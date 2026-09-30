@@ -1,0 +1,34 @@
+# arm=simple_B_cap3 task=toy-ae_gan_hold route=legacy particlegan=/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-constant-fix/particlegan/__init__.py
+START ae_gan_hold route=public primitives custom host + shared noise policy steps=250
+ae-gan-hold arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=0 recon=1.2815 hold=1.4373 phase=init
+ae-gan-hold arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=1 recon=1.2443 hold=1.3589 loss=4.1963
+eval    11 recon_mse=0.3748 hold=0.4493
+eval    21 recon_mse=0.1191 hold=0.06356
+eval    32 recon_mse=0.05116 hold=0.03462
+eval    42 recon_mse=0.00942 hold=0.01597
+ae-gan-hold arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=50 recon=0.0046 hold=0.0224 loss=0.9231
+eval    53 recon_mse=0.004904 hold=0.05675
+eval    63 recon_mse=0.005767 hold=0.05431
+eval    73 recon_mse=0.003407 hold=0.03325
+eval    84 recon_mse=0.003477 hold=0.03617
+eval    94 recon_mse=0.004959 hold=0.04667
+ae-gan-hold arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=100 recon=0.0045 hold=0.0416 loss=0.9311
+eval   105 recon_mse=0.003333 hold=0.02478
+eval   115 recon_mse=0.01817 hold=0.01892
+eval   125 recon_mse=0.0216 hold=0.01065
+eval   136 recon_mse=0.09333 hold=0.06908
+eval   146 recon_mse=0.006491 hold=0.06025
+ae-gan-hold arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=150 recon=0.0240 hold=0.0612 loss=0.8256
+eval   157 recon_mse=0.007865 hold=0.02131
+eval   167 recon_mse=0.004584 hold=0.03397
+eval   178 recon_mse=0.005583 hold=0.007626
+eval   188 recon_mse=0.004497 hold=0.006323
+eval   198 recon_mse=0.01364 hold=0.03724
+ae-gan-hold arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=200 recon=0.0107 hold=0.0553 loss=0.8658
+eval   209 recon_mse=0.009595 hold=0.01156
+eval   219 recon_mse=0.005552 hold=0.0352
+eval   230 recon_mse=0.007132 hold=0.03148
+eval   240 recon_mse=0.00722 hold=0.03791
+eval   250 recon_mse=0.009263 hold=0.0441
+{"event": "DONE", "task": "ae_gan_hold", "status": "PASS", "suffix": 11, "live": {"recon_mse": 0.009262646548449993, "hold": 0.04410136491060257}, "error": null}
+# DONE toy-ae_gan_hold status=PASS metric={'name': 'passing suffix', 'value': '11/24'} 2s

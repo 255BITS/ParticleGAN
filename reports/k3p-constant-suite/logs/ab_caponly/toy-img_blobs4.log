@@ -1,0 +1,28 @@
+# arm=ab_caponly task=toy-img_blobs4 route=gantrainer particlegan=/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-constant-fix/particlegan/__init__.py
+START img_blobs4 route=GANTrainer + generic noise wrappers steps=600
+train     25/600 Ld=+0.0976 Lg=+3.4016 pen=0 s=1 lr_d=0.00425 2s
+train     50/600 Ld=+0.2347 Lg=+3.2671 pen=0 s=1 lr_d=0.00425 2s
+train     75/600 Ld=+0.1644 Lg=+4.8192 pen=0 s=1 lr_d=0.00425 2s
+train    100/600 Ld=+0.1543 Lg=+4.9406 pen=0 s=1 lr_d=0.00425 3s
+train    125/600 Ld=+0.1023 Lg=+5.3012 pen=0 s=1 lr_d=0.00425 3s
+train    150/600 Ld=+0.1003 Lg=+6.2593 pen=0 s=1 lr_d=0.00425 3s
+train    175/600 Ld=+0.2140 Lg=+6.5293 pen=8.01e-05 s=1 lr_d=0.00425 4s
+train    200/600 Ld=+0.0881 Lg=+7.2179 pen=9.72e-05 s=1 lr_d=0.00425 4s
+train    225/600 Ld=+0.0904 Lg=+7.3917 pen=0.000161 s=1 lr_d=0.00425 4s
+train    250/600 Ld=+0.1720 Lg=+6.5725 pen=0.00141 s=1 lr_d=0.00425 5s
+train    275/600 Ld=+0.4937 Lg=+1.2185 pen=0 s=1 lr_d=0.00425 5s
+train    300/600 Ld=+0.5565 Lg=+1.1493 pen=0 s=1 lr_d=0.00425 5s
+train    325/600 Ld=+0.4607 Lg=+1.6519 pen=0 s=1 lr_d=0.00425 6s
+train    350/600 Ld=+0.4308 Lg=+1.4983 pen=0 s=1 lr_d=0.00425 6s
+train    375/600 Ld=+0.4236 Lg=+2.2084 pen=0 s=1 lr_d=0.00425 6s
+train    400/600 Ld=+0.6007 Lg=+1.4320 pen=0 s=1 lr_d=0.00425 7s
+train    425/600 Ld=+0.6053 Lg=+0.9585 pen=0.00228 s=1 lr_d=0.00425 7s
+train    450/600 Ld=+0.8285 Lg=+1.0002 pen=0.00276 s=1 lr_d=0.00425 7s
+train    475/600 Ld=+0.5734 Lg=+1.1029 pen=0.00226 s=1 lr_d=0.00425 8s
+train    500/600 Ld=+0.5392 Lg=+1.5836 pen=0.000699 s=1 lr_d=0.00425 8s
+train    525/600 Ld=+0.4625 Lg=+1.5853 pen=0.00112 s=1 lr_d=0.00425 8s
+train    550/600 Ld=+0.4552 Lg=+1.3291 pen=0.00249 s=1 lr_d=0.00425 9s
+train    575/600 Ld=+0.5267 Lg=+1.1398 pen=0.00247 s=1 lr_d=0.00425 9s
+train    600/600 Ld=+0.6172 Lg=+0.8579 pen=0.000941 s=1 lr_d=0.00425 9s
+{"event": "DONE", "task": "img_blobs4", "status": "FAIL", "suffix": 0, "live": {"modes": 3, "hq": 0.9375, "mean_rmse": 0.01595153845846653, "quality_mode_fractions": [0.28125, 0.0625, 0.3125, 0.28125], "mode_fractions": [0.28125, 0.0625, 0.375, 0.28125], "distribution_tv": 0.1875}, "error": null}
+# DONE toy-img_blobs4 status=FAIL metric={'name': 'passing suffix', 'value': '0/24'} 11s

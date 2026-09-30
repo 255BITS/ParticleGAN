@@ -1,0 +1,28 @@
+# arm=ab_noguard task=toy-residual_student route=legacy particlegan=/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-constant-fix/particlegan/__init__.py
+START residual_student route=public primitives custom host + shared noise policy steps=400
+eval    17 identity_mse=0.1493 success_rate=0.08333 wrong_pad_rate=0.9167 endpoint_l2=0.49
+eval    34 identity_mse=0.008156 success_rate=0.8333 wrong_pad_rate=0.08333 endpoint_l2=0.1693
+eval    50 identity_mse=0.0004115 success_rate=1 wrong_pad_rate=0 endpoint_l2=0.03589
+eval    67 identity_mse=0.006621 success_rate=0.9167 wrong_pad_rate=0.08333 endpoint_l2=0.1746
+eval    84 identity_mse=0.0006964 success_rate=1 wrong_pad_rate=0 endpoint_l2=0.04503
+eval   100 identity_mse=0.007138 success_rate=0.9167 wrong_pad_rate=0.1667 endpoint_l2=0.1718
+eval   117 identity_mse=0.0008828 success_rate=1 wrong_pad_rate=0 endpoint_l2=0.05975
+eval   134 identity_mse=0.001134 success_rate=1 wrong_pad_rate=0 endpoint_l2=0.06785
+eval   150 identity_mse=0.003226 success_rate=1 wrong_pad_rate=0 endpoint_l2=0.1143
+eval   167 identity_mse=0.001412 success_rate=1 wrong_pad_rate=0 endpoint_l2=0.07074
+eval   184 identity_mse=0.00224 success_rate=1 wrong_pad_rate=0 endpoint_l2=0.08739
+eval   200 identity_mse=0.001516 success_rate=1 wrong_pad_rate=0 endpoint_l2=0.07924
+eval   217 identity_mse=0.002232 success_rate=1 wrong_pad_rate=0 endpoint_l2=0.08985
+eval   234 identity_mse=0.0007614 success_rate=1 wrong_pad_rate=0 endpoint_l2=0.04719
+eval   250 identity_mse=0.001071 success_rate=1 wrong_pad_rate=0 endpoint_l2=0.0606
+eval   267 identity_mse=0.004304 success_rate=0.9167 wrong_pad_rate=0.08333 endpoint_l2=0.1226
+eval   284 identity_mse=0.001447 success_rate=1 wrong_pad_rate=0 endpoint_l2=0.07031
+eval   300 identity_mse=0.002411 success_rate=1 wrong_pad_rate=0 endpoint_l2=0.09447
+eval   317 identity_mse=0.001805 success_rate=1 wrong_pad_rate=0 endpoint_l2=0.08302
+eval   334 identity_mse=0.002039 success_rate=1 wrong_pad_rate=0 endpoint_l2=0.08201
+eval   350 identity_mse=0.0008107 success_rate=1 wrong_pad_rate=0 endpoint_l2=0.05419
+eval   367 identity_mse=0.00188 success_rate=1 wrong_pad_rate=0 endpoint_l2=0.07997
+eval   384 identity_mse=0.001478 success_rate=1 wrong_pad_rate=0 endpoint_l2=0.07381
+eval   400 identity_mse=0.002422 success_rate=1 wrong_pad_rate=0 endpoint_l2=0.09731
+{"event": "DONE", "task": "residual_student", "status": "PASS", "suffix": 8, "live": {"identity_mse": 0.0024222158826887608, "success_rate": 1.0, "wrong_pad_rate": 0.0}, "error": null}
+# DONE toy-residual_student status=PASS metric={'name': 'passing suffix', 'value': '8/24'} 4s

@@ -1,0 +1,28 @@
+# arm=k3p_nonoise_ams task=toy-trajectory route=legacy particlegan=/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-constant-fix/particlegan/__init__.py
+START trajectory route=public primitives custom host + shared noise policy steps=400
+eval    17 identity_mse=0.4276
+eval    34 identity_mse=0.2712
+eval    50 identity_mse=0.00351
+eval    67 identity_mse=0.001157
+eval    84 identity_mse=0.003276
+eval   100 identity_mse=0.001729
+eval   117 identity_mse=0.006157
+eval   134 identity_mse=0.001551
+eval   150 identity_mse=0.002005
+eval   167 identity_mse=0.003775
+eval   184 identity_mse=0.002326
+eval   200 identity_mse=0.002629
+eval   217 identity_mse=0.002557
+eval   234 identity_mse=0.004177
+eval   250 identity_mse=0.002212
+eval   267 identity_mse=0.0007713
+eval   284 identity_mse=0.0001303
+eval   300 identity_mse=8.785e-06
+eval   317 identity_mse=7.689e-06
+eval   334 identity_mse=7.028e-06
+eval   350 identity_mse=6.688e-06
+eval   367 identity_mse=6.508e-06
+eval   384 identity_mse=6.439e-06
+eval   400 identity_mse=6.421e-06
+{"event": "DONE", "task": "trajectory", "status": "PASS", "suffix": 22, "live": {"identity_mse": 6.420862064260291e-06}, "error": null}
+# DONE toy-trajectory status=PASS metric={'name': 'passing suffix', 'value': '22/24'} 4s

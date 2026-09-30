@@ -1,0 +1,138 @@
+{
+ "arm": "bcap_ams_b999",
+ "task": "toy-trajectory",
+ "group": "toy",
+ "route": "legacy",
+ "formulation": "simple_B_cap3 + AMSGrad on every optimizer (G, prior, critic), critic betas (0,.999); LR 2e-4 (G 2e-4, critic 1e-4, prior 4e-4), constant, no noise, A2 off, no guard",
+ "steps_override": null,
+ "status": "FAIL",
+ "passed": false,
+ "metric": {
+  "name": "passing suffix",
+  "value": "0/24"
+ },
+ "detail": "confirmed None identity_mse=0.292",
+ "raw": {
+  "verdict": {
+   "status": "FAIL",
+   "attempted": true,
+   "passed": false,
+   "metrics": [
+    {
+     "metric": "identity_mse",
+     "value": 0.2916024923324585,
+     "op": "<=",
+     "threshold": 0.02,
+     "status": "FAIL",
+     "margin": -0.2716024923324585
+    }
+   ],
+   "convergence": {
+    "complete": true,
+    "observations": 24,
+    "passing_observations": 0,
+    "minimum_stable_checks": 5,
+    "passing_suffix": 0,
+    "first_pass_step": null,
+    "stable_from_step": null,
+    "stable_from_seconds": null,
+    "confirmed_step": null,
+    "confirmed_seconds": null
+   },
+   "shortfall": 2.0,
+   "confirmation_fraction": 2.0
+  },
+  "ema": "N/A",
+  "noise_applied": true
+ },
+ "seconds": 3.8,
+ "init": {
+  "function": "constructor (develop entry point makes no particlegan.init call; --init and K3P_INIT unset)",
+  "init_sha256": "4800ba20a657befc31eb067e3c0c271c8214107bdf7922035727d409cc4b6115",
+  "init_tensors": 13
+ },
+ "receipts": {
+  "lr_constant": true,
+  "amsgrad_all": true,
+  "noise": {
+   "host_policy": {
+    "input_std": 0.0,
+    "input_nonzero_steps": 0,
+    "input_sigma_first": 0.0,
+    "output_nonzero_steps": 0,
+    "output_scale_initial": 0.0
+   }
+  },
+  "k3p_legacy": {
+   "package_recipe": {
+    "reg_coeff": 1.0,
+    "reg_kappa": 1.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "d_guard_ratio": 0.0,
+    "d_guard_min_steps": 200,
+    "latent_damping_max_rate": 0.0,
+    "reg_anchor_decay": 0.999,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_betas": [
+     0.0,
+     0.9
+    ],
+    "direct_particle_gain": true,
+    "amsgrad": true,
+    "reg_real_weight": 1.0,
+    "reg_real_mode": "r1",
+    "reg_real_kappa": null
+   },
+   "critic_parameters": 6337
+  },
+  "simple_calls": 400,
+  "lr": {
+   "opt1.g0": {
+    "min": 0.0001,
+    "max": 0.0001,
+    "steps": 400,
+    "amsgrad": true
+   },
+   "opt0.g0": {
+    "min": 0.0002,
+    "max": 0.0002,
+    "steps": 400,
+    "amsgrad": true
+   },
+   "opt0.g1": {
+    "min": 0.0004,
+    "max": 0.0004,
+    "steps": 400,
+    "amsgrad": true
+   }
+  },
+  "particlegan_file": "/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-constant-fix/particlegan/__init__.py",
+  "simple_d_betas": null,
+  "activity": {
+   "a2_damped_steps": 0,
+   "a2_calls": 0,
+   "direct_steps": 0,
+   "direct_gain_steps": 0,
+   "guard_calls": 0,
+   "guard_clips": 0,
+   "penalty_calls": 0,
+   "penalty_s_lt_1": 0,
+   "anchor_evals": 0
+  },
+  "final_sha256": "d05a9afcf8f9b0b7e2787a8b43738406a38572313ef1ccc1d2669bc4c53fa57b",
+  "penalty_variant": null,
+  "recipe": null,
+  "declared_noise": {
+   "input_noise_std": 0.0,
+   "output_noise_std": 0.0
+  },
+  "declared_lr": {
+   "lr_floor": 1.0,
+   "network_lr_floor": 1.0,
+   "d_lr_mult": 0.5,
+   "reg_coeff": 1.0,
+   "prior_lr_mult": 2.0
+  }
+ }
+}

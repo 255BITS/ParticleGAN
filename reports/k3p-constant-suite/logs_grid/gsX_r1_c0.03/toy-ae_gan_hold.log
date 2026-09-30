@@ -1,0 +1,34 @@
+# arm=gsX_r1_c0.03 task=toy-ae_gan_hold route=legacy particlegan=/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-constant-fix/particlegan/__init__.py
+START ae_gan_hold route=public primitives custom host + shared noise policy steps=250
+ae-gan-hold arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=0 recon=1.2815 hold=1.4373 phase=init
+ae-gan-hold arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=1 recon=1.2443 hold=1.3589 loss=4.2120
+eval    11 recon_mse=0.3751 hold=0.4374
+eval    21 recon_mse=0.1221 hold=0.05108
+eval    32 recon_mse=0.03878 hold=0.01189
+eval    42 recon_mse=0.009513 hold=0.06614
+ae-gan-hold arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=50 recon=0.0057 hold=0.0528 loss=0.9098
+eval    53 recon_mse=0.004132 hold=0.03696
+eval    63 recon_mse=0.007433 hold=0.05572
+eval    73 recon_mse=0.006014 hold=0.03454
+eval    84 recon_mse=0.07379 hold=0.01777
+eval    94 recon_mse=0.003266 hold=0.02437
+ae-gan-hold arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=100 recon=0.0089 hold=0.0385 loss=0.8857
+eval   105 recon_mse=0.005236 hold=0.03625
+eval   115 recon_mse=0.006207 hold=0.03387
+eval   125 recon_mse=0.01758 hold=0.03703
+eval   136 recon_mse=0.009125 hold=0.04375
+eval   146 recon_mse=0.005389 hold=0.02984
+ae-gan-hold arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=150 recon=0.0060 hold=0.0261 loss=0.8437
+eval   157 recon_mse=0.01436 hold=0.04437
+eval   167 recon_mse=0.01641 hold=0.04194
+eval   178 recon_mse=0.00471 hold=0.02722
+eval   188 recon_mse=0.006619 hold=0.04234
+eval   198 recon_mse=0.004883 hold=0.03899
+ae-gan-hold arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=200 recon=0.0049 hold=0.0436 loss=0.8067
+eval   209 recon_mse=0.003971 hold=0.02478
+eval   219 recon_mse=0.005513 hold=0.02837
+eval   230 recon_mse=0.003396 hold=0.01814
+eval   240 recon_mse=0.002839 hold=0.01275
+eval   250 recon_mse=0.05483 hold=0.01828
+{"event": "DONE", "task": "ae_gan_hold", "status": "FAIL", "suffix": 0, "live": {"recon_mse": 0.05483057722449303, "hold": 0.018277253955602646}, "error": null}
+# DONE toy-ae_gan_hold status=FAIL metric={'name': 'passing suffix', 'value': '0/24'} 4s

@@ -1,0 +1,13 @@
+22:38:59 start k3p_const_ams
+22:39:22 start k3p_const_ams jobs=3
+22:40:13 RESET k3p_const_ams (duplicate launcher from another agent clobbered run dirs); restarting
+22:40:23 start k3p_const_ams
+22:46:19 end k3p_const_ams rc=0
+22:46:19 start k3p_stock
+22:53:41 end k3p_stock rc=0
+22:53:41 start k3p_nonoise_ams
+23:01:43 end k3p_nonoise_ams rc=0
+23:01:43 start simple_B_cap3
+23:07:15 end simple_B_cap3 rc=0
+23:07:15 start k3p_stock_oldinit (ring only)
+23:09:49 QUEUE DONE

@@ -366,7 +366,8 @@ class GANTrainer:
 # had), and fields added since (with their defaults).
 _REMOVED_RECIPE_FIELDS = {"loss_type": "logistic", "gan_mode": "rp", "reg_arm": "k3p",
                           "reg_method": "autograd"}
-_ADDED_RECIPE_FIELDS = {"reg_anchor_weight": 1.0, "direct_particle_gain": True}
+_ADDED_RECIPE_FIELDS = {"reg_anchor_weight": 1.0, "direct_particle_gain": True, "amsgrad": False,
+                        "reg_real_weight": 1.0, "reg_real_mode": "r1", "reg_real_kappa": None}
 # Construction-time init once lived on the recipe; saved weights supersede it.
 _INIT_FIELD_VALUES = (None, "batch_feature_zero")
 

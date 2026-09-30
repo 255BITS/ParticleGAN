@@ -1,0 +1,28 @@
+# arm=bcap_ams_b999 task=toy-img_blobs4 route=gantrainer particlegan=/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-constant-fix/particlegan/__init__.py
+START img_blobs4 route=GANTrainer + generic noise wrappers steps=600
+train     25/600 Ld=+27.9141 Lg=+0.7412 pen=27.9 s=nan gR=nan/nan lr_d=0.0001 2s
+train     50/600 Ld=+13.3493 Lg=+0.7226 pen=13.3 s=nan gR=nan/nan lr_d=0.0001 2s
+train     75/600 Ld=+10.0003 Lg=+0.7092 pen=10 s=nan gR=nan/nan lr_d=0.0001 3s
+train    100/600 Ld=+9.3047 Lg=+0.7082 pen=9.3 s=nan gR=nan/nan lr_d=0.0001 3s
+train    125/600 Ld=+8.8372 Lg=+0.7100 pen=8.84 s=nan gR=nan/nan lr_d=0.0001 4s
+train    150/600 Ld=+8.4115 Lg=+0.7194 pen=8.41 s=nan gR=nan/nan lr_d=0.0001 5s
+train    175/600 Ld=+7.3402 Lg=+0.7383 pen=7.34 s=nan gR=nan/nan lr_d=0.0001 5s
+train    200/600 Ld=+7.3953 Lg=+0.7615 pen=7.4 s=nan gR=nan/nan lr_d=0.0001 6s
+train    225/600 Ld=+6.3657 Lg=+0.7604 pen=6.37 s=nan gR=nan/nan lr_d=0.0001 7s
+train    250/600 Ld=+5.2751 Lg=+0.7989 pen=5.28 s=nan gR=nan/nan lr_d=0.0001 7s
+train    275/600 Ld=+4.4077 Lg=+0.7941 pen=4.41 s=nan gR=nan/nan lr_d=0.0001 8s
+train    300/600 Ld=+2.9295 Lg=+0.8059 pen=2.93 s=nan gR=nan/nan lr_d=0.0001 8s
+train    325/600 Ld=+3.5331 Lg=+0.7763 pen=3.53 s=nan gR=nan/nan lr_d=0.0001 9s
+train    350/600 Ld=+4.1165 Lg=+0.7841 pen=4.12 s=nan gR=nan/nan lr_d=0.0001 10s
+train    375/600 Ld=+3.1118 Lg=+0.7811 pen=3.11 s=nan gR=nan/nan lr_d=0.0001 10s
+train    400/600 Ld=+4.8196 Lg=+0.7286 pen=4.82 s=nan gR=nan/nan lr_d=0.0001 11s
+train    425/600 Ld=+5.4530 Lg=+0.6286 pen=5.45 s=nan gR=nan/nan lr_d=0.0001 11s
+train    450/600 Ld=+3.6805 Lg=+0.6028 pen=3.68 s=nan gR=nan/nan lr_d=0.0001 12s
+train    475/600 Ld=+2.3305 Lg=+0.6381 pen=2.33 s=nan gR=nan/nan lr_d=0.0001 13s
+train    500/600 Ld=+2.1427 Lg=+0.5505 pen=2.14 s=nan gR=nan/nan lr_d=0.0001 13s
+train    525/600 Ld=+1.9178 Lg=+0.6027 pen=1.92 s=nan gR=nan/nan lr_d=0.0001 14s
+train    550/600 Ld=+3.9717 Lg=+0.5256 pen=3.97 s=nan gR=nan/nan lr_d=0.0001 14s
+train    575/600 Ld=+3.8011 Lg=+0.5410 pen=3.8 s=nan gR=nan/nan lr_d=0.0001 15s
+train    600/600 Ld=+2.1764 Lg=+0.5676 pen=2.18 s=nan gR=nan/nan lr_d=0.0001 16s
+{"event": "DONE", "task": "img_blobs4", "status": "FAIL", "suffix": 0, "live": {"modes": 1, "hq": 0.71875, "mean_rmse": 0.07390391081571579, "quality_mode_fractions": [0.65625, 0.0625, 0.0, 0.0], "mode_fractions": [0.8125, 0.1875, 0.0, 0.0], "distribution_tv": 0.5625}, "error": null}
+# DONE toy-img_blobs4 status=FAIL metric={'name': 'passing suffix', 'value': '0/24'} 17s

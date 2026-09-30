@@ -1,0 +1,28 @@
+# arm=k3p_stock_ams task=toy-vector_spiral route=gantrainer particlegan=/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-constant-fix/particlegan/__init__.py
+START vector_spiral route=GANTrainer + generic noise wrappers steps=1600
+train     66/1600 Ld=+0.6933 Lg=+0.6939 pen=0.00193 s=1 lr_d=0.00425 2s
+train    132/1600 Ld=+0.6936 Lg=+0.6945 pen=0.000899 s=1 lr_d=0.00425 3s
+train    198/1600 Ld=+0.6937 Lg=+0.6951 pen=0.000625 s=1 lr_d=0.00425 3s
+train    264/1600 Ld=+0.6926 Lg=+0.6921 pen=0.000151 s=1 lr_d=0.00425 4s
+train    330/1600 Ld=+0.6932 Lg=+0.6943 pen=0.000169 s=1 lr_d=0.00425 5s
+train    396/1600 Ld=+0.6940 Lg=+0.6935 pen=8.7e-05 s=1 lr_d=0.00425 6s
+train    462/1600 Ld=+0.6927 Lg=+0.6940 pen=0.000183 s=1 lr_d=0.00425 7s
+train    528/1600 Ld=+0.6933 Lg=+0.6932 pen=6.47e-05 s=1 lr_d=0.00425 8s
+train    594/1600 Ld=+0.6933 Lg=+0.6933 pen=4.41e-05 s=1 lr_d=0.00425 9s
+train    660/1600 Ld=+0.6933 Lg=+0.6936 pen=6.26e-05 s=1 lr_d=0.00425 10s
+train    726/1600 Ld=+0.6928 Lg=+0.6929 pen=6.02e-05 s=1 lr_d=0.00425 11s
+train    792/1600 Ld=+0.6934 Lg=+0.6925 pen=0.000179 s=1 lr_d=0.00425 12s
+train    858/1600 Ld=+0.6939 Lg=+0.6928 pen=0.000158 s=1 lr_d=0.00425 13s
+train    924/1600 Ld=+0.6930 Lg=+0.6930 pen=3.65e-05 s=1 lr_d=0.00425 13s
+train    990/1600 Ld=+0.6936 Lg=+0.6933 pen=5.99e-05 s=1 lr_d=0.00423 14s
+train   1056/1600 Ld=+0.6929 Lg=+0.6936 pen=6.21e-05 s=1 lr_d=0.00403 15s
+train   1122/1600 Ld=+0.6931 Lg=+0.6936 pen=4.35e-05 s=1 lr_d=0.00363 16s
+train   1188/1600 Ld=+0.6931 Lg=+0.6940 pen=0.000141 s=1 lr_d=0.00307 17s
+train   1254/1600 Ld=+0.6935 Lg=+0.6935 pen=6.9e-05 s=1 lr_d=0.00242 18s
+train   1320/1600 Ld=+0.6932 Lg=+0.6932 pen=3.08e-05 s=0.823 lr_d=0.00175 19s
+train   1386/1600 Ld=+0.6930 Lg=+0.6930 pen=5.25e-05 s=0.517 lr_d=0.00111 20s
+train   1452/1600 Ld=+0.6933 Lg=+0.6929 pen=6.65e-05 s=0.262 lr_d=0.000581 21s
+train   1518/1600 Ld=+0.6933 Lg=+0.6931 pen=5.44e-05 s=0.0847 lr_d=0.000215 22s
+train   1584/1600 Ld=+0.6933 Lg=+0.6931 pen=5.49e-05 s=0.00394 lr_d=4.98e-05 23s
+{"event": "DONE", "task": "vector_spiral", "status": "PASS", "suffix": 23, "live": {"sw1_normalized": 0.03296104260520463, "mean_error": 0.031039375811815262, "covariance_error": 0.06690707802772522, "target_scale": 1.240945816040039, "sample_count": 4096}, "error": null}
+# DONE toy-vector_spiral status=PASS metric={'name': 'passing suffix', 'value': '23/24'} 25s

@@ -1,0 +1,28 @@
+# arm=ab_nodirect task=toy-img_intensity2 route=gantrainer particlegan=/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-constant-fix/particlegan/__init__.py
+START img_intensity2 route=GANTrainer + generic noise wrappers steps=600
+train     25/600 Ld=+0.0408 Lg=+4.9533 pen=0.0251 s=1 lr_d=0.00425 1s
+train     50/600 Ld=+0.0353 Lg=+5.0111 pen=0.0222 s=1 lr_d=0.00425 2s
+train     75/600 Ld=+0.0370 Lg=+4.8785 pen=0.0233 s=1 lr_d=0.00425 2s
+train    100/600 Ld=+0.0352 Lg=+4.9673 pen=0.0225 s=1 lr_d=0.00425 3s
+train    125/600 Ld=+0.0392 Lg=+4.9026 pen=0.0249 s=1 lr_d=0.00425 3s
+train    150/600 Ld=+0.0430 Lg=+4.7010 pen=0.0267 s=1 lr_d=0.00425 3s
+train    175/600 Ld=+0.5590 Lg=+2.0831 pen=0.112 s=1 lr_d=0.00425 4s
+train    200/600 Ld=+0.6673 Lg=+0.8481 pen=0.0201 s=1 lr_d=0.00425 4s
+train    225/600 Ld=+0.7102 Lg=+0.7079 pen=0.00703 s=1 lr_d=0.00425 5s
+train    250/600 Ld=+0.6939 Lg=+0.7230 pen=0.00271 s=1 lr_d=0.00425 5s
+train    275/600 Ld=+0.6983 Lg=+0.7254 pen=0.00439 s=1 lr_d=0.00425 5s
+train    300/600 Ld=+0.6896 Lg=+0.7454 pen=0.0026 s=1 lr_d=0.00425 6s
+train    325/600 Ld=+0.6830 Lg=+0.7196 pen=0.00219 s=1 lr_d=0.00425 6s
+train    350/600 Ld=+0.6859 Lg=+0.7292 pen=0.00358 s=1 lr_d=0.00425 7s
+train    375/600 Ld=+0.6782 Lg=+0.7256 pen=0.00344 s=1 lr_d=0.00425 7s
+train    400/600 Ld=+0.6548 Lg=+0.7659 pen=0.00384 s=1 lr_d=0.00425 7s
+train    425/600 Ld=+0.6838 Lg=+0.7323 pen=0.00422 s=1 lr_d=0.00425 8s
+train    450/600 Ld=+0.6970 Lg=+0.7508 pen=0.00539 s=1 lr_d=0.00425 8s
+train    475/600 Ld=+0.6821 Lg=+0.7257 pen=0.00386 s=1 lr_d=0.00425 8s
+train    500/600 Ld=+0.6815 Lg=+0.7231 pen=0.00303 s=1 lr_d=0.00425 8s
+train    525/600 Ld=+0.7027 Lg=+0.7077 pen=0.00374 s=1 lr_d=0.00425 9s
+train    550/600 Ld=+0.6938 Lg=+0.7125 pen=0.00293 s=1 lr_d=0.00425 9s
+train    575/600 Ld=+0.7145 Lg=+0.7127 pen=0.00405 s=1 lr_d=0.00425 9s
+train    600/600 Ld=+0.6845 Lg=+0.7199 pen=0.00469 s=1 lr_d=0.00425 9s
+{"event": "DONE", "task": "img_intensity2", "status": "FAIL", "suffix": 0, "live": {"modes": 2, "hq": 0.71875, "mean_rmse": 0.05014067143201828, "quality_mode_fractions": [0.28125, 0.4375], "mode_fractions": [0.46875, 0.53125], "distribution_tv": 0.03125}, "error": null}
+# DONE toy-img_intensity2 status=FAIL metric={'name': 'passing suffix', 'value': '0/24'} 11s

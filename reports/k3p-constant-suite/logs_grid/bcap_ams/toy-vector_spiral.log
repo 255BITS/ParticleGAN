@@ -1,0 +1,28 @@
+# arm=bcap_ams task=toy-vector_spiral route=gantrainer particlegan=/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-constant-fix/particlegan/__init__.py
+START vector_spiral route=GANTrainer + generic noise wrappers steps=1600
+train     66/1600 Ld=+0.0143 Lg=+0.7222 pen=0.0143 s=nan gR=nan/nan lr_d=0.0001 2s
+train    132/1600 Ld=+0.0139 Lg=+0.7162 pen=0.0139 s=nan gR=nan/nan lr_d=0.0001 4s
+train    198/1600 Ld=+0.0580 Lg=+0.7342 pen=0.058 s=nan gR=nan/nan lr_d=0.0001 5s
+train    264/1600 Ld=+0.1174 Lg=+0.7432 pen=0.117 s=nan gR=nan/nan lr_d=0.0001 7s
+train    330/1600 Ld=+0.1570 Lg=+0.7162 pen=0.157 s=nan gR=nan/nan lr_d=0.0001 8s
+train    396/1600 Ld=+0.1378 Lg=+0.7206 pen=0.138 s=nan gR=nan/nan lr_d=0.0001 10s
+train    462/1600 Ld=+0.0060 Lg=+0.7234 pen=0.00602 s=nan gR=nan/nan lr_d=0.0001 11s
+train    528/1600 Ld=+0.0224 Lg=+0.7300 pen=0.0224 s=nan gR=nan/nan lr_d=0.0001 13s
+train    594/1600 Ld=+0.1138 Lg=+0.6974 pen=0.114 s=nan gR=nan/nan lr_d=0.0001 14s
+train    660/1600 Ld=+0.2151 Lg=+0.6668 pen=0.215 s=nan gR=nan/nan lr_d=0.0001 16s
+train    726/1600 Ld=+0.0928 Lg=+0.6796 pen=0.0928 s=nan gR=nan/nan lr_d=0.0001 17s
+train    792/1600 Ld=+0.0942 Lg=+0.6921 pen=0.0942 s=nan gR=nan/nan lr_d=0.0001 19s
+train    858/1600 Ld=+0.1257 Lg=+0.6893 pen=0.126 s=nan gR=nan/nan lr_d=0.0001 20s
+train    924/1600 Ld=+0.1092 Lg=+0.6957 pen=0.109 s=nan gR=nan/nan lr_d=0.0001 22s
+train    990/1600 Ld=+0.2038 Lg=+0.6903 pen=0.204 s=nan gR=nan/nan lr_d=0.0001 23s
+train   1056/1600 Ld=+0.0686 Lg=+0.7047 pen=0.0686 s=nan gR=nan/nan lr_d=0.0001 25s
+train   1122/1600 Ld=+0.0904 Lg=+0.7199 pen=0.0904 s=nan gR=nan/nan lr_d=0.0001 26s
+train   1188/1600 Ld=+0.0464 Lg=+0.7100 pen=0.0464 s=nan gR=nan/nan lr_d=0.0001 28s
+train   1254/1600 Ld=+0.0390 Lg=+0.7304 pen=0.039 s=nan gR=nan/nan lr_d=0.0001 29s
+train   1320/1600 Ld=+0.2094 Lg=+0.6869 pen=0.209 s=nan gR=nan/nan lr_d=0.0001 31s
+train   1386/1600 Ld=+0.1915 Lg=+0.6956 pen=0.192 s=nan gR=nan/nan lr_d=0.0001 32s
+train   1452/1600 Ld=+0.1754 Lg=+0.7209 pen=0.175 s=nan gR=nan/nan lr_d=0.0001 34s
+train   1518/1600 Ld=+0.3609 Lg=+0.6890 pen=0.361 s=nan gR=nan/nan lr_d=0.0001 35s
+train   1584/1600 Ld=+0.2885 Lg=+0.6805 pen=0.289 s=nan gR=nan/nan lr_d=0.0001 37s
+{"event": "DONE", "task": "vector_spiral", "status": "FAIL", "suffix": 0, "live": {"sw1_normalized": 0.49198553902242964, "mean_error": 0.32950082421302795, "covariance_error": 1.5823262929916382, "target_scale": 1.240945816040039, "sample_count": 4096}, "error": null}
+# DONE toy-vector_spiral status=FAIL metric={'name': 'passing suffix', 'value': '0/24'} 39s

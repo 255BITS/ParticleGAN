@@ -1,0 +1,1496 @@
+{
+ "_doc": "One arm = one formulation. 'config' overrides the suite's benchmark config (configs/toy100/constraints_simple_regularization.json with reg_arm a_r1r2 as the host marker); the same keys map 1:1 onto the ring tasks' particlegan recipe. 'recipe' overrides the released K3P recipe fields (particlegan.get_recipe() defaults) on every host. 'critic' is 'k3p' (the package K3P penalty/optimizers) or 'simple_B_cap3'. Noise off = input and output instance noise 0 from step 0; constant LR = lr_floor = network_lr_floor = 1.",
+ "arms": {
+  "k3p_stock": {
+   "formulation": "K3P as released on develop: RpGAN + K3P penalty/EMA anchor/spike guard + A2, input noise .5->0 and output noise .029, cosine LR decay (net floor .01 over a 1600 horizon, prior floor .05), Adam (0,.999)",
+   "critic": "k3p",
+   "config": {},
+   "recipe": {}
+  },
+  "k3p_stock_oldinit": {
+   "formulation": "calibration: k3p_stock with no particlegan.init call anywhere (constructor init on ring too). native/toy/hold/shift already use constructor init in this suite, so only the ring tasks differ from k3p_stock",
+   "critic": "k3p",
+   "config": {},
+   "recipe": {},
+   "init": "constructor"
+  },
+  "k3p_stock_ams": {
+   "formulation": "k3p + ams: k3p_stock with AMSGrad on every optimizer",
+   "critic": "k3p",
+   "config": {},
+   "recipe": {
+    "amsgrad": true
+   }
+  },
+  "k3p_nonoise": {
+   "formulation": "k3p_stock (LR decay, Adam) with no instance noise",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0
+   },
+   "recipe": {}
+  },
+  "k3p_nonoise_ams": {
+   "formulation": "k3p_stock LR decay + AMSGrad, no instance noise",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0
+   },
+   "recipe": {
+    "amsgrad": true
+   }
+  },
+  "k3p_const": {
+   "formulation": "K3P constant LR (floors 1), Adam, no instance noise (baseline for the constant problem)",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0
+   },
+   "recipe": {}
+  },
+  "k3p_const_ams": {
+   "formulation": "k3p constant ams: constant LR (floors 1) + AMSGrad, no instance noise",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0
+   },
+   "recipe": {
+    "amsgrad": true
+   }
+  },
+  "k3p_const_ams_c3": {
+   "formulation": "k3p_const_ams + penalty coefficient x3 (reg_coeff 3)",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "reg_coeff": 3.0
+   },
+   "recipe": {
+    "amsgrad": true
+   }
+  },
+  "simple_B_cap3": {
+   "formulation": "simple-critic winner B_cap3: wgan + R1(1) + secant to nearest real (10, t .5) + cap-all (10, c=3); critic Adam (0,.9), critic LR x.5, no guard/EMA anchor, A2 off; RpGAN G loss; no noise, constant LR",
+   "critic": "simple_B_cap3",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "d_lr_mult": 0.5
+   },
+   "recipe": {
+    "d_guard_ratio": 0.0,
+    "reg_anchor_weight": 0.0,
+    "latent_damping_max_rate": 0.0
+   },
+   "simple": {
+    "d_beta2": 0.9,
+    "loss": "wgan",
+    "real": "r1",
+    "lam_real": 1.0,
+    "lam_drift": null,
+    "path": "secant",
+    "lam_path": 10.0,
+    "path_target": 0.5,
+    "path_u": "0.1,0.9",
+    "cap": "all",
+    "lam_cap": 10.0,
+    "cap_target": 3.0,
+    "lam_center": 0.0,
+    "lazy_k": 1
+   }
+  },
+  "ab_noanchor": {
+   "formulation": "ablation of k3p_const_ams (constant LR + AMSGrad, no noise): EMA anchor term off (reg_anchor_weight 0); inert at constant LR (s==1), bit-exactness check",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0
+   }
+  },
+  "ab_noguard": {
+   "formulation": "ablation of k3p_const_ams (constant LR + AMSGrad, no noise): critic spike guard off (d_guard_ratio 0)",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0
+   },
+   "recipe": {
+    "amsgrad": true,
+    "d_guard_ratio": 0.0
+   }
+  },
+  "ab_noA2": {
+   "formulation": "ablation of k3p_const_ams (constant LR + AMSGrad, no noise): A2 latent-row damping off (latent_damping_max_rate 0)",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0
+   },
+   "recipe": {
+    "amsgrad": true,
+    "latent_damping_max_rate": 0.0
+   }
+  },
+  "ab_nodirect": {
+   "formulation": "ablation of k3p_const_ams (constant LR + AMSGrad, no noise): direct-particle response off (gain False, betas = G's (0,.999))",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0
+   },
+   "recipe": {
+    "amsgrad": true,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ]
+   }
+  },
+  "ab_prior1": {
+   "formulation": "ablation of k3p_const_ams (constant LR + AMSGrad, no noise): prior LR multiplier 2 -> 1 (prior LR = G's)",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "prior_lr_mult": 1.0
+   },
+   "recipe": {
+    "amsgrad": true
+   }
+  },
+  "ab_r1only": {
+   "formulation": "ablation of k3p_const_ams (constant LR + AMSGrad, no noise): penalty = R1 on reals only (RMS units), fake one-sided cap dropped",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0
+   },
+   "recipe": {
+    "amsgrad": true
+   },
+   "penalty": "r1_only"
+  },
+  "ab_caponly": {
+   "formulation": "ablation of k3p_const_ams (constant LR + AMSGrad, no noise): penalty = one-sided RMS cap (kappa 1) on reals and fakes, no R1",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0
+   },
+   "recipe": {
+    "amsgrad": true
+   },
+   "penalty": "cap_only"
+  },
+  "ab_absunits": {
+   "formulation": "ablation of k3p_const_ams (constant LR + AMSGrad, no noise): penalty in L2 units: ||g_r||^2 + relu(||g_f|| - kappa)^2 (no 1/d, 1/sqrt d)",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0
+   },
+   "recipe": {
+    "amsgrad": true
+   },
+   "penalty": "abs_units"
+  },
+  "k3p_simple": {
+   "formulation": "k3p_simple: k3p_const_ams minus every component whose removal cost no suite pass or ring stability: EMA anchor/EMA critic term off (reg_anchor_weight 0; inert at constant LR), direct-particle response off (gain False, betas = G's). Keeps AMSGrad, constant LR, no noise, R1+fake one-sided RMS cap, spike guard, A2, prior LR x2",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ]
+   }
+  },
+  "gs_coeff_0.3": {
+   "formulation": "grid stage 1: k3p_simple (AMSGrad, constant LR, no noise, R1 + fake RMS cap, guard, A2, prior x2) + penalty coefficient x0.3 (reg_coeff .3)",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "reg_coeff": 0.3
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ]
+   }
+  },
+  "gs_coeff_3": {
+   "formulation": "grid stage 1: k3p_simple (AMSGrad, constant LR, no noise, R1 + fake RMS cap, guard, A2, prior x2) + penalty coefficient x3 (reg_coeff 3)",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "reg_coeff": 3.0
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ]
+   }
+  },
+  "gs_lr_0.5x": {
+   "formulation": "grid stage 1: k3p_simple (AMSGrad, constant LR, no noise, R1 + fake RMS cap, guard, A2, prior x2) + G/D/prior base LR x0.5 (lr .002125; prior stays x2 of it)",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "lr": 0.002125
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ]
+   }
+  },
+  "gs_lr_2x": {
+   "formulation": "grid stage 1: k3p_simple (AMSGrad, constant LR, no noise, R1 + fake RMS cap, guard, A2, prior x2) + G/D/prior base LR x2 (lr .0085)",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "lr": 0.0085
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ]
+   }
+  },
+  "gs_dlr_0.5": {
+   "formulation": "grid stage 1: k3p_simple (AMSGrad, constant LR, no noise, R1 + fake RMS cap, guard, A2, prior x2) + critic LR x0.5 (d_lr_mult .5)",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "d_lr_mult": 0.5
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ]
+   }
+  },
+  "gs_dlr_2": {
+   "formulation": "grid stage 1: k3p_simple (AMSGrad, constant LR, no noise, R1 + fake RMS cap, guard, A2, prior x2) + critic LR x2 (d_lr_mult 2)",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "d_lr_mult": 2.0
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ]
+   }
+  },
+  "gs_prior_1": {
+   "formulation": "grid stage 1: k3p_simple (AMSGrad, constant LR, no noise, R1 + fake RMS cap, guard, A2, prior x2) + prior LR multiplier 2 -> 1",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "prior_lr_mult": 1.0
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ]
+   }
+  },
+  "gs_prior_4": {
+   "formulation": "grid stage 1: k3p_simple (AMSGrad, constant LR, no noise, R1 + fake RMS cap, guard, A2, prior x2) + prior LR multiplier 2 -> 4",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "prior_lr_mult": 4.0
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ]
+   }
+  },
+  "gs_b2_0.99": {
+   "formulation": "grid stage 1: k3p_simple (AMSGrad, constant LR, no noise, R1 + fake RMS cap, guard, A2, prior x2) + AMSGrad beta2 .999 -> .99 (all optimizers)",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "betas": [
+     0.0,
+     0.99
+    ]
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ]
+   }
+  },
+  "gs_b2_0.9999": {
+   "formulation": "grid stage 1: k3p_simple (AMSGrad, constant LR, no noise, R1 + fake RMS cap, guard, A2, prior x2) + AMSGrad beta2 .999 -> .9999 (all optimizers)",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "betas": [
+     0.0,
+     0.9999
+    ]
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ]
+   }
+  },
+  "gs_b1_0.5": {
+   "formulation": "grid stage 1: k3p_simple (AMSGrad, constant LR, no noise, R1 + fake RMS cap, guard, A2, prior x2) + G/D beta1 0 -> .5 (prior keeps (0,.999) so A2 still applies)",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "betas": [
+     0.5,
+     0.999
+    ],
+    "prior_betas": [
+     0.0,
+     0.999
+    ]
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ]
+   }
+  },
+  "gs_kappa_0.5": {
+   "formulation": "grid stage 1: k3p_simple (AMSGrad, constant LR, no noise, R1 + fake RMS cap, guard, A2, prior x2) + fake one-sided RMS cap threshold 1 -> .5 (reg_kappa)",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "reg_kappa": 0.5
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ]
+   }
+  },
+  "gs_kappa_2": {
+   "formulation": "grid stage 1: k3p_simple (AMSGrad, constant LR, no noise, R1 + fake RMS cap, guard, A2, prior x2) + fake one-sided RMS cap threshold 1 -> 2 (reg_kappa)",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "reg_kappa": 2.0
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ]
+   }
+  },
+  "gs_a2_0.25": {
+   "formulation": "grid stage 1: k3p_simple (AMSGrad, constant LR, no noise, R1 + fake RMS cap, guard, A2, prior x2) + A2 latent damping max rate .5 -> .25",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ],
+    "latent_damping_max_rate": 0.25
+   }
+  },
+  "gs_a2_1": {
+   "formulation": "grid stage 1: k3p_simple (AMSGrad, constant LR, no noise, R1 + fake RMS cap, guard, A2, prior x2) + A2 latent damping max rate .5 -> 1",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ],
+    "latent_damping_max_rate": 1.0
+   }
+  },
+  "gs_guard_3": {
+   "formulation": "grid stage 1: k3p_simple (AMSGrad, constant LR, no noise, R1 + fake RMS cap, guard, A2, prior x2) + spike-guard ratio 5 -> 3",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ],
+    "d_guard_ratio": 3.0
+   }
+  },
+  "gs_guard_10": {
+   "formulation": "grid stage 1: k3p_simple (AMSGrad, constant LR, no noise, R1 + fake RMS cap, guard, A2, prior x2) + spike-guard ratio 5 -> 10",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ],
+    "d_guard_ratio": 10.0
+   }
+  },
+  "gs_batch_1024": {
+   "formulation": "grid stage 1: k3p_simple (AMSGrad, constant LR, no noise, R1 + fake RMS cap, guard, A2, prior x2) + batch 2048 -> 1024 (hosts that read the config batch: native)",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "batch_size": 1024
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ]
+   }
+  },
+  "gs_batch_4096": {
+   "formulation": "grid stage 1: k3p_simple (AMSGrad, constant LR, no noise, R1 + fake RMS cap, guard, A2, prior x2) + batch 2048 -> 4096 (hosts that read the config batch: native)",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "batch_size": 4096
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ]
+   }
+  },
+  "gs_coeff_0.1": {
+   "formulation": "grid stage 1 (extension): k3p_simple + reg_coeff .1",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "reg_coeff": 0.1
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ]
+   }
+  },
+  "gs_dlr_0.25": {
+   "formulation": "grid stage 1 (extension): k3p_simple + d_lr_mult .25",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "d_lr_mult": 0.25
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ]
+   }
+  },
+  "gs2_c03_d05": {
+   "formulation": "grid stage 2: k3p_simple + reg_coeff .3 + d_lr_mult .5",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "reg_coeff": 0.3,
+    "d_lr_mult": 0.5
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ]
+   }
+  },
+  "gs2_c03_lr2": {
+   "formulation": "grid stage 2: k3p_simple + reg_coeff .3 + lr x2 (.0085)",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "reg_coeff": 0.3,
+    "lr": 0.0085
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ]
+   }
+  },
+  "gs2_lr2_d05": {
+   "formulation": "grid stage 2: k3p_simple + lr x2 (.0085) + d_lr_mult .5",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "lr": 0.0085,
+    "d_lr_mult": 0.5
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ]
+   }
+  },
+  "gs2_c03_lr2_d05": {
+   "formulation": "grid stage 2: k3p_simple + reg_coeff .3 + lr x2 (.0085) + d_lr_mult .5",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "reg_coeff": 0.3,
+    "lr": 0.0085,
+    "d_lr_mult": 0.5
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ]
+   }
+  },
+  "gs2_c03_d05_g3": {
+   "formulation": "grid stage 2: k3p_simple + reg_coeff .3 + d_lr_mult .5 + d_guard_ratio 3",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "reg_coeff": 0.3,
+    "d_lr_mult": 0.5
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ],
+    "d_guard_ratio": 3.0
+   }
+  },
+  "gs2_c03_lr2_d05_g3": {
+   "formulation": "grid stage 2: k3p_simple + reg_coeff .3 + lr x2 (.0085) + d_lr_mult .5 + d_guard_ratio 3",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "reg_coeff": 0.3,
+    "lr": 0.0085,
+    "d_lr_mult": 0.5
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ],
+    "d_guard_ratio": 3.0
+   }
+  },
+  "gs_coeff_0.03": {
+   "formulation": "grid stage 1 (extension): k3p_simple + reg_coeff .03",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "reg_coeff": 0.03
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ]
+   }
+  },
+  "gs2_c01_lr2_d05": {
+   "formulation": "grid stage 2: k3p_simple + reg_coeff .1 + lr x2 (.0085) + d_lr_mult .5",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "reg_coeff": 0.1,
+    "lr": 0.0085,
+    "d_lr_mult": 0.5
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ]
+   }
+  },
+  "gs2_c03_lr2_d05_p1": {
+   "formulation": "grid stage 2: k3p_simple + reg_coeff .3 + lr x2 (.0085) + d_lr_mult .5 + prior_lr_mult 1 (only G LR doubled; D and prior LR as k3p_simple)",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "reg_coeff": 0.3,
+    "lr": 0.0085,
+    "d_lr_mult": 0.5,
+    "prior_lr_mult": 1.0
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ]
+   }
+  },
+  "gsR_r0.1_c0.3": {
+   "formulation": "R1/cap split: gs2_c03_lr2_d05 (lr .0085, d_lr_mult .5) with fake cap at reg_coeff 0.3 and R1-on-reals at reg_coeff*reg_real_weight = 0.1",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "reg_coeff": 0.3,
+    "lr": 0.0085,
+    "d_lr_mult": 0.5
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ],
+    "reg_real_weight": 0.3333333333333333
+   }
+  },
+  "gsR_r0.03_c0.3": {
+   "formulation": "R1/cap split: gs2_c03_lr2_d05 (lr .0085, d_lr_mult .5) with fake cap at reg_coeff 0.3 and R1-on-reals at reg_coeff*reg_real_weight = 0.03",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "reg_coeff": 0.3,
+    "lr": 0.0085,
+    "d_lr_mult": 0.5
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ],
+    "reg_real_weight": 0.1
+   }
+  },
+  "gsR_r0_c0.3": {
+   "formulation": "R1/cap split: gs2_c03_lr2_d05 (lr .0085, d_lr_mult .5) with fake cap at reg_coeff 0.3 and R1-on-reals at reg_coeff*reg_real_weight = 0",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "reg_coeff": 0.3,
+    "lr": 0.0085,
+    "d_lr_mult": 0.5
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ],
+    "reg_real_weight": 0.0
+   }
+  },
+  "gsR_r0.1_c1": {
+   "formulation": "R1/cap split: gs2_c03_lr2_d05 (lr .0085, d_lr_mult .5) with fake cap at reg_coeff 1.0 and R1-on-reals at reg_coeff*reg_real_weight = 0.1",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "reg_coeff": 1.0,
+    "lr": 0.0085,
+    "d_lr_mult": 0.5
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ],
+    "reg_real_weight": 0.1
+   }
+  },
+  "gsR_r0.03_c1": {
+   "formulation": "R1/cap split: gs2_c03_lr2_d05 (lr .0085, d_lr_mult .5) with fake cap at reg_coeff 1.0 and R1-on-reals at reg_coeff*reg_real_weight = 0.03",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "reg_coeff": 1.0,
+    "lr": 0.0085,
+    "d_lr_mult": 0.5
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ],
+    "reg_real_weight": 0.03
+   }
+  },
+  "gsRs_r0.1_c1": {
+   "formulation": "R1/cap split: k3p_simple with fake cap at reg_coeff 1.0 and R1-on-reals at reg_coeff*reg_real_weight = 0.1",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "reg_coeff": 1.0
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ],
+    "reg_real_weight": 0.1
+   }
+  },
+  "gsRs_r0.03_c1": {
+   "formulation": "R1/cap split: k3p_simple with fake cap at reg_coeff 1.0 and R1-on-reals at reg_coeff*reg_real_weight = 0.03",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "reg_coeff": 1.0
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ],
+    "reg_real_weight": 0.03
+   }
+  },
+  "gsRs_r0_c1": {
+   "formulation": "R1/cap split: k3p_simple with fake cap at reg_coeff 1.0 and R1-on-reals at reg_coeff*reg_real_weight = 0",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "reg_coeff": 1.0
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ],
+    "reg_real_weight": 0.0
+   }
+  },
+  "gsC_cap_w": {
+   "formulation": "symmetric cap: gs2_c03_lr2_d05 (reg_coeff .3, lr .0085, d_lr_mult .5) with R1 on reals replaced by the fakes' one-sided RMS cap (kappa 1 on both)",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "reg_coeff": 0.3,
+    "lr": 0.0085,
+    "d_lr_mult": 0.5
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ],
+    "reg_real_mode": "cap"
+   }
+  },
+  "gsC_cap_s": {
+   "formulation": "symmetric cap: k3p_simple (reg_coeff 1) with R1 on reals replaced by the fakes' one-sided RMS cap (kappa 1 on both)",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ],
+    "reg_real_mode": "cap"
+   }
+  },
+  "gsC_cap_s_k0.5": {
+   "formulation": "symmetric cap: k3p_simple with R1 on reals replaced by a one-sided RMS cap at 0.5 (fake cap stays 1)",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ],
+    "reg_real_mode": "cap",
+    "reg_real_kappa": 0.5
+   }
+  },
+  "gsC_cap_s_k2": {
+   "formulation": "symmetric cap: k3p_simple with R1 on reals replaced by a one-sided RMS cap at 2 (fake cap stays 1)",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ],
+    "reg_real_mode": "cap",
+    "reg_real_kappa": 2.0
+   }
+  },
+  "gsX_r1_c0.1": {
+   "formulation": "reverse R1/cap split: k3p_simple with fake cap at reg_coeff 0.1 and R1-on-reals at reg_coeff*reg_real_weight = 1",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "reg_coeff": 0.1
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ],
+    "reg_real_weight": 10.0
+   }
+  },
+  "gsX_r1_c0.03": {
+   "formulation": "reverse R1/cap split: k3p_simple with fake cap at reg_coeff 0.03 and R1-on-reals at reg_coeff*reg_real_weight = 1",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "reg_coeff": 0.03
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ],
+    "reg_real_weight": 33.333333333333336
+   }
+  },
+  "gsX_w_r0.3_c0.1": {
+   "formulation": "reverse R1/cap split: gs2_c03_lr2_d05 (lr .0085, d_lr_mult .5) with fake cap at reg_coeff 0.1 and R1-on-reals at reg_coeff*reg_real_weight = 0.3",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "reg_coeff": 0.1,
+    "lr": 0.0085,
+    "d_lr_mult": 0.5
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ],
+    "reg_real_weight": 3.0
+   }
+  },
+  "gsC_cap_s_k0.25": {
+   "formulation": "symmetric cap: k3p_simple with R1 on reals replaced by a one-sided RMS cap at 0.25 (fake cap stays 1)",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ],
+    "reg_real_mode": "cap",
+    "reg_real_kappa": 0.25
+   }
+  },
+  "gsC_cap_w_k0.5": {
+   "formulation": "symmetric cap: gs2_c03_lr2_d05 (reg_coeff .3, lr .0085, d_lr_mult .5) with R1 on reals replaced by a one-sided RMS cap at 0.5 (fake cap stays 1)",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "reg_coeff": 0.3,
+    "lr": 0.0085,
+    "d_lr_mult": 0.5
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ],
+    "reg_real_mode": "cap",
+    "reg_real_kappa": 0.5
+   }
+  },
+  "gsX_r0.3_c0.03": {
+   "formulation": "R1/cap split neighbour: k3p_simple with fake cap at reg_coeff 0.03 and R1-on-reals at reg_coeff*reg_real_weight = 0.3",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "reg_coeff": 0.03
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ],
+    "reg_real_weight": 10.0
+   }
+  },
+  "gsX_r3_c0.03": {
+   "formulation": "R1/cap split neighbour: k3p_simple with fake cap at reg_coeff 0.03 and R1-on-reals at reg_coeff*reg_real_weight = 3",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "reg_coeff": 0.03
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ],
+    "reg_real_weight": 100.0
+   }
+  },
+  "gsX_r1_c0.01": {
+   "formulation": "R1/cap split neighbour: k3p_simple with fake cap at reg_coeff 0.01 and R1-on-reals at reg_coeff*reg_real_weight = 1",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "reg_coeff": 0.01
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ],
+    "reg_real_weight": 100.0
+   }
+  },
+  "gsX_w_r0.3_c1": {
+   "formulation": "R1/cap split neighbour: gs2_c03_lr2_d05 (lr .0085, d_lr_mult .5) with fake cap at reg_coeff 1 and R1-on-reals at reg_coeff*reg_real_weight = 0.3",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "reg_coeff": 1.0,
+    "lr": 0.0085,
+    "d_lr_mult": 0.5
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ],
+    "reg_real_weight": 0.3
+   }
+  },
+  "gsX_w_r1_c0.3": {
+   "formulation": "R1/cap split neighbour: gs2_c03_lr2_d05 (lr .0085, d_lr_mult .5) with fake cap at reg_coeff 0.3 and R1-on-reals at reg_coeff*reg_real_weight = 1",
+   "critic": "k3p",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "reg_coeff": 0.3,
+    "lr": 0.0085,
+    "d_lr_mult": 0.5
+   },
+   "recipe": {
+    "amsgrad": true,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ],
+    "reg_real_weight": 3.3333333333333335
+   }
+  },
+  "bcap_ams": {
+   "formulation": "simple_B_cap3 + AMSGrad on every optimizer (G, prior, critic), critic betas (0,.9); LR 2e-4 (G 2e-4, critic 1e-4, prior 4e-4), constant, no noise, A2 off, no guard",
+   "critic": "simple_B_cap3",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "d_lr_mult": 0.5,
+    "lr": 0.0002
+   },
+   "recipe": {
+    "d_guard_ratio": 0.0,
+    "reg_anchor_weight": 0.0,
+    "latent_damping_max_rate": 0.0,
+    "amsgrad": true
+   },
+   "simple": {
+    "d_beta2": 0.9,
+    "loss": "wgan",
+    "real": "r1",
+    "lam_real": 1.0,
+    "lam_drift": null,
+    "path": "secant",
+    "lam_path": 10.0,
+    "path_target": 0.5,
+    "path_u": "0.1,0.9",
+    "cap": "all",
+    "lam_cap": 10.0,
+    "cap_target": 3.0,
+    "lam_center": 0.0,
+    "lazy_k": 1
+   }
+  },
+  "bcap_ams_b999": {
+   "formulation": "simple_B_cap3 + AMSGrad on every optimizer (G, prior, critic), critic betas (0,.999); LR 2e-4 (G 2e-4, critic 1e-4, prior 4e-4), constant, no noise, A2 off, no guard",
+   "critic": "simple_B_cap3",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "d_lr_mult": 0.5,
+    "lr": 0.0002
+   },
+   "recipe": {
+    "d_guard_ratio": 0.0,
+    "reg_anchor_weight": 0.0,
+    "latent_damping_max_rate": 0.0,
+    "amsgrad": true
+   },
+   "simple": {
+    "d_beta2": 0.999,
+    "loss": "wgan",
+    "real": "r1",
+    "lam_real": 1.0,
+    "lam_drift": null,
+    "path": "secant",
+    "lam_path": 10.0,
+    "path_target": 0.5,
+    "path_u": "0.1,0.9",
+    "cap": "all",
+    "lam_cap": 10.0,
+    "cap_target": 3.0,
+    "lam_center": 0.0,
+    "lazy_k": 1
+   }
+  },
+  "bcap_ams_a2g": {
+   "formulation": "bcap_ams_b999 (simple_B_cap3 + AMSGrad everywhere, critic betas (0,.999), LR G 2e-4 / critic 1e-4 / prior 4e-4) + A2 latent damping (.5) + K3P critic spike guard (ratio 5, min 200 steps)",
+   "critic": "simple_B_cap3",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "d_lr_mult": 0.5,
+    "lr": 0.0002
+   },
+   "recipe": {
+    "d_guard_ratio": 5.0,
+    "reg_anchor_weight": 0.0,
+    "latent_damping_max_rate": 0.5,
+    "amsgrad": true
+   },
+   "simple": {
+    "d_beta2": 0.999,
+    "loss": "wgan",
+    "real": "r1",
+    "lam_real": 1.0,
+    "lam_drift": null,
+    "path": "secant",
+    "lam_path": 10.0,
+    "path_target": 0.5,
+    "path_u": "0.1,0.9",
+    "cap": "all",
+    "lam_cap": 10.0,
+    "cap_target": 3.0,
+    "lam_center": 0.0,
+    "lazy_k": 1
+   }
+  },
+  "bcap_ams999_hi": {
+   "formulation": "simple_B_cap3 at its own LRs (G .00425, critic x.5, prior x2; constant, no noise, A2 off, no guard) + AMSGrad on every optimizer, critic betas (0,.999)",
+   "critic": "simple_B_cap3",
+   "config": {
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "d_lr_mult": 0.5
+   },
+   "recipe": {
+    "d_guard_ratio": 0.0,
+    "reg_anchor_weight": 0.0,
+    "latent_damping_max_rate": 0.0,
+    "amsgrad": true
+   },
+   "simple": {
+    "d_beta2": 0.999,
+    "loss": "wgan",
+    "real": "r1",
+    "lam_real": 1.0,
+    "lam_drift": null,
+    "path": "secant",
+    "lam_path": 10.0,
+    "path_target": 0.5,
+    "path_u": "0.1,0.9",
+    "cap": "all",
+    "lam_cap": 10.0,
+    "cap_target": 3.0,
+    "lam_center": 0.0,
+    "lazy_k": 1
+   }
+  }
+ }
+}

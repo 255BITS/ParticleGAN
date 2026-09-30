@@ -1,0 +1,34 @@
+# arm=ab_absunits task=toy-ae_gan_hold route=legacy particlegan=/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-constant-fix/particlegan/__init__.py
+START ae_gan_hold route=public primitives custom host + shared noise policy steps=250
+ae-gan-hold arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=0 recon=1.2815 hold=1.4373 phase=init
+ae-gan-hold arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=1 recon=1.2443 hold=1.3589 loss=4.2070
+eval    11 recon_mse=0.3752 hold=0.4567
+eval    21 recon_mse=0.1277 hold=0.02897
+eval    32 recon_mse=0.04215 hold=0.01632
+eval    42 recon_mse=0.005597 hold=0.0237
+ae-gan-hold arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=50 recon=0.0049 hold=0.0207 loss=0.9532
+eval    53 recon_mse=0.004769 hold=0.05603
+eval    63 recon_mse=0.003812 hold=0.03105
+eval    73 recon_mse=0.004425 hold=0.02945
+eval    84 recon_mse=0.004903 hold=0.02987
+eval    94 recon_mse=0.003192 hold=0.0255
+ae-gan-hold arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=100 recon=0.0030 hold=0.0347 loss=0.8647
+eval   105 recon_mse=0.004891 hold=0.03143
+eval   115 recon_mse=0.00564 hold=0.03641
+eval   125 recon_mse=0.004949 hold=0.05037
+eval   136 recon_mse=0.006324 hold=0.03195
+eval   146 recon_mse=0.006973 hold=0.04758
+ae-gan-hold arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=150 recon=0.0059 hold=0.0392 loss=0.8276
+eval   157 recon_mse=0.009442 hold=0.03897
+eval   167 recon_mse=0.005711 hold=0.02552
+eval   178 recon_mse=0.004404 hold=0.04382
+eval   188 recon_mse=0.007356 hold=0.04495
+eval   198 recon_mse=0.004788 hold=0.02712
+ae-gan-hold arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=200 recon=0.0047 hold=0.0259 loss=0.8167
+eval   209 recon_mse=0.005033 hold=0.04037
+eval   219 recon_mse=0.007357 hold=0.003231
+eval   230 recon_mse=0.005631 hold=0.04934
+eval   240 recon_mse=0.006953 hold=0.04468
+eval   250 recon_mse=0.01023 hold=0.003992
+{"event": "DONE", "task": "ae_gan_hold", "status": "PASS", "suffix": 22, "live": {"recon_mse": 0.010229846462607384, "hold": 0.003992431331425905}, "error": null}
+# DONE toy-ae_gan_hold status=PASS metric={'name': 'passing suffix', 'value': '22/24'} 4s

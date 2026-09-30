@@ -1,0 +1,11 @@
+# 2026-09-27 01:42:27 arm=gs2_c03_lr2_d05_g3 device=cuda:0 tasks=5 steps=None
+01:42:35 toy-two_pole               PASS  passing suffix=13/24 | confirmed 54 mean_abs=1.11 grad_med=0.127 | 3s rc=0
+01:42:51 toy-img_bars4              PASS  passing suffix=19/24 | confirmed 250 modes=4 hq=1 | 21s rc=0
+01:45:33 native-grid100             FAIL  final modes/HQ=100/0.980 | coverage FAIL accuracy FAIL first100 250 massTV 0.06355 | 182s rc=0
+01:45:37 native-rotated100          FAIL  final modes/HQ=100/0.971 | coverage FAIL accuracy FAIL first100 2250 massTV 0.0512 | 187s rc=0
+01:45:51 native-staggered100        FAIL  final modes/HQ=100/0.977 | coverage FAIL accuracy FAIL first100 250 massTV 0.048799999999999996 | 200s rc=0
+# 2026-09-27 01:45:51 arm=gs2_c03_lr2_d05_g3 finished
+# 2026-09-27 01:51:31 arm=gs2_c03_lr2_d05_g3 device=cuda:1 tasks=2 steps=None
+01:52:37 ring8-shift                FAIL  fails outside transit=1 | prehold 120/120 arrival +740 departures 1 final HQ 0.990 | 63s rc=0
+01:53:31 ring8-multishift           FAIL  fails outside transit=3 | prehold 120/120 arrival +740/+230/+300 departures 2 final HQ 0.989 | 116s rc=0
+# 2026-09-27 01:53:31 arm=gs2_c03_lr2_d05_g3 finished

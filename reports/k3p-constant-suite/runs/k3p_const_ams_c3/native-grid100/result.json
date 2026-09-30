@@ -1,0 +1,180 @@
+{
+ "arm": "k3p_const_ams_c3",
+ "task": "native-grid100",
+ "group": "native",
+ "route": "gantrainer",
+ "formulation": "k3p_const_ams + penalty coefficient x3 (reg_coeff 3)",
+ "steps_override": null,
+ "status": "FAIL",
+ "passed": false,
+ "metric": {
+  "name": "final modes/HQ",
+  "value": "99/0.961"
+ },
+ "detail": "coverage FAIL accuracy FAIL first100 None massTV 0.059550000000000006",
+ "exit_code": 1,
+ "raw": {
+  "final": {
+   "hq": 0.961,
+   "mass_tv": 0.059550000000000006,
+   "max_cov_eig_ratio": 2.935732091905753,
+   "max_mode_mass": 0.01315,
+   "max_radial_median_ratio": 1.6867350259999911,
+   "min_cov_eig_ratio": 0.17641199537322563,
+   "min_hq_count": 90,
+   "min_hq_mode_mass": 0.0045,
+   "min_radial_median_ratio": 0.584066248164767,
+   "modes": 99,
+   "n": 20000,
+   "passed": false,
+   "precision": 0.961,
+   "valid_n": 20000
+  },
+  "first_full_coverage": null,
+  "holdout": {
+   "ema": {
+    "abs_cov_trace_bias": 0.05184849562741922,
+    "accuracy_pass": false,
+    "accuracy_score": 1.0571366944814526,
+    "all_finite": true,
+    "center_max_sigma": 0.536770555903756,
+    "center_rms_sigma": 0.2131822376978635,
+    "cov_frob_rms": 0.5177638120871605,
+    "cov_trace_bias": 0.05184849562741922,
+    "frozen_pass": false,
+    "mass_tv": 0.05466,
+    "n": 100000,
+    "passed": false,
+    "precision": 0.96145,
+    "precision_gap": 0.027441003461757707,
+    "problem": "grid100",
+    "protocol": "toy100-accuracy-v1",
+    "radial_ks": 0.06932602532649201,
+    "valid_n": 100000,
+    "within_radius_n": 96145
+   },
+   "live": {
+    "abs_cov_trace_bias": 0.09574634982919883,
+    "accuracy_pass": false,
+    "accuracy_score": 1.340935347213772,
+    "all_finite": true,
+    "center_max_sigma": 0.623203274546685,
+    "center_rms_sigma": 0.2823854714515837,
+    "cov_frob_rms": 0.5638299394697175,
+    "cov_trace_bias": 0.09574634982919883,
+    "frozen_pass": false,
+    "mass_tv": 0.054470000000000005,
+    "n": 100000,
+    "passed": false,
+    "precision": 0.96044,
+    "precision_gap": 0.028451003461757773,
+    "problem": "grid100",
+    "protocol": "toy100-accuracy-v1",
+    "radial_ks": 0.0834606879988739,
+    "valid_n": 100000,
+    "within_radius_n": 96044
+   },
+   "target": {
+    "abs_cov_trace_bias": 0.0004259032355904413,
+    "accuracy_pass": true,
+    "accuracy_score": 0.1208307814719265,
+    "all_finite": true,
+    "center_max_sigma": 0.09693988901822922,
+    "center_rms_sigma": 0.04204673098469886,
+    "cov_frob_rms": 0.052380239447918454,
+    "cov_trace_bias": -0.0004259032355904413,
+    "frozen_pass": true,
+    "mass_tv": 0.013510000000000005,
+    "n": 100000,
+    "passed": true,
+    "precision": 0.98861,
+    "precision_gap": 0.00028100346175774504,
+    "problem": "grid100",
+    "protocol": "toy100-accuracy-v1",
+    "radial_ks": 0.0017465508776656202,
+    "valid_n": 100000,
+    "within_radius_n": 98861
+   }
+  },
+  "stable_pass": null
+ },
+ "seconds": 231.5,
+ "init": {
+  "function": "constructor (develop entry point makes no particlegan.init call; --init and K3P_INIT unset)",
+  "init_sha256": "46c10b8db2a8b99c775024f2f4b8b947ded82cf88190a3c1721a1d936ba51e82",
+  "init_tensors": 11
+ },
+ "receipts": {
+  "lr_constant": true,
+  "amsgrad_all": true,
+  "noise": {
+   "wrappers": [
+    {
+     "input_wrapper": false,
+     "output_wrapper": false,
+     "recipe_input_noise": 0.0,
+     "recipe_output_noise": 0.0
+    }
+   ]
+  },
+  "k3p_legacy": {},
+  "simple_calls": 0,
+  "lr": {
+   "opt1.g0": {
+    "min": 0.00425,
+    "max": 0.00425,
+    "steps": 7000,
+    "amsgrad": true
+   },
+   "opt0.g0": {
+    "min": 0.00425,
+    "max": 0.00425,
+    "steps": 7000,
+    "amsgrad": true
+   },
+   "opt0.g1": {
+    "min": 0.0085,
+    "max": 0.0085,
+    "steps": 7000,
+    "amsgrad": true
+   }
+  },
+  "particlegan_file": "/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-constant-fix/particlegan/__init__.py",
+  "recipe": {
+   "lr": 0.00425,
+   "d_lr_mult": 1.0,
+   "betas": [
+    0.0,
+    0.999
+   ],
+   "reg_coeff": 3.0,
+   "reg_kappa": 1.0,
+   "lr_floor": 1.0,
+   "network_lr_floor": 1.0,
+   "network_lr_horizon_cap": 1600,
+   "total_steps": 7000,
+   "d_guard_ratio": 5.0,
+   "d_guard_min_steps": 200,
+   "latent_damping_max_rate": 0.5,
+   "reg_anchor_decay": 0.999,
+   "reg_anchor_weight": 1.0,
+   "direct_particle_betas": [
+    0.0,
+    0.9
+   ],
+   "direct_particle_gain": true,
+   "amsgrad": true
+  },
+  "declared_noise": {
+   "input_noise_std": 0.0,
+   "output_noise_std": 0.0
+  },
+  "declared_lr": {
+   "lr_floor": 1.0,
+   "network_lr_floor": 1.0,
+   "d_lr_mult": 1.0,
+   "reg_coeff": 3.0
+  }
+ },
+ "harness_fix": "status re-derived from gate-<problem>.json"
+}

@@ -1,0 +1,214 @@
+{
+ "arm": "ab_absunits",
+ "task": "shift-mode_hold",
+ "group": "shift",
+ "route": "legacy",
+ "formulation": "ablation of k3p_const_ams (constant LR + AMSGrad, no noise): penalty in L2 units: ||g_r||^2 + relu(||g_f|| - kappa)^2 (no 1/d, 1/sqrt d)",
+ "steps_override": null,
+ "status": "FAIL",
+ "passed": false,
+ "metric": {
+  "name": "deadline window",
+  "value": "71/81"
+ },
+ "detail": "delay 1120 pre-shift hold 97/120",
+ "raw": {
+  "shift_recovery": {
+   "checks": 120,
+   "passing_checks": 93,
+   "failing_steps": [
+    2410,
+    2420,
+    2430,
+    2440,
+    2450,
+    2460,
+    2470,
+    2480,
+    2490,
+    2500,
+    2510,
+    2520,
+    2530,
+    2540,
+    2560,
+    2570,
+    2580,
+    2810,
+    2820,
+    2830,
+    3130,
+    3210,
+    3220,
+    3230,
+    3240,
+    3500,
+    3510
+   ],
+   "min_modes": 2,
+   "min_hq": 0.244384765625,
+   "passing_suffix": 9,
+   "stable_from_step": 3520,
+   "pass_all": false,
+   "pass_suffix": true,
+   "deadline_step": 2800,
+   "deadline_window": {
+    "checks": 81,
+    "passing_checks": 71,
+    "failing_steps": [
+     2810,
+     2820,
+     2830,
+     3130,
+     3210,
+     3220,
+     3230,
+     3240,
+     3500,
+     3510
+    ],
+    "min_modes": 3,
+    "min_hq": 0.3310546875,
+    "passing_suffix": 9,
+    "stable_from_step": 3520,
+    "pass_all": false,
+    "pass_suffix": true
+   },
+   "deadline_assessable": true,
+   "deadline_pass": false,
+   "delay_updates": 1120
+  },
+  "continued_hold": {
+   "checks": 120,
+   "passing_checks": 97,
+   "failing_steps": [
+    1210,
+    1220,
+    1230,
+    1240,
+    1250,
+    1260,
+    1270,
+    1280,
+    1330,
+    1390,
+    1500,
+    1510,
+    1520,
+    1680,
+    1690,
+    1700,
+    1710,
+    1940,
+    1950,
+    2010,
+    2040,
+    2070,
+    2100
+   ],
+   "min_modes": 1,
+   "min_hq": 0.078369140625,
+   "passing_suffix": 30,
+   "stable_from_step": 2110,
+   "pass_all": false,
+   "pass_suffix": true
+  },
+  "final": {
+   "modes": 8,
+   "hq": 1.0
+  },
+  "ema": {
+   "modes": 8,
+   "hq": 1.0
+  }
+ },
+ "seconds": 105.4,
+ "init": {
+  "function": "constructor (develop entry point makes no particlegan.init call; --init and K3P_INIT unset)",
+  "init_sha256": "a84d0510f58df1bd86f18151888e7f62a7b6594ce8396b086f265cc06b3421fd",
+  "init_tensors": 17
+ },
+ "receipts": {
+  "lr_constant": true,
+  "amsgrad_all": true,
+  "noise": {},
+  "k3p_legacy": {
+   "package_recipe": {
+    "reg_coeff": 1.0,
+    "reg_kappa": 1.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "d_guard_ratio": 5.0,
+    "d_guard_min_steps": 200,
+    "latent_damping_max_rate": 0.5,
+    "reg_anchor_decay": 0.999,
+    "reg_anchor_weight": 1.0,
+    "direct_particle_betas": [
+     0.0,
+     0.9
+    ],
+    "direct_particle_gain": true,
+    "amsgrad": true
+   },
+   "calls": 3600,
+   "s_last": 1.0,
+   "critic_parameters": 20161,
+   "guard_clipped_tensors": 11,
+   "record": {
+    "lr_max": 0.00425,
+    "lr_last": 0.00425,
+    "anchor_started": false,
+    "calls": 3600,
+    "observed_steps": 3600
+   }
+  },
+  "simple_calls": 0,
+  "lr": {
+   "opt1.g0": {
+    "min": 0.00425,
+    "max": 0.00425,
+    "steps": 3600,
+    "amsgrad": true
+   },
+   "opt0.g0": {
+    "min": 0.00425,
+    "max": 0.00425,
+    "steps": 3600,
+    "amsgrad": true
+   },
+   "opt0.g1": {
+    "min": 0.0085,
+    "max": 0.0085,
+    "steps": 3600,
+    "amsgrad": true
+   }
+  },
+  "particlegan_file": "/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-constant-fix/particlegan/__init__.py",
+  "simple_d_betas": null,
+  "activity": {
+   "a2_damped_steps": 0,
+   "a2_calls": 3600,
+   "direct_steps": 0,
+   "direct_gain_steps": 0,
+   "guard_calls": 3600,
+   "guard_clips": 11,
+   "penalty_calls": 3600,
+   "penalty_s_lt_1": 0,
+   "anchor_evals": 0
+  },
+  "final_sha256": "a4a0ed15648ed07732110797e4894d0f749bdf84a5fdd9cd7e5e13e59954ae32",
+  "penalty_variant": "abs_units",
+  "recipe": null,
+  "declared_noise": {
+   "input_noise_std": 0.0,
+   "output_noise_std": 0.0
+  },
+  "declared_lr": {
+   "lr_floor": 1.0,
+   "network_lr_floor": 1.0,
+   "d_lr_mult": 1.0,
+   "reg_coeff": 1.0,
+   "prior_lr_mult": 2.0
+  }
+ }
+}

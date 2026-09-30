@@ -1,0 +1,4 @@
+# 2026-09-27 07:57:09 arm=gs2_c03_lr2_d05 device=cuda:0 tasks=2 steps=None
+07:59:29 ring8-shift                PASS  fails outside transit=0 | prehold 120/120 arrival +940 departures 0 final HQ 0.990 | 137s rc=0
+08:01:15 ring8-multishift           PASS  fails outside transit=0 | prehold 120/120 arrival +940/+310/+110 departures 0 final HQ 0.994 | 241s rc=0
+# 2026-09-27 08:01:15 arm=gs2_c03_lr2_d05 finished

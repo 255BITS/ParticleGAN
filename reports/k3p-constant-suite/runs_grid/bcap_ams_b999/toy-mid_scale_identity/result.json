@@ -1,0 +1,188 @@
+{
+ "arm": "bcap_ams_b999",
+ "task": "toy-mid_scale_identity",
+ "group": "toy",
+ "route": "legacy",
+ "formulation": "simple_B_cap3 + AMSGrad on every optimizer (G, prior, critic), critic betas (0,.999); LR 2e-4 (G 2e-4, critic 1e-4, prior 4e-4), constant, no noise, A2 off, no guard",
+ "steps_override": null,
+ "status": "FAIL",
+ "passed": false,
+ "metric": {
+  "name": "passing suffix",
+  "value": "0/24"
+ },
+ "detail": "confirmed None concept_cos_plus=0.78 concept_cos_minus=0.222 concept_mag_plus=0.378 concept_mag_minus=0.198 identity_at_0=0.324 identity_at_mid=0.837",
+ "raw": {
+  "verdict": {
+   "status": "FAIL",
+   "attempted": true,
+   "passed": false,
+   "metrics": [
+    {
+     "metric": "concept_cos_plus",
+     "value": 0.7797179222106934,
+     "op": ">=",
+     "threshold": 0.85,
+     "status": "FAIL",
+     "margin": -0.07028207778930662
+    },
+    {
+     "metric": "concept_cos_minus",
+     "value": 0.2220076024532318,
+     "op": ">=",
+     "threshold": 0.85,
+     "status": "FAIL",
+     "margin": -0.6279923975467682
+    },
+    {
+     "metric": "concept_mag_plus",
+     "value": 0.3776567578315735,
+     "op": ">=",
+     "threshold": 0.75,
+     "status": "FAIL",
+     "margin": -0.3723432421684265
+    },
+    {
+     "metric": "concept_mag_plus",
+     "value": 0.3776567578315735,
+     "op": "<=",
+     "threshold": 1.25,
+     "status": "PASS",
+     "margin": 0.8723432421684265
+    },
+    {
+     "metric": "concept_mag_minus",
+     "value": 0.198159858584404,
+     "op": ">=",
+     "threshold": 0.75,
+     "status": "FAIL",
+     "margin": -0.551840141415596
+    },
+    {
+     "metric": "concept_mag_minus",
+     "value": 0.198159858584404,
+     "op": "<=",
+     "threshold": 1.25,
+     "status": "PASS",
+     "margin": 1.051840141415596
+    },
+    {
+     "metric": "identity_at_0",
+     "value": 0.3238793989374783,
+     "op": ">=",
+     "threshold": 0.85,
+     "status": "FAIL",
+     "margin": -0.5261206010625217
+    },
+    {
+     "metric": "identity_at_mid",
+     "value": 0.8365882375130108,
+     "op": ">=",
+     "threshold": 0.85,
+     "status": "FAIL",
+     "margin": -0.013411762486989165
+    }
+   ],
+   "convergence": {
+    "complete": true,
+    "observations": 24,
+    "passing_observations": 0,
+    "minimum_stable_checks": 5,
+    "passing_suffix": 0,
+    "first_pass_step": null,
+    "stable_from_step": null,
+    "stable_from_seconds": null,
+    "confirmed_step": null,
+    "confirmed_seconds": null
+   },
+   "shortfall": 0.3360609814138448,
+   "confirmation_fraction": 2.0
+  },
+  "ema": "N/A",
+  "noise_applied": true
+ },
+ "seconds": 12.6,
+ "init": {
+  "function": "constructor (develop entry point makes no particlegan.init call; --init and K3P_INIT unset)",
+  "init_sha256": "2ad3d15efb40e9acac4877994ef81660fa3c41fde66217ec0d4b6d809c78c010",
+  "init_tensors": 10
+ },
+ "receipts": {
+  "lr_constant": true,
+  "amsgrad_all": true,
+  "noise": {
+   "host_policy": {
+    "input_std": 0.0,
+    "input_nonzero_steps": 0,
+    "input_sigma_first": 0.0,
+    "output_nonzero_steps": 0,
+    "output_scale_initial": 0.0
+   }
+  },
+  "k3p_legacy": {
+   "package_recipe": {
+    "reg_coeff": 1.0,
+    "reg_kappa": 1.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "d_guard_ratio": 0.0,
+    "d_guard_min_steps": 200,
+    "latent_damping_max_rate": 0.0,
+    "reg_anchor_decay": 0.999,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_betas": [
+     0.0,
+     0.9
+    ],
+    "direct_particle_gain": true,
+    "amsgrad": true,
+    "reg_real_weight": 1.0,
+    "reg_real_mode": "r1",
+    "reg_real_kappa": null
+   },
+   "critic_parameters": 4609
+  },
+  "simple_calls": 3200,
+  "lr": {
+   "opt1.g0": {
+    "min": 0.0001,
+    "max": 0.0001,
+    "steps": 800,
+    "amsgrad": true
+   },
+   "opt0.g0": {
+    "min": 0.0002,
+    "max": 0.0002,
+    "steps": 800,
+    "amsgrad": true
+   }
+  },
+  "particlegan_file": "/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-constant-fix/particlegan/__init__.py",
+  "simple_d_betas": null,
+  "activity": {
+   "a2_damped_steps": 0,
+   "a2_calls": 0,
+   "direct_steps": 0,
+   "direct_gain_steps": 0,
+   "guard_calls": 0,
+   "guard_clips": 0,
+   "penalty_calls": 0,
+   "penalty_s_lt_1": 0,
+   "anchor_evals": 0
+  },
+  "final_sha256": "4fe6b2284632cd192f72b605985adde2958f2bb39494a9f931b06f6885a8ba31",
+  "penalty_variant": null,
+  "recipe": null,
+  "declared_noise": {
+   "input_noise_std": 0.0,
+   "output_noise_std": 0.0
+  },
+  "declared_lr": {
+   "lr_floor": 1.0,
+   "network_lr_floor": 1.0,
+   "d_lr_mult": 0.5,
+   "reg_coeff": 1.0,
+   "prior_lr_mult": 2.0
+  }
+ }
+}

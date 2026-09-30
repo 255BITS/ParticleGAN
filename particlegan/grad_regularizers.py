@@ -89,6 +89,13 @@ class GradientPenalty:
             ``s == 0`` exactly at the floor.
         anchor_weight: weight of the EMA-anchor term ``prox`` (1 is K3P;
             0 removes it and needs no anchor).
+        real_weight: weight of ``A``'s reals term relative to ``coeff``
+            (1 is K3P; 0 leaves only the fake cap in ``A``).
+        real_mode: ``A``'s reals term. ``"r1"`` (K3P): ``mean ||g_r||^2 / d``.
+            ``"cap"``: the fakes' one-sided RMS cap on reals,
+            ``mean relu(||g_r|| / sqrt(d) - real_kappa)^2``, so ``A`` is one
+            symmetric cap and a correct slope at the reals is not pulled to 0.
+        real_kappa: the reals cap for ``real_mode="cap"`` (None: ``kappa``).
         anchor: a ``particlegan.k3p.CriticAnchor`` (or anything with
             ``start_()``, ``update_()`` and ``__call__``), started at the first
             blended call.
@@ -106,13 +113,21 @@ class GradientPenalty:
         anchor_weight: float = 1.0,
         anchor: Optional[Any] = None,
         record: Optional[CriticStepRecord] = None,
+        real_weight: float = 1.0,
+        real_mode: str = "r1",
+        real_kappa: Optional[float] = None,
     ) -> None:
         self.coeff = float(coeff)
         self.kappa = float(kappa)
         self.lazy_k = int(lazy_k)
         self.lr_floor = float(lr_floor)
         self.anchor_weight = float(anchor_weight)
-        for name in ("coeff", "kappa", "anchor_weight"):
+        self.real_weight = float(real_weight)
+        if real_mode not in ("r1", "cap"):
+            raise ValueError(f"real_mode must be 'r1' or 'cap', got {real_mode!r}")
+        self.real_mode = real_mode
+        self.real_kappa = self.kappa if real_kappa is None else float(real_kappa)
+        for name in ("coeff", "kappa", "anchor_weight", "real_weight", "real_kappa"):
             value = getattr(self, name)
             if not math.isfinite(value) or value < 0:
                 raise ValueError(f"{name} must be finite and nonnegative")
@@ -216,10 +231,11 @@ class GradientPenalty:
         s = self.blend_weight()
         self.record.calls += 1
         if s >= 1.0:
-            real_squared = self._grad_norm(D, x_real, squared=True) / dimension
+            real_sq = self._grad_norm(D, x_real, squared=True)
+            real_term = self._real_term(real_sq, dimension)
             fake_norm = self._grad_norm(D, x_fake, squared=False) / dimension ** 0.5
             fake_cap = (fake_norm - self.kappa).relu().square()
-            pen = (coefficient / 2.0) * (real_squared.mean() + fake_cap.mean())
+            pen = (coefficient / 2.0) * (real_term + fake_cap.mean())
             prox, phase = None, "a"
         else:
             use_anchor = self.anchor_weight != 0.0
@@ -247,7 +263,8 @@ class GradientPenalty:
                     prox = self.anchor_weight * prox
             b_term = F.relu(n_r - self.kappa).pow(2).mean() + F.relu(n_f - self.kappa).pow(2).mean() + prox
             if s > 0.0:
-                a_term = (sq_r / dimension).mean() + (n_f / dimension ** 0.5 - self.kappa).relu().square().mean()
+                fake_cap = (n_f / dimension ** 0.5 - self.kappa).relu().square().mean()
+                a_term = self._real_term(sq_r, dimension) + fake_cap
                 pen = (coefficient / 2.0) * (s * a_term + (1.0 - s) * b_term)
                 phase = "blend"
             else:
@@ -255,8 +272,21 @@ class GradientPenalty:
                 phase = "b"
         if not collect_stats:
             return pen, {}
-        return pen, {"applied": True, "pen": float(pen.detach()), "center": self.kappa, "s": s,
-                     "prox": 0.0 if prox is None else float(prox.detach()), "phase": phase}
+        stats = {"applied": True, "pen": float(pen.detach()), "center": self.kappa, "s": s,
+                 "prox": 0.0 if prox is None else float(prox.detach()), "phase": phase}
+        if phase == "a":  # diagnostics only: per-sample input-gradient RMS at the reals and fakes
+            real_rms = (real_sq.detach() / dimension).sqrt()
+            stats.update(real_rms_mean=float(real_rms.mean()), real_rms_max=float(real_rms.max()),
+                         fake_rms_mean=float(fake_norm.detach().mean()), fake_rms_max=float(fake_norm.detach().max()))
+        return pen, stats
+
+    def _real_term(self, real_squared: torch.Tensor, dimension: int) -> torch.Tensor:
+        """``A``'s reals term from per-sample ``||g_r||^2`` (op for op K3P for r1 at weight 1)."""
+        if self.real_mode == "r1":
+            term = (real_squared / dimension).mean()
+        else:  # the fakes' cap: sqrt(sq + eps) / sqrt(d), as _grad_norm and phase A's fake side compute it
+            term = (torch.sqrt(real_squared + 1e-12) / dimension ** 0.5 - self.real_kappa).relu().square().mean()
+        return term if self.real_weight == 1.0 else self.real_weight * term
 
     @staticmethod
     def _grad_norm(D: torch.nn.Module, x: torch.Tensor, squared: bool = False) -> torch.Tensor:

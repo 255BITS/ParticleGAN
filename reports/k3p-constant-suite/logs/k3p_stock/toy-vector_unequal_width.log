@@ -1,0 +1,28 @@
+# arm=k3p_stock task=toy-vector_unequal_width route=gantrainer particlegan=/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-constant-fix/particlegan/__init__.py
+START vector_unequal_width route=GANTrainer + generic noise wrappers steps=1200
+train     50/1200 Ld=+0.6639 Lg=+0.7690 pen=0.0194 s=1 lr_d=0.00425 1s
+train    100/1200 Ld=+0.6991 Lg=+0.7059 pen=0.00108 s=1 lr_d=0.00425 2s
+train    150/1200 Ld=+0.6912 Lg=+0.7012 pen=0.000152 s=1 lr_d=0.00425 3s
+train    200/1200 Ld=+0.6849 Lg=+0.7112 pen=0.000136 s=1 lr_d=0.00425 4s
+train    250/1200 Ld=+0.6848 Lg=+0.7180 pen=9.47e-05 s=1 lr_d=0.00425 5s
+train    300/1200 Ld=+0.7000 Lg=+0.7101 pen=0.000122 s=1 lr_d=0.00425 6s
+train    350/1200 Ld=+0.6896 Lg=+0.7385 pen=0.000197 s=1 lr_d=0.00425 7s
+train    400/1200 Ld=+0.6802 Lg=+0.6964 pen=1.9e-05 s=1 lr_d=0.00425 8s
+train    450/1200 Ld=+0.6830 Lg=+0.7172 pen=4.51e-05 s=1 lr_d=0.00425 8s
+train    500/1200 Ld=+0.6960 Lg=+0.7025 pen=8.28e-06 s=1 lr_d=0.00425 9s
+train    550/1200 Ld=+0.6883 Lg=+0.7161 pen=3.51e-06 s=1 lr_d=0.00425 10s
+train    600/1200 Ld=+0.6942 Lg=+0.7057 pen=1.13e-05 s=1 lr_d=0.00425 11s
+train    650/1200 Ld=+0.6929 Lg=+0.7035 pen=6.34e-06 s=1 lr_d=0.00425 12s
+train    700/1200 Ld=+0.7052 Lg=+0.7088 pen=0.000208 s=1 lr_d=0.00425 13s
+train    750/1200 Ld=+0.6906 Lg=+0.7115 pen=0.000105 s=1 lr_d=0.00421 13s
+train    800/1200 Ld=+0.7008 Lg=+0.7003 pen=2.04e-05 s=1 lr_d=0.00397 14s
+train    850/1200 Ld=+0.6944 Lg=+0.7000 pen=3.18e-06 s=1 lr_d=0.00354 15s
+train    900/1200 Ld=+0.6941 Lg=+0.7073 pen=9.93e-05 s=1 lr_d=0.00296 16s
+train    950/1200 Ld=+0.6955 Lg=+0.7001 pen=1.67e-05 s=1 lr_d=0.0023 16s
+train   1000/1200 Ld=+0.6913 Lg=+0.7088 pen=7.04e-05 s=0.762 lr_d=0.00162 17s
+train   1050/1200 Ld=+0.6898 Lg=+0.7021 pen=3.36e-05 s=0.46 lr_d=0.000989 18s
+train   1100/1200 Ld=+0.6928 Lg=+0.7022 pen=5.27e-05 s=0.217 lr_d=0.000486 19s
+train   1150/1200 Ld=+0.6922 Lg=+0.6977 pen=1.11e-05 s=0.0579 lr_d=0.000159 20s
+train   1200/1200 Ld=+0.6822 Lg=+0.6923 pen=1.65e-05 s=8.65e-05 lr_d=4.25e-05 21s
+{"event": "DONE", "task": "vector_unequal_width", "status": "FAIL", "suffix": 0, "live": {"sw1_normalized": 0.045324553524988744, "mean_error": 0.05449152737855911, "covariance_error": 0.020446306094527245, "target_scale": 2.138371229171753, "sample_count": 4096, "mass_tv": 0.036376953125, "min_mass_ratio": 0.919921875, "hq": 0.86376953125, "component_covariance_error": 1.2860105335712433, "component_covariance_errors": [3.0468008518218994, 1.0470576286315918, 0.7667838335037231, 0.2833998203277588], "component_min_eigen_ratio": 0.41250619292259216, "component_mass": [0.22998046875, 0.2431640625, 0.240478515625, 0.286376953125], "target_mass": [0.25, 0.25, 0.25, 0.25], "component_counts": [942, 996, 985, 1173]}, "error": null}
+# DONE toy-vector_unequal_width status=FAIL metric={'name': 'passing suffix', 'value': '0/24'} 23s

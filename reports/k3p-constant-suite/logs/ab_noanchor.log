@@ -1,0 +1,28 @@
+# 2026-09-26 23:13:27 arm=ab_noanchor device=cuda:0 tasks=26 steps=400
+23:13:47 native-grid100             NO_RESULT None=None |  | 20s rc=0
+23:13:47 native-rotated100          NO_RESULT None=None |  | 20s rc=0
+23:13:47 native-staggered100        NO_RESULT None=None |  | 20s rc=0
+23:14:01 ring8-multishift           NO_RESULT None=None |  | 14s rc=0
+23:14:03 hold-mode_hold             NO_RESULT None=None |  | 16s rc=0
+23:14:07 toy-two_pole               NO_RESULT None=None |  | 4s rc=0
+23:14:13 ring8-shift                NO_RESULT None=None |  | 12s rc=0
+23:14:13 toy-trajectory             NO_RESULT None=None |  | 6s rc=0
+23:14:19 toy-residual_student       NO_RESULT None=None |  | 6s rc=0
+23:14:21 toy-unipolar               NO_RESULT None=None |  | 8s rc=0
+23:14:25 toy-ae_gan_hold            NO_RESULT None=None |  | 6s rc=0
+23:14:31 toy-cover_leftover         NO_RESULT None=None |  | 10s rc=0
+23:14:31 toy-unused_token_hold      NO_RESULT None=None |  | 6s rc=0
+23:14:45 toy-mid_scale_identity     NO_RESULT None=None |  | 14s rc=0
+23:14:47 toy-mode_hold              NO_RESULT None=None |  | 16s rc=0
+23:15:01 shift-mode_hold            NO_RESULT None=None |  | 74s rc=0
+23:15:21 toy-vector_two_broad       NO_RESULT None=None |  | 36s rc=0
+23:15:35 toy-vector_unequal_mass    NO_RESULT None=None |  | 48s rc=0
+23:15:39 toy-vector_unequal_width   NO_RESULT None=None |  | 38s rc=0
+23:16:07 toy-vector_anisotropic     NO_RESULT None=None |  | 46s rc=0
+23:16:15 toy-vector_overlap         NO_RESULT None=None |  | 40s rc=0
+23:16:19 toy-vector_spiral          NO_RESULT None=None |  | 40s rc=0
+23:16:25 toy-img_stripes2           NO_RESULT None=None |  | 18s rc=0
+23:16:33 toy-img_bars4              NO_RESULT None=None |  | 18s rc=0
+23:16:35 toy-img_blobs4             NO_RESULT None=None |  | 16s rc=0
+23:16:39 toy-img_intensity2         NO_RESULT None=None |  | 14s rc=0
+# 2026-09-26 23:16:39 arm=ab_noanchor finished

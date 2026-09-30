@@ -1,0 +1,178 @@
+{
+ "arm": "bcap_ams999_hi",
+ "task": "toy-cover_leftover",
+ "group": "toy",
+ "route": "legacy",
+ "formulation": "simple_B_cap3 at its own LRs (G .00425, critic x.5, prior x2; constant, no noise, A2 off, no guard) + AMSGrad on every optimizer, critic betas (0,.999)",
+ "steps_override": null,
+ "status": "PASS",
+ "passed": true,
+ "metric": {
+  "name": "passing suffix",
+  "value": "14/24"
+ },
+ "detail": "confirmed 500 u_kept=0.997 content_kept=0.999 leak_ratio=0.000653 pole_rel_err_plus=0.00274 pole_rel_err_minus=0.00493 same_dir=0.00193",
+ "raw": {
+  "verdict": {
+   "status": "PASS",
+   "attempted": true,
+   "passed": true,
+   "metrics": [
+    {
+     "metric": "u_kept",
+     "value": 0.9967112441527607,
+     "op": ">=",
+     "threshold": 0.85,
+     "status": "PASS",
+     "margin": 0.1467112441527607
+    },
+    {
+     "metric": "content_kept",
+     "value": 0.9992732603278772,
+     "op": ">=",
+     "threshold": 0.75,
+     "status": "PASS",
+     "margin": 0.24927326032787722
+    },
+    {
+     "metric": "leak_ratio",
+     "value": 0.000652552772412625,
+     "op": "<=",
+     "threshold": 0.2,
+     "status": "PASS",
+     "margin": 0.19934744722758738
+    },
+    {
+     "metric": "pole_rel_err_plus",
+     "value": 0.0027368655428290367,
+     "op": "<=",
+     "threshold": 0.2,
+     "status": "PASS",
+     "margin": 0.19726313445717097
+    },
+    {
+     "metric": "pole_rel_err_minus",
+     "value": 0.004929685033857822,
+     "op": "<=",
+     "threshold": 0.2,
+     "status": "PASS",
+     "margin": 0.1950703149661422
+    },
+    {
+     "metric": "same_dir",
+     "value": 0.0019295382664131085,
+     "op": "<=",
+     "threshold": 0.25,
+     "status": "PASS",
+     "margin": 0.24807046173358688
+    }
+   ],
+   "convergence": {
+    "complete": true,
+    "observations": 24,
+    "passing_observations": 14,
+    "minimum_stable_checks": 5,
+    "passing_suffix": 14,
+    "first_pass_step": 367,
+    "stable_from_step": 367,
+    "stable_from_seconds": 3.215970545075834,
+    "confirmed_step": 500,
+    "confirmed_seconds": 3.871192946098745
+   },
+   "shortfall": 0.0,
+   "confirmation_fraction": 0.625
+  },
+  "ema": "N/A",
+  "noise_applied": true
+ },
+ "seconds": 5.5,
+ "init": {
+  "function": "constructor (develop entry point makes no particlegan.init call; --init and K3P_INIT unset)",
+  "init_sha256": "13b239420a24b2e571b855617d30f4463104b7a29d4e0f90385af11d890b1546",
+  "init_tensors": 10
+ },
+ "receipts": {
+  "lr_constant": true,
+  "amsgrad_all": true,
+  "noise": {
+   "host_policy": {
+    "input_std": 0.0,
+    "input_nonzero_steps": 0,
+    "input_sigma_first": 0.0,
+    "output_nonzero_steps": 0,
+    "output_scale_initial": 0.0
+   }
+  },
+  "k3p_legacy": {
+   "package_recipe": {
+    "reg_coeff": 1.0,
+    "reg_kappa": 1.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "d_guard_ratio": 0.0,
+    "d_guard_min_steps": 200,
+    "latent_damping_max_rate": 0.0,
+    "reg_anchor_decay": 0.999,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_betas": [
+     0.0,
+     0.9
+    ],
+    "direct_particle_gain": true,
+    "amsgrad": true,
+    "reg_real_weight": 1.0,
+    "reg_real_mode": "r1",
+    "reg_real_kappa": null
+   },
+   "critic_parameters": 7361
+  },
+  "simple_calls": 800,
+  "lr": {
+   "opt1.g0": {
+    "min": 0.002125,
+    "max": 0.002125,
+    "steps": 800,
+    "amsgrad": true
+   },
+   "opt0.g0": {
+    "min": 0.00425,
+    "max": 0.00425,
+    "steps": 800,
+    "amsgrad": true
+   },
+   "opt0.g1": {
+    "min": 0.0085,
+    "max": 0.0085,
+    "steps": 800,
+    "amsgrad": true
+   }
+  },
+  "particlegan_file": "/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-constant-fix/particlegan/__init__.py",
+  "simple_d_betas": null,
+  "activity": {
+   "a2_damped_steps": 0,
+   "a2_calls": 0,
+   "direct_steps": 0,
+   "direct_gain_steps": 0,
+   "guard_calls": 0,
+   "guard_clips": 0,
+   "penalty_calls": 0,
+   "penalty_s_lt_1": 0,
+   "anchor_evals": 0
+  },
+  "final_sha256": "8d13583d2123d9825575fd50bb2cb1a598144edb738707dbd61a545dc0848512",
+  "penalty_variant": null,
+  "recipe": null,
+  "declared_noise": {
+   "input_noise_std": 0.0,
+   "output_noise_std": 0.0
+  },
+  "declared_lr": {
+   "lr_floor": 1.0,
+   "network_lr_floor": 1.0,
+   "d_lr_mult": 0.5,
+   "reg_coeff": 1.0,
+   "prior_lr_mult": 2.0
+  }
+ }
+}

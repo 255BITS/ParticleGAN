@@ -1,0 +1,7 @@
+# 2026-09-27 01:33:17 arm=gs_b2_0.9999 device=cuda:1 tasks=5 steps=None
+01:33:25 toy-two_pole               FAIL  passing suffix=0/24 | confirmed None mean_abs=0.16 grad_med=0.0587 | 3s rc=0
+01:33:45 toy-img_bars4              FAIL  passing suffix=0/24 | confirmed None modes=4 hq=0.875 | 23s rc=0
+01:37:19 native-grid100             FAIL  final modes/HQ=99/0.973 | coverage FAIL accuracy FAIL first100 None massTV 0.06 | 237s rc=0
+01:37:27 native-rotated100          FAIL  final modes/HQ=100/0.968 | coverage FAIL accuracy FAIL first100 1750 massTV 0.03425 | 246s rc=0
+01:37:37 native-staggered100        FAIL  final modes/HQ=100/0.964 | coverage FAIL accuracy FAIL first100 500 massTV 0.04020000000000001 | 256s rc=0
+# 2026-09-27 01:37:37 arm=gs_b2_0.9999 finished

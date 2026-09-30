@@ -1,0 +1,28 @@
+# arm=k3p_const task=toy-vector_unequal_mass route=gantrainer particlegan=/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-constant-fix/particlegan/__init__.py
+START vector_unequal_mass route=GANTrainer + generic noise wrappers steps=1200
+train     50/1200 Ld=+0.5152 Lg=+1.4771 pen=0.0323 s=1 lr_d=0.00425 1s
+train    100/1200 Ld=+0.4522 Lg=+1.4842 pen=0.00859 s=1 lr_d=0.00425 3s
+train    150/1200 Ld=+0.5413 Lg=+1.2486 pen=0.00614 s=1 lr_d=0.00425 4s
+train    200/1200 Ld=+0.6010 Lg=+0.9240 pen=0.00239 s=1 lr_d=0.00425 5s
+train    250/1200 Ld=+0.6360 Lg=+0.9437 pen=0.00339 s=1 lr_d=0.00425 6s
+train    300/1200 Ld=+0.5678 Lg=+1.0868 pen=0.0018 s=1 lr_d=0.00425 7s
+train    350/1200 Ld=+0.5875 Lg=+1.0419 pen=0.0024 s=1 lr_d=0.00425 8s
+train    400/1200 Ld=+0.6265 Lg=+0.8955 pen=0.00205 s=1 lr_d=0.00425 9s
+train    450/1200 Ld=+0.6400 Lg=+1.0163 pen=0.00142 s=1 lr_d=0.00425 10s
+train    500/1200 Ld=+0.6255 Lg=+0.9704 pen=0.00237 s=1 lr_d=0.00425 11s
+train    550/1200 Ld=+0.5270 Lg=+1.1586 pen=0.00176 s=1 lr_d=0.00425 12s
+train    600/1200 Ld=+0.6315 Lg=+0.9620 pen=0.00129 s=1 lr_d=0.00425 13s
+train    650/1200 Ld=+0.6275 Lg=+0.8963 pen=0.00294 s=1 lr_d=0.00425 14s
+train    700/1200 Ld=+0.6064 Lg=+0.9648 pen=0.0023 s=1 lr_d=0.00425 15s
+train    750/1200 Ld=+0.6730 Lg=+0.8376 pen=0.00791 s=1 lr_d=0.00425 17s
+train    800/1200 Ld=+0.6217 Lg=+0.8834 pen=0.00229 s=1 lr_d=0.00425 18s
+train    850/1200 Ld=+0.6290 Lg=+0.9061 pen=0.00191 s=1 lr_d=0.00425 19s
+train    900/1200 Ld=+0.6119 Lg=+0.9410 pen=0.000741 s=1 lr_d=0.00425 20s
+train    950/1200 Ld=+0.6226 Lg=+0.9364 pen=0.0018 s=1 lr_d=0.00425 21s
+train   1000/1200 Ld=+0.5706 Lg=+1.0224 pen=0.00141 s=1 lr_d=0.00425 22s
+train   1050/1200 Ld=+0.6547 Lg=+0.8514 pen=0.0021 s=1 lr_d=0.00425 24s
+train   1100/1200 Ld=+0.6387 Lg=+0.9217 pen=0.00245 s=1 lr_d=0.00425 25s
+train   1150/1200 Ld=+0.6402 Lg=+0.8717 pen=0.00171 s=1 lr_d=0.00425 26s
+train   1200/1200 Ld=+0.6328 Lg=+0.8446 pen=0.0013 s=1 lr_d=0.00425 27s
+{"event": "DONE", "task": "vector_unequal_mass", "status": "FAIL", "suffix": 0, "live": {"sw1_normalized": 0.2093392006992487, "mean_error": 0.31331032514572144, "covariance_error": 0.34980538487434387, "target_scale": 1.7948341369628906, "sample_count": 4096, "mass_tv": 0.18791991472244263, "min_mass_ratio": 0.4101562201976776, "hq": 1.0, "component_covariance_error": 0.3173954151570797, "component_covariance_errors": [0.08322951197624207, 0.2663842439651489, 0.19605375826358795, 0.7239141464233398], "component_min_eigen_ratio": -3.629966727203282e-08, "component_mass": [0.692138671875, 0.123046875, 0.17578125, 0.009033203125], "target_mass": [0.550000011920929, 0.30000001192092896, 0.12999999523162842, 0.019999999552965164], "component_counts": [2835, 504, 720, 37]}, "error": null}
+# DONE toy-vector_unequal_mass status=FAIL metric={'name': 'passing suffix', 'value': '0/24'} 29s

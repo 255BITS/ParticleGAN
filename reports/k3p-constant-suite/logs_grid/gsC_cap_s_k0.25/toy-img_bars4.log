@@ -1,0 +1,28 @@
+# arm=gsC_cap_s_k0.25 task=toy-img_bars4 route=gantrainer particlegan=/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-constant-fix/particlegan/__init__.py
+START img_bars4 route=GANTrainer + generic noise wrappers steps=600
+train     25/600 Ld=+0.4946 Lg=+1.0993 pen=0.000592 s=1 gR=0.283/0.305 lr_d=0.00425 1s
+train     50/600 Ld=+0.4881 Lg=+1.2879 pen=0.00284 s=1 gR=0.319/0.365 lr_d=0.00425 2s
+train     75/600 Ld=+0.3024 Lg=+2.0629 pen=0.00413 s=1 gR=0.329/0.371 lr_d=0.00425 2s
+train    100/600 Ld=+0.2843 Lg=+2.2600 pen=0.00786 s=1 gR=0.349/0.444 lr_d=0.00425 3s
+train    125/600 Ld=+0.2386 Lg=+3.0849 pen=0.0164 s=1 gR=0.399/0.503 lr_d=0.00425 3s
+train    150/600 Ld=+0.3386 Lg=+2.3436 pen=0.011 s=1 gR=0.343/0.494 lr_d=0.00425 4s
+train    175/600 Ld=+0.4659 Lg=+2.2042 pen=0.0102 s=1 gR=0.333/0.487 lr_d=0.00425 4s
+train    200/600 Ld=+0.4518 Lg=+2.0844 pen=0.00417 s=1 gR=0.31/0.425 lr_d=0.00425 5s
+train    225/600 Ld=+0.3911 Lg=+2.2367 pen=0.00257 s=1 gR=0.302/0.377 lr_d=0.00425 5s
+train    250/600 Ld=+0.3665 Lg=+2.7282 pen=0.00682 s=1 gR=0.345/0.425 lr_d=0.00425 6s
+train    275/600 Ld=+0.3739 Lg=+2.3976 pen=0.0104 s=1 gR=0.353/0.492 lr_d=0.00425 7s
+train    300/600 Ld=+0.3102 Lg=+3.4318 pen=0.00613 s=1 gR=0.335/0.462 lr_d=0.00425 7s
+train    325/600 Ld=+0.3652 Lg=+2.1488 pen=0.00899 s=1 gR=0.348/0.505 lr_d=0.00425 8s
+train    350/600 Ld=+0.3045 Lg=+2.3018 pen=0.0103 s=1 gR=0.373/0.503 lr_d=0.00425 8s
+train    375/600 Ld=+0.3370 Lg=+2.8070 pen=0.011 s=1 gR=0.379/0.479 lr_d=0.00425 9s
+train    400/600 Ld=+0.4823 Lg=+1.5961 pen=0.000572 s=1 gR=0.245/0.326 lr_d=0.00425 9s
+train    425/600 Ld=+0.5818 Lg=+1.6353 pen=0.000552 s=1 gR=0.22/0.327 lr_d=0.00425 10s
+train    450/600 Ld=+0.5012 Lg=+1.8457 pen=0.00158 s=1 gR=0.245/0.356 lr_d=0.00425 11s
+train    475/600 Ld=+0.3905 Lg=+2.0736 pen=0.00112 s=1 gR=0.269/0.331 lr_d=0.00425 11s
+train    500/600 Ld=+0.3209 Lg=+1.6143 pen=0.00185 s=1 gR=0.252/0.41 lr_d=0.00425 12s
+train    525/600 Ld=+0.8816 Lg=+1.0009 pen=7.87e-05 s=1 gR=0.19/0.275 lr_d=0.00425 12s
+train    550/600 Ld=+0.5061 Lg=+0.9466 pen=0 s=1 gR=0.144/0.163 lr_d=0.00425 13s
+train    575/600 Ld=+0.5738 Lg=+0.9662 pen=0 s=1 gR=0.156/0.183 lr_d=0.00425 14s
+train    600/600 Ld=+0.6370 Lg=+0.8609 pen=0 s=1 gR=0.157/0.168 lr_d=0.00425 14s
+{"event": "DONE", "task": "img_bars4", "status": "FAIL", "suffix": 0, "live": {"modes": 4, "hq": 0.71875, "mean_rmse": 0.08083435893058777, "quality_mode_fractions": [0.125, 0.15625, 0.1875, 0.25], "mode_fractions": [0.15625, 0.1875, 0.34375, 0.3125], "distribution_tv": 0.15625}, "error": null}
+# DONE toy-img_bars4 status=FAIL metric={'name': 'passing suffix', 'value': '0/24'} 16s

@@ -1,0 +1,33 @@
+# arm=gs2_c03_lr2_d05 task=toy-unused_token_hold route=legacy particlegan=/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-constant-fix/particlegan/__init__.py
+START unused_token_hold route=public primitives custom host + shared noise policy steps=200
+unused-token arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=1 hold=0.9880 concept=0.0000 unused_dist=0.0120
+eval     9 unused_hold=0.9944 concept_move=0 unused_dist=0.005623 concept_cos=-0.1508 concept_delta_norm=0.1546 scale0_err=0
+eval    17 unused_hold=0.9811 concept_move=0.246 unused_dist=0.01894 concept_cos=0.6867 concept_delta_norm=0.3582 scale0_err=0
+eval    25 unused_hold=0.9711 concept_move=0.4937 unused_dist=0.02886 concept_cos=0.9985 concept_delta_norm=0.4944 scale0_err=0
+eval    34 unused_hold=0.9761 concept_move=0.722 unused_dist=0.02387 concept_cos=0.9896 concept_delta_norm=0.7296 scale0_err=0
+eval    42 unused_hold=0.9798 concept_move=0.8732 unused_dist=0.02017 concept_cos=1 concept_delta_norm=0.8732 scale0_err=0
+eval    50 unused_hold=0.9869 concept_move=0.9823 unused_dist=0.01312 concept_cos=0.9993 concept_delta_norm=0.9829 scale0_err=0
+unused-token arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=50 hold=0.9869 concept=0.9823 unused_dist=0.0131
+eval    59 unused_hold=0.994 concept_move=0.9487 unused_dist=0.005987 concept_cos=0.9998 concept_delta_norm=1.051 scale0_err=0
+eval    67 unused_hold=0.9979 concept_move=0.9289 unused_dist=0.002075 concept_cos=0.9999 concept_delta_norm=1.071 scale0_err=0
+eval    75 unused_hold=0.9982 concept_move=0.9374 unused_dist=0.001778 concept_cos=1 concept_delta_norm=1.063 scale0_err=0
+eval    84 unused_hold=0.9972 concept_move=0.9641 unused_dist=0.002775 concept_cos=1 concept_delta_norm=1.036 scale0_err=0
+eval    92 unused_hold=0.9978 concept_move=0.9881 unused_dist=0.002237 concept_cos=1 concept_delta_norm=1.012 scale0_err=0
+eval   100 unused_hold=0.9988 concept_move=0.9962 unused_dist=0.001189 concept_cos=1 concept_delta_norm=0.9962 scale0_err=0
+unused-token arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=100 hold=0.9988 concept=0.9962 unused_dist=0.0012
+eval   109 unused_hold=0.9998 concept_move=0.9901 unused_dist=0.0001662 concept_cos=1 concept_delta_norm=0.9901 scale0_err=0
+eval   117 unused_hold=0.9997 concept_move=0.9918 unused_dist=0.0003018 concept_cos=1 concept_delta_norm=0.9918 scale0_err=0
+eval   125 unused_hold=0.9996 concept_move=0.996 unused_dist=0.0003811 concept_cos=1 concept_delta_norm=0.996 scale0_err=0
+eval   134 unused_hold=0.9998 concept_move=0.9998 unused_dist=0.0002262 concept_cos=1 concept_delta_norm=0.9998 scale0_err=0
+eval   142 unused_hold=0.9999 concept_move=0.9987 unused_dist=6.165e-05 concept_cos=1 concept_delta_norm=1.001 scale0_err=0
+eval   150 unused_hold=1 concept_move=0.9987 unused_dist=3.447e-05 concept_cos=1 concept_delta_norm=1.001 scale0_err=0
+unused-token arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=150 hold=1.0000 concept=0.9987 unused_dist=0.0000
+eval   159 unused_hold=0.9999 concept_move=0.9995 unused_dist=5.378e-05 concept_cos=1 concept_delta_norm=1.001 scale0_err=0
+eval   167 unused_hold=1 concept_move=1 unused_dist=3.094e-05 concept_cos=1 concept_delta_norm=1 scale0_err=0
+eval   175 unused_hold=1 concept_move=0.9998 unused_dist=5.908e-06 concept_cos=1 concept_delta_norm=0.9998 scale0_err=0
+eval   184 unused_hold=1 concept_move=0.9999 unused_dist=7.036e-06 concept_cos=1 concept_delta_norm=0.9999 scale0_err=0
+eval   192 unused_hold=1 concept_move=1 unused_dist=6.766e-06 concept_cos=1 concept_delta_norm=1 scale0_err=0
+eval   200 unused_hold=1 concept_move=1 unused_dist=2.777e-06 concept_cos=1 concept_delta_norm=1 scale0_err=0
+unused-token arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=200 hold=1.0000 concept=1.0000 unused_dist=0.0000
+{"event": "DONE", "task": "unused_token_hold", "status": "PASS", "suffix": 20, "live": {"unused_hold": 0.9999972232615164, "concept_move": 0.9999840259552002}, "error": null}
+# DONE toy-unused_token_hold status=PASS metric={'name': 'passing suffix', 'value': '20/24'} 2s

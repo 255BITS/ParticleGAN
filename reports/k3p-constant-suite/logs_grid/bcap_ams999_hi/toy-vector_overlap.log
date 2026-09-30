@@ -1,0 +1,28 @@
+# arm=bcap_ams999_hi task=toy-vector_overlap route=gantrainer particlegan=/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-constant-fix/particlegan/__init__.py
+START vector_overlap route=GANTrainer + generic noise wrappers steps=1200
+train     50/1200 Ld=+0.0709 Lg=+0.6949 pen=0.0709 s=nan gR=nan/nan lr_d=0.00213 3s
+train    100/1200 Ld=+0.0376 Lg=+0.6931 pen=0.0376 s=nan gR=nan/nan lr_d=0.00213 6s
+train    150/1200 Ld=+0.0557 Lg=+0.6938 pen=0.0557 s=nan gR=nan/nan lr_d=0.00213 9s
+train    200/1200 Ld=+0.0488 Lg=+0.6930 pen=0.0488 s=nan gR=nan/nan lr_d=0.00213 12s
+train    250/1200 Ld=+0.0641 Lg=+0.6932 pen=0.0641 s=nan gR=nan/nan lr_d=0.00213 14s
+train    300/1200 Ld=+0.0226 Lg=+0.6934 pen=0.0226 s=nan gR=nan/nan lr_d=0.00213 17s
+train    350/1200 Ld=+0.0290 Lg=+0.6931 pen=0.029 s=nan gR=nan/nan lr_d=0.00213 20s
+train    400/1200 Ld=+0.0281 Lg=+0.6929 pen=0.0281 s=nan gR=nan/nan lr_d=0.00213 23s
+train    450/1200 Ld=+0.0475 Lg=+0.6931 pen=0.0475 s=nan gR=nan/nan lr_d=0.00213 26s
+train    500/1200 Ld=+0.0374 Lg=+0.6931 pen=0.0374 s=nan gR=nan/nan lr_d=0.00213 29s
+train    550/1200 Ld=+0.0385 Lg=+0.6931 pen=0.0385 s=nan gR=nan/nan lr_d=0.00213 32s
+train    600/1200 Ld=+0.0356 Lg=+0.6932 pen=0.0356 s=nan gR=nan/nan lr_d=0.00213 35s
+train    650/1200 Ld=+0.0575 Lg=+0.6930 pen=0.0575 s=nan gR=nan/nan lr_d=0.00213 38s
+train    700/1200 Ld=+0.0531 Lg=+0.6931 pen=0.0531 s=nan gR=nan/nan lr_d=0.00213 40s
+train    750/1200 Ld=+0.0417 Lg=+0.6930 pen=0.0417 s=nan gR=nan/nan lr_d=0.00213 44s
+train    800/1200 Ld=+0.0354 Lg=+0.6932 pen=0.0354 s=nan gR=nan/nan lr_d=0.00213 47s
+train    850/1200 Ld=+0.0458 Lg=+0.6933 pen=0.0458 s=nan gR=nan/nan lr_d=0.00213 50s
+train    900/1200 Ld=+0.0472 Lg=+0.6924 pen=0.0472 s=nan gR=nan/nan lr_d=0.00213 53s
+train    950/1200 Ld=+0.0350 Lg=+0.6931 pen=0.035 s=nan gR=nan/nan lr_d=0.00213 56s
+train   1000/1200 Ld=+0.0425 Lg=+0.6933 pen=0.0425 s=nan gR=nan/nan lr_d=0.00213 59s
+train   1050/1200 Ld=+0.0319 Lg=+0.6933 pen=0.0319 s=nan gR=nan/nan lr_d=0.00213 61s
+train   1100/1200 Ld=+0.0538 Lg=+0.6931 pen=0.0538 s=nan gR=nan/nan lr_d=0.00213 64s
+train   1150/1200 Ld=+0.0614 Lg=+0.6932 pen=0.0614 s=nan gR=nan/nan lr_d=0.00213 66s
+train   1200/1200 Ld=+0.0294 Lg=+0.6931 pen=0.0294 s=nan gR=nan/nan lr_d=0.00213 69s
+{"event": "DONE", "task": "vector_overlap", "status": "FAIL", "suffix": 2, "live": {"sw1_normalized": 0.12949933477701966, "mean_error": 0.07607951015233994, "covariance_error": 0.39471352100372314, "target_scale": 0.8509407043457031, "sample_count": 4096}, "error": null}
+# DONE toy-vector_overlap status=FAIL metric={'name': 'passing suffix', 'value': '2/24'} 71s

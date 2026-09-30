@@ -74,6 +74,20 @@ class Recipe:
     distance_reduction: str = "sum"
     observation_sigma: float = 0.03
     reconstruction_weight: float = 1.0
+    # Append new fields so existing positional Recipe arguments retain meaning.
+    # AMSGrad for every recipe optimizer (G, prior and critic). Recommended
+    # with a constant G/D LR (network_lr_floor >= 1/2): the Adam step then
+    # shrinks with the gradient at equilibrium instead of creeping up as the
+    # second moment decays. The annealed default schedule keeps plain Adam.
+    amsgrad: bool = False
+    # Weight of the critic penalty's R1-on-reals term relative to reg_coeff
+    # (phase A); the one-sided fake cap stays at reg_coeff. 1.0 is K3P;
+    # 0 leaves only the fake cap.
+    reg_real_weight: float = 1.0
+    # Phase A's reals term: "r1" (K3P) or "cap", the fakes' one-sided RMS cap
+    # applied to reals at reg_real_kappa (None: reg_kappa).
+    reg_real_mode: str = "r1"
+    reg_real_kappa: float | None = None
 
     def __post_init__(self):
         object.__setattr__(self, "betas", tuple(self.betas))
@@ -140,9 +154,11 @@ class Recipe:
         for key in ("lr", "d_lr_mult", "prior_lr_mult", "routing_temperature", "observation_sigma"):
             if not math.isfinite(getattr(self, key)) or getattr(self, key) <= 0:
                 raise ValueError(f"{key} must be finite and positive")
+        if type(self.amsgrad) is not bool:
+            raise ValueError("amsgrad must be a boolean")
         if type(self.direct_particle_gain) is not bool:
             raise ValueError("direct_particle_gain must be a boolean")
-        for key in ("reg_coeff", "reg_kappa", "reg_anchor_weight", "prior_reg", "ucd_weight",
+        for key in ("reg_coeff", "reg_kappa", "reg_anchor_weight", "reg_real_weight", "prior_reg", "ucd_weight",
                     "reconstruction_weight"):
             if not math.isfinite(getattr(self, key)) or getattr(self, key) < 0:
                 raise ValueError(f"{key} must be finite and nonnegative")
@@ -235,8 +251,9 @@ class Recipe:
         the critic and its EMA. ``output`` selects the logits from the critic's
         output (default: first element of a tuple/list); ``collect_stats``
         fills ``penalty.last_stats``. ``penalty_overrides`` replace the
-        recipe's ``coeff``, ``kappa``, ``lazy_k``, ``lr_floor`` or
-        ``anchor_weight`` for this penalty.
+        recipe's ``coeff``, ``kappa``, ``lazy_k``, ``lr_floor``,
+        ``anchor_weight``, ``real_weight``, ``real_mode`` or ``real_kappa``
+        for this penalty.
         """
         from .k3p import CriticPenalty
         return CriticPenalty(self, optimizer, output=output, collect_stats=collect_stats,
@@ -245,13 +262,15 @@ class Recipe:
     def _penalty_options(self, **overrides):
         """Resolved kernel settings for ``make_critic_penalty``."""
         options = {"coeff": self.reg_coeff, "kappa": self.reg_kappa, "lazy_k": self.reg_every,
-                   "anchor_weight": self.reg_anchor_weight, **overrides}
+                   "anchor_weight": self.reg_anchor_weight, "real_weight": self.reg_real_weight,
+                   "real_mode": self.reg_real_mode, "real_kappa": self.reg_real_kappa, **overrides}
         # The blend floor f is the network LR floor. A floor >= 1/2 (e.g. 1.0,
         # a constant LR) keeps r >= 1/2 and hence s == 1 for every f, so the
         # same formulation needs no separate path.
         floor = self.resolved_network_lr_floor
         options.setdefault("lr_floor", floor if floor < 0.5 else 0.0)
-        unknown = set(options) - {"coeff", "kappa", "lazy_k", "lr_floor", "anchor_weight"}
+        unknown = set(options) - {"coeff", "kappa", "lazy_k", "lr_floor", "anchor_weight", "real_weight",
+                                  "real_mode", "real_kappa"}
         if unknown:
             raise TypeError(f"unknown critic penalty options: {sorted(unknown)}")
         from .grad_regularizers import GradientPenalty
@@ -267,10 +286,11 @@ class Recipe:
         ``copy.deepcopy(critic)``) that becomes the EMA; the critic penalty
         requires it unless ``reg_anchor_weight == 0``. Checkpoint with ``optimizer.state_dict()``: it holds the
         EMA critic and all counters. ``adam_kwargs`` override the recipe's
-        ``lr * d_lr_mult`` and ``betas`` or add options such as ``fused``.
+        ``lr * d_lr_mult``, ``betas`` and ``amsgrad`` or add options such as ``fused``.
         """
         from .k3p import K3PCriticAdam
-        options = {"lr": self.lr * self.d_lr_mult, "betas": self.betas, **adam_kwargs}
+        options = {"lr": self.lr * self.d_lr_mult, "betas": self.betas, "amsgrad": self.amsgrad,
+                   **adam_kwargs}
         return K3PCriticAdam([p for p in critic.parameters() if p.requires_grad], critic=critic,
                              ema_critic=ema_critic, anchor_decay=self.reg_anchor_decay,
                              guard_ratio=self.d_guard_ratio, guard_min_steps=self.d_guard_min_steps, **options)
@@ -282,10 +302,10 @@ class Recipe:
         and the direct-particle response for the param group ``direct_particles``).
 
         With neither, ``step()`` is exactly ``Adam.step()``. ``adam_kwargs``
-        override the recipe's ``lr`` and ``betas`` or add Adam options.
+        override the recipe's ``lr``, ``betas`` and ``amsgrad`` or add Adam options.
         """
         from .k3p import K3PGeneratorAdam
-        options = {"lr": self.lr, "betas": self.betas, **adam_kwargs}
+        options = {"lr": self.lr, "betas": self.betas, "amsgrad": self.amsgrad, **adam_kwargs}
         return K3PGeneratorAdam(params, latent_table=latent_table, direct_particles=direct_particles,
                                 latent_max_rate=self.latent_damping_max_rate,
                                 direct_betas=self.direct_particle_betas,

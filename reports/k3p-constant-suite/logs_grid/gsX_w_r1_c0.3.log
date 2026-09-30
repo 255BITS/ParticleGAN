@@ -1,0 +1,4 @@
+# 2026-09-27 08:14:53 arm=gsX_w_r1_c0.3 device=cuda:0 tasks=2 steps=None
+08:16:03 ring8-shift                PASS  fails outside transit=0 | prehold 120/120 arrival +620 departures 0 final HQ 0.988 | 68s rc=0
+08:16:51 ring8-multishift           FAIL  fails outside transit=16 | prehold 120/120 arrival +620/+480/+140 departures 1 final HQ 0.988 | 116s rc=0
+# 2026-09-27 08:16:51 arm=gsX_w_r1_c0.3 finished

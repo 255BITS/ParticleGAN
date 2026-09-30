@@ -1,0 +1,171 @@
+{
+ "arm": "k3p_stock_ams",
+ "task": "toy-cover_leftover",
+ "group": "toy",
+ "route": "legacy",
+ "formulation": "k3p + ams: k3p_stock with AMSGrad on every optimizer",
+ "steps_override": null,
+ "status": "PASS",
+ "passed": true,
+ "metric": {
+  "name": "passing suffix",
+  "value": "13/24"
+ },
+ "detail": "confirmed 534 u_kept=0.976 content_kept=1 leak_ratio=0.000994 pole_rel_err_plus=0.0157 pole_rel_err_minus=0.0169 same_dir=0.00137",
+ "raw": {
+  "verdict": {
+   "status": "PASS",
+   "attempted": true,
+   "passed": true,
+   "metrics": [
+    {
+     "metric": "u_kept",
+     "value": 0.9762736461286821,
+     "op": ">=",
+     "threshold": 0.85,
+     "status": "PASS",
+     "margin": 0.12627364612868208
+    },
+    {
+     "metric": "content_kept",
+     "value": 1.0013140149558006,
+     "op": ">=",
+     "threshold": 0.75,
+     "status": "PASS",
+     "margin": 0.25131401495580064
+    },
+    {
+     "metric": "leak_ratio",
+     "value": 0.0009941803964709781,
+     "op": "<=",
+     "threshold": 0.2,
+     "status": "PASS",
+     "margin": 0.19900581960352903
+    },
+    {
+     "metric": "pole_rel_err_plus",
+     "value": 0.01566835306584835,
+     "op": "<=",
+     "threshold": 0.2,
+     "status": "PASS",
+     "margin": 0.18433164693415166
+    },
+    {
+     "metric": "pole_rel_err_minus",
+     "value": 0.016934288665652275,
+     "op": "<=",
+     "threshold": 0.2,
+     "status": "PASS",
+     "margin": 0.18306571133434774
+    },
+    {
+     "metric": "same_dir",
+     "value": 0.0013697581694883233,
+     "op": "<=",
+     "threshold": 0.25,
+     "status": "PASS",
+     "margin": 0.2486302418305117
+    }
+   ],
+   "convergence": {
+    "complete": true,
+    "observations": 24,
+    "passing_observations": 13,
+    "minimum_stable_checks": 5,
+    "passing_suffix": 13,
+    "first_pass_step": 400,
+    "stable_from_step": 400,
+    "stable_from_seconds": 2.92311031895224,
+    "confirmed_step": 534,
+    "confirmed_seconds": 3.5283142759581096
+   },
+   "shortfall": 0.0,
+   "confirmation_fraction": 0.6675
+  },
+  "ema": "N/A",
+  "noise_applied": true
+ },
+ "seconds": 5.0,
+ "init": {
+  "function": "constructor (develop entry point makes no particlegan.init call; --init and K3P_INIT unset)",
+  "init_sha256": "13b239420a24b2e571b855617d30f4463104b7a29d4e0f90385af11d890b1546",
+  "init_tensors": 10
+ },
+ "receipts": {
+  "lr_constant": false,
+  "amsgrad_all": true,
+  "noise": {
+   "host_policy": {
+    "input_std": 0.5,
+    "input_nonzero_steps": 80,
+    "input_sigma_first": 0.5,
+    "output_nonzero_steps": 799,
+    "output_scale_initial": 0.029
+   }
+  },
+  "k3p_legacy": {
+   "package_recipe": {
+    "reg_coeff": 1.0,
+    "reg_kappa": 1.0,
+    "lr_floor": 0.05,
+    "network_lr_floor": 0.01,
+    "d_guard_ratio": 5.0,
+    "d_guard_min_steps": 200,
+    "latent_damping_max_rate": 0.5,
+    "reg_anchor_decay": 0.999,
+    "reg_anchor_weight": 1.0,
+    "direct_particle_betas": [
+     0.0,
+     0.9
+    ],
+    "direct_particle_gain": true,
+    "amsgrad": true
+   },
+   "calls": 800,
+   "s_last": 0.0001947264517916623,
+   "critic_parameters": 7361,
+   "guard_clipped_tensors": 0,
+   "record": {
+    "lr_max": 0.00425,
+    "lr_last": 4.260138190181372e-05,
+    "anchor_started": true,
+    "calls": 800,
+    "observed_steps": 800
+   }
+  },
+  "simple_calls": 0,
+  "lr": {
+   "opt1.g0": {
+    "min": 4.260138190181372e-05,
+    "max": 0.00425,
+    "steps": 800,
+    "amsgrad": true
+   },
+   "opt0.g0": {
+    "min": 4.260138190181372e-05,
+    "max": 0.00425,
+    "steps": 800,
+    "amsgrad": true
+   },
+   "opt0.g1": {
+    "min": 0.00042519457132671326,
+    "max": 0.0085,
+    "steps": 800,
+    "amsgrad": true
+   }
+  },
+  "particlegan_file": "/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-constant-fix/particlegan/__init__.py",
+  "simple_d_betas": null,
+  "recipe": null,
+  "declared_noise": {
+   "input_noise_std": 0.5,
+   "output_noise_std": 0.029
+  },
+  "declared_lr": {
+   "lr_floor": 0.05,
+   "network_lr_floor": 0.01,
+   "d_lr_mult": 1.0,
+   "reg_coeff": 1.0
+  }
+ }
+}

@@ -1,0 +1,33 @@
+# arm=k3p_const_ams_c3 task=toy-unused_token_hold route=legacy particlegan=/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-constant-fix/particlegan/__init__.py
+START unused_token_hold route=public primitives custom host + shared noise policy steps=200
+unused-token arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=1 hold=0.9940 concept=0.0000 unused_dist=0.0060
+eval     9 unused_hold=0.9981 concept_move=0 unused_dist=0.001852 concept_cos=-0.3051 concept_delta_norm=0.07222 scale0_err=0
+eval    17 unused_hold=0.9947 concept_move=0.07369 unused_dist=0.005287 concept_cos=0.7316 concept_delta_norm=0.1007 scale0_err=0
+eval    25 unused_hold=0.9945 concept_move=0.1813 unused_dist=0.005498 concept_cos=0.9984 concept_delta_norm=0.1816 scale0_err=0
+eval    34 unused_hold=0.995 concept_move=0.2793 unused_dist=0.004986 concept_cos=0.9478 concept_delta_norm=0.2947 scale0_err=0
+eval    42 unused_hold=0.9966 concept_move=0.3536 unused_dist=0.003389 concept_cos=0.9498 concept_delta_norm=0.3723 scale0_err=0
+eval    50 unused_hold=0.997 concept_move=0.4106 unused_dist=0.003022 concept_cos=0.9856 concept_delta_norm=0.4166 scale0_err=0
+unused-token arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=50 hold=0.9970 concept=0.4106 unused_dist=0.0030
+eval    59 unused_hold=0.9964 concept_move=0.4726 unused_dist=0.003578 concept_cos=0.9979 concept_delta_norm=0.4736 scale0_err=0
+eval    67 unused_hold=0.9976 concept_move=0.5261 unused_dist=0.002378 concept_cos=0.9998 concept_delta_norm=0.5262 scale0_err=0
+eval    75 unused_hold=0.9966 concept_move=0.5711 unused_dist=0.003357 concept_cos=0.9986 concept_delta_norm=0.5719 scale0_err=0
+eval    84 unused_hold=0.9954 concept_move=0.6129 unused_dist=0.004563 concept_cos=0.9996 concept_delta_norm=0.6132 scale0_err=0
+eval    92 unused_hold=0.9968 concept_move=0.6475 unused_dist=0.003238 concept_cos=0.9999 concept_delta_norm=0.6476 scale0_err=0
+eval   100 unused_hold=0.9981 concept_move=0.68 unused_dist=0.001864 concept_cos=1 concept_delta_norm=0.6801 scale0_err=0
+unused-token arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=100 hold=0.9981 concept=0.6800 unused_dist=0.0019
+eval   109 unused_hold=0.9984 concept_move=0.7142 unused_dist=0.001625 concept_cos=1 concept_delta_norm=0.7142 scale0_err=0
+eval   117 unused_hold=0.9983 concept_move=0.7423 unused_dist=0.001747 concept_cos=1 concept_delta_norm=0.7423 scale0_err=0
+eval   125 unused_hold=0.9972 concept_move=0.7684 unused_dist=0.002763 concept_cos=1 concept_delta_norm=0.7684 scale0_err=0
+eval   134 unused_hold=0.9988 concept_move=0.7967 unused_dist=0.001178 concept_cos=1 concept_delta_norm=0.7967 scale0_err=0
+eval   142 unused_hold=0.9978 concept_move=0.8185 unused_dist=0.002245 concept_cos=1 concept_delta_norm=0.8185 scale0_err=0
+eval   150 unused_hold=0.993 concept_move=0.8384 unused_dist=0.007027 concept_cos=1 concept_delta_norm=0.8384 scale0_err=0
+unused-token arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=150 hold=0.9930 concept=0.8384 unused_dist=0.0070
+eval   159 unused_hold=0.9953 concept_move=0.8587 unused_dist=0.004716 concept_cos=1 concept_delta_norm=0.8587 scale0_err=0
+eval   167 unused_hold=0.9956 concept_move=0.875 unused_dist=0.004421 concept_cos=1 concept_delta_norm=0.875 scale0_err=0
+eval   175 unused_hold=0.9945 concept_move=0.8897 unused_dist=0.005526 concept_cos=1 concept_delta_norm=0.8897 scale0_err=0
+eval   184 unused_hold=0.9939 concept_move=0.9044 unused_dist=0.006054 concept_cos=1 concept_delta_norm=0.9044 scale0_err=0
+eval   192 unused_hold=0.995 concept_move=0.9161 unused_dist=0.004964 concept_cos=1 concept_delta_norm=0.9161 scale0_err=0
+eval   200 unused_hold=0.9962 concept_move=0.9266 unused_dist=0.003827 concept_cos=1 concept_delta_norm=0.9266 scale0_err=0
+unused-token arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=200 hold=0.9962 concept=0.9266 unused_dist=0.0038
+{"event": "DONE", "task": "unused_token_hold", "status": "PASS", "suffix": 6, "live": {"unused_hold": 0.9961728909984231, "concept_move": 0.9265594040971266}, "error": null}
+# DONE toy-unused_token_hold status=PASS metric={'name': 'passing suffix', 'value': '6/24'} 2s

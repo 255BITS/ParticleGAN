@@ -1,0 +1,132 @@
+{
+ "arm": "k3p_simple",
+ "task": "hold-mode_hold",
+ "group": "hold",
+ "route": "legacy",
+ "formulation": "k3p_simple: k3p_const_ams minus every component whose removal cost no suite pass or ring stability: EMA anchor/EMA critic term off (reg_anchor_weight 0; inert at constant LR), direct-particle response off (gain False, betas = G's). Keeps AMSGrad, constant LR, no noise, R1+fake one-sided RMS cap, spike guard, A2, prior LR x2",
+ "steps_override": null,
+ "status": "FAIL",
+ "passed": false,
+ "metric": {
+  "name": "hold+ext",
+  "value": "0/1200+0/0"
+ },
+ "detail": "gate NOT_CONVERGED converged None first_fail None minHQ(hold) None stopped gate_done_plus_post_window",
+ "raw": {
+  "gate": {
+   "name": "first_convergence_then_hold_v1",
+   "confirmation_checks": 200,
+   "settling_budget": 4800,
+   "hold_budget": 1200,
+   "start_step": 1200,
+   "modes": 8,
+   "min_hq": 0.9,
+   "convergence": "first consecutive qualifying window; operational quality criterion",
+   "hold": "the next updates, disjoint from confirmation; no restart after failure",
+   "training_feedback": false,
+   "frozen_toy_verdicts_unchanged": true,
+   "status": "NOT_CONVERGED",
+   "converged_step": null,
+   "settling_checks": 4800,
+   "settling_failures": 4800,
+   "longest_settling_streak": 0,
+   "hold_checks": 0,
+   "first_hold_failure": null,
+   "hold_budget_complete": false
+  },
+  "extension": {
+   "checks": 0,
+   "passing": 0,
+   "min_hq": null
+  }
+ },
+ "seconds": 187.2,
+ "init": {
+  "function": "constructor (develop entry point makes no particlegan.init call; --init and K3P_INIT unset)",
+  "init_sha256": "a84d0510f58df1bd86f18151888e7f62a7b6594ce8396b086f265cc06b3421fd",
+  "init_tensors": 17
+ },
+ "receipts": {
+  "lr_constant": true,
+  "amsgrad_all": true,
+  "noise": {},
+  "k3p_legacy": {
+   "package_recipe": {
+    "reg_coeff": 1.0,
+    "reg_kappa": 1.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "d_guard_ratio": 5.0,
+    "d_guard_min_steps": 200,
+    "latent_damping_max_rate": 0.5,
+    "reg_anchor_decay": 0.999,
+    "reg_anchor_weight": 0.0,
+    "direct_particle_betas": [
+     0.0,
+     0.999
+    ],
+    "direct_particle_gain": false,
+    "amsgrad": true
+   },
+   "calls": 6300,
+   "s_last": 1.0,
+   "critic_parameters": 20161,
+   "guard_clipped_tensors": 123,
+   "record": {
+    "lr_max": 0.00425,
+    "lr_last": 0.00425,
+    "anchor_started": false,
+    "calls": 6300,
+    "observed_steps": 6300
+   }
+  },
+  "simple_calls": 0,
+  "lr": {
+   "opt1.g0": {
+    "min": 0.00425,
+    "max": 0.00425,
+    "steps": 6300,
+    "amsgrad": true
+   },
+   "opt0.g0": {
+    "min": 0.00425,
+    "max": 0.00425,
+    "steps": 6300,
+    "amsgrad": true
+   },
+   "opt0.g1": {
+    "min": 0.0085,
+    "max": 0.0085,
+    "steps": 6300,
+    "amsgrad": true
+   }
+  },
+  "particlegan_file": "/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-constant-fix/particlegan/__init__.py",
+  "simple_d_betas": null,
+  "activity": {
+   "a2_damped_steps": 0,
+   "a2_calls": 6300,
+   "direct_steps": 0,
+   "direct_gain_steps": 0,
+   "guard_calls": 6300,
+   "guard_clips": 123,
+   "penalty_calls": 6300,
+   "penalty_s_lt_1": 0,
+   "anchor_evals": 0
+  },
+  "final_sha256": "d8db022b28e1ac6ea06692e7f8369ccd4efd9136a8b0801c6ec6626c0de39081",
+  "penalty_variant": null,
+  "recipe": null,
+  "declared_noise": {
+   "input_noise_std": 0.0,
+   "output_noise_std": 0.0
+  },
+  "declared_lr": {
+   "lr_floor": 1.0,
+   "network_lr_floor": 1.0,
+   "d_lr_mult": 1.0,
+   "reg_coeff": 1.0,
+   "prior_lr_mult": 2.0
+  }
+ }
+}

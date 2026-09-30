@@ -1,0 +1,33 @@
+# arm=k3p_stock task=toy-unused_token_hold route=legacy particlegan=/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-constant-fix/particlegan/__init__.py
+START unused_token_hold route=public primitives custom host + shared noise policy steps=200
+unused-token arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=1 hold=0.9940 concept=0.0000 unused_dist=0.0060
+eval     9 unused_hold=0.994 concept_move=0.0128 unused_dist=0.006037 concept_cos=0.1613 concept_delta_norm=0.07938 scale0_err=0
+eval    17 unused_hold=0.9928 concept_move=0.1306 unused_dist=0.00724 concept_cos=0.7337 concept_delta_norm=0.1779 scale0_err=0
+eval    25 unused_hold=0.99 concept_move=0.2491 unused_dist=0.009953 concept_cos=0.9287 concept_delta_norm=0.2682 scale0_err=0
+eval    34 unused_hold=0.9903 concept_move=0.3567 unused_dist=0.009652 concept_cos=0.9983 concept_delta_norm=0.3573 scale0_err=0
+eval    42 unused_hold=0.991 concept_move=0.4395 unused_dist=0.009035 concept_cos=0.9941 concept_delta_norm=0.4422 scale0_err=0
+eval    50 unused_hold=0.9925 concept_move=0.5104 unused_dist=0.007513 concept_cos=0.9932 concept_delta_norm=0.5138 scale0_err=0
+unused-token arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=50 hold=0.9925 concept=0.5104 unused_dist=0.0075
+eval    59 unused_hold=0.9935 concept_move=0.5795 unused_dist=0.006477 concept_cos=0.9967 concept_delta_norm=0.5814 scale0_err=0
+eval    67 unused_hold=0.9941 concept_move=0.6317 unused_dist=0.005873 concept_cos=0.9993 concept_delta_norm=0.6321 scale0_err=0
+eval    75 unused_hold=0.9942 concept_move=0.6779 unused_dist=0.005766 concept_cos=0.9997 concept_delta_norm=0.678 scale0_err=0
+eval    84 unused_hold=0.9954 concept_move=0.7256 unused_dist=0.00458 concept_cos=0.9998 concept_delta_norm=0.7258 scale0_err=0
+eval    92 unused_hold=0.9961 concept_move=0.7644 unused_dist=0.003875 concept_cos=0.9998 concept_delta_norm=0.7645 scale0_err=0
+eval   100 unused_hold=0.9965 concept_move=0.7985 unused_dist=0.003477 concept_cos=0.9998 concept_delta_norm=0.7986 scale0_err=0
+unused-token arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=100 hold=0.9965 concept=0.7985 unused_dist=0.0035
+eval   109 unused_hold=0.9963 concept_move=0.8303 unused_dist=0.003717 concept_cos=0.9999 concept_delta_norm=0.8303 scale0_err=0
+eval   117 unused_hold=0.9963 concept_move=0.8553 unused_dist=0.003737 concept_cos=1 concept_delta_norm=0.8553 scale0_err=0
+eval   125 unused_hold=0.9972 concept_move=0.8768 unused_dist=0.002769 concept_cos=1 concept_delta_norm=0.8768 scale0_err=0
+eval   134 unused_hold=0.9985 concept_move=0.8971 unused_dist=0.001517 concept_cos=1 concept_delta_norm=0.8971 scale0_err=0
+eval   142 unused_hold=0.9987 concept_move=0.9119 unused_dist=0.001338 concept_cos=1 concept_delta_norm=0.9119 scale0_err=0
+eval   150 unused_hold=0.9989 concept_move=0.9233 unused_dist=0.001122 concept_cos=1 concept_delta_norm=0.9233 scale0_err=0
+unused-token arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=150 hold=0.9989 concept=0.9233 unused_dist=0.0011
+eval   159 unused_hold=0.9989 concept_move=0.9332 unused_dist=0.001088 concept_cos=1 concept_delta_norm=0.9332 scale0_err=0
+eval   167 unused_hold=0.999 concept_move=0.9392 unused_dist=0.0009796 concept_cos=1 concept_delta_norm=0.9392 scale0_err=0
+eval   175 unused_hold=0.999 concept_move=0.9433 unused_dist=0.000993 concept_cos=1 concept_delta_norm=0.9433 scale0_err=0
+eval   184 unused_hold=0.9989 concept_move=0.9462 unused_dist=0.001102 concept_cos=1 concept_delta_norm=0.9462 scale0_err=0
+eval   192 unused_hold=0.9989 concept_move=0.9473 unused_dist=0.001141 concept_cos=1 concept_delta_norm=0.9473 scale0_err=0
+eval   200 unused_hold=0.9988 concept_move=0.9477 unused_dist=0.001155 concept_cos=1 concept_delta_norm=0.9477 scale0_err=0
+unused-token arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=200 hold=0.9988 concept=0.9477 unused_dist=0.0012
+{"event": "DONE", "task": "unused_token_hold", "status": "PASS", "suffix": 11, "live": {"unused_hold": 0.9988450361415744, "concept_move": 0.947689272259371}, "error": null}
+# DONE toy-unused_token_hold status=PASS metric={'name': 'passing suffix', 'value': '11/24'} 2s

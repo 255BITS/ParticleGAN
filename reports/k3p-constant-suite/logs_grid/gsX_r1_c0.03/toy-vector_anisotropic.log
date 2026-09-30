@@ -1,0 +1,28 @@
+# arm=gsX_r1_c0.03 task=toy-vector_anisotropic route=gantrainer particlegan=/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-constant-fix/particlegan/__init__.py
+START vector_anisotropic route=GANTrainer + generic noise wrappers steps=1200
+train     50/1200 Ld=+0.6021 Lg=+1.4591 pen=0.0407 s=1 gR=0.266/0.665 lr_d=0.00425 2s
+train    100/1200 Ld=+0.4383 Lg=+1.7950 pen=0.0097 s=1 gR=0.0964/0.736 lr_d=0.00425 4s
+train    150/1200 Ld=+0.6702 Lg=+0.7828 pen=0.00996 s=1 gR=0.0932/0.598 lr_d=0.00425 6s
+train    200/1200 Ld=+0.6814 Lg=+0.7835 pen=0.00132 s=1 gR=0.046/0.158 lr_d=0.00425 7s
+train    250/1200 Ld=+0.6290 Lg=+0.7972 pen=0.000559 s=1 gR=0.0281/0.148 lr_d=0.00425 9s
+train    300/1200 Ld=+0.6587 Lg=+0.7750 pen=0.000344 s=1 gR=0.0201/0.142 lr_d=0.00425 11s
+train    350/1200 Ld=+0.6652 Lg=+0.8167 pen=0.000232 s=1 gR=0.0176/0.0577 lr_d=0.00425 13s
+train    400/1200 Ld=+0.7152 Lg=+0.7685 pen=0.000199 s=1 gR=0.0181/0.0652 lr_d=0.00425 15s
+train    450/1200 Ld=+0.6841 Lg=+0.7731 pen=0.000507 s=1 gR=0.0248/0.063 lr_d=0.00425 17s
+train    500/1200 Ld=+0.6520 Lg=+0.7900 pen=0.000183 s=1 gR=0.0166/0.0642 lr_d=0.00425 18s
+train    550/1200 Ld=+0.6573 Lg=+0.7591 pen=7.78e-05 s=1 gR=0.00964/0.0502 lr_d=0.00425 20s
+train    600/1200 Ld=+0.6647 Lg=+0.7709 pen=0.000103 s=1 gR=0.0107/0.0908 lr_d=0.00425 22s
+train    650/1200 Ld=+0.6851 Lg=+0.7493 pen=0.000596 s=1 gR=0.0271/0.141 lr_d=0.00425 24s
+train    700/1200 Ld=+0.6236 Lg=+0.7905 pen=9.75e-05 s=1 gR=0.0116/0.0462 lr_d=0.00425 25s
+train    750/1200 Ld=+0.6789 Lg=+0.7796 pen=0.000126 s=1 gR=0.0143/0.0301 lr_d=0.00425 27s
+train    800/1200 Ld=+0.6571 Lg=+0.7657 pen=0.000132 s=1 gR=0.0129/0.0703 lr_d=0.00425 28s
+train    850/1200 Ld=+0.6679 Lg=+0.7624 pen=0.000194 s=1 gR=0.0172/0.0635 lr_d=0.00425 30s
+train    900/1200 Ld=+0.6509 Lg=+0.7803 pen=0.000122 s=1 gR=0.0121/0.0624 lr_d=0.00425 32s
+train    950/1200 Ld=+0.6659 Lg=+0.7528 pen=0.000164 s=1 gR=0.0153/0.043 lr_d=0.00425 34s
+train   1000/1200 Ld=+0.7101 Lg=+0.7453 pen=9.58e-05 s=1 gR=0.0127/0.0331 lr_d=0.00425 36s
+train   1050/1200 Ld=+0.6496 Lg=+0.7503 pen=9.32e-05 s=1 gR=0.0116/0.0539 lr_d=0.00425 37s
+train   1100/1200 Ld=+0.6579 Lg=+0.7647 pen=0.000149 s=1 gR=0.0133/0.0606 lr_d=0.00425 39s
+train   1150/1200 Ld=+0.6757 Lg=+0.7236 pen=8.59e-05 s=1 gR=0.0102/0.0502 lr_d=0.00425 40s
+train   1200/1200 Ld=+0.6944 Lg=+0.7333 pen=0.000122 s=1 gR=0.0139/0.0643 lr_d=0.00425 42s
+{"event": "DONE", "task": "vector_anisotropic", "status": "PASS", "suffix": 5, "live": {"sw1_normalized": 0.15356892092144772, "mean_error": 0.20694954693317413, "covariance_error": 0.2219415009021759, "target_scale": 2.040409564971924, "sample_count": 4096, "mass_tv": 0.1187337189912796, "min_mass_ratio": 0.643798828125, "hq": 0.98095703125, "component_covariance_error": 0.5596451659997305, "component_covariance_errors": [0.2600129544734955, 0.2584446668624878, 1.160477876663208], "component_min_eigen_ratio": 0.2967684268951416, "component_mass": [0.34033203125, 0.445068359375, 0.214599609375], "target_mass": [0.3333333432674408, 0.3333333432674408, 0.3333333432674408], "component_counts": [1394, 1823, 879]}, "error": null}
+# DONE toy-vector_anisotropic status=PASS metric={'name': 'passing suffix', 'value': '5/24'} 44s

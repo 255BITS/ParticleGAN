@@ -1,0 +1,34 @@
+# arm=bcap_ams task=toy-ae_gan_hold route=legacy particlegan=/home/martyn/dev/ParticleGAN/.claude/worktrees/k3p-constant-fix/particlegan/__init__.py
+START ae_gan_hold route=public primitives custom host + shared noise policy steps=250
+ae-gan-hold arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=0 recon=1.2815 hold=1.4373 phase=init
+ae-gan-hold arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=1 recon=1.2757 hold=1.4345 loss=4.1958
+eval    11 recon_mse=1.267 hold=1.394
+eval    21 recon_mse=1.246 hold=1.354
+eval    32 recon_mse=1.209 hold=1.309
+eval    42 recon_mse=1.165 hold=1.268
+ae-gan-hold arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=50 recon=1.1545 hold=1.2283 loss=3.9393
+eval    53 recon_mse=1.142 hold=1.212
+eval    63 recon_mse=1.119 hold=1.161
+eval    73 recon_mse=1.134 hold=1.109
+eval    84 recon_mse=1.075 hold=1.061
+eval    94 recon_mse=1.057 hold=1.013
+ae-gan-hold arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=100 recon=1.0505 hold=0.9871 loss=3.3711
+eval   105 recon_mse=1.04 hold=0.9621
+eval   115 recon_mse=0.991 hold=0.9153
+eval   125 recon_mse=0.9658 hold=0.8669
+eval   136 recon_mse=0.9562 hold=0.8148
+eval   146 recon_mse=0.9403 hold=0.7658
+ae-gan-hold arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=150 recon=0.9322 hold=0.7442 loss=2.7766
+eval   157 recon_mse=0.9133 hold=0.7109
+eval   167 recon_mse=0.8955 hold=0.664
+eval   178 recon_mse=0.8154 hold=0.6092
+eval   188 recon_mse=0.6879 hold=0.556
+eval   198 recon_mse=0.4769 hold=0.5022
+ae-gan-hold arm=roundcap_k1p0_c1p0_p0p0_b0p999 step=200 recon=0.4661 hold=0.4922 loss=1.9544
+eval   209 recon_mse=0.4342 hold=0.4424
+eval   219 recon_mse=0.3916 hold=0.3996
+eval   230 recon_mse=0.3866 hold=0.3669
+eval   240 recon_mse=0.3476 hold=0.3401
+eval   250 recon_mse=0.3483 hold=0.3134
+{"event": "DONE", "task": "ae_gan_hold", "status": "FAIL", "suffix": 0, "live": {"recon_mse": 0.3483341932296753, "hold": 0.3134145438671112}, "error": null}
+# DONE toy-ae_gan_hold status=FAIL metric={'name': 'passing suffix', 'value': '0/24'} 3s
