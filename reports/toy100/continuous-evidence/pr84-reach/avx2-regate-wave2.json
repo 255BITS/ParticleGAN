@@ -1,0 +1,249 @@
+{
+ "note": "Re-gate of wave-2 kills on the valid AVX2 warm prefix (ATEN_CPU_CAPABILITY=avx2, torch 2.14.0+cpu, seed 0, one thread), using each PR branch head unchanged.",
+ "pr105_idle_covered": {
+  "branch": "cursor/idle-covered-critic-56e0",
+  "warm": [
+   {
+    "event": "WARM_DONE",
+    "method": "idle",
+    "identity_cold_parity": true,
+    "variants": {
+     "identity": {
+      "status": "PASS",
+      "local_stability": {
+       "checks": 200,
+       "passing_checks": 200,
+       "failing_steps": [],
+       "min_modes": 8,
+       "min_hq": 0.989990234375,
+       "passing_suffix": 200,
+       "stable_from_step": 1001,
+       "pass_all": true,
+       "pass_suffix": true
+      },
+      "final": {
+       "modes": 8,
+       "hq": 0.9990234375
+      }
+     },
+     "idle": {
+      "status": "FAIL",
+      "local_stability": {
+       "checks": 200,
+       "passing_checks": 196,
+       "failing_steps": [
+        1129,
+        1130,
+        1131,
+        1132
+       ],
+       "min_modes": 8,
+       "min_hq": 0.8662109375,
+       "passing_suffix": 68,
+       "stable_from_step": 1133,
+       "pass_all": false,
+       "pass_suffix": true
+      },
+      "final": {
+       "modes": 8,
+       "hq": 0.999267578125
+      }
+     }
+    }
+   }
+  ],
+  "cold": [
+   {
+    "event": "STAGE_DONE",
+    "task": "trajectory",
+    "verdict": {
+     "status": "PASS",
+     "attempted": true,
+     "passed": true,
+     "metrics": [
+      {
+       "metric": "identity_mse",
+       "value": 0.0009426682372577488,
+       "op": "<=",
+       "threshold": 0.02,
+       "status": "PASS",
+       "margin": 0.01905733176274225
+      }
+     ],
+     "convergence": {
+      "complete": true,
+      "observations": 24,
+      "passing_observations": 18,
+      "minimum_stable_checks": 5,
+      "passing_suffix": 18,
+      "first_pass_step": 117,
+      "stable_from_step": 117,
+      "stable_from_seconds": 1.5277435620000688,
+      "confirmed_step": 184,
+      "confirmed_seconds": 1.9819746610000948
+     },
+     "shortfall": 0.0,
+     "confirmation_fraction": 0.46
+    },
+    "live": {
+     "identity_mse": 0.0009426682372577488
+    },
+    "tail": [
+     {
+      "step": 334,
+      "modes": null,
+      "hq": null,
+      "mse": null
+     },
+     {
+      "step": 350,
+      "modes": null,
+      "hq": null,
+      "mse": null
+     },
+     {
+      "step": 367,
+      "modes": null,
+      "hq": null,
+      "mse": null
+     },
+     {
+      "step": 384,
+      "modes": null,
+      "hq": null,
+      "mse": null
+     },
+     {
+      "step": 400,
+      "modes": null,
+      "hq": null,
+      "mse": null
+     }
+    ],
+    "seconds": 3.4601478520003184,
+    "response_steps_armed": 0,
+    "response_uses_total": 0
+   },
+   {
+    "event": "STAGE_DONE",
+    "task": "mode_hold",
+    "verdict": {
+     "status": "FAIL",
+     "attempted": true,
+     "passed": false,
+     "metrics": [
+      {
+       "metric": "modes",
+       "value": 8,
+       "op": ">=",
+       "threshold": 8,
+       "status": "PASS",
+       "margin": 0
+      },
+      {
+       "metric": "hq",
+       "value": 1.0,
+       "op": ">=",
+       "threshold": 0.9,
+       "status": "PASS",
+       "margin": 0.09999999999999998
+      }
+     ],
+     "convergence": {
+      "complete": true,
+      "observations": 24,
+      "passing_observations": 6,
+      "minimum_stable_checks": 5,
+      "passing_suffix": 3,
+      "first_pass_step": 800,
+      "stable_from_step": null,
+      "stable_from_seconds": null,
+      "confirmed_step": null,
+      "confirmed_seconds": null
+     },
+     "shortfall": 0.0,
+     "confirmation_fraction": 2.0
+    },
+    "live": {
+     "modes": 8,
+     "hq": 1.0
+    },
+    "tail": [
+     {
+      "step": 1000,
+      "modes": 8,
+      "hq": 0.879150390625,
+      "mse": null
+     },
+     {
+      "step": 1050,
+      "modes": 8,
+      "hq": 0.869140625,
+      "mse": null
+     },
+     {
+      "step": 1100,
+      "modes": 8,
+      "hq": 0.9111328125,
+      "mse": null
+     },
+     {
+      "step": 1150,
+      "modes": 8,
+      "hq": 0.9150390625,
+      "mse": null
+     },
+     {
+      "step": 1200,
+      "modes": 8,
+      "hq": 1.0,
+      "mse": null
+     }
+    ],
+    "seconds": 29.342628575000163,
+    "response_steps_armed": 236,
+    "response_uses_total": 0
+   }
+  ]
+ },
+ "pr103_particle_consensus": {
+  "branch": "cursor/gan6-particle-consensus-275b",
+  "warm": {
+   "arm": "gan6",
+   "status": "PASS",
+   "checks": 200,
+   "pass_all": true,
+   "failing_steps": 0,
+   "warm_state_sha256": "57c10b571a2538075ea842cd0c9ea6f0ff677062ae9287e8e3c21d1241c48861",
+   "identity_cold_parity": true
+  },
+  "cold": [
+   {
+    "event": "STAGE_DONE",
+    "arm": "gan6",
+    "task": "trajectory",
+    "passed": true,
+    "modes": null,
+    "hq": null,
+    "live_modes": null,
+    "live_hq": null,
+    "consensus_actions": {},
+    "verdict_passed": true
+   },
+   {
+    "event": "STAGE_DONE",
+    "arm": "gan6",
+    "task": "mode_hold",
+    "passed": false,
+    "modes": 0,
+    "hq": 0.0,
+    "live_modes": 0,
+    "live_hq": 0.0,
+    "consensus_actions": {
+     "shrink": 1200
+    },
+    "verdict_passed": false
+   }
+  ]
+ }
+}
