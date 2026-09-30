@@ -1,5 +1,25 @@
 # Legacy consumers and GPU ownership audit
 
+## Ownership update — 2026-09-29
+
+Observed at approximately 20:17 America/Denver (2026-09-30 02:17 UTC), after
+the user released GPU 0 and the coordinator merged develop. The previous
+HyperGAN queue and NPC training PIDs listed below had exited. A **new NPC MisGAN
+job, PID 354762**, now occupies GPU 0 at 100% utilization / 1,952 MiB; its config
+is `npc_misgan_s1_gxhop3_dres3_gmblock_pack16_shared_noimputer_50k.toml`.
+GPU 1 showed 0% utilization / 1,127 MiB with desktop clients, including the same
+Brave and ModOrganizer PIDs. Permission to use GPU 1 for the bounded baseline
+screen is pending. No unrelated process was stopped or changed.
+
+The shared Forge queue has eight concluded requests and zero reservations;
+there are no running Forge workers. New merged-source baseline and physical
+pilot registrations exist but have not been enqueued. A registration is not a
+resource reservation. Recheck ownership immediately before draining.
+
+The dated original inventory below remains an audit trail, not current ownership.
+
+## Original ownership snapshot
+
 Read-only observation on **2026-09-28, approximately 21:12–21:16 America/Denver**
 (2026-09-29 03:12–03:16 UTC), from the Forge feature worktree. No launcher,
 queue, process, device allowance or training job was changed. This is an ownership

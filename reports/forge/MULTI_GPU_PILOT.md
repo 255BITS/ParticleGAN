@@ -1,5 +1,23 @@
 # Bounded physical multi-GPU pilot
 
+## Current-source registration — 2026-09-29
+
+The merged-develop pilot is
+[`develop-20260929-gpu-pilot-v1`](calibration-lanes/develop-20260929-gpu-pilot-v1/registration.json),
+against the [new quick-screen cohort](QUICK_SCREEN_STUDY.md). Its
+[contract](../../configs/forge/campaigns/develop-20260929-gpu-pilot-v1.json)
+keeps two `vector_two_broad` cells (K3P and the critic-penalty ablation), the
+5,400-second campaign ceiling, and at most one cancellation repair. Clean public
+sampling and retained full-component vector gates are pinned before execution.
+The acceptance procedure below still applies. Both registrations are unlaunched;
+use the new one when validating the merged feature branch.
+
+The latest [ownership observation](LEGACY_CONSUMERS.md#ownership-update--2026-09-29)
+found a new NPC training job on GPU 0, with only desktop clients on GPU 1.
+A one-device baseline screen cannot satisfy the physical two-GPU acceptance test.
+
+## Preserved earlier-source registration
+
 Status: [registered](calibration-lanes/current-k3p-mog-gpu-pilot-v2/registration.json),
 not enqueued or executed. The exact [selection and caps](../../configs/forge/campaigns/current-k3p-mog-gpu-pilot-v2.json)
 are frozen against current profile v2. The [legacy-consumer audit](LEGACY_CONSUMERS.md)

@@ -27,6 +27,23 @@ defaults and the upstream vector/critic changes. The merged code is a new source
 cohort. Older studies, registrations and receipts retain their original identity;
 new execution requires a newly frozen profile and bounded registration.
 
+The [merged-source quick-screen study](QUICK_SCREEN_STUDY.md) now freezes all
+three candidate revisions with no old-source imports. Its three-task K3P lane
+is registered with a 5,400-second ceiling. A separate
+[physical pilot registration](MULTI_GPU_PILOT.md) selects two substantive vector
+cells under the same source. Neither has launched; device ownership is tracked
+in [the updated audit](LEGACY_CONSUMERS.md#ownership-update--2026-09-29).
+
+The import adds 24 source files from develop's vector-protocol research as two
+context cards, preserving all 174 earlier cards byte-for-byte. Seven JSONL
+schemas remain explicitly unnormalized. The compiler contains 184 records and
+no pending readouts or conflicts; 14 history checks passed after this addition.
+
+Legacy grid/native-runner compatibility passed **26 tests and 13 subtests**.
+The first check encountered the missing optional `matplotlib` dependency; the
+successful check used a temporary validation environment with that dependency.
+The frozen experiment runtime and repository source were unchanged.
+
 ## Frozen inputs and ownership
 
 - Package/inventory baseline: `92dc0319`.

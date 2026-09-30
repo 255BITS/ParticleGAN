@@ -27,6 +27,10 @@ intended coverage; actual execution also requires a compatible public-API
 adapter. Unsupported capabilities remain `BLOCKED` in the required denominator.
 A file existing in the catalog does not mean its adapter has been qualified.
 
+The [current quick-screen study](reports/forge/QUICK_SCREEN_STUDY.md) freezes a
+new source cohort after the develop merge. Its baseline and physical GPU pilot
+have separate bounded registrations; old-source receipts cannot fill its matrix.
+
 Historical cards preserve successes, failures, raw errors, negative controls,
 and missing evidence. They do not automatically qualify a new Forge candidate.
 See [import gaps](reports/forge/import-gaps.json), especially the later dt075

@@ -15,6 +15,13 @@ narrowing the plan.
 
 ## Follow-up status after the software fixes
 
+The 2026-09-29 merge of develop `a8b9d397` at `fe1dd2e1` passed 576 integration
+checks; the subsequent history extension passed 14 checks. Clean public sampling
+retains MoG kernel noise, and vector gates keep their explicit full-component
+policy. The [new source study](QUICK_SCREEN_STUDY.md) imports no older receipts.
+Its baseline screen and two-cell physical pilot are registered, with zero
+launches. Calibration, the real two-GPU pilot and cutover remain outstanding.
+
 The original inspection below is retained as an audit trail. These subsequent
 changes close implementation gaps without claiming the still-missing scientific
 or GPU-pilot outcomes:

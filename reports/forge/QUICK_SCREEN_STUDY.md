@@ -1,5 +1,37 @@
 # Separate quick-screen study
 
+## Merged-develop cohort — 2026-09-29
+
+[`develop-20260929-quick-v1`](../../configs/forge/calibration/develop-20260929-quick-v1.json)
+pins merged commit `fe1dd2e1`, including develop `a8b9d397`, with scientific
+source `95e279a2f9c0666a7dfb7dcb4a3a9c80468c1e38280cc571b456f69071a79d12`.
+It preserves the same three lineages, three smoke tasks, 16 independent reference
+tasks, seed 0 and acceptance criteria. Clean public sampling and retained MoG
+vector gates have new evidence identities. **No old-source receipts are imported**;
+all 57 cells start unknown and adoption remains blocked.
+
+The new [baseline registration](calibration-lanes/develop-20260929-quick-baseline-v1/registration.json)
+selects only K3P's three screen tasks: learned-MoG `mode_hold` (1,200 updates)
+and explicit particle-cloud `img_bars4` / `img_intensity2` (600 each). It reserves
+at most 1,800 seconds per task, 5,400 total, with no ordinary qualification reuse.
+Registration and planning launch no training. Review the complete baseline result
+before selecting ablations or reference work; a failing baseline does not justify
+automatically filling the matrix.
+
+Run from the feature checkout with the shared queue:
+
+```sh
+python -m experiments.forge calibration-lane plan develop-20260929-quick-baseline-v1
+# Enqueue freezes work; drain separately after selecting an available device.
+python -m experiments.forge calibration-lane enqueue develop-20260929-quick-baseline-v1
+```
+
+After execution, verify compatible reuse and duplicate submission before closing
+the lifecycle, then publish the exact-revision readout and calibration reduction.
+The older study below remains frozen and separately reproducible.
+
+## Preserved earlier source cohort
+
 [`current-k3p-mog-quick-v1`](../../configs/forge/calibration/current-k3p-mog-quick-v1.json)
 freezes the already-proposed `mode_hold`, `img_bars4`, and `img_intensity2` screen
 against the same three candidate revisions and 16 independent reference tasks
