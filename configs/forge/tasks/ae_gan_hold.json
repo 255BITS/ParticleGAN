@@ -26,6 +26,9 @@
     "schedule_policy": "public_recipe_with_frozen_host_horizon"
   },
   "evaluation": {
+    "sampling_contract_version": 1,
+    "sampling_law": "generated_and_reconstructed_prior_with_scheduled_output_noise",
+    "eval_output_noise": "public_recipe_schedule",
     "kind": "transfer_sustained",
     "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
     "thresholds": [

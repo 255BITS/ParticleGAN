@@ -8,6 +8,7 @@ from experiments.forge import calibration as c, calibration_lane as lane, views
 from experiments.forge.contracts import atomic_json, file_hash, read_json, stable_hash
 from experiments.forge.planning import resolve_idea
 from experiments.forge.queue import Queue
+from experiments.forge.sampling import executed_receipt, PUBLIC_PRIOR_CLEAN
 from test_forge_promotion import setup as promotion_setup, save_attempt
 from test_forge_queue import SLOTS
 
@@ -39,7 +40,8 @@ def imports_setup(promotion_setup):
     claim = queue.claim(SLOTS)
     assert claim["job"]["task_id"] == "quality"
     raw = {"evidence": {"observations": [{"step": i, "score": 0.} for i in range(1, 25)],
-                        "live": {"score": 0.}, "scoring_weights": "live"}}
+                        "live": {"score": 0.}, "scoring_weights": "live",
+                        **executed_receipt(PUBLIC_PRIOR_CLEAN, eval_output_noise="clean")}}
     grade = views.grade_result(request["tasks"]["quality"], raw)
     atomic_json(Path(claim["worker"]["directory"]) / "terminal.json", {
         "token": claim["worker"]["token"], "attempt_status": "completed", "result": raw, "elapsed_seconds": 1.,

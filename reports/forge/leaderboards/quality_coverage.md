@@ -4,16 +4,17 @@ Ordered by attained tier, then candidate name/cohort; raw metrics and cost remai
 
 | Candidate / exact revision | Scope | Tier | Outcomes | Wall seconds | Next action |
 | --- | --- | ---: | --- | ---: | --- |
-| forge-no-critic-penalty / dffa9b712206 / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | current | 0 | NOT_RUN 22 | unknown | Run the next eligible task within an explicit budget. |
-| forge-no-critic-penalty / dffa9b712206 / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | NOT_RUN 22 | unknown | Run the next eligible task within an explicit budget. |
-| forge-onboarding-anchor-ablation / 6e3dbea4c990 / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | NOT_RUN 22 | unknown | Run the next eligible task within an explicit budget. |
-| forge-onboarding-anchor-ablation / 6e3dbea4c990 / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | current | 0 | NOT_RUN 22 | unknown | Run the next eligible task within an explicit budget. |
-| k3p / 989a12b2dd01 / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | current | 0 | NOT_RUN 22 | unknown | Run the next eligible task within an explicit budget. |
-| k3p / 989a12b2dd01 / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | NOT_RUN 22 | unknown | Run the next eligible task within an explicit budget. |
+| forge-no-critic-penalty / 1e1a3e447fc2 / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | current | 0 | NOT_RUN 22 | unknown | Run the next eligible task within an explicit budget. |
+| forge-no-critic-penalty / 1e1a3e447fc2 / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | NOT_RUN 22 | unknown | Run the next eligible task within an explicit budget. |
+| forge-onboarding-anchor-ablation / fb5c60b1b77e / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | NOT_RUN 22 | unknown | Run the next eligible task within an explicit budget. |
+| forge-onboarding-anchor-ablation / fb5c60b1b77e / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | current | 0 | NOT_RUN 22 | unknown | Run the next eligible task within an explicit budget. |
+| k3p / ef34dc1682c0 / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | NOT_RUN 22 | unknown | Run the next eligible task within an explicit budget. |
+| k3p / ef34dc1682c0 / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | current | 0 | NOT_RUN 22 | unknown | Run the next eligible task within an explicit budget. |
 | forge-no-critic-penalty / ef50ff6fb207 / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | pinned | unknown | FAIL 1 | 7.371 | Publish the stopped cohort readout, or declare a new compatible revision before further qualification. |
 | forge-onboarding-anchor-ablation / 39dc1cc8e516 / cpu (AMD Ryzen 9 5900X 12-Core Processor) | pinned | unknown | FAIL 1 | 5.975 | Publish the stopped cohort readout, or declare a new compatible revision before further qualification. |
 | k3p / 87d849138dd0 / cpu (AMD Ryzen 9 5900X 12-Core Processor) | pinned | unknown | FAIL 1 | 5.255 | Publish the stopped cohort readout, or declare a new compatible revision before further qualification. |
 | forge-no-critic-penalty / 8c2186b82334 / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | pinned | unknown | FAIL 1 | 4.8 | Publish the stopped cohort readout, or declare a new compatible revision before further qualification. |
+| k3p / 989a12b2dd01 / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | calibration_diagnostic | unknown | FAIL 3 | 38.915 | Publish the stopped cohort readout, or declare a new compatible revision before further qualification. |
 | forge-no-critic-penalty / 8c2186b82334 / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | calibration_diagnostic | unknown | FAIL 1, PASS 1 | 14.504 | Publish the stopped cohort readout, or declare a new compatible revision before further qualification. |
 | forge-no-critic-penalty / ef50ff6fb207 / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | calibration_diagnostic | unknown | FAIL 1, PASS 1 | 11.428 | Publish the stopped cohort readout, or declare a new compatible revision before further qualification. |
 | forge-onboarding-anchor-ablation / b10c31a0de40 / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | calibration_diagnostic | unknown | FAIL 1, PASS 2 | 16.383 | Publish the stopped cohort readout, or declare a new compatible revision before further qualification. |

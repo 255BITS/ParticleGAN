@@ -33,6 +33,9 @@
     "produces_state": true
   },
   "evaluation": {
+    "sampling_contract_version": 1,
+    "sampling_law": "public_prior_without_output_noise",
+    "eval_output_noise": "clean",
     "kind": "paired_adaptation",
     "evaluator": "benchmarks.toy100.continuous_probe:match_frozen_control",
     "scoring_weights": "live",

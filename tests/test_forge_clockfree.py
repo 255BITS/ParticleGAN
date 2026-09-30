@@ -8,6 +8,7 @@ import torch
 
 from experiments.forge.clockfree import run_clockfree, source_audit
 from experiments.forge.state import state_digest
+from experiments.forge.sampling import FIELDS, expected_policy
 from experiments.forge.views import grade_result
 
 
@@ -30,6 +31,7 @@ def test_public_state_only_settings_survive_all_clock_perturbations(probe, tmp_p
     task, request = probe
     original_rng = torch.get_rng_state().clone()
     raw = run_clockfree(request, task, tmp_path, "cpu")
+    assert {field: raw["evidence"][field] for field in FIELDS} == expected_policy(task)
     assert torch.equal(original_rng, torch.get_rng_state())
     assert raw["cost"]["completed_updates"] == 24
     grade = grade_result(task, raw)

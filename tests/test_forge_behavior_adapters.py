@@ -7,6 +7,7 @@ import torch
 
 from experiments.forge.behavior_adapters import BehaviorComponents, FROZEN_HOST_RECIPE_FIELDS, HOSTS, run_behavior
 from experiments.forge.views import grade_result, load_tasks
+from experiments.forge.sampling import FIELDS, expected_policy
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -59,6 +60,7 @@ def test_original_objectives_bind_public_components_and_record_real_updates(tmp_
     task["execution"]["steps"] = 2
     before = torch.get_rng_state().clone()
     result = run_behavior(request(), task, tmp_path / host, "cpu")
+    assert {field: result["evidence"][field] for field in FIELDS} == expected_policy(task)
     assert torch.equal(before, torch.get_rng_state())
     assert result["execution_path"] == "public_components"
     assert result["device"] == "cpu"

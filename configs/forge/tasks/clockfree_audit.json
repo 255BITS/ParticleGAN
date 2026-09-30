@@ -21,6 +21,9 @@
     }
   },
   "evaluation": {
+    "sampling_contract_version": 1,
+    "sampling_law": "public_prior_without_output_noise",
+    "eval_output_noise": "clean",
     "kind": "clockfree_parity",
     "evaluator": "experiments.forge.views:_clockfree",
     "scoring_weights": "live",

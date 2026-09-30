@@ -37,7 +37,7 @@
       "experiment/toy": 3,
       "experiment/trajectory": 2,
       "experiment/transition": 7,
-      "forge_engine": 28,
+      "forge_engine": 29,
       "report/behavioral_baseline": 32,
       "report/cifar-ddgan": 623,
       "report/cifar-particle-ae": 35,
@@ -93,7 +93,7 @@
       "candidate_patch": 2,
       "configuration": 802,
       "driver": 214,
-      "engine_support": 28,
+      "engine_support": 29,
       "evaluator_or_audit": 55,
       "evidence_artifact": 1574,
       "frozen_candidate_implementation": 15,
@@ -107,13 +107,13 @@
       "visualization": 15,
       "visualization_artifact": 290
     },
-    "files": 7279
+    "files": 7280
   },
   "coverage": {
-    "declared_count": 7279,
+    "declared_count": 7280,
     "missing": [],
     "stale": [],
-    "tracked_count": 7279,
+    "tracked_count": 7280,
     "unclassified": [],
     "valid": true
   },
@@ -6566,14 +6566,14 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "4219a8dc2c967caca4f67d2ca2e00c1a945f4026",
+      "git_blob": "68321f31d81f14e1b660a8256fcdc09a5d0e2e84",
       "path": "experiments/forge/adaptation.py",
       "role": "engine_support",
       "suggested_tiers": []
     },
     {
       "family": "forge_engine",
-      "git_blob": "bd92e6c1a5bc8daeee5b8708f492d48dd743826e",
+      "git_blob": "c389d57590c5c3573665eea10d7e3d6dceeda577",
       "path": "experiments/forge/adapters.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -6594,7 +6594,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "9bc7ddad547fedce78bbfb695a67b3587aea9cde",
+      "git_blob": "dbef3696ff3d52da7a70cfbbbb1f93f222f999a4",
       "path": "experiments/forge/behavior_adapters.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -6622,7 +6622,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "b7c5f0049f0ee600167ba5d66d5c862800bf8a3f",
+      "git_blob": "1180ad5aab58bd23259eaf77e2a5bf703f5759ba",
       "path": "experiments/forge/clockfree.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -6678,7 +6678,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "378ab064e0e97bdc3cf16d37c6d2854874e17130",
+      "git_blob": "998ca6bd2bb903b06d62747e13d748ef48fd35d9",
       "path": "experiments/forge/planning.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -6692,7 +6692,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "62f8184bdfceffbc0b00b3698dc057761e15f5ec",
+      "git_blob": "fbcffb872013be90891fd8e4f98c4a964f3acdd3",
       "path": "experiments/forge/queue.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -6706,8 +6706,15 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "6e35f1bd28f1df56acd8581c0078388f4150e837",
+      "git_blob": "c59b7dd7fbd8ce5b47b4fb27fa3b3289e612d27d",
       "path": "experiments/forge/runtime.py",
+      "role": "engine_support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "forge_engine",
+      "git_blob": "ac6257638c26d25d121993c217243e12ef7161ab",
+      "path": "experiments/forge/sampling.py",
       "role": "engine_support",
       "suggested_tiers": []
     },
@@ -6727,14 +6734,14 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "e98910c091c193b8bf692baaeff7807679373ea9",
+      "git_blob": "a65367033a5fa7d1b7b6fb56ef1a0dc63e9e329c",
       "path": "experiments/forge/telemetry.py",
       "role": "engine_support",
       "suggested_tiers": []
     },
     {
       "family": "forge_engine",
-      "git_blob": "a1d1ec4527c85c7f44ba36cbd54f9cbe40ea4581",
+      "git_blob": "ac34e8ce7a123a0565803944eaabb9cfcec801cd",
       "path": "experiments/forge/views.py",
       "role": "engine_support",
       "suggested_tiers": []

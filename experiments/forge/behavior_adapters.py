@@ -28,6 +28,7 @@ from benchmarks.transfer_suite.legacy_noise_adapters import NoisePolicy, _InputA
 from .api import CapabilityError, FormulationContext
 from .contracts import atomic_json
 from .mechanisms import MechanismAudit, mechanism_blockers
+from .sampling import BEHAVIOR_POLICIES, POLICIES, executed_receipt
 
 
 HOSTS = ("two_pole", "trajectory", "residual_student", "unipolar", "ae_gan_hold",
@@ -391,8 +392,9 @@ def run_behavior(request: dict, task: dict, output_dir: Path | str, device="cpu"
                 raw = module.run_arm("locked", steps=steps, seed=seed, **kwargs)
         live = raw.get("live", raw)
         metrics = {key: live[key] for key, _, _ in task["evaluation"]["thresholds"] if key in live}
+        policy = executed_receipt(BEHAVIOR_POLICIES[name], eval_output_noise=POLICIES[BEHAVIOR_POLICIES[name]])
         result = dict(task_id=task["id"], evidence=dict(observations=components.observations, live=metrics,
-                      scoring_weights="live", guards=components.guards()),
+                      scoring_weights="live", guards=components.guards(), **policy),
                       execution_path="public_components", device="cpu", applied=components.receipt(),
                       raw=raw, cost=dict(wall_seconds=time.monotonic()-started))
         atomic_json(output_dir / "result.json", result)

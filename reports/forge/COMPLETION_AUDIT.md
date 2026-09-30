@@ -19,15 +19,26 @@ The 2026-09-29 merge of develop `a8b9d397` at `fe1dd2e1` passed 576 integration
 checks; the subsequent history extension passed 14 checks. Clean public sampling
 retains MoG kernel noise, and vector gates keep their explicit full-component
 policy. The [new source study](QUICK_SCREEN_STUDY.md) imports no older receipts.
-Its baseline screen and two-cell physical pilot are registered, with zero
-launches. Calibration, the real two-GPU pilot and cutover remain outstanding.
+Its baseline screen and two-cell physical pilot were registered separately.
+Calibration, the real two-GPU pilot and cutover remain outstanding.
 
 Full CI then exposed six legacy image-host failures from the public trainer's
 blanket RNG uniqueness guard. The [compatibility repair](MIGRATION.md#ci-compatibility-repair)
 preserves legacy shared draws while retaining Forge isolation, with 167 affected
 tests and 504 broader checks passing. Replacement develop **v2** registrations
-bind that new source; the unexecuted v1 artifacts are retained. Full CI must pass
-on the repaired branch before recording CI acceptance.
+bind that new source; the unexecuted v1 artifacts are retained. Full CI on
+`3a06e09c` passed 1,582 tests and 18 subtests, with 16 explicit skips, plus all
+packaging and Python-version smokes.
+
+The [first develop GPU baseline](DEVELOP_QUICK_SCREEN_READOUT.md) then completed
+three scientific FAILs in 38.915 seconds on GPU 0, with complete observations,
+zero unintended RNG deviations, cross-checkout deduplication and zero remaining
+reservations. All 16 independent references remain unknown. The subsequent
+adapter audit found a missing real-image clamp, an obsolete sampling-law claim,
+and a CUDA peak-memory initialization failure. Prospective fixes and strict
+versioned sampling receipts create a new cohort; the original results and costs
+remain archived. The next bounded diagnostic is corrected `img_intensity2`
+alone. These one-device checks do not satisfy the physical two-GPU pilot.
 
 The original inspection below is retained as an audit trail. These subsequent
 changes close implementation gaps without claiming the still-missing scientific

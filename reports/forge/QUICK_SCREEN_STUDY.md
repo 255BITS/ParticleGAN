@@ -2,6 +2,11 @@
 
 ## Merged-develop cohort — 2026-09-29
 
+The [completed GPU baseline](DEVELOP_QUICK_SCREEN_READOUT.md) measured three
+scientific FAILs for 38.915 seconds, with complete curves and zero reservations.
+Duplicate submission reused the exact request/results. All 16 independent
+baseline references and both ablation screens remain unknown; adoption is blocked.
+
 [`develop-20260929-quick-v2`](../../configs/forge/calibration/develop-20260929-quick-v2.json)
 pins commit `b4fae98a`, including develop `a8b9d397` and the legacy shared-RNG
 compatibility repair, with scientific source
@@ -9,7 +14,8 @@ compatibility repair, with scientific source
 It preserves the same three lineages, three smoke tasks, 16 independent reference
 tasks, seed 0 and acceptance criteria. Clean public sampling and retained MoG
 vector gates have new evidence identities. **No old-source receipts are imported**;
-all 57 cells start unknown and adoption remains blocked.
+all 57 cells started unknown. Three baseline smoke cells are now measured FAILs;
+the remaining 54 cells are unknown and adoption remains blocked.
 
 The new [baseline registration](calibration-lanes/develop-20260929-quick-baseline-v2/registration.json)
 selects only K3P's three screen tasks: learned-MoG `mode_hold` (1,200 updates)
@@ -19,7 +25,7 @@ Registration and planning launch no training. Review the complete baseline resul
 before selecting ablations or reference work; a failing baseline does not justify
 automatically filling the matrix.
 
-Run from the feature checkout with the shared queue:
+Commands used at the pinned source before execution, with the shared queue:
 
 ```sh
 python -m experiments.forge calibration-lane plan develop-20260929-quick-baseline-v2
@@ -27,8 +33,11 @@ python -m experiments.forge calibration-lane plan develop-20260929-quick-baselin
 python -m experiments.forge calibration-lane enqueue develop-20260929-quick-baseline-v2
 ```
 
-After execution, verify compatible reuse and duplicate submission before closing
-the lifecycle, then publish the exact-revision readout and calibration reduction.
+Compatible reuse and duplicate submission were verified before closing the
+lifecycle, followed by the exact-revision readout and calibration reduction.
+Future source changes cannot be run under this old registration; use a new frozen
+cohort for further scientific work. Do not repeat this completed baseline merely
+to repair reporting.
 The unexecuted [develop v1 profile](../../configs/forge/calibration/develop-20260929-quick-v1.json)
 and both v1 registrations remain immutable but cannot run from the repaired
 checkout. They consumed zero training time. The older study below also remains

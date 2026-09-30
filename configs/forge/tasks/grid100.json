@@ -15,6 +15,9 @@
     "produces_state": true
   },
   "evaluation": {
+    "sampling_contract_version": 1,
+    "sampling_law": "public_prior_without_output_noise",
+    "eval_output_noise": "clean",
     "kind": "native_accuracy",
     "evaluator": "benchmarks.toy100.accuracy_gate:evaluate_suite",
     "coverage_evaluator": "benchmarks.toy100.gate:evaluate_suite",

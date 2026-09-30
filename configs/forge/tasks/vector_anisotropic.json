@@ -94,6 +94,8 @@
     }
   },
   "evaluation": {
+    "sampling_contract_version": 1,
+    "eval_output_noise": "clean",
     "kind": "transfer_sustained",
     "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
     "gate_policy": {

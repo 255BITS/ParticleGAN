@@ -54,7 +54,6 @@
         },
         "require_complete_smoke_cost": {
           "missing_lineages": [
-            "k3p",
             "forge-onboarding-anchor-ablation",
             "forge-no-critic-penalty"
           ],
@@ -528,7 +527,7 @@
         "reference_negatives": 0,
         "reference_positives": 0,
         "reference_unknown_lineages": 3,
-        "smoke_unknown_lineages": 3,
+        "smoke_unknown_lineages": 2,
         "true_accept": 0,
         "true_reject": 0,
         "unknown": 3
@@ -575,7 +574,35 @@
       "evidence_scope": "current",
       "id": "k3p",
       "incompatible_evidence_policy": "Excluded without cross-cohort or cross-seed credit.",
-      "inputs": [],
+      "inputs": [
+        {
+          "attempt_id": "5a5f1641fd80404fbb509d367e6a467f",
+          "files": {
+            "evidence.json": "8b7ab5a6d316b0c682b88d3a33a3a5e61f63b6a9ef65a2487fead83495e42a01",
+            "request.json": "3cbdd8a292a7ca90e247378fca7a7c5b761096b6262ca1b432c7c2f76e8054fd",
+            "result.json": "955b11cca03f9db60313219f4c7c6c8c1cab04674062c01f76b4eafee3d0d55f"
+          },
+          "result_sha256": "d89dd617d6a563010197750535ec1d42359851e2f0260f1dfa1f7cb4fa208875"
+        },
+        {
+          "attempt_id": "5dd159dc811b41beab63dc7fee7689cc",
+          "files": {
+            "evidence.json": "d34c138789b2a9c4385d61dec14f8d4f1cc6d23d555c28c570cee81385ebcb5d",
+            "request.json": "b67de70fb19172861a396c27c3a11690ec50fd64219080ac116718591ff3bd5b",
+            "result.json": "883aca15121fd491b8503dfdd40ded6a6b60f2f4b121501c4e9d5b0b1381104d"
+          },
+          "result_sha256": "d716a5a2c3742661a41bc864a4019b0b6ba766630e4b82d3de748c5a3d54c436"
+        },
+        {
+          "attempt_id": "e40a18d4e33d488d896c9fe4a1122ceb",
+          "files": {
+            "evidence.json": "47f2d70752833cd0b853a227dc69b8e42abe02d4cbce166535746e9a06bf4466",
+            "request.json": "5802a9a398006b61d7b4eccb6378fb3446920cb47343b141aa183ac1dda76fbe",
+            "result.json": "fa6c72fb9d21c2035b2b8280c0577e82232c7235f6782bd685d04109d0cd438c"
+          },
+          "result_sha256": "47d10232ac24c2fcc23c87afa1c32b0bb7c433b04f61c8db1c1bf561ef51b0f1"
+        }
+      ],
       "reference": {
         "blocked_tasks": [],
         "cost": {
@@ -649,30 +676,26 @@
         "blocked_tasks": [],
         "cost": {
           "flops": null,
-          "known_task_count": 0,
-          "known_wall_seconds": 0,
-          "missing_tasks": [
-            "mode_hold",
-            "img_bars4",
-            "img_intensity2"
-          ],
+          "known_task_count": 3,
+          "known_wall_seconds": 38.915211247018306,
+          "missing_tasks": [],
           "note": "Recorded runtime; concurrent execution and archived budgets differ.",
           "required_task_count": 3,
-          "wall_seconds": null
+          "wall_seconds": 38.915211247018306
         },
-        "decision": "UNKNOWN",
+        "decision": "FAIL",
         "error_or_incomplete_tasks": [],
-        "failed_tasks": [],
-        "task_statuses": {
-          "img_bars4": "NOT_RUN",
-          "img_intensity2": "NOT_RUN",
-          "mode_hold": "NOT_RUN"
-        },
-        "unknown_tasks": [
+        "failed_tasks": [
           "mode_hold",
           "img_bars4",
           "img_intensity2"
-        ]
+        ],
+        "task_statuses": {
+          "img_bars4": "FAIL",
+          "img_intensity2": "FAIL",
+          "mode_hold": "FAIL"
+        },
+        "unknown_tasks": []
       }
     },
     {

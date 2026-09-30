@@ -7,6 +7,7 @@ from pathlib import Path
 
 import pytest
 
+from experiments.forge.sampling import executed_receipt, PUBLIC_PRIOR_CLEAN
 from experiments.forge.views import (
     grade_result, load_tasks, load_view, qualify, task_evaluation_fingerprint,
     task_execution_fingerprint, task_fingerprint, validate_view, view_fingerprint,
@@ -135,7 +136,8 @@ def test_forge_retains_rare_component_shape_failure_despite_upstream_finite_atom
                    component_covariance_error=.25, component_min_eigen_ratio=0.,
                    resolved_core_covariance_error=0., resolved_core_min_eigen_ratio=1.,
                    resolved_max_component_spill=0.)
-    evidence = dict(live=metrics, scoring_weights="live", observations=[
+    evidence = dict(**executed_receipt(PUBLIC_PRIOR_CLEAN, eval_output_noise="clean"),
+                    live=metrics, scoring_weights="live", observations=[
         dict(metrics, step=math.ceil(i * task["execution"]["steps"] / 24)) for i in range(1, 25)])
     assert grade_result(task, {"evidence": evidence})["status"] == "FAIL"
     alternate = deepcopy(task)
@@ -344,7 +346,8 @@ def test_conflicting_compatible_attempts_cannot_cherry_pick_a_pass():
 def ring_evidence(*,bad_step=None,truncate=0,run_id="one"):
     # First 200 checks acquire at 1400, followed by 1200 hold and 300 extension.
     points=[dict(step=s,modes=8,hq=.8 if s==bad_step else .95) for s in range(1201,2901-truncate)]
-    return dict(dense=points,continuity=dict(mode="uninterrupted",run_id=run_id))
+    return dict(**executed_receipt(PUBLIC_PRIOR_CLEAN, eval_output_noise="clean"),
+                dense=points,continuity=dict(mode="uninterrupted",run_id=run_id))
 
 
 def test_ring_first_convergence_and_immediate_extension_are_separate_verdicts():
@@ -390,7 +393,8 @@ def test_native_gate_requires_artifacts_and_rejects_wrong_budget(tmp_path):
     (tmp_path/"grid100").mkdir()
     (tmp_path/"grid100/config.json").write_text(json.dumps(dict(steps=1000)))
     from experiments.forge.artifacts import manifest_artifacts
-    raw=dict(evidence=dict(artifact_root=str(tmp_path), artifact_manifest=manifest_artifacts(tmp_path)))
+    raw=dict(evidence=dict(**executed_receipt(PUBLIC_PRIOR_CLEAN, eval_output_noise="clean"),
+                           artifact_root=str(tmp_path), artifact_manifest=manifest_artifacts(tmp_path)))
     assert grade_result(task,raw)["status"] == "INVALID"
 
 

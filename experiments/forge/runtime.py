@@ -38,6 +38,11 @@ def execute(path: Path) -> int:
         from .adapters import run_task
         probe = MemoryProbe(device="cpu" if worker["device"] == "cpu" else "cuda:0", torch_module=torch)
         execution_job = {**job, "prerequisites": resolved.get("prerequisites", {})}
+        from .sampling import validate_request_sampling
+        try:
+            validate_request_sampling(request, task_ids=job.get("task_ids", [job["task_id"]]))
+        except ValueError as exc:
+            raise CapabilityError([str(exc)]) from exc
         adapter_started = time.monotonic()
         result = run_task(request, execution_job, output, "cpu" if worker["device"] == "cpu" else "cuda:0")
         if not isinstance(result, dict):
@@ -54,7 +59,7 @@ def execute(path: Path) -> int:
     result.setdefault("execution_path", request["candidate"].get("execution_path", "public_trainer"))
     result.setdefault("api_version", request["candidate"].get("api_version", "forge-api-v1"))
     result.setdefault("api_changes", request["candidate"].get("api_changes", []))
-    result.setdefault("claim_contract", request["candidate"]["claim_contract"])
+    result.setdefault("claim_contract", request["candidate"].get("claim_contract", {}))
     result = normalize_adapter_costs(result)
     result.setdefault("cost", {})
     elapsed = time.monotonic() - started

@@ -28,6 +28,9 @@
     "schedule_policy": "public_recipe_with_frozen_host_horizon"
   },
   "evaluation": {
+    "sampling_contract_version": 1,
+    "sampling_law": "learned_parameter_measurement",
+    "eval_output_noise": "not_applied_to_measurement",
     "kind": "transfer_sustained",
     "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
     "thresholds": [

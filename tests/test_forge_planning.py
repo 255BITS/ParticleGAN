@@ -15,12 +15,15 @@ def checkout(tmp_path):
         "schema_version": 1, "id": "screening", "seed": 0, "rng": {"version": "forge-rng-v1"}, "scoring": {"weights": "live"}})
     atomic_json(tmp_path / "configs/forge/ideas/base.json", {
         "schema_version": 1, "id": "base", "goal": "stability", "hypothesis": "improve the penalty",
-        "changed_factors": ["critic penalty"], "mechanism_class": "structural", "recipe_overrides": {}})
+        "changed_factors": ["critic penalty"], "mechanism_class": "structural", "recipe_overrides": {},
+        "claim_contract": {"sampling_law": "task_declared"}})
     assignments = []
     for index in (1, 2, 3):
         task = {"schema_version": 1, "id": f"t{index}", "adapter": "transfer_behavior",
-                "execution": {"steps": 80, "prior": defaults["prior"]},
-                "evaluation": {"kind": "transfer_sustained", "thresholds": [["score", ">=", 1]]},
+                "execution": {"steps": 80, "prior": defaults["prior"], "host": "mode_hold"},
+                "evaluation": {"kind": "transfer_sustained", "thresholds": [["score", ">=", 1]],
+                               "sampling_contract_version": 1, "sampling_law": "public_prior_without_output_noise",
+                               "eval_output_noise": "clean"},
                 "resources": {"gpus": 1, "gpu_memory_mb": 10, "cpu_threads": 1, "timeout_seconds": 10},
                 "requires_capabilities": ["named_rng"], "dependencies": []}
         atomic_json(tmp_path / f"configs/forge/tasks/t{index}.json", task)
@@ -185,3 +188,25 @@ def test_actual_threads_and_parent_compute_participate_in_child_identity(checkou
     threads = resolve_idea(checkout, "base")
     assert threads["jobs"][1]["science"]["compute"]["threads"] == 2
     assert threads["jobs"][1]["compatibility_key"] != after["jobs"][1]["compatibility_key"]
+
+
+def test_new_planning_blocks_ambiguous_candidate_sampling_claim(checkout):
+    path = checkout / "configs/forge/ideas/base.json"
+    idea = read_json(path)
+    idea["claim_contract"]["sampling_law"] = "public_noisy"
+    atomic_json(path, idea)
+    request = resolve_idea(checkout, "base")
+    assert any("task_declared" in value for value in request["preflight_blockers"])
+    with pytest.raises(ValueError, match="submission blocked"):
+        resolve_idea(checkout, "base", freeze_source=True, queue_root=checkout / "runs")
+    assert not (checkout / "runs").exists()
+
+
+def test_new_planning_blocks_unversioned_tasks_despite_task_delegation(checkout):
+    path = checkout / "configs/forge/tasks/t1.json"
+    spec = read_json(path)
+    spec["evaluation"].pop("sampling_contract_version")
+    atomic_json(path, spec)
+    request = resolve_idea(checkout, "base")
+    assert any("sampling_contract_version" in value for value in request["tasks"]["t1"]["preflight_blockers"])
+    assert not (checkout / "runs").exists()

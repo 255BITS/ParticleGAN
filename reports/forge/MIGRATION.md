@@ -31,7 +31,8 @@ The [merged-source quick-screen study](QUICK_SCREEN_STUDY.md) now freezes all
 three candidate revisions with no old-source imports. Its three-task K3P lane
 is registered with a 5,400-second ceiling. A separate
 [physical pilot registration](MULTI_GPU_PILOT.md) selects two substantive vector
-cells under the same source. Neither has launched; device ownership is tracked
+cells under the same source. The v2 baseline has since completed; the physical
+pilot is unlaunched. Device ownership is tracked
 in [the updated audit](LEGACY_CONSUMERS.md#ownership-update--2026-09-29).
 
 The import adds 24 source files from develop's vector-protocol research as two
@@ -56,10 +57,46 @@ states before mutation, preserving the existing schema and same-binding rule.
 
 The affected suite passed **167 tests**, with one unavailable-CUDA check skipped;
 the broader Forge/recipe/K3P suite passed **504 tests**. The final normalized-RNG
-restore check passed 61 tests with one CUDA skip. Full CI is rerun on the repair.
+restore check passed 61 tests with one CUDA skip. Full CI on `3a06e09c` passed
+1,582 tests and 18 subtests, with 16 explicit skips, plus packaging and version smokes.
 The unexecuted develop v1 registrations remain frozen. Replacement **v2** baseline
 and physical-pilot lanes bind the repaired source, preserve all budgets/criteria,
-and import no old measurements. All remain unlaunched.
+and import no old measurements. The baseline's later execution is recorded below;
+the physical pilot is still unlaunched.
+
+## GPU-discovered adapter and receipt repairs
+
+The first screen exposed three prospective fixes: reference image batches now
+clamp noisy templates to `[0,1]`; CUDA peak-memory instrumentation initializes
+the allocator before resetting counters; and all 29 tasks declare a versioned
+sampling policy matched against actual adapter receipts. Queue submission and
+runtime recheck candidate and grouped-task policies against frozen source.
+Archived unversioned requests retain their original semantics and costs.
+
+**525 Forge tests passed**, including reference-batch/RNG parity, sampler
+attestation, grouped-task boundary validation and historical compatibility.
+A real GPU 0 allocation-only probe measured 4,096 allocated / 2,097,152 reserved
+bytes without training. Old missing memory measurements remain unavailable.
+The repairs require a new cohort and registrations before any further training.
+
+## First merged-source GPU screen
+
+After [full CI passed](https://github.com/255BITS/ParticleGAN/actions/runs/36660755141)
+on `3a06e09c` (1,582 tests and 18 subtests; 16 explicit skips), the unrelated
+NPC process exited and GPU 0 became idle. The user-authorized GPU 0 screen then
+completed **three scientific FAILs for 38.915 seconds**, with no execution errors,
+zero reservations and a concluded readout. Duplicate submission from a fresh
+checkout reused one request and all three results without additional launches.
+See [the complete readout](DEVELOP_QUICK_SCREEN_READOUT.md).
+
+The run exposed unavailable CUDA peak telemetry; the allocator probe ran before
+CUDA initialization. The repair passed 30 focused tests and an actual GPU 0
+allocation check (4,096 allocated / 2,097,152 reserved bytes; zero training
+updates). The receipts remain unchanged. The adapter audit also found missing
+clamping of noisy image training data and stale candidate sampling declarations.
+Prospective fixes need their own source/task identities before further execution.
+The physical two-GPU pilot remains unlaunched, and calibration remains blocked
+with all 16 independent baseline references unknown.
 
 ## Frozen inputs and ownership
 

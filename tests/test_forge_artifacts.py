@@ -8,6 +8,7 @@ import pytest
 
 from experiments.forge.artifacts import manifest_artifacts, verify_artifacts
 from experiments.forge.views import grade_result, load_tasks
+from experiments.forge.sampling import PUBLIC_PRIOR_CLEAN, executed_receipt
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -78,7 +79,7 @@ def test_manifest_cannot_escape_or_misdescribe_its_tree(tmp_path):
 def test_native_grader_checks_certified_bytes_before_calling_original_gate(tmp_path, monkeypatch):
     from benchmarks.toy100 import accuracy_gate
     root = artifact_tree(tmp_path / "native")
-    evidence = {"artifact_root": str(root), "artifact_manifest": manifest_artifacts(root)}
+    evidence = {**executed_receipt(PUBLIC_PRIOR_CLEAN, eval_output_noise="clean"), "artifact_root": str(root), "artifact_manifest": manifest_artifacts(root)}
     calls = []
     def original_gate(path, **kwargs):
         calls.append((path, kwargs))
@@ -99,7 +100,7 @@ def test_native_grader_checks_certified_bytes_before_calling_original_gate(tmp_p
 def test_native_grader_needs_manifest_and_exact_declared_early_schedule(tmp_path):
     root = artifact_tree(tmp_path / "native")
     task = load_tasks(ROOT)["grid100"]
-    evidence = {"artifact_root": str(root)}
+    evidence = {**executed_receipt(PUBLIC_PRIOR_CLEAN, eval_output_noise="clean"), "artifact_root": str(root)}
     assert grade_result(task, {"evidence": evidence})["status"] == "INCOMPLETE"
     config = root / "grid100/config.json"
     values = json.loads(config.read_text())
@@ -113,7 +114,7 @@ def test_native_grader_needs_manifest_and_exact_declared_early_schedule(tmp_path
 def test_native_artifact_changed_during_evaluation_is_rejected(tmp_path, monkeypatch):
     from benchmarks.toy100 import accuracy_gate
     root = artifact_tree(tmp_path / "native")
-    evidence = {"artifact_root": str(root), "artifact_manifest": manifest_artifacts(root)}
+    evidence = {**executed_receipt(PUBLIC_PRIOR_CLEAN, eval_output_noise="clean"), "artifact_root": str(root), "artifact_manifest": manifest_artifacts(root)}
     def changing_gate(path, **kwargs):
         (path / "grid100/events.jsonl").write_text("changed during evaluation")
         return {"problems": {"grid100": {"status": "PASS", "reason": "must not qualify"}}}

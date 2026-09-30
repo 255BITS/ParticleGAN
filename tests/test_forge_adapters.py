@@ -9,6 +9,7 @@ import torch
 
 from experiments.forge import adapters
 from experiments.forge.api import CapabilityError, FormulationContext
+from experiments.forge.sampling import FIELDS, expected_policy
 from experiments.forge.views import grade_result
 from particlegan import GANTrainer
 
@@ -38,7 +39,9 @@ def request(value):
 
 
 def execute(value, directory):
-    return adapters.run_task(request(value), {"task_id": value["id"]}, directory, "cpu")
+    raw = adapters.run_task(request(value), {"task_id": value["id"]}, directory, "cpu")
+    assert {field: raw["evidence"][field] for field in FIELDS} == expected_policy(value)
+    return raw
 
 
 def test_vector_uses_public_mog_and_real_evaluator_with_isolated_rng(tmp_path):
@@ -297,4 +300,4 @@ def test_behavior_dispatch_uses_the_shared_component_adapter(tmp_path, monkeypat
     sentinel = {"evidence": {"from": "components"}}
     behavior.run_behavior = lambda req, selected, output, device: sentinel
     monkeypatch.setitem(sys.modules, behavior.__name__, behavior)
-    assert execute(value, tmp_path) is sentinel
+    assert adapters.run_task(request(value), {"task_id": value["id"]}, tmp_path, "cpu") is sentinel

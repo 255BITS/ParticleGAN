@@ -30,6 +30,9 @@ A file existing in the catalog does not mean its adapter has been qualified.
 The [current quick-screen study](reports/forge/QUICK_SCREEN_STUDY.md) freezes a
 new source cohort after the develop merge. Its baseline and physical GPU pilot
 have separate bounded registrations; old-source receipts cannot fill its matrix.
+Its [first GPU baseline](reports/forge/DEVELOP_QUICK_SCREEN_READOUT.md) completed
+three scientific failures for 38.915 seconds. All independent references remain
+unknown, so these results alone cannot establish false rejection or adoption.
 
 Historical cards preserve successes, failures, raw errors, negative controls,
 and missing evidence. They do not automatically qualify a new Forge candidate.
@@ -155,6 +158,14 @@ noise remains present. Behavioral hosts keep their explicitly frozen laws.
 Vector tasks record their retained full-component gates; upstream finite-atom
 shape exemptions have not been calibrated for Forge's MoG prior. These changes
 produce new evidence identities and do not relabel previous receipts.
+
+New idea cards set `claim_contract.sampling_law` to `task_declared`. Each task's
+`evaluation` declares `sampling_contract_version: 1`, `sampling_law`, and
+`eval_output_noise`; the adapter records the policy it actually executes.
+Planning rejects unsupported host/policy combinations. Missing observed policy
+is `INCOMPLETE`; a contradiction is `INVALID`, before scientific metrics are
+graded. Behavioral scheduled-noise and parameter-only measurements retain their
+explicit exceptions. Archived unversioned receipts keep their frozen semantics.
 
 ## Tiers and views
 

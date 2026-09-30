@@ -20,6 +20,7 @@ from .api import CapabilityError, FormulationContext
 from .artifacts import manifest_artifacts, verify_artifacts
 from .contracts import atomic_json, file_hash, read_json, stable_hash
 from .mechanisms import MechanismAudit, mechanism_blockers
+from .sampling import ENUMERATED_PRIOR_CLEAN, PUBLIC_PRIOR_CLEAN, executed_receipt
 from .state import state_digest
 from .telemetry import PhaseTimer, normalize_adapter_costs
 
@@ -98,8 +99,9 @@ def _finite_tree(value):
 
 class _Run:
     """Shared progress, state, measured optimizer counts and RNG audit."""
-    def __init__(self, context, trainer, output, task):
+    def __init__(self, context, trainer, output, task, *, sampling_law=PUBLIC_PRIOR_CLEAN):
         self.context, self.trainer = context, trainer
+        self.sampling_policy = executed_receipt(sampling_law, eval_output_noise="clean")
         self.output, self.task = Path(output), task
         self.output.mkdir(parents=True, exist_ok=True)
         self.started = time.monotonic()
@@ -175,8 +177,7 @@ class _Run:
                   "hooks_exercised": hooks, "mechanism_audit": mechanisms,
                   "unintended_rng_deviations": sum(a["unintended_rng_deviations"] for a in self.rng_audits)}
         evidence = {**evidence, "guards": guards, "rng_audits": self.rng_audits,
-                    "eval_output_noise": "clean",
-                    "sampling_law": evidence.get("sampling_law", "public_prior_without_output_noise")}
+                    **self.sampling_policy}
         if evidence.get("artifact_root"):
             evidence["artifact_manifest"] = manifest_artifacts(evidence["artifact_root"])
             evidence["artifact_portability"] = {
@@ -226,7 +227,7 @@ def _image(request, task, output, device):
     g = context.construct(lambda: Generator(spec), component="generator").to(device)
     d = context.construct(lambda: Discriminator(spec), component="discriminator").to(device)
     trainer = context.build_trainer(g, d)
-    run = _Run(context, trainer, output, task)
+    run = _Run(context, trainer, output, task, sampling_law=ENUMERATED_PRIOR_CLEAN)
     centers = templates(spec).to(device)
     data = context.streams.generator("data", component="target", purpose="training")
     def evaluate():
@@ -237,15 +238,15 @@ def _image(request, task, output, device):
     checkpoints = set(_checkpoints(task))
     for step in range(1, task["execution"]["steps"] + 1):
         indices = torch.randint(len(centers), (context.recipe.batch_size,), device=device, generator=data)
-        real = centers[indices] + spec["noise_std"] * torch.randn(
-            (context.recipe.batch_size, 1, 8, 8), device=device, generator=data)
+        # Preserve the reference image host's clipped noisy-template law.
+        real = (centers[indices] + spec["noise_std"] * torch.randn(
+            (context.recipe.batch_size, 1, 8, 8), device=device, generator=data)).clamp(0., 1.)
         run.step(real)
         if step in checkpoints:
             row = run.evaluate(evaluate)
             observations.append({"step": step, **row})
             _event("observation", task=task["id"], step=step, metrics=row)
-    return run.receipt({"observations": observations, "live": observations[-1],
-                        "sampling_law": "enumerated_prior_without_output_noise"},
+    return run.receipt({"observations": observations, "live": observations[-1]},
                        save_state=task["execution"].get("produces_state", False))
 
 

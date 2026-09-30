@@ -12,7 +12,7 @@
   "recipe_overrides": {},
   "requires_capabilities": ["learned_locations", "a2", "named_rng"],
   "api_changes": [],
-  "claim_contract": {"schedule": "scheduled", "scoring_weights": "live", "sampling_law": "public_noisy"},
+  "claim_contract": {"schedule": "scheduled", "scoring_weights": "live", "sampling_law": "task_declared"},
   "lifecycle": "proposed",
   "prior_art": ["reports/toy100/current-research-base.json"],
   "guide": "EXPERIMENTATION.md"

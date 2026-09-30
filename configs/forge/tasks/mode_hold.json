@@ -23,6 +23,9 @@
     }
   },
   "evaluation": {
+    "sampling_contract_version": 1,
+    "sampling_law": "public_prior_without_output_noise",
+    "eval_output_noise": "clean",
     "kind": "transfer_sustained",
     "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
     "thresholds": [

@@ -16,6 +16,8 @@ import math
 from pathlib import Path
 import sys
 
+from .sampling import grade_sampling, validate_declaration
+
 
 ROOT = Path(__file__).resolve().parents[2]
 IMPORTANCES = {"required", "ranking", "diagnostic"}
@@ -85,6 +87,7 @@ def _dependencies(task):
 
 def _validate_measurement_contract(task):
     """Repeated evaluator constants are declarations, never ignored overrides."""
+    validate_declaration(task)
     evaluation = task["evaluation"]
     kind = evaluation["kind"]
     fixed = {"scoring_weights": "live"}
@@ -522,6 +525,9 @@ def grade_result(task: dict, result: dict | None) -> dict:
         return _verdict("INCOMPLETE", "missing raw evaluator evidence; status stamps cannot qualify")
     if evidence.get("scoring_weights", "live") != task["evaluation"].get("scoring_weights", "live"):
         return _verdict("INVALID", "live/EMA scoring policies differ")
+    sampling = grade_sampling(task, evidence)
+    if sampling is not None:
+        return _verdict(sampling["status"], sampling["reason"])
     guard = _guards(task, evidence)
     if guard is not None:
         return guard

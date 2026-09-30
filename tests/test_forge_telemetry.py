@@ -4,6 +4,7 @@ from pathlib import Path
 from types import SimpleNamespace
 
 import pytest
+import torch
 
 from experiments.forge import telemetry as t
 from experiments.forge.contracts import atomic_json, read_json, stable_hash
@@ -37,17 +38,70 @@ def test_interrupted_phase_still_records_cost_without_swallowing_failure():
 
 def test_memory_probe_reports_distinct_process_and_allocator_scopes(monkeypatch):
     calls = []
-    cuda = SimpleNamespace(reset_peak_memory_stats=lambda device: calls.append(device),
+    cuda = SimpleNamespace(init=lambda: None, reset_peak_memory_stats=lambda device: calls.append(device),
         max_memory_allocated=lambda device: 100, max_memory_reserved=lambda device: 200)
     monkeypatch.setattr(t, "peak_rss", lambda: 300)
-    measured = t.MemoryProbe(device="cuda:0", torch_module=SimpleNamespace(cuda=cuda)).snapshot()
-    assert calls == ["cuda:0"] and measured["process_peak_rss_bytes"] == 300
+    measured = t.MemoryProbe(device="cuda:0", torch_module=SimpleNamespace(cuda=cuda, device=torch.device)).snapshot()
+    assert calls == [torch.device("cuda:0")] and measured["process_peak_rss_bytes"] == 300
     assert measured["cuda_peak_allocated_bytes"] == 100
     assert measured["cuda_peak_reserved_bytes"] == 200
     unavailable = t.MemoryProbe(device="cuda:0").snapshot()
     assert unavailable["cuda_peak_allocated_bytes"] is None
     assert unavailable["cuda_unavailable_reason"]
     assert t.MemoryProbe().snapshot()["cuda_peak_reserved_bytes"] is None
+
+
+@pytest.mark.parametrize("device,index", [("0", 0), (0, 0), ("cuda:0", 0), (torch.device("cuda:0"), 0),
+                                         ("1", 1), (torch.device("cuda:1"), 1),
+                                         ("cuda", 2), (torch.device("cuda"), 2)])
+def test_cuda_probe_initializes_allocator_and_canonicalizes_worker_devices(device, index):
+    calls, state = [], {"initialized": False, "current": 2}
+    def initialize():
+        calls.append("init")
+        state["initialized"] = True
+    def allocator(operation, resolved):
+        # The real reset API can fail this way before its lazy CUDA state exists.
+        if not state["initialized"]:
+            raise RuntimeError("Invalid device argument ")
+        assert isinstance(resolved, torch.device) and resolved == torch.device("cuda", index)
+        calls.append(operation)
+        return {"reset": None, "allocated": 100 + index, "reserved": 200 + index}[operation]
+    cuda = SimpleNamespace(init=initialize, current_device=lambda: state["current"],
+        reset_peak_memory_stats=lambda resolved: allocator("reset", resolved),
+        max_memory_allocated=lambda resolved: allocator("allocated", resolved),
+        max_memory_reserved=lambda resolved: allocator("reserved", resolved))
+    module = SimpleNamespace(cuda=cuda, device=torch.device)
+    probe = t.MemoryProbe(device=device, torch_module=module)
+    state["current"] = 7  # A later current-device change cannot redirect this probe.
+    measured = probe.snapshot()
+    assert calls == ["init", "reset", "allocated", "reserved"]
+    assert measured["cuda_peak_allocated_bytes"] == 100 + index
+    assert measured["cuda_peak_reserved_bytes"] == 200 + index
+    assert "cuda_unavailable_reason" not in measured
+
+
+@pytest.mark.parametrize("stage", ["init", "reset", "allocated", "reserved"])
+def test_cuda_probe_preserves_real_instrumentation_failures_as_unavailable(stage):
+    def invoke(operation, *args):
+        if operation == stage:
+            raise RuntimeError("unavailable at " + stage)
+        return 123
+    cuda = SimpleNamespace(init=lambda: invoke("init"),
+        reset_peak_memory_stats=lambda resolved: invoke("reset", resolved),
+        max_memory_allocated=lambda resolved: invoke("allocated", resolved),
+        max_memory_reserved=lambda resolved: invoke("reserved", resolved))
+    measured = t.MemoryProbe(device="0", torch_module=SimpleNamespace(cuda=cuda, device=torch.device)).snapshot()
+    assert measured["cuda_peak_allocated_bytes"] is None and measured["cuda_peak_reserved_bytes"] is None
+    assert measured["cuda_unavailable_reason"] == "unavailable at " + stage
+
+
+@pytest.mark.parametrize("device", ["cpu", torch.device("cpu")])
+def test_cpu_probe_never_initializes_or_queries_cuda(device):
+    cuda = SimpleNamespace(init=lambda: pytest.fail("CPU telemetry must not initialize CUDA"),
+                           reset_peak_memory_stats=lambda *_: pytest.fail("CPU telemetry must not query CUDA"))
+    measured = t.MemoryProbe(device=device, torch_module=SimpleNamespace(cuda=cuda, device=torch.device)).snapshot()
+    assert measured["cuda_peak_allocated_bytes"] is None and measured["cuda_peak_reserved_bytes"] is None
+    assert "cuda_unavailable_reason" not in measured
 
 
 def test_legacy_inclusive_time_is_renamed_recursively_without_mutation():

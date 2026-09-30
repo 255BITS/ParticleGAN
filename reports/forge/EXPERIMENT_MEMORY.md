@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope; current qualification is recomputed from compatible receipts.
 
-Records: 184. Inventory coverage: complete. Unresolved import items: 7.
+Records: 185. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -2931,6 +2931,22 @@ All three registered smoke cells completed: two_pole FAIL (mean_abs0.1048249<0.3
 
 [Evidence](../../reports/forge/attempts/633dcaca307e4e01b82b5281d82082fb/result.json) · [Record](records/readout-8aacfe961f0e62b062e621fa.json)
 
+### k3p · readout-9c29229a2baba56de3b40845
+
+**Scope:** calibration_diagnostic; scientific; revision `989a12b2dd014078e0e5dcf7c674be243b5a73bee19289c9500964a941369c69`.
+
+The shipped K3P mechanism is a reference for new learned-MoG experiments; historical cloud evidence does not qualify this MoG conversion.
+
+**Observed:** {'FAIL': 3}; wall seconds 38.915; mechanism `structural`.
+
+img_bars4: modes=2, hq=0.9375; mode_hold: modes=5, hq=0.99878; img_intensity2: modes=0, hq=0
+
+The registered merged-develop quick screen completed 0/3 PASS on GPU 0: mode_hold 5/8 modes with hq=0.998779296875; img_bars4 2/4 modes with hq=0.9375; img_intensity2 0/2 modes with hq=0. All 24 observations per task were recorded, with zero passing suffixes and zero unintended RNG deviations. Three scientific FAILs, no execution errors; paid wall time 38.915211247018306 seconds. Live scoring used clean public prior samples; mode_hold used learned MoG and the image hosts used explicit cloud enumeration.
+
+**Next:** Keep the full reference denominator and stop automatic expansion to ablations or the full reference matrix. Review host/formulation solvability and initial-state parity before selecting another bounded scientific diagnosis. Correct future sampling declarations and CUDA telemetry without rewriting these receipts or rerunning failed science just for reporting. The separately registered physical two-GPU pilot still needs a joint device window; this serial screen does not satisfy it.
+
+[Evidence](../../reports/forge/attempts/5a5f1641fd80404fbb509d367e6a467f/result.json) · [Record](records/readout-9c29229a2baba56de3b40845.json)
+
 ### k3p · readout-acc70fcaf6cedb9a3772e41e
 
 **Scope:** calibration_diagnostic; scientific; revision `229770eceb2d51236085562985c341033df825c4c85fc20adbebdef313f8c65b`.
@@ -2975,4 +2991,4 @@ All three registered smoke cells completed at the frozen current cohort: two_pol
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v1`; input digest `a42f7b2c67ba66f4869e0e3343d6c92984bba4c1f007f99ad53600d078959d33`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v1`; input digest `7d7d01991277a57ad93de29fe5472bb35b6cc0156c84717aeac3ad8de4dbd277`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

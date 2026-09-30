@@ -17,6 +17,7 @@ from .api import CapabilityError
 from .artifacts import verify_artifacts
 from .contracts import atomic_json, file_hash, read_json, stable_hash
 from .sources import runtime_manifest
+from .sampling import PUBLIC_PRIOR_CLEAN, executed_receipt
 from .state import state_digest
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -166,7 +167,7 @@ def run_adaptation(request: dict, task: dict, output_dir: Path, device: str) -> 
               "steps": steps, "noise_horizon": context.recipe.total_steps, "diagnostic_every": cadence,
               "dense_after": None, "dense_until": None, "shift_step": shift_step,
               "shift": execution["shift"], "shift_pair": shift_pair,
-              "sampling_law": "public_prior_without_output_noise", "eval_output_noise": "clean"}
+              **executed_receipt(PUBLIC_PRIOR_CLEAN, eval_output_noise="clean")}
     active = {**deepcopy(common), "freeze_after_shift": False, "diagnostic": active_points,
               "optimizer_final": _optimizer_rows(active_final), **_summary(active_points, execution)}
     frozen = {**deepcopy(common), "freeze_after_shift": True, "diagnostic": frozen_points,

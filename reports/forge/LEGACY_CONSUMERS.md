@@ -2,6 +2,13 @@
 
 ## Ownership update — 2026-09-29
 
+At approximately 20:50 local (2026-09-30 02:50 UTC), NPC PID 354762 had exited
+and GPU 0 was idle (18 MiB), with no compute process. Forge then ran the user's
+authorized, registered [three-task GPU 0 screen](DEVELOP_QUICK_SCREEN_READOUT.md).
+It completed at 02:51:54 UTC for 38.915 seconds, with zero final reservations;
+the request is concluded. GPU 1 was not used. The following 20:17 observation
+is retained as the earlier ownership snapshot.
+
 Observed at approximately 20:17 America/Denver (2026-09-30 02:17 UTC), after
 the user released GPU 0 and the coordinator merged develop. The previous
 HyperGAN queue and NPC training PIDs listed below had exited. A **new NPC MisGAN

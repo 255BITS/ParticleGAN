@@ -63,11 +63,20 @@ def peak_rss(*, children=False):
 class MemoryProbe:
     def __init__(self, *, device="cpu", torch_module=None):
         self.device, self.torch, self.cuda_error = str(device), torch_module, None
+        if self.device.isdecimal() or type(device) is int:
+            self.device = "cuda:" + self.device
+        self.cuda_device = None
         if self.device.startswith("cuda"):
             try:
                 if self.torch is None:
                     raise ValueError("CUDA allocator instrumentation unavailable")
-                self.torch.cuda.reset_peak_memory_stats(self.device)
+                self.cuda_device = self.torch.device(self.device)
+                # reset_peak_memory_stats can reach the native allocator before
+                # its per-device state exists. The probe precedes model creation.
+                self.torch.cuda.init()
+                if self.cuda_device.index is None:
+                    self.cuda_device = self.torch.device("cuda", self.torch.cuda.current_device())
+                self.torch.cuda.reset_peak_memory_stats(self.cuda_device)
             except Exception as error:
                 self.cuda_error = str(error)
 
@@ -77,8 +86,8 @@ class MemoryProbe:
                   "cuda_scope": "PyTorch allocator since probe reset; excludes other processes and non-PyTorch allocations"}
         if self.device.startswith("cuda") and self.cuda_error is None:
             try:
-                result.update(cuda_peak_allocated_bytes=int(self.torch.cuda.max_memory_allocated(self.device)),
-                              cuda_peak_reserved_bytes=int(self.torch.cuda.max_memory_reserved(self.device)))
+                result.update(cuda_peak_allocated_bytes=int(self.torch.cuda.max_memory_allocated(self.cuda_device)),
+                              cuda_peak_reserved_bytes=int(self.torch.cuda.max_memory_reserved(self.cuda_device)))
             except Exception as error:
                 self.cuda_error = str(error)
         if self.cuda_error:

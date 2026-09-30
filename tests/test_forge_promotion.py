@@ -8,6 +8,7 @@ from experiments.forge.api import CapabilityError
 from experiments.forge.contracts import atomic_json, file_hash, read_json, stable_hash
 from experiments.forge.knowledge import readout
 from experiments.forge.planning import resolve_idea
+from experiments.forge.sampling import ADAPTER_POLICIES, executed_receipt, PUBLIC_PRIOR_CLEAN
 
 
 def save_attempt(root, request, name, *, score=1., stamp="PASS", cost=1., tasks=None):
@@ -17,7 +18,8 @@ def save_attempt(root, request, name, *, score=1., stamp="PASS", cost=1., tasks=
     for task in tasks or request["tasks"]:
         rows.append({"task_id": task, "compatibility_key": keys[task], "gate_status": stamp,
                      "evidence": {"observations": [{"step": i, "score": score} for i in range(1, 25)],
-                                  "live": {"score": score}, "scoring_weights": "live"},
+                                  "live": {"score": score}, "scoring_weights": "live",
+                                  **executed_receipt(PUBLIC_PRIOR_CLEAN, eval_output_noise="clean")},
                      "cost": {"wall_seconds": cost[task] if isinstance(cost, dict) else cost}, "raw_status": "completed"})
     result = {"schema_version": 1, "attempt_id": name, "candidate_revision": request["candidate_revision"],
               "task_results": rows}
@@ -35,6 +37,7 @@ def setup(tmp_path, monkeypatch):
     # This fixture grades stored synthetic curves and never launches a host.
     # Real adapter applicability is exercised by adapter/worker integration tests.
     monkeypatch.setattr("experiments.forge.adapters.adapter_preflight", lambda task, candidate: [])
+    monkeypatch.setitem(ADAPTER_POLICIES, "fixture", PUBLIC_PRIOR_CLEAN)
     prior = {"kind": "mog", "sigma": .025, "standardize": False, "learnable": True}
     atomic_json(root / "configs/forge/defaults.json", {"protocol": "screening", "prior": prior})
     atomic_json(root / "configs/forge/protocols/screening.json", {
@@ -45,11 +48,12 @@ def setup(tmp_path, monkeypatch):
             "schema_version": 1, "id": name, "goal": "stability", "hypothesis": "a mechanism fixture",
             "changed_factors": ["anchor coefficient"], "mechanism_class": "structural",
             "recipe_overrides": {"reg_anchor_weight": delta},
-            "claim_contract": {"schedule": "scheduled", "scoring_weights": "live"}})
+            "claim_contract": {"schedule": "scheduled", "scoring_weights": "live", "sampling_law": "task_declared"}})
     for name in ("cheap", "quality"):
         atomic_json(root / f"configs/forge/tasks/{name}.json", {
             "schema_version": 1, "id": name, "adapter": "fixture", "execution": {"steps": 24, "prior": prior, "fixture_id": name},
-            "evaluation": {"kind": "transfer_sustained", "thresholds": [["score", ">=", 1.]], "scoring_weights": "live"},
+            "evaluation": {"kind": "transfer_sustained", "thresholds": [["score", ">=", 1.]], "scoring_weights": "live",
+                           **executed_receipt(PUBLIC_PRIOR_CLEAN, eval_output_noise="clean")},
             "resources": {"gpus": 0, "gpu_memory_mb": 16, "cpu_threads": 1, "timeout_seconds": 10},
             "requires_capabilities": ["named_rng"], "dependencies": []})
     atomic_json(root / "configs/forge/views/stability.json", {

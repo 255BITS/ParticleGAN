@@ -177,11 +177,14 @@ def current_request(name):
 
 
 def current_attempt(root, request, name, score=1., *, status="PASS", costs=None, omit=(), retry=None, raw_status=None):
+    from experiments.forge.sampling import executed_receipt, PUBLIC_PRIOR_CLEAN
     costs = costs or {"cheap": .05, "quality": 1.}
     rows = [{"task_id": job["task_id"], "compatibility_key": job["compatibility_key"], "gate_status": status,
              "cost": {"wall_seconds": costs.get(job["task_id"])},
              "evidence": {"observations": [{"step": i, "score": score} for i in range(1, 25)],
-                          "live": {"score": score}, "scoring_weights": "live"}}
+                          "live": {"score": score}, "scoring_weights": "live",
+                          **(executed_receipt(PUBLIC_PRIOR_CLEAN, eval_output_noise="clean")
+                             if "sampling_contract_version" in request["tasks"][job["task_id"]]["evaluation"] else {})}}
             for job in request["jobs"] if job["task_id"] not in omit]
     result = {"attempt_id": name, "candidate_revision": request["candidate_revision"], "task_results": rows}
     resolved = {"request": request}

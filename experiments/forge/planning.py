@@ -6,6 +6,7 @@ from dataclasses import asdict
 from pathlib import Path
 
 from .contracts import atomic_json, identifier, read_json, stable_hash, validate_idea
+from .sampling import candidate_blockers, task_blockers
 from .sources import compute_profile, inspect_source, runtime_manifest, snapshot_source
 from .views import (load_tasks, load_view, task_evaluation_fingerprint,
                     task_execution_fingerprint, validate_view, view_fingerprint)
@@ -103,6 +104,7 @@ def resolve_idea(root: Path, idea_id: str, *, view_id: str | None = None,
         blockers.extend(exc.blockers)
     candidate = {**idea, "resolved_recipe": recipe, "prior": prior, "capabilities": capabilities,
                  "claim_contract": idea.get("claim_contract", {"schedule": "scheduled", "scoring_weights": "live"})}
+    blockers.extend(candidate_blockers(candidate))
     for name, value in view.get("eligibility", {}).get("claim_contract", {}).items():
         if candidate["claim_contract"].get(name) != value:
             blockers.append(f"view requires claim_contract.{name}={value!r}")
@@ -134,6 +136,7 @@ def resolve_idea(root: Path, idea_id: str, *, view_id: str | None = None,
         task["preflight_blockers"] = [f"missing capability {cap}" for cap in sorted(missing)]
         from .adapters import adapter_preflight
         task["preflight_blockers"].extend(adapter_preflight(task, candidate))
+        task["preflight_blockers"].extend(task_blockers(task))
     source = inspect_source(root, sorted(extra_sources))
     formulation = {k: candidate.get(k) for k in FORMULATION_FIELDS}
     formulation.update(resolved_recipe=recipe, prior=prior, api_version=idea.get("api_version", "forge-api-v1"))

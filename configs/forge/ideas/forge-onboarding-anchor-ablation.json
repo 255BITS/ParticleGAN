@@ -5,7 +5,7 @@
     "Ablate the public critic EMA-anchor term with recipe_overrides.reg_anchor_weight=0; keep the inherited initializer, fixed protocol seed and prior."
   ],
   "claim_contract": {
-    "sampling_law": "public_noisy",
+    "sampling_law": "task_declared",
     "schedule": "scheduled",
     "scoring_weights": "live"
   },

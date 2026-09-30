@@ -19,6 +19,9 @@
     "uninterrupted": true
   },
   "evaluation": {
+    "sampling_contract_version": 1,
+    "sampling_law": "public_prior_without_output_noise",
+    "eval_output_noise": "clean",
     "kind": "ring_hold",
     "evaluator": "reports/toy100/gap-fill-20260925/sources/k3p/convergence_gate.py:ConvergenceGate",
     "scoring_weights": "live",

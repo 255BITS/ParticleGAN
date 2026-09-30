@@ -11,6 +11,7 @@ from experiments.forge.api import CapabilityError
 from experiments.forge.artifacts import manifest_artifacts
 from experiments.forge.contracts import atomic_json
 from experiments.forge.state import state_digest
+from experiments.forge.sampling import FIELDS, expected_policy
 from experiments.forge.views import grade_result
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -43,6 +44,7 @@ def pair(tmp_path):
 def test_public_checkpoint_pairs_prefix_and_freezes_every_training_state(pair):
     task, raw = pair
     evidence = raw["evidence"]
+    assert {field: evidence[field] for field in FIELDS} == expected_policy(task)
     proof = verify_pair_artifacts(evidence)
     assert proof["prefix_step"] == proof["frozen_final_step"] == 4
     assert proof["active_final_step"] == 6

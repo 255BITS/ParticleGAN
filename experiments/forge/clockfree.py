@@ -11,6 +11,7 @@ import torch
 
 from .artifacts import manifest_artifacts, verify_artifacts
 from .contracts import atomic_json, file_hash, stable_hash
+from .sampling import PUBLIC_PRIOR_CLEAN, executed_receipt
 from .state import require_consistent_rng, require_optimizer_steps, state_digest
 
 
@@ -112,13 +113,14 @@ def run_clockfree(request, task, output, device):
         for _ in range(probe_steps):
             if name == "evaluation_cadence":
                 generator = context.streams.generator("eval", component="clock_probe", purpose="samples")
-                trainer.sample(spec["evaluation_samples"], generator=generator)
+                trainer.sample(spec["evaluation_samples"], generator=generator, output_noise=False)
             update(context, trainer, data)
             trajectory.append(context.state_dict())
         proof["trajectories"][name] = trajectory
         _event("clock_probe", task=task["id"], condition=name, updates=probe_steps)
     torch.save(proof, directory / "comparisons.pt")
-    evidence = {"comparisons": _comparisons(proof),
+    evidence = {**executed_receipt(PUBLIC_PRIOR_CLEAN, eval_output_noise="clean"),
+                "comparisons": _comparisons(proof),
                 "source_audit": source_audit(proof["recipe"], proof["extensions"]),
                 "artifact_root": str(directory.resolve()), "artifact_manifest": manifest_artifacts(directory),
                 "artifact_portability": {"storage": "local", "requires_bulk_artifacts": True}}
