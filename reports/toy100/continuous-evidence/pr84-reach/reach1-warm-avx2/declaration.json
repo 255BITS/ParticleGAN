@@ -1,0 +1,21 @@
+{
+  "phase": "warm",
+  "method": "reach1",
+  "seed": 0,
+  "host": "neural",
+  "torch": "2.14.0+cpu",
+  "cpu": "AVX2",
+  "shared_gate_eligible": false,
+  "purity": "GAN dynamics only: no coverage, likelihood, anchor, assignment or clip ladder",
+  "source": {
+    "reports/toy100/gan_followup_probe.py": "cb74868b7d0253a413f81db758b127428cf2a2b4845a894dca567fbc70e7c632",
+    "reports/toy100/pr84_reach_candidate.py": "b07c65c4df694fb955c577cb332ec5b0841fdf570028461d35f81b886f754c8c",
+    "reports/toy100/pr84_smoothed_candidate.py": "9c17b1b02f79201ae5392b2b04e11570e08bbbf0d620794861e436b105f0111f",
+    "reports/toy100/alternating_curvature_scratch.py": "cb6278251cf04d321afe7109f5eb91b3a5ebb41a866abb03c9a694b8c9969450",
+    "reports/toy100/extra_adam_scratch.py": "d0afde6ecf34ede0a25c17a9fce238d148e11ba759f30c3e125a901cba7e6c55",
+    "benchmarks/toy100/warm_equilibrium_probe.py": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
+    "benchmarks/toy100/continuous_probe.py": "f64d4950330f56122a4684ab5ea0d9155bb94714413f08387399db95f6ae0834",
+    "benchmarks/locked_shared/mode_hold.py": "a61e3dba70f78e76fad33439cf12943f2c29aa7ce250a527df7a73f23060ce4e",
+    "benchmarks/locked_shared/trajectory.py": "79552591f7cfb52769521bf4e034cdf4bafd90ca66461bb235977a20d1bf1792"
+  }
+}

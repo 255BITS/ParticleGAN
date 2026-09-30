@@ -1,0 +1,8 @@
+{"event": "DECLARED", "phase": "warm", "method": "reachstall_trustfall", "seed": 0, "host": "neural", "torch": "2.14.0+cpu", "cpu": "AVX2", "cpu_env": {"ATEN_CPU_CAPABILITY": "avx2", "MKL_ENABLE_INSTRUCTIONS": "AVX2", "ONEDNN_MAX_CPU_ISA": "AVX2", "DNNL_MAX_CPU_ISA": "AVX2"}, "shared_gate_eligible": false, "purity": "GAN dynamics only: no coverage, likelihood, anchor, assignment or clip ladder"}
+{"event": "VARIANT_START", "variant": "identity"}
+{"event": "VARIANT_START", "variant": "reachstall_trustfall"}
+{"event": "VARIANT_DONE", "variant": "identity"}
+{"event": "VARIANT_DONE", "variant": "reachstall_trustfall"}
+{"event": "WARM", "variant": "identity", "status": "PASS", "checks": 200, "passing_checks": 200, "min_modes": 8, "min_hq": 0.989990234375, "failing_steps": []}
+{"event": "WARM", "variant": "reachstall_trustfall", "status": "PASS", "checks": 200, "passing_checks": 200, "min_modes": 8, "min_hq": 0.91943359375, "failing_steps": []}
+{"event": "DONE"}
