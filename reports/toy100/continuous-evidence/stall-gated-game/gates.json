@@ -1,0 +1,26 @@
+{
+  "host": "neural",
+  "seed": 0,
+  "threads": 1,
+  "torch": "2.14.0+cpu",
+  "cpu": "AVX2",
+  "aten": "avx2",
+  "method": "reachstall_sgame",
+  "call": "KILL",
+  "reason": "Cold ring fails on the same AVX2 process where #107 stall reach passes. The stall predicate is true during early acquisition, so the one-step game bound is not confined to the late dropout.",
+  "warm_rankable": false,
+  "warm_rank_refused": "identity/control fork 0/200 (6 modes at update 1000). Not used to rank.",
+  "stay": "not run; cold ring already failed",
+  "gates": {
+    "warm_identity": {"passing_checks": 0, "checks": 200, "min_modes": 6, "min_hq": 0.9531, "final_modes": 6, "final_hq": 0.999},
+    "warm_method_unranked": {"passing_checks": 0, "checks": 200, "min_modes": 5, "min_hq": 0.9233, "final_modes": 6, "final_hq": 1.0},
+    "cold_trajectory": {"passed": true, "identity_mse": 0.000942668120842427, "stall_game_updates": 0},
+    "cold_ring": {"passed": false, "modes": 8, "hq": 0.701416015625, "passing_observations": "1/24", "passing_suffix": 0, "stall_game_updates": 506, "stall_game_windows": {"1-200": "182/200", "200-400": "143/201", "400-800": "0/401", "800-1200": "182/401"}},
+    "same_machine_reachstall_ring": {"passed": true, "modes": 8, "hq": 0.998046875, "passing_observations": "8/24", "passing_suffix": 8, "stall_game_updates": 0}
+  },
+  "pins": {
+    "pr84_warm": "196/200",
+    "pr107_warm_valid_avx2": "200/200",
+    "pr107_cold_ring_avx2": "8 modes, terminal HQ about 1.0, suffix 8"
+  }
+}
