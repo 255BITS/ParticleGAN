@@ -1,17 +1,11 @@
 {
-  "command": "python -u examples/e22_routed_sites.py --compare --steps 40 --tokens 128 --z-dim 4 --particles 128 --batch-size 8 --device cuda --warmup 1",
+  "command": "PYTHONPATH=. python -u examples/e22_routed_sites.py --compare --steps 40 --tokens 128 --z-dim 4 --particles 128 --batch-size 8 --device cuda:1 --initialization api --warmup 1",
   "hardware": "NVIDIA RTX A6000",
   "torch_version": "2.13.0+cu126",
-  "context_columns": [
-    "source_x",
-    "source_y",
-    "time",
-    "spatial_position"
-  ],
-  "final_output_channels": 2,
-  "source_revision": "8618b19c2eca444fda1ab5c7fa0d6734cd1ae5a8",
+  "initialization": "api",
+  "source_revision": "7083dfcb8d248a1dbc0daca789ff7c2a3d77a73e",
   "source_sha256": {
-    "examples/e22_routed_sites.py": "d4f9292078e6033d600374a6059c03f54a2cc2b0da843684e3cb15be452a789c",
+    "examples/e22_routed_sites.py": "43963bc5a35494fe1b142426365b26621cb7c6ae5fb74316f4aea81af66587c7",
     "particlegan/routing.py": "b64764fccc1518085ecf92d54df3ea4ada163293bc88132622cc04d60dd5ce94",
     "particlegan/policy.py": "803272dc136b7fb024fcf51692e70e7f49323c88f84f8f7bc9aa31292bc780ba",
     "particlegan/recipes.py": "e1e2f478ce9d9f8774933cd4e98e0f91cfaf0e93a152ad0e4bdee782f52ae9d6"
@@ -26,7 +20,7 @@
       1024,
       4
     ],
-    "device": "cuda",
+    "device": "cuda:1",
     "reports": [
       {
         "event": "complete",
@@ -35,14 +29,15 @@
         "z_dim": 4,
         "particles": 128,
         "batch_size": 8,
+        "initialization": "api",
         "steps": 40,
         "warmup_steps": 1,
-        "initial_rmse": 0.1488732397556305,
-        "heldout_rmse": 0.07874678820371628,
-        "heldout_max_error": 0.17969651520252228,
+        "initial_rmse": 0.3414013385772705,
+        "heldout_rmse": 0.16728752851486206,
+        "heldout_max_error": 0.6154395937919617,
         "served_source": "fast",
-        "training_seconds": 1.325878863921389,
-        "seconds_per_update": 0.03314697159803472,
+        "training_seconds": 0.6408135117962956,
+        "seconds_per_update": 0.016020337794907392,
         "row_diagnostics": {
           "counters": {
             "evals": 0,
@@ -68,14 +63,15 @@
         "z_dim": 4,
         "particles": 128,
         "batch_size": 8,
+        "initialization": "api",
         "steps": 40,
         "warmup_steps": 1,
-        "initial_rmse": 0.1488732397556305,
-        "heldout_rmse": 0.023803401738405228,
-        "heldout_max_error": 0.06883639097213745,
+        "initial_rmse": 0.3414013385772705,
+        "heldout_rmse": 0.21022117137908936,
+        "heldout_max_error": 0.7569118738174438,
         "served_source": "fast",
-        "training_seconds": 1.9741386834066361,
-        "seconds_per_update": 0.0493534670851659,
+        "training_seconds": 0.6002392440568656,
+        "seconds_per_update": 0.01500598110142164,
         "row_diagnostics": {
           "counters": {
             "evals": 0,
@@ -101,41 +97,53 @@
         "z_dim": 4,
         "particles": 128,
         "batch_size": 8,
+        "initialization": "api",
         "steps": 40,
         "warmup_steps": 1,
-        "initial_rmse": 0.1488732397556305,
-        "heldout_rmse": 0.03100801818072796,
-        "heldout_max_error": 0.07540309429168701,
+        "initial_rmse": 0.3414013385772705,
+        "heldout_rmse": 0.21022117137908936,
+        "heldout_max_error": 0.7569118738174438,
         "served_source": "fast",
-        "training_seconds": 6.063995411619544,
-        "seconds_per_update": 0.1515998852904886,
+        "training_seconds": 2.044181809294969,
+        "seconds_per_update": 0.05110454523237422,
         "row_diagnostics": {
           "counters": {
             "evals": 40,
             "probes": 320,
-            "proposals": 192,
-            "guard_rejections": 8,
-            "moves": 10,
-            "splits": 5
+            "proposals": 312,
+            "guard_rejections": 32,
+            "moves": 0,
+            "splits": 0
           },
           "last": {
             "step": 40,
             "moves": 0,
             "law": "routed_paired",
-            "fit_error": 0.032824871877421606,
-            "eligible_deaths": 8,
-            "eligible_births": 0
+            "fit_error": 0.41721214135847595,
+            "eligible_deaths": 55,
+            "eligible_births": 73,
+            "child": 100,
+            "parent": 76,
+            "variant": "antisymmetric",
+            "guard_error_before": 0.4942501430372631,
+            "guard_error_after": 0.4659038651478334,
+            "average_guard_error_before": 0.4315463812585217,
+            "average_guard_error_after": 0.4200788988347166,
+            "guard_gain": 0.028346277889429748,
+            "average_guard_gain": 0.01146748242380503,
+            "max_context_harm": 0.06029719279521137,
+            "average_max_context_harm": 0.0721707525483683,
+            "guard_contexts": 64,
+            "accepted": false
           },
           "evidence_counters": {
             "updates": 40,
-            "resets": 640,
-            "global_resets": 5,
-            "flagged_rows_sum": 0
+            "resets": 0,
+            "global_resets": 0,
+            "flagged_rows_sum": 18
           }
         }
       }
     ]
-  },
-  "initialization": "conformance",
-  "interpretation": "Historical hand-built lifecycle fixture; current CLI defaults to API initialization."
+  }
 }

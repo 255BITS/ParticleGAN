@@ -81,6 +81,20 @@ python -u examples/e22_routed_sites.py --steps 60 --output /tmp/e22-sites.pt
 python -u examples/e22_routed_sites.py --steps 2 --resume /tmp/e22-sites.pt
 ```
 
+The CLI uses the public API initializer by default. The former `initialize_`
+entry point is now `init.deterministic_orthogonal_`, with the same values;
+see the [migration table](api.md#migrating-from-initialize_-and-recipeinitialization).
+Whole networks use the documented role keys G=0, D=1, E=2, with router=3.
+The bank is initialized through `recipe.make_prior()` and the public R2
+initializer before the frozen comparison arm disables its gradients. This
+path has neutral row masses and no injected outlier.
+
+Python `make_loop()` retains `initialization="conformance"` as its default
+for the lifecycle tests. That deliberately constructed fixture has a
+hand-built bank, constant query weights and a downweighted outlier. Select
+it explicitly in the CLI with `--initialization conformance`; select
+`initialization="api"` in Python for quality comparisons.
+
 The default task uses 8 spatial tokens, a 16×2 bank and a batch of 8 contexts.
 Inputs have shape `[batch, tokens, 4]` with columns source-x, source-y, time
 and spatial position. Final outputs have shape `[batch, tokens, 2]`. The first
@@ -114,7 +128,7 @@ served-choice rule. Training modules remain fast and serving consumes no
 training RNG. Optional `perturb=True` enables per-site DV12; `output_noise=True`
 adds the stored sigma directly in prediction coordinates.
 
-The fixed tiny CPU run reduced clean final-grid RMSE from **.188005 to
+The fixed tiny CPU conformance fixture reduced clean final-grid RMSE from **.188005 to
 .015629** after 60 actual adversarial updates. All 16 rows received nonzero
 gradients each time. The controller accepted four splits (eight moved rows),
 rejected 43 guarded proposals, and its active evidence held table descent for
@@ -176,11 +190,11 @@ actual paired-game updates with the ordinary two-site loop, including an
 accepted row move, recovery and clean serving. Keep the `no_rows` movable-bank
 baseline when validating this replay path and the Sliders integration.
 
-## One matched spatial comparison
+## API-initialized spatial comparison
 
 ```bash
 python -u examples/e22_routed_sites.py --compare --steps 40 --tokens 128 \
-    --z-dim 4 --particles 128 --batch-size 8 --device cuda
+    --z-dim 4 --particles 128 --batch-size 8 --device cuda:1 --initialization api
 ```
 
 This shape means a **128×4 bank and 128 spatial tokens**, with four-column
@@ -218,25 +232,94 @@ mode, batch size 8 and one restored warmup update:
 
 | Mode | Clean held-out RMSE | Maximum token L2 error | Training wall time | Accepted splits |
 | --- | ---: | ---: | ---: | ---: |
-| Frozen bank | .078747 | .179697 | 1.326 s | 0 |
-| Movable bank, row controls off | **.023803** | **.068836** | 1.974 s | 0 |
-| Full `e22_routed` | .031008 | .075403 | 6.064 s | 5 |
+| Frozen bank | **.167288** | **.615440** | .641 s | 0 |
+| Movable bank, row controls off | .210221 | .756912 | .600 s | 0 |
+| Full `e22_routed` | .210221 | .756912 | 2.044 s | 0 |
 
-All three modes started at clean RMSE .148873 and served fast weights at the
-end. Initialization, batches, paired-error base noise and the four per-update
-DV12 draw schedules matched. The full mode made 320 deletion probes, accepted
-five splits (ten moved rows) and rejected eight guarded proposals. Its evidence
-refreshed each update, but no persistent-force flags fired in this short
-spatial run; the smaller 60-update conformance task separately exercises a
-real evidence hold.
+All modes started at clean RMSE .341401 and served fast weights. Initialization,
+batches, paired-error base noise and DV12 draw schedules matched. Full controls
+made 320 deletion probes, evaluated 312 proposals and rejected 32 at the guard;
+none was accepted. Its output metrics exactly match the movable baseline.
+The [API comparison receipt](e22_routed_api_results.json) records the source
+revision, hashes and diagnostics. The measured full-loop cost is about 3.4
+times the movable baseline here, without a quality improvement.
 
-The movable bank without row controls has the lowest output error at this
-budget. Full row controls improve on the frozen bank while taking about three
-times the movable baseline's training time. This comparison establishes the
-measured output quality and cost for one synthetic task; it does not establish
-a quality advantage for full row controls over the movable baseline. Keep that
-baseline in subsequent Sliders validation. The
-[machine-readable receipt](e22_routed_spatial_results.json) records the shapes,
-matched-input checks, diagnostics and source revision/hashes used for these
-numbers. Adding the optional checkpointed forward does not alter the ordinary
-comparison path.
+Forty updates are inside KA2's initial 799 pure-A calls. A fixed continuation
+through 1,200 updates, retaining matched initialization, batches and noise,
+gives this clean final-grid RMSE trajectory:
+
+| Updates | Frozen bank | Movable bank, controls off | Full `e22_routed` |
+| ---: | ---: | ---: | ---: |
+| 40 | .167288 | .210221 | .210221 |
+| 160 | .026650 | .017721 | .017721 |
+| 400 | .012024 | .008815 | .008815 |
+| 800 | .008263 | .006100 | .006100 |
+| 1,200 | .014569 | .005540 | .005540 |
+
+Full controls accepted no moves throughout this continuation. The movable bank
+improves on the frozen arm at the later checkpoints; the row controls provide
+no observed extra quality on this task. Final maximum token errors are .047025
+for the frozen bank and .025185 for both movable modes. The third grid remains
+outside training and proposal decisions. This is one fixed trajectory, with
+no seed sweep, endpoint selection or convergence guarantee. The
+[trajectory receipt](e22_routed_api_trajectory.json) includes every checkpoint;
+its exploratory elapsed times include validation and shared-device effects,
+so use the separate 40-update receipt for the cost comparison.
+
+## Historical fixture and row-state diagnosis
+
+The earlier comparison used the hand-built conformance initialization:
+
+| Historical 40-update arm | Held-out RMSE | Maximum token error |
+| --- | ---: | ---: |
+| Frozen bank | .078747 | .179697 |
+| Movable bank, controls off | .023803 | .068836 |
+| Full controls, current row-state reset | .031008 | .075403 |
+| Full controls, accepted commits suppressed (diagnostic) | .023803 | .068836 |
+| Full controls, parent Adam moments inherited (diagnostic) | .023454 | .083046 |
+
+The original [receipt](e22_routed_spatial_results.json) is retained with its
+historical revision and hashes. It describes a deliberately constructed
+lifecycle fixture, rather than the current API-initialized quality comparison.
+The [diagnostic receipt](e22_routed_formulation_diagnostics.json) contains the
+exact reproduction, accepted-move observations and two matched diagnostic
+arms. The latter preserve batch and paired/DV12 noise traces; neither changes
+the validation grid or uses it to select moves.
+
+Suppressing actual commits while keeping probes and proposal evaluation active
+reproduces the movable baseline exactly. Inheriting the parent's Adam moments
+for both moved rows removes the mean-RMSE disadvantage, with the other
+controller/history resets retained. Its maximum error worsens, so this is a
+causal diagnostic, not a qualified replacement law.
+
+The current routed commit clears moved-row first/second moments and AMSGrad
+maxima while keeping the optimizer's shared step counter. With beta1=0 and
+beta2=.999, the next nonzero row update after a late reset can be roughly
+5.7–6.3 times a fresh Adam update at the observed steps 32–39, before other
+controls. Tiny immediate gains can therefore precede substantially different
+subsequent learning. A coherent split-state transport or row-local optimizer
+age needs a late-step regression that checks the next update's size. For exact
+half-mass duplication, halving first moments and quartering second moments is
+a mathematical starting point to validate, rather than a proven rule for all
+coupled splits.
+
+There is also a metric mismatch. At step 32, an accepted move lowered guard
+feature error from .0618101 to .0617447 while increasing guard RMSE from
+.0688192 to .0688366 and held-out RMSE from .0666459 to .0666674. Step 35
+showed the same disagreement. A learned-feature guard protects its own metric;
+it does not guarantee lower raw output error. Applications that require paired
+output accuracy should consider an additional output-error guard on protected
+contexts, leaving the final validation grid untouched.
+
+Exact duplicate proposals preserve parent mass after retiring the child and
+add no distinct routing code; identical cloned rows remain symmetric under
+gradient updates between structural moves. Counts labeled `splits` include those replacements and
+should not be read as an equal number of new independent routing components.
+
+The RpGAN signs match the relativistic paired objective. The
+[R3GAN analysis](https://arxiv.org/html/2501.05441v1) establishes local
+convergence under its assumptions, without qualifying this extra row-state
+transport or guaranteeing monotone output RMSE. Keep the movable baseline,
+both mean and maximum output error, and complete trajectories in Sliders
+validation. The initialization correction fixes the comparison setup; the
+routed optimizer-state and guard questions remain ParticleGAN work.
