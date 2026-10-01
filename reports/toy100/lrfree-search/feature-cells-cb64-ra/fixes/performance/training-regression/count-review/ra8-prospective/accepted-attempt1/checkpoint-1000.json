@@ -1,0 +1,292 @@
+{
+  "status": "VALID",
+  "scope": "sealed prospective saved endpoint; no model/optimizer update",
+  "step": 1000,
+  "checkpoint_sha256": "1b258612f19bede0119804b6c791f5d977d7d99f68fe7bdef9e931f5f64f4b77",
+  "receipt_sha256": "cb90db457828339a952341d90fb695a5c2a24e0a01d9b3d8cd09f4d19187bfc0",
+  "checks": {
+    "sealed_post_save_log": true,
+    "record_and_metrics_exact": true,
+    "matched_sources_and_init": true,
+    "genuine_quarter_generator_and_sigma_base_rates": true,
+    "prior_and_critic_base_rates_exact": true,
+    "population_state_load_exact": true,
+    "old_law_atomic_rejections": [
+      "old-law",
+      "wrong-level",
+      "mask-dtype"
+    ],
+    "population_stamp_and_coverage_consistent": true,
+    "moved_row_reset_ledger_exact": true,
+    "graph_bounded_symmetric": true,
+    "novel_children_without_seed_links": true,
+    "common_count_family_and_phase_budget": true,
+    "paired_birth_support_and_true_certificate_accounting": true,
+    "semantic_timing_fields": [
+      "trainer.birth_death.last.eval_seconds"
+    ],
+    "last_metadata_json_serializable": true,
+    "rng_cpu_uint8": true,
+    "backend7_geometry_stamp_consistent": true,
+    "FIFO_step_snapshot_history_exact": true,
+    "paired_average_atomic_rejections": [
+      "old-backend6",
+      "wrong-geometry-policy",
+      "boolean-step",
+      "future-step"
+    ]
+  },
+  "population": {
+    "active": false,
+    "mask_rows": 0,
+    "required_rows": 973,
+    "s": 1.0,
+    "b": 32.0,
+    "last_decisive": 1,
+    "undo_s": null,
+    "coverage_rejections": 1,
+    "expiries": 0,
+    "accepted_stationary": 0,
+    "rebases": 123,
+    "last_population": {
+      "event": "decision",
+      "step": 696,
+      "participating_rows": 591,
+      "required_rows": 973,
+      "coverage_rejected": true,
+      "scheduling_decision": "inconclusive"
+    },
+    "last_decision": {
+      "decision": "inconclusive",
+      "step": 696,
+      "tested_b": 16.0,
+      "verdict_b": -1,
+      "verdict_2b": -1,
+      "evidence_scale": 16.0,
+      "t_b": -2.8791529728078697,
+      "t_2b": -4.692073901626567,
+      "mean_r_b": -0.06979460843528311,
+      "mean_r_2b": -0.11138333093064527,
+      "n_b": 12,
+      "n_2b": 6,
+      "early": false,
+      "log_bf_b": NaN,
+      "log_bf_2b": NaN
+    },
+    "log": [
+      [
+        24,
+        "drift",
+        1.0,
+        4.0
+      ],
+      [
+        120,
+        "inconclusive",
+        1.0,
+        8.0
+      ],
+      [
+        312,
+        "inconclusive",
+        1.0,
+        16.0
+      ],
+      [
+        696,
+        "inconclusive",
+        1.0,
+        32.0
+      ]
+    ],
+    "current_window_participants_b": 299,
+    "current_window_participants_2b": 152
+  },
+  "paired_average": {
+    "stamp": {
+      "schema": 1,
+      "policy": "ema_support_inside_current_real_group_Q_v1",
+      "snapshot": 125,
+      "step": 1000,
+      "rows": 1024,
+      "required": 973,
+      "cells": 64,
+      "rank": 8,
+      "groups": 25,
+      "calibration_rows": 512,
+      "chart_valid": true,
+      "duplicate_ok": true,
+      "finite_rows": 1024,
+      "same_group_rows": 952,
+      "ema_eligible_rows": 642,
+      "coherent_rows": 638,
+      "eligible": false
+    },
+    "age_real_rows": 0,
+    "age_steps": 0,
+    "eligible_now": false,
+    "derived_served_model": "fast",
+    "chart_absent_semantic_view": true,
+    "rejected_atomic_controls": [
+      "old-backend6",
+      "wrong-geometry-policy",
+      "boolean-step",
+      "future-step"
+    ],
+    "limitation": "Empirical anti-blur FIFO lease; no every-update support/stationarity/equivalence or quality certificate."
+  },
+  "serving": {
+    "served_model": "fast",
+    "derived_from_frozen_RA8_geometry_predicate": true,
+    "average_rate": 0.0078125,
+    "note": "Saved tensors are FAST training iterates; serving derives from the frozen empirical geometry lease, independently of table stationarity."
+  },
+  "base_learning_rates": [
+    [
+      0.0010625,
+      0.0085,
+      0.0010625
+    ],
+    [
+      0.00425
+    ]
+  ],
+  "applied_learning_rates": [
+    [
+      0.0001328125,
+      0.0085,
+      0.0010625
+    ],
+    [
+      0.0031874988883657425
+    ]
+  ],
+  "birth_counters": {
+    "evals": 125,
+    "dim_skips": 0,
+    "discoveries": 2325,
+    "realised_deaths": 6201,
+    "realised_births": 6201,
+    "stays": 0,
+    "moves": 6201,
+    "matched": 5728,
+    "normalised": 0,
+    "waited_deaths": 0,
+    "waited_births": 0,
+    "stale_resets": 94550,
+    "iso_evals": 125,
+    "iso_flagged": 74594,
+    "iso_acted": 1,
+    "iso_skipped": 122,
+    "iso_moves": 0,
+    "iso_dup_skips": 0,
+    "cell_evals": 125,
+    "cell_discoveries": 2325,
+    "ordinary_moves": 6201,
+    "feature_rebuilds": 125,
+    "feature_distance_cells": 265772672,
+    "projection_products": 3015843840,
+    "count_test_terms": 535020,
+    "feature_forward_rows": 390201,
+    "invalidated_cells": 4823,
+    "novel_birth_moves": 473,
+    "novel_birth_attempts": 478
+  },
+  "last_phase": {
+    "step": 1000,
+    "ordinary_mass_moves": 0,
+    "ordinary_support_moves": 8,
+    "ordinary_global_moves": 39,
+    "ordinary_novel_birth_moves": 4,
+    "ordinary_copy_moves": 47,
+    "ordinary_moves": 51,
+    "iso_moves": 0,
+    "moves": 51
+  },
+  "row_evidence": {
+    "mature_rows": 0,
+    "flags": 0,
+    "neff_median": 11.941976038445985,
+    "neff_max": 84.86757282866411
+  },
+  "graph": {
+    "edges": 567,
+    "max_degree": 5
+  },
+  "metrics": {
+    "precision": 0.5364990234375,
+    "coverage": 25,
+    "mass_tv": 0.4635009765625,
+    "centre_distance": 0.0993746668100357,
+    "covered_centroid_rms": 0.01865362748503685,
+    "supported_mass": [
+      0.0216064453125,
+      0.0189208984375,
+      0.0218505859375,
+      0.021728515625,
+      0.033935546875,
+      0.01318359375,
+      0.010498046875,
+      0.0166015625,
+      0.0174560546875,
+      0.0206298828125,
+      0.0150146484375,
+      0.0233154296875,
+      0.015380859375,
+      0.025390625,
+      0.0218505859375,
+      0.0174560546875,
+      0.0220947265625,
+      0.0289306640625,
+      0.0198974609375,
+      0.0223388671875,
+      0.025146484375,
+      0.0274658203125,
+      0.0244140625,
+      0.0235595703125,
+      0.02783203125
+    ],
+    "unsupported_mass": 0.4635009765625,
+    "clean_particle_centres": {
+      "precision": 0.611328125,
+      "coverage": 25,
+      "mass_tv": 0.388671875,
+      "centre_distance": 0.09084215015172958,
+      "covered_centroid_rms": 0.024156302213668823,
+      "supported_mass": [
+        0.0244140625,
+        0.0234375,
+        0.0283203125,
+        0.0224609375,
+        0.0380859375,
+        0.01171875,
+        0.01171875,
+        0.0224609375,
+        0.0244140625,
+        0.0244140625,
+        0.017578125,
+        0.025390625,
+        0.01953125,
+        0.0263671875,
+        0.021484375,
+        0.01953125,
+        0.0263671875,
+        0.0302734375,
+        0.0205078125,
+        0.025390625,
+        0.025390625,
+        0.03515625,
+        0.029296875,
+        0.025390625,
+        0.0322265625
+      ],
+      "unsupported_mass": 0.388671875
+    }
+  },
+  "quality_verdict": null,
+  "quality_scope": "Watcher records frozen metrics only; numerical queue owns strict quality adjudication.",
+  "overall_target": "Toy AND original full Grid100 required; intermediate metrics have no acceptance verdict.",
+  "optimizer_updates": 0,
+  "new_seeds": 0,
+  "cuda_initialized": false
+}

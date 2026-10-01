@@ -1,0 +1,38 @@
+[
+  {
+    "name": "gpu-slot",
+    "pid": 383348,
+    "command": [
+      "/tmp/pr38-default-env/bin/python",
+      "-u",
+      "-B",
+      "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/gpu_slot.py",
+      "--queue",
+      "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-recovery",
+      "--reason",
+      "frozen RA4 same-law GPU contracts and all original quality gates",
+      "--",
+      "/tmp/pr38-default-env/bin/python",
+      "-u",
+      "-B",
+      "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/iteration-4/run_gpu.py"
+    ],
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/iteration-4/gpu-slot.log"
+  },
+  {
+    "name": "canonical-monitor",
+    "pid": 383349,
+    "command": [
+      "/tmp/pr38-default-env/bin/python",
+      "-u",
+      "-B",
+      "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/monitor_validation.py",
+      "--validation",
+      "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4",
+      "--watch",
+      "--output",
+      "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/ra4-validation-monitor"
+    ],
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/ra4-validation-monitor.log"
+  }
+]

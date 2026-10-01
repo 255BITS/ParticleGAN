@@ -1,0 +1,19 @@
+{
+  "command": [
+    "/tmp/pr38-default-env/bin/python",
+    "-u",
+    "-B",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/nested_slot.py",
+    "--lane",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10",
+    "--through",
+    "2"
+  ],
+  "pid": 1041629,
+  "startticks": "167551865",
+  "started_UTC": "2026-09-30T13:08:18.497917+00:00",
+  "log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/results/RA10-grid-driver.log",
+  "source_verification_sha256": "efe09f54cfdc196d37abe42598641ea1035c77324f8af57c4f7161af29d02dc6",
+  "numerical_parallelism": 1,
+  "scope": "Original full grid100, 7000 updates, all five terminal clouds and independent 100k holdout"
+}

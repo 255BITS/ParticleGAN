@@ -1,0 +1,31 @@
+{
+  "status": "PASS_CPU_EVIDENCE",
+  "receipt": "joint-review.json",
+  "local_artifact_sha256": {
+    "JOINT-REPORT.md": "fb0f46320c02c5410db1747fc14bd18c29c5d5528d1f6e534ad0d0567f248b6f",
+    "audit_joint.py": "9935b326389e681f37702181f7659fde24f48b05de9995a597edcaf3a671a69c",
+    "joint-review.json": "c127abbb09432f92cb4fb5fc14b5f5fdd8d99b096a074e5d205de7fdf548988f",
+    "joint-review-attempt1.log": "c127abbb09432f92cb4fb5fc14b5f5fdd8d99b096a074e5d205de7fdf548988f",
+    "freeze_followup_reviews.py": "f92c4f5c3b099989a29d57689fbbeb47738f0b2487b965ba0a5ad262b5337315"
+  },
+  "reviewed_source_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/audit_joint.py": "9935b326389e681f37702181f7659fde24f48b05de9995a597edcaf3a671a69c",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/joint-count/pkg-joint-count/particlegan/feature_cells.py": "ada7f24862d915d1d7f768270d46a6c15701cfe949b23f4b9782fb74f9cade9f",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/joint-count/inputs.pt": "cbfa80167e106709ba534cac8f7f3fd3971148c60a9999b6e3975ddc19338904",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/joint-count/prepare-inputs.json": "fea3e5a8b049c6d2ba2d86d018a13761af4bffd3d70c67cfd47718a219d34b73",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/joint-count/PROTOCOL.md": "22c665479e83f46d49a425ca8482e00f8ca075aa090820dfc3b03f4dc41cb983",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/pkg-count-recovery/particlegan/feature_cells.py": "2f55fb6da21d2dc61645d4c9a2f0299f3f652ee7027de235661c8b2cce2f708a",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/support-count/pkg-support-count/particlegan/feature_cells.py": "a2be31d6dd4457dc9e35b9d19dacefe579faaf1601d50329699079e1f9de1dd9"
+  },
+  "archived_original_path_to_retained_copy": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/joint-count/inputs.pt": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/joint-count/inputs-attempt1.pt",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/joint-count/prepare-inputs.json": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/joint-count/prepare-inputs-attempt1.json"
+  },
+  "external_artifact_sha256": {},
+  "previous_independent_freeze_sha256": "615ea0f4b7bb5cce53b1541df096e33ff3988dcabbf268d4def8f172a028d024",
+  "previous_frozen_artifacts_and_sources_unchanged": true,
+  "cuda_initialized": false,
+  "optimizer_updates": 0,
+  "new_seeds": 0,
+  "scope": "Partition, conditional null and action contracts; no learned quality claim"
+}

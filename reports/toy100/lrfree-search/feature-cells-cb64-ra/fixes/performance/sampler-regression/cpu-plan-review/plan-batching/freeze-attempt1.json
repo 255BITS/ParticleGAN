@@ -1,0 +1,9 @@
+{
+  "status": "FREEZE_REJECTED",
+  "reason": "Contract tool hash changed after final-cpu-01 passed; source and inputs unchanged",
+  "receipt_contract_sha256": "d230020d4b0c63f0fc58eeb8331ded9f2b314e8f6a41ba5c54aaf05531eb0fb4",
+  "current_contract_sha256": "f92b0b466fa34bd187061cf48b0064db09f96fc2ed36a3e2414ba6bdb5871742",
+  "input_sha256": "3e8deeb2fe534d28cf3731a4694c0543e280d2de270e0d9644731d9ec40057f2",
+  "proposal_source_sha256": "e6d2823d8e862dd8b29182cf0988325328523be0e77ae1fb2ea964707b34ad7f",
+  "action": "Retain prior passing receipt; rerun same short fixed proof against current contract hash"
+}

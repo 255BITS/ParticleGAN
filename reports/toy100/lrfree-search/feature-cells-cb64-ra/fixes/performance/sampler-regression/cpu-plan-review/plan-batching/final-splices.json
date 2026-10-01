@@ -1,0 +1,37 @@
+{
+  "reference_package_root": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/global-count/pkg-global-count",
+  "proposal_package_root": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/plan-batching/pkg-PLAN-FINAL",
+  "base_source_sha256": "1d3c90aa3b72d086df0defcc8c356e48778310f005473e8c5c271afa44f89d76",
+  "proposal_source_sha256": "e6d2823d8e862dd8b29182cf0988325328523be0e77ae1fb2ea964707b34ad7f",
+  "helper_source_sha256": "6a6a6b042f4290d8997b7252e2e16ef08476428f01d202d426af11882c9f4b88",
+  "ast_splices": [
+    {
+      "kind": "function",
+      "name": "_group_integer_allocate",
+      "base_ast_sha256": null,
+      "proposal_ast_sha256": "1283e6b0a61295ef813ed70df3f540fb73065410113b74bcb8fe86fde19303cd"
+    },
+    {
+      "kind": "method",
+      "owner": "FeatureCellSnapshot",
+      "name": "_ordinary_mass_transport",
+      "base_ast_sha256": "b798de8c3cda670d06db4a59139b17d1521fd6d4cd1d383e4d56a431f26c07ec",
+      "proposal_ast_sha256": "1f89611cb53bacc0d85da4349e99952dd808933a001e7eeddaa9527911fe77f1"
+    },
+    {
+      "kind": "method",
+      "owner": "FeatureCellSnapshot",
+      "name": "_ordinary_support_transport",
+      "base_ast_sha256": "4897b49d16e2cb58867e69af3f067e127ac04de4b284cf75848e9d3bdb270eb1",
+      "proposal_ast_sha256": "829498177df2d92377fb5e47b8542b6f072c83e9fc89743fe2448d0dd26c9c75"
+    },
+    {
+      "kind": "method",
+      "owner": "FeatureCellSnapshot",
+      "name": "_ordinary_global_transport",
+      "base_ast_sha256": "a9c7fde9f1e066d5a68db9f8f43c6fa8e601d0b1f2ff814e16fa12185f24f2d5",
+      "proposal_ast_sha256": "b8362c5cb830a2cf3c0d2ad3bd9cea891984f0b8d41ac1611372fe7160df3031"
+    }
+  ],
+  "script_sha256": "9a3a838f1116816bb16e06fb2a9a3b058f6fdad24324f8f35ce86412740427ce"
+}

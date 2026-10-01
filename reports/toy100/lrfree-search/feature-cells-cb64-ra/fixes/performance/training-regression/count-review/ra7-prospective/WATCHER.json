@@ -1,0 +1,22 @@
+{
+  "status": "STARTED",
+  "utc": "2026-09-30T06:13:26.010338+00:00",
+  "pid": 673818,
+  "startticks": 165062616,
+  "command": [
+    "/tmp/pr38-default-env/bin/python",
+    "-u",
+    "-B",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra7-prospective/audit_checkpoints.py",
+    "--watch"
+  ],
+  "cpu_only": true,
+  "CUDA_VISIBLE_DEVICES": "",
+  "scope": "sealed saved-state audit only; no training/replay/emission",
+  "log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra7-prospective/watcher.log",
+  "helper_sha256": "bbaaad0a8b37163b38818d4bbfb813559d78deae75c5a4cea2fdfe2a34bf1070",
+  "parent_queue_pid": 665153,
+  "parent_queue_startticks": 165013212,
+  "expected_ready_sha256": "f300089ce4fece3a812b890d4060e0567e833dddd236e5a955993f65ef15e1dd",
+  "expected_lane_freeze_sha256": "1724fc603970338b0ae94d58d6055a734e3cd424fcd514a53bb1ca9297426b3d"
+}

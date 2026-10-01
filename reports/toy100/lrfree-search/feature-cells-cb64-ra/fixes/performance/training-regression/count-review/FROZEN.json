@@ -1,0 +1,36 @@
+{
+  "scope": "Independent count partition, exact conditional law, ledger/source and lineage state audit",
+  "status": "PASS_CPU_CONTRACTS",
+  "local_artifact_sha256": {
+    "REPORT.md": "bc49cd20a92f0562fb52e973ebca38421118bee7097fb1198b3ef1c09ad67e46",
+    "PROTOCOL.md": "8a19a2d74b3b208403d33f75b62fe6ab3607bd135d55b4bd2bd513e631bb8646",
+    "audit_counts.py": "7c6f2eec9923f3b4c65348109d6134503b625cc13f359bd6726fd0409d5251d8",
+    "audit_lineage.py": "b5639e48d8ffcdc57484eff99217f7ebc87bb2cea8564ba93e434d2bd8490c7b",
+    "count-review.json": "939e69b12f6daca86ee402e3fc41408b8b30b9157d041a6f4a4d6bd5a4359ef8",
+    "lineage-review.json": "373faf424781378e0b05c1aa57b40dd2d52f69c8aaacac7a8517f9641846e59c",
+    "count-review.log": "939e69b12f6daca86ee402e3fc41408b8b30b9157d041a6f4a4d6bd5a4359ef8",
+    "lineage-review.log": "373faf424781378e0b05c1aa57b40dd2d52f69c8aaacac7a8517f9641846e59c",
+    "failed-lineage-review.log": "3d5a6f02551eec852aacc8b2a15092c2c617c61fdeffb464a932b931f790d96f"
+  },
+  "reviewed_source_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/audit_counts.py": "7c6f2eec9923f3b4c65348109d6134503b625cc13f359bd6726fd0409d5251d8",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/support-count/pkg-support-count/particlegan/feature_cells.py": "a2be31d6dd4457dc9e35b9d19dacefe579faaf1601d50329699079e1f9de1dd9",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/pkg-count-recovery/particlegan/feature_cells.py": "2f55fb6da21d2dc61645d4c9a2f0299f3f652ee7027de235661c8b2cce2f708a",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/snapshot-1000.pt": "6c6dac149ce7b77b835366c1a5944848d3754dd1b8adde583aa6ac29e276b62a",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/audit_lineage.py": "b5639e48d8ffcdc57484eff99217f7ebc87bb2cea8564ba93e434d2bd8490c7b",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA2/particlegan/feature_cells.py": "080dccbc404e1fe4112cd18275eaf94b8f68e6086996b88b5f9b5718770573c1",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/geometry/training-regression/pkg-LINEAGE/particlegan/feature_cells.py": "23c70cd51c7171a272f1b21fa2310c7a15a670b5bf9777c8029af55a5ba80622",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/geometry/training-regression/pkg-LINEAGE/particlegan/training.py": "7edd9cb522357c49021719f8ce63e2cc9eec3a3b41c0f89219eab172e13b1c58"
+  },
+  "inspected_owner_receipt_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/FROZEN.json": "aa1563313bf66fb635ede78bfa9b0dc8904f6a84ef0c446103b4e39932317640",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/support-count/cpu-check.json": "1139929956059b73aa19476214f3a8cc3d1c254e525b1a1baf4fcb9b6b50f888",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/geometry/training-regression/cpu-tests-final.json": "6574491cc8705de2dbb4f0397f61e2d29fa1a1abf19900b91d08a533849258b6"
+  },
+  "parent_diagnosis_all_frozen_hashes_verified": true,
+  "cuda_initialized": false,
+  "optimizer_updates": 0,
+  "new_seeds": 0,
+  "learned_quality_qualified": false,
+  "remaining_work": "Root complete-source initialization and GPU learned validation; separate grid100 JSON analysis requested later"
+}

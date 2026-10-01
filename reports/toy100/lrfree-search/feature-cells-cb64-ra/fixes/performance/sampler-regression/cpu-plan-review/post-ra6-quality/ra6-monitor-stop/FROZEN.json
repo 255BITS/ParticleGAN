@@ -1,0 +1,13 @@
+{
+  "status": "FROZEN_CPU_MONITOR_STOP",
+  "utc": "2026-09-30T06:05:38.479987+00:00",
+  "source_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra6-quality/ra6-monitor-stop/CHECKER-IDENTITY.json": "2eb6413826a408e45e6fbde1da36be479cd3824b2d1035b014e0bb81531265e8",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra6-quality/ra6-monitor-stop/FINAL-FROZEN.json": "24990c2af5f0f5ee923fd17a9295a67acdd69fe12f6c8ffd4cb1627f7b0741c6",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra6-quality/ra6-monitor-stop/FINAL-RECEIPT.json": "59b0b13a9e30c4752d033fffb7359f7c0f03b57b4901e3b4a75ae636640609ce",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra6-quality/ra6-monitor-stop/REPORT.md": "43d0a21e51419e977a9aa5b5d7bb56e41b6ce48fa0ecab995650cbce20075573",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra6-quality/ra6-monitor-stop/STOPPED-AT-TOY-FAILURE.json": "4dea0ef1e6644e9f5c1c28594e99888ae033d76f5a4a5b217efa229ab967782d",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra6-quality/ra6-monitor-stop/identity-before-stop.json": "ba44465aa72d17f1114d43a0bc0d26aa689849fd50907c02daf2b3ba20fe39cd",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra6-quality/ra6-monitor-stop/summary-at-stop.json": "070c07b423a50a890b466a7cdaabef48c08bee2f287d24d877881ce3090b4b68"
+  }
+}

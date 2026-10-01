@@ -1,0 +1,119 @@
+{
+  "status": "PASS",
+  "records": [
+    {
+      "task": "mode_hold",
+      "primary_status": "PASS",
+      "strict_acceptance": "ERROR",
+      "adapted_acceptance": "PASS",
+      "adapted_validity": "VALID",
+      "only_declared_option_changed": true,
+      "all_other_canonical_record_fields_exact": true,
+      "warnings": [],
+      "stream_deviations": 0,
+      "fixture_drift_observed": false
+    },
+    {
+      "task": "img_blobs4",
+      "primary_status": "PASS",
+      "strict_acceptance": "ERROR",
+      "adapted_acceptance": "PASS",
+      "adapted_validity": "VALID",
+      "only_declared_option_changed": true,
+      "all_other_canonical_record_fields_exact": true,
+      "warnings": [],
+      "stream_deviations": 0,
+      "fixture_drift_observed": false
+    },
+    {
+      "task": "vector_unequal_mass",
+      "primary_status": "PASS",
+      "strict_acceptance": "ERROR",
+      "adapted_acceptance": "PASS",
+      "adapted_validity": "VALID",
+      "only_declared_option_changed": true,
+      "all_other_canonical_record_fields_exact": true,
+      "warnings": [],
+      "stream_deviations": 0,
+      "fixture_drift_observed": false
+    }
+  ],
+  "guards": [
+    {
+      "case": "other_option",
+      "reasons": [
+        "original resolved options differ: {'evaluation_generate': 'indexed', 'serial_backward_argument': True, 'strict_streams': False, 'initialization': 'batch_feature_zero', 'diagnostics': True, 'save_final_state': True, 'ring_frozen_control': False, 'eval_output_noise': True, 'image_prior_perturb': False}"
+      ],
+      "status": "PASS"
+    },
+    {
+      "case": "wrong_candidate",
+      "reasons": [
+        "original header candidate digest is missing or differs"
+      ],
+      "status": "PASS"
+    }
+  ],
+  "source_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/audit_indexed_collector.py": "5071f6f3754919ef865ce8dce2d18edca1f80066587fec6c5317956c75979d9d",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/screens/collect.py": "3500fc335698b16741dc674ad9a0f6c30aa5084637cccd1ba6108b4f69049341",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/screens/lane.py": "a2c3b374a2757aca6f27be0237202fb414b7532c707c0f2fa4f58b64fd343bf5",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/iteration-4/READY.json": "8d5522e1e2bf7ae42baf9666bc63da4da490b03f1b62724b1ab759031341ee87",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra4-source-review.json": "9a3c4e05f5f8576da903ca5a55ebc5b103117e90e1d6ff987dd158ec5253d9d1",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/RA4-SOURCE-FROZEN.json": "0dfd64a6caf8d1e256c3eb868de155b3995e85b894ab87e2159f3cc98ccf5a64",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/screens/source-freeze.json": "329e61941685a35007ab514f59b779f5cf5870fdc2d73cf475dc85eab5e3c681",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/screens/READY.json": "1a506432e84f34ea9d4c2abeb1ffb4dcd8b4196a993c70ef057851141a533110",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/screens/candidate-options.json": "0ff74e93d37e8a38d2bdc6551f1c96a0a4271a40aeb9e4f5b9a4ed0f04a64664",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/screens/runs/mode_hold/result.json": "b1a7bc9232503b678f5a081d309459bbb0d2f08f9ecf615ed24b919baa725b35",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/screens/runs/mode_hold/job-header.json": "fdc069eb9208a2c0a4df4a917596ff9bd0ed97b909f3f3138167f06e5c8fbc84",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/screens/runs/mode_hold/execution-receipt.json": "2e70975aec9ee4eb9d2ac1d3e3d868ff6e25f2dcf8ca0c42d3efaf3351860182",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/screens/runs/mode_hold/metrics.jsonl": "b1feb70f4e61b2f2c87eb2a8ab84ffaa6897afcf0f206453d7916070151eb3fa",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/screens/runs/mode_hold/final-state.pt": "449bab07752f10dce02427f61ccacf0a4293d4708c1b2b8694cfef9355a8a28a",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/ra4-validation-monitor/canonical-receipts/screens/runs/mode_hold/acceptance-receipt.json": "298fb4649ad41ae3de24a10e76afb8e629e3ffff1f1efb5887dafa85c6f57bf1",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/screens/runs/img_blobs4/result.json": "fab5bfe91a9c5b74b1d0f32d9f20be6bb5312512575ba45b2a280113fcb89ab2",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/screens/runs/img_blobs4/job-header.json": "b676b16a45cb6c27ce91448dd589a83e85827c961a2b96bcd286378ea5a31ac0",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/screens/runs/img_blobs4/execution-receipt.json": "278a0b88b0dc851ea97c75105ac99c4387c80e8523ed1079aaade2d4a0ed2b3a",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/screens/runs/img_blobs4/metrics.jsonl": "712619c983040a3be9f28ce21505230bf1def77956f4a6a59cc83696d70b4d04",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/screens/runs/img_blobs4/final-state.pt": "288a5bc0959c494c49d1af306540744809b7b6e37bb39223e40667632602c84b",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/ra4-validation-monitor/canonical-receipts/screens/runs/img_blobs4/acceptance-receipt.json": "50af79626dbc2f4efc5a7b1814df0174e8915ad0c5ebddf0e73ade351f5ee20e",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/screens/runs/vector_unequal_mass/result.json": "8bdeb4055ffb3965d7bb3c7c95226a1f54d31f3e3247206d4278b435bff3785c",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/screens/runs/vector_unequal_mass/job-header.json": "9287c1aa1d49263651bf198f7c5d7ebb367c47baad374637b563ce89d4badd30",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/screens/runs/vector_unequal_mass/execution-receipt.json": "a22f11776463f8dafd2152f2f5b28e81d441eb42d84d488859137127c6011b37",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/screens/runs/vector_unequal_mass/metrics.jsonl": "07eef4f88f65c0c7844b9de3ead435f945763cb90ac445fc28eed1aae1795da7",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/screens/runs/vector_unequal_mass/final-state.pt": "3fa259a5716be8a5cb7d47ca94427a9cff48df45046373c7718fdf2a894bc89e",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/ra4-validation-monitor/canonical-receipts/screens/runs/vector_unequal_mass/acceptance-receipt.json": "e6ba855660e944cb88f05406eea4422b4338129a20611a899d3efee6ee3b19c1"
+  },
+  "expected_options_historical_plain": {
+    "eval_output_noise": true,
+    "strict_streams": true,
+    "save_final_state": true,
+    "diagnostics": true,
+    "evaluation_generate": "plain",
+    "serial_backward_argument": true,
+    "initialization": "batch_feature_zero",
+    "image_prior_perturb": false,
+    "ring_frozen_control": false
+  },
+  "expected_options_declared_ra4": {
+    "eval_output_noise": true,
+    "strict_streams": true,
+    "save_final_state": true,
+    "diagnostics": true,
+    "evaluation_generate": "indexed",
+    "serial_backward_argument": true,
+    "initialization": "batch_feature_zero",
+    "image_prior_perturb": false,
+    "ring_frozen_control": false
+  },
+  "adapter_change": "Only the in-memory collect.expected_options evaluation_generate literal: plain -> indexed",
+  "strict_receipts_unchanged": true,
+  "validation_inputs_unchanged": true,
+  "original_primary_verdicts_and_quality_metrics_unchanged": true,
+  "data_init_streams_schedules_scorers_thresholds_and_budgets_unchanged": true,
+  "historical_plain_evaluation_semantically_identical_claim": false,
+  "scope": "Saved artifacts accepted under the predeclared RA4 indexed sampler; historical plain-option mismatch remains recorded",
+  "cpu_only": true,
+  "cuda_initialized": false,
+  "optimizer_updates": 0,
+  "new_seeds": 0
+}

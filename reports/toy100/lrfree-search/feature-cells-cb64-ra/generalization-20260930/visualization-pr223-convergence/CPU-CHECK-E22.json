@@ -1,0 +1,24 @@
+{
+  "actual_observed_points": 4096,
+  "cuda_initialized": false,
+  "derived_geometry_original_objects_and_work_preserved": false,
+  "lazy_controller_record_object_preserved": true,
+  "limitation": "Actual CUDA window/control parity remains mandatory before full capture.",
+  "module_modes_parameter_versions_gradients_external_cursor_identical": true,
+  "native_dimensions_and_initialization": true,
+  "private_streams_and_global_CPU_rng_identical": true,
+  "public_semantic_state_identical": true,
+  "sampling_guard_pass": true,
+  "source_contract": {
+    "host_update_body_identical": true,
+    "original_draw_identical": true,
+    "original_gate_and_terminal_scorer_AST_identical": true,
+    "original_seed": 1234
+  },
+  "source_draw_change_for_CPU_witness": "fork_rng devices=[] only; CPU tensors and private generator",
+  "status": "CPU_PASS",
+  "strict_raw_bytes_NaN_and_signedzero_comparison": true,
+  "target_event_cloud_identical": true,
+  "training_updates": 0,
+  "variant": "E22"
+}

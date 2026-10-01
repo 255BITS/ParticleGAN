@@ -1,0 +1,11 @@
+{
+  "status": "HISTORICAL_SEAL_WRAPPER_ASSERTION",
+  "phase": "validate_independent_static_status_before_owner_ready",
+  "error": "AssertionError: PASS_STATIC_SOURCE_AND_SCALAR_STATE",
+  "cause": "The first post-exit wrapper expected generic PASS; the independent static receipt uses the specific PASS_STATIC_SOURCE_AND_SCALAR_STATE label.",
+  "numerical_contract_status": "PASS_UNCHANGED",
+  "source_input_mutation": false,
+  "ready_or_receipt_written": false,
+  "created_artifact": "RESOLUTION.patch, subsequently verified byte exact against current source",
+  "scope": "Retained failed sealing attempt; no numerical helper rerun or production source change."
+}

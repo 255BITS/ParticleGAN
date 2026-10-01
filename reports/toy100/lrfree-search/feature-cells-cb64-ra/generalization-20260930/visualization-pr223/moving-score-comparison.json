@@ -1,0 +1,134 @@
+{
+  "HQ_definition": "fraction within Euclidean distance <=0.09 of the nearest current target center",
+  "RA14_source": "validation-ra14-r2; original adapter-corrected failed/passed controls",
+  "RA15_source": "validation-ra15; fresh original-seed full1500-update reruns",
+  "acceptance": "both turns: modes>=95 and HQ>=0.9*the step500 pre-turn baseline HQ",
+  "modes_definition": "number of target centers with >=10 HQ samples in the 20000-point gate draw",
+  "plotting_task": "rotated100",
+  "protocol": {
+    "degrees_per_turn": 30,
+    "gate_points": 20000,
+    "rotate_every": 500,
+    "saved_plot_points": 4096,
+    "seed": 1234,
+    "steps": 1500
+  },
+  "rows": [
+    {
+      "RA14": {
+        "hq": 0.9416,
+        "modes": 100,
+        "passed": true
+      },
+      "RA15": {
+        "hq": 0.9379,
+        "modes": 100,
+        "passed": true
+      },
+      "added_target_rotation_deg": 30,
+      "hq_change_percentage_points": -0.37,
+      "minimum_hq": 0.8517600000000001,
+      "minimum_modes": 95,
+      "step": 1000,
+      "step_500_baseline_hq": 0.9464,
+      "task": "grid100"
+    },
+    {
+      "RA14": {
+        "hq": 0.9624,
+        "modes": 100,
+        "passed": true
+      },
+      "RA15": {
+        "hq": 0.962,
+        "modes": 100,
+        "passed": true
+      },
+      "added_target_rotation_deg": 60,
+      "hq_change_percentage_points": -0.04,
+      "minimum_hq": 0.8517600000000001,
+      "minimum_modes": 95,
+      "step": 1500,
+      "step_500_baseline_hq": 0.9464,
+      "task": "grid100"
+    },
+    {
+      "RA14": {
+        "hq": 0.9548,
+        "modes": 100,
+        "passed": true
+      },
+      "RA15": {
+        "hq": 0.9609,
+        "modes": 100,
+        "passed": true
+      },
+      "added_target_rotation_deg": 30,
+      "hq_change_percentage_points": 0.61,
+      "minimum_hq": 0.86481,
+      "minimum_modes": 95,
+      "step": 1000,
+      "step_500_baseline_hq": 0.9609,
+      "task": "rotated100"
+    },
+    {
+      "RA14": {
+        "hq": 0.8557,
+        "modes": 99,
+        "passed": false
+      },
+      "RA15": {
+        "hq": 0.9259,
+        "modes": 98,
+        "passed": true
+      },
+      "added_target_rotation_deg": 60,
+      "hq_change_percentage_points": 7.02,
+      "minimum_hq": 0.86481,
+      "minimum_modes": 95,
+      "step": 1500,
+      "step_500_baseline_hq": 0.9609,
+      "task": "rotated100"
+    },
+    {
+      "RA14": {
+        "hq": 0.9325,
+        "modes": 99,
+        "passed": true
+      },
+      "RA15": {
+        "hq": 0.934,
+        "modes": 100,
+        "passed": true
+      },
+      "added_target_rotation_deg": 30,
+      "hq_change_percentage_points": 0.15,
+      "minimum_hq": 0.85932,
+      "minimum_modes": 95,
+      "step": 1000,
+      "step_500_baseline_hq": 0.9548,
+      "task": "staggered100"
+    },
+    {
+      "RA14": {
+        "hq": 0.9728,
+        "modes": 100,
+        "passed": true
+      },
+      "RA15": {
+        "hq": 0.9476,
+        "modes": 100,
+        "passed": true
+      },
+      "added_target_rotation_deg": 60,
+      "hq_change_percentage_points": -2.52,
+      "minimum_hq": 0.85932,
+      "minimum_modes": 95,
+      "step": 1500,
+      "step_500_baseline_hq": 0.9548,
+      "task": "staggered100"
+    }
+  ],
+  "task_family": "original moving100 two-turn gates",
+  "uniform_HQ_gain_claimed": false
+}

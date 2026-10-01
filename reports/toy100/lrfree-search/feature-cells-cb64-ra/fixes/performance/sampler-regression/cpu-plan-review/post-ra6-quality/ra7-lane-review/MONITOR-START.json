@@ -1,0 +1,24 @@
+{
+  "status": "STARTED_OWNED_CPU_WATCHER",
+  "utc": "2026-09-30T06:11:49.818540+00:00",
+  "pid": 672040,
+  "startticks": "165052997",
+  "command": [
+    "/tmp/pr38-default-env/bin/python",
+    "-u",
+    "-B",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/monitor_validation.py",
+    "--validation",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7",
+    "--output",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/validation-cb64-ra7-monitor",
+    "--watch"
+  ],
+  "validation": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7",
+  "output": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/validation-cb64-ra7-monitor",
+  "monitor_sha256": "4ee4cae810342b675a39b269112ca907be3ffe88ae9cadab157e4933c487328b",
+  "audit_receipt_sha256": "52c25e155070fe5e3d2e28f3854b19d7438a49a697feb41691fc864cd2cda296",
+  "scope": "unchanged canonical saved-artifact checker; CPU only, no numerical reruns or CUDA context",
+  "live_log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra6-quality/ra7-lane-review/watcher.log",
+  "quality_verdict": null
+}

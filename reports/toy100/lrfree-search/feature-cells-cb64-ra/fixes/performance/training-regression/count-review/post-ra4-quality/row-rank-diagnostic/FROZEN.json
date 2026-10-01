@@ -1,0 +1,18 @@
+{
+  "status": "VALID",
+  "files": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra4-quality/row-rank-diagnostic/diagnose.py": "4deb3a1d93334be7ed98b705078b6b050ebb913410a91a2316477520380f18d3",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra4-quality/row-rank-diagnostic/receipt.json": "0d809f3d0a635aa0a58493e3410ae9e8621d349c6646f941cfae27358d9eb4f8",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra4-quality/row-rank-diagnostic/REPORT.md": "adf4999893b3b9d2f4dd3da97ce54a75fb24291179eaf4a5d1fb20cf9bb29ad9"
+  },
+  "input_source_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/row_evidence.py": "1e930343a714d7825d517f157683b8dda7d59048781637ba7475efbd0eab9606",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/training.py": "f5626e4e25f62b37aa76b162ef4d351ed45dad0b5c24dc2c0c385be3d42d6a7a",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/learned/training/toy/CB64-RA4/checkpoint-1250.pt": "56508352d9856ec0dff125d91cea8527db14f19b6a2a80cc0805ac1117509da0",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/learned/training/toy/CB64-RA4/checkpoint-2000.pt": "9d27cc4cfbb5b3b1ce9e209f41e850617a715f2c57e6c5ecb9c0ddd2c8634d2f",
+    "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/learned/training/toy/E22/checkpoint-1250.pt": "470eb6b4dd0d43e7a44639ad7ce72eb81349e3f51d4f60c0711a5ad92646c0d2",
+    "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/learned/training/toy/E22/checkpoint-2000.pt": "2d6d08c195b993120696cc4374fc3a1fa3c8fe35ff042d73e8ae9b06bc2e8c09",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/learned/training/toy/CB64-RA4/config.json": "fab170e44d5649334ea12586fa2efa9e3a9436a5f4a355fd16b011a497cf1118",
+    "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/learned/training/toy/E22/config.json": "e101a2385b54d8c10c2cf26e0a96cf923754c5b81ae5b78526ee3a2da1108752"
+  }
+}

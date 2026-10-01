@@ -1,0 +1,144 @@
+--- /ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA14-replay/particlegan/feature_cells.py
++++ /ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA15-partial-recovery/particlegan/feature_cells.py
+@@ -1578,7 +1578,9 @@
+                                               rank=self.settings["rank"],chunk=self.settings["chunk"])
+             self.snapshot = snapshot
+             # Freeze the scalar witness before any odd-count-driven action.
+-            mean_fixed,mean_stamp = prepare_mean_witness(self,trainer,snapshot,R)
++            partial_recovery = getattr(trainer,'mean_partial_recovery',False)
++            mean_fixed,mean_stamp = prepare_mean_witness(self,trainer,snapshot,R,
++                allow_partial_groups=partial_recovery)
+             pick = torch.randint(self.N,(self.N,),device=z.device,generator=self.stream)
+             F = self._capture_generated(trainer,z[pick],sigma=sigma,jitter=True,rows=pick)
+             flags,pvalues,_ = snapshot.support(q)
+@@ -1647,7 +1649,8 @@
+             # the pre-prefix witness and ranking directions stay fixed.
+             reserved = torch.cat((child,parent,iso_child,iso_parent,newborn,birth_plan["source_seed_rows"]))
+             mean_phase = run_mean_phase(self,trainer,snapshot,mean_fixed,mean_stamp,
+-                earlier_ordinary=len(child)+len(newborn),reserved_rows=reserved)
++                earlier_ordinary=len(child)+len(newborn),reserved_rows=reserved,
++                allow_partial_groups=partial_recovery)
+             mean_child,mean_parent = mean_phase["children"],mean_phase["parents"]
+             if len(mean_child):
+                 invalidated,affected = mean_phase["invalidated"],mean_phase["affected"]
+--- /ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA14-replay/particlegan/feature_policy.py
++++ /ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA15-partial-recovery/particlegan/feature_policy.py
+@@ -35,6 +35,12 @@
+         self.prior = SimpleNamespace(z=policy.table)
+         self.ema_prior = SimpleNamespace(z=policy.averaged_table)
+         self.opt_g = _TableOwner(policy.table_optimizer)
++
++    @property
++    def mean_partial_recovery(self):
++        """Partial occupied-group evidence follows an actual R1 fire only."""
++        detector = self.policy.surprise
++        return detector is not None and type(detector.fires) is int and detector.fires > 0
+ 
+     def __getattr__(self, name):
+         if name in ('G', 'D', 'ema_G', 'recipe', 'device', 'dtype', 'controller',
+--- /ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA14-replay/particlegan/mean_transport.py
++++ /ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA15-partial-recovery/particlegan/mean_transport.py
+@@ -131,6 +131,10 @@
+     reserved = torch.zeros(n, dtype=torch.bool, device=fast.metric.device)
+     reserved[reserved_rows] = True
+     legal = fast.eligible & ema.eligible & (fast.groups == ema.groups)
++    # A zero frozen weight is an inactive recovery group. Filter it before
++    # candidate ranking or any EMA-count division, including newly born rows.
++    legal &= (fixed.weights[fast.groups]>0) & (fixed.weights[ema.groups]>0)
++    legal &= fixed.ema_counts[ema.groups]>0
+     protected = torch.zeros_like(legal)
+     # Preserve an actual jointly eligible survivor in each occupied cell/view.
+     for view in (fast, ema):
+@@ -282,6 +286,8 @@
+         & (vf.categories == fast.categories[child_host]) & (ve.categories == ema.categories[child_host])
+         & (vf.groups == fast.groups[child_host]) & (ve.groups == ema.groups[child_host])
+         & (vf.groups == ve.groups))
++    retained &= (fixed.weights[vf.groups]>0) & (fixed.weights[ve.groups]>0)
++    retained &= fixed.ema_counts[ve.groups]>0
+     working = fixed.ema_means.clone()
+     old_psi = fixed.psi(ema.moment_metric[child_host], ema.groups[child_host])
+     new_psi = fixed.psi(ve.moment_metric, ve.groups)
+@@ -462,7 +468,7 @@
+ 
+ 
+ @torch.no_grad()
+-def prepare_mean_witness(backend,trainer,snapshot,real_features):
++def prepare_mean_witness(backend,trainer,snapshot,real_features,*,allow_partial_groups=False):
+     backend.counters['mean_evals']+=1
+     fixed=None;reason=None;projection=None
+     if not snapshot.valid_metric or snapshot.duplicate_fraction>Q:reason='invalid_or_duplicate_chart'
+@@ -473,7 +479,8 @@
+             observed=capture_outputs_features(backend,trainer,trainer.ema_G,trainer.ema_prior.z,projection)
+             backend.counters['mean_forward_rows']+=backend.N
+             if observed is None:reason='nonfinite_pre_mean_EMA_observation'
+-            else:fixed,reason=freeze_moment(snapshot,real_features[0::2],backend.reservoir[0::2],observed,projection)
++            else:fixed,reason=freeze_moment(snapshot,real_features[0::2],backend.reservoir[0::2],observed,projection,
++                                          allow_partial_groups=allow_partial_groups)
+     witness=(dict(valid=False,fires=False,reason=reason or 'no_valid_frozen_moment') if fixed is None
+         else odd_witness(snapshot,fixed,real_features[1::2],backend.reservoir[1::2]))
+     stamp=mean_diagnostics(witness,step=trainer.completed_steps+1,snapshot_serial=backend.snapshot_serial,
+@@ -501,7 +508,9 @@
+ 
+ 
+ @torch.no_grad()
+-def run_mean_phase(backend,trainer,snapshot,fixed,stamp,*,earlier_ordinary,reserved_rows):
++def run_mean_phase(backend,trainer,snapshot,fixed,stamp,*,earlier_ordinary,reserved_rows,allow_partial_groups=False):
++    if type(allow_partial_groups) is not bool:
++        raise TypeError('partial group recovery must be a boolean')
+     empty=torch.empty(0,dtype=torch.long,device=trainer.prior.z.device)
+     result=dict(children=empty,parents=empty,invalidated=None,affected=None,diagnostics=dict(stamp),packet=None)
+     diag=result['diagnostics'];budget=math.floor(Q*backend.N)-earlier_ordinary
+@@ -515,7 +524,10 @@
+     fast=observe_view(snapshot,None,coordinates=trainer.prior.z,cached_fast=True)
+     ema=observe_view(snapshot,observed.features,coordinates=trainer.ema_prior.z,projected_outputs=observed.projected_outputs)
+     means,counts=group_means(fixed.psi(ema.moment_metric,ema.groups),ema.groups,snapshot.mass_groups)
+-    if bool((counts==0).any()):diag['reason']='missing_current_EMA_group';return result
++    missing = counts==0
++    if allow_partial_groups:
++        missing = missing & (fixed.weights>0)
++    if bool(missing.any()):diag['reason']='missing_current_EMA_group';return result
+     action=replace(fixed,ema_means=means,ema_counts=counts)
+     baseline=float(action.energy());diag.update(objective_before_mean=baseline,objective_after_mean=baseline)
+     pairs=propose_pairs(snapshot,action,fast,ema,earlier_ordinary=earlier_ordinary,reserved_rows=torch.unique(reserved_rows).cpu())
+--- /ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA14-replay/particlegan/output_moments.py
++++ /ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA15-partial-recovery/particlegan/output_moments.py
+@@ -96,8 +96,10 @@
+ 
+ 
+ @torch.no_grad()
+-def freeze_moment(snapshot,even_features,even_raw,ema_observation,projection):
++def freeze_moment(snapshot,even_features,even_raw,ema_observation,projection,*,allow_partial_groups=False):
+     """No odd data or count-driven actions enter the fixed output geometry."""
++    if type(allow_partial_groups) is not bool:
++        raise TypeError('partial group recovery must be a boolean')
+     if not snapshot.valid_metric or snapshot.rank<=0 or snapshot.duplicate_fraction>Q:
+         return None,'invalid_or_duplicate_chart'
+     if projection is None or not 0<projection.rank<=MAX_RANK:return None,'invalid_output_projection'
+@@ -120,12 +122,20 @@
+     ema_chart=snapshot.transform(ema_observation.features)
+     ema_groups=topology[snapshot._assign_metric(ema_chart)[0]].cpu()
+     ema_means,ema_counts=group_means(psi(ema_observation.projected_outputs,ema_groups),ema_groups,snapshot.mass_groups)
+-    if bool((ema_counts==0).any()):return None,'missing_EMA_group'
++    missing = ema_counts==0
++    if bool(missing.any()) and not allow_partial_groups:return None,'missing_EMA_group'
+     residual=even_means-ema_means;lengths=residual.norm(dim=1)
+     directions=torch.where(lengths[:,None]>0,residual/lengths.clamp_min(1e-30)[:,None],torch.zeros_like(residual))
+     if not bool(torch.isfinite(directions).all()&torch.isfinite(ema_means).all()):return None,'nonfinite_frozen_direction'
++    weights = counts.double()/int(counts.sum())
++    if allow_partial_groups and bool(missing.any()):
++        # Preserve original real masses and every odd observation. Missing
++        # support remains the count/birth path's responsibility; this fixed
++        # moment says nothing about those groups and never activates them.
++        directions = torch.where(missing[:,None],torch.zeros_like(directions),directions)
++        weights = weights * (~missing)
+     return FixedOutputMoment(projection,centers,scales,even_means,ema_means,ema_counts,
+-        counts.double()/int(counts.sum()),directions,radius,projection.rank,snapshot.rank,snapshot.cells),None
++        weights,directions,radius,projection.rank,snapshot.rank,snapshot.cells),None
+ 
+ 
+ @torch.no_grad()
+@@ -153,4 +163,3 @@
+         lower_bound=float(lcb),zero_direction_observations=int((fixed.directions[groups].norm(dim=1)==0).sum()),
+         scalar_min=float(values.min()),scalar_max=float(values.max()),even_mass_objective=float(fixed.energy()))
+ 
+-

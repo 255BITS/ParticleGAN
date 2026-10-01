@@ -1,0 +1,12 @@
+{
+  "command": [
+    "/tmp/pr38-default-env/bin/python",
+    "-B",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/optimizer-surprise-dynamics/scalar-reconstruction/reconstruct.py"
+  ],
+  "cpu_only": true,
+  "inputs_sha256": "6b0011b236c4d6bff8799f44ad06dfe7fc5ee9d8b75336163ef333c98c4fa2b7",
+  "pid": 2009524,
+  "started_utc": "2026-09-30T21:39:12.510914+00:00",
+  "startticks": "170617266"
+}

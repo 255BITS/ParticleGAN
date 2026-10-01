@@ -1,0 +1,8 @@
+{
+  "status": "CANCELLED_BEFORE_TEST_EXECUTION",
+  "owned_pid": 2508216,
+  "owned_pid_start_ticks": 171894418,
+  "original_waiting_receipt_sha256": "7abbab7c52516cbdaceb3128f36dc7c54294b7e5b32b7668f229e3562208bab9",
+  "test_updates": 0,
+  "reason": "Read-only integration review confirmed two portability/checkpoint defects; latest source suite will run after fixes. Original package/lane/source guards preserved."
+}

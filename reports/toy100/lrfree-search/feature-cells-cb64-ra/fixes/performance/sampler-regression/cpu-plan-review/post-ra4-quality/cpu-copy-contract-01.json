@@ -1,0 +1,138 @@
+{
+  "created_utc": "2026-09-30T03:52:56.482680+00:00",
+  "status": "PASS",
+  "device": "cpu",
+  "scope": "saved-input mechanical contracts; possible copy parents, not historical actions or quality reruns",
+  "new_seeds": 0,
+  "optimizer_updates": 0,
+  "source_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra4-quality/check_paired_copy.py": "0473eeba58b8dd84ebd045476aff20366a081edc404c1907ecde66f94c5a5270",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra4-quality/diagnose_sampler.py": "b4c74c0a9d410ed4be6afcac0fd586094f9d544d9565fd22253607a7f54a82d6",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra4-quality/pkg-PAIR-EMA/particlegan/feature_cells.py": "ba3302f11afc0bb3d9f0d5554716e4bd3cf0f4550af4cbcd48a786c82bba8cbf",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/feature_cells.py": "a7f2d0f8794e109535358ea08ef43951449814acbdfca89705870df9f153f025",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/learned/training/toy/CB64-RA4/checkpoint-1250.pt": "56508352d9856ec0dff125d91cea8527db14f19b6a2a80cc0805ac1117509da0",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/learned/training/toy/CB64-RA4/checkpoint-2000.pt": "9d27cc4cfbb5b3b1ce9e209f41e850617a715f2c57e6c5ecb9c0ddd2c8634d2f",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation/screens/runs/grid100/final-state.pt": "4cc96c1defc5e6474785dbcd3e1e7d3c1432530d95596209e0102e8cd16833ab"
+  },
+  "source_proof": {
+    "only_changed_module": [
+      "feature_cells.py"
+    ],
+    "exact_ast_changes": [
+      "FeatureCellBirthDeath._move",
+      "FeatureCellBirthDeath.BACKEND_SCHEMA 4\u21925",
+      "FeatureCellBirthDeath.settings.copy_noise_policy"
+    ],
+    "restoring_three_changes_reconstructs_entire_ra4_module": true,
+    "training_api_sampling_serving_output_noise_count_law_unchanged": true
+  },
+  "cases": [
+    {
+      "case": "ra4-toy-1250/unique",
+      "rows": 128,
+      "fast_z_moments_history_graph_rng_bit_identical": true,
+      "single_noise_draw_accounting": true,
+      "ema_exact_own_geometry_placement": true,
+      "old_ema_radius_violation_rows": 115,
+      "new_ema_radius_violation_rows": 0,
+      "old_ema_radius_max_ratio": 4.540821552276611,
+      "both_versioned_caches_rebuilt": true
+    },
+    {
+      "case": "ra4-toy-1250/repeated-parent",
+      "rows": 9,
+      "fast_z_moments_history_graph_rng_bit_identical": true,
+      "single_noise_draw_accounting": true,
+      "ema_exact_own_geometry_placement": true,
+      "old_ema_radius_violation_rows": 9,
+      "new_ema_radius_violation_rows": 0,
+      "old_ema_radius_max_ratio": 1.6203901767730713,
+      "both_versioned_caches_rebuilt": true
+    },
+    {
+      "case": "ra4-toy-1250/simultaneous-parent-overwrite",
+      "rows": 2,
+      "fast_z_moments_history_graph_rng_bit_identical": true,
+      "single_noise_draw_accounting": true,
+      "ema_exact_own_geometry_placement": true,
+      "old_ema_radius_violation_rows": 2,
+      "new_ema_radius_violation_rows": 0,
+      "old_ema_radius_max_ratio": 2.1117043495178223,
+      "both_versioned_caches_rebuilt": true
+    },
+    {
+      "case": "ra4-toy-2000/unique",
+      "rows": 128,
+      "fast_z_moments_history_graph_rng_bit_identical": true,
+      "single_noise_draw_accounting": true,
+      "ema_exact_own_geometry_placement": true,
+      "old_ema_radius_violation_rows": 108,
+      "new_ema_radius_violation_rows": 0,
+      "old_ema_radius_max_ratio": 5.352255821228027,
+      "both_versioned_caches_rebuilt": true
+    },
+    {
+      "case": "ra4-toy-2000/repeated-parent",
+      "rows": 9,
+      "fast_z_moments_history_graph_rng_bit_identical": true,
+      "single_noise_draw_accounting": true,
+      "ema_exact_own_geometry_placement": true,
+      "old_ema_radius_violation_rows": 9,
+      "new_ema_radius_violation_rows": 0,
+      "old_ema_radius_max_ratio": 1.12544584274292,
+      "both_versioned_caches_rebuilt": true
+    },
+    {
+      "case": "ra4-toy-2000/simultaneous-parent-overwrite",
+      "rows": 2,
+      "fast_z_moments_history_graph_rng_bit_identical": true,
+      "single_noise_draw_accounting": true,
+      "ema_exact_own_geometry_placement": true,
+      "old_ema_radius_violation_rows": 2,
+      "new_ema_radius_violation_rows": 0,
+      "old_ema_radius_max_ratio": 2.4691615104675293,
+      "both_versioned_caches_rebuilt": true
+    },
+    {
+      "case": "ra2-grid100-final/unique",
+      "rows": 128,
+      "fast_z_moments_history_graph_rng_bit_identical": true,
+      "single_noise_draw_accounting": true,
+      "ema_exact_own_geometry_placement": true,
+      "old_ema_radius_violation_rows": 81,
+      "new_ema_radius_violation_rows": 0,
+      "old_ema_radius_max_ratio": 25.12251853942871,
+      "both_versioned_caches_rebuilt": true
+    },
+    {
+      "case": "ra2-grid100-final/repeated-parent",
+      "rows": 9,
+      "fast_z_moments_history_graph_rng_bit_identical": true,
+      "single_noise_draw_accounting": true,
+      "ema_exact_own_geometry_placement": true,
+      "old_ema_radius_violation_rows": 0,
+      "new_ema_radius_violation_rows": 0,
+      "old_ema_radius_max_ratio": 0.46186378598213196,
+      "both_versioned_caches_rebuilt": true
+    },
+    {
+      "case": "ra2-grid100-final/simultaneous-parent-overwrite",
+      "rows": 2,
+      "fast_z_moments_history_graph_rng_bit_identical": true,
+      "single_noise_draw_accounting": true,
+      "ema_exact_own_geometry_placement": true,
+      "old_ema_radius_violation_rows": 1,
+      "new_ema_radius_violation_rows": 0,
+      "old_ema_radius_max_ratio": 4.009183406829834,
+      "both_versioned_caches_rebuilt": true
+    }
+  ],
+  "resume": {
+    "new_backend_schema": 5,
+    "old_schema_and_forged_schema_missing_policy_rejected_before_mutation": true,
+    "post_copy_save_load_and_two_copy_continuation_bit_identical": true,
+    "lineage_exact_and_derived_cache_discarded": true
+  },
+  "sources_unchanged": true,
+  "cuda_initialized": false
+}

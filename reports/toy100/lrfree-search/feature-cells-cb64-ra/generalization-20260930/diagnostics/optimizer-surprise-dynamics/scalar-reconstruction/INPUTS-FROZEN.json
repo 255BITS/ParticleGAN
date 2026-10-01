@@ -1,0 +1,25 @@
+{
+  "command": "CUDA_VISIBLE_DEVICES='' OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 NUMEXPR_NUM_THREADS=1 /tmp/pr38-default-env/bin/python -B /ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/optimizer-surprise-dynamics/scalar-reconstruction/reconstruct.py",
+  "constraints": [
+    "closed scalar traces only",
+    "no model/PT/forward/update/draw/scoring/CUDA",
+    "exact existing detector thresholds"
+  ],
+  "sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/optimizer-surprise-dynamics/scalar-reconstruction/PROTOCOL.md": "912fb7b32ce7b80cb38ea5fc9ed1f5d75118668ad90aa5cc9b0893b85b999b65",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/optimizer-surprise-dynamics/scalar-reconstruction/reconstruct.py": "af3d4f7b5abb56238baedc5779e97235a332503ef172dbf84f165cc00251b96b",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-moving-observe/window-1000/trace.jsonl": "439f2ca9bb63d188674d8d9be68f05f50505717516e63bdbfc14fb07da7f0b4a",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-moving-observe/window-500/trace.jsonl": "c0435f810a5db39cd6fa64420807915812bfeac5e33645676943ae848a655f24",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-observe/mnist/trace.jsonl": "26f8b0ae35aeb3eac2e6eb6e25d1edab5dd3ef80a17d0eb8f2694ee98f2f9691",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-observe/toy/trace.jsonl": "58ca9b634ba8bd3a2d4b1f2e2fbfa29d3f03515334c482d17f70622da37f09d5",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-auto/particlegan/continuous.py": "3b21b688a536f5060ba92f6db3dd6da92a8acf25f48895031dd31181998c4bfa",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA13-settled/particlegan/continuous.py": "0342b0b19a6e5e177ec38840775886576d22e21dc6608e6aa2bb49aa53e1bef4"
+  },
+  "status": "FROZEN_CPU_SCALAR_INPUTS",
+  "traces": {
+    "mnist": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-observe/mnist/trace.jsonl",
+    "moving1000": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-moving-observe/window-1000/trace.jsonl",
+    "moving500": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-moving-observe/window-500/trace.jsonl",
+    "toy": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-observe/toy/trace.jsonl"
+  }
+}

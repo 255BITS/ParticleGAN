@@ -1,0 +1,13 @@
+{
+  "status": "FROZEN_PASS",
+  "files": {
+    "audit_lane.py": "304ca9ab66894977b85ae54a94cddb540fee5e1e4aa8fd7a04f60af31df3add3",
+    "receipt.json": "350f2541ed81acffe84fd2d03b346dad2d6e98eb7fd521e309fc3010d2122b57",
+    "REPORT.md": "d56d95b699124a20180245d801b06efdc4cf440f6054fe275ea729faade9d2eb",
+    "MONITOR-START.json": "994f496068feff8b73954d6493ed72c4579665a0df9bc4c0fe5098cdaa8a1b3e"
+  },
+  "evolving_excluded": [
+    "watcher.log",
+    "integration/review/validation-cb64-ra5-monitor/"
+  ]
+}

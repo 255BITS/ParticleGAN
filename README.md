@@ -168,6 +168,7 @@ transport their parent's Adam history at half mass.
 
 - [How the training formulation works](docs/ka2.md), including several critics and conditional critics
 - [E22](docs/e22.md): a schedule-free configuration for the native 100-Gaussian problems with no data-space statistics
+- [ParticleGAN Atlas](docs/atlas.md): illustrated E22 comparison, local population corrections and automatic backend selection
 - [Routed paired E22](docs/e22_routed.md): conditional row evidence, guarded moves and clean serving
 - [Shared-bank routing sites](docs/e22_routed_sites.md): sequential token routing and a matched spatial comparison
 - [Whole-model checkpoint replay](docs/e22_routed_sites.md#activation-checkpointed-whole-model-replay): per-site DV12 without repeated training draws or diagnostics

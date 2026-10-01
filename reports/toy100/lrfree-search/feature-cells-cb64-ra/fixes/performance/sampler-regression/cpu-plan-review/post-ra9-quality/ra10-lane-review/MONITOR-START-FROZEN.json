@@ -1,0 +1,22 @@
+{
+  "status": "PASS",
+  "scope": "FROZEN_OWNED_CPU_METADATA_WATCHER_START",
+  "utc": "2026-09-30T12:54:31.623995+00:00",
+  "source_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra9-quality/ra10-lane-review/MONITOR-START.json": "dfcee3d1662f74d0057de38fa55ff3534fcba56040f9597f4180fe50acff2c38",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra9-quality/ra10-lane-review/MONITOR-IDENTITY.json": "e74dc6a7967dc8258bead3abc16249eda3d72d1d86ff79e991949c8967b173da",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra9-quality/ra10-lane-review/start_monitor.py": "cca4d3bd1d9942e66d5f8ad31d48b456151df6c711e5482afe239ddd9f4b7077",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra9-quality/ra10-lane-review/FROZEN.json": "4bf756afb872a5389b7cdaa9c8291b1431786fa30925a430ca1662e6c80805c4",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/monitor_validation.py": "4ee4cae810342b675a39b269112ca907be3ffe88ae9cadab157e4933c487328b",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/source-freeze.json": "4cd1be039f2d6fb9bd12fe3d93bae60ca331bb68d77d365c9eadb4019bd8b856"
+  },
+  "pid": 1030112,
+  "startticks": 167460340,
+  "validation": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10",
+  "output": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/validation-cb64-ra10-monitor",
+  "source_freeze_sha256": "4cd1be039f2d6fb9bd12fe3d93bae60ca331bb68d77d365c9eadb4019bd8b856",
+  "lane_review_seal_sha256": "4bf756afb872a5389b7cdaa9c8291b1431786fa30925a430ca1662e6c80805c4",
+  "cpu_only": true,
+  "numerical_jobs_started": 0,
+  "live_monitor_log_excluded": true
+}

@@ -1,0 +1,25 @@
+{
+  "status": "FROZEN_READ_ONLY_SAVED_DIAGNOSIS",
+  "requested_milestone": 2000,
+  "analyzed_saved_endpoints": 10,
+  "files_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra6-quality/ra7-saved-diagnosis/ra7-step2000/INTERPRETATION.md": "b5ed43ef5ea8483af53861e93929c052532f01f40c7ecc1542be4305e30ff7d1",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra6-quality/ra7-saved-diagnosis/ra7-step2000/REPORT.md": "559f6f2565483060292aee38e3d4dfa09ca65e469b587957a0c6f5f98201adba",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra6-quality/ra7-saved-diagnosis/ra7-step2000/candidate-metrics-captured.jsonl": "29816a230cc67bd86c9dc68e22a302f96fb59e478078b20201d4e4c78efd2220",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra6-quality/ra7-saved-diagnosis/ra7-step2000/comparison-summary.json": "d099afd702bb7bd39330ebfae0a0911b0e09769ad85746b6ce4674a08931f36b",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra6-quality/ra7-saved-diagnosis/ra7-step2000/e22-metrics-captured.jsonl": "3b7ed570f47baaa152cb0a1a6b4daa899c2d97b755200090e24d2e16462648f0",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra6-quality/ra7-saved-diagnosis/ra7-step2000/motion-1000-2000.json": "7c80a7f057697497ef485cad73611e7691e91ba19106635d4d71c55e13fb7dac",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra6-quality/ra7-saved-diagnosis/ra7-step2000/ra4-metrics-captured.jsonl": "6751beed015d878d2445fb71e571cebe26014d1d85d3e21b421e1902c75302e8",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra6-quality/ra7-saved-diagnosis/ra7-step2000/receipt.json": "014ac5c5e99b10a62afe2e0b951b9a7166c2550e2c9e3d48728f796a73cfbcc6",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra6-quality/ra7-saved-diagnosis/FRAMEWORK.json": "515f152a6a195e49cbf9dc416ddbfb4dbef2b03b847bcebe308fbbc28fd6f19f",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra6-quality/ra7-saved-diagnosis/PROTOCOL.md": "cf926f4a0e7ef5fcb578ca756e71c636dbbdde6d598ed5bb3d6dfaf6585194e9",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra6-quality/ra7-saved-diagnosis/summarize_saved.py": "449dea47d095025409cd0e7b49546e84009e144e0f0c4670e8c65d0af59657b4",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra6-quality/ra7-saved-diagnosis/ra7-step2000.log": "0905bdaf2d51d1ab5a153f76a6691a60707e563ce4588f2d089d97e5e72f971e",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra6-quality/ra7-saved-diagnosis/ra7-step2000-summary.log": "a91d8f5c009a4587b0ee08f805ddd7409ce0de9a9f5daab66aa0cb19827056f4",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra6-quality/ra7-saved-diagnosis/ra7-motion-1000-2000.log": "672da0dd972372d29f46a102cacf6a7c1688f436f96b53057c5bd53042e6857f"
+  },
+  "cpu_only": true,
+  "quality_verdict": "SAVED_CUDA_TOY_PRECISION_AND_TV_FAIL",
+  "frozen_source_writes": 0,
+  "new_virtual_optimizer_probes": 0
+}

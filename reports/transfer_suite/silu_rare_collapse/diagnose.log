@@ -1,6 +1,0 @@
-# 4 episodes, 4 workers
-[    10s] leaky_orig   fail suffix=0 final particles=6 core_eig=0.45; per-observation lines in diagnose_leaky_orig.log
-[    10s] axis_silu    fail suffix=0 final particles=3 core_eig=0.00; per-observation lines in diagnose_axis_silu.log
-[    11s] linear_skip_d96_beta5 fail suffix=3 final particles=7 core_eig=0.27; per-observation lines in diagnose_linear_skip_d96_beta5.log
-[    12s] silu_raw_skip_d96 fail suffix=0 final particles=7 core_eig=-0.00; per-observation lines in diagnose_silu_raw_skip_d96.log
-# done in 12s

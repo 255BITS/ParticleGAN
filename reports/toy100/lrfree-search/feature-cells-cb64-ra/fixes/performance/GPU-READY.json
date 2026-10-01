@@ -1,0 +1,23 @@
+{
+  "status": "READY_COUNT_MICRODIAGNOSTIC",
+  "ready_at": "2026-09-29T23:27:23.041601+00:00",
+  "source_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/count_diagnostic.py": "0f7ccca95a8f66e7a7b2570f492e1e298efc343ff39cfc51ac7ea5817d643fe1",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/pkg/particlegan/feature_cells.py": "53f86ed38337c8875c374ebbf1e4abf4eb0e561e71d77b5d3c9c87cc03eb3615",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/cpu-count-diagnostic.json": "ed63caf920d1774b01cc5e7d622e17d983f5b6fd9d25c90c9e08052ed111337b"
+  },
+  "reference_feature_cells_sha256": "21040766f11d7d8c7a48d236a538fa5d309d28119817d57cb679db33d00a542a",
+  "planned_command": [
+    "/tmp/pr38-default-env/bin/python",
+    "-B",
+    "-u",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/count_diagnostic.py",
+    "--device",
+    "cuda",
+    "--output",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/gpu-count-diagnostic.json"
+  ],
+  "cpu_parity": "196 exhaustive two-cell tables plus uniform64/rare64/one-cell/empty-cells64 all bit-exact; seven malformed cases rejected",
+  "scope": "counts only; remaining private vectorizations await full CPU/GPU snapshot parity",
+  "gpu_execution_owner": "root only; no CUDA context initialized by CPU diagnostic"
+}

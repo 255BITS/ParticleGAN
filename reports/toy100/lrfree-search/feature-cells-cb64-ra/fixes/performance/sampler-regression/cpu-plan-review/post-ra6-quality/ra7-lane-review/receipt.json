@@ -1,0 +1,79 @@
+{
+  "status": "PASS",
+  "utc": "2026-09-30T06:10:50.150849+00:00",
+  "validation": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7",
+  "ready_sha256": "f300089ce4fece3a812b890d4060e0567e833dddd236e5a955993f65ef15e1dd",
+  "source_freeze_sha256": "1724fc603970338b0ae94d58d6055a734e3cd424fcd514a53bb1ca9297426b3d",
+  "package_sha256": "671404988209f615aefd1aec32ab1ef0a51807a9b07514c9bb35a662a6154c7c",
+  "config_sha256": "08359ed4406148faf6915144ef4265d930829de53775eeafc4f17a11b5667b4c",
+  "checked_maps": {
+    "root_numerical": 56,
+    "local": 18,
+    "external": 126,
+    "screen": 106,
+    "retained_original_screen_inputs": 71
+  },
+  "checks": {
+    "all_frozen_maps_exact": true,
+    "full_original_learned_input_maps_equal": true,
+    "learned_scorers_replay_bytes_exact": true,
+    "screen_fixture_scorer_maps_preserved": true,
+    "collector_only_declared_plain_to_indexed_AST_literal": true,
+    "positional_indices_API_compatible": true,
+    "launcher_only_jobs_AST_changes": true,
+    "all_19_job_specs_and_16_screens_exact": true,
+    "toy_first_grid_second": true,
+    "original_candidate_options_noise_and_stream_checks": true,
+    "helper_template_ready_and_declaration_frozen": true,
+    "all_generated_sources_compile": true,
+    "canonical_harness_and_monitor_sources_unchanged": true,
+    "actual_job_CLI_has_no_rate_overrides": true,
+    "learned_and_screen_recipe_merges_do_not_replace_rates": true,
+    "live_initial_training_receipt_has_declared_three_rates": true
+  },
+  "job_order": [
+    "learned-toy-CB64-RA7",
+    "screen-grid100",
+    "learned-mnist-CB64-RA7",
+    "replay-CB64-RA7",
+    "screen-mode_hold",
+    "screen-img_blobs4",
+    "screen-vector_unequal_mass",
+    "screen-ring_shift",
+    "screen-rotated100",
+    "screen-staggered100",
+    "screen-stationary",
+    "screen-img_intensity2",
+    "screen-img_stripes2",
+    "screen-img_bars4",
+    "screen-vector_two_broad",
+    "screen-vector_unequal_width",
+    "screen-vector_anisotropic",
+    "screen-vector_overlap",
+    "screen-vector_spiral"
+  ],
+  "declaration": {
+    "expected_generation_api": "indexed",
+    "basis": "fifth positional parameter named indices",
+    "original_ast_sha256": "b1fd9feaa73ead7170e097e7d52e8b57db0f069adfb2d6834749d879c8369597",
+    "adapted_ast_sha256": "08891c1b65fe387e8fb52ba16b88f56b1177e56d41c57200d1c67a4134fb7902",
+    "exact_change": "collect.expected_options.evaluation_generate: plain -> indexed",
+    "all_other_collector_checks_exact": true,
+    "quality_gates_unchanged": true,
+    "declared_before_numerical_execution": true
+  },
+  "observed_initial_training": {
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/learned/training/toy/CB64-RA7/config.json",
+    "sha256": "aaad04b7f592f37fa169d79a1bd91fcec3e6b8bdd29c1ed1d94fc8e4f161f250",
+    "rates": {
+      "lr": 0.0010625,
+      "prior_lr_mult": 8.0,
+      "d_lr_mult": 4.0
+    },
+    "seed": 314159,
+    "steps": 2000
+  },
+  "monitor_source_sha256": "4ee4cae810342b675a39b269112ca907be3ffe88ae9cadab157e4933c487328b",
+  "numerical_execution": false,
+  "defects": []
+}

@@ -1,0 +1,1679 @@
+{
+  "status": "PASS",
+  "ready_sha256": "8d5522e1e2bf7ae42baf9666bc63da4da490b03f1b62724b1ab759031341ee87",
+  "package_sha256": "e34bcb21aaa64caa0601cea5dc1f9b8eaebee9578686ebff39b459676063deb2",
+  "original_completed_artifact_audit_valid": true,
+  "training": {
+    "toy": [
+      {
+        "path": "validation-ra4/learned/training/toy/CB64-RA4/checkpoint-0000.pt",
+        "completed_steps": 0,
+        "backend_schema": 4,
+        "settings": {
+          "cells": 64,
+          "rank": 8,
+          "chunk": 256,
+          "parent_policy": "real_anchor",
+          "lloyd": 4,
+          "power": 4,
+          "parent_reservoir": 64,
+          "real_anchors": 1,
+          "parent_rank": null,
+          "latent_kernel": "bounded_local_dv12_lineage",
+          "latent_neighbors": 64,
+          "latent_rank": 8,
+          "lineage_degree": 8,
+          "lineage_policy": "symmetric_copy_links_newest_first_invalidate_overwrites",
+          "latent_candidate_bound": 72,
+          "mass_policy": "joint_mass_local_global_common_3K_plus_2_unique_parents_v1",
+          "isolation_parent_pool": "supported_same_cell_without_replacement",
+          "count_partition": "even_fit_score_order_statistic_2K",
+          "count_family": "original_K_plus_support_2K_plus_global_2_common_Q_over_3K_plus_2"
+        },
+        "lineage_shape": [
+          1024,
+          8
+        ],
+        "lineage_edges": 0,
+        "maximum_degree": 0,
+        "rows_with_padding_gaps": 0,
+        "lineage_sha256": "71189f7fb6aed638640078fba3a35fda6c39c8962e74dcc75935aac948da9063",
+        "ordinary_moves": 0,
+        "isolation_moves": 0,
+        "transient_snapshot_and_coordinate_cache_absent": true,
+        "count_diagnostics": {
+          "last_reaction": null,
+          "cumulative_ordinary_moves": 0,
+          "cumulative_isolation_moves": 0
+        }
+      },
+      {
+        "path": "validation-ra4/learned/training/toy/CB64-RA4/checkpoint-0100.pt",
+        "completed_steps": 100,
+        "backend_schema": 4,
+        "settings": {
+          "cells": 64,
+          "rank": 8,
+          "chunk": 256,
+          "parent_policy": "real_anchor",
+          "lloyd": 4,
+          "power": 4,
+          "parent_reservoir": 64,
+          "real_anchors": 1,
+          "parent_rank": null,
+          "latent_kernel": "bounded_local_dv12_lineage",
+          "latent_neighbors": 64,
+          "latent_rank": 8,
+          "lineage_degree": 8,
+          "lineage_policy": "symmetric_copy_links_newest_first_invalidate_overwrites",
+          "latent_candidate_bound": 72,
+          "mass_policy": "joint_mass_local_global_common_3K_plus_2_unique_parents_v1",
+          "isolation_parent_pool": "supported_same_cell_without_replacement",
+          "count_partition": "even_fit_score_order_statistic_2K",
+          "count_family": "original_K_plus_support_2K_plus_global_2_common_Q_over_3K_plus_2"
+        },
+        "lineage_shape": [
+          1024,
+          8
+        ],
+        "lineage_edges": 361,
+        "maximum_degree": 5,
+        "rows_with_padding_gaps": 21,
+        "lineage_sha256": "e9b15110e6de736dd09a8ac89d3235aab4057ab9d5fb7fb7e49e0e6a1618ade6",
+        "ordinary_moves": 580,
+        "isolation_moves": 0,
+        "transient_snapshot_and_coordinate_cache_absent": true,
+        "count_diagnostics": {
+          "last_reaction": {
+            "step": 96,
+            "phases": {
+              "mass": 0,
+              "support": 14,
+              "global": 37
+            },
+            "ordinary": 51,
+            "isolation": 0,
+            "total": 51,
+            "unique_parents": 51,
+            "cells": 64,
+            "categories": 128,
+            "multiplicity": 194,
+            "cutoff": 0.0002577319587628866,
+            "boundary": 1.64103383315317,
+            "partition": {
+              "rule": "even_fit_score_order_statistic",
+              "q": 0.05,
+              "fitted_rows": 512,
+              "ordinal": 487,
+              "ties": "inside",
+              "categories": 128
+            }
+          },
+          "cumulative_ordinary_moves": 580,
+          "cumulative_isolation_moves": 0,
+          "cumulative_phase_breakdown_available": false,
+          "note": "Phase fields describe the latest reaction at saved checkpoints; full-lifetime per-phase counters are not saved"
+        }
+      },
+      {
+        "path": "validation-ra4/learned/training/toy/CB64-RA4/checkpoint-0250.pt",
+        "completed_steps": 250,
+        "backend_schema": 4,
+        "settings": {
+          "cells": 64,
+          "rank": 8,
+          "chunk": 256,
+          "parent_policy": "real_anchor",
+          "lloyd": 4,
+          "power": 4,
+          "parent_reservoir": 64,
+          "real_anchors": 1,
+          "parent_rank": null,
+          "latent_kernel": "bounded_local_dv12_lineage",
+          "latent_neighbors": 64,
+          "latent_rank": 8,
+          "lineage_degree": 8,
+          "lineage_policy": "symmetric_copy_links_newest_first_invalidate_overwrites",
+          "latent_candidate_bound": 72,
+          "mass_policy": "joint_mass_local_global_common_3K_plus_2_unique_parents_v1",
+          "isolation_parent_pool": "supported_same_cell_without_replacement",
+          "count_partition": "even_fit_score_order_statistic_2K",
+          "count_family": "original_K_plus_support_2K_plus_global_2_common_Q_over_3K_plus_2"
+        },
+        "lineage_shape": [
+          1024,
+          8
+        ],
+        "lineage_edges": 544,
+        "maximum_degree": 6,
+        "rows_with_padding_gaps": 58,
+        "lineage_sha256": "d0c253efc2f8c2857541ff84b7ad938eb47f450305fa88b055d617bb1efc1d40",
+        "ordinary_moves": 1547,
+        "isolation_moves": 0,
+        "transient_snapshot_and_coordinate_cache_absent": true,
+        "count_diagnostics": {
+          "last_reaction": {
+            "step": 248,
+            "phases": {
+              "mass": 10,
+              "support": 9,
+              "global": 32
+            },
+            "ordinary": 51,
+            "isolation": 0,
+            "total": 51,
+            "unique_parents": 51,
+            "cells": 64,
+            "categories": 128,
+            "multiplicity": 194,
+            "cutoff": 0.0002577319587628866,
+            "boundary": 1.7183676218121222,
+            "partition": {
+              "rule": "even_fit_score_order_statistic",
+              "q": 0.05,
+              "fitted_rows": 512,
+              "ordinal": 487,
+              "ties": "inside",
+              "categories": 128
+            }
+          },
+          "cumulative_ordinary_moves": 1547,
+          "cumulative_isolation_moves": 0,
+          "cumulative_phase_breakdown_available": false,
+          "note": "Phase fields describe the latest reaction at saved checkpoints; full-lifetime per-phase counters are not saved"
+        }
+      },
+      {
+        "path": "validation-ra4/learned/training/toy/CB64-RA4/checkpoint-0500.pt",
+        "completed_steps": 500,
+        "backend_schema": 4,
+        "settings": {
+          "cells": 64,
+          "rank": 8,
+          "chunk": 256,
+          "parent_policy": "real_anchor",
+          "lloyd": 4,
+          "power": 4,
+          "parent_reservoir": 64,
+          "real_anchors": 1,
+          "parent_rank": null,
+          "latent_kernel": "bounded_local_dv12_lineage",
+          "latent_neighbors": 64,
+          "latent_rank": 8,
+          "lineage_degree": 8,
+          "lineage_policy": "symmetric_copy_links_newest_first_invalidate_overwrites",
+          "latent_candidate_bound": 72,
+          "mass_policy": "joint_mass_local_global_common_3K_plus_2_unique_parents_v1",
+          "isolation_parent_pool": "supported_same_cell_without_replacement",
+          "count_partition": "even_fit_score_order_statistic_2K",
+          "count_family": "original_K_plus_support_2K_plus_global_2_common_Q_over_3K_plus_2"
+        },
+        "lineage_shape": [
+          1024,
+          8
+        ],
+        "lineage_edges": 658,
+        "maximum_degree": 7,
+        "rows_with_padding_gaps": 90,
+        "lineage_sha256": "bf329da24ea9f9ef28007f957d9533e4a2540cb719aed818d9d9f29c274e330e",
+        "ordinary_moves": 3128,
+        "isolation_moves": 0,
+        "transient_snapshot_and_coordinate_cache_absent": true,
+        "count_diagnostics": {
+          "last_reaction": {
+            "step": 496,
+            "phases": {
+              "mass": 0,
+              "support": 24,
+              "global": 27
+            },
+            "ordinary": 51,
+            "isolation": 0,
+            "total": 51,
+            "unique_parents": 51,
+            "cells": 64,
+            "categories": 128,
+            "multiplicity": 194,
+            "cutoff": 0.0002577319587628866,
+            "boundary": 1.6939582303117544,
+            "partition": {
+              "rule": "even_fit_score_order_statistic",
+              "q": 0.05,
+              "fitted_rows": 512,
+              "ordinal": 487,
+              "ties": "inside",
+              "categories": 128
+            }
+          },
+          "cumulative_ordinary_moves": 3128,
+          "cumulative_isolation_moves": 0,
+          "cumulative_phase_breakdown_available": false,
+          "note": "Phase fields describe the latest reaction at saved checkpoints; full-lifetime per-phase counters are not saved"
+        }
+      },
+      {
+        "path": "validation-ra4/learned/training/toy/CB64-RA4/checkpoint-0750.pt",
+        "completed_steps": 750,
+        "backend_schema": 4,
+        "settings": {
+          "cells": 64,
+          "rank": 8,
+          "chunk": 256,
+          "parent_policy": "real_anchor",
+          "lloyd": 4,
+          "power": 4,
+          "parent_reservoir": 64,
+          "real_anchors": 1,
+          "parent_rank": null,
+          "latent_kernel": "bounded_local_dv12_lineage",
+          "latent_neighbors": 64,
+          "latent_rank": 8,
+          "lineage_degree": 8,
+          "lineage_policy": "symmetric_copy_links_newest_first_invalidate_overwrites",
+          "latent_candidate_bound": 72,
+          "mass_policy": "joint_mass_local_global_common_3K_plus_2_unique_parents_v1",
+          "isolation_parent_pool": "supported_same_cell_without_replacement",
+          "count_partition": "even_fit_score_order_statistic_2K",
+          "count_family": "original_K_plus_support_2K_plus_global_2_common_Q_over_3K_plus_2"
+        },
+        "lineage_shape": [
+          1024,
+          8
+        ],
+        "lineage_edges": 637,
+        "maximum_degree": 6,
+        "rows_with_padding_gaps": 88,
+        "lineage_sha256": "899d5234bd6be9bf45436292300df75c19ad2761421d255cd49957c6a6e0bb43",
+        "ordinary_moves": 4697,
+        "isolation_moves": 0,
+        "transient_snapshot_and_coordinate_cache_absent": true,
+        "count_diagnostics": {
+          "last_reaction": {
+            "step": 744,
+            "phases": {
+              "mass": 0,
+              "support": 10,
+              "global": 41
+            },
+            "ordinary": 51,
+            "isolation": 0,
+            "total": 51,
+            "unique_parents": 51,
+            "cells": 64,
+            "categories": 128,
+            "multiplicity": 194,
+            "cutoff": 0.0002577319587628866,
+            "boundary": 1.6879621050963525,
+            "partition": {
+              "rule": "even_fit_score_order_statistic",
+              "q": 0.05,
+              "fitted_rows": 512,
+              "ordinal": 487,
+              "ties": "inside",
+              "categories": 128
+            }
+          },
+          "cumulative_ordinary_moves": 4697,
+          "cumulative_isolation_moves": 0,
+          "cumulative_phase_breakdown_available": false,
+          "note": "Phase fields describe the latest reaction at saved checkpoints; full-lifetime per-phase counters are not saved"
+        }
+      },
+      {
+        "path": "validation-ra4/learned/training/toy/CB64-RA4/checkpoint-1000.pt",
+        "completed_steps": 1000,
+        "backend_schema": 4,
+        "settings": {
+          "cells": 64,
+          "rank": 8,
+          "chunk": 256,
+          "parent_policy": "real_anchor",
+          "lloyd": 4,
+          "power": 4,
+          "parent_reservoir": 64,
+          "real_anchors": 1,
+          "parent_rank": null,
+          "latent_kernel": "bounded_local_dv12_lineage",
+          "latent_neighbors": 64,
+          "latent_rank": 8,
+          "lineage_degree": 8,
+          "lineage_policy": "symmetric_copy_links_newest_first_invalidate_overwrites",
+          "latent_candidate_bound": 72,
+          "mass_policy": "joint_mass_local_global_common_3K_plus_2_unique_parents_v1",
+          "isolation_parent_pool": "supported_same_cell_without_replacement",
+          "count_partition": "even_fit_score_order_statistic_2K",
+          "count_family": "original_K_plus_support_2K_plus_global_2_common_Q_over_3K_plus_2"
+        },
+        "lineage_shape": [
+          1024,
+          8
+        ],
+        "lineage_edges": 692,
+        "maximum_degree": 6,
+        "rows_with_padding_gaps": 72,
+        "lineage_sha256": "92b453b5ef6a7ca1486e74245d3e842e11ec47dd5bd4f65ca006fcd35d3eeaad",
+        "ordinary_moves": 5870,
+        "isolation_moves": 0,
+        "transient_snapshot_and_coordinate_cache_absent": true,
+        "count_diagnostics": {
+          "last_reaction": {
+            "step": 1000,
+            "phases": {
+              "mass": 0,
+              "support": 5,
+              "global": 27
+            },
+            "ordinary": 32,
+            "isolation": 0,
+            "total": 32,
+            "unique_parents": 32,
+            "cells": 64,
+            "categories": 128,
+            "multiplicity": 194,
+            "cutoff": 0.0002577319587628866,
+            "boundary": 1.699779394643924,
+            "partition": {
+              "rule": "even_fit_score_order_statistic",
+              "q": 0.05,
+              "fitted_rows": 512,
+              "ordinal": 487,
+              "ties": "inside",
+              "categories": 128
+            }
+          },
+          "cumulative_ordinary_moves": 5870,
+          "cumulative_isolation_moves": 0,
+          "cumulative_phase_breakdown_available": false,
+          "note": "Phase fields describe the latest reaction at saved checkpoints; full-lifetime per-phase counters are not saved"
+        }
+      },
+      {
+        "path": "validation-ra4/learned/training/toy/CB64-RA4/checkpoint-1250.pt",
+        "completed_steps": 1250,
+        "backend_schema": 4,
+        "settings": {
+          "cells": 64,
+          "rank": 8,
+          "chunk": 256,
+          "parent_policy": "real_anchor",
+          "lloyd": 4,
+          "power": 4,
+          "parent_reservoir": 64,
+          "real_anchors": 1,
+          "parent_rank": null,
+          "latent_kernel": "bounded_local_dv12_lineage",
+          "latent_neighbors": 64,
+          "latent_rank": 8,
+          "lineage_degree": 8,
+          "lineage_policy": "symmetric_copy_links_newest_first_invalidate_overwrites",
+          "latent_candidate_bound": 72,
+          "mass_policy": "joint_mass_local_global_common_3K_plus_2_unique_parents_v1",
+          "isolation_parent_pool": "supported_same_cell_without_replacement",
+          "count_partition": "even_fit_score_order_statistic_2K",
+          "count_family": "original_K_plus_support_2K_plus_global_2_common_Q_over_3K_plus_2"
+        },
+        "lineage_shape": [
+          1024,
+          8
+        ],
+        "lineage_edges": 714,
+        "maximum_degree": 6,
+        "rows_with_padding_gaps": 85,
+        "lineage_sha256": "814043b07fc2bbbec099869dee45cf6b9e3d6b9cfb6840810b0182a032bf633f",
+        "ordinary_moves": 7097,
+        "isolation_moves": 0,
+        "transient_snapshot_and_coordinate_cache_absent": true,
+        "count_diagnostics": {
+          "last_reaction": {
+            "step": 1248,
+            "phases": {
+              "mass": 2,
+              "support": 7,
+              "global": 41
+            },
+            "ordinary": 50,
+            "isolation": 0,
+            "total": 50,
+            "unique_parents": 50,
+            "cells": 64,
+            "categories": 128,
+            "multiplicity": 194,
+            "cutoff": 0.0002577319587628866,
+            "boundary": 1.6449245645918036,
+            "partition": {
+              "rule": "even_fit_score_order_statistic",
+              "q": 0.05,
+              "fitted_rows": 512,
+              "ordinal": 487,
+              "ties": "inside",
+              "categories": 128
+            }
+          },
+          "cumulative_ordinary_moves": 7097,
+          "cumulative_isolation_moves": 0,
+          "cumulative_phase_breakdown_available": false,
+          "note": "Phase fields describe the latest reaction at saved checkpoints; full-lifetime per-phase counters are not saved"
+        }
+      },
+      {
+        "path": "validation-ra4/learned/training/toy/CB64-RA4/checkpoint-1500.pt",
+        "completed_steps": 1500,
+        "backend_schema": 4,
+        "settings": {
+          "cells": 64,
+          "rank": 8,
+          "chunk": 256,
+          "parent_policy": "real_anchor",
+          "lloyd": 4,
+          "power": 4,
+          "parent_reservoir": 64,
+          "real_anchors": 1,
+          "parent_rank": null,
+          "latent_kernel": "bounded_local_dv12_lineage",
+          "latent_neighbors": 64,
+          "latent_rank": 8,
+          "lineage_degree": 8,
+          "lineage_policy": "symmetric_copy_links_newest_first_invalidate_overwrites",
+          "latent_candidate_bound": 72,
+          "mass_policy": "joint_mass_local_global_common_3K_plus_2_unique_parents_v1",
+          "isolation_parent_pool": "supported_same_cell_without_replacement",
+          "count_partition": "even_fit_score_order_statistic_2K",
+          "count_family": "original_K_plus_support_2K_plus_global_2_common_Q_over_3K_plus_2"
+        },
+        "lineage_shape": [
+          1024,
+          8
+        ],
+        "lineage_edges": 666,
+        "maximum_degree": 7,
+        "rows_with_padding_gaps": 87,
+        "lineage_sha256": "3dcae1c73ac55d78e0288436925c4f0e928314519289b2960fd44bea290005ea",
+        "ordinary_moves": 8305,
+        "isolation_moves": 0,
+        "transient_snapshot_and_coordinate_cache_absent": true,
+        "count_diagnostics": {
+          "last_reaction": {
+            "step": 1496,
+            "phases": {
+              "mass": 0,
+              "support": 14,
+              "global": 37
+            },
+            "ordinary": 51,
+            "isolation": 0,
+            "total": 51,
+            "unique_parents": 51,
+            "cells": 64,
+            "categories": 128,
+            "multiplicity": 194,
+            "cutoff": 0.0002577319587628866,
+            "boundary": 1.7156308542606167,
+            "partition": {
+              "rule": "even_fit_score_order_statistic",
+              "q": 0.05,
+              "fitted_rows": 512,
+              "ordinal": 487,
+              "ties": "inside",
+              "categories": 128
+            }
+          },
+          "cumulative_ordinary_moves": 8305,
+          "cumulative_isolation_moves": 0,
+          "cumulative_phase_breakdown_available": false,
+          "note": "Phase fields describe the latest reaction at saved checkpoints; full-lifetime per-phase counters are not saved"
+        }
+      },
+      {
+        "path": "validation-ra4/learned/training/toy/CB64-RA4/checkpoint-1750.pt",
+        "completed_steps": 1750,
+        "backend_schema": 4,
+        "settings": {
+          "cells": 64,
+          "rank": 8,
+          "chunk": 256,
+          "parent_policy": "real_anchor",
+          "lloyd": 4,
+          "power": 4,
+          "parent_reservoir": 64,
+          "real_anchors": 1,
+          "parent_rank": null,
+          "latent_kernel": "bounded_local_dv12_lineage",
+          "latent_neighbors": 64,
+          "latent_rank": 8,
+          "lineage_degree": 8,
+          "lineage_policy": "symmetric_copy_links_newest_first_invalidate_overwrites",
+          "latent_candidate_bound": 72,
+          "mass_policy": "joint_mass_local_global_common_3K_plus_2_unique_parents_v1",
+          "isolation_parent_pool": "supported_same_cell_without_replacement",
+          "count_partition": "even_fit_score_order_statistic_2K",
+          "count_family": "original_K_plus_support_2K_plus_global_2_common_Q_over_3K_plus_2"
+        },
+        "lineage_shape": [
+          1024,
+          8
+        ],
+        "lineage_edges": 656,
+        "maximum_degree": 8,
+        "rows_with_padding_gaps": 60,
+        "lineage_sha256": "eb754370716e928257fad622544ac1580c7e6196d98c3358d8bb072cb80a5617",
+        "ordinary_moves": 9713,
+        "isolation_moves": 0,
+        "transient_snapshot_and_coordinate_cache_absent": true,
+        "count_diagnostics": {
+          "last_reaction": {
+            "step": 1744,
+            "phases": {
+              "mass": 1,
+              "support": 0,
+              "global": 50
+            },
+            "ordinary": 51,
+            "isolation": 0,
+            "total": 51,
+            "unique_parents": 51,
+            "cells": 64,
+            "categories": 128,
+            "multiplicity": 194,
+            "cutoff": 0.0002577319587628866,
+            "boundary": 1.608119951435506,
+            "partition": {
+              "rule": "even_fit_score_order_statistic",
+              "q": 0.05,
+              "fitted_rows": 512,
+              "ordinal": 487,
+              "ties": "inside",
+              "categories": 128
+            }
+          },
+          "cumulative_ordinary_moves": 9713,
+          "cumulative_isolation_moves": 0,
+          "cumulative_phase_breakdown_available": false,
+          "note": "Phase fields describe the latest reaction at saved checkpoints; full-lifetime per-phase counters are not saved"
+        }
+      },
+      {
+        "path": "validation-ra4/learned/training/toy/CB64-RA4/checkpoint-2000.pt",
+        "completed_steps": 2000,
+        "backend_schema": 4,
+        "settings": {
+          "cells": 64,
+          "rank": 8,
+          "chunk": 256,
+          "parent_policy": "real_anchor",
+          "lloyd": 4,
+          "power": 4,
+          "parent_reservoir": 64,
+          "real_anchors": 1,
+          "parent_rank": null,
+          "latent_kernel": "bounded_local_dv12_lineage",
+          "latent_neighbors": 64,
+          "latent_rank": 8,
+          "lineage_degree": 8,
+          "lineage_policy": "symmetric_copy_links_newest_first_invalidate_overwrites",
+          "latent_candidate_bound": 72,
+          "mass_policy": "joint_mass_local_global_common_3K_plus_2_unique_parents_v1",
+          "isolation_parent_pool": "supported_same_cell_without_replacement",
+          "count_partition": "even_fit_score_order_statistic_2K",
+          "count_family": "original_K_plus_support_2K_plus_global_2_common_Q_over_3K_plus_2"
+        },
+        "lineage_shape": [
+          1024,
+          8
+        ],
+        "lineage_edges": 618,
+        "maximum_degree": 6,
+        "rows_with_padding_gaps": 95,
+        "lineage_sha256": "35cc03e2461a6829e73a668a17476dd300708724088c25f4724492a587eb34db",
+        "ordinary_moves": 10701,
+        "isolation_moves": 0,
+        "transient_snapshot_and_coordinate_cache_absent": true,
+        "count_diagnostics": {
+          "last_reaction": {
+            "step": 2000,
+            "phases": {
+              "mass": 1,
+              "support": 6,
+              "global": 44
+            },
+            "ordinary": 51,
+            "isolation": 0,
+            "total": 51,
+            "unique_parents": 51,
+            "cells": 64,
+            "categories": 128,
+            "multiplicity": 194,
+            "cutoff": 0.0002577319587628866,
+            "boundary": 1.6423597614606738,
+            "partition": {
+              "rule": "even_fit_score_order_statistic",
+              "q": 0.05,
+              "fitted_rows": 512,
+              "ordinal": 487,
+              "ties": "inside",
+              "categories": 128
+            }
+          },
+          "cumulative_ordinary_moves": 10701,
+          "cumulative_isolation_moves": 0,
+          "cumulative_phase_breakdown_available": false,
+          "note": "Phase fields describe the latest reaction at saved checkpoints; full-lifetime per-phase counters are not saved"
+        }
+      }
+    ],
+    "mnist": [
+      {
+        "path": "validation-ra4/learned/training/mnist/CB64-RA4/checkpoint-0000.pt",
+        "completed_steps": 0,
+        "backend_schema": 4,
+        "settings": {
+          "cells": 64,
+          "rank": 8,
+          "chunk": 256,
+          "parent_policy": "real_anchor",
+          "lloyd": 4,
+          "power": 4,
+          "parent_reservoir": 64,
+          "real_anchors": 1,
+          "parent_rank": null,
+          "latent_kernel": "bounded_local_dv12_lineage",
+          "latent_neighbors": 64,
+          "latent_rank": 8,
+          "lineage_degree": 8,
+          "lineage_policy": "symmetric_copy_links_newest_first_invalidate_overwrites",
+          "latent_candidate_bound": 72,
+          "mass_policy": "joint_mass_local_global_common_3K_plus_2_unique_parents_v1",
+          "isolation_parent_pool": "supported_same_cell_without_replacement",
+          "count_partition": "even_fit_score_order_statistic_2K",
+          "count_family": "original_K_plus_support_2K_plus_global_2_common_Q_over_3K_plus_2"
+        },
+        "lineage_shape": [
+          1024,
+          8
+        ],
+        "lineage_edges": 0,
+        "maximum_degree": 0,
+        "rows_with_padding_gaps": 0,
+        "lineage_sha256": "71189f7fb6aed638640078fba3a35fda6c39c8962e74dcc75935aac948da9063",
+        "ordinary_moves": 0,
+        "isolation_moves": 0,
+        "transient_snapshot_and_coordinate_cache_absent": true,
+        "count_diagnostics": {
+          "last_reaction": null,
+          "cumulative_ordinary_moves": 0,
+          "cumulative_isolation_moves": 0
+        }
+      },
+      {
+        "path": "validation-ra4/learned/training/mnist/CB64-RA4/checkpoint-0100.pt",
+        "completed_steps": 100,
+        "backend_schema": 4,
+        "settings": {
+          "cells": 64,
+          "rank": 8,
+          "chunk": 256,
+          "parent_policy": "real_anchor",
+          "lloyd": 4,
+          "power": 4,
+          "parent_reservoir": 64,
+          "real_anchors": 1,
+          "parent_rank": null,
+          "latent_kernel": "bounded_local_dv12_lineage",
+          "latent_neighbors": 64,
+          "latent_rank": 8,
+          "lineage_degree": 8,
+          "lineage_policy": "symmetric_copy_links_newest_first_invalidate_overwrites",
+          "latent_candidate_bound": 72,
+          "mass_policy": "joint_mass_local_global_common_3K_plus_2_unique_parents_v1",
+          "isolation_parent_pool": "supported_same_cell_without_replacement",
+          "count_partition": "even_fit_score_order_statistic_2K",
+          "count_family": "original_K_plus_support_2K_plus_global_2_common_Q_over_3K_plus_2"
+        },
+        "lineage_shape": [
+          1024,
+          8
+        ],
+        "lineage_edges": 0,
+        "maximum_degree": 0,
+        "rows_with_padding_gaps": 0,
+        "lineage_sha256": "71189f7fb6aed638640078fba3a35fda6c39c8962e74dcc75935aac948da9063",
+        "ordinary_moves": 0,
+        "isolation_moves": 0,
+        "transient_snapshot_and_coordinate_cache_absent": true,
+        "count_diagnostics": {
+          "last_reaction": {
+            "step": 96,
+            "phases": {
+              "mass": 0,
+              "support": 0,
+              "global": 0
+            },
+            "ordinary": 0,
+            "isolation": 0,
+            "total": 0,
+            "unique_parents": 0,
+            "cells": 64,
+            "categories": 128,
+            "multiplicity": 194,
+            "cutoff": 0.0002577319587628866,
+            "boundary": 1.3435506856557176,
+            "partition": {
+              "rule": "even_fit_score_order_statistic",
+              "q": 0.05,
+              "fitted_rows": 512,
+              "ordinal": 487,
+              "ties": "inside",
+              "categories": 128
+            }
+          },
+          "cumulative_ordinary_moves": 0,
+          "cumulative_isolation_moves": 0,
+          "cumulative_phase_breakdown_available": false,
+          "note": "Phase fields describe the latest reaction at saved checkpoints; full-lifetime per-phase counters are not saved"
+        }
+      },
+      {
+        "path": "validation-ra4/learned/training/mnist/CB64-RA4/checkpoint-0250.pt",
+        "completed_steps": 250,
+        "backend_schema": 4,
+        "settings": {
+          "cells": 64,
+          "rank": 8,
+          "chunk": 256,
+          "parent_policy": "real_anchor",
+          "lloyd": 4,
+          "power": 4,
+          "parent_reservoir": 64,
+          "real_anchors": 1,
+          "parent_rank": null,
+          "latent_kernel": "bounded_local_dv12_lineage",
+          "latent_neighbors": 64,
+          "latent_rank": 8,
+          "lineage_degree": 8,
+          "lineage_policy": "symmetric_copy_links_newest_first_invalidate_overwrites",
+          "latent_candidate_bound": 72,
+          "mass_policy": "joint_mass_local_global_common_3K_plus_2_unique_parents_v1",
+          "isolation_parent_pool": "supported_same_cell_without_replacement",
+          "count_partition": "even_fit_score_order_statistic_2K",
+          "count_family": "original_K_plus_support_2K_plus_global_2_common_Q_over_3K_plus_2"
+        },
+        "lineage_shape": [
+          1024,
+          8
+        ],
+        "lineage_edges": 325,
+        "maximum_degree": 4,
+        "rows_with_padding_gaps": 6,
+        "lineage_sha256": "c570e50f6782a3bdbc185539047b597e248ce7c9295332b3ac4b379559b3423f",
+        "ordinary_moves": 469,
+        "isolation_moves": 0,
+        "transient_snapshot_and_coordinate_cache_absent": true,
+        "count_diagnostics": {
+          "last_reaction": {
+            "step": 248,
+            "phases": {
+              "mass": 35,
+              "support": 0,
+              "global": 16
+            },
+            "ordinary": 51,
+            "isolation": 0,
+            "total": 51,
+            "unique_parents": 51,
+            "cells": 64,
+            "categories": 128,
+            "multiplicity": 194,
+            "cutoff": 0.0002577319587628866,
+            "boundary": 1.342024131162628,
+            "partition": {
+              "rule": "even_fit_score_order_statistic",
+              "q": 0.05,
+              "fitted_rows": 512,
+              "ordinal": 487,
+              "ties": "inside",
+              "categories": 128
+            }
+          },
+          "cumulative_ordinary_moves": 469,
+          "cumulative_isolation_moves": 0,
+          "cumulative_phase_breakdown_available": false,
+          "note": "Phase fields describe the latest reaction at saved checkpoints; full-lifetime per-phase counters are not saved"
+        }
+      },
+      {
+        "path": "validation-ra4/learned/training/mnist/CB64-RA4/checkpoint-0500.pt",
+        "completed_steps": 500,
+        "backend_schema": 4,
+        "settings": {
+          "cells": 64,
+          "rank": 8,
+          "chunk": 256,
+          "parent_policy": "real_anchor",
+          "lloyd": 4,
+          "power": 4,
+          "parent_reservoir": 64,
+          "real_anchors": 1,
+          "parent_rank": null,
+          "latent_kernel": "bounded_local_dv12_lineage",
+          "latent_neighbors": 64,
+          "latent_rank": 8,
+          "lineage_degree": 8,
+          "lineage_policy": "symmetric_copy_links_newest_first_invalidate_overwrites",
+          "latent_candidate_bound": 72,
+          "mass_policy": "joint_mass_local_global_common_3K_plus_2_unique_parents_v1",
+          "isolation_parent_pool": "supported_same_cell_without_replacement",
+          "count_partition": "even_fit_score_order_statistic_2K",
+          "count_family": "original_K_plus_support_2K_plus_global_2_common_Q_over_3K_plus_2"
+        },
+        "lineage_shape": [
+          1024,
+          8
+        ],
+        "lineage_edges": 440,
+        "maximum_degree": 4,
+        "rows_with_padding_gaps": 26,
+        "lineage_sha256": "1146cb1ad8aeda054a2696473c17aa77cc7cd623a7dec48c6fce333c9868b068",
+        "ordinary_moves": 782,
+        "isolation_moves": 0,
+        "transient_snapshot_and_coordinate_cache_absent": true,
+        "count_diagnostics": {
+          "last_reaction": {
+            "step": 496,
+            "phases": {
+              "mass": 0,
+              "support": 0,
+              "global": 0
+            },
+            "ordinary": 0,
+            "isolation": 0,
+            "total": 0,
+            "unique_parents": 0,
+            "cells": 64,
+            "categories": 128,
+            "multiplicity": 194,
+            "cutoff": 0.0002577319587628866,
+            "boundary": 1.3205772206406083,
+            "partition": {
+              "rule": "even_fit_score_order_statistic",
+              "q": 0.05,
+              "fitted_rows": 512,
+              "ordinal": 487,
+              "ties": "inside",
+              "categories": 128
+            }
+          },
+          "cumulative_ordinary_moves": 782,
+          "cumulative_isolation_moves": 0,
+          "cumulative_phase_breakdown_available": false,
+          "note": "Phase fields describe the latest reaction at saved checkpoints; full-lifetime per-phase counters are not saved"
+        }
+      },
+      {
+        "path": "validation-ra4/learned/training/mnist/CB64-RA4/checkpoint-0750.pt",
+        "completed_steps": 750,
+        "backend_schema": 4,
+        "settings": {
+          "cells": 64,
+          "rank": 8,
+          "chunk": 256,
+          "parent_policy": "real_anchor",
+          "lloyd": 4,
+          "power": 4,
+          "parent_reservoir": 64,
+          "real_anchors": 1,
+          "parent_rank": null,
+          "latent_kernel": "bounded_local_dv12_lineage",
+          "latent_neighbors": 64,
+          "latent_rank": 8,
+          "lineage_degree": 8,
+          "lineage_policy": "symmetric_copy_links_newest_first_invalidate_overwrites",
+          "latent_candidate_bound": 72,
+          "mass_policy": "joint_mass_local_global_common_3K_plus_2_unique_parents_v1",
+          "isolation_parent_pool": "supported_same_cell_without_replacement",
+          "count_partition": "even_fit_score_order_statistic_2K",
+          "count_family": "original_K_plus_support_2K_plus_global_2_common_Q_over_3K_plus_2"
+        },
+        "lineage_shape": [
+          1024,
+          8
+        ],
+        "lineage_edges": 447,
+        "maximum_degree": 4,
+        "rows_with_padding_gaps": 24,
+        "lineage_sha256": "30ff136726f4961a73f1a12925376ec5ba39924ef4e5603235987d5c4355fb1a",
+        "ordinary_moves": 820,
+        "isolation_moves": 0,
+        "transient_snapshot_and_coordinate_cache_absent": true,
+        "count_diagnostics": {
+          "last_reaction": {
+            "step": 744,
+            "phases": {
+              "mass": 0,
+              "support": 0,
+              "global": 0
+            },
+            "ordinary": 0,
+            "isolation": 0,
+            "total": 0,
+            "unique_parents": 0,
+            "cells": 64,
+            "categories": 128,
+            "multiplicity": 194,
+            "cutoff": 0.0002577319587628866,
+            "boundary": 1.362528424727912,
+            "partition": {
+              "rule": "even_fit_score_order_statistic",
+              "q": 0.05,
+              "fitted_rows": 512,
+              "ordinal": 487,
+              "ties": "inside",
+              "categories": 128
+            }
+          },
+          "cumulative_ordinary_moves": 820,
+          "cumulative_isolation_moves": 0,
+          "cumulative_phase_breakdown_available": false,
+          "note": "Phase fields describe the latest reaction at saved checkpoints; full-lifetime per-phase counters are not saved"
+        }
+      },
+      {
+        "path": "validation-ra4/learned/training/mnist/CB64-RA4/checkpoint-1000.pt",
+        "completed_steps": 1000,
+        "backend_schema": 4,
+        "settings": {
+          "cells": 64,
+          "rank": 8,
+          "chunk": 256,
+          "parent_policy": "real_anchor",
+          "lloyd": 4,
+          "power": 4,
+          "parent_reservoir": 64,
+          "real_anchors": 1,
+          "parent_rank": null,
+          "latent_kernel": "bounded_local_dv12_lineage",
+          "latent_neighbors": 64,
+          "latent_rank": 8,
+          "lineage_degree": 8,
+          "lineage_policy": "symmetric_copy_links_newest_first_invalidate_overwrites",
+          "latent_candidate_bound": 72,
+          "mass_policy": "joint_mass_local_global_common_3K_plus_2_unique_parents_v1",
+          "isolation_parent_pool": "supported_same_cell_without_replacement",
+          "count_partition": "even_fit_score_order_statistic_2K",
+          "count_family": "original_K_plus_support_2K_plus_global_2_common_Q_over_3K_plus_2"
+        },
+        "lineage_shape": [
+          1024,
+          8
+        ],
+        "lineage_edges": 447,
+        "maximum_degree": 4,
+        "rows_with_padding_gaps": 24,
+        "lineage_sha256": "30ff136726f4961a73f1a12925376ec5ba39924ef4e5603235987d5c4355fb1a",
+        "ordinary_moves": 820,
+        "isolation_moves": 0,
+        "transient_snapshot_and_coordinate_cache_absent": true,
+        "count_diagnostics": {
+          "last_reaction": {
+            "step": 1000,
+            "phases": {
+              "mass": 0,
+              "support": 0,
+              "global": 0
+            },
+            "ordinary": 0,
+            "isolation": 0,
+            "total": 0,
+            "unique_parents": 0,
+            "cells": 64,
+            "categories": 128,
+            "multiplicity": 194,
+            "cutoff": 0.0002577319587628866,
+            "boundary": 1.3563409042705834,
+            "partition": {
+              "rule": "even_fit_score_order_statistic",
+              "q": 0.05,
+              "fitted_rows": 512,
+              "ordinal": 487,
+              "ties": "inside",
+              "categories": 128
+            }
+          },
+          "cumulative_ordinary_moves": 820,
+          "cumulative_isolation_moves": 0,
+          "cumulative_phase_breakdown_available": false,
+          "note": "Phase fields describe the latest reaction at saved checkpoints; full-lifetime per-phase counters are not saved"
+        }
+      },
+      {
+        "path": "validation-ra4/learned/training/mnist/CB64-RA4/checkpoint-1250.pt",
+        "completed_steps": 1250,
+        "backend_schema": 4,
+        "settings": {
+          "cells": 64,
+          "rank": 8,
+          "chunk": 256,
+          "parent_policy": "real_anchor",
+          "lloyd": 4,
+          "power": 4,
+          "parent_reservoir": 64,
+          "real_anchors": 1,
+          "parent_rank": null,
+          "latent_kernel": "bounded_local_dv12_lineage",
+          "latent_neighbors": 64,
+          "latent_rank": 8,
+          "lineage_degree": 8,
+          "lineage_policy": "symmetric_copy_links_newest_first_invalidate_overwrites",
+          "latent_candidate_bound": 72,
+          "mass_policy": "joint_mass_local_global_common_3K_plus_2_unique_parents_v1",
+          "isolation_parent_pool": "supported_same_cell_without_replacement",
+          "count_partition": "even_fit_score_order_statistic_2K",
+          "count_family": "original_K_plus_support_2K_plus_global_2_common_Q_over_3K_plus_2"
+        },
+        "lineage_shape": [
+          1024,
+          8
+        ],
+        "lineage_edges": 447,
+        "maximum_degree": 4,
+        "rows_with_padding_gaps": 25,
+        "lineage_sha256": "8765c31f9a2411127b167ef47e06f9c9abcd9560d9847bc6913faf507132a03a",
+        "ordinary_moves": 824,
+        "isolation_moves": 0,
+        "transient_snapshot_and_coordinate_cache_absent": true,
+        "count_diagnostics": {
+          "last_reaction": {
+            "step": 1248,
+            "phases": {
+              "mass": 0,
+              "support": 0,
+              "global": 0
+            },
+            "ordinary": 0,
+            "isolation": 0,
+            "total": 0,
+            "unique_parents": 0,
+            "cells": 64,
+            "categories": 128,
+            "multiplicity": 194,
+            "cutoff": 0.0002577319587628866,
+            "boundary": 1.3691699930862995,
+            "partition": {
+              "rule": "even_fit_score_order_statistic",
+              "q": 0.05,
+              "fitted_rows": 512,
+              "ordinal": 487,
+              "ties": "inside",
+              "categories": 128
+            }
+          },
+          "cumulative_ordinary_moves": 824,
+          "cumulative_isolation_moves": 0,
+          "cumulative_phase_breakdown_available": false,
+          "note": "Phase fields describe the latest reaction at saved checkpoints; full-lifetime per-phase counters are not saved"
+        }
+      },
+      {
+        "path": "validation-ra4/learned/training/mnist/CB64-RA4/checkpoint-1500.pt",
+        "completed_steps": 1500,
+        "backend_schema": 4,
+        "settings": {
+          "cells": 64,
+          "rank": 8,
+          "chunk": 256,
+          "parent_policy": "real_anchor",
+          "lloyd": 4,
+          "power": 4,
+          "parent_reservoir": 64,
+          "real_anchors": 1,
+          "parent_rank": null,
+          "latent_kernel": "bounded_local_dv12_lineage",
+          "latent_neighbors": 64,
+          "latent_rank": 8,
+          "lineage_degree": 8,
+          "lineage_policy": "symmetric_copy_links_newest_first_invalidate_overwrites",
+          "latent_candidate_bound": 72,
+          "mass_policy": "joint_mass_local_global_common_3K_plus_2_unique_parents_v1",
+          "isolation_parent_pool": "supported_same_cell_without_replacement",
+          "count_partition": "even_fit_score_order_statistic_2K",
+          "count_family": "original_K_plus_support_2K_plus_global_2_common_Q_over_3K_plus_2"
+        },
+        "lineage_shape": [
+          1024,
+          8
+        ],
+        "lineage_edges": 447,
+        "maximum_degree": 4,
+        "rows_with_padding_gaps": 25,
+        "lineage_sha256": "8765c31f9a2411127b167ef47e06f9c9abcd9560d9847bc6913faf507132a03a",
+        "ordinary_moves": 824,
+        "isolation_moves": 0,
+        "transient_snapshot_and_coordinate_cache_absent": true,
+        "count_diagnostics": {
+          "last_reaction": {
+            "step": 1496,
+            "phases": {
+              "mass": 0,
+              "support": 0,
+              "global": 0
+            },
+            "ordinary": 0,
+            "isolation": 0,
+            "total": 0,
+            "unique_parents": 0,
+            "cells": 64,
+            "categories": 128,
+            "multiplicity": 194,
+            "cutoff": 0.0002577319587628866,
+            "boundary": 1.3325244429915466,
+            "partition": {
+              "rule": "even_fit_score_order_statistic",
+              "q": 0.05,
+              "fitted_rows": 512,
+              "ordinal": 487,
+              "ties": "inside",
+              "categories": 128
+            }
+          },
+          "cumulative_ordinary_moves": 824,
+          "cumulative_isolation_moves": 0,
+          "cumulative_phase_breakdown_available": false,
+          "note": "Phase fields describe the latest reaction at saved checkpoints; full-lifetime per-phase counters are not saved"
+        }
+      },
+      {
+        "path": "validation-ra4/learned/training/mnist/CB64-RA4/checkpoint-1750.pt",
+        "completed_steps": 1750,
+        "backend_schema": 4,
+        "settings": {
+          "cells": 64,
+          "rank": 8,
+          "chunk": 256,
+          "parent_policy": "real_anchor",
+          "lloyd": 4,
+          "power": 4,
+          "parent_reservoir": 64,
+          "real_anchors": 1,
+          "parent_rank": null,
+          "latent_kernel": "bounded_local_dv12_lineage",
+          "latent_neighbors": 64,
+          "latent_rank": 8,
+          "lineage_degree": 8,
+          "lineage_policy": "symmetric_copy_links_newest_first_invalidate_overwrites",
+          "latent_candidate_bound": 72,
+          "mass_policy": "joint_mass_local_global_common_3K_plus_2_unique_parents_v1",
+          "isolation_parent_pool": "supported_same_cell_without_replacement",
+          "count_partition": "even_fit_score_order_statistic_2K",
+          "count_family": "original_K_plus_support_2K_plus_global_2_common_Q_over_3K_plus_2"
+        },
+        "lineage_shape": [
+          1024,
+          8
+        ],
+        "lineage_edges": 447,
+        "maximum_degree": 4,
+        "rows_with_padding_gaps": 25,
+        "lineage_sha256": "8765c31f9a2411127b167ef47e06f9c9abcd9560d9847bc6913faf507132a03a",
+        "ordinary_moves": 824,
+        "isolation_moves": 0,
+        "transient_snapshot_and_coordinate_cache_absent": true,
+        "count_diagnostics": {
+          "last_reaction": {
+            "step": 1744,
+            "phases": {
+              "mass": 0,
+              "support": 0,
+              "global": 0
+            },
+            "ordinary": 0,
+            "isolation": 0,
+            "total": 0,
+            "unique_parents": 0,
+            "cells": 64,
+            "categories": 128,
+            "multiplicity": 194,
+            "cutoff": 0.0002577319587628866,
+            "boundary": 1.3626124807151878,
+            "partition": {
+              "rule": "even_fit_score_order_statistic",
+              "q": 0.05,
+              "fitted_rows": 512,
+              "ordinal": 487,
+              "ties": "inside",
+              "categories": 128
+            }
+          },
+          "cumulative_ordinary_moves": 824,
+          "cumulative_isolation_moves": 0,
+          "cumulative_phase_breakdown_available": false,
+          "note": "Phase fields describe the latest reaction at saved checkpoints; full-lifetime per-phase counters are not saved"
+        }
+      },
+      {
+        "path": "validation-ra4/learned/training/mnist/CB64-RA4/checkpoint-2000.pt",
+        "completed_steps": 2000,
+        "backend_schema": 4,
+        "settings": {
+          "cells": 64,
+          "rank": 8,
+          "chunk": 256,
+          "parent_policy": "real_anchor",
+          "lloyd": 4,
+          "power": 4,
+          "parent_reservoir": 64,
+          "real_anchors": 1,
+          "parent_rank": null,
+          "latent_kernel": "bounded_local_dv12_lineage",
+          "latent_neighbors": 64,
+          "latent_rank": 8,
+          "lineage_degree": 8,
+          "lineage_policy": "symmetric_copy_links_newest_first_invalidate_overwrites",
+          "latent_candidate_bound": 72,
+          "mass_policy": "joint_mass_local_global_common_3K_plus_2_unique_parents_v1",
+          "isolation_parent_pool": "supported_same_cell_without_replacement",
+          "count_partition": "even_fit_score_order_statistic_2K",
+          "count_family": "original_K_plus_support_2K_plus_global_2_common_Q_over_3K_plus_2"
+        },
+        "lineage_shape": [
+          1024,
+          8
+        ],
+        "lineage_edges": 447,
+        "maximum_degree": 4,
+        "rows_with_padding_gaps": 25,
+        "lineage_sha256": "8765c31f9a2411127b167ef47e06f9c9abcd9560d9847bc6913faf507132a03a",
+        "ordinary_moves": 824,
+        "isolation_moves": 0,
+        "transient_snapshot_and_coordinate_cache_absent": true,
+        "count_diagnostics": {
+          "last_reaction": {
+            "step": 2000,
+            "phases": {
+              "mass": 0,
+              "support": 0,
+              "global": 0
+            },
+            "ordinary": 0,
+            "isolation": 0,
+            "total": 0,
+            "unique_parents": 0,
+            "cells": 64,
+            "categories": 128,
+            "multiplicity": 194,
+            "cutoff": 0.0002577319587628866,
+            "boundary": 1.309639906819268,
+            "partition": {
+              "rule": "even_fit_score_order_statistic",
+              "q": 0.05,
+              "fitted_rows": 512,
+              "ordinal": 487,
+              "ties": "inside",
+              "categories": 128
+            }
+          },
+          "cumulative_ordinary_moves": 824,
+          "cumulative_isolation_moves": 0,
+          "cumulative_phase_breakdown_available": false,
+          "note": "Phase fields describe the latest reaction at saved checkpoints; full-lifetime per-phase counters are not saved"
+        }
+      }
+    ]
+  },
+  "replay": {
+    "toy": {
+      "branches": [
+        {
+          "path": "validation-ra4/learned/replay/toy/CB64-RA4/branch-0.pt",
+          "completed_steps": 1010,
+          "backend_schema": 4,
+          "settings": {
+            "cells": 64,
+            "rank": 8,
+            "chunk": 256,
+            "parent_policy": "real_anchor",
+            "lloyd": 4,
+            "power": 4,
+            "parent_reservoir": 64,
+            "real_anchors": 1,
+            "parent_rank": null,
+            "latent_kernel": "bounded_local_dv12_lineage",
+            "latent_neighbors": 64,
+            "latent_rank": 8,
+            "lineage_degree": 8,
+            "lineage_policy": "symmetric_copy_links_newest_first_invalidate_overwrites",
+            "latent_candidate_bound": 72,
+            "mass_policy": "joint_mass_local_global_common_3K_plus_2_unique_parents_v1",
+            "isolation_parent_pool": "supported_same_cell_without_replacement",
+            "count_partition": "even_fit_score_order_statistic_2K",
+            "count_family": "original_K_plus_support_2K_plus_global_2_common_Q_over_3K_plus_2"
+          },
+          "lineage_shape": [
+            1024,
+            8
+          ],
+          "lineage_edges": 692,
+          "maximum_degree": 6,
+          "rows_with_padding_gaps": 75,
+          "lineage_sha256": "7482eed792467eb6dfaf33467ea43b08bcdf753cdb2f5194ba38d57029a35659",
+          "ordinary_moves": 5899,
+          "isolation_moves": 0,
+          "transient_snapshot_and_coordinate_cache_absent": true,
+          "count_diagnostics": {
+            "last_reaction": {
+              "step": 1008,
+              "phases": {
+                "mass": 1,
+                "support": 1,
+                "global": 27
+              },
+              "ordinary": 29,
+              "isolation": 0,
+              "total": 29,
+              "unique_parents": 29,
+              "cells": 64,
+              "categories": 128,
+              "multiplicity": 194,
+              "cutoff": 0.0002577319587628866,
+              "boundary": 1.633039227574154,
+              "partition": {
+                "rule": "even_fit_score_order_statistic",
+                "q": 0.05,
+                "fitted_rows": 512,
+                "ordinal": 487,
+                "ties": "inside",
+                "categories": 128
+              }
+            },
+            "cumulative_ordinary_moves": 5899,
+            "cumulative_isolation_moves": 0,
+            "cumulative_phase_breakdown_available": false,
+            "note": "Phase fields describe the latest reaction at saved checkpoints; full-lifetime per-phase counters are not saved"
+          }
+        },
+        {
+          "path": "validation-ra4/learned/replay/toy/CB64-RA4/branch-1.pt",
+          "completed_steps": 1010,
+          "backend_schema": 4,
+          "settings": {
+            "cells": 64,
+            "rank": 8,
+            "chunk": 256,
+            "parent_policy": "real_anchor",
+            "lloyd": 4,
+            "power": 4,
+            "parent_reservoir": 64,
+            "real_anchors": 1,
+            "parent_rank": null,
+            "latent_kernel": "bounded_local_dv12_lineage",
+            "latent_neighbors": 64,
+            "latent_rank": 8,
+            "lineage_degree": 8,
+            "lineage_policy": "symmetric_copy_links_newest_first_invalidate_overwrites",
+            "latent_candidate_bound": 72,
+            "mass_policy": "joint_mass_local_global_common_3K_plus_2_unique_parents_v1",
+            "isolation_parent_pool": "supported_same_cell_without_replacement",
+            "count_partition": "even_fit_score_order_statistic_2K",
+            "count_family": "original_K_plus_support_2K_plus_global_2_common_Q_over_3K_plus_2"
+          },
+          "lineage_shape": [
+            1024,
+            8
+          ],
+          "lineage_edges": 692,
+          "maximum_degree": 6,
+          "rows_with_padding_gaps": 75,
+          "lineage_sha256": "7482eed792467eb6dfaf33467ea43b08bcdf753cdb2f5194ba38d57029a35659",
+          "ordinary_moves": 5899,
+          "isolation_moves": 0,
+          "transient_snapshot_and_coordinate_cache_absent": true,
+          "count_diagnostics": {
+            "last_reaction": {
+              "step": 1008,
+              "phases": {
+                "mass": 1,
+                "support": 1,
+                "global": 27
+              },
+              "ordinary": 29,
+              "isolation": 0,
+              "total": 29,
+              "unique_parents": 29,
+              "cells": 64,
+              "categories": 128,
+              "multiplicity": 194,
+              "cutoff": 0.0002577319587628866,
+              "boundary": 1.633039227574154,
+              "partition": {
+                "rule": "even_fit_score_order_statistic",
+                "q": 0.05,
+                "fitted_rows": 512,
+                "ordinal": 487,
+                "ties": "inside",
+                "categories": 128
+              }
+            },
+            "cumulative_ordinary_moves": 5899,
+            "cumulative_isolation_moves": 0,
+            "cumulative_phase_breakdown_available": false,
+            "note": "Phase fields describe the latest reaction at saved checkpoints; full-lifetime per-phase counters are not saved"
+          }
+        }
+      ],
+      "lineage_graph_bit_identical": true,
+      "original_full_semantic_and_loss_fingerprints_valid": true
+    },
+    "mnist": {
+      "branches": [
+        {
+          "path": "validation-ra4/learned/replay/mnist/CB64-RA4/branch-0.pt",
+          "completed_steps": 1010,
+          "backend_schema": 4,
+          "settings": {
+            "cells": 64,
+            "rank": 8,
+            "chunk": 256,
+            "parent_policy": "real_anchor",
+            "lloyd": 4,
+            "power": 4,
+            "parent_reservoir": 64,
+            "real_anchors": 1,
+            "parent_rank": null,
+            "latent_kernel": "bounded_local_dv12_lineage",
+            "latent_neighbors": 64,
+            "latent_rank": 8,
+            "lineage_degree": 8,
+            "lineage_policy": "symmetric_copy_links_newest_first_invalidate_overwrites",
+            "latent_candidate_bound": 72,
+            "mass_policy": "joint_mass_local_global_common_3K_plus_2_unique_parents_v1",
+            "isolation_parent_pool": "supported_same_cell_without_replacement",
+            "count_partition": "even_fit_score_order_statistic_2K",
+            "count_family": "original_K_plus_support_2K_plus_global_2_common_Q_over_3K_plus_2"
+          },
+          "lineage_shape": [
+            1024,
+            8
+          ],
+          "lineage_edges": 447,
+          "maximum_degree": 4,
+          "rows_with_padding_gaps": 24,
+          "lineage_sha256": "30ff136726f4961a73f1a12925376ec5ba39924ef4e5603235987d5c4355fb1a",
+          "ordinary_moves": 820,
+          "isolation_moves": 0,
+          "transient_snapshot_and_coordinate_cache_absent": true,
+          "count_diagnostics": {
+            "last_reaction": {
+              "step": 1008,
+              "phases": {
+                "mass": 0,
+                "support": 0,
+                "global": 0
+              },
+              "ordinary": 0,
+              "isolation": 0,
+              "total": 0,
+              "unique_parents": 0,
+              "cells": 64,
+              "categories": 128,
+              "multiplicity": 194,
+              "cutoff": 0.0002577319587628866,
+              "boundary": 1.3293169719078481,
+              "partition": {
+                "rule": "even_fit_score_order_statistic",
+                "q": 0.05,
+                "fitted_rows": 512,
+                "ordinal": 487,
+                "ties": "inside",
+                "categories": 128
+              }
+            },
+            "cumulative_ordinary_moves": 820,
+            "cumulative_isolation_moves": 0,
+            "cumulative_phase_breakdown_available": false,
+            "note": "Phase fields describe the latest reaction at saved checkpoints; full-lifetime per-phase counters are not saved"
+          }
+        },
+        {
+          "path": "validation-ra4/learned/replay/mnist/CB64-RA4/branch-1.pt",
+          "completed_steps": 1010,
+          "backend_schema": 4,
+          "settings": {
+            "cells": 64,
+            "rank": 8,
+            "chunk": 256,
+            "parent_policy": "real_anchor",
+            "lloyd": 4,
+            "power": 4,
+            "parent_reservoir": 64,
+            "real_anchors": 1,
+            "parent_rank": null,
+            "latent_kernel": "bounded_local_dv12_lineage",
+            "latent_neighbors": 64,
+            "latent_rank": 8,
+            "lineage_degree": 8,
+            "lineage_policy": "symmetric_copy_links_newest_first_invalidate_overwrites",
+            "latent_candidate_bound": 72,
+            "mass_policy": "joint_mass_local_global_common_3K_plus_2_unique_parents_v1",
+            "isolation_parent_pool": "supported_same_cell_without_replacement",
+            "count_partition": "even_fit_score_order_statistic_2K",
+            "count_family": "original_K_plus_support_2K_plus_global_2_common_Q_over_3K_plus_2"
+          },
+          "lineage_shape": [
+            1024,
+            8
+          ],
+          "lineage_edges": 447,
+          "maximum_degree": 4,
+          "rows_with_padding_gaps": 24,
+          "lineage_sha256": "30ff136726f4961a73f1a12925376ec5ba39924ef4e5603235987d5c4355fb1a",
+          "ordinary_moves": 820,
+          "isolation_moves": 0,
+          "transient_snapshot_and_coordinate_cache_absent": true,
+          "count_diagnostics": {
+            "last_reaction": {
+              "step": 1008,
+              "phases": {
+                "mass": 0,
+                "support": 0,
+                "global": 0
+              },
+              "ordinary": 0,
+              "isolation": 0,
+              "total": 0,
+              "unique_parents": 0,
+              "cells": 64,
+              "categories": 128,
+              "multiplicity": 194,
+              "cutoff": 0.0002577319587628866,
+              "boundary": 1.3293169719078481,
+              "partition": {
+                "rule": "even_fit_score_order_statistic",
+                "q": 0.05,
+                "fitted_rows": 512,
+                "ordinal": 487,
+                "ties": "inside",
+                "categories": 128
+              }
+            },
+            "cumulative_ordinary_moves": 820,
+            "cumulative_isolation_moves": 0,
+            "cumulative_phase_breakdown_available": false,
+            "note": "Phase fields describe the latest reaction at saved checkpoints; full-lifetime per-phase counters are not saved"
+          }
+        }
+      ],
+      "lineage_graph_bit_identical": true,
+      "original_full_semantic_and_loss_fingerprints_valid": true
+    }
+  },
+  "source_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/audit_ra4_graph.py": "b6a344c69b7ca56097d6110b56736319469e2fbb52ae26286d993c9143b3b65c",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/iteration-4/READY.json": "8d5522e1e2bf7ae42baf9666bc63da4da490b03f1b62724b1ab759031341ee87",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/audit_learned.py": "683acf472985084a911edd6763d63d411772563d7fcb71df4a547d2a502347ba",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/ra4-artifact-audit-state-review/summary.json": "0eadea427856899259c69f513e3523b62cb888944a3f3685f2e39cd0646829f8",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/ra4-artifact-audit-state-review/AUDITOR-IDENTITY.json": "9b55ce3999ca4f3cb82bf0cbebe80ffdc5ca1bf62938d378be7434bb592ca605",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/learned/INPUTS.json": "1892f8866f8051371c1943e6996246f5dab80fc5b19a3e0e59f6db16923145c6",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/learned/SOURCE-FREEZE.json": "bd7ccc72e58f966983ca5374598b75e02fcfb383b1b42776ed599feb801cdacc",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/source-freeze.json": "c1b09a7acf8ce40690eeaf6e931586c47c08e523dcfc573c7efb1d6f7bb8b443",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/configs/overrides-CB64-RA4.json": "d2b1018854671ded2ffe92b2f30c97a3871cf15911c6c241ceaadd281d94e7e7",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/__init__.py": "5e602d56461f5569c701d44321f2c10c59ab97a01542629d025330c0d10eb04a",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/batch_feature_init.py": "7178f3f9653a5ecf22633406f58f262ea2569ddf9c7e090e2ddbe1cd5aefc8c2",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/birth_death.py": "447f67de1ed80eec0e260c88808cd40e9f682bf55e1ef6c39e6dc513594c8b72",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/continuous.py": "26c71f54cab370cd5bc6b2faa9e860cf01600db780dddfdda6fcaf6081254388",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/det_init_a.py": "c22542a3ac83fe9fe3c7a807442028ccd1dd2409a4428c6757beb3f623d81d4b",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/det_init_d.py": "6b2333382e03f7d58956e75dae700b2f6ee48cdb57f61bc3ca1b8ab38e5efaa4",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/det_init_f.py": "fb6b0d8d1cc9f61dd0c5b39f6ed606152c0239be944aab47a3de64e83668549c",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/deterministic_init.py": "c7fb045cc137187012cdd526b3c62dea068447b1d1a1f07ab06e01fe5c73564f",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/diffusion.py": "ec4acf8d6e15c30c5dfbb6fc7b93f10ee1c778214493223c50e08eb2e5047683",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/family_e_init.py": "35097639e944f3f97fa07bf5ff23267346059f32e8dfbd615b8f9a802c9a6936",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/feature_cells.py": "a7f2d0f8794e109535358ea08ef43951449814acbdfca89705870df9f153f025",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/grad_regularizers.py": "a02ec4d50b2782b551927125979dd89622d2b728e4a1aa16312401a058d703c2",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/init_registry.py": "2cc0189f229e4ebaf289485152b3fdcb6eb3c9979f0a4db15ddbaf3fb6d3179c",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/initialization.py": "b769638eecc119b22138cd52fa91c56bb0ad3515aab3a567cfef8708dc81a366",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/k3p.py": "fcff8a4f7a37ac630d8662ed34d3f9cbf89f2c59a33203cd5f963609842b8fb1",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/ka2.py": "a972d7d09ffc8940c962124adea2769d8e7e0b6f02522850fe29fc1a150127a8",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/particle_prior.py": "17e39404cefca5963c82d9981f8582ea6c650c9aae66b51ce11ecf05896bb9a9",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/qr_bz_pq_init.py": "3c7f4677d43f19e769453835b1619a17031cef5a5d3f72e9ecb731f310518ce3",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/recipes.py": "c5c195725bd7192efc917253d99391cd1cdd9da09e5d42b7f495188b04d3846e",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/row_evidence.py": "1e930343a714d7825d517f157683b8dda7d59048781637ba7475efbd0eab9606",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/structured_init.py": "b098a033e32e5f535041b713e8a9a4a00992af607f00e45ecf364142fd4c7379",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/training.py": "f5626e4e25f62b37aa76b162ef4d351ed45dad0b5c24dc2c0c385be3d42d6a7a",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/learned/training/toy/CB64-RA4/metrics.jsonl": "6751beed015d878d2445fb71e571cebe26014d1d85d3e21b421e1902c75302e8",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/learned/training/mnist/CB64-RA4/metrics.jsonl": "f3410b67e90c76c29f05647b2a6c4b5218de44e8d290b8c7949e553fdcf01a50",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/learned/replay-CB64-RA4.json": "8252bf3ea1cbaecb7026445f16bd55f297118da0756612963c89ea656fb415c0"
+  },
+  "checkpoint_endpoint_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/learned/training/toy/CB64-RA4/checkpoint-0000.pt": "dce4dec4d1d6ff904a0c6421e7432ee6d8efd5ac7e3674f8510a4e1ab5317ad4",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/learned/training/toy/CB64-RA4/checkpoint-0100.pt": "945d3e39ae8ac429acd1e6d6b01635a90d11596eb789483bac6b67fc9bf334b8",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/learned/training/toy/CB64-RA4/checkpoint-0250.pt": "f8ba563d4fa4d8485462686f2186396a0e0436d7f7c8dc2261827e1229954709",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/learned/training/toy/CB64-RA4/checkpoint-0500.pt": "c9dfea7b89834237dab0b4e7e52cba0d11370eef38dd4c51727308d0d7252be0",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/learned/training/toy/CB64-RA4/checkpoint-0750.pt": "33a5fb00315e649d68408340a278977df1b0154dfddeffcc3ade3ab8a2dd718c",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/learned/training/toy/CB64-RA4/checkpoint-1000.pt": "56fb3dfcc4112d0712575c053d64a2e3ef4519e97e041eeaf1f744dcaf26bf72",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/learned/training/toy/CB64-RA4/checkpoint-1250.pt": "56508352d9856ec0dff125d91cea8527db14f19b6a2a80cc0805ac1117509da0",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/learned/training/toy/CB64-RA4/checkpoint-1500.pt": "24ddb26c4097865ffbce9afc72b7fc344665daf4ff8a0cbd2bf9ebf081ce0be9",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/learned/training/toy/CB64-RA4/checkpoint-1750.pt": "a2b64fd02a99769cc6fbf8b42a8fa81e3087b100c7012af7601bee0c604e5654",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/learned/training/toy/CB64-RA4/checkpoint-2000.pt": "9d27cc4cfbb5b3b1ce9e209f41e850617a715f2c57e6c5ecb9c0ddd2c8634d2f",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/learned/training/mnist/CB64-RA4/checkpoint-0000.pt": "ab2d40ce961d43ef69902d6207b2b624035e615911e43aa8b9457e681f2b84ca",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/learned/training/mnist/CB64-RA4/checkpoint-0100.pt": "ac6fc3fd97764e001098c3260cf576b71863c8eed37a2afdab23c4150e9640fe",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/learned/training/mnist/CB64-RA4/checkpoint-0250.pt": "1bda60dec46f4518a45dfb0feceb6bca50590fe6c8c57ab86a10b4b8199c8bd7",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/learned/training/mnist/CB64-RA4/checkpoint-0500.pt": "63384be41d67f22f6329a37ae760239e11bc29a2eb81ec94b515149be34df86f",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/learned/training/mnist/CB64-RA4/checkpoint-0750.pt": "9219b0335859fc921781da4451f4f59b50030eff57dd54f7db89b4e3ade564d6",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/learned/training/mnist/CB64-RA4/checkpoint-1000.pt": "c078ce722d714e6b0070f88c640a90be9b74609707c739ffe94b4c6d956898c4",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/learned/training/mnist/CB64-RA4/checkpoint-1250.pt": "79dfbcdfabfb1914c1dc697f1880557f3e93a547ef1584e5a0daf46932b6eac6",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/learned/training/mnist/CB64-RA4/checkpoint-1500.pt": "c24e135f54e988cbf06ee0b5761169be581eb42727a08ae2462a300f77c24408",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/learned/training/mnist/CB64-RA4/checkpoint-1750.pt": "1c4f2cafd51b9364f1f8c0fd98598e817f7b2af916c95484ff5044560489f710",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/learned/training/mnist/CB64-RA4/checkpoint-2000.pt": "c4aa87562ca618eafb21e6157a0a7b6c61872e77673733fb3d6eba4e69e2bbc9",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/learned/replay/toy/CB64-RA4/branch-0.pt": "42bed9d415e6c45d281ff3d4ac73a1bbc0d7078b75272ae213a3ff3ea03082ff",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/learned/replay/toy/CB64-RA4/branch-1.pt": "f05fd834359be5c7444e3d0c6ec2ca1d6f1e82840c1bffed4ac111c0e09197ea",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/learned/replay/mnist/CB64-RA4/branch-0.pt": "74d17233c9313f0fee57217067ea53b2a16a0620229cf8cf93cf69c3b8642893",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/learned/replay/mnist/CB64-RA4/branch-1.pt": "a546403ca0e46e89981b150f1ac89e8f0dde25684bc44f863421e2b2e8068309"
+  },
+  "cuda_initialized": false,
+  "optimizer_updates": 0,
+  "new_seeds": 0,
+  "high_dimensional_support_law_qualified": false,
+  "learned_quality_qualified": false,
+  "scope": "Actual saved sparse graph/backend/settings and exact completed artifact receipts; no CUDA execution"
+}

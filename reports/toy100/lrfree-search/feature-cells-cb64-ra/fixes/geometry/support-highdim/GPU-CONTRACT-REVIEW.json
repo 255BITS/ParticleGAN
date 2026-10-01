@@ -1,0 +1,28 @@
+{
+  "status": "VALID",
+  "checks": {
+    "scope_is_diagnostic": true,
+    "physical_gpu_0": true,
+    "uuid": true,
+    "all_copy_checks": true,
+    "six_cases": true,
+    "cached_draws": true,
+    "work_bounds": true,
+    "sources_unchanged": true,
+    "package_maps_still_match": true
+  },
+  "contract_status": "PASS",
+  "result_sha256": "9272e24d8530921eab9f02350a2c5b7fcbd4289a1b11173efb7525c5377701cf",
+  "selected_package": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA2",
+  "limitations": [
+    "CUDA kernel/copy contracts and matched fixed inputs; does not certify retrained learned quality or native acceptance"
+  ],
+  "copy_checks": {
+    "prior": true,
+    "ema": true,
+    "history": true,
+    "optimizer": true,
+    "private_rng": true,
+    "cache_cleared_on_load": true
+  }
+}

@@ -1,0 +1,11 @@
+# Independent indexed metadata adapter review
+
+PASS: owner READY e76a712d99f3a224a99f1e26a4dcfe813eb61617f217577dd60d69f12af5dee4 and PILOT cb9620d116112d710abd4d31f17f101f1d21d58c31b24bcc2bf8c2b738fd6b03 match their declared sources. Independently restoring only collect.expected_options.evaluation_generate indexed to plain reconstructs the entire original collector AST. The hook executes the unchanged original monitor with output pinned to the new review directory. All original source/data/init/stream/schedule/scorer/gate checks and primary verdicts remain. Exact host removal of unset image_steps/native_steps keys and CPU-hidden mechanism loads are included.
+
+Mode hold, image blobs4, vector unequal mass and ring shift are PASS/VALID under the declared indexed RA4 sampler. Their original strict plain interpretation remains ERROR/INVALID, solely for the option difference. Every other original collector record field agrees exactly. Five memory-only controls preserve other-option, wrong-package, stream and plain-API errors, and preserve a quality FAIL as FAIL/VALID. Original task bytes and strict ERROR receipts remain unchanged.
+
+The three archived E22 native controls have plain generation and otherwise the same nine resolved options; their raw result hashes match the archived receipt. The API exception is a declared candidate sampler change, not a claim of semantic equality to historical plain evaluation. Learned toy gates still fail and aggregate count coverage does not qualify the known high-dimensional support-law limitation.
+
+Canonical receipt files contain a compact adapter declaration; summary rows retain detailed strict reasons and original receipt hashes, with a separate strict plain receipt next to each canonical receipt. The first independent direct attempt assumed these adapter-owned annotation layouts were identical and stopped; the failed log/snapshot are retained. The passing audit checks both layouts and every inherited collector field.
+
+Live monitor outputs will evolve as remaining jobs finish. Exact observed canonical/strict receipts and the monitor summary snapshot are retained privately and covered by the freeze; no future immutability claim is made for the live monitor. CPU only, zero optimizer updates, numerical reruns or new seeds.
