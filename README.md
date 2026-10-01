@@ -172,6 +172,7 @@ transport their parent's Adam history at half mass.
 - [Shared-bank routing sites](docs/e22_routed_sites.md): sequential token routing and a matched spatial comparison
 - [Whole-model checkpoint replay](docs/e22_routed_sites.md#activation-checkpointed-whole-model-replay): per-site DV12 without repeated training draws or diagnostics
 - [Routed noisy-game qualification](docs/e22_routed_game.md): token penalty units, mass invariance and matched longer training
+- [Many-site synchronization](docs/e22_routed_readbacks.md): deferred DV12 diagnostics and batched routing validation
 - [API reference](docs/api.md) and a [minimal DDGAN + UCD loop](docs/api.md#a-minimal-ddgan--ucd-loop)
 - Examples: [`quickstart_gan.py`](examples/quickstart_gan.py) (GANTrainer with checkpoints),
   [`e22_external_loop.py`](examples/e22_external_loop.py) (E22 in a caller-owned loop),

@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+- **Many-site synchronization:** DV12 retains only the last two detached
+  applications and computes their diagnostics on demand. Accelerator routing
+  batches finite checks once per complete forward; CPU validation stays eager.
+  Checkpoint format, training noise, row controls and R1 defaults are unchanged.
+  The 71-site CUDA fixture reduces forward-pair scalar reads from 1,014 to 22,
+  with exact before/after recovery state. See the
+  [measurement and integration notes](docs/e22_routed_readbacks.md).
 - **Routed game units and mass invariance:** the pooled-token example applies
   KA2 through a contextual token penalty view; RpGAN scores stay pooled.
   Routed DV12 ignores inactive rows and aggregates duplicate-position mass

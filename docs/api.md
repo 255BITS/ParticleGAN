@@ -82,6 +82,10 @@ moments while preserving the optimizer age.
 The [whole-model checkpoint replay example](e22_routed_sites.md#activation-checkpointed-whole-model-replay)
 recreates routing on recomputation and restores a private DV12 stream without
 advancing the training stream or repeating observations.
+DV12 diagnostics materialize on observation, retaining only two detached
+applications. Accelerator routing validates finite values once per complete
+forward. See the [many-site synchronization measurement](e22_routed_readbacks.md)
+for the validation timing, pending-memory bound and checkpoint compatibility.
 Routed DV12 uses represented mass and active support, collapsing exact latent
 duplicates before estimating bandwidth. Its checkpoint configuration records
 `routed_geometry="mass_atoms_v1"`; former raw-row checkpoints require the prior
