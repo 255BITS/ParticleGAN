@@ -11,8 +11,8 @@
     "examples/e22_routed_convergence_neutral.py": "1b9154bd653db5e5cc629877297eab6a06bbd3f1ac9cabb1858eef36a083724c",
     "examples/run_e22_routed_convergence.py": "2421e447b79489d1f6be3721994f5edabed6af6ddbc3ebe7813ddcec109ce7c5",
     "examples/e22_routed_convergence_rotated_teacher.py": "de53b5b781d3d140d83a40531326a67ef170e06687be551c277d88a45df4266a",
-    "examples/run_e22_routed_convergence_rotated_teacher.py": "b05c2df82aa97476092ca808f5b1805f296df25972028eb7c0557e23a3d4e963",
-    "tests/test_e22_routed_convergence_rotated_teacher.py": "ad8f6a117fbbfc773c96d37570c68561270fd5f80ae7e7edadbd694cb697c965",
+    "examples/run_e22_routed_convergence_rotated_teacher.py": "0a19c6aeffb29ad05e43351aca854e440a5420adb0e03fd4d942657a319b9461",
+    "tests/test_e22_routed_convergence_rotated_teacher.py": "4650381ece669969d997f27a33df6a1f4f62e0211d627250b7d2767eb752b7a3",
     "docs/e22_routed_convergence_v1.json": "8fbb7882ee2c57e4ea939a4cd642058fa5ddca21f6a139f16191b4822ff16d02",
     "docs/e22_routed_convergence_neutral_v1.json": "7313909fc91b57d9945a62bd02dc4a2d3f71af667a9e309276dec1a7233e4e93"
   },
@@ -153,7 +153,8 @@
     "total_wall_budget_seconds": 2700,
     "budget_includes": "all three quality arms, fixed-panel evaluation, six replay software updates, and independent qualification; preparation software is reported separately; wall timeout or missing review is incomplete qualification",
     "quality_training_launched": false,
-    "execution_authorized": false
+    "execution_authorized": false,
+    "artifact_archive": "Exact held source/card/native Python bytes under source/, plus frozen data.pt and full-file SHA; checkpoint and raw-score manifests preserve all declared states."
   },
   "evaluation": {
     "mandatory_common_judges": [

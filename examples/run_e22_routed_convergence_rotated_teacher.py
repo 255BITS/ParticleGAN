@@ -14,6 +14,7 @@ import json
 import math
 from pathlib import Path
 import platform
+import shutil
 import subprocess
 import sys
 import time
@@ -50,6 +51,24 @@ ENDPOINTS = (5120, 6400)
 
 def source_hashes():
     return {str(path.relative_to(ROOT)): common.sha(path) for path in SOURCES}
+
+
+def archive_sources(out, bindings):
+    """Preserve exact held files and native Python for later artifact review."""
+    archived = {}
+    native = {str(path.relative_to(ROOT)): common.sha(path)
+              for path in sorted((ROOT / "particlegan").rglob("*.py"))}
+    if base.digest(native) != bindings["native_source_hash"]:
+        raise RuntimeError("native source changed before archival")
+    for prefix, hashes in (("", bindings["source_hashes"]), ("native/", native)):
+        for relative, expected in hashes.items():
+            destination = out / "source" / prefix / relative
+            destination.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(ROOT / relative, destination)
+            if common.sha(destination) != expected or common.sha(ROOT / relative) != expected:
+                raise RuntimeError("source snapshot differs from frozen bytes: " + relative)
+            archived[prefix + relative] = expected
+    return archived
 
 
 def validate_contract(card):
@@ -208,7 +227,10 @@ def main():
             raise TimeoutError("arm diagnostic budget exhausted")
 
     try:
+        receipt["source_archive"] = archive_sources(args.out, bindings)
         data = law.make_rotated_data()
+        common.save(args.out / "data.pt", data)
+        receipt["data_file_sha256"] = common.sha(args.out / "data.pt")
         initial_data_digest = base.digest(data)
         receipt.update(data_digest=data["digest"], data_hashes={pool: base.digest(data[pool]) for pool in base.SPLITS},
                        raw_coordinate_scale=data["raw_scale"].tolist(),

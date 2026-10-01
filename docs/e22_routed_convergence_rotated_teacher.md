@@ -45,7 +45,9 @@ native control traces and exact 800-to-802 replay. Offline scoring must leave
 the full checkpoint, diagnostics, training streams, data and critics unchanged.
 
 `receipt.json` and `compact-report.json` report execution and scientific gates;
-independent qualification remains pending until a reviewer verifies the actual
+the run also preserves exact held source/card/native Python bytes in `source/`
+and its frozen `data.pt`, with full-file hashes for independent review.
+Independent qualification remains pending until a reviewer verifies the actual
 states, traces, common critic weights, raw scores and replay within the 2,700-
 second total budget. Bulk artifacts stay outside Git and progress is JSONL in
 `run.log`. A remaining gap is a failure witness for this fixed configuration;

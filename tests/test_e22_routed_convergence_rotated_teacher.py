@@ -45,6 +45,33 @@ def roundtrip(state):
     return torch.load(buffer, map_location="cpu", weights_only=False)
 
 
+@pytest.mark.parametrize("corruption", (None, "archive", "source"))
+def test_source_archive_preserves_bytes_and_rejects_drift(tmp_path, monkeypatch, corruption):
+    root = tmp_path / "input"
+    native_path = root / "particlegan" / "api.py"
+    native_path.parent.mkdir(parents=True)
+    native_path.write_text("API_VERSION = 1\n")
+    card_path = root / "card.json"
+    card_path.write_text('{"task": "software-only"}\n')
+    hashes = {"card.json": runner.common.sha(card_path)}
+    native = {"particlegan/api.py": runner.common.sha(native_path)}
+    bindings = {"source_hashes": hashes, "native_source_hash": base.digest(native)}
+    monkeypatch.setattr(runner, "ROOT", root)
+    copyfile = runner.shutil.copyfile
+    if corruption:
+        def corrupt_copy(source, destination):
+            copyfile(source, destination)
+            (destination if corruption == "archive" else source).write_text("altered bytes\n")
+        monkeypatch.setattr(runner.shutil, "copyfile", corrupt_copy)
+        with pytest.raises(RuntimeError, match="snapshot differs"):
+            runner.archive_sources(tmp_path / "run", bindings)
+    else:
+        archive = runner.archive_sources(tmp_path / "run", bindings)
+        assert archive == {**hashes, "native/particlegan/api.py": native["particlegan/api.py"]}
+        assert (tmp_path / "run/source/card.json").read_bytes() == card_path.read_bytes()
+        assert (tmp_path / "run/source/native/particlegan/api.py").read_bytes() == native_path.read_bytes()
+
+
 def test_rotation_preserves_teacher_gram_up_inputs_and_exact_reachability(data):
     original, rotated = data
     before, rng = base.digest(original), torch.get_rng_state().clone()

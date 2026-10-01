@@ -6,23 +6,23 @@
   "task": "routed_convergence_rotated_teacher_v1",
   "rho": 0.027625366713810866,
   "audit_report_sha256": "bfd38b84d558559ebe048ae93302270e6059253a4ccf6149f22eb8117f428241",
-  "prepared_card_sha256": "450a91474524a93fcf48200f62a0c6e54a8ed249423f1bbd8d6a0495ea0fdad8",
+  "prepared_card_sha256": "36e8694e48ea02bf05854dad6dab8d519c58f9d7db5776da6fc0b14327791b8a",
   "source_sha256": {
-    "docs/e22_routed_convergence_rotated_teacher_v1.json": "450a91474524a93fcf48200f62a0c6e54a8ed249423f1bbd8d6a0495ea0fdad8",
-    "examples/run_e22_routed_convergence_rotated_teacher.py": "b05c2df82aa97476092ca808f5b1805f296df25972028eb7c0557e23a3d4e963",
+    "docs/e22_routed_convergence_rotated_teacher_v1.json": "36e8694e48ea02bf05854dad6dab8d519c58f9d7db5776da6fc0b14327791b8a",
+    "examples/run_e22_routed_convergence_rotated_teacher.py": "0a19c6aeffb29ad05e43351aca854e440a5420adb0e03fd4d942657a319b9461",
     "examples/e22_routed_convergence_rotated_teacher.py": "de53b5b781d3d140d83a40531326a67ef170e06687be551c277d88a45df4266a",
     "examples/e22_routed_convergence.py": "b814bc0cac728d02290f6f0ed712dd6bb9483074f11666c5c012e72cd4d8f6b6",
     "examples/e22_routed_convergence_neutral.py": "1b9154bd653db5e5cc629877297eab6a06bbd3f1ac9cabb1858eef36a083724c",
     "examples/run_e22_routed_convergence.py": "2421e447b79489d1f6be3721994f5edabed6af6ddbc3ebe7813ddcec109ce7c5",
     "docs/e22_routed_convergence_v1.json": "8fbb7882ee2c57e4ea939a4cd642058fa5ddca21f6a139f16191b4822ff16d02",
     "docs/e22_routed_convergence_neutral_v1.json": "7313909fc91b57d9945a62bd02dc4a2d3f71af667a9e309276dec1a7233e4e93",
-    "tests/test_e22_routed_convergence_rotated_teacher.py": "ad8f6a117fbbfc773c96d37570c68561270fd5f80ae7e7edadbd694cb697c965"
+    "tests/test_e22_routed_convergence_rotated_teacher.py": "4650381ece669969d997f27a33df6a1f4f62e0211d627250b7d2767eb752b7a3"
   },
   "native_python_source_digest": "d0be475a055aae953c22dbd19f6d2357db041437e0679d2f2f2cfa356517f65b",
   "held_sources_byte_unchanged": true,
   "tests": {
     "file": "tests/test_e22_routed_convergence_rotated_teacher.py",
-    "unique_final_cases_passed": 15,
+    "unique_final_cases_passed": 18,
     "full_prepared_run": {
       "passed": 14,
       "failed": 1,
@@ -44,7 +44,14 @@
       "passed": 14,
       "seconds": 5.21
     },
-    "total_brief_native_update_calls_across_both_full_software_attempts": 66
+    "total_brief_native_update_calls_across_both_full_software_attempts": 66,
+    "source_archive_cases": {
+      "passed": 3,
+      "deselected": 15,
+      "seconds": 23.13,
+      "optimizer_updates": 0,
+      "checks": "Exact app/native byte snapshots; refuse source or archive drift."
+    }
   },
   "verified": [
     "Same student initial tensors, teacher up, fixed inputs and sources; only reachable teacher down span changed.",
@@ -70,5 +77,7 @@
     "Source and software readiness do not establish a trained remaining-gap witness.",
     "The complete actual states/traces/scores and800802 replay require independent qualification after any authorized quality run."
   ],
-  "independent_source_review": "transfer_law_review read-only audit identified no remaining code/quality issue after the documented gate, provenance and limit corrections; no trained experiment qualification implied."
+  "independent_source_review": "transfer_law_review read-only audit identified no remaining code/quality issue after the documented gate, provenance and limit corrections; no trained experiment qualification implied.",
+  "source_preparation_archive_commit": "1f7b7c8022a48a99b40a56a2649b354136566215",
+  "post_preparation_change": "Add exact held source/card/native snapshots and frozen data.pt with SHA before quality execution. Native update, scoring and earlier held fixture bytes unchanged; full6400 path remains unexecuted."
 }
