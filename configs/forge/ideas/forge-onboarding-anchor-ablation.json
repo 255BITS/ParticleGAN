@@ -2,7 +2,8 @@
   "api_changes": [],
   "api_version": "forge-api-v1",
   "changed_factors": [
-    "Ablate the public critic EMA-anchor term with recipe_overrides.reg_anchor_weight=0; keep the inherited initializer, fixed protocol seed and prior."
+    "Ablate the public critic EMA-anchor term with recipe_overrides.reg_anchor_weight=0; keep the inherited initializer, fixed protocol seed and prior.",
+    "Pin the K3P formulation explicitly: parent records provenance, not recipe inheritance; the current public default is KA2."
   ],
   "claim_contract": {
     "sampling_law": "task_declared",
@@ -24,7 +25,9 @@
     "reports/forge/EXPERIMENT_MEMORY.md"
   ],
   "recipe_overrides": {
-    "reg_anchor_weight": 0.0
+    "reg_anchor_weight": 0.0,
+    "name": "k3p",
+    "critic_formulation": "k3p"
   },
   "requires_capabilities": [
     "learned_locations",

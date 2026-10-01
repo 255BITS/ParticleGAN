@@ -75,6 +75,22 @@ def parser():
     b.add_argument("--outcome", help="filter status or presence of a task gate status")
     b.add_argument("--family", action="append", help="display task/host/source family; repeat for alternatives")
     b.add_argument("--evidence-quality", action="append", help="display receipt provenance, e.g. certified_pinned or imported_recorded; repeat for alternatives")
+    techniques = commands.add_parser("techniques", help="regenerate technique rows with full per-tier denominators; no training")
+    techniques.add_argument("--goal", default="discriminator_stability")
+    techniques.add_argument("--device", choices=("cpu", "cuda"), help="show one execution cohort (default both)")
+    techniques.add_argument("--json", action="store_true")
+    techniques.add_argument("--output", type=Path, help="write Markdown and compact JSON using this path prefix")
+    inventory = commands.add_parser("inventory", help="discover and run all declared techniques through ordinary Forge gates")
+    inventory_stages = inventory.add_subparsers(dest="stage", required=True)
+    for stage in ("plan", "enqueue", "run"):
+        inv = inventory_stages.add_parser(stage)
+        inv.add_argument("--view", default="discriminator_stability")
+        inv.add_argument("--through-tier", type=int, choices=(1, 2, 3), default=3)
+        inv.add_argument("--device", choices=("cpu", "cuda"), default=None)
+        inv.add_argument("--cuda-model")
+        inv.add_argument("--campaign", type=Path, default=Path("configs/forge/campaigns/technique-inventory.json"))
+        if stage == "run":
+            inv.add_argument("--gpus", default="0,1", help="physical GPU indices, or cpu")
     r = commands.add_parser("recall", help="find successes, failures and unknowns before a new idea")
     r.add_argument("--query", default="")
     r.add_argument("--goal")
@@ -210,6 +226,29 @@ def main(argv=None):
         emit(summarize_automation(root, selected_queue))
     elif command == "logs":
         follow_logs(queue_root / "events.jsonl", args)
+    elif command == "techniques":
+        from .technique_board import technique_board, render_markdown, write_report
+        if args.output:
+            emit(write_report(root, args.goal, output_prefix=args.output, execution_backend=args.device))
+        else:
+            result = technique_board(root, args.goal, execution_backend=args.device)
+            if args.json:
+                emit(result)
+            else:
+                print(render_markdown(result))
+    elif command == "inventory":
+        from .technique_inventory import plan_inventory, enqueue_inventory, run_inventory
+        backend = args.device or ("cpu" if args.stage == "run" and args.gpus == "cpu" else "cuda")
+        if args.stage == "run" and backend != ("cpu" if args.gpus == "cpu" else "cuda"):
+            raise ValueError("inventory --device must agree with --gpus")
+        options = dict(view_id=args.view, through_tier=args.through_tier,
+                       execution_backend=backend, cuda_model=args.cuda_model, campaign=args.campaign)
+        if args.stage == "plan":
+            emit(plan_inventory(root, queue_root, **options))
+        elif args.stage == "enqueue":
+            emit(enqueue_inventory(root, queue_root, queue=queue, **options))
+        else:
+            emit(run_inventory(root, queue_root, devices=args.gpus.split(","), queue=queue, **options))
     elif command in {"compile", "recall", "board", "readout"}:
         from . import knowledge
         if command == "compile":

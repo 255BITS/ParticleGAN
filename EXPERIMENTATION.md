@@ -275,6 +275,31 @@ python -m experiments.forge board --family image --evidence-quality imported_rec
 python -m experiments.forge board --scope pinned --evidence-quality certified_pinned
 ```
 
+For a technique inventory with one passes/total column per tier, regenerate the
+[technique leaderboard](reports/forge/technique-inventory.md). The roster is
+discovered from `configs/forge/ideas/*.json`, so adding a declared technique adds
+a row automatically. R1/R2, BCap, K3P and the other public formulations retain
+their actual resolved recipes and separate source/runtime/sampling cohorts.
+
+```sh
+# Read-only cost/coverage plan, then explicit gated execution.
+python -m experiments.forge inventory plan --through-tier 3
+python -m experiments.forge inventory run --through-tier 3 --gpus 0,1
+# Read-only regeneration; never launches or repeats an experiment.
+python -m experiments.forge techniques --device cuda \
+  --output reports/forge/technique-inventory
+python -m experiments.forge logs --follow --campaign technique-inventory-v1
+```
+
+The default inventory campaign has explicit reservation ceilings for the whole
+current roster. Inspect the plan before expanding the roster or budgets. Ordinary
+failures stop later tasks, including remaining tasks in that tier; unsupported
+techniques reserve no training resources. Required denominators remain 3/19/2
+for the current `discriminator_stability` view, including unknown and blocked
+cells. A zero passes/total cell alone does not establish a scientific failure.
+Archived and calibration results appear separately and cannot fill current
+qualification cells. Provisional screening still confers no default adoption.
+
 Receipt certification describes evidence identity, not a scientific pass.
 Use `board --json` to inspect family/provenance options and unknowns.
 

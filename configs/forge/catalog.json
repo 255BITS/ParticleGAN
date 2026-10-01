@@ -37,7 +37,7 @@
       "experiment/toy": 3,
       "experiment/trajectory": 2,
       "experiment/transition": 7,
-      "forge_engine": 34,
+      "forge_engine": 36,
       "lrfree/feature-cells-cb64-ra": 4058,
       "report/atlas-explanation": 7,
       "report/behavioral_baseline": 32,
@@ -98,7 +98,7 @@
       "candidate_patch": 25,
       "configuration": 807,
       "driver": 393,
-      "engine_support": 34,
+      "engine_support": 36,
       "evaluator_or_audit": 321,
       "evidence_artifact": 1574,
       "frozen_candidate_implementation": 15,
@@ -112,13 +112,13 @@
       "visualization": 19,
       "visualization_artifact": 301
     },
-    "files": 11105
+    "files": 11107
   },
   "coverage": {
-    "declared_count": 11105,
+    "declared_count": 11107,
     "missing": [],
     "stale": [],
-    "tracked_count": 11105,
+    "tracked_count": 11107,
     "unclassified": [],
     "valid": true
   },
@@ -6601,7 +6601,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "49fdad1685df2dc933c2b81bb983d37f6e56140c",
+      "git_blob": "678a9de2229f15d27dc53a1483bd45f1133b3b68",
       "path": "experiments/forge/__main__.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -6713,7 +6713,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "44137d668818b2e6d26d18f2a1b8d60ff5306f64",
+      "git_blob": "2f1c0335a5739a9ca1a1d51e7a03b79b1e177060",
       "path": "experiments/forge/knowledge.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -6799,6 +6799,20 @@
       "family": "forge_engine",
       "git_blob": "bcdfca0d313dc463dfdc481a71e30685d0395959",
       "path": "experiments/forge/state.py",
+      "role": "engine_support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "forge_engine",
+      "git_blob": "360669493ac30cb365345e2f0f6dfd3083e36628",
+      "path": "experiments/forge/technique_board.py",
+      "role": "engine_support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "forge_engine",
+      "git_blob": "c3f36620bcbe0e997a68376efe2082c7bf834002",
+      "path": "experiments/forge/technique_inventory.py",
       "role": "engine_support",
       "suggested_tiers": []
     },
@@ -79349,65 +79363,6 @@
       "path": "reports/transition/monolithic_viewer.html",
       "role": "support_artifact",
       "suggested_tiers": []
-    }
-  ],
-  "pinned_sources": [
-    {
-      "counts_by_suffix": {
-        "": 2,
-        ".c": 1,
-        ".csv": 3,
-        ".diff": 4,
-        ".gif": 35,
-        ".gz": 645,
-        ".html": 43,
-        ".json": 2436,
-        ".jsonl": 206,
-        ".log": 40,
-        ".md": 570,
-        ".npz": 1458,
-        ".patch": 2,
-        ".pdf": 3,
-        ".png": 253,
-        ".pt": 104,
-        ".py": 698,
-        ".sh": 6,
-        ".svg": 2,
-        ".toml": 4,
-        ".txt": 29,
-        ".xml": 2,
-        ".yaml": 669,
-        ".zip": 12
-      },
-      "file_count": 7227,
-      "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
-      "source_id": "baseline"
-    },
-    {
-      "counts_by_suffix": {
-        ".diff": 2,
-        ".gz": 1,
-        ".json": 168,
-        ".jsonl": 58,
-        ".md": 42,
-        ".patch": 19,
-        ".png": 4,
-        ".py": 64
-      },
-      "file_count": 358,
-      "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
-      "source_id": "pr155"
-    },
-    {
-      "counts_by_suffix": {
-        ".jsonl": 7,
-        ".log": 11,
-        ".md": 2,
-        ".py": 4
-      },
-      "file_count": 24,
-      "revision": "a8b9d3977701ca700d9918ac66d40ac814b9f9ba",
-      "source_id": "develop-vector-protocols"
     }
   ],
   "schema_version": 1,
