@@ -57,4 +57,33 @@ second total budget. Bulk artifacts stay outside Git and progress is JSONL in
 `run.log`. A remaining gap is a failure witness for this fixed configuration;
 different native rates or noise decisions prevent a unique basis-angle claim.
 Absolute scores cannot be subtracted from PR227 because the teacher, fixed
-scale and learned judges differ. No quality run has been performed.
+scale and learned judges differ.
+
+The single authorized run completed and passed independent review: 569,601
+checks, all 105 states, 102 curves, and three exact recovery replays. Training
+and scoring took 762.831 seconds; independent review took 54.934 seconds,
+817.765 seconds combined within the declared 2,700-second budget.
+
+Final held-out paired games, lower is better:
+
+| Common critic | Ordinary native game | Original particles | Neutral particles |
+| --- | ---: | ---: | ---: |
+| Ordinary at 800 | 1.818564 | 0.951775 | 1.224921 |
+| Ordinary at 6,400 | 2.066303 | 1.943993 | 1.881532 |
+| Original particles at 800 | 1.921654 | 1.091335 | 1.286375 |
+| Original particles at 6,400 | 2.173814 | 2.315960 | 2.116456 |
+
+Neutral particles beat ordinary native-game LoRA under every common critic
+at both 5,120 and 6,400, including each of the six subjects. Both particle
+arms retain learned bank/router/code contributions; zeroing codes worsens
+all four final scores. Original particles versus ordinary are mixed across
+the two final critics, so the original disadvantage is not consistently
+reproduced and gap reduction is inapplicable. H/b neutralization also does
+not improve original particles under both early critics, so its all-four
+support gate fails.
+
+This task does not identify the full-Supra cause. The qualified
+[results and provenance](e22_routed_convergence_rotated_teacher_results.json)
+retain both endpoints, all subjects, signed contributions, reference rays,
+failed gates and their limits. A separate guidance-pair task is being prepared
+to test another specific host difference; no angle, seed or scalar scan follows.
