@@ -37,7 +37,7 @@
       "experiment/toy": 3,
       "experiment/trajectory": 2,
       "experiment/transition": 7,
-      "forge_engine": 34,
+      "forge_engine": 35,
       "lrfree/feature-cells-cb64-ra": 4058,
       "report/atlas-explanation": 7,
       "report/behavioral_baseline": 32,
@@ -98,7 +98,7 @@
       "candidate_patch": 25,
       "configuration": 807,
       "driver": 393,
-      "engine_support": 34,
+      "engine_support": 35,
       "evaluator_or_audit": 321,
       "evidence_artifact": 1574,
       "frozen_candidate_implementation": 15,
@@ -112,13 +112,13 @@
       "visualization": 19,
       "visualization_artifact": 301
     },
-    "files": 11105
+    "files": 11106
   },
   "coverage": {
-    "declared_count": 11105,
+    "declared_count": 11106,
     "missing": [],
     "stale": [],
-    "tracked_count": 11105,
+    "tracked_count": 11106,
     "unclassified": [],
     "valid": true
   },
@@ -6601,7 +6601,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "49fdad1685df2dc933c2b81bb983d37f6e56140c",
+      "git_blob": "6e020241528e884000fec0380b97e56a1ab13c54",
       "path": "experiments/forge/__main__.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -6806,6 +6806,13 @@
       "family": "forge_engine",
       "git_blob": "a65367033a5fa7d1b7b6fb56ef1a0dc63e9e329c",
       "path": "experiments/forge/telemetry.py",
+      "role": "engine_support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "forge_engine",
+      "git_blob": "7d494baec8b5204d90f747001e02d37a9cc26453",
+      "path": "experiments/forge/tier_report.py",
       "role": "engine_support",
       "suggested_tiers": []
     },

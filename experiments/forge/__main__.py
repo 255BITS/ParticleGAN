@@ -75,6 +75,10 @@ def parser():
     b.add_argument("--outcome", help="filter status or presence of a task gate status")
     b.add_argument("--family", action="append", help="display task/host/source family; repeat for alternatives")
     b.add_argument("--evidence-quality", action="append", help="display receipt provenance, e.g. certified_pinned or imported_recorded; repeat for alternatives")
+    tiers = commands.add_parser("experiments-by-tier", help="list declared experiment tasks by view and tier; no training")
+    tiers.add_argument("--view", help="show one view; default all current views")
+    tiers.add_argument("--json", action="store_true", help="render machine-readable inventory instead of Markdown")
+    tiers.add_argument("--output", type=Path, help="write the report here, relative to --root; default print to stdout")
     r = commands.add_parser("recall", help="find successes, failures and unknowns before a new idea")
     r.add_argument("--query", default="")
     r.add_argument("--goal")
@@ -162,6 +166,18 @@ def follow_logs(path: Path, args):
 def main(argv=None):
     args = parser().parse_args(argv)
     root = args.root.resolve()
+    if args.command == "experiments-by-tier":
+        from .tier_report import build_report, render_markdown, write_report
+        report = build_report(root, args.view)
+        if args.output is not None:
+            path = write_report(report, root, args.output, as_json=args.json)
+            emit({"output": str(path), "tasks": report["task_count"], "views": len(report["views"]),
+                  "unassigned_tasks": len(report["unassigned_tasks"]), "training_launched": False})
+        elif args.json:
+            emit(report)
+        else:
+            print(render_markdown(report, root), end="")
+        return 0
     queue_root = queue_location(root, args.queue_root)
     from .queue import Queue, drain
     def publish():
