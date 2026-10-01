@@ -96,7 +96,7 @@ def _assert_registered_game_regression(parent, candidate):
             values["zero_code_minus_live"] = _game(proposed, judge, panels, ablate=True) - values["neutral_particle"]
             improvement = values["particle_native_game"] - values["neutral_particle"]
             assert improvement > 1e-4, (arm, step, values)
-            assert abs(values["zero_code_minus_live"]) > 1e-6, (arm, step, values)
+            assert values["zero_code_minus_live"] > 1e-6, (arm, step, values)
             if step == 6400:
                 gap = values["particle_native_game"] - values["ordinary_native_game"]
                 assert gap > 1e-4, (arm, step, values)

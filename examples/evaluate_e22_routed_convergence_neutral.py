@@ -1,7 +1,8 @@
 """Recover only the fixed neutral evaluation, preserving the failed receipt.
 
 No training runs here. The archived training source must differ from the
-repaired helper by exactly the fresh carrier used before checkpoint scoring.
+repaired helper by exactly the fresh checkpoint-scoring carrier and signed
+beneficial-particle gate. Original training bindings and artifacts stay intact.
 """
 
 import argparse
@@ -27,6 +28,25 @@ baseline = neutral.baseline
 
 def observational_source_repair(original, repaired):
     old, new = ast.parse(original), ast.parse(repaired)
+    # Undo exactly the evaluation-only gate correction for the source proof.
+    # Training was performed under the archived unsigned gate; this recovery
+    # classifies its unchanged endpoints with the stricter signed requirement.
+    unsigned = ast.parse('all(abs(value) > 1e-6 for value in particle_witness["zero_code_minus_live_test_game"].values())').body[0].value
+    signed = ast.dump(ast.parse('all(value > 1e-6 for value in particle_witness["zero_code_minus_live_test_game"].values())').body[0].value)
+
+    class RestoreUnsignedGate(ast.NodeTransformer):
+        replacements = 0
+
+        def visit_Call(self, node):
+            if ast.dump(node) == signed:
+                self.replacements += 1
+                return deepcopy(unsigned)
+            return self.generic_visit(node)
+
+    correction = RestoreUnsignedGate()
+    new = correction.visit(new)
+    if correction.replacements != 1:
+        raise ValueError("repair requires exactly one declared signed gate correction")
     insertion = ast.dump(ast.parse("loop = make_neutral_loop(data, bindings=bindings)").body[0])
     for index, node in enumerate(ast.walk(new)):
         for field, value in ast.iter_fields(node):
@@ -37,9 +57,12 @@ def observational_source_repair(original, repaired):
                         owner = list(ast.walk(candidate))[index]
                         getattr(owner, field).pop(position)
                         if ast.dump(candidate) == ast.dump(old):
-                            return {"sole_change": "fresh neutral loop before fixed checkpoint evaluation",
-                                    "training_ast_unchanged": True}
-    raise ValueError("repair changed more than the declared observational carrier")
+                            return {"changes": ["fresh neutral loop before fixed checkpoint evaluation",
+                                                "signed beneficial-particle evaluation gate"],
+                                    "training_ast_unchanged": True,
+                                    "trained_retained_particle_gate": "unsigned_effect_v1",
+                                    "evaluated_retained_particle_gate": "beneficial_signed_v2"}
+    raise ValueError("repair changed more than the declared observational carrier and signed gate")
 
 
 def main():
@@ -145,7 +168,7 @@ def main():
     coverage = failed["particle_coverage"]
     retained = (witness["bridge_still_trainable"] and all(value > 0 for value in witness["C_norms"].values())
                 and coverage["live_bank_updates"] > 0 and coverage["live_query_updates"] > 0
-                and all(abs(value) > 1e-6 for value in witness["zero_code_minus_live_test_game"].values()))
+                and all(value > 1e-6 for value in witness["zero_code_minus_live_test_game"].values()))
     for name, sha in artifact_hashes.items():
         if common.sha(args.run / name) != sha:
             raise AssertionError("read-only recovery changed an original training artifact")
