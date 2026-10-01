@@ -44,7 +44,7 @@ class InputNoise(nn.Module):
 
 
 class GANTrainer:
-    """Own the K3P update mechanics; callers supply networks and real batches.
+    """Own the shared update mechanics; callers supply networks and real batches.
 
     Supports scalar, unconditional GAN recipes with a particle or MoG prior. Fresh real
     batches for the generator can be passed as ``generator_real`` tensors or
@@ -400,9 +400,13 @@ class GANTrainer:
                              "resume under K3P; retrain, or pin the old release to continue them")
         if isinstance(state, dict) and state.get("schema") == 2:
             state = _upgrade_schema_2(state)
-        if isinstance(state, dict) and isinstance(state.get("recipe"), dict):
-            state = {**state, "recipe": _upgrade_recipe_fields(state["recipe"])}
         expected = self.state_dict()
+        # Recipe subclasses can still serialize the historical formulation
+        # fields. Preserve an exact current recipe before trying the public
+        # recipe's migration, which drops those formerly fixed fields.
+        if (isinstance(state, dict) and isinstance(state.get("recipe"), dict)
+                and state["recipe"] != expected["recipe"]):
+            state = {**state, "recipe": _upgrade_recipe_fields(state["recipe"])}
         if not isinstance(state, dict) or state.keys() != expected.keys() or state.get("schema") != 3:
             raise ValueError("invalid GANTrainer checkpoint schema")
         saved_recipe = state["recipe"]
@@ -483,9 +487,9 @@ class GANTrainer:
 
 # Recipe fields that once named a fixed choice (with the value that choice
 # had), and fields added since (with their defaults).
-_REMOVED_RECIPE_FIELDS = {"loss_type": "logistic", "gan_mode": "rp", "reg_arm": "k3p",
+_REMOVED_RECIPE_FIELDS = {"loss_type": "logistic", "gan_mode": "rp",
                           "reg_method": "autograd"}
-_ADDED_RECIPE_FIELDS = {"reg_anchor_weight": 1.0, "direct_particle_gain": True}
+_ADDED_RECIPE_FIELDS = {"reg_anchor_weight": 1.0, "direct_particle_gain": True, "reg_arm": "k3p"}
 # Construction-time init once lived on the recipe; saved weights supersede it.
 _INIT_FIELD_VALUES = (None, "batch_feature_zero")
 

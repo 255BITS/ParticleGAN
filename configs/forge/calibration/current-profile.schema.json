@@ -13,6 +13,8 @@
     "criteria_sha256": {"$ref": "#/$defs/digest"},
     "smoke_tasks": {"$ref": "#/$defs/tasks"},
     "reference_tasks": {"$ref": "#/$defs/tasks"},
+    "diagnostic_tasks": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true,
+      "description": "Optional separate tasks, bound in the cohort and reported with their own costs. No smoke, independent-reference or qualification credit."},
     "reference_exclusions": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
     "reference_scope": {"type": "string", "minLength": 1},
     "scoring_weights": {"const": "live"},
@@ -61,7 +63,7 @@
     },
     "cohort": {
       "type": "object", "required": ["sha256", "identity"],
-      "description": "Exact output of experiments.forge.calibration.calibration_cohort(request, smoke_tasks + reference_tasks). Full protocol fixes seed 0 and named streams; source, runtime, prior, initializer, task/evaluation hashes and per-task compute are bound. Candidate mechanisms and view placement are excluded.",
+      "description": "Exact output of experiments.forge.calibration.calibration_cohort(request, smoke_tasks + reference_tasks + diagnostic_tasks). Full protocol fixes seed 0 and named streams; source, runtime, prior, initializer, task/evaluation hashes and per-task compute are bound. Candidate mechanisms and view placement are excluded.",
       "properties": {"sha256": {"$ref": "#/$defs/digest"}, "identity": {"type": "object"}}
     }
   },

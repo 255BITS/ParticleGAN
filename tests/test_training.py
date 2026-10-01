@@ -147,7 +147,8 @@ def test_freeze_restored_when_generator_callback_raises():
     assert [p.requires_grad for p in trainer.D.parameters()] == flags
 
 
-def test_checkpoints_that_recorded_removed_fixed_choices_still_load():
+@pytest.mark.parametrize("schema", [2, 3])
+def test_checkpoints_that_recorded_removed_fixed_choices_still_load(schema):
     trainer = make_trainer()
     trainer.step(torch.randn(6, 2))
     checkpoint = trainer.state_dict()
@@ -156,11 +157,33 @@ def test_checkpoints_that_recorded_removed_fixed_choices_still_load():
         del recipe[key]
     old = {**checkpoint, "recipe": {**recipe, "loss_type": "logistic", "gan_mode": "rp",
                                     "reg_arm": "k3p", "reg_method": "autograd"}}
+    if schema == 2:
+        old = deepcopy(old)
+        generator = old["optimizers"][0].pop("regularizer")
+        critic = old["optimizers"][1].pop("regularizer")
+        assert generator["direct"] is None
+        old["schema"] = 2
+        old["k3p"] = {"latent": generator["latent"],
+                       "critic": {"penalty": critic["record"], "ema": critic["ema"],
+                                  "guard": critic["guard"]}}
     restored = make_trainer()
     restored.load_state_dict(old)
     assert restored.completed_steps == 1
+    assert_checkpoint_equal(checkpoint, restored.state_dict())
     with pytest.raises(ValueError, match="recipe"):
         make_trainer().load_state_dict({**old, "recipe": {**old["recipe"], "reg_arm": "b_cap"}})
+
+
+def test_k3p_checkpoint_without_new_arm_selector_still_resumes():
+    trainer = make_trainer()
+    trainer.step(torch.arange(12, dtype=torch.float32).reshape(6, 2) / 8)
+    checkpoint = trainer.state_dict()
+    del checkpoint["recipe"]["reg_arm"]
+    restored = make_trainer()
+    restored.load_state_dict(checkpoint)
+    assert restored.completed_steps == 1 and restored.recipe.reg_arm == "k3p"
+    for actual, expected in zip(restored.G.parameters(), trainer.G.parameters()):
+        assert torch.equal(actual, expected)
 
 
 @pytest.mark.parametrize("particles", [12, 1025])

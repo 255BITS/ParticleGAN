@@ -1,0 +1,48 @@
+{
+  "cohort": "48856fefffd85da9fe55d02f69656e632d042b2cbab09c84329d48eba5bb16a5",
+  "criteria_sha256": "6eac2531eed68e392c11a57328999ac5dce509f8fe51d23e7b9031b7a4e3f9d1",
+  "maximum_reserved_seconds": 18000,
+  "profile_sha256": "0e6bea41fd24fa06d3349c29e415f5c5d0e9538ddb51841f25d8c47acb8a2493",
+  "registration_sha256": "01a8acf8004a6c1b6e10bd5c4a475e8067c35a74c5d3f7ab496a7daeb1926a8b",
+  "selected_jobs": [
+    {
+      "budget_seconds": 3600,
+      "candidate": "k3p",
+      "revision": "6385ef80463dca6a3c1c1f94dd3269c8e1db3702a8d236c1bd59d69787e06325",
+      "task": "grid100_affine_paired_laws_v1",
+      "task_blockers": []
+    },
+    {
+      "budget_seconds": 3600,
+      "candidate": "k3p-bcap-matched-v1",
+      "revision": "5db772f81cafe59b642b5707e600380fb49c3d42623b5c769e03dd677bbbfafd",
+      "task": "grid100_affine_paired_laws_v1",
+      "task_blockers": []
+    },
+    {
+      "budget_seconds": 3600,
+      "candidate": "k3p-r1r2-matched-v1",
+      "revision": "3bff4e5835a30fd018893f3b3cb1b612c5ba28d39e62247b61b728b38987b85e",
+      "task": "grid100_affine_paired_laws_v1",
+      "task_blockers": []
+    },
+    {
+      "budget_seconds": 3600,
+      "candidate": "release07-gan-v3-cloud-v1",
+      "revision": "3f2629ea8a1a6c9176d021ccdb99df48c2f7f67296946110288d59f3015ae14d",
+      "task": "grid100_release07_cloud_named_v1",
+      "task_blockers": []
+    },
+    {
+      "budget_seconds": 3600,
+      "candidate": "release07-gan-v3-mog-v1",
+      "revision": "a9b2aa0ace96762b024a30c0979a0eedce8d07f9fae5cb5dc03868522132962c",
+      "task": "grid100_affine_paired_laws_v1",
+      "task_blockers": []
+    }
+  ],
+  "separate_diagnostics_per_lineage": 1,
+  "source": "bf9ccf356d95cd0b0023449c741c2a3f99f260f38c779c07cce221e79fde23f3",
+  "tasks_required_per_lineage": 19,
+  "training_launched": false
+}

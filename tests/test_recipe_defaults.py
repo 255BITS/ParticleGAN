@@ -16,12 +16,13 @@ def without_name(values):
 
 
 def test_default_matches_every_recorded_winning_field():
-    # The frozen K3P config ran arm a_r1r2 under the K3P patch; the package
-    # has no arm/loss switches: K3P and RpGAN logistic are the formulation.
+    # The frozen K3P config ran arm a_r1r2 under the K3P patch. The current
+    # selector explicitly names K3P rather than the patch's old arm alias.
     actual = json.loads(json.dumps(get_recipe().to_dict()))
-    assert not {'reg_arm', 'loss_type', 'gan_mode', 'reg_method'} & set(actual)
+    assert not {'loss_type', 'gan_mode', 'reg_method'} & set(actual)
+    assert actual['reg_arm'] == 'k3p'
     assert (K3P_CONFIG['loss_type'], K3P_CONFIG['gan_mode']) == ('logistic', 'rp')
-    shared = (set(actual) & set(K3P_CONFIG)) - {'name'}
+    shared = (set(actual) & set(K3P_CONFIG)) - {'name', 'reg_arm'}
     assert {key: actual[key] for key in shared} == {key: K3P_CONFIG[key] for key in shared}
     assert {'network_lr_floor', 'network_lr_horizon_cap', 'input_noise_std', 'output_noise_std',
             'output_noise_warmup', 'input_noise_anneal_end', 'batch_size', 'z_dim'} <= shared

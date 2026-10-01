@@ -38,6 +38,8 @@ class Recipe:
     prior_lr_mult: float = 2.0
     betas: tuple[float, float] = (0.0, 0.999)
     prior_betas: tuple[float, float] | None = None
+    # Shared public penalty selector; fixed arms retain their released L2 units.
+    reg_arm: str = "k3p"
     reg_coeff: float = 1.0
     reg_kappa: float = 1.0
     reg_every: int = 1
@@ -235,8 +237,9 @@ class Recipe:
         the critic and its EMA. ``output`` selects the logits from the critic's
         output (default: first element of a tuple/list); ``collect_stats``
         fills ``penalty.last_stats``. ``penalty_overrides`` replace the
-        recipe's ``coeff``, ``kappa``, ``lazy_k``, ``lr_floor`` or
-        ``anchor_weight`` for this penalty.
+        recipe's ``arm``, ``coeff``, ``kappa``, ``lazy_k``, ``lr_floor`` or
+        ``anchor_weight`` for this penalty. ``a_r1r2`` and ``b_cap`` use fixed
+        L2/autograd kernels and never evaluate the K3P anchor.
         """
         from .k3p import CriticPenalty
         return CriticPenalty(self, optimizer, output=output, collect_stats=collect_stats,
@@ -244,14 +247,14 @@ class Recipe:
 
     def _penalty_options(self, **overrides):
         """Resolved kernel settings for ``make_critic_penalty``."""
-        options = {"coeff": self.reg_coeff, "kappa": self.reg_kappa, "lazy_k": self.reg_every,
+        options = {"arm": self.reg_arm, "coeff": self.reg_coeff, "kappa": self.reg_kappa, "lazy_k": self.reg_every,
                    "anchor_weight": self.reg_anchor_weight, **overrides}
         # The blend floor f is the network LR floor. A floor >= 1/2 (e.g. 1.0,
         # a constant LR) keeps r >= 1/2 and hence s == 1 for every f, so the
         # same formulation needs no separate path.
         floor = self.resolved_network_lr_floor
         options.setdefault("lr_floor", floor if floor < 0.5 else 0.0)
-        unknown = set(options) - {"coeff", "kappa", "lazy_k", "lr_floor", "anchor_weight"}
+        unknown = set(options) - {"arm", "coeff", "kappa", "lazy_k", "lr_floor", "anchor_weight"}
         if unknown:
             raise TypeError(f"unknown critic penalty options: {sorted(unknown)}")
         from .grad_regularizers import GradientPenalty
@@ -362,7 +365,7 @@ class Recipe:
 def get_recipe(name="gan", **overrides):
     """Select a model family with current shared defaults and explicit overrides.
 
-    Every family trains with the same formulation; names configure model
+    Every family shares the default formulation; names configure model
     components only. Use ``Recipe(**saved_fields)`` for resolved checkpoints
     and ``recipe.replace(name=...)`` for custom report labels.
     """

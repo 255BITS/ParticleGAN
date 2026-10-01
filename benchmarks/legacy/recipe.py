@@ -1,7 +1,7 @@
 """Pinned pre-removal ``Recipe`` with the formulation switches benchmarks replay.
 
 ``LegacyRecipe`` is ``particlegan.Recipe`` plus the fields ParticleGAN no
-longer ships (``loss_type``, ``gan_mode``, ``reg_arm``, ``reg_method``) and
+longer ships (``loss_type``, ``gan_mode``, ``reg_method``), the archived arms, and
 the factories that honored them, built from the pinned copies in this
 package. With default switches it trains exactly like ``particlegan``'s
 recipe; archived GAN v3 / locked_shared / arm-study configurations resolve
@@ -45,6 +45,15 @@ class LegacyRecipe(Recipe):
         super().__post_init__()
         self.make_loss()
         self.make_gradient_penalty()
+
+    def _penalty_options(self, **overrides):
+        """Keep the base's common validation separate from archived arm selection.
+
+        Before the public selector existed, this inherited hook validated
+        only K3P settings. The actual archived arm/method remains validated
+        by ``make_gradient_penalty`` in ``__post_init__`` above.
+        """
+        return super()._penalty_options(**{**overrides, "arm": "k3p"})
 
     def to_dict(self):
         """The recorded dict: recorded field order; added fields only when changed."""

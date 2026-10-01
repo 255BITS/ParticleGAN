@@ -605,7 +605,7 @@ class CriticPenalty:
             raise TypeError("optimizer must come from recipe.make_critic_optimizer or recipe.make_optimizers")
         self.optimizer, self.critic = optimizer, optimizer.critic
         options = recipe._penalty_options(**penalty_overrides)
-        if optimizer.anchor is None and options["anchor_weight"] != 0:
+        if options["arm"] == "k3p" and optimizer.anchor is None and options["anchor_weight"] != 0:
             raise ValueError("this penalty needs the critic's EMA: pass ema_critic=copy.deepcopy(critic) "
                              "to recipe.make_optimizers / recipe.make_critic_optimizer")
         self.regularizer = GradientPenalty(record=optimizer.record, **options)
@@ -665,7 +665,8 @@ class CriticPenalty:
 
     def diagnostics(self):
         """Host-side scalars for logging (blend weight; guard clip count)."""
-        out = {"blend_weight": float(self.regularizer.blend_weight())}
+        out = ({"blend_weight": float(self.regularizer.blend_weight())}
+               if self.regularizer.arm == "k3p" else {})
         if self.optimizer.guard is not None:
             out["clipped_tensors"] = self.optimizer.guard.clipped_tensors
         return out

@@ -1,0 +1,34 @@
+{
+  "schema_version": 1,
+  "id": "k3p-r1r2-matched-v1",
+  "parent": "k3p",
+  "goal": "discriminator_stability",
+  "hypothesis": "Replace only the critic penalty by frozen historical r1r2 while retaining the K3P optimizer, noise, A2, host and sampling contracts.",
+  "changed_factors": [
+    "reg_arm k3p -> a_r1r2"
+  ],
+  "mechanism_class": "structural",
+  "mechanism_rationale": "Fixed real/fake squared L2 gradients replace the K3P LR-dependent penalty and anchor. Coefficient1, cap1; no tuning.",
+  "api_version": "forge-api-v1",
+  "execution_path": "public_trainer",
+  "recipe_overrides": {
+    "reg_arm": "a_r1r2"
+  },
+  "requires_capabilities": [
+    "learned_locations",
+    "a2",
+    "named_rng"
+  ],
+  "api_changes": [],
+  "claim_contract": {
+    "schedule": "scheduled",
+    "scoring_weights": "live",
+    "sampling_law": "task_declared"
+  },
+  "lifecycle": "proposed",
+  "prior_art": [
+    "reports/forge/studies/FORMULATION_COMPARISON_CONTINUATION.md",
+    "tests/fixtures/release07-public-api.json"
+  ],
+  "guide": "EXPERIMENTATION.md"
+}

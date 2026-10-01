@@ -100,8 +100,10 @@ class MechanismAudit:
                      for name in NAMES}
         penalty = self.rows["critic_penalty"]
         penalty.update(requested=recipe.reg_coeff > 0, enabled=recipe.reg_coeff > 0)
-        self.rows["critic_anchor"].update(requested=recipe.reg_coeff > 0 and recipe.reg_anchor_weight > 0,
-                                          enabled=critic_optimizer.anchor is not None and recipe.reg_coeff > 0 and recipe.reg_anchor_weight > 0)
+        anchor_requested = (recipe.reg_arm == "k3p" and recipe.reg_coeff > 0
+                            and recipe.reg_anchor_weight > 0)
+        self.rows["critic_anchor"].update(requested=anchor_requested,
+                                          enabled=critic_optimizer.anchor is not None and anchor_requested)
         self.rows["critic_guard"].update(requested=recipe.d_guard_ratio > 0,
                                          enabled=critic_optimizer.guard is not None)
         self.rows["a2"]["requested"] = recipe.latent_damping_max_rate > 0
