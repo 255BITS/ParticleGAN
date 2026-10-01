@@ -79,5 +79,25 @@
   ],
   "independent_source_review": "transfer_law_review read-only audit identified no remaining code/quality issue after the documented gate, provenance and limit corrections; no trained experiment qualification implied.",
   "source_preparation_archive_commit": "1f7b7c8022a48a99b40a56a2649b354136566215",
-  "post_preparation_change": "Add exact held source/card/native snapshots and frozen data.pt with SHA before quality execution. Native update, scoring and earlier held fixture bytes unchanged; full6400 path remains unexecuted."
+  "post_preparation_change": "Add exact held source/card/native snapshots and frozen data.pt with SHA before quality execution. Native update, scoring and earlier held fixture bytes unchanged; full6400 path remains unexecuted.",
+  "independent_reviewer_preparation": {
+    "quality_evidence_exists": false,
+    "trained_qualification_executed": false,
+    "optimizer_updates": 0,
+    "final_cases_passed": 5,
+    "first_run_seconds": 5.9,
+    "after_changes_seconds": 2.33,
+    "final_contract_test_seconds": 0.2,
+    "source_sha256": {
+      "examples/review_e22_routed_convergence_rotated_teacher.py": "1a5cf8461249ea4efe9481f71f17129544528ca123c0444d700070f3fef6f70d",
+      "tests/test_e22_routed_convergence_rotated_teacher_review.py": "a591bea2bfa92b2f0dfcdebb728e2e1bb9214938618a7e36d68192ca0ae7424f"
+    },
+    "coverage": "Actual source/archive/data identities, all105states/102curves/19200draws, four mandatory common critics, both fixed endpoints, six replay updates after a complete run; included2700-second total budget."
+  },
+  "final_prepared_card_validation": {
+    "passed": true,
+    "card_sha256": "36e8694e48ea02bf05854dad6dab8d519c58f9d7db5776da6fc0b14327791b8a",
+    "by": "independent rotated_toy_review agent",
+    "optimizer_updates": 0
+  }
 }
