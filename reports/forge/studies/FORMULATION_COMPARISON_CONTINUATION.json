@@ -1,0 +1,67 @@
+{
+  "schema_version": 1,
+  "status": "CONTINUATION_SCOPE_PINNED_NOT_REGISTERED",
+  "user_request": "Run R1/R2, BCap, and the formulation released in 0.7 as well; continue after compaction.",
+  "release": {
+    "tag": "v0.7.0",
+    "commit": "180d18f400335fb295611d624b48a4e072ae3bae",
+    "recipe_name": "gan_v3",
+    "files_sha256": {
+      "particlegan/recipes.py": "56498c6b22895e30c68c28bb897ba7bc9d26707901a33991ec6b3d9cb5a4b060",
+      "particlegan/grad_regularizers.py": "da03f7653b3d8718fbfa086b0c6eb20bf06943b1f6a8e360b6e14ebd66dabd3f",
+      "particlegan/training.py": "d2f418ec1ab43ab24d57071382c2f1fd53e17eb5064fb6bbd391e84543eeb405",
+      "particlegan/locked_shared.py": "d6e0b484691de311b31866b3fa52d6f388809648117926d2d47d25f302316610"
+    },
+    "verified_default_fields": {
+      "z_dim": 4,
+      "num_particles": 20000,
+      "batch_size": 256,
+      "prior_kind": "particles",
+      "sigma_rel": 0.0,
+      "standardize": true,
+      "total_steps": 7000,
+      "lr": 0.00425,
+      "d_lr_mult": 1.0,
+      "prior_lr_mult": 2.0,
+      "betas": [
+        0.0,
+        0.99
+      ],
+      "loss_type": "logistic",
+      "gan_mode": "rp",
+      "reg_arm": "b_cap",
+      "reg_coeff": 6.0,
+      "reg_kappa": 1.25,
+      "reg_every": 1,
+      "reg_method": "autograd",
+      "prior_reg": 0.05,
+      "ema_decay": 0.995,
+      "lr_anneal_start": 0.6,
+      "lr_floor": 0.05
+    }
+  },
+  "arms": [
+    {
+      "id": "r1-r2",
+      "identity": "Historical a_r1r2: zero-centered squared-L2 gradient penalty on real and fake; keep distinct from K3P early R1-plus-fake-cap branch."
+    },
+    {
+      "id": "bcap",
+      "identity": "Historical b_cap: one-sided relu(norm(grad D)-kappa)^2; preregister coefficient and norm, no sweep."
+    },
+    {
+      "id": "release-0-7-gan-v3",
+      "identity": "Full exact released GAN v3 recipe; uses BCap but also released optimizer, spread and shape defaults. Pin full recipe instead of representing as one penalty change."
+    },
+    {
+      "id": "k3p-reference",
+      "identity": "Current K3P control; reuse only receipts exactly compatible with newly resolved scientific source/task/prior/scoring/runtime."
+    }
+  ],
+  "next_stage": "Resolve original-release versus matched-host comparison identities, add centrally supported public penalty/formulation controls with parity tests, then freeze a fresh profile and small explicit diagnostic lane. Register clean/noisy scoring policies prospectively with all outcomes retained, distinguishing MoG versus historical cloud law. Use one fixed seed, named init streams and metrics, not image selection.",
+  "training_allowance_seconds": 0,
+  "registration_created": false,
+  "runs_launched": 0,
+  "prior_failed_study": "no-output-noise-reference-v1 remains concluded/infeasible; exact noise-removal revision abandoned; no continuation or threshold change.",
+  "promotion_scope": "Old K3P default promotion remains historical evidence under its original laws; current clean-MoG qualification remains unestablished. No robustness or seed sweep."
+}
