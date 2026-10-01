@@ -92,7 +92,9 @@ def main():
     ap=argparse.ArgumentParser(description=__doc__)
     ap.add_argument("--prs",type=Path,required=True);ap.add_argument("--sources",type=Path,required=True)
     ap.add_argument("--artifacts",type=Path,required=True);ap.add_argument("--output",type=Path,required=True)
+    ap.add_argument("--addenda",type=Path,help="Pinned supplemental reviews; preserve the original snapshot and cohort")
     args=ap.parse_args();args.output.mkdir(parents=True,exist_ok=True)
+    supplement=read(args.addenda) if args.addenda else {}
     prs=read(args.prs);by_pr={p["number"]:p for p in prs};cases=[];broken=[]
     for record in read(args.artifacts/"develop-frozen-reference/index.json"):
         score,quality=base_rating(record["name"])
@@ -165,6 +167,7 @@ def main():
         cases.append(dict(id=f"source-family-{i:02d}",name=name,origin="develop source review",rating=rating,
                           quality="Source-reviewed definition; no fresh current training evidence",verifies=question,
                           status="SOURCE REVIEW ONLY",media=None,explanation="EXISTING_FAMILIES.md"))
+    cases.extend(supplement.get("cases",[]))
     cases.sort(key=lambda r:(-r["rating"],r["name"]))
     public_hashes=read(args.artifacts/"native-grid100-v2/summary.json")["source_sha256"]
     write(args.output/"catalog.json",dict(base_sha="4b16312e56328a679b92da69a287c0c9490259d9",date="2026-10-01",public_package_sha256=public_hashes,cases=cases,
@@ -172,6 +175,8 @@ def main():
     problems=["# Ranked toy problems","", "Scores rate scientific usefulness: **5** = precise discriminating question with strong oracle/controls; **4** = useful bounded question; **3** = well-defined but narrow/redundant; **2** = weak gate or unsupported application interpretation. A model FAIL does not lower a problem's scientific rating.","",
               "The table includes protocol/architecture variants for traceability. Similar templates, ring stresses and wide-gap polygons are not independent benchmark families. `PASS / FAIL` is the original counterexample arm followed by its proposed positive control. Read [HIGH_RATED.md](HIGH_RATED.md) for the strongest tests' exact claims.","",
               "| Score | Problem / source | What it actually verifies | Current evidence | Training visualization |","|---|---|---|---|---|"]
+    if supplement:
+        problems[6:6]=["[PR226/227 addendum](PR226_PR227.md) adds two retained-evidence reviews on pinned develop `6ec7e578`; their cohort remains separate from the original `4b16312e` runs.",""]
     for c in cases:
         source=f"[{c['origin']}](https://github.com/255BITS/ParticleGAN/pull/{c['pr']})" if c.get("pr") else c["origin"]
         media=f"[GIF]({c['media']})" if c.get("media") else "[Source review; no fresh GIF](EXISTING_FAMILIES.md)" if c["status"]=="SOURCE REVIEW ONLY" else "**Missing: execution blocked**"
@@ -195,6 +200,13 @@ def main():
         inventory.append(dict(number=n,title=r["title"],url=r["url"],head_sha=r["headRefOid"],base_sha=r["baseRefOid"],base=r["baseRefName"],scope=scope,
                               action=action,python_files=r["code_files"],complete_local_diff=r["complete_local_diff"]))
         lines.append(f"| [{n}](https://github.com/255BITS/ParticleGAN/pull/{n}) {r['title'].replace('|','/')} | {scope} | {action} | `{r['headRefOid'][:12]}` |")
+    if supplement:
+        lines.extend(["", "## PR226/227 supplemental review", "",
+                      "Added after the original 134-PR snapshot. Exact proposal heads and develop base `6ec7e578` are preserved separately; training artifacts were reused without retraining. See [the review](PR226_PR227.md).", "",
+                      "| PR | Scope | Problem evidence / action | Pinned head |", "|---|---|---|---|"])
+        for r in supplement.get("pull_requests",[]):
+            inventory.append(r)
+            lines.append(f"| [{r['number']}]({r['url']}) {r['title']} | {r['scope']} | {r['action']} | `{r['head_sha'][:12]}` |")
     write(args.output/"pull_requests.json",inventory)
     (args.output/"OPEN_PRS.md").write_text("\n".join(lines)+"\n")
     sources=read(args.sources/"receipts.json")
@@ -204,6 +216,7 @@ def main():
         if local.exists() and not any(s["pr"]==n and s["path"]==path for s in sources):
             sources.append(dict(pr=n,head_sha=by_pr[n]["headRefOid"],path=path,
                                 sha256=hashlib.sha256(local.read_bytes()).hexdigest(),role="historical endpoint only"))
+    sources.extend(supplement.get("source_receipts",[]))
     write(args.output/"source-receipts.json",[{k:v for k,v in s.items() if k!="local"} for s in sources])
     print(dict(cases=len(cases),new_problem_prs=len(new),open_prs=len(prs),rating_counts=dict(Counter(c["rating"] for c in cases))),flush=True)
 

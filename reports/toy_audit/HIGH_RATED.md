@@ -101,6 +101,29 @@ reopen guard/row/birth-death system fails.
 
 Source: [PR224](https://github.com/255BITS/ParticleGAN/pull/224).
 
+## 4/5 — PR226/227 native convergence diagnostics
+
+**PR226 asks whether a stale asymmetric critic keeps moving an already-correct
+paired prediction.** Public-loss identities isolate the odd force; matched
+1,200-update profiles separate critic parity from D estimator variance. Removing
+odd score/features lowers clean reporting RMSE from 0.053377 to 0.042724. The
+affine path can solve the two-channel task without routing, and all G controllers
+decide frequently: neither particle advantage nor a real-run stationarity delay
+is established.
+
+**PR227 asks whether initial H/b modulation causes a convergence gap within a
+teacher-aligned adapter family.** Both families exactly realize the same teacher;
+the within-particle initialization intervention changes only H/b before policy
+construction. All four predetermined learned critics rank it ahead at 6,400,
+and removing its trained codes worsens all four scores. H and b change together;
+the teacher favors the ordinary initial basis, and the ordinary/particle baseline
+has owner/policy differences. The unsigned ablation gate should become a positive
+signed check before serving as a regression for beneficial particle contribution.
+
+Both are strong bounded diagnostics with fixed-budget progress, rather than
+absolute accuracy qualifications. The [full explanation, controls, retained
+failure and two GIFs](PR226_PR227.md) preserve their later develop cohort separately.
+
 ## 4/5 — MisGAN incomplete-data and conditional-posterior tests
 
 **Question:** can a model learn complete data from incomplete observations,

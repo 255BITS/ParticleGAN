@@ -5,6 +5,24 @@ repair workstream owns production repairs; none are included here. Sources are
 pinned in [pull_requests.json](pull_requests.json), and exact current results are
 in [catalog.json](catalog.json).
 
+## PR226/227 supplemental findings
+
+Both proposals execute and have useful bounded scientific claims; the
+[supplemental review](PR226_PR227.md) supplies their missing training GIFs.
+PR227's long assertion, intervention runner and recovered scorer all use
+`abs(zero_code_minus_live) > 1e-6`. A synthetic control with ablated scores
+0.01 **better** than live scores still passes the actual tensor-based regression.
+For a useful-particle claim, all three paths should require a positive signed
+effect under every mandatory judge and reject a negative-direction control.
+The measured saved run has positive effects, so its result remains supported.
+
+The original PR227 scorer failed after complete training when loading the
+unresolved step-zero state into a resolved policy. Its fresh-policy repair is
+already present at the reviewed head. Original errors/artifacts remain preserved;
+independent re-scoring validates the repaired evidence without retraining.
+Neither PR's relative improvement supplies an absolute output-accuracy gate
+or validates its large image application. No production config repair follows.
+
 ## Execution blockers
 
 | Proposal | Reproduced failure on develop | Consequence |

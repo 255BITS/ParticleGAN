@@ -24,6 +24,61 @@
 
 ## How observations were captured
 
+### Later PR226/227 cohort
+
+The [addendum](PR226_PR227.md) uses develop
+`6ec7e5788e14ea15ddc3e16ac71110458108b6a6` and the two exact proposal heads,
+recorded in [convergence-addendum.json](convergence-addendum.json). Combined
+inventory now contains the original 134 records plus these two supplemental
+records. Original package hashes, training results and sampling laws are unchanged.
+
+PR226 retains Python3.11.15/Torch2.11.0 CPU training. Its 17 bound artifact files,
+48 metric observations and 1,200 caller-chain records per profile were checked.
+The 16-frame GIF uses recorded clean reporting metrics; intermediate output
+tensors were not retained. No cloud reconstruction is implied.
+
+PR227 retains Python3.12.13/Torch2.13.0 CPU training. The observer restores all
+136 saved states, independently scores 132 held-out rows under all four actual
+critic weights, and verifies state/RNG purity. Both original/recovered artifact
+identities and the sole fresh-policy scoring repair are checked. Its 33-frame
+GIF displays fixed every-128th-coordinate teacher/model edit pairs. Metrics use
+all test contexts with the original private Gaussian panels. The signed-gate
+counterexample substitutes synthetic ablation scores and is separately labelled;
+it is not a trained alternative.
+
+Both were reviewed on Python3.12.13/Torch2.13.0. There were **zero new training
+updates**, no seed change and no Atlas substitution into their routed host.
+The full learned opt-in subprocess campaign was not rerun. Its existing
+tensor-based assertion was executed on retained states, together with 39 passing
+focused software tests and one explicitly skipped opt-in training test.
+
+Observation-only reproduction, from this audit checkout with the two pinned
+proposal checkouts and retained local artifacts:
+
+```sh
+CUDA_VISIBLE_DEVICES='' OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 \
+python -u -m benchmarks.toy_audit.review_convergence 226 \
+  --source /tmp/particlegan-toy-review-226 \
+  --artifacts /ml2/hypergan/ParticleGAN-paired-residual-toy-20261001/artifacts/paired-residual-toy/convergence \
+  --output /ml2/hypergan/toy-audit-artifacts-20261001/pr226-review \
+  --media reports/toy_audit/media > /ml2/hypergan/toy-audit-pr226-review.log 2>&1
+CUDA_VISIBLE_DEVICES='' OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 \
+python -u -m benchmarks.toy_audit.review_convergence 227 \
+  --source /tmp/particlegan-toy-review-227 \
+  --artifacts /ml2/hypergan/ParticleGAN-convergence-toy-develop/runs/routed-convergence-v1 \
+  --candidate /ml2/hypergan/ParticleGAN-convergence-toy-develop/runs/routed-convergence-neutral-v1 \
+  --output /ml2/hypergan/toy-audit-artifacts-20261001/pr227-review \
+  --media reports/toy_audit/media > /ml2/hypergan/toy-audit-pr227-review.log 2>&1
+```
+
+The pinned proposal reproduction sources generate the declared evidence
+on a fresh machine; raw checkpoints/JSONL remain outside Git. To regenerate
+the combined catalog, add
+`--addenda reports/toy_audit/convergence-addendum.json` to the catalog command
+below. Media receipts now include these two GIFs.
+
+### Original cohort capture
+
 The transfer hook calls the original evaluator first and records its actual
 clean live draw. Image hosts additionally enumerate the existing finite
 particle table, under an RNG fork and with module modes preserved. Existing
@@ -87,7 +142,7 @@ fixed 10,000 test rows, not trained arms. PR224 uses its specified deterministic
 
 ## GIF interpretation
 
-The 88 training GIFs show actual recorded training checkpoints, with update
+The 90 training GIFs show actual recorded training checkpoints, with update
 labels, sample/template/target views where available, numerical curves and
 full-budget status. There is **no cloud or metric interpolation**. The nine
 behavioral hosts have numerical curves rather than sample clouds; these are
@@ -96,7 +151,7 @@ The native mode zoom uses fixed mode index 0, not the best-looking component.
 Static PNG posters are the final recorded frame.
 
 Historic circle/sprite endpoint media is copied from the exact PR heads and
-labelled `historical-rollout`. It does not count among the 88 training GIFs
+labelled `historical-rollout`. It does not count among the 90 training GIFs
 and does not fill either proposal's missing current convergence evidence.
 
 ## Reproduction commands

@@ -2735,5 +2735,43 @@
       "A\ttests/test_circle_transition.py"
     ],
     "complete_local_diff": true
+  },
+  {
+    "number": 226,
+    "title": "Add GAN-only paired-residual convergence diagnostic",
+    "url": "https://github.com/255BITS/ParticleGAN/pull/226",
+    "head_sha": "0e69fa60bf151762f8edc49bb714c6b7f8cf4804",
+    "base_sha": "6ec7e5788e14ea15ddc3e16ac71110458108b6a6",
+    "base": "develop",
+    "scope": "Supplemental native convergence test; pinned retained-evidence review",
+    "action": "All three improve; even critic lowers final RMSE 19.96%",
+    "python_files": [
+      "A\texamples/e22_paired_residual_toy.py",
+      "A\texperiments/paired_residual_oracle.py",
+      "A\ttests/test_e22_paired_residual_toy.py",
+      "A\ttests/test_paired_residual_oracle.py"
+    ],
+    "complete_local_diff": true
+  },
+  {
+    "number": 227,
+    "title": "Add routed convergence toy with particle initialization control",
+    "url": "https://github.com/255BITS/ParticleGAN/pull/227",
+    "head_sha": "b0e4f420856d7607baa98cbef488e569d20a3f31",
+    "base_sha": "6ec7e5788e14ea15ddc3e16ac71110458108b6a6",
+    "base": "develop",
+    "scope": "Supplemental native convergence test; pinned retained-evidence review",
+    "action": "H/b control closes the gap; unsigned code-ablation gate needs tightening",
+    "python_files": [
+      "A\texamples/diagnose_e22_routed_convergence_basis.py",
+      "A\texamples/e22_routed_convergence.py",
+      "A\texamples/e22_routed_convergence_neutral.py",
+      "A\texamples/evaluate_e22_routed_convergence_neutral.py",
+      "A\texamples/run_e22_routed_convergence.py",
+      "A\ttests/test_e22_routed_convergence.py",
+      "A\ttests/test_e22_routed_convergence_long.py",
+      "A\ttests/test_e22_routed_convergence_neutral.py"
+    ],
+    "complete_local_diff": true
   }
 ]

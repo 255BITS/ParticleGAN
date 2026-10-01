@@ -138,3 +138,12 @@ Snapshot: **134 open PRs**; every exact head/base pair has a complete local Pyth
 | [47](https://github.com/255BITS/ParticleGAN/pull/47) Break: published absolute lengths fail ×24 two_broad; MLP control passes | New test/counterexample proposal | FAIL / PASS | `341f7f757dcb` |
 | [45](https://github.com/255BITS/ParticleGAN/pull/45) Break: published batchfeat lengths fail gauge-complete two_broad ×32 | New test/counterexample proposal | FAIL / PASS | `1114d0eeb0a6` |
 | [22](https://github.com/255BITS/ParticleGAN/pull/22) Circle transition toy with paired-error controller | New test/counterexample proposal | BLOCKED before training | `c85af40f1e30` |
+
+## PR226/227 supplemental review
+
+Added after the original 134-PR snapshot. Exact proposal heads and develop base `6ec7e578` are preserved separately; training artifacts were reused without retraining. See [the review](PR226_PR227.md).
+
+| PR | Scope | Problem evidence / action | Pinned head |
+|---|---|---|---|
+| [226](https://github.com/255BITS/ParticleGAN/pull/226) Add GAN-only paired-residual convergence diagnostic | Supplemental native convergence test; pinned retained-evidence review | All three improve; even critic lowers final RMSE 19.96% | `0e69fa60bf15` |
+| [227](https://github.com/255BITS/ParticleGAN/pull/227) Add routed convergence toy with particle initialization control | Supplemental native convergence test; pinned retained-evidence review | H/b control closes the gap; unsigned code-ablation gate needs tightening | `b0e4f420856d` |

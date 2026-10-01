@@ -1577,6 +1577,86 @@
       "explanation": "EXISTING_FAMILIES.md"
     },
     {
+      "id": "pr226",
+      "name": "Paired residual critic-lag diagnostic",
+      "origin": "PR226",
+      "pr": 226,
+      "rating": 4,
+      "quality": "Good bounded mechanism diagnostic; affine path can bypass routing",
+      "verifies": "Verify the nonzero odd-critic force at correct paired predictions, then separate critic parity from D estimator variance in matched native training.",
+      "status": "All three improve; even critic lowers final RMSE 19.96%",
+      "media": "media/pr226.gif",
+      "explanation": "PR226_PR227.md",
+      "sampling": "clean stock-selected served output; live matches; disjoint reporting grid",
+      "head_sha": "0e69fa60bf151762f8edc49bb714c6b7f8cf4804",
+      "base_sha": "6ec7e5788e14ea15ddc3e16ac71110458108b6a6",
+      "spec": {
+        "protocol": "paired_residual_convergence_diagnostic_v1",
+        "output_shape": [
+          2,
+          1,
+          32
+        ],
+        "effective_clean_output_channels": 2,
+        "prior": "128x4 routed particle cloud",
+        "initialization": "public deterministic orthogonal plus R2",
+        "fit_contexts": 100,
+        "guard_contexts": 64,
+        "report_contexts": 144,
+        "steps_per_profile": 1200,
+        "training_objective": "paired RpGAN + native KA2; reporting RMSE never optimized",
+        "convergence_marker": "first recorded half-initial reporting RMSE; no absolute accuracy pass",
+        "protocol_url": "https://github.com/255BITS/ParticleGAN/blob/0e69fa60bf151762f8edc49bb714c6b7f8cf4804/reports/paired-residual-toy/protocol.json"
+      },
+      "arms": [
+        {
+          "id": "current",
+          "clean_reporting": {
+            "normalized_rmse": 0.05337701737880707,
+            "normalized_mse": 0.002849105978384614,
+            "bias": [
+              0.02419854886829853,
+              -0.025228163227438927
+            ],
+            "max_context_rmse": 0.13970990478992462
+          },
+          "half_error_step": 600
+        },
+        {
+          "id": "even_critic",
+          "clean_reporting": {
+            "normalized_rmse": 0.042723894119262695,
+            "normalized_mse": 0.001825331011787057,
+            "bias": [
+              -0.0020387645345181227,
+              -0.0012302468530833721
+            ],
+            "max_context_rmse": 0.07994207739830017
+          },
+          "half_error_step": 500
+        },
+        {
+          "id": "d_antithetic",
+          "clean_reporting": {
+            "normalized_rmse": 0.05203981325030327,
+            "normalized_mse": 0.0027081419248133898,
+            "bias": [
+              0.023526256904006004,
+              -0.02324465662240982
+            ],
+            "max_context_rmse": 0.13668403029441833
+          },
+          "half_error_step": 600
+        }
+      ],
+      "limitations": [
+        "64 tensor coordinates contain two repeated clean output channels",
+        "affine skip can solve without routing",
+        "frequent G decisions do not reproduce real-run stationarity delay",
+        "no decoded quality or Forge qualification"
+      ]
+    },
+    {
       "id": "source-family-09",
       "name": "Paired swirl2 transport",
       "origin": "develop source review",
@@ -1608,6 +1688,104 @@
       "status": "SOURCE REVIEW ONLY",
       "media": null,
       "explanation": "EXISTING_FAMILIES.md"
+    },
+    {
+      "id": "pr227",
+      "name": "Routed adapter hidden-initialization convergence",
+      "origin": "PR227",
+      "pr": 227,
+      "rating": 4,
+      "quality": "Good bounded initialization regression; beneficial-particle gate needs a signed check",
+      "verifies": "Test whether initial hidden bridge H/b causes a convergence gap in a teacher-aligned two-site adapter family, while the trained shared bank and routing remain useful.",
+      "status": "H/b control closes the gap; unsigned code-ablation gate needs tightening",
+      "media": "media/pr227.gif",
+      "explanation": "PR226_PR227.md",
+      "sampling": "clean FAST; no DV12/output noise in predictions; fixed private paired score panels sigma0.125",
+      "head_sha": "b0e4f420856d7607baa98cbef488e569d20a3f31",
+      "base_sha": "6ec7e5788e14ea15ddc3e16ac71110458108b6a6",
+      "spec": {
+        "protocol": "supra_conditional_two_site_convergence_v1 + hidden_neutral_v1",
+        "sites": 2,
+        "width": 16,
+        "tokens": 16,
+        "adapter_rank": 2,
+        "prior": "shared 128x4 routed particle cloud",
+        "initialization": "named public sampled networks; teacher shares ordinary initial down basis; up factors zero",
+        "fit_contexts": 96,
+        "guard_contexts": 24,
+        "test_contexts": 96,
+        "steps_per_arm": 6400,
+        "training_objective": "native paired RpGAN + token KA2; separately labelled historical MSE/AdamW reference",
+        "common_judges": [
+          "ordinary_native_game@800",
+          "ordinary_native_game@6400",
+          "particle_native_game@800",
+          "particle_native_game@6400"
+        ],
+        "convergence_gate": "endpoint particle/ordinary game gap >1e-4 under both endpoint critics; intervention improves all four and removes at least half the gap; no absolute accuracy pass",
+        "protocol_url": "https://github.com/255BITS/ParticleGAN/blob/b0e4f420856d7607baa98cbef488e569d20a3f31/docs/e22_routed_convergence_v1.json"
+      },
+      "arms": [
+        {
+          "id": "ordinary_native_game",
+          "common_judge_game": {
+            "ordinary_native_game@800": 0.7190849781036377,
+            "ordinary_native_game@6400": 0.9235867857933044,
+            "particle_native_game@800": 0.7252562642097473,
+            "particle_native_game@6400": 0.9307924509048462
+          },
+          "output_rmse_diagnostic": 0.047492627054452896
+        },
+        {
+          "id": "particle_native_game",
+          "common_judge_game": {
+            "ordinary_native_game@800": 1.0228853225708008,
+            "ordinary_native_game@6400": 1.5043978691101074,
+            "particle_native_game@800": 1.1854112148284912,
+            "particle_native_game@6400": 2.304943561553955
+          },
+          "output_rmse_diagnostic": 0.1356312483549118
+        },
+        {
+          "id": "ordinary_mse_reference",
+          "common_judge_game": {
+            "ordinary_native_game@800": 0.7091378569602966,
+            "ordinary_native_game@6400": 0.8198766112327576,
+            "particle_native_game@800": 0.7098462581634521,
+            "particle_native_game@6400": 0.8312075734138489
+          },
+          "output_rmse_diagnostic": 0.03127415105700493
+        },
+        {
+          "id": "neutral_particle",
+          "common_judge_game": {
+            "ordinary_native_game@800": 0.70229172706604,
+            "ordinary_native_game@6400": 0.8027129769325256,
+            "particle_native_game@800": 0.7045040130615234,
+            "particle_native_game@6400": 0.8007083535194397
+          },
+          "output_rmse_diagnostic": 0.03431996703147888
+        }
+      ],
+      "beneficial_code_ablation": {
+        "ordinary_native_game@800": 0.7556474208831787,
+        "ordinary_native_game@6400": 0.5848477482795715,
+        "particle_native_game@800": 1.1852797269821167,
+        "particle_native_game@6400": 0.9303701519966125
+      },
+      "findings": [
+        "Unsigned abs(delta) gate accepts harmful particle contribution; synthetic counterexample executed",
+        "Original scoring failure preserved; fresh-policy observational repair verified",
+        "Full opt-in subprocess campaign not retrained after repair; actual tensor assertions passed retained endpoints"
+      ],
+      "limitations": [
+        "teacher-aligned down basis",
+        "H and b changed together",
+        "initial ordinary/particle comparison includes owner/policy differences",
+        "no accepted structural moves",
+        "held-out times/latents share source identities",
+        "no Supra quality or Forge qualification"
+      ]
     },
     {
       "id": "source-family-00",
