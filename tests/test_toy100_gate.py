@@ -4,6 +4,7 @@ import hashlib
 import json
 
 import numpy as np
+import pytest
 import torch
 
 from benchmarks.toy100 import metrics, problems
@@ -54,7 +55,7 @@ def write_run(output, problem="grid100", *, passing_steps=STEPS,
     return folder
 
 
-def write_manifested_suite(output):
+def write_manifested_suite(output, *, eval_output_noise=None):
     """A complete small receipt whose terminal rows can be audited from draws."""
     declared = {"name": "toy100_receipt_test", "steps": 1000, "seed": 1234,
                 "snapshot_samples": 2,
@@ -64,12 +65,17 @@ def write_manifested_suite(output):
     contents = json.dumps(declared) + "\n"
     source.write_text(contents)
     flats = {name: resolve_problem_config(declared, name) for name in problems.PROBLEM_NAMES}
+    if eval_output_noise is not None:
+        flats = {name: {**config, "eval_output_noise": eval_output_noise}
+                 for name, config in flats.items()}
     receipt = {"config_path": str(source),
                "config_sha256": hashlib.sha256(contents.encode()).hexdigest(),
                "config_contents": contents, "declared_manifest": declared,
                "resolved_problem_configs": flats,
                "selected_problems": list(problems.PROBLEM_NAMES),
                "command_overrides": {"steps": None, "device": None}}
+    if eval_output_noise is not None:
+        receipt["command_overrides"]["eval_output_noise"] = eval_output_noise
     (output / "run_manifest.json").write_text(json.dumps(receipt))
     for index, name in enumerate(problems.PROBLEM_NAMES):
         folder = write_run(output, problem=name)
@@ -91,6 +97,20 @@ def write_manifested_suite(output):
             row["metrics"] = observed
         (folder / "events.jsonl").write_text("".join(json.dumps(row) + "\n" for row in rows))
     return receipt
+
+
+@pytest.mark.parametrize("eval_output_noise", [False, True])
+def test_manifest_binds_sampling_override_and_rejects_tampering(tmp_path, eval_output_noise):
+    receipt = write_manifested_suite(tmp_path, eval_output_noise=eval_output_noise)
+    assert evaluate_suite(tmp_path, write=False)["status"] == "PASS"
+    receipt["command_overrides"]["eval_output_noise"] = not eval_output_noise
+    (tmp_path / "run_manifest.json").write_text(json.dumps(receipt))
+    changed = evaluate_suite(tmp_path, write=False)
+    assert all(row["status"] == "INVALID" for row in changed["problems"].values())
+    receipt["command_overrides"]["eval_output_noise"] = "training_noise"
+    (tmp_path / "run_manifest.json").write_text(json.dumps(receipt))
+    malformed = evaluate_suite(tmp_path, write=False)
+    assert all("must be a boolean" in row["reason"] for row in malformed["problems"].values())
 
 
 def test_summary_pass_stamp_and_initial_success_cannot_certify(tmp_path):
