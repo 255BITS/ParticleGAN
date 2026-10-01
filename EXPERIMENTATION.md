@@ -77,6 +77,19 @@ grade and grant no extra reference credit. Optional calibration `diagnostic_task
 bind separate host identities and report their costs without entering smoke or
 reference decisions. Existing profiles without this field retain their semantics.
 
+The [completed formulation comparison](reports/forge/FORMULATION_COMPARISON_READOUT.md)
+records all five full 7k native runs as FAIL for 408.765 new paid seconds.
+Independent audits pass, and the K3P control exactly reproduces the previous
+clean-MoG trajectory and named training streams. BCap improves centering but
+contracts further; R1/R2 improves shape but loses centering/coverage. Released
+GAN v3's matched MoG adaptation improves shape but still fails the full gates;
+its separate named-cloud host also fails and supplies no MoG reference credit.
+The profile has 4/95 ordinary calibration cells measured (91 unknown), plus
+1/5 separate diagnostic cells (4 unknown); acceptance remains blocked.
+Stop these exact experimental revisions. Inspect saved critic gradients and
+per-mode moments before another supported, bounded training hypothesis. No
+automatic matrix filling, tuning, seed study, continuation or promotion follows.
+
 The history, recall, compile, validate, and board commands launch no training.
 
 ```sh

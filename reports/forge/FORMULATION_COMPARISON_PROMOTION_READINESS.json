@@ -1,0 +1,47 @@
+{
+  "accepted_calibration": false,
+  "cohort_sha256": "48856fefffd85da9fe55d02f69656e632d042b2cbab09c84329d48eba5bb16a5",
+  "criteria_sha256": "6eac2531eed68e392c11a57328999ac5dce509f8fe51d23e7b9031b7a4e3f9d1",
+  "date": "2026-10-01",
+  "denominators": {
+    "diagnostics": {
+      "measured": 1,
+      "required": 5,
+      "unknown_or_blocked": 4
+    },
+    "reference": {
+      "measured": 4,
+      "required": 80,
+      "unknown_or_blocked": 76
+    },
+    "smoke": {
+      "measured": 0,
+      "required": 15,
+      "unknown_or_blocked": 15
+    }
+  },
+  "finished_ordinary_qualification": false,
+  "full_native_gate_counts": {
+    "FAIL": 5,
+    "PASS": 0
+  },
+  "new_paid_wall_seconds": 408.7653831129719,
+  "next_action": "Stop these exact revisions and this selected registration. Before another GPU study, perform a bounded zero-training saved-state audit of critic radial and centering gradients against per-mode moments. Only a supported substantive hypothesis warrants a new frozen registration. Preserve A2 and sigma .025; no coefficient, cap, width, amplitude or seed sweep, best-checkpoint/EMA substitution, 14k continuation or automatic matrix expansion.",
+  "profile_sha256": "0e6bea41fd24fa06d3349c29e415f5c5d0e9538ddb51841f25d8c47acb8a2493",
+  "public_default_changed": false,
+  "qualification_reuse": false,
+  "readout": "reports/forge/FORMULATION_COMPARISON_READOUT.md",
+  "reasons": [
+    "All five registered full native diagnostics FAIL; none qualifies.",
+    "Only4/95 smoke/reference cells measured; four reference decisions FAIL, fifth UNKNOWN; all smoke decisions UNKNOWN.",
+    "Separate released-cloud and paired noise diagnostics confer no extra reference or qualification credit.",
+    "No accepted calibration or finished exact ordinary qualification supports robustness or promotion."
+  ],
+  "registration_payload_sha256": "01a8acf8004a6c1b6e10bd5c4a475e8067c35a74c5d3f7ab496a7daeb1926a8b",
+  "robustness_registered": false,
+  "robustness_training_authorized_seconds": 0,
+  "schema_version": 1,
+  "source_sha256": "bf9ccf356d95cd0b0023449c741c2a3f99f260f38c779c07cce221e79fde23f3",
+  "status": "BLOCKED",
+  "study": "formulation-comparison-v1"
+}

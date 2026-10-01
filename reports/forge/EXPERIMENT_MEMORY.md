@@ -2,13 +2,14 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope; current qualification is recomputed from compatible receipts.
 
-Records: 233. Inventory coverage: complete. Unresolved import items: 7.
+Records: 242. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
 - [adaptation](leaderboards/adaptation.md)
 - [clockfree_continuous](leaderboards/clockfree_continuous.md)
 - [discriminator_stability](leaderboards/discriminator_stability.md)
+- [formulation_comparison](leaderboards/formulation_comparison.md)
 - [host_profile_transfer](leaderboards/host_profile_transfer.md)
 - [quality_coverage](leaderboards/quality_coverage.md)
 
@@ -3476,6 +3477,86 @@ Administrative abandoned: Concluded preregistered full-native FAIL. Training out
 
 [Evidence](../../) · [Record](records/lifecycle-1fdc4834581ce2e17a87e8e7.json)
 
+### k3p-bcap-matched-v1 · lifecycle-78a4ebc4a9d5f08ddeab2fa9
+
+**Scope:** administrative; administrative; revision `5db772f81cafe59b642b5707e600380fb49c3d42623b5c769e03dd677bbbfafd`.
+
+Replace only the critic penalty by frozen historical bcap while retaining the K3P optimizer, noise, A2, host and sampling contracts.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `structural`.
+
+
+
+Administrative abandoned: Registered native comparison failed the unchanged full gates; stop this exact revision without further matrix filling, tuning or continuation. Preserve its concluded readout and complete diagnostic evidence.
+
+**Next:** Retain this revision's evidence and readout; declare a new revision before further work.
+
+[Evidence](../../) · [Record](records/lifecycle-78a4ebc4a9d5f08ddeab2fa9.json)
+
+### release07-gan-v3-cloud-v1 · lifecycle-a7f0052186f7f049b3b6cf54
+
+**Scope:** administrative; administrative; revision `3f2629ea8a1a6c9176d021ccdb99df48c2f7f67296946110288d59f3015ae14d`.
+
+Evaluate the released v0.7 GAN v3 effective recipe on its explicit z4/batch256/unstandardized cloud host with named caller initialization.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `structural`.
+
+
+
+Administrative abandoned: Registered native comparison failed the unchanged full gates; stop this exact revision without further matrix filling, tuning or continuation. Preserve its concluded readout and complete diagnostic evidence.
+
+**Next:** Retain this revision's evidence and readout; declare a new revision before further work.
+
+[Evidence](../../) · [Record](records/lifecycle-a7f0052186f7f049b3b6cf54.json)
+
+### k3p-r1r2-matched-v1 · lifecycle-afc11349bf0ada8bca0c4c89
+
+**Scope:** administrative; administrative; revision `3bff4e5835a30fd018893f3b3cb1b612c5ba28d39e62247b61b728b38987b85e`.
+
+Replace only the critic penalty by frozen historical r1r2 while retaining the K3P optimizer, noise, A2, host and sampling contracts.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `structural`.
+
+
+
+Administrative abandoned: Registered native comparison failed the unchanged full gates; stop this exact revision without further matrix filling, tuning or continuation. Preserve its concluded readout and complete diagnostic evidence.
+
+**Next:** Retain this revision's evidence and readout; declare a new revision before further work.
+
+[Evidence](../../) · [Record](records/lifecycle-afc11349bf0ada8bca0c4c89.json)
+
+### release07-gan-v3-mog-v1 · lifecycle-e90204eef53f90292d2d1750
+
+**Scope:** administrative; administrative; revision `a9b2aa0ace96762b024a30c0979a0eedce8d07f9fae5cb5dc03868522132962c`.
+
+Evaluate the full v0.7 GAN v3 dynamics adapted only to the matched affine z2/batch2048/MoG host.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `structural`.
+
+
+
+Administrative abandoned: Registered native comparison failed the unchanged full gates; stop this exact revision without further matrix filling, tuning or continuation. Preserve its concluded readout and complete diagnostic evidence.
+
+**Next:** Retain this revision's evidence and readout; declare a new revision before further work.
+
+[Evidence](../../) · [Record](records/lifecycle-e90204eef53f90292d2d1750.json)
+
+### k3p-r1r2-matched-v1 · readout-0297c36f9f2d9c5feb45b3cb
+
+**Scope:** calibration_diagnostic; scientific; revision `3bff4e5835a30fd018893f3b3cb1b612c5ba28d39e62247b61b728b38987b85e`.
+
+Replace only the critic penalty by frozen historical r1r2 while retaining the K3P optimizer, noise, A2, host and sampling contracts.
+
+**Observed:** {'FAIL': 1}; wall seconds 83.983; mechanism `structural`.
+
+grid100_affine_paired_laws_v1: precision=0.97753, center_rms_sigma=0.3375, mass_tv=0.02802, radial_ks=0.059452
+
+Preregistered full7000-update grid100_affine_paired_laws_v1 FAIL; sustained coverage FAIL, 0/5 terminal joint passes. Independent100k clean/live holdout: centre RMS 0.337500287sigma, covariance bias -0.186036085, radialKS 0.059452130, massTV 0.028020000, precision 0.97753. All G/D/prior updates complete, finite/hooks checks PASS, unintended RNG deviations0, independent receipt/artifact/evaluator audit PASS. Unique paid 83.982570446999s. No ordinary qualification or promotion; all unknown cells preserved.
+
+**Next:** Stop these exact revisions and this selected registration. Before another GPU study, perform a bounded zero-training saved-state audit of critic radial and centering gradients against per-mode moments. Only a supported substantive hypothesis warrants a new frozen registration. Preserve A2 and sigma .025; no coefficient, cap, width, amplitude or seed sweep, best-checkpoint/EMA substitution, 14k continuation or automatic matrix expansion.
+
+[Evidence](../../reports/forge/attempts/11d3d8b814674fd0841217c7e4304c38/result.json) · [Record](records/readout-0297c36f9f2d9c5feb45b3cb.json)
+
 ### forge-no-critic-penalty · readout-060e7be73e2832e314b9573f
 
 **Scope:** calibration_diagnostic; scientific; revision `1e1a3e447fc222392dd327f0ae3d17ecf4dd7e7ce26ff79f82d69c31668f4461`.
@@ -3668,6 +3749,22 @@ All three registered smoke cells completed: two_pole FAIL (mean_abs0.1048249<0.3
 
 [Evidence](../../reports/forge/attempts/633dcaca307e4e01b82b5281d82082fb/result.json) · [Record](records/readout-8aacfe961f0e62b062e621fa.json)
 
+### k3p-bcap-matched-v1 · readout-95e0cdfdc2f043a0046285c1
+
+**Scope:** calibration_diagnostic; scientific; revision `5db772f81cafe59b642b5707e600380fb49c3d42623b5c769e03dd677bbbfafd`.
+
+Replace only the critic penalty by frozen historical bcap while retaining the K3P optimizer, noise, A2, host and sampling contracts.
+
+**Observed:** {'FAIL': 1}; wall seconds 86.198; mechanism `structural`.
+
+grid100_affine_paired_laws_v1: precision=0.99317, center_rms_sigma=0.05434, mass_tv=0.032, radial_ks=0.13169
+
+Preregistered full7000-update grid100_affine_paired_laws_v1 FAIL; sustained coverage PASS, 0/5 terminal joint passes. Independent100k clean/live holdout: centre RMS 0.054340458sigma, covariance bias -0.285121929, radialKS 0.131685162, massTV 0.032000000, precision 0.99317. All G/D/prior updates complete, finite/hooks checks PASS, unintended RNG deviations0, independent receipt/artifact/evaluator audit PASS. Unique paid 86.197886095993s. No ordinary qualification or promotion; all unknown cells preserved.
+
+**Next:** Stop these exact revisions and this selected registration. Before another GPU study, perform a bounded zero-training saved-state audit of critic radial and centering gradients against per-mode moments. Only a supported substantive hypothesis warrants a new frozen registration. Preserve A2 and sigma .025; no coefficient, cap, width, amplitude or seed sweep, best-checkpoint/EMA substitution, 14k continuation or automatic matrix expansion.
+
+[Evidence](../../reports/forge/attempts/26ebdea492d4408d9ee1b0cccc8bf61b/result.json) · [Record](records/readout-95e0cdfdc2f043a0046285c1.json)
+
 ### k3p · readout-9c29229a2baba56de3b40845
 
 **Scope:** calibration_diagnostic; scientific; revision `989a12b2dd014078e0e5dcf7c674be243b5a73bee19289c9500964a941369c69`.
@@ -3683,6 +3780,22 @@ The registered merged-develop quick screen completed 0/3 PASS on GPU 0: mode_hol
 **Next:** Keep the full reference denominator and stop automatic expansion to ablations or the full reference matrix. Review host/formulation solvability and initial-state parity before selecting another bounded scientific diagnosis. Correct future sampling declarations and CUDA telemetry without rewriting these receipts or rerunning failed science just for reporting. The separately registered physical two-GPU pilot still needs a joint device window; this serial screen does not satisfy it.
 
 [Evidence](../../reports/forge/attempts/5a5f1641fd80404fbb509d367e6a467f/result.json) · [Record](records/readout-9c29229a2baba56de3b40845.json)
+
+### release07-gan-v3-cloud-v1 · readout-9c48b366ebe60b61721c269d
+
+**Scope:** calibration_diagnostic; scientific; revision `3f2629ea8a1a6c9176d021ccdb99df48c2f7f67296946110288d59f3015ae14d`.
+
+Evaluate the released v0.7 GAN v3 effective recipe on its explicit z4/batch256/unstandardized cloud host with named caller initialization.
+
+**Observed:** {'FAIL': 1}; wall seconds 72.155; mechanism `structural`.
+
+grid100_release07_cloud_named_v1: precision=0.76844, center_rms_sigma=0.57414, mass_tv=0.15151, radial_ks=0.10595
+
+Preregistered full7000-update grid100_release07_cloud_named_v1 FAIL; sustained coverage FAIL, 0/5 terminal joint passes. Independent100k clean/live holdout: centre RMS 0.574141532sigma, covariance bias -0.266083317, radialKS 0.105947048, massTV 0.151510000, precision 0.76844. All G/D/prior updates complete, finite/hooks checks PASS, unintended RNG deviations0, independent receipt/artifact/evaluator audit PASS. Unique paid 72.154768106993s. No ordinary qualification or promotion; all unknown cells preserved.
+
+**Next:** Stop these exact revisions and this selected registration. Before another GPU study, perform a bounded zero-training saved-state audit of critic radial and centering gradients against per-mode moments. Only a supported substantive hypothesis warrants a new frozen registration. Preserve A2 and sigma .025; no coefficient, cap, width, amplitude or seed sweep, best-checkpoint/EMA substitution, 14k continuation or automatic matrix expansion.
+
+[Evidence](../../reports/forge/attempts/176ad9907a734b45844d09b2a69ff31d/result.json) · [Record](records/readout-9c48b366ebe60b61721c269d.json)
 
 ### k3p-no-output-noise-diagnostic · readout-abd06840fa1f42a4f64c13ab
 
@@ -3748,6 +3861,38 @@ All three registered smoke cells completed at the frozen current cohort: two_pol
 
 [Evidence](../../reports/forge/attempts/6577d4075c5042dea96c619ba197bd27/result.json) · [Record](records/readout-c723a88e5122f97011aabad9.json)
 
+### release07-gan-v3-mog-v1 · readout-d5a99d9470252f695a717dfc
+
+**Scope:** calibration_diagnostic; scientific; revision `a9b2aa0ace96762b024a30c0979a0eedce8d07f9fae5cb5dc03868522132962c`.
+
+Evaluate the full v0.7 GAN v3 dynamics adapted only to the matched affine z2/batch2048/MoG host.
+
+**Observed:** {'FAIL': 1}; wall seconds 75.19; mechanism `structural`.
+
+grid100_affine_paired_laws_v1: precision=0.97504, center_rms_sigma=0.2299, mass_tv=0.08079, radial_ks=0.039679
+
+Preregistered full7000-update grid100_affine_paired_laws_v1 FAIL; sustained coverage FAIL, 0/5 terminal joint passes. Independent100k clean/live holdout: centre RMS 0.229900289sigma, covariance bias -0.105827929, radialKS 0.039679289, massTV 0.080790000, precision 0.97504. All G/D/prior updates complete, finite/hooks checks PASS, unintended RNG deviations0, independent receipt/artifact/evaluator audit PASS. Unique paid 75.190272702981s. No ordinary qualification or promotion; all unknown cells preserved.
+
+**Next:** Stop these exact revisions and this selected registration. Before another GPU study, perform a bounded zero-training saved-state audit of critic radial and centering gradients against per-mode moments. Only a supported substantive hypothesis warrants a new frozen registration. Preserve A2 and sigma .025; no coefficient, cap, width, amplitude or seed sweep, best-checkpoint/EMA substitution, 14k continuation or automatic matrix expansion.
+
+[Evidence](../../reports/forge/attempts/0bce04d970264d4c95335030ed8724e7/result.json) · [Record](records/readout-d5a99d9470252f695a717dfc.json)
+
+### k3p · readout-eeec25002d17191c315f126b
+
+**Scope:** calibration_diagnostic; scientific; revision `6385ef80463dca6a3c1c1f94dd3269c8e1db3702a8d236c1bd59d69787e06325`.
+
+The shipped K3P mechanism is a reference for new learned-MoG experiments; historical cloud evidence does not qualify this MoG conversion.
+
+**Observed:** {'FAIL': 1}; wall seconds 91.24; mechanism `structural`.
+
+grid100_affine_paired_laws_v1: precision=0.99517, center_rms_sigma=0.089885, mass_tv=0.032, radial_ks=0.12001
+
+Preregistered full7000-update grid100_affine_paired_laws_v1 FAIL; sustained coverage PASS, 0/5 terminal joint passes. Independent100k clean/live holdout: centre RMS 0.089885161sigma, covariance bias -0.265593703, radialKS 0.120006288, massTV 0.032000000, precision 0.99517. All G/D/prior updates complete, finite/hooks checks PASS, unintended RNG deviations0, independent receipt/artifact/evaluator audit PASS. Unique paid 91.239885760006s. No ordinary qualification or promotion; all unknown cells preserved.
+
+**Next:** Stop these exact revisions and this selected registration. Before another GPU study, perform a bounded zero-training saved-state audit of critic radial and centering gradients against per-mode moments. Only a supported substantive hypothesis warrants a new frozen registration. Preserve A2 and sigma .025; no coefficient, cap, width, amplitude or seed sweep, best-checkpoint/EMA substitution, 14k continuation or automatic matrix expansion.
+
+[Evidence](../../reports/forge/attempts/56177ab1d23243d8a6fe61413d8f870f/result.json) · [Record](records/readout-eeec25002d17191c315f126b.json)
+
 ## Unresolved imports and limitations
 
 - **structured_mapping_scope:** These files are inventoried support/config/evidence; no scientific result is inferred from unrecognized schemas. (2287 classified sources.)
@@ -3760,4 +3905,4 @@ All three registered smoke cells completed at the frozen current cohort: two_pol
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v1`; input digest `edf594d5f74259da18d4f7a5f041809a35245c0c47c04bd0b664deb6e26c11cb`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v1`; input digest `0cc8fd26112dd39bca8de4c3729138c7a4ef13a571e0ef4cb0b2fdad817a6934`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
