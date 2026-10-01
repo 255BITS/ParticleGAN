@@ -7,6 +7,21 @@ Actual merge eligibility remains unresolved until the current remote heads,
 develop base and required checks can be refreshed. No GitHub merge or push
 was performed during this preparation.
 
+The later [local Git integration receipt](local-integration.json) records an
+actual prospective tree at `f65fca69fbd24c62c2fe044309caae249b241e6c`, based on
+the newer known develop `6ec7e578`, with original PR224/226 and committed signed
+PR227 repair `0b196047`. All fifteen changed Python sources and the complete
+native package exactly match the retained tested overlay. Its thirty changed
+files are proposal tests/examples/reports and two run-directory ignore entries;
+no production package, library or configuration changes are imported. The
+existing 54/1/1 suite is reused under those exact byte comparisons. This local
+branch is **not a remote develop merge**; actual remote merge count remains zero.
+
+The concrete follow-up branch is `codex/toy-pr227-signed-use`, based on original
+PR227 head `b0e4f420`. Its five files match the portable patch source hashes.
+Publishing and checking this repair is the next external step once GitHub
+access works; while PR227 is open it can be stacked on its proposal branch.
+
 | Proposal | Quality | Scientific result | Local integration | Decision |
 |---|---:|---|---|---|
 | 224 | 5/5 | Unsafe native release reproduces; cancelling only the release and safe geometry both remain stable. | Seven tests pass; the native stability test remains strict XFAIL. Prospective tree clean. | Candidate for a diagnostic/test merge, with the native failure explicitly retained. It is not a controller fix. |

@@ -5,6 +5,38 @@ repair workstream owns production repairs; none are included here. Sources are
 pinned in [pull_requests.json](pull_requests.json), and exact current results are
 in [catalog.json](catalog.json).
 
+## Implemented follow-up
+
+The [latest sorted ledger](IMPROVEMENTS.md) tracks all 109 entries and the
+definition/control improvements for all 64 original low-rated entries.
+[Per-failure diagnoses](FAILURE_DIAGNOSIS.md) distinguish failed metric bars,
+proved structural defects, sampling-law mismatch and unresolved optimizer
+causes. [New image](IMAGE_QUALITY_V2.md) and [non-image](NON_IMAGE_QUALITY.md)
+gates have their own identities and preserve original verdicts.
+
+The PR227 repair is now committed on `codex/toy-pr227-signed-use` at
+`0b196047`: all three paths require a positive code-removal loss, and each of
+four harmful judges rejects. Actual retained endpoint assertions still pass.
+The recovery verifier explicitly preserves original training-source identity
+while admitting the signed evaluation change. No unchanged campaign was
+retrained for this assertion repair. The [merge readout](merge_readiness/README.md)
+binds the patch, eligible local diagnostics, held proposals and prospective
+integration. Publication/remote merges remain blocked by GitHub access.
+
+Fresh [bounded scalar controls](source_families/README.md),
+[routed/ring fixtures](SOURCE_FAMILY_TRAINING.md) and [source demos](SOURCE_DEMOS.md)
+now include real intermediate GIFs. Native accuracy, replay fidelity, ring
+acquisition and Gaussian fidelity failures remain visible; original Gaussian
+and routed-support budget caps remain incomplete. None triggers a production
+configuration repair in this workstream.
+
+The remaining [conditional](conditional_sources/README.md),
+[route](route_sources/README.md) and [paired](paired_sources/README.md) readouts
+complete the 17-entry source-attempt denominator. Affine/swirl validation
+passes at 6,000 updates; both sparse and transition laws hit their caps and
+remain incomplete. Denoising and trajectory sources stop at their original
+CUDA prerequisite, with no training GIF or inferred convergence.
+
 ## PR226/227 supplemental findings
 
 Both proposals execute and have useful bounded scientific claims; the

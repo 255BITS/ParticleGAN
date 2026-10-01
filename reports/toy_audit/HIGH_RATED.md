@@ -4,6 +4,8 @@ Ratings describe the test's scientific question, rather than whether today's
 recipe passes. Exact parameters, budgets, sampling laws, endpoint metrics and
 five-check terminal convergence results are in [catalog.json](catalog.json).
 The [sorted catalog](PROBLEMS.md) includes every captured variant.
+The [follow-up ledger](IMPROVEMENTS.md) preserves these original scores and
+explains separate scoped definition reassessments and fresh source evidence.
 
 ## 5/5 — Native 100-Gaussian distribution fidelity
 
@@ -54,7 +56,7 @@ These are three distinct questions that a uniform isotropic mode farm misses:
 | `vector_unequal_width` | Recover sigmas 0.07/0.12/0.20/0.30 without imposing one shared width. | Correct centers with a common width, or center-only atoms. |
 | `vector_anisotropic` | Recover each component's rotated covariance, including its narrow axis. | Correct average trace with a collapsed narrow axis. |
 
-Their live evaluator combines normalized sliced W1 ≤0.18, mass TV ≤0.15,
+The current resolution-aware live evaluator combines normalized sliced W1 ≤0.18, mass TV ≤0.15,
 HQ ≥0.85, resolved core covariance error ≤0.50, resolved minimum eigenvalue
 ratio ≥0.15, and resolved spill ≤0.05. Unequal mass additionally requires
 minimum mass ratio ≥0.25. Shape uses a four-sigma core and separately bounds
@@ -66,8 +68,12 @@ when under-resolved.** Exact per-run particle counts are in the catalog.
 Fresh synthetic evaluator checks accept independent target draws and reject
 center-only, single-component and global-mean controls. These checks verify
 the scorer, not a trained GAN. The frozen positive host passes unequal width
-and anisotropy; unequal mass fails in this audit. That is a model/reference
-failure, not evidence that rare-mode recovery is a bad problem.
+and anisotropy. Its unequal-mass run retains a historical **FAIL** under the
+older full-component shape gate: the rare component's eigenvalue ratio is
+.0812 against a .15 floor, with only about 5.12 expected table atoms. Mass,
+HQ and resolved-core checks pass. This is an evaluator/resource mismatch;
+the historical result does not establish failed rare-mass recovery or a
+current resolution-aware qualification.
 
 Sources: [definitions and scorer](../../benchmarks/transfer_suite/vector_tasks.py),
 [measured controls](scorer-controls.json).
@@ -117,12 +123,45 @@ the within-particle initialization intervention changes only H/b before policy
 construction. All four predetermined learned critics rank it ahead at 6,400,
 and removing its trained codes worsens all four scores. H and b change together;
 the teacher favors the ordinary initial basis, and the ordinary/particle baseline
-has owner/policy differences. The unsigned ablation gate should become a positive
-signed check before serving as a regression for beneficial particle contribution.
+has owner/policy differences. The original unsigned ablation gate needs a
+positive signed check before serving as a regression for beneficial particle
+contribution. The separately committed [follow-up repair](merge_readiness/README.md)
+implements it: all four retained endpoint deltas pass and harmful-direction
+controls reject.
 
 Both are strong bounded diagnostics with fixed-budget progress, rather than
 absolute accuracy qualifications. The [full explanation, controls, retained
 failure and two GIFs](PR226_PR227.md) preserve their later develop cohort separately.
+
+## Follow-up 4/5 — Bounded correspondence and objective units
+
+**Sign correspondence asks whether a joint-law match can still give the wrong
+action for the actual caller.** Reflecting both generated state and action
+preserves the complete symmetric target law, while reversing that caller's
+physical action. Its original paired residual arm passes at 200 updates:
+100% landings and relative paired MSE .000004023. The wrong-sign marginal arm
+fails, and the supervised-only arm is explicitly rejected for omitting the
+required adversarial objective. This tests one scalar gain around a supplied
+expert, not an audio model or a general learned controller.
+
+**Safe-fast landing asks whether adding plant cost can improve a deliberately
+slow expert match while retaining an active GAN objective.** At 250 updates,
+the combined arm lands all 200 starts with no crash/timeout in mean 21.985 steps,
+and its late GAN gradient remains above the original threshold. The added gate
+counts every initial state. Cost-only is faster at 19.890 steps and is rejected
+solely for omitting the GAN, so adversarial superiority is not established.
+The [fresh explanation and actual training GIFs](source_families/README.md)
+give the complete bounded questions, negative controls and effective budgets.
+
+**Mean-only critic and spatially uniform generator ask analytic negative-unit
+questions.** All four translated blob templates have pixel mean 4/64, making their spatial
+law unidentifiable to a mean-only critic. Every spatially constant stripe
+approximation has RMSE at least sqrt(3/16), about .433, above the .10 quality
+bound. Their proof controls pass while training fails as expected. The new 4/5
+score applies only to those explicitly reclassified unit diagnostics; their
+original impossible positive qualifications remain unsuitable. See
+[proofs and measured controls](IMAGE_QUALITY_V2.md). They cannot disqualify a
+solver or earn a learned-model positive pass.
 
 ## 4/5 — MisGAN incomplete-data and conditional-posterior tests
 
@@ -211,11 +250,13 @@ Global moments and finitely many slices do not prove equality of continuous
 densities. Scale-drift tests changing units before a stationary final window,
 not long-term adaptation to arbitrary target changes.
 
-**Simple image stripes/bars/blobs/intensities:** enumerate all 32 clean live
+**Simple image stripes/bars/blobs/intensities:** the original gates enumerate all 32 clean live
 particles and compare each 8×8 grayscale output to independent target templates.
 Require HQ ≥0.90 and all declared modes for a five-observation terminal suffix.
-This verifies template fidelity and coarse coverage. It does not require exact
-uniform mass: all 30 two-template PR scorers accept a perfect **25/75** mixture.
+This verifies template fidelity and coarse coverage. The historical gates do
+not require exact uniform mass: all 30 two-template PR scorers accept a perfect
+**25/75** mixture. The separately versioned [v2 scorer](IMAGE_QUALITY_V2.md)
+adds both nearest-template and genuine-quality mass TV ≤.10 and rejects that witness.
 RMSE is neither a dedicated count/topology oracle nor a conditional application
 metric. The table names each proposed template's narrower claim explicitly.
 
@@ -230,8 +271,9 @@ both target modes. Ring `mode_hold` checks coverage/HQ, but lacks the native
 
 **PR45 unit change:** scale both the kernel lengths and particle initialization
 with the ×32 target gauge. The archived factory replay reproduces FAIL/PASS.
-This is a bounded demonstration that absolute length/init scales do not transfer
-across units. It is not scale-invariance certification of today's public recipe.
+This tests the joint length/init rescaling across units; it does not establish
+that either factor is independently necessary or sufficient. It is not
+scale-invariance certification of today's public recipe.
 Other wide-gap polygon PRs change the critic and initialization together, so
 their successes do not isolate the critic as the cause. Keep one representative
 scale test and the two-level pair hierarchy, rather than counting each polygon

@@ -1,5 +1,9 @@
 # Ranked toy problems
 
+This is the frozen original scoring cohort. The [latest sorted follow-up](IMPROVEMENTS.md)
+preserves these scores/results and adds stronger gates, fresh source GIFs,
+per-failure explanations and seven scoped definition reassessments.
+
 Scores rate scientific usefulness: **5** = precise discriminating question with strong oracle/controls; **4** = useful bounded question; **3** = well-defined but narrow/redundant; **2** = weak gate or unsupported application interpretation. A model FAIL does not lower a problem's scientific rating.
 
 The table includes protocol/architecture variants for traceability. Similar templates, ring stresses and wide-gap polygons are not independent benchmark families. `PASS / FAIL` is the original counterexample arm followed by its proposed positive control. Read [HIGH_RATED.md](HIGH_RATED.md) for the strongest tests' exact claims.

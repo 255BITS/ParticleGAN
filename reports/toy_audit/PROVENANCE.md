@@ -1,5 +1,52 @@
 # Evidence identity and reproduction
 
+## Follow-up evidence
+
+The [improvement ledger](improvements.json) hashes every input addendum and
+preserves all original catalog/media/training receipts. Current sorted results
+are in [IMPROVEMENTS.md](IMPROVEMENTS.md). The compact
+[publication validation](improvement-validation.json) binds the 53-test log,
+35 Python sources, immutable original receipts and 107 decoded training GIFs.
+Full vector rescoring curves stay in
+the external archive bound by [vector-quality-controls.json](vector-quality-controls.json);
+only endpoints, suffixes, controls and provenance are committed.
+
+Fresh source families use known develop `6ec7e578`, CPU1, original sources,
+seeds and budgets. See [sign/landing/native](source_families/README.md),
+[routed/ring](SOURCE_FAMILY_TRAINING.md), [word/Gaussian](SOURCE_DEMOS.md),
+[sparse/denoising](conditional_sources/README.md),
+[trajectory/transition](route_sources/README.md) and
+[paired transport](paired_sources/README.md) for
+their distinct recipes, actual priors, sampling laws, caps and effective
+optimizer overrides. A recipe dictionary alone is not the effective optimizer
+manifest: native pretraining uses 250 updates at LR .001 although its recipe
+describes the 400-update finetuning arm at .0006, and scalar gains also override
+default rates. Their exact source hashes bind those original choices.
+
+The frozen evaluator bytes used by these runs are preserved in the durable
+external archive, with original SHA `7e6b7f35…`, in
+[evaluator-archive.json](source_families/evaluator-archive.json). AST comparison
+confirms the used Gaussian, word, paired, landing, ring and signed-code scoring
+functions are unchanged. Later calibration controls and the corrected
+twelve-atom two-pole contract are separately bound; old runs are not rebound.
+Demo supervision interruptions and engineering recoveries retain both costs
+and exact matching prefixes. No endpoint/seed winner is selected.
+
+All 17 source-reviewed entries have exact-source attempts. Sparse identity,
+split symbols and both transitions hit their declared caps, retaining partial
+states without a full-budget verdict. Both denoising and trajectory laws stop
+at the original CUDA prerequisite before any model update. Affine/swirl each
+complete the original 6,000-update baseline/movable validation job; the full
+twelve-job protocol and unopened test split receive no qualification credit.
+The ledger hashes every current actual-state GIF and lists missing entries;
+original media receipts are unchanged.
+
+The [local merge receipt](merge_readiness/local-integration.json) is a
+prospective offline Git tree with byte comparisons to the tested overlay;
+**no remote PR was merged**. Fresh authenticated heads and required checks are
+unknown while GitHub access is unavailable. No production config or library
+repair belongs to this audit.
+
 ## Scope and identities
 
 - Develop code: `4b16312e56328a679b92da69a287c0c9490259d9`.
@@ -142,7 +189,7 @@ fixed 10,000 test rows, not trained arms. PR224 uses its specified deterministic
 
 ## GIF interpretation
 
-The 90 training GIFs show actual recorded training checkpoints, with update
+The 90 original training GIFs show actual recorded training checkpoints, with update
 labels, sample/template/target views where available, numerical curves and
 full-budget status. There is **no cloud or metric interpolation**. The nine
 behavioral hosts have numerical curves rather than sample clouds; these are

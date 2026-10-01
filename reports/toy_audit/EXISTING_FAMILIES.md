@@ -1,5 +1,16 @@
 # Additional shipped problem families
 
+This appendix preserves the original source-review cohort. All seventeen
+entries now have separately bound execution attempts. Seven have fresh
+actual-checkpoint media in the separate
+[sign/landing/native](source_families/README.md),
+[routed/ring](SOURCE_FAMILY_TRAINING.md) and [demo](SOURCE_DEMOS.md) readouts.
+The remaining ten have separate source execution readouts in
+[conditional sources](conditional_sources/README.md),
+[route sources](route_sources/README.md) and [paired sources](paired_sources/README.md).
+Exact runtime/API blockers receive no inferred training GIF or convergence.
+[Current definitions and results](IMPROVEMENTS.md) retain both cohorts.
+
 The main catalog executes the declared transfer suite and new open-PR problem
 proposals. This appendix prevents other shipped synthetic families from being
 mistaken for those tasks. These rows are **source/evidence reviews**, not fresh
@@ -26,7 +37,9 @@ Real-image datasets and Gym environments are outside the synthetic toy catalog.
 The [no-particle grid example](../../examples/100gaussians_no_particle_prior.py)
 is a model control on the already catalogued grid100 law, not a new problem.
 
-No fresh training GIF is claimed for these source-reviewed families. Existing
-endpoint viewers and historical scores should remain labelled with their actual
-recipe, budget and sampling law. Current-host replay/visualization gaps remain
-explicit; this appendix is not a current positive-reference certification.
+The table above retains the original source-only review. The linked addenda
+supply fresh checkpoint media and exact prerequisite errors separately;
+incomplete attempts and blocked families earn no inferred convergence.
+Existing endpoint viewers and historical scores keep their actual recipe,
+budget and sampling law. This appendix is not a current positive-reference
+certification.
