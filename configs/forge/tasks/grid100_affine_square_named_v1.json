@@ -101,10 +101,15 @@
       "radial_ks": 0.04
     },
     "sources": {
-      "benchmarks/toy100/gate.py": "55f6ef733f0b10f4c6ac05eb5ad9d30320d807ff520ea1b41c75d2d0b41e406a",
+      "benchmarks/toy100/gate.py": "2ddadf56a4ccd7645c8b4e391373818b1113fb6113a9c691310fb162684058e6",
       "benchmarks/toy100/accuracy_gate.py": "e66ede95d4b80eedd832a102841c2b0a5d6d710f646bfa34dc00647dc0ab3abe",
       "benchmarks/toy100/metrics.py": "a7fbef19082f8470eb392948da52a336a90a3e99c6b3b893343a9e75bcda9c7b",
       "benchmarks/toy100/accuracy.py": "ee5c62049f8cdceb3d93b6d792cbaa96c815e12b3ce79ffaed244fb15a44fed2"
+    },
+    "evaluator_revision": {
+      "id": "native100-manifest-sampling-v2",
+      "previous_gate_sha256": "55f6ef733f0b10f4c6ac05eb5ad9d30320d807ff520ea1b41c75d2d0b41e406a",
+      "change": "Validate explicit CLI evaluation-noise overrides; metric kernels, thresholds, clean sampling law and budgets unchanged."
     }
   },
   "resources": {
