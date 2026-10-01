@@ -79,7 +79,7 @@ completed the actual-anchor posterior uncertainty test using the same four-row
 prior. It passes 14/18 detector gates but fails trained folded 2048 (rare row
 1745), frozen folded 4096 (11 bulk FP), and nominal/highdim 1024 (zero recall).
 Rare-hole 2048 also has two supported rare FP, despite passing that fixture's
-detector gate. [Its receipt](../../support/diagnosis-anchor-posterior.json)
+detector gate. [Its receipt](https://github.com/255BITS/ParticleGAN/blob/bdf05d1be0f68cfdb0c71e81e7e0d3cce477572f/reports/toy100/lrfree-search/feature-cells-cb64-ra/fixes/support/diagnosis-anchor-posterior.json)
 is therefore rejected as a universal correction. The corrected main package
 keeps the original support law while the verified sampling, mass, routing and
 performance fixes receive full GPU validation.

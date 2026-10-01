@@ -1,5 +1,0 @@
-Traceback (most recent call last):
-  File "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra7-quality/paired-average-review/audit.py", line 53, in <module>
-    assert package_identity(BASE)=='671404988209f615aefd1aec32ab1ef0a51807a9b07514c9bb35a662a6154c7c'
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-AssertionError

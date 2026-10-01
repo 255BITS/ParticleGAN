@@ -140,8 +140,8 @@ The full suite ran in 403.52 seconds. Its 12 skips comprise missing optional
 Gymnasium/torch-fidelity dependencies, opt-in CIFAR/native research gates,
 and two assertions requiring CUDA to be absent.
 [Suite receipt](validation-ra17/FULL-TESTS.json),
-[test log](validation-ra17/full-pytest.log),
-[JUnit](validation-ra17/full-pytest-junit.xml),
+[test log](https://github.com/255BITS/ParticleGAN/blob/bdf05d1be0f68cfdb0c71e81e7e0d3cce477572f/reports/toy100/lrfree-search/feature-cells-cb64-ra/generalization-20260930/validation-ra17/full-pytest.log),
+[JUnit](https://github.com/255BITS/ParticleGAN/blob/bdf05d1be0f68cfdb0c71e81e7e0d3cce477572f/reports/toy100/lrfree-search/feature-cells-cb64-ra/generalization-20260930/validation-ra17/full-pytest-junit.xml),
 [replay closure](mnist/ra17-replay/CLOSED.json).
 
 Replays compare losses, semantic training state, and RNG streams after every

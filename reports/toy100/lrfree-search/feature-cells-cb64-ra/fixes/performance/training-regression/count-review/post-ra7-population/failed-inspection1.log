@@ -1,5 +1,0 @@
-Read-only preliminary checkpoint inspection retained.
-lr_settle was assumed to be a dict; it is a list of optimizer-group lists.
-AttributeError: 'list' object has no attribute 'items'
-No source, state, RNG, model, optimizer or diagnostic output was changed.
-The subsequent inspection used the existing list schema.
