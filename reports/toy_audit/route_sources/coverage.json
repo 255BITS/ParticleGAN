@@ -1,0 +1,886 @@
+{
+  "counts": {
+    "actual_gif_frames": 16,
+    "blocked": 2,
+    "captured_prefix_states": 8,
+    "captured_training_states": 16,
+    "catalog_entries": 4,
+    "completed_campaign_updates": 1227,
+    "completed_original_budgets": 0,
+    "full_campaigns": 2,
+    "incomplete": 2,
+    "inferred_convergence_passes": 0,
+    "prefix_exact_owner_matches": 8,
+    "prefix_software_updates": 12,
+    "qualification_credit": 0,
+    "total_purity_assertions": 24
+  },
+  "format": "route_source_coverage_compact_v1",
+  "full_streams_in_git": false,
+  "media_receipt": {
+    "path": "media/media.json",
+    "sha256": "3f2b39052357fa29cd2a9be81ceed85037d2582e27e9acb8ce176e3a23524eec"
+  },
+  "original_catalog_unchanged": true,
+  "recipes": {
+    "trajectory": {
+      "alpha_bar": [
+        1.0,
+        0.9,
+        0.5,
+        0.05,
+        0.0001
+      ],
+      "amsgrad": false,
+      "batch_size": 128,
+      "betas": [
+        0.0,
+        0.999
+      ],
+      "birth_death_feature_scale": "none",
+      "birth_death_isolation": false,
+      "birth_death_space": "data",
+      "conditioning": "ucd",
+      "continuous_policy": null,
+      "critic_payoff_damping": true,
+      "critic_r1_real": true,
+      "d_guard_min_steps": 200,
+      "d_guard_ratio": 5.0,
+      "d_lr_mult": 1.5,
+      "direct_particle_betas": [
+        0.0,
+        0.9
+      ],
+      "direct_particle_gain": true,
+      "distance_reduction": "sum",
+      "ema_decay": 0.995,
+      "encoder_mode": "none",
+      "input_noise_anneal_end": 0.1,
+      "input_noise_std": 0.5,
+      "latent_damping_max_rate": 0.5,
+      "lr": 0.0006,
+      "lr_anneal_start": 0.6,
+      "lr_control": "mobility",
+      "lr_floor": 0.05,
+      "model": "ddgan",
+      "name": "ka2",
+      "network_lr_floor": 0.01,
+      "network_lr_horizon_cap": 1600,
+      "num_classes": 2,
+      "num_particles": 20000,
+      "observation_sigma": 0.03,
+      "output_noise_mode": "fixed",
+      "output_noise_std": 0.029,
+      "output_noise_warmup": 0.2,
+      "particle_birth_death": false,
+      "prior_betas": null,
+      "prior_kind": "particles",
+      "prior_lr_mult": 10.0,
+      "prior_reg": 1.0,
+      "reconstruction_weight": 1.0,
+      "reg_anchor_min_decay": 0.9,
+      "reg_anchor_weight": 1.0,
+      "reg_coeff": 1.0,
+      "reg_every": 4,
+      "reg_kappa": 1.0,
+      "reopen_anchor": "hold",
+      "reopen_signal": "data",
+      "routing_temperature": 0.25,
+      "row_evidence_exclude": true,
+      "row_evidence_gate": false,
+      "row_evidence_hold": true,
+      "row_evidence_hot": true,
+      "row_evidence_null": "theory",
+      "row_policy": "independent",
+      "serve_average": 0.0,
+      "sigma_rel": 0.0,
+      "standardize": true,
+      "table_release_rule": "any",
+      "total_steps": 10000,
+      "ucd_target": "time_class",
+      "ucd_weight": 0.02,
+      "z_dim": 32
+    },
+    "transition": {
+      "alpha_bar": [
+        1.0,
+        0.9,
+        0.5,
+        0.05,
+        0.0001
+      ],
+      "amsgrad": false,
+      "batch_size": 256,
+      "betas": [
+        0.0,
+        0.999
+      ],
+      "birth_death_feature_scale": "none",
+      "birth_death_isolation": false,
+      "birth_death_space": "data",
+      "conditioning": "conditional",
+      "continuous_policy": null,
+      "critic_payoff_damping": true,
+      "critic_r1_real": true,
+      "d_guard_min_steps": 200,
+      "d_guard_ratio": 5.0,
+      "d_lr_mult": 1.0,
+      "direct_particle_betas": [
+        0.0,
+        0.9
+      ],
+      "direct_particle_gain": true,
+      "distance_reduction": "sum",
+      "ema_decay": 0.995,
+      "encoder_mode": "none",
+      "input_noise_anneal_end": 0.1,
+      "input_noise_std": 0.5,
+      "latent_damping_max_rate": 0.5,
+      "lr": 0.00425,
+      "lr_anneal_start": 0.6,
+      "lr_control": "mobility",
+      "lr_floor": 0.05,
+      "model": "gan",
+      "name": "ka2",
+      "network_lr_floor": 0.01,
+      "network_lr_horizon_cap": 1600,
+      "num_classes": 2,
+      "num_particles": 1024,
+      "observation_sigma": 0.03,
+      "output_noise_mode": "fixed",
+      "output_noise_std": 0.029,
+      "output_noise_warmup": 0.2,
+      "particle_birth_death": false,
+      "prior_betas": null,
+      "prior_kind": "mog",
+      "prior_lr_mult": 2.0,
+      "prior_reg": 0.0,
+      "reconstruction_weight": 1.0,
+      "reg_anchor_min_decay": 0.9,
+      "reg_anchor_weight": 1.0,
+      "reg_coeff": 1.0,
+      "reg_every": 1,
+      "reg_kappa": 1.0,
+      "reopen_anchor": "hold",
+      "reopen_signal": "data",
+      "routing_temperature": 0.25,
+      "row_evidence_exclude": true,
+      "row_evidence_gate": false,
+      "row_evidence_hold": true,
+      "row_evidence_hot": true,
+      "row_evidence_null": "theory",
+      "row_policy": "independent",
+      "serve_average": 0.0,
+      "sigma_rel": 0.025,
+      "standardize": true,
+      "table_release_rule": "any",
+      "total_steps": 28000,
+      "ucd_target": "class",
+      "ucd_weight": 0.02,
+      "z_dim": 32
+    }
+  },
+  "records": [
+    {
+      "added_gate_status": "NOT EVALUATED",
+      "blocked_phase": "original-source baseline prerequisite",
+      "captured_training_states": 0,
+      "catalog_id": "source-family-04",
+      "catalog_original_rating": 4,
+      "catalog_original_status": "SOURCE REVIEW ONLY",
+      "completed_updates": 0,
+      "config_path": "configs/trajectory/default.yaml",
+      "exact_error": "RuntimeError: CUDA is required",
+      "execution_config": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 128,
+        "beta1": 0.0,
+        "d_architecture": "mlp",
+        "d_lr_mult": 1.5,
+        "d_mode": "ucd",
+        "d_temporal_width": 64,
+        "d_width": 256,
+        "ema": 0.995,
+        "eval_per_context": 512,
+        "geometry_mode": "discrete",
+        "length": 64,
+        "log_interval": 250,
+        "lr": 0.0006,
+        "model": "ddgan",
+        "noise": "gaussian",
+        "noise_lr_mult": 1.0,
+        "noise_particles": 1024,
+        "num_particles": 20000,
+        "out_dir": "results/trajectory/default",
+        "prior": "learned",
+        "prior_lr_mult": 10.0,
+        "prior_reg": 1.0,
+        "reg_coeff": 1.0,
+        "reg_every": 4,
+        "reg_kappa": 1.0,
+        "save_checkpoint": true,
+        "seed": 24002,
+        "steps": 10000,
+        "ucd_lambda": 0.02,
+        "width": 32,
+        "z_dim": 32
+      },
+      "fresh_execution_status": "BLOCKED",
+      "frozen_inputs": {
+        "path": "/ml2/hypergan/toy-route-source-training-20261001/source-family-04/frozen-inputs.json",
+        "sha256": "7ccbfb811731198585034b2802cdbdf694f0e4b31e3583fed7f89e5ff68a090e"
+      },
+      "full_source_campaigns": 0,
+      "geometry": "discrete",
+      "interpretation": "Original source cannot execute on CPU; no model convergence evidence was produced.",
+      "label": "Conditional two-route trajectories, discrete geometry",
+      "media": null,
+      "name": "Conditional two-route trajectories, discrete geometry",
+      "observer_sources": {
+        "benchmarks/toy_audit/source_conditional_routes_observer.py": "43169f9e75a0b1816105755e32b4fe2ae59424a7d80850d8eb67c2f37eb82a18",
+        "benchmarks/toy_audit/source_conditional_routes_run.py": "9eae5ad72c12eafaa6a61fd28993327e2016e2b5a656f52329ec346c2e1cabf9"
+      },
+      "original_acceptance_gate": "Original trainer reports endpoint diagnostics; it declares no aggregate convergence acceptance gate.",
+      "original_budget": 10000,
+      "original_error_site": "experiments/train_trajectory.py:88",
+      "original_scientific_status": "BLOCKED",
+      "original_sources_unchanged": true,
+      "prefix_parity": "NOT RUN: original source CUDA prerequisite blocked",
+      "problem_selection": "Original checked-in config",
+      "qualification_credit": "none",
+      "raw_receipt": {
+        "path": "/ml2/hypergan/toy-route-source-training-20261001/source-family-04/receipt.json",
+        "sha256": "c05b678aca63218e68fa90a5dbe77074e786c92c8a75de7ec9e45ca18aa326db"
+      },
+      "raw_stdout": {
+        "path": "/ml2/hypergan/toy-route-source-04.log",
+        "sha256": "5364e242697aa0d71c0859a7720912375d40ddbc6d75044a1cf3948d5b4483c7"
+      },
+      "resolved_recipe_key": "trajectory",
+      "runtime": {
+        "device": "cpu",
+        "python": "3.12.13",
+        "threads": 1,
+        "torch": "2.13.0+cu126"
+      },
+      "scientific_question": "Match class-dependent upper-route probability (0.8/0.3), continuous route variation, endpoints and segment obstacle clearance on held-out geometry; route IDs are hidden.",
+      "software_prefix_updates": 0,
+      "source_attempts": 1,
+      "wall_cap_seconds": 120,
+      "wall_seconds_including_cleanup": 0.21823482890613377
+    },
+    {
+      "added_gate_status": "NOT EVALUATED",
+      "blocked_phase": "original-source baseline prerequisite",
+      "captured_training_states": 0,
+      "catalog_id": "source-family-05",
+      "catalog_original_rating": 4,
+      "catalog_original_status": "SOURCE REVIEW ONLY",
+      "completed_updates": 0,
+      "config_path": "configs/trajectory/diversity/confirm_10k/mlp_continuous.yaml",
+      "exact_error": "RuntimeError: CUDA is required",
+      "execution_config": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 128,
+        "beta1": 0.0,
+        "d_architecture": "mlp",
+        "d_lr_mult": 1.5,
+        "d_mode": "ucd",
+        "d_temporal_width": 64,
+        "d_width": 256,
+        "ema": 0.995,
+        "eval_per_context": 512,
+        "geometry_mode": "continuous",
+        "length": 64,
+        "log_interval": 250,
+        "lr": 0.0006,
+        "model": "ddgan",
+        "noise": "gaussian",
+        "noise_lr_mult": 1.0,
+        "noise_particles": 1024,
+        "num_particles": 20000,
+        "out_dir": "results/trajectory/diversity/confirm_10k/mlp_continuous",
+        "prior": "learned",
+        "prior_lr_mult": 10.0,
+        "prior_reg": 1.0,
+        "reg_coeff": 1.0,
+        "reg_every": 4,
+        "reg_kappa": 1.0,
+        "save_checkpoint": true,
+        "seed": 24002,
+        "steps": 10000,
+        "ucd_lambda": 0.02,
+        "width": 32,
+        "z_dim": 32
+      },
+      "fresh_execution_status": "BLOCKED",
+      "frozen_inputs": {
+        "path": "/ml2/hypergan/toy-route-source-training-20261001/source-family-05/frozen-inputs.json",
+        "sha256": "e57f722e046727c01835f29de288c336726df912247a4f99b5ec32046c9eb954"
+      },
+      "full_source_campaigns": 0,
+      "geometry": "continuous",
+      "interpretation": "Original source cannot execute on CPU; no model convergence evidence was produced.",
+      "label": "Conditional two-route trajectories, continuous geometry",
+      "media": null,
+      "name": "Conditional two-route trajectories, continuous geometry",
+      "observer_sources": {
+        "benchmarks/toy_audit/source_conditional_routes_observer.py": "43169f9e75a0b1816105755e32b4fe2ae59424a7d80850d8eb67c2f37eb82a18",
+        "benchmarks/toy_audit/source_conditional_routes_run.py": "9eae5ad72c12eafaa6a61fd28993327e2016e2b5a656f52329ec346c2e1cabf9"
+      },
+      "original_acceptance_gate": "Original trainer reports endpoint diagnostics; it declares no aggregate convergence acceptance gate.",
+      "original_budget": 10000,
+      "original_error_site": "experiments/train_trajectory.py:88",
+      "original_scientific_status": "BLOCKED",
+      "original_sources_unchanged": true,
+      "prefix_parity": "NOT RUN: original source CUDA prerequisite blocked",
+      "problem_selection": "Original checked-in config",
+      "qualification_credit": "none",
+      "raw_receipt": {
+        "path": "/ml2/hypergan/toy-route-source-training-20261001/source-family-05/receipt.json",
+        "sha256": "c513754e527fade7e26b19432dd330203a8c230e675f3084f5c94de576061779"
+      },
+      "raw_stdout": {
+        "path": "/ml2/hypergan/toy-route-source-05.log",
+        "sha256": "a9fa42c8c8f9d5fc1ef514335fe75185dba0b11ed7d038f39c2a4efc863266e7"
+      },
+      "resolved_recipe_key": "trajectory",
+      "runtime": {
+        "device": "cpu",
+        "python": "3.12.13",
+        "threads": 1,
+        "torch": "2.13.0+cu126"
+      },
+      "scientific_question": "Match class-dependent upper-route probability (0.8/0.3), continuous route variation, endpoints and segment obstacle clearance on held-out geometry; route IDs are hidden.",
+      "software_prefix_updates": 0,
+      "source_attempts": 1,
+      "wall_cap_seconds": 120,
+      "wall_seconds_including_cleanup": 0.20988422608934343
+    },
+    {
+      "actual_saved_updates": [
+        0,
+        1,
+        10,
+        25,
+        50,
+        100,
+        250,
+        500
+      ],
+      "added_gate_status": "NOT EVALUATED",
+      "artifacts": {
+        "observations.jsonl": {
+          "path": "/ml2/hypergan/toy-route-source-training-20261001/source-family-06/training/observations.jsonl",
+          "sha256": "7c73b5f0b029435f46412818c0fbf97efb907f38fe33a249e698b69c68dd1a29"
+        },
+        "observations.npz": {
+          "path": "/ml2/hypergan/toy-route-source-training-20261001/source-family-06/training/observations.npz",
+          "sha256": "d9d6073c452b6d83a277528296b74fb2e518c57a7630209517789ec5a8a695ba"
+        },
+        "run/config.yaml": {
+          "path": "/ml2/hypergan/toy-route-source-training-20261001/source-family-06/training/run/config.yaml",
+          "sha256": "6a77441ccdb0376f25051352929ebf6bd78607b02d8cada81ec921933479c313"
+        },
+        "run/recipe.json": {
+          "path": "/ml2/hypergan/toy-route-source-training-20261001/source-family-06/training/run/recipe.json",
+          "sha256": "90bf8bd92559501402fe27de2dd0fe752c60c7274ff383c61dbac5d507531e13"
+        },
+        "run/source.zip": {
+          "path": "/ml2/hypergan/toy-route-source-training-20261001/source-family-06/training/run/source.zip",
+          "sha256": "bc1f2aa0dda961b15dba6706215d591c556ab0b99cd92bc124db7bd075638264"
+        }
+      },
+      "captured_prefix_states": 4,
+      "captured_training_states": 8,
+      "catalog_id": "source-family-06",
+      "catalog_original_rating": 4,
+      "catalog_original_status": "SOURCE REVIEW ONLY",
+      "completed_count_definition": "Completed loop iterations observed at the next original loop boundary; the cap can interrupt the following iteration after some owner updates.",
+      "completed_updates": 599,
+      "config_path": "configs/transition/default.yaml",
+      "exact_error": "TimeoutError: 120-second entry wall cap exhausted",
+      "exact_purity_assertions": 12,
+      "execution_config": {
+        "architecture": "branches",
+        "batch_size": 256,
+        "critic_mode": "joint_marginals",
+        "d_conditioning": "concat",
+        "d_width": 256,
+        "device": "cpu",
+        "encoder": true,
+        "encoder_width": 128,
+        "eval_per_context": 512,
+        "g_class_scale": 8.0,
+        "g_context_scale": 1.0,
+        "geometry_mode": "discrete",
+        "length": 64,
+        "live_log": "results/transition/live.log",
+        "log_interval": 250,
+        "marginal_weight": 1.0,
+        "marginal_width": 128,
+        "normalization_samples": 32768,
+        "num_particles": 1024,
+        "out_dir": "results/transition/default",
+        "real_encoding_weight": 1.0,
+        "save_checkpoint": true,
+        "seed": 24002,
+        "shared_state_critic": true,
+        "steps": 28000,
+        "synthetic_reconstruction_weight": 1.0,
+        "width": 128,
+        "z_dim": 32
+      },
+      "final_observed_metrics": {
+        "ema_encoded": {
+          "next_state_mse": 0.016812369227409363,
+          "state_action_mse": 0.009372981265187263
+        },
+        "ema_prior": {
+          "action_sw1": 0.5039793506264687,
+          "consistency_mean": 0.07063256204128265,
+          "consistency_p50": 0.06283453851938248,
+          "consistency_p95": 0.15147283673286438,
+          "coverage": 9.765625e-05,
+          "joint_sw1": 0.413698498159647,
+          "next_state_sw1": 0.4739092506468296,
+          "precision": 9.765625e-05,
+          "spread_ratio": 0.6623333998024463,
+          "state_sw1": 0.4536099754273891
+        },
+        "live_encoded": {
+          "next_state_mse": 0.007512831594794989,
+          "state_action_mse": 0.002977651311084628
+        },
+        "live_prior": {
+          "action_sw1": 0.4887425899505615,
+          "consistency_mean": 0.22677096724510193,
+          "consistency_p50": 0.21488499641418457,
+          "consistency_p95": 0.4330524206161499,
+          "coverage": 4.8828125e-05,
+          "joint_sw1": 0.34697651900351045,
+          "next_state_sw1": 0.4077135033905506,
+          "precision": 4.8828125e-05,
+          "spread_ratio": 0.9007471352815628,
+          "state_sw1": 0.3862775512039661
+        },
+        "panel": {
+          "contexts": 40,
+          "latent_law": "original MoG prior including its Gaussian component noise",
+          "latent_seed": 99000,
+          "original_endpoint_sampling_preserved": true,
+          "reference_seed": 99001,
+          "rows": 20480,
+          "rows_per_context": 512,
+          "split": "test",
+          "ticks": [
+            0,
+            16,
+            31,
+            46,
+            62
+          ]
+        }
+      },
+      "final_observed_update": 500,
+      "fresh_execution_status": "INCOMPLETE",
+      "frozen_inputs": {
+        "path": "/ml2/hypergan/toy-route-source-training-20261001/source-family-06/frozen-inputs.json",
+        "sha256": "f3384aa7bedc37869fb624507553c00f84ea592184ce8c0d1e810c2949aab8f2"
+      },
+      "full_source_campaigns": 1,
+      "geometry": "discrete",
+      "interpretation": "Partial progress at the cap; original 28,000-step budget and original endpoint evaluation were not completed. No convergence conclusion or merge qualification.",
+      "interrupted_iteration": 600,
+      "interruption_site": "experiments/train_transition.py:355 (EMA update)",
+      "label": "Route transitions, discrete geometry",
+      "media": "media/source-family-06.gif",
+      "media_sha256": "cfaa09fcaeffc2d7791985420cd63ce1c666250545d69991e636afbc45ce8904",
+      "name": "Route transitions, discrete geometry",
+      "normalization": {
+        "count": 32768,
+        "mean": [
+          -0.018546603620052338,
+          0.03084409609436989,
+          0.031746331602334976,
+          7.184773858170956e-05,
+          0.013199730776250362,
+          0.030915943905711174
+        ],
+        "scale": [
+          0.5766190886497498,
+          0.37729915976524353,
+          0.00122144166380167,
+          0.02093471586704254,
+          0.5766192078590393,
+          0.3764325678348541
+        ],
+        "seed": 91001,
+        "split": "train"
+      },
+      "observer_sources": {
+        "benchmarks/toy_audit/source_conditional_routes_observer.py": "43169f9e75a0b1816105755e32b4fe2ae59424a7d80850d8eb67c2f37eb82a18",
+        "benchmarks/toy_audit/source_conditional_routes_run.py": "9eae5ad72c12eafaa6a61fd28993327e2016e2b5a656f52329ec346c2e1cabf9"
+      },
+      "original_acceptance_gate": "Original trainer reports endpoint diagnostics; it declares no aggregate convergence acceptance gate.",
+      "original_budget": 28000,
+      "original_scientific_status": "INCOMPLETE",
+      "original_sources_unchanged": true,
+      "paid_observer_seconds": 27.75721818814054,
+      "poster": "media/source-family-06.png",
+      "prefix_baseline_owner_sha256": {
+        "0": "c0736d7b5b7fb1b0b0ca9930a73827e5a0909c737f83c8116be089948ab2cf4d",
+        "1": "c20088464ec1ed384295a2f5d87fca15ae444e8fac766d6a7c7345e9b6e582b6",
+        "2": "88ccad2da055c0812b442a3d7ddc0e59b9e7b9d2c893ccc5948519652d4f74d0",
+        "3": "55526c030d47bf70d4cb7c78de6039ea9b569a4104f32fd97217dce78376da1f"
+      },
+      "prefix_observed_owner_sha256": {
+        "0": "c0736d7b5b7fb1b0b0ca9930a73827e5a0909c737f83c8116be089948ab2cf4d",
+        "1": "c20088464ec1ed384295a2f5d87fca15ae444e8fac766d6a7c7345e9b6e582b6",
+        "2": "88ccad2da055c0812b442a3d7ddc0e59b9e7b9d2c893ccc5948519652d4f74d0",
+        "3": "55526c030d47bf70d4cb7c78de6039ea9b569a4104f32fd97217dce78376da1f"
+      },
+      "prefix_observer_seconds": 18.502175234956667,
+      "prefix_parity": {
+        "boundaries": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "exact_matches": 4,
+        "passed": true,
+        "software_updates": 6
+      },
+      "prior_at_initialization": {
+        "initial_neighbor_distance": 5.236055850982666,
+        "kind": "mog",
+        "num_particles": 1024,
+        "regularize": "raw centers; full table at <=1024",
+        "sigma": 0.13090139627456665,
+        "sigma_rel": 0.025,
+        "standardize": true
+      },
+      "problem_selection": "Original checked-in config",
+      "qualification_credit": "none",
+      "raw_receipt": {
+        "path": "/ml2/hypergan/toy-route-source-training-20261001/source-family-06/receipt.json",
+        "sha256": "2ff0c2399b5f403d74aa7fc59780b267a56ede2da156897ba4efbb4ca0edee95"
+      },
+      "raw_stdout": {
+        "path": "/ml2/hypergan/toy-route-source-06.log",
+        "sha256": "251d689cd5ee0570d91b6fcbcb7a0f08ee264abc7645718eab205e06171f814b"
+      },
+      "resolved_recipe_key": "transition",
+      "runtime": {
+        "device": "cpu",
+        "python": "3.12.13",
+        "threads": 1,
+        "torch": "2.13.0+cu126"
+      },
+      "sampling": {
+        "contexts": 40,
+        "latent_law": "original MoG prior including its Gaussian component noise",
+        "latent_seed": 99000,
+        "original_endpoint_sampling_preserved": true,
+        "reference_seed": 99001,
+        "rows": 20480,
+        "rows_per_context": 512,
+        "split": "test",
+        "ticks": [
+          0,
+          16,
+          31,
+          46,
+          62
+        ]
+      },
+      "scientific_question": "Match a joint (state, action, next_state) law conditional on geometry, class and physical tick; next_state = state + action, and separately matching block marginals does not establish this relationship.",
+      "software_prefix_updates": 6,
+      "source_attempts": 1,
+      "training_seconds_including_save": 95.58311317511834,
+      "wall_cap_seconds": 120,
+      "wall_seconds_including_cleanup": 123.21016794606112
+    },
+    {
+      "actual_saved_updates": [
+        0,
+        1,
+        10,
+        25,
+        50,
+        100,
+        250,
+        500
+      ],
+      "added_gate_status": "NOT EVALUATED",
+      "artifacts": {
+        "observations.jsonl": {
+          "path": "/ml2/hypergan/toy-route-source-training-20261001/source-family-07/training/observations.jsonl",
+          "sha256": "0fb9046f6c711b083a48128abca6142c96780f3614c988739de5631c843db747"
+        },
+        "observations.npz": {
+          "path": "/ml2/hypergan/toy-route-source-training-20261001/source-family-07/training/observations.npz",
+          "sha256": "2deee7ee9d901a3d07dd74b86584b9780630bc1befffbc5d68e374430859f90c"
+        },
+        "run/config.yaml": {
+          "path": "/ml2/hypergan/toy-route-source-training-20261001/source-family-07/training/run/config.yaml",
+          "sha256": "b57b9b35d7459e1713164a0b0bef02f6b1d1459521c95e520ced4602ba2256d1"
+        },
+        "run/recipe.json": {
+          "path": "/ml2/hypergan/toy-route-source-training-20261001/source-family-07/training/run/recipe.json",
+          "sha256": "90bf8bd92559501402fe27de2dd0fe752c60c7274ff383c61dbac5d507531e13"
+        },
+        "run/source.zip": {
+          "path": "/ml2/hypergan/toy-route-source-training-20261001/source-family-07/training/run/source.zip",
+          "sha256": "4be86a9550eeb1197400f4c75b7856b449228e8c68cb04825cba6b83651b3096"
+        }
+      },
+      "captured_prefix_states": 4,
+      "captured_training_states": 8,
+      "catalog_id": "source-family-07",
+      "catalog_original_rating": 4,
+      "catalog_original_status": "SOURCE REVIEW ONLY",
+      "completed_count_definition": "Completed loop iterations observed at the next original loop boundary; the cap can interrupt the following iteration after some owner updates.",
+      "completed_updates": 628,
+      "config_path": "configs/transition/default.yaml",
+      "exact_error": "TimeoutError: 120-second entry wall cap exhausted",
+      "exact_purity_assertions": 12,
+      "execution_config": {
+        "architecture": "branches",
+        "batch_size": 256,
+        "critic_mode": "joint_marginals",
+        "d_conditioning": "concat",
+        "d_width": 256,
+        "device": "cpu",
+        "encoder": true,
+        "encoder_width": 128,
+        "eval_per_context": 512,
+        "g_class_scale": 8.0,
+        "g_context_scale": 1.0,
+        "geometry_mode": "continuous",
+        "length": 64,
+        "live_log": "results/transition/live.log",
+        "log_interval": 250,
+        "marginal_weight": 1.0,
+        "marginal_width": 128,
+        "normalization_samples": 32768,
+        "num_particles": 1024,
+        "out_dir": "results/transition/default",
+        "real_encoding_weight": 1.0,
+        "save_checkpoint": true,
+        "seed": 24002,
+        "shared_state_critic": true,
+        "steps": 28000,
+        "synthetic_reconstruction_weight": 1.0,
+        "width": 128,
+        "z_dim": 32
+      },
+      "final_observed_metrics": {
+        "ema_encoded": {
+          "next_state_mse": 0.01547895185649395,
+          "state_action_mse": 0.009138394147157669
+        },
+        "ema_prior": {
+          "action_sw1": 0.5221401825547218,
+          "consistency_mean": 0.08588216453790665,
+          "consistency_p50": 0.07662703841924667,
+          "consistency_p95": 0.18382275104522705,
+          "coverage": 0.000634765625,
+          "joint_sw1": 0.4164899341762066,
+          "next_state_sw1": 0.462817145884037,
+          "precision": 0.000244140625,
+          "spread_ratio": 0.5878875754773617,
+          "state_sw1": 0.447890542820096
+        },
+        "live_encoded": {
+          "next_state_mse": 0.004967313725501299,
+          "state_action_mse": 0.001682296977378428
+        },
+        "live_prior": {
+          "action_sw1": 0.5152345053851605,
+          "consistency_mean": 0.12931667268276215,
+          "consistency_p50": 0.12160231173038483,
+          "consistency_p95": 0.2482355386018753,
+          "coverage": 9.765625e-05,
+          "joint_sw1": 0.35206928811967375,
+          "next_state_sw1": 0.3853123188018799,
+          "precision": 4.8828125e-05,
+          "spread_ratio": 0.9142950430512429,
+          "state_sw1": 0.3524529732763767
+        },
+        "panel": {
+          "contexts": 40,
+          "latent_law": "original MoG prior including its Gaussian component noise",
+          "latent_seed": 99000,
+          "original_endpoint_sampling_preserved": true,
+          "reference_seed": 99001,
+          "rows": 20480,
+          "rows_per_context": 512,
+          "split": "test",
+          "ticks": [
+            0,
+            16,
+            31,
+            46,
+            62
+          ]
+        }
+      },
+      "final_observed_update": 500,
+      "fresh_execution_status": "INCOMPLETE",
+      "frozen_inputs": {
+        "path": "/ml2/hypergan/toy-route-source-training-20261001/source-family-07/frozen-inputs.json",
+        "sha256": "7e0b4d1548e8c8bfb6de174034d71a695d9e3aa8515360e2e46784634ff0ee34"
+      },
+      "full_source_campaigns": 1,
+      "geometry": "continuous",
+      "interpretation": "Partial progress at the cap; original 28,000-step budget and original endpoint evaluation were not completed. No convergence conclusion or merge qualification.",
+      "interrupted_iteration": 629,
+      "interruption_site": "experiments/train_transition.py:325 (fake composition before D update)",
+      "label": "Route transitions, continuous geometry",
+      "media": "media/source-family-07.gif",
+      "media_sha256": "6a486ec5ce1f7c991bee5a0b3b8d0c45ae14e02d878a4e13cd77edc209693304",
+      "name": "Route transitions, continuous geometry",
+      "normalization": {
+        "count": 32768,
+        "mean": [
+          -0.015121955424547195,
+          0.029411908239126205,
+          0.03173530101776123,
+          -0.00014794828894082457,
+          0.016613347455859184,
+          0.02926395833492279
+        ],
+        "scale": [
+          0.5791215896606445,
+          0.35784903168678284,
+          0.0012210009153932333,
+          0.02040884830057621,
+          0.5791001319885254,
+          0.35752761363983154
+        ],
+        "seed": 91001,
+        "split": "train"
+      },
+      "observer_sources": {
+        "benchmarks/toy_audit/source_conditional_routes_observer.py": "43169f9e75a0b1816105755e32b4fe2ae59424a7d80850d8eb67c2f37eb82a18",
+        "benchmarks/toy_audit/source_conditional_routes_run.py": "9eae5ad72c12eafaa6a61fd28993327e2016e2b5a656f52329ec346c2e1cabf9"
+      },
+      "original_acceptance_gate": "Original trainer reports endpoint diagnostics; it declares no aggregate convergence acceptance gate.",
+      "original_budget": 28000,
+      "original_scientific_status": "INCOMPLETE",
+      "original_sources_unchanged": true,
+      "paid_observer_seconds": 24.47273510019295,
+      "poster": "media/source-family-07.png",
+      "prefix_baseline_owner_sha256": {
+        "0": "433fa4ea3fd084e3bbc0f182a48706826c65242d65281dc4c8e7351fbc7159b9",
+        "1": "8e0537c242cf7ddbf75ea1b491dbacdccab2ffb7df3a637d1e3ab9c45d763bf3",
+        "2": "c09c60ffdffa7215e90dbc919374d2c0a714b0168c21b3e56a30ef6d31a1a0a7",
+        "3": "213adf44a205a90e62ec2fb99aa2c1b31b5d88abf7bfbe842d203ed9c7d9c617"
+      },
+      "prefix_observed_owner_sha256": {
+        "0": "433fa4ea3fd084e3bbc0f182a48706826c65242d65281dc4c8e7351fbc7159b9",
+        "1": "8e0537c242cf7ddbf75ea1b491dbacdccab2ffb7df3a637d1e3ab9c45d763bf3",
+        "2": "c09c60ffdffa7215e90dbc919374d2c0a714b0168c21b3e56a30ef6d31a1a0a7",
+        "3": "213adf44a205a90e62ec2fb99aa2c1b31b5d88abf7bfbe842d203ed9c7d9c617"
+      },
+      "prefix_observer_seconds": 13.728741289814934,
+      "prefix_parity": {
+        "boundaries": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "exact_matches": 4,
+        "passed": true,
+        "software_updates": 6
+      },
+      "prior_at_initialization": {
+        "initial_neighbor_distance": 5.236055850982666,
+        "kind": "mog",
+        "num_particles": 1024,
+        "regularize": "raw centers; full table at <=1024",
+        "sigma": 0.13090139627456665,
+        "sigma_rel": 0.025,
+        "standardize": true
+      },
+      "problem_selection": "Source-supported continuous geometry, same transition defaults and budget",
+      "qualification_credit": "none",
+      "raw_receipt": {
+        "path": "/ml2/hypergan/toy-route-source-training-20261001/source-family-07/receipt.json",
+        "sha256": "2715f879ce2c60cf2cd9ed8883b5aa7574df432b81ecfff77a74ed1c0ab1d5fb"
+      },
+      "raw_stdout": {
+        "path": "/ml2/hypergan/toy-route-source-07.log",
+        "sha256": "bbe0bb988359f2c3cac39f123249fe7cff1cd4d2fc1e87988648faf070990507"
+      },
+      "resolved_recipe_key": "transition",
+      "runtime": {
+        "device": "cpu",
+        "python": "3.12.13",
+        "threads": 1,
+        "torch": "2.13.0+cu126"
+      },
+      "sampling": {
+        "contexts": 40,
+        "latent_law": "original MoG prior including its Gaussian component noise",
+        "latent_seed": 99000,
+        "original_endpoint_sampling_preserved": true,
+        "reference_seed": 99001,
+        "rows": 20480,
+        "rows_per_context": 512,
+        "split": "test",
+        "ticks": [
+          0,
+          16,
+          31,
+          46,
+          62
+        ]
+      },
+      "scientific_question": "Match a joint (state, action, next_state) law conditional on geometry, class and physical tick; next_state = state + action, and separately matching block marginals does not establish this relationship.",
+      "software_prefix_updates": 6,
+      "source_attempts": 1,
+      "training_seconds_including_save": 100.2949644930195,
+      "wall_cap_seconds": 120,
+      "wall_seconds_including_cleanup": 121.06978200213052
+    }
+  ],
+  "report_generator_sha256": "d9d02f41be2fb28919f6ef9d59900b053671753ab86b60ea985ad905448415f2",
+  "runtime_device": "CPU1; separate from CUDA reports",
+  "source_archive": {
+    "binding_algorithm": "canonical SHA256 of sorted compact JSON path-to-SHA256 map",
+    "bound_source_files": 251,
+    "critical_sha256": {
+      "configs/trajectory/default.yaml": "6044aa4cbb97ba8a1c35c033f651f65e411676f17dbc1f8f48a0cf8332acc78c",
+      "configs/trajectory/diversity/confirm_10k/mlp_continuous.yaml": "9e5b0d46e4e3d143aefa96ed60cc605269fae6badd9c6c4722fa457bd536cbc8",
+      "configs/transition/default.yaml": "8d09a9f8826202693b6556d4b9dd393bbb9e077f248805b1a425405dcb95b2c6",
+      "experiments/train_trajectory.py": "3104306e308c19fa0f89941eac21b533e5663fb84c4a63e4ba35c27ce522a296",
+      "experiments/train_transition.py": "2617077853d2927525d8b10730a2279c9f37310cf0c5fd8f318951321083d12a",
+      "lib/toy_metrics.py": "12e8975fe31ed4d9973d53649ce940171da78739a3d7b80544ba5f4d2313367c",
+      "lib/trajectory.py": "7af4817005b35144ea19cb156c475d8a654584a0913f773028e674916bd4fcf7",
+      "lib/transition.py": "87bb3cfb65a96ac058860a06df421601caf02a44a05c5c62b265d3e1850fcf76"
+    },
+    "git_revision_blobs_verified": 251,
+    "package_manifest_sha256": "5c70786a0dbae68563254e27130082007061f723eb690b82c6da487f79531663",
+    "path": "/ml2/hypergan/toy-route-source-training-20261001/source.tar",
+    "sha256": "f5e105fb49e06532a336468e992d91349a1df90195b2698e01139e2401e59537",
+    "source_manifest_sha256": "c4abdc1f03f25e68b1999e4369a6a63375c894ff43ceab303ed3e12cdb022708"
+  },
+  "source_revision": "6ec7e5788e14ea15ddc3e16ac71110458108b6a6",
+  "wall_cap_definition": "120-second SIGALRM per entry, including source import, short baseline parity and the sole full-budget attempt. Save/receipt cleanup follows without additional optimizer updates."
+}
