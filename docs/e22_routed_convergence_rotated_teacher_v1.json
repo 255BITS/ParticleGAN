@@ -1,6 +1,6 @@
 {
   "task_id": "routed_convergence_rotated_teacher_v1",
-  "status": "source-only preparation; execution held until the full Supra fixed final comparison is independently qualified",
+  "status": "predeclared single CPU diagnostic; execution authorized by the user before any quality toy updates",
   "scope": "standalone_policy_aware_diagnostic; no Forge/default/full-Supra qualification",
   "question": "Does PR227 neutral-H/b convergence survive when both generators must learn a new input basis instead of starting in the exact teacher span?",
   "native_base_revision": "6ec7e5788e14ea15ddc3e16ac71110458108b6a6",
@@ -153,7 +153,7 @@
     "total_wall_budget_seconds": 2700,
     "budget_includes": "all three quality arms, fixed-panel evaluation, six replay software updates, and independent qualification; preparation software is reported separately; wall timeout or missing review is incomplete qualification",
     "quality_training_launched": false,
-    "execution_authorized": false,
+    "execution_authorized": true,
     "artifact_archive": "Exact held source/card/native Python bytes under source/, plus frozen data.pt and full-file SHA; checkpoint and raw-score manifests preserve all declared states."
   },
   "evaluation": {
@@ -192,8 +192,8 @@
     "Native G/router/table LR releases, noise eligibility, surprise or structural responses can differ by configuration; a remaining task gap does not uniquely identify basis-angle mediation.",
     "The audited71 Supra sites are70 rank16/inputwidth576 projections and one rank16/inputwidth768 projection. Their equal-site isotropic chance overlap is0.02767996870109542; measured mean squared cosine is0.027652886220233087 and measured linear-delta energy capture is0.027625366713810866."
   ],
-  "next_action": "Root freezes the final runner/card/source identities and budget after independently qualified full Supra5120/6400 reporting. Enable execution only if neutral particles at6400 fail to beat the historical ordinary reference under both fixed common critics, then run this single declared native-game task once.",
-  "launch_condition": "After full Supra5120/6400 readout and independent qualification, launch this single toy if neutral particles at6400 do not beat historical ordinary6400 under BOTH mandatory common critics. Mixed critic results are mixed, not a win over both. Any H/b improvement over the fresh sampled control remains separately reported.",
+  "next_action": "Run this single frozen native-game task once, then independently qualify all fixed artifacts within the unchanged 2700-second total budget. Preserve every signed score and any scientific failure. Full Supra still must complete both fixed endpoints and its separate review.",
+  "launch_condition": "Explicit user request on 2026-10-01 at approximately 23:26 UTC: isolate the problem into a toy problem. Execute this fixed CPU task alongside the still-running full Supra comparison. Full Supra qualification is pending and is not claimed as launch evidence.",
   "streams": {
     "data_fit_indices": {
       "device": "cpu",
@@ -210,5 +210,15 @@
     "native_policy_seed": 21,
     "initialization": "semantic-name CPU generators from held public sample_distributions_v1 helper; no seed search"
   },
-  "native_python_source_digest": "d0be475a055aae953c22dbd19f6d2357db041437e0679d2f2f2cfa356517f65b"
+  "native_python_source_digest": "d0be475a055aae953c22dbd19f6d2357db041437e0679d2f2f2cfa356517f65b",
+  "authorization_provenance": {
+    "user_request": "isolate the problem into a toy problem",
+    "recorded_utc": "2026-10-01T23:26:00Z",
+    "earlier_source_only_card_sha256": "36e8694e48ea02bf05854dad6dab8d519c58f9d7db5776da6fc0b14327791b8a",
+    "earlier_preparation_commit": "1cce9072",
+    "quality_training_performed_before_change": false,
+    "changed_execution_condition_only": true,
+    "supra_run": "/ml2/hypergan/supra-e22-neutral-init/outputs/e22-supra-neutral-initialization-6400",
+    "supra_qualification_pending": true
+  }
 }

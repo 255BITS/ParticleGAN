@@ -19,10 +19,14 @@ outputs and the derived fixed coordinate scale; preserved weight Gram does
 not preserve task difficulty. The historical trained ordinary span is also
 not an estimate of Supra's exact frozen-caption target span.
 
-The [card](e22_routed_convergence_rotated_teacher_v1.json) holds quality
-execution pending the independently qualified full Supra final comparison.
-The coordinator will enable this single task if neutral particles at 6,400 do
-not beat the historical ordinary reference under both required common critics.
+The [card](e22_routed_convergence_rotated_teacher_v1.json) now authorizes this
+single task following the user's explicit request to isolate the problem in
+a toy while the full Supra comparison continues. This execution condition
+changed before any quality toy updates. The earlier source-only card remains
+archived at commit `1cce9072`, SHA
+`36e8694e48ea02bf05854dad6dab8d519c58f9d7db5776da6fc0b14327791b8a`.
+The native law, task geometry, arms, horizons, gates and budgets are unchanged.
+Full Supra qualification is still pending; it is not claimed as launch evidence.
 H/b gains over the fresh sampled control remain a separate result.
 
 The three native-game arms are ordinary LoRA, original particles, and particles
@@ -33,7 +37,7 @@ error is an offline diagnostic. There is no fresh MSE training arm.
 
 ```sh
 PYTHONPATH=. python -m pytest -q tests/test_e22_routed_convergence_rotated_teacher.py
-# After the coordinator freezes and enables the conditional card:
+# The authorized card is frozen before the single quality run:
 PYTHONPATH=. python -u examples/run_e22_routed_convergence_rotated_teacher.py --out runs/routed-convergence-rotated-v1
 ```
 
