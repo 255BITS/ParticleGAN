@@ -1,4 +1,4 @@
-"""A rounded CUDA exponential must not stall learned noise at initialization."""
+"""Learned noise must escape its floor after the model and table settle."""
 from copy import deepcopy
 import io
 import math
@@ -189,3 +189,114 @@ def test_float32_native_and_external_noise_learning_have_exact_same_device_parit
             assert native.log_output_sigma.grad != 0
             assert not torch.equal(initial, native.log_output_sigma.detach())
     assert not torch.equal(initial, native.log_output_sigma.detach())
+
+
+@pytest.mark.parametrize("device", DEVICES)
+@pytest.mark.parametrize("formulation", ["e22", "e22_routed"])
+def test_frozen_noise_cannot_block_floor_release_and_exact_resume(device, formulation):
+    if formulation == "e22":
+        factory = lambda: make_trainer(device)
+        advance = lambda loop: loop.step(real_batch(loop.policy))
+        save = lambda loop: loop.state_dict()
+        recover = lambda loop, state: loop.load_state_dict(state)
+    else:
+        from examples.e22_routed_sites import checkpoint, make_loop, restore, update
+
+        factory = lambda: make_loop(device=device, tokens=3, batch_size=4, probe_interval=1000)
+        advance, save, recover = update, checkpoint, restore
+
+    loop = factory()
+    policy = loop.policy
+    base = policy.recipe.output_noise_std
+    with torch.no_grad():
+        policy.log_output_sigma.copy_(policy.log_output_sigma.new_tensor(math.log(base * .75)))
+    clamped_parameter = policy.log_output_sigma.detach().clone()
+    noise_tester = policy.lr_settle.testers[0][-1]
+    # Produce a real frozen verdict: the physical floor suppresses the noise
+    # gradient while at least one model group still has its full rate.
+    for _ in range(2 * noise_tester.K):
+        policy.lr_settle.testers[0][0].s = 1.
+        advance(loop)
+        assert policy.log_output_sigma.grad == 0
+        assert_tree_equal(policy.log_output_sigma.detach(), clamped_parameter)
+    assert noise_tester.counts["frozen"] >= 1
+    assert noise_tester.s == 1.
+    assert policy.output_sigma() == base
+
+    # Supply the model/table settlement boundary without altering the frozen
+    # noise tester. The floor is allowed to fall on the next update.
+    for index, testers in enumerate(policy.lr_settle.testers):
+        if index != 1:
+            for tester, role in zip(testers, policy.roles[index]):
+                if role != "noise" and tester is not None:
+                    tester.s = 1. / 64.
+    policy.controller.mobility = .25
+    raw = policy.log_output_sigma.exp()
+    sigma = policy._output_sigma(base, detach=False)
+    assert_tree_equal(sigma, raw)
+    assert_tree_equal(torch.autograd.grad(sigma, policy.log_output_sigma)[0], raw)
+    assert policy.output_sigma() < base
+    before = cpu_roundtrip(save(loop))
+    served_before = policy.served_snapshot()
+    assert served_before["output_sigma"] == policy.output_sigma()
+
+    expected_updates = []
+    for _ in range(2):
+        expected_updates.append(advance(loop))
+        assert policy.log_output_sigma.grad != 0
+        assert_tree_equal(policy.opt_g.param_groups[-1]["lr"], policy.initial_lrs[0][-1])
+    assert not torch.equal(policy.log_output_sigma.detach(), clamped_parameter)
+    expected_gradient = policy.log_output_sigma.grad.detach().clone()
+    expected = save(loop)
+    served_after = policy.served_snapshot()
+    served_model = policy.served_model()
+    sampling = torch.Generator(device=device).manual_seed(11)
+    if formulation == "e22":
+        expected_output = served_model.sample(5, output_noise=True, generator=sampling)
+    else:
+        expected_output = served_model.routed_forward(
+            loop.test_context, output_noise=True, generator=sampling)
+
+    restored = factory()
+    recover(restored, before)
+    assert_tree_equal(served_before, restored.policy.served_snapshot())
+    assert_tree_equal(expected_updates, [advance(restored) for _ in range(2)])
+    assert_tree_equal(expected_gradient, restored.policy.log_output_sigma.grad)
+    assert_tree_equal(expected, save(restored))
+    assert_tree_equal(served_after, restored.policy.served_snapshot())
+    restored_model = restored.policy.served_model()
+    sampling = torch.Generator(device=device).manual_seed(11)
+    if formulation == "e22":
+        actual_output = restored_model.sample(5, output_noise=True, generator=sampling)
+    else:
+        actual_output = restored_model.routed_forward(
+            restored.test_context, output_noise=True, generator=sampling)
+    assert_tree_equal(expected_output, actual_output)
+
+
+@pytest.mark.parametrize("unsettled_role", ["generator", "encoder", "router", "table"])
+def test_noise_floor_waits_for_each_model_role_with_separate_table_owner(unsettled_role):
+    from tests.test_e22_ownership import _components
+
+    policy = _components()
+    base = policy.recipe.output_noise_std
+    policy.controller.mobility = .25
+    with torch.no_grad():
+        policy.log_output_sigma.add_(math.log(.75))
+    unsettled = None
+    for index, testers in enumerate(policy.lr_settle.testers):
+        for tester, role in zip(testers, policy.roles[index]):
+            if role not in ("noise", "critic"):
+                tester.s = 1. / 64.
+            if role == unsettled_role:
+                unsettled = tester
+    assert unsettled is not None
+    unsettled.s = 1. / 32.
+    sigma = policy._output_sigma(base, detach=False)
+    assert sigma == base
+    assert torch.autograd.grad(sigma, policy.log_output_sigma)[0] == 0
+    unsettled.s = 1. / 64.
+    sigma = policy._output_sigma(base, detach=False)
+    raw = policy.log_output_sigma.exp()
+    assert_tree_equal(sigma, raw)
+    assert_tree_equal(torch.autograd.grad(sigma, policy.log_output_sigma)[0], raw)

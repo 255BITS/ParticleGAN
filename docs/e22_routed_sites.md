@@ -106,6 +106,11 @@ from `output_guard_accepted`; `accepted` requires both.
 
 ## Running, restoring and serving
 
+Many-site loops batch accelerator finite checks at the end of each complete
+model forward and defer DV12 diagnostic reductions until observation. The
+[71-site readback fixture](e22_routed_readbacks.md) documents synchronization,
+bounded pending storage, exact recovery and the remaining integration costs.
+
 ```bash
 python -u examples/e22_routed_sites.py --steps 60 --output /tmp/e22-sites.pt
 python -u examples/e22_routed_sites.py --steps 2 --resume /tmp/e22-sites.pt

@@ -57,6 +57,7 @@ class RoutedExecution:
         self._sites, self._candidate = sites, candidate
         self._batch_size, self._perturb_fn = batch_size, perturb_fn
         self._next, self._usage, self._active = 0, None, True
+        self._validation_checks = []
 
     def mix(self, site_name, logits):
         """Mix a shared bank at one declared site using [B,*tokens,N] logits."""
@@ -68,11 +69,20 @@ class RoutedExecution:
         if (not isinstance(logits, torch.Tensor) or logits.ndim < 2
                 or logits.shape[0] != self._batch_size or logits.shape[-1] != len(candidate.table)
                 or any(size == 0 for size in logits.shape) or logits.layout != torch.strided
-                or not logits.is_floating_point() or logits.device != candidate.table.device
-                or not bool(torch.isfinite(logits).all())):
+                or not logits.is_floating_point() or logits.device != candidate.table.device):
+            raise ValueError("routing site logits must be finite floating [contexts, *tokens, rows] tensors on the table device")
+        with torch.no_grad():
+            valid_logits = torch.isfinite(logits).all()
+        if logits.device.type == "cpu" and not bool(valid_logits):
             raise ValueError("routing site logits must be finite floating [contexts, *tokens, rows] tensors on the table device")
         weights = (logits.to(candidate.table.dtype) + candidate.log_mass).softmax(-1)
-        if not bool(torch.isfinite(weights).all()):
+        with torch.no_grad():
+            valid_weights = torch.isfinite(weights).all()
+            if logits.device.type != "cpu":
+                # Only detached scalar predicates survive a site. Aggregate
+                # once at finish, avoiding both readbacks and per-site kernels.
+                self._validation_checks.extend((valid_logits, valid_weights))
+        if logits.device.type == "cpu" and not bool(valid_weights):
             raise ValueError("routing site softmax must retain finite mass after row deletion")
         codes = weights @ candidate.table
         if self._perturb_fn is not None:
@@ -90,15 +100,26 @@ class RoutedExecution:
         return codes
 
     def finish(self):
+        if not self._active:
+            raise ValueError("routing.finish is valid only during its complete model forward")
         if self._next != len(self._sites):
             raise ValueError("the complete model forward must call every declared routing site exactly once")
+        status = 0
+        if self._validation_checks:
+            with torch.no_grad():
+                valid_logits, valid_weights = torch.stack(self._validation_checks).view(-1, 2).all(0)
+                status = int(torch.where(valid_logits, torch.where(valid_weights, 0, 2), 1))
+        if status & 1:
+            raise ValueError("routing site logits must be finite floating [contexts, *tokens, rows] tensors on the table device")
+        if status & 2:
+            raise ValueError("routing site softmax must retain finite mass after row deletion")
         return self._usage / len(self._sites)
 
     def close(self):
         # A callback retaining this object cannot reuse a past candidate or any
         # activations. The returned output/usage keep their normal autograd graph.
         self._active = False
-        self._candidate = self._perturb_fn = self._usage = None
+        self._candidate = self._perturb_fn = self._usage = self._validation_checks = None
 
 
 class RoutedRows:
@@ -242,12 +263,17 @@ class RoutedRows:
             raise ValueError("routed context must be a nonempty batch on the table device")
         weights = self.route(models, context, candidate)
         if (not isinstance(weights, torch.Tensor) or weights.shape != (len(context), len(candidate.table))
-                or not weights.is_floating_point() or weights.device != candidate.table.device
-                or not bool(torch.isfinite(weights).all()) or bool((weights < 0).any())):
+                or not weights.is_floating_point() or weights.device != candidate.table.device):
             raise ValueError("routed callback must return finite nonnegative [contexts, rows] weights")
         tolerance = max(1e-6, 8 * torch.finfo(weights.dtype).eps)
-        if not torch.allclose(weights.sum(1), torch.ones(len(context), device=weights.device, dtype=weights.dtype),
-                              rtol=tolerance, atol=tolerance):
+        with torch.no_grad():
+            valid_values = torch.isfinite(weights).all() & (weights >= 0).all()
+            total = weights.sum(1)
+            valid_normalization = torch.isclose(total, torch.ones_like(total), rtol=tolerance, atol=tolerance).all()
+            status = int(torch.where(valid_values, torch.where(valid_normalization, 0, 2), 1))
+        if status & 1:
+            raise ValueError("routed callback must return finite nonnegative [contexts, rows] weights")
+        if status & 2:
             raise ValueError("routed weights must sum to one for every context")
         return weights.to(candidate.table.dtype)
 

@@ -66,6 +66,7 @@ jobs:
           cp examples/e22_routed_replay.py /tmp/e22_routed_replay.py
           cp examples/e22_routed_game.py /tmp/e22_routed_game.py
           cp examples/e22_routed_support.py /tmp/e22_routed_support.py
+          cp examples/e22_routed_readbacks.py /tmp/e22_routed_readbacks.py
           cd /tmp
           PYTHONPATH=/tmp/particlegan-installed python /tmp/particlegan-autoencoder-smoke.py
           PYTHONPATH=/tmp/particlegan-installed python /tmp/particlegan-gan-smoke.py --steps 2 --output /tmp/particlegan-gan-smoke.pt
@@ -79,6 +80,7 @@ jobs:
           PYTHONPATH=/tmp/particlegan-installed python /tmp/e22_routed_replay.py --steps 2
           PYTHONPATH=/tmp/particlegan-installed python /tmp/e22_routed_replay.py --steps 2 --mode no_rows
           PYTHONPATH=/tmp/particlegan-installed python /tmp/e22_routed_game.py
+          PYTHONPATH=/tmp/particlegan-installed python /tmp/e22_routed_readbacks.py --sites 3 --tokens 2 --particles 16 --steps 2 --warmup-steps 1
           PYTHONPATH=/tmp/particlegan-installed python /tmp/e22_routed_support.py --compare --steps 2 --tokens 8 --particles 16 --game-diagnostics --log-every 2 --receipt /tmp/e22-capacity-smoke.json
           PYTHONPATH=/tmp/particlegan-installed python - <<'PY'
           import particlegan

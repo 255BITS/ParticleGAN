@@ -7,10 +7,26 @@ than changes of the mean. Generator gradient alignment is a distinct signal.
 from copy import deepcopy
 import math
 from types import SimpleNamespace
+from typing import NamedTuple
 import torch
 
 
+class _LatentApplication(NamedTuple):
+    radius: torch.Tensor
+    displacement: torch.Tensor
+    fraction: torch.Tensor
+    autocast_dtype: torch.dtype | None
+
+    def metrics(self):
+        with torch.autocast(device_type=self.radius.device.type, dtype=self.autocast_dtype,
+                            enabled=self.autocast_dtype is not None):
+            return torch.stack((self.radius.min(), self.radius.mean(), self.radius.max(),
+                self.displacement.square().mean().sqrt(), (self.fraction < 1.).float().mean()))
+
+
 class DataDriftController:
+    _LATENT_METRICS = ("radius_min", "radius_mean", "radius_max", "perturbation_rms", "clipped_fraction")
+
     def __init__(self, variant="dv1"):
         self.variant = variant
         if variant in ("dv10", "dv11", "dv12"):
@@ -43,6 +59,28 @@ class DataDriftController:
         self.updates = 0
         self.reopens = 0
         self.closed = False
+
+    @property
+    def latent_applications(self):
+        """The last two recorded DV12 applications as ordinary float dicts.
+
+        Recording retains detached inputs for the last two applications on
+        device. Reading computes their metrics and batches one host transfer;
+        repeated reads use the materialized list. Diagnostics and checkpoint
+        export read it too.
+        """
+        records = self._latent_application_records
+        pending = [(index, value) for index, value in enumerate(records) if isinstance(value, _LatentApplication)]
+        if pending:
+            device = pending[-1][1].radius.device
+            values = torch.stack([value.metrics().to(device=device) for _, value in pending]).cpu().tolist()
+            for (index, _), row in zip(pending, values):
+                records[index] = dict(zip(self._LATENT_METRICS, row))
+        return records
+
+    @latent_applications.setter
+    def latent_applications(self, values):
+        self._latent_application_records = values
 
     @staticmethod
     @torch.no_grad()
@@ -146,11 +184,11 @@ class DataDriftController:
                 fraction = (radius / norm.clamp_min(1e-20)).clamp_max(1.)
             displacement = displacement * fraction.unsqueeze(1)
             if record:
-                self.latent_applications.append({"radius_min": float(radius.min()),
-                    "radius_mean": float(radius.mean()), "radius_max": float(radius.max()),
-                    "perturbation_rms": float(displacement.detach().square().mean().sqrt()),
-                    "clipped_fraction": float((fraction < 1.).float().mean())})
-                self.latent_applications = self.latent_applications[-2:]
+                autocast_dtype = (torch.get_autocast_dtype(latent.device.type)
+                                  if torch.is_autocast_enabled(latent.device.type) else None)
+                application = _LatentApplication(radius.detach(), displacement.detach(), fraction.detach(),
+                                                 autocast_dtype)
+                self._latent_application_records = [*self._latent_application_records, application][-2:]
         return latent + displacement
 
     @torch.no_grad()
@@ -307,10 +345,13 @@ class DataDriftController:
         return {**({"latent_applications": self.latent_applications} if self.variant == "dv12" else {}), **({"support_score": self.support_score, "support_trust": self.support_trust, "applied_latent_bandwidth": None if self.latent_bandwidth is None else (self.latent_bandwidth * self.support_trust).tolist()} if self.variant == "dv11" else {}), **({"latent_bandwidth": self.latent_bandwidth.tolist()} if self.variant in ("dv10", "dv11", "dv12") and self.latent_bandwidth is not None else {}), **({"pair_score": self.pair_score, "pair_drive": self.pair_drive} if self.variant in ("dv8", "dv9") else {}), **({"data_memory": self.data_memory} if self.variant in ("dv2", "dv3", "dv4", "dv5", "dv6", "dv7", "dv8", "dv9", "dv10", "dv11", "dv12") else {}), **{k: getattr(self, k) for k in ("payoff_error", "game_trust", "game_ratio", "variant", "mobility", "alignment", "data_score", "data_drive", "last_cosine", "updates", "reopens", "closed")}}
 
     def state_dict(self):
-        return deepcopy(self.__dict__)
+        return deepcopy({("latent_applications" if name == "_latent_application_records" else name):
+                         (self.latent_applications if name == "_latent_application_records" else value)
+                         for name, value in self.__dict__.items()})
 
     def load_state_dict(self, state):
-        if not isinstance(state, dict) or set(state) != set(self.__dict__) or state["variant"] != self.variant:
+        keys = {"latent_applications" if name == "_latent_application_records" else name for name in self.__dict__}
+        if not isinstance(state, dict) or set(state) != keys or state["variant"] != self.variant:
             raise ValueError("incompatible continuous controller state")
         if self.variant in ("dv10", "dv11", "dv12"):
             bandwidth = state["latent_bandwidth"]
@@ -324,7 +365,10 @@ class DataDriftController:
                 raise ValueError("continuous controller latent bandwidth does not match the table")
             if current is not None and bandwidth is None:
                 raise ValueError("continuous controller latent bandwidth is missing")
-        self.__dict__.update(deepcopy(state))
+        restored = deepcopy(state)
+        if "latent_applications" in restored:
+            restored["_latent_application_records"] = restored.pop("latent_applications")
+        self.__dict__.update(restored)
 
 
 # One-sided alpha = .05 Student-t quantiles t_{.95}(dof), dof = 1..11 (the

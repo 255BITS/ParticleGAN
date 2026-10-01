@@ -904,11 +904,15 @@ class UpdatePolicy:
         sigma = self.log_output_sigma.exp()
         settle = self.controller.mobility
         if self.lr_settle is not None:
+            # The floor waits on model/table settlement, never on noise's own
+            # rate. Clamped noise has zero gradient and a frozen tester; letting
+            # that tester gate the floor would prevent it from ever releasing.
             # A group with no trainable parameters has no tester. Preserve the
             # historical floor fallback rather than assigning it an artificial
             # settled scale; fully trainable E22 groups use the stated floor.
             try:
-                scales = [t.s for index, row in enumerate(self.lr_settle.testers) if index != 1 for t in row]
+                scales = [t.s for index, row in enumerate(self.lr_settle.testers) if index != 1
+                          for t, role in zip(row, self.roles[index]) if role != "noise"]
                 if scales and all(s is not None for s in scales):
                     settle = 1.0 if any(s > 1. / 64. for s in scales) else self.controller.mobility
             except AttributeError:
