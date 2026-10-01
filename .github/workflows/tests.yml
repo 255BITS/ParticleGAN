@@ -23,7 +23,7 @@ jobs:
       (github.event_name != 'pull_request' &&
        contains(fromJSON('["refs/heads/master", "refs/heads/main", "refs/heads/develop"]'), github.ref))
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 25
     strategy:
       fail-fast: false
       matrix:
@@ -100,7 +100,7 @@ jobs:
           assert default.d_lr_mult == 1.0
           assert default.prior_lr_mult == 2.0
           assert default.betas == (0., .999)
-          assert not hasattr(default, 'reg_arm') and default.reg_coeff == 1.0
+          assert default.reg_arm is None and default.critic_formulation == 'ka2' and default.reg_coeff == 1.0
           assert default.reg_kappa == 1.0 and default.prior_reg == 0.0
           assert default.name == 'ka2'
           assert get_recipe('gan') == default

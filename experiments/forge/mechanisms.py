@@ -49,7 +49,7 @@ def _probe(recipe, name):
             penalty = recipe.make_critic_penalty(optimizer, collect_stats=True)
             optimizer.record.lr_max, optimizer.record.lr_last = 1., 0.
             optimizer.record.observed_steps = recipe.reg_every - 1
-            if recipe.critic_formulation == "ka2":
+            if recipe.effective_critic_formulation == "ka2":
                 from particlegan.ka2 import WARMUP_CALLS
                 optimizer.record.calls = WARMUP_CALLS - 1
                 optimizer.record.observed_steps = max(1, optimizer.record.observed_steps)
@@ -62,8 +62,8 @@ def _probe(recipe, name):
             passed = stats.get("applied") is True and stats.get("prox", 0) > 0 and bool(torch.isfinite(value))
             measurements = {"prox": stats.get("prox"), "phase": stats.get("phase"),
                             "penalty_calls": 2, "optimizer_updates": 0,
-                            "declared_lr_ratio": 0., "critic_formulation": recipe.critic_formulation}
-            if recipe.critic_formulation == "ka2":
+                            "declared_lr_ratio": 0., "critic_formulation": recipe.effective_critic_formulation}
+            if recipe.effective_critic_formulation == "ka2":
                 measurements.update(initial_penalty_calls=WARMUP_CALLS - 1,
                                     initial_observed_optimizer_steps=max(1, recipe.reg_every - 1))
     else:
@@ -107,8 +107,10 @@ class MechanismAudit:
                      for name in NAMES}
         penalty = self.rows["critic_penalty"]
         penalty.update(requested=recipe.reg_coeff > 0, enabled=recipe.reg_coeff > 0)
-        self.rows["critic_anchor"].update(requested=recipe.reg_coeff > 0 and recipe.reg_anchor_weight > 0,
-                                          enabled=critic_optimizer.anchor is not None and recipe.reg_coeff > 0 and recipe.reg_anchor_weight > 0)
+        anchor_requested = (recipe.reg_arm in (None, "k3p") and recipe.reg_coeff > 0
+                            and recipe.reg_anchor_weight > 0)
+        self.rows["critic_anchor"].update(requested=anchor_requested,
+                                          enabled=critic_optimizer.anchor is not None and anchor_requested)
         self.rows["critic_guard"].update(requested=recipe.d_guard_ratio > 0,
                                          enabled=critic_optimizer.guard is not None)
         self.rows["a2"]["requested"] = recipe.latent_damping_max_rate > 0

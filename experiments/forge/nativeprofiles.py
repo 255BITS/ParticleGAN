@@ -15,11 +15,27 @@ ROOT = Path(__file__).resolve().parents[2]
 PROFILE_ID = "native_affine_square_named_v1"
 PROFILE_SOURCE = "configs/toy100/constraints_simple_regularization.json"
 PROFILE_SHA256 = "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7"
+RELEASE_PROFILE_ID = "release07_public_default_named_v1"
+RELEASE_PROFILE_SOURCE = "configs/toy100/release07_public_default_host.json"
+RELEASE_PROFILE_SHA256 = "aa6c8d2ab22682dfeae90e829d58c0aab8a0626aa39722cbde12156e7569894e"
 COMPONENTS = {"generator", "discriminator", "prior"}
 
 
-def profile_declaration():
+def profile_declaration(profile_id=PROFILE_ID):
+    if profile_id == RELEASE_PROFILE_ID:
+        return {"id": profile_id, "revision": 1,
+                "source": {"path": RELEASE_PROFILE_SOURCE, "sha256": RELEASE_PROFILE_SHA256}}
+    if profile_id != PROFILE_ID:
+        raise ValueError("unsupported native profile")
     return {"id": PROFILE_ID, "revision": 1, "source": {"path": PROFILE_SOURCE, "sha256": PROFILE_SHA256}}
+
+
+def _profile_id(task):
+    declaration = task["execution"]["native_profile"]
+    profile_id = declaration.get("id")
+    if canonical(declaration) != canonical(profile_declaration(profile_id)):
+        raise ValueError("unsupported or mismatched native profile declaration")
+    return profile_id
 
 
 def _positive(value):
@@ -92,7 +108,12 @@ def resolve_host_initialization(value, *, initializer="deterministic_orthogonal"
     return deepcopy(value)
 
 
-def _profile_spec(root):
+def _profile_spec(root, profile_id=PROFILE_ID):
+    if profile_id == RELEASE_PROFILE_ID:
+        data = (Path(root) / RELEASE_PROFILE_SOURCE).read_bytes()
+        if hashlib.sha256(data).hexdigest() != RELEASE_PROFILE_SHA256:
+            raise ValueError("release host source changed; declare a new profile revision")
+        return json.loads(data)["host_definition"]
     data = (Path(root) / PROFILE_SOURCE).read_bytes()
     if hashlib.sha256(data).hexdigest() != PROFILE_SHA256:
         raise ValueError("native profile source changed; declare a new profile revision")
@@ -131,18 +152,19 @@ def resolve_native_spec(task, *, root=None):
         return None
     if task.get("adapter") not in {"native100", "native100_continuation"}:
         raise ValueError("native profiles apply only to native tasks")
-    if canonical(execution["native_profile"]) != canonical(profile_declaration()):
-        raise ValueError("unsupported or mismatched native profile declaration")
+    profile_id = _profile_id(task)
     if "host_initialization" in execution:
         raise ValueError("native component policies belong in the frozen host_definition, not a second override")
     if {"resources", "initialization"} & set(execution):
         raise ValueError("native resource and initializer fields belong in the frozen host_definition")
-    expected = _profile_spec(ROOT if root is None else root)
+    expected = _profile_spec(ROOT if root is None else root, profile_id)
     if canonical(execution.get("host_definition")) != canonical(expected):
         raise ValueError("native host card differs from its frozen profile")
     if execution.get("problem") not in {"grid100", "rotated100", "staggered100"}:
         raise ValueError("unsupported native profile problem")
     continuation = task["adapter"] == "native100_continuation"
+    if profile_id == RELEASE_PROFILE_ID and continuation:
+        raise ValueError("release default host has no registered continuation")
     if execution.get("steps") != (14000 if continuation else 7000):
         raise ValueError("native profile must retain its complete qualification horizon")
     if continuation and any(execution.get(key) != value for key, value in {
@@ -157,9 +179,7 @@ def resolve_native_spec(task, *, root=None):
 def native_profile_source_files(task):
     if "native_profile" not in task.get("execution", {}):
         return []
-    if canonical(task["execution"]["native_profile"]) != canonical(profile_declaration()):
-        raise ValueError("unsupported native profile source declaration")
-    return [PROFILE_SOURCE]
+    return [profile_declaration(_profile_id(task))["source"]["path"]]
 
 
 def native_host_initialization(task, *, root=None):
@@ -178,8 +198,16 @@ def native_profile_blockers(task, candidate, *, root=None):
         spec = resolve_native_spec(task, root=root)
         if spec is None:
             return []
-        prior = candidate.get("prior", task["execution"].get("prior", {}))
-        if (not isinstance(prior, dict) or prior.get("kind") != "mog" or not _positive(prior.get("sigma")) or prior.get("standardize") is not False
+        release = _profile_id(task) == RELEASE_PROFILE_ID
+        prior = (task["execution"].get("prior", {}) if release else
+                 candidate.get("prior", task["execution"].get("prior", {})))
+        if release:
+            if (prior.get("kind") != "particle_cloud" or prior.get("sigma") != 0
+                    or prior.get("standardize") is not False or prior.get("learnable") is not True
+                    or not isinstance(prior.get("exception_reason"), str) or not prior["exception_reason"].strip()
+                    or set(prior) - {"kind", "sigma", "standardize", "learnable", "exception_reason"}):
+                raise ValueError("release host requires its explicit unstandardized learned particle-cloud exception")
+        elif (not isinstance(prior, dict) or prior.get("kind") != "mog" or not _positive(prior.get("sigma")) or prior.get("standardize") is not False
                 or prior.get("learnable") is not True or set(prior) - {"kind", "sigma", "standardize", "learnable", "init_std"}):
             raise ValueError("native affine profile requires learned MoG locations, positive explicit width, no standardization and uniform masses")
         resolve_host_initialization(native_host_initialization(task, root=root), initializer=candidate.get("initializer", "deterministic_orthogonal"), prior=prior)

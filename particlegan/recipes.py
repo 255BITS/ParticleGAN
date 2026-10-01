@@ -40,6 +40,9 @@ class Recipe:
     prior_lr_mult: float = 2.0
     betas: tuple[float, float] = (0.0, 0.999)
     prior_betas: tuple[float, float] | None = None
+    # None uses critic_formulation. Explicit legacy arms use the K3P optimizer;
+    # fixed R1/R2 and BCap retain their released L2 units.
+    reg_arm: str | None = None
     reg_coeff: float = 1.0
     reg_kappa: float = 1.0
     reg_every: int = 1
@@ -160,6 +163,12 @@ class Recipe:
     row_policy: str = "independent"
 
     def __post_init__(self):
+        if self.critic_formulation not in ("ka2", "k3p"):
+            raise ValueError("critic_formulation must be ka2 or k3p")
+        if self.reg_arm is not None:
+            # Keep resolved recipe/Forge provenance truthful about the optimizer
+            # family selected by an explicit legacy arm.
+            object.__setattr__(self, "critic_formulation", "k3p")
         if self.continuous_policy not in (None, "dv1", "dv2", "dv3", "dv4", "dv5", "dv6", "dv7", "dv8", "dv9", "dv10", "dv11", "dv12"):
             raise ValueError("unknown continuous_policy")
         if (self.total_steps is None) != (self.continuous_policy is not None):
@@ -341,6 +350,8 @@ class Recipe:
         result = asdict(self)
         if self.critic_formulation == "ka2":
             result.pop("critic_formulation")
+        if self.reg_arm is None:
+            result.pop("reg_arm")
         if self.reopen_guard is None:
             result.pop("reopen_guard")
         if self.birth_death_backend == "knn":
@@ -418,7 +429,7 @@ class Recipe:
         recipe's ``coeff``, ``kappa``, ``lazy_k``,
         ``anchor_weight`` or ``r1_real`` for this penalty.
         """
-        if self.critic_formulation == "k3p":
+        if self.effective_critic_formulation == "k3p":
             from .k3p import CriticPenalty
         else:
             from .ka2 import CriticPenalty
@@ -429,11 +440,12 @@ class Recipe:
         """Resolved kernel settings for ``make_critic_penalty``."""
         if self.critic_formulation not in ("ka2", "k3p"):
             raise ValueError("critic_formulation must be ka2 or k3p")
-        if self.critic_formulation == "k3p":
+        if self.effective_critic_formulation == "k3p":
             if not self.critic_r1_real:
                 raise ValueError("critic_r1_real=False requires the KA2 formulation")
             floor = self.resolved_network_lr_floor
-            options = {"coeff": self.reg_coeff, "kappa": self.reg_kappa, "lazy_k": self.reg_every,
+            options = {"arm": self.reg_arm or "k3p", "coeff": self.reg_coeff,
+                       "kappa": self.reg_kappa, "lazy_k": self.reg_every,
                        "anchor_weight": self.reg_anchor_weight,
                        "lr_floor": floor if floor < .5 else 0., **overrides}
             from .grad_regularizers import GradientPenalty
@@ -461,7 +473,7 @@ class Recipe:
         """
         options = {"lr": self.lr * self.d_lr_mult, "betas": self.betas, "amsgrad": self.amsgrad,
                    **adam_kwargs}
-        if self.critic_formulation == "k3p":
+        if self.effective_critic_formulation == "k3p":
             from .k3p import K3PCriticAdam
             return K3PCriticAdam([p for p in critic.parameters() if p.requires_grad], critic=critic,
                                  ema_critic=ema_critic, anchor_decay=.999,
@@ -486,6 +498,11 @@ class Recipe:
                                 latent_max_rate=self.latent_damping_max_rate,
                                 direct_betas=self.direct_particle_betas,
                                 direct_gain=self.direct_particle_gain, **options)
+
+    @property
+    def effective_critic_formulation(self):
+        """Explicit legacy arms retain their K3P optimizer and penalty family."""
+        return "k3p" if self.reg_arm is not None else self.critic_formulation
 
     @property
     def resolved_network_lr_floor(self):

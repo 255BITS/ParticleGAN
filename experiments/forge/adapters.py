@@ -61,6 +61,8 @@ def adapter_preflight(task, candidate, *, root=None):
         from .behavior_adapters import behavior_preflight
         return behavior_preflight(task, candidate)
     blockers = []
+    from .paired_sampling import paired_sampling_blockers
+    blockers.extend(paired_sampling_blockers(task))
     if adapter in {"native100", "native100_continuation"}:
         from .nativeprofiles import native_profile_blockers
         blockers.extend(native_profile_blockers(task, candidate, root=root))
@@ -329,6 +331,10 @@ def _ring(request, task, output, device, *, endurance=False):
 
 
 def _native(request, task, output, device, *, prerequisites=None):
+    from .paired_sampling import paired_sampling_blockers
+    blockers = paired_sampling_blockers(task)
+    if blockers:
+        raise CapabilityError(blockers)
     from benchmarks.toy100.problems import sample_real
     from benchmarks.toy100.metrics import evaluate_samples
     from benchmarks.toy100.accuracy_evidence import AccuracyEvidence
@@ -399,6 +405,9 @@ def _native(request, task, output, device, *, prerequisites=None):
         reference = sample_real(problem, config["eval_samples"], device=device,
             generator=context.streams.generator("eval", component="target", purpose="reference"))
     accuracy = AccuracyEvidence(config, directory, steps, reference)
+    from .paired_sampling import FIELD, PairedOutputNoiseEvidence
+    paired = (PairedOutputNoiseEvidence(context, config, artifact_root / "paired-output-noise", steps, reference)
+              if FIELD in evaluation else None)
     data = context.streams.generator("data", component="target", purpose="training")
     final_metrics, final_arrays = {}, {}
     def evaluate(step):
@@ -411,6 +420,8 @@ def _native(request, task, output, device, *, prerequisites=None):
                      "elapsed": elapsed_offset + time.monotonic() - run.started, "metrics": metrics, "accuracy": fidelity}
             with (directory / "events.jsonl").open("a") as handle:
                 handle.write(json.dumps(event, sort_keys=True, allow_nan=False) + "\n")
+            if paired is not None:
+                paired.observe(step, model, draw, event["elapsed"])
             arrays[model] = draw.detach().cpu().numpy()
             scores[model] = metrics
             if model == "live":
@@ -433,6 +444,7 @@ def _native(request, task, output, device, *, prerequisites=None):
                "eval_steps": steps, "snapshot_steps": steps, "final_samples_file": "final_samples.npz",
                "final": final_metrics, "accuracy": declaration, "holdout": holdout}
     atomic_json(directory / "summary.json", summary)
+    paired_receipt = run.evaluate(lambda: paired.finish(summary, directory)) if paired is not None else None
     saved = context.state_dict()
     state_path = directory / "training-state.pt"
     torch.save(saved, state_path)
@@ -443,6 +455,8 @@ def _native(request, task, output, device, *, prerequisites=None):
                 "holdout_rng": "frozen_accuracy_evidence_seed_offsets_1601_1602_1603"}
     if host_receipt:
         evidence["host"] = host_receipt
+    if paired_receipt is not None:
+        evidence["paired_sampling_diagnostic"] = paired_receipt
     if prefix:
         evidence["prefix_parity"] = prefix
     return run.receipt(evidence, save_state=False)

@@ -8,6 +8,9 @@ under the source, prior, initialization and sampling cohorts that produced them.
 
 - KA2 remains the public default. `get_recipe("k3p")` selects the earlier critic
   explicitly; Forge's K3P declaration no longer inherits a changing default.
+  Fixed R1/R2 and BCap remain available through explicit `reg_arm` selection
+  with their original L2 kernels and K3P optimizer. The completed formulation
+  comparison retains its source and failed scientific verdicts.
 - `get_recipe("e22")` and `get_recipe("atlas")` resolve complete presets before
   host overrides. Atlas adds automatic feature-cell selection with 128 cells and
   the settled reopen guard. A `Recipe.name` alone selects no mechanism.

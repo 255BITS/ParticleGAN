@@ -9,6 +9,13 @@ and the [discriminator stability board](reports/forge/leaderboards/discriminator
 The [implementation plan](docs/better-experiment-automation-plan-2026-09-28.md)
 defines the migration and adoption criteria.
 
+For the combined E22/Atlas/Forge API, read
+[the develop integration notes](reports/forge/DEVELOP_INTEGRATION.md). Presets,
+external budgets and policy serving remain explicit; current Forge task
+definitions block E22/Atlas policy cohorts before reservation until separate
+policy-aware tasks are frozen. Keep bulk execution logs outside Git as required
+by [`AGENTS.md`](AGENTS.md).
+
 ## Readiness and scope
 
 **The framework is ready to use.** The
@@ -69,6 +76,27 @@ budgets and complete policy checkpoints. Current receipts retain their frozen
 source and formulation identity.
 
 Run commands from the repository root in the project's Python environment.
+The [registered formulation comparison](reports/forge/studies/FORMULATION_COMPARISON_V1.md)
+compares fixed R1/R2, BCap and full released v0.7 GAN v3 with K3P on declared
+native hosts. `Recipe.reg_arm` exposes the two fixed L2/autograd penalties through
+the shared public trainer. Paired noisy artifacts retain the required clean/live
+grade and grant no extra reference credit. Optional calibration `diagnostic_tasks`
+bind separate host identities and report their costs without entering smoke or
+reference decisions. Existing profiles without this field retain their semantics.
+
+The [completed formulation comparison](reports/forge/FORMULATION_COMPARISON_READOUT.md)
+records all five full 7k native runs as FAIL for 408.765 new paid seconds.
+Independent audits pass, and the K3P control exactly reproduces the previous
+clean-MoG trajectory and named training streams. BCap improves centering but
+contracts further; R1/R2 improves shape but loses centering/coverage. Released
+GAN v3's matched MoG adaptation improves shape but still fails the full gates;
+its separate named-cloud host also fails and supplies no MoG reference credit.
+The profile has 4/95 ordinary calibration cells measured (91 unknown), plus
+1/5 separate diagnostic cells (4 unknown); acceptance remains blocked.
+Stop these exact experimental revisions. Inspect saved critic gradients and
+per-mode moments before another supported, bounded training hypothesis. No
+automatic matrix filling, tuning, seed study, continuation or promotion follows.
+
 The history, recall, compile, validate, and board commands launch no training.
 
 ```sh

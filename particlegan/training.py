@@ -46,9 +46,11 @@ def _normalized_recipe(recipe):
 
 # Recipe fields that once named a fixed choice, with the only value they could hold; a saved
 # recipe that records them with that value loads, any other value is rejected.
-_REMOVED_RECIPE_FIELDS = {"loss_type": "logistic", "gan_mode": "rp", "reg_arm": "k3p",
+_REMOVED_RECIPE_FIELDS = {"loss_type": "logistic", "gan_mode": "rp",
                           "reg_method": "autograd"}
-_ADDED_RECIPE_FIELDS = {"reg_anchor_weight": 1.0, "direct_particle_gain": True, "continuous_policy": None, "amsgrad": False, "critic_r1_real": True,
+_ADDED_RECIPE_FIELDS = {"reg_anchor_weight": 1.0, "direct_particle_gain": True,
+                        "reg_arm": None, "critic_formulation": "ka2",
+                        "continuous_policy": None, "amsgrad": False, "critic_r1_real": True,
                         "critic_payoff_damping": True, "output_noise_mode": "fixed",
                         "lr_control": "mobility", "particle_birth_death": False,
                         "row_evidence_gate": False, "table_release_rule": "any",

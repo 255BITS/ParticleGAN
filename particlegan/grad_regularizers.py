@@ -67,7 +67,14 @@ class CriticStepRecord:
 
 
 class GradientPenalty:
-    """K3P critic gradient penalty: a learning-rate-scheduled handover.
+    """K3P or a fixed L2/autograd critic gradient penalty.
+
+    ``arm='k3p'`` keeps the learning-rate-scheduled handover below.
+    ``arm='a_r1r2'`` is ``coeff/2 * (E ||g_r||² + E ||g_f||²)``;
+    ``arm='b_cap'`` is ``coeff/2 * (E relu(||g_r|| - kappa)² +
+    E relu(||g_f|| - kappa)²)``. Fixed arms use the v0.7.0 L2 kernels,
+    without RMS rescaling, handover or EMA-anchor evaluation. Laziness
+    applies to every arm. Other historical norms/methods are not supported.
 
     ``pen = coeff/2 * (s * A + (1 - s) * B)`` with
 
@@ -82,6 +89,8 @@ class GradientPenalty:
     ``g = grad_x D(x)`` and ``d`` is the per-sample input size.
 
     Args:
+        arm: ``k3p`` (default), fixed squared-L2 ``a_r1r2``, or fixed
+            one-sided L2 ``b_cap``. Fixed arms ignore the K3P blend/anchor.
         coeff: penalty strength.
         kappa: the cap on the gradient norm.
         lazy_k: apply every k-th step with the coefficient multiplied by k.
@@ -106,7 +115,12 @@ class GradientPenalty:
         anchor_weight: float = 1.0,
         anchor: Optional[Any] = None,
         record: Optional[CriticStepRecord] = None,
+        *,
+        arm: str = "k3p",
     ) -> None:
+        if arm not in ("k3p", "a_r1r2", "b_cap"):
+            raise ValueError(f"unknown critic penalty arm: {arm!r}")
+        self.arm = arm
         self.coeff = float(coeff)
         self.kappa = float(kappa)
         self.lazy_k = int(lazy_k)
@@ -173,7 +187,8 @@ class GradientPenalty:
         the lazy schedule skips ``step``. ``stats`` is empty unless
         ``collect_stats`` (which costs a host sync); then it holds
         ``applied``, ``pen``, ``center``, ``s``, ``prox`` and ``phase``
-        (``'a'``, ``'blend'`` or ``'b'``). ``ema_critic`` evaluates Dbar for
+        (``'a'``, ``'blend'`` or ``'b'`` for K3P). Fixed arms report their
+        arm name as ``phase`` and omit ``s``/``prox``. ``ema_critic`` evaluates Dbar for
         this call (default: the anchor). Several calls per critic step (e.g.
         one per role of a shared module) are allowed.
         """
@@ -183,11 +198,32 @@ class GradientPenalty:
         # Lazy regularization: fewer applications, proportionally bigger hits,
         # so the time-averaged pressure on D is unchanged.
         coefficient = self.coeff * self.lazy_k if self.lazy_k > 1 else self.coeff
+        if self.arm != "k3p":
+            return self._fixed_penalty(D, x_real, x_fake, coefficient, collect_stats)
         return self._k3p_penalty(D, x_real, x_fake, step, coefficient, collect_stats, ema_critic)
 
     def __call__(self, D, x_real, x_fake, step=1, *, ema_critic=None):
         """Return only the penalty tensor, without collecting synchronized stats."""
         return self.penalty(D, x_real, x_fake, step, collect_stats=False, ema_critic=ema_critic)[0]
+
+    def _fixed_penalty(self, D, x_real, x_fake, coefficient, collect_stats):
+        """The released v0.7.0 R1/R2 and BCap formulas, operation for operation."""
+        squared = self.arm == "a_r1r2"
+        real_norm = self._grad_norm(D, x_real, squared=squared)
+        fake_norm = self._grad_norm(D, x_fake, squared=squared)
+        if squared:
+            real_term, fake_term = real_norm, fake_norm
+            center = 0.0
+        else:
+            real_term = F.relu(real_norm - self.kappa).pow(2)
+            fake_term = F.relu(fake_norm - self.kappa).pow(2)
+            center = self.kappa
+        pen = (coefficient / 2.0) * (real_term.mean() + fake_term.mean())
+        self.record.calls += 1
+        if not collect_stats:
+            return pen, {}
+        return pen, {"applied": True, "pen": float(pen.detach()), "center": center,
+                     "phase": self.arm}
 
     def _k3p_penalty(self, D, x_real, x_fake, step, coefficient, collect_stats, ema_critic):
         """K3P, op for op the frozen reports/toy100/gap-fill-20260925 k3p rule."""

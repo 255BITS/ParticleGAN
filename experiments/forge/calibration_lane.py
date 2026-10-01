@@ -9,7 +9,7 @@ import json
 
 from . import planning, views
 from .api import CapabilityError
-from .calibration import _current_profile, calibration_cohort
+from .calibration import _current_profile, calibration_cohort, profile_task_ids
 from .contracts import atomic_json, canonical, file_hash, file_lock, identifier, positive_number, read_json, stable_hash
 from .promotion import _execution_identity, _registration_identity, validate_screening_submission
 from .sources import snapshot_source, verify_snapshot
@@ -102,7 +102,7 @@ def _resolve(root, lineage, contract, profile):
     validate_screening_submission(request)
     if request["candidate_revision"] != lineage["candidate_revision"]:
         _block("calibration candidate differs from its pinned profile revision")
-    names = profile["smoke_tasks"] + profile["reference_tasks"]
+    names = profile_task_ids(profile)
     if calibration_cohort(request, names) != profile["cohort"]:
         _block("calibration source, task, prior, RNG, runtime or compute differs from the frozen cohort")
     return request
@@ -110,8 +110,8 @@ def _resolve(root, lineage, contract, profile):
 
 def _selected_jobs(request, selection, contract, profile):
     selected = set(selection["tasks"])
-    if not selected.issubset(set(profile["smoke_tasks"] + profile["reference_tasks"])):
-        _block("calibration selections must name tasks from the frozen smoke/reference profile")
+    if not selected.issubset(set(profile_task_ids(profile))):
+        _block("calibration selections must name tasks from the frozen smoke/reference/diagnostic profile")
     for name in selected:
         task = request["tasks"][name]
         if task.get("preflight_blockers"):

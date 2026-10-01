@@ -5,12 +5,17 @@ keeps its original construction order and RNG route; these primitives use the
 same public model classes without claiming identical initialization fixtures.
 """
 from torch import nn
-from lib.toy_models import SimpleMLPDiscriminator
+from lib.toy_models import SimpleMLPDiscriminator, SimpleMLPGenerator
 
 
 def native_component(spec, *, role):
     """Construct one exact declared component, rejecting ignored model fields."""
     if role == "generator":
+        if spec.get("kind") == "simple_mlp":
+            keys = {"kind", "z_dim", "hidden_dim", "n_hidden", "out_dim"}
+            if set(spec) != keys or any(type(spec[k]) is not int or spec[k] < 1 for k in keys - {"kind"}):
+                raise ValueError("native MLP generator requires explicit positive dimensions")
+            return SimpleMLPGenerator(**{key: spec[key] for key in keys - {"kind"}})
         if set(spec) != {"kind", "in_features", "out_features", "bias"} or spec["kind"] != "linear":
             raise ValueError("native generator requires an explicit linear card")
         if any(type(spec[k]) is not int or spec[k] < 1 for k in ("in_features", "out_features")) or type(spec["bias"]) is not bool:

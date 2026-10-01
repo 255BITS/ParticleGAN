@@ -101,6 +101,10 @@ def candidate_blockers(candidate: dict) -> list[str]:
 
 
 def task_blockers(task: dict) -> list[str]:
+    from .paired_sampling import paired_sampling_blockers
+    paired_blockers = paired_sampling_blockers(task)
+    if paired_blockers:
+        return paired_blockers
     try:
         declared = validate_declaration(task, required=True)
         if declared != expected_policy(task):

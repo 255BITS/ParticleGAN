@@ -32,7 +32,7 @@ def source_audit(recipe, extensions):
         dependencies.append("output-noise warmup depends on completed steps and horizon")
     if recipe["reg_coeff"] and recipe["reg_every"] != 1:
         dependencies.append("lazy critic penalty uses a periodic update counter")
-    if recipe["reg_coeff"] and recipe.get("critic_formulation", "ka2") == "ka2":
+    if recipe["reg_coeff"] and recipe.get("reg_arm") is None and recipe.get("critic_formulation", "ka2") == "ka2":
         dependencies.append("KA2 switches from pure A to blended penalty at call 800")
     if recipe["d_guard_ratio"] and recipe["d_guard_min_steps"]:
         dependencies.append("critic guard releases at a fixed minimum update count")

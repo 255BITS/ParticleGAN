@@ -843,6 +843,17 @@ Adam moment surprise ([how it works](ka2.md)). `reg_coeff`, `reg_kappa` and `reg
 strength, cap and lazy interval. It recomputes D on detached inputs and builds
 gradients only for the critic's parameters.
 
+`Recipe(reg_arm="a_r1r2")` selects the fixed zero-centered squared L2
+gradient penalty on real and fake inputs. `reg_arm="b_cap"` selects the fixed
+one-sided L2 cap, `relu(norm(grad D) - reg_kappa) ** 2`, on both. Each uses
+`reg_coeff / 2` times the sum of the two mean penalties, with autograd and the
+same lazy interval. These arms reproduce the v0.7 kernels and do not evaluate
+the K3P blend or critic EMA anchor. Optimizer, prior and noise settings remain
+explicit recipe choices; selecting BCap alone does not restore the full v0.7
+recipe. Explicit legacy arms select the K3P optimizer; `reg_arm="k3p"` selects
+the earlier K3P penalty too. `reg_arm=None` follows `critic_formulation`, whose
+default is KA2. These choices are recorded in new source/formulation cohorts.
+
 ### `ParticleRegularizer`
 
 ```python
@@ -1063,6 +1074,7 @@ opt_g, opt_d = recipe.make_optimizers(G, D, prior)
 | `prior_kind`, `sigma_rel`, `standardize` | `particles`, `0`, `True` (standardize applies only to MoG) |
 | `lr`, `d_lr_mult`, `prior_lr_mult` | `.00425`, `1`, `2` |
 | `betas`, `prior_betas` | `(0, .999)`, `None` (inherit betas) |
+| `critic_formulation`, `reg_arm` | `ka2`, `None` (`k3p`, `a_r1r2`, `b_cap` explicitly select legacy K3P/fixed penalties) |
 | `reg_coeff`, `reg_kappa` | `1`, `1` (critic penalty strength and cap) |
 | `reg_every` | `1` (apply the penalty every k-th step at k× coefficient) |
 | `prior_reg`, `ema_decay` | `0`, `.995` |

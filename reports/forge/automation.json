@@ -1,23 +1,23 @@
 {
   "attempt_outcomes": {
     "cancelled": 1,
-    "completed": 39
+    "completed": 44
   },
   "component_timing": {
-    "measured_attempts": 16,
+    "measured_attempts": 21,
     "scope": "Exclusive phases in instrumented adapters; missing phase timing is not zero.",
     "seconds": {
-      "evaluation": 16.99366023753828,
-      "sampling": 0.3576248304307228,
-      "training_updates": 341.618676594866
+      "evaluation": 68.40914286939369,
+      "sampling": 0.7621579724509502,
+      "training_updates": 648.0570963853388
     },
     "unmeasured_attempts": 24
   },
   "concurrency": {
-    "mean_active_workers": 0.0036194793538321737,
-    "measured_attempts": 38,
+    "mean_active_workers": 0.005622506600104289,
+    "measured_attempts": 43,
     "missing_interval_attempts": 2,
-    "observation_window_seconds": 169180.5218911171,
+    "observation_window_seconds": 181611.2941710949,
     "peak_distinct_gpu_devices": 2,
     "peak_workers": 2,
     "scope": "Actual supervised-attempt intervals; this is process occupancy, not GPU kernel utilization."
@@ -39,18 +39,18 @@
     "unknown_cost_outcomes": 0
   },
   "execution_error_rate": {
-    "denominator": 40,
-    "fraction": 0.025,
+    "denominator": 45,
+    "fraction": 0.022222222222222223,
     "numerator": 1
   },
-  "execution_jobs_avoided": 8,
+  "execution_jobs_avoided": null,
   "flops": {
     "kind": "unavailable",
     "value": null
   },
   "incomplete_task_rate": {
-    "denominator": 40,
-    "fraction": 0.025,
+    "denominator": 45,
+    "fraction": 0.022222222222222223,
     "numerator": 1
   },
   "limits": [
@@ -60,24 +60,24 @@
   ],
   "memory": {
     "cuda_peak_allocated_bytes": {
-      "maximum_bytes": 125372416,
-      "measured_attempts": 13
+      "maximum_bytes": 175847936,
+      "measured_attempts": 18
     },
     "cuda_peak_reserved_bytes": {
-      "maximum_bytes": 192937984,
-      "measured_attempts": 13
+      "maximum_bytes": 226492416,
+      "measured_attempts": 18
     },
     "maximum_reaped_child_peak_rss_bytes": {
-      "maximum_bytes": 2163372032,
-      "measured_attempts": 38
+      "maximum_bytes": 2168516608,
+      "measured_attempts": 43
     },
     "process_peak_rss_bytes": {
-      "maximum_bytes": 2163372032,
-      "measured_attempts": 37
+      "maximum_bytes": 2168516608,
+      "measured_attempts": 42
     },
     "supervisor_peak_rss_bytes": {
-      "maximum_bytes": 727412736,
-      "measured_attempts": 38
+      "maximum_bytes": 809648128,
+      "measured_attempts": 43
     }
   },
   "memory_scope": "Process-lifetime RSS and PyTorch allocator peaks have distinct scopes; none is whole-host or whole-device memory.",
@@ -88,11 +88,8 @@
       "attempt_ids": [
         "fafc3da7cecf4b1780bbaedf66141092"
       ],
-      "avoided_execution_jobs": 2,
-      "avoided_tasks": [
-        "unused_token_hold",
-        "ae_gan_hold"
-      ],
+      "avoided_execution_jobs": null,
+      "avoided_tasks": null,
       "candidate_revision": "ef50ff6fb20723ab9340fbb8d1a6c8abd45cb2e2950250578a13dd36207113b5",
       "evidence_wall_seconds": 7.371452854000381,
       "incremental_paid_seconds": 7.371452854000381,
@@ -109,11 +106,8 @@
       "attempt_ids": [
         "2dcfab451e2b4c2087c4c2dcdcfddb44"
       ],
-      "avoided_execution_jobs": 2,
-      "avoided_tasks": [
-        "unused_token_hold",
-        "ae_gan_hold"
-      ],
+      "avoided_execution_jobs": null,
+      "avoided_tasks": null,
       "candidate_revision": "8c2186b8233422534e7d854e115a44d0ed3b88bbce04097814c85f402df8f3b8",
       "evidence_wall_seconds": 4.800435357999959,
       "incremental_paid_seconds": 4.800435357999959,
@@ -130,11 +124,8 @@
       "attempt_ids": [
         "c0178716dd3c4d5695b391919bf9ab81"
       ],
-      "avoided_execution_jobs": 2,
-      "avoided_tasks": [
-        "unused_token_hold",
-        "ae_gan_hold"
-      ],
+      "avoided_execution_jobs": null,
+      "avoided_tasks": null,
       "candidate_revision": "39dc1cc8e516f8127e732edea196f82243ff8cdff4ed761020f0f802a3bcaf0f",
       "evidence_wall_seconds": 5.974550719001854,
       "incremental_paid_seconds": 5.974550719001854,
@@ -151,11 +142,8 @@
       "attempt_ids": [
         "b766e89d1a0843ba9af94f2ce94e4273"
       ],
-      "avoided_execution_jobs": 2,
-      "avoided_tasks": [
-        "unused_token_hold",
-        "ae_gan_hold"
-      ],
+      "avoided_execution_jobs": null,
+      "avoided_tasks": null,
       "candidate_revision": "87d849138dd0ae385260a77223e9a70a7c2a8a112733b2312f556b462cc164e9",
       "evidence_wall_seconds": 5.255199994000577,
       "incremental_paid_seconds": 5.255199994000577,
@@ -169,36 +157,31 @@
       "view": "discriminator_stability"
     }
   ],
-  "queue_available": true,
-  "queue_locations": [
-    "/home/martyn/dev/ParticleGAN-experiment-tiers/runs/forge/fresh-checkout-v2/runs/forge",
-    "/home/martyn/dev/ParticleGAN-experiment-tiers/runs/forge/fresh-checkout/runs/forge",
-    "/home/martyn/dev/ParticleGAN-experiment-tiers/runs/forge/implementation-pilot",
-    "/home/martyn/dev/ParticleGAN/runs/forge"
-  ],
+  "queue_available": false,
+  "queue_locations": [],
   "receipt_issues": [],
   "requests_with_unavailable_cap": 0,
   "reuse": {
-    "evidence_uses": 4,
-    "reused_evidence_uses": 0,
-    "submitted_execution_demands": 12,
-    "unique_evidence_jobs": 4
+    "evidence_uses": null,
+    "reused_evidence_uses": null,
+    "submitted_execution_demands": null,
+    "unique_evidence_jobs": null
   },
   "schema_version": 1,
   "scope": "recorded current Forge receipts; historical imports are excluded",
   "spend": {
-    "attempts": 40,
-    "known_wall_seconds": 623.5758790110267,
+    "attempts": 45,
+    "known_wall_seconds": 1032.3412621239986,
     "scope": "Unique paid attempts, including retries; grouped predicates and subscribers are not charged again.",
     "unknown_cost_attempts": 0,
-    "wall_seconds": 623.5758790110267
+    "wall_seconds": 1032.3412621239986
   },
   "task_gate_counts": {
-    "FAIL": 20,
+    "FAIL": 25,
     "INCOMPLETE": 1,
     "PASS": 19
   },
-  "tasks_avoided": 8,
+  "tasks_avoided": null,
   "tier_rejections": {
     "1": 4
   }

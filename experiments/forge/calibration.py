@@ -259,6 +259,11 @@ def calibration_cohort(request: dict, task_ids: list[str]) -> dict:
     return {"sha256": stable_hash(identity), "identity": deepcopy(identity)}
 
 
+def profile_task_ids(config: dict) -> list[str]:
+    """Bind optional diagnostics without adding them to either decision set."""
+    return config["smoke_tasks"] + config["reference_tasks"] + config.get("diagnostic_tasks", [])
+
+
 _IMPORT_FIELDS = {"attempt_id", "registration_id", "registration_sha256", "candidate_id",
                   "candidate_revision", "tasks", "files", "qualification_reuse"}
 _IMPORT_FILES = {"request.json", "result.json", "evidence.json"}
@@ -342,7 +347,7 @@ def _validate_imports(config):
         raise ValueError("diagnostic_imports must be an explicit list of frozen attempt bindings")
     seen = set()
     lineages = {(r["candidate_id"], r["candidate_revision"]) for r in config["lineages"]}
-    names = set(config["smoke_tasks"] + config["reference_tasks"])
+    names = set(profile_task_ids(config))
     def digest(value):
         return isinstance(value, str) and len(value) == 64 and all(c in "0123456789abcdef" for c in value)
     for row in imports:
@@ -385,6 +390,12 @@ def _current_profile(config, criteria):
         values = config.get(key)
         if not isinstance(values, list) or not values or any(not isinstance(n, str) for n in values) or len(values) != len(set(values)):
             raise ValueError(f"{key} must be a nonempty unique task list")
+    diagnostics = config.get("diagnostic_tasks", [])
+    if (not isinstance(diagnostics, list) or any(not isinstance(n, str) or not n for n in diagnostics)
+            or len(diagnostics) != len(set(diagnostics))):
+        raise ValueError("diagnostic_tasks must be an explicit unique task list")
+    if set(diagnostics) & set(config["smoke_tasks"] + config["reference_tasks"]):
+        raise ValueError("diagnostic tasks may not enter smoke or independent reference decisions")
     if set(config["smoke_tasks"]) & set(config["reference_tasks"]):
         raise ValueError("Reference may not include smoke predicates")
     if set(config.get("reference_exclusions", [])) & set(config["reference_tasks"]):
@@ -397,15 +408,19 @@ def _current_profile(config, criteria):
     identity = cohort.get("identity", {})
     if not identity or cohort.get("sha256") != stable_hash(identity):
         raise ValueError("calibration requires the complete frozen scientific cohort identity")
-    required = set(config["smoke_tasks"] + config["reference_tasks"])
+    required = set(profile_task_ids(config))
     if set(identity.get("tasks", {})) != required:
-        raise ValueError("cohort task definitions differ from smoke/reference requirements")
+        raise ValueError("cohort task definitions differ from declared smoke/reference/diagnostic tasks")
     groups = lambda names: {identity["tasks"][n]["execution_group"] for n in names}
     if groups(config["smoke_tasks"]) & groups(config["reference_tasks"]):
         raise ValueError("independent reference cannot share a smoke execution group")
+    if groups(diagnostics) & groups(config["smoke_tasks"] + config["reference_tasks"]):
+        raise ValueError("diagnostics cannot share a smoke/reference execution group or its cost")
     fingerprints = lambda names: {(identity["tasks"][n]["execution"], identity["tasks"][n]["evaluation"]) for n in names}
     if fingerprints(config["smoke_tasks"]) & fingerprints(config["reference_tasks"]):
         raise ValueError("independent reference cannot rename an identical smoke measurement")
+    if fingerprints(diagnostics) & fingerprints(config["smoke_tasks"] + config["reference_tasks"]):
+        raise ValueError("diagnostics cannot rename an identical smoke/reference measurement")
     if any(identity["tasks"][n].get("scoring_weights") != config["scoring_weights"] for n in required):
         raise ValueError("cohort and profile scoring policies differ")
     prior = identity.get("prior", {})
@@ -445,7 +460,7 @@ def _current_profile(config, criteria):
 
 def _current_lineage(root, spec, config, attempts):
     from .views import grade_result
-    names = config["smoke_tasks"] + config["reference_tasks"]
+    names = profile_task_ids(config)
     indexed, inputs, problems = defaultdict(list), [], []
     imports = {row["attempt_id"]: row for row in config.get("diagnostic_imports", [])
                if (row["candidate_id"], row["candidate_revision"]) == (spec["candidate_id"], spec["candidate_revision"])}
@@ -549,6 +564,9 @@ def _current_lineage(root, spec, config, attempts):
                       ("FAIL", "PASS"): "false_reject", ("FAIL", "FAIL"): "true_reject"}.get(
                           (smoke["decision"], reference["decision"]), "unknown")
     return {**spec, "cohort_sha256": config["cohort"]["sha256"], "smoke": smoke, "reference": reference,
+            **({"diagnostics": {**_decision(tasks, config["diagnostic_tasks"]),
+                "reference_credit": False, "current_qualification_reuse": False}}
+               if "diagnostic_tasks" in config else {}),
             "classification": classification, "conflicts": problems, "inputs": inputs,
             "incompatible_evidence_policy": "Excluded without cross-cohort or cross-seed credit.", "evidence_scope": "current",
             "current_qualification_reuse": False,
@@ -583,7 +601,7 @@ def _evaluate_current(root, profile, config, config_path, criteria, criteria_pat
                 continue
             try:
                 matches = ((request["candidate"]["id"], request["candidate_revision"]) in selected
-                           and calibration_cohort(request, config["smoke_tasks"] + config["reference_tasks"]) == config["cohort"])
+                           and calibration_cohort(request, profile_task_ids(config)) == config["cohort"])
             except (KeyError, TypeError, ValueError):
                 matches = False
             if matches or imported_history:
@@ -599,6 +617,9 @@ def _evaluate_current(root, profile, config, config_path, criteria, criteria_pat
             "diagnostic_import_policy": "Only frozen original receipt bindings with unchanged science and criteria; all selected outcomes and retry costs retained; no qualification credit.",
             "sampling_limit": "Fixed selected lineages diagnose this screen; these fractions are not unbiased population error estimates.",
             "smoke_tasks": config["smoke_tasks"], "reference_tasks": config["reference_tasks"],
+            **({"diagnostic_tasks": config["diagnostic_tasks"],
+                "diagnostic_scope": "Separate outcomes and paid costs; no smoke/reference decision, criterion or qualification credit."}
+               if "diagnostic_tasks" in config else {}),
             "reference_scope": config.get("reference_scope"), "cohorts": [cohort], "matrix": matrix,
             "receipt_issues": relevant_issues, "complete": complete,
             "adoption": "PASS" if accepted else "BLOCKED",
@@ -630,7 +651,7 @@ def verify_calibration(root: Path, request: dict) -> dict:
     rebuilt = _evaluate_current(root, saved["profile"], config, config_path, criteria, criteria_path)
     if rebuilt != saved or rebuilt["adoption"] != "PASS":
         raise ValueError("accepted calibration lacks unchanged complete passing evidence")
-    expected = calibration_cohort(request, saved["smoke_tasks"] + saved["reference_tasks"])
+    expected = calibration_cohort(request, profile_task_ids(saved))
     if expected != config["cohort"] or binding.get("cohort_sha256") != expected["sha256"]:
         raise ValueError("accepted calibration does not cover this source/task/prior/RNG/runtime cohort")
     required_smoke = {row["task"] for row in request["view"]["assignments"]
@@ -666,6 +687,17 @@ def calibrate(root: Path, profile: str = "initial") -> dict:
             costs = [row[k]["cost"]["wall_seconds"] for k in ("smoke", "reference")]
             lines.append("| " + " | ".join([row["id"], row["smoke"]["decision"], row["reference"]["decision"], row["classification"],
                 *("unknown" if value is None else f"{value:.3f}" for value in costs)]) + " |")
+        if output.get("diagnostic_tasks"):
+            lines += ["", "Separate diagnostics provide no independent reference or qualification credit.", "",
+                      "| Exact lineage | Diagnostic task | Outcome | Diagnostic seconds |",
+                      "| --- | --- | --- | ---: |"]
+            for row in output["matrix"]:
+                diagnostic = row["diagnostics"]
+                for name, status in diagnostic["task_statuses"].items():
+                    lines.append(f"| {row['id']} | {name} | {status} | See lineage cost total below |")
+                value = diagnostic["cost"]["wall_seconds"]
+                seconds = "unknown" if value is None else f"{value:.3f}"
+                lines.append(f"| {row['id']} | All declared diagnostics (grouped/retry costs counted once) | — | {seconds} |")
         lines += ["", output["recommendation"], "", "Complete raw evidence and costs are required; unknown/incompatible cells remain in the denominator."]
         atomic_text(directory / (profile + ".md"), "\n".join(lines) + "\n")
         return output

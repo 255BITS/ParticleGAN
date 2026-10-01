@@ -89,7 +89,7 @@ class _PenaltyBinding:
     """Adapt old host call syntax to Recipe.make_critic_penalty's public API."""
     def __init__(self, recipe, optimizer, audit):
         self.bound = recipe.make_critic_penalty(optimizer, collect_stats=True)
-        self.arm, self.coeff, self.kappa = recipe.critic_formulation, recipe.reg_coeff, recipe.reg_kappa
+        self.arm, self.coeff, self.kappa = recipe.reg_arm or recipe.critic_formulation, recipe.reg_coeff, recipe.reg_kappa
         self.norm, self.lazy_k, self.target_anneal = "rms", recipe.reg_every, "none"
         self.calls = 0
         self.audit = audit

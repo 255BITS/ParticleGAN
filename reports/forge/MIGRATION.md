@@ -10,6 +10,25 @@ calibration and production promotion remain future work.
 
 ## Current checkpoint
 
+The [completed formulation comparison](FORMULATION_COMPARISON_READOUT.md)
+restores fixed R1/R2 and BCap through the public trainer, ports the effective
+released v0.7 GAN v3 recipe, and records paired clean/noisy diagnostics under a
+new frozen source `bf9ccf35` and cohort `48856fefff`. All five registered 7k
+native runs FAIL; all independent integrity audits PASS, with 408.765 new paid
+seconds. The K3P control reproduces the earlier primary samples, complete model
+and optimizer state and 19 existing named streams exactly. Historical cloud/noisy
+promotion remains distinct from current clean-MoG evidence. The new profile has
+4/95 measured smoke/reference cells and 91 unknown, plus 1/5 separate cloud
+diagnostics and 4 unknown. Adoption remains blocked. All selected work is
+concluded; the four failed experimental revisions are abandoned, while K3P stays
+a concluded reference. The final CPU development suite passed 1,871 tests and
+18 subtests, with 7 skipped. See the comparison for the complete leaderboard,
+costs, software limitations and recommendation to inspect saved critic gradients
+before any new bounded training registration.
+
+The following paragraphs retain the preceding handoff checkpoints and their
+original profiles, source identities, costs and record counts.
+
 Develop `a8b9d397` is merged; [CI at `99cf096f`](https://github.com/255BITS/ParticleGAN/actions/runs/36677816874)
 passes 1,807 tests and 18 subtests, including the concluded diagnostic receipts.
 The engine, root guide and physical two-GPU pilot are implemented and verified.
@@ -56,7 +75,7 @@ sensitivity assertion is separate evidence. The user confirms that this research
 is still developing; its original receipts can be imported when available. The
 [incoming API checklist](UPSTREAM_E22_COMPATIBILITY.md)
 records future E22/KA2 integration requirements; no incoming code was merged and
-current scientific source remains `5c9c9298`.
+the scientific source at that checkpoint was `5c9c9298`.
 
 The [2026-09-30 scientific stage](SCIENTIFIC_CALIBRATION_20260930_READOUT.md)
 preserves all existing gates and adds a fourth substantive lineage with only
