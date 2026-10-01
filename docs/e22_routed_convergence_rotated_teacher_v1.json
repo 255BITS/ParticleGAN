@@ -1,0 +1,213 @@
+{
+  "task_id": "routed_convergence_rotated_teacher_v1",
+  "status": "source-only preparation; execution held until the full Supra fixed final comparison is independently qualified",
+  "scope": "standalone_policy_aware_diagnostic; no Forge/default/full-Supra qualification",
+  "question": "Does PR227 neutral-H/b convergence survive when both generators must learn a new input basis instead of starting in the exact teacher span?",
+  "native_base_revision": "6ec7e5788e14ea15ddc3e16ac71110458108b6a6",
+  "parent_card_sha256": "8fbb7882ee2c57e4ea939a4cd642058fa5ddca21f6a139f16191b4822ff16d02",
+  "parent_neutral_card_sha256": "7313909fc91b57d9945a62bd02dc4a2d3f71af667a9e309276dec1a7233e4e93",
+  "sources": {
+    "examples/e22_routed_convergence.py": "b814bc0cac728d02290f6f0ed712dd6bb9483074f11666c5c012e72cd4d8f6b6",
+    "examples/e22_routed_convergence_neutral.py": "1b9154bd653db5e5cc629877297eab6a06bbd3f1ac9cabb1858eef36a083724c",
+    "examples/run_e22_routed_convergence.py": "2421e447b79489d1f6be3721994f5edabed6af6ddbc3ebe7813ddcec109ce7c5",
+    "examples/e22_routed_convergence_rotated_teacher.py": "de53b5b781d3d140d83a40531326a67ef170e06687be551c277d88a45df4266a",
+    "examples/run_e22_routed_convergence_rotated_teacher.py": "b05c2df82aa97476092ca808f5b1805f296df25972028eb7c0557e23a3d4e963",
+    "tests/test_e22_routed_convergence_rotated_teacher.py": "ad8f6a117fbbfc773c96d37570c68561270fd5f80ae7e7edadbd694cb697c965",
+    "docs/e22_routed_convergence_v1.json": "8fbb7882ee2c57e4ea939a4cd642058fa5ddca21f6a139f16191b4822ff16d02",
+    "docs/e22_routed_convergence_neutral_v1.json": "7313909fc91b57d9945a62bd02dc4a2d3f71af667a9e309276dec1a7233e4e93"
+  },
+  "changed_factors": [
+    "Teacher down row space only. Teacher outputs and frozen per-coordinate fit residual scales follow the changed target."
+  ],
+  "teacher_geometry": {
+    "rho": 0.027625366713810866,
+    "rho_source": "mean historical ordinary linear-delta energy within fresh sampled Supra down span, across 71 fixed sites",
+    "audit_report_sha256": "bfd38b84d558559ebe048ae93302270e6059253a4ccf6149f22eb8117f428241",
+    "equation": "D_initial.T=Q@R; D_teacher=R.T@(sqrt(rho)*Q.T+sqrt(1-rho)*O.T)",
+    "complement": "lexicographic canonical axes, projected against Q and previously accepted columns, with two reorthogonalization passes; no new random draws",
+    "invariants": [
+      "Teacher down within-rank Gram and row norms",
+      "Teacher up values and fixed row norm0.5",
+      "All student fresh tensors",
+      "All input/source/time/latent panels and streams"
+    ],
+    "software_expected": "Squared principal cosines equal rho within rtol1e-6/atol1e-8; Gram max absolute error<=1e-7; rho1 exactly reproduces parent target panels; both families have bitwise exact teacher reachability."
+  },
+  "host": {
+    "sites": 2,
+    "width": 16,
+    "tokens_per_context": 16,
+    "adapter_rank": 2,
+    "frozen_precision": "bfloat16",
+    "trainable_precision": "float32",
+    "particle_formula": "up(h + tanh(Hh+b) + h*tanh(Cz)); h=down(x)",
+    "routing": "sequential sites, shared bank/controller, second site recomputed from first-site output",
+    "critic": "16->48->16 tanh features; pooled context score; explicit 769-dimensional source/time condition",
+    "penalty": "native KA2 in 16-coordinate token units"
+  },
+  "prior": {
+    "kind": "particle_cloud",
+    "num_particles": 128,
+    "z_dim": 4,
+    "sigma": 0,
+    "exception_reason": "The subject is the shared routed ParticleGAN bank used by Supra, not a learned-MoG host.",
+    "initialization": "public particlegan.init.deterministic_orthogonal_ R2 cloud"
+  },
+  "initialization": {
+    "networks": "public particlegan.init.initialize_, sample_distributions_v1, distinct CPU generators bound to semantic parameter names",
+    "shared": "bitwise identical ordinary/particle down/up and critic initial tensors; up factors zeroed after API initialization",
+    "teacher": "Teacher initialized with the same public sampled API, then only its down span deterministically rotated; teacher up stays exactly fixed. The teacher is reachable by learning down/up in both families.",
+    "reachability_gate": "Install teacher down/up into both families and zero particle H/C/b; require identical complete outputs on fit, guard and test panels before training.",
+    "supra_difference": "This named sampled network initialization is explicit and differs from the earlier Supra deterministic-orthogonal network cohort."
+  },
+  "data": {
+    "fit_contexts": 96,
+    "guard_contexts": 24,
+    "test_contexts": 96,
+    "source_classes": 6,
+    "flow_times": 4,
+    "fit_times": [
+      0.1,
+      0.35,
+      0.6,
+      0.85
+    ],
+    "fit_latent_grids": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "guard_times": [
+      0.22,
+      0.72
+    ],
+    "guard_latent_grids": [
+      4,
+      5
+    ],
+    "test_times": [
+      0.18,
+      0.43,
+      0.68,
+      0.93
+    ],
+    "test_latent_grids": [
+      6,
+      7,
+      8,
+      9
+    ],
+    "latent_geometry": "first 2 of 16 token activations weighted sqrt(7), remaining 14 weighted 1, then normalized to overall RMS 0.77; fixed input heterogeneity, never an error-selected training weight",
+    "condition": "fixed 768-dimensional source embeddings with RMS approximately 0.052, plus time; frozen projection into host activations",
+    "fit_batch_size": 4,
+    "schedule": "editing only; same fixed context order across arms",
+    "critic_coordinate_scale": "fit teacher-minus-base standard deviation per coordinate, clamped at 0.04 and fixed thereafter",
+    "rng": "isolated named initialization, fit-index, paired-base, DV12, birth/death and private evaluation streams; no seed scan"
+  },
+  "arms": [
+    {
+      "id": "ordinary_native_game",
+      "adapter": "ordinary down/up LoRA",
+      "optimizer": "native generator AMSGrad beta=(0,0.999), paired RpGAN and KA2 critic, native stationarity/noise policy",
+      "scaffold": "public UpdatePolicy with frozen unoptimized R2 table; no router/table optimizer groups; both row controls disabled",
+      "comparison_limit": "Native owner-dependent support-floor and noise eligibility can differ from the full particle arm. This is a configuration comparison, not a pure architecture ablation."
+    },
+    {
+      "id": "particle_native_game",
+      "adapter": "gated_particle_v3",
+      "optimizer": "full public e22_routed, AMSGrad beta=(0,0.999), paired RpGAN and KA2 critic",
+      "shared_additions": {
+        "birth_death_backend": "auto",
+        "reopen_guard": "settled"
+      },
+      "row_controls": "enabled; full-model candidate reruns; per-site DV12 and usage attribution",
+      "guard": "zero per-context learned-critic-feature harm on FAST and EMA; output guards disabled",
+      "probe_interval": 100
+    },
+    {
+      "id": "neutral_particle_native_game",
+      "parent": "particle_native_game",
+      "sole_change": "Zero fresh H/b after identical sampled initialization and before policy/EMA construction; C remains bit-exact and trainable.",
+      "optimizer": "Same full native e22_routed game, controls, rates, guard and named streams as particle_native_game."
+    }
+  ],
+  "native_nominal_rates": {
+    "generator": 5e-05,
+    "router": 5e-05,
+    "table": 0.0085,
+    "critic": 0.00425,
+    "learned_noise": 0.00425
+  },
+  "output_noise_std": 0.125,
+  "execution": {
+    "device": "cpu",
+    "threads": 1,
+    "steps_per_arm": 6400,
+    "checkpoint_cadence": 200,
+    "software_recovery_witness": [
+      800,
+      802
+    ],
+    "arm_wall_budget_seconds": 900,
+    "total_wall_budget_seconds": 2700,
+    "budget_includes": "all three quality arms, fixed-panel evaluation, six replay software updates, and independent qualification; preparation software is reported separately; wall timeout or missing review is incomplete qualification",
+    "quality_training_launched": false,
+    "execution_authorized": false
+  },
+  "evaluation": {
+    "mandatory_common_judges": [
+      "ordinary_native_game@800",
+      "ordinary_native_game@6400",
+      "particle_native_game@800",
+      "particle_native_game@6400"
+    ],
+    "judges": "All four actual newly trained baseline weights mandatory; no neutral or metric-selected critic replaces them.",
+    "score": "Native paired generator game on clean FAST outputs under fixed private Gaussian critic-input panels; all fit/guard/test pools. Exact same panel law, seeds and sigma as parent.",
+    "endpoints": [
+      5120,
+      6400
+    ],
+    "all_saved_curves": "All fixed 200-update checkpoints, including zero; no best-checkpoint or head selection.",
+    "anchor": "Zero teacher residual log2 under the original fixed common judges.",
+    "output_metrics": "Offline diagnostic only; prohibited in optimizer, structural decisions/guards, stopping and checkpoint/horizon/head selection.",
+    "neutral_support_gate": "At6400 improve original particles >1e-4 under all four judges, and reduce the original particle-versus-ordinary gap at least50% under both endpoint judges, with live retained particles.",
+    "beat_ordinary_gate": "At6400 neutral particles score lower than ordinary native game by >1e-4 under all four common judges.",
+    "remaining_gap_witness": "At6400 original particles are worse than ordinary by>1e-4 under BOTH fixed endpoint judges AND neutral particles remain worse by>1e-4 under BOTH, with live retained particles. Otherwise report no remaining original-gap witness, while retaining every signed score.",
+    "particle_gate": "Final H/b/C, bank and router remain trainable; C norms are nonzero at both sites; bank/router acquired live gradients; final zero-code game differs from live game>1e-6 under exactly all four mandatory critics. Report final gradients and every signed code gain.",
+    "denominator_policy": "If either original particle-minus-ordinary endpoint gap<=1e-4, the50% gap-reduction support test is inapplicable; report null reductions rather than negative or infinite fractions. H/b improvements and ordinary wins remain separate.",
+    "reference_path": "All four newly trained judges, all pools, all fixed residual fractions[0,.25,.5,1], log2 zero-residual anchor. Report weak or reversed judge directions without substituting heads; learned-game gains alone do not establish output accuracy.",
+    "historical_mse_reference": "No new MSE-trained arm. PR227 historical MSE metrics have a different teacher/scale/judges and cannot serve as a matched rotated-target baseline."
+  },
+  "limits": [
+    "The measured Supra historical down span is not its exact frozen-caption target span.",
+    "Weight-space angles omit activation covariance and coupled full-model routing.",
+    "The rotated teacher remains ordinary-LoRA generated and exactly reachable; this tests span acquisition, not all Supra complexities.",
+    "Teacher target and its fit whitening scale change together; this is not proof that span misalignment uniquely mediates full-Supra behavior.",
+    "One fixed task/stream; no seed scan, robust default promotion, or continuation.",
+    "Actual Supra overlap rho is near chance16/576; fixedrank2/width16 chance overlap is2/16=.125, so transplanting absolute rho tests a more severe toy acquisition regime, not a dimension-normalized replication.",
+    "The canonical complement changes activation covariance difficulty even though weight row Gram is preserved.",
+    "This task derives a new coordinate scale and trains new common critics. Absolute scores and gap percentages cannot be subtracted from PR227 as a causal effect size.",
+    "Native G/router/table LR releases, noise eligibility, surprise or structural responses can differ by configuration; a remaining task gap does not uniquely identify basis-angle mediation.",
+    "The audited71 Supra sites are70 rank16/inputwidth576 projections and one rank16/inputwidth768 projection. Their equal-site isotropic chance overlap is0.02767996870109542; measured mean squared cosine is0.027652886220233087 and measured linear-delta energy capture is0.027625366713810866."
+  ],
+  "next_action": "Root freezes the final runner/card/source identities and budget after independently qualified full Supra5120/6400 reporting. Enable execution only if neutral particles at6400 fail to beat the historical ordinary reference under both fixed common critics, then run this single declared native-game task once.",
+  "launch_condition": "After full Supra5120/6400 readout and independent qualification, launch this single toy if neutral particles at6400 do not beat historical ordinary6400 under BOTH mandatory common critics. Mixed critic results are mixed, not a win over both. Any H/b improvement over the fresh sampled control remains separately reported.",
+  "streams": {
+    "data_fit_indices": {
+      "device": "cpu",
+      "seed": 7
+    },
+    "paired_training_gaussian": {
+      "device": "cpu",
+      "seed": 43
+    },
+    "private_evaluation_panels": {
+      "device": "cpu",
+      "seed": 72
+    },
+    "native_policy_seed": 21,
+    "initialization": "semantic-name CPU generators from held public sample_distributions_v1 helper; no seed search"
+  },
+  "native_python_source_digest": "d0be475a055aae953c22dbd19f6d2357db041437e0679d2f2f2cfa356517f65b"
+}
