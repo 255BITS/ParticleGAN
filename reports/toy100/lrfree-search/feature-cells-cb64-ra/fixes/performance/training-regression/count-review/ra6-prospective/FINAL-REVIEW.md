@@ -1,0 +1,9 @@
+# RA6 completed toy artifact audit
+
+Evidence VALID; strict toy quality FAIL: emitted precision 0.516967773, coverage 23/25, TV 0.483032227. Thresholds remain precision ≥.90, all 25 modes, TV ≤.10. Training completed 2,000 updates in 2187.44s. Grid100, MNIST and replay were not run; the required toy-and-grid target is unmet.
+
+All ten sealed checkpoint receipts and their artifacts are unchanged. The original frozen learned artifact auditor independently verifies their typed GPU fingerprints using CPU storage, initialization, sources, data cursors, configuration and runtime. Its new output is `/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/ra6-final-learned-artifact-audit`. 160 frozen source/input files match the prospective source guard. The earlier tuple/list checker failure and its frozen receipts remain preserved; accepted-attempt2 uses value-identical JSON recipe comparison.
+
+Population certificates were never accepted: two negative direction decisions were rejected for population coverage, with zero expiries. The last rejection at904 tested b32 with525/973 participants; it advanced b to64. Final table s=1, b=64, last_decisive=+1, active=false, 234 rebases; current finite-pair participants are204 at b and53 at2b. Serving remains FAST under the unchanged predicate; EMA update weight is1/256. These are table participation diagnostics, not per-row stationarity or G/D convergence claims.
+
+Strict population-law checkpoint rejection, backend6/trainer5, bounded symmetric lineage graph, copy/novel reset hook and shared count/birth budgets are valid at every sealed endpoint. Semantic state contains no timings beyond the inherited birth_death.last.eval_seconds. No CUDA context, model/optimizer update, new seed, trajectory or evaluator change was made by this audit.

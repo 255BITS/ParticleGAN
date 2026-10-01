@@ -1,0 +1,94 @@
+{
+  "500": {
+    "fire_update": 515,
+    "fire_step": 514,
+    "group_ratios": {
+      "0.0": 18.53287713460203,
+      "0.1": 10.752232383127552,
+      "1.0": 14.806933243347316
+    },
+    "aggregate_ratio": 14.342852613692193,
+    "tester_scales": {
+      "0.0": 0.5,
+      "0.1": 1.0,
+      "0.2": 1.0,
+      "1.0": 0.25
+    },
+    "pending_q": {
+      "1.0": 1.5331058502197266,
+      "0.0": 1.2065049409866333,
+      "0.1": 0.2992744445800781,
+      "0.2": 0.0
+    },
+    "group_memberships": [
+      [
+        "0.0",
+        "0.1",
+        "1.0"
+      ]
+    ],
+    "ka2_anchor_started_before": false,
+    "ka2_anchor_started_at_fire": false,
+    "ka2_ratio_at_fire": null,
+    "at_least_one_network_settled": true,
+    "generator_settled": true,
+    "canonical_restoration": true,
+    "external_stream": {
+      "seed": 1234,
+      "device": "cuda:0",
+      "original_sample_calls": 1000,
+      "batch_size": 2048,
+      "mechanism": "one supplied private CUDA generator; native sample_real twice per original update; rotations consume no RNG",
+      "checkpoint_loading_preserves_external_stream": true,
+      "reconstruction_preserves_global_rng": true,
+      "start_stream_sha256": "97b7925b5e16eb35d78e4d718bc4d3ceda7b5a6ebe6c41d192fd1a3610de30f6",
+      "end_stream_sha256": "44a175779731172ca591340b57b307620deb7db9d58895e82851f058caf40e52"
+    }
+  },
+  "1000": {
+    "fire_update": 1022,
+    "fire_step": 1021,
+    "group_ratios": {
+      "0.0": 5.435960534856268,
+      "0.1": 4.033462348251323,
+      "1.0": 4.077748639874868
+    },
+    "aggregate_ratio": 4.471551647087308,
+    "tester_scales": {
+      "0.0": 1.0,
+      "0.1": 1.0,
+      "0.2": 1.0,
+      "1.0": 0.00390625
+    },
+    "pending_q": {
+      "1.0": 1.2054409980773926,
+      "0.0": 1.538886308670044,
+      "0.1": 0.5319032073020935,
+      "0.2": 0.0
+    },
+    "group_memberships": [
+      [
+        "0.0",
+        "0.1",
+        "1.0"
+      ]
+    ],
+    "ka2_anchor_started_before": true,
+    "ka2_anchor_started_at_fire": true,
+    "ka2_ratio_at_fire": 3.416578443773067,
+    "at_least_one_network_settled": true,
+    "generator_settled": false,
+    "canonical_restoration": true,
+    "external_stream": {
+      "seed": 1234,
+      "device": "cuda:0",
+      "original_sample_calls": 2000,
+      "batch_size": 2048,
+      "mechanism": "one supplied private CUDA generator; native sample_real twice per original update; rotations consume no RNG",
+      "checkpoint_loading_preserves_external_stream": true,
+      "reconstruction_preserves_global_rng": true,
+      "start_stream_sha256": "c1674e8d9b9f8693d0a91a4fc47fc4301e405eff5f6dd0bed0e01778fdcacbfb",
+      "end_stream_sha256": "e7762a017c0b198067ae274ee88a4ae35ccb917f921e139da876baf3a3499ab9"
+    }
+  }
+}

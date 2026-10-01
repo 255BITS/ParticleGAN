@@ -42,7 +42,7 @@ def assert_checkpoint_equal(left, right):
 def test_winning_recipe_is_the_common_default():
     assert get_recipe() == Recipe()
     winner = get_recipe()
-    assert winner.name == 'k3p'
+    assert winner.name == 'ka2'  # the K3P hyperparameters with the KA2 critic penalty
     assert (winner.reg_kappa, winner.reg_coeff, winner.prior_reg) == (1., 1., 0.)
     assert (winner.reg_anchor_weight, winner.direct_particle_gain) == (1., True)
     assert (winner.lr, winner.betas, winner.prior_lr_mult, winner.d_lr_mult) == (.00425, (0., .999), 2., 1.)

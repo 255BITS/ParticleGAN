@@ -1,0 +1,38 @@
+{
+  "atlas_package_sha256": "500ff0e966beb649dd7cafa0b91d7bb30cb451e5d62ece2883411a0507c8df61",
+  "description": "Schematic infographics for current PR155 E22 and ParticleGAN Atlas",
+  "e22_git_commit": "cabe2084284db923d525918cbf3e18de6f20faac",
+  "files": [
+    {
+      "bytes": 1631,
+      "path": "README.md",
+      "sha256": "e7bf4f7a68025194da311d418b568c7961ce1234f28b7e066ddaea37351fe090"
+    },
+    {
+      "bytes": 10026,
+      "path": "render_infographics.py",
+      "sha256": "c7f6b6e0f39b86fc4ff2b8977dd0fe08ca4e8fc188a5a78a9a8b009e89f5d1a0"
+    },
+    {
+      "bytes": 68031,
+      "path": "e22-explained.svg",
+      "sha256": "aa34e71263206a748d60261e92b707ddbbc907e8b1d7527275908b131d180574"
+    },
+    {
+      "bytes": 372866,
+      "path": "e22-explained.png",
+      "sha256": "b5f13ea1154494c4df2df7caf6008b47f2e00c4748c6d5193d0f72ece19045a4"
+    },
+    {
+      "bytes": 87976,
+      "path": "atlas-changes.svg",
+      "sha256": "d2c10d9f160355578a17b732dbccd693f0b9622400b5a39e37bdf3be2f1de605"
+    },
+    {
+      "bytes": 470595,
+      "path": "atlas-changes.png",
+      "sha256": "a8b6d42e14d03d0c036fa1e9ad96c2805286873952280f148f18ba8388834bbe"
+    }
+  ],
+  "schematic_not_benchmark_data": true
+}

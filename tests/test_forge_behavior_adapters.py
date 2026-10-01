@@ -55,17 +55,21 @@ def test_named_noise_receipt_reports_actual_streams_without_consuming_rng(noise_
 
 
 @pytest.mark.parametrize("host", HOSTS)
-def test_original_objectives_bind_public_components_and_record_real_updates(tmp_path, host):
+@pytest.mark.parametrize("formulation", ["ka2", "k3p"])
+def test_original_objectives_bind_public_components_and_record_real_updates(tmp_path, host, formulation):
     task = deepcopy(load_tasks(ROOT)[host])
     task["execution"]["steps"] = 2
     before = torch.get_rng_state().clone()
-    result = run_behavior(request(), task, tmp_path / host, "cpu")
+    declaration = request()
+    declaration["candidate"]["recipe_overrides"]["critic_formulation"] = formulation
+    result = run_behavior(declaration, task, tmp_path / host, "cpu")
     assert {field: result["evidence"][field] for field in FIELDS} == expected_policy(task)
     assert torch.equal(before, torch.get_rng_state())
     assert result["execution_path"] == "public_components"
     assert result["device"] == "cpu"
     assert result["applied"]["public_optimizers"]
-    assert all(name.startswith("K3P") for name in result["applied"]["public_optimizers"])
+    assert all(name in {"K3PGeneratorAdam", "KA2CriticAdam" if formulation == "ka2" else "K3PCriticAdam"}
+               for name in result["applied"]["public_optimizers"])
     assert len(result["evidence"]["observations"]) == 2
     assert result["evidence"]["guards"]["all_finite"]
     assert result["evidence"]["guards"]["hooks_exercised"]

@@ -1,0 +1,15 @@
+{
+  "status": "FROZEN_BEFORE_NUMERICAL_HELPER_EXECUTION",
+  "frozen_utc": "2026-09-30T08:56:24.779659+00:00",
+  "source_and_input_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/contract.py": "486ab8d54d8a778b06d7e731773b9d45e72c0cc3a881698556d959b7da3047e4",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/prepare_tests.py": "33ad38274f8f1fb7a7204573849bfbbd3d755a96cb44798f5b18e249c3b79b0e",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/SOURCE-FROZEN.json": "06649bc07d660c2c54f2927c6b39c0a8c995a2f5f4f7877182ebdf83f9e65294"
+  },
+  "input_selection": [
+    1250,
+    2000
+  ],
+  "numerical_tests": "NOT_RUN",
+  "cpu_only": true
+}

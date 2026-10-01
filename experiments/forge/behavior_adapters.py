@@ -25,7 +25,7 @@ from particlegan.recipes import learning_rate_scales
 from particlegan.training import input_noise_std, output_noise_std
 from benchmarks.transfer_suite.legacy_noise_adapters import NoisePolicy, _InputAdapter, _OutputAdapter
 
-from .api import CapabilityError, FormulationContext
+from .api import CapabilityError, FormulationContext, task_policy_blockers
 from .contracts import atomic_json
 from .mechanisms import MechanismAudit, mechanism_blockers
 from .sampling import BEHAVIOR_POLICIES, POLICIES, executed_receipt
@@ -49,8 +49,9 @@ def behavior_preflight(task: dict, candidate: dict) -> list[str]:
     fields = set(candidate.get("recipe_overrides", {})) & FROZEN_HOST_RECIPE_FIELDS
     if task["execution"].get("host", task["id"]) != "ae_gan_hold":
         fields |= set(candidate.get("recipe_overrides", {})) & {"routing_temperature", "distance_reduction"}
-    return [f"{task['id']}: recipe override {name!r} is owned by the frozen host; revise its task specification"
-            for name in sorted(fields)]
+    return (task_policy_blockers(task, candidate)
+            + [f"{task['id']}: recipe override {name!r} is owned by the frozen host; revise its task specification"
+               for name in sorted(fields)])
 
 
 def _base(module):
@@ -88,7 +89,7 @@ class _PenaltyBinding:
     """Adapt old host call syntax to Recipe.make_critic_penalty's public API."""
     def __init__(self, recipe, optimizer, audit):
         self.bound = recipe.make_critic_penalty(optimizer, collect_stats=True)
-        self.arm, self.coeff, self.kappa = "k3p", recipe.reg_coeff, recipe.reg_kappa
+        self.arm, self.coeff, self.kappa = recipe.critic_formulation, recipe.reg_coeff, recipe.reg_kappa
         self.norm, self.lazy_k, self.target_anneal = "rms", recipe.reg_every, "none"
         self.calls = 0
         self.audit = audit
@@ -172,7 +173,8 @@ class BehaviorComponents:
         # These are frozen host resources; candidate mechanism settings stay shared.
         overrides["total_steps"] = task["execution"]["steps"]
         self.context = FormulationContext(
-            recipe_overrides=overrides, prior=task["execution"]["prior"],
+            recipe_preset=candidate.get("recipe_preset"), recipe_overrides=overrides,
+            prior=task["execution"]["prior"],
             seed=request.get("protocol", {}).get("seed", 0), device="cpu",
             extensions=candidate.get("extensions", {}),
             initializer=candidate.get("initializer", "deterministic_orthogonal"),

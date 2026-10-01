@@ -1,0 +1,14 @@
+{
+  "status": "TECHNICAL_NATIVE_COORDINATE_ANNOTATION_CORRECTION",
+  "utc": "2026-09-30T09:54:24.480609+00:00",
+  "original_helper_sha256": "bb0fef4db217bafe9bcd09c846a55066004e254d5c16bf8bdebf0187bd187efa",
+  "corrected_helper_sha256": "a704b803156a2067f038e9e78ff5db6992c1185c9aecea1cd8e1cbc5b2f5b0d2",
+  "original_preparation_sha256": "ed360120f4d13f7720fcd4ead632c5a5beb34c7fa81614fb93c09213738e20cf",
+  "failed_log_sha256": "71374eabda0c16333ab34a0e3553620bb9610e73aadb61679bde041b6942e2df",
+  "inverse_two_text_splices_restore_entire_original_bytes": true,
+  "actual_numerical_change": "Supplementary raw prior conditional means now use fixed groups of actual A z+b, instead of invalid3sigma coverage assumed for z in output coordinates. All output/target decomposition equations, inputs, parameters and selections are identical.",
+  "parameters_changed": 0,
+  "output_scoring_calls": 0,
+  "production_changes": 0,
+  "prior_failed_attempt_retained": true
+}

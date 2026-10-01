@@ -22,7 +22,9 @@ ALLOWED_STATE = ["parameters_and_ema", "optimizer_moments_and_bias_correction",
 def source_audit(recipe, extensions):
     """Conservative declaration for the shipped scalar API; unknown hooks block."""
     dependencies = []
-    if recipe["lr_floor"] != 1 or recipe["network_lr_floor"] not in (None, 1):
+    if recipe.get("continuous_policy") is not None:
+        dependencies.append("continuous policy lifecycle needs a separate reviewed clock/state audit")
+    elif recipe["lr_floor"] != 1 or recipe["network_lr_floor"] not in (None, 1):
         dependencies.append("learning-rate annealing depends on completed steps and horizon")
     if recipe["input_noise_std"]:
         dependencies.append("input-noise annealing depends on completed steps and horizon")
@@ -30,12 +32,15 @@ def source_audit(recipe, extensions):
         dependencies.append("output-noise warmup depends on completed steps and horizon")
     if recipe["reg_coeff"] and recipe["reg_every"] != 1:
         dependencies.append("lazy critic penalty uses a periodic update counter")
+    if recipe["reg_coeff"] and recipe.get("critic_formulation", "ka2") == "ka2":
+        dependencies.append("KA2 switches from pure A to blended penalty at call 800")
     if recipe["d_guard_ratio"] and recipe["d_guard_min_steps"]:
         dependencies.append("critic guard releases at a fixed minimum update count")
     if extensions:
         dependencies.append("additional formulation bindings need an explicit clock/state audit")
     root = Path(__file__).resolve().parents[2]
-    files = ["particlegan/training.py", "particlegan/recipes.py", "particlegan/k3p.py",
+    files = ["particlegan/training.py", "particlegan/recipes.py", "particlegan/k3p.py", "particlegan/ka2.py",
+             "particlegan/policy.py", "particlegan/continuous.py",
              "particlegan/grad_regularizers.py", "experiments/forge/clockfree.py",
              "experiments/forge/api.py", "experiments/forge/rng.py"]
     return {"source_sha256": {name: file_hash(root / name) for name in files},

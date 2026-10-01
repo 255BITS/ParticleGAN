@@ -1,0 +1,44 @@
+{
+  "status": "PASS",
+  "utc": "2026-09-30T16:15:36.714380+00:00",
+  "scope": "READ_ONLY_CLOSED_CUDA_MECHANICS_PROVENANCE",
+  "phase_ready_sha256": "afcb27d8bf375c1f259c76544653663fe893c5ac279402f364f49bc785193d5e",
+  "result_sha256": "bba1f2ddc2bb697b3eaf9066b5c9851997b5836c7716f6454b87383250f66a98",
+  "package_sha256": "1b54cb00461df0ad89fcad59bba1e3012bf94a71ac887ecf708aafdfadc18a93",
+  "config_sha256": "b3656ea7494413106484c556e53877900dd5ccebf2597b3f80b7d0e7d5ba4437",
+  "guarded_sources": 350,
+  "records": [
+    {
+      "case": "grid",
+      "ordinary": 908,
+      "mean": 908,
+      "rows": 20000,
+      "cells": 128,
+      "checks": 30
+    },
+    {
+      "case": "toy",
+      "ordinary": 51,
+      "mean": 0,
+      "rows": 1024,
+      "cells": 64,
+      "checks": 25
+    }
+  ],
+  "raw_maps_exact": true,
+  "unchanged_owner_command": true,
+  "source_integrity": "VALID",
+  "original_seeds_and_inputs": true,
+  "serial_physical_gpu0": true,
+  "fixture_fresh_backend10": true,
+  "observed_complete_phase_hook_unions": true,
+  "declared_packet_checks_all_PASS": true,
+  "no_postexecution_PT_deserialization": true,
+  "numerical_reruns": 0,
+  "quality_verdict": null,
+  "limitations": [
+    "Checks numerical assertions through the closed authoritative mechanics report; does not independently rerun them.",
+    "One reaction on fresh backend10 fixtures; device-native inputs/seeds, no historical or cross-device replay.",
+    "No quality, long-run stationarity or serving-population certificate."
+  ]
+}

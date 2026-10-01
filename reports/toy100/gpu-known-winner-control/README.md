@@ -59,7 +59,7 @@ runner takes neither changed path. The full diff is retained in
 [inactive-source-differences.patch](inactive-source-differences.patch).
 
 [GPU audit](audit.json) · [CPU regrade](cpu-regrade.json) ·
-[Per-toy GPU results](LEADERBOARD.md) · [Raw GPU ledger](ledger.jsonl) ·
+[Per-toy GPU results](LEADERBOARD.md) · [Raw GPU ledger](https://github.com/255BITS/ParticleGAN/blob/bdf05d1be0f68cfdb0c71e81e7e0d3cce477572f/reports/toy100/gpu-known-winner-control/ledger.jsonl) ·
 [Original CPU evidence](../simpler22/README.md)
 
 The original common-22 initialization regrader explicitly supports CPU only.

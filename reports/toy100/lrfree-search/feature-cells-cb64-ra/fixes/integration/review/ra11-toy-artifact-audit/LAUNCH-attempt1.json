@@ -1,0 +1,24 @@
+{
+  "schema": 1,
+  "utc": "2026-09-30T16:28:44.997640+00:00",
+  "pid": 1255211,
+  "startticks": "168754515",
+  "command": [
+    "/tmp/pr38-default-env/bin/python",
+    "-B",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/ra11-toy-artifact-audit/audit_completed.py",
+    "--input-freeze",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/ra11-toy-artifact-audit/attempt1-inputs/INPUTS-FROZEN.json",
+    "--output",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/ra11-toy-artifact-audit/accepted-attempt1"
+  ],
+  "cwd": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929",
+  "CPU_only": true,
+  "CUDA_VISIBLE_DEVICES": "",
+  "threads": 1,
+  "root_GO_sha256": "71366eb8827176b8875771895803a08c4f9495abbd5148659677a4433fa104af",
+  "input_freeze_sha256": "919ec21c173e9b3ce363699b57dee5d6d8511e60d27b0fb6f2d724209b7521ad",
+  "helper_sha256": "28513e434d50cb25e942aa46d853f2ae69a0494181e81ad759f929c8c19df57c",
+  "audit_invocations": 1,
+  "checkpoint_count": 10
+}

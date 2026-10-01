@@ -389,10 +389,10 @@ def test_unsupported_fields_and_capabilities_block_before_model_construction():
             "future", "float", "trainer", "missing_public_argument", "Unsupported public variable"))
 
 
-def test_legacy_atom_checkpoint_shape_remains_schema_three():
+def test_atom_checkpoint_uses_schema_four_with_original_default_streams():
     trainer = GANTrainer(Recipe(num_particles=8, z_dim=2, total_steps=3), nn.Linear(2, 2), nn.Linear(2, 1))
     state = trainer.state_dict()
-    assert state["schema"] == 3
+    assert state["schema"] == 4
     assert set(state["streams"]) == {"latent_generator", "penalty_generator", "eval_generator", "noise_generator"}
     trainer.load_state_dict(state)
     assert_equal(state, trainer.state_dict())

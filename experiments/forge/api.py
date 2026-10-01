@@ -11,7 +11,7 @@ import math
 
 import torch
 
-from particlegan import GANTrainer, Recipe, init, prior_capabilities, prior_mechanisms
+from particlegan import GANTrainer, Recipe, get_recipe, init, prior_capabilities, prior_mechanisms
 from .rng import NamedStreams, RNG_VERSION
 
 
@@ -29,6 +29,7 @@ TRAINER_STREAM_BINDINGS = {
 BUILTIN_CAPABILITIES = (
     "public_trainer", "public_components", "scalar_gan", "mog_prior", "particle_cloud", "learned_locations",
     "uniform_masses", "fixed_prior_width", "a2", "checkpoint", "named_rng", "live_sampling",
+    "policy_controls", "policy_serving",
 )
 _MISSING = object()
 
@@ -40,6 +41,51 @@ class CapabilityError(ValueError):
     def __init__(self, blockers):
         self.blockers = list(blockers)
         super().__init__("; ".join(self.blockers))
+
+
+def resolve_public_recipe(candidate, **overrides):
+    """Resolve a preset before task resources; a Recipe.name is only a label."""
+    options = {**candidate.get("recipe_overrides", {}), **overrides}
+    preset = candidate.get("recipe_preset")
+    try:
+        return Recipe(**options) if preset is None else get_recipe(preset, **options)
+    except (TypeError, ValueError) as error:
+        raise CapabilityError([f"unsupported recipe: {error}"]) from error
+
+
+def policy_controls(recipe):
+    """Mechanisms requiring the ordered public UpdatePolicy lifecycle."""
+    return bool(recipe.continuous_policy is not None or recipe.lr_control == "stationarity"
+                or recipe.row_evidence_gate or recipe.particle_birth_death
+                or recipe.serve_average or recipe.output_noise_mode != "fixed")
+
+
+def host_recipe_overrides(candidate, execution, resources):
+    """Preserve schedule-free None; task steps bound GANTrainer.max_steps."""
+    recipe = resolve_public_recipe(candidate)
+    fixed = dict(resources)
+    if recipe.total_steps is not None:
+        fixed["total_steps"] = execution.get("original_schedule_horizon", execution["steps"])
+    conflicts = [key for key, value in fixed.items()
+                 if key in candidate.get("recipe_overrides", {})
+                 and candidate["recipe_overrides"][key] != value]
+    if conflicts:
+        raise CapabilityError([f"candidate overrides frozen host resource {key}; declare a different task"
+                               for key in sorted(conflicts)])
+    return {**candidate.get("recipe_overrides", {}), **fixed}
+
+
+def task_policy_blockers(task, candidate):
+    """Current Forge tasks certify clean/live component laws, not E22 controls."""
+    try:
+        recipe = resolve_public_recipe(candidate)
+    except CapabilityError as error:
+        return error.blockers
+    if not policy_controls(recipe):
+        return []
+    host = "public components" if task.get("adapter") == "transfer_behavior" else "clean/live scoring"
+    return [f"{task.get('id', '<task>')}: {host} has no declared policy-control evidence and "
+            "served-sampling contract; freeze a policy-aware task before reservation"]
 
 
 @dataclass(frozen=True)
@@ -176,7 +222,7 @@ class FormulationContext:
     and does not run historical nearest-neighbor calibration. ``extensions``
     are validated bindings registered once through ``CapabilityRegistry``.
     """
-    def __init__(self, *, recipe_overrides=None, prior=None, seed=0, device="cpu",
+    def __init__(self, *, recipe_preset=None, recipe_overrides=None, prior=None, seed=0, device="cpu",
                  requires_capabilities=(), registry=None, extensions=None,
                  initializer="deterministic_orthogonal", rng_version=RNG_VERSION,
                  execution_path="public_trainer", host_initialization=None,
@@ -202,10 +248,16 @@ class FormulationContext:
         for key, value in prior_fields.items():
             if key in overrides and overrides[key] != value:
                 raise CapabilityError([f"recipe {key} conflicts with explicit prior declaration"])
-        try:
-            self.recipe = Recipe(**{**overrides, **prior_fields})
-        except (TypeError, ValueError) as error:
-            raise CapabilityError([f"unsupported recipe: {error}"]) from error
+        self.recipe_preset = recipe_preset
+        self.recipe = resolve_public_recipe({"recipe_preset": recipe_preset,
+                                             "recipe_overrides": overrides}, **prior_fields)
+        if self.recipe.row_policy != "independent":
+            raise CapabilityError(["Forge has no RoutedRows host binding; declare a separate routed task"])
+        if self.prior_config["kind"] != "particle_cloud" and (
+                self.recipe.row_evidence_gate or self.recipe.particle_birth_death):
+            raise CapabilityError(["independent policy row controls require an explicit particle_cloud cohort; MoG is unsupported"])
+        if execution_path == "public_components" and policy_controls(self.recipe):
+            raise CapabilityError(["public_components hosts do not bind the ordered UpdatePolicy lifecycle"])
         if initializer not in ("deterministic_orthogonal", "supplied"):
             raise CapabilityError(["unsupported initializer"])
         self.initializer = initializer
@@ -243,7 +295,10 @@ class FormulationContext:
         return {"public_trainer": scalar, "public_components": True, "scalar_gan": scalar,
                 "mog_prior": p["kind"] == "mog", "particle_cloud": p["kind"] == "particle_cloud",
                 "learned_locations": p["learnable"], "uniform_masses": True, "fixed_prior_width": True,
-                "a2": a2, "checkpoint": True, "named_rng": True, "live_sampling": True,
+                "a2": a2, "checkpoint": True, "named_rng": True,
+                "live_sampling": not (self.recipe.serve_average or self.recipe.continuous_policy),
+                "policy_controls": policy_controls(self.recipe),
+                "policy_serving": self.recipe.serve_average > 0,
                 **{name: True for name in self.extension_values}}
 
     def _check_capabilities(self):
@@ -419,17 +474,33 @@ class FormulationContext:
         streams = [options[name] for name in TRAINER_STREAM_BINDINGS if name in options]
         if len({id(stream) for stream in streams}) != len(streams):
             raise CapabilityError(["Forge requires distinct named trainer streams"])
-        self._trainer = GANTrainer(self.recipe, generator, discriminator, prior=prior, **options)
+        self._trainer = GANTrainer(self.recipe, generator, discriminator, prior=prior,
+                                   seed=self.streams.seed, **options)
         return self._trainer
 
     def receipt(self):
+        policy = None
+        if self._trainer is not None and policy_controls(self.recipe):
+            birth = self._trainer.birth_death
+            policy = {"owner": "particlegan.UpdatePolicy", "completed_steps": self._trainer.completed_steps,
+                      "external_max_steps": self._trainer.max_steps,
+                      "continuous_policy": self.recipe.continuous_policy,
+                      "lr_control": self.recipe.lr_control, "row_policy": self.recipe.row_policy,
+                      "serving": "state_selected" if self.recipe.serve_average else "fast",
+                      "quality_qualification": False,
+                      "private_rng": [] if birth is None else [{
+                          "owner": "UpdatePolicy.birth_death", "seed": self.streams.seed + 6,
+                          "derivation": "public policy seed + 6; independent of Forge named streams",
+                          "state_sha256": hashlib.sha256(birth.stream.get_state().cpu().numpy().tobytes()).hexdigest(),
+                          "checkpoint_path": "trainer.birth_death.stream"}]}
         return {"api_version": API_VERSION, "execution_path": self.execution_path,
+                "recipe_preset": self.recipe_preset,
                 "recipe": self.recipe.to_dict(), "prior": deepcopy(self.prior_config),
                 "capabilities": self.capabilities(), "requires_capabilities": list(self.requires_capabilities),
                 "extensions": deepcopy(self.extension_values),
                 "api_changes": [self.registry.extensions[name].declaration() for name in sorted(self.extension_values)],
                 "initializer": self.initializer, "initialization": deepcopy(self.initialization),
-                "rng": self.streams.manifest(),
+                "rng": self.streams.manifest(), "policy_lifecycle": policy,
                 "prior_mechanisms": None if self._trainer is None else deepcopy(self._trainer.prior_mechanisms)}
 
     def state_dict(self):

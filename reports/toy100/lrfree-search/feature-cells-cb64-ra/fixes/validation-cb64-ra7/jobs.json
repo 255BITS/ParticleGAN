@@ -1,0 +1,252 @@
+[
+  {
+    "name": "learned-toy-CB64-RA7",
+    "threads": 2,
+    "command": [
+      "/tmp/pr38-default-env/bin/python",
+      "-u",
+      "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/learned/run_training.py",
+      "--problem",
+      "toy",
+      "--variant",
+      "CB64-RA7"
+    ],
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/learned/training/toy/CB64-RA7/result.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/logs/learned-toy-CB64-RA7.log"
+  },
+  {
+    "name": "screen-grid100",
+    "threads": 1,
+    "command": [
+      "/tmp/pr38-default-env/bin/python",
+      "-u",
+      "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/screens/run_screen.py",
+      "--task",
+      "grid100"
+    ],
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/screens/runs/grid100/result.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/logs/screen-grid100.log"
+  },
+  {
+    "name": "learned-mnist-CB64-RA7",
+    "threads": 2,
+    "command": [
+      "/tmp/pr38-default-env/bin/python",
+      "-u",
+      "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/learned/run_training.py",
+      "--problem",
+      "mnist",
+      "--variant",
+      "CB64-RA7"
+    ],
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/learned/training/mnist/CB64-RA7/result.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/logs/learned-mnist-CB64-RA7.log"
+  },
+  {
+    "name": "replay-CB64-RA7",
+    "threads": 2,
+    "command": [
+      "/tmp/pr38-default-env/bin/python",
+      "-u",
+      "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/learned/replay.py",
+      "CB64-RA7"
+    ],
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/learned/replay-CB64-RA7.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/logs/replay-CB64-RA7.log"
+  },
+  {
+    "name": "screen-mode_hold",
+    "threads": 1,
+    "command": [
+      "/tmp/pr38-default-env/bin/python",
+      "-u",
+      "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/screens/run_screen.py",
+      "--task",
+      "mode_hold"
+    ],
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/screens/runs/mode_hold/result.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/logs/screen-mode_hold.log"
+  },
+  {
+    "name": "screen-img_blobs4",
+    "threads": 1,
+    "command": [
+      "/tmp/pr38-default-env/bin/python",
+      "-u",
+      "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/screens/run_screen.py",
+      "--task",
+      "img_blobs4"
+    ],
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/screens/runs/img_blobs4/result.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/logs/screen-img_blobs4.log"
+  },
+  {
+    "name": "screen-vector_unequal_mass",
+    "threads": 1,
+    "command": [
+      "/tmp/pr38-default-env/bin/python",
+      "-u",
+      "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/screens/run_screen.py",
+      "--task",
+      "vector_unequal_mass"
+    ],
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/screens/runs/vector_unequal_mass/result.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/logs/screen-vector_unequal_mass.log"
+  },
+  {
+    "name": "screen-ring_shift",
+    "threads": 1,
+    "command": [
+      "/tmp/pr38-default-env/bin/python",
+      "-u",
+      "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/screens/run_screen.py",
+      "--task",
+      "ring_shift"
+    ],
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/screens/runs/ring_shift/result.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/logs/screen-ring_shift.log"
+  },
+  {
+    "name": "screen-rotated100",
+    "threads": 1,
+    "command": [
+      "/tmp/pr38-default-env/bin/python",
+      "-u",
+      "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/screens/run_screen.py",
+      "--task",
+      "rotated100"
+    ],
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/screens/runs/rotated100/result.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/logs/screen-rotated100.log"
+  },
+  {
+    "name": "screen-staggered100",
+    "threads": 1,
+    "command": [
+      "/tmp/pr38-default-env/bin/python",
+      "-u",
+      "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/screens/run_screen.py",
+      "--task",
+      "staggered100"
+    ],
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/screens/runs/staggered100/result.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/logs/screen-staggered100.log"
+  },
+  {
+    "name": "screen-stationary",
+    "threads": 1,
+    "command": [
+      "/tmp/pr38-default-env/bin/python",
+      "-u",
+      "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/screens/run_screen.py",
+      "--task",
+      "stationary"
+    ],
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/screens/runs/stationary/result.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/logs/screen-stationary.log"
+  },
+  {
+    "name": "screen-img_intensity2",
+    "threads": 1,
+    "command": [
+      "/tmp/pr38-default-env/bin/python",
+      "-u",
+      "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/screens/run_screen.py",
+      "--task",
+      "img_intensity2"
+    ],
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/screens/runs/img_intensity2/result.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/logs/screen-img_intensity2.log"
+  },
+  {
+    "name": "screen-img_stripes2",
+    "threads": 1,
+    "command": [
+      "/tmp/pr38-default-env/bin/python",
+      "-u",
+      "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/screens/run_screen.py",
+      "--task",
+      "img_stripes2"
+    ],
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/screens/runs/img_stripes2/result.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/logs/screen-img_stripes2.log"
+  },
+  {
+    "name": "screen-img_bars4",
+    "threads": 1,
+    "command": [
+      "/tmp/pr38-default-env/bin/python",
+      "-u",
+      "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/screens/run_screen.py",
+      "--task",
+      "img_bars4"
+    ],
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/screens/runs/img_bars4/result.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/logs/screen-img_bars4.log"
+  },
+  {
+    "name": "screen-vector_two_broad",
+    "threads": 1,
+    "command": [
+      "/tmp/pr38-default-env/bin/python",
+      "-u",
+      "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/screens/run_screen.py",
+      "--task",
+      "vector_two_broad"
+    ],
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/screens/runs/vector_two_broad/result.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/logs/screen-vector_two_broad.log"
+  },
+  {
+    "name": "screen-vector_unequal_width",
+    "threads": 1,
+    "command": [
+      "/tmp/pr38-default-env/bin/python",
+      "-u",
+      "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/screens/run_screen.py",
+      "--task",
+      "vector_unequal_width"
+    ],
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/screens/runs/vector_unequal_width/result.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/logs/screen-vector_unequal_width.log"
+  },
+  {
+    "name": "screen-vector_anisotropic",
+    "threads": 1,
+    "command": [
+      "/tmp/pr38-default-env/bin/python",
+      "-u",
+      "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/screens/run_screen.py",
+      "--task",
+      "vector_anisotropic"
+    ],
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/screens/runs/vector_anisotropic/result.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/logs/screen-vector_anisotropic.log"
+  },
+  {
+    "name": "screen-vector_overlap",
+    "threads": 1,
+    "command": [
+      "/tmp/pr38-default-env/bin/python",
+      "-u",
+      "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/screens/run_screen.py",
+      "--task",
+      "vector_overlap"
+    ],
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/screens/runs/vector_overlap/result.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/logs/screen-vector_overlap.log"
+  },
+  {
+    "name": "screen-vector_spiral",
+    "threads": 1,
+    "command": [
+      "/tmp/pr38-default-env/bin/python",
+      "-u",
+      "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/screens/run_screen.py",
+      "--task",
+      "vector_spiral"
+    ],
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/screens/runs/vector_spiral/result.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra7/logs/screen-vector_spiral.log"
+  }
+]

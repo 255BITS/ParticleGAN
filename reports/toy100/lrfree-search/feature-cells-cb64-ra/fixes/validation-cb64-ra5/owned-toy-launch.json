@@ -1,0 +1,16 @@
+{
+  "pid": 558485,
+  "startticks": "164515126",
+  "command": [
+    "/tmp/pr38-default-env/bin/python",
+    "-u",
+    "-B",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/nested_slot.py",
+    "--lane",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra5",
+    "--through",
+    "1"
+  ],
+  "log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra5/owned-toy-launch.log",
+  "utc": "2026-09-30 04:42:11 UTC"
+}

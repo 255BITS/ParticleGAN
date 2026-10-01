@@ -1,0 +1,280 @@
+{
+  "scope": "saved original CPU static reference receipts, no rerun/GPU substitution",
+  "source_sha256": {
+    "/ml2/hypergan/gan-attempts/scaling-portability-20260929/scaling_a/cases/highdim_1024_e22.json": "2326db3ec7ea65d02c00bdbc58ff920cf09703ac24a1cccbd5ec31e3c418b2d4",
+    "/ml2/hypergan/gan-attempts/scaling-portability-20260929/scaling_a/cases/highdim_2048_e22.json": "182240c37c5cc630a2ca3dd463e6b4b7d19ef4cdd748694eb25f13f0f92937f8",
+    "/ml2/hypergan/gan-attempts/scaling-portability-20260929/scaling_a/cases/highdim_4096_e22.json": "933c0aecc7ebf437e3a2425e7b0342af4ca6e06284e97cc99bb2fae167c2abc4",
+    "/ml2/hypergan/gan-attempts/scaling-portability-20260929/scaling_a/cases/highdim_8192_e22.json": "63096f0c2259820c8aaa2277ff80be348b8e6f097b0a5c8c6b35af55680f0367",
+    "/ml2/hypergan/gan-attempts/scaling-portability-20260929/geometry_a/results.json": "ad17a6a501cb6a9c77101bb00ea11169596eb6e6da5aa419c89a45cceb149fe1",
+    "/ml2/hypergan/gan-attempts/scaling-portability-20260929/geometry_a/frozen_network_results.json": "064f56a370c78beef600121b6d627d398420bbdb3cab272fb1174c23d7e42ee9"
+  },
+  "cases": [
+    {
+      "source": "/ml2/hypergan/gan-attempts/scaling-portability-20260929/scaling_a/cases/highdim_1024_e22.json",
+      "family": "highdim",
+      "n": 1024,
+      "recall": 0.0,
+      "fp": 0,
+      "flagged": 0,
+      "planted": 46
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/scaling-portability-20260929/scaling_a/cases/highdim_2048_e22.json",
+      "family": "highdim",
+      "n": 2048,
+      "recall": 0.0,
+      "fp": 0,
+      "flagged": 0,
+      "planted": 92
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/scaling-portability-20260929/scaling_a/cases/highdim_4096_e22.json",
+      "family": "highdim",
+      "n": 4096,
+      "recall": 0.0,
+      "fp": 0,
+      "flagged": 0,
+      "planted": 184
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/scaling-portability-20260929/scaling_a/cases/highdim_8192_e22.json",
+      "family": "highdim",
+      "n": 8192,
+      "recall": 0.0,
+      "fp": 0,
+      "flagged": 0,
+      "planted": 369
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/scaling-portability-20260929/geometry_a/results.json",
+      "feature_map": "trained600",
+      "family": "geometry",
+      "n": 2048,
+      "mechanism": "linear",
+      "detector": {
+        "flagged": 72,
+        "true_unsupported": 82,
+        "true_positive": 68,
+        "false_positive": 4,
+        "recall": 0.8292682926829268,
+        "precision": 0.9444444444444444,
+        "legitimate_fpr": 0.002034587995930824,
+        "rare_false_positive": 2,
+        "action_allowed": true,
+        "passes": false
+      },
+      "qualification": {
+        "exact": false,
+        "jitter": false
+      }
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/scaling-portability-20260929/geometry_a/results.json",
+      "feature_map": "trained600",
+      "family": "geometry",
+      "n": 2048,
+      "mechanism": "fold",
+      "detector": {
+        "flagged": 72,
+        "true_unsupported": 82,
+        "true_positive": 68,
+        "false_positive": 4,
+        "recall": 0.8292682926829268,
+        "precision": 0.9444444444444444,
+        "legitimate_fpr": 0.002034587995930824,
+        "rare_false_positive": 2,
+        "action_allowed": true,
+        "passes": false
+      },
+      "qualification": {
+        "exact": false,
+        "jitter": false
+      }
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/scaling-portability-20260929/geometry_a/results.json",
+      "feature_map": "trained600",
+      "family": "geometry",
+      "n": 2048,
+      "mechanism": "fold_nuisance",
+      "detector": {
+        "flagged": 72,
+        "true_unsupported": 82,
+        "true_positive": 68,
+        "false_positive": 4,
+        "recall": 0.8292682926829268,
+        "precision": 0.9444444444444444,
+        "legitimate_fpr": 0.002034587995930824,
+        "rare_false_positive": 2,
+        "action_allowed": true,
+        "passes": false
+      },
+      "qualification": {
+        "exact": false,
+        "jitter": false
+      }
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/scaling-portability-20260929/geometry_a/results.json",
+      "feature_map": "trained600",
+      "family": "geometry",
+      "n": 1024,
+      "mechanism": "fold_nuisance",
+      "detector": {
+        "flagged": 0,
+        "true_unsupported": 41,
+        "true_positive": 0,
+        "false_positive": 0,
+        "recall": 0.0,
+        "precision": 0.0,
+        "legitimate_fpr": 0.0,
+        "rare_false_positive": 0,
+        "action_allowed": false,
+        "passes": false
+      },
+      "qualification": {
+        "exact": false,
+        "jitter": false
+      }
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/scaling-portability-20260929/geometry_a/results.json",
+      "feature_map": "trained600",
+      "family": "geometry",
+      "n": 4096,
+      "mechanism": "fold_nuisance",
+      "detector": {
+        "flagged": 100,
+        "true_unsupported": 164,
+        "true_positive": 96,
+        "false_positive": 4,
+        "recall": 0.5853658536585366,
+        "precision": 0.96,
+        "legitimate_fpr": 0.001017293997965412,
+        "rare_false_positive": 0,
+        "action_allowed": true,
+        "passes": false
+      },
+      "qualification": {
+        "exact": false,
+        "jitter": false
+      }
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/scaling-portability-20260929/geometry_a/frozen_network_results.json",
+      "feature_map": "frozen_initialization",
+      "family": "geometry",
+      "n": 2048,
+      "mechanism": "linear",
+      "detector": {
+        "flagged": 87,
+        "true_unsupported": 82,
+        "true_positive": 82,
+        "false_positive": 5,
+        "recall": 1.0,
+        "precision": 0.9425287356321839,
+        "legitimate_fpr": 0.00254323499491353,
+        "rare_false_positive": 1,
+        "action_allowed": true,
+        "passes": false
+      },
+      "qualification": {
+        "exact": false,
+        "jitter": false
+      }
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/scaling-portability-20260929/geometry_a/frozen_network_results.json",
+      "feature_map": "frozen_initialization",
+      "family": "geometry",
+      "n": 2048,
+      "mechanism": "fold",
+      "detector": {
+        "flagged": 87,
+        "true_unsupported": 82,
+        "true_positive": 82,
+        "false_positive": 5,
+        "recall": 1.0,
+        "precision": 0.9425287356321839,
+        "legitimate_fpr": 0.00254323499491353,
+        "rare_false_positive": 1,
+        "action_allowed": true,
+        "passes": false
+      },
+      "qualification": {
+        "exact": false,
+        "jitter": false
+      }
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/scaling-portability-20260929/geometry_a/frozen_network_results.json",
+      "feature_map": "frozen_initialization",
+      "family": "geometry",
+      "n": 2048,
+      "mechanism": "fold_nuisance",
+      "detector": {
+        "flagged": 87,
+        "true_unsupported": 82,
+        "true_positive": 82,
+        "false_positive": 5,
+        "recall": 1.0,
+        "precision": 0.9425287356321839,
+        "legitimate_fpr": 0.00254323499491353,
+        "rare_false_positive": 1,
+        "action_allowed": true,
+        "passes": false
+      },
+      "qualification": {
+        "exact": false,
+        "jitter": false
+      }
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/scaling-portability-20260929/geometry_a/frozen_network_results.json",
+      "feature_map": "frozen_initialization",
+      "family": "geometry",
+      "n": 1024,
+      "mechanism": "fold_nuisance",
+      "detector": {
+        "flagged": 41,
+        "true_unsupported": 41,
+        "true_positive": 41,
+        "false_positive": 0,
+        "recall": 1.0,
+        "precision": 1.0,
+        "legitimate_fpr": 0.0,
+        "rare_false_positive": 0,
+        "action_allowed": true,
+        "passes": true
+      },
+      "qualification": {
+        "exact": false,
+        "jitter": false
+      }
+    },
+    {
+      "source": "/ml2/hypergan/gan-attempts/scaling-portability-20260929/geometry_a/frozen_network_results.json",
+      "feature_map": "frozen_initialization",
+      "family": "geometry",
+      "n": 4096,
+      "mechanism": "fold_nuisance",
+      "detector": {
+        "flagged": 174,
+        "true_unsupported": 164,
+        "true_positive": 164,
+        "false_positive": 10,
+        "recall": 1.0,
+        "precision": 0.9425287356321839,
+        "legitimate_fpr": 0.00254323499491353,
+        "rare_false_positive": 0,
+        "action_allowed": true,
+        "passes": false
+      },
+      "qualification": {
+        "exact": false,
+        "jitter": false
+      }
+    }
+  ],
+  "conclusion": "No universally passing E22 support fallback exists in these frozen efficacy gates."
+}

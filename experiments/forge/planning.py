@@ -11,7 +11,7 @@ from .sources import compute_profile, inspect_source, runtime_manifest, snapshot
 from .views import (load_tasks, load_view, task_evaluation_fingerprint,
                     task_execution_fingerprint, validate_view, view_fingerprint)
 
-FORMULATION_FIELDS = ("recipe_overrides", "prior", "extensions", "requires_capabilities",
+FORMULATION_FIELDS = ("recipe_preset", "recipe_overrides", "prior", "extensions", "requires_capabilities",
                       "api_changes", "implementation", "initializer", "claim_contract")
 
 
@@ -106,7 +106,8 @@ def resolve_idea(root: Path, idea_id: str, *, view_id: str | None = None,
         blockers.append("custom implementation loaders are unsupported; implement reusable changes in the public package and declare their Recipe/API bindings")
     from .api import CapabilityError, FormulationContext
     try:
-        context = FormulationContext(recipe_overrides=idea.get("recipe_overrides", {}), prior=prior,
+        context = FormulationContext(recipe_preset=idea.get("recipe_preset"),
+            recipe_overrides=idea.get("recipe_overrides", {}), prior=prior,
             seed=protocol["seed"], requires_capabilities=idea.get("requires_capabilities", []),
             extensions=idea.get("extensions", {}), initializer=idea.get("initializer", "deterministic_orthogonal"),
             execution_path=idea.get("execution_path", "public_trainer"))

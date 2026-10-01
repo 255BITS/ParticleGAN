@@ -1,0 +1,29 @@
+{
+  "status": "RUNNING",
+  "started_utc": "2026-09-30T21:17:02.348407+00:00",
+  "pid": 1953222,
+  "startticks": "170484250",
+  "command": [
+    "/tmp/pr38-default-env/bin/python",
+    "-u",
+    "-B",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-observe/run_observe.py"
+  ],
+  "log": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-observe/observe.log",
+  "source_freeze_sha256": "fead51eb3eea982610295a3b1f608d60eab1705856b2a192e792662d436c22ea",
+  "inputs_sha256": "9b8e8c9c266f59d9e39a86d8386a5d8b65b8f3a54eca0bd4ce2bce7172beb4e7",
+  "authorization": "Root explicitly authorized frozen RA12 Toy750->835 and MNIST100->215 observation-only replay",
+  "known_original_processes": {
+    "384331": [
+      "T",
+      "163720702"
+    ],
+    "383348": [
+      "S",
+      "163716372"
+    ]
+  },
+  "original_outer_slot_held": true,
+  "original_owned_numerical_processes_at_launch": [],
+  "signaled_processes": []
+}

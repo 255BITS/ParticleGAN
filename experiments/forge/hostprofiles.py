@@ -87,15 +87,15 @@ def _validate_task(task, candidate, root):
     # sampler. Other tasks must execute the resolved candidate prior literally.
     if prior.get("kind") != "particle_cloud" and canonical(prior) != canonical(candidate["prior"]):
         raise ValueError("task prior differs from the resolved candidate prior")
-    fixed = {**resources, "total_steps": execution.get("original_schedule_horizon", execution["steps"])}
-    overrides = candidate.get("recipe_overrides", {})
-    conflicts = [key for key, value in fixed.items() if key in overrides and overrides[key] != value]
-    if conflicts:
-        raise ValueError("candidate overrides frozen host resource " + ", ".join(sorted(conflicts)))
+    from .api import host_recipe_overrides, task_policy_blockers
+    blockers = task_policy_blockers(task, candidate)
+    if blockers:
+        raise ValueError("; ".join(blockers))
+    overrides = host_recipe_overrides(candidate, execution, resources)
     # Shared public validation without model construction or GPU allocation.
     # Native policy syntax/applicability was already resolved by its helper.
     from .api import FormulationContext
-    FormulationContext(recipe_overrides={**overrides, **fixed}, prior=prior,
+    FormulationContext(recipe_preset=candidate.get("recipe_preset"), recipe_overrides=overrides, prior=prior,
         device="cpu", requires_capabilities=tuple(candidate.get("requires_capabilities", ()))
             + tuple(task["requires_capabilities"]), extensions=candidate.get("extensions", {}),
         initializer=candidate.get("initializer", "deterministic_orthogonal"))
@@ -112,7 +112,8 @@ def _validate_candidate_identity(request):
     # Rebuild from declarations, not candidate-provided resolved_recipe echoes.
     # Recipe resolution has no model construction or training draw and does not
     # depend on promotion seed; the registered RNG protocol is checked separately.
-    context = FormulationContext(recipe_overrides=candidate.get("recipe_overrides", {}),
+    context = FormulationContext(recipe_preset=candidate.get("recipe_preset"),
+        recipe_overrides=candidate.get("recipe_overrides", {}),
         prior=candidate.get("prior"), device="cpu",
         requires_capabilities=candidate.get("requires_capabilities", ()),
         extensions=candidate.get("extensions", {}),

@@ -1,0 +1,6 @@
+{
+  "status": "FAIL",
+  "error": "AssertionError(['mean_has_authority_and_progress', 'exact_packet_inheritance', 'both_views_actual_inside_category_group_support_retained'])",
+  "traceback": "Traceback (most recent call last):\n  File \"/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/mean-category-production/run_mechanics.py\", line 371, in main\n    if not all(checks.values()): raise AssertionError([k for k,v in checks.items() if not v])\n                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: ['mean_has_authority_and_progress', 'exact_packet_inheritance', 'both_views_actual_inside_category_group_support_retained']\n",
+  "records": []
+}

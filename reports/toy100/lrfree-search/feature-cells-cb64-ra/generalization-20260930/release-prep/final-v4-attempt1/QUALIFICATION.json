@@ -1,0 +1,1516 @@
+{
+  "GPU_operations": 0,
+  "actual_quality_execution_labels": "15 RA14 executions plus4 fresh RA15 affected gates; none relabelled freshRA17",
+  "candidate": "RA17-current-pr155",
+  "created_utc": "2026-10-01T02:21:09.888113+00:00",
+  "current_source_bridge": {
+    "CPU_contracts_passed": 104,
+    "current_PR155_commit": "cabe2084284db923d525918cbf3e18de6f20faac",
+    "execution_bridge": {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra17/EXECUTION-BRIDGE.json",
+      "sha256": "25adbc5fb1b04c0e2c588af1e74e8af58c1cdfe86b13a762c58c70bc8104646d"
+    },
+    "finite_original_horizons_only": true,
+    "minimum_all_step_table_s_bound": 0.25,
+    "noise_floor_proof": {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/upstream-noise-floor-applicability/receipt.json",
+      "sha256": "8b2cd60a4cdb1b2f847d8d70d4651b0ae19161ebd6f0fbc92e8f048f17c29734"
+    },
+    "original_learned_prefixes": 2,
+    "original_quality_tasks": 19,
+    "source_bridge": {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/portability/ra17-current-pr155/SOURCE-BRIDGE.json",
+      "sha256": "bd692c3d83353cfdcd7fb6c7ef08c4efa9b5467b0cd5d2f7887bbdd728ed8d8f"
+    },
+    "universal_noise_floor_training_parity_claimed": false
+  },
+  "current_source_training_equivalence_scope": "Original19 gates and2 learned prefixes only; not a universal noise-floor parity claim",
+  "defects": [],
+  "evidence_validity": "VALID",
+  "exact_upstream_CI_CPU_smoke": {
+    "device": "cpu",
+    "exact_upstream_CI_arguments": true,
+    "finite_DV12_dictionaries": 2,
+    "probe_interval": 1000,
+    "quality_gate_or_timing_threshold_added": false,
+    "receipt": {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra17/CI-SMOKE.json",
+      "sha256": "101715aabf624a074486d4161586a60af255c56a49b8433b465bbb18f762e869"
+    },
+    "report": {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra17/ci-smoke-cpu.json",
+      "sha256": "db7d10eab588b35a32e37b263af4908aa78fe1b764e4c82af16368b389d4370a"
+    },
+    "status": "PASS",
+    "structural_evaluations": 0
+  },
+  "finalized_receipt_count": 19,
+  "finalizer_version": 4,
+  "full_suite": {
+    "actual_required_CUDA_nodes": [
+      {
+        "classname": "tests.test_e22_routed_validation",
+        "name": "test_71_site_mix_has_no_scalar_readbacks_and_finish_has_exactly_one",
+        "records": 1,
+        "status": "PASS"
+      },
+      {
+        "classname": "tests.test_e22_routed_readbacks",
+        "name": "test_cuda_scalar_reads_do_not_grow_with_routing_site_count",
+        "records": 1,
+        "status": "PASS"
+      },
+      {
+        "classname": "tests.test_e22_routed_readbacks",
+        "name": "test_71_site_lazy_and_eager_observation_match_gradients_resume_and_serving[cuda]",
+        "records": 1,
+        "status": "PASS"
+      },
+      {
+        "classname": "tests.test_feature_portability",
+        "name": "test_cuda_default_preserves_feature_reactions_and_checkpoint_replay",
+        "records": 1,
+        "status": "PASS"
+      }
+    ],
+    "counts": {
+      "errors": 0,
+      "failed": 0,
+      "passed": 1502,
+      "skipped": 12,
+      "subtests_passed": 18,
+      "xfailed": 0,
+      "xpassed": 0
+    },
+    "current_source": true,
+    "evidence_validity": "VALID",
+    "junit_sha256": "1353d326696a35dc0afd2578b7f3cc3a34d5e4b142e8a2677538615ca5c55cdb",
+    "log_sha256": "93451f58ec324d3ea4691c98e5af16518ffd402d0615f154da7a80a5997edb78",
+    "receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra17/FULL-TESTS.json",
+    "returncode": 0,
+    "skip_reasons": [
+      "SKIPPED [1] tests/test_gym_data.py:4: could not import 'gymnasium': No module named 'gymnasium'",
+      "SKIPPED [1] tests/test_gym_lander_live.py:13: could not import 'gymnasium': No module named 'gymnasium'",
+      "SKIPPED [1] tests/test_gym_probe.py:4: could not import 'gymnasium': No module named 'gymnasium'",
+      "SKIPPED [1] tests/test_lunar_flight.py:6: could not import 'gymnasium': No module named 'gymnasium'",
+      "SKIPPED [4] tests/test_cifar_resume.py:19: opt-in real-data CUDA integration test",
+      "SKIPPED [1] tests/test_image_ddgan.py:72: could not import 'torch_fidelity': No module named 'torch_fidelity'",
+      "SKIPPED [1] tests/test_particle_native_2d.py:29: platform-sensitive convergence gate; opt in with RUN_PARTICLE_NATIVE_RESEARCH_GATE=1",
+      "SKIPPED [1] tests/test_toy100_device.py:45: asserts CUDA is absent",
+      "SKIPPED [1] tests/test_toy100_device.py:55: asserts CUDA is absent"
+    ],
+    "status": "PASS",
+    "summary_line": "1502 passed, 12 skipped, 18 subtests passed in 403.52s (0:06:43)"
+  },
+  "gate_counts": {
+    "moving": {
+      "failed": 0,
+      "passed": 3,
+      "total": 3
+    },
+    "native": {
+      "failed": 0,
+      "passed": 3,
+      "total": 3
+    },
+    "portability": {
+      "failed": 0,
+      "passed": 13,
+      "total": 13
+    }
+  },
+  "gates": [
+    {
+      "current_source_math_bridge": "bd692c3d83353cfdcd7fb6c7ef08c4efa9b5467b0cd5d2f7887bbdd728ed8d8f",
+      "evidence_validity": "VALID",
+      "execution_candidate": "RA14-replay",
+      "final": {
+        "cover": 1.0,
+        "effective_modes": 7.494993209838867,
+        "hq": 0.976806640625,
+        "modes": 8,
+        "n_modes": 8,
+        "pass": true,
+        "seconds": 57.652,
+        "sharp_clean": 1.2606853246688843,
+        "sharp_noisy": 1.3520134687423706,
+        "step": 1200
+      },
+      "fresh_RA17_execution": false,
+      "fresh_latest_candidate_execution": false,
+      "kind": "portability",
+      "latest_source_equivalence": "Explicit zero-fire/KNN then defaultCPU/valid-checkpoint bridges",
+      "native": null,
+      "original_fresh_execution": true,
+      "qualified_current_source_candidate": "RA17-current-pr155",
+      "quality_status": "PASS",
+      "queue_kind": "screen",
+      "receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/mode_hold/acceptance-receipt.json",
+      "scoreboard": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/scoreboard-all.json",
+      "selected_backend": "knn",
+      "source_freeze_sha256": "b998f0760458bf1b39ec8a8ed6ff00af0b3eab2c95e299c3154391949351c0de",
+      "source_lane": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14",
+      "task": "mode_hold"
+    },
+    {
+      "current_source_math_bridge": "bd692c3d83353cfdcd7fb6c7ef08c4efa9b5467b0cd5d2f7887bbdd728ed8d8f",
+      "evidence_validity": "VALID",
+      "execution_candidate": "RA14-replay",
+      "final": {
+        "distribution_tv": 0.03125,
+        "hq": 1.0,
+        "mean_rmse": 0.031898438930511475,
+        "mode_fractions": [
+          0.46875,
+          0.53125
+        ],
+        "modes": 2,
+        "pass": true,
+        "quality_mode_fractions": [
+          0.46875,
+          0.53125
+        ],
+        "seconds": 26.545,
+        "sharp_rmse_clean": 0.009162217378616333,
+        "sharp_rmse_noisy": 0.03143363073468208,
+        "step": 600
+      },
+      "fresh_RA17_execution": false,
+      "fresh_latest_candidate_execution": false,
+      "kind": "portability",
+      "latest_source_equivalence": "Explicit zero-fire/KNN then defaultCPU/valid-checkpoint bridges",
+      "native": null,
+      "original_fresh_execution": true,
+      "qualified_current_source_candidate": "RA17-current-pr155",
+      "quality_status": "PASS",
+      "queue_kind": "screen",
+      "receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/img_intensity2/acceptance-receipt.json",
+      "scoreboard": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/scoreboard-all.json",
+      "selected_backend": "knn",
+      "source_freeze_sha256": "b998f0760458bf1b39ec8a8ed6ff00af0b3eab2c95e299c3154391949351c0de",
+      "source_lane": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14",
+      "task": "img_intensity2"
+    },
+    {
+      "current_source_math_bridge": "bd692c3d83353cfdcd7fb6c7ef08c4efa9b5467b0cd5d2f7887bbdd728ed8d8f",
+      "evidence_validity": "VALID",
+      "execution_candidate": "RA14-replay",
+      "final": {
+        "distribution_tv": 0.03125,
+        "hq": 1.0,
+        "mean_rmse": 0.032342731952667236,
+        "mode_fractions": [
+          0.25,
+          0.28125,
+          0.21875,
+          0.25
+        ],
+        "modes": 4,
+        "pass": true,
+        "quality_mode_fractions": [
+          0.25,
+          0.28125,
+          0.21875,
+          0.25
+        ],
+        "seconds": 25.192,
+        "sharp_rmse_clean": 0.0007570504676550627,
+        "sharp_rmse_noisy": 0.030378051102161407,
+        "step": 600
+      },
+      "fresh_RA17_execution": false,
+      "fresh_latest_candidate_execution": false,
+      "kind": "portability",
+      "latest_source_equivalence": "Explicit zero-fire/KNN then defaultCPU/valid-checkpoint bridges",
+      "native": null,
+      "original_fresh_execution": true,
+      "qualified_current_source_candidate": "RA17-current-pr155",
+      "quality_status": "PASS",
+      "queue_kind": "screen",
+      "receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/img_blobs4/acceptance-receipt.json",
+      "scoreboard": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/scoreboard-all.json",
+      "selected_backend": "knn",
+      "source_freeze_sha256": "b998f0760458bf1b39ec8a8ed6ff00af0b3eab2c95e299c3154391949351c0de",
+      "source_lane": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14",
+      "task": "img_blobs4"
+    },
+    {
+      "current_source_math_bridge": "bd692c3d83353cfdcd7fb6c7ef08c4efa9b5467b0cd5d2f7887bbdd728ed8d8f",
+      "evidence_validity": "VALID",
+      "execution_candidate": "RA14-replay",
+      "final": {
+        "distribution_tv": 0.0625,
+        "hq": 0.9375,
+        "mean_rmse": 0.036570727825164795,
+        "mode_fractions": [
+          0.3125,
+          0.25,
+          0.1875,
+          0.25
+        ],
+        "modes": 4,
+        "pass": true,
+        "quality_mode_fractions": [
+          0.25,
+          0.25,
+          0.1875,
+          0.25
+        ],
+        "seconds": 28.998,
+        "sharp_rmse_clean": 0.00031166852568276227,
+        "sharp_rmse_noisy": 0.030419325456023216,
+        "step": 600
+      },
+      "fresh_RA17_execution": false,
+      "fresh_latest_candidate_execution": false,
+      "kind": "portability",
+      "latest_source_equivalence": "Explicit zero-fire/KNN then defaultCPU/valid-checkpoint bridges",
+      "native": null,
+      "original_fresh_execution": true,
+      "qualified_current_source_candidate": "RA17-current-pr155",
+      "quality_status": "PASS",
+      "queue_kind": "screen",
+      "receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/img_bars4/acceptance-receipt.json",
+      "scoreboard": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/scoreboard-all.json",
+      "selected_backend": "knn",
+      "source_freeze_sha256": "b998f0760458bf1b39ec8a8ed6ff00af0b3eab2c95e299c3154391949351c0de",
+      "source_lane": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14",
+      "task": "img_bars4"
+    },
+    {
+      "current_source_math_bridge": "bd692c3d83353cfdcd7fb6c7ef08c4efa9b5467b0cd5d2f7887bbdd728ed8d8f",
+      "evidence_validity": "VALID",
+      "execution_candidate": "RA14-replay",
+      "final": {
+        "component_counts": [
+          2149,
+          1376,
+          522,
+          49
+        ],
+        "component_covariance_error": 0.5758006386458874,
+        "component_covariance_errors": [
+          0.09259645640850067,
+          0.24094142019748688,
+          0.18632207810878754,
+          1.7833425998687744
+        ],
+        "component_mass": [
+          0.524658203125,
+          0.3359375,
+          0.12744140625,
+          0.011962890625
+        ],
+        "component_min_eigen_ratio": 0.9824706315994263,
+        "covariance_error": 0.1194351464509964,
+        "hq": 0.965087890625,
+        "mass_tv": 0.03593749552965164,
+        "mean_error": 0.08278263360261917,
+        "min_mass_ratio": 0.59814453125,
+        "pass": true,
+        "sample_count": 4096,
+        "seconds": 66.155,
+        "step": 1200,
+        "sw1_normalized": 0.06416949939426786,
+        "target_mass": [
+          0.550000011920929,
+          0.30000001192092896,
+          0.12999999523162842,
+          0.019999999552965164
+        ],
+        "target_scale": 1.7948341369628906
+      },
+      "fresh_RA17_execution": false,
+      "fresh_latest_candidate_execution": false,
+      "kind": "portability",
+      "latest_source_equivalence": "Explicit zero-fire/KNN then defaultCPU/valid-checkpoint bridges",
+      "native": null,
+      "original_fresh_execution": true,
+      "qualified_current_source_candidate": "RA17-current-pr155",
+      "quality_status": "PASS",
+      "queue_kind": "screen",
+      "receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_unequal_mass/acceptance-receipt.json",
+      "scoreboard": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/scoreboard-all.json",
+      "selected_backend": "knn",
+      "source_freeze_sha256": "b998f0760458bf1b39ec8a8ed6ff00af0b3eab2c95e299c3154391949351c0de",
+      "source_lane": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14",
+      "task": "vector_unequal_mass"
+    },
+    {
+      "current_source_math_bridge": "bd692c3d83353cfdcd7fb6c7ef08c4efa9b5467b0cd5d2f7887bbdd728ed8d8f",
+      "evidence_validity": "VALID",
+      "execution_candidate": "RA14-replay",
+      "final": {
+        "distribution_tv": 0.0,
+        "hq": 1.0,
+        "mean_rmse": 0.03383317217230797,
+        "mode_fractions": [
+          0.5,
+          0.5
+        ],
+        "modes": 2,
+        "pass": true,
+        "quality_mode_fractions": [
+          0.5,
+          0.5
+        ],
+        "seconds": 26.304,
+        "sharp_rmse_clean": 0.009935623034834862,
+        "sharp_rmse_noisy": 0.03268525004386902,
+        "step": 600
+      },
+      "fresh_RA17_execution": false,
+      "fresh_latest_candidate_execution": false,
+      "kind": "portability",
+      "latest_source_equivalence": "Explicit zero-fire/KNN then defaultCPU/valid-checkpoint bridges",
+      "native": null,
+      "original_fresh_execution": true,
+      "qualified_current_source_candidate": "RA17-current-pr155",
+      "quality_status": "PASS",
+      "queue_kind": "screen",
+      "receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/img_stripes2/acceptance-receipt.json",
+      "scoreboard": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/scoreboard-all.json",
+      "selected_backend": "knn",
+      "source_freeze_sha256": "b998f0760458bf1b39ec8a8ed6ff00af0b3eab2c95e299c3154391949351c0de",
+      "source_lane": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14",
+      "task": "img_stripes2"
+    },
+    {
+      "current_source_math_bridge": "bd692c3d83353cfdcd7fb6c7ef08c4efa9b5467b0cd5d2f7887bbdd728ed8d8f",
+      "evidence_validity": "VALID",
+      "execution_candidate": "RA14-replay",
+      "final": {
+        "component_counts": [
+          2132,
+          1964
+        ],
+        "component_covariance_error": 0.04582448583096266,
+        "component_covariance_errors": [
+          0.029468761757016182,
+          0.062180209904909134
+        ],
+        "component_mass": [
+          0.5205078125,
+          0.4794921875
+        ],
+        "component_min_eigen_ratio": 0.9130980968475342,
+        "covariance_error": 0.014958265237510204,
+        "hq": 0.989501953125,
+        "mass_tv": 0.0205078125,
+        "mean_error": 0.0442313551902771,
+        "min_mass_ratio": 0.958984375,
+        "pass": true,
+        "sample_count": 4096,
+        "seconds": 47.281,
+        "step": 1200,
+        "sw1_normalized": 0.03474474542515049,
+        "target_mass": [
+          0.5,
+          0.5
+        ],
+        "target_scale": 1.0601637363433838
+      },
+      "fresh_RA17_execution": false,
+      "fresh_latest_candidate_execution": false,
+      "kind": "portability",
+      "latest_source_equivalence": "Explicit zero-fire/KNN then defaultCPU/valid-checkpoint bridges",
+      "native": null,
+      "original_fresh_execution": true,
+      "qualified_current_source_candidate": "RA17-current-pr155",
+      "quality_status": "PASS",
+      "queue_kind": "screen",
+      "receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_two_broad/acceptance-receipt.json",
+      "scoreboard": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/scoreboard-all.json",
+      "selected_backend": "knn",
+      "source_freeze_sha256": "b998f0760458bf1b39ec8a8ed6ff00af0b3eab2c95e299c3154391949351c0de",
+      "source_lane": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14",
+      "task": "vector_two_broad"
+    },
+    {
+      "current_source_math_bridge": "bd692c3d83353cfdcd7fb6c7ef08c4efa9b5467b0cd5d2f7887bbdd728ed8d8f",
+      "evidence_validity": "VALID",
+      "execution_candidate": "RA14-replay",
+      "final": {
+        "component_counts": [
+          1017,
+          1047,
+          1002,
+          1030
+        ],
+        "component_covariance_error": 0.2680711420252919,
+        "component_covariance_errors": [
+          0.25894054770469666,
+          0.3352530002593994,
+          0.41735488176345825,
+          0.06073613837361336
+        ],
+        "component_mass": [
+          0.248291015625,
+          0.255615234375,
+          0.24462890625,
+          0.25146484375
+        ],
+        "component_min_eigen_ratio": 0.4256795346736908,
+        "covariance_error": 0.025261344388127327,
+        "hq": 0.983154296875,
+        "mass_tv": 0.007080078125,
+        "mean_error": 0.024808622896671295,
+        "min_mass_ratio": 0.978515625,
+        "pass": true,
+        "sample_count": 4096,
+        "seconds": 67.404,
+        "step": 1200,
+        "sw1_normalized": 0.02183454354168964,
+        "target_mass": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "target_scale": 2.138371229171753
+      },
+      "fresh_RA17_execution": false,
+      "fresh_latest_candidate_execution": false,
+      "kind": "portability",
+      "latest_source_equivalence": "Explicit zero-fire/KNN then defaultCPU/valid-checkpoint bridges",
+      "native": null,
+      "original_fresh_execution": true,
+      "qualified_current_source_candidate": "RA17-current-pr155",
+      "quality_status": "PASS",
+      "queue_kind": "screen",
+      "receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_unequal_width/acceptance-receipt.json",
+      "scoreboard": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/scoreboard-all.json",
+      "selected_backend": "knn",
+      "source_freeze_sha256": "b998f0760458bf1b39ec8a8ed6ff00af0b3eab2c95e299c3154391949351c0de",
+      "source_lane": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14",
+      "task": "vector_unequal_width"
+    },
+    {
+      "current_source_math_bridge": "bd692c3d83353cfdcd7fb6c7ef08c4efa9b5467b0cd5d2f7887bbdd728ed8d8f",
+      "evidence_validity": "VALID",
+      "execution_candidate": "RA14-replay",
+      "final": {
+        "component_counts": [
+          1269,
+          1481,
+          1346
+        ],
+        "component_covariance_error": 0.09949495798597734,
+        "component_covariance_errors": [
+          0.015144900418817997,
+          0.23125939071178436,
+          0.052080582827329636
+        ],
+        "component_mass": [
+          0.309814453125,
+          0.361572265625,
+          0.32861328125
+        ],
+        "component_min_eigen_ratio": 0.6999159455299377,
+        "covariance_error": 0.027186516672372818,
+        "hq": 0.985107421875,
+        "mass_tv": 0.028238937258720398,
+        "mean_error": 0.02992950938642025,
+        "min_mass_ratio": 0.929443359375,
+        "pass": true,
+        "sample_count": 4096,
+        "seconds": 61.771,
+        "step": 1200,
+        "sw1_normalized": 0.02808553555065623,
+        "target_mass": [
+          0.3333333432674408,
+          0.3333333432674408,
+          0.3333333432674408
+        ],
+        "target_scale": 2.040409564971924
+      },
+      "fresh_RA17_execution": false,
+      "fresh_latest_candidate_execution": false,
+      "kind": "portability",
+      "latest_source_equivalence": "Explicit zero-fire/KNN then defaultCPU/valid-checkpoint bridges",
+      "native": null,
+      "original_fresh_execution": true,
+      "qualified_current_source_candidate": "RA17-current-pr155",
+      "quality_status": "PASS",
+      "queue_kind": "screen",
+      "receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_anisotropic/acceptance-receipt.json",
+      "scoreboard": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/scoreboard-all.json",
+      "selected_backend": "knn",
+      "source_freeze_sha256": "b998f0760458bf1b39ec8a8ed6ff00af0b3eab2c95e299c3154391949351c0de",
+      "source_lane": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14",
+      "task": "vector_anisotropic"
+    },
+    {
+      "current_source_math_bridge": "bd692c3d83353cfdcd7fb6c7ef08c4efa9b5467b0cd5d2f7887bbdd728ed8d8f",
+      "evidence_validity": "VALID",
+      "execution_candidate": "RA14-replay",
+      "final": {
+        "covariance_error": 0.07984843105077744,
+        "mean_error": 0.014165406115353107,
+        "pass": true,
+        "sample_count": 4096,
+        "seconds": 38.546,
+        "step": 1200,
+        "sw1_normalized": 0.02576811382492637,
+        "target_scale": 0.8509407043457031
+      },
+      "fresh_RA17_execution": false,
+      "fresh_latest_candidate_execution": false,
+      "kind": "portability",
+      "latest_source_equivalence": "Explicit zero-fire/KNN then defaultCPU/valid-checkpoint bridges",
+      "native": null,
+      "original_fresh_execution": true,
+      "qualified_current_source_candidate": "RA17-current-pr155",
+      "quality_status": "PASS",
+      "queue_kind": "screen",
+      "receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_overlap/acceptance-receipt.json",
+      "scoreboard": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/scoreboard-all.json",
+      "selected_backend": "knn",
+      "source_freeze_sha256": "b998f0760458bf1b39ec8a8ed6ff00af0b3eab2c95e299c3154391949351c0de",
+      "source_lane": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14",
+      "task": "vector_overlap"
+    },
+    {
+      "current_source_math_bridge": "bd692c3d83353cfdcd7fb6c7ef08c4efa9b5467b0cd5d2f7887bbdd728ed8d8f",
+      "evidence_validity": "VALID",
+      "execution_candidate": "RA14-replay",
+      "final": {
+        "covariance_error": 0.04437887668609619,
+        "mean_error": 0.027347680181264877,
+        "pass": true,
+        "sample_count": 4096,
+        "seconds": 54.778,
+        "step": 1600,
+        "sw1_normalized": 0.026478310166719695,
+        "target_scale": 1.240945816040039
+      },
+      "fresh_RA17_execution": false,
+      "fresh_latest_candidate_execution": false,
+      "kind": "portability",
+      "latest_source_equivalence": "Explicit zero-fire/KNN then defaultCPU/valid-checkpoint bridges",
+      "native": null,
+      "original_fresh_execution": true,
+      "qualified_current_source_candidate": "RA17-current-pr155",
+      "quality_status": "PASS",
+      "queue_kind": "screen",
+      "receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_spiral/acceptance-receipt.json",
+      "scoreboard": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/scoreboard-all.json",
+      "selected_backend": "knn",
+      "source_freeze_sha256": "b998f0760458bf1b39ec8a8ed6ff00af0b3eab2c95e299c3154391949351c0de",
+      "source_lane": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14",
+      "task": "vector_spiral"
+    },
+    {
+      "current_source_math_bridge": "bd692c3d83353cfdcd7fb6c7ef08c4efa9b5467b0cd5d2f7887bbdd728ed8d8f",
+      "evidence_validity": "VALID",
+      "execution_candidate": "RA14-replay",
+      "final": {
+        "cover": 1.0,
+        "effective_modes": 7.998276710510254,
+        "hq": 0.991943359375,
+        "modes": 8,
+        "n_modes": 8,
+        "pass": true,
+        "seconds": 1048.274,
+        "step": 7500
+      },
+      "fresh_RA17_execution": false,
+      "fresh_latest_candidate_execution": false,
+      "kind": "portability",
+      "latest_source_equivalence": "Explicit zero-fire/KNN then defaultCPU/valid-checkpoint bridges",
+      "native": null,
+      "original_fresh_execution": true,
+      "qualified_current_source_candidate": "RA17-current-pr155",
+      "quality_status": "PASS",
+      "queue_kind": "screen",
+      "receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/stationary/acceptance-receipt.json",
+      "scoreboard": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/scoreboard-all.json",
+      "selected_backend": "feature_cells",
+      "source_freeze_sha256": "b998f0760458bf1b39ec8a8ed6ff00af0b3eab2c95e299c3154391949351c0de",
+      "source_lane": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14",
+      "task": "stationary"
+    },
+    {
+      "current_source_math_bridge": "bd692c3d83353cfdcd7fb6c7ef08c4efa9b5467b0cd5d2f7887bbdd728ed8d8f",
+      "evidence_validity": "VALID",
+      "execution_candidate": "RA14-replay",
+      "final": {
+        "acc_abs_cov_trace_bias": 0.014538749700289122,
+        "acc_accuracy_pass": true,
+        "acc_accuracy_score": 0.46727010256809565,
+        "acc_center_rms_sigma": 0.16660712176422504,
+        "acc_cov_trace_bias": 0.014538749700289122,
+        "acc_frozen_pass": true,
+        "acc_mass_tv": 0.03280000000000001,
+        "acc_passed": true,
+        "acc_radial_ks": 0.01375962551126797,
+        "holdout_abs_cov_trace_bias": 0.012156725314119488,
+        "holdout_accuracy_pass": true,
+        "holdout_accuracy_score": 0.34655958134088716,
+        "holdout_center_rms_sigma": 0.13973261075607618,
+        "holdout_cov_trace_bias": 0.012156725314119488,
+        "holdout_frozen_pass": true,
+        "holdout_mass_tv": 0.019510000000000003,
+        "holdout_passed": true,
+        "holdout_precision": 0.98453,
+        "holdout_radial_ks": 0.009633654071012243,
+        "hq": 0.9825,
+        "mass_tv": 0.032799999999999996,
+        "max_cov_eig_ratio": 1.3475564418456727,
+        "max_mode_mass": 0.01155,
+        "max_radial_median_ratio": 1.1780665798263272,
+        "min_cov_eig_ratio": 0.6634834837761125,
+        "min_hq_mode_mass": 0.0084,
+        "min_radial_median_ratio": 0.8814416511708483,
+        "modes": 100,
+        "output_sigma": 0.028999999165534973,
+        "precision": 0.9825,
+        "sharp_clean": 0.29834476113319397,
+        "sharp_noisy": 1.1995784044265747,
+        "step": 7000
+      },
+      "fresh_RA17_execution": false,
+      "fresh_latest_candidate_execution": false,
+      "kind": "native",
+      "latest_source_equivalence": "Explicit zero-fire then defaultCPU/valid-checkpoint bridges",
+      "native": {
+        "accuracy_status": "PASS",
+        "coverage_final": {
+          "acc_abs_cov_trace_bias": 0.014538749700289122,
+          "acc_accuracy_pass": true,
+          "acc_accuracy_score": 0.46727010256809565,
+          "acc_center_rms_sigma": 0.16660712176422504,
+          "acc_cov_trace_bias": 0.014538749700289122,
+          "acc_frozen_pass": true,
+          "acc_mass_tv": 0.03280000000000001,
+          "acc_passed": true,
+          "acc_radial_ks": 0.01375962551126797,
+          "holdout_abs_cov_trace_bias": 0.012156725314119488,
+          "holdout_accuracy_pass": true,
+          "holdout_accuracy_score": 0.34655958134088716,
+          "holdout_center_rms_sigma": 0.13973261075607618,
+          "holdout_cov_trace_bias": 0.012156725314119488,
+          "holdout_frozen_pass": true,
+          "holdout_mass_tv": 0.019510000000000003,
+          "holdout_passed": true,
+          "holdout_precision": 0.98453,
+          "holdout_radial_ks": 0.009633654071012243,
+          "hq": 0.9825,
+          "mass_tv": 0.032799999999999996,
+          "max_cov_eig_ratio": 1.3475564418456727,
+          "max_mode_mass": 0.01155,
+          "max_radial_median_ratio": 1.1780665798263272,
+          "min_cov_eig_ratio": 0.6634834837761125,
+          "min_hq_mode_mass": 0.0084,
+          "min_radial_median_ratio": 0.8814416511708483,
+          "modes": 100,
+          "output_sigma": 0.028999999165534973,
+          "precision": 0.9825,
+          "sharp_clean": 0.29834476113319397,
+          "sharp_noisy": 1.1995784044265747,
+          "step": 7000
+        },
+        "coverage_status": "PASS",
+        "holdout": {
+          "abs_cov_trace_bias": 0.012156725314119488,
+          "accuracy_pass": true,
+          "center_rms_sigma": 0.13973261075607618,
+          "frozen_pass": true,
+          "mass_tv": 0.019510000000000003,
+          "n": 100000,
+          "passed": true,
+          "precision": 0.98453,
+          "radial_ks": 0.009633654071012243
+        },
+        "paired_clouds": "Original five20k terminal clouds + final20k + independent100k; shapes qualified by unchanged collector",
+        "terminal_checks": [
+          {
+            "metrics": {
+              "abs_cov_trace_bias": 0.020286077335551767,
+              "accuracy_pass": true,
+              "center_rms_sigma": 0.15942999612840997,
+              "frozen_pass": true,
+              "mass_tv": 0.033350000000000005,
+              "n": 20000,
+              "passed": true,
+              "precision": 0.984,
+              "radial_ks": 0.0137365997872122
+            },
+            "passed": true,
+            "step": 6000
+          },
+          {
+            "metrics": {
+              "abs_cov_trace_bias": 0.020367928598869378,
+              "accuracy_pass": true,
+              "center_rms_sigma": 0.16353114349610257,
+              "frozen_pass": true,
+              "mass_tv": 0.033350000000000005,
+              "n": 20000,
+              "passed": true,
+              "precision": 0.98255,
+              "radial_ks": 0.015768824119447022
+            },
+            "passed": true,
+            "step": 6250
+          },
+          {
+            "metrics": {
+              "abs_cov_trace_bias": 0.016642410619821746,
+              "accuracy_pass": true,
+              "center_rms_sigma": 0.16334958638842786,
+              "frozen_pass": true,
+              "mass_tv": 0.033350000000000005,
+              "n": 20000,
+              "passed": true,
+              "precision": 0.98225,
+              "radial_ks": 0.013177837472568399
+            },
+            "passed": true,
+            "step": 6500
+          },
+          {
+            "metrics": {
+              "abs_cov_trace_bias": 0.020743922125255443,
+              "accuracy_pass": true,
+              "center_rms_sigma": 0.1733646048214234,
+              "frozen_pass": true,
+              "mass_tv": 0.0335,
+              "n": 20000,
+              "passed": true,
+              "precision": 0.9824,
+              "radial_ks": 0.015158844669902694
+            },
+            "passed": true,
+            "step": 6750
+          },
+          {
+            "metrics": {
+              "abs_cov_trace_bias": 0.014538749700289122,
+              "accuracy_pass": true,
+              "center_rms_sigma": 0.16660712176422504,
+              "frozen_pass": true,
+              "mass_tv": 0.03280000000000001,
+              "n": 20000,
+              "passed": true,
+              "precision": 0.9825,
+              "radial_ks": 0.01375962551126797
+            },
+            "passed": true,
+            "step": 7000
+          }
+        ]
+      },
+      "original_fresh_execution": true,
+      "qualified_current_source_candidate": "RA17-current-pr155",
+      "quality_status": "PASS",
+      "queue_kind": "screen",
+      "receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2/runs/grid100/acceptance-receipt.json",
+      "scoreboard": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2/scoreboard-native.json",
+      "selected_backend": "feature_cells",
+      "source_freeze_sha256": "871322377b4f7330087760298dac5b1869f5bec01ae01d93ee8b3c6956760a5f",
+      "source_lane": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2",
+      "task": "grid100"
+    },
+    {
+      "current_source_math_bridge": "bd692c3d83353cfdcd7fb6c7ef08c4efa9b5467b0cd5d2f7887bbdd728ed8d8f",
+      "evidence_validity": "VALID",
+      "execution_candidate": "RA14-replay",
+      "final": {
+        "acc_abs_cov_trace_bias": 0.017777074394604186,
+        "acc_accuracy_pass": true,
+        "acc_accuracy_score": 0.4288592283949333,
+        "acc_center_rms_sigma": 0.1364375762756252,
+        "acc_cov_trace_bias": 0.017777074394604186,
+        "acc_frozen_pass": true,
+        "acc_mass_tv": 0.030449999999999998,
+        "acc_passed": true,
+        "acc_radial_ks": 0.013919131530222617,
+        "holdout_abs_cov_trace_bias": 0.006633538810075557,
+        "holdout_accuracy_pass": true,
+        "holdout_accuracy_score": 0.26187963059897773,
+        "holdout_center_rms_sigma": 0.11644842800795982,
+        "holdout_cov_trace_bias": 0.006633538810075557,
+        "holdout_frozen_pass": true,
+        "holdout_mass_tv": 0.014029999999999997,
+        "holdout_passed": true,
+        "holdout_precision": 0.98462,
+        "holdout_radial_ks": 0.0066043064368809246,
+        "hq": 0.98535,
+        "mass_tv": 0.030450000000000005,
+        "max_cov_eig_ratio": 1.3948209113094188,
+        "max_mode_mass": 0.01195,
+        "max_radial_median_ratio": 1.1508061909538145,
+        "min_cov_eig_ratio": 0.69270186331834,
+        "min_hq_mode_mass": 0.0083,
+        "min_radial_median_ratio": 0.8851457552813397,
+        "modes": 100,
+        "output_sigma": 0.028999999165534973,
+        "precision": 0.98535,
+        "sharp_clean": 0.2781251072883606,
+        "sharp_noisy": 1.1951535940170288,
+        "step": 7000
+      },
+      "fresh_RA17_execution": false,
+      "fresh_latest_candidate_execution": false,
+      "kind": "native",
+      "latest_source_equivalence": "Explicit zero-fire then defaultCPU/valid-checkpoint bridges",
+      "native": {
+        "accuracy_status": "PASS",
+        "coverage_final": {
+          "acc_abs_cov_trace_bias": 0.017777074394604186,
+          "acc_accuracy_pass": true,
+          "acc_accuracy_score": 0.4288592283949333,
+          "acc_center_rms_sigma": 0.1364375762756252,
+          "acc_cov_trace_bias": 0.017777074394604186,
+          "acc_frozen_pass": true,
+          "acc_mass_tv": 0.030449999999999998,
+          "acc_passed": true,
+          "acc_radial_ks": 0.013919131530222617,
+          "holdout_abs_cov_trace_bias": 0.006633538810075557,
+          "holdout_accuracy_pass": true,
+          "holdout_accuracy_score": 0.26187963059897773,
+          "holdout_center_rms_sigma": 0.11644842800795982,
+          "holdout_cov_trace_bias": 0.006633538810075557,
+          "holdout_frozen_pass": true,
+          "holdout_mass_tv": 0.014029999999999997,
+          "holdout_passed": true,
+          "holdout_precision": 0.98462,
+          "holdout_radial_ks": 0.0066043064368809246,
+          "hq": 0.98535,
+          "mass_tv": 0.030450000000000005,
+          "max_cov_eig_ratio": 1.3948209113094188,
+          "max_mode_mass": 0.01195,
+          "max_radial_median_ratio": 1.1508061909538145,
+          "min_cov_eig_ratio": 0.69270186331834,
+          "min_hq_mode_mass": 0.0083,
+          "min_radial_median_ratio": 0.8851457552813397,
+          "modes": 100,
+          "output_sigma": 0.028999999165534973,
+          "precision": 0.98535,
+          "sharp_clean": 0.2781251072883606,
+          "sharp_noisy": 1.1951535940170288,
+          "step": 7000
+        },
+        "coverage_status": "PASS",
+        "holdout": {
+          "abs_cov_trace_bias": 0.006633538810075557,
+          "accuracy_pass": true,
+          "center_rms_sigma": 0.11644842800795982,
+          "frozen_pass": true,
+          "mass_tv": 0.014029999999999997,
+          "n": 100000,
+          "passed": true,
+          "precision": 0.98462,
+          "radial_ks": 0.0066043064368809246
+        },
+        "paired_clouds": "Original five20k terminal clouds + final20k + independent100k; shapes qualified by unchanged collector",
+        "terminal_checks": [
+          {
+            "metrics": {
+              "abs_cov_trace_bias": 0.013655686655786203,
+              "accuracy_pass": true,
+              "center_rms_sigma": 0.12296672028515564,
+              "frozen_pass": true,
+              "mass_tv": 0.03189999999999999,
+              "n": 20000,
+              "passed": true,
+              "precision": 0.98695,
+              "radial_ks": 0.010102303534271662
+            },
+            "passed": true,
+            "step": 6000
+          },
+          {
+            "metrics": {
+              "abs_cov_trace_bias": 0.018938503730609346,
+              "accuracy_pass": true,
+              "center_rms_sigma": 0.1280875380541503,
+              "frozen_pass": true,
+              "mass_tv": 0.031099999999999996,
+              "n": 20000,
+              "passed": true,
+              "precision": 0.9874,
+              "radial_ks": 0.01218688215378938
+            },
+            "passed": true,
+            "step": 6250
+          },
+          {
+            "metrics": {
+              "abs_cov_trace_bias": 0.01906384695504637,
+              "accuracy_pass": true,
+              "center_rms_sigma": 0.14285840897459395,
+              "frozen_pass": true,
+              "mass_tv": 0.0306,
+              "n": 20000,
+              "passed": true,
+              "precision": 0.9865,
+              "radial_ks": 0.013396587078247757
+            },
+            "passed": true,
+            "step": 6500
+          },
+          {
+            "metrics": {
+              "abs_cov_trace_bias": 0.021830433788105008,
+              "accuracy_pass": true,
+              "center_rms_sigma": 0.13608617286921781,
+              "frozen_pass": true,
+              "mass_tv": 0.0306,
+              "n": 20000,
+              "passed": true,
+              "precision": 0.9847,
+              "radial_ks": 0.01460870236118983
+            },
+            "passed": true,
+            "step": 6750
+          },
+          {
+            "metrics": {
+              "abs_cov_trace_bias": 0.017777074394604186,
+              "accuracy_pass": true,
+              "center_rms_sigma": 0.1364375762756252,
+              "frozen_pass": true,
+              "mass_tv": 0.030449999999999998,
+              "n": 20000,
+              "passed": true,
+              "precision": 0.9854,
+              "radial_ks": 0.013919131530222617
+            },
+            "passed": true,
+            "step": 7000
+          }
+        ]
+      },
+      "original_fresh_execution": true,
+      "qualified_current_source_candidate": "RA17-current-pr155",
+      "quality_status": "PASS",
+      "queue_kind": "screen",
+      "receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2/runs/rotated100/acceptance-receipt.json",
+      "scoreboard": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2/scoreboard-native.json",
+      "selected_backend": "feature_cells",
+      "source_freeze_sha256": "871322377b4f7330087760298dac5b1869f5bec01ae01d93ee8b3c6956760a5f",
+      "source_lane": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2",
+      "task": "rotated100"
+    },
+    {
+      "current_source_math_bridge": "bd692c3d83353cfdcd7fb6c7ef08c4efa9b5467b0cd5d2f7887bbdd728ed8d8f",
+      "evidence_validity": "VALID",
+      "execution_candidate": "RA14-replay",
+      "final": {
+        "acc_abs_cov_trace_bias": 0.003013395044575873,
+        "acc_accuracy_pass": true,
+        "acc_accuracy_score": 0.33241022167893947,
+        "acc_center_rms_sigma": 0.13574737701973882,
+        "acc_cov_trace_bias": -0.003013395044575873,
+        "acc_frozen_pass": true,
+        "acc_mass_tv": 0.029099999999999997,
+        "acc_passed": true,
+        "acc_radial_ks": 0.005430802046852201,
+        "holdout_abs_cov_trace_bias": 0.013583609196344826,
+        "holdout_accuracy_pass": true,
+        "holdout_accuracy_score": 0.2709135386538677,
+        "holdout_center_rms_sigma": 0.11397180765418091,
+        "holdout_cov_trace_bias": -0.013583609196344826,
+        "holdout_frozen_pass": true,
+        "holdout_mass_tv": 0.015850000000000003,
+        "holdout_passed": true,
+        "holdout_precision": 0.98659,
+        "holdout_radial_ks": 0.004551694308578047,
+        "hq": 0.9863,
+        "mass_tv": 0.0291,
+        "max_cov_eig_ratio": 1.309702555511581,
+        "max_mode_mass": 0.0122,
+        "max_radial_median_ratio": 1.165496004207532,
+        "min_cov_eig_ratio": 0.6405448350673867,
+        "min_hq_mode_mass": 0.0082,
+        "min_radial_median_ratio": 0.8673405272585325,
+        "modes": 100,
+        "output_sigma": 0.028999999165534973,
+        "precision": 0.9863,
+        "sharp_clean": 0.21592609584331512,
+        "sharp_noisy": 1.1808825731277466,
+        "step": 7000
+      },
+      "fresh_RA17_execution": false,
+      "fresh_latest_candidate_execution": false,
+      "kind": "native",
+      "latest_source_equivalence": "Explicit zero-fire then defaultCPU/valid-checkpoint bridges",
+      "native": {
+        "accuracy_status": "PASS",
+        "coverage_final": {
+          "acc_abs_cov_trace_bias": 0.003013395044575873,
+          "acc_accuracy_pass": true,
+          "acc_accuracy_score": 0.33241022167893947,
+          "acc_center_rms_sigma": 0.13574737701973882,
+          "acc_cov_trace_bias": -0.003013395044575873,
+          "acc_frozen_pass": true,
+          "acc_mass_tv": 0.029099999999999997,
+          "acc_passed": true,
+          "acc_radial_ks": 0.005430802046852201,
+          "holdout_abs_cov_trace_bias": 0.013583609196344826,
+          "holdout_accuracy_pass": true,
+          "holdout_accuracy_score": 0.2709135386538677,
+          "holdout_center_rms_sigma": 0.11397180765418091,
+          "holdout_cov_trace_bias": -0.013583609196344826,
+          "holdout_frozen_pass": true,
+          "holdout_mass_tv": 0.015850000000000003,
+          "holdout_passed": true,
+          "holdout_precision": 0.98659,
+          "holdout_radial_ks": 0.004551694308578047,
+          "hq": 0.9863,
+          "mass_tv": 0.0291,
+          "max_cov_eig_ratio": 1.309702555511581,
+          "max_mode_mass": 0.0122,
+          "max_radial_median_ratio": 1.165496004207532,
+          "min_cov_eig_ratio": 0.6405448350673867,
+          "min_hq_mode_mass": 0.0082,
+          "min_radial_median_ratio": 0.8673405272585325,
+          "modes": 100,
+          "output_sigma": 0.028999999165534973,
+          "precision": 0.9863,
+          "sharp_clean": 0.21592609584331512,
+          "sharp_noisy": 1.1808825731277466,
+          "step": 7000
+        },
+        "coverage_status": "PASS",
+        "holdout": {
+          "abs_cov_trace_bias": 0.013583609196344826,
+          "accuracy_pass": true,
+          "center_rms_sigma": 0.11397180765418091,
+          "frozen_pass": true,
+          "mass_tv": 0.015850000000000003,
+          "n": 100000,
+          "passed": true,
+          "precision": 0.98659,
+          "radial_ks": 0.004551694308578047
+        },
+        "paired_clouds": "Original five20k terminal clouds + final20k + independent100k; shapes qualified by unchanged collector",
+        "terminal_checks": [
+          {
+            "metrics": {
+              "abs_cov_trace_bias": 0.005800317572324354,
+              "accuracy_pass": true,
+              "center_rms_sigma": 0.14064659287257308,
+              "frozen_pass": true,
+              "mass_tv": 0.0297,
+              "n": 20000,
+              "passed": true,
+              "precision": 0.98475,
+              "radial_ks": 0.0063510195005216374
+            },
+            "passed": true,
+            "step": 6000
+          },
+          {
+            "metrics": {
+              "abs_cov_trace_bias": 0.003821248727405746,
+              "accuracy_pass": true,
+              "center_rms_sigma": 0.1283157155902482,
+              "frozen_pass": true,
+              "mass_tv": 0.0297,
+              "n": 20000,
+              "passed": true,
+              "precision": 0.9841,
+              "radial_ks": 0.006113996507375652
+            },
+            "passed": true,
+            "step": 6250
+          },
+          {
+            "metrics": {
+              "abs_cov_trace_bias": 0.0022736006951313836,
+              "accuracy_pass": true,
+              "center_rms_sigma": 0.12705786036697572,
+              "frozen_pass": true,
+              "mass_tv": 0.029249999999999995,
+              "n": 20000,
+              "passed": true,
+              "precision": 0.9858,
+              "radial_ks": 0.005231347781138651
+            },
+            "passed": true,
+            "step": 6500
+          },
+          {
+            "metrics": {
+              "abs_cov_trace_bias": 0.0028026074678463297,
+              "accuracy_pass": true,
+              "center_rms_sigma": 0.13548131925847373,
+              "frozen_pass": true,
+              "mass_tv": 0.02915,
+              "n": 20000,
+              "passed": true,
+              "precision": 0.9853,
+              "radial_ks": 0.005658636531089001
+            },
+            "passed": true,
+            "step": 6750
+          },
+          {
+            "metrics": {
+              "abs_cov_trace_bias": 0.003013395044575873,
+              "accuracy_pass": true,
+              "center_rms_sigma": 0.13574737701973882,
+              "frozen_pass": true,
+              "mass_tv": 0.029099999999999997,
+              "n": 20000,
+              "passed": true,
+              "precision": 0.9863,
+              "radial_ks": 0.005430802046852201
+            },
+            "passed": true,
+            "step": 7000
+          }
+        ]
+      },
+      "original_fresh_execution": true,
+      "qualified_current_source_candidate": "RA17-current-pr155",
+      "quality_status": "PASS",
+      "queue_kind": "screen",
+      "receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2/runs/staggered100/acceptance-receipt.json",
+      "scoreboard": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2/scoreboard-native.json",
+      "selected_backend": "feature_cells",
+      "source_freeze_sha256": "871322377b4f7330087760298dac5b1869f5bec01ae01d93ee8b3c6956760a5f",
+      "source_lane": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2",
+      "task": "staggered100"
+    },
+    {
+      "baseline": {
+        "hq": 0.9464,
+        "modes": 100,
+        "period_end": 500,
+        "target_deg": 0,
+        "task": "grid100"
+      },
+      "current_source_math_bridge": "bd692c3d83353cfdcd7fb6c7ef08c4efa9b5467b0cd5d2f7887bbdd728ed8d8f",
+      "evidence_validity": "VALID",
+      "execution_candidate": "RA15-partial-recovery",
+      "fresh_RA17_execution": false,
+      "fresh_latest_candidate_execution": false,
+      "kind": "moving",
+      "latest_source_equivalence": "Explicit RA15\u2192latest defaultCPU/valid-checkpoint bridge",
+      "original_fresh_execution": true,
+      "postturn": [
+        {
+          "hq": 0.9379,
+          "modes": 100,
+          "passed": true,
+          "period_end": 1000,
+          "required_hq": 0.8517600000000001,
+          "target_deg": 30
+        },
+        {
+          "hq": 0.962,
+          "modes": 100,
+          "passed": true,
+          "period_end": 1500,
+          "required_hq": 0.8517600000000001,
+          "target_deg": 60
+        }
+      ],
+      "qualified_current_source_candidate": "RA17-current-pr155",
+      "quality_status": "PASS",
+      "queue_kind": "moving",
+      "receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15/moving/grid100/COMPLETION.json",
+      "source_freeze_sha256": "78a8aaadaf97b58c7489e64632485ff66ebc3037a87a4e0ab8cd84dec19b2b4d",
+      "source_lane": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15",
+      "task": "grid100"
+    },
+    {
+      "baseline": {
+        "hq": 0.9609,
+        "modes": 100,
+        "period_end": 500,
+        "target_deg": 0,
+        "task": "rotated100"
+      },
+      "current_source_math_bridge": "bd692c3d83353cfdcd7fb6c7ef08c4efa9b5467b0cd5d2f7887bbdd728ed8d8f",
+      "evidence_validity": "VALID",
+      "execution_candidate": "RA15-partial-recovery",
+      "fresh_RA17_execution": false,
+      "fresh_latest_candidate_execution": false,
+      "kind": "moving",
+      "latest_source_equivalence": "Explicit RA15\u2192latest defaultCPU/valid-checkpoint bridge",
+      "original_fresh_execution": true,
+      "postturn": [
+        {
+          "hq": 0.9609,
+          "modes": 100,
+          "passed": true,
+          "period_end": 1000,
+          "required_hq": 0.86481,
+          "target_deg": 30
+        },
+        {
+          "hq": 0.9259,
+          "modes": 98,
+          "passed": true,
+          "period_end": 1500,
+          "required_hq": 0.86481,
+          "target_deg": 60
+        }
+      ],
+      "qualified_current_source_candidate": "RA17-current-pr155",
+      "quality_status": "PASS",
+      "queue_kind": "moving",
+      "receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15/moving/rotated100/COMPLETION.json",
+      "source_freeze_sha256": "78a8aaadaf97b58c7489e64632485ff66ebc3037a87a4e0ab8cd84dec19b2b4d",
+      "source_lane": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15",
+      "task": "rotated100"
+    },
+    {
+      "baseline": {
+        "hq": 0.9548,
+        "modes": 100,
+        "period_end": 500,
+        "target_deg": 0,
+        "task": "staggered100"
+      },
+      "current_source_math_bridge": "bd692c3d83353cfdcd7fb6c7ef08c4efa9b5467b0cd5d2f7887bbdd728ed8d8f",
+      "evidence_validity": "VALID",
+      "execution_candidate": "RA15-partial-recovery",
+      "fresh_RA17_execution": false,
+      "fresh_latest_candidate_execution": false,
+      "kind": "moving",
+      "latest_source_equivalence": "Explicit RA15\u2192latest defaultCPU/valid-checkpoint bridge",
+      "original_fresh_execution": true,
+      "postturn": [
+        {
+          "hq": 0.934,
+          "modes": 100,
+          "passed": true,
+          "period_end": 1000,
+          "required_hq": 0.85932,
+          "target_deg": 30
+        },
+        {
+          "hq": 0.9476,
+          "modes": 100,
+          "passed": true,
+          "period_end": 1500,
+          "required_hq": 0.85932,
+          "target_deg": 60
+        }
+      ],
+      "qualified_current_source_candidate": "RA17-current-pr155",
+      "quality_status": "PASS",
+      "queue_kind": "moving",
+      "receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15/moving/staggered100/COMPLETION.json",
+      "source_freeze_sha256": "78a8aaadaf97b58c7489e64632485ff66ebc3037a87a4e0ab8cd84dec19b2b4d",
+      "source_lane": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15",
+      "task": "staggered100"
+    },
+    {
+      "current_source_math_bridge": "bd692c3d83353cfdcd7fb6c7ef08c4efa9b5467b0cd5d2f7887bbdd728ed8d8f",
+      "evidence_validity": "VALID",
+      "execution_candidate": "RA15-partial-recovery",
+      "final": {
+        "cover": 1.0,
+        "effective_modes": 7.995912075042725,
+        "hq": 0.9951171875,
+        "modes": 8,
+        "n_modes": 8,
+        "pass": true,
+        "seconds": 640.628,
+        "step": 4600
+      },
+      "fresh_RA17_execution": false,
+      "fresh_latest_candidate_execution": false,
+      "kind": "portability",
+      "latest_source_equivalence": "Explicit RA15\u2192latest defaultCPU/valid-checkpoint bridge",
+      "native": null,
+      "original_fresh_execution": true,
+      "qualified_current_source_candidate": "RA17-current-pr155",
+      "quality_status": "PASS",
+      "queue_kind": "screen",
+      "receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15/runs/ring_shift/acceptance-receipt.json",
+      "selected_backend": "feature_cells",
+      "source_freeze_sha256": "78a8aaadaf97b58c7489e64632485ff66ebc3037a87a4e0ab8cd84dec19b2b4d",
+      "source_lane": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15",
+      "task": "ring_shift"
+    }
+  ],
+  "historical_RA16_qualification": {
+    "closed": {
+      "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/final-v3-r3-attempt1/FROZEN.json",
+      "sha256": "f0162f0c75fe12e277add7ccda0684781cdcc606ff3a50de603d382e881113a1"
+    },
+    "lane": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/final-v3-r3-attempt1"
+  },
+  "learned": {
+    "candidate": "RA14-replay restoration-only bridge",
+    "current_candidate": "RA17-current-pr155",
+    "current_source_scope": "Original finite-prefix source equivalence and actual current native/CPU-map CUDA40 continuation",
+    "fresh_current_learned_training_updates": 0,
+    "fresh_ra14_training_updates": 0,
+    "fresh_updates_per_fixture": 2000,
+    "inherited_final_metrics": {
+      "mnist": {
+        "active_embedding": {
+          "embedding_frechet": 0.5444880363760234,
+          "embedding_precision": 0.869140625,
+          "embedding_recall": 0.84716796875
+        },
+        "class_mass_tv": 0.03639648437499999,
+        "confident_class_coverage": 10,
+        "confident_class_mass": [
+          0.082275390625,
+          0.09033203125,
+          0.064453125,
+          0.065185546875,
+          0.079345703125,
+          0.066162109375,
+          0.074462890625,
+          0.070556640625,
+          0.05908203125,
+          0.07568359375
+        ],
+        "confident_fraction": 0.7275390625,
+        "mean_classifier_confidence": 0.9037254452705383,
+        "pixel_clipping_fraction": 0.40906819701194763,
+        "predicted_class_mass": [
+          0.096923828125,
+          0.099853515625,
+          0.0869140625,
+          0.1015625,
+          0.109130859375,
+          0.08984375,
+          0.09814453125,
+          0.097412109375,
+          0.102783203125,
+          0.117431640625
+        ],
+        "raw_embedding": {
+          "embedding_frechet": 6.852170897247333,
+          "embedding_precision": 0.8798828125,
+          "embedding_recall": 0.85546875
+        }
+      },
+      "toy": {
+        "centre_distance": 0.042550504207611084,
+        "clean_particle_centres": {
+          "centre_distance": 0.02287120744585991,
+          "coverage": 25,
+          "covered_centroid_rms": 0.010440723970532417,
+          "mass_tv": 0.0366796875,
+          "precision": 0.9990234375,
+          "supported_mass": [
+            0.037109375,
+            0.041015625,
+            0.03515625,
+            0.0341796875,
+            0.0390625,
+            0.03515625,
+            0.041015625,
+            0.04296875,
+            0.0361328125,
+            0.041015625,
+            0.0400390625,
+            0.0390625,
+            0.037109375,
+            0.048828125,
+            0.0380859375,
+            0.0361328125,
+            0.041015625,
+            0.044921875,
+            0.041015625,
+            0.0361328125,
+            0.041015625,
+            0.0458984375,
+            0.04296875,
+            0.04296875,
+            0.041015625
+          ],
+          "unsupported_mass": 0.0009765625
+        },
+        "coverage": 25,
+        "covered_centroid_rms": 0.009175768122076988,
+        "mass_tv": 0.05211425781250001,
+        "precision": 0.96533203125,
+        "supported_mass": [
+          0.03515625,
+          0.037353515625,
+          0.0341796875,
+          0.0357666015625,
+          0.03857421875,
+          0.03271484375,
+          0.04248046875,
+          0.0391845703125,
+          0.036865234375,
+          0.0382080078125,
+          0.0399169921875,
+          0.0384521484375,
+          0.0350341796875,
+          0.0455322265625,
+          0.0390625,
+          0.033203125,
+          0.03857421875,
+          0.0421142578125,
+          0.037841796875,
+          0.03955078125,
+          0.03857421875,
+          0.045166015625,
+          0.0413818359375,
+          0.040771484375,
+          0.0396728515625
+        ],
+        "unsupported_mass": 0.03466796875
+      }
+    },
+    "latest_replay": {
+      "candidate": "RA17-current-pr155",
+      "closed_sha256": "f44bdf7eefda2c485b6dc59984e6f7f69ed0afe416f869a15e5f155cfe209b7e",
+      "fixtures": {
+        "mnist": "PASS",
+        "toy": "PASS"
+      },
+      "fresh_replay_updates_total": 40,
+      "fresh_training_updates": 0,
+      "original_fresh_learned_training_source": "RA13-settled",
+      "original_updates_per_fixture": 2000,
+      "receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra17-replay/CLOSED.json",
+      "status": "PASS"
+    },
+    "mnist_comparison": "All10 metric/LR records match corrected E22",
+    "mnist_original_gate": null,
+    "origin": "RA13-settled fresh training",
+    "original_fresh_training_source": "RA13-settled",
+    "replay": {
+      "mnist": "PASS",
+      "toy": "PASS"
+    },
+    "replay_semantic_exclusion": "birth_death.last.eval_seconds only",
+    "toy_original_gate": "PASS"
+  },
+  "model_calls": 0,
+  "overall_qualification": "PASS",
+  "pending": [],
+  "qualification_base": {
+    "candidate_draft_PR": 223,
+    "current_PR155_commit": "cabe2084284db923d525918cbf3e18de6f20faac",
+    "current_source_qualification_requires_actual_latest_gates": true,
+    "historical_RA16_source_commit": "b25de08cfbeef9fe8aa06522324e132c3e71ae0f",
+    "merged_repository_head_at_source_freeze": "dd58d843ea44eff7411bfb7dda8e75ca1cca33eb",
+    "original_reference_commit": "f459cb6d6aaaabeb1af076ec53ad7a963618de90"
+  },
+  "quality_qualification": "PASS",
+  "repository_mutations": 0,
+  "required_gate_count": 19,
+  "retained_failures": [
+    "RA12 static false fires and learned regressions",
+    "RA13 strict learned native/CPU-map replay FAIL",
+    "RA14 first zero-update bridge normalization failure",
+    "RA14 original ALL moving diagnostic ERROR after500 and zero-update native import ERROR",
+    "RA14 original moving rotated100 qualityFAIL at1500",
+    "First RA15 paired window NaN comparison ERROR before updates",
+    "Separate moving-r2 prepared lane and RA15 learned replay prepared but never launched",
+    "RA15 full suite cancelled before execution",
+    "RA15 CPU factory meta mismatch and malformed shape restored before reaction error",
+    "All source preparation failures retained without quality inference"
+  ],
+  "scorer_calls": 0,
+  "status": "COMPLETE",
+  "tensor_loads": 0
+}

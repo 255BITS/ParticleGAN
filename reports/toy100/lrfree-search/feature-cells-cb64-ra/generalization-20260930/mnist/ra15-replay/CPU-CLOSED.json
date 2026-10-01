@@ -1,0 +1,113 @@
+{
+  "CPU_rng_unchanged": true,
+  "begin_step_calls": 0,
+  "checkpoint_loads": 2,
+  "cuda_context_initialized": false,
+  "fixtures": {
+    "mnist": {
+      "R1_fires": 0,
+      "checkpoint_sha256": "e19d6b656d18c62d73b19d5454ef059054ce3f086cd90cb9bb983488b3069491",
+      "completed_steps": 1000,
+      "data_position": 256000,
+      "endpoint_source": "RA13-settled",
+      "rng_buffers": {
+        "birth_death.stream": {
+          "device": "cpu",
+          "dtype": "torch.uint8",
+          "numel": 16
+        },
+        "cpu_rng": {
+          "device": "cpu",
+          "dtype": "torch.uint8",
+          "numel": 5056
+        },
+        "cuda_rng": {
+          "device": "cpu",
+          "dtype": "torch.uint8",
+          "numel": 16
+        },
+        "streams.eval_generator": {
+          "device": "cpu",
+          "dtype": "torch.uint8",
+          "numel": 16
+        },
+        "streams.latent_generator": {
+          "device": "cpu",
+          "dtype": "torch.uint8",
+          "numel": 16
+        },
+        "streams.noise_generator": {
+          "device": "cpu",
+          "dtype": "torch.uint8",
+          "numel": 16
+        },
+        "streams.penalty_generator": {
+          "device": "cpu",
+          "dtype": "torch.uint8",
+          "numel": 16
+        }
+      },
+      "selected_backend": "knn",
+      "source_recipe_schema_matches": true,
+      "status": "PASS",
+      "table_lastblock_blocks_alias_identical": true
+    },
+    "toy": {
+      "R1_fires": 0,
+      "checkpoint_sha256": "4388d45f7e157cca89a3b1b035757c6b1264ae11e86e217208b6b62a9a1db884",
+      "completed_steps": 1000,
+      "data_position": 256000,
+      "endpoint_source": "RA13-settled",
+      "rng_buffers": {
+        "birth_death.stream": {
+          "device": "cpu",
+          "dtype": "torch.uint8",
+          "numel": 16
+        },
+        "cpu_rng": {
+          "device": "cpu",
+          "dtype": "torch.uint8",
+          "numel": 5056
+        },
+        "cuda_rng": {
+          "device": "cpu",
+          "dtype": "torch.uint8",
+          "numel": 16
+        },
+        "streams.eval_generator": {
+          "device": "cpu",
+          "dtype": "torch.uint8",
+          "numel": 16
+        },
+        "streams.latent_generator": {
+          "device": "cpu",
+          "dtype": "torch.uint8",
+          "numel": 16
+        },
+        "streams.noise_generator": {
+          "device": "cpu",
+          "dtype": "torch.uint8",
+          "numel": 16
+        },
+        "streams.penalty_generator": {
+          "device": "cpu",
+          "dtype": "torch.uint8",
+          "numel": 16
+        }
+      },
+      "selected_backend": "feature_cells",
+      "source_recipe_schema_matches": true,
+      "status": "PASS",
+      "table_lastblock_blocks_alias_identical": true
+    }
+  },
+  "inputs_sha256": "8f8191e6762acc0e33eafc6a69491d0606bc7ece6975a374cce7b54861540b79",
+  "limitations": [
+    "No model construction or live CUDA restoration occurred; original40update CUDA replay remains required."
+  ],
+  "model_calls": 0,
+  "sampling_calls": 0,
+  "source_freeze_sha256": "e5ee545f262eb95457b9103fb4950e880e55d766536914736ad36fb3ba658d92",
+  "status": "PASS_SAVED_CHECKPOINT_SOURCE_ALIAS_PREFLIGHT",
+  "training_updates": 0
+}

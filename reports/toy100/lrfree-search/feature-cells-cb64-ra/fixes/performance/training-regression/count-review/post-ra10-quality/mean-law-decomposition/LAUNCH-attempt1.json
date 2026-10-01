@@ -1,0 +1,28 @@
+{
+  "status": "AUTHORIZED_ONE_INVOCATION",
+  "utc": "2026-09-30T14:33:51.112888+00:00",
+  "pid": 1131552,
+  "startticks": 168065126,
+  "command": [
+    "/tmp/pr38-default-env/bin/python",
+    "-B",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra10-quality/mean-law-decomposition/run_decomposition.py",
+    "--source-sha256",
+    "0f40cfdf8d89919cf557ac4efd45f18d43717238d3f45ee132bd50c38b7ea6b1",
+    "--output",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra10-quality/mean-law-decomposition/attempt1"
+  ],
+  "log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra10-quality/mean-law-decomposition/numerical-attempt1.log",
+  "source_seal_sha256": "0f40cfdf8d89919cf557ac4efd45f18d43717238d3f45ee132bd50c38b7ea6b1",
+  "authorization": "root explicit GO after owner/count guards and scoped commit9c4d8405",
+  "CPU_only": true,
+  "environment": {
+    "CUDA_VISIBLE_DEVICES": "",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "OMP_NUM_THREADS": "2",
+    "MKL_NUM_THREADS": "2",
+    "OPENBLAS_NUM_THREADS": "2",
+    "NUMEXPR_NUM_THREADS": "2"
+  },
+  "thread_note": "environment capped2; immutable reviewed helper sets Torch threads1"
+}

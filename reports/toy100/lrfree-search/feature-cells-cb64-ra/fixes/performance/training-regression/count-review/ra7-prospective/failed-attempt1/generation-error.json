@@ -1,0 +1,35 @@
+{
+  "status": "FAILED_PRIVATE_GENERATION",
+  "error": "AssertionError at temporary generator line29; production and old checkers unchanged",
+  "scope": "source construction guard, no watcher/model/numerical run",
+  "anchor_counts": [
+    {
+      "anchor": "    ready = read(READY)\n",
+      "count": 1
+    },
+    {
+      "anchor": "    assert ready['backend_schema']==6 and ready['trainer_schema']==5\n",
+      "count": 1
+    },
+    {
+      "anchor": "    assert cfg['recipe']['serve_average']==4 and cfg['recipe']['z_dim']==128 and cfg['recipe']['num_particles']==1024\n",
+      "count": 1
+    },
+    {
+      "anchor": "            population_state_load_exact=True,old_law_atomic_rejections=rejected,\n",
+      "count": 1
+    },
+    {
+      "anchor": "        birth_counters=bd['counters'],last_phase=phase,\n",
+      "count": 1
+    },
+    {
+      "anchor": "        metrics=record['metrics'],quality_verdict=None if step<2000 else\n            ('PASS' if record['metrics']['precision']>=.9 and record['metrics']['coverage']==25 and record['metrics']['mass_tv']<=.1 else 'FAIL'),\n",
+      "count": 1
+    },
+    {
+      "anchor": "            population_trace=[dict(step=r['step'],population=r.get('population'),serving=r.get('serving'),\n",
+      "count": 0
+    }
+  ]
+}

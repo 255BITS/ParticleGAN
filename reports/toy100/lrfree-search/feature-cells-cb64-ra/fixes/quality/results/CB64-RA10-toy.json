@@ -1,0 +1,19 @@
+{
+  "status": "VALID_TOY_PASS_GRID_PENDING",
+  "variant": "CB64-RA10",
+  "device": "cuda:0",
+  "steps": 2000,
+  "toy_quality_gate": "PASS",
+  "precision": 0.96533203125,
+  "coverage": 25,
+  "mass_tv": 0.05211425781250001,
+  "minimum_supported_mass": 0.03271484375,
+  "artifact_audit": "VALID",
+  "checkpoints_audited": 10,
+  "source_integrity": "VALID",
+  "result_sha256": "01f5b0d4c2c3583054bde3c56de84022adc9805bc1a54598129f9757d6f03df5",
+  "audit_receipt_sha256": "81132d840d0f6c7d716155dfa85a63f260ed4aac2537d983f543095bb34509a2",
+  "audit_frozen_sha256": "abe3d47b65fcdb1bfa24791de2acdc8e743d86d6afbe1626b4e8d11b6eb2db9d",
+  "scope": "Original final noisy emitted toy25 gate; no earlier checkpoint selection; grid pending",
+  "recorded_UTC": "2026-09-30T13:08:18.496815+00:00"
+}

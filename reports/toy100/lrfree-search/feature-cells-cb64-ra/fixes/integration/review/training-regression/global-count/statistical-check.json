@@ -1,0 +1,81 @@
+{
+  "status": "PASS",
+  "checks": [
+    "exact_overlapping_K_plus_2K_plus_global2_common_family_null",
+    "frozen_3K_geometry_score_boundary_rng_and_no_odd_fake_leakage",
+    "empty_tied_minimum_degenerate_bins_retained",
+    "global_checkpoint_distinct_from_frozen_3K",
+    "mass_local_support_and_isolation_method_bodies_unchanged"
+  ],
+  "exact_null_cases": [
+    {
+      "real_rows": 8,
+      "fake_rows": 8,
+      "pooled_support": [
+        4,
+        4,
+        8,
+        0
+      ],
+      "original_cells": 2,
+      "refined_categories": 4,
+      "global_categories": 2,
+      "actual_hypotheses": 8,
+      "cutoff": 0.00625,
+      "allocations": 25,
+      "family_probability_exact": "1/6435",
+      "family_probability": 0.0001554001554001554,
+      "max_pvalue_error": 2.7755575615628914e-15
+    },
+    {
+      "real_rows": 8,
+      "fake_rows": 8,
+      "pooled_support": [
+        6,
+        6,
+        4,
+        0
+      ],
+      "original_cells": 2,
+      "refined_categories": 4,
+      "global_categories": 2,
+      "actual_hypotheses": 8,
+      "cutoff": 0.00625,
+      "allocations": 29,
+      "family_probability_exact": "0",
+      "family_probability": 0.0,
+      "max_pvalue_error": 2.3314683517128287e-15
+    },
+    {
+      "real_rows": 8,
+      "fake_rows": 12,
+      "pooled_support": [
+        4,
+        6,
+        10,
+        0
+      ],
+      "original_cells": 2,
+      "refined_categories": 4,
+      "global_categories": 2,
+      "actual_hypotheses": 8,
+      "cutoff": 0.00625,
+      "allocations": 32,
+      "family_probability_exact": "35/25194",
+      "family_probability": 0.0013892196554735254,
+      "max_pvalue_error": 2.886579864025407e-15
+    }
+  ],
+  "source_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/global-count/statistical_check.py": "6c1347ad0e6e7b7a07bbf94db002617c480cec22517b2b6805d2289c693e7594",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/global-count/pkg-global-count/particlegan/feature_cells.py": "1d3c90aa3b72d086df0defcc8c356e48778310f005473e8c5c271afa44f89d76",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/global-count/inputs.pt": "3e8deeb2fe534d28cf3731a4694c0543e280d2de270e0d9644731d9ec40057f2",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/joint-count/pkg-joint-count/particlegan/feature_cells.py": "ada7f24862d915d1d7f768270d46a6c15701cfe949b23f4b9782fb74f9cade9f",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/joint-count/READY.json": "7e23b8828a19ceb83973e52c0fceb08725a058d237756e1e5790b9bd6ae82f3c"
+  },
+  "sources_unchanged": true,
+  "cuda_initialized": false,
+  "new_seeds": 0,
+  "optimizer_updates": 0,
+  "scope": "CPU finite conditional family, boundary and checkpoint contracts; no quality verdict"
+}

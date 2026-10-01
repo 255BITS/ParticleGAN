@@ -1,0 +1,15 @@
+{
+  "gpu_execution_started": false,
+  "local_source_sha256": {
+    "PROTOCOL.md": "33b0b035b222c05f8c97d803b28eab370dc2dd11384f0c930b5cc5b0dc7c2ff4",
+    "adapter.py": "f96f4c86c04df329a84c6d5d07b9d2b4073cb027b245669c9f817b59ec8f4cd2",
+    "common.py": "4e437277bec7ddf78212d0c726ec67c881c743490b380368ba854e65f3d36ae7",
+    "contracts.py": "b45f44e5ab38e8bccd9b3240628a5e5b1038a673aef9baae55bc94e5ba13f87a",
+    "launch_training.py": "8aa28ddecd28d7f2634e6606ca93639a596ec0dbc512a5e76bca4631b380f70c",
+    "preflight_cpu.py": "db8078beef62c779c365d735f6dd51f541530a2a0e2608d95537f88c46b0708a",
+    "prepare.py": "aab110f5ca7a81f235a25abf7af7cf9e0a2f228cde2c1108b3ce6a801d557f6b",
+    "run_training.py": "ac3292c5795dd14cb143ca6988146e213ac4ec934234b4bb17cc744d3802fe76",
+    "source-transform-receipt.json": "acf1230994f85e2fce647f2be905a1ef8f9e17dce8769949aa52b246b8ecb1a8"
+  },
+  "upstream_base_commit": "cabe2084284db923d525918cbf3e18de6f20faac"
+}

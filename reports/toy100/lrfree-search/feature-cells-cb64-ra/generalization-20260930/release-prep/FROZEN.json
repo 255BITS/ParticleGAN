@@ -1,0 +1,21 @@
+{
+  "archive_copies": 0,
+  "artifact_inventory_bytes": 18112706,
+  "artifact_inventory_files": 510,
+  "closed_utc": "2026-09-30T22:47:10.628437+00:00",
+  "cuda_operations": 0,
+  "file_sha256": {
+    "CONSISTENCY-RECEIPT.json": "4902f8882e4d2a564f70656670bb14ca243f6ce7fe6abcc5d8462cb80f8416da",
+    "INVENTORY.json": "484bb263f164473054c05d15ac5f428d5b47cda635700b17ed352f0f97087177",
+    "QUEUE-SNAPSHOT.json": "bc13a17a30b75942f62b116c37f55d37d9293b0410eb6b7a494c26b2e689b760",
+    "REPORT-DRAFT.md": "a00a5c3a25811a567dd45b63ea9b8fe0712c5c29d42c10cfc576f5a6f8a71bf0",
+    "build_inventory.py": "e74ec051723345b46b998d582029608c29a4cdbd3f92c98a97eb24bf47378ddc"
+  },
+  "final_19_gates": "PENDING",
+  "final_ra14_full_suite": "PENDING",
+  "model_calls": 0,
+  "queue_snapshot_completed": 11,
+  "repository_edits": 0,
+  "status": "FROZEN_ARCHIVE_PLAN_FINAL_VALIDATION_PENDING",
+  "tensor_reads": 0
+}

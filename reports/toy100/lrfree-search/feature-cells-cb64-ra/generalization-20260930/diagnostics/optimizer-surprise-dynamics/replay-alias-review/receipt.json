@@ -1,0 +1,92 @@
+{
+  "base_package_sha256": "c5923f22ceec88292788a0150007ad23d5a5146d2ad9f8ca60e6cafd93770c30",
+  "candidate_package_sha256": "cfd04148d34257e90a4ba734515167c38937870f98e571541cc36f7f7e536bc6",
+  "checkpoint_only_callsites": [
+    {
+      "file": "policy.py",
+      "line": 95,
+      "owner": "_state_to_device"
+    },
+    {
+      "file": "policy.py",
+      "line": 97,
+      "owner": "_state_to_device"
+    },
+    {
+      "file": "policy.py",
+      "line": 99,
+      "owner": "_state_to_device"
+    },
+    {
+      "file": "policy.py",
+      "line": 1270,
+      "owner": "UpdatePolicy._check_state"
+    },
+    {
+      "file": "policy.py",
+      "line": 1274,
+      "owner": "UpdatePolicy._check_state"
+    },
+    {
+      "file": "policy.py",
+      "line": 1320,
+      "owner": "UpdatePolicy.load_state_dict"
+    },
+    {
+      "file": "policy.py",
+      "line": 1322,
+      "owner": "UpdatePolicy.load_state_dict"
+    },
+    {
+      "file": "training.py",
+      "line": 478,
+      "owner": "GANTrainer._load_state_dict"
+    },
+    {
+      "file": "training.py",
+      "line": 484,
+      "owner": "GANTrainer._load_state_dict"
+    },
+    {
+      "file": "training.py",
+      "line": 491,
+      "owner": "GANTrainer._load_state_dict"
+    },
+    {
+      "file": "training.py",
+      "line": 527,
+      "owner": "GANTrainer._load_state_dict"
+    },
+    {
+      "file": "training.py",
+      "line": 529,
+      "owner": "GANTrainer._load_state_dict"
+    },
+    {
+      "file": "training.py",
+      "line": 536,
+      "owner": "GANTrainer._load_state_dict"
+    }
+  ],
+  "config_byte_identical": true,
+  "dtype": "only device is passed to original Tensor.to; shape/dtype/bits policy unchanged",
+  "existing_cpu_evidence": "4 allocation/alias/rebase controls within58 PASS; reviewed, not repeated",
+  "fresh_quality_carry_forward": "valid with explicit RA13 result/source/input provenance and this RA14 restore-only bridge; no relabeling",
+  "historical_full_suite": "RA13 only:1404 PASS/12skip/18subtests; not relabeled as RA14 suite",
+  "limitations": [
+    "no reconstruction of distinct Tensor view/storage aliases or shared Python containers",
+    "no healing of previously saved alias-broken endpoints",
+    "no arbitrary cyclic/custom state-tree claim"
+  ],
+  "no_torch_pt_model_forward_draw_update_scoring_cuda": true,
+  "only_changed_definition": "_state_to_device",
+  "original_replay_failures": "remain FAIL; corrected native/CPU-map CUDA replays pending",
+  "ownership": "one transfer-local memo keyed by original Tensor object identity; distinct owners not coalesced",
+  "package_files": 28,
+  "remaining_source_blockers": [],
+  "schema_and_state_fields_unchanged": true,
+  "scope": "independent restoration-only source bridge; no PT/model/numerical execution",
+  "status": "PASS",
+  "unchanged_modules": 27,
+  "whole_policy_byte_and_ast_inverse_exact": true
+}

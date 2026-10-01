@@ -1,0 +1,28 @@
+{
+  "status": "SOURCE_FROZEN_WAITING_FOR_CPU_AND_ROOT_GPU_AUTHORIZATION",
+  "shared_config_source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/configs/RA14-replay.json",
+  "candidate_review_receipt": {
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/RA14-SOURCE-REVIEW.json",
+    "sha256": "80831db925dfe48d3a6bc15074067718a7f08d00dfe20a1a3346911587571d96"
+  },
+  "current_public_init": true,
+  "model_init_hashes_required_exact": true,
+  "no_synthetic_updates_or_begin_step": true,
+  "scorer_ast_and_original_gate_unchanged": true,
+  "estimated_train_wall_seconds": {
+    "replay": 35
+  },
+  "fresh_training_planned": false,
+  "estimate_scope": "Original RA13 replay took33.97s; RA14 continuation remains unmeasured",
+  "proposed_commands": {
+    "replay": [
+      "/tmp/pr38-default-env/bin/python",
+      "-u",
+      "-B",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay-r2/launch_first.py",
+      "--problem",
+      "replay"
+    ]
+  },
+  "cuda_launches": 0
+}

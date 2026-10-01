@@ -1,0 +1,81 @@
+{
+  "status": "READY",
+  "ready_at": "2026-09-29T22:58:33.416937+00:00",
+  "numerical_execution_started": false,
+  "source_freeze_sha256": "3b7e9726021596afc39400325ef38a54ae83282fed4ba1d7a4f289077c238653",
+  "preparation_receipt_sha256": "03215461dd2ebb250ed19df9f627a942b1f3d99d7f6b92a2477ff424347ab311",
+  "local_source_sha256": {
+    "common.py": "6484c3191e326e63930603e905e53e9f32e3609e6296a54d9807a67e0e6b0000",
+    "run_training.py": "b526570f54f7b0549cb14240807d92390b10ff6fa90e509ca898eb1da93de133",
+    "replay.py": "6b7ac41dab7a52ead34870917235d64c85824bd561dd44cb97b7602468cb2a0d",
+    "prepare.py": "6ac5460972da4e4caa3dab6c587b249f0823c2aab0cc386b5c7444dc9387fabc",
+    "summarize.py": "f7d1e7d42fba29407cda8e889d6bcedbf7e60043478660f765b18b227d436982",
+    "PROTOCOL.md": "22292c5c59c369d2344a8afaa3e101b5ad3a3d3cc9586d230b416f21f74714a9",
+    "COMMANDS.md": "088c54b58c8ba9135de7d464ccaad75b250eae691036180538f73956a9467103",
+    "INPUTS.json": "121e6c9957242ba33a3a7af030a8e91bcdaf44ab2027d4df7a83ac4bc0a2c437"
+  },
+  "planned_serial_commands": [
+    [
+      "/tmp/pr38-default-env/bin/python",
+      "-B",
+      "-u",
+      "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/learned/run_training.py",
+      "--problem",
+      "toy",
+      "--variant",
+      "E22"
+    ],
+    [
+      "/tmp/pr38-default-env/bin/python",
+      "-B",
+      "-u",
+      "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/learned/run_training.py",
+      "--problem",
+      "toy",
+      "--variant",
+      "CB64-RA"
+    ],
+    [
+      "/tmp/pr38-default-env/bin/python",
+      "-B",
+      "-u",
+      "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/learned/run_training.py",
+      "--problem",
+      "mnist",
+      "--variant",
+      "E22"
+    ],
+    [
+      "/tmp/pr38-default-env/bin/python",
+      "-B",
+      "-u",
+      "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/learned/run_training.py",
+      "--problem",
+      "mnist",
+      "--variant",
+      "CB64-RA"
+    ],
+    [
+      "/tmp/pr38-default-env/bin/python",
+      "-B",
+      "-u",
+      "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/learned/replay.py",
+      "E22"
+    ],
+    [
+      "/tmp/pr38-default-env/bin/python",
+      "-B",
+      "-u",
+      "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/learned/replay.py",
+      "CB64-RA"
+    ],
+    [
+      "/tmp/pr38-default-env/bin/python",
+      "-B",
+      "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/learned/summarize.py"
+    ]
+  ],
+  "physical_gpu": 0,
+  "cuda_memory_fraction": 0.2,
+  "cpu_threads": 2
+}

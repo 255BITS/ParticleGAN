@@ -1,0 +1,30 @@
+{
+  "budgets_changed": false,
+  "config_sha256": "a3ee5c67ac6594014feeb1ec333131abb4b1d86832510b69923100ebd8510ad4",
+  "focused_repository_tests": {
+    "cuda_visible_devices": "0",
+    "passed": 54,
+    "seconds": 12.36
+  },
+  "independent_default_r1_tests": {
+    "passed": 4
+  },
+  "moving_observation_sha256": "72557765a534fb177b36bd0c33b5be5f7b93bd2a77c5cc8efc07f8ab09f54d48",
+  "package_equals_repository": true,
+  "package_sha256": "9630687b21dcdc72cb63a65dcae58470d47a81307bc06000534df02e11d17c4c",
+  "quality_pending": [
+    "Toy25",
+    "MNIST E22 parity",
+    "13 portability",
+    "3 static native",
+    "3 moving native",
+    "exact CUDA replay",
+    "full pytest"
+  ],
+  "scalar_receipt_sha256": "215633e12e8451082777c6e6da3430e72214959a1d41e8a36e1fbc0f6fa09910",
+  "scorers_changed": false,
+  "source_closure_sha256": "100d607781db8dacb9561ec13f4aed182a0dfa8f9647216e3560551df64115ea",
+  "static_observation_sha256": "39f50d2f54e04c06ad0bcd441b6057295bc90a2944fb5c051d45c8baf087716c",
+  "status": "SOURCE_AND_DIAGNOSTICS_PASS_QUALITY_PENDING",
+  "thresholds_changed": false
+}

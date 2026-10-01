@@ -1,0 +1,20 @@
+{
+  "command": [
+    "/tmp/pr38-default-env/bin/python",
+    "-u",
+    "-B",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra11/launch.py",
+    "--through",
+    "2"
+  ],
+  "started_utc": "2026-09-30T16:33:48.445632+00:00",
+  "finished_utc": "2026-09-30T16:56:58.995998+00:00",
+  "returncode": 0,
+  "original_outer_pid": 383348,
+  "original_outer_startticks": "163716372",
+  "original_supervisor_pid": 384331,
+  "original_supervisor_startticks": "163720702",
+  "original_supervisor_still_parked": true,
+  "owned_numerical_parallelism": 1,
+  "prior_active_child_untouched": true
+}

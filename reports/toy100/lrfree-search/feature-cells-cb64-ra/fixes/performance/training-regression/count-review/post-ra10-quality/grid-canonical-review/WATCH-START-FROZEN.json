@@ -1,0 +1,24 @@
+{
+  "status": "PASS",
+  "scope": "EXACT_OWNED_CPU_WATCHER_START_PROVENANCE",
+  "utc": "2026-09-30T13:11:39.025597+00:00",
+  "source_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra10-quality/grid-canonical-review/WATCH-START.json": "10f98283c95e7f4f33805965f054c9340f4c99370c60c6f399100e2685ceaf13",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra10-quality/grid-canonical-review/ROOT-GRID-LAUNCH-BINDING.json": "e5d3dd952e2a600d3fb2532dd6ad97ebd6f8b66d617e8bae05f998d6032251a0",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra10-quality/grid-canonical-review/PREPARATION-FINAL-FROZEN.json": "c04c6794135b8bd617ee26e2d80d33aadb92de78aa1d6d6d5e56846b25a84db0",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra10-quality/grid-canonical-review/HELPERS-FROZEN.json": "5fbe891c73e6045544970469db271a4f25f1af5c251badebca39e0e95726399d"
+  },
+  "pid": 1043028,
+  "startticks": 167560886,
+  "command": [
+    "/tmp/pr38-default-env/bin/python",
+    "-B",
+    "performance/training-regression/count-review/post-ra10-quality/grid-canonical-review/audit_grid.py",
+    "--watch"
+  ],
+  "CPU_hidden_CUDA": true,
+  "all_thread_children": {
+    "/proc/1043028/task/1043028/children": []
+  },
+  "no_numerical_jobs_or_signals": true
+}

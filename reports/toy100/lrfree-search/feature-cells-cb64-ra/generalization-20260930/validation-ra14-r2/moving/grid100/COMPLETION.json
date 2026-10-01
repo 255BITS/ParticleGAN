@@ -1,0 +1,82 @@
+{
+  "adapted_runner_sha256": "4d94459b25892cd37427ee940e3ad863f3676b8e1b5d6cd5748525bfaf3a33db",
+  "command": [
+    "/tmp/pr38-default-env/bin/python",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2/run_moving.py",
+    "--task",
+    "grid100"
+  ],
+  "completed": 1790813045.7320473,
+  "numerical_started": 1790812862.6432095,
+  "original_runner_sha256": "8057a8d4298d251edabcaeaaf02ef5b83834bdb56c296d2681c70aec6f277ed1",
+  "peak_allocated_gpu_mib": 183.13232421875,
+  "peak_reserved_gpu_mib": 222.0,
+  "protocol": {
+    "degrees": 30,
+    "draw": 20000,
+    "seed": 1234,
+    "steps": 1500,
+    "turn_every": 500,
+    "turns": 2
+  },
+  "quality_status": "PASS",
+  "resources": {
+    "device": "cuda:0",
+    "gpu_name": "NVIDIA RTX A6000",
+    "gpu_uuid": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+    "memory_fraction": 0.2,
+    "physical_gpu": 0,
+    "total_gpu_bytes": 50896764928
+  },
+  "schedule_changed": false,
+  "scorer_changed": false,
+  "source_integrity_after": {
+    "config_sha256": "a3ee5c67ac6594014feeb1ec333131abb4b1d86832510b69923100ebd8510ad4",
+    "files": 104,
+    "package_sha256": "68f5706590683a44348cb04b3798917411bfaa54e5d45b17d57c345a4da33c15",
+    "source_freeze_sha256": "871322377b4f7330087760298dac5b1869f5bec01ae01d93ee8b3c6956760a5f",
+    "status": "VALID"
+  },
+  "source_integrity_before": {
+    "config_sha256": "a3ee5c67ac6594014feeb1ec333131abb4b1d86832510b69923100ebd8510ad4",
+    "files": 104,
+    "package_sha256": "68f5706590683a44348cb04b3798917411bfaa54e5d45b17d57c345a4da33c15",
+    "source_freeze_sha256": "871322377b4f7330087760298dac5b1869f5bec01ae01d93ee8b3c6956760a5f",
+    "status": "VALID"
+  },
+  "start": 1790812861.6310005,
+  "status": "COMPLETE",
+  "task": "grid100",
+  "thresholds_changed": false,
+  "verdict": {
+    "passed_periods": 2,
+    "periods": [
+      {
+        "hq": 0.9464,
+        "modes": 100,
+        "period_end": 500,
+        "target_deg": 0,
+        "task": "grid100"
+      },
+      {
+        "hq": 0.9416,
+        "modes": 100,
+        "period_end": 1000,
+        "target_deg": 30,
+        "task": "grid100"
+      },
+      {
+        "hq": 0.9624,
+        "modes": 100,
+        "period_end": 1500,
+        "target_deg": 60,
+        "task": "grid100"
+      }
+    ],
+    "pre_turn_hq": 0.9464,
+    "rule": "after each turn: modes >= 95 and hq >= .9 x pre-turn hq",
+    "status": "PASS",
+    "task": "grid100",
+    "turns": 2
+  }
+}

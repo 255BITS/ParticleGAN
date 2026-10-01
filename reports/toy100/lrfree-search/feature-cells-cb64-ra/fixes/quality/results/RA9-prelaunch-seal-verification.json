@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "utc": "2026-09-30T09:15:32.700610+00:00",
+  "checked_maps": 503,
+  "authoritative_proofs": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra9/independent-source/receipt.json": "03345995160f38137cd1a02305d948ff232a8a3e5714dc2ea655531696bf02e6",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra9/independent-source/FROZEN.json": "56bfa56d877c604dd46700148f1fc0d5cf016c3df56f066b3fb554d7a2f21936",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra9/integration-contract/receipt.json": "434fb0e41d7f56b8a2da7145a22e8e0ba4c1e6a9df2caf9fe3a500d3e5e4cf0a",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra9/integration-contract/FROZEN.json": "3f13e4ae5ae66f250618c6a2e541cf4fb168ba59de46d6f34d536e258c1a1fdf"
+  },
+  "quality_verdict": null
+}

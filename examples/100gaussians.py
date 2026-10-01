@@ -11,8 +11,8 @@ This is deliberately nastier than the 25-Gaussian grid:
   - D: simple MLP with Fourier input features, x -> scalar score.
   - Loss: R3GAN-style objective — relativistic pairing (RpGAN) logistic loss
     plus the recipe's critic penalty (``recipe.make_critic_penalty``, currently
-    K3P: RMS R1 plus a fake-side cap, handing over to one-sided caps with an
-    EMA-critic anchor as the critic LR falls).
+    KA2: RMS R1 plus a fake-side cap, then an even blend with one-sided caps and
+    an EMA-critic anchor gated by the critic's Adam statistics).
 
 The recipe defaults (``particlegan.get_recipe()``) are the one supported
 configuration; this example only exposes sizes, rates and schedule fields:
@@ -243,7 +243,8 @@ def train(
         opt_G, opt_D, opt_prior = trainer.opt_g, trainer.opt_d, None
     else:
         # The recipe's optimizers do its step-time work in step() (currently
-        # K3P: spike guard + EMA-critic update for D); we allocate the EMA critic.
+        # KA2: spike guard + moment-surprise controller + EMA-critic update for D);
+        # we allocate the EMA critic.
         opt_G, opt_D = recipe.make_optimizers(G, D, ema_critic=copy.deepcopy(D), fused=fused_adam)
         # EMA copies of G + prior for snapshots/eval; the live weights orbit the
         # equilibrium, the averaged ones sit on it.
@@ -328,7 +329,7 @@ def train(
                 loss_d, loss_gan = stats["loss_d"], stats["loss_gan"]
                 ep_z = stats["prior_regularization"]
             else:
-                # K3P schedule: G/D anneal over the network horizon to the
+                # Recipe schedule: G/D anneal over the network horizon to the
                 # network floor; the prior anneals over the full budget.
                 network, prior_scale = learning_rate_scales(global_step, recipe)
                 for opt in all_opts:

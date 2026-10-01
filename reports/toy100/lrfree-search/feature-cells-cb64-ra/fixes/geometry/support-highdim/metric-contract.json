@@ -1,0 +1,311 @@
+{
+  "scope": "CPU metric contracts, deterministic arrays; no quality seed runs",
+  "source_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/geometry/support-highdim/test_metric_contract.py": "986860b1be3049c29bed520c2234081d3f4e9e65abf67a27ad88e2a691226eea",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/geometry/support-highdim/fisher_rank.py": "ab67cbd221de191febe696207dfc088e3150c0feedc6c3ed79b62cdbef4b95d6",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/geometry/support-highdim/diagnose_highdim.py": "6a18c0bffe83714711682a02fb929c7a9479d665eca4266f19191b51fb2769e2",
+    "/ml2/hypergan/gan-attempts/feature-cells-config-20260929/pkg-CB64-RA/particlegan/feature_cells.py": "21040766f11d7d8c7a48d236a538fa5d309d28119817d57cb679db33d00a542a"
+  },
+  "tests": [
+    {
+      "name": "constant captured head",
+      "status": "PASS",
+      "evidence": {
+        "rows": 64,
+        "width": 16,
+        "rank": 0,
+        "dictionary_rank": 0,
+        "maximum_score": 0.0,
+        "flagged": 0,
+        "duplicate_fraction": 0.984375
+      },
+      "seconds": 0.006229950813576579
+    },
+    {
+      "name": "three even rows each in its own cell",
+      "status": "PASS",
+      "evidence": {
+        "rows": 6,
+        "width": 3,
+        "rank": 2,
+        "dictionary_rank": 2,
+        "maximum_score": 1204833660084154.0,
+        "flagged": 0,
+        "duplicate_fraction": 0.0
+      },
+      "seconds": 0.0024340779054909945
+    },
+    {
+      "name": "collinear 128-feature head",
+      "status": "PASS",
+      "evidence": {
+        "rows": 1024,
+        "width": 128,
+        "rank": 1,
+        "dictionary_rank": 1,
+        "maximum_score": 1.7533455066029628,
+        "flagged": 0,
+        "duplicate_fraction": 0.0
+      },
+      "seconds": 0.01883781305514276
+    },
+    {
+      "name": "exact duplicate rows preserve original guard",
+      "status": "PASS",
+      "evidence": {
+        "rows": 256,
+        "width": 16,
+        "rank": 8,
+        "dictionary_rank": 13,
+        "maximum_score": 206512738433266.06,
+        "flagged": 0,
+        "duplicate_fraction": 0.75
+      },
+      "seconds": 0.010831875959411263
+    },
+    {
+      "name": "one captured feature",
+      "status": "PASS",
+      "evidence": {
+        "rows": 1024,
+        "width": 1,
+        "rank": 1,
+        "dictionary_rank": 1,
+        "maximum_score": 1.7511032274416154,
+        "flagged": 0,
+        "duplicate_fraction": 0.0
+      },
+      "seconds": 0.013976986985653639
+    },
+    {
+      "name": "held-out isolation and unchanged partition/RNG",
+      "status": "PASS",
+      "evidence": {
+        "even_fit_bit_exact": true,
+        "odd_changes_only_calibration": true,
+        "original_partition_unchanged": true,
+        "rng_unchanged": true,
+        "row_and_chunk_invariance": true,
+        "pvalue_formula_exact": true,
+        "dictionary_rank": 13,
+        "rank": 8
+      },
+      "seconds": 0.034795305924490094
+    },
+    {
+      "name": "constant-feature policy and invalid-input rejection",
+      "status": "PASS",
+      "evidence": {
+        "dropped_dimensions": 2,
+        "invalid_inputs_rejected": 3
+      },
+      "seconds": 0.014453679090365767
+    },
+    {
+      "name": "bounded storage N1024/H128",
+      "status": "PASS",
+      "evidence": {
+        "n": 1024,
+        "width": 128,
+        "fit_seconds": 0.0035936119966208935,
+        "query_seconds": 0.0004657020326703787,
+        "arrays": {
+          "scale2": {
+            "shape": [
+              64
+            ],
+            "bytes": 512
+          },
+          "transform": {
+            "shape": [
+              128,
+              8
+            ],
+            "bytes": 8192
+          },
+          "zcenters": {
+            "shape": [
+              64,
+              8
+            ],
+            "bytes": 4096
+          }
+        },
+        "covariance_bytes": 2592,
+        "rank": 8,
+        "dictionary_rank": 18
+      },
+      "seconds": 0.02126010088250041
+    },
+    {
+      "name": "bounded storage N8192/H128",
+      "status": "PASS",
+      "evidence": {
+        "n": 8192,
+        "width": 128,
+        "fit_seconds": 0.012536501046270132,
+        "query_seconds": 0.0036725630052387714,
+        "arrays": {
+          "scale2": {
+            "shape": [
+              64
+            ],
+            "bytes": 512
+          },
+          "transform": {
+            "shape": [
+              128,
+              8
+            ],
+            "bytes": 8192
+          },
+          "zcenters": {
+            "shape": [
+              64,
+              8
+            ],
+            "bytes": 4096
+          }
+        },
+        "covariance_bytes": 2592,
+        "rank": 8,
+        "dictionary_rank": 18
+      },
+      "seconds": 0.0888384860008955
+    },
+    {
+      "name": "bounded storage N1024/H1024",
+      "status": "PASS",
+      "evidence": {
+        "n": 1024,
+        "width": 1024,
+        "fit_seconds": 0.007987427059561014,
+        "query_seconds": 0.002012216951698065,
+        "arrays": {
+          "scale2": {
+            "shape": [
+              64
+            ],
+            "bytes": 512
+          },
+          "transform": {
+            "shape": [
+              1024,
+              8
+            ],
+            "bytes": 65536
+          },
+          "zcenters": {
+            "shape": [
+              64,
+              8
+            ],
+            "bytes": 4096
+          }
+        },
+        "covariance_bytes": 5408,
+        "rank": 8,
+        "dictionary_rank": 26
+      },
+      "seconds": 0.047165357042104006
+    }
+  ],
+  "scaling": [
+    {
+      "n": 1024,
+      "width": 128,
+      "fit_seconds": 0.0035936119966208935,
+      "query_seconds": 0.0004657020326703787,
+      "arrays": {
+        "scale2": {
+          "shape": [
+            64
+          ],
+          "bytes": 512
+        },
+        "transform": {
+          "shape": [
+            128,
+            8
+          ],
+          "bytes": 8192
+        },
+        "zcenters": {
+          "shape": [
+            64,
+            8
+          ],
+          "bytes": 4096
+        }
+      },
+      "covariance_bytes": 2592,
+      "rank": 8,
+      "dictionary_rank": 18
+    },
+    {
+      "n": 8192,
+      "width": 128,
+      "fit_seconds": 0.012536501046270132,
+      "query_seconds": 0.0036725630052387714,
+      "arrays": {
+        "scale2": {
+          "shape": [
+            64
+          ],
+          "bytes": 512
+        },
+        "transform": {
+          "shape": [
+            128,
+            8
+          ],
+          "bytes": 8192
+        },
+        "zcenters": {
+          "shape": [
+            64,
+            8
+          ],
+          "bytes": 4096
+        }
+      },
+      "covariance_bytes": 2592,
+      "rank": 8,
+      "dictionary_rank": 18
+    },
+    {
+      "n": 1024,
+      "width": 1024,
+      "fit_seconds": 0.007987427059561014,
+      "query_seconds": 0.002012216951698065,
+      "arrays": {
+        "scale2": {
+          "shape": [
+            64
+          ],
+          "bytes": 512
+        },
+        "transform": {
+          "shape": [
+            1024,
+            8
+          ],
+          "bytes": 65536
+        },
+        "zcenters": {
+          "shape": [
+            64,
+            8
+          ],
+          "bytes": 4096
+        }
+      },
+      "covariance_bytes": 5408,
+      "rank": 8,
+      "dictionary_rank": 26
+    }
+  ],
+  "cuda_initialized": false,
+  "sources_unchanged": true,
+  "status": "PASS"
+}

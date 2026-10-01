@@ -20,7 +20,7 @@ def probe():
     previous = torch.get_num_threads()
     torch.set_num_threads(1)
     task = json.loads((ROOT / "configs/forge/tasks/clockfree_audit.json").read_text())
-    request = {"candidate": {"recipe_overrides": {"lr_floor": 1, "network_lr_floor": 1,
+    request = {"candidate": {"recipe_overrides": {"critic_formulation": "k3p", "lr_floor": 1, "network_lr_floor": 1,
         "input_noise_std": 0, "output_noise_warmup": 0, "d_guard_min_steps": 0}},
         "protocol": {"seed": 0}}
     yield task, request
@@ -69,7 +69,7 @@ def test_clock_grader_rejects_claim_only_hashes_or_changed_artifacts(probe, tmp_
 
 def test_source_audit_keeps_unknown_extensions_and_periodic_releases_visible():
     from particlegan import Recipe
-    recipe = Recipe(lr_floor=1, network_lr_floor=1, input_noise_std=0,
+    recipe = Recipe(critic_formulation="k3p", lr_floor=1, network_lr_floor=1, input_noise_std=0,
                     output_noise_warmup=0, d_guard_min_steps=0, reg_every=2).to_dict()
     audit = source_audit(recipe, {"unreviewed": True})
     assert len(audit["unexplained_clock_dependencies"]) == 2

@@ -1,0 +1,10 @@
+{
+  "status": "PREPARED_NOT_FROZEN_NOT_TRAINED",
+  "source_lane": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra13-r2",
+  "package_change": "memoized repeated-tensor checkpoint conversion only",
+  "configuration_change": null,
+  "original_scorers": true,
+  "original_budgets": true,
+  "original_thresholds": true,
+  "original_seeds": true
+}

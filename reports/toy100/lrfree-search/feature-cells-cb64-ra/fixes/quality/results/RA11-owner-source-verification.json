@@ -1,0 +1,17 @@
+{
+  "status": "OWNER_SOURCE_VERIFIED_CPU_PENDING",
+  "utc": "2026-09-30T15:50:26.744317+00:00",
+  "source_freeze_sha256": "1294e397fcb1a59bfb8629c373a12eb866384f0ebcf1344276234bd97b0291f3",
+  "raw_guard_count": 279,
+  "package_sha256": "1b54cb00461df0ad89fcad59bba1e3012bf94a71ac887ecf708aafdfadc18a93",
+  "config_sha256": "b3656ea7494413106484c556e53877900dd5ccebf2597b3f80b7d0e7d5ba4437",
+  "changed_modules": [
+    "feature_cells.py",
+    "mean_transport.py"
+  ],
+  "added_modules": [
+    "output_moments.py"
+  ],
+  "unchanged_module_count": 28,
+  "numerical_execution": false
+}

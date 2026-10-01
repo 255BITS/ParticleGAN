@@ -1,0 +1,7 @@
+{
+  "base_package_sha256": "13f5bbe4de824e6899cb28ee4dff8f35d74bbaa6243bfe9c18b8df44d173a1ce",
+  "source_package": "/ml2/hypergan/gan-attempts/feature-cells-config-20260929/pkg-CB64-RA",
+  "source_config": "/ml2/hypergan/gan-attempts/feature-cells-config-20260929/configs/overrides-CB64-RA.json",
+  "baseline_cuda_study": "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929",
+  "policy": "Small deterministic diagnostics using existing fixtures/seeds. No original artifact/source mutations. GPU jobs serialized on physical GPU0 by root. No relaxed gates."
+}

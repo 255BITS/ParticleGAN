@@ -1,0 +1,38 @@
+{
+  "status": "FROZEN_READ_ONLY_SAVED_DIAGNOSIS",
+  "requested_milestones": [
+    500,
+    1000
+  ],
+  "analyzed_available_saved_prefix": [
+    0,
+    100,
+    250,
+    500,
+    750,
+    1000,
+    1250
+  ],
+  "files_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra6-quality/ra7-saved-diagnosis/ra7-step1000/INTERPRETATION.md": "34bf23b103a87544be05899390286a282668bccac06c32fbdf4a70d156463c62",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra6-quality/ra7-saved-diagnosis/ra7-step1000/REPORT.md": "ec63232a61b058de578ec45b45c5e3086491666f7b786bcd378f5aafed57a95c",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra6-quality/ra7-saved-diagnosis/ra7-step1000/candidate-metrics-captured.jsonl": "441d8ec8b259b0290d67830f877c615cd762c2956e2ff0a3f4c7ecbd63f08318",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra6-quality/ra7-saved-diagnosis/ra7-step1000/comparison-summary.json": "253c67a3c141ffe2d9c2dea4792cc6c1444677e484417ae6324d6d9e74dafc97",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra6-quality/ra7-saved-diagnosis/ra7-step1000/e22-metrics-captured.jsonl": "3b7ed570f47baaa152cb0a1a6b4daa899c2d97b755200090e24d2e16462648f0",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra6-quality/ra7-saved-diagnosis/ra7-step1000/motion-0250-0500.json": "8dab979b2eaa3b391db1adf542a4617082860eda28637fc766f18c419afa539e",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra6-quality/ra7-saved-diagnosis/ra7-step1000/motion-0500-1000.json": "0aa4f1104e0396cbe3628c76392b236e57b6ff0a1a2a599070c2fd6b9e6bae06",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra6-quality/ra7-saved-diagnosis/ra7-step1000/ra4-metrics-captured.jsonl": "6751beed015d878d2445fb71e571cebe26014d1d85d3e21b421e1902c75302e8",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra6-quality/ra7-saved-diagnosis/ra7-step1000/receipt.json": "e5a8153a5b835d118d550c45244061852915763a87ca56c77d4adda5129f6236",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra6-quality/ra7-saved-diagnosis/FRAMEWORK.json": "515f152a6a195e49cbf9dc416ddbfb4dbef2b03b847bcebe308fbbc28fd6f19f",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra6-quality/ra7-saved-diagnosis/PROTOCOL.md": "cf926f4a0e7ef5fcb578ca756e71c636dbbdde6d598ed5bb3d6dfaf6585194e9",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra6-quality/ra7-saved-diagnosis/summarize_saved.py": "449dea47d095025409cd0e7b49546e84009e144e0f0c4670e8c65d0af59657b4",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra6-quality/ra7-saved-diagnosis/ra7-step1000.log": "985d36c3701b2841adaf5ecbf12c5498e5388e573193f68cbbc08fafc17737c5",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra6-quality/ra7-saved-diagnosis/ra7-step1000-summary.log": "3c70eee6ab3422fa682ef0bc38bd9fcb14e45d2afebab12dad761d9b6a175f56",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra6-quality/ra7-saved-diagnosis/ra7-motion-0250-0500.log": "2a61bfed01c7a79293c425ef414bab59000a23741531008c81e8d1af423a0b60",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra6-quality/ra7-saved-diagnosis/ra7-motion-0500-1000.log": "1cf4d10a4c894b187de4f1270ec7c12f9d00b1d799f3d6983b55942f2f067eaf"
+  },
+  "cpu_only": true,
+  "quality_verdict": null,
+  "frozen_source_writes": 0,
+  "new_virtual_optimizer_probes": 0
+}

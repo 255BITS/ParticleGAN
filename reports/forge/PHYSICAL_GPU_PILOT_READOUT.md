@@ -24,7 +24,7 @@ These are single-seed, single-task results, not general algorithm rankings.
 ## Operational evidence
 
 The [saved proof](pilots/develop-20260929-gpu-pilot-v3/summary.json) and
-[process/event witnesses](pilots/develop-20260929-gpu-pilot-v3/orchestration.jsonl)
+[process/event witnesses](https://github.com/255BITS/ParticleGAN/blob/45a9ebd0a6b415434d51f614a01373423a646a53/reports/forge/pilots/develop-20260929-gpu-pilot-v3/orchestration.jsonl)
 record these checks:
 
 - The feature checkout and an independent fresh clone at `cd5308ec` submitted

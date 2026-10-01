@@ -1,0 +1,83 @@
+--- a/particlegan/feature_cells.py
++++ b/particlegan/feature_cells.py
+@@ -677,30 +677,37 @@
+         birth_capacity = torch.floor(len(features)*(-difference).clamp_min(0.)+1e-10).long()*comparison["deficit"]
+         target = self._mass_targets(len(features))
+         table_counts = torch.bincount(ids,minlength=self.cells)
+-        # Flagged holes are reserved for isolation. They cannot certify an
+-        # ordinary surplus of legitimate survivors in their assigned cell.
++        budget = math.floor(Q*len(features)) if max_moves is None else min(int(max_moves),math.floor(Q*len(features)))
++        isolation_guard_rejects = int(flags.sum()) > Q*len(features)
++        # A small flagged set remains reserved for the unchanged isolation
++        # guard. During widespread isolation, ordinary count evidence can
++        # certify replacing a flagged row within its separate fixed budget.
++        # Supported survivors always reserve their mass and never supply a
++        # death in this recovery branch.
+         clean_counts = torch.bincount(ids[~flags],minlength=self.cells)
++        flagged_counts = table_counts-clean_counts
+         excess = (clean_counts-target).clamp_min(0)
+         vacancies = (target-clean_counts).clamp_min(0)
+         # Emitted iid count evidence certifies direction. Actual clean rows
+         # determine how much mass can move, avoiding repeated moves generated
+         # solely by emission/pool fluctuation after the table is balanced.
+-        death_capacity = torch.minimum(death_capacity,excess)
++        death_capacity = torch.minimum(death_capacity,flagged_counts if isolation_guard_rejects else excess)
+         birth_capacity = torch.minimum(birth_capacity,vacancies)
+         # Retain an actual eligible parent, rather than merely leaving an
+         # arbitrary nonflagged row that might itself have p<=Q.
+         protected = torch.full((self.cells,),-1,device=self.device,dtype=torch.long)
+         retain = (target>0)&(pool_counts>0)
+         protected[retain] = pool[retain,0]
+-        death_eligible = ~flags&(torch.arange(len(features),device=self.device)!=protected[ids])
++        death_eligible = flags if isolation_guard_rejects else ~flags&(torch.arange(len(features),device=self.device)!=protected[ids])
+         available_deaths = torch.bincount(ids[death_eligible],minlength=self.cells)
+         death_capacity = torch.minimum(death_capacity,available_deaths)
+         inaccessible = birth_capacity[pool_counts==0].sum()
+         birth_capacity = torch.minimum(birth_capacity,pool_counts)
+-        budget = math.floor(Q*len(features)) if max_moves is None else min(int(max_moves),math.floor(Q*len(features)))
+         groups = self._mass_topology()
+         group_target,group_clean = self._group_counts(target),self._group_counts(clean_counts)
+         within_capacity = torch.minimum(self._group_counts(death_capacity),self._group_counts(birth_capacity))
++        if isolation_guard_rejects:
++            within_capacity = torch.minimum(within_capacity,(group_target-group_clean).clamp_min(0))
+         within = _integer_allocate(within_capacity,max(0,budget))
+         within_deaths,within_births = torch.zeros_like(death_capacity),torch.zeros_like(birth_capacity)
+         for group in range(self.mass_groups):
+@@ -708,8 +715,13 @@
+             within_deaths += _integer_allocate(death_capacity*members,int(within[group]))
+             within_births += _integer_allocate(birth_capacity*members,int(within[group]))
+         remaining_death,remaining_birth = death_capacity-within_deaths,birth_capacity-within_births
+-        group_death = torch.minimum(self._group_counts(remaining_death),(group_clean-group_target).clamp_min(0))
+-        group_birth = torch.minimum(self._group_counts(remaining_birth),(group_target-group_clean).clamp_min(0))
++        if isolation_guard_rejects:
++            group_death = self._group_counts(remaining_death)
++            remaining_vacancies = (group_target-group_clean-self._group_counts(within_births)).clamp_min(0)
++            group_birth = torch.minimum(self._group_counts(remaining_birth),remaining_vacancies)
++        else:
++            group_death = torch.minimum(self._group_counts(remaining_death),(group_clean-group_target).clamp_min(0))
++            group_birth = torch.minimum(self._group_counts(remaining_birth),(group_target-group_clean).clamp_min(0))
+         cross_pairs = min(int(group_death.sum()),int(group_birth.sum()),max(0,budget-int(within.sum())))
+         cross_group_death,cross_group_birth = _integer_allocate(group_death,cross_pairs),_integer_allocate(group_birth,cross_pairs)
+         cross_deaths,cross_births = torch.zeros_like(death_capacity),torch.zeros_like(birth_capacity)
+@@ -755,6 +767,12 @@
+                       unique_parent_count=len(torch.unique(parent)),mass_topology=dict(self.mass_topology),
+                       group_target_counts=group_target,group_clean_counts=group_clean,
+                       within_group_moves=int(within.sum()),between_group_moves=cross_pairs)
++        supported_children = child[~flags[child]]
++        detail.update(isolation_guard_rejects=isolation_guard_rejects,
++                      ordinary_flagged_deaths=int(flags[child].sum()),
++                      death_policy="count_certified_flagged_only" if isolation_guard_rejects else "supported_surplus",
++                      planned_supported_counts=clean_counts-torch.bincount(ids[supported_children],minlength=self.cells)
++                          +torch.bincount(ids[parent],minlength=self.cells))
+         return child,parent,detail
+ 
+ 
+@@ -774,7 +792,7 @@
+                              real_anchors=1,parent_rank=None,
+                              latent_kernel="bounded_local_dv12",latent_neighbors=PARENT_RESERVOIR,
+                              latent_rank=recipe.birth_death_metric_rank,
+-                             mass_policy="reference_topology_vacancies_unique_parents_v3",
++                             mass_policy="reference_topology_vacancies_unique_parents_v4",
+                              isolation_parent_pool="supported_same_cell_without_replacement")
+         self.latent_geometry = BoundedLatentGeometry(rank=recipe.birth_death_metric_rank,
+                                                    neighbors=PARENT_RESERVOIR, chunk=recipe.birth_death_chunk)

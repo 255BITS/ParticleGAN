@@ -1,0 +1,51 @@
+{
+  "checkpoint_alias_protocol_preserved": true,
+  "file_sha256": {
+    ".gpu0.lock": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "COMPLETION-replay.json": "acbb2f35a248a12cc6627d274b6f8930ab60d05332781e0fffd891a18f46a429",
+    "CPU-CLOSED.json": "5a361bde961ae64b083bccd75c3d55ca985caf72ae5d51efbed5d9d10346f426",
+    "INPUTS.json": "f6fa0b84dbcf21eacf20314086517f0d53cba30b059a78c639e69bd3034f7209",
+    "LAUNCH-replay.json": "b6a98d0e3b09c6c5df88596232902d5525a7d0f4a10b6a4b74d84da0febd9045",
+    "PROTOCOL.md": "d3b078ec55352149bf13e7c847f882fbd84759bc50e9cd2c71beee84ef0e99ee",
+    "RESTORATION-BRIDGE.json": "a76bbafdce0072d17543c4b4670a2a6b0ebfc6f6685d66215cd0fb87aeec3a0b",
+    "SOURCE-FREEZE.json": "b830d92f2051a03719fc308f7b9658967ac3eaf5aba0f72cd33327f4d1ea2acb",
+    "adapter.py": "192cdbb52e904cfea0cb5b3c012befe744cf5981d52d29cef374474fbd03229e",
+    "bridge.py": "98f6d5a96492d302838dc3f9e9b2700153be50d3efa84b3542f8620d76041aa2",
+    "close_replay.py": "7c1235db22a9fb8d850d23cf855da5645707cd89598aa3b0dad992fb82a865c4",
+    "common.py": "fba6152da18064687187466cd2d0350a533df88e6bcceca426333c35fb97035e",
+    "contracts.py": "4e3465dbc670eb8b129b133ed0a78d4c360827935fd0dc65ab0c26644fffca21",
+    "launch_replay.py": "6c7ced89afefab83f73faca1f727d62662d7f6e0fea181dd6f4b8a06d8969737",
+    "logs/RA17-current-pr155-replay.log": "120b76f6cc15cf4dd615abfb2e3697aee01847a822c6cd6af2bcd671869653f1",
+    "preflight_cpu.py": "a8c0d98eb20b339ffaa0061ca10a8c46c521a206d2b773c521d487992cddba4d",
+    "preparation-receipt.json": "79b37d41c648df148b03ae47cddd5fa9448e782b3ebd5125913f8da06045116c",
+    "prepare.py": "99a63f17843b3b5e0f4ff73b2dfd279a0d42a5f56ce12656094e98da64b62969",
+    "replay-RA17-current-pr155.json": "015f54c40ca004f61df26bf7280aea5ff7c003b1bcd203e504b02dff004f0267",
+    "replay.py": "083211a655978d6371990e927caca71e5c8d3bbf260df269f95a01f5d51108f8",
+    "replay/mnist/RA17-current-pr155/branch-0.pt": "0ec619ff782ba4b86e6889105c7345bd0d182aa7e0eba782b7e444db3d2c40ac",
+    "replay/mnist/RA17-current-pr155/branch-1.pt": "109135c714eaae0cdc79a9116ab66427b3a32dfb2930a5c56cc40a825d858f63",
+    "replay/mnist/RA17-current-pr155/result.json": "3c49006cb8a240ae0f2c05fc1e6d05db1490db1856b63b42f376761df77bd33b",
+    "replay/toy/RA17-current-pr155/branch-0.pt": "797f84863313c864f42c68c475ecd499537d2038af3333fa7beb5b73f010871c",
+    "replay/toy/RA17-current-pr155/branch-1.pt": "fc0559de9a32a72a5818580a891e9d364f9c45ea1e7e29aad38aff171271f214",
+    "replay/toy/RA17-current-pr155/result.json": "b4ccba24906a02eae2d4342a255ef18f65d4ae4b5ed920a72f19a411ba5c2f6e"
+  },
+  "fresh_replay_updates_total": 40,
+  "fresh_training_updates": 0,
+  "native_and_CPU_map_loss_state_sample_bits_identical": true,
+  "native_matches_pinned_original_control": true,
+  "original_learned_fresh_training_source": "RA13-settled",
+  "original_learned_updates_per_fixture": 2000,
+  "package_sha256": "500ff0e966beb649dd7cafa0b91d7bb30cb451e5d62ece2883411a0507c8df61",
+  "replay_status": {
+    "mnist": "PASS",
+    "toy": "PASS"
+  },
+  "source_integrity": {
+    "cpu_closed_sha256": "5a361bde961ae64b083bccd75c3d55ca985caf72ae5d51efbed5d9d10346f426",
+    "inputs_sha256": "f6fa0b84dbcf21eacf20314086517f0d53cba30b059a78c639e69bd3034f7209",
+    "package_sha256": "500ff0e966beb649dd7cafa0b91d7bb30cb451e5d62ece2883411a0507c8df61",
+    "read_only_files": 560,
+    "source_freeze_sha256": "b830d92f2051a03719fc308f7b9658967ac3eaf5aba0f72cd33327f4d1ea2acb",
+    "status": "VALID"
+  },
+  "status": "PASS_LATEST_RA17_ORIGINAL_CUDA40_REPLAY"
+}

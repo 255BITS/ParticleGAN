@@ -1,0 +1,68 @@
+{
+  "command": [
+    "/tmp/pr38-default-env/bin/python",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/run_screen.py",
+    "--task",
+    "img_stripes2"
+  ],
+  "completed": 1790807707.163089,
+  "cuda": "12.6",
+  "numerical_started": 1790807680.7629025,
+  "options": {
+    "diagnostics": true,
+    "eval_output_noise": true,
+    "save_final_state": true,
+    "strict_streams": true
+  },
+  "peak_allocated_gpu_mib": 65.705078125,
+  "peak_reserved_gpu_mib": 66.0,
+  "primary_status": "PASS",
+  "process_exit_code": 0,
+  "resources": {
+    "device": "cuda:0",
+    "expected_gpu_uuid": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+    "gpu_name": "NVIDIA RTX A6000",
+    "gpu_uuid": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+    "memory_fraction": 0.2,
+    "physical_gpu": 0,
+    "total_gpu_bytes": 50896764928
+  },
+  "source_adapters": {
+    "adapted_screen_sha256": "c60d76627f1846e807ae4fa36075a52516ddf568b70d616ad232b4d628118da2",
+    "adapter_sha256": "d014da366bcbb9380d61cd4a5d01e80a18cc08be7d8dcbf68bf5c69f4bdd668d",
+    "changed_construction_calls": {
+      "GANTrainer": 5,
+      "get_recipe": 5,
+      "make_prior": 3
+    },
+    "fixture_helper_sha256": "856ad5ca6b65a8c233faa1718e89957d58de47a956ced2c79244c4e35a65fd12",
+    "hosts_changed": false,
+    "original_screen": "/ml2/hypergan/lrfree-20260926/harness/screen.py",
+    "original_screen_sha256": "ee8193adbdf09e93511befae7b6491143c26de88612eddf065cbb92eb2153c3c",
+    "ring_sample_api": "explicit output_noise=True/False",
+    "schedule_changed": false,
+    "scorer_changed": false,
+    "status": "PREPARED_NOT_TRAINED",
+    "streams_changed": false,
+    "thresholds_changed": false
+  },
+  "source_integrity_after": {
+    "config_sha256": "a3ee5c67ac6594014feeb1ec333131abb4b1d86832510b69923100ebd8510ad4",
+    "files": 103,
+    "package_sha256": "68f5706590683a44348cb04b3798917411bfaa54e5d45b17d57c345a4da33c15",
+    "source_freeze_sha256": "b998f0760458bf1b39ec8a8ed6ff00af0b3eab2c95e299c3154391949351c0de",
+    "status": "VALID"
+  },
+  "source_integrity_before": {
+    "config_sha256": "a3ee5c67ac6594014feeb1ec333131abb4b1d86832510b69923100ebd8510ad4",
+    "files": 103,
+    "package_sha256": "68f5706590683a44348cb04b3798917411bfaa54e5d45b17d57c345a4da33c15",
+    "source_freeze_sha256": "b998f0760458bf1b39ec8a8ed6ff00af0b3eab2c95e299c3154391949351c0de",
+    "status": "VALID"
+  },
+  "start": 1790807679.4060698,
+  "status": "COMPLETE",
+  "task": "img_stripes2",
+  "torch": "2.13.0+cu126",
+  "wall_seconds": 27.757019758224487
+}

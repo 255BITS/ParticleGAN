@@ -1,0 +1,91 @@
+{
+  "status": "COMPLETE_READ_ONLY_BIRTH_RAW_ANNOTATION",
+  "records": [
+    {
+      "row": 0,
+      "model": "fast",
+      "point": [
+        -0.9768093824386597,
+        -0.5309147238731384
+      ],
+      "nearest_oracle_mode": 1,
+      "distance_to_oracle_centre": 0.038646150380373,
+      "raw_supported": true,
+      "nearest_even_reference_row": 176,
+      "distance_to_nearest_even_reference": 0.0008097228710539639,
+      "nearest_even_reference_point": [
+        -0.976469099521637,
+        -0.5316283106803894
+      ],
+      "nearest_even_reference_raw_supported": true,
+      "nearest_even_reference_oracle_distance": 0.039422474801540375
+    },
+    {
+      "row": 7,
+      "model": "fast",
+      "point": [
+        -1.0955439805984497,
+        -0.9801912307739258
+      ],
+      "nearest_oracle_mode": 0,
+      "distance_to_oracle_centre": 0.09757582098245621,
+      "raw_supported": false,
+      "nearest_even_reference_row": 728,
+      "distance_to_nearest_even_reference": 0.0,
+      "nearest_even_reference_point": [
+        -1.095325231552124,
+        -0.9799792766571045
+      ],
+      "nearest_even_reference_raw_supported": false,
+      "nearest_even_reference_oracle_distance": 0.09740446507930756
+    },
+    {
+      "row": 0,
+      "model": "ema",
+      "point": [
+        -0.9884220361709595,
+        -0.5314515829086304
+      ],
+      "nearest_oracle_mode": 1,
+      "distance_to_oracle_centre": 0.03351493924856186,
+      "raw_supported": true,
+      "nearest_even_reference_row": 42,
+      "distance_to_nearest_even_reference": 0.011487588286399841,
+      "nearest_even_reference_point": [
+        -0.9998486638069153,
+        -0.5325745940208435
+      ],
+      "nearest_even_reference_raw_supported": true,
+      "nearest_even_reference_oracle_distance": 0.03257608413696289
+    },
+    {
+      "row": 7,
+      "model": "ema",
+      "point": [
+        -1.0954549312591553,
+        -0.9801116585731506
+      ],
+      "nearest_oracle_mode": 0,
+      "distance_to_oracle_centre": 0.09750481694936752,
+      "raw_supported": false,
+      "nearest_even_reference_row": 728,
+      "distance_to_nearest_even_reference": 0.0,
+      "nearest_even_reference_point": [
+        -1.095325231552124,
+        -0.9799792766571045
+      ],
+      "nearest_even_reference_raw_supported": false,
+      "nearest_even_reference_oracle_distance": 0.09740446507930756
+    }
+  ],
+  "checkpoint_source_sha256": {
+    "integration/review/training-regression/post-ra5-saved-diagnosis/analyze_saved.py": "bf3e2001a703b1801f718bbacc185e24ea7bd631f9cf61997c32a817f505a735",
+    "validation-cb64-ra6/learned/training/toy/CB64-RA6/checkpoint-1000.pt": "c399f85c4e431cbd96deac5a9e2d976544e5f569c19d9276be63d0c129a024f9"
+  },
+  "reaction_step": 1000,
+  "age_updates": 0,
+  "nearest_even_reference_is_descriptive_not_verified_historical_target": true,
+  "oracle_labels_annotation_only": true,
+  "sources_inputs_rng_unchanged": true,
+  "cuda_initialized": false
+}

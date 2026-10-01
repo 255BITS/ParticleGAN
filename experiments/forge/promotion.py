@@ -266,7 +266,8 @@ def _request(artifact, subject_id, seed):
                             "promotion": {"registration_id": artifact["registration_id"],
                                           "registration_sha256": artifact["registration_sha256"]}}
     candidate = request["candidate"]
-    context = FormulationContext(recipe_overrides=candidate.get("recipe_overrides", {}), prior=candidate["prior"],
+    context = FormulationContext(recipe_preset=candidate.get("recipe_preset"),
+        recipe_overrides=candidate.get("recipe_overrides", {}), prior=candidate["prior"],
         seed=seed, requires_capabilities=candidate.get("requires_capabilities", ()),
         extensions=candidate.get("extensions", {}), initializer=candidate.get("initializer", "deterministic_orthogonal"),
         execution_path=candidate.get("execution_path", "public_trainer"))
@@ -333,7 +334,8 @@ def validate_screening_submission(request: dict) -> None:
     factors = candidate.get("changed_factors", [])
     if factors and all(isinstance(f, str) and f.strip().lower() in {"seed", "random_seed", "rng_seed"} for f in factors):
         _block("seed-only screening ideas are forbidden")
-    context = FormulationContext(recipe_overrides=candidate.get("recipe_overrides", {}),
+    context = FormulationContext(recipe_preset=candidate.get("recipe_preset"),
+        recipe_overrides=candidate.get("recipe_overrides", {}),
         prior=candidate.get("prior"), seed=SCREENING_SEED,
         requires_capabilities=candidate.get("requires_capabilities", ()),
         extensions=candidate.get("extensions", {}), initializer=candidate.get("initializer", "deterministic_orthogonal"),

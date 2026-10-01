@@ -1,0 +1,245 @@
+{
+  "status": "VALID",
+  "scope": "sealed prospective saved endpoint; no model/optimizer update",
+  "step": 500,
+  "checkpoint_sha256": "132f9351b3c5857b0e434c7d9b294de12084bc09f8012e01c53159e9e78f7612",
+  "receipt_sha256": "aaad04b7f592f37fa169d79a1bd91fcec3e6b8bdd29c1ed1d94fc8e4f161f250",
+  "checks": {
+    "sealed_post_save_log": true,
+    "record_and_metrics_exact": true,
+    "matched_sources_and_init": true,
+    "genuine_quarter_generator_and_sigma_base_rates": true,
+    "prior_and_critic_base_rates_exact": true,
+    "population_state_load_exact": true,
+    "old_law_atomic_rejections": [
+      "old-law",
+      "wrong-level",
+      "mask-dtype"
+    ],
+    "population_stamp_and_coverage_consistent": true,
+    "moved_row_reset_ledger_exact": true,
+    "graph_bounded_symmetric": true,
+    "novel_children_without_seed_links": true,
+    "common_count_family_and_phase_budget": true,
+    "paired_birth_support_and_true_certificate_accounting": true,
+    "semantic_timing_fields": [
+      "trainer.birth_death.last.eval_seconds"
+    ],
+    "last_metadata_json_serializable": true,
+    "rng_cpu_uint8": true
+  },
+  "population": {
+    "active": false,
+    "mask_rows": 0,
+    "required_rows": 973,
+    "s": 1.0,
+    "b": 16.0,
+    "last_decisive": 1,
+    "undo_s": null,
+    "coverage_rejections": 0,
+    "expiries": 0,
+    "accepted_stationary": 0,
+    "rebases": 62,
+    "last_population": {
+      "event": "decision",
+      "step": 312,
+      "participating_rows": null,
+      "required_rows": 973,
+      "coverage_rejected": false,
+      "scheduling_decision": "inconclusive"
+    },
+    "last_decision": {
+      "decision": "inconclusive",
+      "step": 312,
+      "tested_b": 8.0,
+      "verdict_b": 0,
+      "verdict_2b": 0,
+      "evidence_scale": 8.0,
+      "t_b": -0.804317541920708,
+      "t_2b": 0.8185639518366854,
+      "mean_r_b": -0.021388070269798238,
+      "mean_r_2b": 0.01724175239602725,
+      "n_b": 12,
+      "n_2b": 6,
+      "early": false,
+      "log_bf_b": NaN,
+      "log_bf_2b": NaN
+    },
+    "log": [
+      [
+        24,
+        "drift",
+        1.0,
+        4.0
+      ],
+      [
+        120,
+        "inconclusive",
+        1.0,
+        8.0
+      ],
+      [
+        312,
+        "inconclusive",
+        1.0,
+        16.0
+      ]
+    ],
+    "current_window_participants_b": 488,
+    "current_window_participants_2b": 277
+  },
+  "serving": {
+    "served_model": "fast",
+    "derived_from_original_predicate": true,
+    "average_rate": 0.015625,
+    "note": "Saved model tensors are fast training iterates; serving is derived by the unchanged predicate."
+  },
+  "base_learning_rates": [
+    [
+      0.0010625,
+      0.0085,
+      0.0010625
+    ],
+    [
+      0.00425
+    ]
+  ],
+  "applied_learning_rates": [
+    [
+      0.000265625,
+      0.0085,
+      0.0010625
+    ],
+    [
+      0.0031874987620779663
+    ]
+  ],
+  "birth_counters": {
+    "evals": 62,
+    "dim_skips": 0,
+    "discoveries": 1542,
+    "realised_deaths": 3094,
+    "realised_births": 3094,
+    "stays": 0,
+    "moves": 3094,
+    "matched": 2848,
+    "normalised": 0,
+    "waited_deaths": 0,
+    "waited_births": 0,
+    "stale_resets": 49733,
+    "iso_evals": 62,
+    "iso_flagged": 49542,
+    "iso_acted": 0,
+    "iso_skipped": 62,
+    "iso_moves": 0,
+    "iso_dup_skips": 0,
+    "cell_evals": 62,
+    "cell_discoveries": 1542,
+    "ordinary_moves": 3094,
+    "feature_rebuilds": 62,
+    "feature_distance_cells": 124462912,
+    "projection_products": 1436337152,
+    "count_test_terms": 264750,
+    "feature_forward_rows": 193558,
+    "invalidated_cells": 2422,
+    "novel_birth_moves": 246,
+    "novel_birth_attempts": 248
+  },
+  "last_phase": {
+    "step": 496,
+    "ordinary_mass_moves": 2,
+    "ordinary_support_moves": 26,
+    "ordinary_global_moves": 19,
+    "ordinary_novel_birth_moves": 4,
+    "ordinary_copy_moves": 47,
+    "ordinary_moves": 51,
+    "iso_moves": 0,
+    "moves": 51
+  },
+  "row_evidence": {
+    "mature_rows": 0,
+    "flags": 0,
+    "neff_median": 11.941976038445985,
+    "neff_max": 67.27723703305044
+  },
+  "graph": {
+    "edges": 582,
+    "max_degree": 6
+  },
+  "metrics": {
+    "precision": 0.35546875,
+    "coverage": 20,
+    "mass_tv": 0.64453125,
+    "centre_distance": 0.12807884812355042,
+    "covered_centroid_rms": 0.029868602752685547,
+    "supported_mass": [
+      0.017822265625,
+      0.0247802734375,
+      0.0166015625,
+      0.011962890625,
+      0.01708984375,
+      0.0147705078125,
+      0.0086669921875,
+      0.0126953125,
+      0.0028076171875,
+      0.010009765625,
+      0.01171875,
+      0.0172119140625,
+      0.015380859375,
+      0.00537109375,
+      0.012451171875,
+      0.0208740234375,
+      0.0128173828125,
+      0.010986328125,
+      0.006103515625,
+      0.014404296875,
+      0.0291748046875,
+      0.019775390625,
+      0.015380859375,
+      0.0047607421875,
+      0.0218505859375
+    ],
+    "unsupported_mass": 0.64453125,
+    "clean_particle_centres": {
+      "precision": 0.40234375,
+      "coverage": 21,
+      "mass_tv": 0.59765625,
+      "centre_distance": 0.12096495926380157,
+      "covered_centroid_rms": 0.03683657944202423,
+      "supported_mass": [
+        0.021484375,
+        0.029296875,
+        0.025390625,
+        0.0126953125,
+        0.0185546875,
+        0.0166015625,
+        0.01171875,
+        0.013671875,
+        0.00390625,
+        0.01171875,
+        0.013671875,
+        0.01953125,
+        0.017578125,
+        0.0068359375,
+        0.0146484375,
+        0.025390625,
+        0.01171875,
+        0.01171875,
+        0.005859375,
+        0.013671875,
+        0.0341796875,
+        0.0185546875,
+        0.0166015625,
+        0.0029296875,
+        0.0244140625
+      ],
+      "unsupported_mass": 0.59765625
+    }
+  },
+  "quality_verdict": null,
+  "quality_scope": "Watcher records frozen metrics only; numerical queue owns strict quality adjudication.",
+  "overall_target": "Toy AND original full Grid100 required; intermediate metrics have no acceptance verdict.",
+  "optimizer_updates": 0,
+  "new_seeds": 0,
+  "cuda_initialized": false
+}

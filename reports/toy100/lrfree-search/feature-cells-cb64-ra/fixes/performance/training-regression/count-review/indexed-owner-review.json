@@ -1,0 +1,188 @@
+{
+  "status": "PASS",
+  "source_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/screens/runs/mode_hold/job-header.json": "fdc069eb9208a2c0a4df4a917596ff9bd0ed97b909f3f3138167f06e5c8fbc84",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/screens/runs/mode_hold/execution-receipt.json": "2e70975aec9ee4eb9d2ac1d3e3d868ff6e25f2dcf8ca0c42d3efaf3351860182",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/iteration-4/READY.json": "8d5522e1e2bf7ae42baf9666bc63da4da490b03f1b62724b1ab759031341ee87",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/indexed-metadata/pilot_indexed_adapter.py": "45b8e298cb4249909bddf8962f5524e540e81e41ebe6d1a54d35a76e2d336ff2",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/RA4-SOURCE-FROZEN.json": "0dfd64a6caf8d1e256c3eb868de155b3995e85b894ab87e2159f3cc98ccf5a64",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/source-freeze.json": "c1b09a7acf8ce40690eeaf6e931586c47c08e523dcfc573c7efb1d6f7bb8b443",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/ra4-validation-monitor/canonical-receipts/screens/runs/mode_hold/acceptance-receipt.json": "298fb4649ad41ae3de24a10e76afb8e629e3ffff1f1efb5887dafa85c6f57bf1",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/training.py": "f5626e4e25f62b37aa76b162ef4d351ed45dad0b5c24dc2c0c385be3d42d6a7a",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/indexed-metadata/PILOT.json": "cb9620d116112d710abd4d31f17f101f1d21d58c31b24bcc2bf8c2b738fd6b03",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/screens/runs/vector_unequal_mass/execution-receipt.json": "a22f11776463f8dafd2152f2f5b28e81d441eb42d84d488859137127c6011b37",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/screens/runs/vector_unequal_mass/final-state.pt": "3fa259a5716be8a5cb7d47ca94427a9cff48df45046373c7718fdf2a894bc89e",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/screens/runs/img_blobs4/execution-receipt.json": "278a0b88b0dc851ea97c75105ac99c4387c80e8523ed1079aaade2d4a0ed2b3a",
+    "/ml2/hypergan/lrfree-20260926/harness/screen.py": "ee8193adbdf09e93511befae7b6491143c26de88612eddf065cbb92eb2153c3c",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/screens/runs/vector_unequal_mass/rates.jsonl": "95a83f4550050528e244df83dc5f9a27cf5eb69f7c3ba44d508d531048913fd8",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/screens/source-freeze.json": "329e61941685a35007ab514f59b779f5cf5870fdc2d73cf475dc85eab5e3c681",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/indexed-metadata/indexed_adapter.py": "921f4b9f29173e3604830c9ceae998c88aa935db7a5a06dede41b7d9890675da",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/screens/lane.py": "a2c3b374a2757aca6f27be0237202fb414b7532c707c0f2fa4f58b64fd343bf5",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/screens/READY.json": "1a506432e84f34ea9d4c2abeb1ffb4dcd8b4196a993c70ef057851141a533110",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/screens/collect.py": "3500fc335698b16741dc674ad9a0f6c30aa5084637cccd1ba6108b4f69049341",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/screens/runs/mode_hold/rates.jsonl": "bd9841f68351a89c701efdf4e80a64088bfe3150c160532c7b35301aa3ad245b",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/screens/runs/img_blobs4/final-state.pt": "288a5bc0959c494c49d1af306540744809b7b6e37bb39223e40667632602c84b",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/indexed-collector-e22-reference.json": "f273ce52571ea4a762802e6b41eff175694acb374e65567be99f43f1464e68b8",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/monitor_validation.py": "4ee4cae810342b675a39b269112ca907be3ffe88ae9cadab157e4933c487328b",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/screens/runs/vector_unequal_mass/job-header.json": "9287c1aa1d49263651bf198f7c5d7ebb367c47baad374637b563ce89d4badd30",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/INDEXED-COLLECTOR-PILOT-FROZEN.json": "185e0579078b68f85f9f328f0fe9c20c5ca495122ed68bcf8f080e8dd23d0964",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/screens/runs/img_blobs4/result.json": "fab5bfe91a9c5b74b1d0f32d9f20be6bb5312512575ba45b2a280113fcb89ab2",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/indexed-metadata/run_indexed_monitor.py": "b106a49f0c91245c9307aec347d0a834c53d0cd5cedcb8019eac1ccdbe509371",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/indexed-metadata/prepare_indexed_declaration.py": "e5b457b78af1a6cbc4e724d00231687739f0d6346d8fb29dacc500cb7d6ea241",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/AXIS-ID-READY.json": "9193167d0184e82ef24ed513dc2d823fb5ee84bcadb3696c1518534d5e39801a",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/screens/runs/mode_hold/result.json": "b1a7bc9232503b678f5a081d309459bbb0d2f08f9ecf615ed24b919baa725b35",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/screens/runs/mode_hold/final-state.pt": "449bab07752f10dce02427f61ccacf0a4293d4708c1b2b8694cfef9355a8a28a",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/screens/runs/mode_hold/metrics.jsonl": "b1feb70f4e61b2f2c87eb2a8ab84ffaa6897afcf0f206453d7916070151eb3fa",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/screens/runs/vector_unequal_mass/result.json": "8bdeb4055ffb3965d7bb3c7c95226a1f54d31f3e3247206d4278b435bff3785c",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/screens/runs/img_blobs4/metrics.jsonl": "712619c983040a3be9f28ce21505230bf1def77956f4a6a59cc83696d70b4d04",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/screens/runs/img_blobs4/rates.jsonl": "3d6f94b854d39321eb9994d48b2b52e933b5d86bd6e406a90a1aa8fd0d9acc87",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/screens/runs/img_blobs4/job-header.json": "b676b16a45cb6c27ce91448dd589a83e85827c961a2b96bcd286378ea5a31ac0",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/ra4-validation-monitor/canonical-receipts/screens/runs/img_blobs4/acceptance-receipt.json": "50af79626dbc2f4efc5a7b1814df0174e8915ad0c5ebddf0e73ade351f5ee20e",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/indexed-metadata/READY.json": "e76a712d99f3a224a99f1e26a4dcfe813eb61617f217577dd60d69f12af5dee4",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/screens/runs/vector_unequal_mass/metrics.jsonl": "07eef4f88f65c0c7844b9de3ead435f945763cb90ac445fc28eed1aae1795da7",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/ra4-validation-monitor/canonical-receipts/screens/runs/vector_unequal_mass/acceptance-receipt.json": "e6ba855660e944cb88f05406eea4422b4338129a20611a899d3efee6ee3b19c1",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/audit_indexed_owner.py": "721812065155b6c60b17e2e25ec754b9c5cd22539ffe83f11ba0e3d7e129bbfe",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra4-source-review.json": "9a3c4e05f5f8576da903ca5a55ebc5b103117e90e1d6ff987dd158ec5253d9d1",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra4-settings-ast-supplement.json": "012bab4bc4fea1547591f1bed6912a9331534077d67252e9b260a570492c35f4",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/composition-review/COMPOSITION-FROZEN.json": "69ae4a80e94503b2094a2d21520403fc45849b70caa398248fd910b0fc1cba97",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/ra4-indexed-api-monitor/canonical-receipts/screens/runs/mode_hold/strict-plain-acceptance-receipt.json": "7ebf1bfe31a017721fcb85aa42b1a8c18961339e14dd8093a0fe4e0061a650df",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/ra4-indexed-api-monitor/canonical-receipts/screens/runs/mode_hold/acceptance-receipt.json": "03711399db178cafa46d45935beca9999444ea6313153c348ab2f0868115030a",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/ra4-indexed-api-monitor/canonical-receipts/screens/runs/img_blobs4/strict-plain-acceptance-receipt.json": "188cbda1f6d11285a2552ee0edb365304696ad16fbdb8cdd1b15b19935a3ea72",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/ra4-indexed-api-monitor/canonical-receipts/screens/runs/img_blobs4/acceptance-receipt.json": "1552f5c34d1b3786b49a087b504253d56535943d2de5dc97f631986a3b3f427f",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/ra4-indexed-api-monitor/canonical-receipts/screens/runs/vector_unequal_mass/strict-plain-acceptance-receipt.json": "0d51cdbcab59a4890c94953b66562bff14cf6a0440e35aad632fcfaad7b0e61a",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/ra4-indexed-api-monitor/canonical-receipts/screens/runs/vector_unequal_mass/acceptance-receipt.json": "9b120d9fa4a159fec326fd4281f1941e91072cdab8ec868962fde54ab7e8b994",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/ra4-indexed-api-monitor/canonical-receipts/screens/runs/ring_shift/strict-plain-acceptance-receipt.json": "445bdf581f420ef27cfff99876f365c02a6bf717ef9aedc5e7a5d7b18c160dfa",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/ra4-indexed-api-monitor/canonical-receipts/screens/runs/ring_shift/acceptance-receipt.json": "d733512cee53bcf426a3e3f92bd15d266884b25bd4bdfe5fee3cf9da9d9dc2cd",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/screens/runs/ring_shift/result.json": "81cce9d28428ce30ff2c287792dd97a310c2c67420429126091340f53c2e16f8",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/ra4-validation-monitor/canonical-receipts/screens/runs/ring_shift/acceptance-receipt.json": "dfad72a936d896405868d2e74ea67adaeefb49647d748fa346523abc9f71fbfb"
+  },
+  "ready_sha256": "e76a712d99f3a224a99f1e26a4dcfe813eb61617f217577dd60d69f12af5dee4",
+  "pilot_sha256": "cb9620d116112d710abd4d31f17f101f1d21d58c31b24bcc2bf8c2b738fd6b03",
+  "records": [
+    {
+      "task": "mode_hold",
+      "primary": "PASS",
+      "strict": "ERROR/INVALID",
+      "declared_indexed": "PASS/VALID",
+      "all_other_collector_fields_exact": true,
+      "original_error_receipt_unchanged": true
+    },
+    {
+      "task": "img_blobs4",
+      "primary": "PASS",
+      "strict": "ERROR/INVALID",
+      "declared_indexed": "PASS/VALID",
+      "all_other_collector_fields_exact": true,
+      "original_error_receipt_unchanged": true
+    },
+    {
+      "task": "vector_unequal_mass",
+      "primary": "PASS",
+      "strict": "ERROR/INVALID",
+      "declared_indexed": "PASS/VALID",
+      "all_other_collector_fields_exact": true,
+      "original_error_receipt_unchanged": true
+    },
+    {
+      "task": "ring_shift",
+      "primary": "PASS",
+      "strict": "ERROR/INVALID",
+      "declared_indexed": "PASS/VALID",
+      "all_other_collector_fields_exact": true,
+      "original_error_receipt_unchanged": true
+    }
+  ],
+  "collector_ast_proof": {
+    "original_ast_sha256": "b1fd9feaa73ead7170e097e7d52e8b57db0f069adfb2d6834749d879c8369597",
+    "adapted_ast_sha256": "08891c1b65fe387e8fb52ba16b88f56b1177e56d41c57200d1c67a4134fb7902",
+    "reverted_ast_sha256": "b1fd9feaa73ead7170e097e7d52e8b57db0f069adfb2d6834749d879c8369597",
+    "exact_ast_delta": {
+      "function": "collect",
+      "assignment": "expected_options",
+      "keyword": "evaluation_generate",
+      "before": "plain",
+      "after": "indexed"
+    },
+    "all_other_ast_nodes_exact": true
+  },
+  "api": {
+    "resolved_options": {
+      "evaluation_generate": "indexed",
+      "serial_backward_argument": true,
+      "strict_streams": true,
+      "initialization": "batch_feature_zero",
+      "diagnostics": true,
+      "save_final_state": true,
+      "ring_frozen_control": false,
+      "eval_output_noise": true,
+      "image_prior_perturb": false
+    },
+    "auto_detected": {
+      "evaluation_generate": "indexed",
+      "serial_backward_argument": true
+    },
+    "canonical_resolver_ast_sha256": "0c8edab1170e51e3d94c1e64c1490313da542ee80d6f32c8b85d074be372baf9",
+    "native_positional_fragment_ast_sha256": "3952cb9823d186c9a7c36028e36e54fdae2e080739613e4193ee1f78af0be1f5",
+    "fifth_positional_indices": true
+  },
+  "negative_controls_verified": {
+    "wrong_other_option": {
+      "name": "wrong_other_option",
+      "status": "ERROR",
+      "validity": "INVALID",
+      "reasons": [
+        "original resolved options differ: {'evaluation_generate': 'indexed', 'serial_backward_argument': True, 'strict_streams': False, 'initialization': 'batch_feature_zero', 'diagnostics': True, 'save_final_state': True, 'ring_frozen_control': False, 'eval_output_noise': True, 'image_prior_perturb': False}"
+      ],
+      "memory_overlay_only": true
+    },
+    "wrong_package": {
+      "name": "wrong_package",
+      "status": "ERROR",
+      "validity": "INVALID",
+      "reasons": [
+        "original header candidate digest is missing or differs"
+      ],
+      "memory_overlay_only": true
+    },
+    "wrong_stream": {
+      "name": "wrong_stream",
+      "status": "ERROR",
+      "validity": "INVALID",
+      "reasons": [
+        "original stream deviations: 1"
+      ],
+      "memory_overlay_only": true
+    },
+    "wrong_api_mode": {
+      "name": "wrong_api_mode",
+      "status": "ERROR",
+      "validity": "INVALID",
+      "reasons": [
+        "original resolved options differ: {'evaluation_generate': 'plain', 'serial_backward_argument': True, 'strict_streams': True, 'initialization': 'batch_feature_zero', 'diagnostics': True, 'save_final_state': True, 'ring_frozen_control': False, 'eval_output_noise': True, 'image_prior_perturb': False}"
+      ],
+      "memory_overlay_only": true
+    },
+    "quality_fail": {
+      "name": "quality_fail",
+      "status": "FAIL",
+      "validity": "VALID",
+      "reasons": [],
+      "memory_overlay_only": true
+    }
+  },
+  "monitor_snapshot_path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/indexed-owner-monitor-snapshot-attempt2.json",
+  "monitor_snapshot_sha256": "3c658c4683e1b143079d20404d01f774818e99adb4b40e71dec3c0b4c46c84e8",
+  "live_summary_sha256_observed": "3c658c4683e1b143079d20404d01f774818e99adb4b40e71dec3c0b4c46c84e8",
+  "live_monitor_output_expected_to_evolve": true,
+  "exact_host_unset_budget_key_removal": true,
+  "old_strict_error_receipts_preserved": true,
+  "all_original_numerical_data_init_stream_schedule_scorer_gate_checks_retained": true,
+  "inherited_settings_ast_supplement_sha256": "012bab4bc4fea1547591f1bed6912a9331534077d67252e9b260a570492c35f4",
+  "historical_e22_reference_sha256": "f273ce52571ea4a762802e6b41eff175694acb374e65567be99f43f1464e68b8",
+  "cpu_only": true,
+  "cuda_initialized": false,
+  "optimizer_updates": 0,
+  "new_seeds": 0,
+  "numerical_reruns": 0,
+  "scope": "Declared indexed RA4 metadata acceptance; strict historical plain interpretation is retained and quality verdicts are unchanged"
+}

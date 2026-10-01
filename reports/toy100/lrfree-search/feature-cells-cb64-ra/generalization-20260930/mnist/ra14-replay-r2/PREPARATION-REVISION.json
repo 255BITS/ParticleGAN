@@ -1,0 +1,18 @@
+{
+  "status": "FRESH_ADAPTER_REVISION_NO_NUMERICAL_EXECUTION",
+  "superseded_preparation": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay",
+  "superseded_source_freeze_sha256": "03e94e0e3c9f640e317b93bd4f2c63e42e49326b96f91799fb235d581be7ad99",
+  "failed_cpu_receipt_sha256": "b05707edfaaa01db0b87f1e9c655b77c7ed669dc86440d5aedd5ebef5e0cc989",
+  "changed_adapter_sources": [
+    "bridge.py",
+    "freeze.py"
+  ],
+  "change": "Compare the full current Recipe after the original fixture overrides; pin revision provenance in freeze.",
+  "frozen_source_and_numerical_evidence_preserved": true,
+  "training_updates": 0,
+  "cuda_launches": 0,
+  "source_sha256": {
+    "bridge.py": "3508c3310263f3fa3ecfe35389699c43ed4039d9d48411c637a278c640a01bdf",
+    "freeze.py": "79d438ed64ee0102aa1324108295e202c829cdfa19b93680636e95c52fc16e75"
+  }
+}

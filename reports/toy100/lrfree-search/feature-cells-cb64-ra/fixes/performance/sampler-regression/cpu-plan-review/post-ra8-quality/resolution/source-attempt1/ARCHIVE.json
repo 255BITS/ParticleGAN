@@ -1,0 +1,124 @@
+{
+  "status": "HISTORICAL_STATIC_REVIEW_VERSION_NO_NUMERICAL_TEST",
+  "archived_utc": "2026-09-30T08:48:38.195886+00:00",
+  "reason": "strict count-partition scalar typing gap found before numerical execution",
+  "original_source_freeze_sha256": "ff463cdc001f94fdc807192c5c01351cb1537497ce2185066701ebe03b502bd4",
+  "original_path_to_archive": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/pkg-RESOLUTION/particlegan/anchor_birth.py": {
+      "archive_path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/source-attempt1/pkg-RESOLUTION/particlegan/anchor_birth.py",
+      "sha256": "aa50983d8b61304acf4e1138f16fd4784798983df91e931863bcacd3b511f76f"
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/pkg-RESOLUTION/particlegan/conditioning.py": {
+      "archive_path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/source-attempt1/pkg-RESOLUTION/particlegan/conditioning.py",
+      "sha256": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486"
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/pkg-RESOLUTION/particlegan/family_e_init.py": {
+      "archive_path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/source-attempt1/pkg-RESOLUTION/particlegan/family_e_init.py",
+      "sha256": "35097639e944f3f97fa07bf5ff23267346059f32e8dfbd615b8f9a802c9a6936"
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/pkg-RESOLUTION/particlegan/feature_cells.py": {
+      "archive_path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/source-attempt1/pkg-RESOLUTION/particlegan/feature_cells.py",
+      "sha256": "952ab1d7f97482af2e574c95040137601d791bd83739a8748dd7bb0432f21430"
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/pkg-RESOLUTION/particlegan/initialization.py": {
+      "archive_path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/source-attempt1/pkg-RESOLUTION/particlegan/initialization.py",
+      "sha256": "b769638eecc119b22138cd52fa91c56bb0ad3515aab3a567cfef8708dc81a366"
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/pkg-RESOLUTION/particlegan/det_init_f.py": {
+      "archive_path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/source-attempt1/pkg-RESOLUTION/particlegan/det_init_f.py",
+      "sha256": "fb6b0d8d1cc9f61dd0c5b39f6ed606152c0239be944aab47a3de64e83668549c"
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/pkg-RESOLUTION/particlegan/birth_death.py": {
+      "archive_path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/source-attempt1/pkg-RESOLUTION/particlegan/birth_death.py",
+      "sha256": "447f67de1ed80eec0e260c88808cd40e9f682bf55e1ef6c39e6dc513594c8b72"
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/pkg-RESOLUTION/particlegan/__init__.py": {
+      "archive_path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/source-attempt1/pkg-RESOLUTION/particlegan/__init__.py",
+      "sha256": "5e602d56461f5569c701d44321f2c10c59ab97a01542629d025330c0d10eb04a"
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/pkg-RESOLUTION/particlegan/ka2.py": {
+      "archive_path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/source-attempt1/pkg-RESOLUTION/particlegan/ka2.py",
+      "sha256": "a972d7d09ffc8940c962124adea2769d8e7e0b6f02522850fe29fc1a150127a8"
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/pkg-RESOLUTION/particlegan/gan_loss.py": {
+      "archive_path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/source-attempt1/pkg-RESOLUTION/particlegan/gan_loss.py",
+      "sha256": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7"
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/pkg-RESOLUTION/particlegan/qr_bz_pq_init.py": {
+      "archive_path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/source-attempt1/pkg-RESOLUTION/particlegan/qr_bz_pq_init.py",
+      "sha256": "3c7f4677d43f19e769453835b1619a17031cef5a5d3f72e9ecb731f310518ce3"
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/pkg-RESOLUTION/particlegan/init_registry.py": {
+      "archive_path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/source-attempt1/pkg-RESOLUTION/particlegan/init_registry.py",
+      "sha256": "2cc0189f229e4ebaf289485152b3fdcb6eb3c9979f0a4db15ddbaf3fb6d3179c"
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/pkg-RESOLUTION/particlegan/grad_regularizers.py": {
+      "archive_path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/source-attempt1/pkg-RESOLUTION/particlegan/grad_regularizers.py",
+      "sha256": "a02ec4d50b2782b551927125979dd89622d2b728e4a1aa16312401a058d703c2"
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/pkg-RESOLUTION/particlegan/particle_prior.py": {
+      "archive_path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/source-attempt1/pkg-RESOLUTION/particlegan/particle_prior.py",
+      "sha256": "17e39404cefca5963c82d9981f8582ea6c650c9aae66b51ce11ecf05896bb9a9"
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/pkg-RESOLUTION/particlegan/det_init_d.py": {
+      "archive_path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/source-attempt1/pkg-RESOLUTION/particlegan/det_init_d.py",
+      "sha256": "6b2333382e03f7d58956e75dae700b2f6ee48cdb57f61bc3ca1b8ab38e5efaa4"
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/pkg-RESOLUTION/particlegan/det_init_a.py": {
+      "archive_path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/source-attempt1/pkg-RESOLUTION/particlegan/det_init_a.py",
+      "sha256": "c22542a3ac83fe9fe3c7a807442028ccd1dd2409a4428c6757beb3f623d81d4b"
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/pkg-RESOLUTION/particlegan/birth_phase.py": {
+      "archive_path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/source-attempt1/pkg-RESOLUTION/particlegan/birth_phase.py",
+      "sha256": "aa794152ad55a44673adf3bac4284f6ab4bc3b559fac8cb4e7169fe7fafd633d"
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/pkg-RESOLUTION/particlegan/continuous.py": {
+      "archive_path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/source-attempt1/pkg-RESOLUTION/particlegan/continuous.py",
+      "sha256": "071ebb1b8b85c2ff4166557499dc2b71b5ec41e62aeb9d6dfc34bedc10160195"
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/pkg-RESOLUTION/particlegan/batch_feature_init.py": {
+      "archive_path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/source-attempt1/pkg-RESOLUTION/particlegan/batch_feature_init.py",
+      "sha256": "7178f3f9653a5ecf22633406f58f262ea2569ddf9c7e090e2ddbe1cd5aefc8c2"
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/pkg-RESOLUTION/particlegan/recipes.py": {
+      "archive_path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/source-attempt1/pkg-RESOLUTION/particlegan/recipes.py",
+      "sha256": "c5c195725bd7192efc917253d99391cd1cdd9da09e5d42b7f495188b04d3846e"
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/pkg-RESOLUTION/particlegan/vicreg_loss.py": {
+      "archive_path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/source-attempt1/pkg-RESOLUTION/particlegan/vicreg_loss.py",
+      "sha256": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/pkg-RESOLUTION/particlegan/structured_init.py": {
+      "archive_path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/source-attempt1/pkg-RESOLUTION/particlegan/structured_init.py",
+      "sha256": "b098a033e32e5f535041b713e8a9a4a00992af607f00e45ecf364142fd4c7379"
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/pkg-RESOLUTION/particlegan/deterministic_init.py": {
+      "archive_path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/source-attempt1/pkg-RESOLUTION/particlegan/deterministic_init.py",
+      "sha256": "c7fb045cc137187012cdd526b3c62dea068447b1d1a1f07ab06e01fe5c73564f"
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/pkg-RESOLUTION/particlegan/diffusion.py": {
+      "archive_path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/source-attempt1/pkg-RESOLUTION/particlegan/diffusion.py",
+      "sha256": "ec4acf8d6e15c30c5dfbb6fc7b93f10ee1c778214493223c50e08eb2e5047683"
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/pkg-RESOLUTION/particlegan/row_evidence.py": {
+      "archive_path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/source-attempt1/pkg-RESOLUTION/particlegan/row_evidence.py",
+      "sha256": "1e930343a714d7825d517f157683b8dda7d59048781637ba7475efbd0eab9606"
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/pkg-RESOLUTION/particlegan/k3p.py": {
+      "archive_path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/source-attempt1/pkg-RESOLUTION/particlegan/k3p.py",
+      "sha256": "fcff8a4f7a37ac630d8662ed34d3f9cbf89f2c59a33203cd5f963609842b8fb1"
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/pkg-RESOLUTION/particlegan/autoencoder.py": {
+      "archive_path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/source-attempt1/pkg-RESOLUTION/particlegan/autoencoder.py",
+      "sha256": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402"
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/pkg-RESOLUTION/particlegan/discriminators.py": {
+      "archive_path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/source-attempt1/pkg-RESOLUTION/particlegan/discriminators.py",
+      "sha256": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f"
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/pkg-RESOLUTION/particlegan/training.py": {
+      "archive_path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution/source-attempt1/pkg-RESOLUTION/particlegan/training.py",
+      "sha256": "7fc5e2f6f64ce452c255babbd9532b293a9fba8e70bb0fb1f8465e1a825c6205"
+    }
+  }
+}

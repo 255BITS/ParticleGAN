@@ -1,0 +1,17 @@
+{
+  "pid": 433527,
+  "process_startticks": "163937096",
+  "started_utc": "2026-09-30T03:05:50.815558+00:00",
+  "command": [
+    "/tmp/pr38-default-env/bin/python",
+    "-u",
+    "-B",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/indexed-metadata/run_indexed_monitor.py",
+    "--watch"
+  ],
+  "log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/indexed-metadata/watcher.log",
+  "output": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/ra4-indexed-api-monitor",
+  "ready_sha256": "e76a712d99f3a224a99f1e26a4dcfe813eb61617f217577dd60d69f12af5dee4",
+  "pilot_frozen_sha256": "6afa0a36b0faf9541cc9bdf9dc6e435b6b482e82da5bec21c680db3b2a811a95",
+  "cpu_only": true
+}

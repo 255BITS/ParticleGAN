@@ -4,16 +4,31 @@
   "parent": null,
   "goal": "discriminator_stability",
   "hypothesis": "The shipped K3P mechanism is a reference for new learned-MoG experiments; historical cloud evidence does not qualify this MoG conversion.",
-  "changed_factors": ["public K3P recipe with Forge learned-MoG prior and isolated RNG protocol"],
+  "changed_factors": [
+    "public K3P recipe with Forge learned-MoG prior and isolated RNG protocol"
+  ],
   "mechanism_class": "structural",
   "mechanism_rationale": "Shared public K3P optimizer, regularization and learned prior reference.",
   "api_version": "forge-api-v1",
   "execution_path": "public_trainer",
-  "recipe_overrides": {},
-  "requires_capabilities": ["learned_locations", "a2", "named_rng"],
+  "recipe_overrides": {
+    "name": "k3p",
+    "critic_formulation": "k3p"
+  },
+  "requires_capabilities": [
+    "learned_locations",
+    "a2",
+    "named_rng"
+  ],
   "api_changes": [],
-  "claim_contract": {"schedule": "scheduled", "scoring_weights": "live", "sampling_law": "task_declared"},
+  "claim_contract": {
+    "schedule": "scheduled",
+    "scoring_weights": "live",
+    "sampling_law": "task_declared"
+  },
   "lifecycle": "proposed",
-  "prior_art": ["reports/toy100/current-research-base.json"],
+  "prior_art": [
+    "reports/toy100/current-research-base.json"
+  ],
   "guide": "EXPERIMENTATION.md"
 }

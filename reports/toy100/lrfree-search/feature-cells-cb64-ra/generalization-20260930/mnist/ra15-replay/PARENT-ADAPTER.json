@@ -1,0 +1,40 @@
+{
+  "candidate_lane": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra15-replay",
+  "copied_files": {
+    "adapter.py": {
+      "byte_identical": true,
+      "new_sha256": "192cdbb52e904cfea0cb5b3c012befe744cf5981d52d29cef374474fbd03229e",
+      "original_sha256": "192cdbb52e904cfea0cb5b3c012befe744cf5981d52d29cef374474fbd03229e"
+    },
+    "common.py": {
+      "byte_identical": false,
+      "new_sha256": "6370a183848c484019064f27434427628f659ee54c1c4572e63572077d582110",
+      "original_sha256": "131562c85d78b9897515ee5988ed2ac326c8a5417de2248768ef0ca1533a66f7"
+    },
+    "contracts.py": {
+      "byte_identical": true,
+      "new_sha256": "4e3465dbc670eb8b129b133ed0a78d4c360827935fd0dc65ab0c26644fffca21",
+      "original_sha256": "4e3465dbc670eb8b129b133ed0a78d4c360827935fd0dc65ab0c26644fffca21"
+    },
+    "replay.py": {
+      "byte_identical": true,
+      "new_sha256": "083211a655978d6371990e927caca71e5c8d3bbf260df269f95a01f5d51108f8",
+      "original_sha256": "083211a655978d6371990e927caca71e5c8d3bbf260df269f95a01f5d51108f8"
+    }
+  },
+  "extra_adapter": "stdlib shared-lock coordinator and CPU saved-checkpoint audit",
+  "gpu_operations": 0,
+  "native_control_function_AST_identical": [
+    "checkpoint_origin",
+    "compare_native_control"
+  ],
+  "new_RA15_fresh_training_planned": false,
+  "new_RA15_replay_updates_planned": 40,
+  "only_common_change": "VARIANTS display/package label",
+  "origin_lane": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay-r2",
+  "original_RA13_fresh_training_retained": true,
+  "original_replay_runner_byte_identical": true,
+  "original_sampler_validator_bytes_identical": true,
+  "status": "REPLAY_ONLY_SOURCE_PREPARED",
+  "training_updates": 0
+}

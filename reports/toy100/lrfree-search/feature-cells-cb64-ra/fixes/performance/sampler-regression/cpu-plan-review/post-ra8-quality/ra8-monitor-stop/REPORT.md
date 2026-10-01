@@ -1,0 +1,9 @@
+# RA8 grid acceptance and owned watcher stop
+
+The frozen canonical collector accepts the completed grid artifacts as **VALID**, with quality **FAIL**. Original initialization/prior range match, 34 observations through7000, all five terminal20k clouds and the independent100k holdout remain intact. The declared indexed API expectation changes only that predeclared metadata literal; every other original gate/source/fixture/data/stream check is preserved.
+
+Final failing thresholds are precision .96995 versus .97, maximum covariance eigenvalue ratio1.819186 versus1.7, center RMS .203570sigma versus.20, and radial KS .041203 versus.04. All five terminal accuracy checks fail. Holdout individual fidelity accuracy passes, while its original frozen coverage gate fails; it is not an overall holdout or grid pass. The separate covariance reviewer is identifying the exact holdout coverage condition from the saved cloud.
+
+The owned CPU metadata watcher PID774187/startticks165604598 was stopped with one SIGTERM after two complete command/start/no-child checks across all its threads. It exited. No GPU process, original RA4 supervisor or other watcher was signaled. Completed status remains1/16 screens: grid VALID/FAIL, fifteen unrun PENDING with fixture validity UNVERIFIED and no quality verdict. No further numerical job is started here.
+
+The original canonical acceptance receipt, execution/result bytes and complete saved grid artifact manifest are retained. All source guards and artifact bytes are verified before the final seal. The inline stop receipt includes a live log digest captured before its final print; that historical receipt remains unchanged. FINAL-RECEIPT.json supplies the authoritative post-exit evidence map with that single log digest corrected, preserving the exact stop action and saved outcomes.

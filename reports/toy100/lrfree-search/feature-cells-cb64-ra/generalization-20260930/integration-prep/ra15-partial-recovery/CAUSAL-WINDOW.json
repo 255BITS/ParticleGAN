@@ -1,0 +1,205 @@
+{
+  "full_new_quality_validation": false,
+  "guarded_files": 169,
+  "input_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/moving-rotated-window-ra15-r2/SOURCE-FREEZE.json": "3cdda960aa6b7f0553276c3eb2f3d77ec2f25572bfffc217bbeff430928c8d3f",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/moving-rotated-window-ra15-r2/attempt-1/COMPLETION.json": "1712dd3d8e39405b7001775074a00b20d31f1989552dc2dd8985f3b0dfc7803d",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/moving-rotated-window-ra15-r2/attempt-1/candidate/RESTORE.json": "772606e0703d26adbb19a6d3106ecc7f129bdedc73e8072e7d01cc4c0c52824c",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/moving-rotated-window-ra15-r2/attempt-1/candidate/WINDOW-COMPLETION.json": "1917883c7f09b2494995e702c205aa0dda9e660b08cb509d80add385e15fbcaa",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/moving-rotated-window-ra15-r2/attempt-1/candidate/frames.npz.verdict.json": "86f8bf0ae2a53296bf5757cdc705cb6db76e529010d3d018cd337d6a8d170d57",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/moving-rotated-window-ra15-r2/attempt-1/candidate/steps.jsonl": "084a5a632501749a135662c7dbef1e0b1c27f75118aa8cfef6f74c8952b03664",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/moving-rotated-window-ra15-r2/attempt-1/control/RESTORE.json": "772606e0703d26adbb19a6d3106ecc7f129bdedc73e8072e7d01cc4c0c52824c",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/moving-rotated-window-ra15-r2/attempt-1/control/WINDOW-COMPLETION.json": "0c22099080a353626bf682a0833fec03e8dfe65bacf3647a5365de40d5c1ea4f",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/moving-rotated-window-ra15-r2/attempt-1/control/frames.npz.verdict.json": "adeb2eb611c9ec1e5957184198faa3ce85a17275cd922ec0e016679af6824d5d",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/moving-rotated-window-ra15-r2/attempt-1/control/steps.jsonl": "384acf1abcbb8a848862a7e3db1edca2e122c596b39f84777a70d631875a03c9"
+  },
+  "integration_review": "Four source modules byte-identical to immutable RA15; copy the separate portable tests. Require fresh affected gates before full candidate quality claim.",
+  "portable_test": {
+    "CUDA_fixture": "Checks initialized flag remains unchanged; supports preinitialized CUDA in fullsuite.",
+    "external_fixtures": false,
+    "log_sha256": "af36249d4f90c90b2060aecd864075ecdd611a2f116ab52464b78744fcec2291",
+    "path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/integration-prep/ra15-partial-recovery/tests/test_feature_partial_recovery.py",
+    "result": "17 passed",
+    "sha256": "5bd78dc66d588fa95d36875e12537fdb6f4483a2798aff9550672a7a898c59b0"
+  },
+  "quality_improvement": 0.04269999999999996,
+  "scope": "Both workers restore one original checkpoint at1000 and run exactly the failing second turn; first two periods are inherited RA14 evidence.",
+  "source_freeze_sha256": "3cdda960aa6b7f0553276c3eb2f3d77ec2f25572bfffc217bbeff430928c8d3f",
+  "source_integrity": "VALID",
+  "status": "PASS_CAUSAL_CONTINUATION_ONLY",
+  "unchanged_gate_serving_budget": true,
+  "variants": {
+    "candidate": {
+      "actual_last_freeze_missing_critic_groups": [],
+      "actual_last_frozen_inactive_critic_groups": [],
+      "actual_mean_copy_reactions": 24,
+      "control_reproduction": null,
+      "freeze_reasons": {
+        "OK": 47,
+        "missing_or_insufficient_even_group": 3
+      },
+      "gate_hq_bar": 0.86481,
+      "gate_margin": 0.03359000000000001,
+      "last_mean_diagnostics": {
+        "alpha": 0.00012919896640826875,
+        "attempts": 940,
+        "cells": 128,
+        "chart_rank": 8,
+        "fitted_rows": 10000,
+        "known_range": 25.298221281347036,
+        "lower_bound": 0.06370349092375494,
+        "mean": 0.16658216619058183,
+        "moment_rank": 2,
+        "moves": 653,
+        "objective_after_mean": 0.06685133602741747,
+        "objective_before_mean": 0.09424314855707433,
+        "observations": 10000,
+        "output_dim": 2,
+        "policy": "even_linear_output_group_radial_clip_unit_residual_EB_3K_plus_3_v1",
+        "projection_policy": "even_streamed_varying_axes_if_d_le8_else_top8_marginal_variance_stable_v1",
+        "radius": 6.324555320336759,
+        "range_penalty": 0.05695294348035773,
+        "reason": null,
+        "schema": 2,
+        "selected_axes": [
+          0,
+          1
+        ],
+        "snapshot": 150,
+        "status": "firing",
+        "step": 1500,
+        "variance_ddof1": 1.0931410516103446,
+        "variance_penalty": 0.045925731786469165
+      },
+      "missing_EMA_at_freeze_reactions": 45,
+      "new_mean_fires": 47,
+      "new_mean_moves": 12346,
+      "observed_reactions": 50,
+      "observed_updates": 500,
+      "paired_average_at_1500": {
+        "calibration_rows": 10000,
+        "cells": 128,
+        "chart_valid": true,
+        "coherent_rows": 18901,
+        "duplicate_ok": true,
+        "eligible": false,
+        "ema_eligible_rows": 18901,
+        "finite_rows": 20000,
+        "groups": 100,
+        "policy": "ema_support_inside_current_real_group_Q_v1",
+        "rank": 8,
+        "required": 19000,
+        "rows": 20000,
+        "same_group_rows": 20000,
+        "schema": 1,
+        "snapshot": 150,
+        "step": 1500
+      },
+      "period_1500": {
+        "hq": 0.8984,
+        "modes": 99,
+        "period_end": 1500,
+        "target_deg": 60,
+        "task": "rotated100"
+      },
+      "phase_reasons": {
+        "APPLIED": 24,
+        "missing_current_EMA_group": 1,
+        "missing_or_insufficient_even_group": 3,
+        "no_remaining_budget": 22
+      },
+      "quality_status": "PASS",
+      "restore_pass": true,
+      "served_source_at_1500": "fast",
+      "valid_partial_missing_EMA_reactions": 45
+    },
+    "control": {
+      "actual_last_freeze_missing_critic_groups": [
+        1
+      ],
+      "actual_last_frozen_inactive_critic_groups": null,
+      "actual_mean_copy_reactions": 0,
+      "control_reproduction": {
+        "checkpoint_semantic_mismatches": [],
+        "identical_original_verdict": true,
+        "original_checkpoint_sha256": "86377a68005eab5bd3f095514b59ca0aa94a14b0b408b4098a3826590b8dcc2e",
+        "status": "PASS"
+      },
+      "freeze_reasons": {
+        "missing_EMA_group": 50
+      },
+      "gate_hq_bar": 0.86481,
+      "gate_margin": -0.009109999999999951,
+      "last_mean_diagnostics": {
+        "alpha": 0.00012919896640826875,
+        "attempts": 0,
+        "cells": 128,
+        "chart_rank": 8,
+        "fitted_rows": 10000,
+        "known_range": null,
+        "lower_bound": null,
+        "mean": null,
+        "moment_rank": 2,
+        "moves": 0,
+        "objective_after_mean": null,
+        "objective_before_mean": null,
+        "observations": 10000,
+        "output_dim": 2,
+        "policy": "even_linear_output_group_radial_clip_unit_residual_EB_3K_plus_3_v1",
+        "projection_policy": "even_streamed_varying_axes_if_d_le8_else_top8_marginal_variance_stable_v1",
+        "radius": null,
+        "range_penalty": null,
+        "reason": "missing_EMA_group",
+        "schema": 2,
+        "selected_axes": [
+          0,
+          1
+        ],
+        "snapshot": 150,
+        "status": "invalid",
+        "step": 1500,
+        "variance_ddof1": null,
+        "variance_penalty": null
+      },
+      "missing_EMA_at_freeze_reactions": 50,
+      "new_mean_fires": 0,
+      "new_mean_moves": 0,
+      "observed_reactions": 50,
+      "observed_updates": 500,
+      "paired_average_at_1500": {
+        "calibration_rows": 10000,
+        "cells": 128,
+        "chart_valid": true,
+        "coherent_rows": 18415,
+        "duplicate_ok": true,
+        "eligible": false,
+        "ema_eligible_rows": 18415,
+        "finite_rows": 20000,
+        "groups": 95,
+        "policy": "ema_support_inside_current_real_group_Q_v1",
+        "rank": 8,
+        "required": 19000,
+        "rows": 20000,
+        "same_group_rows": 20000,
+        "schema": 1,
+        "snapshot": 150,
+        "step": 1500
+      },
+      "period_1500": {
+        "hq": 0.8557,
+        "modes": 99,
+        "period_end": 1500,
+        "target_deg": 60,
+        "task": "rotated100"
+      },
+      "phase_reasons": {
+        "missing_EMA_group": 50
+      },
+      "quality_status": "FAIL",
+      "restore_pass": true,
+      "served_source_at_1500": "fast",
+      "valid_partial_missing_EMA_reactions": 0
+    }
+  },
+  "window": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/moving-rotated-window-ra15-r2/attempt-1"
+}

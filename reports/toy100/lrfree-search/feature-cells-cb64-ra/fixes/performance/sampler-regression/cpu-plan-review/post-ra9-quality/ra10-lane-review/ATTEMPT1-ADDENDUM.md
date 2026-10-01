@@ -1,0 +1,3 @@
+# Preserved private audit compiler mismatch
+
+The first lane audit used Python3.12 AST dumping and rejected the declaration's compiler-specific AST digest. The frozen preparer used Python3.9.13. The collector source is unchanged: full original AST restoration succeeds after reverting the single indexed expectation literal. The declaration's original and adapted digests exactly match Python3.9.13 dumps. The original audit helper, preparation seal and failed log stay intact. Run the same stdlib-only helper with the original preparer's interpreter to verify the declared digests; numerical runtime remains the frozen Python3.12 environment. No collector, lane, package, input, gate or numerical work changed.

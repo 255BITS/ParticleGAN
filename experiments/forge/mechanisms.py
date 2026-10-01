@@ -49,6 +49,10 @@ def _probe(recipe, name):
             penalty = recipe.make_critic_penalty(optimizer, collect_stats=True)
             optimizer.record.lr_max, optimizer.record.lr_last = 1., 0.
             optimizer.record.observed_steps = recipe.reg_every - 1
+            if recipe.critic_formulation == "ka2":
+                from particlegan.ka2 import WARMUP_CALLS
+                optimizer.record.calls = WARMUP_CALLS - 1
+                optimizer.record.observed_steps = max(1, optimizer.record.observed_steps)
             values = torch.tensor([[1.], [-1.]], dtype=torch.float64)
             penalty(model, values, -values)  # Start the public anchor.
             with torch.no_grad():
@@ -58,7 +62,10 @@ def _probe(recipe, name):
             passed = stats.get("applied") is True and stats.get("prox", 0) > 0 and bool(torch.isfinite(value))
             measurements = {"prox": stats.get("prox"), "phase": stats.get("phase"),
                             "penalty_calls": 2, "optimizer_updates": 0,
-                            "declared_lr_ratio": 0.}
+                            "declared_lr_ratio": 0., "critic_formulation": recipe.critic_formulation}
+            if recipe.critic_formulation == "ka2":
+                measurements.update(initial_penalty_calls=WARMUP_CALLS - 1,
+                                    initial_observed_optimizer_steps=max(1, recipe.reg_every - 1))
     else:
         parameter = nn.Parameter(torch.zeros(4, 1, dtype=torch.float64))
         options = ({"latent_table": parameter, "betas": recipe.prior_betas or recipe.betas}

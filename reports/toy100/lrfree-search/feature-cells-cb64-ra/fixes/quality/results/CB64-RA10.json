@@ -1,0 +1,135 @@
+{
+  "status": "VALID_TOY_PASS_GRID_CENTER_COVARIANCE_QUALITY_FAIL",
+  "variant": "CB64-RA10",
+  "recorded_UTC": "2026-09-30T14:02:47.124402+00:00",
+  "source_integrity": "VALID",
+  "package_sha256": "c8f8b343bded25ce8153bdd74ab9f722b369c0e087aee8a44d3c6e816baef2e4",
+  "config_sha256": "b3656ea7494413106484c556e53877900dd5ccebf2597b3f80b7d0e7d5ba4437",
+  "toy_gate": "PASS",
+  "toy": {
+    "status": "VALID_TOY_PASS_GRID_PENDING",
+    "variant": "CB64-RA10",
+    "device": "cuda:0",
+    "steps": 2000,
+    "toy_quality_gate": "PASS",
+    "precision": 0.96533203125,
+    "coverage": 25,
+    "mass_tv": 0.05211425781250001,
+    "minimum_supported_mass": 0.03271484375,
+    "artifact_audit": "VALID",
+    "checkpoints_audited": 10,
+    "source_integrity": "VALID",
+    "result_sha256": "01f5b0d4c2c3583054bde3c56de84022adc9805bc1a54598129f9757d6f03df5",
+    "audit_receipt_sha256": "81132d840d0f6c7d716155dfa85a63f260ed4aac2537d983f543095bb34509a2",
+    "audit_frozen_sha256": "abe3d47b65fcdb1bfa24791de2acdc8e743d86d6afbe1626b4e8d11b6eb2db9d",
+    "scope": "Original final noisy emitted toy25 gate; no earlier checkpoint selection; grid pending",
+    "recorded_UTC": "2026-09-30T13:08:18.496815+00:00"
+  },
+  "grid_gate": "FAIL",
+  "grid_completed_steps": 7000,
+  "grid_observations": 34,
+  "grid_result_sha256": "91d289fc8c069732adc9e2ae9fa0216ce5c083ea614b71ff382a0917fc559547",
+  "grid_final": {
+    "precision": 0.97945,
+    "modes": 100,
+    "mass_tv": 0.031849999999999996,
+    "acc_center_rms_sigma": 0.19825016141426094,
+    "acc_abs_cov_trace_bias": 0.05834408641910693,
+    "acc_radial_ks": 0.0323120635468479,
+    "max_cov_eig_ratio": 1.7731222860597085,
+    "max_radial_median_ratio": 1.2633052186463232
+  },
+  "grid_terminal": [
+    {
+      "step": 6000,
+      "gate": "FAIL",
+      "failed_fields": [
+        "max_cov_eig_ratio",
+        "acc_center_rms_sigma",
+        "acc_radial_ks"
+      ],
+      "precision": 0.977,
+      "mass_tv": 0.0322,
+      "center_rms_sigma": 0.21259933766074254,
+      "max_cov_eig_ratio": 1.8018687695808284,
+      "radial_ks": 0.04091500650906532
+    },
+    {
+      "step": 6250,
+      "gate": "FAIL",
+      "failed_fields": [
+        "max_cov_eig_ratio",
+        "acc_center_rms_sigma"
+      ],
+      "precision": 0.9795,
+      "mass_tv": 0.0322,
+      "center_rms_sigma": 0.2084201572666415,
+      "max_cov_eig_ratio": 1.7492155521656332,
+      "radial_ks": 0.03563552662275704
+    },
+    {
+      "step": 6500,
+      "gate": "FAIL",
+      "failed_fields": [
+        "max_cov_eig_ratio",
+        "acc_center_rms_sigma"
+      ],
+      "precision": 0.97985,
+      "mass_tv": 0.0322,
+      "center_rms_sigma": 0.21024576025977268,
+      "max_cov_eig_ratio": 1.7153523685975356,
+      "radial_ks": 0.03213788798035644
+    },
+    {
+      "step": 6750,
+      "gate": "FAIL",
+      "failed_fields": [
+        "max_cov_eig_ratio",
+        "acc_center_rms_sigma"
+      ],
+      "precision": 0.9798,
+      "mass_tv": 0.031849999999999996,
+      "center_rms_sigma": 0.2049229549568468,
+      "max_cov_eig_ratio": 1.8318375103332138,
+      "radial_ks": 0.03144798477043831
+    },
+    {
+      "step": 7000,
+      "gate": "FAIL",
+      "failed_fields": [
+        "max_cov_eig_ratio"
+      ],
+      "precision": 0.97945,
+      "mass_tv": 0.031849999999999996,
+      "center_rms_sigma": 0.19825016141426094,
+      "max_cov_eig_ratio": 1.7731222860597085,
+      "radial_ks": 0.0323120635468479
+    }
+  ],
+  "grid_holdout": {
+    "mass_tv": 0.023919999999999997,
+    "center_rms_sigma": 0.1781809123505804,
+    "abs_cov_trace_bias": 0.05530017811667576,
+    "cov_trace_bias": 0.05530017811667576,
+    "radial_ks": 0.028002559748053324,
+    "accuracy_score": 0.6356592508219148,
+    "accuracy_pass": true,
+    "frozen_pass": false,
+    "passed": false,
+    "precision": 0.97911
+  },
+  "grid_holdout_original_gate": "FAIL",
+  "canonical_fixture_validity": "VALID",
+  "artifact_validity": "VALID",
+  "canonical_receipt_sha256": "1a354e6acbdc097233e9afc83c167383d917e0462bcb904f89958af56f02f147",
+  "artifact_receipt_sha256": "16dea3c21b9f5649eb5dd1ebebcce73001586e78bffa5f941578ab7def7b444f",
+  "artifact_proof_sha256": "3288bdecb2c5d80543af0a373c070c2461f6c987fdd2c92a89b58774049eb0a1",
+  "grid_json_audit_receipt_sha256": "5adff1bcf8495a241f883941f1a3a7fab3b503139399ec2ce70e6bee40ac4edf",
+  "raw_final_state_sha256": "287e8f995c44467ec1a8b1721b23a650947765d7cd143dec54c2b1fab43ec36d",
+  "historical_row_identity_scope": "Native JSON abbreviates long ID lists; historical scalar balances/rendered lengths checked, full IDs/lineage/reset state checked at saved final endpoint",
+  "further_cuda_regressions": "NOT_RUN_GRID_QUALITY_FAILED",
+  "no_earlier_checkpoint_selection": true,
+  "no_seed_sweeps": true,
+  "verified_closed_artifact_proof_files": 289,
+  "scope": "Original full CUDA toy and grid schedules. Final center fidelity passes but five terminal combined checks and original frozen holdout fail. No target recommendation."
+}

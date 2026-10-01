@@ -1,0 +1,30 @@
+diff --git a/particlegan/feature_cells.py b/particlegan/feature_cells.py
+--- a/particlegan/feature_cells.py
++++ b/particlegan/feature_cells.py
+@@ -216,7 +216,9 @@
+             return entry[2]
+         spread = points.detach().std(0, unbiased=False)
+         count = min(self.rank, int((spread > 0).sum()))
+-        axes = spread.argsort(descending=True, stable=True)[:count]
++        # Cache Python indices after one batched transfer. A CUDA scalar axis
++        # would otherwise synchronize every block[:, axis] lookup per chunk.
++        axes = spread.argsort(descending=True, stable=True)[:count].cpu().tolist()
+         orders = []
+         for axis in axes:
+             values, rows = points.detach()[:, axis].sort(stable=True)
+diff --git a/particlegan/training.py b/particlegan/training.py
+--- a/particlegan/training.py
++++ b/particlegan/training.py
+@@ -253,8 +253,11 @@
+         """The output-noise std that ``sample`` currently adds (a float)."""
+         return float(self._output_sigma(output_noise_std(self.recipe, self.completed_steps)))
+ 
+-    def _generate(self, model, latent, sigma, stream, *, rows=None):
++    def _generate(self, model, latent, sigma, stream, indices=None, *, rows=None):
+         """``model(latent) + sigma * eps``; no draw when sigma == 0."""
++        if indices is not None and rows is not None:
++            raise ValueError("pass sampled row IDs as indices or rows, not both")
++        rows = indices if rows is None else rows
+         if self.birth_death is not None and hasattr(self.birth_death, "perturb_latent"):
+             prior = self.ema_prior if model is self.ema_G else self.prior
+             latent = self.birth_death.perturb_latent(latent, stream, self.controller,

@@ -1,0 +1,15 @@
+{
+  "status": "COMPOSED_ROOT_CONTRACT_WRAPPER",
+  "source_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/run_group_profile_v2.py": "5bc48310ee58859a4389dd547599934f3f46fdf803e7e548d85bdc4091168707",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/run_positive_lease.py": "b4b39f73e4d24c070ba92d453d21243a6f070f8b6f735db992e8756950ff901d"
+  },
+  "changes": [
+    "AREA",
+    "OWNER",
+    "OUTPUT"
+  ],
+  "all_other_ast_exact": true,
+  "inherited_child_lock": true,
+  "scope": "Preserves previously verified orphan-safe serial lock, GPU identity, original supervisor and source checks. No numerical execution yet."
+}

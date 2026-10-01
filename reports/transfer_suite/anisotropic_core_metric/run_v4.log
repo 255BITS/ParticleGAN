@@ -1,6 +1,0 @@
-# 4 episodes, 4 workers
-[     8s] v4 vector_unequal_width   leaky_orig       fail suffix= 0 sw1=0.085 tv=0.083 core=0.18 spill=0.055 oldcov=7.81 old=fail(0) failing=max_component_spill 7.3s
-[     8s] v4 vector_unequal_mass    leaky_orig       fail suffix= 0 sw1=0.081 tv=0.052 core=0.31 spill=0.418 oldcov=5.80 old=fail(0) minmass=0.91 failing=max_component_spill 7.5s
-[     9s] v4 vector_unequal_mass    axis_silu        fail suffix= 0 sw1=0.137 tv=0.086 core=0.39 spill=0.046 oldcov=1.44 old=fail(0) minmass=0.65 failing=component_core_min_eigen_ratio 7.8s
-[     9s] v4 vector_unequal_width   axis_silu        SUST suffix= 8 sw1=0.091 tv=0.056 core=0.16 spill=0.041 oldcov=0.89 old=fail(0) failing=- 7.8s
-# done in 9s

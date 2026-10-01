@@ -1,0 +1,51 @@
+{
+  "accuracy": 0.9807999730110168,
+  "active_dimensions": 39,
+  "real_vs_real": {
+    "class_mass_tv": 0.011399999999999993,
+    "predicted_class_mass": [
+      0.1042,
+      0.113,
+      0.1,
+      0.1018,
+      0.09720000000000001,
+      0.08600000000000001,
+      0.09920000000000001,
+      0.1008,
+      0.0984,
+      0.0994
+    ],
+    "confident_class_mass": [
+      0.09920000000000001,
+      0.109,
+      0.0932,
+      0.09680000000000001,
+      0.09480000000000001,
+      0.0824,
+      0.0966,
+      0.093,
+      0.095,
+      0.0932
+    ],
+    "confident_class_coverage": 10,
+    "confident_fraction": 0.9531999826431274,
+    "mean_classifier_confidence": 0.9822109341621399,
+    "raw_embedding": {
+      "embedding_frechet": 24.760949964906104,
+      "embedding_precision": 0.93505859375,
+      "embedding_recall": 0.85302734375
+    },
+    "active_embedding": {
+      "embedding_frechet": 1.947825776769207,
+      "embedding_precision": 0.93701171875,
+      "embedding_recall": 0.84228515625
+    }
+  },
+  "normalization_rule": "real train first 5000; std > 1e-6 * maximum training std",
+  "active_mask_sha256": "09d9892b4e49583f84a5d8f192e6aad6ece2237afe45da407a1fec715f80a600",
+  "active_mean_sha256": "f446c6b9a17cf16f85aae7da1857f6a99b33de145175368825432e2c99f57422",
+  "active_std_sha256": "4b1f1e4fbfb8cb2bc04f18ccf10083462c7223d517916f761cbcca409fd4aea8",
+  "raw_reference_sha256": "b22e4231107b009c7c0dd04e2f4f55c254f94922b2b955f2653f5b4354d9dfcb",
+  "active_reference_sha256": "6604cc8058164117d72883d7c0fcc7574c8ccbb3acb1e33fee8dbc47f9474049",
+  "evaluator_model_sha256": "9872b10008933497cd2b0de80ea7d7d804e58f5a2a9f6dd0ccd5db3cb4f6f05b"
+}

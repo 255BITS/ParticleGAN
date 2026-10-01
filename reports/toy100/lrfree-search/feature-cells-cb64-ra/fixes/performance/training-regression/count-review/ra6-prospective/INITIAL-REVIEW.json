@@ -1,0 +1,34 @@
+{
+  "status": "VALID",
+  "scope": "initial sealed checkpoint artifact/API/population review",
+  "sealed_steps": [
+    0,
+    100,
+    250
+  ],
+  "reviewed_receipts": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra6-prospective/accepted-attempt2/SOURCE-RECEIPT.json": "dbd49d771c7a064e0a3da22a71edfe20814913ff16d5107b5bd1a1b46c1fefef",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra6-prospective/accepted-attempt2/SOURCE-FROZEN.json": "d23f3c777b3fea36afef8e0c9b85b6feaac89dd2e9a7960db15f9ba29e876804",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra6-prospective/accepted-attempt2/checkpoint-0000.json": "c4caf01e44af15bb53971761fb0f205111796908caf5a20c6b03982bfc8c5888",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra6-prospective/accepted-attempt2/checkpoint-0100.json": "cdfdbee816879ee2f32e961accb712bfcf0556bec616ba796fe7c59c6a8cec0d",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra6-prospective/accepted-attempt2/checkpoint-0250.json": "5574a83263cc778fa1805c1e9fcb8cc3011620c0938dce0697d349c2e1985f9c",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra6-prospective/accepted-attempt2/checkpoint-0000-FROZEN.json": "9f085250e2e6616cf76b809c6e13d37919bf73d2990f2243219be1519bfa92c0",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra6-prospective/accepted-attempt2/checkpoint-0100-FROZEN.json": "88e3d0b2b472733f46e4cf1dd84d168843ce45cdf6871d5bebb18327c9b8004d",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra6-prospective/accepted-attempt2/checkpoint-0250-FROZEN.json": "d7bf692f4d7bbdf460636e48a9fa7383c54194d9970535e28e7d3b77b1fa1ffa"
+  },
+  "watcher": {
+    "pid": 598127,
+    "start_ticks": "164696104",
+    "started_utc": "2026-09-30T05:12:20.889907+00:00",
+    "script_sha256": "c2f595430ed9b70ae9d3cdc0383b7de7809d7540d8088dd4565f5cf78b2b4895",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra6-prospective/watcher.log",
+    "cpu_only": true,
+    "read_only_candidate": true
+  },
+  "quality_verdict": null,
+  "target": "Strict final toy AND original full Grid100",
+  "replay_review": "pending authorized passing phase",
+  "cpu_only": true,
+  "cuda_initialized": false,
+  "new_training_updates": 0
+}

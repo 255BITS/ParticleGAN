@@ -16,7 +16,8 @@ import time
 import numpy as np
 import torch
 
-from .api import CapabilityError, FormulationContext
+from .api import (CapabilityError, FormulationContext, host_recipe_overrides,
+                  task_policy_blockers)
 from .artifacts import manifest_artifacts, verify_artifacts
 from .contracts import atomic_json, file_hash, read_json, stable_hash
 from .mechanisms import MechanismAudit, mechanism_blockers
@@ -33,16 +34,13 @@ def _context(request, task, device, resources):
     candidate = request["candidate"]
     from .nativeprofiles import native_host_initialization
     host_initialization = native_host_initialization(task)
-    fixed = {**resources, "total_steps": task["execution"].get("original_schedule_horizon", task["execution"]["steps"])}
-    conflicts = [key for key, value in fixed.items()
-                 if key in candidate.get("recipe_overrides", {}) and candidate["recipe_overrides"][key] != value]
-    if conflicts:
-        raise CapabilityError([f"candidate overrides frozen host resource {key}; declare a different task" for key in sorted(conflicts)])
-    overrides = {**candidate.get("recipe_overrides", {}), **resources}
-    # Execution budget and schedule horizon are distinct for endurance jobs.
-    overrides["total_steps"] = task["execution"].get("original_schedule_horizon", task["execution"]["steps"])
+    blockers = task_policy_blockers(task, candidate)
+    if blockers:
+        raise CapabilityError(blockers)
+    overrides = host_recipe_overrides(candidate, task["execution"], resources)
     return FormulationContext(
-        recipe_overrides=overrides, prior=task["execution"].get("prior", candidate.get("prior")),
+        recipe_preset=candidate.get("recipe_preset"), recipe_overrides=overrides,
+        prior=task["execution"].get("prior", candidate.get("prior")),
         seed=request["protocol"]["seed"], device=device,
         requires_capabilities=tuple(candidate.get("requires_capabilities", ())) + tuple(task["requires_capabilities"]),
         extensions=candidate.get("extensions", {}), initializer=candidate.get("initializer", "deterministic_orthogonal"),
@@ -56,6 +54,9 @@ def adapter_preflight(task, candidate, *, root=None):
                  "native100_continuation", "ring_endurance", "clockfree_audit", "paired_adaptation"}
     if adapter not in supported:
         return [f"no public adapter for {adapter}; implement its declared capability before training"]
+    policy_blockers = task_policy_blockers(task, candidate)
+    if policy_blockers:
+        return policy_blockers
     if adapter == "transfer_behavior" and task["execution"].get("host") != "mode_hold":
         from .behavior_adapters import behavior_preflight
         return behavior_preflight(task, candidate)
@@ -90,10 +91,10 @@ def adapter_preflight(task, candidate, *, root=None):
     if adapter in {"ring_endurance", "transfer_behavior"}:
         from benchmarks.legacy.locked_shared import LOCKED_SHARED
         resources = {"num_particles": LOCKED_SHARED.n_particles, "z_dim": 4, "batch_size": 128}
-    fixed = {**resources, "total_steps": execution.get("original_schedule_horizon", execution["steps"])}
-    blockers.extend(f"candidate overrides frozen host resource {key}; declare a different task"
-                    for key, value in fixed.items() if key in candidate.get("recipe_overrides", {})
-                    and candidate["recipe_overrides"][key] != value)
+    try:
+        host_recipe_overrides(candidate, execution, resources)
+    except CapabilityError as error:
+        blockers.extend(error.blockers)
     return blockers
 
 

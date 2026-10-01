@@ -1,0 +1,16 @@
+{
+  "status": "PRIVATE_PROPOSAL_UNQUALIFIED",
+  "base_package": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA6",
+  "package_root": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra4-quality/anchor-profile/pkg-GROUP-COUNT",
+  "ast_splices": [
+    {
+      "kind": "method",
+      "owner": "FeatureCellSnapshot",
+      "name": "_group_counts",
+      "base_ast_sha256": "7aeadb3732ff630a36a7c92baa47402c01f0f42d32d5ea5a61168d456bc7c7de",
+      "proposal_ast_sha256": "d863319ee64c9e961071bae3f4db0de059ca7d995d58517c8026a00f6cfc0339"
+    }
+  ],
+  "maximum_matrix_entries": 4096,
+  "state_or_law_changes": false
+}
