@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "id": "k3p-no-output-noise-diagnostic",
+  "parent": "k3p",
+  "goal": "discriminator_stability",
+  "hypothesis": "Removing additive training output noise may prevent the clean learned-MoG native distribution from contracting late. This is a one-factor diagnostic of the training/scoring-law mismatch, not a predicted positive or a full-reference claim.",
+  "changed_factors": ["Remove training output-noise convolution in both discriminator and generator objectives: output_noise_std 0.029 -> 0.0. Preserve clean public sampling, A2, all other resolved recipe fields, seed, initializer, prior and full gates."],
+  "mechanism_class": "structural",
+  "mechanism_rationale": "Remove a stochastic convolution from the trained fake distribution using an existing public Recipe field. This changes the training objective while retaining the declared evaluation law; it is neither a constant search nor a sampling-only patch. Zero means absence of this mechanism, not a tuned noise amplitude.",
+  "api_version": "forge-api-v1",
+  "execution_path": "public_trainer",
+  "recipe_overrides": {"output_noise_std": 0.0},
+  "requires_capabilities": ["learned_locations", "a2", "named_rng"],
+  "api_changes": [],
+  "claim_contract": {"schedule": "scheduled", "scoring_weights": "live", "sampling_law": "task_declared"},
+  "lifecycle": "proposed",
+  "prior_art": ["reports/forge/HOST_PROFILE_TRANSFER_READOUT.md", "reports/forge/A2_OFF_NATIVE_READOUT.md", "reports/forge/POSITIVE_REFERENCE_SOURCE_AUDIT.md", "reports/forge/studies/SCIENTIFIC_CALIBRATION_CANDIDATE_ANALYSIS.md", "reports/forge/studies/NO_OUTPUT_NOISE_REFERENCE_V1.md"],
+  "guide": "EXPERIMENTATION.md"
+}

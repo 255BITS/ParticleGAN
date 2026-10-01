@@ -1,0 +1,26 @@
+[
+  {
+    "candidate": "k3p-no-output-noise-diagnostic",
+    "candidate_revision": "0fa6918ca4d0456515de09dbcfaeedffba1d4cecaab00dee5028bcf3b0b34603",
+    "guide": "EXPERIMENTATION.md",
+    "policy_fingerprint": "be39250099541a0d4f589514e86a3e584d9fcb28efb8f3e21febdbd221996dcd",
+    "preflight_blockers": [],
+    "tasks": [
+      {
+        "blockers": [],
+        "budget_seconds": 3600,
+        "execution_group": "grid100_affine_square_named_v1",
+        "importance": "diagnostic",
+        "order": 0,
+        "permitted_by_tier_cap": true,
+        "qualification_tier": 1,
+        "reusable": false,
+        "shared_pending": false,
+        "task": "grid100_affine_square_named_v1"
+      }
+    ],
+    "through_tier": 1,
+    "view": "calibration-no-output-noise-native-v1",
+    "worst_case_seconds": 3600
+  }
+]
