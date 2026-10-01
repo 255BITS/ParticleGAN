@@ -1,0 +1,303 @@
+{
+  "schema": "routed_convergence_neutral_compact_v1",
+  "scope": "one fixed learned-game initialization intervention; no Forge/default/Supra qualification",
+  "bindings": {
+    "source_hashes": {
+      "docs/e22_routed_convergence_v1.json": "8fbb7882ee2c57e4ea939a4cd642058fa5ddca21f6a139f16191b4822ff16d02",
+      "examples/run_e22_routed_convergence.py": "2421e447b79489d1f6be3721994f5edabed6af6ddbc3ebe7813ddcec109ce7c5",
+      "examples/e22_routed_convergence.py": "b814bc0cac728d02290f6f0ed712dd6bb9483074f11666c5c012e72cd4d8f6b6",
+      "docs/e22_routed_convergence_neutral_v1.json": "7313909fc91b57d9945a62bd02dc4a2d3f71af667a9e309276dec1a7233e4e93",
+      "examples/e22_routed_convergence_neutral.py": "504df385659576c0da967866849926e3c2a213e11c2f7d63168cfcadf829c8aa"
+    },
+    "native_revision": "6ec7e5788e14ea15ddc3e16ac71110458108b6a6",
+    "native_base_revision": "6ec7e5788e14ea15ddc3e16ac71110458108b6a6",
+    "native_source_hash": "d0be475a055aae953c22dbd19f6d2357db041437e0679d2f2f2cfa356517f65b",
+    "parent_receipt_sha256": "6d0b3bb22c701f15968ce742afaa09e36af6083449d76245cf5306c2d24eaf60"
+  },
+  "training_source_git_commit": "d7cfb249",
+  "original_training_status": "error_after_complete_training",
+  "original_error_receipt_sha256": "e89814f84d3cb00f6d253106f5055ab640edbe2ee1a576d9a87aec99f301a442",
+  "recovered_evaluation_receipt_sha256": "4f5a671db3844b0510ca2a0cdd67de8909632decc389968400b317f8830cbce8",
+  "evaluation_repair": {
+    "sole_change": "fresh neutral loop before fixed checkpoint evaluation",
+    "training_ast_unchanged": true,
+    "archived_training_source_sha256": "504df385659576c0da967866849926e3c2a213e11c2f7d63168cfcadf829c8aa",
+    "repaired_helper_sha256": "1b9154bd653db5e5cc629877297eab6a06bbd3f1ac9cabb1858eef36a083724c",
+    "recovery_cli_sha256": "768e1a5204780fe511f857079bcc0dd017b8947c04c135224002e174dad4a438",
+    "saved_training_bindings_unchanged": true
+  },
+  "original_training_artifacts_unchanged": true,
+  "new_training_updates": 0,
+  "data_digest": "149f1a3cf546d18485ec07e6bca496edc31a08ca5b146bd81ba3c38f88585f30",
+  "initialization_witness": {
+    "changed_initial_coordinates": [
+      "generator.first.bridge.weight[H]",
+      "generator.first.bridge.bias",
+      "generator.second.bridge.weight[H]",
+      "generator.second.bridge.bias",
+      "average_generator.first.bridge.weight[H]",
+      "average_generator.first.bridge.bias",
+      "average_generator.second.bridge.weight[H]",
+      "average_generator.second.bridge.bias"
+    ],
+    "other_initial_owners_equal": true,
+    "teacher_data_scales_equal": true,
+    "native_recipe_equal": true,
+    "all_non_generator_native_initial_state_equal": true,
+    "sampled_C_nonzero": true,
+    "original_data_digest": "48a7d5a6ef912dbef2eb9e8161301054239e09f897624e0c3a6573e774f79df8",
+    "neutral_data_digest": "149f1a3cf546d18485ec07e6bca496edc31a08ca5b146bd81ba3c38f88585f30"
+  },
+  "private_panel_digest": "5af4a090d2b3517a3f70d486a5a8ecfca5a502b675c49d424746f5183e3696bb",
+  "judges": {
+    "ordinary_native_game@800": "b54415bad7c5f15a8987f13cdba21c114052f417c54e426c8a427a789f551f40",
+    "ordinary_native_game@6400": "8c00874f68c59b436e5fc175f8c2dde494e0a271b39ebb7862a604170551bff7",
+    "particle_native_game@800": "ae39d851d92357dcbf54691f5d1240680eb60faab61bcc56391cc4ee79e79ca5",
+    "particle_native_game@6400": "4b479af6036dd85c68513eb0e1f59aaf6ebc873713d3c60390f622250f1c5d40"
+  },
+  "steps": 6400,
+  "batch_size": 4,
+  "total_training_and_recovery_seconds": 204.09489038214087,
+  "endpoint_test_scores": {
+    "0": {
+      "ordinary_native_game@800": {
+        "paired_game": 3.1546237468719482,
+        "clean_zero_noise_game": 3.1646785736083984,
+        "feature_proxy": 0.9302971363067627,
+        "teacher_zero_residual_anchor": 0.6931471228599548,
+        "output_rmse_diagnostic": 0.2238624095916748
+      },
+      "ordinary_native_game@6400": {
+        "paired_game": 1.9247480630874634,
+        "clean_zero_noise_game": 1.993973731994629,
+        "feature_proxy": 0.6959889531135559,
+        "teacher_zero_residual_anchor": 0.6931471228599548,
+        "output_rmse_diagnostic": 0.2238624095916748
+      },
+      "particle_native_game@800": {
+        "paired_game": 4.164158821105957,
+        "clean_zero_noise_game": 4.177757263183594,
+        "feature_proxy": 1.054342269897461,
+        "teacher_zero_residual_anchor": 0.6931471228599548,
+        "output_rmse_diagnostic": 0.2238624095916748
+      },
+      "particle_native_game@6400": {
+        "paired_game": 2.8442108631134033,
+        "clean_zero_noise_game": 2.9106833934783936,
+        "feature_proxy": 0.6991603970527649,
+        "teacher_zero_residual_anchor": 0.6931471228599548,
+        "output_rmse_diagnostic": 0.2238624095916748
+      }
+    },
+    "1600": {
+      "ordinary_native_game@800": {
+        "paired_game": 1.1332392692565918,
+        "clean_zero_noise_game": 1.1354656219482422,
+        "feature_proxy": 0.1528509110212326,
+        "teacher_zero_residual_anchor": 0.6931471228599548,
+        "output_rmse_diagnostic": 0.16664361953735352
+      },
+      "ordinary_native_game@6400": {
+        "paired_game": 1.5983079671859741,
+        "clean_zero_noise_game": 1.6579028367996216,
+        "feature_proxy": 0.5562868118286133,
+        "teacher_zero_residual_anchor": 0.6931471228599548,
+        "output_rmse_diagnostic": 0.16664361953735352
+      },
+      "particle_native_game@800": {
+        "paired_game": 1.85396409034729,
+        "clean_zero_noise_game": 1.8540693521499634,
+        "feature_proxy": 0.31765565276145935,
+        "teacher_zero_residual_anchor": 0.6931471228599548,
+        "output_rmse_diagnostic": 0.16664361953735352
+      },
+      "particle_native_game@6400": {
+        "paired_game": 2.3571410179138184,
+        "clean_zero_noise_game": 2.413332223892212,
+        "feature_proxy": 0.5319992303848267,
+        "teacher_zero_residual_anchor": 0.6931471228599548,
+        "output_rmse_diagnostic": 0.16664361953735352
+      }
+    },
+    "6400": {
+      "ordinary_native_game@800": {
+        "paired_game": 0.70229172706604,
+        "clean_zero_noise_game": 0.7023475766181946,
+        "feature_proxy": 0.0014261840842664242,
+        "teacher_zero_residual_anchor": 0.6931471228599548,
+        "output_rmse_diagnostic": 0.03431996703147888
+      },
+      "ordinary_native_game@6400": {
+        "paired_game": 0.8027129769325256,
+        "clean_zero_noise_game": 0.810822069644928,
+        "feature_proxy": 0.06645708531141281,
+        "teacher_zero_residual_anchor": 0.6931471228599548,
+        "output_rmse_diagnostic": 0.03431996703147888
+      },
+      "particle_native_game@800": {
+        "paired_game": 0.7045040130615234,
+        "clean_zero_noise_game": 0.7043513655662537,
+        "feature_proxy": 0.0008714431896805763,
+        "teacher_zero_residual_anchor": 0.6931471228599548,
+        "output_rmse_diagnostic": 0.03431996703147888
+      },
+      "particle_native_game@6400": {
+        "paired_game": 0.8007083535194397,
+        "clean_zero_noise_game": 0.8041819930076599,
+        "feature_proxy": 0.03238530084490776,
+        "teacher_zero_residual_anchor": 0.6931471228599548,
+        "output_rmse_diagnostic": 0.03431996703147888
+      }
+    }
+  },
+  "paired_game_improvements": {
+    "ordinary_native_game@800": 0.32059359550476074,
+    "ordinary_native_game@6400": 0.7016848921775818,
+    "particle_native_game@800": 0.4809072017669678,
+    "particle_native_game@6400": 1.5042352080345154
+  },
+  "endpoint_gap_reduction": {
+    "ordinary_native_game@6400": 1.208112090717195,
+    "particle_native_game@6400": 1.094665060034015
+  },
+  "particle_coverage": {
+    "live_bank_updates": 6399,
+    "live_query_updates": 6399,
+    "moves": 0,
+    "row_control_events": 64,
+    "proposal_events": 64,
+    "candidate_proposals": 512
+  },
+  "final_particle_witness": {
+    "C_norms": {
+      "first": 0.6391509771347046,
+      "second": 0.7079761028289795
+    },
+    "bridge_still_trainable": true,
+    "bank_changed": true,
+    "router_changed": true,
+    "zero_code_minus_live_test_game": {
+      "ordinary_native_game@800": 0.7556474208831787,
+      "ordinary_native_game@6400": 0.5848477482795715,
+      "particle_native_game@800": 1.1852797269821167,
+      "particle_native_game@6400": 0.9303701519966125
+    }
+  },
+  "recovery_witness": {
+    "from": 800,
+    "to": 802,
+    "rows_exact": true,
+    "state_exact": true,
+    "final_state_unchanged": true,
+    "software_updates": 2,
+    "wall_seconds": 0.18814889714121819
+  },
+  "retained_particle_gate": true,
+  "mechanism_supported": true,
+  "qualification_credit": "none",
+  "local_bulk_path": "/ml2/hypergan/ParticleGAN-convergence-toy-develop/runs/routed-convergence-neutral-v1",
+  "limitations": [
+    "Teacher aligned to ordinary initial down basis; same exact reachable teacher for both families.",
+    "One fixed cohort/seed; two-site teacher family, not full Supra.",
+    "All four original learned critics mandatory; output RMSE diagnostic only.",
+    "Historical ordinary MSE reference retains lower diagnostic output RMSE.",
+    "No structural moves accepted; native optimizer/default recipes unchanged."
+  ],
+  "independent_review": {
+    "qualified": true,
+    "checks": 61606,
+    "reviewer_sha256": "9ef2a9da68a69453573fa8ec54174d63e25c06e14ba4f916fabb702e1cb66b69",
+    "source_sha256": {
+      "examples/e22_routed_convergence.py": "b814bc0cac728d02290f6f0ed712dd6bb9483074f11666c5c012e72cd4d8f6b6",
+      "examples/run_e22_routed_convergence.py": "2421e447b79489d1f6be3721994f5edabed6af6ddbc3ebe7813ddcec109ce7c5",
+      "docs/e22_routed_convergence_v1.json": "8fbb7882ee2c57e4ea939a4cd642058fa5ddca21f6a139f16191b4822ff16d02",
+      "examples/e22_routed_convergence_neutral.py": "504df385659576c0da967866849926e3c2a213e11c2f7d63168cfcadf829c8aa",
+      "docs/e22_routed_convergence_neutral_v1.json": "7313909fc91b57d9945a62bd02dc4a2d3f71af667a9e309276dec1a7233e4e93"
+    },
+    "checkpoint_files": 34,
+    "curve_rows": 33,
+    "elapsed_seconds": 22.993257666006684,
+    "combined_training_recovery_evaluation_review_seconds": 227.08814804814756,
+    "wall_elapsed_from_run_directory_creation_upper_bound_seconds": 807.6935942173004,
+    "original_training_source_sha256": "504df385659576c0da967866849926e3c2a213e11c2f7d63168cfcadf829c8aa",
+    "evaluation_repair": {
+      "sole_change": "fresh neutral loop before fixed checkpoint evaluation",
+      "training_ast_unchanged": true,
+      "archived_training_source_sha256": "504df385659576c0da967866849926e3c2a213e11c2f7d63168cfcadf829c8aa",
+      "repaired_helper_sha256": "1b9154bd653db5e5cc629877297eab6a06bbd3f1ac9cabb1858eef36a083724c",
+      "recovery_cli_sha256": "768e1a5204780fe511f857079bcc0dd017b8947c04c135224002e174dad4a438",
+      "saved_training_bindings_unchanged": true
+    },
+    "original_failure_preserved": true,
+    "training_ast_unchanged": true,
+    "independent_recovery_updates": 2,
+    "independent_recovery_seconds": 0.19455358386039734,
+    "independent_actual_800_to_802_rows_and_state_exact": true,
+    "initial_process_global_rng_equal_to_parent": false,
+    "process_global_rng_constant_all_saved_boundaries": true,
+    "paired_game_improvements": {
+      "ordinary_native_game@800": 0.32059359550476074,
+      "ordinary_native_game@6400": 0.7016848921775818,
+      "particle_native_game@800": 0.4809072017669678,
+      "particle_native_game@6400": 1.5042352080345154
+    },
+    "endpoint_gap_reduction": {
+      "ordinary_native_game@6400": 1.208112090717195,
+      "particle_native_game@6400": 1.094665060034015
+    },
+    "zero_code_minus_live_test_game": {
+      "ordinary_native_game@800": 0.7556474208831787,
+      "ordinary_native_game@6400": 0.5848477482795715,
+      "particle_native_game@800": 1.1852797269821167,
+      "particle_native_game@6400": 0.9303701519966125
+    },
+    "retained_particle_gate": true,
+    "mechanism_supported": true,
+    "limitations": [
+      "One named LoRA-generated reachable family; no Supra/default/Forge qualification.",
+      "Only initial H and b changed; every native law remains active.",
+      "Process global RNG initial entropy is separate from matched named initialization and training streams.",
+      "Code-ablation direction is reported; output RMSE is evaluation-only."
+    ],
+    "receipt_sha256": "303b9365de66fb17b52430e85fcf59ec5954dc131f715877bfef165bcf676507"
+  },
+  "original_artifact_sha256": {
+    "training-source-504df385.py": "504df385659576c0da967866849926e3c2a213e11c2f7d63168cfcadf829c8aa",
+    "training-receipt-error.json": "e89814f84d3cb00f6d253106f5055ab640edbe2ee1a576d9a87aec99f301a442",
+    "trace.jsonl": "740e42a1812ddfe4b3b42241cd795f66867d8ab086139b6aeba1a669c503a931",
+    "step-0000.pt": "264b55820f7e35b64f46c5798ae9718d67d285d97c51ea90bed163806a56a721",
+    "step-0200.pt": "c1e3dc3b02506730c9a1510f38e620f8cf6d81ca816c360c40824f8a496d2121",
+    "step-0400.pt": "341bd8a2c8eeea81f5ac4575c9a75eebc81669ac0c0a95e9a91996f8db7a9375",
+    "step-0600.pt": "14113c58984821e027385aab69f981ebe0dc21b97a565c4d98007f158ef3bfb3",
+    "step-0800.pt": "d37ecea6c48b4964c86c4f9506e073cdab51e27836437b4894d8e2682f3857d8",
+    "step-1000.pt": "69574b3df95480072cac8fb435c83b7c4bb1ca41ff14d8172e804e7a3916a5db",
+    "step-1200.pt": "ffa921309b90a370b92a29305829a52b77758dd4c8754d8d3389a43d2f5a9e3d",
+    "step-1400.pt": "384a56159a4cb0660f9b0de0d5826698a91c7489953b198451079d50385463d4",
+    "step-1600.pt": "b09210028daeab221a74304ba8d4ffdfd6d387d148489655b93fbf584c6d41c7",
+    "step-1800.pt": "82320be3012cb133d72ddcd8639ed371381ea6c3195533c55f1ddb63a4d8a73d",
+    "step-2000.pt": "068b2c6a7e877620435b52886f5fb404c646e2ac874ff8b0cfe8040f4eb6fe27",
+    "step-2200.pt": "48c111987b454fd15df3de09f46edeb8bdea19fc2c79ca1deeb093878835ddd2",
+    "step-2400.pt": "08c0340cd33dcbdb22b21e0b71f2f11c7efa196b0e68ffbdcb6e97b0bd7786ee",
+    "step-2600.pt": "b3e651e2f8916735850ff7bb702e8bb823304bc0c558d541b95f8a4d24b4c9a3",
+    "step-2800.pt": "39dc708306e43bfb601bb04c4a7f2d957695348f2a330b4ffe4ab03cdf62dcb2",
+    "step-3000.pt": "3ff84a8f55d8630df1bc2ef4aa9ef36a386a5a1ad2773d167521dc8257cbbc24",
+    "step-3200.pt": "825256ed38b9bcd107a832a7be021b394b86a0255ea30f1ea2f92f04d00cfe73",
+    "step-3400.pt": "9706bf35782c1757b012c79f98e534e07fa892b4d9aec2b7231780b1ccdeff10",
+    "step-3600.pt": "9563279249d6e1ec2637523fd596941ec97ddc44032204a1ed1a01a2a5101002",
+    "step-3800.pt": "e59ea52334078ed6878de1e3bce78ddb04c3aa828e88d3ebdcc4ce3d1cf75e10",
+    "step-4000.pt": "5becc098c85badfcff88b0165672f289619e448b3f1330fb142571d229e602f3",
+    "step-4200.pt": "92e22c7efa5dca40824296e26daebc5081dba51dc50a9349691452dfede59214",
+    "step-4400.pt": "647f2386143e6d9d2846903b89b9d8b1f9aa0bc7cc0eec1893feb1f78c06c8e3",
+    "step-4600.pt": "d8e69d0ab30b55626cbd976b01c40ffbd72ed18046e489065c4fa92ac2eb35a7",
+    "step-4800.pt": "d92bd26d2874de0dd5f80c13ccc737c82e462a6699626142bfae2c4f5f18e8a4",
+    "step-5000.pt": "983de22cceb1c7ad45b17c6b0efb7192b76820360d67e975e6c2f93a2052f713",
+    "step-5200.pt": "488258c46389b709da0db613032b332465e6d5f9475d41cd9ee0c74db4f1dfff",
+    "step-5400.pt": "a75df8b60c6c854e9754230ed18329e9b2198757ece7bfeacd29708130a30706",
+    "step-5600.pt": "9aa39edab2ad39f72840c1cc4ddd501fd41438b06fc5e9a67b372ada13da033a",
+    "step-5800.pt": "d60281420b6749517021e021d232f28c5ce05ef06ab344d697bfc99d172796af",
+    "step-6000.pt": "de7faf10ad8b98b316967bbe5539f8ca51a3613e564a53fd02e1d7354b77a7ab",
+    "step-6200.pt": "4dcfe4b00bca377f3dc83b580dd2216c84557e538988afc283a7a4ff57b53c43",
+    "step-6400.pt": "e129c3870fbd24fde5e4c6f03ef33178a32aded1d0aebae4f29e282f7a7fcd08",
+    "step-0802.pt": "d23b23a62bc915c9e97b365d6ca021dfe072de2a39cd64e82c2a90b555a04188"
+  }
+}

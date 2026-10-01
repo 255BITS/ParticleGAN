@@ -241,6 +241,7 @@ def main():
         receipt["judges"] = {name: baseline.digest(judge.state_dict()) for name, judge in judges.items()}
         receipt["private_panel_digest"] = baseline.digest(panels)
         receipt["endpoint_scores"] = {}
+        loop = make_neutral_loop(data, bindings=bindings)
         with (args.out / "common-judge-curves.jsonl").open("w", buffering=1) as curves:
             for step in range(0, 6401, 200):
                 budget()
