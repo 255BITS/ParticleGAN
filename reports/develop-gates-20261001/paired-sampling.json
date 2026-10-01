@@ -445,6 +445,15 @@
   "diagnostic_only": true,
   "kind": "paired_saved_draw_diagnostic",
   "new_training_updates": 0,
+  "original_github_archive": {
+    "actions_run": 36829031177,
+    "bytes": 25001804,
+    "github_artifact_id": 11146644743,
+    "path": "/ml2/hypergan/gan-attempts/develop-gates-20261001/common22-ci-mixed-sampling/github-artifact.zip",
+    "sha256": "b2d849ec90753f835f79fddf86471ba42753e93a687e74f2a074b1268073abf4",
+    "unmodified_upload": true,
+    "zip_entries": 178
+  },
   "scientific_qualification": false,
   "source_head": "fa2c378d5ea4dd8f66eabeb17973818a174732ef",
   "source_run": "https://github.com/255BITS/ParticleGAN/actions/runs/36829031177",

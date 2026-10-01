@@ -56,8 +56,11 @@ promotion. E22's original evidence remains separately labelled.
 ## CPU numerical diagnosis
 
 The restored served-law BCap gate passed locally but Actions run
-`36886525044` measured **21/22 FAIL**, with grid100 failing coverage and
-fidelity. This result remains a real failure in its executed runtime. Its
+`36886525044` measured **19/22 FAIL**: grid100 failed coverage and fidelity,
+and vector_unequal_mass and vector_unequal_width failed their retained gates.
+This corrects the initial native-only count after independently grading all
+19 transfer artifacts; no acceptance rule or recorded result changes. These
+results remain real failures in their executed runtime. Its
 initial samples match the earlier clean run exactly; paired sample differences
 begin at float32 rounding scale on update 1 and amplify thereafter. Both jobs
 used the same CPU PyTorch build, ISA caps, recipe, seed and training budget.
@@ -101,3 +104,22 @@ in all 14 affected Forge tasks. Their execution declarations, sampling laws,
 thresholds and budgets are unchanged. Their evaluation fingerprints change;
 previous receipts retain their frozen identities and receive no implicit new
 qualification.
+
+## Concluded result
+
+The independent original Atlas replay is **19/19 PASS**, with all three static
+native endpoints exactly matching the original qualified metrics. The public
+formulation, Atlas configuration, original gates and update budgets are unchanged.
+
+The extended portable CPU execution, Actions run `36897240453`, completed all
+required budgets and remains **19/22 FAIL**: native 3/3 and transfer 16/19.
+Trajectory, mode hold and unequal-width vectors fail their retained live gates.
+The independent grader agrees with their stored verdicts and validates the
+captured executable source and common sampling law. The timed local/45-minute
+attempts remain incomplete; they are not aggregate passes or quality failures.
+See the [final readout](README.md) and hash-bound compact receipts.
+
+This study closes without further training, tuning, seed changes, continuation,
+default promotion or release. Original clean diagnostics and the existing Forge
+clean-MoG failures remain valid; future adoption needs its own justified,
+policy-aware scientific contract matching the intended serving/prior scope.
