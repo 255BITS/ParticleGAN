@@ -35,7 +35,7 @@ from .metrics import EVAL_N, evaluate_samples
 from .models import (
     OUTPUT_NOISE_SEED_OFFSET, InputNoise, IsolatedOutputNoise, OutputNoise,
     StatefulInputNoise, linear_input_noise, linear_output_noise, paired_output_noise,
-    sample_clean,
+    sample_evaluation,
 )
 from .problems import PROBLEM_NAMES, sample_real
 from .schedule import policy_rate_action, step_with_policy
@@ -69,6 +69,7 @@ RUN_DEFAULTS = {
 OPTIONAL_RUN_FIELDS = {
     "output_noise_warmup", "output_noise_learnable",
     "output_noise_rng", "toy100_model", "network_lr_horizon_cap", "network_lr_floor",
+    "eval_output_noise",
 }
 AFFINE_MODEL_POLICIES = {
     "affine_square_v1", "affine_normal_v1", "affine_square_random_v1",
@@ -200,6 +201,8 @@ def resolve_config(user: Mapping[str, Any]) -> tuple[dict[str, Any], Recipe]:
         raise ValueError("CUDA requested but unavailable")
     if type(run["fused_adam"]) is not bool:
         raise ValueError("fused_adam must be a boolean")
+    if "eval_output_noise" in run and type(run["eval_output_noise"]) is not bool:
+        raise ValueError("eval_output_noise must be a boolean")
     for key in ("output_noise_std", "input_noise_std", "input_noise_anneal_end"):
         value = run[key]
         if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value):
@@ -719,9 +722,9 @@ def train(config: Mapping[str, Any], out_dir: str | Path) -> dict[str, Any]:
         "status": "running", "problem": resolved["problem"], "budget_steps": budget,
         "config": resolved, "eval_steps": eval_steps, "snapshot_steps": snap_steps,
         "provenance": provenance, "environment": environment,
-        # Evaluation and holdout draws omit training output noise. Evidence
-        # without this key predates the change and scored noisy samples.
-        "eval_output_noise": "clean",
+        # Default scoring remains clean. The original served-law regression
+        # is opt-in; evidence without this key predates clean scoring.
+        "eval_output_noise": "training_noise" if resolved.get("eval_output_noise", False) else "clean",
     }
     if "network_lr_horizon_cap" in resolved:
         summary["network_lr_horizon_cap"] = resolved["network_lr_horizon_cap"]
@@ -814,9 +817,10 @@ def train(config: Mapping[str, Any], out_dir: str | Path) -> dict[str, Any]:
                         before_state = _noise_state_sha256(sampled_model)
                         before_draws = sampled_model.draw_receipt()
                         sample_options["output_noise_eval_seed"] = resolved["seed"] + 402
-                    # Score the generator itself: output noise is a training
-                    # regularizer, so evaluation samples are drawn clean.
-                    draw = sample_clean(trainer, count, **sample_options)
+                    draw = sample_evaluation(
+                        trainer, count, eval_output_noise=resolved.get("eval_output_noise", False),
+                        **sample_options,
+                    )
                     if isolated:
                         after_state = _noise_state_sha256(sampled_model)
                         after_draws = sampled_model.draw_receipt()

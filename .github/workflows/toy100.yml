@@ -1,4 +1,4 @@
-name: Shared-recipe 22-toy trained gate
+name: Legacy BCap served-sample 22-toy gate
 
 on:
   push:
@@ -24,7 +24,7 @@ permissions:
 
 jobs:
   trained-gate:
-    name: CPU / Python 3.11 / one recipe across all 22 toys
+    name: CPU / Python 3.11 / BCap with original output-noise sampling
     # Train only merged primary-branch code, including manual dispatches.
     if: >-
       github.event_name != 'pull_request' &&
@@ -74,7 +74,7 @@ jobs:
         shell: bash
         run: |
           set -o pipefail
-          python -u -m benchmarks.toy_suite run --output artifacts/toy-suite-ci 2>&1 | tee toy-suite-ci.log
+          python -u -m benchmarks.toy_suite run --config configs/toy100/constraints_simple_regularization.json --output artifacts/toy-suite-ci 2>&1 | tee toy-suite-ci.log
       - name: Upload gate evidence
         if: always()
         uses: actions/upload-artifact@v4

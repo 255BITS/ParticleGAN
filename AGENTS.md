@@ -16,3 +16,8 @@ receipts, and reproduction sources instead. When removing tracked logs, retain
 their exact archive commit/blob identities and repair report links; do not
 rewrite qualification results or rerun unchanged experiments just for a merge.
 Never force-add ignored bulk logs. Keep new execution logs easy to tail.
+
+Bind trained gates to their actual recipe, prior, initialization, budget and
+sampling law. Check these against the qualified evidence before attributing a
+failure to a formulation change. Clean and noisy served results are separate
+cohorts; matching training settings alone does not make their gates comparable.

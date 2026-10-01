@@ -154,6 +154,20 @@ def sample_clean(trainer, n: int, **options) -> torch.Tensor:
         return trainer.sample(n, **options)
 
 
+def sample_evaluation(trainer, n: int, *, eval_output_noise=False, **options) -> torch.Tensor:
+    """Select clean scoring or the benchmark's original served sampling law.
+
+    This benchmark owns output noise through its generator wrapper; its trainer
+    recipe has neutral output-noise settings. The ordinary sampler preserves
+    that wrapper's fixed/learned noise without adding it twice.
+    """
+    if type(eval_output_noise) is not bool:
+        raise ValueError("eval_output_noise must be a boolean")
+    if eval_output_noise:
+        return trainer.sample(n, **options)
+    return sample_clean(trainer, n, **options)
+
+
 @contextmanager
 def paired_output_noise(models, *, seed: int):
     """Pair evaluation draws without advancing either training stream.

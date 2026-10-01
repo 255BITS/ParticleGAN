@@ -47,6 +47,13 @@ hosts or replace scientific gates. Historical RA14/RA15/RA16/RA17 receipts keep
 their original identities; merging or archiving unchanged research does not
 create new gate runs.
 
+The [post-merge gate diagnosis](../develop-gates-20261001/README.md) separates
+the legacy BCap common-22 CI job from the original Atlas19 qualification.
+PR #209 changed native evaluation to clean samples before integration; the
+old transfer runner retained noisy sampling. Matching training settings cannot
+substitute for matching evaluation laws. Original clean failures remain valid
+in their cohort; only a completed, separately bound replay earns fresh credit.
+
 ## Artifact storage
 
 The repository's `AGENTS.md` requires bulk logs and per-update streams to remain

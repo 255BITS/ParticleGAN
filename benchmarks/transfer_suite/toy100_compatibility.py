@@ -542,6 +542,8 @@ def run(config_path: Path, output: Path, *, tasks=VECTOR_NAMES):
     config_path = config_path.resolve()
     config_bytes = config_path.read_bytes()
     config = load_config(config_path)
+    if config.get("eval_output_noise", True) is not True:
+        raise ValueError("legacy transfer hosts require eval_output_noise=True; clean scoring needs a separate host contract")
     base, noise, resource_overrides = declared_recipe(config)
     model_policy = declared_model_policy(config)
     jobs, profile = load_declaration()
@@ -569,6 +571,7 @@ def run(config_path: Path, output: Path, *, tasks=VECTOR_NAMES):
                     config_sha256=hashlib.sha256(config_bytes).hexdigest(),
                     noise_source_sha256=noise_hash,
                     public_package=package)
+    protocol["eval_output_noise"] = True
     if model_policy:
         protocol["model_policy"] = model_policy
     write(output / "protocol.json", protocol)
@@ -651,7 +654,7 @@ def run(config_path: Path, output: Path, *, tasks=VECTOR_NAMES):
             noise_applied = False
         verdict = test_verdict(spec, result)
         ema = ema_verdict(spec, result)
-        record = dict(name=spec["name"], route=route,
+        record = dict(name=spec["name"], route=route, eval_output_noise=True,
                       noise_applied=noise_applied,
                       noise_receipt=receipt,
                       recipe=legacy_dict(base), host_recipe=legacy_dict(context["host_recipe"]),
