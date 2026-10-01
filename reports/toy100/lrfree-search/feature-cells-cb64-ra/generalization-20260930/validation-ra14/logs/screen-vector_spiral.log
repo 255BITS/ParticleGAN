@@ -1,0 +1,27 @@
+{"event": "waiting_for_gpu", "task": "vector_spiral"}
+{"step": 67, "ok": 1, "sw1_normalized": 0.0647, "mean_error": 0.0761, "covariance_error": 0.0772, "ema": {"sw1_normalized": 0.0483, "mean_error": 0.0137, "covariance_error": 0.1127}}
+{"step": 134, "ok": 1, "sw1_normalized": 0.0313, "mean_error": 0.0308, "covariance_error": 0.0565, "ema": {"sw1_normalized": 0.0275, "mean_error": 0.015, "covariance_error": 0.0299}}
+{"step": 200, "ok": 1, "sw1_normalized": 0.0405, "mean_error": 0.0512, "covariance_error": 0.041, "ema": {"sw1_normalized": 0.0308, "mean_error": 0.037, "covariance_error": 0.0187}}
+{"step": 267, "ok": 1, "sw1_normalized": 0.0294, "mean_error": 0.0332, "covariance_error": 0.059, "ema": {"sw1_normalized": 0.0231, "mean_error": 0.021, "covariance_error": 0.037}}
+{"step": 334, "ok": 1, "sw1_normalized": 0.0377, "mean_error": 0.0507, "covariance_error": 0.0465, "ema": {"sw1_normalized": 0.0231, "mean_error": 0.0216, "covariance_error": 0.0373}}
+{"step": 400, "ok": 1, "sw1_normalized": 0.0224, "mean_error": 0.0049, "covariance_error": 0.0621, "ema": {"sw1_normalized": 0.024, "mean_error": 0.025, "covariance_error": 0.0354}}
+{"step": 467, "ok": 1, "sw1_normalized": 0.0433, "mean_error": 0.0593, "covariance_error": 0.0361, "ema": {"sw1_normalized": 0.0249, "mean_error": 0.0281, "covariance_error": 0.0369}}
+{"step": 534, "ok": 1, "sw1_normalized": 0.0312, "mean_error": 0.0391, "covariance_error": 0.0432, "ema": {"sw1_normalized": 0.0212, "mean_error": 0.0208, "covariance_error": 0.0346}}
+{"step": 600, "ok": 1, "sw1_normalized": 0.0465, "mean_error": 0.0599, "covariance_error": 0.0899, "ema": {"sw1_normalized": 0.0218, "mean_error": 0.0212, "covariance_error": 0.0403}}
+{"step": 667, "ok": 1, "sw1_normalized": 0.0348, "mean_error": 0.0393, "covariance_error": 0.0589, "ema": {"sw1_normalized": 0.0249, "mean_error": 0.0247, "covariance_error": 0.0422}}
+{"step": 734, "ok": 1, "sw1_normalized": 0.0439, "mean_error": 0.0607, "covariance_error": 0.0575, "ema": {"sw1_normalized": 0.026, "mean_error": 0.0287, "covariance_error": 0.0434}}
+{"step": 800, "ok": 1, "sw1_normalized": 0.0299, "mean_error": 0.0287, "covariance_error": 0.0635, "ema": {"sw1_normalized": 0.0249, "mean_error": 0.0287, "covariance_error": 0.0337}}
+{"step": 867, "ok": 1, "sw1_normalized": 0.0356, "mean_error": 0.0434, "covariance_error": 0.0601, "ema": {"sw1_normalized": 0.0225, "mean_error": 0.0196, "covariance_error": 0.0421}}
+{"step": 934, "ok": 1, "sw1_normalized": 0.0278, "mean_error": 0.0083, "covariance_error": 0.0654, "ema": {"sw1_normalized": 0.0242, "mean_error": 0.018, "covariance_error": 0.0421}}
+{"step": 1000, "ok": 1, "sw1_normalized": 0.0334, "mean_error": 0.036, "covariance_error": 0.0634, "ema": {"sw1_normalized": 0.0245, "mean_error": 0.0182, "covariance_error": 0.0391}}
+{"step": 1067, "ok": 1, "sw1_normalized": 0.0238, "mean_error": 0.0139, "covariance_error": 0.0389, "ema": {"sw1_normalized": 0.0238, "mean_error": 0.0139, "covariance_error": 0.0389}}
+{"step": 1134, "ok": 1, "sw1_normalized": 0.0249, "mean_error": 0.0161, "covariance_error": 0.0424, "ema": {"sw1_normalized": 0.0249, "mean_error": 0.0161, "covariance_error": 0.0424}}
+{"step": 1200, "ok": 1, "sw1_normalized": 0.0248, "mean_error": 0.0152, "covariance_error": 0.0441, "ema": {"sw1_normalized": 0.0248, "mean_error": 0.0152, "covariance_error": 0.0441}}
+{"step": 1267, "ok": 1, "sw1_normalized": 0.0258, "mean_error": 0.0182, "covariance_error": 0.0465, "ema": {"sw1_normalized": 0.0258, "mean_error": 0.0182, "covariance_error": 0.0465}}
+{"step": 1334, "ok": 1, "sw1_normalized": 0.0257, "mean_error": 0.0204, "covariance_error": 0.0466, "ema": {"sw1_normalized": 0.0257, "mean_error": 0.0204, "covariance_error": 0.0466}}
+{"step": 1400, "ok": 1, "sw1_normalized": 0.0248, "mean_error": 0.0203, "covariance_error": 0.0443, "ema": {"sw1_normalized": 0.0248, "mean_error": 0.0203, "covariance_error": 0.0443}}
+{"step": 1467, "ok": 1, "sw1_normalized": 0.0246, "mean_error": 0.0203, "covariance_error": 0.0452, "ema": {"sw1_normalized": 0.0246, "mean_error": 0.0203, "covariance_error": 0.0452}}
+{"step": 1534, "ok": 1, "sw1_normalized": 0.0263, "mean_error": 0.026, "covariance_error": 0.044, "ema": {"sw1_normalized": 0.0263, "mean_error": 0.026, "covariance_error": 0.044}}
+{"step": 1600, "ok": 1, "sw1_normalized": 0.0265, "mean_error": 0.0273, "covariance_error": 0.0444, "ema": {"sw1_normalized": 0.0265, "mean_error": 0.0273, "covariance_error": 0.0444}}
+RESULT {"status": "PASS", "task": "vector_spiral", "cand": "RA14-replay", "passing_checks": 24, "observations": 24, "first_arrival": 67, "final_streak": 24, "seconds": 54.86}
+{"event": "screen_end", "task": "vector_spiral", "status": "COMPLETE", "primary_status": "PASS", "wall_seconds": 58.12751364707947}

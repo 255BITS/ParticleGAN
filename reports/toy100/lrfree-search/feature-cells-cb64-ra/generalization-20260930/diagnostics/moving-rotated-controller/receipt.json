@@ -1,0 +1,34 @@
+{
+  "artifacts": {
+    "CONTROLLER-STATE.json": "9860b3a205285fe2bd1fa50e4ae9efbeeb4550c31e7301325bcae0e5c6a84589",
+    "PATCH-REVIEW.json": "55985baf49983975a4c9a4540952776cca9fa19dea33795432d5939b5bf161fe",
+    "PEER-REVIEW.json": "2eaf5fa187806a7add81188c4b245c1481b930267bfa0d518bf083723f6d577d",
+    "REPORT.md": "93cc8815b8ffd27dcfd4f5379d3c9cbefad0ab81c59b8111e376e6e3d3adea53",
+    "inspect_controller.py": "c2ede74299f6a041277a971bbf81614bd0746ce53e579b68d8ee1d05a2697e0a",
+    "peer_review.py": "37baac3bd09027e5efe3e4bb58b84fad070d40d9dbb1a9bfd704708e43b1df7b"
+  },
+  "blanket_LR_boost_supported": false,
+  "cache_invalidation_recommended": false,
+  "checkpoint_loads_audit_script": 3,
+  "finalizer_v2_still_sealed": {
+    "preparation_sha256": "7bd71ac8d6e3d84227eb739f9afa15ce3bffe4099680a107bb05dda8be0177ef",
+    "sha256": "9b3e52d3caf82795d6c296c41d98b6ce381972b952a0cb98e130be437dc4d684"
+  },
+  "gpu_operations": 0,
+  "independent_partial_score": {
+    "active_groups": 99,
+    "authoritative": false,
+    "inactive_zero_observations": 112,
+    "lower_bound": 0.5195955732330525,
+    "observations": 10000,
+    "retained_mass": 0.9891,
+    "scope": "Raw-space isolation, not original critic chart reproduction"
+  },
+  "model_calls": 0,
+  "original_quality_status": "FAIL",
+  "recommendation": "Queue the paired original1000\u21921500CUDA window with exact control reproduction before candidate interpretation.",
+  "scorer_calls": 0,
+  "source_inputs_unchanged": true,
+  "status": "CPU_PASS",
+  "training_updates": 0
+}

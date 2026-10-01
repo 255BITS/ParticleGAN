@@ -1,0 +1,22 @@
+{
+  "status": "COMPLETE",
+  "started_utc": "2026-09-30T22:28:41.275795+00:00",
+  "completed_utc": "2026-09-30T22:29:05.241831+00:00",
+  "returncode": 0,
+  "wall_seconds": 23.9660595159512,
+  "command": [
+    "/tmp/pr38-default-env/bin/python",
+    "-u",
+    "-B",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay-r2/replay.py",
+    "RA14-replay"
+  ],
+  "result": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay-r2/replay-RA14-replay.json",
+  "result_sha256": "27f08739ec5d47cc4fc9aa1d61ecb28a6c045d48dd6dc3fdc0e9ae899ad50d2d",
+  "log": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay-r2/logs/RA14-replay-replay.log",
+  "log_sha256": "20c790a8e9f40c1779106f225f23ab389cc3157f6316ac52952332f881378441",
+  "source_freeze_sha256": "8a94e5da8c8e5f3978160f92becf11ce542b66f47d063eb157cca931fce51514",
+  "inputs_sha256": "a24ca2248affefed5f8c3c660d1b398095776d61e6a496573eaacc15824073ec",
+  "original_supervisor_still_parked": true,
+  "signaled_processes": []
+}

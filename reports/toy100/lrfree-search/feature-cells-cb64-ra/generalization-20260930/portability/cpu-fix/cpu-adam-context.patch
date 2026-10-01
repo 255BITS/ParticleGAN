@@ -1,0 +1,64 @@
+--- a/particlegan/k3p.py
++++ b/particlegan/k3p.py
+@@ -12,6 +12,7 @@
+ """
+ from contextlib import contextmanager
+ from copy import copy, deepcopy
++from types import MethodType
+ from typing import Any, Dict, Optional, Sequence, Tuple
+ 
+ import torch
+@@ -412,7 +413,31 @@
+         return closure()
+ 
+ 
+-class K3PCriticAdam(Adam):
++class _DeviceScopedAdam(Adam):
++    """Run accelerator graph checks only for accelerator-owned parameters."""
++
++    def _accelerator_graph_capture_health_check(self):
++        if any(p.device.type != "cpu" for group in self.param_groups for p in group["params"]):
++            return Adam._accelerator_graph_capture_health_check(self)
++
++    def _cuda_graph_capture_health_check(self):
++        # Older PyTorch versions call this name from Adam.step().
++        if any(p.device.type != "cpu" for group in self.param_groups for p in group["params"]):
++            return Adam._cuda_graph_capture_health_check(self)
++
++
++def _scope_reference_adam_graph_checks(optimizer):
++    """Keep registered CPU Adam instances from opening accelerator contexts."""
++    if type(optimizer) not in (Adam, torch.optim.AdamW):
++        return
++    if any(p.device.type != "cpu" for group in optimizer.param_groups for p in group["params"]):
++        return
++    for name in ("_accelerator_graph_capture_health_check", "_cuda_graph_capture_health_check"):
++        if hasattr(Adam, name) and name not in optimizer.__dict__:
++            setattr(optimizer, name, MethodType(getattr(_DeviceScopedAdam, name), optimizer))
++
++
++class K3PCriticAdam(_DeviceScopedAdam):
+     """Adam for one critic whose ``step()`` also does K3P's critic-side work.
+ 
+     Built by ``recipe.make_critic_optimizer(critic, ema_critic=...)`` (and by
+@@ -484,7 +509,7 @@
+             self.ema_critic.load_state_dict(extra["ema"])
+ 
+ 
+-class K3PGeneratorAdam(Adam):
++class K3PGeneratorAdam(_DeviceScopedAdam):
+     """Adam for the generator side whose ``step()`` applies K3P's update modifications.
+ 
+     Built by ``recipe.make_generator_optimizer(params, latent_table=...,
+--- a/particlegan/policy.py
++++ b/particlegan/policy.py
+@@ -425,6 +425,9 @@
+         self._phase = "ready"
+         self._noise = None
+         self._stray_flags = self._hot = self._z_before = None
++        from .k3p import _scope_reference_adam_graph_checks
++        for optimizer in self.optimizers:
++            _scope_reference_adam_graph_checks(optimizer)
+ 
+     def _training_modules(self):
+         return {name: module for name, module in (

@@ -1,0 +1,40 @@
+{"event": "waiting_for_gpu", "task": "grid100"}
+/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2/screen_current.py:757: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:822.)
+  z_range = [float(prior.z.min()), float(prior.z.max())]
+{"step": 0, "ok": 0, "modes": 0, "hq": 0.0271, "mass_tv": 0.0404, "ema": {"modes": 0, "hq": 0.0271, "mass_tv": 0.0404}}
+{"step": 1, "ok": 0, "modes": 0, "hq": 0.0277, "mass_tv": 0.0406, "ema": {"modes": 0, "hq": 0.0275, "mass_tv": 0.0405}}
+{"step": 10, "ok": 0, "modes": 0, "hq": 0.0559, "mass_tv": 0.0446, "ema": {"modes": 0, "hq": 0.0502, "mass_tv": 0.0433}}
+{"step": 25, "ok": 0, "modes": 0, "hq": 0.1011, "mass_tv": 0.051, "ema": {"modes": 0, "hq": 0.0978, "mass_tv": 0.0498}}
+{"step": 50, "ok": 0, "modes": 6, "hq": 0.2931, "mass_tv": 0.0619, "ema": {"modes": 3, "hq": 0.2492, "mass_tv": 0.0619}}
+{"step": 100, "ok": 0, "modes": 91, "hq": 0.638, "mass_tv": 0.0561, "ema": {"modes": 78, "hq": 0.5967, "mass_tv": 0.0561}}
+{"step": 250, "ok": 0, "modes": 100, "hq": 0.9152, "mass_tv": 0.0406, "ema": {"modes": 100, "hq": 0.8973, "mass_tv": 0.0406}}
+{"step": 500, "ok": 0, "modes": 100, "hq": 0.9464, "mass_tv": 0.0406, "ema": {"modes": 100, "hq": 0.9464, "mass_tv": 0.0406}}
+{"step": 750, "ok": 0, "modes": 100, "hq": 0.9581, "mass_tv": 0.0406, "ema": {"modes": 100, "hq": 0.9581, "mass_tv": 0.0406}}
+{"step": 1000, "ok": 0, "modes": 100, "hq": 0.9669, "mass_tv": 0.0406, "ema": {"modes": 100, "hq": 0.9669, "mass_tv": 0.0406}}
+{"step": 1250, "ok": 0, "modes": 100, "hq": 0.9743, "mass_tv": 0.0406, "ema": {"modes": 100, "hq": 0.9743, "mass_tv": 0.0406}}
+{"step": 1500, "ok": 0, "modes": 100, "hq": 0.9748, "mass_tv": 0.0406, "ema": {"modes": 100, "hq": 0.9748, "mass_tv": 0.0406}}
+{"step": 1750, "ok": 0, "modes": 100, "hq": 0.9751, "mass_tv": 0.0406, "ema": {"modes": 100, "hq": 0.9751, "mass_tv": 0.0406}}
+{"step": 2000, "ok": 1, "modes": 100, "hq": 0.974, "mass_tv": 0.0406, "ema": {"modes": 100, "hq": 0.974, "mass_tv": 0.0406}}
+{"step": 2250, "ok": 0, "modes": 100, "hq": 0.977, "mass_tv": 0.0407, "ema": {"modes": 100, "hq": 0.977, "mass_tv": 0.0407}}
+{"step": 2500, "ok": 0, "modes": 100, "hq": 0.9768, "mass_tv": 0.0374, "ema": {"modes": 100, "hq": 0.9768, "mass_tv": 0.0374}}
+{"step": 2750, "ok": 0, "modes": 100, "hq": 0.9772, "mass_tv": 0.0361, "ema": {"modes": 100, "hq": 0.9772, "mass_tv": 0.0361}}
+{"step": 3000, "ok": 1, "modes": 100, "hq": 0.979, "mass_tv": 0.0349, "ema": {"modes": 100, "hq": 0.979, "mass_tv": 0.0349}}
+{"step": 3250, "ok": 1, "modes": 100, "hq": 0.9796, "mass_tv": 0.0351, "ema": {"modes": 100, "hq": 0.9796, "mass_tv": 0.0351}}
+{"step": 3500, "ok": 1, "modes": 100, "hq": 0.9794, "mass_tv": 0.0346, "ema": {"modes": 100, "hq": 0.9794, "mass_tv": 0.0346}}
+{"step": 3750, "ok": 1, "modes": 100, "hq": 0.9798, "mass_tv": 0.0343, "ema": {"modes": 100, "hq": 0.9798, "mass_tv": 0.0343}}
+{"step": 4000, "ok": 1, "modes": 100, "hq": 0.98, "mass_tv": 0.0335, "ema": {"modes": 100, "hq": 0.98, "mass_tv": 0.0335}}
+{"step": 4250, "ok": 1, "modes": 100, "hq": 0.9815, "mass_tv": 0.034, "ema": {"modes": 100, "hq": 0.9815, "mass_tv": 0.034}}
+{"step": 4500, "ok": 1, "modes": 100, "hq": 0.9823, "mass_tv": 0.034, "ema": {"modes": 100, "hq": 0.9823, "mass_tv": 0.034}}
+{"step": 4750, "ok": 1, "modes": 100, "hq": 0.9829, "mass_tv": 0.0334, "ema": {"modes": 100, "hq": 0.9829, "mass_tv": 0.0334}}
+{"step": 5000, "ok": 1, "modes": 100, "hq": 0.9822, "mass_tv": 0.0334, "ema": {"modes": 100, "hq": 0.9822, "mass_tv": 0.0334}}
+{"step": 5250, "ok": 1, "modes": 100, "hq": 0.9827, "mass_tv": 0.0334, "ema": {"modes": 100, "hq": 0.9827, "mass_tv": 0.0334}}
+{"step": 5500, "ok": 1, "modes": 100, "hq": 0.9839, "mass_tv": 0.0333, "ema": {"modes": 100, "hq": 0.9839, "mass_tv": 0.0333}}
+{"step": 5750, "ok": 1, "modes": 100, "hq": 0.9841, "mass_tv": 0.0334, "ema": {"modes": 100, "hq": 0.9841, "mass_tv": 0.0334}}
+{"step": 6000, "ok": 1, "modes": 100, "hq": 0.984, "mass_tv": 0.0334, "ema": {"modes": 100, "hq": 0.984, "mass_tv": 0.0334}}
+{"step": 6250, "ok": 1, "modes": 100, "hq": 0.9826, "mass_tv": 0.0334, "ema": {"modes": 100, "hq": 0.9826, "mass_tv": 0.0334}}
+{"step": 6500, "ok": 1, "modes": 100, "hq": 0.9822, "mass_tv": 0.0334, "ema": {"modes": 100, "hq": 0.9822, "mass_tv": 0.0334}}
+{"step": 6750, "ok": 1, "modes": 100, "hq": 0.9824, "mass_tv": 0.0335, "ema": {"modes": 100, "hq": 0.9824, "mass_tv": 0.0335}}
+{"step": 7000, "ok": 1, "modes": 100, "hq": 0.9825, "mass_tv": 0.0328, "ema": {"modes": 100, "hq": 0.9825, "mass_tv": 0.0328}}
+RESULT {"status": "PASS", "task": "grid100", "cand": "RA14-replay", "passing_checks": 18, "observations": 34, "first_arrival": 2000, "final_streak": 17, "seconds": 861.98}
+{"event": "screen_end", "task": "grid100", "status": "COMPLETE", "primary_status": "PASS", "wall_seconds": 1038.23597073555}

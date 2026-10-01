@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay/preflight_cpu.py", line 53, in <module>
+    bridge_receipt=preflight_bridge(inputs,torch)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra14-replay/bridge.py", line 191, in preflight_bridge
+    assert all(state['recipe'][key] == value for key, value in inputs['variants'][NAME]['config'].items())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

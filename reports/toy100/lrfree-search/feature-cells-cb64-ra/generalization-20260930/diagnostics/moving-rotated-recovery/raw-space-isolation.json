@@ -1,0 +1,36 @@
+{
+  "active_groups": 99,
+  "active_set_frozen_before_odd_data": true,
+  "limitation": "Exact original critic chart/group IDs require a captured runtime chart; raw mode99 is not identified with a critic group",
+  "missing_raw_groups": [
+    99
+  ],
+  "original_function_reason": "missing_EMA_group",
+  "original_weights_sum": 1.0,
+  "retained_weights_sum": 0.9891000000000001,
+  "scope": "Raw-space isolation, not original critic chart reproduction",
+  "status": "PASS",
+  "weights_renormalized": false,
+  "witness": {
+    "alpha": 0.00012919896640826875,
+    "authoritative": false,
+    "even_mass_objective": 0.5811266175256898,
+    "fires": true,
+    "known_range": 25.298221281347036,
+    "limit": "conditional iid bounded-score algebra; trained shared chart/FIFO empirical evidence only",
+    "lower_bound": 0.5195955732330525,
+    "mean": 0.6245780718230066,
+    "multiplicity": 387,
+    "observations": 10000,
+    "policy": "even_linear_output_group_radial_clip_unit_residual_EB_3K_plus_3_v1",
+    "radius": 6.324555320336759,
+    "range_penalty": 0.05695294348035773,
+    "reason": null,
+    "scalar_max": 5.071459671669559,
+    "scalar_min": -3.834743175665311,
+    "valid": true,
+    "variance_ddof1": 1.1955869374703745,
+    "variance_penalty": 0.04802955510959643,
+    "zero_direction_observations": 112
+  }
+}

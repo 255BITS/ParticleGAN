@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/optimizer-surprise-dynamics/wiring-review/read_only_review.py", line 137, in <module>
+    main()
+  File "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/optimizer-surprise-dynamics/wiring-review/read_only_review.py", line 70, in main
+    assert digest(pm) == closed['package_sha256']
+AssertionError

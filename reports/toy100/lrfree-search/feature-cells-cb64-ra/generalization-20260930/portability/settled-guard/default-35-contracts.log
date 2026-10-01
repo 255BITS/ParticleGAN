@@ -1,0 +1,7 @@
+torch 2.13.0+cu126
+initial_cuda_initialized False
+...................................                                      [100%]
+35 passed in 5.48s
+typed_rng_buffers {"latent_generator": {"dtype": "torch.uint8", "device": "cpu"}, "penalty_generator": {"dtype": "torch.uint8", "device": "cpu"}, "eval_generator": {"dtype": "torch.uint8", "device": "cpu"}, "noise_generator": {"dtype": "torch.uint8", "device": "cpu"}}
+forbidden_cuda_initialization_attempts 0
+final_cuda_initialized False

@@ -1,0 +1,33 @@
+{
+  "budgets_changed": false,
+  "change": "Only policy._state_to_device memoizes repeated Tensor conversion; all calls are checkpoint validation or restoration",
+  "config_sha256": "a3ee5c67ac6594014feeb1ec333131abb4b1d86832510b69923100ebd8510ad4",
+  "focused_new_source_tests": {
+    "cuda_initialized": false,
+    "passed": 58
+  },
+  "fresh_training_evidence": "Original RA13 Toy25 and MNIST, with unchanged fresh-training source/config and explicit source bridge; original source labels retained",
+  "package_equals_repository": true,
+  "package_sha256": "68f5706590683a44348cb04b3798917411bfaa54e5d45b17d57c345a4da33c15",
+  "previous_full_suite": {
+    "passed": 1404,
+    "receipt_sha256": "26622adecad4c83c8545b929edf40fa476ea550f645f62ee0264658f33b72831",
+    "skipped": 12,
+    "subtests": 18
+  },
+  "previous_source_review_sha256": "cfc23d27e01fe69f9d8c44e428dea5f844dab296a8914d1464ab605458c4be1b",
+  "public_config_byte_exact": true,
+  "public_configuration": "configs/100gaussians/ra13-settled.json",
+  "quality_pending": [
+    "RA14 exact CUDA replay",
+    "13 portability",
+    "3 static native",
+    "3 moving native",
+    "final full pytest"
+  ],
+  "scorers_changed": false,
+  "source_bridge_sha256": "0bd0406bf5afb4d82ad619c726af6a0f8a8dbb668bda99107c02ccfee750576a",
+  "source_closure_sha256": "a5fc0725f15a4b081bbfbb558680175165fb3bc619bac3ca7dda85d9d542c399",
+  "status": "SOURCE_AND_RESTORATION_BRIDGE_PASS_GPU_REPLAY_PENDING",
+  "thresholds_changed": false
+}

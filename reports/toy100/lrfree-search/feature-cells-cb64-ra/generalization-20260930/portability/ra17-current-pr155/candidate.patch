@@ -1,0 +1,213 @@
+--- /ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA16-portability/particlegan/continuous.py
++++ /ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA17-current-pr155/particlegan/continuous.py
+@@ -7,10 +7,26 @@
+ from copy import deepcopy
+ import math
+ from types import SimpleNamespace
++from typing import NamedTuple
+ import torch
+ 
+ 
++class _LatentApplication(NamedTuple):
++    radius: torch.Tensor
++    displacement: torch.Tensor
++    fraction: torch.Tensor
++    autocast_dtype: torch.dtype | None
++
++    def metrics(self):
++        with torch.autocast(device_type=self.radius.device.type, dtype=self.autocast_dtype,
++                            enabled=self.autocast_dtype is not None):
++            return torch.stack((self.radius.min(), self.radius.mean(), self.radius.max(),
++                self.displacement.square().mean().sqrt(), (self.fraction < 1.).float().mean()))
++
++
+ class DataDriftController:
++    _LATENT_METRICS = ("radius_min", "radius_mean", "radius_max", "perturbation_rms", "clipped_fraction")
++
+     def __init__(self, variant="dv1"):
+         self.variant = variant
+         if variant in ("dv10", "dv11", "dv12"):
+@@ -43,6 +59,28 @@
+         self.updates = 0
+         self.reopens = 0
+         self.closed = False
++
++    @property
++    def latent_applications(self):
++        """The last two recorded DV12 applications as ordinary float dicts.
++
++        Recording retains detached inputs for the last two applications on
++        device. Reading computes their metrics and batches one host transfer;
++        repeated reads use the materialized list. Diagnostics and checkpoint
++        export read it too.
++        """
++        records = self._latent_application_records
++        pending = [(index, value) for index, value in enumerate(records) if isinstance(value, _LatentApplication)]
++        if pending:
++            device = pending[-1][1].radius.device
++            values = torch.stack([value.metrics().to(device=device) for _, value in pending]).cpu().tolist()
++            for (index, _), row in zip(pending, values):
++                records[index] = dict(zip(self._LATENT_METRICS, row))
++        return records
++
++    @latent_applications.setter
++    def latent_applications(self, values):
++        self._latent_application_records = values
+ 
+     @staticmethod
+     @torch.no_grad()
+@@ -146,11 +184,11 @@
+                 fraction = (radius / norm.clamp_min(1e-20)).clamp_max(1.)
+             displacement = displacement * fraction.unsqueeze(1)
+             if record:
+-                self.latent_applications.append({"radius_min": float(radius.min()),
+-                    "radius_mean": float(radius.mean()), "radius_max": float(radius.max()),
+-                    "perturbation_rms": float(displacement.detach().square().mean().sqrt()),
+-                    "clipped_fraction": float((fraction < 1.).float().mean())})
+-                self.latent_applications = self.latent_applications[-2:]
++                autocast_dtype = (torch.get_autocast_dtype(latent.device.type)
++                                  if torch.is_autocast_enabled(latent.device.type) else None)
++                application = _LatentApplication(radius.detach(), displacement.detach(), fraction.detach(),
++                                                 autocast_dtype)
++                self._latent_application_records = [*self._latent_application_records, application][-2:]
+         return latent + displacement
+ 
+     @torch.no_grad()
+@@ -307,10 +345,13 @@
+         return {**({"latent_applications": self.latent_applications} if self.variant == "dv12" else {}), **({"support_score": self.support_score, "support_trust": self.support_trust, "applied_latent_bandwidth": None if self.latent_bandwidth is None else (self.latent_bandwidth * self.support_trust).tolist()} if self.variant == "dv11" else {}), **({"latent_bandwidth": self.latent_bandwidth.tolist()} if self.variant in ("dv10", "dv11", "dv12") and self.latent_bandwidth is not None else {}), **({"pair_score": self.pair_score, "pair_drive": self.pair_drive} if self.variant in ("dv8", "dv9") else {}), **({"data_memory": self.data_memory} if self.variant in ("dv2", "dv3", "dv4", "dv5", "dv6", "dv7", "dv8", "dv9", "dv10", "dv11", "dv12") else {}), **{k: getattr(self, k) for k in ("payoff_error", "game_trust", "game_ratio", "variant", "mobility", "alignment", "data_score", "data_drive", "last_cosine", "updates", "reopens", "closed")}}
+ 
+     def state_dict(self):
+-        return deepcopy(self.__dict__)
++        return deepcopy({("latent_applications" if name == "_latent_application_records" else name):
++                         (self.latent_applications if name == "_latent_application_records" else value)
++                         for name, value in self.__dict__.items()})
+ 
+     def load_state_dict(self, state):
+-        if not isinstance(state, dict) or set(state) != set(self.__dict__) or state["variant"] != self.variant:
++        keys = {"latent_applications" if name == "_latent_application_records" else name for name in self.__dict__}
++        if not isinstance(state, dict) or set(state) != keys or state["variant"] != self.variant:
+             raise ValueError("incompatible continuous controller state")
+         if self.variant in ("dv10", "dv11", "dv12"):
+             bandwidth = state["latent_bandwidth"]
+@@ -324,7 +365,10 @@
+                 raise ValueError("continuous controller latent bandwidth does not match the table")
+             if current is not None and bandwidth is None:
+                 raise ValueError("continuous controller latent bandwidth is missing")
+-        self.__dict__.update(deepcopy(state))
++        restored = deepcopy(state)
++        if "latent_applications" in restored:
++            restored["_latent_application_records"] = restored.pop("latent_applications")
++        self.__dict__.update(restored)
+ 
+ 
+ # One-sided alpha = .05 Student-t quantiles t_{.95}(dof), dof = 1..11 (the
+--- /ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA16-portability/particlegan/output_moments.py
++++ /ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA17-current-pr155/particlegan/output_moments.py
+@@ -162,4 +162,3 @@
+         radius=fixed.radius,known_range=known_range,variance_penalty=float(variance_penalty),range_penalty=float(range_penalty),
+         lower_bound=float(lcb),zero_direction_observations=int((fixed.directions[groups].norm(dim=1)==0).sum()),
+         scalar_min=float(values.min()),scalar_max=float(values.max()),even_mass_objective=float(fixed.energy()))
+-
+--- /ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA16-portability/particlegan/policy.py
++++ /ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA17-current-pr155/particlegan/policy.py
+@@ -904,11 +904,15 @@
+         sigma = self.log_output_sigma.exp()
+         settle = self.controller.mobility
+         if self.lr_settle is not None:
++            # The floor waits on model/table settlement, never on noise's own
++            # rate. Clamped noise has zero gradient and a frozen tester; letting
++            # that tester gate the floor would prevent it from ever releasing.
+             # A group with no trainable parameters has no tester. Preserve the
+             # historical floor fallback rather than assigning it an artificial
+             # settled scale; fully trainable E22 groups use the stated floor.
+             try:
+-                scales = [t.s for index, row in enumerate(self.lr_settle.testers) if index != 1 for t in row]
++                scales = [t.s for index, row in enumerate(self.lr_settle.testers) if index != 1
++                          for t, role in zip(row, self.roles[index]) if role != "noise"]
+                 if scales and all(s is not None for s in scales):
+                     settle = 1.0 if any(s > 1. / 64. for s in scales) else self.controller.mobility
+             except AttributeError:
+--- /ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA16-portability/particlegan/routing.py
++++ /ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA17-current-pr155/particlegan/routing.py
+@@ -57,6 +57,7 @@
+         self._sites, self._candidate = sites, candidate
+         self._batch_size, self._perturb_fn = batch_size, perturb_fn
+         self._next, self._usage, self._active = 0, None, True
++        self._validation_checks = []
+ 
+     def mix(self, site_name, logits):
+         """Mix a shared bank at one declared site using [B,*tokens,N] logits."""
+@@ -68,11 +69,20 @@
+         if (not isinstance(logits, torch.Tensor) or logits.ndim < 2
+                 or logits.shape[0] != self._batch_size or logits.shape[-1] != len(candidate.table)
+                 or any(size == 0 for size in logits.shape) or logits.layout != torch.strided
+-                or not logits.is_floating_point() or logits.device != candidate.table.device
+-                or not bool(torch.isfinite(logits).all())):
++                or not logits.is_floating_point() or logits.device != candidate.table.device):
++            raise ValueError("routing site logits must be finite floating [contexts, *tokens, rows] tensors on the table device")
++        with torch.no_grad():
++            valid_logits = torch.isfinite(logits).all()
++        if logits.device.type == "cpu" and not bool(valid_logits):
+             raise ValueError("routing site logits must be finite floating [contexts, *tokens, rows] tensors on the table device")
+         weights = (logits.to(candidate.table.dtype) + candidate.log_mass).softmax(-1)
+-        if not bool(torch.isfinite(weights).all()):
++        with torch.no_grad():
++            valid_weights = torch.isfinite(weights).all()
++            if logits.device.type != "cpu":
++                # Only detached scalar predicates survive a site. Aggregate
++                # once at finish, avoiding both readbacks and per-site kernels.
++                self._validation_checks.extend((valid_logits, valid_weights))
++        if logits.device.type == "cpu" and not bool(valid_weights):
+             raise ValueError("routing site softmax must retain finite mass after row deletion")
+         codes = weights @ candidate.table
+         if self._perturb_fn is not None:
+@@ -90,15 +100,26 @@
+         return codes
+ 
+     def finish(self):
++        if not self._active:
++            raise ValueError("routing.finish is valid only during its complete model forward")
+         if self._next != len(self._sites):
+             raise ValueError("the complete model forward must call every declared routing site exactly once")
++        status = 0
++        if self._validation_checks:
++            with torch.no_grad():
++                valid_logits, valid_weights = torch.stack(self._validation_checks).view(-1, 2).all(0)
++                status = int(torch.where(valid_logits, torch.where(valid_weights, 0, 2), 1))
++        if status & 1:
++            raise ValueError("routing site logits must be finite floating [contexts, *tokens, rows] tensors on the table device")
++        if status & 2:
++            raise ValueError("routing site softmax must retain finite mass after row deletion")
+         return self._usage / len(self._sites)
+ 
+     def close(self):
+         # A callback retaining this object cannot reuse a past candidate or any
+         # activations. The returned output/usage keep their normal autograd graph.
+         self._active = False
+-        self._candidate = self._perturb_fn = self._usage = None
++        self._candidate = self._perturb_fn = self._usage = self._validation_checks = None
+ 
+ 
+ class RoutedRows:
+@@ -242,12 +263,17 @@
+             raise ValueError("routed context must be a nonempty batch on the table device")
+         weights = self.route(models, context, candidate)
+         if (not isinstance(weights, torch.Tensor) or weights.shape != (len(context), len(candidate.table))
+-                or not weights.is_floating_point() or weights.device != candidate.table.device
+-                or not bool(torch.isfinite(weights).all()) or bool((weights < 0).any())):
++                or not weights.is_floating_point() or weights.device != candidate.table.device):
+             raise ValueError("routed callback must return finite nonnegative [contexts, rows] weights")
+         tolerance = max(1e-6, 8 * torch.finfo(weights.dtype).eps)
+-        if not torch.allclose(weights.sum(1), torch.ones(len(context), device=weights.device, dtype=weights.dtype),
+-                              rtol=tolerance, atol=tolerance):
++        with torch.no_grad():
++            valid_values = torch.isfinite(weights).all() & (weights >= 0).all()
++            total = weights.sum(1)
++            valid_normalization = torch.isclose(total, torch.ones_like(total), rtol=tolerance, atol=tolerance).all()
++            status = int(torch.where(valid_values, torch.where(valid_normalization, 0, 2), 1))
++        if status & 1:
++            raise ValueError("routed callback must return finite nonnegative [contexts, rows] weights")
++        if status & 2:
+             raise ValueError("routed weights must sum to one for every context")
+         return weights.to(candidate.table.dtype)
+ 

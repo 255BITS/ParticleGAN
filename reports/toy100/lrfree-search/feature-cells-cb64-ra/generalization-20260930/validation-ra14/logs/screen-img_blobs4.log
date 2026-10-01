@@ -1,0 +1,27 @@
+{"event": "waiting_for_gpu", "task": "img_blobs4"}
+{"step": 25, "ok": 0, "modes": 0, "hq": 0.0, "ema": {"modes": 0, "hq": 0.0}}
+{"step": 50, "ok": 0, "modes": 0, "hq": 0.1562, "ema": {"modes": 0, "hq": 0.0}}
+{"step": 75, "ok": 0, "modes": 3, "hq": 0.5625, "ema": {"modes": 2, "hq": 0.4062}}
+{"step": 100, "ok": 0, "modes": 4, "hq": 0.8125, "ema": {"modes": 4, "hq": 0.75}}
+{"step": 125, "ok": 0, "modes": 4, "hq": 0.75, "ema": {"modes": 4, "hq": 0.6562}}
+{"step": 150, "ok": 0, "modes": 4, "hq": 0.875, "ema": {"modes": 4, "hq": 0.7812}}
+{"step": 175, "ok": 1, "modes": 4, "hq": 0.9062, "ema": {"modes": 4, "hq": 0.7812}}
+{"step": 200, "ok": 1, "modes": 4, "hq": 0.9062, "ema": {"modes": 4, "hq": 0.8438}}
+{"step": 225, "ok": 1, "modes": 4, "hq": 0.9375, "ema": {"modes": 4, "hq": 0.9062}}
+{"step": 250, "ok": 1, "modes": 4, "hq": 0.9062, "ema": {"modes": 4, "hq": 0.9062}}
+{"step": 275, "ok": 1, "modes": 4, "hq": 1.0, "ema": {"modes": 4, "hq": 0.9375}}
+{"step": 300, "ok": 1, "modes": 4, "hq": 0.9375, "ema": {"modes": 4, "hq": 0.9688}}
+{"step": 325, "ok": 1, "modes": 4, "hq": 0.9375, "ema": {"modes": 4, "hq": 0.9375}}
+{"step": 350, "ok": 1, "modes": 4, "hq": 0.9688, "ema": {"modes": 4, "hq": 0.9688}}
+{"step": 375, "ok": 1, "modes": 4, "hq": 0.9688, "ema": {"modes": 4, "hq": 0.9688}}
+{"step": 400, "ok": 1, "modes": 4, "hq": 0.9375, "ema": {"modes": 4, "hq": 0.9375}}
+{"step": 425, "ok": 1, "modes": 4, "hq": 0.9688, "ema": {"modes": 4, "hq": 0.9688}}
+{"step": 450, "ok": 1, "modes": 4, "hq": 0.9688, "ema": {"modes": 4, "hq": 0.9688}}
+{"step": 475, "ok": 1, "modes": 4, "hq": 1.0, "ema": {"modes": 4, "hq": 1.0}}
+{"step": 500, "ok": 1, "modes": 4, "hq": 1.0, "ema": {"modes": 4, "hq": 1.0}}
+{"step": 525, "ok": 1, "modes": 4, "hq": 0.9688, "ema": {"modes": 4, "hq": 0.9688}}
+{"step": 550, "ok": 1, "modes": 4, "hq": 1.0, "ema": {"modes": 4, "hq": 0.9688}}
+{"step": 575, "ok": 1, "modes": 4, "hq": 0.9688, "ema": {"modes": 4, "hq": 0.9375}}
+{"step": 600, "ok": 1, "modes": 4, "hq": 1.0, "ema": {"modes": 4, "hq": 1.0}}
+RESULT {"status": "PASS", "task": "img_blobs4", "cand": "RA14-replay", "passing_checks": 18, "observations": 24, "first_arrival": 175, "final_streak": 18, "seconds": 27.54}
+{"event": "screen_end", "task": "img_blobs4", "status": "COMPLETE", "primary_status": "PASS", "wall_seconds": 28.897192239761353}

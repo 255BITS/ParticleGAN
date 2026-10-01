@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/moving-rotated-window-ra15/run_pair.py", line 252, in <module>
+    main()
+  File "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/moving-rotated-window-ra15/run_pair.py", line 245, in main
+    worker(args.worker, args.output.resolve(), args.lock_fd)
+  File "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/moving-rotated-window-ra15/run_pair.py", line 179, in worker
+    exec(compile(source.read_text(), str(source), 'exec'),
+  File "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/moving-rotated-window-ra15/control_runner.py", line 136, in <module>
+    support.resume(trainer, real_batch, stream, gate_rows, owned_output)
+  File "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/moving-rotated-window-ra15/window_support.py", line 88, in resume
+    assert not mismatch, ('checkpoint restoration mismatch', mismatch)
+           ^^^^^^^^^^^^
+AssertionError: ('checkpoint restoration mismatch', [{'path': 'lr_settle.0.1.r_b.0', 'reason': 'tensor differs'}, {'path': 'lr_settle.0.1.r_b.1', 'reason': 'tensor differs'}, {'path': 'lr_settle.0.1.r_b.2', 'reason': 'tensor differs'}, {'path': 'lr_settle.0.1.last_block', 'reason': 'tensor differs'}, {'path': 'lr_settle.0.1.r_2b.0', 'reason': 'tensor differs'}, {'path': 'lr_settle.0.1.last_look.t_2b', 'reason': 'scalar differs', 'expected': 'nan', 'actual': 'nan'}, {'path': 'lr_settle.0.1.blocks.0', 'reason': 'tensor differs'}, {'path': 'lr_settle.0.1.blocks.1', 'reason': 'tensor differs'}, {'path': 'lr_settle.0.1.last.log_bf_2b', 'reason': 'scalar differs', 'expected': 'nan', 'actual': 'nan'}, {'path': 'lr_settle.0.1.last.log_bf_b', 'reason': 'scalar differs', 'expected': 'nan', 'actual': 'nan'}, {'path': 'lr_settle.0.2.r_2b.0', 'reason': 'tensor differs'}, {'path': 'lr_settle.0.2.r_2b.1', 'reason': 'tensor differs'}, {'path': 'lr_settle.0.2.r_2b.2', 'reason': 'tensor differs'}, {'path': 'lr_settle.0.2.r_2b.3', 'reason': 'tensor differs'}, {'path': 'lr_settle.0.2.r_2b.4', 'reason': 'tensor differs'}, {'path': 'lr_settle.0.2.last.t_b', 'reason': 'scalar differs', 'expected': 'nan', 'actual': 'nan'}, {'path': 'lr_settle.0.2.last.mean_r_b', 'reason': 'scalar differs', 'expected': 'nan', 'actual': 'nan'}, {'path': 'lr_settle.0.2.last.t_2b', 'reason': 'scalar differs', 'expected': 'nan', 'actual': 'nan'}, {'path': 'lr_settle.0.2.last.mean_r_2b', 'reason': 'scalar differs', 'expected': 'nan', 'actual': 'nan'}, {'path': 'lr_settle.0.2.r_b.0', 'reason': 'tensor differs'}])

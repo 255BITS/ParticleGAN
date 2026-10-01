@@ -26,7 +26,7 @@ samples = trainer.sample(10_000, output_noise=True)
 
 The caller supplies the device, networks, initialization, population, latent
 width, batch size, and data stream. The recorded Gaussian problems use output
-noise starting at .029; choose this scale for your own data. For an external
+noise starting at .029; set this scale to match your own data. For an external
 optimizer loop, use the existing [`E22Policy` lifecycle](e22.md#caller-owned-updates)
 with the same Recipe and explicit parameter-group roles.
 
@@ -76,7 +76,8 @@ history after loading a CPU-mapped checkpoint onto CUDA.
 
 CPU planning operations use explicit CPU allocation when the caller sets a
 CUDA default device. Restore also requires exact agreement between the saved
-backend output shape and feature FIFO shape before any state is committed.
+backend output shape and initialized feature FIFO shape before any state is
+committed.
 
 The ordinary Recipe defaults and default checkpoint fields remain unchanged.
 The new backend and guard are explicit options. CPU Adam health checks also
