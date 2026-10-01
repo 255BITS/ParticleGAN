@@ -9,7 +9,7 @@ R1 is part of the [E22 preset](e22.md) (`get_recipe("e22")`, `get_recipe("e22_ro
 ```
 
 `"none"` / `"hold"` turns it off (E22 before R1). The Recipe defaults outside the E22 preset are unchanged.
-On a static target it does not fire, and the run is then bit-identical to E22 without it. Harness evidence
+In the native static runs below it does not fire, and the run is then bit-identical to E22 without it. Harness evidence
 (frozen harness, new-API package): native gates 3/3 at 7k and 14k, S4 3/3 at lr x.75 and x1.33, 0 fires in all
 15 native runs; the 13-gate suite matches E22 on 11 gates with 0 fires, including vector_overlap after the
 abrupt-rise rule below. ring_shift and stationary do not run on this API in the frozen harness (E22 as well).
@@ -57,6 +57,35 @@ identical to E22's (grid .98485, rotated .98575, staggered .98265).
 
 Both read only network and optimizer state: no statistic of the data or of generator outputs, no step schedule.
 The state is part of the trainer checkpoint and resumes bit-exactly (`tests/test_r1_rotation.py`).
+
+## Optional guard for a settled game
+
+Optimizer gradients can also jump during ordinary early training or when the critic changes its penalty loss.
+The optional setting below qualifies a re-open using the game's existing stationarity state:
+
+```json
+"reopen_guard": "settled"
+```
+
+At the last calm observation or the start of a surprise excursion, at least one generator, encoder, router, or
+critic learning-rate tester must have a scale below one. That contraction witness stays with the excursion if
+the ordinary stationarity controller opens the ladder before R1 finishes its 12 observations. Table and output
+noise scales do not qualify it, and the critic's separate payoff damping does not count as stationarity.
+
+An excursion without that witness updates the slow reference without rescaling Adam moments, restarting
+testers, or releasing the critic anchor. When KA2 actually begins its blended penalty, the guard starts a new
+measurement reference before queuing that loss's optimizer signal. It reads the applied penalty's state,
+including lazy calls; it does not use a training-step schedule. R1's original ratios and thresholds stay the same.
+
+The guard's witness and loss epoch are checkpointed and validated before model or optimizer mutation. Omitting
+the setting preserves the existing R1 recipe and checkpoint format. Focused contracts are in
+[`tests/test_settled_guard.py`](../tests/test_settled_guard.py).
+
+[`ra13-settled.json`](../configs/100gaussians/ra13-settled.json) combines this guard with automatic population
+backend selection. Feature cells require sufficient finite-population resolution and a complete raw output
+frame of at most eight coordinates; other cases use the existing kNN backend. Generator and output-noise base
+rates are multiplied by one quarter when feature cells are selected. The caller still supplies the task's
+particle count, latent width, batch size, and models.
 
 ## Routed (`e22_routed`)
 

@@ -127,6 +127,10 @@ class Recipe:
     # "release" = the re-open counts as drift evidence for KA2 (evidence = 1) from the fire until KA2's own surprise ratio has
     # risen above REL_HI and fallen back below REL_LO: KA2's native release / EMA tracking / reseed rules then apply. Event-gated.
     reopen_anchor: str = "hold"
+    # Optional acquisition guard for optimizer re-opens. None retains R1's
+    # exact legacy law; "settled" requires a contracted network ladder at
+    # the start of the surprise excursion and rebases known KA2 loss epochs.
+    reopen_guard: str | None = None
     # Null law of the row-evidence gate: "theory" = the exact-law p-value of the statistic as is; "scaled" = the same law applied to t2 / c, where
     # c >= 1 is the smallest scale that makes the median p-value over the tested rows .5 (the typical row is the null: a slowly varying force
     # shared by neighbouring rows, correlated gradients or a different noise level scale every row's statistic alike; only rows that are extreme
@@ -142,6 +146,13 @@ class Recipe:
     # the scale of a hidden unit (rescale a ReLU-type unit and its outgoing weight inversely: same function, different Euclidean distances), so the
     # raw metric depends on an arbitrary parametrisation; "std" is invariant to that symmetry and is a function of the reference half only.
     birth_death_feature_scale: str = "none"
+    # Opt-in bounded feature law. Auto is conservatively scoped to a complete
+    # raw-output moment frame and finite conformal/BH resolution.
+    birth_death_backend: str = "knn"
+    birth_death_cells: int = 64
+    birth_death_metric_rank: int = 8
+    birth_death_chunk: int = 256
+    birth_death_parent_policy: str = "real_anchor"
     # Independent E22 uses its original equal-mass particle statistics.
     # routed_paired is a distinct conditional dense-bank adaptation, bound to
     # an explicit RoutedRows contract in the caller-owned policy API.
@@ -246,6 +257,11 @@ class Recipe:
             raise ValueError("reopen_anchor must be hold or release")
         if self.reopen_anchor != "hold" and self.reopen_signal != "optimizer":
             raise ValueError("reopen_anchor release requires reopen_signal optimizer")
+        if self.reopen_guard not in (None, "settled"):
+            raise ValueError("reopen_guard must be None or settled")
+        if self.reopen_guard is not None and (
+                self.reopen_signal != "optimizer" or self.lr_control != "stationarity"):
+            raise ValueError("reopen_guard settled requires optimizer re-open and stationarity control")
         if self.row_evidence_null not in ("theory", "scaled"):
             raise ValueError("row_evidence_null must be theory or scaled")
         if self.birth_death_space not in ("data", "critic"):
@@ -265,6 +281,20 @@ class Recipe:
                 raise ValueError(f"{_name} must be a boolean")
         if self.table_release_rule not in ("any", "both", "never", "anchor"):
             raise ValueError("table_release_rule must be any, both, never or anchor")
+        if self.birth_death_backend not in ("knn", "feature_cells", "auto"):
+            raise ValueError("birth_death_backend must be knn, feature_cells or auto")
+        for key in ("birth_death_cells", "birth_death_metric_rank", "birth_death_chunk"):
+            if type(getattr(self, key)) is not int or getattr(self, key) <= 0:
+                raise ValueError(f"{key} must be a positive integer")
+        if self.birth_death_parent_policy != "real_anchor":
+            raise ValueError("birth_death_parent_policy must be real_anchor")
+        if self.birth_death_backend != "knn":
+            if (not self.particle_birth_death or self.birth_death_space != "critic"
+                    or self.birth_death_feature_scale != "std" or self.continuous_policy != "dv12"
+                    or self.lr_control != "stationarity"):
+                raise ValueError("feature/auto requires standardized critic birth/death with DV12 stationarity")
+        elif (self.birth_death_cells, self.birth_death_metric_rank, self.birth_death_chunk) != (64, 8, 256):
+            raise ValueError("feature-cell options require feature_cells or auto")
         if type(self.row_evidence_gate) is not bool:
             raise ValueError("row_evidence_gate must be a boolean")
         if self.row_policy not in ("independent", "routed_paired"):
@@ -307,7 +337,15 @@ class Recipe:
         return replace(self, **overrides)
 
     def to_dict(self):
-        return asdict(self)
+        result = asdict(self)
+        if self.reopen_guard is None:
+            result.pop("reopen_guard")
+        if self.birth_death_backend == "knn":
+            # Keep current reference Recipe/config/checkpoint dictionaries.
+            for key in ("birth_death_backend", "birth_death_cells", "birth_death_metric_rank",
+                        "birth_death_chunk", "birth_death_parent_policy"):
+                result.pop(key)
+        return result
 
     def make_prior(self, **overrides):
         """Construct the prior; overrides are local to this call.

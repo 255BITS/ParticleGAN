@@ -181,8 +181,11 @@ class GANTrainer:
         """Current output-noise standard deviation as a float."""
         return self.policy.output_sigma()
 
-    def _generate(self, model, latent, sigma, stream):
-        return self.policy.generate(latent, sigma=sigma, stream=stream, model=model)
+    def _generate(self, model, latent, sigma, stream, indices=None, *, rows=None):
+        if indices is not None and rows is not None:
+            raise ValueError("pass sampled row IDs as indices or rows, not both")
+        return self.policy.generate(latent, sigma=sigma, stream=stream, model=model,
+                                    rows=indices if rows is None else rows)
 
     def served_snapshot(self):
         """Independent currently served generator/table state, also available in caller-owned loops."""
@@ -250,9 +253,9 @@ class GANTrainer:
         self.D.train()
         self.G.eval()
         with torch.no_grad():
-            latent, _ = self.prior.sample(len(real), generator=self.latent_generator)
+            latent, indices_d = self.prior.sample(len(real), generator=self.latent_generator)
             self.policy.observe_support(latent)
-            fake = self._generate(self.G, latent, sigma_out, noise)
+            fake = self._generate(self.G, latent, sigma_out, noise, rows=indices_d)
         self.policy.observe_critic_pair(real, fake)
         loss_d = self.loss.d_loss(critic(real), critic(fake))
         self.penalty.collect_stats = collect_stats
@@ -270,7 +273,7 @@ class GANTrainer:
         try:
             self.D.requires_grad_(False)
             latent, indices = self.prior.sample(len(real), generator=self.latent_generator)
-            fake_logits = critic(self._generate(self.G, latent, sigma_out, noise))
+            fake_logits = critic(self._generate(self.G, latent, sigma_out, noise, rows=indices))
             real_g = generator_real() if callable(generator_real) else generator_real
             real_g = real if real_g is None else self._batch(real_g, "generator_real")
             if real_g.shape[1:] != real.shape[1:]:
@@ -336,10 +339,10 @@ class GANTrainer:
             model.eval()
             prior.eval()
             with torch.random.fork_rng(devices=devices):
-                latent, _ = prior.sample(n, generator=stream)
+                latent, rows = prior.sample(n, generator=stream)
                 sigma = (self._output_sigma(output_noise_std(self.recipe, self.completed_steps))
                          if output_noise else 0.0)
-                return self._generate(model, latent, sigma, stream)
+                return self._generate(model, latent, sigma, stream, rows=rows)
         finally:
             for module, flag in modes:
                 module.training = flag
@@ -369,6 +372,8 @@ class GANTrainer:
                               for name in names},
             "optimizers": [self.opt_g.state_dict(), self.opt_d.state_dict()],
             "initial_lrs": self.initial_lrs, "completed_steps": self.completed_steps,
+            **({} if self.policy._feature_selection is None else {
+                "backend_selection": self.policy._feature_selection.state_dict()}),
             # Compact metadata completes the reusable policy state without
             # duplicating image-sized models or optimizer tensors. Older flat
             # schema-4 checkpoints remain accepted below.
@@ -385,6 +390,8 @@ class GANTrainer:
             **({"birth_death": self.birth_death.state_dict()} if self.birth_death is not None else {}),
             **({"row_evidence": self.row_evidence.state_dict()} if self.row_evidence is not None else {}),
             **({"surprise": self.policy.surprise.state_dict()} if self.policy.surprise is not None else {}),
+            **({"reopen_guard": self.policy.reopen_guard.state_dict()}
+               if self.policy.reopen_guard is not None else {}),
         })
 
     def load_state_dict(self, state):
@@ -405,13 +412,15 @@ class GANTrainer:
         mutation of the live trainer. Earlier formulations cannot be resumed
         under KA2; use the release that wrote those checkpoints.
         """
-        self._serve_release()
+        if self.policy._feature_selection is None and self.policy.reopen_guard is None:
+            self._serve_release()
         if isinstance(state, dict) and state.get("schema") in (1, 2, 3):
             raise ValueError(
                 f"schema-{state['schema']} GANTrainer checkpoints come from an older formulation "
                 "and cannot resume under KA2; pin the release that wrote the checkpoint "
                 "(0.8.0 for K3P), or start a new run")
-        expected = self.state_dict()
+        expected = (self.state_dict() if self.policy._feature_selection is None and self.policy.reopen_guard is None
+                    else self._state_dict())
         if isinstance(state, dict) and (
                 type(state.get("serial_backward", False)) is not bool
                 or state.get("serial_backward", False) != self.serial_backward):
@@ -467,15 +476,23 @@ class GANTrainer:
                 raise ValueError("invalid checkpoint learnable output noise")
         if self.controller is not None:
             deepcopy(self.controller).load_state_dict(_state_to_device(state["controller"], self.device))
-        if self.lr_settle is not None:
-            deepcopy(self.lr_settle).load_state_dict(_state_to_device(state["lr_settle"], self.device),
+        prepared = (None if self.policy._feature_selection is None else
+                    self.policy._feature_selection.prepare_restore(state["backend_selection"], state))
+        validation_birth, validation_settle = ((self.birth_death, self.lr_settle) if prepared is None
+                                             else prepared["controls"])
+        if validation_settle is not None:
+            deepcopy(validation_settle).load_state_dict(_state_to_device(state["lr_settle"], self.device),
                                                     (self.opt_g, self.opt_d))
-        if self.birth_death is not None:
-            self.birth_death.check_state(state["birth_death"])
+        if validation_birth is not None:
+            validation_birth.check_state(state["birth_death"])
         if self.row_evidence is not None:
             self.row_evidence.check_state(state["row_evidence"])
         if self.policy.surprise is not None:
             deepcopy(self.policy.surprise).load_state_dict(_state_to_device(state["surprise"], self.device))
+        if self.policy.reopen_guard is not None:
+            self.policy.reopen_guard.check_state(state["reopen_guard"], roles=self.policy.roles,
+                                                 completed_steps=state["completed_steps"],
+                                                 anchor_started=self.policy._loss_epoch(state["optimizers"][1]))
         metadata = state.get("policy")
         if "policy" in state:
             if (not isinstance(metadata, dict) or metadata.keys() != expected["policy"].keys()
@@ -489,8 +506,16 @@ class GANTrainer:
                           for row, roles in zip(state.get("lr_settle", []), self.policy.roles)
                           for value, role in zip(row, roles))
             source = "averaged" if self.recipe.serve_average > 0 and settled else "fast"
+            if self.policy._feature_selection is not None:
+                feature_source = self.policy._feature_selection.saved_served_source(state)
+                if feature_source is not None:
+                    source = feature_source
             if metadata["served_source"] != source:
                 raise ValueError("inconsistent checkpoint policy served source")
+        if prepared is not None or self.policy.reopen_guard is not None:
+            self._serve_release()
+        if prepared is not None:
+            self.policy._feature_selection.commit_restore(prepared)
         for name, values in state["models"].items():
             getattr(self, name).load_state_dict(values)
         if self.log_output_sigma is not None:
@@ -509,6 +534,10 @@ class GANTrainer:
             self.row_evidence.load_state_dict(state["row_evidence"])
         if self.policy.surprise is not None:
             self.policy.surprise.load_state_dict(_state_to_device(state["surprise"], self.device))
+        if self.policy.reopen_guard is not None:
+            self.policy.reopen_guard.load_state_dict(state["reopen_guard"], roles=self.policy.roles,
+                                                     completed_steps=state["completed_steps"],
+                                                     anchor_started=self.policy._loss_epoch(state["optimizers"][1]))
         self.initial_lrs, self.completed_steps = deepcopy(rates), steps
         self.last_output_sigma = None if metadata is None else metadata["last_output_sigma"]
         for name, value in state["streams"].items():

@@ -966,7 +966,7 @@ class OptimizerSurprise:
         if q is not None:
             self.pending[key] = q
 
-    def decide(self, step=None):
+    def decide(self, step=None, *, guard=None, network=None):
         """Fold this update's observations in; return True when a re-open fires."""
         if not self.pending:
             return False
@@ -990,16 +990,17 @@ class OptimizerSurprise:
         self.last_ratio = ratio
         self.last_ratios = {key: math.exp(value) for key, value in zip(keys, logs)}
         calm = ratio < self.CALM
+        permitted = True if guard is None else guard.observe(ratio, self.CALM, step, network)
         self.since_calm = 0 if calm else self.since_calm + 1
         if self.since_fire is not None:
             self.since_fire += 1
-        if calm or not self.armed:
+        if calm or not self.armed or not permitted:
             for key, value in zip(keys, values):
                 self.slow[key] += (value - self.slow[key]) / (8 * self.K)
         fire = False
         if self.armed:
             abrupt = self.streak > 0 or self.since_calm <= 2 * self.K
-            self.streak = self.streak + 1 if ratio > self.RISE and abrupt else 0
+            self.streak = self.streak + 1 if permitted and ratio > self.RISE and abrupt else 0
             if self.streak >= self.K:
                 fire = True
                 self.fires += 1
@@ -1011,6 +1012,8 @@ class OptimizerSurprise:
                 for key, value in zip(keys, logs):
                     self.slow[key] = self.fast[key] + max(0., value)
                 self.log = (self.log + [[step, round(ratio, 3)]])[-8:]
+                if guard is not None:
+                    guard.after_fire()
         elif calm and self.since_fire >= 8 * self.K:
             self.armed = True
         return fire
@@ -1027,3 +1030,94 @@ class OptimizerSurprise:
         if not isinstance(state, dict) or set(state) != set(self.__dict__):
             raise ValueError("incompatible optimizer-surprise state")
         self.__dict__.update(deepcopy(state))
+
+
+class SettledReopenGuard:
+    """Opt-in R1 acquisition witness; detector ratios and thresholds stay R1's.
+
+    A contracted explicit network ladder at the last calm observation or
+    excursion onset qualifies that excursion. The witness survives an ordinary
+    ladder release while R1 accumulates its sustained-jump evidence. Full-rate
+    excursions follow the existing slow reference without any re-open action.
+    """
+
+    NETWORK_ROLES = frozenset(("generator", "encoder", "router", "critic"))
+
+    def __init__(self):
+        self.ka2_anchor_started = None
+        self.calm_network = {}
+        self.excursion = None
+        self.epoch_rebases = 0
+
+    def observe(self, ratio, calm_level, step, network):
+        network = {} if network is None else network
+        if ratio < calm_level:
+            self.calm_network = deepcopy(network)
+            self.excursion = None
+            return True
+        if self.excursion is None:
+            witness = {**self.calm_network, **network}
+            self.excursion = {"step": step, "network": deepcopy(witness)}
+        return bool(self.excursion["network"])
+
+    def after_fire(self):
+        # A re-open restores every ladder to its ceiling. It supplies no
+        # contraction witness for the next event.
+        self.calm_network = {}
+        self.excursion = None
+
+    def observe_epoch(self, anchor_started, detector):
+        if anchor_started is not None and type(anchor_started) is not bool:
+            raise ValueError("KA2 loss epoch must be a boolean or None")
+        changed = self.ka2_anchor_started is False and anchor_started is True
+        if changed:
+            detector.fast, detector.slow, detector.pending = {}, {}, {}
+            detector.streak, detector.since_calm = 0, 0
+            detector.last_ratio, detector.last_ratios = None, {}
+            # A known objective change has no optimizer action. Preserve real
+            # fires, their refractory clock, and any existing anchor latch.
+            self.calm_network, self.excursion = {}, None
+            self.epoch_rebases += 1
+        self.ka2_anchor_started = anchor_started
+        return changed
+
+    def state_dict(self):
+        return {"schema": 1, **deepcopy(self.__dict__)}
+
+    def check_state(self, state, *, roles, completed_steps, anchor_started):
+        expected = self.state_dict()
+        if (not isinstance(state, dict) or state.keys() != expected.keys()
+                or type(state["schema"]) is not int or state["schema"] != 1):
+            raise ValueError("invalid settled re-open guard schema")
+        epoch = state["ka2_anchor_started"]
+        if ((epoch is not None and type(epoch) is not bool) or epoch != anchor_started):
+            raise ValueError("settled re-open guard loss epoch does not match critic state")
+        if type(state["epoch_rebases"]) is not int or state["epoch_rebases"] < 0:
+            raise ValueError("invalid settled re-open guard epoch counter")
+        topology = {f"{i}.{j}": role for i, row in enumerate(roles) for j, role in enumerate(row)}
+
+        def check_network(network):
+            if not isinstance(network, dict):
+                raise ValueError("invalid settled re-open network witness")
+            for key, witness in network.items():
+                if (type(key) is not str or key not in topology or not isinstance(witness, dict)
+                        or witness.keys() != {"role", "scale"}
+                        or witness["role"] != topology[key] or witness["role"] not in self.NETWORK_ROLES):
+                    raise ValueError("settled re-open witness does not match network ownership")
+                scale = witness["scale"]
+                if type(scale) not in (float, int) or not math.isfinite(scale) or not 0 < scale < 1:
+                    raise ValueError("settled re-open witness needs a contracted network scale")
+
+        check_network(state["calm_network"])
+        excursion = state["excursion"]
+        if excursion is not None:
+            if (not isinstance(excursion, dict) or excursion.keys() != {"step", "network"}
+                    or type(excursion["step"]) is not int
+                    or not 0 <= excursion["step"] <= completed_steps):
+                raise ValueError("invalid settled re-open excursion clock")
+            check_network(excursion["network"])
+
+    def load_state_dict(self, state, *, roles, completed_steps, anchor_started):
+        self.check_state(state, roles=roles, completed_steps=completed_steps,
+                         anchor_started=anchor_started)
+        self.__dict__.update(deepcopy({key: value for key, value in state.items() if key != "schema"}))

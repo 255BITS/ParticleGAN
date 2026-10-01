@@ -13,7 +13,7 @@ contain fast training weights unless the trainer's compatibility serving
 swap is explicitly requested.  Use ``served_snapshot()`` for independent
 inference weights, and checkpoint only at completed update boundaries.
 """
-from copy import deepcopy
+from copy import copy, deepcopy
 from dataclasses import dataclass
 import math
 from types import SimpleNamespace
@@ -21,7 +21,7 @@ from types import SimpleNamespace
 import torch
 from torch import nn
 
-from .continuous import DataDriftController, OptimizerSurprise, StationarityLR
+from .continuous import DataDriftController, OptimizerSurprise, SettledReopenGuard, StationarityLR
 from .recipes import Recipe, learning_rate_scales
 
 
@@ -83,16 +83,20 @@ def _validate_optimizer_state(optimizer, state):
                     raise ValueError("invalid checkpoint Adam step")
 
 
-def _state_to_device(value, device):
-    """Move controller/test tensor state after a CPU-first checkpoint load."""
+def _state_to_device(value, device, memo=None):
+    """Move control tensors, preserving repeated references across a device copy."""
+    memo = {} if memo is None else memo
     if isinstance(value, torch.Tensor):
-        return value.to(device=device)
+        key = id(value)
+        if key not in memo:
+            memo[key] = value.to(device=device)
+        return memo[key]
     if isinstance(value, dict):
-        return {key: _state_to_device(item, device) for key, item in value.items()}
+        return {key: _state_to_device(item, device, memo) for key, item in value.items()}
     if isinstance(value, list):
-        return [_state_to_device(item, device) for item in value]
+        return [_state_to_device(item, device, memo) for item in value]
     if isinstance(value, tuple):
-        return tuple(_state_to_device(item, device) for item in value)
+        return tuple(_state_to_device(item, device, memo) for item in value)
     return value
 
 
@@ -118,25 +122,30 @@ class ServedModel:
     """
 
     def __init__(self, models, table, controller, *, source, output_sigma,
-                 completed_steps, stream, generation=None, row_semantics="independent", routing=None):
+                 completed_steps, stream, generation=None, row_semantics="independent", routing=None,
+                 feature_sampler=None, backend_selection=None):
         self.models, self.table, self.controller = models, table, controller
         self.source, self.output_sigma = source, output_sigma
         self.completed_steps, self.stream, self.generation = completed_steps, stream, generation
         self.row_semantics = row_semantics
         self.routing = routing
+        self.feature_sampler, self.backend_selection = feature_sampler, backend_selection
         self.generator, self.critic = models["generator"], models["critic"]
         self.prior = models.get("prior")
         self.encoder, self.router = models.get("encoder"), models.get("router")
 
     @torch.no_grad()
-    def _generate(self, latent, stream, output_noise):
+    def _generate(self, latent, stream, output_noise, rows=None):
         if self.controller is not None:
             if self.routing is None:
                 prior = self.prior if self.prior is not None else SimpleNamespace(z=self.table)
             else:
                 candidate = self.routing.candidate_for(self.models, self.table, averaged=self.source == "averaged")
                 prior = self.controller.routed_prior(candidate.table, candidate.log_mass)
-            latent = self.controller.perturb_latent(latent, stream, prior)
+            if self.feature_sampler is not None:
+                latent = self.feature_sampler.perturb_latent(latent, stream, self.controller, prior, rows=rows)
+            else:
+                latent = self.controller.perturb_latent(latent, stream, prior)
         y = self.generator(latent) if self.generation is None else self.generation(self.generator, latent)
         if output_noise and self.output_sigma != 0:
             y = y + self.output_sigma * torch.randn(
@@ -155,7 +164,7 @@ class ServedModel:
         return stream
 
     @torch.no_grad()
-    def generate(self, latent, *, generator=None, output_noise=False):
+    def generate(self, latent, *, generator=None, output_noise=False, rows=None):
         """Apply the served latent/output-noise law to caller-supplied latents."""
         if type(output_noise) is not bool:
             raise ValueError("output_noise must be a boolean")
@@ -163,7 +172,7 @@ class ServedModel:
         device = self.table.device
         devices = [device.index] if device.type == "cuda" else []
         with torch.random.fork_rng(devices=devices):
-            return self._generate(latent, stream, output_noise)
+            return self._generate(latent, stream, output_noise, rows=rows)
 
     @torch.no_grad()
     def sample(self, n, *, generator=None, output_noise=False):
@@ -183,8 +192,8 @@ class ServedModel:
                 indices = torch.randint(len(self.table), (n,), device=device, generator=stream)
                 latent = self.table[indices]
             else:
-                latent, _ = self.prior.sample(n, generator=stream)
-            return self._generate(latent, stream, output_noise)
+                latent, indices = self.prior.sample(n, generator=stream)
+            return self._generate(latent, stream, output_noise, rows=indices)
 
     @torch.no_grad()
     def routed_forward(self, context, *, perturb=False, output_noise=False, generator=None):
@@ -367,6 +376,9 @@ class UpdatePolicy:
         self.routed_control = None
         self.surprise = (OptimizerSurprise() if self.lr_settle is not None and recipe.reopen_signal == "optimizer"
                          else None)
+        self.reopen_guard = None if recipe.reopen_guard is None else SettledReopenGuard()
+        if self.reopen_guard is not None:
+            self.reopen_guard.observe_epoch(self._loss_epoch(), self.surprise)
         self.birth_death = None
         self.row_evidence = None
         if self.row_policy == "routed_paired":
@@ -413,9 +425,16 @@ class UpdatePolicy:
         if penalty is not None:
             self.attach_penalty(penalty)
         self.schedule = learning_rate_scales if schedule is None else schedule
+        self._feature_selection = None
+        if recipe.birth_death_backend != "knn":
+            from .feature_policy import FeatureSelection
+            self._feature_selection = FeatureSelection(self, seed + 6)
         self._phase = "ready"
         self._noise = None
         self._stray_flags = self._hot = self._z_before = None
+        from .k3p import _scope_reference_adam_graph_checks
+        for optimizer in self.optimizers:
+            _scope_reference_adam_graph_checks(optimizer)
 
     def _training_modules(self):
         return {name: module for name, module in (
@@ -564,6 +583,8 @@ class UpdatePolicy:
                 or real.device != self.device or real.dtype != self.dtype):
             raise ValueError("real must be a nonempty batch on the model device and dtype")
         real = real.detach()
+        if self._feature_selection is not None:
+            self._feature_selection.observe_shape(real)
         if self.routed_control is not None and self._routed_controls_enabled:
             self.routed_control.begin(routed)
         elif self.routed_control is not None and routed is not None:
@@ -588,7 +609,11 @@ class UpdatePolicy:
                 reopen = self.controller.data_score > 3.
             elif recipe.reopen_signal == "optimizer":
                 self.controller.observe_blind()
-                reopen = self.surprise.decide(self.completed_steps)
+                if self.reopen_guard is None:
+                    reopen = self.surprise.decide(self.completed_steps)
+                else:
+                    reopen = self.surprise.decide(self.completed_steps, guard=self.reopen_guard,
+                                                  network=self._contracted_network())
                 if reopen:
                     self._reopen_moments()
                 if recipe.reopen_anchor == "release":
@@ -654,6 +679,10 @@ class UpdatePolicy:
         """Observe applied critic displacement after its optimizer's step."""
         if self._phase != "critic":
             raise RuntimeError("after_critic_step must follow the critic optimizer step")
+        if self.reopen_guard is not None:
+            # The completed penalty call owns the epoch, including lazy calls
+            # and multiple caller roles. Rebase before changed-loss q is queued.
+            self.reopen_guard.observe_epoch(self._loss_epoch(), self.surprise)
         if self.lr_settle is not None:
             self._settle_observe(1)
         self._phase = "generator"
@@ -749,7 +778,10 @@ class UpdatePolicy:
             if event and event.get("moves") and self.lr_settle is not None:
                 self._routed_rebase()
         elif self.birth_death is not None:
-            event = self.birth_death.maybe_apply(self.last_output_sigma)
+            if self._feature_selection is not None and self._feature_selection.state["actual_backend"] == "feature_cells":
+                event = self.birth_death.maybe_apply(self._feature_selection.facade, self.last_output_sigma)
+            else:
+                event = self.birth_death.maybe_apply(self.last_output_sigma)
             if event and event.get("moves") and self.lr_settle is not None:
                 for index, row in enumerate(self.lr_settle.testers):
                     for group, tester, role in zip(self.optimizers[index].param_groups, row, self.roles[index]):
@@ -805,6 +837,21 @@ class UpdatePolicy:
                 tester.observe(group["params"], group["lr"] / rate, step=self.completed_steps + 1)
                 if self.surprise is not None:
                     self.surprise.observe(f"{index}.{j}", self.optimizers[index], group)
+
+    def _contracted_network(self):
+        return {f"{i}.{j}": {"role": role, "scale": tester.s}
+                for i, (testers, roles) in enumerate(zip(self.lr_settle.testers, self.roles))
+                for j, (tester, role) in enumerate(zip(testers, roles))
+                if (tester is not None and role in SettledReopenGuard.NETWORK_ROLES and tester.s < 1.)}
+
+    def _loss_epoch(self, optimizer_state=None):
+        from .ka2 import KA2StepRecord
+        record = getattr(self.opt_d, "record", None)
+        if not isinstance(record, KA2StepRecord):
+            return None
+        if optimizer_state is None:
+            return record.anchor_started
+        return optimizer_state["regularizer"]["record"]["anchor_started"]
 
     def _anchor_release(self, reopen):
         """reopen_anchor="release": a re-open is evidence that the game moved, so the KA2 anchor may follow KA2's own
@@ -889,7 +936,7 @@ class UpdatePolicy:
     def _clean_generate(self, model, latent):
         return model(latent) if self.generation is None else self.generation(model, latent)
 
-    def generate(self, latent, *, sigma=None, stream=None, averaged=False, model=None):
+    def generate(self, latent, *, sigma=None, stream=None, averaged=False, model=None, rows=None):
         """Generate with DV12 perturbation and optional output noise.
 
         Default noise is the shared value from ``begin_step``; a sampling
@@ -902,9 +949,16 @@ class UpdatePolicy:
         model = (self.ema_G if averaged else self.G) if model is None else model
         averaged = averaged or model is self.ema_G
         if self.controller is not None:
-            latent = self.controller.perturb_latent(
-                latent, stream, self._prior_view(averaged), record=stream is self.noise_generator)
+            if self._feature_selection is not None and self._feature_selection.state["actual_backend"] == "feature_cells":
+                latent = self.birth_death.perturb_latent(
+                    latent, stream, self.controller, prior=self._prior_view(averaged), rows=rows,
+                    record=stream is self.noise_generator)
+            else:
+                latent = self.controller.perturb_latent(
+                    latent, stream, self._prior_view(averaged), record=stream is self.noise_generator)
         y = self._clean_generate(model, latent)
+        if self._feature_selection is not None:
+            self._feature_selection.check_generated_shape(y)
         if sigma == 0:
             return y
         return y + sigma * torch.randn(y.shape, generator=stream, device=y.device, dtype=y.dtype)
@@ -967,6 +1021,8 @@ class UpdatePolicy:
             self._fast = None
 
     def _serve_settled(self):
+        if self._feature_selection is not None and self._feature_selection.state["actual_backend"] == "feature_cells":
+            return self.birth_death.paired_average_eligible(self.completed_steps)
         tester = self._table_tester()
         return tester is not None and getattr(tester, "last_decisive", 0) == -1
 
@@ -1027,7 +1083,10 @@ class UpdatePolicy:
                              "output_sigma": self.output_sigma(), "completed_steps": self.completed_steps,
                              "controller": None if self.controller is None else self.controller.state_dict(),
                              "row_semantics": self.row_semantics,
-                             "routing": None if self.routed_control is None else self.routed_control.spec.to_dict()})
+                             "routing": None if self.routed_control is None else self.routed_control.spec.to_dict(),
+                             **({} if self._feature_selection is None else {
+                                 "backend_selection": self._feature_selection.state_dict(),
+                                 "feature_sampling": self._feature_selection.sampler_snapshot()})})
         finally:
             if swapped:
                 self._serve_apply()
@@ -1061,11 +1120,16 @@ class UpdatePolicy:
             controller.load_state_dict(snapshot["controller"])
         stream = torch.Generator(device=self.device)
         stream.set_state(self.eval_generator.get_state().cpu())
+        feature_sampler = None
+        if snapshot.get("feature_sampling") is not None:
+            from .feature_policy import FrozenFeatureSampler
+            feature_sampler = FrozenFeatureSampler(snapshot["feature_sampling"])
         return ServedModel(models, table, controller, source=snapshot["source"],
                            output_sigma=snapshot["output_sigma"],
                            completed_steps=snapshot["completed_steps"], stream=stream,
                            generation=generation, row_semantics=self.row_semantics,
-                           routing=None if self.routed_control is None else self.routed_control.spec)
+                           routing=None if self.routed_control is None else self.routed_control.spec,
+                           feature_sampler=feature_sampler, backend_selection=snapshot.get("backend_selection"))
 
     def state_dict(self):
         """Save all policy, model, optimizer, averaging and RNG state independently.
@@ -1090,6 +1154,8 @@ class UpdatePolicy:
                 "table": self.table, "averaged_table": self.averaged_table,
                 "optimizers": [optimizer.state_dict() for optimizer in self.optimizers],
                 "initial_lrs": self.initial_lrs, "completed_steps": self.completed_steps,
+                **({} if self._feature_selection is None else {
+                    "backend_selection": self._feature_selection.state_dict()}),
                 "last_output_sigma": self.last_output_sigma,
                 "output_noise": None if self.log_output_sigma is None else self.log_output_sigma.detach(),
                 "controller": None if self.controller is None else self.controller.state_dict(),
@@ -1100,6 +1166,7 @@ class UpdatePolicy:
                                  else self.row_evidence.state_dict()),
                 "routing": None if self.routed_control is None else self.routed_control.state_dict(),
                 **({} if self.surprise is None else {"surprise": self.surprise.state_dict()}),
+                **({} if self.reopen_guard is None else {"reopen_guard": self.reopen_guard.state_dict()}),
                 "streams": {name: getattr(self, name).get_state() for name in self._STREAMS},
                 "cpu_rng": torch.get_rng_state(),
                 "cuda_rng": torch.cuda.get_rng_state(self.device) if self.device.type == "cuda" else None,
@@ -1119,7 +1186,13 @@ class UpdatePolicy:
                 raise ValueError(f"incompatible policy {label} tensor {key}")
 
     def _check_state(self, state):
-        expected = self.state_dict()
+        if self._feature_selection is None and self.reopen_guard is None:
+            expected = self.state_dict()
+        else:
+            # Inspect shapes/topology without touching compatibility swaps.
+            validator = copy(self)
+            validator._fast = None
+            expected = validator.state_dict()
         allowed = (set(expected), set(expected) - {"routing"}) if self.routed_control is None else (set(expected),)
         if not isinstance(state, dict) or set(state) not in allowed or state.get("schema") != 1:
             raise ValueError("invalid UpdatePolicy checkpoint schema")
@@ -1182,8 +1255,12 @@ class UpdatePolicy:
                 raise ValueError("CPU policy cannot load CUDA RNG state")
         except (TypeError, ValueError, RuntimeError, AttributeError) as error:
             raise ValueError("invalid policy checkpoint RNG state") from error
-        for key, control in (("controller", self.controller), ("lr_settle", self.lr_settle),
-                             ("birth_death", None if self.routed_control is not None else self.birth_death),
+        prepared = (None if self._feature_selection is None else
+                    self._feature_selection.prepare_restore(state["backend_selection"], state))
+        validation_birth, validation_settle = ((self.birth_death, self.lr_settle) if prepared is None
+                                             else prepared["controls"])
+        for key, control in (("controller", self.controller), ("lr_settle", validation_settle),
+                             ("birth_death", None if self.routed_control is not None else validation_birth),
                              ("row_evidence", None if self.routed_control is not None else self.row_evidence)):
             if (control is None) != (state[key] is None):
                 raise ValueError(f"incompatible policy {key}")
@@ -1202,21 +1279,32 @@ class UpdatePolicy:
             self.routed_control.check_state(routing)
         if self.surprise is not None:
             deepcopy(self.surprise).load_state_dict(state["surprise"])
+        if self.reopen_guard is not None:
+            self.reopen_guard.check_state(state["reopen_guard"], roles=self.roles,
+                                          completed_steps=state["completed_steps"],
+                                          anchor_started=self._loss_epoch(state["optimizers"][1]))
         table_state = state["lr_settle"]
         settled = False
         if table_state is not None:
             settled = any(value is not None and role == "table" and value.get("last_decisive") == -1
                           for row, roles in zip(table_state, self.roles) for value, role in zip(row, roles))
         source = "averaged" if self.recipe.serve_average > 0 and settled else "fast"
+        if self._feature_selection is not None:
+            feature_source = self._feature_selection.saved_served_source(state)
+            if feature_source is not None:
+                source = feature_source
         if state["served_source"] != source:
             raise ValueError("inconsistent policy served source")
+        return prepared
 
     def load_state_dict(self, state):
         """Validate then restore, keeping caller modules at fast training weights."""
         if self._phase != "ready":
             raise RuntimeError("restore requires a completed update boundary")
-        self._check_state(state)
+        prepared = self._check_state(state)
         self._serve_release()
+        if prepared is not None:
+            self._feature_selection.commit_restore(prepared)
         for name, module in self._training_modules().items():
             module.load_state_dict(state["models"][name])
         for name, module in self._average_modules().items():
@@ -1240,6 +1328,10 @@ class UpdatePolicy:
             self.routed_control.load_state_dict(state["routing"])
         if self.surprise is not None:
             self.surprise.load_state_dict(state["surprise"])
+        if self.reopen_guard is not None:
+            self.reopen_guard.load_state_dict(state["reopen_guard"], roles=self.roles,
+                                              completed_steps=state["completed_steps"],
+                                              anchor_started=self._loss_epoch(state["optimizers"][1]))
         self.initial_lrs, self.completed_steps = deepcopy(state["initial_lrs"]), state["completed_steps"]
         self.last_output_sigma = state["last_output_sigma"]
         for name, value in state["streams"].items():

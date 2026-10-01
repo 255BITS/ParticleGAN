@@ -12,6 +12,7 @@ state. Nothing registers optimizer hooks or keeps module-level state.
 """
 from contextlib import contextmanager
 from copy import copy, deepcopy
+from types import MethodType
 from typing import Any, Dict, Optional, Sequence, Tuple
 
 import torch
@@ -412,7 +413,31 @@ def _closure_loss(closure):
         return closure()
 
 
-class K3PCriticAdam(Adam):
+class _DeviceScopedAdam(Adam):
+    """Run accelerator graph checks only for accelerator-owned parameters."""
+
+    def _accelerator_graph_capture_health_check(self):
+        if any(p.device.type != "cpu" for group in self.param_groups for p in group["params"]):
+            return Adam._accelerator_graph_capture_health_check(self)
+
+    def _cuda_graph_capture_health_check(self):
+        # Older PyTorch versions call this name from Adam.step().
+        if any(p.device.type != "cpu" for group in self.param_groups for p in group["params"]):
+            return Adam._cuda_graph_capture_health_check(self)
+
+
+def _scope_reference_adam_graph_checks(optimizer):
+    """Keep registered CPU Adam instances from opening accelerator contexts."""
+    if type(optimizer) not in (Adam, torch.optim.AdamW):
+        return
+    if any(p.device.type != "cpu" for group in optimizer.param_groups for p in group["params"]):
+        return
+    for name in ("_accelerator_graph_capture_health_check", "_cuda_graph_capture_health_check"):
+        if hasattr(Adam, name) and name not in optimizer.__dict__:
+            setattr(optimizer, name, MethodType(getattr(_DeviceScopedAdam, name), optimizer))
+
+
+class K3PCriticAdam(_DeviceScopedAdam):
     """Adam for one critic whose ``step()`` also does K3P's critic-side work.
 
     Built by ``recipe.make_critic_optimizer(critic, ema_critic=...)`` (and by
@@ -484,7 +509,7 @@ class K3PCriticAdam(Adam):
             self.ema_critic.load_state_dict(extra["ema"])
 
 
-class K3PGeneratorAdam(Adam):
+class K3PGeneratorAdam(_DeviceScopedAdam):
     """Adam for the generator side whose ``step()`` applies K3P's update modifications.
 
     Built by ``recipe.make_generator_optimizer(params, latent_table=...,
