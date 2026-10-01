@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+- **Learned-noise floor release:** exclude the noise group's own stationarity
+  scale from the model/table settlement gate, preventing clamped noise from
+  holding its floor high indefinitely. E22 and `e22_routed` share this repair;
+  noise learning-rate control and checkpoint/configuration formats are retained.
+  CPU/CUDA regressions cover a real frozen verdict, resumed learning, exact
+  recovery and served noise after release.
 - **Many-site synchronization:** DV12 retains only the last two detached
   applications and computes their diagnostics on demand. Accelerator routing
   batches finite checks once per complete forward; CPU validation stays eager.

@@ -116,6 +116,10 @@ only when rounding gives `exp(log_sigma) < floor` while
 `log_sigma >= log_floor`, as can happen at CUDA initialization with .125.
 That branch uses the log-space derivative, including the half subgradient at
 a tie, with a detached correction preserving the exact physical floor.
+As in [native E22](e22.md), the noise group's own stationarity scale does not
+gate floor release. The generator, encoder, router and table scales must all
+reach `1/64`; the floor then follows controller mobility, letting previously
+clamped noise learn again. The noise group's learning-rate control still runs.
 
 Three context sets have different jobs:
 
