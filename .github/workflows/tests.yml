@@ -60,13 +60,34 @@ jobs:
           python -m pip install --no-deps --target /tmp/particlegan-installed /tmp/particlegan-wheel/*.whl
           cp examples/particle_autoencoder.py /tmp/particlegan-autoencoder-smoke.py
           cp examples/quickstart_gan.py /tmp/particlegan-gan-smoke.py
+          cp examples/e22_external_loop.py /tmp/particlegan-e22-smoke.py
+          cp examples/e22_routed_paired.py /tmp/particlegan-e22-routed-smoke.py
+          cp examples/e22_routed_sites.py /tmp/e22_routed_sites.py
+          cp examples/e22_routed_replay.py /tmp/e22_routed_replay.py
+          cp examples/e22_routed_game.py /tmp/e22_routed_game.py
+          cp examples/e22_routed_support.py /tmp/e22_routed_support.py
+          cp examples/e22_routed_readbacks.py /tmp/e22_routed_readbacks.py
           cd /tmp
           PYTHONPATH=/tmp/particlegan-installed python /tmp/particlegan-autoencoder-smoke.py
           PYTHONPATH=/tmp/particlegan-installed python /tmp/particlegan-gan-smoke.py --steps 2 --output /tmp/particlegan-gan-smoke.pt
+          PYTHONPATH=/tmp/particlegan-installed python /tmp/particlegan-e22-smoke.py --steps 2 --output /tmp/particlegan-e22-smoke.pt
+          PYTHONPATH=/tmp/particlegan-installed python /tmp/particlegan-e22-routed-smoke.py --steps 2 --output /tmp/particlegan-e22-routed-smoke.pt
+          PYTHONPATH=/tmp/particlegan-installed python /tmp/particlegan-e22-routed-smoke.py --steps 2 --resume /tmp/particlegan-e22-routed-smoke.pt
+          PYTHONPATH=/tmp/particlegan-installed python /tmp/e22_routed_sites.py --steps 2 --output /tmp/particlegan-e22-sites-smoke.pt
+          PYTHONPATH=/tmp/particlegan-installed python /tmp/e22_routed_sites.py --steps 2 --resume /tmp/particlegan-e22-sites-smoke.pt
+          PYTHONPATH=/tmp/particlegan-installed python /tmp/e22_routed_sites.py --steps 2 --probe-interval 4 --output-error-guard --output /tmp/particlegan-e22-sites-cadence-smoke.pt
+          PYTHONPATH=/tmp/particlegan-installed python /tmp/e22_routed_sites.py --steps 2 --resume /tmp/particlegan-e22-sites-cadence-smoke.pt
+          PYTHONPATH=/tmp/particlegan-installed python /tmp/e22_routed_replay.py --steps 2
+          PYTHONPATH=/tmp/particlegan-installed python /tmp/e22_routed_replay.py --steps 2 --mode no_rows
+          PYTHONPATH=/tmp/particlegan-installed python /tmp/e22_routed_game.py
+          PYTHONPATH=/tmp/particlegan-installed python /tmp/e22_routed_readbacks.py --sites 3 --tokens 2 --particles 16 --steps 2 --warmup-steps 1
+          PYTHONPATH=/tmp/particlegan-installed python /tmp/e22_routed_support.py --compare --steps 2 --tokens 8 --particles 16 --game-diagnostics --log-every 2 --receipt /tmp/e22-capacity-smoke.json
           PYTHONPATH=/tmp/particlegan-installed python - <<'PY'
           import particlegan
           from particlegan import (
               BatchDistanceDiscriminator, DDGAN, LinearSkipDiscriminator,
+              E22Policy, UpdatePolicy, ParticleRows, ScalarHeadFeatures,
+              RoutedRows, RoutedBatch, RoutedCandidate, RoutedExecution,
               MoGParticlePrior, ParticlePrior, get_recipe,
           )
 
@@ -81,8 +102,17 @@ jobs:
           assert default.betas == (0., .999)
           assert not hasattr(default, 'reg_arm') and default.reg_coeff == 1.0
           assert default.reg_kappa == 1.0 and default.prior_reg == 0.0
-          assert default.name == 'k3p'
+          assert default.name == 'ka2'
           assert get_recipe('gan') == default
+          e22 = get_recipe('e22', num_particles=32, z_dim=2, batch_size=8)
+          assert e22.name == 'e22' and e22.total_steps is None
+          assert e22.continuous_policy == 'dv12' and e22.lr_control == 'stationarity'
+          assert e22.row_evidence_gate and e22.particle_birth_death
+          assert e22.output_noise_mode == 'learnable' and e22.serve_average == 4
+          routed = get_recipe('e22_routed', num_particles=16, z_dim=2, batch_size=8)
+          assert routed.row_policy == 'routed_paired'
+          assert routed.row_evidence_gate and routed.particle_birth_death
+          assert get_recipe('e22').row_policy == 'independent'
           assert not hasattr(default, 'make_trainer')
           assert get_recipe('ae_gan').encoder_mode == 'ae'
           assert get_recipe('vae_gan').encoder_mode == 'hard'

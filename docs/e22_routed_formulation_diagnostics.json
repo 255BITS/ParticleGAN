@@ -1,0 +1,3019 @@
+{
+  "initialization": "conformance",
+  "shape": {
+    "tokens": 128,
+    "particles": 128,
+    "z_dim": 4,
+    "batch_size": 8
+  },
+  "updates": 40,
+  "production_full_reproduction": {
+    "moves": [
+      {
+        "step": 5,
+        "child": 16,
+        "parent": 37,
+        "variant": "duplicate",
+        "before": {
+          "fit": {
+            "rmse": 0.15883533656597137,
+            "normalized_rmse": 3.97088360786438,
+            "feature_error": 0.15075038030131227,
+            "critic_real_minus_fake": -0.27244338393211365,
+            "rpg_g": 0.5662567019462585
+          },
+          "guard": {
+            "rmse": 0.1566404402256012,
+            "normalized_rmse": 3.916011095046997,
+            "feature_error": 0.14827464196207307,
+            "critic_real_minus_fake": -0.26726415753364563,
+            "rpg_g": 0.568498432636261
+          },
+          "test": {
+            "rmse": 0.15856905281543732,
+            "normalized_rmse": 3.964226484298706,
+            "feature_error": 0.15179929543703438,
+            "critic_real_minus_fake": -0.2759668231010437,
+            "rpg_g": 0.5647191405296326
+          }
+        },
+        "after": {
+          "fit": {
+            "rmse": 0.15880617499351501,
+            "normalized_rmse": 3.970154285430908,
+            "feature_error": 0.1507090328595596,
+            "critic_real_minus_fake": -0.2723632752895355,
+            "rpg_g": 0.5662915110588074
+          },
+          "guard": {
+            "rmse": 0.1566137820482254,
+            "normalized_rmse": 3.915344476699829,
+            "feature_error": 0.14823556862312792,
+            "critic_real_minus_fake": -0.26718661189079285,
+            "rpg_g": 0.5685321688652039
+          },
+          "test": {
+            "rmse": 0.15853574872016907,
+            "normalized_rmse": 3.9633939266204834,
+            "feature_error": 0.15175268770692227,
+            "critic_real_minus_fake": -0.2758840024471283,
+            "rpg_g": 0.5647550225257874
+          }
+        },
+        "lr_before": [
+          [
+            "generator",
+            1.0,
+            null
+          ],
+          [
+            "encoder",
+            1.0,
+            null
+          ],
+          [
+            "router",
+            1.0,
+            null
+          ],
+          [
+            "table",
+            1.0,
+            1
+          ],
+          [
+            "noise",
+            1.0,
+            null
+          ],
+          [
+            "critic",
+            1.0,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 32,
+        "child": 119,
+        "parent": 66,
+        "variant": "antisymmetric",
+        "before": {
+          "fit": {
+            "rmse": 0.06797720491886139,
+            "normalized_rmse": 1.699430227279663,
+            "feature_error": 0.05859693656887505,
+            "critic_real_minus_fake": 0.03625688701868057,
+            "rpg_g": 0.7116518020629883
+          },
+          "guard": {
+            "rmse": 0.06881924718618393,
+            "normalized_rmse": 1.7204811573028564,
+            "feature_error": 0.06181011604050646,
+            "critic_real_minus_fake": 0.03924480825662613,
+            "rpg_g": 0.7131140232086182
+          },
+          "test": {
+            "rmse": 0.06664592772722244,
+            "normalized_rmse": 1.66614830493927,
+            "feature_error": 0.0623376464990545,
+            "critic_real_minus_fake": 0.03816496208310127,
+            "rpg_g": 0.712539792060852
+          }
+        },
+        "after": {
+          "fit": {
+            "rmse": 0.06800126284360886,
+            "normalized_rmse": 1.7000316381454468,
+            "feature_error": 0.058545416452029056,
+            "critic_real_minus_fake": 0.03622453659772873,
+            "rpg_g": 0.7116358876228333
+          },
+          "guard": {
+            "rmse": 0.06883656233549118,
+            "normalized_rmse": 1.7209140062332153,
+            "feature_error": 0.06174467102352951,
+            "critic_real_minus_fake": 0.039211124181747437,
+            "rpg_g": 0.7130972743034363
+          },
+          "test": {
+            "rmse": 0.06666738539934158,
+            "normalized_rmse": 1.666684627532959,
+            "feature_error": 0.06228067638028567,
+            "critic_real_minus_fake": 0.03813064098358154,
+            "rpg_g": 0.7125227451324463
+          }
+        },
+        "lr_before": [
+          [
+            "generator",
+            1.0,
+            null
+          ],
+          [
+            "encoder",
+            1.0,
+            null
+          ],
+          [
+            "router",
+            1.0,
+            null
+          ],
+          [
+            "table",
+            1.0,
+            11
+          ],
+          [
+            "noise",
+            1.0,
+            null
+          ],
+          [
+            "critic",
+            1.0,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 35,
+        "child": 20,
+        "parent": 0,
+        "variant": "antisymmetric",
+        "before": {
+          "fit": {
+            "rmse": 0.02227816917002201,
+            "normalized_rmse": 0.5569542050361633,
+            "feature_error": 0.013378246969042922,
+            "critic_real_minus_fake": 0.014390317723155022,
+            "rpg_g": 0.700400710105896
+          },
+          "guard": {
+            "rmse": 0.020916316658258438,
+            "normalized_rmse": 0.5229079127311707,
+            "feature_error": 0.012991490321696577,
+            "critic_real_minus_fake": 0.01651466265320778,
+            "rpg_g": 0.7014699578285217
+          },
+          "test": {
+            "rmse": 0.02055678516626358,
+            "normalized_rmse": 0.5139196515083313,
+            "feature_error": 0.013098421910340411,
+            "critic_real_minus_fake": 0.017594285309314728,
+            "rpg_g": 0.7020121216773987
+          }
+        },
+        "after": {
+          "fit": {
+            "rmse": 0.02229917049407959,
+            "normalized_rmse": 0.5574792623519897,
+            "feature_error": 0.013377464681351866,
+            "critic_real_minus_fake": 0.014324810355901718,
+            "rpg_g": 0.7003675699234009
+          },
+          "guard": {
+            "rmse": 0.020933743566274643,
+            "normalized_rmse": 0.5233436226844788,
+            "feature_error": 0.012987787592937379,
+            "critic_real_minus_fake": 0.01643143594264984,
+            "rpg_g": 0.7014277577400208
+          },
+          "test": {
+            "rmse": 0.020573358982801437,
+            "normalized_rmse": 0.514333963394165,
+            "feature_error": 0.013091391584500706,
+            "critic_real_minus_fake": 0.017505047842860222,
+            "rpg_g": 0.7019669413566589
+          }
+        },
+        "lr_before": [
+          [
+            "generator",
+            1.0,
+            null
+          ],
+          [
+            "encoder",
+            1.0,
+            null
+          ],
+          [
+            "router",
+            1.0,
+            null
+          ],
+          [
+            "table",
+            1.0,
+            11
+          ],
+          [
+            "noise",
+            1.0,
+            null
+          ],
+          [
+            "critic",
+            1.0,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 37,
+        "child": 39,
+        "parent": 33,
+        "variant": "antisymmetric",
+        "before": {
+          "fit": {
+            "rmse": 0.03362695500254631,
+            "normalized_rmse": 0.8406738638877869,
+            "feature_error": 0.05821082733587285,
+            "critic_real_minus_fake": 0.05959619581699371,
+            "rpg_g": 0.7237102389335632
+          },
+          "guard": {
+            "rmse": 0.037087105214595795,
+            "normalized_rmse": 0.9271776080131531,
+            "feature_error": 0.07316091569245453,
+            "critic_real_minus_fake": 0.07584761083126068,
+            "rpg_g": 0.7320685386657715
+          },
+          "test": {
+            "rmse": 0.032827310264110565,
+            "normalized_rmse": 0.8206828236579895,
+            "feature_error": 0.05809718961175132,
+            "critic_real_minus_fake": 0.0602862685918808,
+            "rpg_g": 0.7239799499511719
+          }
+        },
+        "after": {
+          "fit": {
+            "rmse": 0.03361745551228523,
+            "normalized_rmse": 0.8404363393783569,
+            "feature_error": 0.05819024584351875,
+            "critic_real_minus_fake": 0.05957076698541641,
+            "rpg_g": 0.7236970663070679
+          },
+          "guard": {
+            "rmse": 0.037075597792863846,
+            "normalized_rmse": 0.926889955997467,
+            "feature_error": 0.07313099130133988,
+            "critic_real_minus_fake": 0.07581362873315811,
+            "rpg_g": 0.7320507764816284
+          },
+          "test": {
+            "rmse": 0.0328180156648159,
+            "normalized_rmse": 0.8204504251480103,
+            "feature_error": 0.05807432676951283,
+            "critic_real_minus_fake": 0.060259442776441574,
+            "rpg_g": 0.7239660620689392
+          }
+        },
+        "lr_before": [
+          [
+            "generator",
+            1.0,
+            null
+          ],
+          [
+            "encoder",
+            1.0,
+            null
+          ],
+          [
+            "router",
+            1.0,
+            null
+          ],
+          [
+            "table",
+            1.0,
+            12
+          ],
+          [
+            "noise",
+            1.0,
+            null
+          ],
+          [
+            "critic",
+            1.0,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 39,
+        "child": 55,
+        "parent": 45,
+        "variant": "antisymmetric",
+        "before": {
+          "fit": {
+            "rmse": 0.07529260963201523,
+            "normalized_rmse": 1.8823152780532837,
+            "feature_error": 0.14640760290116775,
+            "critic_real_minus_fake": 0.17104513943195343,
+            "rpg_g": 0.7824230790138245
+          },
+          "guard": {
+            "rmse": 0.0764019712805748,
+            "normalized_rmse": 1.9100494384765625,
+            "feature_error": 0.16156974330915014,
+            "critic_real_minus_fake": 0.17954440414905548,
+            "rpg_g": 0.7870078086853027
+          },
+          "test": {
+            "rmse": 0.07481927424669266,
+            "normalized_rmse": 1.8704818487167358,
+            "feature_error": 0.15485612501120433,
+            "critic_real_minus_fake": 0.17600950598716736,
+            "rpg_g": 0.7850775122642517
+          }
+        },
+        "after": {
+          "fit": {
+            "rmse": 0.07525189965963364,
+            "normalized_rmse": 1.8812975883483887,
+            "feature_error": 0.14633610092026894,
+            "critic_real_minus_fake": 0.17096585035324097,
+            "rpg_g": 0.782380223274231
+          },
+          "guard": {
+            "rmse": 0.07636100798845291,
+            "normalized_rmse": 1.9090251922607422,
+            "feature_error": 0.16151265380664667,
+            "critic_real_minus_fake": 0.1794792115688324,
+            "rpg_g": 0.7869724035263062
+          },
+          "test": {
+            "rmse": 0.0747799202799797,
+            "normalized_rmse": 1.8694980144500732,
+            "feature_error": 0.15479393983614112,
+            "critic_real_minus_fake": 0.1759401112794876,
+            "rpg_g": 0.7850399017333984
+          }
+        },
+        "lr_before": [
+          [
+            "generator",
+            1.0,
+            null
+          ],
+          [
+            "encoder",
+            1.0,
+            null
+          ],
+          [
+            "router",
+            1.0,
+            null
+          ],
+          [
+            "table",
+            1.0,
+            12
+          ],
+          [
+            "noise",
+            1.0,
+            null
+          ],
+          [
+            "critic",
+            1.0,
+            null
+          ]
+        ]
+      }
+    ],
+    "trajectory": [
+      {
+        "step": 1,
+        "rmse": 0.14961375296115875,
+        "normalized_rmse": 3.7403438091278076,
+        "feature_error": 0.09298992508185112,
+        "critic_real_minus_fake": -0.03345423936843872,
+        "rpg_g": 0.6767345666885376,
+        "move": {
+          "step": 1,
+          "moves": 0,
+          "law": "routed_paired",
+          "fit_error": 0.10412503953592078,
+          "eligible_deaths": 0,
+          "eligible_births": 0
+        },
+        "output_sigma": 0.125,
+        "lrs": [
+          [
+            "generator",
+            1.0,
+            null
+          ],
+          [
+            "encoder",
+            1.0,
+            null
+          ],
+          [
+            "router",
+            1.0,
+            null
+          ],
+          [
+            "table",
+            1.0,
+            0
+          ],
+          [
+            "noise",
+            1.0,
+            null
+          ],
+          [
+            "critic",
+            1.0,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 2,
+        "rmse": 0.15838664770126343,
+        "normalized_rmse": 3.9596664905548096,
+        "feature_error": 0.0583139491640001,
+        "critic_real_minus_fake": -0.10158960521221161,
+        "rpg_g": 0.6445019245147705,
+        "move": {
+          "step": 2,
+          "moves": 0,
+          "law": "routed_paired",
+          "fit_error": 0.06374005065288402,
+          "eligible_deaths": 8,
+          "eligible_births": 0
+        },
+        "output_sigma": 0.125,
+        "lrs": [
+          [
+            "generator",
+            1.0,
+            null
+          ],
+          [
+            "encoder",
+            1.0,
+            null
+          ],
+          [
+            "router",
+            1.0,
+            null
+          ],
+          [
+            "table",
+            1.0,
+            0
+          ],
+          [
+            "noise",
+            1.0,
+            null
+          ],
+          [
+            "critic",
+            1.0,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 3,
+        "rmse": 0.1622644066810608,
+        "normalized_rmse": 4.056610107421875,
+        "feature_error": 0.09872420824422644,
+        "critic_real_minus_fake": -0.2117091715335846,
+        "rpg_g": 0.5943434834480286,
+        "move": {
+          "step": 3,
+          "moves": 0,
+          "law": "routed_paired",
+          "fit_error": 0.09872915763672846,
+          "eligible_deaths": 16,
+          "eligible_births": 0
+        },
+        "output_sigma": 0.125,
+        "lrs": [
+          [
+            "generator",
+            1.0,
+            null
+          ],
+          [
+            "encoder",
+            1.0,
+            null
+          ],
+          [
+            "router",
+            1.0,
+            null
+          ],
+          [
+            "table",
+            1.0,
+            0
+          ],
+          [
+            "noise",
+            1.0,
+            null
+          ],
+          [
+            "critic",
+            1.0,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 4,
+        "rmse": 0.16159284114837646,
+        "normalized_rmse": 4.039821147918701,
+        "feature_error": 0.14011453318961947,
+        "critic_real_minus_fake": -0.30986812710762024,
+        "rpg_g": 0.5505093932151794,
+        "move": {
+          "step": 4,
+          "moves": 0,
+          "law": "routed_paired",
+          "fit_error": 0.13735687185037324,
+          "eligible_deaths": 24,
+          "eligible_births": 0
+        },
+        "output_sigma": 0.125,
+        "lrs": [
+          [
+            "generator",
+            1.0,
+            null
+          ],
+          [
+            "encoder",
+            1.0,
+            null
+          ],
+          [
+            "router",
+            1.0,
+            null
+          ],
+          [
+            "table",
+            1.0,
+            1
+          ],
+          [
+            "noise",
+            1.0,
+            null
+          ],
+          [
+            "critic",
+            1.0,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 5,
+        "rmse": 0.15853574872016907,
+        "normalized_rmse": 3.9633939266204834,
+        "feature_error": 0.15175268770692227,
+        "critic_real_minus_fake": -0.2758840024471283,
+        "rpg_g": 0.5647550225257874,
+        "move": {
+          "step": 5,
+          "moves": 2,
+          "law": "routed_paired",
+          "fit_error": 0.15075038030131227,
+          "eligible_deaths": 26,
+          "eligible_births": 6,
+          "child": 16,
+          "parent": 37,
+          "variant": "duplicate",
+          "guard_error_before": 0.14827464196207307,
+          "guard_error_after": 0.14823556862312792,
+          "average_guard_error_before": 0.07466249003393433,
+          "average_guard_error_after": 0.07464148435362819,
+          "guard_gain": 3.907333894515117e-05,
+          "average_guard_gain": 2.1005680306142305e-05,
+          "max_context_harm": -1.4957576675522777e-05,
+          "average_max_context_harm": 3.108868096335371e-05,
+          "guard_contexts": 64,
+          "accepted": true,
+          "splits": 1
+        },
+        "output_sigma": 0.125,
+        "lrs": [
+          [
+            "generator",
+            1.0,
+            null
+          ],
+          [
+            "encoder",
+            1.0,
+            null
+          ],
+          [
+            "router",
+            1.0,
+            null
+          ],
+          [
+            "table",
+            1.0,
+            1
+          ],
+          [
+            "noise",
+            1.0,
+            null
+          ],
+          [
+            "critic",
+            1.0,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 6,
+        "rmse": 0.15689991414546967,
+        "normalized_rmse": 3.9224977493286133,
+        "feature_error": 0.16366705526167946,
+        "critic_real_minus_fake": -0.20015981793403625,
+        "rpg_g": 0.5980855226516724,
+        "move": {
+          "step": 6,
+          "moves": 0,
+          "law": "routed_paired",
+          "fit_error": 0.16139086389843793,
+          "eligible_deaths": 0,
+          "eligible_births": 8
+        },
+        "output_sigma": 0.125,
+        "lrs": [
+          [
+            "generator",
+            1.0,
+            null
+          ],
+          [
+            "encoder",
+            1.0,
+            null
+          ],
+          [
+            "router",
+            1.0,
+            null
+          ],
+          [
+            "table",
+            1.0,
+            2
+          ],
+          [
+            "noise",
+            1.0,
+            null
+          ],
+          [
+            "critic",
+            1.0,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 7,
+        "rmse": 0.1519799828529358,
+        "normalized_rmse": 3.799499750137329,
+        "feature_error": 0.1848338787661006,
+        "critic_real_minus_fake": -0.11827177554368973,
+        "rpg_g": 0.6357660293579102,
+        "move": {
+          "step": 7,
+          "moves": 0,
+          "law": "routed_paired",
+          "fit_error": 0.182039016292877,
+          "eligible_deaths": 0,
+          "eligible_births": 16
+        },
+        "output_sigma": 0.125,
+        "lrs": [
+          [
+            "generator",
+            1.0,
+            null
+          ],
+          [
+            "encoder",
+            1.0,
+            null
+          ],
+          [
+            "router",
+            1.0,
+            null
+          ],
+          [
+            "table",
+            1.0,
+            2
+          ],
+          [
+            "noise",
+            1.0,
+            null
+          ],
+          [
+            "critic",
+            1.0,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 8,
+        "rmse": 0.14409969747066498,
+        "normalized_rmse": 3.602492570877075,
+        "feature_error": 0.2074878723551457,
+        "critic_real_minus_fake": -0.03724358603358269,
+        "rpg_g": 0.6747006773948669,
+        "move": {
+          "step": 8,
+          "moves": 0,
+          "law": "routed_paired",
+          "fit_error": 0.20519273753836675,
+          "eligible_deaths": 0,
+          "eligible_births": 24
+        },
+        "output_sigma": 0.125,
+        "lrs": [
+          [
+            "generator",
+            1.0,
+            null
+          ],
+          [
+            "encoder",
+            1.0,
+            null
+          ],
+          [
+            "router",
+            1.0,
+            null
+          ],
+          [
+            "table",
+            1.0,
+            3
+          ],
+          [
+            "noise",
+            1.0,
+            null
+          ],
+          [
+            "critic",
+            1.0,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 9,
+        "rmse": 0.13743384182453156,
+        "normalized_rmse": 3.4358463287353516,
+        "feature_error": 0.21822939215748033,
+        "critic_real_minus_fake": 0.049947045743465424,
+        "rpg_g": 0.7184330821037292,
+        "move": {
+          "step": 9,
+          "moves": 0,
+          "law": "routed_paired",
+          "fit_error": 0.21644121517275092,
+          "eligible_deaths": 0,
+          "eligible_births": 32
+        },
+        "output_sigma": 0.125,
+        "lrs": [
+          [
+            "generator",
+            1.0,
+            null
+          ],
+          [
+            "encoder",
+            1.0,
+            null
+          ],
+          [
+            "router",
+            1.0,
+            null
+          ],
+          [
+            "table",
+            1.0,
+            3
+          ],
+          [
+            "noise",
+            1.0,
+            null
+          ],
+          [
+            "critic",
+            1.0,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 10,
+        "rmse": 0.13031738996505737,
+        "normalized_rmse": 3.257935047149658,
+        "feature_error": 0.22638092127544573,
+        "critic_real_minus_fake": 0.1335011124610901,
+        "rpg_g": 0.7621264457702637,
+        "move": {
+          "step": 10,
+          "moves": 0,
+          "law": "routed_paired",
+          "fit_error": 0.22319967662859486,
+          "eligible_deaths": 0,
+          "eligible_births": 40
+        },
+        "output_sigma": 0.125,
+        "lrs": [
+          [
+            "generator",
+            1.0,
+            null
+          ],
+          [
+            "encoder",
+            1.0,
+            null
+          ],
+          [
+            "router",
+            1.0,
+            null
+          ],
+          [
+            "table",
+            1.0,
+            4
+          ],
+          [
+            "noise",
+            1.0,
+            null
+          ],
+          [
+            "critic",
+            1.0,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 11,
+        "rmse": 0.11546657979488373,
+        "normalized_rmse": 2.886664628982544,
+        "feature_error": 0.2238861760039645,
+        "critic_real_minus_fake": 0.20764373242855072,
+        "rpg_g": 0.8023608922958374,
+        "move": {
+          "step": 11,
+          "moves": 0,
+          "law": "routed_paired",
+          "fit_error": 0.21950883118083536,
+          "eligible_deaths": 0,
+          "eligible_births": 48
+        },
+        "output_sigma": 0.125,
+        "lrs": [
+          [
+            "generator",
+            1.0,
+            null
+          ],
+          [
+            "encoder",
+            1.0,
+            null
+          ],
+          [
+            "router",
+            1.0,
+            null
+          ],
+          [
+            "table",
+            1.0,
+            4
+          ],
+          [
+            "noise",
+            1.0,
+            null
+          ],
+          [
+            "critic",
+            1.0,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 12,
+        "rmse": 0.08615042269229889,
+        "normalized_rmse": 2.1537606716156006,
+        "feature_error": 0.17972762882384977,
+        "critic_real_minus_fake": 0.23386548459529877,
+        "rpg_g": 0.8171733617782593,
+        "move": {
+          "step": 12,
+          "moves": 0,
+          "law": "routed_paired",
+          "fit_error": 0.16649508266606944,
+          "eligible_deaths": 0,
+          "eligible_births": 56
+        },
+        "output_sigma": 0.125,
+        "lrs": [
+          [
+            "generator",
+            1.0,
+            null
+          ],
+          [
+            "encoder",
+            1.0,
+            null
+          ],
+          [
+            "router",
+            1.0,
+            null
+          ],
+          [
+            "table",
+            1.0,
+            5
+          ],
+          [
+            "noise",
+            1.0,
+            null
+          ],
+          [
+            "critic",
+            1.0,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 13,
+        "rmse": 0.06568676233291626,
+        "normalized_rmse": 1.6421692371368408,
+        "feature_error": 0.08175412538192087,
+        "critic_real_minus_fake": 0.03351946175098419,
+        "rpg_g": 0.712618350982666,
+        "move": {
+          "step": 13,
+          "moves": 0,
+          "law": "routed_paired",
+          "fit_error": 0.08618555591886397,
+          "eligible_deaths": 8,
+          "eligible_births": 56,
+          "child": 103,
+          "parent": 62,
+          "variant": "antisymmetric",
+          "guard_error_before": 0.07869838528174883,
+          "guard_error_after": 0.07869559149191781,
+          "average_guard_error_before": 0.18665563197165772,
+          "average_guard_error_after": 0.18659959763994308,
+          "guard_gain": 2.793789831034843e-06,
+          "average_guard_gain": 5.6034331714648316e-05,
+          "max_context_harm": 0.00018788064792524262,
+          "average_max_context_harm": 1.3507657760369884e-06,
+          "guard_contexts": 64,
+          "accepted": false
+        },
+        "output_sigma": 0.125,
+        "lrs": [
+          [
+            "generator",
+            1.0,
+            null
+          ],
+          [
+            "encoder",
+            1.0,
+            null
+          ],
+          [
+            "router",
+            1.0,
+            null
+          ],
+          [
+            "table",
+            1.0,
+            5
+          ],
+          [
+            "noise",
+            1.0,
+            null
+          ],
+          [
+            "critic",
+            1.0,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 14,
+        "rmse": 0.14379426836967468,
+        "normalized_rmse": 3.5948567390441895,
+        "feature_error": 0.20075129477390607,
+        "critic_real_minus_fake": -0.2184426486492157,
+        "rpg_g": 0.5900101065635681,
+        "move": {
+          "step": 14,
+          "moves": 0,
+          "law": "routed_paired",
+          "fit_error": 0.2221865405516849,
+          "eligible_deaths": 8,
+          "eligible_births": 64,
+          "skip": "proposal did not improve fit paired error"
+        },
+        "output_sigma": 0.125,
+        "lrs": [
+          [
+            "generator",
+            1.0,
+            null
+          ],
+          [
+            "encoder",
+            1.0,
+            null
+          ],
+          [
+            "router",
+            1.0,
+            null
+          ],
+          [
+            "table",
+            1.0,
+            6
+          ],
+          [
+            "noise",
+            1.0,
+            null
+          ],
+          [
+            "critic",
+            1.0,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 15,
+        "rmse": 0.17459571361541748,
+        "normalized_rmse": 4.364892959594727,
+        "feature_error": 0.20038880869832282,
+        "critic_real_minus_fake": -0.15320110321044922,
+        "rpg_g": 0.6195189952850342,
+        "move": {
+          "step": 15,
+          "moves": 0,
+          "law": "routed_paired",
+          "fit_error": 0.2129655736771376,
+          "eligible_deaths": 8,
+          "eligible_births": 72,
+          "skip": "proposal did not improve fit paired error"
+        },
+        "output_sigma": 0.125,
+        "lrs": [
+          [
+            "generator",
+            1.0,
+            null
+          ],
+          [
+            "encoder",
+            1.0,
+            null
+          ],
+          [
+            "router",
+            1.0,
+            null
+          ],
+          [
+            "table",
+            1.0,
+            6
+          ],
+          [
+            "noise",
+            1.0,
+            null
+          ],
+          [
+            "critic",
+            1.0,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 16,
+        "rmse": 0.18637923896312714,
+        "normalized_rmse": 4.659481048583984,
+        "feature_error": 0.14969086462106762,
+        "critic_real_minus_fake": -0.07276413589715958,
+        "rpg_g": 0.6574872732162476,
+        "move": {
+          "step": 16,
+          "moves": 0,
+          "law": "routed_paired",
+          "fit_error": 0.15899970048015818,
+          "eligible_deaths": 9,
+          "eligible_births": 79,
+          "child": 127,
+          "parent": 55,
+          "variant": "duplicate",
+          "guard_error_before": 0.1679333814576778,
+          "guard_error_after": 0.16755412316996707,
+          "average_guard_error_before": 0.06903679885543215,
+          "average_guard_error_after": 0.06889705622213903,
+          "guard_gain": 0.0003792582877107448,
+          "average_guard_gain": 0.00013974263329313342,
+          "max_context_harm": 0.0002511453924989096,
+          "average_max_context_harm": 0.0007300458822429856,
+          "guard_contexts": 64,
+          "accepted": false
+        },
+        "output_sigma": 0.125,
+        "lrs": [
+          [
+            "generator",
+            1.0,
+            null
+          ],
+          [
+            "encoder",
+            1.0,
+            null
+          ],
+          [
+            "router",
+            1.0,
+            null
+          ],
+          [
+            "table",
+            1.0,
+            7
+          ],
+          [
+            "noise",
+            1.0,
+            null
+          ],
+          [
+            "critic",
+            1.0,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 17,
+        "rmse": 0.19765125215053558,
+        "normalized_rmse": 4.941281795501709,
+        "feature_error": 0.11949678141875365,
+        "critic_real_minus_fake": 0.0014006095007061958,
+        "rpg_g": 0.6939007639884949,
+        "move": {
+          "step": 17,
+          "moves": 0,
+          "law": "routed_paired",
+          "fit_error": 0.12825330845474095,
+          "eligible_deaths": 9,
+          "eligible_births": 87,
+          "child": 127,
+          "parent": 62,
+          "variant": "antisymmetric",
+          "guard_error_before": 0.13582422857573084,
+          "guard_error_after": 0.13544557203770646,
+          "average_guard_error_before": 0.08338283195797119,
+          "average_guard_error_after": 0.08310839360641886,
+          "guard_gain": 0.0003786565380243952,
+          "average_guard_gain": 0.00027443835155232805,
+          "max_context_harm": 0.00035020571164723346,
+          "average_max_context_harm": 0.0007266557910906718,
+          "guard_contexts": 64,
+          "accepted": false
+        },
+        "output_sigma": 0.125,
+        "lrs": [
+          [
+            "generator",
+            1.0,
+            null
+          ],
+          [
+            "encoder",
+            1.0,
+            null
+          ],
+          [
+            "router",
+            1.0,
+            null
+          ],
+          [
+            "table",
+            1.0,
+            7
+          ],
+          [
+            "noise",
+            1.0,
+            null
+          ],
+          [
+            "critic",
+            1.0,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 18,
+        "rmse": 0.20153573155403137,
+        "normalized_rmse": 5.038393020629883,
+        "feature_error": 0.08148243672602644,
+        "critic_real_minus_fake": 0.08261185884475708,
+        "rpg_g": 0.7353764772415161,
+        "move": {
+          "step": 18,
+          "moves": 0,
+          "law": "routed_paired",
+          "fit_error": 0.08849675483587296,
+          "eligible_deaths": 9,
+          "eligible_births": 95,
+          "child": 127,
+          "parent": 54,
+          "variant": "antisymmetric",
+          "guard_error_before": 0.08931154988497911,
+          "guard_error_after": 0.08913525558862194,
+          "average_guard_error_before": 0.08790688159320675,
+          "average_guard_error_after": 0.08762404529311711,
+          "guard_gain": 0.00017629429635714945,
+          "average_guard_gain": 0.00028283630008964537,
+          "max_context_harm": 0.0007229650458424192,
+          "average_max_context_harm": 0.0008577086801982853,
+          "guard_contexts": 64,
+          "accepted": false
+        },
+        "output_sigma": 0.125,
+        "lrs": [
+          [
+            "generator",
+            1.0,
+            null
+          ],
+          [
+            "encoder",
+            1.0,
+            null
+          ],
+          [
+            "router",
+            1.0,
+            null
+          ],
+          [
+            "table",
+            1.0,
+            8
+          ],
+          [
+            "noise",
+            1.0,
+            null
+          ],
+          [
+            "critic",
+            1.0,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 19,
+        "rmse": 0.2091224193572998,
+        "normalized_rmse": 5.228060722351074,
+        "feature_error": 0.11200859937025397,
+        "critic_real_minus_fake": 0.15648213028907776,
+        "rpg_g": 0.7744654417037964,
+        "move": {
+          "step": 19,
+          "moves": 0,
+          "law": "routed_paired",
+          "fit_error": 0.12165403537872434,
+          "eligible_deaths": 10,
+          "eligible_births": 102,
+          "child": 127,
+          "parent": 62,
+          "variant": "duplicate",
+          "guard_error_before": 0.12337716812936683,
+          "guard_error_after": 0.12304135986278629,
+          "average_guard_error_before": 0.10184148465603496,
+          "average_guard_error_after": 0.10160286772156389,
+          "guard_gain": 0.00033580826658054664,
+          "average_guard_gain": 0.00023861693447106865,
+          "max_context_harm": 0.0005441671610893761,
+          "average_max_context_harm": 0.0006813362626665598,
+          "guard_contexts": 64,
+          "accepted": false
+        },
+        "output_sigma": 0.125,
+        "lrs": [
+          [
+            "generator",
+            1.0,
+            null
+          ],
+          [
+            "encoder",
+            1.0,
+            null
+          ],
+          [
+            "router",
+            1.0,
+            null
+          ],
+          [
+            "table",
+            1.0,
+            8
+          ],
+          [
+            "noise",
+            1.0,
+            null
+          ],
+          [
+            "critic",
+            1.0,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 20,
+        "rmse": 0.206376314163208,
+        "normalized_rmse": 5.159408092498779,
+        "feature_error": 0.11268840296616235,
+        "critic_real_minus_fake": 0.23185387253761292,
+        "rpg_g": 0.8157875537872314,
+        "move": {
+          "step": 20,
+          "moves": 0,
+          "law": "routed_paired",
+          "fit_error": 0.11766308080378617,
+          "eligible_deaths": 10,
+          "eligible_births": 110,
+          "child": 127,
+          "parent": 63,
+          "variant": "duplicate",
+          "guard_error_before": 0.1208002548374594,
+          "guard_error_after": 0.12048767252313367,
+          "average_guard_error_before": 0.11484334748776076,
+          "average_guard_error_after": 0.1146533493067187,
+          "guard_gain": 0.00031258231432573606,
+          "average_guard_gain": 0.00018999818104208565,
+          "max_context_harm": 0.0004247953576674568,
+          "average_max_context_harm": 0.0008126947444544175,
+          "guard_contexts": 64,
+          "accepted": false
+        },
+        "output_sigma": 0.125,
+        "lrs": [
+          [
+            "generator",
+            1.0,
+            null
+          ],
+          [
+            "encoder",
+            1.0,
+            null
+          ],
+          [
+            "router",
+            1.0,
+            null
+          ],
+          [
+            "table",
+            1.0,
+            9
+          ],
+          [
+            "noise",
+            1.0,
+            null
+          ],
+          [
+            "critic",
+            1.0,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 21,
+        "rmse": 0.19581568241119385,
+        "normalized_rmse": 4.895392417907715,
+        "feature_error": 0.10885346886350872,
+        "critic_real_minus_fake": 0.3049476146697998,
+        "rpg_g": 0.8572056293487549,
+        "move": {
+          "step": 21,
+          "moves": 0,
+          "law": "routed_paired",
+          "fit_error": 0.1121421818168865,
+          "eligible_deaths": 14,
+          "eligible_births": 114,
+          "skip": "proposal did not improve fit paired error"
+        },
+        "output_sigma": 0.125,
+        "lrs": [
+          [
+            "generator",
+            1.0,
+            null
+          ],
+          [
+            "encoder",
+            1.0,
+            null
+          ],
+          [
+            "router",
+            1.0,
+            null
+          ],
+          [
+            "table",
+            1.0,
+            9
+          ],
+          [
+            "noise",
+            1.0,
+            null
+          ],
+          [
+            "critic",
+            1.0,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 22,
+        "rmse": 0.18150177597999573,
+        "normalized_rmse": 4.537544250488281,
+        "feature_error": 0.13698703394442274,
+        "critic_real_minus_fake": 0.36874204874038696,
+        "rpg_g": 0.8944315910339355,
+        "move": {
+          "step": 22,
+          "moves": 0,
+          "law": "routed_paired",
+          "fit_error": 0.1402494300963816,
+          "eligible_deaths": 22,
+          "eligible_births": 106,
+          "child": 127,
+          "parent": 63,
+          "variant": "antisymmetric",
+          "guard_error_before": 0.1417733110333794,
+          "guard_error_after": 0.14164593227153516,
+          "average_guard_error_before": 0.13963747369734997,
+          "average_guard_error_after": 0.13948928178163544,
+          "guard_gain": 0.00012737876184421883,
+          "average_guard_gain": 0.00014819191571449663,
+          "max_context_harm": 0.0005248535247017599,
+          "average_max_context_harm": 0.0011080264517664834,
+          "guard_contexts": 64,
+          "accepted": false
+        },
+        "output_sigma": 0.125,
+        "lrs": [
+          [
+            "generator",
+            1.0,
+            null
+          ],
+          [
+            "encoder",
+            1.0,
+            null
+          ],
+          [
+            "router",
+            1.0,
+            null
+          ],
+          [
+            "table",
+            1.0,
+            10
+          ],
+          [
+            "noise",
+            1.0,
+            null
+          ],
+          [
+            "critic",
+            1.0,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 23,
+        "rmse": 0.15376494824886322,
+        "normalized_rmse": 3.844123601913452,
+        "feature_error": 0.13199621024869618,
+        "critic_real_minus_fake": 0.41977307200431824,
+        "rpg_g": 0.924935519695282,
+        "move": {
+          "step": 23,
+          "moves": 0,
+          "law": "routed_paired",
+          "fit_error": 0.1334077282012484,
+          "eligible_deaths": 22,
+          "eligible_births": 106,
+          "skip": "proposal did not improve fit paired error"
+        },
+        "output_sigma": 0.125,
+        "lrs": [
+          [
+            "generator",
+            1.0,
+            null
+          ],
+          [
+            "encoder",
+            1.0,
+            null
+          ],
+          [
+            "router",
+            1.0,
+            null
+          ],
+          [
+            "table",
+            1.0,
+            10
+          ],
+          [
+            "noise",
+            1.0,
+            null
+          ],
+          [
+            "critic",
+            1.0,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 24,
+        "rmse": 0.1147456243634224,
+        "normalized_rmse": 2.868640661239624,
+        "feature_error": 0.12491248042251407,
+        "critic_real_minus_fake": 0.442273885011673,
+        "rpg_g": 0.9387003779411316,
+        "move": {
+          "step": 24,
+          "moves": 0,
+          "law": "routed_paired",
+          "fit_error": 0.12346165119860984,
+          "eligible_deaths": 22,
+          "eligible_births": 106,
+          "skip": "proposal did not improve fit paired error"
+        },
+        "output_sigma": 0.125,
+        "lrs": [
+          [
+            "generator",
+            1.0,
+            null
+          ],
+          [
+            "encoder",
+            1.0,
+            null
+          ],
+          [
+            "router",
+            1.0,
+            null
+          ],
+          [
+            "table",
+            1.0,
+            10
+          ],
+          [
+            "noise",
+            1.0,
+            null
+          ],
+          [
+            "critic",
+            1.0,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 25,
+        "rmse": 0.052945949137210846,
+        "normalized_rmse": 1.3236488103866577,
+        "feature_error": 0.06509036715761728,
+        "critic_real_minus_fake": 0.24063526093959808,
+        "rpg_g": 0.8259080052375793,
+        "move": {
+          "step": 25,
+          "moves": 0,
+          "law": "routed_paired",
+          "fit_error": 0.06614463059370654,
+          "eligible_deaths": 22,
+          "eligible_births": 106,
+          "skip": "proposal did not improve fit paired error"
+        },
+        "output_sigma": 0.125,
+        "lrs": [
+          [
+            "generator",
+            1.0,
+            null
+          ],
+          [
+            "encoder",
+            1.0,
+            null
+          ],
+          [
+            "router",
+            1.0,
+            null
+          ],
+          [
+            "table",
+            1.0,
+            10
+          ],
+          [
+            "noise",
+            1.0,
+            null
+          ],
+          [
+            "critic",
+            1.0,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 26,
+        "rmse": 0.12583352625370026,
+        "normalized_rmse": 3.1458380222320557,
+        "feature_error": 0.07772913339849415,
+        "critic_real_minus_fake": -0.29650264978408813,
+        "rpg_g": 0.5559344291687012,
+        "move": {
+          "step": 26,
+          "moves": 0,
+          "law": "routed_paired",
+          "fit_error": 0.07899115878262634,
+          "eligible_deaths": 30,
+          "eligible_births": 98,
+          "child": 127,
+          "parent": 66,
+          "variant": "duplicate",
+          "guard_error_before": 0.0789453697130316,
+          "guard_error_after": 0.07860949174151358,
+          "average_guard_error_before": 0.1659934605833588,
+          "average_guard_error_after": 0.1661434984718324,
+          "guard_gain": 0.0003358779715180268,
+          "average_guard_gain": -0.00015003788847364643,
+          "max_context_harm": 1.8323062439096205e-05,
+          "average_max_context_harm": 0.0009722763252944799,
+          "guard_contexts": 64,
+          "accepted": false
+        },
+        "output_sigma": 0.125,
+        "lrs": [
+          [
+            "generator",
+            1.0,
+            null
+          ],
+          [
+            "encoder",
+            1.0,
+            null
+          ],
+          [
+            "router",
+            1.0,
+            null
+          ],
+          [
+            "table",
+            1.0,
+            10
+          ],
+          [
+            "noise",
+            1.0,
+            null
+          ],
+          [
+            "critic",
+            1.0,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 27,
+        "rmse": 0.13729897141456604,
+        "normalized_rmse": 3.4324746131896973,
+        "feature_error": 0.08146618813086935,
+        "critic_real_minus_fake": -0.26324862241744995,
+        "rpg_g": 0.5701717138290405,
+        "move": {
+          "step": 27,
+          "moves": 0,
+          "law": "routed_paired",
+          "fit_error": 0.0802155190086952,
+          "eligible_deaths": 30,
+          "eligible_births": 98,
+          "skip": "proposal did not improve fit paired error"
+        },
+        "output_sigma": 0.125,
+        "lrs": [
+          [
+            "generator",
+            1.0,
+            null
+          ],
+          [
+            "encoder",
+            1.0,
+            null
+          ],
+          [
+            "router",
+            1.0,
+            null
+          ],
+          [
+            "table",
+            1.0,
+            10
+          ],
+          [
+            "noise",
+            1.0,
+            null
+          ],
+          [
+            "critic",
+            1.0,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 28,
+        "rmse": 0.13273578882217407,
+        "normalized_rmse": 3.318394422531128,
+        "feature_error": 0.0812266058329304,
+        "critic_real_minus_fake": -0.17887862026691437,
+        "rpg_g": 0.6077237725257874,
+        "move": {
+          "step": 28,
+          "moves": 0,
+          "law": "routed_paired",
+          "fit_error": 0.07992577458006717,
+          "eligible_deaths": 30,
+          "eligible_births": 98,
+          "skip": "proposal did not improve fit paired error"
+        },
+        "output_sigma": 0.125,
+        "lrs": [
+          [
+            "generator",
+            1.0,
+            null
+          ],
+          [
+            "encoder",
+            1.0,
+            null
+          ],
+          [
+            "router",
+            1.0,
+            null
+          ],
+          [
+            "table",
+            1.0,
+            10
+          ],
+          [
+            "noise",
+            1.0,
+            null
+          ],
+          [
+            "critic",
+            1.0,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 29,
+        "rmse": 0.12675364315509796,
+        "normalized_rmse": 3.1688413619995117,
+        "feature_error": 0.08552824574159075,
+        "critic_real_minus_fake": -0.10302186757326126,
+        "rpg_g": 0.6429986953735352,
+        "move": {
+          "step": 29,
+          "moves": 0,
+          "law": "routed_paired",
+          "fit_error": 0.08394570457521584,
+          "eligible_deaths": 30,
+          "eligible_births": 98,
+          "skip": "proposal did not improve fit paired error"
+        },
+        "output_sigma": 0.125,
+        "lrs": [
+          [
+            "generator",
+            1.0,
+            null
+          ],
+          [
+            "encoder",
+            1.0,
+            null
+          ],
+          [
+            "router",
+            1.0,
+            null
+          ],
+          [
+            "table",
+            1.0,
+            10
+          ],
+          [
+            "noise",
+            1.0,
+            null
+          ],
+          [
+            "critic",
+            1.0,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 30,
+        "rmse": 0.11103798449039459,
+        "normalized_rmse": 2.775949716567993,
+        "feature_error": 0.09587145695657932,
+        "critic_real_minus_fake": -0.035843122750520706,
+        "rpg_g": 0.6754250526428223,
+        "move": {
+          "step": 30,
+          "moves": 0,
+          "law": "routed_paired",
+          "fit_error": 0.09372512260676326,
+          "eligible_deaths": 38,
+          "eligible_births": 90,
+          "skip": "proposal did not improve fit paired error"
+        },
+        "output_sigma": 0.125,
+        "lrs": [
+          [
+            "generator",
+            1.0,
+            null
+          ],
+          [
+            "encoder",
+            1.0,
+            null
+          ],
+          [
+            "router",
+            1.0,
+            null
+          ],
+          [
+            "table",
+            1.0,
+            10
+          ],
+          [
+            "noise",
+            1.0,
+            null
+          ],
+          [
+            "critic",
+            1.0,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 31,
+        "rmse": 0.09894472360610962,
+        "normalized_rmse": 2.4736180305480957,
+        "feature_error": 0.08475278183957945,
+        "critic_real_minus_fake": 0.020296232774853706,
+        "rpg_g": 0.7034052014350891,
+        "move": {
+          "step": 31,
+          "moves": 0,
+          "law": "routed_paired",
+          "fit_error": 0.08124846661357156,
+          "eligible_deaths": 46,
+          "eligible_births": 82,
+          "skip": "proposal did not improve fit paired error"
+        },
+        "output_sigma": 0.125,
+        "lrs": [
+          [
+            "generator",
+            1.0,
+            null
+          ],
+          [
+            "encoder",
+            1.0,
+            null
+          ],
+          [
+            "router",
+            1.0,
+            null
+          ],
+          [
+            "table",
+            1.0,
+            10
+          ],
+          [
+            "noise",
+            1.0,
+            null
+          ],
+          [
+            "critic",
+            1.0,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 32,
+        "rmse": 0.06666738539934158,
+        "normalized_rmse": 1.666684627532959,
+        "feature_error": 0.06228067638028567,
+        "critic_real_minus_fake": 0.03813064098358154,
+        "rpg_g": 0.7125227451324463,
+        "move": {
+          "step": 32,
+          "moves": 2,
+          "law": "routed_paired",
+          "fit_error": 0.05859693656887505,
+          "eligible_deaths": 52,
+          "eligible_births": 76,
+          "child": 119,
+          "parent": 66,
+          "variant": "antisymmetric",
+          "guard_error_before": 0.06181011604050646,
+          "guard_error_after": 0.06174467102352951,
+          "average_guard_error_before": 0.025508553605634542,
+          "average_guard_error_after": 0.025463191124538785,
+          "guard_gain": 6.544501697695526e-05,
+          "average_guard_gain": 4.536248109575344e-05,
+          "max_context_harm": 4.2849453734091283e-05,
+          "average_max_context_harm": 3.788438574670212e-05,
+          "guard_contexts": 64,
+          "accepted": true,
+          "splits": 1
+        },
+        "output_sigma": 0.125,
+        "lrs": [
+          [
+            "generator",
+            1.0,
+            null
+          ],
+          [
+            "encoder",
+            1.0,
+            null
+          ],
+          [
+            "router",
+            1.0,
+            null
+          ],
+          [
+            "table",
+            1.0,
+            11
+          ],
+          [
+            "noise",
+            1.0,
+            null
+          ],
+          [
+            "critic",
+            1.0,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 33,
+        "rmse": 0.03486129641532898,
+        "normalized_rmse": 0.8715323805809021,
+        "feature_error": 0.03201535096297311,
+        "critic_real_minus_fake": -0.0051461695693433285,
+        "rpg_g": 0.6906179785728455,
+        "move": {
+          "step": 33,
+          "moves": 0,
+          "law": "routed_paired",
+          "fit_error": 0.040207710363921706,
+          "eligible_deaths": 0,
+          "eligible_births": 8
+        },
+        "output_sigma": 0.125,
+        "lrs": [
+          [
+            "generator",
+            1.0,
+            null
+          ],
+          [
+            "encoder",
+            1.0,
+            null
+          ],
+          [
+            "router",
+            1.0,
+            null
+          ],
+          [
+            "table",
+            1.0,
+            11
+          ],
+          [
+            "noise",
+            1.0,
+            null
+          ],
+          [
+            "critic",
+            1.0,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 34,
+        "rmse": 0.012341001071035862,
+        "normalized_rmse": 0.30852505564689636,
+        "feature_error": 0.0072200292145069836,
+        "critic_real_minus_fake": 0.0005875350907444954,
+        "rpg_g": 0.6934583187103271,
+        "move": {
+          "step": 34,
+          "moves": 0,
+          "law": "routed_paired",
+          "fit_error": 0.009757355995244285,
+          "eligible_deaths": 0,
+          "eligible_births": 16
+        },
+        "output_sigma": 0.125,
+        "lrs": [
+          [
+            "generator",
+            1.0,
+            null
+          ],
+          [
+            "encoder",
+            1.0,
+            null
+          ],
+          [
+            "router",
+            1.0,
+            null
+          ],
+          [
+            "table",
+            1.0,
+            11
+          ],
+          [
+            "noise",
+            1.0,
+            null
+          ],
+          [
+            "critic",
+            1.0,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 35,
+        "rmse": 0.020573358982801437,
+        "normalized_rmse": 0.514333963394165,
+        "feature_error": 0.013091391584500706,
+        "critic_real_minus_fake": 0.017505047842860222,
+        "rpg_g": 0.7019669413566589,
+        "move": {
+          "step": 35,
+          "moves": 2,
+          "law": "routed_paired",
+          "fit_error": 0.013378246969042922,
+          "eligible_deaths": 3,
+          "eligible_births": 21,
+          "child": 20,
+          "parent": 0,
+          "variant": "antisymmetric",
+          "guard_error_before": 0.012991490321696577,
+          "guard_error_after": 0.012987787592937379,
+          "average_guard_error_before": 0.0174589241762211,
+          "average_guard_error_after": 0.017451251306379464,
+          "guard_gain": 3.7027287591991044e-06,
+          "average_guard_gain": 7.67286984163829e-06,
+          "max_context_harm": 5.344190205263874e-05,
+          "average_max_context_harm": 7.154144347383713e-05,
+          "guard_contexts": 64,
+          "accepted": true,
+          "splits": 1
+        },
+        "output_sigma": 0.125,
+        "lrs": [
+          [
+            "generator",
+            1.0,
+            null
+          ],
+          [
+            "encoder",
+            1.0,
+            null
+          ],
+          [
+            "router",
+            1.0,
+            null
+          ],
+          [
+            "table",
+            1.0,
+            11
+          ],
+          [
+            "noise",
+            1.0,
+            null
+          ],
+          [
+            "critic",
+            1.0,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 36,
+        "rmse": 0.07723474502563477,
+        "normalized_rmse": 1.9308686256408691,
+        "feature_error": 0.2153826471129935,
+        "critic_real_minus_fake": 0.12689851224422455,
+        "rpg_g": 0.758640706539154,
+        "move": {
+          "step": 36,
+          "moves": 0,
+          "law": "routed_paired",
+          "fit_error": 0.21753087561606657,
+          "eligible_deaths": 0,
+          "eligible_births": 8
+        },
+        "output_sigma": 0.125,
+        "lrs": [
+          [
+            "generator",
+            1.0,
+            null
+          ],
+          [
+            "encoder",
+            1.0,
+            null
+          ],
+          [
+            "router",
+            1.0,
+            null
+          ],
+          [
+            "table",
+            1.0,
+            12
+          ],
+          [
+            "noise",
+            1.0,
+            null
+          ],
+          [
+            "critic",
+            1.0,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 37,
+        "rmse": 0.0328180156648159,
+        "normalized_rmse": 0.8204504251480103,
+        "feature_error": 0.05807432676951283,
+        "critic_real_minus_fake": 0.060259442776441574,
+        "rpg_g": 0.7239660620689392,
+        "move": {
+          "step": 37,
+          "moves": 2,
+          "law": "routed_paired",
+          "fit_error": 0.05821082733587285,
+          "eligible_deaths": 5,
+          "eligible_births": 11,
+          "child": 39,
+          "parent": 33,
+          "variant": "antisymmetric",
+          "guard_error_before": 0.07316091569245453,
+          "guard_error_after": 0.07313099130133988,
+          "average_guard_error_before": 0.016827164435172078,
+          "average_guard_error_after": 0.016813047074516148,
+          "guard_gain": 2.992439111466507e-05,
+          "average_guard_gain": 1.4117360655931213e-05,
+          "max_context_harm": 1.632837163709211e-05,
+          "average_max_context_harm": 1.2550468969379017e-05,
+          "guard_contexts": 64,
+          "accepted": true,
+          "splits": 1
+        },
+        "output_sigma": 0.125,
+        "lrs": [
+          [
+            "generator",
+            1.0,
+            null
+          ],
+          [
+            "encoder",
+            1.0,
+            null
+          ],
+          [
+            "router",
+            1.0,
+            null
+          ],
+          [
+            "table",
+            1.0,
+            12
+          ],
+          [
+            "noise",
+            1.0,
+            null
+          ],
+          [
+            "critic",
+            1.0,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 38,
+        "rmse": 0.041409991681575775,
+        "normalized_rmse": 1.0352498292922974,
+        "feature_error": 0.07565441308073254,
+        "critic_real_minus_fake": 0.1507076472043991,
+        "rpg_g": 0.7719984650611877,
+        "move": {
+          "step": 38,
+          "moves": 0,
+          "law": "routed_paired",
+          "fit_error": 0.0908045353798912,
+          "eligible_deaths": 0,
+          "eligible_births": 8
+        },
+        "output_sigma": 0.125,
+        "lrs": [
+          [
+            "generator",
+            1.0,
+            null
+          ],
+          [
+            "encoder",
+            1.0,
+            null
+          ],
+          [
+            "router",
+            1.0,
+            null
+          ],
+          [
+            "table",
+            1.0,
+            12
+          ],
+          [
+            "noise",
+            1.0,
+            null
+          ],
+          [
+            "critic",
+            1.0,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 39,
+        "rmse": 0.0747799202799797,
+        "normalized_rmse": 1.8694980144500732,
+        "feature_error": 0.15479393983614112,
+        "critic_real_minus_fake": 0.1759401112794876,
+        "rpg_g": 0.7850399017333984,
+        "move": {
+          "step": 39,
+          "moves": 2,
+          "law": "routed_paired",
+          "fit_error": 0.14640760290116775,
+          "eligible_deaths": 8,
+          "eligible_births": 8,
+          "child": 55,
+          "parent": 45,
+          "variant": "antisymmetric",
+          "guard_error_before": 0.16156974330915014,
+          "guard_error_after": 0.16151265380664667,
+          "average_guard_error_before": 0.019973388137175585,
+          "average_guard_error_after": 0.01991657179096116,
+          "guard_gain": 5.7089502503460685e-05,
+          "average_guard_gain": 5.6816346214427745e-05,
+          "max_context_harm": 7.19384454672678e-06,
+          "average_max_context_harm": 2.538898871826817e-05,
+          "guard_contexts": 64,
+          "accepted": true,
+          "splits": 1
+        },
+        "output_sigma": 0.125,
+        "lrs": [
+          [
+            "generator",
+            1.0,
+            null
+          ],
+          [
+            "encoder",
+            1.0,
+            null
+          ],
+          [
+            "router",
+            1.0,
+            null
+          ],
+          [
+            "table",
+            1.0,
+            12
+          ],
+          [
+            "noise",
+            1.0,
+            null
+          ],
+          [
+            "critic",
+            1.0,
+            null
+          ]
+        ]
+      },
+      {
+        "step": 40,
+        "rmse": 0.03100801818072796,
+        "normalized_rmse": 0.7752004265785217,
+        "feature_error": 0.029438930954067046,
+        "critic_real_minus_fake": 0.06361455470323563,
+        "rpg_g": 0.7255469560623169,
+        "move": {
+          "step": 40,
+          "moves": 0,
+          "law": "routed_paired",
+          "fit_error": 0.032824871877421606,
+          "eligible_deaths": 8,
+          "eligible_births": 0
+        },
+        "output_sigma": 0.125,
+        "lrs": [
+          [
+            "generator",
+            1.0,
+            null
+          ],
+          [
+            "encoder",
+            1.0,
+            null
+          ],
+          [
+            "router",
+            1.0,
+            null
+          ],
+          [
+            "table",
+            1.0,
+            13
+          ],
+          [
+            "noise",
+            1.0,
+            null
+          ],
+          [
+            "critic",
+            1.0,
+            null
+          ]
+        ]
+      }
+    ],
+    "final": {
+      "initial_rmse": 0.1488732397556305,
+      "heldout_rmse": 0.03100801818072796,
+      "heldout_max_error": 0.07540309429168701,
+      "served_source": "fast"
+    },
+    "diagnostics": {
+      "counters": {
+        "evals": 40,
+        "probes": 320,
+        "proposals": 192,
+        "guard_rejections": 8,
+        "moves": 10,
+        "splits": 5
+      },
+      "last": {
+        "step": 40,
+        "moves": 0,
+        "law": "routed_paired",
+        "fit_error": 0.032824871877421606,
+        "eligible_deaths": 8,
+        "eligible_births": 0
+      },
+      "evidence_counters": {
+        "updates": 40,
+        "resets": 640,
+        "global_resets": 5,
+        "flagged_rows_sum": 0
+      }
+    }
+  },
+  "diagnostic_arms": [
+    {
+      "arm": "veto_commit",
+      "final": {
+        "initial_rmse": 0.1488732397556305,
+        "heldout_rmse": 0.023803401738405228,
+        "heldout_max_error": 0.06883639097213745,
+        "served_source": "fast"
+      },
+      "diagnostics": {
+        "counters": {
+          "evals": 40,
+          "probes": 320,
+          "proposals": 288,
+          "guard_rejections": 9,
+          "moves": 0,
+          "splits": 0
+        },
+        "last": {
+          "step": 40,
+          "moves": 0,
+          "law": "routed_paired",
+          "fit_error": 0.026862953397383905,
+          "eligible_deaths": 67,
+          "eligible_births": 61,
+          "child": 63,
+          "parent": 127,
+          "variant": "antisymmetric",
+          "guard_error_before": 0.020672439838553623,
+          "guard_error_after": 0.020626281402894218,
+          "average_guard_error_before": 0.01993447281282216,
+          "average_guard_error_after": 0.019871325866204596,
+          "guard_gain": 4.615843565941e-05,
+          "average_guard_gain": 6.31469466175576e-05,
+          "max_context_harm": 5.4012568916787795e-05,
+          "average_max_context_harm": 3.438605633486122e-05,
+          "guard_contexts": 64,
+          "accepted": false,
+          "diagnostic_veto": true
+        },
+        "evidence_counters": {
+          "updates": 40,
+          "resets": 0,
+          "global_resets": 0,
+          "flagged_rows_sum": 468,
+          "hold_steps": 1
+        }
+      },
+      "moves": [
+        {
+          "step": 5,
+          "child": 16,
+          "parent": 37,
+          "variant": "duplicate"
+        },
+        {
+          "step": 6,
+          "child": 16,
+          "parent": 47,
+          "variant": "duplicate"
+        },
+        {
+          "step": 7,
+          "child": 16,
+          "parent": 53,
+          "variant": "duplicate"
+        },
+        {
+          "step": 8,
+          "child": 16,
+          "parent": 62,
+          "variant": "antisymmetric"
+        },
+        {
+          "step": 9,
+          "child": 16,
+          "parent": 63,
+          "variant": "antisymmetric"
+        },
+        {
+          "step": 10,
+          "child": 16,
+          "parent": 62,
+          "variant": "antisymmetric"
+        },
+        {
+          "step": 11,
+          "child": 16,
+          "parent": 63,
+          "variant": "duplicate"
+        },
+        {
+          "step": 12,
+          "child": 16,
+          "parent": 62,
+          "variant": "antisymmetric"
+        },
+        {
+          "step": 32,
+          "child": 126,
+          "parent": 66,
+          "variant": "duplicate"
+        },
+        {
+          "step": 35,
+          "child": 126,
+          "parent": 127,
+          "variant": "duplicate"
+        },
+        {
+          "step": 40,
+          "child": 63,
+          "parent": 127,
+          "variant": "antisymmetric"
+        }
+      ],
+      "trajectory": [
+        {
+          "step": 5,
+          "initial_rmse": 0.1488732397556305,
+          "heldout_rmse": 0.15856905281543732,
+          "heldout_max_error": 0.275438129901886,
+          "served_source": "fast"
+        },
+        {
+          "step": 10,
+          "initial_rmse": 0.1488732397556305,
+          "heldout_rmse": 0.13030008971691132,
+          "heldout_max_error": 0.24639737606048584,
+          "served_source": "fast"
+        },
+        {
+          "step": 15,
+          "initial_rmse": 0.1488732397556305,
+          "heldout_rmse": 0.1746978759765625,
+          "heldout_max_error": 0.3543209731578827,
+          "served_source": "fast"
+        },
+        {
+          "step": 20,
+          "initial_rmse": 0.1488732397556305,
+          "heldout_rmse": 0.20638148486614227,
+          "heldout_max_error": 0.37417545914649963,
+          "served_source": "fast"
+        },
+        {
+          "step": 25,
+          "initial_rmse": 0.1488732397556305,
+          "heldout_rmse": 0.052931297570466995,
+          "heldout_max_error": 0.18118588626384735,
+          "served_source": "fast"
+        },
+        {
+          "step": 30,
+          "initial_rmse": 0.1488732397556305,
+          "heldout_rmse": 0.1110832616686821,
+          "heldout_max_error": 0.2400280088186264,
+          "served_source": "fast"
+        },
+        {
+          "step": 35,
+          "initial_rmse": 0.1488732397556305,
+          "heldout_rmse": 0.020635612308979034,
+          "heldout_max_error": 0.05379490181803703,
+          "served_source": "fast"
+        },
+        {
+          "step": 40,
+          "initial_rmse": 0.1488732397556305,
+          "heldout_rmse": 0.023803401738405228,
+          "heldout_max_error": 0.06883639097213745,
+          "served_source": "fast"
+        }
+      ],
+      "matched_input_trace_sha256": "0b0842dfd8ef539138331ff330a7a8ffa0ab9b24e784190bc94314312798e92c"
+    },
+    {
+      "arm": "inherit_parent_moments",
+      "final": {
+        "initial_rmse": 0.1488732397556305,
+        "heldout_rmse": 0.02345425821840763,
+        "heldout_max_error": 0.08304574340581894,
+        "served_source": "fast"
+      },
+      "diagnostics": {
+        "counters": {
+          "evals": 40,
+          "probes": 320,
+          "proposals": 176,
+          "guard_rejections": 7,
+          "moves": 12,
+          "splits": 6
+        },
+        "last": {
+          "step": 40,
+          "moves": 0,
+          "law": "routed_paired",
+          "fit_error": 0.03516506126915407,
+          "eligible_deaths": 0,
+          "eligible_births": 8
+        },
+        "evidence_counters": {
+          "updates": 40,
+          "resets": 768,
+          "global_resets": 6,
+          "flagged_rows_sum": 0
+        }
+      },
+      "moves": [
+        {
+          "step": 5,
+          "child": 16,
+          "parent": 37,
+          "variant": "duplicate"
+        },
+        {
+          "step": 13,
+          "child": 102,
+          "parent": 88,
+          "variant": "duplicate"
+        },
+        {
+          "step": 32,
+          "child": 119,
+          "parent": 127,
+          "variant": "antisymmetric"
+        },
+        {
+          "step": 35,
+          "child": 23,
+          "parent": 1,
+          "variant": "duplicate"
+        },
+        {
+          "step": 37,
+          "child": 39,
+          "parent": 32,
+          "variant": "antisymmetric"
+        },
+        {
+          "step": 39,
+          "child": 55,
+          "parent": 44,
+          "variant": "duplicate"
+        }
+      ],
+      "trajectory": [
+        {
+          "step": 5,
+          "initial_rmse": 0.1488732397556305,
+          "heldout_rmse": 0.15853574872016907,
+          "heldout_max_error": 0.2753869593143463,
+          "served_source": "fast"
+        },
+        {
+          "step": 10,
+          "initial_rmse": 0.1488732397556305,
+          "heldout_rmse": 0.13028517365455627,
+          "heldout_max_error": 0.24638061225414276,
+          "served_source": "fast"
+        },
+        {
+          "step": 15,
+          "initial_rmse": 0.1488732397556305,
+          "heldout_rmse": 0.17462994158267975,
+          "heldout_max_error": 0.35429248213768005,
+          "served_source": "fast"
+        },
+        {
+          "step": 20,
+          "initial_rmse": 0.1488732397556305,
+          "heldout_rmse": 0.2063477635383606,
+          "heldout_max_error": 0.37416547536849976,
+          "served_source": "fast"
+        },
+        {
+          "step": 25,
+          "initial_rmse": 0.1488732397556305,
+          "heldout_rmse": 0.05291483551263809,
+          "heldout_max_error": 0.1811872124671936,
+          "served_source": "fast"
+        },
+        {
+          "step": 30,
+          "initial_rmse": 0.1488732397556305,
+          "heldout_rmse": 0.11103750765323639,
+          "heldout_max_error": 0.2399342805147171,
+          "served_source": "fast"
+        },
+        {
+          "step": 35,
+          "initial_rmse": 0.1488732397556305,
+          "heldout_rmse": 0.020725252106785774,
+          "heldout_max_error": 0.05326204374432564,
+          "served_source": "fast"
+        },
+        {
+          "step": 40,
+          "initial_rmse": 0.1488732397556305,
+          "heldout_rmse": 0.02345425821840763,
+          "heldout_max_error": 0.08304574340581894,
+          "served_source": "fast"
+        }
+      ],
+      "matched_input_trace_sha256": "0b0842dfd8ef539138331ff330a7a8ffa0ab9b24e784190bc94314312798e92c"
+    }
+  ],
+  "cpu_controls_isolation": {
+    "no_rows": {
+      "initial_rmse": 0.1488732248544693,
+      "heldout_rmse": 0.035399068146944046,
+      "heldout_max_error": 0.11686492711305618,
+      "served_source": "fast",
+      "signature": "e9be8ae9cab698536d4e8333a14450e6be51b22086c5591fa09db95c11e3c6b4",
+      "counters": {
+        "evals": 0,
+        "probes": 0,
+        "proposals": 0,
+        "guard_rejections": 0,
+        "moves": 0,
+        "splits": 0
+      },
+      "evidence": {
+        "updates": 0,
+        "resets": 0,
+        "global_resets": 0,
+        "flagged_rows_sum": 0
+      }
+    },
+    "evidence_only": {
+      "initial_rmse": 0.1488732248544693,
+      "heldout_rmse": 0.035399068146944046,
+      "heldout_max_error": 0.11686492711305618,
+      "served_source": "fast",
+      "signature": "e9be8ae9cab698536d4e8333a14450e6be51b22086c5591fa09db95c11e3c6b4",
+      "counters": {
+        "evals": 40,
+        "probes": 320,
+        "proposals": 0,
+        "guard_rejections": 0,
+        "moves": 0,
+        "splits": 0
+      },
+      "evidence": {
+        "updates": 40,
+        "resets": 0,
+        "global_resets": 0,
+        "flagged_rows_sum": 468,
+        "hold_steps": 1
+      }
+    },
+    "birthdeath_only": {
+      "initial_rmse": 0.1488732248544693,
+      "heldout_rmse": 0.035289596766233444,
+      "heldout_max_error": 0.11769592016935349,
+      "served_source": "fast",
+      "signature": "be977c393b84bdc9bbb72985015b75d33a1d0931a8e9944991c9cc774fa3409f",
+      "counters": {
+        "evals": 40,
+        "probes": 320,
+        "proposals": 208,
+        "guard_rejections": 12,
+        "moves": 6,
+        "splits": 3
+      },
+      "evidence": {
+        "updates": 40,
+        "resets": 384,
+        "global_resets": 3,
+        "flagged_rows_sum": 0
+      }
+    },
+    "full": {
+      "initial_rmse": 0.1488732248544693,
+      "heldout_rmse": 0.035289596766233444,
+      "heldout_max_error": 0.11769592016935349,
+      "served_source": "fast",
+      "signature": "be977c393b84bdc9bbb72985015b75d33a1d0931a8e9944991c9cc774fa3409f",
+      "counters": {
+        "evals": 40,
+        "probes": 320,
+        "proposals": 208,
+        "guard_rejections": 12,
+        "moves": 6,
+        "splits": 3
+      },
+      "evidence": {
+        "updates": 40,
+        "resets": 384,
+        "global_resets": 3,
+        "flagged_rows_sum": 0
+      }
+    }
+  },
+  "limitations": [
+    "Diagnostic monkeypatches identify optimizer-state sensitivity; parent-moment inheritance is not a qualified replacement law.",
+    "The final third grid never enters proposal decisions. Mean RMSE and maximum error must both be retained.",
+    "All observations use one fixed initialization; there was no seed sweep."
+  ],
+  "receipt_generated_at_revision": "7083dfcb8d248a1dbc0daca789ff7c2a3d77a73e",
+  "cuda_executed_example_revision": "8618b19c2eca444fda1ab5c7fa0d6734cd1ae5a8",
+  "cuda_executed_example_sha256": "d4f9292078e6033d600374a6059c03f54a2cc2b0da843684e3cb15be452a789c",
+  "library_source_sha256": {
+    "particlegan/routing.py": "b64764fccc1518085ecf92d54df3ea4ada163293bc88132622cc04d60dd5ce94",
+    "particlegan/policy.py": "803272dc136b7fb024fcf51692e70e7f49323c88f84f8f7bc9aa31292bc780ba",
+    "particlegan/recipes.py": "e1e2f478ce9d9f8774933cd4e98e0f91cfaf0e93a152ad0e4bdee782f52ae9d6"
+  },
+  "cpu_isolation_note": "The additional CPU control-isolation arms use the conformance caller-owned loop; interpret their numerical ordering separately from the reproduced CUDA benchmark."
+}

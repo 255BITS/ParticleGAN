@@ -65,7 +65,11 @@ def test_lazy_keeps_default_technique_and_only_changes_frequency(via):
     assert optk.record.observed_steps == opt1.record.observed_steps == 12
 
 
-def test_lazy_blend_still_reaches_k3p_phases():
+def test_lazy_blend_still_reaches_blended_phase(monkeypatch):
+    # The default KA2 penalty blends after WARMUP_CALLS (800) applied calls; shorten it so the
+    # 6 lazily applied calls of this run reach the blend.
+    import particlegan.ka2
+    monkeypatch.setattr(particlegan.ka2, "WARMUP_CALLS", 3)
     recipe = get_recipe("gan", total_steps=24, network_lr_horizon_cap=24, reg_every=4)
     D = _critic()
     opt = recipe.make_critic_optimizer(D, ema_critic=copy.deepcopy(D))

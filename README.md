@@ -10,9 +10,9 @@ missing. ParticleGAN replaces that noise with a table of learnable latent
 vectors (*particles*) that are optimized together with the generator, so the
 prior itself can move toward the data's modes. The package ships one training
 configuration: a relativistic-pairing (RpGAN) logistic loss, a critic gradient
-penalty that hands over from R1 to capped gradients plus an EMA-critic anchor
-as the learning rate anneals, and the optimizer settings and schedules that go
-with them ([how it works](docs/k3p.md)). You write an ordinary PyTorch GAN
+penalty that starts as R1 and then blends in capped gradients plus an EMA-critic
+anchor gated by the critic's own Adam statistics, and the optimizer settings and
+schedules that go with them ([how it works](docs/ka2.md)). You write an ordinary PyTorch GAN
 loop; the recipe builds the pieces.
 
 ![100 Gaussians: default GAN recipe converging with live weights](100gaussians.gif)
@@ -20,6 +20,14 @@ loop; the recipe builds the pieces.
 Recorded with the 0.8.0 recipe and its original random initialization, live weights, seed 1234:
 **100/100 modes, 98.9% within 3σ after 7,000 updates**, with all 100 modes first covered
 at update 1,430. [Reproduce this animation](reports/readme-100gaussians/README.md#readme-hero-gif).
+
+**Without a learning-rate schedule.** The [E22 configuration](docs/e22.md) has no schedule or training
+horizon, and no statistic of the raw data in its training control. It covers all 100 modes on three layouts,
+ending at 98.3–98.6% of samples within 3σ after 7,000 updates:
+
+![E22 on the grid, rotated and staggered 100-Gaussian problems](reports/e22-animation/e22-100gaussians.gif)
+
+[How this animation was made](reports/e22-animation/README.md).
 
 ## Install
 
@@ -124,11 +132,13 @@ See the [API reference](docs/api.md#initialization) and the
 
 ## Model families
 
-`get_recipe(name)` selects the model; every family trains the same way.
+`get_recipe(name)` selects a model family or an E22 policy preset.
 
 | Name | Model |
 | --- | --- |
 | `gan` (default) | GAN with a learnable particle prior |
+| `e22` | Scalar particle GAN with stationarity control, row evidence, birth/death, learned noise and served averages |
+| `e22_routed` | Conditional dense-bank adaptation with paired row evidence and guarded birth/death |
 | `mog` | GAN with a mixture-of-Gaussians particle prior |
 | `ddgan` | Denoising-diffusion GAN with a UCD (class-conditional) critic |
 | `ddgan_mog` | `ddgan` with a mixture-of-Gaussians prior |
@@ -137,12 +147,37 @@ See the [API reference](docs/api.md#initialization) and the
 | `ae_ddgan` | Autoencoder denoising-diffusion GAN |
 
 Any field can be overridden: `get_recipe("mog", total_steps=20_000)`.
+For E22, set the task's dimensions and output noise explicitly:
+`get_recipe("e22", num_particles=20_000, z_dim=2, batch_size=2048, output_noise_std=.029)`.
+[`E22Policy`](docs/e22.md) exposes the same controls used by `GANTrainer` for
+caller-owned backward passes and optimizer steps, with checkpointing and served snapshots.
+For conditional softmax blends, use `get_recipe("e22_routed", ...)` with the
+explicit [`RoutedRows` contract](docs/e22_routed.md). This adaptation measures
+the whole conditional forward and validates row moves on separate guard
+contexts. Frozen BF16 modules can accompany FP32 trainable parameters and tables.
+Multiple token routing sites can share one bank and controller through the
+[full-model routing contract](docs/e22_routed_sites.md). Candidate checks rerun
+the complete model, including downstream sites and the final paired output.
+`RoutedRows(probe_interval=20)` schedules expensive row probes separately from
+per-update gradient evidence and saves its clock in checkpoints. The optional
+`output_error_guard=True` bounds clean paired-output MSE on guard contexts;
+it does not establish repair of the noisy adversarial game. Split rows
+transport their parent's Adam history at half mass.
 
 ## Learn more
 
-- [How the training formulation works](docs/k3p.md), including several critics and conditional critics
+- [How the training formulation works](docs/ka2.md), including several critics and conditional critics
+- [E22](docs/e22.md): a schedule-free configuration for the native 100-Gaussian problems with no data-space statistics
+- [Routed paired E22](docs/e22_routed.md): conditional row evidence, guarded moves and clean serving
+- [Shared-bank routing sites](docs/e22_routed_sites.md): sequential token routing and a matched spatial comparison
+- [Whole-model checkpoint replay](docs/e22_routed_sites.md#activation-checkpointed-whole-model-replay): per-site DV12 without repeated training draws or diagnostics
+- [Routed noisy-game qualification](docs/e22_routed_game.md): token penalty units, mass invariance and matched longer training
+- [Many-site synchronization](docs/e22_routed_readbacks.md): deferred DV12 diagnostics and batched routing validation
 - [API reference](docs/api.md) and a [minimal DDGAN + UCD loop](docs/api.md#a-minimal-ddgan--ucd-loop)
 - Examples: [`quickstart_gan.py`](examples/quickstart_gan.py) (GANTrainer with checkpoints),
+  [`e22_external_loop.py`](examples/e22_external_loop.py) (E22 in a caller-owned loop),
+  [`e22_routed_paired.py`](examples/e22_routed_paired.py) (source/time-conditioned paired-error training),
+  [`e22_routed_sites.py`](examples/e22_routed_sites.py) (sequential shared-bank routing and spatial ablations),
   [`pytorch_loop.py`](examples/pytorch_loop.py) (the full update in your own loop),
   [`100gaussians.py`](examples/100gaussians.py) (the benchmark above),
   [`particle_autoencoder.py`](examples/particle_autoencoder.py) (AE/VAE-GAN),

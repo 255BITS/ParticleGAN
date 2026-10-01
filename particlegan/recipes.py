@@ -13,13 +13,13 @@ class Recipe:
 
     * ``reg_anchor_weight`` (1.0) scales the critic penalty's EMA-anchor term,
       which ties the critic's input gradient to its parameter EMA once the
-      critic LR anneals. 0 removes the term (no ``ema_critic`` needed).
+      controller anchors the critic. 0 removes the term (no ``ema_critic`` needed).
     * ``direct_particle_gain`` (True) lets a direct sample-particle group
       (``make_generator_optimizer(direct_particles=...)``) raise its LR by up
       to 2x while successive centered gradients agree. False keeps that
       group's LR at the scheduled value (``direct_particle_betas`` still apply).
     """
-    name: str = "k3p"
+    name: str = "ka2"
     model: str = "gan"
     z_dim: int = 2
     num_particles: int = 20_000
@@ -32,7 +32,8 @@ class Recipe:
     ucd_weight: float = 0.02
     alpha_bar: tuple[float, ...] = (1.0, 0.9, 0.5, 0.05, 0.0001)
     batch_size: int = 2048
-    total_steps: int = 7_000
+    total_steps: int | None = 7_000
+    continuous_policy: str | None = None
     lr: float = 0.00425
     d_lr_mult: float = 1.0
     prior_lr_mult: float = 2.0
@@ -45,13 +46,12 @@ class Recipe:
     ema_decay: float = 0.995
     lr_anneal_start: float = 0.6
     lr_floor: float = 0.05
-    # K3P schedule: G/D follow their own cosine over min(total, horizon cap)
+    # G/D follow their own cosine over min(total, horizon cap)
     # down to network_lr_floor; the prior keeps the full-budget cosine above.
-    # network_lr_floor is also K3P's blend floor f (s == 0 at the floor).
     # None means "same as lr_floor"; a None horizon cap means the full budget.
     network_lr_floor: float | None = 0.01
     network_lr_horizon_cap: int | None = 1600
-    reg_anchor_decay: float = 0.999
+    reg_anchor_min_decay: float = 0.90
     # Ablation switches; see the class docstring.
     reg_anchor_weight: float = 1.0
     direct_particle_gain: bool = True
@@ -74,8 +74,84 @@ class Recipe:
     distance_reduction: str = "sum"
     observation_sigma: float = 0.03
     reconstruction_weight: float = 1.0
+    # AMSGrad for every recipe optimizer (G, prior and critic). Intended for a
+    # G/D LR that stays high: the Adam step then shrinks with the gradient at
+    # equilibrium instead of creeping up as the second moment decays. The
+    # default keeps plain Adam (bit-identical to the release without it).
+    amsgrad: bool = False
+    # Ablation switches (appended; defaults reproduce the release bit-for-bit).
+    # critic_r1_real=False drops only the real-data squared-gradient (R1) term
+    # from the KA2 penalty's part A (fake cap, part-B caps and proximity stay).
+    critic_r1_real: bool = True
+    # critic_payoff_damping=False drops the continuous controller's D-only
+    # 1/(1+payoff_error^2) LR factor (G/prior scales unchanged).
+    critic_payoff_damping: bool = True
+    # Generator output noise: "fixed" (output_noise_std), "learnable" (a
+    # trainer-owned log-sigma trained with the generator loss through the
+    # reparameterized noise, initialized at log(output_noise_std)) or
+    # "mobility" (output_noise_std times the continuous controller mobility).
+    output_noise_mode: str = "fixed"
+    # LR control of a continuous (dv12) recipe: "mobility" (DV12: mobility and
+    # game_trust scales, bit-identical to the release) or "stationarity" (per
+    # optimizer group Pflug/SASA-style settling test in intrinsic time; see
+    # continuous.SettleTest). Mobility is still updated (it drives
+    # output_noise_mode="mobility") and game_trust still scales the KA2 anchor.
+    lr_control: str = "mobility"
+    # Fisher-Rao birth-death moves on the particle table (kNN density ratio,
+    # sequential evidence, BH at q=.05; see birth_death.py). Off by default.
+    particle_birth_death: bool = False
+    # Per-row force-persistence evidence (row_evidence.py): rows whose own gradient history has a significant mean
+    # keep the full table rate and do not vote in the table tester; descent is held while many rows are unbalanced.
+    row_evidence_gate: bool = False
+    # Table stationarity tester: which evidence may raise the table rate again ("any" | "both" | "never" | "anchor"), see continuous.py.
+    table_release_rule: str = "any"
+    # Parts of the row-evidence gate (ablation switches; all True is the declared mechanism).
+    row_evidence_hot: bool = True
+    row_evidence_exclude: bool = True
+    row_evidence_hold: bool = True
+    # Space in which birth-death compares the table's samples with the real reservoir: "data" (the samples themselves) or
+    # "critic" (the critic's penultimate features: no data-space metric is needed). Locality uses the table's own latents.
+    birth_death_space: str = "data"
+    # Served model: 0 = the live iterate (the fast parameters) is what samples are drawn from. m > 0 = the averaged model is the model of
+    # record: samples, evaluations and checkpoints' served parameters are an exponential average of the training iterate whose window is
+    # m table-tester blocks (steps per block = b / s of the table tester, both controller state); the fast iterate continues to train.
+    serve_average: float = 0.0
+    # What re-opens the learning-rate ladders when the game changes under them: "data" = the base's real-batch drift
+    # statistic (fast vs slow mean of random features of standardized RAW real batches, z-score > 3: data space);
+    # "none" = no re-open and no statistic of the real batch is read (the ladders can still release on their own evidence);
+    # "optimizer" = continuous.OptimizerSurprise: a sustained jump of the optimizers' own Adam step signal (|g| / sqrt(v_hat))
+    # against its calm level re-opens every ladder once and restarts the generator-side Adam moments (hysteresis re-arm).
+    reopen_signal: str = "data"
+    # What an "optimizer" re-open does to the KA2 critic anchor: "hold" = nothing (a blind recipe forces the anchor on, W = 1,
+    # and damps its EMA by game_trust, so after a re-open the anchor keeps pulling the critic toward the pre-event EMA critic);
+    # "release" = the re-open counts as drift evidence for KA2 (evidence = 1) from the fire until KA2's own surprise ratio has
+    # risen above REL_HI and fallen back below REL_LO: KA2's native release / EMA tracking / reseed rules then apply. Event-gated.
+    reopen_anchor: str = "hold"
+    # Null law of the row-evidence gate: "theory" = the exact-law p-value of the statistic as is; "scaled" = the same law applied to t2 / c, where
+    # c >= 1 is the smallest scale that makes the median p-value over the tested rows .5 (the typical row is the null: a slowly varying force
+    # shared by neighbouring rows, correlated gradients or a different noise level scale every row's statistic alike; only rows that are extreme
+    # relative to the bulk are flagged).
+    row_evidence_null: str = "theory"
+    # Birth-death also re-draws table rows that have no real support. With birth_death_space="critic": a split-conformal isolation test of every
+    # row against the real reservoir in the critic's feature space (k-th neighbour distance over the local real scale; valid when the fake
+    # law equals the real law, conservative for rows scored at their clean centres), Benjamini-Hochberg at the birth-death level over the table; flagged rows become clones of uniformly drawn unflagged
+    # rows, and only while the flagged fraction is at most that same level (a table that is still mostly in transit is not resampled).
+    birth_death_isolation: bool = False
+    # Scale of the critic's feature space in critic-space birth-death and the support test: "none" = the features as the critic delivers them;
+    # "std" = every feature divided by its standard deviation on the reference half (even rows) of the real reservoir. The critic function does not fix
+    # the scale of a hidden unit (rescale a ReLU-type unit and its outgoing weight inversely: same function, different Euclidean distances), so the
+    # raw metric depends on an arbitrary parametrisation; "std" is invariant to that symmetry and is a function of the reference half only.
+    birth_death_feature_scale: str = "none"
+    # Independent E22 uses its original equal-mass particle statistics.
+    # routed_paired is a distinct conditional dense-bank adaptation, bound to
+    # an explicit RoutedRows contract in the caller-owned policy API.
+    row_policy: str = "independent"
 
     def __post_init__(self):
+        if self.continuous_policy not in (None, "dv1", "dv2", "dv3", "dv4", "dv5", "dv6", "dv7", "dv8", "dv9", "dv10", "dv11", "dv12"):
+            raise ValueError("unknown continuous_policy")
+        if (self.total_steps is None) != (self.continuous_policy is not None):
+            raise ValueError("continuous policies require total_steps=None")
         object.__setattr__(self, "betas", tuple(self.betas))
         if self.prior_betas is not None:
             object.__setattr__(self, "prior_betas", tuple(self.prior_betas))
@@ -89,8 +165,8 @@ class Recipe:
         floor = self.network_lr_floor
         if floor is not None and (isinstance(floor, bool) or not math.isfinite(floor) or not 0 <= floor <= 1):
             raise ValueError("network_lr_floor must be None or in [0, 1]")
-        if isinstance(self.reg_anchor_decay, bool) or not 0 <= self.reg_anchor_decay < 1:
-            raise ValueError("reg_anchor_decay must be in [0, 1)")
+        if isinstance(self.reg_anchor_min_decay, bool) or not 0 <= self.reg_anchor_min_decay < 1:
+            raise ValueError("reg_anchor_min_decay must be in [0, 1)")
         for key in ("d_guard_ratio", "input_noise_std", "output_noise_std"):
             value = getattr(self, key)
             if isinstance(value, bool) or not math.isfinite(value) or value < 0:
@@ -105,6 +181,8 @@ class Recipe:
             raise ValueError("direct_particle_betas must contain two values in [0, 1)")
         for key in ("z_dim", "num_particles", "batch_size", "total_steps", "reg_every"):
             value = getattr(self, key)
+            if key == "total_steps" and value is None:
+                continue
             if type(value) is not int or value <= 0:
                 raise ValueError(f"{key} must be a positive integer")
         if self.encoder_mode not in ("none", "ae", "categorical", "hard"):
@@ -140,6 +218,67 @@ class Recipe:
         for key in ("lr", "d_lr_mult", "prior_lr_mult", "routing_temperature", "observation_sigma"):
             if not math.isfinite(getattr(self, key)) or getattr(self, key) <= 0:
                 raise ValueError(f"{key} must be finite and positive")
+        if type(self.amsgrad) is not bool:
+            raise ValueError("amsgrad must be a boolean")
+        for key in ("critic_r1_real", "critic_payoff_damping"):
+            if type(getattr(self, key)) is not bool:
+                raise ValueError(f"{key} must be a boolean")
+        if self.output_noise_mode not in ("fixed", "learnable", "mobility"):
+            raise ValueError("output_noise_mode must be fixed, learnable or mobility")
+        if self.output_noise_mode == "learnable" and not self.output_noise_std > 0:
+            raise ValueError("learnable output noise needs output_noise_std > 0 (its initial value)")
+        if self.output_noise_mode != "fixed" and self.continuous_policy is None:
+            raise ValueError("learnable/mobility output noise requires a continuous_policy (no warmup schedule)")
+        if self.lr_control not in ("mobility", "stationarity"):
+            raise ValueError("lr_control must be mobility or stationarity")
+        if self.lr_control == "stationarity" and self.continuous_policy != "dv12":
+            raise ValueError("lr_control='stationarity' requires continuous_policy='dv12'")
+        if type(self.particle_birth_death) is not bool:
+            raise ValueError("particle_birth_death must be a boolean")
+        if self.particle_birth_death and self.prior_kind != "particles":
+            raise ValueError("particle_birth_death requires prior_kind='particles' (a trainable table)")
+        if (isinstance(self.serve_average, bool) or not isinstance(self.serve_average, (int, float))
+                or not math.isfinite(self.serve_average) or self.serve_average < 0):
+            raise ValueError("serve_average must be a finite number >= 0")
+        if self.reopen_signal not in ("data", "none", "optimizer"):
+            raise ValueError("reopen_signal must be data, none or optimizer")
+        if self.reopen_anchor not in ("hold", "release"):
+            raise ValueError("reopen_anchor must be hold or release")
+        if self.reopen_anchor != "hold" and self.reopen_signal != "optimizer":
+            raise ValueError("reopen_anchor release requires reopen_signal optimizer")
+        if self.row_evidence_null not in ("theory", "scaled"):
+            raise ValueError("row_evidence_null must be theory or scaled")
+        if self.birth_death_space not in ("data", "critic"):
+            raise ValueError("birth_death_space must be data or critic")
+        if self.birth_death_feature_scale not in ("none", "std"):
+            raise ValueError("birth_death_feature_scale must be none or std")
+        if (self.row_policy == "independent" and self.birth_death_feature_scale == "std"
+                and not (self.particle_birth_death and self.birth_death_space == "critic")):
+            raise ValueError("birth_death_feature_scale='std' needs particle_birth_death with birth_death_space='critic'")
+        if type(self.birth_death_isolation) is not bool:
+            raise ValueError("birth_death_isolation must be a boolean")
+        if (self.row_policy == "independent" and self.birth_death_isolation
+                and not (self.particle_birth_death and self.birth_death_space == "critic")):
+            raise ValueError("birth_death_isolation needs particle_birth_death with birth_death_space='critic' (a support test on raw samples is not allowed)")
+        for _name in ("row_evidence_hot", "row_evidence_exclude", "row_evidence_hold"):
+            if type(getattr(self, _name)) is not bool:
+                raise ValueError(f"{_name} must be a boolean")
+        if self.table_release_rule not in ("any", "both", "never", "anchor"):
+            raise ValueError("table_release_rule must be any, both, never or anchor")
+        if type(self.row_evidence_gate) is not bool:
+            raise ValueError("row_evidence_gate must be a boolean")
+        if self.row_policy not in ("independent", "routed_paired"):
+            raise ValueError("row_policy must be independent or routed_paired")
+        if self.row_policy == "routed_paired" and (
+                self.continuous_policy != "dv12" or self.lr_control != "stationarity"):
+            raise ValueError("row_policy='routed_paired' requires DV12 and stationarity control")
+        if self.row_evidence_gate and self.lr_control != "stationarity":
+            raise ValueError("row_evidence_gate requires lr_control='stationarity'")
+        if (self.row_policy == "independent" and (self.particle_birth_death or self.row_evidence_gate)
+                and self.conditioning != "scalar"):
+            raise ValueError("particle birth/death and row evidence require independently sampled "
+                             "unconditional rows; use row_policy='routed_paired' with RoutedRows "
+                             "for conditional dense banks")
         if type(self.direct_particle_gain) is not bool:
             raise ValueError("direct_particle_gain must be a boolean")
         for key in ("reg_coeff", "reg_kappa", "reg_anchor_weight", "prior_reg", "ucd_weight",
@@ -235,57 +374,53 @@ class Recipe:
         the critic and its EMA. ``output`` selects the logits from the critic's
         output (default: first element of a tuple/list); ``collect_stats``
         fills ``penalty.last_stats``. ``penalty_overrides`` replace the
-        recipe's ``coeff``, ``kappa``, ``lazy_k``, ``lr_floor`` or
-        ``anchor_weight`` for this penalty.
+        recipe's ``coeff``, ``kappa``, ``lazy_k``,
+        ``anchor_weight`` or ``r1_real`` for this penalty.
         """
-        from .k3p import CriticPenalty
+        from .ka2 import CriticPenalty
         return CriticPenalty(self, optimizer, output=output, collect_stats=collect_stats,
                              **penalty_overrides)
 
     def _penalty_options(self, **overrides):
         """Resolved kernel settings for ``make_critic_penalty``."""
         options = {"coeff": self.reg_coeff, "kappa": self.reg_kappa, "lazy_k": self.reg_every,
-                   "anchor_weight": self.reg_anchor_weight, **overrides}
-        # The blend floor f is the network LR floor. A floor >= 1/2 (e.g. 1.0,
-        # a constant LR) keeps r >= 1/2 and hence s == 1 for every f, so the
-        # same formulation needs no separate path.
-        floor = self.resolved_network_lr_floor
-        options.setdefault("lr_floor", floor if floor < 0.5 else 0.0)
-        unknown = set(options) - {"coeff", "kappa", "lazy_k", "lr_floor", "anchor_weight"}
+                   "anchor_weight": self.reg_anchor_weight, "r1_real": self.critic_r1_real, **overrides}
+        unknown = set(options) - {"coeff", "kappa", "lazy_k", "anchor_weight", "r1_real"}
         if unknown:
             raise TypeError(f"unknown critic penalty options: {sorted(unknown)}")
-        from .grad_regularizers import GradientPenalty
-        GradientPenalty(**options)  # validate
+        from .ka2 import KA2GradientPenalty
+        KA2GradientPenalty(**options)  # validate
         return options
 
     def make_critic_optimizer(self, critic, *, ema_critic=None, **adam_kwargs):
         """Adam over ``critic``'s trainable parameters whose ``step()`` does the
-        recipe's critic-side work (currently K3P: spike guard, EMA-critic update,
-        LR record).
+        recipe's critic-side work (KA2: spike guard, moment surprise, adaptive
+        EMA-critic update and guarded reseed).
 
         ``ema_critic`` is a caller-allocated copy of ``critic`` (e.g.
         ``copy.deepcopy(critic)``) that becomes the EMA; the critic penalty
         requires it unless ``reg_anchor_weight == 0``. Checkpoint with ``optimizer.state_dict()``: it holds the
         EMA critic and all counters. ``adam_kwargs`` override the recipe's
-        ``lr * d_lr_mult`` and ``betas`` or add options such as ``fused``.
+        ``lr * d_lr_mult``, ``betas`` and ``amsgrad`` or add options such as ``fused``.
         """
-        from .k3p import K3PCriticAdam
-        options = {"lr": self.lr * self.d_lr_mult, "betas": self.betas, **adam_kwargs}
-        return K3PCriticAdam([p for p in critic.parameters() if p.requires_grad], critic=critic,
-                             ema_critic=ema_critic, anchor_decay=self.reg_anchor_decay,
+        from .ka2 import KA2CriticAdam
+        options = {"lr": self.lr * self.d_lr_mult, "betas": self.betas, "amsgrad": self.amsgrad,
+                   **adam_kwargs}
+        return KA2CriticAdam([p for p in critic.parameters() if p.requires_grad], critic=critic,
+                             ema_critic=ema_critic, anchor_min_decay=self.reg_anchor_min_decay,
                              guard_ratio=self.d_guard_ratio, guard_min_steps=self.d_guard_min_steps, **options)
 
     def make_generator_optimizer(self, params, *, latent_table=None, direct_particles=None, **adam_kwargs):
         """Adam over ``params`` (tensors or param groups) whose ``step()`` does the
-        recipe's generator-side work (currently K3P: A2 damping of the sparse
+        recipe's generator-side work (A2 damping of the sparse
         ``latent_table``, e.g. ``prior.z`` alone in its group with beta1 == 0,
         and the direct-particle response for the param group ``direct_particles``).
 
         With neither, ``step()`` is exactly ``Adam.step()``. ``adam_kwargs``
-        override the recipe's ``lr`` and ``betas`` or add Adam options.
+        override the recipe's ``lr``, ``betas`` and ``amsgrad`` or add Adam options.
         """
         from .k3p import K3PGeneratorAdam
-        options = {"lr": self.lr, "betas": self.betas, **adam_kwargs}
+        options = {"lr": self.lr, "betas": self.betas, "amsgrad": self.amsgrad, **adam_kwargs}
         return K3PGeneratorAdam(params, latent_table=latent_table, direct_particles=direct_particles,
                                 latent_max_rate=self.latent_damping_max_rate,
                                 direct_betas=self.direct_particle_betas,
@@ -293,7 +428,7 @@ class Recipe:
 
     @property
     def resolved_network_lr_floor(self):
-        """G/D LR floor (and K3P blend floor f): ``network_lr_floor`` or ``lr_floor``."""
+        """G/D LR floor: ``network_lr_floor`` or ``lr_floor``."""
         return self.lr_floor if self.network_lr_floor is None else self.network_lr_floor
 
     def make_prior_regularizer(self, **overrides):
@@ -312,8 +447,9 @@ class Recipe:
         state), LR schedulers. Move modules to their desired device before
         calling. Frozen parameters are excluded, and a Gaussian/frozen prior
         adds no optimizer group. Additional Adam options, such as ``fused`` or
-        ``eps``, apply to both optimizers. Set learning rates and betas on the
-        recipe. The generator optimizer's groups are ``[generator/encoder,
+        ``eps``, apply to both optimizers. Set learning rates, betas and
+        ``amsgrad`` on the recipe (``amsgrad`` reaches every group: G/E,
+        prior and critic). The generator optimizer's groups are ``[generator/encoder,
         prior]`` (either may be absent); scale the prior group by the prior
         multiplier of ``learning_rate_scales`` and everything else by the
         network one.
@@ -346,14 +482,34 @@ class Recipe:
 
 
 def get_recipe(name="gan", **overrides):
-    """Select a model family with current shared defaults and explicit overrides.
+    """Select a model family or the E22 policy preset with explicit overrides.
 
-    Every family trains with the same formulation; names configure model
-    components only. Use ``Recipe(**saved_fields)`` for resolved checkpoints
-    and ``recipe.replace(name=...)`` for custom report labels.
+    Model families share the default KA2 formulation. ``"e22"`` selects the
+    schedule-free DV12/stationarity policy, row evidence, critic-feature
+    birth/death, learned output noise and served averaging. Its default
+    dimensions are the native 100-Gaussian task's 20,000 particles, latent
+    dimension 2 and batch size 2,048. Set ``num_particles``, ``z_dim``,
+    ``batch_size`` and ``output_noise_std`` explicitly for another task.
+    ``"e22_routed"`` selects the conditional dense-bank ``routed_paired``
+    adaptation. It retains E22's controls and requires an explicit RoutedRows
+    binding, paired observations and separate guard contexts. Its evidence
+    and restructuring law differ from the independent-row formulation.
+    No research configuration file is read at runtime.
+
+    Use ``Recipe(**saved_fields)`` for resolved checkpoints and
+    ``recipe.replace(name=...)`` for custom report labels.
     """
     families = {
         "gan": {},
+        "e22": dict(continuous_policy="dv12", total_steps=None,
+                    lr_control="stationarity", amsgrad=True, reg_coeff=3.0,
+                    input_noise_std=0.0, output_noise_warmup=0.0,
+                    output_noise_mode="learnable", particle_birth_death=True,
+                    row_evidence_gate=True, table_release_rule="anchor",
+                    birth_death_space="critic", birth_death_feature_scale="std",
+                    birth_death_isolation=True, row_evidence_null="scaled",
+                    serve_average=4.0, reopen_signal="optimizer",
+                    reopen_anchor="release"),
         "mog": dict(prior_kind="mog", sigma_rel=.025, num_particles=400),
         "ddgan": dict(model="ddgan", conditioning="ucd", num_classes=4),
         "ddgan_mog": dict(model="ddgan", conditioning="ucd", num_classes=4,
@@ -367,6 +523,7 @@ def get_recipe(name="gan", **overrides):
                          batch_size=64, routing_temperature=.125,
                          distance_reduction="mean"),
     }
+    families["e22_routed"] = {**families["e22"], "row_policy": "routed_paired"}
     if name not in families:
         raise ValueError(f"Unknown recipe {name!r}; choose {', '.join(families)}")
     options = families[name]
@@ -423,7 +580,7 @@ class NetworkLRTransition:
         self.start_step = restored.start_step
 
 
-def learning_rate_scales(step, recipe, *, network_transition=None):
+def learning_rate_scales(step, recipe, *, network_transition=None, controller=None):
     """Return ``(network, prior)`` LR multipliers after ``step`` completed updates.
 
     Generator and critic ("network") follow ``learning_rate_scale`` over
@@ -431,8 +588,27 @@ def learning_rate_scales(step, recipe, *, network_transition=None):
     and then hold; the particle prior follows it over the full budget down to
     ``lr_floor``. When ``network_transition`` is supplied, G/D instead hold at
     full LR until its caller-marked plateau, then decay over its ``decay_steps``.
-    K3P's blend weight is driven by the resulting critic LR.
+    KA2's critic controller is independent of these multipliers.
+
+    A continuous recipe instead reads the current scales from its matching
+    ``controller``; ``step`` is ignored. GANTrainer updates that controller
+    from ordinary training signals. A custom loop must do that explicitly.
+    The network value is the shared base multiplier; DV7 additionally applies
+    ``controller.critic_scale()`` to D. Use ``scale_learning_rates(..., critic=)``
+    to apply all three parameter roles.
     """
+    if getattr(recipe, "lr_control", "mobility") == "stationarity":
+        raise ValueError("lr_control='stationarity' requires per-group policy state; use "
+                         "E22Policy/UpdatePolicy.begin_step() or GANTrainer instead of learning_rate_scales")
+    if recipe.continuous_policy is not None:
+        from .continuous import DataDriftController
+        if not isinstance(controller, DataDriftController) or controller.variant != recipe.continuous_policy:
+            raise ValueError("continuous LR scales require the matching controller; use GANTrainer or pass controller=")
+        if network_transition is not None:
+            raise ValueError("continuous policies do not accept scheduled network transitions")
+        return controller.current_scales()
+    if controller is not None:
+        raise ValueError("controller requires a continuous recipe")
     total = recipe.total_steps
     if network_transition is None:
         horizon = min(total, recipe.network_lr_horizon_cap or total)
@@ -448,19 +624,65 @@ def learning_rate_scales(step, recipe, *, network_transition=None):
     return network, prior
 
 
-def scale_learning_rates(step, recipe, optimizers, base_rates, prior=None, *, network_transition=None):
+def scale_learning_rates(step, recipe, optimizers, base_rates, prior=None, *,
+                         network_transition=None, controller=None, critic=None):
     """Set every group's LR from ``learning_rate_scales(step, recipe)``.
 
     ``base_rates`` holds each optimizer's unscaled group LRs (read them once
     after construction). Groups whose parameters all belong to ``prior`` get
     the prior multiplier; every other group gets the network one, so a custom
-    loop's critic LR follows the same floor K3P's blend weight assumes.
+    loop follows the recipe's split network/prior schedules.
     Pass a ``NetworkLRTransition`` to choose the network decay from validation
     while retaining the ordinary prior schedule. Returns ``(network, prior)``
-    multipliers.
+    multipliers. Continuous recipes require their matching ``controller``.
+    DV7 also requires ``critic``: its module or the exact optimized critic
+    parameters. Critic and prior groups must contain only their own role.
+    D receives the additional critic multiplier; the returned pair remains
+    the shared network/prior multipliers. This helper never observes data or
+    advances the controller: use the same observe_game/observe_real ordering
+    as GANTrainer before applying rates.
     """
-    network, prior_scale = learning_rate_scales(step, recipe, network_transition=network_transition)
+    network, prior_scale = learning_rate_scales(step, recipe, network_transition=network_transition, controller=controller)
     prior_ids = set() if prior is None else {id(p) for p in prior.parameters()}
+    if recipe.continuous_policy in ("dv7", "dv8", "dv9", "dv10", "dv11", "dv12"):
+        from torch import Tensor, nn
+        if critic is None:
+            raise ValueError("asymmetric continuous rates require critic=module or optimized critic parameters")
+        try:
+            parameters = list(critic.parameters() if isinstance(critic, nn.Module) else critic)
+        except TypeError as error:
+            raise TypeError("critic must be a module or iterable of parameters") from error
+        if not parameters or any(not isinstance(p, Tensor) for p in parameters):
+            raise ValueError("critic must identify nonempty optimized parameters")
+        critic_ids = {id(p) for p in parameters}
+        if critic_ids & prior_ids:
+            raise ValueError("critic and prior parameter roles overlap")
+        optimizers, base_rates = tuple(optimizers), tuple(base_rates)
+        if len(optimizers) != len(base_rates):
+            raise ValueError("base_rates must match every optimizer")
+        pending, found = [], set()
+        critic_scale = controller.critic_scale() if recipe.critic_payoff_damping else 1.
+        for optimizer, rates in zip(optimizers, base_rates):
+            if len(optimizer.param_groups) != len(rates):
+                raise ValueError("base_rates must match every optimizer group")
+            for group, rate in zip(optimizer.param_groups, rates):
+                ids = {id(p) for p in group["params"]}
+                if not ids or (ids & critic_ids and not ids <= critic_ids):
+                    raise ValueError("critic parameters must occupy complete nonempty groups")
+                if ids & prior_ids and not ids <= prior_ids:
+                    raise ValueError("prior parameters must occupy complete groups")
+                if getattr(optimizer, "critic", None) is not None and not ids <= critic_ids:
+                    raise ValueError("critic role does not match the critic optimizer")
+                found.update(ids & critic_ids)
+                value = rate * (prior_scale if ids <= prior_ids else network)
+                if ids <= critic_ids:
+                    value *= critic_scale
+                pending.append((group, value))
+        if found != critic_ids:
+            raise ValueError("critic parameters must all belong to the supplied optimizers")
+        for group, value in pending:
+            group["lr"] = value
+        return network, prior_scale
     for optimizer, rates in zip(optimizers, base_rates):
         for group, rate in zip(optimizer.param_groups, rates):
             is_prior = bool(prior_ids) and all(id(p) in prior_ids for p in group["params"])
