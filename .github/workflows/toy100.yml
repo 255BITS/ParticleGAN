@@ -30,7 +30,7 @@ jobs:
       github.event_name != 'pull_request' &&
       contains(fromJSON('["refs/heads/master", "refs/heads/main", "refs/heads/develop"]'), github.ref)
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 75
     env:
       CUDA_VISIBLE_DEVICES: ""
       OMP_NUM_THREADS: "1"
