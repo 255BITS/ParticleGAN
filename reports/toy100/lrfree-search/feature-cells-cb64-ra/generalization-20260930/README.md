@@ -1,94 +1,129 @@
-# Automatic feature cells: qualification and distribution shifts
+# ParticleGAN Atlas: qualification and convergence
 
-This is the implementation and validation follow-up in [PR223](https://github.com/255BITS/ParticleGAN/pull/223),
-based on [PR155](https://github.com/255BITS/ParticleGAN/pull/155) at `cabe2084`.
-Use [`ra13-settled.json`](../../../../../configs/100gaussians/ra13-settled.json)
-with your own models, initialization, population, latent width, batch size, and
-data stream; see the [package guide](../../../../../docs/feature-cells.md).
-RA13 through RA17 use identical configuration bytes. Their names identify
-successive implementation repairs.
+Atlas adds local population checks and guarded reopening to
+[PR155’s E22](https://github.com/255BITS/ParticleGAN/pull/155) at `cabe2084`.
+It is implemented in [PR223](https://github.com/255BITS/ParticleGAN/pull/223).
+Use [`atlas.json`](../../../../../configs/100gaussians/atlas.json) with your
+own models, initialization, population, latent width, batch size, and data
+stream. The [illustrated guide](../../../../../docs/atlas.md) explains E22,
+the changes, their advantages, and their limits.
 
-**Qualification: 19/19 original quality gates pass; Toy passes; MNIST matches
-E22 at all 10 metric and learning-rate checkpoints.** The latest merged source
-also passes the actual CUDA suite and strict checkpoint replays.
-The [final qualification](release-prep/final-v4-attempt1/QUALIFICATION.md)
-and [machine-readable receipt](release-prep/final-v4-attempt1/QUALIFICATION.json)
-record original execution labels and the source proofs used below.
+**Atlas passes all 19 original quality gates and the Toy gate.** On the original
+MNIST fixture it improves the recorded embedding metrics over current PR155
+E22; MNIST has no separate numerical acceptance threshold. The latest merged
+source passes the full CUDA-visible suite and strict checkpoint replays.
 
-## What the package does
+## Formulation and use
 
-The caller supplies the generator and discriminator. ParticleGAN manages a
-learned latent population and monitors the training game. This configuration
-selects feature cells when the population can resolve the evidence budget and
-the output has at most eight raw coordinates. Other cases retain existing kNN
-or representation controls, including MNIST. Selection uses capabilities
-without reading task names or quality scores.
+E22 already learns the latent particle table alongside the generator, adapts
+rates using optimizer history, balances population mass in critic features,
+checks support, and reopens after optimizer shocks. Output noise, critic
+regularization, averaged serving, and caller-owned training APIs are shared.
 
-Feature cells monitor occupancy in critic features and conditional output
-moments. Population controls can rebalance counts, introduce particles from
-certified real anchors, and correct group means. The optional settled R1 guard
-requires a network contraction witness before reopening a settled game. After
-an actual R1 fire, mean correction can use occupied frozen groups; missing
-groups keep zero direction and weight, without redistributing their mass.
-This fixes the empty-group veto observed after a distribution shift.
+Atlas adds temporary regions fitted from recent real critic features. Its
+eligible feature-cell path checks regional counts and conditional raw-output
+averages, with separate count, placement, and real-anchor support actions.
+Placement repair uses checked row reallocation/cloning within groups. Birth
+proposals create latent codes tested through G; they do not copy real outputs.
+Capability selection requires enough particles and at most eight raw output
+coordinates. Other shapes and custom/routed models retain their existing paths.
 
-Other repairs cover CPU optimizer isolation, repeated tensor references during
-checkpoint transfer, explicit CPU placement of planning operations, and atomic
-rejection of malformed initialized FIFO shapes. Ordinary package defaults
-remain unchanged; the recommended configuration explicitly enables these controls.
+The optional settled guard qualifies optimizer reopening with a prior network
+contraction witness and rebases known critic-objective transitions. After an
+actual reopen, mean correction can use occupied frozen groups; missing groups
+have zero direction and weight, without redistributing their mass. CPU
+optimizer isolation, explicit CPU planning, alias-preserving checkpoint
+transfer, and atomic shape validation repair the diagnosed execution failures.
 
-## Comparison with the archived RA11 candidate
+See the [implementation guide](../../../../../docs/feature-cells.md) for
+selection, the empirical one-quarter generator/noise base-rate calibration,
+action budgets, serving coherence, and the existing `E22Policy` API.
+`ra13-settled.json` remains a byte-identical historical configuration alias.
 
-| Check | Archived RA11 | Recommended configuration |
+## Current PR155 E22 comparison
+
+The baseline is freshly executed **current PR155 E22**, including optimizer
+reopening and anchor release. Both recipes use the original Toy/MNIST models,
+initialization, data streams, fixed seed, scorers, and 2,000-update budget.
+Atlas retains its original fresh execution labels and checked source bridges.
+
+| Original final metric | PR155 E22 | Atlas |
+| --- | ---: | ---: |
+| Toy noisy-sample precision ↑ | 71.55% | **96.53%** |
+| Toy covered modes | 25/25 | 25/25 |
+| Toy mass total variation ↓ | 0.28455 | **0.05211** |
+| Toy original quality gate | FAIL | **PASS** |
+| MNIST active embedding Fréchet distance ↓ | 1.88097 | **0.54449** |
+| MNIST embedding precision ↑ | 76.76% | **86.91%** |
+| MNIST embedding recall ↑ | 71.92% | **84.72%** |
+| MNIST confident class coverage | 10/10 | 10/10 |
+| Static MNIST reopen events | 1, recorded after 202 completed updates | **0** |
+
+Toy precision increases 24.99 percentage points. MNIST precision increases
+10.16 points and recall 12.79 points. MNIST uses kNN for both recipes; this
+does not demonstrate image-scale feature cells. The recipe comparison includes
+all selected controls and calibration, rather than isolating one cause.
+[Comparison report](mnist/pr155-e22-current/REPORT.md),
+[pinned metrics and inputs](mnist/pr155-e22-current/comparison-closure/COMPARISON.json).
+
+## Watch learning and distribution-shift recovery
+
+![Atlas and current PR155 E22 learning the rotating 100-Gaussian distribution](visualization-pr223-convergence/render/final-media-1/atlas-vs-e22-convergence.gif)
+
+[Full-resolution MP4](visualization-pr223-convergence/render/final-media-1/atlas-vs-e22-convergence.mp4)
+· [Poster](visualization-pr223-convergence/render/final-media-1/poster.png)
+· [Capture validation](visualization-pr223-convergence/closure-v1/DATA-RECEIPT.json)
+
+Fresh `rotated100` runs start from the same particles and models. The target turns 30°
+after updates 500 and 1,000. The animation uses **153 actual observations per
+method**: 4,096 generated points every ten updates, plus two target-jump frames
+that hold the model fixed. The local zoom reveals individual Gaussian fits;
+the synchronized curves show the drops and recovery. Sample clouds
+are not interpolated.
+
+The curves use separate 4,096-point diagnostics. Filled checkpoint markers
+and endpoint scores use the unchanged original **20,000-point acceptance
+draws**, shown below. The common 90% visual guide is illustrative; original
+shift gates require at least 95 modes and quality at least 90% of each
+method’s own update-500 baseline.
+Quality is the fraction of noisy generated points within 0.09 of a target
+center (three Gaussian standard deviations).
+
+| Original 20k draw | PR155 E22 quality / modes | Atlas quality / modes |
 | --- | --- | --- |
-| Toy25 | PASS, 25/25 modes | PASS, 25/25 modes; all 9 post-update score/LR checkpoints match RA11 |
-| Original portability tasks | 8/13 PASS | 13/13 PASS |
-| Static native Gaussian grids | 3/3 PASS | 3/3 PASS |
-| MNIST active embedding distance, lower is better | 40.5444 | 0.5445 |
-| MNIST embedding precision | 28.13% | 86.91% |
-| MNIST embedding recall | 0% | 84.72% |
-| MNIST confident class coverage | 1/10 | 10/10 |
+| 500, initial fit | 88.10% / 100 | **96.09% / 100** |
+| 1,000, after first shift | 83.99% / 100 | **96.09% / 100** |
+| 1,500, after second shift | **94.73% / 100** | 92.59% / 98 |
 
-The [RA11 receipt](../fixes/quality/results/CB64-RA11-regressions.json)
-retains its five portability failures and MNIST regression. MNIST has no
-separate invented acceptance threshold: the new result matches the corrected
-E22 comparator at every recorded checkpoint. Its selected backend is kNN.
-Toy's final noisy-sample precision is 96.53%, with mass TV 0.05211.
+**Both methods pass both original shift gates.** Atlas improves the initial
+and first-shift endpoints by 7.99 and 12.10 percentage points. E22 finishes
+2.14 points higher and covers two more modes. The fresh paired capture closes
+302 observation-preservation checks and reproduces Atlas’s retained original
+checkpoint state, excluding only observational elapsed-time metadata.
 
-## Moving distribution: two rotations, every 500 updates
+On the 4k diagnostic, Atlas first reaches the shared 90% guide at update 220
+initially and 290 updates after the first shift; E22 does not reach it within
+either 500-update phase. Both first reach it 330 updates after the second
+shift. These are recorded crossing times, not a speed or scaling-law claim.
 
-The existing task trains for 1,500 updates and rotates the target by 30 degrees
-after each 500-update period. Each post-rotation gate requires at least 95 modes
-and quality at least 90% of the step-500 baseline. Quality (HQ) is the fraction
-of noisy primary samples within the scorer's radius of a target center.
-The original tasks, models, seed, streams, scorers, and thresholds are preserved.
+## Original quality qualification
 
-![Observed rotated-grid training before and after the recovery repair](visualization-pr223/rotated100-shift-comparison.gif)
+| Original task group | Atlas |
+| --- | --- |
+| Portability | 13/13 PASS |
+| Static native Gaussian grids | 3/3 PASS |
+| Moving native Gaussian grids | 3/3 PASS, both turns |
+| Toy25 learned model | PASS, 25/25 modes |
+| Ring-shift diagnostic, 4,600 updates | PASS; final HQ 99.51%, 8/8 modes |
 
-The GIF compares saved observations from the failed RA14 run and fresh RA15
-repair at steps 0, 500, 1,000, and 1,500. It plots 4,096 generated points per
-observation. Captions and scores use the separate original 20,000-point
-acceptance draws. Particle movement between observations is not interpolated.
-[Visualization provenance](visualization-pr223/README.md).
-
-| Moving task | Before repair: final HQ / modes | After repair: final HQ / modes | Gate before → after |
-| --- | --- | --- | --- |
-| Grid100 | 96.24% / 100 | 96.20% / 100 | PASS → PASS |
-| Rotated100 | 85.57% / 99 | 92.59% / 98 | FAIL → PASS |
-| Staggered100 | 97.28% / 100 | 94.76% / 100 | PASS → PASS |
-
-Rotated100 improves by **7.02 percentage points**; its unchanged requirement is
-86.481% and at least 95 modes. The other two final HQ scores decrease while
-remaining above their original thresholds. All three repaired tasks pass both
-turns. The [old receipts](validation-ra14-r2/scoreboard-moving.json) retain the
-failure; the [fresh repaired receipts](validation-ra15/scoreboard-moving.json)
-record the three passes.
-
-The separate 4,600-update ring-shift task also passes its original quality,
-acceptance, and source-validity checks: final HQ 99.51%, all eight modes,
-419/460 passing observations, and a final streak of 199. A paired rotated-grid
-diagnostic resumed from step 1,000 improves final HQ from 85.57% to 89.84%
-with 99 modes. This diagnostic is separate from the fresh runs in the table.
+PR155 E22 already reports the 13/13 portability, 3/3 static native, and 3/3
+moving passes. Atlas preserves those pass counts. Historical development
+failures are retained as provenance, not used as the current E22 baseline.
+The [sealed qualification](release-prep/final-v4-attempt1/QUALIFICATION.md)
+and [machine-readable receipt](release-prep/final-v4-attempt1/QUALIFICATION.json)
+keep their original execution labels and comparator identities. The earlier
+learned comparator there disabled reopening; the fresh current-E22 comparison
+above supplements that immutable record.
 
 ## Latest source verification
 
@@ -119,7 +154,8 @@ state comparisons; the native branch also matches the pinned original control.
 
 The qualification preserves **15 fresh RA14 quality executions and four fresh
 RA15 executions**, rather than relabeling them as RA17 training runs. Toy and
-MNIST retain their fresh 2,000-update RA13 execution labels.
+MNIST retain their fresh 2,000-update RA13 execution labels. The new dense
+moving comparison freshly executes both current packages.
 
 - RA14 repairs checkpoint transfer only. RA15's occupied-group recovery is
   inactive on retained zero-fire or kNN runs. All three moving tasks and the
@@ -145,15 +181,17 @@ the shared configuration SHA is
 
 ## Recommendation and scope
 
-Use the shared configuration for the recorded tasks and as an explicit starting
+Use Atlas for the recorded tasks and as an explicit starting
 point with caller-owned models. Feature-cell selection is qualified for these
 low-dimensional tasks; MNIST's kNN result does not establish image-scale
-feature-cell behavior. Larger models still need their own memory, throughput,
-and quality measurements. Fixed-seed results do not establish scaling laws or
-robustness over seeds.
+feature-cell behavior. Extra checks cost computation: Toy took longer with
+Atlas, while MNIST took less time in the recorded separate runs. Larger models
+still need their own memory, throughput, and quality measurements. Fixed-seed
+results do not establish scaling laws or robustness over seeds.
 
 The archive retains failed candidates, preparation errors, the RA13 checkpoint
 alias failure, and the RA14 rotated-grid failure. Sealed receipts keep their
 original statuses. Raw checkpoints, datasets, and sample clouds stay local,
-with paths and hashes in the manifests. The user-requested GIF exports saved
-observations.
+with paths and hashes in the manifests. The published media exports actual
+observations; the explanatory infographics use schematic dots. Earlier sparse
+visualizations remain intact.

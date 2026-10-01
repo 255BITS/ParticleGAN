@@ -1,11 +1,12 @@
-# Automatic feature cells and the settled guard
+# ParticleGAN Atlas: automatic feature cells and the settled guard
 
-[`ra13-settled.json`](../configs/100gaussians/ra13-settled.json) combines the
+[`atlas.json`](../configs/100gaussians/atlas.json) combines the
 feature-cell population controls with the current caller-owned policy API and
 the optional [settled R1 guard](r1-rotation.md#optional-guard-for-a-settled-game).
-The configuration name identifies the shared training settings. Checkpoint
-restoration and recovery after an R1 fire have been repaired with these same
-settings.
+The earlier `ra13-settled.json` file is a byte-identical historical alias.
+Start with the [illustrated E22 → Atlas guide](atlas.md) for the formulation
+and comparison with PR155. Checkpoint restoration and recovery after an R1
+fire have been repaired with these same settings.
 
 ## Use with caller-owned models
 
@@ -14,7 +15,7 @@ import json
 from pathlib import Path
 from particlegan import GANTrainer, Recipe
 
-fields = json.loads(Path("configs/100gaussians/ra13-settled.json").read_text())
+fields = json.loads(Path("configs/100gaussians/atlas.json").read_text())
 fields.update(num_particles=N, z_dim=Z, batch_size=B)
 recipe = Recipe(**fields)
 # Construct and initialize G, D, and prior for your application first.

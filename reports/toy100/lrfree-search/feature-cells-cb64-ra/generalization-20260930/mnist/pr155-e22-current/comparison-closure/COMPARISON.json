@@ -1,0 +1,3498 @@
+{
+  "caveats": [
+    "MNIST uses existing kNN controls in both recipes.",
+    "No numerical MNIST acceptance threshold added.",
+    "Recorded timings are actual observations, not a controlled speed claim.",
+    "Historical E22-without-reopening remains distinct.",
+    "Atlas original fresh execution labels and source/replay bridges remain unchanged."
+  ],
+  "created_utc": "2026-10-01T03:17:29.780162+00:00",
+  "current_e22_config_sha256": "03a8c7a8d35512a4e06735c37c375895f6ecc24011c4411a606eddd92f4c202c",
+  "current_e22_optimizer_reopening": true,
+  "current_e22_package_sha256": "c174ba0b805cc8e49ca40ebbea11785bb908f3ea32615afdf2ecb43e77221316",
+  "fixtures": {
+    "mnist": {
+      "atlas_actual_training_seconds": 91.04781805025414,
+      "atlas_execution": "fresh2000, RA13-settled; current-source bridge/replay retained",
+      "atlas_fires": 0,
+      "atlas_gate": null,
+      "atlas_metrics": {
+        "active_embedding": {
+          "embedding_frechet": 0.5444880363760234,
+          "embedding_precision": 0.869140625,
+          "embedding_recall": 0.84716796875
+        },
+        "class_mass_tv": 0.03639648437499999,
+        "confident_class_coverage": 10,
+        "confident_class_mass": [
+          0.082275390625,
+          0.09033203125,
+          0.064453125,
+          0.065185546875,
+          0.079345703125,
+          0.066162109375,
+          0.074462890625,
+          0.070556640625,
+          0.05908203125,
+          0.07568359375
+        ],
+        "confident_fraction": 0.7275390625,
+        "mean_classifier_confidence": 0.9037254452705383,
+        "pixel_clipping_fraction": 0.40906819701194763,
+        "predicted_class_mass": [
+          0.096923828125,
+          0.099853515625,
+          0.0869140625,
+          0.1015625,
+          0.109130859375,
+          0.08984375,
+          0.09814453125,
+          0.097412109375,
+          0.102783203125,
+          0.117431640625
+        ],
+        "raw_embedding": {
+          "embedding_frechet": 6.852170897247333,
+          "embedding_precision": 0.8798828125,
+          "embedding_recall": 0.85546875
+        }
+      },
+      "atlas_reopen_events": [],
+      "atlas_result": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/training/mnist/RA13-settled/result.json",
+      "atlas_started_at": "2026-09-30T21:55:01.492026+00:00",
+      "checkpoint_comparison": [
+        {
+          "atlas_lrs": [
+            [
+              0.00425,
+              0.0085,
+              0.00425
+            ],
+            [
+              0.00425
+            ]
+          ],
+          "atlas_metrics": {
+            "active_embedding": {
+              "embedding_frechet": 56.842754487912686,
+              "embedding_precision": 1.0,
+              "embedding_recall": 0.0
+            },
+            "class_mass_tv": 0.8865000000000001,
+            "confident_class_coverage": 0,
+            "confident_class_mass": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "confident_fraction": 0.0,
+            "mean_classifier_confidence": 0.8414809703826904,
+            "pixel_clipping_fraction": 0.0,
+            "predicted_class_mass": [
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "raw_embedding": {
+              "embedding_frechet": 887.1634156362575,
+              "embedding_precision": 1.0,
+              "embedding_recall": 0.0
+            }
+          },
+          "atlas_output_sigma": 0.029000001028180122,
+          "atlas_surprise": {
+            "anchor_event": null,
+            "anchor_events": 0,
+            "armed": true,
+            "fires": 0,
+            "last_ratio": null,
+            "log": [],
+            "streak": 0
+          },
+          "current_e22_lrs": [
+            [
+              0.00425,
+              0.0085,
+              0.00425
+            ],
+            [
+              0.00425
+            ]
+          ],
+          "current_e22_metrics": {
+            "active_embedding": {
+              "embedding_frechet": 56.842754487912686,
+              "embedding_precision": 1.0,
+              "embedding_recall": 0.0
+            },
+            "class_mass_tv": 0.8865000000000001,
+            "confident_class_coverage": 0,
+            "confident_class_mass": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "confident_fraction": 0.0,
+            "mean_classifier_confidence": 0.8414809703826904,
+            "pixel_clipping_fraction": 0.0,
+            "predicted_class_mass": [
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "raw_embedding": {
+              "embedding_frechet": 887.1634156362575,
+              "embedding_precision": 1.0,
+              "embedding_recall": 0.0
+            }
+          },
+          "current_e22_output_sigma": 0.029000001028180122,
+          "current_e22_surprise": {
+            "anchor_event": null,
+            "anchor_events": 0,
+            "armed": true,
+            "fires": 0,
+            "last_ratio": null,
+            "log": [],
+            "streak": 0
+          },
+          "lrs_identical": true,
+          "metrics_identical": true,
+          "step": 0
+        },
+        {
+          "atlas_lrs": [
+            [
+              0.00425,
+              0.0085,
+              0.00425
+            ],
+            [
+              4.6948610480228596e-05
+            ]
+          ],
+          "atlas_metrics": {
+            "active_embedding": {
+              "embedding_frechet": 199.7914996879549,
+              "embedding_precision": 0.0,
+              "embedding_recall": 0.0
+            },
+            "class_mass_tv": 0.8865000000000001,
+            "confident_class_coverage": 1,
+            "confident_class_mass": [
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "confident_fraction": 1.0,
+            "mean_classifier_confidence": 0.9892622828483582,
+            "pixel_clipping_fraction": 0.49996668100357056,
+            "predicted_class_mass": [
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "raw_embedding": {
+              "embedding_frechet": 2978.7618780314374,
+              "embedding_precision": 0.0,
+              "embedding_recall": 0.0
+            }
+          },
+          "atlas_output_sigma": 0.051545627415180206,
+          "atlas_surprise": {
+            "anchor_event": null,
+            "anchor_events": 0,
+            "armed": true,
+            "fires": 0,
+            "last_ratio": 1.010235097508746,
+            "log": [],
+            "streak": 0
+          },
+          "current_e22_lrs": [
+            [
+              0.00425,
+              0.0085,
+              0.00425
+            ],
+            [
+              4.6948610480228596e-05
+            ]
+          ],
+          "current_e22_metrics": {
+            "active_embedding": {
+              "embedding_frechet": 199.7914996879549,
+              "embedding_precision": 0.0,
+              "embedding_recall": 0.0
+            },
+            "class_mass_tv": 0.8865000000000001,
+            "confident_class_coverage": 1,
+            "confident_class_mass": [
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "confident_fraction": 1.0,
+            "mean_classifier_confidence": 0.9892622828483582,
+            "pixel_clipping_fraction": 0.49996668100357056,
+            "predicted_class_mass": [
+              0.0,
+              1.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "raw_embedding": {
+              "embedding_frechet": 2978.7618780314374,
+              "embedding_precision": 0.0,
+              "embedding_recall": 0.0
+            }
+          },
+          "current_e22_output_sigma": 0.051545627415180206,
+          "current_e22_surprise": {
+            "anchor_event": null,
+            "anchor_events": 0,
+            "armed": true,
+            "fires": 0,
+            "last_ratio": 1.010235097508746,
+            "log": [],
+            "streak": 0
+          },
+          "lrs_identical": true,
+          "metrics_identical": true,
+          "step": 100
+        },
+        {
+          "atlas_lrs": [
+            [
+              0.00425,
+              0.0085,
+              0.00425
+            ],
+            [
+              0.0003851987645602218
+            ]
+          ],
+          "atlas_metrics": {
+            "active_embedding": {
+              "embedding_frechet": 29.939259225437077,
+              "embedding_precision": 0.97314453125,
+              "embedding_recall": 0.0224609375
+            },
+            "class_mass_tv": 0.72696328125,
+            "confident_class_coverage": 1,
+            "confident_class_mass": [
+              0.00537109375,
+              0.0009765625,
+              0.000244140625,
+              0.000732421875,
+              0.00390625,
+              0.0009765625,
+              0.0,
+              0.0,
+              0.619140625,
+              0.0
+            ],
+            "confident_fraction": 0.63134765625,
+            "mean_classifier_confidence": 0.8566542267799377,
+            "pixel_clipping_fraction": 0.4792511463165283,
+            "predicted_class_mass": [
+              0.1123046875,
+              0.005859375,
+              0.00341796875,
+              0.009521484375,
+              0.023193359375,
+              0.019775390625,
+              0.00390625,
+              0.00244140625,
+              0.81005859375,
+              0.009521484375
+            ],
+            "raw_embedding": {
+              "embedding_frechet": 443.55523321515864,
+              "embedding_precision": 0.97607421875,
+              "embedding_recall": 0.02490234375
+            }
+          },
+          "atlas_output_sigma": 0.06308090686798096,
+          "atlas_surprise": {
+            "anchor_event": null,
+            "anchor_events": 0,
+            "armed": true,
+            "fires": 0,
+            "last_ratio": 1.332830234390875,
+            "log": [],
+            "streak": 0
+          },
+          "current_e22_lrs": [
+            [
+              0.00425,
+              0.0085,
+              0.00425
+            ],
+            [
+              0.0003369766325319558
+            ]
+          ],
+          "current_e22_metrics": {
+            "active_embedding": {
+              "embedding_frechet": 33.03764734734445,
+              "embedding_precision": 0.68994140625,
+              "embedding_recall": 0.00439453125
+            },
+            "class_mass_tv": 0.700437109375,
+            "confident_class_coverage": 2,
+            "confident_class_mass": [
+              0.0,
+              0.000244140625,
+              0.0009765625,
+              0.00927734375,
+              0.0,
+              0.01025390625,
+              0.0,
+              0.0,
+              0.037841796875,
+              0.0
+            ],
+            "confident_fraction": 0.05859375,
+            "mean_classifier_confidence": 0.6629958152770996,
+            "pixel_clipping_fraction": 0.49397340416908264,
+            "predicted_class_mass": [
+              0.0,
+              0.002197265625,
+              0.006591796875,
+              0.21826171875,
+              0.000244140625,
+              0.099853515625,
+              0.00048828125,
+              0.000244140625,
+              0.669921875,
+              0.002197265625
+            ],
+            "raw_embedding": {
+              "embedding_frechet": 528.5464475946325,
+              "embedding_precision": 0.7939453125,
+              "embedding_recall": 0.0048828125
+            }
+          },
+          "current_e22_output_sigma": 0.06329827010631561,
+          "current_e22_surprise": {
+            "anchor_event": null,
+            "anchor_events": 0,
+            "armed": false,
+            "fires": 1,
+            "last_ratio": 0.39395874370467987,
+            "log": [
+              [
+                202,
+                3.984
+              ]
+            ],
+            "streak": 0
+          },
+          "lrs_identical": false,
+          "metrics_identical": false,
+          "step": 250
+        },
+        {
+          "atlas_lrs": [
+            [
+              0.00425,
+              0.0085,
+              0.00425
+            ],
+            [
+              0.0021269081480231023
+            ]
+          ],
+          "atlas_metrics": {
+            "active_embedding": {
+              "embedding_frechet": 6.009637971426095,
+              "embedding_precision": 0.6884765625,
+              "embedding_recall": 0.36669921875
+            },
+            "class_mass_tv": 0.254496875,
+            "confident_class_coverage": 8,
+            "confident_class_mass": [
+              0.01416015625,
+              0.039794921875,
+              0.033203125,
+              0.032958984375,
+              0.05224609375,
+              0.0078125,
+              0.0,
+              0.02392578125,
+              0.066162109375,
+              0.010009765625
+            ],
+            "confident_fraction": 0.2802734375,
+            "mean_classifier_confidence": 0.7334718108177185,
+            "pixel_clipping_fraction": 0.4106859266757965,
+            "predicted_class_mass": [
+              0.03515625,
+              0.112060546875,
+              0.1201171875,
+              0.134033203125,
+              0.122314453125,
+              0.03759765625,
+              0.00830078125,
+              0.079833984375,
+              0.27783203125,
+              0.07275390625
+            ],
+            "raw_embedding": {
+              "embedding_frechet": 97.74682319799126,
+              "embedding_precision": 0.6826171875,
+              "embedding_recall": 0.34716796875
+            }
+          },
+          "atlas_output_sigma": 0.028999999165534973,
+          "atlas_surprise": {
+            "anchor_event": null,
+            "anchor_events": 0,
+            "armed": true,
+            "fires": 0,
+            "last_ratio": 0.8561777020305131,
+            "log": [],
+            "streak": 0
+          },
+          "current_e22_lrs": [
+            [
+              0.00425,
+              0.0085,
+              0.00425
+            ],
+            [
+              0.0001768191531392451
+            ]
+          ],
+          "current_e22_metrics": {
+            "active_embedding": {
+              "embedding_frechet": 15.847996095943095,
+              "embedding_precision": 0.68408203125,
+              "embedding_recall": 0.1552734375
+            },
+            "class_mass_tv": 0.351032421875,
+            "confident_class_coverage": 6,
+            "confident_class_mass": [
+              0.00048828125,
+              0.0166015625,
+              0.0185546875,
+              0.0009765625,
+              0.05517578125,
+              0.008056640625,
+              0.0,
+              0.022216796875,
+              0.021240234375,
+              0.016845703125
+            ],
+            "confident_fraction": 0.16015625,
+            "mean_classifier_confidence": 0.6761094331741333,
+            "pixel_clipping_fraction": 0.4980938732624054,
+            "predicted_class_mass": [
+              0.00390625,
+              0.07421875,
+              0.13720703125,
+              0.020751953125,
+              0.1943359375,
+              0.047607421875,
+              0.002197265625,
+              0.1005859375,
+              0.22314453125,
+              0.196044921875
+            ],
+            "raw_embedding": {
+              "embedding_frechet": 255.621559314014,
+              "embedding_precision": 0.73486328125,
+              "embedding_recall": 0.15283203125
+            }
+          },
+          "current_e22_output_sigma": 0.028999999165534973,
+          "current_e22_surprise": {
+            "anchor_event": null,
+            "anchor_events": 0,
+            "armed": true,
+            "fires": 1,
+            "last_ratio": 0.7346637747341005,
+            "log": [
+              [
+                202,
+                3.984
+              ]
+            ],
+            "streak": 0
+          },
+          "lrs_identical": false,
+          "metrics_identical": false,
+          "step": 500
+        },
+        {
+          "atlas_lrs": [
+            [
+              0.00425,
+              0.0085,
+              0.00425
+            ],
+            [
+              0.003809167358263965
+            ]
+          ],
+          "atlas_metrics": {
+            "active_embedding": {
+              "embedding_frechet": 4.015096434977174,
+              "embedding_precision": 0.73046875,
+              "embedding_recall": 0.6455078125
+            },
+            "class_mass_tv": 0.179185546875,
+            "confident_class_coverage": 9,
+            "confident_class_mass": [
+              0.024658203125,
+              0.068115234375,
+              0.0283203125,
+              0.090576171875,
+              0.052001953125,
+              0.0205078125,
+              0.004638671875,
+              0.023193359375,
+              0.02734375,
+              0.03955078125
+            ],
+            "confident_fraction": 0.37890625,
+            "mean_classifier_confidence": 0.7733424305915833,
+            "pixel_clipping_fraction": 0.4091644287109375,
+            "predicted_class_mass": [
+              0.053466796875,
+              0.124267578125,
+              0.09765625,
+              0.21728515625,
+              0.107421875,
+              0.070068359375,
+              0.025146484375,
+              0.0634765625,
+              0.11669921875,
+              0.12451171875
+            ],
+            "raw_embedding": {
+              "embedding_frechet": 63.00502677888164,
+              "embedding_precision": 0.73828125,
+              "embedding_recall": 0.62353515625
+            }
+          },
+          "atlas_output_sigma": 0.028999999165534973,
+          "atlas_surprise": {
+            "anchor_event": null,
+            "anchor_events": 0,
+            "armed": true,
+            "fires": 0,
+            "last_ratio": 1.113483463409959,
+            "log": [],
+            "streak": 0
+          },
+          "current_e22_lrs": [
+            [
+              0.00425,
+              0.0085,
+              0.00425
+            ],
+            [
+              0.00010365158087793909
+            ]
+          ],
+          "current_e22_metrics": {
+            "active_embedding": {
+              "embedding_frechet": 18.511378319939077,
+              "embedding_precision": 0.4560546875,
+              "embedding_recall": 0.1494140625
+            },
+            "class_mass_tv": 0.4503960937500001,
+            "confident_class_coverage": 3,
+            "confident_class_mass": [
+              0.00048828125,
+              0.028076171875,
+              0.005859375,
+              0.00244140625,
+              0.021484375,
+              0.001953125,
+              0.00048828125,
+              0.004150390625,
+              0.16357421875,
+              0.0
+            ],
+            "confident_fraction": 0.228515625,
+            "mean_classifier_confidence": 0.7037390470504761,
+            "pixel_clipping_fraction": 0.49785876274108887,
+            "predicted_class_mass": [
+              0.003173828125,
+              0.110595703125,
+              0.05029296875,
+              0.046630859375,
+              0.14404296875,
+              0.02392578125,
+              0.015625,
+              0.1005859375,
+              0.501953125,
+              0.003173828125
+            ],
+            "raw_embedding": {
+              "embedding_frechet": 291.13960300738825,
+              "embedding_precision": 0.451171875,
+              "embedding_recall": 0.15380859375
+            }
+          },
+          "current_e22_output_sigma": 0.028999999165534973,
+          "current_e22_surprise": {
+            "anchor_event": null,
+            "anchor_events": 0,
+            "armed": true,
+            "fires": 1,
+            "last_ratio": 0.9078793257006079,
+            "log": [
+              [
+                202,
+                3.984
+              ]
+            ],
+            "streak": 0
+          },
+          "lrs_identical": false,
+          "metrics_identical": false,
+          "step": 750
+        },
+        {
+          "atlas_lrs": [
+            [
+              0.00425,
+              0.0085,
+              0.00425
+            ],
+            [
+              0.004041813558069921
+            ]
+          ],
+          "atlas_metrics": {
+            "active_embedding": {
+              "embedding_frechet": 1.7988102146091762,
+              "embedding_precision": 0.7509765625,
+              "embedding_recall": 0.75830078125
+            },
+            "class_mass_tv": 0.129111328125,
+            "confident_class_coverage": 10,
+            "confident_class_mass": [
+              0.051513671875,
+              0.072265625,
+              0.030517578125,
+              0.055908203125,
+              0.06005859375,
+              0.02490234375,
+              0.036865234375,
+              0.037109375,
+              0.044921875,
+              0.0859375
+            ],
+            "confident_fraction": 0.5,
+            "mean_classifier_confidence": 0.8177099227905273,
+            "pixel_clipping_fraction": 0.4073869287967682,
+            "predicted_class_mass": [
+              0.07421875,
+              0.107666015625,
+              0.081787109375,
+              0.132080078125,
+              0.112548828125,
+              0.06591796875,
+              0.07177734375,
+              0.072021484375,
+              0.119873046875,
+              0.162109375
+            ],
+            "raw_embedding": {
+              "embedding_frechet": 24.56842840219565,
+              "embedding_precision": 0.7802734375,
+              "embedding_recall": 0.76123046875
+            }
+          },
+          "atlas_output_sigma": 0.028999999165534973,
+          "atlas_surprise": {
+            "anchor_event": null,
+            "anchor_events": 0,
+            "armed": true,
+            "fires": 0,
+            "last_ratio": 1.1073450701020464,
+            "log": [],
+            "streak": 0
+          },
+          "current_e22_lrs": [
+            [
+              0.00425,
+              0.0085,
+              0.00425
+            ],
+            [
+              0.00028512939714711496
+            ]
+          ],
+          "current_e22_metrics": {
+            "active_embedding": {
+              "embedding_frechet": 14.393982179756136,
+              "embedding_precision": 0.58740234375,
+              "embedding_recall": 0.2109375
+            },
+            "class_mass_tv": 0.394714453125,
+            "confident_class_coverage": 6,
+            "confident_class_mass": [
+              0.0009765625,
+              0.0634765625,
+              0.0576171875,
+              0.0205078125,
+              0.011474609375,
+              0.005859375,
+              0.0,
+              0.011474609375,
+              0.0205078125,
+              0.00048828125
+            ],
+            "confident_fraction": 0.1923828125,
+            "mean_classifier_confidence": 0.675365686416626,
+            "pixel_clipping_fraction": 0.49667730927467346,
+            "predicted_class_mass": [
+              0.0068359375,
+              0.186767578125,
+              0.276123046875,
+              0.171630859375,
+              0.068359375,
+              0.03125,
+              0.0107421875,
+              0.0615234375,
+              0.17529296875,
+              0.011474609375
+            ],
+            "raw_embedding": {
+              "embedding_frechet": 224.31778247774298,
+              "embedding_precision": 0.6181640625,
+              "embedding_recall": 0.19384765625
+            }
+          },
+          "current_e22_output_sigma": 0.028999999165534973,
+          "current_e22_surprise": {
+            "anchor_event": null,
+            "anchor_events": 0,
+            "armed": true,
+            "fires": 1,
+            "last_ratio": 0.9552760339190515,
+            "log": [
+              [
+                202,
+                3.984
+              ]
+            ],
+            "streak": 0
+          },
+          "lrs_identical": false,
+          "metrics_identical": false,
+          "step": 1000
+        },
+        {
+          "atlas_lrs": [
+            [
+              0.00425,
+              0.0085,
+              0.00425
+            ],
+            [
+              0.0030680817882160058
+            ]
+          ],
+          "atlas_metrics": {
+            "active_embedding": {
+              "embedding_frechet": 1.1811586516979844,
+              "embedding_precision": 0.787109375,
+              "embedding_recall": 0.83740234375
+            },
+            "class_mass_tv": 0.09964335937499999,
+            "confident_class_coverage": 10,
+            "confident_class_mass": [
+              0.05615234375,
+              0.07666015625,
+              0.0537109375,
+              0.055908203125,
+              0.06298828125,
+              0.0419921875,
+              0.071044921875,
+              0.052978515625,
+              0.060546875,
+              0.091064453125
+            ],
+            "confident_fraction": 0.623046875,
+            "mean_classifier_confidence": 0.8669347763061523,
+            "pixel_clipping_fraction": 0.40667444467544556,
+            "predicted_class_mass": [
+              0.07421875,
+              0.1015625,
+              0.08837890625,
+              0.097412109375,
+              0.098876953125,
+              0.0712890625,
+              0.09912109375,
+              0.0751953125,
+              0.136962890625,
+              0.156982421875
+            ],
+            "raw_embedding": {
+              "embedding_frechet": 17.448669121660714,
+              "embedding_precision": 0.796875,
+              "embedding_recall": 0.8408203125
+            }
+          },
+          "atlas_output_sigma": 0.028999999165534973,
+          "atlas_surprise": {
+            "anchor_event": null,
+            "anchor_events": 0,
+            "armed": true,
+            "fires": 0,
+            "last_ratio": 0.9888997323084674,
+            "log": [],
+            "streak": 0
+          },
+          "current_e22_lrs": [
+            [
+              0.00425,
+              0.0085,
+              0.00425
+            ],
+            [
+              0.0005991789898524287
+            ]
+          ],
+          "current_e22_metrics": {
+            "active_embedding": {
+              "embedding_frechet": 10.071581374171153,
+              "embedding_precision": 0.5791015625,
+              "embedding_recall": 0.13037109375
+            },
+            "class_mass_tv": 0.2823828125,
+            "confident_class_coverage": 5,
+            "confident_class_mass": [
+              0.01318359375,
+              0.09423828125,
+              0.00439453125,
+              0.0068359375,
+              0.0498046875,
+              0.0126953125,
+              0.000244140625,
+              0.009521484375,
+              0.047607421875,
+              0.009033203125
+            ],
+            "confident_fraction": 0.24755859375,
+            "mean_classifier_confidence": 0.7091850638389587,
+            "pixel_clipping_fraction": 0.4005509912967682,
+            "predicted_class_mass": [
+              0.065185546875,
+              0.188232421875,
+              0.060302734375,
+              0.0546875,
+              0.147705078125,
+              0.066162109375,
+              0.01171875,
+              0.049560546875,
+              0.23779296875,
+              0.11865234375
+            ],
+            "raw_embedding": {
+              "embedding_frechet": 156.74343241579948,
+              "embedding_precision": 0.57080078125,
+              "embedding_recall": 0.1181640625
+            }
+          },
+          "current_e22_output_sigma": 0.028999999165534973,
+          "current_e22_surprise": {
+            "anchor_event": null,
+            "anchor_events": 0,
+            "armed": true,
+            "fires": 1,
+            "last_ratio": 1.0878925011888871,
+            "log": [
+              [
+                202,
+                3.984
+              ]
+            ],
+            "streak": 0
+          },
+          "lrs_identical": false,
+          "metrics_identical": false,
+          "step": 1250
+        },
+        {
+          "atlas_lrs": [
+            [
+              0.00425,
+              0.0085,
+              0.00425
+            ],
+            [
+              0.003163559903277972
+            ]
+          ],
+          "atlas_metrics": {
+            "active_embedding": {
+              "embedding_frechet": 1.0481367439618055,
+              "embedding_precision": 0.82421875,
+              "embedding_recall": 0.830078125
+            },
+            "class_mass_tv": 0.06326640624999999,
+            "confident_class_coverage": 10,
+            "confident_class_mass": [
+              0.073486328125,
+              0.083740234375,
+              0.063232421875,
+              0.0537109375,
+              0.077392578125,
+              0.053466796875,
+              0.072509765625,
+              0.06005859375,
+              0.065673828125,
+              0.087646484375
+            ],
+            "confident_fraction": 0.69091796875,
+            "mean_classifier_confidence": 0.8926576972007751,
+            "pixel_clipping_fraction": 0.4104944169521332,
+            "predicted_class_mass": [
+              0.092529296875,
+              0.098876953125,
+              0.093994140625,
+              0.091064453125,
+              0.104248046875,
+              0.079833984375,
+              0.09716796875,
+              0.088134765625,
+              0.119140625,
+              0.135009765625
+            ],
+            "raw_embedding": {
+              "embedding_frechet": 15.677249006533202,
+              "embedding_precision": 0.8193359375,
+              "embedding_recall": 0.8203125
+            }
+          },
+          "atlas_output_sigma": 0.028999999165534973,
+          "atlas_surprise": {
+            "anchor_event": null,
+            "anchor_events": 0,
+            "armed": true,
+            "fires": 0,
+            "last_ratio": 0.9411752921804354,
+            "log": [],
+            "streak": 0
+          },
+          "current_e22_lrs": [
+            [
+              0.00425,
+              0.0085,
+              0.00425
+            ],
+            [
+              0.0014950508647289173
+            ]
+          ],
+          "current_e22_metrics": {
+            "active_embedding": {
+              "embedding_frechet": 4.671100436494413,
+              "embedding_precision": 0.6708984375,
+              "embedding_recall": 0.51025390625
+            },
+            "class_mass_tv": 0.163560546875,
+            "confident_class_coverage": 9,
+            "confident_class_mass": [
+              0.03369140625,
+              0.055419921875,
+              0.015869140625,
+              0.029296875,
+              0.037353515625,
+              0.01513671875,
+              0.00830078125,
+              0.0234375,
+              0.046142578125,
+              0.05615234375
+            ],
+            "confident_fraction": 0.32080078125,
+            "mean_classifier_confidence": 0.7459586262702942,
+            "pixel_clipping_fraction": 0.4090697467327118,
+            "predicted_class_mass": [
+              0.077392578125,
+              0.130859375,
+              0.08447265625,
+              0.12353515625,
+              0.0986328125,
+              0.05517578125,
+              0.03955078125,
+              0.06884765625,
+              0.172607421875,
+              0.14892578125
+            ],
+            "raw_embedding": {
+              "embedding_frechet": 72.86169383165384,
+              "embedding_precision": 0.68359375,
+              "embedding_recall": 0.509765625
+            }
+          },
+          "current_e22_output_sigma": 0.028999999165534973,
+          "current_e22_surprise": {
+            "anchor_event": null,
+            "anchor_events": 0,
+            "armed": true,
+            "fires": 1,
+            "last_ratio": 1.1537216148053546,
+            "log": [
+              [
+                202,
+                3.984
+              ]
+            ],
+            "streak": 0
+          },
+          "lrs_identical": false,
+          "metrics_identical": false,
+          "step": 1500
+        },
+        {
+          "atlas_lrs": [
+            [
+              0.00425,
+              0.0085,
+              0.00425
+            ],
+            [
+              0.003175065910491565
+            ]
+          ],
+          "atlas_metrics": {
+            "active_embedding": {
+              "embedding_frechet": 0.5433374620574085,
+              "embedding_precision": 0.869140625,
+              "embedding_recall": 0.8623046875
+            },
+            "class_mass_tv": 0.04871484375000001,
+            "confident_class_coverage": 10,
+            "confident_class_mass": [
+              0.077392578125,
+              0.091064453125,
+              0.066162109375,
+              0.05517578125,
+              0.079345703125,
+              0.064208984375,
+              0.068359375,
+              0.067626953125,
+              0.066650390625,
+              0.076904296875
+            ],
+            "confident_fraction": 0.712890625,
+            "mean_classifier_confidence": 0.8978469371795654,
+            "pixel_clipping_fraction": 0.4095240831375122,
+            "predicted_class_mass": [
+              0.093994140625,
+              0.1025390625,
+              0.096923828125,
+              0.092529296875,
+              0.109619140625,
+              0.083740234375,
+              0.09326171875,
+              0.091796875,
+              0.1171875,
+              0.118408203125
+            ],
+            "raw_embedding": {
+              "embedding_frechet": 7.08310401551239,
+              "embedding_precision": 0.8701171875,
+              "embedding_recall": 0.8701171875
+            }
+          },
+          "atlas_output_sigma": 0.028999999165534973,
+          "atlas_surprise": {
+            "anchor_event": null,
+            "anchor_events": 0,
+            "armed": true,
+            "fires": 0,
+            "last_ratio": 0.9947494910102403,
+            "log": [],
+            "streak": 0
+          },
+          "current_e22_lrs": [
+            [
+              0.00425,
+              0.0085,
+              0.00425
+            ],
+            [
+              0.0016483540912431583
+            ]
+          ],
+          "current_e22_metrics": {
+            "active_embedding": {
+              "embedding_frechet": 3.4251548576201145,
+              "embedding_precision": 0.724609375,
+              "embedding_recall": 0.63916015625
+            },
+            "class_mass_tv": 0.154996875,
+            "confident_class_coverage": 10,
+            "confident_class_mass": [
+              0.033935546875,
+              0.0859375,
+              0.02001953125,
+              0.027099609375,
+              0.040771484375,
+              0.016357421875,
+              0.01318359375,
+              0.03857421875,
+              0.0439453125,
+              0.0810546875
+            ],
+            "confident_fraction": 0.40087890625,
+            "mean_classifier_confidence": 0.7864447236061096,
+            "pixel_clipping_fraction": 0.40509936213493347,
+            "predicted_class_mass": [
+              0.06591796875,
+              0.151611328125,
+              0.078857421875,
+              0.09912109375,
+              0.0927734375,
+              0.06884765625,
+              0.051513671875,
+              0.076171875,
+              0.134521484375,
+              0.1806640625
+            ],
+            "raw_embedding": {
+              "embedding_frechet": 51.13286155864944,
+              "embedding_precision": 0.73828125,
+              "embedding_recall": 0.60986328125
+            }
+          },
+          "current_e22_output_sigma": 0.028999999165534973,
+          "current_e22_surprise": {
+            "anchor_event": null,
+            "anchor_events": 0,
+            "armed": true,
+            "fires": 1,
+            "last_ratio": 0.9718059676686337,
+            "log": [
+              [
+                202,
+                3.984
+              ]
+            ],
+            "streak": 0
+          },
+          "lrs_identical": false,
+          "metrics_identical": false,
+          "step": 1750
+        },
+        {
+          "atlas_lrs": [
+            [
+              0.00425,
+              0.0085,
+              0.00425
+            ],
+            [
+              0.003180598461389926
+            ]
+          ],
+          "atlas_metrics": {
+            "active_embedding": {
+              "embedding_frechet": 0.5444880363760234,
+              "embedding_precision": 0.869140625,
+              "embedding_recall": 0.84716796875
+            },
+            "class_mass_tv": 0.03639648437499999,
+            "confident_class_coverage": 10,
+            "confident_class_mass": [
+              0.082275390625,
+              0.09033203125,
+              0.064453125,
+              0.065185546875,
+              0.079345703125,
+              0.066162109375,
+              0.074462890625,
+              0.070556640625,
+              0.05908203125,
+              0.07568359375
+            ],
+            "confident_fraction": 0.7275390625,
+            "mean_classifier_confidence": 0.9037254452705383,
+            "pixel_clipping_fraction": 0.40906819701194763,
+            "predicted_class_mass": [
+              0.096923828125,
+              0.099853515625,
+              0.0869140625,
+              0.1015625,
+              0.109130859375,
+              0.08984375,
+              0.09814453125,
+              0.097412109375,
+              0.102783203125,
+              0.117431640625
+            ],
+            "raw_embedding": {
+              "embedding_frechet": 6.852170897247333,
+              "embedding_precision": 0.8798828125,
+              "embedding_recall": 0.85546875
+            }
+          },
+          "atlas_output_sigma": 0.028999999165534973,
+          "atlas_surprise": {
+            "anchor_event": null,
+            "anchor_events": 0,
+            "armed": true,
+            "fires": 0,
+            "last_ratio": 0.987401031812073,
+            "log": [],
+            "streak": 0
+          },
+          "current_e22_lrs": [
+            [
+              0.00425,
+              0.0085,
+              0.00425
+            ],
+            [
+              0.0016364265183681668
+            ]
+          ],
+          "current_e22_metrics": {
+            "active_embedding": {
+              "embedding_frechet": 1.8809686577404747,
+              "embedding_precision": 0.767578125,
+              "embedding_recall": 0.71923828125
+            },
+            "class_mass_tv": 0.133030859375,
+            "confident_class_coverage": 10,
+            "confident_class_mass": [
+              0.04248046875,
+              0.102294921875,
+              0.02734375,
+              0.05078125,
+              0.064697265625,
+              0.031982421875,
+              0.019287109375,
+              0.05322265625,
+              0.037109375,
+              0.078125
+            ],
+            "confident_fraction": 0.50732421875,
+            "mean_classifier_confidence": 0.8246971368789673,
+            "pixel_clipping_fraction": 0.41346707940101624,
+            "predicted_class_mass": [
+              0.06494140625,
+              0.147216796875,
+              0.079345703125,
+              0.11572265625,
+              0.113037109375,
+              0.07177734375,
+              0.058349609375,
+              0.093994140625,
+              0.0849609375,
+              0.170654296875
+            ],
+            "raw_embedding": {
+              "embedding_frechet": 27.996749421718505,
+              "embedding_precision": 0.7763671875,
+              "embedding_recall": 0.72998046875
+            }
+          },
+          "current_e22_output_sigma": 0.028999999165534973,
+          "current_e22_surprise": {
+            "anchor_event": null,
+            "anchor_events": 0,
+            "armed": true,
+            "fires": 1,
+            "last_ratio": 1.1001282097513212,
+            "log": [
+              [
+                202,
+                3.984
+              ]
+            ],
+            "streak": 0
+          },
+          "lrs_identical": false,
+          "metrics_identical": false,
+          "step": 2000
+        }
+      ],
+      "compact_metrics": {
+        "confident_class_coverage": {
+          "atlas": 10,
+          "current_e22": 10,
+          "maximum": 10
+        },
+        "embedding_frechet": {
+          "atlas": 0.5444880363760234,
+          "current_e22": 1.8809686577404747,
+          "higher_is_better": false
+        },
+        "embedding_precision": {
+          "atlas": 0.869140625,
+          "current_e22": 0.767578125,
+          "higher_is_better": true
+        },
+        "embedding_recall": {
+          "atlas": 0.84716796875,
+          "current_e22": 0.71923828125,
+          "higher_is_better": true
+        }
+      },
+      "current_e22_actual_training_seconds": 106.98692517913878,
+      "current_e22_completed_at_epoch": 1790824597.3123343,
+      "current_e22_execution": "fresh2000, PR155-E22-cabe2084",
+      "current_e22_fires": 1,
+      "current_e22_gate": null,
+      "current_e22_metrics": {
+        "active_embedding": {
+          "embedding_frechet": 1.8809686577404747,
+          "embedding_precision": 0.767578125,
+          "embedding_recall": 0.71923828125
+        },
+        "class_mass_tv": 0.133030859375,
+        "confident_class_coverage": 10,
+        "confident_class_mass": [
+          0.04248046875,
+          0.102294921875,
+          0.02734375,
+          0.05078125,
+          0.064697265625,
+          0.031982421875,
+          0.019287109375,
+          0.05322265625,
+          0.037109375,
+          0.078125
+        ],
+        "confident_fraction": 0.50732421875,
+        "mean_classifier_confidence": 0.8246971368789673,
+        "pixel_clipping_fraction": 0.41346707940101624,
+        "predicted_class_mass": [
+          0.06494140625,
+          0.147216796875,
+          0.079345703125,
+          0.11572265625,
+          0.113037109375,
+          0.07177734375,
+          0.058349609375,
+          0.093994140625,
+          0.0849609375,
+          0.170654296875
+        ],
+        "raw_embedding": {
+          "embedding_frechet": 27.996749421718505,
+          "embedding_precision": 0.7763671875,
+          "embedding_recall": 0.72998046875
+        }
+      },
+      "current_e22_reopen_events": [
+        [
+          202,
+          3.984
+        ]
+      ],
+      "current_e22_result": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/pr155-e22-current/training/mnist/PR155-E22-cabe2084/result.json",
+      "current_e22_started_at": "2026-10-01T03:14:46.198579+00:00",
+      "initial_hashes_exact": true,
+      "original_steps": 2000
+    },
+    "toy": {
+      "atlas_actual_training_seconds": 161.57476748642512,
+      "atlas_execution": "fresh2000, RA13-settled; current-source bridge/replay retained",
+      "atlas_fires": 0,
+      "atlas_gate": "PASS",
+      "atlas_metrics": {
+        "centre_distance": 0.042550504207611084,
+        "clean_particle_centres": {
+          "centre_distance": 0.02287120744585991,
+          "coverage": 25,
+          "covered_centroid_rms": 0.010440723970532417,
+          "mass_tv": 0.0366796875,
+          "precision": 0.9990234375,
+          "supported_mass": [
+            0.037109375,
+            0.041015625,
+            0.03515625,
+            0.0341796875,
+            0.0390625,
+            0.03515625,
+            0.041015625,
+            0.04296875,
+            0.0361328125,
+            0.041015625,
+            0.0400390625,
+            0.0390625,
+            0.037109375,
+            0.048828125,
+            0.0380859375,
+            0.0361328125,
+            0.041015625,
+            0.044921875,
+            0.041015625,
+            0.0361328125,
+            0.041015625,
+            0.0458984375,
+            0.04296875,
+            0.04296875,
+            0.041015625
+          ],
+          "unsupported_mass": 0.0009765625
+        },
+        "coverage": 25,
+        "covered_centroid_rms": 0.009175768122076988,
+        "mass_tv": 0.05211425781250001,
+        "precision": 0.96533203125,
+        "supported_mass": [
+          0.03515625,
+          0.037353515625,
+          0.0341796875,
+          0.0357666015625,
+          0.03857421875,
+          0.03271484375,
+          0.04248046875,
+          0.0391845703125,
+          0.036865234375,
+          0.0382080078125,
+          0.0399169921875,
+          0.0384521484375,
+          0.0350341796875,
+          0.0455322265625,
+          0.0390625,
+          0.033203125,
+          0.03857421875,
+          0.0421142578125,
+          0.037841796875,
+          0.03955078125,
+          0.03857421875,
+          0.045166015625,
+          0.0413818359375,
+          0.040771484375,
+          0.0396728515625
+        ],
+        "unsupported_mass": 0.03466796875
+      },
+      "atlas_reopen_events": [],
+      "atlas_result": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/training/toy/RA13-settled/result.json",
+      "atlas_started_at": "2026-09-30T21:50:33.881889+00:00",
+      "checkpoint_comparison": [
+        {
+          "atlas_lrs": [
+            [
+              0.00425,
+              0.0085,
+              0.00425
+            ],
+            [
+              0.00425
+            ]
+          ],
+          "atlas_metrics": {
+            "centre_distance": 0.16667038202285767,
+            "clean_particle_centres": {
+              "centre_distance": 0.15417787432670593,
+              "coverage": 1,
+              "covered_centroid_rms": 0.026388948783278465,
+              "mass_tv": 0.96,
+              "precision": 0.1865234375,
+              "supported_mass": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.1865234375,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "unsupported_mass": 0.8134765625
+            },
+            "coverage": 1,
+            "covered_centroid_rms": 0.022687291726469994,
+            "mass_tv": 0.958779296875,
+            "precision": 0.1593017578125,
+            "supported_mass": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.00048828125,
+              0.1580810546875,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.000732421875,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "unsupported_mass": 0.8406982421875
+          },
+          "atlas_output_sigma": 0.029000001028180122,
+          "atlas_surprise": {
+            "anchor_event": null,
+            "anchor_events": 0,
+            "armed": true,
+            "fires": 0,
+            "last_ratio": null,
+            "log": [],
+            "streak": 0
+          },
+          "current_e22_lrs": [
+            [
+              0.00425,
+              0.0085,
+              0.00425
+            ],
+            [
+              0.00425
+            ]
+          ],
+          "current_e22_metrics": {
+            "centre_distance": 0.16667038202285767,
+            "clean_particle_centres": {
+              "centre_distance": 0.15417787432670593,
+              "coverage": 1,
+              "covered_centroid_rms": 0.026388948783278465,
+              "mass_tv": 0.96,
+              "precision": 0.1865234375,
+              "supported_mass": [
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.1865234375,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0
+              ],
+              "unsupported_mass": 0.8134765625
+            },
+            "coverage": 1,
+            "covered_centroid_rms": 0.022687291726469994,
+            "mass_tv": 0.958779296875,
+            "precision": 0.1593017578125,
+            "supported_mass": [
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.00048828125,
+              0.1580810546875,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.000732421875,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0,
+              0.0
+            ],
+            "unsupported_mass": 0.8406982421875
+          },
+          "current_e22_output_sigma": 0.029000001028180122,
+          "current_e22_surprise": {
+            "anchor_event": null,
+            "anchor_events": 0,
+            "armed": true,
+            "fires": 0,
+            "last_ratio": null,
+            "log": [],
+            "streak": 0
+          },
+          "lrs_identical": true,
+          "metrics_identical": true,
+          "step": 0
+        },
+        {
+          "atlas_lrs": [
+            [
+              0.00053125,
+              0.0085,
+              0.0010625
+            ],
+            [
+              0.0031868848725320614
+            ]
+          ],
+          "atlas_metrics": {
+            "centre_distance": 0.18702742457389832,
+            "clean_particle_centres": {
+              "centre_distance": 0.1839563250541687,
+              "coverage": 3,
+              "covered_centroid_rms": 0.010795782320201397,
+              "mass_tv": 0.8623046875,
+              "precision": 0.1376953125,
+              "supported_mass": [
+                0.0009765625,
+                0.009765625,
+                0.005859375,
+                0.0068359375,
+                0.005859375,
+                0.005859375,
+                0.01171875,
+                0.00390625,
+                0.0068359375,
+                0.0068359375,
+                0.005859375,
+                0.001953125,
+                0.001953125,
+                0.001953125,
+                0.01171875,
+                0.0029296875,
+                0.0048828125,
+                0.0078125,
+                0.00390625,
+                0.0048828125,
+                0.0009765625,
+                0.00390625,
+                0.0146484375,
+                0.005859375,
+                0.0
+              ],
+              "unsupported_mass": 0.8623046875
+            },
+            "coverage": 2,
+            "covered_centroid_rms": 0.008256671018898487,
+            "mass_tv": 0.8529052734375,
+            "precision": 0.1470947265625,
+            "supported_mass": [
+              0.0008544921875,
+              0.00732421875,
+              0.0059814453125,
+              0.005859375,
+              0.0045166015625,
+              0.0069580078125,
+              0.006591796875,
+              0.0057373046875,
+              0.0059814453125,
+              0.0106201171875,
+              0.006103515625,
+              0.0042724609375,
+              0.00439453125,
+              0.0042724609375,
+              0.009033203125,
+              0.0057373046875,
+              0.0040283203125,
+              0.0079345703125,
+              0.005126953125,
+              0.005615234375,
+              0.0015869140625,
+              0.004638671875,
+              0.0150146484375,
+              0.006103515625,
+              0.0028076171875
+            ],
+            "unsupported_mass": 0.8529052734375
+          },
+          "atlas_output_sigma": 0.029356524348258972,
+          "atlas_surprise": {
+            "anchor_event": null,
+            "anchor_events": 0,
+            "armed": true,
+            "fires": 0,
+            "last_ratio": 0.5017199795799727,
+            "log": [],
+            "streak": 0
+          },
+          "current_e22_lrs": [
+            [
+              0.0010625,
+              0.0085,
+              0.00425
+            ],
+            [
+              0.0031873276460748106
+            ]
+          ],
+          "current_e22_metrics": {
+            "centre_distance": 0.197831392288208,
+            "clean_particle_centres": {
+              "centre_distance": 0.18988099694252014,
+              "coverage": 1,
+              "covered_centroid_rms": 0.026270048692822456,
+              "mass_tv": 0.89453125,
+              "precision": 0.10546875,
+              "supported_mass": [
+                0.0,
+                0.0009765625,
+                0.00390625,
+                0.001953125,
+                0.00390625,
+                0.001953125,
+                0.009765625,
+                0.0029296875,
+                0.0068359375,
+                0.0107421875,
+                0.005859375,
+                0.0009765625,
+                0.0009765625,
+                0.0009765625,
+                0.0009765625,
+                0.0029296875,
+                0.0,
+                0.009765625,
+                0.0078125,
+                0.0048828125,
+                0.00390625,
+                0.0068359375,
+                0.0068359375,
+                0.009765625,
+                0.0
+              ],
+              "unsupported_mass": 0.89453125
+            },
+            "coverage": 0,
+            "covered_centroid_rms": null,
+            "mass_tv": 0.886962890625,
+            "precision": 0.113037109375,
+            "supported_mass": [
+              0.000244140625,
+              0.002685546875,
+              0.004638671875,
+              0.0050048828125,
+              0.0052490234375,
+              0.0023193359375,
+              0.006103515625,
+              0.0037841796875,
+              0.00732421875,
+              0.005615234375,
+              0.0048828125,
+              0.00341796875,
+              0.0028076171875,
+              0.004638671875,
+              0.0040283203125,
+              0.0029296875,
+              0.0040283203125,
+              0.00830078125,
+              0.005615234375,
+              0.0062255859375,
+              0.0025634765625,
+              0.004150390625,
+              0.0076904296875,
+              0.0059814453125,
+              0.0028076171875
+            ],
+            "unsupported_mass": 0.886962890625
+          },
+          "current_e22_output_sigma": 0.028999999165534973,
+          "current_e22_surprise": {
+            "anchor_event": null,
+            "anchor_events": 0,
+            "armed": true,
+            "fires": 0,
+            "last_ratio": 0.6602727100806058,
+            "log": [],
+            "streak": 0
+          },
+          "lrs_identical": false,
+          "metrics_identical": false,
+          "step": 100
+        },
+        {
+          "atlas_lrs": [
+            [
+              0.00053125,
+              0.0085,
+              0.0010625
+            ],
+            [
+              0.003187488520080762
+            ]
+          ],
+          "atlas_metrics": {
+            "centre_distance": 0.16499917209148407,
+            "clean_particle_centres": {
+              "centre_distance": 0.16062435507774353,
+              "coverage": 8,
+              "covered_centroid_rms": 0.026237791404128075,
+              "mass_tv": 0.7958984375,
+              "precision": 0.2041015625,
+              "supported_mass": [
+                0.001953125,
+                0.001953125,
+                0.001953125,
+                0.0,
+                0.0185546875,
+                0.0009765625,
+                0.0048828125,
+                0.0068359375,
+                0.0,
+                0.0107421875,
+                0.0,
+                0.005859375,
+                0.0009765625,
+                0.0048828125,
+                0.0263671875,
+                0.0068359375,
+                0.0078125,
+                0.0234375,
+                0.01171875,
+                0.013671875,
+                0.01953125,
+                0.0048828125,
+                0.009765625,
+                0.001953125,
+                0.0185546875
+              ],
+              "unsupported_mass": 0.7958984375
+            },
+            "coverage": 8,
+            "covered_centroid_rms": 0.024700893089175224,
+            "mass_tv": 0.79345703125,
+            "precision": 0.20654296875,
+            "supported_mass": [
+              0.00244140625,
+              0.0028076171875,
+              0.0035400390625,
+              0.0013427734375,
+              0.01708984375,
+              0.004150390625,
+              0.0045166015625,
+              0.007080078125,
+              0.002685546875,
+              0.0084228515625,
+              0.00146484375,
+              0.0059814453125,
+              0.001953125,
+              0.0054931640625,
+              0.0267333984375,
+              0.005615234375,
+              0.0078125,
+              0.0203857421875,
+              0.0113525390625,
+              0.013427734375,
+              0.0152587890625,
+              0.006103515625,
+              0.0101318359375,
+              0.0029296875,
+              0.017822265625
+            ],
+            "unsupported_mass": 0.79345703125
+          },
+          "atlas_output_sigma": 0.02901698648929596,
+          "atlas_surprise": {
+            "anchor_event": null,
+            "anchor_events": 0,
+            "armed": true,
+            "fires": 0,
+            "last_ratio": 0.9175204227158057,
+            "log": [],
+            "streak": 0
+          },
+          "current_e22_lrs": [
+            [
+              0.00053125,
+              0.0085,
+              0.00425
+            ],
+            [
+              0.0031874825975053765
+            ]
+          ],
+          "current_e22_metrics": {
+            "centre_distance": 0.17333462834358215,
+            "clean_particle_centres": {
+              "centre_distance": 0.16717243194580078,
+              "coverage": 8,
+              "covered_centroid_rms": 0.022652465850114822,
+              "mass_tv": 0.80859375,
+              "precision": 0.19140625,
+              "supported_mass": [
+                0.0,
+                0.0107421875,
+                0.0048828125,
+                0.0078125,
+                0.0146484375,
+                0.0029296875,
+                0.005859375,
+                0.0029296875,
+                0.0009765625,
+                0.0048828125,
+                0.0048828125,
+                0.0029296875,
+                0.0029296875,
+                0.0107421875,
+                0.009765625,
+                0.00390625,
+                0.0087890625,
+                0.015625,
+                0.0126953125,
+                0.013671875,
+                0.009765625,
+                0.0185546875,
+                0.0068359375,
+                0.00390625,
+                0.0107421875
+              ],
+              "unsupported_mass": 0.80859375
+            },
+            "coverage": 6,
+            "covered_centroid_rms": 0.014834477566182613,
+            "mass_tv": 0.82275390625,
+            "precision": 0.17724609375,
+            "supported_mass": [
+              0.001220703125,
+              0.0076904296875,
+              0.0020751953125,
+              0.009033203125,
+              0.01220703125,
+              0.0047607421875,
+              0.0029296875,
+              0.0072021484375,
+              0.0030517578125,
+              0.0064697265625,
+              0.004150390625,
+              0.00390625,
+              0.0020751953125,
+              0.0081787109375,
+              0.011474609375,
+              0.005126953125,
+              0.0062255859375,
+              0.013916015625,
+              0.0111083984375,
+              0.0108642578125,
+              0.0084228515625,
+              0.0146484375,
+              0.0074462890625,
+              0.005126953125,
+              0.0079345703125
+            ],
+            "unsupported_mass": 0.82275390625
+          },
+          "current_e22_output_sigma": 0.028999999165534973,
+          "current_e22_surprise": {
+            "anchor_event": null,
+            "anchor_events": 0,
+            "armed": true,
+            "fires": 0,
+            "last_ratio": 0.9793533166477159,
+            "log": [],
+            "streak": 0
+          },
+          "lrs_identical": false,
+          "metrics_identical": false,
+          "step": 250
+        },
+        {
+          "atlas_lrs": [
+            [
+              0.000265625,
+              0.0085,
+              0.0010625
+            ],
+            [
+              0.0031874987620779663
+            ]
+          ],
+          "atlas_metrics": {
+            "centre_distance": 0.12807884812355042,
+            "clean_particle_centres": {
+              "centre_distance": 0.12096495926380157,
+              "coverage": 21,
+              "covered_centroid_rms": 0.03683657944202423,
+              "mass_tv": 0.59765625,
+              "precision": 0.40234375,
+              "supported_mass": [
+                0.021484375,
+                0.029296875,
+                0.025390625,
+                0.0126953125,
+                0.0185546875,
+                0.0166015625,
+                0.01171875,
+                0.013671875,
+                0.00390625,
+                0.01171875,
+                0.013671875,
+                0.01953125,
+                0.017578125,
+                0.0068359375,
+                0.0146484375,
+                0.025390625,
+                0.01171875,
+                0.01171875,
+                0.005859375,
+                0.013671875,
+                0.0341796875,
+                0.0185546875,
+                0.0166015625,
+                0.0029296875,
+                0.0244140625
+              ],
+              "unsupported_mass": 0.59765625
+            },
+            "coverage": 20,
+            "covered_centroid_rms": 0.029868602752685547,
+            "mass_tv": 0.64453125,
+            "precision": 0.35546875,
+            "supported_mass": [
+              0.017822265625,
+              0.0247802734375,
+              0.0166015625,
+              0.011962890625,
+              0.01708984375,
+              0.0147705078125,
+              0.0086669921875,
+              0.0126953125,
+              0.0028076171875,
+              0.010009765625,
+              0.01171875,
+              0.0172119140625,
+              0.015380859375,
+              0.00537109375,
+              0.012451171875,
+              0.0208740234375,
+              0.0128173828125,
+              0.010986328125,
+              0.006103515625,
+              0.014404296875,
+              0.0291748046875,
+              0.019775390625,
+              0.015380859375,
+              0.0047607421875,
+              0.0218505859375
+            ],
+            "unsupported_mass": 0.64453125
+          },
+          "atlas_output_sigma": 0.028999999165534973,
+          "atlas_surprise": {
+            "anchor_event": null,
+            "anchor_events": 0,
+            "armed": true,
+            "fires": 0,
+            "last_ratio": 0.9605379962555791,
+            "log": [],
+            "streak": 0
+          },
+          "current_e22_lrs": [
+            [
+              0.000265625,
+              0.0085,
+              0.00425
+            ],
+            [
+              0.0031874963023098253
+            ]
+          ],
+          "current_e22_metrics": {
+            "centre_distance": 0.14253106713294983,
+            "clean_particle_centres": {
+              "centre_distance": 0.13056306540966034,
+              "coverage": 17,
+              "covered_centroid_rms": 0.02646494470536709,
+              "mass_tv": 0.642578125,
+              "precision": 0.357421875,
+              "supported_mass": [
+                0.021484375,
+                0.0185546875,
+                0.017578125,
+                0.0126953125,
+                0.017578125,
+                0.0185546875,
+                0.013671875,
+                0.0166015625,
+                0.001953125,
+                0.0205078125,
+                0.0146484375,
+                0.009765625,
+                0.0029296875,
+                0.0048828125,
+                0.0234375,
+                0.015625,
+                0.005859375,
+                0.0166015625,
+                0.0048828125,
+                0.0205078125,
+                0.0185546875,
+                0.02734375,
+                0.009765625,
+                0.009765625,
+                0.013671875
+              ],
+              "unsupported_mass": 0.642578125
+            },
+            "coverage": 18,
+            "covered_centroid_rms": 0.01904410310089588,
+            "mass_tv": 0.694091796875,
+            "precision": 0.305908203125,
+            "supported_mass": [
+              0.0126953125,
+              0.0147705078125,
+              0.0145263671875,
+              0.01025390625,
+              0.014892578125,
+              0.016357421875,
+              0.012939453125,
+              0.013916015625,
+              0.00244140625,
+              0.0169677734375,
+              0.0166015625,
+              0.0091552734375,
+              0.00439453125,
+              0.0064697265625,
+              0.017822265625,
+              0.01025390625,
+              0.008056640625,
+              0.0142822265625,
+              0.0042724609375,
+              0.016357421875,
+              0.0185546875,
+              0.0208740234375,
+              0.00830078125,
+              0.01025390625,
+              0.010498046875
+            ],
+            "unsupported_mass": 0.694091796875
+          },
+          "current_e22_output_sigma": 0.028999999165534973,
+          "current_e22_surprise": {
+            "anchor_event": null,
+            "anchor_events": 0,
+            "armed": true,
+            "fires": 0,
+            "last_ratio": 0.9644822987759852,
+            "log": [],
+            "streak": 0
+          },
+          "lrs_identical": false,
+          "metrics_identical": false,
+          "step": 500
+        },
+        {
+          "atlas_lrs": [
+            [
+              0.0001328125,
+              0.0085,
+              0.0010625
+            ],
+            [
+              0.003187499706303243
+            ]
+          ],
+          "atlas_metrics": {
+            "centre_distance": 0.07992935180664062,
+            "clean_particle_centres": {
+              "centre_distance": 0.06864980608224869,
+              "coverage": 25,
+              "covered_centroid_rms": 0.024854453280568123,
+              "mass_tv": 0.2354296875,
+              "precision": 0.767578125,
+              "supported_mass": [
+                0.03125,
+                0.0341796875,
+                0.037109375,
+                0.025390625,
+                0.0224609375,
+                0.0361328125,
+                0.0205078125,
+                0.0263671875,
+                0.0224609375,
+                0.029296875,
+                0.0380859375,
+                0.0419921875,
+                0.01953125,
+                0.025390625,
+                0.0302734375,
+                0.0390625,
+                0.041015625,
+                0.0380859375,
+                0.02734375,
+                0.02734375,
+                0.0302734375,
+                0.033203125,
+                0.02734375,
+                0.0341796875,
+                0.029296875
+              ],
+              "unsupported_mass": 0.232421875
+            },
+            "coverage": 25,
+            "covered_centroid_rms": 0.019768374040722847,
+            "mass_tv": 0.3287353515625,
+            "precision": 0.6712646484375,
+            "supported_mass": [
+              0.0283203125,
+              0.02734375,
+              0.0286865234375,
+              0.0223388671875,
+              0.020751953125,
+              0.0274658203125,
+              0.0184326171875,
+              0.022705078125,
+              0.0189208984375,
+              0.026611328125,
+              0.0343017578125,
+              0.037353515625,
+              0.0167236328125,
+              0.0244140625,
+              0.023681640625,
+              0.033203125,
+              0.0384521484375,
+              0.033203125,
+              0.0230712890625,
+              0.026123046875,
+              0.0286865234375,
+              0.0291748046875,
+              0.02734375,
+              0.030517578125,
+              0.0234375
+            ],
+            "unsupported_mass": 0.3287353515625
+          },
+          "atlas_output_sigma": 0.028999999165534973,
+          "atlas_surprise": {
+            "anchor_event": null,
+            "anchor_events": 0,
+            "armed": true,
+            "fires": 0,
+            "last_ratio": 1.3589328395373084,
+            "log": [],
+            "streak": 0
+          },
+          "current_e22_lrs": [
+            [
+              0.0001328125,
+              0.00425,
+              0.00425
+            ],
+            [
+              0.0015937495451702512
+            ]
+          ],
+          "current_e22_metrics": {
+            "centre_distance": 0.1084274873137474,
+            "clean_particle_centres": {
+              "centre_distance": 0.08769480139017105,
+              "coverage": 25,
+              "covered_centroid_rms": 0.017274819314479828,
+              "mass_tv": 0.353515625,
+              "precision": 0.646484375,
+              "supported_mass": [
+                0.029296875,
+                0.0283203125,
+                0.0224609375,
+                0.0234375,
+                0.0322265625,
+                0.0302734375,
+                0.0224609375,
+                0.029296875,
+                0.0224609375,
+                0.0283203125,
+                0.0205078125,
+                0.0185546875,
+                0.017578125,
+                0.0185546875,
+                0.0224609375,
+                0.025390625,
+                0.0234375,
+                0.0322265625,
+                0.0224609375,
+                0.025390625,
+                0.0283203125,
+                0.025390625,
+                0.033203125,
+                0.0322265625,
+                0.0322265625
+              ],
+              "unsupported_mass": 0.353515625
+            },
+            "coverage": 25,
+            "covered_centroid_rms": 0.011540834791958332,
+            "mass_tv": 0.462890625,
+            "precision": 0.537109375,
+            "supported_mass": [
+              0.023193359375,
+              0.0233154296875,
+              0.0189208984375,
+              0.0203857421875,
+              0.028564453125,
+              0.0230712890625,
+              0.02001953125,
+              0.02392578125,
+              0.01806640625,
+              0.023193359375,
+              0.02197265625,
+              0.0157470703125,
+              0.0152587890625,
+              0.0150146484375,
+              0.019287109375,
+              0.0181884765625,
+              0.0186767578125,
+              0.0263671875,
+              0.0191650390625,
+              0.0240478515625,
+              0.024169921875,
+              0.0203857421875,
+              0.027587890625,
+              0.02294921875,
+              0.025634765625
+            ],
+            "unsupported_mass": 0.462890625
+          },
+          "current_e22_output_sigma": 0.028999999165534973,
+          "current_e22_surprise": {
+            "anchor_event": null,
+            "anchor_events": 0,
+            "armed": true,
+            "fires": 0,
+            "last_ratio": 0.9677995388501425,
+            "log": [],
+            "streak": 0
+          },
+          "lrs_identical": false,
+          "metrics_identical": false,
+          "step": 750
+        },
+        {
+          "atlas_lrs": [
+            [
+              0.0001328125,
+              0.0085,
+              0.0010625
+            ],
+            [
+              0.0031874988883657425
+            ]
+          ],
+          "atlas_metrics": {
+            "centre_distance": 0.0993746668100357,
+            "clean_particle_centres": {
+              "centre_distance": 0.09084215015172958,
+              "coverage": 25,
+              "covered_centroid_rms": 0.024156302213668823,
+              "mass_tv": 0.388671875,
+              "precision": 0.611328125,
+              "supported_mass": [
+                0.0244140625,
+                0.0234375,
+                0.0283203125,
+                0.0224609375,
+                0.0380859375,
+                0.01171875,
+                0.01171875,
+                0.0224609375,
+                0.0244140625,
+                0.0244140625,
+                0.017578125,
+                0.025390625,
+                0.01953125,
+                0.0263671875,
+                0.021484375,
+                0.01953125,
+                0.0263671875,
+                0.0302734375,
+                0.0205078125,
+                0.025390625,
+                0.025390625,
+                0.03515625,
+                0.029296875,
+                0.025390625,
+                0.0322265625
+              ],
+              "unsupported_mass": 0.388671875
+            },
+            "coverage": 25,
+            "covered_centroid_rms": 0.01865362748503685,
+            "mass_tv": 0.4635009765625,
+            "precision": 0.5364990234375,
+            "supported_mass": [
+              0.0216064453125,
+              0.0189208984375,
+              0.0218505859375,
+              0.021728515625,
+              0.033935546875,
+              0.01318359375,
+              0.010498046875,
+              0.0166015625,
+              0.0174560546875,
+              0.0206298828125,
+              0.0150146484375,
+              0.0233154296875,
+              0.015380859375,
+              0.025390625,
+              0.0218505859375,
+              0.0174560546875,
+              0.0220947265625,
+              0.0289306640625,
+              0.0198974609375,
+              0.0223388671875,
+              0.025146484375,
+              0.0274658203125,
+              0.0244140625,
+              0.0235595703125,
+              0.02783203125
+            ],
+            "unsupported_mass": 0.4635009765625
+          },
+          "atlas_output_sigma": 0.028999999165534973,
+          "atlas_surprise": {
+            "anchor_event": null,
+            "anchor_events": 0,
+            "armed": true,
+            "fires": 0,
+            "last_ratio": 1.1398425046066005,
+            "log": [],
+            "streak": 0
+          },
+          "current_e22_lrs": [
+            [
+              0.0001328125,
+              0.00425,
+              0.00425
+            ],
+            [
+              0.0015937493496971848
+            ]
+          ],
+          "current_e22_metrics": {
+            "centre_distance": 0.09903491288423538,
+            "clean_particle_centres": {
+              "centre_distance": 0.0748586654663086,
+              "coverage": 25,
+              "covered_centroid_rms": 0.014950050041079521,
+              "mass_tv": 0.2919921875,
+              "precision": 0.7080078125,
+              "supported_mass": [
+                0.029296875,
+                0.033203125,
+                0.0263671875,
+                0.029296875,
+                0.0341796875,
+                0.0322265625,
+                0.0205078125,
+                0.03125,
+                0.02734375,
+                0.029296875,
+                0.0234375,
+                0.017578125,
+                0.0205078125,
+                0.0302734375,
+                0.0244140625,
+                0.029296875,
+                0.0263671875,
+                0.033203125,
+                0.0224609375,
+                0.0283203125,
+                0.0302734375,
+                0.029296875,
+                0.0341796875,
+                0.0283203125,
+                0.037109375
+              ],
+              "unsupported_mass": 0.2919921875
+            },
+            "coverage": 25,
+            "covered_centroid_rms": 0.010292412713170052,
+            "mass_tv": 0.3900146484375,
+            "precision": 0.6099853515625,
+            "supported_mass": [
+              0.025390625,
+              0.026123046875,
+              0.02294921875,
+              0.0262451171875,
+              0.0323486328125,
+              0.0238037109375,
+              0.02197265625,
+              0.028564453125,
+              0.0244140625,
+              0.0260009765625,
+              0.0238037109375,
+              0.0167236328125,
+              0.0213623046875,
+              0.02490234375,
+              0.0191650390625,
+              0.021484375,
+              0.0240478515625,
+              0.02783203125,
+              0.020751953125,
+              0.023193359375,
+              0.0242919921875,
+              0.0225830078125,
+              0.02978515625,
+              0.0235595703125,
+              0.0286865234375
+            ],
+            "unsupported_mass": 0.3900146484375
+          },
+          "current_e22_output_sigma": 0.028999999165534973,
+          "current_e22_surprise": {
+            "anchor_event": null,
+            "anchor_events": 0,
+            "armed": true,
+            "fires": 0,
+            "last_ratio": 1.1293778964550316,
+            "log": [],
+            "streak": 0
+          },
+          "lrs_identical": false,
+          "metrics_identical": false,
+          "step": 1000
+        },
+        {
+          "atlas_lrs": [
+            [
+              6.640625e-05,
+              0.0085,
+              0.0010625
+            ],
+            [
+              0.0031874998331365848
+            ]
+          ],
+          "atlas_metrics": {
+            "centre_distance": 0.06904298812150955,
+            "clean_particle_centres": {
+              "centre_distance": 0.05822703614830971,
+              "coverage": 25,
+              "covered_centroid_rms": 0.030987244099378586,
+              "mass_tv": 0.1535546875,
+              "precision": 0.8583984375,
+              "supported_mass": [
+                0.037109375,
+                0.0341796875,
+                0.04296875,
+                0.033203125,
+                0.0322265625,
+                0.0341796875,
+                0.013671875,
+                0.03515625,
+                0.044921875,
+                0.0361328125,
+                0.0361328125,
+                0.0224609375,
+                0.0302734375,
+                0.0234375,
+                0.0380859375,
+                0.041015625,
+                0.03515625,
+                0.03125,
+                0.029296875,
+                0.03125,
+                0.0400390625,
+                0.0361328125,
+                0.0419921875,
+                0.041015625,
+                0.037109375
+              ],
+              "unsupported_mass": 0.1416015625
+            },
+            "coverage": 25,
+            "covered_centroid_rms": 0.02441202849149704,
+            "mass_tv": 0.2532958984375,
+            "precision": 0.7467041015625,
+            "supported_mass": [
+              0.03173828125,
+              0.0252685546875,
+              0.037109375,
+              0.0284423828125,
+              0.0283203125,
+              0.0323486328125,
+              0.0133056640625,
+              0.02734375,
+              0.0360107421875,
+              0.0302734375,
+              0.0338134765625,
+              0.017822265625,
+              0.0269775390625,
+              0.0208740234375,
+              0.0343017578125,
+              0.037109375,
+              0.029296875,
+              0.02978515625,
+              0.026611328125,
+              0.0291748046875,
+              0.0347900390625,
+              0.0330810546875,
+              0.035888671875,
+              0.034912109375,
+              0.0321044921875
+            ],
+            "unsupported_mass": 0.2532958984375
+          },
+          "atlas_output_sigma": 0.028999999165534973,
+          "atlas_surprise": {
+            "anchor_event": null,
+            "anchor_events": 0,
+            "armed": true,
+            "fires": 0,
+            "last_ratio": 1.1000845403715975,
+            "log": [],
+            "streak": 0
+          },
+          "current_e22_lrs": [
+            [
+              0.0001328125,
+              0.00425,
+              0.00425
+            ],
+            [
+              0.0015937489961741992
+            ]
+          ],
+          "current_e22_metrics": {
+            "centre_distance": 0.0965137630701065,
+            "clean_particle_centres": {
+              "centre_distance": 0.07318980246782303,
+              "coverage": 25,
+              "covered_centroid_rms": 0.01808299496769905,
+              "mass_tv": 0.263671875,
+              "precision": 0.736328125,
+              "supported_mass": [
+                0.0322265625,
+                0.0341796875,
+                0.0283203125,
+                0.03125,
+                0.03515625,
+                0.0341796875,
+                0.0224609375,
+                0.03125,
+                0.0283203125,
+                0.03125,
+                0.03125,
+                0.02734375,
+                0.0224609375,
+                0.0234375,
+                0.021484375,
+                0.0341796875,
+                0.0302734375,
+                0.029296875,
+                0.021484375,
+                0.0302734375,
+                0.0361328125,
+                0.03125,
+                0.02734375,
+                0.0263671875,
+                0.03515625
+              ],
+              "unsupported_mass": 0.263671875
+            },
+            "coverage": 25,
+            "covered_centroid_rms": 0.013654579408466816,
+            "mass_tv": 0.3822021484375,
+            "precision": 0.6177978515625,
+            "supported_mass": [
+              0.0264892578125,
+              0.0274658203125,
+              0.023193359375,
+              0.0267333984375,
+              0.032470703125,
+              0.025634765625,
+              0.0233154296875,
+              0.0289306640625,
+              0.0224609375,
+              0.02490234375,
+              0.0299072265625,
+              0.024658203125,
+              0.021484375,
+              0.021484375,
+              0.0159912109375,
+              0.0257568359375,
+              0.0267333984375,
+              0.021728515625,
+              0.0194091796875,
+              0.022705078125,
+              0.0291748046875,
+              0.0240478515625,
+              0.0233154296875,
+              0.021240234375,
+              0.028564453125
+            ],
+            "unsupported_mass": 0.3822021484375
+          },
+          "current_e22_output_sigma": 0.028999999165534973,
+          "current_e22_surprise": {
+            "anchor_event": null,
+            "anchor_events": 0,
+            "armed": true,
+            "fires": 0,
+            "last_ratio": 1.1859429493252758,
+            "log": [],
+            "streak": 0
+          },
+          "lrs_identical": false,
+          "metrics_identical": false,
+          "step": 1250
+        },
+        {
+          "atlas_lrs": [
+            [
+              6.640625e-05,
+              0.0085,
+              0.0010625
+            ],
+            [
+              0.003187499701719703
+            ]
+          ],
+          "atlas_metrics": {
+            "centre_distance": 0.0896979570388794,
+            "clean_particle_centres": {
+              "centre_distance": 0.08180776983499527,
+              "coverage": 23,
+              "covered_centroid_rms": 0.03250998631119728,
+              "mass_tv": 0.34871093750000004,
+              "precision": 0.658203125,
+              "supported_mass": [
+                0.0341796875,
+                0.0341796875,
+                0.0341796875,
+                0.0390625,
+                0.04296875,
+                0.02734375,
+                0.0283203125,
+                0.017578125,
+                0.0166015625,
+                0.0263671875,
+                0.0244140625,
+                0.0439453125,
+                0.0126953125,
+                0.0126953125,
+                0.0322265625,
+                0.0234375,
+                0.0263671875,
+                0.0263671875,
+                0.0087890625,
+                0.029296875,
+                0.0244140625,
+                0.0361328125,
+                0.009765625,
+                0.0205078125,
+                0.0263671875
+              ],
+              "unsupported_mass": 0.341796875
+            },
+            "coverage": 23,
+            "covered_centroid_rms": 0.026887323707342148,
+            "mass_tv": 0.406982421875,
+            "precision": 0.593017578125,
+            "supported_mass": [
+              0.02783203125,
+              0.028076171875,
+              0.0318603515625,
+              0.0394287109375,
+              0.035888671875,
+              0.0224609375,
+              0.0284423828125,
+              0.0152587890625,
+              0.01318359375,
+              0.0238037109375,
+              0.025390625,
+              0.0390625,
+              0.0125732421875,
+              0.0128173828125,
+              0.0299072265625,
+              0.02099609375,
+              0.0242919921875,
+              0.02587890625,
+              0.008056640625,
+              0.02490234375,
+              0.0201416015625,
+              0.0323486328125,
+              0.0086669921875,
+              0.020263671875,
+              0.021484375
+            ],
+            "unsupported_mass": 0.406982421875
+          },
+          "atlas_output_sigma": 0.028999999165534973,
+          "atlas_surprise": {
+            "anchor_event": null,
+            "anchor_events": 0,
+            "armed": true,
+            "fires": 0,
+            "last_ratio": 1.5323434151222146,
+            "log": [],
+            "streak": 0
+          },
+          "current_e22_lrs": [
+            [
+              0.0001328125,
+              0.002125,
+              0.00425
+            ],
+            [
+              0.0007968747483423309
+            ]
+          ],
+          "current_e22_metrics": {
+            "centre_distance": 0.09070192277431488,
+            "clean_particle_centres": {
+              "centre_distance": 0.0679251104593277,
+              "coverage": 25,
+              "covered_centroid_rms": 0.016291027888655663,
+              "mass_tv": 0.240234375,
+              "precision": 0.759765625,
+              "supported_mass": [
+                0.0322265625,
+                0.0322265625,
+                0.0283203125,
+                0.029296875,
+                0.0380859375,
+                0.03125,
+                0.0185546875,
+                0.0361328125,
+                0.029296875,
+                0.0341796875,
+                0.02734375,
+                0.0244140625,
+                0.025390625,
+                0.025390625,
+                0.029296875,
+                0.0302734375,
+                0.02734375,
+                0.0390625,
+                0.025390625,
+                0.0283203125,
+                0.0341796875,
+                0.033203125,
+                0.0341796875,
+                0.03125,
+                0.03515625
+              ],
+              "unsupported_mass": 0.240234375
+            },
+            "coverage": 25,
+            "covered_centroid_rms": 0.011743380688130856,
+            "mass_tv": 0.34521484375,
+            "precision": 0.65478515625,
+            "supported_mass": [
+              0.025390625,
+              0.0263671875,
+              0.0240478515625,
+              0.0238037109375,
+              0.03369140625,
+              0.0255126953125,
+              0.018798828125,
+              0.03271484375,
+              0.026611328125,
+              0.028564453125,
+              0.0255126953125,
+              0.0267333984375,
+              0.025146484375,
+              0.021728515625,
+              0.026123046875,
+              0.02490234375,
+              0.024658203125,
+              0.030029296875,
+              0.0228271484375,
+              0.0220947265625,
+              0.0299072265625,
+              0.02587890625,
+              0.0277099609375,
+              0.0255126953125,
+              0.030517578125
+            ],
+            "unsupported_mass": 0.34521484375
+          },
+          "current_e22_output_sigma": 0.028999999165534973,
+          "current_e22_surprise": {
+            "anchor_event": null,
+            "anchor_events": 0,
+            "armed": true,
+            "fires": 0,
+            "last_ratio": 1.0504686333486364,
+            "log": [],
+            "streak": 0
+          },
+          "lrs_identical": false,
+          "metrics_identical": false,
+          "step": 1500
+        },
+        {
+          "atlas_lrs": [
+            [
+              6.640625e-05,
+              0.0085,
+              0.0010625
+            ],
+            [
+              0.0031874999073967128
+            ]
+          ],
+          "atlas_metrics": {
+            "centre_distance": 0.06234186887741089,
+            "clean_particle_centres": {
+              "centre_distance": 0.050357554107904434,
+              "coverage": 25,
+              "covered_centroid_rms": 0.027260934934020042,
+              "mass_tv": 0.1273046875,
+              "precision": 0.8916015625,
+              "supported_mass": [
+                0.0419921875,
+                0.0400390625,
+                0.0400390625,
+                0.03125,
+                0.0419921875,
+                0.029296875,
+                0.0234375,
+                0.03125,
+                0.0380859375,
+                0.033203125,
+                0.0390625,
+                0.0244140625,
+                0.0302734375,
+                0.033203125,
+                0.0439453125,
+                0.025390625,
+                0.0419921875,
+                0.0341796875,
+                0.03125,
+                0.0419921875,
+                0.037109375,
+                0.04296875,
+                0.0361328125,
+                0.03515625,
+                0.0439453125
+              ],
+              "unsupported_mass": 0.1083984375
+            },
+            "coverage": 25,
+            "covered_centroid_rms": 0.02205638773739338,
+            "mass_tv": 0.20173828125,
+            "precision": 0.802490234375,
+            "supported_mass": [
+              0.0350341796875,
+              0.0352783203125,
+              0.0369873046875,
+              0.0316162109375,
+              0.0391845703125,
+              0.0247802734375,
+              0.0230712890625,
+              0.0263671875,
+              0.0345458984375,
+              0.029052734375,
+              0.0374755859375,
+              0.0245361328125,
+              0.025146484375,
+              0.02587890625,
+              0.0440673828125,
+              0.0194091796875,
+              0.0367431640625,
+              0.033935546875,
+              0.024658203125,
+              0.039306640625,
+              0.0355224609375,
+              0.0401611328125,
+              0.030517578125,
+              0.0316162109375,
+              0.03759765625
+            ],
+            "unsupported_mass": 0.197509765625
+          },
+          "atlas_output_sigma": 0.028999999165534973,
+          "atlas_surprise": {
+            "anchor_event": null,
+            "anchor_events": 0,
+            "armed": true,
+            "fires": 0,
+            "last_ratio": 0.8104294402747736,
+            "log": [],
+            "streak": 0
+          },
+          "current_e22_lrs": [
+            [
+              6.640625e-05,
+              0.002125,
+              0.00425
+            ],
+            [
+              0.0007968747400033834
+            ]
+          ],
+          "current_e22_metrics": {
+            "centre_distance": 0.08553312718868256,
+            "clean_particle_centres": {
+              "centre_distance": 0.06029481813311577,
+              "coverage": 25,
+              "covered_centroid_rms": 0.015623838640749454,
+              "mass_tv": 0.21484375,
+              "precision": 0.78515625,
+              "supported_mass": [
+                0.0322265625,
+                0.0322265625,
+                0.029296875,
+                0.029296875,
+                0.0390625,
+                0.0322265625,
+                0.0224609375,
+                0.0322265625,
+                0.029296875,
+                0.0341796875,
+                0.0283203125,
+                0.025390625,
+                0.0244140625,
+                0.02734375,
+                0.0322265625,
+                0.029296875,
+                0.0322265625,
+                0.0390625,
+                0.0283203125,
+                0.0302734375,
+                0.03515625,
+                0.0341796875,
+                0.03515625,
+                0.0341796875,
+                0.037109375
+              ],
+              "unsupported_mass": 0.21484375
+            },
+            "coverage": 25,
+            "covered_centroid_rms": 0.011348864063620567,
+            "mass_tv": 0.3115234375,
+            "precision": 0.6884765625,
+            "supported_mass": [
+              0.0264892578125,
+              0.025634765625,
+              0.025634765625,
+              0.02685546875,
+              0.0362548828125,
+              0.0260009765625,
+              0.02197265625,
+              0.0301513671875,
+              0.028564453125,
+              0.026611328125,
+              0.02783203125,
+              0.02880859375,
+              0.025634765625,
+              0.0257568359375,
+              0.02734375,
+              0.0244140625,
+              0.0264892578125,
+              0.0323486328125,
+              0.024658203125,
+              0.022705078125,
+              0.031494140625,
+              0.027587890625,
+              0.02978515625,
+              0.028564453125,
+              0.0308837890625
+            ],
+            "unsupported_mass": 0.3115234375
+          },
+          "current_e22_output_sigma": 0.028999999165534973,
+          "current_e22_surprise": {
+            "anchor_event": null,
+            "anchor_events": 0,
+            "armed": true,
+            "fires": 0,
+            "last_ratio": 1.0335452595756707,
+            "log": [],
+            "streak": 0
+          },
+          "lrs_identical": false,
+          "metrics_identical": false,
+          "step": 1750
+        },
+        {
+          "atlas_lrs": [
+            [
+              6.640625e-05,
+              0.0085,
+              0.0010625
+            ],
+            [
+              0.003187499705744193
+            ]
+          ],
+          "atlas_metrics": {
+            "centre_distance": 0.042550504207611084,
+            "clean_particle_centres": {
+              "centre_distance": 0.02287120744585991,
+              "coverage": 25,
+              "covered_centroid_rms": 0.010440723970532417,
+              "mass_tv": 0.0366796875,
+              "precision": 0.9990234375,
+              "supported_mass": [
+                0.037109375,
+                0.041015625,
+                0.03515625,
+                0.0341796875,
+                0.0390625,
+                0.03515625,
+                0.041015625,
+                0.04296875,
+                0.0361328125,
+                0.041015625,
+                0.0400390625,
+                0.0390625,
+                0.037109375,
+                0.048828125,
+                0.0380859375,
+                0.0361328125,
+                0.041015625,
+                0.044921875,
+                0.041015625,
+                0.0361328125,
+                0.041015625,
+                0.0458984375,
+                0.04296875,
+                0.04296875,
+                0.041015625
+              ],
+              "unsupported_mass": 0.0009765625
+            },
+            "coverage": 25,
+            "covered_centroid_rms": 0.009175768122076988,
+            "mass_tv": 0.05211425781250001,
+            "precision": 0.96533203125,
+            "supported_mass": [
+              0.03515625,
+              0.037353515625,
+              0.0341796875,
+              0.0357666015625,
+              0.03857421875,
+              0.03271484375,
+              0.04248046875,
+              0.0391845703125,
+              0.036865234375,
+              0.0382080078125,
+              0.0399169921875,
+              0.0384521484375,
+              0.0350341796875,
+              0.0455322265625,
+              0.0390625,
+              0.033203125,
+              0.03857421875,
+              0.0421142578125,
+              0.037841796875,
+              0.03955078125,
+              0.03857421875,
+              0.045166015625,
+              0.0413818359375,
+              0.040771484375,
+              0.0396728515625
+            ],
+            "unsupported_mass": 0.03466796875
+          },
+          "atlas_output_sigma": 0.028999999165534973,
+          "atlas_surprise": {
+            "anchor_event": null,
+            "anchor_events": 0,
+            "armed": true,
+            "fires": 0,
+            "last_ratio": 1.5151945587190752,
+            "log": [],
+            "streak": 0
+          },
+          "current_e22_lrs": [
+            [
+              6.640625e-05,
+              0.002125,
+              0.00425
+            ],
+            [
+              0.0007968747842471568
+            ]
+          ],
+          "current_e22_metrics": {
+            "centre_distance": 0.0810808315873146,
+            "clean_particle_centres": {
+              "centre_distance": 0.052734583616256714,
+              "coverage": 25,
+              "covered_centroid_rms": 0.012999268248677254,
+              "mass_tv": 0.1796875,
+              "precision": 0.8203125,
+              "supported_mass": [
+                0.0341796875,
+                0.0361328125,
+                0.0302734375,
+                0.0302734375,
+                0.0390625,
+                0.0361328125,
+                0.025390625,
+                0.033203125,
+                0.029296875,
+                0.0380859375,
+                0.0283203125,
+                0.0283203125,
+                0.025390625,
+                0.0302734375,
+                0.033203125,
+                0.03125,
+                0.0341796875,
+                0.0390625,
+                0.0302734375,
+                0.03125,
+                0.03515625,
+                0.0341796875,
+                0.03515625,
+                0.0341796875,
+                0.0380859375
+              ],
+              "unsupported_mass": 0.1796875
+            },
+            "coverage": 25,
+            "covered_centroid_rms": 0.009584306739270687,
+            "mass_tv": 0.2845458984375,
+            "precision": 0.7154541015625,
+            "supported_mass": [
+              0.0279541015625,
+              0.027099609375,
+              0.0250244140625,
+              0.02783203125,
+              0.0360107421875,
+              0.0279541015625,
+              0.0250244140625,
+              0.0322265625,
+              0.027099609375,
+              0.0322265625,
+              0.0283203125,
+              0.02978515625,
+              0.02587890625,
+              0.0263671875,
+              0.0279541015625,
+              0.0264892578125,
+              0.029296875,
+              0.0318603515625,
+              0.027099609375,
+              0.024658203125,
+              0.031005859375,
+              0.02734375,
+              0.0301513671875,
+              0.0286865234375,
+              0.0321044921875
+            ],
+            "unsupported_mass": 0.2845458984375
+          },
+          "current_e22_output_sigma": 0.028999999165534973,
+          "current_e22_surprise": {
+            "anchor_event": null,
+            "anchor_events": 0,
+            "armed": true,
+            "fires": 0,
+            "last_ratio": 1.0439435213589199,
+            "log": [],
+            "streak": 0
+          },
+          "lrs_identical": false,
+          "metrics_identical": false,
+          "step": 2000
+        }
+      ],
+      "compact_metrics": {
+        "coverage": {
+          "atlas": 25,
+          "current_e22": 25,
+          "maximum": 25
+        },
+        "mass_tv": {
+          "atlas": 0.05211425781250001,
+          "current_e22": 0.2845458984375,
+          "lower_is_better": true
+        },
+        "precision": {
+          "atlas": 0.96533203125,
+          "current_e22": 0.7154541015625,
+          "higher_is_better": true
+        }
+      },
+      "current_e22_actual_training_seconds": 89.46197154955007,
+      "current_e22_completed_at_epoch": 1790824483.682939,
+      "current_e22_execution": "fresh2000, PR155-E22-cabe2084",
+      "current_e22_fires": 0,
+      "current_e22_gate": "FAIL",
+      "current_e22_metrics": {
+        "centre_distance": 0.0810808315873146,
+        "clean_particle_centres": {
+          "centre_distance": 0.052734583616256714,
+          "coverage": 25,
+          "covered_centroid_rms": 0.012999268248677254,
+          "mass_tv": 0.1796875,
+          "precision": 0.8203125,
+          "supported_mass": [
+            0.0341796875,
+            0.0361328125,
+            0.0302734375,
+            0.0302734375,
+            0.0390625,
+            0.0361328125,
+            0.025390625,
+            0.033203125,
+            0.029296875,
+            0.0380859375,
+            0.0283203125,
+            0.0283203125,
+            0.025390625,
+            0.0302734375,
+            0.033203125,
+            0.03125,
+            0.0341796875,
+            0.0390625,
+            0.0302734375,
+            0.03125,
+            0.03515625,
+            0.0341796875,
+            0.03515625,
+            0.0341796875,
+            0.0380859375
+          ],
+          "unsupported_mass": 0.1796875
+        },
+        "coverage": 25,
+        "covered_centroid_rms": 0.009584306739270687,
+        "mass_tv": 0.2845458984375,
+        "precision": 0.7154541015625,
+        "supported_mass": [
+          0.0279541015625,
+          0.027099609375,
+          0.0250244140625,
+          0.02783203125,
+          0.0360107421875,
+          0.0279541015625,
+          0.0250244140625,
+          0.0322265625,
+          0.027099609375,
+          0.0322265625,
+          0.0283203125,
+          0.02978515625,
+          0.02587890625,
+          0.0263671875,
+          0.0279541015625,
+          0.0264892578125,
+          0.029296875,
+          0.0318603515625,
+          0.027099609375,
+          0.024658203125,
+          0.031005859375,
+          0.02734375,
+          0.0301513671875,
+          0.0286865234375,
+          0.0321044921875
+        ],
+        "unsupported_mass": 0.2845458984375
+      },
+      "current_e22_reopen_events": [],
+      "current_e22_result": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/pr155-e22-current/training/toy/PR155-E22-cabe2084/result.json",
+      "current_e22_started_at": "2026-10-01T03:13:10.388423+00:00",
+      "initial_hashes_exact": true,
+      "original_steps": 2000
+    }
+  },
+  "fresh_current_e22_updates_total": 4000,
+  "latest_atlas_package_sha256": "500ff0e966beb649dd7cafa0b91d7bb30cb451e5d62ece2883411a0507c8df61",
+  "new_atlas_training_updates": 0,
+  "scope": "Two original fixed-seed learned fixtures; recipe comparison, not isolated mechanism attribution.",
+  "source_integrity": {
+    "cpu_closed_sha256": "fa8f2ad8ab77093f34413ab1ee13660b5c50c5cf979bc7f5ba97acc256f4b702",
+    "inputs_sha256": "b316bbf28bc659c7bbc13a32fa22e7fd78b25923bcca48721727055ded046fd5",
+    "package_sha256": "c174ba0b805cc8e49ca40ebbea11785bb908f3ea32615afdf2ecb43e77221316",
+    "read_only_files": 95,
+    "source_freeze_sha256": "8bb844c6a89c7aa258a04837fa1150fa55b43811668fe6321f67da87592185ab",
+    "status": "VALID"
+  },
+  "status": "COMPLETE_CURRENT_PR155_E22_VS_ATLAS_COMPARISON",
+  "upstream_base_commit": "cabe2084284db923d525918cbf3e18de6f20faac",
+  "validity": "VALID"
+}

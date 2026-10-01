@@ -1,0 +1,17 @@
+{
+  "created_utc": "2026-10-01T03:17:29.320654+00:00",
+  "file_sha256": {
+    "COMPLETION-mnist.json": "7a2b78f24e21755c9486a75bcf6852501f79bc309a36be38c3e23e2f1cabe269",
+    "COMPLETION-toy.json": "5cc77cff65c58eeaf18d66e130fedfa9aff8239aa0e364789b70befe4ed75622",
+    "CPU-CLOSED.json": "fa8f2ad8ab77093f34413ab1ee13660b5c50c5cf979bc7f5ba97acc256f4b702",
+    "INPUTS.json": "b316bbf28bc659c7bbc13a32fa22e7fd78b25923bcca48721727055ded046fd5",
+    "SOURCE-FREEZE.json": "8bb844c6a89c7aa258a04837fa1150fa55b43811668fe6321f67da87592185ab",
+    "close_comparison.py": "f73a38e04080ba9f0ad6488b437e2570585b3f1b9e6d283a1d064e6605cc079a",
+    "training/mnist/PR155-E22-cabe2084/result.json": "92fb80537dba8289044598005c5a69786523c15fb5476fbd7ffa1008658bde52",
+    "training/toy/PR155-E22-cabe2084/result.json": "f37aead26e16d5b210a5206987dd64488e11b8bf63106b030a8480f2ff3757eb"
+  },
+  "planned_gpu_operations": 0,
+  "planned_model_calls": 0,
+  "planned_scorer_calls": 0,
+  "status": "PREPARED_ACTUAL_CURRENT_E22_VS_ATLAS_RECEIPT_CLOSER"
+}

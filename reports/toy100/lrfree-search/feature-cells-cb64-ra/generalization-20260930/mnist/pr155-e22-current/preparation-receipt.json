@@ -1,0 +1,26 @@
+{
+  "archived_e22_none_not_relabelled": true,
+  "atlas_controls_added": false,
+  "baseline_label": "PR155-E22-cabe2084",
+  "comparator_scope": "Named currentPR155 E22 vscurrent Atlas recipe onoriginal learned fixtures; no ablation attribution.",
+  "cuda_launches": 0,
+  "current_e22_optimizer_reopening": true,
+  "fixtures": 2,
+  "model_initialization": "Original public deterministic orthogonal G=0/D=1, no training RNG consumed",
+  "original_learning_rates_retained": true,
+  "planned_fresh_training_updates": 4000,
+  "planned_replay_updates": 0,
+  "source_contract": {
+    "extra_begin_step_calls": 0,
+    "original10_checkpoints_preserved": true,
+    "original2000_updates_preserved": true,
+    "original_image_scorer_ast_identical": true,
+    "original_init_and_primary_sampler_ast_identical": true,
+    "original_models_metrics_byte_pinned": true,
+    "original_toy_gate_ast_identical": true,
+    "original_training_loop_ast_identical": true,
+    "output_noise_explicit": true
+  },
+  "status": "SOURCE_FROZEN_WAITING_FOR_CPU_PREFLIGHT_AND_ROOT_LAUNCH",
+  "steps_per_fixture": 2000
+}

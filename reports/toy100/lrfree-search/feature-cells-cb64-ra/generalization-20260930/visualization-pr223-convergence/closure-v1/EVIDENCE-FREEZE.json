@@ -1,0 +1,17 @@
+{
+  "files": {
+    "DATA-RECEIPT.json": {
+      "bytes": 11560,
+      "sha256": "774cc0dea3ae3eadc18cce31748521c35470b5b30debaa2a3a96c6e54a9c0f05"
+    },
+    "close_capture.log": {
+      "bytes": 359,
+      "sha256": "af184be47eb71309d1140ea5985ec831d98e8192f85cbb25f71cae901b73602e"
+    },
+    "close_capture.py": {
+      "bytes": 5698,
+      "sha256": "ffa6c4cb3415fc0759ad053ed5c991c6a010ab31eb315df4b53c0f641f6a7371"
+    }
+  },
+  "status": "FROZEN_ACTUAL_PAIRED_CAPTURE_VALIDATION"
+}
