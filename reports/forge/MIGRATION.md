@@ -37,7 +37,7 @@ compatible full-reference positive. Its discovered legacy MoG envelope study is
 now preserved in [supplemental context](supplemental/local-mog-envelope-v1/README.md)
 and compiled memory, including all 26 rows and failed configurations. It retains
 its historical EMA criterion and supplies no current qualification.
-The latest compiler includes 231 records, with no conflicts or pending readouts;
+The handoff compiler included 231 records, with no conflicts or pending readouts;
 both exact control revisions are concluded. The two-control independent audit
 verified frozen grades, named initialization/RNG declarations and paid costs,
 with its missing-tensor/final-state verification limit stated explicitly.
@@ -57,6 +57,24 @@ is still developing; its original receipts can be imported when available. The
 [incoming API checklist](UPSTREAM_E22_COMPATIBILITY.md)
 records future E22/KA2 integration requirements; no incoming code was merged and
 current scientific source remains `5c9c9298`.
+
+The [2026-09-30 scientific stage](SCIENTIFIC_CALIBRATION_20260930_READOUT.md)
+preserves all existing gates and adds a fourth substantive lineage with only
+training output noise removed. Its preregistered full 7k native cell failed for
+93.746687201 new paid seconds; independent grading verifies initial tensor and
+named-RNG parity. The new profile reuses seven original receipts explicitly and
+has 8/76 measured cells, 68 unknown and 289.272195344 seconds of unique recorded
+cost. Every lineage already fails smoke or independent reference, so this roster
+also cannot meet the unchanged positive-reference and zero-false-rejection
+criteria. The exact new revision is concluded and abandoned; further matrix or
+failed-parent continuation spending is stopped. Scientific source, criteria and
+original receipts are unchanged. The [promotion readiness record](SCIENTIFIC_CALIBRATION_PROMOTION_READINESS.json)
+retains the absent accepted calibration and finished qualification; no robustness
+seed study or public-default adoption follows. Future research requires another
+supported hypothesis with a new bounded registration. The updated compiler has
+233 records, no conflicts and no pending readouts; the zero-training
+[saved-geometry diagnosis](studies/NO_OUTPUT_NOISE_SAVED_GEOMETRY.md) narrows the
+next question to heterogeneous learned-location spread and critic/prior response.
 
 ## Develop integration — 2026-09-29
 

@@ -9,7 +9,7 @@ Bound source/prior/runtime cohort: `eca8051cdbaaf1e7b56ef6096a6d29bb403e581403b4
 | k3p | FAIL | FAIL | true_reject | 40.244 | unknown |
 | forge-onboarding-anchor-ablation | FAIL | UNKNOWN | unknown | unknown | unknown |
 | forge-no-critic-penalty | FAIL | UNKNOWN | unknown | unknown | unknown |
-| k3p-no-output-noise-diagnostic | UNKNOWN | UNKNOWN | unknown | unknown | unknown |
+| k3p-no-output-noise-diagnostic | UNKNOWN | FAIL | unknown | unknown | unknown |
 
 Accept only this bound cohort/profile if all frozen criteria pass; no inherited historical-cloud or cross-seed credit.
 

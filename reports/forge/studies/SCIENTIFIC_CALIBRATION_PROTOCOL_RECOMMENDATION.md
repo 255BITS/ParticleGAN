@@ -16,7 +16,7 @@ Selection is deliberately informed by observed K3P late contraction and by the e
 
 ## Resolver and compatible reuse
 
-Use **plain `/usr/bin/python`**, Python 3.14.7, NumPy 2.5.3, PyTorch 2.14.0. The main-checkout `.venv` instead has Python 3.12.13/NumPy 2.5.2 and yields a different cohort. Plain Python verified all three existing candidate revisions and exact cohort `eca8051cdbaaf1e7b56ef6096a6d29bb403e581403b48d3b4f85796190eab08b`, source `5c9c929877c141ccf7352c16987d3a5aadf1aff3a0fedbfa78e7d9b8fe06fdb7`, and zero relevant preflight blockers.
+Use **plain `/usr/bin/python`**, Python 3.14.7, NumPy 2.5.3, PyTorch 2.14.0. The main-checkout `.venv` instead has Python 3.12.13/NumPy 2.5.2 and yields a different cohort. Plain Python verified all three existing candidate revisions and exact cohort `eca8051cdbaaf1e7b56ef6096a6d29bb403e581403b48d3b4f85796190eab08b`, source `5c9c929877c141ccf7352c16987d3a5aadf1aff3a0fedbfa78e7d9b8fe06fdb7`, and zero relevant preflight blockers. The subsequently declared fourth candidate resolves to revision `0fa6918ca4d0456515de09dbcfaeedffba1d4cecaab00dee5028bcf3b0b34603`, output noise zero, exactly the same original source/cohort, and zero global or 19 selected-task blockers; all four lineage cohorts therefore match.
 
 After declaring the new idea, derive the cohort for **every** lineage; compare the complete resolver output, not just a manually copied digest:
 

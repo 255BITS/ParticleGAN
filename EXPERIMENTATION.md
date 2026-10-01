@@ -31,6 +31,16 @@ are required; the controls' independent references and false-reject rate remain
 unknown. [Migration status](reports/forge/MIGRATION.md) retains the earlier
 studies, metrics, costs, source cohorts and future research/adoption work.
 
+The [2026-09-30 bounded reference study](reports/forge/SCIENTIFIC_CALIBRATION_20260930_READOUT.md)
+adds one substantive training-output-noise-removal lineage while preserving all
+three host-profile smoke gates, 16 independent references and frozen criteria.
+Its sole full 7k native diagnostic failed for 93.747 new paid seconds. Shape
+improved but terminal quality and sustained coverage failed. The new profile has
+8/76 measured cells and is also infeasible: every lineage is smoke-negative or
+reference-negative. Stop filling both failed profiles; no robustness or promotion
+run is eligible. Original evidence and the concluded failed revision remain in
+compiled memory.
+
 Task declarations describe intended coverage. Preflight and execution check the
 public API, formulation, host and frozen source; unsupported capabilities remain
 `BLOCKED` in the required denominator. Ordinary prerequisite failures stop later

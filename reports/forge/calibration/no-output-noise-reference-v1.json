@@ -515,7 +515,7 @@
       },
       "sha256": "eca8051cdbaaf1e7b56ef6096a6d29bb403e581403b48d3b4f85796190eab08b",
       "stats": {
-        "all_reference_negatives": 1,
+        "all_reference_negatives": 2,
         "all_reference_positives": 0,
         "blocked_lineages": 0,
         "false_accept": 0,
@@ -528,7 +528,7 @@
         "paired_fraction": 0.25,
         "reference_negatives": 1,
         "reference_positives": 0,
-        "reference_unknown_lineages": 3,
+        "reference_unknown_lineages": 2,
         "smoke_unknown_lineages": 1,
         "true_accept": 0,
         "true_reject": 1,
@@ -1097,13 +1097,23 @@
       "evidence_scope": "current",
       "id": "k3p-no-output-noise-diagnostic",
       "incompatible_evidence_policy": "Excluded without cross-cohort or cross-seed credit.",
-      "inputs": [],
+      "inputs": [
+        {
+          "attempt_id": "180af0fcfee447b697d5b5d05dc2877f",
+          "files": {
+            "evidence.json": "d059e87ea7db3be2fd3b3ec2386e3480eb28942b4be75f554e25b30ceb9b9f71",
+            "request.json": "7d4bfa1ff1579b5d4b51750684b98bed249ab430f6cfff57e89feaf66daef4c1",
+            "result.json": "8d924bee36b97644f0c4804f65635ae4df3278394260731e4e187e346bd1d0a1"
+          },
+          "result_sha256": "38683eb0e1dd5f384399244f0edb42e660c8186abbcc5d3988ad5d3ff5b584da"
+        }
+      ],
       "reference": {
         "blocked_tasks": [],
         "cost": {
           "flops": null,
-          "known_task_count": 0,
-          "known_wall_seconds": 0,
+          "known_task_count": 1,
+          "known_wall_seconds": 93.74668720099726,
           "missing_tasks": [
             "trajectory",
             "residual_student",
@@ -1116,7 +1126,6 @@
             "vector_anisotropic_published",
             "vector_overlap_published",
             "vector_spiral_published",
-            "grid100_affine_square_named_v1",
             "rotated100_affine_square_named_v1",
             "staggered100_affine_square_named_v1",
             "img_stripes2_residual16",
@@ -1126,12 +1135,14 @@
           "required_task_count": 16,
           "wall_seconds": null
         },
-        "decision": "UNKNOWN",
+        "decision": "FAIL",
         "error_or_incomplete_tasks": [],
-        "failed_tasks": [],
+        "failed_tasks": [
+          "grid100_affine_square_named_v1"
+        ],
         "task_statuses": {
           "cover_leftover": "NOT_RUN",
-          "grid100_affine_square_named_v1": "NOT_RUN",
+          "grid100_affine_square_named_v1": "FAIL",
           "img_blobs4_residual16": "NOT_RUN",
           "img_stripes2_residual16": "NOT_RUN",
           "mid_scale_identity": "NOT_RUN",
@@ -1159,7 +1170,6 @@
           "vector_anisotropic_published",
           "vector_overlap_published",
           "vector_spiral_published",
-          "grid100_affine_square_named_v1",
           "rotated100_affine_square_named_v1",
           "staggered100_affine_square_named_v1",
           "img_stripes2_residual16",

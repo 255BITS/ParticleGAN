@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope; current qualification is recomputed from compatible receipts.
 
-Records: 231. Inventory coverage: complete. Unresolved import items: 7.
+Records: 233. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -3460,6 +3460,22 @@ Historical recorded task outcomes: FAIL=1
 
 [Evidence](https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/paired-bd-graft/baseline-result.json) · [Record](records/history-v3-repro-50fe3393d8b8.json)
 
+### k3p-no-output-noise-diagnostic · lifecycle-1fdc4834581ce2e17a87e8e7
+
+**Scope:** administrative; administrative; revision `0fa6918ca4d0456515de09dbcfaeedffba1d4cecaab00dee5028bcf3b0b34603`.
+
+Removing additive training output noise may prevent the clean learned-MoG native distribution from contracting late. This is a one-factor diagnostic of the training/scoring-law mismatch, not a predicted positive or a full-reference claim.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `structural`.
+
+
+
+Administrative abandoned: Concluded preregistered full-native FAIL. Training output-noise removal improves shape but fails sustained coverage, all five terminal accuracy checks and independent holdout. Stop this revision; no further smoke/reference/14k spending. New profile cannot meet positive-reference plus zero false-rejection criteria.
+
+**Next:** Retain this revision's evidence and readout; declare a new revision before further work.
+
+[Evidence](../../) · [Record](records/lifecycle-1fdc4834581ce2e17a87e8e7.json)
+
 ### forge-no-critic-penalty · readout-060e7be73e2832e314b9573f
 
 **Scope:** calibration_diagnostic; scientific; revision `1e1a3e447fc222392dd327f0ae3d17ecf4dd7e7ce26ff79f82d69c31668f4461`.
@@ -3668,6 +3684,22 @@ The registered merged-develop quick screen completed 0/3 PASS on GPU 0: mode_hol
 
 [Evidence](../../reports/forge/attempts/5a5f1641fd80404fbb509d367e6a467f/result.json) · [Record](records/readout-9c29229a2baba56de3b40845.json)
 
+### k3p-no-output-noise-diagnostic · readout-abd06840fa1f42a4f64c13ab
+
+**Scope:** calibration_diagnostic; scientific; revision `0fa6918ca4d0456515de09dbcfaeedffba1d4cecaab00dee5028bcf3b0b34603`.
+
+Removing additive training output noise may prevent the clean learned-MoG native distribution from contracting late. This is a one-factor diagnostic of the training/scoring-law mismatch, not a predicted positive or a full-reference claim.
+
+**Observed:** {'FAIL': 1}; wall seconds 93.747; mechanism `structural`.
+
+grid100_affine_square_named_v1: precision=0.98165, center_rms_sigma=0.18834, mass_tv=0.0317, radial_ks=0.06713
+
+One preregistered full 7000-update clean learned-MoG grid diagnostic FAIL for 93.746687201 paid seconds. Final 100 modes do not compensate for sustained coverage FAIL (one final coverage check) and 0/5 joint terminal passes. The independent 100k live holdout fails abs covariance bias .1630054 > .10 and radial KS .06713046 > .04; centre RMS .1883405 and mass TV .0317 pass. EMA holdout also fails. All intended G/D/prior updates completed, state finite and no unintended RNG deviations. No full-reference positive, accepted calibration or ordinary qualification.
+
+**Next:** Stop this exact diagnostic and its infeasible no-output-noise-reference-v1 roster: every lineage is already smoke-negative or reference-negative, so no possible completion satisfies a reference positive and zero false rejects. Do not spend on its smoke, other reference cells or 14k continuation. Preserve all 16 reference purposes and frozen criteria. Next stage should first use saved terminal artifacts to locate per-mode shape/centre/critic-response failure and require a new supported structural hypothesis with a separately bounded preregistration. Production promotion remains blocked on accepted calibration and finished exact qualification.
+
+[Evidence](../../reports/forge/attempts/180af0fcfee447b697d5b5d05dc2877f/result.json) · [Record](records/readout-abd06840fa1f42a4f64c13ab.json)
+
 ### k3p · readout-acc70fcaf6cedb9a3772e41e
 
 **Scope:** calibration_diagnostic; scientific; revision `229770eceb2d51236085562985c341033df825c4c85fc20adbebdef313f8c65b`.
@@ -3728,4 +3760,4 @@ All three registered smoke cells completed at the frozen current cohort: two_pol
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v1`; input digest `750e059f376099a70891f2459c61f31bd4bca63ae381efe61b59dc01ac60e73f`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v1`; input digest `edf594d5f74259da18d4f7a5f041809a35245c0c47c04bd0b664deb6e26c11cb`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
