@@ -634,7 +634,7 @@ class CriticPenalty:
             raise TypeError("optimizer must come from recipe.make_critic_optimizer or recipe.make_optimizers")
         self.optimizer, self.critic = optimizer, optimizer.critic
         options = recipe._penalty_options(**penalty_overrides)
-        if optimizer.anchor is None and options["anchor_weight"] != 0:
+        if options["arm"] == "k3p" and optimizer.anchor is None and options["anchor_weight"] != 0:
             raise ValueError("this penalty needs the critic's EMA: pass ema_critic=copy.deepcopy(critic) "
                              "to recipe.make_optimizers / recipe.make_critic_optimizer")
         self.regularizer = GradientPenalty(record=optimizer.record, **options)
@@ -650,19 +650,27 @@ class CriticPenalty:
 
     def _ema_view(self, critic):
         """``m -> module`` mapping the EMA root to the EMA counterpart of ``critic``."""
-        if isinstance(critic, nn.Module):
-            name = self._names.get(id(critic))
+        def mapping(module):
+            if not isinstance(module, nn.Module):
+                return None
+            name = self._names.get(id(module))
             if name is not None:
-                return lambda m: m.get_submodule(name)
-            for key, child in critic._modules.items():
-                inner = None if child is None else self._names.get(id(child))
-                if inner is not None:
-                    def view(m, key=key, inner=inner):
-                        clone = copy(critic)
-                        clone._modules = dict(critic._modules)
-                        clone._modules[key] = m.get_submodule(inner)
-                        return clone
-                    return view
+                return lambda root: root.get_submodule(name)
+            children = {key: view for key, child in module._modules.items()
+                        if (view := mapping(child)) is not None}
+            if children:
+                def view(root):
+                    clone = copy(module)
+                    clone._modules = dict(module._modules)
+                    for key, child_view in children.items():
+                        clone._modules[key] = child_view(root)
+                    return clone
+                return view
+            return None
+
+        view = mapping(critic)
+        if view is not None:
+            return view
         raise TypeError("pass the critic paired with this penalty's optimizer, one of its submodules, "
                         "or a module wrapping one of those")
 
@@ -686,7 +694,8 @@ class CriticPenalty:
 
     def diagnostics(self):
         """Host-side scalars for logging (blend weight; guard clip count)."""
-        out = {"blend_weight": float(self.regularizer.blend_weight())}
+        out = ({"blend_weight": float(self.regularizer.blend_weight())}
+               if self.regularizer.arm == "k3p" else {})
         if self.optimizer.guard is not None:
             out["clipped_tensors"] = self.optimizer.guard.clipped_tensors
         return out

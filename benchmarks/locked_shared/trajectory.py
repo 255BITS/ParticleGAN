@@ -135,7 +135,7 @@ def _cover(fake: torch.Tensor, real: torch.Tensor) -> torch.Tensor:
 
 
 def train(*, pairing: str = "shared", gan_factory=None, cap_factory=None,
-          diagnostics=False, noise_policy=None) -> dict:
+          diagnostics=False, noise_policy=None, components=None) -> dict:
     """Train and measure identity error; every pairing is allowed."""
     torch.set_num_threads(1)
     torch.manual_seed(PROTOCOL["seed"])
@@ -166,6 +166,9 @@ def train(*, pairing: str = "shared", gan_factory=None, cap_factory=None,
     )
     if noise_policy is not None:
         noise_policy.register_generator_optimizer(opt_g, opt_d)
+    if components is not None:
+        opt_g, opt_d, gan, regularizer = components.bind(
+            generator=generator, critic=critic, priors=[prior], opt_g=opt_g, opt_d=opt_d)
     steps = PROTOCOL["steps"]
     for step in range(1, steps + 1):
         if noise_policy is not None:

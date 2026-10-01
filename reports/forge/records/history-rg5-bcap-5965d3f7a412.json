@@ -1,0 +1,157 @@
+{
+  "candidate_id": "rg5-bcap",
+  "candidate_revision": "11830aaf946fa10d631d0b0a4702de9c8f564ab2f47e5cb3933087796c7c30cb",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "live",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Historical recorded task outcomes: PASS=1",
+  "evidence_scope": "historical",
+  "hypothesis": "Unknown; consult the linked source narrative.",
+  "mechanism_class": "unknown",
+  "next_action": "Bind compatible task, fixture, package, scoring, and complete raw evidence before qualification reuse.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "attempt_id": "rg5-bcap-toy-ae_gan_hold",
+      "environment": {
+        "ATEN_CPU_CAPABILITY": "avx2",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+        "CUDA_VISIBLE_DEVICES": "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+        "LD_PRELOAD": null,
+        "MKL_ENABLE_INSTRUCTIONS": "AVX2"
+      },
+      "floors": null,
+      "role": "candidate"
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-rg5-bcap-5965d3f7a412",
+  "record_type": "scientific",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "0089356f12173badfd6dc8d985efb5de55a5f72f",
+    "path": "reports/toy100/gap-fill-20260925/results-summary.json",
+    "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "sha256": "8272fb8fb5442da91326131b7100c73812ffd91016a81f5d9a9ffca97903fda4",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results-summary.json"
+  },
+  "task_results": [
+    {
+      "cost": {
+        "flops": null,
+        "flops_status": "unavailable",
+        "peak_gpu_mib": null,
+        "seconds": 10.676302849082276,
+        "steps": null,
+        "train_seconds": null
+      },
+      "diagnostics": {},
+      "evidence": [
+        {
+          "git_blob": "0089356f12173badfd6dc8d985efb5de55a5f72f",
+          "original_evidence": {
+            "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-ae_gan_hold/result.json",
+            "artifact_sha256": "75a539fe67b3667015b0ce84b22dc43ac6195ec01303ef558bf893139da46c37",
+            "id": "rg5-bcap-toy-ae_gan_hold",
+            "snapshot": "results/rg5-bcap-toy-ae_gan_hold.json.gz",
+            "snapshot_sha256": "ae3fae01bd251fbb5b25d428c8ba7eafc3fe620a41d8573078befc445e6509d8"
+          },
+          "path": "reports/toy100/gap-fill-20260925/results-summary.json",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "8272fb8fb5442da91326131b7100c73812ffd91016a81f5d9a9ffca97903fda4",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results-summary.json"
+        }
+      ],
+      "evidence_scope": "historical",
+      "gate_status": "PASS",
+      "metrics": {},
+      "raw_result": {
+        "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-ae_gan_hold/result.json",
+        "artifact_sha256": "75a539fe67b3667015b0ce84b22dc43ac6195ec01303ef558bf893139da46c37",
+        "candidate": "rg5-bcap",
+        "environment": {
+          "ATEN_CPU_CAPABILITY": "avx2",
+          "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+          "CUDA_VISIBLE_DEVICES": "GPU-cb4ce47d-d968-bffd-5646-e830a9fa1c69",
+          "LD_PRELOAD": null,
+          "MKL_ENABLE_INSTRUCTIONS": "AVX2"
+        },
+        "error": null,
+        "floors": null,
+        "id": "rg5-bcap-toy-ae_gan_hold",
+        "kind": "toy",
+        "live": {
+          "hold": 0.001990848919376731,
+          "recon_mse": 0.006131417118012905
+        },
+        "raw_status": "PASS",
+        "seconds": 10.676302849082276,
+        "snapshot": "results/rg5-bcap-toy-ae_gan_hold.json.gz",
+        "snapshot_sha256": "ae3fae01bd251fbb5b25d428c8ba7eafc3fe620a41d8573078befc445e6509d8",
+        "task": "ae_gan_hold",
+        "verdict": {
+          "attempted": true,
+          "confirmation_fraction": 0.628,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": 6.771652397932485,
+            "confirmed_step": 157,
+            "first_pass_step": 32,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 21,
+            "passing_suffix": 14,
+            "stable_from_seconds": 5.295882193837315,
+            "stable_from_step": 115
+          },
+          "metrics": [
+            {
+              "margin": 0.0438685828819871,
+              "metric": "recon_mse",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.05,
+              "value": 0.006131417118012905
+            },
+            {
+              "margin": 0.34800915108062325,
+              "metric": "hold",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.35,
+              "value": 0.001990848919376731
+            }
+          ],
+          "passed": true,
+          "shortfall": 0.0,
+          "status": "PASS"
+        }
+      },
+      "raw_status": "PASS",
+      "reason": null,
+      "role": "candidate",
+      "task_id": "ae_gan_hold"
+    }
+  ]
+}

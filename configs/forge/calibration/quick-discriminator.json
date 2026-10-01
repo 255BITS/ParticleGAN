@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "id": "quick-discriminator",
+  "revision": 1,
+  "criteria": "criteria-v1.json",
+  "lineages": [
+    {
+      "id": "gapfill-k3p",
+      "candidate_id": "k3p",
+      "source_path": "reports/toy100/gap-fill-20260925/qualification-summary.json",
+      "prior_cohort": "historical_host_protocol",
+      "runtime_cohort": "historical_cuda_fp32_fixture_protocol"
+    },
+    {
+      "id": "gapfill-k3g",
+      "candidate_id": "k3g",
+      "source_path": "reports/toy100/gap-fill-20260925/qualification-summary.json",
+      "prior_cohort": "historical_host_protocol",
+      "runtime_cohort": "historical_cuda_fp32_fixture_protocol"
+    },
+    {
+      "id": "gapfill-k3",
+      "candidate_id": "k3",
+      "source_path": "reports/toy100/gap-fill-20260925/qualification-summary.json",
+      "prior_cohort": "historical_host_protocol",
+      "runtime_cohort": "historical_cuda_fp32_fixture_protocol"
+    },
+    {
+      "id": "gapfill-rg5-bcap",
+      "candidate_id": "rg5-bcap",
+      "source_path": "reports/toy100/gap-fill-20260925/qualification-summary.json",
+      "prior_cohort": "historical_host_protocol",
+      "runtime_cohort": "historical_cuda_fp32_fixture_protocol"
+    },
+    {
+      "id": "dv12-ams-rc3-c22",
+      "candidate_id": "dv12-ams-rc3-c22",
+      "source_path": "reports/toy100/lrfree-search/custom22/results.json",
+      "prior_cohort": "historical_custom_hosts",
+      "runtime_cohort": "pr155_custom_engine"
+    },
+    {
+      "id": "st-10-c22",
+      "candidate_id": "st-10-c22",
+      "source_path": "reports/toy100/lrfree-search/custom22/results.json",
+      "prior_cohort": "historical_custom_hosts",
+      "runtime_cohort": "pr155_custom_engine"
+    },
+    {
+      "id": "row-em-renew-all22",
+      "candidate_id": "row-em-renew-all22",
+      "source_path": "reports/toy100/lrfree-search/row-em-renew/all22-summary.json",
+      "prior_cohort": "historical_cloud_with_custom_host_refusals",
+      "runtime_cohort": "pr155_qr_noisy_cuda"
+    },
+    {
+      "id": "pr215_exact_host_init",
+      "candidate_id": "pr215_exact_host_init",
+      "source_path": "reports/toy100/lrfree-search/comparison-pr215-pr217/results.json",
+      "prior_cohort": "historical_particle_cloud",
+      "runtime_cohort": "pr155_xavier_cuda"
+    },
+    {
+      "id": "pr215_qr_adapter",
+      "candidate_id": "pr215_qr_adapter",
+      "source_path": "reports/toy100/lrfree-search/comparison-pr215-pr217/results.json",
+      "prior_cohort": "historical_particle_cloud",
+      "runtime_cohort": "pr155_qr_cuda"
+    },
+    {
+      "id": "pr217_qr_native_adapter",
+      "candidate_id": "pr217_qr_native_adapter",
+      "source_path": "reports/toy100/lrfree-search/comparison-pr215-pr217/results.json",
+      "prior_cohort": "historical_particle_cloud",
+      "runtime_cohort": "pr155_qr_cuda"
+    }
+  ],
+  "smoke_tasks": [
+    "mode_hold",
+    "img_bars4",
+    "img_intensity2"
+  ],
+  "smoke_updates": {
+    "mode_hold": 1200,
+    "img_bars4": 600,
+    "img_intensity2": 1200
+  },
+  "reference_tasks": [
+    "trajectory",
+    "residual_student",
+    "unipolar",
+    "cover_leftover",
+    "mid_scale_identity",
+    "vector_two_broad",
+    "vector_unequal_mass",
+    "vector_unequal_width",
+    "vector_anisotropic",
+    "vector_overlap",
+    "vector_spiral",
+    "grid100",
+    "rotated100",
+    "staggered100",
+    "img_stripes2",
+    "img_blobs4"
+  ],
+  "reference_exclusions": [
+    "two_pole",
+    "unused_token_hold",
+    "ae_gan_hold",
+    "mode_hold",
+    "img_bars4",
+    "img_intensity2"
+  ],
+  "reference_scope": "Independent quality suffix, shared across both proposed smoke profiles. Endurance and adaptation remain separate later requirements. Excludes the union of both smoke predicates to avoid circular false-rejection classification.",
+  "scoring_weights": "live",
+  "new_execution_prior": {
+    "kind": "mog",
+    "sigma": 0.025,
+    "learnable": true
+  },
+  "training_allowance_seconds": 0,
+  "selection_note": "The alternate profile is an explicitly separate research proposal; evaluating it does not replace or relabel initial-profile results.",
+  "budget_note": "Proposed upper update counts only; historical task budgets differ by lineage and are retained. This is not a uniform-cost timing comparison."
+}

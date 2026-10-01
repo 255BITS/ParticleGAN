@@ -1,0 +1,78 @@
+{
+  "candidate_id": "context:lrfree/structural100",
+  "candidate_revision": "45ff7a6b599787118987a3c527f1b291d6a17597e6b6c0e03048b60cfd77ebb8",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "unknown",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Narrative context only; no scientific pass is inferred.",
+  "evidence_scope": "historical",
+  "hypothesis": "Native 100-Gaussian structural round (`st5`\u2013`st7` and D-rate ablation)",
+  "mechanism_class": "training_formulation",
+  "next_action": "Read the linked narrative and normalize any remaining exact experiment identities before scientific comparison.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "family": "lrfree/structural100",
+      "narrative_sources": [
+        {
+          "git_blob": "5393b6fb70ae12b2a9ec09db1e0e3fd39f5c6cf0",
+          "path": "reports/toy100/lrfree-search/structural100/README.md",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "13b5fa10ba5aeb42ec2d9b0e5904fe908b5ebef11b8f97e8da91ced04b06aef7",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/structural100/README.md"
+        },
+        {
+          "git_blob": "a4fc39700de8dd1254e89513e0811ce77c0f938a",
+          "path": "reports/toy100/lrfree-search/structural100/critic-refit-summary.md",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "5e322d833fc6a7115b3aa594034c0d1861faa8d9153e2cf3d904107351df46d8",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/structural100/critic-refit-summary.md"
+        },
+        {
+          "git_blob": "1d50ca54983ee218e6bcd0892589b50247ddd1ea",
+          "path": "reports/toy100/lrfree-search/structural100/critic-underfit-audit.md",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "c271db6d93d061d184bcc9207b9482433a42bbcde57ed19d9efd85f7a729e343",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/structural100/critic-underfit-audit.md"
+        }
+      ],
+      "structured_sources_imported": [
+        "reports/toy100/lrfree-search/structural100/native100-results.json"
+      ],
+      "summary_excerpt": "# Native 100-Gaussian structural round (`st5`\u2013`st7` and D-rate ablation)\n\nThis snapshot records the `st5`\u2013`st7` experiments and D-rate ablation from\nthe LR-free research harness. They are experimental candidates, not changes to the public\n`GANTrainer` default.\nThe question is whether a prior-table controller can find a settling scale\nfrom its own motion, and whether evidence-paired particle moves can clear\nbridge particles and correct mode mass without the churn seen in the earlier\nbirth/death arm. The fixed-noise arm isolates the effect of learned output\nnoise; `.029` is an attribution control, not a proposed universal setting.\n`st6` tests transactional adaptive extragradient on the no-birth/death `st5`\nbase.\n`st7` tests whether temporal evidence from the generated sample law reopens\nonly the critic's stationarity test.\nThe D-base ablation tests the critic's base rate while leaving the other\nstationarity rules in place.\nThe later [#215/#217 source audit](../comparison-pr215-pr217/README.md)\nuses the same #155 hosts but evaluates separate published recipes and has\nits own 13-gate and native verdicts.\n\n## Candidate and evaluation\n\n| Harness candidate | Initialization / mechanism | Output noise | Overrides |\n|---|---|---|---|\n| `st5-scaleaware-qr` | **QR primary** / two-scale, scale-aware settle; no BD | learnable | [config](configs/st5-scaleaware-qr.json) |\n| `st5-scaleaware-xv`"
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-context-lrfree-structural100-8da5accab480",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "5393b6fb70ae12b2a9ec09db1e0e3fd39f5c6cf0",
+    "path": "reports/toy100/lrfree-search/structural100/README.md",
+    "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+    "sha256": "13b5fa10ba5aeb42ec2d9b0e5904fe908b5ebef11b8f97e8da91ced04b06aef7",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/structural100/README.md"
+  },
+  "task_results": []
+}

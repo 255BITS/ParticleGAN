@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "id": "ring_hold",
+  "adapter": "ring_endurance",
+  "execution": {
+    "host": "mode_hold",
+    "steps": 7500,
+    "max_total_steps": 7500,
+    "original_schedule_horizon": 1200,
+    "execution_group": "ring_endurance",
+    "prior": {
+      "kind": "mog",
+      "sigma": 0.025,
+      "standardize": false,
+      "learnable": true
+    },
+    "protocol": "screening",
+    "produces_state": true,
+    "uninterrupted": true
+  },
+  "evaluation": {
+    "sampling_contract_version": 1,
+    "sampling_law": "public_prior_without_output_noise",
+    "eval_output_noise": "clean",
+    "kind": "ring_hold",
+    "evaluator": "reports/toy100/gap-fill-20260925/sources/k3p/convergence_gate.py:ConvergenceGate",
+    "scoring_weights": "live",
+    "start_step": 1200,
+    "confirmation_checks": 200,
+    "settling_budget": 4800,
+    "hold_budget": 1200,
+    "max_total_steps": 7500,
+    "extension_steps": 300,
+    "thresholds": [
+      [
+        "modes",
+        "==",
+        8
+      ],
+      [
+        "hq",
+        ">=",
+        0.9
+      ],
+      [
+        "hq",
+        "<=",
+        1.0
+      ]
+    ],
+    "sources": {
+      "reports/toy100/gap-fill-20260925/sources/k3p/convergence_gate.py": "a29c8c21083195c2944a2b2509ec7d4b96e6fc1eb7c3fa6df70d51dea6fe1ce0"
+    }
+  },
+  "resources": {
+    "gpus": 1,
+    "gpu_memory_mb": 2048,
+    "cpu_threads": 1,
+    "timeout_seconds": 3600
+  },
+  "requires_capabilities": [
+    "checkpoint",
+    "named_rng",
+    "live_sampling",
+    "learned_locations",
+    "mog_prior"
+  ],
+  "dependencies": [
+    {
+      "task": "mode_hold",
+      "kind": "gate"
+    }
+  ]
+}

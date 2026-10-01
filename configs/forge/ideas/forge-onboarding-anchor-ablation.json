@@ -1,0 +1,36 @@
+{
+  "api_changes": [],
+  "api_version": "forge-api-v1",
+  "changed_factors": [
+    "Ablate the public critic EMA-anchor term with recipe_overrides.reg_anchor_weight=0; keep the inherited initializer, fixed protocol seed and prior."
+  ],
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "execution_path": "public_trainer",
+  "goal": "discriminator_stability",
+  "guide": "EXPERIMENTATION.md",
+  "hypothesis": "Removing the public critic EMA-anchor term may weaken short-horizon adversarial movement; the fixed CPU smoke gate should reject a harmful ablation before larger tests.",
+  "id": "forge-onboarding-anchor-ablation",
+  "lifecycle": "proposed",
+  "mechanism_class": "structural",
+  "mechanism_rationale": "A named mechanism ablation removes the EMA-anchor penalty term through the public recipe API; this is not a new seed or a constant sweep.",
+  "parent": "k3p",
+  "prior_art": [
+    "reports/forge/calibration/initial.md",
+    "reports/forge/records/history-k3p-84363f69cb3a.json",
+    "reports/forge/EXPERIMENT_MEMORY.md"
+  ],
+  "recipe_overrides": {
+    "reg_anchor_weight": 0.0
+  },
+  "requires_capabilities": [
+    "learned_locations",
+    "a2",
+    "named_rng"
+  ],
+  "schema_version": 1,
+  "onboarding_scope": "One CPU-only tier-1 walkthrough; no adoption or production-default claim."
+}

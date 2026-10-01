@@ -3,6 +3,7 @@
 Networks and devices belong to the caller; GANTrainer optionally owns updates.
 """
 from .autoencoder import ParticleEncoding, particle_ae, particle_vae
+from .capabilities import prior_capabilities, prior_mechanisms
 from .birth_death import ParticleRows, ScalarHeadFeatures
 from .conditioning import UCD, ucd_labels, ucd_loss, ucd_scores
 from .continuous import DataDriftController
@@ -26,6 +27,7 @@ from . import init
 
 __all__ = [
     "init",
+    "prior_capabilities", "prior_mechanisms",
     "ParticleEncoding", "particle_ae", "particle_vae",
     "ParticleRows", "ScalarHeadFeatures",
     "RoutedBatch", "RoutedCandidate", "RoutedExecution", "RoutedRows",

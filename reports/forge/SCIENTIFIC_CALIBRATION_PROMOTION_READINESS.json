@@ -1,0 +1,56 @@
+{
+  "calibration_profile": "no-output-noise-reference-v1",
+  "calibration_report": "reports/forge/calibration/no-output-noise-reference-v1.json",
+  "calibration_report_sha256": "56db124c8faa380c86bcf4a8bb702342cea8f193ecd12d8a6432f24dc90eb61e",
+  "candidate_id": "k3p-no-output-noise-diagnostic",
+  "candidate_revision": "0fa6918ca4d0456515de09dbcfaeedffba1d4cecaab00dee5028bcf3b0b34603",
+  "checks": [
+    {
+      "reason": "Both preserved host-profile-transfer-v1 and new no-output-noise-reference-v1 have no full positive and cannot satisfy unchanged criteria; neither accepted.",
+      "requirement": "Accepted calibration from verified actual receipts",
+      "status": "BLOCKED"
+    },
+    {
+      "reason": "Only one new calibration-diagnostic cell measured; grid100 full native FAIL. Three new-lineage smoke tasks and 15 remaining independent references unknown. Ordinary qualification unavailable; diagnostic evidence has qualification_reuse false. Ring endurance not measured.",
+      "requirement": "Every applicable ordinary smoke, quality and endurance gate PASS",
+      "status": "FAIL"
+    },
+    {
+      "reason": "One completed paid attempt bound to exact-revision immutable Forge readout; negative conclusion preserved.",
+      "requirement": "Concluded exact-revision readout bound to attempts",
+      "status": "PASS"
+    },
+    {
+      "reason": "Existing unchanged scientific source, exact one-field recipe ablation, seed0 named streams, fixed learned MoG sigma .025 and clean live scoring frozen before training.",
+      "requirement": "Frozen formulation, serving and scoring policy",
+      "status": "PASS"
+    },
+    {
+      "reason": "Selected native toy diagnostic only; no application-quality claim or matching application/endurance evidence.",
+      "requirement": "Product claim supported by matching application evidence",
+      "status": "BLOCKED"
+    }
+  ],
+  "cohort_sha256": "eca8051cdbaaf1e7b56ef6096a6d29bb403e581403b48d3b4f85796190eab08b",
+  "criteria_sha256": "6eac2531eed68e392c11a57328999ac5dce509f8fe51d23e7b9031b7a4e3f9d1",
+  "next_bounded_measurement": {
+    "kind": "read_only_saved_critic_prior_gradient_diagnostic",
+    "purpose": "Inspect deterministic critic radial gradients or public prior-update residual moments across narrow versus broadened/drifted component rows. Saved geometry already shows nearly unchanged analytic kernel scale and heterogeneous location spread. Declare diagnostic algorithm before measurement; no alternative pass view, random sweep, width/scale tuning or training. Review before a supported new structural intervention.",
+    "selection": [
+      "control dca8c7aa0eca484c9270d07125f7cb0b final public checkpoint",
+      "new180af0fcfee447b697d5b5d05dc2877f final public checkpoint"
+    ],
+    "training_allowance_seconds": 0
+  },
+  "production_promotion_registered": false,
+  "profile_sha256": "eccef8c47375daceb53270524e0981550a229ea5850652926ac276a15bf47bff",
+  "public_default_recommended": false,
+  "readout": "reports/forge/records/readout-abd06840fa1f42a4f64c13ab.json",
+  "readout_sha256": "2be40326cc2e73e61ee2b658f1d4777cde11ceef722746d1de2d8b787ba20362",
+  "reason_no_robustness": "No finished qualified candidate or accepted calibration. The conditional seed exception is inapplicable.",
+  "robustness_seeds": null,
+  "saved_geometry_report": "reports/forge/studies/NO_OUTPUT_NOISE_SAVED_GEOMETRY.json",
+  "saved_geometry_sha256": "36725d750b2b625c4bd6ac830d8a63c35e52b7dd9b7fd2a24d06cfe82f952f51",
+  "schema_version": 1,
+  "status": "BLOCKED"
+}

@@ -102,6 +102,7 @@ class TransitionTests(unittest.TestCase):
         self.assertEqual(r, expected)
         self.assertEqual(r["num_particles"], 1024)
         self.assertNotIn("reg_arm", r)
+        self.assertEqual(get_recipe().critic_formulation, "ka2")
         sizes = [sum(p.numel() for p in g.parameters()) for g in
                  (TransitionGenerator(), TransitionGenerator(32, "monolithic", 234))]
         self.assertLess(abs(sizes[0]/sizes[1]-1), .01)

@@ -1,0 +1,1556 @@
+{
+  "candidate_id": "h2-handoff-critic-floor",
+  "candidate_revision": "a791d502aa9509f61e0984304637ebf31bd8b78699af5d3e58270ec58085fc37",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": 0.995,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": true,
+      "options": {
+        "diagnostics": true,
+        "eval_output_noise": true,
+        "evaluation_generate": "plain",
+        "image_prior_perturb": false,
+        "initialization": "batch_feature_zero",
+        "ring_frozen_control": false,
+        "save_final_state": true,
+        "serial_backward_argument": true,
+        "strict_streams": true
+      }
+    },
+    "scoring_weights": "live",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Historical recorded task outcomes: FAIL=1",
+  "evidence_scope": "historical",
+  "hypothesis": "Unknown; consult the linked source narrative.",
+  "mechanism_class": "training_formulation",
+  "next_action": "Bind compatible task, fixture, package, scoring, and complete raw evidence before qualification reuse.",
+  "prior": {
+    "kind": "particles",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": 0.0,
+    "standardize": true,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": {
+      "alpha_bar": [
+        1.0,
+        0.9,
+        0.5,
+        0.05,
+        0.0001
+      ],
+      "amsgrad": true,
+      "batch_size": 2048,
+      "betas": [
+        0.0,
+        0.999
+      ],
+      "conditioning": "scalar",
+      "continuous_policy": "dv12",
+      "critic_payoff_damping": true,
+      "critic_r1_real": true,
+      "d_guard_min_steps": 200,
+      "d_guard_ratio": 5.0,
+      "d_lr_mult": 1.0,
+      "direct_particle_betas": [
+        0.0,
+        0.9
+      ],
+      "direct_particle_gain": true,
+      "distance_reduction": "sum",
+      "ema_decay": 0.995,
+      "encoder_mode": "none",
+      "initialization": "batch_feature_zero",
+      "input_noise_anneal_end": 0.1,
+      "input_noise_std": 0.0,
+      "latent_damping_max_rate": 0.5,
+      "lr": 0.00425,
+      "lr_anneal_start": 0.6,
+      "lr_control": "stationarity",
+      "lr_floor": 0.05,
+      "model": "gan",
+      "name": "ka2",
+      "network_lr_floor": 0.01,
+      "network_lr_horizon_cap": 1600,
+      "num_classes": null,
+      "num_particles": 20000,
+      "observation_sigma": 0.03,
+      "output_noise_mode": "learnable",
+      "output_noise_std": 0.02,
+      "output_noise_warmup": 0.0,
+      "particle_birth_death": true,
+      "prior_betas": null,
+      "prior_kind": "particles",
+      "prior_lr_mult": 2.0,
+      "prior_reg": 0.0,
+      "reconstruction_weight": 1.0,
+      "reg_anchor_min_decay": 0.9,
+      "reg_anchor_weight": 1.0,
+      "reg_coeff": 3.0,
+      "reg_every": 1,
+      "reg_kappa": 1.0,
+      "routing_temperature": 0.25,
+      "sigma_rel": 0.0,
+      "standardize": true,
+      "total_steps": null,
+      "ucd_target": "class",
+      "ucd_weight": 0.02,
+      "z_dim": 2
+    },
+    "context": {
+      "cand": "h2-handoff-critic-floor",
+      "clean_final": {
+        "acc_abs_cov_trace_bias": 0.6584862967726038,
+        "acc_accuracy_pass": false,
+        "acc_accuracy_score": 4.60728155414054,
+        "acc_center_rms_sigma": 0.1608171527638979,
+        "acc_cov_trace_bias": -0.6584862967726038,
+        "acc_frozen_pass": false,
+        "acc_mass_tv": 0.041650000000000006,
+        "acc_passed": false,
+        "acc_radial_ks": 0.4138404327339987,
+        "hq": 0.95895,
+        "mass_tv": 0.04165,
+        "max_cov_eig_ratio": 1.1578217014585532,
+        "max_mode_mass": 0.0128,
+        "max_radial_median_ratio": 1.122216134932149,
+        "min_cov_eig_ratio": 0.0026998591393935776,
+        "min_hq_mode_mass": 0.0067,
+        "min_radial_median_ratio": 0.10527939851103363,
+        "modes": 100,
+        "precision": 0.95895,
+        "sharp_clean": 0.5804867744445801,
+        "sharp_noisy": 1.0459810495376587,
+        "step": 7000
+      },
+      "clean_final_streak": 0,
+      "clean_first_arrival": null,
+      "clean_native": {
+        "accuracy_first_arrival": null,
+        "accuracy_status": "FAIL",
+        "coverage_stable_checks": 0,
+        "coverage_status": "FAIL",
+        "first_arrival": null,
+        "first_full_coverage": 750,
+        "holdout": {
+          "abs_cov_trace_bias": 0.6600049498182878,
+          "accuracy_pass": false,
+          "accuracy_score": 4.584158932228326,
+          "center_rms_sigma": 0.15610802110871247,
+          "cov_trace_bias": -0.6600049498182878,
+          "frozen_pass": false,
+          "mass_tv": 0.037250000000000005,
+          "passed": false,
+          "precision": 0.95709,
+          "radial_ks": 0.4134085116741412
+        },
+        "holdout_pass": false,
+        "reason": "coverage, sustained live accuracy, or independent holdout failed",
+        "stable_from": null,
+        "status": "FAIL",
+        "terminal_accuracy": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "clean_passing_checks": 0,
+      "clean_status": "FAIL",
+      "completed_steps": 7000,
+      "ema_final": {
+        "acc_abs_cov_trace_bias": 0.23213652384785144,
+        "acc_accuracy_pass": false,
+        "acc_accuracy_score": 1.6164012846615836,
+        "acc_center_rms_sigma": 0.16086342332576065,
+        "acc_cov_trace_bias": -0.23213652384785144,
+        "acc_frozen_pass": false,
+        "acc_mass_tv": 0.04180000000000001,
+        "acc_passed": false,
+        "acc_radial_ks": 0.105730244674894,
+        "hq": 0.9531,
+        "mass_tv": 0.0418,
+        "max_cov_eig_ratio": 1.4738281171902634,
+        "max_mode_mass": 0.0128,
+        "max_radial_median_ratio": 1.170550277367348,
+        "min_cov_eig_ratio": 0.38217040994527607,
+        "min_hq_mode_mass": 0.00665,
+        "min_radial_median_ratio": 0.6792267934663551,
+        "modes": 100,
+        "pass": false,
+        "precision": 0.9531,
+        "sharp_clean": 0.5768243670463562,
+        "sharp_noisy": 1.0401396751403809
+      },
+      "eval_output_noise": true,
+      "final": {
+        "acc_abs_cov_trace_bias": 0.22892522400961635,
+        "acc_accuracy_pass": false,
+        "acc_accuracy_score": 1.599730990384083,
+        "acc_center_rms_sigma": 0.1667123632259966,
+        "acc_cov_trace_bias": -0.22892522400961635,
+        "acc_frozen_pass": false,
+        "acc_mass_tv": 0.04170000000000001,
+        "acc_passed": false,
+        "acc_radial_ks": 0.10324439621240744,
+        "holdout_abs_cov_trace_bias": 0.23333503040767012,
+        "holdout_accuracy_pass": false,
+        "holdout_accuracy_score": 1.6146944287003144,
+        "holdout_center_rms_sigma": 0.1557033377973036,
+        "holdout_cov_trace_bias": -0.23333503040767012,
+        "holdout_frozen_pass": false,
+        "holdout_mass_tv": 0.03724000000000001,
+        "holdout_passed": false,
+        "holdout_precision": 0.9507,
+        "holdout_radial_ks": 0.1090497622028549,
+        "hq": 0.9526,
+        "mass_tv": 0.0417,
+        "max_cov_eig_ratio": 1.477275771930725,
+        "max_mode_mass": 0.0128,
+        "max_radial_median_ratio": 1.1884512336732094,
+        "min_cov_eig_ratio": 0.37926951192686004,
+        "min_hq_mode_mass": 0.00665,
+        "min_radial_median_ratio": 0.6655353817014691,
+        "modes": 100,
+        "output_sigma": 0.019999999552965164,
+        "precision": 0.9526,
+        "sharp_clean": 0.5804867744445801,
+        "sharp_noisy": 1.0459810495376587,
+        "step": 7000
+      },
+      "final_lr": [
+        [
+          6.640625e-05,
+          0.0001328125,
+          0.0
+        ],
+        [
+          6.640332548096382e-05
+        ]
+      ],
+      "final_streak": 0,
+      "first_arrival": null,
+      "header": {
+        "auto_detected": {
+          "evaluation_generate": "plain",
+          "serial_backward_argument": true
+        },
+        "cand": "h2-handoff-critic-floor",
+        "cuda": "12.6",
+        "cuda_visible_devices": "0",
+        "declared_options": {},
+        "device": "cuda:0",
+        "gpu": "NVIDIA RTX A6000",
+        "host": "pop-os",
+        "options": {
+          "diagnostics": true,
+          "eval_output_noise": true,
+          "evaluation_generate": "plain",
+          "image_prior_perturb": false,
+          "initialization": "batch_feature_zero",
+          "ring_frozen_control": false,
+          "save_final_state": true,
+          "serial_backward_argument": true,
+          "strict_streams": true
+        },
+        "overrides": {
+          "alpha_bar": [
+            1.0,
+            0.9,
+            0.5,
+            0.05,
+            0.0001
+          ],
+          "amsgrad": true,
+          "batch_size": 128,
+          "betas": [
+            0.0,
+            0.999
+          ],
+          "conditioning": "scalar",
+          "continuous_policy": "dv12",
+          "d_guard_min_steps": 200,
+          "d_guard_ratio": 5.0,
+          "d_lr_mult": 1.0,
+          "direct_particle_betas": [
+            0.0,
+            0.9
+          ],
+          "direct_particle_gain": true,
+          "distance_reduction": "sum",
+          "ema_decay": 0.995,
+          "encoder_mode": "none",
+          "initialization": "batch_feature_zero",
+          "input_noise_anneal_end": 0.1,
+          "input_noise_std": 0.0,
+          "latent_damping_max_rate": 0.5,
+          "lr": 0.00425,
+          "lr_anneal_start": 0.6,
+          "lr_control": "stationarity",
+          "lr_floor": 0.05,
+          "model": "gan",
+          "network_lr_floor": 0.01,
+          "network_lr_horizon_cap": 1600,
+          "num_classes": null,
+          "num_particles": 12,
+          "observation_sigma": 0.03,
+          "output_noise_mode": "learnable",
+          "output_noise_std": 0.02,
+          "output_noise_warmup": 0.0,
+          "particle_birth_death": true,
+          "prior_betas": null,
+          "prior_kind": "particles",
+          "prior_lr_mult": 2.0,
+          "prior_reg": 0.0,
+          "reconstruction_weight": 1.0,
+          "reg_anchor_min_decay": 0.9,
+          "reg_anchor_weight": 1.0,
+          "reg_coeff": 3.0,
+          "reg_every": 1,
+          "reg_kappa": 1.0,
+          "routing_temperature": 0.25,
+          "sigma_rel": 0.0,
+          "standardize": true,
+          "total_steps": null,
+          "ucd_target": "class",
+          "ucd_weight": 0.02,
+          "z_dim": 4
+        },
+        "package_root": "/ml2/hypergan/gan-attempts/combined-h1-h2-20260928/candidate-prior-handoff-critic-floor/package",
+        "package_sha256": "d6f8aedbee8dd191a3a057e2ff3fcd1a6e340b72a09766008e4edfd5f55d7ce8",
+        "python": "/tmp/pr38-default-env/bin/python",
+        "task": "rotated100",
+        "torch": "2.13.0+cu126"
+      },
+      "max_gpu_mib": 1792.0,
+      "native": {
+        "accuracy_first_arrival": null,
+        "accuracy_passing_checks": 0,
+        "accuracy_status": "FAIL",
+        "coverage_stable_checks": 0,
+        "coverage_status": "FAIL",
+        "first_arrival": null,
+        "first_full_coverage": 750,
+        "holdout": {
+          "abs_cov_trace_bias": 0.23333503040767012,
+          "accuracy_pass": false,
+          "accuracy_score": 1.6146944287003144,
+          "center_rms_sigma": 0.1557033377973036,
+          "cov_trace_bias": -0.23333503040767012,
+          "frozen_pass": false,
+          "mass_tv": 0.03724000000000001,
+          "passed": false,
+          "precision": 0.9507,
+          "radial_ks": 0.1090497622028549
+        },
+        "holdout_pass": false,
+        "reason": "coverage, sustained live accuracy, or independent holdout failed",
+        "stable_from": null,
+        "status": "FAIL",
+        "terminal_accuracy": [
+          false,
+          false,
+          false,
+          false,
+          false
+        ]
+      },
+      "native_fixture": {
+        "D_changed": [
+          "net.0.weight",
+          "net.2.weight",
+          "net.4.weight",
+          "net.6.weight"
+        ],
+        "G_kept": true,
+        "after_trainer_init": {
+          "D": {
+            "net.0.bias": "076a27c79e5ace2a3d47f9dd2e83e4ff6ea8872b3c2218f66c92b89b55f36560",
+            "net.0.weight": "8ae121294897d1d14d190b976a224ba9e0dba57f97002ae34fbb4f23f92afd51",
+            "net.2.bias": "076a27c79e5ace2a3d47f9dd2e83e4ff6ea8872b3c2218f66c92b89b55f36560",
+            "net.2.weight": "9de60e454bceabb6771102fcd83430d32ea2d982288fdae65c4226a37797f5ac",
+            "net.4.bias": "076a27c79e5ace2a3d47f9dd2e83e4ff6ea8872b3c2218f66c92b89b55f36560",
+            "net.4.weight": "6f6daf21714d79b42db52fdc316c46f0bcf485e67bbba8c727a0e781f9b1cdba",
+            "net.6.bias": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+            "net.6.weight": "948341adb465fb17db779e058b73a89ead833feeadb525da31480efda2d8f9b1"
+          },
+          "G": {
+            "bias": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc",
+            "weight": "a666c95f0822c64e01580063e9bb27c629d4d0534e3163a9611738599f97df2a"
+          },
+          "prior": {
+            "z": "05039118d87f7fd7e7425d8b43b71061fddffafe73f270cb8ca8f9c8dd708637"
+          }
+        },
+        "initial": {
+          "D": {
+            "net.0.bias": "076a27c79e5ace2a3d47f9dd2e83e4ff6ea8872b3c2218f66c92b89b55f36560",
+            "net.0.weight": "a415a6639dd4c5ea480b4defbd9985513494403acb00e5df41632952fcf60d27",
+            "net.2.bias": "076a27c79e5ace2a3d47f9dd2e83e4ff6ea8872b3c2218f66c92b89b55f36560",
+            "net.2.weight": "f547ca4bc0e557792cc23ba53867fda20953f5d7dead8fa744c2f1cb7664e930",
+            "net.4.bias": "076a27c79e5ace2a3d47f9dd2e83e4ff6ea8872b3c2218f66c92b89b55f36560",
+            "net.4.weight": "ea21b907fa194867b89a6792a561aa23ce95dd277e2a97d263d9a9c297196583",
+            "net.6.bias": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+            "net.6.weight": "c7380d7148d131ad8fe84bc033f5eb0040d20a7f42e0c963e04c3953344e151e"
+          },
+          "G": {
+            "bias": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc",
+            "weight": "a666c95f0822c64e01580063e9bb27c629d4d0534e3163a9611738599f97df2a"
+          },
+          "prior": {
+            "z": "05039118d87f7fd7e7425d8b43b71061fddffafe73f270cb8ca8f9c8dd708637"
+          }
+        },
+        "prior_kept": true,
+        "prior_range": [
+          -4.999968528747559,
+          4.999938011169434
+        ]
+      },
+      "observations": 34,
+      "pass_rule": "frozen native gates: coverage gate (>=5 terminal passing live checks) AND accuracy gate (final five 20k clouds + independent 100k holdout pass fidelity limits)",
+      "passing_checks": 0,
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": true,
+        "batch_size": 2048,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "conditioning": "scalar",
+        "continuous_policy": "dv12",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.0,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "initialization": "batch_feature_zero",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.00425,
+        "lr_anneal_start": 0.6,
+        "lr_control": "stationarity",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "name": "ka2",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 20000,
+        "observation_sigma": 0.03,
+        "output_noise_mode": "learnable",
+        "output_noise_std": 0.02,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": true,
+        "prior_betas": null,
+        "prior_kind": "particles",
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_coeff": 3.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "routing_temperature": 0.25,
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "total_steps": null,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 2
+      },
+      "seconds": 347.7,
+      "status": "FAIL",
+      "stream_deviations": 0,
+      "supporting_receipts": [
+        {
+          "content": {
+            "diagnostics": true,
+            "eval_output_noise": true,
+            "save_final_state": true,
+            "strict_streams": true
+          },
+          "git_blob": "e4fcbaa4850f49a647bd8056a1abec5669db113d",
+          "path": "reports/toy100/lrfree-search/critic-floor/candidate-options.json",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "12288caf79cfd7138e5e3b9df3ac138f126a1a49b43522bb8023bed5ea9dc655",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/critic-floor/candidate-options.json"
+        },
+        {
+          "content": {
+            "alpha_bar": [
+              1.0,
+              0.9,
+              0.5,
+              0.05,
+              0.0001
+            ],
+            "amsgrad": true,
+            "batch_size": 128,
+            "betas": [
+              0.0,
+              0.999
+            ],
+            "conditioning": "scalar",
+            "continuous_policy": "dv12",
+            "d_guard_min_steps": 200,
+            "d_guard_ratio": 5.0,
+            "d_lr_mult": 1.0,
+            "direct_particle_betas": [
+              0.0,
+              0.9
+            ],
+            "direct_particle_gain": true,
+            "distance_reduction": "sum",
+            "ema_decay": 0.995,
+            "encoder_mode": "none",
+            "initialization": "batch_feature_zero",
+            "input_noise_anneal_end": 0.1,
+            "input_noise_std": 0.0,
+            "latent_damping_max_rate": 0.5,
+            "lr": 0.00425,
+            "lr_anneal_start": 0.6,
+            "lr_control": "stationarity",
+            "lr_floor": 0.05,
+            "model": "gan",
+            "network_lr_floor": 0.01,
+            "network_lr_horizon_cap": 1600,
+            "num_classes": null,
+            "num_particles": 12,
+            "observation_sigma": 0.03,
+            "output_noise_mode": "learnable",
+            "output_noise_std": 0.02,
+            "output_noise_warmup": 0.0,
+            "particle_birth_death": true,
+            "prior_betas": null,
+            "prior_kind": "particles",
+            "prior_lr_mult": 2.0,
+            "prior_reg": 0.0,
+            "reconstruction_weight": 1.0,
+            "reg_anchor_min_decay": 0.9,
+            "reg_anchor_weight": 1.0,
+            "reg_coeff": 3.0,
+            "reg_every": 1,
+            "reg_kappa": 1.0,
+            "routing_temperature": 0.25,
+            "sigma_rel": 0.0,
+            "standardize": true,
+            "total_steps": null,
+            "ucd_target": "class",
+            "ucd_weight": 0.02,
+            "z_dim": 4
+          },
+          "git_blob": "7d6bf21f80562d9f49ab797808abd4849bbef43d",
+          "path": "reports/toy100/lrfree-search/critic-floor/overrides.json",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "bccb5824e4c4e5cf1c39ff202f53fa00c7f2f7e4a8c73ba3ebb125d2ed9ba77c",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/critic-floor/overrides.json"
+        },
+        {
+          "content": {
+            "D_changed": [
+              "net.0.weight",
+              "net.2.weight",
+              "net.4.weight",
+              "net.6.weight"
+            ],
+            "G_kept": true,
+            "after_trainer_init": {
+              "D": {
+                "net.0.bias": "076a27c79e5ace2a3d47f9dd2e83e4ff6ea8872b3c2218f66c92b89b55f36560",
+                "net.0.weight": "8ae121294897d1d14d190b976a224ba9e0dba57f97002ae34fbb4f23f92afd51",
+                "net.2.bias": "076a27c79e5ace2a3d47f9dd2e83e4ff6ea8872b3c2218f66c92b89b55f36560",
+                "net.2.weight": "9de60e454bceabb6771102fcd83430d32ea2d982288fdae65c4226a37797f5ac",
+                "net.4.bias": "076a27c79e5ace2a3d47f9dd2e83e4ff6ea8872b3c2218f66c92b89b55f36560",
+                "net.4.weight": "6f6daf21714d79b42db52fdc316c46f0bcf485e67bbba8c727a0e781f9b1cdba",
+                "net.6.bias": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+                "net.6.weight": "948341adb465fb17db779e058b73a89ead833feeadb525da31480efda2d8f9b1"
+              },
+              "G": {
+                "bias": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc",
+                "weight": "a666c95f0822c64e01580063e9bb27c629d4d0534e3163a9611738599f97df2a"
+              },
+              "prior": {
+                "z": "05039118d87f7fd7e7425d8b43b71061fddffafe73f270cb8ca8f9c8dd708637"
+              }
+            },
+            "initial": {
+              "D": {
+                "net.0.bias": "076a27c79e5ace2a3d47f9dd2e83e4ff6ea8872b3c2218f66c92b89b55f36560",
+                "net.0.weight": "a415a6639dd4c5ea480b4defbd9985513494403acb00e5df41632952fcf60d27",
+                "net.2.bias": "076a27c79e5ace2a3d47f9dd2e83e4ff6ea8872b3c2218f66c92b89b55f36560",
+                "net.2.weight": "f547ca4bc0e557792cc23ba53867fda20953f5d7dead8fa744c2f1cb7664e930",
+                "net.4.bias": "076a27c79e5ace2a3d47f9dd2e83e4ff6ea8872b3c2218f66c92b89b55f36560",
+                "net.4.weight": "ea21b907fa194867b89a6792a561aa23ce95dd277e2a97d263d9a9c297196583",
+                "net.6.bias": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+                "net.6.weight": "c7380d7148d131ad8fe84bc033f5eb0040d20a7f42e0c963e04c3953344e151e"
+              },
+              "G": {
+                "bias": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc",
+                "weight": "a666c95f0822c64e01580063e9bb27c629d4d0534e3163a9611738599f97df2a"
+              },
+              "prior": {
+                "z": "05039118d87f7fd7e7425d8b43b71061fddffafe73f270cb8ca8f9c8dd708637"
+              }
+            },
+            "prior_kept": true,
+            "prior_range": [
+              -4.999968528747559,
+              4.999938011169434
+            ]
+          },
+          "git_blob": "2042afdc42d405685d792499ccd9302f0658934d",
+          "path": "reports/toy100/lrfree-search/critic-floor/rotated100-fixture.json",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "2034d9667a14c991f4cbd9c12e00193f2e5bdca5273df5c93783627cf6482955",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/critic-floor/rotated100-fixture.json"
+        },
+        {
+          "content": {
+            "auto_detected": {
+              "evaluation_generate": "plain",
+              "serial_backward_argument": true
+            },
+            "cand": "h2-handoff-critic-floor",
+            "cuda": "12.6",
+            "cuda_visible_devices": "0",
+            "declared_options": {},
+            "device": "cuda:0",
+            "gpu": "NVIDIA RTX A6000",
+            "host": "pop-os",
+            "options": {
+              "diagnostics": true,
+              "eval_output_noise": true,
+              "evaluation_generate": "plain",
+              "image_prior_perturb": false,
+              "initialization": "batch_feature_zero",
+              "ring_frozen_control": false,
+              "save_final_state": true,
+              "serial_backward_argument": true,
+              "strict_streams": true
+            },
+            "overrides": {
+              "alpha_bar": [
+                1.0,
+                0.9,
+                0.5,
+                0.05,
+                0.0001
+              ],
+              "amsgrad": true,
+              "batch_size": 128,
+              "betas": [
+                0.0,
+                0.999
+              ],
+              "conditioning": "scalar",
+              "continuous_policy": "dv12",
+              "d_guard_min_steps": 200,
+              "d_guard_ratio": 5.0,
+              "d_lr_mult": 1.0,
+              "direct_particle_betas": [
+                0.0,
+                0.9
+              ],
+              "direct_particle_gain": true,
+              "distance_reduction": "sum",
+              "ema_decay": 0.995,
+              "encoder_mode": "none",
+              "initialization": "batch_feature_zero",
+              "input_noise_anneal_end": 0.1,
+              "input_noise_std": 0.0,
+              "latent_damping_max_rate": 0.5,
+              "lr": 0.00425,
+              "lr_anneal_start": 0.6,
+              "lr_control": "stationarity",
+              "lr_floor": 0.05,
+              "model": "gan",
+              "network_lr_floor": 0.01,
+              "network_lr_horizon_cap": 1600,
+              "num_classes": null,
+              "num_particles": 12,
+              "observation_sigma": 0.03,
+              "output_noise_mode": "learnable",
+              "output_noise_std": 0.02,
+              "output_noise_warmup": 0.0,
+              "particle_birth_death": true,
+              "prior_betas": null,
+              "prior_kind": "particles",
+              "prior_lr_mult": 2.0,
+              "prior_reg": 0.0,
+              "reconstruction_weight": 1.0,
+              "reg_anchor_min_decay": 0.9,
+              "reg_anchor_weight": 1.0,
+              "reg_coeff": 3.0,
+              "reg_every": 1,
+              "reg_kappa": 1.0,
+              "routing_temperature": 0.25,
+              "sigma_rel": 0.0,
+              "standardize": true,
+              "total_steps": null,
+              "ucd_target": "class",
+              "ucd_weight": 0.02,
+              "z_dim": 4
+            },
+            "package_root": "/ml2/hypergan/gan-attempts/combined-h1-h2-20260928/candidate-prior-handoff-critic-floor/package",
+            "package_sha256": "d6f8aedbee8dd191a3a057e2ff3fcd1a6e340b72a09766008e4edfd5f55d7ce8",
+            "python": "/tmp/pr38-default-env/bin/python",
+            "task": "rotated100",
+            "torch": "2.13.0+cu126"
+          },
+          "git_blob": "5c159cddab7b38ee5d27adb5c3fa51d9fafc7c85",
+          "path": "reports/toy100/lrfree-search/critic-floor/rotated100-job-header.json",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "cbde3353bba632431a39d7fad12bcaacb90cff3b4c8ac68fdaf9ff4c51a574e3",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/critic-floor/rotated100-job-header.json"
+        },
+        {
+          "content": {
+            "base_package": "/ml2/hypergan/gan-attempts/combined-h1-h2-20260928/candidate-prior-geomean-handoff/package",
+            "base_training_sha256": "2cc58d6a604cbb3ace43c02f86476e7d578029cbf4fc4f20e239f7150938b7a4",
+            "candidate_options_sha256": "12288caf79cfd7138e5e3b9df3ac138f126a1a49b43522bb8023bed5ea9dc655",
+            "candidate_package": "/ml2/hypergan/gan-attempts/combined-h1-h2-20260928/candidate-prior-handoff-critic-floor/package",
+            "candidate_package_sha256": "d6f8aedbee8dd191a3a057e2ff3fcd1a6e340b72a09766008e4edfd5f55d7ce8",
+            "candidate_training_sha256": "b3d472d155702e9d49ea9fc514a145ad5b8a13f80d50bcb16c66dc52de2c8c7b",
+            "changed_source_files": [
+              "particlegan/training.py"
+            ],
+            "checkpoint_smoke": {
+              "completed_steps": 1,
+              "critic_anchor_calls": 1,
+              "lrs_equal": true,
+              "models_equal": true,
+              "optimizer_groups_equal": true,
+              "sigma": 0.019999999552965164
+            },
+            "mechanism": "D applied tester scale = max(D tester scale, non-sigma G tester scale, geometrically applied prior tester scales), before existing payoff damping",
+            "overrides_sha256": "bccb5824e4c4e5cf1c39ff202f53fa00c7f2f7e4a8c73ba3ebb125d2ed9ba77c",
+            "smoke_result": "/ml2/hypergan/gan-attempts/combined-h1-h2-20260928/runs/h2-handoff-critic-floor/smoke-grid100/result.json"
+          },
+          "git_blob": "01ebbf3c7dbefe900046994cb81fb9b2b4f1845b",
+          "path": "reports/toy100/lrfree-search/critic-floor/source-manifest.json",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "6c51eea7ae49a286da34c6653a633ee57c842592e77219ba9bb617c58c6c5d13",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/critic-floor/source-manifest.json"
+        }
+      ],
+      "task": "rotated100",
+      "thresholds": [
+        [
+          "modes",
+          ">=",
+          100
+        ],
+        [
+          "precision",
+          ">=",
+          0.97
+        ],
+        [
+          "min_hq_mode_mass",
+          ">=",
+          0.005
+        ],
+        [
+          "mass_tv",
+          "<=",
+          0.1
+        ],
+        [
+          "max_mode_mass",
+          "<=",
+          0.02
+        ],
+        [
+          "min_cov_eig_ratio",
+          ">=",
+          0.4
+        ],
+        [
+          "max_cov_eig_ratio",
+          "<=",
+          1.7
+        ],
+        [
+          "min_radial_median_ratio",
+          ">=",
+          0.65
+        ],
+        [
+          "max_radial_median_ratio",
+          "<=",
+          1.4
+        ],
+        [
+          "acc_mass_tv",
+          "<=",
+          0.06
+        ],
+        [
+          "acc_center_rms_sigma",
+          "<=",
+          0.2
+        ],
+        [
+          "acc_abs_cov_trace_bias",
+          "<=",
+          0.1
+        ],
+        [
+          "acc_radial_ks",
+          "<=",
+          0.04
+        ]
+      ],
+      "train_seconds": 346.62,
+      "warnings": []
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": "d6f8aedbee8dd191a3a057e2ff3fcd1a6e340b72a09766008e4edfd5f55d7ce8",
+    "reuse_eligible": false,
+    "source_revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-h2-handoff-critic-floor-dbc3b124beec",
+  "record_type": "scientific",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "b3c443127149ea76009a17a0c444f132554989e5",
+    "path": "reports/toy100/lrfree-search/critic-floor/rotated100-result.json",
+    "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+    "sha256": "c9e4c196d4bfa830ad5aeb9dbe577771d076d5cfa5dea01b7cfe8d2dafbc0882",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/critic-floor/rotated100-result.json"
+  },
+  "task_results": [
+    {
+      "cost": {
+        "flops": null,
+        "flops_status": "unavailable",
+        "peak_gpu_mib": 1792.0,
+        "seconds": 347.7,
+        "steps": 7000,
+        "train_seconds": 346.62
+      },
+      "diagnostics": {
+        "clean_final": {
+          "acc_abs_cov_trace_bias": 0.6584862967726038,
+          "acc_accuracy_pass": false,
+          "acc_accuracy_score": 4.60728155414054,
+          "acc_center_rms_sigma": 0.1608171527638979,
+          "acc_cov_trace_bias": -0.6584862967726038,
+          "acc_frozen_pass": false,
+          "acc_mass_tv": 0.041650000000000006,
+          "acc_passed": false,
+          "acc_radial_ks": 0.4138404327339987,
+          "hq": 0.95895,
+          "mass_tv": 0.04165,
+          "max_cov_eig_ratio": 1.1578217014585532,
+          "max_mode_mass": 0.0128,
+          "max_radial_median_ratio": 1.122216134932149,
+          "min_cov_eig_ratio": 0.0026998591393935776,
+          "min_hq_mode_mass": 0.0067,
+          "min_radial_median_ratio": 0.10527939851103363,
+          "modes": 100,
+          "precision": 0.95895,
+          "sharp_clean": 0.5804867744445801,
+          "sharp_noisy": 1.0459810495376587,
+          "step": 7000
+        },
+        "clean_final_streak": 0,
+        "clean_first_arrival": null,
+        "clean_native": {
+          "accuracy_first_arrival": null,
+          "accuracy_status": "FAIL",
+          "coverage_stable_checks": 0,
+          "coverage_status": "FAIL",
+          "first_arrival": null,
+          "first_full_coverage": 750,
+          "holdout": {
+            "abs_cov_trace_bias": 0.6600049498182878,
+            "accuracy_pass": false,
+            "accuracy_score": 4.584158932228326,
+            "center_rms_sigma": 0.15610802110871247,
+            "cov_trace_bias": -0.6600049498182878,
+            "frozen_pass": false,
+            "mass_tv": 0.037250000000000005,
+            "passed": false,
+            "precision": 0.95709,
+            "radial_ks": 0.4134085116741412
+          },
+          "holdout_pass": false,
+          "reason": "coverage, sustained live accuracy, or independent holdout failed",
+          "stable_from": null,
+          "status": "FAIL",
+          "terminal_accuracy": [
+            false,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        "clean_passing_checks": 0,
+        "clean_status": "FAIL",
+        "ema_final": {
+          "acc_abs_cov_trace_bias": 0.23213652384785144,
+          "acc_accuracy_pass": false,
+          "acc_accuracy_score": 1.6164012846615836,
+          "acc_center_rms_sigma": 0.16086342332576065,
+          "acc_cov_trace_bias": -0.23213652384785144,
+          "acc_frozen_pass": false,
+          "acc_mass_tv": 0.04180000000000001,
+          "acc_passed": false,
+          "acc_radial_ks": 0.105730244674894,
+          "hq": 0.9531,
+          "mass_tv": 0.0418,
+          "max_cov_eig_ratio": 1.4738281171902634,
+          "max_mode_mass": 0.0128,
+          "max_radial_median_ratio": 1.170550277367348,
+          "min_cov_eig_ratio": 0.38217040994527607,
+          "min_hq_mode_mass": 0.00665,
+          "min_radial_median_ratio": 0.6792267934663551,
+          "modes": 100,
+          "pass": false,
+          "precision": 0.9531,
+          "sharp_clean": 0.5768243670463562,
+          "sharp_noisy": 1.0401396751403809
+        }
+      },
+      "evidence": [
+        {
+          "git_blob": "b3c443127149ea76009a17a0c444f132554989e5",
+          "path": "reports/toy100/lrfree-search/critic-floor/rotated100-result.json",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "c9e4c196d4bfa830ad5aeb9dbe577771d076d5cfa5dea01b7cfe8d2dafbc0882",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/critic-floor/rotated100-result.json"
+        }
+      ],
+      "evidence_scope": "historical",
+      "gate_status": "FAIL",
+      "metrics": {
+        "final": {
+          "acc_abs_cov_trace_bias": 0.22892522400961635,
+          "acc_accuracy_pass": false,
+          "acc_accuracy_score": 1.599730990384083,
+          "acc_center_rms_sigma": 0.1667123632259966,
+          "acc_cov_trace_bias": -0.22892522400961635,
+          "acc_frozen_pass": false,
+          "acc_mass_tv": 0.04170000000000001,
+          "acc_passed": false,
+          "acc_radial_ks": 0.10324439621240744,
+          "holdout_abs_cov_trace_bias": 0.23333503040767012,
+          "holdout_accuracy_pass": false,
+          "holdout_accuracy_score": 1.6146944287003144,
+          "holdout_center_rms_sigma": 0.1557033377973036,
+          "holdout_cov_trace_bias": -0.23333503040767012,
+          "holdout_frozen_pass": false,
+          "holdout_mass_tv": 0.03724000000000001,
+          "holdout_passed": false,
+          "holdout_precision": 0.9507,
+          "holdout_radial_ks": 0.1090497622028549,
+          "hq": 0.9526,
+          "mass_tv": 0.0417,
+          "max_cov_eig_ratio": 1.477275771930725,
+          "max_mode_mass": 0.0128,
+          "max_radial_median_ratio": 1.1884512336732094,
+          "min_cov_eig_ratio": 0.37926951192686004,
+          "min_hq_mode_mass": 0.00665,
+          "min_radial_median_ratio": 0.6655353817014691,
+          "modes": 100,
+          "output_sigma": 0.019999999552965164,
+          "precision": 0.9526,
+          "sharp_clean": 0.5804867744445801,
+          "sharp_noisy": 1.0459810495376587,
+          "step": 7000
+        },
+        "final_streak": 0,
+        "first_arrival": null,
+        "native": {
+          "accuracy_first_arrival": null,
+          "accuracy_passing_checks": 0,
+          "accuracy_status": "FAIL",
+          "coverage_stable_checks": 0,
+          "coverage_status": "FAIL",
+          "first_arrival": null,
+          "first_full_coverage": 750,
+          "holdout": {
+            "abs_cov_trace_bias": 0.23333503040767012,
+            "accuracy_pass": false,
+            "accuracy_score": 1.6146944287003144,
+            "center_rms_sigma": 0.1557033377973036,
+            "cov_trace_bias": -0.23333503040767012,
+            "frozen_pass": false,
+            "mass_tv": 0.03724000000000001,
+            "passed": false,
+            "precision": 0.9507,
+            "radial_ks": 0.1090497622028549
+          },
+          "holdout_pass": false,
+          "reason": "coverage, sustained live accuracy, or independent holdout failed",
+          "stable_from": null,
+          "status": "FAIL",
+          "terminal_accuracy": [
+            false,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        "observations": 34,
+        "pass_rule": "frozen native gates: coverage gate (>=5 terminal passing live checks) AND accuracy gate (final five 20k clouds + independent 100k holdout pass fidelity limits)",
+        "passing_checks": 0,
+        "stream_deviations": 0,
+        "thresholds": [
+          [
+            "modes",
+            ">=",
+            100
+          ],
+          [
+            "precision",
+            ">=",
+            0.97
+          ],
+          [
+            "min_hq_mode_mass",
+            ">=",
+            0.005
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.1
+          ],
+          [
+            "max_mode_mass",
+            "<=",
+            0.02
+          ],
+          [
+            "min_cov_eig_ratio",
+            ">=",
+            0.4
+          ],
+          [
+            "max_cov_eig_ratio",
+            "<=",
+            1.7
+          ],
+          [
+            "min_radial_median_ratio",
+            ">=",
+            0.65
+          ],
+          [
+            "max_radial_median_ratio",
+            "<=",
+            1.4
+          ],
+          [
+            "acc_mass_tv",
+            "<=",
+            0.06
+          ],
+          [
+            "acc_center_rms_sigma",
+            "<=",
+            0.2
+          ],
+          [
+            "acc_abs_cov_trace_bias",
+            "<=",
+            0.1
+          ],
+          [
+            "acc_radial_ks",
+            "<=",
+            0.04
+          ]
+        ]
+      },
+      "raw_result": {
+        "cand": "h2-handoff-critic-floor",
+        "clean_final": {
+          "acc_abs_cov_trace_bias": 0.6584862967726038,
+          "acc_accuracy_pass": false,
+          "acc_accuracy_score": 4.60728155414054,
+          "acc_center_rms_sigma": 0.1608171527638979,
+          "acc_cov_trace_bias": -0.6584862967726038,
+          "acc_frozen_pass": false,
+          "acc_mass_tv": 0.041650000000000006,
+          "acc_passed": false,
+          "acc_radial_ks": 0.4138404327339987,
+          "hq": 0.95895,
+          "mass_tv": 0.04165,
+          "max_cov_eig_ratio": 1.1578217014585532,
+          "max_mode_mass": 0.0128,
+          "max_radial_median_ratio": 1.122216134932149,
+          "min_cov_eig_ratio": 0.0026998591393935776,
+          "min_hq_mode_mass": 0.0067,
+          "min_radial_median_ratio": 0.10527939851103363,
+          "modes": 100,
+          "precision": 0.95895,
+          "sharp_clean": 0.5804867744445801,
+          "sharp_noisy": 1.0459810495376587,
+          "step": 7000
+        },
+        "clean_final_streak": 0,
+        "clean_first_arrival": null,
+        "clean_native": {
+          "accuracy_first_arrival": null,
+          "accuracy_status": "FAIL",
+          "coverage_stable_checks": 0,
+          "coverage_status": "FAIL",
+          "first_arrival": null,
+          "first_full_coverage": 750,
+          "holdout": {
+            "abs_cov_trace_bias": 0.6600049498182878,
+            "accuracy_pass": false,
+            "accuracy_score": 4.584158932228326,
+            "center_rms_sigma": 0.15610802110871247,
+            "cov_trace_bias": -0.6600049498182878,
+            "frozen_pass": false,
+            "mass_tv": 0.037250000000000005,
+            "passed": false,
+            "precision": 0.95709,
+            "radial_ks": 0.4134085116741412
+          },
+          "holdout_pass": false,
+          "reason": "coverage, sustained live accuracy, or independent holdout failed",
+          "stable_from": null,
+          "status": "FAIL",
+          "terminal_accuracy": [
+            false,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        "clean_passing_checks": 0,
+        "clean_status": "FAIL",
+        "completed_steps": 7000,
+        "ema_final": {
+          "acc_abs_cov_trace_bias": 0.23213652384785144,
+          "acc_accuracy_pass": false,
+          "acc_accuracy_score": 1.6164012846615836,
+          "acc_center_rms_sigma": 0.16086342332576065,
+          "acc_cov_trace_bias": -0.23213652384785144,
+          "acc_frozen_pass": false,
+          "acc_mass_tv": 0.04180000000000001,
+          "acc_passed": false,
+          "acc_radial_ks": 0.105730244674894,
+          "hq": 0.9531,
+          "mass_tv": 0.0418,
+          "max_cov_eig_ratio": 1.4738281171902634,
+          "max_mode_mass": 0.0128,
+          "max_radial_median_ratio": 1.170550277367348,
+          "min_cov_eig_ratio": 0.38217040994527607,
+          "min_hq_mode_mass": 0.00665,
+          "min_radial_median_ratio": 0.6792267934663551,
+          "modes": 100,
+          "pass": false,
+          "precision": 0.9531,
+          "sharp_clean": 0.5768243670463562,
+          "sharp_noisy": 1.0401396751403809
+        },
+        "eval_output_noise": true,
+        "final": {
+          "acc_abs_cov_trace_bias": 0.22892522400961635,
+          "acc_accuracy_pass": false,
+          "acc_accuracy_score": 1.599730990384083,
+          "acc_center_rms_sigma": 0.1667123632259966,
+          "acc_cov_trace_bias": -0.22892522400961635,
+          "acc_frozen_pass": false,
+          "acc_mass_tv": 0.04170000000000001,
+          "acc_passed": false,
+          "acc_radial_ks": 0.10324439621240744,
+          "holdout_abs_cov_trace_bias": 0.23333503040767012,
+          "holdout_accuracy_pass": false,
+          "holdout_accuracy_score": 1.6146944287003144,
+          "holdout_center_rms_sigma": 0.1557033377973036,
+          "holdout_cov_trace_bias": -0.23333503040767012,
+          "holdout_frozen_pass": false,
+          "holdout_mass_tv": 0.03724000000000001,
+          "holdout_passed": false,
+          "holdout_precision": 0.9507,
+          "holdout_radial_ks": 0.1090497622028549,
+          "hq": 0.9526,
+          "mass_tv": 0.0417,
+          "max_cov_eig_ratio": 1.477275771930725,
+          "max_mode_mass": 0.0128,
+          "max_radial_median_ratio": 1.1884512336732094,
+          "min_cov_eig_ratio": 0.37926951192686004,
+          "min_hq_mode_mass": 0.00665,
+          "min_radial_median_ratio": 0.6655353817014691,
+          "modes": 100,
+          "output_sigma": 0.019999999552965164,
+          "precision": 0.9526,
+          "sharp_clean": 0.5804867744445801,
+          "sharp_noisy": 1.0459810495376587,
+          "step": 7000
+        },
+        "final_lr": [
+          [
+            6.640625e-05,
+            0.0001328125,
+            0.0
+          ],
+          [
+            6.640332548096382e-05
+          ]
+        ],
+        "final_streak": 0,
+        "first_arrival": null,
+        "header": {
+          "auto_detected": {
+            "evaluation_generate": "plain",
+            "serial_backward_argument": true
+          },
+          "cand": "h2-handoff-critic-floor",
+          "cuda": "12.6",
+          "cuda_visible_devices": "0",
+          "declared_options": {},
+          "device": "cuda:0",
+          "gpu": "NVIDIA RTX A6000",
+          "host": "pop-os",
+          "options": {
+            "diagnostics": true,
+            "eval_output_noise": true,
+            "evaluation_generate": "plain",
+            "image_prior_perturb": false,
+            "initialization": "batch_feature_zero",
+            "ring_frozen_control": false,
+            "save_final_state": true,
+            "serial_backward_argument": true,
+            "strict_streams": true
+          },
+          "overrides": {
+            "alpha_bar": [
+              1.0,
+              0.9,
+              0.5,
+              0.05,
+              0.0001
+            ],
+            "amsgrad": true,
+            "batch_size": 128,
+            "betas": [
+              0.0,
+              0.999
+            ],
+            "conditioning": "scalar",
+            "continuous_policy": "dv12",
+            "d_guard_min_steps": 200,
+            "d_guard_ratio": 5.0,
+            "d_lr_mult": 1.0,
+            "direct_particle_betas": [
+              0.0,
+              0.9
+            ],
+            "direct_particle_gain": true,
+            "distance_reduction": "sum",
+            "ema_decay": 0.995,
+            "encoder_mode": "none",
+            "initialization": "batch_feature_zero",
+            "input_noise_anneal_end": 0.1,
+            "input_noise_std": 0.0,
+            "latent_damping_max_rate": 0.5,
+            "lr": 0.00425,
+            "lr_anneal_start": 0.6,
+            "lr_control": "stationarity",
+            "lr_floor": 0.05,
+            "model": "gan",
+            "network_lr_floor": 0.01,
+            "network_lr_horizon_cap": 1600,
+            "num_classes": null,
+            "num_particles": 12,
+            "observation_sigma": 0.03,
+            "output_noise_mode": "learnable",
+            "output_noise_std": 0.02,
+            "output_noise_warmup": 0.0,
+            "particle_birth_death": true,
+            "prior_betas": null,
+            "prior_kind": "particles",
+            "prior_lr_mult": 2.0,
+            "prior_reg": 0.0,
+            "reconstruction_weight": 1.0,
+            "reg_anchor_min_decay": 0.9,
+            "reg_anchor_weight": 1.0,
+            "reg_coeff": 3.0,
+            "reg_every": 1,
+            "reg_kappa": 1.0,
+            "routing_temperature": 0.25,
+            "sigma_rel": 0.0,
+            "standardize": true,
+            "total_steps": null,
+            "ucd_target": "class",
+            "ucd_weight": 0.02,
+            "z_dim": 4
+          },
+          "package_root": "/ml2/hypergan/gan-attempts/combined-h1-h2-20260928/candidate-prior-handoff-critic-floor/package",
+          "package_sha256": "d6f8aedbee8dd191a3a057e2ff3fcd1a6e340b72a09766008e4edfd5f55d7ce8",
+          "python": "/tmp/pr38-default-env/bin/python",
+          "task": "rotated100",
+          "torch": "2.13.0+cu126"
+        },
+        "max_gpu_mib": 1792.0,
+        "native": {
+          "accuracy_first_arrival": null,
+          "accuracy_passing_checks": 0,
+          "accuracy_status": "FAIL",
+          "coverage_stable_checks": 0,
+          "coverage_status": "FAIL",
+          "first_arrival": null,
+          "first_full_coverage": 750,
+          "holdout": {
+            "abs_cov_trace_bias": 0.23333503040767012,
+            "accuracy_pass": false,
+            "accuracy_score": 1.6146944287003144,
+            "center_rms_sigma": 0.1557033377973036,
+            "cov_trace_bias": -0.23333503040767012,
+            "frozen_pass": false,
+            "mass_tv": 0.03724000000000001,
+            "passed": false,
+            "precision": 0.9507,
+            "radial_ks": 0.1090497622028549
+          },
+          "holdout_pass": false,
+          "reason": "coverage, sustained live accuracy, or independent holdout failed",
+          "stable_from": null,
+          "status": "FAIL",
+          "terminal_accuracy": [
+            false,
+            false,
+            false,
+            false,
+            false
+          ]
+        },
+        "native_fixture": {
+          "D_changed": [
+            "net.0.weight",
+            "net.2.weight",
+            "net.4.weight",
+            "net.6.weight"
+          ],
+          "G_kept": true,
+          "after_trainer_init": {
+            "D": {
+              "net.0.bias": "076a27c79e5ace2a3d47f9dd2e83e4ff6ea8872b3c2218f66c92b89b55f36560",
+              "net.0.weight": "8ae121294897d1d14d190b976a224ba9e0dba57f97002ae34fbb4f23f92afd51",
+              "net.2.bias": "076a27c79e5ace2a3d47f9dd2e83e4ff6ea8872b3c2218f66c92b89b55f36560",
+              "net.2.weight": "9de60e454bceabb6771102fcd83430d32ea2d982288fdae65c4226a37797f5ac",
+              "net.4.bias": "076a27c79e5ace2a3d47f9dd2e83e4ff6ea8872b3c2218f66c92b89b55f36560",
+              "net.4.weight": "6f6daf21714d79b42db52fdc316c46f0bcf485e67bbba8c727a0e781f9b1cdba",
+              "net.6.bias": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+              "net.6.weight": "948341adb465fb17db779e058b73a89ead833feeadb525da31480efda2d8f9b1"
+            },
+            "G": {
+              "bias": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc",
+              "weight": "a666c95f0822c64e01580063e9bb27c629d4d0534e3163a9611738599f97df2a"
+            },
+            "prior": {
+              "z": "05039118d87f7fd7e7425d8b43b71061fddffafe73f270cb8ca8f9c8dd708637"
+            }
+          },
+          "initial": {
+            "D": {
+              "net.0.bias": "076a27c79e5ace2a3d47f9dd2e83e4ff6ea8872b3c2218f66c92b89b55f36560",
+              "net.0.weight": "a415a6639dd4c5ea480b4defbd9985513494403acb00e5df41632952fcf60d27",
+              "net.2.bias": "076a27c79e5ace2a3d47f9dd2e83e4ff6ea8872b3c2218f66c92b89b55f36560",
+              "net.2.weight": "f547ca4bc0e557792cc23ba53867fda20953f5d7dead8fa744c2f1cb7664e930",
+              "net.4.bias": "076a27c79e5ace2a3d47f9dd2e83e4ff6ea8872b3c2218f66c92b89b55f36560",
+              "net.4.weight": "ea21b907fa194867b89a6792a561aa23ce95dd277e2a97d263d9a9c297196583",
+              "net.6.bias": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+              "net.6.weight": "c7380d7148d131ad8fe84bc033f5eb0040d20a7f42e0c963e04c3953344e151e"
+            },
+            "G": {
+              "bias": "af5570f5a1810b7af78caf4bc70a660f0df51e42baf91d4de5b2328de0e83dfc",
+              "weight": "a666c95f0822c64e01580063e9bb27c629d4d0534e3163a9611738599f97df2a"
+            },
+            "prior": {
+              "z": "05039118d87f7fd7e7425d8b43b71061fddffafe73f270cb8ca8f9c8dd708637"
+            }
+          },
+          "prior_kept": true,
+          "prior_range": [
+            -4.999968528747559,
+            4.999938011169434
+          ]
+        },
+        "observations": 34,
+        "pass_rule": "frozen native gates: coverage gate (>=5 terminal passing live checks) AND accuracy gate (final five 20k clouds + independent 100k holdout pass fidelity limits)",
+        "passing_checks": 0,
+        "recipe": {
+          "alpha_bar": [
+            1.0,
+            0.9,
+            0.5,
+            0.05,
+            0.0001
+          ],
+          "amsgrad": true,
+          "batch_size": 2048,
+          "betas": [
+            0.0,
+            0.999
+          ],
+          "conditioning": "scalar",
+          "continuous_policy": "dv12",
+          "critic_payoff_damping": true,
+          "critic_r1_real": true,
+          "d_guard_min_steps": 200,
+          "d_guard_ratio": 5.0,
+          "d_lr_mult": 1.0,
+          "direct_particle_betas": [
+            0.0,
+            0.9
+          ],
+          "direct_particle_gain": true,
+          "distance_reduction": "sum",
+          "ema_decay": 0.995,
+          "encoder_mode": "none",
+          "initialization": "batch_feature_zero",
+          "input_noise_anneal_end": 0.1,
+          "input_noise_std": 0.0,
+          "latent_damping_max_rate": 0.5,
+          "lr": 0.00425,
+          "lr_anneal_start": 0.6,
+          "lr_control": "stationarity",
+          "lr_floor": 0.05,
+          "model": "gan",
+          "name": "ka2",
+          "network_lr_floor": 0.01,
+          "network_lr_horizon_cap": 1600,
+          "num_classes": null,
+          "num_particles": 20000,
+          "observation_sigma": 0.03,
+          "output_noise_mode": "learnable",
+          "output_noise_std": 0.02,
+          "output_noise_warmup": 0.0,
+          "particle_birth_death": true,
+          "prior_betas": null,
+          "prior_kind": "particles",
+          "prior_lr_mult": 2.0,
+          "prior_reg": 0.0,
+          "reconstruction_weight": 1.0,
+          "reg_anchor_min_decay": 0.9,
+          "reg_anchor_weight": 1.0,
+          "reg_coeff": 3.0,
+          "reg_every": 1,
+          "reg_kappa": 1.0,
+          "routing_temperature": 0.25,
+          "sigma_rel": 0.0,
+          "standardize": true,
+          "total_steps": null,
+          "ucd_target": "class",
+          "ucd_weight": 0.02,
+          "z_dim": 2
+        },
+        "seconds": 347.7,
+        "status": "FAIL",
+        "stream_deviations": 0,
+        "task": "rotated100",
+        "thresholds": [
+          [
+            "modes",
+            ">=",
+            100
+          ],
+          [
+            "precision",
+            ">=",
+            0.97
+          ],
+          [
+            "min_hq_mode_mass",
+            ">=",
+            0.005
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.1
+          ],
+          [
+            "max_mode_mass",
+            "<=",
+            0.02
+          ],
+          [
+            "min_cov_eig_ratio",
+            ">=",
+            0.4
+          ],
+          [
+            "max_cov_eig_ratio",
+            "<=",
+            1.7
+          ],
+          [
+            "min_radial_median_ratio",
+            ">=",
+            0.65
+          ],
+          [
+            "max_radial_median_ratio",
+            "<=",
+            1.4
+          ],
+          [
+            "acc_mass_tv",
+            "<=",
+            0.06
+          ],
+          [
+            "acc_center_rms_sigma",
+            "<=",
+            0.2
+          ],
+          [
+            "acc_abs_cov_trace_bias",
+            "<=",
+            0.1
+          ],
+          [
+            "acc_radial_ks",
+            "<=",
+            0.04
+          ]
+        ],
+        "train_seconds": 346.62,
+        "warnings": []
+      },
+      "raw_status": "FAIL",
+      "reason": null,
+      "role": "candidate",
+      "task_id": "rotated100"
+    }
+  ]
+}

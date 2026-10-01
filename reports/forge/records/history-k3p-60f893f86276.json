@@ -1,0 +1,157 @@
+{
+  "candidate_id": "k3p",
+  "candidate_revision": "a567ca6dc5b5b27a61cad5224fb47301466b70735c9ca718f1e51fca265f6f56",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "live",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Historical recorded task outcomes: PASS=1",
+  "evidence_scope": "historical",
+  "hypothesis": "Unknown; consult the linked source narrative.",
+  "mechanism_class": "unknown",
+  "next_action": "Bind compatible task, fixture, package, scoring, and complete raw evidence before qualification reuse.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "attempt_id": "k3p-toy-unused_token_hold",
+      "environment": {
+        "ATEN_CPU_CAPABILITY": "avx2",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+        "CUDA_VISIBLE_DEVICES": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+        "LD_PRELOAD": null,
+        "MKL_ENABLE_INSTRUCTIONS": "AVX2"
+      },
+      "floors": null,
+      "role": "candidate"
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-k3p-60f893f86276",
+  "record_type": "scientific",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "0089356f12173badfd6dc8d985efb5de55a5f72f",
+    "path": "reports/toy100/gap-fill-20260925/results-summary.json",
+    "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "sha256": "8272fb8fb5442da91326131b7100c73812ffd91016a81f5d9a9ffca97903fda4",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results-summary.json"
+  },
+  "task_results": [
+    {
+      "cost": {
+        "flops": null,
+        "flops_status": "unavailable",
+        "peak_gpu_mib": null,
+        "seconds": 5.753563608042896,
+        "steps": null,
+        "train_seconds": null
+      },
+      "diagnostics": {},
+      "evidence": [
+        {
+          "git_blob": "0089356f12173badfd6dc8d985efb5de55a5f72f",
+          "original_evidence": {
+            "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-unused_token_hold/result.json",
+            "artifact_sha256": "eefcc28c68b43e93d173cad625ddaa312a05e1e42fb99be7c6097afee4cd16f2",
+            "id": "k3p-toy-unused_token_hold",
+            "snapshot": "results/k3p-toy-unused_token_hold.json.gz",
+            "snapshot_sha256": "4651e482941cc46877de8914b439574529f525a937375132be235c7006e394f2"
+          },
+          "path": "reports/toy100/gap-fill-20260925/results-summary.json",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "8272fb8fb5442da91326131b7100c73812ffd91016a81f5d9a9ffca97903fda4",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results-summary.json"
+        }
+      ],
+      "evidence_scope": "historical",
+      "gate_status": "PASS",
+      "metrics": {},
+      "raw_result": {
+        "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/k3p-toy-unused_token_hold/result.json",
+        "artifact_sha256": "eefcc28c68b43e93d173cad625ddaa312a05e1e42fb99be7c6097afee4cd16f2",
+        "candidate": "k3p",
+        "environment": {
+          "ATEN_CPU_CAPABILITY": "avx2",
+          "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+          "CUDA_VISIBLE_DEVICES": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+          "LD_PRELOAD": null,
+          "MKL_ENABLE_INSTRUCTIONS": "AVX2"
+        },
+        "error": null,
+        "floors": null,
+        "id": "k3p-toy-unused_token_hold",
+        "kind": "toy",
+        "live": {
+          "concept_move": 0.9450302124023438,
+          "unused_hold": 0.9986878948984668
+        },
+        "raw_status": "PASS",
+        "seconds": 5.753563608042896,
+        "snapshot": "results/k3p-toy-unused_token_hold.json.gz",
+        "snapshot_sha256": "4651e482941cc46877de8914b439574529f525a937375132be235c7006e394f2",
+        "task": "unused_token_hold",
+        "verdict": {
+          "attempted": true,
+          "confirmation_fraction": 0.75,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": 4.22072677500546,
+            "confirmed_step": 150,
+            "first_pass_step": 117,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 11,
+            "passing_suffix": 11,
+            "stable_from_seconds": 3.5621334451716393,
+            "stable_from_step": 117
+          },
+          "metrics": [
+            {
+              "margin": 0.1486878948984668,
+              "metric": "unused_hold",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.85,
+              "value": 0.9986878948984668
+            },
+            {
+              "margin": 0.09503021240234377,
+              "metric": "concept_move",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.85,
+              "value": 0.9450302124023438
+            }
+          ],
+          "passed": true,
+          "shortfall": 0.0,
+          "status": "PASS"
+        }
+      },
+      "raw_status": "PASS",
+      "reason": null,
+      "role": "candidate",
+      "task_id": "unused_token_hold"
+    }
+  ]
+}

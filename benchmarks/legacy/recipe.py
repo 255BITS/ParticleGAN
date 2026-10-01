@@ -1,7 +1,7 @@
 """Pinned pre-removal ``Recipe`` with the formulation switches benchmarks replay.
 
 ``LegacyRecipe`` is ``particlegan.Recipe`` plus the fields ParticleGAN no
-longer ships (``loss_type``, ``gan_mode``, ``reg_arm``, ``reg_method``) and
+longer ships (``loss_type``, ``gan_mode``, ``reg_method``), the archived arms, and
 the factories that honored them, built from the pinned copies in this
 package. It pins the K3P critic (``name="k3p"``, the fixed-decay anchor
 ``reg_anchor_decay`` and ``particlegan.k3p.K3PCriticAdam``) these receipts
@@ -54,6 +54,15 @@ class LegacyRecipe(Recipe):
         self.make_loss()
         self.make_gradient_penalty()
 
+    def _penalty_options(self, **overrides):
+        """Keep the base's common validation separate from archived arm selection.
+
+        Before the public selector existed, this inherited hook validated
+        only K3P settings. The actual archived arm/method remains validated
+        by ``make_gradient_penalty`` in ``__post_init__`` above.
+        """
+        return super()._penalty_options(**{**overrides, "arm": "k3p"})
+
     def to_dict(self):
         """The recorded dict: recorded field order; added fields only when changed."""
         values = super().to_dict()
@@ -93,6 +102,7 @@ def get_recipe(name="gan", **overrides):
     from particlegan import get_recipe as current
     base = current(name)
     values = {f.name: getattr(base, f.name) for f in fields(Recipe)}
+    values.update(critic_formulation="k3p", reg_arm=base.reg_arm or "k3p")
     if values["name"] == "ka2":
         values["name"] = "k3p"  # the K3P-era name of the same recipe
     return LegacyRecipe(**{**values, **overrides})

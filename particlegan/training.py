@@ -5,7 +5,7 @@ import math
 import torch
 from torch import nn
 
-from .particle_prior import ParticlePrior
+from .particle_prior import MoGParticlePrior, ParticlePrior
 from .recipes import Recipe, learning_rate_scales
 from .policy import UpdatePolicy, _state_to_device, _validate_optimizer_state, input_noise_std, output_noise_std
 
@@ -46,9 +46,11 @@ def _normalized_recipe(recipe):
 
 # Recipe fields that once named a fixed choice, with the only value they could hold; a saved
 # recipe that records them with that value loads, any other value is rejected.
-_REMOVED_RECIPE_FIELDS = {"loss_type": "logistic", "gan_mode": "rp", "reg_arm": "k3p",
+_REMOVED_RECIPE_FIELDS = {"loss_type": "logistic", "gan_mode": "rp",
                           "reg_method": "autograd"}
-_ADDED_RECIPE_FIELDS = {"reg_anchor_weight": 1.0, "direct_particle_gain": True, "continuous_policy": None, "amsgrad": False, "critic_r1_real": True,
+_ADDED_RECIPE_FIELDS = {"reg_anchor_weight": 1.0, "direct_particle_gain": True,
+                        "reg_arm": None, "critic_formulation": "ka2",
+                        "continuous_policy": None, "amsgrad": False, "critic_r1_real": True,
                         "critic_payoff_damping": True, "output_noise_mode": "fixed",
                         "lr_control": "mobility", "particle_birth_death": False,
                         "row_evidence_gate": False, "table_release_rule": "any",
@@ -61,7 +63,7 @@ _ADDED_RECIPE_FIELDS = {"reg_anchor_weight": 1.0, "direct_particle_gain": True, 
 class GANTrainer:
     """Own the recipe's update mechanics; callers supply networks and real batches.
 
-    Supports scalar, unconditional GAN recipes with a particle prior. Fresh real
+    Supports scalar, unconditional GAN recipes with a particle or MoG prior. Fresh real
     batches for the generator can be passed as ``generator_real`` tensors or
     zero-argument callables. Data-loader position is caller-owned and must be
     saved separately when checkpointing. Checkpoints restore global PyTorch RNG
@@ -79,6 +81,11 @@ class GANTrainer:
     by default; ``sample(..., output_noise=True)`` adds the current output
     noise (``output_sigma()``; see ``recipe.output_noise_mode``).
 
+    ``max_steps`` bounds execution independently of the recipe's schedule;
+    ``extend_execution`` raises that allowance without changing the formulation.
+    Optional named RNG streams isolate input/output noise, MoG kernel noise,
+    evaluation and stochastic model layers and travel with checkpoints.
+
     ``serial_backward=True`` executes the whole update with autograd
     multithreading disabled. Use it for exact CUDA checkpoint continuation
     with higher-order critic penalties. This changes gradient summation order
@@ -90,6 +97,9 @@ class GANTrainer:
 
     def __init__(self, recipe, generator, discriminator, *, prior=None, seed=0,
                  latent_generator=None, penalty_generator=None,
+                 noise_generator=None, input_noise_generator=None,
+                 prior_noise_generator=None, eval_generator=None, model_generator=None,
+                 require_latent_damping=None, max_steps=None,
                  optimizer_options=None, penalty_options=None, serial_backward=False):
         if not isinstance(recipe, Recipe):
             raise TypeError("recipe must be a Recipe")
@@ -100,9 +110,12 @@ class GANTrainer:
             raise ValueError("GANTrainer requires row_policy='independent'; use E22Policy with RoutedRows "
                              "and a caller-owned loop for paired conditional contexts")
         if (recipe.model != "gan" or recipe.conditioning != "scalar"
-                or recipe.encoder_mode != "none" or recipe.prior_kind != "particles"):
+                or recipe.encoder_mode != "none"):
             raise ValueError("GANTrainer supports unconditional scalar GANs with particle priors and no encoder")
         self.recipe, self.G, self.D = recipe, generator, discriminator
+        if max_steps is not None and (type(max_steps) is not int or max_steps < 1):
+            raise ValueError("max_steps must be a positive integer or None")
+        self.max_steps = recipe.total_steps if max_steps is None else max_steps
         parameters = list(generator.parameters())
         if not parameters or not any(p.requires_grad for p in parameters):
             raise ValueError("generator must have trainable parameters")
@@ -110,8 +123,13 @@ class GANTrainer:
         self.device, self.dtype = first_trainable.device, first_trainable.dtype
         self.prior = (recipe.make_prior().to(device=self.device, dtype=self.dtype)
                       if prior is None else prior)
-        if type(self.prior) is not ParticlePrior:
-            raise ValueError("prior must be a ParticlePrior")
+        expected_prior = MoGParticlePrior if recipe.prior_kind == "mog" else ParticlePrior
+        if type(self.prior) is not expected_prior:
+            raise ValueError("prior must match the recipe's ParticlePrior or MoGParticlePrior kind")
+        if type(self.prior) is MoGParticlePrior and self.prior.standardize != recipe.standardize:
+            raise ValueError("prior standardize must match the recipe")
+        if prior_noise_generator is not None and type(self.prior) is not MoGParticlePrior:
+            raise ValueError("prior_noise_generator requires a MoG prior")
         if self.prior.z.shape != (recipe.num_particles, recipe.z_dim):
             raise ValueError("prior dimensions must match the recipe")
         if not any(p.requires_grad for p in discriminator.parameters()):
@@ -128,21 +146,59 @@ class GANTrainer:
                 seen.add(id(parameter))
         self.optimizer_options = dict(optimizer_options or {})
         self.penalty_options = dict(penalty_options or {})
+        if require_latent_damping is None:
+            require_latent_damping = self.prior.z.requires_grad and recipe.latent_damping_max_rate > 0
+        if type(require_latent_damping) is not bool:
+            raise TypeError("require_latent_damping must be a boolean or None")
         # The recipe picks the regularization formulation; its
         # step-time work runs inside these optimizers' step().
         self.opt_g, self.opt_d = recipe.make_optimizers(
-            self.G, self.D, self.prior, ema_critic=deepcopy(self.D), **self.optimizer_options)
+            self.G, self.D, self.prior, ema_critic=deepcopy(self.D),
+            require_latent_damping=require_latent_damping, **self.optimizer_options)
+        self.prior_mechanisms = self.opt_g.prior_mechanisms
         self.loss = recipe.make_loss()
         self.prior_regularizer = recipe.make_prior_regularizer(weight=1.0)
         self.penalty = recipe.make_critic_penalty(self.opt_d, **self.penalty_options)
+        if eval_generator is not None and any(eval_generator is stream for stream in (
+                latent_generator, penalty_generator, noise_generator, input_noise_generator,
+                prior_noise_generator, model_generator)):
+            raise ValueError("evaluation stream must be separate from training")
         self.policy = UpdatePolicy(
             recipe, self.G, self.D, prior=self.prior,
             generator_optimizer=self.opt_g, critic_optimizer=self.opt_d,
             seed=seed, streams={"latent_generator": latent_generator,
-                                "penalty_generator": penalty_generator},
+                                "penalty_generator": penalty_generator,
+                                "noise_generator": noise_generator,
+                                "eval_generator": eval_generator},
             penalty=self.penalty,
-            schedule=lambda step, config: learning_rate_scales(step, config))
-        self._noisy_D = InputNoise(self.D, 0.0, self.noise_generator)
+            schedule=lambda step, config: learning_rate_scales(step, config),
+            allow_shared_training_streams=not (recipe.continuous_policy is not None
+                or recipe.lr_control == "stationarity" or recipe.row_evidence_gate
+                or recipe.particle_birth_death or recipe.serve_average > 0))
+        self._STREAMS = type(self)._STREAMS
+        if input_noise_generator is not None:
+            self.input_noise_generator = self._stream(input_noise_generator, seed + 7)
+            self._STREAMS += ("input_noise_generator",)
+        else:
+            self.input_noise_generator = self.noise_generator
+        self.prior_noise_generator = None
+        if type(self.prior) is MoGParticlePrior:
+            self.prior_noise_generator = self._stream(prior_noise_generator, seed + 6)
+            self._STREAMS += ("prior_noise_generator",)
+        self.model_generator = None
+        if model_generator is not None:
+            self.model_generator = self._stream(model_generator, seed + 8)
+            self._STREAMS += ("model_generator",)
+        training_streams = [getattr(self, name) for name in self._STREAMS if name != "eval_generator"]
+        if self.eval_generator in training_streams:
+            raise ValueError("evaluation stream must be separate from training")
+        global_stream = (torch.default_generator if self.device.type == "cpu"
+                         else torch.cuda.default_generators[self.device.index])
+        if self.model_generator is not None and (self.model_generator is global_stream or any(
+                getattr(self, name) in (self.model_generator, global_stream)
+                for name in self._STREAMS if name not in ("eval_generator", "model_generator"))):
+            raise ValueError("model stream must be separate from other training streams and global draws")
+        self._noisy_D = InputNoise(self.D, 0.0, self.input_noise_generator)
 
     @property
     def latent_damping(self):
@@ -204,6 +260,21 @@ class GANTrainer:
         returns the gradient penalty's synchronized diagnostic dictionary
         (including the penalty's blend weight ``s``).
         """
+        if self.model_generator is None:
+            return self._execute_step(real, generator_real=generator_real, collect_stats=collect_stats)
+        devices = [self.device.index] if self.device.type == "cuda" else []
+        with torch.random.fork_rng(devices=devices):
+            if self.device.type == "cuda":
+                torch.cuda.set_rng_state(self.model_generator.get_state(), self.device)
+            else:
+                torch.set_rng_state(self.model_generator.get_state())
+            try:
+                return self._execute_step(real, generator_real=generator_real, collect_stats=collect_stats)
+            finally:
+                state = torch.cuda.get_rng_state(self.device) if self.device.type == "cuda" else torch.get_rng_state()
+                self.model_generator.set_state(state)
+
+    def _execute_step(self, real, *, generator_real=None, collect_stats=False):
         try:
             if self.serial_backward:
                 # Serialized backward preserves exact CUDA continuation while
@@ -233,10 +304,24 @@ class GANTrainer:
     def _average_rate(self):
         return self.policy._average_rate()
 
+    def _sample_training_prior(self, n):
+        if type(self.prior) is MoGParticlePrior:
+            return self.prior.sample(n, generator=self.latent_generator,
+                                     noise_generator=self.prior_noise_generator)
+        return self.prior.sample(n, generator=self.latent_generator)
+
+    def extend_execution(self, max_total_steps):
+        """Raise the external execution cap without changing recipe schedules."""
+        if (type(max_total_steps) is not int or max_total_steps <= self.completed_steps
+                or (self.max_steps is not None and max_total_steps <= self.max_steps)):
+            raise ValueError("execution extension must exceed the current allowance and completed steps")
+        self.max_steps = max_total_steps
+        return self.max_steps
+
     def _step(self, real, *, generator_real=None, collect_stats=False):
         self._serve_release()
         recipe = self.recipe
-        if recipe.total_steps is not None and self.completed_steps >= recipe.total_steps:
+        if self.max_steps is not None and self.completed_steps >= self.max_steps:
             raise RuntimeError("recipe training budget exhausted")
         real = self._batch(real, "real")
         if generator_real is not None and not callable(generator_real):
@@ -245,7 +330,8 @@ class GANTrainer:
                 raise ValueError("generator_real must match the real sample shape")
             if len(generator_real) != len(real):
                 raise ValueError("RpGAN generator_real must match the real batch size")
-        step_noise = self.policy.begin_step(real, game_record=self.penalty.regularizer.record)
+        step_noise = self.policy.begin_step(real, game_record=self.penalty.regularizer.record,
+                                            execution_limit=self.max_steps)
         sigma_in, sigma_out = step_noise.input_sigma, step_noise.output_sigma
         noise = self.noise_generator
         critic = self._noisy_D
@@ -253,7 +339,7 @@ class GANTrainer:
         self.D.train()
         self.G.eval()
         with torch.no_grad():
-            latent, indices_d = self.prior.sample(len(real), generator=self.latent_generator)
+            latent, indices_d = self._sample_training_prior(len(real))
             self.policy.observe_support(latent)
             fake = self._generate(self.G, latent, sigma_out, noise, rows=indices_d)
         self.policy.observe_critic_pair(real, fake)
@@ -272,7 +358,7 @@ class GANTrainer:
         flags = [p.requires_grad for p in self.D.parameters()]
         try:
             self.D.requires_grad_(False)
-            latent, indices = self.prior.sample(len(real), generator=self.latent_generator)
+            latent, indices = self._sample_training_prior(len(real))
             fake_logits = critic(self._generate(self.G, latent, sigma_out, noise, rows=indices))
             real_g = generator_real() if callable(generator_real) else generator_real
             real_g = real if real_g is None else self._batch(real_g, "generator_real")
@@ -316,7 +402,8 @@ class GANTrainer:
         return self.policy._settle_observe(index)
 
     @torch.no_grad()
-    def sample(self, n, *, ema=False, generator=None, output_noise=False):
+    def sample(self, n, *, ema=False, generator=None, output_noise=False,
+               fixed_first_n=False, offset=0):
         """Draw live or EMA samples without changing modes or training RNGs.
 
         Samples are clean by default: output noise is a training regularizer.
@@ -330,7 +417,7 @@ class GANTrainer:
         if type(output_noise) is not bool:
             raise ValueError("output_noise must be a boolean")
         stream = self.eval_generator if generator is None else self._stream(generator, 0)
-        if stream in (self.latent_generator, self.penalty_generator, self.noise_generator):
+        if stream in tuple(getattr(self, name) for name in self._STREAMS if name != "eval_generator"):
             raise ValueError("sampling requires a stream separate from training")
         model, prior = (self.ema_G, self.ema_prior) if ema else (self.G, self.prior)
         modes = [(module, module.training) for root in (model, prior) for module in root.modules()]
@@ -339,7 +426,7 @@ class GANTrainer:
             model.eval()
             prior.eval()
             with torch.random.fork_rng(devices=devices):
-                latent, rows = prior.sample(n, generator=stream)
+                latent, rows = prior.sample(n, generator=stream, fixed_first_n=fixed_first_n, offset=offset)
                 sigma = (self._output_sigma(output_noise_std(self.recipe, self.completed_steps))
                          if output_noise else 0.0)
                 return self._generate(model, latent, sigma, stream, rows=rows)
@@ -362,6 +449,7 @@ class GANTrainer:
     def _state_dict(self):
         names = ("G", "D", "prior", "ema_G", "ema_prior")
         return deepcopy({
+            **({"max_steps": self.max_steps} if self.max_steps != self.recipe.total_steps else {}),
             **({"serial_backward": True} if self.serial_backward else {}),
             **({"controller": self.controller.state_dict()} if self.controller is not None else {}),
             "schema": 4, "recipe": self.recipe.to_dict(),
@@ -434,8 +522,12 @@ class GANTrainer:
         for key in ("optimizer_options", "penalty_options", "device", "dtype", "requires_grad"):
             if state[key] != expected[key]:
                 raise ValueError(f"checkpoint {key} does not match trainer")
+        saved_cap = state.get("max_steps", self.recipe.total_steps)
+        if ((saved_cap is not None and (type(saved_cap) is not int or saved_cap < 1))
+                or saved_cap != self.max_steps):
+            raise ValueError("checkpoint execution budget does not match trainer")
         steps = state["completed_steps"]
-        if type(steps) is not int or steps < 0 or (self.recipe.total_steps is not None and steps > self.recipe.total_steps):
+        if type(steps) is not int or steps < 0 or (self.max_steps is not None and steps > self.max_steps):
             raise ValueError("invalid checkpoint step count")
         rates = state["initial_lrs"]
         if (not isinstance(rates, list) or len(rates) != 2
@@ -448,10 +540,16 @@ class GANTrainer:
             raise ValueError("invalid checkpoint model or RNG schema")
         for name, tensors in state["models"].items():
             current = expected["models"][name]
-            if not isinstance(tensors, dict) or tensors.keys() != current.keys() or any(
-                    not isinstance(tensors[k], torch.Tensor) or tensors[k].shape != v.shape
-                    or tensors[k].dtype != v.dtype for k, v in current.items()):
-                raise ValueError(f"checkpoint model {name} has incompatible tensors")
+            if not isinstance(tensors, dict) or tensors.keys() != current.keys():
+                raise ValueError(f"checkpoint model {name} has incompatible state")
+            for key, value in current.items():
+                saved = tensors[key]
+                if isinstance(value, torch.Tensor):
+                    if (not isinstance(saved, torch.Tensor) or saved.shape != value.shape
+                            or saved.dtype != value.dtype):
+                        raise ValueError(f"checkpoint model {name} has incompatible tensors")
+                elif saved != value:
+                    raise ValueError(f"checkpoint model {name} has incompatible state")
         if not isinstance(state["optimizers"], list) or len(state["optimizers"]) != 2:
             raise ValueError("invalid checkpoint optimizer schema")
         try:
@@ -460,8 +558,18 @@ class GANTrainer:
         except (KeyError, TypeError, ValueError, RuntimeError, AttributeError) as error:
             raise ValueError("invalid checkpoint optimizer state") from error
         try:
-            for value in state["streams"].values():
+            seen_streams = {}
+            for name, value in state["streams"].items():
                 torch.Generator(device=self.device).set_state(value.cpu())
+                owner = id(getattr(self, name))
+                if owner in seen_streams and not torch.equal(value, seen_streams[owner]):
+                    raise ValueError("aliased training streams have conflicting RNG states")
+                seen_streams[owner] = value
+                global_stream = (torch.default_generator if self.device.type == "cpu"
+                                 else torch.cuda.default_generators[self.device.index])
+                global_state = state["cpu_rng"] if self.device.type == "cpu" else state["cuda_rng"]
+                if getattr(self, name) is global_stream and not torch.equal(value, global_state):
+                    raise ValueError("global training stream has conflicting RNG state")
             torch.Generator(device="cpu").set_state(state["cpu_rng"].cpu())
             if self.device.type == "cuda":
                 torch.Generator(device=self.device).set_state(state["cuda_rng"].cpu())

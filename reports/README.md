@@ -26,6 +26,9 @@ kept outside the tracked tree. [The archive index](log-archive.json) records
 each removed file's exact commit, Git blob, and byte size. Existing report
 links to these logs point to the preserved archive commit. Compact results,
 qualification receipts, protocols, and reproduction sources remain tracked.
+Forge's large generated JSON leaderboards are archived in the same index;
+`python -m experiments.forge compile` rebuilds them from the retained compact
+receipts. Markdown leaderboards and experiment memory remain available in Git.
 
 To recover a log locally, use `git show ARCHIVE_COMMIT:PATH > /tmp/run.log`,
 with the commit and path from the index. The archived runs retain their original

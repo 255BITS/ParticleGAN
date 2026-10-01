@@ -1,0 +1,67 @@
+{
+  "candidate_id": "context:lrfree/dtrack2",
+  "candidate_revision": "3902021730de8cc93292dd8a6834868d06bb20beb3fd69d74e457920c144811d",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "unknown",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Narrative context only; no scientific pass is inferred.",
+  "evidence_scope": "historical",
+  "hypothesis": "Round 5: critic tracking (d_lr_mult 2.0) \u2014 shape fixed, precision now binds",
+  "mechanism_class": "parameter_change",
+  "next_action": "Read the linked narrative and normalize any remaining exact experiment identities before scientific comparison.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "family": "lrfree/dtrack2",
+      "narrative_sources": [
+        {
+          "git_blob": "3fc0bb08352043b860da759b0d8c285f7fa1fcd1",
+          "path": "reports/toy100/lrfree-search/dtrack2/README.md",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "e114a2e9dab0ac770fc9d62515d2c350b85463c6b73ca984fcda97d5bf865cf2",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/dtrack2/README.md"
+        }
+      ],
+      "structured_sources_imported": [
+        "reports/toy100/lrfree-search/dtrack2/rs1-dtrack-grid100-result.json",
+        "reports/toy100/lrfree-search/dtrack2/rs1-dtrack-rotated100-result.json",
+        "reports/toy100/lrfree-search/dtrack2/rs1-dtrack-staggered100-result.json",
+        "reports/toy100/lrfree-search/dtrack2/rs1b-dtrack15-rotated100-result.json"
+      ],
+      "summary_excerpt": "# Round 5: critic tracking (d_lr_mult 2.0) \u2014 shape fixed, precision now binds\n\nFollow-up to [sigdata-bdpair](../sigdata-bdpair/README.md) (cf1-bdpair: grid+staggered\nPASS, rotated FAIL trace +.124 / KS .063). One declared mechanism: `d_lr_mult`\n1.0 \u2192 2.0 on the frozen cf1 package \u2014 no `.py` change, no sampler change, no\nmetric/task conditioning. Dose check at 1.5x included.\n\n## Frozen results (7k, QR, noisy)\n\n| Candidate | Gate | Verdict | Checks | Prec | TV | Centre/\u03c3 | Trace | KS |\n|---|---|---|---|---:|---:|---:|---:|---:|\n| cf1 base | rotated100 | FAIL | 0/34 | .952 | .034 | .266 | +.124 | .063 |\n| rs1-dtrack (D\u00d72) | rotated100 | FAIL | 0/34 | .957 | .039 | .193 | \u2212.022 | .006 |\n| rs1b (D\u00d71.5) | rotated100 | FAIL | 0/34 | .953 | .034 | .236 | +.082 | .045 |\n| rs1-dtrack (D\u00d72) | grid100 | PASS | 22/34, arr 1500, streak 11 | .983 | .030 | .188 | .025 | .019 |\n| rs1-dtrack (D\u00d72) | staggered100 | FAIL | 9/34, arr 4250, streak 7 | .971 | .036 | .200 | .007 | .013 |\n\nDose-response on rotated shape is monotone (.124 \u2192 .082 \u2192 \u2212.022), confirming the\nunder-tracking diagnosis. But precision is not (.952 \u2192 .953 \u2192 .957): every gate's\nresidual failure is now outlier mass, not per-mode width. BD counters unchanged\nby the D-rate move (~11k moves, 96k waited deaths on rotated), so the shape fix\ncame from the critic, not from fewer teleports.\n\nRaw results, fixtures, headers, 34 scored rows, "
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-context-lrfree-dtrack2-3422a7550929",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "3fc0bb08352043b860da759b0d8c285f7fa1fcd1",
+    "path": "reports/toy100/lrfree-search/dtrack2/README.md",
+    "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+    "sha256": "e114a2e9dab0ac770fc9d62515d2c350b85463c6b73ca984fcda97d5bf865cf2",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/dtrack2/README.md"
+  },
+  "task_results": []
+}

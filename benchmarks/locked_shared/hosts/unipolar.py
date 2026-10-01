@@ -250,6 +250,7 @@ def _fit_rpgan(
     steps: int,
     recipe: UnipolarRecipe,
     noise_policy=None,
+    components=None,
 ) -> tuple[list[dict], GradientPenalty]:
     """One D update then one G update, averaged over scales ``{0, +1}``."""
     gan = GANLoss(loss_type=recipe.loss_type, mode=recipe.gan_mode)
@@ -270,6 +271,9 @@ def _fit_rpgan(
     opt_d = torch.optim.Adam(critic.parameters(), lr=LR, betas=BETAS)
     if noise_policy is not None:
         noise_policy.register_generator_optimizer(opt_g, opt_d)
+    if components is not None:
+        opt_g, opt_d, gan, reg = components.bind(
+            generator=student, critic=critic, opt_g=opt_g, opt_d=opt_d)
     for opt in (opt_g, opt_d):
         opt.param_groups[0]["initial_lr"] = LR
     real = {
@@ -290,6 +294,7 @@ def _fit_rpgan(
             if noise_policy is not None:
                 fake = noise_policy.output(fake, generator_step=False)
             cap, _stats = reg.penalty(
+                components.conditioned_score(critic, scale) if components is not None else
                 lambda z, scale=scale: critic.score(z, scale),
                 real[scale] / critic.input_scale,
                 fake / critic.input_scale,
@@ -346,6 +351,7 @@ def run_arm(
     reg_kappa: float = 1.0,
     reg_norm: str = "l2",
     noise_policy=None,
+    components=None,
 ) -> dict:
     """Fit one arm and score the unipolar gates. Prints a tailable line per checkpoint."""
     if arm not in ("locked_rpgan", "mse_only", "polarity_flipped"):
@@ -381,7 +387,7 @@ def run_arm(
         if noise_policy is not None:
             critic.noise_policy = noise_policy
         history, reg_used = _fit_rpgan(student, critic, target, steps=recipe.steps,
-                                      recipe=recipe, noise_policy=noise_policy)
+                                      recipe=recipe, noise_policy=noise_policy, components=components)
     row = score_residual(student)
     row.update(
         arm=arm,

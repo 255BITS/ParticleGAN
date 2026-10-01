@@ -1,0 +1,21 @@
+{
+  "all_four_lineage_cohorts_match": true,
+  "candidate_revision": "0fa6918ca4d0456515de09dbcfaeedffba1d4cecaab00dee5028bcf3b0b34603",
+  "cohort_sha256": "eca8051cdbaaf1e7b56ef6096a6d29bb403e581403b48d3b4f85796190eab08b",
+  "criteria_sha256": "6eac2531eed68e392c11a57328999ac5dce509f8fe51d23e7b9031b7a4e3f9d1",
+  "device": "GPU0 NVIDIA RTX A6000; GPU1 unrelated owner preserved",
+  "imports": 7,
+  "new_task_budget_seconds": 3600,
+  "profile_sha256": "eccef8c47375daceb53270524e0981550a229ea5850652926ac276a15bf47bff",
+  "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
+  "resolved_recipe_changes": {
+    "output_noise_std": [
+      0.029,
+      0.0
+    ]
+  },
+  "source_sha256": "5c9c929877c141ccf7352c16987d3a5aadf1aff3a0fedbfa78e7d9b8fe06fdb7",
+  "task_preflight_blockers": [],
+  "training_launched": false,
+  "upstream_develop": "a8b9d3977701ca700d9918ac66d40ac814b9f9ba"
+}

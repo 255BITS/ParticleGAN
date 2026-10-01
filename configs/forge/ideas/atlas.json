@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "id": "atlas",
+  "parent": "ka2",
+  "goal": "discriminator_stability",
+  "hypothesis": "The public atlas independent particle-cloud policy is an explicit new cohort. API conformance does not qualify its quality, clean/live behavior, or MoG adaptation.",
+  "changed_factors": [
+    "Explicit atlas policy preset with schedule-free horizon, row controls, learned output noise and state-selected serving"
+  ],
+  "mechanism_class": "structural",
+  "mechanism_rationale": "Public UpdatePolicy lifecycle and equal-mass particle statistics; existing Forge task policies remain blocked pending separately frozen policy-aware tasks.",
+  "api_version": "forge-api-v1",
+  "execution_path": "public_trainer",
+  "recipe_overrides": {},
+  "requires_capabilities": [
+    "particle_cloud",
+    "a2",
+    "named_rng",
+    "policy_controls",
+    "policy_serving"
+  ],
+  "api_changes": [],
+  "claim_contract": {
+    "schedule": "schedule_free",
+    "scoring_weights": "state_selected",
+    "sampling_law": "task_declared"
+  },
+  "lifecycle": "proposed",
+  "prior_art": [
+    "docs/e22.md",
+    "docs/atlas.md",
+    "reports/forge/UPSTREAM_E22_COMPATIBILITY.md"
+  ],
+  "guide": "EXPERIMENTATION.md",
+  "recipe_preset": "atlas",
+  "prior": {
+    "kind": "particle_cloud",
+    "sigma": 0.0,
+    "standardize": false,
+    "learnable": true,
+    "exception_reason": "Independent E22 row controls require an explicit equal-mass particle cloud; this is separate from Forge learned-MoG cohorts."
+  }
+}

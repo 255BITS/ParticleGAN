@@ -7,6 +7,18 @@ training interfaces from [PR155’s E22](e22.md). It adds an optional population
 control path that checks regional sample counts and average output positions,
 plus a guard on reopening a game after it has begun to settle.
 
+The installed package exposes the same controls as a named preset:
+
+```python
+from particlegan import get_recipe
+
+recipe = get_recipe("atlas", num_particles=20_000, z_dim=2, batch_size=2048)
+# recipe.total_steps is None; use GANTrainer(..., max_steps=...) for a budget.
+```
+
+Forge integration and task applicability are described in
+[the develop integration notes](../reports/forge/DEVELOP_INTEGRATION.md).
+
 ## Start with E22
 
 An ordinary GAN learns a generator that maps latent inputs to samples.

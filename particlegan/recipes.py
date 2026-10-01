@@ -20,6 +20,7 @@ class Recipe:
       group's LR at the scheduled value (``direct_particle_betas`` still apply).
     """
     name: str = "ka2"
+    critic_formulation: str = "ka2"
     model: str = "gan"
     z_dim: int = 2
     num_particles: int = 20_000
@@ -39,6 +40,9 @@ class Recipe:
     prior_lr_mult: float = 2.0
     betas: tuple[float, float] = (0.0, 0.999)
     prior_betas: tuple[float, float] | None = None
+    # None uses critic_formulation. Explicit legacy arms use the K3P optimizer;
+    # fixed R1/R2 and BCap retain their released L2 units.
+    reg_arm: str | None = None
     reg_coeff: float = 1.0
     reg_kappa: float = 1.0
     reg_every: int = 1
@@ -159,6 +163,12 @@ class Recipe:
     row_policy: str = "independent"
 
     def __post_init__(self):
+        if self.critic_formulation not in ("ka2", "k3p"):
+            raise ValueError("critic_formulation must be ka2 or k3p")
+        if self.reg_arm is not None:
+            # Keep resolved recipe/Forge provenance truthful about the optimizer
+            # family selected by an explicit legacy arm.
+            object.__setattr__(self, "critic_formulation", "k3p")
         if self.continuous_policy not in (None, "dv1", "dv2", "dv3", "dv4", "dv5", "dv6", "dv7", "dv8", "dv9", "dv10", "dv11", "dv12"):
             raise ValueError("unknown continuous_policy")
         if (self.total_steps is None) != (self.continuous_policy is not None):
@@ -338,6 +348,10 @@ class Recipe:
 
     def to_dict(self):
         result = asdict(self)
+        if self.critic_formulation == "ka2":
+            result.pop("critic_formulation")
+        if self.reg_arm is None:
+            result.pop("reg_arm")
         if self.reopen_guard is None:
             result.pop("reopen_guard")
         if self.birth_death_backend == "knn":
@@ -415,12 +429,28 @@ class Recipe:
         recipe's ``coeff``, ``kappa``, ``lazy_k``,
         ``anchor_weight`` or ``r1_real`` for this penalty.
         """
-        from .ka2 import CriticPenalty
+        if self.effective_critic_formulation == "k3p":
+            from .k3p import CriticPenalty
+        else:
+            from .ka2 import CriticPenalty
         return CriticPenalty(self, optimizer, output=output, collect_stats=collect_stats,
                              **penalty_overrides)
 
     def _penalty_options(self, **overrides):
         """Resolved kernel settings for ``make_critic_penalty``."""
+        if self.critic_formulation not in ("ka2", "k3p"):
+            raise ValueError("critic_formulation must be ka2 or k3p")
+        if self.effective_critic_formulation == "k3p":
+            if not self.critic_r1_real:
+                raise ValueError("critic_r1_real=False requires the KA2 formulation")
+            floor = self.resolved_network_lr_floor
+            options = {"arm": self.reg_arm or "k3p", "coeff": self.reg_coeff,
+                       "kappa": self.reg_kappa, "lazy_k": self.reg_every,
+                       "anchor_weight": self.reg_anchor_weight,
+                       "lr_floor": floor if floor < .5 else 0., **overrides}
+            from .grad_regularizers import GradientPenalty
+            GradientPenalty(**options)
+            return options
         options = {"coeff": self.reg_coeff, "kappa": self.reg_kappa, "lazy_k": self.reg_every,
                    "anchor_weight": self.reg_anchor_weight, "r1_real": self.critic_r1_real, **overrides}
         unknown = set(options) - {"coeff", "kappa", "lazy_k", "anchor_weight", "r1_real"}
@@ -441,9 +471,14 @@ class Recipe:
         EMA critic and all counters. ``adam_kwargs`` override the recipe's
         ``lr * d_lr_mult``, ``betas`` and ``amsgrad`` or add options such as ``fused``.
         """
-        from .ka2 import KA2CriticAdam
         options = {"lr": self.lr * self.d_lr_mult, "betas": self.betas, "amsgrad": self.amsgrad,
                    **adam_kwargs}
+        if self.effective_critic_formulation == "k3p":
+            from .k3p import K3PCriticAdam
+            return K3PCriticAdam([p for p in critic.parameters() if p.requires_grad], critic=critic,
+                                 ema_critic=ema_critic, anchor_decay=.999,
+                                 guard_ratio=self.d_guard_ratio, guard_min_steps=self.d_guard_min_steps, **options)
+        from .ka2 import KA2CriticAdam
         return KA2CriticAdam([p for p in critic.parameters() if p.requires_grad], critic=critic,
                              ema_critic=ema_critic, anchor_min_decay=self.reg_anchor_min_decay,
                              guard_ratio=self.d_guard_ratio, guard_min_steps=self.d_guard_min_steps, **options)
@@ -465,6 +500,11 @@ class Recipe:
                                 direct_gain=self.direct_particle_gain, **options)
 
     @property
+    def effective_critic_formulation(self):
+        """Explicit legacy arms retain their K3P optimizer and penalty family."""
+        return "k3p" if self.reg_arm is not None else self.critic_formulation
+
+    @property
     def resolved_network_lr_floor(self):
         """G/D LR floor: ``network_lr_floor`` or ``lr_floor``."""
         return self.lr_floor if self.network_lr_floor is None else self.network_lr_floor
@@ -474,7 +514,7 @@ class Recipe:
         return ParticleRegularizer(**{"weight": self.prior_reg, **overrides})
 
     def make_optimizers(self, generator, discriminator, prior=None, *, encoder=None, ema_critic=None,
-                        **adam_kwargs):
+                        require_latent_damping=False, **adam_kwargs):
         """Return ``(opt_g, opt_d)``: Adam optimizers whose ``step()`` does the recipe's work.
 
         ``opt_g`` covers G + optional E + prior (``make_generator_optimizer``;
@@ -494,8 +534,14 @@ class Recipe:
 
         Parameters are used as supplied; initialize fresh networks first (e.g.
         ``particlegan.init.deterministic_orthogonal_``).
+
+        ``opt_g.prior_mechanisms`` records prior capabilities and resolved A2
+        status. Nonstandardized MoG locations are row-local and support A2;
+        standardized reads do not. ``require_latent_damping=True`` rejects an
+        unavailable or disabled hook before constructing optimizers. The default
+        preserves historical component callers that did not apply A2 to MoG.
         """
-        from .particle_prior import ParticlePrior
+        from .capabilities import prior_mechanisms
         prior_params = [] if prior is None else [p for p in prior.parameters() if p.requires_grad]
         prior_ids = {id(p) for p in prior_params}
         g_params = []
@@ -512,15 +558,23 @@ class Recipe:
         if prior_params:
             groups.append({"params": prior_params, "lr": self.lr * self.prior_lr_mult,
                            "betas": self.prior_betas if self.prior_betas is not None else self.betas})
-        # A2 acts on a plain particle table (not MoG means or Gaussian priors).
-        latent_table = prior.z if type(prior) is ParticlePrior and prior.z.requires_grad else None
-        return (self.make_generator_optimizer(groups, latent_table=latent_table, **adam_kwargs),
-                self.make_critic_optimizer(discriminator, ema_critic=ema_critic, **adam_kwargs))
+        mechanisms = prior_mechanisms(prior,
+            latent_damping_max_rate=self.latent_damping_max_rate,
+            prior_beta1=(self.prior_betas or self.betas)[0])
+        if require_latent_damping and not mechanisms["a2"]["enabled"]:
+            raise ValueError("required A2 latent damping unavailable: " + mechanisms["a2"]["reason"])
+        # Plain and nonstandardized MoG reads have the same row-local gradient
+        # ownership. Standardized MoG keeps the component API's historic policy
+        # (no A2), now explicit in the optimizer receipt and optionally required.
+        latent_table = prior.z if mechanisms["prior"]["a2_eligible"] else None
+        opt_g = self.make_generator_optimizer(groups, latent_table=latent_table, **adam_kwargs)
+        opt_g.prior_mechanisms = mechanisms
+        return opt_g, self.make_critic_optimizer(discriminator, ema_critic=ema_critic, **adam_kwargs)
 
 
 
 def get_recipe(name="gan", **overrides):
-    """Select a model family or the E22 policy preset with explicit overrides.
+    """Select a model family or a policy preset with explicit overrides.
 
     Model families share the default KA2 formulation. ``"e22"`` selects the
     schedule-free DV12/stationarity policy, row evidence, critic-feature
@@ -532,6 +586,9 @@ def get_recipe(name="gan", **overrides):
     adaptation. It retains E22's controls and requires an explicit RoutedRows
     binding, paired observations and separate guard contexts. Its evidence
     and restructuring law differ from the independent-row formulation.
+    ``"atlas"`` adds automatic feature-cell selection (128 cells) and the
+    settled optimizer-reopen guard to E22. ``"ka2"`` names the default;
+    ``"k3p"`` explicitly selects the earlier critic formulation.
     No research configuration file is read at runtime.
 
     Use ``Recipe(**saved_fields)`` for resolved checkpoints and
@@ -539,6 +596,8 @@ def get_recipe(name="gan", **overrides):
     """
     families = {
         "gan": {},
+        "ka2": {},
+        "k3p": dict(critic_formulation="k3p"),
         "e22": dict(continuous_policy="dv12", total_steps=None,
                     lr_control="stationarity", amsgrad=True, reg_coeff=3.0,
                     input_noise_std=0.0, output_noise_warmup=0.0,
@@ -561,6 +620,8 @@ def get_recipe(name="gan", **overrides):
                          batch_size=64, routing_temperature=.125,
                          distance_reduction="mean"),
     }
+    families["atlas"] = {**families["e22"], "birth_death_backend": "auto",
+                         "birth_death_cells": 128, "reopen_guard": "settled"}
     families["e22_routed"] = {**families["e22"], "row_policy": "routed_paired"}
     if name not in families:
         raise ValueError(f"Unknown recipe {name!r}; choose {', '.join(families)}")

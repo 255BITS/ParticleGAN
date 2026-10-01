@@ -1,0 +1,932 @@
+{
+  "adoption": "BLOCKED",
+  "cohorts": [
+    {
+      "adoption": "BLOCKED",
+      "checks": {
+        "maximum_false_accept_fraction": {
+          "actual": null,
+          "required": 0.1,
+          "status": "BLOCKED"
+        },
+        "maximum_false_reject_fraction": {
+          "actual": null,
+          "required": 0.0,
+          "status": "BLOCKED"
+        },
+        "maximum_smoke_to_reference_wall_ratio": {
+          "actual": null,
+          "required": 0.1,
+          "status": "BLOCKED"
+        },
+        "maximum_smoke_wall_seconds": {
+          "actual": null,
+          "required": 900.0,
+          "status": "BLOCKED"
+        },
+        "minimum_paired_fraction": {
+          "actual": 0.0,
+          "required": 0.9,
+          "status": "BLOCKED"
+        },
+        "minimum_paired_lineages": {
+          "actual": 0,
+          "required": 3,
+          "status": "BLOCKED"
+        },
+        "minimum_reference_negatives": {
+          "actual": 0,
+          "required": 2,
+          "status": "BLOCKED"
+        },
+        "minimum_reference_positives": {
+          "actual": 0,
+          "required": 1,
+          "status": "BLOCKED"
+        },
+        "require_complete_reference_cost": {
+          "missing_lineages": [
+            "k3p",
+            "forge-onboarding-anchor-ablation",
+            "forge-no-critic-penalty"
+          ],
+          "status": "BLOCKED"
+        },
+        "require_complete_smoke_cost": {
+          "missing_lineages": [
+            "k3p",
+            "forge-onboarding-anchor-ablation",
+            "forge-no-critic-penalty"
+          ],
+          "status": "BLOCKED"
+        }
+      },
+      "identity": {
+        "initializer": "deterministic_orthogonal",
+        "prior": {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.025,
+          "standardize": false
+        },
+        "protocol": {
+          "budgets": {
+            "candidate_and_campaign": "required before enqueue; reserve full execution-group cost",
+            "default_through_tier": 1,
+            "per_task": "TaskSpec.execution and resources.timeout_seconds"
+          },
+          "calibration_status": "provisional",
+          "id": "screening",
+          "prior": {
+            "kind": "mog",
+            "learnable": true,
+            "sigma": 0.025,
+            "standardize": false
+          },
+          "revision": 1,
+          "rng": {
+            "candidate_identity_in_seed": false,
+            "component_scoped": true,
+            "derivation": "forge-rng-v1",
+            "streams": [
+              "init",
+              "data",
+              "prior",
+              "noise",
+              "eval"
+            ],
+            "unintended_deviations": 0
+          },
+          "robustness": {
+            "cross_seed_reuse": false,
+            "enabled_for_screening": false,
+            "requires_frozen_candidate": true,
+            "requires_preregistered_seed_set": true
+          },
+          "schema_version": 1,
+          "scoring": {
+            "best_checkpoint": "diagnostic_only",
+            "ema": "separate_view_required",
+            "weights": "live"
+          },
+          "seed": 0
+        },
+        "rng": {
+          "bindings": {
+            "[\"data\",\"target\",\"training\",\"cpu\"]": {
+              "component": "target",
+              "device": "cpu",
+              "family": "data",
+              "initial_state_sha256": "5f6b6f690d2c5963f4945c7af5e1cd2653b1929e9d7b971fdd2222ad648f78f6",
+              "purpose": "training",
+              "seed": 2842969976240124311
+            },
+            "[\"eval\",\"sampler\",\"samples\",\"cpu\"]": {
+              "component": "sampler",
+              "device": "cpu",
+              "family": "eval",
+              "initial_state_sha256": "9488d65f11be2e232c210ae5b27c29426ac74687551e6bc1597afc56159f8726",
+              "purpose": "samples",
+              "seed": 212130830619035767
+            },
+            "[\"eval\",\"target\",\"reference\",\"cpu\"]": {
+              "component": "target",
+              "device": "cpu",
+              "family": "eval",
+              "initial_state_sha256": "905a51801f69a4375927533ecf1199816a077aea8b3164d15b2811fae33abf02",
+              "purpose": "reference",
+              "seed": 7189743471773393273
+            },
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": {
+              "component": "discriminator",
+              "device": "cpu",
+              "family": "init",
+              "initial_state_sha256": "8ed75e93293198624274eafa0c49cc43078dd4eee8571413a8bb487d1296d2db",
+              "purpose": "construction",
+              "seed": 3363721576689578451
+            },
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]": {
+              "component": "generator",
+              "device": "cpu",
+              "family": "init",
+              "initial_state_sha256": "8a66406641fee82839e7b9d37e827e53b87f573b2aaeb3045200574f34e98a33",
+              "purpose": "construction",
+              "seed": 6942576180060350273
+            },
+            "[\"init\",\"prior\",\"locations\",\"cpu\"]": {
+              "component": "prior",
+              "device": "cpu",
+              "family": "init",
+              "initial_state_sha256": "ab1fa62c08db5e35d0b5c6be2418a849814f3490f8448c5b0e671be86de398ca",
+              "purpose": "locations",
+              "seed": 2562565386842645502
+            },
+            "[\"noise\",\"critic\",\"input\",\"cpu\"]": {
+              "component": "critic",
+              "device": "cpu",
+              "family": "noise",
+              "initial_state_sha256": "d45c4d304b060206d27bed2cfb50b4e02d8d3a2a3ebc2bd23198f3119b34be6d",
+              "purpose": "input",
+              "seed": 5961379833291764029
+            },
+            "[\"noise\",\"generator\",\"output\",\"cpu\"]": {
+              "component": "generator",
+              "device": "cpu",
+              "family": "noise",
+              "initial_state_sha256": "e6120399f1ed61ffb0c4cf6a35a6364a96c902b66a479e7e7e29c43e9dd67a0c",
+              "purpose": "output",
+              "seed": 9214932872906931917
+            },
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cpu\"]": {
+              "component": "models",
+              "device": "cpu",
+              "family": "noise",
+              "initial_state_sha256": "c2f7ba3cac65f7a2c9f1da18c52f973980852aaa4a916683301b0efdbb50edf9",
+              "purpose": "stochastic_layers",
+              "seed": 4481608677977550636
+            },
+            "[\"noise\",\"penalty\",\"training\",\"cpu\"]": {
+              "component": "penalty",
+              "device": "cpu",
+              "family": "noise",
+              "initial_state_sha256": "e170727612c771e1a5db3740ca655a777d92c20f99fb8497de95c6cfdb6fdd84",
+              "purpose": "training",
+              "seed": 7930995805460461310
+            },
+            "[\"noise\",\"prior\",\"gaussian\",\"cpu\"]": {
+              "component": "prior",
+              "device": "cpu",
+              "family": "noise",
+              "initial_state_sha256": "d6261b40f0efc71cdced90af99c43969a0675e1827f184a56c8790fee5a820d8",
+              "purpose": "gaussian",
+              "seed": 939191808430552031
+            },
+            "[\"prior\",\"latent\",\"indices\",\"cpu\"]": {
+              "component": "latent",
+              "device": "cpu",
+              "family": "prior",
+              "initial_state_sha256": "c20d03989eda9e8650239603a2db8efb7df1bab81c5257cce0283964a570c14a",
+              "purpose": "indices",
+              "seed": 5876435880110660064
+            }
+          },
+          "runtime": {
+            "rng": "torch.Generator",
+            "torch": "2.14.0+cu130"
+          },
+          "seed": 0,
+          "version": "forge-rng-v1"
+        },
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.3",
+            "scipy": "1.17.1",
+            "torch": "2.14.0"
+          },
+          "python": "3.14.7",
+          "system": "Linux"
+        },
+        "source_sha256": "95e279a2f9c0666a7dfb7dcb4a3a9c80468c1e38280cc571b456f69071a79d12",
+        "tasks": {
+          "cover_leftover": {
+            "compute": {
+              "backend": "cpu",
+              "deterministic": true,
+              "machine": "x86_64",
+              "model": "AMD Ryzen 9 5900X 12-Core Processor",
+              "tf32": false,
+              "threads": 1
+            },
+            "evaluation": "126684bb74dfc593da66838918d253cadb2816e805a853e76b90b60ab68392d8",
+            "execution": "5de2b21493d176cd0e83f65d9a6e46b63a737001669a5c8cf07010780ae5b1c9",
+            "execution_group": "cover_leftover",
+            "scoring_weights": "live"
+          },
+          "grid100": {
+            "compute": {
+              "backend": "cuda",
+              "compute_capability": "8.6",
+              "deterministic": true,
+              "driver": "610.57.04",
+              "model": "NVIDIA RTX A6000",
+              "tf32": false,
+              "threads": 1
+            },
+            "evaluation": "bc88efa046f1749bf954035b665269ec1ee68fade7b66d6d686b555f062a8e66",
+            "execution": "f5b7ae518ef853a83c870149365fd2a4aa89bea8db3044324e086654c47b7425",
+            "execution_group": "grid100",
+            "scoring_weights": "live"
+          },
+          "img_bars4": {
+            "compute": {
+              "backend": "cuda",
+              "compute_capability": "8.6",
+              "deterministic": true,
+              "driver": "610.57.04",
+              "model": "NVIDIA RTX A6000",
+              "tf32": false,
+              "threads": 1
+            },
+            "evaluation": "a75027e7638f8b30d5ef2a029f7da92bfeb9537f1d16b0e130159ccfc76a6dea",
+            "execution": "b939992c5e2806973fee855125c64a2207e19a4b7b4526f2e2181d3855cdb123",
+            "execution_group": "img_bars4",
+            "scoring_weights": "live"
+          },
+          "img_blobs4": {
+            "compute": {
+              "backend": "cuda",
+              "compute_capability": "8.6",
+              "deterministic": true,
+              "driver": "610.57.04",
+              "model": "NVIDIA RTX A6000",
+              "tf32": false,
+              "threads": 1
+            },
+            "evaluation": "a75027e7638f8b30d5ef2a029f7da92bfeb9537f1d16b0e130159ccfc76a6dea",
+            "execution": "b910c6fba7f2847ec43bedaee9cb65ca8865bc83c68c96718c8d4de17660cb46",
+            "execution_group": "img_blobs4",
+            "scoring_weights": "live"
+          },
+          "img_intensity2": {
+            "compute": {
+              "backend": "cuda",
+              "compute_capability": "8.6",
+              "deterministic": true,
+              "driver": "610.57.04",
+              "model": "NVIDIA RTX A6000",
+              "tf32": false,
+              "threads": 1
+            },
+            "evaluation": "d4cfba7e1d074d0593c07274a55c7bacd44003f8e754c79419313ac44bf2a8af",
+            "execution": "b4ee4aefed8408979604303f85dc1d61a0dbbfe570721c1329548709e7f8a62c",
+            "execution_group": "img_intensity2",
+            "scoring_weights": "live"
+          },
+          "img_stripes2": {
+            "compute": {
+              "backend": "cuda",
+              "compute_capability": "8.6",
+              "deterministic": true,
+              "driver": "610.57.04",
+              "model": "NVIDIA RTX A6000",
+              "tf32": false,
+              "threads": 1
+            },
+            "evaluation": "061aba660a9d1c0f7cba51194863007a228c4411a8af7f20e48f7b1b3f26d200",
+            "execution": "a62a7b56ec6dcacb646046c081a5b8b88f25a3940455d1b47212fed6e9f95710",
+            "execution_group": "img_stripes2",
+            "scoring_weights": "live"
+          },
+          "mid_scale_identity": {
+            "compute": {
+              "backend": "cpu",
+              "deterministic": true,
+              "machine": "x86_64",
+              "model": "AMD Ryzen 9 5900X 12-Core Processor",
+              "tf32": false,
+              "threads": 1
+            },
+            "evaluation": "36d40d1d8733153839a381c691cd88fe039af795ee7b9861c978cc30731c7a98",
+            "execution": "f49a4a3f0e43e70a1edb82554adbb4f250d41deae54b4ec2ff4a7730c1daf217",
+            "execution_group": "mid_scale_identity",
+            "scoring_weights": "live"
+          },
+          "mode_hold": {
+            "compute": {
+              "backend": "cuda",
+              "compute_capability": "8.6",
+              "deterministic": true,
+              "driver": "610.57.04",
+              "model": "NVIDIA RTX A6000",
+              "tf32": false,
+              "threads": 1
+            },
+            "evaluation": "ad04690092cddc9d5e8ce61f8825f1bb68469afe34db4fb8ed2e74857d51e5cc",
+            "execution": "b01acd562dade06d420de1e84e3bd24fe5169545b4d1ae1f6d2845c8b11e2918",
+            "execution_group": "mode_hold",
+            "scoring_weights": "live"
+          },
+          "residual_student": {
+            "compute": {
+              "backend": "cpu",
+              "deterministic": true,
+              "machine": "x86_64",
+              "model": "AMD Ryzen 9 5900X 12-Core Processor",
+              "tf32": false,
+              "threads": 1
+            },
+            "evaluation": "98a74ba006ec057527b0076e1da411af616b7fe0053785e76f4e43198a3b9a0e",
+            "execution": "d21c139505868687b7fb13fde73d192d8bca2aa6f73f86af11690dd138d783c8",
+            "execution_group": "residual_student",
+            "scoring_weights": "live"
+          },
+          "rotated100": {
+            "compute": {
+              "backend": "cuda",
+              "compute_capability": "8.6",
+              "deterministic": true,
+              "driver": "610.57.04",
+              "model": "NVIDIA RTX A6000",
+              "tf32": false,
+              "threads": 1
+            },
+            "evaluation": "bc88efa046f1749bf954035b665269ec1ee68fade7b66d6d686b555f062a8e66",
+            "execution": "2ce98641b9194fd2576370adf2a31a38ed8b639ad6eefdd78abb248c2c31a852",
+            "execution_group": "rotated100",
+            "scoring_weights": "live"
+          },
+          "staggered100": {
+            "compute": {
+              "backend": "cuda",
+              "compute_capability": "8.6",
+              "deterministic": true,
+              "driver": "610.57.04",
+              "model": "NVIDIA RTX A6000",
+              "tf32": false,
+              "threads": 1
+            },
+            "evaluation": "bc88efa046f1749bf954035b665269ec1ee68fade7b66d6d686b555f062a8e66",
+            "execution": "e0a0ad78023ea1e08f0bb08e4be61a5594e1c0728d1aff393a2143a85b318bad",
+            "execution_group": "staggered100",
+            "scoring_weights": "live"
+          },
+          "trajectory": {
+            "compute": {
+              "backend": "cpu",
+              "deterministic": true,
+              "machine": "x86_64",
+              "model": "AMD Ryzen 9 5900X 12-Core Processor",
+              "tf32": false,
+              "threads": 1
+            },
+            "evaluation": "7ce43040816862fec12772c8331335d4b59c0e5d2a3e4ac504900f5f33763c01",
+            "execution": "dbd95ff64a3b780f917491a453fddba362bf6a96bbba7ce8626cd7c253817c9f",
+            "execution_group": "trajectory",
+            "scoring_weights": "live"
+          },
+          "unipolar": {
+            "compute": {
+              "backend": "cpu",
+              "deterministic": true,
+              "machine": "x86_64",
+              "model": "AMD Ryzen 9 5900X 12-Core Processor",
+              "tf32": false,
+              "threads": 1
+            },
+            "evaluation": "933cf5ca415289f3c5c2b45e8dec15a7bdf15287f92ad1f5e84c0afc6d7ac6b4",
+            "execution": "5c8b17e7f7417712e05371542770910c1cf109dc1ed213b9e6409b48ffc2ad2d",
+            "execution_group": "unipolar",
+            "scoring_weights": "live"
+          },
+          "vector_anisotropic": {
+            "compute": {
+              "backend": "cuda",
+              "compute_capability": "8.6",
+              "deterministic": true,
+              "driver": "610.57.04",
+              "model": "NVIDIA RTX A6000",
+              "tf32": false,
+              "threads": 1
+            },
+            "evaluation": "b5073cde1cc11b1b4baf7e4db263f8449156135f487cc81eccd3a23d6668f013",
+            "execution": "5edf4f8b72c166182379862df08bec959f7544c96effcf8e6c4823c9a8979e00",
+            "execution_group": "vector_anisotropic",
+            "scoring_weights": "live"
+          },
+          "vector_overlap": {
+            "compute": {
+              "backend": "cuda",
+              "compute_capability": "8.6",
+              "deterministic": true,
+              "driver": "610.57.04",
+              "model": "NVIDIA RTX A6000",
+              "tf32": false,
+              "threads": 1
+            },
+            "evaluation": "56429b554a91f82d7d422c71aadef06b5c2c7e870a768561e80c8d4ce72f2dff",
+            "execution": "311c696153e74c4d09de1bd8a4c42dbe7a522faa9c5f9355a0e4b97750bfcba6",
+            "execution_group": "vector_overlap",
+            "scoring_weights": "live"
+          },
+          "vector_spiral": {
+            "compute": {
+              "backend": "cuda",
+              "compute_capability": "8.6",
+              "deterministic": true,
+              "driver": "610.57.04",
+              "model": "NVIDIA RTX A6000",
+              "tf32": false,
+              "threads": 1
+            },
+            "evaluation": "56429b554a91f82d7d422c71aadef06b5c2c7e870a768561e80c8d4ce72f2dff",
+            "execution": "656beaa971d66fb6288c8081f9071a853a89381399f62ca87b362a7a41600d46",
+            "execution_group": "vector_spiral",
+            "scoring_weights": "live"
+          },
+          "vector_two_broad": {
+            "compute": {
+              "backend": "cuda",
+              "compute_capability": "8.6",
+              "deterministic": true,
+              "driver": "610.57.04",
+              "model": "NVIDIA RTX A6000",
+              "tf32": false,
+              "threads": 1
+            },
+            "evaluation": "b5073cde1cc11b1b4baf7e4db263f8449156135f487cc81eccd3a23d6668f013",
+            "execution": "ccbbe157991e1d309df6f4a76acb01b8c5dea3e4627c0adf424736d4d8c72db1",
+            "execution_group": "vector_two_broad",
+            "scoring_weights": "live"
+          },
+          "vector_unequal_mass": {
+            "compute": {
+              "backend": "cuda",
+              "compute_capability": "8.6",
+              "deterministic": true,
+              "driver": "610.57.04",
+              "model": "NVIDIA RTX A6000",
+              "tf32": false,
+              "threads": 1
+            },
+            "evaluation": "9c59b1e906859346f88db249678f4b86e8cf3b9172669e04a7fdad232d4ef21d",
+            "execution": "182088e02815e6ebc075f53e0563231ce441f14e2a812b3f6a8a01c392b1acf2",
+            "execution_group": "vector_unequal_mass",
+            "scoring_weights": "live"
+          },
+          "vector_unequal_width": {
+            "compute": {
+              "backend": "cuda",
+              "compute_capability": "8.6",
+              "deterministic": true,
+              "driver": "610.57.04",
+              "model": "NVIDIA RTX A6000",
+              "tf32": false,
+              "threads": 1
+            },
+            "evaluation": "b5073cde1cc11b1b4baf7e4db263f8449156135f487cc81eccd3a23d6668f013",
+            "execution": "2726e2b7c98f5177f510917584e85f9f6254bb5786f6951eedf9bf9545648b79",
+            "execution_group": "vector_unequal_width",
+            "scoring_weights": "live"
+          }
+        }
+      },
+      "sha256": "c541b52f7d5882e7196ab6a7190c358c95f52ebdf5e12112e69caf7a49a013e2",
+      "stats": {
+        "all_reference_negatives": 0,
+        "all_reference_positives": 0,
+        "blocked_lineages": 0,
+        "false_accept": 0,
+        "false_accept_fraction": null,
+        "false_reject": 0,
+        "false_reject_fraction": null,
+        "incomplete_lineages": 0,
+        "lineages": 3,
+        "paired": 0,
+        "paired_fraction": 0.0,
+        "reference_negatives": 0,
+        "reference_positives": 0,
+        "reference_unknown_lineages": 3,
+        "smoke_unknown_lineages": 3,
+        "true_accept": 0,
+        "true_reject": 0,
+        "unknown": 3
+      }
+    }
+  ],
+  "complete": false,
+  "criteria": {
+    "adoption_rule": "Every criterion must pass within each declared prior/runtime cohort; missing evidence blocks adoption. Zero training is authorized by this calibration.",
+    "cost_rule": "Both complete task-cost vectors required; compare the maximum observed smoke sum and maximum per-lineage smoke/reference ratio, within each exact prior/runtime cohort. Unknown costs never count as zero.",
+    "false_accept_denominator": "All paired lineages with an independent FAIL reference (false_accept + true_reject).",
+    "false_reject_denominator": "All paired lineages with an independent PASS reference (false_reject + true_accept).",
+    "id": "calibration-criteria-v1",
+    "maximum_false_accept_fraction": 0.1,
+    "maximum_false_reject_fraction": 0.0,
+    "maximum_smoke_to_reference_wall_ratio": 0.1,
+    "maximum_smoke_wall_seconds": 900.0,
+    "minimum_paired_fraction": 0.9,
+    "minimum_paired_lineages": 3,
+    "minimum_reference_negatives": 2,
+    "minimum_reference_positives": 1,
+    "reference_rule": "FAIL if any independent required reference fails; PASS only if every independent required reference passes; otherwise UNKNOWN. Blocked/error/missing tests remain unknown, never scientific failures.",
+    "require_complete_reference_cost": true,
+    "require_complete_smoke_cost": true,
+    "require_new_mog_cohort": true,
+    "schema_version": 1,
+    "scope": "Retrospective saved-evidence calibration; criteria are not claimed to precede the original experiments.",
+    "status": "frozen_before_reducer_evaluation",
+    "unknowns_count_as_failures": false
+  },
+  "criteria_path": "configs/forge/calibration/criteria-v1.json",
+  "criteria_sha256": "6eac2531eed68e392c11a57328999ac5dce509f8fe51d23e7b9031b7a4e3f9d1",
+  "current_qualification_reuse": false,
+  "diagnostic_import_policy": "Only frozen original receipt bindings with unchanged science and criteria; all selected outcomes and retry costs retained; no qualification credit.",
+  "evidence_scope": "current",
+  "matrix": [
+    {
+      "candidate_id": "k3p",
+      "candidate_revision": "8f7f19c704a148d6ad2af5189fcbfafa099a22214a13912840a2b205e1673a2c",
+      "classification": "unknown",
+      "cohort_sha256": "c541b52f7d5882e7196ab6a7190c358c95f52ebdf5e12112e69caf7a49a013e2",
+      "conflicts": [],
+      "current_qualification_reuse": false,
+      "evidence_scope": "current",
+      "id": "k3p",
+      "incompatible_evidence_policy": "Excluded without cross-cohort or cross-seed credit.",
+      "inputs": [],
+      "reference": {
+        "blocked_tasks": [],
+        "cost": {
+          "flops": null,
+          "known_task_count": 0,
+          "known_wall_seconds": 0,
+          "missing_tasks": [
+            "trajectory",
+            "residual_student",
+            "unipolar",
+            "cover_leftover",
+            "mid_scale_identity",
+            "vector_two_broad",
+            "vector_unequal_mass",
+            "vector_unequal_width",
+            "vector_anisotropic",
+            "vector_overlap",
+            "vector_spiral",
+            "grid100",
+            "rotated100",
+            "staggered100",
+            "img_stripes2",
+            "img_blobs4"
+          ],
+          "note": "Recorded runtime; concurrent execution and archived budgets differ.",
+          "required_task_count": 16,
+          "wall_seconds": null
+        },
+        "decision": "UNKNOWN",
+        "error_or_incomplete_tasks": [],
+        "failed_tasks": [],
+        "task_statuses": {
+          "cover_leftover": "NOT_RUN",
+          "grid100": "NOT_RUN",
+          "img_blobs4": "NOT_RUN",
+          "img_stripes2": "NOT_RUN",
+          "mid_scale_identity": "NOT_RUN",
+          "residual_student": "NOT_RUN",
+          "rotated100": "NOT_RUN",
+          "staggered100": "NOT_RUN",
+          "trajectory": "NOT_RUN",
+          "unipolar": "NOT_RUN",
+          "vector_anisotropic": "NOT_RUN",
+          "vector_overlap": "NOT_RUN",
+          "vector_spiral": "NOT_RUN",
+          "vector_two_broad": "NOT_RUN",
+          "vector_unequal_mass": "NOT_RUN",
+          "vector_unequal_width": "NOT_RUN"
+        },
+        "unknown_tasks": [
+          "trajectory",
+          "residual_student",
+          "unipolar",
+          "cover_leftover",
+          "mid_scale_identity",
+          "vector_two_broad",
+          "vector_unequal_mass",
+          "vector_unequal_width",
+          "vector_anisotropic",
+          "vector_overlap",
+          "vector_spiral",
+          "grid100",
+          "rotated100",
+          "staggered100",
+          "img_stripes2",
+          "img_blobs4"
+        ]
+      },
+      "scope": "Calibration diagnoses the screen; it never bypasses failed qualification gates.",
+      "smoke": {
+        "blocked_tasks": [],
+        "cost": {
+          "flops": null,
+          "known_task_count": 0,
+          "known_wall_seconds": 0,
+          "missing_tasks": [
+            "mode_hold",
+            "img_bars4",
+            "img_intensity2"
+          ],
+          "note": "Recorded runtime; concurrent execution and archived budgets differ.",
+          "required_task_count": 3,
+          "wall_seconds": null
+        },
+        "decision": "UNKNOWN",
+        "error_or_incomplete_tasks": [],
+        "failed_tasks": [],
+        "task_statuses": {
+          "img_bars4": "NOT_RUN",
+          "img_intensity2": "NOT_RUN",
+          "mode_hold": "NOT_RUN"
+        },
+        "unknown_tasks": [
+          "mode_hold",
+          "img_bars4",
+          "img_intensity2"
+        ]
+      }
+    },
+    {
+      "candidate_id": "forge-onboarding-anchor-ablation",
+      "candidate_revision": "0288d412b0e5bfa0c7e6ef1c10209cf5da446288fdb4738c7dfc8cfc2b46f810",
+      "classification": "unknown",
+      "cohort_sha256": "c541b52f7d5882e7196ab6a7190c358c95f52ebdf5e12112e69caf7a49a013e2",
+      "conflicts": [],
+      "current_qualification_reuse": false,
+      "evidence_scope": "current",
+      "id": "forge-onboarding-anchor-ablation",
+      "incompatible_evidence_policy": "Excluded without cross-cohort or cross-seed credit.",
+      "inputs": [],
+      "reference": {
+        "blocked_tasks": [],
+        "cost": {
+          "flops": null,
+          "known_task_count": 0,
+          "known_wall_seconds": 0,
+          "missing_tasks": [
+            "trajectory",
+            "residual_student",
+            "unipolar",
+            "cover_leftover",
+            "mid_scale_identity",
+            "vector_two_broad",
+            "vector_unequal_mass",
+            "vector_unequal_width",
+            "vector_anisotropic",
+            "vector_overlap",
+            "vector_spiral",
+            "grid100",
+            "rotated100",
+            "staggered100",
+            "img_stripes2",
+            "img_blobs4"
+          ],
+          "note": "Recorded runtime; concurrent execution and archived budgets differ.",
+          "required_task_count": 16,
+          "wall_seconds": null
+        },
+        "decision": "UNKNOWN",
+        "error_or_incomplete_tasks": [],
+        "failed_tasks": [],
+        "task_statuses": {
+          "cover_leftover": "NOT_RUN",
+          "grid100": "NOT_RUN",
+          "img_blobs4": "NOT_RUN",
+          "img_stripes2": "NOT_RUN",
+          "mid_scale_identity": "NOT_RUN",
+          "residual_student": "NOT_RUN",
+          "rotated100": "NOT_RUN",
+          "staggered100": "NOT_RUN",
+          "trajectory": "NOT_RUN",
+          "unipolar": "NOT_RUN",
+          "vector_anisotropic": "NOT_RUN",
+          "vector_overlap": "NOT_RUN",
+          "vector_spiral": "NOT_RUN",
+          "vector_two_broad": "NOT_RUN",
+          "vector_unequal_mass": "NOT_RUN",
+          "vector_unequal_width": "NOT_RUN"
+        },
+        "unknown_tasks": [
+          "trajectory",
+          "residual_student",
+          "unipolar",
+          "cover_leftover",
+          "mid_scale_identity",
+          "vector_two_broad",
+          "vector_unequal_mass",
+          "vector_unequal_width",
+          "vector_anisotropic",
+          "vector_overlap",
+          "vector_spiral",
+          "grid100",
+          "rotated100",
+          "staggered100",
+          "img_stripes2",
+          "img_blobs4"
+        ]
+      },
+      "scope": "Calibration diagnoses the screen; it never bypasses failed qualification gates.",
+      "smoke": {
+        "blocked_tasks": [],
+        "cost": {
+          "flops": null,
+          "known_task_count": 0,
+          "known_wall_seconds": 0,
+          "missing_tasks": [
+            "mode_hold",
+            "img_bars4",
+            "img_intensity2"
+          ],
+          "note": "Recorded runtime; concurrent execution and archived budgets differ.",
+          "required_task_count": 3,
+          "wall_seconds": null
+        },
+        "decision": "UNKNOWN",
+        "error_or_incomplete_tasks": [],
+        "failed_tasks": [],
+        "task_statuses": {
+          "img_bars4": "NOT_RUN",
+          "img_intensity2": "NOT_RUN",
+          "mode_hold": "NOT_RUN"
+        },
+        "unknown_tasks": [
+          "mode_hold",
+          "img_bars4",
+          "img_intensity2"
+        ]
+      }
+    },
+    {
+      "candidate_id": "forge-no-critic-penalty",
+      "candidate_revision": "f9f08376c193c3bf111265a51317476ab588c07bb892cd0b1c67b6f37c762845",
+      "classification": "unknown",
+      "cohort_sha256": "c541b52f7d5882e7196ab6a7190c358c95f52ebdf5e12112e69caf7a49a013e2",
+      "conflicts": [],
+      "current_qualification_reuse": false,
+      "evidence_scope": "current",
+      "id": "forge-no-critic-penalty",
+      "incompatible_evidence_policy": "Excluded without cross-cohort or cross-seed credit.",
+      "inputs": [],
+      "reference": {
+        "blocked_tasks": [],
+        "cost": {
+          "flops": null,
+          "known_task_count": 0,
+          "known_wall_seconds": 0,
+          "missing_tasks": [
+            "trajectory",
+            "residual_student",
+            "unipolar",
+            "cover_leftover",
+            "mid_scale_identity",
+            "vector_two_broad",
+            "vector_unequal_mass",
+            "vector_unequal_width",
+            "vector_anisotropic",
+            "vector_overlap",
+            "vector_spiral",
+            "grid100",
+            "rotated100",
+            "staggered100",
+            "img_stripes2",
+            "img_blobs4"
+          ],
+          "note": "Recorded runtime; concurrent execution and archived budgets differ.",
+          "required_task_count": 16,
+          "wall_seconds": null
+        },
+        "decision": "UNKNOWN",
+        "error_or_incomplete_tasks": [],
+        "failed_tasks": [],
+        "task_statuses": {
+          "cover_leftover": "NOT_RUN",
+          "grid100": "NOT_RUN",
+          "img_blobs4": "NOT_RUN",
+          "img_stripes2": "NOT_RUN",
+          "mid_scale_identity": "NOT_RUN",
+          "residual_student": "NOT_RUN",
+          "rotated100": "NOT_RUN",
+          "staggered100": "NOT_RUN",
+          "trajectory": "NOT_RUN",
+          "unipolar": "NOT_RUN",
+          "vector_anisotropic": "NOT_RUN",
+          "vector_overlap": "NOT_RUN",
+          "vector_spiral": "NOT_RUN",
+          "vector_two_broad": "NOT_RUN",
+          "vector_unequal_mass": "NOT_RUN",
+          "vector_unequal_width": "NOT_RUN"
+        },
+        "unknown_tasks": [
+          "trajectory",
+          "residual_student",
+          "unipolar",
+          "cover_leftover",
+          "mid_scale_identity",
+          "vector_two_broad",
+          "vector_unequal_mass",
+          "vector_unequal_width",
+          "vector_anisotropic",
+          "vector_overlap",
+          "vector_spiral",
+          "grid100",
+          "rotated100",
+          "staggered100",
+          "img_stripes2",
+          "img_blobs4"
+        ]
+      },
+      "scope": "Calibration diagnoses the screen; it never bypasses failed qualification gates.",
+      "smoke": {
+        "blocked_tasks": [],
+        "cost": {
+          "flops": null,
+          "known_task_count": 0,
+          "known_wall_seconds": 0,
+          "missing_tasks": [
+            "mode_hold",
+            "img_bars4",
+            "img_intensity2"
+          ],
+          "note": "Recorded runtime; concurrent execution and archived budgets differ.",
+          "required_task_count": 3,
+          "wall_seconds": null
+        },
+        "decision": "UNKNOWN",
+        "error_or_incomplete_tasks": [],
+        "failed_tasks": [],
+        "task_statuses": {
+          "img_bars4": "NOT_RUN",
+          "img_intensity2": "NOT_RUN",
+          "mode_hold": "NOT_RUN"
+        },
+        "unknown_tasks": [
+          "mode_hold",
+          "img_bars4",
+          "img_intensity2"
+        ]
+      }
+    }
+  ],
+  "profile": "develop-20260929-quick-v1",
+  "profile_path": "configs/forge/calibration/develop-20260929-quick-v1.json",
+  "profile_sha256": "b830c83f70f639573f82ca1590d02df8711bedec7574c3eae01293201bceaf89",
+  "receipt_issues": [],
+  "recommendation": "Accept only this bound cohort/profile if all frozen criteria pass; no inherited historical-cloud or cross-seed credit.",
+  "reducer_sha256": "9fd484f2309733808000b4ee7666c5f5843e38f063fd02b27357debc24a9779e",
+  "reference_scope": "Independent quality suffix, shared across both proposed smoke profiles. Endurance and adaptation remain separate later requirements. Excludes the union of both smoke predicates to avoid circular false-rejection classification.",
+  "reference_tasks": [
+    "trajectory",
+    "residual_student",
+    "unipolar",
+    "cover_leftover",
+    "mid_scale_identity",
+    "vector_two_broad",
+    "vector_unequal_mass",
+    "vector_unequal_width",
+    "vector_anisotropic",
+    "vector_overlap",
+    "vector_spiral",
+    "grid100",
+    "rotated100",
+    "staggered100",
+    "img_stripes2",
+    "img_blobs4"
+  ],
+  "sampling_limit": "Fixed selected lineages diagnose this screen; these fractions are not unbiased population error estimates.",
+  "schema_version": 1,
+  "smoke_tasks": [
+    "mode_hold",
+    "img_bars4",
+    "img_intensity2"
+  ],
+  "training_seconds_spent": 0
+}

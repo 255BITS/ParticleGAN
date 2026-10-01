@@ -2,6 +2,9 @@
 
 **GANs with a learnable particle prior, for PyTorch.**
 
+**Running experiments / proposing ideas:** start with
+[ParticleGAN Forge — read before running ideas](EXPERIMENTATION.md).
+
 [![Tests](https://github.com/255BITS/ParticleGAN/actions/workflows/tests.yml/badge.svg)](https://github.com/255BITS/ParticleGAN/actions/workflows/tests.yml)
 
 A GAN usually draws its latent code from a fixed Gaussian and leaves all of

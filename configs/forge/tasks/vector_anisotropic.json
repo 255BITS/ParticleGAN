@@ -1,0 +1,158 @@
+{
+  "schema_version": 1,
+  "id": "vector_anisotropic",
+  "adapter": "transfer_vector",
+  "execution": {
+    "host": "vector_anisotropic",
+    "steps": 1200,
+    "prior": {
+      "kind": "mog",
+      "sigma": 0.025,
+      "standardize": false,
+      "learnable": true
+    },
+    "protocol": "screening",
+    "produces_state": false,
+    "host_source": "benchmarks/transfer_suite/vector_tasks.py",
+    "host_definition": {
+      "hidden": 64,
+      "layers": 2,
+      "fourier": 2,
+      "z_dim": 4,
+      "particles": 256,
+      "batch": 128,
+      "steps": 1200,
+      "lr": 0.001,
+      "d_lr_mult": 1.5,
+      "prior_lr_mult": 10.0,
+      "prior_reg": 0.05,
+      "betas": [
+        0.0,
+        0.99
+      ],
+      "ema_decay": 0.995,
+      "reg_arm": "b_cap",
+      "reg_coeff": 3.0,
+      "reg_kappa": 1.25,
+      "d_every": 1,
+      "g_every": 1,
+      "family": "anisotropic",
+      "split": "development",
+      "kind": "gaussian_mixture",
+      "means": [
+        [
+          -2.0,
+          -1.0
+        ],
+        [
+          0.0,
+          1.5
+        ],
+        [
+          2.0,
+          -1.0
+        ]
+      ],
+      "covariances": [
+        [
+          [
+            0.09,
+            0.018
+          ],
+          [
+            0.018,
+            0.0081
+          ]
+        ],
+        [
+          [
+            0.0081,
+            -0.018
+          ],
+          [
+            -0.018,
+            0.09
+          ]
+        ],
+        [
+          [
+            0.04,
+            0.03
+          ],
+          [
+            0.03,
+            0.04
+          ]
+        ]
+      ],
+      "masses": [
+        0.3333333333333333,
+        0.3333333333333333,
+        0.3333333333333333
+      ],
+      "identifiable": true
+    }
+  },
+  "evaluation": {
+    "sampling_contract_version": 1,
+    "eval_output_noise": "clean",
+    "kind": "transfer_sustained",
+    "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+    "gate_policy": {
+      "id": "forge-vector-full-component-v1",
+      "retained_from": "transfer-vectors-v2",
+      "finite_atom_exemptions": false,
+      "rationale": "Forge uses a nonzero-width MoG prior. The upstream v5 finite-atom oracle does not calibrate this sampling law; retain all-component shape gates where identifiable and the existing distribution gates otherwise."
+    },
+    "sampling_law": "public_prior_without_output_noise",
+    "thresholds": [
+      [
+        "sw1_normalized",
+        "<=",
+        0.18
+      ],
+      [
+        "mass_tv",
+        "<=",
+        0.15
+      ],
+      [
+        "hq",
+        ">=",
+        0.85
+      ],
+      [
+        "component_covariance_error",
+        "<=",
+        0.85
+      ],
+      [
+        "component_min_eigen_ratio",
+        ">=",
+        0.15
+      ]
+    ],
+    "observations": 24,
+    "minimum_stable_checks": 5,
+    "scoring_weights": "live",
+    "sources": {
+      "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97",
+      "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+      "benchmarks/transfer_suite/vector_tasks.py": "3ee4eb27759f61a430029c80b7772cac3dca2fb2ac84919ace0db94efca1e0b0"
+    }
+  },
+  "resources": {
+    "gpus": 1,
+    "gpu_memory_mb": 2048,
+    "cpu_threads": 1,
+    "timeout_seconds": 1800
+  },
+  "requires_capabilities": [
+    "checkpoint",
+    "named_rng",
+    "live_sampling",
+    "learned_locations",
+    "mog_prior"
+  ],
+  "dependencies": []
+}

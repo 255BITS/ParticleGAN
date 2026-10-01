@@ -1,0 +1,43 @@
+{
+  "candidate_id": "pr155-e22-api-and-original-review-gaps",
+  "candidate_revision": "183242edb5fb178a11982fe0f38bc775764f9be47cc802b3a98749ca5a44b96b",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "learning_regime": "unverified",
+    "scoring_weights": "historical_served_or_fast_as_declared"
+  },
+  "conclusion": "Incoming PR155 E22 positives cannot fill current MoG/clean-live cells: it requires ParticlePrior, noisy state-selected serving, different initialization/RNG and package. KA2 has a fixed call-800 phase change. Future integration must preserve MoG, named streams, initialization, enumeration, external budgets and complete policy checkpoints, and must avoid the empty-overrides k3p card silently adopting a KA2 default. No current-develop software defect was demonstrated. The newer archive still does not bind original dt07514k, EMA .995 D-tracking3/3 or sub-.03sigma experimental-sensitivity claims; a later written sensitivity assertion and separate EMA failure are preserved without substitution.",
+  "evidence_scope": "historical",
+  "hypothesis": "New E22/KA2 API and archived research must retain their original particle, serving, initialization and scoring identity before comparison with Forge learned MoG.",
+  "mechanism_class": "api_and_evidence_context",
+  "next_action": "Use the linked compatibility checklist when the API lands in develop. Recover original missing evidence and freeze a new justified calibration profile before default adoption. This context record launches no training and carries no current qualification.",
+  "prior": {
+    "kind": "particles",
+    "scope": "Incoming E22 evidence; not the current Forge MoG cohort.",
+    "sigma": 0.0
+  },
+  "provenance": {
+    "audit_files": [
+      {
+        "path": "reports/forge/UPSTREAM_E22_COMPATIBILITY.json",
+        "sha256": "31a57d9e5236f6e7a1ee6d0bee9f38364c9e707277748e91b95571269a4421eb"
+      },
+      {
+        "path": "reports/forge/calibration/pr155-current-followup-source-audit.json",
+        "sha256": "7b7014edc4572bb7aef2eb0bf952b7e9e9467fad18bac752b4e29d67ee7d58da"
+      }
+    ],
+    "importer_version": "forge-pr155-supplement-context-v1",
+    "reuse_eligible": false,
+    "source_revision": "b924ed4d3a2fbfee31796b53a32ea831d235750e",
+    "verification": "Pinned incoming source/artifact byte hashes verified. No science run, regrade or current qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "archive-pr155-current-api-and-review-gaps-183242edb5fb",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/UPSTREAM_E22_COMPATIBILITY.md"
+  },
+  "task_results": []
+}

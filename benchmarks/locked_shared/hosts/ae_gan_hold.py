@@ -156,30 +156,36 @@ def make_recipe(cfg: HoldConfig):
     )
 
 
-def train(cfg: HoldConfig, *, noise_policy=None) -> dict:
+def train(cfg: HoldConfig, *, noise_policy=None, components=None) -> dict:
     """Train and return reconstruction/hold measurements."""
     torch.manual_seed(cfg.seed)
-    recipe = make_recipe(cfg)
-    prior = recipe.make_prior()
+    recipe = make_recipe(cfg) if components is None else components.encoder_recipe(cfg)
+    prior = recipe.make_prior() if components is None else components.make_prior(recipe)
     encoder, decoder, critic = MLP(2, 4), MLP(2, 2), MLP(2, 1)
     if noise_policy is not None:
         from benchmarks.transfer_suite.legacy_noise_adapters import wrap_input, wrap_output
         decoder = wrap_output(decoder, noise_policy)
         critic = wrap_input(critic, noise_policy)
-    opt_g, opt_d = recipe.make_optimizers(decoder, critic, prior, encoder=encoder)
+    opt_g, opt_d = (recipe.make_optimizers(decoder, critic, prior, encoder=encoder)
+                    if components is None else (None, None))
     if noise_policy is not None:
         noise_policy.register_generator_optimizer(opt_g, opt_d)
     gan = recipe.make_loss()
-    regularizer = recipe.make_gradient_penalty(norm=cfg.reg_norm, target_anneal=cfg.target_anneal)
+    regularizer = (recipe.make_gradient_penalty(norm=cfg.reg_norm, target_anneal=cfg.target_anneal)
+                   if components is None else None)
+    if components is not None:
+        opt_g, opt_d, gan, regularizer = components.bind(
+            generator=decoder, encoder=encoder, critic=critic, priors=[prior], opt_g=opt_g, opt_d=opt_d)
     # The source's removed regularizer audit reset the CPU RNG to seed 0 and
     # consumed three uniform values (Linear(2, 1) initialization), then two
     # 8x2 normal tensors. Preserve that training-data stream for EVERY candidate
     # without constructing an audit critic or checking its loss/penalty identity.
-    stream = torch.Generator().manual_seed(0)
-    torch.rand(3, generator=stream)
-    torch.randn(8, 2, generator=stream)
-    torch.randn(8, 2, generator=stream)
-    torch.set_rng_state(stream.get_state())
+    if components is None:
+        stream = torch.Generator().manual_seed(0)
+        torch.rand(3, generator=stream)
+        torch.randn(8, 2, generator=stream)
+        torch.randn(8, 2, generator=stream)
+        torch.set_rng_state(stream.get_state())
 
     def measure(step: int):
         context = noise_policy.evaluation(step) if noise_policy is not None else nullcontext()

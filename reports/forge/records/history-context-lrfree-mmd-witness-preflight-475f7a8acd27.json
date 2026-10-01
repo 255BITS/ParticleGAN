@@ -1,0 +1,62 @@
+{
+  "candidate_id": "context:lrfree/mmd-witness-preflight",
+  "candidate_revision": "45bdc54b0f992061265198e17d5b664c2f4cf5adbd6353e79970de485597ab78",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "unknown",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Narrative context only; no scientific pass is inferred.",
+  "evidence_scope": "historical",
+  "hypothesis": "Read-only MMD witness preflight on critic-floor native100 states",
+  "mechanism_class": "unknown",
+  "next_action": "Read the linked narrative and normalize any remaining exact experiment identities before scientific comparison.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "family": "lrfree/mmd-witness-preflight",
+      "narrative_sources": [
+        {
+          "git_blob": "f0fdf8570cb01afcf08c3497a0e92b96a4a4a77a",
+          "path": "reports/toy100/lrfree-search/mmd-witness-preflight/README.md",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "3ecf9421729a8efe2c0140974b28765670f7b99df4d81fc449979991a2c5ef82",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/mmd-witness-preflight/README.md"
+        }
+      ],
+      "structured_sources_imported": [],
+      "summary_excerpt": "# Read-only MMD witness preflight on critic-floor native100 states\n\n`probe.py` loads the frozen update-7000 grid100, rotated100, and staggered100\ncheckpoints. It changes no candidate source or checkpoint. Each of eight\nblocks per task draws 2,048 sampled prior rows, uses those same row indices in\nfit and heldout contexts, independently draws DV12 latent jitter and unlabelled\nreal samples for the two contexts, and evaluates Gaussian-kernel unbiased MMD\u00b2.\nThe kernel width is the median 10th other-neighbor distance in 8,192 separate\nreal calibration draws (about `.0213`\u2013`.0216`). The generated Gaussian output\nnoise is integrated analytically, rather than resampled. A separate\nreal-vs-real MMD\u00b2 estimates the finite-batch null.\n\nFor `k_h(x,y)=exp(-||x-y||\u00b2/(2h\u00b2))`, the integrated generated/generated\nterm uses width `h\u00b2+2\u03c3\u00b2` and amplitude `(h\u00b2/(h\u00b2+2\u03c3\u00b2))^(d/2)`; the\nreal/generated term uses width `h\u00b2+\u03c3\u00b2` and amplitude\n`(h\u00b2/(h\u00b2+\u03c3\u00b2))^(d/2)`. The self diagonal is excluded in generated/generated\nand real/real U-statistics. A central difference of log sigma on block 0\nagrees with autograd on all three tasks to within `1.8e-7`.\n\n| Task | Heldout MMD\u00b2 minus real/real null, mean [95% CI] | G+prior local sign-step heldout \u0394MMD\u00b2, observed [95% CI] | Of that, q-q self term | Of that, real-q attraction |\n| --- | ---: | ---: | ---: | ---: |\n| grid100 | `+3.94e-5 [-0.39e-5, +8.27e-5]` | `-2.46e-6 ["
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-context-lrfree-mmd-witness-preflight-475f7a8acd27",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "f0fdf8570cb01afcf08c3497a0e92b96a4a4a77a",
+    "path": "reports/toy100/lrfree-search/mmd-witness-preflight/README.md",
+    "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+    "sha256": "3ecf9421729a8efe2c0140974b28765670f7b99df4d81fc449979991a2c5ef82",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/mmd-witness-preflight/README.md"
+  },
+  "task_results": []
+}

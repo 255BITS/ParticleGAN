@@ -277,7 +277,8 @@ class UpdatePolicy:
                  critic_optimizer, prior=None, table=None, table_optimizer=None,
                  roles=None, generation=None, critic_features=None, encoder=None,
                  router=None, row_semantics="independent", seed=0, streams=None,
-                 penalty=None, schedule=None, routed_rows=None):
+                 penalty=None, schedule=None, routed_rows=None,
+                 allow_shared_training_streams=False):
         if not isinstance(recipe, Recipe):
             raise TypeError("recipe must be a Recipe")
         if not isinstance(generator, nn.Module) or not isinstance(critic, nn.Module):
@@ -360,7 +361,15 @@ class UpdatePolicy:
         # hosts historically share it with the latent stream. Active training
         # and evaluation streams still require independent ownership.
         active_streams = (self.latent_generator, self.noise_generator, self.eval_generator)
-        if len({id(stream) for stream in active_streams}) != len(active_streams):
+        if type(allow_shared_training_streams) is not bool:
+            raise TypeError("allow_shared_training_streams must be a boolean")
+        adaptive = (recipe.continuous_policy is not None or recipe.lr_control == "stationarity"
+                    or recipe.row_evidence_gate or recipe.particle_birth_death or recipe.serve_average > 0)
+        if allow_shared_training_streams and adaptive:
+            raise ValueError("adaptive policies require distinct active training streams")
+        if (self.eval_generator in (self.latent_generator, self.noise_generator)
+                or (not allow_shared_training_streams
+                    and len({id(stream) for stream in active_streams}) != len(active_streams))):
             raise ValueError("active policy RNG streams must be distinct")
         self.completed_steps = 0
         self.controller = (None if recipe.continuous_policy is None else
@@ -554,7 +563,7 @@ class UpdatePolicy:
             penalty.regularizer.continuous_controller = self.controller
         return penalty
 
-    def begin_step(self, real, *, game_record=None, routed=None):
+    def begin_step(self, real, *, game_record=None, routed=None, execution_limit=None):
         """Observe critic-real rows, set LRs, take anchors, and compute noise.
 
         Call before any critic forward.  ``game_record`` is the KA2 optimizer's
@@ -564,6 +573,8 @@ class UpdatePolicy:
         Routed row controls require ``RoutedBatch`` fit/guard observations.
         With both row controls disabled, ``routed`` is optional and no row
         observations or reservoirs are updated; a frozen bank is supported.
+        ``execution_limit`` is an external update cap; it does not change the
+        recipe's schedule horizon. Omit it to use the recipe's ordinary cap.
         """
         if self._phase != "ready":
             raise RuntimeError("finish_step must complete the previous policy update")
@@ -577,7 +588,10 @@ class UpdatePolicy:
             raise ValueError("routed observations require recipe.row_policy='routed_paired'")
         self._serve_release()
         recipe = self.recipe
-        if recipe.total_steps is not None and self.completed_steps >= recipe.total_steps:
+        limit = recipe.total_steps if execution_limit is None else execution_limit
+        if execution_limit is not None and (type(execution_limit) is not int or execution_limit < 1):
+            raise ValueError("execution_limit must be a positive integer or None")
+        if limit is not None and self.completed_steps >= limit:
             raise RuntimeError("recipe training budget exhausted")
         if (not isinstance(real, torch.Tensor) or real.ndim < 2 or not len(real)
                 or real.device != self.device or real.dtype != self.dtype):
@@ -764,6 +778,8 @@ class UpdatePolicy:
                     averaged.mul_(1.0 - rate).add_(current, alpha=rate)
             for averaged, current in zip(target.buffers(), source.buffers()):
                 averaged.copy_(current)
+            if name == "prior" and hasattr(target, "set_sigma"):
+                target.set_sigma(source.sigma)
         if self._table_location is None:
             if not self.table.requires_grad:
                 self.averaged_table.copy_(self.table)

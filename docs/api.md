@@ -186,6 +186,17 @@ first, otherwise `ValueError`.
 
 ### Initializing priors
 
+For comparisons with changing architectures,
+`init.deterministic_orthogonal_(module, parameter_seeds={name: seed, ...})`
+accepts one explicit seed for every nonempty trainable named parameter. This
+mode removes positional-index coupling: adding an unrelated parameter does not
+shift the values of shared components. Shapes and declared distributions still
+matter; different architectures are not asserted to have identical weights.
+The default call without `parameter_seeds` retains the existing whole-network
+initialization exactly. `prior_capabilities(prior)` and
+`prior_mechanisms(prior, latent_damping_max_rate=..., prior_beta1=...)` expose
+the supplied prior's sampling and A2 support as JSON-compatible records.
+
 `ParticlePrior` declares its table `z` as `R2Normal(0, init_std)`, so
 
 ```python
@@ -201,11 +212,77 @@ is kept. A
 no parameters. A learned `DrawSource` table (DDGAN) is declared
 `R2Normal(0, 1)`.
 
+### `initialize_(module, *, method, parameter_generators=None, distributions=None, gain=1.0, strict=True)`
+
+An explicit, in-place initializer in `particlegan.init`; returns the same module.
+It is independent of `Recipe` and `GANTrainer`, and does not change
+`deterministic_orthogonal_` or its historical values.
+
+| Method | Applied operation |
+| --- | --- |
+| `identity_linear_v1` | Identity weight and zero bias for a square `nn.Linear` |
+| `xavier_uniform_zero_bias_v1` | Public PyTorch Xavier-uniform weights, with positive `gain`, and zero biases; trainable parameters must belong to supported Linear weights/biases |
+| `sample_distributions_v1` | Literal PyTorch uniform/normal draws from registered `Uniform`/`Normal` descriptors; `KEEP` remains unchanged |
+
+For sampled distributions, `distributions={full_parameter_name: descriptor}`
+provides call-local overrides without changing the registry. An `R2Normal`
+table needs an explicit literal distribution override. Uniform endpoints and
+normal parameters must be finite, with `low < high` and `std > 0`; these methods
+do not interpret a zero-width distribution as a constant. Use identity/zero
+operations or `KEEP` for constants. Xavier `gain` must be finite and positive;
+other methods require its default value.
+
+`parameter_generators` maps **exactly** the randomly drawn parameter names to
+distinct CPU `torch.Generator` objects. Exclude biases zeroed by Xavier, identity
+parameters, `KEEP`, frozen and empty parameters. Callers own seed derivation and
+checkpointing; the initializer neither creates hidden random streams nor reads
+global randomness. Each draw uses CPU scratch in the parameter's dtype, then
+copies to its destination device. A matching named stream therefore does not
+depend on the physical GPU index or an unrelated parameter's draws.
+Passing `torch.default_generator` is rejected; each stream must be owned by the
+caller independently of the global RNG.
+
+```python
+from particlegan import MoGParticlePrior, init
+
+prior = MoGParticlePrior(32, 2, sigma=0.025, standardize=False)
+# The caller supplies its existing named initialization stream for prior/z.
+init.initialize_(prior, method="sample_distributions_v1",
+                 distributions={"z": init.Uniform(-5.0, 5.0)},
+                 parameter_generators={"z": prior_location_generator})
+```
+
+Input declarations, shapes, generator keys/devices and unsupported aliases are
+validated before drawing. Operations and registered finalizers then run on a
+staged CPU module with cloned streams. The result must preserve all unselected
+and frozen parameters, buffers, parameter metadata and module parameter/buffer
+names before selected values and RNG states are committed. Validation or
+finalizer failure leaves caller tensors and supplied stream states unchanged.
+Finalizers that consume the global CPU RNG are rejected. Parameter aliases,
+shared parameter storage, and parameter/buffer storage sharing are unsupported.
+Trainable parameters must be contiguous. This conservatively rejects transposed
+views as well as internally overlapping views, preventing an in-place commit
+failure after another parameter has already changed.
+`strict=False` permits undeclared parameters only in the sampling method; it
+does not relax malformed distributions, unsupported methods or stream checks.
+
+Registered trainable layout fixes still apply, such as the batch-distance
+critic's zero batch-feature readout. Explicit-sigma MoG initialization preserves
+its width, masses and standardization policy. A spacing-calibrated MoG whose
+finalizer would change `sigma`/`d0` is rejected by this API; calibrating noise is
+a separate explicit operation. Frozen prior tables remain untouched.
+
+`Uniform`/`Normal` descriptors have different applications in the two public
+functions: `initialize_(..., method="sample_distributions_v1")` draws the
+literal distribution, while `deterministic_orthogonal_` uses its moments to
+construct QR matrices/patterns. Neither method implies historical fixture parity.
+
 ### `register(cls, declarations=None, *, finalize=None)`
 
-Declares how `deterministic_orthogonal_` treats the parameters that `cls`
-itself owns (not those of its submodules). `declarations` maps each parameter
-name to a spec:
+Declares distributions for parameters that `cls` itself owns (not those of its
+submodules). `deterministic_orthogonal_` uses their moments, and the explicit
+`sample_distributions_v1` method draws supported distributions literally.
+`declarations` maps each parameter name to a spec:
 
 | Spec | Meaning |
 | --- | --- |
@@ -302,7 +379,10 @@ fused layouts and other custom parameters need their own declaration.
 Earlier development builds had `Recipe.initialization="batch_feature_zero"`,
 which `make_optimizers`/`GANTrainer` applied to fresh G/D/E weights (keys 0, 1,
 2) and `make_prior` to learnable tables, plus `particlegan.initialize_`. Both
-are removed; `get_recipe(initialization=...)` is now a `TypeError`.
+are removed; `get_recipe(initialization=...)` is now a `TypeError`. The new
+`particlegan.init.initialize_(..., method=...)` is a separate explicit API;
+it does not restore the old top-level `particlegan.initialize_(..., key=...)`
+or implicit optimizer/trainer initialization.
 
 | Before | Now |
 | --- | --- |
@@ -324,7 +404,10 @@ batch-feature correction, convolution storage, attention, and LoRA. The
 ## GANTrainer
 
 `GANTrainer(recipe, G, D, *, prior=None, seed=0, latent_generator=None,
-penalty_generator=None, optimizer_options=None, penalty_options=None)` is an
+penalty_generator=None, noise_generator=None, input_noise_generator=None,
+prior_noise_generator=None, eval_generator=None, model_generator=None,
+require_latent_damping=None, max_steps=None, optimizer_options=None,
+penalty_options=None, serial_backward=False)` is an
 explicitly imported helper, separate from `Recipe`. Move networks to the same
 device and floating dtype first. When `prior=` is omitted, the helper constructs
 the prior with `recipe.make_prior()`, a plain randomly drawn table. `seed` controls owned sampling streams. The helper
@@ -332,12 +415,37 @@ never changes the weights it receives; for deterministic starting weights,
 call [`init.deterministic_orthogonal_`](#initialization) on G, D and a
 recipe-made prior first and pass `prior=`, as in the minimal loop above.
 
-The helper supports scalar, unconditional GANs with `ParticlePrior`. MoG,
-encoders, conditional GANs and DDGAN use the component API. A step performs one
+The helper supports scalar, unconditional GANs with `ParticlePrior` or
+`MoGParticlePrior`, matching the recipe's `prior_kind` and `standardize` policy.
+Encoders, conditional GANs and DDGAN use the component API. A step performs one
 D update, then one G/prior update with fresh latent samples. During the G phase,
 D is evaluated with frozen parameters; each original gradient flag is restored.
 Small particle tables (at most 1,024 rows) are regularized in full; larger tables
 use unique sampled rows. There is no particle L2 term.
+
+MoG training and sampling keep the declared Gaussian noise, including under
+`eval()` and EMA sampling. Pass an explicit prior from
+`recipe.make_prior(sigma=...)` to avoid spacing calibration. A2 supports learned
+row-local locations (`standardize=False`). Standardized reads couple all rows;
+disable A2 explicitly with `latent_damping_max_rate=0` for that formulation.
+The trainer requires configured A2 by default for a learnable prior. Its
+`prior_mechanisms` receipt reports eligibility, activation, and the reason.
+
+Optional generators isolate component indices (`latent_generator`), MoG draws
+(`prior_noise_generator`), critic input noise (`input_noise_generator`), output
+noise (`noise_generator`), evaluation (`eval_generator`), and stochastic layers
+such as dropout (`model_generator`). Direct-draw training streams may share a
+generator when a nonadaptive legacy host requires one draw sequence. Adaptive
+policies keep their four public policy streams distinct. Evaluation and model
+streams must each remain separate from the other streams. When `model_generator`
+is supplied, no training stream may use the process-default generator, because
+its state is temporarily replaced for stochastic layers. Forge always supplies
+distinct named bindings. Recreate the same stream bindings when restoring a
+checkpoint, since legacy checkpoints do not encode alias topology. Conflicting
+saved states for a shared stream are rejected before restoration. The old
+particle-cloud defaults keep their original streams and schema-4 checkpoints;
+MoG and explicitly supplied additional streams are checkpointed too. Data RNG
+remains caller-owned. Evaluation cannot borrow a training stream.
 
 - `step(real, generator_real=None, collect_stats=False)` returns detached scalar
   tensors `loss_d`, `loss_g`, `loss_gan`, `prior_regularization`, `penalty`, and
@@ -345,13 +453,18 @@ use unique sampled rows. There is no particle L2 term.
   recipe weight. `generator_real` can supply a fresh tensor or zero-argument
   callback for RP/RA; otherwise the real batch is reused. RP requires equal
   batch sizes. `collect_stats=True` also returns penalty diagnostics.
-- `sample(n, ema=False, generator=None, output_noise=False)` defaults to live
-  weights and returns clean samples: the recipe's output noise is a training
-  regularizer, so evaluate without it. `output_noise=True` adds the current
-  training output noise, drawn from the sampling stream. Its separate RNG and
-  temporary evaluation mode preserve training randomness and module modes.
-  EMA averages G/prior parameters and copies their buffers, including
-  integer counters. EMA never determines a live leaderboard pass.
+- `sample(n, ema=False, generator=None, output_noise=False, fixed_first_n=False, offset=0)`
+  defaults to fast weights for ordinary recipes and omits training output noise.
+  E22 and Atlas retain DV12 latent perturbation and their state-selected served
+  fast/averaged weights; `ema=False` does not force the fast iterate for those policies.
+  `output_noise=True`
+  adds the current training output noise using the sampling stream. Its separate
+  RNG and temporary evaluation mode preserve training randomness and module modes.
+  `fixed_first_n=True` enumerates component indices from `offset`; the requested
+  block must fit within the table bounds. Learned MoG kernel noise remains part of the prior law; a
+  zero-width cloud without output noise consumes no evaluation RNG in this mode.
+  EMA averages G/prior parameters and copies their buffers, including integer
+  counters. EMA never determines a live leaderboard pass.
 - `state_dict()` includes G, D, prior, EMA, optimizers, initial learning rates,
   update count and RNG states. `load_state_dict(state)` restores them, including
   global PyTorch RNG. Recreate the same recipe, architecture, options, dtype
@@ -359,11 +472,21 @@ use unique sampled rows. There is no particle L2 term.
   alongside it. Loading on CPU first works for a compatible CUDA trainer:
   `trainer.load_state_dict(torch.load(path, map_location="cpu", weights_only=True))`.
 
-The recipe's `total_steps` is the full schedule budget. Resume with the same
-budget; further steps after it is exhausted raise an error. A failed user
+For scheduled recipes, `total_steps` fixes every schedule horizon. By default it is also
+the execution bound. After restoring a checkpoint with its original bound, call
+`trainer.extend_execution(new_max_steps)` to increase only the execution
+allowance while keeping model, optimizer, prior, EMA, and RNG state intact.
+The new allowance must exceed the current one. Set `max_steps` explicitly to allow bounded continuation
+past that horizon; this preserves the original prefix and leaves schedules at
+their terminal values. It does not stretch or restart a schedule. Save and
+resume with the same explicit bound (included in the checkpoint when different
+from `total_steps`). Further steps after the execution bound raise an error. A failed user
 callback can occur after D has updated, so restore a checkpoint before retrying
 that interrupted update. AMP, distributed training and custom update ratios
 require a caller-owned loop.
+Schedule-free E22 and Atlas retain `total_steps=None`; pass `max_steps` to bound
+their execution without inserting a schedule. Their policy hooks use that
+external allowance without changing the formulation.
 
 `get_recipe()` constructs **KA2** ([details](ka2.md)): Rp logistic, the KA2
 critic penalty (coefficient 1, κ 1, EMA-critic anchor gated by the critic's Adam
@@ -588,7 +711,7 @@ table, as in `ParticlePrior`. Learning and EMA updates do not recalibrate sigma.
 
 | Method / attribute | Result |
 | --- | --- |
-| `sample(batch_size, generator=None, *, fixed_first_n=False, offset=0, eps=None)` | Noisy codes and selected component indices |
+| `sample(batch_size, generator=None, *, fixed_first_n=False, offset=0, eps=None, noise_generator=None)` | Noisy codes and selected component indices |
 | `prior(indices, generator=None, *, eps=None)` | Noisy draws for supplied indices; use this forward path through DDP |
 | `means()` | Differentiable read-space centers, with no noise |
 | `z` | Raw learned table; the input to particle regularization |
@@ -610,7 +733,8 @@ z, indices = prior.sample(64, fixed_first_n=True, eps=eps)
 
 Explicit epsilon must match the sampled codes' shape, device and dtype. An explicit
 generator controls both component selection and Gaussian draws without touching
-global RNG. `sigma=0, standardize=False` preserves `ParticlePrior` outputs and
+global RNG. Supply `noise_generator` to isolate Gaussian draws from component
+selection. `sigma=0, standardize=False` preserves `ParticlePrior` outputs and
 RNG consumption; zero sigma never draws noise. `eval()` keeps Gaussian noise on.
 
 For DDP, sample indices from the unwrapped prior, then call the wrapped module:
@@ -718,6 +842,17 @@ blend with caps on both plus an EMA-critic gradient anchor gated by the critic's
 Adam moment surprise ([how it works](ka2.md)). `reg_coeff`, `reg_kappa` and `reg_every` set its
 strength, cap and lazy interval. It recomputes D on detached inputs and builds
 gradients only for the critic's parameters.
+
+`Recipe(reg_arm="a_r1r2")` selects the fixed zero-centered squared L2
+gradient penalty on real and fake inputs. `reg_arm="b_cap"` selects the fixed
+one-sided L2 cap, `relu(norm(grad D) - reg_kappa) ** 2`, on both. Each uses
+`reg_coeff / 2` times the sum of the two mean penalties, with autograd and the
+same lazy interval. These arms reproduce the v0.7 kernels and do not evaluate
+the K3P blend or critic EMA anchor. Optimizer, prior and noise settings remain
+explicit recipe choices; selecting BCap alone does not restore the full v0.7
+recipe. Explicit legacy arms select the K3P optimizer; `reg_arm="k3p"` selects
+the earlier K3P penalty too. `reg_arm=None` follows `critic_formulation`, whose
+default is KA2. These choices are recorded in new source/formulation cohorts.
 
 ### `ParticleRegularizer`
 
@@ -939,6 +1074,7 @@ opt_g, opt_d = recipe.make_optimizers(G, D, prior)
 | `prior_kind`, `sigma_rel`, `standardize` | `particles`, `0`, `True` (standardize applies only to MoG) |
 | `lr`, `d_lr_mult`, `prior_lr_mult` | `.00425`, `1`, `2` |
 | `betas`, `prior_betas` | `(0, .999)`, `None` (inherit betas) |
+| `critic_formulation`, `reg_arm` | `ka2`, `None` (`k3p`, `a_r1r2`, `b_cap` explicitly select legacy K3P/fixed penalties) |
 | `reg_coeff`, `reg_kappa` | `1`, `1` (critic penalty strength and cap) |
 | `reg_every` | `1` (apply the penalty every k-th step at k× coefficient) |
 | `prior_reg`, `ema_decay` | `0`, `.995` |
@@ -1009,8 +1145,13 @@ torch.save({"G": G.state_dict(), "D": D.state_dict(), "D2": D2.state_dict(),
   `penalty.diagnostics()` returns host scalars such as
   `{"blend_weight": ..., "clipped_tensors": ...}`; `penalty.ema_critic` is the
   paired EMA module.
-- `make_optimizers` gives a learnable `ParticlePrior` table A2 damping (alone
-  in its group with beta1 0) and the critic the spike guard. Set
+- `make_optimizers` gives a learnable row-local `ParticlePrior` or
+  `MoGParticlePrior(standardize=False)` table A2 damping (alone in its group
+  with beta1 0) and the critic the spike guard. Standardized MoG reads couple
+  rows and are not A2 eligible. `opt_g.prior_mechanisms` records this explicitly;
+  `require_latent_damping=True` rejects an unavailable/disabled A2 hook before
+  training. The component factory retains its historical optional behavior by
+  default, while `GANTrainer` requires configured A2 on learned locations. Set
   `latent_damping_max_rate=0` and `d_guard_ratio=0` for plain Adam steps.
 - `make_generator_optimizer(..., direct_particles=[...])` applies the
   direct-particle response to that param group.

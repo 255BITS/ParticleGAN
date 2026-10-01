@@ -71,6 +71,40 @@ mode-acquisition window. QR at xavier's RMS passed this gate, but it failed grid
 under other keys during the #201 investigation, so it is not a supported
 substitute.
 
+### Explicit host methods and named draws
+
+`particlegan.init.initialize_` adds literal initialization methods without
+changing the deterministic QR initializer described above:
+
+- `identity_linear_v1`: identity affine weight and zero bias.
+- `xavier_uniform_zero_bias_v1`: `torch.nn.init.xavier_uniform_` weights and
+  zero biases for Linear layers.
+- `sample_distributions_v1`: literal `Uniform`/`Normal` draws, using the same
+  declaration registry with optional call-local parameter overrides.
+
+Callers supply one distinct CPU generator for each randomly initialized full
+parameter name. Constant/frozen parameters take no generator. Each operation
+uses CPU scratch and preserves the parameter's dtype; initialization values
+do not depend on the destination GPU index. The caller records the named
+stream identities and states. The [API reference](api.md#initialization)
+details strict validation, staged finalization and generator ownership.
+These methods require contiguous trainable parameters and independently owned
+CPU generators; overlapping/transposed parameter views and
+`torch.default_generator` are rejected before mutation.
+
+For example, initializing a learned MoG table with an explicit
+`{"z": init.Uniform(-5, 5)}` override samples a uniform square while preserving
+its explicit sigma and uniform masses. Passing that descriptor to the QR
+initializer would instead select a matrix scale; it would not draw a uniform
+square. Likewise, Xavier sampling differs from QR at Xavier's RMS.
+
+These methods retain a host's chosen architecture/initialization law while
+allowing explicit component/parameter streams. They do not reproduce an old
+combined CUDA draw order, turn MoG samples into particle-cloud evidence, or
+establish a passing training result. A new host profile must declare those
+differences and retain its original scientific gates. The fixed historical
+results above do not automatically transfer to a new named-stream protocol.
+
 ### Exact historical replay
 
 The research hooks that produced the 22/22 result live in

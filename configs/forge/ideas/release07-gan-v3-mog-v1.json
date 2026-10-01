@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "id": "release07-gan-v3-mog-v1",
+  "parent": null,
+  "goal": "discriminator_stability",
+  "hypothesis": "Evaluate the full v0.7 GAN v3 dynamics adapted only to the matched affine z2/batch2048/MoG host.",
+  "changed_factors": [
+    "v0.7 full default GAN v3 recipe; BCap6/cap1.25, betas(0,.99), prior spread.05, full7k cosine, no K3P hooks/input/output noise",
+    "host adaptation z4->2, batch256->2048, cloud->MoG.025"
+  ],
+  "mechanism_class": "structural",
+  "mechanism_rationale": "Released full formulation distinct from penalty-only ablation; current shared trainer exact small-state parity against pinned v0.7.",
+  "api_version": "forge-api-v1",
+  "execution_path": "public_trainer",
+  "recipe_overrides": {
+    "name": "gan_v3",
+    "model": "gan",
+    "z_dim": 2,
+    "num_particles": 20000,
+    "num_classes": null,
+    "conditioning": "scalar",
+    "ucd_target": "class",
+    "ucd_weight": 0.02,
+    "alpha_bar": [
+      1.0,
+      0.9,
+      0.5,
+      0.05,
+      0.0001
+    ],
+    "batch_size": 2048,
+    "total_steps": 7000,
+    "lr": 0.00425,
+    "d_lr_mult": 1.0,
+    "prior_lr_mult": 2.0,
+    "betas": [
+      0.0,
+      0.99
+    ],
+    "prior_betas": null,
+    "reg_arm": "b_cap",
+    "reg_coeff": 6.0,
+    "reg_kappa": 1.25,
+    "reg_every": 1,
+    "prior_reg": 0.05,
+    "ema_decay": 0.995,
+    "lr_anneal_start": 0.6,
+    "lr_floor": 0.05,
+    "encoder_mode": "none",
+    "routing_temperature": 0.25,
+    "distance_reduction": "sum",
+    "observation_sigma": 0.03,
+    "reconstruction_weight": 1.0,
+    "network_lr_floor": null,
+    "network_lr_horizon_cap": null,
+    "reg_anchor_weight": 0.0,
+    "d_guard_ratio": 0.0,
+    "latent_damping_max_rate": 0.0,
+    "direct_particle_gain": false,
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0
+  },
+  "requires_capabilities": [
+    "learned_locations",
+    "named_rng"
+  ],
+  "api_changes": [],
+  "claim_contract": {
+    "schedule": "scheduled",
+    "scoring_weights": "live",
+    "sampling_law": "task_declared"
+  },
+  "lifecycle": "proposed",
+  "prior_art": [
+    "reports/forge/studies/FORMULATION_COMPARISON_CONTINUATION.md",
+    "tests/fixtures/release07-public-api.json"
+  ],
+  "guide": "EXPERIMENTATION.md"
+}

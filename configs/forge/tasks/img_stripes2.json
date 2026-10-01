@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "id": "img_stripes2",
+  "adapter": "transfer_image",
+  "execution": {
+    "host": "img_stripes2",
+    "steps": 600,
+    "prior": {
+      "kind": "particle_cloud",
+      "sigma": 0.0,
+      "standardize": false,
+      "learnable": true,
+      "exception_reason": "Frozen image evaluation enumerates finite learned centers; stochastic MoG sampling requires separately calibrated measurement."
+    },
+    "protocol": "screening",
+    "produces_state": false,
+    "host_source": "benchmarks/transfer_suite/image_tasks.py",
+    "host_definition": {
+      "family": "image_conv_transpose",
+      "split": "development",
+      "pattern": "stripes2",
+      "architecture": "transpose",
+      "width": 12,
+      "z_dim": 8,
+      "steps": 600,
+      "modes": 2,
+      "batch_size": 32,
+      "particles": 32,
+      "lr_g": 0.0017,
+      "lr_d": 0.0017,
+      "adam_betas": [
+        0.0,
+        0.99
+      ],
+      "noise_std": 0.01,
+      "gradient_penalty": "b_cap",
+      "penalty_coeff": 3.0,
+      "kappa": 1.25,
+      "prior_weight": 0.05,
+      "ema_decay": 0.99
+    }
+  },
+  "evaluation": {
+    "sampling_contract_version": 1,
+    "sampling_law": "enumerated_prior_without_output_noise",
+    "eval_output_noise": "clean",
+    "kind": "transfer_sustained",
+    "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+    "thresholds": [
+      [
+        "modes",
+        ">=",
+        2
+      ],
+      [
+        "hq",
+        ">=",
+        0.9
+      ]
+    ],
+    "observations": 24,
+    "minimum_stable_checks": 5,
+    "scoring_weights": "live",
+    "sources": {
+      "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97",
+      "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+      "benchmarks/transfer_suite/image_tasks.py": "4f070d0879cbaaaa076f82b4683cfe74ea9ed8d85480d1922e249444a752ce58"
+    },
+    "measurement": {
+      "hq_min": 0.9,
+      "modes": 2,
+      "quality_rmse": 0.1,
+      "min_mode_fraction": 0.25,
+      "observations": 24,
+      "minimum_stable_checks": 5
+    }
+  },
+  "resources": {
+    "gpus": 1,
+    "gpu_memory_mb": 2048,
+    "cpu_threads": 1,
+    "timeout_seconds": 1800
+  },
+  "requires_capabilities": [
+    "checkpoint",
+    "named_rng",
+    "live_sampling",
+    "learned_locations",
+    "particle_cloud"
+  ],
+  "dependencies": []
+}

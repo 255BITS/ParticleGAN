@@ -1,0 +1,237 @@
+{
+  "candidate_id": "context:report/gym",
+  "candidate_revision": "97b67c8f89a835b94891407e577e27e243c55dcac5217e2974ae82384c6f4fe1",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "unknown",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Narrative context only; no scientific pass is inferred.",
+  "evidence_scope": "historical",
+  "hypothesis": "Lunar Lander baseline leaderboard",
+  "mechanism_class": "unknown",
+  "next_action": "Read the linked narrative and normalize any remaining exact experiment identities before scientific comparison.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "family": "report/gym",
+      "narrative_sources": [
+        {
+          "git_blob": "aff905aa88cc5353a9852c8f5f1f1ee959e72b1f",
+          "path": "reports/gym/lunar_lander/READOUT.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "d8c6e31376713811425031beb9ca4bbc487c189a4e696ab08900a9ce57f6e77a",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/gym/lunar_lander/READOUT.md"
+        },
+        {
+          "git_blob": "7b3ad724a97c2c146db27d8c83d54ae3729311a4",
+          "path": "reports/gym/lunar_lander/baseline/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "20e954b3971b2c2186feed7f2dbb59c419370ba8453e03525291067434fe28b1",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/gym/lunar_lander/baseline/README.md"
+        },
+        {
+          "git_blob": "7130e430cf344aad0e17c6cbe4112d5d9acc87d8",
+          "path": "reports/gym/lunar_lander/demo/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "af2f6f49105b72d26558641c91761e5f07ae240e4f08caab79da45f5b9073fec",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/gym/lunar_lander/demo/README.md"
+        },
+        {
+          "git_blob": "4c9b58ea472d612dde6d0b344dcfc803247a96d0",
+          "path": "reports/gym/lunar_lander_control/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "3110979b76b6cd8d5de611b5e6a4d6677844ec08bc9a14017e5e5a753d0d8d91",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/gym/lunar_lander_control/README.md"
+        },
+        {
+          "git_blob": "cd63b0ef925a0ba6f91d3db4eb908e046009b015",
+          "path": "reports/gym/lunar_lander_control/READOUT.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "effe4a96c9c43f1c53342d48b66ac909c7a31580eac98fc647d130eb66c0f12c",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/gym/lunar_lander_control/READOUT.md"
+        },
+        {
+          "git_blob": "5e39db7556b33ee9d64d272733c9dc0830b90c85",
+          "path": "reports/gym/lunar_lander_control/on_policy_action_diagnostics.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "2710718adf1f1878d8720ac50518a0840cb9553c2254383e6fb3699bdfb7f88a",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/gym/lunar_lander_control/on_policy_action_diagnostics.md"
+        },
+        {
+          "git_blob": "c40967f904842c6f94f147a70e2fccaf8d640066",
+          "path": "reports/gym/lunar_lander_gan_control/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "6fed72b7ba03e37663154f8609c3b38bed37ceca9472d2f42ffd4982654a9bba",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/gym/lunar_lander_gan_control/README.md"
+        },
+        {
+          "git_blob": "bf864ee5e47e7abc6e933acd459236ae4b5a985e",
+          "path": "reports/gym/lunar_lander_gan_control/READOUT.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "806ed6d031873cf8675691329c740bfdda2614030767cbed741549050e30fc68",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/gym/lunar_lander_gan_control/READOUT.md"
+        },
+        {
+          "git_blob": "e40085db3bcb50ad5cbf4452cde4ecc3cb8479fe",
+          "path": "reports/gym/lunar_lander_gan_control/cross_diagnostics.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "5ee3d4e6476e0a7454678137ac24cd3e2fee4a33a42668fad86c00e0983e2c7c",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/gym/lunar_lander_gan_control/cross_diagnostics.md"
+        },
+        {
+          "git_blob": "1b48fa03a09c64c95ab377ab0e59e4118818d99a",
+          "path": "reports/gym/lunar_lander_gan_control/prior_sample_diagnostics.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "a29e3279a5d49b9f95aafa2dc4192c599b2cd0eebb7da54124411b7f598cf40e",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/gym/lunar_lander_gan_control/prior_sample_diagnostics.md"
+        },
+        {
+          "git_blob": "8c5de44dc07f52d80220eb85209b18ddbe9acf48",
+          "path": "reports/gym/lunar_lander_particle_finetune/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "b4cfcdafbe7ad9711b6ca389711c3b3df58f2efa508b54b74e57b5ef1dc8565c",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/gym/lunar_lander_particle_finetune/README.md"
+        },
+        {
+          "git_blob": "f6a9c451fc3c4bc5dd9717a2da1dc5de1fba9135",
+          "path": "reports/gym/lunar_lander_previous_gan/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "5e1948059f0821ec678f3389fad6be59e38a20e935cc8862d92a01930e37358c",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/gym/lunar_lander_previous_gan/README.md"
+        },
+        {
+          "git_blob": "5f70bb741bbb59c41ce8712cfb6aab04ce9b262b",
+          "path": "reports/gym/lunar_lander_previous_gan/READOUT.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "ba0675460c18014e21277652b0a53104b84583e615ce9810d668e6fc61e279ec",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/gym/lunar_lander_previous_gan/READOUT.md"
+        },
+        {
+          "git_blob": "7e6b71281801451036076d52621a650719a89ff3",
+          "path": "reports/gym/lunar_lander_previous_gan/action_diagnostics.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "ad34eb77c6429be0fe185d3dea4ae3518ba2b3088ff53048a35a1258dd0778ae",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/gym/lunar_lander_previous_gan/action_diagnostics.md"
+        },
+        {
+          "git_blob": "7908d2c2000a2ab2c8898e82a2bd2ebb5c710883",
+          "path": "reports/gym/lunar_lander_slider_finetune/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "4ff3887d27fb8322ce4ecd57a0dce7ec9f73ede5f7aca8c4493a99bca7b243ce",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/gym/lunar_lander_slider_finetune/README.md"
+        },
+        {
+          "git_blob": "1a77dd0af8a87141464a6d70865519778413c1aa",
+          "path": "reports/gym/lunar_lander_slider_finetune/READOUT.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "619f74167f646f6c9a7e63687c8155a8083406bcdce4564b8e704d1460f65052",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/gym/lunar_lander_slider_finetune/READOUT.md"
+        },
+        {
+          "git_blob": "f39e7473f4810fbb1c7f5ebe53aa33b44f5134f1",
+          "path": "reports/gym/lunar_lander_slider_gan/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "8da406de273ac59a5e3cd9bd2b709a521e4c81718e388ce47ecb7afe16ac4852",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/gym/lunar_lander_slider_gan/README.md"
+        },
+        {
+          "git_blob": "c24b77d6ab2cff25e8ef34be58d742b27c4ddc7e",
+          "path": "reports/gym/lunar_lander_slider_gan/READOUT.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "a1b7664d5fee5643bdb46cedc70e244f793d41a4e60c70b4858f6af292d720c0",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/gym/lunar_lander_slider_gan/READOUT.md"
+        },
+        {
+          "git_blob": "f857dfcda5670178cf4473accc0e8a33194001a1",
+          "path": "reports/gym/lunar_lander_slider_gan/action_diagnostics.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "d5256c3d21d311ae594ac64c3dbb936b401ba7fe98c9720338bc88f3d04e6630",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/gym/lunar_lander_slider_gan/action_diagnostics.md"
+        },
+        {
+          "git_blob": "68cc7760039bbfd31f764aeabd1d7367b9a3672b",
+          "path": "reports/gym/lunar_lander_sparse_action/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "4def242598362cf4d5c522423db71038927f7ca61c986e5f88795285010e2c47",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/gym/lunar_lander_sparse_action/README.md"
+        },
+        {
+          "git_blob": "7489191def613b4fcfb6e1c275c9f54ddcc2151b",
+          "path": "reports/gym/lunar_lander_sparse_action/READOUT.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "0eb4c0d00a44f067f649fdc60366a249179d60b696c8240bfaeec2d58cd1e97b",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/gym/lunar_lander_sparse_action/READOUT.md"
+        },
+        {
+          "git_blob": "a719ce7827b3aec83e9f67d27faae026f8b54d33",
+          "path": "reports/gym/lunar_lander_sparse_action/cross_diagnostics.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "aaeedba85d46c8055ec381df4bbff050e95250e16b2124784ee3094d66616dcf",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/gym/lunar_lander_sparse_action/cross_diagnostics.md"
+        },
+        {
+          "git_blob": "d8fc664f9ee118c8d4f8d7949afdb86c563696e8",
+          "path": "reports/gym/lunar_lander_sparse_action/on_policy_action_diagnostics.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "1c172ebee9bc0e06a9b9fe88262a5992429c69d91ada15106bf98f517b048fd5",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/gym/lunar_lander_sparse_action/on_policy_action_diagnostics.md"
+        },
+        {
+          "git_blob": "eb7d9406d97eca5223e515fe5fe1dd0a12d81c00",
+          "path": "reports/gym/lunar_lander_state_control/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "8e94ef8486dffa1c4af88f07907e1c37ea6d59895f874b825b78694f618388ba",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/gym/lunar_lander_state_control/README.md"
+        },
+        {
+          "git_blob": "d9e3ac60570c45fad68c1abe112337a90c114513",
+          "path": "reports/gym/lunar_lander_state_control/READOUT.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "9d37038051b0165defbd1a885bab4f4baf157228e8ff70d701194b884e407448",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/gym/lunar_lander_state_control/READOUT.md"
+        },
+        {
+          "git_blob": "ed35f7766adf2b33b91df713cb8c79d835ccfcff",
+          "path": "reports/gym/lunar_lander_state_control/cross_diagnostics.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "96c2293836cf41d36fb4a011507d8102ac2d14c6a750911a554e6f638b63294f",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/gym/lunar_lander_state_control/cross_diagnostics.md"
+        }
+      ],
+      "structured_sources_imported": [],
+      "summary_excerpt": "# Lunar Lander baseline leaderboard\n\nSingle transitions; 11 terrain heights are privileged context. Lower errors are better.\n\n| Model/checkpoint | Next-state MSE | vs persistence | Contact Brier | Action-effect MSE | 20-step MSE |\n| --- | ---: | ---: | ---: | ---: | ---: |\n| direct_final | 0.004820 | +58.3% | 0.00484 | 0.002304 | 0.231991 |\n| direct_best | 0.007048 | +39.1% | 0.00450 | 0.003010 | 0.330456 |\n| persistence | 0.011567 | +0.0% | 0.00525 | 0.012995 | 0.552613 |\n| adversarial_best | 0.063822 | -451.8% | 0.00732 | 0.039382 | 0.520222 |\n| reconstruction_best | 0.082694 | -614.9% | 0.00489 | 0.039649 | 0.640620 |\n| adversarial_final | 0.204280 | -1666.1% | 0.00603 | 0.023113 | 1.634448 |\n| reconstruction_final | 0.487572 | -4115.3% | 0.02862 | 0.246211 | 1.815117 |\n\nCheckpoints selected by validation continuous MSE; final checkpoints also listed. Recursive contacts use p >= .5, and evaluation ends at reference termination. The deterministic encoder predicts a point; joint generation does not establish conditional uncertainty.\n"
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-context-report-gym-98d7f8d0cc29",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "7b3ad724a97c2c146db27d8c83d54ae3729311a4",
+    "path": "reports/gym/lunar_lander/baseline/README.md",
+    "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "sha256": "20e954b3971b2c2186feed7f2dbb59c419370ba8453e03525291067434fe28b1",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/gym/lunar_lander/baseline/README.md"
+  },
+  "task_results": []
+}

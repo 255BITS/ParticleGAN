@@ -1,0 +1,69 @@
+{
+  "candidate_id": "context:report/learned_lr",
+  "candidate_revision": "cbc708d0193283a43bff8738926259c30778adfcf7315f8c7fafab3c09a2c34e",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "unknown",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Narrative context only; no scientific pass is inferred.",
+  "evidence_scope": "historical",
+  "hypothesis": "Learned GAN LR controller \u2014 initial study",
+  "mechanism_class": "unknown",
+  "next_action": "Read the linked narrative and normalize any remaining exact experiment identities before scientific comparison.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "family": "report/learned_lr",
+      "narrative_sources": [
+        {
+          "git_blob": "da4f5c6911d320132327dc7c35a07913d469772d",
+          "path": "reports/learned_lr/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "f4954499066a253fbc1f2a90ecfdf074a2cf502baa1ae380b0c882a542aab1cb",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/learned_lr/README.md"
+        },
+        {
+          "git_blob": "158c720dec8a6526192651efccb3ea625846a552",
+          "path": "reports/learned_lr/full_suite/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "63bc42ed2bd2bcfdb5bb787628a9595654679cbaf04cc37de4f792c44c64b993",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/learned_lr/full_suite/README.md"
+        }
+      ],
+      "structured_sources_imported": [],
+      "summary_excerpt": "# Learned GAN LR controller \u2014 initial study\n\n**Continuation:** the [expanded smart-descent study](../smart_descent/README.md)\nfits gradient feedback on the full development suite, tests direct schedule\nreplacement and raw-gradient descent, and reserves new transfer cases. Its\ncosine-backed candidate passes all 29 live bounds and sustains all nine toys.\nThe initial experiment below is preserved as originally measured.\n\nThis is a trained, runnable research controller. A 12-weight linear network was fitted on a four-mode ring and a nine-mode grid; all nine behavioral hosts and the evaluation tasks below were held out from fitting. Fitting and ring comparisons use 1,200 updates. The full suite preserves each host's original 80\u20131,200 update budget. All runs use seed 0 and live scoring; EMA is recorded separately.\n\nThe frozen controller improves the fitting objective by 10.4% relative to cosine, but fails all three held-out coverage/HQ tasks. Zeroing its feedback inputs slightly improves the fitting objective, so this experiment does not establish a benefit from feedback over a learned time schedule. Cosine remains the stronger ring baseline.\n\n## Full behavioral leaderboard\n\n| Controller | Live bounds | Sustained toys | Ring modes / HQ | Ring confirmation |\n| --- | ---: | ---: | --- | ---: |\n| Constant LR | 29/29 | 8/9 | 8/8 / 100% | Not reached |\n| **Delayed cosine** | **29/29** | *"
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-context-report-learned-lr-8aa9c1257d65",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "da4f5c6911d320132327dc7c35a07913d469772d",
+    "path": "reports/learned_lr/README.md",
+    "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "sha256": "f4954499066a253fbc1f2a90ecfdf074a2cf502baa1ae380b0c882a542aab1cb",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/learned_lr/README.md"
+  },
+  "task_results": []
+}

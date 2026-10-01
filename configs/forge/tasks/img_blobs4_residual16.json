@@ -1,0 +1,100 @@
+{
+  "adapter": "transfer_image",
+  "dependencies": [],
+  "evaluation": {
+    "eval_output_noise": "clean",
+    "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+    "kind": "transfer_sustained",
+    "measurement": {
+      "hq_min": 0.9,
+      "min_mode_fraction": 0.125,
+      "minimum_stable_checks": 5,
+      "modes": 4,
+      "observations": 24,
+      "quality_rmse": 0.1
+    },
+    "minimum_stable_checks": 5,
+    "observations": 24,
+    "sampling_contract_version": 1,
+    "sampling_law": "enumerated_prior_without_output_noise",
+    "scoring_weights": "live",
+    "sources": {
+      "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+      "benchmarks/transfer_suite/image_tasks.py": "4f070d0879cbaaaa076f82b4683cfe74ea9ed8d85480d1922e249444a752ce58",
+      "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97"
+    },
+    "thresholds": [
+      [
+        "modes",
+        ">=",
+        4
+      ],
+      [
+        "hq",
+        ">=",
+        0.9
+      ]
+    ]
+  },
+  "execution": {
+    "host": "img_blobs4",
+    "host_definition": {
+      "adam_betas": [
+        0.0,
+        0.99
+      ],
+      "architecture": "residual_upsample",
+      "batch_size": 32,
+      "ema_decay": 0.99,
+      "family": "image_conv_transpose",
+      "gradient_penalty": "b_cap",
+      "kappa": 1.25,
+      "lr_d": 0.0017,
+      "lr_g": 0.0017,
+      "modes": 4,
+      "noise_std": 0.01,
+      "particles": 32,
+      "pattern": "blobs4",
+      "penalty_coeff": 3.0,
+      "prior_weight": 0.05,
+      "split": "development",
+      "steps": 600,
+      "width": 16,
+      "z_dim": 8
+    },
+    "host_source": "benchmarks/transfer_suite/image_tasks.py",
+    "image_profile": {
+      "id": "published_residual16",
+      "revision": 1,
+      "source": {
+        "path": "benchmarks/transfer_suite/plans/default_comparison.json",
+        "sha256": "2e62a935dd702c9851165354cb580d18ffd4c47b72e0568562d0f50256028883"
+      }
+    },
+    "prior": {
+      "exception_reason": "Frozen image evaluation enumerates finite learned centers; stochastic MoG sampling requires separately calibrated measurement.",
+      "kind": "particle_cloud",
+      "learnable": true,
+      "sigma": 0.0,
+      "standardize": false
+    },
+    "produces_state": false,
+    "protocol": "screening",
+    "steps": 600
+  },
+  "id": "img_blobs4_residual16",
+  "requires_capabilities": [
+    "checkpoint",
+    "named_rng",
+    "live_sampling",
+    "learned_locations",
+    "particle_cloud"
+  ],
+  "resources": {
+    "cpu_threads": 1,
+    "gpu_memory_mb": 2048,
+    "gpus": 1,
+    "timeout_seconds": 1800
+  },
+  "schema_version": 1
+}

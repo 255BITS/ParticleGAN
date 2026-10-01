@@ -1,0 +1,111 @@
+{
+  "candidate_id": "context:report/toy100/accuracy-network-horizon",
+  "candidate_revision": "0e0b9af1e9617c5f972a94322a3a8e7dd3ca4ee9777872a34ba767051ffab7c9",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "unknown",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Narrative context only; no scientific pass is inferred.",
+  "evidence_scope": "historical",
+  "hypothesis": "One experimental configuration passes all three 100-mode accuracy gates",
+  "mechanism_class": "unknown",
+  "next_action": "Read the linked narrative and normalize any remaining exact experiment identities before scientific comparison.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "family": "report/toy100/accuracy-network-horizon",
+      "narrative_sources": [
+        {
+          "git_blob": "a471810914bf0b571208987baf1b2800a1d9703a",
+          "path": "reports/toy100/accuracy-network-horizon/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "18129f2cab68c3a78968e98c6d2e83bdf5c05e7c9caeac218a14076252068230",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/accuracy-network-horizon/README.md"
+        },
+        {
+          "git_blob": "60dfd4810d7d727d57199a974260ad9a1f8b24f6",
+          "path": "reports/toy100/accuracy-network-horizon/accuracy-leaderboard-grid100.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "7a0b79cf3c92a2930f3803090b4e543d684a60da8c274789e6e4b6a63f0563e8",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/accuracy-network-horizon/accuracy-leaderboard-grid100.md"
+        },
+        {
+          "git_blob": "4a80f8770ab61ddf8d9c72320f74421efe06f1a6",
+          "path": "reports/toy100/accuracy-network-horizon/accuracy-leaderboard-rotated100.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "cf66ce3a956920e5934359d66f0e31954c82b238f231d1801c0b62cc745148d0",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/accuracy-network-horizon/accuracy-leaderboard-rotated100.md"
+        },
+        {
+          "git_blob": "cf890dfaf4453124586ab15bb6e0f1868d1e77d9",
+          "path": "reports/toy100/accuracy-network-horizon/accuracy-leaderboard-staggered100.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "bdd4a0eb8c8b2e1f0158fa9a85a1ea2023a0cc7c933554fb7c7c9d3cd7c43457",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/accuracy-network-horizon/accuracy-leaderboard-staggered100.md"
+        },
+        {
+          "git_blob": "6acef068d7a2dbb08e9cfebdd8c99a41130dfa2d",
+          "path": "reports/toy100/accuracy-network-horizon/accuracy-leaderboard.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "87883971fc2579437e22f6d75f31b148d5afc5e215f7d4173f50662a15c56da8",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/accuracy-network-horizon/accuracy-leaderboard.md"
+        },
+        {
+          "git_blob": "74441b0c5f91ea37890d23cf9812c0b2bbef00b8",
+          "path": "reports/toy100/accuracy-network-horizon/leaderboard-grid100.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "27d4f5a65e96c3d629d4ac5efe0bf6d08b73e061d1b4c92bb54432e3d3c2db2c",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/accuracy-network-horizon/leaderboard-grid100.md"
+        },
+        {
+          "git_blob": "ae775ea3c62b2a5da5a75bc529a100ece34e5d27",
+          "path": "reports/toy100/accuracy-network-horizon/leaderboard-rotated100.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "bd3eb2538c9ca6ac6af53a8b563212b7c3f8d7bed3750f679b31b975182f90c2",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/accuracy-network-horizon/leaderboard-rotated100.md"
+        },
+        {
+          "git_blob": "b401fc2e48e9e4363a4210731e98f13900bd4ac9",
+          "path": "reports/toy100/accuracy-network-horizon/leaderboard-staggered100.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "1e39f30a2a6d1daf367cfc6d985c6694cc8d28ddb5eb972d7f298319deb620f8",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/accuracy-network-horizon/leaderboard-staggered100.md"
+        }
+      ],
+      "structured_sources_imported": [],
+      "summary_excerpt": "# One experimental configuration passes all three 100-mode accuracy gates\n\n**3/3 strict PASS**, with five terminal 20,000-draw checks and a separate\n100,000-draw holdout per case. This is experimental 100-mode evidence;\nit does not establish a passing shared recipe across all 22 toys.\n\nAll three runs use byte-identical [configuration](declared_config.json),\n[model and schedule options](model_options.json), [probe source](probe_source.py),\nand [actual optimizer-rate traces](optimizer_actions.jsonl). The generic\nuniform square [-5, 5]\u00b2 initialization and identity affine generator use no\ntarget samples, labels, or centers. The learned prior retains its normal\n7,000-update cosine schedule. G and D use the same cosine with its horizon\ncapped at 1,600 updates, then continue training at its floor. No seed sweep,\nper-problem configuration, or EMA substitution is used.\n\n| Case | Strict gate | Final live modes | Holdout HQ | Holdout mass TV | Center RMS / \u03c3 | Covariance bias | Radial KS |\n|---|---|---:|---:|---:|---:|---:|---:|\n| grid100 | PASS | 100/100 | .98636 | .03565 | .13912 | \u2212.03706 | .01214 |\n| rotated100 | PASS | 100/100 | .98311 | .03784 | .12087 | \u2212.03670 | .01360 |\n| staggered100 | PASS | 100/100 | .98607 | .04024 | .10432 | \u2212.03874 | .01519 |\n\nThe [combined GIF](toy100-progress.gif) shows the full convergence trajectory from\nsaved live samples, including early instability. "
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-context-report-toy100-accuracy-network-horizon-bcb2c0133162",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "a471810914bf0b571208987baf1b2800a1d9703a",
+    "path": "reports/toy100/accuracy-network-horizon/README.md",
+    "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "sha256": "18129f2cab68c3a78968e98c6d2e83bdf5c05e7c9caeac218a14076252068230",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/accuracy-network-horizon/README.md"
+  },
+  "task_results": []
+}

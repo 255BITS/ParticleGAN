@@ -1,0 +1,72 @@
+{
+  "candidate_id": "context:lrfree/sigma-adaptation-audit",
+  "candidate_revision": "0d4e02a22fdbb7c017c23f417d90ab454a4dd3b34ab7d766ecef9b33f91be21e",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "unknown",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Narrative context only; no scientific pass is inferred.",
+  "evidence_scope": "historical",
+  "hypothesis": "Effective sigma release and shared-clock audit (native grid100)",
+  "mechanism_class": "unknown",
+  "next_action": "Read the linked narrative and normalize any remaining exact experiment identities before scientific comparison.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "family": "lrfree/sigma-adaptation-audit",
+      "narrative_sources": [
+        {
+          "git_blob": "a06f9b4e689362766f517ad7646fd220dcdef864",
+          "path": "reports/toy100/lrfree-search/sigma-adaptation-audit/README.md",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "72b195d63df3c0ec35dea94f21ef35d79c612086a5d53d115d5e5a8a4f884ec2",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/sigma-adaptation-audit/README.md"
+        },
+        {
+          "git_blob": "4ff7672bcb4d634f5c56b354964b98411d0c6118",
+          "path": "reports/toy100/lrfree-search/sigma-adaptation-audit/prior-coupling-fixed-sigma-sensitivity.md",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "57d04686c2094e33837732cd26470bce4e389df4ff6a8cbc1c75492a7d3fd85b",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/sigma-adaptation-audit/prior-coupling-fixed-sigma-sensitivity.md"
+        }
+      ],
+      "structured_sources_imported": [
+        "reports/toy100/lrfree-search/sigma-adaptation-audit/clock-result.json",
+        "reports/toy100/lrfree-search/sigma-adaptation-audit/fast-result.json"
+      ],
+      "summary_excerpt": "# Effective sigma release and shared-clock audit (native grid100)\n\nBoth source-isolated sigma follow-ups to the committed [prior-rate coupling](../prior-rate-coupling/README.md) finished the unchanged 7,000-update QR/noisy grid100 gate and independent 100,000-sample holdout. **Neither passes.** The base uses paired birth/death, `batch_feature_zero` initialization, `total_steps: null`, and learnable output noise starting at 0.02. All recipe overrides and BD code are byte-identical across these two follow-ups.\n\n| Candidate | \u03c3 at 7k | Noisy precision | Centre / data \u03c3 | Covariance eig ratios | Trace bias abs | Radial KS | Frozen result |\n|---|---:|---:|---:|---:|---:|---:|---|\n| Committed prior coupling | .02000 | .96875 | .12646 | .572\u20131.330 | .00957 | .03298 | FAIL, precision |\n| Effective-scale release | .00954 | .98425 | .12048 | .485\u20131.205 | .12566 | .10117 | FAIL, trace and radial |\n| Shared intrinsic clock | .01905 | .97065 | .12402 | .505\u20131.302 | .02866 | .04401 | FAIL, radial |\n\nThe runner's `passing_checks` field counts an older coverage-style observation rule (12/34 and 2/34 for these arms). The stricter accuracy check passed **0/34** observations for each, including **0/5** at the required terminal checkpoints.\n\nThe effective-scale patch changes `_output_sigma()` and `_sigma_intrinsic_scale()` to read **applied** non-sigma G/prior rates rather than the raw prior teste"
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-context-lrfree-sigma-adaptation-audit-21c148e4b6ce",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "a06f9b4e689362766f517ad7646fd220dcdef864",
+    "path": "reports/toy100/lrfree-search/sigma-adaptation-audit/README.md",
+    "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+    "sha256": "72b195d63df3c0ec35dea94f21ef35d79c612086a5d53d115d5e5a8a4f884ec2",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/sigma-adaptation-audit/README.md"
+  },
+  "task_results": []
+}

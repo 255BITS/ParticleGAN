@@ -427,6 +427,7 @@ def _fit(
     seed: int,
     teacher: SmileTeacher,
     noise_policy=None,
+    components=None,
 ) -> tuple[MidScaleResidual, dict]:
     """Train on :data:`EVAL_SCALES` (always includes ``-1``)."""
     if not _has_scale(EVAL_SCALES, -1.0):
@@ -459,6 +460,9 @@ def _fit(
     opt_d = torch.optim.Adam(critic.parameters(), lr=LR, betas=BETAS)
     if noise_policy is not None:
         noise_policy.register_generator_optimizer(opt_g, opt_d)
+    if components is not None:
+        opt_g, opt_d, gan, reg = components.bind(
+            generator=student, critic=critic, opt_g=opt_g, opt_d=opt_d)
     for opt in (opt_g, opt_d):
         opt.param_groups[0]["initial_lr"] = LR
     reals = {scale: _batch(targets[scale]) for scale in EVAL_SCALES}
@@ -479,6 +483,7 @@ def _fit(
             if noise_policy is not None:
                 fake = noise_policy.output(fake, generator_step=False)
             cap, _stats = reg.penalty(
+                components.conditioned_score(critic, scale) if components is not None else
                 lambda z, scale=scale: critic.score(z, scale),
                 reals[scale] / critic.input_scale,
                 fake / critic.input_scale,
@@ -560,7 +565,7 @@ def _finish(
 
 
 def run_arm(arm: str, *, steps: int = GATE_STEPS, seed: int = 0,
-            noise_policy=None, **overrides) -> dict:
+            noise_policy=None, components=None, **overrides) -> dict:
     """Fit one arm and score its eval grid. Prints a tailable line."""
     if type(steps) is not int or steps <= 0:
         raise ValueError("steps must be a positive integer")
@@ -568,5 +573,5 @@ def run_arm(arm: str, *, steps: int = GATE_STEPS, seed: int = 0,
         raise ValueError("seed must be an int")
     teacher = smile_teacher()
     student, meta = _fit(arm, steps=steps, seed=seed, teacher=teacher,
-                         noise_policy=noise_policy)
+                         noise_policy=noise_policy, components=components)
     return _finish(student, meta, arm=arm, teacher=teacher)

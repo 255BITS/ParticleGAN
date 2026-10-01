@@ -1,0 +1,11 @@
+# Independent physical pilot review
+
+Verified the saved witnesses, durable request/result/certificates, current queue state and process/lease absence for `calibration-develop-20260929-gpu-pilot-v3`. Operational acceptance is supported.
+
+- Both real CUDA children appeared on distinct A6000 UUIDs. After coordinator-only SIGINT/restart, the same worker/runtime PIDs, Linux start identities, attempt IDs and lease tokens remained live. Penalty progress advanced 150→250 and K3P 200→250 between witnesses 0.954 s apart.
+- Duplicate implementation-checkout/fresh-clone submissions returned identical request IDs. Exactly 3 unique paid attempts exist: original K3P completed; penalty attempt cancelled; one explicitly linked penalty repair completed. The repair hash matches the retained cancelled result; no scientific failure was retried.
+- Both completed vector cells have 24 observations at steps 50…1200 and PASS. Cancelled work remains INCOMPLETE and charged. Total cost is 45.000919218000 s (K3P 19.400400857; cancelled 8.452047890; repair 17.148470471). Current campaign/job reservations are 0; no Forge job is running; selected processes and leases are gone. Reviewed desktop PID/start identities and command lines remain unchanged.
+- Read-only retiering proof: direct diagnostic reduction is tier 0/ineligible despite PASS. A copied diagnostic assignment 1→2 is correctly refused because frozen calibration lanes require Tier 1. Two valid ordinary-view copies move this task 1→2 through the actual board/planner path: policy hashes change, task execution/evaluation hashes and ordinary compatibility keys remain identical, diagnostic keys stay excluded, and current rows remain tier 0/ineligible with this task NOT_RUN. Archived diagnostics remain unranked and non-reusable. No validator bypass was used.
+- Queue state, centralized events, campaign progress and the production view file retained identical byte hashes throughout the demonstration: 0 additional launches, attempts or charged seconds. Evidence: [retiering proof](retiering-proof.json).
+
+Limits: this verifies the registered operational workflow and two task passes. It does not establish the full downstream calibration denominator, robustness, or adoption. Physical-overlap witnesses corroborate simultaneous live GPU allocation/training progress, not continuous GPU utilization or measured FLOPs.

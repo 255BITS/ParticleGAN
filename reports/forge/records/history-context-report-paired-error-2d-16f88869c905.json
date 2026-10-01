@@ -1,0 +1,62 @@
+{
+  "candidate_id": "context:report/paired_error_2d",
+  "candidate_revision": "b3a30a125bd8fa50fab16c61f4ddeb5c3c0b28ded03e95d54249abd3f8a4c351",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "unknown",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Narrative context only; no scientific pass is inferred.",
+  "evidence_scope": "historical",
+  "hypothesis": "Paired 2D transport: MSE-free cap/schedule transfer",
+  "mechanism_class": "unknown",
+  "next_action": "Read the linked narrative and normalize any remaining exact experiment identities before scientific comparison.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "family": "report/paired_error_2d",
+      "narrative_sources": [
+        {
+          "git_blob": "1045dac8e252cc1f9c7e5a571be87cb05ce08e33",
+          "path": "reports/paired_error_2d/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "1dcb858fe1912e49f401bf4967a9be7b7348803d0ab1f8ac76a9edb3a34f5fa3",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/paired_error_2d/README.md"
+        }
+      ],
+      "structured_sources_imported": [],
+      "summary_excerpt": "# Paired 2D transport: MSE-free cap/schedule transfer\n\n**The extraction reproduces all 12 matching model-glue runs exactly.** There is no observed numerical discrepancy in the tested 2D cases. The earlier application headline of 8.2% worse EMA error pooled three seeds and included a 3D task; this extraction holds seed 0 fixed and includes only its two 2D tasks. Those different aggregates must not be compared as if they were the same experiment.\n\nThe standalone host uses this PR's public ParticleGAN losses, gradient cap, VIC and cosine schedule. It imports neither model-glue nor particle-sliders. The routed architecture, known target maps, training-only normalization and random streams are extracted with pinned provenance. This adds a transfer case without changing the nine-host behavioral ranking or production defaults.\n\n[Task and commands](../../benchmarks/paired_error_2d/README.md) \u00b7 [Source provenance](../../benchmarks/paired_error_2d/SOURCE.md) \u00b7 [Full measurements](results.json) \u00b7 [Exact artifact comparison](reference-audit.json) \u00b7 [Runtime/source hashes](protocol.json)\n\nSeed 0, 6,000 updates, batch 64, 1,024 training points, 1,024 validation points. Each row uses its validation-selected EMA checkpoint; live is scored at that same step. Historical test points (4,096) are reused for reproduction, not claimed as a fresh holdout.\n\n| Task | Recipe | Cloud | EMA test NMSE \u2193 | L"
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-context-report-paired-error-2d-16f88869c905",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "1045dac8e252cc1f9c7e5a571be87cb05ce08e33",
+    "path": "reports/paired_error_2d/README.md",
+    "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "sha256": "1dcb858fe1912e49f401bf4967a9be7b7348803d0ab1f8ac76a9edb3a34f5fa3",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/paired_error_2d/README.md"
+  },
+  "task_results": []
+}
