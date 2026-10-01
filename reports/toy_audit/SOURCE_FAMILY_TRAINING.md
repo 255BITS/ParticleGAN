@@ -95,7 +95,14 @@ Every GIF frame is a real captured state; none is interpolated.
 
 The [compact machine-readable join](source-family-training.json) uses key
 `fixtures`, keeps each routed subfixture distinct, binds source/runtime/config
-and sampling identity, and preserves the original diagnosis digest. All raw
+and sampling identity, and preserves the original diagnosis digest. Its
+`source-family-training-compact-v2` publication schema keeps only labeled
+final/best observations, observation counts, terminal-window and budget status,
+compact phase summaries and actual GIF step indices. Full metric curves remain
+in the SHA-bound `curve_archive`; captured tensors remain in
+`observation_archive`. Shared source/runtime bindings use top-level identity
+tables referenced by each fixture. Original external receipts are unchanged,
+and the generator rejects inline temporal metric streams. All raw
 updates, stdout, failures, observation tensors and checkpoints remain outside
 Git under `/ml2/hypergan/toy-audit-artifacts-20261001/source-family-training-v1`.
 CPU uses one thread. Routed fixture work has180 s caps and ring work a120 s cap;

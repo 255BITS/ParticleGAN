@@ -2,6 +2,8 @@
 from __future__ import annotations
 
 import argparse
+from copy import deepcopy
+import hashlib
 import json
 from pathlib import Path
 
@@ -21,9 +23,70 @@ def model_manifest(checkpoint):
             for name, state in checkpoint.items() if name in ("generator", "critic", "prior")}
 
 
+def metric_summary(row):
+    """One labeled state, not an inline temporal metric stream."""
+    result = {key: row[key] for key in ("step", "event", "angle") if key in row}
+    for family in ("original", "correspondence", "gaussian_law"):
+        if family in row:
+            result[family] = {key: value for key, value in row[family].items()
+                              if isinstance(value, (str, int, float, bool)) or value is None}
+    return result
+
+
+def compact_observations(record, metrics):
+    """Keep frame indices/summaries and bind the unchanged external curves."""
+    # Canonical media provenance identifies raw arrays even if a future raw
+    # training receipt uses observations for a full metric stream.
+    record.pop("observations", None)
+    record.pop("initial", None)
+    record["observation_archive"] = deepcopy(record["media"]["raw_observations"])
+    record["curve_archive"] = record.pop("captured_metrics")
+    record["observation_count"] = len(metrics)
+    record["media"]["actual_step_indices"] = [row["step"] for row in metrics]
+    for key in ("best", "final", "best_observed_original"):
+        if isinstance(record.get(key), dict) and "step" in record[key]:
+            record[key] = metric_summary(record[key])
+    record["snapshot_labels"] = dict(final="Last captured complete evaluation boundary; may precede a capped update count",
+                                     best="Best observed metric under its declared selection rule; not a convergence verdict")
+    if "period_endpoints" in record:
+        record["period_endpoints"] = [dict(step=row["step"], angle=row["angle"],
+                                              heldout_rmse=row["original"]["heldout_rmse"],
+                                              relative_mse=row["correspondence"]["relative_mse"],
+                                              passed=row["correspondence"]["passed"])
+                                       for row in record["period_endpoints"]]
+    if "target_turns" in record:
+        record["target_turns"] = [dict(step=turn["instantaneous"]["step"],
+                                         angle=turn["instantaneous"]["angle"],
+                                         immediate_heldout_rmse=turn["instantaneous"]["original"]["heldout_rmse"],
+                                         immediate_relative_mse=turn["instantaneous"]["correspondence"]["relative_mse"],
+                                         first_passing_step=None if turn["first_passing_observation"] is None else
+                                             turn["first_passing_observation"]["step"],
+                                         observed_recovery_updates=turn["observed_recovery_updates"])
+                                  for turn in record["target_turns"]]
+
+
+def forbid_inline_streams(value):
+    """Fail publication if raw temporal arrays creep back into any receipt."""
+    stream_names = {"observations", "diagnostic", "curve", "checks", "actions", "updates", "live_curve"}
+    if isinstance(value, dict):
+        for key, item in value.items():
+            if key in stream_names and isinstance(item, list) and any(isinstance(row, dict) and "step" in row for row in item):
+                raise ValueError(f"raw per-observation stream {key!r} must remain in the external archive")
+            forbid_inline_streams(item)
+    elif isinstance(value, list):
+        for item in value:
+            forbid_inline_streams(item)
+
+
+def shared_identity(value, identities):
+    digest = hashlib.sha256(json.dumps(value, sort_keys=True).encode()).hexdigest()
+    identities.setdefault(digest, value)
+    return digest
+
+
 def assemble(artifacts):
     artifacts = Path(artifacts)
-    fixtures = []
+    fixtures, source_bindings, executed_audit_sources = [], {}, {}
     for name, spec in FIXTURES.items():
         receipt_path = artifacts / (name + "-receipt.json")
         receipt = json.loads(receipt_path.read_text())
@@ -113,8 +176,14 @@ def assemble(artifacts):
                 record["optimization_mechanism"] = "UNRESOLVED: eightupdates are insufficient to diagnose eventual convergence; the frozen game judge favors live codes while clean held-out MSE favors zero codes"
                 record["next_action"] = "Keep replay as a software protocol fixture. Declare a separate justified trained-quality budget/gate before seeking convergence; do not extend this eight-update smoke merely to obtain a pass."
         record["added_gate_status"] = record["full_added_gate_status"]
+        compact_observations(record, metrics)
+        record["binding_ref"] = shared_identity(record.pop("binding"), source_bindings)
+        record["executed_audit_source_ref"] = shared_identity(record.pop("executed_audit_source"), executed_audit_sources)
+        forbid_inline_streams(record)
         fixtures.append(record)
-    return dict(version=VERSION, coverage_catalog_ids=["source-family-10", "source-family-14"],
+    return dict(version=VERSION, publication_schema="source-family-training-compact-v2",
+                source_bindings=source_bindings, executed_audit_sources=executed_audit_sources,
+                coverage_catalog_ids=["source-family-10", "source-family-14"],
                 fixtures=fixtures, source_parent_commit="54604961f1dcf6ffaa9c0807afb384bc590debe9",
                 immutable_original_diagnosis=dict(commit="54604961f1dcf6ffaa9c0807afb384bc590debe9",
                     report_sha256=sha(ROOT / "reports/toy_audit/failure-diagnosis.json")),

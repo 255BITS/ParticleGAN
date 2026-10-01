@@ -9,6 +9,7 @@ import pytest
 import torch
 
 from benchmarks.toy_audit.source_family_ablation import zero_code_snapshot
+from benchmarks.toy_audit.source_family_report import compact_observations, forbid_inline_streams
 from benchmarks.toy_audit.source_routed_ring_training import (
     routed_modules, routed_parity, routed_state, state_digest, suffix,
 )
@@ -90,3 +91,31 @@ def test_fresh_catalog_join_keeps_budget_gate_and_replay_limits_explicit():
     assert records["replay"]["convergence_qualified"] is False
     assert records["ring"]["phases"]["uninterrupted_hold_2400"] == "NOT_RUN_FAILED_ACQUISITION"
     assert all(row["media"]["frames_are_actual_states"] for row in report["fixtures"])
+    assert report["publication_schema"] == "source-family-training-compact-v2"
+    for row in report["fixtures"]:
+        assert "observations" not in row and "captured_metrics" not in row
+        assert row["observation_count"] == row["media"]["media"]["frames"]
+        assert row["observation_count"] == len(row["media"]["actual_step_indices"])
+        assert row["curve_archive"]["path"].endswith("captured-metrics.json")
+        assert row["binding_ref"] in report["source_bindings"]
+        assert row["executed_audit_source_ref"] in report["executed_audit_sources"]
+    forbid_inline_streams(report)
+
+
+def test_compact_publication_keeps_real_step_indices_and_external_curve_identity():
+    metrics = [dict(step=step, event="check", angle=0.,
+                    original=dict(heldout_rmse=.01, points=[[0., 0.]]),
+                    correspondence=dict(relative_mse=.001, passed=True)) for step in (100, 200)]
+    record = dict(observations=metrics, initial=metrics[0], final=metrics[-1], best=metrics[0],
+                  captured_metrics=dict(path="captured-metrics.json", sha256="abc"),
+                  media=dict(raw_observations=dict(path="observations.npz", sha256="def")))
+    compact_observations(record, metrics)
+    assert "observations" not in record and "initial" not in record
+    assert "points" not in record["final"]["original"]
+    assert record["media"]["actual_step_indices"] == [100, 200]
+    assert record["observation_count"] == 2
+    assert record["curve_archive"] == {"path": "captured-metrics.json", "sha256": "abc"}
+    assert "points" in metrics[-1]["original"]  # the raw external stream is unchanged
+    forbid_inline_streams(record)
+    with pytest.raises(ValueError, match="must remain in the external archive"):
+        forbid_inline_streams({"nested": {"diagnostic": metrics}})

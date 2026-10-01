@@ -1,9 +1,51 @@
 {
-  "assembler_sha256": "21132567fa67c792cb68e355fe8c35e5394a5d7bec713760082b5f3831f9bb88",
+  "assembler_sha256": "4805171f93c7e408d804efb19cefe431dae4fa1403f634d9938e1874424ce694",
   "coverage_catalog_ids": [
     "source-family-10",
     "source-family-14"
   ],
+  "executed_audit_sources": {
+    "888fec7d62c05228fd2d6997ddefb0ea709032dba03fa6b22fc49e3e521fa110": {
+      "ablation": {
+        "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-family-training-v1/executed-audit-source/source_family_ablation.py",
+        "sha256": "d8d8b336996c0224d31e3fc85ce56e08e59c0d61f23f8f2dcf92bddc61d6af1a"
+      },
+      "executed_runner_path": "benchmarks/toy_audit/source_family_training.py",
+      "published_runner_content_identical": true,
+      "published_runner_path": "benchmarks/toy_audit/source_routed_ring_training.py",
+      "quality_evaluator": {
+        "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-family-training-v1/executed-audit-source/definition_quality.py",
+        "sha256": "7e6b7f354f34364f618126034db6bcbc6bbce7eb8b942a53491b3fe492184387"
+      },
+      "rename_reason": "Avoid a path collision with an independent agent's sign/landing/native audit module; source binding retains the exact executed bytes",
+      "renderer": {
+        "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-family-training-v1/executed-audit-source/source_family_media.py",
+        "sha256": "24fec43cbd202c851306a0201f7ff4b359c46561383a7341641aa28862a4645f"
+      },
+      "runner": {
+        "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-family-training-v1/executed-audit-source/source_family_training.py",
+        "sha256": "0a38c96c4ba868d10eff6319902b6db8ab309ca89d523499d12b74ea47eb8946"
+      }
+    },
+    "c286f9cdf1ef5b5dd5b901b9096372065bcfd28665a175335d854356ce874db7": {
+      "executed_runner_path": "benchmarks/toy_audit/source_family_training.py",
+      "published_runner_content_identical": true,
+      "published_runner_path": "benchmarks/toy_audit/source_routed_ring_training.py",
+      "quality_evaluator": {
+        "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-family-training-v1/executed-audit-source/definition_quality.py",
+        "sha256": "7e6b7f354f34364f618126034db6bcbc6bbce7eb8b942a53491b3fe492184387"
+      },
+      "rename_reason": "Avoid a path collision with an independent agent's sign/landing/native audit module; source binding retains the exact executed bytes",
+      "renderer": {
+        "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-family-training-v1/executed-audit-source/source_family_media.py",
+        "sha256": "24fec43cbd202c851306a0201f7ff4b359c46561383a7341641aa28862a4645f"
+      },
+      "runner": {
+        "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-family-training-v1/executed-audit-source/source_family_training.py",
+        "sha256": "0a38c96c4ba868d10eff6319902b6db8ab309ca89d523499d12b74ea47eb8946"
+      }
+    }
+  },
   "fixtures": [
     {
       "added_correspondence_gate_status": "PASS",
@@ -27,71 +69,8 @@
         },
         "step": 100
       },
-      "binding": {
-        "quality_evaluator": {
-          "declared_quality_version": "toy-definition-quality-v1",
-          "path": "/ml2/hypergan/ParticleGAN-toy-problem-audit/benchmarks/toy_audit/definition_quality.py",
-          "sha256": "7e6b7f354f34364f618126034db6bcbc6bbce7eb8b942a53491b3fe492184387",
-          "version": "source-family-training-v1",
-          "version_field_scope": "The raw runner receipt's version field names the audit runner; declared_quality_version names the separate quality evaluator"
-        },
-        "runtime": {
-          "cpu_capability": "AVX2",
-          "device": "cpu",
-          "machine": "x86_64",
-          "numpy": "2.5.2",
-          "python": "3.12.13",
-          "threads": 1,
-          "torch": "2.13.0+cu126",
-          "torch_build": "PyTorch built with:\n  - GCC 13.3\n  - C++ Version: 202002\n  - Intel(R) oneAPI Math Kernel Library Version 2024.2-Product Build 20240605 for Intel(R) 64 architecture applications\n  - Intel(R) MKL-DNN v3.12.0 (Git Hash 80afa71049cd69a3df32adcccb623b12cd7baa22)\n  - OpenMP 201511 (a.k.a. OpenMP 4.5)\n  - LAPACK is enabled (usually provided by MKL)\n  - NNPACK is enabled\n  - CPU capability usage: AVX2\n  - Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release, COMMIT_SHA=cf30153c4c131c8164ee7798e5022d810682e2cb, CUDA_FLAGS= -DLIBCUDACXX_ENABLE_SIMPLIFIED_COMPLEX_OPERATIONS -Xfatbin -compress-all -DONNX_NAMESPACE=onnx_torch -gencode arch=compute_50,code=sm_50 -gencode arch=compute_60,code=sm_60 -gencode arch=compute_70,code=sm_70 -gencode arch=compute_75,code=sm_75 -gencode arch=compute_80,code=sm_80 -gencode arch=compute_86,code=sm_86 -gencode arch=compute_90,code=sm_90 -Xcudafe --diag_suppress=cc_clobber_ignored,--diag_suppress=field_without_dll_interface,--diag_suppress=base_class_has_different_dll_interface,--diag_suppress=dll_interface_conflict_none_assumed,--diag_suppress=dll_interface_conflict_dllexport_assumed,--diag_suppress=bad_friend_decl --expt-relaxed-constexpr --expt-extended-lambda -Xfatbin -compress-all --threads 2 -Wno-deprecated-gpu-targets --expt-extended-lambda -DCUB_WRAPPED_NAMESPACE=at_cuda_detail -DDISABLE_CUSPARSE_DEPRECATED -DCUDA_HAS_FP16=1 -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ -D__CUDA_NO_BFLOAT16_CONVERSIONS__ -DC10_NODEPRECATED, CUDA_VERSION=12.6, CUDNN_VERSION=9.10.2, CXX_COMPILER=/opt/rh/gcc-toolset-13/root/usr/bin/c++, CXX_FLAGS= -fvisibility-inlines-hidden -DUSE_PTHREADPOOL -DNDEBUG -DUSE_KINETO -DHAS_CUPTI -DUSE_FBGEMM -DUSE_PYTORCH_QNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE -O2 -fPIC -DC10_NODEPRECATED -Wall -Wextra -Werror=return-type -Werror=non-virtual-dtor -Werror=range-loop-construct -Werror=bool-operation -Wnarrowing -Wno-missing-field-initializers -Wno-unknown-pragmas -Wno-unused-parameter -Wno-strict-overflow -Wno-strict-aliasing -Wno-stringop-overflow -Wsuggest-override -Wno-psabi -Wno-error=old-style-cast -faligned-new -Wno-maybe-uninitialized -fno-math-errno -fno-trapping-math -Werror=format -Wno-dangling-reference -Wno-error=dangling-reference -Wno-stringop-overflow, LAPACK_INFO=mkl, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, TORCH_VERSION=2.13.0, USE_CUDA=1, USE_CUDNN=ON, USE_CUSPARSELT=1, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_GLOO=ON, USE_MKL=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=ON, USE_NNPACK=ON, USE_OPENMP=ON, USE_ROCM=OFF, USE_ROCM_KERNEL_ASSERT=OFF, USE_XCCL=OFF, USE_XPU=OFF, \n",
-          "torch_git_revision": "cf30153c4c131c8164ee7798e5022d810682e2cb"
-        },
-        "source_sha256": {
-          "benchmarks/toy100/continuous_probe.py": "972405ea73644c2d189a4e243a79146f3cf8295c2a2979c30a277b2a54ff4541",
-          "benchmarks/toy100/warm_equilibrium_probe.py": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
-          "benchmarks/toy_audit/source_family_training.py": "0a38c96c4ba868d10eff6319902b6db8ab309ca89d523499d12b74ea47eb8946",
-          "examples/e22_routed_game.py": "0eb056d8dfbff08ef4bd392a0957f30e30eaf762886809b575d93ab6616a161f",
-          "examples/e22_routed_moving.py": "1cb7f214cda8022aeacd5a1844b1ad8716e95cd5efd284b0cdd26d048b05b539",
-          "examples/e22_routed_paired.py": "5d997d2a9fb8d64c1c6d73fa87f14edfac03617cd6f62a31796fe6d47f362a46",
-          "examples/e22_routed_replay.py": "60df44a4cc0a0380eee969bc7f91a20dd6247d55ec23f12c7cb76f7326b3e663",
-          "examples/e22_routed_sites.py": "ae33170fcc1377c93d3a251ec460ff283432a3a65e68d32dd004637913a97c13",
-          "examples/e22_routed_support.py": "f94434b91d2bd99597500d958f4ebc079b64e6a75b5c318c05aaa8dc6fe5c229",
-          "particlegan/__init__.py": "b56efa562acc551d639548c299002e2cd76338b3fd7062699780add51f4f5e8c",
-          "particlegan/_qr.py": "b59cd62cc27ed557b41b2d17ed86ed578c762a3a8a392d63731a5a3b2b018916",
-          "particlegan/anchor_birth.py": "aa50983d8b61304acf4e1138f16fd4784798983df91e931863bcacd3b511f76f",
-          "particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
-          "particlegan/birth_death.py": "b14c50c611a8cf188347e391739fca50a5171200eb6be90e4e3d1509d64e47ed",
-          "particlegan/birth_phase.py": "5ff929e5e9858aa24c4cc2f8999b5d0603e25e42ca3844d1da4cc28b1981d3d7",
-          "particlegan/capabilities.py": "39df9c67dbedf612740057e5fa743bc724678a1bc323d1f7cf550b37c0c01177",
-          "particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
-          "particlegan/continuous.py": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41",
-          "particlegan/diffusion.py": "19c3aa8772703891551b9122fde8e74c07996f779892b7cb6be09553691efa61",
-          "particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
-          "particlegan/feature_cells.py": "e0ea05f61abd7845c7437eed9a79c3a2511d5551ff04f4e619b6b9c8992e221a",
-          "particlegan/feature_policy.py": "de1a50f70a37d4c9174c8850ce3eac2a2597ed01f19fc4fe1a2ce0ec3176a8b2",
-          "particlegan/feature_reference.py": "58e076e9e04600be25e28afafc537a340de727371f4acbbfb2b7dd8bebac18b1",
-          "particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
-          "particlegan/grad_regularizers.py": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747",
-          "particlegan/init.py": "e15d4de01eb49f7097bc249abacab907ff067385412346f54ab0d510cb8649d0",
-          "particlegan/k3p.py": "72fa32ae0d423d2904f310958721c0138823fa4d06ceca6ec451aaf86280607d",
-          "particlegan/ka2.py": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703",
-          "particlegan/mean_transport.py": "57a68e0a65c5424a4460f65002f3862a69e90af330a4d47c700dc773683a2c06",
-          "particlegan/output_moments.py": "dcf3e27228d2c3c9738e473c5b22ee9e6d5047ddcd60c538b66526adb53ef188",
-          "particlegan/particle_prior.py": "0220878bebea227da63abbf9f5b1ebdabdc6aea54fd2332fd2cab02ed734238f",
-          "particlegan/policy.py": "5b6877ab14170340433e54f5d0e0409b2f72721d31145b8d4867890686317ebc",
-          "particlegan/population_continuity.py": "378cd75cca45bc8da4da33e686a12cf99df853042687978314e37c532bc17fe6",
-          "particlegan/recipes.py": "77d2221985a71ed303c4eecb8fae9620d068fb9478b119f5c3fd9a11a1eca86b",
-          "particlegan/routing.py": "63249d808fccb3d4e113eb1d638a245ee665c3cade20a1542bb706f316b4abcc",
-          "particlegan/row_evidence.py": "78be40141ef3946860458e9842159be9321f05c217a4800dd4134113b6eba93e",
-          "particlegan/training.py": "319bc2d32f2ba106d428607575447dcda419f190cfe02fabdb22fc49ddcc5f77",
-          "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
-        }
-      },
+      "binding_ref": "0e2a95d64aabc025822c3758a816d8419a5638d67053f288fa9b568ce6028688",
       "cadence": 20,
-      "captured_metrics": {
-        "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-family-training-v1/paired/captured-metrics.json",
-        "sha256": "79eb3f4a699ab87afeaffd45222330d7384a2b763bcf371d59774d7b63528ae4"
-      },
       "catalog_id": "source-family-14",
       "checkpoint": {
         "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-family-training-v1/paired/checkpoint.pt",
@@ -187,6 +166,10 @@
       },
       "context_population": 180,
       "convergence_qualified": true,
+      "curve_archive": {
+        "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-family-training-v1/paired/captured-metrics.json",
+        "sha256": "79eb3f4a699ab87afeaffd45222330d7384a2b763bcf371d59774d7b63528ae4"
+      },
       "data": {
         "fit_context": {
           "sha256": "651c8ccefd6712cea2cd351674c62dd2a53b7cb804f38ffc4cf8ea675d74ce35",
@@ -232,28 +215,7 @@
         }
       },
       "declared_budget_complete": true,
-      "executed_audit_source": {
-        "ablation": {
-          "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-family-training-v1/executed-audit-source/source_family_ablation.py",
-          "sha256": "d8d8b336996c0224d31e3fc85ce56e08e59c0d61f23f8f2dcf92bddc61d6af1a"
-        },
-        "executed_runner_path": "benchmarks/toy_audit/source_family_training.py",
-        "published_runner_content_identical": true,
-        "published_runner_path": "benchmarks/toy_audit/source_routed_ring_training.py",
-        "quality_evaluator": {
-          "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-family-training-v1/executed-audit-source/definition_quality.py",
-          "sha256": "7e6b7f354f34364f618126034db6bcbc6bbce7eb8b942a53491b3fe492184387"
-        },
-        "rename_reason": "Avoid a path collision with an independent agent's sign/landing/native audit module; source binding retains the exact executed bytes",
-        "renderer": {
-          "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-family-training-v1/executed-audit-source/source_family_media.py",
-          "sha256": "24fec43cbd202c851306a0201f7ff4b359c46561383a7341641aa28862a4645f"
-        },
-        "runner": {
-          "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-family-training-v1/executed-audit-source/source_family_training.py",
-          "sha256": "0a38c96c4ba868d10eff6319902b6db8ab309ca89d523499d12b74ea47eb8946"
-        }
-      },
+      "executed_audit_source_ref": "888fec7d62c05228fd2d6997ddefb0ea709032dba03fa6b22fc49e3e521fa110",
       "final": {
         "angle": 0.0,
         "correspondence": {
@@ -278,26 +240,19 @@
       "gif_relative_to_report": "media/source-14-paired.gif",
       "heldout_not_a_training_signal": true,
       "historical_binary_gate": "UNDECLARED",
-      "initial": {
-        "angle": 0.0,
-        "correspondence": {
-          "mse": 0.03199680566040001,
-          "neutral_mse": 0.05141106765898877,
-          "passed": false,
-          "relative_mse": 0.6223719350206035
-        },
-        "event": "initial",
-        "original": {
-          "heldout_max_error": 0.3128822147846222,
-          "heldout_rmse": 0.17887650430202484,
-          "initial_rmse": 0.17887650430202484,
-          "output_dtype": "torch.float32",
-          "served_source": "fast"
-        },
-        "step": 0
-      },
       "initial_state_sha256": "5fb144f4e31583a80d87fa1c911de2bc963e39abd4dbb5a4162c12cf1280a80d",
       "media": {
+        "actual_step_indices": [
+          0,
+          20,
+          40,
+          60,
+          80,
+          100,
+          120,
+          140,
+          160
+        ],
         "captured_metrics": {
           "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-family-training-v1/paired/captured-metrics.json",
           "sha256": "79eb3f4a699ab87afeaffd45222330d7384a2b763bcf371d59774d7b63528ae4"
@@ -328,12 +283,13 @@
       },
       "media_path": "reports/toy_audit/media/source-14-paired.gif",
       "next_action": "Use this fixture to check clean correspondence and useful mixed code; row moves, architecture transfer and independent-row Gaussian density require separate controls.",
-      "observations": {
+      "observation_archive": {
         "captured_frames": 9,
         "interpolation": false,
         "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-family-training-v1/paired/observations.npz",
         "sha256": "375edcb581744cb0e9756476b2c526d17a38121a4a2ceecc45279cf79a95cc48"
       },
+      "observation_count": 9,
       "observer_control": {
         "control": {
           "state": "0676cc789422e0ad6f9b14c9db09e2e2bfbc62764dae756c4f5dee023dd715d3",
@@ -475,6 +431,10 @@
       "sampling_policy": "All 180 held-out contexts; clean deterministic selected served routed bank; no DV12 or output noise",
       "scientific_claim": "paired context-to-edit correspondence",
       "seconds": 12.298847794998437,
+      "snapshot_labels": {
+        "best": "Best observed metric under its declared selection rule; not a convergence verdict",
+        "final": "Last captured complete evaluation boundary; may precede a capped update count"
+      },
       "source": "examples/e22_routed_paired.py",
       "status": "PASS",
       "stronger_gate_window": {
@@ -509,71 +469,8 @@
         },
         "step": 200
       },
-      "binding": {
-        "quality_evaluator": {
-          "declared_quality_version": "toy-definition-quality-v1",
-          "path": "/ml2/hypergan/ParticleGAN-toy-problem-audit/benchmarks/toy_audit/definition_quality.py",
-          "sha256": "7e6b7f354f34364f618126034db6bcbc6bbce7eb8b942a53491b3fe492184387",
-          "version": "source-family-training-v1",
-          "version_field_scope": "The raw runner receipt's version field names the audit runner; declared_quality_version names the separate quality evaluator"
-        },
-        "runtime": {
-          "cpu_capability": "AVX2",
-          "device": "cpu",
-          "machine": "x86_64",
-          "numpy": "2.5.2",
-          "python": "3.12.13",
-          "threads": 1,
-          "torch": "2.13.0+cu126",
-          "torch_build": "PyTorch built with:\n  - GCC 13.3\n  - C++ Version: 202002\n  - Intel(R) oneAPI Math Kernel Library Version 2024.2-Product Build 20240605 for Intel(R) 64 architecture applications\n  - Intel(R) MKL-DNN v3.12.0 (Git Hash 80afa71049cd69a3df32adcccb623b12cd7baa22)\n  - OpenMP 201511 (a.k.a. OpenMP 4.5)\n  - LAPACK is enabled (usually provided by MKL)\n  - NNPACK is enabled\n  - CPU capability usage: AVX2\n  - Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release, COMMIT_SHA=cf30153c4c131c8164ee7798e5022d810682e2cb, CUDA_FLAGS= -DLIBCUDACXX_ENABLE_SIMPLIFIED_COMPLEX_OPERATIONS -Xfatbin -compress-all -DONNX_NAMESPACE=onnx_torch -gencode arch=compute_50,code=sm_50 -gencode arch=compute_60,code=sm_60 -gencode arch=compute_70,code=sm_70 -gencode arch=compute_75,code=sm_75 -gencode arch=compute_80,code=sm_80 -gencode arch=compute_86,code=sm_86 -gencode arch=compute_90,code=sm_90 -Xcudafe --diag_suppress=cc_clobber_ignored,--diag_suppress=field_without_dll_interface,--diag_suppress=base_class_has_different_dll_interface,--diag_suppress=dll_interface_conflict_none_assumed,--diag_suppress=dll_interface_conflict_dllexport_assumed,--diag_suppress=bad_friend_decl --expt-relaxed-constexpr --expt-extended-lambda -Xfatbin -compress-all --threads 2 -Wno-deprecated-gpu-targets --expt-extended-lambda -DCUB_WRAPPED_NAMESPACE=at_cuda_detail -DDISABLE_CUSPARSE_DEPRECATED -DCUDA_HAS_FP16=1 -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ -D__CUDA_NO_BFLOAT16_CONVERSIONS__ -DC10_NODEPRECATED, CUDA_VERSION=12.6, CUDNN_VERSION=9.10.2, CXX_COMPILER=/opt/rh/gcc-toolset-13/root/usr/bin/c++, CXX_FLAGS= -fvisibility-inlines-hidden -DUSE_PTHREADPOOL -DNDEBUG -DUSE_KINETO -DHAS_CUPTI -DUSE_FBGEMM -DUSE_PYTORCH_QNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE -O2 -fPIC -DC10_NODEPRECATED -Wall -Wextra -Werror=return-type -Werror=non-virtual-dtor -Werror=range-loop-construct -Werror=bool-operation -Wnarrowing -Wno-missing-field-initializers -Wno-unknown-pragmas -Wno-unused-parameter -Wno-strict-overflow -Wno-strict-aliasing -Wno-stringop-overflow -Wsuggest-override -Wno-psabi -Wno-error=old-style-cast -faligned-new -Wno-maybe-uninitialized -fno-math-errno -fno-trapping-math -Werror=format -Wno-dangling-reference -Wno-error=dangling-reference -Wno-stringop-overflow, LAPACK_INFO=mkl, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, TORCH_VERSION=2.13.0, USE_CUDA=1, USE_CUDNN=ON, USE_CUSPARSELT=1, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_GLOO=ON, USE_MKL=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=ON, USE_NNPACK=ON, USE_OPENMP=ON, USE_ROCM=OFF, USE_ROCM_KERNEL_ASSERT=OFF, USE_XCCL=OFF, USE_XPU=OFF, \n",
-          "torch_git_revision": "cf30153c4c131c8164ee7798e5022d810682e2cb"
-        },
-        "source_sha256": {
-          "benchmarks/toy100/continuous_probe.py": "972405ea73644c2d189a4e243a79146f3cf8295c2a2979c30a277b2a54ff4541",
-          "benchmarks/toy100/warm_equilibrium_probe.py": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
-          "benchmarks/toy_audit/source_family_training.py": "0a38c96c4ba868d10eff6319902b6db8ab309ca89d523499d12b74ea47eb8946",
-          "examples/e22_routed_game.py": "0eb056d8dfbff08ef4bd392a0957f30e30eaf762886809b575d93ab6616a161f",
-          "examples/e22_routed_moving.py": "1cb7f214cda8022aeacd5a1844b1ad8716e95cd5efd284b0cdd26d048b05b539",
-          "examples/e22_routed_paired.py": "5d997d2a9fb8d64c1c6d73fa87f14edfac03617cd6f62a31796fe6d47f362a46",
-          "examples/e22_routed_replay.py": "60df44a4cc0a0380eee969bc7f91a20dd6247d55ec23f12c7cb76f7326b3e663",
-          "examples/e22_routed_sites.py": "ae33170fcc1377c93d3a251ec460ff283432a3a65e68d32dd004637913a97c13",
-          "examples/e22_routed_support.py": "f94434b91d2bd99597500d958f4ebc079b64e6a75b5c318c05aaa8dc6fe5c229",
-          "particlegan/__init__.py": "b56efa562acc551d639548c299002e2cd76338b3fd7062699780add51f4f5e8c",
-          "particlegan/_qr.py": "b59cd62cc27ed557b41b2d17ed86ed578c762a3a8a392d63731a5a3b2b018916",
-          "particlegan/anchor_birth.py": "aa50983d8b61304acf4e1138f16fd4784798983df91e931863bcacd3b511f76f",
-          "particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
-          "particlegan/birth_death.py": "b14c50c611a8cf188347e391739fca50a5171200eb6be90e4e3d1509d64e47ed",
-          "particlegan/birth_phase.py": "5ff929e5e9858aa24c4cc2f8999b5d0603e25e42ca3844d1da4cc28b1981d3d7",
-          "particlegan/capabilities.py": "39df9c67dbedf612740057e5fa743bc724678a1bc323d1f7cf550b37c0c01177",
-          "particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
-          "particlegan/continuous.py": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41",
-          "particlegan/diffusion.py": "19c3aa8772703891551b9122fde8e74c07996f779892b7cb6be09553691efa61",
-          "particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
-          "particlegan/feature_cells.py": "e0ea05f61abd7845c7437eed9a79c3a2511d5551ff04f4e619b6b9c8992e221a",
-          "particlegan/feature_policy.py": "de1a50f70a37d4c9174c8850ce3eac2a2597ed01f19fc4fe1a2ce0ec3176a8b2",
-          "particlegan/feature_reference.py": "58e076e9e04600be25e28afafc537a340de727371f4acbbfb2b7dd8bebac18b1",
-          "particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
-          "particlegan/grad_regularizers.py": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747",
-          "particlegan/init.py": "e15d4de01eb49f7097bc249abacab907ff067385412346f54ab0d510cb8649d0",
-          "particlegan/k3p.py": "72fa32ae0d423d2904f310958721c0138823fa4d06ceca6ec451aaf86280607d",
-          "particlegan/ka2.py": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703",
-          "particlegan/mean_transport.py": "57a68e0a65c5424a4460f65002f3862a69e90af330a4d47c700dc773683a2c06",
-          "particlegan/output_moments.py": "dcf3e27228d2c3c9738e473c5b22ee9e6d5047ddcd60c538b66526adb53ef188",
-          "particlegan/particle_prior.py": "0220878bebea227da63abbf9f5b1ebdabdc6aea54fd2332fd2cab02ed734238f",
-          "particlegan/policy.py": "5b6877ab14170340433e54f5d0e0409b2f72721d31145b8d4867890686317ebc",
-          "particlegan/population_continuity.py": "378cd75cca45bc8da4da33e686a12cf99df853042687978314e37c532bc17fe6",
-          "particlegan/recipes.py": "77d2221985a71ed303c4eecb8fae9620d068fb9478b119f5c3fd9a11a1eca86b",
-          "particlegan/routing.py": "63249d808fccb3d4e113eb1d638a245ee665c3cade20a1542bb706f316b4abcc",
-          "particlegan/row_evidence.py": "78be40141ef3946860458e9842159be9321f05c217a4800dd4134113b6eba93e",
-          "particlegan/training.py": "319bc2d32f2ba106d428607575447dcda419f190cfe02fabdb22fc49ddcc5f77",
-          "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
-        }
-      },
+      "binding_ref": "0e2a95d64aabc025822c3758a816d8419a5638d67053f288fa9b568ce6028688",
       "cadence": 100,
-      "captured_metrics": {
-        "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-family-training-v1/support/captured-metrics.json",
-        "sha256": "bbccb9c92bdc54af63695a4e78374b4b86ca2adb8ac1858cc2c7b22328d19458"
-      },
       "catalog_id": "source-family-14",
       "checkpoint_error": "RuntimeError('policy checkpoints require a completed update boundary')",
       "code_ablation": {
@@ -613,6 +510,10 @@
       },
       "context_population": 180,
       "convergence_qualified": false,
+      "curve_archive": {
+        "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-family-training-v1/support/captured-metrics.json",
+        "sha256": "bbccb9c92bdc54af63695a4e78374b4b86ca2adb8ac1858cc2c7b22328d19458"
+      },
       "data": {
         "fit_context": {
           "sha256": "88878fc64ea21c1bed1a603f9342f4616cc71bc7adbd32664602e1320162859e",
@@ -665,28 +566,7 @@
       },
       "declared_budget_complete": false,
       "error": "WallLimit('declared audit wall cap 180s reached')",
-      "executed_audit_source": {
-        "ablation": {
-          "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-family-training-v1/executed-audit-source/source_family_ablation.py",
-          "sha256": "d8d8b336996c0224d31e3fc85ce56e08e59c0d61f23f8f2dcf92bddc61d6af1a"
-        },
-        "executed_runner_path": "benchmarks/toy_audit/source_family_training.py",
-        "published_runner_content_identical": true,
-        "published_runner_path": "benchmarks/toy_audit/source_routed_ring_training.py",
-        "quality_evaluator": {
-          "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-family-training-v1/executed-audit-source/definition_quality.py",
-          "sha256": "7e6b7f354f34364f618126034db6bcbc6bbce7eb8b942a53491b3fe492184387"
-        },
-        "rename_reason": "Avoid a path collision with an independent agent's sign/landing/native audit module; source binding retains the exact executed bytes",
-        "renderer": {
-          "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-family-training-v1/executed-audit-source/source_family_media.py",
-          "sha256": "24fec43cbd202c851306a0201f7ff4b359c46561383a7341641aa28862a4645f"
-        },
-        "runner": {
-          "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-family-training-v1/executed-audit-source/source_family_training.py",
-          "sha256": "0a38c96c4ba868d10eff6319902b6db8ab309ca89d523499d12b74ea47eb8946"
-        }
-      },
+      "executed_audit_source_ref": "888fec7d62c05228fd2d6997ddefb0ea709032dba03fa6b22fc49e3e521fa110",
       "final": {
         "angle": 0.0,
         "correspondence": {
@@ -709,25 +589,13 @@
       "gif_relative_to_report": "media/source-14-support.gif",
       "heldout_not_a_training_signal": true,
       "historical_binary_gate": "UNDECLARED",
-      "initial": {
-        "angle": 0.0,
-        "correspondence": {
-          "mse": 0.03341244845873119,
-          "neutral_mse": 0.03341244845873119,
-          "passed": false,
-          "relative_mse": 1.0
-        },
-        "event": "initial",
-        "original": {
-          "heldout_max_error": 0.39698609709739685,
-          "heldout_rmse": 0.18279071152210236,
-          "initial_rmse": 0.18279071152210236,
-          "served_source": "fast"
-        },
-        "step": 0
-      },
       "initial_state_sha256": "43b519cafad26f596848705922d7ab8e2a5d0c8ef82d731546d4e714b8faf220",
       "media": {
+        "actual_step_indices": [
+          0,
+          100,
+          200
+        ],
         "captured_metrics": {
           "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-family-training-v1/support/captured-metrics.json",
           "sha256": "bbccb9c92bdc54af63695a4e78374b4b86ca2adb8ac1858cc2c7b22328d19458"
@@ -758,12 +626,13 @@
       },
       "media_path": "reports/toy_audit/media/source-14-support.gif",
       "next_action": "Add checkpoint observation at completed capture boundaries before any separately authorized same-default audit; no ready checkpoint exists for continuing this attempt, and no full-budget code/quality result can be inferred.",
-      "observations": {
+      "observation_archive": {
         "captured_frames": 3,
         "interpolation": false,
         "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-family-training-v1/support/observations.npz",
         "sha256": "451696c818eaac5ebbf2d0c621f6fa6b247236d76c7e53b802b5ba4c72ff60ca"
       },
+      "observation_count": 3,
       "observer_control": {
         "control": {
           "state": "9c3ba00ad887d47d297f99fc83e2fb72305a16101e4f9baa5b9f7057d6e79965",
@@ -894,6 +763,10 @@
         "missing ready-boundary policy checkpoint"
       ],
       "seconds": 184.7402536328882,
+      "snapshot_labels": {
+        "best": "Best observed metric under its declared selection rule; not a convergence verdict",
+        "final": "Last captured complete evaluation boundary; may precede a capped update count"
+      },
       "source": "examples/e22_routed_support.py",
       "status": "CAPPED",
       "stronger_gate_window": {
@@ -929,71 +802,8 @@
         },
         "step": 1500
       },
-      "binding": {
-        "quality_evaluator": {
-          "declared_quality_version": "toy-definition-quality-v1",
-          "path": "/ml2/hypergan/ParticleGAN-toy-problem-audit/benchmarks/toy_audit/definition_quality.py",
-          "sha256": "7e6b7f354f34364f618126034db6bcbc6bbce7eb8b942a53491b3fe492184387",
-          "version": "source-family-training-v1",
-          "version_field_scope": "The raw runner receipt's version field names the audit runner; declared_quality_version names the separate quality evaluator"
-        },
-        "runtime": {
-          "cpu_capability": "AVX2",
-          "device": "cpu",
-          "machine": "x86_64",
-          "numpy": "2.5.2",
-          "python": "3.12.13",
-          "threads": 1,
-          "torch": "2.13.0+cu126",
-          "torch_build": "PyTorch built with:\n  - GCC 13.3\n  - C++ Version: 202002\n  - Intel(R) oneAPI Math Kernel Library Version 2024.2-Product Build 20240605 for Intel(R) 64 architecture applications\n  - Intel(R) MKL-DNN v3.12.0 (Git Hash 80afa71049cd69a3df32adcccb623b12cd7baa22)\n  - OpenMP 201511 (a.k.a. OpenMP 4.5)\n  - LAPACK is enabled (usually provided by MKL)\n  - NNPACK is enabled\n  - CPU capability usage: AVX2\n  - Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release, COMMIT_SHA=cf30153c4c131c8164ee7798e5022d810682e2cb, CUDA_FLAGS= -DLIBCUDACXX_ENABLE_SIMPLIFIED_COMPLEX_OPERATIONS -Xfatbin -compress-all -DONNX_NAMESPACE=onnx_torch -gencode arch=compute_50,code=sm_50 -gencode arch=compute_60,code=sm_60 -gencode arch=compute_70,code=sm_70 -gencode arch=compute_75,code=sm_75 -gencode arch=compute_80,code=sm_80 -gencode arch=compute_86,code=sm_86 -gencode arch=compute_90,code=sm_90 -Xcudafe --diag_suppress=cc_clobber_ignored,--diag_suppress=field_without_dll_interface,--diag_suppress=base_class_has_different_dll_interface,--diag_suppress=dll_interface_conflict_none_assumed,--diag_suppress=dll_interface_conflict_dllexport_assumed,--diag_suppress=bad_friend_decl --expt-relaxed-constexpr --expt-extended-lambda -Xfatbin -compress-all --threads 2 -Wno-deprecated-gpu-targets --expt-extended-lambda -DCUB_WRAPPED_NAMESPACE=at_cuda_detail -DDISABLE_CUSPARSE_DEPRECATED -DCUDA_HAS_FP16=1 -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ -D__CUDA_NO_BFLOAT16_CONVERSIONS__ -DC10_NODEPRECATED, CUDA_VERSION=12.6, CUDNN_VERSION=9.10.2, CXX_COMPILER=/opt/rh/gcc-toolset-13/root/usr/bin/c++, CXX_FLAGS= -fvisibility-inlines-hidden -DUSE_PTHREADPOOL -DNDEBUG -DUSE_KINETO -DHAS_CUPTI -DUSE_FBGEMM -DUSE_PYTORCH_QNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE -O2 -fPIC -DC10_NODEPRECATED -Wall -Wextra -Werror=return-type -Werror=non-virtual-dtor -Werror=range-loop-construct -Werror=bool-operation -Wnarrowing -Wno-missing-field-initializers -Wno-unknown-pragmas -Wno-unused-parameter -Wno-strict-overflow -Wno-strict-aliasing -Wno-stringop-overflow -Wsuggest-override -Wno-psabi -Wno-error=old-style-cast -faligned-new -Wno-maybe-uninitialized -fno-math-errno -fno-trapping-math -Werror=format -Wno-dangling-reference -Wno-error=dangling-reference -Wno-stringop-overflow, LAPACK_INFO=mkl, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, TORCH_VERSION=2.13.0, USE_CUDA=1, USE_CUDNN=ON, USE_CUSPARSELT=1, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_GLOO=ON, USE_MKL=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=ON, USE_NNPACK=ON, USE_OPENMP=ON, USE_ROCM=OFF, USE_ROCM_KERNEL_ASSERT=OFF, USE_XCCL=OFF, USE_XPU=OFF, \n",
-          "torch_git_revision": "cf30153c4c131c8164ee7798e5022d810682e2cb"
-        },
-        "source_sha256": {
-          "benchmarks/toy100/continuous_probe.py": "972405ea73644c2d189a4e243a79146f3cf8295c2a2979c30a277b2a54ff4541",
-          "benchmarks/toy100/warm_equilibrium_probe.py": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
-          "benchmarks/toy_audit/source_family_training.py": "0a38c96c4ba868d10eff6319902b6db8ab309ca89d523499d12b74ea47eb8946",
-          "examples/e22_routed_game.py": "0eb056d8dfbff08ef4bd392a0957f30e30eaf762886809b575d93ab6616a161f",
-          "examples/e22_routed_moving.py": "1cb7f214cda8022aeacd5a1844b1ad8716e95cd5efd284b0cdd26d048b05b539",
-          "examples/e22_routed_paired.py": "5d997d2a9fb8d64c1c6d73fa87f14edfac03617cd6f62a31796fe6d47f362a46",
-          "examples/e22_routed_replay.py": "60df44a4cc0a0380eee969bc7f91a20dd6247d55ec23f12c7cb76f7326b3e663",
-          "examples/e22_routed_sites.py": "ae33170fcc1377c93d3a251ec460ff283432a3a65e68d32dd004637913a97c13",
-          "examples/e22_routed_support.py": "f94434b91d2bd99597500d958f4ebc079b64e6a75b5c318c05aaa8dc6fe5c229",
-          "particlegan/__init__.py": "b56efa562acc551d639548c299002e2cd76338b3fd7062699780add51f4f5e8c",
-          "particlegan/_qr.py": "b59cd62cc27ed557b41b2d17ed86ed578c762a3a8a392d63731a5a3b2b018916",
-          "particlegan/anchor_birth.py": "aa50983d8b61304acf4e1138f16fd4784798983df91e931863bcacd3b511f76f",
-          "particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
-          "particlegan/birth_death.py": "b14c50c611a8cf188347e391739fca50a5171200eb6be90e4e3d1509d64e47ed",
-          "particlegan/birth_phase.py": "5ff929e5e9858aa24c4cc2f8999b5d0603e25e42ca3844d1da4cc28b1981d3d7",
-          "particlegan/capabilities.py": "39df9c67dbedf612740057e5fa743bc724678a1bc323d1f7cf550b37c0c01177",
-          "particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
-          "particlegan/continuous.py": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41",
-          "particlegan/diffusion.py": "19c3aa8772703891551b9122fde8e74c07996f779892b7cb6be09553691efa61",
-          "particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
-          "particlegan/feature_cells.py": "e0ea05f61abd7845c7437eed9a79c3a2511d5551ff04f4e619b6b9c8992e221a",
-          "particlegan/feature_policy.py": "de1a50f70a37d4c9174c8850ce3eac2a2597ed01f19fc4fe1a2ce0ec3176a8b2",
-          "particlegan/feature_reference.py": "58e076e9e04600be25e28afafc537a340de727371f4acbbfb2b7dd8bebac18b1",
-          "particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
-          "particlegan/grad_regularizers.py": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747",
-          "particlegan/init.py": "e15d4de01eb49f7097bc249abacab907ff067385412346f54ab0d510cb8649d0",
-          "particlegan/k3p.py": "72fa32ae0d423d2904f310958721c0138823fa4d06ceca6ec451aaf86280607d",
-          "particlegan/ka2.py": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703",
-          "particlegan/mean_transport.py": "57a68e0a65c5424a4460f65002f3862a69e90af330a4d47c700dc773683a2c06",
-          "particlegan/output_moments.py": "dcf3e27228d2c3c9738e473c5b22ee9e6d5047ddcd60c538b66526adb53ef188",
-          "particlegan/particle_prior.py": "0220878bebea227da63abbf9f5b1ebdabdc6aea54fd2332fd2cab02ed734238f",
-          "particlegan/policy.py": "5b6877ab14170340433e54f5d0e0409b2f72721d31145b8d4867890686317ebc",
-          "particlegan/population_continuity.py": "378cd75cca45bc8da4da33e686a12cf99df853042687978314e37c532bc17fe6",
-          "particlegan/recipes.py": "77d2221985a71ed303c4eecb8fae9620d068fb9478b119f5c3fd9a11a1eca86b",
-          "particlegan/routing.py": "63249d808fccb3d4e113eb1d638a245ee665c3cade20a1542bb706f316b4abcc",
-          "particlegan/row_evidence.py": "78be40141ef3946860458e9842159be9321f05c217a4800dd4134113b6eba93e",
-          "particlegan/training.py": "319bc2d32f2ba106d428607575447dcda419f190cfe02fabdb22fc49ddcc5f77",
-          "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
-        }
-      },
+      "binding_ref": "0e2a95d64aabc025822c3758a816d8419a5638d67053f288fa9b568ce6028688",
       "cadence": 50,
-      "captured_metrics": {
-        "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-family-training-v1/moving/captured-metrics.json",
-        "sha256": "b04c12b53952b7e67bd6add42a5a5f397e7234c999d46769bb7c377f292e6317"
-      },
       "catalog_id": "source-family-14",
       "checkpoint": {
         "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-family-training-v1/moving/checkpoint.pt",
@@ -1093,6 +903,10 @@
       },
       "context_population": 180,
       "convergence_qualified": true,
+      "curve_archive": {
+        "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-family-training-v1/moving/captured-metrics.json",
+        "sha256": "b04c12b53952b7e67bd6add42a5a5f397e7234c999d46769bb7c377f292e6317"
+      },
       "data": {
         "fit_context": {
           "sha256": "651c8ccefd6712cea2cd351674c62dd2a53b7cb804f38ffc4cf8ea675d74ce35",
@@ -1138,28 +952,7 @@
         }
       },
       "declared_budget_complete": true,
-      "executed_audit_source": {
-        "ablation": {
-          "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-family-training-v1/executed-audit-source/source_family_ablation.py",
-          "sha256": "d8d8b336996c0224d31e3fc85ce56e08e59c0d61f23f8f2dcf92bddc61d6af1a"
-        },
-        "executed_runner_path": "benchmarks/toy_audit/source_family_training.py",
-        "published_runner_content_identical": true,
-        "published_runner_path": "benchmarks/toy_audit/source_routed_ring_training.py",
-        "quality_evaluator": {
-          "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-family-training-v1/executed-audit-source/definition_quality.py",
-          "sha256": "7e6b7f354f34364f618126034db6bcbc6bbce7eb8b942a53491b3fe492184387"
-        },
-        "rename_reason": "Avoid a path collision with an independent agent's sign/landing/native audit module; source binding retains the exact executed bytes",
-        "renderer": {
-          "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-family-training-v1/executed-audit-source/source_family_media.py",
-          "sha256": "24fec43cbd202c851306a0201f7ff4b359c46561383a7341641aa28862a4645f"
-        },
-        "runner": {
-          "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-family-training-v1/executed-audit-source/source_family_training.py",
-          "sha256": "0a38c96c4ba868d10eff6319902b6db8ab309ca89d523499d12b74ea47eb8946"
-        }
-      },
+      "executed_audit_source_ref": "888fec7d62c05228fd2d6997ddefb0ea709032dba03fa6b22fc49e3e521fa110",
       "final": {
         "angle": 60.0,
         "correspondence": {
@@ -1184,26 +977,43 @@
       "gif_relative_to_report": "media/source-14-moving.gif",
       "heldout_not_a_training_signal": true,
       "historical_binary_gate": "UNDECLARED",
-      "initial": {
-        "angle": 0.0,
-        "correspondence": {
-          "mse": 0.03199680566040001,
-          "neutral_mse": 0.05141106765898877,
-          "passed": false,
-          "relative_mse": 0.6223719350206035
-        },
-        "event": "initial",
-        "original": {
-          "heldout_max_error": 0.3128822147846222,
-          "heldout_rmse": 0.17887650430202484,
-          "initial_rmse": 0.17887650430202484,
-          "output_dtype": "torch.float32",
-          "served_source": "fast"
-        },
-        "step": 0
-      },
       "initial_state_sha256": "1916b38218f484e62a3475a68307aef6d4684270919816d9b70feb957f6c7d0c",
       "media": {
+        "actual_step_indices": [
+          0,
+          50,
+          100,
+          150,
+          200,
+          250,
+          300,
+          350,
+          400,
+          450,
+          500,
+          500,
+          550,
+          600,
+          650,
+          700,
+          750,
+          800,
+          850,
+          900,
+          950,
+          1000,
+          1000,
+          1050,
+          1100,
+          1150,
+          1200,
+          1250,
+          1300,
+          1350,
+          1400,
+          1450,
+          1500
+        ],
         "captured_metrics": {
           "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-family-training-v1/moving/captured-metrics.json",
           "sha256": "b04c12b53952b7e67bd6add42a5a5f397e7234c999d46769bb7c377f292e6317"
@@ -1234,12 +1044,13 @@
       },
       "media_path": "reports/toy_audit/media/source-14-moving.gif",
       "next_action": "Retain this pre-R1 paired-transition result as a component fixture; separate R1 and independent-row native claims require their own contracts.",
-      "observations": {
+      "observation_archive": {
         "captured_frames": 33,
         "interpolation": false,
         "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-family-training-v1/moving/observations.npz",
         "sha256": "249ab0de8df22678ac6fd382202494160e3ab746dd70c6d1fb2239a67aef884f"
       },
+      "observation_count": 33,
       "observer_control": {
         "control": {
           "state": "07487945f55c30c7eb0b3f641170d361f095d4672c0814ab9a56fa4b4c18a545",
@@ -1259,56 +1070,23 @@
       "period_endpoints": [
         {
           "angle": 0.0,
-          "correspondence": {
-            "mse": 4.243993447238741e-06,
-            "neutral_mse": 0.05141106765898877,
-            "passed": true,
-            "relative_mse": 8.255019085363648e-05
-          },
-          "event": "check",
-          "original": {
-            "heldout_max_error": 0.005961316637694836,
-            "heldout_rmse": 0.0020600955467671156,
-            "initial_rmse": 0.17887650430202484,
-            "output_dtype": "torch.float32",
-            "served_source": "averaged"
-          },
+          "heldout_rmse": 0.0020600955467671156,
+          "passed": true,
+          "relative_mse": 8.255019085363648e-05,
           "step": 500
         },
         {
           "angle": 30.0,
-          "correspondence": {
-            "mse": 3.076541551694234e-06,
-            "neutral_mse": 0.051411066571433454,
-            "passed": true,
-            "relative_mse": 5.984200984080952e-05
-          },
-          "event": "check",
-          "original": {
-            "heldout_max_error": 0.005244492087513208,
-            "heldout_rmse": 0.001754007302224636,
-            "initial_rmse": 0.17887650430202484,
-            "output_dtype": "torch.float32",
-            "served_source": "averaged"
-          },
+          "heldout_rmse": 0.001754007302224636,
+          "passed": true,
+          "relative_mse": 5.984200984080952e-05,
           "step": 1000
         },
         {
           "angle": 60.0,
-          "correspondence": {
-            "mse": 1.9233593019460373e-06,
-            "neutral_mse": 0.05141106614149475,
-            "passed": true,
-            "relative_mse": 3.7411387203146544e-05
-          },
-          "event": "check",
-          "original": {
-            "heldout_max_error": 0.003920716233551502,
-            "heldout_rmse": 0.0013868523528799415,
-            "initial_rmse": 0.17887650430202484,
-            "output_dtype": "torch.float32",
-            "served_source": "fast"
-          },
+          "heldout_rmse": 0.0013868523528799415,
+          "passed": true,
+          "relative_mse": 3.7411387203146544e-05,
           "step": 1500
         }
       ],
@@ -1424,6 +1202,10 @@
       "sampling_policy": "All 180 held-out contexts; clean deterministic selected served routed bank; no DV12 or output noise",
       "scientific_claim": "paired context-to-edit correspondence",
       "seconds": 34.616342111025006,
+      "snapshot_labels": {
+        "best": "Best observed metric under its declared selection rule; not a convergence verdict",
+        "final": "Last captured complete evaluation boundary; may precede a capped update count"
+      },
       "source": "examples/e22_routed_moving.py",
       "status": "PASS",
       "stronger_gate_window": {
@@ -1435,82 +1217,20 @@
       },
       "target_turns": [
         {
-          "first_passing_observation": {
-            "angle": 30.0,
-            "correspondence": {
-              "mse": 0.0012537394040340367,
-              "neutral_mse": 0.051411066571433454,
-              "passed": true,
-              "relative_mse": 0.02438656669944826
-            },
-            "event": "check",
-            "original": {
-              "heldout_max_error": 0.05852968245744705,
-              "heldout_rmse": 0.03540818393230438,
-              "initial_rmse": 0.17887650430202484,
-              "output_dtype": "torch.float32",
-              "served_source": "fast"
-            },
-            "step": 550
-          },
-          "instantaneous": {
-            "angle": 30.0,
-            "correspondence": {
-              "mse": 0.01378010555030783,
-              "neutral_mse": 0.051411066571433454,
-              "passed": false,
-              "relative_mse": 0.2680377294091141
-            },
-            "event": "target_turn",
-            "original": {
-              "heldout_max_error": 0.19733834266662598,
-              "heldout_rmse": 0.11738869547843933,
-              "initial_rmse": 0.17887650430202484,
-              "output_dtype": "torch.float32",
-              "served_source": "averaged"
-            },
-            "step": 500
-          },
-          "observed_recovery_updates": 50
+          "angle": 30.0,
+          "first_passing_step": 550,
+          "immediate_heldout_rmse": 0.11738869547843933,
+          "immediate_relative_mse": 0.2680377294091141,
+          "observed_recovery_updates": 50,
+          "step": 500
         },
         {
-          "first_passing_observation": {
-            "angle": 60.0,
-            "correspondence": {
-              "mse": 7.023583219828896e-06,
-              "neutral_mse": 0.05141106614149475,
-              "passed": true,
-              "relative_mse": 0.00013661617521213088
-            },
-            "event": "check",
-            "original": {
-              "heldout_max_error": 0.007875099778175354,
-              "heldout_rmse": 0.002650204347446561,
-              "initial_rmse": 0.17887650430202484,
-              "output_dtype": "torch.float32",
-              "served_source": "averaged"
-            },
-            "step": 1050
-          },
-          "instantaneous": {
-            "angle": 60.0,
-            "correspondence": {
-              "mse": 0.01370001732815735,
-              "neutral_mse": 0.05141106614149475,
-              "passed": false,
-              "relative_mse": 0.26647993041910156
-            },
-            "event": "target_turn",
-            "original": {
-              "heldout_max_error": 0.19805902242660522,
-              "heldout_rmse": 0.11704707890748978,
-              "initial_rmse": 0.17887650430202484,
-              "output_dtype": "torch.float32",
-              "served_source": "averaged"
-            },
-            "step": 1000
-          },
-          "observed_recovery_updates": 50
+          "angle": 60.0,
+          "first_passing_step": 1050,
+          "immediate_heldout_rmse": 0.11704707890748978,
+          "immediate_relative_mse": 0.26647993041910156,
+          "observed_recovery_updates": 50,
+          "step": 1000
         }
       ],
       "trace_sha256": "c9b7f00aa37bd16bdf7233201d2faceaba2064740c870b3e22f6138021d14b9b",
@@ -1538,71 +1258,8 @@
         },
         "step": 7
       },
-      "binding": {
-        "quality_evaluator": {
-          "declared_quality_version": "toy-definition-quality-v1",
-          "path": "/ml2/hypergan/ParticleGAN-toy-problem-audit/benchmarks/toy_audit/definition_quality.py",
-          "sha256": "7e6b7f354f34364f618126034db6bcbc6bbce7eb8b942a53491b3fe492184387",
-          "version": "source-family-training-v1",
-          "version_field_scope": "The raw runner receipt's version field names the audit runner; declared_quality_version names the separate quality evaluator"
-        },
-        "runtime": {
-          "cpu_capability": "AVX2",
-          "device": "cpu",
-          "machine": "x86_64",
-          "numpy": "2.5.2",
-          "python": "3.12.13",
-          "threads": 1,
-          "torch": "2.13.0+cu126",
-          "torch_build": "PyTorch built with:\n  - GCC 13.3\n  - C++ Version: 202002\n  - Intel(R) oneAPI Math Kernel Library Version 2024.2-Product Build 20240605 for Intel(R) 64 architecture applications\n  - Intel(R) MKL-DNN v3.12.0 (Git Hash 80afa71049cd69a3df32adcccb623b12cd7baa22)\n  - OpenMP 201511 (a.k.a. OpenMP 4.5)\n  - LAPACK is enabled (usually provided by MKL)\n  - NNPACK is enabled\n  - CPU capability usage: AVX2\n  - Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release, COMMIT_SHA=cf30153c4c131c8164ee7798e5022d810682e2cb, CUDA_FLAGS= -DLIBCUDACXX_ENABLE_SIMPLIFIED_COMPLEX_OPERATIONS -Xfatbin -compress-all -DONNX_NAMESPACE=onnx_torch -gencode arch=compute_50,code=sm_50 -gencode arch=compute_60,code=sm_60 -gencode arch=compute_70,code=sm_70 -gencode arch=compute_75,code=sm_75 -gencode arch=compute_80,code=sm_80 -gencode arch=compute_86,code=sm_86 -gencode arch=compute_90,code=sm_90 -Xcudafe --diag_suppress=cc_clobber_ignored,--diag_suppress=field_without_dll_interface,--diag_suppress=base_class_has_different_dll_interface,--diag_suppress=dll_interface_conflict_none_assumed,--diag_suppress=dll_interface_conflict_dllexport_assumed,--diag_suppress=bad_friend_decl --expt-relaxed-constexpr --expt-extended-lambda -Xfatbin -compress-all --threads 2 -Wno-deprecated-gpu-targets --expt-extended-lambda -DCUB_WRAPPED_NAMESPACE=at_cuda_detail -DDISABLE_CUSPARSE_DEPRECATED -DCUDA_HAS_FP16=1 -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ -D__CUDA_NO_BFLOAT16_CONVERSIONS__ -DC10_NODEPRECATED, CUDA_VERSION=12.6, CUDNN_VERSION=9.10.2, CXX_COMPILER=/opt/rh/gcc-toolset-13/root/usr/bin/c++, CXX_FLAGS= -fvisibility-inlines-hidden -DUSE_PTHREADPOOL -DNDEBUG -DUSE_KINETO -DHAS_CUPTI -DUSE_FBGEMM -DUSE_PYTORCH_QNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE -O2 -fPIC -DC10_NODEPRECATED -Wall -Wextra -Werror=return-type -Werror=non-virtual-dtor -Werror=range-loop-construct -Werror=bool-operation -Wnarrowing -Wno-missing-field-initializers -Wno-unknown-pragmas -Wno-unused-parameter -Wno-strict-overflow -Wno-strict-aliasing -Wno-stringop-overflow -Wsuggest-override -Wno-psabi -Wno-error=old-style-cast -faligned-new -Wno-maybe-uninitialized -fno-math-errno -fno-trapping-math -Werror=format -Wno-dangling-reference -Wno-error=dangling-reference -Wno-stringop-overflow, LAPACK_INFO=mkl, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, TORCH_VERSION=2.13.0, USE_CUDA=1, USE_CUDNN=ON, USE_CUSPARSELT=1, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_GLOO=ON, USE_MKL=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=ON, USE_NNPACK=ON, USE_OPENMP=ON, USE_ROCM=OFF, USE_ROCM_KERNEL_ASSERT=OFF, USE_XCCL=OFF, USE_XPU=OFF, \n",
-          "torch_git_revision": "cf30153c4c131c8164ee7798e5022d810682e2cb"
-        },
-        "source_sha256": {
-          "benchmarks/toy100/continuous_probe.py": "972405ea73644c2d189a4e243a79146f3cf8295c2a2979c30a277b2a54ff4541",
-          "benchmarks/toy100/warm_equilibrium_probe.py": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
-          "benchmarks/toy_audit/source_family_training.py": "0a38c96c4ba868d10eff6319902b6db8ab309ca89d523499d12b74ea47eb8946",
-          "examples/e22_routed_game.py": "0eb056d8dfbff08ef4bd392a0957f30e30eaf762886809b575d93ab6616a161f",
-          "examples/e22_routed_moving.py": "1cb7f214cda8022aeacd5a1844b1ad8716e95cd5efd284b0cdd26d048b05b539",
-          "examples/e22_routed_paired.py": "5d997d2a9fb8d64c1c6d73fa87f14edfac03617cd6f62a31796fe6d47f362a46",
-          "examples/e22_routed_replay.py": "60df44a4cc0a0380eee969bc7f91a20dd6247d55ec23f12c7cb76f7326b3e663",
-          "examples/e22_routed_sites.py": "ae33170fcc1377c93d3a251ec460ff283432a3a65e68d32dd004637913a97c13",
-          "examples/e22_routed_support.py": "f94434b91d2bd99597500d958f4ebc079b64e6a75b5c318c05aaa8dc6fe5c229",
-          "particlegan/__init__.py": "b56efa562acc551d639548c299002e2cd76338b3fd7062699780add51f4f5e8c",
-          "particlegan/_qr.py": "b59cd62cc27ed557b41b2d17ed86ed578c762a3a8a392d63731a5a3b2b018916",
-          "particlegan/anchor_birth.py": "aa50983d8b61304acf4e1138f16fd4784798983df91e931863bcacd3b511f76f",
-          "particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
-          "particlegan/birth_death.py": "b14c50c611a8cf188347e391739fca50a5171200eb6be90e4e3d1509d64e47ed",
-          "particlegan/birth_phase.py": "5ff929e5e9858aa24c4cc2f8999b5d0603e25e42ca3844d1da4cc28b1981d3d7",
-          "particlegan/capabilities.py": "39df9c67dbedf612740057e5fa743bc724678a1bc323d1f7cf550b37c0c01177",
-          "particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
-          "particlegan/continuous.py": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41",
-          "particlegan/diffusion.py": "19c3aa8772703891551b9122fde8e74c07996f779892b7cb6be09553691efa61",
-          "particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
-          "particlegan/feature_cells.py": "e0ea05f61abd7845c7437eed9a79c3a2511d5551ff04f4e619b6b9c8992e221a",
-          "particlegan/feature_policy.py": "de1a50f70a37d4c9174c8850ce3eac2a2597ed01f19fc4fe1a2ce0ec3176a8b2",
-          "particlegan/feature_reference.py": "58e076e9e04600be25e28afafc537a340de727371f4acbbfb2b7dd8bebac18b1",
-          "particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
-          "particlegan/grad_regularizers.py": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747",
-          "particlegan/init.py": "e15d4de01eb49f7097bc249abacab907ff067385412346f54ab0d510cb8649d0",
-          "particlegan/k3p.py": "72fa32ae0d423d2904f310958721c0138823fa4d06ceca6ec451aaf86280607d",
-          "particlegan/ka2.py": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703",
-          "particlegan/mean_transport.py": "57a68e0a65c5424a4460f65002f3862a69e90af330a4d47c700dc773683a2c06",
-          "particlegan/output_moments.py": "dcf3e27228d2c3c9738e473c5b22ee9e6d5047ddcd60c538b66526adb53ef188",
-          "particlegan/particle_prior.py": "0220878bebea227da63abbf9f5b1ebdabdc6aea54fd2332fd2cab02ed734238f",
-          "particlegan/policy.py": "5b6877ab14170340433e54f5d0e0409b2f72721d31145b8d4867890686317ebc",
-          "particlegan/population_continuity.py": "378cd75cca45bc8da4da33e686a12cf99df853042687978314e37c532bc17fe6",
-          "particlegan/recipes.py": "77d2221985a71ed303c4eecb8fae9620d068fb9478b119f5c3fd9a11a1eca86b",
-          "particlegan/routing.py": "63249d808fccb3d4e113eb1d638a245ee665c3cade20a1542bb706f316b4abcc",
-          "particlegan/row_evidence.py": "78be40141ef3946860458e9842159be9321f05c217a4800dd4134113b6eba93e",
-          "particlegan/training.py": "319bc2d32f2ba106d428607575447dcda419f190cfe02fabdb22fc49ddcc5f77",
-          "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
-        }
-      },
+      "binding_ref": "0e2a95d64aabc025822c3758a816d8419a5638d67053f288fa9b568ce6028688",
       "cadence": 1,
-      "captured_metrics": {
-        "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-family-training-v1/replay/captured-metrics.json",
-        "sha256": "8e6c87840aa9b1a2afc502ee89fb7aad325ffc5152a8f8a14b15e0347f6f9764"
-      },
       "catalog_id": "source-family-14",
       "checkpoint": {
         "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-family-training-v1/replay/checkpoint.pt",
@@ -1704,6 +1361,10 @@
       },
       "context_population": 180,
       "convergence_qualified": false,
+      "curve_archive": {
+        "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-family-training-v1/replay/captured-metrics.json",
+        "sha256": "8e6c87840aa9b1a2afc502ee89fb7aad325ffc5152a8f8a14b15e0347f6f9764"
+      },
       "data": {
         "fit_context": {
           "sha256": "34a6102ba462a9b9524ecb6cc191e9274f55313a34c36bafc127e0001b4c42d4",
@@ -1755,28 +1416,7 @@
         }
       },
       "declared_budget_complete": true,
-      "executed_audit_source": {
-        "ablation": {
-          "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-family-training-v1/executed-audit-source/source_family_ablation.py",
-          "sha256": "d8d8b336996c0224d31e3fc85ce56e08e59c0d61f23f8f2dcf92bddc61d6af1a"
-        },
-        "executed_runner_path": "benchmarks/toy_audit/source_family_training.py",
-        "published_runner_content_identical": true,
-        "published_runner_path": "benchmarks/toy_audit/source_routed_ring_training.py",
-        "quality_evaluator": {
-          "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-family-training-v1/executed-audit-source/definition_quality.py",
-          "sha256": "7e6b7f354f34364f618126034db6bcbc6bbce7eb8b942a53491b3fe492184387"
-        },
-        "rename_reason": "Avoid a path collision with an independent agent's sign/landing/native audit module; source binding retains the exact executed bytes",
-        "renderer": {
-          "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-family-training-v1/executed-audit-source/source_family_media.py",
-          "sha256": "24fec43cbd202c851306a0201f7ff4b359c46561383a7341641aa28862a4645f"
-        },
-        "runner": {
-          "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-family-training-v1/executed-audit-source/source_family_training.py",
-          "sha256": "0a38c96c4ba868d10eff6319902b6db8ab309ca89d523499d12b74ea47eb8946"
-        }
-      },
+      "executed_audit_source_ref": "888fec7d62c05228fd2d6997ddefb0ea709032dba03fa6b22fc49e3e521fa110",
       "final": {
         "angle": 0.0,
         "correspondence": {
@@ -1800,25 +1440,19 @@
       "gif_relative_to_report": "media/source-14-replay.gif",
       "heldout_not_a_training_signal": true,
       "historical_binary_gate": "UNDECLARED",
-      "initial": {
-        "angle": 0.0,
-        "correspondence": {
-          "mse": 0.2898714930176486,
-          "neutral_mse": 0.05124298217785143,
-          "passed": false,
-          "relative_mse": 5.6568037358087
-        },
-        "event": "initial",
-        "original": {
-          "heldout_max_error": 1.7852290868759155,
-          "heldout_rmse": 0.5383971333503723,
-          "initial_rmse": 0.5383971333503723,
-          "served_source": "fast"
-        },
-        "step": 0
-      },
       "initial_state_sha256": "bcb3c901f40067e830522172340215c3517a79e04e3b20643f6817af5545e7fd",
       "media": {
+        "actual_step_indices": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ],
         "captured_metrics": {
           "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-family-training-v1/replay/captured-metrics.json",
           "sha256": "8e6c87840aa9b1a2afc502ee89fb7aad325ffc5152a8f8a14b15e0347f6f9764"
@@ -1849,12 +1483,13 @@
       },
       "media_path": "reports/toy_audit/media/source-14-replay.gif",
       "next_action": "Keep replay as a software protocol fixture. Declare a separate justified trained-quality budget/gate before seeking convergence; do not extend this eight-update smoke merely to obtain a pass.",
-      "observations": {
+      "observation_archive": {
         "captured_frames": 9,
         "interpolation": false,
         "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-family-training-v1/replay/observations.npz",
         "sha256": "b7e4f5c7eae157f0a9672cf1415b21739da4e5808dfe00b47f4c4355dc8aa077"
       },
+      "observation_count": 9,
       "observer_control": {
         "control": {
           "state": "43c5768c46918ff525d625cc46fa2132aab90ea675af4be77e77b58198fcb17b",
@@ -2000,6 +1635,10 @@
         "code removal improves clean paired MSE"
       ],
       "seconds": 47.03575444105081,
+      "snapshot_labels": {
+        "best": "Best observed metric under its declared selection rule; not a convergence verdict",
+        "final": "Last captured complete evaluation boundary; may precede a capped update count"
+      },
       "source": "examples/e22_routed_replay.py",
       "status": "FAIL",
       "stronger_gate_window": {
@@ -2121,40 +1760,6 @@
       "added_gaussian_gate_status": "FAIL",
       "best_observed_original": {
         "gaussian_law": {
-          "covariance_eigenvalues": [
-            [
-              0.20091575111613402,
-              0.6229204440394199
-            ],
-            [
-              0.1714844043883164,
-              0.1897920107868474
-            ],
-            [
-              0.16368037713036596,
-              0.19230934006768324
-            ],
-            [
-              0.15866182285382793,
-              0.17843908538486977
-            ],
-            [
-              0.16791709354993523,
-              0.329165260531914
-            ],
-            [
-              0.0,
-              0.0
-            ],
-            [
-              0.17417102713250526,
-              0.2889910877273834
-            ],
-            [
-              0.0,
-              0.0
-            ]
-          ],
           "hq": 0.964111328125,
           "mass_tv": 0.32568359375,
           "max_radial_ks": 1.0,
@@ -2163,115 +1768,18 @@
           "sample_count": 4096
         },
         "original": {
-          "closest_distance_per_mode": [
-            0.0,
-            0.0329725444316864,
-            0.05670793354511261,
-            0.06652820855379105,
-            0.051582470536231995,
-            2.0902085304260254,
-            0.006694975309073925,
-            2.147157669067383
-          ],
           "cover": 0.75,
           "effective_modes": 5.301435947418213,
           "hq": 0.964111328125,
-          "hq_counts": [
-            1381,
-            709,
-            343,
-            366,
-            515,
-            0,
-            635,
-            0
-          ],
           "hq_radius": 0.21000000000000002,
-          "missing_modes": [
-            5,
-            7
-          ],
           "modes": 6,
           "n_modes": 8,
-          "nearest_counts": [
-            1381,
-            709,
-            345,
-            369,
-            657,
-            0,
-            635,
-            0
-          ],
           "sample_count": 4096
         },
         "step": 1000
       },
-      "binding": {
-        "quality_evaluator": {
-          "declared_quality_version": "toy-definition-quality-v1",
-          "path": "/ml2/hypergan/ParticleGAN-toy-problem-audit/benchmarks/toy_audit/definition_quality.py",
-          "sha256": "7e6b7f354f34364f618126034db6bcbc6bbce7eb8b942a53491b3fe492184387",
-          "version": "source-family-training-v1",
-          "version_field_scope": "The raw runner receipt's version field names the audit runner; declared_quality_version names the separate quality evaluator"
-        },
-        "runtime": {
-          "cpu_capability": "AVX2",
-          "device": "cpu",
-          "machine": "x86_64",
-          "numpy": "2.5.2",
-          "python": "3.12.13",
-          "threads": 1,
-          "torch": "2.13.0+cu126",
-          "torch_build": "PyTorch built with:\n  - GCC 13.3\n  - C++ Version: 202002\n  - Intel(R) oneAPI Math Kernel Library Version 2024.2-Product Build 20240605 for Intel(R) 64 architecture applications\n  - Intel(R) MKL-DNN v3.12.0 (Git Hash 80afa71049cd69a3df32adcccb623b12cd7baa22)\n  - OpenMP 201511 (a.k.a. OpenMP 4.5)\n  - LAPACK is enabled (usually provided by MKL)\n  - NNPACK is enabled\n  - CPU capability usage: AVX2\n  - Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release, COMMIT_SHA=cf30153c4c131c8164ee7798e5022d810682e2cb, CUDA_FLAGS= -DLIBCUDACXX_ENABLE_SIMPLIFIED_COMPLEX_OPERATIONS -Xfatbin -compress-all -DONNX_NAMESPACE=onnx_torch -gencode arch=compute_50,code=sm_50 -gencode arch=compute_60,code=sm_60 -gencode arch=compute_70,code=sm_70 -gencode arch=compute_75,code=sm_75 -gencode arch=compute_80,code=sm_80 -gencode arch=compute_86,code=sm_86 -gencode arch=compute_90,code=sm_90 -Xcudafe --diag_suppress=cc_clobber_ignored,--diag_suppress=field_without_dll_interface,--diag_suppress=base_class_has_different_dll_interface,--diag_suppress=dll_interface_conflict_none_assumed,--diag_suppress=dll_interface_conflict_dllexport_assumed,--diag_suppress=bad_friend_decl --expt-relaxed-constexpr --expt-extended-lambda -Xfatbin -compress-all --threads 2 -Wno-deprecated-gpu-targets --expt-extended-lambda -DCUB_WRAPPED_NAMESPACE=at_cuda_detail -DDISABLE_CUSPARSE_DEPRECATED -DCUDA_HAS_FP16=1 -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ -D__CUDA_NO_BFLOAT16_CONVERSIONS__ -DC10_NODEPRECATED, CUDA_VERSION=12.6, CUDNN_VERSION=9.10.2, CXX_COMPILER=/opt/rh/gcc-toolset-13/root/usr/bin/c++, CXX_FLAGS= -fvisibility-inlines-hidden -DUSE_PTHREADPOOL -DNDEBUG -DUSE_KINETO -DHAS_CUPTI -DUSE_FBGEMM -DUSE_PYTORCH_QNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE -O2 -fPIC -DC10_NODEPRECATED -Wall -Wextra -Werror=return-type -Werror=non-virtual-dtor -Werror=range-loop-construct -Werror=bool-operation -Wnarrowing -Wno-missing-field-initializers -Wno-unknown-pragmas -Wno-unused-parameter -Wno-strict-overflow -Wno-strict-aliasing -Wno-stringop-overflow -Wsuggest-override -Wno-psabi -Wno-error=old-style-cast -faligned-new -Wno-maybe-uninitialized -fno-math-errno -fno-trapping-math -Werror=format -Wno-dangling-reference -Wno-error=dangling-reference -Wno-stringop-overflow, LAPACK_INFO=mkl, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, TORCH_VERSION=2.13.0, USE_CUDA=1, USE_CUDNN=ON, USE_CUSPARSELT=1, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_GLOO=ON, USE_MKL=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=ON, USE_NNPACK=ON, USE_OPENMP=ON, USE_ROCM=OFF, USE_ROCM_KERNEL_ASSERT=OFF, USE_XCCL=OFF, USE_XPU=OFF, \n",
-          "torch_git_revision": "cf30153c4c131c8164ee7798e5022d810682e2cb"
-        },
-        "source_sha256": {
-          "benchmarks/toy100/continuous_probe.py": "972405ea73644c2d189a4e243a79146f3cf8295c2a2979c30a277b2a54ff4541",
-          "benchmarks/toy100/warm_equilibrium_probe.py": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
-          "benchmarks/toy_audit/source_family_training.py": "0a38c96c4ba868d10eff6319902b6db8ab309ca89d523499d12b74ea47eb8946",
-          "examples/e22_routed_game.py": "0eb056d8dfbff08ef4bd392a0957f30e30eaf762886809b575d93ab6616a161f",
-          "examples/e22_routed_moving.py": "1cb7f214cda8022aeacd5a1844b1ad8716e95cd5efd284b0cdd26d048b05b539",
-          "examples/e22_routed_paired.py": "5d997d2a9fb8d64c1c6d73fa87f14edfac03617cd6f62a31796fe6d47f362a46",
-          "examples/e22_routed_replay.py": "60df44a4cc0a0380eee969bc7f91a20dd6247d55ec23f12c7cb76f7326b3e663",
-          "examples/e22_routed_sites.py": "ae33170fcc1377c93d3a251ec460ff283432a3a65e68d32dd004637913a97c13",
-          "examples/e22_routed_support.py": "f94434b91d2bd99597500d958f4ebc079b64e6a75b5c318c05aaa8dc6fe5c229",
-          "particlegan/__init__.py": "b56efa562acc551d639548c299002e2cd76338b3fd7062699780add51f4f5e8c",
-          "particlegan/_qr.py": "b59cd62cc27ed557b41b2d17ed86ed578c762a3a8a392d63731a5a3b2b018916",
-          "particlegan/anchor_birth.py": "aa50983d8b61304acf4e1138f16fd4784798983df91e931863bcacd3b511f76f",
-          "particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
-          "particlegan/birth_death.py": "b14c50c611a8cf188347e391739fca50a5171200eb6be90e4e3d1509d64e47ed",
-          "particlegan/birth_phase.py": "5ff929e5e9858aa24c4cc2f8999b5d0603e25e42ca3844d1da4cc28b1981d3d7",
-          "particlegan/capabilities.py": "39df9c67dbedf612740057e5fa743bc724678a1bc323d1f7cf550b37c0c01177",
-          "particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
-          "particlegan/continuous.py": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41",
-          "particlegan/diffusion.py": "19c3aa8772703891551b9122fde8e74c07996f779892b7cb6be09553691efa61",
-          "particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
-          "particlegan/feature_cells.py": "e0ea05f61abd7845c7437eed9a79c3a2511d5551ff04f4e619b6b9c8992e221a",
-          "particlegan/feature_policy.py": "de1a50f70a37d4c9174c8850ce3eac2a2597ed01f19fc4fe1a2ce0ec3176a8b2",
-          "particlegan/feature_reference.py": "58e076e9e04600be25e28afafc537a340de727371f4acbbfb2b7dd8bebac18b1",
-          "particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
-          "particlegan/grad_regularizers.py": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747",
-          "particlegan/init.py": "e15d4de01eb49f7097bc249abacab907ff067385412346f54ab0d510cb8649d0",
-          "particlegan/k3p.py": "72fa32ae0d423d2904f310958721c0138823fa4d06ceca6ec451aaf86280607d",
-          "particlegan/ka2.py": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703",
-          "particlegan/mean_transport.py": "57a68e0a65c5424a4460f65002f3862a69e90af330a4d47c700dc773683a2c06",
-          "particlegan/output_moments.py": "dcf3e27228d2c3c9738e473c5b22ee9e6d5047ddcd60c538b66526adb53ef188",
-          "particlegan/particle_prior.py": "0220878bebea227da63abbf9f5b1ebdabdc6aea54fd2332fd2cab02ed734238f",
-          "particlegan/policy.py": "5b6877ab14170340433e54f5d0e0409b2f72721d31145b8d4867890686317ebc",
-          "particlegan/population_continuity.py": "378cd75cca45bc8da4da33e686a12cf99df853042687978314e37c532bc17fe6",
-          "particlegan/recipes.py": "77d2221985a71ed303c4eecb8fae9620d068fb9478b119f5c3fd9a11a1eca86b",
-          "particlegan/routing.py": "63249d808fccb3d4e113eb1d638a245ee665c3cade20a1542bb706f316b4abcc",
-          "particlegan/row_evidence.py": "78be40141ef3946860458e9842159be9321f05c217a4800dd4134113b6eba93e",
-          "particlegan/training.py": "319bc2d32f2ba106d428607575447dcda419f190cfe02fabdb22fc49ddcc5f77",
-          "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
-        }
-      },
+      "binding_ref": "0e2a95d64aabc025822c3758a816d8419a5638d67053f288fa9b568ce6028688",
       "cadence": 50,
-      "captured_metrics": {
-        "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-family-training-v1/ring/captured-metrics.json",
-        "sha256": "bcb99a852a587c2b93785823d64fe5ddf48d6102d91f8404b2b74e69d4d4d5dd"
-      },
       "catalog_id": "source-family-10",
       "checkpoint": {
         "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-family-training-v1/ring/checkpoint.pt",
@@ -2279,6 +1787,10 @@
       },
       "completed_updates": 1200,
       "config_sha256": "d07e80657519458a963f058ee8c3ffebc9a29537ec44894e2240356fadfad505",
+      "curve_archive": {
+        "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-family-training-v1/ring/captured-metrics.json",
+        "sha256": "bcb99a852a587c2b93785823d64fe5ddf48d6102d91f8404b2b74e69d4d4d5dd"
+      },
       "declared_budget_complete": true,
       "effective_config": {
         "alpha_bar": [
@@ -2358,24 +1870,7 @@
         "hq": 0.0,
         "modes": 0
       },
-      "executed_audit_source": {
-        "executed_runner_path": "benchmarks/toy_audit/source_family_training.py",
-        "published_runner_content_identical": true,
-        "published_runner_path": "benchmarks/toy_audit/source_routed_ring_training.py",
-        "quality_evaluator": {
-          "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-family-training-v1/executed-audit-source/definition_quality.py",
-          "sha256": "7e6b7f354f34364f618126034db6bcbc6bbce7eb8b942a53491b3fe492184387"
-        },
-        "rename_reason": "Avoid a path collision with an independent agent's sign/landing/native audit module; source binding retains the exact executed bytes",
-        "renderer": {
-          "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-family-training-v1/executed-audit-source/source_family_media.py",
-          "sha256": "24fec43cbd202c851306a0201f7ff4b359c46561383a7341641aa28862a4645f"
-        },
-        "runner": {
-          "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-family-training-v1/executed-audit-source/source_family_training.py",
-          "sha256": "0a38c96c4ba868d10eff6319902b6db8ab309ca89d523499d12b74ea47eb8946"
-        }
-      },
+      "executed_audit_source_ref": "c286f9cdf1ef5b5dd5b901b9096372065bcfd28665a175335d854356ce874db7",
       "failed_terminal_gates": {
         "hq": {
           "minimum": 0.9,
@@ -2466,6 +1961,32 @@
         "sha256": "4af9863a319378b362bfb925b161d9ae8b8b07c9ecf1a452bb645570e04b99b7"
       },
       "media": {
+        "actual_step_indices": [
+          50,
+          100,
+          150,
+          200,
+          250,
+          300,
+          350,
+          400,
+          450,
+          500,
+          550,
+          600,
+          650,
+          700,
+          750,
+          800,
+          850,
+          900,
+          950,
+          1000,
+          1050,
+          1100,
+          1150,
+          1200
+        ],
         "captured_metrics": {
           "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-family-training-v1/ring/captured-metrics.json",
           "sha256": "bcb99a852a587c2b93785823d64fe5ddf48d6102d91f8404b2b74e69d4d4d5dd"
@@ -2505,12 +2026,13 @@
         "step_calls": 1200
       },
       "noise_horizon": 1200,
-      "observations": {
+      "observation_archive": {
         "captured_frames": 24,
         "interpolation": false,
         "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-family-training-v1/ring/observations.npz",
         "sha256": "9d2e23bc79289ea3c3cd9c12eeef79cdcda3ccb253cc0585b8345cbda30c427c"
       },
+      "observation_count": 24,
       "observer_state_parity": {
         "checks": 24,
         "state_preserved": true
@@ -2587,6 +2109,10 @@
         "separate full-density evaluator/resource mismatch"
       ],
       "seconds": 62.013520845910534,
+      "snapshot_labels": {
+        "best": "Best observed metric under its declared selection rule; not a convergence verdict",
+        "final": "Last captured complete evaluation boundary; may precede a capped update count"
+      },
       "source": "benchmarks/toy100/continuous_probe.py",
       "source_recipe": {
         "alpha_bar": [
@@ -2698,8 +2224,71 @@
     "report_sha256": "604fca564e42c915188b6c51a05dcfc18b858acfd87ff4d79f43915e921efa0d"
   },
   "limitation": "Five GIFs verify captured states, not five convergence passes. Original routed scalars have no absolute trained binary gate; replay is software only; support is capped. Added audit gates do not replace historical oracles.",
+  "publication_schema": "source-family-training-compact-v2",
   "runner_sha256": "0a38c96c4ba868d10eff6319902b6db8ab309ca89d523499d12b74ea47eb8946",
   "scope": "Fresh source-only default paths, independent of historical73-arm diagnosis. No default/config/library repair, seed study or failed-acquisition extension.",
+  "source_bindings": {
+    "0e2a95d64aabc025822c3758a816d8419a5638d67053f288fa9b568ce6028688": {
+      "quality_evaluator": {
+        "declared_quality_version": "toy-definition-quality-v1",
+        "path": "/ml2/hypergan/ParticleGAN-toy-problem-audit/benchmarks/toy_audit/definition_quality.py",
+        "sha256": "7e6b7f354f34364f618126034db6bcbc6bbce7eb8b942a53491b3fe492184387",
+        "version": "source-family-training-v1",
+        "version_field_scope": "The raw runner receipt's version field names the audit runner; declared_quality_version names the separate quality evaluator"
+      },
+      "runtime": {
+        "cpu_capability": "AVX2",
+        "device": "cpu",
+        "machine": "x86_64",
+        "numpy": "2.5.2",
+        "python": "3.12.13",
+        "threads": 1,
+        "torch": "2.13.0+cu126",
+        "torch_build": "PyTorch built with:\n  - GCC 13.3\n  - C++ Version: 202002\n  - Intel(R) oneAPI Math Kernel Library Version 2024.2-Product Build 20240605 for Intel(R) 64 architecture applications\n  - Intel(R) MKL-DNN v3.12.0 (Git Hash 80afa71049cd69a3df32adcccb623b12cd7baa22)\n  - OpenMP 201511 (a.k.a. OpenMP 4.5)\n  - LAPACK is enabled (usually provided by MKL)\n  - NNPACK is enabled\n  - CPU capability usage: AVX2\n  - Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release, COMMIT_SHA=cf30153c4c131c8164ee7798e5022d810682e2cb, CUDA_FLAGS= -DLIBCUDACXX_ENABLE_SIMPLIFIED_COMPLEX_OPERATIONS -Xfatbin -compress-all -DONNX_NAMESPACE=onnx_torch -gencode arch=compute_50,code=sm_50 -gencode arch=compute_60,code=sm_60 -gencode arch=compute_70,code=sm_70 -gencode arch=compute_75,code=sm_75 -gencode arch=compute_80,code=sm_80 -gencode arch=compute_86,code=sm_86 -gencode arch=compute_90,code=sm_90 -Xcudafe --diag_suppress=cc_clobber_ignored,--diag_suppress=field_without_dll_interface,--diag_suppress=base_class_has_different_dll_interface,--diag_suppress=dll_interface_conflict_none_assumed,--diag_suppress=dll_interface_conflict_dllexport_assumed,--diag_suppress=bad_friend_decl --expt-relaxed-constexpr --expt-extended-lambda -Xfatbin -compress-all --threads 2 -Wno-deprecated-gpu-targets --expt-extended-lambda -DCUB_WRAPPED_NAMESPACE=at_cuda_detail -DDISABLE_CUSPARSE_DEPRECATED -DCUDA_HAS_FP16=1 -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ -D__CUDA_NO_BFLOAT16_CONVERSIONS__ -DC10_NODEPRECATED, CUDA_VERSION=12.6, CUDNN_VERSION=9.10.2, CXX_COMPILER=/opt/rh/gcc-toolset-13/root/usr/bin/c++, CXX_FLAGS= -fvisibility-inlines-hidden -DUSE_PTHREADPOOL -DNDEBUG -DUSE_KINETO -DHAS_CUPTI -DUSE_FBGEMM -DUSE_PYTORCH_QNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE -O2 -fPIC -DC10_NODEPRECATED -Wall -Wextra -Werror=return-type -Werror=non-virtual-dtor -Werror=range-loop-construct -Werror=bool-operation -Wnarrowing -Wno-missing-field-initializers -Wno-unknown-pragmas -Wno-unused-parameter -Wno-strict-overflow -Wno-strict-aliasing -Wno-stringop-overflow -Wsuggest-override -Wno-psabi -Wno-error=old-style-cast -faligned-new -Wno-maybe-uninitialized -fno-math-errno -fno-trapping-math -Werror=format -Wno-dangling-reference -Wno-error=dangling-reference -Wno-stringop-overflow, LAPACK_INFO=mkl, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, TORCH_VERSION=2.13.0, USE_CUDA=1, USE_CUDNN=ON, USE_CUSPARSELT=1, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_GLOO=ON, USE_MKL=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=ON, USE_NNPACK=ON, USE_OPENMP=ON, USE_ROCM=OFF, USE_ROCM_KERNEL_ASSERT=OFF, USE_XCCL=OFF, USE_XPU=OFF, \n",
+        "torch_git_revision": "cf30153c4c131c8164ee7798e5022d810682e2cb"
+      },
+      "source_sha256": {
+        "benchmarks/toy100/continuous_probe.py": "972405ea73644c2d189a4e243a79146f3cf8295c2a2979c30a277b2a54ff4541",
+        "benchmarks/toy100/warm_equilibrium_probe.py": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
+        "benchmarks/toy_audit/source_family_training.py": "0a38c96c4ba868d10eff6319902b6db8ab309ca89d523499d12b74ea47eb8946",
+        "examples/e22_routed_game.py": "0eb056d8dfbff08ef4bd392a0957f30e30eaf762886809b575d93ab6616a161f",
+        "examples/e22_routed_moving.py": "1cb7f214cda8022aeacd5a1844b1ad8716e95cd5efd284b0cdd26d048b05b539",
+        "examples/e22_routed_paired.py": "5d997d2a9fb8d64c1c6d73fa87f14edfac03617cd6f62a31796fe6d47f362a46",
+        "examples/e22_routed_replay.py": "60df44a4cc0a0380eee969bc7f91a20dd6247d55ec23f12c7cb76f7326b3e663",
+        "examples/e22_routed_sites.py": "ae33170fcc1377c93d3a251ec460ff283432a3a65e68d32dd004637913a97c13",
+        "examples/e22_routed_support.py": "f94434b91d2bd99597500d958f4ebc079b64e6a75b5c318c05aaa8dc6fe5c229",
+        "particlegan/__init__.py": "b56efa562acc551d639548c299002e2cd76338b3fd7062699780add51f4f5e8c",
+        "particlegan/_qr.py": "b59cd62cc27ed557b41b2d17ed86ed578c762a3a8a392d63731a5a3b2b018916",
+        "particlegan/anchor_birth.py": "aa50983d8b61304acf4e1138f16fd4784798983df91e931863bcacd3b511f76f",
+        "particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+        "particlegan/birth_death.py": "b14c50c611a8cf188347e391739fca50a5171200eb6be90e4e3d1509d64e47ed",
+        "particlegan/birth_phase.py": "5ff929e5e9858aa24c4cc2f8999b5d0603e25e42ca3844d1da4cc28b1981d3d7",
+        "particlegan/capabilities.py": "39df9c67dbedf612740057e5fa743bc724678a1bc323d1f7cf550b37c0c01177",
+        "particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+        "particlegan/continuous.py": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41",
+        "particlegan/diffusion.py": "19c3aa8772703891551b9122fde8e74c07996f779892b7cb6be09553691efa61",
+        "particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+        "particlegan/feature_cells.py": "e0ea05f61abd7845c7437eed9a79c3a2511d5551ff04f4e619b6b9c8992e221a",
+        "particlegan/feature_policy.py": "de1a50f70a37d4c9174c8850ce3eac2a2597ed01f19fc4fe1a2ce0ec3176a8b2",
+        "particlegan/feature_reference.py": "58e076e9e04600be25e28afafc537a340de727371f4acbbfb2b7dd8bebac18b1",
+        "particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+        "particlegan/grad_regularizers.py": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747",
+        "particlegan/init.py": "e15d4de01eb49f7097bc249abacab907ff067385412346f54ab0d510cb8649d0",
+        "particlegan/k3p.py": "72fa32ae0d423d2904f310958721c0138823fa4d06ceca6ec451aaf86280607d",
+        "particlegan/ka2.py": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703",
+        "particlegan/mean_transport.py": "57a68e0a65c5424a4460f65002f3862a69e90af330a4d47c700dc773683a2c06",
+        "particlegan/output_moments.py": "dcf3e27228d2c3c9738e473c5b22ee9e6d5047ddcd60c538b66526adb53ef188",
+        "particlegan/particle_prior.py": "0220878bebea227da63abbf9f5b1ebdabdc6aea54fd2332fd2cab02ed734238f",
+        "particlegan/policy.py": "5b6877ab14170340433e54f5d0e0409b2f72721d31145b8d4867890686317ebc",
+        "particlegan/population_continuity.py": "378cd75cca45bc8da4da33e686a12cf99df853042687978314e37c532bc17fe6",
+        "particlegan/recipes.py": "77d2221985a71ed303c4eecb8fae9620d068fb9478b119f5c3fd9a11a1eca86b",
+        "particlegan/routing.py": "63249d808fccb3d4e113eb1d638a245ee665c3cade20a1542bb706f316b4abcc",
+        "particlegan/row_evidence.py": "78be40141ef3946860458e9842159be9321f05c217a4800dd4134113b6eba93e",
+        "particlegan/training.py": "319bc2d32f2ba106d428607575447dcda419f190cfe02fabdb22fc49ddcc5f77",
+        "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+      }
+    }
+  },
   "source_parent_commit": "54604961f1dcf6ffaa9c0807afb384bc590debe9",
   "version": "source-family-training-v1"
 }
