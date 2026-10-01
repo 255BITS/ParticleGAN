@@ -1,0 +1,64 @@
+{
+  "format": "paired_residual_convergence_diagnostic_v1",
+  "base_commit": "6ec7e5788e14ea15ddc3e16ac71110458108b6a6",
+  "purpose": "Separate stochastic critic learning and asymmetric critic lag in a reduced conditional residual GAN, preserving public routed E22 execution.",
+  "scope": "Standalone policy-aware diagnosis; no Forge qualification, default promotion, or decoded-image quality claim.",
+  "hypotheses": {
+    "asymmetric_critic_lag": "At zero residual, antithetic generator noise cancels an even critic's input gradient, but an odd linear critic component retains a generator force while the paired adversarial discriminator parameter gradient is zero.",
+    "critic_energy_signal_variance": "At zero energy-head initialization, antithetic discriminator noise removes the cross-noise term in its energy-coefficient gradient; its expectation and the adversarial objective stay unchanged.",
+    "penalty_geometry": "A mean-pooled linear score on identical repeated coordinates has native coordinate-RMS R1 energy proportional to inverse input dimension squared; this is an explicit geometry assumption, not a general claim about every image critic."
+  },
+  "profiles": {
+    "current": "Learned linear-plus-quadratic residual critic, one discriminator Gaussian and antithetic generator Gaussian.",
+    "even_critic": "Only the critic's odd score/features are removed. Parameter owners, initialization, native policy and generator estimator stay matched.",
+    "d_antithetic": "Only discriminator adversarial Gaussian estimation becomes an antithetic mean. One primary pair observation, one unchanged primary KA2 penalty, one discriminator backward and optimizer step."
+  },
+  "shared_profile": {
+    "output_shape": [2, 1, 32],
+    "num_particles": 128,
+    "z_dim": 4,
+    "batch_size": 16,
+    "generator_base_lr": 0.000204,
+    "critic_lr_multiplier": 1.5,
+    "table_lr_multiplier": 10.0,
+    "generator_applied_multiplier": 0.5,
+    "betas": [0.0, 0.999],
+    "output_noise_std": 1.3,
+    "output_noise_mode": "learnable",
+    "birth_death_backend": "auto",
+    "reopen_guard": "settled",
+    "row_evidence_and_birth_death": true,
+    "routed_reservoir": 64,
+    "routed_probe_interval": 100,
+    "critic_odd_score_gain": 0.0625,
+    "critic_quadratic_score_gain": 1.0,
+    "critic_final_divisor": "sqrt(3)",
+    "initialization": "Public deterministic_orthogonal_: G0, D1, E2, R3, ParticlePrior default R2; fixed declarations preserve the frozen host and zero energy head.",
+    "generator_objective": "RpGAN only; real/reference critic path detached. No reconstruction, MSE, or VIC training term.",
+    "serving": "Ordinary clean network forward; report stock-selected served model and live model separately."
+  },
+  "frozen_evaluation": {
+    "cohorts": "Disjoint deterministic fitting, protected structural-guard, and reporting contexts; report data never enters policy observations.",
+    "metrics": ["clean reporting RMSE", "reporting RMSE divided by shared initial RMSE", "residual bias", "odd critic force at zero residual", "learned quadratic coefficients", "raw and physical output sigma", "actual/base rates and tester decisions"],
+    "primary_comparison": "Final reporting RMSE after the common 1200-update budget; all completed reporting points retained.",
+    "convergence_marker": "First recorded reporting RMSE at or below half the common initial RMSE; absence is reported as not reached.",
+    "causal_qualification": "Toy endpoint improvements require the predicted force or gradient-variance change to support a mechanism interpretation. A toy winner does not establish a real-data winner or healthy routing."
+  },
+  "execution": {
+    "device": "cpu",
+    "threads": 1,
+    "steps_per_profile": 1200,
+    "profiles": 3,
+    "campaign_wall_seconds": 300,
+    "update_watchdog_seconds": 5,
+    "stop": "Stop on nonfinite state, watchdog expiry, or budget. No automatic continuation, timeout increase, seed study, or coefficient sweep.",
+    "raw_artifacts": "Ignored artifacts/paired-residual-toy/; stdout and per-update streams remain outside Git."
+  },
+  "limitations": [
+    "Reduced affine/FiLM host and linear/quadratic critic are deliberately smaller than the image bridge's CNN/attention critic.",
+    "64 output coordinates do not reproduce the bridge's 65536-coordinate KA2 regime.",
+    "Shared caller draws can match; changed gradients affect DV12 and policy state, so private-stream identity is not assumed.",
+    "A source skip can solve this task. Routing participation must be measured, and routing advantage is not inferred.",
+    "The profile represents the late beta1=0 and applied-G=0.5 branch, not the early beta1=0.9 branch."
+  ]
+}
