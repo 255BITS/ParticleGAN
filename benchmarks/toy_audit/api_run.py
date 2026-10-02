@@ -159,7 +159,7 @@ def render_gif(case, records, path, *, full_budget, requested_steps, final_verdi
     columns = min(3, views_count)
     rows = math.ceil(views_count / columns)
     fixed = _view_limits(records)
-    reference = _view_limits(records, roles=("target",))
+    reference_bounds = _view_limits(records, roles=("target",))
     annotations = []
     frames = []
     for record in records:
@@ -171,8 +171,16 @@ def render_gif(case, records, path, *, full_budget, requested_steps, final_verdi
                 continue
             view = dict(record["views"][index])
             target, samples = contract.array(view["target"]), contract.array(view["samples"])
+            if case["id"].startswith("api-critic-lag-") and view["kind"] == "image" and target.ndim == 4 and target.shape[1] == 2:
+                before = {"target_shape": list(target.shape), "sample_shape": list(samples.shape)}
+                target = target.reshape(len(target), 1, -1, target.shape[-1])
+                samples = samples.reshape(len(samples), 1, -1, samples.shape[-1])
+                view["caption"] = view.get("caption", "") + " Two residual feature blocks appear as grayscale rows; they are not color channels."
+                annotations.append({"step": record["step"], "view": index,
+                                    "lossless_feature_layout": {**before, "display_target_shape": list(target.shape),
+                                                               "display_sample_shape": list(samples.shape), "values_modified": False}})
             if case["id"] == "api-circle-controller" and view["kind"] == "line":
-                low, high = reference[index]
+                low, high = reference_bounds[index]
                 margin = .08 * np.maximum(high - low, .1)
                 view["xlim"] = [float(low[0] - margin[0]), float(high[0] + margin[0])]
                 view["ylim"] = [float(low[1] - margin[1]), float(high[1] + margin[1])]

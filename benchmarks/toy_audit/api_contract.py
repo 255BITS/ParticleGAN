@@ -74,7 +74,7 @@ def metric_observations(case):
     """Frozen post-update scoring count, independent of GIF frame selection."""
     thresholds = case.get("thresholds", {})
     inherited = thresholds.get("observations") if isinstance(thresholds, dict) else None
-    count = case.get("evaluation_observations", inherited or min(24, case["default_steps"]))
+    count = case.get("evaluation_observations", inherited if inherited is not None else min(24, case["default_steps"]))
     _positive_integer(count, "evaluation_observations")
     if count > case["default_steps"]:
         raise ValueError("metric observations exceed distinct execution updates")
@@ -167,6 +167,9 @@ def validate_observation(observation):
             if invalid:
                 failures.append(f"{view['title']}: {invalid} nonfinite output values")
                 normalized["nonfinite_output_values"] = normalized.get("nonfinite_output_values", 0) + invalid
+            if view["kind"] == "image" and (values.ndim not in (2, 3, 4) or
+                    (values.ndim == 4 and values.shape[1] not in (1, 3, 4))):
+                raise ValueError("image goal views require a matrix or NCHW grayscale/RGB values; pack feature blocks explicitly")
     result["metrics"] = normalized
     result["failed_bounds"] = sorted(set(failures))
     result["passed"] = result["passed"] and not result["failed_bounds"]

@@ -46,6 +46,16 @@ def test_goal_media_requires_both_reference_and_real_output():
         validate_observation(result)
 
 
+def test_feature_blocks_cannot_masquerade_as_image_color_channels():
+    result = observation()
+    result["views"][0].update(kind="image", target=np.zeros((8, 2, 1, 32)),
+                              samples=np.zeros((8, 2, 1, 32)))
+    with pytest.raises(ValueError, match="pack feature blocks"):
+        validate_observation(result)
+    result["views"][0].update(target=np.zeros((8, 1, 2, 32)), samples=np.zeros((8, 1, 2, 32)))
+    assert validate_observation(result)["passed"]
+
+
 def test_nonfinite_model_output_is_a_metric_failure_with_an_actual_view():
     result = observation()
     result["views"][0]["samples"][0, 1] = float("nan")
