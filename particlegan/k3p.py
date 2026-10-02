@@ -414,7 +414,14 @@ def _closure_loss(closure):
 
 
 class _DeviceScopedAdam(Adam):
-    """Run accelerator graph checks only for accelerator-owned parameters."""
+    """Keep Adam state placement and graph checks tied to parameter ownership."""
+
+    def _init_group(self, *args, **kwargs):
+        # Adam's ordinary scalar step belongs on CPU. Capturable/fused groups
+        # explicitly use the parameter device; moment tensors follow parameters.
+        # Scope initialization alone so caller closures keep their device context.
+        with torch.device("cpu"):
+            return super()._init_group(*args, **kwargs)
 
     def _accelerator_graph_capture_health_check(self):
         if any(p.device.type != "cpu" for group in self.param_groups for p in group["params"]):
