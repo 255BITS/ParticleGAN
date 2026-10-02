@@ -147,35 +147,64 @@ def _view_limits(records, roles=("target", "samples")):
     return bounds
 
 
-def render_gif(case, records, path, *, full_budget, requested_steps, final_verdict=None):
-    """Reference and actual outputs share fixed axes across real observations."""
-    import matplotlib
-    matplotlib.use("Agg")
-    from matplotlib import pyplot as plt
-    from matplotlib.patches import Circle
-    from PIL import Image
-
-    views_count = max(len(record["views"]) for record in records)
-    columns = min(3, views_count)
-    rows = math.ceil(views_count / columns)
-    fixed = _view_limits(records)
-    reference_bounds = _view_limits(records, roles=("target",))
-    annotations = []
-    frames = []
-    for record in records:
-        fig, axes = plt.subplots(rows, columns, figsize=(4.25 * columns, 3.05 * rows + 1.45),
-                                 squeeze=False)
-        for index, ax in enumerate(axes.flat):
-            if index >= len(record["views"]):
-                ax.set_visible(False)
+def _wrapped(text, width, measure):
+    """Wrap by rendered glyph width, including long IDs and explicit newlines."""
+    lines = []
+    for paragraph in str(text).split("\n"):
+        line = ""
+        for word in paragraph.split():
+            candidate = line + (" " if line else "") + word
+            if measure(candidate) <= width:
+                line = candidate
                 continue
-            view = dict(record["views"][index])
+            if line:
+                lines.append(line)
+                line = ""
+            while measure(word) > width:
+                low, high = 1, len(word)
+                while low < high:
+                    mid = (low + high + 1) // 2
+                    if measure(word[:mid]) <= width:
+                        low = mid
+                    else:
+                        high = mid - 1
+                lines.append(word[:low])
+                word = word[low:]
+            line = word
+        lines.append(line)
+    return "\n".join(lines)
+
+
+def _physical_geometry(view):
+    """Equal units for spatial coordinates, not sample indices or time series."""
+    if view.get("aspect") in ("equal", "auto"):
+        return view["aspect"] == "equal"
+    coordinates = {"", "x", "y", "x position", "y position", "position x", "position y"}
+    if any(view.get(label, "").lower().strip() not in coordinates for label in ("xlabel", "ylabel")):
+        return False
+    target = contract.array(view["target"])
+    if view["kind"] == "scatter":
+        return target.ndim >= 2 and np.prod(target.shape[1:]) >= 2
+    return view["kind"] == "line" and target.ndim > 2 and target.shape[-1] == 2
+
+
+def _display_views(case, records, reference_bounds, annotations):
+    """Prepare display-only labels/layout without modifying retained records."""
+    prepared = []
+    for record in records:
+        views = []
+        for index, original in enumerate(record["views"]):
+            view = dict(original)
             target, samples = contract.array(view["target"]), contract.array(view["samples"])
-            if case["id"].startswith("api-critic-lag-") and view["kind"] == "image" and target.ndim == 4 and target.shape[1] == 2:
+            if case["id"].startswith("api-critic-lag-") and view["kind"] == "image":
+                if target.ndim != 4 or target.shape != samples.shape or target.shape[1:-1] not in ((2, 1), (1, 2)):
+                    raise ValueError("critic feature view requires two grayscale rows per context")
                 before = {"target_shape": list(target.shape), "sample_shape": list(samples.shape)}
-                target = target.reshape(len(target), 1, -1, target.shape[-1])
-                samples = samples.reshape(len(samples), 1, -1, samples.shape[-1])
-                view["caption"] = view.get("caption", "") + " Two residual feature blocks appear as grayscale rows; they are not color channels."
+                contexts = len(target)
+                target = target.reshape(1, 1, -1, target.shape[-1])
+                samples = samples.reshape(1, 1, -1, samples.shape[-1])
+                view["caption"] = (view.get("caption", "") +
+                    f" Each displayed context occupies two adjacent grayscale feature rows; first {contexts} contexts. They are not color channels.")
                 annotations.append({"step": record["step"], "view": index,
                                     "lossless_feature_layout": {**before, "display_target_shape": list(target.shape),
                                                                "display_sample_shape": list(samples.shape), "values_modified": False}})
@@ -191,6 +220,81 @@ def render_gif(case, records, path, *, full_budget, requested_steps, final_verdi
                 annotations.append({"step": record["step"], "view": index,
                                     "reference_camera": {"xlim": view["xlim"], "ylim": view["ylim"]},
                                     "outside_view_states": outside, "retained_view_states": len(points)})
+            view.update(target=target, samples=samples)
+            views.append(view)
+        prepared.append(views)
+    return prepared
+
+
+def _render_layout(case, records, prepared, columns, rows, full_budget, requested_steps, final_verdict):
+    """Reserve text space in inches, consistently across every actual frame."""
+    from matplotlib.backends.backend_agg import RendererAgg
+    from matplotlib.font_manager import FontProperties
+    renderer = RendererAgg(1, 1, 100)
+    total_width = (4.6 * columns * .98 - 4.6 * .14) * 100
+    panel_width = total_width / (columns + .45 * (columns - 1))
+    def wrap(text, pixels, size, weight="normal"):
+        font = FontProperties(size=size, weight=weight)
+        return _wrapped(text, pixels, lambda line: renderer.get_text_width_height_descent(line, font, False)[0])
+    goal = wrap(case["goal"], total_width * .96, 11)
+    titles = [[wrap(view["title"], panel_width * .96, 10) for view in views] for views in prepared]
+    captions = [[wrap(view.get("caption", ""), panel_width * .96, 7) for view in views] for views in prepared]
+    badge = wrap(f"Default test {final_verdict}", total_width * .96, 10, "bold") if final_verdict is not None else ""
+    footer = []
+    budget = "default protocol" if full_budget else f"short run; default {case['default_steps']} updates"
+    for record in records:
+        instant = "PASS" if record["passed"] else "FAIL"
+        timeline = wrap(f"{case['id']} | update {record['step']}/{requested_steps} | metric {instant} | {budget}", total_width * .96, 8)
+        metrics = "; ".join(f"{name}={value:.4g}" for name, value in list(record["metrics"].items())[:6])
+        footer.append(timeline + "\n" + wrap(metrics, total_width * .96, 8))
+    heights = [.16 + .19 * (goal.count("\n") + 1)]
+    for row in range(rows):
+        indices = range(row * columns, min((row + 1) * columns, max(map(len, prepared))))
+        title_lines = max(t[index].count("\n") + 1 for t in titles for index in indices if index < len(t))
+        caption_lines = max(c[index].count("\n") + 1 if c[index] else 0 for c in captions for index in indices if index < len(c))
+        # Title, plot, tick/xlabel clearance, caption, inter-row space.
+        heights.extend((.10 + .17 * title_lines, 2.9, .48, .12 + .135 * caption_lines, .13))
+    footer_lines = max(text.count("\n") + 1 for text in footer)
+    badge_height = .24 * (badge.count("\n") + 1) if badge else 0
+    heights.append(.16 + .155 * footer_lines + badge_height)
+    return dict(goal=goal, titles=titles, captions=captions, footer=footer, heights=heights,
+                badge=badge, badge_height=badge_height)
+
+
+def render_gif(case, records, path, *, full_budget, requested_steps, final_verdict=None):
+    """Reference and actual outputs share fixed axes across real observations."""
+    import matplotlib
+    matplotlib.use("Agg")
+    from matplotlib import pyplot as plt
+    from matplotlib.gridspec import GridSpec
+    from matplotlib.patches import Circle
+    from PIL import Image
+
+    views_count = max(len(record["views"]) for record in records)
+    columns = min(3, views_count)
+    rows = math.ceil(views_count / columns)
+    fixed = _view_limits(records)
+    reference_bounds = _view_limits(records, roles=("target",))
+    annotations = []
+    prepared = _display_views(case, records, reference_bounds, annotations)
+    layout = _render_layout(case, records, prepared, columns, rows, full_budget, requested_steps, final_verdict)
+    frames = []
+    for frame_index, record in enumerate(records):
+        height = sum(layout["heights"]) + .20
+        fig = plt.figure(figsize=(4.6 * columns, height), dpi=100)
+        grid = GridSpec(len(layout["heights"]), columns, figure=fig,
+                        height_ratios=layout["heights"], left=.14 / columns, right=.98,
+                        bottom=.10 / height, top=1 - .10 / height, hspace=0, wspace=.45)
+        heading = fig.add_subplot(grid[0, :]); heading.set_axis_off()
+        heading.text(.5, .95, layout["goal"], transform=heading.transAxes,
+                     ha="center", va="top", fontsize=11, linespacing=1.15)
+        for index, view in enumerate(prepared[frame_index]):
+            row, column = divmod(index, columns)
+            title_ax = fig.add_subplot(grid[1 + row * 5, column]); title_ax.set_axis_off()
+            title_ax.text(.5, .85, layout["titles"][frame_index][index], transform=title_ax.transAxes,
+                          ha="center", va="top", fontsize=10, linespacing=1.15)
+            ax = fig.add_subplot(grid[2 + row * 5, column])
+            target, samples = contract.array(view["target"]), contract.array(view["samples"])
             if view["kind"] == "text":
                 reference = "Desired words\n" + "\n".join(view["target_labels"][:8])
                 generated = "Actual decoded output\n" + "\n".join(view["sample_labels"][:8])
@@ -262,26 +366,26 @@ def render_gif(case, records, path, *, full_budget, requested_steps, final_verdi
                 ax.set_ylim(*view["ylim"])
             if view.get("yscale"):
                 ax.set_yscale(view["yscale"])
-            ax.set_title(textwrap.fill(view["title"], 45), fontsize=10)
+            if _physical_geometry(view):
+                ax.set_aspect("equal", adjustable="box")
             ax.set_xlabel(view.get("xlabel", ""), fontsize=8)
             ax.set_ylabel(view.get("ylabel", ""), fontsize=8)
             invalid = int((~np.isfinite(samples)).sum())
             if invalid:
                 ax.text(.5, .5, f"FAIL: {invalid} nonfinite output values", transform=ax.transAxes,
                         ha="center", color="#a31436", bbox={"facecolor": "white", "alpha": .9})
-            if view.get("caption"):
-                ax.text(.5, -.23, textwrap.fill(view["caption"], 65), transform=ax.transAxes,
-                        ha="center", va="top", fontsize=7)
-        fig.suptitle(textwrap.fill(case["goal"], 43 * columns), fontsize=11, y=.98)
-        budget = "default protocol" if full_budget else f"short run; default {case['default_steps']} updates"
-        instant = "PASS" if record["passed"] else "FAIL"
-        metrics = "; ".join(f"{name}={value:.4g}" for name, value in list(record["metrics"].items())[:6])
-        footer = f"{case['id']} | update {record['step']}/{requested_steps} | metric {instant} | {budget}\n{metrics}"
+            caption_ax = fig.add_subplot(grid[4 + row * 5, column]); caption_ax.set_axis_off()
+            caption_ax.text(.5, .95, layout["captions"][frame_index][index], transform=caption_ax.transAxes,
+                            ha="center", va="top", fontsize=7, linespacing=1.15)
+        footer_ax = fig.add_subplot(grid[-1, :]); footer_ax.set_axis_off()
+        footer_y = .95
         if final_verdict is not None:
-            footer = f"Default test {final_verdict} | " + footer
-        fig.text(.02, .035, textwrap.fill(footer, 47 * columns, replace_whitespace=False), fontsize=8)
-        fig.subplots_adjust(left=.23 if columns == 1 else .085, right=.98,
-                            top=.80, bottom=.34, hspace=.85, wspace=.32)
+            footer_ax.text(0, footer_y, layout["badge"], transform=footer_ax.transAxes,
+                           va="top", fontsize=10, fontweight="bold",
+                           color="#26713d" if final_verdict == "PASS" else "#a31436")
+            footer_y -= layout["badge_height"] / layout["heights"][-1]
+        footer_ax.text(0, footer_y, layout["footer"][frame_index], transform=footer_ax.transAxes,
+                       va="top", fontsize=8, linespacing=1.15)
         fig.canvas.draw()
         pixels = np.asarray(fig.canvas.buffer_rgba())[..., :3].copy()
         frames.append(Image.fromarray(pixels).convert("P", palette=Image.Palette.ADAPTIVE))
