@@ -4,9 +4,9 @@ The released GAN v3 baseline is now executable across all **24 required toy
 tasks** through an explicit task-adapted successor. Its first measured smoke
 gate **FAILS**. Integration readiness and scientific qualification are separate.
 
-The [14-technique leaderboard](technique-inventory-unblocked.md) appends this
-measured row to the original 12 techniques and Modern GAN baseline. Previous
-publications, verdicts and costs remain unchanged under their recorded sources.
+The [current technique leaderboard](technique-inventory.md) includes this
+measured row alongside the original 12 techniques and Modern GAN baseline.
+Previously measured verdicts and costs retain their recorded sources.
 
 | Technique / cohort | Smoke | Quality | Endurance | Evidence |
 | --- | ---: | ---: | ---: | --- |
@@ -82,19 +82,18 @@ status does not imply a scientific pass.
 - [Compact observed metrics and bindings](release07-task-adaptation-run.json).
 - [Validated receipt summary](technique-receipts/df1794ebea6444c5a10c2a953843257d.json).
 - [Original envelope/source/log archive manifest](release07-task-adaptation-archive.json).
-- [Frozen 14-row source publication](release07-task-technique-inventory.md).
+- [Numerical frozen source evidence](technique-evidence/d091ec1f6b1db7cfad160b8dcd77f4b6dff432e88dab0c7421c59cff3da997dc.json).
 
 Raw envelopes, stdout, per-update streams, source snapshot and original full
 readout stay in the ignored local archive. Compact summaries cannot supply gate
 evidence. Hydrate byte-exact originals to independently regrade the recorded
-source. Composing the committed publications needs no raw hydration or training:
+source. Regenerating the current leaderboard needs no raw hydration or training:
 
 ```sh
-python reports/forge/regenerate_technique_inventory.py --root . \
-  --compose-original reports/forge/technique-inventory-expanded.json \
-  --compose-current reports/forge/release07-task-technique-inventory.json \
-  --append-candidate release07-gan-v3-task-adapted-v1 \
-  --output-prefix reports/forge/technique-inventory-unblocked
+# Regenerate the same current leaderboard from committed numerical evidence.
+python reports/forge/regenerate_technique_inventory.py
+# Independently regrade/register this source after hydrating its originals.
+python reports/forge/regenerate_technique_inventory.py --source-commit fc66d7c4
 ```
 
 Live logs remain easy to inspect:

@@ -1,14 +1,15 @@
-"""Publish compact summaries after regrading hydrated original Forge receipts.
+"""Update the single current technique leaderboard from validated evidence.
 
-Run from the repository root. Published summaries are display artifacts, never
-qualification inputs. Preserve the original request/evidence/result files and
-hydrate their byte-exact archive before regenerating in a fresh checkout.
+Default regeneration uses committed numerical snapshots and compact receipts.
+--source-commit independently regrades hydrated original receipts and registers
+new measured rows before updating the same leaderboard. No command trains.
 """
 from __future__ import annotations
 
 import argparse
 from collections import Counter
 from copy import deepcopy
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -540,31 +541,227 @@ def compose(root: Path | str = REPOSITORY_ROOT, *, original_report="reports/forg
             "qualification_reuse": False}
 
 
+EVIDENCE_MANIFEST = Path("reports/forge/technique-evidence/manifest.json")
+CURRENT_PREFIX = Path("reports/forge/technique-inventory")
+CONTRACT_CATALOGS = ("recipe_contracts", "protocol_contracts", "task_contracts", "status_reasons")
+
+
+def _snapshot(root, entry, manifest):
+    """Numerical evidence needs its own digest/proofs, not another Markdown board."""
+    path = root / entry["snapshot"]
+    if file_hash(path) != entry["json_sha256"]:
+        raise ValueError("technique evidence snapshot hash mismatch")
+    report = read_json(path)
+    copy = deepcopy(report)
+    claimed = copy.get("provenance", {}).pop("input_digest", None)
+    if claimed != stable_hash(copy):
+        raise ValueError("technique evidence input digest mismatch")
+    if report.get("publication_scope") != "frozen_source":
+        raise ValueError("technique evidence must retain a frozen source cohort")
+    if report.get("frozen_source", {}).get("commit") != entry["source_commit"]:
+        raise ValueError("technique evidence source commit mismatch")
+    for key in ("view", "view_revision", "policy_fingerprint", "tier_requirements"):
+        if manifest[key] != report.get(key):
+            raise ValueError(f"technique evidence has incompatible {key}")
+    selected = {}
+    for name, recorded_at in entry["candidates"].items():
+        matches = [row for row in report["rows"] if row.get("candidate_id") == name]
+        if len(matches) != 1:
+            raise ValueError("technique evidence needs one exact candidate/runtime row")
+        row = matches[0]
+        if row.get("attempt_ids") and not isinstance(recorded_at, str):
+            raise ValueError("measured technique evidence needs its recorded completion time")
+        _validate_published_row(root, report, row)
+        selected[name] = row
+    return report, selected
+
+
+def _current_markdown(result, root, path):
+    def cell(value):
+        return str(value if value is not None else "unknown").replace("|", "\\|").replace("\n", " ")
+    tiers = list(result["tier_requirements"])
+    lines = ["# Current Forge technique leaderboard", "",
+             "Each cell is **passes / full required total**. This is the single current inventory; "
+             "each technique retains its latest recorded scientific source and runtime.", "",
+             "| Technique | Evidence source | Exact revision / cohort | Compute | " +
+             " | ".join(f"Tier {tier}" for tier in tiers) + " | Recorded tier | Other outcomes | Paid seconds |",
+             "| --- | --- | --- | --- | " + " | ".join("---:" for _ in tiers) + " | ---: | --- | ---: |"]
+    for row in result["rows"]:
+        source = row.get("bindings", {}).get("source_digest")
+        pointer = result["evidence_sources"].get(row.get("publication_key"))
+        if pointer and source:
+            source_link = f"[`{source[:12]}`]({os.path.relpath(root / pointer['snapshot'], path.parent)})"
+        else:
+            source_link = f"`{source[:12]}` (unmeasured)" if source else "unresolved"
+        runtime = row.get("runtime_cohort", {})
+        models = sorted({p.get("model") for p in runtime.get("compute_profiles", {}).values() if p and p.get("model")})
+        compute = runtime.get("execution_backend", "unrecorded") + (" / " + ", ".join(models) if models else "")
+        counts = Counter(task["status"] for task in row.get("tasks", []) if task["status"] != "PASS")
+        others = ", ".join(f"{status} {count}" for status, count in sorted(counts.items())) or "all required tasks PASS"
+        seconds = row.get("cost", {}).get("wall_seconds")
+        revision, cohort = (str(row.get(key) or "unresolved")[:12] for key in ("candidate_revision", "cohort"))
+        values = [row["technique"], source_link, f"{revision} / {cohort}", compute,
+                  *[f"{row['tiers'][tier]['passed']}/{row['tiers'][tier]['total']}" for tier in tiers],
+                  row["qualified_tier"], others, round(seconds, 3) if seconds is not None else "unknown"]
+        lines.append("| " + " | ".join(cell(value) for value in values) + " |")
+    lines += ["", "Recorded results remain bound to their actual recipes, priors, initialization, budgets, sampling laws "
+              "and hardware. They do not pool qualification across sources or qualify the latest checkout. "
+              "The screening profile remains provisional.", "",
+              "UNKNOWN means unmeasured. Failed or blocked prerequisites stop later work; required denominators stay fixed.", "",
+              f"[Task statuses and exact bindings]({path.with_suffix('.json').name}) · "
+              f"[Evidence and archived publication identities]({os.path.relpath(root / EVIDENCE_MANIFEST, path.parent)})", "",
+              "Regenerate this same leaderboard from committed evidence, without training or raw-log hydration:", "",
+              "```sh", "python reports/forge/regenerate_technique_inventory.py", "```", "",
+              "After a new experiment, use `--source-commit <executed-commit>` to independently regrade its "
+              "hydrated original receipts and update this leaderboard. Source snapshots are provenance, not additional leaderboards.", "",
+              f"Publication input digest `{result['provenance']['input_digest']}`.", ""]
+    return "\n".join(lines)
+
+
+def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discriminator_stability",
+                    execution_backend="cuda"):
+    """Maintain one current table; registered source snapshots retain the history."""
+    root = Path(root).resolve()
+    manifest_path = root / EVIDENCE_MANIFEST
+    manifest = read_json(manifest_path) if manifest_path.is_file() else None
+    reports = []
+    if manifest is not None:
+        if manifest.get("schema_version") != 1 or manifest.get("view") != view_id:
+            raise ValueError("unsupported current technique evidence manifest/view")
+        policy_path = root / "configs/forge/views" / (view_id + ".json")
+        if policy_path.is_file():
+            policy = read_json(policy_path)
+            if (policy.get("id") != view_id or policy.get("revision") != manifest["view_revision"]
+                    or stable_hash(policy) != manifest["policy_fingerprint"]):
+                raise ValueError("current view policy differs from registered technique evidence")
+        reports = [(entry, *_snapshot(root, entry, manifest)) for entry in manifest["cohorts"]]
+    pending_snapshot = None
+    if source_commit is not None:
+        with tempfile.TemporaryDirectory(prefix="forge-technique-evidence-") as temporary:
+            metadata = regenerate(root, view_id=view_id, execution_backend=execution_backend,
+                                  source_commit=source_commit, output_prefix=Path(temporary) / "evidence")
+            report = read_json(metadata["json"])
+        candidates = {}
+        for row in report["rows"]:
+            if not row.get("attempt_ids"):
+                continue
+            times = [read_json(root / "reports/forge/attempts" / attempt / "result.json")["raw"]["finished_at"]
+                     for attempt in row["attempt_ids"]]
+            if row["candidate_id"] in candidates:
+                raise ValueError("select one runtime cohort; current rows cannot pool runtimes")
+            candidates[row["candidate_id"]] = max(times)
+        if not candidates:
+            raise ValueError("source regrade selected no measured technique rows; restore its recorded runtime/hardware")
+        if manifest is None:
+            manifest = {"schema_version": 1, **{key: report[key] for key in
+                        ("view", "view_revision", "policy_fingerprint", "tier_requirements")},
+                        "cohorts": [], "retired_publications": {}}
+        for key in ("view", "view_revision", "policy_fingerprint", "tier_requirements"):
+            if report.get(key) != manifest[key]:
+                raise ValueError(f"new technique evidence has incompatible {key}")
+        data = _json_text(report)
+        relative = EVIDENCE_MANIFEST.parent / (report["provenance"]["input_digest"] + ".json")
+        entry = {"snapshot": relative.as_posix(), "json_sha256": hashlib.sha256(data.encode()).hexdigest(),
+                 "source_commit": metadata["source_commit"], "candidates": candidates}
+        # Keep exact evidence across CPU/GPU models and other runtime cohorts,
+        # including cohorts from the same source commit. Regrading an identical
+        # snapshot is idempotent; a new snapshot never retires another runtime.
+        if entry not in manifest["cohorts"]:
+            manifest["cohorts"].append(entry)
+        selected = {row["candidate_id"]: row for row in report["rows"] if row["candidate_id"] in candidates}
+        for row in selected.values():
+            _validate_published_row(root, report, row)
+        if not any(old == entry for old, _, _ in reports):
+            reports.append((entry, report, selected))
+        pending_snapshot = root / relative, data
+    if manifest is None:
+        raise ValueError("no registered technique evidence; use --source-commit after a completed experiment")
+    candidates = {path.stem for path in (root / "configs/forge/ideas").glob("*.json")}
+    selected = {}
+    for entry, report, rows in reports:
+        for name, row in rows.items():
+            backend = row.get("runtime_cohort", {}).get("execution_backend", report.get("execution_backend"))
+            if name not in candidates or (execution_backend is not None and backend != execution_backend):
+                continue
+            key = name, backend
+            rank = entry["candidates"][name] or ""
+            previous = selected.get(key)
+            if previous is None or rank > previous[0]:
+                selected[key] = rank, entry, report, deepcopy(row)
+            elif rank == previous[0] and any(row.get(field) != previous[3].get(field)
+                                            for field in ("candidate_revision", "cohort", "runtime_cohort")):
+                raise ValueError("ambiguous latest recorded technique cohort")
+    missing = candidates - {key[0] for key in selected}
+    live = None
+    if missing:
+        with tempfile.TemporaryDirectory(prefix="forge-technique-current-") as temporary:
+            metadata = write_report(root, view_id, execution_backend=execution_backend,
+                                    output_prefix=Path(temporary) / "current")
+            live = read_json(metadata["json"])
+        for key in ("view", "view_revision", "policy_fingerprint", "tier_requirements"):
+            if live.get(key) != manifest[key]:
+                raise ValueError(f"current declarations have incompatible {key}; update the evidence view explicitly")
+        for row in live["rows"]:
+            if row["candidate_id"] in missing:
+                # Measured rows must first be frozen and registered, so a later
+                # code change cannot silently erase their published results.
+                if row.get("attempt_ids"):
+                    raise ValueError("register new measured technique evidence with --source-commit")
+                row.setdefault("bindings", {})["source_origin_commit"] = None
+                backend = row.get("runtime_cohort", {}).get("execution_backend")
+                selected[row["candidate_id"], backend] = "", None, live, deepcopy(row)
+    from experiments.forge.technique_board import DEFAULT_LABELS
+    result = {"schema_version": 1, "reducer_version": "forge-current-technique-inventory-v1",
+              "publication_scope": "current_technique_inventory", "qualification_reuse": False,
+              "qualification_input": False, **{key: manifest[key] for key in
+              ("view", "view_revision", "policy_fingerprint", "tier_requirements")},
+              "execution_backend": execution_backend, "rows": [], "evidence_sources": {}}
+    for _, entry, report, row in selected.values():
+        if entry is not None:
+            row["publication_key"] = entry["json_sha256"]
+            result["evidence_sources"][row["publication_key"]] = deepcopy(entry)
+        else:
+            row.pop("publication_key", None)
+        row.update(qualification_reuse=False, qualification_input=False,
+                   technique=DEFAULT_LABELS.get(row["candidate_id"], row.get("technique", row["candidate_id"])))
+        result["rows"].append(row)
+    result["rows"].sort(key=lambda row: (-row["qualified_tier"], row["technique"], row.get("cohort") or ""))
+    for catalog in CONTRACT_CATALOGS:
+        combined = {}
+        for report in [data_report for _, data_report, _ in reports] + ([live] if live else []):
+            for digest, contract in report.get(catalog, {}).items():
+                if digest != stable_hash(contract):
+                    raise ValueError(f"invalid {catalog} identity in technique evidence")
+                if digest in combined and combined[digest] != contract:
+                    raise ValueError("conflicting scientific contract identities")
+                combined[digest] = deepcopy(contract)
+        result[catalog] = dict(sorted(combined.items()))
+    result["provenance"] = {"publication_reducer_sha256": file_hash(Path(__file__)),
+                            "evidence_manifest_sha256": stable_hash(manifest),
+                            "selected_rows_sha256": stable_hash(result["rows"])}
+    result["provenance"]["input_digest"] = stable_hash(result)
+    json_path, markdown_path = root / CURRENT_PREFIX.with_suffix(".json"), root / CURRENT_PREFIX.with_suffix(".md")
+    markdown = _current_markdown(result, root, markdown_path)
+    # Validate all inputs before changing evidence registry or public outputs.
+    if pending_snapshot:
+        _write_changed(*pending_snapshot)
+        _write_changed(manifest_path, json.dumps(manifest, sort_keys=True, indent=2) + "\n")
+    _write_changed(json_path, _json_text(result))
+    _write_changed(markdown_path, markdown)
+    return {"report": str(markdown_path), "json": str(json_path), "rows": len(result["rows"]),
+            "input_digest": result["provenance"]["input_digest"], "qualification_reuse": False}
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, default=REPOSITORY_ROOT)
     parser.add_argument("--goal", default="discriminator_stability")
     parser.add_argument("--device", choices=("cpu", "cuda", "all"), default="cuda")
-    parser.add_argument("--output-prefix", type=Path, default=Path("reports/forge/technique-inventory"))
     parser.add_argument("--source-commit", help="reconstruct and grade an exact recorded Git source cohort, independently of live HEAD")
-    parser.add_argument("--compose-original", type=Path, help="original frozen publication JSON to retain byte-exact")
-    parser.add_argument("--compose-current", type=Path, help="new publication JSON containing the appended technique")
-    parser.add_argument("--append-candidate", default="r3gan-stacked-training-toy-v1")
     args = parser.parse_args(argv)
-    if args.compose_original or args.compose_current:
-        if not args.compose_original or not args.compose_current or args.source_commit:
-            parser.error("composition requires both --compose-original and --compose-current, without --source-commit")
-        # The existing default is an input publication, so use a distinct
-        # composition destination unless the caller supplies another prefix.
-        prefix = args.output_prefix
-        if prefix == Path("reports/forge/technique-inventory"):
-            prefix = Path("reports/forge/technique-inventory-expanded")
-        print(_json_text(compose(args.root, original_report=args.compose_original, current_report=args.compose_current,
-                                 candidate_id=args.append_candidate, output_prefix=prefix)), end="")
-        return
-    print(_json_text(regenerate(args.root, view_id=args.goal,
+    print(_json_text(publish_current(args.root, view_id=args.goal,
                                 execution_backend=None if args.device == "all" else args.device,
-                                output_prefix=args.output_prefix, source_commit=args.source_commit)), end="")
+                                source_commit=args.source_commit)), end="")
 
 
 if __name__ == "__main__":

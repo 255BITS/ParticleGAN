@@ -1,0 +1,133 @@
+{
+  "cohorts": [
+    {
+      "candidates": {
+        "atlas": null,
+        "e22": null,
+        "forge-no-critic-penalty": "2026-10-01T23:28:24.976+00:00",
+        "forge-onboarding-anchor-ablation": "2026-10-01T23:29:18.355+00:00",
+        "k3p": "2026-10-01T23:30:07.690+00:00",
+        "k3p-a2-off-native-diagnostic": "2026-10-01T23:30:56.830+00:00",
+        "k3p-bcap-matched-v1": "2026-10-01T23:36:25.006+00:00",
+        "k3p-no-output-noise-diagnostic": "2026-10-01T23:36:15.252+00:00",
+        "k3p-r1r2-matched-v1": "2026-10-01T23:36:23.039+00:00",
+        "ka2": "2026-10-01T23:36:30.561+00:00",
+        "release07-gan-v3-cloud-v1": null,
+        "release07-gan-v3-mog-v1": null
+      },
+      "json_sha256": "76a2d43aaebd7c23ef270f0c817c3501ede65c3c94c965ee408e7d0467f91ccb",
+      "snapshot": "reports/forge/technique-evidence/bb31b3f77bee0199fa51df84856dd04171fb58baca7c9328270f3e2a7c67d62d.json",
+      "source_commit": "b04b1b27296b0cba11b70eb9693fbe9200ed38a5"
+    },
+    {
+      "candidates": {
+        "r3gan-stacked-training-toy-v1": "2026-10-02T01:15:47.938+00:00"
+      },
+      "json_sha256": "19ba51024a061a0f2b216be107bfe4a1d38fe63faf4d5bfcb6255589a4b4f9c5",
+      "snapshot": "reports/forge/technique-evidence/8bfb0b738e288fbe9ca2e055539469e52c34b27adeda9901b317d44faf07ea2f.json",
+      "source_commit": "77a373648e3a7a5f1923015fa2097ec9e0ec877f"
+    },
+    {
+      "candidates": {
+        "release07-gan-v3-task-adapted-v1": "2026-10-02T03:48:19.023+00:00"
+      },
+      "json_sha256": "d527be92dd8b7258c0577dbaccc70700b80e87f058d034fca7afe03b81ad5975",
+      "snapshot": "reports/forge/technique-evidence/d091ec1f6b1db7cfad160b8dcd77f4b6dff432e88dab0c7421c59cff3da997dc.json",
+      "source_commit": "fc66d7c49259a8977cbb4478b20dad1ffcc6c1cb"
+    }
+  ],
+  "note": "Numerical evidence/provenance only. The sole current technique leaderboard is reports/forge/technique-inventory.md; snapshots cannot qualify the latest checkout.",
+  "policy_fingerprint": "e53331361a8fd5c55096494d259ddcd95a99f3012b7bb74e5c972f9dd466531f",
+  "retired_publications": {
+    "reports/forge/leaderboards/discriminator_stability.md": {
+      "commit": "acd48888554050ff32b5b0a23b8d9a1395c559f5",
+      "git_blob": "048487dfe2f4e2590161937c6600a6a8fa63ec2a",
+      "sha256": "36c04dde548eb7678c5e4f526bd64489db59024c85746785742cf33bc801f625"
+    },
+    "reports/forge/r3gan-technique-inventory.json": {
+      "commit": "acd48888554050ff32b5b0a23b8d9a1395c559f5",
+      "git_blob": "968f3f0379ed1f1f72e021163dd9d0d5417a79ef",
+      "sha256": "19ba51024a061a0f2b216be107bfe4a1d38fe63faf4d5bfcb6255589a4b4f9c5"
+    },
+    "reports/forge/r3gan-technique-inventory.md": {
+      "commit": "acd48888554050ff32b5b0a23b8d9a1395c559f5",
+      "git_blob": "8c7bb10dcd8d1cc9808e93cee622608ecd493620",
+      "sha256": "cf8c818590e6cfeda12e5ead2a6eceb97799359612a67881cd34d1342ed8d803"
+    },
+    "reports/forge/release07-task-technique-inventory.json": {
+      "commit": "acd48888554050ff32b5b0a23b8d9a1395c559f5",
+      "git_blob": "a85f47a2d9236535b69602fd86cf7cea952e22a9",
+      "sha256": "d527be92dd8b7258c0577dbaccc70700b80e87f058d034fca7afe03b81ad5975"
+    },
+    "reports/forge/release07-task-technique-inventory.md": {
+      "commit": "acd48888554050ff32b5b0a23b8d9a1395c559f5",
+      "git_blob": "c053c3916cd62ed72d68e07fdca54a4c14e1b6dc",
+      "sha256": "23fc835eecfa23592c178a4280762dec98009294c4c97d626b144a3ce0aca3d2"
+    },
+    "reports/forge/technique-inventory-expanded.json": {
+      "commit": "acd48888554050ff32b5b0a23b8d9a1395c559f5",
+      "git_blob": "a8b3e48b976d78179bd6980b453731ce6d452929",
+      "sha256": "d095d5cf3fc7e44103a397495f6087d80ca964b0089673d21fd5548fb6b1a119"
+    },
+    "reports/forge/technique-inventory-expanded.md": {
+      "commit": "acd48888554050ff32b5b0a23b8d9a1395c559f5",
+      "git_blob": "191eada7a9fc64ae01dcb03213c929251bdcc5b5",
+      "sha256": "019936314df6173da3d59fc5809876312a30e04f21b571d8483ffa4843b48920"
+    },
+    "reports/forge/technique-inventory-unblocked.json": {
+      "commit": "acd48888554050ff32b5b0a23b8d9a1395c559f5",
+      "git_blob": "61db6dbfc74faa1443886d806850071b1e35c37c",
+      "sha256": "d49551bff49db87fdd4cfa7751f8a2b94ab8af1edf934a5e0342cb8aded23af4"
+    },
+    "reports/forge/technique-inventory-unblocked.md": {
+      "commit": "acd48888554050ff32b5b0a23b8d9a1395c559f5",
+      "git_blob": "56b5621a1bf19f63211a27408048c5e4e4d9b43c",
+      "sha256": "f9e095e343a04801ea611a24f4c533c8d1978f61b0ccbd1754c5091753efa105"
+    },
+    "reports/forge/technique-inventory.json": {
+      "commit": "acd48888554050ff32b5b0a23b8d9a1395c559f5",
+      "git_blob": "191004fad0fab10a01b8f762bbc7500989f797b2",
+      "sha256": "76a2d43aaebd7c23ef270f0c817c3501ede65c3c94c965ee408e7d0467f91ccb"
+    },
+    "reports/forge/technique-inventory.md": {
+      "commit": "acd48888554050ff32b5b0a23b8d9a1395c559f5",
+      "git_blob": "c2c44dca51cfda773a0ea307b7de9efdcf2c0879",
+      "sha256": "ef4fdcbe0bc4546d914e51a9adb306a0a6c3b5b5297212740d34556305f0f036"
+    }
+  },
+  "schema_version": 1,
+  "tier_requirements": {
+    "1": [
+      "two_pole",
+      "unused_token_hold",
+      "ae_gan_hold"
+    ],
+    "2": [
+      "trajectory",
+      "residual_student",
+      "unipolar",
+      "cover_leftover",
+      "mid_scale_identity",
+      "mode_hold",
+      "vector_two_broad",
+      "vector_unequal_mass",
+      "vector_unequal_width",
+      "vector_anisotropic",
+      "vector_overlap",
+      "vector_spiral",
+      "img_stripes2",
+      "img_bars4",
+      "img_blobs4",
+      "img_intensity2",
+      "grid100",
+      "rotated100",
+      "staggered100"
+    ],
+    "3": [
+      "ring_hold",
+      "ring_extension"
+    ]
+  },
+  "view": "discriminator_stability",
+  "view_revision": 2
+}

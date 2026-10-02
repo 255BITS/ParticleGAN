@@ -2,10 +2,10 @@
 
 The corrected baseline is configurable and has been run through Forge's ordinary
 gates. It **fails the first two-pole movement gate** after all 80 declared updates.
-The [expanded 13-technique leaderboard](technique-inventory-expanded.md) preserves
-the original 12 techniques and appends this separate training-recipe adaptation.
-The [full baseline-source inventory](r3gan-technique-inventory.md) retains every
-technique's complete 3/19/2 required denominators.
+The [current technique leaderboard](technique-inventory.md) includes this
+separate training-recipe adaptation with complete 3/19/2 required denominators.
+Its [numerical source snapshot](technique-evidence/8bfb0b738e288fbe9ca2e055539469e52c34b27adeda9901b317d44faf07ea2f.json)
+retains the frozen evidence and recipe bindings as provenance.
 
 | Technique / recorded source | Tier 1 passes/total | Tier 2 passes/total | Tier 3 passes/total | Measured FAIL | Remaining UNKNOWN |
 | --- | ---: | ---: | ---: | ---: | ---: |
@@ -83,15 +83,10 @@ from the repository root to hydrate ignored evidence. Regrading also requires
 the recorded runtime/hardware. No bulk logs or state dumps are committed.
 
 ```sh
-# Regrade recorded science after hydrating the original evidence.
-.venv/bin/python reports/forge/regenerate_technique_inventory.py --device cuda \
-  --source-commit 77a37364 --output-prefix reports/forge/r3gan-technique-inventory
-# Compose the 13-row display from committed publications; no training/hydration.
-.venv/bin/python reports/forge/regenerate_technique_inventory.py --root . \
-  --compose-original reports/forge/technique-inventory.json \
-  --compose-current reports/forge/r3gan-technique-inventory.json \
-  --append-candidate r3gan-stacked-training-toy-v1 \
-  --output-prefix reports/forge/technique-inventory-expanded
+# Regenerate the single current leaderboard; no training/hydration.
+.venv/bin/python reports/forge/regenerate_technique_inventory.py
+# Independently regrade this source after hydrating its original evidence.
+.venv/bin/python reports/forge/regenerate_technique_inventory.py --source-commit 77a37364
 # Tail the local campaign logs.
 .venv/bin/python -m experiments.forge logs --follow --campaign r3gan-stacked-training-toy-v1
 ```

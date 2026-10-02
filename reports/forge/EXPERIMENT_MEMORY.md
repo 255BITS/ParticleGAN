@@ -8,7 +8,7 @@ Records: 253. Inventory coverage: complete. Unresolved import items: 7.
 
 - [adaptation](leaderboards/adaptation.md)
 - [clockfree_continuous](leaderboards/clockfree_continuous.md)
-- [discriminator_stability](leaderboards/discriminator_stability.md)
+- [discriminator_stability](technique-inventory.md)
 - [formulation_comparison](leaderboards/formulation_comparison.md)
 - [host_profile_transfer](leaderboards/host_profile_transfer.md)
 - [quality_coverage](leaderboards/quality_coverage.md)
@@ -4081,4 +4081,4 @@ This technique failed the full 80-update two_pole smoke gate: {'grad_med': 0.063
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v1`; input digest `c03579e970baa46c950c48cd54e8137cb24b28fb3de221fcd896c3636439c295`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v1`; input digest `dff9e26751acb7340ed99b0144578dc48488e688e78b7e0f7a4f12fbf25806a0`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

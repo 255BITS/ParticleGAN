@@ -61,12 +61,14 @@ python -m experiments.forge logs --follow --campaign release07-gan-v3-task-adapt
 
 Record a readout and publish the exact executed source cohort using
 `reports/forge/regenerate_technique_inventory.py --source-commit <executed-commit>`.
-Use a new output prefix when the live source changes. Its `--compose-original`
-option accepts a previous composed inventory as well as a frozen publication;
-`--compose-current` and `--append-candidate` append one independently graded row.
-Recursive publication hashes, compact receipt proofs and original scientific
-row contents are checked before writing. This display regenerates without
-training or raw-log hydration and does not pool qualification across cohorts.
+This registers the new measured rows as numerical provenance and updates
+`reports/forge/technique-inventory.md`, the single current leaderboard. Default
+regeneration uses `python reports/forge/regenerate_technique_inventory.py`.
+It selects the latest recorded result per declared technique, preserves exact
+source/runtime bindings, and discovers new unmeasured idea cards. Snapshot
+hashes, compact receipt proofs and fixed tier denominators are checked before
+writing. Regeneration needs no raw-log hydration or training and does not pool
+qualification across cohorts. No versioned leaderboard files are created.
 
 Raw execution envelopes, per-update streams and source snapshots remain under
 ignored `runs/forge/` or an artifact archive. Commit the compact readout, final

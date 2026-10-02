@@ -1,7 +1,9 @@
 # Technique inventory through ordinary Forge tiers
 
-The [generated leaderboard](technique-inventory.md) covers all **12 technique
-declarations at frozen implementation `b04b1b27`**. Matched BCap leads this exact cohort: **3/3 smoke,
+This readout covers all **12 technique declarations at frozen implementation
+`b04b1b27`**. Their results remain in the [current leaderboard](technique-inventory.md)
+alongside later techniques; the [numerical source snapshot](technique-evidence/bb31b3f77bee0199fa51df84856dd04171fb58baca7c9328270f3e2a7c67d62d.json)
+preserves this original cohort. Matched BCap leads this exact cohort: **3/3 smoke,
 5/19 quality, 0/2 endurance**, attaining tier 1 before failing mode hold.
 Matched R1/R2, K3P, KA2 and four K3P ablations stop at the first smoke task.
 E22, Atlas and both released GAN v3 host variants are blocked before training.
@@ -75,9 +77,7 @@ an immutable campaign requires a new ID and explicit budgets.
 ```sh
 python -m experiments.forge inventory plan --through-tier 3
 python -m experiments.forge inventory run --through-tier 3 --gpus 0,1
-python reports/forge/regenerate_technique_inventory.py --device cuda \
-  --source-commit b04b1b27 \
-  --output-prefix reports/forge/technique-inventory
+python reports/forge/regenerate_technique_inventory.py
 python -m experiments.forge logs --follow --campaign technique-inventory-v1
 ```
 
@@ -100,7 +100,9 @@ costs and provenance; they are projections and never qualification inputs.
 Compact readout records retain exact attempt coverage and result hashes, with
 the original full readout bytes preserved in the archive.
 
-For independent regeneration in another checkout, obtain the exact local
+Ordinary regeneration reads committed numerical evidence and compact receipts
+and updates the same current leaderboard. No raw-log hydration is needed.
+For independent regrading in another checkout, obtain the exact local
 archive, verify its hash against the manifest, and extract it from the repository
 root. The original envelopes are restored into ignored paths; full archived
 readouts remain under `runs/`. Use the recorded implementation, runtime and
@@ -109,17 +111,16 @@ The later merge of `develop` adds reporting source and changes Forge's broad
 source identity. The replay option reconstructs and verifies the old implementation
 in a separate process; its outcomes do not qualify the merged checkout. Current
 boards retain these outcomes as pinned evidence. No experiments were repeated for
-that merge. Future current publications omit `--source-commit` and use a new prefix.
+that merge. New measured source cohorts use `--source-commit <executed-commit>`
+to update the same leaderboard; numerical snapshots retain provenance.
 
 ```sh
 sha256sum runs/forge/technique-inventory-v1/receipts-and-source.tar.gz
 tar -xzf runs/forge/technique-inventory-v1/receipts-and-source.tar.gz
-python reports/forge/regenerate_technique_inventory.py --device cuda \
-  --source-commit b04b1b27 \
-  --output-prefix reports/forge/technique-inventory
+python reports/forge/regenerate_technique_inventory.py --source-commit b04b1b27
 ```
 
-Regeneration validates the original certificates and regrades compatible
+Independent regrading validates the original certificates and regrades compatible
 evidence without training. It refuses to replace a measured report when its
 original envelopes are missing. Raw stdout, per-update streams, checkpoints
 and state dumps remain local or in the archive; no ignored logs were force-added.

@@ -332,8 +332,11 @@ def write_report(root: Path | str, view_id: str = "discriminator_stability", *,
     prefix = Path(output_prefix) if output_prefix is not None else Path("reports/forge/technique-inventory")
     if not prefix.is_absolute():
         prefix = root / prefix
-    result = technique_board(root, view_id, execution_backend=execution_backend, labels=labels)
     json_path, markdown_path = Path(str(prefix) + ".json"), Path(str(prefix) + ".md")
+    if json_path.is_file() and read_json(json_path).get("publication_scope") == "current_technique_inventory":
+        raise ValueError("registered current leaderboard must be updated with "
+                         "python reports/forge/regenerate_technique_inventory.py")
+    result = technique_board(root, view_id, execution_backend=execution_backend, labels=labels)
     markdown = render_markdown(result, json_link=json_path.name,
                                repo_link_prefix=os.path.relpath(root.resolve(), markdown_path.parent.resolve()))
     if not json_path.exists() or read_json(json_path) != result:
