@@ -104,3 +104,25 @@ def test_legacy_and_current_critic_features_stack_losslessly_by_context(shape):
     assert "two adjacent grayscale feature rows; first 8 contexts" in prepared["caption"]
     assert annotations[0]["lossless_feature_layout"]["values_modified"] is False
     assert api_reframe._observation_identity([record])==original
+
+
+def test_feature_matrix_has_readable_independent_axes_but_images_keep_pixel_aspect(tmp_path,monkeypatch):
+    matrix=np.arange(4096,dtype=np.float32).reshape(1024,4)
+    pixels=np.ones((2,1,8,8),dtype=np.float32)
+    records=[dict(step=28000,passed=False,metrics={"conditional_cdf_error":.5},failed_bounds=["cdf"],
+        views=[dict(kind="image",title="Action and successor feature rows",target=matrix,samples=matrix+1),
+               dict(kind="image",title="Physical image pixels",target=pixels,samples=pixels)])]
+    before=api_reframe._observation_identity(records)
+    aspects=[]
+    actual_close=plt.close
+    def close(fig=None):
+        if isinstance(fig,Figure):
+            aspects.extend(ax.get_aspect() for ax in fig.axes if ax.images)
+        actual_close(fig)
+    monkeypatch.setattr(plt,"close",close)
+    result=api_run.render_gif(dict(id="matrix-render-control",goal="Keep every conditional feature row readable",default_steps=28000),
+        records,tmp_path/"matrix.gif",full_budget=True,requested_steps=28000,final_verdict="FAIL")
+    assert aspects==["auto",1.]
+    assert api_reframe._observation_identity(records)==before
+    hint=result["goal_annotations"][0]["feature_matrix"]
+    assert hint["target_shape"]==[1024,4] and hint["values_modified"] is False

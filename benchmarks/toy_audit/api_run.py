@@ -220,6 +220,13 @@ def _display_views(case, records, reference_bounds, annotations):
                 annotations.append({"step": record["step"], "view": index,
                                     "reference_camera": {"xlim": view["xlim"], "ylim": view["ylim"]},
                                     "outside_view_states": outside, "retained_view_states": len(points)})
+            if view["kind"] == "image" and target.ndim == samples.ndim == 2:
+                view["caption"] = (view.get("caption", "") +
+                    f" Feature matrix: all {len(target)} reference and {len(samples)} output rows are retained; columns are feature coordinates, not image pixels.")
+                annotations.append({"step": record["step"], "view": index,
+                                    "feature_matrix": {"target_shape": list(target.shape),
+                                                       "sample_shape": list(samples.shape),
+                                                       "aspect": "auto", "values_modified": False}})
             view.update(target=target, samples=samples)
             views.append(view)
         prepared.append(views)
@@ -316,7 +323,8 @@ def render_gif(case, records, path, *, full_budget, requested_steps, final_verdi
                     vmin, vmax = view.get("vmin", 0), view.get("vmax", 1)
                     grid = np.clip((grid - vmin) / max(vmax - vmin, 1e-12), 0, 1)
                 ax.imshow(np.ma.masked_invalid(grid), cmap="gray", vmin=view.get("vmin", 0),
-                          vmax=view.get("vmax", 1), interpolation="nearest")
+                          vmax=view.get("vmax", 1), interpolation="nearest",
+                          aspect="auto" if target.ndim == samples.ndim == 2 else "equal")
                 ax.set_xticks([])
                 ax.set_yticks([top.shape[0] / 2, top.shape[0] + 1 + bottom.shape[0] / 2],
                               view.get("row_labels", ["Desired", "API output"]), fontsize=8)
