@@ -48,6 +48,8 @@ def _validate_optimizer_state(optimizer, state):
     moment shapes. A copied optimizer alone can consequently accept a state
     that fails on the next update after live weights have already been loaded.
     """
+    from .recipe_schedules import validate_plain_adam_state
+    validate_plain_adam_state(optimizer, state)
     ema_critic = getattr(optimizer, "ema_critic", None)
     if ema_critic is not None:
         saved_ema = state.get("regularizer", {}).get("ema") if isinstance(state, dict) else None
@@ -611,6 +613,8 @@ class UpdatePolicy:
             self.controller.observe_game(record)
         if self.birth_death is not None and self.routed_control is None:
             self.birth_death.observe_real(real)
+        from .recipe_schedules import apply_training_schedules
+        apply_training_schedules(self.completed_steps, recipe, self.optimizers, self.penalty)
         if self.lr_settle is None:
             network, prior_scale = (self.schedule(self.completed_steps, recipe)
                                     if self.controller is None else self.controller.observe_real(real))

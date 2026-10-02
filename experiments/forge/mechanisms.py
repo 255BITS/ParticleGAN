@@ -106,7 +106,8 @@ class MechanismAudit:
         self.rows = {name: dict(requested=False, enabled=False, calls=0, eligible=0, applied=0)
                      for name in NAMES}
         penalty = self.rows["critic_penalty"]
-        penalty.update(requested=recipe.reg_coeff > 0, enabled=recipe.reg_coeff > 0)
+        penalty_requested = max(recipe.reg_coeff, recipe.reg_coeff_end or 0.) > 0
+        penalty.update(requested=penalty_requested, enabled=penalty_requested)
         anchor_requested = (recipe.reg_arm in (None, "k3p") and recipe.reg_coeff > 0
                             and recipe.reg_anchor_weight > 0)
         self.rows["critic_anchor"].update(requested=anchor_requested,
