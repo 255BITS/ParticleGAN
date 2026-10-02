@@ -57,6 +57,9 @@ def adapter_preflight(task, candidate, *, root=None):
     except ValueError as error:
         return [str(error)]
     adapter = task["adapter"]
+    if adapter == "word_joint":
+        from .word_adapter import word_preflight
+        return word_preflight(task, candidate, root=root)
     supported = {"transfer_behavior", "transfer_vector", "transfer_image", "native100",
                  "native100_continuation", "ring_endurance", "clockfree_audit", "paired_adaptation"}
     if adapter not in supported:
@@ -481,6 +484,9 @@ def _dispatch_task(request: dict, job: dict, output_dir: Path, device: str) -> d
     """Dispatch frozen task definitions; unsupported capabilities fail before work."""
     task = request["tasks"][job["task_id"]]
     adapter = task["adapter"]
+    if adapter == "word_joint":
+        from .word_adapter import run_word
+        return run_word(request, task, output_dir, device)
     if adapter == "transfer_behavior":
         if task["execution"].get("host") == "mode_hold":
             return _ring(request, task, output_dir, device)

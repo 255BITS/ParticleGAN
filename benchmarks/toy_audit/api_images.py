@@ -1048,7 +1048,7 @@ def _join_words(words, latent):
 
 class WordFixture:
     """Joint BiGAN word/inverse question through matched public primitives."""
-    def __init__(self, *, device, seed, recipe_name, max_steps):
+    def __init__(self, *, device, seed, recipe_name, max_steps, components=None):
         self.case, self.device, self.seed = _word_metadata(), torch.device(device), seed
         self.max_steps = self.case["default_steps"] if max_steps is None else max_steps
         if type(self.max_steps) is not int or self.max_steps < 1 or type(seed) is not int or seed < 0:
@@ -1056,15 +1056,27 @@ class WordFixture:
         overrides = dict(self.case["api_overrides"])
         if recipe_name not in ("atlas", "e22", "e22_routed"):
             overrides["total_steps"] = self.case["recipe_schedule_horizon"]
-        self.recipe = get_recipe(recipe_name, **overrides)
+        self.recipe = get_recipe(recipe_name, **overrides) if components is None else components.recipe
+        if (self.recipe.model != "gan" or self.recipe.conditioning != "scalar"
+                or self.recipe.encoder_mode != "none"
+                or (self.recipe.num_particles, self.recipe.z_dim, self.recipe.batch_size) != (5, 2, 256)):
+            raise ValueError("joint word host requires its five-row, 2D, batch-256 scalar joint objective")
         if self.recipe.row_policy != "independent":
             raise ValueError("joint word host does not implement a dense routed bank")
         devices = [self.device.index if self.device.index is not None else torch.cuda.current_device()] if self.device.type == "cuda" else []
         with torch.random.fork_rng(devices=devices):
-            self.G, self.D, self.E = WordGenerator().to(device), WordJointCritic().to(device), WordEncoder().to(device)
-            self.prior = self.recipe.make_prior().to(device)
-            for offset, module in enumerate((self.G, self.D, self.E, self.prior)):
-                init.deterministic_orthogonal_(module, seed=seed + offset)
+            if components is None:
+                self.G, self.D, self.E = WordGenerator().to(device), WordJointCritic().to(device), WordEncoder().to(device)
+                self.prior = self.recipe.make_prior().to(device)
+                for offset, module in enumerate((self.G, self.D, self.E, self.prior)):
+                    init.deterministic_orthogonal_(module, seed=seed + offset)
+            else:
+                self.G, self.D, self.E = [components.construct(factory, component=role).to(device)
+                    for factory, role in ((WordGenerator, "generator"), (WordJointCritic, "discriminator"),
+                                          (WordEncoder, "encoder"))]
+                for module, role in ((self.G, "generator"), (self.D, "discriminator"), (self.E, "encoder")):
+                    components.initialize(module, component=role)
+                self.prior = components.build_prior()
             # Homogeneous roles are required by the public policy. This splits
             # the old G/E group without changing its optimizer settings.
             self.opt_g = self.recipe.make_generator_optimizer([
@@ -1075,13 +1087,22 @@ class WordFixture:
             self.opt_d = self.recipe.make_critic_optimizer(self.D, ema_critic=deepcopy(self.D))
             self.loss = self.recipe.make_loss()
             self.spread = self.recipe.make_prior_regularizer(weight=1.)
-            self.penalty = self.recipe.make_critic_penalty(self.opt_d)
+            self.penalty = self.recipe.make_critic_penalty(self.opt_d, collect_stats=components is not None)
+            policy_streams = None if components is None else {
+                "latent_generator": components.streams.generator("prior", component="latent", purpose="indices"),
+                "penalty_generator": components.streams.generator("noise", component="penalty", purpose="training"),
+                "eval_generator": components.streams.generator("eval", component="sampler", purpose="samples"),
+                "noise_generator": components.streams.generator("noise", component="generator", purpose="output"),
+            }
             self.policy = UpdatePolicy(self.recipe, self.G, self.D, prior=self.prior, encoder=self.E,
                                        generator_optimizer=self.opt_g, critic_optimizer=self.opt_d,
-                                       row_semantics="conditional", seed=seed, penalty=self.penalty)
-            self.noisy_critic = InputNoise(self.D, generator=self.policy.noise_generator)
+                                       row_semantics="conditional", seed=seed, penalty=self.penalty, streams=policy_streams)
+            input_stream = self.policy.noise_generator if components is None else components.streams.generator(
+                "noise", component="critic", purpose="input")
+            self.noisy_critic = InputNoise(self.D, generator=input_stream)
         self.words = word_bank(device=device)
-        self.data_generator = torch.Generator(device=device).manual_seed(seed + 101)
+        self.data_generator = (torch.Generator(device=device).manual_seed(seed + 101) if components is None
+            else components.streams.generator("data", component="target", purpose="training"))
         self.api_components = ("get_recipe", "Recipe.make_prior", "init.deterministic_orthogonal_",
                                "Recipe.make_generator_optimizer", "Recipe.make_critic_optimizer",
                                "Recipe.make_loss", "Recipe.make_critic_penalty", "UpdatePolicy",
@@ -1139,14 +1160,15 @@ class WordFixture:
                 parameter.requires_grad_(flag)
 
     @torch.no_grad()
-    def observe(self, n=1024, seed=DEFAULT_SEED + 1000):
+    def observe(self, n=1024, seed=DEFAULT_SEED + 1000, *, generator=None, reconstruction_generator=None):
         if type(n) is not int or n < 1 or type(seed) is not int or seed < 0:
             raise ValueError("observation size/seed must be positive/nonnegative integers")
         served = self.policy.served_model()
-        stream = torch.Generator(device=self.device).manual_seed(seed)
+        stream = torch.Generator(device=self.device).manual_seed(seed) if generator is None else generator
         latent, rows = served.prior.sample(n, generator=stream)
         generated = served.generate(latent, generator=stream, output_noise=False, rows=rows)
-        reconstruction_stream = torch.Generator(device=self.device).manual_seed(seed + 1)
+        reconstruction_stream = (torch.Generator(device=self.device).manual_seed(seed + 1)
+                                 if reconstruction_generator is None else reconstruction_generator)
         encoded = served.encoder(self.words)
         reconstruction = served.generate(encoded, generator=reconstruction_stream, output_noise=False)
         result = score_words(generated.cpu().numpy(), reconstruction.cpu().numpy())

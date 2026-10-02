@@ -2,7 +2,7 @@
 
 Current task assignments, grouped by goal view and qualification tier. Required tasks gate progression; ranking and diagnostic tasks retain their declared roles.
 
-Catalog: **48 tasks**; **45 assigned** to at least one view; **3 unassigned**. Showing **7/7 views**.
+Catalog: **49 tasks**; **46 assigned** to at least one view; **3 unassigned**. Showing **8/8 views**.
 
 Regenerate from the repository root with `python -m experiments.forge experiments-by-tier --output reports/forge/EXPERIMENTS_BY_TIER.md`. Add `--json` for machine-readable output (use a `.json` output path when saving). Regeneration reads declarations and published artifacts and launches no training.
 
@@ -31,6 +31,7 @@ This report follows changing declarations and published evidence; it selects no 
 | [adaptation](../../configs/forge/views/adaptation.json) | 2 | 3 required | 19 required | 1 required | provisional |
 | [clockfree_continuous](../../configs/forge/views/clockfree_continuous.json) | 2 | 4 required | 19 required | 6 required | provisional |
 | [discriminator_stability](../../configs/forge/views/discriminator_stability.json) | 2 | 3 required | 19 required | 2 required | provisional |
+| [five_word_joint](../../configs/forge/views/five_word_joint.json) | 1 | 3 required | 1 required | 0 tasks | provisional |
 | [formulation_comparison](../../configs/forge/views/formulation_comparison.json) | 1 | 3 required | 19 required, 15 diagnostic | 2 required | provisional |
 | [host_profile_transfer](../../configs/forge/views/host_profile_transfer.json) | 4 | 3 required | 19 required, 13 diagnostic | 2 required | provisional |
 | [quality_coverage](../../configs/forge/views/quality_coverage.json) | 2 | 3 required | 19 required | 0 tasks | provisional |
@@ -204,6 +205,40 @@ Candidate outcomes, metrics and measured costs: [leaderboard](technique-inventor
 | --- | --- | --- | --- | --- | --- | --- |
 | [ring_hold](../../configs/forge/tasks/ring_hold.json) | required | [Question, results, GIFs](#experiment-mode-hold) | ring_endurance / ring_hold | up to 7500 total | 3600 | [mode_hold](../../configs/forge/tasks/mode_hold.json) (gate); group: ring_endurance (uninterrupted) |
 | [ring_extension](../../configs/forge/tasks/ring_extension.json) | required | [Question, results, GIFs](#experiment-mode-hold) | ring_endurance / ring_extension | up to 7500 total; 300 extension | 3600 | [ring_hold](../../configs/forge/tasks/ring_hold.json) (checkpoint); group: ring_endurance (uninterrupted) |
+
+## five_word_joint
+
+Declaration: [five_word_joint](../../configs/forge/views/five_word_joint.json); revision 1; goal: `five_word_joint`.
+
+Declared calibration status: **provisional**.
+
+Finite-word acquisition placement and rejection costs are not calibrated. Existing mechanism smoke prerequisites apply; this view supplies no release/default promotion.
+
+No published solution leaderboard for this view yet; task registration and related API media confer no candidate qualification.
+
+### Tier 1: smoke
+
+3 required.
+
+| Task | Importance | Experiment guide | Adapter / gate | Declared steps | Timeout (s) | Dependencies / shared execution |
+| --- | --- | --- | --- | --- | --- | --- |
+| [two_pole](../../configs/forge/tasks/two_pole.json) | required | [Question, results, GIFs](#experiment-two-pole) | transfer_behavior / transfer_sustained | 80 | 300 | — |
+| [unused_token_hold](../../configs/forge/tasks/unused_token_hold.json) | required | [Question, results, GIFs](#experiment-unused-token-hold) | transfer_behavior / transfer_sustained | 200 | 300 | — |
+| [ae_gan_hold](../../configs/forge/tasks/ae_gan_hold.json) | required | [Question, results, GIFs](#experiment-ae-gan-hold) | transfer_behavior / transfer_sustained | 250 | 300 | — |
+
+### Tier 2: quality
+
+1 required.
+
+| Task | Importance | Experiment guide | Adapter / gate | Declared steps | Timeout (s) | Dependencies / shared execution |
+| --- | --- | --- | --- | --- | --- | --- |
+| [five_word_joint_acquisition](../../configs/forge/tasks/five_word_joint_acquisition.json) | required | [Question, results, GIFs](#experiment-five-word-joint) | word_joint / transfer_sustained | 20001 | 900 | — |
+
+### Tier 3: endurance
+
+0 tasks.
+
+No tasks assigned.
 
 ## formulation_comparison
 
@@ -529,6 +564,38 @@ Related public-API demonstrations, with their own recorded contracts:
 | Variant / actual-training GIF | What this variant tests | Recorded result / failed bounds | Recipe / compute / source | Evidence |
 | --- | --- | --- | --- | --- |
 | [api-guarded-leftover](../toy_audit/api_contract/media/api-guarded-leftover.gif) | Cover both signed poles while preserving content and removing the guarded leak Scope: New caller-owned clean paired-error RpGAN/KA2 host; historical results remain unchanged. | COMPLETE / PASS; 800/800 updates | conditional_ka2 / cpu / 58bcb6febe12 | [definition](../toy_audit/api_contract/cases.json); [readout](../toy_audit/api_contract/readout.json); [recipe and provenance](../toy_audit/api_contract/runs.json) |
+
+### Experiment: five-word-joint
+
+Can a joint BiGAN generator, encoder and critic acquire five equally likely canonical words and reconstruct every correctly paired input with confident token probabilities, including padding?
+
+Explanation, interpretation and reproduction: [experiment readout](five-word-joint/README.md).
+
+Forge declarations: [five_word_joint_acquisition](../../configs/forge/tasks/five_word_joint_acquisition.json).
+
+<details>
+<summary>Declared Forge numerical gates and sampling</summary>
+
+[five_word_joint_acquisition](../../configs/forge/tasks/five_word_joint_acquisition.json)
+
+- **kind**: "transfer_sustained"
+- **thresholds**: [["sample_count", ">=", 1024], ["quality_fraction", ">=", 0.95], ["modes", "==", 5], ["mass_tv", "<=", 0.1], ["reconstruction_exact", "==", 1], ["minimum_reconstruction_token_probability", ">=", 0.9]]
+- **minimum_stable_checks**: 5
+- **prior**: {"exception_reason": "Retained finite-vocabulary joint BiGAN question explicitly uses five learned 2D rows, one possible code per word; a MoG-width question needs its own protocol.", "kind": "particle_cloud", "learnable": true, "sigma": 0.0, "standardize": false}
+- **sampling_law**: "generated_and_paired_reconstructed_prior_without_output_noise"
+- **scoring_weights**: "live"
+- **eval_output_noise**: "clean"
+
+</details>
+
+No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
+
+Related public-API demonstrations, with their own recorded contracts:
+
+| Variant / actual-training GIF | What this variant tests | Recorded result / failed bounds | Recipe / compute / source | Evidence |
+| --- | --- | --- | --- | --- |
+| [forge-five-word-joint-api-demo-v1](../toy_audit/api_contract/five_word_joint/goal.gif) | Can a joint BiGAN generator, encoder and critic acquire five equally likely canonical words and reconstruct every correctly paired input with confident token probabilities, including padding? Scope: One bounded shared-API integration demonstration, not an ordinary Forge run or release qualification. Score the declared bounds honestly at 32 updates and grade the evidence INCOMPLETE against the 20,001-update task. | COMPLETE / INCOMPLETE; 32/20001 updates; quality_fraction, modes, mass_tv, reconstruction_exact, minimum_reconstruction_token_probability | ka2 / cpu / 997c7f01b99a | [definition](../toy_audit/api_contract/five_word_joint/publication.json); [readout](../toy_audit/api_contract/five_word_joint/publication.json); [recipe and provenance](../toy_audit/api_contract/five_word_joint/publication.json) |
+| [image-five-words-joint-ae](../toy_audit/api_contract/media/image-five-words-joint-ae.gif) | Generate the five equally likely canonical words with confident normalized token probabilities, and reconstruct each of the five matched inputs including underscore padding. Scope: Finite vocabulary apple/grape/lemon/melon/berry only. Joint BiGAN inverse reconstruction; no unseen words or natural-language generation. New API-policy variant, not reuse of historical EMA PASS. | COMPLETE / PASS; 20001/20001 updates | ka2 / cpu / 39eff89a9223 | [definition](../toy_audit/api_contract/cases.json); [readout](../toy_audit/api_contract/readout.json); [recipe and provenance](../toy_audit/api_contract/runs.json) |
 
 ### Experiment: grid100
 
@@ -1246,6 +1313,6 @@ The wider question review also links standalone experiments outside the Forge ti
 - [Later questions](../toy_audit/api_contract/recent_prs/README.md)
 - [Caption questions](../toy_audit/api_contract/caption_prs/README.md)
 
-Declaration input digest: `d73250b349d69c695a45623845319540ab49310fb3e1eef4211f6f0222c91cd5`. The JSON form includes the individual task and view file hashes.
+Declaration input digest: `0f6a899b1330b8d5593ce9532ad8750a5529eeec27fe1a1fa03f62bd2cad4455`. The JSON form includes the individual task and view file hashes.
 
-Published artifact input digest: `568a1dfeb45ff22d7af2a608931ca57f7c73fdceb4fce5989f5797bb1af884d1`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.
+Published artifact input digest: `22501558347de795f708f3e4cc5ea57b7cd1c803ac7ee06b9e9cc7521ea1a115`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.

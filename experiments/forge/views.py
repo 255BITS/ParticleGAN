@@ -297,6 +297,8 @@ def _guards(task, evidence):
             return _verdict("INCOMPLETE", f"missing valid {role} optimizer update count")
         if count == 0:
             return _verdict("FAIL", f"{role} did not perform an intended optimizer update")
+        if expected.get("exact_optimizer_updates") and count != task["execution"]["steps"]:
+            return _verdict("INCOMPLETE", f"{role} optimizer updates do not complete the declared task budget")
     if expected.get("mechanism_exercised"):
         from .mechanisms import mechanism_blockers
         reasons = mechanism_blockers(guards.get("mechanism_audit"))

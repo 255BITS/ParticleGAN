@@ -214,6 +214,9 @@ def render_markdown(report: dict, root: Path, output_path: Path | None = None) -
               "Public-API variants join only through their explicit retained question IDs."]
     for guide in report["experiment_guides"]:
         lines += ["", f"### Experiment: {guide['id'].replace('_', '-')}", "", _cell(guide["goal"]), ""]
+        if guide.get("readout_sources"):
+            lines += ["Explanation, interpretation and reproduction: " + ", ".join(
+                link("experiment readout", source) for source in guide["readout_sources"]) + ".", ""]
         lines += ["Forge declarations: " + ", ".join(link(task["id"], task["source"]) for task in guide["tasks"]) + ".", ""]
         contracts = {}
         for task in guide["tasks"]:

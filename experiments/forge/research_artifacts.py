@@ -171,8 +171,15 @@ def build_artifacts(root: Path, tasks: dict, task_paths: dict) -> dict:
             conditions = members[0]["evaluation"].get("conditions", [])
             goal = ("Check saved public trainer state under " + ", ".join(conditions) + " perturbations."
                     if conditions else f"Execute the declared {members[0]['evaluation']['kind']} gate.")
+        explanations = sorted({task.get("research_artifacts", {}).get("readout") for task in members} - {None})
+        for explanation in explanations:
+            resolved = (root / explanation).resolve()
+            if not resolved.is_relative_to(root) or not resolved.is_file():
+                raise ValueError("task research readout must name an existing file in the checkout")
+            inputs[explanation] = file_hash(resolved)
         guides.append({
             "id": question, "goal": goal,
+            "readout_sources": explanations,
             "original_question_ids": [name for name in identities if name in catalog],
             "tasks": [{"id": task["id"], "source": task_paths[task["id"]],
                        "evaluation": task["evaluation"], "execution": task["execution"]}
