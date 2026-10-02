@@ -5,6 +5,13 @@
 **Running experiments / proposing ideas:** start with
 [ParticleGAN Forge — read before running ideas](EXPERIMENTATION.md).
 
+**Review the research:** [experiments by tier, goals and training GIFs](reports/forge/EXPERIMENTS_BY_TIER.md)
+and the [current solution leaderboard](reports/forge/technique-inventory.md).
+The [experiment memory](reports/forge/EXPERIMENT_MEMORY.md) explains the hypotheses,
+comparisons and recommendations behind the recorded results. These views are
+regenerated as experiments and candidate solutions change; release selection
+requires completed Forge qualification and review of the winner.
+
 [![Tests](https://github.com/255BITS/ParticleGAN/actions/workflows/tests.yml/badge.svg)](https://github.com/255BITS/ParticleGAN/actions/workflows/tests.yml)
 
 A GAN usually draws its latent code from a fixed Gaussian and leaves all of

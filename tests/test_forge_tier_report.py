@@ -286,3 +286,158 @@ def test_filtered_report_links_unassigned_dependencies_outside_selected_view():
     document = render_markdown(result, ROOT, ROOT / "reports/forge/tiers.md")
     assert "../../configs/forge/tasks/grid100_affine_square_named_v1.json" in document
     assert "grid100_affine_square_named_v1_14k" in document
+
+
+def publish_demo(root, *, verdict="FAIL", execution="COMPLETE", gif="media/demo.gif"):
+    base = root / "reports/toy_audit/api_contract"
+    case = {"id": "api-smoke", "legacy_ids": ["develop-smoke"],
+            "goal": "Reproduce both poles and their widths", "scope": "New stricter API law",
+            "default_recipe": "atlas", "default_steps": 24}
+    atomic_json(base / "cases.json", {"cases": [case]})
+    atomic_json(base / "readout.json", {"cases": [{
+        "id": case["id"], "verdict": verdict, "execution_status": execution,
+        "completed_updates": 24 if execution == "COMPLETE" else 0,
+        "failed_bounds": ["width"], "gif": gif, "source_commit": "a" * 40,
+    }]})
+    if gif.startswith("media/"):
+        (base / gif).parent.mkdir(parents=True, exist_ok=True)
+        (base / gif).write_bytes(b"test-media-placeholder")
+    return base
+
+
+def test_artifacts_keep_api_scope_and_results_separate_from_forge(inventory):
+    base = publish_demo(inventory)
+    atomic_json(base / "runs.json", {"cases": [{
+        "id": "api-smoke", "recipe": {"name": "atlas"},
+        "runtime": {"device": "cpu"}, "source_identity": "b" * 64,
+    }]})
+    result = build_report(inventory)
+    guide = next(item for item in result["experiment_guides"] if item["id"] == "smoke")
+    demo = guide["api_variants"][0]
+    assert demo["verdict"] == "FAIL" and demo["failed_bounds"] == ["width"]
+    assert demo["scope"] == "New stricter API law" and demo["recipe"] == "atlas"
+    assert demo["source_identity"] == "b" * 64 and demo["runtime"] == {"device": "cpu"}
+    assert demo["media_available"] and demo["qualification_input"] is False
+    assert guide["forge_results"] == []  # Same question ID supplies no Forge credit.
+    document = render_markdown(result, inventory, inventory / "reports/forge/tiers.md")
+    assert "../toy_audit/api_contract/media/demo.gif" in document
+    assert "#experiment-smoke" in document
+    assert "New stricter API law" in document and "COMPLETE / FAIL" in document
+    assert "do not qualify a different Forge task" in document
+
+
+def test_explicit_host_mapping_discovers_variants_without_name_guessing(inventory):
+    base = publish_demo(inventory)
+    definition = read_json(base / "cases.json")
+    definition["cases"].append({**definition["cases"][0], "id": "second-smoke"})
+    atomic_json(base / "cases.json", definition)
+    new_task = task("other_architecture")
+    new_task["execution"]["host"] = "smoke"
+    atomic_json(inventory / "configs/forge/tasks/other_architecture.json", new_task)
+    similar_name = task("smoke_unrelated")
+    atomic_json(inventory / "configs/forge/tasks/smoke_unrelated.json", similar_name)
+    result = build_report(inventory)
+    guide = next(item for item in result["experiment_guides"] if item["id"] == "smoke")
+    assert [item["id"] for item in guide["tasks"]] == ["other_architecture", "smoke"]
+    assert [item["id"] for item in guide["api_variants"]] == ["api-smoke", "second-smoke"]
+    assert guide["api_variants"][1]["verdict"] == "UNKNOWN"
+    unrelated = next(item for item in result["experiment_guides"] if item["id"] == "smoke_unrelated")
+    assert unrelated["api_variants"] == []
+
+
+def test_new_task_question_updates_without_editing_the_generator(inventory):
+    definition = task("smoke")
+    definition["description"] = "Measure a revised target with a new falsifiable question."
+    atomic_json(inventory / "configs/forge/tasks/smoke.json", definition)
+    guide = next(item for item in build_report(inventory)["experiment_guides"] if item["id"] == "smoke")
+    assert guide["goal"] == definition["description"]
+
+
+def test_actual_error_media_and_missing_gifs_are_visible(inventory):
+    base = publish_demo(inventory, execution="ERROR")
+    document = render_markdown(build_report(inventory), inventory)
+    assert "ERROR / FAIL; 0/24 updates" in document
+    (base / "media/demo.gif").unlink()
+    document = render_markdown(build_report(inventory), inventory)
+    assert "api-smoke (GIF unavailable)" in document
+    assert "[api-smoke](" not in document
+
+
+def test_artifact_inputs_change_without_changing_declaration_digest(inventory):
+    first = build_report(inventory)
+    publish_demo(inventory)
+    second = build_report(inventory)
+    assert first["input_digest"] == second["input_digest"]
+    assert first["artifact_input_digest"] != second["artifact_input_digest"]
+    assert "reports/toy_audit/api_contract/cases.json" in second["artifact_input_hashes"]
+    assert second == build_report(inventory)
+
+
+def test_changed_task_is_labelled_without_regrading_or_borrowing_outcomes(inventory):
+    from experiments.forge.views import task_evaluation_fingerprint, task_execution_fingerprint
+    tasks = load_tasks(inventory)
+    contract = {"execution_sha256": task_execution_fingerprint(tasks["smoke"]),
+                "evaluation_sha256": task_evaluation_fingerprint(tasks["smoke"]),
+                "timeout_seconds": 60}
+    atomic_json(inventory / "reports/forge/technique-inventory.json", {
+        "publication_scope": "current_technique_inventory", "task_contracts": {"contract": contract},
+        "rows": [{"candidate_id": "saved-winner", "trainer_family": "test-family",
+                  "candidate_revision": "a" * 64, "cohort": "b" * 64,
+                  "bindings": {"task_contracts": {"smoke": "contract"}, "source_origin_commit": "c" * 40},
+                  "runtime_cohort": {"execution_backend": "cpu"},
+                  "tasks": [{"task_id": "smoke", "status": "PASS"}]}],
+    })
+    def recorded(report):
+        return next(guide for guide in report["experiment_guides"] if guide["id"] == "smoke")["forge_results"][0]
+    assert recorded(build_report(inventory))["declaration_match"] is True
+    tasks["smoke"]["execution"]["steps"] = 48
+    atomic_json(inventory / "configs/forge/tasks/smoke.json", tasks["smoke"])
+    result = build_report(inventory)
+    assert recorded(result)["declaration_match"] is False
+    assert recorded(result)["status"] == "PASS"  # Historical result is retained unchanged.
+    assert "CHANGED; earlier contract" in render_markdown(result, inventory)
+
+
+@pytest.mark.parametrize("mutation,match", [
+    ("duplicate", "duplicate artifact ID"),
+    ("unbound", "no matching variant definition"),
+    ("escape", "invalid published GIF path"),
+])
+def test_invalid_artifact_bindings_are_not_silently_accepted(inventory, mutation, match):
+    base = publish_demo(inventory)
+    if mutation == "duplicate":
+        value = read_json(base / "cases.json")
+        value["cases"].append(deepcopy(value["cases"][0]))
+        atomic_json(base / "cases.json", value)
+    else:
+        value = read_json(base / "readout.json")
+        value["cases"][0].update({"id": "unbound"} if mutation == "unbound" else {"gif": "../../escape.gif"})
+        atomic_json(base / "readout.json", value)
+    with pytest.raises(ValueError, match=match):
+        build_report(inventory)
+
+
+def test_current_report_has_one_guide_per_question_and_preserves_receipt_identity():
+    result = build_report(ROOT)
+    guides = result["experiment_guides"]
+    assert {task["id"] for guide in guides for task in guide["tasks"]} == set(load_tasks(ROOT))
+    assert len({guide["id"] for guide in guides}) == len(guides)
+    publication = read_json(ROOT / "reports/forge/technique-inventory.json")
+    for guide in guides:
+        for outcome in guide["forge_results"]:
+            saved = next(row for row in publication["rows"] if row["candidate_id"] == outcome["candidate_id"]
+                         and row["cohort"] == outcome["cohort"])
+            assert outcome["status"] == next(task["status"] for task in saved["tasks"] if task["task_id"] == outcome["task_id"])
+            assert outcome["candidate_revision"] == saved["candidate_revision"]
+            assert outcome["source_commit"] == saved["bindings"]["source_origin_commit"]
+            assert outcome["backend"] == saved["runtime_cohort"]["execution_backend"]
+    clock = next(guide for guide in guides if guide["id"] == "clockfree_audit")
+    assert clock["api_variants"] == []
+    assert "restart" in clock["goal"]
+
+
+def test_committed_tier_report_matches_current_declarations_and_artifacts():
+    from experiments.forge.tier_report import REPORT_PATH
+    assert (ROOT / REPORT_PATH).read_text() == render_markdown(build_report(ROOT), ROOT, ROOT / REPORT_PATH), (
+        "Regenerate with: python -m experiments.forge experiments-by-tier "
+        "--output reports/forge/EXPERIMENTS_BY_TIER.md")
