@@ -1,0 +1,11 @@
+{
+  "task": "routed_terminal_cancellation_v1_independent_saved_CPU_review",
+  "source": "/tmp/e22_terminal_cancellation_reader_v1.py",
+  "sha256": "044ab5f63d49223639a973ab46afe1ace4086c10ee8f2917deb406a283076ab4",
+  "limit_seconds": 60,
+  "status": "SOURCE_ONLY_FROZEN_UNEXECUTED_BEFORE_SCIENCE",
+  "inputs": "Five endpoint48x16x16 arrays,4precision arrays+2namedVJPs+same native delta,all4x512traces/media/plain native final tensor states/card/report/completion/external/manifest hashes. Opaque inputs.pt Geometry object not unpickled.",
+  "native_models_API_calls_updates": 0,
+  "scope": "Independent fsum numerical reduction/byte checks and final head norms/frozen paired state equality; initialEMA/liveforward/VJP origins remain source-bound, no native model or API replay. Completed producer sciencePASS/FAIL unchanged.",
+  "CLI": "CUDA_VISIBLE_DEVICES='' PYTHONPATH=. /ml2/ntc-image-studio/.venv-anima/bin/python /tmp/e22_terminal_cancellation_reader_v1.py --run runs/terminal-cancellation-v1 --card docs/e22_routed_terminal_cancellation_v1.json --prep docs/e22_routed_terminal_cancellation_preparation.json --manifest /tmp/routed-terminal-cancellation-v1-launch-pins.json --external runs/terminal-cancellation-v1.external.json --out docs/e22_routed_terminal_cancellation_independent_review.json"
+}

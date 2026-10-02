@@ -1,0 +1,54 @@
+{
+  "status": "SOURCE_ONLY_PREPARED_NOT_SOFTWARE_QUALIFIED",
+  "task": "routed_terminal_cancellation_v1",
+  "protocol_sha256": "b94c0129d9cf490f1c32317ea44f9076b730395e47fdc455efb0179ee24d0e01",
+  "source_identity": {
+    "examples/e22_routed_terminal_cancellation.py": "999f8e984ce17b821d3330d313eddde183e5ab313df69fa0360c28f144cdf5e5",
+    "examples/e22_routed_caption_accuracy.py": "bae0f255d890e49bfbe4602bee7f8e84051b24a3cb0219c13b0a42b25768b8e3",
+    "examples/e22_routed_caption_untied.py": "a35938f51b7974677651d2c05b1aa396896255460e213cf26ccf57409efcdb81",
+    "examples/e22_routed_caption_flow.py": "f868c7cb36db670fc1f08aebeb54e6d863837f8d56e685373e5873b2b4a08e3c",
+    "examples/e22_routed_caption_normalization.py": "7077a03143a8d25577bfb2ed1f167d847e75972131093f9228ca10f6aaca9a0e",
+    "examples/render_e22_routed_caption_untied.py": "18e9c55143e551a2ef961128198ae331f3ea2e3992eb6b1be73bdda333dea77b"
+  },
+  "new_test": {
+    "executed": false,
+    "cases": 4,
+    "native_updates": 4,
+    "scope": "one2+2 tiny publicAPI recovery plus zero-update initializer/correlatedhead/EMA/metric/secant controls; no fullscience/CUDA/assets or oldtests",
+    "limit_seconds": 60,
+    "source": "tests/test_e22_routed_terminal_cancellation.py",
+    "sha256": "e3d58c45ebac41286d55f3bf606b9015d18f4ebd1cd7d09c97955daefe0b6cff"
+  },
+  "new_renderer": {
+    "source": "examples/render_e22_routed_terminal_cancellation.py",
+    "sha256": "aae4b682966004c7d031bff3a83e77ac11c104d893e4eeb2f13211c44be82ab3"
+  },
+  "checks_observed": {
+    "stdlib_AST_parses": 3,
+    "source_bytepins_exact": true,
+    "four_new_test_functions": true
+  },
+  "execution": {
+    "Torch_imported": false,
+    "models": 0,
+    "API_calls": 0,
+    "native_updates": 0,
+    "tests_executed": 0,
+    "CUDA": false,
+    "science": false
+  },
+  "native_on_disk_only": {
+    "path": "/ml2/hypergan/ParticleGAN-routed-terminal-cancellation-develop/particlegan",
+    "python_files": 30,
+    "python_sha256": "7b814e32627ac5a332637d336ebaa13b6baab0b9373f6841d9a22fb8ab39cde9",
+    "scope": "Filesystem stdlib hashing only; no claim of actual imported package. Actual runtime path/hash must be recorded during qualification/run."
+  },
+  "pending": [
+    "Root and peer source/card review before first model/test/API execution",
+    "Sole root-authorized CPU60 four-case qualification/exact4 tiny updates",
+    "Root-only GPU300 campaign after source/software qualification"
+  ],
+  "command": "python -m examples.e22_routed_terminal_cancellation --run --out runs/terminal-cancellation-v1 --device cuda:0",
+  "limits": "Explicit analytic terminal-cancellation case, not measured actual geometry, confirmed unique cause, or fullSupra remedy.",
+  "source_only_revision": "Pre-execution normal/bundled import dependency closure added; actual-full storage assertion removed. No test/model/API/science execution or mathematical change."
+}

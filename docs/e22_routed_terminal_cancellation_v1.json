@@ -1,0 +1,155 @@
+{
+  "task": "routed_terminal_cancellation_v1",
+  "status": "source_prepared_unexecuted",
+  "steps": 512,
+  "limit_seconds": 300,
+  "arms": [
+    "ordinary_BF16",
+    "ordinary_FP32",
+    "particle_BF16",
+    "particle_FP32"
+  ],
+  "geometry": {
+    "width": 32,
+    "text": 16,
+    "rank": 4,
+    "tokens": 16,
+    "length": 1,
+    "heads": 4,
+    "output": 16,
+    "frequency": 8
+  },
+  "sites": [
+    "input",
+    "edit"
+  ],
+  "bank_N": 32,
+  "bank_Z": 4,
+  "batch_size": 4,
+  "edit_amplitude": 0.015625,
+  "construction": {
+    "claim": "Explicit analytic terminal input-rounding/cancellation stress case; not measured actual final activation geometry or a confirmed convergence cause.",
+    "paired_head": "One frozen publicly initialized16x16 W; F.linear([a+u,a-u],[W,-W]). Correlation is declared parameterization, not post-init replacement of learned parameters.",
+    "carrier": "Separate frozen/unadapted34-to16 Linear, full named public initializer; source and target conditions differ.",
+    "edit": "Two sequential adapted34-to32-to16 frozen Linear sites, tanh after first, fixed edit amplitude1/64. Both sites affect u.",
+    "context": "UnitGaussian latent16 tokens, source onehot1..6/positive onehot7..12/empty0 in16-dimensional context, time and sin(pi*time); B4 to B8 CFG3 cond-before-uncond; independent BF16 teacher remains fixed.",
+    "latents": "Immutable bundled flow.context_data: privateCPU102 disjoint per-pool/source/draw two-Gaussian anchors; unchanged FIT48/GUARD12/TEST48 grids/row order; synthetic correlation law, not actual trajectories.",
+    "normalization": "One common initial ordinaryBF16 untrained FITstd per output coordinate, finite >1e-8 precondition; shared all D/EMA. No output-coordinate transform/objective.",
+    "terminal_weight_storage": "FP32 stored frozen W in allarms; arithmetic switch changes weight rounding aswell as inputs/matmul/output. Depth1 storage analogue. Widening already quantized tensors cannot recover lost bits; no actual full-model storage claim."
+  },
+  "initialization": {
+    "public_api": "init.initialize_(method=sample_distributions_v1), full-name private generators; deterministic_orthogonal_ prior",
+    "fresh_before_optimizer_EMA": true,
+    "explicit_post_public_init_neutralization": "Both shared/main Up and particle Up zero; H and b zero; sampled C unchanged. Ordinary Up zero. Prior table requires_grad false only for ordinary.",
+    "restore": "Public policy state_dict/load_state_dict; never initialize restored learned owners; independent FAST/EMA registered modules."
+  },
+  "prior": {
+    "kind": "particle_cloud",
+    "sigma": 0,
+    "exception_reason": "Shared routed finite bank conditional paired task; no MoG/Forge/default qualification."
+  },
+  "game": {
+    "implementation": "Immutable bundled examples.e22_routed_caption_accuracy.update, invoked directly; no training/optimizer implementation copied or globals patched.",
+    "particle_recipe": "e22_routed, backend auto, settled reopening",
+    "ordinary_recipe": "e22 with birthdeath/rowevidence/isolation false, feature_scale none, backendknn",
+    "D_G_DV12": "Native unchanged; shared external Gaussian paired error panelsCPU43, sigma initial.125 learned native schedule; privateFITCPU7 and penalty globals900.",
+    "generator_rates": {
+      "G": 5e-05,
+      "router": 5e-05,
+      "table": "publicrecipe.lr*prior_lr_mult"
+    },
+    "structural_guards": "Native learned-feature only/max_context_harm0/output_error_guardFalse",
+    "output_accuracy_feedback": false
+  },
+  "science_gate": {
+    "candidate": "particle_FP32",
+    "control": "ordinary_FP32",
+    "fixed_endpoint": 512,
+    "relative_aggregate_improvement_gte": 0.001,
+    "per_source_RMSE_harm_lte": 1e-06,
+    "code_relative_aggregate_benefit_gte": 0.001,
+    "code_each_source_strictly_beneficial": true,
+    "bank_router_live_fraction_gte": 0.9,
+    "live_denominator": 511,
+    "all_two_sites_C_and_particleUp_norms_finite_positive": true,
+    "offline_metric": "Unscaled F64 physical paired residual RMSE on all48 TEST rows/eight eachsource; no seed/checkpoint/horizon selection. No historical-failure requirement."
+  },
+  "precision_witness": {
+    "scope": "Separate diagnostic on particleBF16 final native update511->512. Clean TEST VJPs before, actual native final displacement including public finish, and BF16/FP32 same-parameter counterfactual predictions before/after.",
+    "helpful_and_harm": "BF16 parameterVJP dot actualdelta <0 AND actual physical deltaMSE>0, reported only; not convergence gate.",
+    "ratio_bound_lte": 0.75,
+    "ratios": [
+      "Q_FP32/Q_BF16",
+      "abs(FP32 deltaMSE-VJPdotdelta)/abs(BF16 deltaMSE-VJPdotdelta)"
+    ],
+    "undefined": "Zero BF16Q or discrepancy =>NA; FAIL/NA retained, not an invalid futureAPI quality gate.",
+    "changed_arithmetic": "Student terminal input/weight/matmul/output jointly FP32, teacher alwaysBF16. Baseline/zero-strength predictions change; not particle-specific or output-cast-only claim."
+  },
+  "media_steps": [
+    0,
+    64,
+    128,
+    256,
+    384,
+    512
+  ],
+  "media_indices": [
+    0,
+    8,
+    16,
+    24,
+    32,
+    40,
+    1,
+    9
+  ],
+  "media": {
+    "rows": "actual zero target plus allfour actual arms",
+    "display": "six fixed source cameras; two extra retained for B4 alignment",
+    "color": "fixed allarms initial-only physical tokenRMS scale",
+    "renderer_seconds": 60,
+    "optional_dependencies": [
+      "numpy",
+      "Pillow>=10.1"
+    ]
+  },
+  "forward_budget": {
+    "mandatory_paired_host_calls": 4260,
+    "mandatory_student_body_calls": 4260,
+    "inherent_teacher_body_calls": 4260,
+    "TEST_parameter_VJP_batches": 24,
+    "native_updates": 2048,
+    "payoff_D_calls": 8192,
+    "limits": "Counts exclude native KA2 penalty/tracking and structural proposal fullreruns; include untrainedFIT12/preflight8/native4096/media48/endpoints+zero60/precision36. Startup through restoration/finalwrites cap300 remains authoritative."
+  },
+  "software_plan": {
+    "executed": false,
+    "cases": 4,
+    "native_updates": 4,
+    "scope": "one2+2 tiny publicAPI recovery plus zero-update initializer/correlatedhead/EMA/metric/secant controls; no fullscience/CUDA/assets or oldtests",
+    "limit_seconds": 60,
+    "source": "tests/test_e22_routed_terminal_cancellation.py",
+    "sha256": "e3d58c45ebac41286d55f3bf606b9015d18f4ebd1cd7d09c97955daefe0b6cff"
+  },
+  "renderer": {
+    "source": "examples/render_e22_routed_terminal_cancellation.py",
+    "sha256": "aae4b682966004c7d031bff3a83e77ac11c104d893e4eeb2f13211c44be82ab3"
+  },
+  "sources": {
+    "examples/e22_routed_terminal_cancellation.py": "999f8e984ce17b821d3330d313eddde183e5ab313df69fa0360c28f144cdf5e5",
+    "examples/e22_routed_caption_accuracy.py": "bae0f255d890e49bfbe4602bee7f8e84051b24a3cb0219c13b0a42b25768b8e3",
+    "examples/e22_routed_caption_untied.py": "a35938f51b7974677651d2c05b1aa396896255460e213cf26ccf57409efcdb81",
+    "examples/e22_routed_caption_flow.py": "f868c7cb36db670fc1f08aebeb54e6d863837f8d56e685373e5873b2b4a08e3c",
+    "examples/e22_routed_caption_normalization.py": "7077a03143a8d25577bfb2ed1f167d847e75972131093f9228ca10f6aaca9a0e",
+    "examples/render_e22_routed_caption_untied.py": "18e9c55143e551a2ef961128198ae331f3ea2e3992eb6b1be73bdda333dea77b"
+  },
+  "imported_package_contract": "Record actual imported native path/hash; enforce unchanged withinrun, no permanent revision allowlist.",
+  "exit_contract": {
+    "0": "completed convergence PASS",
+    "1": "completed convergence FAIL",
+    "2": "incomplete/invalid/error; companion incomplete. Precision diagnostic status separate.",
+    "canonical_companion": "completion.complete is true for complete PASS/0 and FAIL/1, scientific_status matches report; incomplete sets scientific_status null/exit2."
+  },
+  "old_evidence": "Actual student-terminal control locally passed. Its all-arm baseline sensitivity and finite-step improvement do not establish a sustained fullSupra remedy. Original fullSupra remains unbeaten.",
+  "import_dependency_closure": "Byte-bind inherited flow normalization import and bundled untied renderer dependency aswell as base/untied/flow; no dynamic-global patch or importing optional renderer during training."
+}
