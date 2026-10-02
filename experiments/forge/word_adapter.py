@@ -13,11 +13,10 @@ import time
 
 import torch
 
-from .api import CapabilityError, FormulationContext, host_recipe_overrides, task_policy_blockers
+from .api import CapabilityError, task_formulation_context
 from .contracts import atomic_json, file_hash
 from .sampling import JOINT_WORDS_CLEAN, executed_receipt
 from .state import state_digest
-from .taskrecipes import adaptation_receipt, bind_task_candidate
 from .telemetry import PhaseTimer
 
 
@@ -36,6 +35,8 @@ def validate_word_task(task, *, root=None):
                 "joint_critic_widths": [170, 256, 128, 1], "resources": RESOURCES}
     if execution.get("host_definition") != expected:
         raise ValueError("word host definition differs from the shared retained fixture")
+    if execution.get("execution_path") != "public_components":
+        raise ValueError("joint word host requires its explicit public_components execution path")
     if (execution.get("steps") != 20001 or execution.get("original_schedule_horizon") != 20000
             or execution.get("produces_state") is not False):
         raise ValueError("word task requires 20,001 updates / 20,000-update schedule; no continuation claim")
@@ -56,31 +57,19 @@ def validate_word_task(task, *, root=None):
                 raise ValueError(f"word source binding differs: {path}")
 
 
-def word_context(request, task, device):
-    validate_word_task(task)
-    original = request["candidate"]
-    candidate = bind_task_candidate(original, task)
-    blockers = task_policy_blockers(task, candidate)
-    if blockers:
-        raise CapabilityError(blockers)
-    overrides = host_recipe_overrides(candidate, task["execution"], RESOURCES)
-    context = FormulationContext(recipe_preset=candidate.get("recipe_preset"), recipe_overrides=overrides,
-        prior=task["execution"]["prior"], seed=request["protocol"]["seed"], device=device,
-        execution_path="public_components", initializer=candidate.get("initializer", "deterministic_orthogonal"),
-        extensions=candidate.get("extensions", {}),
-        requires_capabilities=tuple(candidate.get("requires_capabilities", ())) + tuple(task["requires_capabilities"]))
+def word_context(request, task, device, *, root=None):
+    validate_word_task(task, root=root)
+    context = task_formulation_context(request["candidate"], task, request.get("protocol"), device=device, root=root)
     if context.initializer != "deterministic_orthogonal":
         raise CapabilityError(["joint word host requires named deterministic orthogonal initialization"])
     if context.recipe.model != "gan" or context.recipe.conditioning != "scalar" or context.recipe.encoder_mode != "none":
         raise CapabilityError(["joint word fixture binds its own encoder and joint adversarial objective; recipe objective incompatible"])
-    context.host_adaptation = adaptation_receipt(original, task)
     return context
 
 
 def word_preflight(task, candidate, *, root=None):
     try:
-        validate_word_task(task, root=root)
-        word_context({"candidate": candidate, "protocol": {"seed": 0}}, task, "cpu")
+        word_context({"candidate": candidate, "protocol": {"seed": 0}}, task, "cpu", root=root)
     except (ValueError, KeyError, TypeError, OSError) as error:
         return error.blockers if isinstance(error, CapabilityError) else [str(error)]
     return []

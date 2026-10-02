@@ -87,6 +87,8 @@ def task_recipe_resources(task):
         return {"num_particles": LOCKED_SHARED.n_particles, "z_dim": 4, "batch_size": 128}
     if adapter in {"native100", "native100_continuation"} and "native_profile" in execution:
         return deepcopy(execution["host_definition"]["resources"])
+    if adapter == "word_joint":
+        return deepcopy(execution["host_definition"]["resources"])
     return deepcopy(execution.get("resources", {}))
 
 

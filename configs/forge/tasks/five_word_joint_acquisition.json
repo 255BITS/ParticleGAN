@@ -7,6 +7,8 @@
     "source-family-15"
   ],
   "execution": {
+    "initializer": "deterministic_orthogonal",
+    "execution_path": "public_components",
     "host": "five_word_joint",
     "steps": 20001,
     "original_schedule_horizon": 20000,
