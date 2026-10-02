@@ -71,6 +71,10 @@ def source_identity():
     root = contract.ROOT
     paths = set((root / "particlegan").glob("*.py"))
     paths.update((root / "benchmarks/toy_audit").glob("api_*.py"))
+    paths.update((root / "benchmarks/toy_audit/api_sources").glob("*.py"))
+    # Native example hosts are also loaded with runpy; that does not retain a
+    # module in sys.modules, so bind their code explicitly.
+    paths.update((root / "examples").glob("e22_*.py"))
     for module in list(sys.modules.values()):
         filename = getattr(module, "__file__", None)
         if filename:

@@ -72,8 +72,9 @@ def discover():
 
 def metric_observations(case):
     """Frozen post-update scoring count, independent of GIF frame selection."""
-    count = case.get("evaluation_observations", case.get("thresholds", {}).get(
-        "observations", min(24, case["default_steps"])))
+    thresholds = case.get("thresholds", {})
+    inherited = thresholds.get("observations") if isinstance(thresholds, dict) else None
+    count = case.get("evaluation_observations", inherited or min(24, case["default_steps"]))
     _positive_integer(count, "evaluation_observations")
     if count > case["default_steps"]:
         raise ValueError("metric observations exceed distinct execution updates")

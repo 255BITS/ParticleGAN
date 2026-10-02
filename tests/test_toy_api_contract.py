@@ -5,7 +5,7 @@ import numpy as np
 import pytest
 
 from benchmarks.toy_audit.api_contract import (
-    coverage, evaluation_steps, validate_case, validate_observation,
+    coverage, evaluation_steps, metric_observations, validate_case, validate_observation,
 )
 
 
@@ -66,6 +66,12 @@ def test_coverage_does_not_drop_old_questions_or_architecture_controls():
 def test_evaluation_boundaries_include_initial_and_terminal_states_once():
     assert evaluation_steps(3, 9) == [0, 1, 2, 3]
     assert evaluation_steps(16, 5) == [0, 4, 8, 12, 16]
+
+
+def test_metric_cadence_preserves_image_declaration_and_accepts_list_bounds():
+    assert metric_observations({"default_steps": 600, "thresholds": {"observations": 24}}) == 24
+    assert metric_observations({"default_steps": 600, "thresholds": ["rmse <= 0.1"]}) == 24
+    assert metric_observations({"default_steps": 8, "thresholds": ["finite"]}) == 8
 
 
 def test_source_only_description_cannot_register_as_runnable_case():
