@@ -100,11 +100,15 @@ def test_independent_denominator_policy_keeps_missing_head_and_mixed_gap_visible
 
 
 def test_fabricated_complete_receipt_cannot_qualify_held_source_only_task(tmp_path, monkeypatch):
-    card = json.loads(runner.CARD.read_text())
+    archived_path = runner.CARD
+    archived_bytes = archived_path.read_bytes()
+    card = json.loads(archived_bytes)
     # This temporary software contract exercises the authorization guard. The
     # archived training card still binds its old sources and is never rewritten.
     card["sources"] = {name: runner.common.sha(runner.ROOT / name) for name in card["sources"]}
+    card["native_python_source_digest"] = runner.common.native_source_hash()
     card["execution"]["execution_authorized"] = False
+    runner.validate_contract(card)
     held = tmp_path / "held-card.json"
     held.write_text(json.dumps(card))
     monkeypatch.setattr(runner, "CARD", held)
@@ -118,3 +122,4 @@ def test_fabricated_complete_receipt_cannot_qualify_held_source_only_task(tmp_pa
     (tmp_path / "receipt.json").write_text(json.dumps(forged))
     with pytest.raises(AssertionError, match="exact held card"):
         review.review_run(tmp_path)
+    assert archived_path.read_bytes() == archived_bytes

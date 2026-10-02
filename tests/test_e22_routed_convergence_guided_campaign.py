@@ -21,7 +21,8 @@ def single_cpu_thread():
         torch.set_num_threads(previous)
 
 
-def contract():
+def software_contract():
+    """Current-byte, unauthorized fixture; not an archived qualification card."""
     card = deepcopy(json.loads(campaign.held_runner.CARD.read_text()))
     card.update(task_id=campaign.factory.TASK,
                 parent_rotated_card_sha256=campaign.held_runner.common.sha(campaign.held_runner.CARD),
@@ -29,6 +30,7 @@ def contract():
                 guided_pair={"guidance": 3., "unconditional_source": "fixed mean of the unchanged six parent source vectors"})
     card["sources"] = {str(path.relative_to(campaign.ROOT)): campaign.held_runner.common.sha(path)
                        for path in campaign.SOURCES if path != campaign.CARD}
+    card["native_python_source_digest"] = campaign.held_runner.common.native_source_hash()
     card["execution"]["execution_authorized"] = False
     return card
 
@@ -53,22 +55,29 @@ def test_namespaces_reuse_exact_code_objects_without_mutating_held_globals():
 
 
 def test_complete_source_contract_and_fixed_denominators():
-    campaign.validate_contract(contract())
+    archived_bytes = campaign.CARD.read_bytes()
+    card = software_contract()
+    assert card["execution"]["execution_authorized"] is False
+    campaign.validate_contract(card)
     runner, reviewer = campaign.adapters()
     assert len(runner.checkpoint_steps()) * len(runner.law.ARMS) == 105
     assert len(runner.curve_steps()) * len(runner.law.ARMS) == 102
     assert len(reviewer.JUDGES) == 4
     assert runner.ENDPOINTS == (5120, 6400)
     assert Path(campaign.held_reviewer.__file__) in campaign.SOURCES
+    assert campaign.CARD.read_bytes() == archived_bytes
 
 
-@pytest.mark.parametrize("change", ["task", "source", "missing_reviewer", "namespace", "guidance", "budget"])
+@pytest.mark.parametrize("change", ["task", "source", "native", "missing_reviewer", "namespace", "guidance", "budget"])
 def test_preflight_rejects_source_or_law_drift(change):
-    card = contract()
+    card = software_contract()
+    campaign.validate_contract(card)
     if change == "task":
         card["task_id"] = campaign.held_runner.law.TASK
     elif change == "source":
         card["sources"]["examples/e22_routed_convergence_guided_campaign.py"] = "0" * 64
+    elif change == "native":
+        card["native_python_source_digest"] = "0" * 64
     elif change == "missing_reviewer":
         card["sources"].pop("examples/review_e22_routed_convergence_guided_pair.py")
     elif change == "namespace":
@@ -97,7 +106,7 @@ def test_new_task_envelope_preserves_observations_and_rejects_old_task():
 def test_reviewer_requires_actual_new_schema_and_sha_bound_completion(tmp_path):
     receipt_path = tmp_path / "receipt.json"
     value = {"schema": campaign.EXECUTION_SCHEMA, "task": campaign.factory.TASK,
-             "orchestration_adapter": campaign.orchestration_manifest(), "contract": contract(), "wall_seconds": 10.}
+             "orchestration_adapter": campaign.orchestration_manifest(), "contract": software_contract(), "wall_seconds": 10.}
     receipt_path.write_text(json.dumps(value))
     (tmp_path / "compact-report.json").write_text("{}")
     with pytest.raises(FileNotFoundError):

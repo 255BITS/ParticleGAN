@@ -234,11 +234,20 @@ def test_all_four_heads_required_for_particle_retention_and_wins_are_separate():
 
 
 def test_frozen_contract_includes_actual_extra_endpoint_and_source_hold():
-    card = json.loads(runner.CARD.read_text())
+    archived_bytes = runner.CARD.read_bytes()
+    card = json.loads(archived_bytes)
     # A signed evaluation repair cannot relabel the archived unsigned training
-    # sources. Fresh execution under that frozen card must remain blocked.
-    with pytest.raises(ValueError, match="declared source changed"):
+    # sources. Later native changes can reject this card before source checks.
+    current_native = runner.common.native_source_hash()
+    reason = ("native Python source differs" if current_native != card["native_python_source_digest"]
+              else "declared source changed")
+    with pytest.raises(ValueError, match=reason):
         runner.validate_contract(card)
+    source_only = deepcopy(card)
+    source_only["native_python_source_digest"] = current_native
+    source_only["execution"]["execution_authorized"] = False
+    with pytest.raises(ValueError, match="declared source changed"):
+        runner.validate_contract(source_only)
     assert isinstance(card["execution"]["execution_authorized"], bool)
     assert len(runner.checkpoint_steps()) == 35
     assert len(runner.curve_steps()) == 34
@@ -248,3 +257,24 @@ def test_frozen_contract_includes_actual_extra_endpoint_and_source_hold():
     bad["evaluation"]["mandatory_common_judges"] = list(runner.JUDGES[:-1])
     with pytest.raises(ValueError, match="frozen"):
         runner.validate_contract(bad)
+    assert runner.CARD.read_bytes() == archived_bytes
+
+
+@pytest.mark.parametrize("change", ["native", "source"])
+def test_current_unauthorized_software_contract_keeps_identity_guards(change):
+    archived_bytes = runner.CARD.read_bytes()
+    card = json.loads(archived_bytes)
+    # In-memory software setup only: no trained evidence is rebound or run.
+    card["native_python_source_digest"] = runner.common.native_source_hash()
+    card["sources"] = {name: runner.common.sha(runner.ROOT / name) for name in card["sources"]}
+    card["execution"]["execution_authorized"] = False
+    runner.validate_contract(card)
+    if change == "native":
+        card["native_python_source_digest"] = "0" * 64
+        reason = "native Python source differs"
+    else:
+        card["sources"]["examples/run_e22_routed_convergence_rotated_teacher.py"] = "0" * 64
+        reason = "declared source changed"
+    with pytest.raises(ValueError, match=reason):
+        runner.validate_contract(card)
+    assert runner.CARD.read_bytes() == archived_bytes
