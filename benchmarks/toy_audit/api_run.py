@@ -118,7 +118,7 @@ def _view_limits(records):
     bounds = {}
     for record in records:
         for index, view in enumerate(record["views"]):
-            if view["kind"] == "image":
+            if view["kind"] in {"image", "text"}:
                 continue
             for role in ("target", "samples"):
                 points = _points(view[role])
@@ -152,7 +152,15 @@ def render_gif(case, records, path, *, full_budget, requested_steps):
                 continue
             view = record["views"][index]
             target, samples = contract.array(view["target"]), contract.array(view["samples"])
-            if view["kind"] == "image":
+            if view["kind"] == "text":
+                reference = "Desired words\n" + "\n".join(view["target_labels"][:8])
+                generated = "Actual decoded output\n" + "\n".join(view["sample_labels"][:8])
+                ax.text(.03, .93, reference, transform=ax.transAxes, va="top",
+                        fontsize=10, family="monospace", color="#586a80")
+                ax.text(.53, .93, generated, transform=ax.transAxes, va="top",
+                        fontsize=10, family="monospace", color="#aa254c")
+                ax.set_axis_off()
+            elif view["kind"] == "image":
                 top, bottom = _image_grid(target), _image_grid(samples)
                 width = max(top.shape[1], bottom.shape[1])
                 def pad(image):

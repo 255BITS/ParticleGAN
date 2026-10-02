@@ -124,10 +124,16 @@ def validate_observation(observation):
     if not isinstance(views, (list, tuple)) or not views:
         raise ValueError("goal-illustrating target/output views required")
     for view in views:
-        if view.get("kind") not in {"scatter", "image", "line", "bar"}:
+        if view.get("kind") not in {"scatter", "image", "line", "bar", "text"}:
             raise ValueError("unsupported goal view")
         if not view.get("title"):
             raise ValueError("goal view title required")
+        if view["kind"] == "text":
+            for role in ("target", "sample"):
+                labels = view.get(f"{role}_labels")
+                if not isinstance(labels, (list, tuple)) or not labels or any(
+                        not isinstance(label, str) for label in labels):
+                    raise ValueError("text goal views require decoded actual/reference labels")
         for role in ("target", "samples"):
             values = array(view[role])
             if not values.size or not np.issubdtype(values.dtype, np.number):
