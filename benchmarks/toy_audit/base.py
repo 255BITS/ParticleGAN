@@ -33,11 +33,18 @@ from .capture import Capture, write
 
 ALIAS_VERSION = "frozen-image-bars4-alias-v1"
 ALIAS_PROOF = "reports/toy_audit/frozen-image-alias.json"
-ALIAS_PROOF_SHA256 = "2eb6ca8010e6db70d92050026ace5fa6f7c1aa853ccb47592eab90ffab55faa2"
+ALIAS_PROOF_SHA256 = "5e00c34ef83129d7656ebb3f3a3ffce27ac07b8e0e2976da8608688bf146804d"
 
 
 def _sha256(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+
+
+def driver_sha256(root):
+    # The receipt digest is the sole excluded line to avoid a circular hash.
+    lines = (root / "benchmarks/toy_audit/base.py").read_bytes().splitlines(keepends=True)
+    return hashlib.sha256(b"".join(line for line in lines
+                                  if not line.startswith(b"ALIAS_PROOF_SHA256 = "))).hexdigest()
 
 
 def load_alias_proof(root):
@@ -65,6 +72,8 @@ def source_runtime_matches(root, proof):
         return False
     try:
         sources = proof["source_sha256"]
+        if driver_sha256(root) != proof["driver_source_sha256"]:
+            return False
         package_files = {str(p.relative_to(root)) for p in (root / "particlegan").glob("*.py")}
         if package_files != {name for name in sources if name.startswith("particlegan/")}:
             return False

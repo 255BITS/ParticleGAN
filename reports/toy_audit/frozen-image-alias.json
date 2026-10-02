@@ -1,6 +1,7 @@
 {
   "alias_name": "img_residual_bars4",
   "canonical_name": "img_bars4",
+  "driver_source_sha256": "1a515212b2eac9fe4b7bc4eb3b2379f17584c05fd5ebb7312f92b80e73999a76",
   "effective_spec": {
     "adam_betas": [
       0.0,

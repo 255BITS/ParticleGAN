@@ -110,7 +110,7 @@ def test_ordered_pixels_and_cadence_are_part_of_execution(tmp_path, frozen, monk
 
 def test_source_runtime_and_proof_mutations_disable_reuse(tmp_path, frozen, monkeypatch):
     proof, _, _ = frozen
-    for name in [base.ALIAS_PROOF, *proof["source_sha256"]]:
+    for name in [base.ALIAS_PROOF, "benchmarks/toy_audit/base.py", *proof["source_sha256"]]:
         target = tmp_path / name
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(ROOT / name, target)
@@ -119,6 +119,10 @@ def test_source_runtime_and_proof_mutations_disable_reuse(tmp_path, frozen, monk
     with monkeypatch.context() as patcher:
         patcher.setattr(base, "runtime_identity", lambda: changed_runtime)
         assert not base.source_runtime_matches(tmp_path, proof)
+    driver = tmp_path / "benchmarks/toy_audit/base.py"
+    driver.write_text(driver.read_text() + "\n# unreviewed dispatcher change\n")
+    assert not base.source_runtime_matches(tmp_path, proof)
+    shutil.copyfile(ROOT / "benchmarks/toy_audit/base.py", driver)
     target = tmp_path / "benchmarks/legacy/gan_loss.py"
     target.write_text(target.read_text() + "\n# unreviewed source change\n")
     assert not base.source_runtime_matches(tmp_path, proof)
