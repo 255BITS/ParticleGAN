@@ -199,11 +199,13 @@ def load_combined(path):
         raise ValueError("combined whole-configuration eligibility changed")
     tier_order = sorted(denominator)
     ranking = lambda trial: (*(-trial["counts"][tier]["study_passed"] for tier in tier_order), trial["id"])
-    family_best = {}
+    family_best, family_ties = {}, {}
     for family in packet["spec"]["families"]:
         ranked = sorted((trial for trial in trials if trial["family"] == family), key=ranking)
         measured = [trial for trial in ranked if trial["measured_cases"]]
         family_best[family] = measured[0]["id"] if measured else None
+        family_ties[family] = [trial["id"] for trial in measured
+                               if ranking(trial)[:-1] == ranking(measured[0])[:-1]] if measured else []
     cohort_id = packet["spec"]["id"] + "--" + packet["source"]["commit"][:12]
     return {"id": cohort_id, "study_id": packet["spec"]["id"],
             "combined_archive": {"path": str(path), "sha256": file_hash(path)},
@@ -216,6 +218,7 @@ def load_combined(path):
             "measured_paid_seconds": packet["measured_paid_seconds"],
             "unmeasured_interrupt_reservation_seconds": packet["unmeasured_interrupt_reservation_seconds"],
             "selection": deepcopy(packet["selection"]), "per_family_best_observed": family_best,
+            "per_family_best_observed_ties": family_ties,
             "trials": sorted(trials, key=lambda trial: (trial["family"], *ranking(trial)))}
 
 
@@ -299,20 +302,21 @@ def review_projection_media(row, output, relative):
         temporary.unlink(missing_ok=True)
 
 
-def copy_representative_media(cohort, output, *, review_projection=False):
-    """Copy unchanged best-observed case GIFs; no frames are generated."""
+def copy_representative_media(cohort, output, *, review_projection=False, all_media=False):
+    """Copy unchanged selected/all observed GIFs, marking display representatives."""
     media = []
     for family, trial_id in cohort["per_family_best_observed"].items():
         if trial_id is None:
             continue
-        trial = next(trial for trial in cohort["trials"] if trial["id"] == trial_id)
-        observed = [row for row in trial["cases"] if row["actual_gif"]]
-        if not observed:
-            continue
-        selected = [observed[0], observed[-1]] if len(observed) > 1 else observed
-        for row in selected:
+        best = next(trial for trial in cohort["trials"] if trial["id"] == trial_id)
+        observed = [row for row in best["cases"] if row["actual_gif"]]
+        representatives = {observed[0]["id"], observed[-1]["id"]} if observed else set()
+        selected = [(trial, row) for trial in cohort["trials"] if trial["family"] == family
+                    for row in trial["cases"] if row["actual_gif"] and
+                    (all_media or (trial["id"] == trial_id and row["id"] in representatives))]
+        for trial, row in selected:
             raw = row["actual_gif"]
-            relative = Path("policy-family-media") / cohort["id"] / family / (trial_id.split("--")[1][:12] + "--" + row["id"] + ".gif")
+            relative = Path("policy-family-media") / cohort["id"] / family / (trial["id"].split("--")[1][:12] + "--" + row["id"] + ".gif")
             destination = output / relative
             destination.parent.mkdir(parents=True, exist_ok=True)
             if file_hash(raw["path"]) != raw["sha256"]:
@@ -322,8 +326,9 @@ def copy_representative_media(cohort, output, *, review_projection=False):
                 raise ValueError("copied representative GIF differs from original")
             published = {"relative_path": relative.as_posix(), "sha256": raw["sha256"], "bytes": raw["bytes"],
                          "frames": raw["frames"], "media_steps": raw["media_steps"], "source_path": raw["path"],
-                         "family": family, "trial_id": trial_id, "case_id": row["id"],
+                         "family": family, "trial_id": trial["id"], "case_id": row["id"],
                          "original_gate_displayed": row["original_gate"], "study_gate": row["study_gate"],
+                         "representative": trial["id"] == trial_id and row["id"] in representatives,
                          "reviewed": False, "numeric_observations_changed": False}
             if review_projection and "projection_ks" in row["final_metrics"]:
                 reviewed_relative = relative.with_name(relative.stem + "-reviewed.gif")
@@ -334,6 +339,7 @@ def copy_representative_media(cohort, output, *, review_projection=False):
             row["published_gif"] = deepcopy(published)
             media.append(published)
     cohort["representative_media"] = media
+    cohort["published_media_scope"] = "all actual observed runs" if all_media else "best-observed display representatives"
 
 
 def escape(value):
@@ -395,6 +401,13 @@ def markdown(board):
                             for family, trial_id in cohort["per_family_best_observed"].items()) + ".", "",
                   "| Observed case / config | Original gate | Study gate | Acquisition / hold passed | Terminal metrics | Actual GIF |",
                   "| --- | --- | --- | --- | --- | --- |"]
+        tied = {family: identities for family, identities in cohort["per_family_best_observed_ties"].items()
+                if len(identities) > 1}
+        if tied:
+            lines[-2:-2] = ["Pass-count ties: " + "; ".join(
+                family + " " + ", ".join(f"`{identity.split('--')[1][:12]}`" for identity in identities)
+                for family, identities in tied.items()) +
+                ". The displayed content ID only breaks a presentation tie; it supplies no measured quality advantage.", ""]
         for trial in cohort["trials"]:
             for row in trial["cases"]:
                 if not row.get("diagnostic"):
@@ -411,6 +424,8 @@ def markdown(board):
                           row["original_gate"], row["study_gate"], acquired, compact, link]
                 lines.append("| " + " | ".join(escape(value) for value in values) + " |")
         for media in cohort["representative_media"]:
+            if not media["representative"]:
+                continue
             lines += ["", f"{media['family']} `{media['trial_id'].split('--')[1][:12]}` / `{media['case_id']}`: "
                       f"original **{media['original_gate_displayed']}**, study **{media['study_gate']}**. " +
                       ("Reviewed retained observations: original numeric values and verdict unchanged; "
@@ -429,7 +444,7 @@ def markdown(board):
     return "\n".join(lines)
 
 
-def publish(paths, output, *, review_projection=False):
+def publish(paths, output, *, review_projection=False, all_media=False):
     if not paths:
         raise ValueError("at least one certified combined archive required")
     cohorts = [load_combined(path) for path in paths]
@@ -438,7 +453,7 @@ def publish(paths, output, *, review_projection=False):
     output = Path(output).resolve()
     output.mkdir(parents=True, exist_ok=True)
     for cohort in cohorts:
-        copy_representative_media(cohort, output, review_projection=review_projection)
+        copy_representative_media(cohort, output, review_projection=review_projection, all_media=all_media)
     board = {"schema": "policy_family_goal_inventory_v1", "goal": GOAL, "primary_goal_board": True,
              "generated_by": publisher_source(), "training_updates": 0, "metric_rescoring": False,
              "current_cohort_id": cohorts[-1]["id"], "default_adoption": False, "speed_winner": None,
@@ -458,11 +473,15 @@ def main(argv=None):
     parser.add_argument("--output", type=Path, default=ROOT / "reports/forge")
     parser.add_argument("--review-projection", action="store_true",
                         help="media-only retained-array review exposing the original projection KS value/bound")
+    parser.add_argument("--all-media", action="store_true",
+                        help="copy every reached run's original GIF and link it in the observed-case table")
     args = parser.parse_args(argv)
-    board = publish(args.combined, args.output, review_projection=args.review_projection)
+    board = publish(args.combined, args.output, review_projection=args.review_projection, all_media=args.all_media)
     print(json.dumps({"goal": GOAL, "cohorts": len(board["cohorts"]),
                       "current": board["current_cohort_id"], "training_updates": 0,
-                      "published_gifs": sum(len(cohort["representative_media"]) for cohort in board["cohorts"])}))
+                      "published_runs": sum(len(cohort["representative_media"]) for cohort in board["cohorts"]),
+                      "published_gifs": sum(1 + media["reviewed"] for cohort in board["cohorts"]
+                                            for media in cohort["representative_media"])}))
 
 
 if __name__ == "__main__":

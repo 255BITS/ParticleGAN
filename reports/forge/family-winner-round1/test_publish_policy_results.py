@@ -21,7 +21,7 @@ def write(path, data):
     path.write_text(json.dumps(data, sort_keys=True, indent=2, allow_nan=False))
 
 
-def fixture(root, name="software-cohort", commit="a" * 40):
+def fixture(root, name="software-cohort", commit="a" * 40, *, all_late=False):
     """Boolean/byte fixtures exercise projection; they are not toy evidence."""
     root.mkdir(parents=True, exist_ok=True)
     source = {"commit": commit, "files_sha256": {"software-fixture.py": "b" * 64}}
@@ -52,9 +52,9 @@ def fixture(root, name="software-cohort", commit="a" * 40):
                 # One source/config acquires too late; another recovers after a
                 # first-window break. Neither can borrow another case's PASS.
                 if lr == .006375:
-                    count = 1 if rate == 1 else 2
+                    count = 1 if rate == 1 or all_late else 2
                     for index in range(count):
-                        late = rate == 1
+                        late = rate == 1 or all_late
                         passing = (lambda step: step >= 16) if late else (
                             (lambda step: step > 0) if index == 0 else (lambda step: step > 0 and step != 6))
                         observations = [{"step": step, "elapsed_seconds": float(step), "passed": passing(step),
@@ -91,7 +91,7 @@ def fixture(root, name="software-cohort", commit="a" * 40):
                                            receipt_sha256=publisher.file_hash(directory / "receipt.json"),
                                            recipe=recipe, runtime=runtime, artifacts=artifacts,
                                            final_metrics=observations[-1]["metrics"], child_returncode=0)
-                    trial.update(status="INCOMPLETE" if rate == 1 else "FAIL", paid_wall_seconds=30. * count)
+                    trial.update(status="INCOMPLETE" if rate == 1 or all_late else "FAIL", paid_wall_seconds=30. * count)
                 trials.append(trial)
     packet = {"schema": publisher.SCHEMA, "spec": protocol, "spec_sha256": publisher.digest(protocol),
               "source": source, "case_definitions": {case["id"]: case for case in cases},
@@ -199,3 +199,32 @@ def test_cohorts_remain_separate_and_raw_unchanged(tmp_path):
     assert all(not cohort["selection"]["fully_qualified_ids"] for cohort in board["cohorts"])
     assert before == {str(path): publisher.file_hash(path) for parent in (first.parent, second.parent)
                       for path in parent.rglob("*") if path.is_file()}
+
+
+def test_all_media_copies_every_observed_run_without_changing_raw(tmp_path):
+    path, _ = fixture(tmp_path / "raw")
+    before = {str(raw): publisher.file_hash(raw) for raw in path.parent.rglob("*") if raw.is_file()}
+    output = tmp_path / "publication"
+    board = publisher.publish([path], output, all_media=True)
+    cohort = board["cohorts"][0]
+    observed = [row for trial in cohort["trials"] for row in trial["cases"] if row["actual_gif"]]
+    assert len(observed) == len(cohort["representative_media"]) == 6
+    assert sum(media["representative"] for media in cohort["representative_media"]) == 4
+    assert cohort["published_media_scope"] == "all actual observed runs"
+    for row in observed:
+        published = row["published_gif"]
+        assert publisher.file_hash(output / published["relative_path"]) == row["actual_gif"]["sha256"]
+        assert published["relative_path"] in (output / "policy-family-inventory.md").read_text()
+    assert before == {str(raw): publisher.file_hash(raw) for raw in path.parent.rglob("*") if raw.is_file()}
+
+
+def test_pass_count_ties_are_explicit_and_exclude_unmeasured_configs(tmp_path):
+    path, _ = fixture(tmp_path / "raw", all_late=True)
+    board = publisher.publish([path], tmp_path / "publication")
+    cohort = board["cohorts"][0]
+    for family, ties in cohort["per_family_best_observed_ties"].items():
+        assert len(ties) == 2 and ties[0] == cohort["per_family_best_observed"][family]
+        assert all(next(trial for trial in cohort["trials"] if trial["id"] == identity)["measured_cases"] == 1
+                   for identity in ties)
+    text = (tmp_path / "publication/policy-family-inventory.md").read_text()
+    assert "Pass-count ties:" in text and "no measured quality advantage" in text
