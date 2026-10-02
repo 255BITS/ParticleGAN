@@ -104,7 +104,7 @@ def resolve_host_initialization(value, *, initializer="deterministic_orthogonal"
     if set(requirements or {}) - set(policies):
         raise ValueError("required component initializer is not pinned by this host")
     if "prior" in policies and "init_std" in (prior or {}):
-        raise ValueError("explicit candidate prior.init_std conflicts with task-pinned location initialization")
+        raise ValueError("explicit prior.init_std conflicts with task-pinned location initialization")
     return deepcopy(value)
 
 
@@ -199,8 +199,8 @@ def native_profile_blockers(task, candidate, *, root=None):
         if spec is None:
             return []
         release = _profile_id(task) == RELEASE_PROFILE_ID
-        prior = (task["execution"].get("prior", {}) if release else
-                 candidate.get("prior", task["execution"].get("prior", {})))
+        from .priors import task_prior
+        prior = task_prior(task)
         if release:
             if (prior.get("kind") != "particle_cloud" or prior.get("sigma") != 0
                     or prior.get("standardize") is not False or prior.get("learnable") is not True

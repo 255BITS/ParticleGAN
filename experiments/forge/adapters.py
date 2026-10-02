@@ -21,6 +21,7 @@ from .api import (CapabilityError, FormulationContext, host_recipe_overrides,
 from .artifacts import manifest_artifacts, verify_artifacts
 from .contracts import atomic_json, file_hash, read_json, stable_hash
 from .mechanisms import MechanismAudit, mechanism_blockers
+from .priors import task_prior
 from .sampling import ENUMERATED_PRIOR_CLEAN, PUBLIC_PRIOR_CLEAN, executed_receipt
 from .state import state_digest
 from .telemetry import PhaseTimer, normalize_adapter_costs
@@ -32,6 +33,7 @@ def _event(event, **values):
 
 
 def _context(request, task, device, resources):
+    prior = task_prior(task)
     candidate = bind_task_candidate(request["candidate"], task)
     from .nativeprofiles import native_host_initialization
     host_initialization = native_host_initialization(task)
@@ -41,7 +43,7 @@ def _context(request, task, device, resources):
     overrides = host_recipe_overrides(candidate, task["execution"], resources)
     context = FormulationContext(
         recipe_preset=candidate.get("recipe_preset"), recipe_overrides=overrides,
-        prior=task["execution"].get("prior", candidate.get("prior")),
+        prior=prior,
         seed=request["protocol"]["seed"], device=device,
         requires_capabilities=tuple(candidate.get("requires_capabilities", ())) + tuple(task["requires_capabilities"]),
         extensions=candidate.get("extensions", {}), initializer=candidate.get("initializer", "deterministic_orthogonal"),
@@ -53,6 +55,7 @@ def _context(request, task, device, resources):
 def adapter_preflight(task, candidate, *, root=None):
     """Report unsupported task/host bindings before reserving training compute."""
     try:
+        task_prior(task)
         candidate = bind_task_candidate(candidate, task)
     except ValueError as error:
         return [str(error)]

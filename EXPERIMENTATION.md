@@ -137,6 +137,15 @@ width and uniform mixture weights remain fixed by default. Particle-cloud hosts
 must explicitly declare `kind: "particle_cloud"`, `sigma: 0`, and an exception
 reason. Historical sigma-zero receipts retain their original identity.
 
+Every task must define `execution.prior` with `kind`, `sigma`, `standardize`,
+and `learnable`; it cannot inherit a prior from the candidate, preset or API.
+`kind: "mog"` selects the public `MoGParticlePrior` code path, while
+`kind: "particle_cloud"` selects `ParticlePrior`. A zero-width MoG and a particle
+cloud can describe the same distribution but retain separate implementation
+identities. Ordinary MoG tasks still require positive sigma. Particle clouds also
+require `standardize: false` and their explicit exception reason. Parameter-only
+controls declare `prior_applicability: "not_sampled"` in `execution`.
+
 Do not create seed-only ideas. Screening uses one fixed protocol seed with named,
 isolated streams. Changing an initializer, sampling law, or stream binding changes
 the evidence identity. A future public-default promotion requires the plan's
@@ -284,7 +293,9 @@ python -m experiments.forge experiments-by-tier --json
 
 The report reads validated task and view declarations plus compact published
 research indexes without accessing the queue, launching training or regrading
-saved evidence. Each task links to its question, declared numerical gates,
+saved evidence. Its prior column names each task's code path and absolute sigma;
+recorded outcomes and related API demos show their own saved priors, with missing
+bindings labelled unrecorded. Each task links to its question, declared numerical gates,
 recorded Forge configuration outcomes and related public-API training GIFs.
 Related demos keep their own recipe, prior, initialization, budget, sampling
 and runtime; they confer no qualification on a different Forge task.

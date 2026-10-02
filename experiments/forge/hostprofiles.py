@@ -9,6 +9,7 @@ from __future__ import annotations
 from pathlib import Path
 
 from .contracts import canonical, stable_hash
+from .priors import task_prior
 
 MODULE = "experiments/forge/hostprofiles.py"
 PROFILE_ADAPTERS = {"image_profile": {"transfer_image"},
@@ -82,13 +83,7 @@ def _validate_task(task, candidate, root):
             raise ValueError("execution budget differs from the explicit host card")
         resources = {"num_particles": spec["particles"], "z_dim": spec["z_dim"],
                      "batch_size": spec["batch_size"] if adapter == "transfer_image" else spec["batch"]}
-    prior = execution.get("prior")
-    if not isinstance(prior, dict) or not isinstance(candidate.get("prior"), dict):
-        raise ValueError("host request needs an explicit resolved task and candidate prior")
-    # Only a task's declared finite-cloud exception may override the candidate's
-    # sampler. Other tasks must execute the resolved candidate prior literally.
-    if prior.get("kind") != "particle_cloud" and canonical(prior) != canonical(candidate["prior"]):
-        raise ValueError("task prior differs from the resolved candidate prior")
+    prior = task_prior(task)
     from .api import host_recipe_overrides, task_policy_blockers
     blockers = task_policy_blockers(task, candidate)
     if blockers:

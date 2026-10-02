@@ -17,6 +17,7 @@ from pathlib import Path
 import sys
 
 from .sampling import grade_sampling, validate_declaration
+from .priors import task_prior
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -152,6 +153,7 @@ def _validate_task(task):
     if not isinstance(caps, list) or any(not isinstance(x, str) or not x for x in caps):
         raise ValueError("requires_capabilities must be a list of names")
     _dependencies(task)
+    task_prior(task)
     _validate_measurement_contract(task)
 
 

@@ -7,6 +7,7 @@ from pathlib import Path
 
 from .contracts import atomic_json, identifier, read_json, stable_hash, validate_idea
 from .sampling import candidate_blockers, task_blockers
+from .priors import task_prior
 from .sources import compute_profile, inspect_source, runtime_manifest, snapshot_source
 from .views import (load_tasks, load_view, task_evaluation_fingerprint,
                     task_execution_fingerprint, validate_view, view_fingerprint)
@@ -184,15 +185,21 @@ def resolve_idea(root: Path, idea_id: str, *, view_id: str | None = None,
             from .contracts import file_hash
             if file_hash(root / relative) != digest:
                 blockers.append(f"{task['id']}: evaluator source changed; revise the task definition: {relative}")
-        task_prior = task["execution"].get("prior", defaults["prior"])
-        # Explicit cloud tests define a different host law; ordinary tasks resolve
-        # the candidate's learned MoG, not an implicit sigma-zero fallback.
-        if task_prior.get("kind") != "particle_cloud":
-            task["execution"]["prior"] = deepcopy(prior)
-        missing = set(task["requires_capabilities"]) - set(capabilities)
-        # Particle clouds in an explicit host exception are built by the adapter.
-        missing -= {"particle_cloud"} if task_prior.get("kind") == "particle_cloud" else set()
-        task["preflight_blockers"] = [f"missing capability {cap}" for cap in sorted(missing)]
+        # The task owns its sampling law. Candidate priors describe the reference
+        # formulation and cannot replace even a task's MoG width or code path.
+        from .taskrecipes import bind_task_candidate
+        try:
+            bound = bind_task_candidate(candidate, task)
+            task_context = FormulationContext(recipe_preset=bound.get("recipe_preset"),
+                recipe_overrides=bound.get("recipe_overrides", {}), prior=task_prior(task),
+                seed=protocol["seed"], requires_capabilities=bound.get("requires_capabilities", []),
+                extensions=bound.get("extensions", {}), initializer=bound.get("initializer", "deterministic_orthogonal"),
+                execution_path=task["execution"].get("execution_path", bound.get("execution_path", "public_trainer")))
+            available = {name for name, enabled in task_context.capabilities().items() if enabled}
+            missing = set(task["requires_capabilities"]) - available
+            task["preflight_blockers"] = [f"missing capability {cap}" for cap in sorted(missing)]
+        except ValueError as error:
+            task["preflight_blockers"] = getattr(error, "blockers", [str(error)])
         from .adapters import adapter_preflight
         task["preflight_blockers"].extend(adapter_preflight(task, candidate, root=root))
         task["preflight_blockers"].extend(task_blockers(task))

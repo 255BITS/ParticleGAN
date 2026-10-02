@@ -13,10 +13,10 @@ import torch
 
 from particlegan import GANTrainer, Recipe, get_recipe, init, prior_capabilities, prior_mechanisms
 from .rng import NamedStreams, RNG_VERSION
+from .priors import DEFAULT_PRIOR, resolve_prior
 
 
 API_VERSION = "forge-api-v1"
-DEFAULT_PRIOR = {"kind": "mog", "sigma": .025, "standardize": False, "learnable": True}
 TRAINER_STREAM_BINDINGS = {
     "latent_generator": ("prior", "latent", "indices"),
     "penalty_generator": ("noise", "penalty", "training"),
@@ -191,28 +191,10 @@ def default_registry():
 
 
 def _resolved_prior(value):
-    given = {} if value is None else dict(value)
-    unknown = set(given) - {"kind", "sigma", "standardize", "learnable", "exception_reason", "init_std"}
-    if unknown:
-        raise CapabilityError([f"unsupported prior fields: {sorted(unknown)}"])
-    prior = {**DEFAULT_PRIOR, **given}
-    if prior["kind"] not in ("mog", "particle_cloud"):
-        raise CapabilityError(["prior kind must be mog or particle_cloud"])
-    if (type(prior["sigma"]) not in (int, float) or not math.isfinite(prior["sigma"])
-            or prior["sigma"] < 0 or type(prior["standardize"]) is not bool
-            or type(prior["learnable"]) is not bool):
-        raise CapabilityError(["prior sigma/standardize/learnable fields are invalid"])
-    if prior["kind"] == "particle_cloud":
-        if (not {"sigma", "standardize", "exception_reason"}.issubset(given)
-                or prior["sigma"] != 0 or prior["standardize"]
-                or not isinstance(prior["exception_reason"], str) or not prior["exception_reason"].strip()):
-            raise CapabilityError(["particle_cloud requires explicit sigma=0, standardize=False and exception_reason"])
-    elif prior["sigma"] <= 0:
-        raise CapabilityError(["MoG requires nonzero sigma; declare an explicit particle_cloud exception for zero noise"])
-    if "init_std" in prior and (type(prior["init_std"]) not in (int, float)
-                                or not math.isfinite(prior["init_std"]) or prior["init_std"] < 0):
-        raise CapabilityError(["prior init_std must be finite and nonnegative"])
-    return prior
+    try:
+        return resolve_prior(value)
+    except ValueError as error:
+        raise CapabilityError([str(error)]) from error
 
 
 class FormulationContext:

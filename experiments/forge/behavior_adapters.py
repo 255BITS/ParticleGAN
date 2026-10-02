@@ -20,7 +20,7 @@ from unittest.mock import patch
 import torch
 from torch import nn
 
-from particlegan import init
+from particlegan import init, prior_capabilities
 from particlegan.recipes import learning_rate_scales
 from particlegan.recipe_schedules import apply_optimizer_schedule
 from particlegan.training import input_noise_std, output_noise_std
@@ -29,6 +29,7 @@ from benchmarks.transfer_suite.legacy_noise_adapters import NoisePolicy, _InputA
 from .api import CapabilityError, FormulationContext, task_policy_blockers
 from .contracts import atomic_json
 from .mechanisms import MechanismAudit, mechanism_blockers
+from .priors import task_prior
 from .sampling import BEHAVIOR_POLICIES, POLICIES, executed_receipt
 from .taskrecipes import BEHAVIOR_HOST_FIELDS, adaptation_receipt, bind_task_candidate
 
@@ -45,13 +46,20 @@ FROZEN_HOST_RECIPE_FIELDS = BEHAVIOR_HOST_FIELDS
 def behavior_preflight(task: dict, candidate: dict) -> list[str]:
     """Return unsupported explicit overrides before constructing any host state."""
     try:
+        prior = task_prior(task)
         candidate = bind_task_candidate(candidate, task)
     except ValueError as error:
         return [str(error)]
     fields = set(candidate.get("recipe_overrides", {})) & FROZEN_HOST_RECIPE_FIELDS
-    if task["execution"].get("host", task["id"]) != "ae_gan_hold":
+    host = task["execution"].get("host", task["id"])
+    if host != "ae_gan_hold":
         fields |= set(candidate.get("recipe_overrides", {})) & {"routing_temperature", "distance_reduction"}
-    return (task_policy_blockers(task, candidate)
+    prior_blockers = []
+    if host in HOSTS:
+        expected = "mog" if host == "ae_gan_hold" else "particle_cloud"
+        if prior["kind"] != expected:
+            prior_blockers.append(f"{task['id']}: frozen behavioral host requires prior kind {expected}")
+    return (prior_blockers + task_policy_blockers(task, candidate)
             + [f"{task['id']}: recipe override {name!r} is owned by the frozen host; revise its task specification"
                for name in sorted(fields)])
 
@@ -189,7 +197,8 @@ class BehaviorComponents:
         overrides["total_steps"] = task["execution"]["steps"]
         self.context = FormulationContext(
             recipe_preset=candidate.get("recipe_preset"), recipe_overrides=overrides,
-            prior=task["execution"]["prior"],
+            prior=task_prior(task),
+            requires_capabilities=tuple(candidate.get("requires_capabilities", ())) + tuple(task["requires_capabilities"]),
             seed=request.get("protocol", {}).get("seed", 0), device="cpu",
             extensions=candidate.get("extensions", {}),
             initializer=candidate.get("initializer", "deterministic_orthogonal"),
@@ -214,6 +223,8 @@ class BehaviorComponents:
 
     def make_prior(self, recipe):
         prior = recipe.make_prior(sigma=self.context.prior_config["sigma"],
+                                  learnable=self.context.prior_config["learnable"],
+                                  init_std=self.context.prior_config.get("init_std", 1.),
                                   generator=self.context.streams.generator("init", component="prior", purpose="locations"))
         return prior
 
@@ -242,6 +253,15 @@ class BehaviorComponents:
     def bind(self, *, generator, critic, opt_g, opt_d, priors=(), encoder=None, direct_particles=()):
         if self.bound:
             raise RuntimeError("one component binder cannot own two host runs")
+        declared = self.context.prior_config
+        for prior in priors:
+            actual = prior_capabilities(prior)
+            expected = {"kind": declared["kind"], "sigma": declared["sigma"],
+                        "standardize": declared["standardize"], "learned_locations": declared["learnable"]}
+            if actual["kind"] == "mog":
+                expected["sigma"] = float(prior.sigma.new_tensor(declared["sigma"]))
+            if any(actual[key] != value for key, value in expected.items()):
+                raise CapabilityError([f"{self.task['id']}: constructed prior differs from execution.prior"])
         self.bound = True
         critic = _base(critic)
         for role, model in (("generator", generator), ("encoder", encoder), ("discriminator", critic)):

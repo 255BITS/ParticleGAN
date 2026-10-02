@@ -91,6 +91,11 @@ def build_artifacts(root: Path, tasks: dict, task_paths: dict) -> dict:
         location = locations[case["id"]]
         readout = readouts.get(case["id"], {})
         receipt = receipts.get(case["id"], {})
+        recipe = receipt.get("recipe", {})
+        prior_kind = {"mog": "mog", "particles": "particle_cloud"}.get(recipe.get("prior_kind"))
+        recorded_prior = ({"kind": "particle_cloud", "sigma": 0.} if prior_kind == "particle_cloud" else
+                          {"kind": "mog", **{key: recipe[key] for key in ("sigma_rel", "standardize")
+                                             if key in recipe}} if prior_kind == "mog" else None)
         media = readout.get("gif") or receipt.get("gif")
         media_path = location["media_base"] / media if media else None
         if media_path is not None:
@@ -104,6 +109,7 @@ def build_artifacts(root: Path, tasks: dict, task_paths: dict) -> dict:
             "evidence_source": location["readout"] if readout else None,
             "receipt_source": location["receipt"] if receipt else None,
             "recipe": receipt.get("recipe", {}).get("name", case.get("default_recipe", "undeclared")),
+            "prior": recorded_prior,
             "source_commit": readout.get("source_commit"),
             "source_identity": receipt.get("source_identity"),
             "runtime": receipt.get("runtime", {}), "sampling": case.get("sampling"),
@@ -151,6 +157,8 @@ def build_artifacts(root: Path, tasks: dict, task_paths: dict) -> dict:
                     "source_commit": row.get("bindings", {}).get("source_origin_commit"),
                     "config_source": config, "evidence_source": publication_path,
                     "recorded_task_contract": recorded_contract,
+                    "prior": contract.get("prior"),
+                    "prior_applicability": contract.get("sampling", {}).get("prior_applicability"),
                     "declaration_match": declaration_match,
                 })
 

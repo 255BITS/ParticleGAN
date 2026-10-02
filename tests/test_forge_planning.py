@@ -46,6 +46,39 @@ def test_plan_does_not_write_and_honors_tier_cap(checkout):
     assert request["rng"]["bindings"]
 
 
+def test_planner_preserves_experiment_priors_over_candidate_reference(checkout):
+    idea_path = checkout / "configs/forge/ideas/base.json"
+    idea = read_json(idea_path)
+    idea["prior"] = {"sigma": .1}
+    atomic_json(idea_path, idea)
+    particle_path = checkout / "configs/forge/tasks/t2.json"
+    particle = read_json(particle_path)
+    particle["execution"]["prior"] = {"kind": "particle_cloud", "sigma": 0,
+        "standardize": False, "learnable": True, "exception_reason": "Explicit cloud fixture"}
+    particle["requires_capabilities"].append("particle_cloud")
+    atomic_json(particle_path, particle)
+    request = resolve_idea(checkout, "base")
+    assert request["candidate"]["prior"]["sigma"] == .1
+    for name in ("t1", "t2", "t3"):
+        declaration = read_json(checkout / f"configs/forge/tasks/{name}.json")
+        assert request["tasks"][name]["execution"]["prior"] == declaration["execution"]["prior"]
+        assert request["tasks"][name]["preflight_blockers"] == []
+
+
+def test_changing_task_prior_changes_its_job_without_changing_other_experiments(checkout):
+    old = resolve_idea(checkout, "base")
+    path = checkout / "configs/forge/tasks/t1.json"
+    value = read_json(path)
+    value["execution"]["prior"]["sigma"] = .05
+    atomic_json(path, value)
+    new = resolve_idea(checkout, "base")
+    assert old["candidate_revision"] == new["candidate_revision"]
+    keys = lambda r: {j["task_id"]: j["compatibility_key"] for j in r["jobs"]}
+    before, after = keys(old), keys(new)
+    assert before["t1"] != after["t1"]
+    assert before["t2"] == after["t2"] and before["t3"] == after["t3"]
+
+
 def test_retiering_reuses_keys_but_freezes_old_policy(checkout):
     old = resolve_idea(checkout, "base")
     path = checkout / "configs/forge/views/stability.json"
