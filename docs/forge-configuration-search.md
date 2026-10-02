@@ -92,6 +92,12 @@ winner stops. The campaign retains the existing full-task 44,100-second
 reservation ceiling, reuses smoke evidence and stops at the first ordinary
 prerequisite failure. Tuning and confirmation costs are reported separately.
 
+The completed [R1/R2 readout](../reports/forge/R1R2_CONFIGURATION_SEARCH_READOUT.md)
+records a 3/3 smoke winner at LR 0.0085 and gamma 1 to 0.1. Its ordinary
+trajectory quality check failed, so it remains Tier 1 and later requirements
+remain unmeasured. The readout links the compact confirmation cost receipt and
+the current leaderboard.
+
 The current screening profile remains provisional. Neither this search nor a
 passing smoke screen establishes calibrated ranking or public-default adoption.
 Calibration and the separately registered robustness stage retain their existing

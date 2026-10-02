@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope; current qualification is recomputed from compatible receipts.
 
-Records: 253. Inventory coverage: complete. Unresolved import items: 7.
+Records: 257. Inventory coverage: incomplete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -3781,6 +3781,22 @@ Reject the one-factor A2-off diagnostic on the named affine grid100 learned-MoG 
 
 [Evidence](../../reports/forge/attempts/d4d633052321469e82caff90210ef309/result.json) · [Record](records/readout-5830d399b6741ce7b3a2b992.json)
 
+### r1r2--abf642c42c5346ad096c29202e4716db535c393c113478552133c1c22761ddbd · readout-5bc30fee4d41b69294b1e32e
+
+**Scope:** current; scientific; revision `7c08dcbf6b2e1a90368368ba328f3597a260381ca68b67f2ac28904050ce3ee1`.
+
+Under the unchanged fixed toy-host movement/convergence gates, larger constant learning rates and paired R1/R2 gamma schedules may improve the failed Modern GAN training adaptation.
+
+**Observed:** {'FAIL': 1, 'PASS': 3}; wall seconds 23.971; mechanism `floor_constant`.
+
+
+
+Bounded R1/R2 Modern GAN toy-host configuration {'lr': 0.0085, 'reg_coeff': 1.0, 'reg_coeff_end': 0.1} under the fixed source/protocol/runtime produced [{'task': 'two_pole', 'gate_status': 'PASS', 'metrics': {'grad_med': 0.6198654174804688, 'mean_abs': 0.8125556111335754}}, {'task': 'unused_token_hold', 'gate_status': 'PASS', 'metrics': {'concept_move': 0.9999794960526742, 'unused_hold': 0.997301101218909}}, {'task': 'ae_gan_hold', 'gate_status': 'PASS', 'metrics': {'hold': 0.06419558823108673, 'recon_mse': 0.006500412710011005}}, {'task': 'trajectory', 'gate_status': 'FAIL', 'metrics': {'identity_mse': 0.23911647498607635}}]. Ordinary prerequisite stopping retained every unmeasured requirement.
+
+**Next:** Stop this exact failed configuration; review the provisional convergence screen before another parameter study. No downstream diagnostic, seed repeat or default adoption follows.
+
+[Evidence](../../reports/forge/technique-receipts/3c6a84341114445da149f04ab7541f01.json) · [Record](records/readout-5bc30fee4d41b69294b1e32e.json)
+
 ### k3p-no-output-noise-diagnostic · readout-6c0c2c5c6610ecfe73fe315d
 
 **Scope:** current; scientific; revision `7bb7527f2fa60cf20120b07fae977f953e66716f31a40ba180240c35a376d803`.
@@ -4037,6 +4053,22 @@ Preregistered full7000-update grid100_affine_paired_laws_v1 FAIL; sustained cove
 
 [Evidence](../../reports/forge/attempts/0bce04d970264d4c95335030ed8724e7/result.json) · [Record](records/readout-d5a99d9470252f695a717dfc.json)
 
+### r1r2--7728cf93188b9fe122536244667789941da52d435cfb0a3ae42b90db200d7595 · readout-dc31730b85dde3cf85253359
+
+**Scope:** current; scientific; revision `059128df90e1bcb0af7f4596f5f9dd034686b171c24177f080a2b971e0f79fe2`.
+
+Under the unchanged fixed toy-host movement/convergence gates, larger constant learning rates and paired R1/R2 gamma schedules may improve the failed Modern GAN training adaptation.
+
+**Observed:** {'FAIL': 1}; wall seconds 9.516; mechanism `floor_constant`.
+
+
+
+Bounded R1/R2 Modern GAN toy-host configuration {'lr': 0.00425, 'reg_coeff': 1.0, 'reg_coeff_end': 0.1} under the fixed source/protocol/runtime produced [{'task': 'two_pole', 'gate_status': 'FAIL', 'metrics': {'grad_med': 0.2411961704492569, 'mean_abs': 0.14577166736125946}}]. Ordinary prerequisite stopping retained every unmeasured requirement.
+
+**Next:** Stop this exact failed configuration; review the provisional convergence screen before another parameter study. No downstream diagnostic, seed repeat or default adoption follows.
+
+[Evidence](../../reports/forge/technique-receipts/b686547339464e94a60fd692675f1545.json) · [Record](records/readout-dc31730b85dde3cf85253359.json)
+
 ### k3p · readout-eeec25002d17191c315f126b
 
 **Scope:** calibration_diagnostic; scientific; revision `6385ef80463dca6a3c1c1f94dd3269c8e1db3702a8d236c1bd59d69787e06325`.
@@ -4052,6 +4084,38 @@ Preregistered full7000-update grid100_affine_paired_laws_v1 FAIL; sustained cove
 **Next:** Stop these exact revisions and this selected registration. Before another GPU study, perform a bounded zero-training saved-state audit of critic radial and centering gradients against per-mode moments. Only a supported substantive hypothesis warrants a new frozen registration. Preserve A2 and sigma .025; no coefficient, cap, width, amplitude or seed sweep, best-checkpoint/EMA substitution, 14k continuation or automatic matrix expansion.
 
 [Evidence](../../reports/forge/attempts/56177ab1d23243d8a6fe61413d8f870f/result.json) · [Record](records/readout-eeec25002d17191c315f126b.json)
+
+### r1r2--f398f6ea70a2d101c520a1a01db90ea968bbb16736e6cec7ffc887e1dd7e241a · readout-f0dadd320f7db48cbf5d7b20
+
+**Scope:** current; scientific; revision `158a5e917e91a158e45de1e37434b11e2469a8e39fbca5b99edac6069c7764aa`.
+
+Under the unchanged fixed toy-host movement/convergence gates, larger constant learning rates and paired R1/R2 gamma schedules may improve the failed Modern GAN training adaptation.
+
+**Observed:** {'FAIL': 1}; wall seconds 5.513; mechanism `floor_constant`.
+
+
+
+Bounded R1/R2 Modern GAN toy-host configuration {'lr': 0.0085, 'reg_coeff': 0.1, 'reg_coeff_end': 0.01} under the fixed source/protocol/runtime produced [{'task': 'two_pole', 'gate_status': 'FAIL', 'metrics': {'grad_med': 1.0202852487564087, 'mean_abs': 1.0062839984893799}}]. Ordinary prerequisite stopping retained every unmeasured requirement.
+
+**Next:** Stop this exact failed configuration; review the provisional convergence screen before another parameter study. No downstream diagnostic, seed repeat or default adoption follows.
+
+[Evidence](../../reports/forge/technique-receipts/2a719ec706924f0ab120961cd58f7582.json) · [Record](records/readout-f0dadd320f7db48cbf5d7b20.json)
+
+### r1r2--b58a087cabab6b43997ec233416294cfc2786bab59026c07a1a4f2565970f5ff · readout-f61373e09376e33fc4c501c8
+
+**Scope:** current; scientific; revision `ff171334c936fd2a0bc7ad4e4beb25ba6582bc35e3baf2042db7345738705493`.
+
+Under the unchanged fixed toy-host movement/convergence gates, larger constant learning rates and paired R1/R2 gamma schedules may improve the failed Modern GAN training adaptation.
+
+**Observed:** {'FAIL': 1}; wall seconds 5.456; mechanism `floor_constant`.
+
+
+
+Bounded R1/R2 Modern GAN toy-host configuration {'lr': 0.00425, 'reg_coeff': 0.1, 'reg_coeff_end': 0.01} under the fixed source/protocol/runtime produced [{'task': 'two_pole', 'gate_status': 'FAIL', 'metrics': {'grad_med': 0.6937375068664551, 'mean_abs': 0.37995293736457825}}]. Ordinary prerequisite stopping retained every unmeasured requirement.
+
+**Next:** Stop this exact failed configuration; review the provisional convergence screen before another parameter study. No downstream diagnostic, seed repeat or default adoption follows.
+
+[Evidence](../../reports/forge/technique-receipts/8ff64e32bf294e5597d8deb036527075.json) · [Record](records/readout-f61373e09376e33fc4c501c8.json)
 
 ### k3p · readout-faf4999394106140c8a2052e
 
@@ -4081,4 +4145,4 @@ This technique failed the full 80-update two_pole smoke gate: {'grad_med': 0.063
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v1`; input digest `dff9e26751acb7340ed99b0144578dc48488e688e78b7e0f7a4f12fbf25806a0`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v1`; input digest `9cfa896299145084ff880e2ace712d499a8ef876b4826d9ea0a4c0b13c8e7367`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

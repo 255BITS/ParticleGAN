@@ -1,7 +1,7 @@
 {
   "attempt_outcomes": {
     "cancelled": 1,
-    "completed": 62
+    "completed": 69
   },
   "component_timing": {
     "measured_attempts": 22,
@@ -11,46 +11,46 @@
       "sampling": 0.769850275319186,
       "training_updates": 659.339497676352
     },
-    "unmeasured_attempts": 41
+    "unmeasured_attempts": 48
   },
   "concurrency": {
-    "mean_active_workers": 0.004456424322208031,
-    "measured_attempts": 61,
+    "mean_active_workers": 0.003959117879063414,
+    "measured_attempts": 68,
     "missing_interval_attempts": 2,
-    "observation_window_seconds": 260243.286059618,
+    "observation_window_seconds": 304161.2448194027,
     "peak_distinct_gpu_devices": 2,
     "peak_workers": 2,
     "scope": "Actual supervised-attempt intervals; this is process occupancy, not GPU kernel utilization."
   },
   "cost_to_qualify": {
-    "maximum_seconds": null,
-    "mean_seconds": null,
-    "measured_outcomes": 0,
-    "median_seconds": null,
-    "outcomes": 0,
+    "maximum_seconds": 17.334850379033014,
+    "mean_seconds": 17.334850379033014,
+    "measured_outcomes": 1,
+    "median_seconds": 17.334850379033014,
+    "outcomes": 1,
     "unknown_cost_outcomes": 0
   },
   "cost_to_reject": {
     "maximum_seconds": 86.35670835815836,
-    "mean_seconds": 11.574695324220686,
-    "measured_outcomes": 14,
-    "median_seconds": 5.544849258469185,
-    "outcomes": 14,
+    "mean_seconds": 10.509261490061666,
+    "measured_outcomes": 18,
+    "median_seconds": 5.5470435855095275,
+    "outcomes": 18,
     "unknown_cost_outcomes": 0
   },
   "execution_error_rate": {
-    "denominator": 63,
-    "fraction": 0.015873015873015872,
+    "denominator": 70,
+    "fraction": 0.014285714285714285,
     "numerator": 1
   },
-  "execution_jobs_avoided": 220,
+  "execution_jobs_avoided": 245,
   "flops": {
     "kind": "unavailable",
     "value": null
   },
   "incomplete_task_rate": {
-    "denominator": 63,
-    "fraction": 0.015873015873015872,
+    "denominator": 70,
+    "fraction": 0.014285714285714285,
     "numerator": 1
   },
   "limits": [
@@ -69,15 +69,15 @@
     },
     "maximum_reaped_child_peak_rss_bytes": {
       "maximum_bytes": 2168516608,
-      "measured_attempts": 61
+      "measured_attempts": 68
     },
     "process_peak_rss_bytes": {
       "maximum_bytes": 2168516608,
-      "measured_attempts": 60
+      "measured_attempts": 67
     },
     "supervisor_peak_rss_bytes": {
       "maximum_bytes": 868331520,
-      "measured_attempts": 61
+      "measured_attempts": 68
     }
   },
   "memory_scope": "Process-lifetime RSS and PyTorch allocator peaks have distinct scopes; none is whole-host or whole-device memory.",
@@ -401,6 +401,48 @@
     },
     {
       "attempt_ids": [
+        "8ff64e32bf294e5597d8deb036527075"
+      ],
+      "avoided_execution_jobs": 2,
+      "avoided_tasks": [
+        "unused_token_hold",
+        "ae_gan_hold"
+      ],
+      "candidate_revision": "ff171334c936fd2a0bc7ad4e4beb25ba6582bc35e3baf2042db7345738705493",
+      "evidence_wall_seconds": 5.456266971013974,
+      "incremental_paid_seconds": 5.456266971013974,
+      "qualified_tier": 0,
+      "rejected_tier": 1,
+      "request_ids": [
+        "1f92bc90b3948253f7d3723c"
+      ],
+      "status": "FAIL",
+      "through_tier": 1,
+      "view": "discriminator_stability"
+    },
+    {
+      "attempt_ids": [
+        "2a719ec706924f0ab120961cd58f7582"
+      ],
+      "avoided_execution_jobs": 2,
+      "avoided_tasks": [
+        "unused_token_hold",
+        "ae_gan_hold"
+      ],
+      "candidate_revision": "158a5e917e91a158e45de1e37434b11e2469a8e39fbca5b99edac6069c7764aa",
+      "evidence_wall_seconds": 5.51279703702312,
+      "incremental_paid_seconds": 5.51279703702312,
+      "qualified_tier": 0,
+      "rejected_tier": 1,
+      "request_ids": [
+        "eab9a2dfe43a0b31556df609"
+      ],
+      "status": "FAIL",
+      "through_tier": 1,
+      "view": "discriminator_stability"
+    },
+    {
+      "attempt_ids": [
         "813505867f5348bfbe113791d78ce0c5"
       ],
       "avoided_execution_jobs": 22,
@@ -587,6 +629,89 @@
       "status": "FAIL",
       "through_tier": 1,
       "view": "discriminator_stability"
+    },
+    {
+      "attempt_ids": [
+        "3c6a84341114445da149f04ab7541f01",
+        "6c44b7cbaff34277a9da6bb0ccb98321",
+        "bcaebd15d92841d0b99aec185a446a46"
+      ],
+      "avoided_execution_jobs": 0,
+      "avoided_tasks": [],
+      "candidate_revision": "7c08dcbf6b2e1a90368368ba328f3597a260381ca68b67f2ac28904050ce3ee1",
+      "evidence_wall_seconds": 17.334850379033014,
+      "incremental_paid_seconds": 17.334850379033014,
+      "qualified_tier": 1,
+      "rejected_tier": null,
+      "request_ids": [
+        "f5103684e4a70ca14892d2fe"
+      ],
+      "status": "PASS",
+      "through_tier": 1,
+      "view": "discriminator_stability"
+    },
+    {
+      "attempt_ids": [
+        "b686547339464e94a60fd692675f1545"
+      ],
+      "avoided_execution_jobs": 2,
+      "avoided_tasks": [
+        "unused_token_hold",
+        "ae_gan_hold"
+      ],
+      "candidate_revision": "059128df90e1bcb0af7f4596f5f9dd034686b171c24177f080a2b971e0f79fe2",
+      "evidence_wall_seconds": 9.51561203901656,
+      "incremental_paid_seconds": 9.51561203901656,
+      "qualified_tier": 0,
+      "rejected_tier": 1,
+      "request_ids": [
+        "9073785ce55366058c397caf"
+      ],
+      "status": "FAIL",
+      "through_tier": 1,
+      "view": "discriminator_stability"
+    },
+    {
+      "attempt_ids": [
+        "3c6a84341114445da149f04ab7541f01",
+        "6c44b7cbaff34277a9da6bb0ccb98321",
+        "8f6e156ef20f47ae939597d0fdcfde65",
+        "bcaebd15d92841d0b99aec185a446a46"
+      ],
+      "avoided_execution_jobs": 19,
+      "avoided_tasks": [
+        "residual_student",
+        "unipolar",
+        "cover_leftover",
+        "mid_scale_identity",
+        "mode_hold",
+        "vector_two_broad",
+        "vector_unequal_mass",
+        "vector_unequal_width",
+        "vector_anisotropic",
+        "vector_overlap",
+        "vector_spiral",
+        "img_stripes2",
+        "img_bars4",
+        "img_blobs4",
+        "img_intensity2",
+        "grid100",
+        "rotated100",
+        "staggered100",
+        "ring_hold",
+        "ring_extension"
+      ],
+      "candidate_revision": "7c08dcbf6b2e1a90368368ba328f3597a260381ca68b67f2ac28904050ce3ee1",
+      "evidence_wall_seconds": 23.971146613999736,
+      "incremental_paid_seconds": 6.636296234966721,
+      "qualified_tier": 1,
+      "rejected_tier": 2,
+      "request_ids": [
+        "8b14a136693890e59481ab01"
+      ],
+      "status": "FAIL",
+      "through_tier": 3,
+      "view": "discriminator_stability"
     }
   ],
   "queue_available": true,
@@ -599,28 +724,28 @@
   "receipt_issues": [],
   "requests_with_unavailable_cap": 0,
   "reuse": {
-    "evidence_uses": 22,
-    "reused_evidence_uses": 0,
-    "submitted_execution_demands": 242,
-    "unique_evidence_jobs": 22
+    "evidence_uses": 32,
+    "reused_evidence_uses": 3,
+    "submitted_execution_demands": 277,
+    "unique_evidence_jobs": 29
   },
   "schema_version": 1,
   "scope": "recorded current Forge receipts; historical imports are excluded",
   "spend": {
-    "attempts": 63,
-    "known_wall_seconds": 1170.9853577380854,
+    "attempts": 70,
+    "known_wall_seconds": 1215.4411803991388,
     "scope": "Unique paid attempts, including retries; grouped predicates and subscribers are not charged again.",
     "unknown_cost_attempts": 0,
-    "wall_seconds": 1170.9853577380854
+    "wall_seconds": 1215.4411803991388
   },
   "task_gate_counts": {
-    "FAIL": 35,
+    "FAIL": 39,
     "INCOMPLETE": 1,
-    "PASS": 27
+    "PASS": 30
   },
-  "tasks_avoided": 230,
+  "tasks_avoided": 256,
   "tier_rejections": {
-    "1": 13,
-    "2": 1
+    "1": 16,
+    "2": 2
   }
 }

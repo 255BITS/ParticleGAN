@@ -602,6 +602,8 @@ def _current_markdown(result, root, path):
         revision, cohort = (str(row.get(key) or "unresolved")[:12] for key in ("candidate_revision", "cohort"))
         selection = row.get("selection", {})
         selection_label = selection.get("selection_kind", "canonical_fallback").replace("_", " ")
+        if selection.get("selection_kind") == "qualified_winner":
+            selection_label += f" (tuning through tier {selection['tuning_through_tier']})"
         if not selection.get("qualified", False):
             selection_label += "; no qualified winner"
         name = row["candidate_id"]
@@ -616,8 +618,9 @@ def _current_markdown(result, root, path):
     lines += ["", "Recorded results remain bound to their actual recipes, priors, initialization, budgets, sampling laws "
               "and hardware. They do not pool qualification across sources or qualify the latest checkout. "
               "Selection never combines passing tasks or tiers from different configurations. A failed best-observed "
-              "configuration is not a qualified winner. Search evidence is provisional, without independent confirmation "
-              "or public-default adoption. The screening profile remains provisional.", "",
+              "configuration is not a qualified winner. Search qualification covers only its declared tuning tiers; "
+              "later-tier outcomes are reported separately. The screening profile remains provisional and does not "
+              "confer calibrated robustness or public-default adoption.", "",
               "UNKNOWN means unmeasured. Failed or blocked prerequisites stop later work; required denominators stay fixed.", "",
               f"[All configuration alternatives, trials, task statuses and exact bindings]({path.with_suffix('.json').name}) · "
               f"[Evidence and archived publication identities]({os.path.relpath(root / EVIDENCE_MANIFEST, path.parent)})", "",

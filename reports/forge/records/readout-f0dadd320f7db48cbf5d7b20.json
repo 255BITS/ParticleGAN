@@ -1,0 +1,125 @@
+{
+  "attempt_ids": [
+    "2a719ec706924f0ab120961cd58f7582"
+  ],
+  "candidate_id": "r1r2--f398f6ea70a2d101c520a1a01db90ea968bbb16736e6cec7ffc887e1dd7e241a",
+  "candidate_revision": "158a5e917e91a158e45de1e37434b11e2469a8e39fbca5b99edac6069c7764aa",
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "comparison": "Four declared configurations share the trainer implementation, source, tasks, prior, initialization, fixed named-RNG protocol and sampling law. Only learning rate and paired penalty endpoints vary. Selection uses required smoke PASS count then configuration hash. The earlier paper-derived LR0.0002 result retains its different source and is not repeated.",
+  "conclusion": "Bounded R1/R2 Modern GAN toy-host configuration {'lr': 0.0085, 'reg_coeff': 0.1, 'reg_coeff_end': 0.01} under the fixed source/protocol/runtime produced [{'task': 'two_pole', 'gate_status': 'FAIL', 'metrics': {'grad_med': 1.0202852487564087, 'mean_abs': 1.0062839984893799}}]. Ordinary prerequisite stopping retained every unmeasured requirement.",
+  "evidence_scope": "current",
+  "full_readout_archive": "runs/forge/r1r2-modern-toy-search-v1/full-readouts/readout-f0dadd320f7db48cbf5d7b20.json",
+  "goal": "discriminator_stability",
+  "hypothesis": "Under the unchanged fixed toy-host movement/convergence gates, larger constant learning rates and paired R1/R2 gamma schedules may improve the failed Modern GAN training adaptation.",
+  "lifecycle": "concluded",
+  "mechanism_class": "floor_constant",
+  "next_action": "Stop this exact failed configuration; review the provisional convergence screen before another parameter study. No downstream diagnostic, seed repeat or default adoption follows.",
+  "prior": {
+    "kind": "mog",
+    "learnable": true,
+    "sigma": 0.025,
+    "standardize": false
+  },
+  "provenance": {
+    "attempts": [
+      {
+        "attempt_id": "2a719ec706924f0ab120961cd58f7582",
+        "result_hash": "b807d35edaff7c90eb6a99b8530e957fbd12bf5505e738f3ccdedfa219ff4df2",
+        "valid_receipt": true
+      }
+    ]
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "record_id": "readout-f0dadd320f7db48cbf5d7b20",
+  "record_type": "scientific",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/technique-receipts/2a719ec706924f0ab120961cd58f7582.json"
+  },
+  "summary_scope": "final_metrics_and_original_receipt_hashes",
+  "task_results": [
+    {
+      "api_version": "forge-api-v1",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "compatibility_key": "d8848164ea45e3e63cc8ae34a75c078abc9e21a59a1b8294eed1b9df534d3fbd",
+      "cost": {
+        "adapter_seconds": 0.2864444419974461,
+        "charged_task": "two_pole",
+        "device": "cpu",
+        "execution_seconds": 5.51279703702312,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 2.3444447020301595,
+        "wall_seconds": 5.51279703702312
+      },
+      "device": "cpu",
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": 40,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 2,
+          "passing_suffix": 0,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metric_checks": {
+          "grad_med": {
+            "margin": -0.02028524875640869,
+            "metric": "grad_med",
+            "op": "<=",
+            "status": "FAIL",
+            "threshold": 1.0,
+            "value": 1.0202852487564087
+          },
+          "mean_abs": {
+            "margin": 0.7062839984893798,
+            "metric": "mean_abs",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.3,
+            "value": 1.0062839984893799
+          }
+        },
+        "passed": false,
+        "shortfall": 0.010142624378204346,
+        "status": "FAIL"
+      },
+      "execution_path": "public_components",
+      "gate_status": "FAIL",
+      "metrics": {
+        "grad_med": 1.0202852487564087,
+        "mean_abs": 1.0062839984893799
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "sampling": {
+        "eval_output_noise": "not_applied_to_measurement",
+        "sampling_contract_version": 1,
+        "sampling_law": "learned_particles_and_critic_gradient",
+        "scoring_weights": "live"
+      },
+      "status": "FAIL",
+      "task_id": "two_pole"
+    }
+  ]
+}

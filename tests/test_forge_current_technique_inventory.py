@@ -287,11 +287,13 @@ def test_committed_cohorts_rebuild_every_scientific_row_in_a_checkout_without_ra
     for relative in (publication.EVIDENCE_MANIFEST.parent, Path("reports/forge/technique-receipts"),
                      Path("configs/forge/ideas"), Path("configs/forge/configurations"),
                      Path("configs/forge/searches"), Path("configs/forge/views"),
+                     Path("configs/forge/tasks"), Path("configs/forge/protocols"),
                      Path("reports/forge/configuration-search")):
         if not (ROOT / relative).is_dir():
             continue
         shutil.copytree(ROOT / relative, tmp_path / relative)
     shutil.copyfile(ROOT / "configs/forge/trainer-families.json", tmp_path / "configs/forge/trainer-families.json")
+    shutil.copyfile(ROOT / "configs/forge/defaults.json", tmp_path / "configs/forge/defaults.json")
     manifest = read_json(tmp_path / publication.EVIDENCE_MANIFEST)
     expected, all_snapshots, registered_rows = {}, [], []
     for entry in manifest["cohorts"]:

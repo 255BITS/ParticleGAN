@@ -4,34 +4,42 @@ Ordered by attained tier, then candidate name/cohort; raw metrics and cost remai
 
 | Candidate / exact revision | Scope | Tier | Outcomes | Wall seconds | Next action |
 | --- | --- | ---: | --- | ---: | --- |
-| atlas / e728cbf628c3 / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | current | 0 | BLOCKED 39 | unknown | Run the next eligible task within an explicit budget. |
-| atlas / e728cbf628c3 / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | BLOCKED 39 | unknown | Run the next eligible task within an explicit budget. |
-| e22 / 04fc0374cad3 / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | BLOCKED 39 | unknown | Run the next eligible task within an explicit budget. |
-| e22 / 04fc0374cad3 / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | current | 0 | BLOCKED 39 | unknown | Run the next eligible task within an explicit budget. |
-| forge-no-critic-penalty / 2059646581fa / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | NOT_RUN 39 | unknown | Run the next eligible task within an explicit budget. |
-| forge-no-critic-penalty / 2059646581fa / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | current | 0 | NOT_RUN 39 | unknown | Run the next eligible task within an explicit budget. |
-| forge-onboarding-anchor-ablation / 1a8f330a3c21 / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | current | 0 | NOT_RUN 39 | unknown | Run the next eligible task within an explicit budget. |
-| forge-onboarding-anchor-ablation / 1a8f330a3c21 / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | NOT_RUN 39 | unknown | Run the next eligible task within an explicit budget. |
-| k3p / e170f14a9f80 / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | current | 0 | NOT_RUN 39 | unknown | Run the next eligible task within an explicit budget. |
-| k3p / e170f14a9f80 / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | NOT_RUN 39 | unknown | Run the next eligible task within an explicit budget. |
-| k3p-a2-off-native-diagnostic / c79cab529634 / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | current | 0 | NOT_RUN 39 | unknown | Run the next eligible task within an explicit budget. |
-| k3p-a2-off-native-diagnostic / c79cab529634 / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | NOT_RUN 39 | unknown | Run the next eligible task within an explicit budget. |
-| k3p-bcap-matched-v1 / b3db3c247e60 / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | NOT_RUN 39 | unknown | Run the next eligible task within an explicit budget. |
-| k3p-bcap-matched-v1 / b3db3c247e60 / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | current | 0 | NOT_RUN 39 | unknown | Run the next eligible task within an explicit budget. |
-| k3p-no-output-noise-diagnostic / 8edd0e093b60 / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | current | 0 | NOT_RUN 39 | unknown | Run the next eligible task within an explicit budget. |
-| k3p-no-output-noise-diagnostic / 8edd0e093b60 / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | NOT_RUN 39 | unknown | Run the next eligible task within an explicit budget. |
-| k3p-r1r2-matched-v1 / 3f792d817917 / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | NOT_RUN 39 | unknown | Run the next eligible task within an explicit budget. |
-| k3p-r1r2-matched-v1 / 3f792d817917 / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | current | 0 | NOT_RUN 39 | unknown | Run the next eligible task within an explicit budget. |
-| ka2 / 669ba827fa98 / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | current | 0 | NOT_RUN 39 | unknown | Run the next eligible task within an explicit budget. |
-| ka2 / 669ba827fa98 / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | NOT_RUN 39 | unknown | Run the next eligible task within an explicit budget. |
-| r3gan-stacked-training-toy-v1 / 24a7b06cd095 / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | current | 0 | NOT_RUN 39 | unknown | Run the next eligible task within an explicit budget. |
-| r3gan-stacked-training-toy-v1 / 24a7b06cd095 / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | NOT_RUN 39 | unknown | Run the next eligible task within an explicit budget. |
-| release07-gan-v3-cloud-v1 / 45a46392aba9 / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | BLOCKED 35, NOT_RUN 4 | unknown | Run the next eligible task within an explicit budget. |
-| release07-gan-v3-cloud-v1 / 45a46392aba9 / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | current | 0 | BLOCKED 35, NOT_RUN 4 | unknown | Run the next eligible task within an explicit budget. |
-| release07-gan-v3-mog-v1 / f1bd1045f437 / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | current | 0 | BLOCKED 32, NOT_RUN 7 | unknown | Run the next eligible task within an explicit budget. |
-| release07-gan-v3-mog-v1 / f1bd1045f437 / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | BLOCKED 32, NOT_RUN 7 | unknown | Run the next eligible task within an explicit budget. |
-| release07-gan-v3-task-adapted-v1 / e514f59783fd / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | current | 0 | NOT_RUN 39 | unknown | Run the next eligible task within an explicit budget. |
-| release07-gan-v3-task-adapted-v1 / e514f59783fd / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | NOT_RUN 39 | unknown | Run the next eligible task within an explicit budget. |
+| r1r2--abf642c42c5346ad096c29202e4716db535c393c113478552133c1c22761ddbd / 7c08dcbf6b2e / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 1 | FAIL 1, NOT_RUN 35, PASS 3 | 23.971 | Run the next eligible task within an explicit budget. |
+| atlas / 5f15bf5bc0f8 / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | current | 0 | BLOCKED 39 | unknown | Run the next eligible task within an explicit budget. |
+| atlas / 5f15bf5bc0f8 / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | BLOCKED 39 | unknown | Run the next eligible task within an explicit budget. |
+| e22 / 3d57f98ed8bb / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | BLOCKED 39 | unknown | Run the next eligible task within an explicit budget. |
+| e22 / 3d57f98ed8bb / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | current | 0 | BLOCKED 39 | unknown | Run the next eligible task within an explicit budget. |
+| forge-no-critic-penalty / 001372145cb8 / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | NOT_RUN 39 | unknown | Run the next eligible task within an explicit budget. |
+| forge-no-critic-penalty / 001372145cb8 / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | current | 0 | NOT_RUN 39 | unknown | Run the next eligible task within an explicit budget. |
+| forge-onboarding-anchor-ablation / d2527967862c / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | current | 0 | NOT_RUN 39 | unknown | Run the next eligible task within an explicit budget. |
+| forge-onboarding-anchor-ablation / d2527967862c / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | NOT_RUN 39 | unknown | Run the next eligible task within an explicit budget. |
+| k3p / 384be3ee5be6 / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | current | 0 | NOT_RUN 39 | unknown | Run the next eligible task within an explicit budget. |
+| k3p / 384be3ee5be6 / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | NOT_RUN 39 | unknown | Run the next eligible task within an explicit budget. |
+| k3p-a2-off-native-diagnostic / 9464dad82960 / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | NOT_RUN 39 | unknown | Run the next eligible task within an explicit budget. |
+| k3p-a2-off-native-diagnostic / 9464dad82960 / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | current | 0 | NOT_RUN 39 | unknown | Run the next eligible task within an explicit budget. |
+| k3p-bcap-matched-v1 / 32ed528c9fd1 / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | current | 0 | NOT_RUN 39 | unknown | Run the next eligible task within an explicit budget. |
+| k3p-bcap-matched-v1 / 32ed528c9fd1 / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | NOT_RUN 39 | unknown | Run the next eligible task within an explicit budget. |
+| k3p-no-output-noise-diagnostic / 41b62b839c52 / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | current | 0 | NOT_RUN 39 | unknown | Run the next eligible task within an explicit budget. |
+| k3p-no-output-noise-diagnostic / 41b62b839c52 / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | NOT_RUN 39 | unknown | Run the next eligible task within an explicit budget. |
+| k3p-r1r2-matched-v1 / e35e4a6f74f2 / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | NOT_RUN 39 | unknown | Run the next eligible task within an explicit budget. |
+| k3p-r1r2-matched-v1 / e35e4a6f74f2 / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | current | 0 | NOT_RUN 39 | unknown | Run the next eligible task within an explicit budget. |
+| ka2 / f741d03ce16c / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | current | 0 | NOT_RUN 39 | unknown | Run the next eligible task within an explicit budget. |
+| ka2 / f741d03ce16c / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | NOT_RUN 39 | unknown | Run the next eligible task within an explicit budget. |
+| r1r2--7728cf93188b9fe122536244667789941da52d435cfb0a3ae42b90db200d7595 / 059128df90e1 / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | FAIL 1, NOT_RUN 38 | 9.516 | Run the next eligible task within an explicit budget. |
+| r1r2--7728cf93188b9fe122536244667789941da52d435cfb0a3ae42b90db200d7595 / 059128df90e1 / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | current | 0 | NOT_RUN 39 | unknown | Run the next eligible task within an explicit budget. |
+| r1r2--abf642c42c5346ad096c29202e4716db535c393c113478552133c1c22761ddbd / 7c08dcbf6b2e / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | current | 0 | NOT_RUN 39 | unknown | Run the next eligible task within an explicit budget. |
+| r1r2--b58a087cabab6b43997ec233416294cfc2786bab59026c07a1a4f2565970f5ff / ff171334c936 / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | current | 0 | NOT_RUN 39 | unknown | Run the next eligible task within an explicit budget. |
+| r1r2--b58a087cabab6b43997ec233416294cfc2786bab59026c07a1a4f2565970f5ff / ff171334c936 / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | FAIL 1, NOT_RUN 38 | 5.456 | Run the next eligible task within an explicit budget. |
+| r1r2--f398f6ea70a2d101c520a1a01db90ea968bbb16736e6cec7ffc887e1dd7e241a / 158a5e917e91 / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | FAIL 1, NOT_RUN 38 | 5.513 | Run the next eligible task within an explicit budget. |
+| r1r2--f398f6ea70a2d101c520a1a01db90ea968bbb16736e6cec7ffc887e1dd7e241a / 158a5e917e91 / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | current | 0 | NOT_RUN 39 | unknown | Run the next eligible task within an explicit budget. |
+| r3gan-stacked-training-toy-v1 / 645c7f757c1d / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | current | 0 | NOT_RUN 39 | unknown | Run the next eligible task within an explicit budget. |
+| r3gan-stacked-training-toy-v1 / 645c7f757c1d / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | NOT_RUN 39 | unknown | Run the next eligible task within an explicit budget. |
+| release07-gan-v3-cloud-v1 / c81fece00124 / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | current | 0 | BLOCKED 35, NOT_RUN 4 | unknown | Run the next eligible task within an explicit budget. |
+| release07-gan-v3-cloud-v1 / c81fece00124 / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | BLOCKED 35, NOT_RUN 4 | unknown | Run the next eligible task within an explicit budget. |
+| release07-gan-v3-mog-v1 / 20e3bba2e9b4 / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | BLOCKED 32, NOT_RUN 7 | unknown | Run the next eligible task within an explicit budget. |
+| release07-gan-v3-mog-v1 / 20e3bba2e9b4 / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | current | 0 | BLOCKED 32, NOT_RUN 7 | unknown | Run the next eligible task within an explicit budget. |
+| release07-gan-v3-task-adapted-v1 / 95ed8074b365 / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | current | 0 | NOT_RUN 39 | unknown | Run the next eligible task within an explicit budget. |
+| release07-gan-v3-task-adapted-v1 / 95ed8074b365 / cpu (AMD Ryzen 9 5900X 12-Core Processor) | current | 0 | NOT_RUN 39 | unknown | Run the next eligible task within an explicit budget. |
 | ka2 / 2a6cb4b3f19e / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | pinned | unknown | FAIL 1 | 5.46 | Publish the stopped cohort readout, or declare a new compatible revision before further qualification. |
 | forge-no-critic-penalty / ef50ff6fb207 / cuda (AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000) | pinned | unknown | FAIL 1 | 7.371 | Publish the stopped cohort readout, or declare a new compatible revision before further qualification. |
 | forge-onboarding-anchor-ablation / 39dc1cc8e516 / cpu (AMD Ryzen 9 5900X 12-Core Processor) | pinned | unknown | FAIL 1 | 5.975 | Publish the stopped cohort readout, or declare a new compatible revision before further qualification. |
