@@ -1,0 +1,14 @@
+{
+  "arm": "control_mlp_matched_init",
+  "status": "PASS",
+  "suffix": 15,
+  "shortfall": 0.0,
+  "error": null,
+  "seconds": 5.395816234871745,
+  "sha256": "4b4388baa2d9203d8028a3aefcf05b3c7fd55e2e88cbe1f985a155614f56d7e0",
+  "kind": "mlp",
+  "init_std": 5.656854249492381,
+  "G": 8.0,
+  "local_width": 1.0,
+  "reach": 11.313708498984761
+}
