@@ -1,0 +1,9 @@
+{
+  "arm": "residual16",
+  "verdict": "PASS",
+  "modes": 2,
+  "hq": 1.0,
+  "mean_rmse": 0.018833046779036522,
+  "confirmed_step": 350,
+  "seconds": 6.430022578919306
+}
