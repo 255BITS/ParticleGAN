@@ -80,12 +80,16 @@ def test_independent_denominator_policy_keeps_missing_head_and_mixed_gap_visible
     witnesses = {arm: {"bridge_still_trainable": True, "bank_still_trainable": True,
                       "router_still_trainable": True, "C_norms": dict.fromkeys(law.SITES, .1),
                       "live_bank_updates": 4, "live_query_updates": 4,
-                      "zero_code_minus_live_test_game": dict.fromkeys(review.JUDGES, -.1)}
+                      "zero_code_minus_live_test_game": dict.fromkeys(review.JUDGES, .1)}
                  for arm in law.ARMS[1:]}
     actual = review.independent_gates(scores, witnesses)
     assert actual == runner.final_gates(scores, witnesses)
     assert actual["neutral_beats_ordinary_all_four"] and actual["H_b_support_gate"]
-    assert all(value < 0 for value in witnesses[law.ARMS[2]]["zero_code_minus_live_test_game"].values())
+    witnesses[law.ARMS[2]]["zero_code_minus_live_test_game"][review.JUDGES[0]] = -.1
+    actual = review.independent_gates(scores, witnesses)
+    assert actual == runner.final_gates(scores, witnesses)
+    assert not actual["retained_particle_gate"][law.ARMS[2]]
+    assert not actual["neutral_beats_ordinary_all_four"] and not actual["H_b_support_gate"]
     witnesses[law.ARMS[2]]["zero_code_minus_live_test_game"].pop(review.JUDGES[0])
     actual = review.independent_gates(scores, witnesses)
     assert not actual["retained_particle_gate"][law.ARMS[2]]
@@ -97,6 +101,9 @@ def test_independent_denominator_policy_keeps_missing_head_and_mixed_gap_visible
 
 def test_fabricated_complete_receipt_cannot_qualify_held_source_only_task(tmp_path, monkeypatch):
     card = json.loads(runner.CARD.read_text())
+    # This temporary software contract exercises the authorization guard. The
+    # archived training card still binds its old sources and is never rewritten.
+    card["sources"] = {name: runner.common.sha(runner.ROOT / name) for name in card["sources"]}
     card["execution"]["execution_authorized"] = False
     held = tmp_path / "held-card.json"
     held.write_text(json.dumps(card))
