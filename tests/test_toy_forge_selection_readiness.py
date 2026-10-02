@@ -17,7 +17,8 @@ def write(path, value):
 
 def task(name):
     return {"schema_version": 1, "id": name, "adapter": "software_fixture",
-        "execution": {"steps": 24},
+        "execution": {"steps": 24, "initializer": "deterministic_orthogonal",
+                      "prior": {"kind": "mog", "sigma": .025, "standardize": False, "learnable": True}},
         "evaluation": {"kind": "transfer_sustained", "thresholds": [["error", "<=", 1.]], "scoring_weights": "live"},
         "resources": {"timeout_seconds": 60}, "requires_capabilities": [], "dependencies": []}
 

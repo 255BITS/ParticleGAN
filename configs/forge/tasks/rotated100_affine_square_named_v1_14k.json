@@ -3,6 +3,7 @@
   "id": "rotated100_affine_square_named_v1_14k",
   "adapter": "native100_continuation",
   "execution": {
+    "initializer": "deterministic_orthogonal",
     "problem": "rotated100",
     "steps": 14000,
     "prior": {

@@ -191,7 +191,7 @@ def test_native_writes_auditable_clean_live_ema_and_holdout_draws(tmp_path, monk
     value = task("grid100", 2)
     value["evaluation"].update(eval_interval=1, early_eval_steps=[0, 1, 2], eval_samples=64)
     frozen = request(value)
-    frozen["candidate"]["recipe_overrides"].update(num_particles=12, batch_size=4)
+    value["execution"]["resources"].update(num_particles=12, batch_size=4)
     before = torch.get_rng_state().clone()
     raw = adapters.run_task(frozen, {"task_id": value["id"]}, tmp_path, "cpu")
     assert torch.equal(before, torch.get_rng_state())
@@ -230,7 +230,7 @@ def test_native_continuation_restores_own_prefix_and_matches_uninterrupted_state
     prefix_task = task("grid100", 2)
     prefix_task["evaluation"].update(eval_interval=1, early_eval_steps=[0, 1, 2], eval_samples=64)
     frozen = request(prefix_task)
-    frozen["candidate"]["recipe_overrides"].update(num_particles=12, batch_size=4)
+    prefix_task["execution"]["resources"].update(num_particles=12, batch_size=4)
     frozen["jobs"] = [{"task_id": "grid100", "compatibility_key": "fixture-prefix"}]
     prefix_raw = adapters.run_task(frozen, {"task_id": "grid100"}, tmp_path / "prefix", "cpu")
     continued = deepcopy(prefix_task)

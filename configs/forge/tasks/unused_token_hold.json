@@ -3,6 +3,7 @@
   "id": "unused_token_hold",
   "adapter": "transfer_behavior",
   "execution": {
+    "initializer": "deterministic_orthogonal",
     "host": "unused_token_hold",
     "steps": 200,
     "prior": {

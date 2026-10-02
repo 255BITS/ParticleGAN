@@ -3,6 +3,7 @@
   "id": "ring16_acquisition",
   "adapter": "transfer_vector",
   "execution": {
+    "initializer": "deterministic_orthogonal",
     "host": "ring16_acquisition",
     "steps": 400,
     "prior": {

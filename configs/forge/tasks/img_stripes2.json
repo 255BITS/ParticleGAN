@@ -3,6 +3,7 @@
   "id": "img_stripes2",
   "adapter": "transfer_image",
   "execution": {
+    "initializer": "deterministic_orthogonal",
     "host": "img_stripes2",
     "steps": 600,
     "prior": {

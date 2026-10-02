@@ -16,7 +16,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def task():
-    return {"id": "coverage", "adapter": "transfer_vector", "execution": {"steps": 24},
+    return {"id": "coverage", "adapter": "transfer_vector", "execution": {"initializer": "deterministic_orthogonal", "steps": 24},
             "evaluation": {"kind": "transfer_sustained", "thresholds": [["error", "<=", 1.]],
                            **executed_receipt(PUBLIC_PRIOR_CLEAN, eval_output_noise="clean")}}
 

@@ -135,8 +135,10 @@ def test_shared_constructor_matches_original_classes_without_changing_rng_order(
     {"kind": "mog", "sigma": .025, "standardize": False, "learnable": False},
     {"kind": "mog", "sigma": .025, "standardize": False, "learnable": True, "init_std": 1.},
 ])
-def test_candidate_prior_conflicts_are_blocked_before_allocation(prior):
-    assert native_profile_blockers(card(), {"prior": prior})
+def test_task_prior_conflicts_are_blocked_before_allocation(prior):
+    value = card()
+    value["execution"]["prior"] = prior
+    assert native_profile_blockers(value, {})
 
 
 def test_profile_source_and_fixed_fields_are_strict(tmp_path):

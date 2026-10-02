@@ -3,6 +3,17 @@
   "id": "grid100_14k",
   "adapter": "native100_continuation",
   "execution": {
+    "initializer": "deterministic_orthogonal",
+    "resources": {
+      "num_particles": 20000,
+      "z_dim": 2,
+      "batch_size": 2048
+    },
+    "model": {
+      "hidden": 128,
+      "layers": 3,
+      "fourier": 2
+    },
     "problem": "grid100",
     "steps": 14000,
     "prior": {

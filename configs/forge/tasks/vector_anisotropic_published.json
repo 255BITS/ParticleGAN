@@ -3,6 +3,7 @@
   "id": "vector_anisotropic_published",
   "adapter": "transfer_vector",
   "execution": {
+    "initializer": "deterministic_orthogonal",
     "host": "vector_anisotropic",
     "steps": 1200,
     "prior": {

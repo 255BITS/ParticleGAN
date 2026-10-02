@@ -3,6 +3,7 @@
   "id": "img_blobs4",
   "adapter": "transfer_image",
   "execution": {
+    "initializer": "deterministic_orthogonal",
     "host": "img_blobs4",
     "steps": 600,
     "prior": {

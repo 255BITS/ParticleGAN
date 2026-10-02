@@ -51,7 +51,7 @@ def setup(tmp_path, monkeypatch):
             "claim_contract": {"schedule": "scheduled", "scoring_weights": "live", "sampling_law": "task_declared"}})
     for name in ("cheap", "quality"):
         atomic_json(root / f"configs/forge/tasks/{name}.json", {
-            "schema_version": 1, "id": name, "adapter": "fixture", "execution": {"steps": 24, "prior": prior, "fixture_id": name},
+            "schema_version": 1, "id": name, "adapter": "fixture", "execution": {"initializer": "deterministic_orthogonal", "steps": 24, "prior": prior, "fixture_id": name},
             "evaluation": {"kind": "transfer_sustained", "thresholds": [["score", ">=", 1.]], "scoring_weights": "live",
                            **executed_receipt(PUBLIC_PRIOR_CLEAN, eval_output_noise="clean")},
             "resources": {"gpus": 0, "gpu_memory_mb": 16, "cpu_threads": 1, "timeout_seconds": 10},
