@@ -77,8 +77,25 @@ Bulk artifacts live on this machine at the manifest's path; sharing Git alone
 does not transfer that archive. Independent regrading requires its original
 receipts, not the compact display summaries.
 
-The next search is a separately declared public-API Atlas/E22 cohort. It uses
-the actual selected public sampler, full unchanged case budgets and an
-additional first-acquisition/hold requirement. Its eight-case scores are kept
-separate from this24-case MoG cohort. Its specification and representation
-card must be frozen before ordinary execution.
+The public-API Atlas/E22 searches use the actual selected public sampler, full
+unchanged budgets and an additional first-acquisition/hold requirement. Their
+eight-case results stay separate from this 24-case MoG cohort. Use the
+[single policy-family goal board](../policy-family-inventory.md) and its
+[compact JSON](../policy-family-inventory.json) for every whole configuration,
+required denominator, original/study verdict and actual training GIF.
+
+The first two grids completed 16 configurations and 18 full original case
+runs. They have no whole-configuration winner: two intensity runs retain the
+study gate, while the other configurations fail or acquire too late; no
+quality case is reached. Seven second-grid runs pass the original image test
+without passing the extra retention rule. The [failure diagnosis](POLICY_FAILURE_DIAGNOSIS.md)
+explains the measured fidelity, Gaussian-CDF and hold failures, including a
+real Atlas/E22 policy-event divergence. The [E22 readout](E22_POLICY_READOUT.md)
+and [Atlas readout](policy-atlas-execution-readout/README.md) keep the original
+high-rate cases and their full provenance.
+
+The [preparation and process diagram](POLICY_PREPARATION.md) links all capacity
+proofs, source freezes, archives and bounded specifications. A third,
+intermediate-rate grid is separately declared within the same unspent policy
+budget. No original verdict, horizon or threshold changes, no failed setting
+is repeated, and no historical pass fills a new source cohort.
