@@ -203,6 +203,32 @@ def test_same_source_cpu_registration_retains_cuda_evidence(evidence, monkeypatc
     assert len(read_json(root / publication.EVIDENCE_MANIFEST)["cohorts"]) == 3
 
 
+def test_unmeasured_other_backend_cannot_overwrite_measured_registration(evidence, monkeypatch):
+    root, manifest = evidence
+    _, report = _register(root, deepcopy(manifest), "bcap", "c", finished="2026-10-03T01:00:00+00:00")
+    atomic_json(root / publication.EVIDENCE_MANIFEST, manifest)
+    unmeasured = deepcopy(report["rows"][0])
+    unmeasured.update(attempt_ids=[], candidate_revision="unmeasured-cpu", cohort="unmeasured-cpu",
+                      runtime_cohort={"execution_backend": "cpu"},
+                      tasks=[{"task_id": "two_pole", "status": "UNKNOWN"}])
+    report["rows"].append(unmeasured)
+    report["provenance"].pop("input_digest")
+    report["provenance"]["input_digest"] = stable_hash(report)
+    atomic_json(root / "reports/forge/attempts/attempt-c/result.json", {
+        "raw": {"finished_at": "2026-10-03T01:00:00+00:00"}})
+    def regrade(*args, output_prefix, **kwargs):
+        atomic_json(output_prefix.with_suffix(".json"), report)
+        return {"json": str(output_prefix.with_suffix(".json")), "source_commit": "commit-c"}
+    monkeypatch.setattr(publication, "regenerate", regrade)
+    result = publication.publish_current(root, source_commit="commit-c")
+    current = read_json(result["json"])
+    selected = next(row for row in current["rows"] if row["candidate_id"] == "bcap")
+    assert selected["candidate_revision"] == "revision-c"
+    assert selected["attempt_ids"] == ["attempt-c"]
+    assert selected["runtime_cohort"]["execution_backend"] == "cuda"
+    assert publication.publish_current(root) == result
+
+
 def test_family_new_hardware_keeps_its_own_canonical_fallback(evidence):
     root, manifest = evidence
     (root / "configs/forge/ideas/atlas.json").unlink()

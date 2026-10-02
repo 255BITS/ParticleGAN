@@ -53,6 +53,19 @@ def test_unknown_family_is_explicit_and_fails_coverage(tiny_repo):
     assert history.validate_inventory(tiny_repo, result)["unclassified"] == ["configs/unknown-domain/idea.json"]
 
 
+def test_api_toy_sources_and_reports_have_explicit_inventory_families(tiny_repo):
+    paths = ("benchmarks/toy_audit/api_family_search.py", "reports/toy_audit/api_contract/ring16/publication.json")
+    for name in paths:
+        path = tiny_repo / name
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text("raise RuntimeError('inventory must not execute this')\n" if name.endswith(".py") else "{}\n")
+    subprocess.run(["git", "-C", str(tiny_repo), "add", "."], check=True)
+    catalog = history.inventory(tiny_repo)
+    assert history.validate_inventory(tiny_repo, catalog)["valid"]
+    assert history.classify(paths[0])["family"] == "benchmark/toy_audit"
+    assert history.classify(paths[1])["family"] == "report/toy_audit"
+
+
 def test_raw_error_is_incomplete_unless_capability_refusal_bound():
     row = {"status": "ERROR", "error": "worker died"}
     ordinary = history._task("grid100", row, {})

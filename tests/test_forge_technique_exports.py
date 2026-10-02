@@ -179,6 +179,20 @@ def _git(root, *arguments):
     return subprocess.check_output(["git", *arguments], cwd=root, text=True, stderr=subprocess.PIPE).strip()
 
 
+def test_publication_roster_deduplicates_display_labels_but_rejects_changed_science():
+    from copy import deepcopy
+    row = {"candidate_id": "trial", "candidate_revision": "revision", "cohort": "cohort",
+           "technique": "trial", "attempt_ids": ["attempt-one"],
+           "tasks": [{"task_id": "toy", "status": "FAIL"}]}
+    selected = deepcopy(row)
+    selected.update(technique="family", selection={"selection_kind": "best_observed"})
+    report = {"rows": [selected], "configuration_rows": [row]}
+    assert publication._publication_rows(report) == [row]
+    selected["tasks"][0]["status"] = "PASS"
+    with pytest.raises(ValueError, match="conflicting scientific rows"):
+        publication._publication_rows(report)
+
+
 @pytest.fixture
 def frozen_checkout(receipt):
     root, directory = receipt
@@ -224,6 +238,54 @@ def write_report(root, goal, *, execution_backend, output_prefix):
     certificate["source"] = request["request"]["source"]
     atomic_json(directory / "evidence.json", certificate)
     return root, directory, commit
+
+
+@pytest.mark.parametrize("hidden_source_mismatch", [False, True])
+def test_frozen_publication_keeps_and_validates_unselected_trial_receipts(
+        frozen_checkout, monkeypatch, hidden_source_mismatch):
+    root, directory, _ = frozen_checkout
+    board = root / "experiments/forge/technique_board.py"
+    board.write_text('''
+import json
+from pathlib import Path
+from .sources import inspect_source
+def write_report(root, goal, *, execution_backend, output_prefix):
+    source = inspect_source(root, ["reports/helpers/evaluator.py"])
+    canonical = {"candidate_id": "canonical", "candidate_revision": "canonical-revision",
+                 "cohort": "canonical-cohort", "attempt_ids": [],
+                 "bindings": {"source_digest": source["digest"]}}
+    trial = {"candidate_id": "new-technique", "candidate_revision": "revision-one",
+             "cohort": "trial-cohort", "attempt_ids": ["attempt-one"],
+             "tiers": {"1": {"passed": 0, "total": 3}},
+             "bindings": {"source_digest": WRONG_SOURCE or source["digest"]}}
+    result = {"rows": [canonical], "configuration_rows": [canonical, trial],
+              "provenance": {"view_sha256": "stable-view", "reducer_sha256": "stable-reducer"}}
+    path = Path(str(output_prefix) + ".json")
+    path.write_text(json.dumps(result))
+    return {"json": str(path), "rows": 1, "input_digest": "upstream"}
+'''.replace("WRONG_SOURCE", repr("wrong-source" if hidden_source_mismatch else None)))
+    _git(root, "add", "experiments/forge/technique_board.py")
+    _git(root, "commit", "-qm", "declare configuration alternatives")
+    commit = _git(root, "rev-parse", "HEAD")
+    request = read_json(directory / "request.json")
+    request["request"]["source"] = inspect_source(root, ["reports/helpers/evaluator.py"])
+    atomic_json(directory / "request.json", request)
+    certificate = read_json(directory / "evidence.json")
+    certificate["source"] = request["request"]["source"]
+    atomic_json(directory / "evidence.json", certificate)
+    monkeypatch.setattr(publication, "render_markdown", lambda *args, **kwargs: "Snapshot\nrows\n")
+    if hidden_source_mismatch:
+        with pytest.raises(ValueError, match="source cohort absent"):
+            publication.regenerate(root, source_commit=commit)
+        assert not (root / "reports/forge/technique-receipts").exists()
+    else:
+        metadata = publication.regenerate(root, source_commit=commit)
+        result = read_json(metadata["json"])
+        assert len(result["rows"]) == 2
+        assert result["snapshot_row_scope"] == "all_configuration_variants"
+        assert metadata["summary_receipts"] == 1
+        assert "attempt-one" in result["provenance"]["qualified_receipts"]
+        assert (root / "reports/forge/technique-receipts/attempt-one.json").is_file()
 
 
 def test_frozen_subprocess_regrades_exact_source_after_live_source_advance(frozen_checkout, monkeypatch):
