@@ -46,6 +46,6 @@ Regenerate after new Forge receipts or declarations with:
 python reports/forge/regenerate_technique_inventory.py --root . --goal discriminator_stability --device cuda --output-prefix reports/forge/r3gan-technique-inventory --source-commit 77a373648e3a7a5f1923015fa2097ec9e0ec877f
 ```
 
-Reducer `forge-technique-board-v1`; input digest `0b2fb7bed46f050ccb3a9ab416c6942ffe5b6e60f3ea43145b96c19d7881967c`. Report generation launches no training.
+Reducer `forge-technique-board-v1`; input digest `de51d3065569b45b5e91e43b564840dc9a699550f6ca89dc9111b7fd6b5fb919`. Report generation launches no training.
 
 Published receipt summaries retain final metrics, gate outcomes and original file hashes. They are display artifacts and supply no qualification input. Hydrate byte-exact original request/evidence/result receipts from the artifact archive before a full independent regrade.

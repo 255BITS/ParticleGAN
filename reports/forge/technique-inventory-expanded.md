@@ -30,4 +30,4 @@ Regenerate this display from the committed publications without launching traini
 python reports/forge/regenerate_technique_inventory.py --root . --compose-original reports/forge/technique-inventory.json --compose-current reports/forge/r3gan-technique-inventory.json --append-candidate r3gan-stacked-training-toy-v1 --output-prefix reports/forge/technique-inventory-expanded
 ```
 
-Publication input digest `06a4df19c880f422545a2e32bba329e3ecb186ff4240500b40e9b1a92965cfab`. Full independent regrading uses each linked publication's own regeneration command and byte-exact original receipts.
+Publication input digest `99486732fc471523eb7a1f25f668b7fc07b684241b117032696a6807aee5421f`. Full independent regrading uses each linked publication's own regeneration command and byte-exact original receipts.
