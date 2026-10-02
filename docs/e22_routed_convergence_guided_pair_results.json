@@ -1,0 +1,1918 @@
+{
+  "task": "routed_convergence_guided_pair_v1",
+  "qualification_scope": "this standalone policy-aware CPU task only",
+  "qualification_credit": "none",
+  "review_sha256": "3d63111f65181183ee0c83ac04698572e0cc2994334fdb496add151f68e384d1",
+  "review_completion_sha256": "cd64b63ac46026ef08336eaeade3d97a807bc350e9f4eca6dce1b6c1cfde2b09",
+  "actual_complete_total_seconds": 566.9904325499665,
+  "reviewer_body_seconds": 44.442962202010676,
+  "execution_seconds": 522.4990356420167,
+  "checks": 570039,
+  "state_counts": {
+    "ordinary_native_game": 35,
+    "particle_native_game": 35,
+    "neutral_particle_native_game": 35
+  },
+  "curve_counts": {
+    "ordinary_native_game": 34,
+    "particle_native_game": 34,
+    "neutral_particle_native_game": 34
+  },
+  "gates": {
+    "original_particle_minus_ordinary_game": {
+      "ordinary_native_game@800": 0.09983086585998535,
+      "ordinary_native_game@6400": 0.33138298988342285,
+      "particle_native_game@800": 0.04186391830444336,
+      "particle_native_game@6400": 0.6647495031356812
+    },
+    "neutral_particle_minus_ordinary_game": {
+      "ordinary_native_game@800": -0.2507596015930176,
+      "ordinary_native_game@6400": -0.3014106750488281,
+      "particle_native_game@800": -0.34640228748321533,
+      "particle_native_game@6400": -0.254874587059021
+    },
+    "paired_game_H_b_improvement": {
+      "ordinary_native_game@800": 0.35059046745300293,
+      "ordinary_native_game@6400": 0.632793664932251,
+      "particle_native_game@800": 0.3882662057876587,
+      "particle_native_game@6400": 0.9196240901947021
+    },
+    "original_particle_gap_reproduced": true,
+    "endpoint_gap_reduction": {
+      "ordinary_native_game@6400": 1.909553852341248,
+      "particle_native_game@6400": 1.383414482984576
+    },
+    "support_gate_applicable": true,
+    "retained_particle_gate": {
+      "particle_native_game": true,
+      "neutral_particle_native_game": true
+    },
+    "H_b_support_gate": true,
+    "neutral_beats_ordinary_all_four": true,
+    "remaining_neutral_gap_witness": false
+  },
+  "endpoint_scores": {
+    "ordinary_native_game@5120": {
+      "ordinary_native_game@800": {
+        "fit": {
+          "paired_game": 2.086005449295044,
+          "clean_zero_noise_game": 2.086751699447632,
+          "feature_proxy": 0.5174320936203003,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.17160823941230774
+        },
+        "guard": {
+          "paired_game": 1.716904640197754,
+          "clean_zero_noise_game": 1.713453769683838,
+          "feature_proxy": 0.3726252019405365,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.1761062890291214
+        },
+        "test": {
+          "paired_game": 1.5675305128097534,
+          "clean_zero_noise_game": 1.565327763557434,
+          "feature_proxy": 0.31118252873420715,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.1686752885580063
+        }
+      },
+      "ordinary_native_game@6400": {
+        "fit": {
+          "paired_game": 2.5059924125671387,
+          "clean_zero_noise_game": 2.557114839553833,
+          "feature_proxy": 0.6308513283729553,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.17160823941230774
+        },
+        "guard": {
+          "paired_game": 2.3121325969696045,
+          "clean_zero_noise_game": 2.360560655593872,
+          "feature_proxy": 0.5197076201438904,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.1761062890291214
+        },
+        "test": {
+          "paired_game": 2.2398579120635986,
+          "clean_zero_noise_game": 2.2899506092071533,
+          "feature_proxy": 0.484804630279541,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.1686752885580063
+        }
+      },
+      "particle_native_game@800": {
+        "fit": {
+          "paired_game": 2.4439878463745117,
+          "clean_zero_noise_game": 2.4455902576446533,
+          "feature_proxy": 0.6089983582496643,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.17160823941230774
+        },
+        "guard": {
+          "paired_game": 1.934515357017517,
+          "clean_zero_noise_game": 1.9336295127868652,
+          "feature_proxy": 0.42628443241119385,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.1761062890291214
+        },
+        "test": {
+          "paired_game": 1.7773493528366089,
+          "clean_zero_noise_game": 1.7762598991394043,
+          "feature_proxy": 0.3632948398590088,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.1686752885580063
+        }
+      },
+      "particle_native_game@6400": {
+        "fit": {
+          "paired_game": 2.272695302963257,
+          "clean_zero_noise_game": 2.323617935180664,
+          "feature_proxy": 0.495789498090744,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.17160823941230774
+        },
+        "guard": {
+          "paired_game": 2.2151079177856445,
+          "clean_zero_noise_game": 2.2623729705810547,
+          "feature_proxy": 0.4645967483520508,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.1761062890291214
+        },
+        "test": {
+          "paired_game": 2.2412922382354736,
+          "clean_zero_noise_game": 2.2915658950805664,
+          "feature_proxy": 0.45805931091308594,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.1686752885580063
+        }
+      }
+    },
+    "ordinary_native_game@6400": {
+      "ordinary_native_game@800": {
+        "fit": {
+          "paired_game": 1.4821521043777466,
+          "clean_zero_noise_game": 1.4789557456970215,
+          "feature_proxy": 0.2716212868690491,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.14949941635131836
+        },
+        "guard": {
+          "paired_game": 1.4151558876037598,
+          "clean_zero_noise_game": 1.4078229665756226,
+          "feature_proxy": 0.2565300762653351,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.15927210450172424
+        },
+        "test": {
+          "paired_game": 1.2454025745391846,
+          "clean_zero_noise_game": 1.2403819561004639,
+          "feature_proxy": 0.18457984924316406,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.15074139833450317
+        }
+      },
+      "ordinary_native_game@6400": {
+        "fit": {
+          "paired_game": 2.220551013946533,
+          "clean_zero_noise_game": 2.267831802368164,
+          "feature_proxy": 0.5192553997039795,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.14949941635131836
+        },
+        "guard": {
+          "paired_game": 2.1377248764038086,
+          "clean_zero_noise_game": 2.1830055713653564,
+          "feature_proxy": 0.4592609107494354,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.15927210450172424
+        },
+        "test": {
+          "paired_game": 2.02201771736145,
+          "clean_zero_noise_game": 2.0663833618164062,
+          "feature_proxy": 0.4029906690120697,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.15074139833450317
+        }
+      },
+      "particle_native_game@800": {
+        "fit": {
+          "paired_game": 1.7063266038894653,
+          "clean_zero_noise_game": 1.703616976737976,
+          "feature_proxy": 0.3269713222980499,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.14949941635131836
+        },
+        "guard": {
+          "paired_game": 1.5841248035430908,
+          "clean_zero_noise_game": 1.5765811204910278,
+          "feature_proxy": 0.2956673204898834,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.15927210450172424
+        },
+        "test": {
+          "paired_game": 1.3907538652420044,
+          "clean_zero_noise_game": 1.3858023881912231,
+          "feature_proxy": 0.21772606670856476,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.15074139833450317
+        }
+      },
+      "particle_native_game@6400": {
+        "fit": {
+          "paired_game": 1.9477368593215942,
+          "clean_zero_noise_game": 1.9912562370300293,
+          "feature_proxy": 0.37979045510292053,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.14949941635131836
+        },
+        "guard": {
+          "paired_game": 1.9851057529449463,
+          "clean_zero_noise_game": 2.0281198024749756,
+          "feature_proxy": 0.3938314914703369,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.15927210450172424
+        },
+        "test": {
+          "paired_game": 1.9725369215011597,
+          "clean_zero_noise_game": 2.0164289474487305,
+          "feature_proxy": 0.3721684515476227,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.15074139833450317
+        }
+      }
+    },
+    "particle_native_game@5120": {
+      "ordinary_native_game@800": {
+        "fit": {
+          "paired_game": 1.5891692638397217,
+          "clean_zero_noise_game": 1.590225338935852,
+          "feature_proxy": 0.3101639449596405,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.17313818633556366
+        },
+        "guard": {
+          "paired_game": 1.4254264831542969,
+          "clean_zero_noise_game": 1.429884910583496,
+          "feature_proxy": 0.28448793292045593,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.19676963984966278
+        },
+        "test": {
+          "paired_game": 1.4118541479110718,
+          "clean_zero_noise_game": 1.4165598154067993,
+          "feature_proxy": 0.2603013813495636,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.19728650152683258
+        }
+      },
+      "ordinary_native_game@6400": {
+        "fit": {
+          "paired_game": 2.277041435241699,
+          "clean_zero_noise_game": 2.324625253677368,
+          "feature_proxy": 0.47745761275291443,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.17313818633556366
+        },
+        "guard": {
+          "paired_game": 2.4575769901275635,
+          "clean_zero_noise_game": 2.5105836391448975,
+          "feature_proxy": 0.5016472935676575,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.19676963984966278
+        },
+        "test": {
+          "paired_game": 2.471388816833496,
+          "clean_zero_noise_game": 2.527737855911255,
+          "feature_proxy": 0.5012100338935852,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.19728650152683258
+        }
+      },
+      "particle_native_game@800": {
+        "fit": {
+          "paired_game": 1.7421883344650269,
+          "clean_zero_noise_game": 1.7446908950805664,
+          "feature_proxy": 0.34175512194633484,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.17313818633556366
+        },
+        "guard": {
+          "paired_game": 1.5376527309417725,
+          "clean_zero_noise_game": 1.5444577932357788,
+          "feature_proxy": 0.3041415214538574,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.19676963984966278
+        },
+        "test": {
+          "paired_game": 1.5353108644485474,
+          "clean_zero_noise_game": 1.5403629541397095,
+          "feature_proxy": 0.28456854820251465,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.19728650152683258
+        }
+      },
+      "particle_native_game@6400": {
+        "fit": {
+          "paired_game": 2.5538644790649414,
+          "clean_zero_noise_game": 2.608734130859375,
+          "feature_proxy": 0.5413455367088318,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.17313818633556366
+        },
+        "guard": {
+          "paired_game": 2.8596718311309814,
+          "clean_zero_noise_game": 2.9163148403167725,
+          "feature_proxy": 0.5960596203804016,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.19676963984966278
+        },
+        "test": {
+          "paired_game": 2.7799055576324463,
+          "clean_zero_noise_game": 2.8394577503204346,
+          "feature_proxy": 0.5741977095603943,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.19728650152683258
+        }
+      }
+    },
+    "particle_native_game@6400": {
+      "ordinary_native_game@800": {
+        "fit": {
+          "paired_game": 1.3663681745529175,
+          "clean_zero_noise_game": 1.3660365343093872,
+          "feature_proxy": 0.21668754518032074,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.15969882905483246
+        },
+        "guard": {
+          "paired_game": 1.333470344543457,
+          "clean_zero_noise_game": 1.3338176012039185,
+          "feature_proxy": 0.23934070765972137,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.18528807163238525
+        },
+        "test": {
+          "paired_game": 1.34523344039917,
+          "clean_zero_noise_game": 1.3473758697509766,
+          "feature_proxy": 0.2257547825574875,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.18917882442474365
+        }
+      },
+      "ordinary_native_game@6400": {
+        "fit": {
+          "paired_game": 2.0713109970092773,
+          "clean_zero_noise_game": 2.114548921585083,
+          "feature_proxy": 0.41068193316459656,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.15969882905483246
+        },
+        "guard": {
+          "paired_game": 2.333549976348877,
+          "clean_zero_noise_game": 2.3828485012054443,
+          "feature_proxy": 0.46355047821998596,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.18528807163238525
+        },
+        "test": {
+          "paired_game": 2.353400707244873,
+          "clean_zero_noise_game": 2.406369209289551,
+          "feature_proxy": 0.46514081954956055,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.18917882442474365
+        }
+      },
+      "particle_native_game@800": {
+        "fit": {
+          "paired_game": 1.453354835510254,
+          "clean_zero_noise_game": 1.4535861015319824,
+          "feature_proxy": 0.2301396131515503,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.15969882905483246
+        },
+        "guard": {
+          "paired_game": 1.3969354629516602,
+          "clean_zero_noise_game": 1.3986644744873047,
+          "feature_proxy": 0.2402449995279312,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.18528807163238525
+        },
+        "test": {
+          "paired_game": 1.4326177835464478,
+          "clean_zero_noise_game": 1.4351478815078735,
+          "feature_proxy": 0.23864884674549103,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.18917882442474365
+        }
+      },
+      "particle_native_game@6400": {
+        "fit": {
+          "paired_game": 2.3460769653320312,
+          "clean_zero_noise_game": 2.3971264362335205,
+          "feature_proxy": 0.4777066707611084,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.15969882905483246
+        },
+        "guard": {
+          "paired_game": 2.6929104328155518,
+          "clean_zero_noise_game": 2.7464115619659424,
+          "feature_proxy": 0.5499727129936218,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.18528807163238525
+        },
+        "test": {
+          "paired_game": 2.637286424636841,
+          "clean_zero_noise_game": 2.693469285964966,
+          "feature_proxy": 0.5322096347808838,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.18917882442474365
+        }
+      }
+    },
+    "neutral_particle_native_game@5120": {
+      "ordinary_native_game@800": {
+        "fit": {
+          "paired_game": 1.1399564743041992,
+          "clean_zero_noise_game": 1.1373134851455688,
+          "feature_proxy": 0.14732907712459564,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.14183107018470764
+        },
+        "guard": {
+          "paired_game": 1.3725872039794922,
+          "clean_zero_noise_game": 1.3654474020004272,
+          "feature_proxy": 0.24783015251159668,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.15752039849758148
+        },
+        "test": {
+          "paired_game": 1.1357594728469849,
+          "clean_zero_noise_game": 1.1320701837539673,
+          "feature_proxy": 0.15812744200229645,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.15135261416435242
+        }
+      },
+      "ordinary_native_game@6400": {
+        "fit": {
+          "paired_game": 2.0323736667633057,
+          "clean_zero_noise_game": 2.077169895172119,
+          "feature_proxy": 0.4138270318508148,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.14183107018470764
+        },
+        "guard": {
+          "paired_game": 2.028484344482422,
+          "clean_zero_noise_game": 2.071521043777466,
+          "feature_proxy": 0.4031204283237457,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.15752039849758148
+        },
+        "test": {
+          "paired_game": 1.9730031490325928,
+          "clean_zero_noise_game": 2.018575429916382,
+          "feature_proxy": 0.3696012496948242,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.15135261416435242
+        }
+      },
+      "particle_native_game@800": {
+        "fit": {
+          "paired_game": 1.260023832321167,
+          "clean_zero_noise_game": 1.2578233480453491,
+          "feature_proxy": 0.17149017751216888,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.14183107018470764
+        },
+        "guard": {
+          "paired_game": 1.514951467514038,
+          "clean_zero_noise_game": 1.5098495483398438,
+          "feature_proxy": 0.2758435010910034,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.15752039849758148
+        },
+        "test": {
+          "paired_game": 1.242274522781372,
+          "clean_zero_noise_game": 1.238437533378601,
+          "feature_proxy": 0.17767323553562164,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.15135261416435242
+        }
+      },
+      "particle_native_game@6400": {
+        "fit": {
+          "paired_game": 1.9231748580932617,
+          "clean_zero_noise_game": 1.9662041664123535,
+          "feature_proxy": 0.3496197760105133,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.14183107018470764
+        },
+        "guard": {
+          "paired_game": 1.9623043537139893,
+          "clean_zero_noise_game": 2.001915454864502,
+          "feature_proxy": 0.3793220520019531,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.15752039849758148
+        },
+        "test": {
+          "paired_game": 1.9907708168029785,
+          "clean_zero_noise_game": 2.0367493629455566,
+          "feature_proxy": 0.37435707449913025,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.15135261416435242
+        }
+      }
+    },
+    "neutral_particle_native_game@6400": {
+      "ordinary_native_game@800": {
+        "fit": {
+          "paired_game": 0.9793155789375305,
+          "clean_zero_noise_game": 0.9772507548332214,
+          "feature_proxy": 0.09583102911710739,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.12942950427532196
+        },
+        "guard": {
+          "paired_game": 1.1392902135849,
+          "clean_zero_noise_game": 1.1343860626220703,
+          "feature_proxy": 0.17436213791370392,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.14067557454109192
+        },
+        "test": {
+          "paired_game": 0.994642972946167,
+          "clean_zero_noise_game": 0.9912016987800598,
+          "feature_proxy": 0.1009417176246643,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.1367826908826828
+        }
+      },
+      "ordinary_native_game@6400": {
+        "fit": {
+          "paired_game": 1.7558603286743164,
+          "clean_zero_noise_game": 1.792323112487793,
+          "feature_proxy": 0.3050572872161865,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.12942950427532196
+        },
+        "guard": {
+          "paired_game": 1.7732391357421875,
+          "clean_zero_noise_game": 1.8077392578125,
+          "feature_proxy": 0.3123738467693329,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.14067557454109192
+        },
+        "test": {
+          "paired_game": 1.720607042312622,
+          "clean_zero_noise_game": 1.7568573951721191,
+          "feature_proxy": 0.2833419144153595,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.1367826908826828
+        }
+      },
+      "particle_native_game@800": {
+        "fit": {
+          "paired_game": 1.0129458904266357,
+          "clean_zero_noise_game": 1.0109375715255737,
+          "feature_proxy": 0.09133531898260117,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.12942950427532196
+        },
+        "guard": {
+          "paired_game": 1.20731520652771,
+          "clean_zero_noise_game": 1.2024508714675903,
+          "feature_proxy": 0.1815008670091629,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.14067557454109192
+        },
+        "test": {
+          "paired_game": 1.044351577758789,
+          "clean_zero_noise_game": 1.0397558212280273,
+          "feature_proxy": 0.10423094779253006,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.1367826908826828
+        }
+      },
+      "particle_native_game@6400": {
+        "fit": {
+          "paired_game": 1.6799067258834839,
+          "clean_zero_noise_game": 1.7142034769058228,
+          "feature_proxy": 0.26770883798599243,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.12942950427532196
+        },
+        "guard": {
+          "paired_game": 1.7114464044570923,
+          "clean_zero_noise_game": 1.7422304153442383,
+          "feature_proxy": 0.2968967854976654,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.14067557454109192
+        },
+        "test": {
+          "paired_game": 1.7176623344421387,
+          "clean_zero_noise_game": 1.753135085105896,
+          "feature_proxy": 0.2897616922855377,
+          "teacher_zero_residual_anchor": 0.6931471228599548,
+          "output_rmse_diagnostic": 0.1367826908826828
+        }
+      }
+    }
+  },
+  "endpoint_six_subject_scores": {
+    "ordinary_native_game@5120": {
+      "ordinary_native_game@800": {
+        "fit": {
+          "0": 2.167167656123638,
+          "1": 2.5900740697979927,
+          "2": 2.06356855481863,
+          "3": 1.9697632640600204,
+          "4": 2.1798583641648293,
+          "5": 1.5456000939011574
+        },
+        "guard": {
+          "0": 2.57771235704422,
+          "1": 2.1200553476810455,
+          "2": 1.4623002707958221,
+          "3": 1.4898215234279633,
+          "4": 1.5200575292110443,
+          "5": 1.1314797401428223
+        },
+        "test": {
+          "0": 2.1668894439935684,
+          "1": 1.806051641702652,
+          "2": 1.5089826211333275,
+          "3": 1.3633236587047577,
+          "4": 1.4452662840485573,
+          "5": 1.1146685294806957
+        }
+      },
+      "ordinary_native_game@6400": {
+        "fit": {
+          "0": 3.63825885951519,
+          "1": 2.325117349624634,
+          "2": 2.2695087790489197,
+          "3": 2.3777467161417007,
+          "4": 2.264350324869156,
+          "5": 2.1609731763601303
+        },
+        "guard": {
+          "0": 2.931802809238434,
+          "1": 2.1753515005111694,
+          "2": 2.2204525470733643,
+          "3": 2.2487398386001587,
+          "4": 2.07020103931427,
+          "5": 2.2262476682662964
+        },
+        "test": {
+          "0": 2.935982823371887,
+          "1": 2.043370306491852,
+          "2": 2.130308449268341,
+          "3": 2.1432538852095604,
+          "4": 2.11225987970829,
+          "5": 2.073972277343273
+        }
+      },
+      "particle_native_game@800": {
+        "fit": {
+          "0": 2.6801454424858093,
+          "1": 2.9910167828202248,
+          "2": 2.4566895812749863,
+          "3": 2.361378811299801,
+          "4": 2.470240645110607,
+          "5": 1.704456016421318
+        },
+        "guard": {
+          "0": 2.8216453194618225,
+          "1": 2.3915528655052185,
+          "2": 1.729117214679718,
+          "3": 1.7447344660758972,
+          "4": 1.6594617366790771,
+          "5": 1.2605811059474945
+        },
+        "test": {
+          "0": 2.4011162891983986,
+          "1": 2.040259540081024,
+          "2": 1.7841159626841545,
+          "3": 1.6004330217838287,
+          "4": 1.599770464003086,
+          "5": 1.2384009063243866
+        }
+      },
+      "particle_native_game@6400": {
+        "fit": {
+          "0": 3.4469303488731384,
+          "1": 2.164088971912861,
+          "2": 1.8881403133273125,
+          "3": 2.0407686978578568,
+          "4": 2.010118581354618,
+          "5": 2.0861243084073067
+        },
+        "guard": {
+          "0": 2.9917460083961487,
+          "1": 2.099457561969757,
+          "2": 2.0286218225955963,
+          "3": 2.074048340320587,
+          "4": 1.9231949746608734,
+          "5": 2.1735788583755493
+        },
+        "test": {
+          "0": 3.0040712505578995,
+          "1": 2.0844969898462296,
+          "2": 2.052549235522747,
+          "3": 2.079698607325554,
+          "4": 2.0343014299869537,
+          "5": 2.1926362365484238
+        }
+      }
+    },
+    "ordinary_native_game@6400": {
+      "ordinary_native_game@800": {
+        "fit": {
+          "0": 1.5056271627545357,
+          "1": 1.3486719951033592,
+          "2": 1.541180171072483,
+          "3": 1.3902817517518997,
+          "4": 1.854001723229885,
+          "5": 1.253149762749672
+        },
+        "guard": {
+          "0": 1.9588055610656738,
+          "1": 1.3833112120628357,
+          "2": 1.2994322180747986,
+          "3": 1.2831867933273315,
+          "4": 1.4510565102100372,
+          "5": 1.1151426434516907
+        },
+        "test": {
+          "0": 1.6230764165520668,
+          "1": 1.1470850557088852,
+          "2": 1.2191404700279236,
+          "3": 1.144705668091774,
+          "4": 1.3293073698878288,
+          "5": 1.0091003328561783
+        }
+      },
+      "ordinary_native_game@6400": {
+        "fit": {
+          "0": 3.2945286631584167,
+          "1": 1.9584146067500114,
+          "2": 1.9676609262824059,
+          "3": 2.0686159431934357,
+          "4": 2.0842869579792023,
+          "5": 1.9497991800308228
+        },
+        "guard": {
+          "0": 2.695348620414734,
+          "1": 1.946011871099472,
+          "2": 2.037264257669449,
+          "3": 2.09201842546463,
+          "4": 1.9697491824626923,
+          "5": 2.085956335067749
+        },
+        "test": {
+          "0": 2.6695743203163147,
+          "1": 1.7751571759581566,
+          "2": 1.8914045989513397,
+          "3": 1.9507918655872345,
+          "4": 1.9238866716623306,
+          "5": 1.9212919846177101
+        }
+      },
+      "particle_native_game@800": {
+        "fit": {
+          "0": 1.7967702895402908,
+          "1": 1.6170005202293396,
+          "2": 1.7637164518237114,
+          "3": 1.6566281095147133,
+          "4": 2.0454926639795303,
+          "5": 1.3583516255021095
+        },
+        "guard": {
+          "0": 2.1184199154376984,
+          "1": 1.6237638592720032,
+          "2": 1.4939327538013458,
+          "3": 1.4867817163467407,
+          "4": 1.5665480494499207,
+          "5": 1.2153020203113556
+        },
+        "test": {
+          "0": 1.7224650532007217,
+          "1": 1.3183559328317642,
+          "2": 1.4068978652358055,
+          "3": 1.3293976858258247,
+          "4": 1.4654672518372536,
+          "5": 1.1019395850598812
+        }
+      },
+      "particle_native_game@6400": {
+        "fit": {
+          "0": 2.904186323285103,
+          "1": 1.782256506383419,
+          "2": 1.6507718041539192,
+          "3": 1.7437099441885948,
+          "4": 1.8098796606063843,
+          "5": 1.7956172749400139
+        },
+        "guard": {
+          "0": 2.6006786823272705,
+          "1": 1.846572369337082,
+          "2": 1.8416626453399658,
+          "3": 1.8863442540168762,
+          "4": 1.7498291730880737,
+          "5": 1.9855474829673767
+        },
+        "test": {
+          "0": 2.562687024474144,
+          "1": 1.7780116498470306,
+          "2": 1.8273235335946083,
+          "3": 1.874667376279831,
+          "4": 1.8340053334832191,
+          "5": 1.9585267528891563
+        }
+      }
+    },
+    "particle_native_game@5120": {
+      "ordinary_native_game@800": {
+        "fit": {
+          "0": 2.884035184979439,
+          "1": 2.484428510069847,
+          "2": 0.9552897401154041,
+          "3": 0.9723861739039421,
+          "4": 1.0214478261768818,
+          "5": 1.217428132891655
+        },
+        "guard": {
+          "0": 2.63797265291214,
+          "1": 1.6215585768222809,
+          "2": 1.0658620595932007,
+          "3": 1.0660595297813416,
+          "4": 1.0399861484766006,
+          "5": 1.1211197972297668
+        },
+        "test": {
+          "0": 2.6436071917414665,
+          "1": 1.4485245943069458,
+          "2": 0.9971958920359612,
+          "3": 1.1443329975008965,
+          "4": 1.1020129173994064,
+          "5": 1.135451529175043
+        }
+      },
+      "ordinary_native_game@6400": {
+        "fit": {
+          "0": 3.6485996544361115,
+          "1": 2.151191994547844,
+          "2": 1.9020116105675697,
+          "3": 1.957726038992405,
+          "4": 1.921077273786068,
+          "5": 2.0816427394747734
+        },
+        "guard": {
+          "0": 3.3853424787521362,
+          "1": 2.0484747290611267,
+          "2": 2.487927496433258,
+          "3": 2.2350186109542847,
+          "4": 2.2259361147880554,
+          "5": 2.362761914730072
+        },
+        "test": {
+          "0": 3.3680315613746643,
+          "1": 2.109714701771736,
+          "2": 2.421200305223465,
+          "3": 2.2971988022327423,
+          "4": 2.2804649025201797,
+          "5": 2.3517225235700607
+        }
+      },
+      "particle_native_game@800": {
+        "fit": {
+          "0": 3.3176789581775665,
+          "1": 2.710179589688778,
+          "2": 1.0370174162089825,
+          "3": 1.0545362830162048,
+          "4": 1.0477550365030766,
+          "5": 1.2859623208642006
+        },
+        "guard": {
+          "0": 2.8803948760032654,
+          "1": 1.747703641653061,
+          "2": 1.1311616599559784,
+          "3": 1.1680151522159576,
+          "4": 1.094791442155838,
+          "5": 1.203849583864212
+        },
+        "test": {
+          "0": 2.9318857640028,
+          "1": 1.5358933806419373,
+          "2": 1.1007296852767467,
+          "3": 1.251590371131897,
+          "4": 1.1798114851117134,
+          "5": 1.2119540311396122
+        }
+      },
+      "particle_native_game@6400": {
+        "fit": {
+          "0": 4.049043521285057,
+          "1": 2.3621371388435364,
+          "2": 2.1850061416625977,
+          "3": 2.116212897002697,
+          "4": 2.2219780534505844,
+          "5": 2.3888103365898132
+        },
+        "guard": {
+          "0": 3.7204808592796326,
+          "1": 2.310927927494049,
+          "2": 2.978858709335327,
+          "3": 2.6142882108688354,
+          "4": 2.804439425468445,
+          "5": 2.7290358543395996
+        },
+        "test": {
+          "0": 3.68446746468544,
+          "1": 2.3176990300416946,
+          "2": 2.762800082564354,
+          "3": 2.565356209874153,
+          "4": 2.7018665224313736,
+          "5": 2.6472445279359818
+        }
+      }
+    },
+    "particle_native_game@6400": {
+      "ordinary_native_game@800": {
+        "fit": {
+          "0": 3.048485368490219,
+          "1": 1.4509812854230404,
+          "2": 0.8281097449362278,
+          "3": 0.852843277156353,
+          "4": 0.9331383146345615,
+          "5": 1.0846510604023933
+        },
+        "guard": {
+          "0": 2.8902807235717773,
+          "1": 1.1388654708862305,
+          "2": 1.0025162249803543,
+          "3": 0.9644487500190735,
+          "4": 0.9586926698684692,
+          "5": 1.0460182279348373
+        },
+        "test": {
+          "0": 2.880991652607918,
+          "1": 1.0869063846766949,
+          "2": 0.9047833643853664,
+          "3": 1.0802031978964806,
+          "4": 1.0660958923399448,
+          "5": 1.0524197183549404
+        }
+      },
+      "ordinary_native_game@6400": {
+        "fit": {
+          "0": 3.4918322712183,
+          "1": 1.8221078291535378,
+          "2": 1.6017062589526176,
+          "3": 1.7318919226527214,
+          "4": 1.7619082629680634,
+          "5": 2.018419958651066
+        },
+        "guard": {
+          "0": 3.3577032685279846,
+          "1": 1.9522023797035217,
+          "2": 2.312624454498291,
+          "3": 2.021809309720993,
+          "4": 2.0804347693920135,
+          "5": 2.2765260338783264
+        },
+        "test": {
+          "0": 3.364911198616028,
+          "1": 1.983055904507637,
+          "2": 2.236128121614456,
+          "3": 2.132208466529846,
+          "4": 2.176923230290413,
+          "5": 2.2271766662597656
+        }
+      },
+      "particle_native_game@800": {
+        "fit": {
+          "0": 3.3175853937864304,
+          "1": 1.559191606938839,
+          "2": 0.8646137751638889,
+          "3": 0.8961997590959072,
+          "4": 0.9612884931266308,
+          "5": 1.1212500184774399
+        },
+        "guard": {
+          "0": 3.046028733253479,
+          "1": 1.2026989161968231,
+          "2": 1.0272224843502045,
+          "3": 1.0211004316806793,
+          "4": 0.9793901741504669,
+          "5": 1.105171799659729
+        },
+        "test": {
+          "0": 3.078389883041382,
+          "1": 1.144704818725586,
+          "2": 0.9684798792004585,
+          "3": 1.1635725870728493,
+          "4": 1.1203280165791512,
+          "5": 1.120231807231903
+        }
+      },
+      "particle_native_game@6400": {
+        "fit": {
+          "0": 3.849096342921257,
+          "1": 2.1038419902324677,
+          "2": 1.8880709409713745,
+          "3": 1.9018015190958977,
+          "4": 2.057194247841835,
+          "5": 2.2764568626880646
+        },
+        "guard": {
+          "0": 3.604830503463745,
+          "1": 2.261436879634857,
+          "2": 2.734956681728363,
+          "3": 2.3963058590888977,
+          "4": 2.5935688614845276,
+          "5": 2.5663639903068542
+        },
+        "test": {
+          "0": 3.6220970451831818,
+          "1": 2.2673673778772354,
+          "2": 2.5140119791030884,
+          "3": 2.3800288885831833,
+          "4": 2.5484296679496765,
+          "5": 2.491784319281578
+        }
+      }
+    },
+    "neutral_particle_native_game@5120": {
+      "ordinary_native_game@800": {
+        "fit": {
+          "0": 1.0748775787651539,
+          "1": 1.1406170912086964,
+          "2": 1.1680938340723515,
+          "3": 1.1006573140621185,
+          "4": 1.3271014541387558,
+          "5": 1.0283917970955372
+        },
+        "guard": {
+          "0": 1.512119472026825,
+          "1": 1.44661346077919,
+          "2": 1.368886947631836,
+          "3": 1.35616734623909,
+          "4": 1.3505727648735046,
+          "5": 1.2011637389659882
+        },
+        "test": {
+          "0": 1.2114259898662567,
+          "1": 1.1528184302151203,
+          "2": 1.1508968137204647,
+          "3": 1.1009572446346283,
+          "4": 1.225734956562519,
+          "5": 0.9727236777544022
+        }
+      },
+      "ordinary_native_game@6400": {
+        "fit": {
+          "0": 2.885876849293709,
+          "1": 1.860605202615261,
+          "2": 1.8018201291561127,
+          "3": 1.856238953769207,
+          "4": 1.9309159070253372,
+          "5": 1.8587858602404594
+        },
+        "guard": {
+          "0": 2.48530912399292,
+          "1": 1.904893547296524,
+          "2": 1.959083080291748,
+          "3": 1.9365514814853668,
+          "4": 1.8532093465328217,
+          "5": 2.0318588316440582
+        },
+        "test": {
+          "0": 2.4088272154331207,
+          "1": 1.8146677687764168,
+          "2": 1.8729786574840546,
+          "3": 1.8994333148002625,
+          "4": 1.9201502352952957,
+          "5": 1.9219620749354362
+        }
+      },
+      "particle_native_game@800": {
+        "fit": {
+          "0": 1.2394016906619072,
+          "1": 1.2969502322375774,
+          "2": 1.3033803179860115,
+          "3": 1.2361780405044556,
+          "4": 1.37845129519701,
+          "5": 1.1057811379432678
+        },
+        "guard": {
+          "0": 1.6256122887134552,
+          "1": 1.6554839313030243,
+          "2": 1.5301843285560608,
+          "3": 1.513089507818222,
+          "4": 1.4444571733474731,
+          "5": 1.3208820223808289
+        },
+        "test": {
+          "0": 1.2466336637735367,
+          "1": 1.289667546749115,
+          "2": 1.3034070953726768,
+          "3": 1.2313427403569221,
+          "4": 1.3268878981471062,
+          "5": 1.0557079650461674
+        }
+      },
+      "particle_native_game@6400": {
+        "fit": {
+          "0": 2.6095692813396454,
+          "1": 1.8447165787220001,
+          "2": 1.700196236371994,
+          "3": 1.6873428672552109,
+          "4": 1.8491749241948128,
+          "5": 1.848048560321331
+        },
+        "guard": {
+          "0": 2.4165554642677307,
+          "1": 1.902038961648941,
+          "2": 1.7984899282455444,
+          "3": 1.8285217583179474,
+          "4": 1.7931010723114014,
+          "5": 2.0351190268993378
+        },
+        "test": {
+          "0": 2.3186974972486496,
+          "1": 1.9027775675058365,
+          "2": 1.8561642691493034,
+          "3": 1.8867871910333633,
+          "4": 1.963349848985672,
+          "5": 2.0168486684560776
+        }
+      }
+    },
+    "neutral_particle_native_game@6400": {
+      "ordinary_native_game@800": {
+        "fit": {
+          "0": 0.9998122714459896,
+          "1": 0.7831590659916401,
+          "2": 1.0184413082897663,
+          "3": 0.9438346512615681,
+          "4": 1.1928498484194279,
+          "5": 0.9377962797880173
+        },
+        "guard": {
+          "0": 1.3310469686985016,
+          "1": 1.1313140988349915,
+          "2": 1.1252003908157349,
+          "3": 1.0478836297988892,
+          "4": 1.1131462454795837,
+          "5": 1.0871498584747314
+        },
+        "test": {
+          "0": 1.198285412043333,
+          "1": 0.8919643796980381,
+          "2": 1.0271045230329037,
+          "3": 0.9052080102264881,
+          "4": 1.055283062160015,
+          "5": 0.8900124840438366
+        }
+      },
+      "ordinary_native_game@6400": {
+        "fit": {
+          "0": 2.6653070896863937,
+          "1": 1.4447064250707626,
+          "2": 1.574803039431572,
+          "3": 1.5116108059883118,
+          "4": 1.7080795541405678,
+          "5": 1.6306548193097115
+        },
+        "guard": {
+          "0": 2.336876392364502,
+          "1": 1.572120189666748,
+          "2": 1.7281821072101593,
+          "3": 1.5971128940582275,
+          "4": 1.624155193567276,
+          "5": 1.780988097190857
+        },
+        "test": {
+          "0": 2.269375666975975,
+          "1": 1.5136839672923088,
+          "2": 1.614010013639927,
+          "3": 1.574168287217617,
+          "4": 1.6694269850850105,
+          "5": 1.682977356016636
+        }
+      },
+      "particle_native_game@800": {
+        "fit": {
+          "0": 1.0917336195707321,
+          "1": 0.806306928396225,
+          "2": 1.0550466403365135,
+          "3": 0.9839555583894253,
+          "4": 1.1762750744819641,
+          "5": 0.9643571563065052
+        },
+        "guard": {
+          "0": 1.3895522952079773,
+          "1": 1.2017117738723755,
+          "2": 1.2129406929016113,
+          "3": 1.1323989927768707,
+          "4": 1.1489810943603516,
+          "5": 1.1583063006401062
+        },
+        "test": {
+          "0": 1.19834104180336,
+          "1": 0.9327684380114079,
+          "2": 1.124084983021021,
+          "3": 0.9617654569447041,
+          "4": 1.1203515157103539,
+          "5": 0.9287980683147907
+        }
+      },
+      "particle_native_game@6400": {
+        "fit": {
+          "0": 2.396305024623871,
+          "1": 1.4703684523701668,
+          "2": 1.5319962799549103,
+          "3": 1.4284506365656853,
+          "4": 1.6592765003442764,
+          "5": 1.5930436104536057
+        },
+        "guard": {
+          "0": 2.1854920387268066,
+          "1": 1.5472664833068848,
+          "2": 1.5971829891204834,
+          "3": 1.5632467567920685,
+          "4": 1.5859598219394684,
+          "5": 1.7895300388336182
+        },
+        "test": {
+          "0": 2.1266914755105972,
+          "1": 1.5652449578046799,
+          "2": 1.595510073006153,
+          "3": 1.565679393708706,
+          "4": 1.7251425608992577,
+          "5": 1.7277061119675636
+        }
+      }
+    }
+  },
+  "particle_witnesses": {
+    "particle_native_game": {
+      "C_norms": {
+        "first": 0.6466466784477234,
+        "second": 0.7298014760017395
+      },
+      "bridge_still_trainable": true,
+      "bank_still_trainable": true,
+      "router_still_trainable": true,
+      "final_bank_gradient_rows": 128,
+      "final_query_gradient_norm": 2.7261757518288707,
+      "bank_changed": true,
+      "router_changed": true,
+      "live_bank_updates": 6399,
+      "live_query_updates": 6399,
+      "row_control_events": 64,
+      "proposal_events": 64,
+      "candidate_proposals": 512,
+      "moves": 0,
+      "zero_code_minus_live_test_game": {
+        "ordinary_native_game@800": 0.2471853494644165,
+        "ordinary_native_game@6400": 0.08314132690429688,
+        "particle_native_game@800": 0.3114579916000366,
+        "particle_native_game@6400": 0.07859230041503906
+      }
+    },
+    "neutral_particle_native_game": {
+      "C_norms": {
+        "first": 0.6431000232696533,
+        "second": 0.7327303290367126
+      },
+      "bridge_still_trainable": true,
+      "bank_still_trainable": true,
+      "router_still_trainable": true,
+      "final_bank_gradient_rows": 128,
+      "final_query_gradient_norm": 0.21019713383874958,
+      "bank_changed": true,
+      "router_changed": true,
+      "live_bank_updates": 6399,
+      "live_query_updates": 6399,
+      "row_control_events": 64,
+      "proposal_events": 64,
+      "candidate_proposals": 512,
+      "moves": 0,
+      "zero_code_minus_live_test_game": {
+        "ordinary_native_game@800": 0.4586350917816162,
+        "ordinary_native_game@6400": 0.38222527503967285,
+        "particle_native_game@800": 0.5441509485244751,
+        "particle_native_game@6400": 0.4871847629547119
+      }
+    }
+  },
+  "judge_reference_path": {
+    "ordinary_native_game@800": {
+      "fit": {
+        "0": {
+          "paired_game": 0.6931471228599548,
+          "six_subject_game": {
+            "0": 0.6931471824645996,
+            "1": 0.6931471824645996,
+            "2": 0.6931471824645996,
+            "3": 0.6931471824645996,
+            "4": 0.6931471824645996,
+            "5": 0.6931471824645996
+          }
+        },
+        "0.25": {
+          "paired_game": 0.9403437972068787,
+          "six_subject_game": {
+            "0": 0.9582441300153732,
+            "1": 0.9486414156854153,
+            "2": 0.981722641736269,
+            "3": 0.8925470970571041,
+            "4": 0.9415957257151604,
+            "5": 0.9193115830421448
+          }
+        },
+        "0.5": {
+          "paired_game": 2.1315221786499023,
+          "six_subject_game": {
+            "0": 2.364984318614006,
+            "1": 2.529381901025772,
+            "2": 2.222757875919342,
+            "3": 1.8895183354616165,
+            "4": 1.800905019044876,
+            "5": 1.9815851151943207
+          }
+        },
+        "1": {
+          "paired_game": 4.293416976928711,
+          "six_subject_game": {
+            "0": 5.571588605642319,
+            "1": 4.999812439084053,
+            "2": 4.297422558069229,
+            "3": 3.755745053291321,
+            "4": 3.4819109737873077,
+            "5": 3.6540205776691437
+          }
+        }
+      },
+      "guard": {
+        "0": {
+          "paired_game": 0.6931471228599548,
+          "six_subject_game": {
+            "0": 0.6931471824645996,
+            "1": 0.6931471824645996,
+            "2": 0.6931471824645996,
+            "3": 0.6931471824645996,
+            "4": 0.6931471824645996,
+            "5": 0.6931471824645996
+          }
+        },
+        "0.25": {
+          "paired_game": 0.8776907324790955,
+          "six_subject_game": {
+            "0": 0.9482768326997757,
+            "1": 0.8593410551548004,
+            "2": 0.8911735117435455,
+            "3": 0.8583619594573975,
+            "4": 0.8590017557144165,
+            "5": 0.849989041686058
+          }
+        },
+        "0.5": {
+          "paired_game": 1.5456886291503906,
+          "six_subject_game": {
+            "0": 2.185446262359619,
+            "1": 1.546577662229538,
+            "2": 1.4694335758686066,
+            "3": 1.3690066039562225,
+            "4": 1.3438569605350494,
+            "5": 1.3598107397556305
+          }
+        },
+        "1": {
+          "paired_game": 2.7612881660461426,
+          "six_subject_game": {
+            "0": 4.959164977073669,
+            "1": 3.1226121187210083,
+            "2": 2.390476167201996,
+            "3": 2.090877503156662,
+            "4": 1.9256170988082886,
+            "5": 2.0789814591407776
+          }
+        }
+      },
+      "test": {
+        "0": {
+          "paired_game": 0.6931471228599548,
+          "six_subject_game": {
+            "0": 0.6931471824645996,
+            "1": 0.6931471824645996,
+            "2": 0.6931471824645996,
+            "3": 0.6931471824645996,
+            "4": 0.6931471824645996,
+            "5": 0.6931471824645996
+          }
+        },
+        "0.25": {
+          "paired_game": 0.8342165350914001,
+          "six_subject_game": {
+            "0": 0.9179290421307087,
+            "1": 0.8194522708654404,
+            "2": 0.8466519191861153,
+            "3": 0.8043620772659779,
+            "4": 0.8060966432094574,
+            "5": 0.81080736592412
+          }
+        },
+        "0.5": {
+          "paired_game": 1.4350275993347168,
+          "six_subject_game": {
+            "0": 1.9701047614216805,
+            "1": 1.485939122736454,
+            "2": 1.4092374294996262,
+            "3": 1.252381019294262,
+            "4": 1.206851176917553,
+            "5": 1.2856521755456924
+          }
+        },
+        "1": {
+          "paired_game": 2.744474411010742,
+          "six_subject_game": {
+            "0": 4.85526442527771,
+            "1": 3.298445090651512,
+            "2": 2.422455996274948,
+            "3": 2.0244417265057564,
+            "4": 1.8503523468971252,
+            "5": 2.015885502099991
+          }
+        }
+      }
+    },
+    "ordinary_native_game@6400": {
+      "fit": {
+        "0": {
+          "paired_game": 0.6931471228599548,
+          "six_subject_game": {
+            "0": 0.6931471824645996,
+            "1": 0.6931471824645996,
+            "2": 0.6931471824645996,
+            "3": 0.6931471824645996,
+            "4": 0.6931471824645996,
+            "5": 0.6931471824645996
+          }
+        },
+        "0.25": {
+          "paired_game": 1.167554497718811,
+          "six_subject_game": {
+            "0": 1.8434118255972862,
+            "1": 1.0373215079307556,
+            "2": 1.065348096191883,
+            "3": 1.0064399987459183,
+            "4": 1.0051572695374489,
+            "5": 1.04764848574996
+          }
+        },
+        "0.5": {
+          "paired_game": 1.9844416379928589,
+          "six_subject_game": {
+            "0": 3.1475422084331512,
+            "1": 1.7244295924901962,
+            "2": 1.9230314865708351,
+            "3": 1.7234306782484055,
+            "4": 1.6943546384572983,
+            "5": 1.693861111998558
+          }
+        },
+        "1": {
+          "paired_game": 3.1959705352783203,
+          "six_subject_game": {
+            "0": 4.262200012803078,
+            "1": 2.9703992307186127,
+            "2": 3.3174420446157455,
+            "3": 2.9009036868810654,
+            "4": 2.989704132080078,
+            "5": 2.735173135995865
+          }
+        }
+      },
+      "guard": {
+        "0": {
+          "paired_game": 0.6931471228599548,
+          "six_subject_game": {
+            "0": 0.6931471824645996,
+            "1": 0.6931471824645996,
+            "2": 0.6931471824645996,
+            "3": 0.6931471824645996,
+            "4": 0.6931471824645996,
+            "5": 0.6931471824645996
+          }
+        },
+        "0.25": {
+          "paired_game": 1.0843547582626343,
+          "six_subject_game": {
+            "0": 1.5385621190071106,
+            "1": 0.9691157639026642,
+            "2": 1.0043983161449432,
+            "3": 0.983330637216568,
+            "4": 0.9663339406251907,
+            "5": 1.0443869233131409
+          }
+        },
+        "0.5": {
+          "paired_game": 1.7976527214050293,
+          "six_subject_game": {
+            "0": 2.645020604133606,
+            "1": 1.503707617521286,
+            "2": 1.747348666191101,
+            "3": 1.5982832312583923,
+            "4": 1.615924447774887,
+            "5": 1.6756320297718048
+          }
+        },
+        "1": {
+          "paired_game": 2.8374459743499756,
+          "six_subject_game": {
+            "0": 3.716395378112793,
+            "1": 2.4779727458953857,
+            "2": 2.9438957571983337,
+            "3": 2.5060659050941467,
+            "4": 2.7385339736938477,
+            "5": 2.641812562942505
+          }
+        }
+      },
+      "test": {
+        "0": {
+          "paired_game": 0.6931471228599548,
+          "six_subject_game": {
+            "0": 0.6931471824645996,
+            "1": 0.6931471824645996,
+            "2": 0.6931471824645996,
+            "3": 0.6931471824645996,
+            "4": 0.6931471824645996,
+            "5": 0.6931471824645996
+          }
+        },
+        "0.25": {
+          "paired_game": 1.0807427167892456,
+          "six_subject_game": {
+            "0": 1.5809278637170792,
+            "1": 0.9638496153056622,
+            "2": 1.0041258670389652,
+            "3": 0.9698428511619568,
+            "4": 0.9462617114186287,
+            "5": 1.0194485932588577
+          }
+        },
+        "0.5": {
+          "paired_game": 1.7847423553466797,
+          "six_subject_game": {
+            "0": 2.709923669695854,
+            "1": 1.545761376619339,
+            "2": 1.7463928163051605,
+            "3": 1.5432370454072952,
+            "4": 1.5344156175851822,
+            "5": 1.6287241876125336
+          }
+        },
+        "1": {
+          "paired_game": 2.8485958576202393,
+          "six_subject_game": {
+            "0": 3.8194110840559006,
+            "1": 2.6134752929210663,
+            "2": 3.016425535082817,
+            "3": 2.438419386744499,
+            "4": 2.612421914935112,
+            "5": 2.591423124074936
+          }
+        }
+      }
+    },
+    "particle_native_game@800": {
+      "fit": {
+        "0": {
+          "paired_game": 0.6931471228599548,
+          "six_subject_game": {
+            "0": 0.6931471824645996,
+            "1": 0.6931471824645996,
+            "2": 0.6931471824645996,
+            "3": 0.6931471824645996,
+            "4": 0.6931471824645996,
+            "5": 0.6931471824645996
+          }
+        },
+        "0.25": {
+          "paired_game": 0.9832132458686829,
+          "six_subject_game": {
+            "0": 0.9945194460451603,
+            "1": 0.9851029291749,
+            "2": 1.0381391569972038,
+            "3": 0.9299027174711227,
+            "4": 0.9376011416316032,
+            "5": 1.0140145123004913
+          }
+        },
+        "0.5": {
+          "paired_game": 2.390183210372925,
+          "six_subject_game": {
+            "0": 2.8697705268859863,
+            "1": 2.7289339900016785,
+            "2": 2.57232666015625,
+            "3": 2.061582028865814,
+            "4": 1.8820192143321037,
+            "5": 2.2264661639928818
+          }
+        },
+        "1": {
+          "paired_game": 4.636136054992676,
+          "six_subject_game": {
+            "0": 6.2539810836315155,
+            "1": 5.202303662896156,
+            "2": 4.952595472335815,
+            "3": 3.9561916291713715,
+            "4": 3.6870860308408737,
+            "5": 3.76465867459774
+          }
+        }
+      },
+      "guard": {
+        "0": {
+          "paired_game": 0.6931471228599548,
+          "six_subject_game": {
+            "0": 0.6931471824645996,
+            "1": 0.6931471824645996,
+            "2": 0.6931471824645996,
+            "3": 0.6931471824645996,
+            "4": 0.6931471824645996,
+            "5": 0.6931471824645996
+          }
+        },
+        "0.25": {
+          "paired_game": 0.8974102735519409,
+          "six_subject_game": {
+            "0": 0.957995280623436,
+            "1": 0.8766183257102966,
+            "2": 0.9104627519845963,
+            "3": 0.8783784061670303,
+            "4": 0.8495579361915588,
+            "5": 0.9114487022161484
+          }
+        },
+        "0.5": {
+          "paired_game": 1.6832325458526611,
+          "six_subject_game": {
+            "0": 2.4901267290115356,
+            "1": 1.6287074387073517,
+            "2": 1.6401178538799286,
+            "3": 1.4502671360969543,
+            "4": 1.405099093914032,
+            "5": 1.4850768446922302
+          }
+        },
+        "1": {
+          "paired_game": 3.0577147006988525,
+          "six_subject_game": {
+            "0": 5.53079879283905,
+            "1": 3.321668565273285,
+            "2": 2.8578662872314453,
+            "3": 2.269452750682831,
+            "4": 2.1270973086357117,
+            "5": 2.2394049167633057
+          }
+        }
+      },
+      "test": {
+        "0": {
+          "paired_game": 0.6931471228599548,
+          "six_subject_game": {
+            "0": 0.6931471824645996,
+            "1": 0.6931471824645996,
+            "2": 0.6931471824645996,
+            "3": 0.6931471824645996,
+            "4": 0.6931471824645996,
+            "5": 0.6931471824645996
+          }
+        },
+        "0.25": {
+          "paired_game": 0.8639131784439087,
+          "six_subject_game": {
+            "0": 0.9372431822121143,
+            "1": 0.8409542068839073,
+            "2": 0.8849977441132069,
+            "3": 0.8342856131494045,
+            "4": 0.8168953470885754,
+            "5": 0.8691029287874699
+          }
+        },
+        "0.5": {
+          "paired_game": 1.5937927961349487,
+          "six_subject_game": {
+            "0": 2.2987948060035706,
+            "1": 1.6168188899755478,
+            "2": 1.611807107925415,
+            "3": 1.3481762185692787,
+            "4": 1.2621453776955605,
+            "5": 1.4250142723321915
+          }
+        },
+        "1": {
+          "paired_game": 3.0856926441192627,
+          "six_subject_game": {
+            "0": 5.5428266525268555,
+            "1": 3.5976433008909225,
+            "2": 2.9750003963708878,
+            "3": 2.176650360226631,
+            "4": 2.0231666415929794,
+            "5": 2.1988680362701416
+          }
+        }
+      }
+    },
+    "particle_native_game@6400": {
+      "fit": {
+        "0": {
+          "paired_game": 0.6931471228599548,
+          "six_subject_game": {
+            "0": 0.6931471824645996,
+            "1": 0.6931471824645996,
+            "2": 0.6931471824645996,
+            "3": 0.6931471824645996,
+            "4": 0.6931471824645996,
+            "5": 0.6931471824645996
+          }
+        },
+        "0.25": {
+          "paired_game": 1.141158103942871,
+          "six_subject_game": {
+            "0": 1.521457001566887,
+            "1": 1.1357845067977905,
+            "2": 1.0422387272119522,
+            "3": 1.0136587023735046,
+            "4": 1.0591576024889946,
+            "5": 1.0746523328125477
+          }
+        },
+        "0.5": {
+          "paired_game": 2.0113987922668457,
+          "six_subject_game": {
+            "0": 3.145678758621216,
+            "1": 1.8563038110733032,
+            "2": 1.7765468135476112,
+            "3": 1.6891241073608398,
+            "4": 1.7659626975655556,
+            "5": 1.8347775414586067
+          }
+        },
+        "1": {
+          "paired_game": 3.319180965423584,
+          "six_subject_game": {
+            "0": 4.953449219465256,
+            "1": 3.0128484070301056,
+            "2": 2.942317873239517,
+            "3": 2.8816686421632767,
+            "4": 2.9925588816404343,
+            "5": 3.132242277264595
+          }
+        }
+      },
+      "guard": {
+        "0": {
+          "paired_game": 0.6931471228599548,
+          "six_subject_game": {
+            "0": 0.6931471824645996,
+            "1": 0.6931471824645996,
+            "2": 0.6931471824645996,
+            "3": 0.6931471824645996,
+            "4": 0.6931471824645996,
+            "5": 0.6931471824645996
+          }
+        },
+        "0.25": {
+          "paired_game": 1.0914521217346191,
+          "six_subject_game": {
+            "0": 1.353388249874115,
+            "1": 1.0385102927684784,
+            "2": 1.0074376910924911,
+            "3": 1.0159143507480621,
+            "4": 1.0563798397779465,
+            "5": 1.077081710100174
+          }
+        },
+        "0.5": {
+          "paired_game": 1.887437343597412,
+          "six_subject_game": {
+            "0": 2.6650235652923584,
+            "1": 1.6427873075008392,
+            "2": 1.707849383354187,
+            "3": 1.693578690290451,
+            "4": 1.8056994080543518,
+            "5": 1.8096859157085419
+          }
+        },
+        "1": {
+          "paired_game": 3.1546618938446045,
+          "six_subject_game": {
+            "0": 4.372181177139282,
+            "1": 2.6569764614105225,
+            "2": 2.9331480264663696,
+            "3": 2.863854944705963,
+            "4": 3.0952606201171875,
+            "5": 3.006550431251526
+          }
+        }
+      },
+      "test": {
+        "0": {
+          "paired_game": 0.6931471228599548,
+          "six_subject_game": {
+            "0": 0.6931471824645996,
+            "1": 0.6931471824645996,
+            "2": 0.6931471824645996,
+            "3": 0.6931471824645996,
+            "4": 0.6931471824645996,
+            "5": 0.6931471824645996
+          }
+        },
+        "0.25": {
+          "paired_game": 1.0859858989715576,
+          "six_subject_game": {
+            "0": 1.3830576092004776,
+            "1": 1.0436587668955326,
+            "2": 1.0047800093889236,
+            "3": 0.9999338164925575,
+            "4": 1.0273480117321014,
+            "5": 1.0571369677782059
+          }
+        },
+        "0.5": {
+          "paired_game": 1.8551220893859863,
+          "six_subject_game": {
+            "0": 2.7178410291671753,
+            "1": 1.6900430843234062,
+            "2": 1.6744341477751732,
+            "3": 1.6175659373402596,
+            "4": 1.6776509135961533,
+            "5": 1.7531972825527191
+          }
+        },
+        "1": {
+          "paired_game": 3.0461173057556152,
+          "six_subject_game": {
+            "0": 4.393612563610077,
+            "1": 2.7829311937093735,
+            "2": 2.7869653552770615,
+            "3": 2.6465675681829453,
+            "4": 2.8147000521421432,
+            "5": 2.8519269973039627
+          }
+        }
+      }
+    }
+  },
+  "source_hashes": {
+    "docs/e22_routed_convergence_guided_pair_v1.json": "2ca1cf8b59fd1dbd02b7e388bcd88aec87d0d8b2cfa78c5d09c8f90f40591fbd",
+    "examples/e22_routed_convergence_guided_campaign.py": "0737b8baf169c457b47cd255d4130ab993da1d7e5eb60e5a57b178e9e54062b4",
+    "examples/run_e22_routed_convergence_guided_pair.py": "1a4ad6013f26d5172fb97f3d762acbf493735d260da2daa2395e67ade7c3d9ba",
+    "examples/review_e22_routed_convergence_guided_pair.py": "25ed8f9cd4308864131c1b1f7a8b95d67ea828ca6822e117e049d0c4b42fe459",
+    "examples/e22_routed_convergence_guided_pair.py": "5a0bcd4ef7ee31f8b25921c1957b9e7bdac619e162e9ca650db4b9ceddd7d1c0",
+    "tests/test_e22_routed_convergence_guided_pair.py": "83cabdbe8f2268fcac4ecfe20a5f04ec1a3c4b22352da66ad99635eff3dc59d2",
+    "tests/test_e22_routed_convergence_guided_campaign.py": "6188446585662fde6456bb73eb7d8bc833149c9685f5e266d3bc7e7ca2092ecb",
+    "examples/review_e22_routed_convergence_rotated_teacher.py": "1a5cf8461249ea4efe9481f71f17129544528ca123c0444d700070f3fef6f70d",
+    "docs/e22_routed_convergence_rotated_teacher_v1.json": "e3fe33fed68a04a8a915a8b8fdde9110e73e692cda646ecb74a5f53189ce162b",
+    "examples/run_e22_routed_convergence_rotated_teacher.py": "0a19c6aeffb29ad05e43351aca854e440a5420adb0e03fd4d942657a319b9461",
+    "examples/e22_routed_convergence_rotated_teacher.py": "de53b5b781d3d140d83a40531326a67ef170e06687be551c277d88a45df4266a",
+    "examples/e22_routed_convergence.py": "b814bc0cac728d02290f6f0ed712dd6bb9483074f11666c5c012e72cd4d8f6b6",
+    "examples/e22_routed_convergence_neutral.py": "1b9154bd653db5e5cc629877297eab6a06bbd3f1ac9cabb1858eef36a083724c",
+    "examples/run_e22_routed_convergence.py": "2421e447b79489d1f6be3721994f5edabed6af6ddbc3ebe7813ddcec109ce7c5",
+    "docs/e22_routed_convergence_v1.json": "8fbb7882ee2c57e4ea939a4cd642058fa5ddca21f6a139f16191b4822ff16d02",
+    "docs/e22_routed_convergence_neutral_v1.json": "7313909fc91b57d9945a62bd02dc4a2d3f71af667a9e309276dec1a7233e4e93",
+    "tests/test_e22_routed_convergence_rotated_teacher.py": "4650381ece669969d997f27a33df6a1f4f62e0211d627250b7d2767eb752b7a3"
+  },
+  "data_digest": "cf2a96ecb6886c7402df6f0926afb2620feb64a3586d50022d8cfa884a1461e4",
+  "native_source_digest": "d0be475a055aae953c22dbd19f6d2357db041437e0679d2f2f2cfa356517f65b",
+  "code_ablation_endpoint": 6400,
+  "limits": [
+    "One fixed guidance3 task and named stream; no CFG, source-correlation, angle, amplitude, seed or horizon scan.",
+    "The qualified unguided rotated task did not consistently reproduce the original particle gap; this new mechanism is a separate hypothesis and does not retrofit that result.",
+    "The two-site width16/rank2 host is a small BF16 surrogate, not the full Supra transformer, caption/null-caption encoder, attention, VAE or spatial/token distribution.",
+    "The unconditional vector is a deterministic mean of six unchanged synthetic source vectors. Supra uses its real null-caption sequence and mask; that transfer distinction remains.",
+    "Conditional activations stay bitwise exact; replacement of their source contribution is FP32 arithmetic. It shares the same mathematical latent/time input, rather than reconstructing separately rounded original latent tensors.",
+    "Host activations physically use2B while native route logits/mixes use[B,2,T,N/Z]. Evidence remainsB contexts and row proposals rerun the entire guided model.",
+    "Each half retains held BF16 branch boundaries. The new final combination isFP32; this changes final output support/transient shapes alongside the guidance law and is reported rather than hidden.",
+    "The teacher remains exactly ordinary-LoRA reachable and inherits fixedrho=.0276253667, a severe rank2/width16 acquisition regime; neither feature isolates every full-Supra difficulty.",
+    "Guided targets/base/whitening and newly trained critic heads change together. Absolute game scores, output RMSE or gap percentages cannot be subtracted from the unguided task as causal effect sizes.",
+    "Native owner-dependent floors, noise eligibility, LR/controller responses can differ between ordinary and routed configurations. Retain all four heads, signed scores and actual control records.",
+    "Output metrics remain offline diagnostics and never enter the optimizer, structural decisions/guards, stopping, or head/checkpoint selection.",
+    "Qualification is this standalone CPU task only, with no Forge/default/full-Supra promotion credit.",
+    "Exact held code-object SHA binds the current Python interpreter and absolute checkout filename; source bytes, callbacks, runtime, archives and native package identity are also explicitly bound."
+  ],
+  "schema": "routed_convergence_guided_pair_qualified_results_v1",
+  "qualified": true,
+  "source_summary_sha256": "f2a820efa55c1e572ad8df7f68ba889548f66efaf050a4bfa81c5d7b2a7c2c5e",
+  "readout": {
+    "problem_isolated": "The original randomly initialized H/b gated particle host loses to ordinary native-game LoRA in the coupled guided task. Changing only fresh H/b to zero removes that disadvantage while retaining C, particles, router and all native controls.",
+    "remaining_full_supra_gap_isolated": false,
+    "remaining_gap_limit": "The H/b-neutral guided toy beats ordinary under all four mandatory judges and every subject at both fixed endpoints. It does not reproduce the remaining disadvantage of neutral particles against the historical MSE/AdamW Supra reference.",
+    "parent_negative_result_preserved": "The unguided rotated teacher did not consistently reproduce the original gap; its independently qualified negative finding remains separately committed."
+  }
+}
