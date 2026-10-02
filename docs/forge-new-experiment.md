@@ -23,6 +23,10 @@ Two worked examples show the process:
 | The proposed solution or complete training configuration | Idea in `configs/forge/ideas/` | A substantive formulation change evaluated on existing tasks |
 | Which tasks support a claim, their tiers and required/diagnostic roles | View in `configs/forge/views/` | An opt-in acquisition view with provisional Tier 1 placement |
 
+`python -m experiments.forge new` scaffolds an idea. Task and view registration
+currently require editing their declarations; the worked examples show those
+files and any necessary adapter changes.
+
 Search existing tasks, API cases, readouts and memory before adding a task.
 An example can have useful successful evidence while lacking Forge registration;
 the five-word investigation found exactly that gap. Keep the original source and
