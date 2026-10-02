@@ -3179,7 +3179,7 @@
       "elapsed_seconds": 8.716241055866703,
       "raw_receipt_sha256": "49db497681eb9c02cb6b916e5f2419dcb285c95d90e502aac202a6b7c8fb2de3",
       "source_commit": "5d75e6556bb65726e71a602dbce708986a5b49f5",
-      "gif": "media/api-critic-lag-current.gif"
+      "gif": "media/api-critic-lag-current-failure.gif"
     },
     {
       "id": "api-critic-lag-d_antithetic",
@@ -3204,7 +3204,7 @@
       "elapsed_seconds": 10.046853760955855,
       "raw_receipt_sha256": "4e3eb9a8c3eb093a3b73bb74968f51ac7f1648d29631eedf30c8ad8b88babe7c",
       "source_commit": "5d75e6556bb65726e71a602dbce708986a5b49f5",
-      "gif": "media/api-critic-lag-d_antithetic.gif"
+      "gif": "media/api-critic-lag-d_antithetic-failure.gif"
     },
     {
       "id": "api-critic-lag-even_critic",
@@ -3229,7 +3229,7 @@
       "elapsed_seconds": 9.02165097091347,
       "raw_receipt_sha256": "e4ff7423db59491ba62470eacf2c7c04ebd448631ebf29d83b5005f477459cf0",
       "source_commit": "5d75e6556bb65726e71a602dbce708986a5b49f5",
-      "gif": "media/api-critic-lag-even_critic.gif"
+      "gif": "media/api-critic-lag-even_critic-failure.gif"
     },
     {
       "id": "api-ring8-hold",
@@ -3302,7 +3302,7 @@
       "elapsed_seconds": 28.02394165797159,
       "raw_receipt_sha256": "d62717b897645f8064b43c60d526ac08d8503816609e36b3bfdf07bec20ef57e",
       "source_commit": "5d75e6556bb65726e71a602dbce708986a5b49f5",
-      "gif": "media/api-ring8-hold.gif"
+      "gif": "media/api-ring8-hold-failure.gif"
     },
     {
       "id": "api-ring8-shift",
@@ -3376,7 +3376,7 @@
       "elapsed_seconds": 25.93101596296765,
       "raw_receipt_sha256": "7202825c733429942a78506c3fdaad1dafd3afea0c96ff52fef649e9abc64831",
       "source_commit": "5d75e6556bb65726e71a602dbce708986a5b49f5",
-      "gif": "media/api-ring8-shift.gif"
+      "gif": "media/api-ring8-shift-failure.gif"
     },
     {
       "id": "api-previous-command-action",

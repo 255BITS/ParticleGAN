@@ -52,7 +52,7 @@ def readout(archive, output):
                "final_observation_passed": endpoint["passed"], "failed_bounds": receipt["failed_bounds"],
                "failed_terminal_checks": failed_checks, "elapsed_seconds": receipt["elapsed_seconds"],
                "raw_receipt_sha256": api_run.file_hash(path), "source_commit": receipt["source"]["commit"],
-               "gif": f"media/{name}.gif"}
+               "gif": f"media/{name}{'-failure' if receipt['status'] == 'ERROR' else ''}.gif"}
         rows.append(row)
         totals[f"{receipt['status']}/{receipt['verdict']}"] += 1
     rows.sort(key=lambda row: (-max(row["source_definition_scores"].values(), default=0),
