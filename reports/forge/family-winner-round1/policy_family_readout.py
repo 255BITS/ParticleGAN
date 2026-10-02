@@ -76,7 +76,9 @@ def project(study_path):
         exported["cases"] = []
         for row in trial["cases"]:
             item = deepcopy(row)
-            if row["status"] not in {"PASS", "FAIL"}:
+            # Late acquisition can leave the study INCOMPLETE despite a fully
+            # executed, certified original PASS. Preserve that receipt too.
+            if row["status"] not in {"PASS", "FAIL", "INCOMPLETE"} or not row.get("receipt_path"):
                 exported["cases"].append(item)
                 continue
             path = Path(row["receipt_path"])
