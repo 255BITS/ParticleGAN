@@ -19,7 +19,7 @@
     1050,
     1200
   ],
-  "numeric_observation_sha256": "21787d19d522bfb07c1df6bcd77980ca9043fc7f809f97c440a049e17dcd9a2a",
+  "numeric_observation_sha256": "bcf3d085fd2d0e8240d5a616069959927cfa44c3bba1686ebdd5f3184af499c9",
   "numeric_observations_changed": false,
   "original_case_sha256": "e293cf19f2f235b30807f9782ec65ceea3693f78e3459b9f7eb117179168c8fc",
   "original_gate": "FAIL",
@@ -35,21 +35,21 @@
   },
   "raw_artifacts": {
     "final-state.pt": {
-      "bytes": 432895,
-      "sha256": "0eaf9678974a633298a8d636b258c11794381db57815c7b8eff27a0ba81c90ca"
+      "bytes": 469405,
+      "sha256": "ec03b174205aa5ccff58a7a0547759d471c448bfc5c960a4e803d1de1bd62b98"
     },
     "goal.gif": {
-      "bytes": 652307,
-      "sha256": "e85966896f44a6cbf166368c62a3198998b44f3c0dca65aab0930e6db00ff99b"
+      "bytes": 682542,
+      "sha256": "2701aadbc202f9d73c1a3cc63129bd4ae15e23a944f670f36284975ce19959ea"
     },
     "observations.npz": {
-      "bytes": 3070364,
-      "sha256": "2042818b165add35e226b2d21d4773e7d171b9ab014987efa1fd81bc3edba45a"
+      "bytes": 3070060,
+      "sha256": "ecc0a6982a8c6424e5dc9d153027248539d8bead3ddf009d118d766c44cb68e1"
     }
   },
   "raw_files_unchanged": true,
-  "raw_receipt": "/ml2/hypergan/forge-policy-family-round1-cli-recovery-20261002/atlas/atlas--ca0901b6679b72404f0989bf27f53c85b01095d291f67ec50fddfd98006880a1/api-vector-two-broad/receipt.json",
-  "raw_receipt_sha256": "e75ef1a5c4bc64f94685dccc0538a7525bc39329b9c95c97b8b2e0ef9018d151",
+  "raw_receipt": "/ml2/hypergan/forge-policy-family-round3-20261002/e22/e22--8385a62046dbf8d9bbf9d08b090d0d7b47147ae0849114a06a7919e9a32ac3f9/api-vector-two-broad/receipt.json",
+  "raw_receipt_sha256": "734926328e16e4ff48791c1dd6225f5058c9a522a46d4e229b7a436efed918aa",
   "render_annotations": {
     "default_verdict_displayed": "FAIL",
     "goal_annotations": [],
@@ -64,13 +64,13 @@
     }
   },
   "reviewed_gif": {
-    "bytes": 673457,
+    "bytes": 704860,
     "frames": 9,
-    "relative_path": "policy-family-media/policy-family-defaults-round1-cli-recovery-v2--eb2d77fbd776/atlas/ca0901b6679b--api-vector-two-broad-reviewed.gif",
-    "sha256": "48ef1a51e8028a052b76e37a894b4802639c5a44f34f1260a963aae89068e042"
+    "relative_path": "policy-family-media/policy-family-defaults-round3-v1--531021742ad2/e22/8385a62046db--api-vector-two-broad-reviewed.gif",
+    "sha256": "eb6b9cf5665d98ccd44443d097e040be76369dd113374a278e736892cef6cc47"
   },
   "schema": "policy_family_metric_media_review_v1",
   "study_gate": "FAIL",
   "training_or_rescoring": false,
-  "training_source_commit": "eb2d77fbd776eab0d2ce5e2550ab9cdfdb6c1162"
+  "training_source_commit": "531021742ad25cc47ed593bc3700f68673742ae3"
 }

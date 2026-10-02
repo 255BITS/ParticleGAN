@@ -2,13 +2,125 @@
 
 This is the primary leaderboard for **policy-family-defaults**. It ranks whole shared-knob configurations within each frozen family/source/spec/runtime lane. The public selected/served particle-cloud questions retain their original host adaptations; this is separate from the Forge clean-MoG inventory.
 
-Current cohort: `policy-family-defaults-round2-v1--0335ecf024ea`. Source cohorts remain separate; individual passing cases never combine into a configuration. UNKNOWN stays unmeasured. This screen supplies **no shipping-default adoption or speed winner**.
+Current cohort: `policy-family-defaults-round4-prior-balance-v1--8021a1c50c4a`. Source cohorts remain separate; individual passing cases never combine into a configuration. UNKNOWN stays unmeasured. This screen supplies **no shipping-default adoption or speed winner**.
 
 The original toy gate requires its terminal passing suffix. The added study gate uses the first five consecutive primary successes, then at least five uninterrupted hold checks and every subsequent primary check. An original PASS may therefore have a FAIL or INCOMPLETE study verdict. GIF badges display the original toy verdict.
 
 Matching small-host numerical traces do not establish Atlas/E22 algorithmic or complete policy-state equivalence. Reference-kNN smoke results do not qualify Atlas feature-cell behavior; unmeasured native quality cases remain in the denominator.
 
-## Current cohort `policy-family-defaults-round2-v1--0335ecf024ea`
+## Current cohort `policy-family-defaults-round4-prior-balance-v1--8021a1c50c4a`
+
+8 declared configurations; each retains 8 required cases. Paid child execution 331.515s. Whole-config outcome: **incomplete_comparison**; fully qualified: **0**. Partial or interrupted evidence supplies no additional qualification.
+
+| Family / config | LR / prior rate | Study smoke | Study quality | Original passes | Measured / required | Whole-config status | First non-pass |
+| --- | --- | ---: | ---: | ---: | ---: | --- | --- |
+| atlas / `3018391da94f` | 0.006375 / 1.5 | 1/2 | 0/6 | 1 | 2/8 | FAIL | api-vector-two-broad: last 5 post-update metric observations do not all pass |
+| atlas / `abe34fb6f0c5` | 0.0053125 / 1.5 | 1/2 | 0/6 | 2 | 2/8 | INCOMPLETE | api-vector-two-broad: fewer than five post-confirmation hold observations |
+| atlas / `236d48b6033f` | 0.006375 / 0.5 | 0/2 | 0/6 | 1 | 1/8 | FAIL | image-develop-img_intensity2-source-transpose12: hold break at 475: finite_template_tv |
+| atlas / `8bb305c13267` | 0.0053125 / 0.5 | 0/2 | 0/6 | 0 | 1/8 | FAIL | image-develop-img_intensity2-source-transpose12: hold break at 525: finite_template_tv; hq; modes |
+| e22 / `5376bd11b0af` | 0.0053125 / 1.5 | 1/2 | 0/6 | 2 | 2/8 | INCOMPLETE | api-vector-two-broad: fewer than five post-confirmation hold observations |
+| e22 / `e3d2b84ede8f` | 0.006375 / 1.5 | 1/2 | 0/6 | 1 | 2/8 | FAIL | api-vector-two-broad: last 5 post-update metric observations do not all pass |
+| e22 / `383591c52dd4` | 0.0053125 / 0.5 | 0/2 | 0/6 | 0 | 1/8 | FAIL | image-develop-img_intensity2-source-transpose12: hold break at 525: finite_template_tv; hq; modes |
+| e22 / `abae69c7b60c` | 0.006375 / 0.5 | 0/2 | 0/6 | 1 | 1/8 | FAIL | image-develop-img_intensity2-source-transpose12: hold break at 475: finite_template_tv |
+
+Per-family best observed display (pass counts, then content ID; not a default or speed selection): atlas `3018391da94f`; e22 `5376bd11b0af`.
+
+Pass-count ties: atlas `3018391da94f`, `abe34fb6f0c5`; e22 `5376bd11b0af`, `e3d2b84ede8f`. The displayed content ID only breaks a presentation tie; it supplies no measured quality advantage.
+
+| Observed case / config | Original gate | Study gate | Acquisition / hold passed | Terminal metrics | Actual GIF |
+| --- | --- | --- | --- | --- | --- |
+| atlas `3018391da94f` / image-develop-img_intensity2-source-transpose12 | PASS | PASS | 450 / 6/6 | hq=1; modes=2; finite_template_tv=0.00292969; distribution_tv=0.00292969 | [actual 9-frame GIF](policy-family-media/policy-family-defaults-round4-prior-balance-v1--8021a1c50c4a/atlas/3018391da94f--image-develop-img_intensity2-source-transpose12.gif) |
+| atlas `3018391da94f` / api-vector-two-broad | FAIL | FAIL | none / 0/0 | hq=0.985596; mass_tv=0.0197754; projection_ks=0.0495483 | [actual 9-frame GIF](policy-family-media/policy-family-defaults-round4-prior-balance-v1--8021a1c50c4a/atlas/3018391da94f--api-vector-two-broad-reviewed.gif) |
+| atlas `abe34fb6f0c5` / image-develop-img_intensity2-source-transpose12 | PASS | PASS | 475 / 5/5 | hq=0.998047; modes=2; finite_template_tv=0.0576172; distribution_tv=0.0576172 | [actual 9-frame GIF](policy-family-media/policy-family-defaults-round4-prior-balance-v1--8021a1c50c4a/atlas/abe34fb6f0c5--image-develop-img_intensity2-source-transpose12.gif) |
+| atlas `abe34fb6f0c5` / api-vector-two-broad | PASS | INCOMPLETE | 1100 / 2/2 | hq=0.992432; mass_tv=0.00268555; projection_ks=0.0544443 | [actual 9-frame GIF](policy-family-media/policy-family-defaults-round4-prior-balance-v1--8021a1c50c4a/atlas/abe34fb6f0c5--api-vector-two-broad-reviewed.gif) |
+| atlas `236d48b6033f` / image-develop-img_intensity2-source-transpose12 | PASS | FAIL | 450 / 5/6 | hq=0.985352; modes=2; finite_template_tv=0.0341797; distribution_tv=0.0263672 | [actual 9-frame GIF](policy-family-media/policy-family-defaults-round4-prior-balance-v1--8021a1c50c4a/atlas/236d48b6033f--image-develop-img_intensity2-source-transpose12.gif) |
+| atlas `8bb305c13267` / image-develop-img_intensity2-source-transpose12 | FAIL | FAIL | 375 / 8/9 | hq=1; modes=2; finite_template_tv=0.0478516; distribution_tv=0.0478516 | [actual 9-frame GIF](policy-family-media/policy-family-defaults-round4-prior-balance-v1--8021a1c50c4a/atlas/8bb305c13267--image-develop-img_intensity2-source-transpose12.gif) |
+| e22 `5376bd11b0af` / image-develop-img_intensity2-source-transpose12 | PASS | PASS | 475 / 5/5 | hq=0.998047; modes=2; finite_template_tv=0.0576172; distribution_tv=0.0576172 | [actual 9-frame GIF](policy-family-media/policy-family-defaults-round4-prior-balance-v1--8021a1c50c4a/e22/5376bd11b0af--image-develop-img_intensity2-source-transpose12.gif) |
+| e22 `5376bd11b0af` / api-vector-two-broad | PASS | INCOMPLETE | 1100 / 2/2 | hq=0.992432; mass_tv=0.00268555; projection_ks=0.0544443 | [actual 9-frame GIF](policy-family-media/policy-family-defaults-round4-prior-balance-v1--8021a1c50c4a/e22/5376bd11b0af--api-vector-two-broad-reviewed.gif) |
+| e22 `e3d2b84ede8f` / image-develop-img_intensity2-source-transpose12 | PASS | PASS | 450 / 6/6 | hq=1; modes=2; finite_template_tv=0.00292969; distribution_tv=0.00292969 | [actual 9-frame GIF](policy-family-media/policy-family-defaults-round4-prior-balance-v1--8021a1c50c4a/e22/e3d2b84ede8f--image-develop-img_intensity2-source-transpose12.gif) |
+| e22 `e3d2b84ede8f` / api-vector-two-broad | FAIL | FAIL | none / 0/0 | hq=0.985596; mass_tv=0.0197754; projection_ks=0.0495483 | [actual 9-frame GIF](policy-family-media/policy-family-defaults-round4-prior-balance-v1--8021a1c50c4a/e22/e3d2b84ede8f--api-vector-two-broad-reviewed.gif) |
+| e22 `383591c52dd4` / image-develop-img_intensity2-source-transpose12 | FAIL | FAIL | 375 / 8/9 | hq=1; modes=2; finite_template_tv=0.0478516; distribution_tv=0.0478516 | [actual 9-frame GIF](policy-family-media/policy-family-defaults-round4-prior-balance-v1--8021a1c50c4a/e22/383591c52dd4--image-develop-img_intensity2-source-transpose12.gif) |
+| e22 `abae69c7b60c` / image-develop-img_intensity2-source-transpose12 | PASS | FAIL | 450 / 5/6 | hq=0.985352; modes=2; finite_template_tv=0.0341797; distribution_tv=0.0263672 | [actual 9-frame GIF](policy-family-media/policy-family-defaults-round4-prior-balance-v1--8021a1c50c4a/e22/abae69c7b60c--image-develop-img_intensity2-source-transpose12.gif) |
+
+atlas `3018391da94f` / `image-develop-img_intensity2-source-transpose12`: original **PASS**, study **PASS**. Copied unchanged from actual retained observations.
+
+![image-develop-img_intensity2-source-transpose12 actual training](policy-family-media/policy-family-defaults-round4-prior-balance-v1--8021a1c50c4a/atlas/3018391da94f--image-develop-img_intensity2-source-transpose12.gif)
+
+atlas `3018391da94f` / `api-vector-two-broad`: original **FAIL**, study **FAIL**. Reviewed retained observations: original numeric values and verdict unchanged; projection KS and its original bound are visible.
+
+![api-vector-two-broad actual training](policy-family-media/policy-family-defaults-round4-prior-balance-v1--8021a1c50c4a/atlas/3018391da94f--api-vector-two-broad-reviewed.gif)
+
+[Unchanged original GIF](policy-family-media/policy-family-defaults-round4-prior-balance-v1--8021a1c50c4a/atlas/3018391da94f--api-vector-two-broad.gif) · [Separate media-review provenance](policy-family-media/policy-family-defaults-round4-prior-balance-v1--8021a1c50c4a/atlas/3018391da94f--api-vector-two-broad-reviewed.media-review.json).
+
+e22 `5376bd11b0af` / `image-develop-img_intensity2-source-transpose12`: original **PASS**, study **PASS**. Copied unchanged from actual retained observations.
+
+![image-develop-img_intensity2-source-transpose12 actual training](policy-family-media/policy-family-defaults-round4-prior-balance-v1--8021a1c50c4a/e22/5376bd11b0af--image-develop-img_intensity2-source-transpose12.gif)
+
+e22 `5376bd11b0af` / `api-vector-two-broad`: original **PASS**, study **INCOMPLETE**. Reviewed retained observations: original numeric values and verdict unchanged; projection KS and its original bound are visible.
+
+![api-vector-two-broad actual training](policy-family-media/policy-family-defaults-round4-prior-balance-v1--8021a1c50c4a/e22/5376bd11b0af--api-vector-two-broad-reviewed.gif)
+
+[Unchanged original GIF](policy-family-media/policy-family-defaults-round4-prior-balance-v1--8021a1c50c4a/e22/5376bd11b0af--api-vector-two-broad.gif) · [Separate media-review provenance](policy-family-media/policy-family-defaults-round4-prior-balance-v1--8021a1c50c4a/e22/5376bd11b0af--api-vector-two-broad-reviewed.media-review.json).
+
+Frozen source `8021a1c50c4aff90ddea5010d368cffdc857b2f6`; spec SHA256 `8bf93b8b603c5a21bad0fefb18ef5497e3c4522e5412287da6bbfeb8f8971b6b`; combined archive SHA256 `0f36a1dd85bde72220f3c89151cc9c73515d6c6b4d0a077eacf3fc4f5b10be62`. Exact recipes, priors/serving law, runtimes, source manifests, case receipts, artifact hashes and all unknown required cells are retained in the JSON.
+
+## Retained cohort `policy-family-defaults-round3-v1--531021742ad2`
+
+8 declared configurations; each retains 8 required cases. Paid child execution 338.823s. Whole-config outcome: **incomplete_comparison**; fully qualified: **0**. Partial or interrupted evidence supplies no additional qualification.
+
+| Family / config | LR / prior rate | Study smoke | Study quality | Original passes | Measured / required | Whole-config status | First non-pass |
+| --- | --- | ---: | ---: | ---: | ---: | --- | --- |
+| atlas / `05ae5523eabc` | 0.0031875 / 1.0 | 1/2 | 0/6 | 1 | 2/8 | FAIL | api-vector-two-broad: projection_ks <= 0.06; last 5 post-update metric observations do not all pass |
+| atlas / `cf74ea1def0d` | 0.0053125 / 1.0 | 1/2 | 0/6 | 1 | 2/8 | FAIL | api-vector-two-broad: last 5 post-update metric observations do not all pass |
+| atlas / `112fe0214b6d` | 0.0031875 / 2.0 | 0/2 | 0/6 | 1 | 1/8 | INCOMPLETE | image-develop-img_intensity2-source-transpose12: fewer than five post-confirmation hold observations |
+| atlas / `3d633688c6ed` | 0.0053125 / 2.0 | 0/2 | 0/6 | 1 | 1/8 | INCOMPLETE | image-develop-img_intensity2-source-transpose12: fewer than five post-confirmation hold observations |
+| e22 / `8385a62046db` | 0.0053125 / 1.0 | 1/2 | 0/6 | 1 | 2/8 | FAIL | api-vector-two-broad: last 5 post-update metric observations do not all pass |
+| e22 / `d0348c27e9ce` | 0.0031875 / 1.0 | 1/2 | 0/6 | 1 | 2/8 | FAIL | api-vector-two-broad: projection_ks <= 0.06; last 5 post-update metric observations do not all pass |
+| e22 / `233d9f6e49d4` | 0.0053125 / 2.0 | 0/2 | 0/6 | 1 | 1/8 | INCOMPLETE | image-develop-img_intensity2-source-transpose12: fewer than five post-confirmation hold observations |
+| e22 / `30110f79b684` | 0.0031875 / 2.0 | 0/2 | 0/6 | 1 | 1/8 | INCOMPLETE | image-develop-img_intensity2-source-transpose12: fewer than five post-confirmation hold observations |
+
+Per-family best observed display (pass counts, then content ID; not a default or speed selection): atlas `05ae5523eabc`; e22 `8385a62046db`.
+
+Pass-count ties: atlas `05ae5523eabc`, `cf74ea1def0d`; e22 `8385a62046db`, `d0348c27e9ce`. The displayed content ID only breaks a presentation tie; it supplies no measured quality advantage.
+
+| Observed case / config | Original gate | Study gate | Acquisition / hold passed | Terminal metrics | Actual GIF |
+| --- | --- | --- | --- | --- | --- |
+| atlas `05ae5523eabc` / image-develop-img_intensity2-source-transpose12 | PASS | PASS | 475 / 5/5 | hq=0.999023; modes=2; finite_template_tv=0.00585938; distribution_tv=0.00585938 | [actual 9-frame GIF](policy-family-media/policy-family-defaults-round3-v1--531021742ad2/atlas/05ae5523eabc--image-develop-img_intensity2-source-transpose12.gif) |
+| atlas `05ae5523eabc` / api-vector-two-broad | FAIL | FAIL | none / 0/0 | hq=0.981201; mass_tv=0.0065918; projection_ks=0.0607192 | [actual 9-frame GIF](policy-family-media/policy-family-defaults-round3-v1--531021742ad2/atlas/05ae5523eabc--api-vector-two-broad-reviewed.gif) |
+| atlas `cf74ea1def0d` / image-develop-img_intensity2-source-transpose12 | PASS | PASS | 425 / 7/7 | hq=0.985352; modes=2; finite_template_tv=0.0371094; distribution_tv=0.0341797 | [actual 9-frame GIF](policy-family-media/policy-family-defaults-round3-v1--531021742ad2/atlas/cf74ea1def0d--image-develop-img_intensity2-source-transpose12.gif) |
+| atlas `cf74ea1def0d` / api-vector-two-broad | FAIL | FAIL | none / 0/0 | hq=0.98584; mass_tv=0.000976562; projection_ks=0.0336865 | [actual 9-frame GIF](policy-family-media/policy-family-defaults-round3-v1--531021742ad2/atlas/cf74ea1def0d--api-vector-two-broad-reviewed.gif) |
+| atlas `112fe0214b6d` / image-develop-img_intensity2-source-transpose12 | PASS | INCOMPLETE | 550 / 2/2 | hq=1; modes=2; finite_template_tv=0.0830078; distribution_tv=0.0830078 | [actual 9-frame GIF](policy-family-media/policy-family-defaults-round3-v1--531021742ad2/atlas/112fe0214b6d--image-develop-img_intensity2-source-transpose12.gif) |
+| atlas `3d633688c6ed` / image-develop-img_intensity2-source-transpose12 | PASS | INCOMPLETE | 525 / 3/3 | hq=0.99707; modes=2; finite_template_tv=0.0175781; distribution_tv=0.0175781 | [actual 9-frame GIF](policy-family-media/policy-family-defaults-round3-v1--531021742ad2/atlas/3d633688c6ed--image-develop-img_intensity2-source-transpose12.gif) |
+| e22 `8385a62046db` / image-develop-img_intensity2-source-transpose12 | PASS | PASS | 425 / 7/7 | hq=0.985352; modes=2; finite_template_tv=0.0371094; distribution_tv=0.0341797 | [actual 9-frame GIF](policy-family-media/policy-family-defaults-round3-v1--531021742ad2/e22/8385a62046db--image-develop-img_intensity2-source-transpose12.gif) |
+| e22 `8385a62046db` / api-vector-two-broad | FAIL | FAIL | none / 0/0 | hq=0.98584; mass_tv=0.000976562; projection_ks=0.0336865 | [actual 9-frame GIF](policy-family-media/policy-family-defaults-round3-v1--531021742ad2/e22/8385a62046db--api-vector-two-broad-reviewed.gif) |
+| e22 `d0348c27e9ce` / image-develop-img_intensity2-source-transpose12 | PASS | PASS | 475 / 5/5 | hq=0.999023; modes=2; finite_template_tv=0.00585938; distribution_tv=0.00585938 | [actual 9-frame GIF](policy-family-media/policy-family-defaults-round3-v1--531021742ad2/e22/d0348c27e9ce--image-develop-img_intensity2-source-transpose12.gif) |
+| e22 `d0348c27e9ce` / api-vector-two-broad | FAIL | FAIL | none / 0/0 | hq=0.981201; mass_tv=0.0065918; projection_ks=0.0607192 | [actual 9-frame GIF](policy-family-media/policy-family-defaults-round3-v1--531021742ad2/e22/d0348c27e9ce--api-vector-two-broad-reviewed.gif) |
+| e22 `233d9f6e49d4` / image-develop-img_intensity2-source-transpose12 | PASS | INCOMPLETE | 525 / 3/3 | hq=0.99707; modes=2; finite_template_tv=0.0175781; distribution_tv=0.0175781 | [actual 9-frame GIF](policy-family-media/policy-family-defaults-round3-v1--531021742ad2/e22/233d9f6e49d4--image-develop-img_intensity2-source-transpose12.gif) |
+| e22 `30110f79b684` / image-develop-img_intensity2-source-transpose12 | PASS | INCOMPLETE | 550 / 2/2 | hq=1; modes=2; finite_template_tv=0.0830078; distribution_tv=0.0830078 | [actual 9-frame GIF](policy-family-media/policy-family-defaults-round3-v1--531021742ad2/e22/30110f79b684--image-develop-img_intensity2-source-transpose12.gif) |
+
+atlas `05ae5523eabc` / `image-develop-img_intensity2-source-transpose12`: original **PASS**, study **PASS**. Copied unchanged from actual retained observations.
+
+![image-develop-img_intensity2-source-transpose12 actual training](policy-family-media/policy-family-defaults-round3-v1--531021742ad2/atlas/05ae5523eabc--image-develop-img_intensity2-source-transpose12.gif)
+
+atlas `05ae5523eabc` / `api-vector-two-broad`: original **FAIL**, study **FAIL**. Reviewed retained observations: original numeric values and verdict unchanged; projection KS and its original bound are visible.
+
+![api-vector-two-broad actual training](policy-family-media/policy-family-defaults-round3-v1--531021742ad2/atlas/05ae5523eabc--api-vector-two-broad-reviewed.gif)
+
+[Unchanged original GIF](policy-family-media/policy-family-defaults-round3-v1--531021742ad2/atlas/05ae5523eabc--api-vector-two-broad.gif) · [Separate media-review provenance](policy-family-media/policy-family-defaults-round3-v1--531021742ad2/atlas/05ae5523eabc--api-vector-two-broad-reviewed.media-review.json).
+
+e22 `8385a62046db` / `image-develop-img_intensity2-source-transpose12`: original **PASS**, study **PASS**. Copied unchanged from actual retained observations.
+
+![image-develop-img_intensity2-source-transpose12 actual training](policy-family-media/policy-family-defaults-round3-v1--531021742ad2/e22/8385a62046db--image-develop-img_intensity2-source-transpose12.gif)
+
+e22 `8385a62046db` / `api-vector-two-broad`: original **FAIL**, study **FAIL**. Reviewed retained observations: original numeric values and verdict unchanged; projection KS and its original bound are visible.
+
+![api-vector-two-broad actual training](policy-family-media/policy-family-defaults-round3-v1--531021742ad2/e22/8385a62046db--api-vector-two-broad-reviewed.gif)
+
+[Unchanged original GIF](policy-family-media/policy-family-defaults-round3-v1--531021742ad2/e22/8385a62046db--api-vector-two-broad.gif) · [Separate media-review provenance](policy-family-media/policy-family-defaults-round3-v1--531021742ad2/e22/8385a62046db--api-vector-two-broad-reviewed.media-review.json).
+
+Frozen source `531021742ad25cc47ed593bc3700f68673742ae3`; spec SHA256 `c6cdef1d0a949160b5a6267818786abef3ef6b207e528caa699f97f2059a4083`; combined archive SHA256 `7b55b4aa8b60bffb0d213f5b5863711691ea27875b96ef546e0b87b295cdd916`. Exact recipes, priors/serving law, runtimes, source manifests, case receipts, artifact hashes and all unknown required cells are retained in the JSON.
+
+## Retained cohort `policy-family-defaults-round2-v1--0335ecf024ea`
 
 8 declared configurations; each retains 8 required cases. Paid child execution 189.031s. Whole-config outcome: **incomplete_comparison**; fully qualified: **0**. Partial or interrupted evidence supplies no additional qualification.
 

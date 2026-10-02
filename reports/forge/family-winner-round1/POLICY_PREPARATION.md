@@ -15,8 +15,11 @@ flowchart TD
     H[Search the declared shared LR and prior-rate grid]
     S{Both full-budget smoke cases pass and retain acquisition?}
     Q{All six full-budget quality cases pass and retain acquisition?}
-    N[Record failure and test the next declared configuration]
+    N[Record exact non-pass and preserve unreached requirements]
     C[Keep every fully qualified whole configuration]
+    E{More declared configurations and sufficient budget?}
+    P{Complete screen with a whole positive?}
+    U[Publish no qualified winner or a provisional incumbent]
     V[Separate calibration, confirmation and reserved robustness]
     T[Compare acquisition times on controlled comparable hardware]
     D[Choose fastest retained convergence and freeze shipping defaults]
@@ -27,9 +30,13 @@ flowchart TD
     S -- No --> N
     S -- Yes --> Q
     Q -- No --> N
-    N --> H
+    N --> E
     Q -- Yes --> C
-    C --> V --> T --> D
+    C --> E
+    E -- Yes --> H
+    E -- No --> P
+    P -- No --> U
+    P -- Yes --> V --> T --> D
 ```
 
 The current round stops at scoped screening. Timing is diagnostic while
@@ -153,6 +160,18 @@ axes cannot be borrowed from another profile. Remaining quotas are Atlas
 4,994.908136 and E22 5,002.280399, totaling 9,997.188535 of the same original
 allowance. This is the last finite screening grid for this action. Unresolved
 failures require a separately justified dynamics or calibration question.
+
+That final grid completed twelve full runs for 331.515183 paid seconds: eight
+original PASS and four original FAIL. The study records four PASS, six FAIL and
+two INCOMPLETE holds. Both families at LR .0053125/prior1.5 pass the original
+broad-mixture gate, but first confirm at1100, leaving only two subsequent checks.
+The [final archive](policy-round4-archive.json) and
+[diagnosis](C6_DIAGNOSIS.md) preserve this positive original result and its
+remaining persistence uncertainty. All four grids together use 1,134.326648
+paid seconds including setup, with no whole-config winner or native quality
+training. The finite screen is complete. Further work needs a new declared
+scientific question; the unused allowance does not justify repeating failed
+settings or adding unregistered grids.
 
 Root admits at most one serial experiment worker per GPU, with at least
 12 GiB free and one Torch/BLAS CPU thread. GPU0 remains excluded while the

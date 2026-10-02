@@ -30,7 +30,7 @@
     },
     "path": "reports/forge/family-winner-round1/publish_policy_results.py",
     "publisher_committed_at_head": true,
-    "repository_head": "29bdc4e34ada62f1cd6c3b608da62af115d9031f",
+    "repository_head": "8021a1c50c4aff90ddea5010d368cffdc857b2f6",
     "sha256": "8f0f0b929152316b88ddcf4aacb458f99c949ee68175b66eddb32c2e1503caf2"
   },
   "raw_artifacts": {
@@ -56,7 +56,7 @@
     "numeric_observations_changed": false
   },
   "renderer_source": {
-    "commit": "29bdc4e34ada62f1cd6c3b608da62af115d9031f",
+    "commit": "8021a1c50c4aff90ddea5010d368cffdc857b2f6",
     "files_sha256": {
       "benchmarks/toy_audit/api_contract.py": "2d23aacfb6107f1535ed04ea0d5bb67d8f33a260ac1aca9e1d1734bfaf0f2e28",
       "benchmarks/toy_audit/api_reframe.py": "7254d231c609edd4186893ee75706924cbbf7359dac951381b2226d9f8ce8065",

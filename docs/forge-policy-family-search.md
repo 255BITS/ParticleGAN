@@ -6,6 +6,49 @@ qualification, all-toy winner, calibrated default adoption or speed winner.
 Historical Atlas19 results remain their original evidence; they are not rerun or
 pooled into this study.
 
+The [completed campaign](../reports/forge/family-winner-round1/README.md) records
+all four grids. The [primary policy board](../reports/forge/policy-family-inventory.md)
+and [machine-readable JSON](../reports/forge/policy-family-inventory.json) are the
+common team record for whole configurations, gates, unknown requirements,
+costs and goal GIFs. No configuration has qualified every required case.
+
+To test one separately declared future config through the public API, use its
+shared Recipe overrides and a fresh archive directory. This example shows the
+observed original broad-mixture PASS setting. A reproduction records a new
+source/runtime cohort; no reproduction was executed for this guide. The command
+runs the full original case and returns exit0 for PASS or exit1 for FAIL; its
+receipt also distinguishes incomplete or invalid execution:
+
+```sh
+CUDA_VISIBLE_DEVICES=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 \
+python -m benchmarks.toy_audit.api_run \
+  --case api-vector-two-broad --recipe e22 \
+  --recipe-overrides '{"lr": 0.0053125, "prior_lr_mult": 1.5}' \
+  --device cuda:0 --wall-cap-seconds 180 --frames 9 \
+  --output /path/to/fresh-candidate-archive
+```
+
+Set the assigned GPU and declared numeric values for the intended study. Use the family
+coordinator below to enforce shared knobs across all eight required cases and
+the additional acquisition/hold gate. A single case PASS is not that whole-config
+gate. Commands in this guide describe the interface; completed failed settings
+are not automatically reexecuted.
+
+Publish from certified combined receipts with the observation-only exporter:
+
+```sh
+python reports/forge/family-winner-round1/publish_policy_results.py \
+  --combined /path/to/archive/current-policy-family-results.json \
+  --all-media --review-projection
+```
+
+Repeat `--combined` for each retained compatible source cohort. Publication
+updates the one primary board and copies every reached original GIF; it keeps
+separate reviewed media provenance and runs no training or model-metric rescoring.
+Commit the compact board, receipts, checked archive manifests and media to
+`develop`. Bulk arrays, checkpoints and full logs remain at the manifest paths;
+team members need that archive or shared-machine access for independent regrading.
+
 Each source cohort freezes one finite grid: the first used `lr` .006375 or
 .0085; the linked second uses the public preset rate .00425 or half that rate
 .002125. The third freezes intermediate rates .0031875 and .0053125. Those

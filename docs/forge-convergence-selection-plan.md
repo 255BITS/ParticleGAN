@@ -2,6 +2,13 @@
 
 Status: proposed implementation plan, based on develop `81402d6b` (2026-10-02).
 
+Implementation update: [PLAN #249](https://github.com/255BITS/ParticleGAN/pull/249)
+is merged. Bounded whole-config progression and the separate public-policy
+capacity/acquisition/hold path have executed a
+[60-configuration screen](../reports/forge/family-winner-round1/README.md).
+It has no fully qualified winner. Controlled speed selection, accepted calibration
+and reserved confirmation/robustness remain prerequisites for shipping defaults.
+
 Start with solution families: a training mechanism is a family, and its complete
 hyperparameter configurations are the candidates. Run a bounded hyperparameter
 search within each family, advancing its configs through increasingly expensive
@@ -296,15 +303,19 @@ score them; a parameter grid cannot repair a missing capability.
 | 4 | Extend the existing compact report and single leaderboard | Fresh-checkout reconstruction gives the same selection and hashes; all failures, alternatives and raw archive identities remain accessible |
 | 5 | Run one new bounded family/defaults comparison, publish it, then register the frozen winner's confirmation | One unchanged public defaults config passes every required toy; declared host exceptions and full gate/speed receipts support the conclusion; no adoption is inferred from screening |
 
-Forge already supplies finite Recipe grids, preflight, prerequisite stopping,
-budget reservation, exact-evidence reuse, durable attempts, phase timing, some
-task-specific confirmation timing, and the single published leaderboard.
-Its current search objective is tuning-task PASS
-counts with a hash tie-break; the first R1/R2 study confirms only one smoke winner.
-The representation receipts, shared-defaults selection, timing contract,
-survivor progression and fastest-convergence objective above are proposed
-additions, not existing CLI behavior. This plan changes no recipes,
-gates, recorded results or defaults and launches no experiments.
+At this plan's original baseline, Forge supplied finite Recipe grids, preflight,
+prerequisite stopping, budget reservation, exact-evidence reuse, durable attempts,
+phase timing and some task-specific confirmation timing. The first R1/R2 study
+confirmed only one smoke winner.
+
+Whole-config progression now advances every smoke survivor in a declared
+full-view study. The separate public-policy CLI also verifies served-state
+capacity and first acquisition with uninterrupted hold. Both retain exact
+required denominators and use PASS counts with a content-ID presentation tie.
+The general matched timing contract, controlled fastest-convergence selection,
+accepted calibration and shipping-default decision remain incomplete. The
+linked completed campaign records the implemented scope and observed outcomes;
+this plan document itself changes no recipe, gate or recorded result.
 
 See the [current configuration-search guide](forge-configuration-search.md),
 [R1/R2 measured readout](../reports/forge/R1R2_CONFIGURATION_SEARCH_READOUT.md),

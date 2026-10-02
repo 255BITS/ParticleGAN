@@ -19,10 +19,10 @@
     1050,
     1200
   ],
-  "numeric_observation_sha256": "21787d19d522bfb07c1df6bcd77980ca9043fc7f809f97c440a049e17dcd9a2a",
+  "numeric_observation_sha256": "eb2b1fc0e97589e2854da0028bce3b65715556c42ee8e7c55bb93172fcd966ff",
   "numeric_observations_changed": false,
   "original_case_sha256": "e293cf19f2f235b30807f9782ec65ceea3693f78e3459b9f7eb117179168c8fc",
-  "original_gate": "FAIL",
+  "original_gate": "PASS",
   "publisher_source": {
     "files_sha256": {
       "reports/forge/family-winner-round1/policy_family_readout.py": "e4269840d790cf1855a1cbe6b0cc9ddd0fca3d779d997120179e4b21fcb10497",
@@ -35,23 +35,23 @@
   },
   "raw_artifacts": {
     "final-state.pt": {
-      "bytes": 432895,
-      "sha256": "0eaf9678974a633298a8d636b258c11794381db57815c7b8eff27a0ba81c90ca"
+      "bytes": 450187,
+      "sha256": "95401e3063a5f0bba29cae59835f50bd1e7f8387776944b09aceea5ba4738075"
     },
     "goal.gif": {
-      "bytes": 652307,
-      "sha256": "e85966896f44a6cbf166368c62a3198998b44f3c0dca65aab0930e6db00ff99b"
+      "bytes": 689019,
+      "sha256": "0848e7e9849ad2821456cd4f034a45108076f50ff61ad6122460632d5c8260e0"
     },
     "observations.npz": {
-      "bytes": 3070364,
-      "sha256": "2042818b165add35e226b2d21d4773e7d171b9ab014987efa1fd81bc3edba45a"
+      "bytes": 3070137,
+      "sha256": "c188d10dd45d8263443b4c085833d39aa0e5fe3ef92ae01f3cc910e369f4b28a"
     }
   },
   "raw_files_unchanged": true,
-  "raw_receipt": "/ml2/hypergan/forge-policy-family-round1-cli-recovery-20261002/atlas/atlas--ca0901b6679b72404f0989bf27f53c85b01095d291f67ec50fddfd98006880a1/api-vector-two-broad/receipt.json",
-  "raw_receipt_sha256": "e75ef1a5c4bc64f94685dccc0538a7525bc39329b9c95c97b8b2e0ef9018d151",
+  "raw_receipt": "/ml2/hypergan/forge-policy-family-round4-20261002/atlas/atlas--abe34fb6f0c5f7802cec80e5a2d88aaffb4aa85e55e4021f646457630abec4f0/api-vector-two-broad/receipt.json",
+  "raw_receipt_sha256": "e2bfc5fdc66ea2c32e77b22d16a00346a83852b3192d9f4b4ee2da2619da20a6",
   "render_annotations": {
-    "default_verdict_displayed": "FAIL",
+    "default_verdict_displayed": "PASS",
     "goal_annotations": [],
     "numeric_observations_changed": false
   },
@@ -64,13 +64,13 @@
     }
   },
   "reviewed_gif": {
-    "bytes": 673457,
+    "bytes": 708184,
     "frames": 9,
-    "relative_path": "policy-family-media/policy-family-defaults-round1-cli-recovery-v2--eb2d77fbd776/atlas/ca0901b6679b--api-vector-two-broad-reviewed.gif",
-    "sha256": "48ef1a51e8028a052b76e37a894b4802639c5a44f34f1260a963aae89068e042"
+    "relative_path": "policy-family-media/policy-family-defaults-round4-prior-balance-v1--8021a1c50c4a/atlas/abe34fb6f0c5--api-vector-two-broad-reviewed.gif",
+    "sha256": "ab7d8afc20e40526581e4a78e3f9aa58a30a26021793987b157dd83544f010b7"
   },
   "schema": "policy_family_metric_media_review_v1",
-  "study_gate": "FAIL",
+  "study_gate": "INCOMPLETE",
   "training_or_rescoring": false,
-  "training_source_commit": "eb2d77fbd776eab0d2ce5e2550ab9cdfdb6c1162"
+  "training_source_commit": "8021a1c50c4aff90ddea5010d368cffdc857b2f6"
 }

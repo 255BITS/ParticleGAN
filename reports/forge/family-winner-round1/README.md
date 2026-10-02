@@ -1,4 +1,31 @@
-# Family defaults search: round one
+# Family defaults search: completed bounded campaign
+
+This campaign tested **60 whole configurations across seven families**: 28
+Forge MoG configurations and 32 public-API Atlas/E22 configurations. It found
+**no fully qualified winner and no shipping default**. Early gates stopped
+failing or incompletely confirmed candidates; all unreached requirements remain
+UNKNOWN. The two suites have different priors, serving laws and denominators,
+so their scores stay on their respective primary boards.
+
+One public-policy balance, LR `.0053125` and prior multiplier
+`1.5`, passes both original smoke toys for Atlas and E22. It retains the added
+intensity hold but confirms broad-mixture acquisition only at update 1100 of
+1200, leaving two later passing observations instead of five. Its study score
+is therefore **1/8**, with broad persistence INCOMPLETE and all six quality
+requirements UNKNOWN. This is a concrete improved candidate, not a selected
+default. The strongest observed MoG candidate is KA2 at **10/24** below.
+
+This actual E22 broad-mixture run illustrates the original target and its
+original PASS. Its separate study verdict is **INCOMPLETE: two of five required
+later hold checks were available**. Atlas's matched run and every other observed
+configuration are linked on the primary policy board.
+
+![Original broad-mixture PASS; separate persistence INCOMPLETE](../policy-family-media/policy-family-defaults-round4-prior-balance-v1--8021a1c50c4a/e22/5376bd11b0af--api-vector-two-broad-reviewed.gif)
+
+The [completion receipt](campaign-completion.json) records exact costs, source
+cohorts, unknown denominators and archived evidence. The
+[open-toy review](OPEN_TOY_PR_REVIEW.md) explains the distinct questions in
+PRs #245, #246 and #253 and the source-bound GIF follow-up #254.
 
 The first frozen search completed **28 complete configurations across five
 families**. None passed every required gate. The best observed KA2 configuration
@@ -84,18 +111,41 @@ eight-case results stay separate from this 24-case MoG cohort. Use the
 [compact JSON](../policy-family-inventory.json) for every whole configuration,
 required denominator, original/study verdict and actual training GIF.
 
-The first two grids completed 16 configurations and 18 full original case
-runs. They have no whole-configuration winner: two intensity runs retain the
-study gate, while the other configurations fail or acquire too late; no
-quality case is reached. Seven second-grid runs pass the original image test
-without passing the extra retention rule. The [failure diagnosis](POLICY_FAILURE_DIAGNOSIS.md)
+All four policy grids completed **32 configurations and 42 full original case
+runs**, comprising 27 original PASS and 15 original FAIL verdicts. The additional
+study gate records 10 PASS, 21 FAIL and 11 INCOMPLETE runs. Every candidate stops
+before quality: none passes both smoke study gates. The primary board retains
+all **256 required cells**, including **214 UNKNOWN**, plus all 42 original
+training GIFs and ten separate reviewed broad-mixture GIFs. These counts describe
+the completed screen and supply no pooled cross-cohort family score.
+
+Independent [binding checks](policy-board-binding-review.json) verified all 42
+complete receipts, 168 bound raw files, 586 committed source blobs, 52 GIFs and
+69 primary-board links. The [visual review](policy-board-visual-review.json)
+checked readable goals and the distinct original, instantaneous and study
+verdicts. Publication performed zero model updates, draws or rescoring.
+
+Seven second-grid runs pass the original image test without passing the extra
+retention rule. The [failure diagnosis](POLICY_FAILURE_DIAGNOSIS.md)
 explains the measured fidelity, Gaussian-CDF and hold failures, including a
 real Atlas/E22 policy-event divergence. The [E22 readout](E22_POLICY_READOUT.md)
 and [Atlas readout](policy-atlas-execution-readout/README.md) keep the original
-high-rate cases and their full provenance.
+high-rate cases and their full provenance. The [third-grid diagnosis](C5_DIAGNOSIS.md)
+and [final-grid diagnosis](C6_DIAGNOSIS.md) explain the later balances and why
+a good endpoint or late original PASS cannot fill the persistence requirement.
 
-The [preparation and process diagram](POLICY_PREPARATION.md) links all capacity
-proofs, source freezes, archives and bounded specifications. A third,
-intermediate-rate grid is separately declared within the same unspent policy
-budget. No original verdict, horizon or threshold changes, no failed setting
-is repeated, and no historical pass fills a new source cohort.
+The [preparation and process diagram](POLICY_PREPARATION.md) links all sixteen
+supported capacity witnesses, source freezes, four checked archives and bounded
+specifications. The policy screen spent **1,134.327 paid child/setup seconds**
+from its original 10,800-second cap, including the preserved zero-update CLI
+failure. It completed **31,200 ordinary API updates**; no native quality run
+was admitted. The unused allowance does not automatically add another grid.
+No original verdict, horizon or threshold changed, no failed setting repeated,
+and no historical pass filled a new source cohort.
+
+The next justified research question is acquisition and uninterrupted retention
+under the actual public sampler, followed by calibration of the screening rule
+and a separately registered confirmation/robustness cohort. Atlas's large native
+feature-cell behavior remains unmeasured by ordinary training here. With no whole
+positive, comparing speed or promoting a family default would overstate the
+evidence. Public trainer/default files were not modified by this campaign.
