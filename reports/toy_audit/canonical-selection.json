@@ -1,0 +1,1564 @@
+{
+  "catalog": {
+    "content_sha256": "ab0ef403044fb48d9fc166641b3392c2dda38e25bebe3d5608f75c7e4bdaf581",
+    "entries": 109,
+    "file_sha256": "1064b4f399c6dde97ce5313b05e3589f7083bad21846fc0d62a311fd8078ff18",
+    "path": "reports/toy_audit/catalog.json"
+  },
+  "checked_toy_proposal_prs": 49,
+  "cleanup_conclusion": "No merged source deletion is justified. Redundant default inventory entries are folded into linked controls; every original source definition, runner, gate and immutable receipt is retained.",
+  "counts": {
+    "canonical_problem_entries": 97,
+    "deleted_merged_source_files": 0,
+    "linked_control_cases": 12,
+    "original_cases": 109,
+    "proved_shared_law_groups": 5,
+    "removed_evidence_cases": 0
+  },
+  "current_definition_assessments": {
+    "id_key": "id",
+    "note": "Original rating/status fields above are immutable historical values, not current definition grading. The two analytic negative units currently have followup_rating4; expected learned failure remains separate.",
+    "path": "reports/toy_audit/improvements.json",
+    "question_key": "verifies",
+    "rating_key": "followup_rating",
+    "rows_key": "rows"
+  },
+  "existing_runner_gates_changed": false,
+  "format": "toy_canonical_selection_v1",
+  "grouping_scope": "Only five proved exact shared-law groups collapse. Other cases remain separately retained conservatively; 97 canonical entries are not 97 independently verified distinct data laws or families.",
+  "groups": [
+    {
+      "canonical_id": "develop-img_stripes2",
+      "label": "Central horizontal/vertical stripe template law",
+      "members": [
+        "develop-img_stripes2",
+        "develop-img_uniform_generator"
+      ],
+      "proof": {
+        "kind": "image_templates",
+        "law_sha256": "247cef106e61e2b985ca05cbababe8ca72a3d8e1adff7057562c838382a688d5",
+        "source": "benchmarks/transfer_suite/image_tasks.py:47-87,208-210; captured float32 template banks directly compared byte-for-byte"
+      }
+    },
+    {
+      "canonical_id": "develop-img_bars4",
+      "label": "Four-position bar template law",
+      "members": [
+        "develop-img_bars4",
+        "develop-img_tiny_generator",
+        "develop-img_residual_bars4"
+      ],
+      "proof": {
+        "kind": "image_templates",
+        "law_sha256": "fbedc7b9a5e7e06193d95a1a314e6d5c9bb0b775344801679c14b07e4d789fe0",
+        "source": "benchmarks/transfer_suite/image_tasks.py:47-87,208-210; captured float32 template banks directly compared byte-for-byte"
+      }
+    },
+    {
+      "canonical_id": "develop-img_blobs4",
+      "label": "Four-position patch template law",
+      "members": [
+        "develop-img_blobs4",
+        "develop-img_mean_discriminator"
+      ],
+      "proof": {
+        "kind": "image_templates",
+        "law_sha256": "e2a89ea0cc889c238b7e1fb7940280af8f72c60c6102cb28429c96a61c6badc3",
+        "source": "benchmarks/transfer_suite/image_tasks.py:47-87,208-210; captured float32 template banks directly compared byte-for-byte"
+      }
+    },
+    {
+      "canonical_id": "develop-img_intensity2",
+      "label": "Two-intensity central-patch template law",
+      "members": [
+        "develop-img_intensity2",
+        "pr58"
+      ],
+      "proof": {
+        "kind": "image_templates",
+        "law_sha256": "ef47ec2ee3d9d72e22b88b8bee822f6ec668fa46a1709b535ab8b77463f194b1",
+        "source": "benchmarks/transfer_suite/image_tasks.py:47-87,208-210; PR58 imports the same template function; captured banks directly compared byte-for-byte"
+      }
+    },
+    {
+      "canonical_id": "develop-stress_fast_critic",
+      "label": "Eight-Gaussian ring: radius 3, sigma .12",
+      "members": [
+        "develop-stress_fast_critic",
+        "develop-stress_slow_critic",
+        "develop-stress_small_batch",
+        "develop-stress_large_critic",
+        "develop-stress_long_horizon",
+        "develop-stress_r1_r2",
+        "develop-stress_weak_critic",
+        "develop-reserved_alternating_critic_updates"
+      ],
+      "proof": {
+        "kind": "vector_sampler",
+        "law_sha256": "4a1c6b1192f5ac524c08ed2e7e7ffc79f355fe481fcf570eeb254a35c41d4e85",
+        "source": "benchmarks/transfer_suite/stress_tasks.py:27-89; benchmarks/transfer_suite/vector_tasks.py:161-181; exact sampler-field JSON fingerprints agree"
+      }
+    }
+  ],
+  "law_source_sha256": {
+    "benchmarks/transfer_suite/image_tasks.py": "4f070d0879cbaaaa076f82b4683cfe74ea9ed8d85480d1922e249444a752ce58",
+    "benchmarks/transfer_suite/stress_tasks.py": "3342e717db338cb6b7ebf5a95c01c51e4be855a564490f34f240b2a0b2e8c7e4",
+    "benchmarks/transfer_suite/vector_tasks.py": "3ee4eb27759f61a430029c80b7772cac3dca2fb2ac84919ace0db94efca1e0b0"
+  },
+  "preserved_non_alias_examples": [
+    {
+      "cases": [
+        "develop-stress_overlapping_data",
+        "develop-stress_fast_critic"
+      ],
+      "reason": "Sigma .6 versus .12 changes the target density."
+    },
+    {
+      "cases": [
+        "develop-mode_hold",
+        "source-family-10",
+        "develop-stress_fast_critic"
+      ],
+      "reason": "Mode-hold/source-ring sigma .07 and own-state hold/shift contracts differ from stationary sigma .12 stress."
+    },
+    {
+      "cases": [
+        "develop-trajectory",
+        "develop-residual_student"
+      ],
+      "reason": "Shared trajectory rows do not establish equal observation/output/paired-control contracts."
+    },
+    {
+      "cases": [
+        "source-family-04",
+        "source-family-05"
+      ],
+      "reason": "Shared conditional route kernel, different training-context exposure distributions."
+    },
+    {
+      "cases": [
+        "source-family-06",
+        "source-family-07"
+      ],
+      "reason": "Shared conditional transition kernel, different training-context exposure distributions."
+    },
+    {
+      "cases": [
+        "pr45-adapted",
+        "pr47-adapted",
+        "develop-vector_two_broad"
+      ],
+      "reason": "x32/x24 push-forwards are meaningful unit-change controls, not exact unscaled target aliases."
+    },
+    {
+      "cases": [
+        "pr64",
+        "develop-img_stripes2"
+      ],
+      "reason": "Double bars at1:3 and5:7 with intensity .9 differ from a single central stripe3:5 with intensity1."
+    },
+    {
+      "cases": [
+        "source-family-14"
+      ],
+      "reason": "This catalog entry aggregates multiple routed fixtures; it is not one proved data law."
+    }
+  ],
+  "records": [
+    {
+      "canonical_id": "pr224",
+      "catalog_id": "pr224",
+      "display_name": "Constructed stiff-game LR release",
+      "exact_shared_law_proved": false,
+      "original_media": "media/pr224.gif",
+      "original_name": "Constructed stiff-game LR release",
+      "original_rating": 5,
+      "original_status": "Counterexample reproduced; both controls stable",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: One native SettleTest LR release can destabilize a settled stiff coordinate; cancel only that release and allow safe-geometry releases.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "atlas-grid100",
+      "catalog_id": "atlas-grid100",
+      "display_name": "grid100",
+      "exact_shared_law_proved": false,
+      "original_media": "media/atlas-grid100.gif",
+      "original_name": "grid100",
+      "original_rating": 5,
+      "original_status": "noisy PASS / clean FAIL / accuracy PASS",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Recover all 100 Gaussian components, balanced mass, centers and within-mode covariance/radial spread; distinguish clean from noisy served laws.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "atlas-rotated100",
+      "catalog_id": "atlas-rotated100",
+      "display_name": "rotated100",
+      "exact_shared_law_proved": false,
+      "original_media": "media/atlas-rotated100.gif",
+      "original_name": "rotated100",
+      "original_rating": 5,
+      "original_status": "noisy PASS / clean FAIL / accuracy PASS",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Recover all 100 Gaussian components, balanced mass, centers and within-mode covariance/radial spread; distinguish clean from noisy served laws.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "atlas-staggered100",
+      "catalog_id": "atlas-staggered100",
+      "display_name": "staggered100",
+      "exact_shared_law_proved": false,
+      "original_media": "media/atlas-staggered100.gif",
+      "original_name": "staggered100",
+      "original_rating": 5,
+      "original_status": "noisy PASS / clean FAIL / accuracy PASS",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Recover all 100 Gaussian components, balanced mass, centers and within-mode covariance/radial spread; distinguish clean from noisy served laws.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "develop-vector_anisotropic",
+      "catalog_id": "develop-vector_anisotropic",
+      "display_name": "vector_anisotropic",
+      "exact_shared_law_proved": false,
+      "original_media": "media/develop-vector_anisotropic.gif",
+      "original_name": "vector_anisotropic",
+      "original_rating": 5,
+      "original_status": "PASS",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Checks covariance shape: a narrow axis cannot be rescued by a wide one.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "develop-vector_unequal_mass",
+      "catalog_id": "develop-vector_unequal_mass",
+      "display_name": "vector_unequal_mass",
+      "exact_shared_law_proved": false,
+      "original_media": "media/develop-vector_unequal_mass.gif",
+      "original_name": "vector_unequal_mass",
+      "original_rating": 5,
+      "original_status": "FAIL",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Checks target occupancy including the rare 2% component, not uniformity.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "develop-vector_unequal_width",
+      "catalog_id": "develop-vector_unequal_width",
+      "display_name": "vector_unequal_width",
+      "exact_shared_law_proved": false,
+      "original_media": "media/develop-vector_unequal_width.gif",
+      "original_name": "vector_unequal_width",
+      "original_rating": 5,
+      "original_status": "PASS",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Checks component-specific scales without imposing one shared Gaussian width.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "source-family-03",
+      "catalog_id": "source-family-03",
+      "display_name": "Analytic denoising grid, four classes",
+      "exact_shared_law_proved": false,
+      "original_media": null,
+      "original_name": "Analytic denoising grid, four classes",
+      "original_rating": 4,
+      "original_status": "SOURCE REVIEW ONLY",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Match q(x0|xt,c) and checkerboard class consistency against the analytic posterior.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "source-family-02",
+      "catalog_id": "source-family-02",
+      "display_name": "Analytic denoising grid, one class",
+      "exact_shared_law_proved": false,
+      "original_media": null,
+      "original_name": "Analytic denoising grid, one class",
+      "original_rating": 4,
+      "original_status": "SOURCE REVIEW ONLY",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Match the exact multimodal q(x0|xt) posterior, rather than a posterior mean.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "pr22",
+      "catalog_id": "pr22",
+      "display_name": "Circle closed-loop controller",
+      "exact_shared_law_proved": false,
+      "original_media": null,
+      "original_name": "Circle closed-loop controller",
+      "original_rating": 4,
+      "original_status": "BLOCKED before training",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Learn context-dependent signed tangential motion and radial recovery from independent local rows; keep true-environment radius, direction and speed over 1024 closed-loop steps.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "pr196-block",
+      "catalog_id": "pr196-block",
+      "display_name": "MisGAN block",
+      "exact_shared_law_proved": false,
+      "original_media": "media/pr196-block.gif",
+      "original_name": "MisGAN block",
+      "original_rating": 4,
+      "original_status": "Measured; no declared binary gate",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Learn complete 8D data from independent missingness AND sample the conditional missing-coordinate posterior; compare ambiguous rows to the exact Bayes oracle.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "pr196-mcar_p20",
+      "catalog_id": "pr196-mcar_p20",
+      "display_name": "MisGAN mcar_p20",
+      "exact_shared_law_proved": false,
+      "original_media": "media/pr196-mcar_p20.gif",
+      "original_name": "MisGAN mcar_p20",
+      "original_rating": 4,
+      "original_status": "Measured; no declared binary gate",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Learn complete 8D data from independent missingness AND sample the conditional missing-coordinate posterior; compare ambiguous rows to the exact Bayes oracle.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "pr196-mcar_p50",
+      "catalog_id": "pr196-mcar_p50",
+      "display_name": "MisGAN mcar_p50",
+      "exact_shared_law_proved": false,
+      "original_media": "media/pr196-mcar_p50.gif",
+      "original_name": "MisGAN mcar_p50",
+      "original_rating": 4,
+      "original_status": "Measured; no declared binary gate",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Learn complete 8D data from independent missingness AND sample the conditional missing-coordinate posterior; compare ambiguous rows to the exact Bayes oracle.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "pr196-mcar_p80",
+      "catalog_id": "pr196-mcar_p80",
+      "display_name": "MisGAN mcar_p80",
+      "exact_shared_law_proved": false,
+      "original_media": "media/pr196-mcar_p80.gif",
+      "original_name": "MisGAN mcar_p80",
+      "original_rating": 4,
+      "original_status": "Measured; no declared binary gate",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Learn complete 8D data from independent missingness AND sample the conditional missing-coordinate posterior; compare ambiguous rows to the exact Bayes oracle.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "source-family-08",
+      "catalog_id": "source-family-08",
+      "display_name": "Paired affine2 transport",
+      "exact_shared_law_proved": false,
+      "original_media": null,
+      "original_name": "Paired affine2 transport",
+      "original_rating": 4,
+      "original_status": "SOURCE REVIEW ONLY",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Learn the analytic paired input-output affine mapping on held-out rows; distinguish correspondence from output-marginal matching.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "pr226",
+      "catalog_id": "pr226",
+      "display_name": "Paired residual critic-lag diagnostic",
+      "exact_shared_law_proved": false,
+      "original_media": "media/pr226.gif",
+      "original_name": "Paired residual critic-lag diagnostic",
+      "original_rating": 4,
+      "original_status": "All three improve; even critic lowers final RMSE 19.96%",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Verify the nonzero odd-critic force at correct paired predictions, then separate critic parity from D estimator variance in matched native training.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "source-family-09",
+      "catalog_id": "source-family-09",
+      "display_name": "Paired swirl2 transport",
+      "exact_shared_law_proved": false,
+      "original_media": null,
+      "original_name": "Paired swirl2 transport",
+      "original_rating": 4,
+      "original_status": "SOURCE REVIEW ONLY",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Learn the radius-dependent paired rotation on held-out rows; fixed/movable clouds are model controls, not new data laws.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "source-family-07",
+      "catalog_id": "source-family-07",
+      "display_name": "Route transitions, continuous geometry",
+      "exact_shared_law_proved": false,
+      "original_media": null,
+      "original_name": "Route transitions, continuous geometry",
+      "original_rating": 4,
+      "original_status": "SOURCE REVIEW ONLY",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Match joint transition relationships under continuous geometry and held-out contexts; class/route marginals alone are insufficient.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "source-family-06",
+      "catalog_id": "source-family-06",
+      "display_name": "Route transitions, discrete geometry",
+      "exact_shared_law_proved": false,
+      "original_media": null,
+      "original_name": "Route transitions, discrete geometry",
+      "original_rating": 4,
+      "original_status": "SOURCE REVIEW ONLY",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Match a joint state/action/next-state law and next=state+action, not only the three marginals.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "pr227",
+      "catalog_id": "pr227",
+      "display_name": "Routed adapter hidden-initialization convergence",
+      "exact_shared_law_proved": false,
+      "original_media": "media/pr227.gif",
+      "original_name": "Routed adapter hidden-initialization convergence",
+      "original_rating": 4,
+      "original_status": "H/b control closes the gap; unsigned code-ablation gate needs tightening",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Test whether initial hidden bridge H/b causes a convergence gap in a teacher-aligned two-site adapter family, while the trained shared bank and routing remain useful.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "source-family-00",
+      "catalog_id": "source-family-00",
+      "display_name": "Sparse mixed identity symbols",
+      "exact_shared_law_proved": false,
+      "original_media": null,
+      "original_name": "Sparse mixed identity symbols",
+      "original_rating": 4,
+      "original_status": "SOURCE REVIEW ONLY",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Match conditional real modes, active noise, exact inactive zeros and deterministic class symbols; W1 alone misses zero leakage.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "source-family-01",
+      "catalog_id": "source-family-01",
+      "display_name": "Sparse mixed split symbols",
+      "exact_shared_law_proved": false,
+      "original_media": null,
+      "original_name": "Sparse mixed split symbols",
+      "original_rating": 4,
+      "original_status": "SOURCE REVIEW ONLY",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Match each class's 50/50 two-symbol law and continuous/symbol consistency, rather than one valid symbol.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "pr153",
+      "catalog_id": "pr153",
+      "display_name": "Sprite world model",
+      "exact_shared_law_proved": false,
+      "original_media": null,
+      "original_name": "Sprite world model",
+      "original_rating": 4,
+      "original_status": "BLOCKED before training",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Predict one-step state+render, then free-run 5/20/50-step dreams against an exact simulator on held-out ID and ceiling-bounce OOD episodes.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "source-family-05",
+      "catalog_id": "source-family-05",
+      "display_name": "Two-route trajectories, continuous geometry",
+      "exact_shared_law_proved": false,
+      "original_media": null,
+      "original_name": "Two-route trajectories, continuous geometry",
+      "original_rating": 4,
+      "original_status": "SOURCE REVIEW ONLY",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Same conditional route/support question with continuously sampled training geometry and fixed held-out contexts.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "source-family-04",
+      "catalog_id": "source-family-04",
+      "display_name": "Two-route trajectories, discrete geometry",
+      "exact_shared_law_proved": false,
+      "original_media": null,
+      "original_name": "Two-route trajectories, discrete geometry",
+      "original_rating": 4,
+      "original_status": "SOURCE REVIEW ONLY",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Match 0.8/0.3 class route probabilities, continuous variation, endpoints and segment-level obstacle clearance on held-out geometry.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "develop-ae_gan_hold",
+      "catalog_id": "develop-ae_gan_hold",
+      "display_name": "ae_gan_hold",
+      "exact_shared_law_proved": false,
+      "original_media": "media/develop-ae_gan_hold.gif",
+      "original_name": "ae_gan_hold",
+      "original_rating": 4,
+      "original_status": "PASS",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Checks reconstruction/identity and an acquired adversarial edit during the declared hold.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "develop-cover_leftover",
+      "catalog_id": "develop-cover_leftover",
+      "display_name": "cover_leftover",
+      "exact_shared_law_proved": false,
+      "original_media": "media/develop-cover_leftover.gif",
+      "original_name": "cover_leftover",
+      "original_rating": 4,
+      "original_status": "PASS",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Checks target coverage plus the separate unwanted-remainder/content constraints.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "develop-img_bars4",
+      "catalog_id": "develop-img_bars4",
+      "display_name": "img_bars4",
+      "exact_shared_law_proved": true,
+      "original_media": "media/develop-img_bars4.gif",
+      "original_name": "img_bars4",
+      "original_rating": 4,
+      "original_status": "PASS",
+      "reason": "Retain the representative shared-law entry and its original named host control: Healthy location transfer: four horizontal/vertical bar positions test spatial coverage.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "develop-img_blobs4",
+      "catalog_id": "develop-img_blobs4",
+      "display_name": "img_blobs4",
+      "exact_shared_law_proved": true,
+      "original_media": "media/develop-img_blobs4.gif",
+      "original_name": "img_blobs4",
+      "original_rating": 4,
+      "original_status": "PASS",
+      "reason": "Retain the representative shared-law entry and its original named host control: Healthy location transfer: four small corner patches test localized quality and coverage.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "develop-img_intensity2",
+      "catalog_id": "develop-img_intensity2",
+      "display_name": "img_intensity2",
+      "exact_shared_law_proved": true,
+      "original_media": "media/develop-img_intensity2.gif",
+      "original_name": "img_intensity2",
+      "original_rating": 4,
+      "original_status": "PASS",
+      "reason": "Retain the representative shared-law entry and its original named host control: Healthy photometric transfer: two patch intensities require intensity fidelity as well as support coverage.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "develop-img_bars4",
+      "catalog_id": "develop-img_residual_bars4",
+      "display_name": "img_residual_bars4",
+      "exact_shared_law_proved": true,
+      "original_media": "media/develop-img_residual_bars4.gif",
+      "original_name": "img_residual_bars4",
+      "original_rating": 4,
+      "original_status": "PASS",
+      "reason": "Same bars4 law; retain the original reserved residual-upsampling architecture contract and its exact historical evidence. Audit prediction duplication does not erase the shipped transpose/residual distinction.",
+      "retention": "control"
+    },
+    {
+      "canonical_id": "develop-img_stripes2",
+      "catalog_id": "develop-img_stripes2",
+      "display_name": "img_stripes2",
+      "exact_shared_law_proved": true,
+      "original_media": "media/develop-img_stripes2.gif",
+      "original_name": "img_stripes2",
+      "original_rating": 4,
+      "original_status": "PASS",
+      "reason": "Retain the representative shared-law entry and its original named host control: Healthy orientation transfer: two distinct stripe orientations with an adequately sized convolutional GAN.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "develop-mid_scale_identity",
+      "catalog_id": "develop-mid_scale_identity",
+      "display_name": "mid_scale_identity",
+      "exact_shared_law_proved": false,
+      "original_media": "media/develop-mid_scale_identity.gif",
+      "original_name": "mid_scale_identity",
+      "original_rating": 4,
+      "original_status": "PASS",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Checks identity preservation and target edit magnitude at intermediate control strength.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "develop-mode_hold",
+      "catalog_id": "develop-mode_hold",
+      "display_name": "mode_hold",
+      "exact_shared_law_proved": false,
+      "original_media": "media/develop-mode_hold.gif",
+      "original_name": "mode_hold",
+      "original_rating": 4,
+      "original_status": "FAIL",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Checks all eight ring modes and HQ through the sampled terminal hold; not within-mode density fidelity.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "develop-reserved_annulus",
+      "catalog_id": "develop-reserved_annulus",
+      "display_name": "reserved_annulus",
+      "exact_shared_law_proved": false,
+      "original_media": "media/develop-reserved_annulus.gif",
+      "original_name": "reserved_annulus",
+      "original_rating": 4,
+      "original_status": "PASS",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Check rotationally symmetric annular support with uniform-in-area radial mass; formerly reserved, now seen audit data.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "develop-residual_student",
+      "catalog_id": "develop-residual_student",
+      "display_name": "residual_student",
+      "exact_shared_law_proved": false,
+      "original_media": "media/develop-residual_student.gif",
+      "original_name": "residual_student",
+      "original_rating": 4,
+      "original_status": "FAIL",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Checks whether the intended residual moves toward the correct paired target.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "atlas-rotated100_moving",
+      "catalog_id": "atlas-rotated100_moving",
+      "display_name": "rotated100_moving",
+      "exact_shared_law_proved": false,
+      "original_media": "media/atlas-rotated100_moving.gif",
+      "original_name": "rotated100_moving",
+      "original_rating": 4,
+      "original_status": "moving PASS / strict native FAIL / accuracy FAIL",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Reacquire a rotated 100-mode target after two 30-degree shifts; the original moving gate is weaker than full density fidelity.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "develop-trajectory",
+      "catalog_id": "develop-trajectory",
+      "display_name": "trajectory",
+      "exact_shared_law_proved": false,
+      "original_media": "media/develop-trajectory.gif",
+      "original_name": "trajectory",
+      "original_rating": 4,
+      "original_status": "PASS",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Checks the extracted trajectory edit while preserving identity in finite paired rows.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "develop-unipolar",
+      "catalog_id": "develop-unipolar",
+      "display_name": "unipolar",
+      "exact_shared_law_proved": false,
+      "original_media": "media/develop-unipolar.gif",
+      "original_name": "unipolar",
+      "original_rating": 4,
+      "original_status": "PASS",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Checks an intended edit with preservation of unrelated content.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "develop-unused_token_hold",
+      "catalog_id": "develop-unused_token_hold",
+      "display_name": "unused_token_hold",
+      "exact_shared_law_proved": false,
+      "original_media": "media/develop-unused_token_hold.gif",
+      "original_name": "unused_token_hold",
+      "original_rating": 4,
+      "original_status": "PASS",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Checks that active controls move and unused controls remain unchanged.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "develop-vector_overlap",
+      "catalog_id": "develop-vector_overlap",
+      "display_name": "vector_overlap",
+      "exact_shared_law_proved": false,
+      "original_media": "media/develop-vector_overlap.gif",
+      "original_name": "vector_overlap",
+      "original_rating": 4,
+      "original_status": "FAIL",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Scores the observable distribution when latent components are not identifiable.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "develop-vector_scale_drift",
+      "catalog_id": "develop-vector_scale_drift",
+      "display_name": "vector_scale_drift",
+      "exact_shared_law_proved": false,
+      "original_media": "media/develop-vector_scale_drift.gif",
+      "original_name": "vector_scale_drift",
+      "original_rating": 4,
+      "original_status": "PASS",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Tests adaptation to changing input units before a stationary final window.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "develop-vector_spiral",
+      "catalog_id": "develop-vector_spiral",
+      "display_name": "vector_spiral",
+      "exact_shared_law_proved": false,
+      "original_media": "media/develop-vector_spiral.gif",
+      "original_name": "vector_spiral",
+      "original_rating": 4,
+      "original_status": "PASS",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Checks continuous curved mass rather than a finite list of target mode centers.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "develop-vector_two_broad",
+      "catalog_id": "develop-vector_two_broad",
+      "display_name": "vector_two_broad",
+      "exact_shared_law_proved": false,
+      "original_media": "media/develop-vector_two_broad.gif",
+      "original_name": "vector_two_broad",
+      "original_rating": 4,
+      "original_status": "PASS",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Basic learnable multimodal distribution and within-mode spread.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "pr45-adapted",
+      "catalog_id": "pr45-adapted",
+      "display_name": "vector_two_broad_gauge_x32",
+      "exact_shared_law_proved": false,
+      "original_media": "media/pr45-adapted.gif",
+      "original_name": "vector_two_broad_gauge_x32",
+      "original_rating": 4,
+      "original_status": "FAIL / PASS",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Stationary isotropic unit change of two_broad; absolute kernel scales and ParticlePrior init_std must both track the gauge.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "source-family-14",
+      "catalog_id": "source-family-14",
+      "display_name": "E22 routed support/pair/moving/replay fixtures",
+      "exact_shared_law_proved": false,
+      "original_media": null,
+      "original_name": "E22 routed support/pair/moving/replay fixtures",
+      "original_rating": 3,
+      "original_status": "SOURCE REVIEW ONLY",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Check each declared dense-bank routing, support/width, paired residual and own-state replay contract; distinct from independent-row Atlas.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "source-family-13",
+      "catalog_id": "source-family-13",
+      "display_name": "Native paired-action particle fixture",
+      "exact_shared_law_proved": false,
+      "original_media": null,
+      "original_name": "Native paired-action particle fixture",
+      "original_rating": 3,
+      "original_status": "SOURCE REVIEW ONLY",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Check paired-reference and particle/controller plumbing on a small constructed action host.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "source-family-11",
+      "catalog_id": "source-family-11",
+      "display_name": "Paired sign kinematic lander",
+      "exact_shared_law_proved": false,
+      "original_media": null,
+      "original_name": "Paired sign kinematic lander",
+      "original_rating": 3,
+      "original_status": "SOURCE REVIEW ONLY",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Expose joint-law sign symmetry versus correct paired control; one scalar sign around a supplied expert, not YuE2 itself.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "source-family-10",
+      "catalog_id": "source-family-10",
+      "display_name": "Ring acquisition/hold/warm/cold/shift protocols",
+      "exact_shared_law_proved": false,
+      "original_media": null,
+      "original_name": "Ring acquisition/hold/warm/cold/shift protocols",
+      "original_rating": 3,
+      "original_status": "SOURCE REVIEW ONLY",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Retain all eight modes in an uninterrupted own-state continuation and reacquire after target shift; many solver PRs reuse this law.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "source-family-12",
+      "catalog_id": "source-family-12",
+      "display_name": "Safe-fast kinematic lander",
+      "exact_shared_law_proved": false,
+      "original_media": null,
+      "original_name": "Safe-fast kinematic lander",
+      "original_rating": 3,
+      "original_status": "SOURCE REVIEW ONLY",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Check safety/speed objective composition for a one-parameter sink controller, not full physical policy learning.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "pr131",
+      "catalog_id": "pr131",
+      "display_name": "img_C_vs_O2",
+      "exact_shared_law_proved": false,
+      "original_media": "media/pr131.gif",
+      "original_name": "img_C_vs_O2",
+      "original_rating": 3,
+      "original_status": "FAIL / PASS",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Fixed open C versus closed O pixel templates; RMSE is not an independent topology oracle.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "pr73",
+      "catalog_id": "pr73",
+      "display_name": "img_L_chirality2",
+      "exact_shared_law_proved": false,
+      "original_media": "media/pr73.gif",
+      "original_name": "img_L_chirality2",
+      "original_rating": 3,
+      "original_status": "FAIL / PASS",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Fixed mirrored L templates; not chirality generalization.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "pr68",
+      "catalog_id": "pr68",
+      "display_name": "img_T_junction2",
+      "exact_shared_law_proved": false,
+      "original_media": "media/pr68.gif",
+      "original_name": "img_T_junction2",
+      "original_rating": 3,
+      "original_status": "FAIL / PASS",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Fixed T-junction patterns; not occlusion reasoning.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "pr76",
+      "catalog_id": "pr76",
+      "display_name": "img_b_d2",
+      "exact_shared_law_proved": false,
+      "original_media": "media/pr76.gif",
+      "original_name": "img_b_d2",
+      "original_rating": 3,
+      "original_status": "PASS / PASS",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Fixed mirrored b/d glyph templates; not general OCR or a dedicated chirality score.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "pr166",
+      "catalog_id": "pr166",
+      "display_name": "img_barcode_quiet_lr2",
+      "exact_shared_law_proved": false,
+      "original_media": "media/pr166.gif",
+      "original_name": "img_barcode_quiet_lr2",
+      "original_rating": 3,
+      "original_status": "FAIL / PASS",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Two fixed barcode-like templates with opposite quiet-zone placement; not barcode validity or decoding.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "develop-img_bars8",
+      "catalog_id": "develop-img_bars8",
+      "display_name": "img_bars8",
+      "exact_shared_law_proved": false,
+      "original_media": "media/develop-img_bars8.gif",
+      "original_name": "img_bars8",
+      "original_rating": 3,
+      "original_status": "FAIL",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Denser support stress: eight bar positions may exceed the short budget; failure cannot disqualify a controller.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "pr170",
+      "catalog_id": "pr170",
+      "display_name": "img_braille_cell_lr2",
+      "exact_shared_law_proved": false,
+      "original_media": "media/pr170.gif",
+      "original_name": "img_braille_cell_lr2",
+      "original_rating": 3,
+      "original_status": "FAIL / PASS",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Left-heavy versus right-heavy raised-dot templates; tactile glyph asymmetry, not Braille decoding.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "pr154",
+      "catalog_id": "pr154",
+      "display_name": "img_chirp_up_down2",
+      "exact_shared_law_proved": false,
+      "original_media": "media/pr154.gif",
+      "original_name": "img_chirp_up_down2",
+      "original_rating": 3,
+      "original_status": "FAIL / FAIL",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Two fixed rising/falling spectrogram-like traces; not audio synthesis or frequency generalization.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "pr62",
+      "catalog_id": "pr62",
+      "display_name": "img_diag_ramp2",
+      "exact_shared_law_proved": false,
+      "original_media": "media/pr62.gif",
+      "original_name": "img_diag_ramp2",
+      "original_rating": 3,
+      "original_status": "FAIL / PASS",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Fixed diagonal intensity ramps; not arbitrary image-algebra operations.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "pr71",
+      "catalog_id": "pr71",
+      "display_name": "img_dof_center_edge2",
+      "exact_shared_law_proved": false,
+      "original_media": "media/pr71.gif",
+      "original_name": "img_dof_center_edge2",
+      "original_rating": 3,
+      "original_status": "FAIL / PASS",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Fixed center/edge focus profiles; not depth estimation or optics reconstruction.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "pr74",
+      "catalog_id": "pr74",
+      "display_name": "img_dots_count23",
+      "exact_shared_law_proved": false,
+      "original_media": "media/pr74.gif",
+      "original_name": "img_dots_count23",
+      "original_rating": 3,
+      "original_status": "FAIL / PASS",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Fixed two-dot/three-dot templates; not counting arbitrary objects, positions or cardinalities.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "pr66",
+      "catalog_id": "pr66",
+      "display_name": "img_fg_bg_invert2",
+      "exact_shared_law_proved": false,
+      "original_media": "media/pr66.gif",
+      "original_name": "img_fg_bg_invert2",
+      "original_rating": 3,
+      "original_status": "FAIL / PASS",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Fixed foreground/background intensity inversions; not conditional image inversion.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "pr79",
+      "catalog_id": "pr79",
+      "display_name": "img_finder_diag2",
+      "exact_shared_law_proved": false,
+      "original_media": "media/pr79.gif",
+      "original_name": "img_finder_diag2",
+      "original_rating": 3,
+      "original_status": "FAIL / PASS",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Two fixed diagonal finder layouts; not QR recognition or error correction.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "pr151",
+      "catalog_id": "pr151",
+      "display_name": "img_hamburger_kebab2",
+      "exact_shared_law_proved": false,
+      "original_media": "media/pr151.gif",
+      "original_name": "img_hamburger_kebab2",
+      "original_rating": 3,
+      "original_status": "FAIL / PASS",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Two fixed menu-icon layouts; not UI interaction or semantic object recognition.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "develop-img_intensity2",
+      "catalog_id": "pr58",
+      "display_name": "img_intensity2",
+      "exact_shared_law_proved": true,
+      "original_media": "media/pr58.gif",
+      "original_name": "img_intensity2",
+      "original_rating": 3,
+      "original_status": "FAIL / PASS",
+      "reason": "Same shipped intensity2 law; retain the original transpose12/residual16 counterexample contrast and pinned proposal evidence. The unmerged reproducer is not a second shipped data definition.",
+      "retention": "control"
+    },
+    {
+      "canonical_id": "pr78",
+      "catalog_id": "pr78",
+      "display_name": "img_letterbox_pillar2",
+      "exact_shared_law_proved": false,
+      "original_media": "media/pr78.gif",
+      "original_name": "img_letterbox_pillar2",
+      "original_rating": 3,
+      "original_status": "FAIL / PASS",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Fixed letterbox versus pillarbox border placement; not aspect-ratio inference from arbitrary images.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "pr150",
+      "catalog_id": "pr150",
+      "display_name": "img_moire_beat2",
+      "exact_shared_law_proved": false,
+      "original_media": "media/pr150.gif",
+      "original_name": "img_moire_beat2",
+      "original_rating": 3,
+      "original_status": "FAIL / PASS",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Two fixed moir\u00e9/beat intensity patterns; not recovery of unseen frequencies or phase.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "pr106",
+      "catalog_id": "pr106",
+      "display_name": "img_play_pause2",
+      "exact_shared_law_proved": false,
+      "original_media": "media/pr106.gif",
+      "original_name": "img_play_pause2",
+      "original_rating": 3,
+      "original_status": "FAIL / PASS",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Fixed play/pause icon templates; not video dynamics or button behavior.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "pr77",
+      "catalog_id": "pr77",
+      "display_name": "img_pyramid_valley2",
+      "exact_shared_law_proved": false,
+      "original_media": "media/pr77.gif",
+      "original_name": "img_pyramid_valley2",
+      "original_rating": 3,
+      "original_status": "FAIL / PASS",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Fixed bright-center versus dark-center radial intensity patterns; not shape-from-shading.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "pr67",
+      "catalog_id": "pr67",
+      "display_name": "img_radial_wedge2",
+      "exact_shared_law_proved": false,
+      "original_media": "media/pr67.gif",
+      "original_name": "img_radial_wedge2",
+      "original_rating": 3,
+      "original_status": "FAIL / PASS",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Fixed radial/wedge patterns; not a segmentation or reconstruction task.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "pr70",
+      "catalog_id": "pr70",
+      "display_name": "img_ramp_corner2",
+      "exact_shared_law_proved": false,
+      "original_media": "media/pr70.gif",
+      "original_name": "img_ramp_corner2",
+      "original_rating": 3,
+      "original_status": "PASS / PASS",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Fixed corner-ramp intensity templates; not a learned coordinate system.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "pr69",
+      "catalog_id": "pr69",
+      "display_name": "img_smile_frown2",
+      "exact_shared_law_proved": false,
+      "original_media": "media/pr69.gif",
+      "original_name": "img_smile_frown2",
+      "original_rating": 3,
+      "original_status": "FAIL / PASS",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Fixed smile/frown arcs; not emotion classification or facial-image fidelity.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "pr59",
+      "catalog_id": "pr59",
+      "display_name": "img_soft_ring2",
+      "exact_shared_law_proved": false,
+      "original_media": "media/pr59.gif",
+      "original_name": "img_soft_ring2",
+      "original_rating": 3,
+      "original_status": "FAIL / PASS",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Fixed soft radial/ring templates; not a continuous stochastic shape family.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "pr159",
+      "catalog_id": "pr159",
+      "display_name": "img_sonar_echo_near_far2",
+      "exact_shared_law_proved": false,
+      "original_media": "media/pr159.gif",
+      "original_name": "img_sonar_echo_near_far2",
+      "original_rating": 3,
+      "original_status": "FAIL / PASS",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Two fixed near/far echo-location templates; not acoustic propagation or range inference.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "pr75",
+      "catalog_id": "pr75",
+      "display_name": "img_stairs_asc_desc2",
+      "exact_shared_law_proved": false,
+      "original_media": "media/pr75.gif",
+      "original_name": "img_stairs_asc_desc2",
+      "original_rating": 3,
+      "original_status": "FAIL / PASS",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Fixed ascending/descending stair templates; not sequence reasoning.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "pr72",
+      "catalog_id": "pr72",
+      "display_name": "img_swirl_cw2",
+      "exact_shared_law_proved": false,
+      "original_media": "media/pr72.gif",
+      "original_name": "img_swirl_cw2",
+      "original_rating": 3,
+      "original_status": "FAIL / PASS",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Fixed opposite-handed swirl patterns; not rotation dynamics or optical flow.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "develop-img_bars4",
+      "catalog_id": "develop-img_tiny_generator",
+      "display_name": "img_tiny_generator",
+      "exact_shared_law_proved": true,
+      "original_media": "media/develop-img_tiny_generator.gif",
+      "original_name": "img_tiny_generator",
+      "original_rating": 3,
+      "original_status": "FAIL",
+      "reason": "Same bars4 law; retain width2/latent1 capacity stress as a named architecture control.",
+      "retention": "control"
+    },
+    {
+      "canonical_id": "pr80",
+      "catalog_id": "pr80",
+      "display_name": "img_traffic_stack_rg2",
+      "exact_shared_law_proved": false,
+      "original_media": "media/pr80.gif",
+      "original_name": "img_traffic_stack_rg2",
+      "original_rating": 3,
+      "original_status": "FAIL / PASS",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Two fixed grayscale traffic-stack patterns; not red/green color semantics or traffic rules.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "pr64",
+      "catalog_id": "pr64",
+      "display_name": "img_vh_bars2",
+      "exact_shared_law_proved": false,
+      "original_media": "media/pr64.gif",
+      "original_name": "img_vh_bars2",
+      "original_rating": 3,
+      "original_status": "FAIL / PASS",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Fixed vertical/horizontal bars; same orientation-coverage question as the shipped stripes family.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "develop-stress_fast_critic",
+      "catalog_id": "develop-reserved_alternating_critic_updates",
+      "display_name": "reserved_alternating_critic_updates",
+      "exact_shared_law_proved": true,
+      "original_media": "media/develop-reserved_alternating_critic_updates.gif",
+      "original_name": "reserved_alternating_critic_updates",
+      "original_rating": 3,
+      "original_status": "FAIL",
+      "reason": "Same stationary ring law; retain the original reserved every-second-D cadence and 2400-update contract. Audit exposure does not restore an unseen-holdout claim.",
+      "retention": "control"
+    },
+    {
+      "canonical_id": "develop-stress_fast_critic",
+      "catalog_id": "develop-stress_fast_critic",
+      "display_name": "stress_fast_critic",
+      "exact_shared_law_proved": true,
+      "original_media": "media/develop-stress_fast_critic.gif",
+      "original_name": "stress_fast_critic",
+      "original_rating": 3,
+      "original_status": "FAIL",
+      "reason": "Retain the representative shared-law entry and its original named host control: A critic learning twice as fast is a realistic optimizer imbalance; maintaining distribution quality matters for routine tuning.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "develop-stress_fast_critic",
+      "catalog_id": "develop-stress_large_critic",
+      "display_name": "stress_large_critic",
+      "exact_shared_law_proved": true,
+      "original_media": "media/develop-stress_large_critic.gif",
+      "original_name": "stress_large_critic",
+      "original_rating": 3,
+      "original_status": "FAIL",
+      "reason": "Same stationary ring law; retain critic width128 versus64 as a capacity and gradient-scale control.",
+      "retention": "control"
+    },
+    {
+      "canonical_id": "develop-stress_fast_critic",
+      "catalog_id": "develop-stress_long_horizon",
+      "display_name": "stress_long_horizon",
+      "exact_shared_law_proved": true,
+      "original_media": "media/develop-stress_long_horizon.gif",
+      "original_name": "stress_long_horizon",
+      "original_rating": 3,
+      "original_status": "FAIL",
+      "reason": "Same stationary ring law; retain 2400 versus1200 updates as persistence/delayed-collapse coverage.",
+      "retention": "control"
+    },
+    {
+      "canonical_id": "develop-stress_overlapping_data",
+      "catalog_id": "develop-stress_overlapping_data",
+      "display_name": "stress_overlapping_data",
+      "exact_shared_law_proved": false,
+      "original_media": "media/develop-stress_overlapping_data.gif",
+      "original_name": "stress_overlapping_data",
+      "original_rating": 3,
+      "original_status": "PASS",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Broad overlapping components diagnose sensitivity to ambiguous mixture labels. Distribution fit matters here; component reconstruction is not an appropriate requirement.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "develop-stress_fast_critic",
+      "catalog_id": "develop-stress_r1_r2",
+      "display_name": "stress_r1_r2",
+      "exact_shared_law_proved": true,
+      "original_media": "media/develop-stress_r1_r2.gif",
+      "original_name": "stress_r1_r2",
+      "original_rating": 3,
+      "original_status": "FAIL",
+      "reason": "Same stationary ring law; retain R1+R2 coefficient .1 versus BCap3 as a distinct regularization control.",
+      "retention": "control"
+    },
+    {
+      "canonical_id": "develop-stress_fast_critic",
+      "catalog_id": "develop-stress_slow_critic",
+      "display_name": "stress_slow_critic",
+      "exact_shared_law_proved": true,
+      "original_media": "media/develop-stress_slow_critic.gif",
+      "original_name": "stress_slow_critic",
+      "original_rating": 3,
+      "original_status": "FAIL",
+      "reason": "Same stationary ring law; retain critic LR multiplier .75 as the slow-opponent control.",
+      "retention": "control"
+    },
+    {
+      "canonical_id": "develop-stress_fast_critic",
+      "catalog_id": "develop-stress_small_batch",
+      "display_name": "stress_small_batch",
+      "exact_shared_law_proved": true,
+      "original_media": "media/develop-stress_small_batch.gif",
+      "original_name": "stress_small_batch",
+      "original_rating": 3,
+      "original_status": "FAIL",
+      "reason": "Same stationary ring law; retain batch64 versus128, including its fewer-draws budget distinction.",
+      "retention": "control"
+    },
+    {
+      "canonical_id": "develop-stress_fast_critic",
+      "catalog_id": "develop-stress_weak_critic",
+      "display_name": "stress_weak_critic",
+      "exact_shared_law_proved": true,
+      "original_media": "media/develop-stress_weak_critic.gif",
+      "original_name": "stress_weak_critic",
+      "original_rating": 3,
+      "original_status": "FAIL",
+      "reason": "Same stationary ring law; retain width16/layer1/no-Fourier critic limitation as a diagnostic control.",
+      "retention": "control"
+    },
+    {
+      "canonical_id": "pr152-adapted",
+      "catalog_id": "pr152-adapted",
+      "display_name": "vector_binary_cluster_pairs_d24_pair4.0_local1.0",
+      "exact_shared_law_proved": false,
+      "original_media": "media/pr152-adapted.gif",
+      "original_name": "vector_binary_cluster_pairs_d24_pair4.0_local1.0",
+      "original_rating": 3,
+      "original_status": "FAIL / PASS",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Two tight vertical pairs (intra-gap 4.0) separated by inter-cluster distance 24 with local sigma unscaled: hierarchical lengthscale trap. Published absolute RBF lengths that fit native two_broad saturate across the coarse gap while a lengthscale-free MLP with matched prior init remains solvable. Distinct from wide_gap (2 loose islands), line4 (uniform 1D), four_corner (uniform lattice), and N-gon / hub-spoke farms.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "pr57-adapted",
+      "catalog_id": "pr57-adapted",
+      "display_name": "vector_boomerang_wide_r16",
+      "exact_shared_law_proved": false,
+      "original_media": "media/pr57-adapted.gif",
+      "original_name": "vector_boomerang_wide_r16",
+      "original_rating": 3,
+      "original_status": "FAIL / PASS",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Classic 3-mode boomerang: left wing (-16,8), apex (0,16), drooping right (16,-2). Curved sparse support under absolute RBF lengths; not kite/chevron/trapezoid/arch.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "pr53-adapted",
+      "catalog_id": "pr53-adapted",
+      "display_name": "vector_chevron_wide_d16_local1.0",
+      "exact_shared_law_proved": false,
+      "original_media": "media/pr53-adapted.gif",
+      "original_name": "vector_chevron_wide_d16_local1.0",
+      "original_rating": 3,
+      "original_status": "FAIL / PASS",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Three isotropic islands on a sharp chevron / boomerang with base gap 16 (matching wide_gap / three_island spacing) but unequal legs (~25.3) so the apex angle is acute \u2014 not equilateral. Published absolute RBF lengths that fit native two_broad saturate across the long legs while a lengthscale-free MLP with matched prior init remains solvable. Distinct from three_island_wide_d16 (equilateral), triangle_gauge_x24, and L_wide_d16.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "pr50-adapted",
+      "catalog_id": "pr50-adapted",
+      "display_name": "vector_four_corner_wide_g8_local1.0",
+      "exact_shared_law_proved": false,
+      "original_media": "media/pr50-adapted.gif",
+      "original_name": "vector_four_corner_wide_g8_local1.0",
+      "original_rating": 3,
+      "original_status": "FAIL / PASS",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Four isotropic islands on a square lattice at (\u00b18,\u00b18) with nearest-neighbor gap matching wide_gap_islands_x8 (d=16) but local \u03c3 unscaled: published absolute RBF lengths that fit native two_broad saturate across the grid while a lengthscale-free MLP with matched prior init remains solvable. Distinct from wide_gap (2 modes on a line), three_island_wide_d16 (3 equilateral), eight_ring_wide_r8 (8 on a circle), and square_gauge_x24 (isotropic means+cov scale).",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "pr51-adapted",
+      "catalog_id": "pr51-adapted",
+      "display_name": "vector_hex_wide_side16_local1.0",
+      "exact_shared_law_proved": false,
+      "original_media": "media/pr51-adapted.gif",
+      "original_name": "vector_hex_wide_side16_local1.0",
+      "original_rating": 3,
+      "original_status": "FAIL / PASS",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Six isotropic islands on a regular hexagon with side/circumradius 16 (neighbor gap matching wide_gap d=16) and local sigma unscaled: published absolute RBF lengths that fit native two_broad saturate across the lattice while a lengthscale-free MLP with matched prior init remains solvable. Distinct from eight_ring_wide_r8 (8 on r=8; winner PASSes), four_corner_wide_g8 (4 square), and three_island_wide_d16 (3 equilateral).",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "pr55-adapted",
+      "catalog_id": "pr55-adapted",
+      "display_name": "vector_kite_wide_h16",
+      "exact_shared_law_proved": false,
+      "original_media": "media/pr55-adapted.gif",
+      "original_name": "vector_kite_wide_h16",
+      "original_rating": 3,
+      "original_status": "FAIL / PASS",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Asymmetric kite: apex (0,16), wings (\u00b110,0), tail (0,-5). Far apex + near tail under absolute RBF lengths; not a regular polygon, diamond, or tall spike.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "develop-vector_narrow",
+      "catalog_id": "develop-vector_narrow",
+      "display_name": "vector_narrow",
+      "exact_shared_law_proved": false,
+      "original_media": "media/develop-vector_narrow.gif",
+      "original_name": "vector_narrow",
+      "original_rating": 3,
+      "original_status": "FAIL",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Deliberately narrow components test critic resolution; nonblocking diagnostic.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "pr52-adapted",
+      "catalog_id": "pr52-adapted",
+      "display_name": "vector_pentagon_wide_r16_local1.0",
+      "exact_shared_law_proved": false,
+      "original_media": "media/pr52-adapted.gif",
+      "original_name": "vector_pentagon_wide_r16_local1.0",
+      "original_rating": 3,
+      "original_status": "FAIL / PASS",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Five isotropic islands on a regular pentagon with circumradius 16 (chord ~18.8, wider than hex side=16) and local sigma unscaled: published absolute RBF lengths that fit native two_broad saturate across the odd-sided lattice while a lengthscale-free MLP with matched prior init remains solvable. Distinct from hex_wide_side16 (6), three_island_wide_d16 (3), four_corner_wide_g8 (4), and eight_ring_wide_r8.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "pr54-adapted",
+      "catalog_id": "pr54-adapted",
+      "display_name": "vector_tall_spike_wide_h16_local1.0",
+      "exact_shared_law_proved": false,
+      "original_media": "media/pr54-adapted.gif",
+      "original_name": "vector_tall_spike_wide_h16_local1.0",
+      "original_rating": 3,
+      "original_status": "FAIL / PASS",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Tall isosceles spike: base tips at (\u00b16,0), apex at (0,16). Base NN=12, legs\u224817.1. Narrower base than chevron_wide_d16 (base 16) and not equilateral three_island. Absolute RBF lengths fit native two_broad but struggle with the far apex; MLP matched init should pass.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "pr49-adapted",
+      "catalog_id": "pr49-adapted",
+      "display_name": "vector_three_island_wide_d16_local1.0",
+      "exact_shared_law_proved": false,
+      "original_media": "media/pr49-adapted.gif",
+      "original_name": "vector_three_island_wide_d16_local1.0",
+      "original_rating": 3,
+      "original_status": "FAIL / PASS",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Three equilateral islands with pairwise gap matching wide_gap_islands_x8 (d=16) but local \u03c3 unscaled: published absolute RBF lengths that fit native two_broad saturate across the triangle while a lengthscale-free MLP with matched prior init remains solvable. Distinct from wide_gap (2 islands), from triangle_gauge_x24 (isotropic means+cov scale), and from eight_ring (many close neighbors on a circle).",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "pr56-adapted",
+      "catalog_id": "pr56-adapted",
+      "display_name": "vector_trapezoid_wide_h16",
+      "exact_shared_law_proved": false,
+      "original_media": "media/pr56-adapted.gif",
+      "original_name": "vector_trapezoid_wide_h16",
+      "original_rating": 3,
+      "original_status": "FAIL / PASS",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Isosceles trapezoid: short top (\u00b18,16), wide base (\u00b116,0). Unequal parallel sides under absolute RBF lengths; not a kite, spike, square, diamond, or chevron.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "pr47-adapted",
+      "catalog_id": "pr47-adapted",
+      "display_name": "vector_two_broad_gauge_x24_mlp_control",
+      "exact_shared_law_proved": false,
+      "original_media": "media/pr47-adapted.gif",
+      "original_name": "vector_two_broad_gauge_x24_mlp_control",
+      "original_rating": 3,
+      "original_status": "FAIL / PASS",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Stationary isotropic unit change; published absolute kernel+init pairing vs lengthscale-free MLP with matched prior init.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "pr48-adapted",
+      "catalog_id": "pr48-adapted",
+      "display_name": "vector_two_broad_wide_gap_x8",
+      "exact_shared_law_proved": false,
+      "original_media": "media/pr48-adapted.gif",
+      "original_name": "vector_two_broad_wide_gap_x8",
+      "original_rating": 3,
+      "original_status": "FAIL / PASS",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Distant islands with unscaled local width: published absolute RBF lengths saturate across the gap while a lengthscale-free MLP with matched prior init remains solvable. Distinct from isotropic gauge (means+cov scaled).",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "source-family-15",
+      "catalog_id": "source-family-15",
+      "display_name": "Five-word latent autoencoder demo",
+      "exact_shared_law_proved": false,
+      "original_media": null,
+      "original_name": "Five-word latent autoencoder demo",
+      "original_rating": 2,
+      "original_status": "SOURCE REVIEW ONLY",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Recover the five fixed words and reconstruction, not text-generation or unseen-word generalization.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "source-family-16",
+      "catalog_id": "source-family-16",
+      "display_name": "Single Gaussian quickstart",
+      "exact_shared_law_proved": false,
+      "original_media": null,
+      "original_name": "Single Gaussian quickstart",
+      "original_rating": 2,
+      "original_status": "SOURCE REVIEW ONLY",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Check training/sample plumbing for a unimodal law; weak as a broad multimodal quality benchmark.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "pr65",
+      "catalog_id": "pr65",
+      "display_name": "Unconditional grayscale left/right template law",
+      "exact_shared_law_proved": false,
+      "original_media": "media/pr65.gif",
+      "original_name": "img_colorize_lr2",
+      "original_rating": 2,
+      "original_status": "FAIL / PASS",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Fixed grayscale left/right intensity patterns; no color channels or conditional grayscale-to-color query.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "pr63",
+      "catalog_id": "pr63",
+      "display_name": "Unconditional mask-like two-template law",
+      "exact_shared_law_proved": false,
+      "original_media": "media/pr63.gif",
+      "original_name": "img_mask_inpaint2",
+      "original_rating": 2,
+      "original_status": "FAIL / FAIL",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Fixed templates named mask-inpaint; no observed image or mask enters G, so no conditional inpainting is tested.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "develop-img_blobs4",
+      "catalog_id": "develop-img_mean_discriminator",
+      "display_name": "Mean-only critic nonidentifiability unit",
+      "exact_shared_law_proved": true,
+      "original_media": "media/develop-img_mean_discriminator.gif",
+      "original_name": "img_mean_discriminator",
+      "original_rating": 2,
+      "original_status": "FAIL",
+      "reason": "Same blobs4 law; retain the analytic equal-mean critic identifiability failure as a negative control, outside positive qualification.",
+      "retention": "control"
+    },
+    {
+      "canonical_id": "pr61",
+      "catalog_id": "pr61",
+      "display_name": "Unconditional sparse two-template law",
+      "exact_shared_law_proved": false,
+      "original_media": "media/pr61.gif",
+      "original_name": "img_sparse_obs2",
+      "original_rating": 2,
+      "original_status": "FAIL / PASS",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Fixed sparse-observation-like templates; no source-domain input or paired correspondence tests translation.",
+      "retention": "keep"
+    },
+    {
+      "canonical_id": "develop-img_stripes2",
+      "catalog_id": "develop-img_uniform_generator",
+      "display_name": "Spatially uniform generator impossibility unit",
+      "exact_shared_law_proved": true,
+      "original_media": "media/develop-img_uniform_generator.gif",
+      "original_name": "img_uniform_generator",
+      "original_rating": 2,
+      "original_status": "FAIL",
+      "reason": "Same stripe law; retain the analytic uniform-output representation failure as a negative control, outside positive qualification.",
+      "retention": "control"
+    },
+    {
+      "canonical_id": "develop-two_pole",
+      "catalog_id": "develop-two_pole",
+      "display_name": "two_pole",
+      "exact_shared_law_proved": false,
+      "original_media": "media/develop-two_pole.gif",
+      "original_name": "two_pole",
+      "original_rating": 2,
+      "original_status": "PASS",
+      "reason": "Retain this declared check; no exact alias to another case is proved here: Checks nonzero travel and bounded median critic gradient; its gate does not require both poles or a correct distribution.",
+      "retention": "keep"
+    }
+  ],
+  "remote_head_status": "UNKNOWN; pinned local snapshots only",
+  "source_presence": {
+    "audit": {
+      "revision": "4c2d6a053524d8b0064f2bababddea266a2853ff",
+      "toy_pr_added_python_paths": {},
+      "toy_prs_with_added_python_paths": 0
+    },
+    "develop_pinned": {
+      "revision": "6ec7e5788e14ea15ddc3e16ac71110458108b6a6",
+      "toy_pr_added_python_paths": {},
+      "toy_prs_with_added_python_paths": 0
+    },
+    "local_integration": {
+      "additional_followup_python_paths": [
+        "tests/test_e22_routed_convergence_signed_gate.py"
+      ],
+      "revision": "f65fca69fbd24c62c2fe044309caae249b241e6c",
+      "toy_pr_added_python_paths": {
+        "224": [
+          "examples/e22_stiff_game_reopen.py",
+          "tests/test_e22_stiff_game_reopen.py"
+        ],
+        "226": [
+          "examples/e22_paired_residual_toy.py",
+          "experiments/paired_residual_oracle.py",
+          "tests/test_e22_paired_residual_toy.py",
+          "tests/test_paired_residual_oracle.py"
+        ],
+        "227": [
+          "examples/diagnose_e22_routed_convergence_basis.py",
+          "examples/e22_routed_convergence.py",
+          "examples/e22_routed_convergence_neutral.py",
+          "examples/evaluate_e22_routed_convergence_neutral.py",
+          "examples/run_e22_routed_convergence.py",
+          "tests/test_e22_routed_convergence.py",
+          "tests/test_e22_routed_convergence_long.py",
+          "tests/test_e22_routed_convergence_neutral.py"
+        ]
+      },
+      "toy_prs_with_added_python_paths": 3
+    }
+  },
+  "template_bank_hash_rule": "SHA256(str(bank.shape).encode() + bank.dtype.str.encode() + concatenation(sorted(contiguous float32 mode bytes))); mode order ignored, duplicate multiplicities retained",
+  "template_banks": {
+    "bars4": {
+      "modes": 4,
+      "sha256": "558f009cbe5ba8c655c7d41a59a90d7c1f5b7eb367167c2da66de09fd91f807f",
+      "shape": [
+        4,
+        1,
+        8,
+        8
+      ]
+    },
+    "blobs4": {
+      "modes": 4,
+      "sha256": "9afd4426c08c927e9a0b07e22f5a077c1a683c60912b1da27c8fb7ef7493061c",
+      "shape": [
+        4,
+        1,
+        8,
+        8
+      ]
+    },
+    "intensity2": {
+      "modes": 2,
+      "sha256": "49693dde9a0bfa0369a4e9ce50ca8e18ce733141ecf49df9a31304a0d4e77b5a",
+      "shape": [
+        2,
+        1,
+        8,
+        8
+      ]
+    },
+    "stripes2": {
+      "modes": 2,
+      "sha256": "08e2099ebb40e84be196e04773edf672718dbe6c5106518329277d875b2517a8",
+      "shape": [
+        2,
+        1,
+        8,
+        8
+      ]
+    }
+  },
+  "training_launched": false,
+  "training_reuse": "No authority to reuse trained receipts or skip training follows from equal data laws. Source/effective recipe, prior, initialization, budget, sampling, backend and complete state identities remain separate."
+}

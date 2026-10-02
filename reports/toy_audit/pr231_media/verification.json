@@ -1,0 +1,278 @@
+{
+  "schema": "toy_audit_pr231_media_verification_v1",
+  "receipt_sha256": "2c1d5d8f6877484c1651d139d5e06aa5856ed1071ee04c666bab1b4c25cd1b50",
+  "focused_software_tests": {
+    "passed": 26,
+    "seconds": 3.27,
+    "log": "/ml2/hypergan/toy-audit-pr231-focused-tests-20261002.log",
+    "log_sha256": "acced28a78cc03b8846b2227cb67d7a455ce80868067b8014acc61c99e6a021e"
+  },
+  "parser_negative_controls": {
+    "passed": 5,
+    "cases": [
+      "duplicate-step",
+      "boolean-rate",
+      "nonfinite-noise",
+      "wrong-evaluation-step",
+      "changed-measurement"
+    ],
+    "log": "/ml2/hypergan/toy-audit-pr231-media-parser-controls-20261002.log",
+    "log_sha256": "15a6c36283cc42a870bff3d14318088a2c84b2bfcbe6f4d97f067b58f3b46cb3"
+  },
+  "media": [
+    {
+      "case_id": "initial-width16",
+      "gif_sha256": "fde0628a6b8227b7b01bf530cb5f4bbe54a6fc3e6a058f559964b5fac18524a0",
+      "poster_sha256": "8c97774cc4ac388eea8215d0ccadcf8dd876e95aa8019c0d6a7efff447d9073b",
+      "decoded_frame_count": 13,
+      "frame_steps": [
+        0,
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000,
+        1100,
+        1200
+      ],
+      "durations_ms": {
+        "first12": 220,
+        "final": 1800
+      },
+      "pixel_size": [
+        900,
+        603
+      ]
+    },
+    {
+      "case_id": "native-handoff-width16",
+      "gif_sha256": "756b46ec662f4763883598596abda51dabe78bd04558955d248f4ac50657c71c",
+      "poster_sha256": "a96676a51457ac18cf8efbff0c7ae3249604478400000d883ce1d934dc6fecfe",
+      "decoded_frame_count": 13,
+      "frame_steps": [
+        0,
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000,
+        1100,
+        1200
+      ],
+      "durations_ms": {
+        "first12": 220,
+        "final": 1800
+      },
+      "pixel_size": [
+        900,
+        603
+      ]
+    },
+    {
+      "case_id": "calibrated-handoff-width16",
+      "gif_sha256": "b7c42e6e11cf547db2cc90541390c5dffe87560b383c843be2219fe6d4f189eb",
+      "poster_sha256": "9a51d81e39c85ac57995f4b65348625a6f39c592cac4da13091f3f8bb4cc676d",
+      "decoded_frame_count": 13,
+      "frame_steps": [
+        0,
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000,
+        1100,
+        1200
+      ],
+      "durations_ms": {
+        "first12": 220,
+        "final": 1800
+      },
+      "pixel_size": [
+        900,
+        603
+      ]
+    },
+    {
+      "case_id": "faithful-width64",
+      "gif_sha256": "00ddadfa0da2b8ecbc1ee94bf02acddbd782fb3153210a708a758085f2dba28e",
+      "poster_sha256": "57a702818f5fd5a90e0b824f819b80e5376a50ea006fad73b8e7059177c168d3",
+      "decoded_frame_count": 13,
+      "frame_steps": [
+        0,
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000,
+        1100,
+        1200
+      ],
+      "durations_ms": {
+        "first12": 220,
+        "final": 1800
+      },
+      "pixel_size": [
+        900,
+        603
+      ]
+    },
+    {
+      "case_id": "faithful-width64-antithetic-bypass",
+      "gif_sha256": "20666eb082764e539b5fd40027e82d8cff736b67fb6d30c5a7544a808bfaec91",
+      "poster_sha256": "8947d5319751e6a23ba2472cbec5a27f257a6c5ba1ab3c045bb48aeb2069a145",
+      "decoded_frame_count": 13,
+      "frame_steps": [
+        0,
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000,
+        1100,
+        1200
+      ],
+      "durations_ms": {
+        "first12": 220,
+        "final": 1800
+      },
+      "pixel_size": [
+        900,
+        603
+      ]
+    },
+    {
+      "case_id": "spatial-native-width4",
+      "gif_sha256": "f88ff48640eb7565448c4d7cccd0eb9fbb5e2913fccf68b9a00db4a1037feec4",
+      "poster_sha256": "ab78fb155325d386340aac7c58fea538b06a5df17d22d5f09597ac014a4b50d8",
+      "decoded_frame_count": 13,
+      "frame_steps": [
+        0,
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000,
+        1100,
+        1200
+      ],
+      "durations_ms": {
+        "first12": 220,
+        "final": 1800
+      },
+      "pixel_size": [
+        900,
+        603
+      ]
+    },
+    {
+      "case_id": "spatial-native-width16",
+      "gif_sha256": "7c67015ff17dced2f18a2e6a585eccbd0dabc83e89947eb347eb3b8f24abe78d",
+      "poster_sha256": "9911346b46cc5ac854dfb04338c4732190b4cfc9be02c5f5aa78b7302485b361",
+      "decoded_frame_count": 13,
+      "frame_steps": [
+        0,
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000,
+        1100,
+        1200
+      ],
+      "durations_ms": {
+        "first12": 220,
+        "final": 1800
+      },
+      "pixel_size": [
+        900,
+        603
+      ]
+    },
+    {
+      "case_id": "publication-width4-replay",
+      "gif_sha256": "8625ab1e29b05e71b7f478ddc161c2dc58f0f5382627d27fde9aa49be5e75ef6",
+      "poster_sha256": "0505fc3d2cf410378fa57f84b998099d8fd3233484f5f97737bb16824f7b161e",
+      "decoded_frame_count": 13,
+      "frame_steps": [
+        0,
+        100,
+        200,
+        300,
+        400,
+        500,
+        600,
+        700,
+        800,
+        900,
+        1000,
+        1100,
+        1200
+      ],
+      "durations_ms": {
+        "first12": 220,
+        "final": 1800
+      },
+      "pixel_size": [
+        900,
+        603
+      ]
+    }
+  ],
+  "visual_validation": {
+    "initial_layout_posters_inspected": [
+      "initial-width16",
+      "native-handoff-width16",
+      "calibrated-handoff-width16",
+      "faithful-width64",
+      "faithful-width64-antithetic-bypass",
+      "spatial-native-width4",
+      "spatial-native-width16",
+      "publication-width4-replay"
+    ],
+    "final_color_and_source_caption_posters_inspected": [
+      "faithful-width64",
+      "spatial-native-width4",
+      "publication-width4-replay"
+    ],
+    "intermediate_frames_inspected": {
+      "faithful-width64": 600,
+      "spatial-native-width16": 600
+    },
+    "result": "Distinct green/cyan and dashed bypass legend; finite fixed axes; actual update labels and retained failure/counterexample captions; no clipping or overlap."
+  }
+}

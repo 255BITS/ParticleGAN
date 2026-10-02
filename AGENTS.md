@@ -22,3 +22,9 @@ Bind trained gates to their actual recipe, prior, initialization, budget and
 sampling law. Check these against the qualified evidence before attributing a
 failure to a formulation change. Clean and noisy served results are separate
 cohorts; matching training settings alone does not make their gates comparable.
+
+Toy tests must follow the [public-API test contract](reports/toy_audit/api_contract/README.md):
+execute through the ParticleGAN API, declare a numerical pass/fail metric, and
+provide an actual-training GIF that illustrates the test's goal. Reform an
+incompatible question into an explicitly scoped, runnable variant, retaining its
+useful controls and the original evidence identity.

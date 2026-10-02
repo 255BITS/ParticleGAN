@@ -1,0 +1,78 @@
+{
+  "canonical_selection_sha256": "6ce912d98db583cdac5f5f47c5075e3d2b7f29db9b5cbe36aaa4f6d18c1c61e9",
+  "counts": {
+    "canonical_problem_entries": 97,
+    "deleted_source_files": 0,
+    "duplicate_frozen_execution_avoided_per_compatible_base_run": 1,
+    "folded_same_law_entries": 12,
+    "full_scientific_training_runs": 0,
+    "original_cases": 109,
+    "proved_shared_law_groups": 5,
+    "retained_named_cases": 109
+  },
+  "frozen_image_alias_proof_sha256": "5e00c34ef83129d7656ebb3f3a3ffce27ac07b8e0e2976da8608688bf146804d",
+  "law_review": {
+    "global_claim": "97 canonical entries are not asserted to be 97 independent families or completely compared data laws.",
+    "image_arms": 69,
+    "image_cases": 39,
+    "vector_cases": 31,
+    "verified_distinct_pixel_banks": 34,
+    "verified_sampler_fingerprints_including_dynamic_schedule": 24
+  },
+  "original_receipts_byte_identical": {
+    "catalog.json": "1064b4f399c6dde97ce5313b05e3589f7083bad21846fc0d62a311fd8078ff18",
+    "convergence-addendum.json": "dcc14d52de605f708a2309ce4cfde49e3ea069ec338ef7432de33feee1887a23",
+    "media/media.json": "6a84af5992d632af518ee0432639ef32fd003025320394e468265e03af9be1b9",
+    "pull_requests.json": "2f35c6511364a3e692dd2905396d40d06957c685b4b2f1095430f69b6b81827d",
+    "scorer-controls.json": "f7f769939381cd8a5574222368938def6e09b81167db4ce8740eef84d6b923db",
+    "source-receipts.json": "ed3fe117d9f3d73c96d648bc2355c9e77e71b6142e6edbdbcaf43fb949dcad7c"
+  },
+  "preceding_audit_head": "4c2d6a053524d8b0064f2bababddea266a2853ff",
+  "production_package_library_and_configs_changed": false,
+  "reason_policy": "Retain every distinct bounded question, architecture/capacity/optimizer control, temporal or conditional variant and negative unit; fold only proved same-law inventory entries. Failed models alone are not removal reasons.",
+  "remote_prs_merged": 0,
+  "remote_status": "GitHub API and DNS unavailable; all follow-up changes remain local",
+  "retained_real_capture_alias_verified_on_integrated_tree": {
+    "alias": "develop-img_residual_bars4",
+    "canonical": "develop-img_bars4",
+    "capture_sha256": "e98330ee99b538f919220bc448187f1b2a9bf5f5c964c21c138e59658895b650",
+    "independent_qualification_evidence": false,
+    "independently_trained": false,
+    "observed_spec_result_and_cloud_paths_preserved": true
+  },
+  "reuse_guards": [
+    "normalized dispatcher source",
+    "43 pinned training dependencies",
+    "actual runtime",
+    "complete effective recipe and implicit defaults",
+    "seed and initialization",
+    "prior and optimizer ownership/settings",
+    "ordered target pixels and data noise/clamp",
+    "loss/controller/EMA/serving",
+    "complete original budget and cadence",
+    "original gates",
+    "valid result/cloud hashes"
+  ],
+  "schema": "toy-retention-validation-v1",
+  "scope": "Canonical inventory and one exact-profile duplicate execution; no new scientific qualification",
+  "separate_execution_controls": [
+    "public_v2 always separate",
+    "--separate-execution retains separate historical runs",
+    "changed/unknown/missing identity restores separate execution"
+  ],
+  "source_sha256": {
+    "benchmarks/toy_audit/base.py": "b71ee452eba35f2db64ed6b0a923edffc7a3d0a9946db54cae979ccb54b66063",
+    "benchmarks/toy_audit/canonical_selection.py": "b4ca13f7d4ad41b6532ffa7ee063ed2acf0a6f3e43dd9e5562164386d6e67790",
+    "tests/test_toy_base_alias.py": "4720b5d810d074eed613139ec6966c98bab46be62ff5e36971765853e1d36819",
+    "tests/test_toy_canonical_selection.py": "1311fb07d1dae27c666710da1ac40a8b8859c3aa297c515ca1241ab7f8382359"
+  },
+  "suite": {
+    "command": "CUDA_VISIBLE_DEVICES='' OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python -m pytest -q tests/test_toy_audit.py tests/test_toy_failure_diagnosis.py tests/test_toy_image_quality_v2.py tests/test_toy_definition_quality.py tests/test_toy_vector_quality.py tests/test_toy_source_family_training.py tests/test_toy_paired_gradient_counterexample.py tests/test_toy_source_demos.py tests/test_source_paired_transport_publication.py tests/test_toy_source_conditional.py tests/test_toy_base_alias.py tests/test_toy_canonical_selection.py",
+    "external_log": "/ml2/hypergan/toy-audit-retention-tests.log",
+    "external_log_sha256": "1d428a54229fbc210dd2cccf525261ec5a69be31d109e7cebd004c217e07c7c3",
+    "passed": 99,
+    "seconds": 11.83,
+    "warnings": 4,
+    "warnings_explanation": "Original word-example noninteractive plotting calls; all assertions pass."
+  }
+}

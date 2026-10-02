@@ -1,0 +1,3292 @@
+{
+  "schema": "toy_open_pr_disposition_v1",
+  "reviewed_utc": "2026-10-02T03:27:49.159754+00:00",
+  "policy": "Merge original 5/5 or 4/5 diagnostics with honest passing stated controls and current checks. Retain any distinct scientific question or useful control; close only wholly useless or proved redundant proposals.",
+  "inventory": {
+    "total_open_prs_at_start": 138,
+    "reviewed_toy_problem_prs": 50,
+    "other_algorithm_recipe_infrastructure_or_reporting_prs": 89,
+    "heads_preserved_in_original_receipts": true,
+    "new_current_scope_prs": [
+      227
+    ],
+    "separate_config_repair_out_of_scope": [
+      229,
+      216
+    ],
+    "latest_refresh": {
+      "total_open_prs": 136,
+      "new_problem_prs": [
+        231
+      ],
+      "no_longer_open_since_start": [
+        224,
+        226,
+        229
+      ],
+      "input_sha256": "d922ccc4c632459184454c3d7ae2865d1f3f1790b4e20cb0beed64a56bcdce9e",
+      "review_status": "PR231 under separate current-source/media review; original 49 dispositions preserved"
+    },
+    "original_inventory_toy_prs": 49,
+    "additional_current_problem_prs": [
+      231
+    ],
+    "final_refresh": {
+      "total_open_prs": 134,
+      "reviewed_problem_prs_still_open": 46,
+      "new_problem_prs_since_previous_refresh": [],
+      "all_46_retained_heads_unchanged": true,
+      "input_sha256": "5c71d2a604baaed49a6852d70eb2b8612f2d811cdf7cf21c6b909b5a0470e7be"
+    }
+  },
+  "counts": {
+    "records": 50,
+    "merged": 4,
+    "await_current_ci": 0,
+    "signed_repair_in_progress": 0,
+    "keep_open": 46,
+    "closed_as_useless_or_duplicate": 0
+  },
+  "scope_note": "Review of problem proposals, not authorizing algorithm/recipe/default/config changes from other toy-related PRs. All remaining proposals have recorded reasons to exist; grouping same-law controls does not justify deleting them.",
+  "input_sha256": {
+    "/ml2/hypergan/toy-audit-open-prs-20261001.json": "9bd6194b1f9cc6373ecf0cf5c7677250b1654ea53e7d0eec6ef69fe2f05632f4",
+    "/ml2/hypergan/toy-audit-open-pr-image-triage.json": "5444c7c6e3adc0d5b971957c3d379bdd79f7d0ca96b0586ff9fa7e6897c76275",
+    "/ml2/hypergan/toy-audit-open-pr-nonimage-triage.json": "9da8e20449f3e32cae1aa612a7062670fa084ade96760b4a028ce3116487f807",
+    "/ml2/hypergan/toy-audit-open-prs-final-20261002.json": "5c71d2a604baaed49a6852d70eb2b8612f2d811cdf7cf21c6b909b5a0470e7be",
+    "/ml2/hypergan/toy-audit-pr231-metadata.json": "beee3c92110446dc5495a13a250556d0ef72688281c841520bd17c2c8d2bc320",
+    "/ml2/hypergan/toy-audit-pr231-review.json": "1d5962b22c25cc6e726da3fe4ad59e87d9fada2e6ab5d7e6e0e4986431bf65ec"
+  },
+  "records": [
+    {
+      "pr": 224,
+      "title": "Add CPU regression reproducer for unsafe generator LR release",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/224",
+      "catalog_ids": [
+        "pr224"
+      ],
+      "original_quality_tiers": [
+        5
+      ],
+      "followup_quality_tiers": [
+        5
+      ],
+      "reviewed_head_sha": "98bca1d1e194c0fa3ae17982c0dc06834fc57246",
+      "base_branch": "develop",
+      "is_draft": false,
+      "scientific_question": "Can one native SettleTest learning-rate release destabilize a settled stiff coordinate, while cancelling only that release and retaining releases on safe geometry provide the two causal controls?",
+      "scientific_result": "NEGATIVE_DIAGNOSTIC_PASS; native controller instability reproduced; No claimed dataset/generator convergence or production optimizer qualification",
+      "reason_to_keep": "Useful expected-failure controller unit with an isolated release intervention and a safe-release control; model failure is the intended diagnostic observation.",
+      "recommendation": "MERGED",
+      "next_step": "Merged the useful expected-failure diagnostic after the refreshed Python matrix and release build passed; a future controller change must separately address the strict XFAIL.",
+      "provenance": [
+        "canonical-selection.json",
+        "catalog.json",
+        "failure-diagnosis.json",
+        "improvements.json"
+      ],
+      "media": [
+        "pr224.gif"
+      ],
+      "remote_checks_at_inventory": [
+        {
+          "name": "CPU / Python 3.10",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/36885507776/job/110447686213"
+        },
+        {
+          "name": "CPU / Python 3.11",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/36885507776/job/110447685976"
+        },
+        {
+          "name": "CPU / Python 3.12",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/36885507776/job/110447685796"
+        },
+        {
+          "name": "Build release distributions",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/36885507776/job/110453909953"
+        }
+      ],
+      "merge_state_at_inventory": "UNSTABLE",
+      "current_head_sha": "1976d5a85360c90de9fe0f98b254825206dcdd37",
+      "base_refresh_only": true,
+      "current_integration_tests": {
+        "passed": 9,
+        "xfailed": 1,
+        "seconds": 9.92,
+        "log_sha256": "77ab71becd6f00421d039855cb24caa17a3c18df16ff91e654d6578845b3ff11"
+      },
+      "remote_merge": {
+        "merge_commit_sha": "70de5a3ef14a28c0c18d0e2bac6f3cac17c296bc",
+        "merged": true,
+        "merged_at": "2026-10-02T02:29:09Z",
+        "number": 224,
+        "state": "closed"
+      }
+    },
+    {
+      "pr": 22,
+      "title": "Circle transition toy with paired-error controller",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/22",
+      "catalog_ids": [
+        "pr22"
+      ],
+      "original_quality_tiers": [
+        4
+      ],
+      "followup_quality_tiers": [
+        4
+      ],
+      "reviewed_head_sha": "c85af40f1e30339702dcb6143830fca15d5334f2",
+      "base_branch": "experiment/circle-transition",
+      "is_draft": true,
+      "scientific_question": "Can independent local signed tangential/radial transition rows support the correct radius, direction and speed over 1024 true-environment closed-loop steps?",
+      "scientific_result": "BLOCKED before training; NO_FRESH_COMPATIBLE_TRAINING",
+      "reason_to_keep": "Distinct closed-loop signed motion and radial recovery question; an API blocker does not remove its scientific value.",
+      "recommendation": "KEEP_OPEN",
+      "next_step": "Keep the useful task; isolate a current-API test adapter and check loss/update parity before capturing training. Do not merge the old whole branch or equate an API exception with numerical training failure.",
+      "provenance": [
+        "canonical-selection.json",
+        "catalog.json",
+        "failure-diagnosis.json",
+        "improvements.json"
+      ],
+      "media": [],
+      "remote_checks_at_inventory": [
+        {
+          "name": "CPU / Python 3.10",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35659109839/job/106529830577"
+        },
+        {
+          "name": "CPU / Python 3.11",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35659109839/job/106529830703"
+        },
+        {
+          "name": "CPU / Python 3.12",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35659109839/job/106529830317"
+        },
+        {
+          "name": "Build release distributions",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35659109839/job/106530410612"
+        }
+      ],
+      "merge_state_at_inventory": "UNSTABLE",
+      "current_head_sha": "c85af40f1e30339702dcb6143830fca15d5334f2"
+    },
+    {
+      "pr": 45,
+      "title": "Break: published batchfeat lengths fail gauge-complete two_broad \u00d732",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/45",
+      "catalog_ids": [
+        "pr45-adapted"
+      ],
+      "original_quality_tiers": [
+        4
+      ],
+      "followup_quality_tiers": [
+        4
+      ],
+      "reviewed_head_sha": "1114d0eeb0a6de762cc932c6e0717653133ad693",
+      "base_branch": "particle-finetune/base",
+      "is_draft": false,
+      "scientific_question": "Does the fixed published recipe transfer across a uniform 32x change of units, and does jointly rescaling kernel lengths and prior initialization recover the original distribution? This joint intervention does not establish that either change is independently necessary.",
+      "scientific_result": "FAIL / PASS (archived compatibility replay; current KA2 not qualified); NOT_RESCORED by the new poor-vector CDF cohort",
+      "reason_to_keep": "Useful unit-covariance control; a 32x pushforward is related to native two_broad but tests a different recipe intervention.",
+      "recommendation": "KEEP_OPEN",
+      "next_step": "Retain the geometry/unit question as a bounded diagnostic. The unchanged source uses removed public recipe fields; the archived adapter is explicit. Integrate a scoped compatible runner and correct composite-control wording before merge review.",
+      "provenance": [
+        "canonical-selection.json",
+        "catalog.json",
+        "failure-diagnosis.json",
+        "improvements.json"
+      ],
+      "media": [
+        "pr45-adapted.gif"
+      ],
+      "remote_checks_at_inventory": [
+        {
+          "name": "CPU / Python 3.10",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35820763782/job/107051900762"
+        },
+        {
+          "name": "CPU / Python 3.11",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35820763782/job/107051900953"
+        },
+        {
+          "name": "CPU / Python 3.12",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35820763782/job/107051901083"
+        },
+        {
+          "name": "Build release distributions",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35820763782/job/107052473166"
+        }
+      ],
+      "merge_state_at_inventory": "UNKNOWN",
+      "current_head_sha": "1114d0eeb0a6de762cc932c6e0717653133ad693"
+    },
+    {
+      "pr": 153,
+      "title": "Animation world model: sprite dream loop with OOD leaderboard",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/153",
+      "catalog_ids": [
+        "pr153"
+      ],
+      "original_quality_tiers": [
+        4
+      ],
+      "followup_quality_tiers": [
+        4
+      ],
+      "reviewed_head_sha": "3972788a2395340596fd6c9f3859978b3d072d24",
+      "base_branch": "develop",
+      "is_draft": false,
+      "scientific_question": "Can a paired state/render predictor sustain 5/20/50-step sprite dreams on held-out simulator episodes and ceiling-bounce out-of-distribution cases?",
+      "scientific_result": "BLOCKED before training; NO_FRESH_COMPATIBLE_TRAINING",
+      "reason_to_keep": "Distinct state-plus-render rollout and bounce generalization question; one-step image generation does not replace it.",
+      "recommendation": "KEEP_OPEN",
+      "next_step": "Keep the useful task; isolate a current-API test adapter and check loss/update parity before capturing training. Do not merge the old whole branch or equate an API exception with numerical training failure.",
+      "provenance": [
+        "canonical-selection.json",
+        "catalog.json",
+        "failure-diagnosis.json",
+        "improvements.json"
+      ],
+      "media": [],
+      "remote_checks_at_inventory": [],
+      "merge_state_at_inventory": "DIRTY",
+      "current_head_sha": "3972788a2395340596fd6c9f3859978b3d072d24"
+    },
+    {
+      "pr": 196,
+      "title": "MisGAN toy: full MisGAN (data + mask + imputer) on the 8D-lifted 100-Gaussian grid",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/196",
+      "catalog_ids": [
+        "pr196-block",
+        "pr196-mcar_p20",
+        "pr196-mcar_p50",
+        "pr196-mcar_p80"
+      ],
+      "original_quality_tiers": [
+        4
+      ],
+      "followup_quality_tiers": [
+        4
+      ],
+      "reviewed_head_sha": "5efc80a3dfb2baffc83f54c61cab07ccfc9826f5",
+      "base_branch": "develop",
+      "is_draft": false,
+      "scientific_question": "Can complete 8D data and independent missingness be learned while sampling the correct missing-coordinate conditional posterior under MCAR20/50/80 and block masks, rather than merely producing a plausible projected marginal?",
+      "scientific_result": "MEASURED; NO_FROZEN_GATE; Posterior/manifold deficits observed; no new predeclared binary model verdict",
+      "reason_to_keep": "Independent missingness and posterior conditionality are distinct from an unconditional grid marginal; all four mask laws remain useful.",
+      "recommendation": "KEEP_OPEN",
+      "next_step": "Keep all four distinct missingness laws. Freeze full-8D manifold/posterior tolerances against finite-draw Bayes controls, preserve the existing ungated observations, and resolve the current develop merge conflicts. Green CI and 100 projected modes do not establish conditional recovery.",
+      "provenance": [
+        "canonical-selection.json",
+        "catalog.json",
+        "failure-diagnosis.json",
+        "improvements.json"
+      ],
+      "media": [
+        "pr196-block.gif",
+        "pr196-mcar_p20.gif",
+        "pr196-mcar_p50.gif",
+        "pr196-mcar_p80.gif"
+      ],
+      "remote_checks_at_inventory": [
+        {
+          "name": "CPU / Python 3.10",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/36302010100/job/108571267177"
+        },
+        {
+          "name": "CPU / Python 3.11",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/36302010100/job/108571266942"
+        },
+        {
+          "name": "CPU / Python 3.12",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/36302010100/job/108571267083"
+        },
+        {
+          "name": "Build release distributions",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/36302010100/job/108572746138"
+        }
+      ],
+      "merge_state_at_inventory": "DIRTY",
+      "current_head_sha": "5efc80a3dfb2baffc83f54c61cab07ccfc9826f5"
+    },
+    {
+      "pr": 226,
+      "title": "Add GAN-only paired-residual convergence diagnostic",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/226",
+      "catalog_ids": [
+        "pr226"
+      ],
+      "original_quality_tiers": [
+        4
+      ],
+      "followup_quality_tiers": [
+        4
+      ],
+      "reviewed_head_sha": "0e69fa60bf151762f8edc49bb714c6b7f8cf4804",
+      "base_branch": "develop",
+      "is_draft": false,
+      "scientific_question": "Does an odd learned critic push an exact paired prediction, and how do evenization and antithetic discriminator estimation differ in the three fixed native training profiles?",
+      "scientific_result": "BOUNDED_DIAGNOSTIC_PASS; three trained profiles improve; No absolute density/routing/decoded-quality gate",
+      "reason_to_keep": "Useful bounded odd-force/parity/estimator diagnostic. The affine bypass and missing absolute accuracy gate limit the claim but do not make the diagnostic useless.",
+      "recommendation": "MERGED",
+      "next_step": "Unchanged reviewed 4/5 head and all four recorded CI checks green. Merge the diagnostic/test only after refreshing against current develop; do not adopt evenization as a production optimizer result.",
+      "provenance": [
+        "PR226_PR227.md",
+        "canonical-selection.json",
+        "catalog.json",
+        "failure-diagnosis.json",
+        "improvements.json",
+        "merge-readiness.json"
+      ],
+      "media": [
+        "pr226.gif"
+      ],
+      "remote_checks_at_inventory": [
+        {
+          "name": "CPU / Python 3.10",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/36912219096/job/110537395877"
+        },
+        {
+          "name": "CPU / Python 3.11",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/36912219096/job/110537395910"
+        },
+        {
+          "name": "CPU / Python 3.12",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/36912219096/job/110537395521"
+        },
+        {
+          "name": "Build release distributions",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/36912219096/job/110544055470"
+        }
+      ],
+      "merge_state_at_inventory": "CLEAN",
+      "current_head_sha": "0e69fa60bf151762f8edc49bb714c6b7f8cf4804",
+      "remote_merge": {
+        "merge_commit_sha": "6b7bf0566151447b30ae6d987fd6954398be3bc2",
+        "merged": true,
+        "merged_at": "2026-10-02T02:14:10Z",
+        "number": 226,
+        "state": "closed"
+      },
+      "current_integration_tests": {
+        "passed": 25,
+        "seconds": 12.08,
+        "log_sha256": "0036dab163ce7b2e7b89dfb660e79658551c1798593fdaaeec18ea3ed39b842c",
+        "base_sha": "3f02957aba4517121c5283d77c8fff98895658b5"
+      }
+    },
+    {
+      "pr": 227,
+      "title": "Add guided routed-convergence and exact-solution game toys",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/227",
+      "catalog_ids": [
+        "pr227"
+      ],
+      "original_quality_tiers": [
+        4
+      ],
+      "followup_quality_tiers": [
+        4
+      ],
+      "reviewed_head_sha": "b370cb7a49429e67f106e41752abea078327c5d0",
+      "base_branch": "develop",
+      "is_draft": false,
+      "scientific_question": "Does neutralizing fresh H/b remove the shared two-site particle disadvantage under four fixed judges while codes remain useful? The live head adds guided CFG=3 and unguided rotated teacher laws, plus a separate zero-update frozen-critic stationarity/attraction unit.",
+      "scientific_result": "Bounded H/b diagnostic supported after signed contribution repair; guided support PASS; unguided rotated reproduction FAIL/inapplicable. All saved beneficial deltas remain positive; zero-update stationarity remains separate. Changed evaluator/native source inherits no training qualification.",
+      "reason_to_keep": "Useful matched H/b intervention and guided/unguided negative control; stationarity versus attraction is a separate local question. Neither establishes the remaining full-Supra cause.",
+      "recommendation": "MERGED",
+      "next_step": "Merged repaired proposal67be after177focused checks and all4CIjobs passed. Future full-host diagnosis and fresh qualification under changed source remain separate work.",
+      "provenance": [
+        "PR226_PR227.md",
+        "canonical-selection.json",
+        "catalog.json",
+        "failure-diagnosis.json",
+        "improvements.json",
+        "merge-readiness.json"
+      ],
+      "media": [
+        "pr227.gif"
+      ],
+      "remote_checks_at_inventory": [
+        {
+          "name": "CPU / Python 3.10",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/36947168860/job/110651812565"
+        },
+        {
+          "name": "CPU / Python 3.11",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/36947168860/job/110651812599"
+        },
+        {
+          "name": "CPU / Python 3.12",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/36947168860/job/110651812475"
+        },
+        {
+          "name": "Build release distributions",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/36947168860/job/110655740234"
+        }
+      ],
+      "merge_state_at_inventory": "CLEAN",
+      "current_head_sha": "67be35f4540c925e81b9a1b542113e7f039046ac",
+      "signed_repair_pr": 230,
+      "signed_repair_url": "https://github.com/255BITS/ParticleGAN/pull/230",
+      "signed_repair_head": "82a13bec02a87d3269605af7b751a95c661e71ee",
+      "signed_repair_validation": {
+        "passed": 135,
+        "skipped": 1,
+        "seconds": 14.14,
+        "signed_new_family_deltas": 16,
+        "minimum_signed_delta": 0.07859230041503906,
+        "saved_state_files_verified": 210,
+        "original_artifact_files_verified": 306,
+        "quality_training_updates": 0,
+        "reclassifier_model_or_optimizer_updates": 0,
+        "qualification_credit": false
+      },
+      "supplemental_media": "pr227_current_media/README.md",
+      "signed_repair_remote_merge": {
+        "merge_commit_sha": "5dc191b67ee3811cf3f7b2fe203e6731ce07c3ee",
+        "merged": true,
+        "merged_at": "2026-10-02T02:41:27Z",
+        "number": 230
+      },
+      "current_integration_tests": {
+        "passed": 177,
+        "skipped": 1,
+        "xfailed": 1,
+        "seconds": 22.1,
+        "log_sha256": "22f50f0fd45451f0fe7f5740a24673530fb268aafa67489dd60b2e678ce6a527",
+        "quality_training_updates": 0,
+        "archived_cards_changed": false,
+        "unauthorized_temporary_software_contracts_only": true
+      },
+      "remote_merge": {
+        "base_sha": "e4278629eab210c0aa7643d3c09f5e0b56e2e3c9",
+        "head_sha": "67be35f4540c925e81b9a1b542113e7f039046ac",
+        "merge_commit_sha": "6bf669a4d639d7a6781d09885a6ba46c60644679",
+        "merged": true,
+        "merged_at": "2026-10-02T03:15:13Z",
+        "number": 227,
+        "state": "closed"
+      },
+      "current_remote_checks": [
+        {
+          "name": "CPU / Python 3.10",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/36958370949/job/110686334598"
+        },
+        {
+          "name": "CPU / Python 3.11",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/36958370949/job/110686334724"
+        },
+        {
+          "name": "CPU / Python 3.12",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/36958370949/job/110686334719"
+        },
+        {
+          "name": "Build release distributions",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/36958370949/job/110688866164"
+        }
+      ]
+    },
+    {
+      "pr": 231,
+      "title": "Add task-verified routed FiLM conditioning sensitivity toys",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/231",
+      "catalog_ids": [],
+      "original_quality_tiers": [],
+      "followup_quality_tiers": [
+        4
+      ],
+      "quality_scope": "New bounded diagnostic4/5; analytic geometry oracle alone5/5. Original109-case ratings unchanged.",
+      "reviewed_head_sha": "68cf68e599d4ac8f8608434c417ed021647e2ff4",
+      "current_head_sha": "68cf68e599d4ac8f8608434c417ed021647e2ff4",
+      "base_branch": "develop",
+      "is_draft": false,
+      "scientific_question": "Does zeroing the entire additive FiLM branch erase particle-code and conditioning directions, and how does that affect actual Adam/GAN updates through a frozen BF16 recipient and dense 128\u00d74 routed table? Unlike PR227's H/b-only neutralization, this also erases Cz.",
+      "scientific_result": "GEOMETRY_UNIT_PASS; bounded initialization sensitivity observed; NO_FROZEN_CONVERGENCE_GATE for learned quality. Faithful ordinary toys do not reproduce repeated G cuts; spatial width16 reverses terminal initialization ordering; matched real100-update G-rate restoration is REJECTED.",
+      "reason_to_keep": "Distinct whole-FiLM erasure, conditioning Jacobian and raw-gradient-versus-Adam-movement diagnostic. Faithful native, antithetic, capacity and wider-spatial counterexamples bound its interpretation; it is not a duplicate of H/b-only PR227.",
+      "recommendation": "MERGED",
+      "next_step": "Merged exact reviewed head 68cf after its current virtual-merge CI and 96 adjacent software checks passed. The full late real-task convergence deficit remains unexplained; retain the negative G-rate bypass result and separate source cohorts.",
+      "provenance": [
+        "HIGH_RATED.md",
+        "pr231_media/README.md",
+        "pr231_media/receipt.json",
+        "../../docs/routed_generator_damping_diagnostic_20261002.md",
+        "../../docs/routed_generator_damping_diagnostic_20261002.json"
+      ],
+      "media": [],
+      "supplemental_media": "pr231_media/README.md",
+      "remote_checks_at_review": [
+        {
+          "name": "CPU / Python 3.10",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/36957943133/job/110685012494"
+        },
+        {
+          "name": "CPU / Python 3.11",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/36957943133/job/110685012332"
+        },
+        {
+          "name": "CPU / Python 3.12",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/36957943133/job/110685012512"
+        },
+        {
+          "name": "Build release distributions",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/36957943133/job/110688753239"
+        }
+      ],
+      "merge_state_at_review": "UNKNOWN",
+      "current_integration_tests": {
+        "passed": 96,
+        "skipped": 3,
+        "seconds": 20.98,
+        "focused_passed": 26,
+        "focused_seconds": 3.32,
+        "log_sha256": "ef829d46631e9c67ea4e29af5e595a9e568b1e6e233b6537ea95a1f10a3b51d2",
+        "base_only_integration_commit": "558b7711c7731ba638caa501adb80fe51f59147c",
+        "eight_proposal_files_byte_identical": true,
+        "incoming_native_lib_configs_unmodified": true,
+        "qualification_credit": false,
+        "frozen_native_file_count": 29,
+        "current_native_file_count": 30
+      },
+      "remote_merge": {
+        "base_sha": "e4278629eab210c0aa7643d3c09f5e0b56e2e3c9",
+        "head_sha": "68cf68e599d4ac8f8608434c417ed021647e2ff4",
+        "merge_commit_sha": "c4b53495d04a2052e266739a82053317b7f49698",
+        "merged": true,
+        "merged_at": "2026-10-02T03:18:51Z",
+        "number": 231,
+        "state": "closed"
+      },
+      "actual_merge_parents": [
+        "6bf669a4d639d7a6781d09885a6ba46c60644679",
+        "68cf68e599d4ac8f8608434c417ed021647e2ff4"
+      ],
+      "historical_native_cohort_note": "Original 3f/70de bindings retain 29 core files. Current native source has 30 files, differs at four files and adds recipe_schedules.py after independent PR229; no new scientific qualification. The original final_source_changes sentence predates its later separately bound publication_replay.",
+      "independent_review": {
+        "input_sha256": "1d5962b22c25cc6e726da3fe4ad59e87d9fada2e6ab5d7e6e0e4986431bf65ec",
+        "recommended_quality_tier": 4,
+        "definition_status": "WELL_DEFINED_BOUNDED_DIAGNOSTIC",
+        "scientific_result": {
+          "analytic_geometry_control": "PASS",
+          "first_step_initialization_sensitivity": "SUPPORTED_IN_DECLARED_FIXTURES",
+          "ordinary_toy_repeated_G_cut_reproduction": "NOT_REPRODUCED",
+          "spatial_width16_uniform_initialization_ordering": "COUNTEREXAMPLE_RETAINED",
+          "real_G_rate_bypass": "REJECT_AS_FIX",
+          "trained_convergence_acceptance_gate": "NO_FROZEN_GATE",
+          "Forge_or_default_qualification": "NONE"
+        },
+        "high_quality_questions": [
+          {
+            "id": "zero-hidden-FiLM-geometry",
+            "tier": 5,
+            "verifies": "At controlled h=0, gain contributes no code derivative. Whole/additive-code erasure closes the shift path; preserving additive code columns while zeroing time/bias retains it. Analytic .25*diag(sech\u00b2(pre_shift))*W_shift,code*J_LayerNorm and complete bank-routed GAN gradient controls agree.",
+            "limit": "Controlled geometry, no optimizer updates or learned convergence qualification."
+          },
+          {
+            "id": "initialization-and-Adam-motion",
+            "tier": 4,
+            "verifies": "Whole shift zero attenuates first-step encoder gradient energy in matched fixtures; actual Adam displacement changes by a different factor.",
+            "limit": "Specific initialized fixtures; relational regression bounds are software checks, not new prelaunch scientific gates."
+          },
+          {
+            "id": "faithful-spatial-and-capacity-controls",
+            "tier": 4,
+            "verifies": "Native routed controls/BF16 recipient boundary/dense128\u00d74bank stay active; width4 and width16 retain opposite initialization orderings.",
+            "limit": "Width changes multiple owners; no universal isolated capacity-cause claim."
+          },
+          {
+            "id": "matched-rate-counterfactual",
+            "tier": 4,
+            "verifies": "Antithetic64native/bypass traces match through504; appliedG-rate first diverges505. Narrow toy benefit remains alongside negative real continuation.",
+            "limit": "Toy factor2 versus real factor32 restoration; no general core-policy defect/remedy identified."
+          }
+        ],
+        "source_limits": [
+          "No frozen trained-convergence acceptance criterion.",
+          "Early outer-identity/backfilled protocols stay weaker historical evidence.",
+          "Metric animations only: intermediate sample clouds were not captured.",
+          "Real receipts retain stale decoded completed:false with independent completion proof.",
+          "No fresh GPU execution or model rescoring in this review."
+        ]
+      },
+      "supplemental_media_validation": {
+        "records": 8,
+        "final_saved_states": 26,
+        "actual_evaluations": 338,
+        "existing_trace_updates_verified": 31200,
+        "new_training_updates": 0,
+        "model_instances_constructed": 0,
+        "metrics_recomputed": 0,
+        "software_replay_updates": 0,
+        "parser_negative_controls": 5,
+        "receipt_sha256": "2c1d5d8f6877484c1651d139d5e06aa5856ed1071ee04c666bab1b4c25cd1b50",
+        "verification_sha256": "9ff41298430e77b1c2609aabc52e22b4b8b85d4d9e7f303046b8636ddd996fa2"
+      }
+    },
+    {
+      "pr": 47,
+      "title": "Break: published absolute lengths fail \u00d724 two_broad; MLP control passes",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/47",
+      "catalog_ids": [
+        "pr47-adapted"
+      ],
+      "original_quality_tiers": [
+        3
+      ],
+      "followup_quality_tiers": [
+        3
+      ],
+      "reviewed_head_sha": "341f7f757dcb018d08009a4d1e16be5715cf620a",
+      "base_branch": "particle-finetune/base",
+      "is_draft": false,
+      "scientific_question": "Does the published host or its composite MLP/prior-initialization control preserve the complete two-broad distribution after a uniform 24x unit change?",
+      "scientific_result": "FAIL / PASS (archived compatibility replay; current KA2 not qualified); FAIL / FAIL (stronger retained-cloud distribution gate)",
+      "reason_to_keep": "Useful 24x unit/complete-recipe comparison; related to PR45 but its target units and architecture/init control differ.",
+      "recommendation": "KEEP_OPEN",
+      "next_step": "Retain this distinct law as an optional stress/negative diagnostic. Both complete recipes fail the stronger distribution gate; the historical PASS remains preserved and is not a fresh density pass. This 3/5 question is below the authorized top-tier merge cutoff; current API and CI also need a scoped port.",
+      "provenance": [
+        "NON_IMAGE_QUALITY.md",
+        "canonical-selection.json",
+        "catalog.json",
+        "failure-diagnosis.json",
+        "improvements.json",
+        "vector-quality-controls.json"
+      ],
+      "media": [
+        "pr47-adapted.gif"
+      ],
+      "remote_checks_at_inventory": [
+        {
+          "name": "CPU / Python 3.10",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35831044880/job/107083459641"
+        },
+        {
+          "name": "CPU / Python 3.11",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35831044880/job/107083459401"
+        },
+        {
+          "name": "CPU / Python 3.12",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35831044880/job/107083459671"
+        },
+        {
+          "name": "Build release distributions",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35831044880/job/107084255679"
+        }
+      ],
+      "merge_state_at_inventory": "UNKNOWN",
+      "current_head_sha": "341f7f757dcb018d08009a4d1e16be5715cf620a"
+    },
+    {
+      "pr": 48,
+      "title": "Break: published absolute lengths fail wide-gap islands; MLP control passes",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/48",
+      "catalog_ids": [
+        "pr48-adapted"
+      ],
+      "original_quality_tiers": [
+        3
+      ],
+      "followup_quality_tiers": [
+        3
+      ],
+      "reviewed_head_sha": "1027c2a108721f1da4f8d615346e9397f351b2c4",
+      "base_branch": "particle-finetune/base",
+      "is_draft": false,
+      "scientific_question": "Do two islands separated by 16 with unchanged local sigma .25 retain equal mass and local spread under the published host and its composite control? This changes separation-to-width, unlike a uniform unit rescaling.",
+      "scientific_result": "FAIL / PASS (archived compatibility replay; current KA2 not qualified); FAIL / FAIL (stronger retained-cloud distribution gate)",
+      "reason_to_keep": "Distinct separation-to-width stress, not a unit-only alias.",
+      "recommendation": "KEEP_OPEN",
+      "next_step": "Retain this distinct law as an optional stress/negative diagnostic. Both complete recipes fail the stronger distribution gate; the historical PASS remains preserved and is not a fresh density pass. This 3/5 question is below the authorized top-tier merge cutoff; current API and CI also need a scoped port.",
+      "provenance": [
+        "NON_IMAGE_QUALITY.md",
+        "canonical-selection.json",
+        "catalog.json",
+        "failure-diagnosis.json",
+        "improvements.json",
+        "vector-quality-controls.json"
+      ],
+      "media": [
+        "pr48-adapted.gif"
+      ],
+      "remote_checks_at_inventory": [
+        {
+          "name": "CPU / Python 3.10",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35836418824/job/107100856803"
+        },
+        {
+          "name": "CPU / Python 3.11",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35836418824/job/107100856977"
+        },
+        {
+          "name": "CPU / Python 3.12",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35836418824/job/107100857066"
+        },
+        {
+          "name": "Build release distributions",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35836418824/job/107101710761"
+        }
+      ],
+      "merge_state_at_inventory": "UNKNOWN",
+      "current_head_sha": "1027c2a108721f1da4f8d615346e9397f351b2c4"
+    },
+    {
+      "pr": 49,
+      "title": "Break: published absolute lengths fail three-island wide gap; MLP control passes",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/49",
+      "catalog_ids": [
+        "pr49-adapted"
+      ],
+      "original_quality_tiers": [
+        3
+      ],
+      "followup_quality_tiers": [
+        3
+      ],
+      "reviewed_head_sha": "4348c9cf9cc18e383e2806160523a5a1bd6aa012",
+      "base_branch": "particle-finetune/base",
+      "is_draft": false,
+      "scientific_question": "Can three equally weighted equilateral islands, pairwise distance 16 and local sigma 1, preserve mass and local width under the two complete host recipes?",
+      "scientific_result": "FAIL / PASS (archived compatibility replay; current KA2 not qualified); FAIL / FAIL (stronger retained-cloud distribution gate)",
+      "reason_to_keep": "Three-mode equilateral geometry changes the target law.",
+      "recommendation": "KEEP_OPEN",
+      "next_step": "Retain this distinct law as an optional stress/negative diagnostic. Both complete recipes fail the stronger distribution gate; the historical PASS remains preserved and is not a fresh density pass. This 3/5 question is below the authorized top-tier merge cutoff; current API and CI also need a scoped port.",
+      "provenance": [
+        "NON_IMAGE_QUALITY.md",
+        "canonical-selection.json",
+        "catalog.json",
+        "failure-diagnosis.json",
+        "improvements.json",
+        "vector-quality-controls.json"
+      ],
+      "media": [
+        "pr49-adapted.gif"
+      ],
+      "remote_checks_at_inventory": [
+        {
+          "name": "CPU / Python 3.10",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35840234494/job/107113293543"
+        },
+        {
+          "name": "CPU / Python 3.11",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35840234494/job/107113293184"
+        },
+        {
+          "name": "CPU / Python 3.12",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35840234494/job/107113293442"
+        },
+        {
+          "name": "Build release distributions",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35840234494/job/107114182408"
+        }
+      ],
+      "merge_state_at_inventory": "UNKNOWN",
+      "current_head_sha": "4348c9cf9cc18e383e2806160523a5a1bd6aa012"
+    },
+    {
+      "pr": 50,
+      "title": "Break: published absolute lengths fail four-corner wide gap; MLP control passes",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/50",
+      "catalog_ids": [
+        "pr50-adapted"
+      ],
+      "original_quality_tiers": [
+        3
+      ],
+      "followup_quality_tiers": [
+        3
+      ],
+      "reviewed_head_sha": "6ef6f56daceae934c774c6b04f0463dd68782ccf",
+      "base_branch": "particle-finetune/base",
+      "is_draft": false,
+      "scientific_question": "Can four equally weighted square-corner islands at (+/-8,+/-8), local sigma 1, preserve mass and local width under the two complete host recipes?",
+      "scientific_result": "FAIL / PASS (archived compatibility replay; current KA2 not qualified); FAIL / FAIL (stronger retained-cloud distribution gate)",
+      "reason_to_keep": "Four-mode square geometry changes the target law.",
+      "recommendation": "KEEP_OPEN",
+      "next_step": "Retain this distinct law as an optional stress/negative diagnostic. Both complete recipes fail the stronger distribution gate; the historical PASS remains preserved and is not a fresh density pass. This 3/5 question is below the authorized top-tier merge cutoff; current API and CI also need a scoped port.",
+      "provenance": [
+        "NON_IMAGE_QUALITY.md",
+        "canonical-selection.json",
+        "catalog.json",
+        "failure-diagnosis.json",
+        "improvements.json",
+        "vector-quality-controls.json"
+      ],
+      "media": [
+        "pr50-adapted.gif"
+      ],
+      "remote_checks_at_inventory": [
+        {
+          "name": "CPU / Python 3.10",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35841808662/job/107118395993"
+        },
+        {
+          "name": "CPU / Python 3.11",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35841808662/job/107118396429"
+        },
+        {
+          "name": "CPU / Python 3.12",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35841808662/job/107118396188"
+        },
+        {
+          "name": "Build release distributions",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35841808662/job/107119253180"
+        }
+      ],
+      "merge_state_at_inventory": "UNKNOWN",
+      "current_head_sha": "6ef6f56daceae934c774c6b04f0463dd68782ccf"
+    },
+    {
+      "pr": 51,
+      "title": "Break: published absolute lengths fail hex-wide lattice; MLP control passes",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/51",
+      "catalog_ids": [
+        "pr51-adapted"
+      ],
+      "original_quality_tiers": [
+        3
+      ],
+      "followup_quality_tiers": [
+        3
+      ],
+      "reviewed_head_sha": "b56a844bbe8d6e49cb6d14f6febab78fdfbc01ba",
+      "base_branch": "particle-finetune/base",
+      "is_draft": false,
+      "scientific_question": "Can six equally weighted hexagon vertices, circumradius/neighbor gap 16 and local sigma 1, preserve all components and within-mode width under the two complete host recipes?",
+      "scientific_result": "FAIL / PASS (archived compatibility replay; current KA2 not qualified); FAIL / FAIL (stronger retained-cloud distribution gate)",
+      "reason_to_keep": "Six-mode regular geometry and mode count change the target law.",
+      "recommendation": "KEEP_OPEN",
+      "next_step": "Retain this distinct law as an optional stress/negative diagnostic. Both complete recipes fail the stronger distribution gate; the historical PASS remains preserved and is not a fresh density pass. This 3/5 question is below the authorized top-tier merge cutoff; current API and CI also need a scoped port.",
+      "provenance": [
+        "NON_IMAGE_QUALITY.md",
+        "canonical-selection.json",
+        "catalog.json",
+        "failure-diagnosis.json",
+        "improvements.json",
+        "vector-quality-controls.json"
+      ],
+      "media": [
+        "pr51-adapted.gif"
+      ],
+      "remote_checks_at_inventory": [
+        {
+          "name": "CPU / Python 3.10",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35844332466/job/107126709751"
+        },
+        {
+          "name": "CPU / Python 3.11",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35844332466/job/107126710093"
+        },
+        {
+          "name": "CPU / Python 3.12",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35844332466/job/107126710167"
+        },
+        {
+          "name": "Build release distributions",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35844332466/job/107127567474"
+        }
+      ],
+      "merge_state_at_inventory": "UNKNOWN",
+      "current_head_sha": "b56a844bbe8d6e49cb6d14f6febab78fdfbc01ba"
+    },
+    {
+      "pr": 52,
+      "title": "Break: published absolute lengths fail pentagon-wide lattice; MLP control passes",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/52",
+      "catalog_ids": [
+        "pr52-adapted"
+      ],
+      "original_quality_tiers": [
+        3
+      ],
+      "followup_quality_tiers": [
+        3
+      ],
+      "reviewed_head_sha": "8cde29c3d12b8995f3725c03e55c26351bf30d23",
+      "base_branch": "particle-finetune/base",
+      "is_draft": false,
+      "scientific_question": "Can five equally weighted pentagon vertices, circumradius 16 and local sigma 1, preserve all components and within-mode width under the two complete host recipes?",
+      "scientific_result": "FAIL / PASS (archived compatibility replay; current KA2 not qualified); FAIL / FAIL (stronger retained-cloud distribution gate)",
+      "reason_to_keep": "Five-mode odd polygon and chord scale change the target law.",
+      "recommendation": "KEEP_OPEN",
+      "next_step": "Retain this distinct law as an optional stress/negative diagnostic. Both complete recipes fail the stronger distribution gate; the historical PASS remains preserved and is not a fresh density pass. This 3/5 question is below the authorized top-tier merge cutoff; current API and CI also need a scoped port.",
+      "provenance": [
+        "NON_IMAGE_QUALITY.md",
+        "canonical-selection.json",
+        "catalog.json",
+        "failure-diagnosis.json",
+        "improvements.json",
+        "vector-quality-controls.json"
+      ],
+      "media": [
+        "pr52-adapted.gif"
+      ],
+      "remote_checks_at_inventory": [
+        {
+          "name": "CPU / Python 3.10",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35846410650/job/107133542558"
+        },
+        {
+          "name": "CPU / Python 3.11",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35846410650/job/107133543107"
+        },
+        {
+          "name": "CPU / Python 3.12",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35846410650/job/107133542959"
+        },
+        {
+          "name": "Build release distributions",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35846410650/job/107134468802"
+        }
+      ],
+      "merge_state_at_inventory": "UNKNOWN",
+      "current_head_sha": "8cde29c3d12b8995f3725c03e55c26351bf30d23"
+    },
+    {
+      "pr": 53,
+      "title": "Break: published absolute lengths fail chevron-wide V; MLP control passes",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/53",
+      "catalog_ids": [
+        "pr53-adapted"
+      ],
+      "original_quality_tiers": [
+        3
+      ],
+      "followup_quality_tiers": [
+        3
+      ],
+      "reviewed_head_sha": "fe6952bcf4d4a98afe5e93391c9cedf9bc0b9251",
+      "base_branch": "particle-finetune/base",
+      "is_draft": false,
+      "scientific_question": "Can a three-island chevron at (-8,8),(8,8),(0,-16), local sigma 1, preserve mass and width across unequal base/leg separations?",
+      "scientific_result": "FAIL / PASS (archived compatibility replay; current KA2 not qualified); FAIL / FAIL (stronger retained-cloud distribution gate)",
+      "reason_to_keep": "Unequal three-mode chevron separations change the target law.",
+      "recommendation": "KEEP_OPEN",
+      "next_step": "Retain this distinct law as an optional stress/negative diagnostic. Both complete recipes fail the stronger distribution gate; the historical PASS remains preserved and is not a fresh density pass. This 3/5 question is below the authorized top-tier merge cutoff; current API and CI also need a scoped port.",
+      "provenance": [
+        "NON_IMAGE_QUALITY.md",
+        "canonical-selection.json",
+        "catalog.json",
+        "failure-diagnosis.json",
+        "improvements.json",
+        "vector-quality-controls.json"
+      ],
+      "media": [
+        "pr53-adapted.gif"
+      ],
+      "remote_checks_at_inventory": [
+        {
+          "name": "CPU / Python 3.10",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35853211505/job/107155524660"
+        },
+        {
+          "name": "CPU / Python 3.11",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35853211505/job/107155524377"
+        },
+        {
+          "name": "CPU / Python 3.12",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35853211505/job/107155524707"
+        },
+        {
+          "name": "Build release distributions",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35853211505/job/107156394127"
+        }
+      ],
+      "merge_state_at_inventory": "UNKNOWN",
+      "current_head_sha": "fe6952bcf4d4a98afe5e93391c9cedf9bc0b9251"
+    },
+    {
+      "pr": 54,
+      "title": "Break: published absolute lengths fail tall-spike wide; MLP control passes",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/54",
+      "catalog_ids": [
+        "pr54-adapted"
+      ],
+      "original_quality_tiers": [
+        3
+      ],
+      "followup_quality_tiers": [
+        3
+      ],
+      "reviewed_head_sha": "ecaa2e22bf25b0ffc0a83995726a1c153114eef8",
+      "base_branch": "particle-finetune/base",
+      "is_draft": false,
+      "scientific_question": "Can a three-island tall spike at (-6,0),(6,0),(0,16), local sigma 1, preserve its narrower base and distant apex under the two complete host recipes?",
+      "scientific_result": "FAIL / PASS (archived compatibility replay; current KA2 not qualified); FAIL / FAIL (stronger retained-cloud distribution gate)",
+      "reason_to_keep": "Narrow-base/distant-apex geometry changes the target law.",
+      "recommendation": "KEEP_OPEN",
+      "next_step": "Retain this distinct law as an optional stress/negative diagnostic. Both complete recipes fail the stronger distribution gate; the historical PASS remains preserved and is not a fresh density pass. This 3/5 question is below the authorized top-tier merge cutoff; current API and CI also need a scoped port.",
+      "provenance": [
+        "NON_IMAGE_QUALITY.md",
+        "canonical-selection.json",
+        "catalog.json",
+        "failure-diagnosis.json",
+        "improvements.json",
+        "vector-quality-controls.json"
+      ],
+      "media": [
+        "pr54-adapted.gif"
+      ],
+      "remote_checks_at_inventory": [
+        {
+          "name": "CPU / Python 3.10",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35855890153/job/107164138269"
+        },
+        {
+          "name": "CPU / Python 3.11",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35855890153/job/107164137787"
+        },
+        {
+          "name": "CPU / Python 3.12",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35855890153/job/107164138111"
+        },
+        {
+          "name": "Build release distributions",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35855890153/job/107165121488"
+        }
+      ],
+      "merge_state_at_inventory": "UNKNOWN",
+      "current_head_sha": "ecaa2e22bf25b0ffc0a83995726a1c153114eef8"
+    },
+    {
+      "pr": 55,
+      "title": "Break: published absolute lengths fail kite-wide; MLP control passes",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/55",
+      "catalog_ids": [
+        "pr55-adapted"
+      ],
+      "original_quality_tiers": [
+        3
+      ],
+      "followup_quality_tiers": [
+        3
+      ],
+      "reviewed_head_sha": "6b5f89512d5d3c9477f290b03a79a53e8c2e9ac9",
+      "base_branch": "particle-finetune/base",
+      "is_draft": false,
+      "scientific_question": "Can the asymmetric four-island kite at (0,16),(+/-10,0),(0,-5), local sigma 1, retain equal mass and local width across unequal separations?",
+      "scientific_result": "FAIL / PASS (archived compatibility replay; current KA2 not qualified); FAIL / FAIL (stronger retained-cloud distribution gate)",
+      "reason_to_keep": "Asymmetric four-mode kite changes the target law.",
+      "recommendation": "KEEP_OPEN",
+      "next_step": "Retain this distinct law as an optional stress/negative diagnostic. Both complete recipes fail the stronger distribution gate; the historical PASS remains preserved and is not a fresh density pass. This 3/5 question is below the authorized top-tier merge cutoff; current API and CI also need a scoped port.",
+      "provenance": [
+        "NON_IMAGE_QUALITY.md",
+        "canonical-selection.json",
+        "catalog.json",
+        "failure-diagnosis.json",
+        "improvements.json",
+        "vector-quality-controls.json"
+      ],
+      "media": [
+        "pr55-adapted.gif"
+      ],
+      "remote_checks_at_inventory": [
+        {
+          "name": "CPU / Python 3.10",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35857743850/job/107170210838"
+        },
+        {
+          "name": "CPU / Python 3.11",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35857743850/job/107170211065"
+        },
+        {
+          "name": "CPU / Python 3.12",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35857743850/job/107170211103"
+        },
+        {
+          "name": "Build release distributions",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35857743850/job/107171129166"
+        }
+      ],
+      "merge_state_at_inventory": "UNKNOWN",
+      "current_head_sha": "6b5f89512d5d3c9477f290b03a79a53e8c2e9ac9"
+    },
+    {
+      "pr": 56,
+      "title": "Break: published absolute lengths fail trapezoid-wide; MLP control passes",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/56",
+      "catalog_ids": [
+        "pr56-adapted"
+      ],
+      "original_quality_tiers": [
+        3
+      ],
+      "followup_quality_tiers": [
+        3
+      ],
+      "reviewed_head_sha": "ab3ef08734054108d64571cccbcf39273aff6e59",
+      "base_branch": "particle-finetune/base",
+      "is_draft": false,
+      "scientific_question": "Can four trapezoid islands with top (+/-8,16), base (+/-16,0), local sigma 1, retain equal mass and within-mode width?",
+      "scientific_result": "FAIL / PASS (archived compatibility replay; current KA2 not qualified); FAIL / FAIL (stronger retained-cloud distribution gate)",
+      "reason_to_keep": "Unequal parallel-side geometry changes the target law.",
+      "recommendation": "KEEP_OPEN",
+      "next_step": "Retain this distinct law as an optional stress/negative diagnostic. Both complete recipes fail the stronger distribution gate; the historical PASS remains preserved and is not a fresh density pass. This 3/5 question is below the authorized top-tier merge cutoff; current API and CI also need a scoped port.",
+      "provenance": [
+        "NON_IMAGE_QUALITY.md",
+        "canonical-selection.json",
+        "catalog.json",
+        "failure-diagnosis.json",
+        "improvements.json",
+        "vector-quality-controls.json"
+      ],
+      "media": [
+        "pr56-adapted.gif"
+      ],
+      "remote_checks_at_inventory": [
+        {
+          "name": "CPU / Python 3.10",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35861788172/job/107183516924"
+        },
+        {
+          "name": "CPU / Python 3.11",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35861788172/job/107183516986"
+        },
+        {
+          "name": "CPU / Python 3.12",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35861788172/job/107183516660"
+        },
+        {
+          "name": "Build release distributions",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35861788172/job/107184469810"
+        }
+      ],
+      "merge_state_at_inventory": "UNKNOWN",
+      "current_head_sha": "ab3ef08734054108d64571cccbcf39273aff6e59"
+    },
+    {
+      "pr": 57,
+      "title": "Break: published absolute lengths fail boomerang-wide; MLP control passes",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/57",
+      "catalog_ids": [
+        "pr57-adapted"
+      ],
+      "original_quality_tiers": [
+        3
+      ],
+      "followup_quality_tiers": [
+        3
+      ],
+      "reviewed_head_sha": "e46d6beccfd8b8ddfcc5e1cff613a5fd87c32aa1",
+      "base_branch": "particle-finetune/base",
+      "is_draft": false,
+      "scientific_question": "Can three boomerang islands at (-16,8),(0,16),(16,-2), local sigma 1, retain equal mass and width in a skewed sparse geometry?",
+      "scientific_result": "FAIL / PASS (archived compatibility replay; current KA2 not qualified); FAIL / FAIL (stronger retained-cloud distribution gate)",
+      "reason_to_keep": "Skewed three-mode boomerang changes the target law.",
+      "recommendation": "KEEP_OPEN",
+      "next_step": "Retain this distinct law as an optional stress/negative diagnostic. Both complete recipes fail the stronger distribution gate; the historical PASS remains preserved and is not a fresh density pass. This 3/5 question is below the authorized top-tier merge cutoff; current API and CI also need a scoped port.",
+      "provenance": [
+        "NON_IMAGE_QUALITY.md",
+        "canonical-selection.json",
+        "catalog.json",
+        "failure-diagnosis.json",
+        "improvements.json",
+        "vector-quality-controls.json"
+      ],
+      "media": [
+        "pr57-adapted.gif"
+      ],
+      "remote_checks_at_inventory": [
+        {
+          "name": "CPU / Python 3.10",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35867177153/job/107201637398"
+        },
+        {
+          "name": "CPU / Python 3.11",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35867177153/job/107201636400"
+        },
+        {
+          "name": "CPU / Python 3.12",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35867177153/job/107201636895"
+        },
+        {
+          "name": "Build release distributions",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35867177153/job/107202736560"
+        }
+      ],
+      "merge_state_at_inventory": "UNKNOWN",
+      "current_head_sha": "e46d6beccfd8b8ddfcc5e1cff613a5fd87c32aa1"
+    },
+    {
+      "pr": 58,
+      "title": "Break: published transpose12 fails img_intensity2; residual16 control passes",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/58",
+      "catalog_ids": [
+        "pr58"
+      ],
+      "original_quality_tiers": [
+        3
+      ],
+      "followup_quality_tiers": [
+        3
+      ],
+      "reviewed_head_sha": "7588abf156d747723f81dca722c5ce114f96d76b",
+      "base_branch": "particle-finetune/base",
+      "is_draft": false,
+      "scientific_question": "Shipped intensity2 data reused as an architecture counterexample; not an independent new problem.",
+      "scientific_result": "FAIL/PASS",
+      "reason_to_keep": "Same shipped two-intensity patch law; retain the pinned transpose12/residual16 architecture contrast as a linked control, not a new data family.",
+      "recommendation": "KEEP_OPEN",
+      "next_step": "Retain in the audit as a narrowly labelled optional image regression. It is below the authorized original 4/5\u20135/5 merge cutoff; isolate/rebase only its test sources onto develop before any future eligibility review.",
+      "provenance": "image-quality-v2.json",
+      "media": [
+        "pr58.gif"
+      ],
+      "remote_checks_at_inventory": [
+        {
+          "name": "CPU / Python 3.10",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35872504170/job/107219927688"
+        },
+        {
+          "name": "CPU / Python 3.11",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35872504170/job/107219927577"
+        },
+        {
+          "name": "CPU / Python 3.12",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35872504170/job/107219927583"
+        },
+        {
+          "name": "Build release distributions",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35872504170/job/107221091411"
+        }
+      ],
+      "merge_state_at_inventory": "UNKNOWN",
+      "current_head_sha": "7588abf156d747723f81dca722c5ce114f96d76b"
+    },
+    {
+      "pr": 59,
+      "title": "Break: published transpose12 fails soft_ring2; residual16 control passes",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/59",
+      "catalog_ids": [
+        "pr59"
+      ],
+      "original_quality_tiers": [
+        3
+      ],
+      "followup_quality_tiers": [
+        3
+      ],
+      "reviewed_head_sha": "a256c0aa559312bb91f1032444bff7a04e38dae7",
+      "base_branch": "particle-finetune/base",
+      "is_draft": false,
+      "scientific_question": "Fixed soft radial/ring templates; not a continuous stochastic shape family.",
+      "scientific_result": "FAIL/PASS",
+      "reason_to_keep": "Distinct fixed soft radial/ring profiles test support and smooth intensity-profile fidelity.",
+      "recommendation": "KEEP_OPEN",
+      "next_step": "Retain in the audit as a narrowly labelled optional image regression. It is below the authorized original 4/5\u20135/5 merge cutoff; isolate/rebase only its test sources onto develop before any future eligibility review.",
+      "provenance": "image-quality-v2.json",
+      "media": [
+        "pr59.gif"
+      ],
+      "remote_checks_at_inventory": [
+        {
+          "name": "CPU / Python 3.10",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35880501130/job/107247400987"
+        },
+        {
+          "name": "CPU / Python 3.11",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35880501130/job/107247401334"
+        },
+        {
+          "name": "CPU / Python 3.12",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35880501130/job/107247401779"
+        },
+        {
+          "name": "Build release distributions",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35880501130/job/107248672939"
+        }
+      ],
+      "merge_state_at_inventory": "UNKNOWN",
+      "current_head_sha": "a256c0aa559312bb91f1032444bff7a04e38dae7"
+    },
+    {
+      "pr": 62,
+      "title": "break: img_diag_ramp2 \u2014 published transpose12 FAIL / residual16 PASS",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/62",
+      "catalog_ids": [
+        "pr62"
+      ],
+      "original_quality_tiers": [
+        3
+      ],
+      "followup_quality_tiers": [
+        3
+      ],
+      "reviewed_head_sha": "df3a7410bfbaf70d972d21cec5ca508204eb95ad",
+      "base_branch": "particle-finetune/base",
+      "is_draft": false,
+      "scientific_question": "Fixed diagonal intensity ramps; not arbitrary image-algebra operations.",
+      "scientific_result": "FAIL/PASS",
+      "reason_to_keep": "Distinct fixed diagonal ramps test intensity direction/profile fidelity without an image-algebra generalization claim.",
+      "recommendation": "KEEP_OPEN",
+      "next_step": "Retain in the audit as a narrowly labelled optional image regression. It is below the authorized original 4/5\u20135/5 merge cutoff; isolate/rebase only its test sources onto develop before any future eligibility review.",
+      "provenance": "image-quality-v2.json",
+      "media": [
+        "pr62.gif"
+      ],
+      "remote_checks_at_inventory": [
+        {
+          "name": "CPU / Python 3.10",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35892736072/job/107288955700"
+        },
+        {
+          "name": "CPU / Python 3.11",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35892736072/job/107288956131"
+        },
+        {
+          "name": "CPU / Python 3.12",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35892736072/job/107288956117"
+        },
+        {
+          "name": "Build release distributions",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35892736072/job/107290004710"
+        }
+      ],
+      "merge_state_at_inventory": "UNKNOWN",
+      "current_head_sha": "df3a7410bfbaf70d972d21cec5ca508204eb95ad"
+    },
+    {
+      "pr": 64,
+      "title": "break: img_vh_bars2 \u2014 published transpose12 FAIL / residual16 PASS",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/64",
+      "catalog_ids": [
+        "pr64"
+      ],
+      "original_quality_tiers": [
+        3
+      ],
+      "followup_quality_tiers": [
+        3
+      ],
+      "reviewed_head_sha": "39a2534ac7b0bafebb182523b4aa435df315f52a",
+      "base_branch": "particle-finetune/base",
+      "is_draft": false,
+      "scientific_question": "Fixed vertical/horizontal bars; same orientation-coverage question as the shipped stripes family.",
+      "scientific_result": "FAIL/FAIL",
+      "reason_to_keep": "Two separated horizontal/vertical bars at intensity 0.9 differ exactly from the shipped single central stripe at intensity 1.0; retain this double-bar spatial-frequency regression.",
+      "recommendation": "KEEP_OPEN",
+      "next_step": "Retain in the audit as a narrowly labelled optional image regression. It is below the authorized original 4/5\u20135/5 merge cutoff; isolate/rebase only its test sources onto develop before any future eligibility review. Preserve the failed learned result; a causal optimizer diagnosis needs new states/factor-isolated evidence, not a weaker gate or another unchanged rerun.",
+      "provenance": "image-quality-v2.json",
+      "media": [
+        "pr64.gif"
+      ],
+      "remote_checks_at_inventory": [
+        {
+          "name": "CPU / Python 3.10",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35901002687/job/107316896427"
+        },
+        {
+          "name": "CPU / Python 3.11",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35901002687/job/107316896130"
+        },
+        {
+          "name": "CPU / Python 3.12",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35901002687/job/107316896364"
+        },
+        {
+          "name": "Build release distributions",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35901002687/job/107317955335"
+        }
+      ],
+      "merge_state_at_inventory": "UNKNOWN",
+      "current_head_sha": "39a2534ac7b0bafebb182523b4aa435df315f52a"
+    },
+    {
+      "pr": 66,
+      "title": "break: img_fg_bg_invert2 \u2014 published transpose12 FAIL / residual16 PASS",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/66",
+      "catalog_ids": [
+        "pr66"
+      ],
+      "original_quality_tiers": [
+        3
+      ],
+      "followup_quality_tiers": [
+        3
+      ],
+      "reviewed_head_sha": "c8f5e6bbf703f48dadbeb1403bad799ab9568f3c",
+      "base_branch": "particle-finetune/base",
+      "is_draft": false,
+      "scientific_question": "Fixed foreground/background intensity inversions; not conditional image inversion.",
+      "scientific_result": "FAIL/FAIL",
+      "reason_to_keep": "Distinct foreground/background intensity inversions test both photometric modes and balanced mass; conditional inversion remains untested.",
+      "recommendation": "KEEP_OPEN",
+      "next_step": "Retain in the audit as a narrowly labelled optional image regression. It is below the authorized original 4/5\u20135/5 merge cutoff; isolate/rebase only its test sources onto develop before any future eligibility review. Preserve the failed learned result; a causal optimizer diagnosis needs new states/factor-isolated evidence, not a weaker gate or another unchanged rerun.",
+      "provenance": "image-quality-v2.json",
+      "media": [
+        "pr66.gif"
+      ],
+      "remote_checks_at_inventory": [
+        {
+          "name": "CPU / Python 3.10",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35922046405/job/107388124907"
+        },
+        {
+          "name": "CPU / Python 3.11",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35922046405/job/107388124596"
+        },
+        {
+          "name": "CPU / Python 3.12",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35922046405/job/107388124921"
+        },
+        {
+          "name": "Build release distributions",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35922046405/job/107388910008"
+        }
+      ],
+      "merge_state_at_inventory": "UNKNOWN",
+      "current_head_sha": "c8f5e6bbf703f48dadbeb1403bad799ab9568f3c"
+    },
+    {
+      "pr": 67,
+      "title": "break: img_radial_wedge2 \u2014 published transpose12 FAIL / residual16 PASS",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/67",
+      "catalog_ids": [
+        "pr67"
+      ],
+      "original_quality_tiers": [
+        3
+      ],
+      "followup_quality_tiers": [
+        3
+      ],
+      "reviewed_head_sha": "aedb87b6148feec4d7c3dd8a69f3d6919b932628",
+      "base_branch": "particle-finetune/base",
+      "is_draft": false,
+      "scientific_question": "Fixed radial/wedge patterns; not a segmentation or reconstruction task.",
+      "scientific_result": "FAIL/PASS",
+      "reason_to_keep": "Distinct radial/wedge profiles test support geometry and intensity fidelity; this is an unconditional template sampler.",
+      "recommendation": "KEEP_OPEN",
+      "next_step": "Retain in the audit as a narrowly labelled optional image regression. It is below the authorized original 4/5\u20135/5 merge cutoff; isolate/rebase only its test sources onto develop before any future eligibility review.",
+      "provenance": "image-quality-v2.json",
+      "media": [
+        "pr67.gif"
+      ],
+      "remote_checks_at_inventory": [
+        {
+          "name": "CPU / Python 3.10",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35925177959/job/107398435097"
+        },
+        {
+          "name": "CPU / Python 3.11",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35925177959/job/107398434970"
+        },
+        {
+          "name": "CPU / Python 3.12",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35925177959/job/107398434745"
+        },
+        {
+          "name": "Build release distributions",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35925177959/job/107399271222"
+        }
+      ],
+      "merge_state_at_inventory": "UNKNOWN",
+      "current_head_sha": "aedb87b6148feec4d7c3dd8a69f3d6919b932628"
+    },
+    {
+      "pr": 68,
+      "title": "break: img_T_junction2 \u2014 published transpose12 FAIL / residual16 PASS",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/68",
+      "catalog_ids": [
+        "pr68"
+      ],
+      "original_quality_tiers": [
+        3
+      ],
+      "followup_quality_tiers": [
+        3
+      ],
+      "reviewed_head_sha": "9a1b085e5a928ca7adecd3946aee867fd3fc2f28",
+      "base_branch": "particle-finetune/base",
+      "is_draft": false,
+      "scientific_question": "Fixed T-junction patterns; not occlusion reasoning.",
+      "scientific_result": "FAIL/FAIL",
+      "reason_to_keep": "Distinct T-junction pixel layouts test local layout fidelity and balanced mass; an independent occlusion oracle is absent.",
+      "recommendation": "KEEP_OPEN",
+      "next_step": "Retain in the audit as a narrowly labelled optional image regression. It is below the authorized original 4/5\u20135/5 merge cutoff; isolate/rebase only its test sources onto develop before any future eligibility review. Preserve the failed learned result; a causal optimizer diagnosis needs new states/factor-isolated evidence, not a weaker gate or another unchanged rerun.",
+      "provenance": "image-quality-v2.json",
+      "media": [
+        "pr68.gif"
+      ],
+      "remote_checks_at_inventory": [
+        {
+          "name": "CPU / Python 3.10",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35930692413/job/107416269818"
+        },
+        {
+          "name": "CPU / Python 3.11",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35930692413/job/107416270192"
+        },
+        {
+          "name": "CPU / Python 3.12",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35930692413/job/107416270040"
+        },
+        {
+          "name": "Build release distributions",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35930692413/job/107417143161"
+        }
+      ],
+      "merge_state_at_inventory": "UNKNOWN",
+      "current_head_sha": "9a1b085e5a928ca7adecd3946aee867fd3fc2f28"
+    },
+    {
+      "pr": 69,
+      "title": "break: smile_frown2 transpose12 FAIL / residual16 PASS",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/69",
+      "catalog_ids": [
+        "pr69"
+      ],
+      "original_quality_tiers": [
+        3
+      ],
+      "followup_quality_tiers": [
+        3
+      ],
+      "reviewed_head_sha": "178e76a87a9587688424a57f2b11db82d6dbeee8",
+      "base_branch": "particle-finetune/base",
+      "is_draft": false,
+      "scientific_question": "Fixed smile/frown arcs; not emotion classification or facial-image fidelity.",
+      "scientific_result": "FAIL/PASS",
+      "reason_to_keep": "Distinct smile/frown arc templates test opposing arc-layout fidelity; no emotion-recognition claim.",
+      "recommendation": "KEEP_OPEN",
+      "next_step": "Retain in the audit as a narrowly labelled optional image regression. It is below the authorized original 4/5\u20135/5 merge cutoff; isolate/rebase only its test sources onto develop before any future eligibility review.",
+      "provenance": "image-quality-v2.json",
+      "media": [
+        "pr69.gif"
+      ],
+      "remote_checks_at_inventory": [
+        {
+          "name": "CPU / Python 3.10",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35932430512/job/107421847641"
+        },
+        {
+          "name": "CPU / Python 3.11",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35932430512/job/107421847616"
+        },
+        {
+          "name": "CPU / Python 3.12",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35932430512/job/107421847449"
+        },
+        {
+          "name": "Build release distributions",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35932430512/job/107422563116"
+        }
+      ],
+      "merge_state_at_inventory": "UNKNOWN",
+      "current_head_sha": "178e76a87a9587688424a57f2b11db82d6dbeee8"
+    },
+    {
+      "pr": 70,
+      "title": "break: img_ramp_corner2 transpose12 FAIL vs residual16 PASS",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/70",
+      "catalog_ids": [
+        "pr70"
+      ],
+      "original_quality_tiers": [
+        3
+      ],
+      "followup_quality_tiers": [
+        3
+      ],
+      "reviewed_head_sha": "4e80be439da39c6192ddc842dddc1aa99fffc5d6",
+      "base_branch": "particle-finetune/base",
+      "is_draft": false,
+      "scientific_question": "Fixed corner-ramp intensity templates; not a learned coordinate system.",
+      "scientific_result": "PASS/PASS",
+      "reason_to_keep": "Distinct corner-ramp profiles remain useful positive architecture regressions; both current-host arms pass, so refresh the obsolete FAIL/PASS title.",
+      "recommendation": "KEEP_OPEN",
+      "next_step": "Retain in the audit as a narrowly labelled optional image regression. It is below the authorized original 4/5\u20135/5 merge cutoff; isolate/rebase only its test sources onto develop before any future eligibility review. Refresh the counterexample claim: both retained arms pass.",
+      "provenance": "image-quality-v2.json",
+      "media": [
+        "pr70.gif"
+      ],
+      "remote_checks_at_inventory": [
+        {
+          "name": "CPU / Python 3.10",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35934623552/job/107428767471"
+        },
+        {
+          "name": "CPU / Python 3.11",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35934623552/job/107428767409"
+        },
+        {
+          "name": "CPU / Python 3.12",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35934623552/job/107428767171"
+        },
+        {
+          "name": "Build release distributions",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35934623552/job/107429469454"
+        }
+      ],
+      "merge_state_at_inventory": "UNKNOWN",
+      "current_head_sha": "4e80be439da39c6192ddc842dddc1aa99fffc5d6"
+    },
+    {
+      "pr": 71,
+      "title": "break: img_dof_center_edge2 transpose12 FAIL vs residual16 PASS",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/71",
+      "catalog_ids": [
+        "pr71"
+      ],
+      "original_quality_tiers": [
+        3
+      ],
+      "followup_quality_tiers": [
+        3
+      ],
+      "reviewed_head_sha": "5c09a04291b971205f348b81fc5c5fff91a67ad3",
+      "base_branch": "particle-finetune/base",
+      "is_draft": false,
+      "scientific_question": "Fixed center/edge focus profiles; not depth estimation or optics reconstruction.",
+      "scientific_result": "FAIL/PASS",
+      "reason_to_keep": "Distinct center/edge focus profiles test local intensity distribution; they do not establish depth or optics reconstruction.",
+      "recommendation": "KEEP_OPEN",
+      "next_step": "Retain in the audit as a narrowly labelled optional image regression. It is below the authorized original 4/5\u20135/5 merge cutoff; isolate/rebase only its test sources onto develop before any future eligibility review.",
+      "provenance": "image-quality-v2.json",
+      "media": [
+        "pr71.gif"
+      ],
+      "remote_checks_at_inventory": [
+        {
+          "name": "CPU / Python 3.10",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35936536042/job/107434711255"
+        },
+        {
+          "name": "CPU / Python 3.11",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35936536042/job/107434711467"
+        },
+        {
+          "name": "CPU / Python 3.12",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35936536042/job/107434711532"
+        },
+        {
+          "name": "Build release distributions",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35936536042/job/107435425125"
+        }
+      ],
+      "merge_state_at_inventory": "UNKNOWN",
+      "current_head_sha": "5c09a04291b971205f348b81fc5c5fff91a67ad3"
+    },
+    {
+      "pr": 72,
+      "title": "break: img_swirl_cw2 \u2014 transpose12 FAIL / residual16 PASS (field chirality)",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/72",
+      "catalog_ids": [
+        "pr72"
+      ],
+      "original_quality_tiers": [
+        3
+      ],
+      "followup_quality_tiers": [
+        3
+      ],
+      "reviewed_head_sha": "39f2888d9c19b36e4f638d0204af64ba3b6ee5d5",
+      "base_branch": "particle-finetune/base",
+      "is_draft": false,
+      "scientific_question": "Fixed opposite-handed swirl patterns; not rotation dynamics or optical flow.",
+      "scientific_result": "FAIL/PASS",
+      "reason_to_keep": "Distinct opposite-handed fixed swirl profiles test mirrored pixel-layout fidelity; no rotation dynamics or optical-flow inference.",
+      "recommendation": "KEEP_OPEN",
+      "next_step": "Retain in the audit as a narrowly labelled optional image regression. It is below the authorized original 4/5\u20135/5 merge cutoff; isolate/rebase only its test sources onto develop before any future eligibility review.",
+      "provenance": "image-quality-v2.json",
+      "media": [
+        "pr72.gif"
+      ],
+      "remote_checks_at_inventory": [
+        {
+          "name": "CPU / Python 3.10",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35938608118/job/107441247666"
+        },
+        {
+          "name": "CPU / Python 3.11",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35938608118/job/107441247577"
+        },
+        {
+          "name": "CPU / Python 3.12",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35938608118/job/107441247747"
+        },
+        {
+          "name": "Build release distributions",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35938608118/job/107441919719"
+        }
+      ],
+      "merge_state_at_inventory": "UNKNOWN",
+      "current_head_sha": "39f2888d9c19b36e4f638d0204af64ba3b6ee5d5"
+    },
+    {
+      "pr": 73,
+      "title": "break: img_L_chirality2 \u2014 transpose12 FAIL / residual16 PASS (discrete letter chirality)",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/73",
+      "catalog_ids": [
+        "pr73"
+      ],
+      "original_quality_tiers": [
+        3
+      ],
+      "followup_quality_tiers": [
+        3
+      ],
+      "reviewed_head_sha": "dbec10a11a21d6367834370298bb8a3de4a7d786",
+      "base_branch": "particle-finetune/base",
+      "is_draft": false,
+      "scientific_question": "Fixed mirrored L templates; not chirality generalization.",
+      "scientific_result": "FAIL/PASS",
+      "reason_to_keep": "Distinct mirrored fixed L glyphs test spatial handedness at template resolution; no held-out font or chirality-generalization oracle.",
+      "recommendation": "KEEP_OPEN",
+      "next_step": "Retain in the audit as a narrowly labelled optional image regression. It is below the authorized original 4/5\u20135/5 merge cutoff; isolate/rebase only its test sources onto develop before any future eligibility review.",
+      "provenance": "image-quality-v2.json",
+      "media": [
+        "pr73.gif"
+      ],
+      "remote_checks_at_inventory": [
+        {
+          "name": "CPU / Python 3.10",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35941691560/job/107450754595"
+        },
+        {
+          "name": "CPU / Python 3.11",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35941691560/job/107450754793"
+        },
+        {
+          "name": "CPU / Python 3.12",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35941691560/job/107450754721"
+        },
+        {
+          "name": "Build release distributions",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35941691560/job/107451366722"
+        }
+      ],
+      "merge_state_at_inventory": "UNKNOWN",
+      "current_head_sha": "dbec10a11a21d6367834370298bb8a3de4a7d786"
+    },
+    {
+      "pr": 74,
+      "title": "break: img_dots_count23 \u2014 transpose12 FAIL / residual16 PASS (discrete cardinality)",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/74",
+      "catalog_ids": [
+        "pr74"
+      ],
+      "original_quality_tiers": [
+        3
+      ],
+      "followup_quality_tiers": [
+        3
+      ],
+      "reviewed_head_sha": "e7e54a63e0c6a5cb62f4fcab86e2e9239bea3619",
+      "base_branch": "particle-finetune/base",
+      "is_draft": false,
+      "scientific_question": "Fixed two-dot/three-dot templates; not counting arbitrary objects, positions or cardinalities.",
+      "scientific_result": "FAIL/PASS",
+      "reason_to_keep": "Distinct fixed two-dot/three-dot supports test retention of both pixel configurations; arbitrary-object counting is absent.",
+      "recommendation": "KEEP_OPEN",
+      "next_step": "Retain in the audit as a narrowly labelled optional image regression. It is below the authorized original 4/5\u20135/5 merge cutoff; isolate/rebase only its test sources onto develop before any future eligibility review.",
+      "provenance": "image-quality-v2.json",
+      "media": [
+        "pr74.gif"
+      ],
+      "remote_checks_at_inventory": [
+        {
+          "name": "CPU / Python 3.10",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35944055872/job/107457990639"
+        },
+        {
+          "name": "CPU / Python 3.11",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35944055872/job/107457990392"
+        },
+        {
+          "name": "CPU / Python 3.12",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35944055872/job/107457990626"
+        },
+        {
+          "name": "Build release distributions",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35944055872/job/107458619706"
+        }
+      ],
+      "merge_state_at_inventory": "UNKNOWN",
+      "current_head_sha": "e7e54a63e0c6a5cb62f4fcab86e2e9239bea3619"
+    },
+    {
+      "pr": 75,
+      "title": "break: img_stairs_asc_desc2 transpose12 FAIL / residual16 PASS",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/75",
+      "catalog_ids": [
+        "pr75"
+      ],
+      "original_quality_tiers": [
+        3
+      ],
+      "followup_quality_tiers": [
+        3
+      ],
+      "reviewed_head_sha": "0a9488d599b064a5e20ccce9344ad5a6a0a0a80b",
+      "base_branch": "particle-finetune/base",
+      "is_draft": false,
+      "scientific_question": "Fixed ascending/descending stair templates; not sequence reasoning.",
+      "scientific_result": "FAIL/FAIL",
+      "reason_to_keep": "Distinct ascending/descending stair supports test directional layout; the stronger residual arm has only four terminal passing observations.",
+      "recommendation": "KEEP_OPEN",
+      "next_step": "Retain in the audit as a narrowly labelled optional image regression. It is below the authorized original 4/5\u20135/5 merge cutoff; isolate/rebase only its test sources onto develop before any future eligibility review. Preserve the failed learned result; a causal optimizer diagnosis needs new states/factor-isolated evidence, not a weaker gate or another unchanged rerun.",
+      "provenance": "image-quality-v2.json",
+      "media": [
+        "pr75.gif"
+      ],
+      "remote_checks_at_inventory": [
+        {
+          "name": "CPU / Python 3.10",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35945508323/job/107462426248"
+        },
+        {
+          "name": "CPU / Python 3.11",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35945508323/job/107462426348"
+        },
+        {
+          "name": "CPU / Python 3.12",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35945508323/job/107462425987"
+        },
+        {
+          "name": "Build release distributions",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35945508323/job/107463057056"
+        }
+      ],
+      "merge_state_at_inventory": "UNKNOWN",
+      "current_head_sha": "0a9488d599b064a5e20ccce9344ad5a6a0a0a80b"
+    },
+    {
+      "pr": 76,
+      "title": "break: img_b_d2 transpose12 FAIL vs residual16 PASS (letter b/d chirality)",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/76",
+      "catalog_ids": [
+        "pr76"
+      ],
+      "original_quality_tiers": [
+        3
+      ],
+      "followup_quality_tiers": [
+        3
+      ],
+      "reviewed_head_sha": "eb2cdd4e13841399c67167bbc5d1baf663e8796a",
+      "base_branch": "particle-finetune/base",
+      "is_draft": false,
+      "scientific_question": "Fixed mirrored b/d glyph templates; not general OCR or a dedicated chirality score.",
+      "scientific_result": "PASS/PASS",
+      "reason_to_keep": "Distinct mirrored b/d glyphs remain useful positive pixel regressions; both current-host arms pass, so refresh the obsolete FAIL/PASS title.",
+      "recommendation": "KEEP_OPEN",
+      "next_step": "Retain in the audit as a narrowly labelled optional image regression. It is below the authorized original 4/5\u20135/5 merge cutoff; isolate/rebase only its test sources onto develop before any future eligibility review. Refresh the counterexample claim: both retained arms pass.",
+      "provenance": "image-quality-v2.json",
+      "media": [
+        "pr76.gif"
+      ],
+      "remote_checks_at_inventory": [
+        {
+          "name": "CPU / Python 3.10",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35947362687/job/107468196861"
+        },
+        {
+          "name": "CPU / Python 3.11",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35947362687/job/107468196668"
+        },
+        {
+          "name": "CPU / Python 3.12",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35947362687/job/107468196862"
+        },
+        {
+          "name": "Build release distributions",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35947362687/job/107468792826"
+        }
+      ],
+      "merge_state_at_inventory": "UNKNOWN",
+      "current_head_sha": "eb2cdd4e13841399c67167bbc5d1baf663e8796a"
+    },
+    {
+      "pr": 77,
+      "title": "break: img_pyramid_valley2 transpose12 FAIL / residual16 PASS (radial intensity polarity)",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/77",
+      "catalog_ids": [
+        "pr77"
+      ],
+      "original_quality_tiers": [
+        3
+      ],
+      "followup_quality_tiers": [
+        3
+      ],
+      "reviewed_head_sha": "33bb9587362dd0a2a99ca1cd20f9b0963fe7f118",
+      "base_branch": "particle-finetune/base",
+      "is_draft": false,
+      "scientific_question": "Fixed bright-center versus dark-center radial intensity patterns; not shape-from-shading.",
+      "scientific_result": "FAIL/PASS",
+      "reason_to_keep": "Distinct bright-center/dark-center radial profiles test intensity polarity; shape-from-shading remains untested.",
+      "recommendation": "KEEP_OPEN",
+      "next_step": "Retain in the audit as a narrowly labelled optional image regression. It is below the authorized original 4/5\u20135/5 merge cutoff; isolate/rebase only its test sources onto develop before any future eligibility review.",
+      "provenance": "image-quality-v2.json",
+      "media": [
+        "pr77.gif"
+      ],
+      "remote_checks_at_inventory": [
+        {
+          "name": "CPU / Python 3.10",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35949086695/job/107473504686"
+        },
+        {
+          "name": "CPU / Python 3.11",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35949086695/job/107473504427"
+        },
+        {
+          "name": "CPU / Python 3.12",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35949086695/job/107473504669"
+        },
+        {
+          "name": "Build release distributions",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35949086695/job/107474050901"
+        }
+      ],
+      "merge_state_at_inventory": "UNSTABLE",
+      "current_head_sha": "33bb9587362dd0a2a99ca1cd20f9b0963fe7f118"
+    },
+    {
+      "pr": 78,
+      "title": "break: img_letterbox_pillar2 transpose12 FAIL / residual16 PASS",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/78",
+      "catalog_ids": [
+        "pr78"
+      ],
+      "original_quality_tiers": [
+        3
+      ],
+      "followup_quality_tiers": [
+        3
+      ],
+      "reviewed_head_sha": "845eb01bf1c7a8c65daf20f9606b325478f493ff",
+      "base_branch": "particle-finetune/base",
+      "is_draft": false,
+      "scientific_question": "Fixed letterbox versus pillarbox border placement; not aspect-ratio inference from arbitrary images.",
+      "scientific_result": "FAIL/PASS",
+      "reason_to_keep": "Distinct letterbox/pillarbox border locations test orientation and border support; no arbitrary-image aspect-ratio inference.",
+      "recommendation": "KEEP_OPEN",
+      "next_step": "Retain in the audit as a narrowly labelled optional image regression. It is below the authorized original 4/5\u20135/5 merge cutoff; isolate/rebase only its test sources onto develop before any future eligibility review.",
+      "provenance": "image-quality-v2.json",
+      "media": [
+        "pr78.gif"
+      ],
+      "remote_checks_at_inventory": [
+        {
+          "name": "CPU / Python 3.10",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35950515938/job/107477848545"
+        },
+        {
+          "name": "CPU / Python 3.11",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35950515938/job/107477848528"
+        },
+        {
+          "name": "CPU / Python 3.12",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35950515938/job/107477848309"
+        },
+        {
+          "name": "Build release distributions",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35950515938/job/107478463827"
+        }
+      ],
+      "merge_state_at_inventory": "UNSTABLE",
+      "current_head_sha": "845eb01bf1c7a8c65daf20f9606b325478f493ff"
+    },
+    {
+      "pr": 79,
+      "title": "break: img_finder_diag2 transpose12 FAIL / residual16 PASS",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/79",
+      "catalog_ids": [
+        "pr79"
+      ],
+      "original_quality_tiers": [
+        3
+      ],
+      "followup_quality_tiers": [
+        3
+      ],
+      "reviewed_head_sha": "f9ae8f512b3274f21e5a3c3911baf44c9c8b722e",
+      "base_branch": "particle-finetune/base",
+      "is_draft": false,
+      "scientific_question": "Two fixed diagonal finder layouts; not QR recognition or error correction.",
+      "scientific_result": "FAIL/FAIL",
+      "reason_to_keep": "Distinct diagonal finder layouts test sparse spatial-support fidelity; QR validity/decoding and error correction remain untested.",
+      "recommendation": "KEEP_OPEN",
+      "next_step": "Retain in the audit as a narrowly labelled optional image regression. It is below the authorized original 4/5\u20135/5 merge cutoff; isolate/rebase only its test sources onto develop before any future eligibility review. Preserve the failed learned result; a causal optimizer diagnosis needs new states/factor-isolated evidence, not a weaker gate or another unchanged rerun.",
+      "provenance": "image-quality-v2.json",
+      "media": [
+        "pr79.gif"
+      ],
+      "remote_checks_at_inventory": [
+        {
+          "name": "CPU / Python 3.10",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35952169816/job/107482829853"
+        },
+        {
+          "name": "CPU / Python 3.11",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35952169816/job/107482829728"
+        },
+        {
+          "name": "CPU / Python 3.12",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35952169816/job/107482829545"
+        },
+        {
+          "name": "Build release distributions",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35952169816/job/107483391402"
+        }
+      ],
+      "merge_state_at_inventory": "UNSTABLE",
+      "current_head_sha": "f9ae8f512b3274f21e5a3c3911baf44c9c8b722e"
+    },
+    {
+      "pr": 80,
+      "title": "break: img_traffic_stack_rg2 transpose12 FAIL / residual16 PASS",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/80",
+      "catalog_ids": [
+        "pr80"
+      ],
+      "original_quality_tiers": [
+        3
+      ],
+      "followup_quality_tiers": [
+        3
+      ],
+      "reviewed_head_sha": "228899a9678f24b7f6ab4dfe810d07cdeee612ec",
+      "base_branch": "particle-finetune/base",
+      "is_draft": false,
+      "scientific_question": "Two fixed grayscale traffic-stack patterns; not red/green color semantics or traffic rules.",
+      "scientific_result": "FAIL/PASS",
+      "reason_to_keep": "Distinct grayscale traffic-stack layouts test vertical placement/profile fidelity; red/green color semantics and traffic rules remain untested.",
+      "recommendation": "KEEP_OPEN",
+      "next_step": "Retain in the audit as a narrowly labelled optional image regression. It is below the authorized original 4/5\u20135/5 merge cutoff; isolate/rebase only its test sources onto develop before any future eligibility review.",
+      "provenance": "image-quality-v2.json",
+      "media": [
+        "pr80.gif"
+      ],
+      "remote_checks_at_inventory": [
+        {
+          "name": "CPU / Python 3.10",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35953115944/job/107485685152"
+        },
+        {
+          "name": "CPU / Python 3.11",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35953115944/job/107485685262"
+        },
+        {
+          "name": "CPU / Python 3.12",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35953115944/job/107485685517"
+        },
+        {
+          "name": "Build release distributions",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35953115944/job/107486233287"
+        }
+      ],
+      "merge_state_at_inventory": "UNSTABLE",
+      "current_head_sha": "228899a9678f24b7f6ab4dfe810d07cdeee612ec"
+    },
+    {
+      "pr": 106,
+      "title": "break: img_play_pause2 transpose12 FAIL / residual16 PASS",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/106",
+      "catalog_ids": [
+        "pr106"
+      ],
+      "original_quality_tiers": [
+        3
+      ],
+      "followup_quality_tiers": [
+        3
+      ],
+      "reviewed_head_sha": "1bbf42aa2eabe4409100e0f8fc52fcedccd48fbc",
+      "base_branch": "particle-finetune/base",
+      "is_draft": false,
+      "scientific_question": "Fixed play/pause icon templates; not video dynamics or button behavior.",
+      "scientific_result": "FAIL/FAIL",
+      "reason_to_keep": "Distinct play/pause icon layouts test sparse shape/support fidelity; no button behavior or temporal video model.",
+      "recommendation": "KEEP_OPEN",
+      "next_step": "Retain in the audit as a narrowly labelled optional image regression. It is below the authorized original 4/5\u20135/5 merge cutoff; isolate/rebase only its test sources onto develop before any future eligibility review. Preserve the failed learned result; a causal optimizer diagnosis needs new states/factor-isolated evidence, not a weaker gate or another unchanged rerun.",
+      "provenance": "image-quality-v2.json",
+      "media": [
+        "pr106.gif"
+      ],
+      "remote_checks_at_inventory": [
+        {
+          "name": "CPU / Python 3.10",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/36018889829/job/107698398445"
+        },
+        {
+          "name": "CPU / Python 3.11",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/36018889829/job/107698398387"
+        },
+        {
+          "name": "CPU / Python 3.12",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/36018889829/job/107698398472"
+        },
+        {
+          "name": "Build release distributions",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/36018889829/job/107699791683"
+        }
+      ],
+      "merge_state_at_inventory": "UNSTABLE",
+      "current_head_sha": "1bbf42aa2eabe4409100e0f8fc52fcedccd48fbc"
+    },
+    {
+      "pr": 131,
+      "title": "break: img_C_vs_O2 transpose12 FAIL / residual16 PASS (open vs closed topology)",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/131",
+      "catalog_ids": [
+        "pr131"
+      ],
+      "original_quality_tiers": [
+        3
+      ],
+      "followup_quality_tiers": [
+        3
+      ],
+      "reviewed_head_sha": "72b312bc9f479b0203839f8227a3ae9d83bcbdda",
+      "base_branch": "particle-finetune/base",
+      "is_draft": false,
+      "scientific_question": "Fixed open C versus closed O pixel templates; RMSE is not an independent topology oracle.",
+      "scientific_result": "FAIL/PASS",
+      "reason_to_keep": "Distinct open-C/closed-O pixel templates test template fidelity; RMSE neighborhoods are not an independent holes/topology oracle.",
+      "recommendation": "KEEP_OPEN",
+      "next_step": "Retain in the audit as a narrowly labelled optional image regression. It is below the authorized original 4/5\u20135/5 merge cutoff; isolate/rebase only its test sources onto develop before any future eligibility review.",
+      "provenance": "image-quality-v2.json",
+      "media": [
+        "pr131.gif"
+      ],
+      "remote_checks_at_inventory": [],
+      "merge_state_at_inventory": "CLEAN",
+      "current_head_sha": "72b312bc9f479b0203839f8227a3ae9d83bcbdda"
+    },
+    {
+      "pr": 150,
+      "title": "break: img_moire_beat2 transpose12 FAIL / residual16 PASS",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/150",
+      "catalog_ids": [
+        "pr150"
+      ],
+      "original_quality_tiers": [
+        3
+      ],
+      "followup_quality_tiers": [
+        3
+      ],
+      "reviewed_head_sha": "cacf2a0ff1f9a67b5cc17e6311db9c37b23476d7",
+      "base_branch": "particle-finetune/base",
+      "is_draft": false,
+      "scientific_question": "Two fixed moir\u00e9/beat intensity patterns; not recovery of unseen frequencies or phase.",
+      "scientific_result": "FAIL/PASS",
+      "reason_to_keep": "Distinct fixed moire/beat intensity profiles test fine-scale photometric fidelity; held-out frequencies and phase remain untested.",
+      "recommendation": "KEEP_OPEN",
+      "next_step": "Retain in the audit as a narrowly labelled optional image regression. It is below the authorized original 4/5\u20135/5 merge cutoff; isolate/rebase only its test sources onto develop before any future eligibility review.",
+      "provenance": "image-quality-v2.json",
+      "media": [
+        "pr150.gif"
+      ],
+      "remote_checks_at_inventory": [],
+      "merge_state_at_inventory": "CLEAN",
+      "current_head_sha": "cacf2a0ff1f9a67b5cc17e6311db9c37b23476d7"
+    },
+    {
+      "pr": 151,
+      "title": "break: img_hamburger_kebab2 transpose12 FAIL / residual16 PASS",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/151",
+      "catalog_ids": [
+        "pr151"
+      ],
+      "original_quality_tiers": [
+        3
+      ],
+      "followup_quality_tiers": [
+        3
+      ],
+      "reviewed_head_sha": "c094bac493ddfe73edd5ee5a8adb926eaf060b1d",
+      "base_branch": "particle-finetune/base",
+      "is_draft": false,
+      "scientific_question": "Two fixed menu-icon layouts; not UI interaction or semantic object recognition.",
+      "scientific_result": "FAIL/PASS",
+      "reason_to_keep": "Distinct hamburger/kebab menu-icon arrangements test orientation and localized support; no semantic UI-recognition oracle.",
+      "recommendation": "KEEP_OPEN",
+      "next_step": "Retain in the audit as a narrowly labelled optional image regression. It is below the authorized original 4/5\u20135/5 merge cutoff; isolate/rebase only its test sources onto develop before any future eligibility review.",
+      "provenance": "image-quality-v2.json",
+      "media": [
+        "pr151.gif"
+      ],
+      "remote_checks_at_inventory": [],
+      "merge_state_at_inventory": "CLEAN",
+      "current_head_sha": "c094bac493ddfe73edd5ee5a8adb926eaf060b1d"
+    },
+    {
+      "pr": 152,
+      "title": "Break: binary-cluster pairs d24 hierarchical lengthscale trap",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/152",
+      "catalog_ids": [
+        "pr152-adapted"
+      ],
+      "original_quality_tiers": [
+        3
+      ],
+      "followup_quality_tiers": [
+        3
+      ],
+      "reviewed_head_sha": "9bc9638721ebca8c15f8c5828113313844b6b80c",
+      "base_branch": "particle-finetune/base",
+      "is_draft": false,
+      "scientific_question": "Can two tight vertical pairs at x=+/-12,y=+/-2, local sigma 1, retain all four components and width across the 24-unit coarse and 4-unit fine gaps?",
+      "scientific_result": "FAIL / PASS (archived compatibility replay; current KA2 not qualified); FAIL / FAIL (stronger retained-cloud distribution gate)",
+      "reason_to_keep": "Hierarchical fine/coarse separation is a useful distinct stress question.",
+      "recommendation": "KEEP_OPEN",
+      "next_step": "Retain this distinct law as an optional stress/negative diagnostic. Both complete recipes fail the stronger distribution gate; the historical PASS remains preserved and is not a fresh density pass. This 3/5 question is below the authorized top-tier merge cutoff; current API and CI also need a scoped port.",
+      "provenance": [
+        "NON_IMAGE_QUALITY.md",
+        "canonical-selection.json",
+        "catalog.json",
+        "failure-diagnosis.json",
+        "improvements.json",
+        "vector-quality-controls.json"
+      ],
+      "media": [
+        "pr152-adapted.gif"
+      ],
+      "remote_checks_at_inventory": [],
+      "merge_state_at_inventory": "CLEAN",
+      "current_head_sha": "9bc9638721ebca8c15f8c5828113313844b6b80c"
+    },
+    {
+      "pr": 154,
+      "title": "Break: published transpose12 fails chirp_up_down2 (DSP rising vs falling spectrogram); residual16 passes",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/154",
+      "catalog_ids": [
+        "pr154"
+      ],
+      "original_quality_tiers": [
+        3
+      ],
+      "followup_quality_tiers": [
+        3
+      ],
+      "reviewed_head_sha": "56f63d371acc01d16a1a8910d36c179617518c96",
+      "base_branch": "particle-finetune/base",
+      "is_draft": false,
+      "scientific_question": "Two fixed rising/falling spectrogram-like traces; not audio synthesis or frequency generalization.",
+      "scientific_result": "FAIL/FAIL",
+      "reason_to_keep": "Distinct fixed rising/falling spectrogram-like traces test thin trace-layout fidelity; neither retained arm passes, so preserve failure and refresh the claimed passing control.",
+      "recommendation": "KEEP_OPEN",
+      "next_step": "Retain in the audit as a narrowly labelled optional image regression. It is below the authorized original 4/5\u20135/5 merge cutoff; isolate/rebase only its test sources onto develop before any future eligibility review. Preserve the failed learned result; a causal optimizer diagnosis needs new states/factor-isolated evidence, not a weaker gate or another unchanged rerun.",
+      "provenance": "image-quality-v2.json",
+      "media": [
+        "pr154.gif"
+      ],
+      "remote_checks_at_inventory": [],
+      "merge_state_at_inventory": "CLEAN",
+      "current_head_sha": "56f63d371acc01d16a1a8910d36c179617518c96"
+    },
+    {
+      "pr": 159,
+      "title": "Break: published transpose12 fails sonar_echo_near_far2 (A-scope near vs far); residual16 passes",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/159",
+      "catalog_ids": [
+        "pr159"
+      ],
+      "original_quality_tiers": [
+        3
+      ],
+      "followup_quality_tiers": [
+        3
+      ],
+      "reviewed_head_sha": "3673b4f88379db86807eb39281ce66661c1f9ff4",
+      "base_branch": "particle-finetune/base",
+      "is_draft": false,
+      "scientific_question": "Two fixed near/far echo-location templates; not acoustic propagation or range inference.",
+      "scientific_result": "FAIL/PASS",
+      "reason_to_keep": "Distinct fixed near/far echo-location profiles test horizontal trace location; acoustic propagation and range inference remain untested.",
+      "recommendation": "KEEP_OPEN",
+      "next_step": "Retain in the audit as a narrowly labelled optional image regression. It is below the authorized original 4/5\u20135/5 merge cutoff; isolate/rebase only its test sources onto develop before any future eligibility review.",
+      "provenance": "image-quality-v2.json",
+      "media": [
+        "pr159.gif"
+      ],
+      "remote_checks_at_inventory": [],
+      "merge_state_at_inventory": "CLEAN",
+      "current_head_sha": "3673b4f88379db86807eb39281ce66661c1f9ff4"
+    },
+    {
+      "pr": 166,
+      "title": "break: img_barcode_quiet_lr2 transpose12 FAIL / residual16 PASS",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/166",
+      "catalog_ids": [
+        "pr166"
+      ],
+      "original_quality_tiers": [
+        3
+      ],
+      "followup_quality_tiers": [
+        3
+      ],
+      "reviewed_head_sha": "d5075cb3607a42eda9a44c03e0c9ec2e8156258a",
+      "base_branch": "particle-finetune/base",
+      "is_draft": false,
+      "scientific_question": "Two fixed barcode-like templates with opposite quiet-zone placement; not barcode validity or decoding.",
+      "scientific_result": "FAIL/PASS",
+      "reason_to_keep": "Distinct barcode-like stripes with opposite quiet-zone placement test sparse margins/layout; barcode validity/decoding remains untested.",
+      "recommendation": "KEEP_OPEN",
+      "next_step": "Retain in the audit as a narrowly labelled optional image regression. It is below the authorized original 4/5\u20135/5 merge cutoff; isolate/rebase only its test sources onto develop before any future eligibility review.",
+      "provenance": "image-quality-v2.json",
+      "media": [
+        "pr166.gif"
+      ],
+      "remote_checks_at_inventory": [],
+      "merge_state_at_inventory": "CLEAN",
+      "current_head_sha": "d5075cb3607a42eda9a44c03e0c9ec2e8156258a"
+    },
+    {
+      "pr": 170,
+      "title": "break: img_braille_cell_lr2 transpose12 FAIL / residual16 PASS",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/170",
+      "catalog_ids": [
+        "pr170"
+      ],
+      "original_quality_tiers": [
+        3
+      ],
+      "followup_quality_tiers": [
+        3
+      ],
+      "reviewed_head_sha": "54407478b337a904820c35f3304c565019c3a8a4",
+      "base_branch": "particle-finetune/base",
+      "is_draft": false,
+      "scientific_question": "Left-heavy versus right-heavy raised-dot templates; tactile glyph asymmetry, not Braille decoding.",
+      "scientific_result": "FAIL/PASS",
+      "reason_to_keep": "Distinct left-heavy/right-heavy raised-dot-cell templates test sparse asymmetric placement; Braille decoding remains untested.",
+      "recommendation": "KEEP_OPEN",
+      "next_step": "Retain in the audit as a narrowly labelled optional image regression. It is below the authorized original 4/5\u20135/5 merge cutoff; isolate/rebase only its test sources onto develop before any future eligibility review.",
+      "provenance": "image-quality-v2.json",
+      "media": [
+        "pr170.gif"
+      ],
+      "remote_checks_at_inventory": [],
+      "merge_state_at_inventory": "CLEAN",
+      "current_head_sha": "54407478b337a904820c35f3304c565019c3a8a4"
+    },
+    {
+      "pr": 61,
+      "title": "break: sparse_obs2 \u2014 published transpose12 FAIL / residual16 PASS",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/61",
+      "catalog_ids": [
+        "pr61"
+      ],
+      "original_quality_tiers": [
+        2
+      ],
+      "followup_quality_tiers": [
+        2
+      ],
+      "reviewed_head_sha": "50dd63350e7e58c97aac01abc4186165a66aea3c",
+      "base_branch": "particle-finetune/base",
+      "is_draft": false,
+      "scientific_question": "Fixed sparse-observation-like templates; no source-domain input or paired correspondence tests translation.",
+      "scientific_result": "FAIL/PASS",
+      "reason_to_keep": "Distinct opposite-diagonal sparse-patch layouts test localized support and balanced mass; there is no conditional source-domain translation input.",
+      "recommendation": "KEEP_OPEN",
+      "next_step": "Retain in the audit as a narrowly labelled optional image regression. It is below the authorized original 4/5\u20135/5 merge cutoff; isolate/rebase only its test sources onto develop before any future eligibility review. Keep the unconditional-template display name and the explicit missing conditional-input limitation.",
+      "provenance": "image-quality-v2.json",
+      "media": [
+        "pr61.gif"
+      ],
+      "remote_checks_at_inventory": [
+        {
+          "name": "CPU / Python 3.10",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35887428587/job/107271043655"
+        },
+        {
+          "name": "CPU / Python 3.11",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35887428587/job/107271043826"
+        },
+        {
+          "name": "CPU / Python 3.12",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35887428587/job/107271043277"
+        },
+        {
+          "name": "Build release distributions",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35887428587/job/107272181003"
+        }
+      ],
+      "merge_state_at_inventory": "UNKNOWN",
+      "current_head_sha": "50dd63350e7e58c97aac01abc4186165a66aea3c"
+    },
+    {
+      "pr": 63,
+      "title": "break: img_mask_inpaint2 \u2014 published transpose12 FAIL / residual16 PASS",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/63",
+      "catalog_ids": [
+        "pr63"
+      ],
+      "original_quality_tiers": [
+        2
+      ],
+      "followup_quality_tiers": [
+        2
+      ],
+      "reviewed_head_sha": "c7936fcb6215728808f9f77177642c0ab0821b79",
+      "base_branch": "particle-finetune/base",
+      "is_draft": false,
+      "scientific_question": "Fixed templates named mask-inpaint; no observed image or mask enters G, so no conditional inpainting is tested.",
+      "scientific_result": "FAIL/FAIL",
+      "reason_to_keep": "Distinct fixed mask-inpaint-named pixel pair tests bounded support/mass fidelity; no mask or observed image conditions G. The residual arm has only four terminal passing observations.",
+      "recommendation": "KEEP_OPEN",
+      "next_step": "Retain in the audit as a narrowly labelled optional image regression. It is below the authorized original 4/5\u20135/5 merge cutoff; isolate/rebase only its test sources onto develop before any future eligibility review. Keep the unconditional-template display name and the explicit missing conditional-input limitation. Preserve the failed learned result; a causal optimizer diagnosis needs new states/factor-isolated evidence, not a weaker gate or another unchanged rerun.",
+      "provenance": "image-quality-v2.json",
+      "media": [
+        "pr63.gif"
+      ],
+      "remote_checks_at_inventory": [
+        {
+          "name": "CPU / Python 3.10",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35896890830/job/107302945731"
+        },
+        {
+          "name": "CPU / Python 3.11",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35896890830/job/107302945758"
+        },
+        {
+          "name": "CPU / Python 3.12",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35896890830/job/107302945511"
+        },
+        {
+          "name": "Build release distributions",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35896890830/job/107304023271"
+        }
+      ],
+      "merge_state_at_inventory": "UNKNOWN",
+      "current_head_sha": "c7936fcb6215728808f9f77177642c0ab0821b79"
+    },
+    {
+      "pr": 65,
+      "title": "break: img_colorize_lr2 \u2014 published transpose12 FAIL / residual16 PASS",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/65",
+      "catalog_ids": [
+        "pr65"
+      ],
+      "original_quality_tiers": [
+        2
+      ],
+      "followup_quality_tiers": [
+        2
+      ],
+      "reviewed_head_sha": "ad2dabdb95532fa9cca9fe9c1965e0cdb05c530f",
+      "base_branch": "particle-finetune/base",
+      "is_draft": false,
+      "scientific_question": "Fixed grayscale left/right intensity patterns; no color channels or conditional grayscale-to-color query.",
+      "scientific_result": "FAIL/PASS",
+      "reason_to_keep": "Distinct grayscale left/right intensity profiles test contrast/layout fidelity; there are neither color channels nor a conditional grayscale-to-color query.",
+      "recommendation": "KEEP_OPEN",
+      "next_step": "Retain in the audit as a narrowly labelled optional image regression. It is below the authorized original 4/5\u20135/5 merge cutoff; isolate/rebase only its test sources onto develop before any future eligibility review. Keep the unconditional-template display name and the explicit missing conditional-input limitation.",
+      "provenance": "image-quality-v2.json",
+      "media": [
+        "pr65.gif"
+      ],
+      "remote_checks_at_inventory": [
+        {
+          "name": "CPU / Python 3.10",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35904823045/job/107329750671"
+        },
+        {
+          "name": "CPU / Python 3.11",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35904823045/job/107329750907"
+        },
+        {
+          "name": "CPU / Python 3.12",
+          "status": "COMPLETED",
+          "conclusion": "FAILURE",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35904823045/job/107329751098"
+        },
+        {
+          "name": "Build release distributions",
+          "status": "COMPLETED",
+          "conclusion": "SKIPPED",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/35904823045/job/107330851573"
+        }
+      ],
+      "merge_state_at_inventory": "UNKNOWN",
+      "current_head_sha": "ad2dabdb95532fa9cca9fe9c1965e0cdb05c530f"
+    }
+  ],
+  "other_open_prs": [
+    {
+      "pr": 229,
+      "title": "Inventory Forge toy techniques and configure the R3GAN baseline",
+      "head_sha": "94cf56e2997891aab5f386a8af05a775a49a1b73"
+    },
+    {
+      "pr": 225,
+      "title": "Review toy problems, their scientific claims, and training GIFs",
+      "head_sha": "ffd2a1925c81bdfd3d45bf79fac0a29fc7abfeb9"
+    },
+    {
+      "pr": 222,
+      "title": "Experiment: 100 Gaussians with PacGAN-8 and no regularization",
+      "head_sha": "4410d03de07a84fb2478de40ddf738dd78d8f956"
+    },
+    {
+      "pr": 217,
+      "title": "Candidate default: DV12 LR controller + KA2 penalty (PR #155 dv12-ams-rc3)",
+      "head_sha": "261fcfd1decba067b9c95123abf21e046dc32127"
+    },
+    {
+      "pr": 216,
+      "title": "Toy/experiment refactor: problem-only toys on one shared runner; recipe-owned LR schedule",
+      "head_sha": "ef7038a457df772c3de7cb0601d77c4da066b4d3"
+    },
+    {
+      "pr": 215,
+      "title": "Candidate default: K3P gs2 (R1 + fake cap, c=.3, AMSGrad, constant LR, no noise, no anchor)",
+      "head_sha": "c138aff3a1fcdca76ee3e84567c28b6f9be7db12"
+    },
+    {
+      "pr": 214,
+      "title": "Default K3P: R1-free path cap + always-on EMA anchor, AMSGrad, constant LR, no noise",
+      "head_sha": "1755b915cf726c0f2e224abe29670683e585418f"
+    },
+    {
+      "pr": 211,
+      "title": "K3P without R1: spike-control x settling factorial",
+      "head_sha": "a1c199f5c1625407deff5089eb4542f80a54d670"
+    },
+    {
+      "pr": 202,
+      "title": "Add recipe amsgrad option for constant-LR K3P",
+      "head_sha": "8a760ee7949f989de113295891d6451f25afec2d"
+    },
+    {
+      "pr": 197,
+      "title": "Simple 3-term critic leaderboard (no noise, constant LR, no controller)",
+      "head_sha": "49376c0d4e9a875bfe59086ffc42accf2d34c408"
+    },
+    {
+      "pr": 195,
+      "title": "KA2 API candidate: new initialization retested; not qualified",
+      "head_sha": "1e040820fadf0ca5845c98bd2c3e9d5b8c8d9160"
+    },
+    {
+      "pr": 193,
+      "title": "Unrolled k=5 after all modes are occupied, at constant LR",
+      "head_sha": "0771eee18ba1bc9bc29fba7fcb82ef4aa69fd9ef"
+    },
+    {
+      "pr": 192,
+      "title": "Constant-LR simultaneous Extra-Adam (extragradient)",
+      "head_sha": "02e7ae20865e1b83f0fba9a35452fdc65ac8dbb0"
+    },
+    {
+      "pr": 191,
+      "title": "Score a 0.999 generator/particle average at constant LR",
+      "head_sha": "963f7faacfaaff82ab1b776b3b6bb7e77669ce53"
+    },
+    {
+      "pr": 190,
+      "title": "Unroll the critic k=5 steps so G sees the hop get punished",
+      "head_sha": "88ce299f87320d0b9fa95d1ab444b541a8bc2cb1"
+    },
+    {
+      "pr": 189,
+      "title": "Constant-LR symplectic gradient adjustment (SGA)",
+      "head_sha": "32e959459da9ef3876c33dbb3577329435e43ee2"
+    },
+    {
+      "pr": 188,
+      "title": "Diagnostic: constant LR with batch growth instead of the cosine anneal",
+      "head_sha": "2302e24cd197f861f52159a862ee6cb6343eb539"
+    },
+    {
+      "pr": 187,
+      "title": "Constant-LR critic history buffer (d_replay)",
+      "head_sha": "a688565efabdf7c70e069abe81da354d4cf74554"
+    },
+    {
+      "pr": 186,
+      "title": "Lookahead-minmax at constant LR",
+      "head_sha": "6eff15d8d552c1eff81b04c7c9999bf96e860289"
+    },
+    {
+      "pr": 185,
+      "title": "Constant-LR Optimistic Adam for the ring hop",
+      "head_sha": "364b504157ba23d1bd83e5cc73eba6fdf6e725ed"
+    },
+    {
+      "pr": 184,
+      "title": "Add deterministic Sobol and R2 sample streams for K3P toys",
+      "head_sha": "1cdee6abf0c44c5bc51cd604d273a0fef7cf637c"
+    },
+    {
+      "pr": 183,
+      "title": "Constant-LR GAN dynamics for the toy100 probes",
+      "head_sha": "c4bf6b11480f8a72f4b727a0b0850e08b93cf66e"
+    },
+    {
+      "pr": 181,
+      "title": "Family F: deterministic particle-prior inits on hid_q and qr_pb_pq",
+      "head_sha": "d615fed2d766f2e8ceac43b6021adc7d4971fd4f"
+    },
+    {
+      "pr": 180,
+      "title": "Family E deterministic orthogonal inits for the K3P toy screen",
+      "head_sha": "c0241d6a260d4406b57afb39f4f4025f90a8fb89"
+    },
+    {
+      "pr": 179,
+      "title": "Family D deterministic K3P inits (hid_q \u00d7 qr_pb_pq hybrids)",
+      "head_sha": "a134d32232f1a6e0935e4b5f871f151cc9acac10"
+    },
+    {
+      "pr": 178,
+      "title": "Map the hid_q ring amplifier and test GAN-native dampers",
+      "head_sha": "87dc15626cacad16eb1399f4eafbb7d8ad63a63f"
+    },
+    {
+      "pr": 177,
+      "title": "Diagnose hid_q ring seed failures (read-only trajectory trace)",
+      "head_sha": "a201017a352239a2f4bc050a3f232832ca70add0"
+    },
+    {
+      "pr": 176,
+      "title": "Diagnose the hid_q ring step where samples decide pass or fail",
+      "head_sha": "84a1138dc2de387c2efcf486e879bd4cc5b82416"
+    },
+    {
+      "pr": 175,
+      "title": "Deterministic init search C: orthogonal LSUV and quasi-random inits",
+      "head_sha": "36ab69abac078b456782bcc334dec3beb5a3c9ae"
+    },
+    {
+      "pr": 174,
+      "title": "Deterministic init search B: Hadamard Thue-Morse with DCT bias",
+      "head_sha": "fadac66a744d7a7655dac8cdb0770d3477640d79"
+    },
+    {
+      "pr": 173,
+      "title": "Deterministic init search A: delta-orthogonal and scaled identity",
+      "head_sha": "ca366b7d7ec1f5ef69a1d0b65fc802e96db2d450"
+    },
+    {
+      "pr": 149,
+      "title": "Re-baseline published CL mechanisms under the canonical harness",
+      "head_sha": "2ce2a05b8490d13bc20dcabd686a3820b15e4d4a"
+    },
+    {
+      "pr": 148,
+      "title": "Pin toy100 CL gates to a cross-vendor MKL mode",
+      "head_sha": "b76076d8472c28dace7b7851627da75c01ade5c7"
+    },
+    {
+      "pr": 147,
+      "title": "Audit toy100 MKL dispatch robustness for #107, #140, and #143",
+      "head_sha": "93307d8dc61a332f9d48b0b9d82ed39c94199820"
+    },
+    {
+      "pr": 146,
+      "title": "Cross-build repro audit of #107, #140, and #141 toy100 gates",
+      "head_sha": "7b7f6f31945c91f3bdb5f9b6ad5525c02ee41c7a"
+    },
+    {
+      "pr": 145,
+      "title": "Audit: full toy suite on #140 (19/22, same baseline)",
+      "head_sha": "0497d6522cc58823f6bf5127de0bea240537e351"
+    },
+    {
+      "pr": 144,
+      "title": "Score stall on the .25-cap factor after the .125 latch",
+      "head_sha": "c1d1a2afe73bdc1085602185fddb317d317f6e8e"
+    },
+    {
+      "pr": 143,
+      "title": "Hold critic width at .15 after the delayed G-lr arm",
+      "head_sha": "3384976cc6fb1931ac63f7b213e585654c9d8996"
+    },
+    {
+      "pr": 142,
+      "title": "DRAFT KILL: delayed-arm extra D TTUR on stall reach (not solved)",
+      "head_sha": "d13ae8149ffd72500690cd5b82bf74bf3bf2b01c"
+    },
+    {
+      "pr": 141,
+      "title": "Delayed-budget G own-curvature clamp .125 after update 1200",
+      "head_sha": "b270fc99f072425b622c457ae1d34c0549116c63"
+    },
+    {
+      "pr": 140,
+      "title": "Delayed-arm G Adam lr \u00d70.5 after update 1200 on a full ring",
+      "head_sha": "ef4084a46d999af33c8c484ef36dfdafbe3fc517"
+    },
+    {
+      "pr": 138,
+      "title": "KILL: post-arm G own-curvature bound .125 on stall reach (draft, not solved)",
+      "head_sha": "57f2bd5a67c663f587009e71b64d273ccbd626fc"
+    },
+    {
+      "pr": 137,
+      "title": "KILL: post-arm G common-mode output-gradient null (draft, not solved)",
+      "head_sha": "f26662a1a10e96a0101726e36e365c99b862b31c"
+    },
+    {
+      "pr": 136,
+      "title": "KILL: post-arm G Adam \u03b21 \u2192 0 on stall reach (draft, not solved)",
+      "head_sha": "0cc2c1d4b117c46483f4eeff06aa3713393eb90b"
+    },
+    {
+      "pr": 135,
+      "title": "KILL: post-arm mode-count TTUR (two extra D steps at \u22646 modes)",
+      "head_sha": "d26e50cffcd0c4032651fb8591411ab909922143"
+    },
+    {
+      "pr": 134,
+      "title": "KILL: post-arm critic-advantage collapse never rejects the G step (draft, not solved)",
+      "head_sha": "690171e2ff5bbfe0cc18992b758de674271d95d4"
+    },
+    {
+      "pr": 133,
+      "title": "KILL: post-arm reject on 50-step trust opening (draft, not solved)",
+      "head_sha": "5dd333f3ffe9f1f6e3cbe2bed63fdc9637988c91"
+    },
+    {
+      "pr": 132,
+      "title": "KILL: sustained-arm G\u00d70.5 on stall reach (draft, not solved)",
+      "head_sha": "e9bea123084ebe0fa20f5652522623c8f4a92a9e"
+    },
+    {
+      "pr": 130,
+      "title": "KILL: G-step rollback on own-curvature trust collapse (draft, not solved)",
+      "head_sha": "b2f1a35f3886a4218672574e2c114a1dd9067eaa"
+    },
+    {
+      "pr": 129,
+      "title": "Mode-drop G freeze on stall reach \u2014 KILL",
+      "head_sha": "7d7e5422defcfbc62d06f8e32cdf5bc75323dac3"
+    },
+    {
+      "pr": 128,
+      "title": "DRAFT: KILL post-acquire EMA-D for G (not solved)",
+      "head_sha": "b50d5f7ce102c90ddc45dda01b4465572f9159a3"
+    },
+    {
+      "pr": 127,
+      "title": "Record full validation of the selected constant-rate GAN",
+      "head_sha": "6d62995adc824225350162bf0672d3457cb45cb1"
+    },
+    {
+      "pr": 126,
+      "title": "KILL: post-step G output-mean restore on stall reach",
+      "head_sha": "caabea0b55dcdb57adb67dd1ce072e78594c8207"
+    },
+    {
+      "pr": 125,
+      "title": "KILL: post-acquire G Adam \u00d70.5 on stall reach (draft, not solved)",
+      "head_sha": "7bf2fc82796ef36ec1b05ff4f920cf75281d73e3"
+    },
+    {
+      "pr": 124,
+      "title": "Zero-mean G outputs on stall reach \u2014 KILL (draft, not solved)",
+      "head_sha": "6824707cebd6bfbdec57a840bbd84a296efd13eb"
+    },
+    {
+      "pr": 123,
+      "title": "Kill stall-gated extra D step on #107",
+      "head_sha": "d6095d84d3407889131204823556c286cfa8b496"
+    },
+    {
+      "pr": 122,
+      "title": "Kill: halve G when own-curvature trust is falling (stall reach kept)",
+      "head_sha": "da1885d9fa77f572a31bbb79e8abd79f59dcefb3"
+    },
+    {
+      "pr": 121,
+      "title": "KILL: stall-gated one-step G game bound (draft)",
+      "head_sha": "9262f8e3ef980fa6a8c6d08bdebbf1a4b83882ad"
+    },
+    {
+      "pr": 120,
+      "title": "Recovery reach: widen G only on a critic-support hard dip",
+      "head_sha": "cc02a5dd0b76b973b9e18aee384f0add56052ea7"
+    },
+    {
+      "pr": 119,
+      "title": "DD-exit on the bounded stall-reach step \u2014 AVX2 keep, AVX512 ring miss",
+      "head_sha": "ee2c168e51789698b9842998b0dc6ab07175a5d9"
+    },
+    {
+      "pr": 118,
+      "title": "Audit: full toy suite on non-kill #60 entries",
+      "head_sha": "e0595432a5b3cf44b5bd05dfd817cf74ad79ccbc"
+    },
+    {
+      "pr": 117,
+      "title": "Kill common-mode translation trust: warm holds, ring and stay regress vs stall reach",
+      "head_sha": "5def098a0b05d308596ee1eea574ce8eebbadf34"
+    },
+    {
+      "pr": 116,
+      "title": "Kill G-trust bet: AVX512 stuck step approaches with the bound on and off",
+      "head_sha": "846d0f6ee30038b78ef7110c483f795fe7c5a92d"
+    },
+    {
+      "pr": 113,
+      "title": "Mode-exit projection on PR84 G step \u2014 kill",
+      "head_sha": "1cc98ed629fbb60d7b9bbdadbbed007f9ea68f1e"
+    },
+    {
+      "pr": 107,
+      "title": "PR84 stall reach: cold ring 8 on AVX2 and AVX512, warm 200; the continued run recovers to 8",
+      "head_sha": "d5ec127b4369de62ffef8e17c547c6506d45ffee"
+    },
+    {
+      "pr": 105,
+      "title": "Idle-when-covered critic response drops the warm continuation",
+      "head_sha": "4523a9b521e21e49c05d18eecf9234917a3cdc0e"
+    },
+    {
+      "pr": 104,
+      "title": "Mild anti-restoring G step \u2014 idle gate still a kill",
+      "head_sha": "33cfad0109c366538411cb3d3639b770cb0a5b41"
+    },
+    {
+      "pr": 103,
+      "title": "GAN-6: particle consensus from critic disagreement",
+      "head_sha": "7af191bbcee29cc6d60321d0db50b06658f6732a"
+    },
+    {
+      "pr": 102,
+      "title": "GAN-4: optimistic Adam on the PR84 game step",
+      "head_sha": "11f64fb5c0a03049462c07c757f3a7d72ec7a883"
+    },
+    {
+      "pr": 101,
+      "title": "Idle anti-gradient critic field on the PR84 update",
+      "head_sha": "0d97c4f7e7677d7c77aeefb1f7be1a30143b8d54"
+    },
+    {
+      "pr": 100,
+      "title": "GAN-5: real-sample Laplacian basin on the PR84 critic",
+      "head_sha": "3121aee83d1d33cafbc6e08f2c8eb82382482e58"
+    },
+    {
+      "pr": 99,
+      "title": "Lane C1: balanced-mass anchors beat pinned surplus TV",
+      "head_sha": "3be2a0f8bb43f970296d85d2afa52b3fcb9c305c"
+    },
+    {
+      "pr": 98,
+      "title": "Neural host for finite-GH9 likelihood (wiring, gates pending)",
+      "head_sha": "38ebbf629a0af6e080bdc52e636d5e449bc8acaa"
+    },
+    {
+      "pr": 97,
+      "title": "Lane A kill: anti-gradient critic field regresses warm",
+      "head_sha": "b2440892a5583cbfa6b1400f9d3d9d41ea0b41a5"
+    },
+    {
+      "pr": 96,
+      "title": "Gate clump HQ ball to rho \u2264 0.25; hold stops at 2210",
+      "head_sha": "9f3358ae1da99a6c6bc3af6db5e7f7f54781863a"
+    },
+    {
+      "pr": 94,
+      "title": "Clump HQ ball: hold 120/120, cold ring 6/8",
+      "head_sha": "9bc03620c5a24c6d8d7dc11e1f6b8a37aa925443"
+    },
+    {
+      "pr": 93,
+      "title": "Restore spent nearest-real margin on the PR84 exit clip",
+      "head_sha": "e958a81c49b4dc3c2b3eaad2a17000d70a091831"
+    },
+    {
+      "pr": 92,
+      "title": "Diagnose frozen PR84 open-cap rho against acquisition",
+      "head_sha": "3cba6c9caa59e3d0689c6629b28d94aa0924dfa6"
+    },
+    {
+      "pr": 91,
+      "title": "Tighten open-cap PR84 steps using the PR #92 rho split",
+      "head_sha": "e34e4b17648093634398a44522af1f4d14c89665"
+    },
+    {
+      "pr": 90,
+      "title": "Isolate the frozen PR84 open-cap HQ step",
+      "head_sha": "baf8ad321be9baf1129da6dbb002fcfa4e7a20f8"
+    },
+    {
+      "pr": 89,
+      "title": "Critic-value spare step fails the 2400 hold",
+      "head_sha": "516353cbe81ecfded136a0e72383e19d7af08468"
+    },
+    {
+      "pr": 88,
+      "title": "Refreshed Chamfer targets fail the 2400 continuation",
+      "head_sha": "7d7676c37ebd390836aa957ecb085367f1e88a35"
+    },
+    {
+      "pr": 87,
+      "title": "Path-crossing G direction for the critic score barrier",
+      "head_sha": "296a25303734cc3e739b25276ef2d4b61f41c58c"
+    },
+    {
+      "pr": 86,
+      "title": "Reject reverse-KL + chi-squared KDE drift as an LR-decay replacement",
+      "head_sha": "bbd476c3e1f767975124c5b616d0e4533b87ef95"
+    },
+    {
+      "pr": 85,
+      "title": "Capped Monge prior step on the PR84 continuous-learning candidate",
+      "head_sha": "205945a6d463695680ae8c5dd0f62b5f8a6d325b"
+    },
+    {
+      "pr": 84,
+      "title": "Smoothed critic clears the cold ring; rest-damping re-trades",
+      "head_sha": "468ad2619a0536f8c69ef878b86bc514d296338a"
+    },
+    {
+      "pr": 83,
+      "title": "GIF of error-relative gain 0.5 cold trajectory",
+      "head_sha": "dce064d1a7e7956acc564d971e9f00dda5567f33"
+    },
+    {
+      "pr": 82,
+      "title": "Alternating own-curvature bounds clear cold trajectory without LR decay; cold ring still fails",
+      "head_sha": "4285309d8e8ac034fb8f7e378716d804e0e9b180"
+    },
+    {
+      "pr": 81,
+      "title": "Replay cross-only warm drift and test a matched output cap",
+      "head_sha": "5501e6e4f489372835d5ec1412c137c3966dc66f"
+    }
+  ]
+}

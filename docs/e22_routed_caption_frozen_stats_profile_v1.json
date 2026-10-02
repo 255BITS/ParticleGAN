@@ -1,0 +1,356 @@
+{
+  "id": "supra_depth1_frozen_scalar_moments_v1",
+  "statistic": "per-tensor float64 mean and population std, correction=0",
+  "calibration_rule": "Linear weight and bias Uniform(mean-sqrt(3)*population_std, mean+sqrt(3)*population_std); pos_embed Normal(mean,population_std)",
+  "source_capsule_sha256": "fc18f90e1422a4a03287e368071cd71cab0d38c4e6cba1337c001b2d82598afc",
+  "source_audit_sha256": "c7abed11bb97a4dc118728246e1c3b9ab79f719c9b6f351358a4e23986b079a0",
+  "source_audit_script_sha256": "fe99ccdfbfbedeaf68c0e4b0204e8280dbb75aefa72afd391b68957077478a01",
+  "observed_source_identity": {
+    "/ml2/hypergan/ParticleGAN-routed-caption-flow-develop/examples/e22_routed_caption_accuracy.py": "bae0f255d890e49bfbe4602bee7f8e84051b24a3cb0219c13b0a42b25768b8e3",
+    "/ml2/hypergan/ParticleGAN-routed-caption-flow-develop/particlegan/init.py": "e15d4de01eb49f7097bc249abacab907ff067385412346f54ab0d510cb8649d0",
+    "/ml2/hypergan/ParticleGAN-convergence-toy-develop/examples/e22_routed_caption_transfer.py": "84f3e2a91a010f6585b59ff0068473ce13c74bd58038b68d30481628b230aedb",
+    "/ml2/hypergan/ParticleGAN-convergence-toy-develop/docs/e22_routed_caption_transfer_campaign_v1.json": "a790c56d57cc647bbd9429afffbc77c2b544d9fda4aa575c767d9bf088d357cb",
+    "/ml2/hypergan/ParticleGAN-convergence-toy-develop/docs/e22_routed_caption_transfer_recovery_v1.json": "ccade33b0f079920e512656f95b20d3c8b3ba24b65eebee23217d7b9c9ec8a37",
+    "/ml2/hypergan/ParticleGAN-routed-caption-flow-develop/docs/e22_routed_caption_flow_v1.json": "a2d65843979511e0809851711b65292790cfd17e9e9326eed70d15a8c93cc843"
+  },
+  "pure_frozen_tensor_count": 29,
+  "geometry_source": "retained pretrained Supra depth1,width576,text768,tokens256,output16; blocks.0 maps to block",
+  "scope": "Scalar values only; no pretrained tensor, direction, covariance, singular values or activation information is supplied to this toy. Independent descriptive calibration, not fitted to toy accuracy or mean fraction.",
+  "entries": {
+    "block.adaln.1.bias": {
+      "shape": [
+        3456
+      ],
+      "mean": -0.052714403835354876,
+      "population_std": 0.11611175881481582,
+      "RMS_descriptive": 0.1275176415512255,
+      "actual_source_key": "blocks.0.adaln.1.bias",
+      "actual_initial_particle_base_key": "model.model.blocks.0.adaln.1.bias",
+      "distribution": "Uniform"
+    },
+    "block.adaln.1.weight": {
+      "shape": [
+        3456,
+        576
+      ],
+      "mean": 0.00018028606134951148,
+      "population_std": 0.06626337801171381,
+      "RMS_descriptive": 0.0662636232678764,
+      "actual_source_key": "blocks.0.adaln.1.weight",
+      "actual_initial_particle_base_key": "model.model.blocks.0.adaln.1.weight",
+      "distribution": "Uniform"
+    },
+    "block.cross_attn.kv.bias": {
+      "shape": [
+        1152
+      ],
+      "mean": -0.0013592998358004217,
+      "population_std": 0.027714806487364095,
+      "RMS_descriptive": 0.027748120561141537,
+      "actual_source_key": "blocks.0.cross_attn.kv.bias",
+      "actual_initial_particle_base_key": "model.model.blocks.0.cross_attn.kv.base.bias",
+      "distribution": "Uniform"
+    },
+    "block.cross_attn.kv.weight": {
+      "shape": [
+        1152,
+        576
+      ],
+      "mean": 9.2400987065933e-06,
+      "population_std": 0.08198693767414188,
+      "RMS_descriptive": 0.08198693819483152,
+      "actual_source_key": "blocks.0.cross_attn.kv.weight",
+      "actual_initial_particle_base_key": "model.model.blocks.0.cross_attn.kv.base.weight",
+      "distribution": "Uniform"
+    },
+    "block.cross_attn.proj.bias": {
+      "shape": [
+        576
+      ],
+      "mean": 0.0060520066541458716,
+      "population_std": 0.04881834079450074,
+      "RMS_descriptive": 0.04919204389400632,
+      "actual_source_key": "blocks.0.cross_attn.proj.bias",
+      "actual_initial_particle_base_key": "model.model.blocks.0.cross_attn.proj.base.bias",
+      "distribution": "Uniform"
+    },
+    "block.cross_attn.proj.weight": {
+      "shape": [
+        576,
+        576
+      ],
+      "mean": -9.620145981835586e-05,
+      "population_std": 0.08895368229836917,
+      "RMS_descriptive": 0.08895373431824083,
+      "actual_source_key": "blocks.0.cross_attn.proj.weight",
+      "actual_initial_particle_base_key": "model.model.blocks.0.cross_attn.proj.base.weight",
+      "distribution": "Uniform"
+    },
+    "block.cross_attn.q.bias": {
+      "shape": [
+        576
+      ],
+      "mean": -0.002755789691845065,
+      "population_std": 0.066968177334792,
+      "RMS_descriptive": 0.06702485473590991,
+      "actual_source_key": "blocks.0.cross_attn.q.bias",
+      "actual_initial_particle_base_key": "model.model.blocks.0.cross_attn.q.base.bias",
+      "distribution": "Uniform"
+    },
+    "block.cross_attn.q.weight": {
+      "shape": [
+        576,
+        576
+      ],
+      "mean": -0.00033135570557432404,
+      "population_std": 0.0606952019176723,
+      "RMS_descriptive": 0.0606961064025582,
+      "actual_source_key": "blocks.0.cross_attn.q.weight",
+      "actual_initial_particle_base_key": "model.model.blocks.0.cross_attn.q.base.weight",
+      "distribution": "Uniform"
+    },
+    "block.mlp.0.bias": {
+      "shape": [
+        2304
+      ],
+      "mean": -0.032102431488412776,
+      "population_std": 0.08011542199709813,
+      "RMS_descriptive": 0.086307861456772,
+      "actual_source_key": "blocks.0.mlp.0.bias",
+      "actual_initial_particle_base_key": "model.model.blocks.0.mlp.0.bias",
+      "distribution": "Uniform"
+    },
+    "block.mlp.0.weight": {
+      "shape": [
+        2304,
+        576
+      ],
+      "mean": -0.0009812055826289132,
+      "population_std": 0.07447035192399333,
+      "RMS_descriptive": 0.07447681572193254,
+      "actual_source_key": "blocks.0.mlp.0.weight",
+      "actual_initial_particle_base_key": "model.model.blocks.0.mlp.0.weight",
+      "distribution": "Uniform"
+    },
+    "block.mlp.2.bias": {
+      "shape": [
+        576
+      ],
+      "mean": -0.002082895294456143,
+      "population_std": 0.04620976552086892,
+      "RMS_descriptive": 0.04625668473098082,
+      "actual_source_key": "blocks.0.mlp.2.bias",
+      "actual_initial_particle_base_key": "model.model.blocks.0.mlp.2.bias",
+      "distribution": "Uniform"
+    },
+    "block.mlp.2.weight": {
+      "shape": [
+        576,
+        2304
+      ],
+      "mean": 0.00012729037553841038,
+      "population_std": 0.06182140960787966,
+      "RMS_descriptive": 0.06182154065327753,
+      "actual_source_key": "blocks.0.mlp.2.weight",
+      "actual_initial_particle_base_key": "model.model.blocks.0.mlp.2.weight",
+      "distribution": "Uniform"
+    },
+    "block.self_attn.proj.bias": {
+      "shape": [
+        576
+      ],
+      "mean": -0.0011522597107816385,
+      "population_std": 0.03708052963348129,
+      "RMS_descriptive": 0.037098428273183964,
+      "actual_source_key": "blocks.0.self_attn.proj.bias",
+      "actual_initial_particle_base_key": "model.model.blocks.0.self_attn.proj.base.bias",
+      "distribution": "Uniform"
+    },
+    "block.self_attn.proj.weight": {
+      "shape": [
+        576,
+        576
+      ],
+      "mean": -8.779176956894791e-05,
+      "population_std": 0.04415124091424903,
+      "RMS_descriptive": 0.044151328198173835,
+      "actual_source_key": "blocks.0.self_attn.proj.weight",
+      "actual_initial_particle_base_key": "model.model.blocks.0.self_attn.proj.base.weight",
+      "distribution": "Uniform"
+    },
+    "block.self_attn.qkv.bias": {
+      "shape": [
+        1728
+      ],
+      "mean": 0.0032103141529365464,
+      "population_std": 0.11090460491259531,
+      "RMS_descriptive": 0.11095105906560515,
+      "actual_source_key": "blocks.0.self_attn.qkv.bias",
+      "actual_initial_particle_base_key": "model.model.blocks.0.self_attn.qkv.base.bias",
+      "distribution": "Uniform"
+    },
+    "block.self_attn.qkv.weight": {
+      "shape": [
+        1728,
+        576
+      ],
+      "mean": 4.1262908212892905e-05,
+      "population_std": 0.04244432978501741,
+      "RMS_descriptive": 0.04244434984219821,
+      "actual_source_key": "blocks.0.self_attn.qkv.weight",
+      "actual_initial_particle_base_key": "model.model.blocks.0.self_attn.qkv.base.weight",
+      "distribution": "Uniform"
+    },
+    "ctx_proj.bias": {
+      "shape": [
+        576
+      ],
+      "mean": 0.003492570197232049,
+      "population_std": 0.05034497425147476,
+      "RMS_descriptive": 0.05046597347683137,
+      "actual_source_key": "ctx_proj.bias",
+      "actual_initial_particle_base_key": "model.model.ctx_proj.base.bias",
+      "distribution": "Uniform"
+    },
+    "ctx_proj.weight": {
+      "shape": [
+        576,
+        768
+      ],
+      "mean": 7.241161778818517e-05,
+      "population_std": 0.09137091135439562,
+      "RMS_descriptive": 0.0913709400475613,
+      "actual_source_key": "ctx_proj.weight",
+      "actual_initial_particle_base_key": "model.model.ctx_proj.base.weight",
+      "distribution": "Uniform"
+    },
+    "final.adaln.1.bias": {
+      "shape": [
+        1152
+      ],
+      "mean": -0.09268925765454997,
+      "population_std": 0.1465832741424966,
+      "RMS_descriptive": 0.1734299707169607,
+      "actual_source_key": "final.adaln.1.bias",
+      "actual_initial_particle_base_key": "model.model.final.adaln.1.bias",
+      "distribution": "Uniform"
+    },
+    "final.adaln.1.weight": {
+      "shape": [
+        1152,
+        576
+      ],
+      "mean": 0.0018418075544824946,
+      "population_std": 0.06993788831174946,
+      "RMS_descriptive": 0.06996213602066749,
+      "actual_source_key": "final.adaln.1.weight",
+      "actual_initial_particle_base_key": "model.model.final.adaln.1.weight",
+      "distribution": "Uniform"
+    },
+    "final.linear.bias": {
+      "shape": [
+        16
+      ],
+      "mean": 0.03596595743147191,
+      "population_std": 0.04125490816234973,
+      "RMS_descriptive": 0.05473132139320555,
+      "actual_source_key": "final.linear.bias",
+      "actual_initial_particle_base_key": "model.model.final.linear.bias",
+      "distribution": "Uniform"
+    },
+    "final.linear.weight": {
+      "shape": [
+        16,
+        576
+      ],
+      "mean": 9.684900296771744e-05,
+      "population_std": 0.05613263427877236,
+      "RMS_descriptive": 0.05613271782840898,
+      "actual_source_key": "final.linear.weight",
+      "actual_initial_particle_base_key": "model.model.final.linear.weight",
+      "distribution": "Uniform"
+    },
+    "pos_embed": {
+      "shape": [
+        1,
+        256,
+        576
+      ],
+      "mean": 0.0009012194997819906,
+      "population_std": 0.21053350835291557,
+      "RMS_descriptive": 0.21053543724507318,
+      "actual_source_key": "pos_embed",
+      "actual_initial_particle_base_key": "model.model.pos_embed",
+      "distribution": "Normal"
+    },
+    "t_embed.mlp.0.bias": {
+      "shape": [
+        576
+      ],
+      "mean": -0.029471433544849726,
+      "population_std": 0.07003626372804188,
+      "RMS_descriptive": 0.07598449599867285,
+      "actual_source_key": "t_embed.mlp.0.bias",
+      "actual_initial_particle_base_key": "model.model.t_embed.mlp.0.bias",
+      "distribution": "Uniform"
+    },
+    "t_embed.mlp.0.weight": {
+      "shape": [
+        576,
+        256
+      ],
+      "mean": -0.004679933938868817,
+      "population_std": 0.05213489901350976,
+      "RMS_descriptive": 0.052344526713124964,
+      "actual_source_key": "t_embed.mlp.0.weight",
+      "actual_initial_particle_base_key": "model.model.t_embed.mlp.0.weight",
+      "distribution": "Uniform"
+    },
+    "t_embed.mlp.2.bias": {
+      "shape": [
+        576
+      ],
+      "mean": -0.0094159175944747,
+      "population_std": 0.09200486039298231,
+      "RMS_descriptive": 0.0924854250143129,
+      "actual_source_key": "t_embed.mlp.2.bias",
+      "actual_initial_particle_base_key": "model.model.t_embed.mlp.2.bias",
+      "distribution": "Uniform"
+    },
+    "t_embed.mlp.2.weight": {
+      "shape": [
+        576,
+        576
+      ],
+      "mean": 0.0007276140095382876,
+      "population_std": 0.02837095030262941,
+      "RMS_descriptive": 0.028380279125144972,
+      "actual_source_key": "t_embed.mlp.2.weight",
+      "actual_initial_particle_base_key": "model.model.t_embed.mlp.2.weight",
+      "distribution": "Uniform"
+    },
+    "x_embed.bias": {
+      "shape": [
+        576
+      ],
+      "mean": 0.0044143896845728,
+      "population_std": 0.16996741245659427,
+      "RMS_descriptive": 0.17002472800589133,
+      "actual_source_key": "x_embed.bias",
+      "actual_initial_particle_base_key": "model.model.x_embed.bias",
+      "distribution": "Uniform"
+    },
+    "x_embed.weight": {
+      "shape": [
+        576,
+        16
+      ],
+      "mean": 0.003244620849669625,
+      "population_std": 0.23987972411869854,
+      "RMS_descriptive": 0.23990166653802417,
+      "actual_source_key": "x_embed.weight",
+      "actual_initial_particle_base_key": "model.model.x_embed.weight",
+      "distribution": "Uniform"
+    }
+  }
+}

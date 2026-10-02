@@ -1,0 +1,963 @@
+{
+  "attempts_per_family": 1,
+  "execution_plan_archive": {
+    "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-paired-transport-v1/plan.json",
+    "sha256": "2a47c0223570d4df115a880437f5b582484e0d0031ca1d29828bcf256288634b"
+  },
+  "measured_job_seconds": 41.22599543305114,
+  "records": [
+    {
+      "actual_model_shapes": {
+        "critic": {
+          "edit_rms": [],
+          "input_scale": [],
+          "net.0.bias": [
+            48
+          ],
+          "net.0.weight": [
+            48,
+            2
+          ],
+          "net.2.bias": [
+            48
+          ],
+          "net.2.weight": [
+            48,
+            48
+          ],
+          "net.4.bias": [
+            48
+          ],
+          "net.4.weight": [
+            48,
+            48
+          ],
+          "net.6.bias": [
+            1
+          ],
+          "net.6.weight": [
+            1,
+            48
+          ],
+          "target_mean": [
+            2
+          ],
+          "target_std": [
+            2
+          ]
+        },
+        "model": {
+          "bridge.net.0.bias": [
+            48
+          ],
+          "bridge.net.0.weight": [
+            48,
+            6
+          ],
+          "bridge.net.2.bias": [
+            48
+          ],
+          "bridge.net.2.weight": [
+            48,
+            48
+          ],
+          "bridge.net.4.bias": [
+            48
+          ],
+          "bridge.net.4.weight": [
+            48,
+            48
+          ],
+          "bridge.net.6.bias": [
+            2
+          ],
+          "bridge.net.6.weight": [
+            2,
+            48
+          ],
+          "bridge.router.0.bias": [
+            16
+          ],
+          "bridge.router.0.weight": [
+            16,
+            2
+          ],
+          "bridge.router.2.bias": [
+            16
+          ],
+          "bridge.router.2.weight": [
+            16,
+            16
+          ],
+          "bridge.router.4.bias": [
+            16
+          ],
+          "bridge.router.4.weight": [
+            16,
+            16
+          ],
+          "bridge.router.6.bias": [
+            4
+          ],
+          "bridge.router.6.weight": [
+            4,
+            16
+          ],
+          "particles": [
+            128,
+            4
+          ]
+        }
+      },
+      "actual_step_indices": [
+        0,
+        500,
+        1000,
+        1500,
+        2000,
+        2500,
+        3000,
+        3500,
+        4000,
+        4500,
+        5000,
+        5500,
+        6000
+      ],
+      "added_gate_definition": "Clean paired MSE/identity-neutral MSE<=.10 for bothlive+EMA; at least5passing terminal original-cadence observations and full6000budget",
+      "added_gate_status": "PASS",
+      "added_terminal_window": {
+        "checks": 12,
+        "minimum_checks": 5,
+        "passed": true,
+        "passing_checks": 12,
+        "passing_suffix": 12
+      },
+      "arm": "baseline",
+      "best_observation_scope": "Source validation-only EMA NMSE selection; distinct from terminal sustained gates; no test qualification",
+      "best_validation_ema_observation": {
+        "added_ema": {
+          "mse": 1.9935423373115352e-05,
+          "neutral_mse": 0.4643667575362169,
+          "passed": true,
+          "relative_mse": 4.293034126492258e-05
+        },
+        "added_live": {
+          "mse": 0.0002638817595791434,
+          "neutral_mse": 0.4643667575362169,
+          "passed": true,
+          "relative_mse": 0.0005682615202242652
+        },
+        "original_ema": {
+          "nmse": 2.0390816644066945e-05,
+          "p95_distance": 0.011897335760295391,
+          "rmse": 0.004464910365641117,
+          "within_0p1": 1.0
+        },
+        "original_live": {
+          "nmse": 0.00026990973856300116,
+          "p95_distance": 0.03915499895811081,
+          "rmse": 0.01624443754553795,
+          "within_0p1": 1.0
+        },
+        "step": 6000
+      },
+      "binding": {
+        "declared_arms": {
+          "baseline": {
+            "coefficient": 1.0,
+            "cosine": false,
+            "kappa": 1.0,
+            "rate": 1.0,
+            "vic": 1.0
+          },
+          "cap-cosine": {
+            "coefficient": 3.0,
+            "cosine": true,
+            "kappa": 1.25,
+            "rate": 0.85,
+            "vic": 1.0
+          },
+          "cap-cosine-vic005": {
+            "coefficient": 3.0,
+            "cosine": true,
+            "kappa": 1.25,
+            "rate": 0.85,
+            "vic": 0.05
+          }
+        },
+        "declared_protocol": {
+          "batch": 64,
+          "betas": [
+            0.0,
+            0.999
+          ],
+          "cap_every": 4,
+          "cosine_floor": 0.05,
+          "cosine_start": 0.6,
+          "critic_lr": 0.0009,
+          "ema": 0.995,
+          "generator_lr": 0.0006,
+          "noise_floor": 0.03,
+          "noise_hold_ratio": 1.3,
+          "noise_horizon": 8000,
+          "noise_start": 1.0,
+          "particle_dim": 4,
+          "particle_lr": 0.006,
+          "particles": 128,
+          "record_every": 500,
+          "router_width": 16,
+          "seed": 0,
+          "split_seeds": {
+            "test": 922827,
+            "train": 922071,
+            "validation": 922193
+          },
+          "stable_tail": 3,
+          "steps": 6000,
+          "target_std_floor": 0.0001,
+          "test_size": 4096,
+          "train_size": 1024,
+          "validation_nmse_bound": 0.01,
+          "validation_p95_bound": 0.2,
+          "validation_size": 1024,
+          "width": 48
+        },
+        "deterministic_algorithms": true,
+        "executed_arm": {
+          "coefficient": 1.0,
+          "cosine": false,
+          "kappa": 1.0,
+          "rate": 1.0,
+          "vic": 1.0
+        },
+        "quality_evaluator": {
+          "path": "/ml2/hypergan/ParticleGAN-toy-problem-audit/benchmarks/toy_audit/definition_quality.py",
+          "sha256": "42d835ab7a0937a6c3759dd719691c721663b7857cb990405253e90f7fbd4cc9"
+        },
+        "runtime": {
+          "cpu_capability": "AVX2",
+          "device": "cpu",
+          "machine": "x86_64",
+          "numpy": "2.5.2",
+          "python": "3.12.13",
+          "threads": 1,
+          "torch": "2.13.0+cu126",
+          "torch_build": "PyTorch built with:\n  - GCC 13.3\n  - C++ Version: 202002\n  - Intel(R) oneAPI Math Kernel Library Version 2024.2-Product Build 20240605 for Intel(R) 64 architecture applications\n  - Intel(R) MKL-DNN v3.12.0 (Git Hash 80afa71049cd69a3df32adcccb623b12cd7baa22)\n  - OpenMP 201511 (a.k.a. OpenMP 4.5)\n  - LAPACK is enabled (usually provided by MKL)\n  - NNPACK is enabled\n  - CPU capability usage: AVX2\n  - Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release, COMMIT_SHA=cf30153c4c131c8164ee7798e5022d810682e2cb, CUDA_FLAGS= -DLIBCUDACXX_ENABLE_SIMPLIFIED_COMPLEX_OPERATIONS -Xfatbin -compress-all -DONNX_NAMESPACE=onnx_torch -gencode arch=compute_50,code=sm_50 -gencode arch=compute_60,code=sm_60 -gencode arch=compute_70,code=sm_70 -gencode arch=compute_75,code=sm_75 -gencode arch=compute_80,code=sm_80 -gencode arch=compute_86,code=sm_86 -gencode arch=compute_90,code=sm_90 -Xcudafe --diag_suppress=cc_clobber_ignored,--diag_suppress=field_without_dll_interface,--diag_suppress=base_class_has_different_dll_interface,--diag_suppress=dll_interface_conflict_none_assumed,--diag_suppress=dll_interface_conflict_dllexport_assumed,--diag_suppress=bad_friend_decl --expt-relaxed-constexpr --expt-extended-lambda -Xfatbin -compress-all --threads 2 -Wno-deprecated-gpu-targets --expt-extended-lambda -DCUB_WRAPPED_NAMESPACE=at_cuda_detail -DDISABLE_CUSPARSE_DEPRECATED -DCUDA_HAS_FP16=1 -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ -D__CUDA_NO_BFLOAT16_CONVERSIONS__ -DC10_NODEPRECATED, CUDA_VERSION=12.6, CUDNN_VERSION=9.10.2, CXX_COMPILER=/opt/rh/gcc-toolset-13/root/usr/bin/c++, CXX_FLAGS= -fvisibility-inlines-hidden -DUSE_PTHREADPOOL -DNDEBUG -DUSE_KINETO -DHAS_CUPTI -DUSE_FBGEMM -DUSE_PYTORCH_QNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE -O2 -fPIC -DC10_NODEPRECATED -Wall -Wextra -Werror=return-type -Werror=non-virtual-dtor -Werror=range-loop-construct -Werror=bool-operation -Wnarrowing -Wno-missing-field-initializers -Wno-unknown-pragmas -Wno-unused-parameter -Wno-strict-overflow -Wno-strict-aliasing -Wno-stringop-overflow -Wsuggest-override -Wno-psabi -Wno-error=old-style-cast -faligned-new -Wno-maybe-uninitialized -fno-math-errno -fno-trapping-math -Werror=format -Wno-dangling-reference -Wno-error=dangling-reference -Wno-stringop-overflow, LAPACK_INFO=mkl, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, TORCH_VERSION=2.13.0, USE_CUDA=1, USE_CUDNN=ON, USE_CUSPARSELT=1, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_GLOO=ON, USE_MKL=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=ON, USE_NNPACK=ON, USE_OPENMP=ON, USE_ROCM=OFF, USE_ROCM_KERNEL_ASSERT=OFF, USE_XCCL=OFF, USE_XPU=OFF, \n",
+          "torch_git_revision": "cf30153c4c131c8164ee7798e5022d810682e2cb"
+        },
+        "source_provenance": {
+          "arms": {
+            "baseline": {
+              "coefficient": 1.0,
+              "cosine": false,
+              "kappa": 1.0,
+              "rate": 1.0,
+              "vic": 1.0
+            },
+            "cap-cosine": {
+              "coefficient": 3.0,
+              "cosine": true,
+              "kappa": 1.25,
+              "rate": 0.85,
+              "vic": 1.0
+            },
+            "cap-cosine-vic005": {
+              "coefficient": 3.0,
+              "cosine": true,
+              "kappa": 1.25,
+              "rate": 0.85,
+              "vic": 0.05
+            }
+          },
+          "device": "cpu",
+          "protocol": {
+            "batch": 64,
+            "betas": [
+              0.0,
+              0.999
+            ],
+            "cap_every": 4,
+            "cosine_floor": 0.05,
+            "cosine_start": 0.6,
+            "critic_lr": 0.0009,
+            "ema": 0.995,
+            "generator_lr": 0.0006,
+            "noise_floor": 0.03,
+            "noise_hold_ratio": 1.3,
+            "noise_horizon": 8000,
+            "noise_start": 1.0,
+            "particle_dim": 4,
+            "particle_lr": 0.006,
+            "particles": 128,
+            "record_every": 500,
+            "router_width": 16,
+            "seed": 0,
+            "split_seeds": {
+              "test": 922827,
+              "train": 922071,
+              "validation": 922193
+            },
+            "stable_tail": 3,
+            "steps": 6000,
+            "target_std_floor": 0.0001,
+            "test_size": 4096,
+            "train_size": 1024,
+            "validation_nmse_bound": 0.01,
+            "validation_p95_bound": 0.2,
+            "validation_size": 1024,
+            "width": 48
+          },
+          "python": "3.12.13",
+          "sources": {
+            "benchmarks/paired_error_2d/__main__.py": "e1db44950e96e96cdf38c5aa2b9a523d1d492b58577b8c3edb4dc0aedc40bdd2",
+            "benchmarks/paired_error_2d/run.py": "622b193562b10d6049ad1e70e73a6ab9fc22120790d2d0aed9a5771942857ad2",
+            "benchmarks/paired_error_2d/task.py": "f9e7a26e7a857afa29d5c210a1f1d73e40aab53d4891a6297f96a900a2c3bea8",
+            "particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+            "particlegan/grad_regularizers.py": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747",
+            "particlegan/recipes.py": "77d2221985a71ed303c4eecb8fae9620d068fb9478b119f5c3fd9a11a1eca86b",
+            "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+          },
+          "threads": 1,
+          "torch": "2.13.0+cu126"
+        },
+        "source_sha256": {
+          "benchmarks/legacy/gan_loss.py": "ee26f6d8ef56dde123740f67dd82f48d01f57d4acfa0f3efd299097a1e60600f",
+          "benchmarks/legacy/grad_regularizers.py": "cfe252f52a6d11274e4be78bd13934fc3d919abe7d0ba349e5bd0199a45dcb5d",
+          "benchmarks/paired_error_2d/SOURCE.md": "1ca3f961100111bf0798e2df831a34a48c2dfba78c8be2ddabcd73d3fb2ede98",
+          "benchmarks/paired_error_2d/__main__.py": "e1db44950e96e96cdf38c5aa2b9a523d1d492b58577b8c3edb4dc0aedc40bdd2",
+          "benchmarks/paired_error_2d/run.py": "622b193562b10d6049ad1e70e73a6ab9fc22120790d2d0aed9a5771942857ad2",
+          "benchmarks/paired_error_2d/task.py": "f9e7a26e7a857afa29d5c210a1f1d73e40aab53d4891a6297f96a900a2c3bea8",
+          "benchmarks/toy_audit/source_paired_transport_training.py": "65deb00ffafabb85d4cf8709c4c03513a8c32f54997d3acff7de9690275f1f7c",
+          "benchmarks/toy_audit/source_routed_ring_training.py": "0a38c96c4ba868d10eff6319902b6db8ab309ca89d523499d12b74ea47eb8946",
+          "particlegan/recipes.py": "77d2221985a71ed303c4eecb8fae9620d068fb9478b119f5c3fd9a11a1eca86b",
+          "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+        }
+      },
+      "catalog_id": "source-family-08",
+      "cloud": "movable",
+      "curve_archive": {
+        "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-paired-transport-v1/affine2/captured-metrics.json",
+        "sha256": "3b1bd50d5ae087fa24a1f25edb42aa22f7f33f12a7e902487d7c719b53fe50fa"
+      },
+      "executed_source_archive": {
+        "observer": {
+          "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-paired-transport-v1/affine2/executed-observer.py",
+          "sha256": "65deb00ffafabb85d4cf8709c4c03513a8c32f54997d3acff7de9690275f1f7c"
+        },
+        "quality": {
+          "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-paired-transport-v1/affine2/executed-quality.py",
+          "sha256": "42d835ab7a0937a6c3759dd719691c721663b7857cb990405253e90f7fbd4cc9"
+        }
+      },
+      "expected_updates": 6000,
+      "final": {
+        "added_ema": {
+          "mse": 1.9935423373115352e-05,
+          "neutral_mse": 0.4643667575362169,
+          "passed": true,
+          "relative_mse": 4.293034126492258e-05
+        },
+        "added_live": {
+          "mse": 0.0002638817595791434,
+          "neutral_mse": 0.4643667575362169,
+          "passed": true,
+          "relative_mse": 0.0005682615202242652
+        },
+        "original_ema": {
+          "nmse": 2.0390816644066945e-05,
+          "p95_distance": 0.011897335760295391,
+          "rmse": 0.004464910365641117,
+          "within_0p1": 1.0
+        },
+        "original_live": {
+          "nmse": 0.00026990973856300116,
+          "p95_distance": 0.03915499895811081,
+          "rmse": 0.01624443754553795,
+          "within_0p1": 1.0
+        },
+        "step": 6000
+      },
+      "fresh_execution_status": "COMPLETE",
+      "full_budget_complete": true,
+      "heldout_not_a_training_loss": true,
+      "initial_hashes": {
+        "critic": "65b829585c7493054d1286a9e4097b787b2f2be6eaa6013e7ec09d0b38f09994",
+        "generator": "0d81c61b885bf650ba39b0b8770f3746aaa06cb643d06f410c5801986fec3ea4"
+      },
+      "label": "affine2-baseline-movable-s0",
+      "last_saved_step": 6000,
+      "latest_checkpoint": {
+        "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-paired-transport-v1/affine2/source-output/runs/affine2-baseline-movable-s0/latest.pt",
+        "sha256": "8ae909835746224afe56bd158d52778ae8ca5b3edcff90cb3690b91bc6085554"
+      },
+      "media": "media/affine2-baseline-movable.gif",
+      "media_receipt": {
+        "actual_step_indices": [
+          0,
+          500,
+          1000,
+          1500,
+          2000,
+          2500,
+          3000,
+          3500,
+          4000,
+          4500,
+          5000,
+          5500,
+          6000
+        ],
+        "curve_archive": {
+          "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-paired-transport-v1/affine2/captured-metrics.json",
+          "sha256": "3b1bd50d5ae087fa24a1f25edb42aa22f7f33f12a7e902487d7c719b53fe50fa"
+        },
+        "frame_helper_sha256": "27fd730928846b4d3034237d48297b29b79bb55189f9f54f85adcbc7df8a0cfa",
+        "interpolation": false,
+        "media": {
+          "bytes": 507218,
+          "frames": 13,
+          "interpolation": false,
+          "path": "reports/toy_audit/paired_sources/media/affine2-baseline-movable.gif",
+          "poster": "reports/toy_audit/paired_sources/media/affine2-baseline-movable.png",
+          "sha256": "37f5ebb694d6960c1b19d155d01d8b6d321d96d5d26f51cec1ea04a1ed03249e"
+        },
+        "observation_archive": {
+          "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-paired-transport-v1/affine2/observations.npz",
+          "sha256": "78aef5bf230ba3fefc0975a289851bbcee38d595d65d33d28cfa6aaaff811451"
+        },
+        "renderer_sha256": "d3b5542992a16c2fd6f1bd4c2f8ddcad4a9c99f6e858380f871da78ae7a0215a",
+        "training_receipt": {
+          "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-paired-transport-v1/affine2-receipt.json",
+          "sha256": "656399a02153ef5e45cdf32c24482bdc0570f9f461cdac1647c61d7aaa7b6b6a"
+        }
+      },
+      "media_receipt_archive": {
+        "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-paired-transport-v1/affine2-media.json",
+        "sha256": "6eccbda685eca544591fe7b31d883f6a0a6dd1d4a9f0291ff05362a6e42b06ac"
+      },
+      "model_control_scope": "baseline/movable is one model/recipe control on this target law; fixed and candidate controls are not additional laws and were not run",
+      "name": "Paired affine2 transport",
+      "observation_archive": {
+        "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-paired-transport-v1/affine2/observations.npz",
+        "sha256": "78aef5bf230ba3fefc0975a289851bbcee38d595d65d33d28cfa6aaaff811451"
+      },
+      "observation_count": 13,
+      "observer_prefix_parity": {
+        "exact": true,
+        "observed": {
+          "losses": "4a7d65895f14f5e0c22d566c4a774763000e307c77d32965c82754180c0a0280",
+          "state": "9e571fa283887826291911639acef8ee97dac75114c98a714066e86783d61962"
+        },
+        "scope": "Software observer parity, including native lazy cap; not a convergence or seed-study result",
+        "unobserved": {
+          "losses": "4a7d65895f14f5e0c22d566c4a774763000e307c77d32965c82754180c0a0280",
+          "state": "9e571fa283887826291911639acef8ee97dac75114c98a714066e86783d61962"
+        },
+        "updates": 4
+      },
+      "observer_state_purity": {
+        "checks": 13,
+        "exact": true
+      },
+      "original_gate_definition": "Source stable_live and stable_ema each require completed6000budget and NMSE<=.01,p95<=.2 at all final3original validation observations; publication PASS requires both flags",
+      "original_scientific_status": "PASS",
+      "original_stable_ema": true,
+      "original_stable_live": true,
+      "sampling_policy": "Clean ordinary live and EMA residual-student forwards on all1024 original validation rows; no prediction noise, no test rows",
+      "seconds": 22.316051639150828,
+      "source_metrics_archive": {
+        "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-paired-transport-v1/affine2/source-output/runs/affine2-baseline-movable-s0/metrics.json",
+        "sha256": "03b49217e53d9647ee7ed0ce25f59a45eb959ea271dd05b1b71ef7a21ccf5d34"
+      },
+      "subset_scope": "One source-default baseline/movable job per data law. Other declared recipe/cloud controls and all12-job test selection are not executed or qualified.",
+      "task": "affine2",
+      "test_evaluation_status": "NOT_RUN: source freeze_and_evaluate requires all12 declared jobs complete before checkpoint freeze/test evaluation",
+      "training_receipt_archive": {
+        "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-paired-transport-v1/affine2-receipt.json",
+        "sha256": "656399a02153ef5e45cdf32c24482bdc0570f9f461cdac1647c61d7aaa7b6b6a"
+      },
+      "version": "paired-source-transport-v1",
+      "wall_cap": 120
+    },
+    {
+      "actual_model_shapes": {
+        "critic": {
+          "edit_rms": [],
+          "input_scale": [],
+          "net.0.bias": [
+            48
+          ],
+          "net.0.weight": [
+            48,
+            2
+          ],
+          "net.2.bias": [
+            48
+          ],
+          "net.2.weight": [
+            48,
+            48
+          ],
+          "net.4.bias": [
+            48
+          ],
+          "net.4.weight": [
+            48,
+            48
+          ],
+          "net.6.bias": [
+            1
+          ],
+          "net.6.weight": [
+            1,
+            48
+          ],
+          "target_mean": [
+            2
+          ],
+          "target_std": [
+            2
+          ]
+        },
+        "model": {
+          "bridge.net.0.bias": [
+            48
+          ],
+          "bridge.net.0.weight": [
+            48,
+            6
+          ],
+          "bridge.net.2.bias": [
+            48
+          ],
+          "bridge.net.2.weight": [
+            48,
+            48
+          ],
+          "bridge.net.4.bias": [
+            48
+          ],
+          "bridge.net.4.weight": [
+            48,
+            48
+          ],
+          "bridge.net.6.bias": [
+            2
+          ],
+          "bridge.net.6.weight": [
+            2,
+            48
+          ],
+          "bridge.router.0.bias": [
+            16
+          ],
+          "bridge.router.0.weight": [
+            16,
+            2
+          ],
+          "bridge.router.2.bias": [
+            16
+          ],
+          "bridge.router.2.weight": [
+            16,
+            16
+          ],
+          "bridge.router.4.bias": [
+            16
+          ],
+          "bridge.router.4.weight": [
+            16,
+            16
+          ],
+          "bridge.router.6.bias": [
+            4
+          ],
+          "bridge.router.6.weight": [
+            4,
+            16
+          ],
+          "particles": [
+            128,
+            4
+          ]
+        }
+      },
+      "actual_step_indices": [
+        0,
+        500,
+        1000,
+        1500,
+        2000,
+        2500,
+        3000,
+        3500,
+        4000,
+        4500,
+        5000,
+        5500,
+        6000
+      ],
+      "added_gate_definition": "Clean paired MSE/identity-neutral MSE<=.10 for bothlive+EMA; at least5passing terminal original-cadence observations and full6000budget",
+      "added_gate_status": "PASS",
+      "added_terminal_window": {
+        "checks": 12,
+        "minimum_checks": 5,
+        "passed": true,
+        "passing_checks": 11,
+        "passing_suffix": 11
+      },
+      "arm": "baseline",
+      "best_observation_scope": "Source validation-only EMA NMSE selection; distinct from terminal sustained gates; no test qualification",
+      "best_validation_ema_observation": {
+        "added_ema": {
+          "mse": 0.0013535424639642688,
+          "neutral_mse": 1.9065421786446923,
+          "passed": true,
+          "relative_mse": 0.0007099462467315905
+        },
+        "added_live": {
+          "mse": 0.004716411081033006,
+          "neutral_mse": 1.9065421786446923,
+          "passed": true,
+          "relative_mse": 0.0024738036922874536
+        },
+        "original_ema": {
+          "nmse": 0.0013839835301041603,
+          "p95_distance": 0.07443786412477493,
+          "rmse": 0.03679051995277405,
+          "within_0p1": 0.9697265625
+        },
+        "original_live": {
+          "nmse": 0.0048224832862615585,
+          "p95_distance": 0.15892234444618225,
+          "rmse": 0.06867613643407822,
+          "within_0p1": 0.75390625
+        },
+        "step": 6000
+      },
+      "binding": {
+        "declared_arms": {
+          "baseline": {
+            "coefficient": 1.0,
+            "cosine": false,
+            "kappa": 1.0,
+            "rate": 1.0,
+            "vic": 1.0
+          },
+          "cap-cosine": {
+            "coefficient": 3.0,
+            "cosine": true,
+            "kappa": 1.25,
+            "rate": 0.85,
+            "vic": 1.0
+          },
+          "cap-cosine-vic005": {
+            "coefficient": 3.0,
+            "cosine": true,
+            "kappa": 1.25,
+            "rate": 0.85,
+            "vic": 0.05
+          }
+        },
+        "declared_protocol": {
+          "batch": 64,
+          "betas": [
+            0.0,
+            0.999
+          ],
+          "cap_every": 4,
+          "cosine_floor": 0.05,
+          "cosine_start": 0.6,
+          "critic_lr": 0.0009,
+          "ema": 0.995,
+          "generator_lr": 0.0006,
+          "noise_floor": 0.03,
+          "noise_hold_ratio": 1.3,
+          "noise_horizon": 8000,
+          "noise_start": 1.0,
+          "particle_dim": 4,
+          "particle_lr": 0.006,
+          "particles": 128,
+          "record_every": 500,
+          "router_width": 16,
+          "seed": 0,
+          "split_seeds": {
+            "test": 922827,
+            "train": 922071,
+            "validation": 922193
+          },
+          "stable_tail": 3,
+          "steps": 6000,
+          "target_std_floor": 0.0001,
+          "test_size": 4096,
+          "train_size": 1024,
+          "validation_nmse_bound": 0.01,
+          "validation_p95_bound": 0.2,
+          "validation_size": 1024,
+          "width": 48
+        },
+        "deterministic_algorithms": true,
+        "executed_arm": {
+          "coefficient": 1.0,
+          "cosine": false,
+          "kappa": 1.0,
+          "rate": 1.0,
+          "vic": 1.0
+        },
+        "quality_evaluator": {
+          "path": "/ml2/hypergan/ParticleGAN-toy-problem-audit/benchmarks/toy_audit/definition_quality.py",
+          "sha256": "42d835ab7a0937a6c3759dd719691c721663b7857cb990405253e90f7fbd4cc9"
+        },
+        "runtime": {
+          "cpu_capability": "AVX2",
+          "device": "cpu",
+          "machine": "x86_64",
+          "numpy": "2.5.2",
+          "python": "3.12.13",
+          "threads": 1,
+          "torch": "2.13.0+cu126",
+          "torch_build": "PyTorch built with:\n  - GCC 13.3\n  - C++ Version: 202002\n  - Intel(R) oneAPI Math Kernel Library Version 2024.2-Product Build 20240605 for Intel(R) 64 architecture applications\n  - Intel(R) MKL-DNN v3.12.0 (Git Hash 80afa71049cd69a3df32adcccb623b12cd7baa22)\n  - OpenMP 201511 (a.k.a. OpenMP 4.5)\n  - LAPACK is enabled (usually provided by MKL)\n  - NNPACK is enabled\n  - CPU capability usage: AVX2\n  - Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release, COMMIT_SHA=cf30153c4c131c8164ee7798e5022d810682e2cb, CUDA_FLAGS= -DLIBCUDACXX_ENABLE_SIMPLIFIED_COMPLEX_OPERATIONS -Xfatbin -compress-all -DONNX_NAMESPACE=onnx_torch -gencode arch=compute_50,code=sm_50 -gencode arch=compute_60,code=sm_60 -gencode arch=compute_70,code=sm_70 -gencode arch=compute_75,code=sm_75 -gencode arch=compute_80,code=sm_80 -gencode arch=compute_86,code=sm_86 -gencode arch=compute_90,code=sm_90 -Xcudafe --diag_suppress=cc_clobber_ignored,--diag_suppress=field_without_dll_interface,--diag_suppress=base_class_has_different_dll_interface,--diag_suppress=dll_interface_conflict_none_assumed,--diag_suppress=dll_interface_conflict_dllexport_assumed,--diag_suppress=bad_friend_decl --expt-relaxed-constexpr --expt-extended-lambda -Xfatbin -compress-all --threads 2 -Wno-deprecated-gpu-targets --expt-extended-lambda -DCUB_WRAPPED_NAMESPACE=at_cuda_detail -DDISABLE_CUSPARSE_DEPRECATED -DCUDA_HAS_FP16=1 -D__CUDA_NO_HALF_OPERATORS__ -D__CUDA_NO_HALF_CONVERSIONS__ -D__CUDA_NO_HALF2_OPERATORS__ -D__CUDA_NO_BFLOAT16_CONVERSIONS__ -DC10_NODEPRECATED, CUDA_VERSION=12.6, CUDNN_VERSION=9.10.2, CXX_COMPILER=/opt/rh/gcc-toolset-13/root/usr/bin/c++, CXX_FLAGS= -fvisibility-inlines-hidden -DUSE_PTHREADPOOL -DNDEBUG -DUSE_KINETO -DHAS_CUPTI -DUSE_FBGEMM -DUSE_PYTORCH_QNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE -O2 -fPIC -DC10_NODEPRECATED -Wall -Wextra -Werror=return-type -Werror=non-virtual-dtor -Werror=range-loop-construct -Werror=bool-operation -Wnarrowing -Wno-missing-field-initializers -Wno-unknown-pragmas -Wno-unused-parameter -Wno-strict-overflow -Wno-strict-aliasing -Wno-stringop-overflow -Wsuggest-override -Wno-psabi -Wno-error=old-style-cast -faligned-new -Wno-maybe-uninitialized -fno-math-errno -fno-trapping-math -Werror=format -Wno-dangling-reference -Wno-error=dangling-reference -Wno-stringop-overflow, LAPACK_INFO=mkl, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, TORCH_VERSION=2.13.0, USE_CUDA=1, USE_CUDNN=ON, USE_CUSPARSELT=1, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_GLOO=ON, USE_MKL=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=ON, USE_NNPACK=ON, USE_OPENMP=ON, USE_ROCM=OFF, USE_ROCM_KERNEL_ASSERT=OFF, USE_XCCL=OFF, USE_XPU=OFF, \n",
+          "torch_git_revision": "cf30153c4c131c8164ee7798e5022d810682e2cb"
+        },
+        "source_provenance": {
+          "arms": {
+            "baseline": {
+              "coefficient": 1.0,
+              "cosine": false,
+              "kappa": 1.0,
+              "rate": 1.0,
+              "vic": 1.0
+            },
+            "cap-cosine": {
+              "coefficient": 3.0,
+              "cosine": true,
+              "kappa": 1.25,
+              "rate": 0.85,
+              "vic": 1.0
+            },
+            "cap-cosine-vic005": {
+              "coefficient": 3.0,
+              "cosine": true,
+              "kappa": 1.25,
+              "rate": 0.85,
+              "vic": 0.05
+            }
+          },
+          "device": "cpu",
+          "protocol": {
+            "batch": 64,
+            "betas": [
+              0.0,
+              0.999
+            ],
+            "cap_every": 4,
+            "cosine_floor": 0.05,
+            "cosine_start": 0.6,
+            "critic_lr": 0.0009,
+            "ema": 0.995,
+            "generator_lr": 0.0006,
+            "noise_floor": 0.03,
+            "noise_hold_ratio": 1.3,
+            "noise_horizon": 8000,
+            "noise_start": 1.0,
+            "particle_dim": 4,
+            "particle_lr": 0.006,
+            "particles": 128,
+            "record_every": 500,
+            "router_width": 16,
+            "seed": 0,
+            "split_seeds": {
+              "test": 922827,
+              "train": 922071,
+              "validation": 922193
+            },
+            "stable_tail": 3,
+            "steps": 6000,
+            "target_std_floor": 0.0001,
+            "test_size": 4096,
+            "train_size": 1024,
+            "validation_nmse_bound": 0.01,
+            "validation_p95_bound": 0.2,
+            "validation_size": 1024,
+            "width": 48
+          },
+          "python": "3.12.13",
+          "sources": {
+            "benchmarks/paired_error_2d/__main__.py": "e1db44950e96e96cdf38c5aa2b9a523d1d492b58577b8c3edb4dc0aedc40bdd2",
+            "benchmarks/paired_error_2d/run.py": "622b193562b10d6049ad1e70e73a6ab9fc22120790d2d0aed9a5771942857ad2",
+            "benchmarks/paired_error_2d/task.py": "f9e7a26e7a857afa29d5c210a1f1d73e40aab53d4891a6297f96a900a2c3bea8",
+            "particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+            "particlegan/grad_regularizers.py": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747",
+            "particlegan/recipes.py": "77d2221985a71ed303c4eecb8fae9620d068fb9478b119f5c3fd9a11a1eca86b",
+            "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+          },
+          "threads": 1,
+          "torch": "2.13.0+cu126"
+        },
+        "source_sha256": {
+          "benchmarks/legacy/gan_loss.py": "ee26f6d8ef56dde123740f67dd82f48d01f57d4acfa0f3efd299097a1e60600f",
+          "benchmarks/legacy/grad_regularizers.py": "cfe252f52a6d11274e4be78bd13934fc3d919abe7d0ba349e5bd0199a45dcb5d",
+          "benchmarks/paired_error_2d/SOURCE.md": "1ca3f961100111bf0798e2df831a34a48c2dfba78c8be2ddabcd73d3fb2ede98",
+          "benchmarks/paired_error_2d/__main__.py": "e1db44950e96e96cdf38c5aa2b9a523d1d492b58577b8c3edb4dc0aedc40bdd2",
+          "benchmarks/paired_error_2d/run.py": "622b193562b10d6049ad1e70e73a6ab9fc22120790d2d0aed9a5771942857ad2",
+          "benchmarks/paired_error_2d/task.py": "f9e7a26e7a857afa29d5c210a1f1d73e40aab53d4891a6297f96a900a2c3bea8",
+          "benchmarks/toy_audit/source_paired_transport_training.py": "65deb00ffafabb85d4cf8709c4c03513a8c32f54997d3acff7de9690275f1f7c",
+          "benchmarks/toy_audit/source_routed_ring_training.py": "0a38c96c4ba868d10eff6319902b6db8ab309ca89d523499d12b74ea47eb8946",
+          "particlegan/recipes.py": "77d2221985a71ed303c4eecb8fae9620d068fb9478b119f5c3fd9a11a1eca86b",
+          "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+        }
+      },
+      "catalog_id": "source-family-09",
+      "cloud": "movable",
+      "curve_archive": {
+        "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-paired-transport-v1/swirl2/captured-metrics.json",
+        "sha256": "024292f32b613f71c30f3d1b19b5f9ba3b20250d5225e834e36ce50e5f2fa356"
+      },
+      "executed_source_archive": {
+        "observer": {
+          "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-paired-transport-v1/swirl2/executed-observer.py",
+          "sha256": "65deb00ffafabb85d4cf8709c4c03513a8c32f54997d3acff7de9690275f1f7c"
+        },
+        "quality": {
+          "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-paired-transport-v1/swirl2/executed-quality.py",
+          "sha256": "42d835ab7a0937a6c3759dd719691c721663b7857cb990405253e90f7fbd4cc9"
+        }
+      },
+      "expected_updates": 6000,
+      "final": {
+        "added_ema": {
+          "mse": 0.0013535424639642688,
+          "neutral_mse": 1.9065421786446923,
+          "passed": true,
+          "relative_mse": 0.0007099462467315905
+        },
+        "added_live": {
+          "mse": 0.004716411081033006,
+          "neutral_mse": 1.9065421786446923,
+          "passed": true,
+          "relative_mse": 0.0024738036922874536
+        },
+        "original_ema": {
+          "nmse": 0.0013839835301041603,
+          "p95_distance": 0.07443786412477493,
+          "rmse": 0.03679051995277405,
+          "within_0p1": 0.9697265625
+        },
+        "original_live": {
+          "nmse": 0.0048224832862615585,
+          "p95_distance": 0.15892234444618225,
+          "rmse": 0.06867613643407822,
+          "within_0p1": 0.75390625
+        },
+        "step": 6000
+      },
+      "fresh_execution_status": "COMPLETE",
+      "full_budget_complete": true,
+      "heldout_not_a_training_loss": true,
+      "initial_hashes": {
+        "critic": "7b306ba8aa7576b865a354e7dde06bf457d33837057fb59a3d0a5e2dfefa11f4",
+        "generator": "0d81c61b885bf650ba39b0b8770f3746aaa06cb643d06f410c5801986fec3ea4"
+      },
+      "label": "swirl2-baseline-movable-s0",
+      "last_saved_step": 6000,
+      "latest_checkpoint": {
+        "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-paired-transport-v1/swirl2/source-output/runs/swirl2-baseline-movable-s0/latest.pt",
+        "sha256": "4f042310cbf7fa1d7daa4a57d2b384029423ed9b0b3a99de4009789c39dcd3ee"
+      },
+      "media": "media/swirl2-baseline-movable.gif",
+      "media_receipt": {
+        "actual_step_indices": [
+          0,
+          500,
+          1000,
+          1500,
+          2000,
+          2500,
+          3000,
+          3500,
+          4000,
+          4500,
+          5000,
+          5500,
+          6000
+        ],
+        "curve_archive": {
+          "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-paired-transport-v1/swirl2/captured-metrics.json",
+          "sha256": "024292f32b613f71c30f3d1b19b5f9ba3b20250d5225e834e36ce50e5f2fa356"
+        },
+        "frame_helper_sha256": "27fd730928846b4d3034237d48297b29b79bb55189f9f54f85adcbc7df8a0cfa",
+        "interpolation": false,
+        "media": {
+          "bytes": 506562,
+          "frames": 13,
+          "interpolation": false,
+          "path": "reports/toy_audit/paired_sources/media/swirl2-baseline-movable.gif",
+          "poster": "reports/toy_audit/paired_sources/media/swirl2-baseline-movable.png",
+          "sha256": "0a8708aef1f50b802b2cdde6b8dbec99ac6a478e218fc5ab852d4ebe2daf2354"
+        },
+        "observation_archive": {
+          "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-paired-transport-v1/swirl2/observations.npz",
+          "sha256": "6ddbdbf81c4e8fcd4ea296e52267c6ed8a64a25ebad3c3cf7f67390ab5bc6d23"
+        },
+        "renderer_sha256": "d3b5542992a16c2fd6f1bd4c2f8ddcad4a9c99f6e858380f871da78ae7a0215a",
+        "training_receipt": {
+          "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-paired-transport-v1/swirl2-receipt.json",
+          "sha256": "b3720f9fc1ea679639e077ec202a8452a0b285e8f589fcda956ccd581b342c87"
+        }
+      },
+      "media_receipt_archive": {
+        "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-paired-transport-v1/swirl2-media.json",
+        "sha256": "c944688a7535a59ba199af90ab0b8039388200491221f3ad11c1735d94e3cd39"
+      },
+      "model_control_scope": "baseline/movable is one model/recipe control on this target law; fixed and candidate controls are not additional laws and were not run",
+      "name": "Paired swirl2 transport",
+      "observation_archive": {
+        "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-paired-transport-v1/swirl2/observations.npz",
+        "sha256": "6ddbdbf81c4e8fcd4ea296e52267c6ed8a64a25ebad3c3cf7f67390ab5bc6d23"
+      },
+      "observation_count": 13,
+      "observer_prefix_parity": {
+        "exact": true,
+        "observed": {
+          "losses": "bc320ba21d246c0238ee14083f1553a05104aec3ba9a9182643e01ea1d6b94a7",
+          "state": "a3e5e821dfca78d2a889819a57577291ef0fa93dbc9ed4470167bc35ffe142bd"
+        },
+        "scope": "Software observer parity, including native lazy cap; not a convergence or seed-study result",
+        "unobserved": {
+          "losses": "bc320ba21d246c0238ee14083f1553a05104aec3ba9a9182643e01ea1d6b94a7",
+          "state": "a3e5e821dfca78d2a889819a57577291ef0fa93dbc9ed4470167bc35ffe142bd"
+        },
+        "updates": 4
+      },
+      "observer_state_purity": {
+        "checks": 13,
+        "exact": true
+      },
+      "original_gate_definition": "Source stable_live and stable_ema each require completed6000budget and NMSE<=.01,p95<=.2 at all final3original validation observations; publication PASS requires both flags",
+      "original_scientific_status": "PASS",
+      "original_stable_ema": true,
+      "original_stable_live": true,
+      "sampling_policy": "Clean ordinary live and EMA residual-student forwards on all1024 original validation rows; no prediction noise, no test rows",
+      "seconds": 18.90994379390031,
+      "source_metrics_archive": {
+        "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-paired-transport-v1/swirl2/source-output/runs/swirl2-baseline-movable-s0/metrics.json",
+        "sha256": "f5ef6afa10b59ad70e36c62ad493b036845f2b7b6f3e5a8929fd0835871bf2f0"
+      },
+      "subset_scope": "One source-default baseline/movable job per data law. Other declared recipe/cloud controls and all12-job test selection are not executed or qualified.",
+      "task": "swirl2",
+      "test_evaluation_status": "NOT_RUN: source freeze_and_evaluate requires all12 declared jobs complete before checkpoint freeze/test evaluation",
+      "training_receipt_archive": {
+        "path": "/ml2/hypergan/toy-audit-artifacts-20261001/source-paired-transport-v1/swirl2-receipt.json",
+        "sha256": "b3720f9fc1ea679639e077ec202a8452a0b285e8f589fcda956ccd581b342c87"
+      },
+      "version": "paired-source-transport-v1",
+      "wall_cap": 120
+    }
+  ],
+  "report_generator_sha256": "a396d58178f4ceb169d54678551607dfb9efe7e9d689f9d00a9e107cdca323a0",
+  "scientific_jobs": 2,
+  "scope": "Two unchanged baseline/movable source jobs; original12-arm frozen-selection/test prerequisite retained. No Forge/default qualification, seed study, configuration repair, retry or budget extension.",
+  "target_laws": 2,
+  "version": "paired-source-transport-v1"
+}

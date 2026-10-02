@@ -1,0 +1,62 @@
+{
+  "schema": "toy_audit_pr227_supplemental_media_verification_v1",
+  "receipt_sha256": "b2cc769a68d63c17a6f7e00313ebc5ab0a4547cc4a91b4f8880e3be8ef495326",
+  "complete_artifact_manifest_validation": {
+    "guided_pair": 157,
+    "rotated_teacher": 149
+  },
+  "parser_controls": {
+    "passed": 16,
+    "includes": "both actual complete streams, and missing/duplicate/unknown-arm/substituted-judge/software-only-step/nonfinite/boolean cases per protocol"
+  },
+  "controls_log": {
+    "path": "/ml2/hypergan/toy-pr227-current-media-software-check-20261001.log",
+    "sha256": "aab6ecadca6fec730229a8c4e2a2ea3b30e1522fbf1f62857cd2a9cc1ee69baf"
+  },
+  "media": [
+    {
+      "protocol": "guided_pair",
+      "gif_sha256": "bbfa88b0593b96ca2740435fbc54ce8099448aa92dd8e99b17648d8516188af0",
+      "decoded_frame_count": 34,
+      "decoded_pixel_size": [
+        920,
+        650
+      ],
+      "durations_ms": {
+        "first33": 220,
+        "final": 1800
+      },
+      "visual_inspection": {
+        "actual_updates": [
+          3200,
+          6400
+        ],
+        "poster_sha256": "9c0072b168b07f2a01226b8a9a4d2f80ad7493f7e9473fbe8110fc8663ca7e62",
+        "frame3200_sha256": "35ef800bce7fe57c974e34fdeeee59011cc30dafd0e46bae433233bceaffb09c",
+        "result": "All four critic panels, actual step labels, three arm colors, fixed finite axes and readable labels; no clipping or overlap."
+      }
+    },
+    {
+      "protocol": "rotated_teacher",
+      "gif_sha256": "1562b0b682d2cfeaa4fc7581acfa5d71d832cbb3f83510eaa2bc226d53cf2e95",
+      "decoded_frame_count": 34,
+      "decoded_pixel_size": [
+        920,
+        650
+      ],
+      "durations_ms": {
+        "first33": 220,
+        "final": 1800
+      },
+      "visual_inspection": {
+        "actual_updates": [
+          3200,
+          6400
+        ],
+        "poster_sha256": "c60edeb11d5bd98074388b829de14e405a9fd200218165874eeb53529ca1010e",
+        "frame3200_sha256": "184167cb54d781eb348bca72119a9152378b99a6b7574d9aac898aadb6d7c267",
+        "result": "All four critic panels, actual step labels, three arm colors, fixed finite axes and readable labels; no clipping or overlap."
+      }
+    }
+  ]
+}

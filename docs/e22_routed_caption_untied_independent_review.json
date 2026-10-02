@@ -1,0 +1,197 @@
+{
+  "complete": true,
+  "independent_integrity_status": "PASS",
+  "scientific_status": "PASS",
+  "gate": {
+    "versus_ordinary": {
+      "aggregate_accuracy_improved": true,
+      "no_source_harmed": true,
+      "aggregate_code_benefit": true,
+      "code_beneficial_each_source": true,
+      "bank_live": true,
+      "query_live": true,
+      "C_live_all_six_sites": true,
+      "pass": true
+    },
+    "versus_shared": {
+      "aggregate_accuracy_improved": true,
+      "no_source_harmed": true,
+      "aggregate_code_benefit": true,
+      "code_beneficial_each_source": true,
+      "bank_live": true,
+      "query_live": true,
+      "C_live_all_six_sites": true,
+      "pass": true
+    },
+    "particle_Up_live_all_six_sites": true,
+    "pass": true
+  },
+  "accuracy": {
+    "ordinary_BF16": {
+      "rmse": 0.006489918631166268,
+      "by_source": {
+        "0": 0.0064765666031385985,
+        "1": 0.006493289599499693,
+        "2": 0.006432832856963881,
+        "3": 0.006548754832801855,
+        "4": 0.0064956577826819776,
+        "5": 0.006491874905726111
+      }
+    },
+    "particle_BF16": {
+      "rmse": 0.006506938519664952,
+      "by_source": {
+        "0": 0.006487325314658033,
+        "1": 0.006510053620327607,
+        "2": 0.006510023689070444,
+        "3": 0.0065533339365834034,
+        "4": 0.006522276640716353,
+        "5": 0.00645822102593162
+      }
+    },
+    "particle_untied_BF16": {
+      "rmse": 0.0064494270777140025,
+      "by_source": {
+        "0": 0.006469858005005055,
+        "1": 0.006489751387196253,
+        "2": 0.006392043400674947,
+        "3": 0.006472869454276233,
+        "4": 0.006444339200536239,
+        "5": 0.0064272044134426965
+      }
+    },
+    "zero_code": {
+      "rmse": 0.0070268628839148225,
+      "by_source": {
+        "0": 0.007157348321647119,
+        "1": 0.006816534498718342,
+        "2": 0.006632618414875181,
+        "3": 0.007039252010068408,
+        "4": 0.007284677210054499,
+        "5": 0.007208246417344195
+      }
+    }
+  },
+  "relative_accuracy_improvement": {
+    "ordinary_BF16": 0.006239146552287189,
+    "particle_BF16": 0.008838479382760611
+  },
+  "relative_code_benefit": 0.08953288396672465,
+  "candidate_minus_control_by_source": {
+    "ordinary_BF16": {
+      "0": -6.708598133543797e-06,
+      "1": -3.5382123034404314e-06,
+      "2": -4.0789456288933996e-05,
+      "3": -7.58853785256218e-05,
+      "4": -5.131858214573858e-05,
+      "5": -6.467049228341473e-05
+    },
+    "particle_BF16": {
+      "0": -1.7467309652977915e-05,
+      "1": -2.030223313135432e-05,
+      "2": -0.00011798028839549689,
+      "3": -8.046448230717047e-05,
+      "4": -7.793744018011386e-05,
+      "5": -3.1016612488923324e-05
+    }
+  },
+  "live_counts": {
+    "ordinary_BF16": {
+      "bank": 0,
+      "query": 0
+    },
+    "particle_BF16": {
+      "bank": 511,
+      "query": 511
+    },
+    "particle_untied_BF16": {
+      "bank": 511,
+      "query": 511
+    }
+  },
+  "live_denominator": 511,
+  "population_events": {
+    "ordinary_BF16": {
+      "proposal_events_including_skips": 0,
+      "accepted_row_moves": 0,
+      "accepted_proposals": 0
+    },
+    "particle_BF16": {
+      "proposal_events_including_skips": 5,
+      "accepted_row_moves": 0,
+      "accepted_proposals": 0
+    },
+    "particle_untied_BF16": {
+      "proposal_events_including_skips": 5,
+      "accepted_row_moves": 0,
+      "accepted_proposals": 0
+    }
+  },
+  "baseline_consistency": {
+    "ordinary_BF16": {
+      "tensors_exact": true,
+      "max_abs_difference": 0.0,
+      "RMSE_difference": 0.0
+    },
+    "particle_BF16": {
+      "tensors_exact": true,
+      "max_abs_difference": 0.0,
+      "RMSE_difference": 0.0
+    }
+  },
+  "prior_PR239_status_unchanged": "FAIL",
+  "full_trace_steps_exact": true,
+  "matched_data_Gaussian_penalty_streams": true,
+  "reconstructed_TEST_context_and_zero_target_digests_exact": true,
+  "file_sha256": {
+    "examples/e22_routed_caption_untied.py": "a35938f51b7974677651d2c05b1aa396896255460e213cf26ccf57409efcdb81",
+    "docs/e22_routed_caption_untied_v1.json": "be0ca520f7426c04a8d9edada3d17027137445e22ff0126cfa078218e96bd7f1",
+    "tests/test_e22_routed_caption_untied.py": "5bde66c3f5cb6efd77a21ff8d69f8faeb9ed40ae94192a9910c5945cae2588c7",
+    "examples/render_e22_routed_caption_untied.py": "18e9c55143e551a2ef961128198ae331f3ea2e3992eb6b1be73bdda333dea77b",
+    "docs/e22_routed_caption_untied_preparation.json": "0c47c94b044c462c6ba22a26aac959429b94d5ac560b5c47395768e9c4940291",
+    "examples/e22_routed_caption_accuracy.py": "bae0f255d890e49bfbe4602bee7f8e84051b24a3cb0219c13b0a42b25768b8e3",
+    "runs/caption-untied-up-v1/report.json": "d1fcf6383c245b5a7c1da9b10ae7c84bffde9637b4aace856b97336e8d9479fd",
+    "runs/caption-untied-up-v1/completion.json": "6f22da16795e837ef9931a4be6ba1e33f1bcec09e1c2102c16a461cdc4ad4db3",
+    "runs/caption-untied-up-v1.external.json": "859ac5e11f48b2ad539e0b791f085da1e4c8fecc816b83d840f24bbcf8349055",
+    "runs/caption-untied-up-v1/endpoint-residuals.pt": "e15348520ef67bd382481ec647ce8ecd259beee6660ec0da5af0cebb077d6c7e",
+    "runs/caption-untied-up-v1/observed-media.pt": "20c7626c4d1ef171b5feef38fa6ffa5051f8ccdc1eef4f6a9c2fa2f3288c5316",
+    "runs/caption-untied-up-v1/ordinary_BF16.jsonl": "85e3e2b1a09448ed04c8a5d5970053f8430cf102acb312615842bd556883e76b",
+    "runs/caption-untied-up-v1/particle_BF16.jsonl": "5d0ae5ebb1bd1c276702adec765c6ac9445caed50b452b89d026acae5f371425",
+    "runs/caption-untied-up-v1/particle_untied_BF16.jsonl": "473bbaf0d0443f7de859a8411f9dd85bd5b6aeb49f0407fcbbcfbd3134ac8842"
+  },
+  "PR239_prior_artifact_sha256": {
+    "report.json": "a6c7ea362704a48c41841fbf6e13be7f1f3b98f7701b61931664696831b47c79",
+    "completion.json": "071a3e98fdbdaf39e23f072cf431e3f08439c6c23d71c83fd4b75cb7ec2ba520",
+    "endpoint-residuals.pt": "ce9404e959f8d0d81c3dc4a94fd64d3693930d7fe50796b3660806a885e27b08"
+  },
+  "native_python_sha256": "7b814e32627ac5a332637d336ebaa13b6baab0b9373f6841d9a22fb8ab39cde9",
+  "all_inputs_sources_native_unchanged": true,
+  "comparison_tolerance": {
+    "rtol": 1e-14,
+    "atol": 1e-15
+  },
+  "reduction": "CPU float64 coordinate sum; independent math.fsum across48contexts/all6sources.",
+  "command": [
+    "/ml2/ntc-image-studio/.venv-anima/bin/python",
+    "/tmp/review_routed_caption_untied_v1.py",
+    "--root",
+    "/ml2/hypergan/ParticleGAN-routed-caption-untied-up-develop",
+    "--old-run",
+    "/ml2/hypergan/ParticleGAN-routed-caption-accuracy-develop/runs/routed-caption-accuracy-v1",
+    "--out",
+    "/ml2/hypergan/ParticleGAN-routed-caption-untied-up-develop/docs/e22_routed_caption_untied_independent_review.json"
+  ],
+  "review_source_sha256": "f2177de9b1ca4757213c11c26447d6e60cdd75c40d9287496f304f90574cc49e",
+  "seconds": 1.142724853940308,
+  "limit_seconds": 60,
+  "model_forwards": 0,
+  "native_updates": 0,
+  "quality_updates": 0,
+  "CUDA_initialized": false,
+  "caller_CPU_RNG_unchanged": true,
+  "GPU_campaign_external_seconds": 161.97279269597493,
+  "limits": [
+    "Saved predictions and trace counts independently checked. Learned norms, native tangent and terminal restore/finite owner checks are source-bound producer witnesses, not fresh model checks.",
+    "Untied heads add82944parameters and separateBF16rounding; this is not unique head-interference causality or actual-Supra improvement."
+  ]
+}

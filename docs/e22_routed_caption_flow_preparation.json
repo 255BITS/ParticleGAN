@@ -1,0 +1,101 @@
+{
+  "schema": "routed_caption_flow_preparation_v1",
+  "task": "routed_caption_correlated_context_v1",
+  "status": "Prepared software PASS only; no full geometry/GPU quality executed",
+  "parent_commit": "5ab86005",
+  "protocol_sha256": "a2d65843979511e0809851711b65292790cfd17e9e9326eed70d15a8c93cc843",
+  "source_identity": {
+    "examples/e22_routed_caption_flow.py": "f868c7cb36db670fc1f08aebeb54e6d863837f8d56e685373e5873b2b4a08e3c",
+    "examples/render_e22_routed_caption_flow.py": "2ec9c596a469269edc54a17b7ca6315af73715d8f849bf027ac39e8e535665e2",
+    "tests/test_e22_routed_caption_flow.py": "ef0e878dc8ebb003e0451863ea6721b1116c5c24835854f9033dbfc3341d93bf",
+    "examples/e22_routed_caption_accuracy.py": "bae0f255d890e49bfbe4602bee7f8e84051b24a3cb0219c13b0a42b25768b8e3",
+    "examples/e22_routed_caption_untied.py": "a35938f51b7974677651d2c05b1aa396896255460e213cf26ccf57409efcdb81",
+    "examples/e22_routed_caption_normalization.py": "7077a03143a8d25577bfb2ed1f167d847e75972131093f9228ca10f6aaca9a0e",
+    "examples/render_e22_routed_caption_untied.py": "18e9c55143e551a2ef961128198ae331f3ea2e3992eb6b1be73bdda333dea77b"
+  },
+  "imported_native_observed": {
+    "imported_package": "/ml2/hypergan/ParticleGAN-routed-caption-flow-develop/particlegan",
+    "python_sha256": "7b814e32627ac5a332637d336ebaa13b6baab0b9373f6841d9a22fb8ab39cde9"
+  },
+  "precision_backend_observed": {
+    "allow_tf32": false,
+    "float32_matmul_precision": "highest",
+    "allow_bf16_reduced_precision_reduction": true
+  },
+  "native_sha_is_preparation_observation_not_runtime_allowlist": true,
+  "software": {
+    "new_cases_passed": 12,
+    "pytest_seconds": 1.93,
+    "external_seconds": 3.6853096270933747,
+    "native_updates_actual": 4,
+    "updates_scope": "One reduced public untied loop0->2 plus fresh public checkpoint0->2; all other caseszero updates",
+    "full576host_forwards": 0,
+    "CUDA_initialized": false,
+    "commands_invoked_once": true,
+    "scope": "Marginal/covariance algebra, original CPU102 stream addressing, all contexts/anchor identities, initial exact anchor, nonfinite rejection, recomputed NEW FIT std/D+EMA scale, public fresh named ownership/tangent/restore, exact native+caller replay, F64 metric/source/code destructive controls, raw-map renderer controls and exclusive paths"
+  },
+  "metadata_only": {
+    "seconds": 1.1854514388833195,
+    "native_updates": 0,
+    "model_constructions": 0,
+    "CUDA_initialized": false
+  },
+  "aggregate_CPU_preparation_process_seconds": 4.870761065976694,
+  "CPU_limit_seconds": 60,
+  "raw_receipts": {
+    "software.log": {
+      "path": "runs/caption-flow-preparation-v1/software.log",
+      "sha256": "3cd30b6e150c99c9a2848ea98ddee76b16272b7cf3093be50fba8163947b4668"
+    },
+    "software-junit.xml": {
+      "path": "runs/caption-flow-preparation-v1/software-junit.xml",
+      "sha256": "c84f01cbafa8ce4fd6ff74a1ea88c9eca56bd6e5c33baf072b54e6bba7cc2f65"
+    },
+    "software-process.json": {
+      "path": "runs/caption-flow-preparation-v1/software-process.json",
+      "sha256": "e5ae8f6a1980466b32032b1168de09c04878290119d37be3f3c283a30b1ce32a"
+    },
+    "native-metadata.log": {
+      "path": "runs/caption-flow-preparation-v1/native-metadata.log",
+      "sha256": "25ca0e21081518d5838e44240cfafcd946f4bdb7eca4f55a97654a169e6e16b4"
+    },
+    "native-metadata-process.json": {
+      "path": "runs/caption-flow-preparation-v1/native-metadata-process.json",
+      "sha256": "31013323600976987f0b99ed0e966b15c1521f2bb25e0d30a1808bfd310c9bce"
+    }
+  },
+  "scientific_result": null,
+  "quality_updates": 0,
+  "full_geometry_prerequisite": "Not executed; runs only in the root-owned first300s campaign",
+  "flow": {
+    "anchor_time": 0.1,
+    "reference_cosine": 0.992,
+    "reference_time_delta": 0.1,
+    "angular_rate": 1.2657558596272396,
+    "formula": "z(t)=cos(omega*(t-.1))*a+sin(omega*(t-.1))*b",
+    "anchor_stream": "CPU102, original iid row addressing; first two time rows per pool/source/occurrence",
+    "independent_trajectories": {
+      "fit": 12,
+      "guard": 6,
+      "test": 12
+    },
+    "same_time_marginal": "N(0,I); independent a,b with no normalization or orthogonalization",
+    "expected_grid_adjacent_cosine": 0.9503495796694267
+  },
+  "normalization": "Same rule; numeric scale recomputed from NEW untrained FIT residuals, not copied oldiid values",
+  "intended_forward_counts": {
+    "data_construction_untrained_paired_residual_forwards": 12,
+    "initial_prerequisite_paired_residual_forwards": 6,
+    "native_quality_updates": 1536,
+    "core_training_paired_residual_forwards": 3072,
+    "fixed_media_paired_residual_forwards": 36,
+    "terminal_three_arm_capture_and_public_restore_repeat_forwards": 72,
+    "terminal_code_ablation_forwards": 12,
+    "fixed_nontraining_paired_residual_forwards_total": 138,
+    "scope": "Each paired residual call includes one source and one live positive-caption teacher backbone call. Counts are exact mandatory source call sites; native feature-guard/candidate reruns and native critic/penalty/monitor internals remain policy-managed extras, not silently claimed absent. No extra original iid host or quality-control rerun."
+  },
+  "raw_paths_ignored": true,
+  "science_command": "CUDA_VISIBLE_DEVICES=0 python -m examples.e22_routed_caption_flow --run --out runs/caption-flow-v1",
+  "render_command": "python -m examples.render_e22_routed_caption_flow --run-directory runs/caption-flow-v1",
+  "limits": "No scientific convergence verdict/actual transfer win/full-Supra promotion. Old sources/tests/cards/results unchanged. Root owns one firstGPU0 campaign; imported package remains runnable across future API revisions."
+}

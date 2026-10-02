@@ -1,0 +1,53 @@
+{
+  "task": "routed_caption_accuracy_v1",
+  "scope": "CPU software preparation only; no convergence result or actual-training GIF yet",
+  "software_status": "PASS",
+  "cases": 20,
+  "pytest_seconds": 1.81,
+  "observed_tool_wall_seconds": 3.554595831,
+  "command": "python -m pytest tests/test_e22_routed_caption_accuracy.py -q",
+  "runs": 1,
+  "native_software_updates": 4,
+  "native_quality_updates": 0,
+  "CUDA_initialized": false,
+  "full_geometry_host_forwards": 0,
+  "replay": "Two original tiny native updates plus two fresh-owner public restore/replay updates; rows and full native/caller/gradient/mode state exact. Trained restore did not call initialize_.",
+  "preflight": "Reduced software geometry, zero updates; initial Down/Up, critics and predictions exact; fresh public restore exact. Full-geometry prerequisite is part of the single future GPU campaign.",
+  "scorer": "Unscaled float64 physical RMSE oracle, unequal-source reductions, inclusive aggregate/source bounds, strict per-source code benefit, nonfinite/missing source rejection, live denominator and six-site C checks.",
+  "media": "Patch RMS includes every coordinate; shared target/ordinary/particle fixed color scale and exclusive output refusal checked. No saved full training states were rendered.",
+  "raw_stdout_storage": "Observed tool transcript only; no separately retained raw-log checksum is claimed.",
+  "observed_stdout": ".................... [100%]\n20 passed in 1.81s",
+  "prepared_checkout": "00b37cb8a367a38ab6ab51d80e05baa7c3157cc0",
+  "imported_package": {
+    "python_sha256": "7b814e32627ac5a332637d336ebaa13b6baab0b9373f6841d9a22fb8ab39cde9",
+    "resolved_in_prepared_checkout": true,
+    "permanent_version_allowlist": false,
+    "actual_imported_path": "/ml2/hypergan/ParticleGAN-routed-caption-accuracy-develop/particlegan"
+  },
+  "versions": {
+    "torch": "2.13.0+cu126",
+    "Pillow": "12.3.0",
+    "numpy": "2.5.2"
+  },
+  "source_sha256": {
+    "examples/e22_routed_caption_accuracy.py": "bae0f255d890e49bfbe4602bee7f8e84051b24a3cb0219c13b0a42b25768b8e3",
+    "examples/render_e22_routed_caption_accuracy.py": "1cdc113f648fabc506e093d23e13ba8b1ecf6b2ed970848c23c0b2159a6b2a7a",
+    "tests/test_e22_routed_caption_accuracy.py": "39b0a0c100ee8646bac08a9c4735f6c7e57d0563862c945e122fcebb0f4e1bad",
+    "docs/e22_routed_caption_accuracy_v1.json": "8fecbf89f1e8f8339eda49fd3d88536a18f49d782e2725dc8e5f330f9ed125bb"
+  },
+  "science_not_executed": true,
+  "budget": {
+    "candidate_GPU_seconds": 300,
+    "CPU_media_seconds": 60,
+    "total_preparation_native_updates": 4
+  },
+  "limitations": [
+    "Software PASS does not mean convergence PASS.",
+    "The generated caption task is not full Supra; actual BF16 integration still trails ordinary LoRA."
+  ],
+  "observed_precision_backend": {
+    "allow_tf32": false,
+    "float32_matmul_precision": "highest",
+    "allow_bf16_reduced_precision_reduction": true
+  }
+}
