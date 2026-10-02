@@ -52,6 +52,34 @@ def build_artifacts(root: Path, tasks: dict, task_paths: dict) -> dict:
     readouts = records(API_ROOT / "readout.json")
     completed = records(API_ROOT / "runs.json")
     failed = records(API_ROOT / "failed-runs.json")
+    locations = {name: {"definition": str(API_ROOT / "cases.json"),
+                       "readout": str(API_ROOT / "readout.json"),
+                       "receipt": str(API_ROOT / ("runs.json" if name in completed else "failed-runs.json")),
+                       "media_base": API_ROOT}
+                 for name in definitions}
+    # New questions publish separate compact evidence rather than rewriting the
+    # frozen campaign. A task explicitly names its supplement; no path guessing.
+    supplements = {task.get("research_artifacts", {}).get("api_publication")
+                   for task in tasks.values()} - {None}
+    for source in sorted(supplements):
+        path = Path(source)
+        if path.is_absolute() or not (root / path).resolve().is_relative_to(root / API_ROOT):
+            raise ValueError("supplemental API publication must stay inside the API report directory")
+        document = load(path)
+        if not document:
+            continue  # Registered, as yet unmeasured question.
+        additions = records(path)
+        if additions.keys() & definitions.keys():
+            raise ValueError("supplemental API publication duplicates an existing variant")
+        definitions.update(additions)
+        for key, destination in (("readouts", readouts), ("runs", completed)):
+            evidence = records(path, key)
+            if evidence.keys() - additions.keys():
+                raise ValueError("supplemental evidence must belong to its own variant definitions")
+            destination.update(evidence)
+        locations.update({name: {"definition": str(path), "readout": str(path),
+                                "receipt": str(path), "media_base": path.parent}
+                          for name in additions})
     if completed.keys() & failed.keys():
         raise ValueError("API publication has conflicting completed and failed receipts")
     receipts = {**completed, **failed}
@@ -60,10 +88,11 @@ def build_artifacts(root: Path, tasks: dict, task_paths: dict) -> dict:
 
     by_question = defaultdict(list)
     for case in definitions.values():
+        location = locations[case["id"]]
         readout = readouts.get(case["id"], {})
         receipt = receipts.get(case["id"], {})
         media = readout.get("gif") or receipt.get("gif")
-        media_path = API_ROOT / media if media else None
+        media_path = location["media_base"] / media if media else None
         if media_path is not None:
             resolved = (root / media_path).resolve()
             if not resolved.is_relative_to(root / API_ROOT) or resolved.suffix != ".gif":
@@ -71,10 +100,9 @@ def build_artifacts(root: Path, tasks: dict, task_paths: dict) -> dict:
         variant = {
             "id": case["id"], "goal": readout.get("goal", case["goal"]),
             "scope": readout.get("scope", case["scope"]),
-            "definition_source": str(API_ROOT / "cases.json"),
-            "evidence_source": str(API_ROOT / "readout.json") if readout else None,
-            "receipt_source": str(API_ROOT / ("runs.json" if case["id"] in completed else "failed-runs.json"))
-                if receipt else None,
+            "definition_source": location["definition"],
+            "evidence_source": location["readout"] if readout else None,
+            "receipt_source": location["receipt"] if receipt else None,
             "recipe": receipt.get("recipe", {}).get("name", case.get("default_recipe", "undeclared")),
             "source_commit": readout.get("source_commit"),
             "source_identity": receipt.get("source_identity"),
@@ -133,6 +161,7 @@ def build_artifacts(root: Path, tasks: dict, task_paths: dict) -> dict:
     guides = []
     for question, members in sorted(grouped.items()):
         identities = [f"develop-{question}", f"atlas-{question}"]
+        identities += sorted({name for task in members for name in task.get("retained_question_ids", [])})
         original = next((catalog[name] for name in identities if name in catalog), {})
         variants = {case["id"]: case for name in identities for case in by_question[name]}
         goal = next((task["description"] for task in members if isinstance(task.get("description"), str)

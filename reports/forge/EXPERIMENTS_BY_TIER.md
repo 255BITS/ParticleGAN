@@ -2,7 +2,7 @@
 
 Current task assignments, grouped by goal view and qualification tier. Required tasks gate progression; ranking and diagnostic tasks retain their declared roles.
 
-Catalog: **47 tasks**; **44 assigned** to at least one view; **3 unassigned**. Showing **6/6 views**.
+Catalog: **48 tasks**; **45 assigned** to at least one view; **3 unassigned**. Showing **7/7 views**.
 
 Regenerate from the repository root with `python -m experiments.forge experiments-by-tier --output reports/forge/EXPERIMENTS_BY_TIER.md`. Add `--json` for machine-readable output (use a `.json` output path when saving). Regeneration reads declarations and published artifacts and launches no training.
 
@@ -34,6 +34,7 @@ This report follows changing declarations and published evidence; it selects no 
 | [formulation_comparison](../../configs/forge/views/formulation_comparison.json) | 1 | 3 required | 19 required, 15 diagnostic | 2 required | provisional |
 | [host_profile_transfer](../../configs/forge/views/host_profile_transfer.json) | 4 | 3 required | 19 required, 13 diagnostic | 2 required | provisional |
 | [quality_coverage](../../configs/forge/views/quality_coverage.json) | 2 | 3 required | 19 required | 0 tasks | provisional |
+| [ring16_acquisition](../../configs/forge/views/ring16_acquisition.json) | 1 | 1 required | 0 tasks | 0 tasks | provisional |
 
 ## adaptation
 
@@ -387,6 +388,36 @@ Candidate outcomes, metrics and measured costs: [leaderboard](leaderboards/quali
 | [grid100](../../configs/forge/tasks/grid100.json) | required | [Question, results, GIFs](#experiment-grid100) | native100 / native_accuracy | 7000 | 3600 | — |
 | [rotated100](../../configs/forge/tasks/rotated100.json) | required | [Question, results, GIFs](#experiment-rotated100) | native100 / native_accuracy | 7000 | 3600 | — |
 | [staggered100](../../configs/forge/tasks/staggered100.json) | required | [Question, results, GIFs](#experiment-staggered100) | native100 / native_accuracy | 7000 | 3600 | — |
+
+### Tier 3: endurance
+
+0 tasks.
+
+No tasks assigned.
+
+## ring16_acquisition
+
+Declaration: [ring16_acquisition](../../configs/forge/views/ring16_acquisition.json); revision 1; goal: `ring16_acquisition`.
+
+Declared calibration status: **provisional**.
+
+Tier 1 placement is a hypothesis. Freeze independent positive/negative references, cost and rejection criteria before a bounded tier calibration; no existing screening profile or release qualification changes.
+
+No published solution leaderboard for this view yet; task registration and related API media confer no candidate qualification.
+
+### Tier 1: smoke
+
+1 required.
+
+| Task | Importance | Experiment guide | Adapter / gate | Declared steps | Timeout (s) | Dependencies / shared execution |
+| --- | --- | --- | --- | --- | --- | --- |
+| [ring16_acquisition](../../configs/forge/tasks/ring16_acquisition.json) | required | [Question, results, GIFs](#experiment-ring16-acquisition) | transfer_vector / transfer_sustained | 400 | 300 | — |
+
+### Tier 2: quality
+
+0 tasks.
+
+No tasks assigned.
 
 ### Tier 3: endurance
 
@@ -799,6 +830,35 @@ Related public-API demonstrations, with their own recorded contracts:
 | --- | --- | --- | --- | --- |
 | [api-trajectory-residual](../toy_audit/api_contract/media/api-trajectory-residual.gif) | Recover the fast trajectory with a residual head and reject a correct marginal with wrong identities Scope: New caller-owned clean paired-error RpGAN/KA2 host; historical results remain unchanged. | COMPLETE / PASS; 400/400 updates | conditional_ka2 / cpu / 58bcb6febe12 | [definition](../toy_audit/api_contract/cases.json); [readout](../toy_audit/api_contract/readout.json); [recipe and provenance](../toy_audit/api_contract/runs.json) |
 
+### Experiment: ring16-acquisition
+
+Acquire all 16 equally weighted two-dimensional Gaussian clusters from scratch: radius 3, sigma 0.1; require meaningful occupancy in every cluster, roughly balanced mass and noncollapsed local spread within 400 updates. No extended hold phase.
+
+Forge declarations: [ring16_acquisition](../../configs/forge/tasks/ring16_acquisition.json).
+
+<details>
+<summary>Declared Forge numerical gates and sampling</summary>
+
+[ring16_acquisition](../../configs/forge/tasks/ring16_acquisition.json)
+
+- **kind**: "transfer_sustained"
+- **thresholds**: [["sample_count", ">=", 4096], ["modes", ">=", 16], ["mass_tv", "<=", 0.15], ["hq", ">=", 0.85], ["component_covariance_error", "<=", 0.85], ["component_min_eigen_ratio", ">=", 0.15]]
+- **minimum_stable_checks**: 5
+- **prior**: {"kind": "mog", "learnable": true, "sigma": 0.025, "standardize": false}
+- **sampling_law**: "public_prior_without_output_noise"
+- **scoring_weights**: "live"
+- **eval_output_noise**: "clean"
+
+</details>
+
+No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
+
+Related public-API demonstrations, with their own recorded contracts:
+
+| Variant / actual-training GIF | What this variant tests | Recorded result / failed bounds | Recipe / compute / source | Evidence |
+| --- | --- | --- | --- | --- |
+| [api-ring16-acquisition](../toy_audit/api_contract/ring16/goal.gif) | Acquire all 16 equally weighted two-dimensional Gaussian clusters from scratch: radius 3, sigma 0.1; require meaningful occupancy in every cluster, roughly balanced mass and noncollapsed local spread within 400 updates. No extended hold phase. Scope: From random initialization, acquire sixteen equal radius-three sigma-.1 Gaussian clusters within 400 updates. Five terminal acquisition checks add no hold phase. Tier 1 is provisional; this standalone K3P/API initializer and RNG cohort supplies no Forge promotion credit. | ERROR / FAIL; 400/400 updates; component_covariance_error <= 0.85, hq >= 0.85, last 5 post-update metric observations do not all pass, goal media/state error: ModuleNotFoundError: No module named 'matplotlib' | k3p / cuda:0 / 746146cbdc5a | [definition](../toy_audit/api_contract/ring16/publication.json); [readout](../toy_audit/api_contract/ring16/publication.json); [recipe and provenance](../toy_audit/api_contract/ring16/publication.json) |
+
 ### Experiment: rotated100
 
 Recover all 100 Gaussian components, balanced mass, centers and within-mode covariance/radial spread; distinguish clean from noisy served laws.
@@ -1186,6 +1246,6 @@ The wider question review also links standalone experiments outside the Forge ti
 - [Later questions](../toy_audit/api_contract/recent_prs/README.md)
 - [Caption questions](../toy_audit/api_contract/caption_prs/README.md)
 
-Declaration input digest: `e51d29ceaef7c602528a7bd17b967c926712bffde41bf8e343fd67f5c57afd46`. The JSON form includes the individual task and view file hashes.
+Declaration input digest: `d73250b349d69c695a45623845319540ab49310fb3e1eef4211f6f0222c91cd5`. The JSON form includes the individual task and view file hashes.
 
-Published artifact input digest: `875b0c900f39f4d618accc54b010478a5c3c1d7b2da5692ce6557f73d404d471`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.
+Published artifact input digest: `568a1dfeb45ff22d7af2a608931ca57f7c73fdceb4fce5989f5797bb1af884d1`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.

@@ -18,7 +18,7 @@ import torch
 from particlegan import Recipe, get_recipe
 
 
-PROVIDERS = ("api_images", "api_vectors", "api_conditionals", "api_diagnostics")
+PROVIDERS = ("api_images", "api_vectors", "api_conditionals", "api_diagnostics", "api_ring16")
 ROOT = Path(__file__).resolve().parents[2]
 CASE_ID = re.compile(r"^[a-zA-Z0-9][a-zA-Z0-9_-]*$")
 

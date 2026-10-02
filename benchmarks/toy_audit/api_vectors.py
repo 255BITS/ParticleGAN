@@ -443,7 +443,10 @@ def score_case(metadata, samples, completed_steps=0):
         if points.shape[1] != 2:
             raise ValueError("vector points need two coordinates")
         spec = metadata["spec"]
-        metrics = _scalar_metrics(vector_tasks.score_samples(points, spec, completed_steps))
+        scorer = vector_tasks.score_samples
+        if metadata.get("metric_family") == "ring16_acquisition":
+            from .ring16_quality import score_samples as scorer
+        metrics = _scalar_metrics(scorer(points, spec, completed_steps))
         if spec["kind"] == "gaussian_mixture":
             metrics["projection_ks"] = projection_ks(points, spec, completed_steps)
         else:
@@ -545,6 +548,7 @@ class VectorFixture:
             options["total_steps"] = case["default_steps"]
         if case.get("caller_owned"):
             options.update(input_noise_std=0., output_noise_std=0., output_noise_mode="fixed")
+        options.update(case.get("recipe_overrides", {}))
         from .api_contract import validate_recipe_overrides
         self.recipe_overrides = validate_recipe_overrides({**case, "provider": "api_vectors"}, recipe_name, recipe_overrides)
         options.update(self.recipe_overrides)
@@ -556,7 +560,8 @@ class VectorFixture:
             torch.manual_seed(seed)
             with torch.device(self.device):
                 prior = self.recipe.make_prior(generator=torch.Generator(device=self.device).manual_seed(seed),
-                                               init_std=case.get("profile", {}).get("init_std", .5))
+                                               init_std=case.get("profile", {}).get("init_std", .5),
+                                               **case.get("prior_options", {}))
                 if case["kind"] == "native100":
                     with torch.no_grad():
                         prior.z.uniform_(-5, 5, generator=torch.Generator(device=self.device).manual_seed(seed))
