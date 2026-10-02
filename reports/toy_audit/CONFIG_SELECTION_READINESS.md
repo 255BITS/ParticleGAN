@@ -73,24 +73,32 @@ cohorts do not pool.
 
 ## Frozen local readout
 
-[config-selection-readiness.json](config-selection-readiness.json) is a compact
-snapshot generated after committing the selector at
-`febe46c6e0a7b21f70ecf480107e1e7ccd09a627`, based on develop
-`fc19f89e8d37b9b7e823ac718f3025161c41bbf0`. It covers this source and runtime;
-incoming PR239–243 and subsequent report updates require a separate read-only
-snapshot of their combined checkout. The counts below are not timeless.
+[config-selection-readiness.json](config-selection-readiness.json) retains the
+original projection at `febe46c6e0a7b21f70ecf480107e1e7ccd09a627` and appends
+`combined_snapshot` from `c31c9077a3d5ac1c57c02e747afcafcfb32f24bd`. The latter
+contains develop's merged PR239–243, the selector and the caption-question review.
+Both commits remain reachable in this branch. The counts below describe the
+combined checkout's actual local runtime and available receipts; they are not
+timeless or a universal count of scientific trials.
 
 The inventory contains 47 tasks, 44 assigned to 6 views, and 3 unassigned named
 affine 14k continuation variants. Every view's declared calibration is
-provisional. There are 13 candidate declarations and 35 current source/runtime
-rows; all attain tier 0, with 25 INCOMPLETE and 10 BLOCKED rows in both selected
-views. They represent configuration/cohort combinations, not 35 independent
-scientific trials.
+provisional. There are 13 candidate declarations and 26 current source/runtime
+rows: one CPU and one NVIDIA RTX A6000 cohort per candidate. All attain tier 0,
+with 18 INCOMPLETE and 8 BLOCKED rows in both selected views. They represent
+configuration/cohort combinations, not 26 independent scientific trials.
 
 | Local view | Required cells | NOT_RUN | BLOCKED | Current qualified options |
 | --- | ---: | ---: | ---: | ---: |
-| quality_coverage | 770 | 568 | 202 | 0 |
-| discriminator_stability | 840 | 618 | 222 | 0 |
+| quality_coverage | 572 | 408 | 164 | 0 |
+| discriminator_stability | 624 | 444 | 180 | 0 |
+
+The earlier projection retained 35 rows under an unavailable-CUDA profile,
+including nine separately named A6000 cohorts. Actual local hardware detection
+in the combined readout makes the default and named A6000 profiles identical,
+so the board deduplicates those overlapping cohorts. The earlier 770/840-cell
+counts remain intact in the original snapshot. No evidence was dropped from a
+required denominator or pooled across distinct runtime identities.
 
 No current PASS or FAIL is inferred from these missing/blocked cells. Four
 pinned cohorts, 22 calibration diagnostic cohorts and 143 historical rows remain
@@ -104,7 +112,10 @@ Forge hashes the broad source tree. Adding the new audit module changes the
 source digest from
 `2f8e6686446071456967c834d77d79922a75ddcaef2cd96256e203ac8ad2896c`
 to `38d8007b628b8e4756885cb1402d0cd2dcd5de17e59d68b0e72fb8bffbb75b8e`.
-The receipt keeps both identities and imports no old qualification. It binds
+The receipt keeps both identities and imports no old qualification. PR239–243
+add examples, tests and documentation outside Forge's `SOURCE_DIRS`, so the
+combined checkout retains the latter broad source digest; its actual Git commit
+and runtime are recorded separately. The receipt binds
 the full external machine reports, source-board digests, view fingerprints,
 config/recipe identities, task roles/budgets and tool bytes. Native code,
 configs and policies were unchanged; no unchanged science was rerun to fill
@@ -131,7 +142,8 @@ CUDA_VISIBLE_DEVICES='' OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 \
   tests/test_forge_tier_report.py tests/test_forge_board_filters.py
 ```
 
-45 software checks passed in 2.18 seconds, including 16 new self-contained
+45 software checks passed in 2.31 seconds on the combined checkout (the earlier
+isolated run took 2.18 seconds), including 16 new self-contained
 controls. They cover unknown/blocked required cells, diagnostic separation,
 historical/pinned exclusion, provisional and forged accepted-calibration
 claims, conflicts, whole-row filters, source/runtime drift, missing required
