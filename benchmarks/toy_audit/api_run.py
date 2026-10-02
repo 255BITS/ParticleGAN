@@ -378,14 +378,18 @@ def run_case(case, output, *, device="cpu", recipe_name=None, steps=None,
     if records:
         try:
             np.savez_compressed(output / "observations.npz", **arrays)
+            receipt["artifacts"]["observations.npz"] = {
+                "sha256": file_hash(output / "observations.npz"),
+                "bytes": (output / "observations.npz").stat().st_size}
+            torch.save(fixture.state_dict(), output / "final-state.pt")
+            receipt["artifacts"]["final-state.pt"] = {
+                "sha256": file_hash(output / "final-state.pt"),
+                "bytes": (output / "final-state.pt").stat().st_size}
             gif = output / "goal.gif"
             media_records = [record for record in records if record["step"] in boundaries]
             render_gif(case, media_records, gif, full_budget=full, requested_steps=steps,
                        final_verdict=receipt["verdict"])
-            torch.save(fixture.state_dict(), output / "final-state.pt")
-            receipt["artifacts"] = {name: {"sha256": file_hash(output / name),
-                                           "bytes": (output / name).stat().st_size}
-                                     for name in ("goal.gif", "observations.npz", "final-state.pt")}
+            receipt["artifacts"]["goal.gif"] = {"sha256": file_hash(gif), "bytes": gif.stat().st_size}
             receipt["gif_frames"] = len(media_records)
         except Exception as error:
             receipt.update(passed=False, verdict="FAIL", status="ERROR")

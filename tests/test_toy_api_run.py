@@ -105,6 +105,21 @@ def test_unsupported_api_construction_is_a_recorded_binary_failure(tmp_path, mon
     assert (tmp_path / "unsupported/receipt.json").is_file()
 
 
+def test_export_failure_retains_bound_final_state_and_observations(tmp_path, monkeypatch):
+    fixture = PublicSoftwareFixture()
+    monkeypatch.setattr(api_run.contract, "build", lambda *args, **kwargs: fixture)
+    def reject_export(*args, **kwargs):
+        raise ValueError("bad display layout")
+    monkeypatch.setattr(api_run, "render_gif", reject_export)
+    case = {"id": "export-control", "default_steps": 8, "eval_samples": 32}
+    result = api_run.run_case(case, tmp_path / "export", steps=2)
+    assert result["status"] == "ERROR" and result["verdict"] == "FAIL"
+    assert result["completed_updates"] == 2
+    assert set(result["artifacts"]) == {"observations.npz", "final-state.pt"}
+    for name, identity in result["artifacts"].items():
+        assert identity["sha256"] == api_run.file_hash(tmp_path / "export" / name)
+
+
 def test_goal_renderer_preserves_whole_independent_episode_paths():
     episodes = np.array([[[0, 0], [1, 0], [2, 1]], [[10, 10], [11, 10], [12, 9]]])
     paths = api_run._line_paths(episodes)
