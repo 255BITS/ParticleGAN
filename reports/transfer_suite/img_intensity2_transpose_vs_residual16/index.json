@@ -1,0 +1,29 @@
+{
+  "arms": {
+    "baseline_transpose12": {
+      "confirmed_step": null,
+      "hq": 0.0,
+      "mean_rmse": 0.16536885499954224,
+      "modes": 0,
+      "verdict": "FAIL"
+    },
+    "residual16": {
+      "confirmed_step": 575,
+      "hq": 1.0,
+      "mean_rmse": 0.021032892167568207,
+      "modes": 2,
+      "verdict": "PASS"
+    }
+  },
+  "device": "cpu",
+  "hit": true,
+  "principal": "published transpose12 fails img_intensity2; residual16 in-family arch control passes",
+  "published_winner": "image suite baseline transpose12 (RpGAN+b_cap+particles); batchfeat N/A for images",
+  "python": "conceptmod env 3.12 / torch 2.13",
+  "seed": 0,
+  "slug": "img_intensity2_transpose_vs_residual16",
+  "task": "img_intensity2",
+  "threads": 1,
+  "tip_sha": "510e0054b2499ce725482de8e7a4ae8d72fd8f25",
+  "track": "application_image_suite"
+}

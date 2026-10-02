@@ -1,0 +1,22 @@
+{
+  "arm": "residual16",
+  "card": {
+    "changes": {
+      "architecture": "residual_upsample",
+      "width": 16
+    },
+    "name": "residual16",
+    "scope": "in-formulation architecture control"
+  },
+  "confirmed_step": 575,
+  "hq": 1.0,
+  "mean_rmse": 0.021032892167568207,
+  "modes": 2,
+  "seconds": 5.047472523059696,
+  "solv_quality": [
+    true,
+    2,
+    1.0
+  ],
+  "verdict": "PASS"
+}
