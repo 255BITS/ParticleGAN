@@ -571,7 +571,8 @@ def main(argv=None):
     requests = [(cases[name], args.output / name,
                  dict(device=args.device, recipe_name=None if args.recipe == "auto" else args.recipe,
                       steps=None if args.steps is None else min(args.steps, cases[name]["default_steps"]),
-                      eval_samples=args.eval_samples, frames=args.frames)) for name in selected]
+                      eval_samples=args.eval_samples, frames=args.frames,
+                      seed=cases[name].get("protocol_seed", 24002))) for name in selected]
     results = []
     if args.jobs == 1:
         iterator = map(_execute_request, requests)

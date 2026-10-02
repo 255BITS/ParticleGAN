@@ -1,0 +1,390 @@
+{
+  "schema_version": 1,
+  "status": "SUPPORTED for all four original image host tolerances",
+  "qualification_credit": false,
+  "prior_and_sampler_identity_required_for_reuse": true,
+  "initial_diagnostic": {
+    "declaration": {
+      "schema_version": 1,
+      "kind": "supervised_representation_diagnostic",
+      "tasks": [
+        "img_stripes2",
+        "img_bars4",
+        "img_blobs4",
+        "img_intensity2"
+      ],
+      "iterations_per_host": 1000,
+      "timeout_seconds_per_host": 300,
+      "seed": 0,
+      "reference_lr": 0.01,
+      "reference_optimizer": "torch.optim.Adam",
+      "device": "cuda:0",
+      "ordinary_training_updates": 0,
+      "ordinary_qualification_credit": false,
+      "sampling_law": "enumerated_prior_without_output_noise",
+      "scoring_weights": "live",
+      "scope": "Exact frozen image host and declared numerical tolerances"
+    },
+    "results": [
+      {
+        "task": "img_stripes2",
+        "representation_status": "SUPPORTED",
+        "task_sha256": "a6a184e3ebbcb06065a6c1e0a89e42deee7a348614372133354c83d26c2c9fe3",
+        "host_definition": {
+          "family": "image_conv_transpose",
+          "split": "development",
+          "pattern": "stripes2",
+          "architecture": "transpose",
+          "width": 12,
+          "z_dim": 8,
+          "steps": 600,
+          "modes": 2,
+          "batch_size": 32,
+          "particles": 32,
+          "lr_g": 0.0017,
+          "lr_d": 0.0017,
+          "adam_betas": [
+            0.0,
+            0.99
+          ],
+          "noise_std": 0.01,
+          "gradient_penalty": "b_cap",
+          "penalty_coeff": 3.0,
+          "kappa": 1.25,
+          "prior_weight": 0.05,
+          "ema_decay": 0.99
+        },
+        "metrics": {
+          "modes": 2,
+          "hq": 1.0,
+          "mean_rmse": 0.00020064812269993126,
+          "quality_mode_fractions": [
+            0.5,
+            0.5
+          ],
+          "mode_fractions": [
+            0.5,
+            0.5
+          ],
+          "distribution_tv": 0.0
+        },
+        "prior": {
+          "kind": "particle_cloud",
+          "sigma": 0.0,
+          "standardize": false,
+          "learnable": true,
+          "exception_reason": "Frozen image evaluation enumerates finite learned centers; stochastic MoG sampling requires separately calibrated measurement."
+        },
+        "diagnostic_fit_updates": 1000,
+        "ordinary_training_updates": 0,
+        "ordinary_qualification_credit": false,
+        "elapsed_seconds": 2.8177303809206933,
+        "artifact": {
+          "path": "/ml2/hypergan/forge-family-winner-round1-20261002/image-representation/img_stripes2-witness.pt",
+          "sha256": "b7f0e7eb81d6d20292156613a1b4609f78842601056367115f0ab37ddd41e733"
+        },
+        "source_sha256": {
+          "benchmarks/transfer_suite/image_tasks.py": "4f070d0879cbaaaa076f82b4683cfe74ea9ed8d85480d1922e249444a752ce58",
+          "experiments/forge/imageprofiles.py": "73d0ca9c182d2395a3d7acdc10fef803a49d70dcef3f7494e8d4258a36dc5c7a",
+          "particlegan/training.py": "7dadc219135bc3e6bf657bfe9bc3fa81dd14d4b2a31c70d5ff61e2941db35c94",
+          "particlegan/recipes.py": "1a7f9df746e242a2774068c819d70d50cd72dc4f7f6b22b0bd13e1345dcf8ab2"
+        }
+      },
+      {
+        "task": "img_bars4",
+        "representation_status": "SUPPORTED",
+        "task_sha256": "ed4d8e304734e630e5ee766dc12b5b24113e941b3a2e6314d03a5d728c3d2309",
+        "host_definition": {
+          "family": "image_conv_transpose",
+          "split": "development",
+          "pattern": "bars4",
+          "architecture": "transpose",
+          "width": 12,
+          "z_dim": 8,
+          "steps": 600,
+          "modes": 4,
+          "batch_size": 32,
+          "particles": 32,
+          "lr_g": 0.0017,
+          "lr_d": 0.0017,
+          "adam_betas": [
+            0.0,
+            0.99
+          ],
+          "noise_std": 0.01,
+          "gradient_penalty": "b_cap",
+          "penalty_coeff": 3.0,
+          "kappa": 1.25,
+          "prior_weight": 0.05,
+          "ema_decay": 0.99
+        },
+        "metrics": {
+          "modes": 4,
+          "hq": 1.0,
+          "mean_rmse": 0.0004752959357574582,
+          "quality_mode_fractions": [
+            0.25,
+            0.25,
+            0.25,
+            0.25
+          ],
+          "mode_fractions": [
+            0.25,
+            0.25,
+            0.25,
+            0.25
+          ],
+          "distribution_tv": 0.0
+        },
+        "prior": {
+          "kind": "particle_cloud",
+          "sigma": 0.0,
+          "standardize": false,
+          "learnable": true,
+          "exception_reason": "Frozen image evaluation enumerates finite learned centers; stochastic MoG sampling requires separately calibrated measurement."
+        },
+        "diagnostic_fit_updates": 1000,
+        "ordinary_training_updates": 0,
+        "ordinary_qualification_credit": false,
+        "elapsed_seconds": 1.0255994540639222,
+        "artifact": {
+          "path": "/ml2/hypergan/forge-family-winner-round1-20261002/image-representation/img_bars4-witness.pt",
+          "sha256": "f9c3d898fc42875f74387ff0cfb5a8b407004bd63af5b5d41827b4fd2cd7c009"
+        },
+        "source_sha256": {
+          "benchmarks/transfer_suite/image_tasks.py": "4f070d0879cbaaaa076f82b4683cfe74ea9ed8d85480d1922e249444a752ce58",
+          "experiments/forge/imageprofiles.py": "73d0ca9c182d2395a3d7acdc10fef803a49d70dcef3f7494e8d4258a36dc5c7a",
+          "particlegan/training.py": "7dadc219135bc3e6bf657bfe9bc3fa81dd14d4b2a31c70d5ff61e2941db35c94",
+          "particlegan/recipes.py": "1a7f9df746e242a2774068c819d70d50cd72dc4f7f6b22b0bd13e1345dcf8ab2"
+        }
+      },
+      {
+        "task": "img_blobs4",
+        "representation_status": "UNRESOLVED",
+        "task_sha256": "5981af0e3fff96be959d3fe80365f2ce5f6aaa0beb942289a104facd069bdff6",
+        "host_definition": {
+          "family": "image_conv_transpose",
+          "split": "development",
+          "pattern": "blobs4",
+          "architecture": "transpose",
+          "width": 12,
+          "z_dim": 8,
+          "steps": 600,
+          "modes": 4,
+          "batch_size": 32,
+          "particles": 32,
+          "lr_g": 0.0017,
+          "lr_d": 0.0017,
+          "adam_betas": [
+            0.0,
+            0.99
+          ],
+          "noise_std": 0.01,
+          "gradient_penalty": "b_cap",
+          "penalty_coeff": 3.0,
+          "kappa": 1.25,
+          "prior_weight": 0.05,
+          "ema_decay": 0.99
+        },
+        "metrics": {
+          "modes": 0,
+          "hq": 0.0,
+          "mean_rmse": 0.25,
+          "quality_mode_fractions": [
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "mode_fractions": [
+            1.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "distribution_tv": 0.75
+        },
+        "prior": {
+          "kind": "particle_cloud",
+          "sigma": 0.0,
+          "standardize": false,
+          "learnable": true,
+          "exception_reason": "Frozen image evaluation enumerates finite learned centers; stochastic MoG sampling requires separately calibrated measurement."
+        },
+        "diagnostic_fit_updates": 1000,
+        "ordinary_training_updates": 0,
+        "ordinary_qualification_credit": false,
+        "elapsed_seconds": 1.0194493250455707,
+        "artifact": {
+          "path": "/ml2/hypergan/forge-family-winner-round1-20261002/image-representation/img_blobs4-witness.pt",
+          "sha256": "f65a9a2313a35a127a43103c7fb577b6937b1f1cf4b3d38b56200cf5170acce1"
+        },
+        "source_sha256": {
+          "benchmarks/transfer_suite/image_tasks.py": "4f070d0879cbaaaa076f82b4683cfe74ea9ed8d85480d1922e249444a752ce58",
+          "experiments/forge/imageprofiles.py": "73d0ca9c182d2395a3d7acdc10fef803a49d70dcef3f7494e8d4258a36dc5c7a",
+          "particlegan/training.py": "7dadc219135bc3e6bf657bfe9bc3fa81dd14d4b2a31c70d5ff61e2941db35c94",
+          "particlegan/recipes.py": "1a7f9df746e242a2774068c819d70d50cd72dc4f7f6b22b0bd13e1345dcf8ab2"
+        }
+      },
+      {
+        "task": "img_intensity2",
+        "representation_status": "SUPPORTED",
+        "task_sha256": "33d1eec100f98044d3100f70fa45beb5d2b1fda46b3d72d67e0ae1049bb7bb6e",
+        "host_definition": {
+          "family": "image_conv_transpose",
+          "split": "development",
+          "pattern": "intensity2",
+          "architecture": "transpose",
+          "width": 12,
+          "z_dim": 8,
+          "steps": 600,
+          "modes": 2,
+          "batch_size": 32,
+          "particles": 32,
+          "lr_g": 0.0017,
+          "lr_d": 0.0017,
+          "adam_betas": [
+            0.0,
+            0.99
+          ],
+          "noise_std": 0.01,
+          "gradient_penalty": "b_cap",
+          "penalty_coeff": 3.0,
+          "kappa": 1.25,
+          "prior_weight": 0.05,
+          "ema_decay": 0.99
+        },
+        "metrics": {
+          "modes": 2,
+          "hq": 1.0,
+          "mean_rmse": 0.000522236805409193,
+          "quality_mode_fractions": [
+            0.5,
+            0.5
+          ],
+          "mode_fractions": [
+            0.5,
+            0.5
+          ],
+          "distribution_tv": 0.0
+        },
+        "prior": {
+          "kind": "particle_cloud",
+          "sigma": 0.0,
+          "standardize": false,
+          "learnable": true,
+          "exception_reason": "Frozen image evaluation enumerates finite learned centers; stochastic MoG sampling requires separately calibrated measurement."
+        },
+        "diagnostic_fit_updates": 1000,
+        "ordinary_training_updates": 0,
+        "ordinary_qualification_credit": false,
+        "elapsed_seconds": 1.0471276289317757,
+        "artifact": {
+          "path": "/ml2/hypergan/forge-family-winner-round1-20261002/image-representation/img_intensity2-witness.pt",
+          "sha256": "462a04ede97889cec691426834d1f583acef8ab9c4904416166776db46d8a61c"
+        },
+        "source_sha256": {
+          "benchmarks/transfer_suite/image_tasks.py": "4f070d0879cbaaaa076f82b4683cfe74ea9ed8d85480d1922e249444a752ce58",
+          "experiments/forge/imageprofiles.py": "73d0ca9c182d2395a3d7acdc10fef803a49d70dcef3f7494e8d4258a36dc5c7a",
+          "particlegan/training.py": "7dadc219135bc3e6bf657bfe9bc3fa81dd14d4b2a31c70d5ff61e2941db35c94",
+          "particlegan/recipes.py": "1a7f9df746e242a2774068c819d70d50cd72dc4f7f6b22b0bd13e1345dcf8ab2"
+        }
+      }
+    ]
+  },
+  "substantive_reference_revision": {
+    "reason": "Sparse blob MSE fit collapsed to black output; a foreground-balanced BCE loss is a distinct bounded reference hypothesis. Failed initial fit remains UNRESOLVED evidence, not capacity exclusion.",
+    "diagnostic": {
+      "declaration": {
+        "schema_version": 1,
+        "kind": "supervised_representation_diagnostic",
+        "tasks": [
+          "img_blobs4"
+        ],
+        "iterations_per_host": 1000,
+        "timeout_seconds_per_host": 300,
+        "seed": 0,
+        "reference_lr": 0.003,
+        "reference_loss": "balanced_bce",
+        "reference_optimizer": "torch.optim.Adam",
+        "device": "cuda:0",
+        "ordinary_training_updates": 0,
+        "ordinary_qualification_credit": false,
+        "sampling_law": "enumerated_prior_without_output_noise",
+        "scoring_weights": "live",
+        "scope": "Exact frozen image host and declared numerical tolerances",
+        "reproducer_sha256": "c834114edc83515ed6cf0ee8d8e86bacc76287be09033e07fe82ac94733421bf"
+      },
+      "results": [
+        {
+          "task": "img_blobs4",
+          "representation_status": "SUPPORTED",
+          "task_sha256": "5981af0e3fff96be959d3fe80365f2ce5f6aaa0beb942289a104facd069bdff6",
+          "host_definition": {
+            "family": "image_conv_transpose",
+            "split": "development",
+            "pattern": "blobs4",
+            "architecture": "transpose",
+            "width": 12,
+            "z_dim": 8,
+            "steps": 600,
+            "modes": 4,
+            "batch_size": 32,
+            "particles": 32,
+            "lr_g": 0.0017,
+            "lr_d": 0.0017,
+            "adam_betas": [
+              0.0,
+              0.99
+            ],
+            "noise_std": 0.01,
+            "gradient_penalty": "b_cap",
+            "penalty_coeff": 3.0,
+            "kappa": 1.25,
+            "prior_weight": 0.05,
+            "ema_decay": 0.99
+          },
+          "metrics": {
+            "modes": 4,
+            "hq": 1.0,
+            "mean_rmse": 4.395138967083767e-05,
+            "quality_mode_fractions": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ],
+            "mode_fractions": [
+              0.25,
+              0.25,
+              0.25,
+              0.25
+            ],
+            "distribution_tv": 0.0
+          },
+          "prior": {
+            "kind": "particle_cloud",
+            "sigma": 0.0,
+            "standardize": false,
+            "learnable": true,
+            "exception_reason": "Frozen image evaluation enumerates finite learned centers; stochastic MoG sampling requires separately calibrated measurement."
+          },
+          "diagnostic_fit_updates": 1000,
+          "ordinary_training_updates": 0,
+          "ordinary_qualification_credit": false,
+          "elapsed_seconds": 1.9791004960425198,
+          "artifact": {
+            "path": "/ml2/hypergan/forge-family-winner-round1-20261002/blob-representation-balanced/img_blobs4-witness.pt",
+            "sha256": "a22b6a3fa9451b7c16f82ac8675769c40efc79a4c8827618966f657390cd6fe7"
+          },
+          "source_sha256": {
+            "benchmarks/transfer_suite/image_tasks.py": "4f070d0879cbaaaa076f82b4683cfe74ea9ed8d85480d1922e249444a752ce58",
+            "experiments/forge/imageprofiles.py": "73d0ca9c182d2395a3d7acdc10fef803a49d70dcef3f7494e8d4258a36dc5c7a",
+            "particlegan/training.py": "7dadc219135bc3e6bf657bfe9bc3fa81dd14d4b2a31c70d5ff61e2941db35c94",
+            "particlegan/recipes.py": "1a7f9df746e242a2774068c819d70d50cd72dc4f7f6b22b0bd13e1345dcf8ab2"
+          }
+        }
+      ]
+    }
+  }
+}

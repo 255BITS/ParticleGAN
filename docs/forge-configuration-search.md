@@ -6,6 +6,13 @@ cohort. A configuration changes settings on the shared public trainer; it does
 not introduce another training loop or a new technique row. The companion JSON
 retains alternative configurations and the exact evidence behind their results.
 
+The proposed [convergence-selection plan](forge-convergence-selection-plan.md)
+asks whether each solution family can represent the required toys, then illustrates
+bounded hyperparameter search for one shared defaults config, gate progression,
+and selection of the quickest stable solution from comparable family finalists.
+Its convergence timing and speed objective are future additions; the implemented
+search behavior is described below.
+
 [`trainer-families.json`](../configs/forge/trainer-families.json) declares family
 membership and a canonical fallback. Distinct mechanisms, including structural
 ablations, have explicit families. The older matched R1/R2 penalty swap and the
@@ -97,6 +104,44 @@ records a 3/3 smoke winner at LR 0.0085 and gamma 1 to 0.1. Its ordinary
 trajectory quality check failed, so it remains Tier 1 and later requirements
 remain unmeasured. The readout links the compact confirmation cost receipt and
 the current leaderboard.
+
+### Advance every smoke survivor in a new full-view study
+
+A fresh study with `tuning_through_tier: 3` submits every grid configuration
+through the existing ordinary gate ladder. Each configuration advances
+independently: all of its smoke requirements must pass before quality, and all
+quality requirements must pass before endurance. A failed configuration stops;
+the others keep advancing. This requires no one-smoke-winner confirmation step.
+Freeze the complete per-configuration and campaign ceilings before enqueueing;
+retain every required task, including unknown and blocked later requirements.
+Tasks used to select the defaults are tuning evidence, not independent confirmation.
+
+The additive `progression` report lists all smoke survivors and all full-view
+qualified configurations. Its outcome distinguishes `full_winner`,
+`tuning_only_winner`, `best_observed` and `pending`. The existing `selection`
+dictionary retains its archived PASS-count/hash objective unchanged. A full
+winner is therefore a provisional whole-config gate winner, rather than a
+measured fastest config or permission to change defaults. Incomplete comparisons
+cannot name a final full-view winner; alternatives and full denominators remain.
+
+`speed_selection.status` is currently `UNAVAILABLE`. Some frozen evaluators
+record terminal-suffix times, while others lack per-observation seconds or bind
+coverage separately from joint accuracy. Reports preserve available original
+evaluator fields as `evaluator_timing`, without converting them to first
+acquisition speed. Total paid wall time remains cost evidence. Hardware
+contention, clock scope and a complete comparable timing contract must be
+resolved before any fastest-convergence claim.
+
+Use the same explicit coordinator queue for all families; enqueue launches no
+worker. The coordinator owns GPU admission and the existing memory/resource
+limits, with one worker per GPU unless an intentional sharing policy is declared:
+
+```sh
+python -m experiments.forge --queue-root /path/to/round/queue search plan NEW_STUDY_ID
+python -m experiments.forge --queue-root /path/to/round/queue search enqueue NEW_STUDY_ID
+python -m experiments.forge --queue-root /path/to/round/queue drain --gpus 0,1 --workers-per-gpu 1
+python -m experiments.forge --queue-root /path/to/round/queue search report NEW_STUDY_ID
+```
 
 The current screening profile remains provisional. Neither this search nor a
 passing smoke screen establishes calibrated ranking or public-default adoption.

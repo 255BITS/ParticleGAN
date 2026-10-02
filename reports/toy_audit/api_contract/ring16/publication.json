@@ -1,0 +1,1201 @@
+{
+  "schema": "particlegan_api_toy_supplement_v1",
+  "cases": [
+    {
+      "id": "api-ring16-acquisition",
+      "legacy_ids": [
+        "develop-ring16_acquisition"
+      ],
+      "title": "Sixteen Gaussian clusters: acquisition",
+      "goal": "Acquire all 16 equally weighted two-dimensional Gaussian clusters from scratch: radius 3, sigma 0.1; require meaningful occupancy in every cluster, roughly balanced mass and noncollapsed local spread within 400 updates. No extended hold phase.",
+      "kind": "vector",
+      "default_steps": 400,
+      "batch_size": 128,
+      "eval_samples": 4096,
+      "default_recipe": "k3p",
+      "sampling": "Live generator; uniform row draws from the learned MoG plus fixed sigma=.025 Gaussian latent noise; standardize=False; output_noise=False; no EMA or policy serving.",
+      "scope": "From random initialization, acquire sixteen equal radius-three sigma-.1 Gaussian clusters within 400 updates. Five terminal acquisition checks add no hold phase. Tier 1 is provisional; this standalone K3P/API initializer and RNG cohort supplies no Forge promotion credit.",
+      "particles": 256,
+      "z_dim": 4,
+      "metric_family": "ring16_acquisition",
+      "sample_evaluator": "benchmarks.toy_audit.ring16_quality:score_samples",
+      "task_sha256": "5713372e217f5b207964416cdb10782d6b227175a861e005fafae797143b5ae5",
+      "spec": {
+        "hidden": 64,
+        "layers": 2,
+        "fourier": 2,
+        "z_dim": 4,
+        "particles": 256,
+        "batch": 128,
+        "steps": 400,
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.0,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "ema_decay": 0.995,
+        "reg_arm": "k3p",
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "d_every": 1,
+        "g_every": 1,
+        "family": "ring16_acquisition",
+        "split": "development",
+        "kind": "gaussian_mixture",
+        "means": [
+          [
+            3.0,
+            0.0
+          ],
+          [
+            2.77163859753386,
+            1.1480502970952693
+          ],
+          [
+            2.121320343559643,
+            2.1213203435596424
+          ],
+          [
+            1.1480502970952695,
+            2.77163859753386
+          ],
+          [
+            1.8369701987210297e-16,
+            3.0
+          ],
+          [
+            -1.1480502970952693,
+            2.77163859753386
+          ],
+          [
+            -2.1213203435596424,
+            2.121320343559643
+          ],
+          [
+            -2.77163859753386,
+            1.1480502970952697
+          ],
+          [
+            -3.0,
+            3.6739403974420594e-16
+          ],
+          [
+            -2.7716385975338604,
+            -1.148050297095269
+          ],
+          [
+            -2.121320343559643,
+            -2.1213203435596424
+          ],
+          [
+            -1.148050297095271,
+            -2.7716385975338595
+          ],
+          [
+            -5.51091059616309e-16,
+            -3.0
+          ],
+          [
+            1.14805029709527,
+            -2.77163859753386
+          ],
+          [
+            2.121320343559642,
+            -2.121320343559643
+          ],
+          [
+            2.7716385975338595,
+            -1.148050297095271
+          ]
+        ],
+        "covariances": [
+          [
+            [
+              0.01,
+              0.0
+            ],
+            [
+              0.0,
+              0.01
+            ]
+          ],
+          [
+            [
+              0.01,
+              0.0
+            ],
+            [
+              0.0,
+              0.01
+            ]
+          ],
+          [
+            [
+              0.01,
+              0.0
+            ],
+            [
+              0.0,
+              0.01
+            ]
+          ],
+          [
+            [
+              0.01,
+              0.0
+            ],
+            [
+              0.0,
+              0.01
+            ]
+          ],
+          [
+            [
+              0.01,
+              0.0
+            ],
+            [
+              0.0,
+              0.01
+            ]
+          ],
+          [
+            [
+              0.01,
+              0.0
+            ],
+            [
+              0.0,
+              0.01
+            ]
+          ],
+          [
+            [
+              0.01,
+              0.0
+            ],
+            [
+              0.0,
+              0.01
+            ]
+          ],
+          [
+            [
+              0.01,
+              0.0
+            ],
+            [
+              0.0,
+              0.01
+            ]
+          ],
+          [
+            [
+              0.01,
+              0.0
+            ],
+            [
+              0.0,
+              0.01
+            ]
+          ],
+          [
+            [
+              0.01,
+              0.0
+            ],
+            [
+              0.0,
+              0.01
+            ]
+          ],
+          [
+            [
+              0.01,
+              0.0
+            ],
+            [
+              0.0,
+              0.01
+            ]
+          ],
+          [
+            [
+              0.01,
+              0.0
+            ],
+            [
+              0.0,
+              0.01
+            ]
+          ],
+          [
+            [
+              0.01,
+              0.0
+            ],
+            [
+              0.0,
+              0.01
+            ]
+          ],
+          [
+            [
+              0.01,
+              0.0
+            ],
+            [
+              0.0,
+              0.01
+            ]
+          ],
+          [
+            [
+              0.01,
+              0.0
+            ],
+            [
+              0.0,
+              0.01
+            ]
+          ],
+          [
+            [
+              0.01,
+              0.0
+            ],
+            [
+              0.0,
+              0.01
+            ]
+          ]
+        ],
+        "masses": [
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625
+        ],
+        "identifiable": true,
+        "thresholds": [
+          [
+            "sample_count",
+            ">=",
+            4096
+          ],
+          [
+            "modes",
+            ">=",
+            16
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "component_covariance_error",
+            "<=",
+            0.85
+          ],
+          [
+            "component_min_eigen_ratio",
+            ">=",
+            0.15
+          ]
+        ]
+      },
+      "thresholds": [
+        [
+          "sample_count",
+          ">=",
+          4096
+        ],
+        [
+          "modes",
+          ">=",
+          16
+        ],
+        [
+          "mass_tv",
+          "<=",
+          0.15
+        ],
+        [
+          "hq",
+          ">=",
+          0.85
+        ],
+        [
+          "component_covariance_error",
+          "<=",
+          0.85
+        ],
+        [
+          "component_min_eigen_ratio",
+          ">=",
+          0.15
+        ]
+      ],
+      "law": {
+        "kind": "gaussian_mixture",
+        "means": [
+          [
+            3.0,
+            0.0
+          ],
+          [
+            2.77163859753386,
+            1.1480502970952693
+          ],
+          [
+            2.121320343559643,
+            2.1213203435596424
+          ],
+          [
+            1.1480502970952695,
+            2.77163859753386
+          ],
+          [
+            1.8369701987210297e-16,
+            3.0
+          ],
+          [
+            -1.1480502970952693,
+            2.77163859753386
+          ],
+          [
+            -2.1213203435596424,
+            2.121320343559643
+          ],
+          [
+            -2.77163859753386,
+            1.1480502970952697
+          ],
+          [
+            -3.0,
+            3.6739403974420594e-16
+          ],
+          [
+            -2.7716385975338604,
+            -1.148050297095269
+          ],
+          [
+            -2.121320343559643,
+            -2.1213203435596424
+          ],
+          [
+            -1.148050297095271,
+            -2.7716385975338595
+          ],
+          [
+            -5.51091059616309e-16,
+            -3.0
+          ],
+          [
+            1.14805029709527,
+            -2.77163859753386
+          ],
+          [
+            2.121320343559642,
+            -2.121320343559643
+          ],
+          [
+            2.7716385975338595,
+            -1.148050297095271
+          ]
+        ],
+        "covariances": [
+          [
+            [
+              0.01,
+              0.0
+            ],
+            [
+              0.0,
+              0.01
+            ]
+          ],
+          [
+            [
+              0.01,
+              0.0
+            ],
+            [
+              0.0,
+              0.01
+            ]
+          ],
+          [
+            [
+              0.01,
+              0.0
+            ],
+            [
+              0.0,
+              0.01
+            ]
+          ],
+          [
+            [
+              0.01,
+              0.0
+            ],
+            [
+              0.0,
+              0.01
+            ]
+          ],
+          [
+            [
+              0.01,
+              0.0
+            ],
+            [
+              0.0,
+              0.01
+            ]
+          ],
+          [
+            [
+              0.01,
+              0.0
+            ],
+            [
+              0.0,
+              0.01
+            ]
+          ],
+          [
+            [
+              0.01,
+              0.0
+            ],
+            [
+              0.0,
+              0.01
+            ]
+          ],
+          [
+            [
+              0.01,
+              0.0
+            ],
+            [
+              0.0,
+              0.01
+            ]
+          ],
+          [
+            [
+              0.01,
+              0.0
+            ],
+            [
+              0.0,
+              0.01
+            ]
+          ],
+          [
+            [
+              0.01,
+              0.0
+            ],
+            [
+              0.0,
+              0.01
+            ]
+          ],
+          [
+            [
+              0.01,
+              0.0
+            ],
+            [
+              0.0,
+              0.01
+            ]
+          ],
+          [
+            [
+              0.01,
+              0.0
+            ],
+            [
+              0.0,
+              0.01
+            ]
+          ],
+          [
+            [
+              0.01,
+              0.0
+            ],
+            [
+              0.0,
+              0.01
+            ]
+          ],
+          [
+            [
+              0.01,
+              0.0
+            ],
+            [
+              0.0,
+              0.01
+            ]
+          ],
+          [
+            [
+              0.01,
+              0.0
+            ],
+            [
+              0.0,
+              0.01
+            ]
+          ],
+          [
+            [
+              0.01,
+              0.0
+            ],
+            [
+              0.0,
+              0.01
+            ]
+          ]
+        ],
+        "masses": [
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625
+        ]
+      },
+      "law_sha256": "7cc1d5a4c4f82592553a2e8f767d6bb6b7271171a73a06261cd357b143609254",
+      "protocol_seed": 0,
+      "evaluation_observations": 24,
+      "terminal_observations": 5,
+      "recipe_overrides": {
+        "prior_kind": "mog",
+        "sigma_rel": 0.0,
+        "standardize": false
+      },
+      "prior_options": {
+        "sigma": 0.025
+      },
+      "profile": {
+        "init_std": 0.5
+      },
+      "adaptation": "New retained question develop-ring16_acquisition; shared transfer_vector target/scorer and public GANTrainer, with an explicit nonzero-width MoG. Existing ring8 acquisition/hold evidence is unchanged.",
+      "initialization": {
+        "generator": "deterministic_orthogonal seed0",
+        "discriminator": "deterministic_orthogonal seed1",
+        "prior": "Gaussian init_std=.5 seed0"
+      },
+      "provider": "api_ring16"
+    }
+  ],
+  "readouts": [
+    {
+      "id": "api-ring16-acquisition",
+      "goal": "Acquire all 16 equally weighted two-dimensional Gaussian clusters from scratch: radius 3, sigma 0.1; require meaningful occupancy in every cluster, roughly balanced mass and noncollapsed local spread within 400 updates. No extended hold phase.",
+      "scope": "From random initialization, acquire sixteen equal radius-three sigma-.1 Gaussian clusters within 400 updates. Five terminal acquisition checks add no hold phase. Tier 1 is provisional; this standalone K3P/API initializer and RNG cohort supplies no Forge promotion credit.",
+      "execution_status": "ERROR",
+      "verdict": "FAIL",
+      "completed_updates": 400,
+      "default_updates": 400,
+      "failed_bounds": [
+        "component_covariance_error <= 0.85",
+        "hq >= 0.85",
+        "last 5 post-update metric observations do not all pass",
+        "goal media/state error: ModuleNotFoundError: No module named 'matplotlib'"
+      ],
+      "gif": "goal.gif",
+      "source_commit": "32e25a8e872a519304d54c1081efe89a73bf821e"
+    }
+  ],
+  "runs": [
+    {
+      "id": "api-ring16-acquisition",
+      "recipe": {
+        "name": "k3p",
+        "critic_formulation": "k3p",
+        "model": "gan",
+        "z_dim": 4,
+        "num_particles": 256,
+        "prior_kind": "mog",
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "num_classes": null,
+        "conditioning": "scalar",
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "batch_size": 128,
+        "total_steps": 400,
+        "continuous_policy": null,
+        "lr": 0.00425,
+        "d_lr_mult": 1.0,
+        "prior_lr_mult": 2.0,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "prior_betas": null,
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "reg_every": 1,
+        "prior_reg": 0.0,
+        "ema_decay": 0.995,
+        "lr_anneal_start": 0.6,
+        "lr_floor": 0.05,
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "direct_particle_gain": true,
+        "d_guard_ratio": 5.0,
+        "d_guard_min_steps": 200,
+        "latent_damping_max_rate": 0.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "input_noise_std": 0.5,
+        "input_noise_anneal_end": 0.1,
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.2,
+        "encoder_mode": "none",
+        "routing_temperature": 0.25,
+        "distance_reduction": "sum",
+        "observation_sigma": 0.03,
+        "reconstruction_weight": 1.0,
+        "amsgrad": false,
+        "critic_r1_real": true,
+        "critic_payoff_damping": true,
+        "output_noise_mode": "fixed",
+        "lr_control": "mobility",
+        "particle_birth_death": false,
+        "row_evidence_gate": false,
+        "table_release_rule": "any",
+        "row_evidence_hot": true,
+        "row_evidence_exclude": true,
+        "row_evidence_hold": true,
+        "birth_death_space": "data",
+        "serve_average": 0.0,
+        "reopen_signal": "data",
+        "reopen_anchor": "hold",
+        "row_evidence_null": "theory",
+        "birth_death_isolation": false,
+        "birth_death_feature_scale": "none",
+        "row_policy": "independent"
+      },
+      "runtime": {
+        "python": "3.14.7",
+        "torch": "2.14.0+cu130",
+        "device": "cuda:0",
+        "cuda": "13.0",
+        "torch_threads": 1
+      },
+      "source_identity": "746146cbdc5a97184082d2bc44c80c2d854f550d0a4f8902f55dfebdc911429d",
+      "protocol": {
+        "updates": 400,
+        "default_updates": 400,
+        "evaluation_samples": 4096,
+        "default_evaluation_samples": 4096,
+        "evaluation_steps": [
+          0,
+          17,
+          34,
+          50,
+          67,
+          84,
+          100,
+          117,
+          134,
+          150,
+          167,
+          184,
+          200,
+          217,
+          234,
+          250,
+          267,
+          284,
+          300,
+          317,
+          334,
+          350,
+          367,
+          384,
+          400
+        ],
+        "metric_evaluation_steps": [
+          0,
+          17,
+          34,
+          50,
+          67,
+          84,
+          100,
+          117,
+          134,
+          150,
+          167,
+          184,
+          200,
+          217,
+          234,
+          250,
+          267,
+          284,
+          300,
+          317,
+          334,
+          350,
+          367,
+          384,
+          400
+        ],
+        "media_steps": [
+          0,
+          50,
+          100,
+          150,
+          200,
+          250,
+          300,
+          350,
+          400
+        ],
+        "metric_observations": 24,
+        "media_frames": 9,
+        "terminal_observations": 5
+      },
+      "seed": 0,
+      "api_components": [
+        "particlegan.Recipe",
+        "particlegan.GANTrainer",
+        "particlegan.ParticlePrior"
+      ],
+      "initialization": {
+        "generator": "deterministic_orthogonal seed0",
+        "discriminator": "deterministic_orthogonal seed1",
+        "prior": "Gaussian init_std=.5 seed0"
+      },
+      "prior_options": {
+        "sigma": 0.025
+      },
+      "sampling": "Live generator; uniform row draws from the learned MoG plus fixed sigma=.025 Gaussian latent noise; standardize=False; output_noise=False; no EMA or policy serving.",
+      "completed_updates": 400,
+      "default_protocol_complete": true,
+      "metric_passed": false,
+      "sustained_metric_passed": false,
+      "verdict": "FAIL",
+      "failed_bounds": [
+        "component_covariance_error <= 0.85",
+        "hq >= 0.85",
+        "last 5 post-update metric observations do not all pass",
+        "goal media/state error: ModuleNotFoundError: No module named 'matplotlib'"
+      ],
+      "final_metrics": {
+        "sw1_normalized": 0.06018656486526549,
+        "mean_error": 0.002447649138048291,
+        "covariance_error": 0.12883910536766052,
+        "target_scale": 3.0029242038726807,
+        "sample_count": 4096,
+        "mass_tv": 0.083740234375,
+        "min_mass_ratio": 0.67578125,
+        "hq": 0.73876953125,
+        "component_covariance_error": 40.84168365597725,
+        "component_min_eigen_ratio": 0.5963106155395508,
+        "component_core_covariance_error": 0.37810486741364,
+        "component_core_min_eigen_ratio": 0.33146944642066956,
+        "max_component_spill": 0.5375722646713257,
+        "resolved_core_covariance_error": 0.0,
+        "resolved_core_min_eigen_ratio": 1.0,
+        "resolved_max_component_spill": 0.0,
+        "modes": 16,
+        "min_hq_mass_ratio": 0.3125,
+        "projection_ks": 0.07510449522872309
+      },
+      "terminal_metrics": [
+        {
+          "step": 334,
+          "metrics": {
+            "sw1_normalized": 0.06268020786845631,
+            "mean_error": 0.006832115817815065,
+            "covariance_error": 0.11667422205209732,
+            "target_scale": 3.0029242038726807,
+            "sample_count": 4096,
+            "mass_tv": 0.097900390625,
+            "min_mass_ratio": 0.5234375,
+            "hq": 0.705810546875,
+            "component_covariance_error": 41.675422474741936,
+            "component_min_eigen_ratio": 0.6182832717895508,
+            "component_core_covariance_error": 0.4017618792131543,
+            "component_core_min_eigen_ratio": 0.40693649649620056,
+            "max_component_spill": 0.5522388219833374,
+            "resolved_core_covariance_error": 0.0,
+            "resolved_core_min_eigen_ratio": 1.0,
+            "resolved_max_component_spill": 0.0,
+            "modes": 15,
+            "min_hq_mass_ratio": 0.234375,
+            "projection_ks": 0.07762695332159131
+          },
+          "passed": false,
+          "failed_bounds": [
+            "component_covariance_error <= 0.85",
+            "hq >= 0.85",
+            "modes >= 16"
+          ]
+        },
+        {
+          "step": 350,
+          "metrics": {
+            "sw1_normalized": 0.06228398973670636,
+            "mean_error": 0.004451781045645475,
+            "covariance_error": 0.13333314657211304,
+            "target_scale": 3.0029242038726807,
+            "sample_count": 4096,
+            "mass_tv": 0.086181640625,
+            "min_mass_ratio": 0.640625,
+            "hq": 0.723876953125,
+            "component_covariance_error": 42.00501552224159,
+            "component_min_eigen_ratio": 0.6341094970703125,
+            "component_core_covariance_error": 0.4043264565989375,
+            "component_core_min_eigen_ratio": 0.3692454695701599,
+            "max_component_spill": 0.5731707215309143,
+            "resolved_core_covariance_error": 0.0,
+            "resolved_core_min_eigen_ratio": 1.0,
+            "resolved_max_component_spill": 0.0,
+            "modes": 16,
+            "min_hq_mass_ratio": 0.2734375,
+            "projection_ks": 0.07783864520844136
+          },
+          "passed": false,
+          "failed_bounds": [
+            "component_covariance_error <= 0.85",
+            "hq >= 0.85"
+          ]
+        },
+        {
+          "step": 367,
+          "metrics": {
+            "sw1_normalized": 0.05921501738324122,
+            "mean_error": 0.006219183094799519,
+            "covariance_error": 0.12189188599586487,
+            "target_scale": 3.0029242038726807,
+            "sample_count": 4096,
+            "mass_tv": 0.083251953125,
+            "min_mass_ratio": 0.67578125,
+            "hq": 0.7353515625,
+            "component_covariance_error": 41.01539672911167,
+            "component_min_eigen_ratio": 0.5846848487854004,
+            "component_core_covariance_error": 0.38955993112176657,
+            "component_core_min_eigen_ratio": 0.3367072641849518,
+            "max_component_spill": 0.5317919254302979,
+            "resolved_core_covariance_error": 0.0,
+            "resolved_core_min_eigen_ratio": 1.0,
+            "resolved_max_component_spill": 0.0,
+            "modes": 16,
+            "min_hq_mass_ratio": 0.31640625,
+            "projection_ks": 0.07239462427204768
+          },
+          "passed": false,
+          "failed_bounds": [
+            "component_covariance_error <= 0.85",
+            "hq >= 0.85"
+          ]
+        },
+        {
+          "step": 384,
+          "metrics": {
+            "sw1_normalized": 0.0601462071553262,
+            "mean_error": 0.002227169694378972,
+            "covariance_error": 0.1275714784860611,
+            "target_scale": 3.0029242038726807,
+            "sample_count": 4096,
+            "mass_tv": 0.085205078125,
+            "min_mass_ratio": 0.66796875,
+            "hq": 0.738037109375,
+            "component_covariance_error": 40.951345294713974,
+            "component_min_eigen_ratio": 0.5873346328735352,
+            "component_core_covariance_error": 0.3754057493060827,
+            "component_core_min_eigen_ratio": 0.33579951524734497,
+            "max_component_spill": 0.5321637392044067,
+            "resolved_core_covariance_error": 0.0,
+            "resolved_core_min_eigen_ratio": 1.0,
+            "resolved_max_component_spill": 0.0,
+            "modes": 16,
+            "min_hq_mass_ratio": 0.3125,
+            "projection_ks": 0.07547541897471027
+          },
+          "passed": false,
+          "failed_bounds": [
+            "component_covariance_error <= 0.85",
+            "hq >= 0.85"
+          ]
+        },
+        {
+          "step": 400,
+          "metrics": {
+            "sw1_normalized": 0.06018656486526549,
+            "mean_error": 0.002447649138048291,
+            "covariance_error": 0.12883910536766052,
+            "target_scale": 3.0029242038726807,
+            "sample_count": 4096,
+            "mass_tv": 0.083740234375,
+            "min_mass_ratio": 0.67578125,
+            "hq": 0.73876953125,
+            "component_covariance_error": 40.84168365597725,
+            "component_min_eigen_ratio": 0.5963106155395508,
+            "component_core_covariance_error": 0.37810486741364,
+            "component_core_min_eigen_ratio": 0.33146944642066956,
+            "max_component_spill": 0.5375722646713257,
+            "resolved_core_covariance_error": 0.0,
+            "resolved_core_min_eigen_ratio": 1.0,
+            "resolved_max_component_spill": 0.0,
+            "modes": 16,
+            "min_hq_mass_ratio": 0.3125,
+            "projection_ks": 0.07510449522872309
+          },
+          "passed": false,
+          "failed_bounds": [
+            "component_covariance_error <= 0.85",
+            "hq >= 0.85"
+          ]
+        }
+      ],
+      "execution_elapsed_seconds": 6.1128678399836645,
+      "gif": "goal.gif",
+      "gif_sha256": "9b50433be3e0cfb560a5977e8a90583d24ca0b64ca59d320cfcac95dbf364cd1",
+      "frames": 9,
+      "raw_receipt_sha256": "73a82c8addc9e39836125391e2842cc793570dbc25cd7bd478a07d1ce7f97c40",
+      "raw_artifacts": {
+        "observations.npz": {
+          "sha256": "48630ac1643d1441374b5dd5e57e469ea8fb33a6896d3b1421062fb650e2fdca",
+          "bytes": 3038837
+        },
+        "final-state.pt": {
+          "sha256": "9802a95ff13e0307b6409c6ac61147eadd47211de3e0f5f0747fce33df934fce",
+          "bytes": 212683
+        }
+      },
+      "qualification_input": false
+    }
+  ],
+  "source_identities": {
+    "746146cbdc5a97184082d2bc44c80c2d854f550d0a4f8902f55dfebdc911429d": {
+      "commit": "32e25a8e872a519304d54c1081efe89a73bf821e",
+      "files_sha256": {
+        "benchmarks/__init__.py": "53ba1483505036be295d73f5f3308bffb951e9414bf2b1139d8756e260e3b830",
+        "benchmarks/gan_v3.py": "00ca856749c82ce3d4e554ced924dda4399311d2e31ca8dbea8b8d5829141538",
+        "benchmarks/learned_lr_evaluation.py": "2bbaf1caba19f7d31632178782ce81ae93e71c1e9455e0ec1e3c5bb740737532",
+        "benchmarks/legacy/__init__.py": "83de2dd27bb1fec5ba74b066b49274ba161e4e480037129e3c99e13b04767f04",
+        "benchmarks/legacy/gan_loss.py": "ee26f6d8ef56dde123740f67dd82f48d01f57d4acfa0f3efd299097a1e60600f",
+        "benchmarks/legacy/grad_regularizers.py": "cfe252f52a6d11274e4be78bd13934fc3d919abe7d0ba349e5bd0199a45dcb5d",
+        "benchmarks/legacy/locked_shared.py": "9bac7def8e5c10d4d4532723ebbf7d7689d5e85c8823dbf07fb7225f91b455c0",
+        "benchmarks/legacy/recipe.py": "b31cdb23913b3c71432ecbdee40a0c0293c067bbcd1f2e5cdfb192426a43c543",
+        "benchmarks/locked_shared/__init__.py": "a33bb985c9801d5fe3ad19666a43f8448a7aaebe2ff86555bd05d7a20e76fc2f",
+        "benchmarks/locked_shared/baseline.py": "72ebe4ef6d3cfe28f1ab6073fc781a72b45173f3ce2a0b63040e84b27bed03cc",
+        "benchmarks/locked_shared/hosts/__init__.py": "3f0d91417b7c3b167e7b9a13b2053eca53394ca454ea62d27f1c26c723a096fb",
+        "benchmarks/locked_shared/hosts/ae_gan_hold.py": "c25ea8f8b998a137719df7fc18e5b047b456cdb5a65969430a652db0524509a9",
+        "benchmarks/locked_shared/hosts/cover_leftover.py": "f9bf24ace45678508c9d7e767e73db86116daece205bd78f3174737d13177838",
+        "benchmarks/locked_shared/hosts/mid_scale_identity.py": "cfe8a3726b644de5844d04449321888358053ff9a4ae66371cc002cae7ecc54c",
+        "benchmarks/locked_shared/hosts/residual_student.py": "5be55913b33dde33bfd3e1c2afaa20d127847a2b85616d6fc06227117c1910e2",
+        "benchmarks/locked_shared/hosts/unipolar.py": "c66b2c48ed00eb9ce4ed91c4e2efafa4f844f8f2fe57338901a754d3e023acb5",
+        "benchmarks/locked_shared/hosts/unused_token_hold.py": "ac535ce8ece5ae647f0b623c0adf06da2cb9ee37a44b7bb950a59e13642b672b",
+        "benchmarks/locked_shared/mlp.py": "928bd363b37b91ec557b82bed5c4b23cfa08eca499d6187ae3da071fcb3b2b1a",
+        "benchmarks/locked_shared/mode_hold.py": "38d4b4030ddaf354d41593395f3d6a26b4acf3668e672ebe56d126b7ee1c7232",
+        "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+        "benchmarks/locked_shared/trajectory.py": "9d9ac0313e53142107fea6ae231b44be0852679aa267d6d423873f948abeea4d",
+        "benchmarks/locked_shared/two_pole.py": "eee207af6d12475f7dbb106087f9d9e269d284274e69e4d199f6d8a38cb54f5e",
+        "benchmarks/smart_descent/__init__.py": "e71448ddd8f5c404eede89e9046d342866d2e9a9faa1642fe950db4dc1d42369",
+        "benchmarks/smart_descent/controller.py": "b2c00ade7ec77d1acba7917d8689bd29db4406fde5cf84cd67976dea274a42cf",
+        "benchmarks/smart_descent/evaluate.py": "7d053ee8397f13e0579baf671867a16a1207c06e2763b1c0a3e8551e9fd38407",
+        "benchmarks/smart_descent/study.py": "01b7f1c994d4de893d0424a20218ca26105dabf65d2e77d5a84c8871dcb3509f",
+        "benchmarks/toy100/__init__.py": "f10bbdfb010d90379c9145f31b499c7c2e878d0ad70291ae3bd6104903852ddb",
+        "benchmarks/toy100/accuracy.py": "ee5c62049f8cdceb3d93b6d792cbaa96c815e12b3ce79ffaed244fb15a44fed2",
+        "benchmarks/toy100/device.py": "7fa0f53db44e8824d3497b471e9fe8db56cbf8b4e02ddf997f65beed63f81911",
+        "benchmarks/toy100/metrics.py": "a7fbef19082f8470eb392948da52a336a90a3e99c6b3b893343a9e75bcda9c7b",
+        "benchmarks/toy100/problems.py": "2581374d451ed9147c031dfcdfbe9e2eea83e41ba49c2b8945b6e729ede26c9d",
+        "benchmarks/toy_audit/__init__.py": "30dbbd092746095414a291a135065be420088a8f14170b94d643d403a0bd12c9",
+        "benchmarks/toy_audit/api_conditionals.py": "ca6b063c0ac315f90661deaffae8f60fbd4a0f9575b891db1895501d12edad38",
+        "benchmarks/toy_audit/api_contract.py": "1b85b938ea11ee8a7038779e15a2a5e6f145b39f3f5e95680b79ec6cd729455f",
+        "benchmarks/toy_audit/api_diagnostics.py": "d83ca91e423823e16126f5eb0557af3682efa22e459db7e1cbd7490558360a50",
+        "benchmarks/toy_audit/api_images.py": "dd1f093b73dbca768210772ff49d8c231c265a1fab4f8a66ff66d8a130460b96",
+        "benchmarks/toy_audit/api_publish.py": "4334ac384c2766d85bd10ece19cee3ba88be67e39f151a414efcac188ecae2de",
+        "benchmarks/toy_audit/api_readout.py": "7026a342e5325e19086bcd23e89fee74d871464cef3d727c1fd7d80c8649a414",
+        "benchmarks/toy_audit/api_reframe.py": "7254d231c609edd4186893ee75706924cbbf7359dac951381b2226d9f8ce8065",
+        "benchmarks/toy_audit/api_ring16.py": "28b7bddc2a72538177431db7318bfd6778fe35fe06e1292b1701a315f75801ff",
+        "benchmarks/toy_audit/api_run.py": "2feb64f2e2dbfc91a5740da9f961b37d9c7bbaced195203a98916f149f0aa7a8",
+        "benchmarks/toy_audit/api_sources/__init__.py": "622170cc5a621286b1b46dc9e0e0199ec451e08e3c404c857268a0e5a4de9e30",
+        "benchmarks/toy_audit/api_sources/circle.py": "540eaa74918c1e218d31eb0d18a62e35bdefdd5eb89d8e0d9ed7f288dd9c6e13",
+        "benchmarks/toy_audit/api_sources/misgan.py": "d701ef0f12178ad6965fa52136bd6f4fdc4f7fe3b61d0af6aff8944f02c19516",
+        "benchmarks/toy_audit/api_sources/sprite.py": "53f0cca3e2c7481c89dc6e014444841b4fa17f66a430fcc046c6fb57e96a77c7",
+        "benchmarks/toy_audit/api_vectors.py": "e9677a23eb8ef8ade12629ef83c66ecfecb3e15de49b10fec9e8e8f26a93307e",
+        "benchmarks/toy_audit/definition_quality.py": "42d835ab7a0937a6c3759dd719691c721663b7857cb990405253e90f7fbd4cc9",
+        "benchmarks/toy_audit/ring16_quality.py": "c666909ee8ed22ecb7a72f4185556f82b0b6d4ebd8aac871d58ed75b7ebf9db6",
+        "benchmarks/toy_audit/source_conditional_scoring.py": "938d227f52f8e614bf249cb8328245da571471582b508e04ac6dccca4e290c43",
+        "benchmarks/toy_audit/vector_quality.py": "8a333bfceb71e311875b8576260c362a66a643c99d3849e6792a10e805de67d9",
+        "benchmarks/transfer_suite/__init__.py": "8d105e8141cf36010abf315aa2b5f74fab872c341612b567236e7fe96c5177dc",
+        "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97",
+        "benchmarks/transfer_suite/stress_tasks.py": "3342e717db338cb6b7ebf5a95c01c51e4be855a564490f34f240b2a0b2e8c7e4",
+        "benchmarks/transfer_suite/vector_tasks.py": "3ee4eb27759f61a430029c80b7772cac3dca2fb2ac84919ace0db94efca1e0b0",
+        "examples/e22_external_loop.py": "c3463363f0420e70b60b5fb3e1cc0ff9bdcb467a2341329de3ec13198e0d2a82",
+        "examples/e22_paired_residual_toy.py": "54cc1817a4dee15aa760d654ef0f68aa5cbb09091c8fce25a227442b23395acd",
+        "examples/e22_routed_antithetic_variance.py": "c82ce65adf1c2048ac5cc5312cb788af50bd7aa46bc3bea678cc66c65a6a1818",
+        "examples/e22_routed_caption_accuracy.py": "bae0f255d890e49bfbe4602bee7f8e84051b24a3cb0219c13b0a42b25768b8e3",
+        "examples/e22_routed_caption_flow.py": "f868c7cb36db670fc1f08aebeb54e6d863837f8d56e685373e5873b2b4a08e3c",
+        "examples/e22_routed_caption_frozen_stats.py": "a8489fc0369bf03bdfe5b8a5bb92c9a7c9b3f66aea83166f5fdd53f8dab99047",
+        "examples/e22_routed_caption_normalization.py": "7077a03143a8d25577bfb2ed1f167d847e75972131093f9228ca10f6aaca9a0e",
+        "examples/e22_routed_caption_untied.py": "a35938f51b7974677651d2c05b1aa396896255460e213cf26ccf57409efcdb81",
+        "examples/e22_routed_convergence.py": "b814bc0cac728d02290f6f0ed712dd6bb9483074f11666c5c012e72cd4d8f6b6",
+        "examples/e22_routed_convergence_guided_campaign.py": "0737b8baf169c457b47cd255d4130ab993da1d7e5eb60e5a57b178e9e54062b4",
+        "examples/e22_routed_convergence_guided_pair.py": "da3b0850fa438d4001c65cff1ae2a54c2930e98155b093748787fd51c11a2f2a",
+        "examples/e22_routed_convergence_neutral.py": "e831f67173d5499303a2cc01232388cdb8f338452a8189e09d1f9a6a69e14972",
+        "examples/e22_routed_convergence_rotated_teacher.py": "de53b5b781d3d140d83a40531326a67ef170e06687be551c277d88a45df4266a",
+        "examples/e22_routed_g_clean.py": "4386576cebcf05669f2daff8f7cd8b8f28a60bd966b37e2de795de72ee6d045d",
+        "examples/e22_routed_game.py": "0eb056d8dfbff08ef4bd392a0957f30e30eaf762886809b575d93ab6616a161f",
+        "examples/e22_routed_game_stationarity.py": "7cb2b3abb1e46710e1072445ee3e32fed6123f91bb58fc1dd2c2dbdc336e907a",
+        "examples/e22_routed_moving.py": "1cb7f214cda8022aeacd5a1844b1ad8716e95cd5efd284b0cdd26d048b05b539",
+        "examples/e22_routed_paired.py": "5d997d2a9fb8d64c1c6d73fa87f14edfac03617cd6f62a31796fe6d47f362a46",
+        "examples/e22_routed_readbacks.py": "99b91b8eb157dfc4ff8362436184bdc4336a185256712da803ad25b4a67630f0",
+        "examples/e22_routed_replay.py": "60df44a4cc0a0380eee969bc7f91a20dd6247d55ec23f12c7cb76f7326b3e663",
+        "examples/e22_routed_sites.py": "ae33170fcc1377c93d3a251ec460ff283432a3a65e68d32dd004637913a97c13",
+        "examples/e22_routed_support.py": "f94434b91d2bd99597500d958f4ebc079b64e6a75b5c318c05aaa8dc6fe5c229",
+        "examples/e22_stiff_game_reopen.py": "6615bcca20a9db746bf5a6125bc3d59626a2b7ef0c747228ede7c89f8e0f618d",
+        "lib/denoising_toy.py": "b16eefa77a131b7c819ed15d92e2b31d3bf3fb13bbaf51aa915e5032265ddc29",
+        "lib/safe_fast_landing.py": "6016f444d47375ba71fafc5ec20132fceb38ca0814854e4fab0b106e092647b5",
+        "lib/sparse_toy.py": "c356bc07a3510efc12eda6ea78ab02196cd5b6dfa2d5540c1602c8649551c979",
+        "lib/toy_metrics.py": "12e8975fe31ed4d9973d53649ce940171da78739a3d7b80544ba5f4d2313367c",
+        "lib/toy_models.py": "70f32797882de0dc88085afcf5e05821b65eb5f248c9690818a2494225d782a3",
+        "lib/trajectory.py": "7af4817005b35144ea19cb156c475d8a654584a0913f773028e674916bd4fcf7",
+        "lib/transition.py": "87bb3cfb65a96ac058860a06df421601caf02a44a05c5c62b265d3e1850fcf76",
+        "lib/vendor/concept_slider_core/reference.py": "c5ef81e49826a8b9065f1b1ab11b03f3fccce7a93c9de8d31b897f668f48b833",
+        "lib/yue2_particle_toy.py": "a0a62a31a276d8b36b97577881e679b8de61162af8699ef39a122b444c8bc078",
+        "particlegan/__init__.py": "b56efa562acc551d639548c299002e2cd76338b3fd7062699780add51f4f5e8c",
+        "particlegan/_qr.py": "b59cd62cc27ed557b41b2d17ed86ed578c762a3a8a392d63731a5a3b2b018916",
+        "particlegan/anchor_birth.py": "aa50983d8b61304acf4e1138f16fd4784798983df91e931863bcacd3b511f76f",
+        "particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+        "particlegan/birth_death.py": "b14c50c611a8cf188347e391739fca50a5171200eb6be90e4e3d1509d64e47ed",
+        "particlegan/birth_phase.py": "5ff929e5e9858aa24c4cc2f8999b5d0603e25e42ca3844d1da4cc28b1981d3d7",
+        "particlegan/capabilities.py": "39df9c67dbedf612740057e5fa743bc724678a1bc323d1f7cf550b37c0c01177",
+        "particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+        "particlegan/continuous.py": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41",
+        "particlegan/diffusion.py": "19c3aa8772703891551b9122fde8e74c07996f779892b7cb6be09553691efa61",
+        "particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+        "particlegan/feature_cells.py": "e0ea05f61abd7845c7437eed9a79c3a2511d5551ff04f4e619b6b9c8992e221a",
+        "particlegan/feature_policy.py": "de1a50f70a37d4c9174c8850ce3eac2a2597ed01f19fc4fe1a2ce0ec3176a8b2",
+        "particlegan/feature_reference.py": "58e076e9e04600be25e28afafc537a340de727371f4acbbfb2b7dd8bebac18b1",
+        "particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+        "particlegan/grad_regularizers.py": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747",
+        "particlegan/init.py": "e15d4de01eb49f7097bc249abacab907ff067385412346f54ab0d510cb8649d0",
+        "particlegan/k3p.py": "200ead2c27ab0b2aa6068f1b1b1b5c826b8125aa8602bfec08b31aaa2894401c",
+        "particlegan/ka2.py": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703",
+        "particlegan/mean_transport.py": "57a68e0a65c5424a4460f65002f3862a69e90af330a4d47c700dc773683a2c06",
+        "particlegan/output_moments.py": "dcf3e27228d2c3c9738e473c5b22ee9e6d5047ddcd60c538b66526adb53ef188",
+        "particlegan/particle_prior.py": "0220878bebea227da63abbf9f5b1ebdabdc6aea54fd2332fd2cab02ed734238f",
+        "particlegan/policy.py": "8370e36b5b93afe95ae24d2b385aac8735a587f86ef2b87ed369ecfdfcb6fec5",
+        "particlegan/population_continuity.py": "378cd75cca45bc8da4da33e686a12cf99df853042687978314e37c532bc17fe6",
+        "particlegan/recipe_schedules.py": "d05e459b3e9e5f938b01a854273b74343f2b6d382bec4ae5151dd1f1cd032500",
+        "particlegan/recipes.py": "1a7f9df746e242a2774068c819d70d50cd72dc4f7f6b22b0bd13e1345dcf8ab2",
+        "particlegan/routing.py": "63249d808fccb3d4e113eb1d638a245ee665c3cade20a1542bb706f316b4abcc",
+        "particlegan/row_evidence.py": "78be40141ef3946860458e9842159be9321f05c217a4800dd4134113b6eba93e",
+        "particlegan/training.py": "7dadc219135bc3e6bf657bfe9bc3fa81dd14d4b2a31c70d5ff61e2941db35c94",
+        "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+      }
+    }
+  },
+  "media_recovery": {
+    "original_execution_status": "ERROR",
+    "numeric_verdict": "FAIL",
+    "displayed_verdict": "ERROR / FAIL",
+    "original_failed_bounds": [
+      "component_covariance_error <= 0.85",
+      "hq >= 0.85",
+      "last 5 post-update metric observations do not all pass",
+      "goal media/state error: ModuleNotFoundError: No module named 'matplotlib'"
+    ],
+    "raw_sha256": {
+      "receipt.json": "73a82c8addc9e39836125391e2842cc793570dbc25cd7bd478a07d1ce7f97c40",
+      "observations.npz": "48630ac1643d1441374b5dd5e57e469ea8fb33a6896d3b1421062fb650e2fdca",
+      "final-state.pt": "9802a95ff13e0307b6409c6ac61147eadd47211de3e0f5f0747fce33df934fce"
+    },
+    "renderer_source": {
+      "commit": "094c55a65395411f3eee378bdb308f6cda45d10d",
+      "files_sha256": {
+        "benchmarks/toy_audit/api_run.py": "2feb64f2e2dbfc91a5740da9f961b37d9c7bbaced195203a98916f149f0aa7a8",
+        "benchmarks/toy_audit/api_reframe.py": "7254d231c609edd4186893ee75706924cbbf7359dac951381b2226d9f8ce8065",
+        "benchmarks/toy_audit/api_contract.py": "1b85b938ea11ee8a7038779e15a2a5e6f145b39f3f5e95680b79ec6cd729455f",
+        "benchmarks/toy_audit/ring16_publish.py": "0563b7ee869829b72794c5b4a8c780bef086e1b8cb28f57f54cdac2d40d00932"
+      },
+      "python": "3.12.13",
+      "matplotlib": "3.11.1"
+    },
+    "media_steps": [
+      0,
+      50,
+      100,
+      150,
+      200,
+      250,
+      300,
+      350,
+      400
+    ],
+    "annotations": {
+      "default_verdict_displayed": "ERROR / FAIL",
+      "goal_annotations": [],
+      "numeric_observations_changed": false
+    },
+    "numeric_observation_sha256": "b40f22e7257744db014f05712299219342ff1977c8e4ed943772925604011ab8",
+    "raw_files_unchanged": true,
+    "qualification_upgrade": false,
+    "training_or_rescoring": false
+  },
+  "training_or_rescoring_by_publication": false,
+  "historical_receipts_changed": false
+}
