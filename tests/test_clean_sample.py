@@ -10,6 +10,7 @@ from torch import nn
 from particlegan import GANTrainer, get_recipe
 from particlegan.training import output_noise_std
 from benchmarks.toy100 import accuracy_evidence
+from benchmarks.toy100 import train as train_module
 from benchmarks.toy100.models import (
     IsolatedOutputNoise, OutputNoise, clean_output_noise, sample_clean,
 )
@@ -152,3 +153,46 @@ def test_toy100_isolated_trainer_accepts_the_output_noise_flag():
                        trainer.sample(8, generator=seed(), output_noise=True))
     with pytest.raises(ValueError, match="boolean"):
         trainer.sample(8, output_noise="yes")
+
+
+@pytest.mark.parametrize("extra", [{}, {"output_noise_rng": "isolated"}])
+def test_explicit_served_scoring_changes_draws_without_changing_training(tmp_path, monkeypatch, extra):
+    trainers = []
+    original_factory = make_trainer
+
+    def capture(*args, **kwargs):
+        trainer = original_factory(*args, **kwargs)
+        trainers.append(trainer)
+        return trainer
+
+    monkeypatch.setattr(train_module, "make_trainer", capture)
+    summaries = [train(_toy_config(eval_output_noise=enabled, **extra), tmp_path / str(enabled))
+                 for enabled in (False, True)]
+    # Short software probes do not run the full research accuracy protocol.
+    # Exercise its separate holdout writer directly on the resulting states.
+    for enabled, trainer, summary in zip((False, True), trainers, summaries):
+        recorder = accuracy_evidence.AccuracyEvidence(
+            summary["config"], tmp_path / str(enabled), [4], torch.zeros(1024, 2))
+        recorder.finish(trainer)
+
+    def same(left, right):
+        if isinstance(left, torch.Tensor):
+            assert torch.equal(left, right)
+        elif isinstance(left, dict):
+            assert left.keys() == right.keys()
+            for key in left:
+                same(left[key], right[key])
+        elif isinstance(left, (tuple, list)):
+            assert type(left) is type(right) and len(left) == len(right)
+            for a, b in zip(left, right):
+                same(a, b)
+        else:
+            assert left == right
+
+    # Models, optimizers, update counts and every checkpointed RNG stream agree.
+    same(trainers[0].state_dict(), trainers[1].state_dict())
+    assert [summary["eval_output_noise"] for summary in summaries] == ["clean", "training_noise"]
+    for filename in ("final_samples.npz", "holdout_samples.npz"):
+        with np.load(tmp_path / "False" / filename) as clean, np.load(tmp_path / "True" / filename) as served:
+            assert not np.array_equal(clean["live"], served["live"])
+            np.testing.assert_array_equal(clean["target"], served["target"])
