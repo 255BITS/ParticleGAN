@@ -74,8 +74,18 @@ pass/failure bounds. Its negative controls reject changed samples and corrupted
 primary metrics. The initial diagnostic stays in the local archive; it launched
 no ordinary training and supplies no qualification.
 
-The paid round cap is 10,800 seconds, with independent 5,400-second family
-and candidate ceilings. Full task reservations are separate: 2,100 seconds
+The initial C2 Atlas launch stopped in argument parsing: its new coordinator
+passed an unsupported `--seed` flag. All four setup attempts, their logs and
+6.165411 paid seconds are retained in the
+[initial launch readout](policy-atlas-initial-launch/README.md). They performed
+zero optimizer updates and produced no scientific result. The linked v2 study
+uses supported arguments and checks each case's actual fixed protocol seed in
+preflight. Real public-CLI parser controls cover both families and all eight
+cases. Protected API/provider bytes and capacity bindings are unchanged.
+
+The total paid round cap including that setup remains 10,800 seconds. The v2
+Atlas allowance is 5,393.834589 seconds and E22's is 5,400; candidate ceilings
+remain 5,400. Full task reservations are separate: 2,100 seconds
 for each native case and 180 seconds for each selected vector/image case,
 plus 120 seconds of export grace. Worst-case reservation is 8,160 seconds per
 configuration and 65,280 for the complete matrix; those figures do not imply
@@ -88,7 +98,9 @@ Root admits at most one serial experiment worker per GPU, with at least
 external graphics workload is hot. Both family lanes can run serially on
 GPU1 with separate archives. Other users' processes remain untouched.
 
-Execution stays at one committed source throughout both lanes. Partial
+Each admitted execution cohort stays at one committed source throughout its
+lanes. A linked engineering repair starts a new explicit cohort and archive;
+it never overwrites a failed or interrupted attempt. Partial
 publications use a separate worktree so the execution HEAD cannot change
 between children. Bulk raw logs, arrays and checkpoints stay outside Git;
 compact certified metrics and illustrative actual-training GIFs are published

@@ -113,6 +113,11 @@ def validate_spec(spec, cases):
     if any(item["id"] not in cases for item in assignments):
         raise ValueError("unknown/missing required API cases")
     for item in assignments:
+        # api_run's CLI takes the seed from registered metadata, not an
+        # arbitrary --seed flag. Bind its actual default before any child.
+        protocol_seed = cases[item["id"]].get("protocol_seed", 24002)
+        if type(protocol_seed) is not int or protocol_seed != spec["seed"]:
+            raise ValueError("registered case protocol seed differs from the frozen study seed")
         _positive(item.get("timeout_seconds"), "case timeout")
     for key in ("budget_seconds", "candidate_budget_seconds", "export_grace_seconds"):
         _positive(spec.get(key), key)
@@ -522,6 +527,14 @@ def _recertify_archive(packet):
                     raise ValueError("saved scientific status differs from its certified raw receipt")
 
 
+def child_command(spec, trial, row, case_root, device):
+    """Exact existing API CLI; original budgets and metadata-bound seed."""
+    return [sys.executable, "-m", "benchmarks.toy_audit.api_run", "--case", row["id"],
+            "--output", str(Path(case_root).parent), "--recipe", trial["family"], "--device", device,
+            "--recipe-overrides", json.dumps(trial["recipe_overrides"]),
+            "--wall-cap-seconds", str(row["timeout_seconds"]), "--frames", str(spec.get("frames", 9))]
+
+
 def run_study(spec, output, *, family, device):
     """Sequential children only; no extra workers or changed protocol resources."""
     if family not in FAMILIES or torch.device(device).type != spec["backend"]:
@@ -574,11 +587,7 @@ def run_study(spec, output, *, family, device):
                 trial["status"] = "INCOMPLETE"
                 break
             log.parent.mkdir(parents=True, exist_ok=True)
-            command = [sys.executable, "-m", "benchmarks.toy_audit.api_run", "--case", row["id"],
-                       "--output", str(case_root.parent), "--recipe", family, "--device", device,
-                       "--recipe-overrides", json.dumps(trial["recipe_overrides"]),
-                       "--wall-cap-seconds", str(row["timeout_seconds"]), "--frames", str(spec.get("frames", 9)),
-                       "--seed", str(spec["seed"])]
+            command = child_command(spec, trial, row, case_root, device)
             row.update(status="RUNNING", command=command, log_path=str(log))
             _save(registration, packet)
             started = time.monotonic()

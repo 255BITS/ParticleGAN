@@ -86,6 +86,11 @@ allowance before starting; a hard subprocess cap includes a separate media-expor
 grace, and an acquisition cap cannot become PASS even if a child exits0.
 Registration precedes the child, and each result is saved durably. An interrupted
 or orphan paid attempt is retained as INCOMPLETE and never automatically retried.
+The child command is checked through the real public CLI parser in software
+controls. Its seed comes from the case's fixed protocol, which preflight must
+match to the study; this CLI has no caller-supplied seed option. An execution
+repair requires a linked new study/source/archive, retaining the original error
+and subtracting its setup cost from the total remaining paid allowance.
 Unknown interruption cost is conservatively charged at its reservation ceiling;
 `measured_paid_seconds` reports only measured child execution separately.
 Metric/sample/checkpoint/source/recipe/runtime/exit consistency is rechecked

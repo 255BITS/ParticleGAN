@@ -321,16 +321,25 @@ def test_committed_cohorts_rebuild_every_scientific_row_in_a_checkout_without_ra
     shutil.copyfile(ROOT / "configs/forge/trainer-families.json", tmp_path / "configs/forge/trainer-families.json")
     shutil.copyfile(ROOT / "configs/forge/defaults.json", tmp_path / "configs/forge/defaults.json")
     manifest = read_json(tmp_path / publication.EVIDENCE_MANIFEST)
-    expected, all_snapshots, registered_rows = {}, [], []
+    expected, all_snapshots, registered_rows, unregistered_shadows = {}, [], [], []
+    snapshot_bytes = {}
     for entry in manifest["cohorts"]:
+        snapshot_bytes[entry["snapshot"]] = (tmp_path / entry["snapshot"]).read_bytes()
         snapshot = read_json(tmp_path / entry["snapshot"])
         all_snapshots.extend(snapshot["rows"])
         for row in snapshot["rows"]:
             if row["candidate_id"] not in entry["candidates"]:
                 continue
+            recorded_at = entry["candidates"][row["candidate_id"]]
+            # Completion-time registrations attest measured runtime rows. A
+            # frozen all-backend roster also contains unmeasured CPU shadows
+            # of the same CUDA config IDs; they are not registered evidence.
+            if isinstance(recorded_at, str) and not row.get("attempt_ids"):
+                unregistered_shadows.append(row)
+                continue
             registered_rows.append(row)
             key = row["candidate_id"], row["runtime_cohort"]["execution_backend"]
-            rank = entry["candidates"][row["candidate_id"]] or ""
+            rank = recorded_at or ""
             if key not in expected or rank > expected[key][0]:
                 expected[key] = rank, row
     # This fixture isolates cached reconstruction; separate tests exercise new
@@ -344,9 +353,11 @@ def test_committed_cohorts_rebuild_every_scientific_row_in_a_checkout_without_ra
     science = lambda row: {key: value for key, value in row.items() if key not in display_fields}
     scientific_variants = [science(row) for row in result["configuration_rows"]]
     assert all(science(row) in scientific_variants for _, row in expected.values())
+    assert all(science(row) not in scientific_variants for row in unregistered_shadows)
     assert all(row in [science(original) for original in all_snapshots] for row in scientific_variants)
     assert Counter(stable_hash(science(row)) for row in result["evidence_rows"]) == Counter(stable_hash(science(row)) for row in registered_rows)
     assert len(result["rows"]) == len({(row["trainer_family"], stable_hash(row["runtime_cohort"])) for row in result["configuration_rows"]})
     assert len(result["configuration_rows"]) >= len(expected)
+    assert all((tmp_path / relative).read_bytes() == original for relative, original in snapshot_bytes.items())
     assert not (tmp_path / "reports/forge/attempts").exists()
     assert len(list((tmp_path / "reports/forge").rglob("*.md"))) == 1

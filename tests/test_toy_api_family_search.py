@@ -174,6 +174,46 @@ def test_budget_and_gate_changes_are_not_implicit_search_axes(tmp_path, cases):
             search.validate_spec(changed, cases)
 
 
+@pytest.mark.parametrize("protocol_seed", [24499, "24002", 24002.])
+def test_case_cli_seed_must_equal_frozen_study_before_capacity_or_child(tmp_path, cases, monkeypatch, protocol_seed):
+    changed = deepcopy(cases)
+    changed[search.DEFAULT_CASES[-1][0]]["protocol_seed"] = protocol_seed
+    monkeypatch.setattr(search, "_proofs", lambda *args: pytest.fail("seed drift reached capacity admission"))
+    with pytest.raises(ValueError, match="protocol seed"):
+        search.plan_study(spec_for(tmp_path), cases=changed)
+
+
+@pytest.mark.parametrize("identifier", [name for name, _ in search.DEFAULT_CASES])
+@pytest.mark.parametrize("family", search.FAMILIES)
+def test_generated_child_arguments_parse_through_actual_api_main_without_updates(tmp_path, cases, monkeypatch, identifier, family):
+    spec = spec_for(tmp_path)
+    search.validate_spec(spec, cases)
+    trial = {"family": family, "recipe_overrides": {"lr": .006375, "prior_lr_mult": 1.}}
+    row = next(item for item in spec["cases"] if item["id"] == identifier)
+    case_root = tmp_path / family / identifier
+    command = search.child_command(spec, trial, row, case_root, "cpu")
+    requests = []
+    def execute(request):
+        requests.append(request)
+        return {"id": identifier, "status": "INCOMPLETE", "verdict": "FAIL"}
+    # Exercise the real parser/discovery/request construction, replacing only
+    # paid execution. A --help probe would miss the rejected legacy --seed.
+    monkeypatch.setattr(api_run, "_execute_request", execute)
+    assert api_run.main(command[3:]) == 1
+    assert len(requests) == 1
+    actual_case, output, options = requests[0]
+    assert actual_case == cases[identifier] and output == case_root
+    assert options == {"device": "cpu", "recipe_name": family, "steps": None,
+                       "eval_samples": None, "frames": spec["frames"],
+                       "recipe_overrides": trial["recipe_overrides"],
+                       "wall_cap_seconds": row["timeout_seconds"], "seed": spec["seed"]}
+    assert "--seed" not in command and not case_root.exists()
+    requests.clear()
+    with pytest.raises(SystemExit) as rejected:
+        api_run.main([*command[3:], "--seed", "24002"])
+    assert rejected.value.code == 2 and not requests
+
+
 def test_health_checks_learned_state_without_rejecting_controller_sentinels():
     case = {"default_steps": 12}
     recipe = {"name": "atlas"}
@@ -263,7 +303,7 @@ def test_run_freezes_before_child_keeps_full_resources_and_stops_first_failure(t
         return SimpleNamespace(returncode=0)
     monkeypatch.setattr(search.subprocess, "run", child)
     result = search.run_study(packet["spec"], archive, family="atlas", device="cpu")
-    assert len(commands) == 4 and all("--seed" in command for command in commands)
+    assert len(commands) == 4 and all("--seed" not in command for command in commands)
     atlas = [trial for trial in result["trials"] if trial["family"] == "atlas"]
     assert all(trial["status"] == "INCOMPLETE" and trial["cases"][0]["status"] == "INCOMPLETE" for trial in atlas)
     assert all(row["status"] == "UNKNOWN" for trial in atlas for row in trial["cases"][1:])

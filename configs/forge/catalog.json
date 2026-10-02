@@ -882,7 +882,7 @@
     },
     {
       "family": "benchmark/toy_audit",
-      "git_blob": "7050ed6e4e530ce2fde2c045f2424d9806aa314f",
+      "git_blob": "74735a9fe3a9b9cbf4689615e0af087d7b39dd1b",
       "path": "benchmarks/toy_audit/api_family_search.py",
       "role": "driver",
       "suggested_tiers": [

@@ -1,0 +1,1594 @@
+{
+  "declared_configs": 8,
+  "executed_family": "atlas",
+  "family_declared_configs": 4,
+  "lane_runtime": {
+    "cuda": "12.6",
+    "cuda_device_model": "NVIDIA RTX A6000",
+    "device": "cuda:0",
+    "python": "3.12.13",
+    "torch": "2.13.0+cu126",
+    "torch_threads": 1
+  },
+  "paid_seconds": 6.16541115893051,
+  "qualification_input": false,
+  "required_cases_per_config": 8,
+  "rescoring": false,
+  "schema": "policy_family_display_readout_v1",
+  "selection": {
+    "attempts_concluded": false,
+    "comparison_complete": false,
+    "default_adoption": false,
+    "display_candidate_id": null,
+    "fully_qualified_ids": [],
+    "outcome": "pending",
+    "required_cases_per_config": 8,
+    "speed_winner": null,
+    "timing_ties": "all qualified configs retained; speed unranked under external contention"
+  },
+  "source": {
+    "commit": "563cb337937a05494a1577376e5740f0aa2e2777",
+    "files_sha256": {
+      "benchmarks/toy100/__init__.py": "f10bbdfb010d90379c9145f31b499c7c2e878d0ad70291ae3bd6104903852ddb",
+      "benchmarks/toy100/__main__.py": "165ce04f2546dbf07ec68ec71032521db3a2abb50df8c70982567a33c03d625b",
+      "benchmarks/toy100/accuracy.py": "ee5c62049f8cdceb3d93b6d792cbaa96c815e12b3ce79ffaed244fb15a44fed2",
+      "benchmarks/toy100/accuracy_evidence.py": "654adde5ee19915bc9eb630d754f2a4c0282d694252df7918bae10f542904d39",
+      "benchmarks/toy100/accuracy_gate.py": "e66ede95d4b80eedd832a102841c2b0a5d6d710f646bfa34dc00647dc0ab3abe",
+      "benchmarks/toy100/config.py": "a11079bac3e134510e2343f12f45c541e56ace1d02690a35cec679405bcc40c3",
+      "benchmarks/toy100/constraint_screen.py": "6fd92211fee23cb5f2c7bb6880ee147656fff24efdb0bdb8b274893c6f6523f9",
+      "benchmarks/toy100/continuous_probe.py": "972405ea73644c2d189a4e243a79146f3cf8295c2a2979c30a277b2a54ff4541",
+      "benchmarks/toy100/device.py": "7fa0f53db44e8824d3497b471e9fe8db56cbf8b4e02ddf997f65beed63f81911",
+      "benchmarks/toy100/gate.py": "2ddadf56a4ccd7645c8b4e391373818b1113fb6113a9c691310fb162684058e6",
+      "benchmarks/toy100/metrics.py": "a7fbef19082f8470eb392948da52a336a90a3e99c6b3b893343a9e75bcda9c7b",
+      "benchmarks/toy100/models.py": "75f33ad0e100930631da2a86a9c0312f6ae02afe6c851d940c7cf44e41dede6a",
+      "benchmarks/toy100/native_models.py": "f1fc3a17844f37ddd071ea5d4867d636009e88545d60641fd6b6a05ee6298aea",
+      "benchmarks/toy100/problems.py": "2581374d451ed9147c031dfcdfbe9e2eea83e41ba49c2b8945b6e729ede26c9d",
+      "benchmarks/toy100/render.py": "4944a36e19c6a0d75ab53c5c4cc650cc7d963d6fb6e31cf64a3da9a3796f538d",
+      "benchmarks/toy100/schedule.py": "38f41fd4f428ec7cf73223ea0fdf148ac32cdcdbf780b61cf2a5166baf0b8803",
+      "benchmarks/toy100/search.py": "83076f0d9b4155ea7c0e504e0433a75c9f5080069f12d9ce226317421d8a03c6",
+      "benchmarks/toy100/train.py": "64ad54128085ab684a77ecb155ae449d95ab326775e13b925cfb783e53c3f610",
+      "benchmarks/toy100/warm_equilibrium_probe.py": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
+      "benchmarks/toy_audit/api_conditionals.py": "ca6b063c0ac315f90661deaffae8f60fbd4a0f9575b891db1895501d12edad38",
+      "benchmarks/toy_audit/api_contract.py": "2d23aacfb6107f1535ed04ea0d5bb67d8f33a260ac1aca9e1d1734bfaf0f2e28",
+      "benchmarks/toy_audit/api_diagnostics.py": "d83ca91e423823e16126f5eb0557af3682efa22e459db7e1cbd7490558360a50",
+      "benchmarks/toy_audit/api_family_search.py": "ad3c9ed704bcc5af690300699e96735b1221cead23ab266c613e3ee9457895ea",
+      "benchmarks/toy_audit/api_images.py": "243190aba0c5870668a63289b771dc6f784c9460b890bc6a77e12cc2796d7184",
+      "benchmarks/toy_audit/api_publish.py": "4334ac384c2766d85bd10ece19cee3ba88be67e39f151a414efcac188ecae2de",
+      "benchmarks/toy_audit/api_readout.py": "7026a342e5325e19086bcd23e89fee74d871464cef3d727c1fd7d80c8649a414",
+      "benchmarks/toy_audit/api_reframe.py": "7254d231c609edd4186893ee75706924cbbf7359dac951381b2226d9f8ce8065",
+      "benchmarks/toy_audit/api_ring16.py": "28b7bddc2a72538177431db7318bfd6778fe35fe06e1292b1701a315f75801ff",
+      "benchmarks/toy_audit/api_run.py": "d6a9d34022688c2b6b8df8c29f93c60deaecf47e8c0888c7c82728c897a43be1",
+      "benchmarks/toy_audit/api_vectors.py": "9707af96fa43f76fad5481b6d6ec76e317957ec8e309ea96cc079ee95c2058af",
+      "benchmarks/toy_audit/definition_quality.py": "42d835ab7a0937a6c3759dd719691c721663b7857cb990405253e90f7fbd4cc9",
+      "benchmarks/toy_audit/vector_quality.py": "8a333bfceb71e311875b8576260c362a66a643c99d3849e6792a10e805de67d9",
+      "benchmarks/transfer_suite/stress_tasks.py": "3342e717db338cb6b7ebf5a95c01c51e4be855a564490f34f240b2a0b2e8c7e4",
+      "benchmarks/transfer_suite/vector_tasks.py": "3ee4eb27759f61a430029c80b7772cac3dca2fb2ac84919ace0db94efca1e0b0",
+      "experiments/forge/configuration_search.py": "cbdc3d15b032ab4112b039a0b89ce8e7f7153fb19c406d5277a3793a81184c6a",
+      "lib/toy_models.py": "70f32797882de0dc88085afcf5e05821b65eb5f248c9690818a2494225d782a3",
+      "particlegan/__init__.py": "b56efa562acc551d639548c299002e2cd76338b3fd7062699780add51f4f5e8c",
+      "particlegan/_qr.py": "b59cd62cc27ed557b41b2d17ed86ed578c762a3a8a392d63731a5a3b2b018916",
+      "particlegan/anchor_birth.py": "aa50983d8b61304acf4e1138f16fd4784798983df91e931863bcacd3b511f76f",
+      "particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+      "particlegan/birth_death.py": "b14c50c611a8cf188347e391739fca50a5171200eb6be90e4e3d1509d64e47ed",
+      "particlegan/birth_phase.py": "5ff929e5e9858aa24c4cc2f8999b5d0603e25e42ca3844d1da4cc28b1981d3d7",
+      "particlegan/capabilities.py": "39df9c67dbedf612740057e5fa743bc724678a1bc323d1f7cf550b37c0c01177",
+      "particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+      "particlegan/continuous.py": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41",
+      "particlegan/diffusion.py": "19c3aa8772703891551b9122fde8e74c07996f779892b7cb6be09553691efa61",
+      "particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+      "particlegan/feature_cells.py": "e0ea05f61abd7845c7437eed9a79c3a2511d5551ff04f4e619b6b9c8992e221a",
+      "particlegan/feature_policy.py": "de1a50f70a37d4c9174c8850ce3eac2a2597ed01f19fc4fe1a2ce0ec3176a8b2",
+      "particlegan/feature_reference.py": "58e076e9e04600be25e28afafc537a340de727371f4acbbfb2b7dd8bebac18b1",
+      "particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+      "particlegan/grad_regularizers.py": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747",
+      "particlegan/init.py": "e15d4de01eb49f7097bc249abacab907ff067385412346f54ab0d510cb8649d0",
+      "particlegan/k3p.py": "200ead2c27ab0b2aa6068f1b1b1b5c826b8125aa8602bfec08b31aaa2894401c",
+      "particlegan/ka2.py": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703",
+      "particlegan/mean_transport.py": "57a68e0a65c5424a4460f65002f3862a69e90af330a4d47c700dc773683a2c06",
+      "particlegan/output_moments.py": "dcf3e27228d2c3c9738e473c5b22ee9e6d5047ddcd60c538b66526adb53ef188",
+      "particlegan/particle_prior.py": "0220878bebea227da63abbf9f5b1ebdabdc6aea54fd2332fd2cab02ed734238f",
+      "particlegan/policy.py": "8370e36b5b93afe95ae24d2b385aac8735a587f86ef2b87ed369ecfdfcb6fec5",
+      "particlegan/population_continuity.py": "378cd75cca45bc8da4da33e686a12cf99df853042687978314e37c532bc17fe6",
+      "particlegan/recipe_schedules.py": "d05e459b3e9e5f938b01a854273b74343f2b6d382bec4ae5151dd1f1cd032500",
+      "particlegan/recipes.py": "1a7f9df746e242a2774068c819d70d50cd72dc4f7f6b22b0bd13e1345dcf8ab2",
+      "particlegan/routing.py": "63249d808fccb3d4e113eb1d638a245ee665c3cade20a1542bb706f316b4abcc",
+      "particlegan/row_evidence.py": "78be40141ef3946860458e9842159be9321f05c217a4800dd4134113b6eba93e",
+      "particlegan/training.py": "7dadc219135bc3e6bf657bfe9bc3fa81dd14d4b2a31c70d5ff61e2941db35c94",
+      "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+    }
+  },
+  "spec_sha256": "9eb73ac6a6be629c5177d40dda6d9dfd58d1ccd9cccd2033b3043b42a25a4589",
+  "speed_ranking": false,
+  "study": {
+    "path": "/ml2/hypergan/forge-policy-family-round1-20261002/atlas/study.json",
+    "sha256": "bba8374f395d4c8040c87f8db0e83995b3f0e7f7e583d47f4294148d794493b9"
+  },
+  "training_updates": 0,
+  "trials": [
+    {
+      "cases": [
+        {
+          "blockers": [],
+          "case_sha256": "e9fa47de6adbb31f083c0333b0c7c41352d2b890b16539d47839d3f9720c5dfb",
+          "command": [
+            "/ml2/hypergan/.venvs/particlegan-develop-integration/bin/python",
+            "-m",
+            "benchmarks.toy_audit.api_run",
+            "--case",
+            "image-develop-img_intensity2-source-transpose12",
+            "--output",
+            "/ml2/hypergan/forge-policy-family-round1-20261002/atlas/atlas--9cf9647fdc669686de09d5c6e500510081b36285876378971fae90bc812f5057",
+            "--recipe",
+            "atlas",
+            "--device",
+            "cuda:0",
+            "--recipe-overrides",
+            "{\"lr\": 0.0085, \"prior_lr_mult\": 2.0}",
+            "--wall-cap-seconds",
+            "180",
+            "--frames",
+            "9",
+            "--seed",
+            "24002"
+          ],
+          "fixed_host_recipe_options": {
+            "batch_size": 32,
+            "num_particles": 32,
+            "prior_kind": "particles",
+            "sigma_rel": 0,
+            "z_dim": 8
+          },
+          "full_protocol_complete": false,
+          "id": "image-develop-img_intensity2-source-transpose12",
+          "log_path": "/ml2/hypergan/forge-policy-family-round1-20261002/atlas/atlas--9cf9647fdc669686de09d5c6e500510081b36285876378971fae90bc812f5057/image-develop-img_intensity2-source-transpose12.log",
+          "original_gate": null,
+          "paid_wall_seconds": 1.6664601480588317,
+          "reason": "FileNotFoundError: [Errno 2] No such file or directory: '/ml2/hypergan/forge-policy-family-round1-20261002/atlas/atlas--9cf9647fdc669686de09d5c6e500510081b36285876378971fae90bc812f5057/image-develop-img_intensity2-source-transpose12/receipt.json'",
+          "resolved_recipe_sha256": "65d4303e6d56f846ee7d65c27f284408bca38b5336b8f58241dc38b70aa94f15",
+          "status": "INVALID",
+          "study_gate": null,
+          "tier": 1,
+          "timeout_seconds": 180,
+          "validation_seconds": 0.00011756992898881435
+        },
+        {
+          "blockers": [],
+          "case_sha256": "e293cf19f2f235b30807f9782ec65ceea3693f78e3459b9f7eb117179168c8fc",
+          "fixed_host_recipe_options": {
+            "batch_size": 128,
+            "betas": [
+              0.0,
+              0.99
+            ],
+            "d_lr_mult": 1.5,
+            "ema_decay": 0.995,
+            "num_particles": 256,
+            "prior_reg": 0.05,
+            "z_dim": 4
+          },
+          "full_protocol_complete": false,
+          "id": "api-vector-two-broad",
+          "original_gate": null,
+          "resolved_recipe_sha256": "54e502cd139c5fcbceec5a3c3106726581c08f434c7f8560897d02f373317607",
+          "status": "UNKNOWN",
+          "study_gate": null,
+          "tier": 1,
+          "timeout_seconds": 180
+        },
+        {
+          "blockers": [],
+          "case_sha256": "93ca5686f7358c701c58b34798b8e1f784a339c958a0fe8e1c9f90af4867f279",
+          "fixed_host_recipe_options": {
+            "batch_size": 2048,
+            "num_particles": 20000,
+            "z_dim": 2
+          },
+          "full_protocol_complete": false,
+          "id": "api-grid100",
+          "original_gate": null,
+          "resolved_recipe_sha256": "bd11275892833e3740bb8d7fb50d0afb01ac6c410bbced7c828f7ae46d07149a",
+          "status": "UNKNOWN",
+          "study_gate": null,
+          "tier": 2,
+          "timeout_seconds": 2100
+        },
+        {
+          "blockers": [],
+          "case_sha256": "6e06e5ba492950d3f8063a27f82bf3d51e75574148235495cc1b331b7fb30754",
+          "fixed_host_recipe_options": {
+            "batch_size": 2048,
+            "num_particles": 20000,
+            "z_dim": 2
+          },
+          "full_protocol_complete": false,
+          "id": "api-rotated100",
+          "original_gate": null,
+          "resolved_recipe_sha256": "bd11275892833e3740bb8d7fb50d0afb01ac6c410bbced7c828f7ae46d07149a",
+          "status": "UNKNOWN",
+          "study_gate": null,
+          "tier": 2,
+          "timeout_seconds": 2100
+        },
+        {
+          "blockers": [],
+          "case_sha256": "9ba09451032b3741df8a30c936bd81cc31038866dd2f4d0eb92966e48b292f48",
+          "fixed_host_recipe_options": {
+            "batch_size": 2048,
+            "num_particles": 20000,
+            "z_dim": 2
+          },
+          "full_protocol_complete": false,
+          "id": "api-staggered100",
+          "original_gate": null,
+          "resolved_recipe_sha256": "bd11275892833e3740bb8d7fb50d0afb01ac6c410bbced7c828f7ae46d07149a",
+          "status": "UNKNOWN",
+          "study_gate": null,
+          "tier": 2,
+          "timeout_seconds": 2100
+        },
+        {
+          "blockers": [],
+          "case_sha256": "e29a36b2461a986a28ca950df869a4926f258b2bfca32bd46bc8b2188aebf32e",
+          "fixed_host_recipe_options": {
+            "batch_size": 128,
+            "betas": [
+              0.0,
+              0.99
+            ],
+            "d_lr_mult": 1.5,
+            "ema_decay": 0.995,
+            "num_particles": 256,
+            "prior_reg": 0.05,
+            "z_dim": 4
+          },
+          "full_protocol_complete": false,
+          "id": "api-vector-unequal-mass",
+          "original_gate": null,
+          "resolved_recipe_sha256": "54e502cd139c5fcbceec5a3c3106726581c08f434c7f8560897d02f373317607",
+          "status": "UNKNOWN",
+          "study_gate": null,
+          "tier": 2,
+          "timeout_seconds": 180
+        },
+        {
+          "blockers": [],
+          "case_sha256": "2ec941011f8398672ce85b1d4df41c6e22dce2e0f98354a75f1d9a6794d4e1b6",
+          "fixed_host_recipe_options": {
+            "batch_size": 128,
+            "betas": [
+              0.0,
+              0.99
+            ],
+            "d_lr_mult": 1.5,
+            "ema_decay": 0.995,
+            "num_particles": 256,
+            "prior_reg": 0.05,
+            "z_dim": 4
+          },
+          "full_protocol_complete": false,
+          "id": "api-vector-anisotropic",
+          "original_gate": null,
+          "resolved_recipe_sha256": "54e502cd139c5fcbceec5a3c3106726581c08f434c7f8560897d02f373317607",
+          "status": "UNKNOWN",
+          "study_gate": null,
+          "tier": 2,
+          "timeout_seconds": 180
+        },
+        {
+          "blockers": [],
+          "case_sha256": "d3145a02dd5e98155b006bf3e99899003707fe8fcf62318ba55fcd2fc6374b4d",
+          "fixed_host_recipe_options": {
+            "batch_size": 32,
+            "num_particles": 32,
+            "prior_kind": "particles",
+            "sigma_rel": 0,
+            "z_dim": 8
+          },
+          "full_protocol_complete": false,
+          "id": "image-develop-img_bars4-source-transpose12",
+          "original_gate": null,
+          "resolved_recipe_sha256": "65d4303e6d56f846ee7d65c27f284408bca38b5336b8f58241dc38b70aa94f15",
+          "status": "UNKNOWN",
+          "study_gate": null,
+          "tier": 2,
+          "timeout_seconds": 180
+        }
+      ],
+      "family": "atlas",
+      "id": "atlas--9cf9647fdc669686de09d5c6e500510081b36285876378971fae90bc812f5057",
+      "paid_wall_seconds": 1.6664601480588317,
+      "recipe_overrides": {
+        "lr": 0.0085,
+        "prior_lr_mult": 2.0
+      },
+      "status": "INVALID"
+    },
+    {
+      "cases": [
+        {
+          "blockers": [],
+          "case_sha256": "e9fa47de6adbb31f083c0333b0c7c41352d2b890b16539d47839d3f9720c5dfb",
+          "command": [
+            "/ml2/hypergan/.venvs/particlegan-develop-integration/bin/python",
+            "-m",
+            "benchmarks.toy_audit.api_run",
+            "--case",
+            "image-develop-img_intensity2-source-transpose12",
+            "--output",
+            "/ml2/hypergan/forge-policy-family-round1-20261002/atlas/atlas--ca0901b6679b72404f0989bf27f53c85b01095d291f67ec50fddfd98006880a1",
+            "--recipe",
+            "atlas",
+            "--device",
+            "cuda:0",
+            "--recipe-overrides",
+            "{\"lr\": 0.006375, \"prior_lr_mult\": 2.0}",
+            "--wall-cap-seconds",
+            "180",
+            "--frames",
+            "9",
+            "--seed",
+            "24002"
+          ],
+          "fixed_host_recipe_options": {
+            "batch_size": 32,
+            "num_particles": 32,
+            "prior_kind": "particles",
+            "sigma_rel": 0,
+            "z_dim": 8
+          },
+          "full_protocol_complete": false,
+          "id": "image-develop-img_intensity2-source-transpose12",
+          "log_path": "/ml2/hypergan/forge-policy-family-round1-20261002/atlas/atlas--ca0901b6679b72404f0989bf27f53c85b01095d291f67ec50fddfd98006880a1/image-develop-img_intensity2-source-transpose12.log",
+          "original_gate": null,
+          "paid_wall_seconds": 1.6162624061107635,
+          "reason": "FileNotFoundError: [Errno 2] No such file or directory: '/ml2/hypergan/forge-policy-family-round1-20261002/atlas/atlas--ca0901b6679b72404f0989bf27f53c85b01095d291f67ec50fddfd98006880a1/image-develop-img_intensity2-source-transpose12/receipt.json'",
+          "resolved_recipe_sha256": "0fd5db261588ee893990dd139e2e077188b0c16b39b3d7ec6b66b23bd34cf7be",
+          "status": "INVALID",
+          "study_gate": null,
+          "tier": 1,
+          "timeout_seconds": 180,
+          "validation_seconds": 0.00011552986688911915
+        },
+        {
+          "blockers": [],
+          "case_sha256": "e293cf19f2f235b30807f9782ec65ceea3693f78e3459b9f7eb117179168c8fc",
+          "fixed_host_recipe_options": {
+            "batch_size": 128,
+            "betas": [
+              0.0,
+              0.99
+            ],
+            "d_lr_mult": 1.5,
+            "ema_decay": 0.995,
+            "num_particles": 256,
+            "prior_reg": 0.05,
+            "z_dim": 4
+          },
+          "full_protocol_complete": false,
+          "id": "api-vector-two-broad",
+          "original_gate": null,
+          "resolved_recipe_sha256": "3ceae2bc9bc2ba592bf34bbbcd802ef959e56a5278a5fdb982bfdc1593e687bd",
+          "status": "UNKNOWN",
+          "study_gate": null,
+          "tier": 1,
+          "timeout_seconds": 180
+        },
+        {
+          "blockers": [],
+          "case_sha256": "93ca5686f7358c701c58b34798b8e1f784a339c958a0fe8e1c9f90af4867f279",
+          "fixed_host_recipe_options": {
+            "batch_size": 2048,
+            "num_particles": 20000,
+            "z_dim": 2
+          },
+          "full_protocol_complete": false,
+          "id": "api-grid100",
+          "original_gate": null,
+          "resolved_recipe_sha256": "e0bcfd168413d6debd2e7e4261667bf371859ae20f38e8215b46aab361d708f4",
+          "status": "UNKNOWN",
+          "study_gate": null,
+          "tier": 2,
+          "timeout_seconds": 2100
+        },
+        {
+          "blockers": [],
+          "case_sha256": "6e06e5ba492950d3f8063a27f82bf3d51e75574148235495cc1b331b7fb30754",
+          "fixed_host_recipe_options": {
+            "batch_size": 2048,
+            "num_particles": 20000,
+            "z_dim": 2
+          },
+          "full_protocol_complete": false,
+          "id": "api-rotated100",
+          "original_gate": null,
+          "resolved_recipe_sha256": "e0bcfd168413d6debd2e7e4261667bf371859ae20f38e8215b46aab361d708f4",
+          "status": "UNKNOWN",
+          "study_gate": null,
+          "tier": 2,
+          "timeout_seconds": 2100
+        },
+        {
+          "blockers": [],
+          "case_sha256": "9ba09451032b3741df8a30c936bd81cc31038866dd2f4d0eb92966e48b292f48",
+          "fixed_host_recipe_options": {
+            "batch_size": 2048,
+            "num_particles": 20000,
+            "z_dim": 2
+          },
+          "full_protocol_complete": false,
+          "id": "api-staggered100",
+          "original_gate": null,
+          "resolved_recipe_sha256": "e0bcfd168413d6debd2e7e4261667bf371859ae20f38e8215b46aab361d708f4",
+          "status": "UNKNOWN",
+          "study_gate": null,
+          "tier": 2,
+          "timeout_seconds": 2100
+        },
+        {
+          "blockers": [],
+          "case_sha256": "e29a36b2461a986a28ca950df869a4926f258b2bfca32bd46bc8b2188aebf32e",
+          "fixed_host_recipe_options": {
+            "batch_size": 128,
+            "betas": [
+              0.0,
+              0.99
+            ],
+            "d_lr_mult": 1.5,
+            "ema_decay": 0.995,
+            "num_particles": 256,
+            "prior_reg": 0.05,
+            "z_dim": 4
+          },
+          "full_protocol_complete": false,
+          "id": "api-vector-unequal-mass",
+          "original_gate": null,
+          "resolved_recipe_sha256": "3ceae2bc9bc2ba592bf34bbbcd802ef959e56a5278a5fdb982bfdc1593e687bd",
+          "status": "UNKNOWN",
+          "study_gate": null,
+          "tier": 2,
+          "timeout_seconds": 180
+        },
+        {
+          "blockers": [],
+          "case_sha256": "2ec941011f8398672ce85b1d4df41c6e22dce2e0f98354a75f1d9a6794d4e1b6",
+          "fixed_host_recipe_options": {
+            "batch_size": 128,
+            "betas": [
+              0.0,
+              0.99
+            ],
+            "d_lr_mult": 1.5,
+            "ema_decay": 0.995,
+            "num_particles": 256,
+            "prior_reg": 0.05,
+            "z_dim": 4
+          },
+          "full_protocol_complete": false,
+          "id": "api-vector-anisotropic",
+          "original_gate": null,
+          "resolved_recipe_sha256": "3ceae2bc9bc2ba592bf34bbbcd802ef959e56a5278a5fdb982bfdc1593e687bd",
+          "status": "UNKNOWN",
+          "study_gate": null,
+          "tier": 2,
+          "timeout_seconds": 180
+        },
+        {
+          "blockers": [],
+          "case_sha256": "d3145a02dd5e98155b006bf3e99899003707fe8fcf62318ba55fcd2fc6374b4d",
+          "fixed_host_recipe_options": {
+            "batch_size": 32,
+            "num_particles": 32,
+            "prior_kind": "particles",
+            "sigma_rel": 0,
+            "z_dim": 8
+          },
+          "full_protocol_complete": false,
+          "id": "image-develop-img_bars4-source-transpose12",
+          "original_gate": null,
+          "resolved_recipe_sha256": "0fd5db261588ee893990dd139e2e077188b0c16b39b3d7ec6b66b23bd34cf7be",
+          "status": "UNKNOWN",
+          "study_gate": null,
+          "tier": 2,
+          "timeout_seconds": 180
+        }
+      ],
+      "family": "atlas",
+      "id": "atlas--ca0901b6679b72404f0989bf27f53c85b01095d291f67ec50fddfd98006880a1",
+      "paid_wall_seconds": 1.6162624061107635,
+      "recipe_overrides": {
+        "lr": 0.006375,
+        "prior_lr_mult": 2.0
+      },
+      "status": "INVALID"
+    },
+    {
+      "cases": [
+        {
+          "blockers": [],
+          "case_sha256": "e9fa47de6adbb31f083c0333b0c7c41352d2b890b16539d47839d3f9720c5dfb",
+          "command": [
+            "/ml2/hypergan/.venvs/particlegan-develop-integration/bin/python",
+            "-m",
+            "benchmarks.toy_audit.api_run",
+            "--case",
+            "image-develop-img_intensity2-source-transpose12",
+            "--output",
+            "/ml2/hypergan/forge-policy-family-round1-20261002/atlas/atlas--e6f3c9f400a46713b77ecd2b14d4771d01d2a25fa720fd0e52d21d6d6dfa8a50",
+            "--recipe",
+            "atlas",
+            "--device",
+            "cuda:0",
+            "--recipe-overrides",
+            "{\"lr\": 0.006375, \"prior_lr_mult\": 1.0}",
+            "--wall-cap-seconds",
+            "180",
+            "--frames",
+            "9",
+            "--seed",
+            "24002"
+          ],
+          "fixed_host_recipe_options": {
+            "batch_size": 32,
+            "num_particles": 32,
+            "prior_kind": "particles",
+            "sigma_rel": 0,
+            "z_dim": 8
+          },
+          "full_protocol_complete": false,
+          "id": "image-develop-img_intensity2-source-transpose12",
+          "log_path": "/ml2/hypergan/forge-policy-family-round1-20261002/atlas/atlas--e6f3c9f400a46713b77ecd2b14d4771d01d2a25fa720fd0e52d21d6d6dfa8a50/image-develop-img_intensity2-source-transpose12.log",
+          "original_gate": null,
+          "paid_wall_seconds": 1.466294368961826,
+          "reason": "FileNotFoundError: [Errno 2] No such file or directory: '/ml2/hypergan/forge-policy-family-round1-20261002/atlas/atlas--e6f3c9f400a46713b77ecd2b14d4771d01d2a25fa720fd0e52d21d6d6dfa8a50/image-develop-img_intensity2-source-transpose12/receipt.json'",
+          "resolved_recipe_sha256": "2adbe74137304e2d558a55fc03a297ab0d5a251845f841408d97d462178076ad",
+          "status": "INVALID",
+          "study_gate": null,
+          "tier": 1,
+          "timeout_seconds": 180,
+          "validation_seconds": 0.00012502004392445087
+        },
+        {
+          "blockers": [],
+          "case_sha256": "e293cf19f2f235b30807f9782ec65ceea3693f78e3459b9f7eb117179168c8fc",
+          "fixed_host_recipe_options": {
+            "batch_size": 128,
+            "betas": [
+              0.0,
+              0.99
+            ],
+            "d_lr_mult": 1.5,
+            "ema_decay": 0.995,
+            "num_particles": 256,
+            "prior_reg": 0.05,
+            "z_dim": 4
+          },
+          "full_protocol_complete": false,
+          "id": "api-vector-two-broad",
+          "original_gate": null,
+          "resolved_recipe_sha256": "a66665658deac689d4fe811f7f205c334b751b6853cbcfdf06f0a771f555a013",
+          "status": "UNKNOWN",
+          "study_gate": null,
+          "tier": 1,
+          "timeout_seconds": 180
+        },
+        {
+          "blockers": [],
+          "case_sha256": "93ca5686f7358c701c58b34798b8e1f784a339c958a0fe8e1c9f90af4867f279",
+          "fixed_host_recipe_options": {
+            "batch_size": 2048,
+            "num_particles": 20000,
+            "z_dim": 2
+          },
+          "full_protocol_complete": false,
+          "id": "api-grid100",
+          "original_gate": null,
+          "resolved_recipe_sha256": "9c129e6e61c4b5cedec563bb2b9c1076cff6c8b43ea1cc452d5f3385a62a1151",
+          "status": "UNKNOWN",
+          "study_gate": null,
+          "tier": 2,
+          "timeout_seconds": 2100
+        },
+        {
+          "blockers": [],
+          "case_sha256": "6e06e5ba492950d3f8063a27f82bf3d51e75574148235495cc1b331b7fb30754",
+          "fixed_host_recipe_options": {
+            "batch_size": 2048,
+            "num_particles": 20000,
+            "z_dim": 2
+          },
+          "full_protocol_complete": false,
+          "id": "api-rotated100",
+          "original_gate": null,
+          "resolved_recipe_sha256": "9c129e6e61c4b5cedec563bb2b9c1076cff6c8b43ea1cc452d5f3385a62a1151",
+          "status": "UNKNOWN",
+          "study_gate": null,
+          "tier": 2,
+          "timeout_seconds": 2100
+        },
+        {
+          "blockers": [],
+          "case_sha256": "9ba09451032b3741df8a30c936bd81cc31038866dd2f4d0eb92966e48b292f48",
+          "fixed_host_recipe_options": {
+            "batch_size": 2048,
+            "num_particles": 20000,
+            "z_dim": 2
+          },
+          "full_protocol_complete": false,
+          "id": "api-staggered100",
+          "original_gate": null,
+          "resolved_recipe_sha256": "9c129e6e61c4b5cedec563bb2b9c1076cff6c8b43ea1cc452d5f3385a62a1151",
+          "status": "UNKNOWN",
+          "study_gate": null,
+          "tier": 2,
+          "timeout_seconds": 2100
+        },
+        {
+          "blockers": [],
+          "case_sha256": "e29a36b2461a986a28ca950df869a4926f258b2bfca32bd46bc8b2188aebf32e",
+          "fixed_host_recipe_options": {
+            "batch_size": 128,
+            "betas": [
+              0.0,
+              0.99
+            ],
+            "d_lr_mult": 1.5,
+            "ema_decay": 0.995,
+            "num_particles": 256,
+            "prior_reg": 0.05,
+            "z_dim": 4
+          },
+          "full_protocol_complete": false,
+          "id": "api-vector-unequal-mass",
+          "original_gate": null,
+          "resolved_recipe_sha256": "a66665658deac689d4fe811f7f205c334b751b6853cbcfdf06f0a771f555a013",
+          "status": "UNKNOWN",
+          "study_gate": null,
+          "tier": 2,
+          "timeout_seconds": 180
+        },
+        {
+          "blockers": [],
+          "case_sha256": "2ec941011f8398672ce85b1d4df41c6e22dce2e0f98354a75f1d9a6794d4e1b6",
+          "fixed_host_recipe_options": {
+            "batch_size": 128,
+            "betas": [
+              0.0,
+              0.99
+            ],
+            "d_lr_mult": 1.5,
+            "ema_decay": 0.995,
+            "num_particles": 256,
+            "prior_reg": 0.05,
+            "z_dim": 4
+          },
+          "full_protocol_complete": false,
+          "id": "api-vector-anisotropic",
+          "original_gate": null,
+          "resolved_recipe_sha256": "a66665658deac689d4fe811f7f205c334b751b6853cbcfdf06f0a771f555a013",
+          "status": "UNKNOWN",
+          "study_gate": null,
+          "tier": 2,
+          "timeout_seconds": 180
+        },
+        {
+          "blockers": [],
+          "case_sha256": "d3145a02dd5e98155b006bf3e99899003707fe8fcf62318ba55fcd2fc6374b4d",
+          "fixed_host_recipe_options": {
+            "batch_size": 32,
+            "num_particles": 32,
+            "prior_kind": "particles",
+            "sigma_rel": 0,
+            "z_dim": 8
+          },
+          "full_protocol_complete": false,
+          "id": "image-develop-img_bars4-source-transpose12",
+          "original_gate": null,
+          "resolved_recipe_sha256": "2adbe74137304e2d558a55fc03a297ab0d5a251845f841408d97d462178076ad",
+          "status": "UNKNOWN",
+          "study_gate": null,
+          "tier": 2,
+          "timeout_seconds": 180
+        }
+      ],
+      "family": "atlas",
+      "id": "atlas--e6f3c9f400a46713b77ecd2b14d4771d01d2a25fa720fd0e52d21d6d6dfa8a50",
+      "paid_wall_seconds": 1.466294368961826,
+      "recipe_overrides": {
+        "lr": 0.006375,
+        "prior_lr_mult": 1.0
+      },
+      "status": "INVALID"
+    },
+    {
+      "cases": [
+        {
+          "blockers": [],
+          "case_sha256": "e9fa47de6adbb31f083c0333b0c7c41352d2b890b16539d47839d3f9720c5dfb",
+          "command": [
+            "/ml2/hypergan/.venvs/particlegan-develop-integration/bin/python",
+            "-m",
+            "benchmarks.toy_audit.api_run",
+            "--case",
+            "image-develop-img_intensity2-source-transpose12",
+            "--output",
+            "/ml2/hypergan/forge-policy-family-round1-20261002/atlas/atlas--fc4e6516e79a121f87eb7c3e421fb5e6a49ae3a061731a546d30aa5473fa04cf",
+            "--recipe",
+            "atlas",
+            "--device",
+            "cuda:0",
+            "--recipe-overrides",
+            "{\"lr\": 0.0085, \"prior_lr_mult\": 1.0}",
+            "--wall-cap-seconds",
+            "180",
+            "--frames",
+            "9",
+            "--seed",
+            "24002"
+          ],
+          "fixed_host_recipe_options": {
+            "batch_size": 32,
+            "num_particles": 32,
+            "prior_kind": "particles",
+            "sigma_rel": 0,
+            "z_dim": 8
+          },
+          "full_protocol_complete": false,
+          "id": "image-develop-img_intensity2-source-transpose12",
+          "log_path": "/ml2/hypergan/forge-policy-family-round1-20261002/atlas/atlas--fc4e6516e79a121f87eb7c3e421fb5e6a49ae3a061731a546d30aa5473fa04cf/image-develop-img_intensity2-source-transpose12.log",
+          "original_gate": null,
+          "paid_wall_seconds": 1.416394235799089,
+          "reason": "FileNotFoundError: [Errno 2] No such file or directory: '/ml2/hypergan/forge-policy-family-round1-20261002/atlas/atlas--fc4e6516e79a121f87eb7c3e421fb5e6a49ae3a061731a546d30aa5473fa04cf/image-develop-img_intensity2-source-transpose12/receipt.json'",
+          "resolved_recipe_sha256": "05ffc0e53c54c4c6d6a0f23178968d8020420165578877d213d74ee4f06db045",
+          "status": "INVALID",
+          "study_gate": null,
+          "tier": 1,
+          "timeout_seconds": 180,
+          "validation_seconds": 0.00010326015762984753
+        },
+        {
+          "blockers": [],
+          "case_sha256": "e293cf19f2f235b30807f9782ec65ceea3693f78e3459b9f7eb117179168c8fc",
+          "fixed_host_recipe_options": {
+            "batch_size": 128,
+            "betas": [
+              0.0,
+              0.99
+            ],
+            "d_lr_mult": 1.5,
+            "ema_decay": 0.995,
+            "num_particles": 256,
+            "prior_reg": 0.05,
+            "z_dim": 4
+          },
+          "full_protocol_complete": false,
+          "id": "api-vector-two-broad",
+          "original_gate": null,
+          "resolved_recipe_sha256": "d81d4a4b2794e74cea2c7fe41cdca34d8f06a6ebc2e61069de476e0e45557857",
+          "status": "UNKNOWN",
+          "study_gate": null,
+          "tier": 1,
+          "timeout_seconds": 180
+        },
+        {
+          "blockers": [],
+          "case_sha256": "93ca5686f7358c701c58b34798b8e1f784a339c958a0fe8e1c9f90af4867f279",
+          "fixed_host_recipe_options": {
+            "batch_size": 2048,
+            "num_particles": 20000,
+            "z_dim": 2
+          },
+          "full_protocol_complete": false,
+          "id": "api-grid100",
+          "original_gate": null,
+          "resolved_recipe_sha256": "e405bf43c493ae25d6928e492a26c8cf0031c47e2854831614ff6f8a889b1f5c",
+          "status": "UNKNOWN",
+          "study_gate": null,
+          "tier": 2,
+          "timeout_seconds": 2100
+        },
+        {
+          "blockers": [],
+          "case_sha256": "6e06e5ba492950d3f8063a27f82bf3d51e75574148235495cc1b331b7fb30754",
+          "fixed_host_recipe_options": {
+            "batch_size": 2048,
+            "num_particles": 20000,
+            "z_dim": 2
+          },
+          "full_protocol_complete": false,
+          "id": "api-rotated100",
+          "original_gate": null,
+          "resolved_recipe_sha256": "e405bf43c493ae25d6928e492a26c8cf0031c47e2854831614ff6f8a889b1f5c",
+          "status": "UNKNOWN",
+          "study_gate": null,
+          "tier": 2,
+          "timeout_seconds": 2100
+        },
+        {
+          "blockers": [],
+          "case_sha256": "9ba09451032b3741df8a30c936bd81cc31038866dd2f4d0eb92966e48b292f48",
+          "fixed_host_recipe_options": {
+            "batch_size": 2048,
+            "num_particles": 20000,
+            "z_dim": 2
+          },
+          "full_protocol_complete": false,
+          "id": "api-staggered100",
+          "original_gate": null,
+          "resolved_recipe_sha256": "e405bf43c493ae25d6928e492a26c8cf0031c47e2854831614ff6f8a889b1f5c",
+          "status": "UNKNOWN",
+          "study_gate": null,
+          "tier": 2,
+          "timeout_seconds": 2100
+        },
+        {
+          "blockers": [],
+          "case_sha256": "e29a36b2461a986a28ca950df869a4926f258b2bfca32bd46bc8b2188aebf32e",
+          "fixed_host_recipe_options": {
+            "batch_size": 128,
+            "betas": [
+              0.0,
+              0.99
+            ],
+            "d_lr_mult": 1.5,
+            "ema_decay": 0.995,
+            "num_particles": 256,
+            "prior_reg": 0.05,
+            "z_dim": 4
+          },
+          "full_protocol_complete": false,
+          "id": "api-vector-unequal-mass",
+          "original_gate": null,
+          "resolved_recipe_sha256": "d81d4a4b2794e74cea2c7fe41cdca34d8f06a6ebc2e61069de476e0e45557857",
+          "status": "UNKNOWN",
+          "study_gate": null,
+          "tier": 2,
+          "timeout_seconds": 180
+        },
+        {
+          "blockers": [],
+          "case_sha256": "2ec941011f8398672ce85b1d4df41c6e22dce2e0f98354a75f1d9a6794d4e1b6",
+          "fixed_host_recipe_options": {
+            "batch_size": 128,
+            "betas": [
+              0.0,
+              0.99
+            ],
+            "d_lr_mult": 1.5,
+            "ema_decay": 0.995,
+            "num_particles": 256,
+            "prior_reg": 0.05,
+            "z_dim": 4
+          },
+          "full_protocol_complete": false,
+          "id": "api-vector-anisotropic",
+          "original_gate": null,
+          "resolved_recipe_sha256": "d81d4a4b2794e74cea2c7fe41cdca34d8f06a6ebc2e61069de476e0e45557857",
+          "status": "UNKNOWN",
+          "study_gate": null,
+          "tier": 2,
+          "timeout_seconds": 180
+        },
+        {
+          "blockers": [],
+          "case_sha256": "d3145a02dd5e98155b006bf3e99899003707fe8fcf62318ba55fcd2fc6374b4d",
+          "fixed_host_recipe_options": {
+            "batch_size": 32,
+            "num_particles": 32,
+            "prior_kind": "particles",
+            "sigma_rel": 0,
+            "z_dim": 8
+          },
+          "full_protocol_complete": false,
+          "id": "image-develop-img_bars4-source-transpose12",
+          "original_gate": null,
+          "resolved_recipe_sha256": "05ffc0e53c54c4c6d6a0f23178968d8020420165578877d213d74ee4f06db045",
+          "status": "UNKNOWN",
+          "study_gate": null,
+          "tier": 2,
+          "timeout_seconds": 180
+        }
+      ],
+      "family": "atlas",
+      "id": "atlas--fc4e6516e79a121f87eb7c3e421fb5e6a49ae3a061731a546d30aa5473fa04cf",
+      "paid_wall_seconds": 1.416394235799089,
+      "recipe_overrides": {
+        "lr": 0.0085,
+        "prior_lr_mult": 1.0
+      },
+      "status": "INVALID"
+    },
+    {
+      "cases": [
+        {
+          "blockers": [],
+          "case_sha256": "e9fa47de6adbb31f083c0333b0c7c41352d2b890b16539d47839d3f9720c5dfb",
+          "fixed_host_recipe_options": {
+            "batch_size": 32,
+            "num_particles": 32,
+            "prior_kind": "particles",
+            "sigma_rel": 0,
+            "z_dim": 8
+          },
+          "full_protocol_complete": false,
+          "id": "image-develop-img_intensity2-source-transpose12",
+          "original_gate": null,
+          "resolved_recipe_sha256": "7554316920ccb76b3d26f35ab6f5c57eaae882d722dcccad8e1021c05dd6bcba",
+          "status": "UNKNOWN",
+          "study_gate": null,
+          "tier": 1,
+          "timeout_seconds": 180
+        },
+        {
+          "blockers": [],
+          "case_sha256": "e293cf19f2f235b30807f9782ec65ceea3693f78e3459b9f7eb117179168c8fc",
+          "fixed_host_recipe_options": {
+            "batch_size": 128,
+            "betas": [
+              0.0,
+              0.99
+            ],
+            "d_lr_mult": 1.5,
+            "ema_decay": 0.995,
+            "num_particles": 256,
+            "prior_reg": 0.05,
+            "z_dim": 4
+          },
+          "full_protocol_complete": false,
+          "id": "api-vector-two-broad",
+          "original_gate": null,
+          "resolved_recipe_sha256": "168e1a259c0f616b94bd895961d13e2f9e8075e05d52cb39d54f6abefa7ba3c5",
+          "status": "UNKNOWN",
+          "study_gate": null,
+          "tier": 1,
+          "timeout_seconds": 180
+        },
+        {
+          "blockers": [],
+          "case_sha256": "93ca5686f7358c701c58b34798b8e1f784a339c958a0fe8e1c9f90af4867f279",
+          "fixed_host_recipe_options": {
+            "batch_size": 2048,
+            "num_particles": 20000,
+            "z_dim": 2
+          },
+          "full_protocol_complete": false,
+          "id": "api-grid100",
+          "original_gate": null,
+          "resolved_recipe_sha256": "c723915e3a4a7087c60f61c479d2beb87cfd86ba3028626c89c69f08cf0d85ef",
+          "status": "UNKNOWN",
+          "study_gate": null,
+          "tier": 2,
+          "timeout_seconds": 2100
+        },
+        {
+          "blockers": [],
+          "case_sha256": "6e06e5ba492950d3f8063a27f82bf3d51e75574148235495cc1b331b7fb30754",
+          "fixed_host_recipe_options": {
+            "batch_size": 2048,
+            "num_particles": 20000,
+            "z_dim": 2
+          },
+          "full_protocol_complete": false,
+          "id": "api-rotated100",
+          "original_gate": null,
+          "resolved_recipe_sha256": "c723915e3a4a7087c60f61c479d2beb87cfd86ba3028626c89c69f08cf0d85ef",
+          "status": "UNKNOWN",
+          "study_gate": null,
+          "tier": 2,
+          "timeout_seconds": 2100
+        },
+        {
+          "blockers": [],
+          "case_sha256": "9ba09451032b3741df8a30c936bd81cc31038866dd2f4d0eb92966e48b292f48",
+          "fixed_host_recipe_options": {
+            "batch_size": 2048,
+            "num_particles": 20000,
+            "z_dim": 2
+          },
+          "full_protocol_complete": false,
+          "id": "api-staggered100",
+          "original_gate": null,
+          "resolved_recipe_sha256": "c723915e3a4a7087c60f61c479d2beb87cfd86ba3028626c89c69f08cf0d85ef",
+          "status": "UNKNOWN",
+          "study_gate": null,
+          "tier": 2,
+          "timeout_seconds": 2100
+        },
+        {
+          "blockers": [],
+          "case_sha256": "e29a36b2461a986a28ca950df869a4926f258b2bfca32bd46bc8b2188aebf32e",
+          "fixed_host_recipe_options": {
+            "batch_size": 128,
+            "betas": [
+              0.0,
+              0.99
+            ],
+            "d_lr_mult": 1.5,
+            "ema_decay": 0.995,
+            "num_particles": 256,
+            "prior_reg": 0.05,
+            "z_dim": 4
+          },
+          "full_protocol_complete": false,
+          "id": "api-vector-unequal-mass",
+          "original_gate": null,
+          "resolved_recipe_sha256": "168e1a259c0f616b94bd895961d13e2f9e8075e05d52cb39d54f6abefa7ba3c5",
+          "status": "UNKNOWN",
+          "study_gate": null,
+          "tier": 2,
+          "timeout_seconds": 180
+        },
+        {
+          "blockers": [],
+          "case_sha256": "2ec941011f8398672ce85b1d4df41c6e22dce2e0f98354a75f1d9a6794d4e1b6",
+          "fixed_host_recipe_options": {
+            "batch_size": 128,
+            "betas": [
+              0.0,
+              0.99
+            ],
+            "d_lr_mult": 1.5,
+            "ema_decay": 0.995,
+            "num_particles": 256,
+            "prior_reg": 0.05,
+            "z_dim": 4
+          },
+          "full_protocol_complete": false,
+          "id": "api-vector-anisotropic",
+          "original_gate": null,
+          "resolved_recipe_sha256": "168e1a259c0f616b94bd895961d13e2f9e8075e05d52cb39d54f6abefa7ba3c5",
+          "status": "UNKNOWN",
+          "study_gate": null,
+          "tier": 2,
+          "timeout_seconds": 180
+        },
+        {
+          "blockers": [],
+          "case_sha256": "d3145a02dd5e98155b006bf3e99899003707fe8fcf62318ba55fcd2fc6374b4d",
+          "fixed_host_recipe_options": {
+            "batch_size": 32,
+            "num_particles": 32,
+            "prior_kind": "particles",
+            "sigma_rel": 0,
+            "z_dim": 8
+          },
+          "full_protocol_complete": false,
+          "id": "image-develop-img_bars4-source-transpose12",
+          "original_gate": null,
+          "resolved_recipe_sha256": "7554316920ccb76b3d26f35ab6f5c57eaae882d722dcccad8e1021c05dd6bcba",
+          "status": "UNKNOWN",
+          "study_gate": null,
+          "tier": 2,
+          "timeout_seconds": 180
+        }
+      ],
+      "family": "e22",
+      "id": "e22--0acab20ca12f4b947a6ec8b60148855f50a636403caffc4de28d724f19672746",
+      "paid_wall_seconds": 0.0,
+      "recipe_overrides": {
+        "lr": 0.006375,
+        "prior_lr_mult": 2.0
+      },
+      "status": "UNKNOWN"
+    },
+    {
+      "cases": [
+        {
+          "blockers": [],
+          "case_sha256": "e9fa47de6adbb31f083c0333b0c7c41352d2b890b16539d47839d3f9720c5dfb",
+          "fixed_host_recipe_options": {
+            "batch_size": 32,
+            "num_particles": 32,
+            "prior_kind": "particles",
+            "sigma_rel": 0,
+            "z_dim": 8
+          },
+          "full_protocol_complete": false,
+          "id": "image-develop-img_intensity2-source-transpose12",
+          "original_gate": null,
+          "resolved_recipe_sha256": "abf4d5364327869f6910960d10c950f431d317bba9b714d1ab1f3e658460f1e9",
+          "status": "UNKNOWN",
+          "study_gate": null,
+          "tier": 1,
+          "timeout_seconds": 180
+        },
+        {
+          "blockers": [],
+          "case_sha256": "e293cf19f2f235b30807f9782ec65ceea3693f78e3459b9f7eb117179168c8fc",
+          "fixed_host_recipe_options": {
+            "batch_size": 128,
+            "betas": [
+              0.0,
+              0.99
+            ],
+            "d_lr_mult": 1.5,
+            "ema_decay": 0.995,
+            "num_particles": 256,
+            "prior_reg": 0.05,
+            "z_dim": 4
+          },
+          "full_protocol_complete": false,
+          "id": "api-vector-two-broad",
+          "original_gate": null,
+          "resolved_recipe_sha256": "e42b86295d588cfdeacff04b37a5ded28d86b968c87dc1d5cb7b28b4e406f054",
+          "status": "UNKNOWN",
+          "study_gate": null,
+          "tier": 1,
+          "timeout_seconds": 180
+        },
+        {
+          "blockers": [],
+          "case_sha256": "93ca5686f7358c701c58b34798b8e1f784a339c958a0fe8e1c9f90af4867f279",
+          "fixed_host_recipe_options": {
+            "batch_size": 2048,
+            "num_particles": 20000,
+            "z_dim": 2
+          },
+          "full_protocol_complete": false,
+          "id": "api-grid100",
+          "original_gate": null,
+          "resolved_recipe_sha256": "24c839f5acfba4fa3e5446668b79695ab8654fa88eee0d33320eccfbc7cf2353",
+          "status": "UNKNOWN",
+          "study_gate": null,
+          "tier": 2,
+          "timeout_seconds": 2100
+        },
+        {
+          "blockers": [],
+          "case_sha256": "6e06e5ba492950d3f8063a27f82bf3d51e75574148235495cc1b331b7fb30754",
+          "fixed_host_recipe_options": {
+            "batch_size": 2048,
+            "num_particles": 20000,
+            "z_dim": 2
+          },
+          "full_protocol_complete": false,
+          "id": "api-rotated100",
+          "original_gate": null,
+          "resolved_recipe_sha256": "24c839f5acfba4fa3e5446668b79695ab8654fa88eee0d33320eccfbc7cf2353",
+          "status": "UNKNOWN",
+          "study_gate": null,
+          "tier": 2,
+          "timeout_seconds": 2100
+        },
+        {
+          "blockers": [],
+          "case_sha256": "9ba09451032b3741df8a30c936bd81cc31038866dd2f4d0eb92966e48b292f48",
+          "fixed_host_recipe_options": {
+            "batch_size": 2048,
+            "num_particles": 20000,
+            "z_dim": 2
+          },
+          "full_protocol_complete": false,
+          "id": "api-staggered100",
+          "original_gate": null,
+          "resolved_recipe_sha256": "24c839f5acfba4fa3e5446668b79695ab8654fa88eee0d33320eccfbc7cf2353",
+          "status": "UNKNOWN",
+          "study_gate": null,
+          "tier": 2,
+          "timeout_seconds": 2100
+        },
+        {
+          "blockers": [],
+          "case_sha256": "e29a36b2461a986a28ca950df869a4926f258b2bfca32bd46bc8b2188aebf32e",
+          "fixed_host_recipe_options": {
+            "batch_size": 128,
+            "betas": [
+              0.0,
+              0.99
+            ],
+            "d_lr_mult": 1.5,
+            "ema_decay": 0.995,
+            "num_particles": 256,
+            "prior_reg": 0.05,
+            "z_dim": 4
+          },
+          "full_protocol_complete": false,
+          "id": "api-vector-unequal-mass",
+          "original_gate": null,
+          "resolved_recipe_sha256": "e42b86295d588cfdeacff04b37a5ded28d86b968c87dc1d5cb7b28b4e406f054",
+          "status": "UNKNOWN",
+          "study_gate": null,
+          "tier": 2,
+          "timeout_seconds": 180
+        },
+        {
+          "blockers": [],
+          "case_sha256": "2ec941011f8398672ce85b1d4df41c6e22dce2e0f98354a75f1d9a6794d4e1b6",
+          "fixed_host_recipe_options": {
+            "batch_size": 128,
+            "betas": [
+              0.0,
+              0.99
+            ],
+            "d_lr_mult": 1.5,
+            "ema_decay": 0.995,
+            "num_particles": 256,
+            "prior_reg": 0.05,
+            "z_dim": 4
+          },
+          "full_protocol_complete": false,
+          "id": "api-vector-anisotropic",
+          "original_gate": null,
+          "resolved_recipe_sha256": "e42b86295d588cfdeacff04b37a5ded28d86b968c87dc1d5cb7b28b4e406f054",
+          "status": "UNKNOWN",
+          "study_gate": null,
+          "tier": 2,
+          "timeout_seconds": 180
+        },
+        {
+          "blockers": [],
+          "case_sha256": "d3145a02dd5e98155b006bf3e99899003707fe8fcf62318ba55fcd2fc6374b4d",
+          "fixed_host_recipe_options": {
+            "batch_size": 32,
+            "num_particles": 32,
+            "prior_kind": "particles",
+            "sigma_rel": 0,
+            "z_dim": 8
+          },
+          "full_protocol_complete": false,
+          "id": "image-develop-img_bars4-source-transpose12",
+          "original_gate": null,
+          "resolved_recipe_sha256": "abf4d5364327869f6910960d10c950f431d317bba9b714d1ab1f3e658460f1e9",
+          "status": "UNKNOWN",
+          "study_gate": null,
+          "tier": 2,
+          "timeout_seconds": 180
+        }
+      ],
+      "family": "e22",
+      "id": "e22--5d4d276493d67e29887fbfc3c98925b989e2c8c28ed32344c5a0588ddc02cf8c",
+      "paid_wall_seconds": 0.0,
+      "recipe_overrides": {
+        "lr": 0.0085,
+        "prior_lr_mult": 1.0
+      },
+      "status": "UNKNOWN"
+    },
+    {
+      "cases": [
+        {
+          "blockers": [],
+          "case_sha256": "e9fa47de6adbb31f083c0333b0c7c41352d2b890b16539d47839d3f9720c5dfb",
+          "fixed_host_recipe_options": {
+            "batch_size": 32,
+            "num_particles": 32,
+            "prior_kind": "particles",
+            "sigma_rel": 0,
+            "z_dim": 8
+          },
+          "full_protocol_complete": false,
+          "id": "image-develop-img_intensity2-source-transpose12",
+          "original_gate": null,
+          "resolved_recipe_sha256": "7cda0f65d8fa3b21c4d865bf922d334b61060d4126c9407706e51720c788d937",
+          "status": "UNKNOWN",
+          "study_gate": null,
+          "tier": 1,
+          "timeout_seconds": 180
+        },
+        {
+          "blockers": [],
+          "case_sha256": "e293cf19f2f235b30807f9782ec65ceea3693f78e3459b9f7eb117179168c8fc",
+          "fixed_host_recipe_options": {
+            "batch_size": 128,
+            "betas": [
+              0.0,
+              0.99
+            ],
+            "d_lr_mult": 1.5,
+            "ema_decay": 0.995,
+            "num_particles": 256,
+            "prior_reg": 0.05,
+            "z_dim": 4
+          },
+          "full_protocol_complete": false,
+          "id": "api-vector-two-broad",
+          "original_gate": null,
+          "resolved_recipe_sha256": "36216f6908770575894462262881b6abdc9ce01451fba711afe8793ee1d7bdf9",
+          "status": "UNKNOWN",
+          "study_gate": null,
+          "tier": 1,
+          "timeout_seconds": 180
+        },
+        {
+          "blockers": [],
+          "case_sha256": "93ca5686f7358c701c58b34798b8e1f784a339c958a0fe8e1c9f90af4867f279",
+          "fixed_host_recipe_options": {
+            "batch_size": 2048,
+            "num_particles": 20000,
+            "z_dim": 2
+          },
+          "full_protocol_complete": false,
+          "id": "api-grid100",
+          "original_gate": null,
+          "resolved_recipe_sha256": "51e9b810104a8dc2be9e212d08f7e2da683c110626fbf6ee3859bf0bb5bee33e",
+          "status": "UNKNOWN",
+          "study_gate": null,
+          "tier": 2,
+          "timeout_seconds": 2100
+        },
+        {
+          "blockers": [],
+          "case_sha256": "6e06e5ba492950d3f8063a27f82bf3d51e75574148235495cc1b331b7fb30754",
+          "fixed_host_recipe_options": {
+            "batch_size": 2048,
+            "num_particles": 20000,
+            "z_dim": 2
+          },
+          "full_protocol_complete": false,
+          "id": "api-rotated100",
+          "original_gate": null,
+          "resolved_recipe_sha256": "51e9b810104a8dc2be9e212d08f7e2da683c110626fbf6ee3859bf0bb5bee33e",
+          "status": "UNKNOWN",
+          "study_gate": null,
+          "tier": 2,
+          "timeout_seconds": 2100
+        },
+        {
+          "blockers": [],
+          "case_sha256": "9ba09451032b3741df8a30c936bd81cc31038866dd2f4d0eb92966e48b292f48",
+          "fixed_host_recipe_options": {
+            "batch_size": 2048,
+            "num_particles": 20000,
+            "z_dim": 2
+          },
+          "full_protocol_complete": false,
+          "id": "api-staggered100",
+          "original_gate": null,
+          "resolved_recipe_sha256": "51e9b810104a8dc2be9e212d08f7e2da683c110626fbf6ee3859bf0bb5bee33e",
+          "status": "UNKNOWN",
+          "study_gate": null,
+          "tier": 2,
+          "timeout_seconds": 2100
+        },
+        {
+          "blockers": [],
+          "case_sha256": "e29a36b2461a986a28ca950df869a4926f258b2bfca32bd46bc8b2188aebf32e",
+          "fixed_host_recipe_options": {
+            "batch_size": 128,
+            "betas": [
+              0.0,
+              0.99
+            ],
+            "d_lr_mult": 1.5,
+            "ema_decay": 0.995,
+            "num_particles": 256,
+            "prior_reg": 0.05,
+            "z_dim": 4
+          },
+          "full_protocol_complete": false,
+          "id": "api-vector-unequal-mass",
+          "original_gate": null,
+          "resolved_recipe_sha256": "36216f6908770575894462262881b6abdc9ce01451fba711afe8793ee1d7bdf9",
+          "status": "UNKNOWN",
+          "study_gate": null,
+          "tier": 2,
+          "timeout_seconds": 180
+        },
+        {
+          "blockers": [],
+          "case_sha256": "2ec941011f8398672ce85b1d4df41c6e22dce2e0f98354a75f1d9a6794d4e1b6",
+          "fixed_host_recipe_options": {
+            "batch_size": 128,
+            "betas": [
+              0.0,
+              0.99
+            ],
+            "d_lr_mult": 1.5,
+            "ema_decay": 0.995,
+            "num_particles": 256,
+            "prior_reg": 0.05,
+            "z_dim": 4
+          },
+          "full_protocol_complete": false,
+          "id": "api-vector-anisotropic",
+          "original_gate": null,
+          "resolved_recipe_sha256": "36216f6908770575894462262881b6abdc9ce01451fba711afe8793ee1d7bdf9",
+          "status": "UNKNOWN",
+          "study_gate": null,
+          "tier": 2,
+          "timeout_seconds": 180
+        },
+        {
+          "blockers": [],
+          "case_sha256": "d3145a02dd5e98155b006bf3e99899003707fe8fcf62318ba55fcd2fc6374b4d",
+          "fixed_host_recipe_options": {
+            "batch_size": 32,
+            "num_particles": 32,
+            "prior_kind": "particles",
+            "sigma_rel": 0,
+            "z_dim": 8
+          },
+          "full_protocol_complete": false,
+          "id": "image-develop-img_bars4-source-transpose12",
+          "original_gate": null,
+          "resolved_recipe_sha256": "7cda0f65d8fa3b21c4d865bf922d334b61060d4126c9407706e51720c788d937",
+          "status": "UNKNOWN",
+          "study_gate": null,
+          "tier": 2,
+          "timeout_seconds": 180
+        }
+      ],
+      "family": "e22",
+      "id": "e22--65e42a03035ec9ef2bad19032ac8a0b849c81b24ef8f8cbf6476da1ae8c8ff4c",
+      "paid_wall_seconds": 0.0,
+      "recipe_overrides": {
+        "lr": 0.0085,
+        "prior_lr_mult": 2.0
+      },
+      "status": "UNKNOWN"
+    },
+    {
+      "cases": [
+        {
+          "blockers": [],
+          "case_sha256": "e9fa47de6adbb31f083c0333b0c7c41352d2b890b16539d47839d3f9720c5dfb",
+          "fixed_host_recipe_options": {
+            "batch_size": 32,
+            "num_particles": 32,
+            "prior_kind": "particles",
+            "sigma_rel": 0,
+            "z_dim": 8
+          },
+          "full_protocol_complete": false,
+          "id": "image-develop-img_intensity2-source-transpose12",
+          "original_gate": null,
+          "resolved_recipe_sha256": "79a7377c2c1de1974c80fcb22ff1fd73c59911a118ac65a4621491c81581abc7",
+          "status": "UNKNOWN",
+          "study_gate": null,
+          "tier": 1,
+          "timeout_seconds": 180
+        },
+        {
+          "blockers": [],
+          "case_sha256": "e293cf19f2f235b30807f9782ec65ceea3693f78e3459b9f7eb117179168c8fc",
+          "fixed_host_recipe_options": {
+            "batch_size": 128,
+            "betas": [
+              0.0,
+              0.99
+            ],
+            "d_lr_mult": 1.5,
+            "ema_decay": 0.995,
+            "num_particles": 256,
+            "prior_reg": 0.05,
+            "z_dim": 4
+          },
+          "full_protocol_complete": false,
+          "id": "api-vector-two-broad",
+          "original_gate": null,
+          "resolved_recipe_sha256": "5e84dd31d639e58de35c45170a43039d092c18c25f03f7a2e1b0a2789cc523cd",
+          "status": "UNKNOWN",
+          "study_gate": null,
+          "tier": 1,
+          "timeout_seconds": 180
+        },
+        {
+          "blockers": [],
+          "case_sha256": "93ca5686f7358c701c58b34798b8e1f784a339c958a0fe8e1c9f90af4867f279",
+          "fixed_host_recipe_options": {
+            "batch_size": 2048,
+            "num_particles": 20000,
+            "z_dim": 2
+          },
+          "full_protocol_complete": false,
+          "id": "api-grid100",
+          "original_gate": null,
+          "resolved_recipe_sha256": "27bb9b29f4730c74320a866db0199490ab7122c16afd5dc563f383a9e039804d",
+          "status": "UNKNOWN",
+          "study_gate": null,
+          "tier": 2,
+          "timeout_seconds": 2100
+        },
+        {
+          "blockers": [],
+          "case_sha256": "6e06e5ba492950d3f8063a27f82bf3d51e75574148235495cc1b331b7fb30754",
+          "fixed_host_recipe_options": {
+            "batch_size": 2048,
+            "num_particles": 20000,
+            "z_dim": 2
+          },
+          "full_protocol_complete": false,
+          "id": "api-rotated100",
+          "original_gate": null,
+          "resolved_recipe_sha256": "27bb9b29f4730c74320a866db0199490ab7122c16afd5dc563f383a9e039804d",
+          "status": "UNKNOWN",
+          "study_gate": null,
+          "tier": 2,
+          "timeout_seconds": 2100
+        },
+        {
+          "blockers": [],
+          "case_sha256": "9ba09451032b3741df8a30c936bd81cc31038866dd2f4d0eb92966e48b292f48",
+          "fixed_host_recipe_options": {
+            "batch_size": 2048,
+            "num_particles": 20000,
+            "z_dim": 2
+          },
+          "full_protocol_complete": false,
+          "id": "api-staggered100",
+          "original_gate": null,
+          "resolved_recipe_sha256": "27bb9b29f4730c74320a866db0199490ab7122c16afd5dc563f383a9e039804d",
+          "status": "UNKNOWN",
+          "study_gate": null,
+          "tier": 2,
+          "timeout_seconds": 2100
+        },
+        {
+          "blockers": [],
+          "case_sha256": "e29a36b2461a986a28ca950df869a4926f258b2bfca32bd46bc8b2188aebf32e",
+          "fixed_host_recipe_options": {
+            "batch_size": 128,
+            "betas": [
+              0.0,
+              0.99
+            ],
+            "d_lr_mult": 1.5,
+            "ema_decay": 0.995,
+            "num_particles": 256,
+            "prior_reg": 0.05,
+            "z_dim": 4
+          },
+          "full_protocol_complete": false,
+          "id": "api-vector-unequal-mass",
+          "original_gate": null,
+          "resolved_recipe_sha256": "5e84dd31d639e58de35c45170a43039d092c18c25f03f7a2e1b0a2789cc523cd",
+          "status": "UNKNOWN",
+          "study_gate": null,
+          "tier": 2,
+          "timeout_seconds": 180
+        },
+        {
+          "blockers": [],
+          "case_sha256": "2ec941011f8398672ce85b1d4df41c6e22dce2e0f98354a75f1d9a6794d4e1b6",
+          "fixed_host_recipe_options": {
+            "batch_size": 128,
+            "betas": [
+              0.0,
+              0.99
+            ],
+            "d_lr_mult": 1.5,
+            "ema_decay": 0.995,
+            "num_particles": 256,
+            "prior_reg": 0.05,
+            "z_dim": 4
+          },
+          "full_protocol_complete": false,
+          "id": "api-vector-anisotropic",
+          "original_gate": null,
+          "resolved_recipe_sha256": "5e84dd31d639e58de35c45170a43039d092c18c25f03f7a2e1b0a2789cc523cd",
+          "status": "UNKNOWN",
+          "study_gate": null,
+          "tier": 2,
+          "timeout_seconds": 180
+        },
+        {
+          "blockers": [],
+          "case_sha256": "d3145a02dd5e98155b006bf3e99899003707fe8fcf62318ba55fcd2fc6374b4d",
+          "fixed_host_recipe_options": {
+            "batch_size": 32,
+            "num_particles": 32,
+            "prior_kind": "particles",
+            "sigma_rel": 0,
+            "z_dim": 8
+          },
+          "full_protocol_complete": false,
+          "id": "image-develop-img_bars4-source-transpose12",
+          "original_gate": null,
+          "resolved_recipe_sha256": "79a7377c2c1de1974c80fcb22ff1fd73c59911a118ac65a4621491c81581abc7",
+          "status": "UNKNOWN",
+          "study_gate": null,
+          "tier": 2,
+          "timeout_seconds": 180
+        }
+      ],
+      "family": "e22",
+      "id": "e22--da75137238384f27a182b60f6232cd1900263fbf4a6875568c6f8cda4edc77bf",
+      "paid_wall_seconds": 0.0,
+      "recipe_overrides": {
+        "lr": 0.006375,
+        "prior_lr_mult": 1.0
+      },
+      "status": "UNKNOWN"
+    }
+  ],
+  "unmeasured_interrupt_reservation_seconds": 0.0
+}
