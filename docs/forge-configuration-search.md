@@ -7,8 +7,9 @@ not introduce another training loop or a new technique row. The companion JSON
 retains alternative configurations and the exact evidence behind their results.
 
 The proposed [convergence-selection plan](forge-convergence-selection-plan.md)
-illustrates advancing candidates through the gates, retaining failures, and
-choosing the quickest stable converging config from a comparable survivor set.
+asks whether each solution family can represent the required toys, then illustrates
+bounded hyperparameter search for one shared defaults config, gate progression,
+and selection of the quickest stable solution from comparable family finalists.
 Its convergence timing and speed objective are future additions; the implemented
 search behavior is described below.
 

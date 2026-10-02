@@ -1,14 +1,25 @@
-# PLAN: find a converging config, then choose the quickest
+# PLAN: verify family representation, then choose winning defaults
 
 Status: proposed implementation plan, based on develop `81402d6b` (2026-10-02).
 
-Run each candidate through increasingly expensive gates. Stop a failing candidate,
-preserve its evidence, and select the next eligible candidate. Once a config
-converges and remains stable, keep it as the incumbent and finish the declared
-comparison: if several qualify, select the one with the shortest measured time
-to confirmed convergence under the same conditions.
+Start with solution families: a training mechanism is a family, and its complete
+hyperparameter configurations are the candidates. Run a bounded hyperparameter
+search within each family, advancing its configs through increasingly expensive
+gates. Stop a failing config, preserve its evidence, and select the next config
+from that family's declared grid. Once a config converges and remains stable,
+keep it as the family incumbent and finish the declared comparison. Compare the
+eligible family finalists under the same conditions; if several qualify, select
+the shortest measured time to confirmed convergence.
 
-The outcome is **the fastest observed eligible config in a declared comparison**.
+The two questions are:
+
+1. **Can this exact solution family and host represent the declared toy target?**
+   Establish representability separately from whether an optimizer can learn it.
+2. **What defaults should the family ship if it wins?** Choose one complete shared
+   configuration across all required toys; if several fully qualify, choose the
+   quickest stable convergence under matched conditions.
+
+The outcome is **the fastest observed eligible family/defaults config in a declared comparison**.
 Each round has a finite candidate list and budget. A round can finish with no
 winner; finding one is a research goal, not a guarantee.
 
@@ -16,29 +27,31 @@ winner; finding one is a research goal, not a guarantee.
 
 ```mermaid
 flowchart TD
-    A[Read previous results and freeze a bounded candidate round] --> B[Select next eligible config]
-    B --> C{Preflight supported?}
-    C -- PASS --> D{Smoke gates pass?}
-    D -- PASS --> E{Quality gates pass?}
-    E -- PASS --> F{Convergence and hold pass?}
-    C -- BLOCKED --> R[Record exact verdict and reason; stop this candidate]
-    D -- Non-pass --> R
-    E -- Non-pass --> R
-    F -- Non-pass --> R
-    F -- PASS --> I[Keep eligible incumbent and record convergence times]
-    R --> J{More candidates and sufficient budget?}
+    A[Freeze family models, toy suite, parameter grids and budgets] --> S[Select next solution family]
+    S --> T{Q1: Representation supported for this family and the required toys?}
+    T -- Supported witness --> H[Q2: Bounded family hyperparameter search; select next complete shared defaults config]
+    T -- Excluded, unresolved or API blocked --> Z[Record representation status and reason; resolve or skip family]
+    H --> D[Advance only on PASS: preflight, smoke, quality, convergence and hold]
+    D --> G{One shared defaults config passes all required toy gates?}
+    G -- Non-pass --> R[Record exact verdict; stop this config]
+    G -- PASS --> I[Keep eligible family config and measured convergence times]
+    R --> J{More family configs and sufficient budget?}
     I --> J
-    J -- Yes --> B
-    J -- No --> K[Publish comparison: quickest eligible if complete; provisional if incomplete]
-    K --> L{Complete comparison with eligible convergence?}
-    L -- Yes --> M[Freeze winner for separate confirmation or robustness]
-    L -- No --> N[No final winner: retain evidence and justify a new round or stop]
+    J -- Yes --> H
+    J -- No --> K[Publish family result: quickest stable defaults, provisional incumbent or no winner]
+    Z --> K
+    K --> Y{More declared families and sufficient budget?}
+    Y -- Yes --> S
+    Y -- No --> L{Complete matched comparison with eligible shared defaults?}
+    L -- Yes --> V[Compare family finalists; quickest stable convergence wins]
+    V --> M[Freeze exact family defaults; reserved confirmation and robustness before the 0.9.0 decision]
+    L -- No --> N[No final winner; keep evidence and justify a new bounded round or stop]
     N -. New round .-> A
     classDef success fill:#dcfce7,stroke:#15803d,color:#14532d
     classDef stopped fill:#fee2e2,stroke:#b91c1c,color:#7f1d1d
     classDef partial fill:#fef3c7,stroke:#b45309,color:#78350f
-    class I,M success
-    class R,N stopped
+    class I,V,M success
+    class R,N,Z stopped
     class K partial
 ```
 
@@ -46,26 +59,90 @@ This is the proposed orchestration. Individual task execution still follows its
 frozen evaluator, horizon and dependencies. A first threshold crossing cannot
 stop a full-budget quality protocol early or change its annealing schedule.
 
-## 1. Select the next candidate
+## 1. Answer representation first, then search family defaults
 
 Read the [experiment memory](../reports/forge/EXPERIMENT_MEMORY.md) and
 [current leaderboard](../reports/forge/technique-inventory.md) first. Use a new
-study ID for a new scientific source or protocol. Within one round, freeze a
-finite grid of public `Recipe` settings, its substantive hypothesis, compatible
-reference controls, runtime and candidate order before training. Use configuration
-hash order as the initial deterministic order; it expresses no quality preference.
+study ID for a new scientific source or protocol. A solution family identifies
+the training mechanism; a hyperparameter trial changes public `Recipe` settings
+within that family. Register a new mechanism through the shared ParticleGAN API
+and family registry before freezing the round. Parameter trials do not become
+extra families or require copied training loops.
+
+Freeze all family implementations, each family's finite hyperparameter grid,
+substantive hypotheses, compatible references, task/runtime/timing contracts,
+family order, config order, per-family allowances and total round budget before
+training. Coupled schedule endpoints form one grid dimension. Seeds, task gates,
+host architecture, prior and sampling law are not hidden hyperparameter axes.
+Use declared family order and configuration hash order within each grid as the
+initial deterministic order; neither expresses a quality preference.
+
+### Question 1: can the family represent the toy?
+
+Bind the answer to the exact public family parameterization, host architecture,
+conditioning, prior support/masses and public sampling/serving law. Supply a
+constructive or analytic argument, or a retained parameter witness whose public
+output meets that toy's declared numerical tolerance. A finite empirical witness
+supports the declared protocol and tolerance; it is not a universal approximation
+claim. Reference fitting can investigate representability within a separately
+declared diagnostic budget, without granting ordinary training qualification.
+
+| Representation status | Meaning | Before hyperparameter search |
+| --- | --- | --- |
+| SUPPORTED | Compatible construction or parameter witness realizes the declared target/tolerance | Admit the family for those exact supported toys |
+| EXCLUDED | An analytic bound or explicit support/capacity contradiction rules out the declared target/tolerance | Record the reason; revise the family/host in a new declared round |
+| UNRESOLVED | No compatible witness; a finite fitting attempt failed or evidence is missing | Record uncertainty; use a bounded diagnostic if justified |
+| API BLOCKED | The required family/host/prior/serving path is unsupported | Resolve the shared API contract before spending on a grid |
+
+A training FAIL means that config failed to learn under that protocol and budget.
+It does not prove the family lacks representation capacity. Reuse a representation
+witness across parameter trials only while its complete family/host/prior/serving
+identity remains compatible. It cannot fill their quality PASS cells. This
+supporting certificate does not replace the public-API training test, numerical
+gate or actual-training GIF.
+
+### Question 2: which defaults should that family ship?
+
+Search the supported family's finite grid for one unchanged complete `Recipe`
+configuration that learns every required toy and passes stability. Each toy may
+learn its own weights; the defaults are shared. Do not select a different recipe
+for each toy or assemble a family score from different trial winners. Existing
+host-owned recipe adaptations must be frozen, disclosed and identical across
+parameter candidates; the eventual shipping claim must list those exceptions.
+
+Keep the actual resolved settings, family identity, supported task scope and
+serving law with each candidate. The winning defaults must resolve through the
+public factory to the exact qualified configuration, with no silent fallback or
+per-toy tuning. Freeze the choice, then obtain the separately reserved confirmation,
+accepted calibration and registered robustness evidence before adopting it for
+the [0.9.0 release integration](https://github.com/255BITS/ParticleGAN/pull/247).
 
 Reuse exact compatible evidence. Do not repeat an unchanged failed revision,
 vary only seeds, or launch a candidate whose required capabilities are missing.
 An infrastructure failure requires a recorded repair and linked retry; a
 scientific failure requires a substantively revised hypothesis or configuration.
 
-After each terminal outcome, take the next unfinished candidate whose dependencies
-pass and whose complete next-task allowance fits the remaining budget. Keep the
-failed candidate's metrics and explanation. When a round has no winner, use those
-failures to justify a new bounded round rather than extending the same search
-without a declared limit. Record the total search spend across rounds as well as
-each candidate's qualification cost.
+After each terminal outcome, take the next unfinished config in that family whose
+dependencies pass and whose complete next-task allowance fits both the family and
+round budgets. Keep the failed config's metrics and explanation. Finish its
+declared grid, retain the quickest fully eligible family config and any timing
+ties, then process the next declared family. A family whose grid has no eligible
+converging config has no winner; a canonical fallback is not a qualified solution.
+
+Across families, rank only matched task/source/runtime/resource cohorts and
+retain each selected config as a whole. Family timing ties remain in the finalist
+pool even when the leaderboard displays one deterministic representative. Do not
+force incompatible cloud/clean-MoG or CPU/CUDA families into a speed ranking.
+
+An analytically EXCLUDED family can close its representation question without a
+grid. UNRESOLVED, API-blocked or budget-unmeasured families remain visible in the
+declared comparison and keep that family-choice conclusion provisional. Define
+supported-cohort exclusions before seeing results; do not drop unresolved
+families afterwards to manufacture a complete comparison.
+
+If no family qualifies, use the recorded failures to justify a new bounded round
+instead of extending the same search without a declared limit. Record each
+family's search spend, total spend across rounds, and per-config qualification cost.
 
 ## 2. Advance only after the gates pass
 
@@ -121,9 +198,11 @@ earlier. An incomplete run is INCOMPLETE; a completed numerical rejection is FAI
 Missing convergence timestamps mean **speed unavailable**, not zero seconds.
 Existing endpoint-only results do not establish an earlier convergence time.
 
-If several candidates pass smoke, every survivor in the preregistered finalist
-set gets the same later gates while budget allows. Advancing only one hash-chosen
-smoke winner cannot answer which survivor converges quickest.
+If several configs in a family pass smoke, every survivor in its preregistered
+finalist set gets the same later gates while budget allows. Advancing only one
+hash-chosen smoke winner cannot answer which config in that family converges
+quickest. Family incumbents and the cross-family comparison remain provisional
+until their declared candidate coverage is complete.
 
 ## 4. Choose the quickest eligible config fairly
 
@@ -162,7 +241,8 @@ the eligible winner. Selection uses these observations, so they are not independ
 confirmation; register reserved confirmation/robustness separately with frozen
 criteria and budget before its execution.
 
-Illustrative example only; these numbers are not ParticleGAN measurements:
+Illustrative parameter trials within one representation-supported family only;
+these numbers are not ParticleGAN measurements:
 
 | Candidate | Smoke | Quality | Hold/endurance | Confirmed acquisition time | Decision |
 | --- | --- | --- | --- | ---: | --- |
@@ -178,8 +258,10 @@ leaderboard. Each record must bind the round and config identities, source/task/
 protocol hashes, resolved recipe, runtime/resource policy, actual metric and
 threshold, gate verdict/reason, required denominator, observed convergence step
 and time, hold verdict, timing method, paid cost, reuse and linked retry history.
-Also preserve candidate order, skipped candidates, remaining budget and selection
-scope so the next person can reconstruct the decision.
+Also preserve representation status and witness/bound provenance, family
+membership, complete per-family grids, family/config order,
+skipped configs, remaining family/round budgets and selection scope so the next
+person can reconstruct both the family search and the final solution decision.
 
 | Artifact | Purpose |
 | --- | --- |
@@ -208,19 +290,20 @@ score them; a parameter grid cannot repair a missing capability.
 
 | Step | Deliverable | Acceptance evidence |
 | --- | --- | --- |
-| 1 | Freeze a convergence/speed contract and suitable screen calibration | Positive/negative references, cohorts, complete budgets and stop rules are declared; failed profiles stay closed |
+| 1 | Freeze family representation contracts, shared-defaults grids, convergence/speed criteria and suitable screen calibration | Supported witnesses or analytic exclusions bind exact hosts/priors/serving; unresolved and API-blocked families stay explicit; budgets and stop rules are declared |
 | 2 | Validate reusable confirmation timing and add missing acquisition telemetry to shared adapters and receipts | Regrading rejects semantic mismatches and missing, changed or non-monotonic timing; CUDA timing is synchronized; full protocols and RNG streams remain intact |
-| 3 | Extend bounded search to advance the declared survivor set and select by eligible convergence time | Fast-but-unstable loses; the quickest stable survivor wins; ties, blocked rows, missing evidence, reuse and exhausted budgets are handled explicitly |
+| 3 | Search each family's frozen hyperparameter grid, advance its survivor set, and compare eligible family finalists by convergence time | Fast-but-unstable loses; the quickest stable config represents its family; family ties remain eligible; incomplete grids or missing families cannot produce a final fastest winner |
 | 4 | Extend the existing compact report and single leaderboard | Fresh-checkout reconstruction gives the same selection and hashes; all failures, alternatives and raw archive identities remain accessible |
-| 5 | Run one new bounded comparison, publish it, then register the frozen winner's confirmation | Full gate and speed receipts support the conclusion; no default promotion is inferred from screening |
+| 5 | Run one new bounded family/defaults comparison, publish it, then register the frozen winner's confirmation | One unchanged public defaults config passes every required toy; declared host exceptions and full gate/speed receipts support the conclusion; no adoption is inferred from screening |
 
 Forge already supplies finite Recipe grids, preflight, prerequisite stopping,
 budget reservation, exact-evidence reuse, durable attempts, phase timing, some
 task-specific confirmation timing, and the single published leaderboard.
 Its current search objective is tuning-task PASS
 counts with a hash tie-break; the first R1/R2 study confirms only one smoke winner.
-The timing contract, survivor progression and fastest-convergence objective above
-are proposed additions, not existing CLI behavior. This plan changes no recipes,
+The representation receipts, shared-defaults selection, timing contract,
+survivor progression and fastest-convergence objective above are proposed
+additions, not existing CLI behavior. This plan changes no recipes,
 gates, recorded results or defaults and launches no experiments.
 
 See the [current configuration-search guide](forge-configuration-search.md),
