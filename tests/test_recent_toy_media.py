@@ -24,25 +24,29 @@ def film_archive(tmp_path):
     (root / "contracts.xml").write_text('<testsuites><testsuite>' + ''.join(
         f'<testcase classname="tests.test_routed_conditioning_code_preserved" name="{name}"/>'
         for name in names) + '</testsuite></testsuites>')
-    save(root / "campaign-protocol.json", {"scope": "synthetic software control"})
-    save(root / "readout.json", {"scope": "synthetic software control"})
-    card = {"protocol_sha256": media.sha(root / "campaign-protocol.json"),
-            "readout_sha256": media.sha(root / "readout.json"),
+    package = {"particlegan/recipes.py": "synthetic source hash oracle"}
+    save(root / "campaign-protocol.json", {"scope": "synthetic software control", "package_files": package})
+    readout = {"widths": {}}
+    card = {"protocol_sha256": media.sha(root / "campaign-protocol.json"), "package_git_sha": "synthetic",
             "contracts": {"junit_sha256": media.sha(root / "contracts.xml")}, "source_sha256": {}, "widths": {}}
     for width in (4, 16):
         folder = root / f"width{width}"
         folder.mkdir()
-        (folder / "spatial_damping.py").write_text('# Synthetic software archive, not a trained experiment.\n')
-        h = media.sha(folder / "spatial_damping.py")
-        card["source_sha256"]["benchmarks/routed_conditioning/spatial_damping.py"] = h
+        sources = {}
+        for name in ("spatial_damping.py", "film_damping.py"):
+            (folder / name).write_text('# Synthetic software archive, not a trained experiment.\n')
+            sources[name] = media.sha(folder / name)
+            card["source_sha256"][f"benchmarks/routed_conditioning/{name}"] = sources[name]
         protocol = {"profiles": list(media.PROFILES), "external_update_cap": 1200,
-                    "width": width, "blocks": 1, "source_sha256": {"spatial_damping.py": h}}
+                    "width": width, "blocks": 1, "source_sha256": sources,
+                    "package_files": package, "package_git_sha": "synthetic",
+                    "package_python_sha256": media.hashlib.sha256(json.dumps(package, sort_keys=True).encode()).hexdigest()}
         save(folder / "protocol.json", protocol)
         profiles = {}
         card["widths"][str(width)] = {"profiles": {}}
         for index, arm in enumerate(media.PROFILES):
             evaluations = [{"step": step, "live_mse": 1 / (1 + step) + .001 * index,
-                            "served_mse": 1 / (1 + step) + .001 * index} for step in range(0, 1201, 100)]
+                            "served_mse": 1 / (1 + step) + .001 * index, "served_source": "fast"} for step in range(0, 1201, 100)]
             profiles[arm] = {"completed_steps": 1200, "live_mse": evaluations[-1]["live_mse"],
                 "served_mse": evaluations[-1]["served_mse"], "served_source": "fast", "evaluations": evaluations}
             metadata = {"initial_code_jacobian_frobenius": (2, 1, 2)[index],
@@ -57,8 +61,17 @@ def film_archive(tmp_path):
                 rows.append(row)
             (folder / f"{arm}.jsonl").write_text(''.join(json.dumps(r) + '\n' for r in rows))
             (folder / f"{arm}-final.pt").write_bytes(b'Synthetic checkpoint identity, never training')
-            card["widths"][str(width)]["profiles"][arm] = {"clean_curve": {str(r["step"]): r["live_mse"] for r in evaluations}}
+            card["widths"][str(width)]["profiles"][arm] = {
+                "clean_curve": {str(r["step"]): r["live_mse"] for r in evaluations},
+                "final_live_mse": evaluations[-1]["live_mse"], "final_served_mse": evaluations[-1]["served_mse"], "served_source": "fast"}
         save(folder / "summary.json", {"protocol": protocol, "profiles": profiles})
+        readout["widths"][str(width)] = {"profiles": {
+            arm: {**card["widths"][str(width)]["profiles"][arm], "evaluations": profiles[arm]["evaluations"],
+                  "raw_summary_sha256": media.sha(folder / "summary.json"),
+                  "initial_code_jacobian_frobenius": (2, 1, 2)[index]}
+            for index, arm in enumerate(media.PROFILES)}}
+    save(root / "readout.json", readout)
+    card["readout_sha256"] = media.sha(root / "readout.json")
     return root, card
 
 
@@ -129,23 +142,29 @@ def test_structural_gif_keeps_all_original_bytes_numeric_rows_and_no_learned_gat
         assert artifact["actual_updates"] == list(range(0, 1201, 100))
 
 
-@pytest.mark.parametrize("change", ["partial", "missing_curve", "wrong_owner", "zero_code", "failed_control"])
+@pytest.mark.parametrize("change", ["partial", "missing_curve", "wrong_owner", "zero_code", "failed_control", "empty_sources", "endpoint", "jacobian_nan"])
 def test_partial_or_failed_structural_protocol_cannot_pass_export(tmp_path, monkeypatch, change):
     root, card = film_archive(tmp_path)
     monkeypatch.setattr(media, "load_card", lambda pr: card)
     folder = root / "width4"
-    if change in ("partial", "missing_curve"):
+    if change in ("partial", "missing_curve", "endpoint"):
         summary = json.loads((folder / "summary.json").read_text())
         row = summary["profiles"][media.PROFILES[2]]
         if change == "partial": row["completed_steps"] = 1199
-        else: row["evaluations"].pop(3)
+        elif change == "missing_curve": row["evaluations"].pop(3)
+        else: row["live_mse"] = 999.
         save(folder / "summary.json", summary)
-    elif change in ("wrong_owner", "zero_code"):
+    elif change in ("wrong_owner", "zero_code", "jacobian_nan"):
         path = folder / f"{media.PROFILES[2]}-metadata.json"
         meta = json.loads(path.read_text())
         if change == "wrong_owner": meta["initial_hashes"]["critic"] = "changed"
-        else: meta["initial_code_jacobian_frobenius"] = 0
-        save(path, meta)
+        else: meta["initial_code_jacobian_frobenius"] = float("nan") if change == "jacobian_nan" else 0
+        if change == "jacobian_nan": path.write_text(json.dumps(meta))
+        else: save(path, meta)
+    elif change == "empty_sources":
+        path = folder / "protocol.json"
+        protocol = json.loads(path.read_text());protocol["source_sha256"] = {}
+        save(path, protocol)
     else:
         path = root / "contracts.xml"
         path.write_text(path.read_text().replace('/>', '><failure/></testcase>', 1))
@@ -216,7 +235,7 @@ def test_clean_game_gif_keeps_actual_four_judge_gate_and_full_budget(tmp_path, m
     assert file_bytes(root) == before
 
 
-@pytest.mark.parametrize("change", ["missing_step", "judge", "nan", "uncalibrated", "fake_pass"])
+@pytest.mark.parametrize("change", ["missing_step", "judge", "nan", "uncalibrated", "fake_pass", "empty_C", "zero_judge"])
 def test_clean_game_rejects_incomplete_or_false_four_judge_evidence(tmp_path, change):
     root, card = clean_archive(tmp_path)
     report = json.loads((root / "report.json").read_text())
@@ -228,6 +247,8 @@ def test_clean_game_rejects_incomplete_or_false_four_judge_evidence(tmp_path, ch
     elif change == "nan":
         report["curves"]["G_clean"]["128"]["clean"][media.JUDGES[0]] = float("inf")
     elif change == "uncalibrated": report["references"][media.JUDGES[0]] = [1., .9, .8, .7]
+    elif change == "empty_C": report["coverage"]["G_clean"]["C_norms"] = []
+    elif change == "zero_judge": report["curves"]["G_clean"]["512"]["zero_code"]["extra judge"] = 1.
     else: report["curves"]["G_clean"]["512"]["clean"][media.JUDGES[0]] += 1
     if change != "missing_step":
         if change == "nan": (root / "report.json").write_text(json.dumps(report))
@@ -236,3 +257,26 @@ def test_clean_game_rejects_incomplete_or_false_four_judge_evidence(tmp_path, ch
         save(root / "completion.json", {"complete": True, "scientific_status": "PASS", "report_sha256": media.sha(root / "report.json")})
         card["bindings"]["completion_sha256"] = media.sha(root / "completion.json")
     with pytest.raises(ValueError): media.clean_data(root, card, media.Inputs())
+
+
+@pytest.mark.parametrize("change", ["ratio", "aggregate"])
+def test_variance_display_must_match_batch_energies(tmp_path, change):
+    path, card = variance_archive(tmp_path)
+    result = json.loads(path.read_text())
+    value = result["statistics"][media.COMPONENTS[0]]["generator"]
+    if change == "ratio": value["ratio"] = .01
+    else:
+        value["single_variance"] = 2.
+        value["antithetic_variance"] = 1.96
+    save(path, result);card["portable_fixed_fixture"]["first_receipt_sha256"] = media.sha(path)
+    with pytest.raises(ValueError): media.variance_data(path, card, media.Inputs())
+
+
+def test_fresh_native_manifest_must_match_actual_public_caller_bytes(tmp_path, monkeypatch):
+    root, card = film_archive(tmp_path)
+    package = json.loads((root / "width4/protocol.json").read_text())["package_files"]
+    monkeypatch.setattr(media, "native_manifest", lambda: deepcopy(package))
+    assert media.film_data(root, card, media.Inputs(), fresh=True)["structural_full_protocol_passed"]
+    monkeypatch.setattr(media, "native_manifest", lambda: {"particlegan/recipes.py": "different bytes"})
+    with pytest.raises(ValueError, match="package binding"):
+        media.film_data(root, card, media.Inputs(), fresh=True)
