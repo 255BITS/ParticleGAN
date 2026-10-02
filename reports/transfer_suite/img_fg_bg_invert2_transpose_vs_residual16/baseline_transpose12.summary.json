@@ -1,0 +1,9 @@
+{
+  "arm": "baseline_transpose12",
+  "verdict": "FAIL",
+  "modes": 1,
+  "hq": 0.46875,
+  "mean_rmse": 0.06190023571252823,
+  "confirmed_step": null,
+  "seconds": 8.343808744000853
+}
