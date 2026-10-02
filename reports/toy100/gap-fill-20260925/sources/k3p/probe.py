@@ -18,11 +18,21 @@ p.add_argument('--backend', choices=['cpu', 'cuda'], required=True)
 p.add_argument('--cpu-random', action='store_true')
 p.add_argument('--init-only', action='store_true', help='capture initialization before the first optimizer update')
 p.add_argument('--initial-state', type=Path, help='initialize GPU parameters from an audited CPU fixture')
+p.add_argument('--init', default=None, help='deterministic structured init name; default keeps PyTorch init')
+p.add_argument('--seed-offset', type=int, default=0, help='added to every torch seed; 0 leaves seeds unchanged')
 p.add_argument('--output', type=Path, required=True)
 a = p.parse_args()
 a.output.mkdir(parents=True, exist_ok=False)
 sys.path.insert(0, str(a.repo.resolve()))
 import torch
+if a.seed_offset or a.init:
+    from particlegan.structured_init import NAMES, configure, install_seed_offset
+    if a.seed_offset:
+        install_seed_offset(a.seed_offset)
+    if a.init:
+        if a.init not in NAMES:
+            raise SystemExit(f'unknown --init {a.init!r}; expected one of: {", ".join(NAMES)}')
+        configure(a.init)
 from torch.utils._python_dispatch import TorchDispatchMode
 from torch.utils._pytree import tree_map
 
@@ -103,6 +113,9 @@ original_step = torch.optim.Adam.step
 
 
 def init(opt, *args, **kwargs):
+    if a.init:
+        from particlegan.structured_init import freeze
+        freeze()
     kwargs.setdefault('foreach', False)
     kwargs.setdefault('fused', False)
     original_init(opt, *args, **kwargs)
@@ -189,7 +202,7 @@ config = json.loads(a.config.read_text())
 config['device'] = device
 audit = RandomAudit(a.cpu_random)
 started = time.perf_counter()
-record = dict(task=a.task, backend=a.backend, cpu_random=a.cpu_random,
+record = dict(task=a.task, backend=a.backend, cpu_random=a.cpu_random, init=a.init, seed_offset=a.seed_offset,
               init_only=a.init_only,
               initialization_fixture_sha256=(hashlib.sha256(a.initial_state.read_bytes()).hexdigest()
                                              if a.initial_state else None),
