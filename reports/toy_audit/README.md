@@ -1,5 +1,9 @@
 # Toy-test review on develop
 
+For current executable tests, use the [public-API variants](api_contract/README.md).
+Each variant declares a binary numerical gate and target/output goal GIF; the
+original review and evidence below remain historical inputs.
+
 This review ranks test definitions and explains their claims. It adds training
 visualizations and reproducible observation tools; it makes **no production
 config or trainer repairs**. Base: `4b16312e56328a679b92da69a287c0c9490259d9`.

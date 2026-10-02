@@ -1,0 +1,40 @@
+{
+  "scope": "Independent read-only original-byte/arithmetic/media binding review; no training/model rescoring",
+  "checks": [
+    {
+      "pr": 233,
+      "raw_input_count": 29,
+      "exporter_commit": "02215b50fae7189db3c132b72cfb0d7f93ee320f",
+      "original_learned_or_estimator_status": "NO_FROZEN_GATE",
+      "gifs": 2,
+      "frames": [
+        13,
+        13
+      ],
+      "raw_files_unchanged": true
+    },
+    {
+      "pr": 234,
+      "raw_input_count": 1,
+      "exporter_commit": "02215b50fae7189db3c132b72cfb0d7f93ee320f",
+      "original_learned_or_estimator_status": "FAIL",
+      "gifs": 1,
+      "frames": [
+        3
+      ],
+      "raw_files_unchanged": true
+    },
+    {
+      "pr": 235,
+      "raw_input_count": 5,
+      "exporter_commit": "02215b50fae7189db3c132b72cfb0d7f93ee320f",
+      "original_learned_or_estimator_status": "PASS",
+      "gifs": 1,
+      "frames": [
+        9
+      ],
+      "raw_files_unchanged": true
+    }
+  ],
+  "errors": []
+}

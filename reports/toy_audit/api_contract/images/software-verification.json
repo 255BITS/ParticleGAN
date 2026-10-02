@@ -1,0 +1,32 @@
+{
+  "version": "public-api-images-v1",
+  "base_commit": "664ce464e3add5c65d06c8b324c6f9892e644eec",
+  "command": "/tmp/pr155-e22-venv/bin/python -m pytest -q tests/test_toy_api_images.py",
+  "result": "212 passed in 4.33s",
+  "log": "/ml2/hypergan/toy-api-images-software-20261002.log",
+  "log_sha256": "d8ba81a9c4bb5043c0680ba53be9d9b64dca32ae3476f2e9970e9da4561b6641",
+  "source_sha256": {
+    "benchmarks/toy_audit/api_images.py": "68c2a8fb0eb4316cb0cebcba7c8fcc79e97512ccac7ed60fb337469369c25b4f",
+    "tests/test_toy_api_images.py": "962c815f5c2972cf0778765266d5419a57011d5265b77c5d90747b13a8ce4019",
+    "reports/toy_audit/catalog.json": "1064b4f399c6dde97ce5313b05e3589f7083bad21846fc0d62a311fd8078ff18",
+    "reports/toy_audit/media/media.json": "6a84af5992d632af518ee0432639ef32fd003025320394e468265e03af9be1b9",
+    "benchmarks/toy_audit/definition_quality.py": "42d835ab7a0937a6c3759dd719691c721663b7857cb990405253e90f7fbd4cc9"
+  },
+  "public_api_declarations_validated": 80,
+  "common_observation_validation_cases": [
+    "image-develop-img_bars4-residual_upsample16",
+    "image-pr63-conditional-transpose12",
+    "image-five-words-joint-ae"
+  ],
+  "maximum_software_prefix_updates": 2,
+  "full_budget_scientific_runs": 0,
+  "scientific_status": "NEW_VARIANT_UNMEASURED",
+  "historical_receipts_unchanged": true,
+  "controls": {
+    "computed": 330,
+    "distinct_scorer_groups": 38,
+    "retained_unique_controls": 158,
+    "all_expected_results_matched": true
+  },
+  "media_status": "Common runner owns supplemental source-bound actual-training GIFs; short runs remain incomplete for the full protocol"
+}
