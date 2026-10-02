@@ -283,7 +283,7 @@ def _pinned_row(group, records, queue_states):
             "next_action": "Publish the stopped cohort readout, or declare a new compatible revision before further qualification."}
 
 
-def board(root: Path, view_id: str) -> dict:
+def board(root: Path, view_id: str, *, include_bindings=False) -> dict:
     """Read-only view; current hardware cohorts and pinned observations stay separate."""
     from . import views
     root = Path(root)
@@ -359,7 +359,7 @@ def board(root: Path, view_id: str) -> dict:
                 qualified["blockers"] = [{"task_id": None, "status": "BLOCKED", "reasons": request["preflight_blockers"]},
                                          *qualified["blockers"]]
             lifecycle = _lifecycle(request, evidence_attempts, records, states)
-            current.append({"candidate_id": idea_id, "candidate_revision": request["candidate_revision"],
+            row = {"candidate_id": idea_id, "candidate_revision": request["candidate_revision"],
                             "evidence_scope": "current", "cohort": cohort,
                             "runtime_cohort": _runtime_cohort(request),
                             "source_digest": request.get("source", {}).get("digest"),
@@ -373,7 +373,11 @@ def board(root: Path, view_id: str) -> dict:
                             "claim_contract": request["candidate"].get("claim_contract"),
                             "preflight_blockers": request.get("preflight_blockers", []),
                             "next_action": "Publish an explanation, comparison, and next action." if lifecycle["pending_readout"]
-                                           else "Run the next eligible task within an explicit budget."})
+                                           else "Run the next eligible task within an explicit budget."}
+            if include_bindings:
+                from .technique_board import request_bindings
+                row["scientific_bindings"] = request_bindings(request)
+            current.append(row)
     current.sort(key=lambda row: (-row["qualified_tier"], row["candidate_id"], row.get("cohort", "")))
     historical = [_historical_row(record) for record in records
                   if record.get("evidence_scope") == "historical" and record.get("record_type") != "family_context"]

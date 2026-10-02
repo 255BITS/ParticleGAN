@@ -37,7 +37,7 @@
       "experiment/toy": 3,
       "experiment/trajectory": 2,
       "experiment/transition": 7,
-      "forge_engine": 35,
+      "forge_engine": 37,
       "lrfree/feature-cells-cb64-ra": 4058,
       "report/atlas-explanation": 7,
       "report/behavioral_baseline": 32,
@@ -98,7 +98,7 @@
       "candidate_patch": 25,
       "configuration": 807,
       "driver": 393,
-      "engine_support": 35,
+      "engine_support": 37,
       "evaluator_or_audit": 321,
       "evidence_artifact": 1574,
       "frozen_candidate_implementation": 15,
@@ -112,13 +112,13 @@
       "visualization": 19,
       "visualization_artifact": 301
     },
-    "files": 11106
+    "files": 11108
   },
   "coverage": {
-    "declared_count": 11106,
+    "declared_count": 11108,
     "missing": [],
     "stale": [],
-    "tracked_count": 11106,
+    "tracked_count": 11108,
     "unclassified": [],
     "valid": true
   },
@@ -795,7 +795,7 @@
     },
     {
       "family": "benchmark/toy100",
-      "git_blob": "bb8e7a6edab4a85c987390d3cbd4c49e53ca8f62",
+      "git_blob": "c0af5a53f12a89687169f9e8442c9fa33670edaf",
       "path": "benchmarks/toy100/schedule.py",
       "role": "support",
       "suggested_tiers": []
@@ -6601,7 +6601,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "6e020241528e884000fec0380b97e56a1ab13c54",
+      "git_blob": "8b366ad8c29549c273a0e83abaec6788c3251d44",
       "path": "experiments/forge/__main__.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -6636,7 +6636,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "28769f5b184adbdef41d6cf6ab47fce2f60ac22b",
+      "git_blob": "09d8c2c905b34d073bb8e3e6bf5e453be03edff3",
       "path": "experiments/forge/behavior_adapters.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -6713,7 +6713,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "44137d668818b2e6d26d18f2a1b8d60ff5306f64",
+      "git_blob": "2f1c0335a5739a9ca1a1d51e7a03b79b1e177060",
       "path": "experiments/forge/knowledge.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -6727,7 +6727,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "34e33fef6af975702c7583df33c3f644f960168e",
+      "git_blob": "a9b32f5d4234be2fdf33e751b997c229d879b1da",
       "path": "experiments/forge/mechanisms.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -6799,6 +6799,20 @@
       "family": "forge_engine",
       "git_blob": "bcdfca0d313dc463dfdc481a71e30685d0395959",
       "path": "experiments/forge/state.py",
+      "role": "engine_support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "forge_engine",
+      "git_blob": "b08a3624380a8d31736b40b3772971e56c2fd365",
+      "path": "experiments/forge/technique_board.py",
+      "role": "engine_support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "forge_engine",
+      "git_blob": "c3f36620bcbe0e997a68376efe2082c7bf834002",
+      "path": "experiments/forge/technique_inventory.py",
       "role": "engine_support",
       "suggested_tiers": []
     },

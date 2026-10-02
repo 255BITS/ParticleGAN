@@ -161,8 +161,48 @@ class Recipe:
     # routed_paired is a distinct conditional dense-bank adaptation, bound to
     # an explicit RoutedRows contract in the caller-owned policy API.
     row_policy: str = "independent"
+    # Explicit optimizer family: the default retains KA2/K3P interventions.
+    # adam uses native PyTorch Adam with only observer bookkeeping. Its fixed
+    # penalties and optional moment/coefficient cosine schedules are declared
+    # independently of any candidate name. Non-None endpoints interpolate from
+    # betas[1]/reg_coeff over anneal_end * total_steps completed updates, then
+    # hold. External execution limits do not change that declared horizon.
+    optimizer_family: str = "formulation"
+    eps: float = 1e-8
+    beta2_end: float | None = None
+    beta2_anneal_end: float = 0.2
+    reg_coeff_end: float | None = None
+    reg_coeff_anneal_end: float = 0.2
 
     def __post_init__(self):
+        if self.optimizer_family not in ("formulation", "adam"):
+            raise ValueError("optimizer_family must be formulation or adam")
+        if isinstance(self.eps, bool) or not math.isfinite(self.eps) or self.eps <= 0:
+            raise ValueError("eps must be finite and positive")
+        for name in ("beta2_anneal_end", "reg_coeff_anneal_end"):
+            value = getattr(self, name)
+            if isinstance(value, bool) or not math.isfinite(value) or not 0 < value <= 1:
+                raise ValueError(f"{name} must be in (0, 1]")
+        if self.beta2_end is not None and (
+                isinstance(self.beta2_end, bool) or not math.isfinite(self.beta2_end) or not 0 <= self.beta2_end < 1):
+            raise ValueError("beta2_end must be None or in [0, 1)")
+        if self.reg_coeff_end is not None and (
+                isinstance(self.reg_coeff_end, bool) or not math.isfinite(self.reg_coeff_end) or self.reg_coeff_end < 0):
+            raise ValueError("reg_coeff_end must be None or finite and nonnegative")
+        if self.optimizer_family == "adam":
+            if self.reg_arm not in ("a_r1r2", "b_cap"):
+                raise ValueError("plain Adam requires an explicit fixed R1/R2 or BCap reg_arm")
+            if (self.d_guard_ratio != 0 or self.reg_anchor_weight != 0
+                    or self.latent_damping_max_rate != 0 or self.direct_particle_gain):
+                raise ValueError("plain Adam requires disabled guard, anchor, latent damping and direct particle gain")
+            if self.continuous_policy is not None:
+                raise ValueError("plain Adam does not implement a continuous update policy")
+        if self.beta2_end is not None and self.optimizer_family != "adam":
+            raise ValueError("scheduled beta2 requires optimizer_family='adam'")
+        if self.reg_coeff_end is not None and self.reg_arm not in ("a_r1r2", "b_cap"):
+            raise ValueError("scheduled reg_coeff requires a fixed R1/R2 or BCap reg_arm")
+        if (self.beta2_end is not None or self.reg_coeff_end is not None) and self.total_steps is None:
+            raise ValueError("recipe cosine schedules require a declared total_steps horizon")
         if self.critic_formulation not in ("ka2", "k3p"):
             raise ValueError("critic_formulation must be ka2 or k3p")
         if self.reg_arm is not None:
@@ -348,6 +388,18 @@ class Recipe:
 
     def to_dict(self):
         result = asdict(self)
+        if self.optimizer_family == "formulation":
+            result.pop("optimizer_family")
+        if self.eps == 1e-8:
+            result.pop("eps")
+        if self.beta2_end is None:
+            result.pop("beta2_end")
+            if self.beta2_anneal_end == 0.2:
+                result.pop("beta2_anneal_end")
+        if self.reg_coeff_end is None:
+            result.pop("reg_coeff_end")
+            if self.reg_coeff_anneal_end == 0.2:
+                result.pop("reg_coeff_anneal_end")
         if self.critic_formulation == "ka2":
             result.pop("critic_formulation")
         if self.reg_arm is None:
@@ -470,9 +522,14 @@ class Recipe:
         requires it unless ``reg_anchor_weight == 0``. Checkpoint with ``optimizer.state_dict()``: it holds the
         EMA critic and all counters. ``adam_kwargs`` override the recipe's
         ``lr * d_lr_mult``, ``betas`` and ``amsgrad`` or add options such as ``fused``.
+        ``optimizer_family='adam'`` returns native Adam with disabled intervention
+        metadata and an observation-only checkpointed critic step counter.
         """
-        options = {"lr": self.lr * self.d_lr_mult, "betas": self.betas, "amsgrad": self.amsgrad,
+        options = {"lr": self.lr * self.d_lr_mult, "betas": self.betas, "amsgrad": self.amsgrad, "eps": self.eps,
                    **adam_kwargs}
+        if self.optimizer_family == "adam":
+            from .recipe_schedules import make_plain_adam
+            return make_plain_adam(self, [p for p in critic.parameters() if p.requires_grad], critic=critic, **options)
         if self.effective_critic_formulation == "k3p":
             from .k3p import K3PCriticAdam
             return K3PCriticAdam([p for p in critic.parameters() if p.requires_grad], critic=critic,
@@ -491,9 +548,14 @@ class Recipe:
 
         With neither, ``step()`` is exactly ``Adam.step()``. ``adam_kwargs``
         override the recipe's ``lr``, ``betas`` and ``amsgrad`` or add Adam options.
+        Plain ``optimizer_family='adam'`` returns native Adam without A2 or
+        direct-particle response, including when role annotations are supplied.
         """
         from .k3p import K3PGeneratorAdam
-        options = {"lr": self.lr, "betas": self.betas, "amsgrad": self.amsgrad, **adam_kwargs}
+        options = {"lr": self.lr, "betas": self.betas, "amsgrad": self.amsgrad, "eps": self.eps, **adam_kwargs}
+        if self.optimizer_family == "adam":
+            from .recipe_schedules import make_plain_adam
+            return make_plain_adam(self, params, **options)
         return K3PGeneratorAdam(params, latent_table=latent_table, direct_particles=direct_particles,
                                 latent_max_rate=self.latent_damping_max_rate,
                                 direct_betas=self.direct_particle_betas,
@@ -742,6 +804,9 @@ def scale_learning_rates(step, recipe, optimizers, base_rates, prior=None, *,
     as GANTrainer before applying rates.
     """
     network, prior_scale = learning_rate_scales(step, recipe, network_transition=network_transition, controller=controller)
+    optimizers = tuple(optimizers)
+    from .recipe_schedules import apply_training_schedules
+    apply_training_schedules(step, recipe, optimizers)
     prior_ids = set() if prior is None else {id(p) for p in prior.parameters()}
     if recipe.continuous_policy in ("dv7", "dv8", "dv9", "dv10", "dv11", "dv12"):
         from torch import Tensor, nn

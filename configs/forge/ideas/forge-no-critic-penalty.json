@@ -2,7 +2,8 @@
   "api_changes": [],
   "api_version": "forge-api-v1",
   "changed_factors": [
-    "Disable the public critic gradient penalty by setting reg_coeff=0; preserve the other K3P components, prior, initialization and screening RNG streams."
+    "Disable the public critic gradient penalty by setting reg_coeff=0; preserve the other K3P components, prior, initialization and screening RNG streams.",
+    "Pin the K3P formulation explicitly: parent records provenance, not recipe inheritance; the current public default is KA2."
   ],
   "claim_contract": {
     "sampling_law": "task_declared",
@@ -24,7 +25,9 @@
     "reports/forge/EXPERIMENT_MEMORY.md"
   ],
   "recipe_overrides": {
-    "reg_coeff": 0.0
+    "reg_coeff": 0.0,
+    "name": "k3p",
+    "critic_formulation": "k3p"
   },
   "requires_capabilities": [
     "learned_locations",

@@ -22,6 +22,7 @@ from torch import nn
 
 from particlegan import init
 from particlegan.recipes import learning_rate_scales
+from particlegan.recipe_schedules import apply_optimizer_schedule
 from particlegan.training import input_noise_std, output_noise_std
 from benchmarks.transfer_suite.legacy_noise_adapters import NoisePolicy, _InputAdapter, _OutputAdapter
 
@@ -56,6 +57,15 @@ def behavior_preflight(task: dict, candidate: dict) -> list[str]:
 
 def _base(module):
     return module.model if isinstance(module, (_InputAdapter, _OutputAdapter)) else module
+
+
+def _observe_range(receipt, value):
+    """Retain compact actual schedule observations, without a per-update stream."""
+    value = float(value)
+    if not receipt:
+        receipt.update(observations=0, first=value, minimum=value, maximum=value)
+    receipt.update(observations=receipt["observations"] + 1, last=value,
+                   minimum=min(receipt["minimum"], value), maximum=max(receipt["maximum"], value))
 
 
 class _OptimizerBundle:
@@ -93,10 +103,12 @@ class _PenaltyBinding:
         self.norm, self.lazy_k, self.target_anneal = "rms", recipe.reg_every, "none"
         self.calls = 0
         self.audit = audit
+        self.coefficient_observations = {}
 
     def penalty(self, critic, real, fake, step=None, **kwargs):
         self.calls += 1
         value = self.bound(critic, real, fake)
+        _observe_range(self.coefficient_observations, self.bound.regularizer.coeff)
         self.audit.observe_penalty(self.bound.last_stats)
         return value, self.bound.last_stats
 
@@ -188,6 +200,7 @@ class BehaviorComponents:
         self.models, self.optimizers, self.base_rates, self.role_parameters = {}, {}, {}, {}
         self.rng_audits, self.observations = [], []
         self.penalty = None
+        self.schedule_observations = {}
         self.noise = _NamedNoise(self)
         self.bound = False
 
@@ -271,9 +284,15 @@ class BehaviorComponents:
         return public_g, public_d, self.recipe.make_loss(), self.penalty
 
     def schedule_optimizer(self, optimizer, completed_updates):
+        apply_optimizer_schedule(completed_updates, self.recipe, optimizer)
         network, prior = learning_rate_scales(completed_updates, self.recipe)
         for group, base in zip(optimizer.param_groups, self.base_rates[id(optimizer)]):
             group["lr"] = base * (prior if group.get("forge_role") == "prior" else network)
+            role = next(name for name, owned in self.optimizers.items() if owned is optimizer)
+            role = "prior" if group.get("forge_role") == "prior" else role
+            observed = self.schedule_observations.setdefault(role, {"lr": {}, "beta2": {}})
+            _observe_range(observed["lr"], group["lr"])
+            _observe_range(observed["beta2"], group["betas"][1])
 
     def checkpoint(self, step, measure):
         budget = self.task["execution"]["steps"]
@@ -318,6 +337,11 @@ class BehaviorComponents:
                     public_optimizers=[type(o).__name__ for opt in self.optimizers.values()
                                        for o in (opt.optimizers if isinstance(opt, _OptimizerBundle) else [opt])],
                     noise=self.noise.receipt(), rng=self.context.streams.manifest(), rng_audits=self.rng_audits,
+                    training_schedules={"clock": "completed host updates; penalty observes completed critic updates",
+                                        "horizon": self.recipe.total_steps,
+                                        "optimizer_groups": deepcopy(self.schedule_observations),
+                                        "penalty_coefficient": deepcopy(self.penalty.coefficient_observations)
+                                        if self.penalty is not None else {}},
                     checkpoint_scope="component states; these hosts do not support continuation",
                     mechanism_applicability={"a2": ("disabled by latent_damping_max_rate=0" if self.recipe.latent_damping_max_rate == 0 else
                                                "installed on prior tables; activation is recorded in mechanism_audit" if any(n.startswith("prior") for n in self.models)
