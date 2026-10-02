@@ -466,3 +466,161 @@ def test_nonfinite_failed_observation_remains_visible_as_failure_evidence(tmp_pa
                                                    bytes=(raw / "observations.npz").stat().st_size)
     save(raw, receipt)
     assert api_publish.verify_run(raw)["observations"][0]["passed"] is False
+
+
+def failure_media_control(tmp_path, name="api-critic-lag-current"):
+    """Reuse the frozen source/protocol software control; no actual training."""
+    from benchmarks.toy_audit import api_reframe
+    from test_toy_api_reframe import failed_archive
+    raw, receipt = failed_archive(tmp_path, name)
+    receipt, identities, steps, display = api_reframe.verify_failure_view(raw)
+    output = tmp_path / "failure-reviews" / name
+    output.mkdir(parents=True)
+    images = [Image.new("RGB", (8, 8), (index * 23 % 255, index * 37 % 255, 120))
+              for index in range(len(steps))]
+    images[0].save(output / "failure-goal.gif", save_all=True, append_images=images[1:],
+                   duration=100, optimize=False)
+    available = {name: identity for name, identity in identities.items() if name != "receipt.json"}
+    review = {"schema": "particlegan_api_toy_failure_media_review_v1",
+        "case_id": name, "raw_receipt": str((raw / "receipt.json").resolve()),
+        "raw_receipt_sha256": identities["receipt.json"]["sha256"],
+        "raw_artifacts": deepcopy(receipt["artifacts"]), "available_raw_artifacts": available,
+        "artifact_attestations": {name: "original_receipt" if name in receipt["artifacts"] else "review_time_only"
+                                  for name in available},
+        "training_source": deepcopy(receipt["source"]), "recipe": deepcopy(receipt["recipe"]),
+        "original_execution_status": "ERROR", "verdict": "FAIL",
+        "original_failed_bounds": deepcopy(receipt["failed_bounds"]),
+        "original_numeric_flags": {key: receipt.get(key) for key in
+                                   ("metric_passed", "sustained_metric_passed", "default_protocol_complete")},
+        "completed_updates": receipt["completed_updates"], "planned_protocol": deepcopy(receipt["protocol"]),
+        "original_media_steps": deepcopy(receipt["protocol"]["media_steps"]), "media_steps": steps,
+        "terminal_frame_added": steps[-1] not in receipt["protocol"]["media_steps"],
+        "final_metrics": deepcopy(receipt["observations"][-1]["metrics"]),
+        "observations": deepcopy(receipt["observations"]), "displayed_verdict": display,
+        "reviewed_gif": {"file": "failure-goal.gif", "sha256": api_run.file_hash(output / "failure-goal.gif"),
+                         "bytes": (output / "failure-goal.gif").stat().st_size, "frames": len(steps)},
+        "renderer_source": {"commit": "failure-renderer-software-control",
+                            "files_sha256": {f"benchmarks/toy_audit/{key}.py": "a" * 64
+                                             for key in ("api_run", "api_reframe", "api_contract")}},
+        "annotations": {"default_verdict_displayed": display, "goal_annotations": [],
+                        "numeric_observations_changed": False},
+        "qualification_upgrade": False, "training_or_rescoring": False, "raw_files_unchanged": True}
+    api_run.write_json(output / "failure-review.json", review)
+    return raw, receipt, output, review
+
+
+@pytest.mark.parametrize("name", ["api-critic-lag-current", "api-critic-lag-even_critic", "api-critic-lag-d_antithetic",
+                                  "api-ring8-hold", "api-ring8-shift"])
+def test_five_explicit_failure_views_bind_actual_prefix_without_qualifying_error(tmp_path, name):
+    raw, receipt, output, review = failure_media_control(tmp_path, name)
+    before = {path.name: path.read_bytes() for path in raw.iterdir()}
+    assert api_publish.verify_failure_media_review(raw, output) == review
+    assert review["media_steps"][-1] == receipt["completed_updates"]
+    assert review["qualification_upgrade"] is False and review["verdict"] == "FAIL"
+    with pytest.raises(ValueError, match="unsuccessful API execution"):
+        api_publish.verify_run(raw)
+    assert before == {path.name: path.read_bytes() for path in raw.iterdir()}
+
+
+@pytest.mark.parametrize("field,value", [
+    ("schema", "particlegan_api_toy_media_review_v1"), ("case_id", "different-case"),
+    ("raw_receipt", "receipt.json"), ("raw_receipt_sha256", "0" * 64),
+    ("raw_artifacts", {"invented": {}}), ("available_raw_artifacts", {}),
+    ("artifact_attestations", {"observations.npz": "original_receipt"}),
+    ("training_source", {"commit": "other"}), ("recipe", {}),
+    ("original_execution_status", "COMPLETE"), ("verdict", "PASS"), ("original_failed_bounds", []),
+    ("original_numeric_flags", {"metric_passed": 1, "sustained_metric_passed": True, "default_protocol_complete": True}),
+    ("completed_updates", 801), ("planned_protocol", {}), ("original_media_steps", [0, 800]),
+    ("media_steps", [0, 800]), ("terminal_frame_added", True), ("final_metrics", {"normalized_rmse": 0}),
+    ("observations", []), ("displayed_verdict", "PASS"), ("qualification_upgrade", True),
+    ("qualification_upgrade", 0), ("training_or_rescoring", True), ("raw_files_unchanged", False),
+])
+def test_failure_review_cannot_change_evidence_attestations_prefix_or_qualification(tmp_path, field, value):
+    raw, _, output, review = failure_media_control(tmp_path)
+    review[field] = value
+    api_run.write_json(output / "failure-review.json", review)
+    with pytest.raises(ValueError):
+        api_publish.verify_failure_media_review(raw, output)
+
+
+@pytest.mark.parametrize("change", ["renderer", "annotation", "file", "bytes", "hash", "frames", "decoded_frames"])
+def test_failure_review_requires_bound_renderer_and_actual_decoded_media(tmp_path, change):
+    raw, _, output, review = failure_media_control(tmp_path)
+    if change == "renderer":
+        review["renderer_source"]["files_sha256"] = {}
+    elif change == "annotation":
+        review["annotations"]["default_verdict_displayed"] = "PASS"
+    elif change == "file":
+        review["reviewed_gif"]["file"] = "../goal.gif"
+    elif change == "bytes":
+        review["reviewed_gif"]["bytes"] = 1
+    elif change == "hash":
+        review["reviewed_gif"]["sha256"] = "0" * 64
+    elif change == "frames":
+        review["reviewed_gif"]["frames"] -= 1
+    else:
+        Image.new("RGB", (8, 8), "black").save(output / "failure-goal.gif")
+        review["reviewed_gif"].update(sha256=api_run.file_hash(output / "failure-goal.gif"),
+                                     bytes=(output / "failure-goal.gif").stat().st_size)
+    api_run.write_json(output / "failure-review.json", review)
+    with pytest.raises(ValueError):
+        api_publish.verify_failure_media_review(raw, output)
+
+
+@pytest.mark.parametrize("name", ["api-critic-lag-current", "api-ring8-shift"])
+def test_explicit_failure_publication_has_separate_receipts_and_zero_qualification(tmp_path, monkeypatch, name):
+    raw, receipt, output, review = failure_media_control(tmp_path, name)
+    before = {path.name: path.read_bytes() for path in raw.iterdir()}
+    api_run.write_json(raw.parent / "summary.json", {"cases": [{"id": name}]})
+    monkeypatch.setattr(api_run, "inventory", lambda cases: {"coverage": {"missing": [], "api_variants": len(cases)}})
+    publication = tmp_path / "publication"
+    ledger = api_publish.publish([raw.parent], publication, failure_media_review=output.parent)
+    complete = api_publish.read(publication / "runs.json")
+    failed = api_publish.read(publication / "failed-runs.json")
+    assert not complete["cases"] and complete["api_execution_complete"] == 0
+    assert complete["default_protocol_complete"] == complete["default_test_passes"] == 0
+    assert failed["actual_goal_views"] == 1 and failed["qualification_upgrades"] == 0
+    assert ledger["published_actual_api_runs"] == 0 and ledger["published_failed_api_attempts"] == 1
+    assert ledger["published_actual_goal_views"] == 1
+    row = failed["cases"][0]
+    assert row["original_execution_status"] == "ERROR" and row["verdict"] == "FAIL"
+    assert row["qualified_api_execution_complete"] is False
+    assert row["qualified_default_protocol_complete"] is row["qualified_default_pass"] is False
+    assert row["original_numeric_flags"] == review["original_numeric_flags"]
+    assert row["raw_artifacts"] == receipt["artifacts"]
+    assert row["available_raw_artifacts"] == review["available_raw_artifacts"]
+    assert "observations" not in row and row["observation_count"] == len(receipt["observations"])
+    assert (publication / row["gif"]).read_bytes() == (output / "failure-goal.gif").read_bytes()
+    assert "failed-runs.json" in (publication / "GALLERY.md").read_text()
+    assert before == {path.name: path.read_bytes() for path in raw.iterdir()}
+
+
+def test_error_cannot_use_default_publication_even_with_a_valid_failure_review(tmp_path):
+    raw, _, output, _ = failure_media_control(tmp_path)
+    api_run.write_json(raw.parent / "summary.json", {"cases": [{"id": raw.name}]})
+    with pytest.raises(ValueError, match="unsuccessful API execution"):
+        api_publish.publish([raw.parent], tmp_path / "publication", media_review=output.parent)
+
+
+def test_failure_publication_cannot_accept_an_unknown_error_or_changed_frozen_recipe(tmp_path):
+    raw, receipt, output, _ = failure_media_control(tmp_path)
+    receipt["recipe"]["lr"] *= 2
+    save(raw, receipt)
+    with pytest.raises(ValueError, match="exact originally resolved recipe"):
+        api_publish.verify_failure_media_review(raw, output)
+    receipt["case"]["id"] = "unregistered-error"
+    save(raw, receipt)
+    with pytest.raises(ValueError, match="five named frozen attempts"):
+        api_publish.verify_failure_media_review(raw, output)
+
+
+def test_failure_review_cli_option_is_explicit_and_separate(tmp_path, monkeypatch):
+    calls = []
+    def fake_publish(runs, output, *, media_review=None, failure_media_review=None):
+        calls.append((media_review, failure_media_review))
+        return {"coverage": {"api_variants": 1, "missing": []}, "missing_api_media": []}
+    monkeypatch.setattr(api_publish, "publish", fake_publish)
+    assert api_publish.main(["--runs", str(tmp_path / "raw"), "--output", str(tmp_path / "published"),
+                             "--media-review", str(tmp_path / "reviewed"),
+                             "--failure-media-review", str(tmp_path / "failures")]) == 0
+    assert calls == [(tmp_path / "reviewed", tmp_path / "failures")]

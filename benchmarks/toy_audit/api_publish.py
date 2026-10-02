@@ -145,6 +145,30 @@ def verify_run(path):
     return receipt
 
 
+def _verify_renderer_annotations(review, receipt, media_steps, display):
+    renderer = review.get("renderer_source")
+    files = renderer.get("files_sha256") if isinstance(renderer, dict) else None
+    required_files = {"benchmarks/toy_audit/api_run.py", "benchmarks/toy_audit/api_reframe.py",
+                      "benchmarks/toy_audit/api_contract.py"}
+    if (not isinstance(renderer, dict) or not isinstance(renderer.get("commit"), str)
+            or not renderer["commit"] or not isinstance(files, dict) or set(files) != required_files
+            or any(not isinstance(value, str) or len(value) != 64
+                   or any(char not in "0123456789abcdef" for char in value) for value in files.values())):
+        raise ValueError("media review must identify its separate renderer source")
+    annotations = review.get("annotations")
+    if (not isinstance(annotations, dict)
+            or annotations.get("default_verdict_displayed") != display
+            or annotations.get("numeric_observations_changed") is not False
+            or not isinstance(annotations.get("goal_annotations"), list)):
+        raise ValueError("media review annotations change the displayed grade or observations")
+    observations = {record["step"]: record for record in receipt["observations"]}
+    for annotation in annotations["goal_annotations"]:
+        if (not isinstance(annotation, dict) or type(annotation.get("step")) is not int
+                or annotation["step"] not in media_steps or type(annotation.get("view")) is not int
+                or not 0 <= annotation["view"] < len(observations[annotation["step"]]["views"])):
+            raise ValueError("media review annotation references an uncaptured view")
+
+
 def _verify_media_review(path, receipt, review_path):
     """Bind a separate render to verified raw evidence; never replace its grade."""
     path, review_path = Path(path), Path(review_path)
@@ -176,27 +200,7 @@ def _verify_media_review(path, receipt, review_path):
     if (not isinstance(media_steps, list) or any(type(step) is not int for step in media_steps)
             or media_steps != receipt["protocol"]["media_steps"]):
         raise ValueError("media review changes the original media steps")
-    renderer = review.get("renderer_source")
-    files = renderer.get("files_sha256") if isinstance(renderer, dict) else None
-    required_files = {"benchmarks/toy_audit/api_run.py", "benchmarks/toy_audit/api_reframe.py",
-                      "benchmarks/toy_audit/api_contract.py"}
-    if (not isinstance(renderer, dict) or not isinstance(renderer.get("commit"), str)
-            or not renderer["commit"] or not isinstance(files, dict) or set(files) != required_files
-            or any(not isinstance(value, str) or len(value) != 64
-                   or any(char not in "0123456789abcdef" for char in value) for value in files.values())):
-        raise ValueError("media review must identify its separate renderer source")
-    annotations = review.get("annotations")
-    if (not isinstance(annotations, dict)
-            or annotations.get("default_verdict_displayed") != receipt["verdict"]
-            or annotations.get("numeric_observations_changed") is not False
-            or not isinstance(annotations.get("goal_annotations"), list)):
-        raise ValueError("media review annotations change the displayed grade or observations")
-    observations = {record["step"]: record for record in receipt["observations"]}
-    for annotation in annotations["goal_annotations"]:
-        if (not isinstance(annotation, dict) or type(annotation.get("step")) is not int
-                or annotation["step"] not in media_steps or type(annotation.get("view")) is not int
-                or not 0 <= annotation["view"] < len(observations[annotation["step"]]["views"])):
-            raise ValueError("media review annotation references an uncaptured view")
+    _verify_renderer_annotations(review, receipt, media_steps, receipt["verdict"])
     gif = review.get("reviewed_gif")
     if not isinstance(gif, dict) or gif.get("file") != "reviewed-goal.gif":
         raise ValueError("media review must name its separate goal GIF")
@@ -218,12 +222,77 @@ def verify_media_review(path, review_path):
     return _verify_media_review(path, verify_run(path), review_path)
 
 
-def publish(archives, output, *, media_review=None):
+def _verify_failure_media_review(path, review_path):
+    # api_reframe uses the strict normal verifier; defer this import to avoid
+    # a module-initialization cycle while retaining its independent source gate.
+    from . import api_reframe
+    path, review_path = Path(path), Path(review_path)
+    receipt, available, steps, display = api_reframe.verify_failure_view(path)
+    review = read(review_path / "failure-review.json")
+    if review.get("schema") != "particlegan_api_toy_failure_media_review_v1":
+        raise ValueError("unsupported failure media review schema")
+    raw_path = review.get("raw_receipt")
+    if (not isinstance(raw_path, str) or not Path(raw_path).is_absolute()
+            or Path(raw_path).resolve() != (path / "receipt.json").resolve()):
+        raise ValueError("failure media review references a different raw receipt")
+    artifacts = {name: identity for name, identity in available.items() if name != "receipt.json"}
+    expected = {"case_id": receipt["case"]["id"],
+                "raw_receipt_sha256": available["receipt.json"]["sha256"],
+                "raw_artifacts": receipt["artifacts"], "available_raw_artifacts": artifacts,
+                "artifact_attestations": {name: "original_receipt" if name in receipt["artifacts"] else "review_time_only"
+                                          for name in artifacts},
+                "training_source": receipt["source"], "recipe": receipt["recipe"],
+                "original_execution_status": "ERROR", "verdict": "FAIL",
+                "original_failed_bounds": receipt["failed_bounds"],
+                "original_numeric_flags": {key: receipt.get(key) for key in
+                                           ("metric_passed", "sustained_metric_passed", "default_protocol_complete")},
+                "completed_updates": receipt["completed_updates"], "planned_protocol": receipt["protocol"],
+                "original_media_steps": receipt["protocol"]["media_steps"], "media_steps": steps,
+                "terminal_frame_added": steps[-1] not in receipt["protocol"]["media_steps"],
+                "final_metrics": receipt["observations"][-1]["metrics"],
+                "observations": receipt["observations"], "displayed_verdict": display,
+                "qualification_upgrade": False, "training_or_rescoring": False, "raw_files_unchanged": True}
+    # Canonical JSON equality binds types too: True must not become 1 and an
+    # original missing numeric flag must remain null rather than an invented PASS.
+    for key, value in expected.items():
+        if (key not in review or json.dumps(review[key], sort_keys=True, allow_nan=False)
+                != json.dumps(value, sort_keys=True, allow_nan=False)):
+            raise ValueError(f"failure media review {key} differs from retained evidence")
+    _verify_renderer_annotations(review, receipt, steps, display)
+    gif = review.get("reviewed_gif")
+    if not isinstance(gif, dict) or gif.get("file") != "failure-goal.gif":
+        raise ValueError("failure review must name its separate goal GIF")
+    if _integer(gif.get("frames"), "failure GIF frames", minimum=2) != len(steps):
+        raise ValueError("failure GIF count differs from captured media steps")
+    artifact = review_path / "failure-goal.gif"
+    if (artifact.stat().st_size != _integer(gif.get("bytes"), "failure GIF bytes")
+            or api_run.file_hash(artifact) != gif.get("sha256")):
+        raise ValueError("failure GIF identity mismatch")
+    with Image.open(artifact) as decoded:
+        if decoded.n_frames != len(steps):
+            raise ValueError("failure GIF lost actual captured states")
+    return receipt, review
+
+
+def verify_failure_media_review(path, review_path):
+    """Verify one of five frozen ERROR supplements without granting completion."""
+    return _verify_failure_media_review(path, review_path)[1]
+
+
+def _copy_media(source, target, identity):
+    if target.exists() and api_run.file_hash(target) != identity["sha256"]:
+        raise ValueError(f"refusing to replace earlier media for {target.stem}")
+    if not target.exists():
+        shutil.copyfile(source, target)
+
+
+def publish(archives, output, *, media_review=None, failure_media_review=None):
     output = Path(output)
     media = output / "media"
     media.mkdir(parents=True, exist_ok=True)
     cases = api_contract.discover()
     rows, seen, manifests, renderer_manifests = [], set(), {}, {}
+    failed_rows, failed_manifests, failed_renderers = [], {}, {}
     for archive in archives:
         archive = Path(archive)
         for summary in read(archive / "summary.json")["cases"]:
@@ -232,6 +301,44 @@ def publish(archives, output, *, media_review=None):
                 raise ValueError(f"ambiguous repeated case receipt: {name}")
             seen.add(name)
             receipt_path = archive / name / "receipt.json"
+            raw = read(receipt_path)
+            if raw.get("status") == "ERROR" and failure_media_review is not None:
+                failure_path = Path(failure_media_review) / name
+                receipt, review = _verify_failure_media_review(receipt_path.parent, failure_path)
+                definition = api_run.json_value(cases[name])
+                if receipt["case"] != definition:
+                    raise ValueError(f"{name}: failed definition differs from registered variant")
+                source_key = hashlib.sha256(json.dumps(receipt["source"], sort_keys=True).encode()).hexdigest()
+                renderer_key = hashlib.sha256(json.dumps(review["renderer_source"], sort_keys=True).encode()).hexdigest()
+                failed_manifests[source_key] = receipt["source"]
+                failed_renderers[renderer_key] = review["renderer_source"]
+                target = media / f"{name}-failure.gif"
+                _copy_media(failure_path / "failure-goal.gif", target, review["reviewed_gif"])
+                failed_rows.append({"id": name, "legacy_ids": definition["legacy_ids"],
+                    "goal": definition["goal"], "scope": definition["scope"],
+                    "sampling": definition["sampling"], "thresholds": definition["thresholds"],
+                    "api_components": receipt["api_components"], "recipe": receipt["recipe"],
+                    "source_identity": source_key, "runtime": receipt["runtime"], "seed": receipt["seed"],
+                    "original_execution_status": "ERROR", "verdict": "FAIL", "passed": False,
+                    "qualification_upgrade": False, "qualified_api_execution_complete": False,
+                    "qualified_default_protocol_complete": False, "qualified_default_pass": False,
+                    "original_failed_bounds": receipt["failed_bounds"],
+                    "original_numeric_flags": review["original_numeric_flags"],
+                    "completed_updates": receipt["completed_updates"], "planned_protocol": receipt["protocol"],
+                    "observation_count": len(receipt["observations"]),
+                    "final_observed_metric_passed": receipt["observations"][-1]["passed"],
+                    "final_metrics": review["final_metrics"], "displayed_verdict": review["displayed_verdict"],
+                    "original_media_steps": review["original_media_steps"], "media_steps": review["media_steps"],
+                    "terminal_frame_added": review["terminal_frame_added"],
+                    "gif": f"media/{target.name}", "gif_sha256": review["reviewed_gif"]["sha256"],
+                    "frames": review["reviewed_gif"]["frames"],
+                    "raw_receipt": str(receipt_path), "raw_receipt_sha256": review["raw_receipt_sha256"],
+                    "raw_artifacts": review["raw_artifacts"], "available_raw_artifacts": review["available_raw_artifacts"],
+                    "artifact_attestations": review["artifact_attestations"],
+                    "media_review": {"raw_sidecar": str(failure_path / "failure-review.json"),
+                        "raw_sidecar_sha256": api_run.file_hash(failure_path / "failure-review.json"),
+                        "renderer_source_identity": renderer_key, "annotations": review["annotations"]}})
+                continue
             receipt = verify_run(receipt_path.parent)
             review_path = Path(media_review) / name if media_review is not None else None
             review = (_verify_media_review(receipt_path.parent, receipt, review_path)
@@ -257,10 +364,7 @@ def publish(archives, output, *, media_review=None):
                                     "training_source_commit": review["training_source_commit"],
                                     "annotations": review["annotations"]}
             target = media / f"{name}.gif"
-            if target.exists() and api_run.file_hash(target) != gif_identity["sha256"]:
-                raise ValueError(f"refusing to replace earlier media for {name}")
-            if not target.exists():
-                shutil.copyfile(gif_source, target)
+            _copy_media(gif_source, target, gif_identity)
             final = receipt["observations"][-1]
             rows.append({"id": name, "legacy_ids": definition["legacy_ids"],
                          "goal": definition["goal"], "scope": definition["scope"],
@@ -280,8 +384,14 @@ def publish(archives, output, *, media_review=None):
             if media_provenance is not None:
                 rows[-1]["media_review"] = media_provenance
     rows.sort(key=lambda row: row["id"])
+    failed_rows.sort(key=lambda row: row["id"])
     ledger = api_run.inventory(cases)
     ledger["published_actual_api_runs"] = len(rows)
+    ledger["published_failed_api_attempts"] = len(failed_rows)
+    ledger["published_actual_goal_views"] = len(rows) + len(failed_rows)
+    ledger["api_execution_complete"] = len(rows)
+    ledger["default_protocol_complete"] = sum(row["default_protocol_complete"] for row in rows)
+    ledger["default_test_passes"] = sum(row["verdict"] == "PASS" for row in rows)
     ledger["missing_api_media"] = sorted(set(cases) - seen)
     api_run.write_json(output / "cases.json", ledger)
     api_run.write_json(output / "runs.json", {
@@ -294,12 +404,22 @@ def publish(archives, output, *, media_review=None):
         "default_protocol_complete": sum(row["default_protocol_complete"] for row in rows),
         "default_test_passes": sum(row["verdict"] == "PASS" for row in rows),
         "instantaneous_metric_passes": sum(row["metric_passed"] for row in rows)})
+    if failure_media_review is not None:
+        api_run.write_json(output / "failed-runs.json", {
+            "schema": "particlegan_api_toy_failure_media_v1", "cases": failed_rows,
+            "source_identities": failed_manifests, "media_renderer_source_identities": failed_renderers,
+            "training_or_rescoring_by_publication": False, "historical_receipts_changed": False,
+            "api_execution_complete": 0, "default_protocol_complete": 0, "default_test_passes": 0,
+            "qualification_upgrades": 0, "actual_goal_views": len(failed_rows)})
     lines = ["# API toy goal gallery", "",
              "These GIFs compare the declared target/behavior with actual public-API outputs.",
              "Each frame is a retained observation; the update, instantaneous metric and budget",
              "are visible. Short runs demonstrate executable tests and goal views; their default",
              "training-budget verdict remains FAIL. Historical trained evidence is unchanged.", "",
-             f"Registered variants: **{len(cases)}**. Verified actual-state GIFs: **{len(rows)}**.",
+             f"Registered variants: **{len(cases)}**. Verified actual-state GIFs: **{len(rows) + len(failed_rows)}**.",
+             f"Completed executions: **{len(rows)}**; failed-attempt views: **{len(failed_rows)}**. "
+             f"Completed default protocols: **{ledger['default_protocol_complete']}**; "
+             f"default passes: **{ledger['default_test_passes']}**.",
              f"Original questions without a runnable API variant: **{len(ledger['coverage']['missing'])}**.", "",
              "[Executable definitions and exact gates](cases.json) · [Compact run receipts](runs.json)", "",
              "| API variant / goal GIF | Question | Executed / default updates | Final instantaneous metric | Default-budget test |",
@@ -312,6 +432,16 @@ def publish(archives, output, *, media_review=None):
         instant = "PASS" if row["metric_passed"] else "FAIL"
         lines.append(f"| [{row['id']}]({row['gif']}) | {goal} | {row['completed_updates']} / "
                      f"{cases[row['id']]['default_steps']} | {instant} | {row['verdict']} |")
+    if failed_rows:
+        lines.extend(["", "These [failed-attempt views](failed-runs.json) retain the original ERROR/FAIL.",
+                      "They illustrate captured training states and grant no execution completion or default pass.",
+                      "A numeric export-error PASS remains separate from qualification; failed prerequisites leave continuation unattempted.", "",
+                      "| Failed API variant / goal GIF | Question | Captured / planned updates | Original result |",
+                      "|---|---|---:|---|"])
+        for row in failed_rows:
+            goal = row["goal"].replace("|", "\\|").replace("\n", " ")
+            lines.append(f"| [{row['id']}]({row['gif']}) | {goal} | {row['completed_updates']} / "
+                         f"{row['planned_protocol']['updates']} | ERROR / {row['displayed_verdict']} |")
     (output / "GALLERY.md").write_text("\n".join(lines) + "\n")
     return ledger
 
@@ -322,8 +452,13 @@ def main(argv=None):
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--media-review", type=Path,
                         help="separate reviewed-render archive; original execution and grades remain required")
+    parser.add_argument("--failure-media-review", type=Path,
+                        help="explicit unqualified views for the five named frozen ERROR/FAIL attempts")
     args = parser.parse_args(argv)
-    ledger = publish(args.runs, args.output, media_review=args.media_review)
+    options = {"media_review": args.media_review}
+    if args.failure_media_review is not None:
+        options["failure_media_review"] = args.failure_media_review
+    ledger = publish(args.runs, args.output, **options)
     print(json.dumps({"variants": ledger["coverage"]["api_variants"],
                       "missing_questions": ledger["coverage"]["missing"],
                       "missing_media": ledger["missing_api_media"]}))
