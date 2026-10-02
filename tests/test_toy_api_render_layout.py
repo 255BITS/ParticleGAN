@@ -118,6 +118,12 @@ def test_feature_matrix_has_readable_independent_axes_but_images_keep_pixel_aspe
     def close(fig=None):
         if isinstance(fig,Figure):
             aspects.extend(ax.get_aspect() for ax in fig.axes if ax.images)
+            renderer=fig.canvas.get_renderer()
+            for ax in fig.axes:
+                if ax.images:
+                    for label in ax.get_yticklabels():
+                        box=label.get_window_extent(renderer)
+                        assert box.x0>=0 and box.x1<=fig.bbox.width
         actual_close(fig)
     monkeypatch.setattr(plt,"close",close)
     result=api_run.render_gif(dict(id="matrix-render-control",goal="Keep every conditional feature row readable",default_steps=28000),

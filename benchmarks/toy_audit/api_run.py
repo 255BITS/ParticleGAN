@@ -238,7 +238,7 @@ def _render_layout(case, records, prepared, columns, rows, full_budget, requeste
     from matplotlib.backends.backend_agg import RendererAgg
     from matplotlib.font_manager import FontProperties
     renderer = RendererAgg(1, 1, 100)
-    total_width = (4.6 * columns * .98 - 4.6 * .14) * 100
+    total_width = (4.6 * columns * .98 - 4.6 * .22) * 100
     panel_width = total_width / (columns + .45 * (columns - 1))
     def wrap(text, pixels, size, weight="normal"):
         font = FontProperties(size=size, weight=weight)
@@ -290,7 +290,7 @@ def render_gif(case, records, path, *, full_budget, requested_steps, final_verdi
         height = sum(layout["heights"]) + .20
         fig = plt.figure(figsize=(4.6 * columns, height), dpi=100)
         layout_grid = GridSpec(len(layout["heights"]), columns, figure=fig,
-                        height_ratios=layout["heights"], left=.14 / columns, right=.98,
+                        height_ratios=layout["heights"], left=.22 / columns, right=.98,
                         bottom=.10 / height, top=1 - .10 / height, hspace=0, wspace=.45)
         heading = fig.add_subplot(layout_grid[0, :]); heading.set_axis_off()
         heading.text(.5, .95, layout["goal"], transform=heading.transAxes,
