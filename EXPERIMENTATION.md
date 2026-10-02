@@ -279,9 +279,22 @@ python -m experiments.forge experiments-by-tier --view discriminator_stability
 python -m experiments.forge experiments-by-tier --json
 ```
 
-The report reads validated task and view declarations without accessing the
-queue, launching training or regrading saved evidence. It lists assigned tasks;
-use the candidate boards below for attained tiers, measured metrics and costs.
+The report reads validated task and view declarations plus compact published
+research indexes without accessing the queue, launching training or regrading
+saved evidence. Each task links to its question, declared numerical gates,
+recorded Forge configuration outcomes and related public-API training GIFs.
+Related demos keep their own recipe, prior, initialization, budget, sampling
+and runtime; they confer no qualification on a different Forge task.
+
+Regenerate this same report after changing tasks/views or publishing results
+and media indexes. New declarations and explicit retained-question mappings
+are discovered automatically, and the report freshness test catches stale
+content. A task's optional `description` supplies its current question; otherwise
+the guide uses the retained question audit or the declared gate. Task variants
+name their host/problem explicitly, and public-API variants retain `legacy_ids`
+for the related-question join. The [current solution leaderboard](reports/forge/technique-inventory.md)
+remains the single ranking for its goal; use its source-bound evidence and
+the compiled memory to explain a release choice after full qualification.
 
 Boards order current rows by attained tier, then name/cohort. Raw metrics and
 cost remain separate; no aggregate metric ranking is declared. Filter whole rows

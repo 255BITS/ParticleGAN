@@ -91,7 +91,7 @@ def parser():
         inv.add_argument("--campaign", type=Path, default=Path("configs/forge/campaigns/technique-inventory.json"))
         if stage == "run":
             inv.add_argument("--gpus", default="0,1", help="physical GPU indices, or cpu")
-    tiers = commands.add_parser("experiments-by-tier", help="list declared experiment tasks by view and tier; no training")
+    tiers = commands.add_parser("experiments-by-tier", help="review experiment tiers, questions, published results and GIFs; no training")
     tiers.add_argument("--view", help="show one view; default all current views")
     tiers.add_argument("--json", action="store_true", help="render machine-readable inventory instead of Markdown")
     tiers.add_argument("--output", type=Path, help="write the report here, relative to --root; default print to stdout")
