@@ -1,0 +1,50 @@
+{
+  "all_seven_raw_files_unchanged": true,
+  "exact_gif_pixel_frames_visually_reviewed": [
+    0,
+    3,
+    11
+  ],
+  "exporter_source": {
+    "commit": "72662f24134809e2fade554793489da9041c5f85",
+    "files_sha256": {
+      "benchmarks/toy_audit/batch_toy_media.py": "4c71ce4a7fa86e97c60887ec65c8b6a84a795cefe0306c80e92e4f340e9bde15",
+      "benchmarks/toy_audit/recent_toy_media.py": "71fb5ea6a15f40f87d0d586394b1ae80326517ac0362bc2172926095fc732a98"
+    }
+  },
+  "five_consumed_files_original_sha_attested": true,
+  "media": {
+    "bytes": 642322,
+    "file": "goal.gif",
+    "frames": 12,
+    "sha256": "41979682b2abda1fd6d22e23173e5d8c123d975594f9e1e2d6e4066a7d4bab5d"
+  },
+  "model_rescoring": false,
+  "native_training_updates": 0,
+  "original_toy_scientific_status": "PASS",
+  "parsed_metrics_exactly_equal_receipt": true,
+  "receipt": "/ml2/hypergan/toy-pr236-media-final-export-20261002/receipt.json",
+  "receipt_sha256": "d369a5154d56c87a6a19e9f6e87dfaf90fa820e40c2810be34a556fe909475d8",
+  "recommendation": "PRESERVE_AND_ADD",
+  "recommended_definition_tier": "4/5 bounded diagnostic",
+  "reviewed_head": "e71265fd7b77ae2ab70ccbf8b7f0049c3d539b84",
+  "schema": "particlegan_pr236_independent_media_qa_v1",
+  "scientific_review": "/ml2/hypergan/toy-pr236-independent-qa-20261002/scientific-review.json",
+  "scientific_review_sha256": "bb7729aeaed2cbb1e536940c37aea82f8743616370986e92cd60b62e1f3efb8f",
+  "separate_real_transfer": "FAIL",
+  "software_controls": {
+    "elapsed_seconds": 9.18,
+    "log": "/ml2/hypergan/toy-pr236-independent-qa-20261002/helper-software.log",
+    "log_sha256": "0a569568349a8746d72cbcef6155620d31212c3d5ace3c885701be6d695a1574",
+    "passed": 29
+  },
+  "status": "PASS",
+  "visual_findings": [
+    "Fixed axes and goal/threshold panels readable",
+    "Update100 G64 worsening shown and labeled +2.83%",
+    "Terminal fixed500 PASS labeled as original V2, no sustained or equalcompute claim",
+    "D16 and four-times G examples explicit",
+    "Real-task FAIL and no continuation/default promotion explicit",
+    "No intermediate image arrays invented; saved metric curves only"
+  ]
+}
