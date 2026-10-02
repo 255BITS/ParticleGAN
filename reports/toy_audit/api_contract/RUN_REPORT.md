@@ -11,6 +11,13 @@ unqualified failure supplements. A model FAIL does not make a test useless.
 [Completed receipts](runs.json) · [Failed-attempt supplements](failed-runs.json) ·
 [Independent source/media audit](binding-review.json).
 
+The [later PR233/234/235 review](recent_prs/README.md) adds three distinct
+standalone API protocols and four more goal GIFs, separately from this frozen
+176-variant campaign. Their narrow definition tier is 4/5: structural FiLM
+controls PASS with learned benefit NO_FROZEN_GATE; zero-update variance FAIL;
+and the fixed clean-G synthetic comparison PASS with separate caption transfer
+FAIL. All three source proposals are retained and integrated.
+
 | Family | Variants | Default PASS | Completed FAIL | ERROR/FAIL |
 |---|---:|---:|---:|---:|
 | Images and five-word inverse/generation | 80 | 31 | 49 | 0 |
@@ -61,6 +68,8 @@ Their 7,000-update noisy served-law runs pass, with final center RMS errors
 diagnostics fail: covariance trace bias is approximately -0.94 and radial KS
 approximately 0.79. A noisy PASS grants no clean-distribution credit.
 
+![Actual grid100 training: noisy target/output and separate noise-disabled diagnostic](media/api-grid100.gif)
+
 **Unequal mass** asks whether the rare 2% component has the right probability;
 **unequal width** and **anisotropy** ask whether local density shape survives.
 These remain informative FAIL tests. Unequal mass has final minimum mass ratio
@@ -88,6 +97,8 @@ initialization arm fails. The **five-word joint autoencoder** passes the full
 20,001 updates: all five words, quality fraction 1.0, mass TV 0.02891, exact
 paired reconstruction and minimum reconstruction token probability 0.99975.
 Decoded strings and full token confidence are both shown and scored.
+
+![Actual five-word inverse/generation training with decoded strings and token confidence](media/image-five-words-joint-ae.gif)
 
 ## What fails, and what the evidence establishes
 
@@ -137,11 +148,15 @@ equal units; feature heatmaps retain their actual rows and columns. Original
 ratings, numeric receipts, target banks and historical GIFs retain their bytes.
 Package, trainer, legacy library and production config trees are unchanged.
 
-The integrated API software suite passes **578 tests** in 49.79 seconds on the
-recorded Python/Torch runtime. Its nine test files cover factories, exact-law
-controls, observer isolation, run grading, media layout, immutable reframing and
-publication tamper rejection. The local log remains outside Git at
-`/ml2/hypergan/toy-api-publication-focused-validation-20261002.log`.
+The final integrated focused suite passes **663 tests** in 66.34 seconds on the
+recorded Python/Torch runtime, including the later PR sources and strict export
+controls. It covers factories, exact-law controls, observer isolation, run
+grading, media layout, immutable reframing, shallow-checkout portability and
+publication tamper rejection. The combined repository suite separately passes
+**3,286 tests and 18 subtests**, with 63 optional skips and the existing stiff
+release expected failure, before the 26 new recent-exporter controls. The logs
+remain outside Git at `/ml2/hypergan/toy-api-final-integrated-focused-validation-20261002.log`
+and `/ml2/hypergan/toy-api-develop-full-suite-20261002.log`.
 
 Raw arrays, checkpoints, progress logs and first rendering attempts remain
 outside Git in `/ml2/hypergan/toy-api-full-protocols-20261002` and the separate

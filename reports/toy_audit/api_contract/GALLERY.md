@@ -12,6 +12,9 @@ numeric observations, training sources and test verdicts remain unchanged.
 Completed executions: **171**; failed-attempt views: **5**. Completed default protocols: **171**; default passes: **51**.
 Original questions without a runnable API variant: **0**.
 
+The [later PR233/234/235 readout](recent_prs/README.md) adds four goal GIFs for
+three standalone API protocols. They remain separate from this frozen campaign.
+
 [Executable definitions and exact gates](cases.json) · [Compact run receipts](runs.json)
 
 | API variant / goal GIF | Question | Executed / default updates | Final instantaneous metric | Default-budget test |

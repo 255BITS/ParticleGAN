@@ -10,6 +10,8 @@ resource, recipe or sampling law.
 The [completed full-budget readout](RUN_REPORT.md) covers all 176 variants:
 51 PASS, 120 completed FAIL and five ERROR/FAIL attempts. Start with the
 [sorted results and per-failure bounds](LEADERBOARD.md) or [goal GIF gallery](GALLERY.md).
+Three later standalone protocols and their strict API reproduction/export
+commands are in the [PR233/234/235 readout](recent_prs/README.md).
 
 ## Contract
 

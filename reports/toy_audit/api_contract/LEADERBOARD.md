@@ -10,6 +10,9 @@ The /5 score belongs to the original question; it is **not a new rating for**
 [Full readout](RUN_REPORT.md) · [Numerical/provenance receipts](readout.json) ·
 [Exact definitions and frozen gates](cases.json) · [Gallery](GALLERY.md)
 
+[Three later 4/5 diagnostic definitions and four additional GIFs](recent_prs/README.md)
+retain their separate structural, estimator and learned-quality verdicts.
+
 A useful negative control can have a FAIL model outcome. Each failed bound is
 observed evidence; it does not by itself identify the optimizer's causal mechanism.
 An endpoint PASS cannot replace the required terminal window or completed execution.
