@@ -282,18 +282,18 @@ def render_gif(case, records, path, *, full_budget, requested_steps, final_verdi
     for frame_index, record in enumerate(records):
         height = sum(layout["heights"]) + .20
         fig = plt.figure(figsize=(4.6 * columns, height), dpi=100)
-        grid = GridSpec(len(layout["heights"]), columns, figure=fig,
+        layout_grid = GridSpec(len(layout["heights"]), columns, figure=fig,
                         height_ratios=layout["heights"], left=.14 / columns, right=.98,
                         bottom=.10 / height, top=1 - .10 / height, hspace=0, wspace=.45)
-        heading = fig.add_subplot(grid[0, :]); heading.set_axis_off()
+        heading = fig.add_subplot(layout_grid[0, :]); heading.set_axis_off()
         heading.text(.5, .95, layout["goal"], transform=heading.transAxes,
                      ha="center", va="top", fontsize=11, linespacing=1.15)
         for index, view in enumerate(prepared[frame_index]):
             row, column = divmod(index, columns)
-            title_ax = fig.add_subplot(grid[1 + row * 5, column]); title_ax.set_axis_off()
+            title_ax = fig.add_subplot(layout_grid[1 + row * 5, column]); title_ax.set_axis_off()
             title_ax.text(.5, .85, layout["titles"][frame_index][index], transform=title_ax.transAxes,
                           ha="center", va="top", fontsize=10, linespacing=1.15)
-            ax = fig.add_subplot(grid[2 + row * 5, column])
+            ax = fig.add_subplot(layout_grid[2 + row * 5, column])
             target, samples = contract.array(view["target"]), contract.array(view["samples"])
             if view["kind"] == "text":
                 reference = "Desired words\n" + "\n".join(view["target_labels"][:8])
@@ -374,10 +374,10 @@ def render_gif(case, records, path, *, full_budget, requested_steps, final_verdi
             if invalid:
                 ax.text(.5, .5, f"FAIL: {invalid} nonfinite output values", transform=ax.transAxes,
                         ha="center", color="#a31436", bbox={"facecolor": "white", "alpha": .9})
-            caption_ax = fig.add_subplot(grid[4 + row * 5, column]); caption_ax.set_axis_off()
+            caption_ax = fig.add_subplot(layout_grid[4 + row * 5, column]); caption_ax.set_axis_off()
             caption_ax.text(.5, .95, layout["captions"][frame_index][index], transform=caption_ax.transAxes,
                             ha="center", va="top", fontsize=7, linespacing=1.15)
-        footer_ax = fig.add_subplot(grid[-1, :]); footer_ax.set_axis_off()
+        footer_ax = fig.add_subplot(layout_grid[-1, :]); footer_ax.set_axis_off()
         footer_y = .95
         if final_verdict is not None:
             footer_ax.text(0, footer_y, layout["badge"], transform=footer_ax.transAxes,

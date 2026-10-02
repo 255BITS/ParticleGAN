@@ -23,6 +23,14 @@ def observations(panels):
     mass = dict(kind="bar", title="All mode masses and their full denominators", xlabel="mode index",
                 ylabel="probability", target=np.full(8,.125), samples=np.full(8,.125), caption=long_caption)
     views = [scatter] if panels==1 else [scatter, deepcopy(scatter), mass, deepcopy(scatter)]
+    if panels=="mixed":
+        pixels=np.eye(28,6,dtype=np.float32)[None,None].repeat(5,axis=0)
+        image=dict(kind="image",title="Matched token probabilities",target=pixels,samples=pixels,
+                   caption=long_caption)
+        words=["apple_","grape_","lemon_","melon_","berry_"]
+        text=dict(kind="text",title="Actual decoded strings",target=pixels,samples=pixels,
+                  target_labels=words,sample_labels=words,caption=long_caption)
+        views=[text,image,deepcopy(text),deepcopy(image)]
     return [dict(step=step, passed=step==2, failed_bounds=[] if step==2 else ["width"],
                  metrics={"relative_distribution_error_against_full_target": .12,
                           "maximum_conditional_covariance_eigenvalue_ratio": 1.15,
@@ -30,7 +38,7 @@ def observations(panels):
                  views=deepcopy(views)) for step in (0,1,2)]
 
 
-@pytest.mark.parametrize("panels",(1,4))
+@pytest.mark.parametrize("panels",(1,4,"mixed"))
 def test_long_text_slots_do_not_overlap_or_escape_and_geometry_stays_circular(tmp_path,monkeypatch,panels):
     records=observations(panels)
     before=api_reframe._observation_identity(records)
