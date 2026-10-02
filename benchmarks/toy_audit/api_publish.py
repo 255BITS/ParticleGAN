@@ -8,6 +8,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import math
 from pathlib import Path
 import shutil
 
@@ -72,6 +73,14 @@ def _verify_grade(receipt):
         _flags(record, f"observation{record['step']}")
         if not isinstance(record.get("metrics"), dict) or not record["metrics"]:
             raise ValueError("observation must retain its measured metrics")
+        if record["passed"]:
+            for name, value in record["metrics"].items():
+                try:
+                    finite_numeric = isinstance(value, (int, float, bool)) and math.isfinite(value)
+                except OverflowError:
+                    finite_numeric = False
+                if not finite_numeric:
+                    raise ValueError(f"passing observation metric {name} must be finite numeric")
         if not isinstance(record.get("views"), list) or not record["views"]:
             raise ValueError("observation must retain actual goal views")
     metric_records = [record for record in observations if record["step"] > 0 and record["step"] in metric_steps]
@@ -119,6 +128,9 @@ def verify_run(path):
                      for observation in observations
                      for index in range(len(observation["views"]))
                      for role in ("target", "samples")}
+    passing_sample_keys = {f"step{observation['step']}_view{index}_samples"
+                           for observation in observations if observation["passed"]
+                           for index in range(len(observation["views"]))}
     with np.load(path / "observations.npz", allow_pickle=False) as arrays:
         if set(arrays.files) != expected_keys:
             raise ValueError("numeric media observations differ from receipt")
@@ -128,6 +140,8 @@ def verify_run(path):
                 raise ValueError("missing actual numeric goal observations")
             if name.endswith("_target") and not np.isfinite(values).all():
                 raise ValueError("nonfinite reference goal")
+            if name in passing_sample_keys and not np.isfinite(values).all():
+                raise ValueError("passing observation contains nonfinite actual samples")
     return receipt
 
 

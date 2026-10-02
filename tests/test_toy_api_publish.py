@@ -426,3 +426,43 @@ def test_media_review_cli_option_passes_only_the_separate_archive(tmp_path, monk
     assert api_publish.main(["--runs", str(tmp_path / "raw"), "--output", str(tmp_path / "published"),
                              "--media-review", str(tmp_path / "reviewed")]) == 0
     assert calls == [([tmp_path / "raw"], tmp_path / "published", tmp_path / "reviewed")]
+
+
+@pytest.mark.parametrize("value", ["nan", "1", None, {"finite": 1}, float("nan"), float("inf")])
+def test_passing_metrics_cannot_be_nonnumeric_or_nonfinite(tmp_path, value):
+    raw = tmp_path / "raw"
+    receipt = archive(raw, frames=3)
+    receipt["observations"][0]["metrics"]["finite"] = value
+    # Includes malformed numeric NaN/Inf JSON as well as the runner's string encoding.
+    (raw / "receipt.json").write_text(json.dumps(receipt))
+    with pytest.raises(ValueError, match="must be finite numeric"):
+        api_publish.verify_run(raw)
+
+
+@pytest.mark.parametrize("value", [np.nan, np.inf, -np.inf])
+def test_passing_samples_cannot_be_nonfinite_even_after_artifact_hash_is_rebound(tmp_path, value):
+    raw = tmp_path / "raw"
+    receipt = archive(raw, frames=3)
+    with np.load(raw / "observations.npz", allow_pickle=False) as data:
+        arrays = {key: data[key].copy() for key in data.files}
+    arrays["step0_view0_samples"][0, 0] = value
+    np.savez_compressed(raw / "observations.npz", **arrays)
+    receipt["artifacts"]["observations.npz"].update(sha256=api_run.file_hash(raw / "observations.npz"),
+                                                   bytes=(raw / "observations.npz").stat().st_size)
+    save(raw, receipt)
+    with pytest.raises(ValueError, match="nonfinite actual samples"):
+        api_publish.verify_run(raw)
+
+
+def test_nonfinite_failed_observation_remains_visible_as_failure_evidence(tmp_path):
+    raw = tmp_path / "raw"
+    receipt = archive(raw, frames=3, failures=(0,))
+    receipt["observations"][0]["metrics"]["finite"] = "nan"
+    with np.load(raw / "observations.npz", allow_pickle=False) as data:
+        arrays = {key: data[key].copy() for key in data.files}
+    arrays["step0_view0_samples"][0, 0] = np.nan
+    np.savez_compressed(raw / "observations.npz", **arrays)
+    receipt["artifacts"]["observations.npz"].update(sha256=api_run.file_hash(raw / "observations.npz"),
+                                                   bytes=(raw / "observations.npz").stat().st_size)
+    save(raw, receipt)
+    assert api_publish.verify_run(raw)["observations"][0]["passed"] is False
