@@ -353,6 +353,34 @@ def test_new_task_question_updates_without_editing_the_generator(inventory):
     assert guide["goal"] == definition["description"]
 
 
+def test_task_named_supplement_joins_without_rewriting_frozen_campaign(inventory):
+    base = publish_demo(inventory)
+    frozen = (base / "cases.json").read_bytes()
+    path = base / "new-question/publication.json"
+    definition = task("new_question")
+    definition["research_artifacts"] = {"api_publication": path.relative_to(inventory).as_posix()}
+    atomic_json(inventory / "configs/forge/tasks/new_question.json", definition)
+    atomic_json(path, {"cases": [{"id": "api-new", "legacy_ids": ["develop-new_question"],
+                                 "goal": "Acquire new target", "scope": "Separate standalone cohort"}],
+                       "readouts": [{"id": "api-new", "execution_status": "COMPLETE", "verdict": "FAIL",
+                                     "completed_updates": 24, "gif": "goal.gif"}],
+                       "runs": [{"id": "api-new", "recipe": {"name": "k3p"}}]})
+    (path.parent / "goal.gif").write_bytes(b"actual-media-placeholder")
+    report = build_report(inventory)
+    guide = next(item for item in report["experiment_guides"] if item["id"] == "new_question")
+    variant = guide["api_variants"][0]
+    assert variant["media_available"] and variant["qualification_input"] is False
+    assert variant["receipt_source"] == path.relative_to(inventory).as_posix()
+    assert variant["gif"].endswith("new-question/goal.gif")
+    assert guide["forge_results"] == []
+    assert (base / "cases.json").read_bytes() == frozen
+    document = json.loads(path.read_text())
+    document["runs"].append({"id": "api-smoke"})
+    atomic_json(path, document)
+    with pytest.raises(ValueError, match="own variant definitions"):
+        build_report(inventory)
+
+
 def test_actual_error_media_and_missing_gifs_are_visible(inventory):
     base = publish_demo(inventory, execution="ERROR")
     document = render_markdown(build_report(inventory), inventory)

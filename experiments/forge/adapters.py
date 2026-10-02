@@ -76,6 +76,9 @@ def adapter_preflight(task, candidate, *, root=None):
         if blockers:
             return blockers
     if adapter == "transfer_vector":
+        scorer = task["evaluation"].get("sample_evaluator")
+        if scorer not in (None, "benchmarks.toy_audit.ring16_quality:score_samples"):
+            blockers.append(f"unsupported vector sample evaluator: {scorer}")
         from .vectorprofiles import vector_profile_blockers
         blockers.extend(vector_profile_blockers(task, root=root))
         if blockers:
@@ -237,6 +240,11 @@ def _checkpoints(task):
 
 def _vector(request, task, output, device):
     from benchmarks.transfer_suite.vector_tasks import sample_target, score_samples
+    scorer = task["evaluation"].get("sample_evaluator")
+    if scorer is not None:
+        if scorer != "benchmarks.toy_audit.ring16_quality:score_samples":
+            raise CapabilityError([f"unsupported vector sample evaluator: {scorer}"])
+        from benchmarks.toy_audit.ring16_quality import score_samples
     from .vectorprofiles import build_vector_models, resolve_vector_spec
     spec = resolve_vector_spec(task)
     context = _context(request, task, device, {"num_particles": spec["particles"],
