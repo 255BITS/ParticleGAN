@@ -231,3 +231,198 @@ def test_mismatched_decoded_gif_frames_fail_even_with_a_new_hash(tmp_path):
     save(path, receipt)
     with pytest.raises(ValueError, match="goal GIF lost"):
         api_publish.verify_run(path)
+
+
+def media_review(path, raw_path, receipt):
+    """Synthetic render identity control; no optimizer, evaluator or provider."""
+    path.mkdir(parents=True)
+    count = receipt["gif_frames"]
+    images = [Image.new("RGB", (8, 8), (255 - index * 13 % 255, index * 23 % 255, 100))
+              for index in range(count)]
+    images[0].save(path / "reviewed-goal.gif", save_all=True, append_images=images[1:],
+                   duration=100, optimize=False)
+    review = {"schema": "particlegan_api_toy_media_review_v1",
+              "case_id": receipt["case"]["id"], "raw_receipt": str((raw_path / "receipt.json").resolve()),
+              "raw_receipt_sha256": api_run.file_hash(raw_path / "receipt.json"),
+              "raw_artifacts": deepcopy(receipt["artifacts"]),
+              "training_source_commit": receipt["source"]["commit"],
+              "renderer_source": {"commit": "separate-renderer-software-control",
+                                  "files_sha256": {f"benchmarks/toy_audit/{name}.py": "a" * 64
+                                                   for name in ("api_run", "api_reframe", "api_contract")}},
+              "verdict": receipt["verdict"], "metric_passed": receipt["metric_passed"],
+              "sustained_metric_passed": receipt["sustained_metric_passed"],
+              "default_protocol_complete": receipt["default_protocol_complete"],
+              "failed_bounds": deepcopy(receipt["failed_bounds"]),
+              "final_metrics": deepcopy(receipt["observations"][-1]["metrics"]),
+              "media_steps": deepcopy(receipt["protocol"]["media_steps"]),
+              "reviewed_gif": {"file": "reviewed-goal.gif",
+                               "sha256": api_run.file_hash(path / "reviewed-goal.gif"),
+                               "bytes": (path / "reviewed-goal.gif").stat().st_size, "frames": count},
+              "annotations": {"default_verdict_displayed": receipt["verdict"],
+                              "goal_annotations": [{"step": receipt["protocol"]["media_steps"][0],
+                                                    "view": 0, "reference_camera": "synthetic-control"}],
+                              "numeric_observations_changed": False},
+              "training_or_rescoring": False, "raw_files_unchanged": True}
+    api_run.write_json(path / "media-review.json", review)
+    return review
+
+
+@pytest.mark.parametrize("updates,failures", [(600, ()), (16, ()), (600, (600,))])
+def test_reviewed_media_preserves_original_pass_short_and_failure_grades(tmp_path, updates, failures):
+    raw, reviewed = tmp_path / "raw", tmp_path / "review"
+    receipt = archive(raw, updates=updates, frames=3, failures=failures)
+    before = {name: (raw / name).read_bytes()
+              for name in ("receipt.json", "goal.gif", "observations.npz", "final-state.pt")}
+    review = media_review(reviewed, raw, receipt)
+    assert api_publish.verify_media_review(raw, reviewed) == review
+    assert api_publish.verify_run(raw) == receipt
+    assert before == {name: (raw / name).read_bytes() for name in before}
+
+
+@pytest.mark.parametrize("field,value", [
+    ("schema", "unbound-render"), ("case_id", "another-case"),
+    ("raw_receipt", "receipt.json"), ("raw_receipt", "/unrelated/receipt.json"),
+    ("raw_receipt_sha256", "0" * 64), ("training_source_commit", "different-training-source"),
+    ("verdict", "FAIL"), ("metric_passed", False), ("metric_passed", 1),
+    ("sustained_metric_passed", False), ("default_protocol_complete", False),
+    ("failed_bounds", ["invented failure"]), ("final_metrics", {"finite": 0}),
+    ("training_or_rescoring", True), ("training_or_rescoring", 0),
+    ("raw_files_unchanged", False), ("raw_files_unchanged", 1),
+])
+def test_media_review_cannot_change_original_identity_metrics_or_grade(tmp_path, field, value):
+    raw, reviewed = tmp_path / "raw", tmp_path / "review"
+    receipt = archive(raw, frames=3)
+    review = media_review(reviewed, raw, receipt)
+    review[field] = value
+    api_run.write_json(reviewed / "media-review.json", review)
+    with pytest.raises(ValueError):
+        api_publish.verify_media_review(raw, reviewed)
+
+
+def test_media_review_cannot_substitute_original_artifacts(tmp_path):
+    raw, reviewed = tmp_path / "raw", tmp_path / "review"
+    review = media_review(reviewed, raw, archive(raw, frames=3))
+    review["raw_artifacts"]["goal.gif"]["sha256"] = review["reviewed_gif"]["sha256"]
+    api_run.write_json(reviewed / "media-review.json", review)
+    with pytest.raises(ValueError, match="raw_artifacts"):
+        api_publish.verify_media_review(raw, reviewed)
+
+
+@pytest.mark.parametrize("steps", [[0, 600], [0, 300, 300, 600], [600, 300, 0], [0.0, 300, 600]])
+def test_media_review_cannot_change_retained_state_steps(tmp_path, steps):
+    raw, reviewed = tmp_path / "raw", tmp_path / "review"
+    review = media_review(reviewed, raw, archive(raw, frames=3))
+    review["media_steps"] = steps
+    api_run.write_json(reviewed / "media-review.json", review)
+    with pytest.raises(ValueError, match="media steps"):
+        api_publish.verify_media_review(raw, reviewed)
+
+
+@pytest.mark.parametrize("change", ["missing_source", "missing_file", "invalid_hash",
+                                    "wrong_label", "changed_observations", "uncaptured_step", "uncaptured_view"])
+def test_review_requires_renderer_identity_and_valid_goal_annotations(tmp_path, change):
+    raw, reviewed = tmp_path / "raw", tmp_path / "review"
+    review = media_review(reviewed, raw, archive(raw, frames=3))
+    if change == "missing_source":
+        del review["renderer_source"]
+    elif change == "missing_file":
+        del review["renderer_source"]["files_sha256"]["benchmarks/toy_audit/api_reframe.py"]
+    elif change == "invalid_hash":
+        review["renderer_source"]["files_sha256"]["benchmarks/toy_audit/api_run.py"] = "z" * 64
+    elif change == "wrong_label":
+        review["annotations"]["default_verdict_displayed"] = "FAIL"
+    elif change == "changed_observations":
+        review["annotations"]["numeric_observations_changed"] = True
+    elif change == "uncaptured_step":
+        review["annotations"]["goal_annotations"][0]["step"] = 25
+    else:
+        review["annotations"]["goal_annotations"][0]["view"] = 1
+    api_run.write_json(reviewed / "media-review.json", review)
+    with pytest.raises(ValueError):
+        api_publish.verify_media_review(raw, reviewed)
+
+
+@pytest.mark.parametrize("field,value", [("file", "../goal.gif"), ("sha256", "0" * 64),
+                                        ("bytes", 1), ("frames", 2), ("frames", 3.0)])
+def test_reviewed_gif_identity_and_media_count_are_checked(tmp_path, field, value):
+    raw, reviewed = tmp_path / "raw", tmp_path / "review"
+    review = media_review(reviewed, raw, archive(raw, frames=3))
+    review["reviewed_gif"][field] = value
+    api_run.write_json(reviewed / "media-review.json", review)
+    with pytest.raises(ValueError):
+        api_publish.verify_media_review(raw, reviewed)
+
+
+def test_reviewed_gif_decoded_count_is_checked_even_with_rebound_identity(tmp_path):
+    raw, reviewed = tmp_path / "raw", tmp_path / "review"
+    review = media_review(reviewed, raw, archive(raw, frames=3))
+    a, b = Image.new("RGB", (8, 8), "black"), Image.new("RGB", (8, 8), "white")
+    a.save(reviewed / "reviewed-goal.gif", save_all=True, append_images=[b], duration=100)
+    review["reviewed_gif"].update(sha256=api_run.file_hash(reviewed / "reviewed-goal.gif"),
+                                  bytes=(reviewed / "reviewed-goal.gif").stat().st_size)
+    api_run.write_json(reviewed / "media-review.json", review)
+    with pytest.raises(ValueError, match="lost actual observed states"):
+        api_publish.verify_media_review(raw, reviewed)
+
+
+@pytest.mark.parametrize("change", ["error", "source_changed", "forged_full", "changed_numeric_capture"])
+def test_review_does_not_weaken_original_execution_or_archive_checks(tmp_path, change):
+    raw, reviewed = tmp_path / "raw", tmp_path / "review"
+    receipt = archive(raw, frames=3, updates=16 if change == "forged_full" else 600)
+    if change == "error":
+        receipt["status"] = "ERROR"
+    elif change == "source_changed":
+        receipt["source_unchanged"] = False
+    elif change == "forged_full":
+        receipt.update(default_protocol_complete=True, passed=True, verdict="PASS", failed_bounds=[])
+    else:
+        with (raw / "observations.npz").open("ab") as handle:
+            handle.write(b"changed")
+    save(raw, receipt)
+    media_review(reviewed, raw, receipt)
+    with pytest.raises(ValueError):
+        api_publish.verify_media_review(raw, reviewed)
+
+
+@pytest.mark.parametrize("reviewed_media", [False, True])
+def test_publication_copies_selected_media_and_keeps_raw_evidence_and_grades(tmp_path, monkeypatch, reviewed_media):
+    runs, review_root = tmp_path / "runs", tmp_path / "review"
+    runs.mkdir()
+    name = "publication-software-control"
+    raw = runs / name
+    receipt = archive(raw, frames=3, updates=16)
+    api_run.write_json(runs / "summary.json", {"cases": [{"id": name}]})
+    reviewed = review_root / name
+    review = media_review(reviewed, raw, receipt)
+    monkeypatch.setattr(api_contract, "discover", lambda: {name: receipt["case"]})
+    monkeypatch.setattr(api_run, "inventory", lambda cases: {"coverage": {"missing": [], "api_variants": 1}})
+    output = tmp_path / "publication"
+    api_publish.publish([runs], output, media_review=review_root if reviewed_media else None)
+    published = api_publish.read(output / "runs.json")
+    row = published["cases"][0]
+    source = reviewed / "reviewed-goal.gif" if reviewed_media else raw / "goal.gif"
+    assert (output / row["gif"]).read_bytes() == source.read_bytes()
+    assert row["gif_sha256"] == api_run.file_hash(source)
+    assert row["raw_artifacts"] == receipt["artifacts"]
+    assert row["raw_receipt_sha256"] == api_run.file_hash(raw / "receipt.json")
+    assert row["verdict"] == "FAIL" and row["metric_passed"] and not row["default_protocol_complete"]
+    assert published["media_review_used"] is reviewed_media
+    assert published["training_or_rescoring_by_publication"] is False
+    if reviewed_media:
+        provenance = row["media_review"]
+        assert provenance["raw_sidecar_sha256"] == api_run.file_hash(reviewed / "media-review.json")
+        assert published["media_renderer_source_identities"][provenance["renderer_source_identity"]] == review["renderer_source"]
+        assert published["source_identities"][row["source_identity"]] == receipt["source"]
+    else:
+        assert "media_review" not in row and not published["media_renderer_source_identities"]
+
+
+def test_media_review_cli_option_passes_only_the_separate_archive(tmp_path, monkeypatch):
+    calls = []
+    def fake_publish(runs, output, *, media_review=None):
+        calls.append((runs, output, media_review))
+        return {"coverage": {"api_variants": 1, "missing": []}, "missing_api_media": []}
+    monkeypatch.setattr(api_publish, "publish", fake_publish)
+    assert api_publish.main(["--runs", str(tmp_path / "raw"), "--output", str(tmp_path / "published"),
+                             "--media-review", str(tmp_path / "reviewed")]) == 0
+    assert calls == [([tmp_path / "raw"], tmp_path / "published", tmp_path / "reviewed")]

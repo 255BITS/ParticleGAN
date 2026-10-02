@@ -131,12 +131,85 @@ def verify_run(path):
     return receipt
 
 
-def publish(archives, output):
+def _verify_media_review(path, receipt, review_path):
+    """Bind a separate render to verified raw evidence; never replace its grade."""
+    path, review_path = Path(path), Path(review_path)
+    review = read(review_path / "media-review.json")
+    if review.get("schema") != "particlegan_api_toy_media_review_v1":
+        raise ValueError("unsupported media review schema")
+    raw_receipt = path / "receipt.json"
+    declared_path = review.get("raw_receipt")
+    if (not isinstance(declared_path, str) or not Path(declared_path).is_absolute()
+            or Path(declared_path).resolve() != raw_receipt.resolve()):
+        raise ValueError("media review references a different raw receipt")
+    if review.get("raw_receipt_sha256") != api_run.file_hash(raw_receipt):
+        raise ValueError("media review raw receipt identity mismatch")
+    for key, expected in (("case_id", receipt["case"]["id"]),
+                          ("raw_artifacts", receipt["artifacts"]),
+                          ("training_source_commit", receipt["source"]["commit"]),
+                          ("verdict", receipt["verdict"]),
+                          ("failed_bounds", receipt["failed_bounds"]),
+                          ("final_metrics", receipt["observations"][-1]["metrics"])):
+        if review.get(key) != expected:
+            raise ValueError(f"media review {key} differs from raw evidence")
+    for key in ("metric_passed", "sustained_metric_passed", "default_protocol_complete"):
+        if type(review.get(key)) is not bool or review[key] != receipt[key]:
+            raise ValueError(f"media review {key} differs from raw evidence")
+    for key, expected in (("training_or_rescoring", False), ("raw_files_unchanged", True)):
+        if review.get(key) is not expected:
+            raise ValueError(f"media review {key} must be {expected}")
+    media_steps = review.get("media_steps")
+    if (not isinstance(media_steps, list) or any(type(step) is not int for step in media_steps)
+            or media_steps != receipt["protocol"]["media_steps"]):
+        raise ValueError("media review changes the original media steps")
+    renderer = review.get("renderer_source")
+    files = renderer.get("files_sha256") if isinstance(renderer, dict) else None
+    required_files = {"benchmarks/toy_audit/api_run.py", "benchmarks/toy_audit/api_reframe.py",
+                      "benchmarks/toy_audit/api_contract.py"}
+    if (not isinstance(renderer, dict) or not isinstance(renderer.get("commit"), str)
+            or not renderer["commit"] or not isinstance(files, dict) or set(files) != required_files
+            or any(not isinstance(value, str) or len(value) != 64
+                   or any(char not in "0123456789abcdef" for char in value) for value in files.values())):
+        raise ValueError("media review must identify its separate renderer source")
+    annotations = review.get("annotations")
+    if (not isinstance(annotations, dict)
+            or annotations.get("default_verdict_displayed") != receipt["verdict"]
+            or annotations.get("numeric_observations_changed") is not False
+            or not isinstance(annotations.get("goal_annotations"), list)):
+        raise ValueError("media review annotations change the displayed grade or observations")
+    observations = {record["step"]: record for record in receipt["observations"]}
+    for annotation in annotations["goal_annotations"]:
+        if (not isinstance(annotation, dict) or type(annotation.get("step")) is not int
+                or annotation["step"] not in media_steps or type(annotation.get("view")) is not int
+                or not 0 <= annotation["view"] < len(observations[annotation["step"]]["views"])):
+            raise ValueError("media review annotation references an uncaptured view")
+    gif = review.get("reviewed_gif")
+    if not isinstance(gif, dict) or gif.get("file") != "reviewed-goal.gif":
+        raise ValueError("media review must name its separate goal GIF")
+    frames = _integer(gif.get("frames"), "reviewed GIF frames", minimum=2)
+    if frames != len(media_steps) or frames != receipt["gif_frames"]:
+        raise ValueError("reviewed GIF count differs from original media steps")
+    expected_bytes = _integer(gif.get("bytes"), "reviewed GIF bytes")
+    artifact = review_path / "reviewed-goal.gif"
+    if artifact.stat().st_size != expected_bytes or api_run.file_hash(artifact) != gif.get("sha256"):
+        raise ValueError("reviewed GIF identity mismatch")
+    with Image.open(artifact) as decoded:
+        if decoded.n_frames != frames:
+            raise ValueError("reviewed GIF lost actual observed states")
+    return review
+
+
+def verify_media_review(path, review_path):
+    """Verify original completion and a supplemental render without rescoring."""
+    return _verify_media_review(path, verify_run(path), review_path)
+
+
+def publish(archives, output, *, media_review=None):
     output = Path(output)
     media = output / "media"
     media.mkdir(parents=True, exist_ok=True)
     cases = api_contract.discover()
-    rows, seen, manifests = [], set(), {}
+    rows, seen, manifests, renderer_manifests = [], set(), {}, {}
     for archive in archives:
         archive = Path(archive)
         for summary in read(archive / "summary.json")["cases"]:
@@ -146,6 +219,9 @@ def publish(archives, output):
             seen.add(name)
             receipt_path = archive / name / "receipt.json"
             receipt = verify_run(receipt_path.parent)
+            review_path = Path(media_review) / name if media_review is not None else None
+            review = (_verify_media_review(receipt_path.parent, receipt, review_path)
+                      if review_path is not None else None)
             definition = api_run.json_value(cases[name])
             if receipt["case"] != definition:
                 raise ValueError(f"{name}: executed definition differs from registered variant")
@@ -153,11 +229,24 @@ def publish(archives, output):
             source_key = hashlib.sha256(json.dumps(source, sort_keys=True).encode()).hexdigest()
             # Different imported dependency sets remain separate source receipts.
             manifests[source_key] = source
+            gif_source = receipt_path.parent / "goal.gif"
+            gif_identity = receipt["artifacts"]["goal.gif"]
+            media_provenance = None
+            if review is not None:
+                gif_source = review_path / "reviewed-goal.gif"
+                gif_identity = review["reviewed_gif"]
+                renderer_key = hashlib.sha256(json.dumps(review["renderer_source"], sort_keys=True).encode()).hexdigest()
+                renderer_manifests[renderer_key] = review["renderer_source"]
+                media_provenance = {"raw_sidecar": str(review_path / "media-review.json"),
+                                    "raw_sidecar_sha256": api_run.file_hash(review_path / "media-review.json"),
+                                    "renderer_source_identity": renderer_key,
+                                    "training_source_commit": review["training_source_commit"],
+                                    "annotations": review["annotations"]}
             target = media / f"{name}.gif"
-            if target.exists() and api_run.file_hash(target) != receipt["artifacts"]["goal.gif"]["sha256"]:
+            if target.exists() and api_run.file_hash(target) != gif_identity["sha256"]:
                 raise ValueError(f"refusing to replace earlier media for {name}")
             if not target.exists():
-                shutil.copyfile(receipt_path.parent / "goal.gif", target)
+                shutil.copyfile(gif_source, target)
             final = receipt["observations"][-1]
             rows.append({"id": name, "legacy_ids": definition["legacy_ids"],
                          "goal": definition["goal"], "scope": definition["scope"],
@@ -170,10 +259,12 @@ def publish(archives, output):
                          "default_protocol_complete": receipt["default_protocol_complete"],
                          "verdict": receipt["verdict"], "failed_bounds": receipt["failed_bounds"],
                          "final_metrics": final["metrics"], "gif": f"media/{name}.gif",
-                         "gif_sha256": receipt["artifacts"]["goal.gif"]["sha256"],
+                         "gif_sha256": gif_identity["sha256"],
                          "frames": receipt["gif_frames"], "seed": receipt["seed"],
                          "raw_receipt": str(receipt_path), "raw_receipt_sha256": api_run.file_hash(receipt_path),
                          "raw_artifacts": receipt["artifacts"]})
+            if media_provenance is not None:
+                rows[-1]["media_review"] = media_provenance
     rows.sort(key=lambda row: row["id"])
     ledger = api_run.inventory(cases)
     ledger["published_actual_api_runs"] = len(rows)
@@ -182,6 +273,8 @@ def publish(archives, output):
     api_run.write_json(output / "runs.json", {
         "schema": "particlegan_api_toy_media_v1", "cases": rows,
         "source_identities": manifests, "training_or_rescoring_by_publication": False,
+        "media_review_used": media_review is not None,
+        "media_renderer_source_identities": renderer_manifests,
         "historical_receipts_changed": False,
         "api_execution_complete": len(rows),
         "default_protocol_complete": sum(row["default_protocol_complete"] for row in rows),
@@ -197,6 +290,9 @@ def publish(archives, output):
              "[Executable definitions and exact gates](cases.json) · [Compact run receipts](runs.json)", "",
              "| API variant / goal GIF | Question | Executed / default updates | Final instantaneous metric | Default-budget test |",
              "|---|---|---:|---|---|"]
+    if media_review is not None:
+        lines[8:8] = ["The displayed GIFs use a separate reviewed renderer. Original receipts,",
+                      "numeric observations, training sources and test verdicts remain unchanged.", ""]
     for row in rows:
         goal = row["goal"].replace("|", "\\|").replace("\n", " ")
         instant = "PASS" if row["metric_passed"] else "FAIL"
@@ -210,8 +306,10 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--runs", type=Path, action="append", required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--media-review", type=Path,
+                        help="separate reviewed-render archive; original execution and grades remain required")
     args = parser.parse_args(argv)
-    ledger = publish(args.runs, args.output)
+    ledger = publish(args.runs, args.output, media_review=args.media_review)
     print(json.dumps({"variants": ledger["coverage"]["api_variants"],
                       "missing_questions": ledger["coverage"]["missing"],
                       "missing_media": ledger["missing_api_media"]}))
