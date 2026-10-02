@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope; current qualification is recomputed from compatible receipts.
 
-Records: 243. Inventory coverage: complete. Unresolved import items: 7.
+Records: 251. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -3621,6 +3621,54 @@ Corrected-source smoke matrix: two_pole FAIL, unused_token_hold FAIL, ae_gan_hol
 
 [Evidence](../../reports/forge/attempts/04e834fc82f24061af71572dce3a22d8/result.json) · [Record](records/readout-15e86dd160a1d64a04ceee04.json)
 
+### k3p-a2-off-native-diagnostic · readout-170dc0a68d5b68737b370a5f
+
+**Scope:** current; scientific; revision `b5ae40d1428d03591c42cb5cddb8adea5042caaa34c8ea2b131565c0ccca72e9`.
+
+Diagnostic hypothesis: removing the active A2 sparse-row damping may change the late covariance undershoot on the unchanged named affine grid100 learned-MoG host. This isolates one mechanism; saved evidence does not predict a positive result, and no full-reference or adoption claim is made.
+
+**Observed:** {'FAIL': 1}; wall seconds 5.426; mechanism `structural`.
+
+
+
+This technique failed the full 80-update two_pole smoke gate: {'grad_med': 0.0637243241071701, 'mean_abs': 0.10652091354131699}. One completed attempt cost 5.425771753 paid seconds. The remaining 2 smoke, all 19 quality and both endurance requirements remain unknown; no execution error or downstream spending.
+
+**Next:** Stop this exact failed ordinary cohort; preserve the negative and unknown denominator. Do not rerun it, vary seeds, fill downstream gates or promote it. Calibration requires a supported bounded design, not relaxed thresholds.
+
+[Evidence](../../reports/forge/technique-receipts/b86f62c3e4f84a43b85d366e4cc43824.json) · [Record](records/readout-170dc0a68d5b68737b370a5f.json)
+
+### k3p-bcap-matched-v1 · readout-21b533460c29dd5049aa64df
+
+**Scope:** current; scientific; revision `18096544dede6a02e09e34be118d13e5554caa5aba4216980dbb442e91761312`.
+
+Replace only the critic penalty by frozen historical bcap while retaining the K3P optimizer, noise, A2, host and sampling contracts.
+
+**Observed:** {'FAIL': 1, 'PASS': 8}; wall seconds 86.357; mechanism `structural`.
+
+ae_gan_hold: recon_mse=0.0052466
+
+Fixed matched BCap passed all 3 smoke requirements and the first 5/19 quality requirements, then failed mode_hold: {'cover': 0.625, 'effective_modes': 4.520427227020264, 'hq': 0.999755859375, 'modes': 5, 'n_modes': 8, 'step': 1200}. Endurance and remaining quality tasks are unknown. Nine completed attempts cost 86.356708358 paid seconds; no execution errors or remaining reservations.
+
+**Next:** Stop this frozen failed cohort; do not continue mode hold or infer native/shape quality from cloud behavioral passes. Investigate the saved mode-hold state under a separately bounded hypothesis before new training; calibration and policy-aware tasks remain required for adoption and broader comparisons.
+
+[Evidence](../../reports/forge/technique-receipts/0184ca1327794ab58168d853ce0ad978.json) · [Record](records/readout-21b533460c29dd5049aa64df.json)
+
+### forge-no-critic-penalty · readout-28f0c9140b4cfeef57f23dd2
+
+**Scope:** current; scientific; revision `aa9e200be9f520bf97e8d3408829b852188c80e2b64aa6f02430f58eaec117c9`.
+
+Removing the public critic gradient penalty tests whether cheap stability gates reject a substantively weakened formulation before quality work.
+
+**Observed:** {'FAIL': 1}; wall seconds 7.827; mechanism `structural`.
+
+
+
+This technique failed the full 80-update two_pole smoke gate: {'grad_med': 1.2546037435531616, 'mean_abs': 0.4477476179599762}. One completed attempt cost 7.827370992 paid seconds. The remaining 2 smoke, all 19 quality and both endurance requirements remain unknown; no execution error or downstream spending.
+
+**Next:** Stop this exact failed ordinary cohort; preserve the negative and unknown denominator. Do not rerun it, vary seeds, fill downstream gates or promote it. Calibration requires a supported bounded design, not relaxed thresholds.
+
+[Evidence](../../reports/forge/technique-receipts/33bc62d63509425e9f7237ef19ee7374.json) · [Record](records/readout-28f0c9140b4cfeef57f23dd2.json)
+
 ### k3p · readout-2c2eb24207b627b2ad26ea18
 
 **Scope:** calibration_diagnostic; scientific; revision `5e4a04632539a2ae1fa6d021e54f2ab5172245e7a028c795d45bfff9c2284426`.
@@ -3701,6 +3749,22 @@ Registered mode-hold diagnostic FAIL: 5/8 modes, HQ .992919921875, zero passing 
 
 [Evidence](../../reports/forge/attempts/eac540ccfe564a5ab396abdd545ab013/result.json) · [Record](records/readout-5470a57cf1a74abc896c8a55.json)
 
+### ka2 · readout-56577544c52c17aa60639d19
+
+**Scope:** current; scientific; revision `2a6cb4b3f19e57bb16599e23df1a83750b1e992634c6428dacd711f0269c83d1`.
+
+The current KA2 public recipe is an explicit learned-MoG reference; archived K3P and E22 cloud results remain separate evidence.
+
+**Observed:** {'FAIL': 1}; wall seconds 5.46; mechanism `structural`.
+
+
+
+This technique failed the full 80-update two_pole smoke gate: {'grad_med': 0.049373187124729156, 'mean_abs': 0.11137516051530838}. One completed attempt cost 5.459934227 paid seconds. The remaining 2 smoke, all 19 quality and both endurance requirements remain unknown; no execution error or downstream spending.
+
+**Next:** Stop this exact failed ordinary cohort; preserve the negative and unknown denominator. Do not rerun it, vary seeds, fill downstream gates or promote it. Calibration requires a supported bounded design, not relaxed thresholds.
+
+[Evidence](../../reports/forge/technique-receipts/0142b29ed9154d9fbf065c2934545c0c.json) · [Record](records/readout-56577544c52c17aa60639d19.json)
+
 ### k3p-a2-off-native-diagnostic · readout-5830d399b6741ce7b3a2b992
 
 **Scope:** calibration_diagnostic; scientific; revision `8493b15ff2d0f677de94a07cf344762a1d9efd58c609987fff7dab311cad8581`.
@@ -3716,6 +3780,22 @@ Reject the one-factor A2-off diagnostic on the named affine grid100 learned-MoG 
 **Next:** Keep A2 in the reference and preserve this negative in memory. Do not extend this failed parent, rerun its control or launch a seed/width sweep. Further calibration needs a supported new hypothesis or compatible saved positive evidence; no qualification or default adoption.
 
 [Evidence](../../reports/forge/attempts/d4d633052321469e82caff90210ef309/result.json) · [Record](records/readout-5830d399b6741ce7b3a2b992.json)
+
+### k3p-no-output-noise-diagnostic · readout-6c0c2c5c6610ecfe73fe315d
+
+**Scope:** current; scientific; revision `7bb7527f2fa60cf20120b07fae977f953e66716f31a40ba180240c35a376d803`.
+
+Removing additive training output noise may prevent the clean learned-MoG native distribution from contracting late. This is a one-factor diagnostic of the training/scoring-law mismatch, not a predicted positive or a full-reference claim.
+
+**Observed:** {'FAIL': 1}; wall seconds 5.876; mechanism `structural`.
+
+
+
+This technique failed the full 80-update two_pole smoke gate: {'grad_med': 0.13080213963985443, 'mean_abs': 0.2641167640686035}. One completed attempt cost 5.876473600 paid seconds. The remaining 2 smoke, all 19 quality and both endurance requirements remain unknown; no execution error or downstream spending.
+
+**Next:** Stop this exact failed ordinary cohort; preserve the negative and unknown denominator. Do not rerun it, vary seeds, fill downstream gates or promote it. Calibration requires a supported bounded design, not relaxed thresholds.
+
+[Evidence](../../reports/forge/technique-receipts/813505867f5348bfbe113791d78ce0c5.json) · [Record](records/readout-6c0c2c5c6610ecfe73fe315d.json)
 
 ### forge-no-critic-penalty · readout-75d5cdc5a88167d59ceff1b2
 
@@ -3765,6 +3845,22 @@ All three registered smoke cells completed: two_pole FAIL (mean_abs0.1048249<0.3
 
 [Evidence](../../reports/forge/attempts/633dcaca307e4e01b82b5281d82082fb/result.json) · [Record](records/readout-8aacfe961f0e62b062e621fa.json)
 
+### forge-onboarding-anchor-ablation · readout-8bfdfb8d2b1c3daf55f9b0bc
+
+**Scope:** current; scientific; revision `e356a8bd7091ac1e130819a62c362fe3b40a5119a4c457793faa889abd9785c7`.
+
+Removing the public critic EMA-anchor term may weaken short-horizon adversarial movement; the fixed CPU smoke gate should reject a harmful ablation before larger tests.
+
+**Observed:** {'FAIL': 1}; wall seconds 5.449; mechanism `structural`.
+
+
+
+This technique failed the full 80-update two_pole smoke gate: {'grad_med': 0.07678461074829102, 'mean_abs': 0.10482493042945862}. One completed attempt cost 5.449001096 paid seconds. The remaining 2 smoke, all 19 quality and both endurance requirements remain unknown; no execution error or downstream spending.
+
+**Next:** Stop this exact failed ordinary cohort; preserve the negative and unknown denominator. Do not rerun it, vary seeds, fill downstream gates or promote it. Calibration requires a supported bounded design, not relaxed thresholds.
+
+[Evidence](../../reports/forge/technique-receipts/299aba837ed24be8a61b0b48074fc7a1.json) · [Record](records/readout-8bfdfb8d2b1c3daf55f9b0bc.json)
+
 ### k3p-bcap-matched-v1 · readout-95e0cdfdc2f043a0046285c1
 
 **Scope:** calibration_diagnostic; scientific; revision `5db772f81cafe59b642b5707e600380fb49c3d42623b5c769e03dd677bbbfafd`.
@@ -3812,6 +3908,22 @@ Preregistered full7000-update grid100_release07_cloud_named_v1 FAIL; sustained c
 **Next:** Stop these exact revisions and this selected registration. Before another GPU study, perform a bounded zero-training saved-state audit of critic radial and centering gradients against per-mode moments. Only a supported substantive hypothesis warrants a new frozen registration. Preserve A2 and sigma .025; no coefficient, cap, width, amplitude or seed sweep, best-checkpoint/EMA substitution, 14k continuation or automatic matrix expansion.
 
 [Evidence](../../reports/forge/attempts/176ad9907a734b45844d09b2a69ff31d/result.json) · [Record](records/readout-9c48b366ebe60b61721c269d.json)
+
+### k3p-r1r2-matched-v1 · readout-a9c44ece3a8e2265db452db4
+
+**Scope:** current; scientific; revision `0a2b2de1a8a75005f8f76ca17130010f477c520425761cff04dd2a4f81f2bc3a`.
+
+Replace only the critic penalty by frozen historical r1r2 while retaining the K3P optimizer, noise, A2, host and sampling contracts.
+
+**Observed:** {'FAIL': 1}; wall seconds 5.812; mechanism `structural`.
+
+
+
+This technique failed the full 80-update two_pole smoke gate: {'grad_med': 0.06404702365398407, 'mean_abs': 0.1786370873451233}. One completed attempt cost 5.811797590 paid seconds. The remaining 2 smoke, all 19 quality and both endurance requirements remain unknown; no execution error or downstream spending.
+
+**Next:** Stop this exact failed ordinary cohort; preserve the negative and unknown denominator. Do not rerun it, vary seeds, fill downstream gates or promote it. Calibration requires a supported bounded design, not relaxed thresholds.
+
+[Evidence](../../reports/forge/technique-receipts/87f406b78184409396a26f61680a5da0.json) · [Record](records/readout-a9c44ece3a8e2265db452db4.json)
 
 ### k3p-no-output-noise-diagnostic · readout-abd06840fa1f42a4f64c13ab
 
@@ -3909,6 +4021,22 @@ Preregistered full7000-update grid100_affine_paired_laws_v1 FAIL; sustained cove
 
 [Evidence](../../reports/forge/attempts/56177ab1d23243d8a6fe61413d8f870f/result.json) · [Record](records/readout-eeec25002d17191c315f126b.json)
 
+### k3p · readout-faf4999394106140c8a2052e
+
+**Scope:** current; scientific; revision `2a97b74e933cc5199847bc89b917f6643d9fd82f8deb2a8490d29b63fba718ce`.
+
+The shipped K3P mechanism is a reference for new learned-MoG experiments; historical cloud evidence does not qualify this MoG conversion.
+
+**Observed:** {'FAIL': 1}; wall seconds 5.581; mechanism `structural`.
+
+
+
+This technique failed the full 80-update two_pole smoke gate: {'grad_med': 0.0637243241071701, 'mean_abs': 0.10652091354131699}. One completed attempt cost 5.581290134 paid seconds. The remaining 2 smoke, all 19 quality and both endurance requirements remain unknown; no execution error or downstream spending.
+
+**Next:** Stop this exact failed ordinary cohort; preserve the negative and unknown denominator. Do not rerun it, vary seeds, fill downstream gates or promote it. Calibration requires a supported bounded design, not relaxed thresholds.
+
+[Evidence](../../reports/forge/technique-receipts/3e1d8ca0f47a4954b41119cbe605548e.json) · [Record](records/readout-faf4999394106140c8a2052e.json)
+
 ## Unresolved imports and limitations
 
 - **structured_mapping_scope:** These files are inventoried support/config/evidence; no scientific result is inferred from unrecognized schemas. (2287 classified sources.)
@@ -3921,4 +4049,4 @@ Preregistered full7000-update grid100_affine_paired_laws_v1 FAIL; sustained cove
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v1`; input digest `f14aaf6a58ccdccdb2f4dfc98bb7749cfce2604315efe72fdd48311152c2b157`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v1`; input digest `86d87dc8093e7d58deec4d92970512e7d899e9b676c7f9dc43a4b37aab6d8de0`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
