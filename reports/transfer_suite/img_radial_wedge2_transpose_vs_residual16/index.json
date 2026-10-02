@@ -1,0 +1,26 @@
+{
+  "arms": {
+    "baseline_transpose12": {
+      "arm": "baseline_transpose12",
+      "confirmed_step": null,
+      "hq": 0.75,
+      "mean_rmse": 0.04704461246728897,
+      "modes": 2,
+      "seconds": 6.257789203198627,
+      "verdict": "FAIL"
+    },
+    "residual16": {
+      "arm": "residual16",
+      "confirmed_step": 575,
+      "hq": 0.9375,
+      "mean_rmse": 0.03155450150370598,
+      "modes": 2,
+      "seconds": 5.307021522894502,
+      "verdict": "PASS"
+    }
+  },
+  "device": "cpu",
+  "hit": true,
+  "principal": "radial_wedge2 upper-half vs left-half pie: published transpose12 vs residual16",
+  "tip_sha": "510e0054b2499ce725482de8e7a4ae8d72fd8f25"
+}
