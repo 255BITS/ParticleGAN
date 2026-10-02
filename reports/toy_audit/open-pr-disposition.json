@@ -410,7 +410,7 @@
       "scientific_result": "Old head bounded H/b diagnostic reproduced; LIVE_SCOPE_EXPANDED; Old signed endpoint reclassification PASS; 16 new guided/rotated saved deltas positive, but new source gates still unsigned at live head",
       "reason_to_keep": "Useful matched H/b intervention and guided/unguided negative control; stationarity versus attraction is a separate local question. Neither establishes the remaining full-Supra cause.",
       "recommendation": "SIGNED_REPAIR_IN_PROGRESS",
-      "next_step": "Repair signed benefit checks in all five old/new assertion paths, reject each harmful arm/judge control, retain independent source bindings and actual negative rotated result; check the repaired proposal head before merging.",
+      "next_step": "PR230 repairs all signed assertions and stable factory identity. Wait for the resulting proposal head CI before merging into develop. Original guided support remains PASS; rotated reproduction stays FAIL/inapplicable; changed source inherits no training qualification.",
       "provenance": [
         "PR226_PR227.md",
         "canonical-selection.json",
@@ -449,7 +449,23 @@
         }
       ],
       "merge_state_at_inventory": "CLEAN",
-      "current_head_sha": "b370cb7a49429e67f106e41752abea078327c5d0"
+      "current_head_sha": "b370cb7a49429e67f106e41752abea078327c5d0",
+      "signed_repair_pr": 230,
+      "signed_repair_url": "https://github.com/255BITS/ParticleGAN/pull/230",
+      "signed_repair_head": "82a13bec02a87d3269605af7b751a95c661e71ee",
+      "signed_repair_validation": {
+        "passed": 135,
+        "skipped": 1,
+        "seconds": 14.14,
+        "signed_new_family_deltas": 16,
+        "minimum_signed_delta": 0.07859230041503906,
+        "saved_state_files_verified": 210,
+        "original_artifact_files_verified": 306,
+        "quality_training_updates": 0,
+        "reclassifier_model_or_optimizer_updates": 0,
+        "qualification_credit": false
+      },
+      "supplemental_media": "pr227_current_media/README.md"
     },
     {
       "pr": 47,

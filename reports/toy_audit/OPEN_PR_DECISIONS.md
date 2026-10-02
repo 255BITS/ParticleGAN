@@ -2,7 +2,7 @@
 
 Reviewed 2026-10-02T02:26:02.409163+00:00: **49 toy-problem PRs** from the complete **138-open-PR** inventory. All exact heads and source evidence are in [the decision receipt](open-pr-disposition.json). The original immutable catalog and quality scores remain historical inputs.
 
-**PR224 and PR226 merged into develop.** PR226's 25 focused checks passed against the refreshed base. PR224 retains its expected-failure fixture after a base-only refresh: 9 targeted checks pass, the strict XFAIL remains, and the refreshed Python matrix/release build are green. PR227 gained guided, rotated-teacher and local stationarity fixtures; its original and added useful-code assertions need the signed repair before merging.
+**PR224 and PR226 merged into develop.** PR226's 25 focused checks passed against the refreshed base. PR224 retains its expected-failure fixture after a base-only refresh: 9 targeted checks pass, the strict XFAIL remains, and the refreshed Python matrix/release build are green. PR227 gained guided, rotated-teacher and local stationarity fixtures; the signed repair is published as [PR230](https://github.com/255BITS/ParticleGAN/pull/230), with 135 passing focused tests. Its resulting proposal head needs green CI before merging. [Both new training GIFs](pr227_current_media/README.md) preserve guided support and the rotated failure.
 
 **No proposal is closed as useless or duplicate.** The other 46 have a distinct target, intervention, useful negative control or pending conditional question. Keep reasons are explicit below. Top-tier definition quality alone does not turn an API exception or failed learned sampler into a passing experiment.
 
