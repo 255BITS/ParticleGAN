@@ -29,6 +29,10 @@ from particlegan import E22Policy, ParticlePrior, RoutedBatch, RoutedRows, get_r
 from benchmarks.routed_conditioning import film_damping as common
 
 
+CODE_PRESERVING_PROFILE = "shift_time_zero_native"
+PROFILES = common.PROFILES + common.EXTRA_PROFILES + (CODE_PRESERVING_PROFILE,)
+
+
 def time_features(context):
     u = context[:, 2, 0, 0]
     return torch.stack((u, (math.pi * u).sin(), (math.pi * u).cos()), 1)
@@ -151,7 +155,7 @@ def contexts_and_targets():
 
 
 def make_loop(profile="original_native", *, width=4, blocks=1):
-    if profile not in common.PROFILES + common.EXTRA_PROFILES:
+    if profile not in PROFILES:
         raise ValueError("unknown diagnostic profile")
     with torch.random.fork_rng(devices=[]):
         torch.manual_seed(common.NAMED_SEEDS["constructor"])
@@ -162,7 +166,11 @@ def make_loop(profile="original_native", *, width=4, blocks=1):
     init.deterministic_orthogonal_(prior)
     if profile != "original_native":
         with torch.no_grad():
-            G.condition.weight[width:].zero_()
+            # Additive code features are the direct route to a conditioned
+            # hidden state even when the source activation is zero. The new
+            # diagnostic neutralizes time features while retaining that path.
+            columns = slice(4, None) if profile == CODE_PRESERVING_PROFILE else slice(None)
+            G.condition.weight[width:, columns].zero_()
             G.condition.bias[width:].zero_()
     fit, fit_target, guard, guard_target, test, test_target = contexts_and_targets()
     recipe = get_recipe("e22_routed", num_particles=128, z_dim=4, batch_size=16,
@@ -211,6 +219,10 @@ def make_loop(profile="original_native", *, width=4, blocks=1):
                 "evaluation_sampling": "clean held-out live and public served functions",
                 "generator_noise_coupling": "antithetic" if "antithetic" in profile else "single Gaussian",
                 "scope": "standalone convergence/variance diagnostic; no Forge/default qualification"}
+    metadata["additive_initialization"] = (
+        "zero time columns and bias; retain code columns" if profile == CODE_PRESERVING_PROFILE
+        else "original public initialization" if profile == "original_native"
+        else "zero all additive columns and bias")
     metadata["initial_hashes"]["table"] = common.tensor_hash({"z": p.table})
     return common.Loop(p, profile, fit, fit_target, guard, guard_target, test, test_target,
                        torch.Generator().manual_seed(common.NAMED_SEEDS["batch"]),
@@ -224,7 +236,7 @@ def main():
     parser.add_argument("--width", type=int, default=4)
     parser.add_argument("--blocks", type=int, default=1)
     parser.add_argument("--report-every", type=int, default=100)
-    parser.add_argument("--profile", action="append", choices=common.PROFILES + common.EXTRA_PROFILES)
+    parser.add_argument("--profile", action="append", choices=PROFILES)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
     if min(args.steps, args.width, args.blocks, args.report_every, args.max_seconds) <= 0:
@@ -260,6 +272,7 @@ def main():
         (args.output / f"{profile}-metadata.json").write_text(json.dumps(common.json_safe(loop.metadata), indent=2) + "\n")
         profile_start = time.monotonic()
         evaluations = [{"step": 0, **common.evaluate(loop)}]
+        common.require_finite("initial clean error", (torch.tensor(evaluations[0]["live_mse"]),))
         cuts, low_steps, minimum, previous_scale = 0, 0, 1., 1.
         with (args.output / f"{profile}.jsonl").open("w", buffering=1) as trace:
             trace.write(json.dumps({"evaluation": evaluations[0]}) + "\n")
@@ -274,6 +287,10 @@ def main():
                 previous_scale = scale
                 if row["step"] % args.report_every == 0 or row["step"] == args.steps:
                     result = {"step": row["step"], **common.evaluate(loop)}
+                    common.require_finite("clean error", (torch.tensor(result["live_mse"]),
+                                                           torch.tensor(result["served_mse"])))
+                    if max(result["live_mse"], result["served_mse"]) > 4 * loop.initial_mse:
+                        raise FloatingPointError("Clean error exceeds 4x starting error; run is unqualified")
                     evaluations.append(result)
                     row["evaluation"] = result
                     print(json.dumps(common.json_safe({"profile": profile, **result,
