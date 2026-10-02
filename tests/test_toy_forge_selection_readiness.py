@@ -146,6 +146,17 @@ def test_multiple_qualified_configs_are_options_without_name_or_cost_winner(fixt
     assert result["selected_config"] is None
 
 
+def test_configuration_trials_are_resolvable_options_with_their_own_declarations(fixture, monkeypatch):
+    root = fixture[0]
+    declaration = root / "configs/forge/configurations/alpha.json"
+    declaration.parent.mkdir(parents=True)
+    (root / "configs/forge/ideas/alpha.json").rename(declaration)
+    install(monkeypatch, fixture, [row(fixture)])
+    result = select.build_readiness(root, candidate_id="alpha")
+    assert result["qualified_options"][0]["config"] == "configs/forge/configurations/alpha.json"
+    assert result["selected_config"] is None
+
+
 def test_claimed_accepted_calibration_needs_actual_cohort_bound_evidence(fixture, monkeypatch):
     fixture[2]["calibration"]["status"] = "accepted"
     write(fixture[0] / "configs/forge/views/quality_coverage.json", fixture[2])

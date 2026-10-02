@@ -178,3 +178,46 @@ def test_forged_contract_catalog_hash_is_rejected(inputs):
     atomic_json(path, _seal(report))
     with pytest.raises(ValueError, match="invalid recipe_contracts identity"):
         _compose(inputs)
+
+
+def _next_publication(root):
+    next_row = _row("third-technique", "c" * 64, attempt="third-attempt")
+    rows = read_json(root / "reports/forge/current.json")["rows"] + [next_row]
+    report = _report(rows)
+    report["provenance"]["qualified_receipts"]["third-attempt"] = _summary(root, next_row, "third-attempt")
+    atomic_json(root / "reports/forge/next.json", _seal(report))
+    atomic_text(root / "reports/forge/next.md", "# next publication\n")
+
+
+def test_append_to_composed_inventory_retains_every_previous_cohort(inputs):
+    first = _compose(inputs)
+    before = Path(first["json"]).read_bytes()
+    _next_publication(inputs)
+    result = publication.compose(inputs, original_report=first["json"],
+                                 current_report="reports/forge/next.json", candidate_id="third-technique",
+                                 output_prefix="reports/forge/third")
+    old = read_json(first["json"])
+    new = read_json(result["json"])
+    assert len(new["rows"]) == 3
+    assert [row["tiers"] for row in new["rows"][:2]] == [row["tiers"] for row in old["rows"]]
+    assert [row["bindings"] for row in new["rows"][:2]] == [row["bindings"] for row in old["rows"]]
+    assert Path(first["json"]).read_bytes() == before
+    assert new["execution_backend"] == "cuda"
+
+
+@pytest.mark.parametrize("tamper", ["ancestor_hash", "resealed_row"])
+def test_append_validates_ancestors_and_exact_scientific_rows(inputs, tamper):
+    first = _compose(inputs)
+    _next_publication(inputs)
+    if tamper == "ancestor_hash":
+        atomic_text(inputs / "reports/forge/original.md", "changed ancestor\n")
+        message = "hash mismatch"
+    else:
+        report = read_json(first["json"])
+        report["rows"][0]["cost"]["wall_seconds"] = 0.
+        atomic_json(Path(first["json"]), _seal(report))
+        message = "original scientific publication"
+    with pytest.raises(ValueError, match=message):
+        publication.compose(inputs, original_report=first["json"], current_report="reports/forge/next.json",
+                            candidate_id="third-technique", output_prefix="reports/forge/third")
+    assert not (inputs / "reports/forge/third.json").exists()

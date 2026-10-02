@@ -59,7 +59,7 @@ def build_readiness(root=ROOT, *, view_id="quality_coverage", backend=None, cand
         raise ValueError("backend must be cpu or cuda")
     inventory = build_report(root, view_id)
     view = views.load_view(root, view_id)
-    idea_paths = sorted((root / "configs/forge/ideas").glob("*.json"))
+    idea_paths = planning.declaration_paths(root)
     ideas = {json.loads(path.read_text())["id"]: path for path in idea_paths}
     if candidate_id is not None and candidate_id not in ideas:
         raise ValueError(f"unknown candidate {candidate_id!r}")

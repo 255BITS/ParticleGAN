@@ -23,6 +23,7 @@ DEFAULT_LABELS = {
     "r3gan-stacked-training-toy-v1": "R3GAN Stacked-MNIST recipe (toy-host adaptation)",
     "k3p-bcap-matched-v1": "BCap (matched K3P recipe)",
     "release07-gan-v3-mog-v1": "GAN v3 release 0.7 (MoG adaptation)",
+    "release07-gan-v3-task-adapted-v1": "GAN v3 release 0.7 (task adaptation)",
     "release07-gan-v3-cloud-v1": "GAN v3 release 0.7 (cloud)",
     "e22": "E22",
     "atlas": "Atlas",
@@ -63,7 +64,12 @@ def request_bindings(request: dict) -> dict:
             "sampling": {key: evaluation.get(key) for key in (
                 "sampling_contract_version", "sampling_law", "eval_output_noise", "scoring_weights")},
         }
-    return {"recipe": candidate.get("resolved_recipe"),
+        if candidate.get("host_adaptation") is not None:
+            from .taskrecipes import adaptation_receipt
+            task_bindings[name]["host_adaptation"] = adaptation_receipt(candidate, task)
+    return {"trainer_family": candidate.get("trainer_family"),
+            "configuration_id": candidate.get("configuration_id"),
+            "recipe": candidate.get("resolved_recipe"),
             "recipe_sha256": stable_hash(candidate.get("resolved_recipe")),
             "prior": candidate.get("prior"),
             "initializer": candidate.get("initializer", "deterministic_orthogonal"),
@@ -328,8 +334,11 @@ def write_report(root: Path | str, view_id: str = "discriminator_stability", *,
     prefix = Path(output_prefix) if output_prefix is not None else Path("reports/forge/technique-inventory")
     if not prefix.is_absolute():
         prefix = root / prefix
-    result = technique_board(root, view_id, execution_backend=execution_backend, labels=labels)
     json_path, markdown_path = Path(str(prefix) + ".json"), Path(str(prefix) + ".md")
+    if json_path.is_file() and read_json(json_path).get("publication_scope") == "current_technique_inventory":
+        raise ValueError("registered current leaderboard must be updated with "
+                         "python reports/forge/regenerate_technique_inventory.py")
+    result = technique_board(root, view_id, execution_backend=execution_backend, labels=labels)
     markdown = render_markdown(result, json_link=json_path.name,
                                repo_link_prefix=os.path.relpath(root.resolve(), markdown_path.parent.resolve()))
     if not json_path.exists() or read_json(json_path) != result:

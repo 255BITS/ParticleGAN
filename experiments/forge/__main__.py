@@ -95,6 +95,13 @@ def parser():
     tiers.add_argument("--view", help="show one view; default all current views")
     tiers.add_argument("--json", action="store_true", help="render machine-readable inventory instead of Markdown")
     tiers.add_argument("--output", type=Path, help="write the report here, relative to --root; default print to stdout")
+    search = commands.add_parser("search", help="bounded deterministic public Recipe grids; no trainer copies")
+    search_stages = search.add_subparsers(dest="stage", required=True)
+    for stage in ("plan", "enqueue", "run", "report"):
+        trial = search_stages.add_parser(stage)
+        trial.add_argument("spec", help="search id or configs/forge/searches JSON path")
+        if stage == "run":
+            trial.add_argument("--gpus", default=None, help="physical GPU indices, or cpu; must match the fixed spec")
     r = commands.add_parser("recall", help="find successes, failures and unknowns before a new idea")
     r.add_argument("--query", default="")
     r.add_argument("--goal")
@@ -201,7 +208,7 @@ def main(argv=None):
         compile_memory(root)
     # The inventory already records every attempt in the live event stream.
     # Compile the full set of boards once after draining this campaign.
-    batch_inventory = args.command == "inventory" and args.stage == "run"
+    batch_inventory = args.command in {"inventory", "search"} and args.stage == "run"
     queue = Queue(queue_root, report_root=root / "reports/forge",
                   on_completion=None if batch_inventory else publish)
     command = args.command
@@ -269,6 +276,17 @@ def main(argv=None):
             emit(enqueue_inventory(root, queue_root, queue=queue, **options))
         else:
             emit(run_inventory(root, queue_root, devices=args.gpus.split(","), queue=queue, **options))
+            publish()
+    elif command == "search":
+        from .configuration_search import plan_search, enqueue_search, run_search, report_search
+        if args.stage == "plan":
+            emit(plan_search(root, queue_root, args.spec))
+        elif args.stage == "enqueue":
+            emit(enqueue_search(root, queue_root, args.spec, queue=queue))
+        elif args.stage == "report":
+            emit(report_search(root, queue_root, args.spec, queue=queue))
+        else:
+            emit(run_search(root, queue_root, args.spec, devices=args.gpus.split(",") if args.gpus else None, queue=queue))
             publish()
     elif command in {"compile", "recall", "board", "readout"}:
         from . import knowledge

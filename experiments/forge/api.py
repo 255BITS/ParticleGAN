@@ -494,6 +494,7 @@ class FormulationContext:
                           "state_sha256": hashlib.sha256(birth.stream.get_state().cpu().numpy().tobytes()).hexdigest(),
                           "checkpoint_path": "trainer.birth_death.stream"}]}
         return {"api_version": API_VERSION, "execution_path": self.execution_path,
+                **({"host_adaptation": self.host_adaptation} if getattr(self, "host_adaptation", None) else {}),
                 "recipe_preset": self.recipe_preset,
                 "recipe": self.recipe.to_dict(), "prior": deepcopy(self.prior_config),
                 "capabilities": self.capabilities(), "requires_capabilities": list(self.requires_capabilities),

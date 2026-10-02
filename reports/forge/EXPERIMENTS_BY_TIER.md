@@ -141,7 +141,7 @@ Declared calibration status: **provisional**.
 
 Phase D historical calibration remains required
 
-Candidate outcomes, metrics and measured costs: [leaderboard](leaderboards/discriminator_stability.md).
+Candidate outcomes, metrics and measured costs: [leaderboard](technique-inventory.md).
 
 ### Tier 1: smoke
 

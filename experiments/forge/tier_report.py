@@ -8,6 +8,7 @@ import shlex
 from urllib.parse import quote
 
 from .contracts import atomic_json, atomic_text, file_hash, read_json, stable_hash
+from .knowledge import leaderboard_path
 from .views import load_tasks, load_view
 
 
@@ -166,7 +167,7 @@ def render_markdown(report: dict, root: Path, output_path: Path | None = None) -
             lines += [f"Declared evidence scope: `{_cell(view['evidence_scope'])}`.", ""]
         if view["evidence_scope"] == "calibration_diagnostic":
             lines += ["This view records calibration diagnostics and grants no ordinary qualification.", ""]
-        lines += [f"Candidate outcomes, metrics and measured costs: {link('leaderboard', 'reports/forge/leaderboards/' + view['id'] + '.md')}."]
+        lines += [f"Candidate outcomes, metrics and measured costs: {link('leaderboard', leaderboard_path(root, view['id']).as_posix())}."]
         for tier in view["tiers"]:
             lines += ["", f"### Tier {tier['qualification_tier']}: {tier['name']}", "", count_text(tier) + ".", ""]
             lines += task_table(tier["tasks"]) if tier["tasks"] else ["No tasks assigned."]

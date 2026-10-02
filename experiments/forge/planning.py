@@ -24,6 +24,9 @@ def candidate_revision_for(source_digest: str, candidate: dict) -> str:
     validate resolved_recipe from the actual public formulation declaration.
     """
     formulation = {key: candidate.get(key) for key in FORMULATION_FIELDS}
+    # Preserve identities of existing declarations with no adaptation contract.
+    if candidate.get("host_adaptation") is not None:
+        formulation["host_adaptation"] = candidate["host_adaptation"]
     formulation.update(resolved_recipe=candidate["resolved_recipe"], prior=candidate["prior"],
                        api_version=candidate.get("api_version", "forge-api-v1"))
     return stable_hash({"source": source_digest, "formulation": formulation})
@@ -52,13 +55,32 @@ def rekey_jobs(jobs):
     return jobs
 
 
+def declaration_paths(root: Path) -> list[Path]:
+    """Ordinary ideas and immutable configurations share the same planner."""
+    paths = sorted(path for directory in ("ideas", "configurations")
+                   for path in (Path(root) / "configs/forge" / directory).glob("*.json"))
+    if len({path.stem for path in paths}) != len(paths):
+        raise ValueError("candidate ids must be unique across ideas and configurations")
+    return paths
+
+
+def discover_candidate_ids(root: Path) -> list[str]:
+    return sorted(path.stem for path in declaration_paths(root))
+
+
 def load_idea(root: Path, idea_id: str) -> dict:
     identifier(idea_id, "idea")
-    path = Path(root) / "configs/forge/ideas" / f"{idea_id}.json"
+    matches = [path for path in declaration_paths(root) if path.stem == idea_id]
+    if not matches:
+        raise FileNotFoundError(f"no declared candidate: {idea_id}")
+    path = matches[0]
     idea = read_json(path)
     validate_idea(idea)
     if idea["id"] != idea_id:
         raise ValueError("idea filename must match id")
+    if path.parent.name == "configurations":
+        from .configuration_search import validate_configuration_declaration
+        validate_configuration_declaration(idea)
     return idea
 
 
@@ -69,6 +91,8 @@ def new_idea(root: Path, idea_id: str, parent: str, *, goal="discriminator_stabi
         raise ValueError(f"idea already exists: {path}")
     inherited = load_idea(root, parent)
     idea = {k: deepcopy(inherited[k]) for k in FORMULATION_FIELDS if k in inherited}
+    if "host_adaptation" in inherited:
+        idea["host_adaptation"] = deepcopy(inherited["host_adaptation"])
     idea.update(schema_version=1, id=idea_id, parent=parent, goal=goal,
                 hypothesis=hypothesis or "TODO: state why this mechanism should improve the selected goal",
                 changed_factors=["TODO: describe the substantive change before enqueue"],
@@ -83,10 +107,16 @@ def new_idea(root: Path, idea_id: str, parent: str, *, goal="discriminator_stabi
 def resolve_idea(root: Path, idea_id: str, *, view_id: str | None = None,
                  through_tier: int = 1, queue_root: Path | None = None,
                  freeze_source: bool = False, execution_backend: str = "cuda",
-                 cuda_model: str | None = None) -> dict:
+                 cuda_model: str | None = None, declaration: dict | None = None) -> dict:
     """Tier placement never enters candidate/task compatibility keys."""
     root = Path(root).resolve()
-    idea = load_idea(root, idea_id)
+    idea = load_idea(root, idea_id) if declaration is None else deepcopy(declaration)
+    validate_idea(idea)
+    if idea["id"] != idea_id:
+        raise ValueError("declaration id must match requested candidate")
+    if declaration is not None and "configuration_id" in idea:
+        from .configuration_search import validate_configuration_declaration
+        validate_configuration_declaration(idea)
     if through_tier not in (1, 2, 3):
         raise ValueError("through-tier must be 1, 2, or 3")
     defaults = read_json(root / "configs/forge/defaults.json")
@@ -112,6 +142,9 @@ def resolve_idea(root: Path, idea_id: str, *, view_id: str | None = None,
             extensions=idea.get("extensions", {}), initializer=idea.get("initializer", "deterministic_orthogonal"),
             execution_path=idea.get("execution_path", "public_trainer"))
         recipe = asdict(context.recipe)
+        if ("configuration_id" in idea
+                and stable_hash(recipe) != stable_hash(idea.get("resolved_configuration_recipe"))):
+            raise ValueError("configuration frozen Recipe differs from current public defaults or API bindings; declare a new configuration")
         capabilities = [name for name, enabled in context.capabilities().items() if enabled]
         rng = context.streams.manifest()
     except CapabilityError as exc:

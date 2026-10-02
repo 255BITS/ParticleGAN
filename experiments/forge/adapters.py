@@ -24,6 +24,7 @@ from .mechanisms import MechanismAudit, mechanism_blockers
 from .sampling import ENUMERATED_PRIOR_CLEAN, PUBLIC_PRIOR_CLEAN, executed_receipt
 from .state import state_digest
 from .telemetry import PhaseTimer, normalize_adapter_costs
+from .taskrecipes import adaptation_receipt, bind_task_candidate
 
 
 def _event(event, **values):
@@ -31,24 +32,30 @@ def _event(event, **values):
 
 
 def _context(request, task, device, resources):
-    candidate = request["candidate"]
+    candidate = bind_task_candidate(request["candidate"], task)
     from .nativeprofiles import native_host_initialization
     host_initialization = native_host_initialization(task)
     blockers = task_policy_blockers(task, candidate)
     if blockers:
         raise CapabilityError(blockers)
     overrides = host_recipe_overrides(candidate, task["execution"], resources)
-    return FormulationContext(
+    context = FormulationContext(
         recipe_preset=candidate.get("recipe_preset"), recipe_overrides=overrides,
         prior=task["execution"].get("prior", candidate.get("prior")),
         seed=request["protocol"]["seed"], device=device,
         requires_capabilities=tuple(candidate.get("requires_capabilities", ())) + tuple(task["requires_capabilities"]),
         extensions=candidate.get("extensions", {}), initializer=candidate.get("initializer", "deterministic_orthogonal"),
         host_initialization=host_initialization)
+    context.host_adaptation = adaptation_receipt(request["candidate"], task)
+    return context
 
 
 def adapter_preflight(task, candidate, *, root=None):
     """Report unsupported task/host bindings before reserving training compute."""
+    try:
+        candidate = bind_task_candidate(candidate, task)
+    except ValueError as error:
+        return [str(error)]
     adapter = task["adapter"]
     supported = {"transfer_behavior", "transfer_vector", "transfer_image", "native100",
                  "native100_continuation", "ring_endurance", "clockfree_audit", "paired_adaptation"}

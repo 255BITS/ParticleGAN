@@ -30,6 +30,18 @@ def _text_output(path: Path, value: str) -> None:
     atomic_text(path, value)
 
 
+def leaderboard_path(root: Path, view_id: str) -> Path:
+    """Use a published technique inventory instead of a second goal table."""
+    current = Path("reports/forge/technique-inventory.md")
+    metadata = Path(root) / current.with_suffix(".json")
+    if metadata.is_file() and (Path(root) / current).is_file():
+        publication = read_json(metadata)
+        if (publication.get("publication_scope") == "current_technique_inventory"
+                and publication.get("view") == view_id):
+            return current
+    return Path("reports/forge/leaderboards") / (view_id + ".md")
+
+
 def _records(root: Path) -> tuple[list[dict], list[dict]]:
     indexed, conflicts = {}, []
     for path in sorted((root / "reports/forge/records").glob("*.json")):
@@ -293,7 +305,8 @@ def board(root: Path, view_id: str, *, include_bindings=False) -> dict:
     states = _queue_states(root, attempts)
     conflicts.extend(receipt_issues)
     current, matched_attempts, seen_cohorts = [], set(), set()
-    for path in sorted((root / "configs/forge/ideas").glob("*.json")):
+    from .planning import declaration_paths
+    for path in declaration_paths(root):
         idea = read_json(path)
         idea_id = idea.get("id", path.stem)
         configurations = {("cuda", None), ("cpu", None)}
@@ -488,7 +501,13 @@ def compile_memory(root: Path) -> dict:
             result = board(root, path.stem)
             boards.append(result)
             _json_output(output / "leaderboards" / (path.stem + ".json"), result)
-            _text_output(output / "leaderboards" / (path.stem + ".md"), _board_markdown(result))
+            markdown_path = leaderboard_path(root, path.stem)
+            if markdown_path.parent == Path("reports/forge/leaderboards"):
+                _text_output(root / markdown_path, _board_markdown(result))
+            else:
+                # This is generated output; numerical cohort evidence stays in
+                # the goal JSON and the inventory's evidence registry.
+                (output / "leaderboards" / (path.stem + ".md")).unlink(missing_ok=True)
         gaps = _gaps(root)
         inputs = {}
         for directory in (root / "reports/forge/records", root / "reports/forge/attempts", root / "configs/forge",
@@ -530,7 +549,8 @@ def compile_memory(root: Path) -> dict:
                  f"Records: {len(records)}. Inventory coverage: {'complete' if coverage.get('valid') else 'incomplete'}. "
                  f"Unresolved import items: {len(gaps.get('gaps', []))}.", "",
                  "## Goal views", ""]
-        lines.extend(f"- [{result['view']}](leaderboards/{result['view']}.md)" for result in boards)
+        lines.extend(f"- [{result['view']}]({leaderboard_path(root, result['view']).relative_to('reports/forge').as_posix()})"
+                     for result in boards)
         lines += ["", "[Measured automation costs, reuse, and avoided work](automation.json). "
                   "Run `python -m experiments.forge stats` for current accounting; unavailable measurements remain explicit.",
                   "", "## Pending readouts", "", ", ".join(pending) or "None recorded.", "",

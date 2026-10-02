@@ -43,9 +43,11 @@ REPORT_FAMILIES = {
     "lunar_fast", "mog-autoencoder", "mog-vae", "prior-comparison",
     "readme-100gaussians", "sparse-ucd", "trajectory", "transition", "releases",
     "atlas-explanation", "e22-animation", "r1-integrations", "develop-gates-20261001",
+    "paired-residual-toy",
 }
 BENCHMARK_FAMILIES = {"init_research", "learned_lr", "legacy", "locked_shared",
-                      "paired_error_2d", "smart_descent", "toy100", "transfer_suite"}
+                      "paired_error_2d", "smart_descent", "toy100", "transfer_suite",
+                      "routed_conditioning"}
 CONFIG_FAMILIES = {"100gaussians", "cifar_ddgan", "cifar_particle_ae",
                    "cifar_particle_ddgan", "denoising", "gym", "mog", "mog_vae",
                    "sparse", "toy100", "trajectory", "transition"}

@@ -221,6 +221,24 @@ def test_compilation_is_deterministic_and_never_ingests_generated_memory(setup):
     assert "reports/forge/compilation.json" not in inputs
 
 
+def test_compiler_links_to_single_published_table_instead_of_creating_another(setup):
+    root, _ = setup
+    current = root / "reports/forge/technique-inventory.md"
+    current.parent.mkdir(parents=True, exist_ok=True)
+    current.write_text("# Current technique leaderboard\n")
+    atomic_json(current.with_suffix(".json"), {"publication_scope": "current_technique_inventory", "view": "stability"})
+    duplicate = root / "reports/forge/leaderboards/stability.md"
+    duplicate.parent.mkdir(parents=True, exist_ok=True)
+    duplicate.write_text("Old generated goal table\n")
+    knowledge.compile_memory(root)
+    assert current.read_text() == "# Current technique leaderboard\n"
+    assert not duplicate.exists()
+    assert "[stability](technique-inventory.md)" in (root / "reports/forge/EXPERIMENT_MEMORY.md").read_text()
+    # The full qualification reducer remains available as numerical evidence.
+    assert (root / "reports/forge/leaderboards/stability.json").is_file()
+    assert knowledge.leaderboard_path(root, "another-goal") == Path("reports/forge/leaderboards/another-goal.md")
+
+
 def test_recall_returns_useful_negative_history_and_unknown_goal(setup):
     root, _ = setup
     historical(root)

@@ -8,6 +8,7 @@ be token efficient
 make it easy to tail the logs
 summarize and give explanations, leaderboard, recommendations on experiments after completion
 establish metrics/leaderboards and use them over viewing images
+only keep one generated leaderboard per goal, the current one
 
 Keep bulk research logs and per-update metric/event streams out of Git. Store
 raw stdout, JSONL traces, JUnit logs, checkpoints, and tensor/state dumps locally

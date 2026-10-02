@@ -50,6 +50,8 @@ def _members(request, task_ids):
 
 
 def _validate_task(task, candidate, root):
+    from .taskrecipes import bind_task_candidate
+    candidate = bind_task_candidate(candidate, task)
     execution, adapter = task["execution"], task["adapter"]
     for marker, adapters in PROFILE_ADAPTERS.items():
         if marker in execution and adapter not in adapters:
@@ -109,6 +111,8 @@ def _validate_candidate_identity(request):
     from .planning import candidate_revision_for
 
     candidate = request["candidate"]
+    from .taskrecipes import validate_host_adaptation
+    validate_host_adaptation(candidate)
     # Rebuild from declarations, not candidate-provided resolved_recipe echoes.
     # Recipe resolution has no model construction or training draw and does not
     # depend on promotion seed; the registered RNG protocol is checked separately.
@@ -120,6 +124,11 @@ def _validate_candidate_identity(request):
         initializer=candidate.get("initializer", "deterministic_orthogonal"),
         execution_path=candidate.get("execution_path", "public_trainer"))
     resolved_recipe = asdict(context.recipe)
+    if "configuration_id" in candidate:
+        from .configuration_search import validate_configuration_declaration
+        validate_configuration_declaration(candidate)
+        if canonical(candidate.get("resolved_configuration_recipe")) != canonical(resolved_recipe):
+            raise ValueError("configuration frozen Recipe differs from its actual public formulation")
     if canonical(candidate.get("resolved_recipe")) != canonical(resolved_recipe):
         raise ValueError("candidate resolved_recipe differs from its actual public formulation")
     expected = candidate_revision_for(request["source"]["digest"],

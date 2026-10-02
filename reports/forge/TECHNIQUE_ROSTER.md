@@ -1,6 +1,6 @@
 # Forge technique roster
 
-The current executable catalog contains 12 idea declarations. The inventory
+The current executable catalog contains 14 idea declarations. The inventory
 uses the ordinary `discriminator_stability` view: **3 smoke, 19 quality and 2
 endurance requirements**. Each tier's denominator stays fixed when execution
 stops or a host is unsupported. Architecture-transfer and paired-sampling
@@ -9,6 +9,7 @@ diagnostics are reported separately. The screening profile remains provisional.
 | Technique | Idea ID | Actual formulation | Ordinary applicability |
 | --- | --- | --- | --- |
 | R1/R2 baseline, matched | `k3p-r1r2-matched-v1` | Fixed squared-L2 real/fake penalty, coefficient 1; K3P optimizer | Execute eligible tiers |
+| Modern GAN training baseline | `r3gan-stacked-training-toy-v1` | Plain Adam; published Stacked-MNIST LR/beta2/R1-R2 schedules adapted to toy hosts | Execute eligible tiers; recorded smoke failure |
 | BCap, matched | `k3p-bcap-matched-v1` | Fixed one-sided L2 real/fake cap, coefficient 1, cap 1; K3P optimizer | Execute eligible tiers |
 | K3P | `k3p` | Explicit K3P penalty and optimizer | Execute eligible tiers |
 | KA2 | `ka2` | Explicit KA2 penalty and optimizer; current public default | Execute eligible tiers |
@@ -17,6 +18,7 @@ diagnostics are reported separately. The screening profile remains provisional.
 | K3P without A2 | `k3p-a2-off-native-diagnostic` | K3P with `latent_damping_max_rate=0` | Execute eligible tiers |
 | K3P without training output noise | `k3p-no-output-noise-diagnostic` | K3P with `output_noise_std=0` | Execute eligible tiers |
 | Released v0.7 GAN v3, matched MoG | `release07-gan-v3-mog-v1` | Full released BCap coefficient 6/cap 1.25 recipe; matched host adaptation | BLOCKED at smoke by frozen host ownership |
+| Released v0.7 GAN v3, task adapted | `release07-gan-v3-task-adapted-v1` | Released optimizer/BCap recipe with explicit per-host resource/objective delegation | All 24 required tasks pass preflight; ordinary gates determine execution |
 | Released v0.7 GAN v3, original cloud host | `release07-gan-v3-cloud-v1` | Full released BCap coefficient 6/cap 1.25 recipe; original cloud diagnostic host | BLOCKED at smoke by frozen host ownership |
 | E22 | `e22` | KA2 plus DV12/stationarity, row controls, learned noise and state-selected serving | BLOCKED: no frozen policy-aware tasks |
 | Atlas | `atlas` | E22 plus automatic feature cells and settled reopen guard | BLOCKED: no frozen policy-aware tasks |
@@ -37,6 +39,15 @@ smoke requirements. Their separately frozen native diagnostic hosts remain
 available in `formulation_comparison`; ordinary gates confer no permission to
 skip blocked smoke. The prior is task-owned: a card's cloud label does not
 force cloud sampling on another task.
+
+The [task-adapted successor](../../docs/forge-task-recipe-adaptation.md) retains
+the complete matched-MoG reference recipe and explicitly delegates only fields
+already owned by each executing host. Scalar trainer hosts keep the released
+prior-spread term; behavioral hosts retain their original objectives and record
+the delegation in applied receipts. All 24 required tasks pass preflight.
+The original cards, blockers and concluded native failures remain frozen.
+This integration makes the comparison executable without asserting a quality
+pass or borrowing historical credit.
 
 ## Recipe binding repair
 
