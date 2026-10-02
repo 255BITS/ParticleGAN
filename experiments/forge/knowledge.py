@@ -305,7 +305,8 @@ def board(root: Path, view_id: str, *, include_bindings=False) -> dict:
     states = _queue_states(root, attempts)
     conflicts.extend(receipt_issues)
     current, matched_attempts, seen_cohorts = [], set(), set()
-    for path in sorted((root / "configs/forge/ideas").glob("*.json")):
+    from .planning import declaration_paths
+    for path in declaration_paths(root):
         idea = read_json(path)
         idea_id = idea.get("id", path.stem)
         configurations = {("cuda", None), ("cpu", None)}

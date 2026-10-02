@@ -1,5 +1,6 @@
 """One current table can be rebuilt from committed, source-bound evidence."""
 from copy import deepcopy
+from collections import Counter
 import importlib.util
 from pathlib import Path
 import shutil
@@ -195,11 +196,34 @@ def test_same_source_cpu_registration_retains_cuda_evidence(evidence, monkeypatc
     monkeypatch.setattr(publication, "regenerate", regrade)
     cpu = publication.publish_current(root, execution_backend="cpu", source_commit="commit-a")
     assert read_json(cpu["json"])["rows"][0]["candidate_revision"] == "revision-cpu"
-    cuda = read_json(publication.publish_current(root)["json"])
+    cuda = read_json(publication.publish_current(root, execution_backend="cuda")["json"])
     assert cuda["rows"][0]["candidate_revision"] == "revision-a"
-    both = read_json(publication.publish_current(root, execution_backend=None)["json"])
+    both = read_json(publication.publish_current(root)["json"])
     assert {row["runtime_cohort"]["execution_backend"] for row in both["rows"]} == {"cpu", "cuda"}
     assert len(read_json(root / publication.EVIDENCE_MANIFEST)["cohorts"]) == 3
+
+
+def test_family_new_hardware_keeps_its_own_canonical_fallback(evidence):
+    root, manifest = evidence
+    (root / "configs/forge/ideas/atlas.json").unlink()
+    atomic_json(root / "configs/forge/trainer-families.json", {"schema_version": 1, "families": [
+        {"id": "bcap", "label": "BCap", "canonical_candidate": "bcap", "candidates": ["bcap"]}]})
+    entry, snapshot = _register(root, manifest, "bcap-trial", "c", finished="2026-10-03T01:00:00+00:00")
+    atomic_json(root / "configs/forge/ideas/bcap-trial.json", {"id": "bcap-trial", "trainer_family": "bcap"})
+    canonical = deepcopy(snapshot["rows"][0])
+    canonical.update(candidate_id="bcap", candidate_revision="revision-canonical-c", cohort="canonical-c", attempt_ids=[],
+                     tasks=[{"task_id": "two_pole", "status": "UNKNOWN"}], cost={"wall_seconds": None})
+    snapshot["rows"].append(canonical)
+    snapshot["provenance"].pop("input_digest")
+    snapshot["provenance"]["input_digest"] = stable_hash(snapshot)
+    atomic_json(root / entry["snapshot"], snapshot)
+    entry["json_sha256"] = file_hash(root / entry["snapshot"])
+    atomic_json(root / publication.EVIDENCE_MANIFEST, manifest)
+    result = read_json(publication.publish_current(root)["json"])
+    assert len(result["rows"]) == 2 and all(row["candidate_id"] == "bcap" for row in result["rows"])
+    assert {row["runtime_cohort"]["compute_profiles"]["cuda"]["model"] for row in result["rows"]} == {"gpu-a", "gpu-c"}
+    assert len(result["configuration_rows"]) == 3
+    assert next(row for row in result["rows"] if row["cohort"] == "canonical-c")["attempt_ids"] == []
 
 
 @pytest.mark.parametrize("tamper,message", [
@@ -261,22 +285,40 @@ def test_raw_technique_export_cannot_replace_registered_current_evidence(evidenc
 
 def test_committed_cohorts_rebuild_every_scientific_row_in_a_checkout_without_raw_logs(tmp_path):
     for relative in (publication.EVIDENCE_MANIFEST.parent, Path("reports/forge/technique-receipts"),
-                     Path("configs/forge/ideas"), Path("configs/forge/views")):
+                     Path("configs/forge/ideas"), Path("configs/forge/configurations"),
+                     Path("configs/forge/searches"), Path("configs/forge/views"),
+                     Path("reports/forge/configuration-search")):
+        if not (ROOT / relative).is_dir():
+            continue
         shutil.copytree(ROOT / relative, tmp_path / relative)
+    shutil.copyfile(ROOT / "configs/forge/trainer-families.json", tmp_path / "configs/forge/trainer-families.json")
     manifest = read_json(tmp_path / publication.EVIDENCE_MANIFEST)
-    expected = {}
+    expected, all_snapshots, registered_rows = {}, [], []
     for entry in manifest["cohorts"]:
         snapshot = read_json(tmp_path / entry["snapshot"])
-        expected.update({row["candidate_id"]: row for row in snapshot["rows"] if row["candidate_id"] in entry["candidates"]})
+        all_snapshots.extend(snapshot["rows"])
+        for row in snapshot["rows"]:
+            if row["candidate_id"] not in entry["candidates"]:
+                continue
+            registered_rows.append(row)
+            key = row["candidate_id"], row["runtime_cohort"]["execution_backend"]
+            rank = entry["candidates"][row["candidate_id"]] or ""
+            if key not in expected or rank > expected[key][0]:
+                expected[key] = rank, row
     # This fixture isolates cached reconstruction; separate tests exercise new
     # cards' live declaration resolution without needing a full Git checkout.
-    for card in (tmp_path / "configs/forge/ideas").glob("*.json"):
-        if card.stem not in expected:
+    for card in list((tmp_path / "configs/forge/ideas").glob("*.json")) + list((tmp_path / "configs/forge/configurations").glob("*.json")):
+        if card.stem not in {key[0] for key in expected}:
             card.unlink()
     result = read_json(publication.publish_current(tmp_path)["json"])
-    display_fields = {"technique", "publication_key", "qualification_input", "qualification_reuse"}
+    display_fields = {"technique", "publication_key", "qualification_input", "qualification_reuse",
+                      "trainer_family", "configuration_id", "comparison_cohort", "selected_configuration", "alternative_scope"}
     science = lambda row: {key: value for key, value in row.items() if key not in display_fields}
-    assert {row["candidate_id"]: science(row) for row in result["rows"]} == {name: science(row) for name, row in expected.items()}
-    assert len(result["rows"]) == len(expected)
+    scientific_variants = [science(row) for row in result["configuration_rows"]]
+    assert all(science(row) in scientific_variants for _, row in expected.values())
+    assert all(row in [science(original) for original in all_snapshots] for row in scientific_variants)
+    assert Counter(stable_hash(science(row)) for row in result["evidence_rows"]) == Counter(stable_hash(science(row)) for row in registered_rows)
+    assert len(result["rows"]) == len({(row["trainer_family"], stable_hash(row["runtime_cohort"])) for row in result["configuration_rows"]})
+    assert len(result["configuration_rows"]) >= len(expected)
     assert not (tmp_path / "reports/forge/attempts").exists()
     assert len(list((tmp_path / "reports/forge").rglob("*.md"))) == 1

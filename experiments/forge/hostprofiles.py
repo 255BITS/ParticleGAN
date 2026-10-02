@@ -124,6 +124,11 @@ def _validate_candidate_identity(request):
         initializer=candidate.get("initializer", "deterministic_orthogonal"),
         execution_path=candidate.get("execution_path", "public_trainer"))
     resolved_recipe = asdict(context.recipe)
+    if "configuration_id" in candidate:
+        from .configuration_search import validate_configuration_declaration
+        validate_configuration_declaration(candidate)
+        if canonical(candidate.get("resolved_configuration_recipe")) != canonical(resolved_recipe):
+            raise ValueError("configuration frozen Recipe differs from its actual public formulation")
     if canonical(candidate.get("resolved_recipe")) != canonical(resolved_recipe):
         raise ValueError("candidate resolved_recipe differs from its actual public formulation")
     expected = candidate_revision_for(request["source"]["digest"],

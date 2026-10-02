@@ -580,12 +580,12 @@ def _current_markdown(result, root, path):
     def cell(value):
         return str(value if value is not None else "unknown").replace("|", "\\|").replace("\n", " ")
     tiers = list(result["tier_requirements"])
-    lines = ["# Current Forge technique leaderboard", "",
-             "Each cell is **passes / full required total**. This is the single current inventory; "
-             "each technique retains its latest recorded scientific source and runtime.", "",
-             "| Technique | Evidence source | Exact revision / cohort | Compute | " +
+    lines = ["# Current Forge trainer-family leaderboard", "",
+             "Each cell is **passes / full required total** from one complete selected configuration. "
+             "Each trainer family and runtime has one row; its alternatives remain recorded separately.", "",
+             "| Trainer family | Selected configuration | Selection | Evidence source | Exact revision / cohort | Compute | " +
              " | ".join(f"Tier {tier}" for tier in tiers) + " | Recorded tier | Other outcomes | Paid seconds |",
-             "| --- | --- | --- | --- | " + " | ".join("---:" for _ in tiers) + " | ---: | --- | ---: |"]
+             "| --- | --- | --- | --- | --- | --- | " + " | ".join("---:" for _ in tiers) + " | ---: | --- | ---: |"]
     for row in result["rows"]:
         source = row.get("bindings", {}).get("source_digest")
         pointer = result["evidence_sources"].get(row.get("publication_key"))
@@ -600,26 +600,45 @@ def _current_markdown(result, root, path):
         others = ", ".join(f"{status} {count}" for status, count in sorted(counts.items())) or "all required tasks PASS"
         seconds = row.get("cost", {}).get("wall_seconds")
         revision, cohort = (str(row.get(key) or "unresolved")[:12] for key in ("candidate_revision", "cohort"))
-        values = [row["technique"], source_link, f"{revision} / {cohort}", compute,
+        selection = row.get("selection", {})
+        selection_label = selection.get("selection_kind", "canonical_fallback").replace("_", " ")
+        if not selection.get("qualified", False):
+            selection_label += "; no qualified winner"
+        name = row["candidate_id"]
+        card = root / "configs/forge/configurations" / (name + ".json")
+        if not card.is_file():
+            card = root / "configs/forge/ideas" / (name + ".json")
+        configuration_link = f"[`{name}`]({os.path.relpath(card, path.parent)})"
+        values = [row["technique"], configuration_link, selection_label, source_link, f"{revision} / {cohort}", compute,
                   *[f"{row['tiers'][tier]['passed']}/{row['tiers'][tier]['total']}" for tier in tiers],
                   row["qualified_tier"], others, round(seconds, 3) if seconds is not None else "unknown"]
         lines.append("| " + " | ".join(cell(value) for value in values) + " |")
     lines += ["", "Recorded results remain bound to their actual recipes, priors, initialization, budgets, sampling laws "
               "and hardware. They do not pool qualification across sources or qualify the latest checkout. "
-              "The screening profile remains provisional.", "",
+              "Selection never combines passing tasks or tiers from different configurations. A failed best-observed "
+              "configuration is not a qualified winner. Search evidence is provisional, without independent confirmation "
+              "or public-default adoption. The screening profile remains provisional.", "",
               "UNKNOWN means unmeasured. Failed or blocked prerequisites stop later work; required denominators stay fixed.", "",
-              f"[Task statuses and exact bindings]({path.with_suffix('.json').name}) · "
+              f"[All configuration alternatives, trials, task statuses and exact bindings]({path.with_suffix('.json').name}) · "
               f"[Evidence and archived publication identities]({os.path.relpath(root / EVIDENCE_MANIFEST, path.parent)})", "",
               "Regenerate this same leaderboard from committed evidence, without training or raw-log hydration:", "",
               "```sh", "python reports/forge/regenerate_technique_inventory.py", "```", "",
               "After a new experiment, use `--source-commit <executed-commit>` to independently regrade its "
               "hydrated original receipts and update this leaderboard. Source snapshots are provenance, not additional leaderboards.", "",
               f"Publication input digest `{result['provenance']['input_digest']}`.", ""]
+    archived = [row for row in result.get("configuration_rows", []) if row.get("alternative_scope") == "archived_alternative"]
+    if archived:
+        lines += ["Archived alternatives retain their original outcomes and incompatible source/runtime bindings:", ""]
+        for row in archived:
+            source = row.get("bindings", {}).get("source_digest", "unresolved")
+            lines.append(f"- `{row['candidate_id']}` ({row['trainer_family']}), source `{source[:12]}`; "
+                         f"recorded tier {row.get('qualified_tier', 0)}. Full evidence is in the companion JSON.")
+        lines.append("")
     return "\n".join(lines)
 
 
 def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discriminator_stability",
-                    execution_backend="cuda"):
+                    execution_backend=None):
     """Maintain one current table; registered source snapshots retain the history."""
     root = Path(root).resolve()
     manifest_path = root / EVIDENCE_MANIFEST
@@ -676,7 +695,10 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
         pending_snapshot = root / relative, data
     if manifest is None:
         raise ValueError("no registered technique evidence; use --source-commit after a completed experiment")
-    candidates = {path.stem for path in (root / "configs/forge/ideas").glob("*.json")}
+    from experiments.forge.planning import declaration_paths
+    from experiments.forge.trainer_families import family_for_candidate, select_family_rows
+    declarations = {path.stem: read_json(path) for path in declaration_paths(root)}
+    candidates = set(declarations)
     selected = {}
     for entry, report, rows in reports:
         for name, row in rows.items():
@@ -691,9 +713,26 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
             elif rank == previous[0] and any(row.get(field) != previous[3].get(field)
                                             for field in ("candidate_revision", "cohort", "runtime_cohort")):
                 raise ValueError("ambiguous latest recorded technique cohort")
+    # A search runtime needs the actual canonical declaration as its fallback;
+    # never present an arbitrary unmeasured tuning trial as the family default.
+    canonical_missing = set()
+    for (name, backend), (_, entry, report, row) in list(selected.items()):
+        canonical = family_for_candidate(root, name, declarations.get(name))["canonical_candidate"]
+        runtime_key = stable_hash(row.get("runtime_cohort"))
+        if any(item[3]["candidate_id"] == canonical and item[3].get("runtime_cohort") == row.get("runtime_cohort")
+               for item in selected.values()):
+            continue
+        matches = [item for item in report["rows"] if item["candidate_id"] == canonical
+                   and item.get("runtime_cohort") == row.get("runtime_cohort")
+                   and item.get("bindings", {}).get("source_digest") == row.get("bindings", {}).get("source_digest")]
+        if len(matches) == 1 and not matches[0].get("attempt_ids"):
+            _validate_published_row(root, report, matches[0])
+            selected[canonical, backend, runtime_key] = "", entry, report, deepcopy(matches[0])
+        else:
+            canonical_missing.add((canonical, backend, runtime_key))
     missing = candidates - {key[0] for key in selected}
     live = None
-    if missing:
+    if missing or canonical_missing:
         with tempfile.TemporaryDirectory(prefix="forge-technique-current-") as temporary:
             metadata = write_report(root, view_id, execution_backend=execution_backend,
                                     output_prefix=Path(temporary) / "current")
@@ -702,14 +741,15 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
             if live.get(key) != manifest[key]:
                 raise ValueError(f"current declarations have incompatible {key}; update the evidence view explicitly")
         for row in live["rows"]:
-            if row["candidate_id"] in missing:
+            backend = row.get("runtime_cohort", {}).get("execution_backend")
+            runtime_key = stable_hash(row.get("runtime_cohort"))
+            if row["candidate_id"] in missing or (row["candidate_id"], backend, runtime_key) in canonical_missing:
                 # Measured rows must first be frozen and registered, so a later
                 # code change cannot silently erase their published results.
                 if row.get("attempt_ids"):
                     raise ValueError("register new measured technique evidence with --source-commit")
                 row.setdefault("bindings", {})["source_origin_commit"] = None
-                backend = row.get("runtime_cohort", {}).get("execution_backend")
-                selected[row["candidate_id"], backend] = "", None, live, deepcopy(row)
+                selected[row["candidate_id"], backend, runtime_key] = "", None, live, deepcopy(row)
     from experiments.forge.technique_board import DEFAULT_LABELS
     result = {"schema_version": 1, "reducer_version": "forge-current-technique-inventory-v1",
               "publication_scope": "current_technique_inventory", "qualification_reuse": False,
@@ -736,8 +776,24 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
                     raise ValueError("conflicting scientific contract identities")
                 combined[digest] = deepcopy(contract)
         result[catalog] = dict(sorted(combined.items()))
+    family_result = select_family_rows(root, result["rows"], result, view_id=view_id,
+                                       policy_fingerprint=manifest["policy_fingerprint"], declarations=declarations)
+    result.update(family_result)
+    # Immutable scientific history stays numerical, including earlier revisions
+    # of the same configuration. It cannot fill cells in the selected row.
+    result["evidence_rows"] = []
+    for entry, report, rows in reports:
+        result["evidence_sources"][entry["json_sha256"]] = deepcopy(entry)
+        for original in rows.values():
+            if execution_backend is not None and original.get("runtime_cohort", {}).get("execution_backend") != execution_backend:
+                continue
+            evidence = deepcopy(original)
+            evidence.update(publication_key=entry["json_sha256"], qualification_reuse=False, qualification_input=False)
+            result["evidence_rows"].append(evidence)
     result["provenance"] = {"publication_reducer_sha256": file_hash(Path(__file__)),
                             "evidence_manifest_sha256": stable_hash(manifest),
+                            "trainer_family_registry_sha256": file_hash(root / "configs/forge/trainer-families.json")
+                                if (root / "configs/forge/trainer-families.json").is_file() else None,
                             "selected_rows_sha256": stable_hash(result["rows"])}
     result["provenance"]["input_digest"] = stable_hash(result)
     json_path, markdown_path = root / CURRENT_PREFIX.with_suffix(".json"), root / CURRENT_PREFIX.with_suffix(".md")
@@ -756,7 +812,7 @@ def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--root", type=Path, default=REPOSITORY_ROOT)
     parser.add_argument("--goal", default="discriminator_stability")
-    parser.add_argument("--device", choices=("cpu", "cuda", "all"), default="cuda")
+    parser.add_argument("--device", choices=("cpu", "cuda", "all"), default="all")
     parser.add_argument("--source-commit", help="reconstruct and grade an exact recorded Git source cohort, independently of live HEAD")
     args = parser.parse_args(argv)
     print(_json_text(publish_current(args.root, view_id=args.goal,

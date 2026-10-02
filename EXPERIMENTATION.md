@@ -301,7 +301,9 @@ For a technique inventory with one passes/total column per tier, use the
 [current technique leaderboard](reports/forge/technique-inventory.md).
 This is the single published technique inventory, updated in place. It includes
 the [configurable Modern GAN training baseline](reports/forge/R3GAN_BASELINE_READOUT.md)
-and preserves each technique's latest recorded result and source identity.
+and selects one complete configuration for each declared trainer family and
+comparable runtime cohort. Alternative configurations retain their recorded
+results and source identities in the companion JSON and evidence snapshots.
 The [released v0.7 task-adaptation readout](reports/forge/RELEASE07_TASK_ADAPTATION_READOUT.md)
 adds one measured successor with all 24 integration preflights ready. Its
 required smoke failure stops the remaining ordinary tasks; the original native
@@ -311,9 +313,21 @@ Numerical source snapshots and receipt proofs remain in
 tables. Regeneration launches no training and needs no raw-log hydration;
 independent regrading of a source needs its byte-exact original receipts.
 The roster is
-discovered from `configs/forge/ideas/*.json`, so adding a declared technique adds
-a row automatically. R1/R2, BCap, K3P and the other public formulations retain
+discovered from `configs/forge/ideas/*.json` and
+`configs/forge/configurations/*.json`. The explicit family registry keeps
+hyperparameter trials within an existing technique row. R1/R2, BCap, K3P and the other public formulations retain
 their actual resolved recipes and separate source/runtime/sampling cohorts.
+The ordinary `inventory` execution command still submits declared ideas;
+configuration grids run only through an explicitly requested `search` study.
+
+Use the [configuration-search workflow](docs/forge-configuration-search.md) to
+declare a bounded recipe grid without copying a trainer. A study freezes its
+tuning tasks, objective, deterministic tie-break and campaign budgets before
+execution. The leaderboard uses all tier cells from one selected configuration;
+it never combines each task's best result from different settings. A search with
+no complete smoke pass has no qualified winner. Later tiers remain untouched
+during selection, and the provisional screen still requires calibration before
+scientific ranking or default adoption.
 
 ```sh
 # Read-only cost/coverage plan, then explicit gated execution.

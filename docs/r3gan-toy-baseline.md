@@ -4,7 +4,10 @@ The [Forge idea](../configs/forge/ideas/r3gan-stacked-training-toy-v1.json)
 transfers the [Modern GAN paper, Appendix D Table 19](https://arxiv.org/html/2501.05441v1#A4)
 Stacked MNIST training profile to the existing toy hosts. The earlier
 `k3p-r1r2-matched-v1` changes only the gradient penalty inside a K3P recipe;
-it remains a separate technique.
+it remains a separate recorded configuration within the R1/R2 trainer family.
+The [configuration-search workflow](forge-configuration-search.md) varies these
+public recipe settings without adding trainer implementations or leaderboard
+rows for every trial.
 
 | Recipe setting | Configured value |
 | --- | --- |

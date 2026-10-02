@@ -67,7 +67,9 @@ def request_bindings(request: dict) -> dict:
         if candidate.get("host_adaptation") is not None:
             from .taskrecipes import adaptation_receipt
             task_bindings[name]["host_adaptation"] = adaptation_receipt(candidate, task)
-    return {"recipe": candidate.get("resolved_recipe"),
+    return {"trainer_family": candidate.get("trainer_family"),
+            "configuration_id": candidate.get("configuration_id"),
+            "recipe": candidate.get("resolved_recipe"),
             "recipe_sha256": stable_hash(candidate.get("resolved_recipe")),
             "prior": candidate.get("prior"),
             "initializer": candidate.get("initializer", "deterministic_orthogonal"),

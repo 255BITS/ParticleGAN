@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "id": "r1r2-modern-toy-confirmation-v1",
+  "budget_seconds": 44100,
+  "candidate_budget_seconds": 44100,
+  "accept_shared_cost_transfer": false,
+  "purpose": "Conditional ordinary Tier 3 evaluation of the single frozen winner of r1r2-modern-toy-v1, eligible only after all four tuning trials finish and the selected configuration passes all three smoke requirements. Reuse exact smoke receipts; stop at ordinary failed prerequisites. Provisional gates confer no calibration, robustness or default adoption."
+}

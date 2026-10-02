@@ -20,6 +20,8 @@ DEFAULT_CAMPAIGN = Path("configs/forge/campaigns/technique-inventory.json")
 
 def discover_techniques(root: Path) -> list[str]:
     """New idea cards enter the next inventory without a maintained name list."""
+    # Saved tuning trials are evidence variants; only an explicit search runs
+    # them. Expanding an ordinary inventory must not rerun every historical grid.
     names = sorted(path.stem for path in (Path(root) / "configs/forge/ideas").glob("*.json"))
     if not names:
         raise ValueError("technique inventory requires at least one declared idea")
