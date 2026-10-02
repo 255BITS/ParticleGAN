@@ -6,6 +6,13 @@ cohort. A configuration changes settings on the shared public trainer; it does
 not introduce another training loop or a new technique row. The companion JSON
 retains alternative configurations and the exact evidence behind their results.
 
+The proposed [convergence-selection plan](forge-convergence-selection-plan.md)
+asks whether each solution family can represent the required toys, then illustrates
+bounded hyperparameter search for one shared defaults config, gate progression,
+and selection of the quickest stable solution from comparable family finalists.
+Its convergence timing and speed objective are future additions; the implemented
+search behavior is described below.
+
 [`trainer-families.json`](../configs/forge/trainer-families.json) declares family
 membership and a canonical fallback. Distinct mechanisms, including structural
 ablations, have explicit families. The older matched R1/R2 penalty swap and the
