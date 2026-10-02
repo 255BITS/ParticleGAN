@@ -280,7 +280,7 @@ def _case(identifier, legacy, title, goal, *, kind="vector", steps=1200,
     return dict(id=identifier, legacy_ids=list(legacy), title=title, goal=goal,
                 kind=kind, default_steps=steps, batch_size=batch,
                 eval_samples=evaluation, default_recipe=default_recipe,
-                sampling="clean currently served weights; independent evaluation RNG; output_noise=False",
+                sampling="public served latent law; independent evaluation RNG; output_noise=False removes additive output noise only; DV12/feature-cell latent perturbation remains when enabled",
                 scope="A per-observation gate is not full-budget or sustained convergence; no historical verdict is replaced.") | extra
 
 
@@ -293,7 +293,7 @@ def _registry():
             "Recover all 100 equal-weight Gaussian modes, their mass and local width, including independent density-fidelity bounds.",
             kind="native100", steps=7000, batch=2048, evaluation=20000,
             problem=name, particles=20000, z_dim=2,
-            sampling="currently served weights plus the recipe's learned output noise; clean diagnostics are scored separately",
+            sampling="public served latent law, including enabled DV12/feature-cell perturbation, plus the recipe's output noise; diagnostics remove additive output noise only",
             thresholds={"native": deepcopy(native_metrics.REQUIREMENTS), "accuracy": deepcopy(accuracy.LIMITS)},
             law=dict(kind="equal100_gaussian", problem=name, sigma=.03))
     name = "api-rotated100-moving"
@@ -302,7 +302,7 @@ def _registry():
         "Fit the full 100-mode law after two 30-degree target jumps, rather than preserve a low relative coverage baseline.",
         kind="native100", steps=1500, batch=2048, evaluation=20000,
         problem="rotated100", moving=True, particles=20000, z_dim=2,
-        sampling="currently served weights plus learned output noise; full gates use the current target frame",
+        sampling="public served latent law, including enabled DV12/feature-cell perturbation, plus output noise; full gates use the current target frame",
         thresholds={"native": deepcopy(native_metrics.REQUIREMENTS), "accuracy": deepcopy(accuracy.LIMITS)},
         law=dict(kind="equal100_gaussian", problem="rotated100", sigma=.03,
                  extra_degrees=[0, 30, 60], update_intervals=[[1, 500], [501, 1000], [1001, 1500]]))
@@ -349,10 +349,10 @@ def _registry():
                 adaptation="Current public trainer/preset replaces historical source execution; both original composite arms remain registered, without a critic-only attribution.")
     cases["api-two-pole-grid12"] = _case(
         "api-two-pole-grid12", ["develop-two_pole"], "Twelve atoms on two poles",
-        "Recover six equally weighted finite offsets per pole, not merely travel away from the origin.",
+        "Check six target offsets per pole in one full row-ID realization, beyond mere travel; full served output-law fidelity remains unmeasured when latent perturbation is active.",
         kind="two_pole", steps=80, batch=12, evaluation=12, particles=12, z_dim=1,
         thresholds=[["sample_count", "==", 12], ["mass_tv", "<=", .05], ["support_fraction", ">=", .95], ["max_grid_quantile_error_halfwidth", "<=", .10]],
-        sampling="exact clean enumeration of the 12 current prior rows; no iid substitute or output noise",
+        sampling="one realization enumerating all 12 prior row IDs; output_noise=False; enabled DV12 latent perturbation remains; this is not exact enumeration of the served output law",
         law=dict(kind="uniform12_atoms", offsets=np.linspace(-.05, .05, 6).tolist(), poles=[-1., 1.]),
         adaptation="Public GANTrainer needs a trainable generator: an identity-initialized affine host is added; initial prior remains twelve zeros. The fixed host critic weights and data law are retained.")
     cases["api-gaussian2d"] = _case(
@@ -371,7 +371,7 @@ def _registry():
             {"acquire": "Acquire all eight equal-weight radius-three, sigma-.07 Gaussian modes, including their within-mode law.",
              "hold": "Acquire by update1200, then retain the same full eight-mode law without resetting optimizer state through update2400.",
              "shift": "After qualified acquisition/hold, adapt to a +1 x translation at update2401; require recovery by update2800 and retained width/mass through3600.",
-             "resolution12": "Retain the original12-row resource as a negative capacity control: clean equal atoms cannot represent eight equal masses and two-dimensional local Gaussian width."}[suffix],
+             "resolution12": "Retain the original 12-row resource as a low-resource public-API control; assess the actual perturbed served law. A separate unperturbed twelve-equal-atom witness has a mass/width obstruction, which does not prove this stochastic served law impossible."}[suffix],
             kind="ring", steps=steps, batch=128, evaluation=4096, particles=particles, z_dim=4,
             phase=suffix, thresholds=deepcopy(ring_bounds), law=dict(kind="ring8", radius=3., sigma=.07, masses=[.125]*8, shift_update=2401 if suffix == "shift" else None, shift=[1., 0.] if suffix == "shift" else [0., 0.]),
             resource_change=dict(original_actual_rows=12, current_rows=particles, latent_dim=4, configured_20000_was_not_actual_resource=True),
@@ -664,7 +664,7 @@ class VectorFixture:
             scored["metrics"].update({"clean_" + key: value for key, value in clean_score["metrics"].items()})
             scored["metrics"]["clean_gate_passed"] = int(clean_score["passed"])
             scored["metrics"]["output_sigma"] = float(self.trainer.output_sigma())
-            views.append(_view("Clean generator, without output noise", target, clean, self.metadata))
+            views.append(_view("Output noise off; served latent law retained", target, clean, self.metadata))
         centers = self._centers()
         if centers is not None and samples.shape[1] == 2:
             labels = torch.cdist(samples, centers).argmin(1)

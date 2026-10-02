@@ -137,7 +137,8 @@ def test_gaussian_gate_rejects_same_mean_covariance_non_gaussian_circle():
     assert result["metrics"]["radial_ks"] > .075
 
 
-def test_twelve_clean_ring_rows_have_an_explicit_mass_and_width_obstruction():
+def test_separate_unperturbed_twelve_atom_ring_witness_has_mass_and_width_obstruction():
+    # This supplied finite population is not GANTrainer.sample's DV12 law.
     case = definition("api-ring8-resolution12")
     angle = torch.arange(8) * torch.pi / 4
     centers = 3 * torch.stack([angle.cos(), angle.sin()], 1)
