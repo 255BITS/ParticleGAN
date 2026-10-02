@@ -746,7 +746,7 @@ class ImageCritic(nn.Module):
 
 
 class ImageFixture:
-    def __init__(self, case, *, device, seed, recipe_name, max_steps):
+    def __init__(self, case, *, device, seed, recipe_name, max_steps, recipe_overrides=None):
         self.case, self.seed, self.device = case, seed, torch.device(device)
         self.max_steps = case["default_steps"] if max_steps is None else max_steps
         if type(self.max_steps) is not int or self.max_steps < 1:
@@ -764,6 +764,9 @@ class ImageFixture:
             overrides["total_steps"] = case["default_steps"]
         if self.query:
             overrides.update(case["conditional_api_overrides"])
+        from .api_contract import validate_recipe_overrides
+        self.recipe_overrides = validate_recipe_overrides({**case, "provider": "api_images"}, recipe_name, recipe_overrides)
+        overrides.update(self.recipe_overrides)
         self.recipe = get_recipe(recipe_name, **overrides)
         if self.recipe.row_policy != "independent":
             raise ValueError("these convolutional fixtures are not dense routed-bank hosts")
@@ -925,11 +928,13 @@ class ImageFixture:
                     api_state=(self.trainer.state_dict() if self.trainer is not None else self.policy.state_dict()))
 
 
-def build_case(case_id, *, device="cpu", seed=DEFAULT_SEED, recipe_name="atlas", max_steps=None):
+def build_case(case_id, *, device="cpu", seed=DEFAULT_SEED, recipe_name="atlas", max_steps=None, recipe_overrides=None):
     if case_id == WORD_CASE_ID:
+        from .api_contract import validate_recipe_overrides
+        validate_recipe_overrides({**_word_metadata(), "provider": "api_images"}, recipe_name, recipe_overrides)
         return WordFixture(device=device, seed=seed, recipe_name=recipe_name, max_steps=max_steps)
     return ImageFixture(_case(case_id), device=device, seed=seed,
-                        recipe_name=recipe_name, max_steps=max_steps)
+                        recipe_name=recipe_name, max_steps=max_steps, recipe_overrides=recipe_overrides)
 
 
 WORD_CASE_ID = "image-five-words-joint-ae"
