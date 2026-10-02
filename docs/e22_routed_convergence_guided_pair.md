@@ -70,3 +70,40 @@ The frozen quality plan remains three arms with 6400 updates each, both fixed
 includes independent review. Every signed score and any failure to reproduce
 the gap must be retained. This task grants no Forge, default, or full Supra
 qualification credit.
+
+The completed task passed independent review: **570,039 checks**, all 105
+states, all 102 fixed curves, and exact recovery for all three arms. Execution
+and review took **566.990 seconds** within the declared 2700-second budget.
+[Qualified results](e22_routed_convergence_guided_pair_results.json) retain both
+endpoints, every judge, every subject, particle ablations and source identities.
+
+Held-out native game at 6400, lower is better:
+
+| Fixed critic | Ordinary LoRA | Original particles | H/b-neutral particles |
+| --- | ---: | ---: | ---: |
+| Ordinary @800 | 1.245403 | 1.345233 | **0.994643** |
+| Ordinary @6400 | 2.022018 | 2.353401 | **1.720607** |
+| Original particles @800 | 1.390754 | 1.432618 | **1.044352** |
+| Original particles @6400 | 1.972537 | 2.637286 | **1.717662** |
+
+This isolates an initialization-sensitive convergence problem in the guided
+host. The original particle arm loses to ordinary under all four critics at
+6400. Zeroing only fresh H/b removes that disadvantage; C, bank and router stay
+trainable and beneficial. Neutral particles beat ordinary for every subject
+under every critic at **both** 5120 and 6400. The original disadvantage is a
+late result: at 5120 it still beats ordinary under the two @800 critics. All
+observations and curves remain in the report; no checkpoint was chosen by score.
+
+The matched H/b intervention establishes its effect on this fixture. Changing
+guided execution also changes targets, scale and trained critic weights, so
+absolute scores from the unguided parent cannot measure a unique CFG effect.
+Both adapter families remain exactly teacher-reachable. The toy **does not
+reproduce the remaining full-Supra disadvantage of H/b-neutral particles**
+against the historical MSE/AdamW reference. That reference also has a different
+initializer and editing/preservation schedule. No general optimizer or SOTA
+claim follows from the toy result.
+
+A separate [zero-update stationarity reproducer](e22_routed_game_stationarity.md)
+checks whether a frozen learned critic pushes an already exact solution. Its
+unit tests also show why canceling that force alone does not guarantee safe
+attraction or faster acquisition.
