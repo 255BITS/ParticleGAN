@@ -45,6 +45,7 @@ def software_fixture(root, monkeypatch):
             "G64": {"D_batch": 16, "G_batch": 64},
         },
         "source_hashes": {"software-source.py": "a" * 64},
+        "package_git_sha": "d" * 40,
     }
     write(runs / "protocol.json", protocol)
     (runs / "source.py").write_text("# synthetic source; no models or trainer\n")
@@ -135,6 +136,8 @@ def software_fixture(root, monkeypatch):
         "identity": {
             "checkout_git_sha": "c" * 40,
             "reference_package_git_sha": "d" * 40,
+            "identity_guard": media.IDENTITY_GUARD,
+            "verified_source_files": len(protocol["source_hashes"]),
         },
         "arms": arms,
         "checks": checks,
@@ -245,6 +248,11 @@ def test_retained_points_remain_distinct_from_endpoint_diagnostic(
         ("nonfinite_contrast", "nonfinite"),
         ("false_contrast_ratio", "contrast arithmetic"),
         ("changed_budget", "protocol"),
+        ("missing_identity", "source identity"),
+        ("changed_package_identity", "source identity"),
+        ("changed_source_count", "source identity"),
+        ("invalid_checkout_identity", "source identity"),
+        ("changed_identity_guard", "source identity"),
     ],
 )
 def test_fresh_controls_reject_without_immutable_hash_masking(
@@ -286,6 +294,16 @@ def test_fresh_controls_reject_without_immutable_hash_masking(
         protocol = json.loads((runs / "protocol.json").read_text())
         protocol["external_steps_per_arm"] = 199
         write(runs / "protocol.json", protocol)
+    elif control == "missing_identity":
+        result["identity"] = {}
+    elif control == "changed_package_identity":
+        result["identity"]["reference_package_git_sha"] = "f" * 40
+    elif control == "changed_source_count":
+        result["identity"]["verified_source_files"] = 0
+    elif control == "invalid_checkout_identity":
+        result["identity"]["checkout_git_sha"] = ""
+    elif control == "changed_identity_guard":
+        result["identity"]["identity_guard"] = "unverified"
     write(runs / "result.json", result)
     (runs / "G64.jsonl").write_text("\n".join(json.dumps(row) for row in rows) + "\n")
     with pytest.raises(ValueError, match=match):

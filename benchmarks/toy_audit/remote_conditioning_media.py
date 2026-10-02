@@ -28,6 +28,7 @@ PROTOCOL = "examples/routed_remote_conditioning_protocol.json"
 PROTOCOL_SHA = "ccc7c3477cf7edc6a417044e321f583b9ddb989f86a4e1d9db27e38ef6da4c6c"
 DRIVER = "examples/routed_remote_conditioning.py"
 ARMS, MEDIA_STEPS, STEPS, SECONDS = ("G16", "G64"), (0, 100, 200), 200, 60
+IDENTITY_GUARD = "sha256 of every frozen package/driver/contract/guide source"
 
 
 def read(path):
@@ -151,6 +152,25 @@ def verify(runs, card, inputs, *, decomposition=None, fresh=False):
         runs / "result.json", None if fresh else authority["original_result_sha256"]
     )
     finite_health(result)
+    identity = result.get("identity", {})
+    checkout = identity.get("checkout_git_sha")
+    if (
+        set(identity)
+        != {
+            "checkout_git_sha",
+            "reference_package_git_sha",
+            "identity_guard",
+            "verified_source_files",
+        }
+        or identity.get("reference_package_git_sha") != protocol["package_git_sha"]
+        or identity.get("identity_guard") != IDENTITY_GUARD
+        or type(identity.get("verified_source_files")) is not int
+        or identity.get("verified_source_files") != len(protocol["source_hashes"])
+        or not isinstance(checkout, str)
+        or len(checkout) != 40
+        or any(char not in "0123456789abcdef" for char in checkout)
+    ):
+        raise ValueError("recorded caller source identity contradicts its protocol")
     if (
         result["failure"] is not None
         or result["status"] not in {"passed", "failed"}
@@ -470,7 +490,7 @@ def render(data, path):
         else:
             ax.text(
                 0.5,
-                0.7,
+                0.58,
                 "No retained contrast observation\nat this earlier checkpoint",
                 transform=ax.transAxes,
                 ha="center",
