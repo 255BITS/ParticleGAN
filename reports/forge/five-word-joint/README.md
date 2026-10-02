@@ -42,6 +42,10 @@ unchanged; this view has no qualified winner.
 
 The sole integration run executed the frozen code at
 [`1ff8e385`](https://github.com/255BITS/ParticleGAN/tree/1ff8e3858bd711b67e391063b52f5dcdfa99b9b6).
+Its original receipt, GIF and raw-artifact hashes are unchanged. The current
+reproduction wrapper additionally saves its inspected source manifest before
+execution and observations before rendering, retaining them if media export
+fails. This export hardening has not rerun or relabeled the original experiment.
 At 32 updates its instantaneous scientific metric is **FAIL**; against the full
 20,001-update task the recorded verdict is **INCOMPLETE**.
 
@@ -145,7 +149,8 @@ cost-to-rejection, and change only view policy after collecting evidence.
 
 ## Reproduce and review
 
-Use the project Python environment. The first three commands are read-only:
+Use the project Python environment. Validation and planning are read-only;
+report regeneration writes the Markdown report and launches no training:
 
 ```sh
 python -m experiments.forge validate

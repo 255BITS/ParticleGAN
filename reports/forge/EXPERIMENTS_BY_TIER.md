@@ -1315,4 +1315,4 @@ The wider question review also links standalone experiments outside the Forge ti
 
 Declaration input digest: `0f6a899b1330b8d5593ce9532ad8750a5529eeec27fe1a1fa03f62bd2cad4455`. The JSON form includes the individual task and view file hashes.
 
-Published artifact input digest: `8b32deb7d9f1ee18fd5f5590ff8c7965630222e624841e9ad173e4e2c4646c22`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.
+Published artifact input digest: `22501558347de795f708f3e4cc5ea57b7cd1c803ac7ee06b9e9cc7521ea1a115`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.

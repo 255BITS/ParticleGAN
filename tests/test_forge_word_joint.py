@@ -125,3 +125,47 @@ def test_report_joins_word_example_through_its_explicit_retained_question():
     variant = next(row for row in guide["api_variants"] if row["id"] == "image-five-words-joint-ae")
     assert variant["verdict"] == "PASS" and variant["media_available"]
     assert variant["qualification_input"] is False
+
+
+def test_failed_renderer_preserves_source_observations_and_state_without_training(tmp_path, monkeypatch):
+    import importlib.util
+    from types import SimpleNamespace
+    import numpy as np
+    import signal
+    import sys
+
+    path = ROOT / "reports/forge/five-word-joint/reproduce_demo.py"
+    spec = importlib.util.spec_from_file_location("word_demo_export_failure_test", path)
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    output = tmp_path / "failed-media"
+    values = torch.zeros(1, 28, 6)
+    record = {"step": 32, "passed": False, "failed_bounds": ["quality_fraction"],
+              "views": [{"target": values, "samples": values}]}
+    # A synthetic completed adapter return isolates the media/error path.
+    # It performs no model construction, training or additional sampling.
+    def completed_adapter(request, task, destination, device, **kwargs):
+        assert (destination / "source-manifest.json").is_file()
+        torch.save({"completed_steps": 32, "synthetic_export_test": True}, destination / "state.pt")
+        (destination / "adapter-receipt.json").write_text('{"scope": "synthetic_export_test"}\n')
+        return {"evidence": {"sampling_law": "generated_and_paired_reconstructed_prior_without_output_noise"}}, [record]
+    def failed_renderer(*args, **kwargs):
+        assert (output / "observations.npz").is_file()
+        raise RuntimeError("injected renderer failure")
+    monkeypatch.setattr(module, "run_word", completed_adapter)
+    monkeypatch.setattr(module, "grade_result", lambda *args: {"gate_status": "INCOMPLETE"})
+    monkeypatch.setattr(module, "render_gif", failed_renderer)
+    monkeypatch.setattr(torch, "use_deterministic_algorithms", lambda *args: None)
+    monkeypatch.setattr(sys, "argv", [str(path), "--output", str(output)])
+    previous_handler = signal.getsignal(signal.SIGALRM)
+    with pytest.raises(RuntimeError, match="injected renderer failure"):
+        module.main()
+    source = read_json(output / "source-manifest.json")
+    assert source["files"]["reports/forge/five-word-joint/reproduce_demo.py"]
+    assert torch.load(output / "state.pt", weights_only=False)["completed_steps"] == 32
+    assert read_json(output / "adapter-receipt.json")["scope"] == "synthetic_export_test"
+    with np.load(output / "observations.npz") as arrays:
+        assert np.array_equal(arrays["step32_view0_target"], values.numpy())
+    assert not (output / "goal.gif").exists()
+    assert signal.getitimer(signal.ITIMER_REAL)[0] == 0
+    assert signal.getsignal(signal.SIGALRM) == previous_handler

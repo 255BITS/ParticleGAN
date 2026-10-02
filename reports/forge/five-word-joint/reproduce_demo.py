@@ -39,10 +39,20 @@ def main():
     torch.use_deterministic_algorithms(True)
     source = inspect_source(ROOT, extra_paths=[str(protocol_path.relative_to(ROOT)), str(candidate_path.relative_to(ROOT)),
                                               f"configs/forge/tasks/{task['id']}.json", str(Path(__file__).relative_to(ROOT))])
+    # This raw manifest stays local even if training or later rendering fails.
+    atomic_json(args.output / "source-manifest.json", source)
     def timeout(signum, frame):
         raise TimeoutError("preregistered 60-second API demonstration budget exhausted")
-    signal.signal(signal.SIGALRM, timeout)
+    previous_handler = signal.signal(signal.SIGALRM, timeout)
     signal.setitimer(signal.ITIMER_REAL, protocol["wall_seconds"])
+    try:
+        _execute_demo(args, protocol, protocol_path, task, candidate, candidate_path, source)
+    finally:
+        signal.setitimer(signal.ITIMER_REAL, 0)
+        signal.signal(signal.SIGALRM, previous_handler)
+
+
+def _execute_demo(args, protocol, protocol_path, task, candidate, candidate_path, source):
     request = {"candidate": candidate, "protocol": {"seed": protocol["seed"]},
                "candidate_revision": stable_hash(candidate), "tasks": {task["id"]: task}}
     raw, records = run_word(request, task, args.output, protocol["device"],
@@ -58,13 +68,13 @@ def main():
             "thresholds": task["evaluation"]["thresholds"]}
     indices = np.rint(np.linspace(0, len(records) - 1, protocol["media_frames"])).astype(int)
     selected = [records[index] for index in indices]
-    render_gif(case, selected, args.output / "goal.gif", full_budget=False,
-               requested_steps=protocol["execution_limit"], final_verdict="INCOMPLETE")
     arrays = {f"step{record['step']}_view{index}_{role}": view[role].numpy()
               for record in records for index, view in enumerate(record["views"]) for role in ("target", "samples")}
     np.savez_compressed(args.output / "observations.npz", **arrays)
+    render_gif(case, selected, args.output / "goal.gif", full_budget=False,
+               requested_steps=protocol["execution_limit"], final_verdict="INCOMPLETE")
     artifacts = {name: {"sha256": file_hash(args.output / name), "bytes": (args.output / name).stat().st_size}
-                 for name in ("adapter-receipt.json", "state.pt", "observations.npz", "goal.gif")}
+                 for name in ("source-manifest.json", "adapter-receipt.json", "state.pt", "observations.npz", "goal.gif")}
     compact = {"id": case["id"], "legacy_ids": case["legacy_ids"], "goal": case["goal"], "scope": case["scope"],
         "execution_status": "COMPLETE", "verdict": "INCOMPLETE", "instantaneous_metric": instantaneous,
         "failed_bounds": records[-1]["failed_bounds"], "full_task_grade": grade,
@@ -90,7 +100,6 @@ def main():
          "default_updates", "source_commit", "gif")}], "runs": [compact],
         "source_identities": {source["digest"]: {"origin_commit": source["origin_commit"], "files": compact["source_bindings"]}}}
     atomic_json(args.output / "publication.json", publication)
-    signal.setitimer(signal.ITIMER_REAL, 0)
     print(json.dumps({"output": str(args.output), "instantaneous_metric": instantaneous,
                       "full_task_grade": grade["gate_status"], "qualification_input": False}), flush=True)
 
