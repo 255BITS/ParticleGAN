@@ -171,6 +171,25 @@ def test_default_recipe_dicts_and_components_remain_legacy_compatible():
     assert renamed.beta2_end == .99 and renamed.reg_coeff_end == .1
 
 
+@pytest.mark.parametrize("fractions", [
+    {"beta2_anneal_end": .4}, {"reg_coeff_anneal_end": .6},
+    {"beta2_anneal_end": .4, "reg_coeff_anneal_end": .6},
+])
+def test_inactive_nondefault_schedule_fractions_survive_roundtrip_and_later_activation(fractions):
+    recipe = plain_recipe(beta2_end=None, reg_coeff_end=None, **fractions)
+    packet = recipe.to_dict()
+    assert all(packet[key] == value for key, value in fractions.items())
+    restored = Recipe(**packet)
+    assert restored == recipe
+    activated = restored.replace(beta2_end=.99, reg_coeff_end=.1)
+    trainer = make_trainer(activated)
+    apply_training_schedules(4, activated, (trainer.opt_g, trainer.opt_d), trainer.penalty)
+    assert trainer.opt_g.param_groups[0]["betas"][1] == cosine_value(
+        4, .9, .99, fractions.get("beta2_anneal_end", .2), 20)
+    assert trainer.penalty.regularizer.coeff == cosine_value(
+        4, 1., .1, fractions.get("reg_coeff_anneal_end", .2), 20)
+
+
 @pytest.mark.parametrize("changes", [
     {"optimizer_family": "unknown"}, {"eps": 0}, {"eps": float("nan")},
     {"beta2_end": 1}, {"beta2_anneal_end": 0}, {"beta2_anneal_end": 1.1},

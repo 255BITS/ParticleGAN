@@ -394,10 +394,12 @@ class Recipe:
             result.pop("eps")
         if self.beta2_end is None:
             result.pop("beta2_end")
-            result.pop("beta2_anneal_end")
+            if self.beta2_anneal_end == 0.2:
+                result.pop("beta2_anneal_end")
         if self.reg_coeff_end is None:
             result.pop("reg_coeff_end")
-            result.pop("reg_coeff_anneal_end")
+            if self.reg_coeff_anneal_end == 0.2:
+                result.pop("reg_coeff_anneal_end")
         if self.critic_formulation == "ka2":
             result.pop("critic_formulation")
         if self.reg_arm is None:
