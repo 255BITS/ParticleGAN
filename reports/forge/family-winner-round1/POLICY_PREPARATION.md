@@ -118,6 +118,23 @@ After debiting the completed first grid, the second grid can spend at most
 The original setup, first grid and second grid together stay within the same
 10,800-second cap. A fresh study ID or source commit grants no extra budget.
 
+The second grid concluded with seven original image passes and one original
+failure; the additional study has five failures and three late acquisitions,
+with no pass. The original full 600-update horizon was completed in all eight
+runs. One Atlas/E22 setting diverged after E22's recorded reopen event; sharing
+a density backend does not establish that their full policy states or outcomes
+are equivalent. The [checked second archive](policy-round2-archive.json) retains
+all eight runs and their source for 189.031428 paid seconds.
+
+The [third specification](policy-search-round3.json) declares one further
+finite intermediate-rate grid: .0031875 or .0053125, crossed with prior rate
+1 or 2. It brackets observed late acquisition and loss of retention rather
+than assuming a monotonic learning-rate effect. Gates, horizons, denominator,
+seed, candidate ceilings and task allowances stay fixed. Its 10,336.011929
+seconds are the exact remaining original allowance, split into Atlas
+5,163.721507 and E22 5,172.290422. Previous errors and results remain debited
+and cannot fill the new source cohort's trained gates.
+
 Root admits at most one serial experiment worker per GPU, with at least
 12 GiB free and one Torch/BLAS CPU thread. GPU0 remains excluded while the
 external graphics workload is hot. Both family lanes can run serially on

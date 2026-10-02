@@ -27,7 +27,7 @@ from . import api_contract as contract, api_run, api_publish
 SCHEMA = "particlegan_policy_family_search_v1"
 FAMILIES = ("atlas", "e22")
 TUNING_FIELDS = {"lr", "prior_lr_mult"}
-LR_PROFILES = ((.006375, .0085), (.002125, .00425))
+LR_PROFILES = ((.006375, .0085), (.002125, .00425), (.0031875, .0053125))
 DEFAULT_CASES = (
     ("image-develop-img_intensity2-source-transpose12", 1),
     ("api-vector-two-broad", 1),

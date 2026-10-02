@@ -49,7 +49,9 @@ def planned(tmp_path, cases, monkeypatch):
 @pytest.mark.parametrize("identifier", [search.DEFAULT_CASES[0][0], "api-vector-two-broad"])
 @pytest.mark.parametrize("knobs", [{"lr": .006375, "prior_lr_mult": 1.},
                                    {"lr": .002125, "prior_lr_mult": 1.},
-                                   {"lr": .00425, "prior_lr_mult": 2.}])
+                                   {"lr": .00425, "prior_lr_mult": 2.},
+                                   {"lr": .0031875, "prior_lr_mult": 1.},
+                                   {"lr": .0053125, "prior_lr_mult": 2.}])
 def test_actual_public_recipe_knobs_applied_before_optimizer_and_updated(cases, family, identifier, knobs):
     fixture = api_contract.build(cases[identifier], device="cpu", recipe_name=family,
                                  max_steps=2, recipe_overrides=knobs)
@@ -150,8 +152,8 @@ def test_all_configs_and_full_denominator_retained_no_speed_winner(tmp_path, cas
     assert result["required_cases_per_config"] == 8 and result["default_adoption"] is False
 
 
-@pytest.mark.parametrize("learning_rates", [[.006375, .0085], [.002125, .00425]])
-def test_two_frozen_grid_profiles_have_distinct_complete_config_denominators(tmp_path, cases, monkeypatch, learning_rates):
+@pytest.mark.parametrize("learning_rates", [[.006375, .0085], [.002125, .00425], [.0031875, .0053125]])
+def test_frozen_grid_profiles_have_distinct_complete_config_denominators(tmp_path, cases, monkeypatch, learning_rates):
     spec = spec_for(tmp_path)
     spec["grid"]["lr"] = learning_rates
     monkeypatch.setattr(search, "_proofs", lambda spec, selected: {
@@ -163,13 +165,19 @@ def test_two_frozen_grid_profiles_have_distinct_complete_config_denominators(tmp
             for trial in packet["trials"]} == {(lr, rate) for lr in learning_rates for rate in (1., 2.)}
     assert all(len(trial["cases"]) == 8 for trial in packet["trials"])
     assert search.select_results(packet)["outcome"] == "pending"
-    packet["spec"]["grid"]["lr"] = [.002125, .00425] if learning_rates[0] == .006375 else [.006375, .0085]
-    with pytest.raises(ValueError, match="configuration"):
-        search.select_results(packet)  # Old IDs cannot fill a different grid.
+    for other_rates in search.LR_PROFILES:
+        if list(other_rates) == learning_rates:
+            continue
+        packet["spec"]["grid"]["lr"] = list(other_rates)
+        with pytest.raises(ValueError, match="configuration"):
+            search.select_results(packet)  # Old IDs cannot fill any different grid.
 
 
 @pytest.mark.parametrize("grid", [{"lr": [.00425, .00425], "prior_lr_mult": [1., 2.]},
                                   {"lr": [.002125, .006375], "prior_lr_mult": [1., 2.]},
+                                  {"lr": [.0031875, .00425], "prior_lr_mult": [1., 2.]},
+                                  {"lr": [.0031875, .0053125, .006375], "prior_lr_mult": [1., 2.]},
+                                  {"lr": [.003, .005], "prior_lr_mult": [1., 2.]},
                                   {"lr": [.002125, .00425], "prior_lr_mult": [1., 1.]},
                                   {"lr": [.002125, .00425], "prior_lr_mult": [True, 2.]},
                                   {"lr": [.002125, float("nan")], "prior_lr_mult": [1., 2.]}])
@@ -180,11 +188,13 @@ def test_custom_duplicate_or_malformed_grid_cannot_change_search_scope(tmp_path,
         search.validate_spec(spec, cases)
 
 
-@pytest.mark.parametrize("mutation", ["drop_config", "drop_case", "duplicate_case", "pass_unknown"])
+@pytest.mark.parametrize("mutation", ["drop_config", "duplicate_config", "drop_case", "duplicate_case", "pass_unknown"])
 def test_incomplete_conflicting_scopes_cannot_shrink_denominator(tmp_path, cases, monkeypatch, mutation):
     packet = planned(tmp_path, cases, monkeypatch)
     if mutation == "drop_config":
         packet["trials"].pop()
+    elif mutation == "duplicate_config":
+        packet["trials"][0] = deepcopy(packet["trials"][1])
     elif mutation == "drop_case":
         packet["trials"][0]["cases"].pop()
     elif mutation == "duplicate_case":

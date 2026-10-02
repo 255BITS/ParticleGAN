@@ -8,8 +8,9 @@ pooled into this study.
 
 Each source cohort freezes one finite grid: the first used `lr` .006375 or
 .0085; the linked second uses the public preset rate .00425 or half that rate
-.002125. Both cross those rates with `prior_lr_mult` 1 or 2. These are the only
-accepted profiles; a different hypothesis needs an explicit reviewed revision.
+.002125. The third freezes intermediate rates .0031875 and .0053125. Each
+crosses its two rates with `prior_lr_mult` 1 or 2. These are the only accepted
+profiles; a different hypothesis needs an explicit reviewed revision.
 Each of the four configurations per family uses the same two knobs on every
 required case. The original host architecture, prior/init, data law, batch,
 evaluation draw count, scoring cadence and full horizon remain unchanged.
@@ -72,6 +73,14 @@ directory for its own plan and execution. Its 10,525.043357 seconds are the
 original 10,800-second allowance less the original setup and completed first
 grid, rather than a fresh allowance. The linked parent receipt and exact
 per-family debits stay in the specification. Source cohorts remain separate.
+
+The [third specification](../reports/forge/family-winner-round1/policy-search-round3.json)
+then tests one intermediate-rate acquisition/retention hypothesis. The second
+grid's seven original image passes supplied no study pass: four collapsed after
+confirmation, three acquired too late; its other image run failed the original
+gate. The next grid receives only 10,336.011929 unspent seconds from the same
+cap. Its four knob pairs are new, with all original cases, gates and horizons
+unchanged. Nonmonotonic prior results do not guarantee an intermediate rate wins.
 
 After one common code/spec/capacity freeze, the coordinator can admit one serial
 family lane per visible GPU. Each lane must use a separate archive and fixed
