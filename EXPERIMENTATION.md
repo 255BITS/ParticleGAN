@@ -292,6 +292,11 @@ python -m experiments.forge board --family image --evidence-quality imported_rec
 python -m experiments.forge board --scope pinned --evidence-quality certified_pinned
 ```
 
+The [explicit task-recipe adaptation guide](docs/forge-task-recipe-adaptation.md)
+describes the released v0.7 successor's opt-in resource/objective binding. Its
+original native-host card remains frozen; adaptation never silently discards
+training mechanisms or imports qualification.
+
 For a technique inventory with one passes/total column per tier, use the
 [expanded technique leaderboard](reports/forge/technique-inventory-expanded.md).
 It preserves the [original inventory](reports/forge/technique-inventory.md) and

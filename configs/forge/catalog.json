@@ -6,6 +6,7 @@
       "benchmark/legacy": 5,
       "benchmark/locked_shared": 30,
       "benchmark/paired_error_2d": 7,
+      "benchmark/routed_conditioning": 3,
       "benchmark/shared": 5,
       "benchmark/smart_descent": 9,
       "benchmark/toy100": 19,
@@ -32,12 +33,12 @@
       "experiment/denoising": 8,
       "experiment/gym": 35,
       "experiment/mog": 20,
-      "experiment/shared": 6,
+      "experiment/shared": 7,
       "experiment/sparse": 4,
       "experiment/toy": 3,
       "experiment/trajectory": 2,
       "experiment/transition": 7,
-      "forge_engine": 37,
+      "forge_engine": 38,
       "lrfree/feature-cells-cb64-ra": 4058,
       "report/atlas-explanation": 7,
       "report/behavioral_baseline": 32,
@@ -53,6 +54,7 @@
       "report/lunar_fast": 41,
       "report/mog-autoencoder": 29,
       "report/mog-vae": 114,
+      "report/paired-residual-toy": 5,
       "report/paired_error_2d": 1,
       "report/prior-comparison": 4,
       "report/project": 7,
@@ -98,27 +100,27 @@
       "candidate_patch": 25,
       "configuration": 807,
       "driver": 393,
-      "engine_support": 37,
+      "engine_support": 38,
       "evaluator_or_audit": 321,
       "evidence_artifact": 1574,
       "frozen_candidate_implementation": 15,
       "frozen_driver": 28,
       "frozen_evaluator_or_audit": 2,
       "frozen_support": 28,
-      "narrative": 954,
-      "structured_evidence": 4982,
-      "support": 1471,
+      "narrative": 955,
+      "structured_evidence": 4985,
+      "support": 1475,
       "support_artifact": 60,
       "visualization": 19,
-      "visualization_artifact": 301
+      "visualization_artifact": 302
     },
-    "files": 11108
+    "files": 11118
   },
   "coverage": {
-    "declared_count": 11108,
+    "declared_count": 11118,
     "missing": [],
     "stale": [],
-    "tracked_count": 11108,
+    "tracked_count": 11118,
     "unclassified": [],
     "valid": true
   },
@@ -611,6 +613,27 @@
       "git_blob": "3cb68646b6e79155e523680f25fb0ed0f221dd00",
       "path": "benchmarks/plot_learned_lr.py",
       "role": "visualization",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/routed_conditioning",
+      "git_blob": "f8191c7cf37286752f552a3a1cd202ff62e38cbd",
+      "path": "benchmarks/routed_conditioning/__init__.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/routed_conditioning",
+      "git_blob": "a8e90f3fef98bbd206e44430b8ec2feb3e90b6bb",
+      "path": "benchmarks/routed_conditioning/film_damping.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/routed_conditioning",
+      "git_blob": "81a49f6ec7a390422475d16fa0f5e1df8d654f57",
+      "path": "benchmarks/routed_conditioning/spatial_damping.py",
+      "role": "support",
       "suggested_tiers": []
     },
     {
@@ -6615,14 +6638,14 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "9cb98bb4390076dbf3d3ef8418842079beb10513",
+      "git_blob": "ba16618cfc40da925ffcfac0217b6ad4085797be",
       "path": "experiments/forge/adapters.py",
       "role": "engine_support",
       "suggested_tiers": []
     },
     {
       "family": "forge_engine",
-      "git_blob": "ab49bf4847d6a97266f9f03c1445886ee4ae8e31",
+      "git_blob": "f02ca7b6b79225ce0b7c61bd8ab8d955429d557f",
       "path": "experiments/forge/api.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -6636,7 +6659,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "09d8c2c905b34d073bb8e3e6bf5e453be03edff3",
+      "git_blob": "57995965a8aee35c8882799b203de8e5257c9d61",
       "path": "experiments/forge/behavior_adapters.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -6678,7 +6701,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "ee61e974b006bb359a39c3f2fe45128cccfa95a8",
+      "git_blob": "e4769cfcb1f756d207a27f908e4d839d04c82e1d",
       "path": "experiments/forge/contracts.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -6692,14 +6715,14 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "3174927c83f14344a5ddcb59da9c3f430c0be859",
+      "git_blob": "3aed829c3125c439539f5c08af28c8891088fc69",
       "path": "experiments/forge/history.py",
       "role": "engine_support",
       "suggested_tiers": []
     },
     {
       "family": "forge_engine",
-      "git_blob": "839da07837b1a7100a29c187e96abf0bb47ee03f",
+      "git_blob": "534e0eb4117ab50d6fc9452b569a244127a344a8",
       "path": "experiments/forge/hostprofiles.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -6748,7 +6771,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "7d92e90be9b0a1f9160110a0984ecab1ee119458",
+      "git_blob": "f205bea72bd8cc38984bdc7fe0fa11c3a4485b16",
       "path": "experiments/forge/planning.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -6804,7 +6827,14 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "b08a3624380a8d31736b40b3772971e56c2fd365",
+      "git_blob": "d465cbaa157d102083b483dbca68f38466e6eb38",
+      "path": "experiments/forge/taskrecipes.py",
+      "role": "engine_support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "forge_engine",
+      "git_blob": "83cca8a9e41f57b038843518ef524f34d551c1d0",
       "path": "experiments/forge/technique_board.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -6911,6 +6941,13 @@
       "family": "experiment/shared",
       "git_blob": "b329756af33ee60d5c20baabda3b1d9a75f0f099",
       "path": "experiments/metric_recon.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "experiment/shared",
+      "git_blob": "720a01600710bf57bc1736b4221eb5faf55463f8",
+      "path": "experiments/paired_residual_oracle.py",
       "role": "support",
       "suggested_tiers": []
     },
@@ -16626,6 +16663,41 @@
       "git_blob": "81125d72030ab21284dffb78ff215770a87f9323",
       "path": "reports/mog-vae/tradeoffs.png",
       "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/paired-residual-toy",
+      "git_blob": "3bb0c63f967bb44aeeaff752c5e913a9c5e24440",
+      "path": "reports/paired-residual-toy/README.md",
+      "role": "narrative",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/paired-residual-toy",
+      "git_blob": "b765eca8045b19cb9a01a1f7c4a54e2b769689fb",
+      "path": "reports/paired-residual-toy/convergence.svg",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/paired-residual-toy",
+      "git_blob": "cf2cab17e18dd25315f6c0acbd15dcf040851367",
+      "path": "reports/paired-residual-toy/measurements.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/paired-residual-toy",
+      "git_blob": "3893fa00c89de2cc62727dc4091726593d203ca7",
+      "path": "reports/paired-residual-toy/oracle.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/paired-residual-toy",
+      "git_blob": "b3287a7dcc7dd4710934b6b15c708220920b4e7d",
+      "path": "reports/paired-residual-toy/protocol.json",
+      "role": "structured_evidence",
       "suggested_tiers": []
     },
     {

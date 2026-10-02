@@ -127,6 +127,8 @@ def validate_idea(idea: dict) -> None:
         raise ValueError("unknown mechanism_class")
     if "seed" in idea:
         raise ValueError("screening seed belongs to the protocol, not the idea")
+    from .taskrecipes import validate_host_adaptation
+    validate_host_adaptation(idea)
 
 
 def transition(record: dict, destination: str, *, reason: str | None = None, successor: str | None = None) -> dict:

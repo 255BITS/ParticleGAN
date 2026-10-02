@@ -337,7 +337,7 @@ def _published_report(root, path):
         path = root / path
     path = path.resolve()
     report = read_json(path)
-    if report.get("publication_scope") not in {"live_current", "frozen_source"}:
+    if report.get("publication_scope") not in {"live_current", "frozen_source", "recorded_cohort_composition"}:
         raise ValueError("composition requires an independently published current or frozen report")
     copy = deepcopy(report)
     claimed = copy.get("provenance", {}).pop("input_digest", None)
@@ -350,8 +350,33 @@ def _published_report(root, path):
                     "json_sha256": file_hash(path), "markdown_sha256": file_hash(markdown)}
 
 
-def _validate_published_row(root, report, row):
+def _validate_published_row(root, report, row, visited=None):
     """Bind each measured display row to its already-published receipt proofs."""
+    if report.get("publication_scope") == "recorded_cohort_composition":
+        pointer = report.get("source_publications", {}).get(row.get("publication_key"))
+        if not isinstance(pointer, dict):
+            raise ValueError("composed row has no source publication")
+        path = (root / pointer["json"]).resolve()
+        visited = set(visited or ())
+        if path in visited:
+            raise ValueError("cyclic source publication composition")
+        visited.add(path)
+        source, paths = _published_report(root, path)
+        if any(pointer.get(name + "_sha256") != paths[name + "_sha256"]
+               for name in ("json", "markdown")) or pointer.get("input_digest") != source["provenance"]["input_digest"]:
+            raise ValueError("composed source publication hash mismatch")
+        identities = ("candidate_id", "candidate_revision", "cohort")
+        matches = [item for item in source.get("rows", [])
+                   if all(item.get(key) == row.get(key) for key in identities)]
+        if len(matches) != 1:
+            raise ValueError("composed row has no unique original publication row")
+        # Labels and display flags can change; scientific row contents cannot.
+        display_fields = {"publication_key", "qualification_reuse", "qualification_input", "technique"}
+        science = lambda item: {key: value for key, value in item.items() if key not in display_fields}
+        if science(row) != science(matches[0]):
+            raise ValueError("composed row differs from its original scientific publication")
+        _validate_published_row(root, source, matches[0], visited)
+        return
     proofs = report.get("provenance", {}).get("qualified_receipts", {})
     for attempt in row.get("attempt_ids", []):
         identifier(attempt, "attempt")
@@ -389,7 +414,7 @@ def _compose_markdown(result, paths, root, markdown_path, original_path, current
     tiers = list(result["tier_requirements"])
     lines = ["# Forge technique inventory: recorded source cohorts", "",
              "Each cell is **passes / full required total** in its row's recorded source and runtime. "
-             "The original inventory and appended training baseline keep their separate evidence identities.", "",
+             "The retained inventory and appended technique keep their separate evidence identities.", "",
              "| Technique | Recorded source | Exact revision / cohort | Compute | " +
              " | ".join(f"Tier {tier}" for tier in tiers) + " | Recorded tier | Other outcomes | Paid seconds |",
              "| --- | --- | --- | --- | " + " | ".join("---:" for _ in tiers) + " | ---: | --- | ---: |"]
@@ -414,7 +439,7 @@ def _compose_markdown(result, paths, root, markdown_path, original_path, current
               "clean/noisy sampling and hardware remain bound to their original rows.", "",
               "UNKNOWN means unmeasured or unrun evidence. Failed or blocked prerequisite gates stop further work; "
               "every declared task remains in its tier denominator.", "",
-              f"[Original frozen inventory]({link(paths['original']['markdown'])}) · "
+              f"[Previous recorded inventory]({link(paths['original']['markdown'])}) · "
               f"[Full current inventory, including all technique denominator rows]({link(paths['current']['markdown'])}) · "
               f"[Exact row bindings and publication hashes]({markdown_path.with_suffix('.json').name})", "",
               "Regenerate this display from the committed publications without launching training or requiring raw receipt hydration:",
@@ -441,10 +466,17 @@ def compose(root: Path | str = REPOSITORY_ROOT, *, original_report="reports/forg
     identifier(candidate_id, "candidate")
     original, original_paths = _published_report(root, original_report)
     current, current_paths = _published_report(root, current_report)
-    if original.get("publication_scope") != "frozen_source":
+    if original.get("publication_scope") not in {"frozen_source", "recorded_cohort_composition"}:
         raise ValueError("original publication must preserve a frozen source cohort")
+    # Earlier compositions recorded runtime on every row but omitted this field.
+    def backend(report):
+        if report.get("execution_backend") is not None:
+            return report["execution_backend"]
+        cohorts = {row.get("runtime_cohort", {}).get("execution_backend") for row in report.get("rows", [])}
+        return next(iter(cohorts)) if len(cohorts) == 1 else None
     for key in ("view", "view_revision", "policy_fingerprint", "tier_requirements", "execution_backend"):
-        if original.get(key) != current.get(key):
+        left, right = (backend(original), backend(current)) if key == "execution_backend" else (original.get(key), current.get(key))
+        if left != right:
             raise ValueError(f"source publications have incompatible {key}; keep them in separate reports")
     if any(row.get("candidate_id") == candidate_id for row in original.get("rows", [])):
         raise ValueError("appended technique is already present in the original publication")
@@ -477,6 +509,7 @@ def compose(root: Path | str = REPOSITORY_ROOT, *, original_report="reports/forg
               "publication_scope": "recorded_cohort_composition", "qualification_reuse": False,
               "qualification_input": False, "view": original["view"], "view_revision": original["view_revision"],
               "policy_fingerprint": original["policy_fingerprint"],
+              "execution_backend": backend(original),
               "tier_requirements": deepcopy(original["tier_requirements"]), "rows": rows,
               "source_publications": {key: {
                   "json": os.path.relpath(pointer["json"], root), "markdown": os.path.relpath(pointer["markdown"], root),

@@ -50,6 +50,8 @@ def _members(request, task_ids):
 
 
 def _validate_task(task, candidate, root):
+    from .taskrecipes import bind_task_candidate
+    candidate = bind_task_candidate(candidate, task)
     execution, adapter = task["execution"], task["adapter"]
     for marker, adapters in PROFILE_ADAPTERS.items():
         if marker in execution and adapter not in adapters:
@@ -109,6 +111,8 @@ def _validate_candidate_identity(request):
     from .planning import candidate_revision_for
 
     candidate = request["candidate"]
+    from .taskrecipes import validate_host_adaptation
+    validate_host_adaptation(candidate)
     # Rebuild from declarations, not candidate-provided resolved_recipe echoes.
     # Recipe resolution has no model construction or training draw and does not
     # depend on promotion seed; the registered RNG protocol is checked separately.

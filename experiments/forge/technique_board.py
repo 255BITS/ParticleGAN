@@ -23,6 +23,7 @@ DEFAULT_LABELS = {
     "r3gan-stacked-training-toy-v1": "R3GAN Stacked-MNIST recipe (toy-host adaptation)",
     "k3p-bcap-matched-v1": "BCap (matched K3P recipe)",
     "release07-gan-v3-mog-v1": "GAN v3 release 0.7 (MoG adaptation)",
+    "release07-gan-v3-task-adapted-v1": "GAN v3 release 0.7 (task adaptation)",
     "release07-gan-v3-cloud-v1": "GAN v3 release 0.7 (cloud)",
     "e22": "E22",
     "atlas": "Atlas",
@@ -63,6 +64,9 @@ def request_bindings(request: dict) -> dict:
             "sampling": {key: evaluation.get(key) for key in (
                 "sampling_contract_version", "sampling_law", "eval_output_noise", "scoring_weights")},
         }
+        if candidate.get("host_adaptation") is not None:
+            from .taskrecipes import adaptation_receipt
+            task_bindings[name]["host_adaptation"] = adaptation_receipt(candidate, task)
     return {"recipe": candidate.get("resolved_recipe"),
             "recipe_sha256": stable_hash(candidate.get("resolved_recipe")),
             "prior": candidate.get("prior"),

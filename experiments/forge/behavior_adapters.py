@@ -30,6 +30,7 @@ from .api import CapabilityError, FormulationContext, task_policy_blockers
 from .contracts import atomic_json
 from .mechanisms import MechanismAudit, mechanism_blockers
 from .sampling import BEHAVIOR_POLICIES, POLICIES, executed_receipt
+from .taskrecipes import BEHAVIOR_HOST_FIELDS, adaptation_receipt, bind_task_candidate
 
 
 HOSTS = ("two_pole", "trajectory", "residual_student", "unipolar", "ae_gan_hold",
@@ -38,15 +39,15 @@ HOSTS = ("two_pole", "trajectory", "residual_student", "unipolar", "ae_gan_hold"
 # These resources/objectives belong to the frozen host, not the formulation.
 # Even a matching explicit value must be removed from the candidate declaration:
 # it cannot be a shared variable when another host owns a different value.
-FROZEN_HOST_RECIPE_FIELDS = frozenset({
-    "total_steps", "batch_size", "num_particles", "z_dim", "encoder_mode",
-    "model", "num_classes", "conditioning", "ucd_target", "ucd_weight", "alpha_bar",
-    "prior_reg", "reconstruction_weight", "observation_sigma",
-})
+FROZEN_HOST_RECIPE_FIELDS = BEHAVIOR_HOST_FIELDS
 
 
 def behavior_preflight(task: dict, candidate: dict) -> list[str]:
     """Return unsupported explicit overrides before constructing any host state."""
+    try:
+        candidate = bind_task_candidate(candidate, task)
+    except ValueError as error:
+        return [str(error)]
     fields = set(candidate.get("recipe_overrides", {})) & FROZEN_HOST_RECIPE_FIELDS
     if task["execution"].get("host", task["id"]) != "ae_gan_hold":
         fields |= set(candidate.get("recipe_overrides", {})) & {"routing_temperature", "distance_reduction"}
@@ -177,7 +178,9 @@ class BehaviorComponents:
     """Explicit shared construction, optimizer, noise, and observation binder."""
     def __init__(self, request, task):
         self.task = task
-        candidate = request.get("candidate", {})
+        reference_candidate = request.get("candidate", {})
+        candidate = bind_task_candidate(reference_candidate, task)
+        self.host_adaptation = adaptation_receipt(reference_candidate, task)
         blockers = behavior_preflight(task, candidate)
         if blockers:
             raise CapabilityError(blockers)
@@ -333,6 +336,7 @@ class BehaviorComponents:
 
     def receipt(self):
         return dict(execution_path="public_components", recipe=asdict(self.recipe),
+                    **({"host_adaptation": self.host_adaptation} if self.host_adaptation else {}),
                     prior=self.context.prior_config, active_roles=sorted(self.role_parameters),
                     public_optimizers=[type(o).__name__ for opt in self.optimizers.values()
                                        for o in (opt.optimizers if isinstance(opt, _OptimizerBundle) else [opt])],

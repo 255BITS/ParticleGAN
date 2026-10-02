@@ -24,6 +24,9 @@ def candidate_revision_for(source_digest: str, candidate: dict) -> str:
     validate resolved_recipe from the actual public formulation declaration.
     """
     formulation = {key: candidate.get(key) for key in FORMULATION_FIELDS}
+    # Preserve identities of existing declarations with no adaptation contract.
+    if candidate.get("host_adaptation") is not None:
+        formulation["host_adaptation"] = candidate["host_adaptation"]
     formulation.update(resolved_recipe=candidate["resolved_recipe"], prior=candidate["prior"],
                        api_version=candidate.get("api_version", "forge-api-v1"))
     return stable_hash({"source": source_digest, "formulation": formulation})
@@ -69,6 +72,8 @@ def new_idea(root: Path, idea_id: str, parent: str, *, goal="discriminator_stabi
         raise ValueError(f"idea already exists: {path}")
     inherited = load_idea(root, parent)
     idea = {k: deepcopy(inherited[k]) for k in FORMULATION_FIELDS if k in inherited}
+    if "host_adaptation" in inherited:
+        idea["host_adaptation"] = deepcopy(inherited["host_adaptation"])
     idea.update(schema_version=1, id=idea_id, parent=parent, goal=goal,
                 hypothesis=hypothesis or "TODO: state why this mechanism should improve the selected goal",
                 changed_factors=["TODO: describe the substantive change before enqueue"],
