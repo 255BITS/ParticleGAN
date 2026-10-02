@@ -8,6 +8,9 @@ Start with the [compiled experiment memory](reports/forge/EXPERIMENT_MEMORY.md)
 and the [current technique leaderboard](reports/forge/technique-inventory.md).
 The [implementation plan](docs/better-experiment-automation-plan-2026-09-28.md)
 defines the migration and adoption criteria.
+For a new research question or host, follow the
+[experiment creation guide](docs/forge-new-experiment.md), with worked ring and
+joint BiGAN examples, scorer controls, registration and artifact publication.
 
 For the combined E22/Atlas/Forge API, read
 [the develop integration notes](reports/forge/DEVELOP_INTEGRATION.md). Presets,
