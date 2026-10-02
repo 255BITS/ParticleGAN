@@ -8,6 +8,11 @@ Open-PR snapshot: 2026-10-01, 134 PRs, exact heads in
 two later proposals on pinned develop `6ec7e578`, using their retained evidence.
 
 Start with the [latest sorted results and improvements](IMPROVEMENTS.md).
+The [canonical problem selection and keep reasons](CANONICAL_SELECTION.md)
+folds 12 proved same-law entries into shared problems: 97 problem entries
+retain all 109 named cases. Architecture, capacity, optimizer and negative
+controls stay linked when they verify a distinct property. Similar appearance
+alone is insufficient to remove a case.
 All 64 original low-rated entries have stronger definitions, controls or
 comparison audits. Seven explicitly scoped questions receive separate
 follow-up definition scores; original ratings and training receipts are
@@ -25,6 +30,12 @@ checkpoint GIFs where training starts, including failed and incomplete runs.
 Source hashes, declared budgets and actual serving laws remain separate.
 These source fixtures use their original APIs; they do not all execute Atlas.
 The complete ledger counts **107 actual-state GIFs across 103/109 entries**.
+
+The frozen audit runner now avoids one identical residual-bars reference
+execution and writes an explicit shared-evidence alias. All shipped task
+definitions remain useful and are retained. The source/runtime/recipe-bound
+[alias proof](frozen-image-alias.json) disables reuse when the conditions change;
+`--separate-execution` preserves separate historical runs.
 
 [Merge readiness](merge_readiness/README.md) identifies PR224/226 and repaired
 PR227 as local diagnostic candidates. The follow-up repair is committed and
@@ -109,7 +120,9 @@ posterior/diversity tolerances relative to its analytic finite-draw reference.
 instrumentation parity checks, the media format, local raw artifact location
 and exact reproduction commands. The [follow-up validation receipt](improvement-validation.json)
 records 53 passing audit tests, original byte comparisons and complete media
-hash/decoding checks. GIFs use actual observed checkpoints with
+hash/decoding checks. The [retention validation](retention-validation.json)
+records 99 passing combined checks and real-capture alias verification without
+training. GIFs use actual observed checkpoints with
 step labels, numerical curves and full-budget outcomes. They do not interpolate
 clouds or substitute a best checkpoint for a failed final window.
 

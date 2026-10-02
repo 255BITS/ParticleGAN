@@ -41,6 +41,26 @@ twelve-job protocol and unopened test split receive no qualification credit.
 The ledger hashes every current actual-state GIF and lists missing entries;
 original media receipts are unchanged.
 
+The [canonical selection](canonical-selection.json) binds all 109 original
+cases and five exact shared-law groups. Its 97 entries are a conservative
+inventory after proved aliases, not 97 independent scientific families.
+Data-law grouping can ignore uniform-template mode order; execution reuse
+requires the original ordered pixels and every effective recipe/control.
+Related conditional exposure and unit-change variants remain separate where
+their complete laws differ or equality is unproved.
+
+The [frozen bars alias proof](frozen-image-alias.json) binds the dispatcher,
+43 training dependencies, actual runtime, seed/initialization, prior/optimizer,
+target/noise/clamp, serving/EMA, complete budget/cadence and gates. The new
+runner writes only alias summary metadata; its result/cloud/spec pointers
+remain those of the actual canonical observation. It neither creates another
+raw capture nor supplies independent qualification. Historical repeated costs
+remain in their original receipts. Changed or missing identity restores
+separate execution; the public-v2 cohort remains separate.
+The [retention validation](retention-validation.json) binds the 99-test log,
+current selection/dispatcher sources, original-byte checks and integrated
+real-capture alias verification. No new scientific campaign ran for cleanup.
+
 The [local merge receipt](merge_readiness/local-integration.json) is a
 prospective offline Git tree with byte comparisons to the tested overlay;
 **no remote PR was merged**. Fresh authenticated heads and required checks are
@@ -231,7 +251,8 @@ CUDA_VISIBLE_DEVICES='' python -m benchmarks.toy_audit.replay \
   --archived-recipe
 
 CUDA_VISIBLE_DEVICES='' python -m benchmarks.toy_audit.base \
-  --reference frozen --output /tmp/toy-artifacts/develop-frozen-reference
+  --reference frozen --separate-execution \
+  --output /tmp/toy-artifacts/develop-frozen-reference
 
 # Repeat for rotated100 and staggered100, preserving budget/initialization.
 CUDA_VISIBLE_DEVICES=1 python -m benchmarks.toy_audit.native grid100 \

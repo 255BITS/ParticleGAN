@@ -14,6 +14,20 @@ proved structural defects, sampling-law mismatch and unresolved optimizer
 causes. [New image](IMAGE_QUALITY_V2.md) and [non-image](NON_IMAGE_QUALITY.md)
 gates have their own identities and preserve original verdicts.
 
+The [retention review](CANONICAL_SELECTION.md) removes 12 duplicate standalone
+problem entries from the default canonical view while retaining their named
+controls and scientific reasons. Every retained case states its purpose.
+Distinct conditional exposure, widths, geometry, temporal laws and negative
+controls stay separate. No checked-in problem definition was found wholly
+useless; unmerged proposal sources cannot be described as deleted from develop.
+
+One actual repeated frozen-reference execution is removed: resolved
+`img_residual_bars4` shares the already-observed residual `img_bars4` result.
+The alias keeps the original observed source/spec/artifact paths and declares
+no independent training or qualification evidence. Source/runtime/recipe,
+ordered-target, budget, gate or cadence changes restore separate execution.
+The ordinary shipped transpose/residual architecture tests remain intact.
+
 The PR227 repair is now committed on `codex/toy-pr227-signed-use` at
 `0b196047`: all three paths require a positive code-removal loss, and each of
 four harmful judges rejects. Actual retained endpoint assertions still pass.
