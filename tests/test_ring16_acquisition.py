@@ -1,5 +1,6 @@
 """The new acquisition gate must discriminate target law from cheap impostors."""
 import json
+from copy import deepcopy
 from pathlib import Path
 
 import pytest
@@ -73,3 +74,49 @@ def test_shared_public_caller_has_exact_mog_and_clean_live_sampling():
     assert not result["passed"]
     assert len(result["views"]) == 3  # Whole target, masses, fixed local width.
     assert result["views"][0]["target"].shape == (4096, 2)
+
+
+def rendering_failure_receipt():
+    from benchmarks.toy_audit.api_vectors import _bounds
+    from benchmarks.toy_audit.ring16_publish import MEDIA_ERROR
+    case = api_contract.discover()[CASE_ID]
+    metrics = dict(sample_count=4096, modes=0, mass_tv=1., hq=0.,
+                   component_covariance_error=1., component_min_eigen_ratio=0.)
+    bounds = _bounds(metrics, case["thresholds"])
+    media = api_contract.evaluation_steps(400, 9)
+    scoring = api_contract.evaluation_steps(400, 25)
+    schedule = sorted(set(media) | set(scoring))
+    return dict(case=case, status="ERROR", verdict="FAIL", passed=False, source_unchanged=True,
+                completed_updates=400, metric_passed=False, sustained_metric_passed=False,
+                default_protocol_complete=True, gif_frames=0, artifacts={},
+                failed_bounds=bounds + ["last 5 post-update metric observations do not all pass", MEDIA_ERROR],
+                protocol=dict(updates=400, default_updates=400, evaluation_samples=4096,
+                              default_evaluation_samples=4096, metric_observations=24,
+                              terminal_observations=5, media_frames=9, media_steps=media,
+                              metric_evaluation_steps=scoring, evaluation_steps=schedule),
+                observations=[dict(step=step, metrics=metrics, passed=False, failed_bounds=bounds,
+                                   views=[dict(kind="scatter", title="Actual output")]) for step in schedule])
+
+
+def test_renderer_recovery_preserves_original_error_and_numeric_fail():
+    from benchmarks.toy_audit.ring16_publish import verify_rendering_failure
+    receipt = rendering_failure_receipt()
+    original = deepcopy(receipt)
+    assert verify_rendering_failure(receipt) == receipt["protocol"]["media_steps"]
+    assert receipt == original
+
+
+@pytest.mark.parametrize("mutation", ["partial", "other_error", "missing_check", "forged_pass"])
+def test_renderer_recovery_rejects_incomplete_or_changed_evidence(mutation):
+    from benchmarks.toy_audit.ring16_publish import verify_rendering_failure
+    receipt = rendering_failure_receipt()
+    if mutation == "partial":
+        receipt["default_protocol_complete"] = False
+    elif mutation == "other_error":
+        receipt["failed_bounds"].append("unrelated optimizer exception")
+    elif mutation == "missing_check":
+        receipt["observations"].pop(1)
+    else:
+        receipt["metric_passed"] = True
+    with pytest.raises(ValueError):
+        verify_rendering_failure(receipt)
