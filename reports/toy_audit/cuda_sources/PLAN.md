@@ -83,6 +83,7 @@ CUDA_VISIBLE_DEVICES=0 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=
 CUDA_VISIBLE_DEVICES='' OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 \
   /tmp/pr155-e22-venv/bin/python -m benchmarks.toy_audit.source_cuda_observation_report \
   --artifacts /ml2/hypergan/toy-source-cuda-observation-20261001 \
+  --software-test-log /ml2/hypergan/toy-audit-source-cuda-observer-software-tests-final.log \
   --output reports/toy_audit/cuda_sources
 ```
 
