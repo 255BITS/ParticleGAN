@@ -8,6 +8,7 @@ completed default-budget quality test.
 from __future__ import annotations
 
 import argparse
+import ast
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from contextlib import contextmanager
 import hashlib
@@ -129,13 +130,13 @@ def _image_grid(values, limit=8):
     return np.concatenate(joined, axis=1)
 
 
-def _view_limits(records):
+def _view_limits(records, roles=("target", "samples")):
     bounds = {}
     for record in records:
         for index, view in enumerate(record["views"]):
             if view["kind"] in {"image", "text"}:
                 continue
-            for role in ("target", "samples"):
+            for role in roles:
                 points = _points(view[role])
                 points = points[np.isfinite(points).all(1)]
                 if len(points):
@@ -146,17 +147,20 @@ def _view_limits(records):
     return bounds
 
 
-def render_gif(case, records, path, *, full_budget, requested_steps):
+def render_gif(case, records, path, *, full_budget, requested_steps, final_verdict=None):
     """Reference and actual outputs share fixed axes across real observations."""
     import matplotlib
     matplotlib.use("Agg")
     from matplotlib import pyplot as plt
+    from matplotlib.patches import Circle
     from PIL import Image
 
     views_count = max(len(record["views"]) for record in records)
     columns = min(3, views_count)
     rows = math.ceil(views_count / columns)
     fixed = _view_limits(records)
+    reference = _view_limits(records, roles=("target",))
+    annotations = []
     frames = []
     for record in records:
         fig, axes = plt.subplots(rows, columns, figsize=(4.25 * columns, 3.05 * rows + 1.45),
@@ -165,15 +169,27 @@ def render_gif(case, records, path, *, full_budget, requested_steps):
             if index >= len(record["views"]):
                 ax.set_visible(False)
                 continue
-            view = record["views"][index]
+            view = dict(record["views"][index])
             target, samples = contract.array(view["target"]), contract.array(view["samples"])
+            if case["id"] == "api-circle-controller" and view["kind"] == "line":
+                low, high = reference[index]
+                margin = .08 * np.maximum(high - low, .1)
+                view["xlim"] = [float(low[0] - margin[0]), float(high[0] + margin[0])]
+                view["ylim"] = [float(low[1] - margin[1]), float(high[1] + margin[1])]
+                points = _points(samples)
+                outside = int(((points < low - margin) | (points > high + margin)).any(1).sum())
+                view["caption"] = (view.get("caption", "") +
+                    f" Axes show the reference band; {outside}/{len(points)} retained predicted states lie outside. The gate scores the complete rollout.")
+                annotations.append({"step": record["step"], "view": index,
+                                    "reference_camera": {"xlim": view["xlim"], "ylim": view["ylim"]},
+                                    "outside_view_states": outside, "retained_view_states": len(points)})
             if view["kind"] == "text":
                 reference = "Desired words\n" + "\n".join(view["target_labels"][:8])
                 generated = "Actual decoded output\n" + "\n".join(view["sample_labels"][:8])
                 ax.text(.03, .93, reference, transform=ax.transAxes, va="top",
-                        fontsize=10, family="monospace", color="#586a80")
+                        fontsize=7.5 if rows > 1 else 10, family="monospace", color="#586a80")
                 ax.text(.53, .93, generated, transform=ax.transAxes, va="top",
-                        fontsize=10, family="monospace", color="#aa254c")
+                        fontsize=7.5 if rows > 1 else 10, family="monospace", color="#aa254c")
                 ax.set_axis_off()
             elif view["kind"] == "image":
                 top, bottom = _image_grid(target), _image_grid(samples)
@@ -222,6 +238,16 @@ def render_gif(case, records, path, *, full_budget, requested_steps):
                     ax.set_xlim(*(view.get("xlim") or [low[0] - .06 * span[0], high[0] + .06 * span[0]]))
                     ax.set_ylim(*(view.get("ylim") or [low[1] - .06 * span[1], high[1] + .06 * span[1]]))
                 ax.legend(fontsize=7, loc="best")
+            if case["id"] in {"api-routes-discrete", "api-routes-continuous"}:
+                raw_geometry = view.get("caption", "").partition("obstacle center/radius=")[2]
+                if raw_geometry:
+                    geometry = ast.literal_eval(raw_geometry)
+                    if len(geometry) != 3 or not all(math.isfinite(x) for x in geometry) or geometry[2] <= 0:
+                        raise ValueError("retained route obstacle geometry is invalid")
+                    ax.add_patch(Circle(geometry[:2], geometry[2], facecolor="#d9cbb5",
+                                        edgecolor="#7a6040", alpha=.6))
+                    annotations.append({"step": record["step"], "view": index,
+                                        "reference_obstacle": {"center": geometry[:2], "radius": geometry[2]}})
             if view.get("xlim"):
                 ax.set_xlim(*view["xlim"])
             if view.get("ylim"):
@@ -243,6 +269,8 @@ def render_gif(case, records, path, *, full_budget, requested_steps):
         instant = "PASS" if record["passed"] else "FAIL"
         metrics = "; ".join(f"{name}={value:.4g}" for name, value in list(record["metrics"].items())[:6])
         footer = f"{case['id']} | update {record['step']}/{requested_steps} | metric {instant} | {budget}\n{metrics}"
+        if final_verdict is not None:
+            footer = f"Default test {final_verdict} | " + footer
         fig.text(.02, .035, textwrap.fill(footer, 47 * columns, replace_whitespace=False), fontsize=8)
         fig.subplots_adjust(left=.23 if columns == 1 else .085, right=.98,
                             top=.80, bottom=.34, hspace=.85, wspace=.32)
@@ -259,6 +287,8 @@ def render_gif(case, records, path, *, full_budget, requested_steps):
             raise ValueError("GIF discarded an actual observation")
     for frame in frames:
         frame.close()
+    return {"default_verdict_displayed": final_verdict,
+            "goal_annotations": annotations, "numeric_observations_changed": False}
 
 
 def run_case(case, output, *, device="cpu", recipe_name=None, steps=None,
@@ -342,7 +372,8 @@ def run_case(case, output, *, device="cpu", recipe_name=None, steps=None,
             np.savez_compressed(output / "observations.npz", **arrays)
             gif = output / "goal.gif"
             media_records = [record for record in records if record["step"] in boundaries]
-            render_gif(case, media_records, gif, full_budget=full, requested_steps=steps)
+            render_gif(case, media_records, gif, full_budget=full, requested_steps=steps,
+                       final_verdict=receipt["verdict"])
             torch.save(fixture.state_dict(), output / "final-state.pt")
             receipt["artifacts"] = {name: {"sha256": file_hash(output / name),
                                            "bytes": (output / name).stat().st_size}
