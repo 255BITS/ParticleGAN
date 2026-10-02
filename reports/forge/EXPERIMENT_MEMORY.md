@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope; current qualification is recomputed from compatible receipts.
 
-Records: 252. Inventory coverage: complete. Unresolved import items: 7.
+Records: 253. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -3957,6 +3957,22 @@ Frozen v2 smoke remains FAIL (two_pole travel); unused_token_hold and learned-Mo
 
 [Evidence](../../reports/forge/attempts/270c483fe3b94932b7f7edcecd89c872/result.json) · [Record](records/readout-acc70fcaf6cedb9a3772e41e.json)
 
+### release07-gan-v3-task-adapted-v1 · readout-afd6d27c7d1eae64aa13299f
+
+**Scope:** current; scientific; revision `d5341d8d12528f9e34030480544dd84fa7b933eed8474ff19e568dfb56b26cbc`.
+
+Make the released v0.7 optimizer and BCap training recipe executable across frozen toy hosts through explicit task-owned resource and objective bindings; measure ordinary gates without importing native or historical credit.
+
+**Observed:** {'FAIL': 1}; wall seconds 5.508; mechanism `structural`.
+
+
+
+The released v0.7 task adaptation passes preflight for all24 ordinary requirements and executes through the frozen public component host. Complete80-update two_pole FAIL: mean_abs0.29372087121009827<0.30; grad_med0.3106328547000885<=1 PASS. All24 observations and the required suffix fail the joint gate. One CPU attempt cost5.508408382942434 paid seconds; no execution errors. Ordinary scheduling stopped; remaining23 cells UNKNOWN, no integration blockers on the successor.
+
+**Next:** Stop this exact failed revision; keep the integration and reusable host adaptation. Review the provisional tier1 movement/convergence protocol before another training hypothesis. Any post-failure quality comparison requires a separately registered bounded diagnostic lane; no threshold change, seed repeat, continuation, automatic matrix filling or default adoption follows.
+
+[Evidence](../../reports/forge/technique-receipts/df1794ebea6444c5a10c2a953843257d.json) · [Record](records/readout-afd6d27c7d1eae64aa13299f.json)
+
 ### r3gan-stacked-training-toy-v1 · readout-bc440d0469187c9299bd524c
 
 **Scope:** current; scientific; revision `724a672468491e40b3f214c3b44b8913b9317266346527139da7a1de750d8d44`.
@@ -4065,4 +4081,4 @@ This technique failed the full 80-update two_pole smoke gate: {'grad_med': 0.063
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v1`; input digest `ede497ebb5bfa6a4e9c024fc1fbc96a7e5b36a4ae9f4d30a883bb400b8c912ff`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v1`; input digest `c03579e970baa46c950c48cd54e8137cb24b28fb3de221fcd896c3636439c295`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

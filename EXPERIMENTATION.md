@@ -298,9 +298,13 @@ original native-host card remains frozen; adaptation never silently discards
 training mechanisms or imports qualification.
 
 For a technique inventory with one passes/total column per tier, use the
-[expanded technique leaderboard](reports/forge/technique-inventory-expanded.md).
+[expanded technique leaderboard](reports/forge/technique-inventory-unblocked.md).
 It preserves the [original inventory](reports/forge/technique-inventory.md) and
 appends the separately frozen [configurable Modern GAN training baseline](reports/forge/R3GAN_BASELINE_READOUT.md).
+The [released v0.7 task-adaptation readout](reports/forge/RELEASE07_TASK_ADAPTATION_READOUT.md)
+adds one measured successor with all 24 integration preflights ready. Its
+required smoke failure stops the remaining ordinary tasks; the original native
+recipe cards and their blockers remain frozen.
 The linked publications retain their source cohorts; composing the display
 launches no training. Each publication lists its independent regrading command.
 The roster is

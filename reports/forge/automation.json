@@ -1,7 +1,7 @@
 {
   "attempt_outcomes": {
     "cancelled": 1,
-    "completed": 61
+    "completed": 62
   },
   "component_timing": {
     "measured_attempts": 22,
@@ -11,13 +11,13 @@
       "sampling": 0.769850275319186,
       "training_updates": 659.339497676352
     },
-    "unmeasured_attempts": 40
+    "unmeasured_attempts": 41
   },
   "concurrency": {
-    "mean_active_workers": 0.004596901484610698,
-    "measured_attempts": 60,
+    "mean_active_workers": 0.004456424322208031,
+    "measured_attempts": 61,
     "missing_interval_attempts": 2,
-    "observation_window_seconds": 251092.20184731483,
+    "observation_window_seconds": 260243.286059618,
     "peak_distinct_gpu_devices": 2,
     "peak_workers": 2,
     "scope": "Actual supervised-attempt intervals; this is process occupancy, not GPU kernel utilization."
@@ -32,25 +32,25 @@
   },
   "cost_to_reject": {
     "maximum_seconds": 86.35670835815836,
-    "mean_seconds": 12.04133278124209,
-    "measured_outcomes": 13,
-    "median_seconds": 5.581290133995935,
-    "outcomes": 13,
+    "mean_seconds": 11.574695324220686,
+    "measured_outcomes": 14,
+    "median_seconds": 5.544849258469185,
+    "outcomes": 14,
     "unknown_cost_outcomes": 0
   },
   "execution_error_rate": {
-    "denominator": 62,
-    "fraction": 0.016129032258064516,
+    "denominator": 63,
+    "fraction": 0.015873015873015872,
     "numerator": 1
   },
-  "execution_jobs_avoided": 198,
+  "execution_jobs_avoided": 220,
   "flops": {
     "kind": "unavailable",
     "value": null
   },
   "incomplete_task_rate": {
-    "denominator": 62,
-    "fraction": 0.016129032258064516,
+    "denominator": 63,
+    "fraction": 0.015873015873015872,
     "numerator": 1
   },
   "limits": [
@@ -69,15 +69,15 @@
     },
     "maximum_reaped_child_peak_rss_bytes": {
       "maximum_bytes": 2168516608,
-      "measured_attempts": 60
+      "measured_attempts": 61
     },
     "process_peak_rss_bytes": {
       "maximum_bytes": 2168516608,
-      "measured_attempts": 59
+      "measured_attempts": 60
     },
     "supervisor_peak_rss_bytes": {
       "maximum_bytes": 868331520,
-      "measured_attempts": 60
+      "measured_attempts": 61
     }
   },
   "memory_scope": "Process-lifetime RSS and PyTorch allocator peaks have distinct scopes; none is whole-host or whole-device memory.",
@@ -205,6 +205,48 @@
       "rejected_tier": 1,
       "request_ids": [
         "f4e7f793f73f5ecf280e959e"
+      ],
+      "status": "FAIL",
+      "through_tier": 3,
+      "view": "discriminator_stability"
+    },
+    {
+      "attempt_ids": [
+        "df1794ebea6444c5a10c2a953843257d"
+      ],
+      "avoided_execution_jobs": 22,
+      "avoided_tasks": [
+        "unused_token_hold",
+        "ae_gan_hold",
+        "trajectory",
+        "residual_student",
+        "unipolar",
+        "cover_leftover",
+        "mid_scale_identity",
+        "mode_hold",
+        "vector_two_broad",
+        "vector_unequal_mass",
+        "vector_unequal_width",
+        "vector_anisotropic",
+        "vector_overlap",
+        "vector_spiral",
+        "img_stripes2",
+        "img_bars4",
+        "img_blobs4",
+        "img_intensity2",
+        "grid100",
+        "rotated100",
+        "staggered100",
+        "ring_hold",
+        "ring_extension"
+      ],
+      "candidate_revision": "d5341d8d12528f9e34030480544dd84fa7b933eed8474ff19e568dfb56b26cbc",
+      "evidence_wall_seconds": 5.508408382942434,
+      "incremental_paid_seconds": 5.508408382942434,
+      "qualified_tier": 0,
+      "rejected_tier": 1,
+      "request_ids": [
+        "f2ef545b54285551f616bbdd"
       ],
       "status": "FAIL",
       "through_tier": 3,
@@ -557,28 +599,28 @@
   "receipt_issues": [],
   "requests_with_unavailable_cap": 0,
   "reuse": {
-    "evidence_uses": 21,
+    "evidence_uses": 22,
     "reused_evidence_uses": 0,
-    "submitted_execution_demands": 219,
-    "unique_evidence_jobs": 21
+    "submitted_execution_demands": 242,
+    "unique_evidence_jobs": 22
   },
   "schema_version": 1,
   "scope": "recorded current Forge receipts; historical imports are excluded",
   "spend": {
-    "attempts": 62,
-    "known_wall_seconds": 1165.476949355143,
+    "attempts": 63,
+    "known_wall_seconds": 1170.9853577380854,
     "scope": "Unique paid attempts, including retries; grouped predicates and subscribers are not charged again.",
     "unknown_cost_attempts": 0,
-    "wall_seconds": 1165.476949355143
+    "wall_seconds": 1170.9853577380854
   },
   "task_gate_counts": {
-    "FAIL": 34,
+    "FAIL": 35,
     "INCOMPLETE": 1,
     "PASS": 27
   },
-  "tasks_avoided": 207,
+  "tasks_avoided": 230,
   "tier_rejections": {
-    "1": 12,
+    "1": 13,
     "2": 1
   }
 }
