@@ -1,5 +1,9 @@
 # Public API image and five-word variants
 
+The [completed common-runner campaign](../RUN_REPORT.md) supplies full-budget
+training receipts and goal GIFs: 31 PASS and 49 FAIL in this family. The
+declaration/software-validation snapshot below predates those scientific runs.
+
 These are new runnable definitions for all 39 retained image entries (34 ordered banks) and the five-word source demo. `api_images.list_cases()` declares 80 hosts: the 69 recorded image arm architectures, four original checked-in transpose12 hosts, six real conditional variants, and one joint word autoencoder. Every original receipt, rating and GIF remains unchanged.
 
 The unconditional hosts use `GANTrainer`. Conditional hosts use the public recipe optimizers/loss/penalty and `UpdatePolicy`, with actual observed pixels and masks supplied to both G and D. Independent-row evidence and birth/death are explicitly disabled on these conditional hosts; the associated feature backend/isolation options are reset through public recipe fields. Stationarity, KA2, optimizer reopening, DV12 latent perturbation and selected serving weights remain active when Atlas is selected. The resolved recipe, seed, initialization and external execution cap travel with the fixture state.

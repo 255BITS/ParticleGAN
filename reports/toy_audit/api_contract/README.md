@@ -7,6 +7,10 @@ ratings and GIFs retain their original identities. New variants link back to
 their original questions and explain every change of scope, architecture,
 resource, recipe or sampling law.
 
+The [completed full-budget readout](RUN_REPORT.md) covers all 176 variants:
+51 PASS, 120 completed FAIL and five ERROR/FAIL attempts. Start with the
+[sorted results and per-failure bounds](LEADERBOARD.md) or [goal GIF gallery](GALLERY.md).
+
 ## Contract
 
 1. State the falsifiable question and exact target law. Include the conditioning

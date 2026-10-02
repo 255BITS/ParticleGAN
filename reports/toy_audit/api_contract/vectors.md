@@ -5,6 +5,10 @@ sharing a target law are comparison arms, not additional independent problems.
 The API inventory and GIF runner consume `list_cases()` and `build_case()` from
 [api_vectors.py](../../../benchmarks/toy_audit/api_vectors.py).
 
+The [completed common-runner campaign](RUN_REPORT.md) now supplies full-budget
+training receipts and goal GIFs. The declaration/software snapshot below
+predates that campaign and makes no independent convergence claim.
+
 These are new audit callers on develop 664ce464. They do not rewrite historical
 recipes, ratings, results or receipts, and do not qualify an optimizer default.
 The common fixed seed is 24002. Independent evaluator/control streams are

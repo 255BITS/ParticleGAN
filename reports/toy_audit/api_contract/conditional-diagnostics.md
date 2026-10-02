@@ -1,5 +1,9 @@
 # Conditional, behavior and native diagnostic API reform v1
 
+The [completed common-runner campaign](RUN_REPORT.md) supplies full-budget
+training receipts and goal GIFs. The software-validation results below remain
+separate from that campaign's learned-model outcomes.
+
 These are **42 runnable new variants for 31 retained historical questions**:
 23 conditional variants and 19 native/control/reconstruction variants. Historical
 names, ratings, source receipts and scientific statuses remain unchanged. This
