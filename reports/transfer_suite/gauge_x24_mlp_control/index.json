@@ -1,0 +1,82 @@
+[
+  {
+    "arm": "winner_published_absolute",
+    "status": "FAIL",
+    "suffix": 0,
+    "shortfall": 0.1247757865176764,
+    "live": {
+      "sw1_normalized": 0.23264977036590875,
+      "mean_error": 0.3640756905078888,
+      "covariance_error": 0.12753424048423767,
+      "target_scale": 25.333404541015625,
+      "sample_count": 4096,
+      "mass_tv": 0.19970703125,
+      "min_mass_ratio": 0.6005859375,
+      "hq": 0.99462890625,
+      "component_covariance_error": 0.07191922795027494,
+      "component_covariance_errors": [
+        0.030293209478259087,
+        0.1135452464222908
+      ],
+      "component_min_eigen_ratio": 0.9580624103546143,
+      "component_mass": [
+        0.69970703125,
+        0.30029296875
+      ],
+      "target_mass": [
+        0.5,
+        0.5
+      ],
+      "component_counts": [
+        2866,
+        1230
+      ]
+    },
+    "error": null,
+    "seconds": 25.61859050602652,
+    "sha256": "8377399a6178acf1aea7fb055d14acb48dbbf4f47ee9e612cdcfa2876a6515fd",
+    "kind": "batchfeat",
+    "init_std": 0.5,
+    "scale": 24.0
+  },
+  {
+    "arm": "control_mlp_matched_init",
+    "status": "PASS",
+    "suffix": 7,
+    "shortfall": 0.0,
+    "live": {
+      "sw1_normalized": 0.1611546830296642,
+      "mean_error": 0.25013014674186707,
+      "covariance_error": 0.07806118577718735,
+      "target_scale": 25.333404541015625,
+      "sample_count": 4096,
+      "mass_tv": 0.139892578125,
+      "min_mass_ratio": 0.72021484375,
+      "hq": 0.984130859375,
+      "component_covariance_error": 0.14315994456410408,
+      "component_covariance_errors": [
+        0.10254936665296555,
+        0.18377052247524261
+      ],
+      "component_min_eigen_ratio": 0.8587980270385742,
+      "component_mass": [
+        0.639892578125,
+        0.360107421875
+      ],
+      "target_mass": [
+        0.5,
+        0.5
+      ],
+      "component_counts": [
+        2621,
+        1475
+      ]
+    },
+    "error": null,
+    "seconds": 5.484894102904946,
+    "sha256": "3e5f31b03d65d4d65cf426def7a10078d8ffd4c3a46a1c7ae10bf23d87dc75fe",
+    "kind": "mlp",
+    "init_std": 12.0,
+    "scale": 24.0
+  }
+]
