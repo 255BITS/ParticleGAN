@@ -11,8 +11,9 @@ import numpy as np
 from PIL import Image
 
 from .api_publish import _verify_grade, verify_run
-from .api_ring16 import list_cases
-from .api_run import file_hash, render_gif, write_json
+from .api_contract import discover
+from .api_ring16 import CASE_ID
+from .api_run import file_hash, json_value, render_gif, write_json
 
 
 MEDIA_ERROR = "goal media/state error: ModuleNotFoundError: No module named 'matplotlib'"
@@ -78,13 +79,14 @@ def recover_media(raw, output):
 
 def publish(raw, output, *, recover_missing_media=False):
     raw, output = Path(raw), Path(output)
+    original = json.loads((raw / "receipt.json").read_text())
+    if original["case"] != json_value(discover()[CASE_ID]) or original["seed"] != 0:
+        raise ValueError("execution differs from the frozen ring16 declaration")
     if recover_missing_media:
         receipt, media, frames, review = recover_media(raw, output)
     else:
         receipt = verify_run(raw)
         media, frames, review = receipt["artifacts"]["goal.gif"], receipt["gif_frames"], None
-    if receipt["case"] != list_cases()[0] or receipt["seed"] != 0:
-        raise ValueError("execution differs from the frozen ring16 declaration")
     source_key = hashlib.sha256(json.dumps(receipt["source"], sort_keys=True).encode()).hexdigest()
     case = receipt["case"]
     row = {"id": case["id"], "recipe": receipt["recipe"], "runtime": receipt["runtime"],
