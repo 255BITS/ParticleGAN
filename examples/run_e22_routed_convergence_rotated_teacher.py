@@ -166,7 +166,7 @@ def final_gates(endpoint_scores, witnesses):
                          and all(value > 0 for value in witness["C_norms"].values())
                          and witness["live_bank_updates"] > 0 and witness["live_query_updates"] > 0
                          and set(witness["zero_code_minus_live_test_game"]) == set(JUDGES)
-                         and all(abs(value) > 1e-6 for value in witness["zero_code_minus_live_test_game"].values()))
+                         and all(value > 1e-6 for value in witness["zero_code_minus_live_test_game"].values()))
     return {"original_particle_minus_ordinary_game": gaps,
             "neutral_particle_minus_ordinary_game": neutral_gaps,
             "paired_game_H_b_improvement": improvements,

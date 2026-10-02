@@ -270,7 +270,7 @@ def main():
         retained_particle_gate = (particle_witness["bridge_still_trainable"]
             and all(value > 0 for value in particle_witness["C_norms"].values())
             and coverage["live_bank_updates"] > 0 and coverage["live_query_updates"] > 0
-            and all(abs(value) > 1e-6 for value in particle_witness["zero_code_minus_live_test_game"].values()))
+            and all(value > 1e-6 for value in particle_witness["zero_code_minus_live_test_game"].values()))
         budget()
         receipt.update(status="complete", wall_seconds=time.monotonic() - start,
                        paired_game_improvements=improvements, endpoint_gap_reduction=gap_reductions,

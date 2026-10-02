@@ -10,7 +10,6 @@ from copy import deepcopy
 import hashlib
 from inspect import unwrap
 import math
-import marshal
 from pathlib import Path
 import sys
 from types import FunctionType
@@ -101,11 +100,19 @@ def factory_namespace(data):
 
 
 def factory_binding_manifest():
+    # Raw marshal bytes depend on benign object-reference flags. Reuse the
+    # campaign's canonical code-field encoding, retaining runtime/path binding.
+    if __package__:
+        from .e22_routed_convergence_guided_campaign import code_sha
+    else:
+        from e22_routed_convergence_guided_campaign import code_sha
     return {
         "id": "isolated_held_code_namespace_v1",
         "held_function": "examples.e22_routed_convergence.make_loop",
         "held_file_sha256": hashlib.sha256(Path(baseline.__file__).read_bytes()).hexdigest(),
-        "held_code_object_sha256": hashlib.sha256(marshal.dumps(baseline.make_loop.__code__)).hexdigest(),
+        "held_code_object_sha256": code_sha(baseline.make_loop),
+        "held_code_object_hash_law": "canonical public code fields; no marshal reference/intern flags",
+        "held_defaults_sha256": baseline.digest((baseline.make_loop.__defaults__, baseline.make_loop.__kwdefaults__)),
         "code_object_runtime": {"python": sys.version, "co_filename": baseline.make_loop.__code__.co_filename},
         "bindings": {"Host": "GuidedHost bound to frozen projection/mean-source data",
                      "model_forward": "guided_model_forward"},
