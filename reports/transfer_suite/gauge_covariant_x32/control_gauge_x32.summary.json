@@ -1,0 +1,16 @@
+{
+  "arm": "control_gauge_x32",
+  "status": "PASS",
+  "suffix": 8,
+  "shortfall": 0.0,
+  "error": null,
+  "seconds": 48.218917763006175,
+  "kernel_scales": [
+    3.2,
+    8.0,
+    16.0,
+    32.0
+  ],
+  "init_std": 16.0,
+  "sha256": "965caa8859db35895096518fc624a3b29bcd123c20d129a325a2ec2ad499b80a"
+}

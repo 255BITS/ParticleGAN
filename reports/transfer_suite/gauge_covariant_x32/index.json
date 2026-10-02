@@ -1,0 +1,90 @@
+[
+  {
+    "arm": "winner_fixed_gauge_x32",
+    "status": "FAIL",
+    "suffix": 0,
+    "shortfall": 0.25326014283635606,
+    "live": {
+      "sw1_normalized": 0.2935005348027204,
+      "mean_error": 0.45978885889053345,
+      "covariance_error": 0.1962943971157074,
+      "target_scale": 33.77787399291992,
+      "sample_count": 4096,
+      "mass_tv": 0.245361328125,
+      "min_mass_ratio": 0.50927734375,
+      "hq": 0.993896484375,
+      "component_covariance_error": 0.09093587286770344,
+      "component_covariance_errors": [
+        0.04747425392270088,
+        0.134397491812706
+      ],
+      "component_min_eigen_ratio": 0.9368148446083069,
+      "component_mass": [
+        0.745361328125,
+        0.254638671875
+      ],
+      "target_mass": [
+        0.5,
+        0.5
+      ],
+      "component_counts": [
+        3053,
+        1043
+      ]
+    },
+    "error": null,
+    "seconds": 44.141728634000174,
+    "kernel_scales": [
+      0.1,
+      0.25,
+      0.5,
+      1.0
+    ],
+    "init_std": 0.5,
+    "sha256": "ac315f0120be988872a74fffc051c9b22a755b4e08ede27d5ca7a780a46c05f4"
+  },
+  {
+    "arm": "control_gauge_x32",
+    "status": "PASS",
+    "suffix": 8,
+    "shortfall": 0.0,
+    "live": {
+      "sw1_normalized": 0.024419202466902483,
+      "mean_error": 0.02690694108605385,
+      "covariance_error": 0.04161747917532921,
+      "target_scale": 33.77787399291992,
+      "sample_count": 4096,
+      "mass_tv": 0.00341796875,
+      "min_mass_ratio": 0.9931640625,
+      "hq": 0.989990234375,
+      "component_covariance_error": 0.10084355622529984,
+      "component_covariance_errors": [
+        0.0781417265534401,
+        0.12354538589715958
+      ],
+      "component_min_eigen_ratio": 0.8306893110275269,
+      "component_mass": [
+        0.50341796875,
+        0.49658203125
+      ],
+      "target_mass": [
+        0.5,
+        0.5
+      ],
+      "component_counts": [
+        2062,
+        2034
+      ]
+    },
+    "error": null,
+    "seconds": 48.218917763006175,
+    "kernel_scales": [
+      3.2,
+      8.0,
+      16.0,
+      32.0
+    ],
+    "init_std": 16.0,
+    "sha256": "965caa8859db35895096518fc624a3b29bcd123c20d129a325a2ec2ad499b80a"
+  }
+]

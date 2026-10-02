@@ -1,0 +1,16 @@
+{
+  "arm": "winner_fixed_gauge_x32",
+  "status": "FAIL",
+  "suffix": 0,
+  "shortfall": 0.25326014283635606,
+  "error": null,
+  "seconds": 44.141728634000174,
+  "kernel_scales": [
+    0.1,
+    0.25,
+    0.5,
+    1.0
+  ],
+  "init_std": 0.5,
+  "sha256": "ac315f0120be988872a74fffc051c9b22a755b4e08ede27d5ca7a780a46c05f4"
+}
