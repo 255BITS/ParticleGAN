@@ -1,10 +1,10 @@
 {
   "schema": "toy_open_pr_disposition_v1",
-  "reviewed_utc": "2026-10-02T02:26:02.409163+00:00",
+  "reviewed_utc": "2026-10-02T03:27:49.159754+00:00",
   "policy": "Merge original 5/5 or 4/5 diagnostics with honest passing stated controls and current checks. Retain any distinct scientific question or useful control; close only wholly useless or proved redundant proposals.",
   "inventory": {
     "total_open_prs_at_start": 138,
-    "reviewed_toy_problem_prs": 49,
+    "reviewed_toy_problem_prs": 50,
     "other_algorithm_recipe_infrastructure_or_reporting_prs": 89,
     "heads_preserved_in_original_receipts": true,
     "new_current_scope_prs": [
@@ -13,13 +13,37 @@
     "separate_config_repair_out_of_scope": [
       229,
       216
-    ]
+    ],
+    "latest_refresh": {
+      "total_open_prs": 136,
+      "new_problem_prs": [
+        231
+      ],
+      "no_longer_open_since_start": [
+        224,
+        226,
+        229
+      ],
+      "input_sha256": "d922ccc4c632459184454c3d7ae2865d1f3f1790b4e20cb0beed64a56bcdce9e",
+      "review_status": "PR231 under separate current-source/media review; original 49 dispositions preserved"
+    },
+    "original_inventory_toy_prs": 49,
+    "additional_current_problem_prs": [
+      231
+    ],
+    "final_refresh": {
+      "total_open_prs": 134,
+      "reviewed_problem_prs_still_open": 46,
+      "new_problem_prs_since_previous_refresh": [],
+      "all_46_retained_heads_unchanged": true,
+      "input_sha256": "5c71d2a604baaed49a6852d70eb2b8612f2d811cdf7cf21c6b909b5a0470e7be"
+    }
   },
   "counts": {
-    "records": 49,
-    "merged": 2,
+    "records": 50,
+    "merged": 4,
     "await_current_ci": 0,
-    "signed_repair_in_progress": 1,
+    "signed_repair_in_progress": 0,
     "keep_open": 46,
     "closed_as_useless_or_duplicate": 0
   },
@@ -27,7 +51,10 @@
   "input_sha256": {
     "/ml2/hypergan/toy-audit-open-prs-20261001.json": "9bd6194b1f9cc6373ecf0cf5c7677250b1654ea53e7d0eec6ef69fe2f05632f4",
     "/ml2/hypergan/toy-audit-open-pr-image-triage.json": "5444c7c6e3adc0d5b971957c3d379bdd79f7d0ca96b0586ff9fa7e6897c76275",
-    "/ml2/hypergan/toy-audit-open-pr-nonimage-triage.json": "9da8e20449f3e32cae1aa612a7062670fa084ade96760b4a028ce3116487f807"
+    "/ml2/hypergan/toy-audit-open-pr-nonimage-triage.json": "9da8e20449f3e32cae1aa612a7062670fa084ade96760b4a028ce3116487f807",
+    "/ml2/hypergan/toy-audit-open-prs-final-20261002.json": "5c71d2a604baaed49a6852d70eb2b8612f2d811cdf7cf21c6b909b5a0470e7be",
+    "/ml2/hypergan/toy-audit-pr231-metadata.json": "beee3c92110446dc5495a13a250556d0ef72688281c841520bd17c2c8d2bc320",
+    "/ml2/hypergan/toy-audit-pr231-review.json": "1d5962b22c25cc6e726da3fe4ad59e87d9fada2e6ab5d7e6e0e4986431bf65ec"
   },
   "records": [
     {
@@ -407,10 +434,10 @@
       "base_branch": "develop",
       "is_draft": false,
       "scientific_question": "Does neutralizing fresh H/b remove the shared two-site particle disadvantage under four fixed judges while codes remain useful? The live head adds guided CFG=3 and unguided rotated teacher laws, plus a separate zero-update frozen-critic stationarity/attraction unit.",
-      "scientific_result": "Old head bounded H/b diagnostic reproduced; LIVE_SCOPE_EXPANDED; Old signed endpoint reclassification PASS; 16 new guided/rotated saved deltas positive, but new source gates still unsigned at live head",
+      "scientific_result": "Bounded H/b diagnostic supported after signed contribution repair; guided support PASS; unguided rotated reproduction FAIL/inapplicable. All saved beneficial deltas remain positive; zero-update stationarity remains separate. Changed evaluator/native source inherits no training qualification.",
       "reason_to_keep": "Useful matched H/b intervention and guided/unguided negative control; stationarity versus attraction is a separate local question. Neither establishes the remaining full-Supra cause.",
-      "recommendation": "SIGNED_REPAIR_IN_PROGRESS",
-      "next_step": "PR230 repairs all signed assertions and stable factory identity. Wait for the resulting proposal head CI before merging into develop. Original guided support remains PASS; rotated reproduction stays FAIL/inapplicable; changed source inherits no training qualification.",
+      "recommendation": "MERGED",
+      "next_step": "Merged repaired proposal67be after177focused checks and all4CIjobs passed. Future full-host diagnosis and fresh qualification under changed source remain separate work.",
       "provenance": [
         "PR226_PR227.md",
         "canonical-selection.json",
@@ -449,7 +476,7 @@
         }
       ],
       "merge_state_at_inventory": "CLEAN",
-      "current_head_sha": "b370cb7a49429e67f106e41752abea078327c5d0",
+      "current_head_sha": "67be35f4540c925e81b9a1b542113e7f039046ac",
       "signed_repair_pr": 230,
       "signed_repair_url": "https://github.com/255BITS/ParticleGAN/pull/230",
       "signed_repair_head": "82a13bec02a87d3269605af7b751a95c661e71ee",
@@ -465,7 +492,202 @@
         "reclassifier_model_or_optimizer_updates": 0,
         "qualification_credit": false
       },
-      "supplemental_media": "pr227_current_media/README.md"
+      "supplemental_media": "pr227_current_media/README.md",
+      "signed_repair_remote_merge": {
+        "merge_commit_sha": "5dc191b67ee3811cf3f7b2fe203e6731ce07c3ee",
+        "merged": true,
+        "merged_at": "2026-10-02T02:41:27Z",
+        "number": 230
+      },
+      "current_integration_tests": {
+        "passed": 177,
+        "skipped": 1,
+        "xfailed": 1,
+        "seconds": 22.1,
+        "log_sha256": "22f50f0fd45451f0fe7f5740a24673530fb268aafa67489dd60b2e678ce6a527",
+        "quality_training_updates": 0,
+        "archived_cards_changed": false,
+        "unauthorized_temporary_software_contracts_only": true
+      },
+      "remote_merge": {
+        "base_sha": "e4278629eab210c0aa7643d3c09f5e0b56e2e3c9",
+        "head_sha": "67be35f4540c925e81b9a1b542113e7f039046ac",
+        "merge_commit_sha": "6bf669a4d639d7a6781d09885a6ba46c60644679",
+        "merged": true,
+        "merged_at": "2026-10-02T03:15:13Z",
+        "number": 227,
+        "state": "closed"
+      },
+      "current_remote_checks": [
+        {
+          "name": "CPU / Python 3.10",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/36958370949/job/110686334598"
+        },
+        {
+          "name": "CPU / Python 3.11",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/36958370949/job/110686334724"
+        },
+        {
+          "name": "CPU / Python 3.12",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/36958370949/job/110686334719"
+        },
+        {
+          "name": "Build release distributions",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/36958370949/job/110688866164"
+        }
+      ]
+    },
+    {
+      "pr": 231,
+      "title": "Add task-verified routed FiLM conditioning sensitivity toys",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/231",
+      "catalog_ids": [],
+      "original_quality_tiers": [],
+      "followup_quality_tiers": [
+        4
+      ],
+      "quality_scope": "New bounded diagnostic4/5; analytic geometry oracle alone5/5. Original109-case ratings unchanged.",
+      "reviewed_head_sha": "68cf68e599d4ac8f8608434c417ed021647e2ff4",
+      "current_head_sha": "68cf68e599d4ac8f8608434c417ed021647e2ff4",
+      "base_branch": "develop",
+      "is_draft": false,
+      "scientific_question": "Does zeroing the entire additive FiLM branch erase particle-code and conditioning directions, and how does that affect actual Adam/GAN updates through a frozen BF16 recipient and dense 128\u00d74 routed table? Unlike PR227's H/b-only neutralization, this also erases Cz.",
+      "scientific_result": "GEOMETRY_UNIT_PASS; bounded initialization sensitivity observed; NO_FROZEN_CONVERGENCE_GATE for learned quality. Faithful ordinary toys do not reproduce repeated G cuts; spatial width16 reverses terminal initialization ordering; matched real100-update G-rate restoration is REJECTED.",
+      "reason_to_keep": "Distinct whole-FiLM erasure, conditioning Jacobian and raw-gradient-versus-Adam-movement diagnostic. Faithful native, antithetic, capacity and wider-spatial counterexamples bound its interpretation; it is not a duplicate of H/b-only PR227.",
+      "recommendation": "MERGED",
+      "next_step": "Merged exact reviewed head 68cf after its current virtual-merge CI and 96 adjacent software checks passed. The full late real-task convergence deficit remains unexplained; retain the negative G-rate bypass result and separate source cohorts.",
+      "provenance": [
+        "HIGH_RATED.md",
+        "pr231_media/README.md",
+        "pr231_media/receipt.json",
+        "../../docs/routed_generator_damping_diagnostic_20261002.md",
+        "../../docs/routed_generator_damping_diagnostic_20261002.json"
+      ],
+      "media": [],
+      "supplemental_media": "pr231_media/README.md",
+      "remote_checks_at_review": [
+        {
+          "name": "CPU / Python 3.10",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/36957943133/job/110685012494"
+        },
+        {
+          "name": "CPU / Python 3.11",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/36957943133/job/110685012332"
+        },
+        {
+          "name": "CPU / Python 3.12",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/36957943133/job/110685012512"
+        },
+        {
+          "name": "Build release distributions",
+          "status": "COMPLETED",
+          "conclusion": "SUCCESS",
+          "url": "https://github.com/255BITS/ParticleGAN/actions/runs/36957943133/job/110688753239"
+        }
+      ],
+      "merge_state_at_review": "UNKNOWN",
+      "current_integration_tests": {
+        "passed": 96,
+        "skipped": 3,
+        "seconds": 20.98,
+        "focused_passed": 26,
+        "focused_seconds": 3.32,
+        "log_sha256": "ef829d46631e9c67ea4e29af5e595a9e568b1e6e233b6537ea95a1f10a3b51d2",
+        "base_only_integration_commit": "558b7711c7731ba638caa501adb80fe51f59147c",
+        "eight_proposal_files_byte_identical": true,
+        "incoming_native_lib_configs_unmodified": true,
+        "qualification_credit": false,
+        "frozen_native_file_count": 29,
+        "current_native_file_count": 30
+      },
+      "remote_merge": {
+        "base_sha": "e4278629eab210c0aa7643d3c09f5e0b56e2e3c9",
+        "head_sha": "68cf68e599d4ac8f8608434c417ed021647e2ff4",
+        "merge_commit_sha": "c4b53495d04a2052e266739a82053317b7f49698",
+        "merged": true,
+        "merged_at": "2026-10-02T03:18:51Z",
+        "number": 231,
+        "state": "closed"
+      },
+      "actual_merge_parents": [
+        "6bf669a4d639d7a6781d09885a6ba46c60644679",
+        "68cf68e599d4ac8f8608434c417ed021647e2ff4"
+      ],
+      "historical_native_cohort_note": "Original 3f/70de bindings retain 29 core files. Current native source has 30 files, differs at four files and adds recipe_schedules.py after independent PR229; no new scientific qualification. The original final_source_changes sentence predates its later separately bound publication_replay.",
+      "independent_review": {
+        "input_sha256": "1d5962b22c25cc6e726da3fe4ad59e87d9fada2e6ab5d7e6e0e4986431bf65ec",
+        "recommended_quality_tier": 4,
+        "definition_status": "WELL_DEFINED_BOUNDED_DIAGNOSTIC",
+        "scientific_result": {
+          "analytic_geometry_control": "PASS",
+          "first_step_initialization_sensitivity": "SUPPORTED_IN_DECLARED_FIXTURES",
+          "ordinary_toy_repeated_G_cut_reproduction": "NOT_REPRODUCED",
+          "spatial_width16_uniform_initialization_ordering": "COUNTEREXAMPLE_RETAINED",
+          "real_G_rate_bypass": "REJECT_AS_FIX",
+          "trained_convergence_acceptance_gate": "NO_FROZEN_GATE",
+          "Forge_or_default_qualification": "NONE"
+        },
+        "high_quality_questions": [
+          {
+            "id": "zero-hidden-FiLM-geometry",
+            "tier": 5,
+            "verifies": "At controlled h=0, gain contributes no code derivative. Whole/additive-code erasure closes the shift path; preserving additive code columns while zeroing time/bias retains it. Analytic .25*diag(sech\u00b2(pre_shift))*W_shift,code*J_LayerNorm and complete bank-routed GAN gradient controls agree.",
+            "limit": "Controlled geometry, no optimizer updates or learned convergence qualification."
+          },
+          {
+            "id": "initialization-and-Adam-motion",
+            "tier": 4,
+            "verifies": "Whole shift zero attenuates first-step encoder gradient energy in matched fixtures; actual Adam displacement changes by a different factor.",
+            "limit": "Specific initialized fixtures; relational regression bounds are software checks, not new prelaunch scientific gates."
+          },
+          {
+            "id": "faithful-spatial-and-capacity-controls",
+            "tier": 4,
+            "verifies": "Native routed controls/BF16 recipient boundary/dense128\u00d74bank stay active; width4 and width16 retain opposite initialization orderings.",
+            "limit": "Width changes multiple owners; no universal isolated capacity-cause claim."
+          },
+          {
+            "id": "matched-rate-counterfactual",
+            "tier": 4,
+            "verifies": "Antithetic64native/bypass traces match through504; appliedG-rate first diverges505. Narrow toy benefit remains alongside negative real continuation.",
+            "limit": "Toy factor2 versus real factor32 restoration; no general core-policy defect/remedy identified."
+          }
+        ],
+        "source_limits": [
+          "No frozen trained-convergence acceptance criterion.",
+          "Early outer-identity/backfilled protocols stay weaker historical evidence.",
+          "Metric animations only: intermediate sample clouds were not captured.",
+          "Real receipts retain stale decoded completed:false with independent completion proof.",
+          "No fresh GPU execution or model rescoring in this review."
+        ]
+      },
+      "supplemental_media_validation": {
+        "records": 8,
+        "final_saved_states": 26,
+        "actual_evaluations": 338,
+        "existing_trace_updates_verified": 31200,
+        "new_training_updates": 0,
+        "model_instances_constructed": 0,
+        "metrics_recomputed": 0,
+        "software_replay_updates": 0,
+        "parser_negative_controls": 5,
+        "receipt_sha256": "2c1d5d8f6877484c1651d139d5e06aa5856ed1071ee04c666bab1b4c25cd1b50",
+        "verification_sha256": "9ff41298430e77b1c2609aabc52e22b4b8b85d4d9e7f303046b8636ddd996fa2"
+      }
     },
     {
       "pr": 47,

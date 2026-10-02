@@ -13,14 +13,25 @@ from benchmarks.transfer_suite import image_tasks, suite, vector_tasks
 
 
 ROOT = Path(__file__).resolve().parents[1]
+ARCHIVED_PROOF_LOADER = base.load_alias_proof
 
 
 @pytest.fixture
 def frozen(monkeypatch):
-    proof = base.load_alias_proof(ROOT)
-    assert proof is not None
-    # Dispatch tests exercise the recognized runtime; mismatches are tested
-    # separately. They stay portable to runtimes where production fails closed.
+    archived = ARCHIVED_PROOF_LOADER(ROOT)
+    assert archived is not None
+    # Exercise dispatch and rejection controls with an in-memory software
+    # contract. Later native changes must not requalify the archived capture.
+    # The production loader and its immutable receipt are left untouched.
+    proof = deepcopy(archived)
+    current_sources = set(proof["source_sha256"]) | {
+        str(p.relative_to(ROOT)) for p in (ROOT / "particlegan").glob("*.py")
+    }
+    proof["source_sha256"] = {name: base._sha256(ROOT / name)
+                              for name in sorted(current_sources)}
+    proof["driver_source_sha256"] = base.driver_sha256(ROOT)
+    proof["purpose"] = "Synthetic software control; no training qualification"
+    monkeypatch.setattr(base, "load_alias_proof", lambda root: deepcopy(proof))
     monkeypatch.setattr(base, "runtime_identity", lambda: deepcopy(proof["runtime"]))
     declared = {s["name"]:s for s in suite.manifest()["tasks"]}
     jobs = {j["spec"]["name"]:j for j in base.plan()}
@@ -129,15 +140,31 @@ def test_source_runtime_and_proof_mutations_disable_reuse(tmp_path, frozen, monk
     shutil.copyfile(ROOT / "benchmarks/legacy/gan_loss.py", target)
     (tmp_path / "particlegan/new_unknown_semantics.py").write_text("\n")
     assert not base.source_runtime_matches(tmp_path, proof)
-    assert base.load_alias_proof(tmp_path) is not None
+    assert ARCHIVED_PROOF_LOADER(tmp_path) is not None
     (tmp_path / base.ALIAS_PROOF).write_text("{}")
-    assert base.load_alias_proof(tmp_path) is None
+    assert ARCHIVED_PROOF_LOADER(tmp_path) is None
+
+
+def test_archived_capture_cannot_gain_current_source_qualification(tmp_path, frozen, monkeypatch):
+    software_proof, spec, residual = frozen
+    archived = ARCHIVED_PROOF_LOADER(ROOT)
+    assert archived is not None
+    changed = software_proof["source_sha256"] != archived["source_sha256"]
+    changed |= software_proof["driver_source_sha256"] != archived["driver_source_sha256"]
+    # This assertion is independent of the native package version: it binds
+    # acceptance to actual bytes, and verifies fail-closed reuse after drift.
+    assert base.source_runtime_matches(ROOT, archived) is (not changed)
+    if changed:
+        canonical = software_capture(tmp_path, spec, archived)
+        monkeypatch.setattr(base, "load_alias_proof", ARCHIVED_PROOF_LOADER)
+        assert alias(residual, canonical) is None
 
 
 @pytest.mark.parametrize("change", ["hash", "incomplete", "policy", "protocol", "missing_ema"])
 def test_invalid_or_incomplete_evidence_cannot_be_shared(tmp_path, frozen, change):
     proof, spec, residual = frozen
     canonical = software_capture(tmp_path, spec, proof)
+    assert alias(residual, canonical) is not None
     path = Path(canonical["artifact"])
     result = json.loads((path / "result.json").read_text())
     if change == "hash":

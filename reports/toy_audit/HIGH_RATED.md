@@ -123,15 +123,62 @@ the within-particle initialization intervention changes only H/b before policy
 construction. All four predetermined learned critics rank it ahead at 6,400,
 and removing its trained codes worsens all four scores. H and b change together;
 the teacher favors the ordinary initial basis, and the ordinary/particle baseline
-has owner/policy differences. The original unsigned ablation gate needs a
-positive signed check before serving as a regression for beneficial particle
-contribution. The separately committed [follow-up repair](merge_readiness/README.md)
-implements it: all four retained endpoint deltas pass and harmful-direction
-controls reject.
+has owner/policy differences. The archived training used an unsigned ablation
+gate. The [signed repair PR230](https://github.com/255BITS/ParticleGAN/pull/230)
+requires removing codes to **worsen** every judge's score; a large improvement
+after removal now rejects. It preserves the archived sources and original
+endpoint measurements rather than qualifying new training under changed code.
+
+The expanded PR227 tests guided CFG=3 pairs and a rotated unguided teacher as
+separate laws. Guided training supports the H/b initialization explanation;
+the rotated family fails original-gap reproduction, so that explanation is not
+established there. The [two actual-checkpoint GIFs](pr227_current_media/README.md)
+show every fixed judge and retain this failure. All 16 retained guided/rotated
+code-removal deltas are positive; 32 harmful-direction software controls reject.
+The local frozen-critic stationarity/attraction fixtures use zero training
+updates and answer a mathematical local question. They do not supply a third
+trained convergence success.
 
 Both are strong bounded diagnostics with fixed-budget progress, rather than
 absolute accuracy qualifications. The [full explanation, controls, retained
 failure and two GIFs](PR226_PR227.md) preserve their later develop cohort separately.
+
+## Current 4/5 — PR231 whole-FiLM conditioning sensitivity
+
+**Question:** does zeroing the entire additive FiLM branch erase useful
+particle-code and conditioning directions, and how does that intervention
+affect actual native GAN updates through a small frozen BF16 recipient?
+PR227 neutralizes only H/b while retaining Cz; PR231 also erases code weights.
+They test different interventions and are retained separately.
+
+The controlled geometry unit checks signed restoring force and curvature,
+while the learned hosts measure code Jacobians, encoder gradient energy and
+actual Adam movement separately. The latter matters because a small raw
+gradient does not establish a proportionally small Adam update. A dense
+128×4 learned particle table, fixed named streams, paired RpGAN/KA2 training
+and clean held-out reporting define the bounded host. Reporting MSE never
+trains the model or accepts a particle row.
+
+The [eight training GIFs](pr231_media/README.md) retain seven archived
+1,200-update cohorts and the separately bound final-source width4 reproduction.
+Every frame uses one of 13 actual clean evaluations; rate/noise curves use
+recorded updates. No intermediate model cloud is reconstructed. Early backfilled
+provenance is labelled separately from faithful native hosts.
+
+**Counterexamples remain part of the test:** faithful ordinary toys do not
+reproduce repeated generator-rate cuts; the wider spatial fixture reverses
+the terminal initialization ordering. A matched 100-update real checkpoint
+control rejects full-base generator-rate restoration: LPIPS worsens 11.47%,
+with 169/176 cases worse. These results prevent initialization sensitivity
+from being promoted into a general rate fix or an explanation of the full
+late convergence deficit.
+
+The mathematical and software controls pass; learned distribution quality is
+`NO_FROZEN_GATE`. The geometry oracle alone is a precise 5/5 unit, while the
+complete diagnostic is 4/5 because its host and application scope remain
+bounded. Archived native receipts retain their actual 70de/3f source cohort;
+later develop changes confer no new training qualification. Source:
+[PR231](https://github.com/255BITS/ParticleGAN/pull/231).
 
 ## Follow-up 4/5 — Bounded correspondence and objective units
 
