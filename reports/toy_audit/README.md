@@ -7,7 +7,10 @@ Open-PR snapshot: 2026-10-01, 134 PRs, exact heads in
 [OPEN_PRS.md](OPEN_PRS.md). The [PR226/227 addendum](PR226_PR227.md) reviews
 two later proposals on pinned develop `6ec7e578`, using their retained evidence.
 
-Start with the [latest sorted results and improvements](IMPROVEMENTS.md).
+Start with the [current open-PR decisions](OPEN_PR_DECISIONS.md), then the
+[sorted results and improvements](IMPROVEMENTS.md). The refreshed complete
+inventory contains 138 open PRs, including all 49 reviewed problem proposals;
+each has an explicit disposition and reason to keep its scientific question.
 The [canonical problem selection and keep reasons](CANONICAL_SELECTION.md)
 folds 12 proved same-law entries into shared problems: 97 problem entries
 retain all 109 named cases. Architecture, capacity, optimizer and negative
@@ -37,10 +40,14 @@ definitions remain useful and are retained. The source/runtime/recipe-bound
 [alias proof](frozen-image-alias.json) disables reuse when the conditions change;
 `--separate-execution` preserves separate historical runs.
 
-[Merge readiness](merge_readiness/README.md) identifies PR224/226 and repaired
-PR227 as local diagnostic candidates. The follow-up repair is committed and
-the prospective integration is verified, but **zero remote PRs have merged**:
-authenticated GitHub access is unavailable and fresh remote checks are unknown.
+[Current merge decisions](OPEN_PR_DECISIONS.md) supersede the earlier
+[offline preparation](merge_readiness/README.md). GitHub access is restored:
+PR224 and PR226 merged into develop after their current checks passed.
+PR226 has 25 focused checks on the refreshed base; PR224 retains its strict
+expected failure alongside 9 passing targeted checks and a green CI matrix. PR227's expanded guided/rotated and
+stationarity scope is under fresh review, including signed contribution checks
+in both its original and added evaluator paths. Useful low-tier and blocked
+proposals stay open with their reasons documented.
 
 For the frozen original review, read the [sorted problem list](PROBLEMS.md), then
 [what the highly rated tests verify](HIGH_RATED.md). The
