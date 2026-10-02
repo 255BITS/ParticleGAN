@@ -1,12 +1,45 @@
 """Synthetic archive controls: publication launches no training or rescoring."""
 from copy import deepcopy
+import hashlib
 import json
 
 import numpy as np
 from PIL import Image
 import pytest
 
-from benchmarks.toy_audit import api_contract, api_publish, api_run
+from benchmarks.toy_audit import api_contract, api_publish, api_reframe, api_run
+
+
+# These archives are software controls, not the historical training cohort.
+# Keep the oracle independent of fixture manifests and available Git history.
+REAL_FROZEN_FILE_HASH = api_reframe._frozen_file_hash
+SYNTHETIC_FROZEN_SOURCE_HASHES = {
+    name: hashlib.sha256(f"synthetic-software-source:{name}".encode()).hexdigest()
+    for name in (
+        "benchmarks/toy_audit/api_run.py",
+        "benchmarks/toy_audit/api_contract.py",
+        "benchmarks/toy_audit/api_diagnostics.py",
+        "benchmarks/toy_audit/api_vectors.py",
+        "particlegan/recipes.py",
+    )
+}
+
+
+def install_synthetic_source_hash_oracle(monkeypatch):
+    def synthetic_hash(name):
+        if name not in SYNTHETIC_FROZEN_SOURCE_HASHES:
+            raise ValueError("unknown synthetic software source path")
+        return SYNTHETIC_FROZEN_SOURCE_HASHES[name]
+
+    monkeypatch.setattr(api_reframe, "_frozen_file_hash", synthetic_hash)
+
+
+@pytest.fixture(autouse=True)
+def synthetic_frozen_source_oracle(monkeypatch):
+    REAL_FROZEN_FILE_HASH.cache_clear()
+    install_synthetic_source_hash_oracle(monkeypatch)
+    yield
+    REAL_FROZEN_FILE_HASH.cache_clear()
 
 
 def archive(path, *, updates=600, default_updates=600, samples=32, frames=9,
@@ -520,6 +553,29 @@ def test_five_explicit_failure_views_bind_actual_prefix_without_qualifying_error
     with pytest.raises(ValueError, match="unsuccessful API execution"):
         api_publish.verify_run(raw)
     assert before == {path.name: path.read_bytes() for path in raw.iterdir()}
+
+
+@pytest.mark.parametrize("name", ["api-critic-lag-current", "api-ring8-shift"])
+def test_failure_controls_need_no_historical_git_objects(tmp_path, monkeypatch, name):
+    def unavailable(*args, **kwargs):
+        raise AssertionError("synthetic archive must not read historical Git objects")
+
+    monkeypatch.setattr(api_reframe.subprocess, "check_output", unavailable)
+    raw, receipt, output, review = failure_media_control(tmp_path, name)
+    assert receipt["source"]["files_sha256"] == {
+        key: SYNTHETIC_FROZEN_SOURCE_HASHES[key] for key in receipt["source"]["files_sha256"]}
+    assert api_publish.verify_failure_media_review(raw, output) == review
+
+
+def test_valid_hex_failure_manifest_tamper_rejects_fixed_source_oracle(tmp_path):
+    raw, receipt, output, _ = failure_media_control(tmp_path)
+    original = receipt["source"]["files_sha256"]["particlegan/recipes.py"]
+    forged = "a" * 64
+    assert forged != original
+    receipt["source"]["files_sha256"]["particlegan/recipes.py"] = forged
+    save(raw, receipt)
+    with pytest.raises(ValueError, match="differs from the frozen Git objects"):
+        api_publish.verify_failure_media_review(raw, output)
 
 
 @pytest.mark.parametrize("field,value", [

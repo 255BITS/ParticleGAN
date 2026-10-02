@@ -1,5 +1,6 @@
 """Media-only recovery controls; synthetic archives launch no training."""
 from copy import deepcopy
+import hashlib
 import json
 
 import numpy as np
@@ -8,7 +9,64 @@ import pytest
 
 from particlegan import get_recipe
 from benchmarks.toy_audit import api_contract, api_publish, api_reframe, api_run
-from test_toy_api_publish import archive, save
+from test_toy_api_publish import (
+    REAL_FROZEN_FILE_HASH,
+    SYNTHETIC_FROZEN_SOURCE_HASHES,
+    archive,
+    install_synthetic_source_hash_oracle,
+    save,
+)
+
+
+@pytest.fixture(autouse=True)
+def synthetic_frozen_source_oracle(monkeypatch):
+    REAL_FROZEN_FILE_HASH.cache_clear()
+    install_synthetic_source_hash_oracle(monkeypatch)
+    yield
+    REAL_FROZEN_FILE_HASH.cache_clear()
+
+
+def test_real_frozen_hash_reads_exact_git_object_and_hashes_raw_bytes(monkeypatch):
+    name = "benchmarks/toy_audit/api_vectors.py"
+    content = b"# exact source bytes\n\xff\x00\r\n"
+    calls = []
+
+    def source_bytes(args, **kwargs):
+        calls.append((args, kwargs))
+        return content
+
+    monkeypatch.setattr(api_reframe.subprocess, "check_output", source_bytes)
+    expected = hashlib.sha256(content).hexdigest()
+    assert REAL_FROZEN_FILE_HASH(name) == expected
+    assert REAL_FROZEN_FILE_HASH(name) == expected
+    assert calls == [(["git", "show", f"{api_reframe._FAILURE_SOURCE}:{name}"],
+                     {"cwd": api_contract.ROOT, "stderr": api_reframe.subprocess.DEVNULL})]
+
+
+@pytest.mark.parametrize("name", ["/absolute.py", "../escape.py", "nested/../../escape.py", "source.txt"])
+def test_real_frozen_hash_rejects_invalid_paths_before_git(monkeypatch, name):
+    def forbidden(*args, **kwargs):
+        raise AssertionError("invalid path must be rejected before Git is invoked")
+
+    monkeypatch.setattr(api_reframe.subprocess, "check_output", forbidden)
+    with pytest.raises(ValueError, match="unknown frozen source path"):
+        REAL_FROZEN_FILE_HASH(name)
+
+
+def test_real_frozen_hash_preserves_unavailable_git_object_failure(monkeypatch):
+    name = "particlegan/recipes.py"
+    command = ["git", "show", f"{api_reframe._FAILURE_SOURCE}:{name}"]
+    failure = api_reframe.subprocess.CalledProcessError(128, command)
+
+    def unavailable(args, **kwargs):
+        assert args == command
+        assert kwargs == {"cwd": api_contract.ROOT, "stderr": api_reframe.subprocess.DEVNULL}
+        raise failure
+
+    monkeypatch.setattr(api_reframe.subprocess, "check_output", unavailable)
+    with pytest.raises(ValueError, match=f"unavailable frozen source object: {name}") as raised:
+        REAL_FROZEN_FILE_HASH(name)
+    assert raised.value.__cause__ is failure
 
 
 def raw_archive(tmp_path, *, failures=(), name="publication-software-control"):
@@ -180,7 +238,7 @@ def failed_archive(tmp_path, name):
     source_files = {"benchmarks/toy_audit/api_run.py", "benchmarks/toy_audit/api_contract.py",
                     f"benchmarks/toy_audit/{case['provider']}.py", "particlegan/recipes.py"}
     receipt["source"] = {"commit": api_reframe._FAILURE_SOURCE,
-                         "files_sha256": {key: api_reframe._frozen_file_hash(key) for key in source_files}}
+                         "files_sha256": {key: SYNTHETIC_FROZEN_SOURCE_HASHES[key] for key in source_files}}
     receipt["seed"] = 24002
     receipt["runtime"] = {"device": "cpu", "torch_threads": 1}
     if export:
