@@ -151,8 +151,13 @@
   "scope": "Qualified guided two-site CPU cohort; within-critic comparisons only, no full-Supra or structural-move benefit claim",
   "documentation_svg": {
     "path": "/ml2/hypergan/ParticleGAN-convergence-toy-develop/docs/figures/e22_routed_convergence_guided_pair.svg",
-    "sha256": "d616490bf6abd8a6768dcd29de13c10a422ebf169aeeb3893619cbdf4ff413cf",
-    "bytes": 82317
+    "sha256": "2f777aff9d6e96bdaf48cbd146bf6c9adb861fa8e47cc574744282d31ac2d88a",
+    "bytes": 81718,
+    "presentation_normalization": {
+      "operation": "Remove trailing whitespace from SVG lines for Git whitespace checks. XML elements, attributes, text and numerical path tokens compare equal after whitespace normalization.",
+      "original_sha256": "d616490bf6abd8a6768dcd29de13c10a422ebf169aeeb3893619cbdf4ff413cf",
+      "xml_semantic_tree_equal": true
+    }
   },
   "visual_validation": {
     "PNG_inspected": true,
