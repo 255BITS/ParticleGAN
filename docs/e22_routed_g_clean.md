@@ -42,3 +42,10 @@ The [fixed protocol](e22_routed_g_clean_v1.json) and
 [compact results and provenance](e22_routed_g_clean_results.json) preserve all
 four scores, curve differences, calibration paths and artifact hashes. Raw
 states, tensors and update logs remain under the ignored run directory.
+
+The [separate actual caption verification](e22_routed_g_clean_caption_results.md)
+completed with scientific FAIL: at 6,400 updates clean-G beat neutral particles
+under all four critics, but ordinary native-game LoRA still led under all four.
+At 5,120 the comparison with neutral was mixed. This preserves the toy PASS
+while rejecting transfer to the fixed actual-task gate; no full-Supra promotion
+follows. The executed toy sources, criteria and original receipt are unchanged.
