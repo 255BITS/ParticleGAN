@@ -75,6 +75,10 @@ def source_identity():
     paths = set((root / "particlegan").glob("*.py"))
     paths.update((root / "benchmarks/toy_audit").glob("api_*.py"))
     paths.update((root / "benchmarks/toy_audit/api_sources").glob("*.py"))
+    # The policy-family study binds the complete frozen native target source,
+    # including helpers which a particular provider may import lazily.
+    paths.update((root / "benchmarks/toy100").glob("*.py"))
+    paths.add(root / "experiments/forge/configuration_search.py")
     # Native example hosts are also loaded with runpy; that does not retain a
     # module in sys.modules, so bind their code explicitly.
     paths.update((root / "examples").glob("e22_*.py"))
@@ -412,20 +416,24 @@ def render_gif(case, records, path, *, full_budget, requested_steps, final_verdi
 
 
 def run_case(case, output, *, device="cpu", recipe_name=None, steps=None,
-             eval_samples=None, frames=9, seed=24002):
+             eval_samples=None, frames=9, seed=24002, recipe_overrides=None, wall_cap_seconds=None):
     output = Path(output)
     output.mkdir(parents=True, exist_ok=False)
     steps = case["default_steps"] if steps is None else steps
     samples = case["eval_samples"] if eval_samples is None else eval_samples
     if type(samples) is not int or samples < 1:
         raise ValueError("evaluation sample count must be positive")
+    if wall_cap_seconds is not None and (isinstance(wall_cap_seconds, bool)
+            or not isinstance(wall_cap_seconds, (int, float)) or not math.isfinite(wall_cap_seconds)
+            or wall_cap_seconds <= 0):
+        raise ValueError("wall cap must be finite positive seconds")
     boundaries = contract.evaluation_steps(steps, frames)
     metric_count = contract.metric_observations(case)
     metric_steps = contract.evaluation_steps(steps, min(steps, metric_count) + 1)
     evaluation_steps = sorted(set(boundaries) | set(metric_steps))
     required_terminal = case.get("terminal_observations", 5)
     receipt = {"schema": "particlegan_api_toy_run_v1", "case": case,
-               "recipe": None, "api_components": [],
+               "recipe": None, "requested_recipe_overrides": json_value(recipe_overrides or {}), "api_components": [],
                "source": source_identity(), "seed": seed,
                "runtime": {"python": platform.python_version(), "torch": str(torch.__version__),
                            "device": str(device), "cuda": torch.version.cuda,
@@ -435,7 +443,12 @@ def run_case(case, output, *, device="cpu", recipe_name=None, steps=None,
                             "evaluation_steps": evaluation_steps,
                             "metric_evaluation_steps": metric_steps, "media_steps": boundaries,
                             "metric_observations": metric_count, "media_frames": frames,
-                            "terminal_observations": required_terminal},
+                            "terminal_observations": required_terminal,
+                            "wall_cap_seconds": wall_cap_seconds},
+               "timing": {"method": "monotonic elapsed execution; CUDA synchronized at observations",
+                          "start": "immediately before fixture construction",
+                          "includes": "fixture initialization, updates, source binding, sampling and evaluation",
+                          "excludes": "initial inventory/queue wait and post-run artifact/media export"},
                "historical_results_changed": False, "observations": []}
     full = (steps >= case["default_steps"] and samples >= case["eval_samples"]
             and len(metric_steps) - 1 >= metric_count)
@@ -443,31 +456,43 @@ def run_case(case, output, *, device="cpu", recipe_name=None, steps=None,
     started = time.monotonic()
     completed = 0
     fixture = None
+    def capture(step):
+        with isolated_evaluation():
+            record = contract.validate_observation(fixture.observe(n=samples, seed=seed + 10000))
+        if torch.device(device).type == "cuda":
+            torch.cuda.synchronize(torch.device(device))
+        record.update(step=step, elapsed_seconds=time.monotonic() - started)
+        for index, view in enumerate(record["views"]):
+            for role in ("target", "samples"):
+                view[role] = contract.array(view[role]).copy()
+                arrays[f"step{step}_view{index}_{role}"] = view[role]
+        records.append(record)
+        compact = {key: value for key, value in record.items() if key != "views"}
+        compact["views"] = [{key: value for key, value in view.items()
+                             if key not in {"target", "samples"}} for view in record["views"]]
+        receipt["observations"].append(compact)
+        print(json.dumps({"case": case["id"], "step": step, "metric_passed": record["passed"],
+                          "elapsed_seconds": record["elapsed_seconds"],
+                          "failed_bounds": record["failed_bounds"][:5]}, allow_nan=False), flush=True)
     try:
-        fixture = contract.build(case, device=device, seed=seed, recipe_name=recipe_name, max_steps=steps)
+        options = {"recipe_overrides": recipe_overrides} if recipe_overrides else {}
+        fixture = contract.build(case, device=device, seed=seed, recipe_name=recipe_name, max_steps=steps, **options)
         receipt["recipe"] = json_value(fixture.recipe.to_dict())
         receipt["api_components"] = list(fixture.api_components)
+        if torch.device(device).type == "cuda":
+            receipt["runtime"]["cuda_device_model"] = torch.cuda.get_device_name(torch.device(device))
         receipt["source"] = source_identity()
         for step in range(steps + 1):
+            if wall_cap_seconds is not None and time.monotonic() - started >= wall_cap_seconds:
+                raise TimeoutError("declared wall cap reached; unchanged full protocol is incomplete")
             if step:
                 fixture.step()
                 completed = step
             if step not in evaluation_steps:
                 continue
-            with isolated_evaluation():
-                record = contract.validate_observation(fixture.observe(n=samples, seed=seed + 10000))
-            record["step"] = step
-            for index, view in enumerate(record["views"]):
-                for role in ("target", "samples"):
-                    view[role] = contract.array(view[role]).copy()
-                    arrays[f"step{step}_view{index}_{role}"] = view[role]
-            records.append(record)
-            compact = {key: value for key, value in record.items() if key != "views"}
-            compact["views"] = [{key: value for key, value in view.items()
-                                 if key not in {"target", "samples"}} for view in record["views"]]
-            receipt["observations"].append(compact)
-            print(json.dumps({"case": case["id"], "step": step, "metric_passed": record["passed"],
-                              "failed_bounds": record["failed_bounds"][:5]}, allow_nan=False), flush=True)
+            capture(step)
+        if wall_cap_seconds is not None and time.monotonic() - started >= wall_cap_seconds:
+            raise TimeoutError("declared wall cap reached; complete acquisition exceeded the frozen resource allowance")
         terminal = [record for record in records if record["step"] > 0
                     and record["step"] in metric_steps][-required_terminal:]
         sustained = len(terminal) == required_terminal and all(record["passed"] for record in terminal)
@@ -481,9 +506,18 @@ def run_case(case, output, *, device="cpu", recipe_name=None, steps=None,
                        passed=full and sustained, verdict="PASS" if full and sustained else "FAIL",
                        failed_bounds=failed, completed_updates=completed)
     except Exception as error:
-        receipt.update(status="ERROR", passed=False, verdict="FAIL",
+        status = ("INCOMPLETE" if isinstance(error, TimeoutError) else
+                  "BLOCKED" if isinstance(error, contract.UnsupportedRecipeOverrides) else "ERROR")
+        receipt.update(status=status, passed=False, verdict="FAIL",
                        failed_bounds=[f"API execution or metric error: {type(error).__name__}: {error}"],
                        completed_updates=completed, default_protocol_complete=False)
+        if isinstance(error, TimeoutError) and fixture is not None and completed > 0 and (
+                not records or records[-1]["step"] != completed):
+            try:
+                capture(completed)  # Actual terminal state; never another update.
+                receipt["partial_terminal_observation_added"] = True
+            except Exception as capture_error:
+                receipt["failed_bounds"].append(f"partial goal observation unavailable: {capture_error}")
     receipt["elapsed_seconds"] = time.monotonic() - started
     receipt["artifacts"] = {}
     receipt["gif_frames"] = 0
@@ -499,8 +533,13 @@ def run_case(case, output, *, device="cpu", recipe_name=None, steps=None,
                 "bytes": (output / "final-state.pt").stat().st_size}
             gif = output / "goal.gif"
             media_records = [record for record in records if record["step"] in boundaries]
-            render_gif(case, media_records, gif, full_budget=full, requested_steps=steps,
-                       final_verdict=receipt["verdict"])
+            if receipt["status"] != "COMPLETE" and not any(
+                    record["step"] == records[-1]["step"] for record in media_records):
+                media_records.append(records[-1])
+            render_gif(case, media_records, gif,
+                       full_budget=receipt.get("default_protocol_complete", False), requested_steps=steps,
+                       final_verdict=(receipt["verdict"] if receipt["status"] == "COMPLETE" else
+                                      f"{receipt['status']} / FAIL: {receipt['failed_bounds'][0]}"))
             receipt["artifacts"]["goal.gif"] = {"sha256": file_hash(gif), "bytes": gif.stat().st_size}
             receipt["gif_frames"] = len(media_records)
         except Exception as error:
@@ -544,6 +583,8 @@ def main(argv=None):
     parser.add_argument("--output", type=Path)
     parser.add_argument("--device", default="cpu")
     parser.add_argument("--recipe", default="auto")
+    parser.add_argument("--recipe-overrides", type=json.loads, help="Explicit JSON object of public Recipe tuning knobs")
+    parser.add_argument("--wall-cap-seconds", type=float, help="Bound execution; a capped run cannot qualify a full protocol")
     parser.add_argument("--steps", type=int, help="Explicitly bounded run; short runs never qualify the default budget")
     parser.add_argument("--eval-samples", type=int)
     parser.add_argument("--frames", type=int, default=9)
@@ -571,7 +612,8 @@ def main(argv=None):
     requests = [(cases[name], args.output / name,
                  dict(device=args.device, recipe_name=None if args.recipe == "auto" else args.recipe,
                       steps=None if args.steps is None else min(args.steps, cases[name]["default_steps"]),
-                      eval_samples=args.eval_samples, frames=args.frames)) for name in selected]
+                      eval_samples=args.eval_samples, frames=args.frames,
+                      recipe_overrides=args.recipe_overrides, wall_cap_seconds=args.wall_cap_seconds)) for name in selected]
     results = []
     if args.jobs == 1:
         iterator = map(_execute_request, requests)

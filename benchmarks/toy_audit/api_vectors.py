@@ -514,7 +514,7 @@ class VectorFixture:
     """Caller-owned data/phase state around one current public trainer."""
     api_components = ("particlegan.Recipe", "particlegan.GANTrainer", "particlegan.ParticlePrior")
 
-    def __init__(self, case, *, device="cpu", seed=24002, recipe_name="atlas", max_steps=None):
+    def __init__(self, case, *, device="cpu", seed=24002, recipe_name="atlas", max_steps=None, recipe_overrides=None):
         self.metadata = deepcopy(case)
         self.case_id = case["id"]
         self.device = torch.device(device)
@@ -545,6 +545,9 @@ class VectorFixture:
             options["total_steps"] = case["default_steps"]
         if case.get("caller_owned"):
             options.update(input_noise_std=0., output_noise_std=0., output_noise_mode="fixed")
+        from .api_contract import validate_recipe_overrides
+        self.recipe_overrides = validate_recipe_overrides({**case, "provider": "api_vectors"}, recipe_name, recipe_overrides)
+        options.update(self.recipe_overrides)
         self.recipe = get_recipe(recipe_name, **options)
         data_device = "cpu" if case["kind"] in ("vector", "two_pole") else self.device
         self.data_rng = torch.Generator(device=data_device).manual_seed(seed)
@@ -746,8 +749,9 @@ def _view(title, target, samples, metadata):
                 xlabel="x", ylabel="y", caption=metadata["sampling"])
 
 
-def build_case(id, *, device="cpu", seed=24002, recipe_name="atlas", max_steps=None):
+def build_case(id, *, device="cpu", seed=24002, recipe_name="atlas", max_steps=None, recipe_overrides=None):
     cases = _registry()
     if id not in cases:
         raise ValueError(f"unknown vector case {id!r}")
-    return VectorFixture(cases[id], device=device, seed=seed, recipe_name=recipe_name, max_steps=max_steps)
+    return VectorFixture(cases[id], device=device, seed=seed, recipe_name=recipe_name,
+                         max_steps=max_steps, recipe_overrides=recipe_overrides)
