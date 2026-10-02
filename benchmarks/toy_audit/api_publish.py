@@ -21,23 +21,99 @@ def read(path):
     return json.loads(Path(path).read_text())
 
 
+def _integer(value, name, *, minimum=1):
+    if type(value) is not int or value < minimum:
+        raise ValueError(f"{name} must be an integer >= {minimum}")
+    return value
+
+
+def _flags(record, name):
+    if type(record.get("passed")) is not bool:
+        raise ValueError(f"{name}: passed must be binary")
+    failures = record.get("failed_bounds")
+    if not isinstance(failures, list) or any(not isinstance(value, str) or not value.strip() for value in failures):
+        raise ValueError(f"{name}: failed_bounds must identify rejected bounds")
+    if record["passed"] != (not failures):
+        raise ValueError(f"{name}: binary pass/failed_bounds inconsistency")
+
+
+def _verify_grade(receipt):
+    """Rederive protocol completion/terminal grade, without model rescoring."""
+    case = api_contract.validate_case(receipt["case"])
+    protocol = receipt["protocol"]
+    updates = _integer(protocol["updates"], "protocol updates")
+    samples = _integer(protocol["evaluation_samples"], "evaluation samples")
+    metric_count = api_contract.metric_observations(case)
+    terminal_count = case.get("terminal_observations", 5)
+    for key, expected in (("default_updates", case["default_steps"]),
+                          ("default_evaluation_samples", case["eval_samples"]),
+                          ("metric_observations", metric_count),
+                          ("terminal_observations", terminal_count)):
+        if _integer(protocol[key], key) != expected:
+            raise ValueError(f"protocol {key} differs from registered case")
+    frames = _integer(protocol["media_frames"], "requested media frames")
+    metric_steps = api_contract.evaluation_steps(updates, min(updates, metric_count) + 1)
+    media_steps = api_contract.evaluation_steps(updates, frames)
+    union_steps = sorted(set(metric_steps) | set(media_steps))
+    for key, expected in (("metric_evaluation_steps", metric_steps), ("media_steps", media_steps),
+                          ("evaluation_steps", union_steps)):
+        actual = protocol[key]
+        if not isinstance(actual, list) or any(type(step) is not int for step in actual) or actual != expected:
+            raise ValueError(f"protocol {key} differs from exact frozen step coverage")
+    if _integer(receipt["completed_updates"], "completed updates") != updates:
+        raise ValueError("completion does not match executed update budget")
+    observations = receipt["observations"]
+    if not isinstance(observations, list) or len(observations) < 2:
+        raise ValueError("training media requires initial and post-update observations")
+    actual_steps = [record.get("step") for record in observations]
+    if any(type(step) is not int for step in actual_steps) or actual_steps != union_steps:
+        raise ValueError("missing, duplicate or out-of-order observation step coverage")
+    for record in observations:
+        _flags(record, f"observation{record['step']}")
+        if not isinstance(record.get("metrics"), dict) or not record["metrics"]:
+            raise ValueError("observation must retain its measured metrics")
+        if not isinstance(record.get("views"), list) or not record["views"]:
+            raise ValueError("observation must retain actual goal views")
+    metric_records = [record for record in observations if record["step"] > 0 and record["step"] in metric_steps]
+    terminal = metric_records[-terminal_count:]
+    final = observations[-1]
+    sustained = len(terminal) == terminal_count and all(record["passed"] for record in terminal)
+    full = (updates >= case["default_steps"] and samples >= case["eval_samples"]
+            and len(metric_records) >= metric_count)
+    expected_failures = list(final["failed_bounds"])
+    if not full:
+        expected_failures.append("default budget, evaluation draw count or metric cadence not completed")
+    if not sustained:
+        expected_failures.append(f"last {terminal_count} post-update metric observations do not all pass")
+    passed = full and sustained
+    for key, expected in (("metric_passed", final["passed"]), ("sustained_metric_passed", sustained),
+                          ("default_protocol_complete", full), ("passed", passed)):
+        if type(receipt.get(key)) is not bool or receipt[key] != expected:
+            raise ValueError(f"{key} differs from rederived protocol grade")
+    _flags(receipt, "receipt")
+    if receipt["failed_bounds"] != expected_failures:
+        raise ValueError("receipt failed_bounds differ from rederived protocol grade")
+    if receipt.get("verdict") != ("PASS" if passed else "FAIL"):
+        raise ValueError("verdict differs from rederived protocol grade")
+    if _integer(receipt["gif_frames"], "retained GIF frames", minimum=2) != len(media_steps):
+        raise ValueError("goal GIF count differs from declared media steps")
+    return media_steps
+
+
 def verify_run(path):
     path = Path(path)
     receipt = read(path / "receipt.json")
-    if receipt["status"] != "COMPLETE" or not receipt["source_unchanged"]:
+    if receipt["status"] != "COMPLETE" or receipt["source_unchanged"] is not True:
         raise ValueError(f"{path}: unsuccessful API execution cannot publish as completed media")
     for name in ("goal.gif", "observations.npz", "final-state.pt"):
         expected = receipt["artifacts"][name]
         artifact = path / name
         if artifact.stat().st_size != expected["bytes"] or api_run.file_hash(artifact) != expected["sha256"]:
             raise ValueError(f"{path}: {name} identity mismatch")
+    media_steps = _verify_grade(receipt)
     observations = receipt["observations"]
-    if len(observations) < 2 or observations[0]["step"] != 0:
-        raise ValueError("training media requires an initial state and actual update")
-    if observations[-1]["step"] != receipt["completed_updates"]:
-        raise ValueError("last media state does not match executed update budget")
     with Image.open(path / "goal.gif") as gif:
-        if gif.n_frames != len(observations) or gif.n_frames != receipt["gif_frames"]:
+        if gif.n_frames != len(media_steps) or gif.n_frames != receipt["gif_frames"]:
             raise ValueError("goal GIF lost actual observed states")
     expected_keys = {f"step{observation['step']}_view{index}_{role}"
                      for observation in observations
