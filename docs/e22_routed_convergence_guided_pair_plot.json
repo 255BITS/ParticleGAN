@@ -1,0 +1,162 @@
+{
+  "schema": "guided_toy_convergence_figure_v1",
+  "input_paths": {
+    "curves": "/ml2/hypergan/ParticleGAN-convergence-toy-develop/runs/routed-convergence-guided-pair-v1/common-judge-curves.jsonl",
+    "execution": "/ml2/hypergan/ParticleGAN-convergence-toy-develop/runs/routed-convergence-guided-pair-v1/receipt.json",
+    "execution_completion": "/ml2/hypergan/ParticleGAN-convergence-toy-develop/runs/routed-convergence-guided-pair-v1/execution-completion.json",
+    "review": "/ml2/hypergan/ParticleGAN-convergence-toy-develop/runs/routed-convergence-guided-pair-v1/independent-review.json",
+    "review_completion": "/ml2/hypergan/ParticleGAN-convergence-toy-develop/runs/routed-convergence-guided-pair-v1/independent-review.json.completion.json"
+  },
+  "input_sha256": {
+    "curves": "036d04da137bc14848f3046fc225b90483ba9cf26eddb291045611778fda04d9",
+    "execution": "8b762c123afaa9bb9c5ed43a0ed9155dc9e077858a52f7b92230e87efa0b6248",
+    "execution_completion": "a6ef88e25c16ebfa4563b4502504b5f65dc2145f61d6a2b3d1e0438ce5e5d107",
+    "review": "3d63111f65181183ee0c83ac04698572e0cc2994334fdb496add151f68e384d1",
+    "review_completion": "cd64b63ac46026ef08336eaeade3d97a807bc350e9f4eca6dce1b6c1cfde2b09"
+  },
+  "plot_source_sha256": "c283c80a1fc5a0df343ca04f14f67ae3c721d1ddc1a89d203c51a72316a82c15",
+  "review_checks": 570039,
+  "data_digest": "cf2a96ecb6886c7402df6f0926afb2620feb64a3586d50022d8cfa884a1461e4",
+  "critics": {
+    "ordinary_native_game@800": "7511649dc936baa4a3737573bdaedea96080e9b983e13b218483fc28ee8a0e51",
+    "ordinary_native_game@6400": "3af06efe87e6ee923531a7aa34963649977a8512ff600fdfff16ec919af7a33f",
+    "particle_native_game@800": "1af750a82a7616a2cce43a9ddc9ebafb71a3038e42a6882fcb817af0d51e4164",
+    "particle_native_game@6400": "be8d2aad06732fe0e6b9f55e04bfcf0fc4b4993df8f71a934b354f212d365d89"
+  },
+  "arms": [
+    "ordinary_native_game",
+    "particle_native_game",
+    "neutral_particle_native_game"
+  ],
+  "labels": [
+    "Ordinary LoRA (native game)",
+    "Original particles (sampled H/b)",
+    "Neutral particles (H/b = 0 at init)"
+  ],
+  "checkpoint_steps": [
+    0,
+    200,
+    400,
+    600,
+    800,
+    1000,
+    1200,
+    1400,
+    1600,
+    1800,
+    2000,
+    2200,
+    2400,
+    2600,
+    2800,
+    3000,
+    3200,
+    3400,
+    3600,
+    3800,
+    4000,
+    4200,
+    4400,
+    4600,
+    4800,
+    5000,
+    5120,
+    5200,
+    5400,
+    5600,
+    5800,
+    6000,
+    6200,
+    6400
+  ],
+  "checkpoint_rows": 102,
+  "plotted_values": 408,
+  "panels": 4,
+  "pool": "test",
+  "metric": "paired_game",
+  "head": "clean FAST",
+  "smoothing": false,
+  "state_selection": false,
+  "output_metrics_used": false,
+  "fixed_endpoints": [
+    5120,
+    6400
+  ],
+  "fixed_endpoint_values": {
+    "5120": {
+      "ordinary_native_game@800": {
+        "ordinary_native_game": 1.5675305128097534,
+        "particle_native_game": 1.4118541479110718,
+        "neutral_particle_native_game": 1.1357594728469849
+      },
+      "ordinary_native_game@6400": {
+        "ordinary_native_game": 2.2398579120635986,
+        "particle_native_game": 2.471388816833496,
+        "neutral_particle_native_game": 1.9730031490325928
+      },
+      "particle_native_game@800": {
+        "ordinary_native_game": 1.7773493528366089,
+        "particle_native_game": 1.5353108644485474,
+        "neutral_particle_native_game": 1.242274522781372
+      },
+      "particle_native_game@6400": {
+        "ordinary_native_game": 2.2412922382354736,
+        "particle_native_game": 2.7799055576324463,
+        "neutral_particle_native_game": 1.9907708168029785
+      }
+    },
+    "6400": {
+      "ordinary_native_game@800": {
+        "ordinary_native_game": 1.2454025745391846,
+        "particle_native_game": 1.34523344039917,
+        "neutral_particle_native_game": 0.994642972946167
+      },
+      "ordinary_native_game@6400": {
+        "ordinary_native_game": 2.02201771736145,
+        "particle_native_game": 2.353400707244873,
+        "neutral_particle_native_game": 1.720607042312622
+      },
+      "particle_native_game@800": {
+        "ordinary_native_game": 1.3907538652420044,
+        "particle_native_game": 1.4326177835464478,
+        "neutral_particle_native_game": 1.044351577758789
+      },
+      "particle_native_game@6400": {
+        "ordinary_native_game": 1.9725369215011597,
+        "particle_native_game": 2.637286424636841,
+        "neutral_particle_native_game": 1.7176623344421387
+      }
+    }
+  },
+  "accepted_structural_moves": {
+    "ordinary_native_game": 0,
+    "particle_native_game": 0,
+    "neutral_particle_native_game": 0
+  },
+  "files": {
+    "svg": {
+      "path": "/ml2/hypergan/ParticleGAN-convergence-toy-develop/runs/routed-convergence-guided-pair-v1/figures/guided-toy-convergence.svg",
+      "sha256": "d616490bf6abd8a6768dcd29de13c10a422ebf169aeeb3893619cbdf4ff413cf",
+      "bytes": 82317
+    },
+    "png": {
+      "path": "/ml2/hypergan/ParticleGAN-convergence-toy-develop/runs/routed-convergence-guided-pair-v1/figures/guided-toy-convergence.png",
+      "sha256": "04fc1289c40451497752806db7e68db4aaf3d604d2a385fc848807cff029dd13",
+      "bytes": 330048
+    }
+  },
+  "matplotlib_version": "3.11.2",
+  "seconds": 0.7688926230184734,
+  "model_or_optimizer_updates": 0,
+  "scope": "Qualified guided two-site CPU cohort; within-critic comparisons only, no full-Supra or structural-move benefit claim",
+  "documentation_svg": {
+    "path": "/ml2/hypergan/ParticleGAN-convergence-toy-develop/docs/figures/e22_routed_convergence_guided_pair.svg",
+    "sha256": "d616490bf6abd8a6768dcd29de13c10a422ebf169aeeb3893619cbdf4ff413cf",
+    "bytes": 82317
+  },
+  "visual_validation": {
+    "PNG_inspected": true,
+    "PNG_sha256": "04fc1289c40451497752806db7e68db4aaf3d604d2a385fc848807cff029dd13",
+    "result": "All4 critic panels,34 saved points per arm, clear labels and fixed5120/6400 markers; no clipping/overlap."
+  }
+}

@@ -79,6 +79,13 @@ endpoints, every judge, every subject, particle ablations and source identities.
 
 Held-out native game at 6400, lower is better:
 
+![All saved guided-toy convergence points under all four fixed critics](figures/e22_routed_convergence_guided_pair.svg)
+
+The [plot receipt](e22_routed_convergence_guided_pair_plot.json) binds all 408
+values and the figure to the qualified curve stream. Its
+[plotter](../examples/plot_e22_routed_convergence_guided_pair.py) performs no
+training or model loading.
+
 | Fixed critic | Ordinary LoRA | Original particles | H/b-neutral particles |
 | --- | ---: | ---: | ---: |
 | Ordinary @800 | 1.245403 | 1.345233 | **0.994643** |
