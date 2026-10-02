@@ -1,0 +1,312 @@
+{
+  "task": "routed_caption_fit_std_v1",
+  "complete": true,
+  "scientific_status": "PASS",
+  "checks": {
+    "bound_report_complete_PASS": true,
+    "external_no_timeout_exit0_within300": true,
+    "external_manifest_launcher_current_exact": true,
+    "source_card_prep_current_exact": true,
+    "recorded_native_current_unchanged": true,
+    "source_bound_native_law": true,
+    "saved_artifact_hashes_match": true,
+    "normalization_before_training_bound": true,
+    "fixed_FIT_TEST_all48_six_sources": true,
+    "FIT_std_no_degenerate_or_epsilon_floor": true,
+    "actual_scale_raw_std_exact_and_F64_std_consistent": true,
+    "previous_floor_all16_and_reported_exact": true,
+    "initial_raw_normalized_power_match": true,
+    "pure_tensor_fixed_context_and_zero_target_digests": true,
+    "mandatory_four_physical_conditions": true,
+    "finite_physical_f27db3ca1da7": true,
+    "finite_physical_ecaff313459e": true,
+    "finite_physical_9730e7526dfb": true,
+    "finite_physical_b729d58b0036": true,
+    "independent_F64_all_scores_exact": true,
+    "trace512_fixed_data_Gaussian_stream_ordinary_BF16": true,
+    "trace_finite_native_losses_ordinary_BF16": true,
+    "population_counts_exact_ordinary_BF16": true,
+    "trace512_fixed_data_Gaussian_stream_particle_BF16": true,
+    "trace_finite_native_losses_particle_BF16": true,
+    "population_counts_exact_particle_BF16": true,
+    "trace512_fixed_data_Gaussian_stream_particle_untied_BF16": true,
+    "trace_finite_native_losses_particle_untied_BF16": true,
+    "population_counts_exact_particle_untied_BF16": true,
+    "all3_external_penalty_streams_exact": true,
+    "both_particle_native_DV12_final_streams_match": true,
+    "independent_raw_source_code_live_numeric_PASS": true,
+    "producer_head_norm_witnesses_present": true,
+    "source_artifact_immutable_end": true,
+    "CPU_no_CUDA_initialized": true
+  },
+  "accuracy": {
+    "ordinary_BF16": {
+      "rmse": 0.006543289293496626,
+      "by_source": {
+        "0": 0.006461117984849172,
+        "1": 0.006586236800317638,
+        "2": 0.006518634724139701,
+        "3": 0.006673324742494011,
+        "4": 0.006544279671001959,
+        "5": 0.006473777078992881
+      },
+      "source_counts": {
+        "0": 8,
+        "1": 8,
+        "2": 8,
+        "3": 8,
+        "4": 8,
+        "5": 8
+      }
+    },
+    "particle_BF16": {
+      "rmse": 0.00652559006475953,
+      "by_source": {
+        "0": 0.006464779063661054,
+        "1": 0.006537152174211416,
+        "2": 0.0065200463699247105,
+        "3": 0.006607931344509113,
+        "4": 0.006540534503314656,
+        "5": 0.006482119588546515
+      },
+      "source_counts": {
+        "0": 8,
+        "1": 8,
+        "2": 8,
+        "3": 8,
+        "4": 8,
+        "5": 8
+      }
+    },
+    "particle_untied_BF16": {
+      "rmse": 0.006394539506943568,
+      "by_source": {
+        "0": 0.006344374569578112,
+        "1": 0.006427201894269984,
+        "2": 0.006321986314992823,
+        "3": 0.0065286923542434705,
+        "4": 0.0063817315254943085,
+        "5": 0.006361050862833421
+      },
+      "source_counts": {
+        "0": 8,
+        "1": 8,
+        "2": 8,
+        "3": 8,
+        "4": 8,
+        "5": 8
+      }
+    },
+    "zero_code": {
+      "rmse": 0.007031394195604958,
+      "by_source": {
+        "0": 0.007290925529026692,
+        "1": 0.006852582229912035,
+        "2": 0.0065755167430808425,
+        "3": 0.006984084369106148,
+        "4": 0.007250805339112218,
+        "5": 0.007206838054055025
+      },
+      "source_counts": {
+        "0": 8,
+        "1": 8,
+        "2": 8,
+        "3": 8,
+        "4": 8,
+        "5": 8
+      }
+    }
+  },
+  "accuracy_bounds": {
+    "ordinary_BF16": {
+      "aggregate_gain_gte_point1_percent": true,
+      "each_source_harm_lte_1e6": true,
+      "relative_gain": 0.02273318202526986
+    },
+    "particle_BF16": {
+      "aggregate_gain_gte_point1_percent": true,
+      "each_source_harm_lte_1e6": true,
+      "relative_gain": 0.020082560583092768
+    }
+  },
+  "code_benefit": {
+    "aggregate_gain_gte_point1_percent": true,
+    "each_source_strictly_benefits": true,
+    "relative_gain": 0.09959351849650089
+  },
+  "endpoint_mean_center_power": {
+    "ordinary_BF16": {
+      "power": 4.281463477838758e-05,
+      "rms": 0.006543289293496626,
+      "token_mean_power": 1.7639837218937497e-06,
+      "token_centered_power": 4.1050651056493834e-05,
+      "token_mean_power_fraction": 0.041200485091704944,
+      "global_coordinate_mean_power": 2.161303358612746e-07
+    },
+    "particle_BF16": {
+      "power": 4.2583325693288286e-05,
+      "rms": 0.00652559006475953,
+      "token_mean_power": 1.494808818864618e-06,
+      "token_centered_power": 4.1088516874423664e-05,
+      "token_mean_power_fraction": 0.03510314881536414,
+      "global_coordinate_mean_power": 1.9746555978420472e-07
+    },
+    "particle_untied_BF16": {
+      "power": 4.089013550586209e-05,
+      "rms": 0.006394539506943568,
+      "token_mean_power": 1.3346444332391238e-06,
+      "token_centered_power": 3.955549107262297e-05,
+      "token_mean_power_fraction": 0.03263976547712312,
+      "global_coordinate_mean_power": 1.7973123422179059e-07
+    },
+    "zero_code": {
+      "power": 4.944050433398708e-05,
+      "rms": 0.007031394195604957,
+      "token_mean_power": 1.0138079421629858e-05,
+      "token_centered_power": 3.930242491235724e-05,
+      "token_mean_power_fraction": 0.2050561489653049,
+      "global_coordinate_mean_power": 5.484068012269806e-06
+    }
+  },
+  "initial_fit_mean_center_power": {
+    "raw_initial_fit": {
+      "power": 0.00021472156848111103,
+      "rms": 0.014653380786736931,
+      "token_mean_power": 0.00017649655170703655,
+      "token_centered_power": 3.822501677407448e-05,
+      "token_mean_power_fraction": 0.8219786813012354,
+      "global_coordinate_mean_power": 0.00011456111544722692
+    },
+    "normalized_initial_fit": {
+      "power": 1.9726915684215367,
+      "rms": 1.4045253890270324,
+      "token_mean_power": 1.5570159219793884,
+      "token_centered_power": 0.4156756464421482,
+      "token_mean_power_fraction": 0.7892850290961835,
+      "global_coordinate_mean_power": 0.9727729397994938
+    },
+    "previous_floor_normalized_initial_fit": {
+      "power": 0.13420098030069438,
+      "rms": 0.36633451966842323,
+      "token_mean_power": 0.11031034481689785,
+      "token_centered_power": 0.023890635483796552,
+      "token_mean_power_fraction": 0.8219786813012354,
+      "global_coordinate_mean_power": 0.07160069715451683
+    }
+  },
+  "FIT_raw_std": [
+    0.008598292246460915,
+    0.009572222828865051,
+    0.008085431531071663,
+    0.010998738929629326,
+    0.00934984628111124,
+    0.012040549889206886,
+    0.012440938502550125,
+    0.009329031221568584,
+    0.007869042456150055,
+    0.009641326032578945,
+    0.007486296817660332,
+    0.014549611136317253,
+    0.010115500539541245,
+    0.009264633059501648,
+    0.010263885371387005,
+    0.007776501122862101
+  ],
+  "FIT_F64_std": [
+    0.008598292051040186,
+    0.009572222475295135,
+    0.008085431994922442,
+    0.01099873941392474,
+    0.009349846936708098,
+    0.012040549903328817,
+    0.012440937899319446,
+    0.00932903147600074,
+    0.007869041930307973,
+    0.009641326418933688,
+    0.007486296850414312,
+    0.014549611061396617,
+    0.010115500024826694,
+    0.009264632918212343,
+    0.010263884805511972,
+    0.0077765011606766065
+  ],
+  "epsilon_floor_fraction": 0,
+  "previous_floor_fraction": 1,
+  "trace_reductions": {
+    "ordinary_BF16": {
+      "bank_live_after_first": 0,
+      "query_live_after_first": 0,
+      "proposal_events_including_skips": 0,
+      "accepted_row_moves": 0,
+      "accepted_proposals": 0,
+      "final_native_DV12_stream_digest": "f1f0da90897e168742b62750a8fb982833527c093911c28361a365e7a2efd9e4"
+    },
+    "particle_BF16": {
+      "bank_live_after_first": 511,
+      "query_live_after_first": 511,
+      "proposal_events_including_skips": 5,
+      "accepted_row_moves": 0,
+      "accepted_proposals": 0,
+      "final_native_DV12_stream_digest": "562764c4aaae77addc32514a0e80e5a0d646e7554ed8fdcc9ffd91ee278bef9c"
+    },
+    "particle_untied_BF16": {
+      "bank_live_after_first": 511,
+      "query_live_after_first": 511,
+      "proposal_events_including_skips": 5,
+      "accepted_row_moves": 0,
+      "accepted_proposals": 0,
+      "final_native_DV12_stream_digest": "562764c4aaae77addc32514a0e80e5a0d646e7554ed8fdcc9ffd91ee278bef9c"
+    }
+  },
+  "raw_artifact_and_source_identities": {
+    "/ml2/hypergan/ParticleGAN-routed-caption-normalization-develop/runs/caption-normalization-v1/report.json": "ce0a7c28de15dcb63e15a90ea449cb964b8ebdb5609120155c93584d2b65421d",
+    "/ml2/hypergan/ParticleGAN-routed-caption-normalization-develop/runs/caption-normalization-v1/completion.json": "20ee87860295ab45ed20b4216018fec1296dfea89bfd4760ce3bcb028a332750",
+    "/ml2/hypergan/ParticleGAN-routed-caption-normalization-develop/runs/caption-normalization-v1/normalization-inputs.pt": "93449900957e08dc6fec5a21acedcfffed3d2be02ea2c013511ebaf87ad64a30",
+    "/ml2/hypergan/ParticleGAN-routed-caption-normalization-develop/runs/caption-normalization-v1/endpoint-residuals.pt": "75d2e59d2802367ed6eb06c3c462ae1f43088df96641f5a2a9d8272e254e4195",
+    "/ml2/hypergan/ParticleGAN-routed-caption-normalization-develop/runs/caption-normalization-v1/observed-media.pt": "1c82ae595e06aed1d9fd98d73c73d460a974748f954ef9fd429371a476e2f24b",
+    "/ml2/hypergan/ParticleGAN-routed-caption-normalization-develop/runs/caption-normalization-v1/ordinary_BF16.jsonl": "4266d1280f3a1a92175f26d61469e855130dde6bb71adc614245fc0d30e948b5",
+    "/ml2/hypergan/ParticleGAN-routed-caption-normalization-develop/runs/caption-normalization-v1/particle_BF16.jsonl": "b036fff28e83a9ebd4f7665ecad7f395ef4aa90a87284d74f03fb55014d03eb1",
+    "/ml2/hypergan/ParticleGAN-routed-caption-normalization-develop/runs/caption-normalization-v1/particle_untied_BF16.jsonl": "c2301d8618c15b062f830012757eba10cce0b88f9749a5deb540caa64937e90c",
+    "/ml2/hypergan/ParticleGAN-routed-caption-normalization-develop/runs/caption-normalization-v1.external.json": "3fb684d4d565eb50863a7f720b9d771451535a335e87e7f941fcbcb3439bf38f",
+    "/ml2/hypergan/ParticleGAN-routed-caption-normalization-develop/docs/e22_routed_caption_normalization_v1.json": "33189f667744fc7fee4f9d20b3d030d6c217362f03f0fdbaeeff6d95c02fdaa1",
+    "/ml2/hypergan/ParticleGAN-routed-caption-normalization-develop/docs/e22_routed_caption_normalization_preparation.json": "fc9567d894ac7fae5b60c97c2d892a4eb5abe47102b5ac52133e48d1957e5217",
+    "/tmp/routed-caption-normalization-v1-launch-pins.json": "0a6f1e425392965a1044b19159cc7b0a99990aeb60ba443248fdd81714b0edc6",
+    "/tmp/bounded-particle-api-campaign-launcher-v1.py": "1e497a4bb36e979e7192bd38bc32d6bacf9bda8d363bbc648d8eef5db7964a5f"
+  },
+  "source_identity": {
+    "examples/e22_routed_caption_normalization.py": "7077a03143a8d25577bfb2ed1f167d847e75972131093f9228ca10f6aaca9a0e",
+    "examples/render_e22_routed_caption_normalization.py": "971537929ec67a310ff067dd1307e78ab739f173a87e6c7e0a25c4aa731250f7",
+    "tests/test_e22_routed_caption_normalization.py": "fee930af67dda03261ddf0455741f04a72b4a1d24a14ebcd6f7ea374db708b28",
+    "examples/e22_routed_caption_accuracy.py": "bae0f255d890e49bfbe4602bee7f8e84051b24a3cb0219c13b0a42b25768b8e3",
+    "examples/e22_routed_caption_untied.py": "a35938f51b7974677651d2c05b1aa396896255460e213cf26ccf57409efcdb81",
+    "examples/render_e22_routed_caption_untied.py": "18e9c55143e551a2ef961128198ae331f3ea2e3992eb6b1be73bdda333dea77b"
+  },
+  "imported_native": {
+    "imported_package": "/ml2/hypergan/ParticleGAN-routed-caption-normalization-develop/particlegan",
+    "python_sha256": "7b814e32627ac5a332637d336ebaa13b6baab0b9373f6841d9a22fb8ab39cde9"
+  },
+  "actual_outer_quality_seconds": 162.68321392079815,
+  "producer_seconds": 161.90196395595558,
+  "independent_metric_tolerance_abs": 2e-15,
+  "CPU_vs_GPU_FIT_std_tolerance": "4float32eps relative; stored scale/report values match exactly",
+  "counts": {
+    "host_or_model_forwards": 0,
+    "native_updates": 0,
+    "native_policy_calls": 0,
+    "CUDA_initialized": false
+  },
+  "scope": "Independent saved-tensor F64 metric, scale/power and full raw-stream reduction. Model/EMA finite norms/public restores/native learned-state liveness and sole-scale full-data equality remain source-bound producer witnesses; no checkpoint/model loading or rerun. No per-update adaptive sigma/LR observation exists. PASS rejects normalization alone in this fixed generated fixture, not actual caption/full-Supra gap.",
+  "previous_attempt": {
+    "source": "/tmp/review_caption_normalization_v1.py",
+    "source_sha256": "445a8cc1f824a72981daecde323d69532b77998db299bbf675b8879f16a1cc6b",
+    "receipt_sha256": "7f46d41eab4cd399502e9e1857b1736c121318ac0cb2a377bdf1c49239051583",
+    "seconds": 1.0078596959356219,
+    "error": "Reduction v1 incorrectly hashed stacked Gaussian tensor instead of literal list of two arrays; no model/native/GPU calls or science changes."
+  },
+  "previous_attempt_reserved_seconds": 2,
+  "aggregate_cap_seconds": 60,
+  "seconds": 1.0176941840909421,
+  "limit_seconds": 58,
+  "review_source_sha256": "846890f16ba86f937cde06398e51008f68fbfe95f8e846324ecd8ce007833121",
+  "command": "CUDA_VISIBLE_DEVICES='' timeout --signal=INT --kill-after=5 58 /ml2/ntc-image-studio/.venv-anima/bin/python /tmp/review_caption_normalization_v2.py"
+}

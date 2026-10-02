@@ -1,0 +1,50 @@
+{
+  "initial_only_patch_RMS_upper_bound": 0.32022502914382117,
+  "displayed_TEST_indices": [
+    0,
+    40,
+    80,
+    120,
+    160,
+    200
+  ],
+  "retained_B4_padding_indices_not_displayed": [
+    1,
+    41
+  ],
+  "displayed_source_ids": [
+    18,
+    4,
+    17,
+    5,
+    16,
+    15
+  ],
+  "steps": [
+    0,
+    5120,
+    6400
+  ],
+  "scientific_status": "FAIL",
+  "fullTEST240_terminal_RMSE": 0.050191642154460196,
+  "images": {
+    "observed-training.gif": "b67d17ac4769e21910a23132afb128889d4047df89ae404eb77bf81a9a7dc767",
+    "goal-final.png": "1a0b836ed7cb8ae1d48124da010f3085e2664e3d099bf461ccb1b5d38fbb497c"
+  },
+  "display": "Physical paired velocity residual coordinate RMS; no generated images; no output metric enters training or selection.",
+  "input_sha256": {
+    "report": "18f64bfc77e22ffcd0490a368b564a157b3dcc25890f975c55e432817dfa4b4b",
+    "completion": "28e166072cdceb376b6c44053c33cdd5ad606c9d1af5da4ddcdb02b11694cef1",
+    "observed_media": "f2785fa9afb09adc6b4dc079bd14e389226f36f4ea1e7d846960421e9913421d"
+  },
+  "renderer_sha256": "f8ffce9a3cc02796099a1ffb46df3d1d1f34ebea7672cbfee3bd43b8d6d83faa",
+  "complete": true,
+  "error": null,
+  "seconds": 1.0088158850558102,
+  "limit_seconds": 60,
+  "models_constructed": 0,
+  "model_forward_calls": 0,
+  "native_updates": 0,
+  "CUDA_initialized": false,
+  "CPU_RNG_unchanged": true
+}
