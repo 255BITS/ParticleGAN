@@ -235,6 +235,13 @@ class NativeFixture:
                     failures+=_bound(metrics,"checkpoint_owner_mismatch",hi=0)
             if prediction.ndim==2:
                 views=[view("Matched heldout conditional targets and served outputs",target,prediction,caption="Each output uses its own source/time context; target marginal agreement alone cannot pass.")]
+            elif self.name.startswith("critic-lag"):
+                # These are two 32-coordinate feature blocks, not two color
+                # channels. Move the singleton axis without changing values.
+                views=[view("Matched paired residual feature blocks",
+                    target[:8].reshape(-1,1,2,32),prediction[:8].reshape(-1,1,2,32),
+                    "image",vmin=-2.5,vmax=2.5,
+                    caption="Two 32-coordinate residual feature blocks (64 total), shown as grayscale rows. Target and served output use the same heldout context.")]
             else:
                 views=[view("Matched heldout paired outputs",target[:8],prediction[:8],"image",vmin=-2.5,vmax=2.5,caption="Clean actual served output, with the same context's target. Original host/bank/control sizes are retained.")]
         return observation(metrics,failures,views)

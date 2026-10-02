@@ -153,6 +153,28 @@ def test_native_observer_prefix_parity():
     assert api._tree_equal(left.state_dict(),right.state_dict())
 
 
+@pytest.mark.parametrize("arm",("current","even_critic","d_antithetic"))
+def test_critic_lag_grayscale_view_preserves_both_actual_feature_blocks(arm):
+    f=api.build_case("api-critic-lag-"+arm,recipe_name="e22_routed",max_steps=2)
+    f.step();f.step()
+    with torch.no_grad():
+        actual=f.loop.policy.served_model().routed_forward(f.loop.report_context)[:8]
+    target=f.loop.report_targets[:8]
+    assert actual.shape==target.shape==(8,2,1,32)
+    state=f.state_dict()
+    record=f.observe()
+    assert api._tree_equal(state,f.state_dict())
+    panel=record["views"][0]
+    assert panel["kind"]=="image"
+    assert panel["samples"].shape==panel["target"].shape==(8,1,2,32)
+    assert torch.equal(panel["samples"].reshape_as(actual),actual)
+    assert torch.equal(panel["target"].reshape_as(target),target)
+    assert "Two 32-coordinate residual feature blocks (64 total)" in panel["caption"]
+    # Exercise the actual shared media conversion that rejected two channels.
+    from benchmarks.toy_audit.api_run import _image_grid
+    assert _image_grid(panel["samples"]).shape==(2,8*32+7)
+
+
 def test_wrong_checkout_import_unknown_source_and_recipe_are_rejected(monkeypatch,tmp_path):
     monkeypatch.setitem(__import__("sys").modules,"e22_routed_fake",SimpleNamespace(__file__=str(tmp_path/"e22_routed_fake.py")))
     with pytest.raises(ValueError,match="foreign-checkout"):api._example("e22_routed_paired")
