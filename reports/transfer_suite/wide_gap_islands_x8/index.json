@@ -1,0 +1,84 @@
+[
+  {
+    "arm": "winner_published_absolute",
+    "status": "FAIL",
+    "suffix": 0,
+    "shortfall": 1.0,
+    "live": {
+      "sw1_normalized": 0.6253385904435738,
+      "mean_error": 0.9835116267204285,
+      "covariance_error": 0.9990276098251343,
+      "target_scale": 8.001964569091797,
+      "sample_count": 4096,
+      "mass_tv": 0.5,
+      "min_mass_ratio": 0.0,
+      "hq": 0.970947265625,
+      "component_covariance_error": 0.5284147318452597,
+      "component_covariance_errors": [
+        0.05682946369051933,
+        1.0
+      ],
+      "component_min_eigen_ratio": 0.0,
+      "component_mass": [
+        1.0,
+        0.0
+      ],
+      "target_mass": [
+        0.5,
+        0.5
+      ],
+      "component_counts": [
+        4096,
+        0
+      ]
+    },
+    "error": null,
+    "seconds": 19.684350172057748,
+    "sha256": "b119d638a41bd06393e60729a51f10c64a37bc48102118a699f96c5075a9ea33",
+    "kind": "batchfeat",
+    "init_std": 0.5,
+    "gap": 8.0,
+    "local_width": 0.25
+  },
+  {
+    "arm": "control_mlp_matched_init",
+    "status": "PASS",
+    "suffix": 9,
+    "shortfall": 0.0,
+    "live": {
+      "sw1_normalized": 0.06218553978658195,
+      "mean_error": 0.08183028548955917,
+      "covariance_error": 0.031319521367549896,
+      "target_scale": 8.001964569091797,
+      "sample_count": 4096,
+      "mass_tv": 0.042724609375,
+      "min_mass_ratio": 0.91455078125,
+      "hq": 0.989013671875,
+      "component_covariance_error": 0.32038579881191254,
+      "component_covariance_errors": [
+        0.36745914816856384,
+        0.27331244945526123
+      ],
+      "component_min_eigen_ratio": 0.4803343415260315,
+      "component_mass": [
+        0.542724609375,
+        0.457275390625
+      ],
+      "target_mass": [
+        0.5,
+        0.5
+      ],
+      "component_counts": [
+        2223,
+        1873
+      ]
+    },
+    "error": null,
+    "seconds": 5.209239071933553,
+    "sha256": "cf236af78bbda090eb4e12b4c9cfb872b232679be031564e4fc1f4df8207fbee",
+    "kind": "mlp",
+    "init_std": 4.0,
+    "gap": 8.0,
+    "local_width": 0.25
+  }
+]
