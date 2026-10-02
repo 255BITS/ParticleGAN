@@ -37,6 +37,7 @@
     ]
   },
   "execution": {
+    "initializer": "deterministic_orthogonal",
     "host": "img_stripes2",
     "host_definition": {
       "adam_betas": [

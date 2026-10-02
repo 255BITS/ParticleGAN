@@ -81,7 +81,7 @@ def load_idea(root: Path, idea_id: str) -> dict:
         raise ValueError("idea filename must match id")
     if path.parent.name == "configurations":
         from .configuration_search import validate_configuration_declaration
-        validate_configuration_declaration(idea)
+        validate_configuration_declaration(idea, root=root)
     return idea
 
 
@@ -117,7 +117,7 @@ def resolve_idea(root: Path, idea_id: str, *, view_id: str | None = None,
         raise ValueError("declaration id must match requested candidate")
     if declaration is not None and "configuration_id" in idea:
         from .configuration_search import validate_configuration_declaration
-        validate_configuration_declaration(idea)
+        validate_configuration_declaration(idea, root=root)
     if through_tier not in (1, 2, 3):
         raise ValueError("through-tier must be 1, 2, or 3")
     defaults = read_json(root / "configs/forge/defaults.json")
@@ -135,7 +135,8 @@ def resolve_idea(root: Path, idea_id: str, *, view_id: str | None = None,
         blockers.append("extensions require api_changes describing variables, provider, affected hosts and migration")
     if idea.get("implementation"):
         blockers.append("custom implementation loaders are unsupported; implement reusable changes in the public package and declare their Recipe/API bindings")
-    from .api import CapabilityError, FormulationContext
+    from .api import CapabilityError, FormulationContext, task_formulation_context
+    from .initialization import task_initializer
     try:
         context = FormulationContext(recipe_preset=idea.get("recipe_preset"),
             recipe_overrides=idea.get("recipe_overrides", {}), prior=prior,
@@ -187,14 +188,9 @@ def resolve_idea(root: Path, idea_id: str, *, view_id: str | None = None,
                 blockers.append(f"{task['id']}: evaluator source changed; revise the task definition: {relative}")
         # The task owns its sampling law. Candidate priors describe the reference
         # formulation and cannot replace even a task's MoG width or code path.
-        from .taskrecipes import bind_task_candidate
         try:
-            bound = bind_task_candidate(candidate, task)
-            task_context = FormulationContext(recipe_preset=bound.get("recipe_preset"),
-                recipe_overrides=bound.get("recipe_overrides", {}), prior=task_prior(task),
-                seed=protocol["seed"], requires_capabilities=bound.get("requires_capabilities", []),
-                extensions=bound.get("extensions", {}), initializer=bound.get("initializer", "deterministic_orthogonal"),
-                execution_path=task["execution"].get("execution_path", bound.get("execution_path", "public_trainer")))
+            task_context = task_formulation_context(candidate, task, protocol, root=root)
+            task["field_ownership"] = task_context.receipt()["field_ownership"]
             available = {name for name, enabled in task_context.capabilities().items() if enabled}
             missing = set(task["requires_capabilities"]) - available
             task["preflight_blockers"] = [f"missing capability {cap}" for cap in sorted(missing)]
@@ -203,7 +199,7 @@ def resolve_idea(root: Path, idea_id: str, *, view_id: str | None = None,
         from .adapters import adapter_preflight
         task["preflight_blockers"].extend(adapter_preflight(task, candidate, root=root))
         task["preflight_blockers"].extend(task_blockers(task))
-        if task["adapter"] == "native100_continuation" and "native_profile" in task["execution"]:
+        if task["adapter"] == "native100_continuation":
             from .nativeprofiles import validate_native_continuation
             try:
                 validate_native_continuation(tasks[task["execution"]["continuation_of"]], task, root=root)
@@ -232,6 +228,7 @@ def resolve_idea(root: Path, idea_id: str, *, view_id: str | None = None,
                    "evaluation": {m: task_evaluation_fingerprint(tasks[m]) for m in members},
                    "protocol": protocol, "seed": protocol["seed"], "rng": rng,
                    "initializer": idea.get("initializer", "deterministic_orthogonal"), "runtime": runtime,
+                   "task_initializers": {m: task_initializer(tasks[m]) for m in members},
                    "compute": {**compute_profiles[backend], "threads": task["resources"]["cpu_threads"]}}
         prerequisites = set()
         def collect_dependencies(name):
@@ -270,7 +267,7 @@ def resolve_idea(root: Path, idea_id: str, *, view_id: str | None = None,
             "jobs": jobs, "through_tier": through_tier, "preflight_blockers": blockers}
 
 
-def plan_summary(request: dict, queue_state: dict | None = None) -> dict:
+def plan_summary(request: dict, queue_state: dict | None = None, *, include_ownership=False) -> dict:
     existing = (queue_state or {}).get("jobs", {})
     by_task = {m: job for job in request["jobs"] for m in job.get("task_ids", [job["task_id"]])}
     tasks = []
@@ -288,7 +285,9 @@ def plan_summary(request: dict, queue_state: dict | None = None) -> dict:
         tasks.append({**assignment, "reusable": reusable, "shared_pending": bool(saved and not reusable),
                       "permitted_by_tier_cap": allowed, "budget_seconds": job["budget_seconds"],
                       "execution_group": job["execution_group"],
-                      "blockers": request["tasks"][task_id].get("preflight_blockers", [])})
+                      "blockers": request["tasks"][task_id].get("preflight_blockers", []),
+                      **({"field_ownership": request["tasks"][task_id].get("field_ownership")}
+                         if include_ownership else {})})
     return {"candidate": request["candidate"]["id"], "candidate_revision": request["candidate_revision"],
             "view": request["view"]["id"], "policy_fingerprint": request["policy_fingerprint"],
             "through_tier": request["through_tier"], "tasks": tasks, "worst_case_seconds": total,

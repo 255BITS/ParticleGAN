@@ -10,7 +10,7 @@ from experiments.forge.contracts import atomic_json, read_json, stable_hash
 
 def task(name, *, prior="mog", sampling="public_prior_without_output_noise"):
     return {"schema_version": 1, "id": name, "adapter": "test",
-            "execution": {"steps": 24, "prior": {"kind": prior, "sigma": .025 if prior == "mog" else 0,
+            "execution": {"initializer": "deterministic_orthogonal", "steps": 24, "prior": {"kind": prior, "sigma": .025 if prior == "mog" else 0,
                                                  "standardize": False, "learnable": True,
                                                  **({"exception_reason": "Finite-cloud fixture"} if prior == "particle_cloud" else {})},
                           "host_definition": {"initialization": {"method": "named_v1"}}},

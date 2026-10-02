@@ -60,7 +60,9 @@ def test_runtime_cannot_fall_back_to_candidate_prior():
     candidate = dict(prior=deepcopy(MOG))
     assert "prior requires explicit" in adapter_preflight(value, candidate)[0]
     with pytest.raises(ValueError, match="prior requires explicit"):
-        _context(dict(candidate=candidate, protocol=dict(seed=0)), value, "cpu", {})
+        spec = value["execution"]["host_definition"]
+        _context(dict(candidate=candidate, protocol=dict(seed=0)), value, "cpu",
+                 dict(num_particles=spec["particles"], z_dim=spec["z_dim"], batch_size=spec["batch"]))
 
 
 @pytest.mark.parametrize("prior,other,expected", [
@@ -68,6 +70,7 @@ def test_runtime_cannot_fall_back_to_candidate_prior():
 ])
 def test_experiment_kind_selects_actual_code_path_despite_candidate_prior(prior, other, expected):
     value = task()
+    value["execution"]["host_definition"].update(particles=12, z_dim=2, batch=4)
     value["execution"]["prior"] = deepcopy(prior)
     value["requires_capabilities"] = ["mog_prior" if expected is MoGParticlePrior else "particle_cloud"]
     candidate = dict(prior=deepcopy(other), recipe_overrides={})

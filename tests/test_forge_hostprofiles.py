@@ -46,6 +46,7 @@ def rebind(req):
     for job in req["jobs"]:
         members = job.get("task_ids", [job["task_id"]])
         job["science"].update(candidate_revision=req["candidate_revision"], initializer="deterministic_orthogonal",
+            task_initializers={name: req["tasks"][name]["execution"]["initializer"] for name in members},
             execution={name: task_execution_fingerprint(req["tasks"][name]) for name in members},
             evaluation={name: task_evaluation_fingerprint(req["tasks"][name]) for name in members})
         parent = req["tasks"][job["task_id"]]["execution"].get("continuation_of")

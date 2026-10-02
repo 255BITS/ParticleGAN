@@ -4,7 +4,7 @@ There is no second optimizer or training loop here. New experiment variables
 bind explicitly to a documented public Recipe or GANTrainer argument.
 """
 from copy import deepcopy
-from dataclasses import dataclass, fields
+from dataclasses import asdict, dataclass, fields
 import hashlib
 import inspect
 import math
@@ -73,6 +73,76 @@ def host_recipe_overrides(candidate, execution, resources):
         raise CapabilityError([f"candidate overrides frozen host resource {key}; declare a different task"
                                for key in sorted(conflicts)])
     return {**candidate.get("recipe_overrides", {}), **fixed}
+
+
+def task_recipe_resources(task):
+    """Resolve only the resources consumed by the task's existing adapter."""
+    execution, adapter = task["execution"], task["adapter"]
+    if adapter in {"transfer_vector", "paired_adaptation", "transfer_image"}:
+        spec = execution["host_definition"]
+        return {"num_particles": spec["particles"], "z_dim": spec["z_dim"],
+                "batch_size": spec["batch_size"] if adapter == "transfer_image" else spec["batch"]}
+    if adapter == "ring_endurance" or (adapter == "transfer_behavior" and execution.get("host") == "mode_hold"):
+        from benchmarks.legacy.locked_shared import LOCKED_SHARED
+        return {"num_particles": LOCKED_SHARED.n_particles, "z_dim": 4, "batch_size": 128}
+    if adapter in {"native100", "native100_continuation"} and "native_profile" in execution:
+        return deepcopy(execution["host_definition"]["resources"])
+    return deepcopy(execution.get("resources", {}))
+
+
+def task_recipe_overrides(candidate, task):
+    """Materialize task binding once, identically for planning and execution."""
+    from .taskrecipes import bind_task_candidate
+    bound = bind_task_candidate(candidate, task)
+    execution = task["execution"]
+    if task["adapter"] == "transfer_behavior" and execution.get("host") != "mode_hold":
+        from .behavior_adapters import behavior_preflight
+        blockers = behavior_preflight(task, bound)
+        if blockers:
+            raise CapabilityError(blockers)
+        overrides = {**bound.get("recipe_overrides", {}), "total_steps": execution["steps"]}
+        if execution.get("host") == "ae_gan_hold":
+            from benchmarks.locked_shared.hosts.ae_gan_hold import HoldConfig
+            cfg = HoldConfig(name="forge")
+            overrides.update(encoder_mode="ae", z_dim=2, num_particles=cfg.n_particles, batch_size=cfg.batch)
+        return overrides
+    return host_recipe_overrides(bound, execution, task_recipe_resources(task))
+
+
+def task_formulation_context(candidate, task, protocol=None, *, device="cpu", root=None):
+    """Resolve a task's actual public configuration without constructing models."""
+    from .initialization import task_initializer
+    from .nativeprofiles import native_host_initialization
+    from .priors import task_prior
+    from .taskrecipes import adaptation_receipt, bind_task_candidate
+    bound = bind_task_candidate(candidate, task)
+    blockers = task_policy_blockers(task, bound)
+    if blockers:
+        raise CapabilityError(blockers)
+    context = FormulationContext(recipe_preset=bound.get("recipe_preset"),
+        recipe_overrides=task_recipe_overrides(candidate, task), prior=task_prior(task),
+        seed=(protocol or {}).get("seed", 0), device=device,
+        requires_capabilities=tuple(bound.get("requires_capabilities", ())) + tuple(task["requires_capabilities"]),
+        extensions=bound.get("extensions", {}), initializer=task_initializer(task, candidate),
+        host_initialization=native_host_initialization(task, root=root),
+        execution_path=task["execution"].get("execution_path", bound.get("execution_path", "public_trainer")))
+    # Typed extensions receive the same ownership and policy checks as ordinary
+    # overrides before a worker can reserve this task.
+    blockers = task_policy_blockers(task, {"recipe_overrides": asdict(context.recipe)})
+    if task["adapter"] == "transfer_behavior" and task["execution"].get("host") != "mode_hold":
+        from .behavior_adapters import behavior_preflight
+        blockers.extend(behavior_preflight(task, {"recipe_overrides": context.bindings["recipe"]}))
+    if blockers:
+        raise CapabilityError(blockers)
+    from .boundaries import ownership_receipt
+    ownership_receipt(candidate, task, asdict(context.recipe), protocol,
+                      initializer=context.initializer,
+                      extension_recipe_bindings=context.bindings["recipe"])
+    context.host_adaptation = adaptation_receipt(candidate, task)
+    context.ownership_contract = {"candidate": deepcopy(candidate), "task": deepcopy(task),
+                                  "protocol": deepcopy(protocol or {}),
+                                  "extension_recipe_bindings": deepcopy(context.bindings["recipe"])}
+    return context
 
 
 def task_policy_blockers(task, candidate):
@@ -461,6 +531,11 @@ class FormulationContext:
         return self._trainer
 
     def receipt(self):
+        ownership = {}
+        if getattr(self, "ownership_contract", None) is not None:
+            from .boundaries import ownership_receipt
+            ownership["field_ownership"] = ownership_receipt(**self.ownership_contract,
+                resolved_recipe=asdict(self.recipe), initializer=self.initializer)
         policy = None
         if self._trainer is not None and policy_controls(self.recipe):
             birth = self._trainer.birth_death
@@ -476,6 +551,7 @@ class FormulationContext:
                           "state_sha256": hashlib.sha256(birth.stream.get_state().cpu().numpy().tobytes()).hexdigest(),
                           "checkpoint_path": "trainer.birth_death.stream"}]}
         return {"api_version": API_VERSION, "execution_path": self.execution_path,
+                **ownership,
                 **({"host_adaptation": self.host_adaptation} if getattr(self, "host_adaptation", None) else {}),
                 "recipe_preset": self.recipe_preset,
                 "recipe": self.recipe.to_dict(), "prior": deepcopy(self.prior_config),

@@ -3,6 +3,7 @@
   "id": "cover_leftover",
   "adapter": "transfer_behavior",
   "execution": {
+    "initializer": "deterministic_orthogonal",
     "host": "cover_leftover",
     "steps": 800,
     "prior": {

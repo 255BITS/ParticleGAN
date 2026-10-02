@@ -23,7 +23,7 @@ def checkout(tmp_path):
     for tier in (1, 2, 3):
         atomic_json(tmp_path / f"configs/forge/tasks/t{tier}.json", {
             "schema_version": 1, "id": f"t{tier}", "adapter": "transfer_behavior",
-            "execution": {"steps": 80, "prior": prior, "host": "mode_hold"},
+            "execution": {"initializer": "deterministic_orthogonal", "steps": 80, "prior": prior, "host": "mode_hold"},
             "evaluation": {"kind": "transfer_sustained", "thresholds": [["score", ">=", 1]],
                            "sampling_contract_version": 1, "sampling_law": "public_prior_without_output_noise",
                            "eval_output_noise": "clean"},
@@ -72,7 +72,7 @@ def test_known_blocked_first_task_spends_nothing_and_creates_no_attempt(checkout
     assert result["blocked_count"] == 1 and result["submitted_count"] == 0
     row = result["candidates"][0]
     assert row["submission_status"] == "BLOCKED"
-    assert "missing capability unsupported_inventory_probe" in row["submission_blockers"][0]
+    assert "required capability unavailable: unsupported_inventory_probe" in row["submission_blockers"][0]
     assert row["required_tier_totals"] == {"1": 1, "2": 1, "3": 1}
     assert all(t["evidence_status"] == "UNKNOWN" for t in row["tasks"])
     assert not (checkout / "runs").exists()

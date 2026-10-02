@@ -20,7 +20,7 @@ def checkout(tmp_path):
     assignments = []
     for index in (1, 2, 3):
         task = {"schema_version": 1, "id": f"t{index}", "adapter": "transfer_behavior",
-                "execution": {"steps": 80, "prior": defaults["prior"], "host": "mode_hold"},
+                "execution": {"initializer": "deterministic_orthogonal", "steps": 80, "prior": defaults["prior"], "host": "mode_hold"},
                 "evaluation": {"kind": "transfer_sustained", "thresholds": [["score", ">=", 1]],
                                "sampling_contract_version": 1, "sampling_law": "public_prior_without_output_noise",
                                "eval_output_noise": "clean"},
@@ -44,6 +44,20 @@ def test_plan_does_not_write_and_honors_tier_cap(checkout):
     assert summary["worst_case_seconds"] == 10
     assert [r["permitted_by_tier_cap"] for r in summary["tasks"]] == [True, False, False]
     assert request["rng"]["bindings"]
+
+
+def test_planning_exposes_task_bound_values_and_protocol_ownership(checkout):
+    request = resolve_idea(checkout, "base")
+    summary = plan_summary(request, include_ownership=True)
+    ownership = summary["tasks"][0]["field_ownership"]
+    assert ownership["recipe_fields"]["total_steps"]["value"] == 80
+    assert ownership["recipe_fields"]["total_steps"]["owner"] == "task"
+    assert ownership["recipe_fields"]["batch_size"]["value"] == 128
+    assert ownership["recipe_fields"]["batch_size"]["owner"] == "task"
+    assert ownership["recipe_fields"]["lr"]["owner"] == "hyperparameter"
+    assert ownership["protocol"]["seed"]["owner"] == "protocol"
+    assert ownership["task_contract"]["initialization"]["value"] == "deterministic_orthogonal"
+    assert request["jobs"][0]["science"]["task_initializers"] == {"t1": "deterministic_orthogonal"}
 
 
 def test_planner_preserves_experiment_priors_over_candidate_reference(checkout):

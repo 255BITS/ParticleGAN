@@ -3,6 +3,7 @@
   "id": "mode_hold",
   "adapter": "transfer_behavior",
   "execution": {
+    "initializer": "deterministic_orthogonal",
     "host": "mode_hold",
     "steps": 1200,
     "prior": {

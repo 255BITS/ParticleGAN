@@ -10,6 +10,7 @@ import math
 from pathlib import Path
 
 from .contracts import canonical, identifier, stable_hash
+from .initialization import task_initializer
 
 ROOT = Path(__file__).resolve().parents[2]
 PROFILE_ID = "native_affine_square_named_v1"
@@ -19,6 +20,7 @@ RELEASE_PROFILE_ID = "release07_public_default_named_v1"
 RELEASE_PROFILE_SOURCE = "configs/toy100/release07_public_default_host.json"
 RELEASE_PROFILE_SHA256 = "aa6c8d2ab22682dfeae90e829d58c0aab8a0626aa39722cbde12156e7569894e"
 COMPONENTS = {"generator", "discriminator", "prior"}
+PLAIN_NATIVE_MODEL = {"hidden": 128, "layers": 3, "fourier": 2}
 
 
 def profile_declaration(profile_id=PROFILE_ID):
@@ -147,8 +149,18 @@ def resolve_native_spec(task, *, root=None):
     """Return a validated explicit profile, or None for an unchanged old task."""
     execution = task["execution"]
     if "native_profile" not in execution:
-        if task.get("adapter") in {"native100", "native100_continuation"} and ({"host_definition", "host_initialization", "resources", "initialization"} & set(execution)):
-            raise ValueError("native model overrides require an explicit profile")
+        if task.get("adapter") in {"native100", "native100_continuation"}:
+            if {"host_definition", "host_initialization", "initialization"} & set(execution):
+                raise ValueError("native model overrides require an explicit profile")
+            # Tasks predating explicit ownership keep the old source fallback.
+            # Current declarations freeze the existing MLP and resource values.
+            if "initializer" in execution or {"model", "resources"} & set(execution):
+                if canonical(execution.get("model")) != canonical(PLAIN_NATIVE_MODEL):
+                    raise ValueError("native model variants require an explicit profile")
+                resources = execution.get("resources")
+                if (not isinstance(resources, dict) or set(resources) != {"num_particles", "z_dim", "batch_size"}
+                        or any(type(value) is not int or value <= 0 for value in resources.values())):
+                    raise ValueError("native resources must explicitly declare positive num_particles, z_dim and batch_size")
         return None
     if task.get("adapter") not in {"native100", "native100_continuation"}:
         raise ValueError("native profiles apply only to native tasks")
@@ -193,8 +205,9 @@ def native_host_initialization(task, *, root=None):
         "components": deepcopy(spec["initialization"])}
 
 
-def native_profile_blockers(task, candidate, *, root=None):
+def native_profile_blockers(task, candidate, *, root=None, explicit_initializer=True):
     try:
+        initializer = task_initializer(task, candidate, explicit=explicit_initializer)
         spec = resolve_native_spec(task, root=root)
         if spec is None:
             return []
@@ -210,7 +223,7 @@ def native_profile_blockers(task, candidate, *, root=None):
         elif (not isinstance(prior, dict) or prior.get("kind") != "mog" or not _positive(prior.get("sigma")) or prior.get("standardize") is not False
                 or prior.get("learnable") is not True or set(prior) - {"kind", "sigma", "standardize", "learnable", "init_std"}):
             raise ValueError("native affine profile requires learned MoG locations, positive explicit width, no standardization and uniform masses")
-        resolve_host_initialization(native_host_initialization(task, root=root), initializer=candidate.get("initializer", "deterministic_orthogonal"), prior=prior)
+        resolve_host_initialization(native_host_initialization(task, root=root), initializer=initializer, prior=prior)
         fixed = {**spec["resources"], "total_steps": 7000}
         for key, value in fixed.items():
             if key in candidate.get("recipe_overrides", {}) and candidate["recipe_overrides"][key] != value:
@@ -223,6 +236,9 @@ def native_profile_blockers(task, candidate, *, root=None):
 def validate_native_continuation(parent, child, *, root=None):
     a, b = resolve_native_spec(parent, root=root), resolve_native_spec(child, root=root)
     if a is None and b is None:
+        for field in ("initializer", "resources", "model"):
+            if canonical(parent["execution"].get(field)) != canonical(child["execution"].get(field)):
+                raise ValueError(f"native continuation changes task-owned {field}")
         return
     if (a is None or b is None or canonical(a) != canonical(b)
             or parent["adapter"] != "native100" or child["adapter"] != "native100_continuation"
@@ -232,6 +248,8 @@ def validate_native_continuation(parent, child, *, root=None):
         raise ValueError("native continuation must bind its matching profile and own 7k parent")
     if native_host_initialization(parent, root=root) != native_host_initialization(child, root=root):
         raise ValueError("native continuation changes host initialization identity")
+    if parent["execution"].get("initializer") != child["execution"].get("initializer"):
+        raise ValueError("native continuation changes task initializer")
 
 
 def task_from_profile(base_task, task_id, *, parent_task_id=None, root=None):
@@ -242,6 +260,8 @@ def task_from_profile(base_task, task_id, *, parent_task_id=None, root=None):
     task["id"] = task_id
     task["execution"].update(native_profile=profile_declaration(),
                              host_definition=_profile_spec(ROOT if root is None else root))
+    task["execution"].pop("resources", None)
+    task["execution"].pop("model", None)
     if task["adapter"] == "native100_continuation":
         if not parent_task_id:
             raise ValueError("profile continuation requires its explicit matching parent")

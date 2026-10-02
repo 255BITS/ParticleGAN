@@ -146,6 +146,29 @@ identities. Ordinary MoG tasks still require positive sigma. Particle clouds als
 require `standardize: false` and their explicit exception reason. Parameter-only
 controls declare `prior_applicability: "not_sampled"` in `execution`.
 
+The [field ownership contract](docs/forge-field-boundaries.md) separates task
+conditions, technique mechanisms, hyperparameters and the comparison protocol.
+Each task also declares `execution.initializer`; fixed host fixtures and native
+component policies remain its more specific initialization rules. An explicit
+candidate initializer is a compatibility requirement and cannot replace the
+task's policy. Native tasks declare their model and training resources, while
+profiled and behavioral hosts retain their frozen host definitions and sources.
+
+Inspect effective values and their owners before submission:
+
+```sh
+python -m experiments.forge plan k3p --device cpu --show-boundaries
+```
+
+Planning and adapters use the same task binding. Execution receipts record each
+field's owner and source; inactive historical host optimizer settings remain
+labelled provenance. Configuration searches preserve the base technique's
+mechanisms and reject axes that are inactive or delegated on every tuning task.
+Changing a mechanism requires a structural idea. Family labels describe lineage;
+task priors and sampling laws remain distinct scientific comparison cohorts.
+These declaration changes create new execution identities. Saved receipts and
+qualification outcomes retain their original bindings and are not regraded.
+
 Do not create seed-only ideas. Screening uses one fixed protocol seed with named,
 isolated streams. Changing an initializer, sampling law, or stream binding changes
 the evidence identity. A future public-default promotion requires the plan's

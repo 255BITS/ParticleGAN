@@ -26,8 +26,9 @@ from particlegan.recipe_schedules import apply_optimizer_schedule
 from particlegan.training import input_noise_std, output_noise_std
 from benchmarks.transfer_suite.legacy_noise_adapters import NoisePolicy, _InputAdapter, _OutputAdapter
 
-from .api import CapabilityError, FormulationContext, task_policy_blockers
+from .api import CapabilityError, task_formulation_context, task_policy_blockers
 from .contracts import atomic_json
+from .initialization import task_initializer
 from .mechanisms import MechanismAudit, mechanism_blockers
 from .priors import task_prior
 from .sampling import BEHAVIOR_POLICIES, POLICIES, executed_receipt
@@ -47,6 +48,7 @@ def behavior_preflight(task: dict, candidate: dict) -> list[str]:
     """Return unsupported explicit overrides before constructing any host state."""
     try:
         prior = task_prior(task)
+        task_initializer(task, candidate)
         candidate = bind_task_candidate(candidate, task)
     except ValueError as error:
         return [str(error)]
@@ -187,22 +189,14 @@ class BehaviorComponents:
     def __init__(self, request, task):
         self.task = task
         reference_candidate = request.get("candidate", {})
+        self.reference_candidate = deepcopy(reference_candidate)
+        self.protocol = deepcopy(request.get("protocol", {}))
         candidate = bind_task_candidate(reference_candidate, task)
         self.host_adaptation = adaptation_receipt(reference_candidate, task)
         blockers = behavior_preflight(task, candidate)
         if blockers:
             raise CapabilityError(blockers)
-        overrides = dict(candidate.get("recipe_overrides", {}))
-        # These are frozen host resources; candidate mechanism settings stay shared.
-        overrides["total_steps"] = task["execution"]["steps"]
-        self.context = FormulationContext(
-            recipe_preset=candidate.get("recipe_preset"), recipe_overrides=overrides,
-            prior=task_prior(task),
-            requires_capabilities=tuple(candidate.get("requires_capabilities", ())) + tuple(task["requires_capabilities"]),
-            seed=request.get("protocol", {}).get("seed", 0), device="cpu",
-            extensions=candidate.get("extensions", {}),
-            initializer=candidate.get("initializer", "deterministic_orthogonal"),
-            execution_path="public_components")
+        self.context = task_formulation_context(reference_candidate, task, self.protocol, device="cpu")
         extension_blockers = behavior_preflight(task, {"recipe_overrides": self.context.bindings["recipe"]})
         if extension_blockers:
             raise CapabilityError(extension_blockers)
@@ -355,7 +349,12 @@ class BehaviorComponents:
                     unintended_rng_deviations=sum(a["unintended_rng_deviations"] for a in self.rng_audits))
 
     def receipt(self):
+        from .boundaries import ownership_receipt
         return dict(execution_path="public_components", recipe=asdict(self.recipe),
+                    initializer=self.context.initializer, initialization=deepcopy(self.context.initialization),
+                    field_ownership=ownership_receipt(self.reference_candidate, self.task, asdict(self.recipe),
+                        self.protocol, self.context.initializer,
+                        extension_recipe_bindings=self.context.bindings["recipe"]),
                     **({"host_adaptation": self.host_adaptation} if self.host_adaptation else {}),
                     prior=self.context.prior_config, active_roles=sorted(self.role_parameters),
                     public_optimizers=[type(o).__name__ for opt in self.optimizers.values()

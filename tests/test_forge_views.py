@@ -35,7 +35,7 @@ VECTOR_THRESHOLDS_V1 = {
 
 def simple_task(name):
     return dict(schema_version=1, id=name, adapter="test_host",
-                execution=dict(steps=24, produces_state=True,
+                execution=dict(initializer="deterministic_orthogonal", steps=24, produces_state=True,
                                prior=dict(kind="mog", sigma=.025, standardize=False, learnable=True)),
                 evaluation=dict(kind="transfer_sustained", thresholds=[["error", "<=", 1.0]],
                                 scoring_weights="live"), resources={},

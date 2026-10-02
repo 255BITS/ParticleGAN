@@ -3,6 +3,7 @@
   "id": "clockfree_audit",
   "adapter": "clockfree_audit",
   "execution": {
+    "initializer": "deterministic_orthogonal",
     "steps": 24,
     "warmup_steps": 4,
     "probe_steps": 4,

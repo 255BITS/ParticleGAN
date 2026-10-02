@@ -16,7 +16,7 @@ ROOT = Path(__file__).resolve().parents[1]
 def task(name):
     return {
         "schema_version": 1, "id": name, "adapter": "inventory_fixture",
-        "execution": {"steps": 24, "prior": {"kind": "mog", "sigma": .025,
+        "execution": {"initializer": "deterministic_orthogonal", "steps": 24, "prior": {"kind": "mog", "sigma": .025,
                                                "standardize": False, "learnable": True}},
         "evaluation": {"kind": "inventory_fixture"},
         "resources": {"timeout_seconds": 60}, "dependencies": [],

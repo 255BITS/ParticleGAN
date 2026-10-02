@@ -9,7 +9,7 @@ from experiments.forge.contracts import atomic_json, read_json, stable_hash
 
 def make_task(name):
     return {"schema_version": 1, "id": name, "adapter": "test",
-            "execution": {"steps": 24, "prior": {"kind": "mog", "sigma": .025,
+            "execution": {"initializer": "deterministic_orthogonal", "steps": 24, "prior": {"kind": "mog", "sigma": .025,
                                                  "standardize": False, "learnable": True}},
             "evaluation": {"kind": "transfer_sustained", "thresholds": [["error", "<=", 1.0]],
                            "scoring_weights": "live"}, "resources": {}, "dependencies": [], "requires_capabilities": []}

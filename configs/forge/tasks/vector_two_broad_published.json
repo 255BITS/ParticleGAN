@@ -3,6 +3,7 @@
   "id": "vector_two_broad_published",
   "adapter": "transfer_vector",
   "execution": {
+    "initializer": "deterministic_orthogonal",
     "host": "vector_two_broad",
     "steps": 1200,
     "prior": {

@@ -26,7 +26,8 @@ def checkout(tmp_path):
     for tier in (1, 2, 3):
         atomic_json(tmp_path / f"configs/forge/tasks/t{tier}.json", {
             "schema_version": 1, "id": f"t{tier}", "adapter": "transfer_behavior",
-            "execution": {"steps": 80, "prior": prior, "host": "mode_hold"},
+            "execution": {"steps": 80, "prior": prior, "host": "mode_hold",
+                          "initializer": "deterministic_orthogonal"},
             "evaluation": {"kind": "transfer_sustained", "thresholds": [["score", ">=", 1]],
                            "observations": 24, "minimum_stable_checks": 5,
                            "sampling_contract_version": 1, "sampling_law": "public_prior_without_output_noise",
@@ -102,6 +103,70 @@ def test_invalid_grid_and_public_recipe_validation(checkout, spec, grid):
     spec["grid"] = grid
     with pytest.raises(ValueError):
         search.plan_search(checkout, checkout / "runs", spec)
+
+
+@pytest.mark.parametrize("grid", [{"lr": [True]}, {"reg_coeff": [False]},
+                                  {"reg_every": [1.0]}, {"betas": [[False, .99]]},
+                                  {"prior_betas": [[0, True]]}, {"eps": [float("inf")]}])
+def test_search_values_have_explicit_numeric_types(checkout, spec, grid):
+    spec["grid"] = grid
+    with pytest.raises(ValueError, match="invalid hyperparameter value"):
+        search.materialize_search(checkout, spec)
+    assert not (checkout / "configs/forge/configurations").exists()
+
+
+@pytest.mark.parametrize("grid, mechanism", [({"reg_coeff": [0.]}, "critic_penalty"),
+                                            ({"amsgrad": [True]}, "amsgrad"),
+                                            ({"prior_reg": [.1]}, "prior_regularization")])
+def test_new_trials_preserve_base_mechanisms_before_writing(checkout, spec, grid, mechanism):
+    spec["grid"] = grid
+    with pytest.raises(ValueError, match=mechanism):
+        search.materialize_search(checkout, spec)
+    assert not (checkout / "configs/forge/configurations").exists()
+
+
+@pytest.mark.parametrize("field", ["reg_coeff_anneal_end", "beta2_anneal_end"])
+def test_inactive_schedule_axes_are_rejected(checkout, spec, field):
+    spec["grid"] = {field: [.1, .3]}
+    with pytest.raises(ValueError, match="inactive or task-owned"):
+        search.materialize_search(checkout, spec)
+
+
+def _behavioral_prior_reg_base(checkout):
+    path = checkout / "configs/forge/ideas/base.json"
+    base = read_json(path)
+    base["recipe_overrides"]["prior_reg"] = .05
+    base["host_adaptation"] = {"schema_version": 1, "recipe_fields": ["prior_reg"]}
+    atomic_json(path, base)
+    path = checkout / "configs/forge/tasks/t1.json"
+    task = read_json(path)
+    task["execution"].update(host="two_pole", prior={"kind": "particle_cloud", "sigma": 0,
+        "standardize": False, "learnable": True, "exception_reason": "frozen behavioral host"})
+    atomic_json(path, task)
+
+
+def test_task_delegated_axes_are_rejected_when_every_tuning_task_owns_them(checkout, spec):
+    _behavioral_prior_reg_base(checkout)
+    spec["grid"] = {"prior_reg": [.1, .2]}
+    with pytest.raises(ValueError, match="prior_reg is inactive or task-owned"):
+        search.materialize_search(checkout, spec)
+
+
+def test_axis_keeps_honest_scoped_ownership_when_a_scalar_task_uses_it(checkout, spec):
+    _behavioral_prior_reg_base(checkout)
+    spec["grid"] = {"prior_reg": [.1, .2]}
+    spec["tuning_through_tier"] = 2
+    assert len(search.materialize_search(checkout, spec)) == 2
+
+
+def test_frozen_priors_cannot_supply_a_prior_optimizer_search_axis(checkout, spec):
+    path = checkout / "configs/forge/tasks/t1.json"
+    task = read_json(path)
+    task["execution"]["prior"]["learnable"] = False
+    atomic_json(path, task)
+    spec["grid"] = {"prior_lr_mult": [1, 4]}
+    with pytest.raises(ValueError, match="prior_lr_mult is inactive"):
+        search.materialize_search(checkout, spec)
 
 
 def test_bound_budgets_and_protocol_are_preflight_requirements(checkout, spec):
@@ -313,7 +378,66 @@ def test_frozen_configuration_identity_survives_later_public_defaults(checkout, 
         raise AssertionError("historical identity must not resolve today's public Recipe")
     monkeypatch.setattr(search, "_resolved_recipe", different_defaults)
     assert search.configuration_id(card, resolved_recipe=card["resolved_configuration_recipe"]) == card["configuration_id"]
-    assert load_idea(checkout, card["id"]) == card
+    search.validate_configuration_declaration(card)  # Frozen evidence has no current checkout lineage.
+
+
+def test_ordinary_configuration_validation_rejects_rehashed_structural_ablation(checkout, spec):
+    path = search.materialize_search(checkout, spec)[0]
+    card = read_json(path)
+    card["recipe_overrides"]["reg_coeff"] = 0.
+    card["resolved_configuration_recipe"]["reg_coeff"] = 0.
+    digest = search.configuration_id(card, resolved_recipe=card["resolved_configuration_recipe"])
+    card.update(configuration_id=digest, id=f"{card['trainer_family']}--{digest}")
+    search.validate_configuration_declaration(card)  # Internally consistent identity is insufficient.
+    with pytest.raises(ValueError, match="critic_penalty"):
+        search.validate_configuration_declaration(card, root=checkout)
+    target = path.with_name(f"{card['id']}.json")
+    atomic_json(target, card)
+    with pytest.raises(ValueError, match="critic_penalty"):
+        load_idea(checkout, card["id"])
+    with pytest.raises(ValueError, match="critic_penalty"):
+        resolve_idea(checkout, card["id"], declaration=card, view_id="stability", execution_backend="cpu")
+
+
+def test_current_configuration_requires_an_acyclic_declared_parent(checkout, spec):
+    card = read_json(search.materialize_search(checkout, spec)[0])
+    card["parent"] = card["id"]
+    with pytest.raises(ValueError, match="parent cycle"):
+        search.validate_configuration_declaration(card, root=checkout)
+    card["parent"] = "missing-technique"
+    with pytest.raises(ValueError, match="parent must name"):
+        search.validate_configuration_declaration(card, root=checkout)
+
+
+def test_rehashed_configuration_cannot_change_fixed_laws_or_nonsearch_knobs(checkout, spec):
+    card = read_json(search.materialize_search(checkout, spec)[0])
+    for field, value, message in [("claim_contract", {"sampling_law": "changed"}, "fixed parent"),
+                                  ("latent_damping_max_rate", .4, "outside the hyperparameter")]:
+        changed = deepcopy(card)
+        if field == "claim_contract":
+            changed[field] = value
+        else:
+            changed["recipe_overrides"][field] = value
+            changed["resolved_configuration_recipe"][field] = value
+        digest = search.configuration_id(changed, resolved_recipe=changed["resolved_configuration_recipe"])
+        changed.update(configuration_id=digest, id=f"{changed['trainer_family']}--{digest}")
+        with pytest.raises(ValueError, match=message):
+            search.validate_configuration_declaration(changed, root=checkout)
+
+
+def test_existing_positive_floor_round_retains_all_configuration_identities():
+    root = Path(__file__).resolve().parents[1]
+    study = "r1r2-modern-family-round1-v1"
+    paths = [path for path in (root / "configs/forge/configurations").glob("*.json")
+             if read_json(path).get("search_study_id") == study]
+    before = {path: path.read_bytes() for path in paths}
+    declarations = search._declarations(root, search._load_spec(root, study))
+    assert len(declarations) == len(paths) == 8
+    assert {card["configuration_id"] for card, _ in declarations} == {
+        read_json(path)["configuration_id"] for path in paths}
+    for path in paths:
+        search.validate_configuration_declaration(read_json(path), root=root)
+    assert before == {path: path.read_bytes() for path in paths}
 
 
 def test_actual_context_recipe_matches_frozen_card_and_report(checkout, spec):
@@ -325,6 +449,7 @@ def test_actual_context_recipe_matches_frozen_card_and_report(checkout, spec):
         assert card["prior"] == planned["base_declaration"]["prior"]
         assert trial["resolved_recipe"]["prior_kind"] == "mog"
         assert trial["resolved_recipe"]["standardize"] is False
+        assert trial["technique_signature"] == planned["technique_signature"]
 
 
 def test_changed_unspecified_default_rejected_before_queue_admission(checkout, spec, monkeypatch):

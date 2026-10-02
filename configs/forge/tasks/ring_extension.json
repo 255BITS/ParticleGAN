@@ -3,6 +3,7 @@
   "id": "ring_extension",
   "adapter": "ring_endurance",
   "execution": {
+    "initializer": "deterministic_orthogonal",
     "host": "mode_hold",
     "steps": 7500,
     "max_total_steps": 7500,
