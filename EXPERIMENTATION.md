@@ -266,6 +266,23 @@ Diagnostics remain visible without vetoing required passes. The hold and extensi
 share one uninterrupted execution; the extension cannot borrow another
 candidate's trained state or hide behind a passing ordinary hold.
 
+The [experiments by tier report](reports/forge/EXPERIMENTS_BY_TIER.md) lists the
+current task assignments for every view, including required, ranking and
+diagnostic roles, declared budgets, dependencies and tasks unassigned to any
+view. Regenerate it after adding tasks or changing tier placement:
+
+```sh
+python -m experiments.forge experiments-by-tier \
+  --output reports/forge/EXPERIMENTS_BY_TIER.md
+# Inspect one view or print a machine-readable inventory without writing.
+python -m experiments.forge experiments-by-tier --view discriminator_stability
+python -m experiments.forge experiments-by-tier --json
+```
+
+The report reads validated task and view declarations without accessing the
+queue, launching training or regrading saved evidence. It lists assigned tasks;
+use the candidate boards below for attained tiers, measured metrics and costs.
+
 Boards order current rows by attained tier, then name/cohort. Raw metrics and
 cost remain separate; no aggregate metric ranking is declared. Filter whole rows
 without shrinking their qualification denominator:
