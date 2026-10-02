@@ -44,6 +44,26 @@ The [coordinator contract](../../../docs/forge-policy-family-search.md)
 describes full horizons, original gates, first acquisition and uninterrupted
 hold, early stops, exact receipt verification and cost accounting.
 
+That first grid concluded with no fully qualified configuration. Each family
+has one smoke PASS, three configurations with numerical FAIL, and one original
+image PASS that acquired too late for the study's five hold checks. No quality
+case was reached. Atlas and E22 produced identical numerical results on these
+small-population reference hosts; the distinct large-population Atlas backend
+remains untested by this sweep. Failure is a property of these bound settings
+and hosts, rather than proof that either family cannot represent the targets.
+The [checked first-grid archive](policy-round1-archive.json) retains all ten
+complete original runs, including late original passes, with 268.791232 paid
+seconds and their exact executed source.
+
+The [second specification](policy-search-round2.json) tests the actual public
+preset LR .00425 and half that rate .002125, crossed with the same prior rates
+1 and 2. It changes no original gate, horizon, host or protocol seed. This
+stabilization hypothesis follows the first grid's image-fidelity, projected
+shape and retention failures. No old failed knob pair is repeated. Its new
+source cohort records PR252 ownership integration and stronger archive guards;
+the public trainer, cases and capacity proof bindings remain unchanged. Old
+trained passes cannot fill this new cohort's denominator.
+
 The [joined capacity card](policy-representation.json) contains all sixteen
 family/case witnesses. Every record binds the current case, preset, sampler,
 source files, complete zero-update CPU public checkpoint and observed arrays.
@@ -92,6 +112,11 @@ configuration and 65,280 for the complete matrix; those figures do not imply
 that the round may exceed its actual paid cap. Unused reservation returns to
 the family after measured completion. Remaining budget must cover the entire
 next task allowance before admission.
+
+After debiting the completed first grid, the second grid can spend at most
+10,525.043357 further paid seconds: Atlas 5,256.986966 and E22 5,268.056391.
+The original setup, first grid and second grid together stay within the same
+10,800-second cap. A fresh study ID or source commit grants no extra budget.
 
 Root admits at most one serial experiment worker per GPU, with at least
 12 GiB free and one Torch/BLAS CPU thread. GPU0 remains excluded while the

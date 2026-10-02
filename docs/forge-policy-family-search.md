@@ -6,7 +6,10 @@ qualification, all-toy winner, calibrated default adoption or speed winner.
 Historical Atlas19 results remain their original evidence; they are not rerun or
 pooled into this study.
 
-The finite grid changes `lr` (0.006375 or 0.0085) and `prior_lr_mult` (1 or 2).
+Each source cohort freezes one finite grid: the first used `lr` .006375 or
+.0085; the linked second uses the public preset rate .00425 or half that rate
+.002125. Both cross those rates with `prior_lr_mult` 1 or 2. These are the only
+accepted profiles; a different hypothesis needs an explicit reviewed revision.
 Each of the four configurations per family uses the same two knobs on every
 required case. The original host architecture, prior/init, data law, batch,
 evaluation draw count, scoring cadence and full horizon remain unchanged.
@@ -61,6 +64,15 @@ OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m benchmarks.toy_audit.api_family_se
   plan reports/forge/family-winner-round1/policy-search.json --output /tmp/policy-plan.json
 ```
 
+The next distinct specification is
+[`policy-search-round2.json`](../reports/forge/family-winner-round1/policy-search-round2.json).
+Its baseline/half-rate hypothesis follows measured higher-rate smoke failures;
+it repeats no failed configuration. Use that specification and a new output
+directory for its own plan and execution. Its 10,525.043357 seconds are the
+original 10,800-second allowance less the original setup and completed first
+grid, rather than a fresh allowance. The linked parent receipt and exact
+per-family debits stay in the specification. Source cohorts remain separate.
+
 After one common code/spec/capacity freeze, the coordinator can admit one serial
 family lane per visible GPU. Each lane must use a separate archive and fixed
 runtime/device model. The exact child command uses the existing `api_run` public
@@ -94,7 +106,9 @@ and subtracting its setup cost from the total remaining paid allowance.
 Unknown interruption cost is conservatively charged at its reservation ceiling;
 `measured_paid_seconds` reports only measured child execution separately.
 Metric/sample/checkpoint/source/recipe/runtime/exit consistency is rechecked
-before granting qualification or combining archives.
+before granting qualification or combining archives. Every completed original
+receipt is rechecked, including an original PASS whose additional study hold
+is INCOMPLETE. Saved paid cost cannot be below its bound acquisition time.
 
 ```sh
 python -m benchmarks.toy_audit.api_family_search combine \

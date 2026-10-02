@@ -27,6 +27,7 @@ from . import api_contract as contract, api_run, api_publish
 SCHEMA = "particlegan_policy_family_search_v1"
 FAMILIES = ("atlas", "e22")
 TUNING_FIELDS = {"lr", "prior_lr_mult"}
+LR_PROFILES = ((.006375, .0085), (.002125, .00425))
 DEFAULT_CASES = (
     ("image-develop-img_intensity2-source-transpose12", 1),
     ("api-vector-two-broad", 1),
@@ -99,14 +100,25 @@ def _source(cases):
     return {"commit": commit, "files_sha256": _manifest(paths)}
 
 
+def _validated_grid(spec):
+    grid = spec.get("grid")
+    if (not isinstance(grid, dict) or set(grid) != TUNING_FIELDS
+            or any(not isinstance(grid[key], list) or len(grid[key]) != 2
+                   or any(isinstance(value, bool) or not isinstance(value, (int, float))
+                          or not math.isfinite(value) for value in grid[key])
+                   or len(set(grid[key])) != 2 for key in TUNING_FIELDS)
+            or tuple(grid["lr"]) not in LR_PROFILES or grid["prior_lr_mult"] != [1., 2.]):
+        raise ValueError("requires one frozen two-LR/two-prior-rate grid profile")
+    return grid
+
+
 def validate_spec(spec, cases):
     """Freeze all candidates, denominators, timeouts and study-only hold rules."""
     if spec.get("schema") != SCHEMA or not isinstance(spec.get("id"), str) or not contract.CASE_ID.fullmatch(spec["id"]):
         raise ValueError("invalid policy-family search schema/id")
     if spec.get("families") != list(FAMILIES) or spec.get("seed") != 24002:
         raise ValueError("this round requires declared atlas/e22 families and the unchanged seed24002")
-    if spec.get("grid") != {"lr": [.006375, .0085], "prior_lr_mult": [1., 2.]}:
-        raise ValueError("this round requires the preregistered four substantive shared knob configurations")
+    _validated_grid(spec)
     assignments = spec.get("cases", [])
     if [(item.get("id"), item.get("tier")) for item in assignments] != list(DEFAULT_CASES):
         raise ValueError("required case order/tiers differ from the frozen two-smoke/six-quality suite")
@@ -414,9 +426,12 @@ def verify_case(path, case, family, knobs, source, *, returncode, runtime=None, 
 
 def select_results(packet):
     trials = packet["trials"]
+    grid = _validated_grid(packet["spec"])
+    if packet["spec"].get("families") != list(FAMILIES):
+        raise ValueError("both declared families must remain in the selection denominator")
     expected = [(case_id, tier) for case_id, tier in DEFAULT_CASES]
     expected_trials = {family + "--" + digest({"family": family, "overrides": {"lr": lr, "prior_lr_mult": rate}})
-                       for family, lr, rate in product(FAMILIES, [.006375, .0085], [1., 2.])}
+                       for family, lr, rate in product(FAMILIES, grid["lr"], grid["prior_lr_mult"])}
     if len(trials) != 8 or {trial["id"] for trial in trials} != expected_trials:
         raise ValueError("every declared configuration must remain in the selection denominator")
     for trial in trials:
@@ -481,7 +496,7 @@ def _verify_costs(packet):
 
 
 def _recertify_archive(packet):
-    """Verify durable complete receipts before trusting any saved PASS/FAIL."""
+    """Verify every retained complete receipt, including study-INCOMPLETE."""
     cases = contract.discover()
     validate_spec(packet["spec"], cases)
     selected = {item["id"]: cases[item["id"]] for item in packet["spec"]["cases"]}
@@ -510,7 +525,8 @@ def _recertify_archive(packet):
                 raise ValueError("a family archive contains another family's execution")
             continue
         for row in trial["cases"]:
-            if row["status"] not in {"PASS", "FAIL"}:
+            if (row["status"] not in {"PASS", "FAIL"} and not row.get("full_protocol_complete")
+                    and not row.get("receipt_path") and row.get("original_gate") != "PASS"):
                 continue
             receipt_path = Path(row.get("receipt_path", ""))
             if not receipt_path.is_file() or api_run.file_hash(receipt_path) != row.get("receipt_sha256"):

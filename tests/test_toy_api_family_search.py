@@ -47,12 +47,14 @@ def planned(tmp_path, cases, monkeypatch):
 
 @pytest.mark.parametrize("family", ["atlas", "e22"])
 @pytest.mark.parametrize("identifier", [search.DEFAULT_CASES[0][0], "api-vector-two-broad"])
-def test_actual_public_recipe_knobs_applied_before_optimizer_and_updated(cases, family, identifier):
-    knobs = {"lr": .006375, "prior_lr_mult": 1.}
+@pytest.mark.parametrize("knobs", [{"lr": .006375, "prior_lr_mult": 1.},
+                                   {"lr": .002125, "prior_lr_mult": 1.},
+                                   {"lr": .00425, "prior_lr_mult": 2.}])
+def test_actual_public_recipe_knobs_applied_before_optimizer_and_updated(cases, family, identifier, knobs):
     fixture = api_contract.build(cases[identifier], device="cpu", recipe_name=family,
                                  max_steps=2, recipe_overrides=knobs)
     assert isinstance(fixture.recipe, Recipe)
-    assert fixture.recipe.lr == knobs["lr"] and fixture.recipe.prior_lr_mult == 1.
+    assert fixture.recipe.lr == knobs["lr"] and fixture.recipe.prior_lr_mult == knobs["prior_lr_mult"]
     assert api_run.json_value(fixture.recipe.to_dict()) == search.resolved_recipe(cases[identifier], family, knobs)
     assert fixture.trainer.opt_g.param_groups[0]["lr"] == knobs["lr"]
     before = [parameter.detach().clone() for parameter in fixture.trainer.G.parameters()]
@@ -146,6 +148,36 @@ def test_all_configs_and_full_denominator_retained_no_speed_winner(tmp_path, cas
     assert result["outcome"] == "scoped_fully_qualified"
     assert len(result["fully_qualified_ids"]) == 2 and result["speed_winner"] is None
     assert result["required_cases_per_config"] == 8 and result["default_adoption"] is False
+
+
+@pytest.mark.parametrize("learning_rates", [[.006375, .0085], [.002125, .00425]])
+def test_two_frozen_grid_profiles_have_distinct_complete_config_denominators(tmp_path, cases, monkeypatch, learning_rates):
+    spec = spec_for(tmp_path)
+    spec["grid"]["lr"] = learning_rates
+    monkeypatch.setattr(search, "_proofs", lambda spec, selected: {
+        (family, name): {"status": "SUPPORTED", "reason": None}
+        for family in search.FAMILIES for name in selected})
+    packet = search.plan_study(spec, cases=cases)
+    assert len(packet["trials"]) == 8
+    assert {(trial["recipe_overrides"]["lr"], trial["recipe_overrides"]["prior_lr_mult"])
+            for trial in packet["trials"]} == {(lr, rate) for lr in learning_rates for rate in (1., 2.)}
+    assert all(len(trial["cases"]) == 8 for trial in packet["trials"])
+    assert search.select_results(packet)["outcome"] == "pending"
+    packet["spec"]["grid"]["lr"] = [.002125, .00425] if learning_rates[0] == .006375 else [.006375, .0085]
+    with pytest.raises(ValueError, match="configuration"):
+        search.select_results(packet)  # Old IDs cannot fill a different grid.
+
+
+@pytest.mark.parametrize("grid", [{"lr": [.00425, .00425], "prior_lr_mult": [1., 2.]},
+                                  {"lr": [.002125, .006375], "prior_lr_mult": [1., 2.]},
+                                  {"lr": [.002125, .00425], "prior_lr_mult": [1., 1.]},
+                                  {"lr": [.002125, .00425], "prior_lr_mult": [True, 2.]},
+                                  {"lr": [.002125, float("nan")], "prior_lr_mult": [1., 2.]}])
+def test_custom_duplicate_or_malformed_grid_cannot_change_search_scope(tmp_path, cases, grid):
+    spec = spec_for(tmp_path)
+    spec["grid"] = grid
+    with pytest.raises(ValueError, match="grid"):
+        search.validate_spec(spec, cases)
 
 
 @pytest.mark.parametrize("mutation", ["drop_config", "drop_case", "duplicate_case", "pass_unknown"])
@@ -337,11 +369,11 @@ def test_interrupted_paid_attempt_is_not_automatically_reexecuted(tmp_path, case
 class PublicTimedFixture:
     """Real public optimizer updates; finite output is a software-only gate."""
     api_components = ("GANTrainer", "Recipe")
-    def __init__(self, clock=None):
+    def __init__(self, clock=None, max_steps=12):
         self.recipe = get_recipe("atlas", z_dim=2, num_particles=16, batch_size=16,
                                  lr=.006375, prior_lr_mult=1.)
         critic = nn.Sequential(nn.Linear(2, 8), nn.LeakyReLU(.2), nn.Linear(8, 1))
-        self.trainer = GANTrainer(self.recipe, nn.Linear(2, 2), critic, seed=7, max_steps=12)
+        self.trainer = GANTrainer(self.recipe, nn.Linear(2, 2), critic, seed=7, max_steps=max_steps)
         self.data = torch.Generator().manual_seed(9)
         self.clock = clock
     def step(self):
@@ -619,4 +651,51 @@ def test_coherent_zeroed_costs_still_cannot_erase_actual_acquisition(tmp_path, c
     search._verify_costs(packet)
     monkeypatch.setattr(search, "verify_case", lambda *args, **kwargs: {"elapsed_seconds": .5})
     with pytest.raises(ValueError, match="acquisition time"):
+        search._recertify_archive(packet)
+
+
+def test_real_original_pass_with_insufficient_hold_still_binds_receipt_and_paid_cost(tmp_path, cases, monkeypatch):
+    # Actual public updates and retained arrays/state/GIF, with a deliberately
+    # narrow finite-output software predicate. Nine primary checks provide an
+    # original PASS but only four checks after the five-check confirmation.
+    identifier = search.DEFAULT_CASES[0][0]
+    case = {**software_case(), "id": identifier, "default_steps": 9, "evaluation_observations": 9,
+            "z_dim": 2, "particles": 16}
+    catalog = {**cases, identifier: case}
+    monkeypatch.setattr(api_contract, "discover", lambda: catalog)
+    fixture = PublicTimedFixture(max_steps=9)
+    monkeypatch.setattr(api_contract, "build", lambda *args, **kwargs: fixture)
+    monkeypatch.setattr(search, "_score", lambda *args: {
+        "metrics": {"finite_fraction": 1.}, "passed": True, "failed_bounds": []})
+    packet = planned(tmp_path, catalog, monkeypatch)
+    trial = next(trial for trial in packet["trials"] if trial["family"] == "atlas"
+                 and trial["recipe_overrides"] == {"lr": .006375, "prior_lr_mult": 1.})
+    path = tmp_path / "actual-complete-short-hold"
+    receipt = api_run.run_case(case, path, recipe_name="atlas", recipe_overrides=trial["recipe_overrides"],
+                               frames=3, wall_cap_seconds=10.)
+    assert receipt["verdict"] == "PASS" and receipt["default_protocol_complete"]
+    verified = search.verify_case(path, case, "atlas", trial["recipe_overrides"], packet["source"],
+                                  returncode=0, runtime=receipt["runtime"], wall_cap_seconds=10., frames=3)
+    assert verified["status"] == verified["study_gate"] == "INCOMPLETE"
+    assert verified["original_gate"] == "PASS" and verified["acquisition_hold"]["hold_checks"] == 4
+    paid = receipt["elapsed_seconds"] + .5
+    row = trial["cases"][0]
+    row.update(verified, paid_wall_seconds=paid, child_returncode=0)
+    trial.update(status="INCOMPLETE", paid_wall_seconds=paid)
+    packet.update(executed_family="atlas", lane_runtime=receipt["runtime"], spent_seconds=paid,
+                  measured_paid_seconds=paid, unmeasured_interrupt_reservation_seconds=0.)
+    search._recertify_archive(packet)  # Real retained-original-PASS receipt; no mocked verifier.
+    erased = deepcopy(packet)
+    erased_trial = next(item for item in erased["trials"] if item["id"] == trial["id"])
+    erased_trial["cases"][0]["paid_wall_seconds"] = erased_trial["paid_wall_seconds"] = 0.
+    erased["spent_seconds"] = erased["measured_paid_seconds"] = 0.
+    search._verify_costs(erased)  # Coherently forged zeros cannot evade the raw time.
+    with pytest.raises(ValueError, match="acquisition time"):
+        search._recertify_archive(erased)
+    row["full_protocol_complete"] = False
+    with pytest.raises(ValueError, match="scientific status"):
+        search._recertify_archive(packet)
+    row["full_protocol_complete"] = True
+    row["receipt_sha256"] = "changed"
+    with pytest.raises(ValueError, match="unchanged bound receipt"):
         search._recertify_archive(packet)
