@@ -87,10 +87,19 @@ def _points(values):
     values = contract.array(values)
     if values.ndim == 1:
         return np.column_stack((np.arange(len(values)), values))
+    if values.ndim > 2 and values.shape[-1] == 2:
+        return values.reshape(-1, 2)
     values = values.reshape(len(values), -1)
     if values.shape[1] == 1:
         return np.column_stack((np.arange(len(values)), values[:, 0]))
     return values[:, :2]
+
+
+def _line_paths(values):
+    values = contract.array(values)
+    if values.ndim > 2 and values.shape[-1] == 2:
+        return list(values.reshape(-1, values.shape[-2], 2))
+    return [_points(values)]
 
 
 def _image_grid(values, limit=8):
@@ -186,14 +195,18 @@ def render_gif(case, records, path, *, full_budget, requested_steps):
                 ax.bar(x + .18, b, width=.36, color="#ce476a", label="API output")
                 ax.legend(fontsize=7)
                 if index in fixed:
-                    ax.set_ylim(0, max(.05, float(fixed[index][1][1]) * 1.08))
+                    ax.set_ylim(min(0, float(fixed[index][0][1]) * 1.08),
+                                max(.05, float(fixed[index][1][1]) * 1.08))
             else:
                 for values, color, label in ((target, "#91a0b0", "Desired/reference"),
                                               (samples, "#ce476a", "API output")):
                     points = _points(values)
                     points = points[np.isfinite(points).all(1)]
                     if view["kind"] == "line":
-                        ax.plot(points[:, 0], points[:, 1], color=color, label=label, linewidth=1.4)
+                        for path_index, actual_path in enumerate(_line_paths(values)[:12]):
+                            actual_path = actual_path[np.isfinite(actual_path).all(1)]
+                            ax.plot(actual_path[:, 0], actual_path[:, 1], color=color,
+                                    label=label if path_index == 0 else None, linewidth=1.1, alpha=.75)
                     else:
                         ax.scatter(points[:, 0], points[:, 1], color=color, label=label,
                                    s=4, alpha=.55, rasterized=True)

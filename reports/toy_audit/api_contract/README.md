@@ -68,7 +68,7 @@ only the compact receipt and final goal GIF.
 
 ## Families
 
-- [Images and actual conditional image queries](images.md)
+- [Images and actual conditional image queries](images/README.md)
 - [Vector distributions, units, support, density and continuation](vectors.md)
 - [Conditional, paired, temporal and causal diagnostic variants](conditional-diagnostics.md)
 

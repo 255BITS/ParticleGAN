@@ -88,3 +88,11 @@ def test_unsupported_api_construction_is_a_recorded_binary_failure(tmp_path, mon
     assert result["completed_updates"] == 0 and result["gif_frames"] == 0
     assert "unsupported conditional policy" in result["failed_bounds"][0]
     assert (tmp_path / "unsupported/receipt.json").is_file()
+
+
+def test_goal_renderer_preserves_whole_independent_episode_paths():
+    episodes = np.array([[[0, 0], [1, 0], [2, 1]], [[10, 10], [11, 10], [12, 9]]])
+    paths = api_run._line_paths(episodes)
+    assert len(paths) == 2
+    assert all(np.array_equal(path, episode) for path, episode in zip(paths, episodes))
+    assert len(api_run._points(episodes)) == 6
