@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope; current qualification is recomputed from compatible receipts.
 
-Records: 242. Inventory coverage: complete. Unresolved import items: 7.
+Records: 243. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -644,6 +644,22 @@ Complete historical component-scale CSV: 26 rows, 6 C0-envelope passes and 20 fa
 **Next:** Use as historical prior art with the archived evaluator and failures visible; obtain compatible full-reference evidence before treating any lineage as a current positive. No new run is authorized by this context import.
 
 [Evidence](../../reports/forge/supplemental/local-mog-envelope-v1/manifest.json) · [Record](records/context-local-mog-envelope-7f6e13219e35.json)
+
+### develop-original-atlas19-and-gate-diagnosis · develop-original-atlas19-and-gate-diagnosis-fae8ce2a6d7f
+
+**Scope:** historical; family_context; revision `fae8ce2a6d7f69f4a12d2b21b62a8444e2ad8a91ffdb1606f1fb53691772ad78`.
+
+Determine whether post-merge gate failures changed the E22/Atlas formulation or instead tested a different candidate, prior, initialization, sampler or runtime.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `original_cohort_replay_and_sampling_contract_audit`.
+
+
+
+Fresh, independently audited original Atlas replay passes 19/19 CUDA gates (3 native, 13 portability, 3 moving) for 48,800 updates and 6,546.906 wall seconds under current contention. All three static native endpoints exactly match the original qualified metrics. Public formulation and Atlas configuration are unchanged. PR #209 had changed native scoring to clean while transfer scoring stayed noisy; explicit sampling-law binding repairs that mixed-cohort checker. All three Atlas clean diagnostics still fail. The first corrected legacy runtime passed 22/22 locally, while the next hosted runtime truly failed 19/22 (grid100, unequal-mass and unequal-width vectors). The completed portable CPU profile also truly fails 19/22: native 3/3, transfer 16/19, with trajectory, mode hold and unequal-width vectors failing unchanged live gates. Timed local/45-minute attempts remain incomplete. Two completed portable native tasks have exact saved-draw equality across Ryzen/EPYC (82 files, 246 arrays); this supplies no aggregate or vendor-causation claim. Software CI passes 2,249 tests and 18 subtests; history/memory checks pass 37 tests. Earlier clean-MoG K3P/BCap/R1-R2/release failures and infeasible profiles remain valid. Neither the replay nor sampling repair qualifies current Forge MoG/clean-live, clock-free behavior or public-default adoption.
+
+**Next:** Keep the integration on develop and the release branch held. Preserve every failed cohort; do not fill or tune the concluded failed profiles. Before main/default adoption, freeze a justified policy-aware qualification matching the intended prior, initialization, sampling law, serving weights and controls. No additional training is launched by this context record.
+
+[Evidence](../../reports/develop-gates-20261001/README.md) · [Record](records/develop-original-atlas19-and-gate-diagnosis-fae8ce2a6d7f.json)
 
 ### cf1-bdpair · history-cf1-bdpair-21ac56b45896
 
@@ -3905,4 +3921,4 @@ Preregistered full7000-update grid100_affine_paired_laws_v1 FAIL; sustained cove
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v1`; input digest `7301db5cdf7dbfc2348b0ef977571d20e416f48119b1299cc4d21fcbbc33e13d`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v1`; input digest `f14aaf6a58ccdccdb2f4dfc98bb7749cfce2604315efe72fdd48311152c2b157`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

@@ -17,6 +17,14 @@ from .problems import sample_real
 class AccuracyEvidence:
     def __init__(self, config: dict, output: Path, eval_steps: list[int], target):
         self.config = config
+        # Forge receipts use named sampling laws; toy100 run configs use a
+        # boolean switch. Preserve both schemas and reject undeclared laws.
+        law = config.get("eval_output_noise", False)
+        if type(law) is str and law in ("clean", "training_noise"):
+            law = law == "training_noise"
+        if type(law) is not bool:
+            raise ValueError("eval_output_noise must be a boolean or a declared sampling law")
+        self.eval_output_noise = law
         self.output = Path(output)
         self.check_steps = eval_steps[-MIN_STABLE_CHECKS:]
         self.target = target[:config["eval_samples"]].detach().cpu().numpy()
@@ -51,7 +59,7 @@ class AccuracyEvidence:
             for model in ("live", "ema"):
                 draws = sample_evaluation(
                     trainer, HOLDOUT_N, ema=model == "ema",
-                    eval_output_noise=config.get("eval_output_noise", False),
+                    eval_output_noise=self.eval_output_noise,
                     generator=generator(HOLDOUT_SEED_OFFSETS["latent"]),
                 )
                 arrays[model] = draws.detach().cpu().numpy()

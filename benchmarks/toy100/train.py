@@ -698,6 +698,11 @@ def train(config: Mapping[str, Any], out_dir: str | Path) -> dict[str, Any]:
     environment = {
         "python": sys.version.split()[0], "torch": torch.__version__,
         "numpy": np.__version__, "platform": platform.platform(),
+        "cpu_capability": torch.backends.cpu.get_cpu_capability(),
+        "cpu_dispatch": {key: os.environ.get(key) for key in (
+            "ATEN_CPU_CAPABILITY", "ONEDNN_MAX_CPU_ISA", "DNNL_MAX_CPU_ISA",
+            "MKL_ENABLE_INSTRUCTIONS", "MKL_CBWR")},
+        "torch_build_sha256": hashlib.sha256(torch.__config__.show().encode()).hexdigest(),
         "device": str(device), "cuda": torch.version.cuda,
         "gpu": torch.cuda.get_device_name(device) if device.type == "cuda" else None,
         "visible_devices": os.environ.get("CUDA_VISIBLE_DEVICES"),

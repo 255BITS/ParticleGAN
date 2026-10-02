@@ -52,7 +52,21 @@ the legacy BCap common-22 CI job from the original Atlas19 qualification.
 PR #209 changed native evaluation to clean samples before integration; the
 old transfer runner retained noisy sampling. Matching training settings cannot
 substitute for matching evaluation laws. Original clean failures remain valid
-in their cohort; only a completed, separately bound replay earns fresh credit.
+in their cohort. The [fresh independent Atlas replay](../develop-gates-20261001/atlas19-replay.json)
+now passes **19/19 original CUDA gates**: three full 7k native gates, 13
+portability gates and three moving gates. All three static native endpoint
+metrics match the original qualification exactly; the public formulation and
+Atlas configuration remain unchanged. This supplies fresh evidence only for the
+original cloud/noisy cohort. All three clean native diagnostics still fail, and
+the earlier [K3P/BCap clean-MoG failures](FORMULATION_COMPARISON_READOUT.md)
+remain valid. None of these original passes fills a current Forge policy cell.
+
+The fully executed portable CPU legacy BCap regression remains **19/22 FAIL**:
+native 3/3 pass, transfer 16/19 pass. Trajectory, mode hold and unequal-width
+vectors fail their unchanged live criteria. Its sampler/source identity repair
+does not turn those outcomes into passes, and its distinct runtime cannot supply
+Atlas or current Forge credit. No further tuning or default adoption follows
+the concluded investigation.
 
 ## Artifact storage
 

@@ -211,8 +211,11 @@ def _manifest_expected(output: Path, names: tuple[str, ...]) -> dict[str, dict] 
     if len(names) == len(problems.PROBLEM_NAMES) and selected != list(problems.PROBLEM_NAMES):
         raise ValueError("run manifest does not cover all declared problems")
     command = declaration.get("command_overrides", {"steps": None, "device": None})
-    if (not isinstance(command, dict) or set(command) != {"steps", "device"}):
+    if (not isinstance(command, dict) or not {"steps", "device"}.issubset(command)
+            or set(command) - {"steps", "device", "eval_output_noise"}):
         raise ValueError("run manifest command overrides are invalid")
+    if "eval_output_noise" in command and type(command["eval_output_noise"]) is not bool:
+        raise ValueError("run manifest eval_output_noise override must be a boolean")
     stored = declaration.get("resolved_problem_configs")
     if not isinstance(stored, dict) or set(stored) != set(problems.PROBLEM_NAMES):
         raise ValueError("run manifest must resolve all three problem configs")
@@ -220,6 +223,8 @@ def _manifest_expected(output: Path, names: tuple[str, ...]) -> dict[str, dict] 
     for name in problems.PROBLEM_NAMES:
         flat = resolve_problem_config(declared, name, steps=command["steps"],
                                       device=command["device"], validate_runtime=False)
+        if "eval_output_noise" in command:
+            flat["eval_output_noise"] = command["eval_output_noise"]
         if stored[name] != flat:
             raise ValueError(f"run manifest resolved config differs for {name}")
         # A CUDA receipt can be audited without CUDA. Only the availability

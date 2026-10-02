@@ -42,7 +42,7 @@ REPORT_FAMILIES = {
     "cifar-particle-ae", "cifar-particle-ddgan", "denoising-toy", "gym",
     "lunar_fast", "mog-autoencoder", "mog-vae", "prior-comparison",
     "readme-100gaussians", "sparse-ucd", "trajectory", "transition", "releases",
-    "atlas-explanation", "e22-animation", "r1-integrations",
+    "atlas-explanation", "e22-animation", "r1-integrations", "develop-gates-20261001",
 }
 BENCHMARK_FAMILIES = {"init_research", "learned_lr", "legacy", "locked_shared",
                       "paired_error_2d", "smart_descent", "toy100", "transfer_suite"}
