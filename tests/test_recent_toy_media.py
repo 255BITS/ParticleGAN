@@ -57,6 +57,9 @@ def film_archive(tmp_path):
             rows = [{"evaluation": evaluations[0]}]
             for step in range(1, 1201):
                 row = {"step": step, "dense_gradient_rows": 128, "loss_g": .7, "loss_d": .7, "penalty": .1}
+                row.update(gradient_energy={"encoder": 1., "table": 1.}, displacement_energy={"encoder": .1, "table": .1},
+                           output_sigma=.125, applied_rates={"generator": {"applied_ratio": 1., "roles": ["generator", "table"]}},
+                           proposed_rates={"generator": [.001, .001]})
                 if step % 100 == 0: row["evaluation"] = evaluations[step // 100]
                 rows.append(row)
             (folder / f"{arm}.jsonl").write_text(''.join(json.dumps(r) + '\n' for r in rows))
@@ -142,7 +145,7 @@ def test_structural_gif_keeps_all_original_bytes_numeric_rows_and_no_learned_gat
         assert artifact["actual_updates"] == list(range(0, 1201, 100))
 
 
-@pytest.mark.parametrize("change", ["partial", "missing_curve", "wrong_owner", "zero_code", "failed_control", "empty_sources", "endpoint", "jacobian_nan"])
+@pytest.mark.parametrize("change", ["partial", "missing_curve", "wrong_owner", "zero_code", "failed_control", "empty_sources", "endpoint", "jacobian_nan", "nan_gradient"])
 def test_partial_or_failed_structural_protocol_cannot_pass_export(tmp_path, monkeypatch, change):
     root, card = film_archive(tmp_path)
     monkeypatch.setattr(media, "load_card", lambda pr: card)
@@ -165,6 +168,11 @@ def test_partial_or_failed_structural_protocol_cannot_pass_export(tmp_path, monk
         path = folder / "protocol.json"
         protocol = json.loads(path.read_text());protocol["source_sha256"] = {}
         save(path, protocol)
+    elif change == "nan_gradient":
+        path = folder / f"{media.PROFILES[0]}.jsonl"
+        rows = [json.loads(line) for line in path.read_text().splitlines()]
+        rows[1]["gradient_energy"]["encoder"] = float("nan")
+        path.write_text(''.join(json.dumps(row) + '\n' for row in rows))
     else:
         path = root / "contracts.xml"
         path.write_text(path.read_text().replace('/>', '><failure/></testcase>', 1))
@@ -280,3 +288,31 @@ def test_fresh_native_manifest_must_match_actual_public_caller_bytes(tmp_path, m
     monkeypatch.setattr(media, "native_manifest", lambda: {"particlegan/recipes.py": "different bytes"})
     with pytest.raises(ValueError, match="package binding"):
         media.film_data(root, card, media.Inputs(), fresh=True)
+
+
+@pytest.mark.parametrize("change,expected", [
+    ("partial", "incomplete FiLM budget"),
+    ("endpoint", "summary endpoint differs"),
+])
+def test_fresh_exit_zero_protocol_still_rejects_partial_budget_or_forged_endpoint(
+        tmp_path, monkeypatch, capsys, change, expected):
+    root, card = film_archive(tmp_path)
+    package = json.loads((root / "width4/protocol.json").read_text())["package_files"]
+    source_oracle = {"scope": "Synthetic current public-caller identity; never training"}
+    monkeypatch.setattr(media, "load_card", lambda pr: card)
+    monkeypatch.setattr(media, "native_manifest", lambda: deepcopy(package))
+    monkeypatch.setattr(media, "active_sources", lambda *args: deepcopy(source_oracle))
+    # This models a caller that wrote its result and exited zero. Fresh evidence
+    # has no immutable old summary hash to mask either numeric/budget guard.
+    monkeypatch.setattr(media, "reproduce", lambda *args: root)
+    save(root / "reproduction.json", {"source": source_oracle})
+    summary = json.loads((root / "width4/summary.json").read_text())
+    result = summary["profiles"][media.PROFILES[2]]
+    if change == "partial": result["completed_steps"] = 1199
+    else: result["live_mse"] = 999.
+    save(root / "width4/summary.json", summary)
+    output = tmp_path / "review"
+    assert media.main(["--pr", "233", "--reproduce", "--input", str(root),
+                       "--output", str(output)]) == 2
+    assert expected in capsys.readouterr().err
+    assert not output.exists()

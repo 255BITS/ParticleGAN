@@ -93,6 +93,18 @@ def native_manifest():
             for path in sorted((ROOT / "particlegan").rglob("*.py"))}
 
 
+def finite_health(value):
+    """Keep categorical owner labels/None; reject nonfinite numeric health."""
+    if isinstance(value, dict):
+        for child in value.values(): finite_health(child)
+    elif isinstance(value, (tuple, list)):
+        for child in value: finite_health(child)
+    elif isinstance(value, (int, float)) and not math.isfinite(value):
+        raise ValueError("nonfinite gradient, displacement, noise or rate health evidence")
+    elif isinstance(value, str) and value in {"NaN", "Infinity", "-Infinity", "inf", "-inf", "nan"}:
+        raise ValueError("nonfinite gradient, displacement, noise or rate health evidence")
+
+
 def film_data(root, card, inputs, fresh=False):
     root = Path(root)
     campaign, readout = None, None
@@ -157,6 +169,9 @@ def film_data(root, card, inputs, fresh=False):
                     or any(r["dense_gradient_rows"] != 128 for r in updates)):
                 raise ValueError("incomplete FiLM budget, dense-bank invariant or observation schedule")
             finite([r[k] for r in updates for k in ("loss_d", "loss_g", "penalty")])
+            for row in updates:
+                for key in ("gradient_energy", "displacement_energy", "output_sigma", "applied_rates", "proposed_rates"):
+                    finite_health(row[key])
             finite([r[k] for r in evaluations for k in ("live_mse", "served_mse")])
             finite([result["live_mse"], result["served_mse"]])
             if any(result[key] != evaluations[-1][key] for key in ("live_mse", "served_mse", "served_source")):
