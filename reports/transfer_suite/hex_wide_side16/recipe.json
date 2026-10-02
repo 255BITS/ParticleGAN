@@ -1,0 +1,1 @@
+{"name": "shared_c6", "overrides": {"lr": 0.00425, "d_lr_mult": 1.0, "prior_lr_mult": 2.0, "betas": [0.0, 0.99], "prior_betas": null, "reg_coeff": 6.0, "reg_kappa": 1.25, "prior_reg": 0.05}}
