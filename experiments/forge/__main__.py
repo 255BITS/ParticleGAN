@@ -48,6 +48,7 @@ def parser():
         c.add_argument("--cuda-model", help="required CUDA model on heterogeneous machines")
         if name == "plan":
             c.add_argument("--all-tiers", action="store_true", help="include full details for tasks outside the requested tier cap")
+            c.add_argument("--show-boundaries", action="store_true", help="include each effective field's task, technique, hyperparameter or protocol owner")
         if name != "plan":
             c.add_argument("--campaign", type=Path, default=Path("configs/forge/campaigns/smoke.json"))
         if name == "run":
@@ -223,7 +224,7 @@ def main(argv=None):
                                execution_backend=args.device or ("cpu" if command == "run" and args.gpus == "cpu" else "cuda"),
                                cuda_model=args.cuda_model)
         if command == "plan":
-            summary = plan_summary(request, queue.inspect())
+            summary = plan_summary(request, queue.inspect(), include_ownership=args.show_boundaries)
             if not args.all_tiers:
                 summary["deferred_tasks"] = [t["task"] for t in summary["tasks"] if not t["permitted_by_tier_cap"]]
                 summary["tasks"] = [t for t in summary["tasks"] if t["permitted_by_tier_cap"]]

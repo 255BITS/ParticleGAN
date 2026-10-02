@@ -7,6 +7,8 @@
     "source-family-15"
   ],
   "execution": {
+    "initializer": "deterministic_orthogonal",
+    "execution_path": "public_components",
     "host": "five_word_joint",
     "steps": 20001,
     "original_schedule_horizon": 20000,
@@ -110,10 +112,15 @@
       "exact_optimizer_updates": true
     },
     "sources": {
-      "benchmarks/toy_audit/api_images.py": "bedcb88841ef5cae8c9bfa60364bfacebbef29dea640036c1e30c4593ae71a3f",
+      "benchmarks/toy_audit/api_images.py": "243190aba0c5870668a63289b771dc6f784c9460b890bc6a77e12cc2796d7184",
       "benchmarks/toy_audit/definition_quality.py": "42d835ab7a0937a6c3759dd719691c721663b7857cb990405253e90f7fbd4cc9",
       "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97",
       "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8"
+    },
+    "evaluator_revision": {
+      "id": "joint-word-task-source-binding-v2",
+      "previous_api_images_sha256": "bedcb88841ef5cae8c9bfa60364bfacebbef29dea640036c1e30c4593ae71a3f",
+      "change": "Bind the current public fixture after bounded Recipe configuration API additions; retain the declared numerical bounds, task geometry and budget. Earlier evidence keeps its original source binding."
     }
   },
   "resources": {

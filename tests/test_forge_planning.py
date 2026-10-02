@@ -20,7 +20,7 @@ def checkout(tmp_path):
     assignments = []
     for index in (1, 2, 3):
         task = {"schema_version": 1, "id": f"t{index}", "adapter": "transfer_behavior",
-                "execution": {"steps": 80, "prior": defaults["prior"], "host": "mode_hold"},
+                "execution": {"initializer": "deterministic_orthogonal", "steps": 80, "prior": defaults["prior"], "host": "mode_hold"},
                 "evaluation": {"kind": "transfer_sustained", "thresholds": [["score", ">=", 1]],
                                "sampling_contract_version": 1, "sampling_law": "public_prior_without_output_noise",
                                "eval_output_noise": "clean"},
@@ -44,6 +44,53 @@ def test_plan_does_not_write_and_honors_tier_cap(checkout):
     assert summary["worst_case_seconds"] == 10
     assert [r["permitted_by_tier_cap"] for r in summary["tasks"]] == [True, False, False]
     assert request["rng"]["bindings"]
+
+
+def test_planning_exposes_task_bound_values_and_protocol_ownership(checkout):
+    request = resolve_idea(checkout, "base")
+    summary = plan_summary(request, include_ownership=True)
+    ownership = summary["tasks"][0]["field_ownership"]
+    assert ownership["recipe_fields"]["total_steps"]["value"] == 80
+    assert ownership["recipe_fields"]["total_steps"]["owner"] == "task"
+    assert ownership["recipe_fields"]["batch_size"]["value"] == 128
+    assert ownership["recipe_fields"]["batch_size"]["owner"] == "task"
+    assert ownership["recipe_fields"]["lr"]["owner"] == "hyperparameter"
+    assert ownership["protocol"]["seed"]["owner"] == "protocol"
+    assert ownership["task_contract"]["initialization"]["value"] == "deterministic_orthogonal"
+    assert request["jobs"][0]["science"]["task_initializers"] == {"t1": "deterministic_orthogonal"}
+
+
+def test_planner_preserves_experiment_priors_over_candidate_reference(checkout):
+    idea_path = checkout / "configs/forge/ideas/base.json"
+    idea = read_json(idea_path)
+    idea["prior"] = {"sigma": .1}
+    atomic_json(idea_path, idea)
+    particle_path = checkout / "configs/forge/tasks/t2.json"
+    particle = read_json(particle_path)
+    particle["execution"]["prior"] = {"kind": "particle_cloud", "sigma": 0,
+        "standardize": False, "learnable": True, "exception_reason": "Explicit cloud fixture"}
+    particle["requires_capabilities"].append("particle_cloud")
+    atomic_json(particle_path, particle)
+    request = resolve_idea(checkout, "base")
+    assert request["candidate"]["prior"]["sigma"] == .1
+    for name in ("t1", "t2", "t3"):
+        declaration = read_json(checkout / f"configs/forge/tasks/{name}.json")
+        assert request["tasks"][name]["execution"]["prior"] == declaration["execution"]["prior"]
+        assert request["tasks"][name]["preflight_blockers"] == []
+
+
+def test_changing_task_prior_changes_its_job_without_changing_other_experiments(checkout):
+    old = resolve_idea(checkout, "base")
+    path = checkout / "configs/forge/tasks/t1.json"
+    value = read_json(path)
+    value["execution"]["prior"]["sigma"] = .05
+    atomic_json(path, value)
+    new = resolve_idea(checkout, "base")
+    assert old["candidate_revision"] == new["candidate_revision"]
+    keys = lambda r: {j["task_id"]: j["compatibility_key"] for j in r["jobs"]}
+    before, after = keys(old), keys(new)
+    assert before["t1"] != after["t1"]
+    assert before["t2"] == after["t2"] and before["t3"] == after["t3"]
 
 
 def test_retiering_reuses_keys_but_freezes_old_policy(checkout):

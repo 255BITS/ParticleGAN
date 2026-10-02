@@ -328,9 +328,15 @@ def test_committed_cohorts_rebuild_every_scientific_row_in_a_checkout_without_ra
         for row in snapshot["rows"]:
             if row["candidate_id"] not in entry["candidates"]:
                 continue
+            # A completion time registers the measured runtime. An all-backend
+            # snapshot can also retain unmeasured placeholders for that same
+            # candidate; those are archived context, not another registration.
+            recorded_at = entry["candidates"][row["candidate_id"]]
+            if isinstance(recorded_at, str) and not row.get("attempt_ids"):
+                continue
             registered_rows.append(row)
             key = row["candidate_id"], row["runtime_cohort"]["execution_backend"]
-            rank = entry["candidates"][row["candidate_id"]] or ""
+            rank = recorded_at or ""
             if key not in expected or rank > expected[key][0]:
                 expected[key] = rank, row
     # This fixture isolates cached reconstruction; separate tests exercise new

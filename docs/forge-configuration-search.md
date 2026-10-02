@@ -14,8 +14,9 @@ Its convergence timing and speed objective are future additions; the implemented
 search behavior is described below.
 
 [`trainer-families.json`](../configs/forge/trainer-families.json) declares family
-membership and a canonical fallback. Distinct mechanisms, including structural
-ablations, have explicit families. The older matched R1/R2 penalty swap and the
+membership and a canonical fallback. Families describe presentation lineage;
+each new search also records its actual public technique signature. Distinct
+mechanisms, including structural ablations, have explicit families. The older matched R1/R2 penalty swap and the
 Modern GAN recipe belong to the same R1/R2 family, but their historical source
 cohorts remain separate evidence. The canonical fallback is an explicit choice,
 not a claim that incomparable historical configurations have been ranked.
@@ -31,6 +32,31 @@ Coupled settings such as two endpoints of a penalty schedule belong in one
 dimension. Trials inherit the same architecture, prior, initialization, named
 random streams, task horizons and sampling law. Seeds and task definitions are
 not search parameters.
+
+The [field registry](../experiments/forge/boundaries.py) declares ownership and
+the conservative finite search whitelist. Search resolves the complete base
+and trial recipes and rejects a change that enables or disables a mechanism:
+zero penalty coefficients at either schedule endpoint, optional cosine
+schedules, optimizer moment activation, AMSGrad, prior regularization, and zero
+terminal learning rates are structural boundaries. Positive strengths and timing
+can vary within the same signature. A structural ablation needs its own idea;
+a family label cannot turn it into a hyperparameter trial.
+Positive LR floors, including a constant floor of one, remain settings within
+the same always-declared schedule path.
+Ordinary planning of a configuration card applies the same parent technique,
+fixed-law and whitelist checks, even when its content hash is internally valid.
+
+Search also rejects an axis that is inactive or task-owned on every declared
+tuning task. For example, a coefficient annealing fraction has no effect when
+its schedule is absent, and fixed R1/R2 does not consume `reg_kappa`. Behavioral
+hosts own their auxiliary `prior_reg` objective; scalar public trainers retain
+the candidate's value. A mixed study can tune that scalar value only when one
+of its tuning tasks actually consumes it. Task bindings use the same pure
+resolver as execution, without constructing or training models.
+
+Technique signatures are additional provenance in newly planned studies.
+Existing configuration hashes, saved studies, qualification results and
+historical family/cohort distinctions retain their original identity.
 
 The initial [R1/R2 search](../configs/forge/searches/r1r2-modern-toy-v1.json)
 tests four substantive toy-host adaptations of the existing Modern GAN recipe:

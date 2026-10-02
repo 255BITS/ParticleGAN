@@ -10,6 +10,7 @@ from urllib.parse import quote
 
 from .contracts import atomic_json, atomic_text, file_hash, read_json, stable_hash
 from .knowledge import leaderboard_path
+from .priors import PRIOR_CODE_PATHS, task_prior
 from .research_artifacts import build_artifacts
 from .views import load_tasks, load_view
 
@@ -44,6 +45,9 @@ def build_report(root: Path, view_id: str | None = None) -> dict:
             "id": name, "source": task_paths[name], "adapter": task["adapter"],
             "guide_id": execution.get("host") or execution.get("problem") or name,
             "evaluation_kind": task["evaluation"]["kind"],
+            "prior": task_prior(task),
+            "prior_code_path": PRIOR_CODE_PATHS[execution["prior"]["kind"]],
+            "prior_applicability": execution.get("prior_applicability"),
             "steps": execution.get("steps"),
             "incremental_steps": execution.get("incremental_steps"),
             "extension_steps": execution.get("extension_steps"),
@@ -81,6 +85,10 @@ def build_report(root: Path, view_id: str | None = None) -> dict:
     return {
         "schema_version": 1, "task_count": len(tasks), "assigned_task_count": len(assigned),
         "view_count": len(views), "views": result_views,
+        "prior_counts": {kind: sum(task["execution"]["prior"]["kind"] == kind for task in tasks.values())
+                         for kind in PRIOR_CODE_PATHS},
+        "nonsampled_prior_count": sum(task["execution"].get("prior_applicability") == "not_sampled"
+                                     for task in tasks.values()),
         "unassigned_tasks": [task_row(name) for name in sorted(tasks.keys() - assigned)],
         "task_sources": task_paths,
         "input_hashes": inputs, "input_digest": stable_hash(inputs),
@@ -90,6 +98,19 @@ def build_report(root: Path, view_id: str | None = None) -> dict:
 
 def _cell(value) -> str:
     return "—" if value is None else str(value).replace("|", "\\|").replace("\n", " ")
+
+
+def _prior_cell(prior, applicability=None):
+    """Label the declared/recorded kind, including zero-sigma MoG evidence."""
+    if not prior or prior.get("kind") not in PRIOR_CODE_PATHS:
+        return "unrecorded"
+    fields = []
+    for key in ("sigma", "sigma_rel"):
+        if key in prior:
+            fields.append(f"{key}={prior[key]:g}")
+    if applicability == "not_sampled":
+        fields.append("not sampled")
+    return PRIOR_CODE_PATHS[prior["kind"]] + (" (" + "; ".join(fields) + ")" if fields else "")
 
 
 def render_markdown(report: dict, root: Path, output_path: Path | None = None) -> str:
@@ -113,6 +134,14 @@ def render_markdown(report: dict, root: Path, output_path: Path | None = None) -
         "Required tasks gate progression; ranking and diagnostic tasks retain their declared roles.", "",
         f"Catalog: **{report['task_count']} tasks**; **{report['assigned_task_count']} assigned** to at least one view; "
         f"**{len(report['unassigned_tasks'])} unassigned**. Showing **{len(report['views'])}/{report['view_count']} views**.", "",
+        f"Declared priors across the catalog: **{report['prior_counts']['mog']} MoGParticlePrior**, "
+        f"**{report['prior_counts']['particle_cloud']} ParticlePrior** "
+        f"(including **{report['nonsampled_prior_count']} nonsampled parameter controls**). "
+        "Every experiment defines `execution.prior` explicitly; candidate and API defaults cannot supply it. "
+        "`kind: mog` selects `MoGParticlePrior`; `kind: particle_cloud` selects `ParticlePrior`. "
+        "Sigma alone does not identify the code path. Ordinary Forge MoG tasks require positive sigma; "
+        "archived zero-sigma MoG evidence keeps its recorded kind. "
+        "Task sigma is absolute; API demonstrations may instead record the recipe's relative `sigma_rel`.", "",
         f"Regenerate from the repository root with `{command}`. Add `--json` for machine-readable output "
         "(use a `.json` output path when saving). Regeneration reads declarations and published artifacts and launches no training.", "",
         "Tier 1 is smoke, Tier 2 is quality, and Tier 3 is endurance. "
@@ -162,7 +191,7 @@ def render_markdown(report: dict, root: Path, output_path: Path | None = None) -
 
     def task_table(tasks, assigned=True):
         headers = ["Task"] + (["Importance"] if assigned else [])
-        headers += ["Experiment guide", "Adapter / gate", "Declared steps", "Timeout (s)", "Dependencies / shared execution"]
+        headers += ["Prior code path", "Experiment guide", "Adapter / gate", "Declared steps", "Timeout (s)", "Dependencies / shared execution"]
         table = ["| " + " | ".join(headers) + " |", "| " + " | ".join(["---"] * len(headers)) + " |"]
         for task in tasks:
             steps = _cell(task["steps"])
@@ -180,7 +209,8 @@ def render_markdown(report: dict, root: Path, output_path: Path | None = None) -
                 notes.append("group: " + _cell(task["execution_group"])
                              + (" (uninterrupted)" if task["uninterrupted"] else ""))
             cells = [link(task["id"], task["source"])] + ([_cell(task["importance"])] if assigned else [])
-            cells += [f"[Question, results, GIFs](#experiment-{task['guide_id'].replace('_', '-')})",
+            cells += [_prior_cell(task["prior"], task["prior_applicability"]),
+                      f"[Question, results, GIFs](#experiment-{task['guide_id'].replace('_', '-')})",
                       _cell(task["adapter"]) + " / " + _cell(task["evaluation_kind"]),
                       _cell(steps), _cell(task["timeout_seconds"]), "; ".join(notes) or "—"]
             table.append("| " + " | ".join(cells) + " |")
@@ -239,15 +269,16 @@ def render_markdown(report: dict, root: Path, output_path: Path | None = None) -
         lines += ["</details>", ""]
         if guide["forge_results"]:
             lines += ["Recorded Forge task outcomes (exact saved configuration/source/runtime):", "",
-                      "| Task | Configuration | Recorded outcome | Current declaration | Source / cohort | Evidence |",
-                      "| --- | --- | --- | --- | --- | --- |"]
+                      "| Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |",
+                      "| --- | --- | --- | --- | --- | --- | --- |"]
             for result in guide["forge_results"]:
                 config = link(result["label"], result["config_source"]) if result["config_source"] else _cell(result["candidate_id"])
                 source = result["source_commit"][:12] if result["source_commit"] else "unbound"
                 binding = f"{result['backend']} / {source} / {result['cohort'][:12]}"
                 match = {True: "matches; source remains frozen", False: "CHANGED; earlier contract", None: "unbound"}[result["declaration_match"]]
                 lines.append("| " + " | ".join([
-                    _cell(result["task_id"]), config, _cell(result["status"]), match, _cell(binding),
+                    _cell(result["task_id"]), config, _prior_cell(result["prior"], result["prior_applicability"]),
+                    _cell(result["status"]), match, _cell(binding),
                     link("source-bound receipt index", result["evidence_source"]),
                 ]) + " |")
         else:
@@ -256,8 +287,8 @@ def render_markdown(report: dict, root: Path, output_path: Path | None = None) -
         lines.append("")
         if guide["api_variants"]:
             lines += ["Related public-API demonstrations, with their own recorded contracts:", "",
-                      "| Variant / actual-training GIF | What this variant tests | Recorded result / failed bounds | Recipe / compute / source | Evidence |",
-                      "| --- | --- | --- | --- | --- |"]
+                      "| Variant / actual-training GIF | What this variant tests | Recorded prior code path | Recorded result / failed bounds | Recipe / compute / source | Evidence |",
+                      "| --- | --- | --- | --- | --- | --- |"]
             for variant in guide["api_variants"]:
                 media = link(variant["id"], variant["gif"]) if variant["media_available"] else _cell(variant["id"]) + " (GIF unavailable)"
                 outcome = f"{variant['execution_status']} / {variant['verdict']}"
@@ -273,7 +304,7 @@ def render_markdown(report: dict, root: Path, output_path: Path | None = None) -
                         evidence.append(link(label, variant[field]))
                 lines.append("| " + " | ".join([
                     media, _cell(variant["goal"] + " Scope: " + variant["scope"]),
-                    _cell(outcome), _cell(binding), "; ".join(evidence),
+                    _prior_cell(variant["prior"]), _cell(outcome), _cell(binding), "; ".join(evidence),
                 ]) + " |")
         else:
             lines += ["No related published API training GIF. This task retains its own declared numerical audit."]

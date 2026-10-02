@@ -163,7 +163,7 @@ def test_later_host_correction_and_bounded_proposal_remain_explicit(saved_replay
 def current_request(name):
     prior = {"kind": "mog", "sigma": .025, "standardize": False, "learnable": True}
     tasks = {name: {"schema_version": 1, "id": name, "adapter": "fixture",
-        "execution": {"steps": 24, "prior": prior, "fixture_id": name}, "dependencies": [], "requires_capabilities": [],
+        "execution": {"initializer": "deterministic_orthogonal", "steps": 24, "prior": prior, "fixture_id": name}, "dependencies": [], "requires_capabilities": [],
         "evaluation": {"kind": "transfer_sustained", "thresholds": [["score", ">=", 1.]], "scoring_weights": "live"}}
         for name in ("cheap", "quality")}
     return {"candidate": {"id": name, "prior": prior, "recipe_overrides": {"mechanism": name}},

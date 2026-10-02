@@ -3,6 +3,7 @@
   "id": "unipolar",
   "adapter": "transfer_behavior",
   "execution": {
+    "initializer": "deterministic_orthogonal",
     "host": "unipolar",
     "steps": 400,
     "prior": {

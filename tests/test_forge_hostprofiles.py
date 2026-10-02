@@ -46,6 +46,7 @@ def rebind(req):
     for job in req["jobs"]:
         members = job.get("task_ids", [job["task_id"]])
         job["science"].update(candidate_revision=req["candidate_revision"], initializer="deterministic_orthogonal",
+            task_initializers={name: req["tasks"][name]["execution"]["initializer"] for name in members},
             execution={name: task_execution_fingerprint(req["tasks"][name]) for name in members},
             evaluation={name: task_evaluation_fingerprint(req["tasks"][name]) for name in members})
         parent = req["tasks"][job["task_id"]]["execution"].get("continuation_of")
@@ -104,8 +105,20 @@ def test_valid_profile_is_checked_then_queued_without_model_construction(tmp_pat
     assert all(not row["attempts"] for row in queue.inspect()["jobs"].values())
 
 
+def test_frozen_request_preserves_task_mog_width_without_candidate_override(tmp_path):
+    req = prospective(tmp_path)
+    vector = req["tasks"]["vector_unequal_mass_published"]
+    vector["execution"]["prior"]["sigma"] = .1
+    rebind(req)
+    assert req["candidate"]["prior"]["sigma"] == .025
+    validate_request_host_profiles(req)
+    queue = Queue(tmp_path / "queue", grader=grade)
+    assert queue.submit(req, campaign())["status"] == "queued"
+    assert req["tasks"][vector["id"]]["execution"]["prior"]["sigma"] == .1
+
+
 @pytest.mark.parametrize("mutation", ["image_width", "vector_card", "profile_version", "missing_profile",
-    "prior_mismatch", "invalid_prior", "resource_conflict", "unknown_recipe", "wrong_adapter", "missing_task"])
+    "missing_prior", "invalid_prior", "resource_conflict", "unknown_recipe", "wrong_adapter", "missing_task"])
 def test_semantic_forgery_blocks_even_with_rehashed_jobs_and_empty_cached_blockers(tmp_path, mutation):
     req = prospective(tmp_path)
     image, vector = req["tasks"].values()
@@ -113,7 +126,7 @@ def test_semantic_forgery_blocks_even_with_rehashed_jobs_and_empty_cached_blocke
     elif mutation == "vector_card": vector["execution"]["host_definition"]["research_discriminator"]["softplus_beta"] = 1.
     elif mutation == "profile_version": vector["execution"]["vector_profile"]["revision"] = 2
     elif mutation == "missing_profile": vector["execution"].pop("vector_profile")
-    elif mutation == "prior_mismatch": vector["execution"]["prior"]["sigma"] = .1
+    elif mutation == "missing_prior": vector["execution"].pop("prior")
     elif mutation == "invalid_prior":
         req["candidate"]["prior"]["sigma"] = 0
         vector["execution"]["prior"]["sigma"] = 0

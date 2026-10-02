@@ -3,6 +3,7 @@
   "id": "vector_spiral",
   "adapter": "transfer_vector",
   "execution": {
+    "initializer": "deterministic_orthogonal",
     "host": "vector_spiral",
     "steps": 1600,
     "prior": {

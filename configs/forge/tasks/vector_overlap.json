@@ -3,6 +3,7 @@
   "id": "vector_overlap",
   "adapter": "transfer_vector",
   "execution": {
+    "initializer": "deterministic_orthogonal",
     "host": "vector_overlap",
     "steps": 1200,
     "prior": {

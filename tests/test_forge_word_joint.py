@@ -11,7 +11,7 @@ from benchmarks.toy_audit.api_images import WordFixture, word_bank, score_words,
 from experiments.forge.adapters import adapter_preflight
 from experiments.forge.contracts import read_json
 from experiments.forge.views import grade_result, load_tasks, load_view
-from experiments.forge.word_adapter import run_word
+from experiments.forge.word_adapter import run_word, word_context
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -48,7 +48,7 @@ def test_word_scorer_detects_wrong_pairs_despite_perfect_generated_marginal():
     (lambda c: c["recipe_overrides"].update(encoder_mode="ae"), "particle encoders"),
     (lambda c: c["recipe_overrides"].update(batch_size=128), "frozen host resource"),
     (lambda c: c["recipe_overrides"].update(prior_kind="mog"), "explicit prior"),
-    (lambda c: c.update(initializer="supplied"), "named deterministic"),
+    (lambda c: c.update(initializer="supplied"), "candidate initializer conflicts"),
 ])
 def test_incompatible_candidates_block_before_training(mutate, reason):
     frozen, task = request()
@@ -69,6 +69,52 @@ def test_task_bound_geometry_prior_and_source_are_checked():
         assert adapter_preflight(altered, frozen["candidate"], root=ROOT)
 
 
+def test_word_context_uses_the_same_task_owned_resources_initializer_and_receipt_as_planning():
+    from experiments.forge.api import task_formulation_context, task_recipe_resources
+    frozen, task = request()
+    assert task["execution"]["initializer"] == "deterministic_orthogonal"
+    assert task["execution"]["execution_path"] == "public_components"
+    assert task_recipe_resources(task) == {"num_particles": 5, "z_dim": 2, "batch_size": 256}
+    planned = task_formulation_context(frozen["candidate"], task, frozen["protocol"], device="cpu")
+    bound = word_context(frozen, task, "cpu", root=ROOT)
+    assert bound.receipt() == planned.receipt()
+    receipt = bound.receipt()["field_ownership"]
+    assert receipt["task_contract"]["initialization"]["owner"] == "task"
+    assert receipt["task_contract"]["initialization"]["value"] == "deterministic_orthogonal"
+    for field in ("num_particles", "z_dim", "batch_size"):
+        assert receipt["recipe_fields"][field]["owner"] == "task"
+        assert receipt["recipe_fields"][field]["value"] == task["execution"]["host_definition"]["resources"][field]
+
+
+def test_frozen_word_boundary_checks_sources_and_candidate_overrides_with_cached_preflight(tmp_path):
+    import shutil
+    from experiments.forge.hostprofiles import validate_request_host_profiles
+    from experiments.forge.sources import inspect_source, snapshot_source
+    from test_forge_hostprofiles import bind_candidate, rebind
+    from test_forge_initialization import current_request
+
+    frozen, task = request()
+    current = current_request(tmp_path, [task])
+    checkout = tmp_path / "worktree"
+    for name in task["evaluation"]["sources"]:
+        target = checkout / name
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(ROOT / name, target)
+    manifest = inspect_source(checkout, set(current["source"]["files"]) | set(task["evaluation"]["sources"]))
+    manifest["snapshot_path"] = str(snapshot_source(checkout, tmp_path / "word-source-queue", manifest))
+    current["source"] = manifest
+    current["candidate"] = {**deepcopy(frozen["candidate"]), "prior": current["candidate"]["prior"]}
+    bind_candidate(current)
+    rebind(current)
+    validate_request_host_profiles(current)
+    assert not current["tasks"][task["id"]]["preflight_blockers"]
+    current["candidate"]["recipe_overrides"]["batch_size"] = 128
+    bind_candidate(current)
+    rebind(current)
+    with pytest.raises(ValueError, match="frozen host resource batch_size"):
+        validate_request_host_profiles(current)
+
+
 def test_joint_api_updates_encoder_and_all_roles_with_isolated_clean_sampling(tmp_path):
     frozen, task = request()
     global_rng = torch.get_rng_state().clone()
@@ -78,6 +124,8 @@ def test_joint_api_updates_encoder_and_all_roles_with_isolated_clean_sampling(tm
     assert raw["prior"]["kind"] == "particle_cloud" and raw["prior"]["sigma"] == 0
     assert raw["recipe"]["total_steps"] == 20000
     assert raw["execution_path"] == "public_components"
+    assert raw["initializer"] == task["execution"]["initializer"]
+    assert raw["field_ownership"]["recipe_fields"]["num_particles"]["value"] == 5
     guards = raw["evidence"]["guards"]
     assert guards["optimizer_updates"] == {"generator": 2, "encoder": 2, "prior": 2, "discriminator": 2}
     assert guards["all_finite"] and guards["hooks_exercised"]

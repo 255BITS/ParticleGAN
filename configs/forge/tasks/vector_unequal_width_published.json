@@ -3,6 +3,7 @@
   "id": "vector_unequal_width_published",
   "adapter": "transfer_vector",
   "execution": {
+    "initializer": "deterministic_orthogonal",
     "host": "vector_unequal_width",
     "steps": 1200,
     "prior": {
