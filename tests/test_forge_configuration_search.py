@@ -56,6 +56,8 @@ def complete(queue, score, *, seconds=2, fabricated_gate=None):
     """A certified frozen-evaluator terminal envelope, no training process."""
     claimed = queue.claim([{"device": "cpu", "slot": 0, "memory_mb": 100}])
     assert claimed is not None
+    if callable(score):
+        score = score(claimed)
     evidence = {"curve": [{"step": math.ceil(i * 80 / 24), "score": score} for i in range(1, 25)],
                 "live": {"score": score},
         "sampling_contract_version": 1, "sampling_law": "public_prior_without_output_noise",
@@ -366,3 +368,109 @@ def test_cli_search_stages_parse_without_extra_protocol_knobs():
         assert parser().parse_args(["search", stage, "study"]).stage == stage
     with pytest.raises(SystemExit):
         parser().parse_args(["search", "run", "study", "--seed", "1"])
+
+
+def test_full_search_advances_every_smoke_survivor_and_keeps_unknowns(checkout, spec):
+    spec["tuning_through_tier"] = 3
+    spec["campaign"].update(budget_seconds=120, candidate_budget_seconds=30)
+    queue = Queue(checkout / "runs", report_root=checkout / "reports/forge")
+    planned = search.enqueue_search(checkout, checkout / "runs", spec, queue=queue)
+    ids = [trial["candidate_id"] for trial in planned["trials"]]
+    observed = []
+    def score(claimed):
+        candidate, task = claimed["request"]["candidate"]["id"], claimed["job"]["task_id"]
+        observed.append((candidate, task))
+        return 0 if (candidate, task) in {(ids[0], "t1"), (ids[1], "t2")} else 1
+    for _ in range(9):
+        complete(queue, score)
+    assert queue.claim([{"device": "cpu", "slot": 0, "memory_mb": 100}]) is None
+    report = search.report_search(checkout, checkout / "runs", spec, queue=queue)
+    assert set(observed) == ({(ids[0], "t1"), (ids[1], "t1"), (ids[1], "t2")} |
+                             {(candidate, task) for candidate in ids[2:] for task in ("t1", "t2", "t3")})
+    assert report["progression"]["smoke_survivor_candidate_ids"] == sorted(ids[1:])
+    assert report["progression"]["full_view_qualified_candidate_ids"] == sorted(ids[2:])
+    assert report["progression"]["outcome"] == "full_winner"
+    assert report["progression"]["full_view_winner_candidate_id"] == ids[2]
+    assert report["selection"] == search.select_configuration(report["trials"], 3)
+    first = report["trials"][0]["qualification"]
+    assert first["required_total"] == 3 and first["required_statuses"] == {"FAIL": 1, "UNKNOWN": 2}
+    assert report["trials"][1]["qualification"]["qualified_tier"] == 1
+    assert report["cost"]["new_paid_wall_seconds"] == 18
+    assert report["speed_selection"]["status"] == "UNAVAILABLE"
+    assert report["speed_selection"]["selected_candidate_id"] is None
+    assert report["default_adoption"] is False
+    assert all(task["evaluator_timing"]["status"] == "UNAVAILABLE"
+               for trial in report["trials"] for task in trial["tasks"])
+
+
+def test_smoke_only_winner_is_not_full_view_qualified(checkout, spec):
+    queue = Queue(checkout / "runs", report_root=checkout / "reports/forge")
+    search.enqueue_search(checkout, checkout / "runs", spec, queue=queue)
+    for _ in range(4):
+        complete(queue, 1)
+    assert queue.claim([{"device": "cpu", "slot": 0, "memory_mb": 100}]) is None
+    report = search.report_search(checkout, checkout / "runs", spec, queue=queue)
+    assert report["selection"]["selection_kind"] == "qualified_winner"
+    assert report["progression"]["outcome"] == "tuning_only_winner"
+    assert report["progression"]["full_view_winner_candidate_id"] is None
+    assert report["progression"]["full_view_qualified_candidate_ids"] == []
+    assert all(trial["qualification"]["required_statuses"] == {"PASS": 1, "UNKNOWN": 2}
+               for trial in report["trials"])
+
+
+def test_qualification_requires_required_prefix_and_retains_blocked_denominator():
+    trial = {"tasks": [{"task": "smoke", "qualification_tier": 1, "importance": "required", "gate_status": "BLOCKED"},
+                       {"task": "quality", "qualification_tier": 2, "importance": "required", "gate_status": "PASS"},
+                       {"task": "hold", "qualification_tier": 3, "importance": "required", "gate_status": "UNKNOWN"},
+                       {"task": "diagnostic", "qualification_tier": 1, "importance": "diagnostic", "gate_status": "PASS"}]}
+    result = search._qualification(trial, 3)
+    assert result["qualified_tier"] == 0
+    assert result["required_total"] == 3
+    assert result["required_statuses"] == {"BLOCKED": 1, "PASS": 1, "UNKNOWN": 1}
+    assert not result["full_view_qualified"] and not result["tuning_qualified"]
+
+
+def test_progression_rejects_dropped_or_duplicate_view_tasks(checkout, spec):
+    report = search.plan_search(checkout, checkout / "runs", spec)
+    report["trials"][0]["tasks"].pop()
+    with pytest.raises(ValueError, match="complete view task denominator"):
+        search._annotate_progression(report)
+    report = search.plan_search(checkout, checkout / "runs", spec)
+    for trial in report["trials"]:
+        trial["tasks"].append(deepcopy(trial["tasks"][0]))
+    with pytest.raises(ValueError, match="complete view task denominator"):
+        search._annotate_progression(report)
+
+
+def test_recorded_suffix_time_is_preserved_without_becoming_acquisition_speed():
+    original = {"confirmed_step": 80, "confirmed_seconds": 1.5, "stable_from_seconds": .9}
+    grade = {"evaluator_result": {"convergence": original}}
+    result = search._evaluator_timing({"evaluation": {"kind": "transfer_sustained"}}, grade)
+    assert result["status"] == "RECORDED_EVALUATOR_ONLY"
+    assert result["original_evaluator_convergence"] == original
+    assert not result["speed_qualified"]
+    assert "terminal passing suffix" in result["semantics"]
+    assert original["confirmed_seconds"] == 1.5
+
+
+@pytest.mark.parametrize("value", [float("nan"), float("inf"), -1, True])
+def test_invalid_recorded_seconds_remain_unavailable_and_json_finite(value):
+    original = {"confirmed_step": 80, "confirmed_seconds": value}
+    result = search._evaluator_timing({"evaluation": {"kind": "transfer_sustained"}},
+                                     {"evaluator_result": {"convergence": original}})
+    assert result["status"] == "UNAVAILABLE" and not result["speed_qualified"]
+    assert result["original_evaluator_convergence"]["confirmed_seconds"] is None
+    assert result["invalid_timing_fields"] == ["confirmed_seconds"]
+    stable_hash(result)
+    assert original["confirmed_seconds"] is value
+
+
+def test_hold_steps_and_native_coverage_time_cannot_supply_joint_quality_seconds():
+    hold = search._evaluator_timing({"evaluation": {"kind": "ring_hold"}},
+                                    {"metrics": {"converged_step": 1400, "hold_budget_complete": True}})
+    assert hold["status"] == "UNAVAILABLE"
+    assert hold["original_evaluator_convergence"]["converged_step"] == 1400
+    native = search._evaluator_timing({"evaluation": {"kind": "native_accuracy"}},
+        {"evaluator_result": {"coverage": {"confirmed_seconds": 3}}})
+    assert native["status"] == "UNAVAILABLE" and not native["speed_qualified"]
+    assert native["original_evaluator_convergence"] == {}

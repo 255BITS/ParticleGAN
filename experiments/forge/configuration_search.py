@@ -11,6 +11,7 @@ from collections import Counter
 from copy import deepcopy
 from dataclasses import asdict, fields
 from itertools import product
+import math
 from pathlib import Path
 
 from particlegan import Recipe
@@ -227,6 +228,100 @@ def _persist(root, summary):
     atomic_json(_report_path(root, summary["study_id"]), summary)
 
 
+def _qualification(trial, through_tier):
+    """Retain the full view denominator independently of the tuning cap."""
+    required = [task for task in trial["tasks"] if task["importance"] == "required"]
+    tuning = [task for task in required if task["qualification_tier"] <= through_tier]
+    tiers, qualified_tier = [], 0
+    advancing = not trial.get("submission_blockers")
+    for tier in sorted({task["qualification_tier"] for task in required}):
+        tasks = [task for task in required if task["qualification_tier"] == tier]
+        counts = dict(sorted(Counter(task["gate_status"] for task in tasks).items()))
+        passed = bool(tasks) and counts.get("PASS", 0) == len(tasks)
+        advancing = advancing and passed and tier == qualified_tier + 1
+        if advancing:
+            qualified_tier = tier
+        tiers.append({"tier": tier, "required_total": len(tasks),
+                      "required_passed": counts.get("PASS", 0), "statuses": counts})
+    tuning_passed = bool(tuning) and not trial.get("submission_blockers") and all(
+        task["gate_status"] == "PASS" for task in tuning)
+    full_passed = bool(required) and not trial.get("submission_blockers") and all(
+        task["gate_status"] == "PASS" for task in required)
+    return {"qualified_tier": qualified_tier, "tuning_qualified": tuning_passed,
+            "full_view_qualified": full_passed and qualified_tier == max(
+                (task["qualification_tier"] for task in required), default=0) and all(
+                task["qualification_tier"] <= through_tier for task in required),
+            "required_total": len(required),
+            "required_passed": sum(task["gate_status"] == "PASS" for task in required),
+            "required_statuses": dict(sorted(Counter(task["gate_status"] for task in required).items())),
+            "tuning_required_total": len(tuning),
+            "tuning_required_passed": sum(task["gate_status"] == "PASS" for task in tuning),
+            "tiers": tiers}
+
+
+def _annotate_progression(summary):
+    """Add reporting without changing the archived PASS-count/hash selector."""
+    trials = summary["trials"]
+    scopes = [sorted((task["task"], task["qualification_tier"], task["importance"])
+                     for task in trial["tasks"]) for trial in trials]
+    if any(scope != scopes[0] for scope in scopes[1:]) or any(
+            len({task[0] for task in scope}) != len(scope) for scope in scopes):
+        raise ValueError("search progression requires the same complete view task denominator for every configuration")
+    for trial in trials:
+        trial["qualification"] = _qualification(trial, summary["tuning_through_tier"])
+    selected = next((trial for trial in trials if trial["candidate_id"] ==
+                     summary["selection"]["selected_candidate_id"]), None)
+    outcome = ("pending" if not summary["selection"]["selection_complete"] else
+               "full_winner" if selected and selected["qualification"]["full_view_qualified"] else
+               "tuning_only_winner" if summary["selection"]["qualified"] else "best_observed")
+    summary["progression"] = {
+        "policy": "every declared configuration advances independently through ordinary prerequisites to the tier cap",
+        "configured_through_tier": summary["tuning_through_tier"],
+        "smoke_survivor_candidate_ids": sorted(trial["candidate_id"] for trial in trials
+            if trial["qualification"]["qualified_tier"] >= 1),
+        "full_view_qualified_candidate_ids": sorted(trial["candidate_id"] for trial in trials
+            if trial["qualification"]["full_view_qualified"]),
+        "outcome": outcome,
+        "full_view_winner_candidate_id": selected["candidate_id"] if outcome == "full_winner" else None,
+        "comparison_complete": summary["selection"]["selection_complete"],
+        "default_adoption": False,
+    }
+    summary["speed_selection"] = {
+        "status": "UNAVAILABLE", "selected_candidate_id": None,
+        "reason": "No frozen comparable first-acquisition timing contract is implemented for this search. "
+                  "Not all required adapters record per-observation seconds; original terminal-suffix "
+                  "or coverage-only times cannot supply full-quality first-acquisition speed.",
+        "wall_time_ranking": False,
+    }
+
+
+def _evaluator_timing(task, grade):
+    """Preserve recorded evaluator semantics; never infer acquisition seconds."""
+    kind = task["evaluation"]["kind"]
+    if kind == "transfer_sustained":
+        original = grade.get("evaluator_result", {}).get("convergence", {})
+        semantics = "complete live curve and terminal passing suffix"
+    elif kind in {"ring_hold", "ring_extension"}:
+        original = grade.get("metrics", {})
+        semantics = "first qualifying dense window followed by uninterrupted hold/extension"
+    else:
+        original = {}
+        semantics = "no first full-quality acquisition timestamp in this evaluator result"
+    original = _compact(original)
+    invalid = [key for key, value in original.items() if key.endswith("seconds") and value is not None
+               and (isinstance(value, bool) or not isinstance(value, (int, float))
+                    or not math.isfinite(value) or value < 0)]
+    for key in invalid:
+        original[key] = None  # Raw values remain in the certified original receipt.
+    seconds = original.get("confirmed_seconds")
+    recorded = (not isinstance(seconds, bool) and isinstance(seconds, (int, float))
+                and math.isfinite(seconds) and seconds >= 0 and not invalid)
+    return {"status": "RECORDED_EVALUATOR_ONLY" if recorded else "UNAVAILABLE",
+            "semantics": semantics, "original_evaluator_convergence": original,
+            "invalid_timing_fields": invalid,
+            "speed_qualified": False}
+
+
 def _prepare(root, queue_root, spec, queue):
     spec = _load_spec(root, spec)
     previous = _check_spec_registration(root, spec)
@@ -293,6 +388,7 @@ def _prepare(root, queue_root, spec, queue):
                "holdout_tasks": [a["task"] for a in requests[0]["view"]["assignments"]
                                  if a["qualification_tier"] > spec["tuning_through_tier"]]}
     summary["selection"] = select_configuration(trials, spec["tuning_through_tier"])
+    _annotate_progression(summary)
     return requests, summary, previous
 
 
@@ -438,7 +534,9 @@ def report_search(root: Path, queue_root: Path, spec, *, queue=None) -> dict:
                 if original:
                     observed[original["attempt_id"]] = original
             result = job.get("result")
-            task.update(gate_status="UNKNOWN", raw_status=None, metrics={}, cost={})
+            task.update(gate_status="UNKNOWN", raw_status=None, metrics={}, cost={},
+                        evaluator_timing={"status": "UNAVAILABLE", "speed_qualified": False,
+                                          "reason": "no currently certified evaluator result"})
             if not result:
                 if task["blockers"] or trial["submission_blockers"]:
                     task["gate_status"] = "BLOCKED"
@@ -459,6 +557,8 @@ def report_search(root: Path, queue_root: Path, spec, *, queue=None) -> dict:
                             cost=deepcopy(row.get("cost", {})),
                             reason=grade.get("reason", row.get("reason")) if valid else "missing or mismatched original receipt certificate",
                             attempt_id=result["attempt_id"])
+                if valid:
+                    task["evaluator_timing"] = _evaluator_timing(entry["request"]["tasks"][task["task"]], grade)
                 trial["attempt_ids"].append(result["attempt_id"])
                 evidence.append({"attempt_id": result["attempt_id"], "result_hash": stable_hash(result),
                                  "valid_receipt": valid})
@@ -484,6 +584,7 @@ def report_search(root: Path, queue_root: Path, spec, *, queue=None) -> dict:
         trial["status"] = ("PASS" if required and statuses == {"PASS"} else
                            next((s for s in ("INVALID", "FAIL", "INCOMPLETE", "BLOCKED") if s in statuses), "UNKNOWN"))
     summary["selection"] = select_configuration(summary["trials"], summary["tuning_through_tier"])
+    _annotate_progression(summary)
     selected = next((t for t in summary["trials"] if t["candidate_id"] == summary["selection"]["selected_candidate_id"]), None)
     if selected:
         selected["selection"] = deepcopy(summary["selection"])
