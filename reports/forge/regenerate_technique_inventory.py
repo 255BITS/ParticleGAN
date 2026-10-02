@@ -471,7 +471,7 @@ def compose(root: Path | str = REPOSITORY_ROOT, *, original_report="reports/forg
             row = deepcopy(original_row)
             row.update(publication_key=key, qualification_reuse=False, qualification_input=False)
             if key == "current" and candidate_id == "r3gan-stacked-training-toy-v1":
-                row["technique"] = "R3GAN paper training recipe (toy adaptation)"
+                row["technique"] = "R3GAN Stacked-MNIST recipe (toy-host adaptation)"
             rows.append(row)
     result = {"schema_version": 1, "reducer_version": "forge-technique-composition-v1",
               "publication_scope": "recorded_cohort_composition", "qualification_reuse": False,

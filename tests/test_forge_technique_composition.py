@@ -96,7 +96,7 @@ def test_composition_preserves_frozen_rows_and_separates_new_source_runtime_and_
     assert originals == {path: path.read_bytes() for path in originals}
     assert not (root / "reports/forge/attempts").exists()
     markdown = Path(first["report"]).read_text()
-    assert "R3GAN paper training recipe (toy adaptation)" in markdown
+    assert "R3GAN Stacked-MNIST recipe (toy-host adaptation)" in markdown
     assert "a" * 12 in markdown and "b" * 12 in markdown
     assert "gpu-old" in markdown and "gpu-new" in markdown
     assert "(original.md)" in markdown and "(current.md)" in markdown

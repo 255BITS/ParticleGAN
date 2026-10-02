@@ -1,0 +1,19 @@
+{
+  "archive": "runs/forge/r3gan-stacked-training-toy-v1/receipts-and-source.tar.gz",
+  "archive_bytes": 1443882,
+  "archive_sha256": "a0446d48bfb7102995e2ab9d3ecddd18022a30e4db3d6359c6c87712d3ac51a8",
+  "attempt_count": 1,
+  "campaign_id": "r3gan-stacked-training-toy-v1",
+  "files": {
+    "reports/forge/attempts/ea66e44192c048eaa97f8595c5e55508/evidence.json": "8616659048ce285994a46368dfcde21d5b854e0a4118a2ee8a265929c9ab1d9e",
+    "reports/forge/attempts/ea66e44192c048eaa97f8595c5e55508/request.json": "2eb0a85d558fd97fd8ec448b690f5cc9455602e4ba1a8c61f435c1664ddd9fd1",
+    "reports/forge/attempts/ea66e44192c048eaa97f8595c5e55508/result.json": "66a91da6155b4f9e08100a550ffa692cb271faa0d806d3f1e8b97bf2da306357"
+  },
+  "full_readouts": {
+    "runs/forge/r3gan-stacked-training-toy-v1/full-readouts/readout-bc440d0469187c9299bd524c.json": "8d9abdda1e5b344d012dc2a6fa17e8c7fcb85b1e02a769ff828b74804881184b"
+  },
+  "restoration": "Obtain exact local archive, verify SHA256, extract from repository root. Original envelopes/artifacts/source/logs remain ignored; keep full readout in runs. Regrade using the recorded source commit and matching runtime/hardware; never substitute compact projections for original evidence.",
+  "schema_version": 1,
+  "source_digest": "8bfb0b738e288fbe9ca2e055539469e52c34b27adeda9901b317d44faf07ea2f",
+  "source_origin_commit": "77a373648e3a7a5f1923015fa2097ec9e0ec877f"
+}

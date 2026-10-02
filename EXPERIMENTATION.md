@@ -292,8 +292,13 @@ python -m experiments.forge board --family image --evidence-quality imported_rec
 python -m experiments.forge board --scope pinned --evidence-quality certified_pinned
 ```
 
-For a technique inventory with one passes/total column per tier, regenerate the
-[technique leaderboard](reports/forge/technique-inventory.md). The roster is
+For a technique inventory with one passes/total column per tier, use the
+[expanded technique leaderboard](reports/forge/technique-inventory-expanded.md).
+It preserves the [original inventory](reports/forge/technique-inventory.md) and
+appends the separately frozen [configurable Modern GAN training baseline](reports/forge/R3GAN_BASELINE_READOUT.md).
+The linked publications retain their source cohorts; composing the display
+launches no training. Each publication lists its independent regrading command.
+The roster is
 discovered from `configs/forge/ideas/*.json`, so adding a declared technique adds
 a row automatically. R1/R2, BCap, K3P and the other public formulations retain
 their actual resolved recipes and separate source/runtime/sampling cohorts.
@@ -309,8 +314,10 @@ python reports/forge/regenerate_technique_inventory.py --device cuda \
 python -m experiments.forge logs --follow --campaign technique-inventory-v1
 ```
 
-The default inventory campaign has explicit reservation ceilings for the whole
-current roster. Inspect the plan before expanding the roster or budgets. Ordinary
+The original default inventory campaign has explicit reservation ceilings for
+its 12-technique roster. New techniques require checking the expanded plan and
+a new immutable campaign ID with adequate budgets. The Modern GAN recipe uses
+its own one-candidate campaign; it does not rerun unchanged techniques. Ordinary
 failures stop later tasks, including remaining tasks in that tier; unsupported
 techniques reserve no training resources. Required denominators remain 3/19/2
 for the current `discriminator_stability` view, including unknown and blocked

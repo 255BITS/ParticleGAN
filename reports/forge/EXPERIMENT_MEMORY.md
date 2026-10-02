@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope; current qualification is recomputed from compatible receipts.
 
-Records: 251. Inventory coverage: complete. Unresolved import items: 7.
+Records: 252. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -3957,6 +3957,22 @@ Frozen v2 smoke remains FAIL (two_pole travel); unused_token_hold and learned-Mo
 
 [Evidence](../../reports/forge/attempts/270c483fe3b94932b7f7edcecd89c872/result.json) · [Record](records/readout-acc70fcaf6cedb9a3772e41e.json)
 
+### r3gan-stacked-training-toy-v1 · readout-bc440d0469187c9299bd524c
+
+**Scope:** current; scientific; revision `724a672468491e40b3f214c3b44b8913b9317266346527139da7a1de750d8d44`.
+
+Transfer the Modern GAN paper's Stacked MNIST training recipe to Forge's fixed toy hosts, distinguishing the complete scheduled Adam/R1/R2 recipe from the prior penalty-only swap.
+
+**Observed:** {'FAIL': 1}; wall seconds 5.347; mechanism `structural`.
+
+
+
+The corrected Modern GAN Stacked MNIST training recipe, adapted to the fixed Forge toy hosts, failed the complete 80-update two_pole movement gate: mean_abs=0.011449367739260197 <0.30; grad_med=0.13321508467197418 <=1 passed. 24 observations, zero passing observations/suffix; actual Adam beta2 0.9 to0.99, gamma1 to0.1, constant LR0.0002,80 penalty applications, no interventions. One CPU attempt cost5.347339480998926 paid seconds. All23 remaining requirements are unknown; no execution error or downstream spending.
+
+**Next:** Stop this exact failed revision. Preserve full denominators and the separate recorded cohorts; no seed repeats,unchanged reruns or downstream gate filling. Before a substantive further test, establish an independently justified and bounded convergence/reference protocol; calibrate the provisional screen before adoption.
+
+[Evidence](../../reports/forge/technique-receipts/ea66e44192c048eaa97f8595c5e55508.json) · [Record](records/readout-bc440d0469187c9299bd524c.json)
+
 ### k3p · readout-c3df7159c90725fdef1cb700
 
 **Scope:** calibration_diagnostic; scientific; revision `ef34dc1682c082151c202c4549af6343fa8b309ac5cf71c8ad29098dc55e77e4`.
@@ -4049,4 +4065,4 @@ This technique failed the full 80-update two_pole smoke gate: {'grad_med': 0.063
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v1`; input digest `ee9aea63ece5bb5ff0b0d48be4940c159bed5d05f6585dee19a0869c29be8cde`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v1`; input digest `ede497ebb5bfa6a4e9c024fc1fbc96a7e5b36a4ae9f4d30a883bb400b8c912ff`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
