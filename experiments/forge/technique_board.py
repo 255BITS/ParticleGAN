@@ -20,6 +20,7 @@ DEFAULT_LABELS = {
     "k3p": "K3P",
     "ka2": "KA2",
     "k3p-r1r2-matched-v1": "R1/R2 standard penalty (matched K3P recipe)",
+    "r3gan-stacked-training-toy-v1": "R3GAN Stacked-MNIST recipe (toy-host adaptation)",
     "k3p-bcap-matched-v1": "BCap (matched K3P recipe)",
     "release07-gan-v3-mog-v1": "GAN v3 release 0.7 (MoG adaptation)",
     "release07-gan-v3-cloud-v1": "GAN v3 release 0.7 (cloud)",
