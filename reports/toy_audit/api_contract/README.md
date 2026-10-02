@@ -54,8 +54,10 @@ python -m benchmarks.toy_audit.api_run --case CASE_ID --steps 16 \
 
 The short run renders genuine target/output states and reports the instantaneous
 numeric gate. It cannot pass the default-budget test. The full verdict requires
-the declared training budget and evaluation sample count plus five terminal
-post-update observations passing the numerical gate. Exceptions, NaNs and
+the declared training budget and evaluation sample count plus the declared
+terminal observations passing the numerical gate (five for learned-quality
+tasks; individual causal/geometry units declare their own observation count).
+Exceptions, NaNs and
 incomplete protocols fail explicitly. The command exits nonzero on FAIL.
 
 `--all` runs every registered variant and can consume the sum of their budgets;

@@ -250,23 +250,27 @@ def run_case(case, output, *, device="cpu", recipe_name=None, steps=None,
     if type(samples) is not int or samples < 1:
         raise ValueError("evaluation sample count must be positive")
     boundaries = contract.evaluation_steps(steps, frames)
-    fixture = contract.build(case, device=device, seed=seed, recipe_name=recipe_name, max_steps=steps)
-    recipe = json_value(fixture.recipe.to_dict())
+    required_terminal = case.get("terminal_observations", 5)
     receipt = {"schema": "particlegan_api_toy_run_v1", "case": case,
-               "recipe": recipe, "api_components": list(fixture.api_components),
+               "recipe": None, "api_components": [],
                "source": source_identity(), "seed": seed,
                "runtime": {"python": platform.python_version(), "torch": str(torch.__version__),
                            "device": str(device), "cuda": torch.version.cuda,
                            "torch_threads": torch.get_num_threads()},
                "protocol": {"updates": steps, "default_updates": case["default_steps"],
                             "evaluation_samples": samples, "default_evaluation_samples": case["eval_samples"],
-                            "evaluation_steps": boundaries, "terminal_observations": 5},
+                            "evaluation_steps": boundaries, "terminal_observations": required_terminal},
                "historical_results_changed": False, "observations": []}
     full = steps >= case["default_steps"] and samples >= case["eval_samples"]
     records, arrays = [], {}
     started = time.monotonic()
     completed = 0
+    fixture = None
     try:
+        fixture = contract.build(case, device=device, seed=seed, recipe_name=recipe_name, max_steps=steps)
+        receipt["recipe"] = json_value(fixture.recipe.to_dict())
+        receipt["api_components"] = list(fixture.api_components)
+        receipt["source"] = source_identity()
         for step in range(steps + 1):
             if step:
                 fixture.step()
@@ -287,13 +291,13 @@ def run_case(case, output, *, device="cpu", recipe_name=None, steps=None,
             receipt["observations"].append(compact)
             print(json.dumps({"case": case["id"], "step": step, "metric_passed": record["passed"],
                               "failed_bounds": record["failed_bounds"][:5]}, allow_nan=False), flush=True)
-        terminal = [record for record in records if record["step"] > 0][-5:]
-        sustained = len(terminal) == 5 and all(record["passed"] for record in terminal)
+        terminal = [record for record in records if record["step"] > 0][-required_terminal:]
+        sustained = len(terminal) == required_terminal and all(record["passed"] for record in terminal)
         failed = list(records[-1]["failed_bounds"])
         if not full:
             failed.append("default budget or evaluation draw count not completed")
         if not sustained:
-            failed.append("last five post-update metric observations do not all pass")
+            failed.append(f"last {required_terminal} post-update metric observations do not all pass")
         receipt.update(status="COMPLETE", metric_passed=records[-1]["passed"],
                        sustained_metric_passed=sustained, default_protocol_complete=full,
                        passed=full and sustained, verdict="PASS" if full and sustained else "FAIL",
@@ -303,19 +307,23 @@ def run_case(case, output, *, device="cpu", recipe_name=None, steps=None,
                        failed_bounds=[f"API execution or metric error: {type(error).__name__}: {error}"],
                        completed_updates=completed, default_protocol_complete=False)
     receipt["elapsed_seconds"] = time.monotonic() - started
+    receipt["artifacts"] = {}
+    receipt["gif_frames"] = 0
     if records:
-        np.savez_compressed(output / "observations.npz", **arrays)
-        gif = output / "goal.gif"
-        render_gif(case, records, gif, full_budget=full, requested_steps=steps)
-        torch.save(fixture.state_dict(), output / "final-state.pt")
-        receipt["artifacts"] = {name: {"sha256": file_hash(output / name),
-                                       "bytes": (output / name).stat().st_size}
-                                 for name in ("goal.gif", "observations.npz", "final-state.pt")}
-        receipt["gif_frames"] = len(records)
-    else:
-        receipt["artifacts"] = {}
-        receipt["gif_frames"] = 0
-    receipt["source_unchanged"] = all(file_hash(contract.ROOT / path) == expected
+        try:
+            np.savez_compressed(output / "observations.npz", **arrays)
+            gif = output / "goal.gif"
+            render_gif(case, records, gif, full_budget=full, requested_steps=steps)
+            torch.save(fixture.state_dict(), output / "final-state.pt")
+            receipt["artifacts"] = {name: {"sha256": file_hash(output / name),
+                                           "bytes": (output / name).stat().st_size}
+                                     for name in ("goal.gif", "observations.npz", "final-state.pt")}
+            receipt["gif_frames"] = len(records)
+        except Exception as error:
+            receipt.update(passed=False, verdict="FAIL", status="ERROR")
+            receipt["failed_bounds"].append(f"goal media/state error: {type(error).__name__}: {error}")
+    receipt["source_unchanged"] = all((contract.ROOT / path).is_file() and
+                                        file_hash(contract.ROOT / path) == expected
                                         for path, expected in receipt["source"]["files_sha256"].items())
     if not receipt["source_unchanged"]:
         receipt.update(passed=False, verdict="FAIL", status="ERROR")
@@ -366,7 +374,8 @@ def main(argv=None):
     for name in selected:
         result = run_case(cases[name], args.output / name, device=args.device,
                           recipe_name=None if args.recipe == "auto" else args.recipe,
-                          steps=args.steps, eval_samples=args.eval_samples, frames=args.frames)
+                          steps=None if args.steps is None else min(args.steps, cases[name]["default_steps"]),
+                          eval_samples=args.eval_samples, frames=args.frames)
         results.append({"id": name, "verdict": result["verdict"], "status": result["status"],
                         "metric_passed": result.get("metric_passed", False),
                         "default_protocol_complete": result["default_protocol_complete"],

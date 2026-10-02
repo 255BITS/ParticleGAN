@@ -76,3 +76,15 @@ def test_nonfinite_metrics_are_preserved_as_explicit_json_failures(tmp_path):
     path = tmp_path / "failure.json"
     api_run.write_json(path, {"passed": False, "rmse": float("nan")})
     assert json.loads(path.read_text()) == {"passed": False, "rmse": "nan"}
+
+
+def test_unsupported_api_construction_is_a_recorded_binary_failure(tmp_path, monkeypatch):
+    def reject(*args, **kwargs):
+        raise ValueError("unsupported conditional policy")
+    monkeypatch.setattr(api_run.contract, "build", reject)
+    case = {"id": "unsupported-control", "default_steps": 8, "eval_samples": 32}
+    result = api_run.run_case(case, tmp_path / "unsupported", steps=1)
+    assert result["status"] == "ERROR" and result["verdict"] == "FAIL"
+    assert result["completed_updates"] == 0 and result["gif_frames"] == 0
+    assert "unsupported conditional policy" in result["failed_bounds"][0]
+    assert (tmp_path / "unsupported/receipt.json").is_file()

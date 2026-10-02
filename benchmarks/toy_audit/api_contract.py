@@ -42,6 +42,10 @@ def validate_case(case):
         raise ValueError(f"{case['id']}: repeated historical mapping")
     for name in ("default_steps", "batch_size", "eval_samples"):
         _positive_integer(case.get(name), f"{case['id']}.{name}")
+    terminal = case.get("terminal_observations", 5)
+    _positive_integer(terminal, f"{case['id']}.terminal_observations")
+    if terminal > case["default_steps"]:
+        raise ValueError(f"{case['id']}: terminal observations exceed the execution budget")
     if not case.get("thresholds"):
         raise ValueError(f"{case['id']}: frozen pass/fail bounds required")
     if not case.get("sampling"):
