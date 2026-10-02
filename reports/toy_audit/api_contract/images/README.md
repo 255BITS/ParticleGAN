@@ -26,11 +26,15 @@ The execution budget is **20,001 updates**, reflecting the original inclusive lo
 
 The spatially uniform generator remains an expected representation failure. The mean-only critic remains an information-negative control for equal-mass patch positions. Width2/z1 remains capacity stress. Failing their output-quality bound does not mean the public API is broken.
 
+Each bank's finite pixel question is distinct from a host's control purpose. Healthy bars test bar-position coverage, healthy blobs test localized corner patches, healthy stripes test orientation and contrast, and healthy intensity hosts test brightness. Restricted hosts name their own capacity, representation or critic-information question. The residual bars host names its upsampling architecture; PR58 names its reuse of the shipped intensity law. These goal metadata descriptions do not change data, training, gates or any historical result.
+
 Three cases share an exact default execution definition: reserved residual bars4 with frozen bars4; PR58 residual16 with shipped intensity residual16; source intensity transpose12 with PR58 transpose12. `alias_of` links these declarations. No second independent capture is claimed. Recipe, seed, budget, serving, source or runtime changes require a separate execution; this provider never automatically skips or fabricates a run.
 
 ## Validation and scientific status
 
 The focused software suite performs actual one-update checks on every image fixture, checks the word host on KA2 and Atlas, compares architecture forwards with the original cores, and proves that observation preserves exact model/optimizer/policy/RNG state and the next update. Native diagnostic NaN sentinels are compared byte-for-byte; outputs and scalar scoring metrics must remain finite.
+
+The per-host description correction has eight passing metadata/coverage checks. Comparing all 80 declarations with `af550fe6` confirms that only `goal` and `scope` changed in 15 declarations; every other field and all ordered bank bytes are identical. No training was repeated. The linked original declaration and software receipts retain their original revision.
 
 All 330 analytic controls behave as declared: 80 positive references and 250 negatives. Image controls discriminate mass imbalance despite perfect HQ/support, collapse and mean images. Conditional controls additionally discriminate swapped/shuffled correspondence, observed-pixel corruption and channel errors. Word controls discriminate diffuse correct argmax, wrong pairing, collapse, mass imbalance and wrong padding.
 
@@ -54,9 +58,9 @@ python -m benchmarks.toy_audit.api_run --case image-five-words-joint-ae --steps 
 | T_junction2 | pr68 | Fixed T-junction patterns; not occlusion reasoning. |
 | b_d2 | pr76 | Fixed mirrored b/d glyph templates; not general OCR or a dedicated chirality score. |
 | barcode_quiet_lr2 | pr166 | Two fixed barcode-like templates with opposite quiet-zone placement; not barcode validity or decoding. |
-| bars4 | develop-img_bars4, develop-img_residual_bars4, develop-img_tiny_generator | Undercapacity stress: width2 and a one-dimensional latent may constrain representation and optimization; non-blocking. |
-| bars8 | develop-img_bars8 | Denser support stress: eight bar positions may exceed the short budget; failure cannot disqualify a controller. |
-| blobs4 | develop-img_blobs4, develop-img_mean_discriminator | Low-information architecture stress: D sees only image mean; equal-mass patch positions are indistinguishable, so failure is non-blocking. |
+| bars4 | develop-img_bars4, develop-img_residual_bars4, develop-img_tiny_generator | Recover all four horizontal/vertical bar positions with sharp pixel fidelity and balanced output mass. |
+| bars8 | develop-img_bars8 | Recover all eight horizontal/vertical bar positions with pixel fidelity and balanced output mass; denser finite-support diagnostic. |
+| blobs4 | develop-img_blobs4, develop-img_mean_discriminator | Recover four localized 2x2 corner patches with correct position, pixel fidelity and balanced output mass. |
 | braille_cell_lr2 | pr170 | Left-heavy versus right-heavy raised-dot templates; tactile glyph asymmetry, not Braille decoding. |
 | chirp_up_down2 | pr154 | Two fixed rising/falling spectrogram-like traces; not audio synthesis or frequency generalization. |
 | colorize_lr2 | pr65 | Fixed grayscale left/right intensity patterns; no color channels or conditional grayscale-to-color query. |
@@ -66,7 +70,7 @@ python -m benchmarks.toy_audit.api_run --case image-five-words-joint-ae --steps 
 | fg_bg_invert2 | pr66 | Fixed foreground/background intensity inversions; not conditional image inversion. |
 | finder_diag2 | pr79 | Two fixed diagonal finder layouts; not QR recognition or error correction. |
 | hamburger_kebab2 | pr151 | Two fixed menu-icon layouts; not UI interaction or semantic object recognition. |
-| intensity2 | develop-img_intensity2, pr58 | Shipped intensity2 data reused as an architecture counterexample; not an independent new problem. |
+| intensity2 | develop-img_intensity2, pr58 | Recover both center-patch intensities (0.35 and 0.85) with correct brightness and balanced output mass. |
 | letterbox_pillar2 | pr78 | Fixed letterbox versus pillarbox border placement; not aspect-ratio inference from arbitrary images. |
 | mask_inpaint2 | pr63 | Fixed templates named mask-inpaint; no observed image or mask enters G, so no conditional inpainting is tested. |
 | moire_beat2 | pr150 | Two fixed moiré/beat intensity patterns; not recovery of unseen frequencies or phase. |
@@ -79,7 +83,7 @@ python -m benchmarks.toy_audit.api_run --case image-five-words-joint-ae --steps 
 | sonar_echo_near_far2 | pr159 | Two fixed near/far echo-location templates; not acoustic propagation or range inference. |
 | sparse_obs2 | pr61 | Fixed sparse-observation-like templates; no source-domain input or paired correspondence tests translation. |
 | stairs_asc_desc2 | pr75 | Fixed ascending/descending stair templates; not sequence reasoning. |
-| stripes2 | develop-img_stripes2, develop-img_uniform_generator | Known representation failure: G can only output spatially uniform images, so stripe quality is impossible; diagnostic only. |
+| stripes2 | develop-img_stripes2, develop-img_uniform_generator | Recover both centered horizontal and vertical stripes with pixel contrast and balanced output mass. |
 | swirl_cw2 | pr72 | Fixed opposite-handed swirl patterns; not rotation dynamics or optical flow. |
 | traffic_stack_rg2 | pr80 | Two fixed grayscale traffic-stack patterns; not red/green color semantics or traffic rules. |
 | vh_bars2 | pr64 | Fixed vertical/horizontal bars; same orientation-coverage question as the shipped stripes family. |

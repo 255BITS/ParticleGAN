@@ -235,18 +235,20 @@ _BANKS = {'C_vs_O2': {'encoded': 'c-lLA#>e(70i2eWW{(Y%Do@CKTG>x2rndjd<<r9d0IOf;g
                          'path': 'reports/transfer_suite/img_vh_bars2_transpose_vs_residual16/reproduce_arms.py',
                          'sha256': 'cdf52a2b830b753d3699bfeed7de61f26da592d1dd9c3b728fdda65f383844e6'}}}
 
+# A bank's pixel question does not inherit the purpose of the last host that
+# happens to use it. Restricted hosts retain their own questions below.
 _GOALS = {'C_vs_O2': 'Fixed open C versus closed O pixel templates; RMSE is not an independent topology oracle.',
  'L_chirality2': 'Fixed mirrored L templates; not chirality generalization.',
  'T_junction2': 'Fixed T-junction patterns; not occlusion reasoning.',
  'b_d2': 'Fixed mirrored b/d glyph templates; not general OCR or a dedicated chirality score.',
  'barcode_quiet_lr2': 'Two fixed barcode-like templates with opposite quiet-zone placement; not barcode '
                       'validity or decoding.',
- 'bars4': 'Undercapacity stress: width2 and a one-dimensional latent may constrain representation and '
-          'optimization; non-blocking.',
- 'bars8': 'Denser support stress: eight bar positions may exceed the short budget; failure cannot disqualify '
-          'a controller.',
- 'blobs4': 'Low-information architecture stress: D sees only image mean; equal-mass patch positions are '
-           'indistinguishable, so failure is non-blocking.',
+ 'bars4': 'Recover all four horizontal/vertical bar positions with sharp pixel fidelity and balanced '
+          'output mass.',
+ 'bars8': 'Recover all eight horizontal/vertical bar positions with pixel fidelity and balanced output '
+          'mass; denser finite-support diagnostic.',
+ 'blobs4': 'Recover four localized 2x2 corner patches with correct position, pixel fidelity and balanced '
+           'output mass.',
  'braille_cell_lr2': 'Left-heavy versus right-heavy raised-dot templates; tactile glyph asymmetry, not '
                      'Braille decoding.',
  'chirp_up_down2': 'Two fixed rising/falling spectrogram-like traces; not audio synthesis or frequency '
@@ -260,8 +262,8 @@ _GOALS = {'C_vs_O2': 'Fixed open C versus closed O pixel templates; RMSE is not 
  'fg_bg_invert2': 'Fixed foreground/background intensity inversions; not conditional image inversion.',
  'finder_diag2': 'Two fixed diagonal finder layouts; not QR recognition or error correction.',
  'hamburger_kebab2': 'Two fixed menu-icon layouts; not UI interaction or semantic object recognition.',
- 'intensity2': 'Shipped intensity2 data reused as an architecture counterexample; not an independent new '
-               'problem.',
+ 'intensity2': 'Recover both center-patch intensities (0.35 and 0.85) with correct brightness and balanced '
+               'output mass.',
  'letterbox_pillar2': 'Fixed letterbox versus pillarbox border placement; not aspect-ratio inference from '
                       'arbitrary images.',
  'mask_inpaint2': 'Fixed templates named mask-inpaint; no observed image or mask enters G, so no conditional '
@@ -279,13 +281,21 @@ _GOALS = {'C_vs_O2': 'Fixed open C versus closed O pixel templates; RMSE is not 
  'sparse_obs2': 'Fixed sparse-observation-like templates; no source-domain input or paired correspondence '
                 'tests translation.',
  'stairs_asc_desc2': 'Fixed ascending/descending stair templates; not sequence reasoning.',
- 'stripes2': 'Known representation failure: G can only output spatially uniform images, so stripe quality is '
-             'impossible; diagnostic only.',
+ 'stripes2': 'Recover both centered horizontal and vertical stripes with pixel contrast and balanced '
+             'output mass.',
  'swirl_cw2': 'Fixed opposite-handed swirl patterns; not rotation dynamics or optical flow.',
  'traffic_stack_rg2': 'Two fixed grayscale traffic-stack patterns; not red/green color semantics or traffic '
                       'rules.',
  'vh_bars2': 'Fixed vertical/horizontal bars; same orientation-coverage question as the shipped stripes '
              'family.'}
+
+_HOST_GOALS = {
+    "develop-img_residual_bars4": "Test nearest-neighbor residual upsampling on all four horizontal/vertical bar positions; require sharp pixel fidelity and balanced spatial coverage.",
+    "develop-img_tiny_generator": "Test whether a width2 generator with a one-dimensional latent covers all four sharp bar-position templates with balanced mass; capacity diagnostic.",
+    "develop-img_mean_discriminator": "Expose a mean-only critic's inability to distinguish four equal-mass corner-patch locations; measure spatial fidelity and balanced coverage as an information-negative control.",
+    "develop-img_uniform_generator": "Expose a spatially uniform generator's inability to render the centered horizontal and vertical stripes; measure spatial fidelity as a representation-negative control.",
+    "pr58": "Test each retained architecture's brightness fidelity and balanced mass for center patches at 0.35 and 0.85; this reuses the shipped intensity data law.",
+}
 
 # id, legacy ID, pattern, architecture, width, z_dim, budget, RMSE, origin, query
 _HOSTS = [
@@ -384,7 +394,7 @@ def _declarations():
         row = dict(id=case_id, legacy_ids=[legacy_id], title=f"{pattern}: {architecture} width {width}",
                    pattern=pattern, architecture=architecture, width=width, z_dim=z_dim,
                    default_steps=steps, batch_size=32, query=query, arm_identity=origin,
-                   goal=_QUERY_GOALS[query] if query else _GOALS[pattern],
+                   goal=_QUERY_GOALS[query] if query else _HOST_GOALS.get(legacy_id, _GOALS[pattern]),
                    scope="Finite 8x8 paired queries only; no unseen-image, OCR, topology, DSP or natural-colorization generalization claim." if query else _GOALS[pattern],
                    thresholds=dict(hq_min=.9, modes=modes, quality_rmse=rmse,
                                    min_mode_fraction=.5 / modes, observations=24, minimum_stable_checks=5),

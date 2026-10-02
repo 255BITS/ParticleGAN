@@ -71,6 +71,40 @@ def test_every_retained_image_and_architecture_is_declared_without_history_edits
     assert all(case["default_steps"] == (480 if case["architecture"] in ("mean_discriminator", "uniform_generator") or case["width"] == 2 else 600) for case in CASES)
 
 
+@pytest.mark.parametrize("healthy_legacy,other_legacy", [
+    ("develop-img_bars4", "develop-img_tiny_generator"),
+    ("develop-img_blobs4", "develop-img_mean_discriminator"),
+    ("develop-img_stripes2", "develop-img_uniform_generator"),
+    ("develop-img_intensity2", "pr58"),
+])
+def test_shared_bank_does_not_overwrite_healthy_host_question(healthy_legacy, other_legacy):
+    healthy = [case for case in CASES if case["legacy_ids"] == [healthy_legacy]]
+    other = [case for case in CASES if case["legacy_ids"] == [other_legacy]]
+    assert healthy and other
+    assert {case["ordered_template_sha256"] for case in healthy + other} == {
+        healthy[0]["ordered_template_sha256"]}
+    assert not ({case["goal"] for case in healthy} & {case["goal"] for case in other})
+    for case in healthy:
+        assert "balanced" in case["goal"]
+        assert "control_reason" not in case
+        assert not any(claim in case["goal"] for claim in (
+            "width2", "one-dimensional latent", "mean-only", "spatially uniform", "reuses"))
+
+
+@pytest.mark.parametrize("legacy_id,mechanism", [
+    ("develop-img_tiny_generator", "width2"),
+    ("develop-img_mean_discriminator", "mean-only"),
+    ("develop-img_uniform_generator", "spatially uniform"),
+])
+def test_restricted_host_question_names_its_actual_control(legacy_id, mechanism):
+    case = next(case for case in CASES if case["legacy_ids"] == [legacy_id])
+    assert mechanism in case["goal"]
+    assert "diagnostic" in case["goal"] or "negative control" in case["goal"]
+    assert case["control_reason"]
+    assert case["default_steps"] == 480
+    assert case["scientific_status"] == "NEW_VARIANT_UNMEASURED"
+
+
 @pytest.mark.parametrize("pattern", sorted({case["pattern"] for case in CASES}))
 def test_lossless_ordered_banks_are_bound_and_independent(pattern):
     cases = [case for case in CASES if case["pattern"] == pattern]
