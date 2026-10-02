@@ -16,15 +16,17 @@ import time
 import numpy as np
 import torch
 
-from .api import (CapabilityError, FormulationContext, host_recipe_overrides,
+from .api import (CapabilityError, task_formulation_context, task_recipe_resources,
                   task_policy_blockers)
 from .artifacts import manifest_artifacts, verify_artifacts
 from .contracts import atomic_json, file_hash, read_json, stable_hash
+from .initialization import task_initializer
 from .mechanisms import MechanismAudit, mechanism_blockers
+from .priors import task_prior
 from .sampling import ENUMERATED_PRIOR_CLEAN, PUBLIC_PRIOR_CLEAN, executed_receipt
 from .state import state_digest
 from .telemetry import PhaseTimer, normalize_adapter_costs
-from .taskrecipes import adaptation_receipt, bind_task_candidate
+from .taskrecipes import bind_task_candidate
 
 
 def _event(event, **values):
@@ -32,31 +34,24 @@ def _event(event, **values):
 
 
 def _context(request, task, device, resources):
-    candidate = bind_task_candidate(request["candidate"], task)
-    from .nativeprofiles import native_host_initialization
-    host_initialization = native_host_initialization(task)
-    blockers = task_policy_blockers(task, candidate)
-    if blockers:
-        raise CapabilityError(blockers)
-    overrides = host_recipe_overrides(candidate, task["execution"], resources)
-    context = FormulationContext(
-        recipe_preset=candidate.get("recipe_preset"), recipe_overrides=overrides,
-        prior=task["execution"].get("prior", candidate.get("prior")),
-        seed=request["protocol"]["seed"], device=device,
-        requires_capabilities=tuple(candidate.get("requires_capabilities", ())) + tuple(task["requires_capabilities"]),
-        extensions=candidate.get("extensions", {}), initializer=candidate.get("initializer", "deterministic_orthogonal"),
-        host_initialization=host_initialization)
-    context.host_adaptation = adaptation_receipt(request["candidate"], task)
-    return context
+    declared = task_recipe_resources(task)
+    if declared and resources != declared:
+        raise CapabilityError([f"{task['id']}: adapter resources differ from experiment-owned task resources"])
+    return task_formulation_context(request["candidate"], task, request.get("protocol"), device=device)
 
 
 def adapter_preflight(task, candidate, *, root=None):
     """Report unsupported task/host bindings before reserving training compute."""
     try:
+        task_prior(task)
+        task_initializer(task, candidate)
         candidate = bind_task_candidate(candidate, task)
     except ValueError as error:
         return [str(error)]
     adapter = task["adapter"]
+    if adapter == "word_joint":
+        from .word_adapter import word_preflight
+        return word_preflight(task, candidate, root=root)
     supported = {"transfer_behavior", "transfer_vector", "transfer_image", "native100",
                  "native100_continuation", "ring_endurance", "clockfree_audit", "paired_adaptation"}
     if adapter not in supported:
@@ -66,7 +61,9 @@ def adapter_preflight(task, candidate, *, root=None):
         return policy_blockers
     if adapter == "transfer_behavior" and task["execution"].get("host") != "mode_hold":
         from .behavior_adapters import behavior_preflight
-        return behavior_preflight(task, candidate)
+        blockers = behavior_preflight(task, candidate)
+        if blockers:
+            return blockers
     blockers = []
     from .paired_sampling import paired_sampling_blockers
     blockers.extend(paired_sampling_blockers(task))
@@ -76,6 +73,9 @@ def adapter_preflight(task, candidate, *, root=None):
         if blockers:
             return blockers
     if adapter == "transfer_vector":
+        scorer = task["evaluation"].get("sample_evaluator")
+        if scorer not in (None, "benchmarks.toy_audit.ring16_quality:score_samples"):
+            blockers.append(f"unsupported vector sample evaluator: {scorer}")
         from .vectorprofiles import vector_profile_blockers
         blockers.extend(vector_profile_blockers(task, root=root))
         if blockers:
@@ -90,20 +90,13 @@ def adapter_preflight(task, candidate, *, root=None):
         recipe = candidate.get("resolved_recipe")
         if recipe and "lr_floor" in recipe:
             blockers.extend(source_audit(recipe, candidate.get("extensions", {}))["unexplained_clock_dependencies"])
-    # The same host resources consumed by _context must reject ignored overrides.
-    execution = task["execution"]
-    resources = execution.get("resources", {})
-    if adapter in {"transfer_vector", "paired_adaptation", "transfer_image"}:
-        spec = execution["host_definition"]
-        resources = {"num_particles": spec["particles"], "z_dim": spec["z_dim"],
-                     "batch_size": spec["batch_size"] if adapter == "transfer_image" else spec["batch"]}
-    if adapter in {"ring_endurance", "transfer_behavior"}:
-        from benchmarks.legacy.locked_shared import LOCKED_SHARED
-        resources = {"num_particles": LOCKED_SHARED.n_particles, "z_dim": 4, "batch_size": 128}
+    # Planning, preflight and execution share the exact public binding path.
     try:
-        host_recipe_overrides(candidate, execution, resources)
+        task_formulation_context(candidate, task, device="cpu", root=root)
     except CapabilityError as error:
         blockers.extend(error.blockers)
+    except ValueError as error:
+        blockers.append(str(error))
     return blockers
 
 
@@ -237,6 +230,11 @@ def _checkpoints(task):
 
 def _vector(request, task, output, device):
     from benchmarks.transfer_suite.vector_tasks import sample_target, score_samples
+    scorer = task["evaluation"].get("sample_evaluator")
+    if scorer is not None:
+        if scorer != "benchmarks.toy_audit.ring16_quality:score_samples":
+            raise CapabilityError([f"unsupported vector sample evaluator: {scorer}"])
+        from benchmarks.toy_audit.ring16_quality import score_samples
     from .vectorprofiles import build_vector_models, resolve_vector_spec
     spec = resolve_vector_spec(task)
     context = _context(request, task, device, {"num_particles": spec["particles"],
@@ -350,10 +348,10 @@ def _native(request, task, output, device, *, prerequisites=None):
     problem = task["execution"]["problem"]
     evaluation = task["evaluation"]
     spec = resolve_native_spec(task)
-    if spec is not None and task["execution"].get("continuation_of"):
+    if task["execution"].get("continuation_of"):
         validate_native_continuation(request["tasks"][task["execution"]["continuation_of"]], task)
-    context = _context(request, task, device, spec["resources"] if spec else {})
-    g, d = build_native_models(context, spec) if spec else _models(context, {"hidden": 128, "layers": 3, "fourier": 2})
+    context = _context(request, task, device, spec["resources"] if spec else task["execution"]["resources"])
+    g, d = build_native_models(context, spec) if spec else _models(context, task["execution"]["model"])
     trainer = context.build_trainer(g, d,
         max_steps=context.recipe.total_steps if task["execution"].get("preserve_prefix_steps") else task["execution"]["steps"])
     host_receipt = _host_receipt(spec, task["execution"]["native_profile"], g, d) if spec else None
@@ -473,6 +471,9 @@ def _dispatch_task(request: dict, job: dict, output_dir: Path, device: str) -> d
     """Dispatch frozen task definitions; unsupported capabilities fail before work."""
     task = request["tasks"][job["task_id"]]
     adapter = task["adapter"]
+    if adapter == "word_joint":
+        from .word_adapter import run_word
+        return run_word(request, task, output_dir, device)
     if adapter == "transfer_behavior":
         if task["execution"].get("host") == "mode_hold":
             return _ring(request, task, output_dir, device)

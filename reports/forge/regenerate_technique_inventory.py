@@ -128,7 +128,7 @@ def _publication_provenance(result, summaries):
         provenance = summary["provenance"]
         if provenance.get("source_origin_commit") is not None:
             origins.setdefault(provenance["source_digest"], set()).add(provenance["source_origin_commit"])
-    for row in result["rows"]:
+    for row in [*result["rows"], *result.get("configuration_rows", [])]:
         bindings = row.setdefault("bindings", {})
         recorded = sorted(origins.get(bindings.get("source_digest"), set()))
         bindings["source_origin_commit"] = recorded[0] if len(recorded) == 1 else None
@@ -221,6 +221,29 @@ def _overlay_reports(original, destination):
             _overlay_reports(source, target)
 
 
+def _publication_rows(result):
+    """Retain every independently graded configuration before family selection.
+
+    The frozen registry may predate a study's activation. Its family default
+    rows are a display selection, while configuration_rows retain all trials.
+    A numerical snapshot must preserve that full roster and its receipt proofs.
+    """
+    if "configuration_rows" not in result:
+        return result["rows"]
+    display_fields = {"technique", "selection", "selected_configuration", "alternative_scope"}
+    rows, seen = [], {}
+    for row in [*result["configuration_rows"], *result["rows"]]:
+        identity = (row["candidate_id"], row.get("candidate_revision"), row.get("cohort"))
+        science = {key: value for key, value in row.items() if key not in display_fields}
+        if identity in seen:
+            if seen[identity] != science:
+                raise ValueError("conflicting scientific rows for one publication identity")
+            continue
+        seen[identity] = science
+        rows.append(deepcopy(row))
+    return rows
+
+
 def _frozen_report(root, source_commit, *, view_id, execution_backend, temporary):
     commit = _resolve_commit(root, source_commit)
     manifests = _receipt_manifests(root, commit)
@@ -255,6 +278,9 @@ print(json.dumps(result, sort_keys=True))
         raise ValueError("frozen independent report failed: " + error.stderr.strip()) from error
     metadata = json.loads(output)
     result = read_json(metadata["json"])
+    result["rows"] = _publication_rows(result)
+    if "configuration_rows" in result:
+        result["snapshot_row_scope"] = "all_configuration_variants"
     allowed = set(manifests)
     if any(row.get("bindings", {}).get("source_digest") not in allowed for row in result["rows"]):
         raise ValueError("frozen report contains a source cohort absent from the validated original receipts")
@@ -285,6 +311,9 @@ def regenerate(root: Path | str = REPOSITORY_ROOT, *, view_id="discriminator_sta
             metadata = write_report(root, view_id, execution_backend=execution_backend,
                                     output_prefix=Path(temporary) / "inventory")
             result = read_json(metadata["json"])
+            result["rows"] = _publication_rows(result)
+            if "configuration_rows" in result:
+                result["snapshot_row_scope"] = "all_configuration_variants"
             commit, frozen_digests = None, []
         else:
             metadata, result, commit, frozen_digests = _frozen_report(
@@ -565,7 +594,8 @@ def _snapshot(root, entry, manifest):
             raise ValueError(f"technique evidence has incompatible {key}")
     selected = {}
     for name, recorded_at in entry["candidates"].items():
-        matches = [row for row in report["rows"] if row.get("candidate_id") == name]
+        matches = [row for row in report["rows"] if row.get("candidate_id") == name
+                   and (bool(row.get("attempt_ids")) if isinstance(recorded_at, str) else True)]
         if len(matches) != 1:
             raise ValueError("technique evidence needs one exact candidate/runtime row")
         row = matches[0]
@@ -690,7 +720,11 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
         # snapshot is idempotent; a new snapshot never retires another runtime.
         if entry not in manifest["cohorts"]:
             manifest["cohorts"].append(entry)
-        selected = {row["candidate_id"]: row for row in report["rows"] if row["candidate_id"] in candidates}
+        # A frozen all-backend roster also contains unmeasured configurations
+        # on other runtimes. Those cannot overwrite a measured registration
+        # of the same candidate just because they appear later in the roster.
+        selected = {row["candidate_id"]: row for row in report["rows"]
+                    if row["candidate_id"] in candidates and row.get("attempt_ids")}
         for row in selected.values():
             _validate_published_row(root, report, row)
         if not any(old == entry for old, _, _ in reports):

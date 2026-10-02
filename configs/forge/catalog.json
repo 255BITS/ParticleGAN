@@ -10,6 +10,7 @@
       "benchmark/shared": 5,
       "benchmark/smart_descent": 9,
       "benchmark/toy100": 19,
+      "benchmark/toy_audit": 64,
       "benchmark/transfer_suite": 87,
       "config/100gaussians": 4,
       "config/cifar_ddgan": 77,
@@ -38,7 +39,7 @@
       "experiment/toy": 3,
       "experiment/trajectory": 2,
       "experiment/transition": 7,
-      "forge_engine": 38,
+      "forge_engine": 41,
       "lrfree/feature-cells-cb64-ra": 4058,
       "report/atlas-explanation": 7,
       "report/behavioral_baseline": 32,
@@ -88,6 +89,7 @@
       "report/toy100/shared22": 201,
       "report/toy100/simpler22": 180,
       "report/toy100/torch214-gpu-check": 10,
+      "report/toy_audit": 519,
       "report/trajectory": 175,
       "report/transfer_suite": 341,
       "report/transfer_suite/anisotropic_core_metric": 2,
@@ -95,32 +97,32 @@
       "report/transition": 83
     },
     "by_role": {
-      "analysis": 74,
+      "analysis": 75,
       "candidate_implementation": 17,
-      "candidate_patch": 25,
+      "candidate_patch": 26,
       "configuration": 807,
-      "driver": 393,
-      "engine_support": 38,
-      "evaluator_or_audit": 321,
+      "driver": 400,
+      "engine_support": 41,
+      "evaluator_or_audit": 324,
       "evidence_artifact": 1574,
       "frozen_candidate_implementation": 15,
       "frozen_driver": 28,
       "frozen_evaluator_or_audit": 2,
       "frozen_support": 28,
-      "narrative": 955,
-      "structured_evidence": 4985,
-      "support": 1475,
+      "narrative": 993,
+      "structured_evidence": 5047,
+      "support": 1525,
       "support_artifact": 60,
-      "visualization": 19,
-      "visualization_artifact": 302
+      "visualization": 22,
+      "visualization_artifact": 720
     },
-    "files": 11118
+    "files": 11704
   },
   "coverage": {
-    "declared_count": 11118,
+    "declared_count": 11704,
     "missing": [],
     "stale": [],
-    "tracked_count": 11118,
+    "tracked_count": 11704,
     "unclassified": [],
     "valid": true
   },
@@ -631,7 +633,7 @@
     },
     {
       "family": "benchmark/routed_conditioning",
-      "git_blob": "81a49f6ec7a390422475d16fa0f5e1df8d654f57",
+      "git_blob": "ca972bde6e657c46614e55f2af085ea7f72e9203",
       "path": "benchmarks/routed_conditioning/spatial_damping.py",
       "role": "support",
       "suggested_tiers": []
@@ -849,6 +851,474 @@
       "suggested_tiers": [
         2
       ]
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "7427fdc9a10bedf8fb07a0b1dc24b4add816e6ea",
+      "path": "benchmarks/toy_audit/__init__.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "6f56c43e24d84a24e5f67eedee0a8df4daf54e80",
+      "path": "benchmarks/toy_audit/api_conditionals.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "0552cbcb4948658f2b40c888fd8864b07fd32a84",
+      "path": "benchmarks/toy_audit/api_contract.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "8f50b065dfe8da28d266750455f7835030562593",
+      "path": "benchmarks/toy_audit/api_diagnostics.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "3836263ba6402be7954f468965b25ada33606338",
+      "path": "benchmarks/toy_audit/api_images.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "d543ab562849eff7dce4546d730b91f89b9d7968",
+      "path": "benchmarks/toy_audit/api_publish.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "66061619c1f1f6a85e5aa967254106d942f63168",
+      "path": "benchmarks/toy_audit/api_readout.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "2ca5524c6eb278547fe25aae8843edae59a63f10",
+      "path": "benchmarks/toy_audit/api_reframe.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "b05c9866d856754c3b68a31cc228ad824aa55bf9",
+      "path": "benchmarks/toy_audit/api_ring16.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "3acef48fc4c526f890502b212b9d6dca2dcb46c0",
+      "path": "benchmarks/toy_audit/api_run.py",
+      "role": "driver",
+      "suggested_tiers": [
+        2
+      ]
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "64defdcf44f60f473847073e93ceb216875174b1",
+      "path": "benchmarks/toy_audit/api_sources/__init__.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "7431f456a52c328e363fcecd0153e15cfd515dee",
+      "path": "benchmarks/toy_audit/api_sources/circle.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "4aa74740d5eead1292b98ff9e0864773aac07c66",
+      "path": "benchmarks/toy_audit/api_sources/misgan.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "eefb6c44f4c90928c8f77a14b0334eba94b5cdce",
+      "path": "benchmarks/toy_audit/api_sources/sprite.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "990fa77853e7d211acb1a56f2534ca7f854c7c95",
+      "path": "benchmarks/toy_audit/api_vectors.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "e6fc9426751b9db405b1f114ce0fda315b8ebeb3",
+      "path": "benchmarks/toy_audit/base.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "15317dc7eb59cf19d406cf39dddff5e78956db8b",
+      "path": "benchmarks/toy_audit/batch_toy_media.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "2a809ca8ef71c4b43db82380cbf9fb5235574f22",
+      "path": "benchmarks/toy_audit/canonical_selection.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "7452677bbc77282d69537f5bda114f0ffec83808",
+      "path": "benchmarks/toy_audit/capture.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "aac40db32b943b1fdd9c54566bc0ef75c691fb85",
+      "path": "benchmarks/toy_audit/catalog.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "a9fb37301e5f63ccf24c83829c10180ea1ca819d",
+      "path": "benchmarks/toy_audit/check_paired_gradient.py",
+      "role": "evaluator_or_audit",
+      "suggested_tiers": [
+        1
+      ]
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "6aba1c9e666b980e6dcf392fe8f95326af0e263c",
+      "path": "benchmarks/toy_audit/check_signed_particle_gate.py",
+      "role": "evaluator_or_audit",
+      "suggested_tiers": [
+        1
+      ]
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "ee981996efc4f6aad8880b37520a925babea2ccd",
+      "path": "benchmarks/toy_audit/check_source_family_parity.py",
+      "role": "evaluator_or_audit",
+      "suggested_tiers": [
+        1
+      ]
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "7853300bd4720a57829582119272b6653d997853",
+      "path": "benchmarks/toy_audit/definition_quality.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "3defb7b167064c8033266866dbc429845fcbebe2",
+      "path": "benchmarks/toy_audit/failure_diagnosis.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "0192649514f55eef963bf8132bef0dd4a13ac8d2",
+      "path": "benchmarks/toy_audit/fetch.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "08b398a55ee8c793942acb1f7a45e99a3fc7e5a2",
+      "path": "benchmarks/toy_audit/forge_image_representation.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "7226a7a979e24ded2a9d9c12a6e7fbd3c0b1df77",
+      "path": "benchmarks/toy_audit/forge_selection_readiness.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "d5d8e3a2d7f2012326410a347be3c2af1f17f4e7",
+      "path": "benchmarks/toy_audit/image_quality_v2.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "8c845adc69af2d2f6ff2191fae881aa3c8a59ff3",
+      "path": "benchmarks/toy_audit/improvement_ledger.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "a927d2bf0327ffe2ffe1c51a58b5792516c7204e",
+      "path": "benchmarks/toy_audit/native.py",
+      "role": "driver",
+      "suggested_tiers": [
+        2
+      ]
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "4a0ee78318db1e5df618b3e94260d0cf4d8b648b",
+      "path": "benchmarks/toy_audit/oracle.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "24268adf7b1338cce9a88387666f22f8e124173e",
+      "path": "benchmarks/toy_audit/pr227_current_media.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "17dba5d287f5fd8901b5c4bd28189d535f6b20ee",
+      "path": "benchmarks/toy_audit/pr231_media.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "084e8363692f2337bf25a69674d43077b4540fe3",
+      "path": "benchmarks/toy_audit/proposal.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "dea2d5185752e606581186b6286a4a5b235fe745",
+      "path": "benchmarks/toy_audit/recent_toy_media.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "d3ed022956e755b79ea3d3bdb23869d35579f7fc",
+      "path": "benchmarks/toy_audit/render.py",
+      "role": "visualization",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "3057447595bcae5d0d373ea077c2ce1dd7e8c04c",
+      "path": "benchmarks/toy_audit/render_source_families.py",
+      "role": "visualization",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "dc0599aa4355cfb2893cd0a82deaf52c5b3133fa",
+      "path": "benchmarks/toy_audit/replay.py",
+      "role": "driver",
+      "suggested_tiers": [
+        2
+      ]
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "697ac60361f827b76b05c4ed7d1b8eeda96a6868",
+      "path": "benchmarks/toy_audit/review_convergence.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "58edb6a2c9f4744092c6ee16049677f9d14eef9c",
+      "path": "benchmarks/toy_audit/ring16_controls.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "6dd3a057c97db254600cdcbc666e0474b604fb10",
+      "path": "benchmarks/toy_audit/ring16_publish.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "b63e4294deb847c86ba4ec4388c3e33618efc74a",
+      "path": "benchmarks/toy_audit/ring16_quality.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "e3d622b904264cc56f06524240cf5af866cae82d",
+      "path": "benchmarks/toy_audit/scorers.py",
+      "role": "analysis",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "9a870c05bc167a247259b0081e67ef45bcd9b802",
+      "path": "benchmarks/toy_audit/source_conditional_capture.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "f649e6a2041d25a5084b465a99bf9167a44d62fd",
+      "path": "benchmarks/toy_audit/source_conditional_report.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "f5dd208547e2dbf3fc1babc3ea63541d2fab3fa5",
+      "path": "benchmarks/toy_audit/source_conditional_routes_observer.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "f6650b6c7a6fd303a963dee0e210d2c5ebc2271c",
+      "path": "benchmarks/toy_audit/source_conditional_routes_render.py",
+      "role": "visualization",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "43450debc84bef7c0971f046a461546af02c19a5",
+      "path": "benchmarks/toy_audit/source_conditional_routes_report.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "5eb59e4e31c043bee02647e48a1e1b2b0d8e6bf0",
+      "path": "benchmarks/toy_audit/source_conditional_routes_run.py",
+      "role": "driver",
+      "suggested_tiers": [
+        2
+      ]
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "fcb080ce3148def7db260838038a0bf1c21924b7",
+      "path": "benchmarks/toy_audit/source_conditional_scoring.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "b28c2d448a2d13f111ea0a573cc29b027f29b8fb",
+      "path": "benchmarks/toy_audit/source_cuda_observation.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "3725c540ee24cbafe20b4accd89a0b03e13d499b",
+      "path": "benchmarks/toy_audit/source_cuda_observation_report.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "42500deaffd4e710444b5160c0e69be5f7d71960",
+      "path": "benchmarks/toy_audit/source_demo_report.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "00ee4013f6b4af1fe2fec943b0bb32f57c9e46e1",
+      "path": "benchmarks/toy_audit/source_demos.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "173266f59bc97fa289b2413d047309863939a642",
+      "path": "benchmarks/toy_audit/source_family_ablation.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "75c9be9eea784b5b36833c27d52eca409d1fd3f4",
+      "path": "benchmarks/toy_audit/source_family_media.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "8c0c67d0353f913d8104326ba22102303d20d8d7",
+      "path": "benchmarks/toy_audit/source_family_report.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "e7695d9677945569c7b30425e5db69f55ce232e5",
+      "path": "benchmarks/toy_audit/source_family_training.py",
+      "role": "driver",
+      "suggested_tiers": [
+        2
+      ]
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "34e6ce7aaf7ab93f0671fba4f45c628cee4f4b5b",
+      "path": "benchmarks/toy_audit/source_paired_transport_media.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "413db48db596ebad559b563af35c5f065a0b979b",
+      "path": "benchmarks/toy_audit/source_paired_transport_report.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "315244ed310b94ed60115883f4036860058e607c",
+      "path": "benchmarks/toy_audit/source_paired_transport_training.py",
+      "role": "driver",
+      "suggested_tiers": [
+        2
+      ]
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "b56d75ac2d665532c81aba927fcc6754e4a29c29",
+      "path": "benchmarks/toy_audit/source_routed_ring_training.py",
+      "role": "driver",
+      "suggested_tiers": [
+        2
+      ]
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "7945b80f437da7f086cebfedb2885679d5002630",
+      "path": "benchmarks/toy_audit/vector_quality.py",
+      "role": "support",
+      "suggested_tiers": []
     },
     {
       "family": "benchmark/shared",
@@ -6624,7 +7094,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "8b366ad8c29549c273a0e83abaec6788c3251d44",
+      "git_blob": "b21946dd3b0ad14595fb0e64d022fb8600447265",
       "path": "experiments/forge/__main__.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -6638,7 +7108,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "ba16618cfc40da925ffcfac0217b6ad4085797be",
+      "git_blob": "0c4db07164a552d1e72d563f602108c9a896a419",
       "path": "experiments/forge/adapters.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -6694,6 +7164,13 @@
     },
     {
       "family": "forge_engine",
+      "git_blob": "c95073f724fdde887951a52dc65a63d91064ac8f",
+      "path": "experiments/forge/configuration_search.py",
+      "role": "engine_support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "forge_engine",
       "git_blob": "bf17cec274394b825ef73652916b769a4dc7824a",
       "path": "experiments/forge/continuation.py",
       "role": "engine_support",
@@ -6715,14 +7192,14 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "3aed829c3125c439539f5c08af28c8891088fc69",
+      "git_blob": "869491c3d556293743e1b465b6ecf4fa6706a085",
       "path": "experiments/forge/history.py",
       "role": "engine_support",
       "suggested_tiers": []
     },
     {
       "family": "forge_engine",
-      "git_blob": "534e0eb4117ab50d6fc9452b569a244127a344a8",
+      "git_blob": "8054a09577503fa1a7ed73f05e438b4a7e6e5870",
       "path": "experiments/forge/hostprofiles.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -6736,7 +7213,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "2f1c0335a5739a9ca1a1d51e7a03b79b1e177060",
+      "git_blob": "cab534e69db5aec563691433ffe1113a25bf6ec8",
       "path": "experiments/forge/knowledge.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -6771,7 +7248,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "f205bea72bd8cc38984bdc7fe0fa11c3a4485b16",
+      "git_blob": "65c8ee648f2473c7ebe9b7c77d33a4bff4e2893f",
       "path": "experiments/forge/planning.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -6787,6 +7264,13 @@
       "family": "forge_engine",
       "git_blob": "901c49f4f00351803ffe68bfc041fd5d56fa9426",
       "path": "experiments/forge/queue.py",
+      "role": "engine_support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "forge_engine",
+      "git_blob": "4db725b39d90805166887e0bb881ddadb48c18e7",
+      "path": "experiments/forge/research_artifacts.py",
       "role": "engine_support",
       "suggested_tiers": []
     },
@@ -6834,14 +7318,14 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "83cca8a9e41f57b038843518ef524f34d551c1d0",
+      "git_blob": "49edc2f469d8eb6430bf0e0f1fc4ce2766c90aad",
       "path": "experiments/forge/technique_board.py",
       "role": "engine_support",
       "suggested_tiers": []
     },
     {
       "family": "forge_engine",
-      "git_blob": "c3f36620bcbe0e997a68376efe2082c7bf834002",
+      "git_blob": "76515c5a35bdb355aa027e60fded88d290b432ce",
       "path": "experiments/forge/technique_inventory.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -6855,8 +7339,15 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "7d494baec8b5204d90f747001e02d37a9cc26453",
+      "git_blob": "f84e370cb9582146dccf38e0a76eb5e3d624d832",
       "path": "experiments/forge/tier_report.py",
+      "role": "engine_support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "forge_engine",
+      "git_blob": "b98a85ae07c38acdd9b55074298ea7ccc13a81c9",
+      "path": "experiments/forge/trainer_families.py",
       "role": "engine_support",
       "suggested_tiers": []
     },
@@ -75095,6 +75586,3639 @@
       "family": "report/toy100/torch214-gpu-check",
       "git_blob": "450d10205a91b776468c623842408e8a211e4810",
       "path": "reports/toy100/torch214-gpu-check/summary.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "c5dc3df0133a19d5dccbf6c33574408523a48a38",
+      "path": "reports/toy_audit/CANONICAL_SELECTION.md",
+      "role": "narrative",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "cb0c5ec17011d73afe9e16347690882d1c9feea0",
+      "path": "reports/toy_audit/CONFIG_SELECTION_READINESS.md",
+      "role": "narrative",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "6740767be5f34961824b39846359610963e03ede",
+      "path": "reports/toy_audit/EXISTING_FAMILIES.md",
+      "role": "narrative",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "b5854a18b617df86953052b6d2d1e6fd0b82eec1",
+      "path": "reports/toy_audit/FAILURE_DIAGNOSIS.md",
+      "role": "narrative",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "3e8975f948d87ae233d9785a39a36d76c5dabc19",
+      "path": "reports/toy_audit/FOLLOW_UP.md",
+      "role": "narrative",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "245b1606722e1a3ace86a96e84891d40d6f315f0",
+      "path": "reports/toy_audit/HIGH_RATED.md",
+      "role": "narrative",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "4956842fa78c2620a1f0ef5dcbeeb0ef69a61d48",
+      "path": "reports/toy_audit/IMAGE_QUALITY_V2.md",
+      "role": "narrative",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "b1aa1c0432f4eb3ef5012fddbb5156a40bd33ae7",
+      "path": "reports/toy_audit/IMPROVEMENTS.md",
+      "role": "narrative",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "01c9cc0cfeb3504275a8592782f8c164987c6aee",
+      "path": "reports/toy_audit/NON_IMAGE_QUALITY.md",
+      "role": "narrative",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "b06a84a02360fd7ad8b1b526e4363151fac01bce",
+      "path": "reports/toy_audit/OPEN_PRS.md",
+      "role": "narrative",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "fb3c703fc1e2da54e8e156bc333353aa1c327178",
+      "path": "reports/toy_audit/OPEN_PR_DECISIONS.md",
+      "role": "narrative",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "2cacab72852e7b433862a45fd11dd061ce1f5940",
+      "path": "reports/toy_audit/PR226_PR227.md",
+      "role": "narrative",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "812a3b8e62c235ac6d7a193e6664bc9255cba4d4",
+      "path": "reports/toy_audit/PROBLEMS.md",
+      "role": "narrative",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "ff9c402f1b769316cd02f991693420507889d84d",
+      "path": "reports/toy_audit/PROVENANCE.md",
+      "role": "narrative",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "bdf4e9a2341180f8429a06b454e6e840c39a72ed",
+      "path": "reports/toy_audit/README.md",
+      "role": "narrative",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "a5abe6b276e226c0512d82533c0519495f3cb411",
+      "path": "reports/toy_audit/SOURCE_DEMOS.md",
+      "role": "narrative",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "bf304ef315d53e3d28d704ecd362349fb807b168",
+      "path": "reports/toy_audit/SOURCE_FAMILY_TRAINING.md",
+      "role": "narrative",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "c5c18fedc49b03465890157425d4852c23391e68",
+      "path": "reports/toy_audit/api_contract/GALLERY.md",
+      "role": "narrative",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "8328d9c58c04d6238fef5d114fc546c0f910c133",
+      "path": "reports/toy_audit/api_contract/LEADERBOARD.md",
+      "role": "narrative",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "f08214e0b0e329f876ab0cf3244920722c77dd11",
+      "path": "reports/toy_audit/api_contract/QUESTION_RANKING.md",
+      "role": "narrative",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "85900ddb81df895a5d95b7145937ff652522027b",
+      "path": "reports/toy_audit/api_contract/README.md",
+      "role": "narrative",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "06cdfbdc73c6f262da90991d8e78a8f769c66746",
+      "path": "reports/toy_audit/api_contract/RUN_REPORT.md",
+      "role": "narrative",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "4af3ab828da78da8c390e9f5373744c2579676d3",
+      "path": "reports/toy_audit/api_contract/binding-review.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "d25774b21ecad2f3e3b714d3e1f2e17ec729f067",
+      "path": "reports/toy_audit/api_contract/caption_prs/README.md",
+      "role": "narrative",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "1f2ca17b7b865797048c3b85d26c6bf58e1836cc",
+      "path": "reports/toy_audit/api_contract/caption_prs/pr239-240-bindings.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "0793225d7a1a6c06e539e35b47033f896ce59850",
+      "path": "reports/toy_audit/api_contract/caption_prs/pr239-240-review.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "05c44ab4d8919da5a2dee4b8a8149de0a15e29f3",
+      "path": "reports/toy_audit/api_contract/caption_prs/pr241-243-review.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "f12b8ce483c96d3966e1b77470a9a452c00ec645",
+      "path": "reports/toy_audit/api_contract/cases.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "8c6155dfcf25eb69551e12f7b043c7497689a5f4",
+      "path": "reports/toy_audit/api_contract/conditional-diagnostics.md",
+      "role": "narrative",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "a63be81a90b75aa946a74fea766d2332156b514f",
+      "path": "reports/toy_audit/api_contract/failed-runs.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "0680c380e1799de945b878570174cd58db07d338",
+      "path": "reports/toy_audit/api_contract/images/README.md",
+      "role": "narrative",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "9194adaf4a3c40135fb535fff4e4b6651ef73f83",
+      "path": "reports/toy_audit/api_contract/images/declaration-provenance.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "90d80da99512b361554ce1c8561dc000ef0113d1",
+      "path": "reports/toy_audit/api_contract/images/scorer-controls.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "f60cc8bd4c066f7be4be8ed360f6a31602ccb6d6",
+      "path": "reports/toy_audit/api_contract/images/software-verification.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "1d650e437fd7f7214cf6f6a1671b9f5fdcb0bcd3",
+      "path": "reports/toy_audit/api_contract/media/api-ae-anchor-hold.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "05afd1082f98abb6da0e507e82cdcea8e082ebf0",
+      "path": "reports/toy_audit/api_contract/media/api-circle-controller.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "9ad48a226a75c6813015d5ba5133a3f1bf8d99c2",
+      "path": "reports/toy_audit/api_contract/media/api-critic-lag-current-failure.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "8c9a7ee96c7d4374f862608d5adf856b282d75d0",
+      "path": "reports/toy_audit/api_contract/media/api-critic-lag-d_antithetic-failure.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "33dd29872b3e65abba487218c04edb381e0c9fbd",
+      "path": "reports/toy_audit/api_contract/media/api-critic-lag-even_critic-failure.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "cf9fa4a3a18ec2dceb755bbfe85e38d28b4677f0",
+      "path": "reports/toy_audit/api_contract/media/api-film-original_native.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "716e644c5fe901cd7a244924c31307ae185e6f7e",
+      "path": "reports/toy_audit/api_contract/media/api-film-shift_zero_antithetic.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "a9fd5812a775c7ebb5896487ef266045d67952ed",
+      "path": "reports/toy_audit/api_contract/media/api-film-shift_zero_g_bypass.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "d4ee0f0b4048a41fcb7bb108204ae8727176ec69",
+      "path": "reports/toy_audit/api_contract/media/api-film-shift_zero_native.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "b292ef051261c15cccd6ff13a92c6a69f51a2ad2",
+      "path": "reports/toy_audit/api_contract/media/api-gaussian2d.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "e7ab43e7cc8afda73bd4fbdc8bb77dbc416f171c",
+      "path": "reports/toy_audit/api_contract/media/api-grid100.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "35857b8d2e7cb2a682736576edcd4c8b375efd61",
+      "path": "reports/toy_audit/api_contract/media/api-guarded-leftover.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "ec218926a7cea8ba0dfbfb46824187726e754091",
+      "path": "reports/toy_audit/api_contract/media/api-mask-block.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "95c257f93c16d144a48fbeea0a74434b8e4cfbb2",
+      "path": "reports/toy_audit/api_contract/media/api-mask-mcar-p20.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "7cda3069b26e85794ee0bb59341c6a1c2dd9dd7b",
+      "path": "reports/toy_audit/api_contract/media/api-mask-mcar-p50.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "56cc8ae100ec123b1e0f2a00beb059eb17b1dea8",
+      "path": "reports/toy_audit/api_contract/media/api-mask-mcar-p80.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "6514d5f0132ba6f202d18929b21be0044b27de12",
+      "path": "reports/toy_audit/api_contract/media/api-midscale-identity.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "d12f8c67dad78ced8c9833a72d78689c124fa696",
+      "path": "reports/toy_audit/api_contract/media/api-posterior-1class.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "3165ca3b9775f0550b4d92f72dd376ddbd90b745",
+      "path": "reports/toy_audit/api_contract/media/api-posterior-4class.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "b11e6ba3f3ff5926c134b01e3cd907c7d6f8b03e",
+      "path": "reports/toy_audit/api_contract/media/api-pr152-control.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "dc27a2a33b899a0fe72e5bc5989d782f47faec12",
+      "path": "reports/toy_audit/api_contract/media/api-pr152-published.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "180956ee86d8c1759d56e68bc9f25cd99c10330e",
+      "path": "reports/toy_audit/api_contract/media/api-pr45-control.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "853e1ad2c7afb61d7d6ae37e1d4cd07c74216fca",
+      "path": "reports/toy_audit/api_contract/media/api-pr45-published.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "92848169193a810321596543e82f66dda258cb52",
+      "path": "reports/toy_audit/api_contract/media/api-pr47-control.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "1c52391a729ec621e5d1d8edc66193a1a29edfbb",
+      "path": "reports/toy_audit/api_contract/media/api-pr47-published.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "94efe9151f8251e8c88ed43f1441a5a749e811f5",
+      "path": "reports/toy_audit/api_contract/media/api-pr48-control.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "bdfb0bb81ca0fa22099dc84ea821c2b630988630",
+      "path": "reports/toy_audit/api_contract/media/api-pr48-published.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "4371ec8060bc0fbf3452294b92e1c8ffdf76c13a",
+      "path": "reports/toy_audit/api_contract/media/api-pr49-control.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "b08cdb00f140695e7432f88da32547b020b5b6c2",
+      "path": "reports/toy_audit/api_contract/media/api-pr49-published.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "1f62f5bd138f44e1e4a1378edd767e55d8ca287a",
+      "path": "reports/toy_audit/api_contract/media/api-pr50-control.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "1e80a87b6f018d3f953e6a74495eed9c47965e5e",
+      "path": "reports/toy_audit/api_contract/media/api-pr50-published.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "0bb10b61c672785e3368c960a44b452fd28e8781",
+      "path": "reports/toy_audit/api_contract/media/api-pr51-control.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "bc103ccf91d7463cc4e6b5bb512eb79bb39f412e",
+      "path": "reports/toy_audit/api_contract/media/api-pr51-published.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "2f26c8a013c6e2160d2740680d8d1e5a0f0d9af1",
+      "path": "reports/toy_audit/api_contract/media/api-pr52-control.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "5f5373955986d4379ac00465cd6707b79589a7bc",
+      "path": "reports/toy_audit/api_contract/media/api-pr52-published.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "5d154cea1a9aa56f17e0260922247672272a9807",
+      "path": "reports/toy_audit/api_contract/media/api-pr53-control.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "aa234c3c8272dab0a6b5ae376fb672f9648833b5",
+      "path": "reports/toy_audit/api_contract/media/api-pr53-published.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "d4d3d38b78b294d7299abd2282297a79e633df94",
+      "path": "reports/toy_audit/api_contract/media/api-pr54-control.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "c11624070402293567814d4c75fa1773cca423b2",
+      "path": "reports/toy_audit/api_contract/media/api-pr54-published.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "5b518e61b125d1552aa9e334d03dcde664314594",
+      "path": "reports/toy_audit/api_contract/media/api-pr55-control.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "a0f94c7c678b5df88d399f834fea807d0dfcb950",
+      "path": "reports/toy_audit/api_contract/media/api-pr55-published.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "813672f38bf32f0631d20831459bb02e62ff38f3",
+      "path": "reports/toy_audit/api_contract/media/api-pr56-control.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "e91a18988806757e209d5ac4bff69410020d0288",
+      "path": "reports/toy_audit/api_contract/media/api-pr56-published.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "a23b166a1039f2778c82c3331d133c315e636f0c",
+      "path": "reports/toy_audit/api_contract/media/api-pr57-control.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "62ba7cc168c426770ba8d41bfd6572cd54a6b8af",
+      "path": "reports/toy_audit/api_contract/media/api-pr57-published.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "8eec7eb56fc86bbf04163a6788ac9cef986c37ac",
+      "path": "reports/toy_audit/api_contract/media/api-previous-command-action.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "97deda77b797fa3e4547c3df766350e3e83f6271",
+      "path": "reports/toy_audit/api_contract/media/api-reserved-alternating-critic-updates.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "b85231e30710d9d9df1b79286ed1fcff6ff5ca89",
+      "path": "reports/toy_audit/api_contract/media/api-reserved-annulus.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "008d6b5047b1648572c3b9bf8fff630de58f35e1",
+      "path": "reports/toy_audit/api_contract/media/api-ring8-acquire.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "3e5a73706aeeaa0282aa6a6ab02d15e461d41417",
+      "path": "reports/toy_audit/api_contract/media/api-ring8-hold-failure.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "36714852e436e7ede8ffdd5e8af51a88dd8d119f",
+      "path": "reports/toy_audit/api_contract/media/api-ring8-resolution12.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "9ae8e62df8b79771efe2bb961a5f3625beb7b22e",
+      "path": "reports/toy_audit/api_contract/media/api-ring8-shift-failure.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "ad9197a102f38d90bbbacb5d386c732fa68c1714",
+      "path": "reports/toy_audit/api_contract/media/api-rotated100-moving.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "b475f1cfa484a2e4fae96f18fc48aa04a5329c68",
+      "path": "reports/toy_audit/api_contract/media/api-rotated100.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "717f7a9a98bbd06f46178d8c863b2aac8e8813ed",
+      "path": "reports/toy_audit/api_contract/media/api-routed-acquisition-neutral.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "f4f3d86540ab04f65c9cf0b20bcf070e503dbfdb",
+      "path": "reports/toy_audit/api_contract/media/api-routed-acquisition-original.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "53ed9c92d3e77d6e5634b2cf49b08ef93c67cbc7",
+      "path": "reports/toy_audit/api_contract/media/api-routed-moving.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "90cff76e5445c7ea58b97c9e2374deebcecd8d16",
+      "path": "reports/toy_audit/api_contract/media/api-routed-paired.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "82f552dd9115f7ad12c9ef860331fd498f0e1d60",
+      "path": "reports/toy_audit/api_contract/media/api-routed-replay.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "3444b8b76c378229dfa4ee6b82b074da49aea0b3",
+      "path": "reports/toy_audit/api_contract/media/api-routed-support.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "d1cd65517374726e798cc57ec964f9cd673fca57",
+      "path": "reports/toy_audit/api_contract/media/api-routes-continuous.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "c78140338e1365d8f94bc60af8e7a5c3dae747bb",
+      "path": "reports/toy_audit/api_contract/media/api-routes-discrete.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "05ce3ef700ff134dcea0f1c144d1d132b850bf61",
+      "path": "reports/toy_audit/api_contract/media/api-safe-fast-controls.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "dc6e76851c093f3680e649c3bf7a96e93a3525c6",
+      "path": "reports/toy_audit/api_contract/media/api-sign-lander-controls.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "6ae6fe98aca87074e1b9d68e1a7b088e01e65f1d",
+      "path": "reports/toy_audit/api_contract/media/api-sparse-identity.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "b8037a8598a3500624306c8d7eb0c997fe68755e",
+      "path": "reports/toy_audit/api_contract/media/api-sparse-split.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "b67da404dcd5e73382e7d7686de93e54fca4cb48",
+      "path": "reports/toy_audit/api_contract/media/api-sprite-dynamics.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "3dc9637a790112e4184c8fbc8f707de381f8dc3e",
+      "path": "reports/toy_audit/api_contract/media/api-staggered100.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "89e19bb8f66a21bec7d92785f56e369a6b15f81d",
+      "path": "reports/toy_audit/api_contract/media/api-stiff-cancel.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "3f42f305e09797f47ea468084e7fb3e97affedd7",
+      "path": "reports/toy_audit/api_contract/media/api-stiff-native.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "3cc8632078cb13b1e974847d64630978a23bb6a0",
+      "path": "reports/toy_audit/api_contract/media/api-stiff-safe.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "0f7adea261630d8170bb61c41c157ab26f2f9112",
+      "path": "reports/toy_audit/api_contract/media/api-stress-fast-critic.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "7483dedfd68b4d919bd5be37228ae1f9a4a3a3b2",
+      "path": "reports/toy_audit/api_contract/media/api-stress-large-critic.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "87c20b7e1fbf80e0e10329370ee9431cf57e4393",
+      "path": "reports/toy_audit/api_contract/media/api-stress-long-horizon.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "4dbe7bceeba91bd2b895d69adb59652334ca30b1",
+      "path": "reports/toy_audit/api_contract/media/api-stress-overlapping-data.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "f171e00fc0c8d0511c9229f225835f7c0fb2dfd1",
+      "path": "reports/toy_audit/api_contract/media/api-stress-r1-r2.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "71f703d3597e708552b9d321f7d4e0a22a9dea85",
+      "path": "reports/toy_audit/api_contract/media/api-stress-slow-critic.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "0184c37bd9168027ca7036a9eaaef2862029d9dc",
+      "path": "reports/toy_audit/api_contract/media/api-stress-small-batch.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "376c3a5c8139e855ddbf43e29ffdfaf7ddccc4b2",
+      "path": "reports/toy_audit/api_contract/media/api-stress-weak-critic.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "b0e300fced1ca2d56623878f917909a142e3c614",
+      "path": "reports/toy_audit/api_contract/media/api-trajectory-edit.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "b80eee480533bb439bd0575baf497743b87ea04d",
+      "path": "reports/toy_audit/api_contract/media/api-trajectory-residual.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "089863088d862e7cc5d2582bc3810d09ab1ad4e1",
+      "path": "reports/toy_audit/api_contract/media/api-transitions-continuous.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "4426172abb4eb6d983bbb4f7cea2c8ccf58b0c7a",
+      "path": "reports/toy_audit/api_contract/media/api-transitions-discrete.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "6364906a8f879604f17c80dacb7e75446769e32f",
+      "path": "reports/toy_audit/api_contract/media/api-transport-affine2.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "d52fb22f7f86959c42901d2deb26a5cd3feaaced",
+      "path": "reports/toy_audit/api_contract/media/api-transport-swirl2.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "c542c59ae69a032e15036de036a8b3e7b14a0fa5",
+      "path": "reports/toy_audit/api_contract/media/api-two-pole-grid12.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "01f8012125d4a6064c24979b21b3fdca9c9ffb2f",
+      "path": "reports/toy_audit/api_contract/media/api-unipolar-hold.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "86b9fe864c3de345f2aef54c7726cebe562c232b",
+      "path": "reports/toy_audit/api_contract/media/api-unused-token-hold.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "3ad6e702482dea0ab5d11bb44de9a6f670b3434e",
+      "path": "reports/toy_audit/api_contract/media/api-vector-anisotropic.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "0acdfad6def46c5f8a43546f752f9069318d76cf",
+      "path": "reports/toy_audit/api_contract/media/api-vector-narrow.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "c245f65072dfca5b9c41287901c87d617aa6b782",
+      "path": "reports/toy_audit/api_contract/media/api-vector-overlap.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "5eafca456e8790b09763bf05aff399846848e93e",
+      "path": "reports/toy_audit/api_contract/media/api-vector-scale-drift.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "c3a1c218be6a841fd12a2708e8fe409de7d1cfd3",
+      "path": "reports/toy_audit/api_contract/media/api-vector-spiral.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "e8b5796d87cc4048d13a57c6b4dec15d19e9700b",
+      "path": "reports/toy_audit/api_contract/media/api-vector-two-broad.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "c236d3884035477f90024158e70bab434a70f8bb",
+      "path": "reports/toy_audit/api_contract/media/api-vector-unequal-mass.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "e0a4009f8b35e59189ac09c51aecfb3566e58d70",
+      "path": "reports/toy_audit/api_contract/media/api-vector-unequal-width.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "a02c5b13295df1693e111ad0424f7fc75d70edc3",
+      "path": "reports/toy_audit/api_contract/media/image-develop-img_bars4-residual_upsample16.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "9968fda536f07d5860eccabfe2406d6d533cc951",
+      "path": "reports/toy_audit/api_contract/media/image-develop-img_bars4-source-transpose12.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "1eb74aaa870577497ac9a057b5fe54a0839e51f8",
+      "path": "reports/toy_audit/api_contract/media/image-develop-img_bars8-transpose12.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "8d1c8b02300b0da11e7994b7af034fb4973429e4",
+      "path": "reports/toy_audit/api_contract/media/image-develop-img_blobs4-residual_upsample16.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "dc60875e099eaa07051526589bd629db00ca2b75",
+      "path": "reports/toy_audit/api_contract/media/image-develop-img_blobs4-source-transpose12.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "ed9228c39858b36d4d03e6f9020250e64feb3026",
+      "path": "reports/toy_audit/api_contract/media/image-develop-img_intensity2-residual_upsample16.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "fa4f00b4487e726113a4cf90ed36ce50e0d6bccf",
+      "path": "reports/toy_audit/api_contract/media/image-develop-img_intensity2-source-transpose12.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "6c81bdd525fc9cb232917a350dfa93d0fe7ffbcb",
+      "path": "reports/toy_audit/api_contract/media/image-develop-img_mean_discriminator-mean_discriminator12.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "9ef07961833a7769725c4d541ea907847a7afc73",
+      "path": "reports/toy_audit/api_contract/media/image-develop-img_residual_bars4-residual_upsample16.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "ab8997462e56947e8fe46ed70aa02c8ce1784bde",
+      "path": "reports/toy_audit/api_contract/media/image-develop-img_stripes2-residual_upsample16.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "887a19244b546dbdd804df9a5a2ff55128850ef2",
+      "path": "reports/toy_audit/api_contract/media/image-develop-img_stripes2-source-transpose12.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "651aa9ac1c27ff62fc79352ea7667e3a8510fa3d",
+      "path": "reports/toy_audit/api_contract/media/image-develop-img_tiny_generator-transpose2.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "971bb39065dfcd2eece1ab5d9d727d0a544bc9ba",
+      "path": "reports/toy_audit/api_contract/media/image-develop-img_uniform_generator-uniform_generator12.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "1d43e828c0921d9043406db8f645db3ed794e386",
+      "path": "reports/toy_audit/api_contract/media/image-five-words-joint-ae.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "6b6500b9934b29f5ce5ffdb20a9bb130bd04414e",
+      "path": "reports/toy_audit/api_contract/media/image-pr106-residual_upsample16.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "ee13a4e56a35208f8efda32ce8a09e96c2ae75f3",
+      "path": "reports/toy_audit/api_contract/media/image-pr106-transpose12.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "20b5e38cb182f5cb410f6e4e7d3324bef59817cd",
+      "path": "reports/toy_audit/api_contract/media/image-pr131-residual_upsample16.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "38bd00b13cf645fb60711c982c6d4e372cdd97dd",
+      "path": "reports/toy_audit/api_contract/media/image-pr131-transpose12.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "877d044210c9f3b4431fe25b84a4afe633842f99",
+      "path": "reports/toy_audit/api_contract/media/image-pr150-residual_upsample16.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "eb070d5e7a8ae24c29a85cfc14a33347eac7228c",
+      "path": "reports/toy_audit/api_contract/media/image-pr150-transpose12.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "c0fbc9c7d94bd999d0f15d0905f7af74a1d3cc7a",
+      "path": "reports/toy_audit/api_contract/media/image-pr151-residual_upsample16.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "1ef085bd783629c27f9e8e0e55a3ab0e33c06ab0",
+      "path": "reports/toy_audit/api_contract/media/image-pr151-transpose12.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "8029baa68e8369b8c083883710b2031e429d20d9",
+      "path": "reports/toy_audit/api_contract/media/image-pr154-residual_upsample16.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "ac2ad8f8e333ecf504ec558236c9351482b4bdf5",
+      "path": "reports/toy_audit/api_contract/media/image-pr154-transpose12.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "8e35618c72e231b4022e71014cf4035879ffd6aa",
+      "path": "reports/toy_audit/api_contract/media/image-pr159-residual_upsample16.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "cacfbde2575e32c9459fc313af1c2671b1a0d897",
+      "path": "reports/toy_audit/api_contract/media/image-pr159-transpose12.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "dd060970a467566057cb49362a7fcb11115e8946",
+      "path": "reports/toy_audit/api_contract/media/image-pr166-residual_upsample16.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "0df2c5d522086674f8fa361385961b246b160f66",
+      "path": "reports/toy_audit/api_contract/media/image-pr166-transpose12.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "55502f8af495acd26966bda3f87329f589ac52cc",
+      "path": "reports/toy_audit/api_contract/media/image-pr170-residual_upsample16.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "179fc8367b2818e3578b62d9cb0f17f96cdc5dda",
+      "path": "reports/toy_audit/api_contract/media/image-pr170-transpose12.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "c0a900ae872fd5598526798bbc083c6bbde52ec1",
+      "path": "reports/toy_audit/api_contract/media/image-pr58-residual_upsample16.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "694368f08a1b9d7aea837b37ad78a7e9dc0af7d8",
+      "path": "reports/toy_audit/api_contract/media/image-pr58-transpose12.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "7af25d7344225c0595001b236873eeee34c56ffa",
+      "path": "reports/toy_audit/api_contract/media/image-pr59-residual_upsample16.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "b9a7b5af0b7ede1f06586ff447cf31dd603ec150",
+      "path": "reports/toy_audit/api_contract/media/image-pr59-transpose12.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "7a4ca0a8109e29f4688f42f5459fdb342f969def",
+      "path": "reports/toy_audit/api_contract/media/image-pr61-conditional-residual_upsample16.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "40adc3fe2dd2d19e79980916b35654b4f1eac7d7",
+      "path": "reports/toy_audit/api_contract/media/image-pr61-conditional-transpose12.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "86a27efc303fd09783f65f31d2c55a6848a931d4",
+      "path": "reports/toy_audit/api_contract/media/image-pr61-residual_upsample16.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "86ed165a572a19b8f366beb5f3abbf53236a4747",
+      "path": "reports/toy_audit/api_contract/media/image-pr61-transpose12.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "e30881f4935800ee98e57c60b84030714acc8aed",
+      "path": "reports/toy_audit/api_contract/media/image-pr62-residual_upsample16.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "7bc470add968ae366a1dd7d2b76261e92aeef7c3",
+      "path": "reports/toy_audit/api_contract/media/image-pr62-transpose12.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "ba86f519db92397a8aae21bcf6cd0aeef161578a",
+      "path": "reports/toy_audit/api_contract/media/image-pr63-conditional-residual_upsample16.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "386250642f60935819ffeb29a9735089157eec4f",
+      "path": "reports/toy_audit/api_contract/media/image-pr63-conditional-transpose12.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "3b53f4a9f3923119ba7ee4303b866a87f96ac1d2",
+      "path": "reports/toy_audit/api_contract/media/image-pr63-residual_upsample16.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "10aa6789308096fd04ce219c7f3addf5dec3685e",
+      "path": "reports/toy_audit/api_contract/media/image-pr63-transpose12.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "60b967cfe4c948b1dfea6a805fad2f1f5001069a",
+      "path": "reports/toy_audit/api_contract/media/image-pr64-residual_upsample16.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "96d30cfd021e76ac00d44baeb93a6768b7b71ca8",
+      "path": "reports/toy_audit/api_contract/media/image-pr64-transpose12.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "d6a793e3733d1b77672621a4dff5e3d1ea1e433c",
+      "path": "reports/toy_audit/api_contract/media/image-pr65-conditional-residual_upsample16.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "bdd6077185a04a8f225f360e8bf0978ed4fea21d",
+      "path": "reports/toy_audit/api_contract/media/image-pr65-conditional-transpose12.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "8adfe8010088371c16122c9606c990107af80f10",
+      "path": "reports/toy_audit/api_contract/media/image-pr65-residual_upsample16.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "a0909c17134e800850cf0cb4d33a5a0db3c4ea67",
+      "path": "reports/toy_audit/api_contract/media/image-pr65-transpose12.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "93f6b3adfd77cadb69a259d501dd966c3cf7bf58",
+      "path": "reports/toy_audit/api_contract/media/image-pr66-residual_upsample16.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "0f3a71a304b8eabc39e270a5eb1780a104ac49b8",
+      "path": "reports/toy_audit/api_contract/media/image-pr66-transpose12.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "33adb114eeb2456adc81011f44be5d9a41388ddd",
+      "path": "reports/toy_audit/api_contract/media/image-pr67-residual_upsample16.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "132e7723bc50f9223c40d398806bbe7df6bc3042",
+      "path": "reports/toy_audit/api_contract/media/image-pr67-transpose12.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "855a1b351ab31be9c14e879d682a67851b417a6c",
+      "path": "reports/toy_audit/api_contract/media/image-pr68-residual_upsample16.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "aa060c139ec43c03cd7ed6167a3258c7fedcd1f7",
+      "path": "reports/toy_audit/api_contract/media/image-pr68-transpose12.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "e473a903ca4ea7b613acafd1b5189ccc051821e9",
+      "path": "reports/toy_audit/api_contract/media/image-pr69-residual_upsample16.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "2ec04b4a0f74f17023da8664d5f1f51fd127a269",
+      "path": "reports/toy_audit/api_contract/media/image-pr69-transpose12.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "44638930c001c159dc5bf7dcc85467d3eac328c2",
+      "path": "reports/toy_audit/api_contract/media/image-pr70-residual_upsample16.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "a07faaee0f5d9f6c6ef4aebee5dbfba04efd69a1",
+      "path": "reports/toy_audit/api_contract/media/image-pr70-transpose12.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "cea210e2d52ad0c80e608de48476a51ec18ab266",
+      "path": "reports/toy_audit/api_contract/media/image-pr71-residual_upsample16.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "0db5a1ad070386c5bc67db0429c00e9e809701e9",
+      "path": "reports/toy_audit/api_contract/media/image-pr71-transpose12.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "4f5f4475c9b146b756d20a91f773d7f431b14200",
+      "path": "reports/toy_audit/api_contract/media/image-pr72-residual_upsample16.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "823b14c9c9ebedd208a50e60d910c7bfd6ea26fa",
+      "path": "reports/toy_audit/api_contract/media/image-pr72-transpose12.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "eac0c252d8ce68d2912f735bf95d38df8d74431e",
+      "path": "reports/toy_audit/api_contract/media/image-pr73-residual_upsample16.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "8a9016e357fd1a02eb954789cddaa020620f3836",
+      "path": "reports/toy_audit/api_contract/media/image-pr73-transpose12.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "e56046df7cca85ae12a376fb71acfee589515cab",
+      "path": "reports/toy_audit/api_contract/media/image-pr74-residual_upsample16.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "7a4780b6e854a178d29689899c446789fe0fe8a7",
+      "path": "reports/toy_audit/api_contract/media/image-pr74-transpose12.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "85afa0aff4db3d216c36be28c201b06c9300c8ae",
+      "path": "reports/toy_audit/api_contract/media/image-pr75-residual_upsample16.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "f17fb3388a6df074f8f3a8a7a8fd00381a68b817",
+      "path": "reports/toy_audit/api_contract/media/image-pr75-transpose12.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "3d8b31006ec3fed4c300e7b91acd22cf7ca4fe8c",
+      "path": "reports/toy_audit/api_contract/media/image-pr76-residual_upsample16.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "74c3e5b702de20b0f27d862b3be4aa6013016f1d",
+      "path": "reports/toy_audit/api_contract/media/image-pr76-transpose12.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "5806e8127c66e069aa71f36f3fe5e7321fc7f3a8",
+      "path": "reports/toy_audit/api_contract/media/image-pr77-residual_upsample16.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "5c0e005b1869af13163821854f697927023e65eb",
+      "path": "reports/toy_audit/api_contract/media/image-pr77-transpose12.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "567149637bfdfa87bfd9363899a807acddd709c8",
+      "path": "reports/toy_audit/api_contract/media/image-pr78-residual_upsample16.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "963e671fab0b1001f83401231fd3857375ef80b9",
+      "path": "reports/toy_audit/api_contract/media/image-pr78-transpose12.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "f56a59fd152a5336b8f2842956e8ab20b5476131",
+      "path": "reports/toy_audit/api_contract/media/image-pr79-residual_upsample16.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "a6439bd5a748efb91d181c3cc479540ecdbddc28",
+      "path": "reports/toy_audit/api_contract/media/image-pr79-transpose12.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "0b99d6ff5382bc4a69cd2cbe95cc36e394355d4d",
+      "path": "reports/toy_audit/api_contract/media/image-pr80-residual_upsample16.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "d18cde1cb6e45baf859105a0463c6a0cab64dfce",
+      "path": "reports/toy_audit/api_contract/media/image-pr80-transpose12.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "6dc07eeee443b2460599b91af9eac96197b663c3",
+      "path": "reports/toy_audit/api_contract/pr236/README.md",
+      "role": "narrative",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "c0a0e82e9184cf42275a752fbdba18655fc6538c",
+      "path": "reports/toy_audit/api_contract/pr236/goal.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "9f9791bb96eb4dd963be2ba763095718456b73fc",
+      "path": "reports/toy_audit/api_contract/pr236/independent-review.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "b093032dfcccb2751349e15ba9f493acc5332d70",
+      "path": "reports/toy_audit/api_contract/pr236/integrated-validation.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "222a6ef887bb338d826f3fcfb42750145fb30047",
+      "path": "reports/toy_audit/api_contract/pr236/receipt.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "795acf4ea48c6a4f350bcce86e5eea271fa50244",
+      "path": "reports/toy_audit/api_contract/pr236/scientific-review.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "ec12e4d5ff418e5e172d17a7c6088621a850ca39",
+      "path": "reports/toy_audit/api_contract/readout.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "c08a8b82740b567b4f2faa8e1e5b448e636ec577",
+      "path": "reports/toy_audit/api_contract/recent_prs/README.md",
+      "role": "narrative",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "b23fcf6cb73ce1a511b1dff6d550b251a69fabb0",
+      "path": "reports/toy_audit/api_contract/recent_prs/binding-review.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "92a0c8c6ee90f2c60f0eeab0f8786c609d64a6d3",
+      "path": "reports/toy_audit/api_contract/recent_prs/coverage.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "866c225bc49424105c2eaed63fcade7c6253a6af",
+      "path": "reports/toy_audit/api_contract/recent_prs/pr233/pr233-width16-goal.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "c673c36fcef61a252c3c66581cc896d5ed98daaf",
+      "path": "reports/toy_audit/api_contract/recent_prs/pr233/pr233-width4-goal.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "dd1087a38845b5a387a1bbc05c2848c766d7a12c",
+      "path": "reports/toy_audit/api_contract/recent_prs/pr233/receipt.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "15386d5b3cb26b2bd0b7c816a36ea5b95c3c08ef",
+      "path": "reports/toy_audit/api_contract/recent_prs/pr234/pr234-goal.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "800104ae0991bcad6ae4df3ffd567c010a4ef5da",
+      "path": "reports/toy_audit/api_contract/recent_prs/pr234/receipt.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "03e3e0c1f838d81be3c33f579b73d5d424cd4041",
+      "path": "reports/toy_audit/api_contract/recent_prs/pr235/pr235-goal.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "e156ec0ffe94b4063a6ca86c7fa894720bcd3cef",
+      "path": "reports/toy_audit/api_contract/recent_prs/pr235/receipt.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "43b68713cd2850c0af2fce17dc13102f9a814930",
+      "path": "reports/toy_audit/api_contract/ring16/README.md",
+      "role": "narrative",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "bfce35ccdfd008dec4617b3f835a65ef31d7c0c7",
+      "path": "reports/toy_audit/api_contract/ring16/controls.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "120001aa986dea16ebe034a40d391021af212e17",
+      "path": "reports/toy_audit/api_contract/ring16/goal.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "b2e12df1f12d2f798eebcfede272274f0a84bb5b",
+      "path": "reports/toy_audit/api_contract/ring16/publication.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "541a605c7a22c081d396c257e1fa529920ce106c",
+      "path": "reports/toy_audit/api_contract/runs.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "808ad4b6b3278fae06801e69ca39390f5dadc05c",
+      "path": "reports/toy_audit/api_contract/software-validation.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "0364b10cb233aee0dbb5c7412e2cfb0b21bcea9c",
+      "path": "reports/toy_audit/api_contract/vectors.md",
+      "role": "narrative",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "3fa8268c1f141a1e680c75f7f519a9e123c0bc74",
+      "path": "reports/toy_audit/canonical-selection.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "9da970e05499dc12801d96ca49c7513bb3e7698d",
+      "path": "reports/toy_audit/catalog.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "fcd7ccf796b87080be0c263bc3945ac9c01a0c4a",
+      "path": "reports/toy_audit/conditional_sources/README.md",
+      "role": "narrative",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "794cd2e8a06d4c2b530ff366de3e6f8f6ac21dde",
+      "path": "reports/toy_audit/conditional_sources/controls.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "5a7f7c4bbb4593a20062da446db7de9350bae385",
+      "path": "reports/toy_audit/conditional_sources/coverage.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "f708cdc5d40f19114db99cd709b8cb5d87e61ae1",
+      "path": "reports/toy_audit/conditional_sources/media/source-family-00.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "ba497d37c82ff62cd5d4f46b0188c7852b063ccb",
+      "path": "reports/toy_audit/conditional_sources/media/source-family-00.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "7b11388a2e6bc132834a8a941e7fbd14d723a1cd",
+      "path": "reports/toy_audit/conditional_sources/media/source-family-01.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "70b6933bed358486d0b502fb491825f824010f84",
+      "path": "reports/toy_audit/conditional_sources/media/source-family-01.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "4326c4486f7e11a2e1829dff8aa441cae85c5ef3",
+      "path": "reports/toy_audit/config-selection-readiness.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "2c73d59cca327075e6f1c4c948e7a3d02d21c141",
+      "path": "reports/toy_audit/convergence-addendum.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "66380b1b73b3530bfe7a015aec1c13898e7ce728",
+      "path": "reports/toy_audit/cuda_sources/PLAN.md",
+      "role": "narrative",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "3e6c358fdb7f0ba68aad940b11c6b0c99b3ab373",
+      "path": "reports/toy_audit/cuda_sources/README.md",
+      "role": "narrative",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "188ded6001a693958a4b3cca3f4ce0e363deeab4",
+      "path": "reports/toy_audit/cuda_sources/coverage.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "fca46eb233fe909babf2818be6b37ac64526b6e7",
+      "path": "reports/toy_audit/current-validation.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "9f4c26791ce00f6a046ce193ba2e649cc6e7661d",
+      "path": "reports/toy_audit/definition-quality-controls.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "90cc01a21521cc1958e86d9db3de38a81dab3735",
+      "path": "reports/toy_audit/failure-diagnosis.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "3e93281cf981ecbb604b431b8ca4617c88ff2e97",
+      "path": "reports/toy_audit/frozen-image-alias.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "b6be69f3c3f621d6c1e70e40e45fc46d50462814",
+      "path": "reports/toy_audit/image-quality-v2.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "81c2dbf8f4d94084ec429bfdb88e984cf9dc9817",
+      "path": "reports/toy_audit/improvement-validation.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "b9bb191ceed65a165fbf40b1d13ac832356a568e",
+      "path": "reports/toy_audit/improvements.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "b3275ed996e1467ff2aa57a8d78c690d8fc53cc1",
+      "path": "reports/toy_audit/media/atlas-grid100.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "c402145ae65e6b6777191a80cf810c4c424cef32",
+      "path": "reports/toy_audit/media/atlas-grid100.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "60dfc5b8b97df23b755ef5e4f9557e049ae6fff7",
+      "path": "reports/toy_audit/media/atlas-rotated100.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "94194cb21c30395b5c892549e50081d74328722e",
+      "path": "reports/toy_audit/media/atlas-rotated100.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "f9a5b7e2d19e4cde8f5d33c71c5577f00b523108",
+      "path": "reports/toy_audit/media/atlas-rotated100_moving.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "7c5af693780ecfc75590067753bb6b4cf795643f",
+      "path": "reports/toy_audit/media/atlas-rotated100_moving.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "21e5faf978186be2a4b810d8280fad6bee4543b3",
+      "path": "reports/toy_audit/media/atlas-staggered100.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "5ee59cf66dacefa9271302a89eec754e098b9aac",
+      "path": "reports/toy_audit/media/atlas-staggered100.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "4c61be57c40accfcf8195e030166bf8a2259757a",
+      "path": "reports/toy_audit/media/develop-ae_gan_hold.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "653022159a1a55a240da3533f03227651df48cf4",
+      "path": "reports/toy_audit/media/develop-ae_gan_hold.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "4ce92c87efd13e431a44b962295b90f22d5cc6d1",
+      "path": "reports/toy_audit/media/develop-cover_leftover.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "35d95ca94b856202f58babad90996514cec46ac3",
+      "path": "reports/toy_audit/media/develop-cover_leftover.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "a7e3928140549b94d72cd9a0218d77adbffeaf59",
+      "path": "reports/toy_audit/media/develop-img_bars4.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "6799c48b09002be244920fa30635599a37c693d6",
+      "path": "reports/toy_audit/media/develop-img_bars4.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "2671dfbe8ba60db6cba5e8d5f30c69a38ffc7bf5",
+      "path": "reports/toy_audit/media/develop-img_bars8.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "fd37959a84da9295f70109230c1c70038a2fee92",
+      "path": "reports/toy_audit/media/develop-img_bars8.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "d2819f21593f2b69195185e8d3725b671482785d",
+      "path": "reports/toy_audit/media/develop-img_blobs4.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "f637e7b593c502b87986b0ef981e2486291770da",
+      "path": "reports/toy_audit/media/develop-img_blobs4.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "cab589f04b669d258d5603c5cbd2c2f5ea65464f",
+      "path": "reports/toy_audit/media/develop-img_intensity2.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "61bbce7207f127d02b706ccc5433ed3c9df9aa7d",
+      "path": "reports/toy_audit/media/develop-img_intensity2.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "95faf36aeb459ad23fa17beccc403ae13e1eeb1f",
+      "path": "reports/toy_audit/media/develop-img_mean_discriminator.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "e021324df566b3eec5641fa70ebee149dd0b2f04",
+      "path": "reports/toy_audit/media/develop-img_mean_discriminator.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "2ee6a507e1f91dd877da85da24ea7aa7460b6c85",
+      "path": "reports/toy_audit/media/develop-img_residual_bars4.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "e0ef2f2b12d335366cb0c3dd263ea925c2abf67b",
+      "path": "reports/toy_audit/media/develop-img_residual_bars4.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "fc3cc37361f60aa450bac613f8d945a98325a14f",
+      "path": "reports/toy_audit/media/develop-img_stripes2.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "68d4a9b33484e7a49c261e062e1f4fc9e32e5527",
+      "path": "reports/toy_audit/media/develop-img_stripes2.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "d1ff7ef83caa1fdba270b9235b0823cedfd3402d",
+      "path": "reports/toy_audit/media/develop-img_tiny_generator.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "42832bf7ae97c955fcde64d651b7ddb48ce7daf4",
+      "path": "reports/toy_audit/media/develop-img_tiny_generator.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "4384df434453e4061ba9264a94e9117dc99cc877",
+      "path": "reports/toy_audit/media/develop-img_uniform_generator.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "062f0c0a850fc8bb60c14e15cd195276eb3a35ae",
+      "path": "reports/toy_audit/media/develop-img_uniform_generator.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "133d087af9a4601ce9893e1f4c0f83b58e5e2c6d",
+      "path": "reports/toy_audit/media/develop-mid_scale_identity.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "cf8b748a554c62e3dac2d48cc02d653c248f6af5",
+      "path": "reports/toy_audit/media/develop-mid_scale_identity.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "300ea70ceba6166e228268ce9ee68cd1450dd1a5",
+      "path": "reports/toy_audit/media/develop-mode_hold.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "22f3c638d778f19eb9767407655de5b22a5cefff",
+      "path": "reports/toy_audit/media/develop-mode_hold.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "3735e614ff63c905a212181606caef8e1494a9f7",
+      "path": "reports/toy_audit/media/develop-reserved_alternating_critic_updates.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "584a71040a6ba4375f11c0fd95e739bfe0377407",
+      "path": "reports/toy_audit/media/develop-reserved_alternating_critic_updates.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "a7c4d44c1de40e28d960a65d4d3eb049c8a08a8e",
+      "path": "reports/toy_audit/media/develop-reserved_annulus.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "defea6d7ca980543c1efa03c992d03462236388f",
+      "path": "reports/toy_audit/media/develop-reserved_annulus.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "e4289e0f2bc3bc00d1ce8aa41157c9eefc23161a",
+      "path": "reports/toy_audit/media/develop-residual_student.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "2b3b4c890846860432b9798732c064aa33987699",
+      "path": "reports/toy_audit/media/develop-residual_student.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "e36086f856b533023bf87438b08d81560cf0624a",
+      "path": "reports/toy_audit/media/develop-stress_fast_critic.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "b6ae91978631665d129952fb710b6c0149d9c688",
+      "path": "reports/toy_audit/media/develop-stress_fast_critic.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "b7ae8e2f09a44bbf59b1d7728af551851c1af0f2",
+      "path": "reports/toy_audit/media/develop-stress_large_critic.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "136d63a135014cfaa02904b7fd764da52771dca7",
+      "path": "reports/toy_audit/media/develop-stress_large_critic.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "89c56cf2357e00af7863d914c9b0901109c9cb97",
+      "path": "reports/toy_audit/media/develop-stress_long_horizon.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "c750123ba56b38c522ae4862f241b617b8e0d659",
+      "path": "reports/toy_audit/media/develop-stress_long_horizon.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "882fb1aca3eb49c9d0c63434c4eb1c6201cde0e2",
+      "path": "reports/toy_audit/media/develop-stress_overlapping_data.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "ba17c2a6cd278aeff209810a7db5016273b94898",
+      "path": "reports/toy_audit/media/develop-stress_overlapping_data.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "99ecbe0bc072546a1b5f580f97489384f81bc3e3",
+      "path": "reports/toy_audit/media/develop-stress_r1_r2.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "27e3cf87b83b79466d72c80784831529715f7548",
+      "path": "reports/toy_audit/media/develop-stress_r1_r2.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "d63898ca2e7d1062ee278cb0a34c64673942c5e1",
+      "path": "reports/toy_audit/media/develop-stress_slow_critic.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "660980d61c8863e626e86733b4c186b513f787c1",
+      "path": "reports/toy_audit/media/develop-stress_slow_critic.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "e03004e8109a7e3cbd8a0bac2aeee7ee5f2253d3",
+      "path": "reports/toy_audit/media/develop-stress_small_batch.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "480127def1bc30a2ff49b2641263102cd2d360a4",
+      "path": "reports/toy_audit/media/develop-stress_small_batch.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "c627d51e4497720aab04d3cfb48c47ee3d2776c7",
+      "path": "reports/toy_audit/media/develop-stress_weak_critic.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "64564f9a0b192018a617f6e486953dd9500cba1e",
+      "path": "reports/toy_audit/media/develop-stress_weak_critic.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "9619cbd7036297851f6577d375c25ecf9b803066",
+      "path": "reports/toy_audit/media/develop-trajectory.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "24457865218d03d9053a0832cdde773bc0c652f8",
+      "path": "reports/toy_audit/media/develop-trajectory.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "58cc2cf6bc3d61795d0b68ab1f6cda600fc9ab94",
+      "path": "reports/toy_audit/media/develop-two_pole.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "684ea54697914bea99119e3eff62f0c400ca46a4",
+      "path": "reports/toy_audit/media/develop-two_pole.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "5031c646780a5f855d66a769ec6321e61b7f86bf",
+      "path": "reports/toy_audit/media/develop-unipolar.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "8d720bf6eae93d71e53da343f9cbfeb5a7a7b35a",
+      "path": "reports/toy_audit/media/develop-unipolar.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "96f2187aa94619775bbbdd42d4b5cc43665cbbac",
+      "path": "reports/toy_audit/media/develop-unused_token_hold.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "a3399bd3d364b2f802621e99de78824d1f930d27",
+      "path": "reports/toy_audit/media/develop-unused_token_hold.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "8f92f2724893dda667fde3b01ba6a9ad152d34fe",
+      "path": "reports/toy_audit/media/develop-vector_anisotropic.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "13b9cb7dbde39eb0f164a71804420a9646a6606a",
+      "path": "reports/toy_audit/media/develop-vector_anisotropic.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "ea22a700c27aaa4836c88a2befdb84b1a297b1a7",
+      "path": "reports/toy_audit/media/develop-vector_narrow.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "13ae21770ed01d214fcc7c1df75e8bce1d7dfd6a",
+      "path": "reports/toy_audit/media/develop-vector_narrow.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "fcbfcbc2de6e3bb0719b1ca769ccdd791fd84be8",
+      "path": "reports/toy_audit/media/develop-vector_overlap.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "db11a032db95097354230f9f2c8444d37baf7109",
+      "path": "reports/toy_audit/media/develop-vector_overlap.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "292a0188a4d50f4103dd2514b180e888f9854c13",
+      "path": "reports/toy_audit/media/develop-vector_scale_drift.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "9d212de6a04583c6d1c26baa09da0fabdc265c24",
+      "path": "reports/toy_audit/media/develop-vector_scale_drift.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "9ab039326b15f6f6377e9e2184441f2c1f3ffe98",
+      "path": "reports/toy_audit/media/develop-vector_spiral.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "d2910f829a2a922bd41aa2e0553601af118ce36a",
+      "path": "reports/toy_audit/media/develop-vector_spiral.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "26ead863d07291730b224c295d0c81444c3cb6b7",
+      "path": "reports/toy_audit/media/develop-vector_two_broad.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "1c3fdb7ee01d3d4c00e40bb4d18dd790a6fe3b2b",
+      "path": "reports/toy_audit/media/develop-vector_two_broad.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "e33f13292f5a80c86cc1911e6b38dad1a4f789f1",
+      "path": "reports/toy_audit/media/develop-vector_unequal_mass.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "1d060a641ed8d6ddc16934da4575dc577af932c6",
+      "path": "reports/toy_audit/media/develop-vector_unequal_mass.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "ec0853ab2c9365e727e65468746804eb784eb38f",
+      "path": "reports/toy_audit/media/develop-vector_unequal_width.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "328a061dceb4d6a16e06ef0c4ecc36d448d4af78",
+      "path": "reports/toy_audit/media/develop-vector_unequal_width.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "f25198b8687560a7a16ebdb0d76ecb65388589a6",
+      "path": "reports/toy_audit/media/media.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "5a79fa9ca660d238d104309c6a8a0ae567cbc880",
+      "path": "reports/toy_audit/media/pr106.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "2662be8102190e734f9732496f09c8039279a380",
+      "path": "reports/toy_audit/media/pr106.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "a8d2587c9f11f1f13cc3d1ade63d18567a24f1c9",
+      "path": "reports/toy_audit/media/pr131.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "25b15ad041a900c9c687e2bfd906ac6519579565",
+      "path": "reports/toy_audit/media/pr131.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "fe19761f7377831f868c541ef3fce462a320e256",
+      "path": "reports/toy_audit/media/pr150.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "97f4c012d29aa9df6fc9bca3f2ab6fe6d1374be3",
+      "path": "reports/toy_audit/media/pr150.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "8e9916ab0205eff3995e586ef89019d756889a0f",
+      "path": "reports/toy_audit/media/pr151.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "00a36595913c32b2ccce0750fc52f08bd0ff7aa7",
+      "path": "reports/toy_audit/media/pr151.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "8122de1c8e2f43254691f0296803b6e698f6aabd",
+      "path": "reports/toy_audit/media/pr152-adapted.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "e1b7e0a382d3e186d25387de7d2b5909190286a6",
+      "path": "reports/toy_audit/media/pr152-adapted.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "c56db91e0081d8ed5b9b3b217c258d55cfa9bd11",
+      "path": "reports/toy_audit/media/pr153-historical-rollout.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "06a548e4adfe8e2965e924cf05894bc5a99d530b",
+      "path": "reports/toy_audit/media/pr154.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "3bb7215cf8727812b6d6f8ac6e0d2b9df342c3b4",
+      "path": "reports/toy_audit/media/pr154.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "1d323257386f9fdc8bba08e8ebdb792e0d57e4e1",
+      "path": "reports/toy_audit/media/pr159.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "231407972d4ffa22cde483694e7d7abd4c45a567",
+      "path": "reports/toy_audit/media/pr159.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "c93536bdbca494ec278d619b5f99d521591294f5",
+      "path": "reports/toy_audit/media/pr166.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "3e8ac2a1e97199066ff3ef4af3a86d56d28ed6a3",
+      "path": "reports/toy_audit/media/pr166.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "8be5d39cdd7eb777827c58d521757d329298e370",
+      "path": "reports/toy_audit/media/pr170.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "a10bd1d5a22972b4dbd2b35f0a853182879f53be",
+      "path": "reports/toy_audit/media/pr170.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "cf0fa1f66f03cf2f6ef7a099b384fb73bc29b489",
+      "path": "reports/toy_audit/media/pr196-block.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "263dca2eb491f7bba0a451c654de612af0190828",
+      "path": "reports/toy_audit/media/pr196-block.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "608c43f02000ec3cecdd158aa7ccdd3af9d126cb",
+      "path": "reports/toy_audit/media/pr196-mcar_p20.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "40286ef55f2b51815b794fab2bc32e073bcceed8",
+      "path": "reports/toy_audit/media/pr196-mcar_p20.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "9cfa095971f2129cfd0a8bd57c197fe33fbb869a",
+      "path": "reports/toy_audit/media/pr196-mcar_p50.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "94bd25baeaf80faa9547b61a13d7184c1d91bc32",
+      "path": "reports/toy_audit/media/pr196-mcar_p50.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "b959aa83465d2bc6cb6576fef81e0c3c64aaf90d",
+      "path": "reports/toy_audit/media/pr196-mcar_p80.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "2d09fdf65777e861e02696c245299b3b4bc34606",
+      "path": "reports/toy_audit/media/pr196-mcar_p80.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "130fe7ead8d729fa910d23b6e089d443b4dac67a",
+      "path": "reports/toy_audit/media/pr22-historical-rollout.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "b5ee77e6eb864e106ce379c2d48574d88d6a90ce",
+      "path": "reports/toy_audit/media/pr224.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "3773a6f14ac4c026b6e007c93f355c3e14ed764d",
+      "path": "reports/toy_audit/media/pr224.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "ebce0586f6eb5c1db4bf98cc9725a106b3297230",
+      "path": "reports/toy_audit/media/pr226.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "029777853e8f306938a92f1788f6f99344a1e9ab",
+      "path": "reports/toy_audit/media/pr226.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "dd0c5e42d5ed3eecba4d5eaacb091127aa3036a1",
+      "path": "reports/toy_audit/media/pr227.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "d9ee18eba282c7405403d6727815ffb757563e3d",
+      "path": "reports/toy_audit/media/pr227.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "ba4edbb70114e69c10c56999b2e44da47351a92d",
+      "path": "reports/toy_audit/media/pr45-adapted.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "26fc802e75053a02950e7f2c4fe6dcd489edc48a",
+      "path": "reports/toy_audit/media/pr45-adapted.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "0fd0515e0bf457c1f8149096c3ca018dc355c716",
+      "path": "reports/toy_audit/media/pr47-adapted.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "4dca6c7f01a4a2d32b00812ef64d6202d9914159",
+      "path": "reports/toy_audit/media/pr47-adapted.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "9d6f67c9b52d87e4407a93b2822d051db97c3ade",
+      "path": "reports/toy_audit/media/pr48-adapted.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "8ce4be242f7d88bb5b011fe7130163307be55467",
+      "path": "reports/toy_audit/media/pr48-adapted.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "555fd130b54435ba09a858480fe7640944ebee60",
+      "path": "reports/toy_audit/media/pr49-adapted.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "91722401e4c979fad8fcb287dc1dfc4c8633248c",
+      "path": "reports/toy_audit/media/pr49-adapted.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "24409ca7a3e7cc9ed5d4d34a61059e8f2a7650c0",
+      "path": "reports/toy_audit/media/pr50-adapted.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "26144c45709ae7c1cf1b784335321fd8d942eb15",
+      "path": "reports/toy_audit/media/pr50-adapted.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "ecca6cbfeda51c24694e70a78be6d525ac08b041",
+      "path": "reports/toy_audit/media/pr51-adapted.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "fbda82ea959a1c3b0710cbcf18af176cd2440760",
+      "path": "reports/toy_audit/media/pr51-adapted.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "182a700c1e6bf72395091734c064ad2d1b03d28f",
+      "path": "reports/toy_audit/media/pr52-adapted.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "d1a16fc7fcccdcf17ca812498a69eaf415ce8fdb",
+      "path": "reports/toy_audit/media/pr52-adapted.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "e468c5f29a367f2892a7bd4df3df5e3e4fc597e0",
+      "path": "reports/toy_audit/media/pr53-adapted.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "fc576e6f46da5b0dae914ae2e80a9bdb08b626c9",
+      "path": "reports/toy_audit/media/pr53-adapted.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "ae0442da40e36597db6d118f4efef7d919f17940",
+      "path": "reports/toy_audit/media/pr54-adapted.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "e586ad2debc1949a2ab511a459c47ccfbe6744b5",
+      "path": "reports/toy_audit/media/pr54-adapted.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "360314e040c757d73bddc91fcb471a70143dc2f0",
+      "path": "reports/toy_audit/media/pr55-adapted.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "411e3140efc255218e2f4d5c90cb7a1f7d0af33f",
+      "path": "reports/toy_audit/media/pr55-adapted.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "805b6473ab41f36cb6ec7f525a255a985d830a6d",
+      "path": "reports/toy_audit/media/pr56-adapted.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "1ce7f537447d28cbe28158fae95ffb08fe827393",
+      "path": "reports/toy_audit/media/pr56-adapted.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "d098802502e843fdd1aa709a7f4e163fbb21e552",
+      "path": "reports/toy_audit/media/pr57-adapted.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "b1715356863802d5be5361fc7e39ee3101f508c1",
+      "path": "reports/toy_audit/media/pr57-adapted.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "db7fc003dee183a3ae2b69115e99cffc9706f7b2",
+      "path": "reports/toy_audit/media/pr58.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "0d268d3b8ff0632b5442f29f60946a907adae79d",
+      "path": "reports/toy_audit/media/pr58.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "490df0ad4035eedef10d97d2a86c78e7eb49b9db",
+      "path": "reports/toy_audit/media/pr59.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "b1aa58dd1e11554ae291c6dab370cec430f1ad28",
+      "path": "reports/toy_audit/media/pr59.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "e94fa20cae484ab071a46bd94f06522c34fa0ef2",
+      "path": "reports/toy_audit/media/pr61.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "76a5d17d9c0640b4a57cd5f0140386f74b2da783",
+      "path": "reports/toy_audit/media/pr61.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "8add0d8d5161191555f94cf8b0708bb6a0095e45",
+      "path": "reports/toy_audit/media/pr62.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "e5fd3ec4ebb95f9c0b7aa72962cf6a55d306e028",
+      "path": "reports/toy_audit/media/pr62.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "23d646ae1084bac8a77cfb76081d9bb604b92d27",
+      "path": "reports/toy_audit/media/pr63.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "b2db37599430afc623052cf3523058f6c87db91f",
+      "path": "reports/toy_audit/media/pr63.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "953b8c491c80a39735fd58bd221715d7e0aab933",
+      "path": "reports/toy_audit/media/pr64.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "b96f715b48cc7b23054e0a4f05f836eb56ac1f47",
+      "path": "reports/toy_audit/media/pr64.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "192674667ec18091c9a09c3b31d15a6dfdd98579",
+      "path": "reports/toy_audit/media/pr65.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "00cd05256b9699e22d68b9edcaf050ce6499610f",
+      "path": "reports/toy_audit/media/pr65.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "92770ec382a46db8fa5e444b98c97c2f490b3812",
+      "path": "reports/toy_audit/media/pr66.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "ba93cb4646f261f0b5ee44e985e1a50a3b1af1d0",
+      "path": "reports/toy_audit/media/pr66.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "08e54d8c9e443deb59047402ca174778ec3589f5",
+      "path": "reports/toy_audit/media/pr67.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "d23cf22f6d104785158eb8bf50bd4d4c61943319",
+      "path": "reports/toy_audit/media/pr67.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "3c2f57c26b82195463b25837849f86348554f673",
+      "path": "reports/toy_audit/media/pr68.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "6619d53af131d6764627c22c1d1a0ce1911c84a6",
+      "path": "reports/toy_audit/media/pr68.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "0b88b2dff9e1749911606f4d4638677d53fa6340",
+      "path": "reports/toy_audit/media/pr69.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "25241d87cd8efab778c4a8a33d5109cf5115be46",
+      "path": "reports/toy_audit/media/pr69.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "392a274d8ffcc05f8185ff87ecad0a5cfaa7dec1",
+      "path": "reports/toy_audit/media/pr70.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "26409787d8cd06b958eda67e92b9099c413e288e",
+      "path": "reports/toy_audit/media/pr70.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "c224f9e3a6739fedc8cda0c26a776462adce5918",
+      "path": "reports/toy_audit/media/pr71.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "65e2731a23929ba1f6d38bd8e6e55ab8b1cc4518",
+      "path": "reports/toy_audit/media/pr71.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "ef52ba8eecace848b001f96a2ac1da31406b3843",
+      "path": "reports/toy_audit/media/pr72.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "1162269b7073e4f1dd0979c60580d965bce22345",
+      "path": "reports/toy_audit/media/pr72.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "1a5ba7b0c17e09f1fd0de84f0a718456a3c37779",
+      "path": "reports/toy_audit/media/pr73.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "4bcee7fa22dcecf267246a0cde1b53252d3f882f",
+      "path": "reports/toy_audit/media/pr73.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "c83766a1befccf9250b3b7311755d3e65b3d4b56",
+      "path": "reports/toy_audit/media/pr74.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "4106b71c14704465b4169a8a59accc1a8139095b",
+      "path": "reports/toy_audit/media/pr74.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "c3c9d44e2e897b367fec2db1b46ae301393f791f",
+      "path": "reports/toy_audit/media/pr75.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "6150836b40c6a813c4a993819b65688c63cfb5ca",
+      "path": "reports/toy_audit/media/pr75.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "280b5c084d1c1e7d9f201bc78fb3e7128f90497c",
+      "path": "reports/toy_audit/media/pr76.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "f70ec0dc1848b36e378955d832c8f49a86313c91",
+      "path": "reports/toy_audit/media/pr76.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "e9c5032aa076a342c913a747f45b4a1d44a04cdc",
+      "path": "reports/toy_audit/media/pr77.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "217b63e44bd6068039e3f1fdae13ca5ca18b8288",
+      "path": "reports/toy_audit/media/pr77.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "92fefb22560a52c58ccadf404d73137de1f24992",
+      "path": "reports/toy_audit/media/pr78.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "49db9234541aa5e4d8de39c4da776079d2a51d81",
+      "path": "reports/toy_audit/media/pr78.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "9724489830948aa1b1c114da5312e4857291cda1",
+      "path": "reports/toy_audit/media/pr79.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "cc5105590f2e3b78ee31f89c4af34b1f8c802b80",
+      "path": "reports/toy_audit/media/pr79.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "69e76a85de87f995ca8cf5fc5406db6ba7c6d825",
+      "path": "reports/toy_audit/media/pr80.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "7bfcb494118f4ab9d388c7b056d9f1c0c25f8476",
+      "path": "reports/toy_audit/media/pr80.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "8cc8019bd266ad36bd00c8fdb74fb96aba15cac9",
+      "path": "reports/toy_audit/media/source-10-ring-acquisition.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "2175d2711117cc67641341e79e01149c438b4490",
+      "path": "reports/toy_audit/media/source-10-ring-acquisition.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "4c4c5d2630c5cf2a407f5964be295002db649098",
+      "path": "reports/toy_audit/media/source-14-moving.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "120cb1e6a8744b0455f522ca0c8447b15bfed38d",
+      "path": "reports/toy_audit/media/source-14-moving.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "038db455e5e5e45315e86cda6616c3c1a9d33d14",
+      "path": "reports/toy_audit/media/source-14-paired.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "e22866f89e5bbb35891d0da74046559974064d33",
+      "path": "reports/toy_audit/media/source-14-paired.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "26b72eb4cbf36e963d162d9df245d0aa3fafe67f",
+      "path": "reports/toy_audit/media/source-14-replay.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "8ad4ab0fb227354f1559af0e4aa84cc9e55f1855",
+      "path": "reports/toy_audit/media/source-14-replay.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "24b1818d3d19e8b1df34f259cd2fdc2b739e3e34",
+      "path": "reports/toy_audit/media/source-14-support.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "c90e042ed9d3db13ec3a8672b7ef95d603985030",
+      "path": "reports/toy_audit/media/source-14-support.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "5eedd6b55cb7ef035e323bf8cd64c3a7ab7f4693",
+      "path": "reports/toy_audit/media/source-five-modes.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "90f1e08e2f67e04baab60fc494246f2accb091ef",
+      "path": "reports/toy_audit/media/source-five-modes.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "207a0df998bbbdfd89c635e2115f937193d42c59",
+      "path": "reports/toy_audit/media/source-quickstart-cpu128.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "623e39a8355168736d68b64d39767078acdff59b",
+      "path": "reports/toy_audit/media/source-quickstart-cpu128.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "0c8834e6422d23b2a7010ed177315e7480453f24",
+      "path": "reports/toy_audit/media/source-quickstart.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "c49acda3cc36ed40a558a7bc005756d96458264b",
+      "path": "reports/toy_audit/media/source-quickstart.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "ed0dfb9b1d6bc2c6455c46969ca86119962dfd67",
+      "path": "reports/toy_audit/merge_readiness/README.md",
+      "role": "narrative",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "e73abaed5cab60a6f3ac01d386e4700c3d6c8a22",
+      "path": "reports/toy_audit/merge_readiness/local-integration.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "af64c1a29d8db5e85970c951c17c359381b11715",
+      "path": "reports/toy_audit/merge_readiness/merge-readiness.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "569f3a9f5759ccef757846ecce9961d6279b8bdf",
+      "path": "reports/toy_audit/merge_readiness/pr227-signed-endpoints.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "2fc7ea72294e05d1d5e8a2a42e02b06923050e29",
+      "path": "reports/toy_audit/merge_readiness/pr227-signed-gate.patch",
+      "role": "candidate_patch",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "23966ad22448e92597a3edbeb5a4430b5354c9e0",
+      "path": "reports/toy_audit/misgan-oracles.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "966dfcf801981594dda1615d09796ceda5a43e70",
+      "path": "reports/toy_audit/open-pr-disposition.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "2de888e0358e9971bbdb32a195763424a5b0f7da",
+      "path": "reports/toy_audit/paired-gradient-counterexample.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "df8726869efdfe0da0055b777d2aa4c54ae194ce",
+      "path": "reports/toy_audit/paired_sources/README.md",
+      "role": "narrative",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "7d37d6efc7a68c27da721f4d1ee1925e41c62811",
+      "path": "reports/toy_audit/paired_sources/coverage.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "d37da61992cf28f925a8810536d050801a393f0f",
+      "path": "reports/toy_audit/paired_sources/media/affine2-baseline-movable.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "2b884c6b7f42e1b2fed425ce9b476aa0eaf3b983",
+      "path": "reports/toy_audit/paired_sources/media/affine2-baseline-movable.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "cd9d14ca4e12133cf9ed315d29c5c88be2fc582e",
+      "path": "reports/toy_audit/paired_sources/media/swirl2-baseline-movable.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "6bca53fea86e6a4d79e284145428caf52a57c647",
+      "path": "reports/toy_audit/paired_sources/media/swirl2-baseline-movable.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "eb3a46a33c8fe85407757322ee0354f076582196",
+      "path": "reports/toy_audit/pr227_current_media/README.md",
+      "role": "narrative",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "a58e941132d0d1a238f44c814481d27ba2a376e2",
+      "path": "reports/toy_audit/pr227_current_media/guided_pair.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "acfd14ed00ec3d193b105191382e329f72aabb77",
+      "path": "reports/toy_audit/pr227_current_media/guided_pair.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "7a6fe05224a45d5733ebcc083dfb6312b8d69f76",
+      "path": "reports/toy_audit/pr227_current_media/receipt.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "743fde763c369c89928975a6df76c727b1635b0c",
+      "path": "reports/toy_audit/pr227_current_media/rotated_teacher.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "2fb584774d0963c3d80dcd53dbee76f14aecbc48",
+      "path": "reports/toy_audit/pr227_current_media/rotated_teacher.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "56857007ebf6e2b0c354c9bfaf39ec946d0e2274",
+      "path": "reports/toy_audit/pr227_current_media/verification.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "52e676614d60a156af43e3040fe6fda4d9e03ce7",
+      "path": "reports/toy_audit/pr231_media/README.md",
+      "role": "narrative",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "050839cfe168c9868c1d3018ac523f73ec0148ac",
+      "path": "reports/toy_audit/pr231_media/calibrated-handoff-width16.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "e6b8b4c9e6af7235a5de18ce83de6fce234cbb0e",
+      "path": "reports/toy_audit/pr231_media/calibrated-handoff-width16.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "f46caf4a6ea0608844f3aabba6b3fe6db22c1767",
+      "path": "reports/toy_audit/pr231_media/faithful-width64-antithetic-bypass.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "b109537e65b58eb7b20a8f65d8e992e41b5ab3cd",
+      "path": "reports/toy_audit/pr231_media/faithful-width64-antithetic-bypass.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "c9b24fe8af606d23eef1f683f69e3466d60a635a",
+      "path": "reports/toy_audit/pr231_media/faithful-width64.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "870d41ff35fd422bd0624fd5b949a297c08d732b",
+      "path": "reports/toy_audit/pr231_media/faithful-width64.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "6130a0f1442a2701382a90a7caf06cfdc940ecd3",
+      "path": "reports/toy_audit/pr231_media/initial-width16.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "80a3fbe8066af06f8fee6fc022b75b5c86accb57",
+      "path": "reports/toy_audit/pr231_media/initial-width16.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "588ee66dbd7fe8d5bdcaba511efa9b5a13853ea0",
+      "path": "reports/toy_audit/pr231_media/native-handoff-width16.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "9cfef26313d67da7e994d30e375b4bf50c9c4597",
+      "path": "reports/toy_audit/pr231_media/native-handoff-width16.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "47b30d45e92675b2f6309f23c362fe9905f89a81",
+      "path": "reports/toy_audit/pr231_media/publication-width4-replay.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "41a98c7a3286215006df6b2ac2f31a89462ff3ba",
+      "path": "reports/toy_audit/pr231_media/publication-width4-replay.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "d8e421ef3f6fc96cd2bdf63042dfdecbc4f2203d",
+      "path": "reports/toy_audit/pr231_media/receipt.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "d8c62382c185db71bd2948be1d9633f83bd41071",
+      "path": "reports/toy_audit/pr231_media/spatial-native-width16.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "58143d6c720b1c72f096aac48fe20d8c9febcb54",
+      "path": "reports/toy_audit/pr231_media/spatial-native-width16.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "d402518aa52c9827d28733969f598f8f5b2afec9",
+      "path": "reports/toy_audit/pr231_media/spatial-native-width4.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "d27e325567d547689bcca742ee460f9c03422815",
+      "path": "reports/toy_audit/pr231_media/spatial-native-width4.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "08508ec000ddd66b61fadf902e4c606cf53bb901",
+      "path": "reports/toy_audit/pr231_media/verification.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "ade722feaad910eb61d4a317b6f8543c1385976d",
+      "path": "reports/toy_audit/pull_requests.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "82dadf219ba02566a077bb696641cb5cfd1bdfa0",
+      "path": "reports/toy_audit/retention-validation.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "177d2ce66f8e3d1a52ee6ff9dffb35b3861e581a",
+      "path": "reports/toy_audit/route_sources/README.md",
+      "role": "narrative",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "01ceed0afa3c020e4b005a56f6a397fa370b0db7",
+      "path": "reports/toy_audit/route_sources/coverage.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "ee80119e53e31fdc53617cf94bdd394bc8dc5ae2",
+      "path": "reports/toy_audit/route_sources/media/media.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "5fb98501f55a55e3bead65b34cfe002c8a8b0180",
+      "path": "reports/toy_audit/route_sources/media/source-family-06.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "790f9070cdb9cadf7d3571a816a99895f93df1c8",
+      "path": "reports/toy_audit/route_sources/media/source-family-06.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "d293276de318e68f54195946e61e86c5f8038fd8",
+      "path": "reports/toy_audit/route_sources/media/source-family-07.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "5ecb9b452a3641f1559225d396db328f131dff40",
+      "path": "reports/toy_audit/route_sources/media/source-family-07.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "2c3041dfff89d712b56dd82b495cb175c1a38ea2",
+      "path": "reports/toy_audit/scorer-controls.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "8efe29d55e2d328f7d19bcb34139941ec1118ab3",
+      "path": "reports/toy_audit/separate-public-v2-comparison.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "f021abdd2dfa055b6036f2f5e433d3111e3e99a3",
+      "path": "reports/toy_audit/source-demos.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "9268c4e30f49d028c1666bd3a2e27079a8ac2cda",
+      "path": "reports/toy_audit/source-family-training.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "c783df96e7d9ecc34b25b7a25cef18d6f66185b5",
+      "path": "reports/toy_audit/source-receipts.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "bc8b285a753d6124ad7167e18c7b2fcb0fd97baa",
+      "path": "reports/toy_audit/source_families/README.md",
+      "role": "narrative",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "7996906e01967b136ba1dbc6aabacbbe74864ddb",
+      "path": "reports/toy_audit/source_families/coverage.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "9d6fedecc3bb56984847d706b99fb167aefe46e5",
+      "path": "reports/toy_audit/source_families/evaluator-archive.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "d0d5f52b567118b2b14e656c5c8df92b26c3106c",
+      "path": "reports/toy_audit/source_families/media/landing.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "f5ed98ab4b17f67ff9a0ce0b7d889afbfa4f34a3",
+      "path": "reports/toy_audit/source_families/media/landing.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "d31dfffcbe6551497b39a32d61c85b90d7576c16",
+      "path": "reports/toy_audit/source_families/media/media.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "f00f61aba65c813a956458398fb7c7e8e8792fe3",
+      "path": "reports/toy_audit/source_families/media/native.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "16637d8ef4e7afc4f49c9683482caf008591bf9b",
+      "path": "reports/toy_audit/source_families/media/native.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "d443cf80aa3fad9ba3c14caf33e45cf97b6ebdcf",
+      "path": "reports/toy_audit/source_families/media/sign.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "a0d1e381dcf53f25d3b4b68c77b1641f8ec20d11",
+      "path": "reports/toy_audit/source_families/media/sign.png",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "3f7c999aa308101865429cc76abdf1d7df08c7de",
+      "path": "reports/toy_audit/vector-quality-controls.json",
       "role": "structured_evidence",
       "suggested_tiers": []
     },

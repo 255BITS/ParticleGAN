@@ -84,7 +84,7 @@ def test_policy_applicability_blocks_before_construction_or_task_reservation():
     assert any("policy-aware task" in x for x in task_policy_blockers(task, candidate))
     assert any("policy-aware task" in x for x in adapter_preflight(task, candidate, root=ROOT))
     with pytest.raises(CapabilityError, match="policy-aware task"):
-        _context({"candidate": candidate, "protocol": {"seed": 0}}, task, "cpu", {})
+        _context({"candidate": candidate, "protocol": {"seed": 0}}, task, "cpu", task["execution"]["resources"])
 
 
 def test_host_resources_leave_schedule_free_horizon_and_external_budget_distinct():

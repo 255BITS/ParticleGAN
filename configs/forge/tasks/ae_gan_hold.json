@@ -3,6 +3,7 @@
   "id": "ae_gan_hold",
   "adapter": "transfer_behavior",
   "execution": {
+    "initializer": "deterministic_orthogonal",
     "host": "ae_gan_hold",
     "steps": 250,
     "prior": {

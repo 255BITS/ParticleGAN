@@ -3,6 +3,7 @@
   "id": "two_pole",
   "adapter": "transfer_behavior",
   "execution": {
+    "initializer": "deterministic_orthogonal",
     "host": "two_pole",
     "steps": 80,
     "prior": {

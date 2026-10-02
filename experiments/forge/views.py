@@ -17,6 +17,8 @@ from pathlib import Path
 import sys
 
 from .sampling import grade_sampling, validate_declaration
+from .priors import task_prior
+from .initialization import task_initializer
 
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -152,6 +154,8 @@ def _validate_task(task):
     if not isinstance(caps, list) or any(not isinstance(x, str) or not x for x in caps):
         raise ValueError("requires_capabilities must be a list of names")
     _dependencies(task)
+    task_prior(task)
+    task_initializer(task)
     _validate_measurement_contract(task)
 
 
@@ -297,6 +301,8 @@ def _guards(task, evidence):
             return _verdict("INCOMPLETE", f"missing valid {role} optimizer update count")
         if count == 0:
             return _verdict("FAIL", f"{role} did not perform an intended optimizer update")
+        if expected.get("exact_optimizer_updates") and count != task["execution"]["steps"]:
+            return _verdict("INCOMPLETE", f"{role} optimizer updates do not complete the declared task budget")
     if expected.get("mechanism_exercised"):
         from .mechanisms import mechanism_blockers
         reasons = mechanism_blockers(guards.get("mechanism_audit"))

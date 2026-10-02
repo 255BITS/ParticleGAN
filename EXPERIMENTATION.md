@@ -8,6 +8,9 @@ Start with the [compiled experiment memory](reports/forge/EXPERIMENT_MEMORY.md)
 and the [current technique leaderboard](reports/forge/technique-inventory.md).
 The [implementation plan](docs/better-experiment-automation-plan-2026-09-28.md)
 defines the migration and adoption criteria.
+For a new research question or host, follow the
+[experiment creation guide](docs/forge-new-experiment.md), with worked ring and
+joint BiGAN examples, scorer controls, registration and artifact publication.
 
 For the combined E22/Atlas/Forge API, read
 [the develop integration notes](reports/forge/DEVELOP_INTEGRATION.md). Presets,
@@ -133,6 +136,38 @@ New ordinary tasks use learned MoG priors: locations learn, while the declared
 width and uniform mixture weights remain fixed by default. Particle-cloud hosts
 must explicitly declare `kind: "particle_cloud"`, `sigma: 0`, and an exception
 reason. Historical sigma-zero receipts retain their original identity.
+
+Every task must define `execution.prior` with `kind`, `sigma`, `standardize`,
+and `learnable`; it cannot inherit a prior from the candidate, preset or API.
+`kind: "mog"` selects the public `MoGParticlePrior` code path, while
+`kind: "particle_cloud"` selects `ParticlePrior`. A zero-width MoG and a particle
+cloud can describe the same distribution but retain separate implementation
+identities. Ordinary MoG tasks still require positive sigma. Particle clouds also
+require `standardize: false` and their explicit exception reason. Parameter-only
+controls declare `prior_applicability: "not_sampled"` in `execution`.
+
+The [field ownership contract](docs/forge-field-boundaries.md) separates task
+conditions, technique mechanisms, hyperparameters and the comparison protocol.
+Each task also declares `execution.initializer`; fixed host fixtures and native
+component policies remain its more specific initialization rules. An explicit
+candidate initializer is a compatibility requirement and cannot replace the
+task's policy. Native tasks declare their model and training resources, while
+profiled and behavioral hosts retain their frozen host definitions and sources.
+
+Inspect effective values and their owners before submission:
+
+```sh
+python -m experiments.forge plan k3p --device cpu --show-boundaries
+```
+
+Planning and adapters use the same task binding. Execution receipts record each
+field's owner and source; inactive historical host optimizer settings remain
+labelled provenance. Configuration searches preserve the base technique's
+mechanisms and reject axes that are inactive or delegated on every tuning task.
+Changing a mechanism requires a structural idea. Family labels describe lineage;
+task priors and sampling laws remain distinct scientific comparison cohorts.
+These declaration changes create new execution identities. Saved receipts and
+qualification outcomes retain their original bindings and are not regraded.
 
 Do not create seed-only ideas. Screening uses one fixed protocol seed with named,
 isolated streams. Changing an initializer, sampling law, or stream binding changes
@@ -281,7 +316,9 @@ python -m experiments.forge experiments-by-tier --json
 
 The report reads validated task and view declarations plus compact published
 research indexes without accessing the queue, launching training or regrading
-saved evidence. Each task links to its question, declared numerical gates,
+saved evidence. Its prior column names each task's code path and absolute sigma;
+recorded outcomes and related API demos show their own saved priors, with missing
+bindings labelled unrecorded. Each task links to its question, declared numerical gates,
 recorded Forge configuration outcomes and related public-API training GIFs.
 Related demos keep their own recipe, prior, initialization, budget, sampling
 and runtime; they confer no qualification on a different Forge task.

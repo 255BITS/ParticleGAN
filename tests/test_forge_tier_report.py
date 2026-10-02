@@ -16,7 +16,9 @@ ROOT = Path(__file__).resolve().parents[1]
 def task(name):
     return {
         "schema_version": 1, "id": name, "adapter": "inventory_fixture",
-        "execution": {"steps": 24}, "evaluation": {"kind": "inventory_fixture"},
+        "execution": {"initializer": "deterministic_orthogonal", "steps": 24, "prior": {"kind": "mog", "sigma": .025,
+                                               "standardize": False, "learnable": True}},
+        "evaluation": {"kind": "inventory_fixture"},
         "resources": {"timeout_seconds": 60}, "dependencies": [],
         "requires_capabilities": [],
     }
@@ -281,6 +283,28 @@ def test_current_catalog_coverage_and_uninterrupted_extension_are_explicit():
     assert extension["dependencies"] == [{"task": "ring_hold", "kind": "checkpoint"}]
 
 
+def test_prior_inventory_includes_unassigned_and_nonsampled_tasks(inventory):
+    value = task("unused")
+    value["execution"].update(prior={"kind": "particle_cloud", "sigma": 0,
+                                     "standardize": False, "learnable": True,
+                                     "exception_reason": "Nonsampled parameter control"},
+                              prior_applicability="not_sampled")
+    atomic_json(inventory / "configs/forge/tasks/unused.json", value)
+    result = build_report(inventory)
+    assert result["prior_counts"] == {"mog": 5, "particle_cloud": 1}
+    assert result["nonsampled_prior_count"] == 1
+    smoke = tier(result, "stability", 1)["tasks"][0]
+    assert smoke["prior"] == task("smoke")["execution"]["prior"]
+    assert smoke["prior_code_path"] == "MoGParticlePrior"
+    unused = result["unassigned_tasks"][0]
+    assert unused["prior_code_path"] == "ParticlePrior"
+    assert unused["prior_applicability"] == "not_sampled"
+    document = render_markdown(result, inventory)
+    assert "Prior code path" in document
+    assert "MoGParticlePrior (sigma=0.025)" in document
+    assert "ParticlePrior (sigma=0; not sampled)" in document
+
+
 def test_filtered_report_links_unassigned_dependencies_outside_selected_view():
     result = build_report(ROOT, "quality_coverage")
     document = render_markdown(result, ROOT, ROOT / "reports/forge/tiers.md")
@@ -317,6 +341,7 @@ def test_artifacts_keep_api_scope_and_results_separate_from_forge(inventory):
     assert demo["verdict"] == "FAIL" and demo["failed_bounds"] == ["width"]
     assert demo["scope"] == "New stricter API law" and demo["recipe"] == "atlas"
     assert demo["source_identity"] == "b" * 64 and demo["runtime"] == {"device": "cpu"}
+    assert demo["prior"] is None  # A recipe name cannot establish a historical code path.
     assert demo["media_available"] and demo["qualification_input"] is False
     assert guide["forge_results"] == []  # Same question ID supplies no Forge credit.
     document = render_markdown(result, inventory, inventory / "reports/forge/tiers.md")
@@ -324,6 +349,21 @@ def test_artifacts_keep_api_scope_and_results_separate_from_forge(inventory):
     assert "#experiment-smoke" in document
     assert "New stricter API law" in document and "COMPLETE / FAIL" in document
     assert "do not qualify a different Forge task" in document
+
+
+@pytest.mark.parametrize("kind,width,expected", [
+    ("mog", 0., "MoGParticlePrior (sigma_rel=0)"),
+    ("mog", .025, "MoGParticlePrior (sigma_rel=0.025)"),
+    ("particles", .025, "ParticlePrior (sigma=0)"),
+])
+def test_api_prior_uses_saved_kind_and_preserves_relative_width(inventory, kind, width, expected):
+    base = publish_demo(inventory)
+    atomic_json(base / "runs.json", {"cases": [{
+        "id": "api-smoke", "recipe": {"name": "saved", "prior_kind": kind, "sigma_rel": width},
+    }]})
+    document = render_markdown(build_report(inventory), inventory)
+    row = next(line for line in document.splitlines() if line.startswith("| [api-smoke]"))
+    assert expected in row
 
 
 def test_explicit_host_mapping_discovers_variants_without_name_guessing(inventory):
@@ -353,6 +393,34 @@ def test_new_task_question_updates_without_editing_the_generator(inventory):
     assert guide["goal"] == definition["description"]
 
 
+def test_task_named_supplement_joins_without_rewriting_frozen_campaign(inventory):
+    base = publish_demo(inventory)
+    frozen = (base / "cases.json").read_bytes()
+    path = base / "new-question/publication.json"
+    definition = task("new_question")
+    definition["research_artifacts"] = {"api_publication": path.relative_to(inventory).as_posix()}
+    atomic_json(inventory / "configs/forge/tasks/new_question.json", definition)
+    atomic_json(path, {"cases": [{"id": "api-new", "legacy_ids": ["develop-new_question"],
+                                 "goal": "Acquire new target", "scope": "Separate standalone cohort"}],
+                       "readouts": [{"id": "api-new", "execution_status": "COMPLETE", "verdict": "FAIL",
+                                     "completed_updates": 24, "gif": "goal.gif"}],
+                       "runs": [{"id": "api-new", "recipe": {"name": "k3p"}}]})
+    (path.parent / "goal.gif").write_bytes(b"actual-media-placeholder")
+    report = build_report(inventory)
+    guide = next(item for item in report["experiment_guides"] if item["id"] == "new_question")
+    variant = guide["api_variants"][0]
+    assert variant["media_available"] and variant["qualification_input"] is False
+    assert variant["receipt_source"] == path.relative_to(inventory).as_posix()
+    assert variant["gif"].endswith("new-question/goal.gif")
+    assert guide["forge_results"] == []
+    assert (base / "cases.json").read_bytes() == frozen
+    document = json.loads(path.read_text())
+    document["runs"].append({"id": "api-smoke"})
+    atomic_json(path, document)
+    with pytest.raises(ValueError, match="own variant definitions"):
+        build_report(inventory)
+
+
 def test_actual_error_media_and_missing_gifs_are_visible(inventory):
     base = publish_demo(inventory, execution="ERROR")
     document = render_markdown(build_report(inventory), inventory)
@@ -378,7 +446,7 @@ def test_changed_task_is_labelled_without_regrading_or_borrowing_outcomes(invent
     tasks = load_tasks(inventory)
     contract = {"execution_sha256": task_execution_fingerprint(tasks["smoke"]),
                 "evaluation_sha256": task_evaluation_fingerprint(tasks["smoke"]),
-                "timeout_seconds": 60}
+                "timeout_seconds": 60, "prior": deepcopy(tasks["smoke"]["execution"]["prior"])}
     atomic_json(inventory / "reports/forge/technique-inventory.json", {
         "publication_scope": "current_technique_inventory", "task_contracts": {"contract": contract},
         "rows": [{"candidate_id": "saved-winner", "trainer_family": "test-family",
@@ -391,10 +459,12 @@ def test_changed_task_is_labelled_without_regrading_or_borrowing_outcomes(invent
         return next(guide for guide in report["experiment_guides"] if guide["id"] == "smoke")["forge_results"][0]
     assert recorded(build_report(inventory))["declaration_match"] is True
     tasks["smoke"]["execution"]["steps"] = 48
+    tasks["smoke"]["execution"]["prior"]["sigma"] = .1
     atomic_json(inventory / "configs/forge/tasks/smoke.json", tasks["smoke"])
     result = build_report(inventory)
     assert recorded(result)["declaration_match"] is False
     assert recorded(result)["status"] == "PASS"  # Historical result is retained unchanged.
+    assert recorded(result)["prior"]["sigma"] == .025  # Use the saved contract, not the current task.
     assert "CHANGED; earlier contract" in render_markdown(result, inventory)
 
 

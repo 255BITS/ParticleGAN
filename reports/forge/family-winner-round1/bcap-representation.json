@@ -1,0 +1,2537 @@
+{
+  "budget_seconds": 60,
+  "candidate_base_source_note": "The zero-update source files are hash-bound individually and may precede the committed search source; this is capacity evidence only. Actual trial qualifications must bind frozen search source9f89fa7c.",
+  "compatible_source_scope": "Rates and penalty strength do not change the declared host/prior representation. Actual noisy AE/residual serving laws are BCap terminal recipe laws; zero-output-noise Modern/release variants require their own bound measurement or analytic law join.",
+  "configuration_bindings": [
+    {
+      "candidate_id": "bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212",
+      "candidate_revision": "b2ec4ae22585ab63bc4d07b720a564f45d0f66e153fbb96cd578eeb2bde75867",
+      "configuration_id": "08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212",
+      "request_id": "8c2f749c258303009e73f873",
+      "settings": {
+        "d_lr_mult": 2.0,
+        "prior_lr_mult": 4.0,
+        "reg_coeff": 0.5
+      },
+      "source_digest": "9f89fa7cc7af552ef7e41405fab415abbd00acf3d3c6e4af8e4435fb2423142e"
+    },
+    {
+      "candidate_id": "bcap--0fc5834c2f114d83b8b7ace471dbc8271d0afddd8c92ba1b84d5db8325a8ecd5",
+      "candidate_revision": "4a16ed108be01d5f15ba8259ab5402e56baf7549198852c1f6b48c05e791a196",
+      "configuration_id": "0fc5834c2f114d83b8b7ace471dbc8271d0afddd8c92ba1b84d5db8325a8ecd5",
+      "request_id": "13d145c5f8fa6f8ff0869bcd",
+      "settings": {
+        "d_lr_mult": 2.0,
+        "prior_lr_mult": 1.0,
+        "reg_coeff": 1.0
+      },
+      "source_digest": "9f89fa7cc7af552ef7e41405fab415abbd00acf3d3c6e4af8e4435fb2423142e"
+    },
+    {
+      "candidate_id": "bcap--46afd334b69b00edb05f5487d7e00d2c5f52d82ab2d3adaa6d7c6d9158e73604",
+      "candidate_revision": "ce0b2e8eb103535bcfedd56ec5a9f72a676f2ea90ab57b027ec8bc55dcc5bda8",
+      "configuration_id": "46afd334b69b00edb05f5487d7e00d2c5f52d82ab2d3adaa6d7c6d9158e73604",
+      "request_id": "748b7bdcd174ff7165ca41e4",
+      "settings": {
+        "d_lr_mult": 0.5,
+        "prior_lr_mult": 1.0,
+        "reg_coeff": 1.0
+      },
+      "source_digest": "9f89fa7cc7af552ef7e41405fab415abbd00acf3d3c6e4af8e4435fb2423142e"
+    },
+    {
+      "candidate_id": "bcap--4cb8358e1e3eefdb6744ae63e84ce724bf73a47e471a12817aaf3a14466c2dd3",
+      "candidate_revision": "b2b6f2dca0b71ef4bfb0e518531d2ae294d147704aa38cee9cbbafd9caccb9ca",
+      "configuration_id": "4cb8358e1e3eefdb6744ae63e84ce724bf73a47e471a12817aaf3a14466c2dd3",
+      "request_id": "326aca9d76f4fe93814d1a39",
+      "settings": {
+        "d_lr_mult": 0.5,
+        "prior_lr_mult": 4.0,
+        "reg_coeff": 1.0
+      },
+      "source_digest": "9f89fa7cc7af552ef7e41405fab415abbd00acf3d3c6e4af8e4435fb2423142e"
+    },
+    {
+      "candidate_id": "bcap--66881ffa01364264272e87b084a09b8a00ce0c6d7a49904cc73d7c60238e8ce0",
+      "candidate_revision": "6f99123299b783ea45d9f2d6db5c4a5cd4ff0df84e5f7cf3f6c0c4ad1cbcb8f7",
+      "configuration_id": "66881ffa01364264272e87b084a09b8a00ce0c6d7a49904cc73d7c60238e8ce0",
+      "request_id": "20e1b93713f62a4bf9df9f73",
+      "settings": {
+        "d_lr_mult": 2.0,
+        "prior_lr_mult": 1.0,
+        "reg_coeff": 0.5
+      },
+      "source_digest": "9f89fa7cc7af552ef7e41405fab415abbd00acf3d3c6e4af8e4435fb2423142e"
+    },
+    {
+      "candidate_id": "bcap--67963edee7209ea85f9c07ec1f1195301e0ac40a975a44ef9891c5241a4ba2bc",
+      "candidate_revision": "46873452231a8c9d3c7f5bb748186b82693b4824b05eaeec93d8af808fa7a467",
+      "configuration_id": "67963edee7209ea85f9c07ec1f1195301e0ac40a975a44ef9891c5241a4ba2bc",
+      "request_id": "def86105f562df97bdef1ed8",
+      "settings": {
+        "d_lr_mult": 2.0,
+        "prior_lr_mult": 4.0,
+        "reg_coeff": 1.0
+      },
+      "source_digest": "9f89fa7cc7af552ef7e41405fab415abbd00acf3d3c6e4af8e4435fb2423142e"
+    },
+    {
+      "candidate_id": "bcap--c5f3aebf586c1da32ddfbaad77fab841eb2c43c7da652f56e9ffe622382d803e",
+      "candidate_revision": "e3232a9daaeec9f0eb5d2cd31d98617ced7e625c06337aea2e433e23b78bd56e",
+      "configuration_id": "c5f3aebf586c1da32ddfbaad77fab841eb2c43c7da652f56e9ffe622382d803e",
+      "request_id": "1d3051feeb7a73a67fee505b",
+      "settings": {
+        "d_lr_mult": 0.5,
+        "prior_lr_mult": 4.0,
+        "reg_coeff": 0.5
+      },
+      "source_digest": "9f89fa7cc7af552ef7e41405fab415abbd00acf3d3c6e4af8e4435fb2423142e"
+    },
+    {
+      "candidate_id": "bcap--f65f1922d02456d3a4b7135bb3aa6483d1c76184d74608479b2634094b039383",
+      "candidate_revision": "1a0946e190d7bebf4bddc91222cb0c7fac7bf52d75cc7976171d59369d5b7755",
+      "configuration_id": "f65f1922d02456d3a4b7135bb3aa6483d1c76184d74608479b2634094b039383",
+      "request_id": "dc4a004867cdf08beed403b3",
+      "settings": {
+        "d_lr_mult": 0.5,
+        "prior_lr_mult": 1.0,
+        "reg_coeff": 0.5
+      },
+      "source_digest": "9f89fa7cc7af552ef7e41405fab415abbd00acf3d3c6e4af8e4435fb2423142e"
+    }
+  ],
+  "elapsed_seconds": 7.323991743847728,
+  "endurance_scope": "ring target representation may be reused for ring_hold/extension; dynamic200-check acquisition/1200hold/300extension qualification remains unmeasured",
+  "family": "bcap",
+  "fitting_updates": 0,
+  "global_torch_rng_unchanged": true,
+  "negative_coverage_note": "Ring zero-cloud and native zero-width outputs fail. Deterministic behavioral constructions verify their parameter questions. Five frozen-state draws are not learned terminal observations.",
+  "ordinary_gan_updates": 0,
+  "protocol_seed": 0,
+  "qualification_credit": false,
+  "raw_receipt": "/ml2/hypergan/toy-forge-family-round1-bcap-representation-20261002-cloud-bound/receipt.json",
+  "raw_receipt_sha256": "530d6eca446f4a9e458b2b090d68e490b490211ee11cc5744ee07943a391c88d",
+  "records": [
+    {
+      "api_capabilities": {
+        "a2": true,
+        "checkpoint": true,
+        "fixed_prior_width": true,
+        "learned_locations": true,
+        "live_sampling": true,
+        "mog_prior": false,
+        "named_rng": true,
+        "particle_cloud": true,
+        "policy_controls": false,
+        "policy_serving": false,
+        "public_components": true,
+        "public_trainer": true,
+        "scalar_gan": true,
+        "uniform_masses": true
+      },
+      "artifact_directory": "/ml2/hypergan/toy-forge-family-round1-bcap-representation-20261002-cloud-bound/two_pole",
+      "declared_optimizer_budget": 80,
+      "evaluation": {
+        "eval_output_noise": "not_applied_to_measurement",
+        "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+        "guards": {
+          "finite_state": true,
+          "mechanism_exercised": true,
+          "optimizer_roles": [
+            "prior",
+            "discriminator"
+          ],
+          "rng_isolation": true
+        },
+        "kind": "transfer_sustained",
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "sampling_contract_version": 1,
+        "sampling_law": "learned_particles_and_critic_gradient",
+        "scoring_weights": "live",
+        "sources": {
+          "benchmarks/locked_shared/baseline.py": "72ebe4ef6d3cfe28f1ab6073fc781a72b45173f3ce2a0b63040e84b27bed03cc",
+          "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+          "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97"
+        },
+        "thresholds": [
+          [
+            "mean_abs",
+            ">=",
+            0.3
+          ],
+          [
+            "grad_med",
+            "<=",
+            1.0
+          ]
+        ]
+      },
+      "failed_bounds": [],
+      "measurement_summary": "constructed parameter-state measurement",
+      "metrics": {
+        "grad_med": 0.0,
+        "mean_abs": 1.0
+      },
+      "notes": [
+        "Explicit12-row sample cloud matches balanced fixed pole spread; a constant learned critic gives gradient median0. This is a parameter witness, not proof of optimizer travel from zero."
+      ],
+      "optimizer_updates": 0,
+      "passed": true,
+      "prior": {
+        "exception_reason": "This host optimizes explicit sample-particle coordinates directly, without a separate generator or latent sampling kernel.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "public_api": [
+        "Recipe.make_generator_optimizer",
+        "Recipe.make_critic_optimizer",
+        "Recipe.make_critic_penalty",
+        "Recipe.make_loss"
+      ],
+      "raw_metrics_sha256": "d8754f4bb06595576f39bf7fedf509ab7457a9951304b20d89b62273f262edcb",
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 2048,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "k3p",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.0,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.5,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.00425,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "name": "ka2",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 20000,
+        "observation_sigma": 0.03,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.2,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "particles",
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 80,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 2
+      },
+      "representation_scope": "declared numeric target tolerance at a constructed public-component state; not optimizer learnability",
+      "representation_status": "SUPPORTED",
+      "sampling": {
+        "eval_output_noise": "not_applied_to_measurement",
+        "sampling_law": "learned_particles_and_critic_gradient",
+        "scoring_weights": "live"
+      },
+      "seconds": 0.9394300801213831,
+      "state_file_sha256": "0a1ec83610a5bb0a50d5f503516cb710ce5623694be25eeca2e8031e7565c2d5",
+      "task_id": "two_pole",
+      "task_sha256": "61d08d600bea5871c762188ac01ee77341fe97d7f2af419fb558990fb637bc68",
+      "witness_sha256": "0d3ca6ed48bc3ce3c63bfb727f4f175f5acc362a1d40a03aee3a1c6cc50fe9ba"
+    },
+    {
+      "api_capabilities": {
+        "a2": true,
+        "checkpoint": true,
+        "fixed_prior_width": true,
+        "learned_locations": true,
+        "live_sampling": true,
+        "mog_prior": false,
+        "named_rng": true,
+        "particle_cloud": true,
+        "policy_controls": false,
+        "policy_serving": false,
+        "public_components": true,
+        "public_trainer": true,
+        "scalar_gan": true,
+        "uniform_masses": true
+      },
+      "artifact_directory": "/ml2/hypergan/toy-forge-family-round1-bcap-representation-20261002-cloud-bound/unused_token_hold",
+      "declared_optimizer_budget": 200,
+      "evaluation": {
+        "eval_output_noise": "not_applied_to_measurement",
+        "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+        "guards": {
+          "finite_state": true,
+          "mechanism_exercised": true,
+          "optimizer_roles": [
+            "generator",
+            "discriminator"
+          ],
+          "rng_isolation": true
+        },
+        "kind": "transfer_sustained",
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "sampling_contract_version": 1,
+        "sampling_law": "learned_parameter_measurement",
+        "scoring_weights": "live",
+        "sources": {
+          "benchmarks/locked_shared/baseline.py": "72ebe4ef6d3cfe28f1ab6073fc781a72b45173f3ce2a0b63040e84b27bed03cc",
+          "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+          "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97"
+        },
+        "thresholds": [
+          [
+            "unused_hold",
+            ">=",
+            0.85
+          ],
+          [
+            "concept_move",
+            ">=",
+            0.85
+          ]
+        ]
+      },
+      "failed_bounds": [],
+      "measurement_summary": "constructed parameter-state measurement",
+      "metrics": {
+        "concept_move": 1.0,
+        "unused_hold": 1.0
+      },
+      "notes": [
+        "Per-slot correction realizes exact active concept motion while the unused slot and scale0 remain unchanged."
+      ],
+      "optimizer_updates": 0,
+      "passed": true,
+      "prior": {
+        "exception_reason": "Deterministic embedding controls are parameter clouds; there is no sampled latent prior or separate prior optimizer.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "public_api": [
+        "Recipe.make_generator_optimizer",
+        "Recipe.make_critic_optimizer",
+        "Recipe.make_critic_penalty",
+        "Recipe.make_loss"
+      ],
+      "raw_metrics_sha256": "f9720eb13493729e731fc3573ab06123c551cacda5957641dee35755f9dd5a0b",
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 2048,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "k3p",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.0,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.5,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.00425,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "name": "ka2",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 20000,
+        "observation_sigma": 0.03,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.2,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "particles",
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 200,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 2
+      },
+      "representation_scope": "declared numeric target tolerance at a constructed public-component state; not optimizer learnability",
+      "representation_status": "SUPPORTED",
+      "sampling": {
+        "eval_output_noise": "not_applied_to_measurement",
+        "sampling_law": "learned_parameter_measurement",
+        "scoring_weights": "live"
+      },
+      "seconds": 0.004671447211876512,
+      "state_file_sha256": "56abfa43fd2f69b4c3f9ca805c17ee4e1a3ac7cd15616b751eea853d2ec3d28a",
+      "task_id": "unused_token_hold",
+      "task_sha256": "9551affcd515da1c9eef9335ace56c95ded002612c5b871647e469cffa41539e",
+      "witness_sha256": "230a932de6770cf3f6cf2717a26513ccae797605b8bc45e6065cf23de41a599d"
+    },
+    {
+      "api_capabilities": {
+        "a2": true,
+        "checkpoint": true,
+        "fixed_prior_width": true,
+        "learned_locations": true,
+        "live_sampling": true,
+        "mog_prior": true,
+        "named_rng": true,
+        "particle_cloud": false,
+        "policy_controls": false,
+        "policy_serving": false,
+        "public_components": true,
+        "public_trainer": true,
+        "scalar_gan": true,
+        "uniform_masses": true
+      },
+      "artifact_directory": "/ml2/hypergan/toy-forge-family-round1-bcap-representation-20261002-cloud-bound/ae_gan_hold",
+      "declared_optimizer_budget": 250,
+      "evaluation": {
+        "eval_output_noise": "public_recipe_schedule",
+        "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+        "guards": {
+          "finite_state": true,
+          "mechanism_exercised": true,
+          "optimizer_roles": [
+            "encoder",
+            "generator",
+            "prior",
+            "discriminator"
+          ],
+          "rng_isolation": true
+        },
+        "kind": "transfer_sustained",
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "sampling_contract_version": 1,
+        "sampling_law": "generated_and_reconstructed_prior_with_scheduled_output_noise",
+        "scoring_weights": "live",
+        "sources": {
+          "benchmarks/locked_shared/baseline.py": "72ebe4ef6d3cfe28f1ab6073fc781a72b45173f3ce2a0b63040e84b27bed03cc",
+          "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+          "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97"
+        },
+        "thresholds": [
+          [
+            "recon_mse",
+            "<=",
+            0.05
+          ],
+          [
+            "hold",
+            "<=",
+            0.35
+          ]
+        ]
+      },
+      "failed_bounds": [],
+      "measurement_summary": "worst/min across five fixed-state capacity draws",
+      "metrics": {
+        "hold": 0.0030054007656872272,
+        "recon_mse": 0.003351714462041855
+      },
+      "notes": [
+        "Hard public particle AE selects one of two exactly placed anchor groups; identity decoder and zero offsets leave target Gaussian residual variance. Reconstruction and unconditional hold retain the terminal scheduled output noise0.029. Five frozen-state measurements are capacity draws, not trained terminal observations."
+      ],
+      "optimizer_updates": 0,
+      "passed": true,
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "public_api": [
+        "Recipe.make_generator_optimizer",
+        "Recipe.make_critic_optimizer",
+        "Recipe.make_critic_penalty",
+        "Recipe.make_loss"
+      ],
+      "raw_metrics_sha256": "1c568a1fcae50e893f6576e0584a957ed7098d726795991c91172e67971dd09a",
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 64,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "k3p",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.0,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "ae",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.5,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.00425,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "name": "ka2",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 12,
+        "observation_sigma": 0.03,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.2,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "mog",
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 250,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 2
+      },
+      "representation_scope": "declared numeric target tolerance at a constructed public-component state; not optimizer learnability",
+      "representation_status": "SUPPORTED",
+      "sampling": {
+        "eval_output_noise": "public_recipe_schedule",
+        "sampling_law": "generated_and_reconstructed_prior_with_scheduled_output_noise",
+        "scoring_weights": "live"
+      },
+      "seconds": 0.017093147849664092,
+      "state_file_sha256": "e79b76d419ace0eb68892fa01efd88847c6927e3c701f0ad4bc9bbe58040664c",
+      "task_id": "ae_gan_hold",
+      "task_sha256": "c3efee0c048a110ba7d9b6e9ae09153c8b6744a97e68456b4051ddcd4ef2c5c5",
+      "witness_sha256": "b4af9b6dba78ebe4bd1a0f086946f0b5fa62eb29d5d1b81b644df8de9e122e16"
+    },
+    {
+      "api_capabilities": {
+        "a2": true,
+        "checkpoint": true,
+        "fixed_prior_width": true,
+        "learned_locations": true,
+        "live_sampling": true,
+        "mog_prior": false,
+        "named_rng": true,
+        "particle_cloud": true,
+        "policy_controls": false,
+        "policy_serving": false,
+        "public_components": true,
+        "public_trainer": true,
+        "scalar_gan": true,
+        "uniform_masses": true
+      },
+      "artifact_directory": "/ml2/hypergan/toy-forge-family-round1-bcap-representation-20261002-cloud-bound/unipolar",
+      "declared_optimizer_budget": 400,
+      "evaluation": {
+        "eval_output_noise": "not_applied_to_measurement",
+        "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+        "kind": "transfer_sustained",
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "sampling_contract_version": 1,
+        "sampling_law": "learned_parameter_measurement",
+        "scoring_weights": "live",
+        "sources": {
+          "benchmarks/locked_shared/baseline.py": "72ebe4ef6d3cfe28f1ab6073fc781a72b45173f3ce2a0b63040e84b27bed03cc",
+          "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+          "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97"
+        },
+        "thresholds": [
+          [
+            "cover",
+            ">=",
+            0.85
+          ],
+          [
+            "off_caption",
+            "<=",
+            0.05
+          ],
+          [
+            "neu_hold",
+            ">=",
+            0.85
+          ]
+        ]
+      },
+      "failed_bounds": [],
+      "measurement_summary": "constructed parameter-state measurement",
+      "metrics": {
+        "cover": 1.0,
+        "neu_hold": 1.0,
+        "off_caption": 0.0
+      },
+      "notes": [
+        "Odd residual equals PLUS; even/origin zero. Positive,neutral and half-scale outputs realize the intended parameter law."
+      ],
+      "optimizer_updates": 0,
+      "passed": true,
+      "prior": {
+        "exception_reason": "Deterministic student residual controls are parameter clouds, not draws from a sampled latent prior.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "public_api": [
+        "Recipe.make_generator_optimizer",
+        "Recipe.make_critic_optimizer",
+        "Recipe.make_critic_penalty",
+        "Recipe.make_loss"
+      ],
+      "raw_metrics_sha256": "e36a22b66fc25134d63df1afcb6c89ce63dc6629299ca6630309f845e36c221f",
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 2048,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "k3p",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.0,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.5,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.00425,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "name": "ka2",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 20000,
+        "observation_sigma": 0.03,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.2,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "particles",
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 400,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 2
+      },
+      "representation_scope": "declared numeric target tolerance at a constructed public-component state; not optimizer learnability",
+      "representation_status": "SUPPORTED",
+      "sampling": {
+        "eval_output_noise": "not_applied_to_measurement",
+        "sampling_law": "learned_parameter_measurement",
+        "scoring_weights": "live"
+      },
+      "seconds": 0.007086709840223193,
+      "state_file_sha256": "8c0666611f694ec187faccd0c3f984a58d3a5b69feff431f3f93b0525031020d",
+      "task_id": "unipolar",
+      "task_sha256": "4d64bb431a03a83cfc8eb99a6874e015fb476b461de813b5cbb4ccad8f444589",
+      "witness_sha256": "3f26bdb21c1b2e94c83a6487e93166ddd8e5cec08988b880b65b4e6bf53e3651"
+    },
+    {
+      "api_capabilities": {
+        "a2": true,
+        "checkpoint": true,
+        "fixed_prior_width": true,
+        "learned_locations": true,
+        "live_sampling": true,
+        "mog_prior": false,
+        "named_rng": true,
+        "particle_cloud": true,
+        "policy_controls": false,
+        "policy_serving": false,
+        "public_components": true,
+        "public_trainer": true,
+        "scalar_gan": true,
+        "uniform_masses": true
+      },
+      "artifact_directory": "/ml2/hypergan/toy-forge-family-round1-bcap-representation-20261002-cloud-bound/cover_leftover",
+      "declared_optimizer_budget": 800,
+      "evaluation": {
+        "eval_output_noise": "not_applied_to_measurement",
+        "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+        "kind": "transfer_sustained",
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "sampling_contract_version": 1,
+        "sampling_law": "learned_parameter_measurement",
+        "scoring_weights": "live",
+        "sources": {
+          "benchmarks/locked_shared/baseline.py": "72ebe4ef6d3cfe28f1ab6073fc781a72b45173f3ce2a0b63040e84b27bed03cc",
+          "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+          "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97"
+        },
+        "thresholds": [
+          [
+            "u_kept",
+            ">=",
+            0.85
+          ],
+          [
+            "content_kept",
+            ">=",
+            0.75
+          ],
+          [
+            "leak_ratio",
+            "<=",
+            0.2
+          ],
+          [
+            "pole_rel_err_plus",
+            "<=",
+            0.2
+          ],
+          [
+            "pole_rel_err_minus",
+            "<=",
+            0.2
+          ],
+          [
+            "same_dir",
+            "<=",
+            0.25
+          ]
+        ]
+      },
+      "failed_bounds": [],
+      "measurement_summary": "constructed parameter-state measurement",
+      "metrics": {
+        "content_kept": 1.0000000034925978,
+        "leak_ratio": 0.0,
+        "pole_rel_err_minus": 0.0,
+        "pole_rel_err_plus": 0.0,
+        "same_dir": 0.0,
+        "u_kept": 0.9999999900000002
+      },
+      "notes": [
+        "Residual odd/even decomposition exactly realizes both guarded poles. The gate scores the residual, not learned-cloud jitter/distribution; no claim that its auxiliary stochastic cloud law is learned."
+      ],
+      "optimizer_updates": 0,
+      "passed": true,
+      "prior": {
+        "exception_reason": "This host uses two explicit learned clouds and separately declared host jitter; no implicit MoG kernel may replace that law.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "public_api": [
+        "Recipe.make_generator_optimizer",
+        "Recipe.make_critic_optimizer",
+        "Recipe.make_critic_penalty",
+        "Recipe.make_loss"
+      ],
+      "raw_metrics_sha256": "4e241ea9d39f524192552e99bd01bb55ade26923ee32dab7027581223aa5ae0c",
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 2048,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "k3p",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.0,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.5,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.00425,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "name": "ka2",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 20000,
+        "observation_sigma": 0.03,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.2,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "particles",
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 800,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 2
+      },
+      "representation_scope": "declared numeric target tolerance at a constructed public-component state; not optimizer learnability",
+      "representation_status": "SUPPORTED",
+      "sampling": {
+        "eval_output_noise": "not_applied_to_measurement",
+        "sampling_law": "learned_parameter_measurement",
+        "scoring_weights": "live"
+      },
+      "seconds": 0.008520979201421142,
+      "state_file_sha256": "87f29d0c117659c96847db502f4683414aa072d75a511865c44d7436e65d974f",
+      "task_id": "cover_leftover",
+      "task_sha256": "53d29cb726b63536a867d8df19f827ad9a3392d9e821ff568619f2fc41d85adc",
+      "witness_sha256": "90fc2acdc873590b22122745e345894d069c7d20ac5af744200a5496c791fe41"
+    },
+    {
+      "api_capabilities": {
+        "a2": true,
+        "checkpoint": true,
+        "fixed_prior_width": true,
+        "learned_locations": true,
+        "live_sampling": true,
+        "mog_prior": false,
+        "named_rng": true,
+        "particle_cloud": true,
+        "policy_controls": false,
+        "policy_serving": false,
+        "public_components": true,
+        "public_trainer": true,
+        "scalar_gan": true,
+        "uniform_masses": true
+      },
+      "artifact_directory": "/ml2/hypergan/toy-forge-family-round1-bcap-representation-20261002-cloud-bound/mid_scale_identity",
+      "declared_optimizer_budget": 800,
+      "evaluation": {
+        "eval_output_noise": "not_applied_to_measurement",
+        "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+        "kind": "transfer_sustained",
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "sampling_contract_version": 1,
+        "sampling_law": "learned_parameter_measurement",
+        "scoring_weights": "live",
+        "sources": {
+          "benchmarks/locked_shared/baseline.py": "72ebe4ef6d3cfe28f1ab6073fc781a72b45173f3ce2a0b63040e84b27bed03cc",
+          "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+          "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97"
+        },
+        "thresholds": [
+          [
+            "concept_cos_plus",
+            ">=",
+            0.85
+          ],
+          [
+            "concept_cos_minus",
+            ">=",
+            0.85
+          ],
+          [
+            "concept_mag_plus",
+            ">=",
+            0.75
+          ],
+          [
+            "concept_mag_plus",
+            "<=",
+            1.25
+          ],
+          [
+            "concept_mag_minus",
+            ">=",
+            0.75
+          ],
+          [
+            "concept_mag_minus",
+            "<=",
+            1.25
+          ],
+          [
+            "identity_at_0",
+            ">=",
+            0.85
+          ],
+          [
+            "identity_at_mid",
+            ">=",
+            0.85
+          ]
+        ]
+      },
+      "failed_bounds": [],
+      "measurement_summary": "constructed parameter-state measurement",
+      "metrics": {
+        "concept_cos_minus": 1.0,
+        "concept_cos_plus": 1.0,
+        "concept_mag_minus": 1.0,
+        "concept_mag_plus": 1.0,
+        "identity_at_0": 1.0,
+        "identity_at_mid": 1.0
+      },
+      "notes": [
+        "origin=identity,odd=guarded concept,even=mid=0 realizes every required scale{-1,0,.5,1} with correct content projection."
+      ],
+      "optimizer_updates": 0,
+      "passed": true,
+      "prior": {
+        "exception_reason": "Deterministic scale-conditioned residual controls are parameter clouds, with no sampled latent prior.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "public_api": [
+        "Recipe.make_generator_optimizer",
+        "Recipe.make_critic_optimizer",
+        "Recipe.make_critic_penalty",
+        "Recipe.make_loss"
+      ],
+      "raw_metrics_sha256": "996e20361704c9ba6ed3c3a0473580ab80abb2475f38a1ef7168599b87cce641",
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 2048,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "k3p",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.0,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.5,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.00425,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "name": "ka2",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 20000,
+        "observation_sigma": 0.03,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.2,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "particles",
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 800,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 2
+      },
+      "representation_scope": "declared numeric target tolerance at a constructed public-component state; not optimizer learnability",
+      "representation_status": "SUPPORTED",
+      "sampling": {
+        "eval_output_noise": "not_applied_to_measurement",
+        "sampling_law": "learned_parameter_measurement",
+        "scoring_weights": "live"
+      },
+      "seconds": 0.005490491166710854,
+      "state_file_sha256": "5d1c66e8cdd5d391a71be3c02ac3b942bcc66b1755c20953f13516b36ccb5178",
+      "task_id": "mid_scale_identity",
+      "task_sha256": "494163d8897a288aa281229361c67768f549e54cb25036aca76a1d3fd5b21168",
+      "witness_sha256": "7140233badc08683ff4fca049520f9825e6cb4e28713e6fd9c412e5f7e623721"
+    },
+    {
+      "api_capabilities": {
+        "a2": true,
+        "checkpoint": true,
+        "fixed_prior_width": true,
+        "learned_locations": true,
+        "live_sampling": true,
+        "mog_prior": false,
+        "named_rng": true,
+        "particle_cloud": true,
+        "policy_controls": false,
+        "policy_serving": false,
+        "public_components": true,
+        "public_trainer": true,
+        "scalar_gan": true,
+        "uniform_masses": true
+      },
+      "artifact_directory": "/ml2/hypergan/toy-forge-family-round1-bcap-representation-20261002-cloud-bound/residual_student",
+      "declared_optimizer_budget": 400,
+      "evaluation": {
+        "eval_output_noise": "public_recipe_schedule",
+        "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+        "kind": "transfer_sustained",
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "sampling_contract_version": 1,
+        "sampling_law": "conditional_prior_centers_with_scheduled_output_noise",
+        "scoring_weights": "live",
+        "sources": {
+          "benchmarks/locked_shared/baseline.py": "72ebe4ef6d3cfe28f1ab6073fc781a72b45173f3ce2a0b63040e84b27bed03cc",
+          "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+          "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97"
+        },
+        "thresholds": [
+          [
+            "identity_mse",
+            "<=",
+            0.02
+          ],
+          [
+            "success_rate",
+            ">=",
+            1.0
+          ],
+          [
+            "wrong_pad_rate",
+            "<=",
+            0.0
+          ]
+        ]
+      },
+      "failed_bounds": [],
+      "measurement_summary": "worst/min across five fixed-state capacity draws",
+      "metrics": {
+        "identity_mse": 0.0008699076133780181,
+        "success_rate": 1.0,
+        "wrong_pad_rate": 0.0
+      },
+      "notes": [
+        "Exact block-rotation minus identity is representable by the unchanged20\u219264\u219264\u219216 paired-LeakyReLU residual MLP. Latent columns zero. Actual evaluation includes terminal output noise0.029 and each of12own-pad identities; no training updates or qualification."
+      ],
+      "optimizer_updates": 0,
+      "passed": true,
+      "prior": {
+        "exception_reason": "The conditional residual objective directly enumerates prior.z; stochastic latent sampling needs a separately calibrated task.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "public_api": [
+        "Recipe.make_generator_optimizer",
+        "Recipe.make_critic_optimizer",
+        "Recipe.make_critic_penalty",
+        "Recipe.make_loss"
+      ],
+      "raw_metrics_sha256": "34056dabea980aa0c954c1ffa5c6d21049fd2ead35da2dbc08a1c9f3d0a5106a",
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 2048,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "k3p",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.0,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.5,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.00425,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "name": "ka2",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 20000,
+        "observation_sigma": 0.03,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.2,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "particles",
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 400,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 2
+      },
+      "representation_scope": "declared numeric target tolerance at a constructed public-component state; not optimizer learnability",
+      "representation_status": "SUPPORTED",
+      "sampling": {
+        "eval_output_noise": "public_recipe_schedule",
+        "sampling_law": "conditional_prior_centers_with_scheduled_output_noise",
+        "scoring_weights": "live"
+      },
+      "seconds": 0.014535245951265097,
+      "state_file_sha256": "a9713d8ad4b55335b0324be9878019792ec2d22801f2c8e237b5d0051bee0130",
+      "task_id": "residual_student",
+      "task_sha256": "dcb014517269add9fbe16d098d8d4444b099325ced788805730e0a1d14af3750",
+      "witness_sha256": "4f71e9cd5eff73bac905e6954e9df7aaa30883f6cebaeef546b5d2ed0e53f430"
+    },
+    {
+      "api_capabilities": {
+        "a2": true,
+        "checkpoint": true,
+        "fixed_prior_width": true,
+        "learned_locations": true,
+        "live_sampling": true,
+        "mog_prior": true,
+        "named_rng": true,
+        "particle_cloud": false,
+        "policy_controls": false,
+        "policy_serving": false,
+        "public_components": true,
+        "public_trainer": true,
+        "scalar_gan": true,
+        "uniform_masses": true
+      },
+      "api_completed_updates": 0,
+      "artifact_directory": "/ml2/hypergan/toy-forge-family-round1-bcap-representation-20261002-cloud-bound/mode_hold",
+      "construction": {
+        "output_law": "Gaussian selector coordinate0 quantile intervals choose8 modes; independent coordinates1/2 scale to sigma.07. Narrow ramps yield a target approximation, not exact continuous Gaussian mixture.",
+        "prior_law": "12 identical zero-location Gaussian components reduce exactly to N(0,.025^2 I4); uniform named row sampling remains active",
+        "ramp_half_width": 2.5e-05,
+        "ramp_probability": 0.004409313201904297,
+        "thresholds": [
+          -0.028758732602000237,
+          -0.01686224341392517,
+          -0.00796598382294178,
+          0.0,
+          0.00796598382294178,
+          0.01686224341392517,
+          0.028758732602000237
+        ],
+        "upper_bound": 0.005585191925620058
+      },
+      "declared_optimizer_budget": 1200,
+      "evaluation": {
+        "eval_output_noise": "clean",
+        "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+        "kind": "transfer_sustained",
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise",
+        "scoring_weights": "live",
+        "sources": {
+          "benchmarks/locked_shared/baseline.py": "72ebe4ef6d3cfe28f1ab6073fc781a72b45173f3ce2a0b63040e84b27bed03cc",
+          "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+          "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97"
+        },
+        "thresholds": [
+          [
+            "modes",
+            ">=",
+            8
+          ],
+          [
+            "hq",
+            ">=",
+            0.9
+          ]
+        ]
+      },
+      "measurement_summary": "worst/min across five fixed-state capacity draws",
+      "negative_control": {
+        "cover": 0.0,
+        "effective_modes": 0.0,
+        "hq": 0.0,
+        "modes": 0,
+        "n_modes": 8
+      },
+      "notes": [
+        "Same12-row4D continuous MoG andG96\u00d73 host; stronger balanced mass/covariance/radial diagnostic also passes. This is a finite public-sampling law/tolerance witness; it does not validate training acquisition or any uninterrupted hold/endurance updates."
+      ],
+      "optimizer_updates": 0,
+      "original_gate_witness": {
+        "failed_bounds": [],
+        "metrics": {
+          "hq": 0.984375,
+          "modes": 8
+        },
+        "passed": true
+      },
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "public_api": [
+        "GANTrainer",
+        "GANTrainer.sample",
+        "Recipe.make_prior"
+      ],
+      "raw_metrics_sha256": "d4b239b52c7b2494d81c2e6d4fcf2816a1e434978b9f0a1e42d04da607c49fb0",
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 128,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "k3p",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.0,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.5,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.00425,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "name": "ka2",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 12,
+        "observation_sigma": 0.03,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.2,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "mog",
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 1200,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 4
+      },
+      "representation_scope": "public-host target law within declared numerical tolerance; optimizer learnability untested",
+      "representation_status": "SUPPORTED",
+      "rng_audit": {
+        "changed_streams": [
+          "[\"eval\",\"capacity\",\"holdout\",\"cpu\"]",
+          "[\"eval\",\"capacity\",\"ring\",\"cpu\"]"
+        ],
+        "unintended_rng_deviations": 0,
+        "unintended_streams": []
+      },
+      "samples_file_sha256": "b258e82527bc643ff9550fccbfb38d4c1e5412b3f7a119d409a6638b5ad8038c",
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_law": "public_prior_without_output_noise",
+        "scoring_weights": "live"
+      },
+      "seconds": 0.32796572404913604,
+      "state_file_sha256": "2b59037cdf9c8a7299b8b19897fcd5a8df2f265f96b9fb786cf753c043a95576",
+      "stronger_holdout": {
+        "covariance_eigenvalues": [
+          [
+            1.00123308786707,
+            1.1812343204594928
+          ],
+          [
+            1.0331049213696046,
+            1.2792206711748368
+          ],
+          [
+            1.064271084231473,
+            1.3492479744282082
+          ],
+          [
+            1.0866084553946438,
+            1.4872916379936492
+          ],
+          [
+            1.0563504730000317,
+            1.4614745585696354
+          ],
+          [
+            1.0818754562444786,
+            1.4895616915996241
+          ],
+          [
+            1.0476600363587893,
+            1.2897621285420484
+          ],
+          [
+            1.0125833702760434,
+            1.2028384723521945
+          ]
+        ],
+        "hq": 0.98525,
+        "mass_tv": 0.003689999999999999,
+        "max_radial_ks": 0.011865230201660304,
+        "modes": 8,
+        "passed": true,
+        "sample_count": 100000
+      },
+      "task_id": "mode_hold",
+      "task_sha256": "070ed9ed35451e294f7962dc0cbfd5926e49498eead1dc9f224a2d065c45d1b3",
+      "witness_sha256": "fcfcf3fc1808ab35f43c7f816e7dbc80a6ea73612ec71153ca19a50569746c72"
+    },
+    {
+      "api_capabilities": {
+        "a2": true,
+        "checkpoint": true,
+        "fixed_prior_width": true,
+        "learned_locations": true,
+        "live_sampling": true,
+        "mog_prior": true,
+        "named_rng": true,
+        "particle_cloud": false,
+        "policy_controls": false,
+        "policy_serving": false,
+        "public_components": true,
+        "public_trainer": true,
+        "scalar_gan": true,
+        "uniform_masses": true
+      },
+      "api_completed_updates": 0,
+      "artifact_directory": "/ml2/hypergan/toy-forge-family-round1-bcap-representation-20261002-cloud-bound/grid100",
+      "construction": {
+        "analytic_law": "Uniform20k-component MoG reduces exactly to100equal Gaussian components with target means and covariance. Remaining latent columns(ifany)ignored.",
+        "map": "G(z)=1.2*(z0,z1) encoded exactly by3hidden paired-LeakyReLU layers",
+        "prior_sigma": 0.025,
+        "rows_per_mode": 200,
+        "target_sigma": 0.03
+      },
+      "declared_optimizer_budget": 7000,
+      "evaluation": {
+        "accuracy_limits": {
+          "abs_cov_trace_bias": 0.1,
+          "center_rms_sigma": 0.2,
+          "mass_tv": 0.06,
+          "radial_ks": 0.04
+        },
+        "coverage_evaluator": "benchmarks.toy100.gate:evaluate_suite",
+        "coverage_thresholds": {
+          "all_finite": true,
+          "max_cov_eig_ratio": 1.7,
+          "max_mass_tv": 0.1,
+          "max_mode_mass": 0.02,
+          "max_radial_median_ratio": 1.4,
+          "min_cov_eig_ratio": 0.4,
+          "min_hq_mode_mass": 0.005,
+          "min_modes": 100,
+          "min_precision": 0.97,
+          "min_radial_median_ratio": 0.65,
+          "min_samples": 20000
+        },
+        "early_eval_steps": [
+          0,
+          1,
+          10,
+          25,
+          50,
+          100
+        ],
+        "eval_interval": 250,
+        "eval_output_noise": "clean",
+        "eval_samples": 20000,
+        "evaluator": "benchmarks.toy100.accuracy_gate:evaluate_suite",
+        "evaluator_revision": {
+          "change": "Validate explicit CLI evaluation-noise overrides; metric kernels, thresholds, clean sampling law and budgets unchanged.",
+          "id": "native100-manifest-sampling-v2",
+          "previous_gate_sha256": "55f6ef733f0b10f4c6ac05eb5ad9d30320d807ff520ea1b41c75d2d0b41e406a"
+        },
+        "holdout_samples": 100000,
+        "kind": "native_accuracy",
+        "minimum_stable_checks": 5,
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise",
+        "scoring_weights": "live",
+        "sources": {
+          "benchmarks/toy100/accuracy.py": "ee5c62049f8cdceb3d93b6d792cbaa96c815e12b3ce79ffaed244fb15a44fed2",
+          "benchmarks/toy100/accuracy_gate.py": "e66ede95d4b80eedd832a102841c2b0a5d6d710f646bfa34dc00647dc0ab3abe",
+          "benchmarks/toy100/gate.py": "2ddadf56a4ccd7645c8b4e391373818b1113fb6113a9c691310fb162684058e6",
+          "benchmarks/toy100/metrics.py": "a7fbef19082f8470eb392948da52a336a90a3e99c6b3b893343a9e75bcda9c7b"
+        }
+      },
+      "measurement_summary": "five20000-sample fixed-state draws plus100000-sample holdout",
+      "negative_control": {
+        "accuracy": {
+          "abs_cov_trace_bias": 1.0,
+          "accuracy_pass": false,
+          "accuracy_score": 8.75,
+          "all_finite": true,
+          "center_max_sigma": 0.0,
+          "center_rms_sigma": 0.0,
+          "cov_frob_rms": 1.0,
+          "cov_trace_bias": -1.0,
+          "frozen_pass": false,
+          "mass_tv": 0.0,
+          "n": 20000,
+          "passed": false,
+          "precision": 1.0,
+          "precision_gap": 0.011108996538242266,
+          "problem": "grid100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 1.0,
+          "valid_n": 20000,
+          "within_radius_n": 20000
+        },
+        "coverage": {
+          "hq": 1.0,
+          "mass_tv": 0.0,
+          "max_cov_eig_ratio": 0.0,
+          "max_mode_mass": 0.01,
+          "max_radial_median_ratio": 0.0,
+          "min_cov_eig_ratio": 0.0,
+          "min_hq_count": 200,
+          "min_hq_mode_mass": 0.01,
+          "min_radial_median_ratio": 0.0,
+          "modes": 100,
+          "n": 20000,
+          "passed": false,
+          "precision": 1.0,
+          "valid_n": 20000
+        },
+        "passed": false
+      },
+      "notes": [
+        "Required native host is rawG128\u00d73/D Fourier2 MLP, not the archived affine profile. Five20k draws plus100k holdout meet unchanged numerical predicates at one constructed state; they are not terminal observations of a7000-update training run."
+      ],
+      "optimizer_updates": 0,
+      "original_gate_witness": {
+        "all_draws_passed": true,
+        "draw_count": 5,
+        "holdout_passed": true
+      },
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "public_api": [
+        "GANTrainer",
+        "GANTrainer.sample",
+        "Recipe.make_prior"
+      ],
+      "raw_metrics_sha256": "570b0cf8177775bb1a23fdfbfb3e9d62c985795c1c28fa229eee5b6bdecfc919",
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 2048,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "k3p",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.0,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.5,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.00425,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "name": "ka2",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 20000,
+        "observation_sigma": 0.03,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.2,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "mog",
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 7000,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 2
+      },
+      "representation_scope": "public-host target law within declared numerical tolerance; optimizer learnability untested",
+      "representation_status": "SUPPORTED",
+      "rng_audit": {
+        "changed_streams": [
+          "[\"eval\",\"capacity\",\"holdout\",\"cpu\"]",
+          "[\"eval\",\"capacity\",\"terminal\",\"cpu\"]"
+        ],
+        "unintended_rng_deviations": 0,
+        "unintended_streams": []
+      },
+      "samples_file_sha256": "97ced4011d283fc99bc96b87401f8b6c765d55e31c33b40f801759e54baadf44",
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_law": "public_prior_without_output_noise",
+        "scoring_weights": "live"
+      },
+      "seconds": 1.8494189500343055,
+      "state_file_sha256": "bd07fa0adea4e9434ae908bd83cae54dbb6e88dd60da1faa758c530e86efcbee",
+      "stronger_holdout": {
+        "accuracy": {
+          "abs_cov_trace_bias": 0.001140547495315225,
+          "accuracy_pass": true,
+          "accuracy_score": 0.12504397497943473,
+          "all_finite": true,
+          "center_max_sigma": 0.10270049874243228,
+          "center_rms_sigma": 0.042834319934875416,
+          "cov_frob_rms": 0.0525101804916616,
+          "cov_trace_bias": -0.001140547495315225,
+          "frozen_pass": true,
+          "mass_tv": 0.012200000000000006,
+          "n": 100000,
+          "passed": true,
+          "precision": 0.98882,
+          "precision_gap": 7.100346175770156e-05,
+          "problem": "grid100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 0.002850619678275046,
+          "valid_n": 100000,
+          "within_radius_n": 98882
+        },
+        "coverage": {
+          "hq": 0.98882,
+          "mass_tv": 0.012200000000000006,
+          "max_cov_eig_ratio": 1.0566197964540471,
+          "max_mode_mass": 0.01107,
+          "max_radial_median_ratio": 1.0537034427827334,
+          "min_cov_eig_ratio": 0.8304714566553114,
+          "min_hq_count": 915,
+          "min_hq_mode_mass": 0.00915,
+          "min_radial_median_ratio": 0.9304864670702155,
+          "modes": 100,
+          "n": 100000,
+          "passed": true,
+          "precision": 0.98882,
+          "valid_n": 100000
+        },
+        "passed": true
+      },
+      "task_id": "grid100",
+      "task_sha256": "2cccd4e8dcfe3e445a6553fbafde10a0c4b83abfacaa6b943867cc368a7993c7",
+      "witness_sha256": "605fa72d52d694a7cd5e182afcab59275c8e9e922314dfee82b018c6f11c638c"
+    },
+    {
+      "api_capabilities": {
+        "a2": true,
+        "checkpoint": true,
+        "fixed_prior_width": true,
+        "learned_locations": true,
+        "live_sampling": true,
+        "mog_prior": true,
+        "named_rng": true,
+        "particle_cloud": false,
+        "policy_controls": false,
+        "policy_serving": false,
+        "public_components": true,
+        "public_trainer": true,
+        "scalar_gan": true,
+        "uniform_masses": true
+      },
+      "api_completed_updates": 0,
+      "artifact_directory": "/ml2/hypergan/toy-forge-family-round1-bcap-representation-20261002-cloud-bound/rotated100",
+      "construction": {
+        "analytic_law": "Uniform20k-component MoG reduces exactly to100equal Gaussian components with target means and covariance. Remaining latent columns(ifany)ignored.",
+        "map": "G(z)=1.2*(z0,z1) encoded exactly by3hidden paired-LeakyReLU layers",
+        "prior_sigma": 0.025,
+        "rows_per_mode": 200,
+        "target_sigma": 0.03
+      },
+      "declared_optimizer_budget": 7000,
+      "evaluation": {
+        "accuracy_limits": {
+          "abs_cov_trace_bias": 0.1,
+          "center_rms_sigma": 0.2,
+          "mass_tv": 0.06,
+          "radial_ks": 0.04
+        },
+        "coverage_evaluator": "benchmarks.toy100.gate:evaluate_suite",
+        "coverage_thresholds": {
+          "all_finite": true,
+          "max_cov_eig_ratio": 1.7,
+          "max_mass_tv": 0.1,
+          "max_mode_mass": 0.02,
+          "max_radial_median_ratio": 1.4,
+          "min_cov_eig_ratio": 0.4,
+          "min_hq_mode_mass": 0.005,
+          "min_modes": 100,
+          "min_precision": 0.97,
+          "min_radial_median_ratio": 0.65,
+          "min_samples": 20000
+        },
+        "early_eval_steps": [
+          0,
+          1,
+          10,
+          25,
+          50,
+          100
+        ],
+        "eval_interval": 250,
+        "eval_output_noise": "clean",
+        "eval_samples": 20000,
+        "evaluator": "benchmarks.toy100.accuracy_gate:evaluate_suite",
+        "evaluator_revision": {
+          "change": "Validate explicit CLI evaluation-noise overrides; metric kernels, thresholds, clean sampling law and budgets unchanged.",
+          "id": "native100-manifest-sampling-v2",
+          "previous_gate_sha256": "55f6ef733f0b10f4c6ac05eb5ad9d30320d807ff520ea1b41c75d2d0b41e406a"
+        },
+        "holdout_samples": 100000,
+        "kind": "native_accuracy",
+        "minimum_stable_checks": 5,
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise",
+        "scoring_weights": "live",
+        "sources": {
+          "benchmarks/toy100/accuracy.py": "ee5c62049f8cdceb3d93b6d792cbaa96c815e12b3ce79ffaed244fb15a44fed2",
+          "benchmarks/toy100/accuracy_gate.py": "e66ede95d4b80eedd832a102841c2b0a5d6d710f646bfa34dc00647dc0ab3abe",
+          "benchmarks/toy100/gate.py": "2ddadf56a4ccd7645c8b4e391373818b1113fb6113a9c691310fb162684058e6",
+          "benchmarks/toy100/metrics.py": "a7fbef19082f8470eb392948da52a336a90a3e99c6b3b893343a9e75bcda9c7b"
+        }
+      },
+      "measurement_summary": "five20000-sample fixed-state draws plus100000-sample holdout",
+      "negative_control": {
+        "accuracy": {
+          "abs_cov_trace_bias": 1.0,
+          "accuracy_pass": false,
+          "accuracy_score": 8.750011060738508,
+          "all_finite": true,
+          "center_max_sigma": 1.7436298997547685e-05,
+          "center_rms_sigma": 8.849359406483957e-06,
+          "cov_frob_rms": 1.0,
+          "cov_trace_bias": -1.0,
+          "frozen_pass": false,
+          "mass_tv": 0.0,
+          "n": 20000,
+          "passed": false,
+          "precision": 1.0,
+          "precision_gap": 0.011108996538242266,
+          "problem": "rotated100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 0.9999999998462801,
+          "valid_n": 20000,
+          "within_radius_n": 20000
+        },
+        "coverage": {
+          "hq": 1.0,
+          "mass_tv": 0.0,
+          "max_cov_eig_ratio": 0.0,
+          "max_mode_mass": 0.01,
+          "max_radial_median_ratio": 0.0,
+          "min_cov_eig_ratio": 0.0,
+          "min_hq_count": 200,
+          "min_hq_mode_mass": 0.01,
+          "min_radial_median_ratio": 0.0,
+          "modes": 100,
+          "n": 20000,
+          "passed": false,
+          "precision": 1.0,
+          "valid_n": 20000
+        },
+        "passed": false
+      },
+      "notes": [
+        "Required native host is rawG128\u00d73/D Fourier2 MLP, not the archived affine profile. Five20k draws plus100k holdout meet unchanged numerical predicates at one constructed state; they are not terminal observations of a7000-update training run."
+      ],
+      "optimizer_updates": 0,
+      "original_gate_witness": {
+        "all_draws_passed": true,
+        "draw_count": 5,
+        "holdout_passed": true
+      },
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "public_api": [
+        "GANTrainer",
+        "GANTrainer.sample",
+        "Recipe.make_prior"
+      ],
+      "raw_metrics_sha256": "060ca5e62194a3594f9921babe3c52f65f48a1794941f6853c80cb6354e62ad8",
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 2048,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "k3p",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.0,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.5,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.00425,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "name": "ka2",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 20000,
+        "observation_sigma": 0.03,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.2,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "mog",
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 7000,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 2
+      },
+      "representation_scope": "public-host target law within declared numerical tolerance; optimizer learnability untested",
+      "representation_status": "SUPPORTED",
+      "rng_audit": {
+        "changed_streams": [
+          "[\"eval\",\"capacity\",\"holdout\",\"cpu\"]",
+          "[\"eval\",\"capacity\",\"terminal\",\"cpu\"]"
+        ],
+        "unintended_rng_deviations": 0,
+        "unintended_streams": []
+      },
+      "samples_file_sha256": "d5b20d19aacac970c2148396e044622ea6f60c6029e2fa20337d1656e120222c",
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_law": "public_prior_without_output_noise",
+        "scoring_weights": "live"
+      },
+      "seconds": 2.1738643189892173,
+      "state_file_sha256": "d3b4afa061b4f442766bf5eb6a7b46e4d3ba77962e913e871b4b85beaa65ffd4",
+      "stronger_holdout": {
+        "accuracy": {
+          "abs_cov_trace_bias": 0.001140553502825159,
+          "accuracy_pass": true,
+          "accuracy_score": 0.1250505216346244,
+          "all_finite": true,
+          "center_max_sigma": 0.10269167394098583,
+          "center_rms_sigma": 0.04283537170483012,
+          "cov_frob_rms": 0.05251014558328412,
+          "cov_trace_bias": -0.001140553502825159,
+          "frozen_pass": true,
+          "mass_tv": 0.012200000000000006,
+          "n": 100000,
+          "passed": true,
+          "precision": 0.98882,
+          "precision_gap": 7.100346175770156e-05,
+          "problem": "rotated100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 0.00285145438611048,
+          "valid_n": 100000,
+          "within_radius_n": 98882
+        },
+        "coverage": {
+          "hq": 0.98881,
+          "mass_tv": 0.012200000000000006,
+          "max_cov_eig_ratio": 1.0566190342601418,
+          "max_mode_mass": 0.01107,
+          "max_radial_median_ratio": 1.0536970105156789,
+          "min_cov_eig_ratio": 0.8304714905755808,
+          "min_hq_count": 915,
+          "min_hq_mode_mass": 0.00915,
+          "min_radial_median_ratio": 0.9304860045005171,
+          "modes": 100,
+          "n": 100000,
+          "passed": true,
+          "precision": 0.98881,
+          "valid_n": 100000
+        },
+        "passed": true
+      },
+      "task_id": "rotated100",
+      "task_sha256": "8b203a0e3698cd96dc613deb142d0034452e883fa137b59b6a8440616424bd71",
+      "witness_sha256": "00b6d138eeb185f8f0c2a57ab86ebd4c63923b998bb5e1f3f3030fcfcbbff978"
+    },
+    {
+      "api_capabilities": {
+        "a2": true,
+        "checkpoint": true,
+        "fixed_prior_width": true,
+        "learned_locations": true,
+        "live_sampling": true,
+        "mog_prior": true,
+        "named_rng": true,
+        "particle_cloud": false,
+        "policy_controls": false,
+        "policy_serving": false,
+        "public_components": true,
+        "public_trainer": true,
+        "scalar_gan": true,
+        "uniform_masses": true
+      },
+      "api_completed_updates": 0,
+      "artifact_directory": "/ml2/hypergan/toy-forge-family-round1-bcap-representation-20261002-cloud-bound/staggered100",
+      "construction": {
+        "analytic_law": "Uniform20k-component MoG reduces exactly to100equal Gaussian components with target means and covariance. Remaining latent columns(ifany)ignored.",
+        "map": "G(z)=1.2*(z0,z1) encoded exactly by3hidden paired-LeakyReLU layers",
+        "prior_sigma": 0.025,
+        "rows_per_mode": 200,
+        "target_sigma": 0.03
+      },
+      "declared_optimizer_budget": 7000,
+      "evaluation": {
+        "accuracy_limits": {
+          "abs_cov_trace_bias": 0.1,
+          "center_rms_sigma": 0.2,
+          "mass_tv": 0.06,
+          "radial_ks": 0.04
+        },
+        "coverage_evaluator": "benchmarks.toy100.gate:evaluate_suite",
+        "coverage_thresholds": {
+          "all_finite": true,
+          "max_cov_eig_ratio": 1.7,
+          "max_mass_tv": 0.1,
+          "max_mode_mass": 0.02,
+          "max_radial_median_ratio": 1.4,
+          "min_cov_eig_ratio": 0.4,
+          "min_hq_mode_mass": 0.005,
+          "min_modes": 100,
+          "min_precision": 0.97,
+          "min_radial_median_ratio": 0.65,
+          "min_samples": 20000
+        },
+        "early_eval_steps": [
+          0,
+          1,
+          10,
+          25,
+          50,
+          100
+        ],
+        "eval_interval": 250,
+        "eval_output_noise": "clean",
+        "eval_samples": 20000,
+        "evaluator": "benchmarks.toy100.accuracy_gate:evaluate_suite",
+        "evaluator_revision": {
+          "change": "Validate explicit CLI evaluation-noise overrides; metric kernels, thresholds, clean sampling law and budgets unchanged.",
+          "id": "native100-manifest-sampling-v2",
+          "previous_gate_sha256": "55f6ef733f0b10f4c6ac05eb5ad9d30320d807ff520ea1b41c75d2d0b41e406a"
+        },
+        "holdout_samples": 100000,
+        "kind": "native_accuracy",
+        "minimum_stable_checks": 5,
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise",
+        "scoring_weights": "live",
+        "sources": {
+          "benchmarks/toy100/accuracy.py": "ee5c62049f8cdceb3d93b6d792cbaa96c815e12b3ce79ffaed244fb15a44fed2",
+          "benchmarks/toy100/accuracy_gate.py": "e66ede95d4b80eedd832a102841c2b0a5d6d710f646bfa34dc00647dc0ab3abe",
+          "benchmarks/toy100/gate.py": "2ddadf56a4ccd7645c8b4e391373818b1113fb6113a9c691310fb162684058e6",
+          "benchmarks/toy100/metrics.py": "a7fbef19082f8470eb392948da52a336a90a3e99c6b3b893343a9e75bcda9c7b"
+        }
+      },
+      "measurement_summary": "five20000-sample fixed-state draws plus100000-sample holdout",
+      "negative_control": {
+        "accuracy": {
+          "abs_cov_trace_bias": 1.0,
+          "accuracy_pass": false,
+          "accuracy_score": 8.750003331929085,
+          "all_finite": true,
+          "center_max_sigma": 4.768371579070641e-06,
+          "center_rms_sigma": 2.665600750567193e-06,
+          "cov_frob_rms": 1.0,
+          "cov_trace_bias": -1.0,
+          "frozen_pass": false,
+          "mass_tv": 0.0,
+          "n": 20000,
+          "passed": false,
+          "precision": 1.0,
+          "precision_gap": 0.011108996538242266,
+          "problem": "staggered100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 0.9999999999885036,
+          "valid_n": 20000,
+          "within_radius_n": 20000
+        },
+        "coverage": {
+          "hq": 1.0,
+          "mass_tv": 0.0,
+          "max_cov_eig_ratio": 0.0,
+          "max_mode_mass": 0.01,
+          "max_radial_median_ratio": 0.0,
+          "min_cov_eig_ratio": 0.0,
+          "min_hq_count": 200,
+          "min_hq_mode_mass": 0.01,
+          "min_radial_median_ratio": 0.0,
+          "modes": 100,
+          "n": 20000,
+          "passed": false,
+          "precision": 1.0,
+          "valid_n": 20000
+        },
+        "passed": false
+      },
+      "notes": [
+        "Required native host is rawG128\u00d73/D Fourier2 MLP, not the archived affine profile. Five20k draws plus100k holdout meet unchanged numerical predicates at one constructed state; they are not terminal observations of a7000-update training run."
+      ],
+      "optimizer_updates": 0,
+      "original_gate_witness": {
+        "all_draws_passed": true,
+        "draw_count": 5,
+        "holdout_passed": true
+      },
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "public_api": [
+        "GANTrainer",
+        "GANTrainer.sample",
+        "Recipe.make_prior"
+      ],
+      "raw_metrics_sha256": "3b6ea979cb1faa7061deb4c492627915f1b1d828b575e36a35ac902852fcbe3b",
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": false,
+        "batch_size": 2048,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "birth_death_space": "data",
+        "conditioning": "scalar",
+        "continuous_policy": null,
+        "critic_formulation": "k3p",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.0,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.5,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.00425,
+        "lr_anneal_start": 0.6,
+        "lr_control": "mobility",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "name": "ka2",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 20000,
+        "observation_sigma": 0.03,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.2,
+        "particle_birth_death": false,
+        "prior_betas": null,
+        "prior_kind": "mog",
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.0,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_arm": "b_cap",
+        "reg_coeff": 1.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "hold",
+        "reopen_signal": "data",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": false,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "theory",
+        "row_policy": "independent",
+        "serve_average": 0.0,
+        "sigma_rel": 0.0,
+        "standardize": false,
+        "table_release_rule": "any",
+        "total_steps": 7000,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 2
+      },
+      "representation_scope": "public-host target law within declared numerical tolerance; optimizer learnability untested",
+      "representation_status": "SUPPORTED",
+      "rng_audit": {
+        "changed_streams": [
+          "[\"eval\",\"capacity\",\"holdout\",\"cpu\"]",
+          "[\"eval\",\"capacity\",\"terminal\",\"cpu\"]"
+        ],
+        "unintended_rng_deviations": 0,
+        "unintended_streams": []
+      },
+      "samples_file_sha256": "5a3f05aaf8d12caa6b43dc627ff6d1c4817797a963102802742a9fea9dddd3dc",
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_law": "public_prior_without_output_noise",
+        "scoring_weights": "live"
+      },
+      "seconds": 1.969870312139392,
+      "state_file_sha256": "3ca616f961c6718070b09ed2f21c628860a584d539142d4fafb04cc0a8cb5cbb",
+      "stronger_holdout": {
+        "accuracy": {
+          "abs_cov_trace_bias": 0.00114053543411341,
+          "accuracy_pass": true,
+          "accuracy_score": 0.12504149069264586,
+          "all_finite": true,
+          "center_max_sigma": 0.10269154854335895,
+          "center_rms_sigma": 0.04283462613255212,
+          "cov_frob_rms": 0.05251015056721678,
+          "cov_trace_bias": -0.00114053543411341,
+          "frozen_pass": true,
+          "mass_tv": 0.012200000000000006,
+          "n": 100000,
+          "passed": true,
+          "precision": 0.98882,
+          "precision_gap": 7.100346175770156e-05,
+          "problem": "staggered100",
+          "protocol": "toy100-accuracy-v1",
+          "radial_ks": 0.0028501657773342126,
+          "valid_n": 100000,
+          "within_radius_n": 98882
+        },
+        "coverage": {
+          "hq": 0.98881,
+          "mass_tv": 0.012200000000000006,
+          "max_cov_eig_ratio": 1.0566197527236634,
+          "max_mode_mass": 0.01107,
+          "max_radial_median_ratio": 1.0537034427827334,
+          "min_cov_eig_ratio": 0.8304715025826862,
+          "min_hq_count": 915,
+          "min_hq_mode_mass": 0.00915,
+          "min_radial_median_ratio": 0.9304864670702155,
+          "modes": 100,
+          "n": 100000,
+          "passed": true,
+          "precision": 0.98881,
+          "valid_n": 100000
+        },
+        "passed": true
+      },
+      "task_id": "staggered100",
+      "task_sha256": "7704b433cf563684ecb7d58b6459e60d6202aab01fe6936054f3842cdef91e27",
+      "witness_sha256": "f6805141b9316bcf6a086e128b9e16cd97ce0860bf337dccb8a2e39466985dcb"
+    }
+  ],
+  "reproducible_external_source": "/ml2/hypergan/toy-forge-family-round1-bcap-representation-20261002-cloud-bound/source.py",
+  "runtime": {
+    "device": "cpu",
+    "numpy": "2.5.2",
+    "python": "3.12.13",
+    "threads": 1,
+    "torch": "2.13.0+cu126"
+  },
+  "schema": "particlegan_bcap_round1_representation_compact_v1",
+  "script_sha256": "87a7a4946608345134c211730bab4ca5ec488eb4ee2be0388d03e0f6a2cc05d2",
+  "search_source_digest": "9f89fa7cc7af552ef7e41405fab415abbd00acf3d3c6e4af8e4435fb2423142e",
+  "search_spec_hash": "92f246e693e645a7e52dae1e24b9a362a3eb8ebb262d9a62e502f34cd8c89bbc",
+  "setup_attempts": [
+    {
+      "receipt": "/ml2/hypergan/toy-forge-family-round1-bcap-representation-20261002/execution-summary.json",
+      "sha256": "3d2f70645249bd26b9fa2baf13d4c246d35ea3d6ff22757b8e06fc69ef7e8ba5",
+      "summary": {
+        "complete": false,
+        "completed_witnesses": [
+          "two_pole"
+        ],
+        "fitting_updates": 0,
+        "reason": "External observer omitted the original run_behavior public KEEP declarations for four zero-origin parameter hosts; bind rejected SharedSlotStudent before observation. Original adapter declares these exact constants at behavior_adapters.py369.",
+        "source_sha256": "6e0faef2522038e20eeb3d481e3376c8dde2f73c980998dbf27103ba705cf98d",
+        "status": "SETUP_ERROR",
+        "training_updates": 0
+      }
+    },
+    {
+      "receipt": "/ml2/hypergan/toy-forge-family-round1-bcap-representation-20261002-initializer-bound/execution-summary.json",
+      "sha256": "b2a9c24ba816d75fa11aa415a1b5c41ceb8b8fbf531ab63c182a26ef634ce099",
+      "summary": {
+        "complete": false,
+        "completed_witnesses": [
+          "two_pole",
+          "unused_token_hold",
+          "ae_gan_hold",
+          "unipolar"
+        ],
+        "fitting_updates": 0,
+        "reason": "External observer used AE-only BehaviorComponents.make_prior(sigma=...) on cover/residual particle-cloud hosts. Actual source constructs ParticlePrior without sigma; restored that public constructor, not an API/source repair.",
+        "source_sha256": "f75f550d427c928769e3557be48dac84684bd61f0a807388ef36e4d70ef8442d",
+        "status": "SETUP_ERROR",
+        "training_updates": 0
+      }
+    }
+  ],
+  "source_commit": "83b2d96f3f042c8c4f16d020d081a07934f64822",
+  "source_files_sha256": {
+    "benchmarks/locked_shared/hosts/__init__.py": "3f0d91417b7c3b167e7b9a13b2053eca53394ca454ea62d27f1c26c723a096fb",
+    "benchmarks/locked_shared/hosts/ae_gan_hold.py": "c25ea8f8b998a137719df7fc18e5b047b456cdb5a65969430a652db0524509a9",
+    "benchmarks/locked_shared/hosts/cover_leftover.py": "f9bf24ace45678508c9d7e767e73db86116daece205bd78f3174737d13177838",
+    "benchmarks/locked_shared/hosts/mid_scale_identity.py": "cfe8a3726b644de5844d04449321888358053ff9a4ae66371cc002cae7ecc54c",
+    "benchmarks/locked_shared/hosts/residual_student.py": "5be55913b33dde33bfd3e1c2afaa20d127847a2b85616d6fc06227117c1910e2",
+    "benchmarks/locked_shared/hosts/unipolar.py": "c66b2c48ed00eb9ce4ed91c4e2efafa4f844f8f2fe57338901a754d3e023acb5",
+    "benchmarks/locked_shared/hosts/unused_token_hold.py": "ac535ce8ece5ae647f0b623c0adf06da2cb9ee37a44b7bb950a59e13642b672b",
+    "benchmarks/locked_shared/mode_hold.py": "38d4b4030ddaf354d41593395f3d6a26b4acf3668e672ebe56d126b7ee1c7232",
+    "benchmarks/locked_shared/trajectory.py": "9d9ac0313e53142107fea6ae231b44be0852679aa267d6d423873f948abeea4d",
+    "benchmarks/locked_shared/two_pole.py": "eee207af6d12475f7dbb106087f9d9e269d284274e69e4d199f6d8a38cb54f5e",
+    "benchmarks/toy100/accuracy.py": "ee5c62049f8cdceb3d93b6d792cbaa96c815e12b3ce79ffaed244fb15a44fed2",
+    "benchmarks/toy100/metrics.py": "a7fbef19082f8470eb392948da52a336a90a3e99c6b3b893343a9e75bcda9c7b",
+    "benchmarks/toy100/problems.py": "2581374d451ed9147c031dfcdfbe9e2eea83e41ba49c2b8945b6e729ede26c9d",
+    "benchmarks/toy_audit/definition_quality.py": "42d835ab7a0937a6c3759dd719691c721663b7857cb990405253e90f7fbd4cc9",
+    "benchmarks/transfer_suite/legacy_noise_adapters.py": "2e4ebc45fc92a3464d230d0bac8cddc00521f760b20be6538a103a6e27700c09",
+    "configs/forge/ideas/k3p-bcap-matched-v1.json": "7eed5eb795a0cedf1200e3333ea225736e06a3db67d6b48720115a144fda71a8",
+    "configs/forge/protocols/screening.json": "3fefb4d47fd2cd8aa6ed110c0a9f5bffefaae700431d1f57ca7b162c8efbb803",
+    "experiments/forge/adapters.py": "93edaca886aad9b73c88ce4bfee74d1a1778408c5cd44ba1ed99882736b737ae",
+    "experiments/forge/api.py": "fb4d49b9702aa1569f5ad9c9ed459904fcf5ab33d33a6f6a43b58f7f3df3a468",
+    "experiments/forge/behavior_adapters.py": "20e25930092c9cf0f7535ccc758bb1247cf613f46f95ec96c721035826b32a4d",
+    "experiments/forge/taskrecipes.py": "c11739bd935256e7083875f4e67d6c29fad1b9ea5915976dd32ed1eb7531d285",
+    "lib/toy_models.py": "70f32797882de0dc88085afcf5e05821b65eb5f248c9690818a2494225d782a3",
+    "particlegan/particle_prior.py": "0220878bebea227da63abbf9f5b1ebdabdc6aea54fd2332fd2cab02ed734238f",
+    "particlegan/recipes.py": "1a7f9df746e242a2774068c819d70d50cd72dc4f7f6b22b0bd13e1345dcf8ab2",
+    "particlegan/training.py": "7dadc219135bc3e6bf657bfe9bc3fa81dd14d4b2a31c70d5ff61e2941db35c94"
+  },
+  "training_movie": null,
+  "training_updates": 0,
+  "unresolved_required_tasks": [
+    "trajectory",
+    "vector_two_broad",
+    "vector_unequal_mass",
+    "vector_unequal_width",
+    "vector_anisotropic",
+    "vector_overlap",
+    "vector_spiral",
+    "img_stripes2",
+    "img_bars4",
+    "img_blobs4",
+    "img_intensity2"
+  ]
+}

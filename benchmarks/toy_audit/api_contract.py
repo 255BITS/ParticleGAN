@@ -7,6 +7,7 @@ Historical audit definitions and receipts are inputs, never migration outputs.
 from __future__ import annotations
 
 from importlib import import_module
+from copy import deepcopy
 import math
 from pathlib import Path
 import re
@@ -14,10 +15,10 @@ import re
 import numpy as np
 import torch
 
-from particlegan import Recipe
+from particlegan import Recipe, get_recipe
 
 
-PROVIDERS = ("api_images", "api_vectors", "api_conditionals", "api_diagnostics")
+PROVIDERS = ("api_images", "api_vectors", "api_conditionals", "api_diagnostics", "api_ring16")
 ROOT = Path(__file__).resolve().parents[2]
 CASE_ID = re.compile(r"^[a-zA-Z0-9][a-zA-Z0-9_-]*$")
 
@@ -93,11 +94,37 @@ def coverage(cases, historical_ids):
             "mapping": {name: sorted(values) for name, values in sorted(mappings.items())}}
 
 
-def build(case, *, device="cpu", seed=24002, recipe_name=None, max_steps=None):
+class UnsupportedRecipeOverrides(ValueError):
+    """This fixture has no declared contract for arbitrary tuning overrides."""
+
+
+def validate_recipe_overrides(case, recipe_name, recipe_overrides):
+    """Allow public tuning knobs without changing the host or sampling law."""
+    from experiments.forge.configuration_search import TUNABLE_FIELDS
+    if recipe_overrides is None:
+        return {}
+    if not isinstance(recipe_overrides, dict):
+        raise ValueError("recipe_overrides must be a JSON object")
+    if not recipe_overrides:
+        return {}
+    forbidden = set(recipe_overrides) - TUNABLE_FIELDS
+    if forbidden:
+        raise ValueError(f"non-tuning Recipe overrides are forbidden: {sorted(forbidden)}")
+    if (case.get("provider") not in {"api_vectors", "api_images"} or case.get("query")
+            or case.get("caller_owned") or case.get("penalty_arm") or case.get("kind") == "word"):
+        raise UnsupportedRecipeOverrides(f"{case['id']}: tuning overrides are unsupported for this caller/conditional/stress host")
+    result = deepcopy(recipe_overrides)
+    get_recipe(recipe_name, **result)  # Public validation before any optimizer construction.
+    return result
+
+
+def build(case, *, device="cpu", seed=24002, recipe_name=None, max_steps=None, recipe_overrides=None):
     provider = import_module(f"benchmarks.toy_audit.{case['provider']}")
+    recipe_name = recipe_name or case["default_recipe"]
+    overrides = validate_recipe_overrides(case, recipe_name, recipe_overrides)
+    options = {"recipe_overrides": overrides} if overrides else {}
     fixture = provider.build_case(case["id"], device=device, seed=seed,
-                                  recipe_name=recipe_name or case["default_recipe"],
-                                  max_steps=max_steps)
+                                  recipe_name=recipe_name, max_steps=max_steps, **options)
     if not isinstance(fixture.recipe, Recipe):
         raise TypeError(f"{case['id']}: recipe must be the public particlegan.Recipe")
     if not fixture.api_components or any(not isinstance(name, str) or not name

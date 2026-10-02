@@ -3,6 +3,7 @@
   "id": "mid_scale_identity",
   "adapter": "transfer_behavior",
   "execution": {
+    "initializer": "deterministic_orthogonal",
     "host": "mid_scale_identity",
     "steps": 800,
     "prior": {

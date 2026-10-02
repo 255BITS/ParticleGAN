@@ -14,8 +14,9 @@ Its convergence timing and speed objective are future additions; the implemented
 search behavior is described below.
 
 [`trainer-families.json`](../configs/forge/trainer-families.json) declares family
-membership and a canonical fallback. Distinct mechanisms, including structural
-ablations, have explicit families. The older matched R1/R2 penalty swap and the
+membership and a canonical fallback. Families describe presentation lineage;
+each new search also records its actual public technique signature. Distinct
+mechanisms, including structural ablations, have explicit families. The older matched R1/R2 penalty swap and the
 Modern GAN recipe belong to the same R1/R2 family, but their historical source
 cohorts remain separate evidence. The canonical fallback is an explicit choice,
 not a claim that incomparable historical configurations have been ranked.
@@ -31,6 +32,31 @@ Coupled settings such as two endpoints of a penalty schedule belong in one
 dimension. Trials inherit the same architecture, prior, initialization, named
 random streams, task horizons and sampling law. Seeds and task definitions are
 not search parameters.
+
+The [field registry](../experiments/forge/boundaries.py) declares ownership and
+the conservative finite search whitelist. Search resolves the complete base
+and trial recipes and rejects a change that enables or disables a mechanism:
+zero penalty coefficients at either schedule endpoint, optional cosine
+schedules, optimizer moment activation, AMSGrad, prior regularization, and zero
+terminal learning rates are structural boundaries. Positive strengths and timing
+can vary within the same signature. A structural ablation needs its own idea;
+a family label cannot turn it into a hyperparameter trial.
+Positive LR floors, including a constant floor of one, remain settings within
+the same always-declared schedule path.
+Ordinary planning of a configuration card applies the same parent technique,
+fixed-law and whitelist checks, even when its content hash is internally valid.
+
+Search also rejects an axis that is inactive or task-owned on every declared
+tuning task. For example, a coefficient annealing fraction has no effect when
+its schedule is absent, and fixed R1/R2 does not consume `reg_kappa`. Behavioral
+hosts own their auxiliary `prior_reg` objective; scalar public trainers retain
+the candidate's value. A mixed study can tune that scalar value only when one
+of its tuning tasks actually consumes it. Task bindings use the same pure
+resolver as execution, without constructing or training models.
+
+Technique signatures are additional provenance in newly planned studies.
+Existing configuration hashes, saved studies, qualification results and
+historical family/cohort distinctions retain their original identity.
 
 The initial [R1/R2 search](../configs/forge/searches/r1r2-modern-toy-v1.json)
 tests four substantive toy-host adaptations of the existing Modern GAN recipe:
@@ -104,6 +130,44 @@ records a 3/3 smoke winner at LR 0.0085 and gamma 1 to 0.1. Its ordinary
 trajectory quality check failed, so it remains Tier 1 and later requirements
 remain unmeasured. The readout links the compact confirmation cost receipt and
 the current leaderboard.
+
+### Advance every smoke survivor in a new full-view study
+
+A fresh study with `tuning_through_tier: 3` submits every grid configuration
+through the existing ordinary gate ladder. Each configuration advances
+independently: all of its smoke requirements must pass before quality, and all
+quality requirements must pass before endurance. A failed configuration stops;
+the others keep advancing. This requires no one-smoke-winner confirmation step.
+Freeze the complete per-configuration and campaign ceilings before enqueueing;
+retain every required task, including unknown and blocked later requirements.
+Tasks used to select the defaults are tuning evidence, not independent confirmation.
+
+The additive `progression` report lists all smoke survivors and all full-view
+qualified configurations. Its outcome distinguishes `full_winner`,
+`tuning_only_winner`, `best_observed` and `pending`. The existing `selection`
+dictionary retains its archived PASS-count/hash objective unchanged. A full
+winner is therefore a provisional whole-config gate winner, rather than a
+measured fastest config or permission to change defaults. Incomplete comparisons
+cannot name a final full-view winner; alternatives and full denominators remain.
+
+`speed_selection.status` is currently `UNAVAILABLE`. Some frozen evaluators
+record terminal-suffix times, while others lack per-observation seconds or bind
+coverage separately from joint accuracy. Reports preserve available original
+evaluator fields as `evaluator_timing`, without converting them to first
+acquisition speed. Total paid wall time remains cost evidence. Hardware
+contention, clock scope and a complete comparable timing contract must be
+resolved before any fastest-convergence claim.
+
+Use the same explicit coordinator queue for all families; enqueue launches no
+worker. The coordinator owns GPU admission and the existing memory/resource
+limits, with one worker per GPU unless an intentional sharing policy is declared:
+
+```sh
+python -m experiments.forge --queue-root /path/to/round/queue search plan NEW_STUDY_ID
+python -m experiments.forge --queue-root /path/to/round/queue search enqueue NEW_STUDY_ID
+python -m experiments.forge --queue-root /path/to/round/queue drain --gpus 0,1 --workers-per-gpu 1
+python -m experiments.forge --queue-root /path/to/round/queue search report NEW_STUDY_ID
+```
 
 The current screening profile remains provisional. Neither this search nor a
 passing smoke screen establishes calibrated ranking or public-default adoption.

@@ -10,7 +10,9 @@ from experiments.forge.contracts import atomic_json, read_json, stable_hash
 
 def task(name, *, prior="mog", sampling="public_prior_without_output_noise"):
     return {"schema_version": 1, "id": name, "adapter": "test",
-            "execution": {"steps": 24, "prior": {"kind": prior},
+            "execution": {"initializer": "deterministic_orthogonal", "steps": 24, "prior": {"kind": prior, "sigma": .025 if prior == "mog" else 0,
+                                                 "standardize": False, "learnable": True,
+                                                 **({"exception_reason": "Finite-cloud fixture"} if prior == "particle_cloud" else {})},
                           "host_definition": {"initialization": {"method": "named_v1"}}},
             "evaluation": {"kind": "transfer_sustained", "thresholds": [["error", "<=", 1.]],
                            "scoring_weights": "live", "sampling_law": sampling},
@@ -108,7 +110,7 @@ def request(tasks):
 def test_bindings_keep_prior_initialization_full_budget_and_clean_noisy_laws():
     clean = request({"quality": task("quality")})
     noisy = deepcopy(clean)
-    noisy["tasks"]["quality"]["execution"]["prior"] = {"kind": "particle_cloud"}
+    noisy["tasks"]["quality"]["execution"]["prior"] = task("quality", prior="particle_cloud")["execution"]["prior"]
     noisy["tasks"]["quality"]["execution"]["host_definition"]["initialization"]["method"] = "different"
     noisy["tasks"]["quality"]["evaluation"]["sampling_law"] = "noisy_served"
     noisy["tasks"]["quality"]["resources"]["timeout_seconds"] = 900
@@ -118,7 +120,7 @@ def test_bindings_keep_prior_initialization_full_budget_and_clean_noisy_laws():
     refs = [row["bindings"]["task_contracts"]["quality"] for row in result["rows"]]
     assert refs[0] != refs[1]
     contracts = [result["task_contracts"][ref] for ref in refs]
-    assert contracts[0]["prior"] == {"kind": "mog"}
+    assert contracts[0]["prior"] == clean["tasks"]["quality"]["execution"]["prior"]
     assert contracts[1]["initialization"] == {"method": "different"}
     assert contracts[1]["timeout_seconds"] == 900
     assert contracts[0]["steps"] == 24

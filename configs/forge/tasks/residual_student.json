@@ -3,6 +3,7 @@
   "id": "residual_student",
   "adapter": "transfer_behavior",
   "execution": {
+    "initializer": "deterministic_orthogonal",
     "host": "residual_student",
     "steps": 400,
     "prior": {

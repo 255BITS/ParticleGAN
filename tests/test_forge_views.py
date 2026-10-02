@@ -35,7 +35,8 @@ VECTOR_THRESHOLDS_V1 = {
 
 def simple_task(name):
     return dict(schema_version=1, id=name, adapter="test_host",
-                execution=dict(steps=24, produces_state=True),
+                execution=dict(initializer="deterministic_orthogonal", steps=24, produces_state=True,
+                               prior=dict(kind="mog", sigma=.025, standardize=False, learnable=True)),
                 evaluation=dict(kind="transfer_sustained", thresholds=[["error", "<=", 1.0]],
                                 scoring_weights="live"), resources={},
                 requires_capabilities=[], dependencies=[])
@@ -110,7 +111,8 @@ def test_frozen_thresholds_reference_the_declared_gate_policy_and_current_scorer
         assert tasks[spec["name"]]["evaluation"]["thresholds"] == json.loads(json.dumps(thresholds))
     assert {s["name"] for s in vectors if s["tier"] == "ranking"} == set(VECTOR_THRESHOLDS_V1)
     assert {name for name, task in tasks.items() if task["adapter"] == "transfer_vector"
-            and "vector_profile" not in task["execution"]} == set(VECTOR_THRESHOLDS_V1)
+            and "vector_profile" not in task["execution"]
+            and task["evaluation"].get("gate_policy", {}).get("id") == "forge-vector-full-component-v1"} == set(VECTOR_THRESHOLDS_V1)
     for task in tasks.values():
         if task["adapter"] == "transfer_vector" and "vector_profile" in task["execution"]:
             assert task["evaluation"] == tasks[task["execution"]["host"]]["evaluation"]

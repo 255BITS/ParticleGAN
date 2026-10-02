@@ -1,4 +1,4 @@
-"""Revalidate explicit host semantics at frozen-request execution boundaries.
+"""Revalidate experiment ownership at frozen-request execution boundaries.
 
 Only snapshots containing this module opt into this boundary. Older frozen
 registrations retain their original execution rules. Cached preflight results
@@ -9,12 +9,15 @@ from __future__ import annotations
 from pathlib import Path
 
 from .contracts import canonical, stable_hash
+from .initialization import MODULE as INITIALIZATION_MODULE, task_initializer
+from .priors import task_prior
 
 MODULE = "experiments/forge/hostprofiles.py"
 PROFILE_ADAPTERS = {"image_profile": {"transfer_image"},
                     "vector_profile": {"transfer_vector"},
                     "native_profile": {"native100", "native100_continuation"}}
 SUPPORTED_ADAPTERS = frozenset().union(*PROFILE_ADAPTERS.values())
+BOUNDARY_ADAPTERS = SUPPORTED_ADAPTERS | {"transfer_behavior", "ring_endurance", "clockfree_audit", "paired_adaptation", "word_joint"}
 
 
 
@@ -49,28 +52,41 @@ def _members(request, task_ids):
     return members
 
 
-def _validate_task(task, candidate, root):
+def _validate_task(task, candidate, root, *, explicit_initializer=True):
     from .taskrecipes import bind_task_candidate
+    initializer = task_initializer(task, candidate, explicit=explicit_initializer)
+    reference_candidate = candidate
     candidate = bind_task_candidate(candidate, task)
     execution, adapter = task["execution"], task["adapter"]
     for marker, adapters in PROFILE_ADAPTERS.items():
         if marker in execution and adapter not in adapters:
             raise ValueError(f"{marker} is unsupported by adapter {adapter}")
-    if adapter not in SUPPORTED_ADAPTERS:
-        return False
-    if "host_initialization" in execution:
+    if "host_initialization" in execution and (adapter in SUPPORTED_ADAPTERS or explicit_initializer):
         raise ValueError("host initialization must be declared inside a supported native profile")
+    if adapter not in SUPPORTED_ADAPTERS:
+        if explicit_initializer and adapter in BOUNDARY_ADAPTERS:
+            if adapter == "word_joint":
+                from .word_adapter import word_context
+                word_context({"candidate": reference_candidate, "protocol": {"seed": 0}}, task, "cpu", root=root)
+            else:
+                from .api import task_formulation_context
+                task_formulation_context(reference_candidate, task, device="cpu", root=root)
+            return True
+        return False
     if adapter.startswith("native100"):
         from .nativeprofiles import native_profile_blockers
-        blockers = native_profile_blockers(task, candidate, root=root)
+        blockers = native_profile_blockers(task, candidate, root=root, explicit_initializer=explicit_initializer)
         if blockers:
             raise ValueError("; ".join(blockers))
-        # Legacy native tasks still use their old resource/init path. Their
-        # generic construction validation belongs to the ordinary adapter.
+        # Legacy native tasks retain their old resource/init path. Current MLP
+        # tasks own their resources and participate in the same frozen checks.
         if "native_profile" not in execution:
-            return False
-        from .nativeprofiles import resolve_native_spec
-        resources = resolve_native_spec(task, root=root)["resources"]
+            if "resources" not in execution:
+                return False
+            resources = execution["resources"]
+        else:
+            from .nativeprofiles import resolve_native_spec
+            resources = resolve_native_spec(task, root=root)["resources"]
     else:
         if adapter == "transfer_image":
             from .imageprofiles import resolve_image_spec
@@ -82,13 +98,7 @@ def _validate_task(task, candidate, root):
             raise ValueError("execution budget differs from the explicit host card")
         resources = {"num_particles": spec["particles"], "z_dim": spec["z_dim"],
                      "batch_size": spec["batch_size"] if adapter == "transfer_image" else spec["batch"]}
-    prior = execution.get("prior")
-    if not isinstance(prior, dict) or not isinstance(candidate.get("prior"), dict):
-        raise ValueError("host request needs an explicit resolved task and candidate prior")
-    # Only a task's declared finite-cloud exception may override the candidate's
-    # sampler. Other tasks must execute the resolved candidate prior literally.
-    if prior.get("kind") != "particle_cloud" and canonical(prior) != canonical(candidate["prior"]):
-        raise ValueError("task prior differs from the resolved candidate prior")
+    prior = task_prior(task)
     from .api import host_recipe_overrides, task_policy_blockers
     blockers = task_policy_blockers(task, candidate)
     if blockers:
@@ -97,10 +107,14 @@ def _validate_task(task, candidate, root):
     # Shared public validation without model construction or GPU allocation.
     # Native policy syntax/applicability was already resolved by its helper.
     from .api import FormulationContext
-    FormulationContext(recipe_preset=candidate.get("recipe_preset"), recipe_overrides=overrides, prior=prior,
-        device="cpu", requires_capabilities=tuple(candidate.get("requires_capabilities", ()))
-            + tuple(task["requires_capabilities"]), extensions=candidate.get("extensions", {}),
-        initializer=candidate.get("initializer", "deterministic_orthogonal"))
+    if explicit_initializer:
+        from .api import task_formulation_context
+        task_formulation_context(reference_candidate, task, device="cpu", root=root)
+    else:
+        FormulationContext(recipe_preset=candidate.get("recipe_preset"), recipe_overrides=overrides, prior=prior,
+            device="cpu", requires_capabilities=tuple(candidate.get("requires_capabilities", ()))
+                + tuple(task["requires_capabilities"]), extensions=candidate.get("extensions", {}),
+            initializer=initializer)
     return True
 
 
@@ -137,7 +151,7 @@ def _validate_candidate_identity(request):
         raise ValueError("candidate scientific identity differs from its actual formulation/source")
 
 
-def _validate_job_identity(request, checked):
+def _validate_job_identity(request, checked, *, explicit_initializer=True):
     from .views import task_execution_fingerprint, task_evaluation_fingerprint
     covered = set()
     for job in request["jobs"]:
@@ -160,7 +174,7 @@ def _validate_job_identity(request, checked):
             raise ValueError("host job resources differ from its frozen task/compute budget")
         for member in relevant:
             task = request["tasks"][member]
-            if task.get("adapter") == "native100_continuation" and "native_profile" in task["execution"]:
+            if task.get("adapter") == "native100_continuation":
                 parent_id = task["execution"]["continuation_of"]
                 parents = [row for row in request["jobs"] if parent_id in row.get("task_ids", [row["task_id"]])]
                 if (len(parents) != 1 or science.get("prerequisites", {}).get(parent_id)
@@ -168,6 +182,11 @@ def _validate_job_identity(request, checked):
                     raise ValueError("native continuation scientific identity lacks its exact own-parent job")
         expected_execution = {name: task_execution_fingerprint(request["tasks"][name]) for name in members}
         expected_evaluation = {name: task_evaluation_fingerprint(request["tasks"][name]) for name in members}
+        if explicit_initializer:
+            expected_initializers = {name: task_initializer(request["tasks"][name], request["candidate"])
+                                     for name in members}
+            if science.get("task_initializers") != expected_initializers:
+                raise ValueError("host job initialization differs from its experiment-owned task policies")
         if (science.get("execution") != expected_execution or science.get("evaluation") != expected_evaluation
                 or science.get("candidate_revision") != request["candidate_revision"]
                 or science.get("initializer") != request["candidate"].get("initializer", "deterministic_orthogonal")
@@ -194,6 +213,10 @@ def validate_request_host_profiles(request: dict, *, task_ids=None) -> None:
     from .sources import verify_snapshot
     root = Path(snapshot)
     verify_snapshot(root, source)
+    # The new source contract owns initialization in tasks. Existing frozen
+    # requests without the helper retain their original candidate fallback and
+    # scientific keys; their old source executes its original binding rules.
+    explicit_initializer = INITIALIZATION_MODULE in source.get("files", {})
     blockers, checked = [], set()
     tasks = request.get("tasks", {})
     for member in sorted(_members(request, task_ids)):
@@ -202,23 +225,23 @@ def validate_request_host_profiles(request: dict, *, task_ids=None) -> None:
             continue
         task = tasks[member]
         try:
-            if _validate_task(task, request["candidate"], root):
+            if _validate_task(task, request["candidate"], root, explicit_initializer=explicit_initializer):
                 checked.add(member)
-            if task.get("adapter") == "native100_continuation" and "native_profile" in task["execution"]:
+            if task.get("adapter") == "native100_continuation":
                 from .nativeprofiles import validate_native_continuation
                 parent_id = task["execution"]["continuation_of"]
                 if parent_id not in tasks:
                     raise ValueError("native continuation lacks its declared parent task")
                 parent = tasks[parent_id]
-                _validate_task(parent, request["candidate"], root)
-                checked.add(parent_id)
+                if _validate_task(parent, request["candidate"], root, explicit_initializer=explicit_initializer):
+                    checked.add(parent_id)
                 validate_native_continuation(parent, task, root=root)
         except (KeyError, TypeError, ValueError, OSError) as error:
             blockers.append(f"{member}: {error}")
     if not blockers:
         try:
             _validate_candidate_identity(request)
-            _validate_job_identity(request, checked)
+            _validate_job_identity(request, checked, explicit_initializer=explicit_initializer)
         except (KeyError, TypeError, ValueError) as error:
             blockers.append(str(error))
     if blockers:

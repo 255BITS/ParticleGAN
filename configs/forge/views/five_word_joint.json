@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "id": "five_word_joint",
+  "revision": 1,
+  "goal": "five_word_joint",
+  "assignments": [
+    {
+      "task": "two_pole",
+      "qualification_tier": 1,
+      "importance": "required",
+      "order": 0
+    },
+    {
+      "task": "unused_token_hold",
+      "qualification_tier": 1,
+      "importance": "required",
+      "order": 1
+    },
+    {
+      "task": "ae_gan_hold",
+      "qualification_tier": 1,
+      "importance": "required",
+      "order": 2
+    },
+    {
+      "task": "five_word_joint_acquisition",
+      "qualification_tier": 2,
+      "importance": "required",
+      "order": 0
+    }
+  ],
+  "eligibility": {},
+  "calibration": {
+    "status": "provisional",
+    "adoption_blocker": "Finite-word acquisition placement and rejection costs are not calibrated. Existing mechanism smoke prerequisites apply; this view supplies no release/default promotion."
+  },
+  "ranking": {
+    "policy": "qualified_tier_only_with_raw_metrics",
+    "compare_compatible_cohorts": true,
+    "cost_separate": true
+  },
+  "policy_change_reason": "Opt-in retained five-word inverse-learning question; preserve frozen stability and configuration-search views. Tier 2 is provisional because the original quality budget is 20,001 updates, not cheap smoke."
+}

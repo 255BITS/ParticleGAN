@@ -26,7 +26,8 @@ def checkout(tmp_path):
     for tier in (1, 2, 3):
         atomic_json(tmp_path / f"configs/forge/tasks/t{tier}.json", {
             "schema_version": 1, "id": f"t{tier}", "adapter": "transfer_behavior",
-            "execution": {"steps": 80, "prior": prior, "host": "mode_hold"},
+            "execution": {"steps": 80, "prior": prior, "host": "mode_hold",
+                          "initializer": "deterministic_orthogonal"},
             "evaluation": {"kind": "transfer_sustained", "thresholds": [["score", ">=", 1]],
                            "observations": 24, "minimum_stable_checks": 5,
                            "sampling_contract_version": 1, "sampling_law": "public_prior_without_output_noise",
@@ -56,6 +57,8 @@ def complete(queue, score, *, seconds=2, fabricated_gate=None):
     """A certified frozen-evaluator terminal envelope, no training process."""
     claimed = queue.claim([{"device": "cpu", "slot": 0, "memory_mb": 100}])
     assert claimed is not None
+    if callable(score):
+        score = score(claimed)
     evidence = {"curve": [{"step": math.ceil(i * 80 / 24), "score": score} for i in range(1, 25)],
                 "live": {"score": score},
         "sampling_contract_version": 1, "sampling_law": "public_prior_without_output_noise",
@@ -100,6 +103,70 @@ def test_invalid_grid_and_public_recipe_validation(checkout, spec, grid):
     spec["grid"] = grid
     with pytest.raises(ValueError):
         search.plan_search(checkout, checkout / "runs", spec)
+
+
+@pytest.mark.parametrize("grid", [{"lr": [True]}, {"reg_coeff": [False]},
+                                  {"reg_every": [1.0]}, {"betas": [[False, .99]]},
+                                  {"prior_betas": [[0, True]]}, {"eps": [float("inf")]}])
+def test_search_values_have_explicit_numeric_types(checkout, spec, grid):
+    spec["grid"] = grid
+    with pytest.raises(ValueError, match="invalid hyperparameter value"):
+        search.materialize_search(checkout, spec)
+    assert not (checkout / "configs/forge/configurations").exists()
+
+
+@pytest.mark.parametrize("grid, mechanism", [({"reg_coeff": [0.]}, "critic_penalty"),
+                                            ({"amsgrad": [True]}, "amsgrad"),
+                                            ({"prior_reg": [.1]}, "prior_regularization")])
+def test_new_trials_preserve_base_mechanisms_before_writing(checkout, spec, grid, mechanism):
+    spec["grid"] = grid
+    with pytest.raises(ValueError, match=mechanism):
+        search.materialize_search(checkout, spec)
+    assert not (checkout / "configs/forge/configurations").exists()
+
+
+@pytest.mark.parametrize("field", ["reg_coeff_anneal_end", "beta2_anneal_end"])
+def test_inactive_schedule_axes_are_rejected(checkout, spec, field):
+    spec["grid"] = {field: [.1, .3]}
+    with pytest.raises(ValueError, match="inactive or task-owned"):
+        search.materialize_search(checkout, spec)
+
+
+def _behavioral_prior_reg_base(checkout):
+    path = checkout / "configs/forge/ideas/base.json"
+    base = read_json(path)
+    base["recipe_overrides"]["prior_reg"] = .05
+    base["host_adaptation"] = {"schema_version": 1, "recipe_fields": ["prior_reg"]}
+    atomic_json(path, base)
+    path = checkout / "configs/forge/tasks/t1.json"
+    task = read_json(path)
+    task["execution"].update(host="two_pole", prior={"kind": "particle_cloud", "sigma": 0,
+        "standardize": False, "learnable": True, "exception_reason": "frozen behavioral host"})
+    atomic_json(path, task)
+
+
+def test_task_delegated_axes_are_rejected_when_every_tuning_task_owns_them(checkout, spec):
+    _behavioral_prior_reg_base(checkout)
+    spec["grid"] = {"prior_reg": [.1, .2]}
+    with pytest.raises(ValueError, match="prior_reg is inactive or task-owned"):
+        search.materialize_search(checkout, spec)
+
+
+def test_axis_keeps_honest_scoped_ownership_when_a_scalar_task_uses_it(checkout, spec):
+    _behavioral_prior_reg_base(checkout)
+    spec["grid"] = {"prior_reg": [.1, .2]}
+    spec["tuning_through_tier"] = 2
+    assert len(search.materialize_search(checkout, spec)) == 2
+
+
+def test_frozen_priors_cannot_supply_a_prior_optimizer_search_axis(checkout, spec):
+    path = checkout / "configs/forge/tasks/t1.json"
+    task = read_json(path)
+    task["execution"]["prior"]["learnable"] = False
+    atomic_json(path, task)
+    spec["grid"] = {"prior_lr_mult": [1, 4]}
+    with pytest.raises(ValueError, match="prior_lr_mult is inactive"):
+        search.materialize_search(checkout, spec)
 
 
 def test_bound_budgets_and_protocol_are_preflight_requirements(checkout, spec):
@@ -311,7 +378,66 @@ def test_frozen_configuration_identity_survives_later_public_defaults(checkout, 
         raise AssertionError("historical identity must not resolve today's public Recipe")
     monkeypatch.setattr(search, "_resolved_recipe", different_defaults)
     assert search.configuration_id(card, resolved_recipe=card["resolved_configuration_recipe"]) == card["configuration_id"]
-    assert load_idea(checkout, card["id"]) == card
+    search.validate_configuration_declaration(card)  # Frozen evidence has no current checkout lineage.
+
+
+def test_ordinary_configuration_validation_rejects_rehashed_structural_ablation(checkout, spec):
+    path = search.materialize_search(checkout, spec)[0]
+    card = read_json(path)
+    card["recipe_overrides"]["reg_coeff"] = 0.
+    card["resolved_configuration_recipe"]["reg_coeff"] = 0.
+    digest = search.configuration_id(card, resolved_recipe=card["resolved_configuration_recipe"])
+    card.update(configuration_id=digest, id=f"{card['trainer_family']}--{digest}")
+    search.validate_configuration_declaration(card)  # Internally consistent identity is insufficient.
+    with pytest.raises(ValueError, match="critic_penalty"):
+        search.validate_configuration_declaration(card, root=checkout)
+    target = path.with_name(f"{card['id']}.json")
+    atomic_json(target, card)
+    with pytest.raises(ValueError, match="critic_penalty"):
+        load_idea(checkout, card["id"])
+    with pytest.raises(ValueError, match="critic_penalty"):
+        resolve_idea(checkout, card["id"], declaration=card, view_id="stability", execution_backend="cpu")
+
+
+def test_current_configuration_requires_an_acyclic_declared_parent(checkout, spec):
+    card = read_json(search.materialize_search(checkout, spec)[0])
+    card["parent"] = card["id"]
+    with pytest.raises(ValueError, match="parent cycle"):
+        search.validate_configuration_declaration(card, root=checkout)
+    card["parent"] = "missing-technique"
+    with pytest.raises(ValueError, match="parent must name"):
+        search.validate_configuration_declaration(card, root=checkout)
+
+
+def test_rehashed_configuration_cannot_change_fixed_laws_or_nonsearch_knobs(checkout, spec):
+    card = read_json(search.materialize_search(checkout, spec)[0])
+    for field, value, message in [("claim_contract", {"sampling_law": "changed"}, "fixed parent"),
+                                  ("latent_damping_max_rate", .4, "outside the hyperparameter")]:
+        changed = deepcopy(card)
+        if field == "claim_contract":
+            changed[field] = value
+        else:
+            changed["recipe_overrides"][field] = value
+            changed["resolved_configuration_recipe"][field] = value
+        digest = search.configuration_id(changed, resolved_recipe=changed["resolved_configuration_recipe"])
+        changed.update(configuration_id=digest, id=f"{changed['trainer_family']}--{digest}")
+        with pytest.raises(ValueError, match=message):
+            search.validate_configuration_declaration(changed, root=checkout)
+
+
+def test_existing_positive_floor_round_retains_all_configuration_identities():
+    root = Path(__file__).resolve().parents[1]
+    study = "r1r2-modern-family-round1-v1"
+    paths = [path for path in (root / "configs/forge/configurations").glob("*.json")
+             if read_json(path).get("search_study_id") == study]
+    before = {path: path.read_bytes() for path in paths}
+    declarations = search._declarations(root, search._load_spec(root, study))
+    assert len(declarations) == len(paths) == 8
+    assert {card["configuration_id"] for card, _ in declarations} == {
+        read_json(path)["configuration_id"] for path in paths}
+    for path in paths:
+        search.validate_configuration_declaration(read_json(path), root=root)
+    assert before == {path: path.read_bytes() for path in paths}
 
 
 def test_actual_context_recipe_matches_frozen_card_and_report(checkout, spec):
@@ -323,6 +449,7 @@ def test_actual_context_recipe_matches_frozen_card_and_report(checkout, spec):
         assert card["prior"] == planned["base_declaration"]["prior"]
         assert trial["resolved_recipe"]["prior_kind"] == "mog"
         assert trial["resolved_recipe"]["standardize"] is False
+        assert trial["technique_signature"] == planned["technique_signature"]
 
 
 def test_changed_unspecified_default_rejected_before_queue_admission(checkout, spec, monkeypatch):
@@ -366,3 +493,109 @@ def test_cli_search_stages_parse_without_extra_protocol_knobs():
         assert parser().parse_args(["search", stage, "study"]).stage == stage
     with pytest.raises(SystemExit):
         parser().parse_args(["search", "run", "study", "--seed", "1"])
+
+
+def test_full_search_advances_every_smoke_survivor_and_keeps_unknowns(checkout, spec):
+    spec["tuning_through_tier"] = 3
+    spec["campaign"].update(budget_seconds=120, candidate_budget_seconds=30)
+    queue = Queue(checkout / "runs", report_root=checkout / "reports/forge")
+    planned = search.enqueue_search(checkout, checkout / "runs", spec, queue=queue)
+    ids = [trial["candidate_id"] for trial in planned["trials"]]
+    observed = []
+    def score(claimed):
+        candidate, task = claimed["request"]["candidate"]["id"], claimed["job"]["task_id"]
+        observed.append((candidate, task))
+        return 0 if (candidate, task) in {(ids[0], "t1"), (ids[1], "t2")} else 1
+    for _ in range(9):
+        complete(queue, score)
+    assert queue.claim([{"device": "cpu", "slot": 0, "memory_mb": 100}]) is None
+    report = search.report_search(checkout, checkout / "runs", spec, queue=queue)
+    assert set(observed) == ({(ids[0], "t1"), (ids[1], "t1"), (ids[1], "t2")} |
+                             {(candidate, task) for candidate in ids[2:] for task in ("t1", "t2", "t3")})
+    assert report["progression"]["smoke_survivor_candidate_ids"] == sorted(ids[1:])
+    assert report["progression"]["full_view_qualified_candidate_ids"] == sorted(ids[2:])
+    assert report["progression"]["outcome"] == "full_winner"
+    assert report["progression"]["full_view_winner_candidate_id"] == ids[2]
+    assert report["selection"] == search.select_configuration(report["trials"], 3)
+    first = report["trials"][0]["qualification"]
+    assert first["required_total"] == 3 and first["required_statuses"] == {"FAIL": 1, "UNKNOWN": 2}
+    assert report["trials"][1]["qualification"]["qualified_tier"] == 1
+    assert report["cost"]["new_paid_wall_seconds"] == 18
+    assert report["speed_selection"]["status"] == "UNAVAILABLE"
+    assert report["speed_selection"]["selected_candidate_id"] is None
+    assert report["default_adoption"] is False
+    assert all(task["evaluator_timing"]["status"] == "UNAVAILABLE"
+               for trial in report["trials"] for task in trial["tasks"])
+
+
+def test_smoke_only_winner_is_not_full_view_qualified(checkout, spec):
+    queue = Queue(checkout / "runs", report_root=checkout / "reports/forge")
+    search.enqueue_search(checkout, checkout / "runs", spec, queue=queue)
+    for _ in range(4):
+        complete(queue, 1)
+    assert queue.claim([{"device": "cpu", "slot": 0, "memory_mb": 100}]) is None
+    report = search.report_search(checkout, checkout / "runs", spec, queue=queue)
+    assert report["selection"]["selection_kind"] == "qualified_winner"
+    assert report["progression"]["outcome"] == "tuning_only_winner"
+    assert report["progression"]["full_view_winner_candidate_id"] is None
+    assert report["progression"]["full_view_qualified_candidate_ids"] == []
+    assert all(trial["qualification"]["required_statuses"] == {"PASS": 1, "UNKNOWN": 2}
+               for trial in report["trials"])
+
+
+def test_qualification_requires_required_prefix_and_retains_blocked_denominator():
+    trial = {"tasks": [{"task": "smoke", "qualification_tier": 1, "importance": "required", "gate_status": "BLOCKED"},
+                       {"task": "quality", "qualification_tier": 2, "importance": "required", "gate_status": "PASS"},
+                       {"task": "hold", "qualification_tier": 3, "importance": "required", "gate_status": "UNKNOWN"},
+                       {"task": "diagnostic", "qualification_tier": 1, "importance": "diagnostic", "gate_status": "PASS"}]}
+    result = search._qualification(trial, 3)
+    assert result["qualified_tier"] == 0
+    assert result["required_total"] == 3
+    assert result["required_statuses"] == {"BLOCKED": 1, "PASS": 1, "UNKNOWN": 1}
+    assert not result["full_view_qualified"] and not result["tuning_qualified"]
+
+
+def test_progression_rejects_dropped_or_duplicate_view_tasks(checkout, spec):
+    report = search.plan_search(checkout, checkout / "runs", spec)
+    report["trials"][0]["tasks"].pop()
+    with pytest.raises(ValueError, match="complete view task denominator"):
+        search._annotate_progression(report)
+    report = search.plan_search(checkout, checkout / "runs", spec)
+    for trial in report["trials"]:
+        trial["tasks"].append(deepcopy(trial["tasks"][0]))
+    with pytest.raises(ValueError, match="complete view task denominator"):
+        search._annotate_progression(report)
+
+
+def test_recorded_suffix_time_is_preserved_without_becoming_acquisition_speed():
+    original = {"confirmed_step": 80, "confirmed_seconds": 1.5, "stable_from_seconds": .9}
+    grade = {"evaluator_result": {"convergence": original}}
+    result = search._evaluator_timing({"evaluation": {"kind": "transfer_sustained"}}, grade)
+    assert result["status"] == "RECORDED_EVALUATOR_ONLY"
+    assert result["original_evaluator_convergence"] == original
+    assert not result["speed_qualified"]
+    assert "terminal passing suffix" in result["semantics"]
+    assert original["confirmed_seconds"] == 1.5
+
+
+@pytest.mark.parametrize("value", [float("nan"), float("inf"), -1, True])
+def test_invalid_recorded_seconds_remain_unavailable_and_json_finite(value):
+    original = {"confirmed_step": 80, "confirmed_seconds": value}
+    result = search._evaluator_timing({"evaluation": {"kind": "transfer_sustained"}},
+                                     {"evaluator_result": {"convergence": original}})
+    assert result["status"] == "UNAVAILABLE" and not result["speed_qualified"]
+    assert result["original_evaluator_convergence"]["confirmed_seconds"] is None
+    assert result["invalid_timing_fields"] == ["confirmed_seconds"]
+    stable_hash(result)
+    assert original["confirmed_seconds"] is value
+
+
+def test_hold_steps_and_native_coverage_time_cannot_supply_joint_quality_seconds():
+    hold = search._evaluator_timing({"evaluation": {"kind": "ring_hold"}},
+                                    {"metrics": {"converged_step": 1400, "hold_budget_complete": True}})
+    assert hold["status"] == "UNAVAILABLE"
+    assert hold["original_evaluator_convergence"]["converged_step"] == 1400
+    native = search._evaluator_timing({"evaluation": {"kind": "native_accuracy"}},
+        {"evaluator_result": {"coverage": {"confirmed_seconds": 3}}})
+    assert native["status"] == "UNAVAILABLE" and not native["speed_qualified"]
+    assert native["original_evaluator_convergence"] == {}

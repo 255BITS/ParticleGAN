@@ -12,7 +12,8 @@
       ],
       "rationale": "The modern R3GAN Stacked-MNIST training adaptation is the canonical baseline. The older fixed R1/R2 penalty on a K3P recipe remains an explicit alternative; different recorded sources are not ranked against one another.",
       "active_search_by_backend": {
-        "cpu": "r1r2-modern-toy-v1"
+        "cpu": "r1r2-modern-toy-v1",
+        "cuda": "r1r2-modern-family-round1-v1"
       }
     },
     {
@@ -22,7 +23,8 @@
       "candidates": [
         "k3p-bcap-matched-v1"
       ],
-      "rationale": "Frozen BCap penalty with its declared K3P optimizer and training law."
+      "rationale": "Frozen BCap penalty with its declared K3P optimizer and training law.",
+      "active_search_by_backend": {"cuda": "bcap-family-defaults-round1-v1"}
     },
     {
       "id": "k3p",
@@ -31,7 +33,8 @@
       "candidates": [
         "k3p"
       ],
-      "rationale": "Public K3P formulation."
+      "rationale": "Public K3P formulation.",
+      "active_search_by_backend": {"cuda": "k3p-family-defaults-round1-v1"}
     },
     {
       "id": "ka2",
@@ -40,7 +43,8 @@
       "candidates": [
         "ka2"
       ],
-      "rationale": "Public KA2 formulation retains its own training mechanism."
+      "rationale": "Public KA2 formulation retains its own training mechanism.",
+      "active_search_by_backend": {"cuda": "ka2-family-defaults-round1-v1"}
     },
     {
       "id": "e22",
@@ -68,7 +72,8 @@
         "release07-gan-v3-task-adapted-v1",
         "release07-gan-v3-mog-v1"
       ],
-      "rationale": "The explicit task adaptation is the runnable MoG configuration. The earlier host-incompatible MoG card stays an archived alternative, with its original source and blockers."
+      "rationale": "The explicit task adaptation is the runnable MoG configuration. The earlier host-incompatible MoG card stays an archived alternative, with its original source and blockers.",
+      "active_search_by_backend": {"cuda": "release07-gan-v3-mog-family-defaults-round1-v1"}
     },
     {
       "id": "release07-gan-v3-cloud",

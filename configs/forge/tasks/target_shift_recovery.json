@@ -3,6 +3,7 @@
   "id": "target_shift_recovery",
   "adapter": "paired_adaptation",
   "execution": {
+    "initializer": "deterministic_orthogonal",
     "host": "mode_hold",
     "steps": 3600,
     "control_steps": 3600,

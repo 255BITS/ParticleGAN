@@ -11,24 +11,20 @@ from collections import Counter
 from copy import deepcopy
 from dataclasses import asdict, fields
 from itertools import product
+import math
 from pathlib import Path
 
 from particlegan import Recipe
 
-from .api import FormulationContext
+from .api import FormulationContext, task_formulation_context
+from .boundaries import TUNABLE_FIELDS, task_owned_recipe_fields
 from .contracts import atomic_json, identifier, positive_number, read_json, stable_hash, validate_idea
 from .planning import FORMULATION_FIELDS, load_idea, plan_summary, resolve_idea
 from .queue import Queue, drain
 from .technique_inventory import _first_task_blockers, _signature
+from .techniques import recipe_field_active, technique_signature, validate_same_technique
 
 
-# Host resources, architecture, initialization, priors and sampling laws cannot
-# become hidden tuning axes. New public optimizer/penalty knobs can be added here.
-TUNABLE_FIELDS = frozenset({
-    "lr", "d_lr_mult", "prior_lr_mult", "betas", "prior_betas", "eps", "amsgrad",
-    "reg_coeff", "reg_coeff_end", "reg_coeff_anneal_end", "reg_kappa", "reg_every", "prior_reg",
-    "lr_anneal_start", "lr_floor", "network_lr_floor", "beta2_end", "beta2_anneal_end",
-})
 SPEC_FIELDS = frozenset({"schema_version", "id", "trainer_family", "base_candidate", "grid",
                          "tuning_through_tier", "view", "execution_backend", "cuda_model", "protocol",
                          "protocol_hash", "campaign", "hypothesis", "rationale", "guide"})
@@ -94,6 +90,8 @@ def _grid(grid):
                 raise ValueError(f"unknown Recipe grid field: {name}")
             if name not in TUNABLE_FIELDS:
                 raise ValueError(f"forbidden Recipe grid field (fixed host/protocol/sampling law): {name}")
+            for choice in choices:
+                _validate_grid_value(name, choice[name])
         if assigned & names:
             raise ValueError("grid axes overlap Recipe fields")
         if len({stable_hash(choice) for choice in choices}) != len(choices):
@@ -108,6 +106,25 @@ def _grid(grid):
         raise ValueError("search grid exceeds the 256-configuration declaration limit")
     return [dict(item for choice in combination for item in choice.items())
             for combination in product(*axes)]
+
+
+def _validate_grid_value(name, value):
+    """JSON booleans are not numeric hyperparameters; optional values are typed."""
+    if name == "amsgrad":
+        valid = type(value) is bool
+    elif name == "reg_every":
+        valid = type(value) is int and value > 0
+    elif name in {"betas", "prior_betas"}:
+        valid = (name == "prior_betas" and value is None) or (
+            isinstance(value, (list, tuple)) and len(value) == 2
+            and all(type(item) in (int, float) and math.isfinite(item) and 0 <= item < 1
+                    for item in value))
+    elif value is None:
+        valid = name in {"network_lr_floor", "beta2_end", "reg_coeff_end"}
+    else:
+        valid = type(value) in (int, float) and math.isfinite(value)
+    if not valid:
+        raise ValueError(f"invalid hyperparameter value for Recipe.{name}: {value!r}")
 
 
 def configuration_id(candidate, *, resolved_recipe=None):
@@ -143,8 +160,12 @@ def _base_declaration(root, spec):
     return base
 
 
-def validate_configuration_declaration(candidate):
-    """Ordinary plan/run cannot bypass a content-addressed card's identity."""
+def validate_configuration_declaration(candidate, *, root=None, _lineage=()):
+    """Validate recorded identity, and current ordinary-entry technique lineage.
+
+    Evidence readers pass no checkout and retain pure frozen-hash validation.
+    Ordinary declaration loaders additionally bind the named parent technique.
+    """
     family = identifier(candidate.get("trainer_family"), "configuration trainer_family")
     frozen = candidate.get("resolved_configuration_recipe")
     if not isinstance(frozen, dict) or not frozen:
@@ -155,10 +176,53 @@ def validate_configuration_declaration(candidate):
     digest = configuration_id(candidate, resolved_recipe=frozen)
     if (candidate.get("configuration_id") != digest or candidate.get("id") != f"{family}--{digest}"):
         raise ValueError("configuration declaration hash does not match its actual Recipe and fixed laws")
+    if root is None:
+        return
+    if stable_hash(_resolved_recipe(candidate)) != stable_hash(frozen):
+        raise ValueError("configuration frozen Recipe differs from current public defaults or API bindings; "
+                         "declare a new configuration")
+    parent_id = identifier(candidate.get("parent"), "configuration parent")
+    lineage = (*_lineage, candidate["id"])
+    if parent_id in lineage:
+        raise ValueError("configuration technique lineage contains a parent cycle")
+    # Read declarations without re-entering the ordinary loader; validate each
+    # configuration ancestor with an explicit cycle guard instead.
+    from .planning import declaration_paths
+    paths = [path for path in declaration_paths(root) if path.stem == parent_id]
+    if len(paths) != 1:
+        raise ValueError("configuration parent must name one declared technique/configuration")
+    parent = read_json(paths[0])
+    validate_idea(parent)
+    if parent.get("id") != parent_id:
+        raise ValueError("configuration parent filename differs from its declaration")
+    if paths[0].parent.name == "configurations":
+        validate_configuration_declaration(parent, root=root, _lineage=lineage)
+        parent_recipe = parent["resolved_configuration_recipe"]
+        reference = parent
+    else:
+        defaults = read_json(Path(root) / "configs/forge/defaults.json")
+        reference = {**parent, "prior": {**defaults["prior"], **parent.get("prior", {})}}
+        parent_recipe = _resolved_recipe(reference)
+    from .trainer_families import family_for_candidate, load_families
+    if (parent.get("trainer_family") not in (None, family)
+            or (load_families(root) and family_for_candidate(root, parent_id, parent)["id"] != family)):
+        raise ValueError("configuration parent belongs to a different trainer_family")
+    validate_same_technique(parent_recipe, frozen)
+    laws = (set(FORMULATION_FIELDS) - {"recipe_overrides"}) | {"host_adaptation", "execution_path"}
+    if any(stable_hash(candidate.get(name)) != stable_hash(reference.get(name)) for name in laws):
+        raise ValueError("configuration changes fixed parent technique/protocol declarations")
+    changed = {name for name in frozen if name != "name"
+               and stable_hash(frozen[name]) != stable_hash(parent_recipe.get(name))}
+    if changed - TUNABLE_FIELDS:
+        raise ValueError("configuration changes fields outside the hyperparameter search whitelist: "
+                         + ", ".join(sorted(changed - TUNABLE_FIELDS)))
+    for name in changed:
+        _validate_grid_value(name, frozen[name])
 
 
 def _declarations(root, spec):
     base = _base_declaration(root, spec)
+    base_recipe = _resolved_recipe(base)
     from .trainer_families import family_for_candidate, load_families
     if load_families(root) and family_for_candidate(root, base["id"], base)["id"] != spec["trainer_family"]:
         raise ValueError("base candidate belongs to a different registered trainer_family")
@@ -169,6 +233,7 @@ def _declarations(root, spec):
         idea = deepcopy(base)
         idea["recipe_overrides"] = {**base.get("recipe_overrides", {}), **settings}
         frozen_recipe = _resolved_recipe(idea)  # Actual public context, never ignored kwargs.
+        validate_same_technique(base_recipe, frozen_recipe)
         digest = configuration_id(idea, resolved_recipe=frozen_recipe)
         name = f"{spec['trainer_family']}--{digest}"
         identifier(name, "configuration candidate")
@@ -192,7 +257,46 @@ def _declarations(root, spec):
                 raise ValueError(f"configuration declaration is immutable: {name}")
             idea = existing
         declarations.append((idea, settings))
+    _validate_tuning_axes(root, spec, base_recipe, declarations)
     return sorted(declarations, key=lambda item: item[0]["configuration_id"])
+
+
+def _validate_tuning_axes(root, spec, base_recipe, declarations):
+    """Do not spend a search axis on values every tuning host ignores."""
+    from .views import load_tasks, load_view
+
+    tasks = load_tasks(root)
+    view = load_view(root, spec["view"])
+    tuning = [tasks[row["task"]] for row in view["assignments"]
+              if row["qualification_tier"] <= spec["tuning_through_tier"]]
+    requested = {name for _, settings in declarations for name in settings}
+    names = {name for name in requested
+             if any(stable_hash(settings.get(name, base_recipe[name])) != stable_hash(base_recipe[name])
+                    for _, settings in declarations)}
+    for name in sorted(names):
+        active = False
+        uncertain = False
+        for task in tuning:
+            if name in task_owned_recipe_fields(task):
+                continue
+            for idea, _ in declarations:
+                if not recipe_field_active(name, idea["resolved_configuration_recipe"], task=task):
+                    continue
+                try:
+                    context = task_formulation_context(idea, task, root=root)
+                except ValueError:
+                    # An incompatible formulation remains a visible preflight
+                    # blocker; an unresolved binding is not proof of inactivity.
+                    uncertain = True
+                    continue
+                if recipe_field_active(name, context.recipe, task=task):
+                    active = True
+                    break
+            if active:
+                break
+        if not active and not uncertain:
+            raise ValueError(f"search Recipe.{name} is inactive or task-owned on every tuning task; "
+                             "remove this axis or declare a task where it is effective")
 
 
 def materialize_search(root: Path, spec) -> list[Path]:
@@ -227,6 +331,100 @@ def _persist(root, summary):
     atomic_json(_report_path(root, summary["study_id"]), summary)
 
 
+def _qualification(trial, through_tier):
+    """Retain the full view denominator independently of the tuning cap."""
+    required = [task for task in trial["tasks"] if task["importance"] == "required"]
+    tuning = [task for task in required if task["qualification_tier"] <= through_tier]
+    tiers, qualified_tier = [], 0
+    advancing = not trial.get("submission_blockers")
+    for tier in sorted({task["qualification_tier"] for task in required}):
+        tasks = [task for task in required if task["qualification_tier"] == tier]
+        counts = dict(sorted(Counter(task["gate_status"] for task in tasks).items()))
+        passed = bool(tasks) and counts.get("PASS", 0) == len(tasks)
+        advancing = advancing and passed and tier == qualified_tier + 1
+        if advancing:
+            qualified_tier = tier
+        tiers.append({"tier": tier, "required_total": len(tasks),
+                      "required_passed": counts.get("PASS", 0), "statuses": counts})
+    tuning_passed = bool(tuning) and not trial.get("submission_blockers") and all(
+        task["gate_status"] == "PASS" for task in tuning)
+    full_passed = bool(required) and not trial.get("submission_blockers") and all(
+        task["gate_status"] == "PASS" for task in required)
+    return {"qualified_tier": qualified_tier, "tuning_qualified": tuning_passed,
+            "full_view_qualified": full_passed and qualified_tier == max(
+                (task["qualification_tier"] for task in required), default=0) and all(
+                task["qualification_tier"] <= through_tier for task in required),
+            "required_total": len(required),
+            "required_passed": sum(task["gate_status"] == "PASS" for task in required),
+            "required_statuses": dict(sorted(Counter(task["gate_status"] for task in required).items())),
+            "tuning_required_total": len(tuning),
+            "tuning_required_passed": sum(task["gate_status"] == "PASS" for task in tuning),
+            "tiers": tiers}
+
+
+def _annotate_progression(summary):
+    """Add reporting without changing the archived PASS-count/hash selector."""
+    trials = summary["trials"]
+    scopes = [sorted((task["task"], task["qualification_tier"], task["importance"])
+                     for task in trial["tasks"]) for trial in trials]
+    if any(scope != scopes[0] for scope in scopes[1:]) or any(
+            len({task[0] for task in scope}) != len(scope) for scope in scopes):
+        raise ValueError("search progression requires the same complete view task denominator for every configuration")
+    for trial in trials:
+        trial["qualification"] = _qualification(trial, summary["tuning_through_tier"])
+    selected = next((trial for trial in trials if trial["candidate_id"] ==
+                     summary["selection"]["selected_candidate_id"]), None)
+    outcome = ("pending" if not summary["selection"]["selection_complete"] else
+               "full_winner" if selected and selected["qualification"]["full_view_qualified"] else
+               "tuning_only_winner" if summary["selection"]["qualified"] else "best_observed")
+    summary["progression"] = {
+        "policy": "every declared configuration advances independently through ordinary prerequisites to the tier cap",
+        "configured_through_tier": summary["tuning_through_tier"],
+        "smoke_survivor_candidate_ids": sorted(trial["candidate_id"] for trial in trials
+            if trial["qualification"]["qualified_tier"] >= 1),
+        "full_view_qualified_candidate_ids": sorted(trial["candidate_id"] for trial in trials
+            if trial["qualification"]["full_view_qualified"]),
+        "outcome": outcome,
+        "full_view_winner_candidate_id": selected["candidate_id"] if outcome == "full_winner" else None,
+        "comparison_complete": summary["selection"]["selection_complete"],
+        "default_adoption": False,
+    }
+    summary["speed_selection"] = {
+        "status": "UNAVAILABLE", "selected_candidate_id": None,
+        "reason": "No frozen comparable first-acquisition timing contract is implemented for this search. "
+                  "Not all required adapters record per-observation seconds; original terminal-suffix "
+                  "or coverage-only times cannot supply full-quality first-acquisition speed.",
+        "wall_time_ranking": False,
+    }
+
+
+def _evaluator_timing(task, grade):
+    """Preserve recorded evaluator semantics; never infer acquisition seconds."""
+    kind = task["evaluation"]["kind"]
+    if kind == "transfer_sustained":
+        original = grade.get("evaluator_result", {}).get("convergence", {})
+        semantics = "complete live curve and terminal passing suffix"
+    elif kind in {"ring_hold", "ring_extension"}:
+        original = grade.get("metrics", {})
+        semantics = "first qualifying dense window followed by uninterrupted hold/extension"
+    else:
+        original = {}
+        semantics = "no first full-quality acquisition timestamp in this evaluator result"
+    original = _compact(original)
+    invalid = [key for key, value in original.items() if key.endswith("seconds") and value is not None
+               and (isinstance(value, bool) or not isinstance(value, (int, float))
+                    or not math.isfinite(value) or value < 0)]
+    for key in invalid:
+        original[key] = None  # Raw values remain in the certified original receipt.
+    seconds = original.get("confirmed_seconds")
+    recorded = (not isinstance(seconds, bool) and isinstance(seconds, (int, float))
+                and math.isfinite(seconds) and seconds >= 0 and not invalid)
+    return {"status": "RECORDED_EVALUATOR_ONLY" if recorded else "UNAVAILABLE",
+            "semantics": semantics, "original_evaluator_convergence": original,
+            "invalid_timing_fields": invalid,
+            "speed_qualified": False}
+
+
 def _prepare(root, queue_root, spec, queue):
     spec = _load_spec(root, spec)
     previous = _check_spec_registration(root, spec)
@@ -251,6 +449,7 @@ def _prepare(root, queue_root, spec, queue):
                  "declaration": deepcopy(idea),
                  "recipe_preset": idea.get("recipe_preset"), "recipe_overrides": idea["recipe_overrides"],
                  "resolved_recipe": request["candidate"]["resolved_recipe"],
+                 "technique_signature": technique_signature(idea["resolved_configuration_recipe"]),
                  "candidate_revision": request["candidate_revision"], "source_digest": request["source"]["digest"],
                  "scientific_signature": _signature(request), "policy_fingerprint": request["policy_fingerprint"],
                  "runtime_cohort": {"runtime": request["runtime"], "execution_backend": request["execution_backend"],
@@ -280,6 +479,7 @@ def _prepare(root, queue_root, spec, queue):
     summary = {"schema_version": 1, "stage": "planned", "study_id": spec["id"],
                "trainer_family": spec["trainer_family"], "base_candidate": spec["base_candidate"],
                "base_declaration": _base_declaration(root, spec),
+               "technique_signature": technique_signature(_resolved_recipe(_base_declaration(root, spec))),
                "spec": spec, "spec_hash": stable_hash(spec), "view": spec["view"],
                "tuning_through_tier": spec["tuning_through_tier"],
                "execution_backend": spec["execution_backend"], "source_digests": sources,
@@ -293,6 +493,7 @@ def _prepare(root, queue_root, spec, queue):
                "holdout_tasks": [a["task"] for a in requests[0]["view"]["assignments"]
                                  if a["qualification_tier"] > spec["tuning_through_tier"]]}
     summary["selection"] = select_configuration(trials, spec["tuning_through_tier"])
+    _annotate_progression(summary)
     return requests, summary, previous
 
 
@@ -438,7 +639,9 @@ def report_search(root: Path, queue_root: Path, spec, *, queue=None) -> dict:
                 if original:
                     observed[original["attempt_id"]] = original
             result = job.get("result")
-            task.update(gate_status="UNKNOWN", raw_status=None, metrics={}, cost={})
+            task.update(gate_status="UNKNOWN", raw_status=None, metrics={}, cost={},
+                        evaluator_timing={"status": "UNAVAILABLE", "speed_qualified": False,
+                                          "reason": "no currently certified evaluator result"})
             if not result:
                 if task["blockers"] or trial["submission_blockers"]:
                     task["gate_status"] = "BLOCKED"
@@ -459,6 +662,8 @@ def report_search(root: Path, queue_root: Path, spec, *, queue=None) -> dict:
                             cost=deepcopy(row.get("cost", {})),
                             reason=grade.get("reason", row.get("reason")) if valid else "missing or mismatched original receipt certificate",
                             attempt_id=result["attempt_id"])
+                if valid:
+                    task["evaluator_timing"] = _evaluator_timing(entry["request"]["tasks"][task["task"]], grade)
                 trial["attempt_ids"].append(result["attempt_id"])
                 evidence.append({"attempt_id": result["attempt_id"], "result_hash": stable_hash(result),
                                  "valid_receipt": valid})
@@ -484,6 +689,7 @@ def report_search(root: Path, queue_root: Path, spec, *, queue=None) -> dict:
         trial["status"] = ("PASS" if required and statuses == {"PASS"} else
                            next((s for s in ("INVALID", "FAIL", "INCOMPLETE", "BLOCKED") if s in statuses), "UNKNOWN"))
     summary["selection"] = select_configuration(summary["trials"], summary["tuning_through_tier"])
+    _annotate_progression(summary)
     selected = next((t for t in summary["trials"] if t["candidate_id"] == summary["selection"]["selected_candidate_id"]), None)
     if selected:
         selected["selection"] = deepcopy(summary["selection"])
