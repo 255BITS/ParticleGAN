@@ -57,6 +57,11 @@ numeric gate. It cannot pass the default-budget test. The full verdict requires
 the declared training budget and evaluation sample count plus the declared
 terminal observations passing the numerical gate (five for learned-quality
 tasks; individual causal/geometry units declare their own observation count).
+The frozen metric cadence is independent of `--frames`: by default, 24 evenly
+spaced post-update observations (or every update for shorter declared units).
+Image and word fixtures retain their declared 24 checks. GIF frame selection
+adds real observations but cannot remove a scoring check or change the terminal
+PASS requirement. Receipts record both exact scoring and media update schedules.
 Exceptions, NaNs and
 incomplete protocols fail explicitly. The command exits nonzero on FAIL.
 

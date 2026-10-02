@@ -897,6 +897,7 @@ class ImageFixture:
             views.insert(0, dict(kind="image", title="Actual conditioning inputs" if masks is None else "Observed inputs and masks",
                                  target=self.problem["observed"].cpu(),
                                  samples=self.problem["observed"].cpu() if masks is None else masks.cpu(),
+                                 row_labels=["Observed input", "Given input" if masks is None else "Conditioning mask"],
                                  caption="These pixels, and masks where present, enter both G and D; no mode labels enter the networks."))
         result["metrics"].update(completed_steps=float(self.completed_steps),
                                   served_averaged=float(served.source == "averaged"),

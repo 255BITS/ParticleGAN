@@ -185,7 +185,7 @@ def render_gif(case, records, path, *, full_budget, requested_steps):
                           vmax=view.get("vmax", 1), interpolation="nearest")
                 ax.set_xticks([])
                 ax.set_yticks([top.shape[0] / 2, top.shape[0] + 1 + bottom.shape[0] / 2],
-                              ["Desired", "API output"])
+                              view.get("row_labels", ["Desired", "API output"]))
             elif view["kind"] == "bar":
                 a, b = target.reshape(-1), samples.reshape(-1)
                 if len(a) != len(b):
@@ -263,6 +263,9 @@ def run_case(case, output, *, device="cpu", recipe_name=None, steps=None,
     if type(samples) is not int or samples < 1:
         raise ValueError("evaluation sample count must be positive")
     boundaries = contract.evaluation_steps(steps, frames)
+    metric_count = contract.metric_observations(case)
+    metric_steps = contract.evaluation_steps(steps, min(steps, metric_count) + 1)
+    evaluation_steps = sorted(set(boundaries) | set(metric_steps))
     required_terminal = case.get("terminal_observations", 5)
     receipt = {"schema": "particlegan_api_toy_run_v1", "case": case,
                "recipe": None, "api_components": [],
@@ -272,9 +275,13 @@ def run_case(case, output, *, device="cpu", recipe_name=None, steps=None,
                            "torch_threads": torch.get_num_threads()},
                "protocol": {"updates": steps, "default_updates": case["default_steps"],
                             "evaluation_samples": samples, "default_evaluation_samples": case["eval_samples"],
-                            "evaluation_steps": boundaries, "terminal_observations": required_terminal},
+                            "evaluation_steps": evaluation_steps,
+                            "metric_evaluation_steps": metric_steps, "media_steps": boundaries,
+                            "metric_observations": metric_count, "media_frames": frames,
+                            "terminal_observations": required_terminal},
                "historical_results_changed": False, "observations": []}
-    full = steps >= case["default_steps"] and samples >= case["eval_samples"]
+    full = (steps >= case["default_steps"] and samples >= case["eval_samples"]
+            and len(metric_steps) - 1 >= metric_count)
     records, arrays = [], {}
     started = time.monotonic()
     completed = 0
@@ -288,7 +295,7 @@ def run_case(case, output, *, device="cpu", recipe_name=None, steps=None,
             if step:
                 fixture.step()
                 completed = step
-            if step not in boundaries:
+            if step not in evaluation_steps:
                 continue
             with isolated_evaluation():
                 record = contract.validate_observation(fixture.observe(n=samples, seed=seed + 10000))
@@ -304,11 +311,12 @@ def run_case(case, output, *, device="cpu", recipe_name=None, steps=None,
             receipt["observations"].append(compact)
             print(json.dumps({"case": case["id"], "step": step, "metric_passed": record["passed"],
                               "failed_bounds": record["failed_bounds"][:5]}, allow_nan=False), flush=True)
-        terminal = [record for record in records if record["step"] > 0][-required_terminal:]
+        terminal = [record for record in records if record["step"] > 0
+                    and record["step"] in metric_steps][-required_terminal:]
         sustained = len(terminal) == required_terminal and all(record["passed"] for record in terminal)
         failed = list(records[-1]["failed_bounds"])
         if not full:
-            failed.append("default budget or evaluation draw count not completed")
+            failed.append("default budget, evaluation draw count or metric cadence not completed")
         if not sustained:
             failed.append(f"last {required_terminal} post-update metric observations do not all pass")
         receipt.update(status="COMPLETE", metric_passed=records[-1]["passed"],
@@ -326,12 +334,13 @@ def run_case(case, output, *, device="cpu", recipe_name=None, steps=None,
         try:
             np.savez_compressed(output / "observations.npz", **arrays)
             gif = output / "goal.gif"
-            render_gif(case, records, gif, full_budget=full, requested_steps=steps)
+            media_records = [record for record in records if record["step"] in boundaries]
+            render_gif(case, media_records, gif, full_budget=full, requested_steps=steps)
             torch.save(fixture.state_dict(), output / "final-state.pt")
             receipt["artifacts"] = {name: {"sha256": file_hash(output / name),
                                            "bytes": (output / name).stat().st_size}
                                      for name in ("goal.gif", "observations.npz", "final-state.pt")}
-            receipt["gif_frames"] = len(records)
+            receipt["gif_frames"] = len(media_records)
         except Exception as error:
             receipt.update(passed=False, verdict="FAIL", status="ERROR")
             receipt["failed_bounds"].append(f"goal media/state error: {type(error).__name__}: {error}")

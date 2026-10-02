@@ -46,6 +46,8 @@ def validate_case(case):
     _positive_integer(terminal, f"{case['id']}.terminal_observations")
     if terminal > case["default_steps"]:
         raise ValueError(f"{case['id']}: terminal observations exceed the execution budget")
+    if terminal > metric_observations(case):
+        raise ValueError(f"{case['id']}: terminal observations exceed the declared metric cadence")
     if not case.get("thresholds"):
         raise ValueError(f"{case['id']}: frozen pass/fail bounds required")
     if not case.get("sampling"):
@@ -63,8 +65,19 @@ def discover():
                 raise ValueError(f"duplicate API case: {case['id']}")
             case["provider"] = name
             case.setdefault("default_recipe", "atlas")
+            case.setdefault("evaluation_observations", metric_observations(case))
             cases[case["id"]] = case
     return cases
+
+
+def metric_observations(case):
+    """Frozen post-update scoring count, independent of GIF frame selection."""
+    count = case.get("evaluation_observations", case.get("thresholds", {}).get(
+        "observations", min(24, case["default_steps"])))
+    _positive_integer(count, "evaluation_observations")
+    if count > case["default_steps"]:
+        raise ValueError("metric observations exceed distinct execution updates")
+    return count
 
 
 def coverage(cases, historical_ids):
@@ -132,6 +145,11 @@ def validate_observation(observation):
             raise ValueError("unsupported goal view")
         if not view.get("title"):
             raise ValueError("goal view title required")
+        if "row_labels" in view and (view["kind"] != "image" or
+                not isinstance(view["row_labels"], (list, tuple)) or
+                len(view["row_labels"]) != 2 or any(
+                    not isinstance(label, str) or not label for label in view["row_labels"])):
+            raise ValueError("image row labels must identify both displayed rows")
         if view["kind"] == "text":
             for role in ("target", "sample"):
                 labels = view.get(f"{role}_labels")

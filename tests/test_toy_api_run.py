@@ -72,6 +72,21 @@ def test_eval_isolation_preserves_all_ambient_rngs():
     assert torch.equal(cpu, torch.get_rng_state())
 
 
+def test_sparse_gif_frames_do_not_reduce_frozen_metric_cadence(tmp_path, monkeypatch):
+    torch.set_num_threads(1)
+    fixture = PublicSoftwareFixture()
+    monkeypatch.setattr(api_run.contract, "build", lambda *args, **kwargs: fixture)
+    case = {"id": "cadence-control", "goal": "Public API software cadence control",
+            "default_steps": 8, "eval_samples": 32, "evaluation_observations": 8}
+    result = api_run.run_case(case, tmp_path / "cadence", frames=2)
+    assert result["verdict"] == "PASS"
+    assert result["protocol"]["metric_evaluation_steps"] == list(range(9))
+    assert result["protocol"]["media_steps"] == [0, 8]
+    assert len(result["observations"]) == 9 and result["gif_frames"] == 2
+    with Image.open(tmp_path / "cadence/goal.gif") as gif:
+        assert gif.n_frames == 2
+
+
 def test_nonfinite_metrics_are_preserved_as_explicit_json_failures(tmp_path):
     path = tmp_path / "failure.json"
     api_run.write_json(path, {"passed": False, "rmse": float("nan")})
