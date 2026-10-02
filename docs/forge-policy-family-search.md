@@ -1,0 +1,109 @@
+# Bounded policy-family common-knob search
+
+This is a separate `policy-family-defaults` cohort for the actual public Atlas
+and E22 selected/served particle-cloud API. It supplies no current Forge MoG
+qualification, all-toy winner, calibrated default adoption or speed winner.
+Historical Atlas19 results remain their original evidence; they are not rerun or
+pooled into this study.
+
+The finite grid changes `lr` (0.006375 or 0.0085) and `prior_lr_mult` (1 or 2).
+Each of the four configurations per family uses the same two knobs on every
+required case. The original host architecture, prior/init, data law, batch,
+evaluation draw count, scoring cadence and full horizon remain unchanged.
+Existing fixture adaptations, including vector optimizer betas, are disclosed
+under `fixed_host_recipe_options`; the exact complete resolved Recipe is bound
+and checked. This is a common-knob search within those frozen adaptations, not
+proof that one unadapted public Recipe should ship for every host.
+
+| Order | API case | Tier | Updates | Batch | Evaluation samples |
+| --- | --- | --- | ---: | ---: | ---: |
+| 1 | `image-develop-img_intensity2-source-transpose12` | smoke | 600 | 32 | 1,024 |
+| 2 | `api-vector-two-broad` | smoke | 1,200 | 128 | 4,096 |
+| 3 | `api-grid100` | quality | 7,000 | 2,048 | 20,000 |
+| 4 | `api-rotated100` | quality | 7,000 | 2,048 | 20,000 |
+| 5 | `api-staggered100` | quality | 7,000 | 2,048 | 20,000 |
+| 6 | `api-vector-unequal-mass` | quality | 1,200 | 128 | 4,096 |
+| 7 | `api-vector-anisotropic` | quality | 1,200 | 128 | 4,096 |
+| 8 | `image-develop-img_bars4-source-transpose12` | quality | 600 | 32 | 1,024 |
+
+All cases retain their original numeric predicates and 24 post-update primary
+scoring observations. The study additionally requires the first five consecutive
+passing primary observations to confirm acquisition, followed by at least five
+additional passing hold observations. Every later primary observation must pass.
+There is no later restart window after collapse. Initial or GIF-only observations
+do not count. A full run acquired too late for five hold checks is `INCOMPLETE`.
+The original per-case verdict remains separate; an original PASS can fail this
+study's retention rule. The original GIF footer reports that original verdict;
+the published study board must also show the separate study verdict.
+
+Before training, every family/case needs a source-, preset-, host-, sampling- and
+artifact-bound capacity card. The planner restores its public state on CPU,
+checks the original full horizon and zero optimizer-update clock, reproduces the
+same-seed actual served draws, rederives their original numeric gate and verifies
+state/RNG parity. This is a necessary finite snapshot-capacity witness. It does
+not demonstrate learning, stable adaptive geometry or a GPU trained PASS. Prior
+failed constructions remain separate. Conditional/caller-owned and named stress
+tuning contracts are unsupported and explicitly BLOCKED.
+
+The preregistration JSON contains `schema: particlegan_policy_family_search_v1`,
+an immutable study `id`, families `[atlas,e22]`, seed24002, the exact grid and case
+order above, per-case `timeout_seconds`, `export_grace_seconds`,
+`candidate_budget_seconds`, `budget_seconds`, `representation_card` path/SHA,
+backend, frame count and the frozen stability rule. `speed_ranking` and
+`default_adoption` must both be false. Optional `family_budget_seconds` declares
+disjoint Atlas/E22 paid quotas whose sum cannot exceed the round cap; otherwise
+each gets half. Worst-case reservations are reported separately from the paid cap.
+
+Planning starts no optimizer updates, queues, calibration or default promotion:
+
+```sh
+OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m benchmarks.toy_audit.api_family_search \
+  plan reports/forge/family-winner-round1/policy-search.json --output /tmp/policy-plan.json
+```
+
+After one common code/spec/capacity freeze, the coordinator can admit one serial
+family lane per visible GPU. Each lane must use a separate archive and fixed
+runtime/device model. The exact child command uses the existing `api_run` public
+API path with the full default protocol; it never passes shortened `--steps` or
+`--eval-samples` values or creates extra workers:
+
+```sh
+CUDA_VISIBLE_DEVICES=0 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 \
+python -m benchmarks.toy_audit.api_family_search run \
+  reports/forge/family-winner-round1/policy-search.json \
+  --family atlas --device cuda:0 --output /path/to/archive/atlas
+```
+
+Use the other assigned visible GPU and `--family e22` for its separate lane.
+Do not launch these commands while another admitted worker owns that slot.
+Tail `<archive>/<configuration-id>/<case-id>.log`. Actual arrays, checkpoints,
+GIFs and full logs stay in the archive. The compact `study.json` retains recipe,
+source/runtime, costs, original/study gates and exact artifact identities.
+
+A config stops at its first non-PASS. Later required cases remain UNKNOWN, not
+zeroes or removed denominators. The coordinator reserves a complete next task
+allowance before starting; a hard subprocess cap includes a separate media-export
+grace, and an acquisition cap cannot become PASS even if a child exits0.
+Registration precedes the child, and each result is saved durably. An interrupted
+or orphan paid attempt is retained as INCOMPLETE and never automatically retried.
+Unknown interruption cost is conservatively charged at its reservation ceiling;
+`measured_paid_seconds` reports only measured child execution separately.
+Metric/sample/checkpoint/source/recipe/runtime/exit consistency is rechecked
+before granting qualification or combining archives.
+
+```sh
+python -m benchmarks.toy_audit.api_family_search combine \
+  /path/to/archive/atlas/study.json --archive /path/to/archive/e22/study.json \
+  --output /path/to/archive/current-policy-family-results.json
+```
+
+The combination rejects different source/spec/case/runtime-version cohorts.
+It retains all eight configurations and all eight case denominators, every
+fully qualified config and any ties. Incomplete comparisons cannot name a final
+winner; a deterministic pass-count display is only best observed evidence.
+Monotonic acquisition timestamps synchronize CUDA at observations and include
+initialization, updates and evaluation; they exclude queue wait and post-run
+export. They are diagnostic under external contention and different GPU models.
+No fastest config is selected from them. The screen remains provisional until
+separate calibration, confirmation and reserved robustness evidence justify any
+public-default decision.

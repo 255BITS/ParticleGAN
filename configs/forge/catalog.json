@@ -10,7 +10,7 @@
       "benchmark/shared": 5,
       "benchmark/smart_descent": 9,
       "benchmark/toy100": 19,
-      "benchmark/toy_audit": 64,
+      "benchmark/toy_audit": 65,
       "benchmark/transfer_suite": 87,
       "config/100gaussians": 4,
       "config/cifar_ddgan": 77,
@@ -39,7 +39,7 @@
       "experiment/toy": 3,
       "experiment/trajectory": 2,
       "experiment/transition": 7,
-      "forge_engine": 41,
+      "forge_engine": 42,
       "lrfree/feature-cells-cb64-ra": 4058,
       "report/atlas-explanation": 7,
       "report/behavioral_baseline": 32,
@@ -89,7 +89,7 @@
       "report/toy100/shared22": 201,
       "report/toy100/simpler22": 180,
       "report/toy100/torch214-gpu-check": 10,
-      "report/toy_audit": 519,
+      "report/toy_audit": 521,
       "report/trajectory": 175,
       "report/transfer_suite": 341,
       "report/transfer_suite/anisotropic_core_metric": 2,
@@ -101,8 +101,8 @@
       "candidate_implementation": 17,
       "candidate_patch": 26,
       "configuration": 807,
-      "driver": 400,
-      "engine_support": 41,
+      "driver": 401,
+      "engine_support": 42,
       "evaluator_or_audit": 324,
       "evidence_artifact": 1574,
       "frozen_candidate_implementation": 15,
@@ -110,19 +110,19 @@
       "frozen_evaluator_or_audit": 2,
       "frozen_support": 28,
       "narrative": 993,
-      "structured_evidence": 5047,
+      "structured_evidence": 5048,
       "support": 1525,
       "support_artifact": 60,
       "visualization": 22,
-      "visualization_artifact": 720
+      "visualization_artifact": 721
     },
-    "files": 11704
+    "files": 11708
   },
   "coverage": {
-    "declared_count": 11704,
+    "declared_count": 11708,
     "missing": [],
     "stale": [],
-    "tracked_count": 11704,
+    "tracked_count": 11708,
     "unclassified": [],
     "valid": true
   },
@@ -868,7 +868,7 @@
     },
     {
       "family": "benchmark/toy_audit",
-      "git_blob": "0552cbcb4948658f2b40c888fd8864b07fd32a84",
+      "git_blob": "29f6b1059f2e103268c58fdb8ca0f61f0c063e92",
       "path": "benchmarks/toy_audit/api_contract.py",
       "role": "support",
       "suggested_tiers": []
@@ -882,7 +882,16 @@
     },
     {
       "family": "benchmark/toy_audit",
-      "git_blob": "3836263ba6402be7954f468965b25ada33606338",
+      "git_blob": "7050ed6e4e530ce2fde2c045f2424d9806aa314f",
+      "path": "benchmarks/toy_audit/api_family_search.py",
+      "role": "driver",
+      "suggested_tiers": [
+        2
+      ]
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "672a7d411c06b17d67e96c3e244d49a0838f8e34",
       "path": "benchmarks/toy_audit/api_images.py",
       "role": "support",
       "suggested_tiers": []
@@ -7108,7 +7117,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "0c4db07164a552d1e72d563f602108c9a896a419",
+      "git_blob": "2e0c679455fd4ae0bf9beea47fd7d3b94cbaa43f",
       "path": "experiments/forge/adapters.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -7269,7 +7278,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "4db725b39d90805166887e0bb881ddadb48c18e7",
+      "git_blob": "f1a50a0954408acc05b8d4ee3ad72d630c8e2001",
       "path": "experiments/forge/research_artifacts.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -7290,7 +7299,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "8d95f85e7eff9da94e9ba11fd5eca4abc32f5fb1",
+      "git_blob": "ebac63d5133c12989133a1429106b18f55dd7eb3",
       "path": "experiments/forge/sampling.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -7339,7 +7348,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "f84e370cb9582146dccf38e0a76eb5e3d624d832",
+      "git_blob": "370fad04809767b5d49360f4b4f5ddb018dfe095",
       "path": "experiments/forge/tier_report.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -7360,8 +7369,15 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "ac34e8ce7a123a0565803944eaabb9cfcec801cd",
+      "git_blob": "24b7aec915f1441fd535c10f80222a913ed41f71",
       "path": "experiments/forge/views.py",
+      "role": "engine_support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "forge_engine",
+      "git_blob": "3872cb68c510ba61817c93e53aa5ad5aef44b836",
+      "path": "experiments/forge/word_adapter.py",
       "role": "engine_support",
       "suggested_tiers": []
     },
@@ -75796,6 +75812,20 @@
       "family": "report/toy_audit",
       "git_blob": "a63be81a90b75aa946a74fea766d2332156b514f",
       "path": "reports/toy_audit/api_contract/failed-runs.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "4d033487f03013bef5725ba0d95703756fa2cf7d",
+      "path": "reports/toy_audit/api_contract/five_word_joint/goal.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "8d21762efe624d54a168c4aa857b13d9b04aef6a",
+      "path": "reports/toy_audit/api_contract/five_word_joint/publication.json",
       "role": "structured_evidence",
       "suggested_tiers": []
     },

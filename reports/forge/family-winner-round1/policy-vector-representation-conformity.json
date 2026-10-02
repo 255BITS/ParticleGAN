@@ -1,0 +1,2565 @@
+{
+  "budget_seconds": 60,
+  "default_adoption": false,
+  "elapsed_seconds": 1.896449756110087,
+  "fitting_updates": 0,
+  "global_torch_rng_unchanged": true,
+  "grid_compatibility": "Records retain declared lr.006375/prior_lr_mult1 as captured. Rates only do not alter zero-update public sampling; all other effective recipe fields are unchanged. Loader must bind the explicit effective recipe rather than metadata default rates.",
+  "interpretation": "Final-source public restore/sample conformity of six previously constructed zero-update capacity states. Original source packet and artifacts remain byte unchanged. Exact public source change only rejects API stress callers; no new parameters, lifecycle prelude, model/optimizer update, fitting, acquisition or training qualification.",
+  "no_qualification_credit": true,
+  "original_artifacts_unchanged": true,
+  "original_compact_packet": {
+    "path": "reports/forge/family-winner-round1/policy-vector-representation.json",
+    "sha256": "d2edf14e812c6a9f870a3d85f70d2d15192afed28b9cbf6555b34cb6799661d1"
+  },
+  "original_receipt": "/ml2/hypergan/toy-policy-vector-capacity-round1-20261002/receipt.json",
+  "original_receipt_sha256": "bdcb537268f9d09d8068ebe052f7644f7c2de888ecb82539dd76af082cfdadd4",
+  "qualification_credit": false,
+  "raw_receipt": "/ml2/hypergan/toy-policy-vector-capacity-conformity-20261002/receipt.json",
+  "raw_receipt_sha256": "b6eeac735a0ce1854ccaca852bb6dafcaa327ae484ba137cd02fc40082dc04b2",
+  "records": [
+    {
+      "artifacts": {
+        "samples": {
+          "path": "/ml2/hypergan/toy-policy-vector-capacity-conformity-20261002/atlas/api-vector-two-broad/samples.npz",
+          "sha256": "0f9bbc103621720ad381d750bc7d23668023ce90eba80183cd05d497ef9d36c4"
+        },
+        "state": {
+          "path": "/ml2/hypergan/toy-policy-vector-capacity-conformity-20261002/atlas/api-vector-two-broad/state.pt",
+          "sha256": "fe25fe614de2fba29ade8dc4aaf9d5cfb76bc049dd6398a95d0d1c32189a5c85"
+        }
+      },
+      "bindings": {
+        "case_sha256": "e293cf19f2f235b30807f9782ec65ceea3693f78e3459b9f7eb117179168c8fc",
+        "preset_sha256": "4f9f39072e3b89b51bbc0128d2ffeb8b62145fd9f81b1409590588893eb06fae",
+        "sampling_sha256": "97ab90c848ba60e67c35052bd3c219effa557c76d54d22427c50417de5e4db69",
+        "source_files_sha256": {
+          "benchmarks/toy100/__init__.py": "f10bbdfb010d90379c9145f31b499c7c2e878d0ad70291ae3bd6104903852ddb",
+          "benchmarks/toy100/__main__.py": "165ce04f2546dbf07ec68ec71032521db3a2abb50df8c70982567a33c03d625b",
+          "benchmarks/toy100/accuracy.py": "ee5c62049f8cdceb3d93b6d792cbaa96c815e12b3ce79ffaed244fb15a44fed2",
+          "benchmarks/toy100/accuracy_evidence.py": "654adde5ee19915bc9eb630d754f2a4c0282d694252df7918bae10f542904d39",
+          "benchmarks/toy100/accuracy_gate.py": "e66ede95d4b80eedd832a102841c2b0a5d6d710f646bfa34dc00647dc0ab3abe",
+          "benchmarks/toy100/config.py": "a11079bac3e134510e2343f12f45c541e56ace1d02690a35cec679405bcc40c3",
+          "benchmarks/toy100/constraint_screen.py": "6fd92211fee23cb5f2c7bb6880ee147656fff24efdb0bdb8b274893c6f6523f9",
+          "benchmarks/toy100/continuous_probe.py": "972405ea73644c2d189a4e243a79146f3cf8295c2a2979c30a277b2a54ff4541",
+          "benchmarks/toy100/device.py": "7fa0f53db44e8824d3497b471e9fe8db56cbf8b4e02ddf997f65beed63f81911",
+          "benchmarks/toy100/gate.py": "2ddadf56a4ccd7645c8b4e391373818b1113fb6113a9c691310fb162684058e6",
+          "benchmarks/toy100/metrics.py": "a7fbef19082f8470eb392948da52a336a90a3e99c6b3b893343a9e75bcda9c7b",
+          "benchmarks/toy100/models.py": "75f33ad0e100930631da2a86a9c0312f6ae02afe6c851d940c7cf44e41dede6a",
+          "benchmarks/toy100/native_models.py": "f1fc3a17844f37ddd071ea5d4867d636009e88545d60641fd6b6a05ee6298aea",
+          "benchmarks/toy100/problems.py": "2581374d451ed9147c031dfcdfbe9e2eea83e41ba49c2b8945b6e729ede26c9d",
+          "benchmarks/toy100/render.py": "4944a36e19c6a0d75ab53c5c4cc650cc7d963d6fb6e31cf64a3da9a3796f538d",
+          "benchmarks/toy100/schedule.py": "38f41fd4f428ec7cf73223ea0fdf148ac32cdcdbf780b61cf2a5166baf0b8803",
+          "benchmarks/toy100/search.py": "83076f0d9b4155ea7c0e504e0433a75c9f5080069f12d9ce226317421d8a03c6",
+          "benchmarks/toy100/train.py": "64ad54128085ab684a77ecb155ae449d95ab326775e13b925cfb783e53c3f610",
+          "benchmarks/toy100/warm_equilibrium_probe.py": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
+          "benchmarks/toy_audit/api_contract.py": "2d23aacfb6107f1535ed04ea0d5bb67d8f33a260ac1aca9e1d1734bfaf0f2e28",
+          "benchmarks/toy_audit/api_vectors.py": "9707af96fa43f76fad5481b6d6ec76e317957ec8e309ea96cc079ee95c2058af",
+          "benchmarks/toy_audit/definition_quality.py": "42d835ab7a0937a6c3759dd719691c721663b7857cb990405253e90f7fbd4cc9",
+          "benchmarks/toy_audit/vector_quality.py": "8a333bfceb71e311875b8576260c362a66a643c99d3849e6792a10e805de67d9",
+          "benchmarks/transfer_suite/stress_tasks.py": "3342e717db338cb6b7ebf5a95c01c51e4be855a564490f34f240b2a0b2e8c7e4",
+          "benchmarks/transfer_suite/vector_tasks.py": "3ee4eb27759f61a430029c80b7772cac3dca2fb2ac84919ace0db94efca1e0b0",
+          "lib/toy_models.py": "70f32797882de0dc88085afcf5e05821b65eb5f248c9690818a2494225d782a3",
+          "particlegan/__init__.py": "b56efa562acc551d639548c299002e2cd76338b3fd7062699780add51f4f5e8c",
+          "particlegan/_qr.py": "b59cd62cc27ed557b41b2d17ed86ed578c762a3a8a392d63731a5a3b2b018916",
+          "particlegan/anchor_birth.py": "aa50983d8b61304acf4e1138f16fd4784798983df91e931863bcacd3b511f76f",
+          "particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+          "particlegan/birth_death.py": "b14c50c611a8cf188347e391739fca50a5171200eb6be90e4e3d1509d64e47ed",
+          "particlegan/birth_phase.py": "5ff929e5e9858aa24c4cc2f8999b5d0603e25e42ca3844d1da4cc28b1981d3d7",
+          "particlegan/capabilities.py": "39df9c67dbedf612740057e5fa743bc724678a1bc323d1f7cf550b37c0c01177",
+          "particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+          "particlegan/continuous.py": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41",
+          "particlegan/diffusion.py": "19c3aa8772703891551b9122fde8e74c07996f779892b7cb6be09553691efa61",
+          "particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+          "particlegan/feature_cells.py": "e0ea05f61abd7845c7437eed9a79c3a2511d5551ff04f4e619b6b9c8992e221a",
+          "particlegan/feature_policy.py": "de1a50f70a37d4c9174c8850ce3eac2a2597ed01f19fc4fe1a2ce0ec3176a8b2",
+          "particlegan/feature_reference.py": "58e076e9e04600be25e28afafc537a340de727371f4acbbfb2b7dd8bebac18b1",
+          "particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+          "particlegan/grad_regularizers.py": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747",
+          "particlegan/init.py": "e15d4de01eb49f7097bc249abacab907ff067385412346f54ab0d510cb8649d0",
+          "particlegan/k3p.py": "200ead2c27ab0b2aa6068f1b1b1b5c826b8125aa8602bfec08b31aaa2894401c",
+          "particlegan/ka2.py": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703",
+          "particlegan/mean_transport.py": "57a68e0a65c5424a4460f65002f3862a69e90af330a4d47c700dc773683a2c06",
+          "particlegan/output_moments.py": "dcf3e27228d2c3c9738e473c5b22ee9e6d5047ddcd60c538b66526adb53ef188",
+          "particlegan/particle_prior.py": "0220878bebea227da63abbf9f5b1ebdabdc6aea54fd2332fd2cab02ed734238f",
+          "particlegan/policy.py": "8370e36b5b93afe95ae24d2b385aac8735a587f86ef2b87ed369ecfdfcb6fec5",
+          "particlegan/population_continuity.py": "378cd75cca45bc8da4da33e686a12cf99df853042687978314e37c532bc17fe6",
+          "particlegan/recipe_schedules.py": "d05e459b3e9e5f938b01a854273b74343f2b6d382bec4ae5151dd1f1cd032500",
+          "particlegan/recipes.py": "1a7f9df746e242a2774068c819d70d50cd72dc4f7f6b22b0bd13e1345dcf8ab2",
+          "particlegan/routing.py": "63249d808fccb3d4e113eb1d638a245ee665c3cade20a1542bb706f316b4abcc",
+          "particlegan/row_evidence.py": "78be40141ef3946860458e9842159be9321f05c217a4800dd4134113b6eba93e",
+          "particlegan/training.py": "7dadc219135bc3e6bf657bfe9bc3fa81dd14d4b2a31c70d5ff61e2941db35c94",
+          "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+        }
+      },
+      "case_id": "api-vector-two-broad",
+      "claim_scope": "Necessary numeric snapshot capacity only in the actual full-horizon public policy and selected backend. One real-data lifecycle prelude/abort, zero forward/backward/optimizer updates; no training reachability or default/Forge qualification. Finalsource conformity restores the exact original public checkpoint and reproduces original actual samples/targets bitwise; no repeated lifecycle prelude or parameter edits.",
+      "completed_steps": 0,
+      "conformity": {
+        "change_scope": "Additional validate_recipe_overrides rejection for api-stress-* callers. Exact three selected cases, public package/preset/sampling/scorers unchanged. Original capture is preserved; this is an actual finalsource public restore/sample check.",
+        "fitting_updates": 0,
+        "new_lifecycle_preludes": 0,
+        "original_bindings_location": "Original immutable capture receipt and original_compact_packet; exact source differences retained in this record.",
+        "original_receipt": "/ml2/hypergan/toy-policy-vector-capacity-round1-20261002/receipt.json",
+        "original_receipt_sha256": "bdcb537268f9d09d8068ebe052f7644f7c2de888ecb82539dd76af082cfdadd4",
+        "parity": {
+          "current_samples_equal_original": true,
+          "current_served_samples_equal_original": true,
+          "current_targets_equal_original": true,
+          "fixture_and_served_samples_equal": true,
+          "observer_full_state_unchanged": true,
+          "observer_global_torch_rng_unchanged": true,
+          "restored_state_digest_equal": true
+        },
+        "retained_original_artifacts": {
+          "samples": {
+            "path": "/ml2/hypergan/toy-policy-vector-capacity-round1-20261002/atlas/api-vector-two-broad/samples.npz",
+            "sha256": "640a93e6840972a2d4f740c8d68287522be2ceeae5968b12bd3a96ce8a5f4e00"
+          },
+          "state": {
+            "path": "/ml2/hypergan/toy-policy-vector-capacity-round1-20261002/atlas/api-vector-two-broad/state.pt",
+            "sha256": "05053e6980d4ff087f7dd5b19dc35d300189c54ba0b3c40756f04a3100b62c36"
+          }
+        },
+        "source_differences": {
+          "benchmarks/toy_audit/api_contract.py": {
+            "current": "2d23aacfb6107f1535ed04ea0d5bb67d8f33a260ac1aca9e1d1734bfaf0f2e28",
+            "original": "0c79eae1dbd489553bdce30395b51476c247d657c742351c074315946afb71e2"
+          }
+        },
+        "state_digest": "7b3ccfebee22d2bd048b82cea7e9aeab27edc6fa6ae5fde868d36ccef4705a23",
+        "training_updates": 0
+      },
+      "construction": {
+        "coordinates": "target Gaussian quantiles from Halton bases2/3, algebraically centered and covariance-normalized independently for each component",
+        "fitting_updates": 0,
+        "generator_map": "G(z)=(z0,z1), encoded in original64x2 LeakyReLU model; latent axes2/3 are zero",
+        "law_limit": "Finite quadrature convolved with the actual source-derived DV12/feature-cell kernel, not an exact continuous Gaussian mixture law",
+        "mass_quantization_tv": 0.0,
+        "row_masses": [
+          0.5,
+          0.5
+        ],
+        "rows_per_component": [
+          128,
+          128
+        ],
+        "target_masses": [
+          0.5,
+          0.5
+        ],
+        "type": "deterministic_gaussian_point_quadrature"
+      },
+      "family": "atlas",
+      "fitting_updates": 0,
+      "lifecycle": {
+        "backend_selection": {
+          "actual_backend": "knn",
+          "generator_noise_factor": 1.0,
+          "moment_rank_bound": 8,
+          "output_shape": [
+            2
+          ],
+          "population_policy": {
+            "actual_backend": "knn",
+            "calibration_rows": 128,
+            "finite_resolution_feasible": false,
+            "matching_sampler": "controller_reference",
+            "maximum_guard_flags": 12,
+            "minimum_bh_flags": 40,
+            "population": 256,
+            "q": 0.05,
+            "requested_backend": "feature_cells",
+            "rule": "ceil(N/[Q*(floor(N/2)+1)]) <= floor(Q*N)",
+            "schema": 1
+          },
+          "rate_mapping": [
+            [
+              {
+                "base_rate": 0.006375,
+                "factor": 1.0,
+                "rate": 0.006375,
+                "role": "generator"
+              },
+              {
+                "base_rate": 0.006375,
+                "factor": 1.0,
+                "rate": 0.006375,
+                "role": "table"
+              },
+              {
+                "base_rate": 0.006375,
+                "factor": 1.0,
+                "rate": 0.006375,
+                "role": "noise"
+              }
+            ],
+            [
+              {
+                "base_rate": 0.0095625,
+                "factor": 1.0,
+                "rate": 0.0095625,
+                "role": "critic"
+              }
+            ]
+          ],
+          "raw_output_width": 2,
+          "requested_backend": "auto",
+          "sampling_backend": "controller_reference",
+          "schema": 1,
+          "selection_reason": "finite_resolution_infeasible"
+        },
+        "begin_source_real_step": 1,
+        "completed_steps": 0,
+        "controller_after": {
+          "alignment": 0.0,
+          "closed": false,
+          "data_drive": 0.0,
+          "data_memory": 0.0,
+          "data_score": 0.0,
+          "fast_mean_variance": null,
+          "fast_reference": null,
+          "game_ratio": 1.0,
+          "game_trust": 1.0,
+          "last_cosine": 0.0,
+          "latent_applications": [],
+          "latent_bandwidth": [
+            0.2576940953731537,
+            0.0625,
+            0.0,
+            0.0
+          ],
+          "location": null,
+          "mean_covariance": null,
+          "mobility": 0.995,
+          "payoff_error": 0.0,
+          "previous_gradient": null,
+          "projection": null,
+          "reference": null,
+          "reopens": 0,
+          "scale": null,
+          "slow_mean_variance": null,
+          "updates": 1,
+          "variance": null,
+          "variant": "dv12"
+        },
+        "controller_before": {
+          "alignment": 0.0,
+          "closed": false,
+          "data_drive": 0.0,
+          "data_memory": 0.0,
+          "data_score": 0.0,
+          "fast_mean_variance": null,
+          "fast_reference": null,
+          "game_ratio": 1.0,
+          "game_trust": 1.0,
+          "last_cosine": 0.0,
+          "latent_applications": [],
+          "latent_bandwidth": [
+            0.2576940953731537,
+            0.0625,
+            0.0,
+            0.0
+          ],
+          "location": null,
+          "mean_covariance": null,
+          "mobility": 1.0,
+          "payoff_error": 0.0,
+          "previous_gradient": null,
+          "projection": null,
+          "reference": null,
+          "reopens": 0,
+          "scale": null,
+          "slow_mean_variance": null,
+          "updates": 0,
+          "variance": null,
+          "variant": "dv12"
+        },
+        "prelude_count": 1,
+        "prelude_scope": "Source first real batch advances the fixture data stream and policy/controller/reservoir metadata. abort_step releases phase bookkeeping without undoing these observations. No model or optimizer step.",
+        "served_source": "fast"
+      },
+      "negative_control": {
+        "failed_bounds": [
+          "sw1_normalized <= 0.18",
+          "component_covariance_error <= 0.85",
+          "component_min_eigen_ratio >= 0.15",
+          "projection_ks <= 0.06"
+        ],
+        "label": "means-only unperturbed witness; supplied-array gate calibration, not the public sampler",
+        "metrics": {
+          "component_core_covariance_error": 1.0,
+          "component_core_min_eigen_ratio": 0.0,
+          "component_covariance_error": 1.0,
+          "component_min_eigen_ratio": 0.0,
+          "covariance_error": 0.07751994580030441,
+          "hq": 1.0,
+          "mass_tv": 0.0,
+          "max_component_spill": 0.0,
+          "mean_error": 0.006435361225157976,
+          "min_mass_ratio": 1.0,
+          "projection_ks": 0.4999999999999999,
+          "resolved_core_covariance_error": 1.0,
+          "resolved_core_min_eigen_ratio": 0.0,
+          "resolved_max_component_spill": 0.0,
+          "sample_count": 4096,
+          "sw1_normalized": 0.18255409830770597,
+          "target_scale": 1.0555585622787476
+        },
+        "passed": false
+      },
+      "observations": [
+        {
+          "completed_steps": 0,
+          "evaluation_seed": 34002,
+          "failed_bounds": [],
+          "metrics": {
+            "component_core_covariance_error": 0.05791402608156204,
+            "component_core_min_eigen_ratio": 0.9588383436203003,
+            "component_covariance_error": 0.05791402608156204,
+            "component_min_eigen_ratio": 0.9588383436203003,
+            "covariance_error": 0.012864907272160053,
+            "hq": 0.99658203125,
+            "mass_tv": 0.006591796875,
+            "max_component_spill": 0.003958436194807291,
+            "mean_error": 0.011877377517521381,
+            "min_mass_ratio": 0.98681640625,
+            "projection_ks": 0.029704114331097542,
+            "resolved_core_covariance_error": 0.05791402608156204,
+            "resolved_core_min_eigen_ratio": 0.9588383436203003,
+            "resolved_max_component_spill": 0.003958436194807291,
+            "sample_count": 4096,
+            "sw1_normalized": 0.013401737397352153,
+            "target_scale": 1.0555585622787476
+          },
+          "passed": true,
+          "samples_key": "samples"
+        }
+      ],
+      "observer_purity": {
+        "fixture_full_state_unchanged": true,
+        "global_torch_rng_unchanged": true,
+        "optimizer_states_empty": true
+      },
+      "ordinary_initialized_model_sha256": "3e8ae227e97f8e7f4e4fb27c91cefeff145a5af0265ac6abaa8364c4a9e33b03",
+      "original_full_horizon": 1200,
+      "public_api": [
+        "api_contract.build",
+        "GANTrainer",
+        "UpdatePolicy.begin_step",
+        "UpdatePolicy.abort_step",
+        "GANTrainer.sample",
+        "UpdatePolicy.served_model",
+        "ServedModel.sample"
+      ],
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": true,
+        "batch_size": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "birth_death_backend": "auto",
+        "birth_death_cells": 128,
+        "birth_death_chunk": 256,
+        "birth_death_feature_scale": "std",
+        "birth_death_isolation": true,
+        "birth_death_metric_rank": 8,
+        "birth_death_parent_policy": "real_anchor",
+        "birth_death_space": "critic",
+        "conditioning": "scalar",
+        "continuous_policy": "dv12",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.006375,
+        "lr_anneal_start": 0.6,
+        "lr_control": "stationarity",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "name": "atlas",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 256,
+        "observation_sigma": 0.03,
+        "output_noise_mode": "learnable",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": true,
+        "prior_betas": null,
+        "prior_kind": "particles",
+        "prior_lr_mult": 1.0,
+        "prior_reg": 0.05,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_coeff": 3.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "release",
+        "reopen_guard": "settled",
+        "reopen_signal": "optimizer",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": true,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "scaled",
+        "row_policy": "independent",
+        "serve_average": 4.0,
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "table_release_rule": "anchor",
+        "total_steps": null,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 4
+      },
+      "recipe_overrides": {
+        "lr": 0.006375,
+        "prior_lr_mult": 1.0
+      },
+      "served_observation": {
+        "failed_bounds": [],
+        "metrics": {
+          "component_core_covariance_error": 0.05791402608156204,
+          "component_core_min_eigen_ratio": 0.9588383436203003,
+          "component_covariance_error": 0.05791402608156204,
+          "component_min_eigen_ratio": 0.9588383436203003,
+          "covariance_error": 0.012864907272160053,
+          "hq": 0.99658203125,
+          "mass_tv": 0.006591796875,
+          "max_component_spill": 0.003958436194807291,
+          "mean_error": 0.011877377517521381,
+          "min_mass_ratio": 0.98681640625,
+          "projection_ks": 0.029704114331097542,
+          "resolved_core_covariance_error": 0.05791402608156204,
+          "resolved_core_min_eigen_ratio": 0.9588383436203003,
+          "resolved_max_component_spill": 0.003958436194807291,
+          "sample_count": 4096,
+          "sw1_normalized": 0.013401737397352153,
+          "target_scale": 1.0555585622787476
+        },
+        "passed": true,
+        "same_seed_public_samples_equal": true,
+        "samples_key": "served_samples"
+      },
+      "status": "SUPPORTED",
+      "training_updates": 0
+    },
+    {
+      "artifacts": {
+        "samples": {
+          "path": "/ml2/hypergan/toy-policy-vector-capacity-conformity-20261002/atlas/api-vector-unequal-mass/samples.npz",
+          "sha256": "432763c745c1abde8f8a20cdc6bd488bab86c56f978856c4aa71853ca8101ddb"
+        },
+        "state": {
+          "path": "/ml2/hypergan/toy-policy-vector-capacity-conformity-20261002/atlas/api-vector-unequal-mass/state.pt",
+          "sha256": "5e604b037d6ee0589f58f18c1d06c0d6fe1636ed2035cb7c4f4141ae64e7e951"
+        }
+      },
+      "bindings": {
+        "case_sha256": "e29a36b2461a986a28ca950df869a4926f258b2bfca32bd46bc8b2188aebf32e",
+        "preset_sha256": "4f9f39072e3b89b51bbc0128d2ffeb8b62145fd9f81b1409590588893eb06fae",
+        "sampling_sha256": "97ab90c848ba60e67c35052bd3c219effa557c76d54d22427c50417de5e4db69",
+        "source_files_sha256": {
+          "benchmarks/toy100/__init__.py": "f10bbdfb010d90379c9145f31b499c7c2e878d0ad70291ae3bd6104903852ddb",
+          "benchmarks/toy100/__main__.py": "165ce04f2546dbf07ec68ec71032521db3a2abb50df8c70982567a33c03d625b",
+          "benchmarks/toy100/accuracy.py": "ee5c62049f8cdceb3d93b6d792cbaa96c815e12b3ce79ffaed244fb15a44fed2",
+          "benchmarks/toy100/accuracy_evidence.py": "654adde5ee19915bc9eb630d754f2a4c0282d694252df7918bae10f542904d39",
+          "benchmarks/toy100/accuracy_gate.py": "e66ede95d4b80eedd832a102841c2b0a5d6d710f646bfa34dc00647dc0ab3abe",
+          "benchmarks/toy100/config.py": "a11079bac3e134510e2343f12f45c541e56ace1d02690a35cec679405bcc40c3",
+          "benchmarks/toy100/constraint_screen.py": "6fd92211fee23cb5f2c7bb6880ee147656fff24efdb0bdb8b274893c6f6523f9",
+          "benchmarks/toy100/continuous_probe.py": "972405ea73644c2d189a4e243a79146f3cf8295c2a2979c30a277b2a54ff4541",
+          "benchmarks/toy100/device.py": "7fa0f53db44e8824d3497b471e9fe8db56cbf8b4e02ddf997f65beed63f81911",
+          "benchmarks/toy100/gate.py": "2ddadf56a4ccd7645c8b4e391373818b1113fb6113a9c691310fb162684058e6",
+          "benchmarks/toy100/metrics.py": "a7fbef19082f8470eb392948da52a336a90a3e99c6b3b893343a9e75bcda9c7b",
+          "benchmarks/toy100/models.py": "75f33ad0e100930631da2a86a9c0312f6ae02afe6c851d940c7cf44e41dede6a",
+          "benchmarks/toy100/native_models.py": "f1fc3a17844f37ddd071ea5d4867d636009e88545d60641fd6b6a05ee6298aea",
+          "benchmarks/toy100/problems.py": "2581374d451ed9147c031dfcdfbe9e2eea83e41ba49c2b8945b6e729ede26c9d",
+          "benchmarks/toy100/render.py": "4944a36e19c6a0d75ab53c5c4cc650cc7d963d6fb6e31cf64a3da9a3796f538d",
+          "benchmarks/toy100/schedule.py": "38f41fd4f428ec7cf73223ea0fdf148ac32cdcdbf780b61cf2a5166baf0b8803",
+          "benchmarks/toy100/search.py": "83076f0d9b4155ea7c0e504e0433a75c9f5080069f12d9ce226317421d8a03c6",
+          "benchmarks/toy100/train.py": "64ad54128085ab684a77ecb155ae449d95ab326775e13b925cfb783e53c3f610",
+          "benchmarks/toy100/warm_equilibrium_probe.py": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
+          "benchmarks/toy_audit/api_contract.py": "2d23aacfb6107f1535ed04ea0d5bb67d8f33a260ac1aca9e1d1734bfaf0f2e28",
+          "benchmarks/toy_audit/api_vectors.py": "9707af96fa43f76fad5481b6d6ec76e317957ec8e309ea96cc079ee95c2058af",
+          "benchmarks/toy_audit/definition_quality.py": "42d835ab7a0937a6c3759dd719691c721663b7857cb990405253e90f7fbd4cc9",
+          "benchmarks/toy_audit/vector_quality.py": "8a333bfceb71e311875b8576260c362a66a643c99d3849e6792a10e805de67d9",
+          "benchmarks/transfer_suite/stress_tasks.py": "3342e717db338cb6b7ebf5a95c01c51e4be855a564490f34f240b2a0b2e8c7e4",
+          "benchmarks/transfer_suite/vector_tasks.py": "3ee4eb27759f61a430029c80b7772cac3dca2fb2ac84919ace0db94efca1e0b0",
+          "lib/toy_models.py": "70f32797882de0dc88085afcf5e05821b65eb5f248c9690818a2494225d782a3",
+          "particlegan/__init__.py": "b56efa562acc551d639548c299002e2cd76338b3fd7062699780add51f4f5e8c",
+          "particlegan/_qr.py": "b59cd62cc27ed557b41b2d17ed86ed578c762a3a8a392d63731a5a3b2b018916",
+          "particlegan/anchor_birth.py": "aa50983d8b61304acf4e1138f16fd4784798983df91e931863bcacd3b511f76f",
+          "particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+          "particlegan/birth_death.py": "b14c50c611a8cf188347e391739fca50a5171200eb6be90e4e3d1509d64e47ed",
+          "particlegan/birth_phase.py": "5ff929e5e9858aa24c4cc2f8999b5d0603e25e42ca3844d1da4cc28b1981d3d7",
+          "particlegan/capabilities.py": "39df9c67dbedf612740057e5fa743bc724678a1bc323d1f7cf550b37c0c01177",
+          "particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+          "particlegan/continuous.py": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41",
+          "particlegan/diffusion.py": "19c3aa8772703891551b9122fde8e74c07996f779892b7cb6be09553691efa61",
+          "particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+          "particlegan/feature_cells.py": "e0ea05f61abd7845c7437eed9a79c3a2511d5551ff04f4e619b6b9c8992e221a",
+          "particlegan/feature_policy.py": "de1a50f70a37d4c9174c8850ce3eac2a2597ed01f19fc4fe1a2ce0ec3176a8b2",
+          "particlegan/feature_reference.py": "58e076e9e04600be25e28afafc537a340de727371f4acbbfb2b7dd8bebac18b1",
+          "particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+          "particlegan/grad_regularizers.py": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747",
+          "particlegan/init.py": "e15d4de01eb49f7097bc249abacab907ff067385412346f54ab0d510cb8649d0",
+          "particlegan/k3p.py": "200ead2c27ab0b2aa6068f1b1b1b5c826b8125aa8602bfec08b31aaa2894401c",
+          "particlegan/ka2.py": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703",
+          "particlegan/mean_transport.py": "57a68e0a65c5424a4460f65002f3862a69e90af330a4d47c700dc773683a2c06",
+          "particlegan/output_moments.py": "dcf3e27228d2c3c9738e473c5b22ee9e6d5047ddcd60c538b66526adb53ef188",
+          "particlegan/particle_prior.py": "0220878bebea227da63abbf9f5b1ebdabdc6aea54fd2332fd2cab02ed734238f",
+          "particlegan/policy.py": "8370e36b5b93afe95ae24d2b385aac8735a587f86ef2b87ed369ecfdfcb6fec5",
+          "particlegan/population_continuity.py": "378cd75cca45bc8da4da33e686a12cf99df853042687978314e37c532bc17fe6",
+          "particlegan/recipe_schedules.py": "d05e459b3e9e5f938b01a854273b74343f2b6d382bec4ae5151dd1f1cd032500",
+          "particlegan/recipes.py": "1a7f9df746e242a2774068c819d70d50cd72dc4f7f6b22b0bd13e1345dcf8ab2",
+          "particlegan/routing.py": "63249d808fccb3d4e113eb1d638a245ee665c3cade20a1542bb706f316b4abcc",
+          "particlegan/row_evidence.py": "78be40141ef3946860458e9842159be9321f05c217a4800dd4134113b6eba93e",
+          "particlegan/training.py": "7dadc219135bc3e6bf657bfe9bc3fa81dd14d4b2a31c70d5ff61e2941db35c94",
+          "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+        }
+      },
+      "case_id": "api-vector-unequal-mass",
+      "claim_scope": "Necessary numeric snapshot capacity only in the actual full-horizon public policy and selected backend. One real-data lifecycle prelude/abort, zero forward/backward/optimizer updates; no training reachability or default/Forge qualification. Finalsource conformity restores the exact original public checkpoint and reproduces original actual samples/targets bitwise; no repeated lifecycle prelude or parameter edits.",
+      "completed_steps": 0,
+      "conformity": {
+        "change_scope": "Additional validate_recipe_overrides rejection for api-stress-* callers. Exact three selected cases, public package/preset/sampling/scorers unchanged. Original capture is preserved; this is an actual finalsource public restore/sample check.",
+        "fitting_updates": 0,
+        "new_lifecycle_preludes": 0,
+        "original_bindings_location": "Original immutable capture receipt and original_compact_packet; exact source differences retained in this record.",
+        "original_receipt": "/ml2/hypergan/toy-policy-vector-capacity-round1-20261002/receipt.json",
+        "original_receipt_sha256": "bdcb537268f9d09d8068ebe052f7644f7c2de888ecb82539dd76af082cfdadd4",
+        "parity": {
+          "current_samples_equal_original": true,
+          "current_served_samples_equal_original": true,
+          "current_targets_equal_original": true,
+          "fixture_and_served_samples_equal": true,
+          "observer_full_state_unchanged": true,
+          "observer_global_torch_rng_unchanged": true,
+          "restored_state_digest_equal": true
+        },
+        "retained_original_artifacts": {
+          "samples": {
+            "path": "/ml2/hypergan/toy-policy-vector-capacity-round1-20261002/atlas/api-vector-unequal-mass/samples.npz",
+            "sha256": "f36df89766ad0c9d039580dfb7a668593bc0e44aa08ca1cbd4e2a0379c4d5041"
+          },
+          "state": {
+            "path": "/ml2/hypergan/toy-policy-vector-capacity-round1-20261002/atlas/api-vector-unequal-mass/state.pt",
+            "sha256": "e7741b1b65405d9949babb1316c89a3fd892d19dba5a624f2189d7ab2f6e34de"
+          }
+        },
+        "source_differences": {
+          "benchmarks/toy_audit/api_contract.py": {
+            "current": "2d23aacfb6107f1535ed04ea0d5bb67d8f33a260ac1aca9e1d1734bfaf0f2e28",
+            "original": "0c79eae1dbd489553bdce30395b51476c247d657c742351c074315946afb71e2"
+          }
+        },
+        "state_digest": "eac0e6d4bf9ee5efb8836eb211a33012346f8e09b7ba094454797fda656857a8",
+        "training_updates": 0
+      },
+      "construction": {
+        "coordinates": "target Gaussian quantiles from Halton bases2/3, algebraically centered and covariance-normalized independently for each component",
+        "fitting_updates": 0,
+        "generator_map": "G(z)=(z0,z1), encoded in original64x2 LeakyReLU model; latent axes2/3 are zero",
+        "law_limit": "Finite quadrature convolved with the actual source-derived DV12/feature-cell kernel, not an exact continuous Gaussian mixture law",
+        "mass_quantization_tv": 0.0015624999999999858,
+        "row_masses": [
+          0.55078125,
+          0.30078125,
+          0.12890625,
+          0.01953125
+        ],
+        "rows_per_component": [
+          141,
+          77,
+          33,
+          5
+        ],
+        "target_masses": [
+          0.55,
+          0.3,
+          0.13,
+          0.02
+        ],
+        "type": "deterministic_gaussian_point_quadrature"
+      },
+      "family": "atlas",
+      "fitting_updates": 0,
+      "lifecycle": {
+        "backend_selection": {
+          "actual_backend": "knn",
+          "generator_noise_factor": 1.0,
+          "moment_rank_bound": 8,
+          "output_shape": [
+            2
+          ],
+          "population_policy": {
+            "actual_backend": "knn",
+            "calibration_rows": 128,
+            "finite_resolution_feasible": false,
+            "matching_sampler": "controller_reference",
+            "maximum_guard_flags": 12,
+            "minimum_bh_flags": 40,
+            "population": 256,
+            "q": 0.05,
+            "requested_backend": "feature_cells",
+            "rule": "ceil(N/[Q*(floor(N/2)+1)]) <= floor(Q*N)",
+            "schema": 1
+          },
+          "rate_mapping": [
+            [
+              {
+                "base_rate": 0.006375,
+                "factor": 1.0,
+                "rate": 0.006375,
+                "role": "generator"
+              },
+              {
+                "base_rate": 0.006375,
+                "factor": 1.0,
+                "rate": 0.006375,
+                "role": "table"
+              },
+              {
+                "base_rate": 0.006375,
+                "factor": 1.0,
+                "rate": 0.006375,
+                "role": "noise"
+              }
+            ],
+            [
+              {
+                "base_rate": 0.0095625,
+                "factor": 1.0,
+                "rate": 0.0095625,
+                "role": "critic"
+              }
+            ]
+          ],
+          "raw_output_width": 2,
+          "requested_backend": "auto",
+          "sampling_backend": "controller_reference",
+          "schema": 1,
+          "selection_reason": "finite_resolution_infeasible"
+        },
+        "begin_source_real_step": 1,
+        "completed_steps": 0,
+        "controller_after": {
+          "alignment": 0.0,
+          "closed": false,
+          "data_drive": 0.0,
+          "data_memory": 0.0,
+          "data_score": 0.0,
+          "fast_mean_variance": null,
+          "fast_reference": null,
+          "game_ratio": 1.0,
+          "game_trust": 1.0,
+          "last_cosine": 0.0,
+          "latent_applications": [],
+          "latent_bandwidth": [
+            0.2704203128814697,
+            0.35282889008522034,
+            0.0,
+            0.0
+          ],
+          "location": null,
+          "mean_covariance": null,
+          "mobility": 0.995,
+          "payoff_error": 0.0,
+          "previous_gradient": null,
+          "projection": null,
+          "reference": null,
+          "reopens": 0,
+          "scale": null,
+          "slow_mean_variance": null,
+          "updates": 1,
+          "variance": null,
+          "variant": "dv12"
+        },
+        "controller_before": {
+          "alignment": 0.0,
+          "closed": false,
+          "data_drive": 0.0,
+          "data_memory": 0.0,
+          "data_score": 0.0,
+          "fast_mean_variance": null,
+          "fast_reference": null,
+          "game_ratio": 1.0,
+          "game_trust": 1.0,
+          "last_cosine": 0.0,
+          "latent_applications": [],
+          "latent_bandwidth": [
+            0.2704203128814697,
+            0.35282889008522034,
+            0.0,
+            0.0
+          ],
+          "location": null,
+          "mean_covariance": null,
+          "mobility": 1.0,
+          "payoff_error": 0.0,
+          "previous_gradient": null,
+          "projection": null,
+          "reference": null,
+          "reopens": 0,
+          "scale": null,
+          "slow_mean_variance": null,
+          "updates": 0,
+          "variance": null,
+          "variant": "dv12"
+        },
+        "prelude_count": 1,
+        "prelude_scope": "Source first real batch advances the fixture data stream and policy/controller/reservoir metadata. abort_step releases phase bookkeeping without undoing these observations. No model or optimizer step.",
+        "served_source": "fast"
+      },
+      "negative_control": {
+        "failed_bounds": [
+          "resolved_core_covariance_error <= 0.5",
+          "resolved_core_min_eigen_ratio >= 0.15",
+          "projection_ks <= 0.06"
+        ],
+        "label": "means-only unperturbed witness; supplied-array gate calibration, not the public sampler",
+        "metrics": {
+          "component_core_covariance_error": 1.0,
+          "component_core_min_eigen_ratio": 0.0,
+          "component_covariance_error": 1.0,
+          "component_min_eigen_ratio": 0.0,
+          "covariance_error": 0.02386072650551796,
+          "hq": 1.0,
+          "mass_tv": 0.001562485471367836,
+          "max_component_spill": 0.0,
+          "mean_error": 0.018637655302882195,
+          "min_mass_ratio": 0.9765625,
+          "projection_ks": 0.42656249999999996,
+          "resolved_core_covariance_error": 1.0,
+          "resolved_core_min_eigen_ratio": 0.0,
+          "resolved_max_component_spill": 0.0,
+          "sample_count": 4096,
+          "sw1_normalized": 0.08448093703045569,
+          "target_scale": 1.7593294382095337
+        },
+        "passed": false
+      },
+      "observations": [
+        {
+          "completed_steps": 0,
+          "evaluation_seed": 34002,
+          "failed_bounds": [],
+          "metrics": {
+            "component_core_covariance_error": 0.17447223793715239,
+            "component_core_min_eigen_ratio": 0.8939907550811768,
+            "component_covariance_error": 0.17447223793715239,
+            "component_min_eigen_ratio": 0.8939907550811768,
+            "covariance_error": 0.04326790198683739,
+            "hq": 0.99560546875,
+            "mass_tv": 0.009208986535668373,
+            "max_component_spill": 0.006694560870528221,
+            "mean_error": 0.027421386912465096,
+            "min_mass_ratio": 0.9521484375,
+            "projection_ks": 0.023378500911634625,
+            "resolved_core_covariance_error": 0.07850593701004982,
+            "resolved_core_min_eigen_ratio": 0.8939907550811768,
+            "resolved_max_component_spill": 0.006694560870528221,
+            "sample_count": 4096,
+            "sw1_normalized": 0.021337548044917023,
+            "target_scale": 1.7593294382095337
+          },
+          "passed": true,
+          "samples_key": "samples"
+        }
+      ],
+      "observer_purity": {
+        "fixture_full_state_unchanged": true,
+        "global_torch_rng_unchanged": true,
+        "optimizer_states_empty": true
+      },
+      "ordinary_initialized_model_sha256": "3e8ae227e97f8e7f4e4fb27c91cefeff145a5af0265ac6abaa8364c4a9e33b03",
+      "original_full_horizon": 1200,
+      "public_api": [
+        "api_contract.build",
+        "GANTrainer",
+        "UpdatePolicy.begin_step",
+        "UpdatePolicy.abort_step",
+        "GANTrainer.sample",
+        "UpdatePolicy.served_model",
+        "ServedModel.sample"
+      ],
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": true,
+        "batch_size": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "birth_death_backend": "auto",
+        "birth_death_cells": 128,
+        "birth_death_chunk": 256,
+        "birth_death_feature_scale": "std",
+        "birth_death_isolation": true,
+        "birth_death_metric_rank": 8,
+        "birth_death_parent_policy": "real_anchor",
+        "birth_death_space": "critic",
+        "conditioning": "scalar",
+        "continuous_policy": "dv12",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.006375,
+        "lr_anneal_start": 0.6,
+        "lr_control": "stationarity",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "name": "atlas",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 256,
+        "observation_sigma": 0.03,
+        "output_noise_mode": "learnable",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": true,
+        "prior_betas": null,
+        "prior_kind": "particles",
+        "prior_lr_mult": 1.0,
+        "prior_reg": 0.05,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_coeff": 3.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "release",
+        "reopen_guard": "settled",
+        "reopen_signal": "optimizer",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": true,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "scaled",
+        "row_policy": "independent",
+        "serve_average": 4.0,
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "table_release_rule": "anchor",
+        "total_steps": null,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 4
+      },
+      "recipe_overrides": {
+        "lr": 0.006375,
+        "prior_lr_mult": 1.0
+      },
+      "served_observation": {
+        "failed_bounds": [],
+        "metrics": {
+          "component_core_covariance_error": 0.17447223793715239,
+          "component_core_min_eigen_ratio": 0.8939907550811768,
+          "component_covariance_error": 0.17447223793715239,
+          "component_min_eigen_ratio": 0.8939907550811768,
+          "covariance_error": 0.04326790198683739,
+          "hq": 0.99560546875,
+          "mass_tv": 0.009208986535668373,
+          "max_component_spill": 0.006694560870528221,
+          "mean_error": 0.027421386912465096,
+          "min_mass_ratio": 0.9521484375,
+          "projection_ks": 0.023378500911634625,
+          "resolved_core_covariance_error": 0.07850593701004982,
+          "resolved_core_min_eigen_ratio": 0.8939907550811768,
+          "resolved_max_component_spill": 0.006694560870528221,
+          "sample_count": 4096,
+          "sw1_normalized": 0.021337548044917023,
+          "target_scale": 1.7593294382095337
+        },
+        "passed": true,
+        "same_seed_public_samples_equal": true,
+        "samples_key": "served_samples"
+      },
+      "status": "SUPPORTED",
+      "training_updates": 0
+    },
+    {
+      "artifacts": {
+        "samples": {
+          "path": "/ml2/hypergan/toy-policy-vector-capacity-conformity-20261002/atlas/api-vector-anisotropic/samples.npz",
+          "sha256": "b7108d2561edb5a8d05ec51ed1ec23c3507f214d635f27a14b172419f3c5bc00"
+        },
+        "state": {
+          "path": "/ml2/hypergan/toy-policy-vector-capacity-conformity-20261002/atlas/api-vector-anisotropic/state.pt",
+          "sha256": "858b5ac06c6e9bc31020a8670c8b579099b2b56350db21fd80053f94b18a7158"
+        }
+      },
+      "bindings": {
+        "case_sha256": "2ec941011f8398672ce85b1d4df41c6e22dce2e0f98354a75f1d9a6794d4e1b6",
+        "preset_sha256": "4f9f39072e3b89b51bbc0128d2ffeb8b62145fd9f81b1409590588893eb06fae",
+        "sampling_sha256": "97ab90c848ba60e67c35052bd3c219effa557c76d54d22427c50417de5e4db69",
+        "source_files_sha256": {
+          "benchmarks/toy100/__init__.py": "f10bbdfb010d90379c9145f31b499c7c2e878d0ad70291ae3bd6104903852ddb",
+          "benchmarks/toy100/__main__.py": "165ce04f2546dbf07ec68ec71032521db3a2abb50df8c70982567a33c03d625b",
+          "benchmarks/toy100/accuracy.py": "ee5c62049f8cdceb3d93b6d792cbaa96c815e12b3ce79ffaed244fb15a44fed2",
+          "benchmarks/toy100/accuracy_evidence.py": "654adde5ee19915bc9eb630d754f2a4c0282d694252df7918bae10f542904d39",
+          "benchmarks/toy100/accuracy_gate.py": "e66ede95d4b80eedd832a102841c2b0a5d6d710f646bfa34dc00647dc0ab3abe",
+          "benchmarks/toy100/config.py": "a11079bac3e134510e2343f12f45c541e56ace1d02690a35cec679405bcc40c3",
+          "benchmarks/toy100/constraint_screen.py": "6fd92211fee23cb5f2c7bb6880ee147656fff24efdb0bdb8b274893c6f6523f9",
+          "benchmarks/toy100/continuous_probe.py": "972405ea73644c2d189a4e243a79146f3cf8295c2a2979c30a277b2a54ff4541",
+          "benchmarks/toy100/device.py": "7fa0f53db44e8824d3497b471e9fe8db56cbf8b4e02ddf997f65beed63f81911",
+          "benchmarks/toy100/gate.py": "2ddadf56a4ccd7645c8b4e391373818b1113fb6113a9c691310fb162684058e6",
+          "benchmarks/toy100/metrics.py": "a7fbef19082f8470eb392948da52a336a90a3e99c6b3b893343a9e75bcda9c7b",
+          "benchmarks/toy100/models.py": "75f33ad0e100930631da2a86a9c0312f6ae02afe6c851d940c7cf44e41dede6a",
+          "benchmarks/toy100/native_models.py": "f1fc3a17844f37ddd071ea5d4867d636009e88545d60641fd6b6a05ee6298aea",
+          "benchmarks/toy100/problems.py": "2581374d451ed9147c031dfcdfbe9e2eea83e41ba49c2b8945b6e729ede26c9d",
+          "benchmarks/toy100/render.py": "4944a36e19c6a0d75ab53c5c4cc650cc7d963d6fb6e31cf64a3da9a3796f538d",
+          "benchmarks/toy100/schedule.py": "38f41fd4f428ec7cf73223ea0fdf148ac32cdcdbf780b61cf2a5166baf0b8803",
+          "benchmarks/toy100/search.py": "83076f0d9b4155ea7c0e504e0433a75c9f5080069f12d9ce226317421d8a03c6",
+          "benchmarks/toy100/train.py": "64ad54128085ab684a77ecb155ae449d95ab326775e13b925cfb783e53c3f610",
+          "benchmarks/toy100/warm_equilibrium_probe.py": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
+          "benchmarks/toy_audit/api_contract.py": "2d23aacfb6107f1535ed04ea0d5bb67d8f33a260ac1aca9e1d1734bfaf0f2e28",
+          "benchmarks/toy_audit/api_vectors.py": "9707af96fa43f76fad5481b6d6ec76e317957ec8e309ea96cc079ee95c2058af",
+          "benchmarks/toy_audit/definition_quality.py": "42d835ab7a0937a6c3759dd719691c721663b7857cb990405253e90f7fbd4cc9",
+          "benchmarks/toy_audit/vector_quality.py": "8a333bfceb71e311875b8576260c362a66a643c99d3849e6792a10e805de67d9",
+          "benchmarks/transfer_suite/stress_tasks.py": "3342e717db338cb6b7ebf5a95c01c51e4be855a564490f34f240b2a0b2e8c7e4",
+          "benchmarks/transfer_suite/vector_tasks.py": "3ee4eb27759f61a430029c80b7772cac3dca2fb2ac84919ace0db94efca1e0b0",
+          "lib/toy_models.py": "70f32797882de0dc88085afcf5e05821b65eb5f248c9690818a2494225d782a3",
+          "particlegan/__init__.py": "b56efa562acc551d639548c299002e2cd76338b3fd7062699780add51f4f5e8c",
+          "particlegan/_qr.py": "b59cd62cc27ed557b41b2d17ed86ed578c762a3a8a392d63731a5a3b2b018916",
+          "particlegan/anchor_birth.py": "aa50983d8b61304acf4e1138f16fd4784798983df91e931863bcacd3b511f76f",
+          "particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+          "particlegan/birth_death.py": "b14c50c611a8cf188347e391739fca50a5171200eb6be90e4e3d1509d64e47ed",
+          "particlegan/birth_phase.py": "5ff929e5e9858aa24c4cc2f8999b5d0603e25e42ca3844d1da4cc28b1981d3d7",
+          "particlegan/capabilities.py": "39df9c67dbedf612740057e5fa743bc724678a1bc323d1f7cf550b37c0c01177",
+          "particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+          "particlegan/continuous.py": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41",
+          "particlegan/diffusion.py": "19c3aa8772703891551b9122fde8e74c07996f779892b7cb6be09553691efa61",
+          "particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+          "particlegan/feature_cells.py": "e0ea05f61abd7845c7437eed9a79c3a2511d5551ff04f4e619b6b9c8992e221a",
+          "particlegan/feature_policy.py": "de1a50f70a37d4c9174c8850ce3eac2a2597ed01f19fc4fe1a2ce0ec3176a8b2",
+          "particlegan/feature_reference.py": "58e076e9e04600be25e28afafc537a340de727371f4acbbfb2b7dd8bebac18b1",
+          "particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+          "particlegan/grad_regularizers.py": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747",
+          "particlegan/init.py": "e15d4de01eb49f7097bc249abacab907ff067385412346f54ab0d510cb8649d0",
+          "particlegan/k3p.py": "200ead2c27ab0b2aa6068f1b1b1b5c826b8125aa8602bfec08b31aaa2894401c",
+          "particlegan/ka2.py": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703",
+          "particlegan/mean_transport.py": "57a68e0a65c5424a4460f65002f3862a69e90af330a4d47c700dc773683a2c06",
+          "particlegan/output_moments.py": "dcf3e27228d2c3c9738e473c5b22ee9e6d5047ddcd60c538b66526adb53ef188",
+          "particlegan/particle_prior.py": "0220878bebea227da63abbf9f5b1ebdabdc6aea54fd2332fd2cab02ed734238f",
+          "particlegan/policy.py": "8370e36b5b93afe95ae24d2b385aac8735a587f86ef2b87ed369ecfdfcb6fec5",
+          "particlegan/population_continuity.py": "378cd75cca45bc8da4da33e686a12cf99df853042687978314e37c532bc17fe6",
+          "particlegan/recipe_schedules.py": "d05e459b3e9e5f938b01a854273b74343f2b6d382bec4ae5151dd1f1cd032500",
+          "particlegan/recipes.py": "1a7f9df746e242a2774068c819d70d50cd72dc4f7f6b22b0bd13e1345dcf8ab2",
+          "particlegan/routing.py": "63249d808fccb3d4e113eb1d638a245ee665c3cade20a1542bb706f316b4abcc",
+          "particlegan/row_evidence.py": "78be40141ef3946860458e9842159be9321f05c217a4800dd4134113b6eba93e",
+          "particlegan/training.py": "7dadc219135bc3e6bf657bfe9bc3fa81dd14d4b2a31c70d5ff61e2941db35c94",
+          "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+        }
+      },
+      "case_id": "api-vector-anisotropic",
+      "claim_scope": "Necessary numeric snapshot capacity only in the actual full-horizon public policy and selected backend. One real-data lifecycle prelude/abort, zero forward/backward/optimizer updates; no training reachability or default/Forge qualification. Finalsource conformity restores the exact original public checkpoint and reproduces original actual samples/targets bitwise; no repeated lifecycle prelude or parameter edits.",
+      "completed_steps": 0,
+      "conformity": {
+        "change_scope": "Additional validate_recipe_overrides rejection for api-stress-* callers. Exact three selected cases, public package/preset/sampling/scorers unchanged. Original capture is preserved; this is an actual finalsource public restore/sample check.",
+        "fitting_updates": 0,
+        "new_lifecycle_preludes": 0,
+        "original_bindings_location": "Original immutable capture receipt and original_compact_packet; exact source differences retained in this record.",
+        "original_receipt": "/ml2/hypergan/toy-policy-vector-capacity-round1-20261002/receipt.json",
+        "original_receipt_sha256": "bdcb537268f9d09d8068ebe052f7644f7c2de888ecb82539dd76af082cfdadd4",
+        "parity": {
+          "current_samples_equal_original": true,
+          "current_served_samples_equal_original": true,
+          "current_targets_equal_original": true,
+          "fixture_and_served_samples_equal": true,
+          "observer_full_state_unchanged": true,
+          "observer_global_torch_rng_unchanged": true,
+          "restored_state_digest_equal": true
+        },
+        "retained_original_artifacts": {
+          "samples": {
+            "path": "/ml2/hypergan/toy-policy-vector-capacity-round1-20261002/atlas/api-vector-anisotropic/samples.npz",
+            "sha256": "097c6999793a006e88a9884bc2e0562e71aceb3374115d5e86aca82041249dd4"
+          },
+          "state": {
+            "path": "/ml2/hypergan/toy-policy-vector-capacity-round1-20261002/atlas/api-vector-anisotropic/state.pt",
+            "sha256": "79d5a4da6594d1a7b21ef74f720e1b9a98db4d01d2326b6c1188462acefaebd5"
+          }
+        },
+        "source_differences": {
+          "benchmarks/toy_audit/api_contract.py": {
+            "current": "2d23aacfb6107f1535ed04ea0d5bb67d8f33a260ac1aca9e1d1734bfaf0f2e28",
+            "original": "0c79eae1dbd489553bdce30395b51476c247d657c742351c074315946afb71e2"
+          }
+        },
+        "state_digest": "d04b9fbc3d4ed2d18d9c8056f1c8970a8446e87c8a4764abf297035d99640abc",
+        "training_updates": 0
+      },
+      "construction": {
+        "coordinates": "target Gaussian quantiles from Halton bases2/3, algebraically centered and covariance-normalized independently for each component",
+        "fitting_updates": 0,
+        "generator_map": "G(z)=(z0,z1), encoded in original64x2 LeakyReLU model; latent axes2/3 are zero",
+        "law_limit": "Finite quadrature convolved with the actual source-derived DV12/feature-cell kernel, not an exact continuous Gaussian mixture law",
+        "mass_quantization_tv": 0.0026041666666666574,
+        "row_masses": [
+          0.3359375,
+          0.33203125,
+          0.33203125
+        ],
+        "rows_per_component": [
+          86,
+          85,
+          85
+        ],
+        "target_masses": [
+          0.3333333333333333,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "type": "deterministic_gaussian_point_quadrature"
+      },
+      "family": "atlas",
+      "fitting_updates": 0,
+      "lifecycle": {
+        "backend_selection": {
+          "actual_backend": "knn",
+          "generator_noise_factor": 1.0,
+          "moment_rank_bound": 8,
+          "output_shape": [
+            2
+          ],
+          "population_policy": {
+            "actual_backend": "knn",
+            "calibration_rows": 128,
+            "finite_resolution_feasible": false,
+            "matching_sampler": "controller_reference",
+            "maximum_guard_flags": 12,
+            "minimum_bh_flags": 40,
+            "population": 256,
+            "q": 0.05,
+            "requested_backend": "feature_cells",
+            "rule": "ceil(N/[Q*(floor(N/2)+1)]) <= floor(Q*N)",
+            "schema": 1
+          },
+          "rate_mapping": [
+            [
+              {
+                "base_rate": 0.006375,
+                "factor": 1.0,
+                "rate": 0.006375,
+                "role": "generator"
+              },
+              {
+                "base_rate": 0.006375,
+                "factor": 1.0,
+                "rate": 0.006375,
+                "role": "table"
+              },
+              {
+                "base_rate": 0.006375,
+                "factor": 1.0,
+                "rate": 0.006375,
+                "role": "noise"
+              }
+            ],
+            [
+              {
+                "base_rate": 0.0095625,
+                "factor": 1.0,
+                "rate": 0.0095625,
+                "role": "critic"
+              }
+            ]
+          ],
+          "raw_output_width": 2,
+          "requested_backend": "auto",
+          "sampling_backend": "controller_reference",
+          "schema": 1,
+          "selection_reason": "finite_resolution_infeasible"
+        },
+        "begin_source_real_step": 1,
+        "completed_steps": 0,
+        "controller_after": {
+          "alignment": 0.0,
+          "closed": false,
+          "data_drive": 0.0,
+          "data_memory": 0.0,
+          "data_score": 0.0,
+          "fast_mean_variance": null,
+          "fast_reference": null,
+          "game_ratio": 1.0,
+          "game_trust": 1.0,
+          "last_cosine": 0.0,
+          "latent_applications": [],
+          "latent_bandwidth": [
+            0.41216039657592773,
+            0.2991708219051361,
+            0.0,
+            0.0
+          ],
+          "location": null,
+          "mean_covariance": null,
+          "mobility": 0.995,
+          "payoff_error": 0.0,
+          "previous_gradient": null,
+          "projection": null,
+          "reference": null,
+          "reopens": 0,
+          "scale": null,
+          "slow_mean_variance": null,
+          "updates": 1,
+          "variance": null,
+          "variant": "dv12"
+        },
+        "controller_before": {
+          "alignment": 0.0,
+          "closed": false,
+          "data_drive": 0.0,
+          "data_memory": 0.0,
+          "data_score": 0.0,
+          "fast_mean_variance": null,
+          "fast_reference": null,
+          "game_ratio": 1.0,
+          "game_trust": 1.0,
+          "last_cosine": 0.0,
+          "latent_applications": [],
+          "latent_bandwidth": [
+            0.41216039657592773,
+            0.2991708219051361,
+            0.0,
+            0.0
+          ],
+          "location": null,
+          "mean_covariance": null,
+          "mobility": 1.0,
+          "payoff_error": 0.0,
+          "previous_gradient": null,
+          "projection": null,
+          "reference": null,
+          "reopens": 0,
+          "scale": null,
+          "slow_mean_variance": null,
+          "updates": 0,
+          "variance": null,
+          "variant": "dv12"
+        },
+        "prelude_count": 1,
+        "prelude_scope": "Source first real batch advances the fixture data stream and policy/controller/reservoir metadata. abort_step releases phase bookkeeping without undoing these observations. No model or optimizer step.",
+        "served_source": "fast"
+      },
+      "negative_control": {
+        "failed_bounds": [
+          "resolved_core_covariance_error <= 0.5",
+          "resolved_core_min_eigen_ratio >= 0.15",
+          "projection_ks <= 0.06"
+        ],
+        "label": "means-only unperturbed witness; supplied-array gate calibration, not the public sampler",
+        "metrics": {
+          "component_core_covariance_error": 1.0,
+          "component_core_min_eigen_ratio": 0.0,
+          "component_covariance_error": 1.0,
+          "component_min_eigen_ratio": 0.0,
+          "covariance_error": 0.025360696017742157,
+          "hq": 1.0,
+          "mass_tv": 0.002604171633720398,
+          "max_component_spill": 0.0,
+          "mean_error": 0.019957583397626877,
+          "min_mass_ratio": 0.99609375,
+          "projection_ks": 0.3346354166666662,
+          "resolved_core_covariance_error": 1.0,
+          "resolved_core_min_eigen_ratio": 0.0,
+          "resolved_max_component_spill": 0.0,
+          "sample_count": 4096,
+          "sw1_normalized": 0.08327591229212869,
+          "target_scale": 2.032285690307617
+        },
+        "passed": false
+      },
+      "observations": [
+        {
+          "completed_steps": 0,
+          "evaluation_seed": 34002,
+          "failed_bounds": [],
+          "metrics": {
+            "component_core_covariance_error": 0.03797081702699264,
+            "component_core_min_eigen_ratio": 0.9416263103485107,
+            "component_covariance_error": 0.03797081702699264,
+            "component_min_eigen_ratio": 0.9416263103485107,
+            "covariance_error": 0.013312996365129948,
+            "hq": 0.98828125,
+            "mass_tv": 0.007731124758720398,
+            "max_component_spill": 0.013254786841571331,
+            "mean_error": 0.015489337034523487,
+            "min_mass_ratio": 0.982177734375,
+            "projection_ks": 0.02297569300737945,
+            "resolved_core_covariance_error": 0.03797081702699264,
+            "resolved_core_min_eigen_ratio": 0.9416263103485107,
+            "resolved_max_component_spill": 0.013254786841571331,
+            "sample_count": 4096,
+            "sw1_normalized": 0.013191690809704431,
+            "target_scale": 2.032285690307617
+          },
+          "passed": true,
+          "samples_key": "samples"
+        }
+      ],
+      "observer_purity": {
+        "fixture_full_state_unchanged": true,
+        "global_torch_rng_unchanged": true,
+        "optimizer_states_empty": true
+      },
+      "ordinary_initialized_model_sha256": "3e8ae227e97f8e7f4e4fb27c91cefeff145a5af0265ac6abaa8364c4a9e33b03",
+      "original_full_horizon": 1200,
+      "public_api": [
+        "api_contract.build",
+        "GANTrainer",
+        "UpdatePolicy.begin_step",
+        "UpdatePolicy.abort_step",
+        "GANTrainer.sample",
+        "UpdatePolicy.served_model",
+        "ServedModel.sample"
+      ],
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": true,
+        "batch_size": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "birth_death_backend": "auto",
+        "birth_death_cells": 128,
+        "birth_death_chunk": 256,
+        "birth_death_feature_scale": "std",
+        "birth_death_isolation": true,
+        "birth_death_metric_rank": 8,
+        "birth_death_parent_policy": "real_anchor",
+        "birth_death_space": "critic",
+        "conditioning": "scalar",
+        "continuous_policy": "dv12",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.006375,
+        "lr_anneal_start": 0.6,
+        "lr_control": "stationarity",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "name": "atlas",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 256,
+        "observation_sigma": 0.03,
+        "output_noise_mode": "learnable",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": true,
+        "prior_betas": null,
+        "prior_kind": "particles",
+        "prior_lr_mult": 1.0,
+        "prior_reg": 0.05,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_coeff": 3.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "release",
+        "reopen_guard": "settled",
+        "reopen_signal": "optimizer",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": true,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "scaled",
+        "row_policy": "independent",
+        "serve_average": 4.0,
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "table_release_rule": "anchor",
+        "total_steps": null,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 4
+      },
+      "recipe_overrides": {
+        "lr": 0.006375,
+        "prior_lr_mult": 1.0
+      },
+      "served_observation": {
+        "failed_bounds": [],
+        "metrics": {
+          "component_core_covariance_error": 0.03797081702699264,
+          "component_core_min_eigen_ratio": 0.9416263103485107,
+          "component_covariance_error": 0.03797081702699264,
+          "component_min_eigen_ratio": 0.9416263103485107,
+          "covariance_error": 0.013312996365129948,
+          "hq": 0.98828125,
+          "mass_tv": 0.007731124758720398,
+          "max_component_spill": 0.013254786841571331,
+          "mean_error": 0.015489337034523487,
+          "min_mass_ratio": 0.982177734375,
+          "projection_ks": 0.02297569300737945,
+          "resolved_core_covariance_error": 0.03797081702699264,
+          "resolved_core_min_eigen_ratio": 0.9416263103485107,
+          "resolved_max_component_spill": 0.013254786841571331,
+          "sample_count": 4096,
+          "sw1_normalized": 0.013191690809704431,
+          "target_scale": 2.032285690307617
+        },
+        "passed": true,
+        "same_seed_public_samples_equal": true,
+        "samples_key": "served_samples"
+      },
+      "status": "SUPPORTED",
+      "training_updates": 0
+    },
+    {
+      "artifacts": {
+        "samples": {
+          "path": "/ml2/hypergan/toy-policy-vector-capacity-conformity-20261002/e22/api-vector-two-broad/samples.npz",
+          "sha256": "0f9bbc103621720ad381d750bc7d23668023ce90eba80183cd05d497ef9d36c4"
+        },
+        "state": {
+          "path": "/ml2/hypergan/toy-policy-vector-capacity-conformity-20261002/e22/api-vector-two-broad/state.pt",
+          "sha256": "da1af2e79145c6887226706761886211e3e77f5e9a34216cd28e35598228b166"
+        }
+      },
+      "bindings": {
+        "case_sha256": "e293cf19f2f235b30807f9782ec65ceea3693f78e3459b9f7eb117179168c8fc",
+        "preset_sha256": "67f133d203beac5abd68ee2ca2843655e684e3e193e368787e6d1866790200b6",
+        "sampling_sha256": "97ab90c848ba60e67c35052bd3c219effa557c76d54d22427c50417de5e4db69",
+        "source_files_sha256": {
+          "benchmarks/toy100/__init__.py": "f10bbdfb010d90379c9145f31b499c7c2e878d0ad70291ae3bd6104903852ddb",
+          "benchmarks/toy100/__main__.py": "165ce04f2546dbf07ec68ec71032521db3a2abb50df8c70982567a33c03d625b",
+          "benchmarks/toy100/accuracy.py": "ee5c62049f8cdceb3d93b6d792cbaa96c815e12b3ce79ffaed244fb15a44fed2",
+          "benchmarks/toy100/accuracy_evidence.py": "654adde5ee19915bc9eb630d754f2a4c0282d694252df7918bae10f542904d39",
+          "benchmarks/toy100/accuracy_gate.py": "e66ede95d4b80eedd832a102841c2b0a5d6d710f646bfa34dc00647dc0ab3abe",
+          "benchmarks/toy100/config.py": "a11079bac3e134510e2343f12f45c541e56ace1d02690a35cec679405bcc40c3",
+          "benchmarks/toy100/constraint_screen.py": "6fd92211fee23cb5f2c7bb6880ee147656fff24efdb0bdb8b274893c6f6523f9",
+          "benchmarks/toy100/continuous_probe.py": "972405ea73644c2d189a4e243a79146f3cf8295c2a2979c30a277b2a54ff4541",
+          "benchmarks/toy100/device.py": "7fa0f53db44e8824d3497b471e9fe8db56cbf8b4e02ddf997f65beed63f81911",
+          "benchmarks/toy100/gate.py": "2ddadf56a4ccd7645c8b4e391373818b1113fb6113a9c691310fb162684058e6",
+          "benchmarks/toy100/metrics.py": "a7fbef19082f8470eb392948da52a336a90a3e99c6b3b893343a9e75bcda9c7b",
+          "benchmarks/toy100/models.py": "75f33ad0e100930631da2a86a9c0312f6ae02afe6c851d940c7cf44e41dede6a",
+          "benchmarks/toy100/native_models.py": "f1fc3a17844f37ddd071ea5d4867d636009e88545d60641fd6b6a05ee6298aea",
+          "benchmarks/toy100/problems.py": "2581374d451ed9147c031dfcdfbe9e2eea83e41ba49c2b8945b6e729ede26c9d",
+          "benchmarks/toy100/render.py": "4944a36e19c6a0d75ab53c5c4cc650cc7d963d6fb6e31cf64a3da9a3796f538d",
+          "benchmarks/toy100/schedule.py": "38f41fd4f428ec7cf73223ea0fdf148ac32cdcdbf780b61cf2a5166baf0b8803",
+          "benchmarks/toy100/search.py": "83076f0d9b4155ea7c0e504e0433a75c9f5080069f12d9ce226317421d8a03c6",
+          "benchmarks/toy100/train.py": "64ad54128085ab684a77ecb155ae449d95ab326775e13b925cfb783e53c3f610",
+          "benchmarks/toy100/warm_equilibrium_probe.py": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
+          "benchmarks/toy_audit/api_contract.py": "2d23aacfb6107f1535ed04ea0d5bb67d8f33a260ac1aca9e1d1734bfaf0f2e28",
+          "benchmarks/toy_audit/api_vectors.py": "9707af96fa43f76fad5481b6d6ec76e317957ec8e309ea96cc079ee95c2058af",
+          "benchmarks/toy_audit/definition_quality.py": "42d835ab7a0937a6c3759dd719691c721663b7857cb990405253e90f7fbd4cc9",
+          "benchmarks/toy_audit/vector_quality.py": "8a333bfceb71e311875b8576260c362a66a643c99d3849e6792a10e805de67d9",
+          "benchmarks/transfer_suite/stress_tasks.py": "3342e717db338cb6b7ebf5a95c01c51e4be855a564490f34f240b2a0b2e8c7e4",
+          "benchmarks/transfer_suite/vector_tasks.py": "3ee4eb27759f61a430029c80b7772cac3dca2fb2ac84919ace0db94efca1e0b0",
+          "lib/toy_models.py": "70f32797882de0dc88085afcf5e05821b65eb5f248c9690818a2494225d782a3",
+          "particlegan/__init__.py": "b56efa562acc551d639548c299002e2cd76338b3fd7062699780add51f4f5e8c",
+          "particlegan/_qr.py": "b59cd62cc27ed557b41b2d17ed86ed578c762a3a8a392d63731a5a3b2b018916",
+          "particlegan/anchor_birth.py": "aa50983d8b61304acf4e1138f16fd4784798983df91e931863bcacd3b511f76f",
+          "particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+          "particlegan/birth_death.py": "b14c50c611a8cf188347e391739fca50a5171200eb6be90e4e3d1509d64e47ed",
+          "particlegan/birth_phase.py": "5ff929e5e9858aa24c4cc2f8999b5d0603e25e42ca3844d1da4cc28b1981d3d7",
+          "particlegan/capabilities.py": "39df9c67dbedf612740057e5fa743bc724678a1bc323d1f7cf550b37c0c01177",
+          "particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+          "particlegan/continuous.py": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41",
+          "particlegan/diffusion.py": "19c3aa8772703891551b9122fde8e74c07996f779892b7cb6be09553691efa61",
+          "particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+          "particlegan/feature_cells.py": "e0ea05f61abd7845c7437eed9a79c3a2511d5551ff04f4e619b6b9c8992e221a",
+          "particlegan/feature_policy.py": "de1a50f70a37d4c9174c8850ce3eac2a2597ed01f19fc4fe1a2ce0ec3176a8b2",
+          "particlegan/feature_reference.py": "58e076e9e04600be25e28afafc537a340de727371f4acbbfb2b7dd8bebac18b1",
+          "particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+          "particlegan/grad_regularizers.py": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747",
+          "particlegan/init.py": "e15d4de01eb49f7097bc249abacab907ff067385412346f54ab0d510cb8649d0",
+          "particlegan/k3p.py": "200ead2c27ab0b2aa6068f1b1b1b5c826b8125aa8602bfec08b31aaa2894401c",
+          "particlegan/ka2.py": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703",
+          "particlegan/mean_transport.py": "57a68e0a65c5424a4460f65002f3862a69e90af330a4d47c700dc773683a2c06",
+          "particlegan/output_moments.py": "dcf3e27228d2c3c9738e473c5b22ee9e6d5047ddcd60c538b66526adb53ef188",
+          "particlegan/particle_prior.py": "0220878bebea227da63abbf9f5b1ebdabdc6aea54fd2332fd2cab02ed734238f",
+          "particlegan/policy.py": "8370e36b5b93afe95ae24d2b385aac8735a587f86ef2b87ed369ecfdfcb6fec5",
+          "particlegan/population_continuity.py": "378cd75cca45bc8da4da33e686a12cf99df853042687978314e37c532bc17fe6",
+          "particlegan/recipe_schedules.py": "d05e459b3e9e5f938b01a854273b74343f2b6d382bec4ae5151dd1f1cd032500",
+          "particlegan/recipes.py": "1a7f9df746e242a2774068c819d70d50cd72dc4f7f6b22b0bd13e1345dcf8ab2",
+          "particlegan/routing.py": "63249d808fccb3d4e113eb1d638a245ee665c3cade20a1542bb706f316b4abcc",
+          "particlegan/row_evidence.py": "78be40141ef3946860458e9842159be9321f05c217a4800dd4134113b6eba93e",
+          "particlegan/training.py": "7dadc219135bc3e6bf657bfe9bc3fa81dd14d4b2a31c70d5ff61e2941db35c94",
+          "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+        }
+      },
+      "case_id": "api-vector-two-broad",
+      "claim_scope": "Necessary numeric snapshot capacity only in the actual full-horizon public policy and selected backend. One real-data lifecycle prelude/abort, zero forward/backward/optimizer updates; no training reachability or default/Forge qualification. Finalsource conformity restores the exact original public checkpoint and reproduces original actual samples/targets bitwise; no repeated lifecycle prelude or parameter edits.",
+      "completed_steps": 0,
+      "conformity": {
+        "change_scope": "Additional validate_recipe_overrides rejection for api-stress-* callers. Exact three selected cases, public package/preset/sampling/scorers unchanged. Original capture is preserved; this is an actual finalsource public restore/sample check.",
+        "fitting_updates": 0,
+        "new_lifecycle_preludes": 0,
+        "original_bindings_location": "Original immutable capture receipt and original_compact_packet; exact source differences retained in this record.",
+        "original_receipt": "/ml2/hypergan/toy-policy-vector-capacity-round1-20261002/receipt.json",
+        "original_receipt_sha256": "bdcb537268f9d09d8068ebe052f7644f7c2de888ecb82539dd76af082cfdadd4",
+        "parity": {
+          "current_samples_equal_original": true,
+          "current_served_samples_equal_original": true,
+          "current_targets_equal_original": true,
+          "fixture_and_served_samples_equal": true,
+          "observer_full_state_unchanged": true,
+          "observer_global_torch_rng_unchanged": true,
+          "restored_state_digest_equal": true
+        },
+        "retained_original_artifacts": {
+          "samples": {
+            "path": "/ml2/hypergan/toy-policy-vector-capacity-round1-20261002/e22/api-vector-two-broad/samples.npz",
+            "sha256": "640a93e6840972a2d4f740c8d68287522be2ceeae5968b12bd3a96ce8a5f4e00"
+          },
+          "state": {
+            "path": "/ml2/hypergan/toy-policy-vector-capacity-round1-20261002/e22/api-vector-two-broad/state.pt",
+            "sha256": "dea84559d3917e07a1b08ac14761ba990486cb97d2eb70ddbb19fc113fe1cdc0"
+          }
+        },
+        "source_differences": {
+          "benchmarks/toy_audit/api_contract.py": {
+            "current": "2d23aacfb6107f1535ed04ea0d5bb67d8f33a260ac1aca9e1d1734bfaf0f2e28",
+            "original": "0c79eae1dbd489553bdce30395b51476c247d657c742351c074315946afb71e2"
+          }
+        },
+        "state_digest": "162cdf2c676deb1731ac4b15f4bc799a8b3756e021bf837d0a3fb5f25e7bc17e",
+        "training_updates": 0
+      },
+      "construction": {
+        "coordinates": "target Gaussian quantiles from Halton bases2/3, algebraically centered and covariance-normalized independently for each component",
+        "fitting_updates": 0,
+        "generator_map": "G(z)=(z0,z1), encoded in original64x2 LeakyReLU model; latent axes2/3 are zero",
+        "law_limit": "Finite quadrature convolved with the actual source-derived DV12/feature-cell kernel, not an exact continuous Gaussian mixture law",
+        "mass_quantization_tv": 0.0,
+        "row_masses": [
+          0.5,
+          0.5
+        ],
+        "rows_per_component": [
+          128,
+          128
+        ],
+        "target_masses": [
+          0.5,
+          0.5
+        ],
+        "type": "deterministic_gaussian_point_quadrature"
+      },
+      "family": "e22",
+      "fitting_updates": 0,
+      "lifecycle": {
+        "backend_selection": null,
+        "begin_source_real_step": 1,
+        "completed_steps": 0,
+        "controller_after": {
+          "alignment": 0.0,
+          "closed": false,
+          "data_drive": 0.0,
+          "data_memory": 0.0,
+          "data_score": 0.0,
+          "fast_mean_variance": null,
+          "fast_reference": null,
+          "game_ratio": 1.0,
+          "game_trust": 1.0,
+          "last_cosine": 0.0,
+          "latent_applications": [],
+          "latent_bandwidth": [
+            0.2576940953731537,
+            0.0625,
+            0.0,
+            0.0
+          ],
+          "location": null,
+          "mean_covariance": null,
+          "mobility": 0.995,
+          "payoff_error": 0.0,
+          "previous_gradient": null,
+          "projection": null,
+          "reference": null,
+          "reopens": 0,
+          "scale": null,
+          "slow_mean_variance": null,
+          "updates": 1,
+          "variance": null,
+          "variant": "dv12"
+        },
+        "controller_before": {
+          "alignment": 0.0,
+          "closed": false,
+          "data_drive": 0.0,
+          "data_memory": 0.0,
+          "data_score": 0.0,
+          "fast_mean_variance": null,
+          "fast_reference": null,
+          "game_ratio": 1.0,
+          "game_trust": 1.0,
+          "last_cosine": 0.0,
+          "latent_applications": [],
+          "latent_bandwidth": [
+            0.2576940953731537,
+            0.0625,
+            0.0,
+            0.0
+          ],
+          "location": null,
+          "mean_covariance": null,
+          "mobility": 1.0,
+          "payoff_error": 0.0,
+          "previous_gradient": null,
+          "projection": null,
+          "reference": null,
+          "reopens": 0,
+          "scale": null,
+          "slow_mean_variance": null,
+          "updates": 0,
+          "variance": null,
+          "variant": "dv12"
+        },
+        "prelude_count": 1,
+        "prelude_scope": "Source first real batch advances the fixture data stream and policy/controller/reservoir metadata. abort_step releases phase bookkeeping without undoing these observations. No model or optimizer step.",
+        "served_source": "fast"
+      },
+      "negative_control": {
+        "failed_bounds": [
+          "sw1_normalized <= 0.18",
+          "component_covariance_error <= 0.85",
+          "component_min_eigen_ratio >= 0.15",
+          "projection_ks <= 0.06"
+        ],
+        "label": "means-only unperturbed witness; supplied-array gate calibration, not the public sampler",
+        "metrics": {
+          "component_core_covariance_error": 1.0,
+          "component_core_min_eigen_ratio": 0.0,
+          "component_covariance_error": 1.0,
+          "component_min_eigen_ratio": 0.0,
+          "covariance_error": 0.07751994580030441,
+          "hq": 1.0,
+          "mass_tv": 0.0,
+          "max_component_spill": 0.0,
+          "mean_error": 0.006435361225157976,
+          "min_mass_ratio": 1.0,
+          "projection_ks": 0.4999999999999999,
+          "resolved_core_covariance_error": 1.0,
+          "resolved_core_min_eigen_ratio": 0.0,
+          "resolved_max_component_spill": 0.0,
+          "sample_count": 4096,
+          "sw1_normalized": 0.18255409830770597,
+          "target_scale": 1.0555585622787476
+        },
+        "passed": false
+      },
+      "observations": [
+        {
+          "completed_steps": 0,
+          "evaluation_seed": 34002,
+          "failed_bounds": [],
+          "metrics": {
+            "component_core_covariance_error": 0.05791402608156204,
+            "component_core_min_eigen_ratio": 0.9588383436203003,
+            "component_covariance_error": 0.05791402608156204,
+            "component_min_eigen_ratio": 0.9588383436203003,
+            "covariance_error": 0.012864907272160053,
+            "hq": 0.99658203125,
+            "mass_tv": 0.006591796875,
+            "max_component_spill": 0.003958436194807291,
+            "mean_error": 0.011877377517521381,
+            "min_mass_ratio": 0.98681640625,
+            "projection_ks": 0.029704114331097542,
+            "resolved_core_covariance_error": 0.05791402608156204,
+            "resolved_core_min_eigen_ratio": 0.9588383436203003,
+            "resolved_max_component_spill": 0.003958436194807291,
+            "sample_count": 4096,
+            "sw1_normalized": 0.013401737397352153,
+            "target_scale": 1.0555585622787476
+          },
+          "passed": true,
+          "samples_key": "samples"
+        }
+      ],
+      "observer_purity": {
+        "fixture_full_state_unchanged": true,
+        "global_torch_rng_unchanged": true,
+        "optimizer_states_empty": true
+      },
+      "ordinary_initialized_model_sha256": "3e8ae227e97f8e7f4e4fb27c91cefeff145a5af0265ac6abaa8364c4a9e33b03",
+      "original_full_horizon": 1200,
+      "public_api": [
+        "api_contract.build",
+        "GANTrainer",
+        "UpdatePolicy.begin_step",
+        "UpdatePolicy.abort_step",
+        "GANTrainer.sample",
+        "UpdatePolicy.served_model",
+        "ServedModel.sample"
+      ],
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": true,
+        "batch_size": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "birth_death_feature_scale": "std",
+        "birth_death_isolation": true,
+        "birth_death_space": "critic",
+        "conditioning": "scalar",
+        "continuous_policy": "dv12",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.006375,
+        "lr_anneal_start": 0.6,
+        "lr_control": "stationarity",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "name": "e22",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 256,
+        "observation_sigma": 0.03,
+        "output_noise_mode": "learnable",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": true,
+        "prior_betas": null,
+        "prior_kind": "particles",
+        "prior_lr_mult": 1.0,
+        "prior_reg": 0.05,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_coeff": 3.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "release",
+        "reopen_signal": "optimizer",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": true,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "scaled",
+        "row_policy": "independent",
+        "serve_average": 4.0,
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "table_release_rule": "anchor",
+        "total_steps": null,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 4
+      },
+      "recipe_overrides": {
+        "lr": 0.006375,
+        "prior_lr_mult": 1.0
+      },
+      "served_observation": {
+        "failed_bounds": [],
+        "metrics": {
+          "component_core_covariance_error": 0.05791402608156204,
+          "component_core_min_eigen_ratio": 0.9588383436203003,
+          "component_covariance_error": 0.05791402608156204,
+          "component_min_eigen_ratio": 0.9588383436203003,
+          "covariance_error": 0.012864907272160053,
+          "hq": 0.99658203125,
+          "mass_tv": 0.006591796875,
+          "max_component_spill": 0.003958436194807291,
+          "mean_error": 0.011877377517521381,
+          "min_mass_ratio": 0.98681640625,
+          "projection_ks": 0.029704114331097542,
+          "resolved_core_covariance_error": 0.05791402608156204,
+          "resolved_core_min_eigen_ratio": 0.9588383436203003,
+          "resolved_max_component_spill": 0.003958436194807291,
+          "sample_count": 4096,
+          "sw1_normalized": 0.013401737397352153,
+          "target_scale": 1.0555585622787476
+        },
+        "passed": true,
+        "same_seed_public_samples_equal": true,
+        "samples_key": "served_samples"
+      },
+      "status": "SUPPORTED",
+      "training_updates": 0
+    },
+    {
+      "artifacts": {
+        "samples": {
+          "path": "/ml2/hypergan/toy-policy-vector-capacity-conformity-20261002/e22/api-vector-unequal-mass/samples.npz",
+          "sha256": "432763c745c1abde8f8a20cdc6bd488bab86c56f978856c4aa71853ca8101ddb"
+        },
+        "state": {
+          "path": "/ml2/hypergan/toy-policy-vector-capacity-conformity-20261002/e22/api-vector-unequal-mass/state.pt",
+          "sha256": "f0f7d67620b02f03d2cda45982402a9d0c2070cef892151519703c472b826483"
+        }
+      },
+      "bindings": {
+        "case_sha256": "e29a36b2461a986a28ca950df869a4926f258b2bfca32bd46bc8b2188aebf32e",
+        "preset_sha256": "67f133d203beac5abd68ee2ca2843655e684e3e193e368787e6d1866790200b6",
+        "sampling_sha256": "97ab90c848ba60e67c35052bd3c219effa557c76d54d22427c50417de5e4db69",
+        "source_files_sha256": {
+          "benchmarks/toy100/__init__.py": "f10bbdfb010d90379c9145f31b499c7c2e878d0ad70291ae3bd6104903852ddb",
+          "benchmarks/toy100/__main__.py": "165ce04f2546dbf07ec68ec71032521db3a2abb50df8c70982567a33c03d625b",
+          "benchmarks/toy100/accuracy.py": "ee5c62049f8cdceb3d93b6d792cbaa96c815e12b3ce79ffaed244fb15a44fed2",
+          "benchmarks/toy100/accuracy_evidence.py": "654adde5ee19915bc9eb630d754f2a4c0282d694252df7918bae10f542904d39",
+          "benchmarks/toy100/accuracy_gate.py": "e66ede95d4b80eedd832a102841c2b0a5d6d710f646bfa34dc00647dc0ab3abe",
+          "benchmarks/toy100/config.py": "a11079bac3e134510e2343f12f45c541e56ace1d02690a35cec679405bcc40c3",
+          "benchmarks/toy100/constraint_screen.py": "6fd92211fee23cb5f2c7bb6880ee147656fff24efdb0bdb8b274893c6f6523f9",
+          "benchmarks/toy100/continuous_probe.py": "972405ea73644c2d189a4e243a79146f3cf8295c2a2979c30a277b2a54ff4541",
+          "benchmarks/toy100/device.py": "7fa0f53db44e8824d3497b471e9fe8db56cbf8b4e02ddf997f65beed63f81911",
+          "benchmarks/toy100/gate.py": "2ddadf56a4ccd7645c8b4e391373818b1113fb6113a9c691310fb162684058e6",
+          "benchmarks/toy100/metrics.py": "a7fbef19082f8470eb392948da52a336a90a3e99c6b3b893343a9e75bcda9c7b",
+          "benchmarks/toy100/models.py": "75f33ad0e100930631da2a86a9c0312f6ae02afe6c851d940c7cf44e41dede6a",
+          "benchmarks/toy100/native_models.py": "f1fc3a17844f37ddd071ea5d4867d636009e88545d60641fd6b6a05ee6298aea",
+          "benchmarks/toy100/problems.py": "2581374d451ed9147c031dfcdfbe9e2eea83e41ba49c2b8945b6e729ede26c9d",
+          "benchmarks/toy100/render.py": "4944a36e19c6a0d75ab53c5c4cc650cc7d963d6fb6e31cf64a3da9a3796f538d",
+          "benchmarks/toy100/schedule.py": "38f41fd4f428ec7cf73223ea0fdf148ac32cdcdbf780b61cf2a5166baf0b8803",
+          "benchmarks/toy100/search.py": "83076f0d9b4155ea7c0e504e0433a75c9f5080069f12d9ce226317421d8a03c6",
+          "benchmarks/toy100/train.py": "64ad54128085ab684a77ecb155ae449d95ab326775e13b925cfb783e53c3f610",
+          "benchmarks/toy100/warm_equilibrium_probe.py": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
+          "benchmarks/toy_audit/api_contract.py": "2d23aacfb6107f1535ed04ea0d5bb67d8f33a260ac1aca9e1d1734bfaf0f2e28",
+          "benchmarks/toy_audit/api_vectors.py": "9707af96fa43f76fad5481b6d6ec76e317957ec8e309ea96cc079ee95c2058af",
+          "benchmarks/toy_audit/definition_quality.py": "42d835ab7a0937a6c3759dd719691c721663b7857cb990405253e90f7fbd4cc9",
+          "benchmarks/toy_audit/vector_quality.py": "8a333bfceb71e311875b8576260c362a66a643c99d3849e6792a10e805de67d9",
+          "benchmarks/transfer_suite/stress_tasks.py": "3342e717db338cb6b7ebf5a95c01c51e4be855a564490f34f240b2a0b2e8c7e4",
+          "benchmarks/transfer_suite/vector_tasks.py": "3ee4eb27759f61a430029c80b7772cac3dca2fb2ac84919ace0db94efca1e0b0",
+          "lib/toy_models.py": "70f32797882de0dc88085afcf5e05821b65eb5f248c9690818a2494225d782a3",
+          "particlegan/__init__.py": "b56efa562acc551d639548c299002e2cd76338b3fd7062699780add51f4f5e8c",
+          "particlegan/_qr.py": "b59cd62cc27ed557b41b2d17ed86ed578c762a3a8a392d63731a5a3b2b018916",
+          "particlegan/anchor_birth.py": "aa50983d8b61304acf4e1138f16fd4784798983df91e931863bcacd3b511f76f",
+          "particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+          "particlegan/birth_death.py": "b14c50c611a8cf188347e391739fca50a5171200eb6be90e4e3d1509d64e47ed",
+          "particlegan/birth_phase.py": "5ff929e5e9858aa24c4cc2f8999b5d0603e25e42ca3844d1da4cc28b1981d3d7",
+          "particlegan/capabilities.py": "39df9c67dbedf612740057e5fa743bc724678a1bc323d1f7cf550b37c0c01177",
+          "particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+          "particlegan/continuous.py": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41",
+          "particlegan/diffusion.py": "19c3aa8772703891551b9122fde8e74c07996f779892b7cb6be09553691efa61",
+          "particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+          "particlegan/feature_cells.py": "e0ea05f61abd7845c7437eed9a79c3a2511d5551ff04f4e619b6b9c8992e221a",
+          "particlegan/feature_policy.py": "de1a50f70a37d4c9174c8850ce3eac2a2597ed01f19fc4fe1a2ce0ec3176a8b2",
+          "particlegan/feature_reference.py": "58e076e9e04600be25e28afafc537a340de727371f4acbbfb2b7dd8bebac18b1",
+          "particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+          "particlegan/grad_regularizers.py": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747",
+          "particlegan/init.py": "e15d4de01eb49f7097bc249abacab907ff067385412346f54ab0d510cb8649d0",
+          "particlegan/k3p.py": "200ead2c27ab0b2aa6068f1b1b1b5c826b8125aa8602bfec08b31aaa2894401c",
+          "particlegan/ka2.py": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703",
+          "particlegan/mean_transport.py": "57a68e0a65c5424a4460f65002f3862a69e90af330a4d47c700dc773683a2c06",
+          "particlegan/output_moments.py": "dcf3e27228d2c3c9738e473c5b22ee9e6d5047ddcd60c538b66526adb53ef188",
+          "particlegan/particle_prior.py": "0220878bebea227da63abbf9f5b1ebdabdc6aea54fd2332fd2cab02ed734238f",
+          "particlegan/policy.py": "8370e36b5b93afe95ae24d2b385aac8735a587f86ef2b87ed369ecfdfcb6fec5",
+          "particlegan/population_continuity.py": "378cd75cca45bc8da4da33e686a12cf99df853042687978314e37c532bc17fe6",
+          "particlegan/recipe_schedules.py": "d05e459b3e9e5f938b01a854273b74343f2b6d382bec4ae5151dd1f1cd032500",
+          "particlegan/recipes.py": "1a7f9df746e242a2774068c819d70d50cd72dc4f7f6b22b0bd13e1345dcf8ab2",
+          "particlegan/routing.py": "63249d808fccb3d4e113eb1d638a245ee665c3cade20a1542bb706f316b4abcc",
+          "particlegan/row_evidence.py": "78be40141ef3946860458e9842159be9321f05c217a4800dd4134113b6eba93e",
+          "particlegan/training.py": "7dadc219135bc3e6bf657bfe9bc3fa81dd14d4b2a31c70d5ff61e2941db35c94",
+          "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+        }
+      },
+      "case_id": "api-vector-unequal-mass",
+      "claim_scope": "Necessary numeric snapshot capacity only in the actual full-horizon public policy and selected backend. One real-data lifecycle prelude/abort, zero forward/backward/optimizer updates; no training reachability or default/Forge qualification. Finalsource conformity restores the exact original public checkpoint and reproduces original actual samples/targets bitwise; no repeated lifecycle prelude or parameter edits.",
+      "completed_steps": 0,
+      "conformity": {
+        "change_scope": "Additional validate_recipe_overrides rejection for api-stress-* callers. Exact three selected cases, public package/preset/sampling/scorers unchanged. Original capture is preserved; this is an actual finalsource public restore/sample check.",
+        "fitting_updates": 0,
+        "new_lifecycle_preludes": 0,
+        "original_bindings_location": "Original immutable capture receipt and original_compact_packet; exact source differences retained in this record.",
+        "original_receipt": "/ml2/hypergan/toy-policy-vector-capacity-round1-20261002/receipt.json",
+        "original_receipt_sha256": "bdcb537268f9d09d8068ebe052f7644f7c2de888ecb82539dd76af082cfdadd4",
+        "parity": {
+          "current_samples_equal_original": true,
+          "current_served_samples_equal_original": true,
+          "current_targets_equal_original": true,
+          "fixture_and_served_samples_equal": true,
+          "observer_full_state_unchanged": true,
+          "observer_global_torch_rng_unchanged": true,
+          "restored_state_digest_equal": true
+        },
+        "retained_original_artifacts": {
+          "samples": {
+            "path": "/ml2/hypergan/toy-policy-vector-capacity-round1-20261002/e22/api-vector-unequal-mass/samples.npz",
+            "sha256": "f36df89766ad0c9d039580dfb7a668593bc0e44aa08ca1cbd4e2a0379c4d5041"
+          },
+          "state": {
+            "path": "/ml2/hypergan/toy-policy-vector-capacity-round1-20261002/e22/api-vector-unequal-mass/state.pt",
+            "sha256": "783a6a7460acf5a9bfd0eeb1927d61d9fc6eb586d2dbfa8a28c28518dbc09109"
+          }
+        },
+        "source_differences": {
+          "benchmarks/toy_audit/api_contract.py": {
+            "current": "2d23aacfb6107f1535ed04ea0d5bb67d8f33a260ac1aca9e1d1734bfaf0f2e28",
+            "original": "0c79eae1dbd489553bdce30395b51476c247d657c742351c074315946afb71e2"
+          }
+        },
+        "state_digest": "271085bcf892d8dc6ed832a4696f35e7f6da8cfb3af8b08eceea239fbe74db33",
+        "training_updates": 0
+      },
+      "construction": {
+        "coordinates": "target Gaussian quantiles from Halton bases2/3, algebraically centered and covariance-normalized independently for each component",
+        "fitting_updates": 0,
+        "generator_map": "G(z)=(z0,z1), encoded in original64x2 LeakyReLU model; latent axes2/3 are zero",
+        "law_limit": "Finite quadrature convolved with the actual source-derived DV12/feature-cell kernel, not an exact continuous Gaussian mixture law",
+        "mass_quantization_tv": 0.0015624999999999858,
+        "row_masses": [
+          0.55078125,
+          0.30078125,
+          0.12890625,
+          0.01953125
+        ],
+        "rows_per_component": [
+          141,
+          77,
+          33,
+          5
+        ],
+        "target_masses": [
+          0.55,
+          0.3,
+          0.13,
+          0.02
+        ],
+        "type": "deterministic_gaussian_point_quadrature"
+      },
+      "family": "e22",
+      "fitting_updates": 0,
+      "lifecycle": {
+        "backend_selection": null,
+        "begin_source_real_step": 1,
+        "completed_steps": 0,
+        "controller_after": {
+          "alignment": 0.0,
+          "closed": false,
+          "data_drive": 0.0,
+          "data_memory": 0.0,
+          "data_score": 0.0,
+          "fast_mean_variance": null,
+          "fast_reference": null,
+          "game_ratio": 1.0,
+          "game_trust": 1.0,
+          "last_cosine": 0.0,
+          "latent_applications": [],
+          "latent_bandwidth": [
+            0.2704203128814697,
+            0.35282889008522034,
+            0.0,
+            0.0
+          ],
+          "location": null,
+          "mean_covariance": null,
+          "mobility": 0.995,
+          "payoff_error": 0.0,
+          "previous_gradient": null,
+          "projection": null,
+          "reference": null,
+          "reopens": 0,
+          "scale": null,
+          "slow_mean_variance": null,
+          "updates": 1,
+          "variance": null,
+          "variant": "dv12"
+        },
+        "controller_before": {
+          "alignment": 0.0,
+          "closed": false,
+          "data_drive": 0.0,
+          "data_memory": 0.0,
+          "data_score": 0.0,
+          "fast_mean_variance": null,
+          "fast_reference": null,
+          "game_ratio": 1.0,
+          "game_trust": 1.0,
+          "last_cosine": 0.0,
+          "latent_applications": [],
+          "latent_bandwidth": [
+            0.2704203128814697,
+            0.35282889008522034,
+            0.0,
+            0.0
+          ],
+          "location": null,
+          "mean_covariance": null,
+          "mobility": 1.0,
+          "payoff_error": 0.0,
+          "previous_gradient": null,
+          "projection": null,
+          "reference": null,
+          "reopens": 0,
+          "scale": null,
+          "slow_mean_variance": null,
+          "updates": 0,
+          "variance": null,
+          "variant": "dv12"
+        },
+        "prelude_count": 1,
+        "prelude_scope": "Source first real batch advances the fixture data stream and policy/controller/reservoir metadata. abort_step releases phase bookkeeping without undoing these observations. No model or optimizer step.",
+        "served_source": "fast"
+      },
+      "negative_control": {
+        "failed_bounds": [
+          "resolved_core_covariance_error <= 0.5",
+          "resolved_core_min_eigen_ratio >= 0.15",
+          "projection_ks <= 0.06"
+        ],
+        "label": "means-only unperturbed witness; supplied-array gate calibration, not the public sampler",
+        "metrics": {
+          "component_core_covariance_error": 1.0,
+          "component_core_min_eigen_ratio": 0.0,
+          "component_covariance_error": 1.0,
+          "component_min_eigen_ratio": 0.0,
+          "covariance_error": 0.02386072650551796,
+          "hq": 1.0,
+          "mass_tv": 0.001562485471367836,
+          "max_component_spill": 0.0,
+          "mean_error": 0.018637655302882195,
+          "min_mass_ratio": 0.9765625,
+          "projection_ks": 0.42656249999999996,
+          "resolved_core_covariance_error": 1.0,
+          "resolved_core_min_eigen_ratio": 0.0,
+          "resolved_max_component_spill": 0.0,
+          "sample_count": 4096,
+          "sw1_normalized": 0.08448093703045569,
+          "target_scale": 1.7593294382095337
+        },
+        "passed": false
+      },
+      "observations": [
+        {
+          "completed_steps": 0,
+          "evaluation_seed": 34002,
+          "failed_bounds": [],
+          "metrics": {
+            "component_core_covariance_error": 0.17447223793715239,
+            "component_core_min_eigen_ratio": 0.8939907550811768,
+            "component_covariance_error": 0.17447223793715239,
+            "component_min_eigen_ratio": 0.8939907550811768,
+            "covariance_error": 0.04326790198683739,
+            "hq": 0.99560546875,
+            "mass_tv": 0.009208986535668373,
+            "max_component_spill": 0.006694560870528221,
+            "mean_error": 0.027421386912465096,
+            "min_mass_ratio": 0.9521484375,
+            "projection_ks": 0.023378500911634625,
+            "resolved_core_covariance_error": 0.07850593701004982,
+            "resolved_core_min_eigen_ratio": 0.8939907550811768,
+            "resolved_max_component_spill": 0.006694560870528221,
+            "sample_count": 4096,
+            "sw1_normalized": 0.021337548044917023,
+            "target_scale": 1.7593294382095337
+          },
+          "passed": true,
+          "samples_key": "samples"
+        }
+      ],
+      "observer_purity": {
+        "fixture_full_state_unchanged": true,
+        "global_torch_rng_unchanged": true,
+        "optimizer_states_empty": true
+      },
+      "ordinary_initialized_model_sha256": "3e8ae227e97f8e7f4e4fb27c91cefeff145a5af0265ac6abaa8364c4a9e33b03",
+      "original_full_horizon": 1200,
+      "public_api": [
+        "api_contract.build",
+        "GANTrainer",
+        "UpdatePolicy.begin_step",
+        "UpdatePolicy.abort_step",
+        "GANTrainer.sample",
+        "UpdatePolicy.served_model",
+        "ServedModel.sample"
+      ],
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": true,
+        "batch_size": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "birth_death_feature_scale": "std",
+        "birth_death_isolation": true,
+        "birth_death_space": "critic",
+        "conditioning": "scalar",
+        "continuous_policy": "dv12",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.006375,
+        "lr_anneal_start": 0.6,
+        "lr_control": "stationarity",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "name": "e22",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 256,
+        "observation_sigma": 0.03,
+        "output_noise_mode": "learnable",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": true,
+        "prior_betas": null,
+        "prior_kind": "particles",
+        "prior_lr_mult": 1.0,
+        "prior_reg": 0.05,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_coeff": 3.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "release",
+        "reopen_signal": "optimizer",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": true,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "scaled",
+        "row_policy": "independent",
+        "serve_average": 4.0,
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "table_release_rule": "anchor",
+        "total_steps": null,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 4
+      },
+      "recipe_overrides": {
+        "lr": 0.006375,
+        "prior_lr_mult": 1.0
+      },
+      "served_observation": {
+        "failed_bounds": [],
+        "metrics": {
+          "component_core_covariance_error": 0.17447223793715239,
+          "component_core_min_eigen_ratio": 0.8939907550811768,
+          "component_covariance_error": 0.17447223793715239,
+          "component_min_eigen_ratio": 0.8939907550811768,
+          "covariance_error": 0.04326790198683739,
+          "hq": 0.99560546875,
+          "mass_tv": 0.009208986535668373,
+          "max_component_spill": 0.006694560870528221,
+          "mean_error": 0.027421386912465096,
+          "min_mass_ratio": 0.9521484375,
+          "projection_ks": 0.023378500911634625,
+          "resolved_core_covariance_error": 0.07850593701004982,
+          "resolved_core_min_eigen_ratio": 0.8939907550811768,
+          "resolved_max_component_spill": 0.006694560870528221,
+          "sample_count": 4096,
+          "sw1_normalized": 0.021337548044917023,
+          "target_scale": 1.7593294382095337
+        },
+        "passed": true,
+        "same_seed_public_samples_equal": true,
+        "samples_key": "served_samples"
+      },
+      "status": "SUPPORTED",
+      "training_updates": 0
+    },
+    {
+      "artifacts": {
+        "samples": {
+          "path": "/ml2/hypergan/toy-policy-vector-capacity-conformity-20261002/e22/api-vector-anisotropic/samples.npz",
+          "sha256": "b7108d2561edb5a8d05ec51ed1ec23c3507f214d635f27a14b172419f3c5bc00"
+        },
+        "state": {
+          "path": "/ml2/hypergan/toy-policy-vector-capacity-conformity-20261002/e22/api-vector-anisotropic/state.pt",
+          "sha256": "2f12ab343c3dd9b8ecda8accbb9000fd7712b76b04cb4acb0544eb950325461f"
+        }
+      },
+      "bindings": {
+        "case_sha256": "2ec941011f8398672ce85b1d4df41c6e22dce2e0f98354a75f1d9a6794d4e1b6",
+        "preset_sha256": "67f133d203beac5abd68ee2ca2843655e684e3e193e368787e6d1866790200b6",
+        "sampling_sha256": "97ab90c848ba60e67c35052bd3c219effa557c76d54d22427c50417de5e4db69",
+        "source_files_sha256": {
+          "benchmarks/toy100/__init__.py": "f10bbdfb010d90379c9145f31b499c7c2e878d0ad70291ae3bd6104903852ddb",
+          "benchmarks/toy100/__main__.py": "165ce04f2546dbf07ec68ec71032521db3a2abb50df8c70982567a33c03d625b",
+          "benchmarks/toy100/accuracy.py": "ee5c62049f8cdceb3d93b6d792cbaa96c815e12b3ce79ffaed244fb15a44fed2",
+          "benchmarks/toy100/accuracy_evidence.py": "654adde5ee19915bc9eb630d754f2a4c0282d694252df7918bae10f542904d39",
+          "benchmarks/toy100/accuracy_gate.py": "e66ede95d4b80eedd832a102841c2b0a5d6d710f646bfa34dc00647dc0ab3abe",
+          "benchmarks/toy100/config.py": "a11079bac3e134510e2343f12f45c541e56ace1d02690a35cec679405bcc40c3",
+          "benchmarks/toy100/constraint_screen.py": "6fd92211fee23cb5f2c7bb6880ee147656fff24efdb0bdb8b274893c6f6523f9",
+          "benchmarks/toy100/continuous_probe.py": "972405ea73644c2d189a4e243a79146f3cf8295c2a2979c30a277b2a54ff4541",
+          "benchmarks/toy100/device.py": "7fa0f53db44e8824d3497b471e9fe8db56cbf8b4e02ddf997f65beed63f81911",
+          "benchmarks/toy100/gate.py": "2ddadf56a4ccd7645c8b4e391373818b1113fb6113a9c691310fb162684058e6",
+          "benchmarks/toy100/metrics.py": "a7fbef19082f8470eb392948da52a336a90a3e99c6b3b893343a9e75bcda9c7b",
+          "benchmarks/toy100/models.py": "75f33ad0e100930631da2a86a9c0312f6ae02afe6c851d940c7cf44e41dede6a",
+          "benchmarks/toy100/native_models.py": "f1fc3a17844f37ddd071ea5d4867d636009e88545d60641fd6b6a05ee6298aea",
+          "benchmarks/toy100/problems.py": "2581374d451ed9147c031dfcdfbe9e2eea83e41ba49c2b8945b6e729ede26c9d",
+          "benchmarks/toy100/render.py": "4944a36e19c6a0d75ab53c5c4cc650cc7d963d6fb6e31cf64a3da9a3796f538d",
+          "benchmarks/toy100/schedule.py": "38f41fd4f428ec7cf73223ea0fdf148ac32cdcdbf780b61cf2a5166baf0b8803",
+          "benchmarks/toy100/search.py": "83076f0d9b4155ea7c0e504e0433a75c9f5080069f12d9ce226317421d8a03c6",
+          "benchmarks/toy100/train.py": "64ad54128085ab684a77ecb155ae449d95ab326775e13b925cfb783e53c3f610",
+          "benchmarks/toy100/warm_equilibrium_probe.py": "528552f3faa0624938de7403942cdca933a0786c2f5b12beb71798d8ddec1ab5",
+          "benchmarks/toy_audit/api_contract.py": "2d23aacfb6107f1535ed04ea0d5bb67d8f33a260ac1aca9e1d1734bfaf0f2e28",
+          "benchmarks/toy_audit/api_vectors.py": "9707af96fa43f76fad5481b6d6ec76e317957ec8e309ea96cc079ee95c2058af",
+          "benchmarks/toy_audit/definition_quality.py": "42d835ab7a0937a6c3759dd719691c721663b7857cb990405253e90f7fbd4cc9",
+          "benchmarks/toy_audit/vector_quality.py": "8a333bfceb71e311875b8576260c362a66a643c99d3849e6792a10e805de67d9",
+          "benchmarks/transfer_suite/stress_tasks.py": "3342e717db338cb6b7ebf5a95c01c51e4be855a564490f34f240b2a0b2e8c7e4",
+          "benchmarks/transfer_suite/vector_tasks.py": "3ee4eb27759f61a430029c80b7772cac3dca2fb2ac84919ace0db94efca1e0b0",
+          "lib/toy_models.py": "70f32797882de0dc88085afcf5e05821b65eb5f248c9690818a2494225d782a3",
+          "particlegan/__init__.py": "b56efa562acc551d639548c299002e2cd76338b3fd7062699780add51f4f5e8c",
+          "particlegan/_qr.py": "b59cd62cc27ed557b41b2d17ed86ed578c762a3a8a392d63731a5a3b2b018916",
+          "particlegan/anchor_birth.py": "aa50983d8b61304acf4e1138f16fd4784798983df91e931863bcacd3b511f76f",
+          "particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+          "particlegan/birth_death.py": "b14c50c611a8cf188347e391739fca50a5171200eb6be90e4e3d1509d64e47ed",
+          "particlegan/birth_phase.py": "5ff929e5e9858aa24c4cc2f8999b5d0603e25e42ca3844d1da4cc28b1981d3d7",
+          "particlegan/capabilities.py": "39df9c67dbedf612740057e5fa743bc724678a1bc323d1f7cf550b37c0c01177",
+          "particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+          "particlegan/continuous.py": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41",
+          "particlegan/diffusion.py": "19c3aa8772703891551b9122fde8e74c07996f779892b7cb6be09553691efa61",
+          "particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+          "particlegan/feature_cells.py": "e0ea05f61abd7845c7437eed9a79c3a2511d5551ff04f4e619b6b9c8992e221a",
+          "particlegan/feature_policy.py": "de1a50f70a37d4c9174c8850ce3eac2a2597ed01f19fc4fe1a2ce0ec3176a8b2",
+          "particlegan/feature_reference.py": "58e076e9e04600be25e28afafc537a340de727371f4acbbfb2b7dd8bebac18b1",
+          "particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+          "particlegan/grad_regularizers.py": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747",
+          "particlegan/init.py": "e15d4de01eb49f7097bc249abacab907ff067385412346f54ab0d510cb8649d0",
+          "particlegan/k3p.py": "200ead2c27ab0b2aa6068f1b1b1b5c826b8125aa8602bfec08b31aaa2894401c",
+          "particlegan/ka2.py": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703",
+          "particlegan/mean_transport.py": "57a68e0a65c5424a4460f65002f3862a69e90af330a4d47c700dc773683a2c06",
+          "particlegan/output_moments.py": "dcf3e27228d2c3c9738e473c5b22ee9e6d5047ddcd60c538b66526adb53ef188",
+          "particlegan/particle_prior.py": "0220878bebea227da63abbf9f5b1ebdabdc6aea54fd2332fd2cab02ed734238f",
+          "particlegan/policy.py": "8370e36b5b93afe95ae24d2b385aac8735a587f86ef2b87ed369ecfdfcb6fec5",
+          "particlegan/population_continuity.py": "378cd75cca45bc8da4da33e686a12cf99df853042687978314e37c532bc17fe6",
+          "particlegan/recipe_schedules.py": "d05e459b3e9e5f938b01a854273b74343f2b6d382bec4ae5151dd1f1cd032500",
+          "particlegan/recipes.py": "1a7f9df746e242a2774068c819d70d50cd72dc4f7f6b22b0bd13e1345dcf8ab2",
+          "particlegan/routing.py": "63249d808fccb3d4e113eb1d638a245ee665c3cade20a1542bb706f316b4abcc",
+          "particlegan/row_evidence.py": "78be40141ef3946860458e9842159be9321f05c217a4800dd4134113b6eba93e",
+          "particlegan/training.py": "7dadc219135bc3e6bf657bfe9bc3fa81dd14d4b2a31c70d5ff61e2941db35c94",
+          "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+        }
+      },
+      "case_id": "api-vector-anisotropic",
+      "claim_scope": "Necessary numeric snapshot capacity only in the actual full-horizon public policy and selected backend. One real-data lifecycle prelude/abort, zero forward/backward/optimizer updates; no training reachability or default/Forge qualification. Finalsource conformity restores the exact original public checkpoint and reproduces original actual samples/targets bitwise; no repeated lifecycle prelude or parameter edits.",
+      "completed_steps": 0,
+      "conformity": {
+        "change_scope": "Additional validate_recipe_overrides rejection for api-stress-* callers. Exact three selected cases, public package/preset/sampling/scorers unchanged. Original capture is preserved; this is an actual finalsource public restore/sample check.",
+        "fitting_updates": 0,
+        "new_lifecycle_preludes": 0,
+        "original_bindings_location": "Original immutable capture receipt and original_compact_packet; exact source differences retained in this record.",
+        "original_receipt": "/ml2/hypergan/toy-policy-vector-capacity-round1-20261002/receipt.json",
+        "original_receipt_sha256": "bdcb537268f9d09d8068ebe052f7644f7c2de888ecb82539dd76af082cfdadd4",
+        "parity": {
+          "current_samples_equal_original": true,
+          "current_served_samples_equal_original": true,
+          "current_targets_equal_original": true,
+          "fixture_and_served_samples_equal": true,
+          "observer_full_state_unchanged": true,
+          "observer_global_torch_rng_unchanged": true,
+          "restored_state_digest_equal": true
+        },
+        "retained_original_artifacts": {
+          "samples": {
+            "path": "/ml2/hypergan/toy-policy-vector-capacity-round1-20261002/e22/api-vector-anisotropic/samples.npz",
+            "sha256": "097c6999793a006e88a9884bc2e0562e71aceb3374115d5e86aca82041249dd4"
+          },
+          "state": {
+            "path": "/ml2/hypergan/toy-policy-vector-capacity-round1-20261002/e22/api-vector-anisotropic/state.pt",
+            "sha256": "6627596d1b4d9bfe9a18d5ad4b1e132045a39b00d66918f8f5c3980549ae1fe4"
+          }
+        },
+        "source_differences": {
+          "benchmarks/toy_audit/api_contract.py": {
+            "current": "2d23aacfb6107f1535ed04ea0d5bb67d8f33a260ac1aca9e1d1734bfaf0f2e28",
+            "original": "0c79eae1dbd489553bdce30395b51476c247d657c742351c074315946afb71e2"
+          }
+        },
+        "state_digest": "a69dad2d707ac11db0fb686c7b93ddc6c0996f3c9658256f31816e95075ef829",
+        "training_updates": 0
+      },
+      "construction": {
+        "coordinates": "target Gaussian quantiles from Halton bases2/3, algebraically centered and covariance-normalized independently for each component",
+        "fitting_updates": 0,
+        "generator_map": "G(z)=(z0,z1), encoded in original64x2 LeakyReLU model; latent axes2/3 are zero",
+        "law_limit": "Finite quadrature convolved with the actual source-derived DV12/feature-cell kernel, not an exact continuous Gaussian mixture law",
+        "mass_quantization_tv": 0.0026041666666666574,
+        "row_masses": [
+          0.3359375,
+          0.33203125,
+          0.33203125
+        ],
+        "rows_per_component": [
+          86,
+          85,
+          85
+        ],
+        "target_masses": [
+          0.3333333333333333,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "type": "deterministic_gaussian_point_quadrature"
+      },
+      "family": "e22",
+      "fitting_updates": 0,
+      "lifecycle": {
+        "backend_selection": null,
+        "begin_source_real_step": 1,
+        "completed_steps": 0,
+        "controller_after": {
+          "alignment": 0.0,
+          "closed": false,
+          "data_drive": 0.0,
+          "data_memory": 0.0,
+          "data_score": 0.0,
+          "fast_mean_variance": null,
+          "fast_reference": null,
+          "game_ratio": 1.0,
+          "game_trust": 1.0,
+          "last_cosine": 0.0,
+          "latent_applications": [],
+          "latent_bandwidth": [
+            0.41216039657592773,
+            0.2991708219051361,
+            0.0,
+            0.0
+          ],
+          "location": null,
+          "mean_covariance": null,
+          "mobility": 0.995,
+          "payoff_error": 0.0,
+          "previous_gradient": null,
+          "projection": null,
+          "reference": null,
+          "reopens": 0,
+          "scale": null,
+          "slow_mean_variance": null,
+          "updates": 1,
+          "variance": null,
+          "variant": "dv12"
+        },
+        "controller_before": {
+          "alignment": 0.0,
+          "closed": false,
+          "data_drive": 0.0,
+          "data_memory": 0.0,
+          "data_score": 0.0,
+          "fast_mean_variance": null,
+          "fast_reference": null,
+          "game_ratio": 1.0,
+          "game_trust": 1.0,
+          "last_cosine": 0.0,
+          "latent_applications": [],
+          "latent_bandwidth": [
+            0.41216039657592773,
+            0.2991708219051361,
+            0.0,
+            0.0
+          ],
+          "location": null,
+          "mean_covariance": null,
+          "mobility": 1.0,
+          "payoff_error": 0.0,
+          "previous_gradient": null,
+          "projection": null,
+          "reference": null,
+          "reopens": 0,
+          "scale": null,
+          "slow_mean_variance": null,
+          "updates": 0,
+          "variance": null,
+          "variant": "dv12"
+        },
+        "prelude_count": 1,
+        "prelude_scope": "Source first real batch advances the fixture data stream and policy/controller/reservoir metadata. abort_step releases phase bookkeeping without undoing these observations. No model or optimizer step.",
+        "served_source": "fast"
+      },
+      "negative_control": {
+        "failed_bounds": [
+          "resolved_core_covariance_error <= 0.5",
+          "resolved_core_min_eigen_ratio >= 0.15",
+          "projection_ks <= 0.06"
+        ],
+        "label": "means-only unperturbed witness; supplied-array gate calibration, not the public sampler",
+        "metrics": {
+          "component_core_covariance_error": 1.0,
+          "component_core_min_eigen_ratio": 0.0,
+          "component_covariance_error": 1.0,
+          "component_min_eigen_ratio": 0.0,
+          "covariance_error": 0.025360696017742157,
+          "hq": 1.0,
+          "mass_tv": 0.002604171633720398,
+          "max_component_spill": 0.0,
+          "mean_error": 0.019957583397626877,
+          "min_mass_ratio": 0.99609375,
+          "projection_ks": 0.3346354166666662,
+          "resolved_core_covariance_error": 1.0,
+          "resolved_core_min_eigen_ratio": 0.0,
+          "resolved_max_component_spill": 0.0,
+          "sample_count": 4096,
+          "sw1_normalized": 0.08327591229212869,
+          "target_scale": 2.032285690307617
+        },
+        "passed": false
+      },
+      "observations": [
+        {
+          "completed_steps": 0,
+          "evaluation_seed": 34002,
+          "failed_bounds": [],
+          "metrics": {
+            "component_core_covariance_error": 0.03797081702699264,
+            "component_core_min_eigen_ratio": 0.9416263103485107,
+            "component_covariance_error": 0.03797081702699264,
+            "component_min_eigen_ratio": 0.9416263103485107,
+            "covariance_error": 0.013312996365129948,
+            "hq": 0.98828125,
+            "mass_tv": 0.007731124758720398,
+            "max_component_spill": 0.013254786841571331,
+            "mean_error": 0.015489337034523487,
+            "min_mass_ratio": 0.982177734375,
+            "projection_ks": 0.02297569300737945,
+            "resolved_core_covariance_error": 0.03797081702699264,
+            "resolved_core_min_eigen_ratio": 0.9416263103485107,
+            "resolved_max_component_spill": 0.013254786841571331,
+            "sample_count": 4096,
+            "sw1_normalized": 0.013191690809704431,
+            "target_scale": 2.032285690307617
+          },
+          "passed": true,
+          "samples_key": "samples"
+        }
+      ],
+      "observer_purity": {
+        "fixture_full_state_unchanged": true,
+        "global_torch_rng_unchanged": true,
+        "optimizer_states_empty": true
+      },
+      "ordinary_initialized_model_sha256": "3e8ae227e97f8e7f4e4fb27c91cefeff145a5af0265ac6abaa8364c4a9e33b03",
+      "original_full_horizon": 1200,
+      "public_api": [
+        "api_contract.build",
+        "GANTrainer",
+        "UpdatePolicy.begin_step",
+        "UpdatePolicy.abort_step",
+        "GANTrainer.sample",
+        "UpdatePolicy.served_model",
+        "ServedModel.sample"
+      ],
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": true,
+        "batch_size": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "birth_death_feature_scale": "std",
+        "birth_death_isolation": true,
+        "birth_death_space": "critic",
+        "conditioning": "scalar",
+        "continuous_policy": "dv12",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.006375,
+        "lr_anneal_start": 0.6,
+        "lr_control": "stationarity",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "name": "e22",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 256,
+        "observation_sigma": 0.03,
+        "output_noise_mode": "learnable",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": true,
+        "prior_betas": null,
+        "prior_kind": "particles",
+        "prior_lr_mult": 1.0,
+        "prior_reg": 0.05,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_coeff": 3.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "release",
+        "reopen_signal": "optimizer",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": true,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "scaled",
+        "row_policy": "independent",
+        "serve_average": 4.0,
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "table_release_rule": "anchor",
+        "total_steps": null,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 4
+      },
+      "recipe_overrides": {
+        "lr": 0.006375,
+        "prior_lr_mult": 1.0
+      },
+      "served_observation": {
+        "failed_bounds": [],
+        "metrics": {
+          "component_core_covariance_error": 0.03797081702699264,
+          "component_core_min_eigen_ratio": 0.9416263103485107,
+          "component_covariance_error": 0.03797081702699264,
+          "component_min_eigen_ratio": 0.9416263103485107,
+          "covariance_error": 0.013312996365129948,
+          "hq": 0.98828125,
+          "mass_tv": 0.007731124758720398,
+          "max_component_spill": 0.013254786841571331,
+          "mean_error": 0.015489337034523487,
+          "min_mass_ratio": 0.982177734375,
+          "projection_ks": 0.02297569300737945,
+          "resolved_core_covariance_error": 0.03797081702699264,
+          "resolved_core_min_eigen_ratio": 0.9416263103485107,
+          "resolved_max_component_spill": 0.013254786841571331,
+          "sample_count": 4096,
+          "sw1_normalized": 0.013191690809704431,
+          "target_scale": 2.032285690307617
+        },
+        "passed": true,
+        "same_seed_public_samples_equal": true,
+        "samples_key": "served_samples"
+      },
+      "status": "SUPPORTED",
+      "training_updates": 0
+    }
+  ],
+  "runtime": {
+    "device": "cpu",
+    "numpy": "2.5.2",
+    "python": "3.12.13",
+    "threads": 1,
+    "torch": "2.13.0+cu126"
+  },
+  "schema": "particlegan_policy_vector_representation_conformity_compact_round1_v1",
+  "script": "/ml2/hypergan/toy-policy-vector-capacity-conformity-20261002/source.py",
+  "script_sha256": "9b6f50b34e6394323ffffd4d411ccb31de382c0fc1cd146e4dd68d36b157a9c0",
+  "seed": 24002,
+  "training_updates": 0
+}

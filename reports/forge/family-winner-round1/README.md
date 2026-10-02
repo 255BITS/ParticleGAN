@@ -35,7 +35,7 @@ half-rate critics fail the earlier movement gate; two other full-rate critics
 fail trajectory identity. R1/R2's best config learns trajectory identity
 (MSE1.31e-6) but loses residual correspondence. Another R1/R2 trial passes its
 final movement bounds while having only a two-observation passing suffix,
-short of the required five. These are measured failure mechanisms and failed
+short of the required five. These are measured numerical failure signatures and failed
 bounds, not causal claims about an isolated optimizer knob.
 
 The round consumed **1,587.149 paid task seconds** in156 certified attempts.

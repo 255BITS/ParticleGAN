@@ -111,7 +111,8 @@ def validate_recipe_overrides(case, recipe_name, recipe_overrides):
     if forbidden:
         raise ValueError(f"non-tuning Recipe overrides are forbidden: {sorted(forbidden)}")
     if (case.get("provider") not in {"api_vectors", "api_images"} or case.get("query")
-            or case.get("caller_owned") or case.get("penalty_arm") or case.get("kind") == "word"):
+            or case.get("caller_owned") or case.get("penalty_arm") or case.get("kind") == "word"
+            or case.get("id", "").startswith("api-stress-")):
         raise UnsupportedRecipeOverrides(f"{case['id']}: tuning overrides are unsupported for this caller/conditional/stress host")
     result = deepcopy(recipe_overrides)
     get_recipe(recipe_name, **result)  # Public validation before any optimizer construction.
