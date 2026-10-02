@@ -1,0 +1,93 @@
+{
+  "task": "routed_caption_late_phase_preparation_v1",
+  "status": "SOURCE_AND_REDUCED_SOFTWARE_READY; quality not executed",
+  "complete": true,
+  "source_identity": {
+    "examples/e22_routed_caption_late_phase.py": "f4bad83b5ff9944a14c75bcf5d51d82e26fd3ed432a0730122255fffdc313b65",
+    "examples/render_e22_routed_caption_late_phase.py": "61fd56ad58bdbe6b76fe292f57251533e6beef0d493d05dea62124fbe0e0823f",
+    "tests/test_e22_routed_caption_late_phase.py": "8f19fab86157995acdf20f3965e2c963f02c08a9cd39ec984e6ab3afcb5e2a7d",
+    "tests/test_e22_routed_caption_late_phase_renderer.py": "d99a095adaf81043704a01d401e503cd68fe133151f353751c1e77c7a27b236a",
+    "examples/e22_routed_caption_frozen_stats.py": "a8489fc0369bf03bdfe5b8a5bb92c9a7c9b3f66aea83166f5fdd53f8dab99047",
+    "examples/render_e22_routed_caption_frozen_stats.py": "ea369cc340f349f042a498d131429cba75563c03aa9e9e232255ea2c8fb374d9",
+    "tests/test_e22_routed_caption_frozen_stats.py": "707cdb18f8436d4dc0d36e18a664c18684b865cf14d73aaffb8f218cd93caea4",
+    "docs/e22_routed_caption_frozen_stats_profile_v1.json": "3589d8501f6a6f95db9d959f65aa7e6cfe32f32eb53307e4b9b8a76f84824b74",
+    "examples/e22_routed_caption_flow.py": "f868c7cb36db670fc1f08aebeb54e6d863837f8d56e685373e5873b2b4a08e3c",
+    "examples/render_e22_routed_caption_flow.py": "2ec9c596a469269edc54a17b7ca6315af73715d8f849bf027ac39e8e535665e2",
+    "tests/test_e22_routed_caption_flow.py": "ef0e878dc8ebb003e0451863ea6721b1116c5c24835854f9033dbfc3341d93bf",
+    "examples/e22_routed_caption_accuracy.py": "bae0f255d890e49bfbe4602bee7f8e84051b24a3cb0219c13b0a42b25768b8e3",
+    "examples/e22_routed_caption_untied.py": "a35938f51b7974677651d2c05b1aa396896255460e213cf26ccf57409efcdb81",
+    "examples/e22_routed_caption_normalization.py": "7077a03143a8d25577bfb2ed1f167d847e75972131093f9228ca10f6aaca9a0e",
+    "examples/render_e22_routed_caption_untied.py": "18e9c55143e551a2ef961128198ae331f3ea2e3992eb6b1be73bdda333dea77b"
+  },
+  "protocol_sha256": "740f96f96764026cda84f728986e9920007c96a9b948ecc0edbbe0a9a5b05b6b",
+  "imported_native_observed": {
+    "imported_package": "/ml2/hypergan/ParticleGAN-routed-caption-late-phase-develop/particlegan",
+    "python_sha256": "7b814e32627ac5a332637d336ebaa13b6baab0b9373f6841d9a22fb8ab39cde9"
+  },
+  "backend_flags_observed": {
+    "allow_tf32": false,
+    "float32_matmul_precision": "highest",
+    "allow_bf16_reduced_precision_reduction": true
+  },
+  "public_API_identity_contract": "Actual imported package/path hash is observed and source-bound for preparation; reusable CLI has within-run consistency only, no permanent native allowlist.",
+  "software": {
+    "new_cases_passed": 18,
+    "failures": 0,
+    "pytest_seconds": 1.857,
+    "external_process_seconds": 3.7330115591175854,
+    "internal_process_seconds": 3.1752426710445434,
+    "aggregate_budget_seconds": 60,
+    "native_updates": 4,
+    "updates_scope": "One fixed tiny public2+2 fresh-owner replay test; all other initial/native loss/tangent/renderer checks have zero native updates.",
+    "CUDA_initialized": false,
+    "full576host_forwards": 0,
+    "quality_updates": 0,
+    "renderer_executions": 0,
+    "old_test_executions": 0,
+    "no_failed_attempts_or_repeated_suite": true,
+    "command": [
+      "CUDA_VISIBLE_DEVICES=",
+      "PYTHONPATH=.",
+      "/ml2/ntc-image-studio/.venv-anima/bin/python",
+      "/tmp/prepare_caption_late_phase_v1.py"
+    ],
+    "runtime_checks": {
+      "NEW_suite_passed": true,
+      "all15_sources_unchanged": true,
+      "fixed_card_unchanged": true,
+      "imported_API_unchanged": true,
+      "backend_flags_unchanged": true,
+      "global_CPU_RNG_unchanged": true,
+      "CUDA_uninitialized": true
+    }
+  },
+  "raw_software_artifacts": {
+    "runs/caption-late-phase-preparation-v1/software.log": {
+      "sha256": "a7ef0900f89a6b8dbb4e23a724d3bb190895781fc7a960120061b96b9c4e598e"
+    },
+    "runs/caption-late-phase-preparation-v1/software-junit.xml": {
+      "sha256": "70f621a81c6d6b61455046c17d3197e86e56f847e2f063b50ee1fdc24b478c20"
+    },
+    "runs/caption-late-phase-preparation-v1/software-process.json": {
+      "sha256": "7dbbad387e09bcadb59f466850f65603397542694ee55079a43cc0bdd89c78f1"
+    },
+    "runs/caption-late-phase-preparation-v1/software-external.json": {
+      "sha256": "d67fff62396910f17b3f1ff52d35ac73886182447744b5fdabeff55b74c05383"
+    }
+  },
+  "wrapper": {
+    "path": "/tmp/prepare_caption_late_phase_v1.py",
+    "sha256": "61a9fea96c6f01087ab3977dbc27c5a519fcc6f46130676db8f5df4095f1bf8c"
+  },
+  "read_only_review_scope": "Root and both peers source/card/public factory/ownership/gate/count review before quality; no duplicated models/API/tests from reviewers.",
+  "hypothesis_scope": "Only2048 fixed horizon differs from parent512 task; actual native late phase coverage must be observed, and phase telemetry remains outside terminal performance gate. No unique phase cause or actual/full-Supra qualification claimed.",
+  "intended_counts": {
+    "quality_updates": 6144,
+    "mandatory_paired_residual_forwards": 12618,
+    "mandatory_source_and_teacher_backbone_forwards": 25236,
+    "policy_managed_reruns_are_extra": true
+  },
+  "science_cli": "CUDA_VISIBLE_DEVICES=0 python -m examples.e22_routed_caption_late_phase --run --out runs/caption-late-phase-v1",
+  "quality_budget_seconds": 900,
+  "quality_launch_owner": "root; not launched by preparation agent"
+}

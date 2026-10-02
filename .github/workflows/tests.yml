@@ -48,7 +48,10 @@ jobs:
         run: python -m pip check
       - name: Test numerical kernels and experiment workflows
         if: matrix.python == '3.12'
-        run: python -m pytest -q
+        run: python -m pytest -q --ignore=tests/test_e22_routed_caption_late_phase_renderer.py
+      - name: Test bounded late-phase renderer in a fresh process
+        if: matrix.python == '3.12'
+        run: timeout --signal=INT --kill-after=5s 60s python -m pytest -q tests/test_e22_routed_caption_late_phase_renderer.py
       - name: Exercise the complete Lunar pipeline and GIF exports
         if: matrix.python == '3.11'
         env:

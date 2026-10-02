@@ -1,0 +1,883 @@
+{
+  "schema": "routed_caption_late_phase_results_v1",
+  "task": "routed_caption_late_phase_v1",
+  "complete": true,
+  "scientific_status": "PASS",
+  "outcome": "The fixed2048 generated caption benchmark passes. Crossing the currently observed KA2 phase did not reproduce the remaining actual-caption failure; no Supra win or unique phase cause is established.",
+  "parent_dependency": {
+    "PR": "https://github.com/255BITS/ParticleGAN/pull/243",
+    "prepared_parent_commit": "18ff99d268393a9301212c9899a1fb1f99067842",
+    "publication_base": "develop; PR243 merged before publication, frozen protocol remains unchanged"
+  },
+  "changed_factor": "Fixed fresh horizon512 to2048 only. Frozen scalar profile/flow/text/host/init/prior/native update laws remain inherited; extra native adaptation and diagnostics follow naturally.",
+  "geometry": {
+    "width": 576,
+    "text": 768,
+    "rank": 16,
+    "tokens": 256,
+    "length": 128,
+    "heads": 9,
+    "output": 16,
+    "frequency": 256
+  },
+  "metric": "Offline unscaled physical paired TEST48 residual RMSE in float64,256tokens\u00d716coordinates; six equally sized source groups of8 contexts. Native-game ordinary comparator, not historical Supra-MSE ordinary.",
+  "updates_per_arm": 2048,
+  "quality_updates": 6144,
+  "replay_updates": 0,
+  "terminal_accuracy": {
+    "ordinary_BF16": {
+      "rmse": 0.546611430701668,
+      "by_source": {
+        "0": 0.582274059294831,
+        "1": 0.5356819492996002,
+        "2": 0.5122584350984563,
+        "3": 0.5539845279722311,
+        "4": 0.5526336326927338,
+        "5": 0.5403652584724005
+      },
+      "source_counts": {
+        "0": 8,
+        "1": 8,
+        "2": 8,
+        "3": 8,
+        "4": 8,
+        "5": 8
+      }
+    },
+    "particle_BF16": {
+      "rmse": 0.5182846123906831,
+      "by_source": {
+        "0": 0.5461876100272962,
+        "1": 0.5037579757359173,
+        "2": 0.48847667880175905,
+        "3": 0.5258841685044822,
+        "4": 0.5186944055471381,
+        "5": 0.5247981730323941
+      },
+      "source_counts": {
+        "0": 8,
+        "1": 8,
+        "2": 8,
+        "3": 8,
+        "4": 8,
+        "5": 8
+      }
+    },
+    "particle_untied_BF16": {
+      "rmse": 0.48423498203739546,
+      "by_source": {
+        "0": 0.5171315712350314,
+        "1": 0.4737940696450389,
+        "2": 0.4520699667075408,
+        "3": 0.4944716797230467,
+        "4": 0.48408498632087066,
+        "5": 0.4814430950230296
+      },
+      "source_counts": {
+        "0": 8,
+        "1": 8,
+        "2": 8,
+        "3": 8,
+        "4": 8,
+        "5": 8
+      }
+    },
+    "zero_code": {
+      "rmse": 0.6983391186720715,
+      "by_source": {
+        "0": 0.861758212057812,
+        "1": 0.6305124763464643,
+        "2": 0.5567963384223761,
+        "3": 0.7207582456727857,
+        "4": 0.6713404784717737,
+        "5": 0.7111113133032683
+      },
+      "source_counts": {
+        "0": 8,
+        "1": 8,
+        "2": 8,
+        "3": 8,
+        "4": 8,
+        "5": 8
+      }
+    }
+  },
+  "terminal_relative_improvement": {
+    "ordinary_BF16": 0.11411479006979752,
+    "particle_BF16": 0.06569678037753712
+  },
+  "terminal_code_benefit": {
+    "absolute_RMSE": 0.2141041366346761,
+    "relative_RMSE": 0.4421492551691395,
+    "strict_each_source": true
+  },
+  "fixed_endpoints": [
+    512,
+    768,
+    800,
+    1024,
+    1536,
+    2048
+  ],
+  "full_TEST_curve_rows": [
+    {
+      "step": 512,
+      "arm": "ordinary_BF16",
+      "rmse": 0.7753937292347031,
+      "by_source": {
+        "0": 0.8326111605393578,
+        "1": 0.7647166512220067,
+        "2": 0.7160326676078481,
+        "3": 0.8159163645173527,
+        "4": 0.7439027019423546,
+        "5": 0.7730240525249804
+      }
+    },
+    {
+      "step": 512,
+      "arm": "particle_BF16",
+      "rmse": 0.7453921362966869,
+      "by_source": {
+        "0": 0.8054579616111169,
+        "1": 0.7214811741705477,
+        "2": 0.6912897255379977,
+        "3": 0.7823461761879614,
+        "4": 0.7286264762052711,
+        "5": 0.7372349982568299
+      }
+    },
+    {
+      "step": 512,
+      "arm": "particle_untied_BF16",
+      "rmse": 0.7371639088084463,
+      "by_source": {
+        "0": 0.80330070510853,
+        "1": 0.7186351557846002,
+        "2": 0.6804097323913526,
+        "3": 0.7741641435324079,
+        "4": 0.7150731689206696,
+        "5": 0.7246503286183469
+      }
+    },
+    {
+      "step": 768,
+      "arm": "ordinary_BF16",
+      "rmse": 0.7008253673716994,
+      "by_source": {
+        "0": 0.7597178236884854,
+        "1": 0.6833088882404686,
+        "2": 0.6430495400429053,
+        "3": 0.7473551342258701,
+        "4": 0.6765344404005591,
+        "5": 0.687825347221526
+      }
+    },
+    {
+      "step": 768,
+      "arm": "particle_BF16",
+      "rmse": 0.6679570308649326,
+      "by_source": {
+        "0": 0.7120909223831786,
+        "1": 0.6509214825948372,
+        "2": 0.6136320161306976,
+        "3": 0.711379815599652,
+        "4": 0.6486281525624151,
+        "5": 0.6655098336520963
+      }
+    },
+    {
+      "step": 768,
+      "arm": "particle_untied_BF16",
+      "rmse": 0.6404463092795095,
+      "by_source": {
+        "0": 0.6910058462315962,
+        "1": 0.6256738291285115,
+        "2": 0.5893702358665354,
+        "3": 0.6773026557010675,
+        "4": 0.6211650343665405,
+        "5": 0.6325581935057146
+      }
+    },
+    {
+      "step": 800,
+      "arm": "ordinary_BF16",
+      "rmse": 0.6980343023475764,
+      "by_source": {
+        "0": 0.7627542042786252,
+        "1": 0.6877279572929514,
+        "2": 0.6318941868669835,
+        "3": 0.7292901712065625,
+        "4": 0.6875343668988941,
+        "5": 0.6818281904221213
+      }
+    },
+    {
+      "step": 800,
+      "arm": "particle_BF16",
+      "rmse": 0.6631061795036475,
+      "by_source": {
+        "0": 0.7132896729502524,
+        "1": 0.652466939294258,
+        "2": 0.6034271801737211,
+        "3": 0.6909099242909819,
+        "4": 0.6528278141563209,
+        "5": 0.6603775641053744
+      }
+    },
+    {
+      "step": 800,
+      "arm": "particle_untied_BF16",
+      "rmse": 0.6350477549678948,
+      "by_source": {
+        "0": 0.6929609130180452,
+        "1": 0.6250324737731089,
+        "2": 0.5796859721835077,
+        "3": 0.6564333318068186,
+        "4": 0.6260856123584356,
+        "5": 0.624443549763522
+      }
+    },
+    {
+      "step": 1024,
+      "arm": "ordinary_BF16",
+      "rmse": 0.6548398973143568,
+      "by_source": {
+        "0": 0.7092614107372516,
+        "1": 0.6514609681670818,
+        "2": 0.5997541968117177,
+        "3": 0.6829067630263459,
+        "4": 0.6333177315797823,
+        "5": 0.6467460955955778
+      }
+    },
+    {
+      "step": 1024,
+      "arm": "particle_BF16",
+      "rmse": 0.6225482714786027,
+      "by_source": {
+        "0": 0.6686538633370702,
+        "1": 0.6145977676394367,
+        "2": 0.5709886928139252,
+        "3": 0.6457509884749956,
+        "4": 0.6074036823708868,
+        "5": 0.6233843414680111
+      }
+    },
+    {
+      "step": 1024,
+      "arm": "particle_untied_BF16",
+      "rmse": 0.5894157767800264,
+      "by_source": {
+        "0": 0.6392378407616315,
+        "1": 0.582373671217706,
+        "2": 0.5417968184310711,
+        "3": 0.6080247791998779,
+        "4": 0.5762966297259755,
+        "5": 0.5842310394847405
+      }
+    },
+    {
+      "step": 1536,
+      "arm": "ordinary_BF16",
+      "rmse": 0.5959867052560816,
+      "by_source": {
+        "0": 0.6398765796308971,
+        "1": 0.5833551409792888,
+        "2": 0.5501884632351084,
+        "3": 0.6130934436988335,
+        "4": 0.599107886107389,
+        "5": 0.5864592777041953
+      }
+    },
+    {
+      "step": 1536,
+      "arm": "particle_BF16",
+      "rmse": 0.564969305846216,
+      "by_source": {
+        "0": 0.6004097462425614,
+        "1": 0.5433638757920214,
+        "2": 0.5308077798660357,
+        "3": 0.57819032508524,
+        "4": 0.5665219829484934,
+        "5": 0.5678006921790143
+      }
+    },
+    {
+      "step": 1536,
+      "arm": "particle_untied_BF16",
+      "rmse": 0.5262737065397467,
+      "by_source": {
+        "0": 0.5679518420396613,
+        "1": 0.5072560285199355,
+        "2": 0.4888955657345811,
+        "3": 0.5387312077521598,
+        "4": 0.5303475623227311,
+        "5": 0.5209485450231512
+      }
+    },
+    {
+      "step": 2048,
+      "arm": "ordinary_BF16",
+      "rmse": 0.546611430701668,
+      "by_source": {
+        "0": 0.582274059294831,
+        "1": 0.5356819492996002,
+        "2": 0.5122584350984563,
+        "3": 0.5539845279722311,
+        "4": 0.5526336326927338,
+        "5": 0.5403652584724005
+      }
+    },
+    {
+      "step": 2048,
+      "arm": "particle_BF16",
+      "rmse": 0.5182846123906831,
+      "by_source": {
+        "0": 0.5461876100272962,
+        "1": 0.5037579757359173,
+        "2": 0.48847667880175905,
+        "3": 0.5258841685044822,
+        "4": 0.5186944055471381,
+        "5": 0.5247981730323941
+      }
+    },
+    {
+      "step": 2048,
+      "arm": "particle_untied_BF16",
+      "rmse": 0.48423498203739546,
+      "by_source": {
+        "0": 0.5171315712350314,
+        "1": 0.4737940696450389,
+        "2": 0.4520699667075408,
+        "3": 0.4944716797230467,
+        "4": 0.48408498632087066,
+        "5": 0.4814430950230296
+      }
+    }
+  ],
+  "fixed512_to2048_descriptive_deltas": {
+    "ordinary_BF16": {
+      "terminal_minus512_RMSE": -0.2287822985330351,
+      "terminal_minus512_by_source": {
+        "0": -0.2503371012445268,
+        "1": -0.2290347019224065,
+        "2": -0.20377423250939186,
+        "3": -0.26193183654512164,
+        "4": -0.19126906924962084,
+        "5": -0.23265879405257994
+      }
+    },
+    "particle_BF16": {
+      "terminal_minus512_RMSE": -0.22710752390600375,
+      "terminal_minus512_by_source": {
+        "0": -0.2592703515838207,
+        "1": -0.2177231984346304,
+        "2": -0.20281304673623868,
+        "3": -0.25646200768347927,
+        "4": -0.20993207065813302,
+        "5": -0.21243682522443585
+      }
+    },
+    "particle_untied_BF16": {
+      "terminal_minus512_RMSE": -0.25292892677105083,
+      "terminal_minus512_by_source": {
+        "0": -0.2861691338734986,
+        "1": -0.24484108613956135,
+        "2": -0.2283397656838118,
+        "3": -0.27969246380936125,
+        "4": -0.23098818259979897,
+        "5": -0.24320723359531726
+      }
+    }
+  },
+  "gate": {
+    "pass": true,
+    "versus_ordinary": {
+      "pass": true,
+      "aggregate_accuracy_improved": true,
+      "no_source_harmed": true,
+      "relative_accuracy_improvement": 0.11411479006979752
+    },
+    "versus_shared": {
+      "pass": true,
+      "aggregate_accuracy_improved": true,
+      "no_source_harmed": true,
+      "relative_accuracy_improvement": 0.06569678037753712
+    },
+    "aggregate_code_benefit": true,
+    "code_beneficial_each_source": true,
+    "bank_live": true,
+    "query_live": true,
+    "C_live_all_six_sites": true,
+    "particle_Up_live_all_six_sites": true,
+    "relative_code_benefit": 0.4421492551691395,
+    "relative_margin": 0.001,
+    "per_source_harm_tolerance": 1e-06,
+    "live_fraction_threshold": 0.9,
+    "live_denominator": 2047
+  },
+  "live": {
+    "bank": 2047,
+    "query": 2047,
+    "denominator": 2047
+  },
+  "C_norms": {
+    "ctx_proj": 1.0679500102996826,
+    "block.self_attn.qkv": 1.1631197929382324,
+    "block.self_attn.proj": 1.136271595954895,
+    "block.cross_attn.q": 1.2559250593185425,
+    "block.cross_attn.kv": 1.1112743616104126,
+    "block.cross_attn.proj": 0.9366427659988403
+  },
+  "particle_Up_norms": {
+    "ctx_proj": 0.6637296676635742,
+    "block.self_attn.qkv": 2.0566751956939697,
+    "block.self_attn.proj": 0.8121609091758728,
+    "block.cross_attn.q": 1.566770315170288,
+    "block.cross_attn.kv": 2.917271137237549,
+    "block.cross_attn.proj": 0.6099422574043274
+  },
+  "population_events": {
+    "ordinary_BF16": {
+      "proposal_events_including_skips": 0,
+      "accepted_row_moves": 0,
+      "accepted_proposals": 0
+    },
+    "particle_BF16": {
+      "proposal_events_including_skips": 20,
+      "accepted_row_moves": 0,
+      "accepted_proposals": 0
+    },
+    "particle_untied_BF16": {
+      "proposal_events_including_skips": 20,
+      "accepted_row_moves": 0,
+      "accepted_proposals": 0
+    }
+  },
+  "feature_guard_scope": "Native whole-model critic-feature guards remain max_context_harm0/output_error_guardFalse. Both particle arms recorded20 events and0accepted proposals/row moves; no structural gain or output-accuracy optimizer/guard is claimed.",
+  "phase_observations": {
+    "ordinary_BF16": {
+      "phase_counts": {
+        "a": 799,
+        "blend": 1249
+      },
+      "first_blend_step": 800,
+      "critic_calls": {
+        "available_count": 2048,
+        "first": 1,
+        "last": 2048,
+        "min": 1,
+        "max": 2048
+      },
+      "critic_observed_steps": {
+        "available_count": 2048,
+        "first": 1,
+        "last": 2048,
+        "min": 1,
+        "max": 2048
+      },
+      "post_update_sigma": {
+        "available_count": 2048,
+        "first": 0.125532329082489,
+        "last": 0.125,
+        "min": 0.125,
+        "max": 0.125532329082489
+      },
+      "post_update_critic_group_lrs": {
+        "group_counts": [
+          1
+        ],
+        "groups": [
+          {
+            "available_count": 2048,
+            "first": 0.00425,
+            "last": 0.00042507943394359967,
+            "min": 0.00031052138876938644,
+            "max": 0.00425
+          }
+        ]
+      },
+      "terminal_KA2": {
+        "applied": true,
+        "pen": 0.057623472064733505,
+        "center": 1.0,
+        "s": 0.5,
+        "w": 1.0,
+        "alpha": 7.544262887449395e-06,
+        "prox": 0.008817771449685097,
+        "phase": "blend"
+      },
+      "unavailable_or_placeholder_rows": 0
+    },
+    "particle_BF16": {
+      "phase_counts": {
+        "a": 799,
+        "blend": 1249
+      },
+      "first_blend_step": 800,
+      "critic_calls": {
+        "available_count": 2048,
+        "first": 1,
+        "last": 2048,
+        "min": 1,
+        "max": 2048
+      },
+      "critic_observed_steps": {
+        "available_count": 2048,
+        "first": 1,
+        "last": 2048,
+        "min": 1,
+        "max": 2048
+      },
+      "post_update_sigma": {
+        "available_count": 2048,
+        "first": 0.125532329082489,
+        "last": 0.125,
+        "min": 0.125,
+        "max": 0.125532329082489
+      },
+      "post_update_critic_group_lrs": {
+        "group_counts": [
+          1
+        ],
+        "groups": [
+          {
+            "available_count": 2048,
+            "first": 0.00425,
+            "last": 0.0007825932214635343,
+            "min": 0.0003471431271113984,
+            "max": 0.00425
+          }
+        ]
+      },
+      "terminal_KA2": {
+        "applied": true,
+        "pen": 0.06000116094946861,
+        "center": 1.0,
+        "s": 0.5,
+        "w": 1.0,
+        "alpha": 9.264740898896936e-08,
+        "prox": 0.006787923630326986,
+        "phase": "blend"
+      },
+      "unavailable_or_placeholder_rows": 0
+    },
+    "particle_untied_BF16": {
+      "phase_counts": {
+        "a": 799,
+        "blend": 1249
+      },
+      "first_blend_step": 800,
+      "critic_calls": {
+        "available_count": 2048,
+        "first": 1,
+        "last": 2048,
+        "min": 1,
+        "max": 2048
+      },
+      "critic_observed_steps": {
+        "available_count": 2048,
+        "first": 1,
+        "last": 2048,
+        "min": 1,
+        "max": 2048
+      },
+      "post_update_sigma": {
+        "available_count": 2048,
+        "first": 0.125532329082489,
+        "last": 0.125,
+        "min": 0.125,
+        "max": 0.125532329082489
+      },
+      "post_update_critic_group_lrs": {
+        "group_counts": [
+          1
+        ],
+        "groups": [
+          {
+            "available_count": 2048,
+            "first": 0.00425,
+            "last": 0.0008420979268574783,
+            "min": 0.0003588816913412391,
+            "max": 0.00425
+          }
+        ]
+      },
+      "terminal_KA2": {
+        "applied": true,
+        "pen": 0.05911910533905029,
+        "center": 1.0,
+        "s": 0.5,
+        "w": 1.0,
+        "alpha": 5.2512602837202336e-08,
+        "prox": 0.00757016334682703,
+        "phase": "blend"
+      },
+      "unavailable_or_placeholder_rows": 0
+    }
+  },
+  "phase_telemetry_is_accuracy_gate_predicate": false,
+  "rate_interpretation": "All arms use the same initial critic recipe LR. Recorded post-update critic LR trajectories differ under unchanged native control; sigma is post-update. Generator/router initial5e-5 is source-bound; applied G/router/table LRs were not separately logged. No phase or LR intervention, or matched actual wall-time superiority, is established.",
+  "initial_FIT_mean_center_power": {
+    "raw_initial_fit": {
+      "power": 1.4311826562066674,
+      "rms": 1.1963204655135962,
+      "token_mean_power": 0.8045749095050446,
+      "token_centered_power": 0.6266077467016227,
+      "token_mean_power_fraction": 0.5621748600821931,
+      "global_coordinate_mean_power": 0.49841680124732246
+    },
+    "normalized_initial_fit": {
+      "power": 1.5033165947096354,
+      "rms": 1.2260981178966206,
+      "token_mean_power": 0.8197483846729808,
+      "token_centered_power": 0.6835682100366544,
+      "token_mean_power_fraction": 0.5452932453202346,
+      "global_coordinate_mean_power": 0.5033979876245969
+    },
+    "previous_floor_normalized_initial_fit": {
+      "power": 1.5033165947096354,
+      "rms": 1.2260981178966206,
+      "token_mean_power": 0.8197483846729808,
+      "token_centered_power": 0.6835682100366544,
+      "token_mean_power_fraction": 0.5452932453202346,
+      "global_coordinate_mean_power": 0.5033979876245969
+    }
+  },
+  "endpoint_mean_center_power": {
+    "ordinary_BF16": {
+      "power": 0.29878405617372444,
+      "rms": 0.5466114307016681,
+      "token_mean_power": 0.07549506515292748,
+      "token_centered_power": 0.2232889910207969,
+      "token_mean_power_fraction": 0.25267434320200727,
+      "global_coordinate_mean_power": 0.02295093197477808
+    },
+    "particle_BF16": {
+      "power": 0.26861893944096066,
+      "rms": 0.5182846123906831,
+      "token_mean_power": 0.07229548681290311,
+      "token_centered_power": 0.1963234526280575,
+      "token_mean_power_fraction": 0.2691377121931971,
+      "global_coordinate_mean_power": 0.023203925610483452
+    },
+    "particle_untied_BF16": {
+      "power": 0.23448351782875668,
+      "rms": 0.48423498203739546,
+      "token_mean_power": 0.052630434178989556,
+      "token_centered_power": 0.18185308364976707,
+      "token_mean_power_fraction": 0.22445259550151225,
+      "global_coordinate_mean_power": 0.015610486572249744
+    },
+    "zero_code": {
+      "power": 0.4876775246676856,
+      "rms": 0.6983391186720715,
+      "token_mean_power": 0.17668667089529555,
+      "token_centered_power": 0.31099085377239,
+      "token_mean_power_fraction": 0.3623022631926575,
+      "global_coordinate_mean_power": 0.05330331165677173
+    }
+  },
+  "normalization": {
+    "law": {
+      "statistic": "untrained FIT residual coordinate std, correction=1, flattened contexts and tokens",
+      "epsilon": 1e-08,
+      "reject_std_lte_epsilon": true,
+      "previous_floor": 0.04,
+      "shared_across_all_arms_and_D_EMA_features": true
+    },
+    "raw_FIT_std_range": [
+      0.7908105850219727,
+      1.1315065622329712
+    ],
+    "epsilon_floor_fraction": 0,
+    "previous_floor_fraction": 0.0
+  },
+  "frozen_profile_sha256": "3589d8501f6a6f95db9d959f65aa7e6cfe32f32eb53307e4b9b8a76f84824b74",
+  "data_digest": "9abf570dd8bdee82e3ccfaa5607d214bdd17b040024b506d8d6d835d653ef15d",
+  "parameter_counts": {
+    "ordinary_DownUp": 141312,
+    "particle_bridge": 2016,
+    "router": 14616,
+    "table": 512,
+    "particle_total": 158456,
+    "total_ratio": 1.1213201992753623,
+    "untied_extra_Up": 82944,
+    "untied_particle_total": 241400,
+    "untied_vs_ordinary_parameter_ratio": 1.7082767210144927
+  },
+  "producer_initial_prerequisite": {
+    "pass": true,
+    "native_updates": 0,
+    "common_initial_owners_predictions_exact": true,
+    "fresh_public_restore_exact": true,
+    "scope": "zero-update full-geometry prerequisite",
+    "counts": {
+      "ordinary_DownUp": 141312,
+      "particle_bridge": 2016,
+      "router": 14616,
+      "table": 512,
+      "particle_total": 158456,
+      "total_ratio": 1.1213201992753623,
+      "untied_extra_Up": 82944,
+      "untied_particle_total": 241400,
+      "untied_vs_ordinary_parameter_ratio": 1.7082767210144927
+    },
+    "initial_tangent": {
+      "main_Up_gradient_matches_ordinary_exact": true,
+      "particle_Up_gradients_finite_positive_all_six_sites": true,
+      "particle_Up_gradient_norms": {
+        "ctx_proj": 0.001814754409912076,
+        "block.self_attn.qkv": 0.0004187979050632421,
+        "block.self_attn.proj": 0.00014250953530344133,
+        "block.cross_attn.q": 0.000496207809931694,
+        "block.cross_attn.kv": 0.002095619380362139,
+        "block.cross_attn.proj": 0.002462957392433878
+      },
+      "fit_indices": [
+        0,
+        8,
+        16,
+        24
+      ],
+      "private_Gaussian_seed": 72,
+      "native_DV12_perturbation": true,
+      "native_updates": 0,
+      "scope": "Initial point only; no total-variance or adaptive-update theorem."
+    }
+  },
+  "producer_owner_restore_finite_scope": "Fresh full-geometry initial owner/output/public restore/tangent and terminal public restore/clean repeat/finite learned ownership are source-bound producer witnesses; independent saved-CPU review does not reload models or checkpoints.",
+  "independent_review": {
+    "path": "docs/e22_routed_caption_late_phase_independent_review.json",
+    "sha256": "e4dca76594f437c0e9f9039990b743675e545fd7a4125652cd9f77906f624be1",
+    "checks_passed": 147,
+    "seconds": 1.9539101640693843,
+    "limit_seconds": 60,
+    "source_sha256": "180bb05d8709c569a9534b450eb7feb8c885edfbf939a96a2a924c76f0751971",
+    "counts": {
+      "host_or_model_forwards": 0,
+      "native_updates": 0,
+      "native_policy_calls": 0,
+      "ParticleGAN_API_calls": 0,
+      "model_constructions": 0,
+      "CUDA_initialized": false
+    },
+    "metric_tolerance_abs": 2e-15,
+    "scope": "Saved-only exact29 scalar resampling, anchors/contexts, all6144 external data/Gaussian/penalty stream records,18fullTEST curves, terminal source/code/live metrics, phase/rate snapshots and media facts; no model/native/API/GPU execution."
+  },
+  "software_preparation": {
+    "path": "docs/e22_routed_caption_late_phase_preparation.json",
+    "sha256": "79d19c7710ee71f606f6ea93fae5e7a368ffcb75002a146ff34d1e00c4c491b9",
+    "new_cases_passed": 18,
+    "pytest_seconds": 1.857,
+    "external_seconds": 3.7330115591175854,
+    "limit_seconds": 60,
+    "tiny_native_updates": 4,
+    "scope": "One NEW18-case reducedCPU suite, exactly2+2 native replayupdates;0fullhost/CUDA/quality/old tests/plotting."
+  },
+  "quality_budget": {
+    "attempts": 1,
+    "physical_GPU": 0,
+    "limit_seconds": 900,
+    "actual_external_seconds": 610.6340055079199,
+    "producer_seconds": 609.9053659169003,
+    "external_exit_code": 0,
+    "timed_out": false,
+    "pre_post_pins_unchanged": 58
+  },
+  "media": {
+    "published_files": {
+      "docs/media/e22_routed_caption_late_phase/goal.gif": "53e67a3f616ee198baa703715f608b86db253a0b4c2e24c16130b4af89096dae",
+      "docs/media/e22_routed_caption_late_phase/goal-final.png": "6293d58fa012e5324acf06c627731764d5c9958f013fb486f446feb84e952ad3",
+      "docs/media/e22_routed_caption_late_phase/metrics.png": "04e014c675bb480ea39a985b02c8a1e54fd41236077eeb85c2860888aab16555",
+      "docs/media/e22_routed_caption_late_phase/media-completion.json": "a1f53fbb31e6b61e8d900f5a22f26a1d397434a24d67d21ee3d98c55928b1527"
+    },
+    "byte_exact_copy": true,
+    "actual_render_seconds": 2.3917583988513798,
+    "limit_seconds": 60,
+    "host_forwards": 0,
+    "native_updates": 0,
+    "ParticleGAN_API_calls": 0,
+    "CUDA_initialized": false,
+    "fixed_steps": [
+      0,
+      256,
+      512,
+      768,
+      800,
+      1024,
+      1536,
+      2048
+    ],
+    "full_curve_steps": [
+      512,
+      768,
+      800,
+      1024,
+      1536,
+      2048
+    ],
+    "fixed_initial_only_color_limit": 2.308841825120657,
+    "source_sha256": "61fd56ad58bdbe6b76fe292f57251533e6beef0d493d05dea62124fbe0e0823f",
+    "metric_plot_interpretation": "Top: physical fullTEST48 RMSE at fixed endpoints; middle/bottom: actual nativeG/Dgame loss traces (Dpenalty excluded). Phase markers are observed first blends only, not phase-causality or accuracy controls."
+  },
+  "source_identity": {
+    "examples/e22_routed_caption_late_phase.py": "f4bad83b5ff9944a14c75bcf5d51d82e26fd3ed432a0730122255fffdc313b65",
+    "examples/render_e22_routed_caption_late_phase.py": "61fd56ad58bdbe6b76fe292f57251533e6beef0d493d05dea62124fbe0e0823f",
+    "tests/test_e22_routed_caption_late_phase.py": "8f19fab86157995acdf20f3965e2c963f02c08a9cd39ec984e6ab3afcb5e2a7d",
+    "tests/test_e22_routed_caption_late_phase_renderer.py": "d99a095adaf81043704a01d401e503cd68fe133151f353751c1e77c7a27b236a",
+    "examples/e22_routed_caption_frozen_stats.py": "a8489fc0369bf03bdfe5b8a5bb92c9a7c9b3f66aea83166f5fdd53f8dab99047",
+    "examples/render_e22_routed_caption_frozen_stats.py": "ea369cc340f349f042a498d131429cba75563c03aa9e9e232255ea2c8fb374d9",
+    "tests/test_e22_routed_caption_frozen_stats.py": "707cdb18f8436d4dc0d36e18a664c18684b865cf14d73aaffb8f218cd93caea4",
+    "docs/e22_routed_caption_frozen_stats_profile_v1.json": "3589d8501f6a6f95db9d959f65aa7e6cfe32f32eb53307e4b9b8a76f84824b74",
+    "examples/e22_routed_caption_flow.py": "f868c7cb36db670fc1f08aebeb54e6d863837f8d56e685373e5873b2b4a08e3c",
+    "examples/render_e22_routed_caption_flow.py": "2ec9c596a469269edc54a17b7ca6315af73715d8f849bf027ac39e8e535665e2",
+    "tests/test_e22_routed_caption_flow.py": "ef0e878dc8ebb003e0451863ea6721b1116c5c24835854f9033dbfc3341d93bf",
+    "examples/e22_routed_caption_accuracy.py": "bae0f255d890e49bfbe4602bee7f8e84051b24a3cb0219c13b0a42b25768b8e3",
+    "examples/e22_routed_caption_untied.py": "a35938f51b7974677651d2c05b1aa396896255460e213cf26ccf57409efcdb81",
+    "examples/e22_routed_caption_normalization.py": "7077a03143a8d25577bfb2ed1f167d847e75972131093f9228ca10f6aaca9a0e",
+    "examples/render_e22_routed_caption_untied.py": "18e9c55143e551a2ef961128198ae331f3ea2e3992eb6b1be73bdda333dea77b"
+  },
+  "protocol_sha256": "740f96f96764026cda84f728986e9920007c96a9b948ecc0edbbe0a9a5b05b6b",
+  "imported_native": {
+    "imported_package": "/ml2/hypergan/ParticleGAN-routed-caption-late-phase-develop/particlegan",
+    "python_sha256": "7b814e32627ac5a332637d336ebaa13b6baab0b9373f6841d9a22fb8ab39cde9"
+  },
+  "source_native_backend_within_run_unchanged": true,
+  "precision_backend": {
+    "allow_tf32": false,
+    "float32_matmul_precision": "highest",
+    "allow_bf16_reduced_precision_reduction": true
+  },
+  "raw_artifact_identities": {
+    "/tmp/review_caption_late_phase_v1.py": "180bb05d8709c569a9534b450eb7feb8c885edfbf939a96a2a924c76f0751971",
+    "runs/caption-late-phase-v1/report.json": "c6e40033e2721d1708b2b6f232b30baa439665f554ef11a30a30433c9993f61d",
+    "runs/caption-late-phase-v1/completion.json": "23095bf0a9b936b26558cdbf7fb86dea533fe88f20f84546856a762d12b08aba",
+    "runs/caption-late-phase-v1/late-phase-inputs.pt": "af303cce00d05e9d4006d58f99b792c7ebd89708a7e3e6c70f78690d7d5f1e60",
+    "runs/caption-late-phase-v1/endpoint-residuals.pt": "139c4c56993e9e425e2df3559f1feefe8fde18e428861b0f04b3a3b6c8f082a2",
+    "runs/caption-late-phase-v1/observed-media.pt": "0652dc49618a0f9899028a334e878a5a063e29864d024142c62dbe12d93e37ae",
+    "runs/caption-late-phase-v1/curve-residuals.pt": "8923d1755e37df7c594303e29efa6e3211c725f5a2e60b2137a57ec5c332bf24",
+    "runs/caption-late-phase-v1/ordinary_BF16.jsonl": "40cf9de56bfecd3bb334a1da0e18bbaaa0d11c5edbc7e3da91012c7488797f9c",
+    "runs/caption-late-phase-v1/particle_BF16.jsonl": "7261a59fd8955458fda1a7e1df0e0b70f5206d753af9461c5eb2b60ce7dfe3a5",
+    "runs/caption-late-phase-v1/particle_untied_BF16.jsonl": "daba14f21b0f9d04bfe9210d2a58e5ed88b2466de325f1b5fd6df6caa5c94dd6",
+    "runs/caption-late-phase-v1.external.json": "c6093ffc007985f952ce4d4bde00fc30e2aebb3c8e28b0532ca1cb17fee0b3ea",
+    "docs/e22_routed_caption_late_phase_v1.json": "740f96f96764026cda84f728986e9920007c96a9b948ecc0edbbe0a9a5b05b6b",
+    "docs/e22_routed_caption_late_phase_preparation.json": "79d19c7710ee71f606f6ea93fae5e7a368ffcb75002a146ff34d1e00c4c491b9",
+    "/tmp/routed-caption-late-phase-v1-launch-pins.json": "e75192805c414dcf943925bda3b6ef696de6475e434acdbc88287696f4035b02",
+    "/tmp/bounded-particle-api-campaign-launcher-v1.py": "1e497a4bb36e979e7192bd38bc32d6bacf9bda8d363bbc648d8eef5db7964a5f",
+    "docs/e22_routed_caption_frozen_stats_profile_v1.json": "3589d8501f6a6f95db9d959f65aa7e6cfe32f32eb53307e4b9b8a76f84824b74",
+    "/tmp/e22-caption-frozen-magnitudes-v1.json": "c7abed11bb97a4dc118728246e1c3b9ab79f719c9b6f351358a4e23986b079a0",
+    "docs/e22_routed_caption_late_phase_independent_review.json": "e4dca76594f437c0e9f9039990b743675e545fd7a4125652cd9f77906f624be1",
+    "runs/caption-late-phase-v1/media-completion.json": "a1f53fbb31e6b61e8d900f5a22f26a1d397434a24d67d21ee3d98c55928b1527"
+  },
+  "scope_limits": [
+    "One fixed generated/calibrated caption task, no seeds/scales/epsilon/horizon search or adaptive stopping/checkpoint selection.",
+    "Offline raw accuracy and code ablation never enter native optimizer, feature row guards, sigma choice or training feedback.",
+    "The actual observed799pureA/1249blend coverage is descriptive and is not a historical predicate in the numerical gate; compatible future APIs can run and pass with different telemetry.",
+    "Scalar calibration does not recreate pretrained tensor directions, spectra/covariances/positions, semantic token directions, actual latent amplitude or deep Supra host.",
+    "Source-bound native learned-owner/EMA/restore witnesses remain distinct from independently reproduced saved tensor/metric/stream facts.",
+    "Untied has additional head capacity and BF16 rounding paths; this is not a unique mechanism attribution.",
+    "PASS does not reproduce the actual-caption failure, beat original fullSupra, approve defaults/promotion or authorize further actual/full quality work.",
+    "All old and executed new sources/cards/tests/preparation records remain unchanged; no science/review/render rerun. Rawlogs/states remain excluded."
+  ]
+}
