@@ -71,6 +71,7 @@ class Inputs:
         item = {"sha256": sha(path), "bytes": path.stat().st_size}
         if expected is not None and item["sha256"] != expected:
             raise ValueError(f"retained artifact identity mismatch: {path.name}")
+        item["attestation"] = "original_public_receipt" if expected is not None else "review_time_only"
         self.files[str(path)] = item
         return path
 
@@ -87,11 +88,17 @@ def finite(values):
         raise ValueError("nonfinite or missing numeric observation")
 
 
+def native_manifest():
+    return {str(path.relative_to(ROOT)): sha(path)
+            for path in sorted((ROOT / "particlegan").rglob("*.py"))}
+
+
 def film_data(root, card, inputs, fresh=False):
     root = Path(root)
+    campaign, readout = None, None
     if not fresh:
-        inputs.bind(root / "campaign-protocol.json", card["protocol_sha256"])
-        inputs.bind(root / "readout.json", card["readout_sha256"])
+        campaign = inputs.read(root / "campaign-protocol.json", card["protocol_sha256"])
+        readout = inputs.read(root / "readout.json", card["readout_sha256"])
     junit = inputs.bind(root / "contracts.xml", None if fresh else card["contracts"]["junit_sha256"])
     tree = ET.parse(junit)
     controls = [t for t in tree.iter("testcase") if t.get("classname", "").endswith("test_routed_conditioning_code_preserved")]
@@ -107,17 +114,30 @@ def film_data(root, card, inputs, fresh=False):
         folder = root / f"width{width}"
         protocol = inputs.read(folder / "protocol.json")
         if (protocol["profiles"] != list(PROFILES) or protocol["external_update_cap"] != 1200
-                or protocol["width"] != width or protocol["blocks"] != 1):
+                or protocol["width"] != width or protocol["blocks"] != 1
+                or set(protocol["source_sha256"]) != {"spatial_damping.py", "film_damping.py"}):
             raise ValueError("changed FiLM host, profile order or full budget")
+        package_files = protocol["package_files"]
+        if (not package_files or protocol["package_python_sha256"] != hashlib.sha256(
+                json.dumps(package_files, sort_keys=True).encode()).hexdigest()
+                or fresh and package_files != native_manifest()
+                or not fresh and (package_files != campaign["package_files"]
+                                  or protocol["package_git_sha"] != card["package_git_sha"])):
+            raise ValueError("changed or missing FiLM native package binding")
         for name, expected in protocol["source_sha256"].items():
             if expected != card["source_sha256"][f"benchmarks/routed_conditioning/{name}"]:
                 raise ValueError("changed FiLM source")
             inputs.bind(folder / name, expected)
-        summary = inputs.read(folder / "summary.json")
+        witnesses = None if fresh else readout["widths"][str(width)]["profiles"]
+        summary_hash = None if fresh else witnesses[PROFILES[0]]["raw_summary_sha256"]
+        if not fresh and any(w["raw_summary_sha256"] != summary_hash for w in witnesses.values()):
+            raise ValueError("conflicting original FiLM summary bindings")
+        summary = inputs.read(folder / "summary.json", summary_hash)
         if summary["protocol"] != protocol or set(summary["profiles"]) != set(PROFILES):
             raise ValueError("incomplete or changed FiLM protocol")
         metadata = {arm: inputs.read(folder / f"{arm}-metadata.json") for arm in PROFILES}
         original, neutral, candidate = (metadata[arm] for arm in PROFILES)
+        finite([m["initial_code_jacobian_frobenius"] for m in metadata.values()])
         if (candidate["additive_initialization"] != "zero time columns and bias; retain code columns"
                 or not candidate["initial_code_jacobian_frobenius"] > neutral["initial_code_jacobian_frobenius"]
                 or any(candidate["initial_hashes"][role] != original["initial_hashes"][role]
@@ -138,10 +158,23 @@ def film_data(root, card, inputs, fresh=False):
                 raise ValueError("incomplete FiLM budget, dense-bank invariant or observation schedule")
             finite([r[k] for r in updates for k in ("loss_d", "loss_g", "penalty")])
             finite([r[k] for r in evaluations for k in ("live_mse", "served_mse")])
+            finite([result["live_mse"], result["served_mse"]])
+            if any(result[key] != evaluations[-1][key] for key in ("live_mse", "served_mse", "served_source")):
+                raise ValueError("FiLM summary endpoint differs from its last actual observation")
             inputs.bind(folder / f"{arm}-final.pt")
             if not fresh and ({str(r["step"]): r["live_mse"] for r in evaluations}
                               != card["widths"][str(width)]["profiles"][arm]["clean_curve"]):
                 raise ValueError("FiLM observations differ from the original published curve")
+            if not fresh:
+                witness = witnesses[arm]
+                published = card["widths"][str(width)]["profiles"][arm]
+                if (evaluations != witness["evaluations"]
+                        or metadata[arm]["initial_code_jacobian_frobenius"] != witness["initial_code_jacobian_frobenius"]
+                        or any(result[key] != published[final] or result[key] != witness[final]
+                               for key, final in (("live_mse", "final_live_mse"), ("served_mse", "final_served_mse")))
+                        or result["served_source"] != published["served_source"]
+                        or result["served_source"] != witness["served_source"]):
+                    raise ValueError("FiLM displayed observations differ from immutable published evidence")
             results[arm] = {key: deepcopy(result[key]) for key in
                            ("live_mse", "served_mse", "served_source", "completed_steps", "evaluations")}
         widths[width] = {"profiles": results, "metadata": metadata}
@@ -169,6 +202,15 @@ def variance_data(path, card, inputs, fresh=False):
                 raise ValueError("both fixed variance batches are mandatory")
             finite([s[k] for s in [value, *value["batch_statistics"]]
                     for k in ("ratio", "single_variance", "antithetic_variance")])
+            for statistic in [value, *value["batch_statistics"]]:
+                if (statistic["single_variance"] <= 0 or statistic["antithetic_variance"] < 0
+                        or not math.isclose(statistic["ratio"], statistic["antithetic_variance"] / statistic["single_variance"],
+                                            rel_tol=1e-7, abs_tol=1e-12)):
+                    raise ValueError("displayed variance ratio differs from retained centered energies")
+            for key in ("single_variance", "antithetic_variance"):
+                if not math.isclose(value[key], sum(r[key] for r in value["batch_statistics"]) / 2,
+                                    rel_tol=1e-10, abs_tol=1e-18):
+                    raise ValueError("aggregate variance differs from the two fixed batch means")
     primary = stats[COMPONENTS[0]]["generator"]
     passed = primary["single_variance"] > 0 and 0 <= primary["antithetic_variance"] <= .75 * primary["single_variance"]
     if result["pass"] is not passed or result["variance_result"] != ("PASS" if passed else "FAIL"):
@@ -218,11 +260,18 @@ def clean_data(root, card, inputs, fresh=False):
         and all(b >= a - 1e-5 for a, b in zip(path, path[1:])) and path[-1] > path[0] + 1e-4
         for path in report["references"].values()))
     coverage = report["coverage"]["G_clean"]
+    finite(coverage["C_norms"])
+    if (len(coverage["C_norms"]) != 2 or any(x < 0 for x in coverage["C_norms"])
+            or any(type(coverage[k]) is not int or not 0 <= coverage[k] <= 512 for k in ("bank", "query"))):
+        raise ValueError("exactly two finite branch norms and full-protocol particle counts are required")
     if (gate["calibrated"] is not calibrated or gate["bank_live"] != (coverage["bank"] > 0)
             or gate["query_live"] != (coverage["query"] > 0)
             or gate["C_live"] != all(x > 0 for x in coverage["C_norms"])):
         raise ValueError("clean-G calibration or particle invariant contradicts retained observations")
     final = report["curves"]["G_clean"]["512"]
+    if set(final["zero_code"]) != set(JUDGES):
+        raise ValueError("exactly four terminal zero-code common judges are required")
+    finite(final["zero_code"].values())
     native = report["curves"]["native"]["512"]["clean"]
     delta = max(final["clean"][j] - native[j] for j in JUDGES)
     gain = min(final["zero_code"][j] - final["clean"][j] for j in JUDGES)
