@@ -90,7 +90,7 @@ def test_benign_marshal_reference_flags_do_not_change_actual_factory_identity(mo
     raw_before = marshal.dumps(code)
     before = guided.factory.factory_binding_manifest()
     aliases = (code.co_consts, code.co_names, code.co_varnames, code.co_filename,
-               code.co_code, code.co_linetable, code.co_exceptiontable)
+               code.co_code, code.co_linetable, getattr(code, "co_exceptiontable", b""))
     raw_after = marshal.dumps(code)
     assert raw_before != raw_after  # The old metadata guard falsely rejects.
     assert marshal.loads(raw_before) == marshal.loads(raw_after)
