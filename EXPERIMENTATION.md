@@ -302,8 +302,9 @@ their actual resolved recipes and separate source/runtime/sampling cohorts.
 # Read-only cost/coverage plan, then explicit gated execution.
 python -m experiments.forge inventory plan --through-tier 3
 python -m experiments.forge inventory run --through-tier 3 --gpus 0,1
-# Read-only publication with compact, linked receipt summaries.
+# Replay the measured inventory's recorded implementation without training.
 python reports/forge/regenerate_technique_inventory.py --device cuda \
+  --source-commit b04b1b27 \
   --output-prefix reports/forge/technique-inventory
 python -m experiments.forge logs --follow --campaign technique-inventory-v1
 ```
@@ -322,7 +323,13 @@ into Git. Full new execution envelopes remain ignored and archived unchanged;
 summary projections are never qualification inputs. To rebuild the measured
 inventory in another checkout, first hydrate the exact originals using the
 [archive manifest and restoration instructions](reports/forge/TECHNIQUE_INVENTORY_READOUT.md).
-The wrapper refuses to overwrite a measured report when those originals are absent.
+The wrapper refuses to overwrite a measured report when those originals are absent
+or the live source no longer contains its measured cohort. `--source-commit`
+reconstructs and verifies the recorded implementation before independent regrading;
+its results do not qualify a newer checkout. To publish a new current cohort, omit
+that flag and use a new output prefix. Do not rerun unchanged science solely for a
+merge or a reporting change. Inventory runs compile boards once after draining;
+attempt receipts and tail-able events remain available throughout execution.
 
 Receipt certification describes evidence identity, not a scientific pass.
 Use `board --json` to inspect family/provenance options and unknowns.

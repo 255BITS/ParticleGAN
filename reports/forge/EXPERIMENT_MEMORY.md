@@ -4049,4 +4049,4 @@ This technique failed the full 80-update two_pole smoke gate: {'grad_med': 0.063
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v1`; input digest `86d87dc8093e7d58deec4d92970512e7d899e9b676c7f9dc43a4b37aab6d8de0`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v1`; input digest `ee9aea63ece5bb5ff0b0d48be4940c159bed5d05f6585dee19a0869c29be8cde`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

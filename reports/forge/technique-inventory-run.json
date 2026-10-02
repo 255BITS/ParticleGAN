@@ -329,8 +329,10 @@
   "upfront_blocked_techniques": 4,
   "validation": {
     "focused_inventory_and_knowledge_tests_passed": 53,
-    "forge_tests_passed": 708,
-    "publication_tests_passed": 9,
+    "forge_tests_passed": 749,
+    "frozen_implementation_forge_tests_passed": 708,
+    "publication_tests_passed": 14,
+    "scope": "Full final Forge suite: 749 passed; final publication guard revision: 14 passed. Focused counts overlap the full suite.",
     "tasks_validated": 47,
     "views_validated": 6
   },

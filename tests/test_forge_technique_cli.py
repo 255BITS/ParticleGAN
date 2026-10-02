@@ -17,3 +17,27 @@ def test_techniques_cli_regeneration_selects_compute_without_execution_options()
     assert args.command == "techniques"
     assert args.device == "cuda"
     assert str(args.output) == "reports/forge/technique-inventory"
+
+
+def test_inventory_compiles_boards_once_after_all_attempts(monkeypatch, tmp_path):
+    from experiments.forge import __main__ as cli, knowledge, queue, technique_inventory
+
+    events = []
+
+    class FakeQueue:
+        def __init__(self, root, *, report_root, on_completion):
+            self.on_completion = on_completion
+
+    def run(root, queue_root, *, queue, **options):
+        for _ in range(3):
+            events.append("receipt")
+            if queue.on_completion:
+                queue.on_completion()
+        return {"stage": "drained"}
+
+    monkeypatch.setattr(queue, "Queue", FakeQueue)
+    monkeypatch.setattr(technique_inventory, "run_inventory", run)
+    monkeypatch.setattr(knowledge, "compile_memory", lambda root: events.append("compile"))
+    monkeypatch.setattr(cli, "emit", lambda result: None)
+    cli.main(["--root", str(tmp_path), "inventory", "run", "--gpus", "cpu"])
+    assert events == ["receipt", "receipt", "receipt", "compile"]

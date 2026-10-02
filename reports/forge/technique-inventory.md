@@ -1,8 +1,10 @@
 # Forge technique inventory by tier
 
+This report grades the **frozen source cohort `b04b1b27296b0cba11b70eb9693fbe9200ed38a5`** reconstructed from Git and verified against original receipt manifests. Its outcomes do not qualify the latest checkout.
+
 View `discriminator_stability` revision 2; requested device `cuda`. Calibration remains `provisional`.
 
-Each cell is **passes / full required total** for that exact current cohort. Rows follow Forge's attained-tier order; no aggregate quality or speed ranking is declared.
+Each cell is **passes / full required total** for that exact recorded cohort. Rows follow Forge's attained-tier order; no aggregate quality or speed ranking is declared.
 
 | Technique | Cohort / exact revision | Compute | Tier 1 | Tier 2 | Tier 3 | Qualified tier | Other outcomes | Paid seconds |
 | --- | --- | --- | ---: | ---: | ---: | ---: | --- | ---: |
@@ -21,7 +23,7 @@ Each cell is **passes / full required total** for that exact current cohort. Row
 
 UNKNOWN means missing or unrun evidence. A failed or blocked prerequisite stops later-tier spending while every declared task stays in its denominator. Nonrequired diagnostics never fill required cells.
 
-Current rows bind the resolved recipe, prior, initialization, full budget, sampling law, source and runtime. Different clean/noisy sampling and hardware cohorts stay separate.
+Recorded rows bind the resolved recipe, prior, initialization, full budget, sampling law, source and runtime. Different clean/noisy sampling and hardware cohorts stay separate.
 
 ## Measured cells and first blockers
 
@@ -47,9 +49,9 @@ Pinned, calibration diagnostic and historical evidence remains separate and unra
 Regenerate after new Forge receipts or declarations with:
 
 ```sh
-python reports/forge/regenerate_technique_inventory.py --root . --goal discriminator_stability --device cuda --output-prefix reports/forge/technique-inventory
+python reports/forge/regenerate_technique_inventory.py --root . --goal discriminator_stability --device cuda --output-prefix reports/forge/technique-inventory --source-commit b04b1b27296b0cba11b70eb9693fbe9200ed38a5
 ```
 
-Reducer `forge-technique-board-v1`; input digest `761ce37a91214e5fc13362d09c71d79b5f6b26ac38d281de4f1fdfe8186f52df`. Report generation launches no training.
+Reducer `forge-technique-board-v1`; input digest `0de8c6a207b1112da281005e371f0eab7b65a4c26e718633100c4c11eb8f422d`. Report generation launches no training.
 
 Published receipt summaries retain final metrics, gate outcomes and original file hashes. They are display artifacts and supply no qualification input. Hydrate byte-exact original request/evidence/result receipts from the artifact archive before a full independent regrade.

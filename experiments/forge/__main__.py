@@ -199,7 +199,11 @@ def main(argv=None):
     def publish():
         from .knowledge import compile_memory
         compile_memory(root)
-    queue = Queue(queue_root, report_root=root / "reports/forge", on_completion=publish)
+    # The inventory already records every attempt in the live event stream.
+    # Compile the full set of boards once after draining this campaign.
+    batch_inventory = args.command == "inventory" and args.stage == "run"
+    queue = Queue(queue_root, report_root=root / "reports/forge",
+                  on_completion=None if batch_inventory else publish)
     command = args.command
     if command == "new":
         from .planning import new_idea
@@ -265,6 +269,7 @@ def main(argv=None):
             emit(enqueue_inventory(root, queue_root, queue=queue, **options))
         else:
             emit(run_inventory(root, queue_root, devices=args.gpus.split(","), queue=queue, **options))
+            publish()
     elif command in {"compile", "recall", "board", "readout"}:
         from . import knowledge
         if command == "compile":

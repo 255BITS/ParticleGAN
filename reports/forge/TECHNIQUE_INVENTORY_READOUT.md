@@ -1,7 +1,7 @@
 # Technique inventory through ordinary Forge tiers
 
-The [generated leaderboard](technique-inventory.md) covers all **12 current
-technique declarations**. Matched BCap leads this exact cohort: **3/3 smoke,
+The [generated leaderboard](technique-inventory.md) covers all **12 technique
+declarations at frozen implementation `b04b1b27`**. Matched BCap leads this exact cohort: **3/3 smoke,
 5/19 quality, 0/2 endurance**, attaining tier 1 before failing mode hold.
 Matched R1/R2, K3P, KA2 and four K3P ablations stop at the first smoke task.
 E22, Atlas and both released GAN v3 host variants are blocked before training.
@@ -76,6 +76,7 @@ an immutable campaign requires a new ID and explicit budgets.
 python -m experiments.forge inventory plan --through-tier 3
 python -m experiments.forge inventory run --through-tier 3 --gpus 0,1
 python reports/forge/regenerate_technique_inventory.py --device cuda \
+  --source-commit b04b1b27 \
   --output-prefix reports/forge/technique-inventory
 python -m experiments.forge logs --follow --campaign technique-inventory-v1
 ```
@@ -104,11 +105,17 @@ archive, verify its hash against the manifest, and extract it from the repositor
 root. The original envelopes are restored into ignored paths; full archived
 readouts remain under `runs/`. Use the recorded implementation, runtime and
 hardware cohort to reproduce this table. Different cohorts remain separate.
+The later merge of `develop` adds reporting source and changes Forge's broad
+source identity. The replay option reconstructs and verifies the old implementation
+in a separate process; its outcomes do not qualify the merged checkout. Current
+boards retain these outcomes as pinned evidence. No experiments were repeated for
+that merge. Future current publications omit `--source-commit` and use a new prefix.
 
 ```sh
 sha256sum runs/forge/technique-inventory-v1/receipts-and-source.tar.gz
 tar -xzf runs/forge/technique-inventory-v1/receipts-and-source.tar.gz
 python reports/forge/regenerate_technique_inventory.py --device cuda \
+  --source-commit b04b1b27 \
   --output-prefix reports/forge/technique-inventory
 ```
 
@@ -117,8 +124,10 @@ evidence without training. It refuses to replace a measured report when its
 original envelopes are missing. Raw stdout, per-update streams, checkpoints
 and state dumps remain local or in the archive; no ignored logs were force-added.
 
-Validation passed **708 Forge tests**, **53 focused inventory/knowledge tests**
-and **9 publication tests**; Forge validates **47 tasks and 6 views**. The
-publication tests cover trace removal, immutable originals, invalid certificate
-rejection, summary links and missing-archive protection. Metrics and receipts
-drive this comparison; no image inspection or seed-only experiment was used.
+The full Forge suite passed **749 tests**. After the final publication guard
+update, all **14 publication tests** passed; these overlap the full suite. Forge
+validates **47 tasks and 6 views**. Publication checks cover trace removal,
+immutable originals, invalid certificate rejection, summary links, missing-archive
+protection and frozen-source replay after live source or runtime changes. Metrics
+and receipts drive this comparison; no image inspection or seed-only experiment
+was used.
