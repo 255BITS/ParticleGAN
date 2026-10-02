@@ -1,0 +1,447 @@
+{
+  "additional_goal_gifs": 4,
+  "combined_question_count": 113,
+  "frozen_176_variant_campaign_changed": false,
+  "independent_review": {
+    "all_four_final_frames_visually_readable": true,
+    "elapsed_seconds": 10.85,
+    "focused_software_controls_passed": 26,
+    "raw_input_identities_verified": 35,
+    "receipt": "/ml2/hypergan/toy-recent-pr-media-independent-qa-20261002/binding-review.json",
+    "receipt_sha256": "a6b9265a900f5e39f07262da45fd29b0ba27d053a0f3da0ed15f62c2f55f71d0",
+    "status": "PASS",
+    "training_or_model_rescoring": false
+  },
+  "independent_training_or_model_rescoring_during_review": false,
+  "metadata_scope": "Frozen parent GitHub metadata snapshots; remote state may subsequently change. Exact heads and completed checks are recorded per case.",
+  "original_110_question_coverage_changed": false,
+  "quality_scale": "4/5 here rates a useful bounded diagnostic definition, not learned success or old catalog rerating.",
+  "raw_verification": {
+    "exporter_source_commit": "02215b50fae7189db3c132b72cfb0d7f93ee320f",
+    "final_export_archive": "/ml2/hypergan/toy-recent-pr-media-final-export-20261002",
+    "original_bytes_unchanged": true,
+    "original_previews_preserved": "/ml2/hypergan/toy-recent-pr-media-first-export-20261002"
+  },
+  "records": [
+    {
+      "actual_result": "Time-only initialization restores code sensitivity. Terminal clean MSE is 2.83% worse than original at width4 and49.17% better at width16; no general winner. Original actual NovaQwen transfer is3.32% worse and remains a separate failed cohort.",
+      "added_gate_status": "PASS (source-predeclared code-retention controls plus exact full finite protocol; no learned-benefit bound)",
+      "arms": 6,
+      "attestation_limit": "Published campaign/readout/JUnit bind summaries, complete evaluation curves, initial Jacobians, serving endpoints and source/native manifests. Per-update traces, metadata and final checkpoint digests are recorded at export time only; the original readout did not attest those file hashes.",
+      "base_name": "develop",
+      "catalog_id": "pr233",
+      "changed_files": [
+        "benchmarks/routed_conditioning/spatial_damping.py",
+        "docs/routed_film_code_preserved_20261002.json",
+        "docs/routed_film_code_preserved_20261002.md",
+        "tests/test_routed_conditioning_code_preserved.py"
+      ],
+      "ci_all_success": true,
+      "ci_checks_at_metadata_snapshot": [
+        {
+          "completedAt": "2026-10-02T04:09:01Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/255BITS/ParticleGAN/actions/runs/36963163859/job/110701073006",
+          "name": "CPU / Python 3.10",
+          "status": "COMPLETED"
+        },
+        {
+          "completedAt": "2026-10-02T04:09:29Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/255BITS/ParticleGAN/actions/runs/36963163859/job/110701073087",
+          "name": "CPU / Python 3.11",
+          "status": "COMPLETED"
+        },
+        {
+          "completedAt": "2026-10-02T04:24:46Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/255BITS/ParticleGAN/actions/runs/36963163859/job/110701072886",
+          "name": "CPU / Python 3.12",
+          "status": "COMPLETED"
+        },
+        {
+          "completedAt": "2026-10-02T04:25:19Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/255BITS/ParticleGAN/actions/runs/36963163859/job/110704984562",
+          "name": "Build release distributions",
+          "status": "COMPLETED"
+        }
+      ],
+      "distinct_reason": "Spatial 2x8x8 hosts, widths4/16, and time-only additive initialization retain a direct code route at h=0; the four existing api-film arms use a width16/two-block vector host and whole additive erasure.",
+      "exporter_source": {
+        "commit": "02215b50fae7189db3c132b72cfb0d7f93ee320f",
+        "file": "benchmarks/toy_audit/recent_toy_media.py",
+        "sha256": "71fb5ea6a15f40f87d0d586394b1ae80326517ac0362bc2172926095fc732a98"
+      },
+      "frame_counts": [
+        13,
+        13
+      ],
+      "fresh_execution_status": "NOT_RUN (retained original evidence verified)",
+      "gate_scope": "Source numerical tests assert byte equality of retained code columns, owner invariants and exact replay. Export requires all six1200-update arms, dense128-row gradients, finite health, all13 actual observations and bound endpoints. No learned-quality threshold is added.",
+      "goal": "Neutralize only additive time columns while preserving initial additive code columns in a spatial FiLM host.",
+      "head_parents": [
+        "c4b53495d04a2052e266739a82053317b7f49698"
+      ],
+      "head_sha": "6be1be53f8a8c2ac5d823aa8f63430d9c6a58a84",
+      "independent_training_during_review": false,
+      "media": [
+        {
+          "actual_updates": [
+            0,
+            100,
+            200,
+            300,
+            400,
+            500,
+            600,
+            700,
+            800,
+            900,
+            1000,
+            1100,
+            1200
+          ],
+          "bytes": 437031,
+          "file": "pr233/pr233-width4-goal.gif",
+          "frames": 13,
+          "preview_sha256_identical": true,
+          "sha256": "1051bc4800d23ed6238dafc5f3bc5b4be9235b2f77b98c0065ec0d9eaa606cfa",
+          "variance_observation_phases": null,
+          "visually_inspected": true
+        },
+        {
+          "actual_updates": [
+            0,
+            100,
+            200,
+            300,
+            400,
+            500,
+            600,
+            700,
+            800,
+            900,
+            1000,
+            1100,
+            1200
+          ],
+          "bytes": 433708,
+          "file": "pr233/pr233-width16-goal.gif",
+          "frames": 13,
+          "preview_sha256_identical": true,
+          "sha256": "2f4daf32f40f0426d5fe843a16f4509031e7e3a7814559ff2688c8690e02ea71",
+          "variance_observation_phases": null,
+          "visually_inspected": true
+        }
+      ],
+      "media_software_controls": "26 PASS",
+      "merge_state_at_metadata_snapshot": "UNKNOWN",
+      "mergeable_at_metadata_snapshot": "UNKNOWN",
+      "metadata_snapshot_path": "/ml2/hypergan/toy-pr233-review-metadata-20261002.json",
+      "metadata_snapshot_sha256": "4d5e95d9b777490cb3123c477045edebf459a73fca8bd179c9898c3cad9ffd93",
+      "model_rescoring_during_review": false,
+      "native_updates_each": 1200,
+      "original_contract_gap": "Original public caller can exit0 after a capped partial loop. The wrapper refuses partial/full-budget mismatch before any receipt or GIF; learned benefit remains unqualified.",
+      "original_quality_tier": null,
+      "original_scientific_status": "NO_FROZEN_GATE",
+      "original_source_software_checks": "PASS",
+      "pr": 233,
+      "production_package_config_lib_changes": false,
+      "public_caller": "python -m benchmarks.routed_conditioning.spatial_damping",
+      "receipt": "pr233/receipt.json",
+      "receipt_sha256": "b65508fe8004fcae9630e21f6682ada5a800247bc904f16a32cfe48dbd7b3b29",
+      "recommendation": "PRESERVE_AND_ADD",
+      "recommended_quality_tier": "4/5 bounded diagnostic definition",
+      "related_existing_variants": [
+        "api-film-original_native",
+        "api-film-shift_zero_native",
+        "api-film-shift_zero_g_bypass",
+        "api-film-shift_zero_antithetic"
+      ],
+      "retained_input": "/ml2/hypergan/routed-film-code-preserved-artifacts-20261002",
+      "scoped_source_commits": [
+        "6be1be53f8a8c2ac5d823aa8f63430d9c6a58a84"
+      ],
+      "source_files_sha256": {
+        "benchmarks/routed_conditioning/spatial_damping.py": "0122675cc226b6c5e128bbf36a9e2cadd768f42e86296d4c30888e356197ad39",
+        "docs/routed_film_code_preserved_20261002.json": "63fa23a0533acf88c54f3dced4a997590e025f38728ed47cdaffa03580739aac",
+        "docs/routed_film_code_preserved_20261002.md": "ef3701af469f6e4211d09bbe887902b7116e02877f58f0f50b5cfda979d05653",
+        "tests/test_routed_conditioning_code_preserved.py": "5c174be36d188b94dfd418809e7ae0478b584e44e29a1fa7c5fdebd23f0a5624"
+      },
+      "source_test_count": 29,
+      "source_test_logs": [
+        "pr233-software.log",
+        "pr233-antithetic-adjacent-software.log"
+      ],
+      "state_at_metadata_snapshot": "OPEN",
+      "title": "Add code-preserving FiLM ablation with negative Nova Qwen transfer",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/233"
+    },
+    {
+      "actual_result": "Portable primary ratio0.9785470252362619 fails0.75; ownership checks pass. Separate actual caption ratio0.9210079768 also fails. Fixed-clean Gaussian controls demonstrate that the two stochastic components answer different questions.",
+      "added_gate_status": "FAIL (unchanged original ratio<=0.75)",
+      "arms": 0,
+      "attestation_limit": "The portable first-receipt hash is in the published source card. Per-pair gradient vectors were not retained, so only the two actual batch summaries and original aggregate are animated.",
+      "base_name": "develop",
+      "catalog_id": "pr234",
+      "changed_files": [
+        "docs/e22_routed_antithetic_variance.md",
+        "docs/e22_routed_caption_antithetic_failure.json",
+        "examples/e22_routed_antithetic_variance.py",
+        "tests/test_e22_routed_antithetic_variance.py"
+      ],
+      "ci_all_success": true,
+      "ci_checks_at_metadata_snapshot": [
+        {
+          "completedAt": "2026-10-02T05:29:38Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/255BITS/ParticleGAN/actions/runs/36969006116/job/110718841623",
+          "name": "CPU / Python 3.10",
+          "status": "COMPLETED"
+        },
+        {
+          "completedAt": "2026-10-02T05:29:32Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/255BITS/ParticleGAN/actions/runs/36969006116/job/110718841687",
+          "name": "CPU / Python 3.11",
+          "status": "COMPLETED"
+        },
+        {
+          "completedAt": "2026-10-02T05:44:04Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/255BITS/ParticleGAN/actions/runs/36969006116/job/110718841688",
+          "name": "CPU / Python 3.12",
+          "status": "COMPLETED"
+        },
+        {
+          "completedAt": "2026-10-02T05:45:00Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/255BITS/ParticleGAN/actions/runs/36969006116/job/110722574371",
+          "name": "Build release distributions",
+          "status": "COMPLETED"
+        }
+      ],
+      "distinct_reason": "A zero-update centered estimator-variance counterexample under two fixed batches, full-generator gradients and routed DV12; existing D-antithetic/FiLM arms measure learned fit or critic force, not this variance question.",
+      "exporter_source": {
+        "commit": "02215b50fae7189db3c132b72cfb0d7f93ee320f",
+        "file": "benchmarks/toy_audit/recent_toy_media.py",
+        "sha256": "71fb5ea6a15f40f87d0d586394b1ae80326517ac0362bc2172926095fc732a98"
+      },
+      "frame_counts": [
+        3
+      ],
+      "fresh_execution_status": "NOT_RUN (retained original evidence verified)",
+      "gate_scope": "Exactly two fixed B4 batches,16 private sign pairs each, sigma0.125, no native updates. Each displayed ratio must match paired/single centered variance, and aggregate energies must match the two fixed-batch means. Full-generator DV12+Gaussian ratio<=0.75 is the primary gate.",
+      "goal": "Test whether Gaussian antithetic pairing reduces total routed-generator gradient variance when the public forward includes DV12 and BF16 transport.",
+      "head_parents": [
+        "45e621f11de05816204151a271e87144ebded90a"
+      ],
+      "head_sha": "ae7fd0bb2f61967f718c96ba9722cd4a7c9d1be0",
+      "independent_training_during_review": false,
+      "media": [
+        {
+          "actual_updates": [
+            0,
+            0,
+            0
+          ],
+          "bytes": 126217,
+          "file": "pr234/pr234-goal.gif",
+          "frames": 3,
+          "preview_sha256_identical": true,
+          "sha256": "5f6c1369207b6912da44c3efbd1aeef68695fcfd90d0768e4fa75683d865c342",
+          "variance_observation_phases": [
+            0,
+            1,
+            2
+          ],
+          "visually_inspected": true
+        }
+      ],
+      "media_software_controls": "26 PASS",
+      "merge_state_at_metadata_snapshot": "CLEAN",
+      "mergeable_at_metadata_snapshot": "MERGEABLE",
+      "metadata_snapshot_path": "/ml2/hypergan/toy-pr234-review-metadata-20261002.json",
+      "metadata_snapshot_sha256": "4361a02ff9628caac01427e199588c2641df2f519e31627c131f4e12c79cc82e",
+      "model_rescoring_during_review": false,
+      "native_updates_each": 0,
+      "original_contract_gap": "The original diagnostic has no training updates. Its GIF is explicitly an estimator illustration of batch1, batch2 and their variance aggregate; it must never be presented as training convergence.",
+      "original_quality_tier": null,
+      "original_scientific_status": "FAIL",
+      "original_source_software_checks": "PASS",
+      "pr": 234,
+      "production_package_config_lib_changes": false,
+      "public_caller": "python examples/e22_routed_antithetic_variance.py --fixture routed-dv12 --bf16",
+      "receipt": "pr234/receipt.json",
+      "receipt_sha256": "fa6d862f17922ad5c017066022b89ef735c67a707a279ebbdc138df7e180f572",
+      "recommendation": "PRESERVE_AND_ADD",
+      "recommended_quality_tier": "4/5 bounded diagnostic definition",
+      "related_existing_variants": [
+        "api-critic-lag-d_antithetic",
+        "api-film-shift_zero_antithetic"
+      ],
+      "retained_input": "/ml2/hypergan/ParticleGAN-antithetic-variance-public-develop/runs/routed-dv12-first.json",
+      "scoped_source_commits": [
+        "ae7fd0bb2f61967f718c96ba9722cd4a7c9d1be0"
+      ],
+      "source_files_sha256": {
+        "docs/e22_routed_antithetic_variance.md": "d0e5571cb44e497fbb9f932c4e92cceaefd08743c2d798312a20b8bdff5d4c69",
+        "docs/e22_routed_caption_antithetic_failure.json": "7fabe49df73cb5b8fc66b5f6e41888b78e3f5858bbecdbc52bf6c97d4d7879f8",
+        "examples/e22_routed_antithetic_variance.py": "c82ce65adf1c2048ac5cc5312cb788af50bd7aa46bc3bea678cc66c65a6a1818",
+        "tests/test_e22_routed_antithetic_variance.py": "36df2f72d589eb59dfefa77430b751678ab89df6fd74006c6ee7c3eb2a03a72d"
+      },
+      "source_test_count": 9,
+      "source_test_logs": [
+        "pr234-software.log"
+      ],
+      "state_at_metadata_snapshot": "OPEN",
+      "title": "Add public API routed noise variance failure toy",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/234"
+    },
+    {
+      "actual_result": "Worst terminal clean-G minus native game=-0.0003039836883544922 and minimum code gain=0.0909001827 pass the frozen synthetic gate. Intermediate regressions remain visible. Separate actual caption transfer fails; this is not an absolute fit, sustained convergence or general DV12 default claim.",
+      "added_gate_status": "PASS (unchanged original four-judge gate)",
+      "arms": 2,
+      "attestation_limit": "Report, completion, both full traces and retained tensors have hashes in the published source card. Animation reads saved numeric curves; no model or metric is recomputed.",
+      "base_name": "develop",
+      "catalog_id": "pr235",
+      "changed_files": [
+        ".gitignore",
+        "docs/e22_routed_g_clean.md",
+        "docs/e22_routed_g_clean_caption_results.json",
+        "docs/e22_routed_g_clean_caption_results.md",
+        "docs/e22_routed_g_clean_results.json",
+        "docs/e22_routed_g_clean_v1.json",
+        "examples/e22_routed_g_clean.py",
+        "tests/test_e22_routed_g_clean.py"
+      ],
+      "ci_all_success": true,
+      "ci_checks_at_metadata_snapshot": [
+        {
+          "completedAt": "2026-10-02T06:33:08Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/255BITS/ParticleGAN/actions/runs/36973926855/job/110733555080",
+          "name": "CPU / Python 3.10",
+          "status": "COMPLETED"
+        },
+        {
+          "completedAt": "2026-10-02T06:33:04Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/255BITS/ParticleGAN/actions/runs/36973926855/job/110733555231",
+          "name": "CPU / Python 3.11",
+          "status": "COMPLETED"
+        },
+        {
+          "completedAt": "2026-10-02T06:46:52Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/255BITS/ParticleGAN/actions/runs/36973926855/job/110733554853",
+          "name": "CPU / Python 3.12",
+          "status": "COMPLETED"
+        },
+        {
+          "completedAt": "2026-10-02T06:47:26Z",
+          "conclusion": "SUCCESS",
+          "detailsUrl": "https://github.com/255BITS/ParticleGAN/actions/runs/36973926855/job/110737432675",
+          "name": "Build release distributions",
+          "status": "COMPLETED"
+        }
+      ],
+      "distinct_reason": "Changes only G-forward latent perturbation while preserving D DV12 and native draw cadence in a fresh two-site conditioning-switch fixture. Existing acquisition and critic-lag cases change initialization or critic force/symmetry instead.",
+      "exporter_source": {
+        "commit": "02215b50fae7189db3c132b72cfb0d7f93ee320f",
+        "file": "benchmarks/toy_audit/recent_toy_media.py",
+        "sha256": "71fb5ea6a15f40f87d0d586394b1ae80326517ac0362bc2172926095fc732a98"
+      },
+      "frame_counts": [
+        9
+      ],
+      "fresh_execution_status": "NOT_RUN (retained original evidence verified)",
+      "gate_scope": "Exactly512 updates per arm. Worst terminal clean-G minus native common-critic game<-1e-4; beneficial zero-code ablation>1e-6; all four reference ladders calibrated; bank/query live and exactly two positive branch norms. Ordinary-toy comparison unavailable.",
+      "goal": "Compare native training with perturb=False only on the differentiable generator forward, under four fixed common judges and matched public routed noise/data schedules.",
+      "head_parents": [
+        "369fffa95f107410ea5862095607f3bea198a656"
+      ],
+      "head_sha": "bcd4b1b201f8f154a00e2b432cf051c0e318813c",
+      "independent_training_during_review": false,
+      "media": [
+        {
+          "actual_updates": [
+            0,
+            64,
+            128,
+            192,
+            256,
+            320,
+            384,
+            448,
+            512
+          ],
+          "bytes": 541530,
+          "file": "pr235/pr235-goal.gif",
+          "frames": 9,
+          "preview_sha256_identical": true,
+          "sha256": "425db281ddba14a133723b7217ebc1d8df4c7da89e79de04db1a63fc2dbf725f",
+          "variance_observation_phases": null,
+          "visually_inspected": true
+        }
+      ],
+      "media_software_controls": "26 PASS",
+      "merge_state_at_metadata_snapshot": "CLEAN",
+      "mergeable_at_metadata_snapshot": "MERGEABLE",
+      "metadata_snapshot_path": "/ml2/hypergan/toy-pr235-review-metadata-20261002.json",
+      "metadata_snapshot_sha256": "1957578912dda4a0791655899ba248c2626c5d57ca2c1adc852445753b3164e3",
+      "model_rescoring_during_review": false,
+      "native_updates_each": 512,
+      "original_contract_gap": "The source already has a full-budget learned metric and saved actual observations but no goal GIF. The supplement adds the GIF while refusing partial or unbound reports.",
+      "original_quality_tier": null,
+      "original_scientific_status": "PASS (bounded synthetic terminal gate)",
+      "original_source_software_checks": "PASS",
+      "pr": 235,
+      "production_package_config_lib_changes": false,
+      "public_caller": "python examples/e22_routed_g_clean.py --run",
+      "receipt": "pr235/receipt.json",
+      "receipt_sha256": "532e78fc3312da92e1b237967e2b471a11334cf5a1b361e7ee2ba029dcfec0ac",
+      "recommendation": "PRESERVE_AND_ADD",
+      "recommended_quality_tier": "4/5 bounded diagnostic definition",
+      "related_existing_variants": [
+        "api-routed-acquisition-original",
+        "api-routed-acquisition-neutral",
+        "api-critic-lag-current",
+        "api-critic-lag-even_critic",
+        "api-critic-lag-d_antithetic"
+      ],
+      "retained_input": "/ml2/hypergan/ParticleGAN-routed-g-clean-toy-develop/runs/routed-g-clean-v1",
+      "scoped_source_commits": [
+        "369fffa95f107410ea5862095607f3bea198a656",
+        "bcd4b1b201f8f154a00e2b432cf051c0e318813c"
+      ],
+      "source_files_sha256": {
+        ".gitignore": "f52f9963ea8194abdcdb432f3d4c339bfb4ebf2f62009c49862760cf6e343abf",
+        "docs/e22_routed_g_clean.md": "dd7e0fe5cdf5484d1683a5492c4567175abf120493c4d103320e53d9b493e3a0",
+        "docs/e22_routed_g_clean_caption_results.json": "82de298a93626353e221cb2eb9824af07cb41317a7986196918ad159a7732158",
+        "docs/e22_routed_g_clean_caption_results.md": "5fc8bd8cba7a633bcd6381b967478274f9a1d272b6a627424dfc561e355cfbde",
+        "docs/e22_routed_g_clean_results.json": "11089ea4af388899167740ed2f3ca45e2274c18b1a77352197329b2d2fa001bc",
+        "docs/e22_routed_g_clean_v1.json": "f33acb3b446e52375a3f759c9cca85a1c785a319b5f6218a797994b2bbab9929",
+        "examples/e22_routed_g_clean.py": "4386576cebcf05669f2daff8f7cd8b8f28a60bd966b37e2de795de72ee6d045d",
+        "tests/test_e22_routed_g_clean.py": "18ed686478e52c5ab80110271e5c1c087683b6c6eccf9d4e09a66eb6fda61a5b"
+      },
+      "source_test_count": 12,
+      "source_test_logs": [
+        "pr235-software.log"
+      ],
+      "state_at_metadata_snapshot": "OPEN",
+      "title": "Add a public API convergence test for clean routed generator updates",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/235"
+    }
+  ],
+  "schema": "particlegan_recent_toy_review_v1",
+  "software_controls": {
+    "elapsed_seconds": 11.96,
+    "log": "/ml2/hypergan/toy-audit-new-open-prs-233-235-20261002/recent-media-software-final.log",
+    "log_sha256": "3c260bacf3570fd06c83cca064c6e9835bc5576ba93af6572720eb1e338dc6a9",
+    "native_training_updates": 0,
+    "passed": 26
+  },
+  "standalone_new_questions": 3
+}
