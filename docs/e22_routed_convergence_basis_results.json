@@ -1,0 +1,366 @@
+{
+  "schema": "routed_convergence_basis_compact_v1",
+  "evidence_type": "completed observational private-clone diagnostic; zero training updates",
+  "scope": "Teacher-aligned rank-two, two-site conditional toy; no Forge/default/full-Supra quality qualification.",
+  "training_updates": 0,
+  "baseline_bindings": {
+    "source_hashes": {
+      "docs/e22_routed_convergence_v1.json": "8fbb7882ee2c57e4ea939a4cd642058fa5ddca21f6a139f16191b4822ff16d02",
+      "examples/run_e22_routed_convergence.py": "2421e447b79489d1f6be3721994f5edabed6af6ddbc3ebe7813ddcec109ce7c5",
+      "examples/e22_routed_convergence.py": "b814bc0cac728d02290f6f0ed712dd6bb9483074f11666c5c012e72cd4d8f6b6"
+    },
+    "native_revision": "6ec7e5788e14ea15ddc3e16ac71110458108b6a6",
+    "native_base_revision": "6ec7e5788e14ea15ddc3e16ac71110458108b6a6",
+    "native_source_hash": "d0be475a055aae953c22dbd19f6d2357db041437e0679d2f2f2cfa356517f65b"
+  },
+  "data_digest": "48a7d5a6ef912dbef2eb9e8161301054239e09f897624e0c3a6573e774f79df8",
+  "original_execution": {
+    "artifact_directory_local": "/ml2/hypergan/ParticleGAN-convergence-toy-develop/runs/routed-basis-audit-v1",
+    "basis": {
+      "source": "runs/routed-basis-audit-v1/audit.py",
+      "source_sha256": "b129be064ad4d429dacc1d18a25a6a1fb69906f06731817e6308e183697dab13",
+      "report": "runs/routed-basis-audit-v1/report.json",
+      "report_sha256": "8a100325038252a41aa982b038bc69e158ed92e69e918317573708315927cd59",
+      "log_sha256": "bb333e204930095b7d8a6db74fb2865a2101d11b6800e6c86072bf46786b56ce"
+    },
+    "output_tangent": {
+      "source": "runs/routed-basis-audit-v1/function_tangent.py",
+      "source_sha256": "82a3924021075fb4250dc420fb60aab57769cec232785a775709ecdd7814a7f8",
+      "report": "runs/routed-basis-audit-v1/function-tangent.json",
+      "report_sha256": "24b7b11d2e48a5c7f8a25b273de716a7480c6b433e6907216fdaaa206355fd89",
+      "log_sha256": "24b7b11d2e48a5c7f8a25b273de716a7480c6b433e6907216fdaaa206355fd89"
+    },
+    "input_sha256": {
+      "receipt.json": "6d0b3bb22c701f15968ce742afaa09e36af6083449d76245cf5306c2d24eaf60",
+      "particle_native_game/step-0000.pt": "93a9b475d1e7a2ec41b7f7c68eeaa6fc68ebc8bb5d88317c979d93ef632457f7",
+      "ordinary_native_game/step-0000.pt": "5e875bbf80f8ea5228c93e4ccde8ae1ee199034f9236797baba67ca9b1fbc2c5",
+      "particle_native_game/step-6400.pt": "b737bb91640dd005664df37c507e5e4852db482e48ca7aa350381a7dd676040e",
+      "ordinary_native_game/step-0800.pt": "860259c35a7415753484f4837ac2acdbd363f737278a1a163441136e45a41048",
+      "ordinary_native_game/step-6400.pt": "2cd6272b564932995e8c8212585b3be7391cf1b59b82965478482aa19f443e33",
+      "particle_native_game/step-0800.pt": "4e88bff07a4324f686798d894e063f4c2735f095f2690abb658b087327540902"
+    },
+    "runtime_checks_basis": {
+      "initial_clean_output_exact_all_three_models_all_pools": true,
+      "C_columns_bit_exact": true,
+      "all_private_native_state_unchanged": true,
+      "held_baseline_sources_unchanged": true,
+      "data_digest_exact": true,
+      "common_initial_output_gradient_bit_exact_all_four_judges": true
+    },
+    "runtime_checks_tangent": {
+      "same_base_outputs_all_function_tangents": true,
+      "private_full_native_states_unchanged": true,
+      "C_unchanged": true
+    }
+  },
+  "packaged_reproducer": {
+    "source": "examples/diagnose_e22_routed_convergence_basis.py",
+    "source_sha256": "82163e505c9692a86660fcd5f317b2dce7db387971954723854b67c184e9d596",
+    "executed": false,
+    "note": "Tracked CLI packages the original scratch audit arithmetic and adds provenance checks. These observations came from the two original scratch sources, not an execution of the packaged reproducer.",
+    "validation": "Syntax/compile, no optimizer-step call, CLI help, and independent read-only math review; no unchanged scientific rerun.",
+    "command": "CUDA_VISIBLE_DEVICES='' PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=. python examples/diagnose_e22_routed_convergence_basis.py --parent runs/routed-convergence-v1 --out runs/routed-basis-audit-reproduced"
+  },
+  "fit_basis": {
+    "initial_particle": {
+      "first": {
+        "hidden_rms": 0.44934756526049324,
+        "hidden_modulation_over_hidden": 0.7766921900158377,
+        "gate_rms": 0.08343134850582995,
+        "code_modulation_over_hidden": 0.10898500486157564,
+        "phi_hidden_cosine": 0.7472828949484022,
+        "recover_hidden_from_phi_relative_rms": 0.5338347858943993,
+        "H_operator_norm": 0.3996070921421051,
+        "tanh_bias_rms": 0.2944810817871459
+      },
+      "second": {
+        "hidden_rms": 0.291290572610109,
+        "hidden_modulation_over_hidden": 0.8708719252412042,
+        "gate_rms": 0.1288698501906651,
+        "code_modulation_over_hidden": 0.15466862945444704,
+        "phi_hidden_cosine": 0.7706941503284036,
+        "recover_hidden_from_phi_relative_rms": 0.46789037235725506,
+        "H_operator_norm": 0.3639792799949646,
+        "tanh_bias_rms": 0.2424150008252591
+      }
+    },
+    "initial_H_bias_neutral": {
+      "first": {
+        "hidden_rms": 0.44934756526049324,
+        "hidden_modulation_over_hidden": 0.0,
+        "gate_rms": 0.08343134850582995,
+        "code_modulation_over_hidden": 0.10898500486157564,
+        "phi_hidden_cosine": 0.9971368066946688,
+        "recover_hidden_from_phi_relative_rms": 0.06706042980373159,
+        "H_operator_norm": 0.0,
+        "tanh_bias_rms": 0.0
+      },
+      "second": {
+        "hidden_rms": 0.291290572610109,
+        "hidden_modulation_over_hidden": 0.0,
+        "gate_rms": 0.1288698501906651,
+        "code_modulation_over_hidden": 0.15466862945444704,
+        "phi_hidden_cosine": 0.9886981946640794,
+        "recover_hidden_from_phi_relative_rms": 0.11151014820400022,
+        "H_operator_norm": 0.0,
+        "tanh_bias_rms": 0.0
+      }
+    },
+    "final_particle": {
+      "first": {
+        "hidden_rms": 0.749912636440643,
+        "hidden_modulation_over_hidden": 0.6133215247303931,
+        "gate_rms": 0.9283230173098237,
+        "code_modulation_over_hidden": 0.957365783428455,
+        "phi_hidden_cosine": 0.8331033150535401,
+        "recover_hidden_from_phi_relative_rms": 0.5248873136011474,
+        "H_operator_norm": 0.62624591588974,
+        "tanh_bias_rms": 0.29270701699496154
+      },
+      "second": {
+        "hidden_rms": 0.4791243436720111,
+        "hidden_modulation_over_hidden": 0.7392013475745473,
+        "gate_rms": 0.958063496685421,
+        "code_modulation_over_hidden": 0.9769880711887157,
+        "phi_hidden_cosine": 0.9249592168771362,
+        "recover_hidden_from_phi_relative_rms": 0.21687794073387723,
+        "H_operator_norm": 0.5036530494689941,
+        "tanh_bias_rms": 0.2545472761492932
+      }
+    }
+  },
+  "initial_parameter_gradient": {
+    "ordinary_native_game@800": {
+      "first": {
+        "particle": {
+          "cosine_to_ordinary": -0.6830318391827914,
+          "relative_difference_from_ordinary": 1.755235195159912
+        },
+        "H_bias_neutral": {
+          "cosine_to_ordinary": 0.9999111930754416,
+          "relative_difference_from_ordinary": 0.05264338105916977
+        }
+      },
+      "second": {
+        "particle": {
+          "cosine_to_ordinary": 0.06142974674902443,
+          "relative_difference_from_ordinary": 2.6027724742889404
+        },
+        "H_bias_neutral": {
+          "cosine_to_ordinary": 0.9989562283274699,
+          "relative_difference_from_ordinary": 0.049242280423641205
+        }
+      }
+    },
+    "ordinary_native_game@6400": {
+      "first": {
+        "particle": {
+          "cosine_to_ordinary": -0.21744392982862903,
+          "relative_difference_from_ordinary": 1.4542198181152344
+        },
+        "H_bias_neutral": {
+          "cosine_to_ordinary": 0.9996195226914755,
+          "relative_difference_from_ordinary": 0.053749844431877136
+        }
+      },
+      "second": {
+        "particle": {
+          "cosine_to_ordinary": 0.5441538613983924,
+          "relative_difference_from_ordinary": 1.2090778350830078
+        },
+        "H_bias_neutral": {
+          "cosine_to_ordinary": 0.998368605590349,
+          "relative_difference_from_ordinary": 0.09102634340524673
+        }
+      }
+    },
+    "particle_native_game@800": {
+      "first": {
+        "particle": {
+          "cosine_to_ordinary": -0.47028981444759066,
+          "relative_difference_from_ordinary": 1.8491222858428955
+        },
+        "H_bias_neutral": {
+          "cosine_to_ordinary": 0.9998747549456564,
+          "relative_difference_from_ordinary": 0.053584691137075424
+        }
+      },
+      "second": {
+        "particle": {
+          "cosine_to_ordinary": 0.15488637590399731,
+          "relative_difference_from_ordinary": 2.248037576675415
+        },
+        "H_bias_neutral": {
+          "cosine_to_ordinary": 0.9985924086738146,
+          "relative_difference_from_ordinary": 0.05718482658267021
+        }
+      }
+    },
+    "particle_native_game@6400": {
+      "first": {
+        "particle": {
+          "cosine_to_ordinary": 0.5002214229721413,
+          "relative_difference_from_ordinary": 0.9028772115707397
+        },
+        "H_bias_neutral": {
+          "cosine_to_ordinary": 0.9995644068316176,
+          "relative_difference_from_ordinary": 0.06551975756883621
+        }
+      },
+      "second": {
+        "particle": {
+          "cosine_to_ordinary": 0.652328320722299,
+          "relative_difference_from_ordinary": 0.8615745902061462
+        },
+        "H_bias_neutral": {
+          "cosine_to_ordinary": 0.9974743620855451,
+          "relative_difference_from_ordinary": 0.07288966327905655
+        }
+      }
+    }
+  },
+  "initial_output_tangent": {
+    "ordinary_native_game@800": {
+      "raw_gradient": {
+        "particle": {
+          "cosine_to_ordinary_output_tangent": 0.5867310434973336,
+          "relative_output_tangent_difference": 1.6486974954605103,
+          "game_gradient_dot_output_tangent": -16.82195281982422,
+          "output_tangent_rms": 0.4473503530025482
+        },
+        "H_bias_neutral": {
+          "cosine_to_ordinary_output_tangent": 0.9964877583751448,
+          "relative_output_tangent_difference": 0.13632147014141083,
+          "game_gradient_dot_output_tangent": -6.377862453460693,
+          "output_tangent_rms": 0.1965821385383606
+        }
+      },
+      "initial_native_Adam": {
+        "particle": {
+          "cosine_to_ordinary_output_tangent": 0.5529202284656511,
+          "relative_output_tangent_difference": 1.0348061323165894,
+          "game_gradient_dot_output_tangent": -0.0011815311154350638,
+          "output_tangent_rms": 3.6252127756597474e-05
+        },
+        "H_bias_neutral": {
+          "cosine_to_ordinary_output_tangent": 0.9948592083180742,
+          "relative_output_tangent_difference": 0.11124883592128754,
+          "game_gradient_dot_output_tangent": -0.0007855819421820343,
+          "output_tangent_rms": 2.948528344859369e-05
+        }
+      }
+    },
+    "ordinary_native_game@6400": {
+      "raw_gradient": {
+        "particle": {
+          "cosine_to_ordinary_output_tangent": 0.7471322518919564,
+          "relative_output_tangent_difference": 0.9959812760353088,
+          "game_gradient_dot_output_tangent": -0.5735051035881042,
+          "output_tangent_rms": 0.07687679678201675
+        },
+        "H_bias_neutral": {
+          "cosine_to_ordinary_output_tangent": 0.9926533838961179,
+          "relative_output_tangent_difference": 0.17773045599460602,
+          "game_gradient_dot_output_tangent": -0.33417677879333496,
+          "output_tangent_rms": 0.044532615691423416
+        }
+      },
+      "initial_native_Adam": {
+        "particle": {
+          "cosine_to_ordinary_output_tangent": 0.47547305739447415,
+          "relative_output_tangent_difference": 1.1207175254821777,
+          "game_gradient_dot_output_tangent": -0.00020754974684678018,
+          "output_tangent_rms": 3.486166679067537e-05
+        },
+        "H_bias_neutral": {
+          "cosine_to_ordinary_output_tangent": 0.9577062347082432,
+          "relative_output_tangent_difference": 0.28776344656944275,
+          "game_gradient_dot_output_tangent": -0.00016368408978451043,
+          "output_tangent_rms": 2.8451626349124126e-05
+        }
+      }
+    },
+    "particle_native_game@800": {
+      "raw_gradient": {
+        "particle": {
+          "cosine_to_ordinary_output_tangent": 0.5924651039662014,
+          "relative_output_tangent_difference": 1.7104744911193848,
+          "game_gradient_dot_output_tangent": -15.767779350280762,
+          "output_tangent_rms": 0.4239991307258606
+        },
+        "H_bias_neutral": {
+          "cosine_to_ordinary_output_tangent": 0.9952501142124156,
+          "relative_output_tangent_difference": 0.14483273029327393,
+          "game_gradient_dot_output_tangent": -5.392412185668945,
+          "output_tangent_rms": 0.17917881906032562
+        }
+      },
+      "initial_native_Adam": {
+        "particle": {
+          "cosine_to_ordinary_output_tangent": 0.5866377667402621,
+          "relative_output_tangent_difference": 0.987104594707489,
+          "game_gradient_dot_output_tangent": -0.0011618754360824823,
+          "output_tangent_rms": 3.589972766349092e-05
+        },
+        "H_bias_neutral": {
+          "cosine_to_ordinary_output_tangent": 0.9708242599483611,
+          "relative_output_tangent_difference": 0.24099183082580566,
+          "game_gradient_dot_output_tangent": -0.0007354282424785197,
+          "output_tangent_rms": 2.9530619940487668e-05
+        }
+      }
+    },
+    "particle_native_game@6400": {
+      "raw_gradient": {
+        "particle": {
+          "cosine_to_ordinary_output_tangent": 0.8007260957236618,
+          "relative_output_tangent_difference": 0.6505921483039856,
+          "game_gradient_dot_output_tangent": -0.540452241897583,
+          "output_tangent_rms": 0.06738009303808212
+        },
+        "H_bias_neutral": {
+          "cosine_to_ordinary_output_tangent": 0.9905741382526888,
+          "relative_output_tangent_difference": 0.16237773001194,
+          "game_gradient_dot_output_tangent": -0.5799872875213623,
+          "output_tangent_rms": 0.05772019922733307
+        }
+      },
+      "initial_native_Adam": {
+        "particle": {
+          "cosine_to_ordinary_output_tangent": 0.5492772230359002,
+          "relative_output_tangent_difference": 1.0160261392593384,
+          "game_gradient_dot_output_tangent": -0.00023517050431109965,
+          "output_tangent_rms": 3.483163891360164e-05
+        },
+        "H_bias_neutral": {
+          "cosine_to_ordinary_output_tangent": 0.9944178134892556,
+          "relative_output_tangent_difference": 0.11820150911808014,
+          "game_gradient_dot_output_tangent": -0.0002562018926255405,
+          "output_tangent_rms": 2.908178612415213e-05
+        }
+      }
+    }
+  },
+  "probe_batch_indices": [
+    15,
+    4,
+    25,
+    86
+  ],
+  "probe_generator_gaussian_digest": "2d02157a0325f67e8d897d8f9ed5a27e7dd8e07f679273de4f28ef9ac43e0592",
+  "interpretation": [
+    "Only private initial FAST H columns and bias were zeroed; C stayed bit-exact. This was an observational probe, not a saved training-law migration.",
+    "The initial outputs and fixed-critic output gradients match exactly. H/b changes the features and acquisition tangents, rather than the fresh serving output.",
+    "Every reported tangent descends its own learned game; parameter or output-tangent differences do not establish a gradient-sign bug.",
+    "The separately declared training intervention tests the initial H/b choice causally; these static basis statistics alone do not establish convergence or uniquely identify mediation.",
+    "The H norm bound concerns the zero-code local hidden Jacobian, not the whole routed host or a global conditioning guarantee."
+  ],
+  "limits": [
+    "Teacher down factors deliberately match the initial ordinary/student down basis; findings are confined to this declared target family and initialization cohort.",
+    "Clean native routing, one fixed native generator Gaussian, and four frozen common learned critics; this is not an actual post-D/DV12 training pass.",
+    "Output JVPs use declared autograd BF16 cast derivatives; they are not finite-difference derivatives of the quantized forward.",
+    "Least-squares hidden recovery is descriptive feature geometry, not an optimizer objective, quality guard, or checkpoint-selection criterion.",
+    "Initial native-Adam response assumes empty moments, beta1=0 and zero weight decay; no optimizer step was performed.",
+    "No native optimizer, default recipe, ParticleGAN source, full Supra model, or completed baseline artifact was modified."
+  ]
+}

@@ -1,0 +1,157 @@
+{
+  "schema": "routed_game_stationarity_compact_results_v1",
+  "scope": "Frozen-critic local stationarity only; no joint-equilibrium or acquisition claim",
+  "card_sha256": "ba709f6c5a863ec2976cc4e13bcfab8e95199068fd4a61fad7db6c97cdc09664",
+  "software_receipt_sha256": "7e8571ab565c4804dc3598ee0036b6e88dfc6c83b7acadaaa225c3e5f11e8bd5",
+  "actual_report_sha256": "86070aac0b4704b57b96b358a9174e7f3ca8d56c0d201372b4d1dc066ae1c860",
+  "actual_plan_sha256": "328e2acd1661a58abad4858da0b9fd923cfbd42ee8a9943125a78d507ed3893d",
+  "completion_sha256": "85ca3adf9b3a96adb56925266a13d3870d1ee0c2b782a9ed4d8818b734e60dd0",
+  "observation_seconds": 2.263421538984403,
+  "software_seconds": 6.11766496184282,
+  "software_cases_passed": 7,
+  "model_updates": 0,
+  "optimizer_updates": 0,
+  "actual_generator_forward_calls": 3,
+  "full_Supra_forward_calls": 0,
+  "all_anchors_log2_max_absolute_error": 1.904654323148236e-09,
+  "all_192_code_hidden_down_bank_router_gradients_zero_at_zero_Up": true,
+  "native_owners_inputs_global_rng_unchanged": true,
+  "cases": {
+    "current_single": {
+      "contexts": 48,
+      "stationary_contexts": 0,
+      "Up_gradient_norm_min": 0.14889175915834021,
+      "Up_gradient_norm_max": 0.6528910822981848,
+      "normalized_residual_gradient_norm_min": 0.019135926157770933,
+      "normalized_residual_gradient_norm_max": 0.07348006475910188,
+      "raw_residual_negative_gradient_slope_max": -0.011022051102076073
+    },
+    "current_antithetic": {
+      "contexts": 48,
+      "stationary_contexts": 0,
+      "Up_gradient_norm_min": 0.1323466634931373,
+      "Up_gradient_norm_max": 0.4877525704937044,
+      "normalized_residual_gradient_norm_min": 0.017459096544214563,
+      "normalized_residual_gradient_norm_max": 0.043582586139682675,
+      "raw_residual_negative_gradient_slope_max": -0.00916805472691281
+    },
+    "even_single": {
+      "contexts": 48,
+      "stationary_contexts": 0,
+      "Up_gradient_norm_min": 0.007341589683897127,
+      "Up_gradient_norm_max": 0.46397753809140024,
+      "normalized_residual_gradient_norm_min": 0.005120471565725332,
+      "normalized_residual_gradient_norm_max": 0.06457136373529214,
+      "raw_residual_negative_gradient_slope_max": -0.0007989474831580359
+    },
+    "even_antithetic": {
+      "contexts": 48,
+      "stationary_contexts": 48,
+      "Up_gradient_norm_min": 0.0,
+      "Up_gradient_norm_max": 0.0,
+      "normalized_residual_gradient_norm_min": 0.0,
+      "normalized_residual_gradient_norm_max": 0.0,
+      "raw_residual_negative_gradient_slope_max": -0.0
+    }
+  },
+  "per_judge": {
+    "ordinary_native_game@800": {
+      "current_single": {
+        "Up_norm_max": 0.43713331224627666,
+        "normalized_residual_norm_max": 0.0427869768761628,
+        "stationary_contexts": 0
+      },
+      "current_antithetic": {
+        "Up_norm_max": 0.40103694718033533,
+        "normalized_residual_norm_max": 0.043582586139682675,
+        "stationary_contexts": 0
+      },
+      "even_single": {
+        "Up_norm_max": 0.05785247150327779,
+        "normalized_residual_norm_max": 0.013126429581709353,
+        "stationary_contexts": 0
+      },
+      "even_antithetic": {
+        "Up_norm_max": 0.0,
+        "normalized_residual_norm_max": 0.0,
+        "stationary_contexts": 12
+      }
+    },
+    "ordinary_native_game@6400": {
+      "current_single": {
+        "Up_norm_max": 0.3880700867747369,
+        "normalized_residual_norm_max": 0.05653990975234815,
+        "stationary_contexts": 0
+      },
+      "current_antithetic": {
+        "Up_norm_max": 0.2493630793448298,
+        "normalized_residual_norm_max": 0.027487009197895873,
+        "stationary_contexts": 0
+      },
+      "even_single": {
+        "Up_norm_max": 0.2568660535427392,
+        "normalized_residual_norm_max": 0.04927816588247937,
+        "stationary_contexts": 0
+      },
+      "even_antithetic": {
+        "Up_norm_max": 0.0,
+        "normalized_residual_norm_max": 0.0,
+        "stationary_contexts": 12
+      }
+    },
+    "particle_native_game@800": {
+      "current_single": {
+        "Up_norm_max": 0.5155122077859938,
+        "normalized_residual_norm_max": 0.05778490349934802,
+        "stationary_contexts": 0
+      },
+      "current_antithetic": {
+        "Up_norm_max": 0.4877525704937044,
+        "normalized_residual_norm_max": 0.04060675566091892,
+        "stationary_contexts": 0
+      },
+      "even_single": {
+        "Up_norm_max": 0.09298938385343257,
+        "normalized_residual_norm_max": 0.024927508735458334,
+        "stationary_contexts": 0
+      },
+      "even_antithetic": {
+        "Up_norm_max": 0.0,
+        "normalized_residual_norm_max": 0.0,
+        "stationary_contexts": 12
+      }
+    },
+    "particle_native_game@6400": {
+      "current_single": {
+        "Up_norm_max": 0.6528910822981848,
+        "normalized_residual_norm_max": 0.07348006475910188,
+        "stationary_contexts": 0
+      },
+      "current_antithetic": {
+        "Up_norm_max": 0.3173870207915906,
+        "normalized_residual_norm_max": 0.029749623350930867,
+        "stationary_contexts": 0
+      },
+      "even_single": {
+        "Up_norm_max": 0.46397753809140024,
+        "normalized_residual_norm_max": 0.06457136373529214,
+        "stationary_contexts": 0
+      },
+      "even_antithetic": {
+        "Up_norm_max": 0.0,
+        "normalized_residual_norm_max": 0.0,
+        "stationary_contexts": 12
+      }
+    }
+  },
+  "limits": [
+    "An arbitrary stale frozen critic can push an exact generator; this is not a violation of true joint GAN equilibrium because the critic need not be at its own optimum.",
+    "Reflection-even features/scores plus antithetic signs enforce local frozen-critic stationarity, not convergence rate, stability, structural correctness or optimizer-default promotion.",
+    "Evenization removes first-order signed conditional mean discrimination and can slow acquisition. Whether it helps acquisition remains untested.",
+    "The constructed known solution is the fresh FAST output, not the held rotated teacher target. Zero-Up necessarily zeros code/H/b/C/down/bank/router gradients; this is not evidence of their inactivity after acquisition.",
+    "Only twelve fixed balanced fit contexts and four small CPU learned critics are inspected. This does not explain the late full-Supra or ordinary-versus-particle convergence gap.",
+    "The residual-coordinate negative-gradient slope is exact continuous game algebra. The Up slope is native autograd linearization through BF16 casts, not a literal infinitesimal derivative of a quantized parameter function; no step is taken.",
+    "No optimizer or model updates, newly trained critics, output objective, seed/quality/epsilon/head scan, full Supra checkpoint/forward or GPU work. Software verification cost is separately reported."
+  ],
+  "qualification_credit": "none"
+}
