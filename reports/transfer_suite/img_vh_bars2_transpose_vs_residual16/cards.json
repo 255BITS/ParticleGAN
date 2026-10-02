@@ -1,0 +1,4 @@
+[
+  {"name": "baseline_transpose12", "scope": "published image path (transpose width 12)", "changes": {}},
+  {"name": "residual16", "scope": "in-formulation architecture control", "changes": {"architecture": "residual_upsample", "width": 16}}
+]
