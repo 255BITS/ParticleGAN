@@ -2,7 +2,8 @@
   "api_changes": [],
   "api_version": "forge-api-v1",
   "changed_factors": [
-    "Disable A2 only: recipe_overrides.latent_damping_max_rate=0; remove its required capability because this mechanism is intentionally absent."
+    "Disable A2 only: recipe_overrides.latent_damping_max_rate=0; remove its required capability because this mechanism is intentionally absent.",
+    "Pin the K3P formulation explicitly: parent records provenance, not recipe inheritance; the current public default is KA2."
   ],
   "claim_contract": {
     "sampling_law": "task_declared",
@@ -25,7 +26,9 @@
     "reports/forge/studies/A2_OFF_NATIVE_DIAGNOSTIC.md"
   ],
   "recipe_overrides": {
-    "latent_damping_max_rate": 0
+    "latent_damping_max_rate": 0,
+    "name": "k3p",
+    "critic_formulation": "k3p"
   },
   "requires_capabilities": [
     "learned_locations",

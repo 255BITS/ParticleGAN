@@ -1,0 +1,65 @@
+{
+  "schema_version": 1,
+  "id": "r3gan-stacked-training-toy-v1",
+  "parent": "k3p-r1r2-matched-v1",
+  "goal": "discriminator_stability",
+  "hypothesis": "Transfer the Modern GAN paper's Stacked MNIST training recipe to Forge's fixed toy hosts, distinguishing the complete scheduled Adam/R1/R2 recipe from the prior penalty-only swap.",
+  "changed_factors": [
+    "plain torch Adam with beta1=0, beta2 cosine 0.9 to 0.99 over the first 20% of each frozen host horizon",
+    "R1+R2 gamma cosine 1 to 0.1 over the same burn-in; penalty every discriminator update",
+    "constant network and learned-prior LR 0.0002 with equal role multipliers and eps=1e-8",
+    "disable K3P input/output noise, A2 damping, critic guard/anchor and direct-particle gain"
+  ],
+  "mechanism_class": "structural",
+  "mechanism_rationale": "A substantive public optimizer and schedule change, not a seed experiment or coefficient sweep. Transfer Appendix D Table 19 Stacked MNIST training settings using completed host updates in place of processed images; 2/10 Mimg becomes 20% of the frozen host horizon. Existing toy architectures, auxiliary objectives, initialization, prior, budgets and clean/live sampling gates remain task-owned. The paper's image architecture, fixed Gaussian latent prior, 10M-image training budget and EMA image evaluation are not reproduced.",
+  "api_version": "forge-api-v1",
+  "execution_path": "public_trainer",
+  "recipe_overrides": {
+    "name": "r3gan-stacked-training-toy-v1",
+    "critic_formulation": "k3p",
+    "optimizer_family": "adam",
+    "lr": 0.0002,
+    "d_lr_mult": 1.0,
+    "prior_lr_mult": 1.0,
+    "betas": [0.0, 0.9],
+    "prior_betas": null,
+    "beta2_end": 0.99,
+    "beta2_anneal_end": 0.2,
+    "eps": 1e-8,
+    "amsgrad": false,
+    "reg_arm": "a_r1r2",
+    "reg_coeff": 1.0,
+    "reg_coeff_end": 0.1,
+    "reg_coeff_anneal_end": 0.2,
+    "reg_every": 1,
+    "reg_anchor_weight": 0.0,
+    "lr_floor": 1.0,
+    "network_lr_floor": 1.0,
+    "network_lr_horizon_cap": null,
+    "d_guard_ratio": 0.0,
+    "latent_damping_max_rate": 0.0,
+    "direct_particle_gain": false,
+    "direct_particle_betas": [0.0, 0.9],
+    "input_noise_std": 0.0,
+    "output_noise_std": 0.0,
+    "ema_decay": 0.0
+  },
+  "requires_capabilities": ["learned_locations", "named_rng"],
+  "api_changes": [
+    "Public Recipe optimizer_family, eps and cosine beta2/reg_coeff endpoints; shared factories and caller-owned update schedules honor the same settings across Forge hosts. Defaults preserve existing recipes."
+  ],
+  "claim_contract": {
+    "schedule": "scheduled",
+    "scoring_weights": "live",
+    "sampling_law": "task_declared"
+  },
+  "lifecycle": "proposed",
+  "prior_art": [
+    "https://arxiv.org/html/2501.05441v1#A4",
+    "https://github.com/brownvc/R3GAN/blob/19a7ddf463fbac2bd39b4c1c73d63f1c441c7403/training/training_loop.py",
+    "https://github.com/brownvc/R3GAN/blob/19a7ddf463fbac2bd39b4c1c73d63f1c441c7403/R3GAN/Trainer.py",
+    "reports/forge/TECHNIQUE_INVENTORY_READOUT.md",
+    "reports/forge/FORMULATION_COMPARISON_READOUT.md"
+  ],
+  "guide": "EXPERIMENTATION.md"
+}

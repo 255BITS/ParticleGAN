@@ -266,6 +266,23 @@ Diagnostics remain visible without vetoing required passes. The hold and extensi
 share one uninterrupted execution; the extension cannot borrow another
 candidate's trained state or hide behind a passing ordinary hold.
 
+The [experiments by tier report](reports/forge/EXPERIMENTS_BY_TIER.md) lists the
+current task assignments for every view, including required, ranking and
+diagnostic roles, declared budgets, dependencies and tasks unassigned to any
+view. Regenerate it after adding tasks or changing tier placement:
+
+```sh
+python -m experiments.forge experiments-by-tier \
+  --output reports/forge/EXPERIMENTS_BY_TIER.md
+# Inspect one view or print a machine-readable inventory without writing.
+python -m experiments.forge experiments-by-tier --view discriminator_stability
+python -m experiments.forge experiments-by-tier --json
+```
+
+The report reads validated task and view declarations without accessing the
+queue, launching training or regrading saved evidence. It lists assigned tasks;
+use the candidate boards below for attained tiers, measured metrics and costs.
+
 Boards order current rows by attained tier, then name/cohort. Raw metrics and
 cost remain separate; no aggregate metric ranking is declared. Filter whole rows
 without shrinking their qualification denominator:
@@ -274,6 +291,52 @@ without shrinking their qualification denominator:
 python -m experiments.forge board --family image --evidence-quality imported_recorded
 python -m experiments.forge board --scope pinned --evidence-quality certified_pinned
 ```
+
+For a technique inventory with one passes/total column per tier, use the
+[expanded technique leaderboard](reports/forge/technique-inventory-expanded.md).
+It preserves the [original inventory](reports/forge/technique-inventory.md) and
+appends the separately frozen [configurable Modern GAN training baseline](reports/forge/R3GAN_BASELINE_READOUT.md).
+The linked publications retain their source cohorts; composing the display
+launches no training. Each publication lists its independent regrading command.
+The roster is
+discovered from `configs/forge/ideas/*.json`, so adding a declared technique adds
+a row automatically. R1/R2, BCap, K3P and the other public formulations retain
+their actual resolved recipes and separate source/runtime/sampling cohorts.
+
+```sh
+# Read-only cost/coverage plan, then explicit gated execution.
+python -m experiments.forge inventory plan --through-tier 3
+python -m experiments.forge inventory run --through-tier 3 --gpus 0,1
+# Replay the measured inventory's recorded implementation without training.
+python reports/forge/regenerate_technique_inventory.py --device cuda \
+  --source-commit b04b1b27 \
+  --output-prefix reports/forge/technique-inventory
+python -m experiments.forge logs --follow --campaign technique-inventory-v1
+```
+
+The original default inventory campaign has explicit reservation ceilings for
+its 12-technique roster. New techniques require checking the expanded plan and
+a new immutable campaign ID with adequate budgets. The Modern GAN recipe uses
+its own one-candidate campaign; it does not rerun unchanged techniques. Ordinary
+failures stop later tasks, including remaining tasks in that tier; unsupported
+techniques reserve no training resources. Required denominators remain 3/19/2
+for the current `discriminator_stability` view, including unknown and blocked
+cells. A zero passes/total cell alone does not establish a scientific failure.
+Archived and calibration results appear separately and cannot fill current
+qualification cells. Provisional screening still confers no default adoption.
+`techniques` also renders a read-only local board or JSON. The publication wrapper
+exports final metrics and receipt hashes without copying per-update diagnostics
+into Git. Full new execution envelopes remain ignored and archived unchanged;
+summary projections are never qualification inputs. To rebuild the measured
+inventory in another checkout, first hydrate the exact originals using the
+[archive manifest and restoration instructions](reports/forge/TECHNIQUE_INVENTORY_READOUT.md).
+The wrapper refuses to overwrite a measured report when those originals are absent
+or the live source no longer contains its measured cohort. `--source-commit`
+reconstructs and verifies the recorded implementation before independent regrading;
+its results do not qualify a newer checkout. To publish a new current cohort, omit
+that flag and use a new output prefix. Do not rerun unchanged science solely for a
+merge or a reporting change. Inventory runs compile boards once after draining;
+attempt receipts and tail-able events remain available throughout execution.
 
 Receipt certification describes evidence identity, not a scientific pass.
 Use `board --json` to inspect family/provenance options and unknowns.

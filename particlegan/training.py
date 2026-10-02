@@ -57,7 +57,10 @@ _ADDED_RECIPE_FIELDS = {"reg_anchor_weight": 1.0, "direct_particle_gain": True,
                         "row_evidence_hot": True, "row_evidence_exclude": True, "row_evidence_hold": True,
                         "birth_death_space": "data", "serve_average": 0.0, "reopen_signal": "data",
                         "row_evidence_null": "theory", "birth_death_isolation": False,
-                        "birth_death_feature_scale": "none", "row_policy": "independent"}
+                        "birth_death_feature_scale": "none", "row_policy": "independent",
+                        "optimizer_family": "formulation", "eps": 1e-8,
+                        "beta2_end": None, "beta2_anneal_end": 0.2,
+                        "reg_coeff_end": None, "reg_coeff_anneal_end": 0.2}
 
 
 class GANTrainer:

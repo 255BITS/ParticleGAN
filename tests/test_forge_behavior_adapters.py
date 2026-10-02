@@ -1,5 +1,6 @@
 """Bounded two-update integration checks; these runs cannot earn qualification."""
 from copy import deepcopy
+import json
 from pathlib import Path
 
 import pytest
@@ -17,6 +18,53 @@ def request():
     return dict(protocol=dict(seed=0), candidate=dict(recipe_overrides={
         "input_noise_std": 0., "output_noise_std": 0.,
     }))
+
+
+@pytest.mark.parametrize("host", HOSTS)
+def test_configured_paper_training_recipe_reaches_all_behavior_components(tmp_path, host):
+    """Exercise the real factory/callback ordering, including prior bundles."""
+    task = deepcopy(load_tasks(ROOT)[host])
+    task["execution"]["steps"] = 2
+    candidate = json.loads((ROOT / "configs/forge/ideas/r3gan-stacked-training-toy-v1.json").read_text())
+    result = run_behavior(dict(protocol=dict(seed=0), candidate=candidate), task, tmp_path / host)
+    applied = result["applied"]
+    assert set(applied["public_optimizers"]) == {"Adam"}
+    schedule = applied["training_schedules"]
+    assert schedule["horizon"] == 2
+    gamma = schedule["penalty_coefficient"]
+    # Conditional hosts sum one penalty per context into the same D update.
+    contexts = {"unipolar": 2, "mid_scale_identity": 4}.get(host, 1)
+    assert gamma["observations"] == 2 * contexts
+    assert gamma["first"] == pytest.approx(1.)
+    assert gamma["last"] == pytest.approx(.1)
+    for role in schedule["optimizer_groups"].values():
+        assert role["lr"]["minimum"] == role["lr"]["maximum"] == .0002
+        assert role["beta2"]["first"] == pytest.approx(.9)
+        assert role["beta2"]["last"] == pytest.approx(.99)
+    mechanisms = result["evidence"]["guards"]["mechanism_audit"]["mechanisms"]
+    assert mechanisms["critic_penalty"]["applied"] == 2 * contexts
+    assert all(not row["requested"] and not row["enabled"] and row["applied"] == 0
+               for name, row in mechanisms.items() if name != "critic_penalty")
+    assert applied["recipe"]["input_noise_std"] == 0
+    assert applied["recipe"]["output_noise_std"] == 0
+    assert result["evidence"]["guards"]["all_finite"]
+    assert result["evidence"]["guards"]["hooks_exercised"]
+    assert grade_result(load_tasks(ROOT)[host], result)["status"] == "INCOMPLETE"
+
+
+def test_penalty_schedule_starting_at_zero_remains_requested(tmp_path):
+    task = deepcopy(load_tasks(ROOT)["two_pole"])
+    task["execution"]["steps"] = 2
+    candidate = json.loads((ROOT / "configs/forge/ideas/r3gan-stacked-training-toy-v1.json").read_text())
+    candidate["recipe_overrides"].update(reg_coeff=0., reg_coeff_end=1.)
+    result = run_behavior(dict(protocol=dict(seed=0), candidate=candidate), task, tmp_path)
+    row = result["evidence"]["guards"]["mechanism_audit"]["mechanisms"]["critic_penalty"]
+    assert row["requested"] and row["enabled"]
+    # The kernel runs on both calls; the observed coefficient records zero pressure first.
+    assert row["applied"] == 2
+    coefficient = result["applied"]["training_schedules"]["penalty_coefficient"]
+    assert coefficient["first"] == 0 and coefficient["last"] == 1
+    assert result["evidence"]["guards"]["hooks_exercised"]
 
 
 @pytest.mark.parametrize("noise_enabled", [False, True])

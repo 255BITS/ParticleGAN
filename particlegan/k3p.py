@@ -630,14 +630,16 @@ class CriticPenalty:
     """
 
     def __init__(self, recipe, optimizer, *, output=None, collect_stats=False, **penalty_overrides):
-        if not isinstance(optimizer, K3PCriticAdam):
+        if not (isinstance(optimizer, K3PCriticAdam) or (
+                type(optimizer) is torch.optim.Adam and getattr(optimizer, "recipe_optimizer_family", None) == "adam")):
             raise TypeError("optimizer must come from recipe.make_critic_optimizer or recipe.make_optimizers")
-        self.optimizer, self.critic = optimizer, optimizer.critic
+        self.recipe, self.optimizer, self.critic = recipe, optimizer, optimizer.critic
         options = recipe._penalty_options(**penalty_overrides)
         if options["arm"] == "k3p" and optimizer.anchor is None and options["anchor_weight"] != 0:
             raise ValueError("this penalty needs the critic's EMA: pass ema_critic=copy.deepcopy(critic) "
                              "to recipe.make_optimizers / recipe.make_critic_optimizer")
         self.regularizer = GradientPenalty(record=optimizer.record, **options)
+        self.initial_coeff = self.regularizer.coeff
         self.output = _first_output if output is None else output
         self.collect_stats = bool(collect_stats)
         self.last_stats = {}
@@ -675,6 +677,9 @@ class CriticPenalty:
                         "or a module wrapping one of those")
 
     def __call__(self, critic, x_real, x_fake, *condition, **condition_kwargs):
+        from .recipe_schedules import apply_penalty_schedule
+        if getattr(self, "recipe", None) is not None:
+            apply_penalty_schedule(self.optimizer.record.observed_steps, self.recipe, self)
         output = self.output
 
         def live(x):
