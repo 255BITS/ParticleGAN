@@ -13,6 +13,7 @@ PUBLIC_PRIOR_CLEAN = "public_prior_without_output_noise"
 ENUMERATED_PRIOR_CLEAN = "enumerated_prior_without_output_noise"
 CONDITIONAL_CENTERS = "conditional_prior_centers_with_scheduled_output_noise"
 GENERATED_AND_RECONSTRUCTED = "generated_and_reconstructed_prior_with_scheduled_output_noise"
+JOINT_WORDS_CLEAN = "generated_and_paired_reconstructed_prior_without_output_noise"
 PARTICLES_AND_GRADIENT = "learned_particles_and_critic_gradient"
 PARAMETER_MEASUREMENT = "learned_parameter_measurement"
 
@@ -23,10 +24,12 @@ POLICIES = {
     ENUMERATED_PRIOR_CLEAN: "clean",
     CONDITIONAL_CENTERS: "public_recipe_schedule",
     GENERATED_AND_RECONSTRUCTED: "public_recipe_schedule",
+    JOINT_WORDS_CLEAN: "clean",
     PARTICLES_AND_GRADIENT: "not_applied_to_measurement",
     PARAMETER_MEASUREMENT: "not_applied_to_measurement",
 }
 ADAPTER_POLICIES = {
+    "word_joint": JOINT_WORDS_CLEAN,
     "transfer_vector": PUBLIC_PRIOR_CLEAN,
     "transfer_image": ENUMERATED_PRIOR_CLEAN,
     "native100": PUBLIC_PRIOR_CLEAN,

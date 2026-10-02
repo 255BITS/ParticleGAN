@@ -197,7 +197,11 @@ def render_markdown(report: dict, root: Path, output_path: Path | None = None) -
             lines += [f"Declared evidence scope: `{_cell(view['evidence_scope'])}`.", ""]
         if view["evidence_scope"] == "calibration_diagnostic":
             lines += ["This view records calibration diagnostics and grants no ordinary qualification.", ""]
-        lines += [f"Candidate outcomes, metrics and measured costs: {link('leaderboard', leaderboard_path(root, view['id']).as_posix())}."]
+        board = leaderboard_path(root, view["id"])
+        if (root / board).is_file():
+            lines += [f"Candidate outcomes, metrics and measured costs: {link('leaderboard', board.as_posix())}."]
+        else:
+            lines += ["No published solution leaderboard for this view yet; task registration and related API media confer no candidate qualification."]
         for tier in view["tiers"]:
             lines += ["", f"### Tier {tier['qualification_tier']}: {tier['name']}", "", count_text(tier) + ".", ""]
             lines += task_table(tier["tasks"]) if tier["tasks"] else ["No tasks assigned."]
@@ -210,6 +214,9 @@ def render_markdown(report: dict, root: Path, output_path: Path | None = None) -
               "Public-API variants join only through their explicit retained question IDs."]
     for guide in report["experiment_guides"]:
         lines += ["", f"### Experiment: {guide['id'].replace('_', '-')}", "", _cell(guide["goal"]), ""]
+        if guide.get("readout_sources"):
+            lines += ["Explanation, interpretation and reproduction: " + ", ".join(
+                link("experiment readout", source) for source in guide["readout_sources"]) + ".", ""]
         lines += ["Forge declarations: " + ", ".join(link(task["id"], task["source"]) for task in guide["tasks"]) + ".", ""]
         contracts = {}
         for task in guide["tasks"]:

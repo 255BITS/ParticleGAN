@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "id": "forge-five-word-joint-api-demo-v1",
+  "task": "five_word_joint_acquisition",
+  "candidate": "five-word-joint-ka2-v1",
+  "execution_limit": 32,
+  "wall_seconds": 60,
+  "device": "cpu",
+  "cpu_threads": 1,
+  "seed": 0,
+  "eval_samples": 1024,
+  "scoring_observations": 24,
+  "media_frames": 9,
+  "purpose": "One bounded shared-API integration demonstration, not an ordinary Forge run or release qualification. Score the declared bounds honestly at 32 updates and grade the evidence INCOMPLETE against the 20,001-update task."
+}
