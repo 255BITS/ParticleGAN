@@ -853,7 +853,11 @@ Forge declarations: [ring16_acquisition](../../configs/forge/tasks/ring16_acquis
 
 No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
 
-No related published API training GIF. This task retains its own declared numerical audit.
+Related public-API demonstrations, with their own recorded contracts:
+
+| Variant / actual-training GIF | What this variant tests | Recorded result / failed bounds | Recipe / compute / source | Evidence |
+| --- | --- | --- | --- | --- |
+| [api-ring16-acquisition](../toy_audit/api_contract/ring16/goal.gif) | Acquire all 16 equally weighted two-dimensional Gaussian clusters from scratch: radius 3, sigma 0.1; require meaningful occupancy in every cluster, roughly balanced mass and noncollapsed local spread within 400 updates. No extended hold phase. Scope: From random initialization, acquire sixteen equal radius-three sigma-.1 Gaussian clusters within 400 updates. Five terminal acquisition checks add no hold phase. Tier 1 is provisional; this standalone K3P/API initializer and RNG cohort supplies no Forge promotion credit. | ERROR / FAIL; 400/400 updates; component_covariance_error <= 0.85, hq >= 0.85, last 5 post-update metric observations do not all pass, goal media/state error: ModuleNotFoundError: No module named 'matplotlib' | k3p / cuda:0 / 746146cbdc5a | [definition](../toy_audit/api_contract/ring16/publication.json); [readout](../toy_audit/api_contract/ring16/publication.json); [recipe and provenance](../toy_audit/api_contract/ring16/publication.json) |
 
 ### Experiment: rotated100
 
@@ -1244,4 +1248,4 @@ The wider question review also links standalone experiments outside the Forge ti
 
 Declaration input digest: `d73250b349d69c695a45623845319540ab49310fb3e1eef4211f6f0222c91cd5`. The JSON form includes the individual task and view file hashes.
 
-Published artifact input digest: `875b0c900f39f4d618accc54b010478a5c3c1d7b2da5692ce6557f73d404d471`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.
+Published artifact input digest: `568a1dfeb45ff22d7af2a608931ca57f7c73fdceb4fce5989f5797bb1af884d1`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.

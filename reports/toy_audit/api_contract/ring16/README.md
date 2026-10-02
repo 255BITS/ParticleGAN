@@ -32,7 +32,32 @@ The [compact control receipt](controls.json) records an independent full target 
 
 ## Result
 
-The sole frozen full-budget demonstration has not run in this preregistration commit. Its endpoint metrics, failed bounds, actual-training GIF and source/provenance receipt will be added without changing this protocol.
+**Numerical acquisition FAIL after all 400 updates; original execution stamp ERROR / FAIL.** The one declared K3P-MoG run took **6.113 paid execution seconds** on `cuda:0`, one Torch thread, Python 3.14.7 / Torch 2.14.0+cu130. All 24 scoring checks completed and **0/5 terminal joint checks passed**. No retry, continuation or seed variation followed.
+
+| Endpoint metric | Measured | Bound | Result |
+|---|---:|---:|---|
+| Finite output | 0 nonfinite values | 0 | PASS |
+| Evaluation samples | 4,096 | ≥ 4,096 | PASS |
+| Meaningful modes | 16/16 | 16/16 | PASS |
+| Minimum in-cluster mass / target mass | .3125 | ≥ .25 to count a mode | PASS |
+| Mass TV | .08374 | ≤ .15 | PASS |
+| HQ | .73877 | ≥ .85 | FAIL |
+| Average component covariance error | 40.84168 | ≤ .85 | FAIL |
+| Minimum component eigen ratio | .59631 | ≥ .15 | PASS |
+
+The terminal checkpoints contained 15, 16, 16, 16 and 16 meaningful modes at updates 334, 350, 367, 384 and 400. Every terminal checkpoint failed HQ and covariance. The result therefore demonstrates late mode acquisition with roughly balanced mass, while **26.1% of final samples remain outside all target 3-sigma balls**. Within the four-sigma component cores the covariance-error diagnostic is .378; scoring the full assigned components gives 40.84. That gap is consistent with off-cluster samples inflating spread and is not evidence of a precise Gaussian fit. The nongating projection-KS diagnostic is .07510.
+
+This does not rerate the eight-mode `mode_hold` result: it changes mode count, sigma, acquisition budget and the standalone API initializer/RNG cohort. Nor does the low observed cost establish Tier 1 calibration; there is still no independently qualified positive reference or rejection/cost comparison for this task.
+
+**Recommendation:** keep this provisional acquisition question and its honest negative result. Before changing its tier or promoting it into a shared release view, preregister a bounded independent reference/cost study. Stop this exact failed training cohort; any subsequent solution change needs a substantive hypothesis and a new evidence identity. No 0.9.0 solution is selected or qualified by this demonstration.
+
+[Compact numerical/recipe/provenance publication](publication.json) · [Actual-training GIF](goal.gif)
+
+![Actual target/output acquisition at nine saved training states](goal.gif)
+
+The original raw receipt remains unchanged. Training, numerical observations and checkpoint saving completed, then the shell Python lacked `matplotlib` during GIF rendering. Its original **ERROR / FAIL** and that artifact failure are retained in the publication. The GIF was subsequently rendered from the saved target/output arrays in the project environment, with **zero extra training or sampling** and a separate renderer receipt. The frozen training source is `32e25a8e872a519304d54c1081efe89a73bf821e`; renderer source is `094c55a65395411f3eee378bdb308f6cda45d10d` (the exact commit/file identities are authoritative in `publication.json`). Both the original artifact hashes and nine-frame GIF hash are recorded. Numerical FAIL, original execution ERROR and media availability are separate facts.
+
+The initial control/readout source was committed before execution. The existing current solution leaderboard keeps its frozen research cohorts; this standalone result is discoverable through the generated experiment guide and grants no Forge qualification.
 
 ## Reproduce and inspect
 
@@ -41,7 +66,7 @@ From the repository root in the project environment, these commands use an unuse
 ```sh
 python -m benchmarks.toy_audit.ring16_controls --output /tmp/ring16-controls.json
 mkdir -p runs/api/ring16-reproduction
-python -m benchmarks.toy_audit.api_run --case api-ring16-acquisition \
+timeout 300s python -m benchmarks.toy_audit.api_run --case api-ring16-acquisition \
   --device cuda:0 --output runs/api/ring16-reproduction \
   > runs/api/ring16-reproduction/runner.log 2>&1
 tail -f runs/api/ring16-reproduction/runner.log
@@ -49,6 +74,8 @@ python -m benchmarks.toy_audit.ring16_publish \
   --raw runs/api/ring16-reproduction/api-ring16-acquisition \
   --output /tmp/ring16-publication
 ```
+
+For this recorded rendering failure only, the media-only exporter additionally uses `--recover-missing-media` in the project environment; it requires the exact original missing-dependency failure and does not change the raw receipt.
 
 The caller selects the declared seed 0; the published metadata records it explicitly. The exporter verifies the complete original receipt, protocol and artifact identities; it copies compact endpoint/terminal evidence and the GIF and launches no training or rescoring. Checkpoints, arrays and the complete observation/log streams stay in ignored local storage.
 
