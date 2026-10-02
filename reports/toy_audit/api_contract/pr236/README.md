@@ -8,6 +8,10 @@ are unidentifiable from the generator inputs. This verifies conditional-mean
 recovery; it does not verify nuisance distribution coverage or the optimum of
 the learned GAN game.
 
+[All 114 questions, sorted](../QUESTION_RANKING.md) ·
+[Independent scientific review](scientific-review.json) ·
+[Source, metric and visual review](independent-review.json).
+
 ![Actual recorded training observations and original endpoint gates](goal.gif)
 
 The GIF contains exactly 12 recorded evaluation states at updates
@@ -123,3 +127,8 @@ changed panel/RNG/source/fixture identities, exit-status contradictions,
 timeout/error rejection, and a full numerical FAIL that preserves failure
 media with a nonzero exit. These software controls need no historical Git
 objects, raw scientific datasets, or scientific training in shallow CI.
+
+The [integrated validation](integrated-validation.json) additionally passes
+62 controls in 20.57 seconds, including the existing recent-PR exporter. All
+37 protected sources, source-commit blobs, GIF hashes and new report links
+match; production trees and frozen PR237 evidence retain their bytes.
