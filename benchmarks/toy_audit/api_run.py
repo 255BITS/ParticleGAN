@@ -8,10 +8,12 @@ completed default-budget quality test.
 from __future__ import annotations
 
 import argparse
+from concurrent.futures import ProcessPoolExecutor, as_completed
 from contextlib import contextmanager
 import hashlib
 import json
 import math
+import multiprocessing
 from pathlib import Path
 import platform
 import random
@@ -189,7 +191,7 @@ def render_gif(case, records, path, *, full_budget, requested_steps):
                           vmax=view.get("vmax", 1), interpolation="nearest")
                 ax.set_xticks([])
                 ax.set_yticks([top.shape[0] / 2, top.shape[0] + 1 + bottom.shape[0] / 2],
-                              view.get("row_labels", ["Desired", "API output"]))
+                              view.get("row_labels", ["Desired", "API output"]), fontsize=8)
             elif view["kind"] == "bar":
                 a, b = target.reshape(-1), samples.reshape(-1)
                 if len(a) != len(b):
@@ -242,7 +244,8 @@ def render_gif(case, records, path, *, full_budget, requested_steps):
         metrics = "; ".join(f"{name}={value:.4g}" for name, value in list(record["metrics"].items())[:6])
         footer = f"{case['id']} | update {record['step']}/{requested_steps} | metric {instant} | {budget}\n{metrics}"
         fig.text(.02, .035, textwrap.fill(footer, 47 * columns, replace_whitespace=False), fontsize=8)
-        fig.subplots_adjust(top=.80, bottom=.24, hspace=.70, wspace=.28)
+        fig.subplots_adjust(left=.23 if columns == 1 else .085, right=.98,
+                            top=.80, bottom=.34, hspace=.85, wspace=.32)
         fig.canvas.draw()
         pixels = np.asarray(fig.canvas.buffer_rgba())[..., :3].copy()
         frames.append(Image.fromarray(pixels).convert("P", palette=Image.Palette.ADAPTIVE))
@@ -366,6 +369,17 @@ def inventory(cases):
             "contract": "Public ParticleGAN execution, fixed binary metrics, actual goal-reference/output GIFs"}
 
 
+def _execute_request(request):
+    case, output, options = request
+    torch.set_num_threads(1)
+    result = run_case(case, output, **options)
+    return {"id": case["id"], "verdict": result["verdict"], "status": result["status"],
+            "metric_passed": result.get("metric_passed", False),
+            "default_protocol_complete": result["default_protocol_complete"],
+            "completed_updates": result["completed_updates"],
+            "receipt": str(Path(output) / "receipt.json")}
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--list", action="store_true", help="List executable variants and goals")
@@ -378,6 +392,7 @@ def main(argv=None):
     parser.add_argument("--steps", type=int, help="Explicitly bounded run; short runs never qualify the default budget")
     parser.add_argument("--eval-samples", type=int)
     parser.add_argument("--frames", type=int, default=9)
+    parser.add_argument("--jobs", type=int, default=1, help="Independent CPU case workers; each uses one Torch thread")
     args = parser.parse_args(argv)
     torch.set_num_threads(1)
     cases = contract.discover()
@@ -393,20 +408,31 @@ def main(argv=None):
         parser.error("choose --list, --inventory, --case or --all")
     if not args.output:
         parser.error("--output is required for actual execution")
+    if args.jobs < 1 or (args.jobs > 1 and torch.device(args.device).type != "cpu"):
+        parser.error("--jobs must be positive; parallel case workers require CPU")
     unknown = set(selected) - set(cases)
     if unknown:
         parser.error(f"unknown cases: {sorted(unknown)}")
+    requests = [(cases[name], args.output / name,
+                 dict(device=args.device, recipe_name=None if args.recipe == "auto" else args.recipe,
+                      steps=None if args.steps is None else min(args.steps, cases[name]["default_steps"]),
+                      eval_samples=args.eval_samples, frames=args.frames)) for name in selected]
     results = []
-    for name in selected:
-        result = run_case(cases[name], args.output / name, device=args.device,
-                          recipe_name=None if args.recipe == "auto" else args.recipe,
-                          steps=None if args.steps is None else min(args.steps, cases[name]["default_steps"]),
-                          eval_samples=args.eval_samples, frames=args.frames)
-        results.append({"id": name, "verdict": result["verdict"], "status": result["status"],
-                        "metric_passed": result.get("metric_passed", False),
-                        "default_protocol_complete": result["default_protocol_complete"],
-                        "completed_updates": result["completed_updates"],
-                        "receipt": str(args.output / name / "receipt.json")})
+    if args.jobs == 1:
+        iterator = map(_execute_request, requests)
+        for result in iterator:
+            results.append(result)
+            write_json(args.output / "summary.json", {"cases": results})
+    else:
+        with ProcessPoolExecutor(max_workers=args.jobs, mp_context=multiprocessing.get_context("spawn")) as pool:
+            futures = [pool.submit(_execute_request, request) for request in requests]
+            for future in as_completed(futures):
+                result = future.result()
+                results.append(result)
+                write_json(args.output / "summary.json", {"cases": results})
+                print(json.dumps({"finished_case": result["id"], "verdict": result["verdict"],
+                                  "status": result["status"], "finished_cases": len(results),
+                                  "total_cases": len(requests)}), flush=True)
     write_json(args.output / "summary.json", {"cases": results})
     return 0 if all(result["verdict"] == "PASS" for result in results) else 1
 

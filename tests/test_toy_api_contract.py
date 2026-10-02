@@ -84,3 +84,14 @@ def test_source_only_description_cannot_register_as_runnable_case():
     del incomplete["thresholds"]
     with pytest.raises(ValueError, match="pass/fail bounds"):
         validate_case(incomplete)
+
+
+def test_executable_inventory_retains_every_historical_question_and_pr231():
+    from benchmarks.toy_audit import api_contract, api_run
+    cases = api_contract.discover()
+    ledger = api_run.inventory(cases)
+    assert ledger["coverage"]["required_questions"] == 110
+    assert ledger["coverage"]["missing"] == []
+    assert len(cases) == 176
+    assert all(case["evaluation_observations"] >= case.get("terminal_observations", 5)
+               for case in cases.values())

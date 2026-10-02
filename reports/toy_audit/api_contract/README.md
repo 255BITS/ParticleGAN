@@ -66,7 +66,9 @@ Exceptions, NaNs and
 incomplete protocols fail explicitly. The command exits nonzero on FAIL.
 
 `--all` runs every registered variant and can consume the sum of their budgets;
-inspect the inventory first. Case output directories are exclusive so a new run
+inspect the inventory first. `--jobs 8 --device cpu` runs independent cases in
+eight processes, each with one Torch thread and its own frozen random streams.
+Case output directories are exclusive so a new run
 cannot overwrite an earlier receipt. Logs are JSON progress lines suitable for
 tailing. Checkpoints and observation arrays remain in the run directory; publish
 only the compact receipt and final goal GIF.
