@@ -15,6 +15,11 @@ diagnostic finds contrast error near V while midpoint error dominates total
 error. It establishes little remote-marker contrast was learned in this fixed
 fixture and budget; it does not establish a ParticleGAN or real bridge defect.
 
+The primary evaluation uses clean `sigma=0, perturb=False` outputs. The frozen
+same-family teacher supplies an analytic clean representability witness; an
+irreducible output-noise floor does not make the original 0.5V gate impossible.
+Native noisy training dynamics and noisy-code capacity remain separate questions.
+
 | Actual API updates per arm | G16 clean held patch MSE | G64 clean held patch MSE | G64 gain over G16 |
 | ---: | ---: | ---: | ---: |
 | 0 | 56.984703064 | 56.984703064 | 0% |
