@@ -6,6 +6,12 @@ cohort. A configuration changes settings on the shared public trainer; it does
 not introduce another training loop or a new technique row. The companion JSON
 retains alternative configurations and the exact evidence behind their results.
 
+The proposed [convergence-selection plan](forge-convergence-selection-plan.md)
+illustrates advancing candidates through the gates, retaining failures, and
+choosing the quickest stable converging config from a comparable survivor set.
+Its convergence timing and speed objective are future additions; the implemented
+search behavior is described below.
+
 [`trainer-families.json`](../configs/forge/trainer-families.json) declares family
 membership and a canonical fallback. Distinct mechanisms, including structural
 ablations, have explicit families. The older matched R1/R2 penalty swap and the
