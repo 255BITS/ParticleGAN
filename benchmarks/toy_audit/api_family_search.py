@@ -27,7 +27,12 @@ from . import api_contract as contract, api_run, api_publish
 SCHEMA = "particlegan_policy_family_search_v1"
 FAMILIES = ("atlas", "e22")
 TUNING_FIELDS = {"lr", "prior_lr_mult"}
-LR_PROFILES = ((.006375, .0085), (.002125, .00425), (.0031875, .0053125))
+GRID_PROFILES = (
+    ((.006375, .0085), (1., 2.)),
+    ((.002125, .00425), (1., 2.)),
+    ((.0031875, .0053125), (1., 2.)),
+    ((.0053125, .006375), (.5, 1.5)),
+)
 DEFAULT_CASES = (
     ("image-develop-img_intensity2-source-transpose12", 1),
     ("api-vector-two-broad", 1),
@@ -107,7 +112,7 @@ def _validated_grid(spec):
                    or any(isinstance(value, bool) or not isinstance(value, (int, float))
                           or not math.isfinite(value) for value in grid[key])
                    or len(set(grid[key])) != 2 for key in TUNING_FIELDS)
-            or tuple(grid["lr"]) not in LR_PROFILES or grid["prior_lr_mult"] != [1., 2.]):
+            or (tuple(grid["lr"]), tuple(grid["prior_lr_mult"])) not in GRID_PROFILES):
         raise ValueError("requires one frozen two-LR/two-prior-rate grid profile")
     return grid
 

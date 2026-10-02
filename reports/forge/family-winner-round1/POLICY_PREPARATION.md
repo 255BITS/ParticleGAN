@@ -135,6 +135,25 @@ seconds are the exact remaining original allowance, split into Atlas
 5,163.721507 and E22 5,172.290422. Previous errors and results remain debited
 and cannot fill the new source cohort's trained gates.
 
+The third grid also concluded without a whole-configuration pass. Two settings
+per family retained intensity and then failed broad-mixture acquisition or its
+terminal window; the other two acquired intensity too late. The full original
+12 runs comprise 8 original passes and 4 original failures. Their separate
+study gates are 4 passes, 4 failures and 4 incomplete holds. A good broad-mixture
+endpoint at LR .0053125/prior1 does not erase its earlier failed observations.
+The [third archive](policy-round3-archive.json) and
+[diagnosis](C5_DIAGNOSIS.md) retain all metrics, clocks, states and source for
+338.823394 paid seconds.
+
+The [final specification](policy-search-round4.json) keeps LR .0053125 or
+.006375 and tests new prior multipliers .5 or 1.5. These four new balances
+probe acquisition and persistence; they imply no monotonic improvement or
+diagnosed prior-optimizer cause. The complete LR/prior pair is frozen, so
+axes cannot be borrowed from another profile. Remaining quotas are Atlas
+4,994.908136 and E22 5,002.280399, totaling 9,997.188535 of the same original
+allowance. This is the last finite screening grid for this action. Unresolved
+failures require a separately justified dynamics or calibration question.
+
 Root admits at most one serial experiment worker per GPU, with at least
 12 GiB free and one Torch/BLAS CPU thread. GPU0 remains excluded while the
 external graphics workload is hot. Both family lanes can run serially on

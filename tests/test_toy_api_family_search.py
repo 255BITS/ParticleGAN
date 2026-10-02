@@ -51,7 +51,11 @@ def planned(tmp_path, cases, monkeypatch):
                                    {"lr": .002125, "prior_lr_mult": 1.},
                                    {"lr": .00425, "prior_lr_mult": 2.},
                                    {"lr": .0031875, "prior_lr_mult": 1.},
-                                   {"lr": .0053125, "prior_lr_mult": 2.}])
+                                   {"lr": .0053125, "prior_lr_mult": 2.},
+                                   {"lr": .0053125, "prior_lr_mult": .5},
+                                   {"lr": .0053125, "prior_lr_mult": 1.5},
+                                   {"lr": .006375, "prior_lr_mult": .5},
+                                   {"lr": .006375, "prior_lr_mult": 1.5}])
 def test_actual_public_recipe_knobs_applied_before_optimizer_and_updated(cases, family, identifier, knobs):
     fixture = api_contract.build(cases[identifier], device="cpu", recipe_name=family,
                                  max_steps=2, recipe_overrides=knobs)
@@ -59,6 +63,12 @@ def test_actual_public_recipe_knobs_applied_before_optimizer_and_updated(cases, 
     assert fixture.recipe.lr == knobs["lr"] and fixture.recipe.prior_lr_mult == knobs["prior_lr_mult"]
     assert api_run.json_value(fixture.recipe.to_dict()) == search.resolved_recipe(cases[identifier], family, knobs)
     assert fixture.trainer.opt_g.param_groups[0]["lr"] == knobs["lr"]
+    prior_ids = {id(parameter) for parameter in fixture.trainer.prior.parameters() if parameter.requires_grad}
+    prior_groups = [group for group in fixture.trainer.opt_g.param_groups
+                    if prior_ids & {id(parameter) for parameter in group["params"]}]
+    assert prior_ids and len(prior_groups) == 1
+    assert {id(parameter) for parameter in prior_groups[0]["params"]} == prior_ids
+    assert prior_groups[0]["lr"] == knobs["lr"] * knobs["prior_lr_mult"]
     before = [parameter.detach().clone() for parameter in fixture.trainer.G.parameters()]
     fixture.step(); fixture.step()
     assert fixture.trainer.completed_steps == 2
@@ -152,23 +162,27 @@ def test_all_configs_and_full_denominator_retained_no_speed_winner(tmp_path, cas
     assert result["required_cases_per_config"] == 8 and result["default_adoption"] is False
 
 
-@pytest.mark.parametrize("learning_rates", [[.006375, .0085], [.002125, .00425], [.0031875, .0053125]])
-def test_frozen_grid_profiles_have_distinct_complete_config_denominators(tmp_path, cases, monkeypatch, learning_rates):
+@pytest.mark.parametrize("learning_rates,prior_rates", [([.006375, .0085], [1., 2.]),
+                                                      ([.002125, .00425], [1., 2.]),
+                                                      ([.0031875, .0053125], [1., 2.]),
+                                                      ([.0053125, .006375], [.5, 1.5])])
+def test_frozen_grid_profiles_have_distinct_complete_config_denominators(tmp_path, cases, monkeypatch,
+                                                                       learning_rates, prior_rates):
     spec = spec_for(tmp_path)
-    spec["grid"]["lr"] = learning_rates
+    spec["grid"] = {"lr": learning_rates, "prior_lr_mult": prior_rates}
     monkeypatch.setattr(search, "_proofs", lambda spec, selected: {
         (family, name): {"status": "SUPPORTED", "reason": None}
         for family in search.FAMILIES for name in selected})
     packet = search.plan_study(spec, cases=cases)
     assert len(packet["trials"]) == 8
     assert {(trial["recipe_overrides"]["lr"], trial["recipe_overrides"]["prior_lr_mult"])
-            for trial in packet["trials"]} == {(lr, rate) for lr in learning_rates for rate in (1., 2.)}
+            for trial in packet["trials"]} == {(lr, rate) for lr in learning_rates for rate in prior_rates}
     assert all(len(trial["cases"]) == 8 for trial in packet["trials"])
     assert search.select_results(packet)["outcome"] == "pending"
-    for other_rates in search.LR_PROFILES:
-        if list(other_rates) == learning_rates:
+    for other_learning_rates, other_prior_rates in search.GRID_PROFILES:
+        if list(other_learning_rates) == learning_rates and list(other_prior_rates) == prior_rates:
             continue
-        packet["spec"]["grid"]["lr"] = list(other_rates)
+        packet["spec"]["grid"] = {"lr": list(other_learning_rates), "prior_lr_mult": list(other_prior_rates)}
         with pytest.raises(ValueError, match="configuration"):
             search.select_results(packet)  # Old IDs cannot fill any different grid.
 
@@ -178,6 +192,14 @@ def test_frozen_grid_profiles_have_distinct_complete_config_denominators(tmp_pat
                                   {"lr": [.0031875, .00425], "prior_lr_mult": [1., 2.]},
                                   {"lr": [.0031875, .0053125, .006375], "prior_lr_mult": [1., 2.]},
                                   {"lr": [.003, .005], "prior_lr_mult": [1., 2.]},
+                                  {"lr": [.0053125, .006375], "prior_lr_mult": [1., 2.]},
+                                  {"lr": [.006375, .0085], "prior_lr_mult": [.5, 1.5]},
+                                  {"lr": [.002125, .00425], "prior_lr_mult": [.5, 1.5]},
+                                  {"lr": [.0031875, .0053125], "prior_lr_mult": [.5, 1.5]},
+                                  {"lr": [.0053125, .006375], "prior_lr_mult": [.5, 2.]},
+                                  {"lr": [.0053125, .006375], "prior_lr_mult": [.5, .5]},
+                                  {"lr": [.0053125, .006375], "prior_lr_mult": [False, 1.5]},
+                                  {"lr": [.0053125, .006375], "prior_lr_mult": [.5, float("inf")]},
                                   {"lr": [.002125, .00425], "prior_lr_mult": [1., 1.]},
                                   {"lr": [.002125, .00425], "prior_lr_mult": [True, 2.]},
                                   {"lr": [.002125, float("nan")], "prior_lr_mult": [1., 2.]}])

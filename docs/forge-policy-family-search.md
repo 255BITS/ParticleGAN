@@ -8,9 +8,12 @@ pooled into this study.
 
 Each source cohort freezes one finite grid: the first used `lr` .006375 or
 .0085; the linked second uses the public preset rate .00425 or half that rate
-.002125. The third freezes intermediate rates .0031875 and .0053125. Each
-crosses its two rates with `prior_lr_mult` 1 or 2. These are the only accepted
-profiles; a different hypothesis needs an explicit reviewed revision.
+.002125. The third freezes intermediate rates .0031875 and .0053125. Those
+three profiles cross their rates with `prior_lr_mult` 1 or 2. The final profile
+binds LR .0053125 or .006375 specifically to prior multiplier .5 or 1.5.
+These are the only accepted complete grid pairings; combining axes borrowed
+from different profiles is rejected. A different hypothesis needs an explicit
+reviewed revision.
 Each of the four configurations per family uses the same two knobs on every
 required case. The original host architecture, prior/init, data law, batch,
 evaluation draw count, scoring cadence and full horizon remain unchanged.
@@ -81,6 +84,15 @@ confirmation, three acquired too late; its other image run failed the original
 gate. The next grid receives only 10,336.011929 unspent seconds from the same
 cap. Its four knob pairs are new, with all original cases, gates and horizons
 unchanged. Nonmonotonic prior results do not guarantee an intermediate rate wins.
+
+The [fourth and final specification](../reports/forge/family-winner-round1/policy-search-round4.json)
+tests a shared prior-rate balance at rates that previously retained intensity.
+This is a lower or intermediate table-rate ceiling; actual transport also
+depends on the policy, row evidence and birth/death. It does not establish a
+prior optimizer cause or promise slower actual drift. All four knob pairs are
+new. The first three grids and setup leave exactly 9,997.188535 seconds from
+the original cap. This concludes the finite screening search; failures do not
+automatically start more local tuning, a seed study or default promotion.
 
 After one common code/spec/capacity freeze, the coordinator can admit one serial
 family lane per visible GPU. Each lane must use a separate archive and fixed
