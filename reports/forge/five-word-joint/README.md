@@ -1,5 +1,10 @@
 # Five-word joint BiGAN acquisition
 
+The example already has successful full-budget source and public-API evidence.
+It was absent from Forge because it lacked a registered joint-word adapter,
+task, evaluator binding and view assignment. This registration connects those
+pieces and gives the tier report an explicit link to its retained question.
+
 The [registered task](../../../configs/forge/tasks/five_word_joint_acquisition.json)
 asks whether a generator, encoder and joint critic can learn five equally likely
 words and the correctly paired inverse mapping. It preserves the actual question
@@ -24,12 +29,47 @@ word/typo generalization.
   reconstruction and minimum correct reconstruction-token probability 0.999753.
 - [Frozen short-demo protocol](demo-protocol.json): one 32-update API integration
   check, 60 seconds maximum, seed 0, 1,024 samples, 24 post-update observations.
-  Its results are published separately after execution, with no full-task credit.
+  [Compact receipt](../../toy_audit/api_contract/five_word_joint/publication.json)
+  and [actual-training GIF](../../toy_audit/api_contract/five_word_joint/goal.gif)
+  are separate from the historical campaign, with no full-task credit.
 
 The historical/source and API results keep their original source, recipe, prior,
 initialization, sampling, budgets and runtime. They do not qualify this new Forge
 task. The [current solution leaderboard](../technique-inventory.md) remains
 unchanged; this view has no qualified winner.
+
+## Short-demo result and recommendation
+
+The sole integration run executed the frozen code at
+[`1ff8e385`](https://github.com/255BITS/ParticleGAN/tree/1ff8e3858bd711b67e391063b52f5dcdfa99b9b6).
+At 32 updates its instantaneous scientific metric is **FAIL**; against the full
+20,001-update task the recorded verdict is **INCOMPLETE**.
+
+| Measurement at update 32 | Observed | Required |
+| --- | ---: | ---: |
+| Confident canonical-word fraction | 0 | ≥ 0.95 |
+| Confident modes | 0 | 5 |
+| Word/rejection TV | 1.0 | ≤ 0.10 |
+| Exact paired reconstruction | False | True |
+| Minimum correct reconstruction-token probability | 0.118271 | ≥ 0.90 |
+| Actual optimizer updates, each of G/E/prior/D | 32 | 20,001 |
+| Unintended RNG deviations | 0 | 0 |
+
+State stayed finite and all four roles updated. The 0.781-second measured
+adapter loop is a partial CPU cost, excluding GIF rendering and imports. The
+receipt distinguishes actual critic-penalty activation from synthetic component
+probes for branches not activated in this short host run; those probes are not
+training or convergence evidence. Nine GIF frames show real targets, generated
+strings and correctly paired reconstructions. Raw stdout, observations and
+state remain under ignored `runs/forge/five-word-joint-demo-v1` in the worktree;
+the published compact receipt retains their exact SHA-256 identities.
+
+This verifies the registration path and its evidence guards. It does not test
+whether the Forge cohort succeeds at its full budget and does not contradict
+either older full-budget PASS. Review the preserved joint objective and numerical
+controls first, then decide whether to run the normal gated campaign. Keep Tier 2
+provisional until a separately budgeted calibration measures rejection cost and
+false rejections; no automatic continuation, tuning or promotion follows.
 
 ## Why it was missing from Forge
 
@@ -116,6 +156,7 @@ python -m experiments.forge experiments-by-tier --output reports/forge/EXPERIMEN
 The sole short integration demo is explicitly outside ordinary qualification:
 
 ```sh
+mkdir -p runs/forge
 python reports/forge/five-word-joint/reproduce_demo.py --output runs/forge/five-word-joint-demo-v1 > runs/forge/five-word-joint-demo-v1.log 2>&1
 tail -F runs/forge/five-word-joint-demo-v1.log
 ```

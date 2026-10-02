@@ -563,6 +563,7 @@ Related public-API demonstrations, with their own recorded contracts:
 
 | Variant / actual-training GIF | What this variant tests | Recorded result / failed bounds | Recipe / compute / source | Evidence |
 | --- | --- | --- | --- | --- |
+| [forge-five-word-joint-api-demo-v1](../toy_audit/api_contract/five_word_joint/goal.gif) | Can a joint BiGAN generator, encoder and critic acquire five equally likely canonical words and reconstruct every correctly paired input with confident token probabilities, including padding? Scope: One bounded shared-API integration demonstration, not an ordinary Forge run or release qualification. Score the declared bounds honestly at 32 updates and grade the evidence INCOMPLETE against the 20,001-update task. | COMPLETE / INCOMPLETE; 32/20001 updates; quality_fraction, modes, mass_tv, reconstruction_exact, minimum_reconstruction_token_probability | ka2 / cpu / 997c7f01b99a | [definition](../toy_audit/api_contract/five_word_joint/publication.json); [readout](../toy_audit/api_contract/five_word_joint/publication.json); [recipe and provenance](../toy_audit/api_contract/five_word_joint/publication.json) |
 | [image-five-words-joint-ae](../toy_audit/api_contract/media/image-five-words-joint-ae.gif) | Generate the five equally likely canonical words with confident normalized token probabilities, and reconstruct each of the five matched inputs including underscore padding. Scope: Finite vocabulary apple/grape/lemon/melon/berry only. Joint BiGAN inverse reconstruction; no unseen words or natural-language generation. New API-policy variant, not reuse of historical EMA PASS. | COMPLETE / PASS; 20001/20001 updates | ka2 / cpu / 39eff89a9223 | [definition](../toy_audit/api_contract/cases.json); [readout](../toy_audit/api_contract/readout.json); [recipe and provenance](../toy_audit/api_contract/runs.json) |
 
 ### Experiment: grid100
@@ -1254,4 +1255,4 @@ The wider question review also links standalone experiments outside the Forge ti
 
 Declaration input digest: `2b577ff5fdf70f0a7c28fdf542ee8ca3fe2801942054bd86ac956f2681b160c8`. The JSON form includes the individual task and view file hashes.
 
-Published artifact input digest: `183c065f63b70ac46aa520439d8d60f604c151458590b012954c83c1cb4dc3a3`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.
+Published artifact input digest: `e53fa3bc3fe60132363c458a8330cf8dcfe7c9607ef04a23b14ab9743a502139`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.
