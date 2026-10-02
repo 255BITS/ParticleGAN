@@ -22,6 +22,8 @@ build/
 dist/
 /runs/api/
 /runs/forge/
+/runs/routed-convergence*/
+/runs/routed-basis-audit*/
 /runs/mog_autoencoder/
 /runs/cifar_particle_ae/
 /runs/cifar_particle_ddgan/
@@ -71,3 +73,17 @@ dist/
 # them locally/in artifact archives; publish compact technique-receipts instead.
 # Existing tracked historical envelopes retain their original Git identities.
 /reports/forge/attempts/
+
+/runs/routed-convergence-rotated-v1/
+/runs/routed-convergence-rotated-v1.launcher.log
+/runs/routed-rotated-authorized-preflight.json
+
+/runs/guided-pair-preparation/
+
+/runs/routed-convergence-guided-pair-v1.launcher.log
+
+/runs/routed-guided-authorized-preflight.json
+
+/runs/routed-game-stationarity-v1/
+
+/runs/routed-game-stationarity-v1.launcher.log
