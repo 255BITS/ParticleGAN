@@ -13,8 +13,14 @@ The [completed full-budget readout](RUN_REPORT.md) covers all 176 variants:
 Three later standalone protocols and their strict API reproduction/export
 commands are in the [PR233/234/235 readout](recent_prs/README.md).
 The [PR236 batch-size diagnostic](pr236/README.md) adds its frozen endpoint
-comparison and actual-metric goal GIF. The [complete question ranking](QUESTION_RANKING.md)
-sorts all 114 retained questions and links their goals, API results and media.
+comparison and actual-metric goal GIF. The [PR239–243 caption diagnostics](caption_prs/README.md)
+add five distinct questions and six actual-observation GIFs, including a separate
+failed actual-caption context. The [complete question ranking](QUESTION_RANKING.md)
+sorts all 119 retained questions and links their goals, API results and 187 GIFs.
+The [Forge config-selection readout](../CONFIG_SELECTION_READINESS.md) applies
+the current requirements from PR228 and reports eligible config options with
+their exact source, recipe and runtime; these standalone diagnostics supply no
+automatic Forge qualification.
 
 ## Contract
 
