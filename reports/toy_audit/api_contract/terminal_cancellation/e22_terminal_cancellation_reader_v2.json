@@ -1,0 +1,108 @@
+{
+  "task": "routed_terminal_cancellation_v1_independent_saved_CPU_review_compatibility_v2",
+  "source": "/tmp/e22_terminal_cancellation_reader_v2.py",
+  "sha256": "c9e88136e5e41d91e5e94de26f6bcb85b41c3adbd6d0c6ea34688ec7161ab914",
+  "limit_seconds": 60,
+  "status": "SOURCE_ONLY_FROZEN_UNEXECUTED_POST_SCIENCE_METADATA_COMPATIBILITY",
+  "producer_task_unchanged": "routed_terminal_cancellation_v1",
+  "cwd": "/ml2/hypergan/ParticleGAN-routed-terminal-cancellation-develop",
+  "CLI": "CUDA_VISIBLE_DEVICES='' PYTHONPATH=. /ml2/ntc-image-studio/.venv-anima/bin/python /tmp/e22_terminal_cancellation_reader_v2.py --run runs/terminal-cancellation-v1 --card docs/e22_routed_terminal_cancellation_v1.json --prep docs/e22_routed_terminal_cancellation_preparation.json --manifest /tmp/routed-terminal-cancellation-v1-launch-pins.json --external runs/terminal-cancellation-v1.external.json --out docs/e22_routed_terminal_cancellation_independent_review_v2.json",
+  "lineage": {
+    "reader_v1": {
+      "path": "/tmp/e22_terminal_cancellation_reader_v1.py",
+      "sha256": "044ab5f63d49223639a973ab46afe1ace4086c10ee8f2917deb406a283076ab4"
+    },
+    "descriptor_v1": {
+      "path": "/tmp/e22_terminal_cancellation_reader_v1.json",
+      "sha256": "6a49a0fdb68d190d434be0446e88adf28e5c4350bbac8ff441eeca79ded5bd8f"
+    },
+    "failed_review_v1": {
+      "path": "/ml2/hypergan/ParticleGAN-routed-terminal-cancellation-develop/docs/e22_routed_terminal_cancellation_independent_review.json",
+      "sha256": "d1dd952ea83305f428cc161459c20494a6f03e4f51729151a17dc37f25895786"
+    },
+    "failed_review_companion_v1": {
+      "path": "/ml2/hypergan/ParticleGAN-routed-terminal-cancellation-develop/docs/e22_routed_terminal_cancellation_independent_review.json.completion.json",
+      "sha256": "240ec3b41b410ac1c5ef8a3b708d6b5b24243216df4901c6c21f773f386c900b"
+    },
+    "failed_wrapper_v1": {
+      "path": "/ml2/hypergan/ParticleGAN-routed-terminal-cancellation-develop/runs/terminal-cancellation-v1.reviewer/completion.json",
+      "sha256": "78d8bc946347f8b9f95164f275739c263eb6bd872eb85e2b4324ff90b6f15dc4"
+    },
+    "failed_stdout_v1": {
+      "path": "/ml2/hypergan/ParticleGAN-routed-terminal-cancellation-develop/runs/terminal-cancellation-v1.reviewer/stdout.log",
+      "sha256": "271c77265629b6bd16ee8edecc3c22d9a96302ff2b65ec2cedd236fff23b9a97"
+    }
+  },
+  "compatibility": {
+    "cause": "Recipe.to_dict preserves tuple-valued fields in Torch state; producer JSON serialization represents these fields as lists. Direct saved-dict/JSON-dict equality fails despite identical recipe values.",
+    "exact_source_substitution": {
+      "before": "native['recipe']==report['recipes'][a]",
+      "after": "json.dumps(native['recipe'],sort_keys=True,allow_nan=False)==json.dumps(report['recipes'][a],sort_keys=True,allow_nan=False)"
+    },
+    "scope": "Normalize only the saved native recipe metadata comparison to its canonical JSON representation; all tensor values, native states, optimizer fields, numerical reductions, gates and tolerances are unchanged.",
+    "new_reader_not_frozen_at_GPU_execution": true,
+    "original_failed_reader_and_receipts_preserved": true,
+    "root_must_pin_new_reader_and_descriptor_for_one_fresh_CPU60_execution": true,
+    "representation_oracle": "Stdlib-only: tuple/list JSON representations equal, changed beta remains unequal, integer/float scalar representation remains distinct.",
+    "inverse_source_substitution_recovers_original_bytes_exactly": true,
+    "all_non_main_function_ASTs_unchanged": [
+      "budget",
+      "check",
+      "sha",
+      "digest",
+      "values",
+      "mean_squared",
+      "metric",
+      "near",
+      "same_metric",
+      "secant",
+      "dot",
+      "reduce_precision"
+    ],
+    "valid_scientific_PASS_or_FAIL_remains_complete_True_independent_of_gate": true
+  },
+  "source_evidence": [
+    {
+      "path": "/ml2/hypergan/ParticleGAN-routed-terminal-cancellation-develop/particlegan/recipes.py",
+      "lines": [
+        34,
+        41,
+        42,
+        68,
+        389
+      ],
+      "fact": "Tuple-valued recipe declarations; to_dict uses dataclasses.asdict without list conversion."
+    },
+    {
+      "path": "/ml2/hypergan/ParticleGAN-routed-terminal-cancellation-develop/particlegan/policy.py",
+      "line": 1170,
+      "fact": "Public native state_dict retains recipe.to_dict directly."
+    },
+    {
+      "path": "/ml2/hypergan/ParticleGAN-routed-terminal-cancellation-develop/examples/e22_routed_terminal_cancellation.py",
+      "lines": [
+        314,
+        390
+      ],
+      "fact": "Recipe dict is retained in report, then serialized as JSON."
+    }
+  ],
+  "preparation_execution": {
+    "Torch_imports": 0,
+    "raw_loads": 0,
+    "models": 0,
+    "API_calls": 0,
+    "native_updates": 0,
+    "CUDA": false,
+    "science_or_reader_executions": 0
+  },
+  "failed_v1_summary": {
+    "complete": false,
+    "qualification": "FAIL",
+    "error": {
+      "type": "AssertionError",
+      "message": "ordinary_BF16_saved_boundary_recipe_data"
+    },
+    "checks": 132
+  }
+}

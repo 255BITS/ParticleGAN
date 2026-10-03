@@ -1,0 +1,50 @@
+{
+  "status": "SOFTWARE_PASS_SCIENCE_UNEXECUTED_READER_SOURCE_CLEAR",
+  "task": "routed_terminal_cancellation_v1",
+  "protocol_sha256": "b94c0129d9cf490f1c32317ea44f9076b730395e47fdc455efb0179ee24d0e01",
+  "source_identity": {
+    "examples/e22_routed_terminal_cancellation.py": "999f8e984ce17b821d3330d313eddde183e5ab313df69fa0360c28f144cdf5e5",
+    "examples/e22_routed_caption_accuracy.py": "bae0f255d890e49bfbe4602bee7f8e84051b24a3cb0219c13b0a42b25768b8e3",
+    "examples/e22_routed_caption_untied.py": "a35938f51b7974677651d2c05b1aa396896255460e213cf26ccf57409efcdb81",
+    "examples/e22_routed_caption_flow.py": "f868c7cb36db670fc1f08aebeb54e6d863837f8d56e685373e5873b2b4a08e3c",
+    "examples/e22_routed_caption_normalization.py": "7077a03143a8d25577bfb2ed1f167d847e75972131093f9228ca10f6aaca9a0e",
+    "examples/render_e22_routed_caption_untied.py": "18e9c55143e551a2ef961128198ae331f3ea2e3992eb6b1be73bdda333dea77b"
+  },
+  "software": {
+    "qualification": "PASS",
+    "new_cases": 4,
+    "pytest_seconds": 1.6,
+    "native_updates": 4,
+    "update_accounting": "Exactly one2+2 reduced publicAPI replay; remaining3cases zero-update. No oldtests executed.",
+    "external_seconds": 4.040367336943746,
+    "limit_seconds": 60,
+    "CUDA": false,
+    "actual_asset_loads": 0,
+    "all42pins_unchanged": true,
+    "raw_artifacts": {
+      "runs/terminal-cancellation-software-v1/report.json": "8b7fe01d29b7cd568ce3cb653b84a849b50a609d351c9a62fed83d114dc7a7bd",
+      "runs/terminal-cancellation-software-v1/completion.json": "2b655f6c69d27337ee97dbda9c9741b3661c8a239e620c1bc30c3c7e50466780",
+      "runs/terminal-cancellation-software-v1/stdout.log": "db74590bf2ef59f0983493548e13d91cc56ee7704800d3e72676c4a283cfa0a5",
+      "runs/terminal-cancellation-software-v1/junit.xml": "ae36528d4d4ddfd729a7c5c57ba05cad669722853e18c0cd5775cc7208147fd0",
+      "runs/terminal-cancellation-software-v1.external.json": "95e13982c2f3968b6e031006ce8aecfefbf83d4cb51bd821e72aff6c418ee9de",
+      "/tmp/terminal-cancellation-software-v1-plan.json": "b563be72b4bbb29ca7d66ccf7bf6e4cd529b89dc8a3a4dd9aaf813a7b7eeca48",
+      "/tmp/run_terminal_cancellation_software_v1.py": "c33201a17fd858ab495f972c3531420317481d2b5f6158c94466cbd837d0b571"
+    }
+  },
+  "source_only_reader": {
+    "path": "/tmp/e22_terminal_cancellation_reader_v1.py",
+    "sha256": "044ab5f63d49223639a973ab46afe1ace4086c10ee8f2917deb406a283076ab4",
+    "protocol_path": "/tmp/e22_terminal_cancellation_reader_v1.json",
+    "protocol_sha256": "6a49a0fdb68d190d434be0446e88adf28e5c4350bbac8ff441eeca79ded5bd8f",
+    "execution": false,
+    "limit_seconds": 60,
+    "models_API_native_updates": 0,
+    "review": "Independent peer source/schema/math CLEAR before first science; no execution, model, API or raw-array loads by reviewers.",
+    "reviewed_source_sha256": "044ab5f63d49223639a973ab46afe1ace4086c10ee8f2917deb406a283076ab4",
+    "reviewed_protocol_sha256": "6a49a0fdb68d190d434be0446e88adf28e5c4350bbac8ff441eeca79ded5bd8f"
+  },
+  "sampling_and_science": "Allcarded512/300 fourarm publicAPI law and terminalbounds unchanged; imported native runtime path/hash recorded/enforcedwithinrun, never permanent revision allowlist.",
+  "preservation": "Executed example/tests/card/renderer/source-only receipt/softwareattempt unchanged. This NEW receipt alone records qualification.",
+  "command": "python -m examples.e22_routed_terminal_cancellation --run --out runs/terminal-cancellation-v1 --device cuda:0",
+  "scope": "Constructed paired-column terminal cancellation task; software PASS is not convergence PASS, actual geometry reproduction or fullSupra remedy. Original fullSupra remains unbeaten."
+}

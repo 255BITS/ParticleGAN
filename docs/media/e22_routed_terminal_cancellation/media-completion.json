@@ -1,0 +1,16 @@
+{
+  "complete": true,
+  "report_sha256": "579a1b6b7fde9e0b7b2ffb3f6d116792cad5aa0d22163617f02a4e32c88d310d",
+  "completion_sha256": "ccd2313265a37d893068997f48090af54752b8538d9ebf9b43904b672f41f38b",
+  "observed_media_sha256": "caa7c8f285f18110bfd617874bf5932874e13280a216a2faf80740712834425c",
+  "protocol_sha256": "b94c0129d9cf490f1c32317ea44f9076b730395e47fdc455efb0179ee24d0e01",
+  "renderer_sha256": "aae4b682966004c7d031bff3a83e77ac11c104d893e4eeb2f13211c44be82ab3",
+  "gif_sha256": "f6209413dda1c26bc961753eb90b05f7a72355593a551abcb084185088ec615e",
+  "png_sha256": "903e1bee35e9fb8ab9a150877cd3df9c22578bd3410483fe8a4fcd8761210db7",
+  "initial_only_vmax": 0.008119098849928097,
+  "native_updates": 0,
+  "model_forwards": 0,
+  "scientific_status_unchanged": "FAIL",
+  "seconds": 1.5809891370590776,
+  "limit_seconds": 60
+}
