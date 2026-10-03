@@ -76,6 +76,16 @@ def _behavior_host(task):
 def prior_control_binding(task):
     """Separate direct generated coordinates from a sampled latent prior."""
     if _behavior_host(task) == "two_pole":
+        from .policy_contracts import is_policy_task
+        if is_policy_task(task):
+            return {"representation": "direct_sample_coordinates_public_policy_table",
+                    "latent_table_controls": True,
+                    "construction": "ParticlePrior table with parameterless identity generator",
+                    "optimizer": "Recipe.make_generator_optimizer(latent_table=..., direct_particles=...)",
+                    "base_lr": "Recipe.lr * Recipe.prior_lr_mult",
+                    "base_betas": "Recipe.prior_betas or Recipe.betas", "lr_schedule": "prior",
+                    "note": "The explicitly new policy task binds these coordinates to the public prior-table role; "
+                    "the original direct-coordinate task retains its generator-side optimizer law."}
         return {"representation": "direct_sample_coordinates", "latent_table_controls": False,
                 "construction": "direct nn.Parameter; no ParticlePrior or latent-table optimizer",
                 "optimizer": "Recipe.make_generator_optimizer(direct_particles=...)",

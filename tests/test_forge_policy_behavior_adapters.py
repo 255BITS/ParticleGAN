@@ -70,6 +70,19 @@ def test_public_checkpoint_restores_exact_next_update_and_input_is_unchanged():
     assert typed_state_digest(saved) == digest
 
 
+def test_policy_table_role_reports_the_optimizer_values_it_actually_consumes():
+    request, task = definition()
+    fixture = TwoPolePolicyFixture(request, task)
+    receipt = fixture.context.receipt()["field_ownership"]
+    group = fixture.opt_g.param_groups[0]
+    binding = receipt["task_contract"]["prior"]["control_binding"]
+    assert binding["representation"] == "direct_sample_coordinates_public_policy_table"
+    assert binding["latent_table_controls"] is True
+    assert group["lr"] == fixture.recipe.lr * fixture.recipe.prior_lr_mult
+    assert receipt["recipe_fields"]["prior_lr_mult"]["status"] == "effective"
+    assert receipt["recipe_fields"]["prior_lr_mult"]["value"] == fixture.recipe.prior_lr_mult
+
+
 @pytest.mark.parametrize("field", ["recipe", "cursor", "streams", "parameters", "audit"])
 def test_changed_state_rejected_without_mutating_public_owner(field):
     request, task = definition()
