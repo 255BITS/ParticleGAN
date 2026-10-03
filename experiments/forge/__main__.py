@@ -113,6 +113,9 @@ def parser():
     commands.add_parser("validate", help="validate all task/view definitions without training")
     calibration = commands.add_parser("calibrate", help="replay saved calibration evidence; no training")
     calibration.add_argument("--profile", default="initial")
+    feasibility = commands.add_parser("calibration-preflight", help="check whether a frozen current profile can meet its criteria; no writes or training")
+    feasibility.add_argument("--profile", required=True)
+    feasibility.add_argument("--require-feasible", action="store_true", help="exit nonzero for infeasible criteria or unresolved receipt issues")
     lane = commands.add_parser("calibration-lane", help="register selected bounded diagnostics; never qualify a candidate")
     lane_stages = lane.add_subparsers(dest="stage", required=True)
     lane_register = lane_stages.add_parser("register")
@@ -190,6 +193,11 @@ def follow_logs(path: Path, args):
 def main(argv=None):
     args = parser().parse_args(argv)
     root = args.root.resolve()
+    if args.command == "calibration-preflight":
+        from .calibration_feasibility import preflight
+        result = preflight(root, args.profile)
+        emit(result)
+        return int(args.require_feasible and (result["feasibility"]["status"] != "POSSIBLE" or bool(result["receipt_issues"])))
     if args.command == "experiments-by-tier":
         from .tier_report import build_report, render_markdown, write_report
         report = build_report(root, args.view)

@@ -39,7 +39,7 @@
       "experiment/toy": 3,
       "experiment/trajectory": 2,
       "experiment/transition": 7,
-      "forge_engine": 46,
+      "forge_engine": 47,
       "lrfree/feature-cells-cb64-ra": 4058,
       "report/atlas-explanation": 7,
       "report/behavioral_baseline": 32,
@@ -102,7 +102,7 @@
       "candidate_patch": 26,
       "configuration": 807,
       "driver": 401,
-      "engine_support": 46,
+      "engine_support": 47,
       "evaluator_or_audit": 324,
       "evidence_artifact": 1574,
       "frozen_candidate_implementation": 15,
@@ -116,13 +116,13 @@
       "visualization": 22,
       "visualization_artifact": 721
     },
-    "files": 11712
+    "files": 11713
   },
   "coverage": {
-    "declared_count": 11712,
+    "declared_count": 11713,
     "missing": [],
     "stale": [],
-    "tracked_count": 11712,
+    "tracked_count": 11713,
     "unclassified": [],
     "valid": true
   },
@@ -7103,7 +7103,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "83f7d5eeb4a96ccef58c280b57ca2e23d0f9f187",
+      "git_blob": "85e91617c5ac8fd81d47143a8f00015549bf5f7f",
       "path": "experiments/forge/__main__.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -7166,7 +7166,14 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "31bd32acde7366339a44cc367b817a01bd017f47",
+      "git_blob": "e9910c497324bdd4a8671cfdea8bbc2c5bd70a71",
+      "path": "experiments/forge/calibration_feasibility.py",
+      "role": "engine_support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "forge_engine",
+      "git_blob": "782c37704e5e9ed7a7298256083988ae084e0971",
       "path": "experiments/forge/calibration_lane.py",
       "role": "engine_support",
       "suggested_tiers": []

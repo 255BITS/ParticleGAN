@@ -137,6 +137,13 @@ def register(root: Path, contract_path: Path) -> dict:
     _validate(contract)
     frozen = _profile(root, contract)
     profile = frozen["profile"]
+    from .calibration_feasibility import preflight
+    checked = preflight(root, contract["profile"])
+    feasibility = checked["feasibility"]
+    if feasibility["status"] == "INFEASIBLE":
+        _block("calibration profile cannot meet its frozen adoption criteria: " + "; ".join(feasibility["reasons"]))
+    if checked["receipt_issues"]:
+        _block("calibration preflight has unresolved original receipt issues; restore exact evidence before registration")
     lineages = {row["id"]: row for row in profile["lineages"]}
     subjects, total = {}, 0
     for selection in contract["selections"]:
