@@ -1,0 +1,137 @@
+{
+  "grades": {
+    "vector_two_broad_policy_selected_cloud_v1": {
+      "evaluator_result": {
+        "attempted": true,
+        "confirmation_fraction": 0.25,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 300,
+          "first_pass_step": 100,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 23,
+          "passing_suffix": 23,
+          "stable_from_seconds": null,
+          "stable_from_step": 100
+        },
+        "metrics": [
+          {
+            "margin": 0.14837233192959148,
+            "metric": "sw1_normalized",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.18,
+            "value": 0.03162766807040852
+          },
+          {
+            "margin": 0.135107421875,
+            "metric": "mass_tv",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.15,
+            "value": 0.014892578125
+          },
+          {
+            "margin": 0.13022460937500002,
+            "metric": "hq",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.980224609375
+          },
+          {
+            "margin": 0.6507913418114185,
+            "metric": "component_covariance_error",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.19920865818858147
+          },
+          {
+            "margin": 0.7892083287239074,
+            "metric": "component_min_eigen_ratio",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.15,
+            "value": 0.9392083287239075
+          }
+        ],
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "component_core_covariance_error": 0.11846837028861046,
+        "component_core_covariance_errors": [
+          0.12283134460449219,
+          0.11410539597272873
+        ],
+        "component_core_eigen_ratios": [
+          0.8263747692108154,
+          0.8957222700119019
+        ],
+        "component_core_min_eigen_ratio": 0.8263747692108154,
+        "component_counts": [
+          1987,
+          2109
+        ],
+        "component_covariance_error": 0.19920865818858147,
+        "component_covariance_errors": [
+          0.29612138867378235,
+          0.10229592770338058
+        ],
+        "component_mass": [
+          0.485107421875,
+          0.514892578125
+        ],
+        "component_min_eigen_ratio": 0.9392083287239075,
+        "component_resolved": [
+          true,
+          true
+        ],
+        "component_spill": [
+          0.01560140959918499,
+          0.02370791882276535
+        ],
+        "covariance_error": 0.031941283494234085,
+        "hq": 0.980224609375,
+        "mass_tv": 0.014892578125,
+        "max_component_spill": 0.02370791882276535,
+        "mean_error": 0.03794141113758087,
+        "min_mass_ratio": 0.97021484375,
+        "resolved_core_covariance_error": 0.11846837028861046,
+        "resolved_core_min_eigen_ratio": 0.8263747692108154,
+        "resolved_max_component_spill": 0.02370791882276535,
+        "sample_count": 4096,
+        "step": 1200,
+        "sw1_normalized": 0.03162766807040852,
+        "target_mass": [
+          0.5,
+          0.5
+        ],
+        "target_scale": 1.0555585622787476
+      },
+      "reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "status": "PASS"
+    }
+  },
+  "raw_hash": "50db363364134e8eed806af1510817508c7d287b3af4da397088f0dea908beb5",
+  "schema_version": 1,
+  "source_digest": "db5492df4aa5ef60ce9e7d5869b2b6be8d492f19191a2889967274555f8d0037",
+  "telemetry": {
+    "independent_grading_seconds": 0.8797027319669724,
+    "memory": {
+      "cpu_scope": "this process lifetime, including imports",
+      "cuda_peak_allocated_bytes": null,
+      "cuda_peak_reserved_bytes": null,
+      "cuda_scope": "PyTorch allocator since probe reset; excludes other processes and non-PyTorch allocations",
+      "process_peak_rss_bytes": 664748032
+    },
+    "scope": "Independent CPU evaluator process, including evaluator artifact reads."
+  }
+}
