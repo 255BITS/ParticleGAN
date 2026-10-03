@@ -195,7 +195,10 @@ def request_from_base(base, spec, source):
         job = by_task[row["id"]]
         if job["budget_seconds"] != row["timeout_seconds"] or job["execution_group"] != row["execution_group"]:
             raise ValueError("planner job allowance/group changed")
-    return request
+    # Recipes contain tuple-valued metadata, while durable JSON retains arrays.
+    # Freeze the transport representation before both recording and reconstructing
+    # the request; this changes no Recipe values or execution/runtime declarations.
+    return json.loads(canonical(request))
 
 
 def build_request(root, spec, source=None):
@@ -275,7 +278,7 @@ def verify_packet(packet):
     if read(snapshot / "forge-source.json") != {k: v for k, v in source.items() if k != "snapshot_path"}:
         raise ValueError("snapshot provenance metadata changed")
     expected = build_request(snapshot, spec, source)
-    if expected != packet["request"]:
+    if canonical(expected) != canonical(packet["request"]):
         raise ValueError("candidate/task/Recipe/runtime/compatibility reconstruction changed")
     card = read(check_pin(card_pin))
     if card != card_for(expected, spec) or packet.get("capacity_preflight") != card:

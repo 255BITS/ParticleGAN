@@ -31,6 +31,9 @@ Preparation copies a content-addressed source tree and writes an immutable
 sidecar outside the fresh output, so registration can still admit an empty
 canonical output. It initializes no queue, reserves no device and performs no
 training. It may query hardware identity without initializing CUDA.
+Recipe sequence metadata is frozen as JSON arrays before recording and exact
+reconstruction. This preserves Recipe values and distinguishes numeric metadata
+from boolean substitutions; runtime/source/gate drift still rejects admission.
 
 ```sh
 PG_DIAGNOSTIC_OUTPUT=/ml2/hypergan/forge-atlas-current-gpu-diagnostics-v1

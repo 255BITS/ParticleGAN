@@ -130,6 +130,56 @@ def test_candidate_review_is_retained_and_only_exact_decision_blockers_are_advis
         diagnostic.request_from_base(base, spec, {"digest": "a" * 64})
 
 
+@pytest.mark.parametrize("change", [None, "recipe", "numeric_type", "runtime", "gate", "job", "source"])
+def test_serialized_preparation_reconstructs_actual_recipe_metadata_and_rejects_drift(spec, tmp_path, monkeypatch, change):
+    """Exercise the durable entry point with public Recipe tuples and a real snapshot.
+
+    Only planner discovery/import routing is replaced by private software metadata;
+    request construction, JSON serialization, snapshot hashes and packet guards run.
+    """
+    from particlegan import get_recipe
+    from experiments.forge.contracts import stable_hash
+    from experiments.forge import planning
+
+    snapshot = tmp_path / "source"
+    files = {}
+    for relative in [diagnostic.SELF] + [row["definition"] for row in spec["cases"]]:
+        destination = snapshot / relative
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        destination.write_bytes((ROOT / relative).read_bytes())
+        files[relative] = diagnostic.file_hash(destination)
+    metadata = {"schema_version": 1, "files": files, "digest": stable_hash(files), "origin_commit": None}
+    dumped(snapshot / "forge-source.json", metadata)
+    source = {**metadata, "snapshot_path": str(snapshot)}
+    base = base_request(spec)
+    base["source"] = metadata
+    base["candidate"]["resolved_recipe"] = get_recipe("atlas").to_dict()
+    assert isinstance(base["candidate"]["resolved_recipe"]["betas"], tuple)
+    monkeypatch.setattr(planning, "resolve_idea", lambda *args, **kwargs: deepcopy(base))
+    monkeypatch.setattr(diagnostic, "guard_imports", lambda *args, **kwargs: None)
+    request = diagnostic.build_request(snapshot, spec, source)
+    card = diagnostic.card_for(request, spec)
+    card_path = dumped(tmp_path / "card.json", card)
+    packet = {"schema": diagnostic.SCHEMA, "spec": {**spec, "representation_card": diagnostic.pin(card_path)},
+              "spec_sha256": diagnostic.digest(spec), "request": request, "source": source,
+              "execution_source": source, "case_definitions": diagnostic.case_definitions(request, spec),
+              "capacity_preflight": card, "runtime_contract": request["runtime"],
+              "family_paid_budget_seconds": {"atlas": 34800}}
+    packet = diagnostic.read(dumped(tmp_path / "preparation.json", packet))
+    assert packet["request"]["candidate"]["resolved_recipe"]["betas"] == [0., .999]
+    assert base["candidate"]["resolved_recipe"]["betas"] == (0., .999)
+    if change == "recipe": packet["request"]["candidate"]["resolved_recipe"]["alpha_bar"][1] = .8
+    elif change == "numeric_type": packet["request"]["candidate"]["resolved_recipe"]["betas"][0] = False
+    elif change == "runtime": packet["request"]["runtime"]["python"] = "different-runtime"
+    elif change == "gate": packet["request"]["tasks"][spec["cases"][0]["id"]]["evaluation"]["thresholds"] = []
+    elif change == "job": packet["request"]["jobs"][0]["compatibility_key"] = "foreign"
+    elif change == "source": (snapshot / diagnostic.SELF).write_text("changed pinned wrapper\n")
+    if change is None:
+        assert diagnostic.verify_packet(packet) == spec
+    else:
+        with pytest.raises(ValueError): diagnostic.verify_packet(packet)
+
+
 def test_unsupported_change_requires_new_contract_not_automatic_expansion(spec):
     base = base_request(spec)
     base["tasks"]["five_word_joint_acquisition" + diagnostic.SUFFIX]["preflight_blockers"] = []
