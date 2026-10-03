@@ -50,11 +50,8 @@ def json_value(value):
 
 
 def write_json(path, value):
-    path = Path(path)
-    path.parent.mkdir(parents=True, exist_ok=True)
-    temporary = path.with_name(path.name + ".tmp")
-    temporary.write_text(json.dumps(json_value(value), indent=2, allow_nan=False) + "\n")
-    temporary.replace(path)
+    from experiments.forge.contracts import atomic_json
+    atomic_json(Path(path), json_value(value))
 
 
 @contextmanager
@@ -79,6 +76,7 @@ def source_identity():
     # including helpers which a particular provider may import lazily.
     paths.update((root / "benchmarks/toy100").glob("*.py"))
     paths.add(root / "experiments/forge/configuration_search.py")
+    paths.update(root / f"experiments/forge/{name}.py" for name in ("policy_execution", "queue", "sources", "contracts"))
     # Native example hosts are also loaded with runpy; that does not retain a
     # module in sys.modules, so bind their code explicitly.
     paths.update((root / "examples").glob("e22_*.py"))
@@ -89,8 +87,10 @@ def source_identity():
             if path.suffix == ".py" and path.is_relative_to(root) and path.is_file():
                 paths.add(path)
     sources = {str(path.relative_to(root)): file_hash(path) for path in sorted(paths)}
-    head = subprocess.run(["git", "rev-parse", "HEAD"], cwd=root, check=True,
-                          text=True, capture_output=True).stdout.strip()
+    snapshot = root / "forge-source.json"
+    head = (json.loads(snapshot.read_text())["origin_commit"] if snapshot.is_file() else
+            subprocess.run(["git", "rev-parse", "HEAD"], cwd=root, check=True,
+                           text=True, capture_output=True).stdout.strip())
     return {"commit": head, "files_sha256": sources}
 
 

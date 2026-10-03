@@ -99,7 +99,8 @@ def _source(cases):
     paths += list((contract.ROOT / "benchmarks/toy_audit").glob("api_*.py"))
     for case in cases.values():
         paths += [contract.ROOT / path for path in proof_bindings(case, "atlas")["source_files_sha256"]]
-    paths += [contract.ROOT / "experiments/forge/configuration_search.py"]
+    paths += [contract.ROOT / f"experiments/forge/{name}.py"
+              for name in ("configuration_search", "policy_execution", "queue", "sources", "contracts")]
     commit = subprocess.run(["git", "rev-parse", "HEAD"], cwd=contract.ROOT,
                             check=True, capture_output=True, text=True).stdout.strip()
     return {"commit": commit, "files_sha256": _manifest(paths)}
@@ -155,6 +156,11 @@ def validate_spec(spec, cases):
     if not isinstance(spec.get("representation_card"), dict) or set(spec["representation_card"]) != {"path", "sha256"}:
         raise ValueError("exact representation card path/hash required")
     _positive(spec.get("frames", 9), "media frames", integer=True)
+    resources = spec.get("resources", {})
+    if not isinstance(resources, dict) or set(resources) - {"host_memory_mb"}:
+        raise ValueError("policy resources may declare only host_memory_mb; GPUs remain exclusive")
+    if resources and _positive(resources.get("host_memory_mb"), "host_memory_mb") < 512:
+        raise ValueError("policy host_memory_mb must reserve at least 512 MiB")
     return spec
 
 
@@ -237,7 +243,7 @@ def plan_study(spec, *, cases=None):
             "source": _source(selected), "case_definitions": selected, "trials": sorted(trials, key=lambda trial: trial["id"]),
             "capacity_preflight": {family + "/" + case_id: value for (family, case_id), value in proofs.items()},
             "runtime_contract": {"python": platform.python_version(), "torch": str(torch.__version__),
-                                 "cuda": torch.version.cuda, "torch_threads": torch.get_num_threads(),
+                                 "cuda": torch.version.cuda, "torch_threads": 1,
                                  "backend": spec["backend"]},
             "candidate_worst_case_reservation_seconds": sum(item["timeout_seconds"] + spec["export_grace_seconds"] for item in spec["cases"]),
             "round_worst_case_reservation_seconds": 8 * sum(item["timeout_seconds"] + spec["export_grace_seconds"] for item in spec["cases"]),
@@ -463,7 +469,7 @@ def select_results(packet):
 
 def _runtime(device):
     value = {"python": platform.python_version(), "torch": str(torch.__version__),
-             "cuda": torch.version.cuda, "torch_threads": torch.get_num_threads(), "device": str(device)}
+             "cuda": torch.version.cuda, "torch_threads": 1, "device": str(device)}
     if torch.device(device).type == "cuda":
         value["cuda_device_model"] = torch.cuda.get_device_name(torch.device(device))
     return value
@@ -536,9 +542,16 @@ def _recertify_archive(packet):
             receipt_path = Path(row.get("receipt_path", ""))
             if not receipt_path.is_file() or api_run.file_hash(receipt_path) != row.get("receipt_sha256"):
                 raise ValueError("archived scientific status lacks its unchanged bound receipt")
+            evidence_source = row.get("evidence_source", packet["source"])
+            if evidence_source.get("files_sha256") != packet["source"]["files_sha256"]:
+                raise ValueError("shared evidence source differs from the scientific source cohort")
+            from experiments.forge.policy_execution import scientific_runtime
+            evidence_runtime = row.get("evidence_runtime", packet["lane_runtime"])
+            if scientific_runtime(evidence_runtime) != scientific_runtime(packet["lane_runtime"]):
+                raise ValueError("shared evidence runtime differs from the scientific hardware cohort")
             verified = verify_case(receipt_path.parent, packet["case_definitions"][row["id"]], family,
-                                   trial["recipe_overrides"], packet["source"], returncode=row.get("child_returncode"),
-                                   runtime=packet["lane_runtime"], wall_cap_seconds=row["timeout_seconds"], frames=packet["spec"].get("frames", 9))
+                                   trial["recipe_overrides"], evidence_source, returncode=row.get("child_returncode"),
+                                   runtime=evidence_runtime, wall_cap_seconds=row["timeout_seconds"], frames=packet["spec"].get("frames", 9))
             paid = row.get("paid_wall_seconds")
             if (isinstance(paid, bool) or not isinstance(paid, (int, float)) or not math.isfinite(paid)
                     or paid < verified["elapsed_seconds"]):
@@ -556,33 +569,44 @@ def child_command(spec, trial, row, case_root, device):
             "--wall-cap-seconds", str(row["timeout_seconds"]), "--frames", str(spec.get("frames", 9))]
 
 
-def run_study(spec, output, *, family, device):
-    """Sequential children only; no extra workers or changed protocol resources."""
+def run_study(spec, output, *, family, device, queue_root=None):
+    """One dedicated policy owner; shared admission, immutable children, reuse."""
+    from experiments.forge.__main__ import queue_location
+    from experiments.forge.policy_execution import PolicyCoordinator, freeze_source
     if family not in FAMILIES or torch.device(device).type != spec["backend"]:
         raise ValueError("family/device must match the frozen study")
     packet = plan_study(spec)
     runtime = _runtime(device)
-    output = Path(output)
-    output.mkdir(parents=True, exist_ok=True)
+    coordinator = PolicyCoordinator(queue_location(contract.ROOT, queue_root), report_root=contract.ROOT / "reports/forge")
+    packet["execution_source"] = freeze_source(contract.ROOT, coordinator.root, packet["source"])
+    packet.update(measured_paid_seconds=0., unmeasured_interrupt_reservation_seconds=0.,
+                  selection=select_results(packet))
+    requested = Path(output).resolve()
+    key, canonical = coordinator.register(api_run.json_value(packet), requested, family, runtime)
+    with coordinator.study_lease(key) as lease:
+        if lease is not None:
+            coordinator.recover()
+            packet = json.loads((canonical / "study.json").read_text())
+            _recertify_archive(packet)
+            _run_owned_study(packet, canonical, family, packet["lane_runtime"]["device"], coordinator, lease)
+    return coordinator.publish_attachment(key, canonical, requested)
+
+
+def _run_owned_study(packet, output, family, device, coordinator, study_lease):
+    spec, runtime = packet["spec"], packet["lane_runtime"]
     registration = output / "study.json"
-    if registration.exists():
-        saved = json.loads(registration.read_text())
-        if any(saved.get(key) != packet.get(key) for key in ("spec_sha256", "spec", "source", "case_definitions", "capacity_preflight", "runtime_contract", "family_paid_budget_seconds")):
-            raise ValueError("study identity changed; use a new study ID/output")
-        if saved.get("executed_family") != family or saved.get("lane_runtime") != runtime:
-            raise ValueError("one family/fixed runtime per output; use separate family archives")
-        _recertify_archive(saved)
-        packet = saved
-    elif any(output.iterdir()):
-        raise ValueError("unregistered nonempty archive cannot be reused as a fresh study")
-    packet.update(executed_family=family, lane_runtime=runtime)
-    packet.setdefault("spent_seconds", 0.)
-    _save(registration, packet)  # Freeze registration before any paid child.
+    _save(registration, packet)
     for trial in packet["trials"]:
         if trial["family"] != family or trial["status"] != "UNKNOWN":
             continue
         trial_spent = trial.get("paid_wall_seconds", 0.)
         for row in trial["cases"]:
+            if row["status"] == "RUNNING" and row.get("attempt_key"):
+                retained = coordinator.retained(row["attempt_key"])
+                if retained and retained["status"] in {"completed", "interrupted"}:
+                    # The central terminal transaction may have survived a
+                    # crash before the corresponding study projection save.
+                    row["status"] = "UNKNOWN"
             if row["status"] == "PASS":
                 if api_run.file_hash(row["receipt_path"]) != row["receipt_sha256"]:
                     raise ValueError("retained completed case changed; no unchanged reexecution")
@@ -601,47 +625,84 @@ def run_study(spec, output, *, family, device):
                 trial["reason"] = "remaining frozen budget cannot reserve complete next task"
                 break
             case = packet["case_definitions"][row["id"]]
-            case_root = output / trial["id"] / row["id"]
-            log = output / trial["id"] / (row["id"] + ".log")
-            if case_root.exists() or log.exists():
-                row.update(status="INCOMPLETE", reason="orphan paid artifacts retained; no automatic unchanged retry")
-                trial["status"] = "INCOMPLETE"
-                break
-            log.parent.mkdir(parents=True, exist_ok=True)
-            command = child_command(spec, trial, row, case_root, device)
-            row.update(status="RUNNING", command=command, log_path=str(log))
-            _save(registration, packet)
-            started = time.monotonic()
-            child_finished = None
-            try:
-                with log.open("w") as stream:
-                    child = subprocess.run(command, cwd=contract.ROOT, stdout=stream, stderr=subprocess.STDOUT,
-                                           timeout=allowance, check=False)
-                child_finished = time.monotonic()
-                raw = json.loads((case_root / "receipt.json").read_text())
-                if raw.get("status") != "COMPLETE":
-                    row.update(status=raw.get("status") if raw.get("status") in {"INCOMPLETE", "BLOCKED", "ERROR"} else "INVALID",
-                               reason="; ".join(raw.get("failed_bounds", [])), original_gate=raw.get("verdict"))
+            attempt_key = coordinator.attempt_key(packet, trial, row)
+            with coordinator.admit(attempt_key, packet, row, device) as (admission, attempt_lease):
+                if admission["status"] == "busy":
+                    packet["coordinator"]["waiting_reason"] = admission["reason"]
+                    trial["paid_wall_seconds"] = trial_spent
+                    _save(registration, packet)
+                    return packet
+                if admission["status"] in {"completed", "interrupted"}:
+                    if admission["status"] == "completed":
+                        retained = deepcopy(admission["result"])
+                        if retained.get("full_protocol_complete"):
+                            verified = verify_case(Path(retained["receipt_path"]).parent, case, family,
+                                                   trial["recipe_overrides"], admission["source"],
+                                                   returncode=retained.get("child_returncode"), runtime=admission["runtime"],
+                                                   wall_cap_seconds=row["timeout_seconds"], frames=spec.get("frames", 9))
+                            if any(retained.get(field) != verified.get(field) for field in verified):
+                                raise ValueError("shared policy receipt changed; no unchanged reexecution")
+                        row.update(retained, reused_physical_attempt=True, evidence_source=admission["source"],
+                                   evidence_runtime=admission["runtime"])
+                    else:
+                        row.update(status="INCOMPLETE", reason=admission["reason"], attempt_key=attempt_key,
+                                   unmeasured_interrupt_reserved_seconds=admission["charged_seconds"])
+                    charged = row.get("paid_wall_seconds", 0.) + row.get("unmeasured_interrupt_reserved_seconds", 0.)
+                    packet["spent_seconds"] += charged
+                    trial_spent += charged
                 else:
-                    row.update(verify_case(case_root, case, family, trial["recipe_overrides"], packet["source"],
-                                           returncode=child.returncode, runtime=runtime,
-                                           wall_cap_seconds=row["timeout_seconds"], frames=spec.get("frames", 9)))
-                row["child_returncode"] = child.returncode
-            except subprocess.TimeoutExpired:
-                child_finished = time.monotonic()
-                row.update(status="INCOMPLETE", reason="hard subprocess cap; full protocol unavailable")
-            except Exception as error:
-                row.update(status="INVALID", reason=f"{type(error).__name__}: {error}")
-            child_finished = time.monotonic() if child_finished is None else child_finished
-            elapsed = child_finished - started
-            packet["spent_seconds"] += elapsed
-            trial_spent += elapsed
-            row.update(paid_wall_seconds=elapsed, validation_seconds=time.monotonic() - child_finished,
-                       log_path=str(log), command=command)
-            if packet["spent_seconds"] > packet["family_paid_budget_seconds"][family] or trial_spent > spec["candidate_budget_seconds"]:
-                row.update(status="INCOMPLETE", reason="paid child execution exceeded the frozen family/candidate cap")
-            trial["paid_wall_seconds"] = trial_spent
-            _save(registration, packet)
+                    case_root = output / trial["id"] / row["id"]
+                    log = output / trial["id"] / (row["id"] + ".log")
+                    if case_root.exists() or log.exists():
+                        row.update(status="INCOMPLETE", reason="orphan paid artifacts retained; no automatic unchanged retry",
+                                   unmeasured_interrupt_reserved_seconds=allowance)
+                        packet["spent_seconds"] += allowance
+                        trial_spent += allowance
+                        # Conservative terminal receipt, even if orphan work did
+                        # not leave a measurable child interval.
+                        coordinator.complete(attempt_key, {**row, "paid_wall_seconds": 0.})
+                    else:
+                        log.parent.mkdir(parents=True, exist_ok=True)
+                        command = child_command(spec, trial, row, case_root, device)
+                        row.update(status="RUNNING", command=command, log_path=str(log), attempt_key=attempt_key,
+                                   reserved_seconds=allowance)
+                        packet["coordinator"].pop("waiting_reason", None)
+                        _save(registration, packet)
+                        started = time.monotonic()
+                        child_finished = None
+                        interruption = None
+                        try:
+                            child = coordinator.launch(command, packet, log, (study_lease, attempt_lease), allowance)
+                            child_finished = time.monotonic()
+                            raw = json.loads((case_root / "receipt.json").read_text())
+                            if raw.get("status") != "COMPLETE":
+                                row.update(status=raw.get("status") if raw.get("status") in {"INCOMPLETE", "BLOCKED", "ERROR"} else "INVALID",
+                                           reason="; ".join(raw.get("failed_bounds", [])), original_gate=raw.get("verdict"))
+                            else:
+                                row.update(verify_case(case_root, case, family, trial["recipe_overrides"], packet["source"],
+                                                       returncode=child.returncode, runtime=runtime,
+                                                       wall_cap_seconds=row["timeout_seconds"], frames=spec.get("frames", 9)))
+                            row["child_returncode"] = child.returncode
+                        except subprocess.TimeoutExpired:
+                            child_finished = time.monotonic()
+                            row.update(status="INCOMPLETE", reason="hard subprocess cap; full protocol unavailable")
+                        except Exception as error:
+                            row.update(status="INVALID", reason=f"{type(error).__name__}: {error}")
+                        except BaseException as error:
+                            interruption = error
+                            row.update(status="INCOMPLETE", reason="interrupted paid attempt; no automatic unchanged retry")
+                        child_finished = time.monotonic() if child_finished is None else child_finished
+                        elapsed = child_finished - started
+                        packet["spent_seconds"] += elapsed
+                        trial_spent += elapsed
+                        row.update(paid_wall_seconds=elapsed, validation_seconds=time.monotonic() - child_finished)
+                        if packet["spent_seconds"] > packet["family_paid_budget_seconds"][family] or trial_spent > spec["candidate_budget_seconds"]:
+                            row.update(status="INCOMPLETE", reason="paid child execution exceeded the frozen family/candidate cap")
+                        coordinator.complete(attempt_key, deepcopy(row))
+                        trial["paid_wall_seconds"] = trial_spent
+                        _save(registration, packet)
+                        if interruption is not None:
+                            raise interruption
             if row["status"] != "PASS":
                 trial["status"] = row["status"]
                 break
@@ -685,6 +746,7 @@ def main(argv=None):
     parser.add_argument("--output", type=Path)
     parser.add_argument("--family", choices=FAMILIES)
     parser.add_argument("--device", default="cpu")
+    parser.add_argument("--queue-root", type=Path, help="shared Forge admission ledger (default common Git repository runs/forge)")
     parser.add_argument("--archive", type=Path, action="append", default=[])
     args = parser.parse_args(argv)
     spec = json.loads(args.spec.read_text()) if args.stage != "combine" else None
@@ -695,7 +757,7 @@ def main(argv=None):
     else:
         if args.output is None or args.family is None:
             parser.error("run requires --output and --family; coordinator owns GPU admission")
-        packet = run_study(spec, args.output, family=args.family, device=args.device)
+        packet = run_study(spec, args.output, family=args.family, device=args.device, queue_root=args.queue_root)
     if args.stage in ("plan", "combine") and args.output:
         api_run.write_json(args.output, packet)
     print(json.dumps(api_run.json_value(packet), indent=2, allow_nan=False))

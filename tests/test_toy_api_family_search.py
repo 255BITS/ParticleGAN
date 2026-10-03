@@ -11,10 +11,12 @@ from torch import nn
 
 from particlegan import GANTrainer, Recipe, get_recipe
 from benchmarks.toy_audit import api_contract, api_run, api_family_search as search
+from experiments.forge.policy_execution import PolicyCoordinator
 
 
 @pytest.fixture(autouse=True)
-def cpu_one_thread():
+def cpu_one_thread(tmp_path, monkeypatch):
+    monkeypatch.setenv("PARTICLEGAN_FORGE_QUEUE", str(tmp_path / "shared-queue"))
     previous = torch.get_num_threads()
     torch.set_num_threads(1)
     yield
@@ -365,7 +367,7 @@ def test_run_freezes_before_child_keeps_full_resources_and_stops_first_failure(t
         output = Path(command[command.index("--output") + 1]) / command[command.index("--case") + 1]
         api_run.write_json(output / "receipt.json", {"status": "INCOMPLETE", "verdict": "FAIL", "failed_bounds": ["cap"]})
         return SimpleNamespace(returncode=0)
-    monkeypatch.setattr(search.subprocess, "run", child)
+    monkeypatch.setattr(PolicyCoordinator, "launch", lambda self, command, *args: child(command))
     result = search.run_study(packet["spec"], archive, family="atlas", device="cpu")
     assert len(commands) == 4 and all("--seed" not in command for command in commands)
     atlas = [trial for trial in result["trials"] if trial["family"] == "atlas"]
@@ -386,7 +388,7 @@ def test_interrupted_paid_attempt_is_not_automatically_reexecuted(tmp_path, case
     trial["cases"][0]["status"] = "RUNNING"
     archive = tmp_path / "run"
     api_run.write_json(archive / "study.json", packet)
-    monkeypatch.setattr(search.subprocess, "run", lambda *args, **kwargs: pytest.fail("unchanged interrupted attempt reran"))
+    monkeypatch.setattr(PolicyCoordinator, "launch", lambda *args, **kwargs: pytest.fail("unchanged interrupted attempt reran"))
     # Other fresh configs are blocked in this software fixture so only recovery is evaluated.
     for candidate in packet["trials"]:
         if candidate["id"] != trial["id"]:
