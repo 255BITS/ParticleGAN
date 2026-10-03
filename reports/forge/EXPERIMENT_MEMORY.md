@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 369. Inventory coverage: complete. Unresolved import items: 7.
+Records: 388. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -4133,6 +4133,310 @@ This technique failed the full 80-update two_pole smoke gate: {'grad_med': 0.063
 
 [Evidence](../../reports/forge/technique-receipts/3e1d8ca0f47a4954b41119cbe605548e.json) · [Record](records/readout-faf4999394106140c8a2052e.json)
 
+### ka2-slow-prior-0p1 · word-diagnostic-1daeb48c4e66b7ab2e4e1551
+
+**Scope:** task_only_diagnostic; scientific; revision `a3ea26c51800ede1c4dd8983a58b0c2a891bf18e8ef814c7aa5f9283186acf81`.
+
+Conditional parameter-only follow-up after the complete first diagnostic round: hold clean full-horizon optimizer settings fixed and slow the existing learned prior role to prevent code contraction while G/E learns the bijection. Same finite-word joint/inverse core and numerical gates; task-only diagnostic grants no ordinary qualification.
+
+**Observed:** {'PASS': 1}; wall seconds 180.236; mechanism `floor_constant`.
+
+five_word_joint_acquisition: modes=5, mass_tv=0.024219
+
+PASS on the unchanged finite five-word joint/inverse task; 21/24 observations pass and the passing terminal suffix is 21 (required >=5). This reaches the task directly and grants no ordinary Tier 1 or default-adoption credit.
+
+**Next:** Use the completed bounded readout before further research. Preserve original failures and unknown main-view cells; no seed repeat, automatic continuation or default adoption.
+
+[Evidence](../../reports/forge/word-root-cause/receipts/ka2-slow-prior-0p1.json) · [Record](records/word-diagnostic-1daeb48c4e66b7ab2e4e1551.json)
+
+### k3p-slow-prior-0p25 · word-diagnostic-2079073e755c77a3ee599732
+
+**Scope:** task_only_diagnostic; scientific; revision `917dd6a24d1787ac88dadade867beb7beef5a084150c57285f63b37f4a15b349`.
+
+Conditional parameter-only follow-up after the complete first diagnostic round: hold clean full-horizon optimizer settings fixed and slow the existing learned prior role to prevent code contraction while G/E learns the bijection. Same finite-word joint/inverse core and numerical gates; task-only diagnostic grants no ordinary qualification.
+
+**Observed:** {'FAIL': 1}; wall seconds 152.128; mechanism `floor_constant`.
+
+five_word_joint_acquisition: modes=4, mass_tv=0.22422
+
+FAIL on the unchanged finite five-word joint/inverse task; 0/24 observations pass and the passing terminal suffix is 0 (required >=5). This reaches the task directly and grants no ordinary Tier 1 or default-adoption credit.
+
+**Next:** Use the completed bounded readout before further research. Preserve original failures and unknown main-view cells; no seed repeat, automatic continuation or default adoption.
+
+[Evidence](../../reports/forge/word-root-cause/receipts/k3p-slow-prior-0p25.json) · [Record](records/word-diagnostic-2079073e755c77a3ee599732.json)
+
+### k3p-coeff1-cap0p1 · word-diagnostic-2cc5a1b19929b60cf60e4434
+
+**Scope:** task_only_diagnostic; scientific; revision `8effaa09e476ee03768abb1abf9282bc3cd18a8969ac2a6444374d449df978b7`.
+
+Independent bounded existing-parameter contrast after low-rate/noise/horizon and slower-prior diagnostics: tune positive K3P critic coefficient/cap strengths on the unchanged 170-dimensional word/latent joint host. Compare against the already-completed clean/full low-rate baseline without rerunning it. No penalty swap, new objective, seed study or qualification bypass credit.
+
+**Observed:** {'FAIL': 1}; wall seconds 150.496; mechanism `floor_constant`.
+
+five_word_joint_acquisition: modes=2, mass_tv=0.62422
+
+FAIL on the unchanged finite five-word joint/inverse task; 0/24 observations pass and the passing terminal suffix is 0 (required >=5). This reaches the task directly and grants no ordinary Tier 1 or default-adoption credit.
+
+**Next:** Use the completed bounded readout before further research. Preserve original failures and unknown main-view cells; no seed repeat, automatic continuation or default adoption.
+
+[Evidence](../../reports/forge/word-root-cause/receipts/k3p-coeff1-cap0p1.json) · [Record](records/word-diagnostic-2cc5a1b19929b60cf60e4434.json)
+
+### k3p-low-rate-original-noise · word-diagnostic-31c2ec140a756316daa7f398
+
+**Scope:** task_only_diagnostic; scientific; revision `cf5121a07e917a991379d206e74d2c5135ac1dac246df295daa6f644d0d731c5`.
+
+User-authorized parameter-only diagnosis and repair of existing K3P, KA2 and R1/R2 on the unchanged finite-word joint generator/inverse question. Standalone diagnostic reaches the word task directly; no main-view qualification or default adoption.
+
+**Observed:** {'FAIL': 1}; wall seconds 166.127; mechanism `floor_constant`.
+
+five_word_joint_acquisition: modes=4, mass_tv=0.22422
+
+FAIL on the unchanged finite five-word joint/inverse task; 0/24 observations pass and the passing terminal suffix is 0 (required >=5). This reaches the task directly and grants no ordinary Tier 1 or default-adoption credit.
+
+**Next:** Use the completed bounded readout before further research. Preserve original failures and unknown main-view cells; no seed repeat, automatic continuation or default adoption.
+
+[Evidence](../../reports/forge/word-root-cause/receipts/k3p-low-rate-original-noise.json) · [Record](records/word-diagnostic-31c2ec140a756316daa7f398.json)
+
+### k3p-coeff170-cap1 · word-diagnostic-34636303d73a2e8ff8317fe6
+
+**Scope:** task_only_diagnostic; scientific; revision `7c9ea7c422fdacc4f9bbee35883893cf0d6abb2693341b515598e52b8a47cfa5`.
+
+Independent bounded existing-parameter contrast after low-rate/noise/horizon and slower-prior diagnostics: tune positive K3P critic coefficient/cap strengths on the unchanged 170-dimensional word/latent joint host. Compare against the already-completed clean/full low-rate baseline without rerunning it. No penalty swap, new objective, seed study or qualification bypass credit.
+
+**Observed:** {'PASS': 1}; wall seconds 151.482; mechanism `floor_constant`.
+
+five_word_joint_acquisition: modes=5, mass_tv=0.024219
+
+PASS on the unchanged finite five-word joint/inverse task; 24/24 observations pass and the passing terminal suffix is 24 (required >=5). This reaches the task directly and grants no ordinary Tier 1 or default-adoption credit.
+
+**Next:** Use the completed bounded readout before further research. Preserve original failures and unknown main-view cells; no seed repeat, automatic continuation or default adoption.
+
+[Evidence](../../reports/forge/word-root-cause/receipts/k3p-coeff170-cap1.json) · [Record](records/word-diagnostic-34636303d73a2e8ff8317fe6.json)
+
+### k3p-slow-prior-0p5 · word-diagnostic-4233c39e171cc2256df48c03
+
+**Scope:** task_only_diagnostic; scientific; revision `6ccd6854e1b323c67116a819ebeb65d3edd8331de5510e3df86934e4bc4aa497`.
+
+Conditional parameter-only follow-up after the complete first diagnostic round: hold clean full-horizon optimizer settings fixed and slow the existing learned prior role to prevent code contraction while G/E learns the bijection. Same finite-word joint/inverse core and numerical gates; task-only diagnostic grants no ordinary qualification.
+
+**Observed:** {'FAIL': 1}; wall seconds 150.47; mechanism `floor_constant`.
+
+five_word_joint_acquisition: modes=2, mass_tv=0.6
+
+FAIL on the unchanged finite five-word joint/inverse task; 0/24 observations pass and the passing terminal suffix is 0 (required >=5). This reaches the task directly and grants no ordinary Tier 1 or default-adoption credit.
+
+**Next:** Use the completed bounded readout before further research. Preserve original failures and unknown main-view cells; no seed repeat, automatic continuation or default adoption.
+
+[Evidence](../../reports/forge/word-root-cause/receipts/k3p-slow-prior-0p5.json) · [Record](records/word-diagnostic-4233c39e171cc2256df48c03.json)
+
+### ka2-slow-prior-0p25 · word-diagnostic-48d0e04cb39975dd920addef
+
+**Scope:** task_only_diagnostic; scientific; revision `1da46ac2e086644934253b01edea57f39b7a099f4a831686647f70c6acd715ec`.
+
+Conditional parameter-only follow-up after the complete first diagnostic round: hold clean full-horizon optimizer settings fixed and slow the existing learned prior role to prevent code contraction while G/E learns the bijection. Same finite-word joint/inverse core and numerical gates; task-only diagnostic grants no ordinary qualification.
+
+**Observed:** {'PASS': 1}; wall seconds 173.749; mechanism `floor_constant`.
+
+five_word_joint_acquisition: modes=5, mass_tv=0.024219
+
+PASS on the unchanged finite five-word joint/inverse task; 11/24 observations pass and the passing terminal suffix is 11 (required >=5). This reaches the task directly and grants no ordinary Tier 1 or default-adoption credit.
+
+**Next:** Use the completed bounded readout before further research. Preserve original failures and unknown main-view cells; no seed repeat, automatic continuation or default adoption.
+
+[Evidence](../../reports/forge/word-root-cause/receipts/ka2-slow-prior-0p25.json) · [Record](records/word-diagnostic-48d0e04cb39975dd920addef.json)
+
+### r1r2-low-rate-original-roles · word-diagnostic-4d632e29ec48eec7a7cceb41
+
+**Scope:** task_only_diagnostic; scientific; revision `9679c1a73952b37628813de6135e67c35c7f3a482aa05d3bfb8452b4e265d918`.
+
+User-authorized parameter-only diagnosis and repair of existing K3P, KA2 and R1/R2 on the unchanged finite-word joint generator/inverse question. Standalone diagnostic reaches the word task directly; no main-view qualification or default adoption.
+
+**Observed:** {'PASS': 1}; wall seconds 124.176; mechanism `floor_constant`.
+
+five_word_joint_acquisition: modes=5, mass_tv=0.024219
+
+PASS on the unchanged finite five-word joint/inverse task; 22/24 observations pass and the passing terminal suffix is 9 (required >=5). This reaches the task directly and grants no ordinary Tier 1 or default-adoption credit.
+
+**Next:** Use the completed bounded readout before further research. Preserve original failures and unknown main-view cells; no seed repeat, automatic continuation or default adoption.
+
+[Evidence](../../reports/forge/word-root-cause/receipts/r1r2-low-rate-original-roles.json) · [Record](records/word-diagnostic-4d632e29ec48eec7a7cceb41.json)
+
+### ka2-low-rate-original-noise · word-diagnostic-5b413df2820d3403cf7d166e
+
+**Scope:** task_only_diagnostic; scientific; revision `773d4c9513a9836da5620a64e2c60fbfaebbcce53e02fd761f29bbaee54fc9df`.
+
+User-authorized parameter-only diagnosis and repair of existing K3P, KA2 and R1/R2 on the unchanged finite-word joint generator/inverse question. Standalone diagnostic reaches the word task directly; no main-view qualification or default adoption.
+
+**Observed:** {'FAIL': 1}; wall seconds 179.054; mechanism `floor_constant`.
+
+five_word_joint_acquisition: modes=4, mass_tv=0.22422
+
+FAIL on the unchanged finite five-word joint/inverse task; 0/24 observations pass and the passing terminal suffix is 0 (required >=5). This reaches the task directly and grants no ordinary Tier 1 or default-adoption credit.
+
+**Next:** Use the completed bounded readout before further research. Preserve original failures and unknown main-view cells; no seed repeat, automatic continuation or default adoption.
+
+[Evidence](../../reports/forge/word-root-cause/receipts/ka2-low-rate-original-noise.json) · [Record](records/word-diagnostic-5b413df2820d3403cf7d166e.json)
+
+### k3p-slow-prior-0p1 · word-diagnostic-5ef70f1d3085171e255d5880
+
+**Scope:** task_only_diagnostic; scientific; revision `de38e3b1f45be551c22e7cc976398787e4000be7727ec3367abfb83ece929037`.
+
+Conditional parameter-only follow-up after the complete first diagnostic round: hold clean full-horizon optimizer settings fixed and slow the existing learned prior role to prevent code contraction while G/E learns the bijection. Same finite-word joint/inverse core and numerical gates; task-only diagnostic grants no ordinary qualification.
+
+**Observed:** {'FAIL': 1}; wall seconds 151.953; mechanism `floor_constant`.
+
+five_word_joint_acquisition: modes=3, mass_tv=0.4
+
+FAIL on the unchanged finite five-word joint/inverse task; 0/24 observations pass and the passing terminal suffix is 0 (required >=5). This reaches the task directly and grants no ordinary Tier 1 or default-adoption credit.
+
+**Next:** Use the completed bounded readout before further research. Preserve original failures and unknown main-view cells; no seed repeat, automatic continuation or default adoption.
+
+[Evidence](../../reports/forge/word-root-cause/receipts/k3p-slow-prior-0p1.json) · [Record](records/word-diagnostic-5ef70f1d3085171e255d5880.json)
+
+### ka2-slow-prior-0p5 · word-diagnostic-741f54ec9ea6689d074218a1
+
+**Scope:** task_only_diagnostic; scientific; revision `c90aba418fbbeb49289dedf22dda4dcafdcf493bd38ec2aa2a7bd144a054587a`.
+
+Conditional parameter-only follow-up after the complete first diagnostic round: hold clean full-horizon optimizer settings fixed and slow the existing learned prior role to prevent code contraction while G/E learns the bijection. Same finite-word joint/inverse core and numerical gates; task-only diagnostic grants no ordinary qualification.
+
+**Observed:** {'FAIL': 1}; wall seconds 177.686; mechanism `floor_constant`.
+
+five_word_joint_acquisition: modes=4, mass_tv=0.22422
+
+FAIL on the unchanged finite five-word joint/inverse task; 0/24 observations pass and the passing terminal suffix is 0 (required >=5). This reaches the task directly and grants no ordinary Tier 1 or default-adoption credit.
+
+**Next:** Use the completed bounded readout before further research. Preserve original failures and unknown main-view cells; no seed repeat, automatic continuation or default adoption.
+
+[Evidence](../../reports/forge/word-root-cause/receipts/ka2-slow-prior-0p5.json) · [Record](records/word-diagnostic-741f54ec9ea6689d074218a1.json)
+
+### k3p-clean-full-original-rate · word-diagnostic-8698cb431ec5354fb9d66312
+
+**Scope:** task_only_diagnostic; scientific; revision `52107a196a00287e89280e8c39da51816c4a51807eae99d9307441b68c680510`.
+
+User-authorized parameter-only diagnosis and repair of existing K3P, KA2 and R1/R2 on the unchanged finite-word joint generator/inverse question. Standalone diagnostic reaches the word task directly; no main-view qualification or default adoption.
+
+**Observed:** {'FAIL': 1}; wall seconds 177.828; mechanism `floor_constant`.
+
+five_word_joint_acquisition: modes=0, mass_tv=1
+
+FAIL on the unchanged finite five-word joint/inverse task; 0/24 observations pass and the passing terminal suffix is 0 (required >=5). This reaches the task directly and grants no ordinary Tier 1 or default-adoption credit.
+
+**Next:** Use the completed bounded readout before further research. Preserve original failures and unknown main-view cells; no seed repeat, automatic continuation or default adoption.
+
+[Evidence](../../reports/forge/word-root-cause/receipts/k3p-clean-full-original-rate.json) · [Record](records/word-diagnostic-8698cb431ec5354fb9d66312.json)
+
+### r1r2-mid-rate-fast-roles · word-diagnostic-a89f00328a6b33f44ee3cbb1
+
+**Scope:** task_only_diagnostic; scientific; revision `1aae3017cc71ea978649920a4edbf05da43a0aa0007e82d1a874da75465f207f`.
+
+User-authorized parameter-only diagnosis and repair of existing K3P, KA2 and R1/R2 on the unchanged finite-word joint generator/inverse question. Standalone diagnostic reaches the word task directly; no main-view qualification or default adoption.
+
+**Observed:** {'PASS': 1}; wall seconds 123.07; mechanism `floor_constant`.
+
+five_word_joint_acquisition: modes=5, mass_tv=0.024219
+
+PASS on the unchanged finite five-word joint/inverse task; 23/24 observations pass and the passing terminal suffix is 22 (required >=5). This reaches the task directly and grants no ordinary Tier 1 or default-adoption credit.
+
+**Next:** Use the completed bounded readout before further research. Preserve original failures and unknown main-view cells; no seed repeat, automatic continuation or default adoption.
+
+[Evidence](../../reports/forge/word-root-cause/receipts/r1r2-mid-rate-fast-roles.json) · [Record](records/word-diagnostic-a89f00328a6b33f44ee3cbb1.json)
+
+### k3p-coeff170-cap0p1 · word-diagnostic-ba0dd91779d34466b64ca9d4
+
+**Scope:** task_only_diagnostic; scientific; revision `a686d1e2e96c93e19cabe769d41584a56e7442a4f30bf27b0c8174c3bfed81e5`.
+
+Independent bounded existing-parameter contrast after low-rate/noise/horizon and slower-prior diagnostics: tune positive K3P critic coefficient/cap strengths on the unchanged 170-dimensional word/latent joint host. Compare against the already-completed clean/full low-rate baseline without rerunning it. No penalty swap, new objective, seed study or qualification bypass credit.
+
+**Observed:** {'PASS': 1}; wall seconds 150.229; mechanism `floor_constant`.
+
+five_word_joint_acquisition: modes=5, mass_tv=0.024219
+
+PASS on the unchanged finite five-word joint/inverse task; 24/24 observations pass and the passing terminal suffix is 24 (required >=5). This reaches the task directly and grants no ordinary Tier 1 or default-adoption credit.
+
+**Next:** Use the completed bounded readout before further research. Preserve original failures and unknown main-view cells; no seed repeat, automatic continuation or default adoption.
+
+[Evidence](../../reports/forge/word-root-cause/receipts/k3p-coeff170-cap0p1.json) · [Record](records/word-diagnostic-ba0dd91779d34466b64ca9d4.json)
+
+### r1r2-low-rate-fast-roles · word-diagnostic-ca65bfdc6b5ccd8b0d43336b
+
+**Scope:** task_only_diagnostic; scientific; revision `d07008027ac5f9882ce257c84386e011e193c424dceb45dcbf63e065286b83ce`.
+
+User-authorized parameter-only diagnosis and repair of existing K3P, KA2 and R1/R2 on the unchanged finite-word joint generator/inverse question. Standalone diagnostic reaches the word task directly; no main-view qualification or default adoption.
+
+**Observed:** {'PASS': 1}; wall seconds 123.315; mechanism `floor_constant`.
+
+five_word_joint_acquisition: modes=5, mass_tv=0.024219
+
+PASS on the unchanged finite five-word joint/inverse task; 22/24 observations pass and the passing terminal suffix is 6 (required >=5). This reaches the task directly and grants no ordinary Tier 1 or default-adoption credit.
+
+**Next:** Use the completed bounded readout before further research. Preserve original failures and unknown main-view cells; no seed repeat, automatic continuation or default adoption.
+
+[Evidence](../../reports/forge/word-root-cause/receipts/r1r2-low-rate-fast-roles.json) · [Record](records/word-diagnostic-ca65bfdc6b5ccd8b0d43336b.json)
+
+### k3p-clean-full-low-rate · word-diagnostic-cbcc08b833cdd7f039b53447
+
+**Scope:** task_only_diagnostic; scientific; revision `f8b63ff6768c3fb3125ec0acb6b03c5f2acb6b37e91a81c433a461e160389ece`.
+
+User-authorized parameter-only diagnosis and repair of existing K3P, KA2 and R1/R2 on the unchanged finite-word joint generator/inverse question. Standalone diagnostic reaches the word task directly; no main-view qualification or default adoption.
+
+**Observed:** {'FAIL': 1}; wall seconds 149.234; mechanism `floor_constant`.
+
+five_word_joint_acquisition: modes=2, mass_tv=0.6
+
+FAIL on the unchanged finite five-word joint/inverse task; 0/24 observations pass and the passing terminal suffix is 0 (required >=5). This reaches the task directly and grants no ordinary Tier 1 or default-adoption credit.
+
+**Next:** Use the completed bounded readout before further research. Preserve original failures and unknown main-view cells; no seed repeat, automatic continuation or default adoption.
+
+[Evidence](../../reports/forge/word-root-cause/receipts/k3p-clean-full-low-rate.json) · [Record](records/word-diagnostic-cbcc08b833cdd7f039b53447.json)
+
+### ka2-clean-full-low-rate · word-diagnostic-d15ef7dda68917521973e3c3
+
+**Scope:** task_only_diagnostic; scientific; revision `711b9d749d6e3afedaec2dc28d13901d21912b159e32430ebf59e93dc6f8b553`.
+
+User-authorized parameter-only diagnosis and repair of existing K3P, KA2 and R1/R2 on the unchanged finite-word joint generator/inverse question. Standalone diagnostic reaches the word task directly; no main-view qualification or default adoption.
+
+**Observed:** {'FAIL': 1}; wall seconds 181.77; mechanism `floor_constant`.
+
+five_word_joint_acquisition: modes=4, mass_tv=0.22422
+
+FAIL on the unchanged finite five-word joint/inverse task; 0/24 observations pass and the passing terminal suffix is 0 (required >=5). This reaches the task directly and grants no ordinary Tier 1 or default-adoption credit.
+
+**Next:** Use the completed bounded readout before further research. Preserve original failures and unknown main-view cells; no seed repeat, automatic continuation or default adoption.
+
+[Evidence](../../reports/forge/word-root-cause/receipts/ka2-clean-full-low-rate.json) · [Record](records/word-diagnostic-d15ef7dda68917521973e3c3.json)
+
+### ka2-clean-full-original-rate · word-diagnostic-d55cded9da12e599548f1e13
+
+**Scope:** task_only_diagnostic; scientific; revision `6fe8447f6efde0115d44c1e26623fc3fb78eee1ce1e1c778ddfaa78639e40589`.
+
+User-authorized parameter-only diagnosis and repair of existing K3P, KA2 and R1/R2 on the unchanged finite-word joint generator/inverse question. Standalone diagnostic reaches the word task directly; no main-view qualification or default adoption.
+
+**Observed:** {'FAIL': 1}; wall seconds 176.201; mechanism `floor_constant`.
+
+five_word_joint_acquisition: modes=1, mass_tv=0.8
+
+FAIL on the unchanged finite five-word joint/inverse task; 0/24 observations pass and the passing terminal suffix is 0 (required >=5). This reaches the task directly and grants no ordinary Tier 1 or default-adoption credit.
+
+**Next:** Use the completed bounded readout before further research. Preserve original failures and unknown main-view cells; no seed repeat, automatic continuation or default adoption.
+
+[Evidence](../../reports/forge/word-root-cause/receipts/ka2-clean-full-original-rate.json) · [Record](records/word-diagnostic-d55cded9da12e599548f1e13.json)
+
+### word-joint-root-cause-readout · word-diagnostic-readout-46dd1b58096a2b9d65e90c5a
+
+**Scope:** task_only_diagnostic; task_diagnostic_readout; revision `46dd1b58096a2b9d65e90c5ab544a3fb94d66d771f75906b94a8ca80fbff951b`.
+
+Audit the finite five-word joint host and inherited training law before attributing failure to BiGAN or introducing a new stabilization technique. Clean/full K3P/KA2 ablations cross original-parent noise/warmup/horizon activation boundaries; they are task-only diagnostics, not ordinary same-signature configuration searches. Round2/3 preserve their measured clean/full comparator signatures.
+
+**Observed:** No normalized scientific verdict; wall seconds unknown; mechanism `explicit_existing_control_ablation`.
+
+
+
+All three existing families pass the unchanged 20,001-update, 24-check/five-terminal-pass word task: selected K3P suffix24, KA2 suffix21, R1/R2 suffix22. Joint pairs/signs/routing are correct. Early network decay with a 100:1 nominal prior/network rate, post-softmax fake-only Gaussian noise and 170-dimensional critic penalty units are explicit host-binding risks; bundled comparisons do not isolate noise as the cause. Lowering prior rate restored KA2; strengthening the existing positive critic coefficient restored K3P. No new loss or spread: all 18 diagnostic arms prior_reg0. A2/direct particle gain were inactive. Historical R1/R2 word was unmeasured, not FAIL. Equality grading and prior_betas consumption bugs were repaired without relabeling old whole verdicts. Coeff170 matches only initial pure-A real R1 scale; fake cap and later kernels remain different. The two coeff170 cap arms have identical saved observations/endpoints, not independent replications or evidence of cap improvement. All arm verdicts/costs reside in their own records; this narrative adds no duplicated task result or cost.
+
+**Next:** Use reports/forge/word-root-cause/README.md and exact configs/forge/selections/word-joint-task-v1.json for scoped reproduction. Ordinary complete-view qualification and calibration remain required before defaults; preserve original failures/unknowns and do not automatically launch another paid study.
+
+[Evidence](../../reports/forge/word-root-cause/summary.json) · [Record](records/word-diagnostic-readout-46dd1b58096a2b9d65e90c5a.json)
+
 ## Concluded compact publications
 
 These study and trial projections preserve recorded outcomes, unknowns and source cohorts. They do not regrade archived science or replace original receipts. Overlapping study/trial costs must not be summed.
@@ -4168,4 +4472,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `85b6c34d1dc418854b2dad564926700f6fec4df518e90b0383874138ac8d2bc2`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `342daefb326449ae7bc11841dc564e547205716cbd929bd0e4d405de4a009c9b`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

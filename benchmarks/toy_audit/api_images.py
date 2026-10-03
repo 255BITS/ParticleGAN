@@ -1087,7 +1087,8 @@ class WordFixture:
             self.opt_g = self.recipe.make_generator_optimizer([
                 dict(params=list(self.G.parameters()), lr=self.recipe.lr),
                 dict(params=list(self.E.parameters()), lr=self.recipe.lr),
-                dict(params=list(self.prior.parameters()), lr=self.recipe.lr * self.recipe.prior_lr_mult)],
+                dict(params=list(self.prior.parameters()), lr=self.recipe.lr * self.recipe.prior_lr_mult,
+                     betas=self.recipe.prior_betas if self.recipe.prior_betas is not None else self.recipe.betas)],
                 latent_table=self.prior.z)
             self.opt_d = self.recipe.make_critic_optimizer(self.D, ema_critic=deepcopy(self.D))
             self.loss = self.recipe.make_loss()

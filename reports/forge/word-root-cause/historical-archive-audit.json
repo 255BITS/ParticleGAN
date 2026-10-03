@@ -1,0 +1,40 @@
+{
+  "schema_version": 1,
+  "scope": "read-only retained historical archive identity audit; no regrading or training",
+  "audit_source": {
+    "path": "/home/martyn/dev/ParticleGAN/runs/forge/word-root-cause-audit/historical_archive_audit.py",
+    "sha256": "2819645be93e501c581043824dac8a8687ae07e06d351bda6df8868123e74448",
+    "publication_audit_sha256": "6edf3074a6a2336b4201d8ed49c00333895d259bb59759cd036cbd78b12de467"
+  },
+  "archive_card": {
+    "path": "/home/martyn/dev/ParticleGAN-word-task-fix/reports/forge/tier1-refresh/archive.json",
+    "sha256": "300031b86425c01c067af6ddead3abe4cdb6a33a0982a275b8d64a6a0fe5c60b"
+  },
+  "archive": {
+    "path": "/home/martyn/dev/ParticleGAN/artifacts/forge/tier1-existing-configs-v1.tar.gz",
+    "bytes": 43004589,
+    "sha256": "1ea74b7b92cd36848a6204bd39d9ce087470f8da4210f9dc0e4bd670c11057d9"
+  },
+  "archive_identity_matches_card": true,
+  "restoration_manifest_equals_card": true,
+  "original_receipts_checked": 333,
+  "archived_frozen_source_files_checked": 1137,
+  "source_files_sha256_mapping_digest": "7306340bac0a4ea67ea7b080513116457b7d72a8cb0d0c1f0727eaae6db38185",
+  "git_source": {
+    "origin_commit": "2899099048c0a9987eb8720214abfce56d86d92a",
+    "source_files_checked": 1137,
+    "digest_matches_files": true,
+    "missing": [],
+    "mismatched": []
+  },
+  "word_states_sha256": {
+    "queue/51169502a0e64466b5005e7c870b5592/state.pt": "b26893116fdad34972b6770c4587d3ee05b37b7a7847b8bbd3225bdbbf981a3a",
+    "queue/8e0a35381d6543bd8a3ecb6056351c06/state.pt": "c28c3869eab705781ff594edb635d8016e6578c919ec354c9377efd5ea64d35b"
+  },
+  "mismatched_or_missing_archive_members": [],
+  "snapshot_container_provenance": {
+    "retained_sha256": "926a4b2c7fdefacd51629577104eae4ee5c8c6da85e241f50e14ed215215ec3b",
+    "verified_scope": "Complete archived frozen source files and executed Git commit; original snapshot container is not a member of this archive."
+  },
+  "pass": true
+}

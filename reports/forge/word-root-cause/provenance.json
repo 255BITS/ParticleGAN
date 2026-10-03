@@ -1,0 +1,194 @@
+{
+  "schema_version": 1,
+  "scope": "Read-only saved-state diagnostic. No scientific rerun, no changed qualifications.",
+  "script": {
+    "path": "/home/martyn/dev/ParticleGAN/runs/forge/word-root-cause-audit/endpoint_anatomy.py",
+    "sha256": "5195e50c1c49a192af059b44e9391a8413b82e5c7c7b84d94caa31a0c876a4f8"
+  },
+  "numerical_result": {
+    "path": "/home/martyn/dev/ParticleGAN/runs/forge/word-root-cause-audit/endpoints.json",
+    "sha256": "993956df87d3242e30b3a864f1df2426717f0e6212cbd8cc951031b68a1b12ce"
+  },
+  "consumed_code": {
+    "benchmarks/toy_audit/api_images.py": "243190aba0c5870668a63289b771dc6f784c9460b890bc6a77e12cc2796d7184",
+    "particlegan/init.py": "e15d4de01eb49f7097bc249abacab907ff067385412346f54ab0d510cb8649d0",
+    "particlegan/particle_prior.py": "0220878bebea227da63abbf9f5b1ebdabdc6aea54fd2332fd2cab02ed734238f",
+    "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36",
+    "experiments/forge/state.py": "2eb9613f8e85c63240499307a81c5af429b23cfa1f0ed08c126630a76ed887b5"
+  },
+  "old_raw_archive": {
+    "bytes": 43004589,
+    "path": "/home/martyn/dev/ParticleGAN/artifacts/forge/tier1-existing-configs-v1.tar.gz",
+    "sha256": "1ea74b7b92cd36848a6204bd39d9ce087470f8da4210f9dc0e4bd670c11057d9"
+  },
+  "old_attempt_provenance": {
+    "51169502a0e64466b5005e7c870b5592": {
+      "canonical_result_hash": "e7327bf0851e4c8039e30008dede31f98830cc4825853717011c89188c406977",
+      "original_files": {
+        "evidence": {
+          "path": "reports/forge/attempts/51169502a0e64466b5005e7c870b5592/evidence.json",
+          "sha256": "60ed0458c7965f2e697d8c088071bd49d823414b4aa8cd08e6144f99515eb33c"
+        },
+        "request": {
+          "path": "reports/forge/attempts/51169502a0e64466b5005e7c870b5592/request.json",
+          "sha256": "d59d0b978ea00bc11ef62286171f3f43c8dee0b984e046bb79d6442033e87c3a"
+        },
+        "result": {
+          "path": "reports/forge/attempts/51169502a0e64466b5005e7c870b5592/result.json",
+          "sha256": "03371b046278654fe04618c3db0698a68d1e7ac5e679dd0853b09a95720e5ecb"
+        }
+      },
+      "source_digest": "7306340bac0a4ea67ea7b080513116457b7d72a8cb0d0c1f0727eaae6db38185",
+      "source_origin_commit": "2899099048c0a9987eb8720214abfce56d86d92a"
+    },
+    "8e0a35381d6543bd8a3ecb6056351c06": {
+      "canonical_result_hash": "05414324b9816a7685a5898f6fbbf22944c5b17b0c7c7713a93ea289573d306c",
+      "original_files": {
+        "evidence": {
+          "path": "reports/forge/attempts/8e0a35381d6543bd8a3ecb6056351c06/evidence.json",
+          "sha256": "4dd62396db3d4489e2274882609cf9e00b3a17956ed6cab46d6f481ccd5a97b4"
+        },
+        "request": {
+          "path": "reports/forge/attempts/8e0a35381d6543bd8a3ecb6056351c06/request.json",
+          "sha256": "38c236996c9b8326769edef498fb102cd9ba06b34dd924c44511ce62151ac9c7"
+        },
+        "result": {
+          "path": "reports/forge/attempts/8e0a35381d6543bd8a3ecb6056351c06/result.json",
+          "sha256": "381fa429da058e30cc2e8dd392a389775c943d9e335641a6e300de52165a4225"
+        }
+      },
+      "source_digest": "7306340bac0a4ea67ea7b080513116457b7d72a8cb0d0c1f0727eaae6db38185",
+      "source_origin_commit": "2899099048c0a9987eb8720214abfce56d86d92a"
+    }
+  },
+  "historical_source_positive": {
+    "source_commit": "6ec7e5788e14ea15ddc3e16ac71110458108b6a6",
+    "source_summary_sha256": "47fa3cf63823d32dc50eb16c01dcafa4a62ae15cf7bc331c89aa51bbb7c5707f",
+    "final_live_metrics": {
+      "sample_count": 4096,
+      "quality_fraction": 1.0,
+      "word_masses": [
+        0.200439453125,
+        0.187744140625,
+        0.20166015625,
+        0.20751953125,
+        0.20263671875
+      ],
+      "mass_tv": 0.012255859374999983,
+      "modes": 5,
+      "reconstruction_exact": true,
+      "minimum_reconstruction_token_probability": 0.999937639629333,
+      "reconstruction_nll": 9.138448176475764e-06,
+      "passed": true
+    },
+    "terminal": {
+      "passing_suffix": 59,
+      "passed": true
+    }
+  },
+  "historical_public_api_positive": {
+    "source_identity": "39eff89a9223f38d4110201a2182bdea27a4e6bd5f6078bf530c94e3bd32b48c",
+    "raw_receipt_sha256": "81850c08a54a07133316e75b79fae60fdcc4756e601cadd94496fb2169b89ede",
+    "raw_receipt": "/ml2/hypergan/toy-api-full-protocols-20261002/image-five-words-joint-ae/receipt.json",
+    "final_metrics": {
+      "sample_count": 1024,
+      "quality_fraction": 1.0,
+      "mass_tv": 0.028906249999999994,
+      "modes": 5,
+      "reconstruction_exact": true,
+      "minimum_reconstruction_token_probability": 0.9997531771659851,
+      "reconstruction_nll": 2.963126184634421e-05,
+      "mass_apple": 0.2177734375,
+      "mass_grape": 0.201171875,
+      "mass_lemon": 0.2099609375,
+      "mass_melon": 0.193359375,
+      "mass_berry": 0.177734375,
+      "completed_steps": 20001.0,
+      "served_averaged": 0.0,
+      "output_noise_added": 0.0,
+      "policy_latent_perturbation": 0.0
+    },
+    "runtime": {
+      "python": "3.12.13",
+      "torch": "2.13.0+cu126",
+      "device": "cpu",
+      "cuda": "12.6",
+      "torch_threads": 1
+    },
+    "protocol": {
+      "updates": 20001,
+      "default_updates": 20001,
+      "evaluation_samples": 1024,
+      "default_evaluation_samples": 1024,
+      "evaluation_steps": [
+        0,
+        834,
+        1667,
+        2501,
+        3334,
+        4167,
+        5001,
+        5834,
+        6667,
+        7501,
+        8334,
+        9168,
+        10001,
+        10834,
+        11668,
+        12501,
+        13334,
+        14168,
+        15001,
+        15835,
+        16668,
+        17501,
+        18335,
+        19168,
+        20001
+      ],
+      "metric_evaluation_steps": [
+        0,
+        834,
+        1667,
+        2501,
+        3334,
+        4167,
+        5001,
+        5834,
+        6667,
+        7501,
+        8334,
+        9168,
+        10001,
+        10834,
+        11668,
+        12501,
+        13334,
+        14168,
+        15001,
+        15835,
+        16668,
+        17501,
+        18335,
+        19168,
+        20001
+      ],
+      "media_steps": [
+        0,
+        2501,
+        5001,
+        7501,
+        10001,
+        12501,
+        15001,
+        17501,
+        20001
+      ],
+      "metric_observations": 24,
+      "media_frames": 9,
+      "terminal_observations": 5
+    },
+    "seed": 24002
+  }
+}

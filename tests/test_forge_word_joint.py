@@ -158,6 +158,21 @@ def test_standalone_word_fixture_retains_its_public_recipe_and_seed_offsets():
     assert torch.equal(fixture.policy.latent_generator.get_state(), torch.Generator().manual_seed(24004).get_state())
 
 
+@pytest.mark.parametrize("optimizer_family", ["formulation", "adam"])
+def test_joint_prior_optimizer_honors_distinct_prior_betas(optimizer_family):
+    frozen, task = request()
+    if optimizer_family == "adam":
+        frozen["candidate"] = read_json(next((ROOT / "configs/forge/configurations").glob("r1r2--302b*.json")))
+    frozen["candidate"]["recipe_overrides"].update(
+        optimizer_family=optimizer_family, betas=[0., .999], prior_betas=[0., .9])
+    components = word_context(frozen, task, "cpu")
+    fixture = WordFixture(device="cpu", seed=0, recipe_name=None, max_steps=1, components=components)
+    prior = fixture.opt_g.param_groups[2]
+    assert tuple(prior["betas"]) == (0., .9)
+    assert prior["params"] == list(fixture.prior.parameters())
+    assert all(tuple(group["betas"]) == (0., .999) for group in fixture.opt_g.param_groups[:2])
+
+
 def test_joint_acquisition_is_required_smoke_after_existing_prerequisites():
     view = load_view(ROOT, "discriminator_stability")
     tier1 = [row["task"] for row in view["assignments"] if row["qualification_tier"] == 1]

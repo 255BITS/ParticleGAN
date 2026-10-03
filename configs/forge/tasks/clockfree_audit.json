@@ -11,8 +11,16 @@
     "original_schedule_horizon": 128,
     "perturbed_horizon": 4096,
     "evaluation_samples": 16,
-    "resources": {"num_particles": 16, "z_dim": 2, "batch_size": 8},
-    "model": {"hidden": 16, "layers": 2, "fourier": 2},
+    "resources": {
+      "num_particles": 16,
+      "z_dim": 2,
+      "batch_size": 8
+    },
+    "model": {
+      "hidden": 16,
+      "layers": 2,
+      "fourier": 2
+    },
     "protocol": "screening",
     "prior": {
       "kind": "mog",
