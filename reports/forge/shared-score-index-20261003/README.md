@@ -31,6 +31,10 @@ source/API blockers are being evaluated as separately named family variants;
 the original blocked identities retain their original results. The older
 comparison scopes below and their `index.json` remain their original snapshots.
 
+## Retained acquisition and stability
+
+The [saved-observation audit](../atlas-retained-acquisition-gaps-20261003/README.md) distinguishes a first passing read from five-read acquisition. Overlap first passes at 150 and confirms at 850; intensity first passes at 350 and confirms at 525. Both have early gaps and no observed loss after confirmation. Their original terminal-five PASS results stand. The ring fails precision at 1407 (HQ .89453125 below .9), while retaining all eight modes and cover 1. This independently replayed chronology changes no gates or grades and adds zero training, scoring or qualification credit.
+
 ## Named-family startup attempts
 
 The [native-v1 engineering report](../atlas-named-gpu-diagnostics-invalid-20261003/README.md)
