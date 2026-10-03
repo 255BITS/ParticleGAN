@@ -29,7 +29,11 @@ study is a reviewable registry change.
 A search declares a base recipe, a finite grid of public `Recipe` settings, a
 fixed protocol/view/runtime, a tuning tier cap and immutable campaign budgets.
 Coupled settings such as two endpoints of a penalty schedule belong in one
-dimension. Trials inherit the same architecture, prior, initialization, named
+dimension. A list of grid objects declares their finite union instead of a
+Cartesian product. This can refresh existing configurations whose original
+override sets differ without adding redundant overrides or changing their
+content identities. Duplicate choices and more than 256 configurations are
+rejected. Trials inherit the same architecture, prior, initialization, named
 random streams, task horizons and sampling law. Seeds and task definitions are
 not search parameters.
 
@@ -189,3 +193,13 @@ Ordinary regeneration reads committed evidence and changes the same current
 report. Frozen numerical snapshots preserve history without generating more
 leaderboard tables. New trainer families and configuration studies can use the
 same declarations, queue, selection reducer and publication command.
+
+When the required view policy advances, register the new measured source with
+`--advance-policy --source-commit EXECUTED_COMMIT`. This explicitly archives
+the previous policy and its numerical cohorts, preserving their original tier
+denominators. Only evidence for the current policy enters the selected rows.
+Subsequent regeneration uses the normal command without `--advance-policy`.
+The [all-existing-config Tier 1 refresh](../reports/forge/tier1-refresh/README.md)
+uses five new study registrations for the same 32 immutable configurations and
+15 existing ideas under revision 3. It refreshes selection projections without
+changing the scientific configuration cards.

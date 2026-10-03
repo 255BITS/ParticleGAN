@@ -70,6 +70,18 @@ def _load_spec(root, spec, *, validate_current_protocol=True):
 
 
 def _grid(grid):
+    # Re-evaluate an exact union of previously declared grids without adding
+    # redundant overrides or taking their unwanted Cartesian product. Explicit
+    # overrides participate in configuration identity, including default values.
+    if isinstance(grid, list):
+        if not grid or any(not isinstance(part, dict) for part in grid):
+            raise ValueError("search grid union requires nonempty ordinary grid objects")
+        choices = [choice for part in grid for choice in _grid(part)]
+        if len(choices) > 256:
+            raise ValueError("search grid exceeds the 256-configuration declaration limit")
+        if len({stable_hash(choice) for choice in choices}) != len(choices):
+            raise ValueError("search grid union contains duplicate choices")
+        return choices
     if not isinstance(grid, dict) or not grid:
         raise ValueError("search grid must declare at least one Recipe axis")
     recipe_fields = {field.name for field in fields(Recipe)}

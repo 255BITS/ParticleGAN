@@ -1,5 +1,6 @@
 """Fresh-checkout recall controls over compact summaries, without training."""
 from copy import deepcopy
+from collections import defaultdict
 from pathlib import Path
 
 import pytest
@@ -188,19 +189,72 @@ def test_current_published_campaign_has_complete_discoverable_trial_coverage():
     root = Path(__file__).resolve().parents[1]
     records = publication_memory.normalize(root)
     trials = [record for record in records if record["record_type"] == "published_trial"]
-    assert len(trials) == 64  # Current 28 MoG + earlier 4 R1/R2 + 32 policy.
-    ids = {record["candidate_id"] for record in trials}
-    recalled = knowledge.recall(root)
-    assert ids <= {record["candidate_id"] for record in recalled}
+    # The same card can occur in several frozen studies. Check complete source
+    # cohorts from authoritative publications instead of a growing global count.
+    expected, studies = {}, {}
+    for path in sorted((root / "reports/forge/configuration-search").glob("*.json")):
+        report = read_json(path)
+        if report["selection"].get("all_trials_terminal") is not True:
+            continue
+        relative = path.relative_to(root).as_posix()
+        studies[relative, report["study_id"], None] = [trial["candidate_id"] for trial in report["trials"]]
+        for trial in report["trials"]:
+            key = relative, report["study_id"], trial["candidate_id"], trial["candidate_revision"], None
+            assert key not in expected
+            expected[key] = {field: trial.get(field) for field in ("source_digest", "protocol_hash", "runtime_cohort")}
+    policy = read_json(root / publication_memory.POLICY_BOARD)
+    for cohort in policy["cohorts"]:
+        if cohort["selection"].get("attempts_concluded") is not True:
+            continue
+        studies[publication_memory.POLICY_BOARD, cohort["study_id"], cohort["id"]] = [
+            trial["id"] for trial in cohort["trials"]]
+        for trial in cohort["trials"]:
+            key = publication_memory.POLICY_BOARD, cohort["study_id"], trial["id"], None, cohort["id"]
+            assert key not in expected
+            expected[key] = {"source_commit": cohort.get("source", {}).get("commit"),
+                             "spec_sha256": cohort.get("spec_sha256"),
+                             "runtime_contract": cohort.get("runtime_contract")}
+
+    def identity(record):
+        return (record["source"]["path"], record["study_id"], record["candidate_id"],
+                record.get("candidate_revision"), record.get("cohort"))
+
+    assert len(trials) == len(expected) and {identity(trial) for trial in trials} == set(expected)
+    actual_studies = {(record["source"]["path"], record["study_id"], record.get("cohort")): record["trial_ids"]
+                      for record in records if record["record_type"] == "published_study"
+                      and record["source"]["path"] != publication_memory.COMPLETION}
+    assert actual_studies == studies
+    groups = defaultdict(list)
     for trial in trials:
-        match = knowledge.recall(root, trial["candidate_id"], trial["goal"])[0]
-        assert match["candidate_id"] == trial["candidate_id"] and match["exact_identity_match"]
-        assert match["qualification_input"] is False
+        assert trial["source"]["sha256"] == file_hash(root / trial["source"]["path"])
+        assert {field: trial["provenance"].get(field) for field in expected[identity(trial)]} == expected[identity(trial)]
+        groups[trial["candidate_id"], trial["goal"]].append(trial)
+    for (candidate_id, goal), cohort_trials in groups.items():
+        matches = {record["record_id"]: record for record in knowledge.recall(root, candidate_id, goal)}
+        for trial in cohort_trials:
+            match = matches[trial["record_id"]]
+            assert match["candidate_id"] == trial["candidate_id"]
+            assert match["candidate_revision"] == trial["candidate_revision"]
+            assert match["study_id"] == trial["study_id"] and match["source"] == trial["source"]
+            assert match["exact_identity_match"] and match["qualification_input"] is False
+
+    refresh = read_json(root / "configs/forge/rounds/tier1-existing-configs-v1.json")
+    refreshed = [trial for trial in trials if trial["study_id"] in refresh["studies"]]
+    assert len(refreshed) == len(refresh["configuration_ids"])
+    assert {trial["candidate_id"] for trial in refreshed} == set(refresh["configuration_ids"])
+    assert {trial["study_id"] for trial in refreshed} == set(refresh["studies"])
     exact_id = "ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f"
-    exact = knowledge.recall(root, exact_id, "discriminator_stability")[0]
+    original = read_json(root / "reports/forge/configuration-search/ka2-family-defaults-round1-v1.json")
+    original_trial = next(trial for trial in original["trials"] if trial["candidate_id"] == exact_id)
+    assert original_trial["source_digest"] == "9f89fa7cc7af552ef7e41405fab415abbd00acf3d3c6e4af8e4435fb2423142e"
+    exact = next(record for record in knowledge.recall(root, exact_id, "discriminator_stability")
+                 if record["study_id"] == original["study_id"]
+                 and record["candidate_revision"] == original_trial["candidate_revision"]
+                 and record["source"]["path"] == "reports/forge/configuration-search/ka2-family-defaults-round1-v1.json")
     assert exact["candidate_id"] == exact_id and exact["exact_identity_match"]
-    assert exact["task_results"][0]["gate_status"] == "FAIL"
-    assert exact["task_results"][0]["metrics"]["min_mass_ratio"] == pytest.approx(.59814453125)
+    failed = next(task for task in exact["task_results"] if task["task_id"] == "vector_unequal_mass")
+    assert failed["gate_status"] == "FAIL"
+    assert failed["metrics"]["min_mass_ratio"] == pytest.approx(.59814453125)
     assert any(row["candidate_id"] == exact_id for row in knowledge.recall(root, "min_mass_ratio", "discriminator_stability"))
     assert any(row["study_id"] == "policy-family-defaults-round4-prior-balance-v1"
                for row in knowledge.recall(root, "prior-balance", "policy-family-defaults"))
