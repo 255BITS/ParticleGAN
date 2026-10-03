@@ -18,6 +18,12 @@ identities, numerical grades, costs and all 18 original GIFs. It explains each
 passing question and records the failed numerical bounds. Raw checkpoints and
 populations remain outside Git.
 
+[Retained goal-view supplements](../atlas-current-gpu-publication-views-20261003/README.md)
+make TwoPole's near-zero failure and the three native tests' missing Gaussian
+width visible. They use the original saved arrays, nine actual states and
+analytic reference contours, with zero new draws, updates or scoring. Their
+separately recorded CPU display cost supplies no convergence-speed credit.
+
 This source/cohort has diagnostic credit only. Its passes cannot fill the
 ordinary leaderboard, historical Atlas19 or a different family's cells, and
 no shipping default or fair convergence-speed winner is established. The eight
