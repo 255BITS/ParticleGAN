@@ -1,0 +1,969 @@
+{
+  "schema": "continuous_goal_media_visual_qa_v1",
+  "summary": {
+    "media_records": 8,
+    "moving_supplements": 3,
+    "native_supplements": 3,
+    "H2_hold_media": 2,
+    "supplement_full_original_gate": {
+      "PASS": 6,
+      "FAIL": 0
+    },
+    "native_clean_diagnostic": {
+      "PASS": 0,
+      "FAIL": 3
+    },
+    "H2_named_hold": {
+      "PASS": 0,
+      "FAIL": 2
+    },
+    "source_immutable_baseline": {
+      "completed": 19,
+      "required": 19,
+      "original_gate": "PASS",
+      "metric_gifs": 19,
+      "paid_wall_seconds": 5210.63884702418
+    },
+    "new_training_updates": 0,
+    "new_draws": 0,
+    "model_forwards": 0,
+    "rescoring": false,
+    "source_or_raw_mutations": false,
+    "qualification_input": false,
+    "default_adoption": false
+  },
+  "source_snapshots": [
+    {
+      "origin_commit": "a0d6d89fb470f551b3f790016a237c40a377e1e8",
+      "digest": "e2b6c0e675c5da26663ac7a6181025df1d964dfe43e9a70591374ee94688d985",
+      "file_count": 3825,
+      "all_declared_file_bytes_verified": true
+    },
+    {
+      "origin_commit": "82c85cc32c43746074cb2809ae0f2aed271484bd",
+      "digest": "429fc7d9a90a710346637da72ebe611a0a73515c05aede32c00640824fdfa760",
+      "file_count": 3534,
+      "all_declared_file_bytes_verified": true
+    }
+  ],
+  "visual_sampling": "Initial, middle/turn, and final displayed frame independently inspected for each of eight GIFs; frame count/hash checks cover all stored frames. This is sampled visual QA, not inspection of every frame.",
+  "limits": [
+    "Supplementary media illustrates retained evidence and does not add or regrade qualification.",
+    "All three static native primary noisy laws pass; their clean diagnostic laws fail.",
+    "Moving rotated100 passes its original 95-mode gate with 98 terminal modes; this is not an all-100 retention claim.",
+    "Both H2 GIFs have equal bytes, which does not establish full algorithm or state equivalence.",
+    "Original Atlas19 diagnostics remain separate from ordinary clean-MoG family qualification, default adoption, or speed ranking."
+  ],
+  "records": [
+    {
+      "id": "atlas-original19-moving-grid100",
+      "role": "moving supplement",
+      "receipt": {
+        "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/moving-goal-media/grid100/moving-media-receipt.json",
+        "bytes": 9799,
+        "sha256": "79e8a77a2ecc16844472fe2996d555c59e95a24f6dc42a2e3ecb097467717ecf"
+      },
+      "gif": {
+        "bytes": 159873,
+        "frames": 4,
+        "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/moving-goal-media/grid100/moving-goal.gif",
+        "sha256": "63775290464f08d38478e26855d728e4c344df6ec50dbc5451e166e1a1eb4d18"
+      },
+      "actual_steps": [
+        0,
+        500,
+        1000,
+        1500
+      ],
+      "renderer_commit": "82c85cc32c43746074cb2809ae0f2aed271484bd",
+      "renderer_git_blobs_verified": true,
+      "raw_inputs_verified": 9,
+      "complete_declared_execution_snapshot_verified": true,
+      "visual_frames_reviewed": [
+        0,
+        2,
+        3
+      ],
+      "visual_result": "READABLE_AND_FAITHFUL",
+      "meaning": "Two target turns start at updates 501 and 1001; all four retained sample states and analytical reference centers follow the original timing. Gate requires at least 95 modes and HQ at least 90% of the preceding observed value.",
+      "note": null,
+      "scope": {
+        "original_gate": "PASS",
+        "target_turn_updates": [
+          501,
+          1001
+        ],
+        "gate_samples": 20000,
+        "displayed_samples": 4096,
+        "stored_dtype": "float16",
+        "target_reference": "retained centers with recorded analytical rotations"
+      },
+      "displayed_observations": [
+        {
+          "original_20k_period_observation": null,
+          "step": 0,
+          "target_rotation_degrees": 0
+        },
+        {
+          "original_20k_period_observation": {
+            "hq": 0.9464,
+            "modes": 100,
+            "period_end": 500,
+            "target_deg": 0,
+            "task": "grid100"
+          },
+          "step": 500,
+          "target_rotation_degrees": 0
+        },
+        {
+          "original_20k_period_observation": {
+            "hq": 0.9379,
+            "modes": 100,
+            "period_end": 1000,
+            "target_deg": 30,
+            "task": "grid100"
+          },
+          "step": 1000,
+          "target_rotation_degrees": 30
+        },
+        {
+          "original_20k_period_observation": {
+            "hq": 0.962,
+            "modes": 100,
+            "period_end": 1500,
+            "target_deg": 60,
+            "task": "grid100"
+          },
+          "step": 1500,
+          "target_rotation_degrees": 60
+        }
+      ]
+    },
+    {
+      "id": "atlas-original19-moving-rotated100",
+      "role": "moving supplement",
+      "receipt": {
+        "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/moving-goal-media/rotated100/moving-media-receipt.json",
+        "bytes": 9849,
+        "sha256": "1df24670050ae86b39fda1833f0beda18b698e5643ed3bf7160fde66744719b5"
+      },
+      "gif": {
+        "bytes": 169544,
+        "frames": 4,
+        "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/moving-goal-media/rotated100/moving-goal.gif",
+        "sha256": "ec0f6ea0bfe4c3794f10e0b2498861c03a994d10b81d5b8bd498e4f27f162ae2"
+      },
+      "actual_steps": [
+        0,
+        500,
+        1000,
+        1500
+      ],
+      "renderer_commit": "82c85cc32c43746074cb2809ae0f2aed271484bd",
+      "renderer_git_blobs_verified": true,
+      "raw_inputs_verified": 9,
+      "complete_declared_execution_snapshot_verified": true,
+      "visual_frames_reviewed": [
+        0,
+        2,
+        3
+      ],
+      "visual_result": "READABLE_AND_FAITHFUL",
+      "meaning": "Two target turns start at updates 501 and 1001; all four retained sample states and analytical reference centers follow the original timing. Gate requires at least 95 modes and HQ at least 90% of the preceding observed value.",
+      "note": "Moving rotated100 ends with 98 modes and passes its original 95-mode gate.",
+      "scope": {
+        "original_gate": "PASS",
+        "target_turn_updates": [
+          501,
+          1001
+        ],
+        "gate_samples": 20000,
+        "displayed_samples": 4096,
+        "stored_dtype": "float16",
+        "target_reference": "retained centers with recorded analytical rotations"
+      },
+      "displayed_observations": [
+        {
+          "original_20k_period_observation": null,
+          "step": 0,
+          "target_rotation_degrees": 0
+        },
+        {
+          "original_20k_period_observation": {
+            "hq": 0.9609,
+            "modes": 100,
+            "period_end": 500,
+            "target_deg": 0,
+            "task": "rotated100"
+          },
+          "step": 500,
+          "target_rotation_degrees": 0
+        },
+        {
+          "original_20k_period_observation": {
+            "hq": 0.9609,
+            "modes": 100,
+            "period_end": 1000,
+            "target_deg": 30,
+            "task": "rotated100"
+          },
+          "step": 1000,
+          "target_rotation_degrees": 30
+        },
+        {
+          "original_20k_period_observation": {
+            "hq": 0.9259,
+            "modes": 98,
+            "period_end": 1500,
+            "target_deg": 60,
+            "task": "rotated100"
+          },
+          "step": 1500,
+          "target_rotation_degrees": 60
+        }
+      ]
+    },
+    {
+      "id": "atlas-original19-moving-staggered100",
+      "role": "moving supplement",
+      "receipt": {
+        "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/moving-goal-media/staggered100/moving-media-receipt.json",
+        "bytes": 9878,
+        "sha256": "0d8653d178f47daa3449f2970add81262c1c980a42dfe3b35c611ea718a4ca05"
+      },
+      "gif": {
+        "bytes": 203243,
+        "frames": 4,
+        "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/moving-goal-media/staggered100/moving-goal.gif",
+        "sha256": "aa21115e2a548259e825502174000bc30ed055497adfca30ed84e813f27844d6"
+      },
+      "actual_steps": [
+        0,
+        500,
+        1000,
+        1500
+      ],
+      "renderer_commit": "82c85cc32c43746074cb2809ae0f2aed271484bd",
+      "renderer_git_blobs_verified": true,
+      "raw_inputs_verified": 9,
+      "complete_declared_execution_snapshot_verified": true,
+      "visual_frames_reviewed": [
+        0,
+        2,
+        3
+      ],
+      "visual_result": "READABLE_AND_FAITHFUL",
+      "meaning": "Two target turns start at updates 501 and 1001; all four retained sample states and analytical reference centers follow the original timing. Gate requires at least 95 modes and HQ at least 90% of the preceding observed value.",
+      "note": null,
+      "scope": {
+        "original_gate": "PASS",
+        "target_turn_updates": [
+          501,
+          1001
+        ],
+        "gate_samples": 20000,
+        "displayed_samples": 4096,
+        "stored_dtype": "float16",
+        "target_reference": "retained centers with recorded analytical rotations"
+      },
+      "displayed_observations": [
+        {
+          "original_20k_period_observation": null,
+          "step": 0,
+          "target_rotation_degrees": 0
+        },
+        {
+          "original_20k_period_observation": {
+            "hq": 0.9548,
+            "modes": 100,
+            "period_end": 500,
+            "target_deg": 0,
+            "task": "staggered100"
+          },
+          "step": 500,
+          "target_rotation_degrees": 0
+        },
+        {
+          "original_20k_period_observation": {
+            "hq": 0.934,
+            "modes": 100,
+            "period_end": 1000,
+            "target_deg": 30,
+            "task": "staggered100"
+          },
+          "step": 1000,
+          "target_rotation_degrees": 30
+        },
+        {
+          "original_20k_period_observation": {
+            "hq": 0.9476,
+            "modes": 100,
+            "period_end": 1500,
+            "target_deg": 60,
+            "task": "staggered100"
+          },
+          "step": 1500,
+          "target_rotation_degrees": 60
+        }
+      ]
+    },
+    {
+      "id": "atlas-original19-native-grid100",
+      "role": "native supplement",
+      "receipt": {
+        "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/native-goal-media/grid100/native-media-receipt.json",
+        "bytes": 30966,
+        "sha256": "757cadbb50eb9e1dba8ed83c8d918328c314372174ca5bb3b3250b21ad96e9a3"
+      },
+      "gif": {
+        "bytes": 292829,
+        "frames": 9,
+        "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/native-goal-media/grid100/native-goal.gif",
+        "sha256": "7b973fa274b99755899451371f964c220e3f44fcc808026a0313816a7b25ab95"
+      },
+      "actual_steps": [
+        0,
+        50,
+        750,
+        1750,
+        2750,
+        3750,
+        4750,
+        5750,
+        7000
+      ],
+      "renderer_commit": "e872ea5ae5d85594dc0224b9317c181c3bdaa962",
+      "renderer_git_blobs_verified": true,
+      "raw_inputs_verified": 64,
+      "complete_declared_execution_snapshot_verified": true,
+      "visual_frames_reviewed": [
+        0,
+        4,
+        8
+      ],
+      "visual_result": "READABLE_AND_FAITHFUL",
+      "meaning": "Retained noisy-primary cloud recovers all 100 modes and Gaussian mass/shape; separate clean diagnostic remains FAIL. Full joint coverage/accuracy verdict is retrospective, not the instantaneous displayed state.",
+      "note": "Early missing fidelity statistics are shown as unavailable; no zero-filling.",
+      "scope": {
+        "original_gate": "PASS",
+        "original_gates": {
+          "clean": {
+            "accuracy": "FAIL",
+            "coverage": "FAIL"
+          },
+          "noisy": {
+            "accuracy": "PASS",
+            "coverage": "PASS"
+          }
+        },
+        "observations": 34,
+        "gate_samples": 20000,
+        "final_five_steps": [
+          6000,
+          6250,
+          6500,
+          6750,
+          7000
+        ],
+        "independent_holdout_samples": 100000,
+        "displayed_samples": 4096,
+        "stored_dtype": "float32",
+        "target_reference": "retained fixed target cloud",
+        "primary_law": "noisy live, original trainer.G/prior references; policy may apply served parameters"
+      },
+      "displayed_observations": [
+        {
+          "recorded_20k_metrics": {
+            "acc_abs_cov_trace_bias": null,
+            "acc_center_rms_sigma": null,
+            "acc_radial_ks": null,
+            "mass_tv": 0.04045,
+            "modes": 0,
+            "precision": 0.02705
+          },
+          "recorded_instant_coverage": false,
+          "recorded_instant_fidelity": false,
+          "step": 0
+        },
+        {
+          "recorded_20k_metrics": {
+            "acc_abs_cov_trace_bias": 0.7075018938752224,
+            "acc_center_rms_sigma": 0.4673691806563818,
+            "acc_radial_ks": 0.2687145231751011,
+            "mass_tv": 0.06185,
+            "modes": 6,
+            "precision": 0.2931
+          },
+          "recorded_instant_coverage": false,
+          "recorded_instant_fidelity": false,
+          "step": 50
+        },
+        {
+          "recorded_20k_metrics": {
+            "acc_abs_cov_trace_bias": 0.24076440079271055,
+            "acc_center_rms_sigma": 0.15778678860916637,
+            "acc_radial_ks": 0.09946962279426419,
+            "mass_tv": 0.040600000000000004,
+            "modes": 100,
+            "precision": 0.9581
+          },
+          "recorded_instant_coverage": false,
+          "recorded_instant_fidelity": false,
+          "step": 750
+        },
+        {
+          "recorded_20k_metrics": {
+            "acc_abs_cov_trace_bias": 0.08047513524806105,
+            "acc_center_rms_sigma": 0.16801022006846061,
+            "acc_radial_ks": 0.03827200794858887,
+            "mass_tv": 0.040600000000000004,
+            "modes": 100,
+            "precision": 0.97515
+          },
+          "recorded_instant_coverage": false,
+          "recorded_instant_fidelity": false,
+          "step": 1750
+        },
+        {
+          "recorded_20k_metrics": {
+            "acc_abs_cov_trace_bias": 0.05611238481595615,
+            "acc_center_rms_sigma": 0.1611624007415334,
+            "acc_radial_ks": 0.03093171599186495,
+            "mass_tv": 0.03610000000000001,
+            "modes": 100,
+            "precision": 0.9772
+          },
+          "recorded_instant_coverage": false,
+          "recorded_instant_fidelity": false,
+          "step": 2750
+        },
+        {
+          "recorded_20k_metrics": {
+            "acc_abs_cov_trace_bias": 0.04570447014511858,
+            "acc_center_rms_sigma": 0.16735421337775627,
+            "acc_radial_ks": 0.025606144531016728,
+            "mass_tv": 0.034300000000000004,
+            "modes": 100,
+            "precision": 0.9798
+          },
+          "recorded_instant_coverage": true,
+          "recorded_instant_fidelity": true,
+          "step": 3750
+        },
+        {
+          "recorded_20k_metrics": {
+            "acc_abs_cov_trace_bias": 0.0331479046191725,
+            "acc_center_rms_sigma": 0.15542353439255838,
+            "acc_radial_ks": 0.019093766567768955,
+            "mass_tv": 0.033449999999999994,
+            "modes": 100,
+            "precision": 0.98285
+          },
+          "recorded_instant_coverage": true,
+          "recorded_instant_fidelity": true,
+          "step": 4750
+        },
+        {
+          "recorded_20k_metrics": {
+            "acc_abs_cov_trace_bias": 0.018989149764648605,
+            "acc_center_rms_sigma": 0.161652168496922,
+            "acc_radial_ks": 0.014686867159032446,
+            "mass_tv": 0.033350000000000005,
+            "modes": 100,
+            "precision": 0.98415
+          },
+          "recorded_instant_coverage": true,
+          "recorded_instant_fidelity": true,
+          "step": 5750
+        },
+        {
+          "recorded_20k_metrics": {
+            "acc_abs_cov_trace_bias": 0.014538749700289122,
+            "acc_center_rms_sigma": 0.16660712176422504,
+            "acc_radial_ks": 0.01375962551126797,
+            "mass_tv": 0.032799999999999996,
+            "modes": 100,
+            "precision": 0.9825
+          },
+          "recorded_instant_coverage": true,
+          "recorded_instant_fidelity": true,
+          "step": 7000
+        }
+      ]
+    },
+    {
+      "id": "atlas-original19-native-rotated100",
+      "role": "native supplement",
+      "receipt": {
+        "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/native-goal-media/rotated100/native-media-receipt.json",
+        "bytes": 31091,
+        "sha256": "0206032bbbc0e2b8c494f0ba2be631bcce81848c386e35da240f931e354fe834"
+      },
+      "gif": {
+        "bytes": 266842,
+        "frames": 9,
+        "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/native-goal-media/rotated100/native-goal.gif",
+        "sha256": "7dbf3ccf1e49a927b8dc04d41bda82bc93262d6e2a41bcb6d2d0482306133349"
+      },
+      "actual_steps": [
+        0,
+        50,
+        750,
+        1750,
+        2750,
+        3750,
+        4750,
+        5750,
+        7000
+      ],
+      "renderer_commit": "e872ea5ae5d85594dc0224b9317c181c3bdaa962",
+      "renderer_git_blobs_verified": true,
+      "raw_inputs_verified": 64,
+      "complete_declared_execution_snapshot_verified": true,
+      "visual_frames_reviewed": [
+        0,
+        4,
+        8
+      ],
+      "visual_result": "READABLE_AND_FAITHFUL",
+      "meaning": "Retained noisy-primary cloud recovers all 100 modes and Gaussian mass/shape; separate clean diagnostic remains FAIL. Full joint coverage/accuracy verdict is retrospective, not the instantaneous displayed state.",
+      "note": "Early missing fidelity statistics are shown as unavailable; no zero-filling.",
+      "scope": {
+        "original_gate": "PASS",
+        "original_gates": {
+          "clean": {
+            "accuracy": "FAIL",
+            "coverage": "FAIL"
+          },
+          "noisy": {
+            "accuracy": "PASS",
+            "coverage": "PASS"
+          }
+        },
+        "observations": 34,
+        "gate_samples": 20000,
+        "final_five_steps": [
+          6000,
+          6250,
+          6500,
+          6750,
+          7000
+        ],
+        "independent_holdout_samples": 100000,
+        "displayed_samples": 4096,
+        "stored_dtype": "float32",
+        "target_reference": "retained fixed target cloud",
+        "primary_law": "noisy live, original trainer.G/prior references; policy may apply served parameters"
+      },
+      "displayed_observations": [
+        {
+          "recorded_20k_metrics": {
+            "acc_abs_cov_trace_bias": null,
+            "acc_center_rms_sigma": null,
+            "acc_radial_ks": null,
+            "mass_tv": 0.1539,
+            "modes": 0,
+            "precision": 0.01975
+          },
+          "recorded_instant_coverage": false,
+          "recorded_instant_fidelity": false,
+          "step": 0
+        },
+        {
+          "recorded_20k_metrics": {
+            "acc_abs_cov_trace_bias": null,
+            "acc_center_rms_sigma": null,
+            "acc_radial_ks": null,
+            "mass_tv": 0.13575,
+            "modes": 1,
+            "precision": 0.1602
+          },
+          "recorded_instant_coverage": false,
+          "recorded_instant_fidelity": false,
+          "step": 50
+        },
+        {
+          "recorded_20k_metrics": {
+            "acc_abs_cov_trace_bias": 0.09223176456338189,
+            "acc_center_rms_sigma": 0.14546617114917704,
+            "acc_radial_ks": 0.0417935071974308,
+            "mass_tv": 0.0364,
+            "modes": 100,
+            "precision": 0.97455
+          },
+          "recorded_instant_coverage": true,
+          "recorded_instant_fidelity": false,
+          "step": 750
+        },
+        {
+          "recorded_20k_metrics": {
+            "acc_abs_cov_trace_bias": 0.04161350273645459,
+            "acc_center_rms_sigma": 0.1595423126818633,
+            "acc_radial_ks": 0.021508278099237055,
+            "mass_tv": 0.0315,
+            "modes": 100,
+            "precision": 0.98245
+          },
+          "recorded_instant_coverage": true,
+          "recorded_instant_fidelity": true,
+          "step": 1750
+        },
+        {
+          "recorded_20k_metrics": {
+            "acc_abs_cov_trace_bias": 0.021331204544414284,
+            "acc_center_rms_sigma": 0.15141307742379062,
+            "acc_radial_ks": 0.015666478454945842,
+            "mass_tv": 0.031549999999999995,
+            "modes": 100,
+            "precision": 0.98565
+          },
+          "recorded_instant_coverage": true,
+          "recorded_instant_fidelity": true,
+          "step": 2750
+        },
+        {
+          "recorded_20k_metrics": {
+            "acc_abs_cov_trace_bias": 0.00012131206004950545,
+            "acc_center_rms_sigma": 0.1425702230976461,
+            "acc_radial_ks": 0.009114672254176392,
+            "mass_tv": 0.031049999999999998,
+            "modes": 100,
+            "precision": 0.9857
+          },
+          "recorded_instant_coverage": true,
+          "recorded_instant_fidelity": true,
+          "step": 3750
+        },
+        {
+          "recorded_20k_metrics": {
+            "acc_abs_cov_trace_bias": 0.010954577203560412,
+            "acc_center_rms_sigma": 0.13777197915446826,
+            "acc_radial_ks": 0.005343456204110808,
+            "mass_tv": 0.0313,
+            "modes": 100,
+            "precision": 0.98775
+          },
+          "recorded_instant_coverage": true,
+          "recorded_instant_fidelity": true,
+          "step": 4750
+        },
+        {
+          "recorded_20k_metrics": {
+            "acc_abs_cov_trace_bias": 0.004523850310435451,
+            "acc_center_rms_sigma": 0.13782893755100487,
+            "acc_radial_ks": 0.009289819928938292,
+            "mass_tv": 0.031700000000000006,
+            "modes": 100,
+            "precision": 0.9873
+          },
+          "recorded_instant_coverage": true,
+          "recorded_instant_fidelity": true,
+          "step": 5750
+        },
+        {
+          "recorded_20k_metrics": {
+            "acc_abs_cov_trace_bias": 0.017777074394604186,
+            "acc_center_rms_sigma": 0.1364375762756252,
+            "acc_radial_ks": 0.013919131530222617,
+            "mass_tv": 0.030450000000000005,
+            "modes": 100,
+            "precision": 0.98535
+          },
+          "recorded_instant_coverage": true,
+          "recorded_instant_fidelity": true,
+          "step": 7000
+        }
+      ]
+    },
+    {
+      "id": "atlas-original19-native-staggered100",
+      "role": "native supplement",
+      "receipt": {
+        "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/native-goal-media/staggered100/native-media-receipt.json",
+        "bytes": 31258,
+        "sha256": "ece011a497e9941c6da87cb80365a609194a113815892b43df038054a19ac2a7"
+      },
+      "gif": {
+        "bytes": 405234,
+        "frames": 9,
+        "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/native-goal-media/staggered100/native-goal.gif",
+        "sha256": "fa62f6a5b7e30b1486041b4bd7dff540d8753024081c854cb95526148e85d94c"
+      },
+      "actual_steps": [
+        0,
+        50,
+        750,
+        1750,
+        2750,
+        3750,
+        4750,
+        5750,
+        7000
+      ],
+      "renderer_commit": "e872ea5ae5d85594dc0224b9317c181c3bdaa962",
+      "renderer_git_blobs_verified": true,
+      "raw_inputs_verified": 64,
+      "complete_declared_execution_snapshot_verified": true,
+      "visual_frames_reviewed": [
+        0,
+        4,
+        8
+      ],
+      "visual_result": "READABLE_AND_FAITHFUL",
+      "meaning": "Retained noisy-primary cloud recovers all 100 modes and Gaussian mass/shape; separate clean diagnostic remains FAIL. Full joint coverage/accuracy verdict is retrospective, not the instantaneous displayed state.",
+      "note": "Early missing fidelity statistics are shown as unavailable; no zero-filling.",
+      "scope": {
+        "original_gate": "PASS",
+        "original_gates": {
+          "clean": {
+            "accuracy": "FAIL",
+            "coverage": "FAIL"
+          },
+          "noisy": {
+            "accuracy": "PASS",
+            "coverage": "PASS"
+          }
+        },
+        "observations": 34,
+        "gate_samples": 20000,
+        "final_five_steps": [
+          6000,
+          6250,
+          6500,
+          6750,
+          7000
+        ],
+        "independent_holdout_samples": 100000,
+        "displayed_samples": 4096,
+        "stored_dtype": "float32",
+        "target_reference": "retained fixed target cloud",
+        "primary_law": "noisy live, original trainer.G/prior references; policy may apply served parameters"
+      },
+      "displayed_observations": [
+        {
+          "recorded_20k_metrics": {
+            "acc_abs_cov_trace_bias": null,
+            "acc_center_rms_sigma": null,
+            "acc_radial_ks": null,
+            "mass_tv": 0.12455,
+            "modes": 0,
+            "precision": 0.02625
+          },
+          "recorded_instant_coverage": false,
+          "recorded_instant_fidelity": false,
+          "step": 0
+        },
+        {
+          "recorded_20k_metrics": {
+            "acc_abs_cov_trace_bias": 0.6529465131188141,
+            "acc_center_rms_sigma": 0.6624459010748892,
+            "acc_radial_ks": 0.29592077690349694,
+            "mass_tv": 0.0805,
+            "modes": 6,
+            "precision": 0.27965
+          },
+          "recorded_instant_coverage": false,
+          "recorded_instant_fidelity": false,
+          "step": 50
+        },
+        {
+          "recorded_20k_metrics": {
+            "acc_abs_cov_trace_bias": 0.15923519882384674,
+            "acc_center_rms_sigma": 0.16140605371786879,
+            "acc_radial_ks": 0.06841148523788343,
+            "mass_tv": 0.03610000000000001,
+            "modes": 100,
+            "precision": 0.96435
+          },
+          "recorded_instant_coverage": false,
+          "recorded_instant_fidelity": false,
+          "step": 750
+        },
+        {
+          "recorded_20k_metrics": {
+            "acc_abs_cov_trace_bias": 0.042819951624953445,
+            "acc_center_rms_sigma": 0.1494203730030173,
+            "acc_radial_ks": 0.021282523448876767,
+            "mass_tv": 0.03265,
+            "modes": 100,
+            "precision": 0.98115
+          },
+          "recorded_instant_coverage": true,
+          "recorded_instant_fidelity": true,
+          "step": 1750
+        },
+        {
+          "recorded_20k_metrics": {
+            "acc_abs_cov_trace_bias": 0.012704079900602405,
+            "acc_center_rms_sigma": 0.14384731826753194,
+            "acc_radial_ks": 0.011829545083602011,
+            "mass_tv": 0.03085,
+            "modes": 100,
+            "precision": 0.9852
+          },
+          "recorded_instant_coverage": true,
+          "recorded_instant_fidelity": true,
+          "step": 2750
+        },
+        {
+          "recorded_20k_metrics": {
+            "acc_abs_cov_trace_bias": 0.0030122025121415152,
+            "acc_center_rms_sigma": 0.14075318638111214,
+            "acc_radial_ks": 0.007571470291137028,
+            "mass_tv": 0.030949999999999995,
+            "modes": 100,
+            "precision": 0.98605
+          },
+          "recorded_instant_coverage": true,
+          "recorded_instant_fidelity": true,
+          "step": 3750
+        },
+        {
+          "recorded_20k_metrics": {
+            "acc_abs_cov_trace_bias": 0.005771680043575755,
+            "acc_center_rms_sigma": 0.14455874199406796,
+            "acc_radial_ks": 0.004874736011253877,
+            "mass_tv": 0.030699999999999998,
+            "modes": 100,
+            "precision": 0.98535
+          },
+          "recorded_instant_coverage": true,
+          "recorded_instant_fidelity": true,
+          "step": 4750
+        },
+        {
+          "recorded_20k_metrics": {
+            "acc_abs_cov_trace_bias": 0.0067043756462720205,
+            "acc_center_rms_sigma": 0.14000485974500934,
+            "acc_radial_ks": 0.005782749522529107,
+            "mass_tv": 0.0297,
+            "modes": 100,
+            "precision": 0.98535
+          },
+          "recorded_instant_coverage": true,
+          "recorded_instant_fidelity": true,
+          "step": 5750
+        },
+        {
+          "recorded_20k_metrics": {
+            "acc_abs_cov_trace_bias": 0.003013395044575873,
+            "acc_center_rms_sigma": 0.13574737701973882,
+            "acc_radial_ks": 0.005430802046852201,
+            "mass_tv": 0.0291,
+            "modes": 100,
+            "precision": 0.9863
+          },
+          "recorded_instant_coverage": true,
+          "recorded_instant_fidelity": true,
+          "step": 7000
+        }
+      ]
+    },
+    {
+      "id": "c6-atlas-broad-hold-1200-to-1350",
+      "role": "H2 named hold",
+      "receipt": {
+        "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/hold-continuation-v2/atlas/c6-atlas-broad-hold-1200-to-1350/result.json",
+        "bytes": 27347,
+        "sha256": "1844252366b6b5dfa65a382736572ef236448e9320446653443ac994f1d42cd3"
+      },
+      "gif": {
+        "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/hold-continuation-v2/atlas/c6-atlas-broad-hold-1200-to-1350/goal.gif",
+        "bytes": 1128406,
+        "sha256": "b56db2674a5f785c7979ff4bfb8ae6d4c309880cb29c3f45a8a72bb16b2f7822",
+        "frames": 12
+      },
+      "actual_steps": [
+        0,
+        150,
+        300,
+        450,
+        600,
+        750,
+        900,
+        1050,
+        1200,
+        1250,
+        1300,
+        1350
+      ],
+      "renderer_commit": "82c85cc32c43746074cb2809ae0f2aed271484bd",
+      "original_source_commit": "8021a1c50c4aff90ddea5010d368cffdc857b2f6",
+      "renderer_git_blobs_verified": true,
+      "raw_inputs_verified": 3,
+      "complete_declared_execution_snapshot_verified": true,
+      "original_parent_receipt_and3artifacts_verified": true,
+      "visual_frames_reviewed": [
+        0,
+        9,
+        11
+      ],
+      "visual_result": "READABLE_AND_FAITHFUL",
+      "meaning": "Original acquisition at update 1100 passes only three of five required later checks; updates 1250/1300 fail and 1350 passes. Full named hold FAIL is retained alongside original 1200-update PASS/study INCOMPLETE.",
+      "note": "Family is identified by its receipt/publication row, not the GIF pixels; some word/number labels are joined but readable.",
+      "scope": {
+        "original_gate": "PASS",
+        "original_study_gate": "INCOMPLETE",
+        "named_hold": "FAIL",
+        "hold_checks": 5,
+        "hold_passed": 3,
+        "new_training_updates_in_original_run": 150,
+        "new_training_updates_during_this_qa": 0,
+        "qualification_input": false
+      }
+    },
+    {
+      "id": "c6-e22-broad-hold-1200-to-1350",
+      "role": "H2 named hold",
+      "receipt": {
+        "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/hold-continuation-v2/e22/c6-e22-broad-hold-1200-to-1350/result.json",
+        "bytes": 27332,
+        "sha256": "4c0d798b25208bf897dc0df3582ae2e96be4331e7ef965c721a85453cb8ad2b6"
+      },
+      "gif": {
+        "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/hold-continuation-v2/e22/c6-e22-broad-hold-1200-to-1350/goal.gif",
+        "bytes": 1128406,
+        "sha256": "b56db2674a5f785c7979ff4bfb8ae6d4c309880cb29c3f45a8a72bb16b2f7822",
+        "frames": 12
+      },
+      "actual_steps": [
+        0,
+        150,
+        300,
+        450,
+        600,
+        750,
+        900,
+        1050,
+        1200,
+        1250,
+        1300,
+        1350
+      ],
+      "renderer_commit": "82c85cc32c43746074cb2809ae0f2aed271484bd",
+      "original_source_commit": "8021a1c50c4aff90ddea5010d368cffdc857b2f6",
+      "renderer_git_blobs_verified": true,
+      "raw_inputs_verified": 3,
+      "complete_declared_execution_snapshot_verified": true,
+      "original_parent_receipt_and3artifacts_verified": true,
+      "visual_frames_reviewed": [
+        0,
+        9,
+        11
+      ],
+      "visual_result": "READABLE_AND_FAITHFUL",
+      "meaning": "Original acquisition at update 1100 passes only three of five required later checks; updates 1250/1300 fail and 1350 passes. Full named hold FAIL is retained alongside original 1200-update PASS/study INCOMPLETE.",
+      "note": "Family is identified by its receipt/publication row, not the GIF pixels; some word/number labels are joined but readable.",
+      "scope": {
+        "original_gate": "PASS",
+        "original_study_gate": "INCOMPLETE",
+        "named_hold": "FAIL",
+        "hold_checks": 5,
+        "hold_passed": 3,
+        "new_training_updates_in_original_run": 150,
+        "new_training_updates_during_this_qa": 0,
+        "qualification_input": false
+      }
+    }
+  ]
+}
