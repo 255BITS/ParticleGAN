@@ -400,7 +400,7 @@ class Queue:
         with self.state() as state:
             self._refresh(state)
             running = [j for j in state["jobs"].values() if j["status"] == "running"]
-            from .policy_execution import active_reservations, recover_attempts
+            from .policy_execution import active_reservations, device_key, recover_attempts
             recover_attempts(state)
             policy = active_reservations(state)
             capacity = host_capacity()
@@ -408,11 +408,11 @@ class Queue:
             reserved += [entry["worker"]["host_reservation"] for entry in policy]
             free_threads = capacity["cpu_threads"] - sum(r["cpu_threads"] for r in reserved)
             free_host_memory = capacity["available_memory_mb"] - sum(r["host_memory_mb"] for r in reserved)
-            busy = {(j["worker"]["device"], j["worker"]["slot"]) for j in running}
-            free = [s for s in slots if (s["device"], s["slot"]) not in busy]
-            exclusive = {str(entry["worker"]["device"]) for entry in policy
+            busy = {(device_key(j["worker"]["device"]), j["worker"]["slot"]) for j in running}
+            free = [s for s in slots if (device_key(s["device"]), s["slot"]) not in busy]
+            exclusive = {device_key(entry["worker"]["device"]) for entry in policy
                          if entry["worker"].get("exclusive_device")}
-            free = [slot for slot in free if str(slot["device"]) not in exclusive]
+            free = [slot for slot in free if device_key(slot["device"]) not in exclusive]
             pending = sorted(state["submissions"].items(), key=lambda kv: (
                 -(kv[1]["request"].get("priority", 0) + (time.time() - kv[1]["submitted_at"]) / 300), kv[0]))
             for request_id, entry in pending:

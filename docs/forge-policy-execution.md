@@ -12,6 +12,8 @@ location through `--git-common-dir`. `PARTICLEGAN_FORGE_QUEUE` or the policy
 runner's `--queue-root` overrides it; all cooperating runners must use the same
 location. Both directions account for active CPU-thread and host-memory
 reservations, and a policy GPU is exclusive across every Forge GPU slot.
+CUDA visibility masks must use numeric physical indices; unresolved UUID/MIG
+masks fail before admission so they cannot bypass the core queue's numeric slots.
 Before admission, the existing core collection machinery recovers abandoned
 reservations with no terminal receipt or execution lease. A live core collector
 lease protects its claim-to-launch gap, and live execution leases remain fenced.
@@ -42,11 +44,17 @@ creates a new cohort; archived outcomes and original reproduction sources are
 not rewritten or requalified.
 
 The study and physical attempt each have a kernel lease inherited by their
-child. Recovery never replaces an attempt while that lease is held, including
-after the coordinator dies. When the last holder exits without a central
-terminal receipt, recovery charges the complete timeout plus export allowance
-and retains INCOMPLETE. A central terminal receipt that survived a crash before
-the study save is reused with its measured cost. Full allowances must fit both
+independent frozen supervisor and child. An absolute admission deadline and
+supervisor OS alarm bound startup, source verification, child execution and
+export even when the submitting coordinator is killed. A bootstrap pipe permits
+the payload only after its token and process-group identity are durable. Recovery
+preserves live leases before that deadline; after it, recovery can fence the
+registered group if the supervisor also died. When the last holder exits without
+a certified terminal receipt, recovery charges the complete timeout plus export
+allowance (and any measured shutdown overshoot) and retains INCOMPLETE. A durable
+supervisor completion is certified from its original raw receipt without launching
+again. A central certified receipt surviving a study-save crash is reused with
+its measured cost. Full allowances must fit both
 family and candidate budgets before admission. Logical studies retain the
 original measured/reserved cost of reused evidence conservatively; physical
 cost is charged once in `policy_attempts` in the shared ledger.
@@ -76,5 +84,7 @@ them. The coordinator does not establish scientific screening calibration.
 Software controls in `tests/test_forge_policy_execution.py` exercise concurrent
 submitters, overlapping-study reuse, surviving inherited leases, interrupted
 charges, central-terminal recovery, actual frozen child imports, tamper rejection,
-and both CPU/GPU directions of admission with real `Queue.claim` calls. Children
+both CPU/GPU directions of admission with real `Queue.claim` calls, fail-closed
+UUID masks and numeric aliases, and actual killed-caller/killed-supervisor sleep
+payloads with deadline fencing and durable completion recovery. Children
 are software controls, with no GAN campaign or new scientific result.
