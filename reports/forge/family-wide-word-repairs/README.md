@@ -48,15 +48,82 @@ Increasing the shared base LR while preserving the reference absolute latent
 prior rate is a testable numerical hypothesis, not a demonstrated transfer fix.
 All other mechanisms, task budgets and qualification gates remain fixed.
 
+## Bounded global coupled-rate phase
+
+The six configurations retained their complete clean base recipes and changed
+only shared `lr` and positive `prior_lr_mult`. Each pair preserves the reference
+nominal latent-prior base learning rate; realized feedback and optimizer
+trajectories can change. The direct-coordinate host still consumes the G
+rate. The [phase summary](rates-summary.json) binds all six complete candidates
+to source `36ed5655d9e6` and the same scientific digest `2aea8c53d187` as the
+initial phase. Source origin identities remain separate in the ordinary receipts.
+No seed, task, objective, mechanism or gate changed.
+
+| Family / exact configuration receipt | Global LR | Prior multiplier | First-gate movement (`>=0.3`) | Required Tier 1 | Last measured gate |
+| --- | ---: | ---: | ---: | --- | --- |
+| [K3P](rates/k3p-lr0.00425.json) | 0.00425 | 0.282353 | 0.128044 | 0/5 | Movement FAIL |
+| [K3P](rates/k3p-lr0.006375.json) | 0.006375 | 0.188235 | 0.122587 | 0/5 | Movement FAIL |
+| [KA2](rates/ka2-lr0.00425.json) | 0.00425 | 0.014118 | 0.136965 | 0/5 | Movement FAIL |
+| [KA2](rates/ka2-lr0.006375.json) | 0.006375 | 0.009412 | 0.191691 | 0/5 | Movement FAIL |
+| [R1/R2](rates/r1r2-lr0.006375.json) | 0.006375 | 0.376471 | 0.266909 | 0/5 | Movement FAIL |
+| [R1/R2](rates/r1r2-lr0.0085.json) | 0.0085 | 0.282353 | 0.478752 | 3/5 | Ring16 quality FAIL; word UNKNOWN |
+
+R1/R2 at LR 0.0085 passed `two_pole`, `unused_token_hold` and `ae_gan_hold`
+with terminal passing suffixes 12, 19 and 24. Its ring16 output covered all 16
+modes and passed mass TV (0.087158), but failed three quality gates:
+
+| Ring16 metric | Observed | Required | Result |
+| --- | ---: | --- | --- |
+| High-quality fraction | 0.845215 | `>=0.85` | FAIL |
+| Mean relative component covariance error | 2.098760 | `<=0.85` | FAIL |
+| Minimum covariance eigenvalue ratio | 0.112707 | `>=0.15` | FAIL |
+
+Mode coverage alone therefore does not qualify the configuration. The failed
+ring gate left word and all higher tasks unmeasured. Five other configurations
+failed the first gate. This phase measured three PASS and six FAIL cells, leaving
+147 UNKNOWN cells, and charged **65.314 seconds**. Together the two phases used
+**82.976 paid seconds**, measured 12 cells and left 222 later cells unmeasured.
+All nine global word cells are UNKNOWN. The [K3P](../configuration-search/k3p-global-repair-rates-v1.json),
+[KA2](../configuration-search/ka2-global-repair-rates-v1.json) and
+[R1/R2](../configuration-search/r1r2-global-repair-rates-v1.json) search reports
+preserve the full denominator and their frozen objective. K3P/KA2 zero-pass
+tie choices use configuration hashes; they do not establish scientific superiority.
+R1/R2's three-pass configuration is best observed within its same-source grid,
+and remains unqualified.
+
+No family standard was promoted. The current table keeps the exact historical
+incumbents, labelled unqualified, and retains all nine attempted global recipes
+as unranked alternatives. It does not compare their pass counts across different
+source cohorts or combine the old word successes with new smoke passes.
+Increasing LR alone is not a supported general repair: K3P movement decreased
+between the two tested higher rates. Further work needs a separate bounded
+global proposal addressing the observed movement and ring quality failures;
+this round authorizes no additional training. The word formulation retains its
+historical working evidence, while its transfer to these whole candidates is
+still unmeasured.
+
 The [frozen round](../../../configs/forge/rounds/family-wide-word-repairs-v1.json)
-authorizes three candidates, seed 0, GPU 0 only, one worker and one CPU thread per
-task through Tier 3. The required denominator is 5/19/2. Its conservative cap is
+authorizes three candidates, seed 0, GPU 0 as the only GPU, one intended global
+worker and one CPU thread per task through Tier 3. Task-owned `two_pole` jobs use
+CPU; all nine movement comparisons used the same CPU model, thread count and
+scientific runtime. The requested CUDA cohort binds both CPU and CUDA profiles.
+The required denominator is 5/19/2. Its conservative cap is
 48,900 seconds per candidate and 146,700 total. The planner reserves 25 actual
 jobs per candidate for 26 tasks, totalling 45,300 seconds: the two endurance tasks
 share one 3,600-second execution group. Failed prerequisites stop remaining work
 in that tier and all higher tiers. Gated cells remain unmeasured. No seed study,
 new technique, gate weakening, per-task optimizer override or automatic further
 paid round is authorized.
+
+The queue's automatic CPU slot exceeded the intended global worker cap once in
+the coupled-rate phase. R1/R2 LR 0.006375 `two_pole` ran on CPU from
+16:26:17.685 to 16:26:25.975 UTC on 2026-10-03, overlapping R1/R2 LR 0.0085
+`ring16_acquisition` on GPU 0 from 16:26:16.923 to 16:26:28.952 UTC. Actual
+concurrency reached two supervisors for about 8.29 seconds, with one per device
+and one CPU thread each. The [phase summary](rates-summary.json) and
+[artifact card](archive.json) disclose this execution deviation. Frozen
+declarations, measured grades and UNKNOWN cells are preserved; no speed claim
+is made.
 
 The formal first-gate prediction is `two_pole.mean_abs >=0.3`, with `<0.3` as
 falsifier, under the unchanged median-gradient gate and five passing terminal
@@ -81,6 +148,15 @@ API observations and explicit target/gate bounds, including the first failures.
 The [renderer](render.py) records exact input hashes, frame updates and thresholds;
 it performs no optimizer updates or sampling draws. Existing native distribution
 tasks already save their actual evaluated output snapshots if reached.
+
+The [artifact card](archive.json) binds the exact 12 ordinary certificates, raw
+observations, source snapshots and actual-training GIF receipts in one local
+archive. The [archive audit](archive-audit.json) verifies all 2,518 inventory
+entries and both 1,137-file executed source manifests. Raw logs, checkpoints and
+metric streams remain outside Git. The [byte-preservation proof](preservation-audit.json)
+and [read-only reproducer](preservation_audit.py) compare the immutable prior
+scientific history against develop `53f2d423`; generated memory/current inventory
+and the additive evidence registry are declared refreshes.
 Preparation and workers both use `/usr/bin/python`, CPython 3.14.7 and the same
 declared package manifest. The repository `.venv` Python 3.12 environment is used
 only for software tests and post-training rendering, with no optimizer updates

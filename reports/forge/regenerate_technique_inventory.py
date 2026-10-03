@@ -694,6 +694,11 @@ def _current_markdown(result, root, path):
                "hydrated original receipts and update this leaderboard. Reusable candidates use the same complete task ladder. "
                "Historical task-only diagnostics remain motivation and reproduction evidence. Source snapshots are provenance, not additional leaderboards."), "",
               f"Publication input digest `{result['provenance']['input_digest']}`.", ""]
+    if not recorded_policy and result["view"] == "discriminator_stability":
+        lines += ["The [whole-family repair readout](family-wide-word-repairs/README.md) records the ordinary "
+                  "candidate attempts and bounded global configuration search. Their complete rows remain "
+                  "unranked alternatives below and in the companion JSON; a failed replacement does not "
+                  "make its historical incumbent a qualified standard.", ""]
     if result.get("archived_policies"):
         lines += ["Earlier view policies retain their exact numerical snapshots and receipt proofs in the companion JSON. "
                   "Their outcomes do not fill current requirements:", ""]

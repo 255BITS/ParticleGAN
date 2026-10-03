@@ -1,8 +1,10 @@
-"""Run the six frozen ordinary global configurations in one serial batch.
+"""Run six frozen ordinary configurations with one configured CUDA worker.
 
 This composes existing strict search admission and Queue/drain APIs, retaining
 ordinary prerequisites, independent grading, durable certificates and cost
-accounting. Full memory/leaderboard compilation is deferred to publication.
+accounting. Queue also supplies its independent CPU fallback slot; actual
+concurrency must be recorded from saved supervisor intervals. Full memory/
+leaderboard compilation is deferred to publication.
 """
 import argparse
 import json
