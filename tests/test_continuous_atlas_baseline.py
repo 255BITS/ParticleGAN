@@ -303,6 +303,36 @@ def test_gif_uses_actual_observations_and_preserves_all_raw_bytes(setup):
         baseline.render_metric_gif(packet, row, target)
 
 
+def test_native_gif_preserves_unavailable_accuracy_and_binds_its_renderer(setup):
+    packet = prepare(setup); row = packet['rows'][16]; row['status'] = 'PASS'
+    target = setup.output / 'native-media'; evidence(packet, row, target)
+    path = target / 'metrics.jsonl'
+    records = baseline._jsonl(path)
+    for record in records[:2]:
+        record['acc_center_rms_sigma'] = None
+    path.write_text(''.join(json.dumps(record) + '\n' for record in records))
+    before = {p.name: baseline.sha(p) for p in target.iterdir()}
+    media = baseline.render_metric_gif(packet, row, target)
+    assert media['frames'] == 9 and media['training_updates'] == 0
+    assert media['unavailable_observations'] == {'acc_center_rms_sigma': [0, 1]}
+    assert media['renderer_source']['sha256'] == baseline.sha(MODULE)
+    assert media['renderer_source']['scientific_source_digest'] == packet['source']['execution_digest']
+    assert before == {name: baseline.sha(target / name) for name in before}
+    assert baseline._jsonl(path)[:2] == records[:2]
+
+
+@pytest.mark.parametrize('invalid', [float('nan'), float('inf')])
+def test_native_gif_rejects_nonfinite_values_without_treating_them_as_unavailable(setup, invalid):
+    packet = prepare(setup); row = packet['rows'][16]
+    target = setup.output / 'invalid-media'; evidence(packet, row, target)
+    path = target / 'metrics.jsonl'; records = baseline._jsonl(path)
+    records[0]['acc_center_rms_sigma'] = invalid
+    path.write_text(''.join(json.dumps(record) + '\n' for record in records))
+    with pytest.raises(ValueError, match='nonfinite retained plot metric'):
+        baseline.render_metric_gif(packet, row, target)
+    assert not (target / 'goal-metrics.gif').exists()
+
+
 @pytest.mark.parametrize('coverage,accuracy,expected', [('FAIL', 'PASS', 'FAIL'), ('PASS', 'PASS', 'PASS'), ('PASS', 'FAIL', 'FAIL')])
 def test_native_original_gate_requires_both_coverage_and_accuracy(setup, coverage, accuracy, expected):
     packet = prepare(setup); row = packet['rows'][16]; target = setup.output / 'native'

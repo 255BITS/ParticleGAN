@@ -31,6 +31,24 @@ CASE = 'api-vector-two-broad'
 SEED, EVAL_SEED, SAMPLES = 24002, 34002, 4096
 START, END, BOUNDARIES = 1200, 1350, (1250, 1300, 1350)
 CAP, GRACE, TOTAL_CAP = 180., 60., 480.
+PREVIOUS_OUTPUT = Path('/ml2/hypergan/forge-continuous-leaderboard-20261003/hold-continuation')
+PREVIOUS_SOURCE = {
+    'commit': 'e97cae6d897369354588c29b65b02893ab066484',
+    'execution_digest': '29069307aaaefe61b6ab5c2c9b5b26a8b536323570db4054f2abea8f64dd7b29',
+    'files_sha256': {SELF: '93342f094a40d1e36df7161b0d250cef90ff7a9ffb965e0041c8365f13e85128'},
+}
+PREVIOUS_STUDIES = {
+    'atlas': {
+        'study_sha256': 'e551fe443879ab2a487de8e372c54295206bef3fdb04dc7b7ed0e096956bb54d',
+        'request_sha256': 'ecf016dea5ac00bdb6beab89d149cacc53b3ecd52cab467f09b88a904b6e176a',
+        'log_sha256': 'c6f7b6c055085ffab8a027b224778e0d27adf904ddadc2645bbf7866f9298cd4',
+        'paid_wall_seconds': 3.440489402040839},
+    'e22': {
+        'study_sha256': '7a3f7c1be32d95c65c95dede31f11c0663f815c09e27ae00dfda39ec6d87b661',
+        'request_sha256': '7afeaaf39ccf9b00d317b06099c0b9a6e53896a6e3c7f347f13b9d883afd0684',
+        'log_sha256': 'c6f7b6c055085ffab8a027b224778e0d27adf904ddadc2645bbf7866f9298cd4',
+        'paid_wall_seconds': 3.3781889399979264},
+}
 KNOBS = {'lr': .0053125, 'prior_lr_mult': 1.5}
 NPZ_SHA = 'c188d10dd45d8263443b4c085833d39aa0e5fe3ef92ae01f3cc910e369f4b28a'
 PARENTS = {
@@ -151,7 +169,24 @@ def guard_imports(directory, source, *, modules=None):
             continue
         filename = getattr(module, '__file__', None)
         if filename is None:
-            raise ValueError(f'unbound scientific namespace: {name}')
+            # Original lib is a PEP420 namespace, with no __init__.py. Its
+            # search path must still identify exactly the exported source;
+            # every loaded descendant is checked independently below.
+            expected = directory / name.replace('.', '/')
+            paths = list(getattr(module, '__path__', ()))
+            spec = getattr(module, '__spec__', None)
+            spec_paths = list(getattr(spec, 'submodule_search_locations', ()) or ())
+            descendants = [key for key in source['files_sha256']
+                           if key.startswith(name.replace('.', '/') + '/')]
+            if (name.split('.', 1)[0] != 'lib' or len(paths) != 1 or len(spec_paths) != 1
+                    or spec is None or spec.origin is not None
+                    or Path(paths[0]).resolve() != expected or Path(spec_paths[0]).resolve() != expected
+                    or not expected.is_dir() or (expected / '__init__.py').exists()
+                    or not descendants or any(not (directory / key).is_file()
+                                              or sha(directory / key) != source['files_sha256'][key]
+                                              for key in descendants)):
+                raise ValueError(f'unbound scientific namespace: {name}')
+            continue
         path = Path(filename).resolve()
         if not path.is_relative_to(directory):
             raise ValueError(f'wrong scientific import path: {name}: {path}')
@@ -170,8 +205,50 @@ def activate_original(directory, source):
         (Path(p).resolve() / n).is_dir() for n in ('particlegan', 'benchmarks', 'lib'))]
 
 
+def engineering_history(directory=PREVIOUS_OUTPUT, *, pins=PREVIOUS_STUDIES):
+    """Retain the two source-admission failures and debit their measured cost."""
+    records = []
+    for family in PARENTS:
+        study_path = Path(directory) / family / 'study.json'
+        pin = pins[family]
+        if sha(study_path) != pin['study_sha256']:
+            raise ValueError('previous engineering study changed')
+        study = read(study_path)
+        if (study.get('source') != PREVIOUS_SOURCE or len(study.get('rows', [])) != 1):
+            raise ValueError('previous engineering source/row identity differs')
+        row = study['rows'][0]; name = f'c6-{family}-broad-hold-1200-to-1350'
+        if (row.get('id') != name or row.get('status') != 'INCOMPLETE'
+                or row.get('child_returncode') != 1 or row.get('full_protocol_complete') is not False
+                or row.get('result_path') is not None or row.get('result_sha256') is not None
+                or row.get('timeout_seconds') != CAP or row.get('allowance_seconds') != CAP + GRACE
+                or verify_cost(row) != pin['paid_wall_seconds']
+                or study.get('spent_seconds') != pin['paid_wall_seconds']):
+            raise ValueError('previous engineering completion/cost contract differs')
+        artifacts = {}
+        for filename, key in (('request.json', 'request_sha256'), ('run.log', 'log_sha256')):
+            path = study_path.parent / name / filename
+            if sha(path) != pin[key]:
+                raise ValueError('previous engineering request/log changed')
+            artifacts[filename] = {'path': str(path), 'sha256': pin[key]}
+        records.append({'family': family, 'study_path': str(study_path),
+                        'study_sha256': pin['study_sha256'], 'source': PREVIOUS_SOURCE,
+                        'artifacts': artifacts, 'status': 'INCOMPLETE',
+                        'scientific_updates': 0, 'paid_wall_seconds': pin['paid_wall_seconds']})
+    return {'reason': 'New explicit engineering cohort repairs strict PEP420 namespace admission only; original scientific source and parents unchanged.',
+            'records': records, 'paid_seconds': math.fsum(r['paid_wall_seconds'] for r in records),
+            'ordinary_updates': 0, 'automatic_retry': False}
+
+
+def can_reserve(previous_paid, new_paid):
+    if any(type(value) not in (int, float) or not math.isfinite(value) or value < 0
+           for value in (previous_paid, new_paid)):
+        raise ValueError('invalid combined continuation cost')
+    return previous_paid + new_paid + CAP + GRACE <= TOTAL_CAP
+
+
 def plan(root=ROOT, *, original_root=ORIGINAL_ROOT):
     root = Path(root).resolve()
+    history = engineering_history()
     parents = {family: original(family) for family in PARENTS}
     source = parents['atlas']['receipt']['source']
     if parents['e22']['receipt']['source'] != source:
@@ -192,10 +269,13 @@ def plan(root=ROOT, *, original_root=ORIGINAL_ROOT):
             'scope': 'Named persistence extension only; original1200 PASS/studyINCOMPLETE unchanged; no ordinary eight-case, family/default or speed qualification.',
         }
     head = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=root, text=True).strip()
-    return {'schema': 'c6_policy_hold_continuation_v1',
-            'spec': {'id': 'c6-two-family-broad-hold-extension-20261003',
+    return {'schema': 'c6_policy_hold_continuation_v2',
+            'spec': {'id': 'c6-two-family-broad-hold-extension-20261003-v2',
                      'representation_card': {'path': parents['atlas']['path'], 'sha256': parents['atlas']['receipt_sha256']},
                      'total_paid_cap_seconds': TOTAL_CAP, 'export_grace_seconds': GRACE, 'frames': 12,
+                     'previous_paid_seconds': history['paid_seconds'],
+                     'remaining_paid_cap_seconds': TOTAL_CAP - history['paid_seconds'],
+                     'engineering_recovery': history,
                      'resources': {'host_memory_mb': 2048}, 'no_automatic_retry': True,
                      'baseline_prerequisite': 'verified original Atlas img_intensity2 control PASS; one-host scope only'},
             'source': {'commit': head, 'files_sha256': {SELF: sha(root / SELF)}},
@@ -204,7 +284,7 @@ def plan(root=ROOT, *, original_root=ORIGINAL_ROOT):
             'rows': [{'id': key, 'family': d['family'], 'status': 'UNKNOWN',
                       'timeout_seconds': CAP, 'allowance_seconds': CAP + GRACE,
                       'case_sha256': digest(d)} for key, d in definitions.items()],
-            'status': 'READY', 'spent_seconds': 0., 'qualification_input': False,
+            'status': 'READY', 'spent_seconds': history['paid_seconds'], 'qualification_input': False,
             'default_adoption': False, 'ordinary_eight_case_qualification': False, 'speed_ranking': False}
 
 
@@ -699,6 +779,8 @@ def run(output, *, baseline_ledger, root=ROOT, queue_root=None, max_new_attempts
     """Root-invoked only; each family has its own maintained exclusive study lease."""
     from experiments.forge.policy_execution import PolicyCoordinator
     packet = prepare(output, root=root, queue_root=queue_root)
+    if engineering_history() != packet['spec']['engineering_recovery']:
+        raise ValueError('preserved engineering prefix differs from prepared recovery cohort')
     baseline = baseline_control(baseline_ledger)
     owner = _baseline_module(root)
     if os.environ.get('CUDA_VISIBLE_DEVICES') != '1':
@@ -731,7 +813,8 @@ def run(output, *, baseline_ledger, root=ROOT, queue_root=None, max_new_attempts
             row['attempt_key'] = attempt
             if not coordinator.retained(attempt) and max_new_attempts is not None and launched >= max_new_attempts:
                 lane['waiting_reason'] = 'explicit dispatch limit reached'; summaries.append(lane); break
-            if not coordinator.retained(attempt) and sum(s.get('spent_seconds', 0.) for s in summaries) + CAP + GRACE > TOTAL_CAP:
+            if not coordinator.retained(attempt) and not can_reserve(
+                    packet['spec']['previous_paid_seconds'], sum(s.get('spent_seconds', 0.) for s in summaries)):
                 lane['waiting_reason'] = 'remaining two-attempt cap cannot reserve complete allowance'
                 write(canonical / 'study.json', lane); summaries.append(lane); break
             if not coordinator.retained(attempt) and not owner.gpu_readiness()['ready']:
@@ -795,10 +878,14 @@ def run(output, *, baseline_ledger, root=ROOT, queue_root=None, max_new_attempts
                 print(json.dumps({'event': 'complete', 'family': family, 'status': row['status'],
                                   'charged_seconds': lane['spent_seconds']}), flush=True)
             summaries.append(lane)
-    summary = {'schema': 'c6_hold_continuation_summary_v1', 'status': 'COMPLETE' if len(summaries) == 2 and all(
+    new_paid = sum(s.get('spent_seconds', 0.) for s in summaries)
+    summary = {'schema': 'c6_hold_continuation_summary_v2', 'status': 'COMPLETE' if len(summaries) == 2 and all(
                s['rows'][0]['status'] not in {'UNKNOWN', 'RUNNING'} for s in summaries) else 'INCOMPLETE',
                'family_studies': summaries, 'total_paid_cap_seconds': TOTAL_CAP,
-               'spent_seconds': sum(s.get('spent_seconds', 0.) for s in summaries),
+               'previous_paid_seconds': packet['spec']['previous_paid_seconds'],
+               'new_paid_seconds': new_paid,
+               'spent_seconds': packet['spec']['previous_paid_seconds'] + new_paid,
+               'engineering_recovery': packet['spec']['engineering_recovery'],
                'qualification_input': False, 'default_adoption': False, 'speed_ranking': False}
     if summary['spent_seconds'] > TOTAL_CAP:
         raise ValueError('continuation paid cost exceeded its fixed two-attempt cap')

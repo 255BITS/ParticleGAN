@@ -3,6 +3,7 @@ from copy import deepcopy
 import importlib.util
 import json
 import os
+import shutil
 from pathlib import Path
 import subprocess
 import sys
@@ -106,6 +107,72 @@ def test_same_module_bytes_from_maintained_namespace_are_not_accepted(tmp_path):
     hold.guard_imports(old, source, modules={'particlegan': SimpleNamespace(__file__=str(old / 'particlegan.py'))})
     with pytest.raises(ValueError, match='wrong scientific import path'):
         hold.guard_imports(old, source, modules={'particlegan': SimpleNamespace(__file__=str(maintained / 'particlegan.py'))})
+
+
+def namespace_module(directory, *, paths=None, spec_paths=None, origin=None):
+    paths = [str(directory)] if paths is None else paths
+    return SimpleNamespace(__file__=None, __path__=paths,
+                           __spec__=SimpleNamespace(origin=origin,
+                                                    submodule_search_locations=paths if spec_paths is None else spec_paths))
+
+
+@pytest.mark.parametrize('mutation', ['missing_path', 'multiple_paths', 'current_path',
+                                    'spec_path', 'not_namespace', 'no_descendants', 'changed_child'])
+def test_namespace_lib_needs_one_exact_original_path_and_pinned_children(tmp_path, mutation):
+    old = tmp_path / 'old'; lib = old / 'lib'; lib.mkdir(parents=True)
+    child = lib / 'toy_models.py'; child.write_text('original = True\n')
+    source = {'files_sha256': {'lib/toy_models.py': hold.sha(child)}}
+    module = namespace_module(lib)
+    children = {'lib': module, 'lib.toy_models': SimpleNamespace(__file__=str(child))}
+    hold.guard_imports(old, source, modules=children)
+    current = tmp_path / 'current/lib'; current.mkdir(parents=True)
+    (current / 'toy_models.py').write_text(child.read_text())
+    if mutation == 'missing_path': module.__path__ = []
+    elif mutation == 'multiple_paths': module.__path__.append(str(current))
+    elif mutation == 'current_path': module = namespace_module(current); children['lib'] = module
+    elif mutation == 'spec_path': module.__spec__.submodule_search_locations = [str(current)]
+    elif mutation == 'not_namespace': module.__spec__.origin = str(lib)
+    elif mutation == 'no_descendants': source['files_sha256'] = {}
+    else: children['lib.toy_models'].__file__ = str(current / 'toy_models.py')
+    with pytest.raises(ValueError): hold.guard_imports(old, source, modules=children)
+
+
+def test_actual_public_providers_and_selected_registry_import_in_a_fresh_cpu_namespace(tmp_path):
+    # A self-contained software source export keeps this control portable to
+    # shallow CI; it supplies no historical scientific-source qualification.
+    export = tmp_path / 'export'; export.mkdir()
+    files = {}
+    for root_name in ('benchmarks', 'particlegan', 'experiments', 'lib'):
+        for path in (ROOT / root_name).rglob('*.py'):
+            if '__pycache__' in path.parts:
+                continue
+            relative = path.relative_to(ROOT).as_posix()
+            target = export / relative; target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(path, target); files[relative] = hold.sha(path)
+    source = {'commit': hold.ORIGINAL_COMMIT, 'files_sha256': files}
+    declaration = tmp_path / 'software-source.json'; hold.write(declaration, source)
+    command = (
+        'import importlib.util,json; '
+        f's=importlib.util.spec_from_file_location("hold",{str(Path(hold.__file__))!r}); '
+        'm=importlib.util.module_from_spec(s);s.loader.exec_module(m); '
+        f'source=json.load(open({str(declaration)!r}));m.activate_original({str(export)!r},source); '
+        'from benchmarks.toy_audit import api_vectors,api_contract,api_run; '
+        'case=api_vectors._registry()[m.CASE]; '
+        'assert case["id"]==m.CASE and case["default_steps"]==1200; '
+        'case["provider"]="api_vectors"; '
+        'assert api_contract.validate_recipe_overrides(case,"atlas",m.KNOBS)==m.KNOBS; '
+        f'm.guard_imports({str(export)!r},source); '
+        'import lib,torch; '
+        f'assert list(lib.__path__)==[{str(export / "lib")!r}]; '
+        'assert not torch.cuda.is_initialized(); '
+        'print("public provider/registry source preflight PASS; zero model/optimizer/sampler updates")'
+    )
+    environment = dict(os.environ); environment.pop('PYTHONPATH', None)
+    environment['CUDA_VISIBLE_DEVICES'] = ''
+    completed = subprocess.run([sys.executable, '-B', '-c', command], cwd=tmp_path,
+                               env=environment, capture_output=True, text=True, timeout=30)
+    assert completed.returncode == 0, completed.stderr
+    assert 'public provider/registry source preflight PASS' in completed.stdout
 
 
 def test_fresh_child_namespace_switch_does_not_depend_on_historical_git_objects(tmp_path):
@@ -302,6 +369,47 @@ def test_interrupt_retains_original_allowance_without_creating_a_retry_budget():
     with pytest.raises(ValueError):
         hold.verify_cost({'status': 'INCOMPLETE', 'paid_wall_seconds': 7.,
                           'unmeasured_interrupt_reserved_seconds': 200., 'charged_seconds': 207.})
+
+
+def test_recovery_keeps_source_bound_engineering_prefix_and_paid_debit(tmp_path):
+    pins = deepcopy(hold.PREVIOUS_STUDIES)
+    for family, pin in pins.items():
+        name = f'c6-{family}-broad-hold-1200-to-1350'
+        directory = tmp_path / family / name; directory.mkdir(parents=True)
+        study = {'source': hold.PREVIOUS_SOURCE, 'spent_seconds': pin['paid_wall_seconds'],
+                 'rows': [{'id': name, 'status': 'INCOMPLETE', 'child_returncode': 1,
+                           'full_protocol_complete': False, 'result_path': None, 'result_sha256': None,
+                           'timeout_seconds': hold.CAP, 'allowance_seconds': hold.CAP + hold.GRACE,
+                           'paid_wall_seconds': pin['paid_wall_seconds'],
+                           'charged_seconds': pin['paid_wall_seconds']}]}
+        hold.write(directory.parent / 'study.json', study)
+        pin['study_sha256'] = hold.sha(directory.parent / 'study.json')
+        for filename, key in [('request.json', 'request_sha256'), ('run.log', 'log_sha256')]:
+            (directory / filename).write_text('synthetic software fixture\n')
+            pin[key] = hold.sha(directory / filename)
+    result = hold.engineering_history(tmp_path, pins=pins)
+    assert result['paid_seconds'] == 6.8186783420387655
+    assert result['ordinary_updates'] == 0
+    assert result['automatic_retry'] is False
+    assert all(row['status'] == 'INCOMPLETE' for row in result['records'])
+    # Even coherently rewriting the local costs/hash cannot erase the pinned
+    # engineering debit under the frozen combined 480-second allowance.
+    path = tmp_path / 'atlas/study.json'; modified = hold.read(path)
+    modified['spent_seconds'] = 0.
+    modified['rows'][0].update(paid_wall_seconds=0., charged_seconds=0.)
+    hold.write(path, modified); pins['atlas']['study_sha256'] = hold.sha(path)
+    with pytest.raises(ValueError, match='cost contract'):
+        hold.engineering_history(tmp_path, pins=pins)
+
+
+def test_old_engineering_charge_limits_new_attempt_reservations():
+    debit = 6.8186783420387655
+    assert hold.can_reserve(debit, 0.)
+    assert hold.can_reserve(debit, 20.)
+    assert not hold.can_reserve(debit, 234.)
+    assert hold.TOTAL_CAP == 480.
+    for paid in (-1., float('nan'), float('inf')):
+        with pytest.raises(ValueError): hold.can_reserve(debit, paid)
 
 
 def test_source_defined_unavailable_diagnostics_roundtrip_without_waiving_model_health():

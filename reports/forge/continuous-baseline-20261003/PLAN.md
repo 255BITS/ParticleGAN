@@ -91,3 +91,17 @@ It cannot fill any of the six unreached ordinary policy requirements or
 qualify a family, shipping default or speed comparison. Its GIF must combine
 retained original frames with the three actual appended states, with their
 provenance and the original INCOMPLETE grade visible.
+
+The first continuation launcher stopped both children before model construction
+because its strict import guard rejected the original PEP420 `lib` namespace.
+Those two startup attempts remain INCOMPLETE, with zero scientific updates and
+6.8186783420387655 paid seconds. An explicitly named v2 engineering cohort fixes
+only that source admission, binds the six preserved request/log/study hashes,
+and debits those seconds from the same 480-second cap. It receives no new budget
+and does not overwrite or retry the original attempts.
+
+Supplemental moving/native goal GIFs may render only hash-verified retained
+arrays with fixed cameras and original recorded gates. The metric renderer
+preserves unavailable native diagnostics as visible gaps. These exports name
+their own committed rendering source separately from the frozen scientific
+snapshot; they make no new draws, updates or scientific regrading.

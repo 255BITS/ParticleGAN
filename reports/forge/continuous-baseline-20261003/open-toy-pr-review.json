@@ -1,0 +1,561 @@
+{
+  "schema": "particlegan_continuous_open_toy_pr_review_v1",
+  "reviewed_at_utc": "2026-10-03T08:24:28.923349+00:00",
+  "review_checkout": "e97cae6d897369354588c29b65b02893ab066484",
+  "scope": [
+    261
+  ],
+  "retained_comparison_scope": [
+    246,
+    253
+  ],
+  "is_configuration_board": false,
+  "original_ratings_receipts_or_gates_changed": false,
+  "scientific_execution_performed_by_review": false,
+  "method": "Exact Git/file hashes, current source-byte compatibility, pure saved-array arithmetic/trace consistency, actual retained GIF inspection and cached CI metadata; no caller/model execution.",
+  "records": [
+    {
+      "pr": 261,
+      "url": "https://github.com/255BITS/ParticleGAN/pull/261",
+      "head": "7943dda321c1011dd3c86fc598a92b3493159a83",
+      "source_ref": "refs/remotes/origin/pr261",
+      "quality": {
+        "score": 4,
+        "scale": 5,
+        "scope": "Bounded diagnostic definition; full-task transfer, robust convergence and family qualification are separate."
+      },
+      "question": "With fixed architecture/native game/init/updates and paired addresses, does expanding training latent support from two to eight initial noise seeds improve unseen-noise conditional recovery while routed particles remain beneficial?",
+      "original_scientific_status": "PASS",
+      "scientific_scope": "Full declared 1024-update generated FP32 two-arm protocol only; actual Supra transfer UNKNOWN.",
+      "api_components": [
+        "Recipe",
+        "ParticlePrior",
+        "GANLoss",
+        "public optimizers",
+        "init.initialize_",
+        "E22Policy",
+        "RoutedRows"
+      ],
+      "general_config_selector_compatible": false,
+      "recipe": "e22_routed with fixed conditional cloud/options/branch rates; arbitrary Atlas/default config overrides are not accepted",
+      "protocol": {
+        "path": "docs/e22_routed_latent_coverage_v2.json",
+        "sha256": "edbf56db270d378234be899cb022aa94c882cba686819eaa243301dbb43a6567",
+        "steps_per_arm": 1024,
+        "arms": 2,
+        "native_quality_updates": 2048,
+        "optimizer_quality_steps": 4096,
+        "score_steps": [
+          896,
+          928,
+          960,
+          992,
+          1024
+        ],
+        "media_steps": [
+          0,
+          128,
+          256,
+          512,
+          800,
+          1024
+        ],
+        "wall_cap_seconds": 300,
+        "reported_child_elapsed_seconds": 227.33138238894753,
+        "verified_external_elapsed_seconds": 228.24110367987305,
+        "ordered_fit_records": {
+          "two_seed": 240,
+          "eight_seed": 960
+        },
+        "unique_fit_contexts": {
+          "two_seed": 228,
+          "eight_seed": 912
+        },
+        "held_out_records": 240,
+        "unique_held_out_contexts": 228,
+        "guard_contexts": 64,
+        "training_context_draws_per_arm": 4096,
+        "frozen_thresholds": {
+          "baseline_test_fit_mse_ratio": 1.1,
+          "relative_rmse_gain": 0.001,
+          "source_harm": 1e-06,
+          "seed_harm": 1e-06,
+          "gap_fraction": 0.9,
+          "common_game_gain": 1e-06,
+          "code_gain": 1e-06,
+          "live_fraction": 0.9
+        }
+      },
+      "numerical_checks": {
+        "baseline_fit_test_phenotype": true,
+        "held_RMSE_improved_all_five": true,
+        "no_source_harmed_all_five": true,
+        "no_TEST_seed_harmed_all_five": true,
+        "common_originalFIT_gap_reduced": true,
+        "both_common_games_improved_all_five": true,
+        "code_RMSE_beneficial": true,
+        "code_RMSE_beneficial_each_source": true,
+        "code_game_beneficial_both_judges": true,
+        "particles_retained_both_arms": true,
+        "native_KA2_phase_qualified": true
+      },
+      "terminal_metrics": {
+        "baseline_rmse": 0.05337024538165,
+        "expanded_rmse": 0.04104622367148761,
+        "relative_rmse_gain": 0.23091559017638863,
+        "zero_code_rmse": 0.08954399378911752,
+        "baseline_TEST_minus_originalFIT_mse": 0.0005545458920595864,
+        "expanded_TEST_minus_originalFIT_mse": -6.744144329220991e-05
+      },
+      "source_hashes": {
+        "examples/e22_routed_latent_coverage.py": "d95c8cb007c46d0c5c7ec5b7fb91cb3789ba4adaba57299e48460d52c6fe6105",
+        "examples/render_e22_routed_latent_coverage.py": "717173aff64751025a3324e80d184b59b5925ad8e9dad84c55581d647020ea35",
+        "examples/e22_routed_caption_accuracy.py": "bae0f255d890e49bfbe4602bee7f8e84051b24a3cb0219c13b0a42b25768b8e3"
+      },
+      "native_python_sha256": "7b814e32627ac5a332637d336ebaa13b6baab0b9373f6841d9a22fb8ab39cde9",
+      "native_file_count": 30,
+      "current_native_file_drift": [],
+      "source_pins_checked": true,
+      "native_complete_set_checked": true,
+      "actual_training_traces": {
+        "two_seed": {
+          "full_updates": 1024,
+          "bank_live": 1023,
+          "query_live": 1023,
+          "matched_stream_sha256": "3fcbaf647c43c2b053b4e1fd16b13a051efda6e61ff713622bd4b3a6c9f9bdaf",
+          "proposal_events": 10,
+          "accepted_proposals": 0
+        },
+        "eight_seed": {
+          "full_updates": 1024,
+          "bank_live": 1023,
+          "query_live": 1023,
+          "matched_stream_sha256": "3fcbaf647c43c2b053b4e1fd16b13a051efda6e61ff713622bd4b3a6c9f9bdaf",
+          "proposal_events": 10,
+          "accepted_proposals": 0
+        }
+      },
+      "original_raw_artifacts": {
+        "observed-training.pt": {
+          "path": "/ml2/hypergan/ParticleGAN-routed-latent-coverage-fresh-owner-develop/runs/latent-coverage-science-v2/observed-training.pt",
+          "exists": true,
+          "expected": "4da8f30dc1c9aad5cdfe574e0d7c7c11c12ed87e92844842e34c332bced4e61f",
+          "actual": "4da8f30dc1c9aad5cdfe574e0d7c7c11c12ed87e92844842e34c332bced4e61f",
+          "matched": true,
+          "bytes": 5354464
+        },
+        "report.json": {
+          "path": "/ml2/hypergan/ParticleGAN-routed-latent-coverage-fresh-owner-develop/runs/latent-coverage-science-v2/report.json",
+          "exists": true,
+          "expected": "b3e926090f7eef219bbcba015dc819b57ef30d21d6b86505f35dc15b9b8317b7",
+          "actual": "b3e926090f7eef219bbcba015dc819b57ef30d21d6b86505f35dc15b9b8317b7",
+          "matched": true,
+          "bytes": 26351
+        },
+        "completion.json": {
+          "path": "/ml2/hypergan/ParticleGAN-routed-latent-coverage-fresh-owner-develop/runs/latent-coverage-science-v2/completion.json",
+          "exists": true,
+          "expected": "b8c782286b5b106bcec6f054c1eb0ec385cc2d67a2fc84186969e83db549eee7",
+          "actual": "b8c782286b5b106bcec6f054c1eb0ec385cc2d67a2fc84186969e83db549eee7",
+          "matched": true,
+          "bytes": 4244
+        },
+        "two_seed-checkpoint-1024.pt": {
+          "path": "/ml2/hypergan/ParticleGAN-routed-latent-coverage-fresh-owner-develop/runs/latent-coverage-science-v2/two_seed-checkpoint-1024.pt",
+          "exists": true,
+          "expected": "756613e2dda7cafcc455233cac90debc0d49777f7d31b0c6ec9ce124e4dcaba7",
+          "actual": "756613e2dda7cafcc455233cac90debc0d49777f7d31b0c6ec9ce124e4dcaba7",
+          "matched": true,
+          "bytes": 554540
+        },
+        "eight_seed-checkpoint-1024.pt": {
+          "path": "/ml2/hypergan/ParticleGAN-routed-latent-coverage-fresh-owner-develop/runs/latent-coverage-science-v2/eight_seed-checkpoint-1024.pt",
+          "exists": true,
+          "expected": "3d92879395dc5c311acc18362d32da814a7c58568a38f2d55418613cdf2af09e",
+          "actual": "3d92879395dc5c311acc18362d32da814a7c58568a38f2d55418613cdf2af09e",
+          "matched": true,
+          "bytes": 547329
+        },
+        "two_seed.jsonl": {
+          "path": "/ml2/hypergan/ParticleGAN-routed-latent-coverage-fresh-owner-develop/runs/latent-coverage-science-v2/two_seed.jsonl",
+          "exists": true,
+          "expected": "e90b6042705623479e51b731bd5934ce6e9aac19d1282b0a45ec82e20b3e9622",
+          "actual": "e90b6042705623479e51b731bd5934ce6e9aac19d1282b0a45ec82e20b3e9622",
+          "matched": true,
+          "bytes": 911314
+        },
+        "eight_seed.jsonl": {
+          "path": "/ml2/hypergan/ParticleGAN-routed-latent-coverage-fresh-owner-develop/runs/latent-coverage-science-v2/eight_seed.jsonl",
+          "exists": true,
+          "expected": "8fba30c81c986de58c7c047e36ff377600a1bd789fe12409a391efb04dbcf0da",
+          "actual": "8fba30c81c986de58c7c047e36ff377600a1bd789fe12409a391efb04dbcf0da",
+          "matched": true,
+          "bytes": 912770
+        }
+      },
+      "raw_artifact_hashes_rechecked_after_review": true,
+      "original_external_source_manifest": {
+        "path": "/tmp/latent-coverage-software-trials-v2-preparation/native-gpu300-manifest.json",
+        "sha256": "9c3ef51f464344953ea5e194198fe044e3df31e8633a12dd1e26fdf345a4b19a",
+        "files": 44,
+        "all_current_hashes_verified": true,
+        "all_original_before_and_after_attestations_pass": true
+      },
+      "media": {
+        "gif_path": "docs/e22_routed_latent_coverage/media-v2/goal.gif",
+        "expected": "df68d18e7e8149faf2fe3732d6a9407865ed0c599245ddfbece3499ba71bc631",
+        "actual": "df68d18e7e8149faf2fe3732d6a9407865ed0c599245ddfbece3499ba71bc631",
+        "matched": true,
+        "bytes": 358653,
+        "frames": 6,
+        "size": [
+          1170,
+          1120
+        ],
+        "actual_steps": [
+          0,
+          128,
+          256,
+          512,
+          800,
+          1024
+        ],
+        "camera": "Six fixed TEST seed39001 neutral-path time0 queries; complete240-row test determines gates.",
+        "first_and_final_frame_visual_review": "readable target/outputs/fixed color scale and scientific PASS footer",
+        "actual_quality_points_only": true,
+        "model_or_image_interpolation": false,
+        "receipt_path": "docs/e22_routed_latent_coverage/media-v2/media-completion.json",
+        "receipt_sha256": "03afa31eaa0b3ce18646b5e95d258f6b728fe99ed9359a007aec0705c2f79af0",
+        "saved_review_sha256": "b0829e72d364cca432aaa13b63999041e8f00403bbff69edb170d736b55733b0",
+        "producer_state_reexecuted_by_this_review": false
+      },
+      "github_metadata": {
+        "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/pr261-metadata.json",
+        "sha256": "4f52be2b5b09b431a55c69a3405afa0f081ccfb8213b84202d92e773e773ff37",
+        "checks": [
+          {
+            "name": "CPU / Python 3.10",
+            "conclusion": "SUCCESS",
+            "completedAt": "2026-10-03T02:28:37Z",
+            "detailsUrl": "https://github.com/255BITS/ParticleGAN/actions/runs/37089826514/job/111107589138"
+          },
+          {
+            "name": "CPU / Python 3.11",
+            "conclusion": "SUCCESS",
+            "completedAt": "2026-10-03T02:28:46Z",
+            "detailsUrl": "https://github.com/255BITS/ParticleGAN/actions/runs/37089826514/job/111107589369"
+          },
+          {
+            "name": "CPU / Python 3.12",
+            "conclusion": "SUCCESS",
+            "completedAt": "2026-10-03T02:41:29Z",
+            "detailsUrl": "https://github.com/255BITS/ParticleGAN/actions/runs/37089826514/job/111107589287"
+          },
+          {
+            "name": "Build release distributions",
+            "conclusion": "SUCCESS",
+            "completedAt": "2026-10-03T02:42:05Z",
+            "detailsUrl": "https://github.com/255BITS/ParticleGAN/actions/runs/37089826514/job/111110142326"
+          }
+        ],
+        "formal_draft_flag_in_snapshot": null,
+        "body_explicitly_says_draft": true,
+        "ongoing_activity": "Actual Supra transfer is being tested according to the captured PR body.",
+        "CI_scope": "Generic public API/kernel/workflow tests and packaging; no new PR261 test file or automatic execution of this specific CPU prerequisite."
+      },
+      "fresh_execution_by_review": {
+        "training_updates": 0,
+        "model_forwards": 0,
+        "sampler_calls": 0,
+        "CUDA_initialized": false,
+        "pure_retained_array_arithmetic": true
+      },
+      "qualification": {
+        "bounded_generated_toy": true,
+        "actual_Supra": false,
+        "Forge_cells": false,
+        "family_search_hold": false,
+        "default_adoption": false,
+        "speed_ranking": false
+      },
+      "disposition": "RETAIN_DISTINCT_POSITIVE_BOUNDED_TOY; HOLD_REMOTE_ACTION_FOR_AUTHOR_READY_STATE_AND_REFRESHED_EXACT_HEAD_CHECKS",
+      "limitations": [
+        "Five relative fixed comparisons, not an absolute calibrated convergence tolerance or five post-acquisition hold checks.",
+        "Two held-out seeds within one generated carrier; no population robustness or actual Supra improvement established.",
+        "Native owner/gradient/moment/recovery claims remain authenticated producer evidence; this review checked hashes, raw trace consistency and saved arithmetic without rebuilding models.",
+        "Preregistered 0.1% relative threshold is preserved; the actual observed terminal gain is 23.09%.",
+        "Protocol binds package/caller bytes and arithmetic backend flags but does not record a complete Python/Torch/device runtime identity; timing is only this observed execution.",
+        "Current package/caller source compatibility and cached green CI do not resolve the explicit author draft/work-in-progress status."
+      ],
+      "recommended_software_controls_before_routine_automation": [
+        "Self-contained shallow-checkout tests for missing endpoint/arm, nonfinite cloud, harmful signed code and critic effects, and complete scientific status versus software-only status.",
+        "Keep the original CPU60 recovery prerequisite separate from scientific acceptance; do not repeat the already concluded GPU cohort for this review."
+      ]
+    }
+  ],
+  "retained_comparisons": [
+    {
+      "pr": 246,
+      "url": "https://github.com/255BITS/ParticleGAN/pull/246",
+      "head": "b35dee597943c95499ca4a94d3cd141bd19f8fda",
+      "quality": {
+        "score": 4,
+        "scale": 5,
+        "scope": "bounded diagnostic usefulness; separate from learned convergence and original frozen ratings"
+      },
+      "original_scientific_status": "VALID_NEGATIVE_FIXED_GATE_FAIL",
+      "question": "Does G64 versus G16 with D16 fixed improve deterministic observed remote-marker reconstruction by10% at100/200 and beat the marker-blind reference at200?",
+      "prior_report": "reports/forge/family-winner-round1/open-toy-pr-review.json",
+      "prior_record_reaudited_or_regraded": false,
+      "why_distinct_from_261": "Observed remote-marker information/width and midpoint/contrast fidelity; training latent support size is not its intervention.",
+      "why_keep": "A source-bound numerical failure answers a useful question and does not prove representational impossibility or qualify shipping.",
+      "Forge_qualification_credit": false,
+      "default_adoption": false,
+      "source_hashes": {
+        "published_driver": {
+          "git_commit": "b35dee597943c95499ca4a94d3cd141bd19f8fda",
+          "path": "examples/routed_remote_conditioning.py",
+          "sha256": "4db96c11b15176eafea404fa6f27cc3b1eca98852c46fb10a4c8bef2e8abca2d"
+        },
+        "published_protocol": {
+          "git_commit": "b35dee597943c95499ca4a94d3cd141bd19f8fda",
+          "path": "examples/routed_remote_conditioning_protocol.json",
+          "sha256": "ccc7c3477cf7edc6a417044e321f583b9ddb989f86a4e1d9db27e38ef6da4c6c"
+        },
+        "original_executed_driver": {
+          "git_commit": "b35dee597943c95499ca4a94d3cd141bd19f8fda",
+          "path": "docs/routed_remote_conditioning_20261002_archive/scientific_driver.py.txt",
+          "sha256": "6b0b65d39e4cf5bc9588ae8de4632e9c0ede784d41884560509197d7a89f1c34"
+        },
+        "original_executed_protocol": {
+          "git_commit": "b35dee597943c95499ca4a94d3cd141bd19f8fda",
+          "path": "docs/routed_remote_conditioning_20261002_archive/scientific_protocol.json",
+          "sha256": "b1cd007e46f8c616bbfad8a56dfee5a0da4d33fe0a126802045b68095f504ed5"
+        },
+        "public_card": {
+          "git_commit": "b35dee597943c95499ca4a94d3cd141bd19f8fda",
+          "path": "docs/routed_remote_conditioning_results_20261002.json",
+          "sha256": "c0e70b1b9b47866b49ea487e97460de42301d1bce1b82f4c45bc9c80e21b0996"
+        },
+        "original_raw_result_sha256": "5d7cfc667692d6c9fc32a654b51560405aeae37700a4d24f5177d7f2562cd45d",
+        "published_source_manifest_entry_count": 40,
+        "published_source_manifest_location": "source_hashes in the exact published_protocol above"
+      },
+      "primary_math": {
+        "primary_sampling": "live routed_generate(context,sigma=0,perturb=False); deterministic teacher targets use the same clean call",
+        "input_information": "Fully observed content,time and paired remote marker; no hidden nuisance.",
+        "analytic_clean_representation_witness": {
+          "status": "ANALYTIC_EXISTENCE_ONLY",
+          "construction": "Match teacher raw generator, same-shape encoder/router/table parameters in the student topology; identical FrozenHost and frozen fit target normalization then give zero clean prediction error.",
+          "actual_sampler_capture_performed_for_this_review": false,
+          "proves_fixed_200_update_optimizer_reachability": false,
+          "proves_native_noisy_sampler_capacity": false
+        },
+        "primary_bound_proven_impossible": false,
+        "irreducible_noise_floor_in_primary_score_established": false,
+        "native_noise_scope": "DV12 perturbations and shared Gaussian output-error noise affect training, not the primary clean evaluation.",
+        "paired_identity": "MSE(p_plus,p_minus;y_plus,y_minus)=mean((predicted_midpoint-target_midpoint)^2)+mean((predicted_halfcontrast-target_halfcontrast)^2)",
+        "codeblind_bound": "A marker-blind predictor has identical paired patch outputs and halfcontrast0; its optimal total error is V=mean(target_halfcontrast^2), attained by the target midpoint among unrestricted marker-blind functions.",
+        "marker_pixels": [
+          0,
+          1
+        ],
+        "held_patch_first_coordinate": 12,
+        "direct_g_radius": 4,
+        "held_direct_local_support_first_coordinate": 8,
+        "V": 0.0005061657866463065,
+        "original_total_mse_upper_bound": 0.00025308289332315326,
+        "original_total_rmse_upper_bound": 0.01590857923647342,
+        "bound_scope": "Restricted marker-blind reference, not irreducible error for complete observed inputs. Total<=.5V entails conditional fidelity but can fail from midpoint error despite perfect contrast.",
+        "ten_percent_gate_boundary": "Original direct inequalities accept zero-versus-zero baseline without a percentage-gain interpretation; actual baseline errors are positive.",
+        "future_variant": "Preregister separate contrast and midpoint fidelity; preserve batch comparison as unequal compute; any noisy-serving claim needs its own target/sampler witness and calibration."
+      },
+      "separate_contrast": {
+        "authority": "Already executed after the original campaign; does not replace or rescue original gates.",
+        "available_steps": [
+          200
+        ],
+        "predictor_forwards": 9,
+        "native_updates": 0,
+        "optimizer_steps": 0,
+        "new_execution_in_this_review": false,
+        "contrast_criterion": "conditional_error<=.5V",
+        "ratio_identity": "conditional_error/V=target_contrast_power/V-2*alpha+predicted_contrast_power/V",
+        "recorded_status": "failed",
+        "metrics": {
+          "G16": {
+            "pair_MSE": 1.5986967302194772,
+            "midpoint_loss": 1.5981903897461365,
+            "conditional_error": 0.0005063404733407389,
+            "conditional_error_over_V": 1.000345117546545,
+            "alpha": 0.00030064236355146454,
+            "predicted_contrast_power_over_V": 0.000946466857368776,
+            "target_contrast_power_over_V": 0.9999999354162792,
+            "decomposition_identity_error": 1.0625181290357943e-17,
+            "marker_learned": false,
+            "prediction_sha256": "5dc434f10ad2292119168df5173329ffe295da86926763d76cdfa36455ad267a",
+            "public_native_and_caller_replay_exact": true
+          },
+          "G64": {
+            "pair_MSE": 1.5947275253341386,
+            "midpoint_loss": 1.5942232442037811,
+            "conditional_error": 0.0005042811303575079,
+            "conditional_error_over_V": 0.9962766027682634,
+            "alpha": 0.004269536803996634,
+            "predicted_contrast_power_over_V": 0.004815740959977524,
+            "target_contrast_power_over_V": 0.9999999354162792,
+            "decomposition_identity_error": 9.974659986866641e-18,
+            "marker_learned": false,
+            "prediction_sha256": "d5cd0cdb5af472ed73389f80f1a5bd81ab0940624ed9c1c72c7b05716c632e07",
+            "public_native_and_caller_replay_exact": true
+          }
+        },
+        "source_sha256": "a71651547c3968145a92c73d9b65c133774633840aecaee3741e38becc40c610",
+        "original_result_sha256": "b04ad4f8e44ddb193a2131211b6458b0d2a335f889abe45b325424a71919b558",
+        "interpretation": "Both contrast ratios remain near1 and fail the separate bound; midpoint dominates total MSE. This is endpoint contrast recovery, not a native/real-task failure mechanism."
+      },
+      "media_followup": {
+        "pr": 254,
+        "url": "https://github.com/255BITS/ParticleGAN/pull/254",
+        "tip": "491756abc88d04ae3afe40893c5a7d6d819b5035",
+        "exporter_commit": "7afd6e3ca021f5b3cf69daf28513986cf6092ef8",
+        "exporter_files_sha256": {
+          "benchmarks/toy_audit/remote_conditioning_media.py": "3474fd610e6fe218f54c8df7943d7cb124736d9f2792dcc9983067a1519f5a8b",
+          "benchmarks/toy_audit/recent_toy_media.py": "71fb5ea6a15f40f87d0d586394b1ae80326517ac0362bc2172926095fc732a98"
+        },
+        "file_change_count": 6,
+        "caller_package_gates_and_original_scientific_results_changed": false,
+        "focused_controls_passed": 26,
+        "focused_seconds": 2.23,
+        "recorded_identity_guard": "Exact reference packageSHA, guard string, source filecount, and40hex checkoutSHA; byte-equivalent publication checkout may differ.",
+        "receipt": {
+          "git_commit": "491756abc88d04ae3afe40893c5a7d6d819b5035",
+          "path": "reports/toy_audit/api_contract/pr246/receipt.json",
+          "sha256": "09abab990ed4ff70396c42260c89b8e3eeb8746adb9294bb722c5772f1689ade"
+        },
+        "media_checks": {
+          "git_commit": "491756abc88d04ae3afe40893c5a7d6d819b5035",
+          "path": "reports/toy_audit/api_contract/pr246/media-checks.json",
+          "sha256": "d25c0e8afe217987d7023db31b1e33d6929e0972664e345c1daf9ce471b869cf"
+        },
+        "gif": {
+          "git_commit": "491756abc88d04ae3afe40893c5a7d6d819b5035",
+          "path": "reports/toy_audit/api_contract/pr246/goal.gif",
+          "sha256": "06280ca31807fab3ef3e78f45635b9c0f0463c0e4bbf1958519c56d487887f2e"
+        },
+        "actual_metric_steps": [
+          0,
+          100,
+          200
+        ],
+        "frames": 3,
+        "bytes": 210467,
+        "consumed_files_hash_verified": 9,
+        "exporter_and_dependency_commit_bytes_verified": true,
+        "committed_gif_copy_matches_verified_export": true,
+        "visual_readability_checked": true,
+        "model_image_arrays_retained": false,
+        "earlier_contrast_unknown": true,
+        "contrast_available_steps": [
+          200
+        ],
+        "original_public_vs_review_time_only_attestations_separate": true,
+        "export_activity": {
+          "model_forwards": 0,
+          "training_updates": 0,
+          "new_draws": 0,
+          "model_metric_rescoring": false
+        },
+        "scientific_status_unchanged": "FAIL",
+        "original_failed_metric_check_count": 4
+      }
+    },
+    {
+      "pr": 253,
+      "url": "https://github.com/255BITS/ParticleGAN/pull/253",
+      "head": "a31ce8c1ddac831ae032ecaf4b43d84919cd6173",
+      "quality": {
+        "score": 4,
+        "scale": 5,
+        "scope": "bounded diagnostic usefulness; separate from learned convergence and original frozen ratings"
+      },
+      "original_scientific_status": "FAIL",
+      "question": "In constructed frozen[W,-W] terminal cancellation, are routed edits beneficial under BF16/FP32 arithmetic, and what does the last native update show about precision?",
+      "prior_report": "reports/forge/family-winner-round1/open-toy-pr-review.json",
+      "prior_record_reaudited_or_regraded": false,
+      "why_distinct_from_261": "Constructed terminal cancellation and BF16/FP32 arithmetic; training latent support size is not its intervention.",
+      "why_keep": "A source-bound numerical failure answers a useful question and does not prove representational impossibility or qualify shipping.",
+      "Forge_qualification_credit": false,
+      "default_adoption": false,
+      "source_hashes": {
+        "examples/e22_routed_terminal_cancellation.py": "999f8e984ce17b821d3330d313eddde183e5ab313df69fa0360c28f144cdf5e5",
+        "examples/e22_routed_caption_accuracy.py": "bae0f255d890e49bfbe4602bee7f8e84051b24a3cb0219c13b0a42b25768b8e3",
+        "examples/e22_routed_caption_untied.py": "a35938f51b7974677651d2c05b1aa396896255460e213cf26ccf57409efcdb81",
+        "examples/e22_routed_caption_flow.py": "f868c7cb36db670fc1f08aebeb54e6d863837f8d56e685373e5873b2b4a08e3c",
+        "examples/e22_routed_caption_normalization.py": "7077a03143a8d25577bfb2ed1f167d847e75972131093f9228ca10f6aaca9a0e",
+        "examples/render_e22_routed_caption_untied.py": "18e9c55143e551a2ef961128198ae331f3ea2e3992eb6b1be73bdda333dea77b"
+      },
+      "source_card": {
+        "git_commit": "a31ce8c1ddac831ae032ecaf4b43d84919cd6173",
+        "path": "docs/e22_routed_terminal_cancellation_v1.json",
+        "sha256": "b94c0129d9cf490f1c32317ea44f9076b730395e47fdc455efb0179ee24d0e01"
+      },
+      "media": {
+        "gif": {
+          "git_commit": "a31ce8c1ddac831ae032ecaf4b43d84919cd6173",
+          "path": "docs/media/e22_routed_terminal_cancellation/goal.gif",
+          "sha256": "f6209413dda1c26bc961753eb90b05f7a72355593a551abcb084185088ec615e"
+        },
+        "final_png": {
+          "git_commit": "a31ce8c1ddac831ae032ecaf4b43d84919cd6173",
+          "path": "docs/media/e22_routed_terminal_cancellation/goal-final.png",
+          "sha256": "903e1bee35e9fb8ab9a150877cd3df9c22578bd3410483fe8a4fcd8761210db7"
+        },
+        "receipt": {
+          "git_commit": "a31ce8c1ddac831ae032ecaf4b43d84919cd6173",
+          "path": "docs/media/e22_routed_terminal_cancellation/media-completion.json",
+          "sha256": "00628bdb2cf058222c23564c3fd6db405a7eba09bb04d0f1bfebadd9ce59c0c7"
+        },
+        "actual_steps": [
+          0,
+          64,
+          128,
+          256,
+          384,
+          512
+        ],
+        "frames": 6,
+        "bound_original_report_completion_and_media_inputs_hash_verified": 3,
+        "gif_and_final_png_hashes_verified": true,
+        "terminal_failure_readable": true
+      },
+      "separate_precision_diagnostic": {
+        "scope": "local final native update, same Parameters/delta; not a convergence criterion",
+        "status": "PASS",
+        "ratios": {
+          "Q": 0.019547671067292025,
+          "discrepancy": 0.3595713809779189
+        },
+        "both_ratios_upper_bound": 0.75,
+        "parameter_slopes": {
+          "BF16": 5.124758790418722e-09,
+          "FP32": 5.171057372959217e-09
+        },
+        "helpful_parameter_slope_and_finite_harm": false,
+        "convergence_criterion": false,
+        "rescues_scientific_status": false
+      }
+    }
+  ],
+  "external_review_files": [
+    {
+      "path": "/tmp/toy-pr261-independent-review-20261003/binding-review.json",
+      "sha256": "7eb2b26d819c2b1ed63409e4392f45680b882106e8e4ccab4fbb439cba3442bd"
+    },
+    {
+      "path": "/tmp/toy-pr261-independent-review-20261003/numeric-review.json",
+      "sha256": "ad7c99fe1dd0cae4a35ff566f505352622f0224290e5967f705c1c6b45a2b13a"
+    }
+  ],
+  "local_remote_actions_performed": false
+}

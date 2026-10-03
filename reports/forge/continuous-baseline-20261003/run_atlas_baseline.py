@@ -433,13 +433,21 @@ def render_metric_gif(packet,row,target):
     requirements=[x for x in requirements if x[0] in data[-1] and isinstance(x[2],(float,int))][:6]
     if not requirements:raise ValueError('no original metric available for illustrative GIF')
     indices=np.unique(np.linspace(0,len(data)-1,min(9,len(data)),dtype=int)).tolist();frames=[]
+    missing={name:[step for step,r in zip(steps,data) if r.get(name) is None]
+             for name,_,_ in requirements}
     for index in indices:
         fig,axes=plt.subplots(len(requirements),1,figsize=(8,2.1*len(requirements)+1.3),squeeze=False)
         for ax,(name,op,bound) in zip(axes[:,0],requirements):
             values=[r.get(name) for r in data]
-            if any(type(v) not in (int,float) or not math.isfinite(v) for v in values):raise ValueError('nonfinite retained plot metric')
-            ax.plot(steps[:index+1],values[:index+1],color='#d44a6b');ax.axhline(bound,color='#577588',linestyle='--',label=f'{name} {op} {bound:g}')
-            ax.set_xlim(0,definition['original_host']['steps']);lo=min(min(values),bound);hi=max(max(values),bound);pad=max((hi-lo)*.15,.01)
+            # Original native accuracy records legitimately use None before
+            # those diagnostics are available. Preserve gaps visibly; absence
+            # earns no numerical pass and is never replaced with zero.
+            if any(v is not None and (type(v) not in (int,float) or not math.isfinite(v)) for v in values):raise ValueError('nonfinite retained plot metric')
+            numeric=[v for v in values if v is not None]
+            ax.plot(steps[:index+1],values[:index+1],color='#d44a6b',marker='.',markersize=3);ax.axhline(bound,color='#577588',linestyle='--',label=f'{name} {op} {bound:g}')
+            if values[index] is None:
+                ax.text(.98,.82,'Not available at this check',transform=ax.transAxes,ha='right',fontsize=8)
+            ax.set_xlim(0,definition['original_host']['steps']);lo=min(numeric+[bound]);hi=max(numeric+[bound]);pad=max((hi-lo)*.15,.01)
             ax.set_ylim(lo-pad,hi+pad);ax.set_ylabel(name);ax.legend(loc='best',fontsize=8)
         axes[-1,0].set_xlabel('Actual completed updates')
         fig.suptitle(f'Atlas original19: {row["group"]}/{row["task"]}\nActual metric traces only; generated-image frames were not retained',fontsize=11)
@@ -449,7 +457,11 @@ def render_metric_gif(packet,row,target):
     destination=target/'goal-metrics.gif';frames[0].save(destination,save_all=True,append_images=frames[1:],duration=700,loop=0)
     with Image.open(destination) as gif:count=gif.n_frames
     result={'path':str(destination),'sha256':sha(destination),'bytes':destination.stat().st_size,'frames':count,
-            'actual_steps':[steps[i] for i in indices],'metric_only':True,'new_draws':False,'training_updates':0}
+            'actual_steps':[steps[i] for i in indices],'metric_only':True,'new_draws':False,'training_updates':0,
+            'unavailable_observations':{k:v for k,v in missing.items() if v},
+            'renderer_source':{'path':RELATIVE_SELF,'sha256':sha(__file__),
+                               'scope':'offline visualization only; frozen scientific child and gates unchanged',
+                               'scientific_source_digest':packet['source'].get('execution_digest')}}
     atomic_json(target/'media-receipt.json',result)
     return result
 
