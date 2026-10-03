@@ -558,8 +558,13 @@ location; unavailable local artifacts remain evidence gaps.
 `calibrate` replays saved evidence without training. Follow the
 [current-cohort protocol](reports/forge/CURRENT_CALIBRATION_PROTOCOL.md) to freeze
 the controls, independent reference, task identities, cost criteria and prior.
+Check the [read-only feasibility preflight](docs/forge-calibration-preflight.md)
+before selecting paid diagnostics. New calibration-lane registrations reject
+mathematically infeasible profiles and unresolved original receipt issues;
+logical feasibility alone supplies no adoption or qualification credit.
 
 ```sh
+python -m experiments.forge calibration-preflight --profile <current-profile> --require-feasible
 python -m experiments.forge calibrate --profile initial
 python -m experiments.forge calibration-lane register --contract path/to/diagnostic-contract.json
 python -m experiments.forge calibration-lane plan <registration-id>
