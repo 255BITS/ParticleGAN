@@ -765,6 +765,20 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
             candidates[row["candidate_id"]] = max(times)
         if not candidates:
             raise ValueError("source regrade selected no measured technique rows; restore its recorded runtime/hardware")
+        # Freeze declared blockers on the explicitly selected backend alongside
+        # measured rows. A null completion time records no execution or gate
+        # credit; it prevents cached regeneration from inventing CPU shadows or
+        # resolving those same blockers against later source changes.
+        if execution_backend is not None:
+            unmeasured = {}
+            for row in report["rows"]:
+                if row["candidate_id"] in candidates or row.get("attempt_ids") or row.get("status") != "BLOCKED":
+                    continue
+                unmeasured.setdefault(row["candidate_id"], []).append(row)
+            for name, rows in unmeasured.items():
+                if len(rows) != 1 or rows[0].get("runtime_cohort", {}).get("execution_backend") != execution_backend:
+                    raise ValueError("select one runtime cohort; blocked current rows cannot pool runtimes")
+                candidates[name] = None
         if advancing:
             if (report.get("view") != policy["id"] or report.get("view_revision") != policy["revision"]
                     or report.get("policy_fingerprint") != stable_hash(policy)):
@@ -795,7 +809,8 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
         # on other runtimes. Those cannot overwrite a measured registration
         # of the same candidate just because they appear later in the roster.
         selected = {row["candidate_id"]: row for row in report["rows"]
-                    if row["candidate_id"] in candidates and row.get("attempt_ids")}
+                    if row["candidate_id"] in candidates and
+                    (bool(row.get("attempt_ids")) if isinstance(candidates[row["candidate_id"]], str) else True)}
         for row in selected.values():
             _validate_published_row(root, report, row)
         if not any(old == entry for old, _, _ in reports):

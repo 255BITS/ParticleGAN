@@ -420,15 +420,24 @@ scientific ranking or default adoption.
 # Read-only cost/coverage plan, then explicit gated execution.
 python -m experiments.forge inventory plan --through-tier 3
 python -m experiments.forge inventory run --through-tier 3 --gpus 0,1
-# Regenerate the current publication under its recorded revision-2 policy.
-python reports/forge/regenerate_technique_inventory.py \
-  --recorded-policy configs/forge/view-history/discriminator_stability-v2.json
+# Regenerate the single current publication from registered compact evidence.
+python reports/forge/regenerate_technique_inventory.py
 python -m experiments.forge logs --follow --campaign technique-inventory-v1
 ```
 
-Recorded-policy regeneration preserves existing evidence and cannot be combined
-with `--source-commit`. New results for revision 3 need a compatible evidence
-registration; historical revision-2 results cannot fill its new requirements.
+The [expanded Tier 1 readout](reports/forge/tier1-refresh/README.md) evaluates
+all 15 existing ideas and 32 saved configurations under revision 3, then refreshes
+whole-configuration selections. Its frozen roster, five finite studies and
+shared campaign preserve the exact configuration recipes. `inventory` alone
+includes only ideas; use the readout's reproduction wrapper to include saved
+configurations through their registered studies. Failed prerequisites stop the
+remaining work, including later tasks within Tier 1.
+
+To advance a published view policy, register its measured source explicitly with
+`--advance-policy --source-commit EXECUTED_COMMIT`. Earlier numerical cohorts
+and their original denominators are archived unchanged; their results cannot
+fill new requirements. `--recorded-policy` only regenerates evidence for the
+manifest's exact policy and cannot be combined with new-source registration.
 
 The original default inventory campaign has explicit reservation ceilings for
 its 12-technique roster. New techniques require checking the expanded plan and
@@ -437,14 +446,11 @@ its own one-candidate campaign; it does not rerun unchanged techniques. Ordinary
 failures stop later tasks, including remaining tasks in that tier; unsupported
 techniques reserve no training resources. Required denominators are 5/19/2
 for the current `discriminator_stability` view, including unknown and blocked
-cells. The published inventory retains its recorded revision-2 3/19/2 cohorts
-until compatible evidence exists for a new publication; its historical results
-are not regraded against the new view. A zero passes/total cell alone does not
-establish a scientific failure.
-The archived policy above must match the publication's recorded task/view
-manifest. It preserves those results while the current revision-3 board keeps
-unmeasured acquisition tasks unknown. New revision-3 evidence uses its own
-current policy and updates the same published leaderboard.
+cells. The current publication uses revision 3; earlier revision-2 3/19/2 cohorts
+retain their original outcomes in its companion JSON and immutable snapshots.
+A zero passes/total cell alone does not establish a scientific failure.
+Unreached acquisition tasks remain unknown. New compatible evidence updates
+the same published leaderboard.
 Archived and calibration results appear separately and cannot fill current
 qualification cells. Provisional screening still confers no default adoption.
 `techniques` also renders a read-only local board or JSON. The publication wrapper
@@ -453,7 +459,7 @@ into Git. Full new execution envelopes remain ignored and archived unchanged;
 summary projections are never qualification inputs. A checkout can regenerate
 the same current leaderboard from committed evidence without raw-log hydration.
 For an independent regrade, hydrate exact originals using the
-[archive manifest and restoration instructions](reports/forge/TECHNIQUE_INVENTORY_READOUT.md).
+[current archive receipt and restoration instructions](reports/forge/tier1-refresh/README.md).
 `--source-commit <executed-commit>` reconstructs and verifies the recorded
 implementation, registers its measured evidence and updates the same leaderboard;
 its results do not qualify a newer checkout. The raw `techniques --output` export

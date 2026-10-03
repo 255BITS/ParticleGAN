@@ -238,6 +238,8 @@ def _later_policy_evidence(root, manifest, monkeypatch, *, revision=3):
                                      "1": ["two_pole", "token", "ae", "ring", "word"]}, "cohorts": []}
     _, report = _register(root, current, "bcap", "c", finished="2026-10-03T01:00:00+00:00")
     _, unknown = _register(root, deepcopy(current), "atlas", "d")
+    unknown["rows"][0]["status"] = "BLOCKED"
+    unknown["rows"][0]["tasks"][0]["status"] = "BLOCKED"
     report["rows"].extend(unknown["rows"])
     report["provenance"].pop("input_digest")
     report["provenance"]["input_digest"] = stable_hash(report)
@@ -257,19 +259,29 @@ def test_explicit_policy_advance_preserves_original_cohorts_without_new_credit(e
     baseline = read_json(publication.publish_current(root)["json"])
     protected = {entry["snapshot"]: (root / entry["snapshot"]).read_bytes() for entry in manifest["cohorts"]}
     _later_policy_evidence(root, manifest, monkeypatch)
-    publication.main(["--root", str(root), "--source-commit", "commit-c", "--advance-policy"])
+    publication.main(["--root", str(root), "--source-commit", "commit-c", "--device", "cuda", "--advance-policy"])
     assert '"rows":2' in capsys.readouterr().out
     updated = read_json(root / publication.EVIDENCE_MANIFEST)
     assert updated["view_revision"] == 3
     assert len(updated["cohorts"]) == 1 and len(updated["archived_policies"]) == 1
+    assert updated["cohorts"][0]["candidates"] == {
+        "bcap": "2026-10-03T01:00:00+00:00", "atlas": None}
     archive = updated["archived_policies"][0]
     assert archive == {key: deepcopy(manifest[key]) for key in (*publication.POLICY_FIELDS, "cohorts")}
+    def unexpected(*args, **kwargs):
+        pytest.fail("frozen blockers must not resolve against live source")
+    monkeypatch.setattr(publication, "write_report", unexpected)
     result = publication.publish_current(root)
     current = read_json(result["json"])
     bcap = next(row for row in current["rows"] if row["candidate_id"] == "bcap")
     assert bcap["candidate_revision"] == "revision-c"
     assert bcap["tiers"]["1"] == {"passed": 0, "total": 5}
     assert bcap["qualified_tier"] == 0
+    atlas = next(row for row in current["rows"] if row["candidate_id"] == "atlas")
+    assert atlas["attempt_ids"] == [] and atlas["cost"]["wall_seconds"] is None
+    assert atlas["status"] == "BLOCKED" and atlas["candidate_revision"] == "revision-d"
+    assert atlas["runtime_cohort"]["execution_backend"] == "cuda"
+    assert len(current["configuration_rows"]) == 2
     assert all(row["candidate_revision"] != "revision-a" for row in current["configuration_rows"])
     original = next(row for row in current["archived_evidence_rows"] if row["candidate_id"] == "bcap")
     assert original["evidence_policy"]["view_revision"] == 2
@@ -283,7 +295,8 @@ def test_explicit_policy_advance_preserves_original_cohorts_without_new_credit(e
     outputs = _outputs(root)
     assert publication.publish_current(root) == result
     assert _outputs(root) == outputs
-    assert publication.publish_current(root, source_commit="commit-c", advance_policy=True) == result
+    assert publication.publish_current(root, source_commit="commit-c", execution_backend="cuda", advance_policy=True)
+    assert publication.publish_current(root) == result
     assert read_json(root / publication.EVIDENCE_MANIFEST) == updated
 
 

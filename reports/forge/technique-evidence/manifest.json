@@ -1,89 +1,184 @@
 {
+  "archived_policies": [
+    {
+      "cohorts": [
+        {
+          "candidates": {
+            "atlas": null,
+            "e22": null,
+            "forge-no-critic-penalty": "2026-10-01T23:28:24.976+00:00",
+            "forge-onboarding-anchor-ablation": "2026-10-01T23:29:18.355+00:00",
+            "k3p": "2026-10-01T23:30:07.690+00:00",
+            "k3p-a2-off-native-diagnostic": "2026-10-01T23:30:56.830+00:00",
+            "k3p-bcap-matched-v1": "2026-10-01T23:36:25.006+00:00",
+            "k3p-no-output-noise-diagnostic": "2026-10-01T23:36:15.252+00:00",
+            "k3p-r1r2-matched-v1": "2026-10-01T23:36:23.039+00:00",
+            "ka2": "2026-10-01T23:36:30.561+00:00",
+            "release07-gan-v3-cloud-v1": null,
+            "release07-gan-v3-mog-v1": null
+          },
+          "json_sha256": "76a2d43aaebd7c23ef270f0c817c3501ede65c3c94c965ee408e7d0467f91ccb",
+          "snapshot": "reports/forge/technique-evidence/bb31b3f77bee0199fa51df84856dd04171fb58baca7c9328270f3e2a7c67d62d.json",
+          "source_commit": "b04b1b27296b0cba11b70eb9693fbe9200ed38a5"
+        },
+        {
+          "candidates": {
+            "r3gan-stacked-training-toy-v1": "2026-10-02T01:15:47.938+00:00"
+          },
+          "json_sha256": "19ba51024a061a0f2b216be107bfe4a1d38fe63faf4d5bfcb6255589a4b4f9c5",
+          "snapshot": "reports/forge/technique-evidence/8bfb0b738e288fbe9ca2e055539469e52c34b27adeda9901b317d44faf07ea2f.json",
+          "source_commit": "77a373648e3a7a5f1923015fa2097ec9e0ec877f"
+        },
+        {
+          "candidates": {
+            "release07-gan-v3-task-adapted-v1": "2026-10-02T03:48:19.023+00:00"
+          },
+          "json_sha256": "d527be92dd8b7258c0577dbaccc70700b80e87f058d034fca7afe03b81ad5975",
+          "snapshot": "reports/forge/technique-evidence/d091ec1f6b1db7cfad160b8dcd77f4b6dff432e88dab0c7421c59cff3da997dc.json",
+          "source_commit": "fc66d7c49259a8977cbb4478b20dad1ffcc6c1cb"
+        },
+        {
+          "candidates": {
+            "r1r2--7728cf93188b9fe122536244667789941da52d435cfb0a3ae42b90db200d7595": "2026-10-02T15:57:04.940+00:00",
+            "r1r2--abf642c42c5346ad096c29202e4716db535c393c113478552133c1c22761ddbd": "2026-10-02T16:00:16.981+00:00",
+            "r1r2--b58a087cabab6b43997ec233416294cfc2786bab59026c07a1a4f2565970f5ff": "2026-10-02T15:57:40.575+00:00",
+            "r1r2--f398f6ea70a2d101c520a1a01db90ea968bbb16736e6cec7ffc887e1dd7e241a": "2026-10-02T15:57:48.745+00:00"
+          },
+          "json_sha256": "01b60e07a43c46062dc8746e7133acd11e1155334280fdc874efd3ef0b01169f",
+          "snapshot": "reports/forge/technique-evidence/dc9517031d2121b0f6ad27cb4787207a5b914c93edadc869808c53929220c3e6.json",
+          "source_commit": "cd0ba9feba7aae79723f8581fe29eb4bd3c9050b"
+        },
+        {
+          "candidates": {
+            "bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212": "2026-10-02T18:15:08.929+00:00",
+            "bcap--0fc5834c2f114d83b8b7ace471dbc8271d0afddd8c92ba1b84d5db8325a8ecd5": "2026-10-02T18:16:50.818+00:00",
+            "bcap--46afd334b69b00edb05f5487d7e00d2c5f52d82ab2d3adaa6d7c6d9158e73604": "2026-10-02T18:16:32.916+00:00",
+            "bcap--4cb8358e1e3eefdb6744ae63e84ce724bf73a47e471a12817aaf3a14466c2dd3": "2026-10-02T18:16:44.174+00:00",
+            "bcap--66881ffa01364264272e87b084a09b8a00ce0c6d7a49904cc73d7c60238e8ce0": "2026-10-02T18:17:27.672+00:00",
+            "bcap--67963edee7209ea85f9c07ec1f1195301e0ac40a975a44ef9891c5241a4ba2bc": "2026-10-02T18:18:12.327+00:00",
+            "bcap--c5f3aebf586c1da32ddfbaad77fab841eb2c43c7da652f56e9ffe622382d803e": "2026-10-02T18:18:23.017+00:00",
+            "bcap--f65f1922d02456d3a4b7135bb3aa6483d1c76184d74608479b2634094b039383": "2026-10-02T18:18:35.418+00:00",
+            "k3p--00b69f56de29e1968b9d84f9b532afc535fa44555e235eb6c14cfc58b7baed9b": "2026-10-02T18:20:58.672+00:00",
+            "k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c": "2026-10-02T18:22:50.938+00:00",
+            "k3p--a4b78c36d9faacd837e079c3fd3b9623fc141f42737e03312053a86c560abb8a": "2026-10-02T18:24:36.404+00:00",
+            "k3p--caa08ebf04c2b95ed480dd9c23e39a8624e39ae27b2b80a9af1ac74f13a86b9f": "2026-10-02T18:26:25.287+00:00",
+            "ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f": "2026-10-02T18:29:17.854+00:00",
+            "ka2--6183426d7810463d5461ad936a42c67a38516fce8b32b23065da215fed8d145d": "2026-10-02T18:30:13.330+00:00",
+            "ka2--d02d7932342e1fa1db0a7a91537394297601e55516882d20ec033b4992bb527f": "2026-10-02T18:32:06.188+00:00",
+            "ka2--e425fc18e432bbec6c1a1e2fc0b2f8024c7ad104fd5acf8908b6cfbbb5a3da03": "2026-10-02T18:33:51.641+00:00",
+            "r1r2--083deac11d390b7895cca37396e9caf2adf5706d4ce560ae70a089e305ab3b4b": "2026-10-02T18:33:35.446+00:00",
+            "r1r2--14eeafe7d865bdc5f6886ae8db64afd22bac3fd20a82e5ddb59188ab4fa30cc6": "2026-10-02T18:33:46.892+00:00",
+            "r1r2--151d3b970d66ccb2956e2b914d518a0e5652e7164dccf000a29bbc82831b2d46": "2026-10-02T18:33:57.708+00:00",
+            "r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f": "2026-10-02T18:34:49.660+00:00",
+            "r1r2--4363c95b3f6f2739729c7a104bd080a427e3efbef1f915ce14c191009bfa3a27": "2026-10-02T18:35:30.479+00:00",
+            "r1r2--9481826257709128f1c864bac2950906d0ad940b8f75fbfa3d47317e7b26007d": "2026-10-02T18:36:10.793+00:00",
+            "r1r2--dad6fdf50034381c106102df008e26b7687b04918cab85c13721e2a2dbbbe743": "2026-10-02T18:36:19.612+00:00",
+            "r1r2--e033ba04e5b9609b896a084a182d785394869fcad19d4a15cffe86e9a973f3fe": "2026-10-02T18:36:59.851+00:00",
+            "release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c": "2026-10-02T18:38:53.996+00:00",
+            "release07-gan-v3-mog--7311bde77895ceac2d493a6b102672cab0973b6685383339a2867d80956aa11f": "2026-10-02T18:40:37.220+00:00",
+            "release07-gan-v3-mog--8bac47a479c2bb8dea2edee5378b642fbe5e6dd8c5fceab2d4e8077d6371345e": "2026-10-02T18:42:23.958+00:00",
+            "release07-gan-v3-mog--c1b747662d851c7c1ee0d8572e34c0438f28d5e0920c572b74622a25479f9e26": "2026-10-02T18:42:46.517+00:00"
+          },
+          "json_sha256": "73258a630fa7af48718fd1030c4977665c6d0f278e20e299c833601191b4710c",
+          "snapshot": "reports/forge/technique-evidence/81247a9eaefed4e7c2b6ebeec8dc29305805546582d2f98b7f138fbd8a2e1ae7.json",
+          "source_commit": "05a2b3c021155fa72471b2293c3fd6d41d1e58a0"
+        }
+      ],
+      "policy_fingerprint": "e53331361a8fd5c55096494d259ddcd95a99f3012b7bb74e5c972f9dd466531f",
+      "tier_requirements": {
+        "1": [
+          "two_pole",
+          "unused_token_hold",
+          "ae_gan_hold"
+        ],
+        "2": [
+          "trajectory",
+          "residual_student",
+          "unipolar",
+          "cover_leftover",
+          "mid_scale_identity",
+          "mode_hold",
+          "vector_two_broad",
+          "vector_unequal_mass",
+          "vector_unequal_width",
+          "vector_anisotropic",
+          "vector_overlap",
+          "vector_spiral",
+          "img_stripes2",
+          "img_bars4",
+          "img_blobs4",
+          "img_intensity2",
+          "grid100",
+          "rotated100",
+          "staggered100"
+        ],
+        "3": [
+          "ring_hold",
+          "ring_extension"
+        ]
+      },
+      "view": "discriminator_stability",
+      "view_revision": 2
+    }
+  ],
   "cohorts": [
     {
       "candidates": {
         "atlas": null,
+        "bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212": "2026-10-03T03:54:55.861+00:00",
+        "bcap--0fc5834c2f114d83b8b7ace471dbc8271d0afddd8c92ba1b84d5db8325a8ecd5": "2026-10-03T03:55:36.423+00:00",
+        "bcap--46afd334b69b00edb05f5487d7e00d2c5f52d82ab2d3adaa6d7c6d9158e73604": "2026-10-03T03:55:33.834+00:00",
+        "bcap--4cb8358e1e3eefdb6744ae63e84ce724bf73a47e471a12817aaf3a14466c2dd3": "2026-10-03T03:55:46.872+00:00",
+        "bcap--66881ffa01364264272e87b084a09b8a00ce0c6d7a49904cc73d7c60238e8ce0": "2026-10-03T03:56:41.305+00:00",
+        "bcap--67963edee7209ea85f9c07ec1f1195301e0ac40a975a44ef9891c5241a4ba2bc": "2026-10-03T03:57:24.211+00:00",
+        "bcap--c5f3aebf586c1da32ddfbaad77fab841eb2c43c7da652f56e9ffe622382d803e": "2026-10-03T03:57:21.942+00:00",
+        "bcap--f65f1922d02456d3a4b7135bb3aa6483d1c76184d74608479b2634094b039383": "2026-10-03T03:57:34.535+00:00",
         "e22": null,
-        "forge-no-critic-penalty": "2026-10-01T23:28:24.976+00:00",
-        "forge-onboarding-anchor-ablation": "2026-10-01T23:29:18.355+00:00",
-        "k3p": "2026-10-01T23:30:07.690+00:00",
-        "k3p-a2-off-native-diagnostic": "2026-10-01T23:30:56.830+00:00",
-        "k3p-bcap-matched-v1": "2026-10-01T23:36:25.006+00:00",
-        "k3p-no-output-noise-diagnostic": "2026-10-01T23:36:15.252+00:00",
-        "k3p-r1r2-matched-v1": "2026-10-01T23:36:23.039+00:00",
-        "ka2": "2026-10-01T23:36:30.561+00:00",
+        "five-word-joint-ka2-v1": "2026-10-03T04:11:38.073+00:00",
+        "forge-no-critic-penalty": "2026-10-03T04:11:49.220+00:00",
+        "forge-onboarding-anchor-ablation": "2026-10-03T04:12:00.613+00:00",
+        "k3p": "2026-10-03T04:12:11.267+00:00",
+        "k3p--00b69f56de29e1968b9d84f9b532afc535fa44555e235eb6c14cfc58b7baed9b": "2026-10-03T03:58:30.382+00:00",
+        "k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c": "2026-10-03T04:02:16.944+00:00",
+        "k3p--a4b78c36d9faacd837e079c3fd3b9623fc141f42737e03312053a86c560abb8a": "2026-10-03T04:02:32.941+00:00",
+        "k3p--caa08ebf04c2b95ed480dd9c23e39a8624e39ae27b2b80a9af1ac74f13a86b9f": "2026-10-03T04:02:49.693+00:00",
+        "k3p-a2-off-native-diagnostic": "2026-10-03T04:12:22.211+00:00",
+        "k3p-bcap-matched-v1": "2026-10-03T04:13:11.491+00:00",
+        "k3p-no-output-noise-diagnostic": "2026-10-03T04:13:10.363+00:00",
+        "k3p-r1r2-matched-v1": "2026-10-03T04:13:20.947+00:00",
+        "ka2": "2026-10-03T04:13:31.726+00:00",
+        "ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f": "2026-10-03T04:06:26.209+00:00",
+        "ka2--6183426d7810463d5461ad936a42c67a38516fce8b32b23065da215fed8d145d": "2026-10-03T04:06:40.902+00:00",
+        "ka2--d02d7932342e1fa1db0a7a91537394297601e55516882d20ec033b4992bb527f": "2026-10-03T04:06:58.680+00:00",
+        "ka2--e425fc18e432bbec6c1a1e2fc0b2f8024c7ad104fd5acf8908b6cfbbb5a3da03": "2026-10-03T04:07:14.886+00:00",
+        "r1r2--083deac11d390b7895cca37396e9caf2adf5706d4ce560ae70a089e305ab3b4b": "2026-10-03T04:03:36.480+00:00",
+        "r1r2--14eeafe7d865bdc5f6886ae8db64afd22bac3fd20a82e5ddb59188ab4fa30cc6": "2026-10-03T04:03:50.619+00:00",
+        "r1r2--151d3b970d66ccb2956e2b914d518a0e5652e7164dccf000a29bbc82831b2d46": "2026-10-03T04:04:04.209+00:00",
+        "r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f": "2026-10-03T04:07:32.180+00:00",
+        "r1r2--4363c95b3f6f2739729c7a104bd080a427e3efbef1f915ce14c191009bfa3a27": "2026-10-03T04:07:49.049+00:00",
+        "r1r2--7728cf93188b9fe122536244667789941da52d435cfb0a3ae42b90db200d7595": "2026-10-03T04:05:42.186+00:00",
+        "r1r2--9481826257709128f1c864bac2950906d0ad940b8f75fbfa3d47317e7b26007d": "2026-10-03T04:08:05.137+00:00",
+        "r1r2--abf642c42c5346ad096c29202e4716db535c393c113478552133c1c22761ddbd": "2026-10-03T04:08:21.292+00:00",
+        "r1r2--b58a087cabab6b43997ec233416294cfc2786bab59026c07a1a4f2565970f5ff": "2026-10-03T04:07:31.971+00:00",
+        "r1r2--dad6fdf50034381c106102df008e26b7687b04918cab85c13721e2a2dbbbe743": "2026-10-03T04:07:48.494+00:00",
+        "r1r2--e033ba04e5b9609b896a084a182d785394869fcad19d4a15cffe86e9a973f3fe": "2026-10-03T04:08:48.632+00:00",
+        "r1r2--f398f6ea70a2d101c520a1a01db90ea968bbb16736e6cec7ffc887e1dd7e241a": "2026-10-03T04:08:49.832+00:00",
+        "r3gan-stacked-training-toy-v1": "2026-10-03T04:13:41.942+00:00",
         "release07-gan-v3-cloud-v1": null,
-        "release07-gan-v3-mog-v1": null
+        "release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c": "2026-10-03T04:09:42.878+00:00",
+        "release07-gan-v3-mog--7311bde77895ceac2d493a6b102672cab0973b6685383339a2867d80956aa11f": "2026-10-03T04:10:21.044+00:00",
+        "release07-gan-v3-mog--8bac47a479c2bb8dea2edee5378b642fbe5e6dd8c5fceab2d4e8077d6371345e": "2026-10-03T04:11:00.309+00:00",
+        "release07-gan-v3-mog--c1b747662d851c7c1ee0d8572e34c0438f28d5e0920c572b74622a25479f9e26": "2026-10-03T04:11:38.538+00:00",
+        "release07-gan-v3-mog-v1": null,
+        "release07-gan-v3-task-adapted-v1": "2026-10-03T04:13:51.979+00:00"
       },
-      "json_sha256": "76a2d43aaebd7c23ef270f0c817c3501ede65c3c94c965ee408e7d0467f91ccb",
-      "snapshot": "reports/forge/technique-evidence/bb31b3f77bee0199fa51df84856dd04171fb58baca7c9328270f3e2a7c67d62d.json",
-      "source_commit": "b04b1b27296b0cba11b70eb9693fbe9200ed38a5"
-    },
-    {
-      "candidates": {
-        "r3gan-stacked-training-toy-v1": "2026-10-02T01:15:47.938+00:00"
-      },
-      "json_sha256": "19ba51024a061a0f2b216be107bfe4a1d38fe63faf4d5bfcb6255589a4b4f9c5",
-      "snapshot": "reports/forge/technique-evidence/8bfb0b738e288fbe9ca2e055539469e52c34b27adeda9901b317d44faf07ea2f.json",
-      "source_commit": "77a373648e3a7a5f1923015fa2097ec9e0ec877f"
-    },
-    {
-      "candidates": {
-        "release07-gan-v3-task-adapted-v1": "2026-10-02T03:48:19.023+00:00"
-      },
-      "json_sha256": "d527be92dd8b7258c0577dbaccc70700b80e87f058d034fca7afe03b81ad5975",
-      "snapshot": "reports/forge/technique-evidence/d091ec1f6b1db7cfad160b8dcd77f4b6dff432e88dab0c7421c59cff3da997dc.json",
-      "source_commit": "fc66d7c49259a8977cbb4478b20dad1ffcc6c1cb"
-    },
-    {
-      "candidates": {
-        "r1r2--7728cf93188b9fe122536244667789941da52d435cfb0a3ae42b90db200d7595": "2026-10-02T15:57:04.940+00:00",
-        "r1r2--abf642c42c5346ad096c29202e4716db535c393c113478552133c1c22761ddbd": "2026-10-02T16:00:16.981+00:00",
-        "r1r2--b58a087cabab6b43997ec233416294cfc2786bab59026c07a1a4f2565970f5ff": "2026-10-02T15:57:40.575+00:00",
-        "r1r2--f398f6ea70a2d101c520a1a01db90ea968bbb16736e6cec7ffc887e1dd7e241a": "2026-10-02T15:57:48.745+00:00"
-      },
-      "json_sha256": "01b60e07a43c46062dc8746e7133acd11e1155334280fdc874efd3ef0b01169f",
-      "snapshot": "reports/forge/technique-evidence/dc9517031d2121b0f6ad27cb4787207a5b914c93edadc869808c53929220c3e6.json",
-      "source_commit": "cd0ba9feba7aae79723f8581fe29eb4bd3c9050b"
-    },
-    {
-      "candidates": {
-        "bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212": "2026-10-02T18:15:08.929+00:00",
-        "bcap--0fc5834c2f114d83b8b7ace471dbc8271d0afddd8c92ba1b84d5db8325a8ecd5": "2026-10-02T18:16:50.818+00:00",
-        "bcap--46afd334b69b00edb05f5487d7e00d2c5f52d82ab2d3adaa6d7c6d9158e73604": "2026-10-02T18:16:32.916+00:00",
-        "bcap--4cb8358e1e3eefdb6744ae63e84ce724bf73a47e471a12817aaf3a14466c2dd3": "2026-10-02T18:16:44.174+00:00",
-        "bcap--66881ffa01364264272e87b084a09b8a00ce0c6d7a49904cc73d7c60238e8ce0": "2026-10-02T18:17:27.672+00:00",
-        "bcap--67963edee7209ea85f9c07ec1f1195301e0ac40a975a44ef9891c5241a4ba2bc": "2026-10-02T18:18:12.327+00:00",
-        "bcap--c5f3aebf586c1da32ddfbaad77fab841eb2c43c7da652f56e9ffe622382d803e": "2026-10-02T18:18:23.017+00:00",
-        "bcap--f65f1922d02456d3a4b7135bb3aa6483d1c76184d74608479b2634094b039383": "2026-10-02T18:18:35.418+00:00",
-        "k3p--00b69f56de29e1968b9d84f9b532afc535fa44555e235eb6c14cfc58b7baed9b": "2026-10-02T18:20:58.672+00:00",
-        "k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c": "2026-10-02T18:22:50.938+00:00",
-        "k3p--a4b78c36d9faacd837e079c3fd3b9623fc141f42737e03312053a86c560abb8a": "2026-10-02T18:24:36.404+00:00",
-        "k3p--caa08ebf04c2b95ed480dd9c23e39a8624e39ae27b2b80a9af1ac74f13a86b9f": "2026-10-02T18:26:25.287+00:00",
-        "ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f": "2026-10-02T18:29:17.854+00:00",
-        "ka2--6183426d7810463d5461ad936a42c67a38516fce8b32b23065da215fed8d145d": "2026-10-02T18:30:13.330+00:00",
-        "ka2--d02d7932342e1fa1db0a7a91537394297601e55516882d20ec033b4992bb527f": "2026-10-02T18:32:06.188+00:00",
-        "ka2--e425fc18e432bbec6c1a1e2fc0b2f8024c7ad104fd5acf8908b6cfbbb5a3da03": "2026-10-02T18:33:51.641+00:00",
-        "r1r2--083deac11d390b7895cca37396e9caf2adf5706d4ce560ae70a089e305ab3b4b": "2026-10-02T18:33:35.446+00:00",
-        "r1r2--14eeafe7d865bdc5f6886ae8db64afd22bac3fd20a82e5ddb59188ab4fa30cc6": "2026-10-02T18:33:46.892+00:00",
-        "r1r2--151d3b970d66ccb2956e2b914d518a0e5652e7164dccf000a29bbc82831b2d46": "2026-10-02T18:33:57.708+00:00",
-        "r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f": "2026-10-02T18:34:49.660+00:00",
-        "r1r2--4363c95b3f6f2739729c7a104bd080a427e3efbef1f915ce14c191009bfa3a27": "2026-10-02T18:35:30.479+00:00",
-        "r1r2--9481826257709128f1c864bac2950906d0ad940b8f75fbfa3d47317e7b26007d": "2026-10-02T18:36:10.793+00:00",
-        "r1r2--dad6fdf50034381c106102df008e26b7687b04918cab85c13721e2a2dbbbe743": "2026-10-02T18:36:19.612+00:00",
-        "r1r2--e033ba04e5b9609b896a084a182d785394869fcad19d4a15cffe86e9a973f3fe": "2026-10-02T18:36:59.851+00:00",
-        "release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c": "2026-10-02T18:38:53.996+00:00",
-        "release07-gan-v3-mog--7311bde77895ceac2d493a6b102672cab0973b6685383339a2867d80956aa11f": "2026-10-02T18:40:37.220+00:00",
-        "release07-gan-v3-mog--8bac47a479c2bb8dea2edee5378b642fbe5e6dd8c5fceab2d4e8077d6371345e": "2026-10-02T18:42:23.958+00:00",
-        "release07-gan-v3-mog--c1b747662d851c7c1ee0d8572e34c0438f28d5e0920c572b74622a25479f9e26": "2026-10-02T18:42:46.517+00:00"
-      },
-      "json_sha256": "73258a630fa7af48718fd1030c4977665c6d0f278e20e299c833601191b4710c",
-      "snapshot": "reports/forge/technique-evidence/81247a9eaefed4e7c2b6ebeec8dc29305805546582d2f98b7f138fbd8a2e1ae7.json",
-      "source_commit": "05a2b3c021155fa72471b2293c3fd6d41d1e58a0"
+      "json_sha256": "926a4b2c7fdefacd51629577104eae4ee5c8c6da85e241f50e14ed215215ec3b",
+      "snapshot": "reports/forge/technique-evidence/494153533dcedb578c944134a3b16f6d368d1439685dd7689934eabf858887e3.json",
+      "source_commit": "2899099048c0a9987eb8720214abfce56d86d92a"
     }
   ],
   "note": "Numerical evidence/provenance only. The sole current technique leaderboard is reports/forge/technique-inventory.md; snapshots cannot qualify the latest checkout.",
-  "policy_fingerprint": "e53331361a8fd5c55096494d259ddcd95a99f3012b7bb74e5c972f9dd466531f",
+  "policy_fingerprint": "c856f402249b71c8f877974e427dc7ed70bf7102f9bc0e433b933d7a024789fe",
   "retired_publications": {
     "reports/forge/leaderboards/discriminator_stability.md": {
       "commit": "acd48888554050ff32b5b0a23b8d9a1395c559f5",
@@ -146,7 +241,9 @@
     "1": [
       "two_pole",
       "unused_token_hold",
-      "ae_gan_hold"
+      "ae_gan_hold",
+      "ring16_acquisition",
+      "five_word_joint_acquisition"
     ],
     "2": [
       "trajectory",
@@ -175,5 +272,5 @@
     ]
   },
   "view": "discriminator_stability",
-  "view_revision": 2
+  "view_revision": 3
 }
