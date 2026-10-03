@@ -43,7 +43,9 @@ def prepare(protocol, arm, device):
         raise ValueError("diagnostic includes an undeclared parameter")
     candidate["id"] = arm["id"]
     candidate["recipe_overrides"].update(arm["recipe_delta"])
-    candidate.pop("resolved_configuration_recipe", None)
+    for name in ("resolved_configuration_recipe", "configuration_id", "search_study_id",
+                 "search_report", "configuration_settings"):
+        candidate.pop(name, None)
     context = word_context({"candidate": candidate, "protocol": {"seed": protocol["protocol_seed"]}},
                            task, device, root=ROOT)
     reference = word_context({"candidate": parent, "protocol": {"seed": protocol["protocol_seed"]}},
@@ -60,8 +62,9 @@ def prepare(protocol, arm, device):
 
 
 def validate(protocol):
-    if (len(protocol["arms"]) > protocol["maximum_runs"] or protocol["maximum_runs"] != 9
-            or protocol["round_reserved_seconds"] != 8100 or protocol["run_timeout_seconds"] != 900
+    if (len(protocol["arms"]) != protocol["maximum_runs"] or not 1 <= protocol["maximum_runs"] <= 9
+            or protocol["round_reserved_seconds"] != 900 * protocol["maximum_runs"]
+            or protocol["run_timeout_seconds"] != 900
             or protocol["device"] != "cuda:0" or protocol["workers"] != 1
             or protocol["cpu_threads"] != 1 or protocol["protocol_seed"] != 0):
         raise ValueError("invalid bounded execution protocol")
