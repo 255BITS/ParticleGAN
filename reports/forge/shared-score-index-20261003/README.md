@@ -2,6 +2,29 @@
 
 No configuration is eligible to ship, and no fair speed winner is established. This is a read-only navigation and comparison index of pinned reports, not a new certifier. The local JSON preserves source, law, denominator, original grade, study grade, costs and availability separately.
 
+## Completed current Atlas GPU diagnostic
+
+The [native-v2 result and original goal GIFs](../atlas-current-gpu-diagnostics-native-v2-20261003/README.md)
+cover all 26 current required questions: **7 PASS, 11 executed FAIL and 8 BLOCKED**;
+Tier 1 is 0/5, Tier 2 is 7/19 and Tier 3 is 0/2. All 17 physical jobs completed,
+costing 2,996.7973392466083 measured paid seconds with zero interruption reserve.
+The two ring slots share one job and their cost is counted once.
+
+The [portable diagnostic JSON](../atlas-current-gpu-diagnostics-native-v2-20261003/summary.json)
+binds execution commit `9563dea57bb150f2a0275bbe8d785bf76210fca3`, source digest
+`db5492df4aa5ef60ce9e7d5869b2b6be8d492f19191a2889967274555f8d0037`,
+the seed-0 C6 rate pair, actual Recipes, GPU/runtime, original task/evaluator
+identities, numerical grades, costs and all 18 original GIFs. It explains each
+passing question and records the failed numerical bounds. Raw checkpoints and
+populations remain outside Git.
+
+This source/cohort has diagnostic credit only. Its passes cannot fill the
+ordinary leaderboard, historical Atlas19 or a different family's cells, and
+no shipping default or fair convergence-speed winner is established. The eight
+source/API blockers are being evaluated as separately named family variants;
+the original blocked identities retain their original results. The older
+comparison scopes below and their `index.json` remain their original snapshots.
+
 | Scope | Source / declared law | Comparable score | Status and cost | Team report |
 |---|---|---|---|---|
 | Ordinary MoG, current Forge | Origin `28990990`; live, scheduled, learned MoG prior σ = 0.025 | KA2 and K3P tie at 4/5 Tier 1; 19 Tier 2 and 2 Tier 3 requirements remain unknown | Both FAIL; qualified tier 0; no default or speed credit | [Primary ordinary board](https://github.com/255BITS/ParticleGAN/blob/4749b2780add539df4bd8d2dd1d3cc9f002f77ad/reports/forge/technique-inventory.md) |

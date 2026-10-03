@@ -1,0 +1,161 @@
+{
+  "grades": {
+    "vector_unequal_mass_policy_selected_cloud_v1": {
+      "evaluator_result": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": null,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 0,
+          "passing_suffix": 0,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metrics": [
+          {
+            "margin": 0.14242018487870406,
+            "metric": "sw1_normalized",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.18,
+            "value": 0.03757981512129595
+          },
+          {
+            "margin": 0.12332031466066837,
+            "metric": "mass_tv",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.15,
+            "value": 0.026679685339331627
+          },
+          {
+            "margin": 0.12998046875000002,
+            "metric": "hq",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.97998046875
+          },
+          {
+            "margin": -0.012167011946439765,
+            "metric": "component_covariance_error",
+            "op": "<=",
+            "status": "FAIL",
+            "threshold": 0.85,
+            "value": 0.8621670119464397
+          },
+          {
+            "margin": 0.11254922151565552,
+            "metric": "component_min_eigen_ratio",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.15,
+            "value": 0.2625492215156555
+          },
+          {
+            "margin": 0.6401743292808533,
+            "metric": "min_mass_ratio",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.25,
+            "value": 0.8901743292808533
+          }
+        ],
+        "passed": false,
+        "shortfall": 0.0023856886169489736,
+        "status": "FAIL"
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "component_core_covariance_error": 0.47568611800670624,
+        "component_core_covariance_errors": [
+          0.22117628157138824,
+          0.5950783491134644,
+          0.24097095429897308,
+          0.8455188870429993
+        ],
+        "component_core_eigen_ratios": [
+          0.7069526314735413,
+          0.26234540343284607,
+          0.6595705151557922,
+          0.44058525562286377
+        ],
+        "component_core_min_eigen_ratio": 0.26234540343284607,
+        "component_counts": [
+          2346,
+          1178,
+          474,
+          98
+        ],
+        "component_covariance_error": 0.8621670119464397,
+        "component_covariance_errors": [
+          0.8478944301605225,
+          0.5230907797813416,
+          0.17878375947475433,
+          1.8988990783691406
+        ],
+        "component_mass": [
+          0.57275390625,
+          0.28759765625,
+          0.11572265625,
+          0.02392578125
+        ],
+        "component_min_eigen_ratio": 0.2625492215156555,
+        "component_resolved": [
+          true,
+          true,
+          true,
+          false
+        ],
+        "component_spill": [
+          0.017050297930836678,
+          0.011884549632668495,
+          0.025316456332802773,
+          0.16326530277729034
+        ],
+        "covariance_error": 0.07692325860261917,
+        "hq": 0.97998046875,
+        "mass_tv": 0.026679685339331627,
+        "max_component_spill": 0.16326530277729034,
+        "mean_error": 0.010552613995969296,
+        "min_mass_ratio": 0.8901743292808533,
+        "resolved_core_covariance_error": 0.3524085283279419,
+        "resolved_core_min_eigen_ratio": 0.26234540343284607,
+        "resolved_max_component_spill": 0.025316456332802773,
+        "sample_count": 4096,
+        "step": 1200,
+        "sw1_normalized": 0.03757981512129595,
+        "target_mass": [
+          0.550000011920929,
+          0.30000001192092896,
+          0.12999999523162842,
+          0.019999999552965164
+        ],
+        "target_scale": 1.7593294382095337
+      },
+      "reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "status": "FAIL"
+    }
+  },
+  "raw_hash": "0046e48d6592d5ba5a7981127f563b895ec295c0e2c5fc6bb30af2a8b0bbdf61",
+  "schema_version": 1,
+  "source_digest": "db5492df4aa5ef60ce9e7d5869b2b6be8d492f19191a2889967274555f8d0037",
+  "telemetry": {
+    "independent_grading_seconds": 0.8415586529299617,
+    "memory": {
+      "cpu_scope": "this process lifetime, including imports",
+      "cuda_peak_allocated_bytes": null,
+      "cuda_peak_reserved_bytes": null,
+      "cuda_scope": "PyTorch allocator since probe reset; excludes other processes and non-PyTorch allocations",
+      "process_peak_rss_bytes": 664854528
+    },
+    "scope": "Independent CPU evaluator process, including evaluator artifact reads."
+  }
+}

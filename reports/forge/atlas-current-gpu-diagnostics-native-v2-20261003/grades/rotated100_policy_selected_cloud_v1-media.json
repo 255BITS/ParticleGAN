@@ -1,0 +1,83 @@
+{
+  "actual_steps": [
+    0,
+    50,
+    750,
+    1750,
+    2750,
+    4000,
+    5000,
+    6000,
+    7000
+  ],
+  "draws": 0,
+  "gif": {
+    "bytes": 309777,
+    "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/rotated100_policy_selected_cloud_v1/rotated100_policy_selected_cloud_v1-goal.gif",
+    "sha256": "782044697ea79e68a7d0c829bd1f8be7fd3f06c208dd9da16082d6c35b17837d"
+  },
+  "inputs": [
+    {
+      "bytes": 91263,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/rotated100_policy_selected_cloud_v1/native100/rotated100/snapshots/step_000000.npz",
+      "sha256": "e697300c2525bff0a80cb409602b6058e01a638bfb4716b11f64edd6b5d76677"
+    },
+    {
+      "bytes": 91024,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/rotated100_policy_selected_cloud_v1/native100/rotated100/snapshots/step_000050.npz",
+      "sha256": "d755584aa336544a132964625ddd0be00e2d505163f2b27bfdbf179754859c21"
+    },
+    {
+      "bytes": 90837,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/rotated100_policy_selected_cloud_v1/native100/rotated100/snapshots/step_000750.npz",
+      "sha256": "ab3b82f35b9773e7f8962242bfc696db959003ff1e0b0f33ac6f5d0f9be31eba"
+    },
+    {
+      "bytes": 90742,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/rotated100_policy_selected_cloud_v1/native100/rotated100/snapshots/step_001750.npz",
+      "sha256": "33faaf9dc21c2f3180fe4a061078838d25bc77317c4b11a3be7cb68fc2f9b4bf"
+    },
+    {
+      "bytes": 90572,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/rotated100_policy_selected_cloud_v1/native100/rotated100/snapshots/step_002750.npz",
+      "sha256": "16d103f020afa2719afe809135657d063f7697914b333e84c932a4c7ba53455c"
+    },
+    {
+      "bytes": 90248,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/rotated100_policy_selected_cloud_v1/native100/rotated100/snapshots/step_004000.npz",
+      "sha256": "42289e2f4144974475087872b674fce38848c3e98a073982ae0980a419937cc0"
+    },
+    {
+      "bytes": 90051,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/rotated100_policy_selected_cloud_v1/native100/rotated100/snapshots/step_005000.npz",
+      "sha256": "9f4c3132534f942f8e61d8306ad29acb5b5453ca9c16c434f7ec87ae11af1470"
+    },
+    {
+      "bytes": 90091,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/rotated100_policy_selected_cloud_v1/native100/rotated100/snapshots/step_006000.npz",
+      "sha256": "66842dec56014600df7043faca5301129a6cfb851fb1dbf915d51097e63665dd"
+    },
+    {
+      "bytes": 89995,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/rotated100_policy_selected_cloud_v1/native100/rotated100/snapshots/step_007000.npz",
+      "sha256": "993c3f317aacb3ab05758189c51640eb21ced3ef341bc466d09a0df75c766954"
+    },
+    {
+      "bytes": 7238,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/rotated100_policy_selected_cloud_v1/native100/rotated100/summary.json",
+      "sha256": "24c963468f84e8de71eb8ff31259895b81b77308d1794abb62788b6a9e17aca3"
+    },
+    {
+      "bytes": 67051,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/rotated100_policy_selected_cloud_v1/native100/rotated100/events.jsonl",
+      "sha256": "05ea33317ab1a46eb06b0c8017432125f982a0da7eab6905095e4dea00d4e674"
+    }
+  ],
+  "optimizer_updates": 0,
+  "original_gate": "FAIL",
+  "qualification_input": false,
+  "renderer_sha256": "fda26cea46ce2dab200e418c3d04e288e3234d61609deecaebe53b1624bf4101",
+  "schema": "particlegan_atlas_current_gpu_diagnostics_v1_media",
+  "source_digest": "db5492df4aa5ef60ce9e7d5869b2b6be8d492f19191a2889967274555f8d0037",
+  "task": "rotated100_policy_selected_cloud_v1"
+}
