@@ -14,7 +14,7 @@ import re
 
 from .contracts import atomic_json, atomic_text, file_hash, file_lock, identifier, read_json, stable_hash
 
-REDUCER_VERSION = "forge-knowledge-v1"
+REDUCER_VERSION = "forge-knowledge-v2"
 
 
 def _json_output(path: Path, value) -> None:
@@ -65,6 +65,73 @@ def _gaps(root: Path) -> dict:
         "gaps": [{"kind": "history_not_imported", "reason": "Run forge history before treating memory as complete."}],
         "scientific_normalization_complete": False,
     }
+
+
+def _memory_records(root: Path) -> tuple[list[dict], list[dict]]:
+    """Publication summaries enter recall only, never the qualification reducer."""
+    from .publication_memory import normalize
+    records, conflicts = _records(root)
+    return sorted([*records, *normalize(root)], key=lambda record: record["record_id"]), conflicts
+
+
+def _input_hashes(root: Path) -> dict:
+    from .publication_memory import input_paths
+    paths = set(input_paths(root))
+    for directory in ("reports/forge/records", "reports/forge/attempts", "configs/forge",
+                      "reports/forge/calibration-lanes", "reports/forge/promotions"):
+        paths.update((root / directory).rglob("*.json"))
+    # The history catalog tracks Git blobs of unrelated engineering source.
+    # Its drift is reported separately and cannot make scientific recall stale.
+    paths.discard(root / "configs/forge/catalog.json")
+    for name in ("import-gaps.json", "history-sources.json"):
+        path = root / "reports/forge" / name
+        if path.is_file():
+            paths.add(path)
+    return {str(path.relative_to(root)): file_hash(path) for path in sorted(paths)}
+
+
+def _reducer_hashes() -> dict:
+    from . import publication_memory
+    return {__name__: file_hash(Path(__file__)),
+            publication_memory.__name__: file_hash(Path(publication_memory.__file__))}
+
+
+def freshness(root: Path) -> dict:
+    """Read-only check suitable for CI and agents; no training or hydration."""
+    from .publication_memory import OUTPUT, normalize
+    root = Path(root)
+    path = root / "reports/forge/compilation.json"
+    current = _input_hashes(root)
+    manifest = read_json(path) if path.is_file() else {}
+    previous = manifest.get("input_hashes", {})
+    added, removed = sorted(current.keys() - previous.keys()), sorted(previous.keys() - current.keys())
+    changed = sorted(name for name in current.keys() & previous.keys() if current[name] != previous[name])
+    projected = normalize(root)
+    output = root / OUTPUT
+    materialization_current = (output.is_file() and read_json(output).get("records") == projected)
+    record_count = len(_records(root)[0]) + len(projected)
+    view_count = len(list((root / "configs/forge/views").glob("*.json")))
+    reducer_current = (manifest.get("reducer_version") == REDUCER_VERSION
+                       and manifest.get("reducer_hashes") == _reducer_hashes())
+    counts_current = manifest.get("record_count") == record_count and manifest.get("view_count") == view_count
+    memory = root / "reports/forge/EXPERIMENT_MEMORY.md"
+    memory_current = (memory.is_file() and manifest.get("output_hashes", {}).get("reports/forge/EXPERIMENT_MEMORY.md") == file_hash(memory))
+    fresh = bool(manifest) and not (added or removed or changed) and reducer_current and counts_current and materialization_current and memory_current
+    try:
+        from .history import validate_inventory
+        coverage = validate_inventory(root)
+    except Exception as exc:
+        coverage = {"valid": False, "reason": str(exc)}
+    return {"fresh": fresh, "status": "CURRENT" if fresh else "STALE", "added_inputs": added,
+            "removed_inputs": removed, "changed_inputs": changed, "reducer_current": reducer_current,
+            "publication_materialization_current": materialization_current,
+            "memory_current": memory_current,
+            "record_count": record_count, "view_count": view_count,
+            "publication_record_count": len(projected),
+            "inventory_coverage": coverage,
+            "coverage_scope": "Registered compact publication schemas and normalized records; original artifact availability is separate.",
+            "qualification_refresh": manifest.get("qualification_refresh", {"mode": "unrecorded"}),
+            "next_action": None if fresh else "Run python -m experiments.forge compile --summaries-only; inspect missing publication bindings before proposing work."}
 
 
 def _cost(rows: list[dict]) -> dict:
@@ -423,13 +490,19 @@ def board(root: Path, view_id: str, *, include_bindings=False) -> dict:
 
 def recall(root: Path, query: str = "", goal: str | None = None) -> list[dict]:
     """Search normalized records; missing goal tags remain visible as unknown."""
-    records, _ = _records(Path(root))
+    records, _ = _memory_records(Path(root))
     words = re.findall(r"[a-z0-9_]+", query.lower())
     matches = []
     for record in records:
-        searchable = " ".join(str(record.get(k, "")) for k in (
-            "candidate_id", "hypothesis", "mechanism_class", "conclusion", "next_action", "source", "provenance")).lower()
+        searchable = json.dumps(record, sort_keys=True).lower()
         score = sum(word in searchable for word in words)
+        identities = [str(record.get(key) or "").lower() for key in
+                      ("record_id", "candidate_id", "candidate_revision", "configuration_id", "study_id")]
+        # A literal complete id outranks broad token overlap (hyphens otherwise
+        # split family ids into common, often misleading words).
+        exact = bool(query.strip()) and query.strip().lower() in identities
+        if exact:
+            score += len(words) + 1
         if words and score == 0:
             continue
         declared_goal = record.get("goal")
@@ -439,7 +512,14 @@ def recall(root: Path, query: str = "", goal: str | None = None) -> list[dict]:
                         "candidate_revision": record.get("candidate_revision"), "evidence_scope": record.get("evidence_scope"),
                         "hypothesis": record.get("hypothesis"), "conclusion": record.get("conclusion"),
                         "next_action": record.get("next_action"), "source": record.get("source"),
-                        "cost": _cost(record.get("task_results", [])), "match_score": score,
+                        "cost": record.get("recorded_cost") or _cost(record.get("task_results", [])), "match_score": score,
+                        "exact_identity_match": exact, "study_id": record.get("study_id"),
+                        "qualification_input": record.get("qualification_input", record.get("evidence_scope") == "current"),
+                        "task_results": [{key: row.get(key) for key in
+                                          ("task_id", "gate_status", "original_gate", "metrics", "failed_bounds", "reason", "receipt")}
+                                         for row in record.get("task_results", [])
+                                         if record.get("evidence_scope") == "published_summary"
+                                         and row.get("gate_status") in {"FAIL", "INVALID", "BLOCKED", "INCOMPLETE"}],
                         "goal_applicability": "unknown" if not declared_goal else declared_goal})
     return sorted(matches, key=lambda row: (-row["match_score"], row["record_id"]))
 
@@ -490,16 +570,29 @@ def _metric_excerpt(rows: list[dict]) -> str:
     return "; ".join(fragments)
 
 
-def compile_memory(root: Path) -> dict:
+def compile_memory(root: Path, *, summaries_only: bool = False) -> dict:
     """Map outputs reduce deterministically, with one writer and explicit gaps."""
     root = Path(root)
     output = root / "reports/forge"
     with file_lock(root / "runs/forge/compile.lock"):
-        records, conflicts = _records(root)
+        previous = read_json(output / "compilation.json") if (output / "compilation.json").is_file() else {}
+        records, conflicts = _memory_records(root)
         boards = []
         for path in sorted((root / "configs/forge/views").glob("*.json")):
-            result = board(root, path.stem)
+            if summaries_only:
+                result = {"view": path.stem, "current_rows": [], "pinned_rows": [], "calibration_rows": [], "conflicts": []}
+            else:
+                result = board(root, path.stem)
             boards.append(result)
+            if summaries_only:
+                markdown_path = leaderboard_path(root, path.stem)
+                if not (root / markdown_path).exists():
+                    _text_output(root / markdown_path,
+                                 f"# {path.stem}\n\nThis view has no previously published goal table. "
+                                 "The compact memory refresh records its declaration without replaying original receipts. "
+                                 f"Inspect `forge board --goal {path.stem} --json` with compatible original evidence "
+                                 "before making a qualification claim.\n")
+                continue
             _json_output(output / "leaderboards" / (path.stem + ".json"), result)
             markdown_path = leaderboard_path(root, path.stem)
             if markdown_path.parent == Path("reports/forge/leaderboards"):
@@ -509,15 +602,7 @@ def compile_memory(root: Path) -> dict:
                 # the goal JSON and the inventory's evidence registry.
                 (output / "leaderboards" / (path.stem + ".md")).unlink(missing_ok=True)
         gaps = _gaps(root)
-        inputs = {}
-        for directory in (root / "reports/forge/records", root / "reports/forge/attempts", root / "configs/forge",
-                          root / "reports/forge/calibration-lanes", root / "reports/forge/promotions"):
-            for path in sorted(directory.rglob("*.json")):
-                inputs[str(path.relative_to(root))] = file_hash(path)
-        for name in ("import-gaps.json", "history-sources.json"):
-            path = output / name
-            if path.exists():
-                inputs[str(path.relative_to(root))] = file_hash(path)
+        inputs = _input_hashes(root)
         coverage = gaps.get("inventory_coverage", {"valid": False, "reason": "inventory unavailable"})
         try:
             from .history import validate_inventory
@@ -529,23 +614,46 @@ def compile_memory(root: Path) -> dict:
                           if row.get("pending_readout")})
         scientific_sources = sorted({row["source_digest"] for result in boards for row in result["current_rows"]
                                      if row.get("source_digest")})
+        if summaries_only:
+            pending = previous.get("pending_readout", [])
+            scientific_sources = previous.get("scientific_source_digests", [])
+        reducer_hashes = _reducer_hashes()
         reducer_hash = file_hash(Path(__file__))
         manifest = {"schema_version": 1, "reducer_version": REDUCER_VERSION, "reducer_sha256": reducer_hash,
+                    "reducer_hashes": reducer_hashes,
                     "input_hashes": inputs, "scientific_source_digests": scientific_sources,
-                    "input_digest": stable_hash({"files": inputs, "sources": scientific_sources, "reducer": reducer_hash}),
+                    "input_digest": stable_hash({"files": inputs, "sources": scientific_sources, "reducers": reducer_hashes}),
                     "record_count": len(records), "view_count": len(boards), "inventory_coverage": coverage,
                     "conflicts": conflicts + [issue for result in boards for issue in result["conflicts"]],
                     "pending_readout": pending, "import_gap_count": len(gaps.get("gaps", [])),
                     "scientific_normalization_complete": gaps.get("scientific_normalization_complete", False)}
+        manifest["qualification_refresh"] = {
+            "mode": "preserved_published_evidence" if summaries_only else "compatible_receipt_reducer",
+            "source_manifest_digest": (previous.get("qualification_refresh", {}).get("source_manifest_digest")
+                                       or previous.get("input_digest")) if summaries_only else None,
+            "note": "Publication recall freshness grants no qualification; original evidence availability is separate."}
         manifest["operational_lifecycle_digest"] = stable_hash([
             {"cohort": row.get("cohort"), "lifecycle": row.get("lifecycle"), "requests": row.get("queue_submissions", [])}
             for result in boards for row in result["current_rows"] + result.get("pinned_rows", []) + result.get("calibration_rows", [])])
-        from .telemetry import summarize_automation
-        automation = summarize_automation(root)
+        if summaries_only:
+            manifest["operational_lifecycle_digest"] = previous.get("operational_lifecycle_digest")
+            automation = read_json(output / "automation.json") if (output / "automation.json").is_file() else {
+                "schema_version": 1, "scope": "unavailable; compact memory refresh does not replay original receipts"}
+        else:
+            from .telemetry import summarize_automation
+            automation = summarize_automation(root)
         _json_output(output / "automation.json", automation)
         manifest["automation_digest"] = stable_hash(automation)
+        from .publication_memory import OUTPUT, VERSION
+        publication_records = [record for record in records if record.get("evidence_scope") == "published_summary"]
+        _json_output(root / OUTPUT, {"schema_version": 1, "reducer_version": VERSION,
+                                    "qualification_input": False, "records": publication_records})
+        manifest["publication_record_count"] = len(publication_records)
         lines = ["# ParticleGAN Forge experiment memory", "",
-                 "Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope; current qualification is recomputed from compatible receipts.", "",
+                 "Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. "
+                 + ("Published qualification and automation snapshots are retained without replaying unavailable originals. " if summaries_only
+                    else "Current qualification is recomputed from compatible receipts. ")
+                 + "Compact publications enter recall as display-only summaries and grant no qualification.", "",
                  f"Records: {len(records)}. Inventory coverage: {'complete' if coverage.get('valid') else 'incomplete'}. "
                  f"Unresolved import items: {len(gaps.get('gaps', []))}.", "",
                  "## Goal views", ""]
@@ -556,6 +664,8 @@ def compile_memory(root: Path) -> dict:
                   "", "## Pending readouts", "", ", ".join(pending) or "None recorded.", "",
                   "## Experiment and family records", ""]
         for record in records:
+            if record.get("evidence_scope") == "published_summary":
+                continue
             rows = record.get("task_results", [])
             counts = dict(sorted(Counter(row.get("gate_status", "NOT_RUN") for row in rows).items()))
             seconds = _cost(rows)["wall_seconds"]
@@ -569,6 +679,18 @@ def compile_memory(root: Path) -> dict:
                       str(record.get("conclusion", "Conclusion pending.")), "",
                       f"**Next:** {record.get('next_action', 'Readout pending.')}", "",
                       f"[Evidence]({_link(record.get('source'))}) · [Record](records/{record['record_id']}.json)", ""]
+        lines += ["## Concluded compact publications", "",
+                  "These study and trial projections preserve recorded outcomes, unknowns and source cohorts. "
+                  "They do not regrade archived science or replace original receipts. Overlapping study/trial costs must not be summed.", "",
+                  "[Normalized publication records](publication-records.json). "
+                  "Search exact IDs, failed requirement metric names, mechanisms and goals with `forge recall`. "
+                  "Check current input coverage with `forge compile --check`.", ""]
+        for record in publication_records:
+            if record["record_type"] != "published_study":
+                continue
+            lines += [f"- **{record['study_id']}**: {record['conclusion']} "
+                      f"[Source]({_link(record['source'])}) · [Board](../../{record['source']['board']})"]
+        lines.append("")
         lines += ["## Unresolved imports and limitations", ""]
         for gap in gaps.get("gaps", []):
             lines.append(f"- **{gap.get('gap_id', gap.get('kind', 'unknown'))}:** {gap.get('reason', 'Unresolved')}"
@@ -577,9 +699,12 @@ def compile_memory(root: Path) -> dict:
                   f"Reducer `{REDUCER_VERSION}`; input digest `{manifest['input_digest']}`. "
                   "[Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.", ""]
         _text_output(output / "EXPERIMENT_MEMORY.md", "\n".join(lines))
+        manifest["output_hashes"] = {name: file_hash(root / name)
+                                     for name in ("reports/forge/EXPERIMENT_MEMORY.md", OUTPUT)}
         _json_output(output / "compilation.json", manifest)
         return {"records": len(records), "views": len(boards), "pending_readout": pending,
                 "inventory_coverage": coverage, "input_digest": manifest["input_digest"],
+                "qualification_refresh": manifest["qualification_refresh"],
                 "memory": "reports/forge/EXPERIMENT_MEMORY.md", "conflicts": manifest["conflicts"]}
 
 

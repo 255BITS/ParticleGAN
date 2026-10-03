@@ -101,6 +101,9 @@ per-mode moments before another supported, bounded training hypothesis. No
 automatic matrix filling, tuning, seed study, continuation or promotion follows.
 
 The history, recall, compile, validate, and board commands launch no training.
+Recall includes source-bound concluded configuration and policy publications as
+non-qualifying summaries. [Research memory freshness](docs/forge-research-memory.md)
+is visible in plans; `forge compile --check` checks it without artifact hydration.
 
 ```sh
 python -m experiments.forge validate
