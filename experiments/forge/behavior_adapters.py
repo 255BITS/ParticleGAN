@@ -204,6 +204,7 @@ class BehaviorComponents:
         if candidate.get("claim_contract", {}).get("learning") == "clockfree":
             raise CapabilityError(["these scheduled public components do not implement a clock-free optimizer"])
         self.models, self.optimizers, self.base_rates, self.role_parameters = {}, {}, {}, {}
+        self.direct_particle_ids, self.initial_group_betas = set(), {}
         self.rng_audits, self.observations = [], []
         self.penalty = None
         self.schedule_observations = {}
@@ -283,6 +284,7 @@ class BehaviorComponents:
                 [{"params": list(prior.parameters()), "lr": self.recipe.lr * self.recipe.prior_lr_mult,
                   "betas": self.recipe.prior_betas or self.recipe.betas, "forge_role": "prior"}], latent_table=prior.z))
         if direct_particles:
+            self.direct_particle_ids = {id(parameter) for parameter in direct_particles}
             parts.append(self.recipe.make_generator_optimizer(
                 [{"params": list(direct_particles), "forge_role": "prior"}],
                 direct_particles=list(direct_particles)))
@@ -293,6 +295,7 @@ class BehaviorComponents:
         self.optimizers = {"generator": public_g, "discriminator": public_d}
         for optimizer in self.optimizers.values():
             self.base_rates[id(optimizer)] = [group["lr"] for group in optimizer.param_groups]
+            self.initial_group_betas[id(optimizer)] = [tuple(group["betas"]) for group in optimizer.param_groups]
         self.mechanism_audit = MechanismAudit(self.recipe, public_d, parts)
         self.penalty = _PenaltyBinding(self.recipe, public_d, self.mechanism_audit)
         # Host constructors may seed global RNG for fixed fixtures. Training
@@ -348,6 +351,34 @@ class BehaviorComponents:
                     hooks_exercised=not mechanism_blockers(mechanisms), mechanism_audit=mechanisms,
                     unintended_rng_deviations=sum(a["unintended_rng_deviations"] for a in self.rng_audits))
 
+    def optimizer_group_bindings(self):
+        """Report construction and step controls without changing optimizer law."""
+        rows = []
+        for role, optimizer in self.optimizers.items():
+            owned = optimizer.optimizers if isinstance(optimizer, _OptimizerBundle) else [optimizer]
+            group_index = 0
+            for public in owned:
+                for group in public.param_groups:
+                    direct = bool(self.direct_particle_ids) and {id(p) for p in group["params"]} == self.direct_particle_ids
+                    latent = group.get("forge_role") == "prior" and not direct
+                    response = getattr(public, "direct_response", None) if direct else None
+                    rows.append({"optimizer_role": role, "group_index": group_index,
+                        "optimizer": type(public).__name__, "counter_role": group.get("forge_role", role),
+                        "representation": "direct_sample_coordinates" if direct else "latent_prior_locations" if latent else "network",
+                        "base_lr": self.base_rates[id(optimizer)][group_index], "current_lr": group["lr"],
+                        "base_betas": list(self.initial_group_betas[id(optimizer)][group_index]),
+                        "current_group_betas": list(group["betas"]),
+                        "lr_schedule": "prior" if group.get("forge_role") == "prior" else "network",
+                        "prior_lr_mult_consumed": latent, "prior_betas_consumed": latent,
+                        "beta2_schedule_declared": self.recipe.beta2_end is not None,
+                        "group_betas_overridden_during_step": response is not None,
+                        "direct_particle_response": {"installed": response is not None,
+                            "step_betas": list(response.betas) if response is not None else None,
+                            "gain_enabled": response.gain if response is not None else False,
+                            "lr_gain_range": [1., 2.] if response is not None and response.gain else [1., 1.]}})
+                    group_index += 1
+        return rows
+
     def receipt(self):
         from .boundaries import ownership_receipt
         return dict(execution_path="public_components", recipe=asdict(self.recipe),
@@ -359,6 +390,7 @@ class BehaviorComponents:
                     prior=self.context.prior_config, active_roles=sorted(self.role_parameters),
                     public_optimizers=[type(o).__name__ for opt in self.optimizers.values()
                                        for o in (opt.optimizers if isinstance(opt, _OptimizerBundle) else [opt])],
+                    optimizer_group_bindings=self.optimizer_group_bindings(),
                     noise=self.noise.receipt(), rng=self.context.streams.manifest(), rng_audits=self.rng_audits,
                     training_schedules={"clock": "completed host updates; penalty observes completed critic updates",
                                         "horizon": self.recipe.total_steps,

@@ -152,7 +152,8 @@ def test_behavioral_objective_reference_is_not_claimed_as_effective():
     assert receipt["recipe_fields"]["num_particles"]["value"] is None
     assert receipt["delegated_reference_values"] == {"prior_reg": .123, "z_dim": 2}
     assert receipt["task_contract"]["initialization"]["fixed_initialization"] == task["execution"]["fixed_initialization"]
-    assert receipt["task_contract"]["prior"]["code_path"] == "ParticlePrior"
+    assert receipt["task_contract"]["prior"]["code_path"] is None
+    assert receipt["task_contract"]["prior"]["declared_code_path"] == "ParticlePrior"
 
 
 def test_ae_encoder_recipe_resources_are_effective_and_objectives_stay_host_owned():

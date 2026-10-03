@@ -15,6 +15,16 @@ searching it. A configuration must preserve its technique's mechanisms. Setting
 a penalty coefficient to zero, adding a schedule or disabling an update control
 can change the technique even though the field accepts a number.
 
+The formulation family is the reusable solution axis; the technique signature
+is the stricter boundary for numerical configuration search. An ordinary idea
+may change existing controls within its formulation family with explicit
+structural provenance, but a changed optimizer/loss formulation needs a new
+family. Each candidate supplies one global recipe across eligible tasks.
+Task applicability can make a role or control inactive; it cannot silently
+choose a bespoke optimizer recipe. Publication pins one complete ordinary
+candidate/cohort row per family and retains other cohorts unranked. A family
+label never authorizes pooling source, runtime, prior or sampling identities.
+
 | Owner | Binding |
 | --- | --- |
 | Task | Prior, architecture/data, initialization, update limit and scheduled horizon, particles, latent dimension, batch size, evaluation and sampling |

@@ -1,7 +1,7 @@
 """Update the single current technique leaderboard from validated evidence.
 
 Default regeneration uses committed numerical snapshots and compact receipts.
-Task-only word diagnostics are displayed separately and supply no tier credit.
+Current selection pins one whole ordinary evidence row per formulation family.
 --source-commit independently regrades hydrated original receipts and registers
 new measured rows before updating the same leaderboard. No command trains.
 --recorded-policy rebuilds existing rows under their exact archived view policy.
@@ -576,7 +576,6 @@ def compose(root: Path | str = REPOSITORY_ROOT, *, original_report="reports/forg
 
 EVIDENCE_MANIFEST = Path("reports/forge/technique-evidence/manifest.json")
 CURRENT_PREFIX = Path("reports/forge/technique-inventory")
-WORD_TASK_SELECTION = Path("configs/forge/selections/word-joint-task-v1.json")
 CONTRACT_CATALOGS = ("recipe_contracts", "protocol_contracts", "task_contracts", "status_reasons")
 POLICY_FIELDS = ("view", "view_revision", "policy_fingerprint", "tier_requirements")
 
@@ -626,71 +625,6 @@ def _archived_reports(root, manifest):
     return reports
 
 
-def _word_task_diagnostics(root, execution_backend):
-    """Project committed recommendations without regrading or filling tier cells."""
-    path = root / WORD_TASK_SELECTION
-    if not path.is_file():
-        return None
-    selection = read_json(path)
-    flags = ("qualification_input", "qualification_reuse", "eligible_for_default")
-    if (selection.get("schema_version") != 1 or selection.get("scope") != "task_only_diagnostic"
-            or any(selection.get(flag) is not False for flag in flags)):
-        raise ValueError("word diagnostics must be explicitly nonqualifying")
-
-    def artifact(binding):
-        relative = Path(binding["path"])
-        target = (root / relative).resolve()
-        if relative.is_absolute() or not target.is_relative_to(root):
-            raise ValueError("invalid word diagnostic artifact path")
-        if (not target.is_file() or file_hash(target) != binding["sha256"]
-                or ("bytes" in binding and target.stat().st_size != binding["bytes"])):
-            raise ValueError("word diagnostic artifact identity mismatch")
-        return target
-
-    rows, families = [], set()
-    for selected in selection["recipes"]:
-        if (any(selected.get(flag) is not False for flag in flags)
-                or selected["family"] in families):
-            raise ValueError("word diagnostic selections must be unique and nonqualifying")
-        families.add(selected["family"])
-        receipt = read_json(artifact(selected["receipt"]))
-        artifact(selected["parent"])
-        if (receipt.get("qualification_input") is not False or receipt.get("eligible_for_default") is not False
-                or receipt["id"] != selected["arm"] or receipt["family"] != selected["family"]
-                or receipt["parent"] != selected["parent"]["path"]
-                or receipt["parent_sha256"] != selected["parent"]["sha256"]):
-            raise ValueError("word diagnostic receipt selection mismatch")
-        executed_recipe = {key: field["value"] for key, field in receipt["field_ownership"]["recipe_fields"].items()}
-        if (stable_hash(selected["recipe"]) != selected["full_recipe_sha256"]
-                or selected["full_recipe_sha256"] != stable_hash(executed_recipe)
-                or stable_hash(receipt["recipe"]) != selected["normalized_recipe_sha256"]
-                or any(selected["recipe"].get(key) != value for key, value in receipt["recipe"].items())):
-            raise ValueError("word diagnostic recipe identity mismatch")
-        for key in ("source_commit", "source_digest", "task_fingerprint", "prior", "initialization",
-                    "runtime", "rng_manifest_sha256", "final_metrics"):
-            if selected[key] != receipt[key]:
-                raise ValueError(f"word diagnostic {key} binding mismatch")
-        task, evaluation = receipt["task"], receipt["task"]["evaluation"]
-        if (task["id"] != "five_word_joint_acquisition"
-                or selected["task"]["path"] != "configs/forge/tasks/five_word_joint_acquisition.json"
-                or selected["task"]["updates"] != task["execution"]["steps"]
-                or selected["task"]["schedule_horizon"] != task["execution"]["original_schedule_horizon"]
-                or selected["task"]["observations"] != evaluation["observations"]
-                or selected["task"]["terminal_passes"] != evaluation["minimum_stable_checks"]
-                or selected["task"]["sampling_law"] != receipt["sampling_law"]
-                or receipt["sampling_law"] != evaluation["sampling_law"]
-                or selected["convergence"] != receipt["grade"]["evaluator_result"]["convergence"]):
-            raise ValueError("word diagnostic task or convergence binding mismatch")
-        backend = receipt["runtime"]["device"].split(":", 1)[0]
-        if execution_backend is None or execution_backend == backend:
-            rows.append(dict(deepcopy(selected), gate_status=receipt["grade"]["gate_status"]))
-    if not rows:
-        return None
-    result = {key: deepcopy(value) for key, value in selection.items() if key != "recipes"}
-    result.update(selection={"path": WORD_TASK_SELECTION.as_posix(), "sha256": file_hash(path)}, rows=rows)
-    return result
-
-
 def _current_markdown(result, root, path):
     def cell(value):
         return str(value if value is not None else "unknown").replace("|", "\\|").replace("\n", " ")
@@ -706,8 +640,9 @@ def _current_markdown(result, root, path):
                   "Current task placement is listed in [experiments by tier](EXPERIMENTS_BY_TIER.md). "
                   "The recorded outcomes supply no qualification for a later view revision.", ""]
     lines += [
-             "Each cell is **passes / full required total** from one complete selected configuration. "
-             "Each trainer family and runtime has one row; its alternatives remain recorded separately.", "",
+             "Each cell is **passes / full required total** from one complete selected configuration. " +
+             ("Each trainer family and runtime has one archived row; its alternatives remain recorded separately."
+              if recorded_policy else "Each formulation family has one current selected row; source and runtime alternatives remain unranked."), "",
              "| Trainer family | Selected configuration | Selection | Evidence source | Exact revision / cohort | Compute | " +
              " | ".join(f"Tier {tier}" for tier in tiers) + " | Recorded tier | Other outcomes | Paid seconds |",
              "| --- | --- | --- | --- | --- | --- | " + " | ".join("---:" for _ in tiers) + " | ---: | --- | ---: |"]
@@ -756,32 +691,9 @@ def _current_markdown(result, root, path):
                "New evidence for a later view revision requires its own compatible evidence registration."
                if recorded_policy else
                "For ordinary Forge qualification, use `--source-commit <executed-commit>` to independently regrade "
-               "hydrated original receipts and update this leaderboard. Task-only word diagnostics are read from their "
-               "committed recipe selections and compact receipts. Source snapshots are provenance, not additional leaderboards."), "",
+               "hydrated original receipts and update this leaderboard. Reusable candidates use the same complete task ladder. "
+               "Historical task-only diagnostics remain motivation and reproduction evidence. Source snapshots are provenance, not additional leaderboards."), "",
               f"Publication input digest `{result['provenance']['input_digest']}`.", ""]
-    diagnostics = result.get("task_diagnostics")
-    if diagnostics:
-        selection_link = os.path.relpath(root / diagnostics["selection"]["path"], path.parent)
-        lines += ["## Five-word joint task diagnostics", "",
-                  "The bounded word-task study recommends the exact recipes below. These are **task-only diagnostics**: "
-                  "they do not replace the configurations above, fill Tier 1 cells, or qualify defaults. "
-                  "Each result retains its executed source, recipe, prior, initialization, budget and clean/live sampling law.", "",
-                  f"[Exact task-only recipes]({selection_link}) · "
-                  "[Root cause, all 18 runs and training GIFs](word-root-cause/README.md)", "",
-                  "| Family | Selected diagnostic / receipt | Result | Terminal passing suffix | Modes / quality | TV | Minimum inverse probability | Executed commit | Compute |",
-                  "| --- | --- | --- | ---: | --- | ---: | ---: | --- | --- |"]
-        labels = {"k3p": "K3P", "ka2": "KA2", "r1r2": "R1/R2"}
-        for row in diagnostics["rows"]:
-            receipt_link = os.path.relpath(root / row["receipt"]["path"], path.parent)
-            metrics, convergence, runtime = row["final_metrics"], row["convergence"], row["runtime"]
-            values = [labels.get(row["family"], row["family"]), f"[`{row['arm']}`]({receipt_link})", row["gate_status"],
-                      f"{convergence['passing_suffix']}/{convergence['observations']}",
-                      f"{metrics['modes']} / {metrics['quality_fraction']:.3f}", f"{metrics['mass_tv']:.6f}",
-                      f"{metrics['minimum_reconstruction_token_probability']:.6f}",
-                      f"`{row['source_commit'][:12]}`", runtime.get("gpu", runtime["device"])]
-            lines.append("| " + " | ".join(cell(value) for value in values) + " |")
-        lines += ["", "Use these recipes for this word host. Whole-configuration Tier 1 qualification still requires "
-                  "all required tasks under one compatible recipe and source cohort. No experiments were rerun for this publication.", ""]
     if result.get("archived_policies"):
         lines += ["Earlier view policies retain their exact numerical snapshots and receipt proofs in the companion JSON. "
                   "Their outcomes do not fill current requirements:", ""]
@@ -910,9 +822,12 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
     if manifest is None:
         raise ValueError("no registered technique evidence; use --source-commit after a completed experiment")
     from experiments.forge.planning import declaration_paths
-    from experiments.forge.trainer_families import family_for_candidate, select_family_rows
+    from experiments.forge.trainer_families import (CURRENT_SELECTION, family_for_candidate, load_current_selection,
+                                                    scientific_row_hash, select_family_rows)
     declarations = {path.stem: read_json(path) for path in declaration_paths(root)}
     candidates = set(declarations)
+    current_pins = (load_current_selection(root, view_id=view_id, policy_fingerprint=manifest["policy_fingerprint"])
+                    if recorded_view is None else {})
     selected = {}
     for entry, report, rows in reports:
         for name, row in rows.items():
@@ -924,14 +839,17 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
             previous = selected.get(key)
             if previous is None or rank > previous[0]:
                 selected[key] = rank, entry, report, deepcopy(row)
-            elif rank == previous[0] and any(row.get(field) != previous[3].get(field)
-                                            for field in ("candidate_revision", "cohort", "runtime_cohort")):
+            elif (rank == previous[0] and any(row.get(field) != previous[3].get(field)
+                                             for field in ("candidate_revision", "cohort", "runtime_cohort"))
+                  and family_for_candidate(root, name, declarations.get(name),
+                                           current_presentation=True)["id"] not in current_pins):
                 raise ValueError("ambiguous latest recorded technique cohort")
     # A search runtime needs the actual canonical declaration as its fallback;
     # never present an arbitrary unmeasured tuning trial as the family default.
     canonical_missing = set()
     for (name, backend), (_, entry, report, row) in list(selected.items()):
-        canonical = family_for_candidate(root, name, declarations.get(name))["canonical_candidate"]
+        canonical = family_for_candidate(root, name, declarations.get(name),
+                                         current_presentation=recorded_view is None)["canonical_candidate"]
         runtime_key = stable_hash(row.get("runtime_cohort"))
         if any(item[3]["candidate_id"] == canonical and item[3].get("runtime_cohort") == row.get("runtime_cohort")
                for item in selected.values()):
@@ -964,6 +882,19 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
                     raise ValueError("register new measured technique evidence with --source-commit")
                 row.setdefault("bindings", {})["source_origin_commit"] = None
                 selected[row["candidate_id"], backend, runtime_key] = "", None, live, deepcopy(row)
+    if current_pins:
+        # Exact historical incumbents must survive newer observations of the
+        # same card. Keep complete source/runtime alternatives, never cells.
+        retained = {}
+        for entry, report, rows in reports:
+            for name, row in rows.items():
+                backend = row.get("runtime_cohort", {}).get("execution_backend")
+                if name not in candidates or (execution_backend is not None and backend != execution_backend):
+                    continue
+                retained.setdefault(scientific_row_hash(row), ("", entry, report, deepcopy(row)))
+        for item in selected.values():
+            retained.setdefault(scientific_row_hash(item[3]), item)
+        selected = retained
     from experiments.forge.technique_board import DEFAULT_LABELS
     result = {"schema_version": 1, "reducer_version": "forge-current-technique-inventory-v1",
               "publication_scope": "current_technique_inventory", "qualification_reuse": False,
@@ -997,7 +928,7 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
         result[catalog] = dict(sorted(combined.items()))
     family_result = select_family_rows(root, result["rows"], result, view_id=view_id,
                                        policy_fingerprint=manifest["policy_fingerprint"], declarations=declarations,
-                                       view_policy=recorded_view)
+                                       view_policy=recorded_view, execution_backend=execution_backend)
     result.update(family_result)
     # Immutable scientific history stays numerical, including earlier revisions
     # of the same configuration. It cannot fill cells in the selected row.
@@ -1020,15 +951,13 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
                                 qualification_input=False,
                                 evidence_policy={key: deepcopy(policy[key]) for key in POLICY_FIELDS})
                 result["archived_evidence_rows"].append(evidence)
-    if view_id == "discriminator_stability" and recorded_policy is None:
-        diagnostics = _word_task_diagnostics(root, execution_backend)
-        if diagnostics:
-            result["task_diagnostics"] = diagnostics
     result["provenance"] = {"publication_reducer_sha256": file_hash(Path(__file__)),
                             "evidence_manifest_sha256": stable_hash(manifest),
                             "trainer_family_registry_sha256": file_hash(root / "configs/forge/trainer-families.json")
                                 if (root / "configs/forge/trainer-families.json").is_file() else None,
-                            "selected_rows_sha256": stable_hash(result["rows"])}
+                            "selected_rows_sha256": stable_hash(result["rows"]),
+                            "family_current_selection_sha256": file_hash(root / CURRENT_SELECTION)
+                                if current_pins else None}
     result["provenance"]["input_digest"] = stable_hash(result)
     json_path, markdown_path = root / CURRENT_PREFIX.with_suffix(".json"), root / CURRENT_PREFIX.with_suffix(".md")
     markdown = _current_markdown(result, root, markdown_path)

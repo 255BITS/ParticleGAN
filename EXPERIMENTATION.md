@@ -388,9 +388,11 @@ For a technique inventory with one passes/total column per tier, use the
 [current technique leaderboard](reports/forge/technique-inventory.md).
 This is the single published technique inventory, updated in place. It includes
 the [configurable Modern GAN training baseline](reports/forge/R3GAN_BASELINE_READOUT.md)
-and selects one complete configuration for each declared trainer family and
-comparable runtime cohort. Alternative configurations retain their recorded
-results and source identities in the companion JSON and evidence snapshots.
+and selects one complete configuration for each formulation family. The generic
+[`family-current-v1.json`](configs/forge/selections/family-current-v1.json) mapping
+pins its exact measured revision, recipe, source, runtime and task identities.
+Alternative configurations retain their recorded results and source identities
+as unranked alternatives in the companion JSON and evidence snapshots.
 The [released v0.7 task-adaptation readout](reports/forge/RELEASE07_TASK_ADAPTATION_READOUT.md)
 adds one measured successor with all 24 integration preflights ready. Its
 required smoke failure stops the remaining ordinary tasks; the original native
@@ -404,6 +406,20 @@ discovered from `configs/forge/ideas/*.json` and
 `configs/forge/configurations/*.json`. The explicit family registry keeps
 hyperparameter trials within an existing technique row. R1/R2, BCap, K3P and the other public formulations retain
 their actual resolved recipes and separate source/runtime/sampling cohorts.
+Solutions are reusable family candidates, evaluated through the same task ladder.
+Keep one global recipe on every eligible host; task bindings supply conditions
+and applicability rather than bespoke optimizer settings. A changed formulation
+needs a new family. Structural control changes within an existing formulation
+need ordinary idea cards and explicit deltas; they must not bypass the stricter
+same-signature configuration-search validator. A new configured family standard
+requires all five required Tier 1 tasks to PASS from that one candidate and
+compatible evidence cohort. A failure leaves the recorded incumbent selected
+and the attempted replacement visible as an unranked alternative. Retaining an
+incumbent does not claim it beats a candidate from another source or runtime.
+Configured standards do not change public defaults or relax calibration and
+independent-confirmation requirements. Recorded-policy reconstruction preserves
+its original family/cohort rows.
+
 The ordinary `inventory` execution command still submits declared ideas;
 configuration grids run only through an explicitly requested `search` study.
 
@@ -441,9 +457,11 @@ and the penalty's units over the full joint input. Record active controllers as
 well as nominal rates. The word study repaired exact-equality grading and prior
 optimizer beta binding; it preserves old evidence and ordinary qualification.
 Clean/full noise and horizon ablations can cross technique activation boundaries,
-so declare their diagnostic scope instead of calling them ordinary same-signature
-configuration searches. These lessons do not add implicit recipe adaptation or
-establish that noise alone caused failure.
+so register reusable structural idea candidates instead of calling them ordinary
+same-signature configuration searches. The task-only study and recipe export
+remain historical evidence; they are not an active solution-selection operation
+or an importer into ordinary qualification. These lessons do not add implicit
+recipe adaptation or establish that noise alone caused failure.
 
 To advance a published view policy, register its measured source explicitly with
 `--advance-policy --source-commit EXECUTED_COMMIT`. Earlier numerical cohorts
