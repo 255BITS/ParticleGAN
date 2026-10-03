@@ -30,9 +30,23 @@ Regenerate this same leaderboard from committed evidence, without training or ra
 python reports/forge/regenerate_technique_inventory.py
 ```
 
-After a new experiment, use `--source-commit <executed-commit>` to independently regrade its hydrated original receipts and update this leaderboard. Source snapshots are provenance, not additional leaderboards.
+For ordinary Forge qualification, use `--source-commit <executed-commit>` to independently regrade hydrated original receipts and update this leaderboard. Task-only word diagnostics are read from their committed recipe selections and compact receipts. Source snapshots are provenance, not additional leaderboards.
 
-Publication input digest `b3aeb0c33b2218507fe10a9006c37876f56bf8c2ce29475d495c8b5a0180b67d`.
+Publication input digest `ce68822de9c442d3a6d3330ce308a39ed98dadc46e399d22120d1027a922867f`.
+
+## Five-word joint task diagnostics
+
+The bounded word-task study recommends the exact recipes below. These are **task-only diagnostics**: they do not replace the configurations above, fill Tier 1 cells, or qualify defaults. Each result retains its executed source, recipe, prior, initialization, budget and clean/live sampling law.
+
+[Exact task-only recipes](../../configs/forge/selections/word-joint-task-v1.json) · [Root cause, all 18 runs and training GIFs](word-root-cause/README.md)
+
+| Family | Selected diagnostic / receipt | Result | Terminal passing suffix | Modes / quality | TV | Minimum inverse probability | Executed commit | Compute |
+| --- | --- | --- | ---: | --- | ---: | ---: | --- | --- |
+| K3P | [`k3p-coeff170-cap1`](word-root-cause/receipts/k3p-coeff170-cap1.json) | PASS | 24/24 | 5 / 1.000 | 0.024219 | 0.997103 | `575d485eedca` | NVIDIA RTX A6000 |
+| KA2 | [`ka2-slow-prior-0p1`](word-root-cause/receipts/ka2-slow-prior-0p1.json) | PASS | 21/24 | 5 / 1.000 | 0.024219 | 0.999942 | `1a2c8d06de6b` | NVIDIA RTX A6000 |
+| R1/R2 | [`r1r2-mid-rate-fast-roles`](word-root-cause/receipts/r1r2-mid-rate-fast-roles.json) | PASS | 22/24 | 5 / 1.000 | 0.024219 | 0.996137 | `ecc2dc8f48b7` | NVIDIA RTX A6000 |
+
+Use these recipes for this word host. Whole-configuration Tier 1 qualification still requires all required tasks under one compatible recipe and source cohort. No experiments were rerun for this publication.
 
 Earlier view policies retain their exact numerical snapshots and receipt proofs in the companion JSON. Their outcomes do not fill current requirements:
 
