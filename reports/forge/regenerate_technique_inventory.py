@@ -707,10 +707,12 @@ def _current_markdown(result, root, path):
                   "The recorded outcomes supply no qualification for a later view revision.", ""]
     lines += [
              "Each cell is **passes / full required total** from one complete selected configuration. "
-             "Each trainer family and runtime has one row; its alternatives remain recorded separately.", "",
-             "| Trainer family | Selected configuration | Selection | Evidence source | Exact revision / cohort | Compute | " +
-             " | ".join(f"Tier {tier}" for tier in tiers) + " | Recorded tier | Other outcomes | Paid seconds |",
-             "| --- | --- | --- | --- | --- | --- | " + " | ".join("---:" for _ in tiers) + " | ---: | --- | ---: |"]
+             "Each trainer family and runtime has one row; its alternatives remain recorded separately. "
+             "Expand the configuration details below for selection, provenance, other outcomes and cost.", "",
+             "| Trainer family / runtime | " +
+             " | ".join(f"Tier {tier}" for tier in tiers) + " | Recorded tier |",
+             "| --- | " + " | ".join("---:" for _ in tiers) + " | ---: |"]
+    details = ["<details>", "<summary>Selected configurations and provenance</summary>", ""]
     for row in result["rows"]:
         source = row.get("bindings", {}).get("source_digest")
         pointer = result["evidence_sources"].get(row.get("publication_key"))
@@ -735,12 +737,24 @@ def _current_markdown(result, root, path):
         card = root / "configs/forge/configurations" / (name + ".json")
         if not card.is_file():
             card = root / "configs/forge/ideas" / (name + ".json")
-        configuration_link = f"[`{name}`]({os.path.relpath(card, path.parent)})"
-        values = [row["technique"], configuration_link, selection_label, source_link, f"{revision} / {cohort}", compute,
+        # Keep content-addressed IDs in the link target, with a readable label.
+        label = name.rsplit("--", 1)
+        configuration_label = " · ".join([label[0], label[1][:12]]) if len(label) == 2 else name
+        configuration_link = f"[{configuration_label}]({os.path.relpath(card, path.parent)})"
+        backend = runtime.get("execution_backend", "unrecorded")
+        values = [f"{row['technique']}<br>{backend}",
                   *[f"{row['tiers'][tier]['passed']}/{row['tiers'][tier]['total']}" for tier in tiers],
-                  row["qualified_tier"], others, round(seconds, 3) if seconds is not None else "unknown"]
+                  row["qualified_tier"]]
         lines.append("| " + " | ".join(cell(value) for value in values) + " |")
-    lines += ["", "Recorded results remain bound to their actual recipes, priors, initialization, budgets, sampling laws "
+        details += [f"### {cell(row['technique'])} ({cell(backend)})", "",
+                    f"- **Selected configuration:** {configuration_link}",
+                    f"- **Selection:** {cell(selection_label)}",
+                    f"- **Evidence source:** {source_link}",
+                    f"- **Exact revision / cohort:** {revision} / {cohort}",
+                    f"- **Compute:** {cell(compute)}",
+                    f"- **Other outcomes:** {cell(others)}",
+                    f"- **Paid seconds:** {round(seconds, 3) if seconds is not None else 'unknown'}", ""]
+    lines += [""] + details + ["</details>", "", "Recorded results remain bound to their actual recipes, priors, initialization, budgets, sampling laws "
               "and hardware. They do not pool qualification across sources or qualify the latest checkout. "
               "Selection never combines passing tasks or tiers from different configurations. A failed best-observed "
               "configuration is not a qualified winner. Search qualification covers only its declared tuning tiers; "
@@ -768,19 +782,26 @@ def _current_markdown(result, root, path):
                   "Each result retains its executed source, recipe, prior, initialization, budget and clean/live sampling law.", "",
                   f"[Exact task-only recipes]({selection_link}) · "
                   "[Root cause, all 18 runs and training GIFs](word-root-cause/README.md)", "",
-                  "| Family | Selected diagnostic / receipt | Result | Terminal passing suffix | Modes / quality | TV | Minimum inverse probability | Executed commit | Compute |",
-                  "| --- | --- | --- | ---: | --- | ---: | ---: | --- | --- |"]
+                  "The passing suffix is the terminal passing observations / total observations. "
+                  "Min. inverse P is the minimum reconstruction token probability.", "",
+                  "| Family | Result | Passing suffix | TV | Min. inverse P |",
+                  "| --- | --- | ---: | ---: | ---: |"]
+        details = ["<details>", "<summary>Diagnostic recipes, modes, quality and provenance</summary>", ""]
         labels = {"k3p": "K3P", "ka2": "KA2", "r1r2": "R1/R2"}
         for row in diagnostics["rows"]:
             receipt_link = os.path.relpath(root / row["receipt"]["path"], path.parent)
             metrics, convergence, runtime = row["final_metrics"], row["convergence"], row["runtime"]
-            values = [labels.get(row["family"], row["family"]), f"[`{row['arm']}`]({receipt_link})", row["gate_status"],
+            family = labels.get(row["family"], row["family"])
+            values = [family, row["gate_status"],
                       f"{convergence['passing_suffix']}/{convergence['observations']}",
-                      f"{metrics['modes']} / {metrics['quality_fraction']:.3f}", f"{metrics['mass_tv']:.6f}",
-                      f"{metrics['minimum_reconstruction_token_probability']:.6f}",
-                      f"`{row['source_commit'][:12]}`", runtime.get("gpu", runtime["device"])]
+                      f"{metrics['mass_tv']:.6f}", f"{metrics['minimum_reconstruction_token_probability']:.6f}"]
             lines.append("| " + " | ".join(cell(value) for value in values) + " |")
-        lines += ["", "Use these recipes for this word host. Whole-configuration Tier 1 qualification still requires "
+            details += [f"### {cell(family)}", "",
+                        f"- **Selected diagnostic / receipt:** [{row['arm']}]({receipt_link})",
+                        f"- **Modes / quality:** {metrics['modes']} / {metrics['quality_fraction']:.3f}",
+                        f"- **Executed commit:** `{row['source_commit'][:12]}`",
+                        f"- **Compute:** {cell(runtime.get('gpu', runtime['device']))}", ""]
+        lines += [""] + details + ["</details>", "", "Use these recipes for this word host. Whole-configuration Tier 1 qualification still requires "
                   "all required tasks under one compatible recipe and source cohort. No experiments were rerun for this publication.", ""]
     if result.get("archived_policies"):
         lines += ["Earlier view policies retain their exact numerical snapshots and receipt proofs in the companion JSON. "
