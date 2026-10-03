@@ -2,6 +2,7 @@
 from copy import deepcopy
 import importlib.util
 import json
+import os
 from pathlib import Path
 import subprocess
 import sys
@@ -221,6 +222,27 @@ def test_cli_does_not_launch_without_explicit_verified_baseline():
     assert error.value.code == 2
 
 
+def test_direct_parent_cli_from_outside_checkout_imports_real_forge_without_pythonpath(tmp_path):
+    output = tmp_path / 'never-launched-hold'
+    snapshot = tmp_path / 'invalid-source'; snapshot.mkdir()
+    preparation = output.parent / f'.{output.name}.hold-preparation.json'
+    hold.write(preparation, {'execution_source': {
+        'snapshot_path': str(snapshot), 'files': {}, 'digest': '0' * 64}})
+    before = preparation.read_bytes()
+    environment = dict(os.environ); environment.pop('PYTHONPATH', None)
+    completed = subprocess.run(
+        [sys.executable, '-B', str(Path(hold.__file__)), '--prepare-only', '--output', str(output),
+         '--queue-root', str(tmp_path / 'never-created-queue')],
+        cwd=tmp_path, env=environment, capture_output=True, text=True, timeout=20)
+    assert completed.returncode != 0
+    assert 'invalid source manifest digest' in completed.stderr
+    assert 'experiments/forge/sources.py' in completed.stderr
+    assert 'ModuleNotFoundError' not in completed.stderr
+    assert preparation.read_bytes() == before
+    assert not output.exists()
+    assert not (tmp_path / 'never-created-queue').exists()
+
+
 def recorded_clouds():
     from benchmarks.toy_audit.api_vectors import list_cases, score_case
     case = next(c for c in list_cases() if c['id'] == hold.CASE)
@@ -301,3 +323,17 @@ def test_source_defined_unavailable_diagnostics_roundtrip_without_waiving_model_
     assert not hold.finite_state(invalid)
     invalid = deepcopy(state); invalid['trainer']['lr_settle'][0][0]['r_b'][0][0] = float('inf')
     assert not hold.finite_state(invalid)
+
+
+@pytest.mark.parametrize('container', ['last', 'last_look', 'log'])
+@pytest.mark.parametrize('leaf', ['log_bf_b', 'log_bf_2b'])
+def test_only_source_defined_negative_infinity_log_bf_sentinels_are_admitted(container, leaf):
+    diagnostic = {leaf: float('-inf')}
+    state = {'trainer': {'lr_settle': [[{container: [diagnostic] if container == 'log' else diagnostic}]]}}
+    assert hold.finite_state(state)
+    assert hold.tree_equal(state, deepcopy(state))
+    diagnostic[leaf] = float('inf')
+    assert not hold.finite_state(state)
+    diagnostic[leaf] = 0.
+    diagnostic['unknown_log_bf'] = float('-inf')
+    assert not hold.finite_state(state)

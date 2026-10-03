@@ -264,6 +264,7 @@ def finite_state(value, path=()):
 
     continuous.py stores NaN for masked/no-evidence displacement/cosine entries
     and unavailable test statistics; t_b/t_2b may be infinite at zero variance.
+    log_bf_b/log_bf_2b use negative infinity before sufficient early evidence.
     These named diagnostic leaves are not model/optimizer health metrics. Their
     values are preserved and compared, never replaced or interpreted as PASS.
     The original public loader still validates the entire controller schema.
@@ -286,7 +287,8 @@ def finite_state(value, path=()):
                   and type(path[2]) is int and type(path[3]) is int
                   and path[4] in {'last', 'last_look', 'log'}
                   and path[-1] in {'t_b', 't_2b', 'mean_r_b', 'mean_r_2b', 'log_bf_b', 'log_bf_2b'})
-    return diagnostic and (math.isnan(value) or path[-1] in {'t_b', 't_2b'})
+    return diagnostic and (math.isnan(value) or path[-1] in {'t_b', 't_2b'}
+                           or value == -math.inf and path[-1] in {'log_bf_b', 'log_bf_2b'})
 
 
 def restore(fixture, state, *, initial=START, final=END):
@@ -817,6 +819,10 @@ def main(argv=None):
         return child(args.child)
     if args.verify_result:
         return verify_result(args.verify_result)
+    # Direct parent CLI execution must find maintained Forge from any cwd.
+    # Fresh scientific child/verification dispatch above owns its original
+    # namespace and must never receive this maintained checkout import path.
+    sys.path.insert(0, str(ROOT))
     if args.plan:
         print(json.dumps(plan(), indent=2, allow_nan=False)); return 0
     if args.output is None:
