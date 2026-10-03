@@ -34,6 +34,22 @@ def parser():
     p.add_argument("--root", type=Path, default=Path(__file__).resolve().parents[2], help="Forge checkout containing declarations and durable reports")
     p.add_argument("--queue-root", type=Path, help="shared repo-local operational queue; default common Git repository runs/forge")
     commands = p.add_subparsers(dest="command", required=True)
+    artifacts = commands.add_parser("artifacts", help="verify/hydrate byte-exact originals; no training or regrading")
+    artifact_stages = artifacts.add_subparsers(dest="stage", required=True)
+    for stage in ("inspect", "hydrate"):
+        artifact = artifact_stages.add_parser(stage)
+        artifact.add_argument("manifest", type=Path, help="committed Forge archive card")
+        artifact.add_argument("--member", action="append", default=[], help="exact archive member; repeat to select originals")
+        artifact.add_argument("--mirror", action="append", type=Path, default=[], help="mounted content-addressed mirror directory")
+        artifact.add_argument("--locations", type=Path, help="local SHA-256 location/retention configuration")
+        if stage == "hydrate":
+            artifact.add_argument("--destination", type=Path, required=True, help="new isolated directory (must not exist)")
+    original = artifact_stages.add_parser("git", help="hydrate an exact commit/path/blob original already available in Git")
+    original.add_argument("--commit", required=True)
+    original.add_argument("--path", required=True)
+    original.add_argument("--blob", required=True)
+    original.add_argument("--sha256", required=True)
+    original.add_argument("--destination", type=Path, required=True)
     new = commands.add_parser("new", help="scaffold one small idea declaration")
     new.add_argument("--id", required=True)
     new.add_argument("--parent", default="k3p")
@@ -190,6 +206,27 @@ def follow_logs(path: Path, args):
 def main(argv=None):
     args = parser().parse_args(argv)
     root = args.root.resolve()
+    if args.command == "artifacts":
+        from .artifact_resolver import ArtifactError, hydrate_archive, hydrate_git, inspect_archive
+        try:
+            if args.stage == "git":
+                result = hydrate_git(root, commit=args.commit, path=args.path, blob=args.blob,
+                                     sha256=args.sha256, destination=args.destination)
+            else:
+                card = read_json(root / args.manifest)
+                options = {"members": args.member, "mirrors": args.mirror, "locations": args.locations}
+                result = (inspect_archive(root, card, **options) if args.stage == "inspect"
+                          else hydrate_archive(root, card, args.destination, **options))
+            emit(result)
+            return 0
+        except ArtifactError as error:
+            emit({"status": error.status, "message": str(error), "training_launched": False,
+                  "qualification_changed": False})
+            return 2 if error.status == "MISSING" else 3
+        except (OSError, ValueError, KeyError, TypeError) as error:
+            emit({"status": "INVALID", "message": str(error), "training_launched": False,
+                  "qualification_changed": False})
+            return 3
     if args.command == "experiments-by-tier":
         from .tier_report import build_report, render_markdown, write_report
         report = build_report(root, args.view)
