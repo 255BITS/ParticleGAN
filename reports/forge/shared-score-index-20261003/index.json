@@ -1,0 +1,5282 @@
+{
+  "boundary_date": "2026-10-03",
+  "c6_hold_extension": {
+    "availability": "PINNED_PR_BRANCH_REPORT",
+    "cost": {
+      "charged_seconds": 31.18462771223858,
+      "combined_charged_seconds": 38.003306054277346,
+      "paid_seconds": 31.18462771223858,
+      "previous_paid_seconds": 6.8186783420387655,
+      "reserved_seconds": 0.0
+    },
+    "current_requirement_credit": false,
+    "default_adoption": false,
+    "engineering_paid_seconds": 6.8186783420387655,
+    "fair_speed_winner": null,
+    "id": "c6-exact-broad-150-update-hold-extension",
+    "law": "Restore exact old C6 public-policy state at 1200 and append 150 unchanged updates; checks 1250/1300/1350. Both1250/1300 FAIL, final 1350 instant PASS does not erase persistence FAIL.",
+    "new_updates": 300,
+    "pr": 266,
+    "report": "https://github.com/255BITS/ParticleGAN/blob/edc9d2e6e1227f8d7a1dd52e6e363b03ef871eb8/reports/forge/continuous-baseline-20261003/README.md",
+    "required": 2,
+    "rows": [
+      {
+        "completed_steps": 1350,
+        "compound_hold": {
+          "first_confirmed_step": 1100,
+          "full_protocol_complete": true,
+          "hold_checks": 5,
+          "hold_passed": 3,
+          "new_hold_checks": 3,
+          "original_gate": "PASS",
+          "original_hold_checks": 2,
+          "original_study_gate": "INCOMPLETE",
+          "passed": false,
+          "required_hold_checks": 5,
+          "speed_eligible": false,
+          "status": "FAIL"
+        },
+        "cost": {
+          "charged_seconds": 15.290889646159485,
+          "paid_seconds": 15.290889646159485,
+          "reserved_seconds": 0.0
+        },
+        "extension_gate": "FAIL",
+        "family": "atlas",
+        "id": "c6-atlas-broad-hold-1200-to-1350",
+        "media": "media/c6-atlas-broad-hold-1200-to-1350.gif",
+        "new_updates": 150,
+        "original_gate": "PASS",
+        "original_study_gate": "INCOMPLETE",
+        "parent_source_commit": "8021a1c50c4aff90ddea5010d368cffdc857b2f6",
+        "source_commit": "82c85cc32c43746074cb2809ae0f2aed271484bd"
+      },
+      {
+        "completed_steps": 1350,
+        "compound_hold": {
+          "first_confirmed_step": 1100,
+          "full_protocol_complete": true,
+          "hold_checks": 5,
+          "hold_passed": 3,
+          "new_hold_checks": 3,
+          "original_gate": "PASS",
+          "original_hold_checks": 2,
+          "original_study_gate": "INCOMPLETE",
+          "passed": false,
+          "required_hold_checks": 5,
+          "speed_eligible": false,
+          "status": "FAIL"
+        },
+        "cost": {
+          "charged_seconds": 15.893738066079095,
+          "paid_seconds": 15.893738066079095,
+          "reserved_seconds": 0.0
+        },
+        "extension_gate": "FAIL",
+        "family": "e22",
+        "id": "c6-e22-broad-hold-1200-to-1350",
+        "media": "media/c6-e22-broad-hold-1200-to-1350.gif",
+        "new_updates": 150,
+        "original_gate": "PASS",
+        "original_study_gate": "INCOMPLETE",
+        "parent_source_commit": "8021a1c50c4aff90ddea5010d368cffdc857b2f6",
+        "source_commit": "82c85cc32c43746074cb2809ae0f2aed271484bd"
+      }
+    ],
+    "scientific_counts": {
+      "BLOCKED": 0,
+      "ERROR": 0,
+      "FAIL": 2,
+      "INCOMPLETE": 0,
+      "PASS": 0,
+      "UNASSESSED": 0,
+      "UNKNOWN": 0
+    }
+  },
+  "cross_cohort_case_pooling": false,
+  "eligible_shipping_winner": null,
+  "fair_speed_winner": null,
+  "future_named_families": {
+    "capacity_cells": {
+      "captured_in_this_index": 0,
+      "learned_credit": 0,
+      "required": 16
+    },
+    "cost_inheritance_only": {
+      "k3p_remaining_slot_seconds": 7625.802896707086,
+      "ka2_remaining_slot_seconds": 7620.202851408394,
+      "original_cap_seconds": 15360.0,
+      "pair_remaining_seconds": 15246.00574811548,
+      "prior_campaign_seconds": 113.99425188452005
+    },
+    "families": [
+      "ka2",
+      "k3p"
+    ],
+    "law": "Own fast/no DV12/fixed sigma warmup/scheduled/AMSGradFalse law; fresh capacity and learning outcomes needed. Ordinary 4/5 is a hypothesis, not public-policy credit.",
+    "scientific_cells": {
+      "UNKNOWN": 16,
+      "required": 16
+    },
+    "status_at_boundary": "UNEXECUTED",
+    "tuple": {
+      "d_lr_mult": 1.0,
+      "lr": 0.006375,
+      "prior_lr_mult": 1.0
+    }
+  },
+  "gate_changes": false,
+  "historical_atlas19": {
+    "availability": "PINNED_PR_BRANCH_REPORT",
+    "complete": 19,
+    "config_sha256": "a3ee5c67ac6594014feeb1ec333131abb4b1d86832510b69923100ebd8510ad4",
+    "cost": {
+      "charged_seconds": 5210.63884702418,
+      "paid_seconds": 5210.63884702418,
+      "reserved_seconds": 0.0
+    },
+    "current_requirement_credit": false,
+    "default_adoption": false,
+    "fair_speed_winner": null,
+    "id": "historical-atlas19-exact-replay",
+    "law": "Original Atlas19 source-owned loops/resources and concrete per-case observer. Image TV diagnostic; native noisy primary requires joint coverage+accuracy, 34 observations, final-five 20k plus independent 100k. Native clean diagnostics all FAIL.",
+    "metric_gifs": 19,
+    "original_counts": {
+      "BLOCKED": 0,
+      "ERROR": 0,
+      "FAIL": 0,
+      "INCOMPLETE": 0,
+      "PASS": 19,
+      "UNASSESSED": 0,
+      "UNKNOWN": 0
+    },
+    "pr": 266,
+    "report": "https://github.com/255BITS/ParticleGAN/blob/edc9d2e6e1227f8d7a1dd52e6e363b03ef871eb8/reports/forge/continuous-baseline-20261003/README.md",
+    "required": 19,
+    "source_commit": "a0d6d89fb470f551b3f790016a237c40a377e1e8",
+    "source_execution_digest": "e2b6c0e675c5da26663ac7a6181025df1d964dfe43e9a70591374ee94688d985",
+    "supplemental_goal_gifs": 6
+  },
+  "inputs": {
+    "atlas19_hold": {
+      "bytes": 574945,
+      "path": "/ml2/hypergan/ParticleGAN-continuous-pg-leaderboard-20261003/reports/forge/continuous-baseline-20261003/results.json",
+      "sha256": "4cdbec6b54e31ecdaac5ee2cd887258004c5da7c9a7102261e1c1c8c3939b66a"
+    },
+    "critic_archive": {
+      "bytes": 8599,
+      "path": "/ml2/hypergan/ParticleGAN-critic-balance-results-20261003/reports/forge/critic-balance-20261003/archive.json",
+      "sha256": "cc2553e635b2675726e282325127a0018307e870a4bec8ce364f8c305e99c903"
+    },
+    "critic_rate": {
+      "bytes": 83682,
+      "path": "/ml2/hypergan/forge-critic-balance-20261003-v2/publication-v1/results.json",
+      "sha256": "b935f088d53dff90de31a9bec768e140a3505c0c03729cf5f3d814f9f993b35f"
+    },
+    "generator_archive": {
+      "bytes": 13705,
+      "path": "/ml2/hypergan/ParticleGAN-generator-step-results-20261003/reports/forge/generator-step-20261003/archive.json",
+      "sha256": "28833711ef1a0617468788ee5496aedbe16f5ba87b129da05616da4fa3c08991"
+    },
+    "generator_half": {
+      "bytes": 92866,
+      "path": "/ml2/hypergan/forge-generator-step-20261003/publication-v1/results.json",
+      "sha256": "a9da2ae3af04d50873cc7f0199eedd34a0f2ba768efc86ada866a40d293c6c63"
+    },
+    "inventory": {
+      "bytes": 34023,
+      "path": "/ml2/hypergan/pg-recent-pr-inventory-20261003/inventory-review.json",
+      "sha256": "8c4a0779645e5fedd20f680f53a86b41fb24ca694d37b3ca9ca2eeb09f8d4d0b"
+    },
+    "ordinary": {
+      "bytes": 1710051,
+      "path": "/ml2/hypergan/ParticleGAN-generator-step-20261003/reports/forge/technique-inventory.json",
+      "sha256": "01513191552cb57846582acd609a89571e130576b30ea509ce73ab213e4296bd"
+    },
+    "policy": {
+      "bytes": 921753,
+      "path": "/ml2/hypergan/ParticleGAN-generator-step-20261003/reports/forge/policy-family-inventory.json",
+      "sha256": "b36cf5d76adc736adc09184afef38d81b708313864e0e94c38a47a75ace004dc"
+    }
+  },
+  "interpretation": [
+    "Q1 SUPPORTED means a parameter/sampling capacity witness, never learned PASS.",
+    "Original numeric grade and added acquisition/hold grade stay separate.",
+    "Each full configuration retains all required case denominators; early stop later cases remainUNKNOWN.",
+    "Rank only inside a declared compatible source/spec/family/runtime lane; no successful-case pooling across tuples.",
+    "Paid wall intervals, interrupted reservation, CPU construction/verification diagnostics and external contention are separate accounting domains.",
+    "Historical19/19 does not fill current Forge or public-policy requirements.",
+    "LOCAL_ONLY archive cards are not remotely replicated checkpoints.",
+    "Index points to the maintained primary reports; it does not supersede their certifiers or create a second shipping leaderboard."
+  ],
+  "inventory_limit": {
+    "develop_at_last_primary_inventory": "4749b2780add539df4bd8d2dd1d3cc9f002f77ad",
+    "merged_delta_from_scientific4749": "NONE",
+    "open_pr_metadata_scope": "LATEST100_UPDATED_ROWS_ONLY; not exhaustive older-open-PR or current-CI verification",
+    "pr266_267_268": "Known pinned report links; no new GitHub state/CI/merge check performed by this index.",
+    "production_pr255": "UNTOUCHED; current production diff unverified in bounded inventory"
+  },
+  "kind": "DERIVED_READ_ONLY_INDEX_NOT_CERTIFIER",
+  "metric_rescoring": false,
+  "new_sampler_calls": 0,
+  "new_training_updates": 0,
+  "ordinary_mog": {
+    "all_configuration_rows_available_in_primary_report": 47,
+    "availability": "PINNED_ON_DEVELOP",
+    "current_tier1_tie": [
+      "ka2",
+      "k3p"
+    ],
+    "default_adoption": false,
+    "fair_speed_winner": null,
+    "id": "ordinary-mog-current-forge",
+    "policy_fingerprint": "c856f402249b71c8f877974e427dc7ed70bf7102f9bc0e433b933d7a024789fe",
+    "ranking_rule": "Import the primary board selections; compare required PASS counts only inside its declared comparison_cohort. Do not fill lower tiers with historical or public-policy evidence.",
+    "report": "https://github.com/255BITS/ParticleGAN/blob/4749b2780add539df4bd8d2dd1d3cc9f002f77ad/reports/forge/technique-inventory.md",
+    "required_denominators": {
+      "tier1": 5,
+      "tier2": 19,
+      "tier3": 2
+    },
+    "selected_family_rows": [
+      {
+        "comparison_cohort": "f44513063f54dda028e7843f749aaf6f470920c4104263842860127164a67e21",
+        "configuration_id": "atlas",
+        "family": "atlas",
+        "imported_selection": {
+          "independent_confirmation": null,
+          "qualified": false,
+          "required_passes_by_tier": null,
+          "selected_candidate_id": null,
+          "selection_kind": "canonical_fallback",
+          "study_id": null
+        },
+        "law": {
+          "claim_contract": {
+            "sampling_law": "task_declared",
+            "schedule": "schedule_free",
+            "scoring_weights": "state_selected"
+          },
+          "initializer": "deterministic_orthogonal",
+          "prior": {
+            "exception_reason": "Independent E22 row controls require an explicit equal-mass particle cloud; this is separate from Forge learned-MoG cohorts.",
+            "kind": "particle_cloud",
+            "learnable": true,
+            "sigma": 0.0,
+            "standardize": false
+          },
+          "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+          "recipe_sha256": "a186235341b37123e9944253a40ed2105993354954ca37f6b527f2cae44a1132"
+        },
+        "qualified_tier": 0,
+        "recipe_knobs": {
+          "amsgrad": true,
+          "betas": [
+            0.0,
+            0.999
+          ],
+          "d_lr_mult": 1.0,
+          "lr": 0.00425,
+          "prior_lr_mult": 2.0,
+          "total_steps": null
+        },
+        "reported_cost": {
+          "measured_tasks": 0,
+          "unmeasured_tasks": 0,
+          "wall_seconds": null
+        },
+        "source_digest": "7306340bac0a4ea67ea7b080513116457b7d72a8cb0d0c1f0727eaae6db38185",
+        "source_origin_commit": "2899099048c0a9987eb8720214abfce56d86d92a",
+        "status": "BLOCKED",
+        "tiers": {
+          "1": {
+            "counts": {
+              "BLOCKED": 5
+            },
+            "passed": 0,
+            "total": 5
+          },
+          "2": {
+            "counts": {
+              "BLOCKED": 19
+            },
+            "passed": 0,
+            "total": 19
+          },
+          "3": {
+            "counts": {
+              "BLOCKED": 2
+            },
+            "passed": 0,
+            "total": 2
+          }
+        }
+      },
+      {
+        "comparison_cohort": "aa16123b9d1d2aca26b8e87794316188c541c20de0e394abaf0530c1dc53ef48",
+        "configuration_id": "08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212",
+        "family": "bcap",
+        "imported_selection": {
+          "independent_confirmation": "not_performed",
+          "qualified": false,
+          "required_passes_by_tier": [
+            3
+          ],
+          "selected_candidate_id": "bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212",
+          "selection_kind": "best_observed",
+          "study_id": "bcap-tier1-refresh-v1"
+        },
+        "law": {
+          "claim_contract": {
+            "sampling_law": "task_declared",
+            "schedule": "scheduled",
+            "scoring_weights": "live"
+          },
+          "initializer": "deterministic_orthogonal",
+          "prior": {
+            "kind": "mog",
+            "learnable": true,
+            "sigma": 0.025,
+            "standardize": false
+          },
+          "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+          "recipe_sha256": "dc0ab7855facf1f8b0431b08f4656587a59ee2de249ff0deeb62b11c50e12540"
+        },
+        "qualified_tier": 0,
+        "recipe_knobs": {
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.999
+          ],
+          "d_lr_mult": 2.0,
+          "lr": 0.00425,
+          "prior_lr_mult": 4.0,
+          "total_steps": 7000
+        },
+        "reported_cost": {
+          "measured_tasks": 4,
+          "unmeasured_tasks": 0,
+          "wall_seconds": 30.559230890125036
+        },
+        "source_digest": "7306340bac0a4ea67ea7b080513116457b7d72a8cb0d0c1f0727eaae6db38185",
+        "source_origin_commit": "2899099048c0a9987eb8720214abfce56d86d92a",
+        "status": "FAIL",
+        "tiers": {
+          "1": {
+            "counts": {
+              "FAIL": 1,
+              "PASS": 3,
+              "UNKNOWN": 1
+            },
+            "passed": 3,
+            "total": 5
+          },
+          "2": {
+            "counts": {
+              "UNKNOWN": 19
+            },
+            "passed": 0,
+            "total": 19
+          },
+          "3": {
+            "counts": {
+              "UNKNOWN": 2
+            },
+            "passed": 0,
+            "total": 2
+          }
+        }
+      },
+      {
+        "comparison_cohort": "f44513063f54dda028e7843f749aaf6f470920c4104263842860127164a67e21",
+        "configuration_id": "e22",
+        "family": "e22",
+        "imported_selection": {
+          "independent_confirmation": null,
+          "qualified": false,
+          "required_passes_by_tier": null,
+          "selected_candidate_id": null,
+          "selection_kind": "canonical_fallback",
+          "study_id": null
+        },
+        "law": {
+          "claim_contract": {
+            "sampling_law": "task_declared",
+            "schedule": "schedule_free",
+            "scoring_weights": "state_selected"
+          },
+          "initializer": "deterministic_orthogonal",
+          "prior": {
+            "exception_reason": "Independent E22 row controls require an explicit equal-mass particle cloud; this is separate from Forge learned-MoG cohorts.",
+            "kind": "particle_cloud",
+            "learnable": true,
+            "sigma": 0.0,
+            "standardize": false
+          },
+          "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+          "recipe_sha256": "563e9c1a40681807e4c9e7700dee871a164aadce9b31ab23364cea8293ccac8e"
+        },
+        "qualified_tier": 0,
+        "recipe_knobs": {
+          "amsgrad": true,
+          "betas": [
+            0.0,
+            0.999
+          ],
+          "d_lr_mult": 1.0,
+          "lr": 0.00425,
+          "prior_lr_mult": 2.0,
+          "total_steps": null
+        },
+        "reported_cost": {
+          "measured_tasks": 0,
+          "unmeasured_tasks": 0,
+          "wall_seconds": null
+        },
+        "source_digest": "7306340bac0a4ea67ea7b080513116457b7d72a8cb0d0c1f0727eaae6db38185",
+        "source_origin_commit": "2899099048c0a9987eb8720214abfce56d86d92a",
+        "status": "BLOCKED",
+        "tiers": {
+          "1": {
+            "counts": {
+              "BLOCKED": 5
+            },
+            "passed": 0,
+            "total": 5
+          },
+          "2": {
+            "counts": {
+              "BLOCKED": 19
+            },
+            "passed": 0,
+            "total": 19
+          },
+          "3": {
+            "counts": {
+              "BLOCKED": 2
+            },
+            "passed": 0,
+            "total": 2
+          }
+        }
+      },
+      {
+        "comparison_cohort": "aa16123b9d1d2aca26b8e87794316188c541c20de0e394abaf0530c1dc53ef48",
+        "configuration_id": "1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c",
+        "family": "release07-gan-v3-mog",
+        "imported_selection": {
+          "independent_confirmation": "not_performed",
+          "qualified": false,
+          "required_passes_by_tier": [
+            3
+          ],
+          "selected_candidate_id": "release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c",
+          "selection_kind": "best_observed",
+          "study_id": "release07-gan-v3-mog-tier1-refresh-v1"
+        },
+        "law": {
+          "claim_contract": {
+            "sampling_law": "task_declared",
+            "schedule": "scheduled",
+            "scoring_weights": "live"
+          },
+          "initializer": "deterministic_orthogonal",
+          "prior": {
+            "kind": "mog",
+            "learnable": true,
+            "sigma": 0.025,
+            "standardize": false
+          },
+          "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+          "recipe_sha256": "ad189b704ce2fced9b4cbf07955ee39cd9145e3d0e5fa4bbe9d92f7f4a74cff1"
+        },
+        "qualified_tier": 0,
+        "recipe_knobs": {
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "d_lr_mult": 1.0,
+          "lr": 0.006375,
+          "prior_lr_mult": 1.0,
+          "total_steps": 7000
+        },
+        "reported_cost": {
+          "measured_tasks": 4,
+          "unmeasured_tasks": 0,
+          "wall_seconds": 28.757482298999093
+        },
+        "source_digest": "7306340bac0a4ea67ea7b080513116457b7d72a8cb0d0c1f0727eaae6db38185",
+        "source_origin_commit": "2899099048c0a9987eb8720214abfce56d86d92a",
+        "status": "FAIL",
+        "tiers": {
+          "1": {
+            "counts": {
+              "FAIL": 1,
+              "PASS": 3,
+              "UNKNOWN": 1
+            },
+            "passed": 3,
+            "total": 5
+          },
+          "2": {
+            "counts": {
+              "UNKNOWN": 19
+            },
+            "passed": 0,
+            "total": 19
+          },
+          "3": {
+            "counts": {
+              "UNKNOWN": 2
+            },
+            "passed": 0,
+            "total": 2
+          }
+        }
+      },
+      {
+        "comparison_cohort": "aa16123b9d1d2aca26b8e87794316188c541c20de0e394abaf0530c1dc53ef48",
+        "configuration_id": "release07-gan-v3-cloud-v1",
+        "family": "release07-gan-v3-cloud",
+        "imported_selection": {
+          "independent_confirmation": null,
+          "qualified": false,
+          "required_passes_by_tier": null,
+          "selected_candidate_id": null,
+          "selection_kind": "canonical_fallback",
+          "study_id": null
+        },
+        "law": {
+          "claim_contract": {
+            "sampling_law": "task_declared",
+            "schedule": "scheduled",
+            "scoring_weights": "live"
+          },
+          "initializer": "deterministic_orthogonal",
+          "prior": {
+            "kind": "mog",
+            "learnable": true,
+            "sigma": 0.025,
+            "standardize": false
+          },
+          "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+          "recipe_sha256": "b9bb3c0216c0e10a3455f40082f0f50759fb30e58bf5bf9275c5bcba74c0fb2d"
+        },
+        "qualified_tier": 0,
+        "recipe_knobs": {
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.99
+          ],
+          "d_lr_mult": 1.0,
+          "lr": 0.00425,
+          "prior_lr_mult": 2.0,
+          "total_steps": 7000
+        },
+        "reported_cost": {
+          "measured_tasks": 0,
+          "unmeasured_tasks": 0,
+          "wall_seconds": null
+        },
+        "source_digest": "7306340bac0a4ea67ea7b080513116457b7d72a8cb0d0c1f0727eaae6db38185",
+        "source_origin_commit": "2899099048c0a9987eb8720214abfce56d86d92a",
+        "status": "BLOCKED",
+        "tiers": {
+          "1": {
+            "counts": {
+              "BLOCKED": 5
+            },
+            "passed": 0,
+            "total": 5
+          },
+          "2": {
+            "counts": {
+              "BLOCKED": 19
+            },
+            "passed": 0,
+            "total": 19
+          },
+          "3": {
+            "counts": {
+              "BLOCKED": 2
+            },
+            "passed": 0,
+            "total": 2
+          }
+        }
+      },
+      {
+        "comparison_cohort": "aa16123b9d1d2aca26b8e87794316188c541c20de0e394abaf0530c1dc53ef48",
+        "configuration_id": "0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c",
+        "family": "k3p",
+        "imported_selection": {
+          "independent_confirmation": "not_performed",
+          "qualified": false,
+          "required_passes_by_tier": [
+            4
+          ],
+          "selected_candidate_id": "k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c",
+          "selection_kind": "best_observed",
+          "study_id": "k3p-tier1-refresh-v1"
+        },
+        "law": {
+          "claim_contract": {
+            "sampling_law": "task_declared",
+            "schedule": "scheduled",
+            "scoring_weights": "live"
+          },
+          "initializer": "deterministic_orthogonal",
+          "prior": {
+            "kind": "mog",
+            "learnable": true,
+            "sigma": 0.025,
+            "standardize": false
+          },
+          "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+          "recipe_sha256": "fe683eea09623330b1e95774977e0ba58ce10f040a536849e0d0fe7361fda857"
+        },
+        "qualified_tier": 0,
+        "recipe_knobs": {
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.999
+          ],
+          "d_lr_mult": 1.0,
+          "lr": 0.006375,
+          "prior_lr_mult": 1.0,
+          "total_steps": 7000
+        },
+        "reported_cost": {
+          "measured_tasks": 5,
+          "unmeasured_tasks": 0,
+          "wall_seconds": 210.976942106965
+        },
+        "source_digest": "7306340bac0a4ea67ea7b080513116457b7d72a8cb0d0c1f0727eaae6db38185",
+        "source_origin_commit": "2899099048c0a9987eb8720214abfce56d86d92a",
+        "status": "FAIL",
+        "tiers": {
+          "1": {
+            "counts": {
+              "FAIL": 1,
+              "PASS": 4
+            },
+            "passed": 4,
+            "total": 5
+          },
+          "2": {
+            "counts": {
+              "UNKNOWN": 19
+            },
+            "passed": 0,
+            "total": 19
+          },
+          "3": {
+            "counts": {
+              "UNKNOWN": 2
+            },
+            "passed": 0,
+            "total": 2
+          }
+        }
+      },
+      {
+        "comparison_cohort": "aa16123b9d1d2aca26b8e87794316188c541c20de0e394abaf0530c1dc53ef48",
+        "configuration_id": "k3p-a2-off-native-diagnostic",
+        "family": "k3p-no-a2",
+        "imported_selection": {
+          "independent_confirmation": null,
+          "qualified": false,
+          "required_passes_by_tier": null,
+          "selected_candidate_id": null,
+          "selection_kind": "canonical_fallback",
+          "study_id": null
+        },
+        "law": {
+          "claim_contract": {
+            "sampling_law": "task_declared",
+            "schedule": "scheduled",
+            "scoring_weights": "live"
+          },
+          "initializer": "deterministic_orthogonal",
+          "prior": {
+            "kind": "mog",
+            "learnable": true,
+            "sigma": 0.025,
+            "standardize": false
+          },
+          "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+          "recipe_sha256": "2e5964def21fbb363e2915762c5969e52d0ba34fee38334f5623c9285dee9ed0"
+        },
+        "qualified_tier": 0,
+        "recipe_knobs": {
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.999
+          ],
+          "d_lr_mult": 1.0,
+          "lr": 0.00425,
+          "prior_lr_mult": 2.0,
+          "total_steps": 7000
+        },
+        "reported_cost": {
+          "measured_tasks": 1,
+          "unmeasured_tasks": 0,
+          "wall_seconds": 5.317800150020048
+        },
+        "source_digest": "7306340bac0a4ea67ea7b080513116457b7d72a8cb0d0c1f0727eaae6db38185",
+        "source_origin_commit": "2899099048c0a9987eb8720214abfce56d86d92a",
+        "status": "FAIL",
+        "tiers": {
+          "1": {
+            "counts": {
+              "FAIL": 1,
+              "UNKNOWN": 4
+            },
+            "passed": 0,
+            "total": 5
+          },
+          "2": {
+            "counts": {
+              "UNKNOWN": 19
+            },
+            "passed": 0,
+            "total": 19
+          },
+          "3": {
+            "counts": {
+              "UNKNOWN": 2
+            },
+            "passed": 0,
+            "total": 2
+          }
+        }
+      },
+      {
+        "comparison_cohort": "aa16123b9d1d2aca26b8e87794316188c541c20de0e394abaf0530c1dc53ef48",
+        "configuration_id": "forge-onboarding-anchor-ablation",
+        "family": "k3p-no-anchor",
+        "imported_selection": {
+          "independent_confirmation": null,
+          "qualified": false,
+          "required_passes_by_tier": null,
+          "selected_candidate_id": null,
+          "selection_kind": "canonical_fallback",
+          "study_id": null
+        },
+        "law": {
+          "claim_contract": {
+            "sampling_law": "task_declared",
+            "schedule": "scheduled",
+            "scoring_weights": "live"
+          },
+          "initializer": "deterministic_orthogonal",
+          "prior": {
+            "kind": "mog",
+            "learnable": true,
+            "sigma": 0.025,
+            "standardize": false
+          },
+          "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+          "recipe_sha256": "6250b24f40b10103053e5916d8478085e8d89d64b04dc4fbff16307e5aa15227"
+        },
+        "qualified_tier": 0,
+        "recipe_knobs": {
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.999
+          ],
+          "d_lr_mult": 1.0,
+          "lr": 0.00425,
+          "prior_lr_mult": 2.0,
+          "total_steps": 7000
+        },
+        "reported_cost": {
+          "measured_tasks": 1,
+          "unmeasured_tasks": 0,
+          "wall_seconds": 5.418764899019152
+        },
+        "source_digest": "7306340bac0a4ea67ea7b080513116457b7d72a8cb0d0c1f0727eaae6db38185",
+        "source_origin_commit": "2899099048c0a9987eb8720214abfce56d86d92a",
+        "status": "FAIL",
+        "tiers": {
+          "1": {
+            "counts": {
+              "FAIL": 1,
+              "UNKNOWN": 4
+            },
+            "passed": 0,
+            "total": 5
+          },
+          "2": {
+            "counts": {
+              "UNKNOWN": 19
+            },
+            "passed": 0,
+            "total": 19
+          },
+          "3": {
+            "counts": {
+              "UNKNOWN": 2
+            },
+            "passed": 0,
+            "total": 2
+          }
+        }
+      },
+      {
+        "comparison_cohort": "aa16123b9d1d2aca26b8e87794316188c541c20de0e394abaf0530c1dc53ef48",
+        "configuration_id": "forge-no-critic-penalty",
+        "family": "k3p-no-penalty",
+        "imported_selection": {
+          "independent_confirmation": null,
+          "qualified": false,
+          "required_passes_by_tier": null,
+          "selected_candidate_id": null,
+          "selection_kind": "canonical_fallback",
+          "study_id": null
+        },
+        "law": {
+          "claim_contract": {
+            "sampling_law": "task_declared",
+            "schedule": "scheduled",
+            "scoring_weights": "live"
+          },
+          "initializer": "deterministic_orthogonal",
+          "prior": {
+            "kind": "mog",
+            "learnable": true,
+            "sigma": 0.025,
+            "standardize": false
+          },
+          "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+          "recipe_sha256": "503488733e3aee1288fa1519a59075acf114ab66a1f1a566215d102b448e0adf"
+        },
+        "qualified_tier": 0,
+        "recipe_knobs": {
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.999
+          ],
+          "d_lr_mult": 1.0,
+          "lr": 0.00425,
+          "prior_lr_mult": 2.0,
+          "total_steps": 7000
+        },
+        "reported_cost": {
+          "measured_tasks": 1,
+          "unmeasured_tasks": 0,
+          "wall_seconds": 5.51677786197979
+        },
+        "source_digest": "7306340bac0a4ea67ea7b080513116457b7d72a8cb0d0c1f0727eaae6db38185",
+        "source_origin_commit": "2899099048c0a9987eb8720214abfce56d86d92a",
+        "status": "FAIL",
+        "tiers": {
+          "1": {
+            "counts": {
+              "FAIL": 1,
+              "UNKNOWN": 4
+            },
+            "passed": 0,
+            "total": 5
+          },
+          "2": {
+            "counts": {
+              "UNKNOWN": 19
+            },
+            "passed": 0,
+            "total": 19
+          },
+          "3": {
+            "counts": {
+              "UNKNOWN": 2
+            },
+            "passed": 0,
+            "total": 2
+          }
+        }
+      },
+      {
+        "comparison_cohort": "aa16123b9d1d2aca26b8e87794316188c541c20de0e394abaf0530c1dc53ef48",
+        "configuration_id": "k3p-no-output-noise-diagnostic",
+        "family": "k3p-no-training-noise",
+        "imported_selection": {
+          "independent_confirmation": null,
+          "qualified": false,
+          "required_passes_by_tier": null,
+          "selected_candidate_id": null,
+          "selection_kind": "canonical_fallback",
+          "study_id": null
+        },
+        "law": {
+          "claim_contract": {
+            "sampling_law": "task_declared",
+            "schedule": "scheduled",
+            "scoring_weights": "live"
+          },
+          "initializer": "deterministic_orthogonal",
+          "prior": {
+            "kind": "mog",
+            "learnable": true,
+            "sigma": 0.025,
+            "standardize": false
+          },
+          "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+          "recipe_sha256": "70f9101e378bf94a50b2f667262c567a358524d3f61f39d1d4e10ebd87668418"
+        },
+        "qualified_tier": 0,
+        "recipe_knobs": {
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.999
+          ],
+          "d_lr_mult": 1.0,
+          "lr": 0.00425,
+          "prior_lr_mult": 2.0,
+          "total_steps": 7000
+        },
+        "reported_cost": {
+          "measured_tasks": 1,
+          "unmeasured_tasks": 0,
+          "wall_seconds": 5.657143431017175
+        },
+        "source_digest": "7306340bac0a4ea67ea7b080513116457b7d72a8cb0d0c1f0727eaae6db38185",
+        "source_origin_commit": "2899099048c0a9987eb8720214abfce56d86d92a",
+        "status": "FAIL",
+        "tiers": {
+          "1": {
+            "counts": {
+              "FAIL": 1,
+              "UNKNOWN": 4
+            },
+            "passed": 0,
+            "total": 5
+          },
+          "2": {
+            "counts": {
+              "UNKNOWN": 19
+            },
+            "passed": 0,
+            "total": 19
+          },
+          "3": {
+            "counts": {
+              "UNKNOWN": 2
+            },
+            "passed": 0,
+            "total": 2
+          }
+        }
+      },
+      {
+        "comparison_cohort": "aa16123b9d1d2aca26b8e87794316188c541c20de0e394abaf0530c1dc53ef48",
+        "configuration_id": "093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f",
+        "family": "ka2",
+        "imported_selection": {
+          "independent_confirmation": "not_performed",
+          "qualified": false,
+          "required_passes_by_tier": [
+            4
+          ],
+          "selected_candidate_id": "ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f",
+          "selection_kind": "best_observed",
+          "study_id": "ka2-tier1-refresh-v1"
+        },
+        "law": {
+          "claim_contract": {
+            "sampling_law": "task_declared",
+            "schedule": "scheduled",
+            "scoring_weights": "live"
+          },
+          "initializer": "deterministic_orthogonal",
+          "prior": {
+            "kind": "mog",
+            "learnable": true,
+            "sigma": 0.025,
+            "standardize": false
+          },
+          "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+          "recipe_sha256": "50787d2adfbc21ec74b5f79f2d85181c0d3bc96c21bcc08722be0395d2e913fe"
+        },
+        "qualified_tier": 0,
+        "recipe_knobs": {
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.999
+          ],
+          "d_lr_mult": 1.0,
+          "lr": 0.006375,
+          "prior_lr_mult": 1.0,
+          "total_steps": 7000
+        },
+        "reported_cost": {
+          "measured_tasks": 5,
+          "unmeasured_tasks": 0,
+          "wall_seconds": 222.7212175949826
+        },
+        "source_digest": "7306340bac0a4ea67ea7b080513116457b7d72a8cb0d0c1f0727eaae6db38185",
+        "source_origin_commit": "2899099048c0a9987eb8720214abfce56d86d92a",
+        "status": "FAIL",
+        "tiers": {
+          "1": {
+            "counts": {
+              "FAIL": 1,
+              "PASS": 4
+            },
+            "passed": 4,
+            "total": 5
+          },
+          "2": {
+            "counts": {
+              "UNKNOWN": 19
+            },
+            "passed": 0,
+            "total": 19
+          },
+          "3": {
+            "counts": {
+              "UNKNOWN": 2
+            },
+            "passed": 0,
+            "total": 2
+          }
+        }
+      },
+      {
+        "comparison_cohort": "aa16123b9d1d2aca26b8e87794316188c541c20de0e394abaf0530c1dc53ef48",
+        "configuration_id": "302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f",
+        "family": "r1r2",
+        "imported_selection": {
+          "independent_confirmation": "not_performed",
+          "qualified": false,
+          "required_passes_by_tier": [
+            3
+          ],
+          "selected_candidate_id": "r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f",
+          "selection_kind": "best_observed",
+          "study_id": "r1r2-tier1-refresh-v1"
+        },
+        "law": {
+          "claim_contract": {
+            "sampling_law": "task_declared",
+            "schedule": "scheduled",
+            "scoring_weights": "live"
+          },
+          "initializer": "deterministic_orthogonal",
+          "prior": {
+            "kind": "mog",
+            "learnable": true,
+            "sigma": 0.025,
+            "standardize": false
+          },
+          "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+          "recipe_sha256": "deb7f75a0e7190ea040d0978206f0d3874e90fb8362c7045d0ff337179231910"
+        },
+        "qualified_tier": 0,
+        "recipe_knobs": {
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.9
+          ],
+          "d_lr_mult": 1.0,
+          "lr": 0.0085,
+          "prior_lr_mult": 1.0,
+          "total_steps": 7000
+        },
+        "reported_cost": {
+          "measured_tasks": 4,
+          "unmeasured_tasks": 0,
+          "wall_seconds": 27.627088042965624
+        },
+        "source_digest": "7306340bac0a4ea67ea7b080513116457b7d72a8cb0d0c1f0727eaae6db38185",
+        "source_origin_commit": "2899099048c0a9987eb8720214abfce56d86d92a",
+        "status": "FAIL",
+        "tiers": {
+          "1": {
+            "counts": {
+              "FAIL": 1,
+              "PASS": 3,
+              "UNKNOWN": 1
+            },
+            "passed": 3,
+            "total": 5
+          },
+          "2": {
+            "counts": {
+              "UNKNOWN": 19
+            },
+            "passed": 0,
+            "total": 19
+          },
+          "3": {
+            "counts": {
+              "UNKNOWN": 2
+            },
+            "passed": 0,
+            "total": 2
+          }
+        }
+      },
+      {
+        "comparison_cohort": "aa16123b9d1d2aca26b8e87794316188c541c20de0e394abaf0530c1dc53ef48",
+        "configuration_id": "five-word-joint-ka2-v1",
+        "family": "five-word-joint-ka2-v1",
+        "imported_selection": {
+          "independent_confirmation": null,
+          "qualified": false,
+          "required_passes_by_tier": null,
+          "selected_candidate_id": null,
+          "selection_kind": "canonical_fallback",
+          "study_id": null
+        },
+        "law": {
+          "claim_contract": {
+            "sampling_law": "task_declared",
+            "schedule": "scheduled",
+            "scoring_weights": "live"
+          },
+          "initializer": "deterministic_orthogonal",
+          "prior": {
+            "kind": "mog",
+            "learnable": true,
+            "sigma": 0.025,
+            "standardize": false
+          },
+          "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+          "recipe_sha256": "1bbb112231e9fb9ced7f504440cb16936cc9ad82400504acd47782d7963be1b5"
+        },
+        "qualified_tier": 0,
+        "recipe_knobs": {
+          "amsgrad": false,
+          "betas": [
+            0.0,
+            0.999
+          ],
+          "d_lr_mult": 1.5,
+          "lr": 0.0006,
+          "prior_lr_mult": 2.0,
+          "total_steps": 7000
+        },
+        "reported_cost": {
+          "measured_tasks": 1,
+          "unmeasured_tasks": 0,
+          "wall_seconds": 5.6368885730043985
+        },
+        "source_digest": "7306340bac0a4ea67ea7b080513116457b7d72a8cb0d0c1f0727eaae6db38185",
+        "source_origin_commit": "2899099048c0a9987eb8720214abfce56d86d92a",
+        "status": "FAIL",
+        "tiers": {
+          "1": {
+            "counts": {
+              "FAIL": 1,
+              "UNKNOWN": 4
+            },
+            "passed": 0,
+            "total": 5
+          },
+          "2": {
+            "counts": {
+              "UNKNOWN": 19
+            },
+            "passed": 0,
+            "total": 19
+          },
+          "3": {
+            "counts": {
+              "UNKNOWN": 2
+            },
+            "passed": 0,
+            "total": 2
+          }
+        }
+      }
+    ],
+    "source_note": "The measured selected refresh rows bind source digest 7306340... and origin 28990990...; canonical unmeasured rows remain BLOCKED.",
+    "tie_score": {
+      "FAIL": 1,
+      "PASS": 4,
+      "required": 5
+    },
+    "view": "discriminator_stability"
+  },
+  "public_policy_cohorts": [
+    {
+      "best_observed_by_family": {
+        "atlas": "atlas--ca0901b6679b72404f0989bf27f53c85b01095d291f67ec50fddfd98006880a1",
+        "e22": "e22--0acab20ca12f4b947a6ec8b60148855f50a636403caffc4de28d724f19672746"
+      },
+      "best_observed_ties": {
+        "atlas": [
+          "atlas--ca0901b6679b72404f0989bf27f53c85b01095d291f67ec50fddfd98006880a1"
+        ],
+        "e22": [
+          "e22--0acab20ca12f4b947a6ec8b60148855f50a636403caffc4de28d724f19672746"
+        ]
+      },
+      "declared_configs": 8,
+      "id": "policy-family-defaults-round1-cli-recovery-v2--eb2d77fbd776",
+      "measured_paid_seconds": 268.79123173863627,
+      "required_cases_per_config": 8,
+      "reservation_note": "No additional reserve inferred from absent field. See source family ledgers for accounting.",
+      "reservation_reported": null,
+      "selection": {
+        "attempts_concluded": true,
+        "comparison_complete": false,
+        "default_adoption": false,
+        "display_candidate_id": "atlas--ca0901b6679b72404f0989bf27f53c85b01095d291f67ec50fddfd98006880a1",
+        "fully_qualified_ids": [],
+        "outcome": "incomplete_comparison",
+        "required_cases_per_config": 8,
+        "speed_winner": null,
+        "timing_ties": "all qualified configs retained; speed unranked under external contention"
+      },
+      "source_commit": "eb2d77fbd776eab0d2ce5e2550ab9cdfdb6c1162",
+      "source_manifest_sha256": null,
+      "study_id": "policy-family-defaults-round1-cli-recovery-v2",
+      "trials": [
+        {
+          "cases": [
+            {
+              "case_id": "image-develop-img_intensity2-source-transpose12",
+              "execution_status": "PASS",
+              "original_gate": "PASS",
+              "original_media": "policy-family-media/policy-family-defaults-round1-cli-recovery-v2--eb2d77fbd776/atlas/ca0901b6679b--image-develop-img_intensity2-source-transpose12.gif",
+              "receipt_sha256": "1bc04141bc35d38fcef72f6e5867336d8d1099adabd755b5c4f452395c158225",
+              "reviewed_media": null,
+              "study_gate": "PASS"
+            },
+            {
+              "case_id": "api-vector-two-broad",
+              "execution_status": "FAIL",
+              "original_gate": "FAIL",
+              "original_media": "policy-family-media/policy-family-defaults-round1-cli-recovery-v2--eb2d77fbd776/atlas/ca0901b6679b--api-vector-two-broad-reviewed.gif",
+              "receipt_sha256": "e75ef1a5c4bc64f94685dccc0538a7525bc39329b9c95c97b8b2e0ef9018d151",
+              "reviewed_media": null,
+              "study_gate": "FAIL"
+            },
+            {
+              "case_id": "api-grid100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-rotated100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-staggered100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-unequal-mass",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-anisotropic",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "image-develop-img_bars4-source-transpose12",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            }
+          ],
+          "counts_by_tier": {
+            "1": {
+              "original_passed": 1,
+              "required": 2,
+              "study_passed": 1
+            },
+            "2": {
+              "original_passed": 0,
+              "required": 6,
+              "study_passed": 0
+            }
+          },
+          "family": "atlas",
+          "fully_qualified": false,
+          "id": "atlas--ca0901b6679b72404f0989bf27f53c85b01095d291f67ec50fddfd98006880a1",
+          "measured_cases": 2,
+          "original_pass_count": 1,
+          "paid_wall_seconds": 63.934941278770566,
+          "recipe_overrides": {
+            "lr": 0.006375,
+            "prior_lr_mult": 2.0
+          },
+          "required_cases": 8,
+          "status": "FAIL",
+          "study_pass_count": 1,
+          "unknown_cases": 6
+        },
+        {
+          "cases": [
+            {
+              "case_id": "image-develop-img_intensity2-source-transpose12",
+              "execution_status": "FAIL",
+              "original_gate": "FAIL",
+              "original_media": "policy-family-media/policy-family-defaults-round1-cli-recovery-v2--eb2d77fbd776/atlas/9cf9647fdc66--image-develop-img_intensity2-source-transpose12.gif",
+              "receipt_sha256": "79e49a27c3a4d7c7b01abed771ecccdee1b493d91d22ce9b500fc6f36e1d1b4b",
+              "reviewed_media": null,
+              "study_gate": "FAIL"
+            },
+            {
+              "case_id": "api-vector-two-broad",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-grid100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-rotated100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-staggered100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-unequal-mass",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-anisotropic",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "image-develop-img_bars4-source-transpose12",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            }
+          ],
+          "counts_by_tier": {
+            "1": {
+              "original_passed": 0,
+              "required": 2,
+              "study_passed": 0
+            },
+            "2": {
+              "original_passed": 0,
+              "required": 6,
+              "study_passed": 0
+            }
+          },
+          "family": "atlas",
+          "fully_qualified": false,
+          "id": "atlas--9cf9647fdc669686de09d5c6e500510081b36285876378971fae90bc812f5057",
+          "measured_cases": 1,
+          "original_pass_count": 0,
+          "paid_wall_seconds": 24.25575635302812,
+          "recipe_overrides": {
+            "lr": 0.0085,
+            "prior_lr_mult": 2.0
+          },
+          "required_cases": 8,
+          "status": "FAIL",
+          "study_pass_count": 0,
+          "unknown_cases": 7
+        },
+        {
+          "cases": [
+            {
+              "case_id": "image-develop-img_intensity2-source-transpose12",
+              "execution_status": "INCOMPLETE",
+              "original_gate": "PASS",
+              "original_media": "policy-family-media/policy-family-defaults-round1-cli-recovery-v2--eb2d77fbd776/atlas/e6f3c9f400a4--image-develop-img_intensity2-source-transpose12.gif",
+              "receipt_sha256": "9ea0bf8ab628c575c25cd99031ba1a2fdbf1fd6b07869922e8fcde54f174946a",
+              "reviewed_media": null,
+              "study_gate": "INCOMPLETE"
+            },
+            {
+              "case_id": "api-vector-two-broad",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-grid100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-rotated100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-staggered100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-unequal-mass",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-anisotropic",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "image-develop-img_bars4-source-transpose12",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            }
+          ],
+          "counts_by_tier": {
+            "1": {
+              "original_passed": 1,
+              "required": 2,
+              "study_passed": 0
+            },
+            "2": {
+              "original_passed": 0,
+              "required": 6,
+              "study_passed": 0
+            }
+          },
+          "family": "atlas",
+          "fully_qualified": false,
+          "id": "atlas--e6f3c9f400a46713b77ecd2b14d4771d01d2a25fa720fd0e52d21d6d6dfa8a50",
+          "measured_cases": 1,
+          "original_pass_count": 1,
+          "paid_wall_seconds": 24.854534358950332,
+          "recipe_overrides": {
+            "lr": 0.006375,
+            "prior_lr_mult": 1.0
+          },
+          "required_cases": 8,
+          "status": "INCOMPLETE",
+          "study_pass_count": 0,
+          "unknown_cases": 7
+        },
+        {
+          "cases": [
+            {
+              "case_id": "image-develop-img_intensity2-source-transpose12",
+              "execution_status": "FAIL",
+              "original_gate": "FAIL",
+              "original_media": "policy-family-media/policy-family-defaults-round1-cli-recovery-v2--eb2d77fbd776/atlas/fc4e6516e79a--image-develop-img_intensity2-source-transpose12.gif",
+              "receipt_sha256": "67f38f3fd3ada348d6a4cc454eb588d11589980a80bcf6205b80d85246097b76",
+              "reviewed_media": null,
+              "study_gate": "FAIL"
+            },
+            {
+              "case_id": "api-vector-two-broad",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-grid100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-rotated100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-staggered100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-unequal-mass",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-anisotropic",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "image-develop-img_bars4-source-transpose12",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            }
+          ],
+          "counts_by_tier": {
+            "1": {
+              "original_passed": 0,
+              "required": 2,
+              "study_passed": 0
+            },
+            "2": {
+              "original_passed": 0,
+              "required": 6,
+              "study_passed": 0
+            }
+          },
+          "family": "atlas",
+          "fully_qualified": false,
+          "id": "atlas--fc4e6516e79a121f87eb7c3e421fb5e6a49ae3a061731a546d30aa5473fa04cf",
+          "measured_cases": 1,
+          "original_pass_count": 0,
+          "paid_wall_seconds": 23.802390914177522,
+          "recipe_overrides": {
+            "lr": 0.0085,
+            "prior_lr_mult": 1.0
+          },
+          "required_cases": 8,
+          "status": "FAIL",
+          "study_pass_count": 0,
+          "unknown_cases": 7
+        },
+        {
+          "cases": [
+            {
+              "case_id": "image-develop-img_intensity2-source-transpose12",
+              "execution_status": "PASS",
+              "original_gate": "PASS",
+              "original_media": "policy-family-media/policy-family-defaults-round1-cli-recovery-v2--eb2d77fbd776/e22/0acab20ca12f--image-develop-img_intensity2-source-transpose12.gif",
+              "receipt_sha256": "2ed06e12ab051dc66e923e54aa36623f8747f68ae7a992725a5d2b071d96a620",
+              "reviewed_media": null,
+              "study_gate": "PASS"
+            },
+            {
+              "case_id": "api-vector-two-broad",
+              "execution_status": "FAIL",
+              "original_gate": "FAIL",
+              "original_media": "policy-family-media/policy-family-defaults-round1-cli-recovery-v2--eb2d77fbd776/e22/0acab20ca12f--api-vector-two-broad-reviewed.gif",
+              "receipt_sha256": "49dd30c3c79beb10461bc68525cd708c26192e1eec7474c26fe6d6b762c9e39e",
+              "reviewed_media": null,
+              "study_gate": "FAIL"
+            },
+            {
+              "case_id": "api-grid100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-rotated100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-staggered100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-unequal-mass",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-anisotropic",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "image-develop-img_bars4-source-transpose12",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            }
+          ],
+          "counts_by_tier": {
+            "1": {
+              "original_passed": 1,
+              "required": 2,
+              "study_passed": 1
+            },
+            "2": {
+              "original_passed": 0,
+              "required": 6,
+              "study_passed": 0
+            }
+          },
+          "family": "e22",
+          "fully_qualified": false,
+          "id": "e22--0acab20ca12f4b947a6ec8b60148855f50a636403caffc4de28d724f19672746",
+          "measured_cases": 2,
+          "original_pass_count": 1,
+          "paid_wall_seconds": 63.133500668918714,
+          "recipe_overrides": {
+            "lr": 0.006375,
+            "prior_lr_mult": 2.0
+          },
+          "required_cases": 8,
+          "status": "FAIL",
+          "study_pass_count": 1,
+          "unknown_cases": 6
+        },
+        {
+          "cases": [
+            {
+              "case_id": "image-develop-img_intensity2-source-transpose12",
+              "execution_status": "FAIL",
+              "original_gate": "FAIL",
+              "original_media": "policy-family-media/policy-family-defaults-round1-cli-recovery-v2--eb2d77fbd776/e22/5d4d276493d6--image-develop-img_intensity2-source-transpose12.gif",
+              "receipt_sha256": "5734918e10a2a83aa2179ae050acd4804c14ab389e064bb48421eb7bbfb21225",
+              "reviewed_media": null,
+              "study_gate": "FAIL"
+            },
+            {
+              "case_id": "api-vector-two-broad",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-grid100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-rotated100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-staggered100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-unequal-mass",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-anisotropic",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "image-develop-img_bars4-source-transpose12",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            }
+          ],
+          "counts_by_tier": {
+            "1": {
+              "original_passed": 0,
+              "required": 2,
+              "study_passed": 0
+            },
+            "2": {
+              "original_passed": 0,
+              "required": 6,
+              "study_passed": 0
+            }
+          },
+          "family": "e22",
+          "fully_qualified": false,
+          "id": "e22--5d4d276493d67e29887fbfc3c98925b989e2c8c28ed32344c5a0588ddc02cf8c",
+          "measured_cases": 1,
+          "original_pass_count": 0,
+          "paid_wall_seconds": 23.25268791685812,
+          "recipe_overrides": {
+            "lr": 0.0085,
+            "prior_lr_mult": 1.0
+          },
+          "required_cases": 8,
+          "status": "FAIL",
+          "study_pass_count": 0,
+          "unknown_cases": 7
+        },
+        {
+          "cases": [
+            {
+              "case_id": "image-develop-img_intensity2-source-transpose12",
+              "execution_status": "FAIL",
+              "original_gate": "FAIL",
+              "original_media": "policy-family-media/policy-family-defaults-round1-cli-recovery-v2--eb2d77fbd776/e22/65e42a03035e--image-develop-img_intensity2-source-transpose12.gif",
+              "receipt_sha256": "d268fe05fd44e63f641f9396c67d0337b9d5ce42f252a8371fec1239c2fab007",
+              "reviewed_media": null,
+              "study_gate": "FAIL"
+            },
+            {
+              "case_id": "api-vector-two-broad",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-grid100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-rotated100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-staggered100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-unequal-mass",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-anisotropic",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "image-develop-img_bars4-source-transpose12",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            }
+          ],
+          "counts_by_tier": {
+            "1": {
+              "original_passed": 0,
+              "required": 2,
+              "study_passed": 0
+            },
+            "2": {
+              "original_passed": 0,
+              "required": 6,
+              "study_passed": 0
+            }
+          },
+          "family": "e22",
+          "fully_qualified": false,
+          "id": "e22--65e42a03035ec9ef2bad19032ac8a0b849c81b24ef8f8cbf6476da1ae8c8ff4c",
+          "measured_cases": 1,
+          "original_pass_count": 0,
+          "paid_wall_seconds": 23.40527253295295,
+          "recipe_overrides": {
+            "lr": 0.0085,
+            "prior_lr_mult": 2.0
+          },
+          "required_cases": 8,
+          "status": "FAIL",
+          "study_pass_count": 0,
+          "unknown_cases": 7
+        },
+        {
+          "cases": [
+            {
+              "case_id": "image-develop-img_intensity2-source-transpose12",
+              "execution_status": "INCOMPLETE",
+              "original_gate": "PASS",
+              "original_media": "policy-family-media/policy-family-defaults-round1-cli-recovery-v2--eb2d77fbd776/e22/da7513723838--image-develop-img_intensity2-source-transpose12.gif",
+              "receipt_sha256": "8a3995411e15b5c4df7456180d5bdd220b88af52b58f1360c493b46fddb237fe",
+              "reviewed_media": null,
+              "study_gate": "INCOMPLETE"
+            },
+            {
+              "case_id": "api-vector-two-broad",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-grid100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-rotated100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-staggered100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-unequal-mass",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-anisotropic",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "image-develop-img_bars4-source-transpose12",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            }
+          ],
+          "counts_by_tier": {
+            "1": {
+              "original_passed": 1,
+              "required": 2,
+              "study_passed": 0
+            },
+            "2": {
+              "original_passed": 0,
+              "required": 6,
+              "study_passed": 0
+            }
+          },
+          "family": "e22",
+          "fully_qualified": false,
+          "id": "e22--da75137238384f27a182b60f6232cd1900263fbf4a6875568c6f8cda4edc77bf",
+          "measured_cases": 1,
+          "original_pass_count": 1,
+          "paid_wall_seconds": 22.152147714979947,
+          "recipe_overrides": {
+            "lr": 0.006375,
+            "prior_lr_mult": 1.0
+          },
+          "required_cases": 8,
+          "status": "INCOMPLETE",
+          "study_pass_count": 0,
+          "unknown_cases": 7
+        }
+      ]
+    },
+    {
+      "best_observed_by_family": {
+        "atlas": "atlas--1c9d2a067ff2102d5bac759c6651fc1ea44e1c932cb24360fc09c40431e1803d",
+        "e22": "e22--4a3ce5cf0e28c856de95243f2f8faaf2974269bc09bfdaabb2a3cf42875566db"
+      },
+      "best_observed_ties": {
+        "atlas": [
+          "atlas--1c9d2a067ff2102d5bac759c6651fc1ea44e1c932cb24360fc09c40431e1803d",
+          "atlas--916ab8dff81a16119a6bc772c47362b5637af746c063572c75a3945d6c467816",
+          "atlas--9723217ce64dfdcc88fb37aec35b3476562104f2bce63b25273d33e2098bf7bf",
+          "atlas--d04d2c7e0c56516cafca40ff4622c41986a3d2afb6d1546032c11d313837b691"
+        ],
+        "e22": [
+          "e22--4a3ce5cf0e28c856de95243f2f8faaf2974269bc09bfdaabb2a3cf42875566db",
+          "e22--88a864cb691ec876eff8841c110860c62830ca6986ab986b2cd065c1d5e5d2d6",
+          "e22--ab19c4f54e43cf88ec26d5988012d01e23ae84d2f23c5454e1b53a82a61e0914",
+          "e22--cb221ca2bd300bbcc744ad7f03825740fb747beb5f1f1043f5ccc22acc11949e"
+        ]
+      },
+      "declared_configs": 8,
+      "id": "policy-family-defaults-round2-v1--0335ecf024ea",
+      "measured_paid_seconds": 189.03142790216953,
+      "required_cases_per_config": 8,
+      "reservation_note": "No additional reserve inferred from absent field. See source family ledgers for accounting.",
+      "reservation_reported": null,
+      "selection": {
+        "attempts_concluded": true,
+        "comparison_complete": false,
+        "default_adoption": false,
+        "display_candidate_id": "atlas--1c9d2a067ff2102d5bac759c6651fc1ea44e1c932cb24360fc09c40431e1803d",
+        "fully_qualified_ids": [],
+        "outcome": "incomplete_comparison",
+        "required_cases_per_config": 8,
+        "speed_winner": null,
+        "timing_ties": "all qualified configs retained; speed unranked under external contention"
+      },
+      "source_commit": "0335ecf024ea8a6b337a216345f444abd41e3a6c",
+      "source_manifest_sha256": null,
+      "study_id": "policy-family-defaults-round2-v1",
+      "trials": [
+        {
+          "cases": [
+            {
+              "case_id": "image-develop-img_intensity2-source-transpose12",
+              "execution_status": "INCOMPLETE",
+              "original_gate": "PASS",
+              "original_media": "policy-family-media/policy-family-defaults-round2-v1--0335ecf024ea/atlas/1c9d2a067ff2--image-develop-img_intensity2-source-transpose12.gif",
+              "receipt_sha256": "8487d09a7f9071aacd145102e0df06e450c1bed5c2a8ebe5f04d4b74d8c44dc2",
+              "reviewed_media": null,
+              "study_gate": "INCOMPLETE"
+            },
+            {
+              "case_id": "api-vector-two-broad",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-grid100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-rotated100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-staggered100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-unequal-mass",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-anisotropic",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "image-develop-img_bars4-source-transpose12",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            }
+          ],
+          "counts_by_tier": {
+            "1": {
+              "original_passed": 1,
+              "required": 2,
+              "study_passed": 0
+            },
+            "2": {
+              "original_passed": 0,
+              "required": 6,
+              "study_passed": 0
+            }
+          },
+          "family": "atlas",
+          "fully_qualified": false,
+          "id": "atlas--1c9d2a067ff2102d5bac759c6651fc1ea44e1c932cb24360fc09c40431e1803d",
+          "measured_cases": 1,
+          "original_pass_count": 1,
+          "paid_wall_seconds": 22.75244171707891,
+          "recipe_overrides": {
+            "lr": 0.002125,
+            "prior_lr_mult": 1.0
+          },
+          "required_cases": 8,
+          "status": "INCOMPLETE",
+          "study_pass_count": 0,
+          "unknown_cases": 7
+        },
+        {
+          "cases": [
+            {
+              "case_id": "image-develop-img_intensity2-source-transpose12",
+              "execution_status": "FAIL",
+              "original_gate": "FAIL",
+              "original_media": "policy-family-media/policy-family-defaults-round2-v1--0335ecf024ea/atlas/916ab8dff81a--image-develop-img_intensity2-source-transpose12.gif",
+              "receipt_sha256": "51bb29aab4db9edc1841d979d0a748c5fe7985c48c0100038067a459808e8768",
+              "reviewed_media": null,
+              "study_gate": "FAIL"
+            },
+            {
+              "case_id": "api-vector-two-broad",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-grid100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-rotated100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-staggered100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-unequal-mass",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-anisotropic",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "image-develop-img_bars4-source-transpose12",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            }
+          ],
+          "counts_by_tier": {
+            "1": {
+              "original_passed": 0,
+              "required": 2,
+              "study_passed": 0
+            },
+            "2": {
+              "original_passed": 0,
+              "required": 6,
+              "study_passed": 0
+            }
+          },
+          "family": "atlas",
+          "fully_qualified": false,
+          "id": "atlas--916ab8dff81a16119a6bc772c47362b5637af746c063572c75a3945d6c467816",
+          "measured_cases": 1,
+          "original_pass_count": 0,
+          "paid_wall_seconds": 23.452623292105272,
+          "recipe_overrides": {
+            "lr": 0.002125,
+            "prior_lr_mult": 2.0
+          },
+          "required_cases": 8,
+          "status": "FAIL",
+          "study_pass_count": 0,
+          "unknown_cases": 7
+        },
+        {
+          "cases": [
+            {
+              "case_id": "image-develop-img_intensity2-source-transpose12",
+              "execution_status": "FAIL",
+              "original_gate": "PASS",
+              "original_media": "policy-family-media/policy-family-defaults-round2-v1--0335ecf024ea/atlas/9723217ce64d--image-develop-img_intensity2-source-transpose12.gif",
+              "receipt_sha256": "33e3c412fa33d78553286f4ff511a1c76a7589399649d17fa4898211af34c5cb",
+              "reviewed_media": null,
+              "study_gate": "FAIL"
+            },
+            {
+              "case_id": "api-vector-two-broad",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-grid100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-rotated100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-staggered100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-unequal-mass",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-anisotropic",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "image-develop-img_bars4-source-transpose12",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            }
+          ],
+          "counts_by_tier": {
+            "1": {
+              "original_passed": 1,
+              "required": 2,
+              "study_passed": 0
+            },
+            "2": {
+              "original_passed": 0,
+              "required": 6,
+              "study_passed": 0
+            }
+          },
+          "family": "atlas",
+          "fully_qualified": false,
+          "id": "atlas--9723217ce64dfdcc88fb37aec35b3476562104f2bce63b25273d33e2098bf7bf",
+          "measured_cases": 1,
+          "original_pass_count": 1,
+          "paid_wall_seconds": 23.45397346583195,
+          "recipe_overrides": {
+            "lr": 0.00425,
+            "prior_lr_mult": 2.0
+          },
+          "required_cases": 8,
+          "status": "FAIL",
+          "study_pass_count": 0,
+          "unknown_cases": 7
+        },
+        {
+          "cases": [
+            {
+              "case_id": "image-develop-img_intensity2-source-transpose12",
+              "execution_status": "FAIL",
+              "original_gate": "PASS",
+              "original_media": "policy-family-media/policy-family-defaults-round2-v1--0335ecf024ea/atlas/d04d2c7e0c56--image-develop-img_intensity2-source-transpose12.gif",
+              "receipt_sha256": "ce00178666754e523c66765f9e34524d1c455d35936af6c272a122858227b12b",
+              "reviewed_media": null,
+              "study_gate": "FAIL"
+            },
+            {
+              "case_id": "api-vector-two-broad",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-grid100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-rotated100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-staggered100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-unequal-mass",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-anisotropic",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "image-develop-img_bars4-source-transpose12",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            }
+          ],
+          "counts_by_tier": {
+            "1": {
+              "original_passed": 1,
+              "required": 2,
+              "study_passed": 0
+            },
+            "2": {
+              "original_passed": 0,
+              "required": 6,
+              "study_passed": 0
+            }
+          },
+          "family": "atlas",
+          "fully_qualified": false,
+          "id": "atlas--d04d2c7e0c56516cafca40ff4622c41986a3d2afb6d1546032c11d313837b691",
+          "measured_cases": 1,
+          "original_pass_count": 1,
+          "paid_wall_seconds": 23.606420022202656,
+          "recipe_overrides": {
+            "lr": 0.00425,
+            "prior_lr_mult": 1.0
+          },
+          "required_cases": 8,
+          "status": "FAIL",
+          "study_pass_count": 0,
+          "unknown_cases": 7
+        },
+        {
+          "cases": [
+            {
+              "case_id": "image-develop-img_intensity2-source-transpose12",
+              "execution_status": "INCOMPLETE",
+              "original_gate": "PASS",
+              "original_media": "policy-family-media/policy-family-defaults-round2-v1--0335ecf024ea/e22/4a3ce5cf0e28--image-develop-img_intensity2-source-transpose12.gif",
+              "receipt_sha256": "6bbf9dfb1f1d85c6af2f9bd3e504c7690f509528cec2a2cdf47d662769f88f8f",
+              "reviewed_media": null,
+              "study_gate": "INCOMPLETE"
+            },
+            {
+              "case_id": "api-vector-two-broad",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-grid100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-rotated100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-staggered100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-unequal-mass",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-anisotropic",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "image-develop-img_bars4-source-transpose12",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            }
+          ],
+          "counts_by_tier": {
+            "1": {
+              "original_passed": 1,
+              "required": 2,
+              "study_passed": 0
+            },
+            "2": {
+              "original_passed": 0,
+              "required": 6,
+              "study_passed": 0
+            }
+          },
+          "family": "e22",
+          "fully_qualified": false,
+          "id": "e22--4a3ce5cf0e28c856de95243f2f8faaf2974269bc09bfdaabb2a3cf42875566db",
+          "measured_cases": 1,
+          "original_pass_count": 1,
+          "paid_wall_seconds": 23.552166420035064,
+          "recipe_overrides": {
+            "lr": 0.002125,
+            "prior_lr_mult": 2.0
+          },
+          "required_cases": 8,
+          "status": "INCOMPLETE",
+          "study_pass_count": 0,
+          "unknown_cases": 7
+        },
+        {
+          "cases": [
+            {
+              "case_id": "image-develop-img_intensity2-source-transpose12",
+              "execution_status": "FAIL",
+              "original_gate": "PASS",
+              "original_media": "policy-family-media/policy-family-defaults-round2-v1--0335ecf024ea/e22/88a864cb691e--image-develop-img_intensity2-source-transpose12.gif",
+              "receipt_sha256": "b2439a781dc4b1ca2413c1f4bb368e1d2671f2faec5074e7f281d80a330894b2",
+              "reviewed_media": null,
+              "study_gate": "FAIL"
+            },
+            {
+              "case_id": "api-vector-two-broad",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-grid100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-rotated100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-staggered100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-unequal-mass",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-anisotropic",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "image-develop-img_bars4-source-transpose12",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            }
+          ],
+          "counts_by_tier": {
+            "1": {
+              "original_passed": 1,
+              "required": 2,
+              "study_passed": 0
+            },
+            "2": {
+              "original_passed": 0,
+              "required": 6,
+              "study_passed": 0
+            }
+          },
+          "family": "e22",
+          "fully_qualified": false,
+          "id": "e22--88a864cb691ec876eff8841c110860c62830ca6986ab986b2cd065c1d5e5d2d6",
+          "measured_cases": 1,
+          "original_pass_count": 1,
+          "paid_wall_seconds": 24.152218072908,
+          "recipe_overrides": {
+            "lr": 0.00425,
+            "prior_lr_mult": 1.0
+          },
+          "required_cases": 8,
+          "status": "FAIL",
+          "study_pass_count": 0,
+          "unknown_cases": 7
+        },
+        {
+          "cases": [
+            {
+              "case_id": "image-develop-img_intensity2-source-transpose12",
+              "execution_status": "INCOMPLETE",
+              "original_gate": "PASS",
+              "original_media": "policy-family-media/policy-family-defaults-round2-v1--0335ecf024ea/e22/ab19c4f54e43--image-develop-img_intensity2-source-transpose12.gif",
+              "receipt_sha256": "51cd6a48e67db137861e17dcf19a86986243d5fd51d49727cdfbef7628753956",
+              "reviewed_media": null,
+              "study_gate": "INCOMPLETE"
+            },
+            {
+              "case_id": "api-vector-two-broad",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-grid100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-rotated100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-staggered100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-unequal-mass",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-anisotropic",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "image-develop-img_bars4-source-transpose12",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            }
+          ],
+          "counts_by_tier": {
+            "1": {
+              "original_passed": 1,
+              "required": 2,
+              "study_passed": 0
+            },
+            "2": {
+              "original_passed": 0,
+              "required": 6,
+              "study_passed": 0
+            }
+          },
+          "family": "e22",
+          "fully_qualified": false,
+          "id": "e22--ab19c4f54e43cf88ec26d5988012d01e23ae84d2f23c5454e1b53a82a61e0914",
+          "measured_cases": 1,
+          "original_pass_count": 1,
+          "paid_wall_seconds": 23.904536731075495,
+          "recipe_overrides": {
+            "lr": 0.002125,
+            "prior_lr_mult": 1.0
+          },
+          "required_cases": 8,
+          "status": "INCOMPLETE",
+          "study_pass_count": 0,
+          "unknown_cases": 7
+        },
+        {
+          "cases": [
+            {
+              "case_id": "image-develop-img_intensity2-source-transpose12",
+              "execution_status": "FAIL",
+              "original_gate": "PASS",
+              "original_media": "policy-family-media/policy-family-defaults-round2-v1--0335ecf024ea/e22/cb221ca2bd30--image-develop-img_intensity2-source-transpose12.gif",
+              "receipt_sha256": "3fa8d5973e0bd8a265874255c68307fda9a3ab43330da15e76c0a2842c54ee52",
+              "reviewed_media": null,
+              "study_gate": "FAIL"
+            },
+            {
+              "case_id": "api-vector-two-broad",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-grid100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-rotated100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-staggered100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-unequal-mass",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-anisotropic",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "image-develop-img_bars4-source-transpose12",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            }
+          ],
+          "counts_by_tier": {
+            "1": {
+              "original_passed": 1,
+              "required": 2,
+              "study_passed": 0
+            },
+            "2": {
+              "original_passed": 0,
+              "required": 6,
+              "study_passed": 0
+            }
+          },
+          "family": "e22",
+          "fully_qualified": false,
+          "id": "e22--cb221ca2bd300bbcc744ad7f03825740fb747beb5f1f1043f5ccc22acc11949e",
+          "measured_cases": 1,
+          "original_pass_count": 1,
+          "paid_wall_seconds": 24.15704818093218,
+          "recipe_overrides": {
+            "lr": 0.00425,
+            "prior_lr_mult": 2.0
+          },
+          "required_cases": 8,
+          "status": "FAIL",
+          "study_pass_count": 0,
+          "unknown_cases": 7
+        }
+      ]
+    },
+    {
+      "best_observed_by_family": {
+        "atlas": "atlas--05ae5523eabcc40be1b3cc4a06afd52d5a1d442a2f66b7df427e67ca3b23d78d",
+        "e22": "e22--8385a62046dbf8d9bbf9d08b090d0d7b47147ae0849114a06a7919e9a32ac3f9"
+      },
+      "best_observed_ties": {
+        "atlas": [
+          "atlas--05ae5523eabcc40be1b3cc4a06afd52d5a1d442a2f66b7df427e67ca3b23d78d",
+          "atlas--cf74ea1def0d0ea4afa16f47ac10ea1268664fe480c9f6ab578a48ea6a1eabe2"
+        ],
+        "e22": [
+          "e22--8385a62046dbf8d9bbf9d08b090d0d7b47147ae0849114a06a7919e9a32ac3f9",
+          "e22--d0348c27e9ce4f9acc96751820270b35fd1eb999c18e79b8ab7601667b174b21"
+        ]
+      },
+      "declared_configs": 8,
+      "id": "policy-family-defaults-round3-v1--531021742ad2",
+      "measured_paid_seconds": 338.82339419214986,
+      "required_cases_per_config": 8,
+      "reservation_note": "No additional reserve inferred from absent field. See source family ledgers for accounting.",
+      "reservation_reported": null,
+      "selection": {
+        "attempts_concluded": true,
+        "comparison_complete": false,
+        "default_adoption": false,
+        "display_candidate_id": "atlas--05ae5523eabcc40be1b3cc4a06afd52d5a1d442a2f66b7df427e67ca3b23d78d",
+        "fully_qualified_ids": [],
+        "outcome": "incomplete_comparison",
+        "required_cases_per_config": 8,
+        "speed_winner": null,
+        "timing_ties": "all qualified configs retained; speed unranked under external contention"
+      },
+      "source_commit": "531021742ad25cc47ed593bc3700f68673742ae3",
+      "source_manifest_sha256": null,
+      "study_id": "policy-family-defaults-round3-v1",
+      "trials": [
+        {
+          "cases": [
+            {
+              "case_id": "image-develop-img_intensity2-source-transpose12",
+              "execution_status": "PASS",
+              "original_gate": "PASS",
+              "original_media": "policy-family-media/policy-family-defaults-round3-v1--531021742ad2/atlas/05ae5523eabc--image-develop-img_intensity2-source-transpose12.gif",
+              "receipt_sha256": "1f4a7a1e1c97baac138c878b80eab0b8910cdd658a0adf7341012a88d39f39c8",
+              "reviewed_media": null,
+              "study_gate": "PASS"
+            },
+            {
+              "case_id": "api-vector-two-broad",
+              "execution_status": "FAIL",
+              "original_gate": "FAIL",
+              "original_media": "policy-family-media/policy-family-defaults-round3-v1--531021742ad2/atlas/05ae5523eabc--api-vector-two-broad-reviewed.gif",
+              "receipt_sha256": "af0203caec885640f71aecb503d97f0e82c3e5d6da2663be9a18b48363585b24",
+              "reviewed_media": null,
+              "study_gate": "FAIL"
+            },
+            {
+              "case_id": "api-grid100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-rotated100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-staggered100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-unequal-mass",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-anisotropic",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "image-develop-img_bars4-source-transpose12",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            }
+          ],
+          "counts_by_tier": {
+            "1": {
+              "original_passed": 1,
+              "required": 2,
+              "study_passed": 1
+            },
+            "2": {
+              "original_passed": 0,
+              "required": 6,
+              "study_passed": 0
+            }
+          },
+          "family": "atlas",
+          "fully_qualified": false,
+          "id": "atlas--05ae5523eabcc40be1b3cc4a06afd52d5a1d442a2f66b7df427e67ca3b23d78d",
+          "measured_cases": 2,
+          "original_pass_count": 1,
+          "paid_wall_seconds": 62.330047614872456,
+          "recipe_overrides": {
+            "lr": 0.0031875,
+            "prior_lr_mult": 1.0
+          },
+          "required_cases": 8,
+          "status": "FAIL",
+          "study_pass_count": 1,
+          "unknown_cases": 6
+        },
+        {
+          "cases": [
+            {
+              "case_id": "image-develop-img_intensity2-source-transpose12",
+              "execution_status": "PASS",
+              "original_gate": "PASS",
+              "original_media": "policy-family-media/policy-family-defaults-round3-v1--531021742ad2/atlas/cf74ea1def0d--image-develop-img_intensity2-source-transpose12.gif",
+              "receipt_sha256": "b6ed3e4a430a319b9b5fee1805ea914126383c530018770a6da4c6a67ff83f8b",
+              "reviewed_media": null,
+              "study_gate": "PASS"
+            },
+            {
+              "case_id": "api-vector-two-broad",
+              "execution_status": "FAIL",
+              "original_gate": "FAIL",
+              "original_media": "policy-family-media/policy-family-defaults-round3-v1--531021742ad2/atlas/cf74ea1def0d--api-vector-two-broad-reviewed.gif",
+              "receipt_sha256": "56480f3bd412d537c98772b719150ea24fd66820717e8c17196ea9856d8de859",
+              "reviewed_media": null,
+              "study_gate": "FAIL"
+            },
+            {
+              "case_id": "api-grid100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-rotated100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-staggered100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-unequal-mass",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-anisotropic",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "image-develop-img_bars4-source-transpose12",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            }
+          ],
+          "counts_by_tier": {
+            "1": {
+              "original_passed": 1,
+              "required": 2,
+              "study_passed": 1
+            },
+            "2": {
+              "original_passed": 0,
+              "required": 6,
+              "study_passed": 0
+            }
+          },
+          "family": "atlas",
+          "fully_qualified": false,
+          "id": "atlas--cf74ea1def0d0ea4afa16f47ac10ea1268664fe480c9f6ab578a48ea6a1eabe2",
+          "measured_cases": 2,
+          "original_pass_count": 1,
+          "paid_wall_seconds": 61.27968976693228,
+          "recipe_overrides": {
+            "lr": 0.0053125,
+            "prior_lr_mult": 1.0
+          },
+          "required_cases": 8,
+          "status": "FAIL",
+          "study_pass_count": 1,
+          "unknown_cases": 6
+        },
+        {
+          "cases": [
+            {
+              "case_id": "image-develop-img_intensity2-source-transpose12",
+              "execution_status": "INCOMPLETE",
+              "original_gate": "PASS",
+              "original_media": "policy-family-media/policy-family-defaults-round3-v1--531021742ad2/atlas/112fe0214b6d--image-develop-img_intensity2-source-transpose12.gif",
+              "receipt_sha256": "197d27d7f580e770eaba7d06c851fd6a305c5c4ecff5f90494f8f28327d398b3",
+              "reviewed_media": null,
+              "study_gate": "INCOMPLETE"
+            },
+            {
+              "case_id": "api-vector-two-broad",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-grid100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-rotated100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-staggered100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-unequal-mass",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-anisotropic",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "image-develop-img_bars4-source-transpose12",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            }
+          ],
+          "counts_by_tier": {
+            "1": {
+              "original_passed": 1,
+              "required": 2,
+              "study_passed": 0
+            },
+            "2": {
+              "original_passed": 0,
+              "required": 6,
+              "study_passed": 0
+            }
+          },
+          "family": "atlas",
+          "fully_qualified": false,
+          "id": "atlas--112fe0214b6d64dc16a48f2c6d0418e209f73fb6abb924f502ccfb38afa50d65",
+          "measured_cases": 1,
+          "original_pass_count": 1,
+          "paid_wall_seconds": 22.901968194171786,
+          "recipe_overrides": {
+            "lr": 0.0031875,
+            "prior_lr_mult": 2.0
+          },
+          "required_cases": 8,
+          "status": "INCOMPLETE",
+          "study_pass_count": 0,
+          "unknown_cases": 7
+        },
+        {
+          "cases": [
+            {
+              "case_id": "image-develop-img_intensity2-source-transpose12",
+              "execution_status": "INCOMPLETE",
+              "original_gate": "PASS",
+              "original_media": "policy-family-media/policy-family-defaults-round3-v1--531021742ad2/atlas/3d633688c6ed--image-develop-img_intensity2-source-transpose12.gif",
+              "receipt_sha256": "c061dd0d4192415d83a72bd8f60e476a9cede2dbf4f9c8f646dec66688e8daea",
+              "reviewed_media": null,
+              "study_gate": "INCOMPLETE"
+            },
+            {
+              "case_id": "api-vector-two-broad",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-grid100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-rotated100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-staggered100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-unequal-mass",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-anisotropic",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "image-develop-img_bars4-source-transpose12",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            }
+          ],
+          "counts_by_tier": {
+            "1": {
+              "original_passed": 1,
+              "required": 2,
+              "study_passed": 0
+            },
+            "2": {
+              "original_passed": 0,
+              "required": 6,
+              "study_passed": 0
+            }
+          },
+          "family": "atlas",
+          "fully_qualified": false,
+          "id": "atlas--3d633688c6ed81ea63c756bf91c908ca7615ea04fc6b7f6f956a9519b9957c7a",
+          "measured_cases": 1,
+          "original_pass_count": 1,
+          "paid_wall_seconds": 22.30166562809609,
+          "recipe_overrides": {
+            "lr": 0.0053125,
+            "prior_lr_mult": 2.0
+          },
+          "required_cases": 8,
+          "status": "INCOMPLETE",
+          "study_pass_count": 0,
+          "unknown_cases": 7
+        },
+        {
+          "cases": [
+            {
+              "case_id": "image-develop-img_intensity2-source-transpose12",
+              "execution_status": "PASS",
+              "original_gate": "PASS",
+              "original_media": "policy-family-media/policy-family-defaults-round3-v1--531021742ad2/e22/8385a62046db--image-develop-img_intensity2-source-transpose12.gif",
+              "receipt_sha256": "94c376eafd45536269fb7fdb7cd79868633bea96bb3deaf6dbf1744117c00c15",
+              "reviewed_media": null,
+              "study_gate": "PASS"
+            },
+            {
+              "case_id": "api-vector-two-broad",
+              "execution_status": "FAIL",
+              "original_gate": "FAIL",
+              "original_media": "policy-family-media/policy-family-defaults-round3-v1--531021742ad2/e22/8385a62046db--api-vector-two-broad-reviewed.gif",
+              "receipt_sha256": "734926328e16e4ff48791c1dd6225f5058c9a522a46d4e229b7a436efed918aa",
+              "reviewed_media": null,
+              "study_gate": "FAIL"
+            },
+            {
+              "case_id": "api-grid100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-rotated100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-staggered100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-unequal-mass",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-anisotropic",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "image-develop-img_bars4-source-transpose12",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            }
+          ],
+          "counts_by_tier": {
+            "1": {
+              "original_passed": 1,
+              "required": 2,
+              "study_passed": 1
+            },
+            "2": {
+              "original_passed": 0,
+              "required": 6,
+              "study_passed": 0
+            }
+          },
+          "family": "e22",
+          "fully_qualified": false,
+          "id": "e22--8385a62046dbf8d9bbf9d08b090d0d7b47147ae0849114a06a7919e9a32ac3f9",
+          "measured_cases": 2,
+          "original_pass_count": 1,
+          "paid_wall_seconds": 62.378723859088495,
+          "recipe_overrides": {
+            "lr": 0.0053125,
+            "prior_lr_mult": 1.0
+          },
+          "required_cases": 8,
+          "status": "FAIL",
+          "study_pass_count": 1,
+          "unknown_cases": 6
+        },
+        {
+          "cases": [
+            {
+              "case_id": "image-develop-img_intensity2-source-transpose12",
+              "execution_status": "PASS",
+              "original_gate": "PASS",
+              "original_media": "policy-family-media/policy-family-defaults-round3-v1--531021742ad2/e22/d0348c27e9ce--image-develop-img_intensity2-source-transpose12.gif",
+              "receipt_sha256": "761edd687fb586a749835f24f0e6ebc280d2a016d69759cfea577ad1d867ee48",
+              "reviewed_media": null,
+              "study_gate": "PASS"
+            },
+            {
+              "case_id": "api-vector-two-broad",
+              "execution_status": "FAIL",
+              "original_gate": "FAIL",
+              "original_media": "policy-family-media/policy-family-defaults-round3-v1--531021742ad2/e22/d0348c27e9ce--api-vector-two-broad-reviewed.gif",
+              "receipt_sha256": "fbb3e80f945ba29524e0e06c6bdd47024ed51067ff01254d6a2d356f551b7f65",
+              "reviewed_media": null,
+              "study_gate": "FAIL"
+            },
+            {
+              "case_id": "api-grid100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-rotated100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-staggered100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-unequal-mass",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-anisotropic",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "image-develop-img_bars4-source-transpose12",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            }
+          ],
+          "counts_by_tier": {
+            "1": {
+              "original_passed": 1,
+              "required": 2,
+              "study_passed": 1
+            },
+            "2": {
+              "original_passed": 0,
+              "required": 6,
+              "study_passed": 0
+            }
+          },
+          "family": "e22",
+          "fully_qualified": false,
+          "id": "e22--d0348c27e9ce4f9acc96751820270b35fd1eb999c18e79b8ab7601667b174b21",
+          "measured_cases": 2,
+          "original_pass_count": 1,
+          "paid_wall_seconds": 62.27986457105726,
+          "recipe_overrides": {
+            "lr": 0.0031875,
+            "prior_lr_mult": 1.0
+          },
+          "required_cases": 8,
+          "status": "FAIL",
+          "study_pass_count": 1,
+          "unknown_cases": 6
+        },
+        {
+          "cases": [
+            {
+              "case_id": "image-develop-img_intensity2-source-transpose12",
+              "execution_status": "INCOMPLETE",
+              "original_gate": "PASS",
+              "original_media": "policy-family-media/policy-family-defaults-round3-v1--531021742ad2/e22/233d9f6e49d4--image-develop-img_intensity2-source-transpose12.gif",
+              "receipt_sha256": "bfc8c622371a81168e8227816e66f2fc222f6aa4cbbe67b0fd12d180c00da7ce",
+              "reviewed_media": null,
+              "study_gate": "INCOMPLETE"
+            },
+            {
+              "case_id": "api-vector-two-broad",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-grid100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-rotated100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-staggered100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-unequal-mass",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-anisotropic",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "image-develop-img_bars4-source-transpose12",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            }
+          ],
+          "counts_by_tier": {
+            "1": {
+              "original_passed": 1,
+              "required": 2,
+              "study_passed": 0
+            },
+            "2": {
+              "original_passed": 0,
+              "required": 6,
+              "study_passed": 0
+            }
+          },
+          "family": "e22",
+          "fully_qualified": false,
+          "id": "e22--233d9f6e49d46306187b00c2e9338b24092686c8819f4d7a35103596e3fcfaac",
+          "measured_cases": 1,
+          "original_pass_count": 1,
+          "paid_wall_seconds": 22.50005340203643,
+          "recipe_overrides": {
+            "lr": 0.0053125,
+            "prior_lr_mult": 2.0
+          },
+          "required_cases": 8,
+          "status": "INCOMPLETE",
+          "study_pass_count": 0,
+          "unknown_cases": 7
+        },
+        {
+          "cases": [
+            {
+              "case_id": "image-develop-img_intensity2-source-transpose12",
+              "execution_status": "INCOMPLETE",
+              "original_gate": "PASS",
+              "original_media": "policy-family-media/policy-family-defaults-round3-v1--531021742ad2/e22/30110f79b684--image-develop-img_intensity2-source-transpose12.gif",
+              "receipt_sha256": "26011ae8d44bb3c198a09fbf147f8c932afc3dfd0e570f8adf7ba5fab31d6ffa",
+              "reviewed_media": null,
+              "study_gate": "INCOMPLETE"
+            },
+            {
+              "case_id": "api-vector-two-broad",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-grid100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-rotated100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-staggered100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-unequal-mass",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-anisotropic",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "image-develop-img_bars4-source-transpose12",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            }
+          ],
+          "counts_by_tier": {
+            "1": {
+              "original_passed": 1,
+              "required": 2,
+              "study_passed": 0
+            },
+            "2": {
+              "original_passed": 0,
+              "required": 6,
+              "study_passed": 0
+            }
+          },
+          "family": "e22",
+          "fully_qualified": false,
+          "id": "e22--30110f79b68444ddc5b0d46c5b58fe87af7dc13a9b8c305f5613f8e9d542b37e",
+          "measured_cases": 1,
+          "original_pass_count": 1,
+          "paid_wall_seconds": 22.85138115589507,
+          "recipe_overrides": {
+            "lr": 0.0031875,
+            "prior_lr_mult": 2.0
+          },
+          "required_cases": 8,
+          "status": "INCOMPLETE",
+          "study_pass_count": 0,
+          "unknown_cases": 7
+        }
+      ]
+    },
+    {
+      "best_observed_by_family": {
+        "atlas": "atlas--3018391da94f435ef3032212e111ea15ae877fc32b0bf94114b0d7c9e69a6a00",
+        "e22": "e22--5376bd11b0af6ba9ffe3151f3fbc6604e09b8df896869241676f2559e4f730be"
+      },
+      "best_observed_ties": {
+        "atlas": [
+          "atlas--3018391da94f435ef3032212e111ea15ae877fc32b0bf94114b0d7c9e69a6a00",
+          "atlas--abe34fb6f0c5f7802cec80e5a2d88aaffb4aa85e55e4021f646457630abec4f0"
+        ],
+        "e22": [
+          "e22--5376bd11b0af6ba9ffe3151f3fbc6604e09b8df896869241676f2559e4f730be",
+          "e22--e3d2b84ede8f17df4ce9c214ed87336c921213c83d6d1030add8d4337a92bceb"
+        ]
+      },
+      "declared_configs": 8,
+      "id": "policy-family-defaults-round4-prior-balance-v1--8021a1c50c4a",
+      "measured_paid_seconds": 331.51518269861117,
+      "required_cases_per_config": 8,
+      "reservation_note": "No additional reserve inferred from absent field. See source family ledgers for accounting.",
+      "reservation_reported": null,
+      "selection": {
+        "attempts_concluded": true,
+        "comparison_complete": false,
+        "default_adoption": false,
+        "display_candidate_id": "atlas--3018391da94f435ef3032212e111ea15ae877fc32b0bf94114b0d7c9e69a6a00",
+        "fully_qualified_ids": [],
+        "outcome": "incomplete_comparison",
+        "required_cases_per_config": 8,
+        "speed_winner": null,
+        "timing_ties": "all qualified configs retained; speed unranked under external contention"
+      },
+      "source_commit": "8021a1c50c4aff90ddea5010d368cffdc857b2f6",
+      "source_manifest_sha256": null,
+      "study_id": "policy-family-defaults-round4-prior-balance-v1",
+      "trials": [
+        {
+          "cases": [
+            {
+              "case_id": "image-develop-img_intensity2-source-transpose12",
+              "execution_status": "PASS",
+              "original_gate": "PASS",
+              "original_media": "policy-family-media/policy-family-defaults-round4-prior-balance-v1--8021a1c50c4a/atlas/3018391da94f--image-develop-img_intensity2-source-transpose12.gif",
+              "receipt_sha256": "c338feffa474e3c16c18d3cd746b9b48992d06e18d021c67d4f7b95d63c7c89a",
+              "reviewed_media": null,
+              "study_gate": "PASS"
+            },
+            {
+              "case_id": "api-vector-two-broad",
+              "execution_status": "FAIL",
+              "original_gate": "FAIL",
+              "original_media": "policy-family-media/policy-family-defaults-round4-prior-balance-v1--8021a1c50c4a/atlas/3018391da94f--api-vector-two-broad-reviewed.gif",
+              "receipt_sha256": "cde0330486999b1afe4a586df5a401c825d53d9a1c68b0518197582baeca6c33",
+              "reviewed_media": null,
+              "study_gate": "FAIL"
+            },
+            {
+              "case_id": "api-grid100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-rotated100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-staggered100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-unequal-mass",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-anisotropic",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "image-develop-img_bars4-source-transpose12",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            }
+          ],
+          "counts_by_tier": {
+            "1": {
+              "original_passed": 1,
+              "required": 2,
+              "study_passed": 1
+            },
+            "2": {
+              "original_passed": 0,
+              "required": 6,
+              "study_passed": 0
+            }
+          },
+          "family": "atlas",
+          "fully_qualified": false,
+          "id": "atlas--3018391da94f435ef3032212e111ea15ae877fc32b0bf94114b0d7c9e69a6a00",
+          "measured_cases": 2,
+          "original_pass_count": 1,
+          "paid_wall_seconds": 59.67341486597434,
+          "recipe_overrides": {
+            "lr": 0.006375,
+            "prior_lr_mult": 1.5
+          },
+          "required_cases": 8,
+          "status": "FAIL",
+          "study_pass_count": 1,
+          "unknown_cases": 6
+        },
+        {
+          "cases": [
+            {
+              "case_id": "image-develop-img_intensity2-source-transpose12",
+              "execution_status": "PASS",
+              "original_gate": "PASS",
+              "original_media": "policy-family-media/policy-family-defaults-round4-prior-balance-v1--8021a1c50c4a/atlas/abe34fb6f0c5--image-develop-img_intensity2-source-transpose12.gif",
+              "receipt_sha256": "4f2bbbcb1ced5a8f092670413729be6ef202b2b2060e0ac1c2443db882199a6d",
+              "reviewed_media": null,
+              "study_gate": "PASS"
+            },
+            {
+              "case_id": "api-vector-two-broad",
+              "execution_status": "INCOMPLETE",
+              "original_gate": "PASS",
+              "original_media": "policy-family-media/policy-family-defaults-round4-prior-balance-v1--8021a1c50c4a/atlas/abe34fb6f0c5--api-vector-two-broad-reviewed.gif",
+              "receipt_sha256": "e2bfc5fdc66ea2c32e77b22d16a00346a83852b3192d9f4b4ee2da2619da20a6",
+              "reviewed_media": null,
+              "study_gate": "INCOMPLETE"
+            },
+            {
+              "case_id": "api-grid100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-rotated100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-staggered100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-unequal-mass",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-anisotropic",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "image-develop-img_bars4-source-transpose12",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            }
+          ],
+          "counts_by_tier": {
+            "1": {
+              "original_passed": 2,
+              "required": 2,
+              "study_passed": 1
+            },
+            "2": {
+              "original_passed": 0,
+              "required": 6,
+              "study_passed": 0
+            }
+          },
+          "family": "atlas",
+          "fully_qualified": false,
+          "id": "atlas--abe34fb6f0c5f7802cec80e5a2d88aaffb4aa85e55e4021f646457630abec4f0",
+          "measured_cases": 2,
+          "original_pass_count": 2,
+          "paid_wall_seconds": 59.326042673084885,
+          "recipe_overrides": {
+            "lr": 0.0053125,
+            "prior_lr_mult": 1.5
+          },
+          "required_cases": 8,
+          "status": "INCOMPLETE",
+          "study_pass_count": 1,
+          "unknown_cases": 6
+        },
+        {
+          "cases": [
+            {
+              "case_id": "image-develop-img_intensity2-source-transpose12",
+              "execution_status": "FAIL",
+              "original_gate": "PASS",
+              "original_media": "policy-family-media/policy-family-defaults-round4-prior-balance-v1--8021a1c50c4a/atlas/236d48b6033f--image-develop-img_intensity2-source-transpose12.gif",
+              "receipt_sha256": "d96574b717a8ec6ec848baed6d1138e098c00e7687d4cc868f71eff5a71e6546",
+              "reviewed_media": null,
+              "study_gate": "FAIL"
+            },
+            {
+              "case_id": "api-vector-two-broad",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-grid100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-rotated100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-staggered100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-unequal-mass",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-anisotropic",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "image-develop-img_bars4-source-transpose12",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            }
+          ],
+          "counts_by_tier": {
+            "1": {
+              "original_passed": 1,
+              "required": 2,
+              "study_passed": 0
+            },
+            "2": {
+              "original_passed": 0,
+              "required": 6,
+              "study_passed": 0
+            }
+          },
+          "family": "atlas",
+          "fully_qualified": false,
+          "id": "atlas--236d48b6033ff1abd0ac59fb54e42ce14b18465dc98b365fbb0ac669353dc656",
+          "measured_cases": 1,
+          "original_pass_count": 1,
+          "paid_wall_seconds": 21.99983537895605,
+          "recipe_overrides": {
+            "lr": 0.006375,
+            "prior_lr_mult": 0.5
+          },
+          "required_cases": 8,
+          "status": "FAIL",
+          "study_pass_count": 0,
+          "unknown_cases": 7
+        },
+        {
+          "cases": [
+            {
+              "case_id": "image-develop-img_intensity2-source-transpose12",
+              "execution_status": "FAIL",
+              "original_gate": "FAIL",
+              "original_media": "policy-family-media/policy-family-defaults-round4-prior-balance-v1--8021a1c50c4a/atlas/8bb305c13267--image-develop-img_intensity2-source-transpose12.gif",
+              "receipt_sha256": "3e18dbbe5f0600fe6248e1daf88199c4099b236e0d063da24cad94e4ec85063c",
+              "reviewed_media": null,
+              "study_gate": "FAIL"
+            },
+            {
+              "case_id": "api-vector-two-broad",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-grid100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-rotated100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-staggered100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-unequal-mass",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-anisotropic",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "image-develop-img_bars4-source-transpose12",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            }
+          ],
+          "counts_by_tier": {
+            "1": {
+              "original_passed": 0,
+              "required": 2,
+              "study_passed": 0
+            },
+            "2": {
+              "original_passed": 0,
+              "required": 6,
+              "study_passed": 0
+            }
+          },
+          "family": "atlas",
+          "fully_qualified": false,
+          "id": "atlas--8bb305c1326741e13924a73f4af18d050808443a8f429569a45cfdcc7d32e514",
+          "measured_cases": 1,
+          "original_pass_count": 0,
+          "paid_wall_seconds": 23.25237070978619,
+          "recipe_overrides": {
+            "lr": 0.0053125,
+            "prior_lr_mult": 0.5
+          },
+          "required_cases": 8,
+          "status": "FAIL",
+          "study_pass_count": 0,
+          "unknown_cases": 7
+        },
+        {
+          "cases": [
+            {
+              "case_id": "image-develop-img_intensity2-source-transpose12",
+              "execution_status": "PASS",
+              "original_gate": "PASS",
+              "original_media": "policy-family-media/policy-family-defaults-round4-prior-balance-v1--8021a1c50c4a/e22/5376bd11b0af--image-develop-img_intensity2-source-transpose12.gif",
+              "receipt_sha256": "19017a0c294d4e295de3bc2c4ff09c7a6ba46df347a7dd8bde959e59a76fdbf0",
+              "reviewed_media": null,
+              "study_gate": "PASS"
+            },
+            {
+              "case_id": "api-vector-two-broad",
+              "execution_status": "INCOMPLETE",
+              "original_gate": "PASS",
+              "original_media": "policy-family-media/policy-family-defaults-round4-prior-balance-v1--8021a1c50c4a/e22/5376bd11b0af--api-vector-two-broad-reviewed.gif",
+              "receipt_sha256": "bf6005d2118b3f6994ca240e706a5e8a4e5ef94818f8b54ecc695a6fb00a03dd",
+              "reviewed_media": null,
+              "study_gate": "INCOMPLETE"
+            },
+            {
+              "case_id": "api-grid100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-rotated100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-staggered100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-unequal-mass",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-anisotropic",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "image-develop-img_bars4-source-transpose12",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            }
+          ],
+          "counts_by_tier": {
+            "1": {
+              "original_passed": 2,
+              "required": 2,
+              "study_passed": 1
+            },
+            "2": {
+              "original_passed": 0,
+              "required": 6,
+              "study_passed": 0
+            }
+          },
+          "family": "e22",
+          "fully_qualified": false,
+          "id": "e22--5376bd11b0af6ba9ffe3151f3fbc6604e09b8df896869241676f2559e4f730be",
+          "measured_cases": 2,
+          "original_pass_count": 2,
+          "paid_wall_seconds": 60.68062499794178,
+          "recipe_overrides": {
+            "lr": 0.0053125,
+            "prior_lr_mult": 1.5
+          },
+          "required_cases": 8,
+          "status": "INCOMPLETE",
+          "study_pass_count": 1,
+          "unknown_cases": 6
+        },
+        {
+          "cases": [
+            {
+              "case_id": "image-develop-img_intensity2-source-transpose12",
+              "execution_status": "PASS",
+              "original_gate": "PASS",
+              "original_media": "policy-family-media/policy-family-defaults-round4-prior-balance-v1--8021a1c50c4a/e22/e3d2b84ede8f--image-develop-img_intensity2-source-transpose12.gif",
+              "receipt_sha256": "b3a232e0368a9e50249eec27edf004a6f208b7564a451dc1d84bea1289ddc2f8",
+              "reviewed_media": null,
+              "study_gate": "PASS"
+            },
+            {
+              "case_id": "api-vector-two-broad",
+              "execution_status": "FAIL",
+              "original_gate": "FAIL",
+              "original_media": "policy-family-media/policy-family-defaults-round4-prior-balance-v1--8021a1c50c4a/e22/e3d2b84ede8f--api-vector-two-broad-reviewed.gif",
+              "receipt_sha256": "e1779d9c12b26f6d90f4e009434485e4be73378f2dea80a5eef25fbc6f12ab6f",
+              "reviewed_media": null,
+              "study_gate": "FAIL"
+            },
+            {
+              "case_id": "api-grid100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-rotated100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-staggered100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-unequal-mass",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-anisotropic",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "image-develop-img_bars4-source-transpose12",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            }
+          ],
+          "counts_by_tier": {
+            "1": {
+              "original_passed": 1,
+              "required": 2,
+              "study_passed": 1
+            },
+            "2": {
+              "original_passed": 0,
+              "required": 6,
+              "study_passed": 0
+            }
+          },
+          "family": "e22",
+          "fully_qualified": false,
+          "id": "e22--e3d2b84ede8f17df4ce9c214ed87336c921213c83d6d1030add8d4337a92bceb",
+          "measured_cases": 2,
+          "original_pass_count": 1,
+          "paid_wall_seconds": 61.176902297884226,
+          "recipe_overrides": {
+            "lr": 0.006375,
+            "prior_lr_mult": 1.5
+          },
+          "required_cases": 8,
+          "status": "FAIL",
+          "study_pass_count": 1,
+          "unknown_cases": 6
+        },
+        {
+          "cases": [
+            {
+              "case_id": "image-develop-img_intensity2-source-transpose12",
+              "execution_status": "FAIL",
+              "original_gate": "FAIL",
+              "original_media": "policy-family-media/policy-family-defaults-round4-prior-balance-v1--8021a1c50c4a/e22/383591c52dd4--image-develop-img_intensity2-source-transpose12.gif",
+              "receipt_sha256": "1df017cc9b5e8303a4c296864a9d3c9cc9f33f6b3267cc6486f31925789149c0",
+              "reviewed_media": null,
+              "study_gate": "FAIL"
+            },
+            {
+              "case_id": "api-vector-two-broad",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-grid100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-rotated100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-staggered100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-unequal-mass",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-anisotropic",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "image-develop-img_bars4-source-transpose12",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            }
+          ],
+          "counts_by_tier": {
+            "1": {
+              "original_passed": 0,
+              "required": 2,
+              "study_passed": 0
+            },
+            "2": {
+              "original_passed": 0,
+              "required": 6,
+              "study_passed": 0
+            }
+          },
+          "family": "e22",
+          "fully_qualified": false,
+          "id": "e22--383591c52dd48ec320f5353d6dd35ad4f65d873af1e8a7ea70662e143ef5ce2a",
+          "measured_cases": 1,
+          "original_pass_count": 0,
+          "paid_wall_seconds": 23.35205067298375,
+          "recipe_overrides": {
+            "lr": 0.0053125,
+            "prior_lr_mult": 0.5
+          },
+          "required_cases": 8,
+          "status": "FAIL",
+          "study_pass_count": 0,
+          "unknown_cases": 7
+        },
+        {
+          "cases": [
+            {
+              "case_id": "image-develop-img_intensity2-source-transpose12",
+              "execution_status": "FAIL",
+              "original_gate": "PASS",
+              "original_media": "policy-family-media/policy-family-defaults-round4-prior-balance-v1--8021a1c50c4a/e22/abae69c7b60c--image-develop-img_intensity2-source-transpose12.gif",
+              "receipt_sha256": "3b2a598a26536a40b25b5ab85747aa86b2310df019703aec978e5f7897b0a226",
+              "reviewed_media": null,
+              "study_gate": "FAIL"
+            },
+            {
+              "case_id": "api-vector-two-broad",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-grid100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-rotated100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-staggered100",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-unequal-mass",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "api-vector-anisotropic",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            },
+            {
+              "case_id": "image-develop-img_bars4-source-transpose12",
+              "execution_status": "UNKNOWN",
+              "original_gate": null,
+              "original_media": null,
+              "receipt_sha256": null,
+              "reviewed_media": null,
+              "study_gate": null
+            }
+          ],
+          "counts_by_tier": {
+            "1": {
+              "original_passed": 1,
+              "required": 2,
+              "study_passed": 0
+            },
+            "2": {
+              "original_passed": 0,
+              "required": 6,
+              "study_passed": 0
+            }
+          },
+          "family": "e22",
+          "fully_qualified": false,
+          "id": "e22--abae69c7b60ce159e41d557f148ee63939ba897597acf4381bb80ad732474611",
+          "measured_cases": 1,
+          "original_pass_count": 1,
+          "paid_wall_seconds": 22.053941101999953,
+          "recipe_overrides": {
+            "lr": 0.006375,
+            "prior_lr_mult": 0.5
+          },
+          "required_cases": 8,
+          "status": "FAIL",
+          "study_pass_count": 0,
+          "unknown_cases": 7
+        }
+      ]
+    }
+  ],
+  "recent_public_policy": [
+    {
+      "archive": {
+        "all_member_hashes_verified": true,
+        "archive_member_count": 10411,
+        "availability": "LOCAL_ONLY",
+        "bytes": 64385103,
+        "path": "/ml2/hypergan/forge-critic-balance-archive-20261003/critic-balance-capacity16-learning2-v1.tar.gz",
+        "sha256": "292061adad594577d9186207234929afa42437cdf9e5539128d9ca4865a7b533"
+      },
+      "availability": "PINNED_PR_BRANCH_REPORT_NOT_DEVELOP_AT_BOUNDARY",
+      "cases": [
+        {
+          "acquisition_hold": {
+            "reason": "no five-check acquisition window",
+            "status": "FAIL"
+          },
+          "case_id": "image-develop-img_intensity2-source-transpose12",
+          "completed_updates": 600,
+          "family": "atlas",
+          "full_protocol_complete": true,
+          "media": {
+            "bytes": 191904,
+            "caption": "Original gate: FAIL; added first-window hold: FAIL; confirm step unavailable; later unavailable/unavailable passing; at least 5 required, every later primary check must pass.",
+            "frames": 9,
+            "original_path": "/ml2/hypergan/forge-critic-balance-20261003-v2/atlas/atlas--da2b715e4d88919fc314b718d11c27e0e6740a5ff30835d0137186337fafa1bc/image-develop-img_intensity2-source-transpose12/goal.gif",
+            "path": "media/atlas/image-develop-img_intensity2-source-transpose12/goal.gif",
+            "sha256": "7aba76b1ed1bbcffda60a9fd0640550ec66b65697bb05effe5c92c6f786030c2"
+          },
+          "original_gate": "FAIL",
+          "status": "FAIL",
+          "study_gate": "FAIL"
+        },
+        {
+          "acquisition_hold": null,
+          "case_id": "api-vector-two-broad",
+          "completed_updates": null,
+          "family": "atlas",
+          "full_protocol_complete": false,
+          "media": null,
+          "original_gate": null,
+          "status": "UNKNOWN",
+          "study_gate": null
+        },
+        {
+          "acquisition_hold": null,
+          "case_id": "api-grid100",
+          "completed_updates": null,
+          "family": "atlas",
+          "full_protocol_complete": false,
+          "media": null,
+          "original_gate": null,
+          "status": "UNKNOWN",
+          "study_gate": null
+        },
+        {
+          "acquisition_hold": null,
+          "case_id": "api-rotated100",
+          "completed_updates": null,
+          "family": "atlas",
+          "full_protocol_complete": false,
+          "media": null,
+          "original_gate": null,
+          "status": "UNKNOWN",
+          "study_gate": null
+        },
+        {
+          "acquisition_hold": null,
+          "case_id": "api-staggered100",
+          "completed_updates": null,
+          "family": "atlas",
+          "full_protocol_complete": false,
+          "media": null,
+          "original_gate": null,
+          "status": "UNKNOWN",
+          "study_gate": null
+        },
+        {
+          "acquisition_hold": null,
+          "case_id": "api-vector-unequal-mass",
+          "completed_updates": null,
+          "family": "atlas",
+          "full_protocol_complete": false,
+          "media": null,
+          "original_gate": null,
+          "status": "UNKNOWN",
+          "study_gate": null
+        },
+        {
+          "acquisition_hold": null,
+          "case_id": "api-vector-anisotropic",
+          "completed_updates": null,
+          "family": "atlas",
+          "full_protocol_complete": false,
+          "media": null,
+          "original_gate": null,
+          "status": "UNKNOWN",
+          "study_gate": null
+        },
+        {
+          "acquisition_hold": null,
+          "case_id": "image-develop-img_bars4-source-transpose12",
+          "completed_updates": null,
+          "family": "atlas",
+          "full_protocol_complete": false,
+          "media": null,
+          "original_gate": null,
+          "status": "UNKNOWN",
+          "study_gate": null
+        },
+        {
+          "acquisition_hold": {
+            "reason": "no five-check acquisition window",
+            "status": "FAIL"
+          },
+          "case_id": "image-develop-img_intensity2-source-transpose12",
+          "completed_updates": 600,
+          "family": "e22",
+          "full_protocol_complete": true,
+          "media": {
+            "bytes": 191904,
+            "caption": "Original gate: FAIL; added first-window hold: FAIL; confirm step unavailable; later unavailable/unavailable passing; at least 5 required, every later primary check must pass.",
+            "frames": 9,
+            "original_path": "/ml2/hypergan/forge-critic-balance-20261003-v2/e22/e22--eb46d286391383c36160b8363ecfdc7d230528a8b50a2945dab4279f36e7e6eb/image-develop-img_intensity2-source-transpose12/goal.gif",
+            "path": "media/e22/image-develop-img_intensity2-source-transpose12/goal.gif",
+            "sha256": "7aba76b1ed1bbcffda60a9fd0640550ec66b65697bb05effe5c92c6f786030c2"
+          },
+          "original_gate": "FAIL",
+          "status": "FAIL",
+          "study_gate": "FAIL"
+        },
+        {
+          "acquisition_hold": null,
+          "case_id": "api-vector-two-broad",
+          "completed_updates": null,
+          "family": "e22",
+          "full_protocol_complete": false,
+          "media": null,
+          "original_gate": null,
+          "status": "UNKNOWN",
+          "study_gate": null
+        },
+        {
+          "acquisition_hold": null,
+          "case_id": "api-grid100",
+          "completed_updates": null,
+          "family": "e22",
+          "full_protocol_complete": false,
+          "media": null,
+          "original_gate": null,
+          "status": "UNKNOWN",
+          "study_gate": null
+        },
+        {
+          "acquisition_hold": null,
+          "case_id": "api-rotated100",
+          "completed_updates": null,
+          "family": "e22",
+          "full_protocol_complete": false,
+          "media": null,
+          "original_gate": null,
+          "status": "UNKNOWN",
+          "study_gate": null
+        },
+        {
+          "acquisition_hold": null,
+          "case_id": "api-staggered100",
+          "completed_updates": null,
+          "family": "e22",
+          "full_protocol_complete": false,
+          "media": null,
+          "original_gate": null,
+          "status": "UNKNOWN",
+          "study_gate": null
+        },
+        {
+          "acquisition_hold": null,
+          "case_id": "api-vector-unequal-mass",
+          "completed_updates": null,
+          "family": "e22",
+          "full_protocol_complete": false,
+          "media": null,
+          "original_gate": null,
+          "status": "UNKNOWN",
+          "study_gate": null
+        },
+        {
+          "acquisition_hold": null,
+          "case_id": "api-vector-anisotropic",
+          "completed_updates": null,
+          "family": "e22",
+          "full_protocol_complete": false,
+          "media": null,
+          "original_gate": null,
+          "status": "UNKNOWN",
+          "study_gate": null
+        },
+        {
+          "acquisition_hold": null,
+          "case_id": "image-develop-img_bars4-source-transpose12",
+          "completed_updates": null,
+          "family": "e22",
+          "full_protocol_complete": false,
+          "media": null,
+          "original_gate": null,
+          "status": "UNKNOWN",
+          "study_gate": null
+        }
+      ],
+      "configs": [
+        {
+          "configuration_id": "atlas--da2b715e4d88919fc314b718d11c27e0e6740a5ff30835d0137186337fafa1bc",
+          "execution_counts": {
+            "FAIL": 1,
+            "UNKNOWN": 7
+          },
+          "family": "atlas",
+          "fully_qualified": false,
+          "original_gate_counts": {
+            "FAIL": 1,
+            "UNAVAILABLE": 7
+          },
+          "required_cases": 8,
+          "study_gate_counts": {
+            "FAIL": 1,
+            "UNAVAILABLE": 7
+          },
+          "tuple": {
+            "d_lr_mult": 2.25,
+            "lr": 0.0053125,
+            "prior_lr_mult": 1.5
+          }
+        },
+        {
+          "configuration_id": "e22--eb46d286391383c36160b8363ecfdc7d230528a8b50a2945dab4279f36e7e6eb",
+          "execution_counts": {
+            "FAIL": 1,
+            "UNKNOWN": 7
+          },
+          "family": "e22",
+          "fully_qualified": false,
+          "original_gate_counts": {
+            "FAIL": 1,
+            "UNAVAILABLE": 7
+          },
+          "required_cases": 8,
+          "study_gate_counts": {
+            "FAIL": 1,
+            "UNAVAILABLE": 7
+          },
+          "tuple": {
+            "d_lr_mult": 2.25,
+            "lr": 0.0053125,
+            "prior_lr_mult": 1.5
+          }
+        }
+      ],
+      "configuration_ids": 2,
+      "costs": {
+        "clock": "This cohort's durable supervised child intervals plus conservative interruption reserves; original engineering error is separately bound and debited from remaining quotas; CPU capacity verification, queue wait and parent certification are separate diagnostics",
+        "combined_cap_seconds": 15360.0,
+        "combined_charged_seconds": 59.116680497769266,
+        "engineering_paid_seconds": 4.757908704923466,
+        "family_remaining_caps_seconds": {
+          "atlas": 7675.2420912950765,
+          "e22": 7680.0
+        },
+        "ordinary_paid_seconds": 54.3587717928458,
+        "ordinary_reserved_seconds": 0.0,
+        "remaining_cohort_cap_seconds": 15355.242091295077
+      },
+      "counts": {
+        "capacity": {
+          "SUPPORTED": 16
+        },
+        "execution": {
+          "FAIL": 2,
+          "UNKNOWN": 14
+        },
+        "goal_gifs": 2,
+        "original_gates": {
+          "FAIL": 2,
+          "UNAVAILABLE": 14
+        },
+        "study_gates": {
+          "FAIL": 2,
+          "UNAVAILABLE": 14
+        }
+      },
+      "declared_configs": 2,
+      "default_adoption": false,
+      "fair_speed_winner": null,
+      "id": "critic_rate",
+      "law": "Atlas/E22 family-owned public selected policy, unchanged eight protected targets and full horizons. Current image finite-templateTV is gated; native 24 full20k observations / final five use noisy primary and noiseoff selected-policy diagnostic, without separate forced EMA or 100k. First five consecutive passing checks plus at least five later all-passing checks are the added study requirement.",
+      "pr": 267,
+      "report": "https://github.com/255BITS/ParticleGAN/blob/dc3256b61042a5aa2193bc5dfc16799c15521521/reports/forge/critic-balance-20261003/README.md",
+      "required_cases_per_config": 8,
+      "required_cells": 16,
+      "selection": {
+        "attempts_concluded": true,
+        "best_observed_ids": [
+          "atlas--da2b715e4d88919fc314b718d11c27e0e6740a5ff30835d0137186337fafa1bc",
+          "e22--eb46d286391383c36160b8363ecfdc7d230528a8b50a2945dab4279f36e7e6eb"
+        ],
+        "comparison_complete": true,
+        "default_adoption": false,
+        "fully_qualified_ids": [],
+        "outcome": "best_observed",
+        "required_cases_per_config": 8,
+        "required_cells": 16,
+        "required_configurations": 2,
+        "speed_winner": null
+      },
+      "source": {
+        "commit": "a956c6fc447bbe1314ff43ec224825a0e941eb55",
+        "manifest_sha256": "dded3b676e2ddf14b607ab39b9980b157fb9f5ea2ab09f77aa2e30b94d31f712"
+      },
+      "tuple": {
+        "d_lr_mult": 2.25,
+        "lr": 0.0053125,
+        "prior_lr_mult": 1.5
+      }
+    },
+    {
+      "archive": {
+        "all_member_hashes_verified": true,
+        "archive_member_count": 17366,
+        "availability": "LOCAL_ONLY",
+        "bytes": 111262244,
+        "path": "/ml2/hypergan/forge-generator-step-archive-20261003/generator-step-capacity16-learning2-v1.tar.gz",
+        "sha256": "271cf1c21a341d33d520311160c3d9c03f3ffcb6094dd544602e2084089c8949"
+      },
+      "availability": "PINNED_PR_BRANCH_REPORT_NOT_DEVELOP_AT_BOUNDARY",
+      "cases": [
+        {
+          "acquisition_hold": {
+            "reason": "no five-check acquisition window",
+            "status": "FAIL"
+          },
+          "case_id": "image-develop-img_intensity2-source-transpose12",
+          "completed_updates": 600,
+          "family": "atlas",
+          "full_protocol_complete": true,
+          "media": {
+            "bytes": 192353,
+            "caption": "Original gate: FAIL; added first-window hold: FAIL; confirm step unavailable; later unavailable/unavailable passing; at least 5 required, every later primary check must pass.",
+            "frames": 9,
+            "original_path": "/ml2/hypergan/forge-generator-step-20261003/atlas/atlas--d2e6767ae639367ca480c4271d72f20700a2d03e95242f4dd1ba75bfc01ed3f3/image-develop-img_intensity2-source-transpose12/goal.gif",
+            "path": "media/atlas/image-develop-img_intensity2-source-transpose12/goal.gif",
+            "sha256": "9a5b6e71bcee967383eab1a32c49add58192f984e1eef22970223761b35bc026"
+          },
+          "original_gate": "FAIL",
+          "status": "FAIL",
+          "study_gate": "FAIL"
+        },
+        {
+          "acquisition_hold": null,
+          "case_id": "api-vector-two-broad",
+          "completed_updates": null,
+          "family": "atlas",
+          "full_protocol_complete": false,
+          "media": null,
+          "original_gate": null,
+          "status": "UNKNOWN",
+          "study_gate": null
+        },
+        {
+          "acquisition_hold": null,
+          "case_id": "api-grid100",
+          "completed_updates": null,
+          "family": "atlas",
+          "full_protocol_complete": false,
+          "media": null,
+          "original_gate": null,
+          "status": "UNKNOWN",
+          "study_gate": null
+        },
+        {
+          "acquisition_hold": null,
+          "case_id": "api-rotated100",
+          "completed_updates": null,
+          "family": "atlas",
+          "full_protocol_complete": false,
+          "media": null,
+          "original_gate": null,
+          "status": "UNKNOWN",
+          "study_gate": null
+        },
+        {
+          "acquisition_hold": null,
+          "case_id": "api-staggered100",
+          "completed_updates": null,
+          "family": "atlas",
+          "full_protocol_complete": false,
+          "media": null,
+          "original_gate": null,
+          "status": "UNKNOWN",
+          "study_gate": null
+        },
+        {
+          "acquisition_hold": null,
+          "case_id": "api-vector-unequal-mass",
+          "completed_updates": null,
+          "family": "atlas",
+          "full_protocol_complete": false,
+          "media": null,
+          "original_gate": null,
+          "status": "UNKNOWN",
+          "study_gate": null
+        },
+        {
+          "acquisition_hold": null,
+          "case_id": "api-vector-anisotropic",
+          "completed_updates": null,
+          "family": "atlas",
+          "full_protocol_complete": false,
+          "media": null,
+          "original_gate": null,
+          "status": "UNKNOWN",
+          "study_gate": null
+        },
+        {
+          "acquisition_hold": null,
+          "case_id": "image-develop-img_bars4-source-transpose12",
+          "completed_updates": null,
+          "family": "atlas",
+          "full_protocol_complete": false,
+          "media": null,
+          "original_gate": null,
+          "status": "UNKNOWN",
+          "study_gate": null
+        },
+        {
+          "acquisition_hold": {
+            "reason": "no five-check acquisition window",
+            "status": "FAIL"
+          },
+          "case_id": "image-develop-img_intensity2-source-transpose12",
+          "completed_updates": 600,
+          "family": "e22",
+          "full_protocol_complete": true,
+          "media": {
+            "bytes": 192353,
+            "caption": "Original gate: FAIL; added first-window hold: FAIL; confirm step unavailable; later unavailable/unavailable passing; at least 5 required, every later primary check must pass.",
+            "frames": 9,
+            "original_path": "/ml2/hypergan/forge-generator-step-20261003/e22/e22--accb716670730414f49af2a9bce2cd4c373d7df69bdcebfbf495637349e928a1/image-develop-img_intensity2-source-transpose12/goal.gif",
+            "path": "media/e22/image-develop-img_intensity2-source-transpose12/goal.gif",
+            "sha256": "9a5b6e71bcee967383eab1a32c49add58192f984e1eef22970223761b35bc026"
+          },
+          "original_gate": "FAIL",
+          "status": "FAIL",
+          "study_gate": "FAIL"
+        },
+        {
+          "acquisition_hold": null,
+          "case_id": "api-vector-two-broad",
+          "completed_updates": null,
+          "family": "e22",
+          "full_protocol_complete": false,
+          "media": null,
+          "original_gate": null,
+          "status": "UNKNOWN",
+          "study_gate": null
+        },
+        {
+          "acquisition_hold": null,
+          "case_id": "api-grid100",
+          "completed_updates": null,
+          "family": "e22",
+          "full_protocol_complete": false,
+          "media": null,
+          "original_gate": null,
+          "status": "UNKNOWN",
+          "study_gate": null
+        },
+        {
+          "acquisition_hold": null,
+          "case_id": "api-rotated100",
+          "completed_updates": null,
+          "family": "e22",
+          "full_protocol_complete": false,
+          "media": null,
+          "original_gate": null,
+          "status": "UNKNOWN",
+          "study_gate": null
+        },
+        {
+          "acquisition_hold": null,
+          "case_id": "api-staggered100",
+          "completed_updates": null,
+          "family": "e22",
+          "full_protocol_complete": false,
+          "media": null,
+          "original_gate": null,
+          "status": "UNKNOWN",
+          "study_gate": null
+        },
+        {
+          "acquisition_hold": null,
+          "case_id": "api-vector-unequal-mass",
+          "completed_updates": null,
+          "family": "e22",
+          "full_protocol_complete": false,
+          "media": null,
+          "original_gate": null,
+          "status": "UNKNOWN",
+          "study_gate": null
+        },
+        {
+          "acquisition_hold": null,
+          "case_id": "api-vector-anisotropic",
+          "completed_updates": null,
+          "family": "e22",
+          "full_protocol_complete": false,
+          "media": null,
+          "original_gate": null,
+          "status": "UNKNOWN",
+          "study_gate": null
+        },
+        {
+          "acquisition_hold": null,
+          "case_id": "image-develop-img_bars4-source-transpose12",
+          "completed_updates": null,
+          "family": "e22",
+          "full_protocol_complete": false,
+          "media": null,
+          "original_gate": null,
+          "status": "UNKNOWN",
+          "study_gate": null
+        }
+      ],
+      "configs": [
+        {
+          "configuration_id": "atlas--d2e6767ae639367ca480c4271d72f20700a2d03e95242f4dd1ba75bfc01ed3f3",
+          "execution_counts": {
+            "FAIL": 1,
+            "UNKNOWN": 7
+          },
+          "family": "atlas",
+          "fully_qualified": false,
+          "original_gate_counts": {
+            "FAIL": 1,
+            "UNAVAILABLE": 7
+          },
+          "required_cases": 8,
+          "study_gate_counts": {
+            "FAIL": 1,
+            "UNAVAILABLE": 7
+          },
+          "tuple": {
+            "d_lr_mult": 4.5,
+            "lr": 0.00265625,
+            "prior_lr_mult": 3.0
+          }
+        },
+        {
+          "configuration_id": "e22--accb716670730414f49af2a9bce2cd4c373d7df69bdcebfbf495637349e928a1",
+          "execution_counts": {
+            "FAIL": 1,
+            "UNKNOWN": 7
+          },
+          "family": "e22",
+          "fully_qualified": false,
+          "original_gate_counts": {
+            "FAIL": 1,
+            "UNAVAILABLE": 7
+          },
+          "required_cases": 8,
+          "study_gate_counts": {
+            "FAIL": 1,
+            "UNAVAILABLE": 7
+          },
+          "tuple": {
+            "d_lr_mult": 4.5,
+            "lr": 0.00265625,
+            "prior_lr_mult": 3.0
+          }
+        }
+      ],
+      "configuration_ids": 2,
+      "costs": {
+        "clock": "New cohort durable supervised child intervals plus conservative interruption reserves; prior science and engineering are separately bound and debited once from remaining quotas; CPU capacity verification, queue wait and parent certification are separate diagnostics",
+        "combined_cap_seconds": 15360.0,
+        "combined_charged_seconds": 113.99425188452005,
+        "family_remaining_caps_seconds": {
+          "atlas": 7648.239041277208,
+          "e22": 7652.644278225023
+        },
+        "ordinary_paid_seconds": 54.87757138675079,
+        "ordinary_reserved_seconds": 0.0,
+        "prior_engineering_paid_seconds": 4.757908704923466,
+        "prior_scientific_paid_seconds": 54.3587717928458,
+        "prior_total_paid_seconds": 59.116680497769266,
+        "remaining_cohort_cap_seconds": 15300.88331950223
+      },
+      "counts": {
+        "capacity": {
+          "SUPPORTED": 16
+        },
+        "execution": {
+          "FAIL": 2,
+          "UNKNOWN": 14
+        },
+        "goal_gifs": 2,
+        "original_gates": {
+          "FAIL": 2,
+          "UNAVAILABLE": 14
+        },
+        "study_gates": {
+          "FAIL": 2,
+          "UNAVAILABLE": 14
+        }
+      },
+      "declared_configs": 2,
+      "default_adoption": false,
+      "fair_speed_winner": null,
+      "id": "generator_half",
+      "law": "Atlas/E22 family-owned public selected policy, unchanged eight protected targets and full horizons. Current image finite-templateTV is gated; native 24 full20k observations / final five use noisy primary and noiseoff selected-policy diagnostic, without separate forced EMA or 100k. First five consecutive passing checks plus at least five later all-passing checks are the added study requirement.",
+      "pr": 268,
+      "report": "https://github.com/255BITS/ParticleGAN/blob/95bc3480/reports/forge/generator-step-20261003/README.md",
+      "required_cases_per_config": 8,
+      "required_cells": 16,
+      "selection": {
+        "attempts_concluded": true,
+        "best_observed_ids": [
+          "atlas--d2e6767ae639367ca480c4271d72f20700a2d03e95242f4dd1ba75bfc01ed3f3",
+          "e22--accb716670730414f49af2a9bce2cd4c373d7df69bdcebfbf495637349e928a1"
+        ],
+        "comparison_complete": true,
+        "default_adoption": false,
+        "fully_qualified_ids": [],
+        "outcome": "best_observed",
+        "required_cases_per_config": 8,
+        "required_cells": 16,
+        "required_configurations": 2,
+        "speed_winner": null
+      },
+      "source": {
+        "commit": "488b792e2fb875894f017cf7043420f2bb66190f",
+        "manifest_sha256": "b9f32fbde362e471d99e9ae69bee1f60795b4a942697f350584f7caf3e21f76a"
+      },
+      "tuple": {
+        "d_lr_mult": 4.5,
+        "lr": 0.00265625,
+        "prior_lr_mult": 3.0
+      }
+    }
+  ],
+  "remote_queries": 0,
+  "schema": "particlegan_shared_score_index_v1"
+}
