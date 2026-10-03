@@ -84,6 +84,28 @@ def main(argv=None):
             changed.append(protocol_path.relative_to(args.root).as_posix())
             if not args.check:
                 protocol_path.write_bytes(data)
+    named_protocol_path = args.root / "reports/forge/atlas-named-gpu-diagnostics-v1/protocol.json"
+    if named_protocol_path.is_file():
+        protocol = json.loads(named_protocol_path.read_bytes())
+        named_tasks = {task["id"]: task for task in tasks
+                       if task["task_cohort"] != independent.COHORT}
+        if {case["id"] for case in protocol["cases"]} != set(named_tasks):
+            raise ValueError("named diagnostic protocol must retain exactly eight adapted slots")
+        for case in protocol["cases"]:
+            task = named_tasks[case["id"]]
+            expected_path = "configs/forge/task-variants/" + task["task_cohort"] + "/" + task["id"] + ".json"
+            if case["definition"] != expected_path:
+                raise ValueError("named diagnostic definition differs from its exact variant")
+            data = (json.dumps(task, indent=2, sort_keys=True, allow_nan=False) + "\n").encode()
+            case["sha256"] = hashlib.sha256(data).hexdigest()
+            for section in ("execution", "evaluation"):
+                encoded = json.dumps(task[section], sort_keys=True, separators=(",", ":"), allow_nan=False).encode()
+                case[section + "_sha256"] = hashlib.sha256(encoded).hexdigest()
+        data = (json.dumps(protocol, indent=2, sort_keys=True, allow_nan=False) + "\n").encode()
+        if named_protocol_path.read_bytes() != data:
+            changed.append(named_protocol_path.relative_to(args.root).as_posix())
+            if not args.check:
+                named_protocol_path.write_bytes(data)
     print(json.dumps({"status": "STALE" if args.check and changed else "CURRENT",
                       "declarations": len(tasks), "changed": changed,
                       "scientific_evidence_regraded": False, "compute_reserved": False}, indent=2))

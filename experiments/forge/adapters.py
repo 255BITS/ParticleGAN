@@ -605,6 +605,13 @@ def _dispatch_task(request: dict, job: dict, output_dir: Path, device: str) -> d
     adapter = task["adapter"]
     if _named_policy_module(task) is not None:
         import importlib
+        from .policy_cohorts import policy_task_declaration
+        # Producers validate the exact declaration, while compiled requests also
+        # carry inert planner annotations. Keep the wire task unchanged and
+        # refuse its recorded blockers before removing only the typed metadata.
+        if task.get("preflight_blockers"):
+            raise CapabilityError(task["preflight_blockers"])
+        task = policy_task_declaration(task)
         name, function = _NAMED_POLICY_ADAPTERS[task["task_cohort"]]
         producer = importlib.import_module("." + name, package=__package__)
         context = _context(request, task, device, task_recipe_resources(task))
