@@ -1,0 +1,34 @@
+{
+  "inputs": {
+    "BASELINE_SELECTION.json": {
+      "bytes": 131487,
+      "original_path": "/ml2/hypergan/pg-best-baseline-selection-20261003/BASELINE_SELECTION.json",
+      "sha256": "bb5dafad7f04305a579f498093ad65d27f9ef5cc096caa709d4ce6e1fc7c8114"
+    },
+    "BASELINE_SELECTION.md": {
+      "bytes": 13140,
+      "editorial_adjustment": "Relative primary policy-board link targets the same merged report; external original remains unchanged.",
+      "original_path": "/ml2/hypergan/pg-best-baseline-selection-20261003/BASELINE_SELECTION.md",
+      "published_sha256": "5000656610bc61c11952a0e420d9e8cf054adc431767f1950a6ca45efdcfede1",
+      "sha256": "8fdd85146fb1949d45671dde3cdc8a045563b43db7a6489e076e034b6cf6478e"
+    },
+    "RETAINED_HOLD_DEBUG.md": {
+      "bytes": 11045,
+      "original_path": "/ml2/hypergan/pg-best-baseline-retained-debug-20261003/RETAINED_HOLD_DEBUG.md",
+      "sha256": "17121dccf97b2afc5a7cda5f332b4eec80e56fc4fb2e40036257168ec3903859"
+    },
+    "analyze_retained_hold.py": {
+      "bytes": 16556,
+      "original_path": "/ml2/hypergan/pg-best-baseline-retained-debug-20261003/analyze_retained_hold.py",
+      "sha256": "5d56a8abe20da297a60c8fa68da28b28199a894692cb2679970a278832afe3ac"
+    },
+    "retained-hold-debug.json": {
+      "bytes": 560213,
+      "original_path": "/ml2/hypergan/pg-best-baseline-retained-debug-20261003/retained-hold-debug.json",
+      "sha256": "144a3248d319ab93cc7aab7c06c672ba9dbf0ae6e47d52c9bc0ad50f6bb1572a"
+    }
+  },
+  "new_models_draws_training_scorer_calls": 0,
+  "schema": "c6_baseline_debug_copy_v1",
+  "scientific_grades_changed": false
+}

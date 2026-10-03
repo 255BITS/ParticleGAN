@@ -2,7 +2,7 @@
   "automation_digest": "625006792c1515ea89a3107942e770d45304311ecbce131c904321b70152bb85",
   "conflicts": [],
   "import_gap_count": 7,
-  "input_digest": "55e2d3220d99c9fee3f5a40722c3e94136576ce404e577650516d4be89d0f839",
+  "input_digest": "ee60d140d2e59646ade350a520073abe29fa09916e2ae10f7f248dbacc341fc1",
   "input_hashes": {
     "configs/forge/calibration-lane-template.json": "65f10d3061aa487bb32da43bb97cb91934a25d763f6bb634f1d3316fdcc6d9e5",
     "configs/forge/calibration/criteria-v1.json": "6eac2531eed68e392c11a57328999ac5dce509f8fe51d23e7b9031b7a4e3f9d1",
@@ -729,8 +729,8 @@
     "reports/forge/technique-evidence/d091ec1f6b1db7cfad160b8dcd77f4b6dff432e88dab0c7421c59cff3da997dc.json": "d527be92dd8b7258c0577dbaccc70700b80e87f058d034fca7afe03b81ad5975",
     "reports/forge/technique-evidence/dc9517031d2121b0f6ad27cb4787207a5b914c93edadc869808c53929220c3e6.json": "01b60e07a43c46062dc8746e7133acd11e1155334280fdc874efd3ef0b01169f",
     "reports/forge/technique-evidence/manifest.json": "a51cb0da6ec07a62ef7f4413275f2ff63094d1cd1e0224802fb29ea47c979fc3",
-    "reports/forge/technique-inventory.json": "074eefb88cb429a06d61510dc8191bd1acba90e4b23054f8c145fffc7587f36d",
-    "reports/forge/technique-inventory.md": "e8acf78d954fe891dd6a6eb27a7868c02abb4667393a2e36163275b5a3e0f940",
+    "reports/forge/technique-inventory.json": "3ac8d9c07349b43f91b2e8017c914e717cdfd58e80c3f2c895d58d5f4181586d",
+    "reports/forge/technique-inventory.md": "40640afc2ed3b580e151bc7a78c3e9ecfb471d50802cd3f5d6b4c6fb45ed1138",
     "reports/forge/technique-receipts/001093b404dc498b8f8c0125c26dc754.json": "fe780b8a8caa6bf4ec7547bc360cfeeb72ea56883a4d9ef4c0dadb3922a72cce",
     "reports/forge/technique-receipts/0142b29ed9154d9fbf065c2934545c0c.json": "2e809dfe00085aa6f9185e1622dadf2a4b9a7a1be75c851406f13498ab7d99ec",
     "reports/forge/technique-receipts/0184ca1327794ab58168d853ce0ad978.json": "cc494b95b1dbcae5f7057b21eb499c5e5e177a06a4481a9403a407c4fc6b8c87",
@@ -1037,16 +1037,16 @@
     "reports/forge/technique-receipts/feab61b6e5d945f3a7344ebbd1eac1be.json": "6714549984e5784b1f6a41c2f5d19de03c87ace239c9240a045cbc5b68fa730b"
   },
   "inventory_coverage": {
-    "declared_count": 11720,
+    "declared_count": 11721,
     "missing": [],
     "stale": [],
-    "tracked_count": 11720,
+    "tracked_count": 11721,
     "unclassified": [],
     "valid": true
   },
   "operational_lifecycle_digest": "b7b68ed15100a08f46090394c6597c2707df5002faed03502f29115ba3f14fca",
   "output_hashes": {
-    "reports/forge/EXPERIMENT_MEMORY.md": "2807c07b76014593451b8033f47159f3d8d0b26fe8e97c0405af1692ce0b7e8c",
+    "reports/forge/EXPERIMENT_MEMORY.md": "fd600be819cf52a53ddeb8d405276a5d7666acab98daee7a1933888aa57ed928",
     "reports/forge/publication-records.json": "5177f6ec85e2b8bb03cee7a3b2cfa0eba3600d84a5988f79f53d63519ecd984e"
   },
   "pending_readout": [

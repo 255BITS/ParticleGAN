@@ -979,7 +979,6 @@ Recorded Forge task outcomes (exact saved configuration/source/runtime):
 | Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
 | two_pole | [BCap](../../configs/forge/configurations/bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / 2899099048c0 / bf859ff60898 | [source-bound receipt index](technique-inventory.json) |
-| two_pole | [five-word-joint-ka2-v1](../../configs/forge/ideas/five-word-joint-ka2-v1.json) | ParticlePrior (sigma=0) | FAIL | CHANGED; earlier contract | cuda / 2899099048c0 / 471a74f59360 | [source-bound receipt index](technique-inventory.json) |
 | two_pole | [K3P](../../configs/forge/configurations/k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / 2899099048c0 / 7ebaeb278a75 | [source-bound receipt index](technique-inventory.json) |
 | two_pole | [K3P without A2](../../configs/forge/ideas/k3p-a2-off-native-diagnostic.json) | ParticlePrior (sigma=0) | FAIL | CHANGED; earlier contract | cuda / 2899099048c0 / 31b4d36cc007 | [source-bound receipt index](technique-inventory.json) |
 | two_pole | [K3P without critic anchor](../../configs/forge/ideas/forge-onboarding-anchor-ablation.json) | ParticlePrior (sigma=0) | FAIL | CHANGED; earlier contract | cuda / 2899099048c0 / 08a552799580 | [source-bound receipt index](technique-inventory.json) |
@@ -1247,4 +1246,4 @@ The wider question review also links standalone experiments outside the Forge ti
 
 Declaration input digest: `e19612930696d10c45025db31cd5cd2dd7ab2891b0e2bbcb06ad793638eb419a`. The JSON form includes the individual task and view file hashes.
 
-Published artifact input digest: `85fd47028dd9068ccb7f4f54c705df3331ce07b432290eed060ebd555fd31c82`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.
+Published artifact input digest: `edbc472dcb65f9fadc1af056182b515da02276f1532edea17f0b63307ed0aa15`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.
