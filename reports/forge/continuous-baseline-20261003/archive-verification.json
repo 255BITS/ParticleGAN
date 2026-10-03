@@ -1,0 +1,16 @@
+{
+  "archive_bytes": 159261059,
+  "archive_member_count": 11572,
+  "archive_sha256": "e160acbcc6b98e1ea7a4ff928911033515774d6781d0e83ebeedc5a565d892d0",
+  "bootstrap_hydration": "HYDRATED",
+  "bootstrap_member_count": 40,
+  "full_index_sha256": "38bb5904845be87d53143c735cb8dd9724532833657f3f82aebf2782093e92e7",
+  "individually_verified_members": 11572,
+  "qualification_changed": false,
+  "retention": {
+    "owner": "unassigned",
+    "retain_until": "undeclared"
+  },
+  "status": "AVAILABLE",
+  "training_launched": false
+}
