@@ -8,6 +8,10 @@ Start with the [compiled experiment memory](reports/forge/EXPERIMENT_MEMORY.md)
 and the [current technique leaderboard](reports/forge/technique-inventory.md).
 The [implementation plan](docs/better-experiment-automation-plan-2026-09-28.md)
 defines the migration and adoption criteria.
+The [Forge preparation review map](docs/forge-integration-review-map.md) records
+the six agent-research changes and their software acceptance. Use its linked
+operating guides for recall, bounded decisions, policy execution and artifact
+retrieval; scientific calibration and release qualification remain separate.
 For a new research question or host, follow the
 [experiment creation guide](docs/forge-new-experiment.md), with worked ring and
 joint BiGAN examples, scorer controls, registration and artifact publication.
@@ -104,6 +108,10 @@ The history, recall, compile, validate, and board commands launch no training.
 Recall includes source-bound concluded configuration and policy publications as
 non-qualifying summaries. [Research memory freshness](docs/forge-research-memory.md)
 is visible in plans; `forge compile --check` checks it without artifact hydration.
+Use `forge compile --summaries-only` to refresh recall after a reporting or source
+merge while preserving published qualifications and telemetry. Inspect missing
+originals with the [artifact resolver](docs/forge-artifact-resolver.md); absence
+of an archive blocks saved-state analysis rather than authorizing a rerun.
 
 ```sh
 python -m experiments.forge validate
@@ -128,6 +136,11 @@ Bind original evidence identities, review the actual task-owned delta, freeze on
 bounded round and numerical prediction/falsifier, then mark the contract ready.
 Planning shows the bindings; unfinished drafts block admission before spend.
 Saved v1 evidence retains its original identity.
+Keep the same view, tier, backend and runtime selection when preparing and
+submitting the ready contract. Its candidate-round cap accumulates paid retries
+and reservations across campaigns within the shared queue; a new campaign does
+not replenish it. Readout records the frozen numerical prediction and falsifier
+separately from ordinary qualification.
 
 Edit `configs/forge/ideas/critic-anchor-v2.json`. Describe the substantive
 change in `changed_factors`, cite relevant prior work, and choose
@@ -500,7 +513,8 @@ python -m experiments.forge readout critic-anchor-v2 \
   --conclusion "State the measured result and its limits" \
   --comparison "Compare the same task/protocol and scoring weights with the parent" \
   --next-action "Advance, revise a specific mechanism, investigate a blocker, or stop"
-python -m experiments.forge compile
+python -m experiments.forge compile --summaries-only
+python -m experiments.forge compile --check
 ```
 
 To stop pursuing a finished idea, preserve its readout and record the reason:
@@ -524,13 +538,20 @@ concluded failed idea remains useful history. Live, EMA, clean/noisy,
 and calibrated-sampling outcomes remain separate; an earlier good checkpoint
 cannot replace a failed required terminal window.
 
-Compilation writes one searchable [experiment memory](reports/forge/EXPERIMENT_MEMORY.md),
-per-view Markdown/JSON boards, and [input hashes and coverage](reports/forge/compilation.json).
+The summary-only refresh writes one searchable [experiment memory](reports/forge/EXPERIMENT_MEMORY.md),
+its publication projection, and [input hashes and coverage](reports/forge/compilation.json).
+It preserves published per-view qualification tables and automation snapshots.
 Rows show exact identities, status/denominator, cost, blockers, and next actions.
 Historical summaries can overlap individual attempt evidence; never add their
 counts or costs as though they were independent experiments.
 Pinned older revisions retain recorded verdicts and costs in the board. A changed
-live evaluator does not regrade or promote them.
+live evaluator does not promote them. Plain `compile` runs the receipt reducers
+and can change archived grades when original envelopes are unavailable or a live
+validator has changed. Use it for an intentional qualification/telemetry update
+only after checking the required original envelopes and their scientific bindings;
+it is not the reporting-merge refresh. See the
+[memory guide](docs/forge-research-memory.md) for freshness scope and preserved
+snapshot identities.
 
 ## Maintain history and coverage
 
@@ -548,7 +569,8 @@ with the current branch by name.
 ```sh
 python -m experiments.forge history
 python -m experiments.forge history --check
-python -m experiments.forge compile
+python -m experiments.forge compile --summaries-only
+python -m experiments.forge compile --check
 ```
 
 History import reads the pinned initial repository and #155 trees without

@@ -12,12 +12,21 @@ and [machine-readable JSON](../reports/forge/policy-family-inventory.json) are t
 common team record for whole configurations, gates, unknown requirements,
 costs and goal GIFs. No configuration has qualified every required case.
 
+New automated studies use the [shared policy execution coordinator](forge-policy-execution.md).
+It freezes source, deduplicates compatible studies and overlapping physical
+attempts, and shares resource admission with ordinary Forge workers. All
+cooperating submitters must use the same queue root. Its independently
+supervised deadlines and inherited leases bound children after a caller crash;
+retained originals can resume certification without training again.
+
 To test one separately declared future config through the public API, use its
 shared Recipe overrides and a fresh archive directory. This example shows the
 observed original broad-mixture PASS setting. A reproduction records a new
 source/runtime cohort; no reproduction was executed for this guide. The command
 runs the full original case and returns exit0 for PASS or exit1 for FAIL; its
-receipt also distinguishes incomplete or invalid execution:
+receipt also distinguishes incomplete or invalid execution. This standalone
+`api_run` command does not register a policy study in the shared admission
+ledger; automated research should use the coordinator below:
 
 ```sh
 CUDA_VISIBLE_DEVICES=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 \
@@ -37,7 +46,7 @@ are not automatically reexecuted.
 Publish from certified combined receipts with the observation-only exporter:
 
 ```sh
-python reports/forge/family-winner-round1/publish_policy_results.py \
+python -m experiments.forge.policy_publication \
   --combined /path/to/archive/current-policy-family-results.json \
   --all-media --review-projection
 ```
@@ -48,6 +57,18 @@ separate reviewed media provenance and runs no training or model-metric rescorin
 Commit the compact board, receipts, checked archive manifests and media to
 `develop`. Bulk arrays, checkpoints and full logs remain at the manifest paths;
 team members need that archive or shared-machine access for independent regrading.
+Resolve those exact originals with the [artifact resolver](forge-artifact-resolver.md).
+An inaccessible manifest location remains a missing-evidence result. For a
+local display readout, use:
+
+```sh
+python -m experiments.forge.policy_family_readout /path/to/archive/study.json \
+  --output runs/forge/local-policy-readout
+```
+
+The dated scripts under `reports/forge/family-winner-round1/` remain frozen
+reproduction sources; maintained publication and readout code lives in the
+experiment package. Neither command grants qualification or starts training.
 
 Each source cohort freezes one finite grid: the first used `lr` .006375 or
 .0085; the linked second uses the public preset rate .00425 or half that rate
@@ -111,11 +132,10 @@ OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m benchmarks.toy_audit.api_family_se
   plan reports/forge/family-winner-round1/policy-search.json --output /tmp/policy-plan.json
 ```
 
-The next distinct specification is
+The completed campaign's second distinct specification is
 [`policy-search-round2.json`](../reports/forge/family-winner-round1/policy-search-round2.json).
 Its baseline/half-rate hypothesis follows measured higher-rate smoke failures;
-it repeats no failed configuration. Use that specification and a new output
-directory for its own plan and execution. Its 10,525.043357 seconds are the
+it repeated no failed configuration. Its 10,525.043357 seconds are the
 original 10,800-second allowance less the original setup and completed first
 grid, rather than a fresh allowance. The linked parent receipt and exact
 per-family debits stay in the specification. Source cohorts remain separate.
@@ -151,7 +171,9 @@ python -m benchmarks.toy_audit.api_family_search run \
 ```
 
 Use the other assigned visible GPU and `--family e22` for its separate lane.
-Do not launch these commands while another admitted worker owns that slot.
+The coordinator refuses admission while another cooperating runner owns that
+physical slot. Set `--queue-root /path/to/shared/runs/forge` when overriding the
+default main-repository ledger; use the same location for core and policy work.
 Tail `<archive>/<configuration-id>/<case-id>.log`. Actual arrays, checkpoints,
 GIFs and full logs stay in the archive. The compact `study.json` retains recipe,
 source/runtime, costs, original/study gates and exact artifact identities.
@@ -160,7 +182,9 @@ A config stops at its first non-PASS. Later required cases remain UNKNOWN, not
 zeroes or removed denominators. The coordinator reserves a complete next task
 allowance before starting; a hard subprocess cap includes a separate media-export
 grace, and an acquisition cap cannot become PASS even if a child exits0.
-Registration precedes the child, and each result is saved durably. An interrupted
+Registration precedes the child, and each result is saved durably. A busy
+coordinator returns its canonical attachment or `coordinator.waiting_reason`;
+only a later explicit `run` resumes unlaunched work. An interrupted
 or orphan paid attempt is retained as INCOMPLETE and never automatically retried.
 The child command is checked through the real public CLI parser in software
 controls. Its seed comes from the case's fixed protocol, which preflight must
