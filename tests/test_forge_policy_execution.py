@@ -53,7 +53,7 @@ def test_core_queue_and_policy_share_host_and_exclusive_gpu_admission(tmp_path, 
     coordinator = execution.PolicyCoordinator(tmp_path / "queue")
     request = core_request(tmp_path, backend)
     coordinator.queue.submit(request, {"id": "control", "budget_seconds": 100., "candidate_budget_seconds": 100.})
-    slot = {"device": "cpu" if backend == "cpu" else "0", "slot": 0,
+    slot = {"device": "cpu" if backend == "cpu" else "00", "slot": 0,
             "memory_mb": 4096, "capacity_mb": 4096}
     device = "cpu" if backend == "cpu" else "cuda:0"
     packet, row = packet_for_admission(), {"timeout_seconds": 10.}
@@ -80,6 +80,9 @@ def test_visible_cuda_device_maps_to_shared_physical_index(monkeypatch):
     assert execution.physical_device("cuda:1") == "7"
     with pytest.raises(ValueError, match="outside CUDA_VISIBLE_DEVICES"):
         execution.physical_device("cuda:2")
+    monkeypatch.setenv("CUDA_VISIBLE_DEVICES", "05,07")
+    assert execution.physical_device("cuda:0") == "5"
+    assert execution.device_key("05") == "5"
 
 
 def test_cuda_placement_reuses_science_but_gpu_model_is_a_distinct_cohort(tmp_path):
@@ -142,6 +145,12 @@ def frozen_control(tmp_path):
     (root / "particlegan/__init__.py").write_text("")
     code = root / "particlegan/control.py"
     code.write_text("VALUE = 'frozen'\n")
+    # The independent supervisor must itself come from the frozen source.
+    package = root / "experiments/forge"
+    package.mkdir(parents=True)
+    original = Path(execution.__file__).parent
+    for name in ("__init__", "policy_execution", "contracts", "queue", "sources"):
+        (package / f"{name}.py").write_bytes((original / f"{name}.py").read_bytes())
     expected = {"commit": "control", "files_sha256": {"particlegan/control.py": api_run.file_hash(code)}}
     manifest = execution.freeze_source(root, tmp_path / "queue", expected)
     return root, code, {**packet_for_admission(), "execution_source": manifest}
@@ -350,3 +359,116 @@ def test_recovery_uses_central_terminal_before_study_projection_save(tmp_path, m
     assert recovered["spent_seconds"] == 2.
     assert recovered["unmeasured_interrupt_reservation_seconds"] == 0.
     assert target["cases"][0]["reused_physical_attempt"] is True
+
+
+@pytest.mark.parametrize("first", ["core", "policy"])
+def test_unresolved_uuid_mask_fails_before_aliasing_core_gpu_admission(tmp_path, monkeypatch, first):
+    monkeypatch.setenv("CUDA_VISIBLE_DEVICES", "GPU-fixture-uuid")
+    coordinator = execution.PolicyCoordinator(tmp_path / "queue")
+    coordinator.queue.submit(core_request(tmp_path, "cuda"),
+                             {"id": "control", "budget_seconds": 100., "candidate_budget_seconds": 100.})
+    slot = {"device": "0", "slot": 0, "memory_mb": 4096, "capacity_mb": 4096}
+    with execution.execution_lease(coordinator.root / "coordinator.lock"):
+        if first == "core":
+            assert coordinator.queue.claim([slot]) is not None
+        with pytest.raises(ValueError, match="numeric CUDA_VISIBLE_DEVICES"):
+            with coordinator.admit("unresolved-uuid", packet_for_admission(), {"timeout_seconds": 10.}, "cuda:0"):
+                pytest.fail("unresolved GPU alias was admitted")
+        assert coordinator.queue.inspect().get("policy_attempts", {}) == {}
+        if first == "policy":
+            assert coordinator.queue.claim([slot]) is not None
+
+
+def launch_software_payload(root, packet, marker, release=None):
+    coordinator = execution.PolicyCoordinator(root)
+    script = (f"from pathlib import Path; import os,time; Path({str(marker)!r}).write_text(str(os.getpid())); "
+              "time.sleep(30)")
+    if release is not None:
+        script = f"""from pathlib import Path
+import os,time
+Path({str(marker)!r}).write_text(str(os.getpid()))
+while not Path({str(release)!r}).exists(): time.sleep(.01)
+"""
+    with coordinator.study_lease("software-owner") as study:
+        with coordinator.admit("supervised-control", packet, {"timeout_seconds": 2.}, "cpu") as (_, lease):
+            coordinator.launch([sys.executable, "-c", script], packet, Path(root) / "child.log", (study, lease), 3.)
+
+
+@pytest.mark.parametrize("kill_supervisor", [False, True, "stopped"])
+def test_killed_caller_cannot_extend_child_deadline_and_recovery_fences_dead_supervisor(tmp_path, kill_supervisor):
+    _, _, packet = frozen_control(tmp_path)
+    root = tmp_path / "queue"
+    coordinator = execution.PolicyCoordinator(root)
+    marker = tmp_path / "payload-started"
+    context = multiprocessing.get_context("fork")
+    launcher = context.Process(target=launch_software_payload, args=(root, packet, marker))
+    directory = root / "policy/attempts/supervised-control"
+    child = None
+    supervisor = None
+    try:
+        launcher.start(); wait_for_file(marker)
+        child = read_json(directory / "child.json")
+        supervisor = read_json(directory / "supervisor.json")
+        entry = coordinator.queue.inspect()["policy_attempts"]["supervised-control"]
+        launcher.kill(); launcher.join(5)
+        if kill_supervisor:
+            os.kill(supervisor["pid"], 19 if kill_supervisor == "stopped" else 9)
+        coordinator.recover()
+        assert coordinator.queue.inspect()["policy_attempts"]["supervised-control"]["status"] == "running"
+        assert execution.process_identity(child["pid"]) == child["process_identity"]
+        with coordinator.admit("supervised-control", packet, {"timeout_seconds": 2.}, "cpu") as (decision, lease):
+            assert decision["status"] == "busy" and lease is None
+        cutoff = entry["deadline_monotonic"] + 2.
+        while execution.process_identity(child["pid"]) is not None or execution.lease_held(directory / "execution.lock"):
+            if time.monotonic() > cutoff:
+                pytest.fail("dead coordinator extended physical child beyond its bounded deadline")
+            if kill_supervisor:
+                coordinator.recover()
+            time.sleep(.01)
+        coordinator.recover()
+        saved = coordinator.queue.inspect()["policy_attempts"]["supervised-control"]
+        assert saved["status"] == "interrupted" and saved["charged_seconds"] >= 3.
+        if not kill_supervisor:
+            terminal = read_json(directory / "supervisor-terminal.json")
+            assert terminal["attempt_status"] == "timeout"
+            assert terminal["paid_wall_seconds"] <= 3.5
+            assert saved["charged_seconds"] == max(3., terminal["paid_wall_seconds"])
+        with coordinator.admit("supervised-control", packet, {"timeout_seconds": 2.}, "cpu") as (decision, lease):
+            assert decision["status"] == "interrupted" and lease is None
+    finally:
+        if launcher.pid and launcher.is_alive():
+            launcher.kill(); launcher.join(5)
+        if child:
+            execution.fence_orphan_group(child, directory)
+        if supervisor and execution.process_identity(supervisor["pid"]) == supervisor["process_identity"]:
+            os.kill(supervisor["pid"], 9)
+
+
+def test_supervisor_completion_survives_killed_caller_without_reexecution(tmp_path):
+    _, _, packet = frozen_control(tmp_path)
+    root = tmp_path / "queue"
+    coordinator = execution.PolicyCoordinator(root)
+    marker, release = tmp_path / "payload-started", tmp_path / "release"
+    launcher = multiprocessing.get_context("fork").Process(target=launch_software_payload,
+                                                          args=(root, packet, marker, release))
+    directory = root / "policy/attempts/supervised-control"
+    try:
+        launcher.start(); wait_for_file(marker)
+        launcher.kill(); launcher.join(5)
+        release.touch()
+        wait_for_file(directory / "supervisor-terminal.json")
+        deadline = time.monotonic() + 3.
+        while execution.lease_held(directory / "execution.lock"):
+            assert time.monotonic() < deadline
+            time.sleep(.01)
+        coordinator.recover()
+        with coordinator.admit("supervised-control", packet, {"timeout_seconds": 2.}, "cpu") as (decision, lease):
+            assert decision["status"] == "awaiting_certification" and lease is not None
+            assert decision["terminal"]["child_returncode"] == 0
+            assert decision["charged_seconds"] == decision["terminal"]["paid_wall_seconds"] > 0
+            coordinator.complete("supervised-control", {"status": "INCOMPLETE", "paid_wall_seconds": decision["charged_seconds"]})
+        assert len(coordinator.queue.inspect()["policy_attempts"]) == 1
+    finally:
+        release.touch()
+        if launcher.pid and launcher.is_alive():
+            launcher.kill(); launcher.join(5)

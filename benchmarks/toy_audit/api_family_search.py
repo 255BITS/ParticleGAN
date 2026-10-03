@@ -569,6 +569,15 @@ def child_command(spec, trial, row, case_root, device):
             "--wall-cap-seconds", str(row["timeout_seconds"]), "--frames", str(spec.get("frames", 9))]
 
 
+def _child_outcome(case_root, case, family, trial, source, runtime, returncode, spec, row):
+    raw = json.loads((case_root / "receipt.json").read_text())
+    if raw.get("status") != "COMPLETE":
+        return {"status": raw.get("status") if raw.get("status") in {"INCOMPLETE", "BLOCKED", "ERROR"} else "INVALID",
+                "reason": "; ".join(raw.get("failed_bounds", [])), "original_gate": raw.get("verdict")}
+    return verify_case(case_root, case, family, trial["recipe_overrides"], source, returncode=returncode,
+                       runtime=runtime, wall_cap_seconds=row["timeout_seconds"], frames=spec.get("frames", 9))
+
+
 def run_study(spec, output, *, family, device, queue_root=None):
     """One dedicated policy owner; shared admission, immutable children, reuse."""
     from experiments.forge.__main__ import queue_location
@@ -603,7 +612,7 @@ def _run_owned_study(packet, output, family, device, coordinator, study_lease):
         for row in trial["cases"]:
             if row["status"] == "RUNNING" and row.get("attempt_key"):
                 retained = coordinator.retained(row["attempt_key"])
-                if retained and retained["status"] in {"completed", "interrupted"}:
+                if retained and retained["status"] in {"completed", "interrupted", "awaiting_certification"}:
                     # The central terminal transaction may have survived a
                     # crash before the corresponding study projection save.
                     row["status"] = "UNKNOWN"
@@ -632,8 +641,20 @@ def _run_owned_study(packet, output, family, device, coordinator, study_lease):
                     trial["paid_wall_seconds"] = trial_spent
                     _save(registration, packet)
                     return packet
-                if admission["status"] in {"completed", "interrupted"}:
-                    if admission["status"] == "completed":
+                if admission["status"] in {"completed", "interrupted", "awaiting_certification"}:
+                    if admission["status"] == "awaiting_certification":
+                        # The independent supervisor finished after its caller
+                        # died. Certify that original payload, never launch it.
+                        command = admission["command"]
+                        case_root = Path(command[command.index("--output") + 1]) / row["id"]
+                        terminal = admission["terminal"]
+                        row.update(_child_outcome(case_root, case, family, trial, admission["source"], admission["runtime"],
+                                                  terminal["child_returncode"], spec, row),
+                                   child_returncode=terminal["child_returncode"], paid_wall_seconds=terminal["paid_wall_seconds"],
+                                   command=command, log_path=admission["log_path"], reused_physical_attempt=True,
+                                   evidence_source=admission["source"], evidence_runtime=admission["runtime"])
+                        coordinator.complete(attempt_key, deepcopy(row))
+                    elif admission["status"] == "completed":
                         retained = deepcopy(admission["result"])
                         if retained.get("full_protocol_complete"):
                             verified = verify_case(Path(retained["receipt_path"]).parent, case, family,
@@ -646,7 +667,8 @@ def _run_owned_study(packet, output, family, device, coordinator, study_lease):
                                    evidence_runtime=admission["runtime"])
                     else:
                         row.update(status="INCOMPLETE", reason=admission["reason"], attempt_key=attempt_key,
-                                   unmeasured_interrupt_reserved_seconds=admission["charged_seconds"])
+                                   unmeasured_interrupt_reserved_seconds=admission["allowance_seconds"],
+                                   paid_wall_seconds=max(0., admission["charged_seconds"] - admission["allowance_seconds"]))
                     charged = row.get("paid_wall_seconds", 0.) + row.get("unmeasured_interrupt_reserved_seconds", 0.)
                     packet["spent_seconds"] += charged
                     trial_spent += charged
@@ -671,19 +693,16 @@ def _run_owned_study(packet, output, family, device, coordinator, study_lease):
                         started = time.monotonic()
                         child_finished = None
                         interruption = None
+                        supervised_seconds = 0.
                         try:
                             child = coordinator.launch(command, packet, log, (study_lease, attempt_lease), allowance)
+                            supervised_seconds = getattr(child, "paid_wall_seconds", 0.)
                             child_finished = time.monotonic()
-                            raw = json.loads((case_root / "receipt.json").read_text())
-                            if raw.get("status") != "COMPLETE":
-                                row.update(status=raw.get("status") if raw.get("status") in {"INCOMPLETE", "BLOCKED", "ERROR"} else "INVALID",
-                                           reason="; ".join(raw.get("failed_bounds", [])), original_gate=raw.get("verdict"))
-                            else:
-                                row.update(verify_case(case_root, case, family, trial["recipe_overrides"], packet["source"],
-                                                       returncode=child.returncode, runtime=runtime,
-                                                       wall_cap_seconds=row["timeout_seconds"], frames=spec.get("frames", 9)))
+                            row.update(_child_outcome(case_root, case, family, trial, packet["source"], runtime,
+                                                      child.returncode, spec, row))
                             row["child_returncode"] = child.returncode
-                        except subprocess.TimeoutExpired:
+                        except subprocess.TimeoutExpired as error:
+                            supervised_seconds = getattr(error, "paid_wall_seconds", 0.)
                             child_finished = time.monotonic()
                             row.update(status="INCOMPLETE", reason="hard subprocess cap; full protocol unavailable")
                         except Exception as error:
@@ -692,7 +711,7 @@ def _run_owned_study(packet, output, family, device, coordinator, study_lease):
                             interruption = error
                             row.update(status="INCOMPLETE", reason="interrupted paid attempt; no automatic unchanged retry")
                         child_finished = time.monotonic() if child_finished is None else child_finished
-                        elapsed = child_finished - started
+                        elapsed = max(child_finished - started, supervised_seconds)
                         packet["spent_seconds"] += elapsed
                         trial_spent += elapsed
                         row.update(paid_wall_seconds=elapsed, validation_seconds=time.monotonic() - child_finished)
