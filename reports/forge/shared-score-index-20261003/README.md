@@ -47,6 +47,26 @@ It supplies no capacity or optimizer conclusion. A correction must use a new
 frozen execution source and preserve these failed attempts and costs. This
 report cannot fill another family, original source or ordinary ranking.
 
+## Completed named-family v3 cut
+
+The [source-bound results and five actual goal GIFs](../atlas-named-gpu-diagnostics-native-v3-20261003/README.md)
+record **5 PASS, 1 INVALID and 2 NOT_RUN** among the eight adapted questions.
+Trajectory, residual-student, unipolar, mid-scale identity and routed AE passed
+their full original horizons and terminal-five gates at the fixed C6 rate pair.
+Unused-token hit a CUDA/CPU evaluation-boundary defect; cover and min11 word
+were never admitted. This is not a numerical failure of the routed family.
+
+The [portable results](../atlas-named-gpu-diagnostics-native-v3-20261003/results.json)
+retain **5 PASS, 1 INVALID and 124 NOT_RUN** across five separate 26-slot views,
+with exact Recipes, runtime, selected owners, original grades, cost and source
+pins. Current paid cost is **235.7073353389278 seconds**, reserve zero; including
+the earlier **25.32295504095964-second** engineering debit, the campaign charge
+is **261.03029037988745/10500 seconds**. These are supervised costs, not fair
+convergence-speed measurements. All original N5 blocks and other source-scoped
+results remain separate. No complete family, shipping default or speed winner
+is established. The five completed passes are retained for the repaired
+continuation, which may execute only the three remaining questions.
+
 | Scope | Source / declared law | Comparable score | Status and cost | Team report |
 |---|---|---|---|---|
 | Ordinary MoG, current Forge | Origin `28990990`; live, scheduled, learned MoG prior σ = 0.025 | KA2 and K3P tie at 4/5 Tier 1; 19 Tier 2 and 2 Tier 3 requirements remain unknown | Both FAIL; qualified tier 0; no default or speed credit | [Primary ordinary board](https://github.com/255BITS/ParticleGAN/blob/4749b2780add539df4bd8d2dd1d3cc9f002f77ad/reports/forge/technique-inventory.md) |

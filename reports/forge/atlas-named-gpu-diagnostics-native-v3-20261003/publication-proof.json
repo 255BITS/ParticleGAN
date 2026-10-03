@@ -1,0 +1,172 @@
+{
+  "actual_frames_each": 9,
+  "controls_log": {
+    "bytes": 99,
+    "path": "/ml2/hypergan/pg-atlas-named-native-v3-publication-20261003/software-controls-final.log",
+    "sha256": "af8c4a68a6ec5f76dcecc66123c6936a5c7a030a63f72ff9fa87039cbf68a261"
+  },
+  "copied_artifacts_byte_equal": true,
+  "copied_original_public_artifacts": [
+    {
+      "bytes": 293981,
+      "path": "gifs/ae_gan_hold_ae_routed_policy_v1.gif",
+      "sha256": "807518fb372b8b73c46f99a75dca2c15ca168a84a1217e4b3d14be52efe77c6e"
+    },
+    {
+      "bytes": 2056,
+      "path": "grades/ae_gan_hold_ae_routed_policy_v1.json",
+      "sha256": "3889553c6aa4d6015578c14590bef147e4084f36b7f6d0c1a22a3edc55c999a3"
+    },
+    {
+      "bytes": 3581,
+      "path": "media/ae_gan_hold_ae_routed_policy_v1.json",
+      "sha256": "b6b67deec555e37198c7aa2195347e574fdc15b9210db820f6266c5d3eefa42b"
+    },
+    {
+      "bytes": 475529,
+      "path": "gifs/trajectory_conditional_policy_selected_cloud_v1.gif",
+      "sha256": "fd393a43dfc737a7b5f272bf959cb7b6590da653a81e515d132c91ac4312462a"
+    },
+    {
+      "bytes": 1822,
+      "path": "grades/trajectory_conditional_policy_selected_cloud_v1.json",
+      "sha256": "508271b93a918dc7d4fca36ce273d2942cc3d9e4fda8263b8a10c13cef214162"
+    },
+    {
+      "bytes": 3886,
+      "path": "media/trajectory_conditional_policy_selected_cloud_v1.json",
+      "sha256": "998802d053a78ac0d41bd306ba1866e29a4ad69aac15f84b60f6011d411c60c1"
+    },
+    {
+      "bytes": 489417,
+      "path": "gifs/residual_student_conditional_policy_selected_cloud_v1.gif",
+      "sha256": "590a8d68fc9377c74ca233f7c211c3c642c4bf806a632780b98e637ad6b1df77"
+    },
+    {
+      "bytes": 2328,
+      "path": "grades/residual_student_conditional_policy_selected_cloud_v1.json",
+      "sha256": "959269a6cdcfdf309c6a4f4f25c71caa72511f29759597a3ff15a3a2f5e1ef13"
+    },
+    {
+      "bytes": 3958,
+      "path": "media/residual_student_conditional_policy_selected_cloud_v1.json",
+      "sha256": "78603916af4e8061a6f278dbc14ae7ac778398b9747f0c09d031bf8c3e8105bd"
+    },
+    {
+      "bytes": 317967,
+      "path": "gifs/unipolar_conditional_policy_selected_cloud_v1.gif",
+      "sha256": "fe3aaa00012b883f55d3261a754c8acf2f81227831f04d8425481569f1012d5c"
+    },
+    {
+      "bytes": 2470,
+      "path": "grades/unipolar_conditional_policy_selected_cloud_v1.json",
+      "sha256": "f6fdaadbd6a77ace641b128fee65b23ba3bce54e767b99b6b6db5f232525e3ca"
+    },
+    {
+      "bytes": 3862,
+      "path": "media/unipolar_conditional_policy_selected_cloud_v1.json",
+      "sha256": "ef104f2855cd9908682b073ae78c34f0a8ec05925b04bf16be0728da9893e8dd"
+    },
+    {
+      "bytes": 339943,
+      "path": "gifs/mid_scale_identity_conditional_policy_selected_cloud_v1.gif",
+      "sha256": "4488841f932bfb33cb2de804577bdc4b0eb1808d8f8dbc052c9d2f164dccfc6b"
+    },
+    {
+      "bytes": 3793,
+      "path": "grades/mid_scale_identity_conditional_policy_selected_cloud_v1.json",
+      "sha256": "d41a2f70cc8e9d7bb10f21c47d771ea891c3f7bc7afed984e719f29bc07cb1e1"
+    },
+    {
+      "bytes": 3983,
+      "path": "media/mid_scale_identity_conditional_policy_selected_cloud_v1.json",
+      "sha256": "e35c13f61d5f9ade2b462c7d196140b43f481a0b18edf768a89c1ef184d061c7"
+    }
+  ],
+  "cost": {
+    "convergence_time_available": false,
+    "current_paid_seconds": 235.7073353389278,
+    "current_reserved_seconds": 0.0,
+    "flops_available": false,
+    "inclusive_charged_seconds": 261.03029037988745,
+    "lanes": {
+      "0": {
+        "cap_seconds": 7500,
+        "current_paid_seconds": 221.9527463898994,
+        "current_reserved_seconds": 0.0,
+        "inclusive_charged_seconds": 234.82608077581972,
+        "prior_engineering_paid_seconds": 12.873334385920316
+      },
+      "1": {
+        "cap_seconds": 3000,
+        "current_paid_seconds": 13.754588949028403,
+        "current_reserved_seconds": 0.0,
+        "inclusive_charged_seconds": 26.204209604067728,
+        "prior_engineering_paid_seconds": 12.449620655039325
+      }
+    },
+    "original_cap_seconds": 10500,
+    "prior_engineering_paid_seconds": 25.32295504095964
+  },
+  "counts": {
+    "attempted_adapted_questions": 6,
+    "declared_adapted_questions": 8,
+    "required_family_cells": 130,
+    "required_slots_per_family": 26,
+    "statuses": {
+      "INVALID": 1,
+      "NOT_RUN": 124,
+      "PASS": 5
+    },
+    "terminal_families": 3,
+    "tiers_per_family": {
+      "1": 5,
+      "2": 19,
+      "3": 2
+    }
+  },
+  "draws": 0,
+  "goal_gifs": 5,
+  "input_index": {
+    "bytes": 467492,
+    "path": "/ml2/hypergan/pg-atlas-named-native-v3-publication-20261003/publication-final/input-index.json",
+    "sha256": "00c5d8e4f0c1954a24b55f909ed3e1e2ee56a9256b26947af7d20b93129fb3b5"
+  },
+  "local_readout_links_resolve": true,
+  "model_constructions": 0,
+  "model_restores": 0,
+  "observer_verdicts_recomputed": false,
+  "plaintext_internal_tokens_copied": 0,
+  "public_json_and_markdown_privacy_pass": true,
+  "publisher": {
+    "bytes": 47266,
+    "path": "/ml2/hypergan/pg-atlas-named-native-v3-publication-20261003/publish_results.py",
+    "sha256": "54f1dd910285b34cd64c538ac7ebfbb62675782ff18e8eb8f8a2f55dab86a2c2"
+  },
+  "qualification_input": false,
+  "raw_file_mutation_detected": false,
+  "raw_verified_files": 1572,
+  "readme": {
+    "bytes": 5918,
+    "path": "/ml2/hypergan/pg-atlas-named-native-v3-publication-20261003/publication-final/README.md",
+    "sha256": "7368647bfb7acaccd2b0f4425d0f4cb6088fc21c09d1a1a66de6f2b80aef4fe9"
+  },
+  "rescoring": 0,
+  "results": {
+    "bytes": 518012,
+    "path": "/ml2/hypergan/pg-atlas-named-native-v3-publication-20261003/publication-final/results.json",
+    "sha256": "8ba7230a71041e3a0185528c9e76c5f39bff6eeadfb98b59d715ef72ff76b9e0"
+  },
+  "schema": "particlegan_atlas_named_gpu_diagnostics_publication_review_v3",
+  "tests": {
+    "bytes": 19694,
+    "path": "/ml2/hypergan/pg-atlas-named-native-v3-publication-20261003/test_publish_results.py",
+    "sha256": "38ef6517235315463926b68193331c6fdb7298413241a743ae59b551c1efcd3e"
+  },
+  "training_updates": 0,
+  "trusted_inputs": {
+    "bytes": 11389,
+    "path": "/ml2/hypergan/pg-atlas-named-native-v3-publication-20261003/final-inputs.json",
+    "sha256": "b4becc8dd901d4732efad7852349efbe18632263e8e30c41798d965d3ab5e157"
+  }
+}
