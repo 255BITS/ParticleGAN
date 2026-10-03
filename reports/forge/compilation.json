@@ -2,7 +2,7 @@
   "automation_digest": "625006792c1515ea89a3107942e770d45304311ecbce131c904321b70152bb85",
   "conflicts": [],
   "import_gap_count": 7,
-  "input_digest": "c8dda3456102c68096846ffbf8ae83e5d1b30de68af93dbb90fdf4b9c3495bd4",
+  "input_digest": "afab6fff6f1c0f43ed61f542f481c44192ece1d47a9770873382039eee6d05aa",
   "input_hashes": {
     "configs/forge/calibration-lane-template.json": "65f10d3061aa487bb32da43bb97cb91934a25d763f6bb634f1d3316fdcc6d9e5",
     "configs/forge/calibration/criteria-v1.json": "6eac2531eed68e392c11a57328999ac5dce509f8fe51d23e7b9031b7a4e3f9d1",
@@ -101,6 +101,7 @@
     "configs/forge/ideas/release07-gan-v3-cloud-v1.json": "daee7bac640a1d000d9b6596b6c458d2b40fa251beeb4c162ae57e0b11fa67ab",
     "configs/forge/ideas/release07-gan-v3-mog-v1.json": "5726a561ca5a92ff96cf93e53f47c3acba01e44622437534c67a00eaeb7f8bec",
     "configs/forge/ideas/release07-gan-v3-task-adapted-v1.json": "0c11aa5d44503f146fcfea3cb97267cfc63e02d3a4a24f36d87c7bbb9b801558",
+    "configs/forge/legacy-ideas-v1.json": "9b73cb51804d5b0c8ae4ae2bdb6f8987f484ca84ed744b5070ed26916cf4d08d",
     "configs/forge/promotion-template.json": "f9a254eeb6e05ff1e8d16fe3f77dc42f31d1156a1cc65f1ad626f8387ca581be",
     "configs/forge/protocols/screening.json": "3fefb4d47fd2cd8aa6ed110c0a9f5bffefaae700431d1f57ca7b162c8efbb803",
     "configs/forge/rounds/family-defaults-round1-v1.json": "395db17a29821d50314aa32552d602d9699c782797510b82a204eddf4a02b18a",
@@ -813,16 +814,16 @@
     "reports/forge/technique-receipts/feab61b6e5d945f3a7344ebbd1eac1be.json": "6714549984e5784b1f6a41c2f5d19de03c87ace239c9240a045cbc5b68fa730b"
   },
   "inventory_coverage": {
-    "declared_count": 11713,
+    "declared_count": 11720,
     "missing": [],
     "stale": [],
-    "tracked_count": 11713,
+    "tracked_count": 11720,
     "unclassified": [],
     "valid": true
   },
   "operational_lifecycle_digest": "e80d58c2c0a11277b274b75296db28d73f210f78d2f3c8a5bac7e3124f745252",
   "output_hashes": {
-    "reports/forge/EXPERIMENT_MEMORY.md": "02afd8d01c79282e0501f4e446dd108e09e10edcf0276fb2bca143fe0905fe62",
+    "reports/forge/EXPERIMENT_MEMORY.md": "5f4cd1722633e24ca1e48c39828cb18d40060988b2b446f294f064a9d1d2fbce",
     "reports/forge/publication-records.json": "43e6839f9ebfd099a711c27f9f1b4b8c65ca4c96211ac70fdd5e3d04c3999c08"
   },
   "pending_readout": [],
@@ -834,10 +835,10 @@
   },
   "record_count": 332,
   "reducer_hashes": {
-    "experiments.forge.knowledge": "0707a3e81f7a29976bb7754fefcb22f275fd8363e9fea392af0610a4aa9883a6",
+    "experiments.forge.knowledge": "6e27c27d9d15025f0173c6a500bfb3256670ef5895f6b6d6cacf2b30e02d8d8a",
     "experiments.forge.publication_memory": "c2313dfac04a6e098994e808a4119807430fe13071deb270e30fa75c97e0d182"
   },
-  "reducer_sha256": "0707a3e81f7a29976bb7754fefcb22f275fd8363e9fea392af0610a4aa9883a6",
+  "reducer_sha256": "6e27c27d9d15025f0173c6a500bfb3256670ef5895f6b6d6cacf2b30e02d8d8a",
   "reducer_version": "forge-knowledge-v2",
   "schema_version": 1,
   "scientific_normalization_complete": false,
