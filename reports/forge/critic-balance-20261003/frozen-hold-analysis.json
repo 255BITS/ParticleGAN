@@ -1,0 +1,1494 @@
+{
+  "case": {
+    "batch_size": 128,
+    "default_steps": 1200,
+    "eval_samples": 4096,
+    "id": "api-vector-two-broad",
+    "law": {
+      "covariances": [
+        [
+          [
+            0.0625,
+            0.0
+          ],
+          [
+            0.0,
+            0.0625
+          ]
+        ],
+        [
+          [
+            0.0625,
+            0.0
+          ],
+          [
+            0.0,
+            0.0625
+          ]
+        ]
+      ],
+      "kind": "gaussian_mixture",
+      "masses": [
+        0.5,
+        0.5
+      ],
+      "means": [
+        [
+          -1.0,
+          0.0
+        ],
+        [
+          1.0,
+          0.0
+        ]
+      ]
+    },
+    "law_sha256": "10fcc33b5dbe139b41e688597b6a1534f76b5b93d7c0b24ba5094e41fc8392e7",
+    "particles": 256,
+    "sampling": "public served latent law; independent evaluation RNG; output_noise=False removes additive output noise only; DV12/feature-cell latent perturbation remains when enabled",
+    "thresholds": [
+      [
+        "sw1_normalized",
+        "<=",
+        0.18
+      ],
+      [
+        "mass_tv",
+        "<=",
+        0.15
+      ],
+      [
+        "hq",
+        ">=",
+        0.85
+      ],
+      [
+        "component_covariance_error",
+        "<=",
+        0.85
+      ],
+      [
+        "component_min_eigen_ratio",
+        ">=",
+        0.15
+      ],
+      [
+        "sample_count",
+        ">=",
+        4096
+      ],
+      [
+        "projection_ks",
+        "<=",
+        0.06
+      ]
+    ],
+    "z_dim": 4
+  },
+  "chronology": [
+    {
+      "cross_family_samples_bitwise_equal": true,
+      "failed_bounds": [],
+      "ks_excess_over_bound": -0.007939539595736955,
+      "metrics": {
+        "component_core_covariance_error": 0.07369458489120007,
+        "component_core_min_eigen_ratio": 0.9301203489303589,
+        "component_covariance_error": 0.07874043472111225,
+        "component_min_eigen_ratio": 0.9518780708312988,
+        "covariance_error": 0.03719404712319374,
+        "hq": 0.986572265625,
+        "mass_tv": 0.002685546875,
+        "max_component_spill": 0.01472754031419754,
+        "mean_error": 0.028427673503756523,
+        "min_mass_ratio": 0.99462890625,
+        "projection_ks": 0.05206046040426304,
+        "resolved_core_covariance_error": 0.07369458489120007,
+        "resolved_core_min_eigen_ratio": 0.9301203489303589,
+        "resolved_max_component_spill": 0.01472754031419754,
+        "sample_count": 4096,
+        "sw1_normalized": 0.02244384585552455,
+        "target_scale": 1.0555585622787476
+      },
+      "passed": true,
+      "phase": "original_hold",
+      "sample_array_max_abs_change_from1200": 0.4139386937022209,
+      "sample_array_rms_change_from1200": 0.05820334575168963,
+      "step": 1150,
+      "target_bitwise_equal_to1200": true
+    },
+    {
+      "cross_family_samples_bitwise_equal": true,
+      "failed_bounds": [],
+      "ks_excess_over_bound": -0.005555725409883638,
+      "metrics": {
+        "component_core_covariance_error": 0.10467602871358395,
+        "component_core_min_eigen_ratio": 0.8284796476364136,
+        "component_covariance_error": 0.10638302005827427,
+        "component_min_eigen_ratio": 0.8284796476364136,
+        "covariance_error": 0.03893938660621643,
+        "hq": 0.992431640625,
+        "mass_tv": 0.002685546875,
+        "max_component_spill": 0.010199125856161118,
+        "mean_error": 0.023431727662682533,
+        "min_mass_ratio": 0.99462890625,
+        "projection_ks": 0.05444427459011636,
+        "resolved_core_covariance_error": 0.10467602871358395,
+        "resolved_core_min_eigen_ratio": 0.8284796476364136,
+        "resolved_max_component_spill": 0.010199125856161118,
+        "sample_count": 4096,
+        "sw1_normalized": 0.020053852674527455,
+        "target_scale": 1.0555585622787476
+      },
+      "passed": true,
+      "phase": "original_hold",
+      "sample_array_max_abs_change_from1200": 0.0,
+      "sample_array_rms_change_from1200": 0.0,
+      "step": 1200,
+      "target_bitwise_equal_to1200": true
+    },
+    {
+      "cross_family_samples_bitwise_equal": true,
+      "failed_bounds": [
+        "projection_ks <= 0.06"
+      ],
+      "ks_excess_over_bound": 0.0458236784588924,
+      "metrics": {
+        "component_core_covariance_error": 0.13105948269367218,
+        "component_core_min_eigen_ratio": 0.8125914335250854,
+        "component_covariance_error": 0.13045796006917953,
+        "component_min_eigen_ratio": 0.8127355575561523,
+        "covariance_error": 0.016292201355099678,
+        "hq": 0.985107421875,
+        "mass_tv": 0.001953125,
+        "max_component_spill": 0.019117647781968117,
+        "mean_error": 0.07269597053527832,
+        "min_mass_ratio": 0.99609375,
+        "projection_ks": 0.1058236784588924,
+        "resolved_core_covariance_error": 0.13105948269367218,
+        "resolved_core_min_eigen_ratio": 0.8125914335250854,
+        "resolved_max_component_spill": 0.019117647781968117,
+        "sample_count": 4096,
+        "sw1_normalized": 0.049858608460374626,
+        "target_scale": 1.0555585622787476
+      },
+      "passed": false,
+      "phase": "appended_hold",
+      "sample_array_max_abs_change_from1200": 0.30755820870399475,
+      "sample_array_rms_change_from1200": 0.08449292583415961,
+      "step": 1250,
+      "target_bitwise_equal_to1200": true
+    },
+    {
+      "cross_family_samples_bitwise_equal": true,
+      "failed_bounds": [
+        "projection_ks <= 0.06"
+      ],
+      "ks_excess_over_bound": 0.017633095135215965,
+      "metrics": {
+        "component_core_covariance_error": 0.1516217142343521,
+        "component_core_min_eigen_ratio": 0.7906407117843628,
+        "component_covariance_error": 0.1540997475385666,
+        "component_min_eigen_ratio": 0.7903342247009277,
+        "covariance_error": 0.12798447906970978,
+        "hq": 0.989013671875,
+        "mass_tv": 0.001953125,
+        "max_component_spill": 0.012159532867372036,
+        "mean_error": 0.037943191826343536,
+        "min_mass_ratio": 0.99609375,
+        "projection_ks": 0.07763309513521596,
+        "resolved_core_covariance_error": 0.1516217142343521,
+        "resolved_core_min_eigen_ratio": 0.7906407117843628,
+        "resolved_max_component_spill": 0.012159532867372036,
+        "sample_count": 4096,
+        "sw1_normalized": 0.04398083236783495,
+        "target_scale": 1.0555585622787476
+      },
+      "passed": false,
+      "phase": "appended_hold",
+      "sample_array_max_abs_change_from1200": 0.32690340280532837,
+      "sample_array_rms_change_from1200": 0.08564500805032844,
+      "step": 1300,
+      "target_bitwise_equal_to1200": true
+    },
+    {
+      "cross_family_samples_bitwise_equal": true,
+      "failed_bounds": [],
+      "ks_excess_over_bound": -0.00874143466701166,
+      "metrics": {
+        "component_core_covariance_error": 0.07043411210179329,
+        "component_core_min_eigen_ratio": 0.9053506255149841,
+        "component_covariance_error": 0.07043411210179329,
+        "component_min_eigen_ratio": 0.9053506255149841,
+        "covariance_error": 0.02278118021786213,
+        "hq": 0.989501953125,
+        "mass_tv": 0.001953125,
+        "max_component_spill": 0.014591439627110958,
+        "mean_error": 0.023797115311026573,
+        "min_mass_ratio": 0.99609375,
+        "projection_ks": 0.05125856533298834,
+        "resolved_core_covariance_error": 0.07043411210179329,
+        "resolved_core_min_eigen_ratio": 0.9053506255149841,
+        "resolved_max_component_spill": 0.014591439627110958,
+        "sample_count": 4096,
+        "sw1_normalized": 0.020485099482001976,
+        "target_scale": 1.0555585622787476
+      },
+      "passed": true,
+      "phase": "appended_hold",
+      "sample_array_max_abs_change_from1200": 0.3203285038471222,
+      "sample_array_rms_change_from1200": 0.06319489306319268,
+      "step": 1350,
+      "target_bitwise_equal_to1200": true
+    }
+  ],
+  "cost": {
+    "new_paid_seconds": 31.18462771223858,
+    "previous_paid_seconds": 6.8186783420387655,
+    "speed_ranking": false,
+    "spent_seconds": 38.003306054277346,
+    "total_paid_cap_seconds": 480.0
+  },
+  "empirical_equivalence": {
+    "appended_array_keys": 18,
+    "appended_array_values": 98316,
+    "appended_arrays_dtype_shape_bytes_equal": true,
+    "appended_metric_scalars_exactly_equal": 51,
+    "checkpoint_groups": {
+      "1200": {
+        "backend_selection": {
+          "atlas_tensors": 0,
+          "e22_tensors": 0,
+          "equal_type_and_tensor_bytes": false
+        },
+        "birth_death": {
+          "atlas_tensors": 8,
+          "e22_tensors": 8,
+          "equal_type_and_tensor_bytes": true
+        },
+        "controller": {
+          "atlas_tensors": 2,
+          "e22_tensors": 2,
+          "equal_type_and_tensor_bytes": true
+        },
+        "cpu_rng": {
+          "atlas_tensors": 1,
+          "e22_tensors": 1,
+          "equal_type_and_tensor_bytes": false
+        },
+        "cuda_rng": {
+          "atlas_tensors": 1,
+          "e22_tensors": 1,
+          "equal_type_and_tensor_bytes": false
+        },
+        "data_rng": {
+          "equal_type_and_tensor_bytes": true
+        },
+        "lr_settle": {
+          "atlas_tensors": 44,
+          "e22_tensors": 44,
+          "equal_type_and_tensor_bytes": true
+        },
+        "models": {
+          "atlas_tensors": 21,
+          "e22_tensors": 21,
+          "equal_type_and_tensor_bytes": true
+        },
+        "optimizers": {
+          "atlas_tensors": 64,
+          "e22_tensors": 64,
+          "equal_type_and_tensor_bytes": true
+        },
+        "policy": {
+          "atlas_tensors": 0,
+          "e22_tensors": 0,
+          "equal_type_and_tensor_bytes": true
+        },
+        "recipe": {
+          "atlas_tensors": 0,
+          "e22_tensors": 0,
+          "equal_type_and_tensor_bytes": false
+        },
+        "reopen_guard": {
+          "atlas_tensors": 0,
+          "e22_tensors": 0,
+          "equal_type_and_tensor_bytes": false
+        },
+        "row_evidence": {
+          "atlas_tensors": 5,
+          "e22_tensors": 5,
+          "equal_type_and_tensor_bytes": true
+        },
+        "streams": {
+          "atlas_tensors": 4,
+          "e22_tensors": 4,
+          "equal_type_and_tensor_bytes": true
+        },
+        "surprise": {
+          "atlas_tensors": 4,
+          "e22_tensors": 4,
+          "equal_type_and_tensor_bytes": false
+        }
+      },
+      "1350": {
+        "backend_selection": {
+          "atlas_tensors": 0,
+          "e22_tensors": 0,
+          "equal_type_and_tensor_bytes": false
+        },
+        "birth_death": {
+          "atlas_tensors": 8,
+          "e22_tensors": 8,
+          "equal_type_and_tensor_bytes": true
+        },
+        "controller": {
+          "atlas_tensors": 2,
+          "e22_tensors": 2,
+          "equal_type_and_tensor_bytes": true
+        },
+        "cpu_rng": {
+          "atlas_tensors": 1,
+          "e22_tensors": 1,
+          "equal_type_and_tensor_bytes": false
+        },
+        "cuda_rng": {
+          "atlas_tensors": 1,
+          "e22_tensors": 1,
+          "equal_type_and_tensor_bytes": false
+        },
+        "data_rng": {
+          "equal_type_and_tensor_bytes": true
+        },
+        "lr_settle": {
+          "atlas_tensors": 52,
+          "e22_tensors": 52,
+          "equal_type_and_tensor_bytes": true
+        },
+        "models": {
+          "atlas_tensors": 21,
+          "e22_tensors": 21,
+          "equal_type_and_tensor_bytes": true
+        },
+        "optimizers": {
+          "atlas_tensors": 64,
+          "e22_tensors": 64,
+          "equal_type_and_tensor_bytes": true
+        },
+        "policy": {
+          "atlas_tensors": 0,
+          "e22_tensors": 0,
+          "equal_type_and_tensor_bytes": true
+        },
+        "recipe": {
+          "atlas_tensors": 0,
+          "e22_tensors": 0,
+          "equal_type_and_tensor_bytes": false
+        },
+        "reopen_guard": {
+          "atlas_tensors": 0,
+          "e22_tensors": 0,
+          "equal_type_and_tensor_bytes": false
+        },
+        "row_evidence": {
+          "atlas_tensors": 5,
+          "e22_tensors": 5,
+          "equal_type_and_tensor_bytes": true
+        },
+        "streams": {
+          "atlas_tensors": 4,
+          "e22_tensors": 4,
+          "equal_type_and_tensor_bytes": true
+        },
+        "surprise": {
+          "atlas_tensors": 4,
+          "e22_tensors": 4,
+          "equal_type_and_tensor_bytes": false
+        }
+      }
+    },
+    "five_observations_primary_scalars_exactly_equal": 85,
+    "limits": "Equality covers retained samples and endpoint groups only; no assertion of every intermediate policy/rate/action",
+    "whole_checkpoint_equality": false
+  },
+  "engineering_history": {
+    "automatic_retry": false,
+    "ordinary_updates": 0,
+    "paid_seconds": 6.8186783420387655,
+    "reason": "New explicit engineering cohort repairs strict PEP420 namespace admission only; original scientific source and parents unchanged.",
+    "records": [
+      {
+        "artifacts": {
+          "request.json": {
+            "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/hold-continuation/atlas/c6-atlas-broad-hold-1200-to-1350/request.json",
+            "sha256": "ecf016dea5ac00bdb6beab89d149cacc53b3ecd52cab467f09b88a904b6e176a"
+          },
+          "run.log": {
+            "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/hold-continuation/atlas/c6-atlas-broad-hold-1200-to-1350/run.log",
+            "sha256": "c6f7b6c055085ffab8a027b224778e0d27adf904ddadc2645bbf7866f9298cd4"
+          }
+        },
+        "family": "atlas",
+        "paid_wall_seconds": 3.440489402040839,
+        "scientific_updates": 0,
+        "source": {
+          "commit": "e97cae6d897369354588c29b65b02893ab066484",
+          "execution_digest": "29069307aaaefe61b6ab5c2c9b5b26a8b536323570db4054f2abea8f64dd7b29",
+          "files_sha256": {
+            "reports/forge/continuous-baseline-20261003/run_hold_continuation.py": "93342f094a40d1e36df7161b0d250cef90ff7a9ffb965e0041c8365f13e85128"
+          }
+        },
+        "status": "INCOMPLETE",
+        "study_path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/hold-continuation/atlas/study.json",
+        "study_sha256": "e551fe443879ab2a487de8e372c54295206bef3fdb04dc7b7ed0e096956bb54d"
+      },
+      {
+        "artifacts": {
+          "request.json": {
+            "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/hold-continuation/e22/c6-e22-broad-hold-1200-to-1350/request.json",
+            "sha256": "7afeaaf39ccf9b00d317b06099c0b9a6e53896a6e3c7f347f13b9d883afd0684"
+          },
+          "run.log": {
+            "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/hold-continuation/e22/c6-e22-broad-hold-1200-to-1350/run.log",
+            "sha256": "c6f7b6c055085ffab8a027b224778e0d27adf904ddadc2645bbf7866f9298cd4"
+          }
+        },
+        "family": "e22",
+        "paid_wall_seconds": 3.3781889399979264,
+        "scientific_updates": 0,
+        "source": {
+          "commit": "e97cae6d897369354588c29b65b02893ab066484",
+          "execution_digest": "29069307aaaefe61b6ab5c2c9b5b26a8b536323570db4054f2abea8f64dd7b29",
+          "files_sha256": {
+            "reports/forge/continuous-baseline-20261003/run_hold_continuation.py": "93342f094a40d1e36df7161b0d250cef90ff7a9ffb965e0041c8365f13e85128"
+          }
+        },
+        "status": "INCOMPLETE",
+        "study_path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/hold-continuation/e22/study.json",
+        "study_sha256": "7a3f7c1be32d95c65c95dede31f11c0663f815c09e27ae00dfda39ec6d87b661"
+      }
+    ]
+  },
+  "evidence_backed_findings": [
+    {
+      "basis": "Raw primary flags, exact metric values and unchanged bound",
+      "claim": "Only projected shape persistence fails:3/5 later checks, recovery at1350 does not erase1250/1300 FAILs",
+      "confidence": "high"
+    },
+    {
+      "basis": "Retained byte comparisons plus original/new protocol seed34002",
+      "claim": "The saved output arrays change under fixed target arrays/evaluation seed; neither a new target nor a new evaluation seed explains the difference",
+      "confidence": "high"
+    },
+    {
+      "basis": "Endpoint cumulative counters unchanged; surprise logs empty",
+      "claim": "No new recorded discrete relocation, isolation move, controller reopen or surprise fire occurs during1201\u20131350",
+      "confidence": "high_for_saved_counter_scope"
+    },
+    {
+      "basis": "Endpoint parameter differences and controller/counter states",
+      "claim": "G,D,prior,averages and continuous controller/row evidence change together",
+      "confidence": "high"
+    },
+    {
+      "basis": "Missing failed-boundary checkpoints/action/force trace; no controlled intervention in frozen evidence",
+      "claim": "Generator/prior transport, adaptive latent sampling and rate/row control remain coupled candidate contributors; critic-rate causation is unresolved",
+      "confidence": "unresolved_mechanism"
+    },
+    {
+      "basis": "Original PASS plus later mixed results; no eight-case or19/19 credit",
+      "claim": "Passing acquired states and1350 demonstrate this sampled tolerance can be attained by these recorded states; they do not establish persistent convergence or full-family learning/capacity",
+      "confidence": "high_for_narrow_observation"
+    }
+  ],
+  "families": [
+    {
+      "candidate_id": "atlas--abe34fb6f0c5f7802cec80e5a2d88aaffb4aa85e55e4021f646457630abec4f0",
+      "compound_hold": {
+        "first_confirmed_step": 1100,
+        "full_protocol_complete": true,
+        "hold_checks": 5,
+        "hold_passed": 3,
+        "new_hold_checks": 3,
+        "original_gate": "PASS",
+        "original_hold_checks": 2,
+        "original_study_gate": "INCOMPLETE",
+        "passed": false,
+        "required_hold_checks": 5,
+        "speed_eligible": false,
+        "status": "FAIL"
+      },
+      "continued_artifacts": {
+        "appended-observations.npz": {
+          "bytes": 368574,
+          "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/hold-continuation-v2/atlas/c6-atlas-broad-hold-1200-to-1350/appended-observations.npz",
+          "sha256": "f49fc8c1f72e857c07e984ec54c06374b1f4acf1c431ab67a9c986137cbe0056"
+        },
+        "continued-state.pt": {
+          "bytes": 450735,
+          "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/hold-continuation-v2/atlas/c6-atlas-broad-hold-1200-to-1350/continued-state.pt",
+          "sha256": "467455f881f843a08cfe9c143c323d216dd0714f8a018c32b62992bc6698ebd1"
+        },
+        "goal.gif": {
+          "bytes": 1128406,
+          "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/hold-continuation-v2/atlas/c6-atlas-broad-hold-1200-to-1350/goal.gif",
+          "sha256": "b56db2674a5f785c7979ff4bfb8ae6d4c309880cb29c3f45a8a72bb16b2f7822"
+        }
+      },
+      "endpoint_parameter_changes": {
+        "D": {
+          "max_abs_parameter_change": 0.03705844283103943,
+          "tensor_count": 7
+        },
+        "G": {
+          "max_abs_parameter_change": 0.07114293426275253,
+          "tensor_count": 6
+        },
+        "ema_G": {
+          "max_abs_parameter_change": 0.03050285577774048,
+          "tensor_count": 6
+        },
+        "ema_prior": {
+          "max_abs_parameter_change": 0.04229855537414551,
+          "tensor_count": 1
+        },
+        "prior": {
+          "max_abs_parameter_change": 0.07028669118881226,
+          "tensor_count": 1
+        }
+      },
+      "endpoint_snapshots": [
+        {
+          "backend_selection": {
+            "actual_backend": "knn",
+            "generator_noise_factor": 1.0,
+            "moment_rank_bound": 8,
+            "output_shape": [
+              2
+            ],
+            "population_policy": {
+              "actual_backend": "knn",
+              "calibration_rows": 128,
+              "finite_resolution_feasible": false,
+              "matching_sampler": "controller_reference",
+              "maximum_guard_flags": 12,
+              "minimum_bh_flags": 40,
+              "population": 256,
+              "q": 0.05,
+              "requested_backend": "feature_cells",
+              "rule": "ceil(N/[Q*(floor(N/2)+1)]) <= floor(Q*N)",
+              "schema": 1
+            },
+            "rate_mapping": [
+              [
+                {
+                  "base_rate": 0.0053125,
+                  "factor": 1.0,
+                  "rate": 0.0053125,
+                  "role": "generator"
+                },
+                {
+                  "base_rate": 0.00796875,
+                  "factor": 1.0,
+                  "rate": 0.00796875,
+                  "role": "table"
+                },
+                {
+                  "base_rate": 0.0053125,
+                  "factor": 1.0,
+                  "rate": 0.0053125,
+                  "role": "noise"
+                }
+              ],
+              [
+                {
+                  "base_rate": 0.00796875,
+                  "factor": 1.0,
+                  "rate": 0.00796875,
+                  "role": "critic"
+                }
+              ]
+            ],
+            "raw_output_width": 2,
+            "requested_backend": "auto",
+            "sampling_backend": "controller_reference",
+            "schema": 1,
+            "selection_reason": "finite_resolution_infeasible"
+          },
+          "birth_death_counters": {
+            "evals": 600,
+            "iso_moves": 0,
+            "moves": 11,
+            "realised_births": 11,
+            "realised_deaths": 1305
+          },
+          "controller": {
+            "closed": true,
+            "game_ratio": 1.9312178278355758,
+            "game_trust": 0.5355708360653842,
+            "mobility": 0.002449639206617857,
+            "reopens": 0,
+            "updates": 1200,
+            "variant": "dv12"
+          },
+          "data_stream_sha256": "ae2b55b32fff67717255f1a9da476da1d5e655c3ba0beb2576b526888a6801a3",
+          "initial_lrs": [
+            [
+              0.0053125,
+              0.00796875,
+              0.0053125
+            ],
+            [
+              0.00796875
+            ]
+          ],
+          "latent_bandwidth": [
+            0.25011181831359863,
+            0.24987518787384033,
+            0.24998408555984497,
+            0.2500387132167816
+          ],
+          "named_stream_sha256": {
+            "eval_generator": "990b134dd10e229ffe3beec9fb67cd867d7978a07110a24189a2d0e440ab1ac4",
+            "latent_generator": "8619e94a2df9b9edc841eadcaa2257d542d97425d88bee91d54f6335bd452164",
+            "noise_generator": "aa9d8942b3b06a2fbf47ff465a122fecc02b7663644e5b1a265e6b399c26f39e",
+            "penalty_generator": "7bf0366dfbea9430bb65c14a82ab6fe783d1972fe305ba55dfb2dab71aca1b82"
+          },
+          "optimizer_lrs": [
+            [
+              0.0053125,
+              0.00796875,
+              0.0053125
+            ],
+            [
+              0.00597655784264745
+            ]
+          ],
+          "reopen_guard": {
+            "calm_network": {
+              "1.0": {
+                "role": "critic",
+                "scale": 0.25
+              }
+            },
+            "epoch_rebases": 1,
+            "excursion": null,
+            "ka2_anchor_started": true,
+            "schema": 1
+          },
+          "row_evidence_counters": {
+            "hold_steps": 835,
+            "resets": 11,
+            "updates": 1200
+          },
+          "served_source": "fast",
+          "step": 1200,
+          "surprise": {
+            "anchor_events": 0,
+            "fires": 0,
+            "last_ratio": 1.1461780298306845,
+            "since_calm": 0
+          },
+          "surprise_log_count": 0,
+          "table_test": {
+            "b": 64.0,
+            "last_decisive": 1,
+            "s": 1.0
+          }
+        },
+        {
+          "backend_selection": {
+            "actual_backend": "knn",
+            "generator_noise_factor": 1.0,
+            "moment_rank_bound": 8,
+            "output_shape": [
+              2
+            ],
+            "population_policy": {
+              "actual_backend": "knn",
+              "calibration_rows": 128,
+              "finite_resolution_feasible": false,
+              "matching_sampler": "controller_reference",
+              "maximum_guard_flags": 12,
+              "minimum_bh_flags": 40,
+              "population": 256,
+              "q": 0.05,
+              "requested_backend": "feature_cells",
+              "rule": "ceil(N/[Q*(floor(N/2)+1)]) <= floor(Q*N)",
+              "schema": 1
+            },
+            "rate_mapping": [
+              [
+                {
+                  "base_rate": 0.0053125,
+                  "factor": 1.0,
+                  "rate": 0.0053125,
+                  "role": "generator"
+                },
+                {
+                  "base_rate": 0.00796875,
+                  "factor": 1.0,
+                  "rate": 0.00796875,
+                  "role": "table"
+                },
+                {
+                  "base_rate": 0.0053125,
+                  "factor": 1.0,
+                  "rate": 0.0053125,
+                  "role": "noise"
+                }
+              ],
+              [
+                {
+                  "base_rate": 0.00796875,
+                  "factor": 1.0,
+                  "rate": 0.00796875,
+                  "role": "critic"
+                }
+              ]
+            ],
+            "raw_output_width": 2,
+            "requested_backend": "auto",
+            "sampling_backend": "controller_reference",
+            "schema": 1,
+            "selection_reason": "finite_resolution_infeasible"
+          },
+          "birth_death_counters": {
+            "evals": 675,
+            "iso_moves": 0,
+            "moves": 11,
+            "realised_births": 11,
+            "realised_deaths": 1305
+          },
+          "controller": {
+            "closed": true,
+            "game_ratio": 1.0919201368993567,
+            "game_trust": 0.9916214811486534,
+            "mobility": 0.0011554106179527755,
+            "reopens": 0,
+            "updates": 1350,
+            "variant": "dv12"
+          },
+          "data_stream_sha256": "760d53b038c87aee940df1818ac8b0465a1793f5d3cb5ee74e16fae3dcf120f5",
+          "initial_lrs": [
+            [
+              0.0053125,
+              0.00796875,
+              0.0053125
+            ],
+            [
+              0.00796875
+            ]
+          ],
+          "latent_bandwidth": [
+            0.2503148019313812,
+            0.24994724988937378,
+            0.2498711347579956,
+            0.2497767210006714
+          ],
+          "named_stream_sha256": {
+            "eval_generator": "990b134dd10e229ffe3beec9fb67cd867d7978a07110a24189a2d0e440ab1ac4",
+            "latent_generator": "41432abdce5eb4ab7f2de0e526ab5a13960c30bff9eb1720c77b10ee6e00cec6",
+            "noise_generator": "3f132f07f3072033584cabb63023a5f43cbffb61f81f43a2bfc12aff29162b8a",
+            "penalty_generator": "7bf0366dfbea9430bb65c14a82ab6fe783d1972fe305ba55dfb2dab71aca1b82"
+          },
+          "optimizer_lrs": [
+            [
+              0.0053125,
+              0.00796875,
+              0.0053125
+            ],
+            [
+              0.005976560606208149
+            ]
+          ],
+          "reopen_guard": {
+            "calm_network": {
+              "1.0": {
+                "role": "critic",
+                "scale": 0.125
+              }
+            },
+            "epoch_rebases": 1,
+            "excursion": null,
+            "ka2_anchor_started": true,
+            "schema": 1
+          },
+          "row_evidence_counters": {
+            "hold_steps": 943,
+            "resets": 11,
+            "updates": 1350
+          },
+          "served_source": "fast",
+          "step": 1350,
+          "surprise": {
+            "anchor_events": 0,
+            "fires": 0,
+            "last_ratio": 0.8711017685734491,
+            "since_calm": 0
+          },
+          "surprise_log_count": 0,
+          "table_test": {
+            "b": 64.0,
+            "last_decisive": 1,
+            "s": 1.0
+          }
+        }
+      ],
+      "family": "atlas",
+      "log": {
+        "bytes": 461,
+        "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/hold-continuation-v2/atlas/c6-atlas-broad-hold-1200-to-1350/run.log",
+        "sha256": "6e8909b4928847bfb9141d615068c7541be9c33b4c2ad9469d09891eeb116521"
+      },
+      "new_hold_execution": "COMPLETE",
+      "new_hold_science": "FAIL",
+      "observer_purity": true,
+      "original_gate": "PASS",
+      "original_inputs_unchanged": true,
+      "original_study_gate": "INCOMPLETE",
+      "parent_artifacts": {
+        "final-state.pt": {
+          "bytes": 450187,
+          "path": "/ml2/hypergan/forge-policy-family-round4-20261002/atlas/atlas--abe34fb6f0c5f7802cec80e5a2d88aaffb4aa85e55e4021f646457630abec4f0/api-vector-two-broad/final-state.pt",
+          "sha256": "95401e3063a5f0bba29cae59835f50bd1e7f8387776944b09aceea5ba4738075"
+        },
+        "goal.gif": {
+          "bytes": 689019,
+          "path": "/ml2/hypergan/forge-policy-family-round4-20261002/atlas/atlas--abe34fb6f0c5f7802cec80e5a2d88aaffb4aa85e55e4021f646457630abec4f0/api-vector-two-broad/goal.gif",
+          "sha256": "0848e7e9849ad2821456cd4f034a45108076f50ff61ad6122460632d5c8260e0"
+        },
+        "observations.npz": {
+          "bytes": 3070137,
+          "path": "/ml2/hypergan/forge-policy-family-round4-20261002/atlas/atlas--abe34fb6f0c5f7802cec80e5a2d88aaffb4aa85e55e4021f646457630abec4f0/api-vector-two-broad/observations.npz",
+          "sha256": "c188d10dd45d8263443b4c085833d39aa0e5fe3ef92ae01f3cc910e369f4b28a"
+        }
+      },
+      "parent_receipt": {
+        "bytes": 75781,
+        "path": "/ml2/hypergan/forge-policy-family-round4-20261002/atlas/atlas--abe34fb6f0c5f7802cec80e5a2d88aaffb4aa85e55e4021f646457630abec4f0/api-vector-two-broad/receipt.json",
+        "sha256": "e2bfc5fdc66ea2c32e77b22d16a00346a83852b3192d9f4b4ee2da2619da20a6"
+      },
+      "protocol": {
+        "acquisition_cap_seconds": 180.0,
+        "evaluation_samples": 4096,
+        "evaluation_seed": 34002,
+        "export_grace_seconds": 60.0,
+        "initial_completed_updates": 1200,
+        "new_observation_steps": [
+          1250,
+          1300,
+          1350
+        ],
+        "new_updates": 150,
+        "total_execution_limit": 1350
+      },
+      "raw_receipt": {
+        "bytes": 27347,
+        "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/hold-continuation-v2/atlas/c6-atlas-broad-hold-1200-to-1350/result.json",
+        "sha256": "1844252366b6b5dfa65a382736572ef236448e9320446653443ac994f1d42cd3"
+      },
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": true,
+        "batch_size": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "birth_death_backend": "auto",
+        "birth_death_cells": 128,
+        "birth_death_chunk": 256,
+        "birth_death_feature_scale": "std",
+        "birth_death_isolation": true,
+        "birth_death_metric_rank": 8,
+        "birth_death_parent_policy": "real_anchor",
+        "birth_death_space": "critic",
+        "conditioning": "scalar",
+        "continuous_policy": "dv12",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.0053125,
+        "lr_anneal_start": 0.6,
+        "lr_control": "stationarity",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "name": "atlas",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 256,
+        "observation_sigma": 0.03,
+        "output_noise_mode": "learnable",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": true,
+        "prior_betas": null,
+        "prior_kind": "particles",
+        "prior_lr_mult": 1.5,
+        "prior_reg": 0.05,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_coeff": 3.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "release",
+        "reopen_guard": "settled",
+        "reopen_signal": "optimizer",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": true,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "scaled",
+        "row_policy": "independent",
+        "serve_average": 4.0,
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "table_release_rule": "anchor",
+        "total_steps": null,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 4
+      },
+      "recipe_sha256": "5c6714ed92d1b90c669bc6140069b0f55fa618628c698da03bf8140df169b23b",
+      "request": {
+        "bytes": 840107,
+        "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/hold-continuation-v2/atlas/c6-atlas-broad-hold-1200-to-1350/request.json",
+        "sha256": "511c57926bcdda028adce5bb1961f0725d9812bfd85be823b5b01ae9cbbb54f0"
+      },
+      "restore": {
+        "appended_update_limit": 150,
+        "complete_checkpoint_restore": true,
+        "only_external_cap_changed": true,
+        "original_completed_updates": 1200,
+        "recipe_schedule_changed": false
+      },
+      "runtime": {
+        "cuda": "12.6",
+        "cuda_device_model": "NVIDIA RTX A6000",
+        "device": "cuda:0",
+        "python": "3.12.13",
+        "torch": "2.13.0+cu126",
+        "torch_threads": 1
+      },
+      "sampler_parity": {
+        "completed_steps": 1200,
+        "evaluations": 1,
+        "new_scientific_observations": 0,
+        "passed": true,
+        "samples": 4096,
+        "seed": 34002
+      }
+    },
+    {
+      "candidate_id": "e22--5376bd11b0af6ba9ffe3151f3fbc6604e09b8df896869241676f2559e4f730be",
+      "compound_hold": {
+        "first_confirmed_step": 1100,
+        "full_protocol_complete": true,
+        "hold_checks": 5,
+        "hold_passed": 3,
+        "new_hold_checks": 3,
+        "original_gate": "PASS",
+        "original_hold_checks": 2,
+        "original_study_gate": "INCOMPLETE",
+        "passed": false,
+        "required_hold_checks": 5,
+        "speed_eligible": false,
+        "status": "FAIL"
+      },
+      "continued_artifacts": {
+        "appended-observations.npz": {
+          "bytes": 368574,
+          "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/hold-continuation-v2/e22/c6-e22-broad-hold-1200-to-1350/appended-observations.npz",
+          "sha256": "f49fc8c1f72e857c07e984ec54c06374b1f4acf1c431ab67a9c986137cbe0056"
+        },
+        "continued-state.pt": {
+          "bytes": 449327,
+          "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/hold-continuation-v2/e22/c6-e22-broad-hold-1200-to-1350/continued-state.pt",
+          "sha256": "45df3f3d1e5799f7be92506cffa90324e456fd95cd2bad83bb3a0435f0181426"
+        },
+        "goal.gif": {
+          "bytes": 1128406,
+          "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/hold-continuation-v2/e22/c6-e22-broad-hold-1200-to-1350/goal.gif",
+          "sha256": "b56db2674a5f785c7979ff4bfb8ae6d4c309880cb29c3f45a8a72bb16b2f7822"
+        }
+      },
+      "endpoint_parameter_changes": {
+        "D": {
+          "max_abs_parameter_change": 0.03705844283103943,
+          "tensor_count": 7
+        },
+        "G": {
+          "max_abs_parameter_change": 0.07114293426275253,
+          "tensor_count": 6
+        },
+        "ema_G": {
+          "max_abs_parameter_change": 0.03050285577774048,
+          "tensor_count": 6
+        },
+        "ema_prior": {
+          "max_abs_parameter_change": 0.04229855537414551,
+          "tensor_count": 1
+        },
+        "prior": {
+          "max_abs_parameter_change": 0.07028669118881226,
+          "tensor_count": 1
+        }
+      },
+      "endpoint_snapshots": [
+        {
+          "backend_selection": null,
+          "birth_death_counters": {
+            "evals": 600,
+            "iso_moves": 0,
+            "moves": 11,
+            "realised_births": 11,
+            "realised_deaths": 1305
+          },
+          "controller": {
+            "closed": true,
+            "game_ratio": 1.9312178278355758,
+            "game_trust": 0.5355708360653842,
+            "mobility": 0.002449639206617857,
+            "reopens": 0,
+            "updates": 1200,
+            "variant": "dv12"
+          },
+          "data_stream_sha256": "ae2b55b32fff67717255f1a9da476da1d5e655c3ba0beb2576b526888a6801a3",
+          "initial_lrs": [
+            [
+              0.0053125,
+              0.00796875,
+              0.0053125
+            ],
+            [
+              0.00796875
+            ]
+          ],
+          "latent_bandwidth": [
+            0.25011181831359863,
+            0.24987518787384033,
+            0.24998408555984497,
+            0.2500387132167816
+          ],
+          "named_stream_sha256": {
+            "eval_generator": "990b134dd10e229ffe3beec9fb67cd867d7978a07110a24189a2d0e440ab1ac4",
+            "latent_generator": "8619e94a2df9b9edc841eadcaa2257d542d97425d88bee91d54f6335bd452164",
+            "noise_generator": "aa9d8942b3b06a2fbf47ff465a122fecc02b7663644e5b1a265e6b399c26f39e",
+            "penalty_generator": "7bf0366dfbea9430bb65c14a82ab6fe783d1972fe305ba55dfb2dab71aca1b82"
+          },
+          "optimizer_lrs": [
+            [
+              0.0053125,
+              0.00796875,
+              0.0053125
+            ],
+            [
+              0.00597655784264745
+            ]
+          ],
+          "reopen_guard": null,
+          "row_evidence_counters": {
+            "hold_steps": 835,
+            "resets": 11,
+            "updates": 1200
+          },
+          "served_source": "fast",
+          "step": 1200,
+          "surprise": {
+            "anchor_events": 0,
+            "fires": 0,
+            "last_ratio": 1.9344821235083223,
+            "since_calm": 302
+          },
+          "surprise_log_count": 0,
+          "table_test": {
+            "b": 64.0,
+            "last_decisive": 1,
+            "s": 1.0
+          }
+        },
+        {
+          "backend_selection": null,
+          "birth_death_counters": {
+            "evals": 675,
+            "iso_moves": 0,
+            "moves": 11,
+            "realised_births": 11,
+            "realised_deaths": 1305
+          },
+          "controller": {
+            "closed": true,
+            "game_ratio": 1.0919201368993567,
+            "game_trust": 0.9916214811486534,
+            "mobility": 0.0011554106179527755,
+            "reopens": 0,
+            "updates": 1350,
+            "variant": "dv12"
+          },
+          "data_stream_sha256": "760d53b038c87aee940df1818ac8b0465a1793f5d3cb5ee74e16fae3dcf120f5",
+          "initial_lrs": [
+            [
+              0.0053125,
+              0.00796875,
+              0.0053125
+            ],
+            [
+              0.00796875
+            ]
+          ],
+          "latent_bandwidth": [
+            0.2503148019313812,
+            0.24994724988937378,
+            0.2498711347579956,
+            0.2497767210006714
+          ],
+          "named_stream_sha256": {
+            "eval_generator": "990b134dd10e229ffe3beec9fb67cd867d7978a07110a24189a2d0e440ab1ac4",
+            "latent_generator": "41432abdce5eb4ab7f2de0e526ab5a13960c30bff9eb1720c77b10ee6e00cec6",
+            "noise_generator": "3f132f07f3072033584cabb63023a5f43cbffb61f81f43a2bfc12aff29162b8a",
+            "penalty_generator": "7bf0366dfbea9430bb65c14a82ab6fe783d1972fe305ba55dfb2dab71aca1b82"
+          },
+          "optimizer_lrs": [
+            [
+              0.0053125,
+              0.00796875,
+              0.0053125
+            ],
+            [
+              0.005976560606208149
+            ]
+          ],
+          "reopen_guard": null,
+          "row_evidence_counters": {
+            "hold_steps": 943,
+            "resets": 11,
+            "updates": 1350
+          },
+          "served_source": "fast",
+          "step": 1350,
+          "surprise": {
+            "anchor_events": 0,
+            "fires": 0,
+            "last_ratio": 1.4460947350027615,
+            "since_calm": 452
+          },
+          "surprise_log_count": 0,
+          "table_test": {
+            "b": 64.0,
+            "last_decisive": 1,
+            "s": 1.0
+          }
+        }
+      ],
+      "family": "e22",
+      "log": {
+        "bytes": 456,
+        "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/hold-continuation-v2/e22/c6-e22-broad-hold-1200-to-1350/run.log",
+        "sha256": "85bc5f50a46911b8ff54ac4329006114505667a2ccb3d2bb44e760ff2fc04e39"
+      },
+      "new_hold_execution": "COMPLETE",
+      "new_hold_science": "FAIL",
+      "observer_purity": true,
+      "original_gate": "PASS",
+      "original_inputs_unchanged": true,
+      "original_study_gate": "INCOMPLETE",
+      "parent_artifacts": {
+        "final-state.pt": {
+          "bytes": 448779,
+          "path": "/ml2/hypergan/forge-policy-family-round4-20261002/e22/e22--5376bd11b0af6ba9ffe3151f3fbc6604e09b8df896869241676f2559e4f730be/api-vector-two-broad/final-state.pt",
+          "sha256": "c68b983b89db276b3e1bc3352c2e176066d84e3d9eef54ac9c49c8201a1d89b8"
+        },
+        "goal.gif": {
+          "bytes": 689019,
+          "path": "/ml2/hypergan/forge-policy-family-round4-20261002/e22/e22--5376bd11b0af6ba9ffe3151f3fbc6604e09b8df896869241676f2559e4f730be/api-vector-two-broad/goal.gif",
+          "sha256": "0848e7e9849ad2821456cd4f034a45108076f50ff61ad6122460632d5c8260e0"
+        },
+        "observations.npz": {
+          "bytes": 3070137,
+          "path": "/ml2/hypergan/forge-policy-family-round4-20261002/e22/e22--5376bd11b0af6ba9ffe3151f3fbc6604e09b8df896869241676f2559e4f730be/api-vector-two-broad/observations.npz",
+          "sha256": "c188d10dd45d8263443b4c085833d39aa0e5fe3ef92ae01f3cc910e369f4b28a"
+        }
+      },
+      "parent_receipt": {
+        "bytes": 75571,
+        "path": "/ml2/hypergan/forge-policy-family-round4-20261002/e22/e22--5376bd11b0af6ba9ffe3151f3fbc6604e09b8df896869241676f2559e4f730be/api-vector-two-broad/receipt.json",
+        "sha256": "bf6005d2118b3f6994ca240e706a5e8a4e5ef94818f8b54ecc695a6fb00a03dd"
+      },
+      "protocol": {
+        "acquisition_cap_seconds": 180.0,
+        "evaluation_samples": 4096,
+        "evaluation_seed": 34002,
+        "export_grace_seconds": 60.0,
+        "initial_completed_updates": 1200,
+        "new_observation_steps": [
+          1250,
+          1300,
+          1350
+        ],
+        "new_updates": 150,
+        "total_execution_limit": 1350
+      },
+      "raw_receipt": {
+        "bytes": 27332,
+        "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/hold-continuation-v2/e22/c6-e22-broad-hold-1200-to-1350/result.json",
+        "sha256": "4c0d798b25208bf897dc0df3582ae2e96be4331e7ef965c721a85453cb8ad2b6"
+      },
+      "recipe": {
+        "alpha_bar": [
+          1.0,
+          0.9,
+          0.5,
+          0.05,
+          0.0001
+        ],
+        "amsgrad": true,
+        "batch_size": 128,
+        "betas": [
+          0.0,
+          0.99
+        ],
+        "birth_death_feature_scale": "std",
+        "birth_death_isolation": true,
+        "birth_death_space": "critic",
+        "conditioning": "scalar",
+        "continuous_policy": "dv12",
+        "critic_payoff_damping": true,
+        "critic_r1_real": true,
+        "d_guard_min_steps": 200,
+        "d_guard_ratio": 5.0,
+        "d_lr_mult": 1.5,
+        "direct_particle_betas": [
+          0.0,
+          0.9
+        ],
+        "direct_particle_gain": true,
+        "distance_reduction": "sum",
+        "ema_decay": 0.995,
+        "encoder_mode": "none",
+        "input_noise_anneal_end": 0.1,
+        "input_noise_std": 0.0,
+        "latent_damping_max_rate": 0.5,
+        "lr": 0.0053125,
+        "lr_anneal_start": 0.6,
+        "lr_control": "stationarity",
+        "lr_floor": 0.05,
+        "model": "gan",
+        "name": "e22",
+        "network_lr_floor": 0.01,
+        "network_lr_horizon_cap": 1600,
+        "num_classes": null,
+        "num_particles": 256,
+        "observation_sigma": 0.03,
+        "output_noise_mode": "learnable",
+        "output_noise_std": 0.029,
+        "output_noise_warmup": 0.0,
+        "particle_birth_death": true,
+        "prior_betas": null,
+        "prior_kind": "particles",
+        "prior_lr_mult": 1.5,
+        "prior_reg": 0.05,
+        "reconstruction_weight": 1.0,
+        "reg_anchor_min_decay": 0.9,
+        "reg_anchor_weight": 1.0,
+        "reg_coeff": 3.0,
+        "reg_every": 1,
+        "reg_kappa": 1.0,
+        "reopen_anchor": "release",
+        "reopen_signal": "optimizer",
+        "routing_temperature": 0.25,
+        "row_evidence_exclude": true,
+        "row_evidence_gate": true,
+        "row_evidence_hold": true,
+        "row_evidence_hot": true,
+        "row_evidence_null": "scaled",
+        "row_policy": "independent",
+        "serve_average": 4.0,
+        "sigma_rel": 0.0,
+        "standardize": true,
+        "table_release_rule": "anchor",
+        "total_steps": null,
+        "ucd_target": "class",
+        "ucd_weight": 0.02,
+        "z_dim": 4
+      },
+      "recipe_sha256": "eafcb532a5ddea456c06e6b62766295b07ecc566818302e073fe8f5e1f033bb8",
+      "request": {
+        "bytes": 840091,
+        "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/hold-continuation-v2/e22/c6-e22-broad-hold-1200-to-1350/request.json",
+        "sha256": "26d43b64c36ab851d4f0320992399752009215b8a78cb8205fc15b03f1df9485"
+      },
+      "restore": {
+        "appended_update_limit": 150,
+        "complete_checkpoint_restore": true,
+        "only_external_cap_changed": true,
+        "original_completed_updates": 1200,
+        "recipe_schedule_changed": false
+      },
+      "runtime": {
+        "cuda": "12.6",
+        "cuda_device_model": "NVIDIA RTX A6000",
+        "device": "cuda:0",
+        "python": "3.12.13",
+        "torch": "2.13.0+cu126",
+        "torch_threads": 1
+      },
+      "sampler_parity": {
+        "completed_steps": 1200,
+        "evaluations": 1,
+        "new_scientific_observations": 0,
+        "passed": true,
+        "samples": 4096,
+        "seed": 34002
+      }
+    }
+  ],
+  "metric_ownership": {
+    "all_other_primary_bounds_pass_at_five_selected_steps": true,
+    "center_diagnostic": "mean_error is the norm of the empirical mean difference from a fixed seed991 reference sample divided by target RMS scale; no center gate is declared for this case",
+    "core_spill_diagnostics": "core/resolution/spill values are recorded but are not added gates for this host",
+    "failed_gate": "32 fixed projected CDFs against the analytic two-Gaussian mixture, projection_ks<=.06",
+    "global_covariance_diagnostic": "covariance_error is normalized global covariance error and is unbounded for this separated-broad host",
+    "other_primary_bounds": [
+      [
+        "sw1_normalized",
+        "<=",
+        0.18
+      ],
+      [
+        "mass_tv",
+        "<=",
+        0.15
+      ],
+      [
+        "hq",
+        ">=",
+        0.85
+      ],
+      [
+        "component_covariance_error",
+        "<=",
+        0.85
+      ],
+      [
+        "component_min_eigen_ratio",
+        ">=",
+        0.15
+      ],
+      [
+        "sample_count",
+        ">=",
+        4096
+      ]
+    ],
+    "within_mode_covariance_gate": "component_covariance_error<=.85 and component_min_eigen_ratio>=.15"
+  },
+  "missing_for_attribution": [
+    "Source-bound checkpoint at1150/1250/1300 with G/D/prior/averages, table test, selected serving, sampler/controller, rate groups and named streams",
+    "Per-update effective role rates, guard/reopen/row-hold/sampler application trace over1201\u20131350",
+    "Retained per-projection CDF residuals/worst direction and paired critic/generator/prior force diagnostics at failing boundaries"
+  ],
+  "next_critic_contrast_limit": "New shared d_lr_mult2.25 is an unproven higher critic-balance hypothesis. This frozen evidence gives no causal identification and no new winning/default or cross-source claim.",
+  "question": "What precisely fails after the original broad-law acquisition, and what can the retained state establish about a mechanism?",
+  "schema": "particlegan_frozen_broad_hold_failure_analysis_v1",
+  "scope": "Frozen PR266/C6/H2 evidence only; no new model, draw, fit, update, GPU, scorer execution, or grade change",
+  "serving_contract": {
+    "averaging_present": {
+      "average_rate": 0.00390625,
+      "ema_decay": 0.995,
+      "endpoint_last_decisive": 1,
+      "endpoint_table_b": 64,
+      "endpoint_table_s": 1.0,
+      "serve_average": 4.0
+    },
+    "endpoint_source": "fast at1200 and1350",
+    "historical_Atlas19_noisy_credit": false,
+    "intermediate_selection": "NOT_RECORDED at1150/1250/1300; no midpoint checkpoints",
+    "no_separate_ema_grade": true,
+    "primary": "Selected public served G/prior with additive output_noise=False; enabled DV12 latent perturbation remains",
+    "source_condition": "Reference backend serves paired averaged G/prior only when table tester last_decisive==-1; otherwise fast"
+  },
+  "source": {
+    "independently_verified_scientific_files": 148,
+    "prior_readout": {
+      "bytes": 64194,
+      "path": "/ml2/hypergan/ParticleGAN-continuous-pg-leaderboard-20261003/reports/forge/continuous-baseline-20261003/hold-results.json",
+      "sha256": "a1ccf9db355212ebde2ffde507973c49e011da9e2c72f9a83f31aa896d8307f5"
+    },
+    "scientific": {
+      "continuation_helper": {
+        "commit": "82c85cc32c43746074cb2809ae0f2aed271484bd",
+        "execution_digest": "429fc7d9a90a710346637da72ebe611a0a73515c05aede32c00640824fdfa760",
+        "files_sha256": {
+          "reports/forge/continuous-baseline-20261003/run_hold_continuation.py": "adcfbd92b39e3affa2626965bf32101bd4ade8a0ad00c9a4e4bbd4a0df4a0b58"
+        }
+      },
+      "continuation_snapshot": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/hold-extension/snapshots/429fc7d9a90a710346637da72ebe611a0a73515c05aede32c00640824fdfa760",
+      "declared_full_execution_inventory_count": 3534,
+      "full_execution_inventory_scope": "The3534-entry full snapshot inventory is bound by study/request hashes; this readout checks all148 scientific files and the maintained helper, not every archive file.",
+      "placement_guard": {
+        "gpu_memory_fraction": 0.2,
+        "logical_device": "cuda:0",
+        "required_cuda_visible_devices": "1",
+        "source": "run_hold_continuation.py:503-506;786"
+      },
+      "scientific_commit": "8021a1c50c4aff90ddea5010d368cffdc857b2f6",
+      "scientific_file_count": 148,
+      "scientific_files_independently_verified": 148,
+      "scientific_manifest_sha256": "676452cc8c0dd82c03000c1b494a1ccf3f9f0f4b479aa2a14faf535204b55598",
+      "scientific_snapshot": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/hold-extension/snapshots/429fc7d9a90a710346637da72ebe611a0a73515c05aede32c00640824fdfa760/hold-original-source"
+    },
+    "selected_source_files": {
+      "benchmarks/toy_audit/api_vectors.py": {
+        "path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/hold-extension/snapshots/429fc7d9a90a710346637da72ebe611a0a73515c05aede32c00640824fdfa760/hold-original-source/benchmarks/toy_audit/api_vectors.py",
+        "sha256": "9707af96fa43f76fad5481b6d6ec76e317957ec8e309ea96cc079ee95c2058af"
+      },
+      "benchmarks/toy_audit/vector_quality.py": {
+        "path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/hold-extension/snapshots/429fc7d9a90a710346637da72ebe611a0a73515c05aede32c00640824fdfa760/hold-original-source/benchmarks/toy_audit/vector_quality.py",
+        "sha256": "8a333bfceb71e311875b8576260c362a66a643c99d3849e6792a10e805de67d9"
+      },
+      "benchmarks/transfer_suite/vector_tasks.py": {
+        "path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/hold-extension/snapshots/429fc7d9a90a710346637da72ebe611a0a73515c05aede32c00640824fdfa760/hold-original-source/benchmarks/transfer_suite/vector_tasks.py",
+        "sha256": "3ee4eb27759f61a430029c80b7772cac3dca2fb2ac84919ace0db94efca1e0b0"
+      },
+      "particlegan/policy.py": {
+        "path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/hold-extension/snapshots/429fc7d9a90a710346637da72ebe611a0a73515c05aede32c00640824fdfa760/hold-original-source/particlegan/policy.py",
+        "sha256": "8370e36b5b93afe95ae24d2b385aac8735a587f86ef2b87ed369ecfdfcb6fec5"
+      },
+      "particlegan/training.py": {
+        "path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/hold-extension/snapshots/429fc7d9a90a710346637da72ebe611a0a73515c05aede32c00640824fdfa760/hold-original-source/particlegan/training.py",
+        "sha256": "7dadc219135bc3e6bf657bfe9bc3fa81dd14d4b2a31c70d5ff61e2941db35c94"
+      }
+    }
+  },
+  "status": "RETAINED_EVIDENCE_ANALYSIS_COMPLETE",
+  "work": {
+    "gpu_calls": 0,
+    "new_draws": 0,
+    "new_models": 0,
+    "optimizer_or_fitting_updates": 0,
+    "queue_or_resource_calls": 0,
+    "raw_or_source_edits": false,
+    "scorer_calls_or_regrading": 0
+  }
+}

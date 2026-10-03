@@ -1,0 +1,1392 @@
+{
+  "added_study_gate": "First five consecutive post-update primary PASS observations, followed by at least five later observations; every later primary check must PASS. No reacquisition.",
+  "definition_quality_only": true,
+  "families": [
+    "atlas",
+    "e22"
+  ],
+  "historical_atlas19_difference": [
+    "Historical image checks require complete mode count andHQ>=.9, withTV diagnostic. Current API also gates distribution_tv<=.10 and finite_template_tv<=.10.",
+    "Historical fixed-native Atlas19 has34 checks and an independent100k holdout. Current API has24 post-update20k checks, initial0, and a five-terminal-observation gate; no100k credit.",
+    "Fixed rotated100 is a stationary25-degree geometry. Historical moving rows turn the target by two additional30-degree jumps and are separate questions.",
+    "Historical live/EMA/clean panels cannot be pooled with this API noisy-selected-policy primary law. Current observer adds only the noise-off diagnostic."
+  ],
+  "image_tv_definitions": {
+    "distribution_tv": "HalfL1 of nearest-template assigned mass versus uniform mass, including low-quality assignments.",
+    "finite_template_tv": "Half ofL1 qualified-template mass error plus rejected mass; counts low-quality images as off-support."
+  },
+  "media_contract": [
+    "Use only actual retained observation arrays at the nine recorded media steps; no synthetic progress or new draws.",
+    "Show desired targets and actual outputs with stable axes/color scales and actual update labels.",
+    "Pair the original GIF verdict with added study verdict, first-window confirmation, later-pass count and actual failed bounds.",
+    "A terminal instantaneousPASS cannot replace original final-five or added hold requirements.",
+    "Original GIF/receipt/NPZ/state bytes stay immutable; any supplementary annotation is separately source/hash-bound."
+  ],
+  "original_gate": "Full original update/sample/cadence protocol plus all five final primary observations passing.",
+  "quality_credit": "Necessary zero-update capacity and historical receipts provide no learning, default, speed or clean-MoG credit.",
+  "records": [
+    {
+      "actual_execution_status": "NOT_INSPECTED",
+      "actual_media_path": null,
+      "actual_media_status": "AWAITING_FINISHED_PATHS",
+      "architecture": "transpose",
+      "cadence": {
+        "earliest_first_window_confirmation": 125,
+        "latest_confirmation_leaving_five_holds": 475,
+        "media_steps": [
+          0,
+          75,
+          150,
+          225,
+          300,
+          375,
+          450,
+          525,
+          600
+        ],
+        "metric_steps": [
+          0,
+          25,
+          50,
+          75,
+          100,
+          125,
+          150,
+          175,
+          200,
+          225,
+          250,
+          275,
+          300,
+          325,
+          350,
+          375,
+          400,
+          425,
+          450,
+          475,
+          500,
+          525,
+          550,
+          575,
+          600
+        ],
+        "original_last_five_steps": [
+          500,
+          525,
+          550,
+          575,
+          600
+        ],
+        "post_update_observations": 24
+      },
+      "case_id": "image-develop-img_intensity2-source-transpose12",
+      "claim_limit": "Finite 8x8 templates through the exact transpose width12 host; no natural-image or MoG qualification.",
+      "classification": {
+        "mean_rmse_is_diagnostic": true,
+        "min_qualified_mass_per_mode": 0.25,
+        "nearest_template_rmse_max": 0.06
+      },
+      "definition_sha256": "e9fa47de6adbb31f083c0333b0c7c41352d2b890b16539d47839d3f9720c5dfb",
+      "evaluation_samples": 1024,
+      "host_resources": {
+        "batch_size": 32,
+        "particles": 32,
+        "z_dim": 8
+      },
+      "media_checklist": [
+        "Show both ordered desired patches beside actual sampled output tiles with the same [0,1] grayscale scale.",
+        "The center patch must differ in brightness, not location; avoid framewise contrast normalization.",
+        "Make HQ, modes, both TV metrics and rejected mass readable; the thumbnail grid alone cannot certify occupancy."
+      ],
+      "original_primary_bounds": [
+        {
+          "metric": "modes",
+          "operator": ">=",
+          "value": 2
+        },
+        {
+          "metric": "hq",
+          "operator": ">=",
+          "value": 0.9
+        },
+        {
+          "metric": "distribution_tv",
+          "operator": "<=",
+          "value": 0.1
+        },
+        {
+          "metric": "finite_template_tv",
+          "operator": "<=",
+          "value": 0.1
+        }
+      ],
+      "primary_output_noise": false,
+      "question": "Can one convolutional generator preserve two photometric levels at the same location and their equal probability?",
+      "serving": "Actual public selected fast/averaged weights with enabled policy latent perturbation retained; fixed isolated evaluation seed 34002.",
+      "source_locations": [
+        "benchmarks/toy_audit/api_images.py:_HOSTS, _metadata, _partition, ImageFixture.observe",
+        "benchmarks/transfer_suite/image_tasks.py:templates"
+      ],
+      "steps": 600,
+      "target_law": {
+        "background": 0,
+        "kind": "uniform_ordered_grayscale_templates",
+        "masses": [
+          0.5,
+          0.5
+        ],
+        "ordered_sha256": "05489b1025607126a07709640796daa66e6d0a841697fc6160dff46636879512",
+        "patch_columns": [
+          2,
+          3,
+          4,
+          5
+        ],
+        "patch_intensities": [
+          0.35,
+          0.85
+        ],
+        "patch_rows": [
+          2,
+          3,
+          4,
+          5
+        ],
+        "shape": [
+          1,
+          8,
+          8
+        ],
+        "training_pixels": "Independent N(0,0.01^2), clipped to [0,1]"
+      },
+      "tier": 1,
+      "timeout_seconds": 180.0,
+      "title": "Two patch intensities",
+      "width": 12
+    },
+    {
+      "actual_execution_status": "NOT_INSPECTED",
+      "actual_media_path": null,
+      "actual_media_status": "AWAITING_FINISHED_PATHS",
+      "cadence": {
+        "earliest_first_window_confirmation": 250,
+        "latest_confirmation_leaving_five_holds": 950,
+        "media_steps": [
+          0,
+          150,
+          300,
+          450,
+          600,
+          750,
+          900,
+          1050,
+          1200
+        ],
+        "metric_steps": [
+          0,
+          50,
+          100,
+          150,
+          200,
+          250,
+          300,
+          350,
+          400,
+          450,
+          500,
+          550,
+          600,
+          650,
+          700,
+          750,
+          800,
+          850,
+          900,
+          950,
+          1000,
+          1050,
+          1100,
+          1150,
+          1200
+        ],
+        "original_last_five_steps": [
+          1000,
+          1050,
+          1100,
+          1150,
+          1200
+        ],
+        "post_update_observations": 24
+      },
+      "case_id": "api-vector-two-broad",
+      "claim_limit": "Separated two-component distribution under the selected public served law; center coverage alone does not pass.",
+      "definition_sha256": "e293cf19f2f235b30807f9782ec65ceea3693f78e3459b9f7eb117179168c8fc",
+      "evaluation_samples": 4096,
+      "host_resources": {
+        "batch_size": 128,
+        "particles": 256,
+        "z_dim": 4
+      },
+      "media_checklist": [
+        "Show the whole held-out target/output cloud on fixed axes; both lobes and their spread must be visible.",
+        "Show all-mode mass bars and the fixed mode0 local-width reference; retain outliers in the full-cloud view.",
+        "Expose projection KS and component-shape failures in paired case context even when the generic footer omits them."
+      ],
+      "original_primary_bounds": [
+        {
+          "metric": "sw1_normalized",
+          "operator": "<=",
+          "value": 0.18
+        },
+        {
+          "metric": "mass_tv",
+          "operator": "<=",
+          "value": 0.15
+        },
+        {
+          "metric": "hq",
+          "operator": ">=",
+          "value": 0.85
+        },
+        {
+          "metric": "component_covariance_error",
+          "operator": "<=",
+          "value": 0.85
+        },
+        {
+          "metric": "component_min_eigen_ratio",
+          "operator": ">=",
+          "value": 0.15
+        },
+        {
+          "metric": "sample_count",
+          "operator": ">=",
+          "value": 4096
+        },
+        {
+          "metric": "projection_ks",
+          "operator": "<=",
+          "value": 0.06
+        }
+      ],
+      "primary_output_noise": false,
+      "question": "Can the generator recover two equally occupied modes with Gaussian spread, instead of merely landing two atoms on their centers?",
+      "serving": "Actual public selected fast/averaged weights with enabled policy latent perturbation retained; fixed isolated evaluation seed 34002.",
+      "source_locations": [
+        "benchmarks/transfer_suite/vector_tasks.py:TASKS, SEPARATED_BOUNDS, score_samples",
+        "benchmarks/toy_audit/api_vectors.py:_registry, score_case, VectorFixture.observe"
+      ],
+      "steps": 1200,
+      "target_law": {
+        "covariances": [
+          [
+            [
+              0.0625,
+              0
+            ],
+            [
+              0,
+              0.0625
+            ]
+          ],
+          [
+            [
+              0.0625,
+              0
+            ],
+            [
+              0,
+              0.0625
+            ]
+          ]
+        ],
+        "kind": "gaussian_mixture",
+        "masses": [
+          0.5,
+          0.5
+        ],
+        "means": [
+          [
+            -1,
+            0
+          ],
+          [
+            1,
+            0
+          ]
+        ]
+      },
+      "tier": 1,
+      "timeout_seconds": 180.0,
+      "title": "Two broad Gaussian modes"
+    },
+    {
+      "actual_execution_status": "NOT_INSPECTED",
+      "actual_media_path": null,
+      "actual_media_status": "AWAITING_FINISHED_PATHS",
+      "cadence": {
+        "earliest_first_window_confirmation": 1459,
+        "latest_confirmation_leaving_five_holds": 5542,
+        "media_steps": [
+          0,
+          875,
+          1750,
+          2625,
+          3500,
+          4375,
+          5250,
+          6125,
+          7000
+        ],
+        "metric_steps": [
+          0,
+          292,
+          584,
+          875,
+          1167,
+          1459,
+          1750,
+          2042,
+          2334,
+          2625,
+          2917,
+          3209,
+          3500,
+          3792,
+          4084,
+          4375,
+          4667,
+          4959,
+          5250,
+          5542,
+          5834,
+          6125,
+          6417,
+          6709,
+          7000
+        ],
+        "original_last_five_steps": [
+          5834,
+          6125,
+          6417,
+          6709,
+          7000
+        ],
+        "post_update_observations": 24
+      },
+      "case_id": "api-grid100",
+      "claim_limit": "Static100-mode public-policy law. No independent100k holdout, moving-target, clean-MoG or default adoption credit.",
+      "definition_sha256": "93ca5686f7358c701c58b34798b8e1f784a339c958a0fe8e1c9f90af4867f279",
+      "diagnostic_branches": {
+        "forced_ema": "Not retained by this observer; no independent EMA panel or grade.",
+        "output_noise_off": "Available, same selected policy/latent law."
+      },
+      "evaluation_samples": 20000,
+      "historical_difference": "Historical Atlas19 fixed-native evidence has34 checks plus a separate100k holdout; this API question has24 post-update20k checks plus initial0 and a final-five gate.",
+      "host_resources": {
+        "batch_size": 2048,
+        "particles": 20000,
+        "z_dim": 2
+      },
+      "media_checklist": [
+        "Show all100 target/output clusters on fixed whole-cloud axes; preserve the declared orientation/staggering.",
+        "Primary panel includes recipe output noise; label the second panel as output noise off with the served latent law retained.",
+        "Show all100 mode masses and a fixed mode0 width comparison at sigma0.03; one zoom is illustrative, not all-mode proof.",
+        "Keep primary coverage and fidelity bounds separate from the noise-off diagnostics; expose actual failed bounds in paired context.",
+        "Do not label the diagnostic as a separately sampled EMA branch; selected serving may itself use averaged parameters."
+      ],
+      "original_primary_bounds": [
+        {
+          "metric": "n",
+          "operator": ">=",
+          "value": 20000
+        },
+        {
+          "metric": "valid_n",
+          "operator": "==",
+          "value": "n"
+        },
+        {
+          "metric": "modes",
+          "operator": "==",
+          "value": 100
+        },
+        {
+          "metric": "precision",
+          "operator": ">=",
+          "value": 0.97
+        },
+        {
+          "metric": "min_hq_mode_mass",
+          "operator": ">=",
+          "value": 0.005
+        },
+        {
+          "metric": "mass_tv",
+          "operator": "<=",
+          "value": 0.1
+        },
+        {
+          "metric": "max_mode_mass",
+          "operator": "<=",
+          "value": 0.02
+        },
+        {
+          "metric": "min_cov_eig_ratio",
+          "operator": ">=",
+          "value": 0.4
+        },
+        {
+          "metric": "max_cov_eig_ratio",
+          "operator": "<=",
+          "value": 1.7
+        },
+        {
+          "metric": "min_radial_median_ratio",
+          "operator": ">=",
+          "value": 0.65
+        },
+        {
+          "metric": "max_radial_median_ratio",
+          "operator": "<=",
+          "value": 1.4
+        },
+        {
+          "metric": "accuracy_mass_tv",
+          "operator": "<=",
+          "value": 0.06
+        },
+        {
+          "metric": "accuracy_center_rms_sigma",
+          "operator": "<=",
+          "value": 0.2
+        },
+        {
+          "metric": "accuracy_abs_cov_trace_bias",
+          "operator": "<=",
+          "value": 0.1
+        },
+        {
+          "metric": "accuracy_radial_ks",
+          "operator": "<=",
+          "value": 0.04
+        }
+      ],
+      "primary_output_noise": true,
+      "question": "Recover equal mass and target width on every cell of an axis-aligned 10x10 grid.",
+      "serving": "Actual public selected fast/averaged weights with enabled policy latent perturbation retained; fixed isolated evaluation seed 34002.",
+      "source_locations": [
+        "benchmarks/toy100/problems.py:_centers, sample_real",
+        "benchmarks/toy100/metrics.py:REQUIREMENTS, passes",
+        "benchmarks/toy100/accuracy.py:LIMITS, passes_accuracy",
+        "benchmarks/toy_audit/api_vectors.py:_registry, score_case, VectorFixture.observe"
+      ],
+      "steps": 7000,
+      "target_law": {
+        "geometry": "Cartesian coordinates -4.5 through4.5, one-unit spacing.",
+        "kind": "equal100_gaussian",
+        "masses": "100 equal probabilities0.01",
+        "sigma": 0.03
+      },
+      "tier": 2,
+      "timeout_seconds": 2100.0,
+      "title": "Axis-aligned 100-mode grid",
+      "validity": "Every draw finite; valid_n equals n; integer counts and native metric consistency required."
+    },
+    {
+      "actual_execution_status": "NOT_INSPECTED",
+      "actual_media_path": null,
+      "actual_media_status": "AWAITING_FINISHED_PATHS",
+      "cadence": {
+        "earliest_first_window_confirmation": 1459,
+        "latest_confirmation_leaving_five_holds": 5542,
+        "media_steps": [
+          0,
+          875,
+          1750,
+          2625,
+          3500,
+          4375,
+          5250,
+          6125,
+          7000
+        ],
+        "metric_steps": [
+          0,
+          292,
+          584,
+          875,
+          1167,
+          1459,
+          1750,
+          2042,
+          2334,
+          2625,
+          2917,
+          3209,
+          3500,
+          3792,
+          4084,
+          4375,
+          4667,
+          4959,
+          5250,
+          5542,
+          5834,
+          6125,
+          6417,
+          6709,
+          7000
+        ],
+        "original_last_five_steps": [
+          5834,
+          6125,
+          6417,
+          6709,
+          7000
+        ],
+        "post_update_observations": 24
+      },
+      "case_id": "api-rotated100",
+      "claim_limit": "Static100-mode public-policy law. No independent100k holdout, moving-target, clean-MoG or default adoption credit.",
+      "definition_sha256": "6e06e5ba492950d3f8063a27f82bf3d51e75574148235495cc1b331b7fb30754",
+      "diagnostic_branches": {
+        "forced_ema": "Not retained by this observer; no independent EMA panel or grade.",
+        "output_noise_off": "Available, same selected policy/latent law."
+      },
+      "evaluation_samples": 20000,
+      "historical_difference": "Historical Atlas19 fixed-native evidence has34 checks plus a separate100k holdout; this API question has24 post-update20k checks plus initial0 and a final-five gate.",
+      "host_resources": {
+        "batch_size": 2048,
+        "particles": 20000,
+        "z_dim": 2
+      },
+      "media_checklist": [
+        "Show all100 target/output clusters on fixed whole-cloud axes; preserve the declared orientation/staggering.",
+        "Primary panel includes recipe output noise; label the second panel as output noise off with the served latent law retained.",
+        "Show all100 mode masses and a fixed mode0 width comparison at sigma0.03; one zoom is illustrative, not all-mode proof.",
+        "Keep primary coverage and fidelity bounds separate from the noise-off diagnostics; expose actual failed bounds in paired context.",
+        "Do not label the diagnostic as a separately sampled EMA branch; selected serving may itself use averaged parameters."
+      ],
+      "original_primary_bounds": [
+        {
+          "metric": "n",
+          "operator": ">=",
+          "value": 20000
+        },
+        {
+          "metric": "valid_n",
+          "operator": "==",
+          "value": "n"
+        },
+        {
+          "metric": "modes",
+          "operator": "==",
+          "value": 100
+        },
+        {
+          "metric": "precision",
+          "operator": ">=",
+          "value": 0.97
+        },
+        {
+          "metric": "min_hq_mode_mass",
+          "operator": ">=",
+          "value": 0.005
+        },
+        {
+          "metric": "mass_tv",
+          "operator": "<=",
+          "value": 0.1
+        },
+        {
+          "metric": "max_mode_mass",
+          "operator": "<=",
+          "value": 0.02
+        },
+        {
+          "metric": "min_cov_eig_ratio",
+          "operator": ">=",
+          "value": 0.4
+        },
+        {
+          "metric": "max_cov_eig_ratio",
+          "operator": "<=",
+          "value": 1.7
+        },
+        {
+          "metric": "min_radial_median_ratio",
+          "operator": ">=",
+          "value": 0.65
+        },
+        {
+          "metric": "max_radial_median_ratio",
+          "operator": "<=",
+          "value": 1.4
+        },
+        {
+          "metric": "accuracy_mass_tv",
+          "operator": "<=",
+          "value": 0.06
+        },
+        {
+          "metric": "accuracy_center_rms_sigma",
+          "operator": "<=",
+          "value": 0.2
+        },
+        {
+          "metric": "accuracy_abs_cov_trace_bias",
+          "operator": "<=",
+          "value": 0.1
+        },
+        {
+          "metric": "accuracy_radial_ks",
+          "operator": "<=",
+          "value": 0.04
+        }
+      ],
+      "primary_output_noise": true,
+      "question": "Test the same mass/width recovery when a fixed25-degree rotation removes alignment with the coordinate axes.",
+      "serving": "Actual public selected fast/averaged weights with enabled policy latent perturbation retained; fixed isolated evaluation seed 34002.",
+      "source_locations": [
+        "benchmarks/toy100/problems.py:_centers, sample_real",
+        "benchmarks/toy100/metrics.py:REQUIREMENTS, passes",
+        "benchmarks/toy100/accuracy.py:LIMITS, passes_accuracy",
+        "benchmarks/toy_audit/api_vectors.py:_registry, score_case, VectorFixture.observe"
+      ],
+      "steps": 7000,
+      "target_law": {
+        "geometry": "The same 10x10 grid rotated by25 degrees; stationary throughout training.",
+        "kind": "equal100_gaussian",
+        "masses": "100 equal probabilities0.01",
+        "sigma": 0.03
+      },
+      "tier": 2,
+      "timeout_seconds": 2100.0,
+      "title": "Fixed rotated 100-mode grid",
+      "validity": "Every draw finite; valid_n equals n; integer counts and native metric consistency required."
+    },
+    {
+      "actual_execution_status": "NOT_INSPECTED",
+      "actual_media_path": null,
+      "actual_media_status": "AWAITING_FINISHED_PATHS",
+      "cadence": {
+        "earliest_first_window_confirmation": 1459,
+        "latest_confirmation_leaving_five_holds": 5542,
+        "media_steps": [
+          0,
+          875,
+          1750,
+          2625,
+          3500,
+          4375,
+          5250,
+          6125,
+          7000
+        ],
+        "metric_steps": [
+          0,
+          292,
+          584,
+          875,
+          1167,
+          1459,
+          1750,
+          2042,
+          2334,
+          2625,
+          2917,
+          3209,
+          3500,
+          3792,
+          4084,
+          4375,
+          4667,
+          4959,
+          5250,
+          5542,
+          5834,
+          6125,
+          6417,
+          6709,
+          7000
+        ],
+        "original_last_five_steps": [
+          5834,
+          6125,
+          6417,
+          6709,
+          7000
+        ],
+        "post_update_observations": 24
+      },
+      "case_id": "api-staggered100",
+      "claim_limit": "Static100-mode public-policy law. No independent100k holdout, moving-target, clean-MoG or default adoption credit.",
+      "definition_sha256": "9ba09451032b3741df8a30c936bd81cc31038866dd2f4d0eb92966e48b292f48",
+      "diagnostic_branches": {
+        "forced_ema": "Not retained by this observer; no independent EMA panel or grade.",
+        "output_noise_off": "Available, same selected policy/latent law."
+      },
+      "evaluation_samples": 20000,
+      "historical_difference": "Historical Atlas19 fixed-native evidence has34 checks plus a separate100k holdout; this API question has24 post-update20k checks plus initial0 and a final-five gate.",
+      "host_resources": {
+        "batch_size": 2048,
+        "particles": 20000,
+        "z_dim": 2
+      },
+      "media_checklist": [
+        "Show all100 target/output clusters on fixed whole-cloud axes; preserve the declared orientation/staggering.",
+        "Primary panel includes recipe output noise; label the second panel as output noise off with the served latent law retained.",
+        "Show all100 mode masses and a fixed mode0 width comparison at sigma0.03; one zoom is illustrative, not all-mode proof.",
+        "Keep primary coverage and fidelity bounds separate from the noise-off diagnostics; expose actual failed bounds in paired context.",
+        "Do not label the diagnostic as a separately sampled EMA branch; selected serving may itself use averaged parameters."
+      ],
+      "original_primary_bounds": [
+        {
+          "metric": "n",
+          "operator": ">=",
+          "value": 20000
+        },
+        {
+          "metric": "valid_n",
+          "operator": "==",
+          "value": "n"
+        },
+        {
+          "metric": "modes",
+          "operator": "==",
+          "value": 100
+        },
+        {
+          "metric": "precision",
+          "operator": ">=",
+          "value": 0.97
+        },
+        {
+          "metric": "min_hq_mode_mass",
+          "operator": ">=",
+          "value": 0.005
+        },
+        {
+          "metric": "mass_tv",
+          "operator": "<=",
+          "value": 0.1
+        },
+        {
+          "metric": "max_mode_mass",
+          "operator": "<=",
+          "value": 0.02
+        },
+        {
+          "metric": "min_cov_eig_ratio",
+          "operator": ">=",
+          "value": 0.4
+        },
+        {
+          "metric": "max_cov_eig_ratio",
+          "operator": "<=",
+          "value": 1.7
+        },
+        {
+          "metric": "min_radial_median_ratio",
+          "operator": ">=",
+          "value": 0.65
+        },
+        {
+          "metric": "max_radial_median_ratio",
+          "operator": "<=",
+          "value": 1.4
+        },
+        {
+          "metric": "accuracy_mass_tv",
+          "operator": "<=",
+          "value": 0.06
+        },
+        {
+          "metric": "accuracy_center_rms_sigma",
+          "operator": "<=",
+          "value": 0.2
+        },
+        {
+          "metric": "accuracy_abs_cov_trace_bias",
+          "operator": "<=",
+          "value": 0.1
+        },
+        {
+          "metric": "accuracy_radial_ks",
+          "operator": "<=",
+          "value": 0.04
+        }
+      ],
+      "primary_output_noise": true,
+      "question": "Test all-mode mass/width recovery after alternating row offsets disrupt a simple axis-aligned lattice.",
+      "serving": "Actual public selected fast/averaged weights with enabled policy latent perturbation retained; fixed isolated evaluation seed 34002.",
+      "source_locations": [
+        "benchmarks/toy100/problems.py:_centers, sample_real",
+        "benchmarks/toy100/metrics.py:REQUIREMENTS, passes",
+        "benchmarks/toy100/accuracy.py:LIMITS, passes_accuracy",
+        "benchmarks/toy_audit/api_vectors.py:_registry, score_case, VectorFixture.observe"
+      ],
+      "steps": 7000,
+      "target_law": {
+        "geometry": "First coordinate multiplied by0.85; second coordinate offset -0.25 on even rows and +0.25 on odd rows.",
+        "kind": "equal100_gaussian",
+        "masses": "100 equal probabilities0.01",
+        "sigma": 0.03
+      },
+      "tier": 2,
+      "timeout_seconds": 2100.0,
+      "title": "Staggered 100-mode geometry",
+      "validity": "Every draw finite; valid_n equals n; integer counts and native metric consistency required."
+    },
+    {
+      "actual_execution_status": "NOT_INSPECTED",
+      "actual_media_path": null,
+      "actual_media_status": "AWAITING_FINISHED_PATHS",
+      "all_component_mass_ratio_floor": 0.25,
+      "cadence": {
+        "earliest_first_window_confirmation": 250,
+        "latest_confirmation_leaving_five_holds": 950,
+        "media_steps": [
+          0,
+          150,
+          300,
+          450,
+          600,
+          750,
+          900,
+          1050,
+          1200
+        ],
+        "metric_steps": [
+          0,
+          50,
+          100,
+          150,
+          200,
+          250,
+          300,
+          350,
+          400,
+          450,
+          500,
+          550,
+          600,
+          650,
+          700,
+          750,
+          800,
+          850,
+          900,
+          950,
+          1000,
+          1050,
+          1100,
+          1150,
+          1200
+        ],
+        "original_last_five_steps": [
+          1000,
+          1050,
+          1100,
+          1150,
+          1200
+        ],
+        "post_update_observations": 24
+      },
+      "case_id": "api-vector-unequal-mass",
+      "claim_limit": "The2-percent mode has5.12 declared particles, below the32-particle shape floor: its occupancy/HQ/TV remain gated, but its width/spill are diagnostic.",
+      "definition_sha256": "e29a36b2461a986a28ca950df869a4926f258b2bfca32bd46bc8b2188aebf32e",
+      "evaluation_samples": 4096,
+      "host_resources": {
+        "batch_size": 128,
+        "particles": 256,
+        "z_dim": 4
+      },
+      "media_checklist": [
+        "Show all four target/output clusters and all four mass bars on a readable probability scale; the reference bars must be55/30/13/2percent.",
+        "Keep the rare2-percent cluster visible and label the mass-ratio gate; a uniform-looking cloud is not the target.",
+        "Show a fixed mode0 width panel, while stating that rare-mode width is not gated by the resolved shape aggregate."
+      ],
+      "original_primary_bounds": [
+        {
+          "metric": "sw1_normalized",
+          "operator": "<=",
+          "value": 0.18
+        },
+        {
+          "metric": "mass_tv",
+          "operator": "<=",
+          "value": 0.15
+        },
+        {
+          "metric": "hq",
+          "operator": ">=",
+          "value": 0.85
+        },
+        {
+          "metric": "resolved_core_covariance_error",
+          "operator": "<=",
+          "value": 0.5
+        },
+        {
+          "metric": "resolved_core_min_eigen_ratio",
+          "operator": ">=",
+          "value": 0.15
+        },
+        {
+          "metric": "resolved_max_component_spill",
+          "operator": "<=",
+          "value": 0.05
+        },
+        {
+          "metric": "min_mass_ratio",
+          "operator": ">=",
+          "value": 0.25
+        },
+        {
+          "metric": "sample_count",
+          "operator": ">=",
+          "value": 4096
+        },
+        {
+          "metric": "projection_ks",
+          "operator": "<=",
+          "value": 0.06
+        }
+      ],
+      "particle_resolution_floor": 32,
+      "primary_output_noise": false,
+      "question": "Can the generator retain specified55/30/13/2-percent component occupancy, including the rare mode, without forcing uniform mass?",
+      "rare_minimum_assigned_mass": 0.005,
+      "rare_target_mass": 0.02,
+      "resolved_shape_components": [
+        true,
+        true,
+        true,
+        false
+      ],
+      "serving": "Actual public selected fast/averaged weights with enabled policy latent perturbation retained; fixed isolated evaluation seed 34002.",
+      "source_locations": [
+        "benchmarks/transfer_suite/vector_tasks.py:CORE_SPILL_BOUNDS, PARTICLE_FLOOR, TASKS, component_resolved, score_samples",
+        "benchmarks/toy_audit/api_vectors.py:_registry, score_case, VectorFixture.observe"
+      ],
+      "steps": 1200,
+      "target_law": {
+        "covariances": [
+          [
+            [
+              0.0324,
+              0
+            ],
+            [
+              0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0
+            ],
+            [
+              0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0
+            ],
+            [
+              0,
+              0.0324
+            ]
+          ],
+          [
+            [
+              0.0324,
+              0
+            ],
+            [
+              0,
+              0.0324
+            ]
+          ]
+        ],
+        "kind": "gaussian_mixture",
+        "masses": [
+          0.55,
+          0.3,
+          0.13,
+          0.02
+        ],
+        "means": [
+          [
+            -1.5,
+            -1.5
+          ],
+          [
+            -1.5,
+            1.5
+          ],
+          [
+            1.5,
+            -1.5
+          ],
+          [
+            1.5,
+            1.5
+          ]
+        ]
+      },
+      "tier": 2,
+      "timeout_seconds": 180.0,
+      "title": "Unequal Gaussian occupancy"
+    },
+    {
+      "actual_execution_status": "NOT_INSPECTED",
+      "actual_media_path": null,
+      "actual_media_status": "AWAITING_FINISHED_PATHS",
+      "cadence": {
+        "earliest_first_window_confirmation": 250,
+        "latest_confirmation_leaving_five_holds": 950,
+        "media_steps": [
+          0,
+          150,
+          300,
+          450,
+          600,
+          750,
+          900,
+          1050,
+          1200
+        ],
+        "metric_steps": [
+          0,
+          50,
+          100,
+          150,
+          200,
+          250,
+          300,
+          350,
+          400,
+          450,
+          500,
+          550,
+          600,
+          650,
+          700,
+          750,
+          800,
+          850,
+          900,
+          950,
+          1000,
+          1050,
+          1100,
+          1150,
+          1200
+        ],
+        "original_last_five_steps": [
+          1000,
+          1050,
+          1100,
+          1150,
+          1200
+        ],
+        "post_update_observations": 24
+      },
+      "case_id": "api-vector-anisotropic",
+      "claim_limit": "Finite separated three-component covariance question; matching centers or only total variance does not certify the shape.",
+      "definition_sha256": "2ec941011f8398672ce85b1d4df41c6e22dce2e0f98354a75f1d9a6794d4e1b6",
+      "evaluation_samples": 4096,
+      "host_resources": {
+        "batch_size": 128,
+        "particles": 256,
+        "z_dim": 4
+      },
+      "media_checklist": [
+        "Show all three target/output ellipses at equal x/y units and fixed axes; preserve their distinct orientations.",
+        "Show equal target occupancy bars and a fixed mode0 local-width comparison; wide-axis spread must not hide narrow-axis collapse.",
+        "Keep resolved eigenvalue/core-shape/spill and projection-KS bounds in paired context; all three components are resolved."
+      ],
+      "original_primary_bounds": [
+        {
+          "metric": "sw1_normalized",
+          "operator": "<=",
+          "value": 0.18
+        },
+        {
+          "metric": "mass_tv",
+          "operator": "<=",
+          "value": 0.15
+        },
+        {
+          "metric": "hq",
+          "operator": ">=",
+          "value": 0.85
+        },
+        {
+          "metric": "resolved_core_covariance_error",
+          "operator": "<=",
+          "value": 0.5
+        },
+        {
+          "metric": "resolved_core_min_eigen_ratio",
+          "operator": ">=",
+          "value": 0.15
+        },
+        {
+          "metric": "resolved_max_component_spill",
+          "operator": "<=",
+          "value": 0.05
+        },
+        {
+          "metric": "sample_count",
+          "operator": ">=",
+          "value": 4096
+        },
+        {
+          "metric": "projection_ks",
+          "operator": "<=",
+          "value": 0.06
+        }
+      ],
+      "particle_resolution_floor": 32,
+      "primary_output_noise": false,
+      "question": "Can the generator recover differently oriented covariance ellipses while retaining spread along each narrow axis?",
+      "resolved_shape_components": [
+        true,
+        true,
+        true
+      ],
+      "serving": "Actual public selected fast/averaged weights with enabled policy latent perturbation retained; fixed isolated evaluation seed 34002.",
+      "source_locations": [
+        "benchmarks/transfer_suite/vector_tasks.py:CORE_SPILL_BOUNDS, TASKS, component_resolved, score_samples",
+        "benchmarks/toy_audit/api_vectors.py:_registry, score_case, VectorFixture.observe"
+      ],
+      "steps": 1200,
+      "target_law": {
+        "covariances": [
+          [
+            [
+              0.09,
+              0.018
+            ],
+            [
+              0.018,
+              0.0081
+            ]
+          ],
+          [
+            [
+              0.0081,
+              -0.018
+            ],
+            [
+              -0.018,
+              0.09
+            ]
+          ],
+          [
+            [
+              0.04,
+              0.03
+            ],
+            [
+              0.03,
+              0.04
+            ]
+          ]
+        ],
+        "kind": "gaussian_mixture",
+        "masses": [
+          0.3333333333333333,
+          0.3333333333333333,
+          0.3333333333333333
+        ],
+        "means": [
+          [
+            -2,
+            -1
+          ],
+          [
+            0,
+            1.5
+          ],
+          [
+            2,
+            -1
+          ]
+        ]
+      },
+      "tier": 2,
+      "timeout_seconds": 180.0,
+      "title": "Anisotropic Gaussian shape"
+    },
+    {
+      "actual_execution_status": "NOT_INSPECTED",
+      "actual_media_path": null,
+      "actual_media_status": "AWAITING_FINISHED_PATHS",
+      "architecture": "transpose",
+      "cadence": {
+        "earliest_first_window_confirmation": 125,
+        "latest_confirmation_leaving_five_holds": 475,
+        "media_steps": [
+          0,
+          75,
+          150,
+          225,
+          300,
+          375,
+          450,
+          525,
+          600
+        ],
+        "metric_steps": [
+          0,
+          25,
+          50,
+          75,
+          100,
+          125,
+          150,
+          175,
+          200,
+          225,
+          250,
+          275,
+          300,
+          325,
+          350,
+          375,
+          400,
+          425,
+          450,
+          475,
+          500,
+          525,
+          550,
+          575,
+          600
+        ],
+        "original_last_five_steps": [
+          500,
+          525,
+          550,
+          575,
+          600
+        ],
+        "post_update_observations": 24
+      },
+      "case_id": "image-develop-img_bars4-source-transpose12",
+      "claim_limit": "Exact transpose width12 host, not the residual width16 control; finite-template spatial coverage, not arbitrary-object recognition.",
+      "classification": {
+        "mean_rmse_is_diagnostic": true,
+        "min_qualified_mass_per_mode": 0.125,
+        "nearest_template_rmse_max": 0.1
+      },
+      "definition_sha256": "d3145a02dd5e98155b006bf3e99899003707fe8fcf62318ba55fcd2fc6374b4d",
+      "evaluation_samples": 1024,
+      "host_resources": {
+        "batch_size": 32,
+        "particles": 32,
+        "z_dim": 8
+      },
+      "media_checklist": [
+        "Show all four ordered desired templates beside actual sampled tiles at fixed[0,1] grayscale.",
+        "Two orientations and two offsets per orientation must be identifiable; blurred averages or one repeated position must remain visible.",
+        "Make HQ, mode count, both TV metrics and rejected mass readable; a few nice tiles alone do not certify mass."
+      ],
+      "original_primary_bounds": [
+        {
+          "metric": "modes",
+          "operator": ">=",
+          "value": 4
+        },
+        {
+          "metric": "hq",
+          "operator": ">=",
+          "value": 0.9
+        },
+        {
+          "metric": "distribution_tv",
+          "operator": "<=",
+          "value": 0.1
+        },
+        {
+          "metric": "finite_template_tv",
+          "operator": "<=",
+          "value": 0.1
+        }
+      ],
+      "primary_output_noise": false,
+      "question": "Can the convolutional generator cover two vertical and two horizontal bar positions with sharp pixels and balanced mass?",
+      "serving": "Actual public selected fast/averaged weights with enabled policy latent perturbation retained; fixed isolated evaluation seed 34002.",
+      "source_locations": [
+        "benchmarks/toy_audit/api_images.py:_HOSTS, _metadata, _partition, ImageFixture.observe",
+        "benchmarks/transfer_suite/image_tasks.py:templates"
+      ],
+      "steps": 600,
+      "target_law": {
+        "background": 0,
+        "bar_value": 1,
+        "coordinate_convention": "Zero-based; slice end is excluded.",
+        "kind": "uniform_ordered_grayscale_templates",
+        "masses": [
+          0.25,
+          0.25,
+          0.25,
+          0.25
+        ],
+        "ordered_modes": [
+          "vertical columns1:3",
+          "vertical columns5:7",
+          "horizontal rows1:3",
+          "horizontal rows5:7"
+        ],
+        "ordered_sha256": "ea1a988a1e5aa5d875603049aebe35afe0da4ff398a3bbc9e12cd6338c3814af",
+        "shape": [
+          1,
+          8,
+          8
+        ],
+        "training_pixels": "Independent N(0,0.01^2), clipped to [0,1]"
+      },
+      "tier": 2,
+      "timeout_seconds": 180.0,
+      "title": "Four bar locations",
+      "width": 12
+    }
+  ],
+  "renderer_limit": "Current generic footer prints the first six metrics. Vector projectionKS/shape and native fidelity failures may be omitted; actual failed bounds must remain available in paired publication context.",
+  "required_cases_per_candidate": 8,
+  "required_cells": 16,
+  "schema": "critic_balance_question_bounds_media_checklist_v1",
+  "scientific_results_reviewed": false,
+  "scope": "Prospective source-grounded question/bounds/media checklist; no new qualification or review of evolving runs.",
+  "shared_recipe_overrides": {
+    "d_lr_mult": 2.25,
+    "lr": 0.0053125,
+    "prior_lr_mult": 1.5
+  },
+  "source_commit": "a956c6fc447bbe1314ff43ec224825a0e941eb55",
+  "source_files_sha256": {
+    "benchmarks/toy100/accuracy.py": "ee5c62049f8cdceb3d93b6d792cbaa96c815e12b3ce79ffaed244fb15a44fed2",
+    "benchmarks/toy100/metrics.py": "a7fbef19082f8470eb392948da52a336a90a3e99c6b3b893343a9e75bcda9c7b",
+    "benchmarks/toy100/problems.py": "2581374d451ed9147c031dfcdfbe9e2eea83e41ba49c2b8945b6e729ede26c9d",
+    "benchmarks/toy_audit/api_contract.py": "2d23aacfb6107f1535ed04ea0d5bb67d8f33a260ac1aca9e1d1734bfaf0f2e28",
+    "benchmarks/toy_audit/api_family_search.py": "719b1bd3439eab226d94fb3f8c57592083ffd8c58d455ee872fa3f35c97b060f",
+    "benchmarks/toy_audit/api_images.py": "2e6c65efff150f4fd393ad3b4ee3000d3f0f56b7a077a80f2624c4af46f7b491",
+    "benchmarks/toy_audit/api_run.py": "44a770e6fbeca4d9e2d7d1e74d3107ab2d9ef2f284d76d6e7a0d60cce6f1a5e7",
+    "benchmarks/toy_audit/api_vectors.py": "9707af96fa43f76fad5481b6d6ec76e317957ec8e309ea96cc079ee95c2058af",
+    "benchmarks/transfer_suite/image_tasks.py": "4f070d0879cbaaaa076f82b4683cfe74ea9ed8d85480d1922e249444a752ce58",
+    "benchmarks/transfer_suite/vector_tasks.py": "3ee4eb27759f61a430029c80b7772cac3dca2fb2ac84919ace0db94efca1e0b0",
+    "reports/forge/critic-balance-20261003/run_critic_balance.py": "f1cd29b512c2333672955e356218060e781e88c68eb3b1c3970b59ee3d13f615"
+  },
+  "statuses": "No first window or any later contradiction isFAIL; insufficient later observations isINCOMPLETE; unreached cases remainUNKNOWN in the8-case denominator."
+}

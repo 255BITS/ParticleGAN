@@ -1,0 +1,54 @@
+{
+  "artifacts": {
+    "log": {
+      "bytes": 2660,
+      "path": "/ml2/hypergan/forge-critic-balance-20261003/atlas/atlas--da2b715e4d88919fc314b718d11c27e0e6740a5ff30835d0137186337fafa1bc/image-develop-img_intensity2-source-transpose12.log",
+      "sha256": "8fa65d7c8bedf1cd3bb9c4c1e76a9d408a00edcb468b60ea1f65d9d140d40cc6"
+    },
+    "request": {
+      "bytes": 557510,
+      "path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/9875f3fc81cdef471b64b2b00afbae203772500138416907c340a75e72b5e9ed/supervisor-request.json",
+      "sha256": "48d8c341658c30851e05ebcb2ea1370964a23ac7956a667a4f29559c188bdcd5"
+    },
+    "study": {
+      "bytes": 1329987,
+      "path": "/ml2/hypergan/forge-critic-balance-20261003/atlas/study.json",
+      "sha256": "560d42b13901714a6f09af706e5cbec01a25392e4ec3e575e2725fd010a3c3ce"
+    },
+    "terminal": {
+      "bytes": 150,
+      "path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/9875f3fc81cdef471b64b2b00afbae203772500138416907c340a75e72b5e9ed/supervisor-terminal.json",
+      "sha256": "d2e206ac10c3878bc846f4c5ca392fddf64e9a3007c802984f5dd00700ff69ed"
+    }
+  },
+  "attempt_key": "9875f3fc81cdef471b64b2b00afbae203772500138416907c340a75e72b5e9ed",
+  "case_id": "image-develop-img_intensity2-source-transpose12",
+  "e22_unchanged_launch": "WITHHELD_KNOWN_BOOTSTRAP_ERROR",
+  "family": "atlas",
+  "maintained_source_commit": "92167813cb2b04af0c4e0395984c503b7fb7d7fe",
+  "missing_dependency": {
+    "bytes": 7835,
+    "path": "configs/forge/tasks/ring16_acquisition.json",
+    "sha256": "e6b53ba29fbe9ead47e842cfa01e40ba57821bd1b4e6aa5b297631fa0f6525c1"
+  },
+  "ordinary_training_updates": 0,
+  "original_paid_pair_ceiling_seconds": 15360.0,
+  "paid_seconds": 4.757908704923466,
+  "public_receipt": null,
+  "repair_scope": "New test snapshot inventory only; original source, error, cost and unknown cells unchanged",
+  "required_cells": 16,
+  "required_configs": 2,
+  "schema": "particlegan_critic_balance_bootstrap_error_v1",
+  "scientific_credit": false,
+  "scientific_source_base": "4749b2780add539df4bd8d2dd1d3cc9f002f77ad",
+  "snapshot_digest": "103fc3fd5e990d907490d3a4a6283dedd857cca2c76fd4102b02a1623c1ba79a",
+  "snapshot_path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/source-origins/25611fa53e50281927b3c3607fced40313087e16e3feb3085118f33d367f980c/snapshots/103fc3fd5e990d907490d3a4a6283dedd857cca2c76fd4102b02a1623c1ba79a",
+  "status": "ERROR",
+  "unmeasured_reservation_seconds": 0.0,
+  "v2_remaining_family_ceilings_seconds": {
+    "atlas": 7675.2420912950765,
+    "e22": 7680.0
+  },
+  "v2_remaining_pair_ceiling_seconds": 15355.242091295077,
+  "zero_update_evidence": "Pinned child traceback fails in contract.discover before api.main and fixture construction"
+}
