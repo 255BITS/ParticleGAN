@@ -79,3 +79,5 @@ These are the original historical hosts and gates. The [current ordinary leaderb
 Review [measured persistence failures](HOLD_RESULTS.md), [independent goal-media QA](GOAL_MEDIA_QA.md), and [current open toy PR dispositions](REMOTE_PR_CHECKPOINT.md). The verified JSON and copied GIF bytes are unchanged from the offline publication; this README additionally explains its questions.
 
 The [raw evidence archive](ARCHIVE.md) includes all frozen source, parent and continued checkpoints, draw arrays and terminal supervisor receipts. Its [verification receipt](archive-verification.json) confirms 11,572 individually checked members. Bulk evidence is local; the compact scores and GIFs in this directory are shareable through Git.
+
+The [next critic-rate contrast](NEXT_CRITIC_BALANCE.md) declares one new shared configuration per family. It is a proposed sensitivity test with fresh capacity and execution bindings pending; it contributes no measured result to this publication.
