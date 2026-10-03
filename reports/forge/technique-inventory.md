@@ -1,5 +1,7 @@
 # Current Forge trainer-family leaderboard
 
+Atlas's historical study has **19/19 original PASS**. The later C6 broad hold has **2/2 hold FAIL**, with six other domains UNKNOWN per family. See [completed source-bound studies](#completed-source-bound-studies) for the exact protocols and original goal GIFs. These separate results do not fill the ordinary qualification cells below.
+
 Each cell is **passes / full required total** from one complete selected configuration. Each trainer family and runtime has one row; its alternatives remain recorded separately. Expand the configuration details below for selection, provenance, other outcomes and cost.
 
 | Trainer family / runtime | Tier 1 | Tier 2 | Tier 3 | Recorded tier |
@@ -167,7 +169,7 @@ python reports/forge/regenerate_technique_inventory.py
 
 For ordinary Forge qualification, use `--source-commit <executed-commit>` to independently regrade hydrated original receipts and update this leaderboard. Task-only word diagnostics are read from their committed recipe selections and compact receipts. Source snapshots are provenance, not additional leaderboards.
 
-Publication input digest `8be039f3292fc386996adbf57e7da20a5ed01a3d425ff2ce415e2110cc62721f`.
+Publication input digest `ee77c534ac48d935c41d037df2b72cddc8b5907164c9f99e0c02db48d70fea4d`.
 
 ## Five-word joint task diagnostics
 
@@ -214,3 +216,62 @@ Use these recipes for this word host. Whole-configuration Tier 1 qualification s
 Earlier view policies retain their exact numerical snapshots and receipt proofs in the companion JSON. Their outcomes do not fill current requirements:
 
 - `discriminator_stability` revision 2: recorded denominators 3/19/2; 5 source cohorts.
+
+
+
+## Completed source-bound studies
+
+These separate publications add evidence navigation. They do not change the ordinary table, ranks, tiers or qualification. Historical and current cells are not pooled; no default or fair speed winner is established.
+
+| Study | Result | Goal and readout |
+| --- | --- | --- |
+| Historical Atlas19 original protocols | 19/19 original PASS | [actual goal GIF](continuous-baseline-20261003/media/atlas-original19-portability-img_intensity2.gif); [readout + exact gates](continuous-baseline-20261003/README.md) |
+| Named C6 broad hold extension | 2/2 new hold FAIL | [actual goal GIF](continuous-baseline-20261003/media/c6-atlas-broad-hold-1200-to-1350.gif); [readout + exact gates](continuous-baseline-20261003/README.md) |
+| Critic-rate contrast | 2 FAIL; 14 UNKNOWN | [actual goal GIF](critic-balance-20261003/media/atlas/image-develop-img_intensity2-source-transpose12/goal.gif); [readout + exact gates](critic-balance-20261003/README.md) |
+| Generator-half contrast | 2 FAIL; 14 UNKNOWN | [actual goal GIF](generator-step-20261003/media/atlas/image-develop-img_intensity2-source-transpose12/goal.gif); [readout + exact gates](generator-step-20261003/README.md) |
+
+<details>
+<summary>Exact protocols, sources, costs and archive availability</summary>
+
+### Historical Atlas19 original protocols
+
+- **Required evidence and result:** 19/19 original PASS; 48,800 original updates; native final-five 20k + independent 100k; clean native diagnostics separate
+- **Source and recipe:** `a0d6d89f; original noisy law`
+- **Serving law:** Original noisy selected-policy law; clean diagnostics separate; native joint coverage+accuracy includes independent 100k
+- **Paid / reserve (seconds):** 5210.638847 / 0.000000
+- **Raw availability:** [archive card](continuous-baseline-20261003/archive.json); [raw resolver (LOCAL_ONLY)](continuous-baseline-20261003/ARCHIVE.md)
+
+### Named C6 broad hold extension
+
+- **Required evidence and result:** 2/2 new hold FAIL; old 1200 PASS/study INCOMPLETE retained; 150 appended each; 3/5 later checks
+- **Source and recipe:** `8021a1c5 → 82c85cc3`
+- **Serving law:** Original 8021 public served sampler; output_noise=False; 150 appended updates, no ordinary eight-case credit
+- **Paid / reserve (seconds):** 31.184628 new + 6.818678 startup / 0.000000
+- **Raw availability:** [archive card](continuous-baseline-20261003/archive.json); [raw resolver (LOCAL_ONLY)](continuous-baseline-20261003/ARCHIVE.md)
+
+### Critic-rate contrast
+
+- **Required evidence and result:** 2 configs × 8 = 16; 16 cold SUPPORTED; 2 FAIL, 14 UNKNOWN; original 2 FAIL, 14 UNAVAILABLE; hold 2 FAIL, 14 UNAVAILABLE; 24 observations; native 20k, no 100k
+- **Source and recipe:** `a956c6fc; selected-policy; LR/prior/D 0.0053125/1.5/2.25`
+- **Serving law:** Public selected-policy serving; image/vector output-noise-off primary, native noisy primary; 24×20k native checks, no independent 100k
+- **Paid / reserve (seconds):** 54.358772 new / 0.000000; cumulative 59.116680
+- **Raw availability:** [archive card](critic-balance-20261003/archive.json); [raw resolver (LOCAL_ONLY)](critic-balance-20261003/ARCHIVE.md)
+
+### Generator-half contrast
+
+- **Required evidence and result:** 2 configs × 8 = 16; 16 cold SUPPORTED; 2 FAIL, 14 UNKNOWN; original 2 FAIL, 14 UNAVAILABLE; hold 2 FAIL, 14 UNAVAILABLE; 24 observations; native 20k, no 100k
+- **Source and recipe:** `488b792e; selected-policy; LR/prior/D 0.00265625/3.0/4.5`
+- **Serving law:** Public selected-policy serving; image/vector output-noise-off primary, native noisy primary; 24×20k native checks, no independent 100k
+- **Paid / reserve (seconds):** 54.877571 new / 0.000000; cumulative 113.994252
+- **Raw availability:** [archive card](generator-step-20261003/archive.json); [raw resolver (LOCAL_ONLY)](generator-step-20261003/ARCHIVE.md)
+
+</details>
+
+Original GIF verdicts and added hold verdicts remain separate in each readout. Capacity uses zero optimizer updates and provides no learned PASS. UNKNOWN means unreached; engineering failures remain distinct from numerical FAIL.
+
+The historical intensity host uses residual16, seed 0 and enumeration of 32 rows without latent perturbation; the new intensity host uses transpose12, seed 24002 and 1024 public noise-off selected-policy draws with latent perturbation. These are different protocols. The C6 extension preserves only the original broad checkpoint's PASS/INCOMPLETE grades, not a full eight-case qualification.
+
+Costs are summed supervised child intervals, with conservative reserves separate. Generator cumulative 113.994252 seconds already includes critic 59.116680 seconds once. Historical Atlas19+holds 5248.642153 seconds is a disjoint study; these figures are not elapsed-time or FLOPs rankings. Raw archives remain LOCAL_ONLY; this projection does not hydrate or independently recertify them.
+
+
+[Exact C6 baseline and retained persistence diagnosis](c6-baseline-debug-20261003/README.md): two original smoke passes per family, six later domains UNKNOWN; the added broad hold fails on projected-CDF shape excursions. The source-bound diagnostic preserves all original gates and supplies no default or speed credit.

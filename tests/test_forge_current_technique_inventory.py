@@ -80,6 +80,102 @@ def _copy_word_diagnostics(root):
     return selection
 
 
+def _copy_completed_studies(root):
+    from experiments.forge.completed_studies import REGISTRY
+    registry = read_json(ROOT / REGISTRY)
+    paths = [REGISTRY]
+    for study in registry["studies"]:
+        paths += [study[role]["path"] for role in ("report", "archive", "readout", "archive_readout")]
+        paths += [pin["path"] for pin in study["media"]]
+    for relative in paths:
+        (root / relative).parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(ROOT / relative, root / relative)
+    return registry
+
+
+def test_completed_studies_cannot_replace_selected_configs_history_or_word_results(evidence):
+    root, manifest = evidence
+    selection = _copy_word_diagnostics(root)
+    families = []
+    for selected, source in zip(selection["recipes"], ("c", "d", "e")):
+        name = Path(selected["parent"]["path"]).stem
+        _register(root, manifest, name, source)
+        (root / f"configs/forge/ideas/{name}.json").unlink()
+        families.append({"id": selected["family"], "label": selected["family"],
+                         "canonical_candidate": name, "candidates": [name]})
+    atomic_json(root / "configs/forge/trainer-families.json", {"schema_version": 1, "families": families})
+    baseline = read_json(publication.publish_current(root)["json"])
+    assert "completed_api_studies" not in baseline
+    manifest = (root / publication.EVIDENCE_MANIFEST).read_bytes()
+    original_markdown = (root / "reports/forge/technique-inventory.md").read_text()
+    word_section = original_markdown.split("## Five-word joint task diagnostics", 1)[1]
+    word_section = word_section.split("No experiments were rerun for this publication.", 1)[0]
+    _copy_completed_studies(root)
+    published = publication.publish_current(root)
+    current = read_json(published["json"])
+    for key, value in baseline.items():
+        if key != "provenance":
+            assert current[key] == value
+    assert set(current) - set(baseline) == {"completed_api_studies"}
+    assert current["provenance"]["selected_rows_sha256"] == baseline["provenance"]["selected_rows_sha256"]
+    assert current["provenance"]["input_digest"] != baseline["provenance"]["input_digest"]
+    rows = current["completed_api_studies"]["rows"]
+    assert rows[0]["counts"] == {"PASS": 19}
+    assert rows[1]["counts"] == {"FAIL": 2}
+    assert all(row["qualification_input"] is row["reuse"] is False for row in rows)
+    assert all(row["counts"]["execution"] == {"FAIL": 2, "UNKNOWN": 14} for row in rows[2:])
+    markdown = Path(published["report"]).read_text()
+    assert word_section in markdown
+    assert "<summary>Selected configurations and provenance</summary>" in markdown
+    assert "19/19 original PASS" in markdown and "2/2 new hold FAIL" in markdown
+    assert "19/19 original PASS" in markdown.split("| Trainer family / runtime", 1)[0]
+    outputs = _outputs(root)
+    mtimes = {path: path.stat().st_mtime_ns for path in outputs}
+    assert publication.publish_current(root) == published
+    assert outputs == _outputs(root)
+    assert mtimes == {path: path.stat().st_mtime_ns for path in outputs}
+    assert (root / publication.EVIDENCE_MANIFEST).read_bytes() == manifest
+
+
+@pytest.mark.parametrize("role", ["report", "archive_readout", "gif"])
+def test_completed_study_input_drift_preserves_public_outputs_and_evidence(evidence, role):
+    root, _ = evidence
+    registry = _copy_completed_studies(root)
+    publication.publish_current(root)
+    before = _outputs(root)
+    manifest = (root / publication.EVIDENCE_MANIFEST).read_bytes()
+    study = registry["studies"][0]
+    pin = study["media"][0] if role == "gif" else study[role]
+    path = root / pin["path"]
+    path.write_bytes(path.read_bytes() + b"changed input")
+    with pytest.raises(ValueError, match="pinned input drift"):
+        publication.publish_current(root)
+    assert _outputs(root) == before
+    assert (root / publication.EVIDENCE_MANIFEST).read_bytes() == manifest
+
+
+def test_baseline_diagnosis_is_additive_bound_navigation(evidence):
+    root, _ = evidence
+    baseline = read_json(publication.publish_current(root)["json"])
+    relative = Path("reports/forge/c6-baseline-debug-20261003")
+    shutil.copytree(ROOT / relative, root / relative)
+    current = read_json(publication.publish_current(root)["json"])
+    for key, value in baseline.items():
+        if key != "provenance":
+            assert current[key] == value
+    assert set(current) - set(baseline) == {"baseline_debugging"}
+    debug = current["baseline_debugging"]
+    assert debug["qualification_input"] is debug["qualification_reuse"] is False
+    assert debug["files_sha256"] == {
+        path.relative_to(root).as_posix(): file_hash(path) for path in (root / relative).iterdir()
+    }
+    before = _outputs(root)
+    (root / relative / "BASELINE_SELECTION.json").unlink()
+    with pytest.raises(FileNotFoundError):
+        publication.publish_current(root)
+    assert _outputs(root) == before
+
+
 @pytest.mark.parametrize("tamper,match", [
     ("scope", "nonqualifying"), ("qualification_input", "nonqualifying"),
     ("receipt", "artifact identity"), ("recipe", "recipe identity"), ("omitted_recipe", "recipe identity"),

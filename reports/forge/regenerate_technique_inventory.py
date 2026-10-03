@@ -705,6 +705,12 @@ def _current_markdown(result, root, path):
                   f"with recorded required denominators **{denominators}**. "
                   "Current task placement is listed in [experiments by tier](EXPERIMENTS_BY_TIER.md). "
                   "The recorded outcomes supply no qualification for a later view revision.", ""]
+    if result.get("completed_api_studies"):
+        lines += ["Atlas's historical study has **19/19 original PASS**. The later C6 broad hold has "
+                  "**2/2 hold FAIL**, with six other domains UNKNOWN per family. "
+                  "See [completed source-bound studies](#completed-source-bound-studies) for the exact "
+                  "protocols and original goal GIFs. These separate results do not fill the ordinary "
+                  "qualification cells below.", ""]
     lines += [
              "Each cell is **passes / full required total** from one complete selected configuration. "
              "Each trainer family and runtime has one row; its alternatives remain recorded separately. "
@@ -819,6 +825,15 @@ def _current_markdown(result, root, path):
             lines.append(f"- `{row['candidate_id']}` ({row['trainer_family']}), source `{source[:12]}`; "
                          f"recorded tier {row.get('qualified_tier', 0)}. Full evidence is in the companion JSON.")
         lines.append("")
+    if result.get("completed_api_studies"):
+        from experiments.forge.completed_studies import render_completed_studies
+        lines += ["", render_completed_studies(result["completed_api_studies"], root, path), ""]
+    if result.get("baseline_debugging"):
+        link = os.path.relpath(root / result["baseline_debugging"]["readout"], path.parent)
+        lines += [f"[Exact C6 baseline and retained persistence diagnosis]({link}): "
+                  "two original smoke passes per family, six later domains UNKNOWN; "
+                  "the added broad hold fails on projected-CDF shape excursions. "
+                  "The source-bound diagnostic preserves all original gates and supplies no default or speed credit.", ""]
     return "\n".join(lines)
 
 
@@ -1045,11 +1060,32 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
         diagnostics = _word_task_diagnostics(root, execution_backend)
         if diagnostics:
             result["task_diagnostics"] = diagnostics
+    # Compact API studies retain their own gates, laws and full denominators.
+    # They are display evidence and never enter ordinary family selection.
+    from experiments.forge import completed_studies as completed_studies_projection
+    completed_studies = completed_studies_projection.load_completed_studies(root)
+    if completed_studies:
+        result["completed_api_studies"] = completed_studies
+    debug_root = root / "reports/forge/c6-baseline-debug-20261003"
+    if debug_root.is_dir():
+        debug_names = ("README.md", "BASELINE_SELECTION.md", "BASELINE_SELECTION.json",
+                       "RETAINED_HOLD_DEBUG.md", "retained-hold-debug.json",
+                       "analyze_retained_hold.py", "copy-verification.json")
+        result["baseline_debugging"] = {
+            "readout": (debug_root / "README.md").relative_to(root).as_posix(),
+            "files_sha256": {(debug_root / name).relative_to(root).as_posix(): file_hash(debug_root / name)
+                             for name in debug_names},
+            "qualification_input": False, "qualification_reuse": False,
+            "scope": "Exact original C6 baseline selection and retained-data causal diagnosis; no new qualification",
+        }
     result["provenance"] = {"publication_reducer_sha256": file_hash(Path(__file__)),
                             "evidence_manifest_sha256": stable_hash(manifest),
                             "trainer_family_registry_sha256": file_hash(root / "configs/forge/trainer-families.json")
                                 if (root / "configs/forge/trainer-families.json").is_file() else None,
                             "selected_rows_sha256": stable_hash(result["rows"])}
+    if completed_studies:
+        result["provenance"]["completed_studies_projector_sha256"] = file_hash(
+            Path(completed_studies_projection.__file__))
     result["provenance"]["input_digest"] = stable_hash(result)
     json_path, markdown_path = root / CURRENT_PREFIX.with_suffix(".json"), root / CURRENT_PREFIX.with_suffix(".md")
     markdown = _current_markdown(result, root, markdown_path)
