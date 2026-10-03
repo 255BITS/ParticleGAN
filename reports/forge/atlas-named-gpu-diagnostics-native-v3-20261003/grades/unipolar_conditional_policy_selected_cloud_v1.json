@@ -1,0 +1,79 @@
+{
+  "grades": {
+    "unipolar_conditional_policy_selected_cloud_v1": {
+      "evaluator_result": {
+        "attempted": true,
+        "confirmation_fraction": 0.375,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 150,
+          "first_pass_step": 84,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 20,
+          "passing_suffix": 20,
+          "stable_from_seconds": null,
+          "stable_from_step": 84
+        },
+        "metrics": [
+          {
+            "margin": 0.14697919657621983,
+            "metric": "cover",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.9969791965762198
+          },
+          {
+            "margin": 0.049211622918785274,
+            "metric": "off_caption",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.05,
+            "value": 0.0007883770812147324
+          },
+          {
+            "margin": 0.1308060880750418,
+            "metric": "neu_hold",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.9808060880750418
+          }
+        ],
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "cos_plus": 0.9984739422798157,
+        "cover": 0.9969791965762198,
+        "half_norm_ratio": 0.499030342930471,
+        "mag_ratio": 1.0014970302581787,
+        "neu_hold": 0.9808060880750418,
+        "off_caption": 0.0007883770812147324,
+        "step": 400
+      },
+      "reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "status": "PASS"
+    }
+  },
+  "raw_hash": "b19c6c5966048dbc10985f9973b2e548a74e718100880ae44d0b0b8227bf1e53",
+  "schema_version": 1,
+  "source_digest": "87fcd4e28bdcd9f347379b7db1fbcf0af3edcc0fbd5e97e4a98d9a49f8987a87",
+  "telemetry": {
+    "independent_grading_seconds": 0.8792249830439687,
+    "memory": {
+      "cpu_scope": "this process lifetime, including imports",
+      "cuda_peak_allocated_bytes": null,
+      "cuda_peak_reserved_bytes": null,
+      "cuda_scope": "PyTorch allocator since probe reset; excludes other processes and non-PyTorch allocations",
+      "process_peak_rss_bytes": 665186304
+    },
+    "scope": "Independent CPU evaluator process, including evaluator artifact reads."
+  }
+}
