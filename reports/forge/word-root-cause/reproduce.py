@@ -29,7 +29,7 @@ from experiments.forge.word_adapter import run_word, word_context
 
 PROTOCOL_PATH = Path(__file__).with_name("round1-protocol.json")
 ALLOWED = {"lr", "d_lr_mult", "prior_lr_mult", "input_noise_std", "output_noise_std",
-           "network_lr_horizon_cap"}
+           "network_lr_horizon_cap", "reg_coeff", "reg_kappa"}
 
 
 def prepare(protocol, arm, device):

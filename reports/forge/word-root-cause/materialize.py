@@ -22,7 +22,7 @@ def write(path, value):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--round", type=int, choices=(1, 2), required=True)
+    parser.add_argument("--round", type=int, choices=(1, 2, 3), required=True)
     parser.add_argument("--runs", type=Path, required=True)
     args = parser.parse_args()
     protocol_path = HERE / f"round{args.round}-protocol.json"
