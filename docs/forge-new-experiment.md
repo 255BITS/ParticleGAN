@@ -21,7 +21,7 @@ Two worked examples show the process:
 | --- | --- | --- |
 | The question, target, host or measurement protocol | Task in `configs/forge/tasks/` | Acquire sixteen Gaussian clusters within 400 updates |
 | The proposed solution or complete training configuration | Idea in `configs/forge/ideas/` | A substantive formulation change evaluated on existing tasks |
-| Which tasks support a claim, their tiers and required/diagnostic roles | View in `configs/forge/views/` | An opt-in acquisition view with provisional Tier 1 placement |
+| Which tasks support a claim, their tiers and required/diagnostic roles | Existing view in `configs/forge/views/` | Add ordinary acquisition tasks to Tier 1 of `discriminator_stability` |
 
 `python -m experiments.forge new` scaffolds a schema-v2 idea with a draft
 [hypothesis-to-decision contract](forge-decision-contract.md). It cannot enter
@@ -101,16 +101,28 @@ target and protocol. Do not inherit execution settings invisibly at runtime.
 
 Required tiers in an ordinary view must be contiguous from Tier 1. A Tier 2
 task therefore needs meaningful required Tier 1 prerequisites. Existing failed,
-blocked or missing prerequisites stop higher-tier work. Diagnostics use their
-declared role and cannot supply ordinary qualification by bypassing a gate.
+blocked or missing prerequisites stop remaining tasks in that tier and
+higher-tier work. Diagnostics use their declared role and cannot supply ordinary
+qualification by bypassing a gate.
 
-Use a new opt-in provisional view when adding a question would change an existing
-frozen qualification or search denominator. Initial placement is a hypothesis.
-Scientific placement needs independent positive/negative references, false
+For an ordinary new question, add the task as required Tier 1 in the existing
+`discriminator_stability` view and increment its revision. Both worked acquisition
+examples follow this policy: `ring16_acquisition` and
+`five_word_joint_acquisition` are required Tier 1 tasks in revision 3, with a
+5/19/2 denominator. Create a new view only for an explicitly different claim or
+diagnostic scope, such as clock-free eligibility or architecture transfer.
+Keeping an existing denominator unchanged is not sufficient reason for a new
+view. Saved campaign requests, calibration/search contracts and recorded revision-2
+3/19/2 results retain their original task sets and evidence identities.
+
+Initial placement remains a hypothesis, even for a successful source example.
+Scientific adoption needs independent positive/negative references, false
 rejection/acceptance and cost measurements under a preregistered compute cap.
-Oracle controls or a single fast run do not calibrate a tier. A later tier change
-gets a new view revision; changed budgets, gates or sampling laws need a new
-protocol identity with the original evidence preserved.
+Oracle controls or a single fast run do not calibrate a tier. Check the expanded
+reservation budget: these five Tier 1 tasks total 2,100 seconds, so the historical
+900-second smoke campaign is insufficient. A later tier change gets a new view
+revision; changed task budgets, gates or sampling laws need a new protocol
+identity with the original evidence preserved.
 
 ## 5. Validate, inspect cost, then freeze
 
@@ -119,13 +131,15 @@ dependencies as well as the training dependencies before the bounded run.
 
 ```sh
 python -m experiments.forge validate
-python -m experiments.forge plan k3p --view ring16_acquisition \
+python -m experiments.forge plan k3p --view discriminator_stability \
   --through-tier 1 --device cpu
 ```
 
 Both commands are read-only. The plan shows blockers, compatible reuse,
 prerequisites and worst-case reserved cost; it launches no training. This example
-plans the ring task for an existing candidate and does not authorize executing it.
+plans all five required Tier 1 tasks for an existing candidate and does not
+authorize executing them. Inspect every task's compatibility and the full
+reservation ceiling before choosing a campaign.
 
 For a new v2 idea, plan its final view, tier and compute cohort after the actual
 formulation change. Inspect `decision_contract.actual_bindings` and `expected`,

@@ -1,10 +1,10 @@
 # Sixteen Gaussian clusters: acquisition
 
-[Current tier report](../../../forge/EXPERIMENTS_BY_TIER.md#experiment-ring16-acquisition) · [Forge task](../../../../configs/forge/tasks/ring16_acquisition.json) · [Dedicated provisional view](../../../../configs/forge/views/ring16_acquisition.json)
+[Current tier report](../../../forge/EXPERIMENTS_BY_TIER.md#experiment-ring16-acquisition) · [Forge task](../../../../configs/forge/tasks/ring16_acquisition.json) · [Main qualification view](../../../../configs/forge/views/discriminator_stability.json)
 
 This new retained question asks whether training from scratch acquires all 16 equally weighted 2D Gaussian clusters within a small fixed budget. The means are `3(cos(2πk/16), sin(2πk/16))`, k = 0,…,15; each covariance is `0.01I`. Adjacent centers are about 11.7 Gaussian standard deviations apart. Acquisition is separate from extended retention or target adaptation.
 
-The user chose an initial **Tier 1** placement. This is a provisional research placement, with its own view; it is not a calibrated speed/rejection conclusion. The existing eight-mode `mode_hold` task, frozen screening views, historical qualification and the current release leaderboard keep their original identities and denominators.
+The user chose an initial **Tier 1** placement in the main `discriminator_stability` view. Revision 3 requires this task and `five_word_joint_acquisition` alongside the three existing behavior checks, giving a 5/19/2 denominator. Placement remains provisional until calibration establishes rejection/cost performance. The existing eight-mode `mode_hold` task and historical revision-2 3/19/2 qualification retain their original identities and results.
 
 ## Preregistered protocol
 
@@ -49,7 +49,7 @@ The terminal checkpoints contained 15, 16, 16, 16 and 16 meaningful modes at upd
 
 This does not rerate the eight-mode `mode_hold` result: it changes mode count, sigma, acquisition budget and the standalone API initializer/RNG cohort. Nor does the low observed cost establish Tier 1 calibration; there is still no independently qualified positive reference or rejection/cost comparison for this task.
 
-**Recommendation:** keep this provisional acquisition question and its honest negative result. Before changing its tier or promoting it into a shared release view, preregister a bounded independent reference/cost study. Stop this exact failed training cohort; any subsequent solution change needs a substantive hypothesis and a new evidence identity. No 0.9.0 solution is selected or qualified by this demonstration.
+**Recommendation:** keep this provisional Tier 1 acquisition question in the main view and its honest negative result. Before scientific adoption of the expanded screen, preregister a bounded independent reference/cost study. Stop this exact failed training cohort; any subsequent solution change needs a substantive hypothesis and a new evidence identity. No 0.9.0 solution is selected or qualified by this demonstration.
 
 [Compact numerical/recipe/provenance publication](publication.json) · [Actual-training GIF](goal.gif)
 

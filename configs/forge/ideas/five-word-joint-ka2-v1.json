@@ -2,7 +2,7 @@
   "schema_version": 1,
   "id": "five-word-joint-ka2-v1",
   "parent": "ka2",
-  "goal": "five_word_joint",
+  "goal": "discriminator_stability",
   "hypothesis": "The source-shaped KA2 joint BiGAN recipe can acquire balanced confident word modes and the paired inverse mapping under explicitly bound clean/live, named-stream Forge execution.",
   "changed_factors": [
     "retained finite-word G/E/joint-D host",

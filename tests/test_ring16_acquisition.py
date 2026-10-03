@@ -39,7 +39,7 @@ def test_target_and_destructive_controls_validate_acquisition_bounds():
     assert not rows["nonfinite"]["passed"]
 
 
-def test_declaration_is_shared_and_new_view_preserves_original_mode_hold():
+def test_shared_declaration_is_required_smoke_and_preserves_original_mode_hold():
     tasks = load_tasks(ROOT)
     task = tasks["ring16_acquisition"]
     case = list_cases()[0]
@@ -49,14 +49,12 @@ def test_declaration_is_shared_and_new_view_preserves_original_mode_hold():
     assert means.shape == (16, 2)
     assert torch.allclose(means.norm(dim=1), torch.full((16,), 3.))
     assert case["law"]["masses"] == [1/16]*16
-    view = load_view(ROOT, "ring16_acquisition")
+    view = load_view(ROOT, "discriminator_stability")
     assert view["calibration"]["status"] == "provisional"
-    assert view["assignments"] == [dict(task="ring16_acquisition", qualification_tier=1,
-                                        importance="required", order=0)]
-    original = load_view(ROOT, "discriminator_stability")
-    assert original["revision"] == 2
-    assert len(original["assignments"]) == 24
-    assert next(a for a in original["assignments"] if a["task"] == "mode_hold")["qualification_tier"] == 2
+    assert next(a for a in view["assignments"] if a["task"] == "ring16_acquisition") == dict(
+        task="ring16_acquisition", qualification_tier=1, importance="required", order=3)
+    assert next(a for a in view["assignments"] if a["task"] == "mode_hold")["qualification_tier"] == 2
+    assert task["resources"]["timeout_seconds"] == 300
     candidate = json.loads((ROOT / "configs/forge/ideas/k3p.json").read_text())
     assert adapter_preflight(task, candidate) == []
 

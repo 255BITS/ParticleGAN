@@ -158,12 +158,16 @@ def test_standalone_word_fixture_retains_its_public_recipe_and_seed_offsets():
     assert torch.equal(fixture.policy.latent_generator.get_state(), torch.Generator().manual_seed(24004).get_state())
 
 
-def test_new_view_preserves_existing_meaningful_smoke_prerequisites():
-    view = load_view(ROOT, "five_word_joint")
+def test_joint_acquisition_is_required_smoke_after_existing_prerequisites():
+    view = load_view(ROOT, "discriminator_stability")
     tier1 = [row["task"] for row in view["assignments"] if row["qualification_tier"] == 1]
-    assert tier1 == ["two_pole", "unused_token_hold", "ae_gan_hold"]
-    assert view["assignments"][-1] == {"task": "five_word_joint_acquisition", "qualification_tier": 2,
-                                       "importance": "required", "order": 0}
+    assert tier1[:3] == ["two_pole", "unused_token_hold", "ae_gan_hold"]
+    assert next(row for row in view["assignments"] if row["task"] == "five_word_joint_acquisition") == {
+        "task": "five_word_joint_acquisition", "qualification_tier": 1, "importance": "required", "order": 4}
+    task = load_tasks(ROOT)["five_word_joint_acquisition"]
+    assert task["execution"]["steps"] == 20001
+    assert task["execution"]["original_schedule_horizon"] == 20000
+    assert task["resources"]["timeout_seconds"] == 900
 
 
 def test_report_joins_word_example_through_its_explicit_retained_question():

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "id": "discriminator_stability",
-  "revision": 3,
+  "revision": 2,
   "goal": "discriminator_stability",
   "assignments": [
     {
@@ -21,18 +21,6 @@
       "qualification_tier": 1,
       "importance": "required",
       "order": 2
-    },
-    {
-      "task": "ring16_acquisition",
-      "qualification_tier": 1,
-      "importance": "required",
-      "order": 3
-    },
-    {
-      "task": "five_word_joint_acquisition",
-      "qualification_tier": 1,
-      "importance": "required",
-      "order": 4
     },
     {
       "task": "trajectory",
@@ -164,12 +152,12 @@
   "eligibility": {},
   "calibration": {
     "status": "provisional",
-    "adoption_blocker": "Expanded five-task Tier 1 placement is provisional and requires a new bounded calibration; prior three-task profiles and revision 2 published qualification retain their original scope."
+    "adoption_blocker": "Phase D historical calibration remains required"
   },
   "ranking": {
     "policy": "qualified_tier_only_with_raw_metrics",
     "compare_compatible_cohorts": true,
     "cost_separate": true
   },
-  "policy_change_reason": "Correct acquisition task registration by user decision: ring16_acquisition and five_word_joint_acquisition are required Tier 1 tasks in the existing main view. Placement remains provisional; task gates, budgets and saved evidence retain their original identities."
+  "policy_change_reason": "Make existing tier-only ordering explicit; metric ranking needs separately predeclared metrics and directions."
 }
