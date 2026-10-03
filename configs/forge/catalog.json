@@ -7236,7 +7236,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "0debaac4630125f90c262b571a0941b662d03009",
+      "git_blob": "e90abe26de693498095dd105cbe3382bd8de29e6",
       "path": "experiments/forge/knowledge.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -7383,7 +7383,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "366ccf3a3914e12c354baf28c9e6eec4823d54a6",
+      "git_blob": "4754d17f796337e0cf13419940d5bd0d5db146bc",
       "path": "experiments/forge/tier_report.py",
       "role": "engine_support",
       "suggested_tiers": []

@@ -187,6 +187,19 @@ def test_calibration_diagnostic_view_preserves_scope_and_qualification_limits(in
     assert "no ordinary qualification" in document.lower()
 
 
+def test_declaration_pointer_does_not_claim_measured_candidate_outcomes(inventory):
+    from experiments.forge.knowledge import DECLARATION_ONLY_BOARD
+    path = inventory / "reports/forge/leaderboards/stability.md"
+    path.parent.mkdir(parents=True)
+    path.write_text(f"# stability\n\n{DECLARATION_ONLY_BOARD}\n\nNo scientific results.\n")
+    document = render_markdown(build_report(inventory), inventory)
+    assert "Declaration only:" in document
+    assert "no published candidate outcomes, metrics or measured costs" in document
+    assert "Candidate outcomes, metrics and measured costs:" not in document
+    path.write_text("# stability\n\nPublished scientific outcome table.\n")
+    assert "Candidate outcomes, metrics and measured costs:" in render_markdown(build_report(inventory), inventory)
+
+
 def test_task_source_links_follow_renamed_declarations(inventory):
     original = inventory / "configs/forge/tasks/smoke.json"
     original.rename(original.with_name("renamed_smoke.json"))

@@ -15,6 +15,7 @@ import re
 from .contracts import atomic_json, atomic_text, file_hash, file_lock, identifier, read_json, stable_hash
 
 REDUCER_VERSION = "forge-knowledge-v2"
+DECLARATION_ONLY_BOARD = "<!-- forge: declaration-only; no measured outcomes -->"
 
 
 def _json_output(path: Path, value) -> None:
@@ -586,9 +587,11 @@ def compile_memory(root: Path, *, summaries_only: bool = False) -> dict:
             boards.append(result)
             if summaries_only:
                 markdown_path = leaderboard_path(root, path.stem)
-                if not (root / markdown_path).exists():
+                published_path = root / markdown_path
+                legacy_pointer = f"# {path.stem}\n\nThis view has no previously published goal table. "
+                if not published_path.exists() or published_path.read_text().startswith(legacy_pointer):
                     _text_output(root / markdown_path,
-                                 f"# {path.stem}\n\nThis view has no previously published goal table. "
+                                 f"# {path.stem}\n\n{DECLARATION_ONLY_BOARD}\n\nThis view has no previously published goal table. "
                                  "The compact memory refresh records its declaration without replaying original receipts. "
                                  f"Inspect `forge board --goal {path.stem} --json` with compatible original evidence "
                                  "before making a qualification claim.\n")
