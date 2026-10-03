@@ -112,8 +112,13 @@ def require_fields(value: dict, fields, label: str) -> None:
 
 def validate_idea(idea: dict) -> None:
     require_fields(idea, ("schema_version", "id", "hypothesis", "changed_factors", "goal", "mechanism_class"), "idea")
-    if idea["schema_version"] != SCHEMA_VERSION:
+    if type(idea["schema_version"]) is not int or idea["schema_version"] not in (1, 2):
         raise ValueError("unsupported idea schema_version")
+    if idea["schema_version"] == 2 and "decision_contract" not in idea:
+        raise ValueError("v2 ideas require a decision_contract; use forge new to create the draft scaffold")
+    if "decision_contract" in idea:
+        from .decision_contracts import validate_shape
+        validate_shape(idea["decision_contract"])
     identifier(idea["id"], "idea id")
     identifier(idea["goal"], "goal")
     if not isinstance(idea["hypothesis"], str) or not idea["hypothesis"].strip():

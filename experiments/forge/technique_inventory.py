@@ -125,6 +125,10 @@ def enqueue_inventory(root: Path, queue_root: Path, *, view_id="discriminator_st
     queue = queue or Queue(queue_root, report_root=root / "reports/forge")
     if queue.root != queue_root:
         raise ValueError("inventory queue_root differs from the supplied Queue")
+    if queue.report_root is None:
+        queue.report_root = root / "reports/forge"
+    elif queue.report_root.parent.parent != root:
+        raise ValueError("inventory Queue report_root differs from its research repository")
     requests, summary = _prepare(root, queue_root, view_id=view_id, through_tier=through_tier,
                                  execution_backend=execution_backend, cuda_model=cuda_model,
                                  campaign=campaign, queue=queue)
