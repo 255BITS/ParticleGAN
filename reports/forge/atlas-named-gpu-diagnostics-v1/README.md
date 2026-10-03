@@ -1,6 +1,6 @@
 # Eight named Atlas GPU host diagnostics
 
-This is one finite diagnostic declaration, with the fixed shared Atlas pair
+This is one corrected-source successor (`atlas-named-hosts-current-gpu-diagnostics-v3`), with the fixed shared Atlas pair
 `lr=.0053125`, `prior_lr_mult=1.5` and seed `0`. It preserves the original
 targets, objectives, gates and full horizons. Each actual named family retains
 its own complete 26-question view with Tier 1/2/3 denominators **5/19/2**.
@@ -24,6 +24,28 @@ disabled controls or extra sweep are permitted. Completed numerical `FAIL`
 continues the diagnostic lane. Invalid source/contract/runtime/checkpoint/media
 or interrupted execution halts its lane and retains `INVALID`/`INCOMPLETE`
 and all unreached `NOT_RUN` cells.
+
+These are **inclusive lane ceilings**. The two original pre-update INVALID
+attempts remain unchanged and debit GPU0 `12.873334385920316` seconds and GPU1
+`12.449620655039325` seconds, with zero reserve. The exact
+[original failure summary](../atlas-named-gpu-diagnostics-invalid-20261003/summary.json)
+(`7fee64a4…`) and its old source and durable terminal proofs are frozen inputs.
+Initial remaining paid capacity is GPU0 `7487.12666561408` and GPU1
+`2987.5503793449607` seconds; together `10474.67704495904` seconds.
+The unadmitted native-v2 preparation supplies no cost or scientific credit.
+
+Before **each job**, historical lane debit + verified completed predecessor
+families' charged costs + current family charged spend + the unchanged full
+job allowance must fit that physical lane. The separate family cap must also
+fit. Family caps stay 7200/300/300/1800/900; a debit is not subtracted from an
+unrelated 300-second family cap. Another lane cannot supply spare capacity.
+Predecessor study/source/grade/media and durable cost pins must verify in the
+exact lane order. Missing, interrupted or unfinished predecessor records
+refuse downstream admission. Current paid, interruption reserve, historical
+debit and inclusive lane charge remain separate in state and human readouts.
+Measured teardown overruns are durably retained as `BUDGET_EXCEEDED` and halt;
+they never reset the ceiling or admit a later job. No old failure supplies a
+current outcome. This authorization permits one successor and no retry sweep.
 
 The generic planner uses the inherited Atlas `public_trainer` reference
 context to resolve **metadata only**. Every adapted task overrides execution

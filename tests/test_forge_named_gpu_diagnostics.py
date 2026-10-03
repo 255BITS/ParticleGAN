@@ -66,6 +66,7 @@ def packet_for(spec):
     return {"schema": diagnostic.SCHEMA, "spec": deepcopy(spec), "spec_sha256": diagnostic.digest(spec), "source": source,
             "execution_source": source, "requests": requests, "runtime_contract": requests["atlas_conditional"]["runtime"],
             "case_definitions": diagnostic.case_definitions(requests, spec),
+            "engineering_carryover": diagnostic.engineering_carryover(spec, ROOT),
             "family_paid_budget_seconds": {f: v["cap"] for f, v in diagnostic.FAMILIES.items()}}
 
 
@@ -175,7 +176,7 @@ def test_unsafe_lane_has_no_admission(spec, text):
 
 
 def result_row(state, job, tmp_path, status="COMPLETE", grade="FAIL", terminal_status="completed"):
-    terminal = dump(tmp_path / (job["task_id"] + ".json"), {"token": job["task_id"], "attempt_status": terminal_status, "paid_wall_seconds": 1.})
+    terminal = dump(tmp_path / (job["task_id"] + ".json"), {"token": job["task_id"], "attempt_status": terminal_status, "paid_wall_seconds": 1., "child_returncode": 0 if status == "COMPLETE" else 1})
     result = {"compatibility_key": job["compatibility_key"], "task_ids": job["task_ids"], "token": job["task_id"],
               "status": status, "terminal": diagnostic.pin(terminal), **diagnostic.legacy().charge(1., diagnostic.read(terminal), job["budget_seconds"])}
     if status == "COMPLETE": result["outcome"] = {"statuses": {job["task_id"]: grade}, "qualification_input": False}
@@ -184,6 +185,7 @@ def result_row(state, job, tmp_path, status="COMPLETE", grade="FAIL", terminal_s
     state["measured_paid_seconds"] += result["paid_wall_seconds"]
     state["unmeasured_interrupt_reserved_seconds"] += result["unmeasured_interrupt_reserved_seconds"]
     state["spent_seconds"] = state["measured_paid_seconds"] + state["unmeasured_interrupt_reserved_seconds"]
+    state["lane_accounting"] = diagnostic.lane_accounting(state, require_ready=True)
     return result
 
 
@@ -319,6 +321,7 @@ def test_durable_timeout_teardown_overshoot_is_saved_and_never_reset(spec, tmp_p
     path = dump(Path(row["terminal"]["path"]), terminal)
     row.update(terminal=diagnostic.pin(path), **diagnostic.legacy().charge(301., terminal, 300))
     state.update(measured_paid_seconds=301., unmeasured_interrupt_reserved_seconds=0., spent_seconds=301.)
+    state["lane_accounting"] = diagnostic.lane_accounting(state, require_ready=True)
     with pytest.raises(ValueError, match="BUDGET_EXCEEDED"): diagnostic.verify_state(state)
     output = tmp_path / "archive"; output.mkdir()
     diagnostic.save_state(output, state)
@@ -362,3 +365,125 @@ def test_recorded_signed_media_has_one_full_range_and_literal_original_badge(spe
         assert view["target"][0, 0] == -3. and view["samples"][0, 0] == index
         assert "signed values are preserved" in view["caption"]
     assert {p: diagnostic.file_hash(p) for p in paths} == before
+
+
+def completed_predecessor(spec, family, tmp_path, *, paid_each=1., predecessor_paths=()):
+    """Private metadata/terminal fixtures, not scientific evidence."""
+    packet = diagnostic.family_packet(packet_for(spec), family, predecessor_paths)
+    state = diagnostic.initial_state(packet); folder = tmp_path / family; folder.mkdir(exist_ok=True)
+    for job in diagnostic.executable_jobs(packet):
+        row = result_row(state, job, folder, grade="FAIL")
+        terminal_path = Path(row["terminal"]["path"]); terminal = diagnostic.read(terminal_path); terminal["paid_wall_seconds"] = paid_each
+        dump(terminal_path, terminal)
+        row.update(terminal=diagnostic.pin(terminal_path), **diagnostic.legacy().charge(paid_each, terminal, job["budget_seconds"]))
+        attempt = folder / job["task_id"]; attempt.mkdir()
+        raw = {"private_software_fixture": True}
+        resolved = {"packet": packet, "packet_sha256": diagnostic.digest(packet), "request": state["request"], "job": job, "worker": {"token": row["token"]}}
+        grade = {"raw_hash": diagnostic.digest(raw), "source_digest": state["source"]["digest"], "grades": {job["task_id"]: {"gate_status": "FAIL"}}}
+        gif = attempt / "goal.gif"; gif.write_bytes(b"private retained software media")
+        media = {"family": family, "task": job["task_id"], "source_digest": state["source"]["digest"], "original_gate": "FAIL", "qualification_input": False, "gif": diagnostic.pin(gif), "inputs": []}
+        row["outcome"].update(resolved=diagnostic.pin(dump(attempt / "resolved.json", resolved)), raw=diagnostic.pin(dump(attempt / "raw.json", raw)),
+                              grading=diagnostic.pin(dump(attempt / "grade.json", grade)), media={job["task_id"]: {"receipt": diagnostic.pin(dump(attempt / "media.json", media)), "gif": diagnostic.pin(gif)}})
+    state["status"] = "COMPLETE_DIAGNOSTIC"
+    diagnostic.save_state(folder, state)
+    return folder / "study.json"
+
+
+def test_old_engineering_reference_preserves_cost_only_and_fixed_family_caps(spec):
+    proof = diagnostic.engineering_carryover(spec, ROOT)
+    assert proof["reference"]["paid_seconds_by_lane"] == {"0": 12.873334385920316, "1": 12.449620655039325}
+    assert [row["status"] for row in proof["attempts"]] == ["INVALID", "INVALID"]
+    assert proof["qualification_input"] is False
+    assert [diagnostic.FAMILIES[f]["cap"] for f in diagnostic.FAMILIES] == [7200, 300, 300, 1800, 900]
+
+
+@pytest.mark.parametrize("change", ["missing", "reset", "swapped", "summary", "source", "credit", "repeat"])
+def test_carryover_cannot_reset_change_or_supply_science(spec, change):
+    if change == "missing": spec.pop("engineering_carryover")
+    elif change == "reset": spec["engineering_carryover"]["paid_seconds_by_lane"]["0"] = 0.
+    elif change == "swapped": spec["engineering_carryover"]["paid_seconds_by_lane"] = dict(reversed(list(diagnostic.PRIOR_DEBITS.items()))) | {"0": diagnostic.PRIOR_DEBITS["1"], "1": diagnostic.PRIOR_DEBITS["0"]}
+    elif change == "summary": spec["engineering_carryover"]["summary"]["sha256"] = "0" * 64
+    elif change == "source": spec["engineering_carryover"]["source"]["digest"] = "0" * 64
+    elif change == "credit": spec["engineering_carryover"]["qualification_input"] = True
+    else: spec["engineering_carryover"]["authorized_successors"] = 2
+    with pytest.raises(ValueError): diagnostic.validate_spec(spec)
+
+
+def test_four_full_conditional_charges_refuse_ae_without_reducing_its_300_cap(spec, tmp_path):
+    prior = completed_predecessor(spec, "atlas_conditional", tmp_path, paid_each=1800.)
+    packet = diagnostic.family_packet(packet_for(spec), "atlas_ae_routed", [("atlas_conditional", prior)])
+    state = diagnostic.initial_state(packet); job = diagnostic.selected_jobs(packet)[0]
+    assert job["budget_seconds"] == diagnostic.FAMILIES["atlas_ae_routed"]["cap"] == 300
+    assert state["lane_accounting"]["predecessor_charged_seconds"] == 7200
+    assert state["lane_accounting"]["inclusive_lane_charged_seconds"] == 7200 + diagnostic.PRIOR_DEBITS["0"]
+    assert not diagnostic.full_allowance_fits(state, job)
+    assert not state["jobs"] and state["spent_seconds"] == 0.
+
+
+def test_cheap_conditional_completion_admits_original_full_ae_allowance(spec, tmp_path):
+    prior = completed_predecessor(spec, "atlas_conditional", tmp_path, paid_each=1.)
+    packet = diagnostic.family_packet(packet_for(spec), "atlas_ae_routed", [("atlas_conditional", prior)])
+    state = diagnostic.initial_state(packet)
+    assert diagnostic.full_allowance_fits(state, diagnostic.selected_jobs(packet)[0])
+    assert state["lane_accounting"]["historical_engineering_debit_seconds"] == diagnostic.PRIOR_DEBITS["0"]
+    assert state["lane_accounting"]["predecessor_paid_seconds"] == 4.
+
+
+def test_unused_and_cover_full_charges_refuse_word_without_borrowing_gpu0(spec, tmp_path):
+    unused = completed_predecessor(spec, "atlas_routed", tmp_path, paid_each=300.)
+    cover = completed_predecessor(spec, "atlas_multibank", tmp_path, paid_each=1800., predecessor_paths=[("atlas_routed", unused)])
+    packet = diagnostic.family_packet(packet_for(spec), "atlas_word_joint_min11", [("atlas_routed", unused), ("atlas_multibank", cover)])
+    state = diagnostic.initial_state(packet)
+    assert state["lane_accounting"]["predecessor_charged_seconds"] == 2100.
+    assert not diagnostic.full_allowance_fits(state, diagnostic.selected_jobs(packet)[0])
+    assert state["lane_accounting"]["lane_cap_seconds"] == 3000
+
+
+@pytest.mark.parametrize("change", ["missing", "foreign_family", "duplicate", "source", "unfinished", "unrecorded_terminal", "cost", "gate", "bytes"])
+def test_lane_prefix_forgery_stale_cost_and_unrecorded_crash_refuse_admission(spec, tmp_path, change):
+    prior = completed_predecessor(spec, "atlas_conditional", tmp_path)
+    paths = [("atlas_conditional", prior)]
+    if change == "missing": paths = []
+    elif change == "foreign_family": paths = [("atlas_routed", prior)]
+    elif change == "duplicate": paths *= 2
+    elif change == "bytes":
+        packet = diagnostic.family_packet(packet_for(spec), "atlas_ae_routed", paths)
+        prior.write_text(prior.read_text() + " ")
+        with pytest.raises(ValueError): diagnostic.lane_accounting(packet, require_ready=True)
+        return
+    else:
+        state = diagnostic.read(prior)
+        if change == "source": state["source"]["digest"] = "b" * 64
+        elif change == "unfinished": state["status"] = "RUNNING"
+        elif change == "unrecorded_terminal":
+            # Durable terminal exists, but completion is not yet recorded.
+            state["jobs"].pop(); state["status"] = "RUNNING"
+        elif change == "cost":
+            for row in state["jobs"]: row.update(paid_wall_seconds=0., charged_seconds=0.)
+            state.update(spent_seconds=0., measured_paid_seconds=0.)
+        elif change == "gate":
+            row = state["jobs"][0]; name = row["task_ids"][0]; row["outcome"]["statuses"][name] = "PASS"; state["slots"][name]["diagnostic_status"] = "PASS"
+        dump(prior, state)
+    packet = diagnostic.family_packet(packet_for(spec), "atlas_ae_routed", paths)
+    with pytest.raises(ValueError): diagnostic.lane_accounting(packet, require_ready=True)
+
+
+def test_inclusive_ledger_and_debit_cannot_be_reset_on_resume(spec, tmp_path):
+    state = diagnostic.initial_state(diagnostic.family_packet(packet_for(spec), "atlas_conditional"))
+    result_row(state, diagnostic.selected_jobs(state)[0], tmp_path)
+    diagnostic.verify_state(state)
+    state["lane_accounting"]["historical_engineering_debit_seconds"] = 0.
+    state["lane_accounting"]["inclusive_lane_charged_seconds"] = state["spent_seconds"]
+    with pytest.raises(ValueError, match="lane"): diagnostic.verify_state(state)
+
+
+def test_missing_supervisor_reservation_remains_charged_once_and_halts_lane(spec, tmp_path):
+    state = diagnostic.initial_state(diagnostic.family_packet(packet_for(spec), "atlas_routed"))
+    job = diagnostic.selected_jobs(state)[0]
+    row = {"compatibility_key": job["compatibility_key"], "task_ids": job["task_ids"], "token": "private-software-attempt", "status": "INCOMPLETE", **diagnostic.legacy().charge(0., None, 300)}
+    state["jobs"].append(row); state["slots"][job["task_id"]]["diagnostic_status"] = "INCOMPLETE"; state["status"] = "INCOMPLETE"
+    folder = tmp_path / "atlas_routed"; folder.mkdir(); diagnostic.save_state(folder, state)
+    assert state["measured_paid_seconds"] == 0. and state["unmeasured_interrupt_reserved_seconds"] == state["spent_seconds"] == 300.
+    assert state["lane_accounting"]["inclusive_lane_charged_seconds"] == 300. + diagnostic.PRIOR_DEBITS["1"]
+    packet = diagnostic.family_packet(packet_for(spec), "atlas_multibank", [("atlas_routed", folder / "study.json")])
+    with pytest.raises(ValueError, match="unfinished"): diagnostic.lane_accounting(packet, require_ready=True)

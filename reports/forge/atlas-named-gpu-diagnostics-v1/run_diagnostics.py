@@ -26,6 +26,13 @@ SCHEMA = "particlegan_atlas_named_gpu_diagnostics_v1"
 OVERRIDES = {"lr": .0053125, "prior_lr_mult": 1.5}
 ORDINARY_DECLARATION = "configs/forge/ideas/atlas-c6-observed-policy-current-v1.json"
 LEGACY_ADMISSION_BLOCKER = "new v1 declaration is not immutable legacy evidence; use a v2 decision_contract"
+PRIOR_SUMMARY = "reports/forge/atlas-named-gpu-diagnostics-invalid-20261003/summary.json"
+PRIOR_SOURCE = {"commit": "aee59bea7f1a629d71052fbb010d930650a4ed26",
+                "digest": "73b00a75863383e4038a3731c8213a7fb072971712a05aab79efa181a93c0280"}
+PRIOR_DEBITS = {"0": 12.873334385920316, "1": 12.449620655039325}
+ENGINEERING_REFERENCE = {"summary": {"path": PRIOR_SUMMARY, "sha256": "7fee64a49aa56b2cec25ffcf4861eccd91ba6886fd33f9e95565dce1b701cfd7", "bytes": 235580},
+                         "source": PRIOR_SOURCE, "paid_seconds_by_lane": PRIOR_DEBITS,
+                         "reserved_seconds": 0., "qualification_input": False, "authorized_successors": 1}
 FLAGS = ("qualification_input", "ordinary_tier_credit", "calibration_credit",
          "default_adoption", "cross_cohort_pooling", "speed_ranking")
 ENVIRONMENT = {"CUDA_DEVICE_ORDER": "PCI_BUS_ID", "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
@@ -102,14 +109,14 @@ def active_rows(spec, family):
 
 
 def validate_spec(spec, root=None):
-    fixed = {"schema": SCHEMA, "id": "atlas-named-hosts-current-gpu-diagnostics-v1",
+    fixed = {"schema": SCHEMA, "id": "atlas-named-hosts-current-gpu-diagnostics-v3",
              "view": "discriminator_stability", "recipe_preset": "atlas", "recipe_overrides": OVERRIDES,
              "seed": 0, "cuda_model": "NVIDIA RTX A6000", "required_slots_per_family": 26,
              "families": list(FAMILIES), "executable_slots": 8, "executable_jobs": 8,
              "diagnostic_cap_seconds": 10500, "lane_cap_seconds": {"0": 7500, "1": 3000},
              "full_view_tiers": {"1": 5, "2": 19, "3": 2}, "frames": 9, "export_grace_seconds": 0,
              "failure_policy": "continue_completed_numerical_FAIL_halt_invalid_lane_no_retry",
-             "evidence_use": "named_policy_host_diagnostic",
+             "evidence_use": "named_policy_host_diagnostic", "engineering_carryover": ENGINEERING_REFERENCE,
              "resources": {"host_memory_mb": 2048, "cpu_threads": 1, "minimum_free_gpu_memory_mib": 12288,
                            "maximum_gpu_temperature_c": 82, "memory_fraction": .2}}
     if any(canonical(spec.get(k)) != canonical(v) for k, v in fixed.items()) or any(spec.get(k) is not False for k in FLAGS):
@@ -147,6 +154,55 @@ def validate_spec(spec, root=None):
                     or task["evaluation"]["observations"] != 24 or task["evaluation"]["minimum_stable_checks"] != 5):
                 raise ValueError("actual named task law/gates/cadence/resources differ")
     return spec
+
+
+def engineering_carryover(spec, root, *, durable=False):
+    """Old INVALID receipts supply cost only, never current task outcomes."""
+    if canonical(spec.get("engineering_carryover")) != canonical(ENGINEERING_REFERENCE):
+        raise ValueError("the exact old engineering debit/source cannot reset or change")
+    path = Path(root) / PRIOR_SUMMARY; summary_pin = ENGINEERING_REFERENCE["summary"]
+    if path.is_symlink() or file_hash(path) != summary_pin["sha256"] or path.stat().st_size != summary_pin["bytes"]:
+        raise ValueError("old engineering publication missing or changed")
+    prior = read(path)
+    if (prior.get("status") != "INVALID" or prior["source"].get("origin_commit") != PRIOR_SOURCE["commit"]
+            or prior["source"].get("digest") != PRIOR_SOURCE["digest"]
+            or prior.get("qualification_input") is not False or prior["counts"].get("completed_updates") != 0
+            or prior["counts"].get("all_planned_family_cells") != {"INVALID": 2, "NOT_RUN": 128}
+            or prior["cost"].get("reserved_seconds") != 0. or len(prior["attempts"]) != 2):
+        raise ValueError("old engineering attribution changed")
+    records = []
+    for item, (physical, family) in zip(prior["attempts"], (("0", "atlas_conditional"), ("1", "atlas_routed"))):
+        expected_cost = PRIOR_DEBITS[physical]
+        if (item.get("family") != family or item.get("physical_gpu") != physical or item.get("status") != "INVALID"
+                or item.get("scientific_gate") != "UNAVAILABLE" or item.get("completed_updates") != 0
+                or item.get("observations") != 0 or item.get("goal_gifs") != 0
+                or item.get("supervisor_status") != "completed" or item.get("child_returncode") != 1
+                or any(item["cost"].get(key) != value for key, value in
+                       (("paid_seconds", expected_cost), ("charged_seconds", expected_cost), ("reserved_seconds", 0.)))):
+            raise ValueError("old attempts supply only the two exact measured engineering debits")
+        if durable:
+            for artifact in item["artifacts"].values():
+                check_pin(artifact)
+            terminal = read(check_pin(item["artifacts"]["terminal"]))
+            supervisor = read(check_pin(item["artifacts"]["supervisor_request"]))
+            old_state = read(check_pin(item["artifacts"]["study"]))
+            old_row = old_state["jobs"][0]
+            if (hashlib.sha256(terminal["token"].encode()).hexdigest() != item["token_sha256"]
+                    or supervisor["token"] != terminal["token"] or old_row["token"] != terminal["token"]
+                    or supervisor["source"].get("digest") != PRIOR_SOURCE["digest"]
+                    or supervisor["source"].get("origin_commit") != PRIOR_SOURCE["commit"]
+                    or terminal.get("attempt_status") != "completed" or terminal.get("child_returncode") != 1
+                    or terminal.get("paid_wall_seconds") != expected_cost
+                    or old_state.get("status") != "INVALID" or old_row.get("status") != "INVALID"
+                    or old_row.get("outcome") is not None or old_row.get("charged_seconds") != expected_cost
+                    or old_row.get("unmeasured_interrupt_reserved_seconds") != 0.):
+                raise ValueError("old durable terminal/source/cost proof changed")
+        records.append({"physical_gpu": physical, "family": family, "status": "INVALID",
+                        "paid_seconds": expected_cost, "reserved_seconds": 0.,
+                        "artifacts": deepcopy(item["artifacts"]), "qualification_input": False})
+    if prior["cost"].get("paid_seconds") != sum(PRIOR_DEBITS.values()):
+        raise ValueError("old aggregate debit differs from the two durable measurements")
+    return {"reference": deepcopy(ENGINEERING_REFERENCE), "attempts": records, "qualification_input": False}
 
 
 def declaration(root, spec, family):
@@ -234,7 +290,7 @@ def build_requests(root, spec, source=None):
                 declaration=declaration(root, spec, family), view_id=spec["view"], through_tier=1,
                 freeze_source=False, execution_backend="cuda", cuda_model=spec["cuda_model"]) for family in FAMILIES}
     if source is None:
-        extras = {SELF, DELEGATE, DIRECTORY + "/protocol.json", DIRECTORY + "/README.md"}
+        extras = {SELF, DELEGATE, DIRECTORY + "/protocol.json", DIRECTORY + "/README.md", PRIOR_SUMMARY}
         extras.update(str(p.relative_to(root)) for p in (Path(root) / "configs/forge").rglob("*.json"))
         for request in requests.values():
             extras.update(request["source"]["files"])
@@ -285,7 +341,8 @@ def prepare(spec_path, output):
     packet = {"schema": SCHEMA, "spec": {**spec, "representation_card": pin(card_path)}, "spec_sha256": digest(spec),
               "requests": requests, "source": source, "execution_source": source, "capacity_preflight": card,
               "case_definitions": case_definitions(requests, spec), "runtime_contract": runtimes[0],
-              "family_paid_budget_seconds": {family: info["cap"] for family, info in FAMILIES.items()}}
+              "family_paid_budget_seconds": {family: info["cap"] for family, info in FAMILIES.items()},
+              "engineering_carryover": engineering_carryover(spec, ROOT, durable=True)}
     path = preparation_path(output)
     if path.exists() and read(path) != packet:
         raise ValueError("preserve previous preparation/source; declare a new output")
@@ -305,6 +362,9 @@ def verify_packet(packet):
     forge("sources").verify_snapshot(snapshot, source)
     if read(snapshot / "forge-source.json") != {k: v for k, v in source.items() if k != "snapshot_path"}:
         raise ValueError("snapshot metadata changed")
+    if (source["files"].get(PRIOR_SUMMARY) != ENGINEERING_REFERENCE["summary"]["sha256"]
+            or packet.get("engineering_carryover") != engineering_carryover(spec, snapshot, durable=True)):
+        raise ValueError("frozen engineering debit/artifacts/source changed")
     requests, _ = build_requests(snapshot, spec, source)
     if canonical(requests) != canonical(packet["requests"]):
         raise ValueError("candidate/task/Recipe/runtime/compatibility reconstruction changed")
@@ -318,12 +378,13 @@ def verify_packet(packet):
     return spec
 
 
-def family_packet(packet, family):
+def family_packet(packet, family, predecessor_paths=()):
     if family not in FAMILIES:
         raise ValueError("unknown named family")
     result = deepcopy(packet)
     result.update(family=family, request=deepcopy(packet["requests"][family]),
-                  lane_runtime=lane_runtime(packet["requests"][family], FAMILIES[family]["gpu"]))
+                  lane_runtime=lane_runtime(packet["requests"][family], FAMILIES[family]["gpu"]),
+                  lane_predecessors=[{"family": name, "study": pin(path)} for name, path in predecessor_paths])
     return result
 
 
@@ -368,6 +429,81 @@ def executable_jobs(packet):
             if not packet["request"]["tasks"][job["task_id"]].get("preflight_blockers")]
 
 
+def prior_lane_families(family):
+    names = [name for name, info in FAMILIES.items() if info["gpu"] == FAMILIES[family]["gpu"]]
+    return names[:names.index(family)]
+
+
+def verify_predecessor_outcome(state, row, job):
+    """Read certified artifacts/grades only; never replay or rescore a model."""
+    outcome = row["outcome"]
+    resolved = read(check_pin(outcome["resolved"]))
+    raw = read(check_pin(outcome["raw"])); grade = read(check_pin(outcome["grading"]))
+    packet = resolved["packet"]
+    if (resolved.get("packet_sha256") != digest(packet) or packet.get("source") != state["source"]
+            or packet.get("family") != state["family"] or packet.get("lane_predecessors") != state.get("lane_predecessors")
+            or resolved.get("request") != state["request"] or resolved.get("job") != job
+            or resolved.get("worker", {}).get("token") != row["token"]
+            or grade.get("raw_hash") != digest(raw) or grade.get("source_digest") != state["source"]["digest"]
+            or set(grade.get("grades", {})) != set(job["task_ids"])
+            or {name: value.get("gate_status") for name, value in grade["grades"].items()} != outcome["statuses"]
+            or set(outcome.get("media", {})) != set(job["task_ids"])):
+        raise ValueError("predecessor original grade/source/task attribution changed")
+    for name, media in outcome["media"].items():
+        receipt = read(check_pin(media["receipt"])); check_pin(media["gif"])
+        if (receipt.get("family") != state["family"] or receipt.get("task") != name
+                or receipt.get("source_digest") != state["source"]["digest"]
+                or receipt.get("original_gate") != outcome["statuses"][name]
+                or receipt.get("qualification_input") is not False or receipt.get("gif") != media["gif"]):
+            raise ValueError("predecessor media/original verdict changed")
+        for item in receipt.get("inputs", []):
+            check_pin(item)
+
+
+def lane_accounting(state, *, require_ready=False):
+    family = state["family"]; physical = FAMILIES[family]["gpu"]
+    if (canonical(state["spec"].get("engineering_carryover")) != canonical(ENGINEERING_REFERENCE)
+            or state.get("engineering_carryover", {}).get("reference") != ENGINEERING_REFERENCE):
+        raise ValueError("historical lane engineering debit cannot disappear or reset")
+    required = prior_lane_families(family); refs = state.get("lane_predecessors", [])
+    names = [item.get("family") for item in refs]
+    if names != required[:len(names)] or (require_ready and names != required):
+        raise ValueError("admission requires exactly the complete predecessor-family lane prefix")
+    paid = reserved = 0.
+    for item in refs:
+        predecessor = read(check_pin(item["study"]))
+        name = item["family"]
+        if (predecessor.get("family") != name or predecessor.get("status") != "COMPLETE_DIAGNOSTIC"
+                or predecessor.get("source") != state["source"] or predecessor.get("execution_source") != state["execution_source"]
+                or predecessor.get("spec_sha256") != state["spec_sha256"] or predecessor.get("spec") != state["spec"]
+                or predecessor.get("engineering_carryover") != state["engineering_carryover"]
+                or predecessor.get("request") != state["requests"][name]
+                or predecessor.get("requests") != state["requests"]
+                or predecessor.get("lane_runtime") != lane_runtime(state["requests"][name], physical)):
+            raise ValueError("foreign, stale or unfinished predecessor cannot supply lane costs")
+        verify_state(predecessor)
+        for row, job in zip(predecessor["jobs"], executable_jobs(predecessor)):
+            terminal = read(check_pin(row["terminal"]))
+            if row.get("status") != "COMPLETE" or terminal.get("child_returncode") != 0:
+                raise ValueError("predecessor did not complete with its original numerical grade")
+            verify_predecessor_outcome(predecessor, row, job)
+        paid += predecessor["measured_paid_seconds"]
+        reserved += predecessor["unmeasured_interrupt_reserved_seconds"]
+    charged = legacy().number(state.get("spent_seconds", 0.), "current family charged")
+    return {"physical_gpu": physical, "lane_cap_seconds": state["spec"]["lane_cap_seconds"][physical],
+            "historical_engineering_debit_seconds": PRIOR_DEBITS[physical],
+            "predecessor_paid_seconds": paid, "predecessor_reserved_seconds": reserved,
+            "predecessor_charged_seconds": paid + reserved, "current_family_charged_seconds": charged,
+            "inclusive_lane_charged_seconds": PRIOR_DEBITS[physical] + paid + reserved + charged,
+            "all_predecessor_families_complete": names == required, "qualification_input": False}
+
+
+def full_allowance_fits(state, job):
+    ledger = lane_accounting(state, require_ready=True)
+    return (state["spent_seconds"] + job["budget_seconds"] <= FAMILIES[state["family"]]["cap"]
+            and ledger["inclusive_lane_charged_seconds"] + job["budget_seconds"] <= ledger["lane_cap_seconds"])
+
+
 def initial_state(packet):
     state = deepcopy(packet); family = packet["family"]
     active = {r["id"] for r in active_rows(packet["spec"], family)}
@@ -380,6 +516,7 @@ def initial_state(packet):
             "preflight_blockers": blockers, "qualification_input": False}
     state["historical_original_word"] = {"prior_rows": 5, "status": "BLOCKED", "execution_credit": False,
         "claim": "Original N5 cannot enable all public row owners; min11 is a distinct declared resource/joint-code law."}
+    state["lane_accounting"] = lane_accounting(state)
     return state
 
 
@@ -389,10 +526,13 @@ def verify_state(state):
     executable = [j for j in allowed if not expected[j["task_id"]]["preflight_blockers"]]
     if len(state["jobs"]) > len(executable):
         raise ValueError("extra/duplicate named job")
+    ledger = lane_accounting(state, require_ready=bool(state["jobs"]))
     paid = reserved = 0.; halted = False
     for index, row in enumerate(state["jobs"]):
         job = executable[index]
-        if paid + reserved + job["budget_seconds"] > FAMILIES[family]["cap"]:
+        if (paid + reserved + job["budget_seconds"] > FAMILIES[family]["cap"]
+                or ledger["historical_engineering_debit_seconds"] + ledger["predecessor_charged_seconds"]
+                   + paid + reserved + job["budget_seconds"] > ledger["lane_cap_seconds"]):
             raise ValueError("the full original allowance was unavailable before this attempt")
         if halted or row.get("compatibility_key") != job["compatibility_key"] or row.get("task_ids") != job["task_ids"]:
             raise ValueError("each family executes an uninterrupted prefix of its own declared questions")
@@ -430,7 +570,9 @@ def verify_state(state):
     for key, value in (("measured_paid_seconds", paid), ("unmeasured_interrupt_reserved_seconds", reserved), ("spent_seconds", paid + reserved)):
         if not math.isclose(legacy().number(state.get(key), key), value, rel_tol=0, abs_tol=1e-8):
             raise ValueError("study totals do not match durable charged costs")
-    overrun = paid + reserved > FAMILIES[family]["cap"]
+    if state.get("lane_accounting") != ledger:
+        raise ValueError("inclusive lane/current paid/reserve/engineering ledger changed")
+    overrun = paid + reserved > FAMILIES[family]["cap"] or ledger["inclusive_lane_charged_seconds"] > ledger["lane_cap_seconds"]
     if (state.get("family_paid_budget_seconds") != {f: info["cap"] for f, info in FAMILIES.items()}
             or state.get("qualification_input") is not False or state.get("default_adoption") is not False
             or state.get("ordinary_qualified_tier") != 0):
@@ -630,11 +772,14 @@ def save_state(output, state):
     state["measured_paid_seconds"] = sum(r["paid_wall_seconds"] for r in state["jobs"])
     state["unmeasured_interrupt_reserved_seconds"] = sum(r["unmeasured_interrupt_reserved_seconds"] for r in state["jobs"])
     state["spent_seconds"] = state["measured_paid_seconds"] + state["unmeasured_interrupt_reserved_seconds"]
-    if state["spent_seconds"] > FAMILIES[state["family"]]["cap"]:
+    state["lane_accounting"] = lane_accounting(state, require_ready=bool(state["jobs"]))
+    if (state["spent_seconds"] > FAMILIES[state["family"]]["cap"]
+            or state["lane_accounting"]["inclusive_lane_charged_seconds"] > state["lane_accounting"]["lane_cap_seconds"]):
         state.update(status="BUDGET_EXCEEDED", stop_reason="Durable measured supervisor overrun retained; no further admission or budget reset.")
     verify_state(state); write(Path(output) / "study.json", state)
     lines = ["# " + state["family"] + " GPU diagnostic", "", "All 26 required questions remain visible. Only this family's named adapted subset is executed; no ordinary/default/speed credit.", "",
              f"Measured paid {state['measured_paid_seconds']:.6f}s; reserve {state['unmeasured_interrupt_reserved_seconds']:.6f}s; charged {state['spent_seconds']:.6f}/{FAMILIES[state['family']]['cap']}s.", "",
+             f"Historical engineering debit {state['lane_accounting']['historical_engineering_debit_seconds']:.15g}s; completed predecessor families charged {state['lane_accounting']['predecessor_charged_seconds']:.15g}s; inclusive GPU{state['lane_accounting']['physical_gpu']} charge {state['lane_accounting']['inclusive_lane_charged_seconds']:.15g}/{state['lane_accounting']['lane_cap_seconds']}s. No earlier outcome supplies current qualification credit.", "",
              "| Actual question | Tier | Original diagnostic gate | Goal GIF |", "|---|---:|---|---|"]
     for assignment in state["request"]["view"]["assignments"]:
         name = assignment["task"]; media = ""
@@ -655,10 +800,11 @@ def run_family(output, packet, queue_root):
     output = Path(output).resolve(); verify_packet(packet); family = packet["family"]
     physical = FAMILIES[family]["gpu"]; runtime = lane_runtime(packet["request"], physical)
     state = read(output / "study.json") if (output / "study.json").exists() else initial_state(packet)
-    for key in ("spec", "spec_sha256", "source", "execution_source", "request", "requests", "family", "case_definitions", "runtime_contract", "family_paid_budget_seconds", "lane_runtime"):
+    for key in ("spec", "spec_sha256", "source", "execution_source", "request", "requests", "family", "case_definitions", "runtime_contract", "family_paid_budget_seconds", "lane_runtime", "engineering_carryover", "lane_predecessors"):
         if state.get(key) != packet.get(key):
             raise ValueError("resume source/family/quota/runtime changed")
     verify_state(state)
+    lane_accounting(state, require_ready=True)
     if state["status"] == "BUDGET_EXCEEDED":
         return state
     for row in state["jobs"]:
@@ -676,8 +822,8 @@ def run_family(output, packet, queue_root):
         if study_lease is None:
             raise RuntimeError("another owner holds this exact family study")
         for job in executable_jobs(packet)[len(state["jobs"]):]:
-            if state["spent_seconds"] + job["budget_seconds"] > FAMILIES[family]["cap"]:
-                state.update(status="INCOMPLETE", stop_reason="next full allowance cannot fit"); break
+            if not full_allowance_fits(state, job):
+                state.update(status="INCOMPLETE", stop_reason="next full allowance cannot fit the unchanged family and inclusive lane ceilings"); break
             telemetry = gpu_readiness(packet["spec"], physical)
             row = {"id": job["task_id"], "timeout_seconds": job["budget_seconds"]}
             attempt = coordinator.attempt_key(packet, {"family": family, "recipe_overrides": OVERRIDES}, row)
@@ -739,15 +885,17 @@ def run_family(output, packet, queue_root):
 
 def run_lane(output, queue_root, physical):
     packet = read(preparation_path(output)); verify_packet(packet)
-    summaries = []
+    summaries = []; predecessors = []
     for family, info in FAMILIES.items():
         if info["gpu"] != physical:
             continue
-        state = run_family(Path(output) / family, family_packet(packet, family), queue_root)
+        state = run_family(Path(output) / family, family_packet(packet, family, predecessors), queue_root)
         summaries.append({"family": family, "status": state["status"], "paid_seconds": state["measured_paid_seconds"],
-                          "reserved_seconds": state["unmeasured_interrupt_reserved_seconds"], "qualification_input": False})
+                          "reserved_seconds": state["unmeasured_interrupt_reserved_seconds"],
+                          "lane_accounting": state["lane_accounting"], "qualification_input": False})
         if state["status"] != "COMPLETE_DIAGNOSTIC":
             break  # Infrastructure/invalid evidence stops the physical lane.
+        predecessors.append((family, Path(output) / family / "study.json"))
     return summaries
 
 

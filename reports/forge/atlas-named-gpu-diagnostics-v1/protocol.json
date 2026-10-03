@@ -111,6 +111,24 @@
   "cuda_model": "NVIDIA RTX A6000",
   "default_adoption": false,
   "diagnostic_cap_seconds": 10500,
+  "engineering_carryover": {
+    "authorized_successors": 1,
+    "paid_seconds_by_lane": {
+      "0": 12.873334385920316,
+      "1": 12.449620655039325
+    },
+    "qualification_input": false,
+    "reserved_seconds": 0.0,
+    "source": {
+      "commit": "aee59bea7f1a629d71052fbb010d930650a4ed26",
+      "digest": "73b00a75863383e4038a3731c8213a7fb072971712a05aab79efa181a93c0280"
+    },
+    "summary": {
+      "bytes": 235580,
+      "path": "reports/forge/atlas-named-gpu-diagnostics-invalid-20261003/summary.json",
+      "sha256": "7fee64a49aa56b2cec25ffcf4861eccd91ba6886fd33f9e95565dce1b701cfd7"
+    }
+  },
   "evidence_use": "named_policy_host_diagnostic",
   "executable_jobs": 8,
   "executable_slots": 8,
@@ -129,7 +147,7 @@
     "2": 19,
     "3": 2
   },
-  "id": "atlas-named-hosts-current-gpu-diagnostics-v1",
+  "id": "atlas-named-hosts-current-gpu-diagnostics-v3",
   "lane_cap_seconds": {
     "0": 7500,
     "1": 3000
