@@ -36,9 +36,9 @@ its own bounded declaration and source freeze.
 
 ```sh
 # Preparation/contract inspection only; no enqueue or training.
-python reports/forge/family-wide-word-repairs/prepare.py
+/usr/bin/python reports/forge/family-wide-word-repairs/prepare.py
 # Execute only after the complete shared source freeze and audited READY plans.
-python -m experiments.forge --queue-root runs/forge/family-wide-word-repairs-v1/queue run k3p-global-repair-v1 --through-tier 3 --device cuda --gpus 0 --campaign configs/forge/campaigns/family-wide-word-repairs-v1.json
+/usr/bin/python -m experiments.forge --queue-root runs/forge/family-wide-word-repairs-v1/queue run k3p-global-repair-v1 --through-tier 3 --device cuda --gpus 0 --campaign configs/forge/campaigns/family-wide-word-repairs-v1.json
 tail -F runs/forge/family-wide-word-repairs-v1/worker.log
 python -m experiments.forge --queue-root runs/forge/family-wide-word-repairs-v1/queue logs --follow --campaign family-wide-word-repairs-v1
 ```
@@ -50,6 +50,10 @@ API observations and explicit target/gate bounds, including the first failures.
 The [renderer](render.py) records exact input hashes, frame updates and thresholds;
 it performs no optimizer updates or sampling draws. Existing native distribution
 tasks already save their actual evaluated output snapshots if reached.
+Preparation and workers both use `/usr/bin/python`, CPython 3.14.7 and the same
+declared package manifest. The repository `.venv` Python 3.12 environment is used
+only for software tests and post-training rendering, with no optimizer updates
+or new sampling draws; its identity is recorded separately in media receipts.
 
 All family-row evidence must come from one complete candidate and source/runtime
 cohort. The [single current leaderboard](../technique-inventory.md) retains each

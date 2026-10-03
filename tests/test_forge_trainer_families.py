@@ -307,6 +307,21 @@ def test_current_pin_does_not_change_recorded_policy_selection(study):
     assert select(study, view_policy=recorded)["rows"][0]["candidate_id"] == study[4]["selection"]["selected_candidate_id"]
 
 
+def test_generic_family_selection_filters_mixed_rows_by_requested_backend(study):
+    rows = study[1]
+    gpu = deepcopy(rows[-1])
+    gpu["runtime_cohort"] = {"execution_backend": "cuda", "compute_profiles": {"cuda": {"model": "gpu-a"}}}
+    rows.append(gpu)
+    current_pin(study, rows[0])
+    cpu = select(study, execution_backend="cpu")
+    assert len(cpu["rows"]) == 1 and len(cpu["configuration_rows"]) == 5
+    assert all(row["runtime_cohort"]["execution_backend"] == "cpu" for row in cpu["configuration_rows"])
+    assert cpu["rows"][0]["candidate_id"] == rows[0]["candidate_id"]
+    cuda = select(study, execution_backend="cuda")
+    assert len(cuda["rows"]) == len(cuda["configuration_rows"]) == 1
+    assert cuda["rows"][0]["runtime_cohort"]["execution_backend"] == "cuda"
+
+
 def test_current_only_task_history_membership_preserves_recorded_family_identity():
     assert families.family_for_candidate(ROOT, "five-word-joint-ka2-v1", current_presentation=True)["id"] == "ka2"
     assert families.family_for_candidate(ROOT, "five-word-joint-ka2-v1")["id"] == "five-word-joint-ka2-v1"

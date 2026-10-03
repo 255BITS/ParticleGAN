@@ -329,6 +329,9 @@ def select_family_rows(root: Path | str, rows: list[dict], catalogs: dict, *, vi
                     if view_policy is None else {})
     grouped, families, variants = {}, {}, []
     for original in rows:
+        if (execution_backend is not None
+                and original.get("runtime_cohort", {}).get("execution_backend") != execution_backend):
+            continue
         row = deepcopy(original)
         family = family_for_candidate(root, row["candidate_id"], declarations.get(row["candidate_id"]),
                                       current_presentation=view_policy is None)

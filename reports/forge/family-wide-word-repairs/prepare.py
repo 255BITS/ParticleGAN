@@ -76,6 +76,7 @@ def main():
     assert len({plan["source_digest"] for plan in plans}) == 1, "Shared execution source changed during preparation"
     write(ROOT / "reports/forge/family-wide-word-repairs/plans.json", {
         "schema_version": 1, "scope": "ordinary_global_family_candidates",
+        "scientific_python_executable": sys.executable,
         "view": "discriminator_stability", "through_tier": 3, "candidates": plans,
         "candidate_reservation_seconds": 48900, "campaign_reservation_seconds": 146700,
         "actual_total_grouped_job_reservation_seconds": sum(p["grouped_job_reservation_seconds"] for p in plans),

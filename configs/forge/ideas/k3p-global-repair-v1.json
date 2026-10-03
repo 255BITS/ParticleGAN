@@ -75,11 +75,11 @@
       "campaign_budget_seconds": 146700,
       "candidate_budget_seconds": 48900,
       "execution_backend": "cuda",
-      "jobs_sha256": "e1abe6f1ad91c359cbfb67d461b4b44a5a7bed0b8698f884762de757602d645f",
+      "jobs_sha256": "588651109a700f31eaf01ff129e4381526458dcfcb0874e70c7e106f2a4bf903",
       "max_rounds": 1,
       "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
       "runtime_cohort_sha256": "e2f4acc3bb6543576475ece1bb0bce5b973eca2ed1852b13d096ec9145277c71",
-      "source_digest": "b878216385fbb28233f44fd3c600f0940e713cd258a8f69dccff7bce4d6cd92a",
+      "source_digest": "2aea8c53d1871625ff47b58a9a24c6259b46e4647669ad42d34bc4366a42508f",
       "task_ids": [
         "ae_gan_hold",
         "cover_leftover",

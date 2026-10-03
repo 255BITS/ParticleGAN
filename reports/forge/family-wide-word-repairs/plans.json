@@ -5,7 +5,7 @@
   "candidates": [
     {
       "candidate": "k3p-global-repair-v1",
-      "candidate_revision": "3e4a91c1d063c97f9f92b65700cbb0f06834300b31f9769c456b494d5c76d234",
+      "candidate_revision": "9bc3da4de808300aaa74effda23f1114910ce2c819bda3fcd579bb8b6d5f5e8e",
       "compute_profiles": {
         "cpu": {
           "backend": "cpu",
@@ -94,8 +94,8 @@
         "table_release_rule": "any"
       },
       "grouped_job_reservation_seconds": 45300,
-      "idea_sha256": "1024a75626c25fe736bb644197d73f5c5cc0747beacdd85b0ffa59c3172821db",
-      "preparation_checkout_commit": "53f2d423d662fb2ae52312215fda11826219174c",
+      "idea_sha256": "492c1fb8551098d022e5e4d95deb8d4e4dc8d42699cfd2d0e6c164ea45c22ead",
+      "preparation_checkout_commit": "f72dae1fd8911b23ef346e26fae5533782d059ea",
       "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
       "runtime": {
         "implementation": "CPython",
@@ -108,7 +108,7 @@
         "python": "3.14.7",
         "system": "Linux"
       },
-      "source_digest": "b878216385fbb28233f44fd3c600f0940e713cd258a8f69dccff7bce4d6cd92a",
+      "source_digest": "2aea8c53d1871625ff47b58a9a24c6259b46e4647669ad42d34bc4366a42508f",
       "tasks": [
         {
           "blockers": [],
@@ -480,7 +480,7 @@
     },
     {
       "candidate": "ka2-global-repair-v1",
-      "candidate_revision": "ac27b1eb3fa930ffb53636351883d4e8c3d068044d95b00cbcefc5ea033c36c9",
+      "candidate_revision": "71a50b7b10fdc6307c92b781224e73625f670377ffeb4a31b9f3abe4b34be108",
       "compute_profiles": {
         "cpu": {
           "backend": "cpu",
@@ -569,8 +569,8 @@
         "table_release_rule": "any"
       },
       "grouped_job_reservation_seconds": 45300,
-      "idea_sha256": "da6bbd36f87752f1e195931f2b38e169db30bf10f6f428fb0caae26fdc31e874",
-      "preparation_checkout_commit": "53f2d423d662fb2ae52312215fda11826219174c",
+      "idea_sha256": "c2cbdbfcb068c16b637b33a385889b847905bdc3f4507b879cfe1e0bb61f01ab",
+      "preparation_checkout_commit": "f72dae1fd8911b23ef346e26fae5533782d059ea",
       "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
       "runtime": {
         "implementation": "CPython",
@@ -583,7 +583,7 @@
         "python": "3.14.7",
         "system": "Linux"
       },
-      "source_digest": "b878216385fbb28233f44fd3c600f0940e713cd258a8f69dccff7bce4d6cd92a",
+      "source_digest": "2aea8c53d1871625ff47b58a9a24c6259b46e4647669ad42d34bc4366a42508f",
       "tasks": [
         {
           "blockers": [],
@@ -955,7 +955,7 @@
     },
     {
       "candidate": "r1r2-global-repair-v1",
-      "candidate_revision": "cb3e47ae7da1f71b6636e4273a29a1e6cff01a3214e92a463df05007ea067bcb",
+      "candidate_revision": "5a20a41ac1b78983611d3cfd765d572c436f93fa5b00ace5dba9934c288e4107",
       "compute_profiles": {
         "cpu": {
           "backend": "cpu",
@@ -1044,8 +1044,8 @@
         "table_release_rule": "any"
       },
       "grouped_job_reservation_seconds": 45300,
-      "idea_sha256": "66cb9fafe171ab258859056224e45e517f1b67bce7682740474af020133a9cd1",
-      "preparation_checkout_commit": "53f2d423d662fb2ae52312215fda11826219174c",
+      "idea_sha256": "85af1689b8c2e33f5462b7787c5305452ccdc3841a79ae5de025322521039add",
+      "preparation_checkout_commit": "f72dae1fd8911b23ef346e26fae5533782d059ea",
       "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
       "runtime": {
         "implementation": "CPython",
@@ -1058,7 +1058,7 @@
         "python": "3.14.7",
         "system": "Linux"
       },
-      "source_digest": "b878216385fbb28233f44fd3c600f0940e713cd258a8f69dccff7bce4d6cd92a",
+      "source_digest": "2aea8c53d1871625ff47b58a9a24c6259b46e4647669ad42d34bc4366a42508f",
       "tasks": [
         {
           "blockers": [],
@@ -1432,6 +1432,7 @@
   "decision": "Evaluate each whole global candidate under ordinary ordered prerequisites. Preserve every gated later cell as unmeasured; no per-task recipe selection, tuning, or automatic continuation.",
   "old_task_only_word_receipts_reused_for_qualification": 0,
   "schema_version": 1,
+  "scientific_python_executable": "/usr/bin/python",
   "scope": "ordinary_global_family_candidates",
   "through_tier": 3,
   "view": "discriminator_stability"
