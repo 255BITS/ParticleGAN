@@ -29,6 +29,23 @@ from .telemetry import PhaseTimer, normalize_adapter_costs
 from .taskrecipes import bind_task_candidate
 
 
+def _policy_task(task):
+    return task.get("execution", {}).get("policy_contract") is not None
+
+
+def _policy_word_blocker(task):
+    return (f"{task['id']}: the joint (word,E(word))/(G(z),z) game has no declared "
+            "ordered policy ownership, independent-row birth/death geometry and selected conditional "
+            "serving adapter; a separate public routed joint contract is required")
+
+
+def _checkpoint_digest(task, state):
+    if _policy_task(task):
+        from .policy_adapters import typed_state_digest
+        return typed_state_digest(state)
+    return state_digest(state)
+
+
 def _event(event, **values):
     print(json.dumps({"event": event, **values}, sort_keys=True, allow_nan=False), flush=True)
 
@@ -50,6 +67,8 @@ def adapter_preflight(task, candidate, *, root=None):
         return [str(error)]
     adapter = task["adapter"]
     if adapter == "word_joint":
+        if _policy_task(task):
+            return [_policy_word_blocker(task)]
         from .word_adapter import word_preflight
         return word_preflight(task, candidate, root=root)
     supported = {"transfer_behavior", "transfer_vector", "transfer_image", "native100",
@@ -60,7 +79,10 @@ def adapter_preflight(task, candidate, *, root=None):
     if policy_blockers:
         return policy_blockers
     if adapter == "transfer_behavior" and task["execution"].get("host") != "mode_hold":
-        from .behavior_adapters import behavior_preflight
+        if _policy_task(task):
+            from .policy_behavior_adapters import behavior_preflight
+        else:
+            from .behavior_adapters import behavior_preflight
         blockers = behavior_preflight(task, candidate)
         if blockers:
             return blockers
@@ -138,6 +160,13 @@ class _Run:
         self.finite = True
         self.rng_audits = []
         self.last_update = {}
+        self.policy_audit = None
+        self.policy_purity = []
+        self.policy_observations = []
+        self.retained_draws = []
+        if _policy_task(task):
+            from .policy_adapters import PolicyLifecycleAudit
+            self.policy_audit = PolicyLifecycleAudit(trainer.policy)
         self.mechanism_audit = MechanismAudit(context.recipe, trainer.opt_d, [trainer.opt_g])
         self.timing = PhaseTimer(synchronize=(lambda: torch.cuda.synchronize(context.device))
                                 if context.device.type == "cuda" else None)
@@ -164,6 +193,10 @@ class _Run:
             raise FloatingPointError("nonfinite public training loss")
 
     def evaluate(self, function):
+        policy_before = None
+        if self.policy_audit is not None:
+            from .policy_adapters import evaluation_state, typed_state_digest
+            policy_before = typed_state_digest(evaluation_state(self.context.state_dict()))
         before = self.context.streams.audit()
         cpu = torch.get_rng_state().clone()
         cuda = torch.cuda.get_rng_state(self.context.device).clone() if self.context.device.type == "cuda" else None
@@ -180,6 +213,17 @@ class _Run:
             audit["unintended_rng_deviations"] += 1
             audit["unintended_streams"].append("global_cuda")
         self.rng_audits.append(audit)
+        if policy_before is not None:
+            policy_after = typed_state_digest(evaluation_state(self.context.state_dict()))
+            pure = policy_after == policy_before
+            self.policy_purity.append({"completed_steps": self.trainer.completed_steps,
+                "before_sha256": policy_before, "after_sha256": policy_after,
+                "digest_kind": "typed_policy_state_v1", "pure": pure,
+                "allowed_changes": "independent named evaluation RNG streams only"})
+            if not pure:
+                raise RuntimeError("policy observation changed training/controller/serving state")
+            from .policy_adapters import observation_receipt
+            self.policy_observations.append(observation_receipt(self.task, self.trainer.policy))
         self.finite = self.finite and _finite_tree(result)
         return result
 
@@ -187,10 +231,32 @@ class _Run:
         stream = self.context.streams.generator("eval", component="ema" if ema else "live", purpose="samples")
         return self.trainer.sample(n, ema=ema, generator=stream)
 
+    def retain_draw(self, step, samples, *, target=None):
+        """Store the actual scored draw; observation adds no sample or forward."""
+        if self.policy_audit is None:
+            return
+        directory = self.output / "policy-artifacts" / "observations"
+        directory.mkdir(parents=True, exist_ok=True)
+        values = {"samples": samples.detach().cpu().numpy()}
+        if target is not None:
+            values["target"] = target.detach().cpu().numpy()
+        path = directory / f"step_{step:06d}.npz"
+        np.savez_compressed(path, **values)
+        self.retained_draws.append({"step": step,
+            "path": str(path.relative_to(self.output / "policy-artifacts")),
+            "sha256": file_hash(path), "samples": len(samples),
+            "source": "same actual public selected draw supplied to unchanged scorer"})
+
     def receipt(self, evidence, *, save_state=True):
         trainer = self.trainer
         state = self.context.state_dict()
-        self.finite = self.finite and _finite_tree(state)
+        if self.policy_audit is not None:
+            from .policy_adapters import controls_receipt, finite_policy_state
+            self.finite = self.finite and finite_policy_state(state)
+            policy_controls = controls_receipt(trainer.policy, trainer.completed_steps)
+        else:
+            self.finite = self.finite and _finite_tree(state)
+            policy_controls = None
         # Count actual Adam state steps, rather than echoing the task budget.
         def updates(optimizer, parameters):
             observed = [int(optimizer.state[p]["step"]) for p in parameters
@@ -203,11 +269,29 @@ class _Run:
         mechanisms = self.mechanism_audit.receipt()
         hooks = trainer.opt_d.record.observed_steps == trainer.completed_steps and (
             not a2["requested"] or (a2["enabled"] and trainer.latent_history is not None)) and not mechanism_blockers(mechanisms)
+        if policy_controls is not None:
+            hooks = hooks and policy_controls["implementation_observed"]
         guards = {"all_finite": self.finite, "optimizer_updates": counts,
                   "hooks_exercised": hooks, "mechanism_audit": mechanisms,
                   "unintended_rng_deviations": sum(a["unintended_rng_deviations"] for a in self.rng_audits)}
         evidence = {**evidence, "guards": guards, "rng_audits": self.rng_audits,
                     **self.sampling_policy}
+        if policy_controls is not None:
+            evidence.update(scoring_weights="state_selected", policy_controls=policy_controls,
+                policy_observation=self.policy_observations[-1] if self.policy_observations else
+                    {**deepcopy(self.task["evaluation"]["policy_observation"]), "observed": False},
+                policy_observations=self.policy_observations, policy_purity=self.policy_purity,
+                checkpoint_digest_kind="typed_policy_state_v1")
+            if not evidence.get("artifact_root"):
+                artifacts = self.output / "policy-artifacts"
+                artifacts.mkdir(parents=True, exist_ok=True)
+                state_path = artifacts / "state.pt"
+                torch.save(state, state_path)
+                evidence.update(artifact_root=str(artifacts.resolve()),
+                    retained_draws=self.retained_draws,
+                    checkpoint={"path": "state.pt", "sha256": file_hash(state_path),
+                        "state_sha256": _checkpoint_digest(self.task, state),
+                        "digest_kind": "typed_policy_state_v1"})
         if evidence.get("artifact_root"):
             evidence["artifact_manifest"] = manifest_artifacts(evidence["artifact_root"])
             evidence["artifact_portability"] = {
@@ -240,7 +324,7 @@ def _vector(request, task, output, device):
     context = _context(request, task, device, {"num_particles": spec["particles"],
                        "z_dim": spec["z_dim"], "batch_size": spec["batch"]})
     g, d = build_vector_models(context, spec)
-    trainer = context.build_trainer(g, d)
+    trainer = context.build_trainer(g, d, max_steps=task["execution"]["steps"])
     host_receipt = _host_receipt(spec, task["execution"].get("vector_profile"), g, d)
     spec["thresholds"] = task["evaluation"]["thresholds"]
     run = _Run(context, trainer, output, task)
@@ -250,7 +334,11 @@ def _vector(request, task, output, device):
     for step in range(1, task["execution"]["steps"] + 1):
         run.step(sample_target(spec, context.recipe.batch_size, data, step - 1).to(device))
         if step in checkpoints:
-            row = run.evaluate(lambda: score_samples(run.sample(4096).cpu(), spec, step))
+            def evaluate():
+                draw = run.sample(4096).cpu()
+                run.retain_draw(step, draw)
+                return score_samples(draw, spec, step)
+            row = run.evaluate(evaluate)
             observations.append({"step": step, **row})
             _event("observation", task=task["id"], step=step, metrics=row)
     return run.receipt({"observations": observations, "live": observations[-1], "host": host_receipt},
@@ -264,7 +352,7 @@ def _image(request, task, output, device):
     context = _context(request, task, device, {"num_particles": spec["particles"],
                        "z_dim": spec["z_dim"], "batch_size": spec["batch_size"]})
     g, d = build_image_models(context, spec)
-    trainer = context.build_trainer(g, d)
+    trainer = context.build_trainer(g, d, max_steps=task["execution"]["steps"])
     run = _Run(context, trainer, output, task, sampling_law=ENUMERATED_PRIOR_CLEAN)
     host_receipt = _host_receipt(spec, task["execution"].get("image_profile"), g, d)
     centers = templates(spec).to(device)
@@ -272,6 +360,7 @@ def _image(request, task, output, device):
     def evaluate():
         generated = trainer.sample(context.recipe.num_particles, fixed_first_n=True,
             generator=context.streams.generator("eval", component="live", purpose="enumerated_samples"))
+        run.retain_draw(trainer.completed_steps, generated, target=centers)
         return image_metrics(generated, centers, task["evaluation"]["measurement"])
     observations = []
     checkpoints = set(_checkpoints(task))
@@ -309,7 +398,11 @@ def _ring(request, task, output, device, *, endurance=False):
     for step in range(1, task["execution"]["steps"] + 1):
         run.step(sample_ring(means, context.recipe.batch_size, SIGMA, data).to(device))
         if (endurance and step > gate.start_step) or (not endurance and step in checkpoints):
-            row = run.evaluate(lambda: diversity(run.sample(4096).cpu(), means))
+            def evaluate():
+                draw = run.sample(4096).cpu()
+                run.retain_draw(step, draw, target=means)
+                return diversity(draw, means)
+            row = run.evaluate(evaluate)
             point = {"step": step, **row}
             if endurance:
                 dense.append(point)
@@ -353,7 +446,9 @@ def _native(request, task, output, device, *, prerequisites=None):
     context = _context(request, task, device, spec["resources"] if spec else task["execution"]["resources"])
     g, d = build_native_models(context, spec) if spec else _models(context, task["execution"]["model"])
     trainer = context.build_trainer(g, d,
-        max_steps=context.recipe.total_steps if task["execution"].get("preserve_prefix_steps") else task["execution"]["steps"])
+        max_steps=(task["execution"]["preserve_prefix_steps"] if _policy_task(task)
+                   else context.recipe.total_steps) if task["execution"].get("preserve_prefix_steps")
+                   else task["execution"]["steps"])
     host_receipt = _host_receipt(spec, task["execution"]["native_profile"], g, d) if spec else None
     run = _Run(context, trainer, output, task)
     artifact_root = Path(output) / "native100"
@@ -381,16 +476,19 @@ def _native(request, task, output, device, *, prerequisites=None):
         if file_hash(checkpoint) != old["checkpoint"]["sha256"]:
             raise ValueError("continuation checkpoint bytes differ from prerequisite")
         state = torch.load(checkpoint, map_location=device, weights_only=True)
-        if state["trainer"]["completed_steps"] != prefix_steps or state_digest(state) != old["checkpoint"]["state_sha256"]:
+        if state["trainer"]["completed_steps"] != prefix_steps or _checkpoint_digest(task, state) != old["checkpoint"]["state_sha256"]:
             raise ValueError("continuation checkpoint does not represent the exact original prefix")
         context.load_state_dict(state)
         restored = context.state_dict()
-        if state_digest(restored) != state_digest(state):
+        if _checkpoint_digest(task, restored) != _checkpoint_digest(task, state):
             raise ValueError("public restore changed prefix state")
         torch.save(restored, artifact_root / "resume-restored.pt")
-        prefix = {"steps": prefix_steps, "reference_sha256": state_digest(state),
-                  "continued_sha256": state_digest(restored), "prerequisite": parent,
+        prefix = {"steps": prefix_steps, "reference_sha256": _checkpoint_digest(task, state),
+                  "continued_sha256": _checkpoint_digest(task, restored), "prerequisite": parent,
                   "artifact_manifest": old["artifact_manifest"], "checkpoint": old["checkpoint"]}
+        if run.policy_audit is not None:
+            run.policy_audit.reset_after_restore()
+            prefix["digest_kind"] = "typed_policy_state_v1"
         trainer.extend_execution(task["execution"]["steps"])
         shutil.copytree(retained / problem, directory)
         prefix_events = [json.loads(line) for line in (directory / "events.jsonl").read_text().splitlines()]
@@ -455,7 +553,8 @@ def _native(request, task, output, device, *, prerequisites=None):
     torch.save(saved, state_path)
     evidence = {"artifact_root": str(artifact_root.resolve()), "problem": problem,
                 "checkpoint": {"path": str(state_path.relative_to(artifact_root)),
-                    "sha256": file_hash(state_path), "state_sha256": state_digest(saved)},
+                    "sha256": file_hash(state_path), "state_sha256": _checkpoint_digest(task, saved),
+                    **({"digest_kind": "typed_policy_state_v1"} if _policy_task(task) else {})},
                 "artifact_schema": "native100_coverage_accuracy_v1",
                 "holdout_rng": "frozen_accuracy_evidence_seed_offsets_1601_1602_1603"}
     if host_receipt:
@@ -472,12 +571,17 @@ def _dispatch_task(request: dict, job: dict, output_dir: Path, device: str) -> d
     task = request["tasks"][job["task_id"]]
     adapter = task["adapter"]
     if adapter == "word_joint":
+        if _policy_task(task):
+            raise CapabilityError([_policy_word_blocker(task)])
         from .word_adapter import run_word
         return run_word(request, task, output_dir, device)
     if adapter == "transfer_behavior":
         if task["execution"].get("host") == "mode_hold":
             return _ring(request, task, output_dir, device)
-        from .behavior_adapters import run_behavior
+        if _policy_task(task):
+            from .policy_behavior_adapters import run_behavior
+        else:
+            from .behavior_adapters import run_behavior
         return run_behavior(request, task, output_dir, device)
     if adapter == "transfer_vector":
         return _vector(request, task, output_dir, device)

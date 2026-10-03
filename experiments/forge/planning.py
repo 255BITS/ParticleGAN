@@ -28,6 +28,8 @@ def candidate_revision_for(source_digest: str, candidate: dict) -> str:
     # Preserve identities of existing declarations with no adaptation contract.
     if candidate.get("host_adaptation") is not None:
         formulation["host_adaptation"] = candidate["host_adaptation"]
+    if "task_cohort" in candidate:
+        formulation["task_cohort"] = candidate["task_cohort"]
     formulation.update(resolved_recipe=candidate["resolved_recipe"], prior=candidate["prior"],
                        api_version=candidate.get("api_version", "forge-api-v1"))
     return stable_hash({"source": source_digest, "formulation": formulation})
@@ -94,6 +96,8 @@ def new_idea(root: Path, idea_id: str, parent: str, *, goal="discriminator_stabi
     idea = {k: deepcopy(inherited[k]) for k in FORMULATION_FIELDS if k in inherited}
     if "host_adaptation" in inherited:
         idea["host_adaptation"] = deepcopy(inherited["host_adaptation"])
+    if "task_cohort" in inherited:
+        idea["task_cohort"] = inherited["task_cohort"]
     from .decision_contracts import scaffold
     idea.update(schema_version=2, id=idea_id, parent=parent, goal=goal,
                 hypothesis=hypothesis or "TODO: state why this mechanism should improve the selected goal",
@@ -124,8 +128,13 @@ def resolve_idea(root: Path, idea_id: str, *, view_id: str | None = None,
     defaults = read_json(root / "configs/forge/defaults.json")
     view = load_view(root, view_id or idea["goal"])
     all_tasks = load_tasks(root)
+    if "task_cohort" in idea:
+        from .policy_contracts import load_policy_variants, resolve_policy_view
+        all_tasks.update(load_policy_variants(root, all_tasks))
+        view, tasks = resolve_policy_view(view, all_tasks, idea)
+    else:
+        tasks = {a["task"]: deepcopy(all_tasks[a["task"]]) for a in view["assignments"]}
     validate_view(view, all_tasks)
-    tasks = {a["task"]: deepcopy(all_tasks[a["task"]]) for a in view["assignments"]}
     protocol_id = defaults["protocol"]
     protocol = read_json(root / "configs/forge/protocols" / f"{protocol_id}.json")
     prior = {**defaults["prior"], **idea.get("prior", {})}
@@ -164,6 +173,22 @@ def resolve_idea(root: Path, idea_id: str, *, view_id: str | None = None,
             blockers.append(f"view requires capability {name}")
     # Referenced evaluator source outside normal code roots must travel with a job.
     extra_sources = set(idea.get("source_files", []))
+    if "task_cohort" in idea:
+        # The worker must be able to validate the same prospective declarations,
+        # their unchanged parents and the public policy implementation. These
+        # Forge JSON files are deliberately excluded from the ordinary source
+        # scan, so retain them explicitly for this opt-in cohort only.
+        extra_sources.add(f"configs/forge/views/{view['id']}.json")
+        for name, task in tasks.items():
+            parent = task["policy_parent"]["id"]
+            extra_sources.update((f"configs/forge/tasks/{parent}.json",
+                                  f"configs/forge/task-variants/{idea['task_cohort']}/{name}.json"))
+            execution = task["execution"]
+            extra_sources.update(execution["policy_contract"]["sources"])
+            extra_sources.update(execution.get("policy_resource_sources", {}))
+            provenance = execution.get("policy_recipe_overrides_provenance")
+            if provenance is not None:
+                extra_sources.add(provenance["source"])
     # A view selects evidence, not a different candidate implementation. Capture
     # the same catalog evaluator support set for every view so quality/stability
     # requests can share their identical task receipts.

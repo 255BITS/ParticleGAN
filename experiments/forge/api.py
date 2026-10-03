@@ -29,7 +29,7 @@ TRAINER_STREAM_BINDINGS = {
 BUILTIN_CAPABILITIES = (
     "public_trainer", "public_components", "scalar_gan", "mog_prior", "particle_cloud", "learned_locations",
     "uniform_masses", "fixed_prior_width", "a2", "checkpoint", "named_rng", "live_sampling",
-    "policy_controls", "policy_serving",
+    "policy_controls", "policy_serving", "served_sampling",
 )
 _MISSING = object()
 
@@ -97,6 +97,13 @@ def task_recipe_overrides(candidate, task):
     from .taskrecipes import bind_task_candidate
     bound = bind_task_candidate(candidate, task)
     execution = task["execution"]
+    if execution.get("policy_contract") is not None:
+        # A prospective policy host explicitly owns these frozen exceptions.
+        # This does not enlarge the original host_adaptation allowlist.
+        from .policy_contracts import policy_recipe_overrides
+        bound["recipe_overrides"] = {
+            **bound.get("recipe_overrides", {}), **policy_recipe_overrides(task)}
+        return host_recipe_overrides(bound, execution, task_recipe_resources(task))
     if task["adapter"] == "transfer_behavior" and execution.get("host") != "mode_hold":
         from .behavior_adapters import behavior_preflight
         blockers = behavior_preflight(task, bound)
@@ -127,11 +134,13 @@ def task_formulation_context(candidate, task, protocol=None, *, device="cpu", ro
         requires_capabilities=tuple(bound.get("requires_capabilities", ())) + tuple(task["requires_capabilities"]),
         extensions=bound.get("extensions", {}), initializer=task_initializer(task, candidate),
         host_initialization=native_host_initialization(task, root=root),
+        policy_contract=task["execution"].get("policy_contract"),
         execution_path=task["execution"].get("execution_path", bound.get("execution_path", "public_trainer")))
     # Typed extensions receive the same ownership and policy checks as ordinary
     # overrides before a worker can reserve this task.
     blockers = task_policy_blockers(task, {"recipe_overrides": asdict(context.recipe)})
-    if task["adapter"] == "transfer_behavior" and task["execution"].get("host") != "mode_hold":
+    if (task["adapter"] == "transfer_behavior" and task["execution"].get("host") != "mode_hold"
+            and task["execution"].get("policy_contract") is None):
         from .behavior_adapters import behavior_preflight
         blockers.extend(behavior_preflight(task, {"recipe_overrides": context.bindings["recipe"]}))
     if blockers:
@@ -141,6 +150,7 @@ def task_formulation_context(candidate, task, protocol=None, *, device="cpu", ro
                       initializer=context.initializer,
                       extension_recipe_bindings=context.bindings["recipe"])
     context.host_adaptation = adaptation_receipt(candidate, task)
+    context._policy_expected_max_steps = task["execution"]["steps"]
     context.ownership_contract = {"candidate": deepcopy(candidate), "task": deepcopy(task),
                                   "protocol": deepcopy(protocol or {}),
                                   "extension_recipe_bindings": deepcopy(context.bindings["recipe"])}
@@ -150,11 +160,22 @@ def task_formulation_context(candidate, task, protocol=None, *, device="cpu", ro
 def task_policy_blockers(task, candidate):
     """Current Forge tasks certify clean/live component laws, not E22 controls."""
     try:
-        recipe = resolve_public_recipe(candidate)
+        execution = task.get("execution", {})
+        if execution.get("policy_contract") is not None:
+            prior = _resolved_prior(execution.get("prior"))
+            recipe = resolve_public_recipe({
+                **candidate, "recipe_overrides": task_recipe_overrides(candidate, task)},
+                prior_kind="mog" if prior["kind"] == "mog" else "particles",
+                sigma_rel=0., standardize=prior["standardize"])
+        else:
+            recipe = resolve_public_recipe(candidate)
     except CapabilityError as error:
         return error.blockers
     if not policy_controls(recipe):
         return []
+    if task.get("execution", {}).get("policy_contract") is not None:
+        from .policy_contracts import policy_contract_blockers
+        return policy_contract_blockers(task, recipe)
     host = "public components" if task.get("adapter") == "transfer_behavior" else "clean/live scoring"
     return [f"{task.get('id', '<task>')}: {host} has no declared policy-control evidence and "
             "served-sampling contract; freeze a policy-aware task before reservation"]
@@ -280,10 +301,11 @@ class FormulationContext:
                  requires_capabilities=(), registry=None, extensions=None,
                  initializer="deterministic_orthogonal", rng_version=RNG_VERSION,
                  execution_path="public_trainer", host_initialization=None,
-                 initializer_requirements=None):
+                 initializer_requirements=None, policy_contract=None):
         if execution_path not in ("public_trainer", "public_components"):
             raise CapabilityError(["unsupported public execution path"])
         self.execution_path = execution_path
+        self.policy_contract = deepcopy(policy_contract)
         self.registry = registry if registry is not None else default_registry()
         self.extension_values, self.bindings = self.registry.resolve(extensions or {})
         incompatible = [name for name in self.extension_values
@@ -310,7 +332,11 @@ class FormulationContext:
         if self.prior_config["kind"] != "particle_cloud" and (
                 self.recipe.row_evidence_gate or self.recipe.particle_birth_death):
             raise CapabilityError(["independent policy row controls require an explicit particle_cloud cohort; MoG is unsupported"])
-        if execution_path == "public_components" and policy_controls(self.recipe):
+        if execution_path == "public_components" and policy_controls(self.recipe) and (
+                not isinstance(self.policy_contract, dict)
+                or self.policy_contract.get("owner") != "particlegan.UpdatePolicy"
+                or self.policy_contract.get("lifecycle") != "ordered_public_update"
+                or self.policy_contract.get("execution_path") != "public_components"):
             raise CapabilityError(["public_components hosts do not bind the ordered UpdatePolicy lifecycle"])
         if initializer not in ("deterministic_orthogonal", "supplied"):
             raise CapabilityError(["unsupported initializer"])
@@ -339,6 +365,9 @@ class FormulationContext:
         self.requires_capabilities = tuple(requires_capabilities)
         self.initialization = {}
         self._trainer = None
+        self._policy = None
+        self._policy_max_steps = None
+        self._policy_expected_max_steps = None
         self._check_capabilities()
 
     def capabilities(self):
@@ -353,6 +382,7 @@ class FormulationContext:
                 "live_sampling": not (self.recipe.serve_average or self.recipe.continuous_policy),
                 "policy_controls": policy_controls(self.recipe),
                 "policy_serving": self.recipe.serve_average > 0,
+                "served_sampling": bool(policy_controls(self.recipe) and self.recipe.serve_average > 0),
                 **{name: True for name in self.extension_values}}
 
     def _check_capabilities(self):
@@ -532,6 +562,33 @@ class FormulationContext:
                                    seed=self.streams.seed, **options)
         return self._trainer
 
+    @property
+    def policy(self):
+        """The actual public lifecycle owned by this one task attempt."""
+        return self._trainer.policy if self._trainer is not None else self._policy
+
+    def bind_update_policy(self, policy, *, external_max_steps):
+        """Bind caller-owned components to a real, declared public lifecycle."""
+        from particlegan import UpdatePolicy
+        if self.execution_path != "public_components" or self.policy_contract is None:
+            raise CapabilityError(["caller-owned policy requires a declared public-components task contract"])
+        if not isinstance(policy, UpdatePolicy):
+            raise TypeError("policy must be a particlegan.UpdatePolicy")
+        if self._trainer is not None or self._policy is not None:
+            raise ValueError("a context owns one public update lifecycle")
+        if policy.recipe.to_dict() != self.recipe.to_dict():
+            raise CapabilityError(["bound policy Recipe differs from the resolved task Recipe"])
+        if type(external_max_steps) is not int or external_max_steps < 1:
+            raise ValueError("external_max_steps must be a positive integer")
+        if (self._policy_expected_max_steps is not None
+                and external_max_steps != self._policy_expected_max_steps):
+            raise CapabilityError(["bound policy execution limit differs from its frozen task budget"])
+        if policy.device != self.device or policy.row_semantics != self.policy_contract["row_semantics"]:
+            raise CapabilityError(["bound policy device or row semantics differ from its task contract"])
+        self._policy = policy
+        self._policy_max_steps = external_max_steps
+        return policy
+
     def receipt(self):
         ownership = {}
         if getattr(self, "ownership_contract", None) is not None:
@@ -539,10 +596,11 @@ class FormulationContext:
             ownership["field_ownership"] = ownership_receipt(**self.ownership_contract,
                 resolved_recipe=asdict(self.recipe), initializer=self.initializer)
         policy = None
-        if self._trainer is not None and policy_controls(self.recipe):
-            birth = self._trainer.birth_death
-            policy = {"owner": "particlegan.UpdatePolicy", "completed_steps": self._trainer.completed_steps,
-                      "external_max_steps": self._trainer.max_steps,
+        if self.policy is not None and policy_controls(self.recipe):
+            actual_policy = self.policy
+            birth = actual_policy.birth_death
+            policy = {"owner": "particlegan.UpdatePolicy", "completed_steps": actual_policy.completed_steps,
+                      "external_max_steps": self._trainer.max_steps if self._trainer is not None else self._policy_max_steps,
                       "continuous_policy": self.recipe.continuous_policy,
                       "lr_control": self.recipe.lr_control, "row_policy": self.recipe.row_policy,
                       "serving": "state_selected" if self.recipe.serve_average else "fast",
@@ -551,7 +609,11 @@ class FormulationContext:
                           "owner": "UpdatePolicy.birth_death", "seed": self.streams.seed + 6,
                           "derivation": "public policy seed + 6; independent of Forge named streams",
                           "state_sha256": hashlib.sha256(birth.stream.get_state().cpu().numpy().tobytes()).hexdigest(),
-                          "checkpoint_path": "trainer.birth_death.stream"}]}
+                          "checkpoint_path": "trainer.birth_death.stream" if self._trainer is not None else "policy.birth_death.stream"}]}
+            if self.policy_contract is not None:
+                from .policy_adapters import controls_receipt
+                policy["contract"] = deepcopy(self.policy_contract)
+                policy["controls"] = controls_receipt(actual_policy, actual_policy.completed_steps)
         return {"api_version": API_VERSION, "execution_path": self.execution_path,
                 **ownership,
                 **({"host_adaptation": self.host_adaptation} if getattr(self, "host_adaptation", None) else {}),

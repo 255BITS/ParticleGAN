@@ -83,6 +83,9 @@ def expected_policy(task: dict) -> dict:
 def validate_declaration(task: dict, *, required: bool = False) -> dict | None:
     """Validate an opt-in declaration without changing archived task semantics."""
     evaluation = task.get("evaluation", {})
+    if task.get("task_cohort") is not None or "policy_observation" in evaluation:
+        from .policy_contracts import validate_policy_observation
+        validate_policy_observation(task)
     if "sampling_contract_version" not in evaluation:
         if required:
             raise ValueError("new planning requires evaluation.sampling_contract_version=1")
@@ -133,6 +136,30 @@ def grade_sampling(task: dict, evidence: dict) -> dict | None:
     if type(evidence["sampling_contract_version"]) is not int or any(
             evidence[key] != declared[key] for key in FIELDS):
         return {"status": "INVALID", "reason": "observed sampling policy differs from the frozen task contract"}
+    if task.get("task_cohort") is not None:
+        from .policy_contracts import validate_policy_observation
+        contract = validate_policy_observation(task)
+        observed = evidence.get("policy_observation")
+        if not isinstance(observed, dict):
+            return {"status": "INCOMPLETE", "reason": "missing observed selected-policy measurement contract"}
+        if any(key not in observed or type(observed[key]) is not type(value)
+               or observed[key] != value for key, value in contract.items()):
+            return {"status": "INVALID", "reason": "observed policy weights, sampler, noise or diagnostics differ from the frozen contract"}
+        if observed.get("observed") is not True:
+            return {"status": "INCOMPLETE", "reason": "selected-policy measurement was not observed"}
+        if "policy_owner" not in observed or "selected_source" not in observed:
+            return {"status": "INCOMPLETE", "reason": "measurement lacks its actual public selected-policy owner/source"}
+        if (observed.get("policy_owner") != "particlegan.UpdatePolicy"
+                or observed.get("selected_source") not in {"fast", "averaged"}):
+            return {"status": "INVALID", "reason": "measurement lacks its actual public selected-policy owner/source"}
+        if "controller" not in observed:
+            return {"status": "INCOMPLETE", "reason": "measurement lacks its actual Atlas controller identity"}
+        if observed["controller"] != "dv12":
+            return {"status": "INVALID", "reason": "measurement controller differs from this declared Atlas policy"}
+        digest = observed.get("snapshot_sha256")
+        if (not isinstance(digest, str) or len(digest) != 64
+                or any(letter not in "0123456789abcdef" for letter in digest)):
+            return {"status": "INCOMPLETE", "reason": "measurement lacks a selected-policy snapshot identity"}
     return None
 
 

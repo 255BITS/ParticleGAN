@@ -81,6 +81,9 @@ def task_owned_recipe_fields(task):
         owned |= BEHAVIOR_HOST_FIELDS
         if host != "ae_gan_hold":
             owned |= {"routing_temperature", "distance_reduction"}
+    if "policy_recipe_overrides" in task.get("execution", {}):
+        from .policy_contracts import policy_recipe_overrides
+        owned |= set(policy_recipe_overrides(task))
     return frozenset(owned)
 
 
@@ -157,6 +160,13 @@ def ownership_receipt(candidate, task, resolved_recipe, protocol=None, initializ
     if set(extension_recipe_bindings) - RECIPE_FIELD_OWNERS.keys():
         raise ValueError("extension ownership receipt contains unknown public Recipe fields")
     execution = task.get("execution", {})
+    policy_fields = {}
+    if "policy_recipe_overrides" in execution:
+        from .policy_contracts import policy_recipe_overrides
+        policy_fields = policy_recipe_overrides(task)
+    for name, value in policy_fields.items():
+        if _json_value(resolved_recipe[name]) != _json_value(value):
+            raise ValueError(f"effective Recipe {name} contradicts task-owned policy adaptation")
     prior = execution.get("prior")
     if not isinstance(prior, dict) or prior.get("kind") not in {"mog", "particle_cloud"}:
         raise ValueError("ownership receipt requires the task's explicit prior")
@@ -173,7 +183,9 @@ def ownership_receipt(candidate, task, resolved_recipe, protocol=None, initializ
     if resolved_recipe["total_steps"] is not None and resolved_recipe["total_steps"] != horizon:
         raise ValueError("effective Recipe total_steps contradicts task-owned schedule horizon")
     host = _behavior_host(task)
-    behavior_owned = task_owned_recipe_fields(task) - TASK_RECIPE_FIELDS
+    # Explicit policy adaptations are active Recipe values. They are distinct
+    # from legacy component objectives whose Recipe fields are inactive.
+    behavior_owned = task_owned_recipe_fields(task) - TASK_RECIPE_FIELDS - set(policy_fields)
     if host is not None and host != "mode_hold":
         behavior_owned |= RESOURCE_FIELDS - {"total_steps"}
         if host == "ae_gan_hold":
@@ -196,6 +208,8 @@ def ownership_receipt(candidate, task, resolved_recipe, protocol=None, initializ
                           else "task.execution.steps")
         elif name in resources:
             source = resources[name][1]
+        elif name in policy_fields:
+            source = f"task.execution.policy_recipe_overrides.{name}"
         elif host == "ae_gan_hold" and name in {"encoder_mode", "z_dim", "num_particles", "batch_size"}:
             source = "frozen behavioral host HoldConfig and public encoder recipe binding"
         elif (name in RESOURCE_FIELDS - {"total_steps"}
@@ -208,12 +222,14 @@ def ownership_receipt(candidate, task, resolved_recipe, protocol=None, initializ
             result[name] = _record(None, owner, "frozen behavioral host objective/component source",
                                    status="host_owned", reference_recipe_value=_json_value(value))
         else:
-            result[name] = _record(value, owner, source, status=status)
+            extra = ({"provenance": _json_value(execution["policy_recipe_overrides_provenance"])}
+                     if name in policy_fields else {})
+            result[name] = _record(value, owner, source, status=status, **extra)
     host_definition = execution.get("host_definition", {})
     # Legacy optimizer and penalty settings are retained provenance. Scalar
     # adapters copy architecture, data and resources, never these settings.
     inactive_names = ((set(TECHNIQUE_RECIPE_FIELDS) | set(HYPERPARAMETER_RECIPE_FIELDS))
-                      - task_owned_recipe_fields(task)) | {
+                      - task_owned_recipe_fields(task)) | set(policy_fields) | {
                           "d_every", "g_every", "loss_type", "gan_mode", "reg_norm", "reg_lazy", "target_anneal"}
     inactive = {name: _record(value, "task", f"task.execution.host_definition.{name}", status="inactive_provenance")
                 for name, value in sorted(host_definition.items()) if name in inactive_names}
@@ -257,9 +273,17 @@ def ownership_receipt(candidate, task, resolved_recipe, protocol=None, initializ
     if protocol is not None:
         receipt["protocol"] = {name: _record(protocol[name], "protocol", f"protocol.{name}")
                                for name in ("id", "revision", "seed", "rng", "scoring", "robustness") if name in protocol}
+    if "task_cohort" in task:
+        receipt["task_contract"]["task_cohort"] = _record(
+            task["task_cohort"], "task", "task.task_cohort")
+    if policy_fields:
+        receipt["task_contract"]["policy_recipe_adaptation"] = _record(
+            {"overrides": policy_fields,
+             "provenance": execution["policy_recipe_overrides_provenance"]},
+            "task", "task.execution.policy_recipe_overrides and its source provenance")
     # These declarations are references, never a fallback for effective task
     # priors or initialization. Protocol.prior is likewise retained as policy.
-    reference = {name: candidate[name] for name in ("prior", "initializer") if name in candidate}
+    reference = {name: candidate[name] for name in ("prior", "initializer", "task_cohort") if name in candidate}
     if protocol is not None and "prior" in protocol:
         reference["protocol_prior"] = protocol["prior"]
     receipt["reference_declarations"] = _json_value(reference)

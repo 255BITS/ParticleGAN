@@ -38,8 +38,11 @@ def _read(path):
 
 def task_execution_fingerprint(task: dict) -> str:
     """Scientific execution identity deliberately excludes view policy."""
-    return _hash({key: task.get(key) for key in (
-        "schema_version", "adapter", "execution", "requires_capabilities", "dependencies")})
+    binding = {key: task.get(key) for key in (
+        "schema_version", "adapter", "execution", "requires_capabilities", "dependencies")}
+    if task.get("task_cohort") is not None:
+        binding.update(task_cohort=task["task_cohort"], policy_parent=task.get("policy_parent"))
+    return _hash(binding)
 
 
 def task_evaluation_fingerprint(task: dict) -> str:
@@ -93,6 +96,9 @@ def _validate_measurement_contract(task):
     evaluation = task["evaluation"]
     kind = evaluation["kind"]
     fixed = {"scoring_weights": "live"}
+    if task.get("task_cohort") is not None:
+        from .policy_contracts import validate_policy_observation
+        fixed["scoring_weights"] = validate_policy_observation(task)["weight_selector"]
     if kind == "transfer_sustained":
         from benchmarks.locked_shared.observation import OBSERVATIONS, MIN_STABLE_CHECKS
         fixed.update(evaluator="benchmarks.transfer_suite.protocol:test_verdict",
@@ -317,6 +323,145 @@ def _guards(task, evidence):
     return None
 
 
+def _policy_guards(task, evidence):
+    """Require observed lifecycle and pure reads for prospective policy tasks."""
+    if task.get("task_cohort") is None:
+        return None
+    controls = evidence.get("policy_controls")
+    if not isinstance(controls, dict):
+        return _verdict("INCOMPLETE", "missing actual public policy lifecycle/control evidence")
+    if (controls.get("cohort") != task["task_cohort"]
+            or controls.get("row_semantics") != "independent"):
+        return _verdict("INVALID", "public policy cohort or row semantics differ from the frozen task")
+    execution = controls.get("execution")
+    if (not isinstance(execution, dict) or not isinstance(execution.get("model_devices"), list)
+            or not execution["model_devices"]
+            or not isinstance(execution.get("floating_dtypes"), list) or not execution["floating_dtypes"]
+            or type(execution.get("autocast_enabled")) is not bool):
+        return _verdict("INCOMPLETE", "missing observed model device, dtype and precision context")
+    if (any(not isinstance(value, str) or value.split(":", 1)[0] != task["execution"]["device"]
+            for value in execution["model_devices"])
+            or any(not isinstance(value, str) or not value.startswith("torch.float")
+                   for value in execution["floating_dtypes"])
+            or execution["autocast_enabled"]):
+        return _verdict("INVALID", "observed policy device or autocast differs from this frozen GPU task")
+    requested, enabled = controls.get("requested"), controls.get("enabled")
+    if (not isinstance(requested, dict) or not requested or not isinstance(enabled, dict)
+            or set(requested) != set(enabled)
+            or any(type(value) is not bool for value in (*requested.values(), *enabled.values()))):
+        return _verdict("INCOMPLETE", "missing typed requested/enabled policy-owner evidence")
+    required_controls = {"continuous_controller", "stationarity_lr", "row_evidence", "birth_death",
+                         "learned_output_noise", "selected_averaging", "optimizer_surprise", "reopen_guard"}
+    if set(requested) != required_controls or not all(requested.values()):
+        return _verdict("INVALID", "requested owners differ from this declared Atlas policy mechanism")
+    if (controls.get("requested_owners_bound") is not True
+            or any(value and not enabled[name] for name, value in requested.items())):
+        return _verdict("BLOCKED", "a requested policy mechanism has no actual enabled owner")
+    lifecycle = controls.get("lifecycle", {})
+    if not isinstance(lifecycle, dict) or "owner" not in lifecycle:
+        return _verdict("INCOMPLETE", "missing actual public policy lifecycle owner")
+    steps = controls.get("completed_steps")
+    start = lifecycle.get("start_completed_steps")
+    if (type(steps) is not int or not 0 < steps <= task["execution"]["steps"]
+            or type(start) is not int or not 0 <= start < steps):
+        return _verdict("INCOMPLETE", "missing valid observed public policy update interval")
+    if start != task["execution"].get("preserve_prefix_steps", 0):
+        return _verdict("INCOMPLETE", "policy lifecycle does not cover this task's complete owned update interval")
+    kind = task["evaluation"]["kind"]
+    if kind in {"transfer_sustained", "native_accuracy"} and steps != task["execution"]["steps"]:
+        return _verdict("INCOMPLETE", "public policy did not complete the original full task budget")
+    from .policy_adapters import HOOKS
+    calls = lifecycle.get("calls")
+    expected = steps - start
+    if (not isinstance(calls, dict) or set(calls) != set(HOOKS)
+            or any(type(value) is not int or value != expected for value in calls.values())
+            or lifecycle.get("owner") != "particlegan.UpdatePolicy"
+            or lifecycle.get("end_completed_steps") != steps
+            or lifecycle.get("observed_updates") != expected
+            or lifecycle.get("pending") != [] or lifecycle.get("order_errors") != 0
+            or lifecycle.get("last_order") != list(HOOKS)
+            or lifecycle.get("complete") is not True
+            or controls.get("implementation_observed") is not True):
+        return _verdict("INVALID", "ordered public policy hooks do not establish the complete update interval")
+    guards = evidence.get("guards")
+    if not isinstance(guards, dict) or type(guards.get("all_finite")) is not bool:
+        return _verdict("INCOMPLETE", "missing observed finite policy-state guard")
+    if not guards["all_finite"]:
+        return _verdict("FAIL", "observed public policy state is nonfinite")
+    deviations = guards.get("unintended_rng_deviations")
+    if type(deviations) is not int or deviations < 0:
+        return _verdict("INCOMPLETE", "missing observed global and named training RNG audit")
+    if deviations:
+        return _verdict("INVALID", "unintended RNG stream deviations invalidate policy comparison")
+    updates = guards.get("optimizer_updates")
+    roles = ("prior", "discriminator") if task["execution"].get("host") == "two_pole" else (
+        "generator", "discriminator", "prior")
+    for role in roles:
+        count = updates.get(role) if isinstance(updates, dict) else None
+        if type(count) is not int or count < 0:
+            return _verdict("INCOMPLETE", f"missing actual {role} optimizer update count")
+        if count == 0:
+            return _verdict("FAIL", f"{role} did not perform an intended policy optimizer update")
+        if count != steps:
+            return _verdict("INVALID", f"{role} optimizer state disagrees with the completed policy updates")
+    purity = evidence.get("policy_purity")
+    if not isinstance(purity, list) or not purity:
+        return _verdict("INCOMPLETE", "missing policy state and RNG measurement-purity evidence")
+    for observed in purity:
+        if (not isinstance(observed, dict) or observed.get("digest_kind") != "typed_policy_state_v1"
+                or not _digest(observed.get("before_sha256"))
+                or not _digest(observed.get("after_sha256"))):
+            return _verdict("INCOMPLETE", "measurement purity lacks exact typed policy-state identities")
+        if (observed.get("pure") is not True
+                or observed["before_sha256"] != observed["after_sha256"]):
+            return _verdict("INVALID", "measurement changed policy, optimizer, model or training RNG state")
+    observations = evidence.get("policy_observations")
+    if not isinstance(observations, list) or len(observations) != len(purity):
+        return _verdict("INCOMPLETE", "policy measurement declarations and purity observations are incomplete")
+    if evidence.get("policy_observation") != observations[-1]:
+        return _verdict("INVALID", "final policy measurement differs from its retained observation")
+    if "served_source" not in controls:
+        return _verdict("INCOMPLETE", "missing actual final policy serving source")
+    if controls["served_source"] != observations[-1].get("selected_source"):
+        return _verdict("INVALID", "final policy serving source differs from its scored measurement")
+    measured_steps = []
+    from .sampling import grade_sampling
+    for observed, audit in zip(observations, purity):
+        observed_step = observed.get("completed_steps") if isinstance(observed, dict) else None
+        minimum_step = 0 if kind == "native_accuracy" else 1
+        if type(observed_step) is not int or type(audit.get("completed_steps")) is not int:
+            return _verdict("INCOMPLETE", "measurement is not bound to its actual policy update and purity audit")
+        if not minimum_step <= observed_step <= steps or audit["completed_steps"] != observed_step:
+            return _verdict("INVALID", "measurement and purity clocks disagree with actual policy updates")
+        measured_steps.append(observed_step)
+        problem = grade_sampling(task, {**evidence, "policy_observation": observed})
+        if problem is not None:
+            return _verdict(problem["status"], problem["reason"])
+    if measured_steps[-1] != steps or any(b < a for a, b in zip(measured_steps, measured_steps[1:])):
+        return _verdict("INVALID", "retained policy measurements do not establish chronological final-state evidence")
+    if kind == "transfer_sustained":
+        expected_steps = [math.ceil(i * task["execution"]["steps"] / 24) for i in range(1, 25)]
+        if measured_steps != expected_steps:
+            status = "INCOMPLETE" if len(measured_steps) < len(expected_steps) else "INVALID"
+            return _verdict(status, "all original transfer checkpoints need observed pure policy measurements")
+    elif kind == "native_accuracy":
+        from benchmarks.toy100.train import evaluation_steps
+        evaluation = task["evaluation"]
+        expected_steps = evaluation_steps(task["execution"]["steps"],
+                                          evaluation["eval_interval"], evaluation["early_eval_steps"])
+        if start:
+            expected_steps = [step for step in expected_steps if step > start]
+        if not set(expected_steps) <= set(measured_steps):
+            return _verdict("INCOMPLETE", "all original native checkpoints need observed pure policy measurements")
+    elif kind in {"ring_hold", "ring_extension"}:
+        dense = evidence.get("dense")
+        if (not isinstance(dense, list) or not dense
+                or not {point.get("step") for point in dense if isinstance(point, dict)} <= set(measured_steps)
+                or dense[-1].get("step") != steps):
+            return _verdict("INCOMPLETE", "ring measurements lack their complete uninterrupted policy interval")
+    return None
+
+
 def _transfer(task, evidence):
     from benchmarks.transfer_suite.protocol import test_verdict
 
@@ -534,6 +679,9 @@ def grade_result(task: dict, result: dict | None) -> dict:
     sampling = grade_sampling(task, evidence)
     if sampling is not None:
         return _verdict(sampling["status"], sampling["reason"])
+    policy = _policy_guards(task, evidence)
+    if policy is not None:
+        return policy
     guard = _guards(task, evidence)
     if guard is not None:
         return guard
