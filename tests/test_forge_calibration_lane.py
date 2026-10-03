@@ -10,6 +10,7 @@ from experiments.forge.contracts import atomic_json, file_hash, read_json, stabl
 from experiments.forge.planning import resolve_idea
 from experiments.forge.promotion import validate_screening_submission
 from test_forge_promotion import setup as promotion_setup, save_attempt
+from forge_legacy_fixtures import pin_legacy
 
 
 @pytest.fixture
@@ -322,6 +323,7 @@ def test_queue_runs_only_registered_diagnostics_after_smoke_failure_and_retains_
     assert state["submissions"][entry["request"]["request_id"]]["status"] == "completed"
     assert state["campaigns"][request["calibration_campaign"]["id"]]["spent_seconds"] == 2.
     # The ordinary lane has distinct keys and cannot inherit diagnostic PASS.
+    pin_legacy(root)
     ordinary = resolve_idea(root, "negative1", through_tier=3, queue_root=root / "queue",
                             execution_backend="cpu", freeze_source=True)
     queue.submit(ordinary, {"id": "ordinary", "budget_seconds": 20, "candidate_budget_seconds": 20})

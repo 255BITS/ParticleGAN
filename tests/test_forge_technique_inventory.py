@@ -6,6 +6,7 @@ import pytest
 from experiments.forge.contracts import atomic_json, read_json
 from experiments.forge.queue import Queue
 from experiments.forge import technique_inventory as inventory
+from forge_legacy_fixtures import pin_legacy
 
 
 @pytest.fixture
@@ -35,6 +36,7 @@ def checkout(tmp_path):
         "goal": "stability", "assignments": assignments, "eligibility": {}})
     (tmp_path / "particlegan").mkdir()
     (tmp_path / "particlegan/fixture.py").write_text("mechanism = 1\n")
+    pin_legacy(tmp_path)
     return tmp_path
 
 
@@ -49,6 +51,7 @@ def alias(root, name):
     idea = read_json(root / "configs/forge/ideas/base.json")
     idea.update(id=name, hypothesis="same mechanism with another label")
     atomic_json(root / f"configs/forge/ideas/{name}.json", idea)
+    pin_legacy(root)
 
 
 def test_plan_discovers_new_cards_preserves_denominators_and_writes_nothing(checkout):
@@ -119,6 +122,7 @@ def test_candidate_specific_extra_sources_keep_distinct_real_identities(checkout
     idea = read_json(path)
     idea["source_files"] = ["support.py"]
     atomic_json(path, idea)
+    pin_legacy(checkout)
     result = inventory.enqueue_inventory(checkout, checkout / "runs", **options())
     assert result["submitted_count"] == 2
     assert len(result["source_digests"]) == 2 and result["source_digest"] is None

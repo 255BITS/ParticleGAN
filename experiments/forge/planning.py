@@ -94,13 +94,14 @@ def new_idea(root: Path, idea_id: str, parent: str, *, goal="discriminator_stabi
     idea = {k: deepcopy(inherited[k]) for k in FORMULATION_FIELDS if k in inherited}
     if "host_adaptation" in inherited:
         idea["host_adaptation"] = deepcopy(inherited["host_adaptation"])
-    idea.update(schema_version=1, id=idea_id, parent=parent, goal=goal,
+    from .decision_contracts import scaffold
+    idea.update(schema_version=2, id=idea_id, parent=parent, goal=goal,
                 hypothesis=hypothesis or "TODO: state why this mechanism should improve the selected goal",
                 changed_factors=["TODO: describe the substantive change before enqueue"],
                 mechanism_class=inherited.get("mechanism_class", "structural"),
                 mechanism_rationale="TODO: explain structural, constant/floor or sampling-only change",
                 api_version="forge-api-v1", lifecycle="proposed", execution_path="public_trainer",
-                prior_art=[parent], guide="EXPERIMENTATION.md")
+                prior_art=[parent], guide="EXPERIMENTATION.md", decision_contract=scaffold(parent, goal))
     atomic_json(path, idea)
     return path
 
@@ -253,18 +254,31 @@ def resolve_idea(root: Path, idea_id: str, *, view_id: str | None = None,
                                    "cpu_threads": resources["cpu_threads"], "allow_cpu": backend == "cpu",
                                    "backend": backend, "gpu_model": compute_profiles[backend].get("model") if backend == "cuda" else None}})
     rekey_jobs(jobs)
+    request = {"schema_version": 1, "candidate": candidate, "candidate_revision": candidate_revision,
+               "requires_independent_grading": True,
+               "source": source, "runtime": runtime, "protocol": protocol, "rng": rng,
+               "execution_backend": execution_backend, "compute_profiles": compute_profiles,
+               "view": view, "policy_fingerprint": view_fingerprint(view), "tasks": tasks,
+               "jobs": jobs, "through_tier": through_tier, "preflight_blockers": blockers}
+    if "decision_contract" in candidate:
+        from .decision_contracts import inspect_contract
+        review = inspect_contract(root, request)
+        request["decision_review"] = review
+        request["decision_admission"] = review["receipt"]
+        blockers.extend(review["blockers"])
+    elif "configuration_id" not in candidate and (root / "configs/forge/legacy-ideas-v1.json").is_file():
+        from .decision_contracts import validate_legacy_admission
+        try:
+            validate_legacy_admission(request, root=root)
+        except ValueError as error:
+            blockers.append(str(error))
     if freeze_source:
         if blockers:
             raise ValueError("submission blocked: " + "; ".join(blockers))
         if queue_root is None:
             raise ValueError("queue_root is required to freeze source")
         source["snapshot_path"] = str(snapshot_source(root, queue_root, source))
-    return {"schema_version": 1, "candidate": candidate, "candidate_revision": candidate_revision,
-            "requires_independent_grading": True,
-            "source": source, "runtime": runtime, "protocol": protocol, "rng": rng,
-            "execution_backend": execution_backend, "compute_profiles": compute_profiles,
-            "view": view, "policy_fingerprint": view_fingerprint(view), "tasks": tasks,
-            "jobs": jobs, "through_tier": through_tier, "preflight_blockers": blockers}
+    return request
 
 
 def plan_summary(request: dict, queue_state: dict | None = None, *, include_ownership=False) -> dict:
@@ -291,4 +305,5 @@ def plan_summary(request: dict, queue_state: dict | None = None, *, include_owne
     return {"candidate": request["candidate"]["id"], "candidate_revision": request["candidate_revision"],
             "view": request["view"]["id"], "policy_fingerprint": request["policy_fingerprint"],
             "through_tier": request["through_tier"], "tasks": tasks, "worst_case_seconds": total,
+            **({"decision_contract": request["decision_review"]} if "decision_review" in request else {}),
             "preflight_blockers": request["preflight_blockers"], "guide": "EXPERIMENTATION.md"}

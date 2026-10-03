@@ -217,6 +217,9 @@ class Queue:
 
     def submit(self, request: dict, campaign: dict) -> dict:
         """Request contains pinned view/tasks/protocol/source and fully resolved jobs."""
+        from .decision_contracts import validate_admission as validate_decision_admission
+        validate_decision_admission(request, campaign,
+                                    root=self.report_root.parent.parent if self.report_root else None)
         from .promotion import validate_screening_submission, validate_submission
         if "calibration_lane" in request:
             from .calibration_lane import validate_submission as validate_calibration_submission
@@ -247,6 +250,8 @@ class Queue:
         request_id = stable_hash(request)[:24]
         request = {**request, "request_id": request_id}
         with self.state() as state:
+            from .decision_contracts import register_round
+            register_round(state, request)
             if self.report_root:
                 from .lifecycle import ensure_open
                 ensure_open(self.report_root.parent.parent, request)
@@ -379,7 +384,7 @@ class Queue:
             else:
                 entry.update(status="queued", reason=None)
 
-    def _available_budget(self, state, request, seconds):
+    def _available_budget(self, state, request, seconds, *, job_key=None, new_round_reservation=True):
         campaign = state["campaigns"][request["campaign_id"]]
         definition = campaign["definition"]
         if campaign["spent_seconds"] + campaign["reserved_seconds"] + seconds > definition["budget_seconds"]:
@@ -393,7 +398,8 @@ class Queue:
                 candidate_spent += job.get("reserved_seconds", 0.0)
         if candidate_spent + seconds > definition["candidate_budget_seconds"]:
             return False, "candidate budget cannot reserve the full next task"
-        return True, None
+        from .decision_contracts import available_round_budget
+        return available_round_budget(state, request, seconds if new_round_reservation else 0, job_key=job_key)
 
     def claim(self, slots: list[dict], *, campaign_filter=None, goal_filter=None) -> dict | None:
         """Called only by the drain owner; reservation is atomic with submissions."""
@@ -465,7 +471,7 @@ class Queue:
                                          lifecycle="awaiting_readout")
                         continue
                     seconds = job["definition"]["budget_seconds"]
-                    ok, reason = self._available_budget(state, request, seconds)
+                    ok, reason = self._available_budget(state, request, seconds, job_key=key)
                     if not ok:
                         entry.update(status="blocked", reason="resource: " + reason, lifecycle="awaiting_readout")
                         continue
@@ -700,7 +706,7 @@ class Queue:
             entry = state["submissions"][request_id]
             # Withdraw before selecting an alternative payer/subscriber.
             entry.update(status="cancelled", lifecycle="awaiting_readout", reason="cancelled by request")
-            for job in state["jobs"].values():
+            for key, job in state["jobs"].items():
                 if request_id not in job["subscribers"]:
                     continue
                 job["subscribers"].remove(request_id)
@@ -722,7 +728,7 @@ class Queue:
                     for successor in active:
                         req = state["submissions"][successor]["request"]
                         campaign = state["campaigns"][req["campaign_id"]]
-                        if campaign["definition"].get("accept_shared_cost_transfer") and self._available_budget(state, req, job["reserved_seconds"])[0]:
+                        if campaign["definition"].get("accept_shared_cost_transfer") and self._available_budget(state, req, job["reserved_seconds"], job_key=key, new_round_reservation=False)[0]:
                             state["campaigns"][owner["campaign"]]["reserved_seconds"] -= job["reserved_seconds"]
                             campaign["reserved_seconds"] += job["reserved_seconds"]
                             job["cost_owner"] = {"request": successor, "campaign": req["campaign_id"], "revision": req["candidate_revision"]}

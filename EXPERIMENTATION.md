@@ -123,6 +123,12 @@ python -m experiments.forge new --id critic-anchor-v2 --parent k3p \
   --hypothesis "A stronger critic anchor preserves terminal quality during hold"
 ```
 
+New scaffolds use idea schema v2 and a draft [hypothesis-to-decision contract](docs/forge-decision-contract.md).
+Bind original evidence identities, review the actual task-owned delta, freeze one
+bounded round and numerical prediction/falsifier, then mark the contract ready.
+Planning shows the bindings; unfinished drafts block admission before spend.
+Saved v1 evidence retains its original identity.
+
 Edit `configs/forge/ideas/critic-anchor-v2.json`. Describe the substantive
 change in `changed_factors`, cite relevant prior work, and choose
 `mechanism_class`: `structural`, `floor_constant`, or `sampling_only_patch`.

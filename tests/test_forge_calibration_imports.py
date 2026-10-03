@@ -11,6 +11,7 @@ from experiments.forge.queue import Queue
 from experiments.forge.sampling import executed_receipt, PUBLIC_PRIOR_CLEAN
 from test_forge_promotion import setup as promotion_setup, save_attempt
 from test_forge_queue import SLOTS
+from forge_legacy_fixtures import pin_legacy
 
 
 @pytest.fixture
@@ -93,6 +94,7 @@ def test_queue_dedup_reuses_original_diagnostic_across_explicit_profile_import(i
     assert not report["current_qualification_reuse"]
     assert before == {str(p): p.read_bytes() for p in (root / "reports/forge/attempts").rglob("*") if p.is_file()}
     # Same selected task still requires separate ordinary evidence.
+    pin_legacy(root)
     ordinary = resolve_idea(root, "negative1", through_tier=3, freeze_source=True,
                             execution_backend="cpu", queue_root=root / "queue")
     queue.submit(ordinary, {"id": "ordinary", "budget_seconds": 30, "candidate_budget_seconds": 30})

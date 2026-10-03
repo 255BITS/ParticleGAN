@@ -744,6 +744,9 @@ def readout(root: Path, candidate_id: str, conclusion: str, comparison: str, nex
               "provenance": {"attempts": [{"attempt_id": a["attempt_id"], "result_hash": a["result_hash"],
                                              "valid_receipt": a["valid_receipt"]} for a in selected]},
               "conclusion": conclusion.strip(), "comparison": comparison.strip(), "next_action": next_action.strip()}
+    if candidate.get("decision_contract") is not None:
+        from .decision_contracts import concluded_outcomes
+        record["decision_outcomes"] = concluded_outcomes(selected)
     states = _queue_states(root, attempts)
     with file_lock(root / "runs/forge/readout.lock"), ExitStack() as locks:
         for location in sorted(states):
