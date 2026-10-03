@@ -2,23 +2,23 @@
 
 Atlas's historical study has **19/19 original PASS**. The later C6 broad hold has **2/2 hold FAIL**, with six other domains UNKNOWN per family. See [completed source-bound studies](#completed-source-bound-studies) for the exact protocols and original goal GIFs. These separate results do not fill the ordinary qualification cells below.
 
-Each cell is **passes / full required total** from one complete selected configuration. Each trainer family and runtime has one row; its alternatives remain recorded separately. Expand the configuration details below for selection, provenance, other outcomes and cost.
+Each cell retains **passes / full required total** or **status (N required)** from one selected configuration. Mixed cells show the counts of failed, blocked and unmeasured tasks. Each trainer family and runtime has one row; its alternatives remain recorded separately. Expand the configuration details below for selection, provenance, other outcomes and cost.
 
 | Trainer family / runtime | Tier 1 | Tier 2 | Tier 3 | Recorded tier |
 | --- | ---: | ---: | ---: | ---: |
-| Atlas<br>cuda | 0/5 | 0/19 | 0/2 | 0 |
-| BCap<br>cuda | 3/5 | 0/19 | 0/2 | 0 |
-| E22<br>cuda | 0/5 | 0/19 | 0/2 | 0 |
-| GAN v3 release 0.7 (MoG)<br>cuda | 3/5 | 0/19 | 0/2 | 0 |
-| GAN v3 release 0.7 (cloud)<br>cuda | 0/5 | 0/19 | 0/2 | 0 |
-| K3P<br>cuda | 4/5 | 0/19 | 0/2 | 0 |
-| K3P without A2<br>cuda | 0/5 | 0/19 | 0/2 | 0 |
-| K3P without critic anchor<br>cuda | 0/5 | 0/19 | 0/2 | 0 |
-| K3P without critic penalty<br>cuda | 0/5 | 0/19 | 0/2 | 0 |
-| K3P without training output noise<br>cuda | 0/5 | 0/19 | 0/2 | 0 |
-| KA2<br>cuda | 4/5 | 0/19 | 0/2 | 0 |
-| R1/R2<br>cuda | 3/5 | 0/19 | 0/2 | 0 |
-| five-word-joint-ka2-v1<br>cuda | 0/5 | 0/19 | 0/2 | 0 |
+| Atlas<br>cuda<br>[Atlas history: 19/19 PASS](continuous-baseline-20261003/README.md)<br>[C6 Atlas hold FAIL](c6-baseline-debug-20261003/README.md) | BLOCKED (5 required) | BLOCKED (19 required) | BLOCKED (2 required) | 0 |
+| BCap<br>cuda | 3/5<br>FAIL 1 · UNKNOWN 1 | UNKNOWN (19 required) | UNKNOWN (2 required) | 0 |
+| E22<br>cuda<br>[Atlas history: 19/19 PASS](continuous-baseline-20261003/README.md)<br>[C6 E22 hold FAIL](c6-baseline-debug-20261003/README.md) | BLOCKED (5 required) | BLOCKED (19 required) | BLOCKED (2 required) | 0 |
+| GAN v3 release 0.7 (MoG)<br>cuda | 3/5<br>FAIL 1 · UNKNOWN 1 | UNKNOWN (19 required) | UNKNOWN (2 required) | 0 |
+| GAN v3 release 0.7 (cloud)<br>cuda | BLOCKED (5 required) | BLOCKED (19 required) | BLOCKED (2 required) | 0 |
+| K3P<br>cuda | 4/5<br>FAIL 1 | UNKNOWN (19 required) | UNKNOWN (2 required) | 0 |
+| K3P without A2<br>cuda | 0/5<br>FAIL 1 · UNKNOWN 4 | UNKNOWN (19 required) | UNKNOWN (2 required) | 0 |
+| K3P without critic anchor<br>cuda | 0/5<br>FAIL 1 · UNKNOWN 4 | UNKNOWN (19 required) | UNKNOWN (2 required) | 0 |
+| K3P without critic penalty<br>cuda | 0/5<br>FAIL 1 · UNKNOWN 4 | UNKNOWN (19 required) | UNKNOWN (2 required) | 0 |
+| K3P without training output noise<br>cuda | 0/5<br>FAIL 1 · UNKNOWN 4 | UNKNOWN (19 required) | UNKNOWN (2 required) | 0 |
+| KA2<br>cuda | 4/5<br>FAIL 1 | UNKNOWN (19 required) | UNKNOWN (2 required) | 0 |
+| R1/R2<br>cuda | 3/5<br>FAIL 1 · UNKNOWN 1 | UNKNOWN (19 required) | UNKNOWN (2 required) | 0 |
+| five-word-joint-ka2-v1<br>cuda | 0/5<br>FAIL 1 · UNKNOWN 4 | UNKNOWN (19 required) | UNKNOWN (2 required) | 0 |
 
 <details>
 <summary>Selected configurations and provenance</summary>
@@ -32,6 +32,8 @@ Each cell is **passes / full required total** from one complete selected configu
 - **Compute:** cuda / AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000
 - **Other outcomes:** BLOCKED 26
 - **Paid seconds:** unknown
+
+- **Separate baseline evidence:** [Atlas history: 19/19 PASS](continuous-baseline-20261003/README.md) · [C6 Atlas hold FAIL](c6-baseline-debug-20261003/README.md); no current tier credit.
 
 ### BCap (cuda)
 
@@ -52,6 +54,8 @@ Each cell is **passes / full required total** from one complete selected configu
 - **Compute:** cuda / AMD Ryzen 9 5900X 12-Core Processor, NVIDIA RTX A6000
 - **Other outcomes:** BLOCKED 26
 - **Paid seconds:** unknown
+
+- **Separate baseline evidence:** [Atlas history: 19/19 PASS](continuous-baseline-20261003/README.md) · [C6 E22 hold FAIL](c6-baseline-debug-20261003/README.md); no current tier credit.
 
 ### GAN v3 release 0.7 (MoG) (cuda)
 
@@ -157,7 +161,7 @@ Each cell is **passes / full required total** from one complete selected configu
 
 Recorded results remain bound to their actual recipes, priors, initialization, budgets, sampling laws and hardware. They do not pool qualification across sources or qualify the latest checkout. Selection never combines passing tasks or tiers from different configurations. A failed best-observed configuration is not a qualified winner. Search qualification covers only its declared tuning tiers; later-tier outcomes are reported separately. The screening profile remains provisional and does not confer calibrated robustness or public-default adoption.
 
-UNKNOWN means unmeasured. Failed or blocked prerequisites stop later work; required denominators stay fixed.
+BLOCKED means execution was incompatible or a prerequisite was unavailable. NOT RUN and UNKNOWN mean unexecuted or unmeasured; FAIL records an executed gate failure. Failed or blocked prerequisites stop later work; required denominators stay fixed. The Atlas-history and C6-hold links retain their separate protocols and supply no current tier credit.
 
 [All configuration alternatives, trials, task statuses and exact bindings](technique-inventory.json) · [Evidence and archived publication identities](technique-evidence/manifest.json)
 
@@ -169,7 +173,7 @@ python reports/forge/regenerate_technique_inventory.py
 
 For ordinary Forge qualification, use `--source-commit <executed-commit>` to independently regrade hydrated original receipts and update this leaderboard. Task-only word diagnostics are read from their committed recipe selections and compact receipts. Source snapshots are provenance, not additional leaderboards.
 
-Publication input digest `ee77c534ac48d935c41d037df2b72cddc8b5907164c9f99e0c02db48d70fea4d`.
+Publication input digest `f53d2af0a9d86fcb221da3697c5f2b1ad8a9dbc09e1e590e8ca28f80b3c23ab1`.
 
 ## Five-word joint task diagnostics
 

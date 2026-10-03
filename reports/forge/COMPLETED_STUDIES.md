@@ -24,3 +24,9 @@ The reducer verifies the [committed registry](completed-studies.json), three res
 Read the expandable protocol details and follow the goal GIF/readout links to see what each test verifies. The [C6 baseline diagnosis](c6-baseline-debug-20261003/README.md) explains why mode and mass checks can pass while projected distribution shape fails. Its evidence is linked and hashed separately from qualification.
 
 Paid supervised-child intervals and conservative reserves are separate fields. Generator cumulative cost already includes the critic study and startup once; historical Atlas19 and its hold extensions have a separate allowance. These are accounting totals, not comparable speed rankings. Bulk archives remain **LOCAL_ONLY**, with **NOT_PERFORMED** remote replication and no inferred retention guarantee; share the committed scores/GIFs and use each archive readout for the actual resolver.
+
+The main tier cells explicitly distinguish `BLOCKED (N required)`, unmeasured
+`UNKNOWN`/`NOT RUN`, and executed `FAIL` counts. Mixed tiers retain the full
+required denominator and the recorded status breakdown. Atlas and E22 rows link
+directly to the separate historical Atlas 19/19 PASS and current C6 hold FAIL
+readouts; those links add no current qualification credit.

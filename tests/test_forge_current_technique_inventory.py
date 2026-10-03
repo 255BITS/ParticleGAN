@@ -624,6 +624,89 @@ def test_raw_technique_export_cannot_replace_registered_current_evidence(evidenc
     assert _outputs(root) == before
 
 
+def _tier_display_fixture(tier1, later="UNKNOWN"):
+    required = {"1": [f"smoke-{i}" for i in range(5)],
+                "2": [f"quality-{i}" for i in range(19)],
+                "3": [f"hold-{i}" for i in range(2)]}
+    statuses = {"1": tier1, "2": [later] * 19, "3": [later] * 2}
+    row = {"candidate_id": "atlas", "trainer_family": "atlas", "technique": "Atlas",
+           "runtime_cohort": {"execution_backend": "cpu"}, "qualified_tier": 0,
+           "tasks": [{"task_id": task, "status": status, "gate_status": status}
+                     for tier, names in required.items() for task, status in zip(names, statuses[tier])],
+           "tiers": {tier: {"passed": values.count("PASS"), "total": len(values),
+                            "counts": dict(Counter(values))} for tier, values in statuses.items()}}
+    return {"tier_requirements": required, "rows": [row], "evidence_sources": {},
+            "provenance": {"input_digest": "synthetic-display-only"}}
+
+
+@pytest.mark.parametrize("status,label", [
+    ("BLOCKED", "BLOCKED"), ("UNKNOWN", "UNKNOWN"), ("NOT_RUN", "NOT RUN"),
+    ("INCOMPLETE", "INCOMPLETE"), ("INVALID", "INVALID"),
+])
+def test_current_tier_cells_keep_blocked_and_unmeasured_denominators(tmp_path, status, label):
+    result = _tier_display_fixture([status] * 5, later=status)
+    before = deepcopy(result)
+    markdown = publication._current_markdown(result, tmp_path, tmp_path / "reports/forge/table.md")
+    row = next(line for line in markdown.splitlines() if line.startswith("| Atlas<br>"))
+    for total in (5, 19, 2):
+        assert f"{label} ({total} required)" in row
+    assert "FAIL" not in row
+    assert result == before
+
+
+@pytest.mark.parametrize("statuses,expected", [
+    (["PASS", "FAIL", "BLOCKED", "UNKNOWN", "NOT_RUN"],
+     "1/5<br>BLOCKED 1 · FAIL 1 · NOT RUN 1 · UNKNOWN 1"),
+    (["FAIL"] * 5, "0/5<br>FAIL 5"),
+    (["FAIL"] + ["UNKNOWN"] * 4, "0/5<br>FAIL 1 · UNKNOWN 4"),
+    (["NOT_RUN", "UNKNOWN", "NOT_RUN", "UNKNOWN", "UNKNOWN"],
+     "NOT RUN/UNKNOWN (5 required)"),
+    (["PASS"] * 5, "5/5 PASS"),
+])
+def test_current_tier_cells_show_actual_mixed_gate_counts(tmp_path, statuses, expected):
+    result = _tier_display_fixture(statuses)
+    before = deepcopy(result)
+    markdown = publication._current_markdown(result, tmp_path, tmp_path / "reports/forge/table.md")
+    row = next(line for line in markdown.splitlines() if line.startswith("| Atlas<br>"))
+    assert expected in row
+    assert "UNKNOWN (19 required)" in row and "UNKNOWN (2 required)" in row
+    assert result == before
+
+
+def test_legacy_tier_display_does_not_invent_an_all_failed_breakdown(tmp_path):
+    result = _tier_display_fixture(["BLOCKED"] * 5)
+    row = result["rows"][0]
+    row["tiers"]["1"].pop("counts")
+    assert publication._current_tier_cell(row, "1", result["tier_requirements"]["1"], "table.json") == "BLOCKED (5 required)"
+    # A legacy aggregate can lack enough task detail to reconstruct its counts.
+    row["tiers"]["1"]["passed"] = 1
+    before = deepcopy(result)
+    rendered = publication._current_tier_cell(row, "1", result["tier_requirements"]["1"], "table.json")
+    assert rendered == "1/5<br>[5 required; task statuses](table.json)"
+    assert "FAIL" not in rendered and result == before
+
+
+def test_main_policy_rows_link_separate_history_and_failed_hold_without_credit():
+    result = read_json(ROOT / "reports/forge/technique-inventory.json")
+    result["rows"] = [row for row in result["rows"] if row["trainer_family"] in {"atlas", "e22"}]
+    assert {row["trainer_family"] for row in result["rows"]} == {"atlas", "e22"}
+    before = deepcopy(result)
+    markdown = publication._current_markdown(result, ROOT, ROOT / "reports/forge/technique-inventory.md")
+    table_rows = [line for line in markdown.splitlines() if line.startswith(("| Atlas<br>", "| E22<br>"))]
+    assert len(table_rows) == 2
+    for line, label in zip(table_rows, ("Atlas", "E22")):
+        assert "[Atlas history: 19/19 PASS](continuous-baseline-20261003/README.md)" in line
+        assert f"[C6 {label} hold FAIL](c6-baseline-debug-20261003/README.md)" in line
+        assert all(f"BLOCKED ({total} required)" in line for total in (5, 19, 2))
+        assert line.endswith("| 0 |")
+    assert "E22 history: 19/19" not in markdown
+    assert "no current tier credit" in markdown and result == before
+    without_history = deepcopy(result)
+    without_history.pop("completed_api_studies")
+    assert publication._separate_baseline_links(without_history, result["rows"][0], ROOT,
+                                                ROOT / "reports/forge/technique-inventory.md") == []
+
+
 def test_committed_cohorts_rebuild_every_scientific_row_in_a_checkout_without_raw_logs(tmp_path):
     for relative in (publication.EVIDENCE_MANIFEST.parent, Path("reports/forge/technique-receipts"),
                      Path("configs/forge/ideas"), Path("configs/forge/configurations"),

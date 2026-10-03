@@ -691,6 +691,61 @@ def _word_task_diagnostics(root, execution_backend):
     return result
 
 
+def _current_tier_cell(row, tier, required, json_link):
+    """Display recorded states without turning missing/blocked work into FAIL."""
+    summary = row["tiers"][tier]
+    passed, total = summary["passed"], summary["total"]
+    counts = summary.get("counts")
+    if counts is None:
+        # Some older snapshots retain only the aggregate and task statuses.
+        # Unknown tasks stay in the denominator; the aggregate is not regraded.
+        required = set(required)
+        counts = Counter(task["status"] for task in row.get("tasks", [])
+                         if task["task_id"] in required and task["status"] != "PASS")
+        counts["PASS"] = passed
+        remaining = total - sum(counts.values())
+        if remaining >= 0:
+            counts["UNKNOWN"] += remaining
+    counts = {status: count for status, count in counts.items() if count}
+    if sum(counts.values()) != total or counts.get("PASS", 0) != passed:
+        # An incomplete legacy breakdown cannot establish an all-failed state.
+        return f"{passed}/{total}<br>[{total} required; task statuses]({json_link})"
+    if len(counts) == 1:
+        status = next(iter(counts))
+        if status == "PASS":
+            return f"{passed}/{total} PASS"
+        if status != "FAIL":
+            return f"{status.replace('_', ' ')} ({total} required)"
+    if not passed and set(counts) <= {"UNKNOWN", "NOT_RUN"}:
+        return f"NOT RUN/UNKNOWN ({total} required)"
+    other = " · ".join(f"{status.replace('_', ' ')} {count}"
+                       for status, count in sorted(counts.items()) if status != "PASS")
+    return f"{passed}/{total}" + (f"<br>{other}" if other else "")
+
+
+def _separate_baseline_links(result, row, root, path):
+    """Navigate separate Atlas/C6 evidence without granting current tier credit."""
+    family = row.get("trainer_family", row["candidate_id"].split("--", 1)[0])
+    if family not in {"atlas", "e22"}:
+        return []
+    studies = {study["id"]: study for study in
+               result.get("completed_api_studies", {}).get("rows", [])}
+    links = []
+    historical = studies.get("atlas19_original")
+    if historical:
+        counts = historical["counts"]
+        if counts == {"PASS": historical["required_cells"]}:
+            link = os.path.relpath(root / historical["readout"], path.parent)
+            links.append(f"[Atlas history: {counts['PASS']}/{historical['required_cells']} PASS]({link})")
+    hold = studies.get("c6_hold")
+    if hold and hold["counts"] == {"FAIL": hold["required_cells"]}:
+        debug = result.get("baseline_debugging", {}).get("readout")
+        link = os.path.relpath(root / (debug or hold["readout"]), path.parent)
+        label = {"atlas": "Atlas", "e22": "E22"}[family]
+        links.append(f"[C6 {label} hold FAIL]({link})")
+    return links
+
+
 def _current_markdown(result, root, path):
     def cell(value):
         return str(value if value is not None else "unknown").replace("|", "\\|").replace("\n", " ")
@@ -712,7 +767,8 @@ def _current_markdown(result, root, path):
                   "protocols and original goal GIFs. These separate results do not fill the ordinary "
                   "qualification cells below.", ""]
     lines += [
-             "Each cell is **passes / full required total** from one complete selected configuration. "
+             "Each cell retains **passes / full required total** or **status (N required)** from one selected configuration. "
+             "Mixed cells show the counts of failed, blocked and unmeasured tasks. "
              "Each trainer family and runtime has one row; its alternatives remain recorded separately. "
              "Expand the configuration details below for selection, provenance, other outcomes and cost.", "",
              "| Trainer family / runtime | " +
@@ -748,8 +804,11 @@ def _current_markdown(result, root, path):
         configuration_label = " · ".join([label[0], label[1][:12]]) if len(label) == 2 else name
         configuration_link = f"[{configuration_label}]({os.path.relpath(card, path.parent)})"
         backend = runtime.get("execution_backend", "unrecorded")
-        values = [f"{row['technique']}<br>{backend}",
-                  *[f"{row['tiers'][tier]['passed']}/{row['tiers'][tier]['total']}" for tier in tiers],
+        baseline_links = _separate_baseline_links(result, row, root, path)
+        family_label = "<br>".join([f"{row['technique']}", backend, *baseline_links])
+        values = [family_label,
+                  *[_current_tier_cell(row, tier, result["tier_requirements"][tier],
+                                      path.with_suffix('.json').name) for tier in tiers],
                   row["qualified_tier"]]
         lines.append("| " + " | ".join(cell(value) for value in values) + " |")
         details += [f"### {cell(row['technique'])} ({cell(backend)})", "",
@@ -760,13 +819,19 @@ def _current_markdown(result, root, path):
                     f"- **Compute:** {cell(compute)}",
                     f"- **Other outcomes:** {cell(others)}",
                     f"- **Paid seconds:** {round(seconds, 3) if seconds is not None else 'unknown'}", ""]
+        if baseline_links:
+            details += ["- **Separate baseline evidence:** " + " · ".join(baseline_links) +
+                        "; no current tier credit.", ""]
     lines += [""] + details + ["</details>", "", "Recorded results remain bound to their actual recipes, priors, initialization, budgets, sampling laws "
               "and hardware. They do not pool qualification across sources or qualify the latest checkout. "
               "Selection never combines passing tasks or tiers from different configurations. A failed best-observed "
               "configuration is not a qualified winner. Search qualification covers only its declared tuning tiers; "
               "later-tier outcomes are reported separately. The screening profile remains provisional and does not "
               "confer calibrated robustness or public-default adoption.", "",
-              "UNKNOWN means unmeasured. Failed or blocked prerequisites stop later work; required denominators stay fixed.", "",
+              "BLOCKED means execution was incompatible or a prerequisite was unavailable. "
+              "NOT RUN and UNKNOWN mean unexecuted or unmeasured; FAIL records an executed gate failure. "
+              "Failed or blocked prerequisites stop later work; required denominators stay fixed. "
+              "The Atlas-history and C6-hold links retain their separate protocols and supply no current tier credit.", "",
               f"[All configuration alternatives, trials, task statuses and exact bindings]({path.with_suffix('.json').name}) · "
               f"[Evidence and archived publication identities]({os.path.relpath(root / EVIDENCE_MANIFEST, path.parent)})", "",
               "Regenerate this same leaderboard from committed evidence, without training or raw-log hydration:", "",
