@@ -8,6 +8,7 @@ import shutil
 import pytest
 
 from experiments.forge.contracts import atomic_json, file_hash, read_json, stable_hash
+from experiments.forge.trainer_families import CURRENT_SELECTION, family_row_pin
 
 ROOT = Path(__file__).resolve().parents[1]
 spec = importlib.util.spec_from_file_location("forge_current_inventory", ROOT / "reports/forge/regenerate_technique_inventory.py")
@@ -51,7 +52,9 @@ def _register(root, manifest, name, source, *, finished=None, passed=0):
 
 @pytest.fixture
 def evidence(tmp_path, monkeypatch):
-    policy = {"id": "discriminator_stability", "revision": 2}
+    policy = {"id": "discriminator_stability", "revision": 2,
+              "assignments": [{"task": name, "importance": "required", "qualification_tier": 1}
+                              for name in ("two_pole", "token", "ae")]}
     atomic_json(tmp_path / "configs/forge/views/discriminator_stability.json", policy)
     manifest = {"schema_version": 1, "view": policy["id"], "view_revision": 2,
                 "policy_fingerprint": stable_hash(policy), "tier_requirements": {
@@ -63,6 +66,10 @@ def evidence(tmp_path, monkeypatch):
         pytest.fail("cached publication must not resolve live receipts or train")
     monkeypatch.setattr(publication, "write_report", unexpected)
     monkeypatch.setattr(publication, "regenerate", unexpected)
+    # These cached-evidence fixtures intentionally have no executable toy
+    # declarations; only the complete committed-checkout test uses real tasks.
+    monkeypatch.setattr("experiments.forge.views.load_view", lambda root, view_id:
+                        read_json(Path(root) / f"configs/forge/views/{view_id}.json"))
     return tmp_path, manifest
 
 
@@ -70,9 +77,59 @@ def _outputs(root):
     return {path: path.read_bytes() for path in (root / "reports/forge").glob("technique-inventory.*")}
 
 
+def _family_pin(root, manifest, row):
+    card = {"schema_version": 1, "scope": "whole_candidate_family_current", "default_adoption": False,
+            "view": manifest["view"], "policy_fingerprint": manifest["policy_fingerprint"],
+            "selections": [family_row_pin(row, selection_kind="historical_incumbent", reason="Recorded incumbent.")]}
+    atomic_json(root / CURRENT_SELECTION, card)
+    return card
+
+
+def test_current_pin_retains_exact_incumbent_after_new_source_and_never_pools(evidence):
+    root, manifest = evidence
+    incumbent = read_json(root / manifest["cohorts"][0]["snapshot"])["rows"][0]
+    incumbent["trainer_family"] = "bcap"
+    _family_pin(root, manifest, incumbent)
+    _register(root, manifest, "bcap", "c", finished="2026-10-03T01:00:00+00:00", passed=1)
+    result = read_json(publication.publish_current(root)["json"])
+    selected = next(row for row in result["rows"] if row["candidate_id"] == "bcap")
+    assert selected["candidate_revision"] == "revision-a"
+    assert selected["tasks"] == incumbent["tasks"] and selected["tiers"] == incumbent["tiers"]
+    assert len([row for row in result["rows"] if row["trainer_family"] == "bcap"]) == 1
+    assert {row["candidate_revision"] for row in result["configuration_rows"] if row["trainer_family"] == "bcap"} == {"revision-a", "revision-c"}
+    assert result["provenance"]["family_current_selection_sha256"] == file_hash(root / CURRENT_SELECTION)
+    before = _outputs(root)
+    assert publication.publish_current(root)["input_digest"] == result["provenance"]["input_digest"]
+    assert _outputs(root) == before
+
+
+@pytest.mark.parametrize("tamper", ["duplicate", "policy", "source", "recipe", "runtime", "whole_row", "standard"])
+def test_invalid_current_family_pin_cannot_change_publication(evidence, tamper):
+    root, manifest = evidence
+    row = read_json(root / manifest["cohorts"][0]["snapshot"])["rows"][0]
+    row["trainer_family"] = "bcap"
+    card = _family_pin(root, manifest, row)
+    publication.publish_current(root)
+    before = _outputs(root)
+    if tamper == "duplicate":
+        card["selections"].append(deepcopy(card["selections"][0]))
+    elif tamper == "policy":
+        card["policy_fingerprint"] = "edited"
+    elif tamper == "standard":
+        card["selections"][0]["selection_kind"] = "configured_standard"
+    else:
+        key = {"source": "source_digest", "recipe": "recipe_sha256", "runtime": "runtime_cohort_sha256",
+               "whole_row": "scientific_row_sha256"}[tamper]
+        card["selections"][0][key] = "edited"
+    atomic_json(root / CURRENT_SELECTION, card)
+    with pytest.raises(ValueError):
+        publication.publish_current(root)
+    assert _outputs(root) == before
+
+
 def _copy_word_diagnostics(root):
-    selection = read_json(ROOT / publication.WORD_TASK_SELECTION)
-    paths = [publication.WORD_TASK_SELECTION]
+    selection = read_json(ROOT / Path("configs/forge/selections/word-joint-task-v1.json"))
+    paths = [Path("configs/forge/selections/word-joint-task-v1.json")]
     paths += [Path(row[key]["path"]) for row in selection["recipes"] for key in ("receipt", "parent")]
     for relative in paths:
         (root / relative).parent.mkdir(parents=True, exist_ok=True)
@@ -93,23 +150,14 @@ def _copy_completed_studies(root):
     return registry
 
 
-def test_completed_studies_cannot_replace_selected_configs_history_or_word_results(evidence):
+def test_completed_studies_cannot_replace_selected_family_configs_or_history(evidence):
     root, manifest = evidence
-    selection = _copy_word_diagnostics(root)
-    families = []
-    for selected, source in zip(selection["recipes"], ("c", "d", "e")):
-        name = Path(selected["parent"]["path"]).stem
-        _register(root, manifest, name, source)
-        (root / f"configs/forge/ideas/{name}.json").unlink()
-        families.append({"id": selected["family"], "label": selected["family"],
-                         "canonical_candidate": name, "candidates": [name]})
-    atomic_json(root / "configs/forge/trainer-families.json", {"schema_version": 1, "families": families})
+    incumbent = read_json(root / manifest["cohorts"][0]["snapshot"])["rows"][0]
+    incumbent["trainer_family"] = "bcap"
+    _family_pin(root, manifest, incumbent)
     baseline = read_json(publication.publish_current(root)["json"])
     assert "completed_api_studies" not in baseline
     manifest = (root / publication.EVIDENCE_MANIFEST).read_bytes()
-    original_markdown = (root / "reports/forge/technique-inventory.md").read_text()
-    word_section = original_markdown.split("## Five-word joint task diagnostics", 1)[1]
-    word_section = word_section.split("No experiments were rerun for this publication.", 1)[0]
     _copy_completed_studies(root)
     published = publication.publish_current(root)
     current = read_json(published["json"])
@@ -125,7 +173,8 @@ def test_completed_studies_cannot_replace_selected_configs_history_or_word_resul
     assert all(row["qualification_input"] is row["reuse"] is False for row in rows)
     assert all(row["counts"]["execution"] == {"FAIL": 2, "UNKNOWN": 14} for row in rows[2:])
     markdown = Path(published["report"]).read_text()
-    assert word_section in markdown
+    assert "task_diagnostics" not in current
+    assert "Five-word joint task diagnostics" not in markdown
     assert "<summary>Selected configurations and provenance</summary>" in markdown
     assert "19/19 original PASS" in markdown and "2/2 new hold FAIL" in markdown
     assert "19/19 original PASS" in markdown.split("| Trainer family / runtime", 1)[0]
@@ -174,44 +223,6 @@ def test_baseline_diagnosis_is_additive_bound_navigation(evidence):
     with pytest.raises(FileNotFoundError):
         publication.publish_current(root)
     assert _outputs(root) == before
-
-
-@pytest.mark.parametrize("tamper,match", [
-    ("scope", "nonqualifying"), ("qualification_input", "nonqualifying"),
-    ("receipt", "artifact identity"), ("recipe", "recipe identity"), ("omitted_recipe", "recipe identity"),
-    ("final_metrics", "final_metrics binding"), ("runtime", "runtime binding"),
-    ("convergence", "convergence binding"), ("budget", "task or convergence binding"),
-    ("escape", "artifact path"),
-])
-def test_word_diagnostics_reject_unbound_results(tmp_path, tamper, match):
-    selection = _copy_word_diagnostics(tmp_path)
-    row = selection["recipes"][0]
-    if tamper == "scope":
-        selection["scope"] = "qualification"
-    elif tamper == "qualification_input":
-        row[tamper] = True
-    elif tamper == "receipt":
-        (tmp_path / row["receipt"]["path"]).write_text("{}\n")
-    elif tamper == "recipe":
-        row["recipe"]["lr"] *= 2
-        row["full_recipe_sha256"] = stable_hash(row["recipe"])
-    elif tamper == "omitted_recipe":
-        assert "beta2_end" not in read_json(tmp_path / row["receipt"]["path"])["recipe"]
-        row["recipe"]["beta2_end"] = .99
-        row["full_recipe_sha256"] = stable_hash(row["recipe"])
-    elif tamper == "final_metrics":
-        row[tamper]["modes"] = 4
-    elif tamper == "runtime":
-        row[tamper]["device"] = "cpu"
-    elif tamper == "convergence":
-        row[tamper]["passing_suffix"] = 23
-    elif tamper == "budget":
-        row["task"]["updates"] -= 1
-    else:
-        row["receipt"]["path"] = "../outside.json"
-    atomic_json(tmp_path / publication.WORD_TASK_SELECTION, selection)
-    with pytest.raises(ValueError, match=match):
-        publication._word_task_diagnostics(tmp_path, None)
 
 
 def test_current_publication_needs_no_originals_and_is_idempotent(evidence):
@@ -513,7 +524,10 @@ def test_same_source_cpu_registration_retains_cuda_evidence(evidence, monkeypatc
     assert read_json(cpu["json"])["rows"][0]["candidate_revision"] == "revision-cpu"
     cuda = read_json(publication.publish_current(root, execution_backend="cuda")["json"])
     assert cuda["rows"][0]["candidate_revision"] == "revision-a"
-    both = read_json(publication.publish_current(root)["json"])
+    with pytest.raises(ValueError, match="explicit whole-row family selection"):
+        publication.publish_current(root)
+    both = read_json(publication.publish_current(
+        root, recorded_policy="configs/forge/views/discriminator_stability.json")["json"])
     assert {row["runtime_cohort"]["execution_backend"] for row in both["rows"]} == {"cpu", "cuda"}
     assert len(read_json(root / publication.EVIDENCE_MANIFEST)["cohorts"]) == 3
 
@@ -560,11 +574,20 @@ def test_family_new_hardware_keeps_its_own_canonical_fallback(evidence):
     atomic_json(root / entry["snapshot"], snapshot)
     entry["json_sha256"] = file_hash(root / entry["snapshot"])
     atomic_json(root / publication.EVIDENCE_MANIFEST, manifest)
+    with pytest.raises(ValueError, match="explicit whole-row family selection"):
+        publication.publish_current(root)
+    recorded = read_json(publication.publish_current(
+        root, recorded_policy="configs/forge/views/discriminator_stability.json")["json"])
+    assert len(recorded["rows"]) == 2 and all(row["candidate_id"] == "bcap" for row in recorded["rows"])
+    assert len(recorded["configuration_rows"]) == 3
+    assert next(row for row in recorded["rows"] if row["cohort"] == "canonical-c")["attempt_ids"] == []
+    incumbent = deepcopy(read_json(root / manifest["cohorts"][0]["snapshot"])["rows"][0])
+    incumbent["trainer_family"] = "bcap"
+    _family_pin(root, manifest, incumbent)
     result = read_json(publication.publish_current(root)["json"])
-    assert len(result["rows"]) == 2 and all(row["candidate_id"] == "bcap" for row in result["rows"])
-    assert {row["runtime_cohort"]["compute_profiles"]["cuda"]["model"] for row in result["rows"]} == {"gpu-a", "gpu-c"}
+    assert len(result["rows"]) == 1 and result["rows"][0]["cohort"] == "cohort-a"
     assert len(result["configuration_rows"]) == 3
-    assert next(row for row in result["rows"] if row["cohort"] == "canonical-c")["attempt_ids"] == []
+    assert {row["alternative_scope"] for row in result["configuration_rows"]} == {"selected", "archived_alternative"}
 
 
 @pytest.mark.parametrize("tamper,message", [
@@ -624,6 +647,89 @@ def test_raw_technique_export_cannot_replace_registered_current_evidence(evidenc
     assert _outputs(root) == before
 
 
+def _tier_display_fixture(tier1, later="UNKNOWN"):
+    required = {"1": [f"smoke-{i}" for i in range(5)],
+                "2": [f"quality-{i}" for i in range(19)],
+                "3": [f"hold-{i}" for i in range(2)]}
+    statuses = {"1": tier1, "2": [later] * 19, "3": [later] * 2}
+    row = {"candidate_id": "atlas", "trainer_family": "atlas", "technique": "Atlas",
+           "runtime_cohort": {"execution_backend": "cpu"}, "qualified_tier": 0,
+           "tasks": [{"task_id": task, "status": status, "gate_status": status}
+                     for tier, names in required.items() for task, status in zip(names, statuses[tier])],
+           "tiers": {tier: {"passed": values.count("PASS"), "total": len(values),
+                            "counts": dict(Counter(values))} for tier, values in statuses.items()}}
+    return {"view": "discriminator_stability", "tier_requirements": required, "rows": [row], "evidence_sources": {},
+            "provenance": {"input_digest": "synthetic-display-only"}}
+
+
+@pytest.mark.parametrize("status,label", [
+    ("BLOCKED", "BLOCKED"), ("UNKNOWN", "UNKNOWN"), ("NOT_RUN", "NOT RUN"),
+    ("INCOMPLETE", "INCOMPLETE"), ("INVALID", "INVALID"),
+])
+def test_current_tier_cells_keep_blocked_and_unmeasured_denominators(tmp_path, status, label):
+    result = _tier_display_fixture([status] * 5, later=status)
+    before = deepcopy(result)
+    markdown = publication._current_markdown(result, tmp_path, tmp_path / "reports/forge/table.md")
+    row = next(line for line in markdown.splitlines() if line.startswith("| Atlas<br>"))
+    for total in (5, 19, 2):
+        assert f"{label} ({total} required)" in row
+    assert "FAIL" not in row
+    assert result == before
+
+
+@pytest.mark.parametrize("statuses,expected", [
+    (["PASS", "FAIL", "BLOCKED", "UNKNOWN", "NOT_RUN"],
+     "1/5<br>BLOCKED 1 · FAIL 1 · NOT RUN 1 · UNKNOWN 1"),
+    (["FAIL"] * 5, "0/5<br>FAIL 5"),
+    (["FAIL"] + ["UNKNOWN"] * 4, "0/5<br>FAIL 1 · UNKNOWN 4"),
+    (["NOT_RUN", "UNKNOWN", "NOT_RUN", "UNKNOWN", "UNKNOWN"],
+     "NOT RUN/UNKNOWN (5 required)"),
+    (["PASS"] * 5, "5/5 PASS"),
+])
+def test_current_tier_cells_show_actual_mixed_gate_counts(tmp_path, statuses, expected):
+    result = _tier_display_fixture(statuses)
+    before = deepcopy(result)
+    markdown = publication._current_markdown(result, tmp_path, tmp_path / "reports/forge/table.md")
+    row = next(line for line in markdown.splitlines() if line.startswith("| Atlas<br>"))
+    assert expected in row
+    assert "UNKNOWN (19 required)" in row and "UNKNOWN (2 required)" in row
+    assert result == before
+
+
+def test_legacy_tier_display_does_not_invent_an_all_failed_breakdown(tmp_path):
+    result = _tier_display_fixture(["BLOCKED"] * 5)
+    row = result["rows"][0]
+    row["tiers"]["1"].pop("counts")
+    assert publication._current_tier_cell(row, "1", result["tier_requirements"]["1"], "table.json") == "BLOCKED (5 required)"
+    # A legacy aggregate can lack enough task detail to reconstruct its counts.
+    row["tiers"]["1"]["passed"] = 1
+    before = deepcopy(result)
+    rendered = publication._current_tier_cell(row, "1", result["tier_requirements"]["1"], "table.json")
+    assert rendered == "1/5<br>[5 required; task statuses](table.json)"
+    assert "FAIL" not in rendered and result == before
+
+
+def test_main_policy_rows_link_separate_history_and_failed_hold_without_credit():
+    result = read_json(ROOT / "reports/forge/technique-inventory.json")
+    result["rows"] = [row for row in result["rows"] if row["trainer_family"] in {"atlas", "e22"}]
+    assert {row["trainer_family"] for row in result["rows"]} == {"atlas", "e22"}
+    before = deepcopy(result)
+    markdown = publication._current_markdown(result, ROOT, ROOT / "reports/forge/technique-inventory.md")
+    table_rows = [line for line in markdown.splitlines() if line.startswith(("| Atlas<br>", "| E22<br>"))]
+    assert len(table_rows) == 2
+    for line, label in zip(table_rows, ("Atlas", "E22")):
+        assert "[Atlas history: 19/19 PASS](continuous-baseline-20261003/README.md)" in line
+        assert f"[C6 {label} hold FAIL](c6-baseline-debug-20261003/README.md)" in line
+        assert all(f"BLOCKED ({total} required)" in line for total in (5, 19, 2))
+        assert line.endswith("| 0 |")
+    assert "E22 history: 19/19" not in markdown
+    assert "no current tier credit" in markdown and result == before
+    without_history = deepcopy(result)
+    without_history.pop("completed_api_studies")
+    assert publication._separate_baseline_links(without_history, result["rows"][0], ROOT,
+                                                ROOT / "reports/forge/technique-inventory.md") == []
+
+
 def test_committed_cohorts_rebuild_every_scientific_row_in_a_checkout_without_raw_logs(tmp_path):
     for relative in (publication.EVIDENCE_MANIFEST.parent, Path("reports/forge/technique-receipts"),
                      Path("configs/forge/ideas"), Path("configs/forge/configurations"),
@@ -679,30 +785,18 @@ def test_committed_cohorts_rebuild_every_scientific_row_in_a_checkout_without_ra
     assert all((tmp_path / relative).read_bytes() == original for relative, original in snapshot_bytes.items())
     assert not (tmp_path / "reports/forge/attempts").exists()
     assert len(list((tmp_path / "reports/forge").rglob("*.md"))) == 1
-    _copy_word_diagnostics(tmp_path)
+    selection = _copy_word_diagnostics(tmp_path)
     updated = read_json(publication.publish_current(tmp_path)["json"])
     for key in ("rows", "configuration_rows", "evidence_rows", "archived_evidence_rows", "tier_requirements"):
         assert updated.get(key) == result.get(key)
-    diagnostics = updated["task_diagnostics"]
-    assert diagnostics["scope"] == "task_only_diagnostic"
-    assert diagnostics["qualification_input"] is False and diagnostics["qualification_reuse"] is False
-    assert [row["gate_status"] for row in diagnostics["rows"]] == ["PASS"] * 3
-    assert [row["convergence"]["passing_suffix"] for row in diagnostics["rows"]] == [24, 21, 22]
-    markdown = (tmp_path / "reports/forge/technique-inventory.md").read_text()
-    assert "do not replace the configurations above, fill Tier 1 cells, or qualify defaults" in markdown
-    assert "0.997103" in markdown and "0.999942" in markdown and "0.996137" in markdown
-    assert publication._word_task_diagnostics(tmp_path, "cpu") is None
-    assert publication._word_task_diagnostics(tmp_path, "cuda") == diagnostics
+    assert "task_diagnostics" not in updated
+    assert "Five-word joint task diagnostics" not in (tmp_path / "reports/forge/technique-inventory.md").read_text()
     before = _outputs(tmp_path)
     times = {path: path.stat().st_mtime_ns for path in before}
     publication.publish_current(tmp_path)
     assert _outputs(tmp_path) == before
     assert times == {path: path.stat().st_mtime_ns for path in before}
-    historical = read_json(publication.publish_current(
-        tmp_path, recorded_policy="configs/forge/views/discriminator_stability.json")["json"])
-    assert "task_diagnostics" not in historical and historical["rows"] == updated["rows"]
+    # A historical direct-task export is no longer an active solution input.
+    (tmp_path / selection["recipes"][0]["receipt"]["path"]).write_text("{}\n")
     publication.publish_current(tmp_path)
-    (tmp_path / diagnostics["rows"][0]["receipt"]["path"]).write_text("{}\n")
-    with pytest.raises(ValueError, match="artifact identity"):
-        publication.publish_current(tmp_path)
     assert _outputs(tmp_path) == before

@@ -185,6 +185,44 @@ def test_summary_refresh_missing_view_is_a_pointer_without_invented_gate_results
     assert not (root / "reports/forge/leaderboards/new.json").exists()
 
 
+def test_summary_freshness_uses_compact_inputs_independent_of_attempt_hydration(publication, monkeypatch):
+    root, publication_path, report = publication
+    attempt = root / "reports/forge/attempts/local-hydration"
+    atomic_json(attempt / "request.json", {"request_id": "archived-request"})
+    atomic_json(attempt / "result.json", {"result_hash": "archived-result"})
+    monkeypatch.setattr(knowledge, "_attempts", lambda *args: pytest.fail("Summary refresh must not hydrate attempts"))
+    knowledge.compile_memory(root, summaries_only=True)
+    manifest = read_json(root / "reports/forge/compilation.json")
+    assert not any(name.startswith("reports/forge/attempts/") for name in manifest["input_hashes"])
+    assert str(publication_path.relative_to(root)) in manifest["input_hashes"]
+    atomic_json(attempt / "result.json", {"result_hash": "another-local-copy"})
+    assert knowledge.freshness(root)["fresh"]
+    for path in attempt.iterdir():
+        path.unlink()
+    assert knowledge.freshness(root)["fresh"]
+    report["trials"][0]["tasks"][0]["metrics"]["min_mass_ratio"] = .4
+    atomic_json(publication_path, report)
+    assert not knowledge.freshness(root)["fresh"]
+
+
+def test_ordinary_receipt_compilation_still_tracks_original_attempt_inputs(publication):
+    root, _, _ = publication
+    attempt = root / "reports/forge/attempts/original"
+    request_path, result_path = attempt / "request.json", attempt / "result.json"
+    atomic_json(request_path, {"request_id": "original-request"})
+    atomic_json(result_path, {"result_hash": "original-result"})
+    knowledge.compile_memory(root)
+    assert knowledge.freshness(root)["fresh"]
+    atomic_json(result_path, {"result_hash": "changed-result"})
+    status = knowledge.freshness(root)
+    assert not status["fresh"]
+    assert str(result_path.relative_to(root)) in status["changed_inputs"]
+    request_path.unlink()
+    status = knowledge.freshness(root)
+    assert not status["fresh"]
+    assert str(request_path.relative_to(root)) in status["removed_inputs"]
+
+
 def test_current_published_campaign_has_complete_discoverable_trial_coverage():
     root = Path(__file__).resolve().parents[1]
     records = publication_memory.normalize(root)

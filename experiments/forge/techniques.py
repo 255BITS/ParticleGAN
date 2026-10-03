@@ -76,9 +76,11 @@ def validate_same_technique(base, trial):
 
 def recipe_field_active(name, value, *, task=None):
     """Conservative declared activity, without constructing or sampling models."""
+    from .boundaries import prior_control_binding
+
     recipe = _recipe(value)
     execution = {} if task is None else task.get("execution", {})
-    prior_active = (execution.get("prior_applicability") != "not_sampled"
+    prior_active = ((task is None or prior_control_binding(task)["latent_table_controls"])
                     and execution.get("prior", {}).get("learnable", True))
     penalty_end = recipe.reg_coeff if recipe.reg_coeff_end is None else recipe.reg_coeff_end
     if name in {"reg_kappa", "reg_every", "reg_coeff_anneal_end"}:

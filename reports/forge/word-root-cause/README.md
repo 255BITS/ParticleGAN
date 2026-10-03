@@ -9,7 +9,10 @@ was added.
 
 These are **task-only diagnostic results**, not ordinary Tier 1 qualifications
 or new default selections. The existing [current technique leaderboard](../technique-inventory.md)
-retains its original qualification cells and displays these diagnostics separately.
+selects reusable ordinary family candidates through the full task ladder. This
+task-only study and its exact recipe export remain historical motivation and
+reproduction evidence; they supply no ordinary qualification or current
+task-specific solution selection.
 K3P/KA2 clean/full arms disable existing training
 noise and the short network horizon cap, crossing Forge's strict mechanism
 activation boundaries relative to their original parents. They are authorized
@@ -209,10 +212,11 @@ The software regression passed 4,080 tests (63 skipped, one xfail,
 process. After regeneration, all **83 focused word/grader/publication/freshness
 tests passed**. These software checks launch no additional scientific word runs.
 
-Use the three exported recipes for this declared word task, with the explicit
-host binding and sampling law. Before ordinary qualification or default adoption,
-run the existing complete view and its provisional calibration policy under a
-new bounded campaign; these task-only passes do not bypass prerequisites or
-predict transfer. Future host registration should verify effective role rates,
+The three historical recipe exports reproduce this declared word study with its
+explicit host binding and sampling law. Reuse proceeds through ordinary global
+family candidates and the existing complete view under a bounded campaign;
+these task-only passes do not bypass prerequisites, select a current standard,
+predict transfer or authorize default adoption. The provisional calibration
+policy remains in force. Future host registration should verify effective role rates,
 schedule horizons, categorical output noise and joint-input penalty units before
 attributing a failure to a formulation. No automatic recipe adaptation is added.

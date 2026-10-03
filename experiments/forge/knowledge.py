@@ -75,11 +75,21 @@ def _memory_records(root: Path) -> tuple[list[dict], list[dict]]:
     return sorted([*records, *normalize(root)], key=lambda record: record["record_id"]), conflicts
 
 
-def _input_hashes(root: Path) -> dict:
+def _input_hashes(root: Path, *, summaries_only: bool = False) -> dict:
+    """Hash the inputs consumed by this compilation mode.
+
+    Compact publication recall reads records and publication bindings, while
+    preserving existing qualifications. Hydrated original attempts are inputs
+    only to the ordinary receipt reducer, so their local availability cannot
+    invalidate a summaries-only publication in a clean checkout.
+    """
     from .publication_memory import input_paths
     paths = set(input_paths(root))
-    for directory in ("reports/forge/records", "reports/forge/attempts", "configs/forge",
-                      "reports/forge/calibration-lanes", "reports/forge/promotions"):
+    directories = ["reports/forge/records", "configs/forge",
+                   "reports/forge/calibration-lanes", "reports/forge/promotions"]
+    if not summaries_only:
+        directories.append("reports/forge/attempts")
+    for directory in directories:
         paths.update((root / directory).rglob("*.json"))
     # The history catalog tracks Git blobs of unrelated engineering source.
     # Its drift is reported separately and cannot make scientific recall stale.
@@ -102,8 +112,9 @@ def freshness(root: Path) -> dict:
     from .publication_memory import OUTPUT, normalize
     root = Path(root)
     path = root / "reports/forge/compilation.json"
-    current = _input_hashes(root)
     manifest = read_json(path) if path.is_file() else {}
+    summaries_only = manifest.get("qualification_refresh", {}).get("mode") == "preserved_published_evidence"
+    current = _input_hashes(root, summaries_only=summaries_only)
     previous = manifest.get("input_hashes", {})
     added, removed = sorted(current.keys() - previous.keys()), sorted(previous.keys() - current.keys())
     changed = sorted(name for name in current.keys() & previous.keys() if current[name] != previous[name])
@@ -620,7 +631,7 @@ def compile_memory(root: Path, *, summaries_only: bool = False) -> dict:
                 # the goal JSON and the inventory's evidence registry.
                 (output / "leaderboards" / (path.stem + ".md")).unlink(missing_ok=True)
         gaps = _gaps(root)
-        inputs = _input_hashes(root)
+        inputs = _input_hashes(root, summaries_only=summaries_only)
         coverage = gaps.get("inventory_coverage", {"valid": False, "reason": "inventory unavailable"})
         try:
             from .history import validate_inventory

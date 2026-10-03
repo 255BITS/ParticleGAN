@@ -175,6 +175,22 @@
       "json_sha256": "926a4b2c7fdefacd51629577104eae4ee5c8c6da85e241f50e14ed215215ec3b",
       "snapshot": "reports/forge/technique-evidence/494153533dcedb578c944134a3b16f6d368d1439685dd7689934eabf858887e3.json",
       "source_commit": "2899099048c0a9987eb8720214abfce56d86d92a"
+    },
+    {
+      "candidates": {
+        "k3p--370894f9284090fc9771145a869f2d7fa617283c3736c8e461a47553c9668ce6": "2026-10-03T16:25:31.792+00:00",
+        "k3p--9f4bc2973d95cf1545e009ec044ed582a318e6d869d62f4d99f6eee529d1d93d": "2026-10-03T16:25:38.579+00:00",
+        "k3p-global-repair-v1": "2026-10-03T16:05:50.285+00:00",
+        "ka2--4496b859e066d7a4b6279f2d34fbd58d083e0f18c2a22ade5ba12c964d01a7ca": "2026-10-03T16:25:45.925+00:00",
+        "ka2--8d6bb101262f49dcef37111b37ab781ca09652b47ad95e783ccea4dfbec680b4": "2026-10-03T16:25:52.811+00:00",
+        "ka2-global-repair-v1": "2026-10-03T16:08:49.071+00:00",
+        "r1r2--724b3d52fbb2172a985d1bf29890b2ef9ba2598c9f1724d93a9afa7c872cbdad": "2026-10-03T16:26:28.952+00:00",
+        "r1r2--f78d5d603be1611025389c4ca0f7f485f3d2caa0a25fb6bc38b7c96da3509a3e": "2026-10-03T16:26:25.974+00:00",
+        "r1r2-global-repair-v1": "2026-10-03T16:11:50.308+00:00"
+      },
+      "json_sha256": "832b903fe468c18e85b2101f87261f2cffc5e3b9bde502f10204b4542e82e3e6",
+      "snapshot": "reports/forge/technique-evidence/a5571522adc7d7ea5d51a7ab62fd66acf6b320d6f6d60af40546494054646f13.json",
+      "source_commit": "36ed5655d9e6cfd7f92626cc4ca8c18e07edcb45"
     }
   ],
   "note": "Numerical evidence/provenance only. The sole current technique leaderboard is reports/forge/technique-inventory.md; snapshots cannot qualify the latest checkout.",

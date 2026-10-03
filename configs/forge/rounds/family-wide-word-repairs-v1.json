@@ -1,0 +1,42 @@
+{
+  "actual_grouped_job_reservation_seconds_per_candidate": 45300,
+  "base_commit": "53f2d423d662fb2ae52312215fda11826219174c",
+  "base_provenance": "Worktree branch base at creation; independent of later origin/develop movement and eventual executed source commit.",
+  "campaign": "configs/forge/campaigns/family-wide-word-repairs-v1.json",
+  "campaign_budget_seconds": 146700,
+  "candidate_budget_seconds": 48900,
+  "candidates": [
+    "k3p-global-repair-v1",
+    "ka2-global-repair-v1",
+    "r1r2-global-repair-v1"
+  ],
+  "cpu_threads": 1,
+  "families": [
+    "k3p",
+    "ka2",
+    "r1r2"
+  ],
+  "gpus": [
+    0
+  ],
+  "id": "family-wide-word-repairs-v1",
+  "max_rounds": 1,
+  "maximum_candidates": 3,
+  "maximum_configuration_variants_per_candidate": 1,
+  "ordinary_stop_policy": "First required failure stops remaining tasks in that tier and all later tiers; unknown cells remain unmeasured. No diagnostic word bypass.",
+  "post_round_policy": "Read out all measured and gated cells. No automatic further search, seed experiment, continuation, or default adoption. A justified global numeric search requires a fresh bounded declaration and source freeze.",
+  "protocol_seed": 0,
+  "qualification_reuse_of_old_word_diagnostics": false,
+  "recipe_policy": "One fixed global optimizer/penalty/noise/schedule recipe per family candidate across every eligible task. Existing task-owned geometry/resources/prior/horizon/objectives and explicit mechanism applicability remain task conditions; no per-task candidate tweaks.",
+  "registration": "Ordinary schema-v2 ideas, not search cards. K3P/KA2 activation-boundary changes explicit; existing formulation families preserved because no kernel/optimizer-family/objective change.",
+  "required_tasks_by_tier": [
+    5,
+    19,
+    2
+  ],
+  "schema_version": 1,
+  "task_allowance_sum_per_candidate": 48900,
+  "through_tier": 3,
+  "view": "discriminator_stability",
+  "workers": 1
+}
