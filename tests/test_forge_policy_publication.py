@@ -311,3 +311,70 @@ def test_maintained_publisher_provenance_binds_package_sources():
     assert provenance["path"] == "experiments/forge/policy_publication.py"
     assert all(publisher.file_hash(publisher.ROOT / name) == digest
                for name, digest in provenance["files_sha256"].items())
+
+
+def reused_evidence_fixture(root):
+    """Reuse original receipts after a docs-only origin/physical-placement change."""
+    combined, packet = fixture(root)
+    original_source = deepcopy(packet["source"])
+    packet["source"]["commit"] = "c" * 40
+    for trial in packet["trials"]:
+        for row in trial["cases"]:
+            if row.get("receipt_path"):
+                row["evidence_source"] = deepcopy(original_source)
+                row["evidence_runtime"] = deepcopy(row["runtime"])
+    seal(root, packet)
+    # Current placement is cuda:1; each retained original receipt remains cuda:0.
+    for archive in packet["family_archives"]:
+        lane = json.loads(Path(archive["path"]).read_text())
+        lane["lane_runtime"]["device"] = "cuda:1"
+        archive["runtime"]["device"] = "cuda:1"
+        write(Path(archive["path"]), lane)
+        archive["sha256"] = publisher.file_hash(archive["path"])
+    write(combined, packet)
+    return combined, packet
+
+
+def test_reused_original_origin_and_gpu_placement_are_preserved_in_publication(tmp_path):
+    path, _ = reused_evidence_fixture(tmp_path / "originals")
+    before = {str(raw): publisher.file_hash(raw) for raw in path.parent.rglob("*") if raw.is_file()}
+    cohort = publisher.load_combined(path)
+    assert cohort["source"]["commit"] == "c" * 40
+    observed = [row for trial in cohort["trials"] for row in trial["cases"] if row["full_protocol_complete"]]
+    assert len(observed) == 6
+    for row in observed:
+        assert row["evidence_source"]["commit"] == "a" * 40
+        assert row["evidence_source"]["files_sha256"] == cohort["source"]["files_sha256"]
+        assert row["evidence_runtime"]["device"] == "cuda:0"
+    assert all(archive["runtime"]["device"] == "cuda:1" for archive in cohort["family_archives"])
+    publisher.publish([path], tmp_path / "publication")
+    assert before == {str(raw): publisher.file_hash(raw) for raw in path.parent.rglob("*") if raw.is_file()}
+
+
+@pytest.mark.parametrize("mutation,match", [
+    ("unbound_origin", "source-bound"), ("fake_current_origin", "source-bound"),
+    ("source_bytes", "source bytes"), ("hardware_model", "hardware cohort"),
+    ("device_type", "hardware cohort"), ("thread_count", "hardware cohort"),
+    ("fake_current_placement", "retained evidence identity"),
+])
+def test_reused_evidence_cannot_recertify_changed_origin_bytes_or_runtime(tmp_path, mutation, match):
+    path, packet = reused_evidence_fixture(tmp_path / "originals")
+    row = next(row for trial in packet["trials"] for row in trial["cases"] if row.get("receipt_path"))
+    if mutation == "unbound_origin": row.pop("evidence_source")
+    elif mutation == "fake_current_origin": row["evidence_source"]["commit"] = packet["source"]["commit"]
+    elif mutation == "source_bytes": row["evidence_source"]["files_sha256"]["software-fixture.py"] = "d" * 64
+    elif mutation == "hardware_model": row["evidence_runtime"]["cuda_device_model"] = "different hardware"
+    elif mutation == "device_type": row["evidence_runtime"]["device"] = "cpu"
+    elif mutation == "thread_count": row["evidence_runtime"]["torch_threads"] = 2
+    else: row["evidence_runtime"]["device"] = "cuda:1"
+    # Update both source packets and their certified archive byte bindings;
+    # only the scientific metadata under test is inconsistent with originals.
+    for archive in packet["family_archives"]:
+        lane = json.loads(Path(archive["path"]).read_text())
+        replacements = {trial["id"]: trial for trial in packet["trials"] if trial["family"] == archive["family"]}
+        lane["trials"] = [deepcopy(replacements.get(trial["id"], trial)) for trial in lane["trials"]]
+        write(Path(archive["path"]), lane)
+        archive["sha256"] = publisher.file_hash(archive["path"])
+    write(path, packet)
+    with pytest.raises(ValueError, match=match):
+        publisher.load_combined(path)
