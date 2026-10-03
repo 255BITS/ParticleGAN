@@ -216,7 +216,7 @@ Declared calibration status: **provisional**.
 
 Finite-word acquisition placement and rejection costs are not calibrated. Existing mechanism smoke prerequisites apply; this view supplies no release/default promotion.
 
-No published solution leaderboard for this view yet; task registration and related API media confer no candidate qualification.
+Declaration only: [view pointer](leaderboards/five_word_joint.md); no published candidate outcomes, metrics or measured costs.
 
 ### Tier 1: smoke
 
@@ -440,7 +440,7 @@ Declared calibration status: **provisional**.
 
 Tier 1 placement is a hypothesis. Freeze independent positive/negative references, cost and rejection criteria before a bounded tier calibration; no existing screening profile or release qualification changes.
 
-No published solution leaderboard for this view yet; task registration and related API media confer no candidate qualification.
+Declaration only: [view pointer](leaderboards/ring16_acquisition.md); no published candidate outcomes, metrics or measured costs.
 
 ### Tier 1: smoke
 

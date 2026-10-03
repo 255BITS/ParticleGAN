@@ -9,7 +9,7 @@ import shlex
 from urllib.parse import quote
 
 from .contracts import atomic_json, atomic_text, file_hash, read_json, stable_hash
-from .knowledge import leaderboard_path
+from .knowledge import DECLARATION_ONLY_BOARD, leaderboard_path
 from .priors import PRIOR_CODE_PATHS, task_prior
 from .research_artifacts import build_artifacts
 from .views import load_tasks, load_view
@@ -228,7 +228,9 @@ def render_markdown(report: dict, root: Path, output_path: Path | None = None) -
         if view["evidence_scope"] == "calibration_diagnostic":
             lines += ["This view records calibration diagnostics and grants no ordinary qualification.", ""]
         board = leaderboard_path(root, view["id"])
-        if (root / board).is_file():
+        if (root / board).is_file() and DECLARATION_ONLY_BOARD in (root / board).read_text():
+            lines += [f"Declaration only: {link('view pointer', board.as_posix())}; no published candidate outcomes, metrics or measured costs."]
+        elif (root / board).is_file():
             lines += [f"Candidate outcomes, metrics and measured costs: {link('leaderboard', board.as_posix())}."]
         else:
             lines += ["No published solution leaderboard for this view yet; task registration and related API media confer no candidate qualification."]
