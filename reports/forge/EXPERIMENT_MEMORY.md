@@ -9,11 +9,9 @@ Records: 332. Inventory coverage: complete. Unresolved import items: 7.
 - [adaptation](leaderboards/adaptation.md)
 - [clockfree_continuous](leaderboards/clockfree_continuous.md)
 - [discriminator_stability](technique-inventory.md)
-- [five_word_joint](leaderboards/five_word_joint.md)
 - [formulation_comparison](leaderboards/formulation_comparison.md)
 - [host_profile_transfer](leaderboards/host_profile_transfer.md)
 - [quality_coverage](leaderboards/quality_coverage.md)
-- [ring16_acquisition](leaderboards/ring16_acquisition.md)
 
 [Measured automation costs, reuse, and avoided work](automation.json). Run `python -m experiments.forge stats` for current accounting; unavailable measurements remain explicit.
 
@@ -4165,4 +4163,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `afab6fff6f1c0f43ed61f542f481c44192ece1d47a9770873382039eee6d05aa`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `4dce9f73baf96513337217b56b9b6d9d1b2795232e1244bd5b40f5f4b945c6b3`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

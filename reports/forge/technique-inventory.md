@@ -1,4 +1,6 @@
-# Current Forge trainer-family leaderboard
+# Recorded Forge trainer-family leaderboard
+
+This table preserves [discriminator_stability revision 2](../../configs/forge/view-history/discriminator_stability-v2.json) with recorded required denominators **Tier 1: 3, Tier 2: 19, Tier 3: 2**. Current task placement is listed in [experiments by tier](EXPERIMENTS_BY_TIER.md). The recorded outcomes supply no qualification for a later view revision.
 
 Each cell is **passes / full required total** from one complete selected configuration. Each trainer family and runtime has one row; its alternatives remain recorded separately.
 
@@ -32,12 +34,12 @@ UNKNOWN means unmeasured. Failed or blocked prerequisites stop later work; requi
 Regenerate this same leaderboard from committed evidence, without training or raw-log hydration:
 
 ```sh
-python reports/forge/regenerate_technique_inventory.py
+python reports/forge/regenerate_technique_inventory.py --recorded-policy configs/forge/view-history/discriminator_stability-v2.json
 ```
 
-After a new experiment, use `--source-commit <executed-commit>` to independently regrade its hydrated original receipts and update this leaderboard. Source snapshots are provenance, not additional leaderboards.
+This command uses the exact archived policy and registered snapshots; it does not resolve new declarations. New evidence for a later view revision requires its own compatible evidence registration.
 
-Publication input digest `a982a4a383c5c117941cccbd8aabf4c8171362f0b3cc7ade59970c866c48ff42`.
+Publication input digest `28961256504842c517ab43cdb8f8a3e0c9f8eacd9ce2217108515950e465be74`.
 
 Archived alternatives retain their original outcomes and incompatible source/runtime bindings:
 

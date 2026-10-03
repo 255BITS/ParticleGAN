@@ -35,8 +35,9 @@ word/typo generalization.
 
 The historical/source and API results keep their original source, recipe, prior,
 initialization, sampling, budgets and runtime. They do not qualify this new Forge
-task. The [current solution leaderboard](../technique-inventory.md) remains
-unchanged; this view has no qualified winner.
+task. The [current solution leaderboard](../technique-inventory.md) retains its
+frozen revision-2 research cohorts; this registration supplies no full-task
+qualification.
 
 ## Short-demo result and recommendation
 
@@ -71,7 +72,7 @@ the published compact receipt retains their exact SHA-256 identities.
 This verifies the registration path and its evidence guards. It does not test
 whether the Forge cohort succeeds at its full budget and does not contradict
 either older full-budget PASS. Review the preserved joint objective and numerical
-controls first, then decide whether to run the normal gated campaign. Keep Tier 2
+controls first, then decide whether to run the normal gated campaign. Keep Tier 1
 provisional until a separately budgeted calibration measures rejection cost and
 false rejections; no automatic continuation, tuning or promotion follows.
 
@@ -139,13 +140,15 @@ requires all 24 observations and five consecutive passing terminal checks.
 Finite state, G/E/prior/D optimizer updates, mechanism activation and RNG
 isolation also remain required; an endpoint or PASS stamp cannot qualify a run.
 
-The new [five_word_joint view](../../../configs/forge/views/five_word_joint.json)
-keeps the three existing mechanism smoke prerequisites at Tier 1 and places word
-acquisition provisionally in Tier 2. A 20,001-update quality budget is too costly
-to assert cheap-smoke placement without calibration. Existing stability views,
-leaderboards, calibration and search contracts stay frozen. A scientific tier
-study should preregister positive/negative references, false rejections and
-cost-to-rejection, and change only view policy after collecting evidence.
+The [main discriminator_stability view](../../../configs/forge/views/discriminator_stability.json)
+places this acquisition task provisionally in Tier 1, alongside
+`ring16_acquisition` and the three existing mechanism checks. Revision 3 requires
+5/19/2 tasks. The 20,001-update word budget and 900-second allowance stay unchanged;
+placement alone does not establish cheap rejection or a calibrated screen.
+Historical revision-2 3/19/2 results, calibration and search contracts retain
+their frozen identities. A scientific tier study should preregister
+positive/negative references, false rejections and cost-to-rejection before
+adopting the expanded screen.
 
 ## Reproduce and review
 
@@ -154,7 +157,7 @@ report regeneration writes the Markdown report and launches no training:
 
 ```sh
 python -m experiments.forge validate
-python -m experiments.forge plan five-word-joint-ka2-v1 --through-tier 2 --device cpu
+python -m experiments.forge plan five-word-joint-ka2-v1 --view discriminator_stability --through-tier 1 --device cpu
 python -m experiments.forge experiments-by-tier --output reports/forge/EXPERIMENTS_BY_TIER.md
 ```
 
@@ -173,17 +176,21 @@ Bulk stdout, observations and state remain under ignored `runs/forge`; publish
 only the compact receipt and final GIF. Output directories are exclusive.
 
 For a later explicitly requested ordinary run, the
-[1,800-second campaign](../../../configs/forge/campaigns/five-word-joint-v1.json)
-reserves three 300-second smoke allowances and one 900-second word allowance:
+[2,100-second campaign](../../../configs/forge/campaigns/tier1-acquisition-v1.json)
+reserves the three existing 300-second behavior allowances, the 300-second ring
+allowance and the 900-second word allowance. The original 1,800-second
+`five-word-joint-v1` campaign stays frozen and cannot cover the complete revised
+Tier 1:
 
 ```sh
-python -m experiments.forge run five-word-joint-ka2-v1 --through-tier 2 --gpus cpu --campaign configs/forge/campaigns/five-word-joint-v1.json
+python -m experiments.forge run five-word-joint-ka2-v1 --view discriminator_stability --through-tier 1 --gpus cpu --campaign configs/forge/campaigns/tier1-acquisition-v1.json
 python -m experiments.forge logs --follow --candidate five-word-joint-ka2-v1
-python -m experiments.forge board --goal five_word_joint
+python -m experiments.forge board --goal discriminator_stability
 ```
 
-Ordinary failures stop later tiers. No full-budget current Forge word run has
-been launched, no smoke prerequisite has been bypassed for qualification, and
+Ordinary failures stop remaining tasks in the same tier and all later tiers;
+word acquisition follows the four earlier Tier 1 checks. No full-budget current
+Forge word run has been launched, no smoke prerequisite has been bypassed for qualification, and
 no historical pass has been transferred into the new leaderboard. Review this
 registration and its controls before deciding whether to run, revise or retier
 the task. A release choice still needs full Forge qualification.

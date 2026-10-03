@@ -71,8 +71,12 @@ def test_initial_inventory_has_complete_quality_and_distinct_claim_views():
     assert variant["importance"] == "diagnostic"
     assert all(a["task"] != variant["task"] for a in stability["assignments"] + quality["assignments"])
     smoke = [a["task"] for a in stability["assignments"] if a["qualification_tier"] == 1]
-    assert smoke == ["two_pole", "unused_token_hold", "ae_gan_hold"]
-    assert sum(tasks[n]["execution"]["steps"] for n in smoke) == 530
+    assert smoke == ["two_pole", "unused_token_hold", "ae_gan_hold", "ring16_acquisition",
+                     "five_word_joint_acquisition"]
+    assert sum(tasks[n]["execution"]["steps"] for n in smoke[:3]) == 530
+    assert stability["revision"] == 3
+    assert [sum(a["qualification_tier"] == tier and a["importance"] == "required"
+                for a in stability["assignments"]) for tier in (1, 2, 3)] == [5, 19, 2]
     assert all("qualification_tier" not in t for t in tasks.values())
     assert tasks["ring_hold"]["execution"]["execution_group"] == tasks["ring_extension"]["execution"]["execution_group"]
     assert tasks["ring_hold"]["execution"]["max_total_steps"] == 7500
@@ -87,6 +91,30 @@ def test_initial_inventory_has_complete_quality_and_distinct_claim_views():
         else:
             assert prior["kind"] == "mog" and prior["sigma"] > 0 and prior["learnable"]
     assert tasks["ae_gan_hold"]["execution"]["prior"]["kind"] == "mog"
+
+
+def test_default_plan_and_report_include_acquisition_smoke_without_new_views():
+    from experiments.forge.planning import plan_summary, resolve_idea
+    from experiments.forge.tier_report import build_report
+
+    request = resolve_idea(ROOT, "k3p", through_tier=1, execution_backend="cpu")
+    plan = plan_summary(request)
+    planned = {row["task"]: row for row in plan["tasks"]}
+    report = build_report(ROOT)
+    assert not {"ring16_acquisition", "five_word_joint"} & {row["id"] for row in report["views"]}
+    view = next(row for row in report["views"] if row["id"] == "discriminator_stability")
+    smoke = next(row for row in view["tiers"] if row["qualification_tier"] == 1)
+    assert smoke["counts"] == {"required": 5, "ranking": 0, "diagnostic": 0}
+    reported = {row["id"]: row for row in smoke["tasks"]}
+    for name, updates, timeout in (("ring16_acquisition", 400, 300),
+                                   ("five_word_joint_acquisition", 20001, 900)):
+        assert planned[name]["qualification_tier"] == 1
+        assert planned[name]["importance"] == "required" and planned[name]["permitted_by_tier_cap"]
+        assert planned[name]["budget_seconds"] == timeout
+        assert reported[name]["steps"] == updates and reported[name]["timeout_seconds"] == timeout
+    # The tier cap permits both acquisitions and excludes every quality task.
+    assert all(not row["permitted_by_tier_cap"] for row in plan["tasks"]
+               if row["qualification_tier"] > 1)
 
 
 def test_uninterrupted_execution_group_cannot_cross_tier_caps():

@@ -2,7 +2,7 @@
 
 Current task assignments, grouped by goal view and qualification tier. Required tasks gate progression; ranking and diagnostic tasks retain their declared roles.
 
-Catalog: **49 tasks**; **46 assigned** to at least one view; **3 unassigned**. Showing **8/8 views**.
+Catalog: **49 tasks**; **46 assigned** to at least one view; **3 unassigned**. Showing **6/6 views**.
 
 Declared priors across the catalog: **32 MoGParticlePrior**, **17 ParticlePrior** (including **3 nonsampled parameter controls**). Every experiment defines `execution.prior` explicitly; candidate and API defaults cannot supply it. `kind: mog` selects `MoGParticlePrior`; `kind: particle_cloud` selects `ParticlePrior`. Sigma alone does not identify the code path. Ordinary Forge MoG tasks require positive sigma; archived zero-sigma MoG evidence keeps its recorded kind. Task sigma is absolute; API demonstrations may instead record the recipe's relative `sigma_rel`.
 
@@ -32,12 +32,10 @@ This report follows changing declarations and published evidence; it selects no 
 | --- | ---: | --- | --- | --- | --- |
 | [adaptation](../../configs/forge/views/adaptation.json) | 2 | 3 required | 19 required | 1 required | provisional |
 | [clockfree_continuous](../../configs/forge/views/clockfree_continuous.json) | 2 | 4 required | 19 required | 6 required | provisional |
-| [discriminator_stability](../../configs/forge/views/discriminator_stability.json) | 2 | 3 required | 19 required | 2 required | provisional |
-| [five_word_joint](../../configs/forge/views/five_word_joint.json) | 1 | 3 required | 1 required | 0 tasks | provisional |
+| [discriminator_stability](../../configs/forge/views/discriminator_stability.json) | 3 | 5 required | 19 required | 2 required | provisional |
 | [formulation_comparison](../../configs/forge/views/formulation_comparison.json) | 1 | 3 required | 19 required, 15 diagnostic | 2 required | provisional |
 | [host_profile_transfer](../../configs/forge/views/host_profile_transfer.json) | 4 | 3 required | 19 required, 13 diagnostic | 2 required | provisional |
 | [quality_coverage](../../configs/forge/views/quality_coverage.json) | 2 | 3 required | 19 required | 0 tasks | provisional |
-| [ring16_acquisition](../../configs/forge/views/ring16_acquisition.json) | 1 | 1 required | 0 tasks | 0 tasks | provisional |
 
 ## adaptation
 
@@ -155,23 +153,25 @@ Candidate outcomes, metrics and measured costs: [leaderboard](leaderboards/clock
 
 ## discriminator_stability
 
-Declaration: [discriminator_stability](../../configs/forge/views/discriminator_stability.json); revision 2; goal: `discriminator_stability`.
+Declaration: [discriminator_stability](../../configs/forge/views/discriminator_stability.json); revision 3; goal: `discriminator_stability`.
 
 Declared calibration status: **provisional**.
 
-Phase D historical calibration remains required
+Expanded five-task Tier 1 placement is provisional and requires a new bounded calibration; prior three-task profiles and revision 2 published qualification retain their original scope.
 
 Candidate outcomes, metrics and measured costs: [leaderboard](technique-inventory.md).
 
 ### Tier 1: smoke
 
-3 required.
+5 required.
 
 | Task | Importance | Prior code path | Experiment guide | Adapter / gate | Declared steps | Timeout (s) | Dependencies / shared execution |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | [two_pole](../../configs/forge/tasks/two_pole.json) | required | ParticlePrior (sigma=0) | [Question, results, GIFs](#experiment-two-pole) | transfer_behavior / transfer_sustained | 80 | 300 | — |
 | [unused_token_hold](../../configs/forge/tasks/unused_token_hold.json) | required | ParticlePrior (sigma=0; not sampled) | [Question, results, GIFs](#experiment-unused-token-hold) | transfer_behavior / transfer_sustained | 200 | 300 | — |
 | [ae_gan_hold](../../configs/forge/tasks/ae_gan_hold.json) | required | MoGParticlePrior (sigma=0.025) | [Question, results, GIFs](#experiment-ae-gan-hold) | transfer_behavior / transfer_sustained | 250 | 300 | — |
+| [ring16_acquisition](../../configs/forge/tasks/ring16_acquisition.json) | required | MoGParticlePrior (sigma=0.025) | [Question, results, GIFs](#experiment-ring16-acquisition) | transfer_vector / transfer_sustained | 400 | 300 | — |
+| [five_word_joint_acquisition](../../configs/forge/tasks/five_word_joint_acquisition.json) | required | ParticlePrior (sigma=0) | [Question, results, GIFs](#experiment-five-word-joint) | word_joint / transfer_sustained | 20001 | 900 | — |
 
 ### Tier 2: quality
 
@@ -207,40 +207,6 @@ Candidate outcomes, metrics and measured costs: [leaderboard](technique-inventor
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | [ring_hold](../../configs/forge/tasks/ring_hold.json) | required | MoGParticlePrior (sigma=0.025) | [Question, results, GIFs](#experiment-mode-hold) | ring_endurance / ring_hold | up to 7500 total | 3600 | [mode_hold](../../configs/forge/tasks/mode_hold.json) (gate); group: ring_endurance (uninterrupted) |
 | [ring_extension](../../configs/forge/tasks/ring_extension.json) | required | MoGParticlePrior (sigma=0.025) | [Question, results, GIFs](#experiment-mode-hold) | ring_endurance / ring_extension | up to 7500 total; 300 extension | 3600 | [ring_hold](../../configs/forge/tasks/ring_hold.json) (checkpoint); group: ring_endurance (uninterrupted) |
-
-## five_word_joint
-
-Declaration: [five_word_joint](../../configs/forge/views/five_word_joint.json); revision 1; goal: `five_word_joint`.
-
-Declared calibration status: **provisional**.
-
-Finite-word acquisition placement and rejection costs are not calibrated. Existing mechanism smoke prerequisites apply; this view supplies no release/default promotion.
-
-Declaration only: [view pointer](leaderboards/five_word_joint.md); no published candidate outcomes, metrics or measured costs.
-
-### Tier 1: smoke
-
-3 required.
-
-| Task | Importance | Prior code path | Experiment guide | Adapter / gate | Declared steps | Timeout (s) | Dependencies / shared execution |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| [two_pole](../../configs/forge/tasks/two_pole.json) | required | ParticlePrior (sigma=0) | [Question, results, GIFs](#experiment-two-pole) | transfer_behavior / transfer_sustained | 80 | 300 | — |
-| [unused_token_hold](../../configs/forge/tasks/unused_token_hold.json) | required | ParticlePrior (sigma=0; not sampled) | [Question, results, GIFs](#experiment-unused-token-hold) | transfer_behavior / transfer_sustained | 200 | 300 | — |
-| [ae_gan_hold](../../configs/forge/tasks/ae_gan_hold.json) | required | MoGParticlePrior (sigma=0.025) | [Question, results, GIFs](#experiment-ae-gan-hold) | transfer_behavior / transfer_sustained | 250 | 300 | — |
-
-### Tier 2: quality
-
-1 required.
-
-| Task | Importance | Prior code path | Experiment guide | Adapter / gate | Declared steps | Timeout (s) | Dependencies / shared execution |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| [five_word_joint_acquisition](../../configs/forge/tasks/five_word_joint_acquisition.json) | required | ParticlePrior (sigma=0) | [Question, results, GIFs](#experiment-five-word-joint) | word_joint / transfer_sustained | 20001 | 900 | — |
-
-### Tier 3: endurance
-
-0 tasks.
-
-No tasks assigned.
 
 ## formulation_comparison
 
@@ -425,36 +391,6 @@ Candidate outcomes, metrics and measured costs: [leaderboard](leaderboards/quali
 | [grid100](../../configs/forge/tasks/grid100.json) | required | MoGParticlePrior (sigma=0.025) | [Question, results, GIFs](#experiment-grid100) | native100 / native_accuracy | 7000 | 3600 | — |
 | [rotated100](../../configs/forge/tasks/rotated100.json) | required | MoGParticlePrior (sigma=0.025) | [Question, results, GIFs](#experiment-rotated100) | native100 / native_accuracy | 7000 | 3600 | — |
 | [staggered100](../../configs/forge/tasks/staggered100.json) | required | MoGParticlePrior (sigma=0.025) | [Question, results, GIFs](#experiment-staggered100) | native100 / native_accuracy | 7000 | 3600 | — |
-
-### Tier 3: endurance
-
-0 tasks.
-
-No tasks assigned.
-
-## ring16_acquisition
-
-Declaration: [ring16_acquisition](../../configs/forge/views/ring16_acquisition.json); revision 1; goal: `ring16_acquisition`.
-
-Declared calibration status: **provisional**.
-
-Tier 1 placement is a hypothesis. Freeze independent positive/negative references, cost and rejection criteria before a bounded tier calibration; no existing screening profile or release qualification changes.
-
-Declaration only: [view pointer](leaderboards/ring16_acquisition.md); no published candidate outcomes, metrics or measured costs.
-
-### Tier 1: smoke
-
-1 required.
-
-| Task | Importance | Prior code path | Experiment guide | Adapter / gate | Declared steps | Timeout (s) | Dependencies / shared execution |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| [ring16_acquisition](../../configs/forge/tasks/ring16_acquisition.json) | required | MoGParticlePrior (sigma=0.025) | [Question, results, GIFs](#experiment-ring16-acquisition) | transfer_vector / transfer_sustained | 400 | 300 | — |
-
-### Tier 2: quality
-
-0 tasks.
-
-No tasks assigned.
 
 ### Tier 3: endurance
 
@@ -1364,6 +1300,6 @@ The wider question review also links standalone experiments outside the Forge ti
 - [Later questions](../toy_audit/api_contract/recent_prs/README.md)
 - [Caption questions](../toy_audit/api_contract/caption_prs/README.md)
 
-Declaration input digest: `2da3c6e4038f4e77e5a3330bd988f277026241cf3b87775120e174e5e7dc8268`. The JSON form includes the individual task and view file hashes.
+Declaration input digest: `25849172e95cd0c73790e0645dee26e1bd9804dab00321e0aef17a9f8f0f1915`. The JSON form includes the individual task and view file hashes.
 
-Published artifact input digest: `cd21e7c8e96e783effc2af954b9428543cfe6fe0278f20d25d13ae1cc1778ce9`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.
+Published artifact input digest: `f1488f0254d2dce7545f866fdf4214af938393308719a856810428ee7fce1a34`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.

@@ -3,6 +3,7 @@
 Default regeneration uses committed numerical snapshots and compact receipts.
 --source-commit independently regrades hydrated original receipts and registers
 new measured rows before updating the same leaderboard. No command trains.
+--recorded-policy rebuilds existing rows under their exact archived view policy.
 """
 from __future__ import annotations
 
@@ -610,7 +611,17 @@ def _current_markdown(result, root, path):
     def cell(value):
         return str(value if value is not None else "unknown").replace("|", "\\|").replace("\n", " ")
     tiers = list(result["tier_requirements"])
-    lines = ["# Current Forge trainer-family leaderboard", "",
+    recorded_policy = result.get("recorded_policy")
+    title = "Recorded" if recorded_policy else "Current"
+    lines = [f"# {title} Forge trainer-family leaderboard", ""]
+    if recorded_policy:
+        denominators = ", ".join(f"Tier {tier}: {len(result['tier_requirements'][tier])}" for tier in tiers)
+        policy_link = os.path.relpath(root / recorded_policy, path.parent)
+        lines += [f"This table preserves [{result['view']} revision {result['view_revision']}]({policy_link}) "
+                  f"with recorded required denominators **{denominators}**. "
+                  "Current task placement is listed in [experiments by tier](EXPERIMENTS_BY_TIER.md). "
+                  "The recorded outcomes supply no qualification for a later view revision.", ""]
+    lines += [
              "Each cell is **passes / full required total** from one complete selected configuration. "
              "Each trainer family and runtime has one row; its alternatives remain recorded separately.", "",
              "| Trainer family | Selected configuration | Selection | Evidence source | Exact revision / cohort | Compute | " +
@@ -655,9 +666,13 @@ def _current_markdown(result, root, path):
               f"[All configuration alternatives, trials, task statuses and exact bindings]({path.with_suffix('.json').name}) · "
               f"[Evidence and archived publication identities]({os.path.relpath(root / EVIDENCE_MANIFEST, path.parent)})", "",
               "Regenerate this same leaderboard from committed evidence, without training or raw-log hydration:", "",
-              "```sh", "python reports/forge/regenerate_technique_inventory.py", "```", "",
-              "After a new experiment, use `--source-commit <executed-commit>` to independently regrade its "
-              "hydrated original receipts and update this leaderboard. Source snapshots are provenance, not additional leaderboards.", "",
+              "```sh", "python reports/forge/regenerate_technique_inventory.py" +
+              (" --recorded-policy " + shlex.quote(recorded_policy) if recorded_policy else ""), "```", "",
+              ("This command uses the exact archived policy and registered snapshots; it does not resolve new declarations. "
+               "New evidence for a later view revision requires its own compatible evidence registration."
+               if recorded_policy else
+               "After a new experiment, use `--source-commit <executed-commit>` to independently regrade its "
+               "hydrated original receipts and update this leaderboard. Source snapshots are provenance, not additional leaderboards."), "",
               f"Publication input digest `{result['provenance']['input_digest']}`.", ""]
     archived = [row for row in result.get("configuration_rows", []) if row.get("alternative_scope") == "archived_alternative"]
     if archived:
@@ -671,21 +686,33 @@ def _current_markdown(result, root, path):
 
 
 def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discriminator_stability",
-                    execution_backend=None):
+                    execution_backend=None, recorded_policy=None):
     """Maintain one current table; registered source snapshots retain the history."""
     root = Path(root).resolve()
     manifest_path = root / EVIDENCE_MANIFEST
     manifest = read_json(manifest_path) if manifest_path.is_file() else None
+    if recorded_policy is not None and source_commit is not None:
+        raise ValueError("recorded policy publication cannot register new source evidence")
+    recorded_view = None
+    if recorded_policy is not None:
+        if manifest is None:
+            raise ValueError("recorded policy publication requires registered technique evidence")
+        recorded_path = Path(recorded_policy)
+        if not recorded_path.is_absolute():
+            recorded_path = root / recorded_path
+        recorded_view = read_json(recorded_path)
+        recorded_policy = os.path.relpath(recorded_path.resolve(), root)
     reports = []
     if manifest is not None:
         if manifest.get("schema_version") != 1 or manifest.get("view") != view_id:
             raise ValueError("unsupported current technique evidence manifest/view")
         policy_path = root / "configs/forge/views" / (view_id + ".json")
-        if policy_path.is_file():
-            policy = read_json(policy_path)
+        if recorded_view is not None or policy_path.is_file():
+            policy = recorded_view if recorded_view is not None else read_json(policy_path)
             if (policy.get("id") != view_id or policy.get("revision") != manifest["view_revision"]
                     or stable_hash(policy) != manifest["policy_fingerprint"]):
-                raise ValueError("current view policy differs from registered technique evidence")
+                label = "recorded" if recorded_view is not None else "current"
+                raise ValueError(f"{label} view policy differs from registered technique evidence")
         reports = [(entry, *_snapshot(root, entry, manifest)) for entry in manifest["cohorts"]]
     pending_snapshot = None
     if source_commit is not None:
@@ -769,7 +796,7 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
             canonical_missing.add((canonical, backend, runtime_key))
     missing = candidates - {key[0] for key in selected}
     live = None
-    if missing or canonical_missing:
+    if (missing or canonical_missing) and recorded_view is None:
         with tempfile.TemporaryDirectory(prefix="forge-technique-current-") as temporary:
             metadata = write_report(root, view_id, execution_backend=execution_backend,
                                     output_prefix=Path(temporary) / "current")
@@ -793,6 +820,8 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
               "qualification_input": False, **{key: manifest[key] for key in
               ("view", "view_revision", "policy_fingerprint", "tier_requirements")},
               "execution_backend": execution_backend, "rows": [], "evidence_sources": {}}
+    if recorded_policy is not None:
+        result["recorded_policy"] = recorded_policy
     for _, entry, report, row in selected.values():
         if entry is not None:
             row["publication_key"] = entry["json_sha256"]
@@ -814,7 +843,8 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
                 combined[digest] = deepcopy(contract)
         result[catalog] = dict(sorted(combined.items()))
     family_result = select_family_rows(root, result["rows"], result, view_id=view_id,
-                                       policy_fingerprint=manifest["policy_fingerprint"], declarations=declarations)
+                                       policy_fingerprint=manifest["policy_fingerprint"], declarations=declarations,
+                                       view_policy=recorded_view)
     result.update(family_result)
     # Immutable scientific history stays numerical, including earlier revisions
     # of the same configuration. It cannot fill cells in the selected row.
@@ -851,10 +881,12 @@ def main(argv=None):
     parser.add_argument("--goal", default="discriminator_stability")
     parser.add_argument("--device", choices=("cpu", "cuda", "all"), default="all")
     parser.add_argument("--source-commit", help="reconstruct and grade an exact recorded Git source cohort, independently of live HEAD")
+    parser.add_argument("--recorded-policy", type=Path,
+                        help="rebuild registered rows under this exact archived view policy, without resolving live declarations")
     args = parser.parse_args(argv)
     print(_json_text(publish_current(args.root, view_id=args.goal,
                                 execution_backend=None if args.device == "all" else args.device,
-                                source_commit=args.source_commit)), end="")
+                                source_commit=args.source_commit, recorded_policy=args.recorded_policy)), end="")
 
 
 if __name__ == "__main__":

@@ -87,6 +87,67 @@ def test_current_publication_needs_no_originals_and_is_idempotent(evidence):
     assert times == {path: path.stat().st_mtime_ns for path in outputs}
 
 
+def test_recorded_policy_preserves_old_rows_after_view_and_declarations_change(evidence, capsys):
+    root, manifest = evidence
+    baseline = read_json(publication.publish_current(root)["json"])
+    archive = Path("configs/forge/view-history/discriminator_stability-v2.json")
+    atomic_json(root / archive, read_json(root / "configs/forge/views/discriminator_stability.json"))
+    atomic_json(root / "configs/forge/views/discriminator_stability.json", {
+        "id": "discriminator_stability", "revision": 3,
+        "assignments": [{"task": "new-acquisition", "qualification_tier": 1, "importance": "required"}]})
+    atomic_json(root / "configs/forge/ideas/new-word-candidate.json", {"id": "new-word-candidate"})
+    protected = {path: path.read_bytes() for path in (root / publication.EVIDENCE_MANIFEST.parent).glob("*.json")}
+    before = _outputs(root)
+    with pytest.raises(ValueError, match="current view policy differs"):
+        publication.publish_current(root)
+    assert _outputs(root) == before
+    publication.main(["--root", str(root), "--recorded-policy", str(archive)])
+    assert '"rows":2' in capsys.readouterr().out
+    result = publication.publish_current(root, recorded_policy=archive)
+    report = read_json(result["json"])
+    assert report["recorded_policy"] == archive.as_posix()
+    assert report["view_revision"] == 2
+    assert report["tier_requirements"] == manifest["tier_requirements"]
+    for key in ("rows", "configuration_rows", "evidence_rows"):
+        assert report[key] == baseline[key]
+    assert all(row["candidate_id"] != "new-word-candidate" for row in report["configuration_rows"])
+    markdown = Path(result["report"]).read_text()
+    assert "Recorded Forge trainer-family leaderboard" in markdown
+    assert "discriminator_stability revision 2" in markdown
+    assert "Tier 1: 3, Tier 2: 19, Tier 3: 2" in markdown
+    assert "--recorded-policy " + archive.as_posix() in markdown
+    assert not (root / "reports/forge/attempts").exists()
+    assert all(path.read_bytes() == original for path, original in protected.items())
+    outputs = _outputs(root)
+    times = {path: path.stat().st_mtime_ns for path in outputs}
+    assert result == publication.publish_current(root, recorded_policy=archive)
+    assert _outputs(root) == outputs
+    assert times == {path: path.stat().st_mtime_ns for path in outputs}
+
+
+@pytest.mark.parametrize("field", ["id", "revision", "assignments"])
+def test_recorded_policy_must_match_registered_identity(evidence, field):
+    root, _ = evidence
+    publication.publish_current(root)
+    before = _outputs(root)
+    policy = read_json(root / "configs/forge/views/discriminator_stability.json")
+    policy[field] = "changed"
+    archive = "configs/forge/view-history/changed.json"
+    atomic_json(root / archive, policy)
+    with pytest.raises(ValueError, match="recorded view policy differs"):
+        publication.publish_current(root, recorded_policy=archive)
+    assert _outputs(root) == before
+
+
+def test_recorded_policy_cannot_register_source_evidence(evidence):
+    root, _ = evidence
+    publication.publish_current(root)
+    before = _outputs(root)
+    with pytest.raises(ValueError, match="cannot register new source evidence"):
+        publication.publish_current(root, recorded_policy="unused.json", source_commit="commit-a")
+    assert _outputs(root) == before
+
+
 def test_newer_measured_revision_updates_one_row_without_pooling(evidence):
     root, manifest = evidence
     publication.publish_current(root)
@@ -313,6 +374,7 @@ def test_committed_cohorts_rebuild_every_scientific_row_in_a_checkout_without_ra
     for relative in (publication.EVIDENCE_MANIFEST.parent, Path("reports/forge/technique-receipts"),
                      Path("configs/forge/ideas"), Path("configs/forge/configurations"),
                      Path("configs/forge/searches"), Path("configs/forge/views"),
+                     Path("configs/forge/view-history"),
                      Path("configs/forge/tasks"), Path("configs/forge/protocols"),
                      Path("reports/forge/configuration-search")):
         if not (ROOT / relative).is_dir():
@@ -347,7 +409,8 @@ def test_committed_cohorts_rebuild_every_scientific_row_in_a_checkout_without_ra
     for card in list((tmp_path / "configs/forge/ideas").glob("*.json")) + list((tmp_path / "configs/forge/configurations").glob("*.json")):
         if card.stem not in {key[0] for key in expected}:
             card.unlink()
-    result = read_json(publication.publish_current(tmp_path)["json"])
+    result = read_json(publication.publish_current(
+        tmp_path, recorded_policy="configs/forge/view-history/discriminator_stability-v2.json")["json"])
     display_fields = {"technique", "publication_key", "qualification_input", "qualification_reuse",
                       "trainer_family", "configuration_id", "comparison_cohort", "selected_configuration", "alternative_scope"}
     science = lambda row: {key: value for key, value in row.items() if key not in display_fields}

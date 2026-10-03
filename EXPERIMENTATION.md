@@ -11,6 +11,11 @@ defines the migration and adoption criteria.
 For a new research question or host, follow the
 [experiment creation guide](docs/forge-new-experiment.md), with worked ring and
 joint BiGAN examples, scorer controls, registration and artifact publication.
+Register ordinary new questions as required Tier 1 tasks in the existing
+`discriminator_stability` view. Revise that view and check its full reservation
+budget; create a separate view only for an explicitly different claim or
+diagnostic scope. Preserving an old denominator alone is not a reason for a new
+view. Historical receipts and pinned view revisions keep their original results.
 
 For the combined E22/Atlas/Forge API, read
 [the develop integration notes](reports/forge/DEVELOP_INTEGRATION.md). Presets,
@@ -189,7 +194,7 @@ screen is not a public-default promotion.
 ```sh
 python -m experiments.forge plan critic-anchor-v2 --through-tier 1
 python -m experiments.forge enqueue critic-anchor-v2 --through-tier 1 \
-  --campaign configs/forge/campaigns/smoke.json
+  --campaign configs/forge/campaigns/tier1-acquisition-v1.json
 python -m experiments.forge queue
 ```
 
@@ -198,18 +203,23 @@ wall time. `enqueue` freezes the source request and returns without starting
 training. An identical scientific request attaches to existing work or compatible
 evidence. Changing only prose does not justify rerunning the same experiment.
 
-The default smoke campaign caps campaign and candidate reservations at 900
-seconds. Task timeouts live in each task's `resources.timeout_seconds`.
-Larger campaigns need their own JSON definition and explicit budgets. The worker
-reserves a complete task allowance before starting it; a remaining budget too
-small for that reservation blocks another launch.
+The current five-task Tier 1 reserves up to 2,100 seconds: three existing
+300-second behavior tasks, the 300-second ring acquisition and the 900-second
+word acquisition. The explicit `tier1-acquisition-v1` campaign caps campaign and
+candidate reservations at that amount. The historical `smoke.json` campaign
+retains its 900-second ceiling and cannot cover the complete expanded Tier 1.
+Task timeouts live in each task's `resources.timeout_seconds`. Larger campaigns
+need their own JSON definition and explicit budgets. The worker reserves a
+complete task allowance before starting it; a remaining budget too small for
+that reservation blocks another launch.
 
 ```sh
 # One bounded worker per GPU; execution is a separate, explicit action.
 python -m experiments.forge drain --gpus 0,1 --workers-per-gpu 1
 
 # Or submit and wait for this campaign on CPU for an applicable smoke task.
-python -m experiments.forge run critic-anchor-v2 --through-tier 1 --gpus cpu
+python -m experiments.forge run critic-anchor-v2 --through-tier 1 --gpus cpu \
+  --campaign configs/forge/campaigns/tier1-acquisition-v1.json
 ```
 
 Use `--device cpu` or `--device cuda` when planning/enqueuing; `run` infers the
@@ -298,11 +308,16 @@ Older snapshots retain their recorded execution contract.
 
 ## Tiers and views
 
-| Qualification tier | Initial stability profile | Purpose |
+| Qualification tier | Current stability profile (revision 3) | Purpose |
 | --- | --- | --- |
-| 1: smoke | `two_pole`, `unused_token_hold`, `ae_gan_hold`; 530 total host updates | Cheap behavior, finite-state, intended-update and mechanism checks |
-| 2: quality | Complete 19 transfer hosts plus three 7,000-update native coverage/accuracy gates | Require useful sustained live quality across families |
+| 1: smoke | `two_pole`, `unused_token_hold`, `ae_gan_hold`, `ring16_acquisition`, `five_word_joint_acquisition`; 20,931 total host updates, up to 2,100 reserved seconds | Behavior, finite-state, intended-update, mechanism and acquisition checks; placement remains provisional |
+| 2: quality | 19 hosts, including three 7,000-update native coverage/accuracy gates | Require useful sustained live quality across families |
 | 3: endurance | Own-state ring hold and extension; reserve up to 7,500 total updates | Detect late failure after acquisition |
+
+The current required denominator is 5/19/2. Revision 2 and its published 3/19/2
+qualification results remain historical evidence; adding acquisition requirements
+does not regrade them or transfer API demonstrations into Forge qualification.
+The expanded smoke profile needs calibration before scientific adoption.
 
 All required lower-tier tasks must pass before higher-tier work is eligible.
 Failed, missing, invalid, and blocked evidence stop downstream spending.
@@ -392,21 +407,31 @@ scientific ranking or default adoption.
 # Read-only cost/coverage plan, then explicit gated execution.
 python -m experiments.forge inventory plan --through-tier 3
 python -m experiments.forge inventory run --through-tier 3 --gpus 0,1
-# Regenerate the one current leaderboard from committed evidence.
-python reports/forge/regenerate_technique_inventory.py
-# After a new experiment, regrade/register its source and update the same file.
-python reports/forge/regenerate_technique_inventory.py --source-commit <executed-commit>
+# Regenerate the current publication under its recorded revision-2 policy.
+python reports/forge/regenerate_technique_inventory.py \
+  --recorded-policy configs/forge/view-history/discriminator_stability-v2.json
 python -m experiments.forge logs --follow --campaign technique-inventory-v1
 ```
+
+Recorded-policy regeneration preserves existing evidence and cannot be combined
+with `--source-commit`. New results for revision 3 need a compatible evidence
+registration; historical revision-2 results cannot fill its new requirements.
 
 The original default inventory campaign has explicit reservation ceilings for
 its 12-technique roster. New techniques require checking the expanded plan and
 a new immutable campaign ID with adequate budgets. The Modern GAN recipe uses
 its own one-candidate campaign; it does not rerun unchanged techniques. Ordinary
 failures stop later tasks, including remaining tasks in that tier; unsupported
-techniques reserve no training resources. Required denominators remain 3/19/2
+techniques reserve no training resources. Required denominators are 5/19/2
 for the current `discriminator_stability` view, including unknown and blocked
-cells. A zero passes/total cell alone does not establish a scientific failure.
+cells. The published inventory retains its recorded revision-2 3/19/2 cohorts
+until compatible evidence exists for a new publication; its historical results
+are not regraded against the new view. A zero passes/total cell alone does not
+establish a scientific failure.
+The archived policy above must match the publication's recorded task/view
+manifest. It preserves those results while the current revision-3 board keeps
+unmeasured acquisition tasks unknown. New revision-3 evidence uses its own
+current policy and updates the same published leaderboard.
 Archived and calibration results appear separately and cannot fill current
 qualification cells. Provisional screening still confers no default adoption.
 `techniques` also renders a read-only local board or JSON. The publication wrapper

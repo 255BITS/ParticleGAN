@@ -92,7 +92,8 @@ def _declarations(root):
     return {path.stem: read_json(path) for path in declaration_paths(root)}
 
 
-def _search_pin(root, family_id, backend, rows, declarations, catalogs, *, view_id, policy_fingerprint):
+def _search_pin(root, family_id, backend, rows, declarations, catalogs, *, view_id, policy_fingerprint,
+                view_policy=None):
     from .configuration_search import _grid, _load_spec, configuration_id, select_configuration
     from .planning import FORMULATION_FIELDS
     from .views import load_view
@@ -170,7 +171,8 @@ def _search_pin(root, family_id, backend, rows, declarations, catalogs, *, view_
         cohort_rows = [row for row in rows if row["candidate_id"] in expected]
         if len(cohort_rows) != len(expected) or {row["candidate_id"] for row in cohort_rows} != set(expected):
             raise ValueError("search comparison is missing verified configuration evidence")
-        assignments = {a["task"]: a for a in load_view(root, view_id)["assignments"]}
+        assignments = {a["task"]: a for a in
+                       (view_policy if view_policy is not None else load_view(root, view_id))["assignments"]}
         verified = []
         for trial in trials:
             name = trial["candidate_id"]
@@ -235,8 +237,12 @@ def _search_pin(root, family_id, backend, rows, declarations, catalogs, *, view_
 
 
 def select_family_rows(root: Path | str, rows: list[dict], catalogs: dict, *, view_id: str,
-                       policy_fingerprint: str, declarations: dict | None = None) -> dict:
+                       policy_fingerprint: str, declarations: dict | None = None,
+                       view_policy: dict | None = None) -> dict:
     """Choose one whole configuration per family/backend, retaining alternatives."""
+    if view_policy is not None and (view_policy.get("id") != view_id
+                                    or stable_hash(view_policy) != policy_fingerprint):
+        raise ValueError("explicit family-selection view differs from its recorded policy")
     declarations = _declarations(root) if declarations is None else declarations
     grouped, families, variants = {}, {}, []
     for original in rows:
@@ -255,7 +261,7 @@ def select_family_rows(root: Path | str, rows: list[dict], catalogs: dict, *, vi
     for (family_id, backend, _), alternatives in sorted(grouped.items()):
         family = families[family_id]
         pin = _search_pin(root, family_id, backend, alternatives, declarations, catalogs,
-                          view_id=view_id, policy_fingerprint=policy_fingerprint)
+                          view_id=view_id, policy_fingerprint=policy_fingerprint, view_policy=view_policy)
         if pin:
             selected, metadata = pin
         else:

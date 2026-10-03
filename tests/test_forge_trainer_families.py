@@ -78,10 +78,10 @@ def study(tmp_path):
     return tmp_path, rows, catalogs, cards, report, policy
 
 
-def select(study):
+def select(study, **options):
     root, rows, catalogs, cards, _, policy = study
     return families.select_family_rows(root, rows, catalogs, declarations=cards,
-                                      view_id="discriminator_stability", policy_fingerprint=policy)
+                                      view_id="discriminator_stability", policy_fingerprint=policy, **options)
 
 
 def test_all_four_declared_configuration_ids_bind_actual_forge_prior_context(study):
@@ -124,7 +124,14 @@ def test_failed_study_selects_one_whole_configuration_and_preserves_every_trial(
     assert not selected["selection"]["qualified"] and not selected["selection"]["default_adoption"]
     assert selected["tiers"] == next(row["tiers"] for row in study[1] if row["candidate_id"] == selected["candidate_id"])
     assert {row["alternative_scope"] for row in result["configuration_rows"]} == {"selected", "comparable_trial", "archived_alternative"}
-    assert selected["tiers"]["1"] == {"passed": 0, "total": 3}
+    assignments = read_json(study[0] / "configs/forge/views/discriminator_stability.json")["assignments"]
+    required = {row["task"] for row in assignments if row["importance"] == "required"}
+    assert {row["task_id"] for row in selected["tasks"]} == required
+    assert selected["tiers"]["1"] == {
+        "passed": 0,
+        "total": sum(row["importance"] == "required" and row["qualification_tier"] == 1
+                     for row in assignments),
+    }
 
 
 def test_pending_search_uses_canonical_configuration(study):
@@ -147,6 +154,26 @@ def test_frozen_selection_survives_current_protocol_change(study):
     atomic_json(root / "configs/forge/defaults.json", {"protocol": "future-protocol"})
     atomic_json(root / "configs/forge/protocols/screening.json", {"changed": "future protocol"})
     assert select(study)["rows"][0]["candidate_id"] == study[4]["selection"]["selected_candidate_id"]
+
+
+def test_explicit_recorded_policy_preserves_selection_after_current_view_changes(study):
+    root = study[0]
+    path = root / "configs/forge/views/discriminator_stability.json"
+    recorded = read_json(path)
+    current = deepcopy(recorded)
+    current["revision"] += 1
+    current["assignments"].append({"task": "img_intensity2_residual16", "qualification_tier": 1,
+                                   "importance": "required", "order": 10})
+    atomic_json(path, current)
+    with pytest.raises(ValueError, match="frozen view task denominator"):
+        select(study)
+    selected = select(study, view_policy=recorded)["rows"][0]
+    assert selected["candidate_id"] == study[4]["selection"]["selected_candidate_id"]
+    assert selected["tiers"] == next(row["tiers"] for row in study[1]
+                                      if row["candidate_id"] == selected["candidate_id"])
+    # Supplying an edited policy cannot relabel frozen trial evidence.
+    with pytest.raises(ValueError, match="recorded policy"):
+        select(study, view_policy=current)
 
 
 @pytest.mark.parametrize("tamper,message", [
