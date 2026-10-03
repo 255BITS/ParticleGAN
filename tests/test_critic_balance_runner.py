@@ -53,6 +53,7 @@ def spec_for(tmp_path):
 
 def planned(tmp_path, cases, monkeypatch):
     # Explicit software card, never recorded as capacity evidence.
+    monkeypatch.setattr(runner, "verify_engineering_carryover", lambda: deepcopy(runner.ENGINEERING_ARTIFACTS))
     monkeypatch.setattr(runner, "capacity_module", lambda: SimpleNamespace(
         SHARED_OVERRIDES=runner.OVERRIDES, SCHEMA="software-capacity", CLAIM_SCOPE="Synthetic fixture; no scientific evidence",
         verify_packet=lambda packet: deepcopy(packet)))
@@ -512,3 +513,95 @@ def test_capacity_header_scope_and_complete_denominator_rejected(tmp_path, cases
     refresh_card(spec, edit)
     with pytest.raises(ValueError, match="zero-update capacity"):
         runner.plan_study(spec, cases=cases)
+
+
+def test_real_snapshot_public_discovery_has_original_task_and_all_eight_definitions(tmp_path, cases):
+    """Exercise the omitted dependency in an isolated copied source, without models."""
+    from experiments.forge.sources import verify_snapshot
+    execution = runner.freeze_execution_source(ROOT, tmp_path / "source-cache", runner.source(cases))
+    snapshot = Path(execution["snapshot_path"])
+    verify_snapshot(snapshot, execution)
+    for relative, sha in runner.DISCOVERY_INPUTS.items():
+        assert execution["files"][relative] == sha
+        assert api_run.file_hash(snapshot / relative) == sha
+    environment = os.environ.copy()
+    environment.update(CUDA_VISIBLE_DEVICES="", PYTHONPATH=str(snapshot), PYTHONDONTWRITEBYTECODE="1",
+                       OMP_NUM_THREADS="1", MKL_NUM_THREADS="1", OPENBLAS_NUM_THREADS="1")
+    code = ("import json, pathlib, torch; from benchmarks.toy_audit import api_contract; "
+            "from experiments.forge.contracts import stable_hash; torch.set_num_threads(1); "
+            "c=api_contract.discover(); "
+            "print(json.dumps({'root':str(api_contract.ROOT),'cases':{k:stable_hash(v) for k,v in c.items()},"
+            "'cuda_initialized':torch.cuda.is_initialized()}))")
+    process = subprocess.run([sys.executable, "-B", "-c", code], cwd=snapshot, env=environment,
+                             capture_output=True, text=True, timeout=60)
+    assert process.returncode == 0, process.stderr
+    actual = json.loads(process.stdout)
+    assert Path(actual["root"]).resolve() == snapshot.resolve()
+    assert actual["cuda_initialized"] is False
+    assert "api-ring16-acquisition" in actual["cases"]
+    for row, sha in zip(runner.CASE_ROWS, runner.CASE_SHA256):
+        assert actual["cases"][row[0]] == sha
+    # Losing the precise original dependency must invalidate this test snapshot.
+    (snapshot / next(iter(runner.DISCOVERY_INPUTS))).unlink()
+    with pytest.raises((FileNotFoundError, ValueError)):
+        verify_snapshot(snapshot, execution)
+
+
+def test_snapshot_rejects_changed_discovery_pin_before_export(tmp_path, cases):
+    expected = runner.source(cases)
+    expected["discovery_inputs_sha256"][next(iter(runner.DISCOVERY_INPUTS))] = "0" * 64
+    with pytest.raises(ValueError, match="dependency binding"):
+        runner.freeze_execution_source(ROOT, tmp_path / "source-cache", expected)
+    assert not (tmp_path / "source-cache").exists()
+
+
+def test_prior_bootstrap_cost_debits_budget_without_a_case_grade(tmp_path, cases, monkeypatch):
+    packet = planned(tmp_path, cases, monkeypatch)
+    spec = packet["spec"]
+    assert spec["family_budget_seconds"]["atlas"] + runner.ENGINEERING_PAID_SECONDS == 7680.
+    assert spec["family_budget_seconds"]["e22"] == 7680.
+    assert spec["budget_seconds"] + runner.ENGINEERING_PAID_SECONDS == 15360.
+    assert packet["spent_seconds"] == 0.
+    trial = packet["trials"][0]
+    trial["paid_wall_seconds"] = spec["family_budget_seconds"]["atlas"] - 239.999
+    assert runner.allow_next(packet, trial) is None
+    spec["engineering_carryover"]["paid_seconds"] = 0.
+    with pytest.raises(ValueError, match="fixed"):
+        runner.validate_spec(spec, cases)
+
+
+def engineering_fixture(tmp_path, monkeypatch):
+    row = {"id": runner.CASE_ROWS[0][0], "status": "ERROR", "attempt_key": runner.ENGINEERING_ATTEMPT,
+           "paid_wall_seconds": runner.ENGINEERING_PAID_SECONDS, "full_protocol_complete": False}
+    packet = {"executed_family": "atlas", "source": {"commit": "92167813cb2b04af0c4e0395984c503b7fb7d7fe"},
+              "trials": [{"family": "atlas", "status": "ERROR", "paid_wall_seconds": runner.ENGINEERING_PAID_SECONDS,
+                          "cases": [row, *[{"status": "UNKNOWN"} for _ in range(7)]]},
+                         {"family": "e22", "status": "UNKNOWN", "paid_wall_seconds": 0.,
+                          "cases": [{"status": "UNKNOWN"} for _ in range(8)]}],
+              "spent_seconds": runner.ENGINEERING_PAID_SECONDS,
+              "measured_paid_seconds": runner.ENGINEERING_PAID_SECONDS,
+              "unmeasured_interrupt_reservation_seconds": 0.}
+    artifacts = {}
+    for role in ("study", "request", "terminal", "log"):
+        path = tmp_path / (role + ".json")
+        path.write_text(json.dumps(packet if role == "study" else {"software_fixture": True}))
+        artifacts[role] = {"path": str(path), "sha256": api_run.file_hash(path), "bytes": path.stat().st_size}
+    monkeypatch.setattr(runner, "ENGINEERING_ARTIFACTS", artifacts)
+    calls = []
+    monkeypatch.setattr(runner, "durable_cost", lambda p, t, r: calls.append((p, t, r)))
+    return artifacts, calls
+
+
+def test_prior_error_requires_hash_bound_artifacts_and_durable_cost(tmp_path, monkeypatch):
+    artifacts, calls = engineering_fixture(tmp_path, monkeypatch)
+    assert runner.verify_engineering_carryover() == artifacts
+    assert len(calls) == 1 and calls[0][2]["status"] == "ERROR"
+
+
+@pytest.mark.parametrize("role", ["study", "request", "terminal", "log"])
+def test_prior_error_artifact_tamper_rejected(tmp_path, monkeypatch, role):
+    artifacts, calls = engineering_fixture(tmp_path, monkeypatch)
+    Path(artifacts[role]["path"]).write_text('{"changed":true}')
+    with pytest.raises(ValueError, match="artifact unavailable or changed"):
+        runner.verify_engineering_carryover()
+    assert not calls

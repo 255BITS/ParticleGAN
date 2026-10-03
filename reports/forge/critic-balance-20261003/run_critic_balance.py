@@ -46,6 +46,20 @@ CASE_SHA256 = (
 )
 TERMINAL = {"PASS", "FAIL", "INCOMPLETE", "BLOCKED", "ERROR", "INVALID"}
 STATUSES = TERMINAL | {"UNKNOWN", "RUNNING"}
+DISCOVERY_INPUTS = {"configs/forge/tasks/ring16_acquisition.json":
+                    "e6b53ba29fbe9ead47e842cfa01e40ba57821bd1b4e6aa5b297631fa0f6525c1"}
+ENGINEERING_PAID_SECONDS = 4.757908704923466
+ENGINEERING_ATTEMPT = "9875f3fc81cdef471b64b2b00afbae203772500138416907c340a75e72b5e9ed"
+ENGINEERING_ARTIFACTS = {
+    "study": {"path": "/ml2/hypergan/forge-critic-balance-20261003/atlas/study.json",
+              "sha256": "560d42b13901714a6f09af706e5cbec01a25392e4ec3e575e2725fd010a3c3ce", "bytes": 1329987},
+    "request": {"path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/" + ENGINEERING_ATTEMPT + "/supervisor-request.json",
+                "sha256": "48d8c341658c30851e05ebcb2ea1370964a23ac7956a667a4f29559c188bdcd5", "bytes": 557510},
+    "terminal": {"path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/" + ENGINEERING_ATTEMPT + "/supervisor-terminal.json",
+                 "sha256": "d2e206ac10c3878bc846f4c5ca392fddf64e9a3007c802984f5dd00700ff69ed", "bytes": 150},
+    "log": {"path": "/ml2/hypergan/forge-critic-balance-20261003/atlas/atlas--da2b715e4d88919fc314b718d11c27e0e6740a5ff30835d0137186337fafa1bc/image-develop-img_intensity2-source-transpose12.log",
+            "sha256": "8fa65d7c8bedf1cd3bb9c4c1e76a9d408a00edcb468b60ea1f65d9d140d40cc6", "bytes": 2660},
+}
 
 
 def modules():
@@ -79,7 +93,7 @@ def number(value, label):
     return value
 
 
-def default_spec(card_path, card_sha256, *, identifier="critic-balance-d225-20261003"):
+def default_spec(card_path, card_sha256, *, identifier="critic-balance-d225-20261003-v2"):
     """The entire finite protocol; no arbitrary grids or per-toy knob winners."""
     return {
         "schema": SCHEMA, "id": identifier, "families": list(FAMILIES),
@@ -87,8 +101,13 @@ def default_spec(card_path, card_sha256, *, identifier="critic-balance-d225-2026
         "cases": [{"id": name, "tier": tier, "timeout_seconds": cap, "case_sha256": sha}
                   for (name, tier, cap), sha in zip(CASE_ROWS, CASE_SHA256)],
         "representation_card": {"path": str(card_path), "sha256": card_sha256},
-        "candidate_budget_seconds": 7680., "family_budget_seconds": {family: 7680. for family in FAMILIES},
-        "budget_seconds": 15360., "export_grace_seconds": 60., "frames": 9,
+        "candidate_budget_seconds": 7680.,
+        "family_budget_seconds": {"atlas": 7680. - ENGINEERING_PAID_SECONDS, "e22": 7680.},
+        "budget_seconds": 15360. - ENGINEERING_PAID_SECONDS,
+        "engineering_carryover": {"family": "atlas", "paid_seconds": ENGINEERING_PAID_SECONDS,
+                                  "artifacts": deepcopy(ENGINEERING_ARTIFACTS),
+                                  "claim": "Original bootstrap ERROR before public fixture construction; no scientific credit"},
+        "export_grace_seconds": 60., "frames": 9,
         "backend": "cuda", "speed_ranking": False, "default_adoption": False,
         "stability": {"confirmation_checks": 5, "post_confirmation_hold_checks": 5,
                       "first_window_only": True, "all_subsequent_primary_checks": True},
@@ -131,7 +150,61 @@ def source(cases):
     _, search, api = modules()
     value = search._source(cases)
     value["files_sha256"].update({path: api.file_hash(ROOT / path) for path in (RELATIVE, CAPACITY_RELATIVE)})
+    # Public receipt source_identity binds Python files. Bind discovery data
+    # separately and enforce it in the source snapshot/durable supervisor.
+    if any(api.file_hash(ROOT / path) != sha for path, sha in DISCOVERY_INPUTS.items()):
+        raise ValueError("original public discovery data changed")
+    value["discovery_inputs_sha256"] = dict(DISCOVERY_INPUTS)
     return value
+
+
+def freeze_execution_source(root, queue_root, expected):
+    """New-test inventory repair; existing core/science and snapshots stay intact."""
+    from experiments.forge.contracts import stable_hash
+    from experiments.forge.sources import inspect_source, snapshot_source
+    root = Path(root).resolve()
+    if expected.get("discovery_inputs_sha256") != DISCOVERY_INPUTS:
+        raise ValueError("planned public discovery dependency binding changed")
+    extras = [str(path.relative_to(root)) for directory in ("examples", "reports")
+              for path in (root / directory).rglob("*.py")]
+    extras.extend(DISCOVERY_INPUTS)
+    catalog = root / "reports/toy_audit/catalog.json"
+    if catalog.is_file():
+        extras.append(str(catalog.relative_to(root)))
+    manifest = inspect_source(root, extras)
+    bindings = {**expected["files_sha256"], **DISCOVERY_INPUTS}
+    if any(manifest["files"].get(path) != sha for path, sha in bindings.items()):
+        raise ValueError("source or discovery inputs changed between planning and snapshot")
+    manifest["origin_commit"] = expected["commit"]
+    namespace = Path(queue_root) / "policy/source-origins" / stable_hash(expected["commit"])
+    destination = snapshot_source(root, namespace, manifest)
+    return {**manifest, "snapshot_path": str(destination)}
+
+
+def verify_engineering_carryover():
+    """Charge the immutable prior error once; it cannot grant a case grade."""
+    _, search, api = modules()
+    for binding in ENGINEERING_ARTIFACTS.values():
+        path = Path(binding["path"])
+        if (not path.is_file() or path.stat().st_size != binding["bytes"]
+                or api.file_hash(path) != binding["sha256"]):
+            raise ValueError("original engineering error artifact unavailable or changed")
+    packet = json.loads(Path(ENGINEERING_ARTIFACTS["study"]["path"]).read_text())
+    trial = next(t for t in packet["trials"] if t["family"] == "atlas")
+    row = trial["cases"][0]
+    search._verify_costs(packet)
+    if (packet.get("executed_family") != "atlas" or trial["status"] != "ERROR"
+            or packet["source"]["commit"] != "92167813cb2b04af0c4e0395984c503b7fb7d7fe"
+            or row["status"] != "ERROR" or row.get("receipt_path")
+            or row.get("full_protocol_complete") or row.get("attempt_key") != ENGINEERING_ATTEMPT
+            or packet["measured_paid_seconds"] != ENGINEERING_PAID_SECONDS
+            or packet["spent_seconds"] != ENGINEERING_PAID_SECONDS
+            or packet["unmeasured_interrupt_reservation_seconds"] != 0.
+            or any(r["status"] != "UNKNOWN" for r in trial["cases"][1:])
+            or any(r.get("attempt_key") for t in packet["trials"] if t["family"] != "atlas" for r in t["cases"])):
+        raise ValueError("prior error cost, attribution or scientific scope changed")
+    durable_cost(packet, trial, row)
+    return deepcopy(ENGINEERING_ARTIFACTS)
 
 
 def capacity_outcomes(spec, cases):
@@ -213,7 +286,8 @@ def plan_study(spec, *, cases=None):
               "runtime_contract": search._runtime("cpu") | {"device": "cuda:0", "backend": "cuda"},
               "candidate_worst_case_reservation_seconds": 7680., "round_worst_case_reservation_seconds": 15360.,
               "goal": "critic-rate-balance-sensitivity", "speed_ranking": False, "default_adoption": False,
-              "paid_cost_scope": "Durable supervised child intervals plus conservative interruption reserves; "
+              "paid_cost_scope": "This cohort's durable supervised child intervals plus conservative interruption reserves; "
+                                 "original engineering error is separately bound and debited from remaining quotas; "
                                  "CPU capacity verification, queue wait and parent certification are separate diagnostics",
               "scope": "Two shared whole recipes across eight public served-policy cases; provisional, no MoG/default qualification",
               "native_scope": "24 post-update 20k primary checks and five terminal checks; no independent 100k gate",
@@ -435,8 +509,10 @@ def recertify_archive(packet):
     selected = {item["id"]: cases[item["id"]] for item in packet["spec"]["cases"]}
     if (packet.get("schema") != SCHEMA or packet.get("spec_sha256") != digest(packet["spec"])
             or packet["case_definitions"] != api.json_value(selected)
-            or packet["source"]["files_sha256"] != source(selected)["files_sha256"]):
+            or packet["source"]["files_sha256"] != source(selected)["files_sha256"]
+            or packet["source"].get("discovery_inputs_sha256") != source(selected)["discovery_inputs_sha256"]):
         raise ValueError("archived source/protocol/case identities changed")
+    verify_engineering_carryover()
     # All 16 outcomes still authenticate the same current card; negative
     # outcomes block their own family only and are never replaced by old credit.
     if capacity_outcomes(packet["spec"], selected) != packet["capacity_preflight"]:
@@ -478,7 +554,9 @@ def human_readout(packet):
              "This provisional public served-policy screen grants no defaults, fastest-family or Forge MoG credit.", "",
              "Native scope: 24 post-update observations of 20,000 served outputs; "
              "five terminal observations. No independent 100,000-output gate.", "",
-             f"Paid/reserved seconds: {packet['spent_seconds']:.6f} / 15,360 prospective pair ceiling.", "",
+             f"This cohort paid/reserved seconds: {packet['spent_seconds']:.6f} / {packet['spec']['budget_seconds']:.6f} remaining pair ceiling.", "",
+             f"Original bootstrap ERROR cost: {ENGINEERING_PAID_SECONDS:.6f} seconds, retained separately and debited once. "
+             "Combined ceiling remains 15,360 seconds; the error grants no scientific credit.", "",
              "This paid clock covers supervised children and conservative interruption charges; "
              "CPU capacity verification, queue wait and parent certification are separate diagnostics.", "",
              "| Family | Required case / question | Execution / study | Original gate | First-window hold | Goal GIF |",
@@ -649,7 +727,7 @@ def run_owned(packet, output, family, coordinator, study_lease):
                     save(registration, packet)
                     raise interruption
         trial["paid_wall_seconds"] = sum(r.get("paid_wall_seconds", 0.) + r.get("unmeasured_interrupt_reserved_seconds", 0.) for r in trial["cases"])
-        if trial["paid_wall_seconds"] > 7680.:
+        if trial["paid_wall_seconds"] > packet["family_paid_budget_seconds"][family]:
             trial["status"] = "INCOMPLETE"
             trial["reason"] = "actual paid time exceeded the frozen family ceiling"
             break
@@ -674,15 +752,16 @@ def run_study(spec, output, *, family, queue_root=None):
         Path(output).mkdir(parents=True, exist_ok=False)
         save(Path(output) / "study.json", packet)
         return packet
+    verify_engineering_carryover()
     validate_lane("cuda:0")
     import torch
     torch.set_num_threads(1)
     from experiments.forge.__main__ import queue_location
-    from experiments.forge.policy_execution import PolicyCoordinator, freeze_source
+    from experiments.forge.policy_execution import PolicyCoordinator
     from experiments.forge.sources import verify_snapshot
     runtime = search._runtime("cuda:0")
     coordinator = PolicyCoordinator(queue_location(contract.ROOT, queue_root), report_root=contract.ROOT / "reports/forge")
-    packet["execution_source"] = freeze_source(contract.ROOT, coordinator.root, packet["source"])
+    packet["execution_source"] = freeze_execution_source(contract.ROOT, coordinator.root, packet["source"])
     verify_snapshot(Path(packet["execution_source"]["snapshot_path"]), packet["execution_source"])
     key, canonical = coordinator.register(api.json_value(packet), Path(output).resolve(), family, runtime)
     with coordinator.study_lease(key) as lease:
