@@ -1,0 +1,125 @@
+{
+  "candidate_id": "context:report/smart_descent",
+  "candidate_revision": "76f06a46d1433061e2bbc21df3580e9f52b33dd02cb8ed613b6745964250f78b",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "unknown",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Narrative context only; no scientific pass is inferred.",
+  "evidence_scope": "historical",
+  "hypothesis": "Smart descent \u2014 expanded experiments",
+  "mechanism_class": "unknown",
+  "next_action": "Read the linked narrative and normalize any remaining exact experiment identities before scientific comparison.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "family": "report/smart_descent",
+      "narrative_sources": [
+        {
+          "git_blob": "6eb3205ea63595329aad9dd9da9d13bc6ff004f5",
+          "path": "reports/smart_descent/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "5d344f13fac0ba82c4da9150851380d40eb36290d3d00e4e37eaf451c623efd6",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/smart_descent/README.md"
+        },
+        {
+          "git_blob": "1b5a34fffd7720c0ea8a1b9ae33c399053286530",
+          "path": "reports/smart_descent/damping/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "072b3dcaf9db432cc9c4335f6d75b49601ce75e3db1ac35dd9d5ce91392530d2",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/smart_descent/damping/README.md"
+        },
+        {
+          "git_blob": "7e7887086223d5d7e3a0a92e1a8fe17799495567",
+          "path": "reports/smart_descent/frozen_evaluation/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "85c0cb13754869617bcffe7b94be9f82ae343b3853bb661b9c73c3e34f5bdaba",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/smart_descent/frozen_evaluation/README.md"
+        },
+        {
+          "git_blob": "bc13c1b1e97a4ba6c029225f6b0c4f10a7c1c432",
+          "path": "reports/smart_descent/lr_only/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "34f6ae7f2d94c0962a354f03058f066c0d27d1b5e4fd2471ddfd01af71ebdcc5",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/smart_descent/lr_only/README.md"
+        },
+        {
+          "git_blob": "9f4b468da4de37a85fe265ab4dd9e6972e63d532",
+          "path": "reports/smart_descent/multi_control/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "b665be231b8ad019b2d509afe1d8ae4706659d35065da99248f901c13de39b8f",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/smart_descent/multi_control/README.md"
+        },
+        {
+          "git_blob": "ca2adf454b6eb2adbe3867e46c92f69f65e9ff34",
+          "path": "reports/smart_descent/sgd/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "5139ca623fa6b23d171562af8b954d33627ab1cedcb73283786dd42952db3d14",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/smart_descent/sgd/README.md"
+        },
+        {
+          "git_blob": "0a4f70dffb656f86c465a8cca40e76d87f49b3e2",
+          "path": "reports/smart_descent/sgd/common_lr/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "35adff857405a6a0f2c9d4b573f14c5dd6ca1529a6e42d42444cbaaa2e156811",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/smart_descent/sgd/common_lr/README.md"
+        },
+        {
+          "git_blob": "3a1be0c28415e46b068755ca555663a71e93b760",
+          "path": "reports/smart_descent/sgd/per_tensor/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "6a81807855496f477eca6b8702336d206061361f5839a018a0cc611423908e7a",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/smart_descent/sgd/per_tensor/README.md"
+        },
+        {
+          "git_blob": "7d963e3f2aaf43feaf78dcaf85b668d7da4be241",
+          "path": "reports/smart_descent/sgd/rms_decay/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "d5ec4555faf975dea3c6d1c08316346452303fa301aef5472a25d7fbdb9d85e9",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/smart_descent/sgd/rms_decay/README.md"
+        },
+        {
+          "git_blob": "7d2b5505852deabdc50e129805249f64318c838f",
+          "path": "reports/smart_descent/standalone/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "0eb6648ead26b28cc0a9503094005d1a242c4697504b97711c152a050426aaf3",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/smart_descent/standalone/README.md"
+        }
+      ],
+      "structured_sources_imported": [],
+      "summary_excerpt": "# Smart descent \u2014 expanded experiments\n\nThe next [transfer study](../transfer_suite/README.md) declares test importance:\nrequired regressions determine eligibility, realistic variations affect ranking,\nand deliberate data/architecture limitations remain nonblocking diagnostics.\n\n**A learned feedback addition to cosine now passes all 29 live bounds and\nsustains all nine behavioral toys. It is not a reliable replacement for cosine\nor Adam.** Direct fitting without a clock did not produce a policy that sustains\nall nine toys. Per-tensor gradient descent improved substantially over ordinary\nSGD, but no tested SGD rule passed both of its development tasks.\n\nKeep the supported cosine baseline and production defaults. Retain the learned\npolicy as a research comparison: its feedback has a measurable benefit on the\ndevelopment suite, and it succeeds on one new architecture/task where cosine\nfails. It does not dominate the transfer cases or establish a wall-time speedup.\n\n## Full behavioral leaderboard\n\nAll rows use the same cap formulation, original host budgets and seed 0. Live\nweights determine scores; EMA is separate. The ten independent shared checks\nall pass. Configuration/posture checks are excluded.\n\n| Controller | Live bounds | Sustained toys | Ring modes / HQ | Ring confirmation | Mean confirmation / budget |\n| --- | ---: | ---: | --- | ---: | ---: |\n| Cosine baseline | 29/29 |"
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-context-report-smart-descent-d18c56c9f363",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "6eb3205ea63595329aad9dd9da9d13bc6ff004f5",
+    "path": "reports/smart_descent/README.md",
+    "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "sha256": "5d344f13fac0ba82c4da9150851380d40eb36290d3d00e4e37eaf451c623efd6",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/smart_descent/README.md"
+  },
+  "task_results": []
+}

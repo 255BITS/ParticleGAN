@@ -1169,3 +1169,29 @@ def test_common_22_identity_normalizes_real_recipe_tuple_after_json(tmp_path, mo
     grade = toy_suite.regrade(tmp_path / "json-roundtrip")
     assert grade["status"] == "PASS"
     assert grade["global_recipe_identical"] is True
+
+    # Complete passing metrics cannot bridge different public sampling laws.
+    toy["eval_output_noise"] = False
+    mixed = toy_suite.regrade(tmp_path / "mixed-sampling-law")
+    assert mixed["status"] == "INCOMPLETE"
+    assert mixed["global_recipe_identical"] is True
+    assert mixed["sampling_law_identical"] is False
+    assert "sampling laws differ" in mixed["reason"]
+    toy["eval_output_noise"] = True
+    assert toy_suite.regrade(tmp_path / "same-sampling-law")["status"] == "PASS"
+
+
+def test_common_22_rejects_clean_only_request_before_spending(tmp_path, monkeypatch):
+    config = tmp_path / "candidate.json"
+    config.write_text(json.dumps({"eval_output_noise": False}))
+    monkeypatch.setattr(toy_suite, "_run_command", lambda *args, **kwargs: pytest.fail("training must not start"))
+    with pytest.raises(ValueError, match="legacy common-22 requires"):
+        toy_suite.run(config, tmp_path / "out", device="cpu")
+    assert not (tmp_path / "out").exists()
+
+
+def test_native_sampling_receipt_cannot_contradict_requested_law():
+    assert toy_suite._native_eval_output_noise({}, {}) is True  # original pre-clean archive
+    assert toy_suite._native_eval_output_noise({"eval_output_noise": "clean"}, {}) is False
+    with pytest.raises(ValueError, match="contradicts"):
+        toy_suite._native_eval_output_noise({"eval_output_noise": "clean"}, {"eval_output_noise": True})

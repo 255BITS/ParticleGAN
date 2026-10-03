@@ -1,0 +1,76 @@
+{
+  "candidate_id": "context:report/lunar_fast",
+  "candidate_revision": "0b9dd831e98298bdd4ef05636589bbc2a3014e02f3c17bb46b6a5a253c0f5e2c",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "unknown",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Narrative context only; no scientific pass is inferred.",
+  "evidence_scope": "historical",
+  "hypothesis": "Fast Lunar lander: full command evidence",
+  "mechanism_class": "unknown",
+  "next_action": "Read the linked narrative and normalize any remaining exact experiment identities before scientific comparison.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "family": "report/lunar_fast",
+      "narrative_sources": [
+        {
+          "git_blob": "c6db748b3a6296b970d3079e6718eccba957d3c8",
+          "path": "reports/lunar_fast/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "d94d03876ed239f3a014c884b5283049898a8522491469c1128f8a12619c6968",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/lunar_fast/README.md"
+        },
+        {
+          "git_blob": "39c665ceaf0f9d986fddfaa2d81c9ef85256ef53",
+          "path": "reports/lunar_fast/audit/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "aa1790902fd85e4258c4687aa1b29cb1422b84df34d65147559c03ba0cdd0f7d",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/lunar_fast/audit/README.md"
+        },
+        {
+          "git_blob": "e9887e8153df1e7f38a5f3080b02cc47bf594812",
+          "path": "reports/lunar_fast/audit/contact_correction/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "4066998efef33b53167ebd47a3525382e2960af44cdb0368151bcf8b32dd9dbd",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/lunar_fast/audit/contact_correction/README.md"
+        }
+      ],
+      "structured_sources_imported": [],
+      "summary_excerpt": "# Fast Lunar lander: full command evidence\n\nThe complete command ran from an empty output directory in about **72 seconds**\non CPU. It collected experts and simulator branches, trained dynamics and the\npolicies, extracted faster trajectories, selected on validation, and exported\nthe real-flight demos below. Both landing and speed gates passed. The declared\nenvironment is the bidirectional-main-thrust Box2D variant, not stock Lunar.\n\n| Learned controller | Validation landings | Validation success steps | Regression landings | Regression success steps |\n| --- | ---: | ---: | ---: | ---: |\n| Slow | 20/20 | 210.35 | 30/30 | 219.83 |\n| Fast, selected round 3 | 20/20 | 184.35 | 30/30 | 186.77 |\n\nFast won **30/30 paired regression flights**, with **1.177\u00d7 paired speedup**\n(15.0% fewer steps) and **32 median steps saved**. No flight in these evaluation\ncohorts crashed, flew away, or ended with an incomplete landing. This is a\nfinite-cohort result, not a universal landing guarantee. Validation selected\n`fast_round_3.pt` from three candidates; the selected checkpoint is `fast.pt`.\n\n![Learned slow and fast flights on seed 94000 at the same playback rate](comparison.gif)\n\nThe GIF uses the first matched regression world in fixed order: **94000**,\nslow **225** steps and fast **173**. Both are actual learned-policy rollouts.\nPlayback uses 50 simulation steps/s with one rendered frame every th"
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-context-report-lunar-fast-6bc3bcaf31fa",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "c6db748b3a6296b970d3079e6718eccba957d3c8",
+    "path": "reports/lunar_fast/README.md",
+    "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "sha256": "d94d03876ed239f3a014c884b5283049898a8522491469c1128f8a12619c6968",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/lunar_fast/README.md"
+  },
+  "task_results": []
+}

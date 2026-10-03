@@ -1,0 +1,28 @@
+{
+  "command": [
+    "/tmp/pr38-default-env/bin/python",
+    "-u",
+    "-B",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra17-replay/replay.py",
+    "RA17-current-pr155"
+  ],
+  "completed": 1790820864.3335164,
+  "fresh_replay_updates_total": 40,
+  "fresh_training_updates": 0,
+  "log": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra17-replay/logs/RA17-current-pr155-replay.log",
+  "log_sha256": "120b76f6cc15cf4dd615abfb2e3697aee01847a822c6cd6af2bcd671869653f1",
+  "result": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra17-replay/replay-RA17-current-pr155.json",
+  "result_sha256": "015f54c40ca004f61df26bf7280aea5ff7c003b1bcd203e504b02dff004f0267",
+  "returncode": 0,
+  "signaled_processes": [],
+  "source_integrity_after": {
+    "cpu_closed_sha256": "5a361bde961ae64b083bccd75c3d55ca985caf72ae5d51efbed5d9d10346f426",
+    "inputs_sha256": "f6fa0b84dbcf21eacf20314086517f0d53cba30b059a78c639e69bd3034f7209",
+    "package_sha256": "500ff0e966beb649dd7cafa0b91d7bb30cb451e5d62ece2883411a0507c8df61",
+    "read_only_files": 560,
+    "source_freeze_sha256": "b830d92f2051a03719fc308f7b9658967ac3eaf5aba0f72cd33327f4d1ea2acb",
+    "status": "VALID"
+  },
+  "status": "COMPLETE",
+  "wall_seconds": 17.453649282455444
+}

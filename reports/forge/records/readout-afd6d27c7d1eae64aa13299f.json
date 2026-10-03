@@ -1,0 +1,74 @@
+{
+  "attempt_ids": [
+    "df1794ebea6444c5a10c2a953843257d"
+  ],
+  "candidate_id": "release07-gan-v3-task-adapted-v1",
+  "candidate_revision": "d5341d8d12528f9e34030480544dd84fa7b933eed8474ff19e568dfb56b26cbc",
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "comparison": "Original release07-gan-v3-mog-v1 was blocked on21 of24 tasks because it imposed a single native host. The successor retains that complete reference recipe and explicitly delegates existing host-owned resources/objectives. BCap coefficient6/cap1.25 and release optimizer dynamics remain; scalar hosts retain prior spread.05, behavioral hosts retain their frozen objectives. Historical full7k native failures and matched BCap results retain separate source/prior/sampling cohorts and grant no credit.",
+  "conclusion": "The released v0.7 task adaptation passes preflight for all24 ordinary requirements and executes through the frozen public component host. Complete80-update two_pole FAIL: mean_abs0.29372087121009827<0.30; grad_med0.3106328547000885<=1 PASS. All24 observations and the required suffix fail the joint gate. One CPU attempt cost5.508408382942434 paid seconds; no execution errors. Ordinary scheduling stopped; remaining23 cells UNKNOWN, no integration blockers on the successor.",
+  "evidence_scope": "current",
+  "goal": "discriminator_stability",
+  "hypothesis": "Make the released v0.7 optimizer and BCap training recipe executable across frozen toy hosts through explicit task-owned resource and objective bindings; measure ordinary gates without importing native or historical credit.",
+  "lifecycle": "concluded",
+  "mechanism_class": "structural",
+  "next_action": "Stop this exact failed revision; keep the integration and reusable host adaptation. Review the provisional tier1 movement/convergence protocol before another training hypothesis. Any post-failure quality comparison requires a separately registered bounded diagnostic lane; no threshold change, seed repeat, continuation, automatic matrix filling or default adoption follows.",
+  "prior": {
+    "kind": "mog",
+    "learnable": true,
+    "sigma": 0.025,
+    "standardize": false
+  },
+  "provenance": {
+    "attempts": [
+      {
+        "attempt_id": "df1794ebea6444c5a10c2a953843257d",
+        "result_hash": "1a11e1784f0721066fabed8e98a116f720a6d76116bda08028f1df83892e8b43",
+        "valid_receipt": true
+      }
+    ]
+  },
+  "publication": {
+    "kind": "compact_readout_projection",
+    "original_archive_member": "runs/forge/release07-gan-v3-task-adapted-v1/full-readouts/readout-afd6d27c7d1eae64aa13299f.json",
+    "original_file_sha256": "75218465f9c074fded891ec60955601361a5aba702533c7fc65102e1744d6498",
+    "qualification_input": false
+  },
+  "qualification_reuse": false,
+  "record_id": "readout-afd6d27c7d1eae64aa13299f",
+  "record_type": "scientific",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/technique-receipts/df1794ebea6444c5a10c2a953843257d.json"
+  },
+  "task_results": [
+    {
+      "_attempt_id": "df1794ebea6444c5a10c2a953843257d",
+      "compatibility_key": "f1f0fb164aa6b6789c968ebca6313df9d02a0f3ed10054c29202b3d57d32ff18",
+      "cost": {
+        "adapter_seconds": 0.38841332599986345,
+        "charged_task": "two_pole",
+        "device": "cpu",
+        "execution_seconds": 5.508408382942434,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 2.42818194499705,
+        "wall_seconds": 5.508408382942434
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "grad_med": 0.3106328547000885,
+        "mean_abs": 0.29372087121009827
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "two_pole"
+    }
+  ]
+}

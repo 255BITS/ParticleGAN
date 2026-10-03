@@ -1,0 +1,146 @@
+{
+  "candidate_id": "context:lrfree/evidence",
+  "candidate_revision": "c6f204735300d3d5a9523d61a3126784b87a89fd2e89e8bfbc9de352ebfc0293",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "unknown",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Narrative context only; no scientific pass is inferred.",
+  "evidence_scope": "historical",
+  "hypothesis": "AMSGrad on DV12 (PR202 port): results and diagnosis",
+  "mechanism_class": "unknown",
+  "next_action": "Read the linked narrative and normalize any remaining exact experiment identities before scientific comparison.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "family": "lrfree/evidence",
+      "narrative_sources": [
+        {
+          "git_blob": "425db148298188056bdefbaf2978b0c69b309b2e",
+          "path": "reports/toy100/lrfree-search/evidence/amsgrad-dv12.md",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "5eea15e28e9ed165f4d0a498f156eb89a6784974c05755ee9cdaf3e94fd2b945",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/evidence/amsgrad-dv12.md"
+        },
+        {
+          "git_blob": "247135e6a8c8ca62e86ee7156dc4c59cececbc34",
+          "path": "reports/toy100/lrfree-search/evidence/amsgrad-rp15.md",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "076cd9975839a0158750ad2c1bc059bd2c3e2d30c43ed9bdea6407f4f55efc83",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/evidence/amsgrad-rp15.md"
+        },
+        {
+          "git_blob": "bb255a1de838356a7c77eab5a89aff41d70f485d",
+          "path": "reports/toy100/lrfree-search/evidence/evidence.md",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "62674d16226718770a7240e6726cc11bc0423ddacd3062115349cb4e12f01777",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/evidence/evidence.md"
+        },
+        {
+          "git_blob": "ea8acaf63c0d324225db718468d5352f503b8966",
+          "path": "reports/toy100/lrfree-search/evidence/knobs.md",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "c91f02ba794e7dc93a241ebcec31e24464f6f19c738ccad5388421b7ea984a8a",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/evidence/knobs.md"
+        },
+        {
+          "git_blob": "e3b6109073d914a2ab9e974d019efb28d21153a6",
+          "path": "reports/toy100/lrfree-search/evidence/oscillation.md",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "23d0a2807eec78817358d038def77274912f19c5ba917cdfe057ac43dd19f7cd",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/evidence/oscillation.md"
+        },
+        {
+          "git_blob": "b77903a9e8036a916dec4bca910c443a379d1924",
+          "path": "reports/toy100/lrfree-search/evidence/prior-pfloor.md",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "3a16741923d648fec5865ad3627b9d8563e3c0a7291dcca68f9d20e8aa257873",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/evidence/prior-pfloor.md"
+        },
+        {
+          "git_blob": "d65b7fbf795b6b4c8c1ed546044a0fcc6b6ce1aa",
+          "path": "reports/toy100/lrfree-search/evidence/prior-plm.md",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "64bcf1c40ae6cc6d87ca91ef519e073134da32af5747ba3e265c8e4772357a69",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/evidence/prior-plm.md"
+        },
+        {
+          "git_blob": "e6d13134d46b82fd2da7a1d2047d812bf7d8ff10",
+          "path": "reports/toy100/lrfree-search/evidence/step-dynamics.md",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "a05ee576ab8d40806508d003a6fe11318fc1686c0b628e6098d8abb45428bfd4",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/evidence/step-dynamics.md"
+        },
+        {
+          "git_blob": "ef3ac6346bd75d6875072214f277c5d643dd22e4",
+          "path": "reports/toy100/lrfree-search/evidence/theory.md",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "2ab09915de16d8fb2d2d12d878d3809ac7ea93e2c4f1200e763f70aa0ed74778",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/evidence/theory.md"
+        },
+        {
+          "git_blob": "623f2e52c9935ca8b79bf78125582b36166d478d",
+          "path": "reports/toy100/lrfree-search/evidence/top2-dv12reg.md",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "dd7f17579cc94721e6de3c901e2316282ddcc2c067e85eae6606b4b60a2d6190",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/evidence/top2-dv12reg.md"
+        },
+        {
+          "git_blob": "ad32a888ef38bcfe8a6222372e52b9ff81815a7a",
+          "path": "reports/toy100/lrfree-search/evidence/top2-rp15noise.md",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "a7ae3c6f99cd3983f25ad2e414692c9eaf4a8226511547cf92a42ff6d8fb63d8",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/evidence/top2-rp15noise.md"
+        },
+        {
+          "git_blob": "7e88d9072590070e6d67a02e753589507d2a9c46",
+          "path": "reports/toy100/lrfree-search/evidence/top2-t2-dv12q.md",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "f40bb14c1c4a65f0271282c4ab595d1a88db18f7b6383f650363b8ad3c73ec8c",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/evidence/top2-t2-dv12q.md"
+        },
+        {
+          "git_blob": "6a05b007382d47e8fd3e28cecfa49adea105b317",
+          "path": "reports/toy100/lrfree-search/evidence/top2-t2-rp15reg.md",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "409540a1c56b16718472470ed3c28b11a3d1b1e2217f9d8bfb4ef14a3fe9ab23",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/evidence/top2-t2-rp15reg.md"
+        }
+      ],
+      "structured_sources_imported": [],
+      "summary_excerpt": "# AMSGrad on DV12 (PR202 port): results and diagnosis\n\n*2026-09-27, harness `/ml2/hypergan/lrfree-20260926`. Analysis script: `scratchpad/dv12amsgrad-an/{dvtraj,ringsum}.py` (not part of the harness).*\n\n## 0. Answers\n\n- **Did amsgrad fix `vector_unequal_mass` without breaking mode_hold? No.**\n  - **Unequal mass is unchanged.** `dv12-ams` has the same applied-LR trace as API-DV12 (G<.5 @322 vs 321, <.1 @720 vs 717). The particle allocation is also the same: frozen at [.602,.339,.055,.005] from update 450.\n    - min mass ratio is .2319 in both runs.\n    - Covariance error got slightly worse (.920 vs .879).\n  - **mode_hold still passes, but it is weaker.** 6/24 @950 with final HQ .909, vs 12/24 @650 with HQ .983.\n  - **Two new failures appear:** img_bars4 (2/4 modes) and img_intensity2 (a one-check HQ blip). The net result is **10/13 vs 12/13** for API-DV12.\n  - **`dv12-ams-rc3` does pass v.mass and mode_hold, but reg_coeff=3 is what does it.** The plain-Adam control `dv12-rc3` gives the same particle allocation and the same v.mass PASS 18/24 @350. It also passes mode_hold (6/24 @950).\n  - Both rc3 arms fail img_intensity2, so each is **12/13**, the same count as API-DV12. They swap the v.mass failure for an intensity2 failure.\n- **Can amsgrad replace the LR controller? No.** In the constant-LR DV12 arm `dv12-const-ams`, the controller still runs but never scales an LR. In the 4 t"
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-context-lrfree-evidence-e3fd3da87d09",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "425db148298188056bdefbaf2978b0c69b309b2e",
+    "path": "reports/toy100/lrfree-search/evidence/amsgrad-dv12.md",
+    "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+    "sha256": "5eea15e28e9ed165f4d0a498f156eb89a6784974c05755ee9cdaf3e94fd2b945",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/evidence/amsgrad-dv12.md"
+  },
+  "task_results": []
+}

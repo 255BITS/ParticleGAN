@@ -23,7 +23,7 @@ from lib.gym_state_control import training_recipe
 from lib.gym_transition import GymTransitionScaler
 from lib.gym_previous_gan import (MODULE_KEYS, build_models, hashes, fake_paths,
     real_record, task_loss, adversarial_loss)
-from particlegan import scale_learning_rates
+from particlegan import init, scale_learning_rates
 
 DEFAULTS = dict(arm='previous_marginals', steps=2500, batch_size=256,
     checkpoints=[250, 1000, 2500], log_interval=250, seed=24003, device='cuda:1',
@@ -84,6 +84,12 @@ def train(cfg):
             if hashlib.sha256(value).hexdigest() != digest:
                 raise RuntimeError('Source changed during capture')
             archive.writestr(name, value)
+    recipe = training_recipe(cfg)
+    # build_state_models initialized G and the prior; the fresh E and D start here.
+    init.deterministic_orthogonal_(bundle['D'], seed=1)
+    init.deterministic_orthogonal_(bundle['E'], seed=2)
+    opt_g, opt_d = recipe.make_optimizers(bundle['G'], bundle['D'], bundle['prior'],
+        encoder=bundle['E'], ema_critic=copy.deepcopy(bundle['D']), fused=device.type == 'cuda')
     provenance = dict(sources=sources, source_archive_sha256=sha256(out / 'source.zip'),
         episodes=dict(path=cfg['episodes'], sha256=sha256(cfg['episodes'])),
         expert_data=dict(count=len(triples), episode_ids=np.unique(records['episode_ids']).tolist(),
@@ -95,9 +101,6 @@ def train(cfg):
         gan_training=True, adversarial_semantics='Prior and control-encoded full triples; average paths per role; no synthetic cycle',
         supervision='All expert training actions; action MSE plus G1/G3 reconstruction, each weight 1')
     values = {k: torch.as_tensor(v, device=device) for k,v in records.items() if k not in ('episode_ids', 'steps')}
-    recipe = training_recipe(cfg)
-    opt_g, opt_d = recipe.make_optimizers(bundle['G'], bundle['D'], bundle['prior'],
-        encoder=bundle['E'], ema_critic=copy.deepcopy(bundle['D']), fused=device.type == 'cuda')
     optimizers = (opt_g, opt_d)
     rates = [[g['lr'] for g in opt.param_groups] for opt in optimizers]
     gan, spread = recipe.make_loss(), recipe.make_prior_regularizer()

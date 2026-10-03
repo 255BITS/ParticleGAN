@@ -1,0 +1,43 @@
+{
+  "status": "PASS_FINAL_SOURCE_ONLY_FIXTURE_REPLAY_AUDIT",
+  "source_contract": {
+    "original_image_scorer_ast_identical": true,
+    "original_toy_gate_ast_identical": true,
+    "original_models_metrics_byte_pinned": true,
+    "original_checkpoint_budget_preserved": true,
+    "original_primary_output_noise_explicit": true,
+    "extra_begin_step_calls": 0,
+    "transformed_runner_sha256": "9741adf986b80bba6667d2355e37731961294d79ad4416cfc389a9d320187e47"
+  },
+  "public_init_parity_receipt_sha256": "5b120b410353deaf4faa443326375abfaac4a4690af5aca0fe6702965545ef90",
+  "original_private_and_global_rng_cpu_buffer_validation_unchanged": true,
+  "native_checkpoint_load_preserves_saved_device_tags": true,
+  "cpu_map_applies_only_to_second_checkpoint_restore_input": true,
+  "restored_full_state_fingerprint_captured_before_updates": true,
+  "exact_original_replay_updates_per_branch": 10,
+  "independent_branches": 2,
+  "tensor_placement_recorded_for_both_restore_inputs_and_results": true,
+  "primary_sample_bytes_compared": true,
+  "original_primary_draw_counts_and_seed": true,
+  "sampling_required_to_preserve_training_state": true,
+  "original_semantic_exclusion_only": "birth_death.last.eval_seconds",
+  "candidate_source_frozen": false,
+  "training_updates": 0,
+  "model_forwards": 0,
+  "cuda_contexts": 0,
+  "cuda_launches": 0,
+  "local_source_sha256": {
+    "adapter.py": "192cdbb52e904cfea0cb5b3c012befe744cf5981d52d29cef374474fbd03229e",
+    "audit_source.py": "f09d2e2a469136044389d928c726fc4a4a827f1af7f7990e230a1854f8deb4b5",
+    "build_adapter.py": "1eca8fd9bac7693f5a7c98c033e61379a9297370a6af731d85afe6280e0f345f",
+    "common.py": "ca88dc6087369d5d7b6f9ff13109032f965a2c661989ef7adaa39a75ac0776f9",
+    "contracts.py": "9209d33c76ce9cb00b1f50aeb16644e319d633f73e850278a3b42ef83836bd68",
+    "freeze.py": "92ba2eea7accb1875fb0c2d23bb64449ed5b3f1c3e80422ea134a4f2107c5f10",
+    "init_parity_cpu.py": "c1c234f2800c5e616f98a5d0a00dae7c926f8ddc09a2d91250224b9440710bbe",
+    "launch_first.py": "8c7f225175e31d042fb216ccdcdc9c860bf48267a172ea5cd682c0ae346d6c81",
+    "preflight_cpu.py": "06848eec2dc87b61a2355f898246cde3be95aec69d0a5c375473c2651191f148",
+    "replay.py": "8c8d84b649a80b945e67a1c835ef62d0ef3ab2b91550de933eb1f3b948cef93c",
+    "run_training.py": "9741adf986b80bba6667d2355e37731961294d79ad4416cfc389a9d320187e47",
+    "summarize.py": "ff298f99f0e4e7365326a5cd4c049cc69b3aa4a8867a03f5022b04077759247f"
+  }
+}

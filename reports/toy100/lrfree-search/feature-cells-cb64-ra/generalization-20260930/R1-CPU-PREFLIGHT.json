@@ -1,0 +1,14 @@
+{
+  "status": "PASS",
+  "tests": 3,
+  "cuda_used": false,
+  "scope": "R1 detector, ordinary trainer reaction wiring, byte-exact CPU continuation after synthetic detector fire",
+  "test_sha256": "94cef0c98d27de1cc43d0256a56538f8c3d4a9499b4c9fc06dbdf0668373cd07",
+  "preparation_sha256": "240a8ac5894537dee90546b43e83b4ba30ce3d1ab033e22fb692e435a0949e08",
+  "prior_test_fixture_notes": [
+    "Injected q=1000 did not cross RISE after K=12 smoothing; corrected to1e6 for intended wiring test.",
+    "Numeric Tensor equality rejects matching legacy NaN bytes; exact typed-byte comparison confirms full endpoint equivalence."
+  ],
+  "quality_claim": false,
+  "current_default_promoted": false
+}

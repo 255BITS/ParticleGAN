@@ -1,0 +1,28 @@
+{
+  "created_utc": "2026-09-30T03:58:18.191458+00:00",
+  "status": "PASS",
+  "device": "cpu",
+  "fixture_control": "saved live prior copied into EMA; lineage cleared in private memory only",
+  "source_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra4-quality/check_equal_control.py": "82cd03fc84bb3bf16d5246649e02fd70c640cb26273ddb2be940a7a06e93c309",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra4-quality/check_paired_copy.py": "0473eeba58b8dd84ebd045476aff20366a081edc404c1907ecde66f94c5a5270",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-ra4/learned/training/toy/CB64-RA4/checkpoint-2000.pt": "9d27cc4cfbb5b3b1ce9e209f41e850617a715f2c57e6c5ecb9c0ddd2c8634d2f",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra4-quality/pkg-PAIR-EMA/particlegan/feature_cells.py": "ba3302f11afc0bb3d9f0d5554716e4bd3cf0f4550af4cbcd48a786c82bba8cbf",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA4/particlegan/feature_cells.py": "a7f2d0f8794e109535358ea08ef43951449814acbdfca89705870df9f153f025"
+  },
+  "case": {
+    "case": "equal-priors-empty-lineage",
+    "rows": 128,
+    "fast_z_moments_history_graph_rng_bit_identical": true,
+    "single_noise_draw_accounting": true,
+    "ema_exact_own_geometry_placement": true,
+    "old_ema_radius_violation_rows": 0,
+    "new_ema_radius_violation_rows": 0,
+    "old_ema_radius_max_ratio": 1.0000001192092896,
+    "both_versioned_caches_rebuilt": true
+  },
+  "equal_priors_preserve_old_ema_bits": true,
+  "numerical_updates": 0,
+  "new_seeds": 0,
+  "fixture_files_unchanged": true
+}

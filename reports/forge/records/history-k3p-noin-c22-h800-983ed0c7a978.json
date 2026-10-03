@@ -1,0 +1,440 @@
+{
+  "candidate_id": "k3p-noin-c22-h800",
+  "candidate_revision": "c2f4bf416468b41a103bb74c8c4f88fa8304b901e39188b67e5e54e3fba63c11",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": {
+        "eval_output_noise": true
+      }
+    },
+    "scoring_weights": "live",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Historical recorded task outcomes: PASS=2",
+  "evidence_scope": "historical",
+  "hypothesis": "binding control: develop K3P annealed with horizon = host budget 800, host init, critic input noise OFF (engine does not bind input noise)",
+  "mechanism_class": "unknown",
+  "next_action": "Bind compatible task, fixture, package, scoring, and complete raw evidence before qualification reuse.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": {
+      "amsgrad": false,
+      "initialization": null,
+      "input_noise_std": 0.0,
+      "total_steps": 800
+    },
+    "context": {
+      "candidate_options": {
+        "eval_output_noise": true
+      },
+      "config_hash": "821ea000507ee818",
+      "note": "binding control: develop K3P annealed with horizon = host budget 800, host init, critic input noise OFF (engine does not bind input noise)",
+      "overrides": {
+        "amsgrad": false,
+        "initialization": null,
+        "input_noise_std": 0.0,
+        "total_steps": 800
+      },
+      "package_root": "/ml2/hypergan/lrfree-20260926/candidates/pr202-k3p/package",
+      "package_sha256": "552cddfc287cb70eb800ab7ba3cb91dde674f77879bf0fc70fa42f35f819c0bd",
+      "supporting_receipts": []
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": "552cddfc287cb70eb800ab7ba3cb91dde674f77879bf0fc70fa42f35f819c0bd",
+    "reuse_eligible": false,
+    "source_revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-k3p-noin-c22-h800-983ed0c7a978",
+  "record_type": "scientific",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "ff178cd5313a1e3349452302b0727d2cd17d20db",
+    "path": "reports/toy100/lrfree-search/custom22/results.json",
+    "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+    "sha256": "c29ee5fc2220d56b142a0947f622778928c47be83453ae7decde11abd32db454",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/custom22/results.json"
+  },
+  "task_results": [
+    {
+      "cost": {
+        "flops": null,
+        "flops_status": "unavailable",
+        "peak_gpu_mib": null,
+        "seconds": null,
+        "steps": null,
+        "train_seconds": null
+      },
+      "diagnostics": {},
+      "evidence": [
+        {
+          "git_blob": "ff178cd5313a1e3349452302b0727d2cd17d20db",
+          "path": "reports/toy100/lrfree-search/custom22/results.json",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "c29ee5fc2220d56b142a0947f622778928c47be83453ae7decde11abd32db454",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/custom22/results.json"
+        }
+      ],
+      "evidence_scope": "historical",
+      "gate_status": "PASS",
+      "metrics": {
+        "final": {
+          "content_kept": 1.0001077253395607,
+          "covered": true,
+          "even_norm": 0.0013525208923965693,
+          "fail_reasons": "",
+          "host_pass": true,
+          "leak_frac": -0.9999988675117493,
+          "leak_ratio": 0.0007053684887986171,
+          "odd_norm": 1.099234700202942,
+          "on_content": 0.5500592589378357,
+          "on_e": 0.0006721647223457694,
+          "on_u": 0.9529270529747009,
+          "particle_rms": 0.27439501881599426,
+          "pole_rel_err_minus": 0.032361507415771484,
+          "pole_rel_err_plus": 0.031025368720293045,
+          "same_dir": 0.0012289083992465537,
+          "u_kept": 0.9529270434454306
+        },
+        "final_streak": 11,
+        "first_arrival": 467,
+        "passing_checks": 11,
+        "thresholds": [
+          [
+            "u_kept",
+            ">=",
+            0.85
+          ],
+          [
+            "content_kept",
+            ">=",
+            0.75
+          ],
+          [
+            "leak_ratio",
+            "<=",
+            0.2
+          ],
+          [
+            "pole_rel_err_plus",
+            "<=",
+            0.2
+          ],
+          [
+            "pole_rel_err_minus",
+            "<=",
+            0.2
+          ],
+          [
+            "same_dir",
+            "<=",
+            0.25
+          ]
+        ]
+      },
+      "raw_result": {
+        "binding_sha256": "620bf137c3ad7e74740722b16c0ecd0e4ab329c6d7a1758892a589c56b3e995e",
+        "engine_sha256": "39ab8f54885b066f06a0852133a90f556658988553d4acec76aa4d71ff484b25",
+        "final": {
+          "content_kept": 1.0001077253395607,
+          "covered": true,
+          "even_norm": 0.0013525208923965693,
+          "fail_reasons": "",
+          "host_pass": true,
+          "leak_frac": -0.9999988675117493,
+          "leak_ratio": 0.0007053684887986171,
+          "odd_norm": 1.099234700202942,
+          "on_content": 0.5500592589378357,
+          "on_e": 0.0006721647223457694,
+          "on_u": 0.9529270529747009,
+          "particle_rms": 0.27439501881599426,
+          "pole_rel_err_minus": 0.032361507415771484,
+          "pole_rel_err_plus": 0.031025368720293045,
+          "same_dir": 0.0012289083992465537,
+          "u_kept": 0.9529270434454306
+        },
+        "final_streak": 11,
+        "first_arrival": 467,
+        "parity": {
+          "file": "/ml2/hypergan/lrfree-20260926/runs/_parity/552cddfc287cb70e-df56cbd620dd-39ab8f54885b-97831f8c55ab.json",
+          "id": "552cddfc287cb70e-df56cbd620dd-39ab8f54885b-97831f8c55ab",
+          "scope": "per-package gate = components_parity c1 (scalar mode_hold) + c2 (sparse table) only; host-specific engine paths (initialization=None, second table + own A2, RoleView, encoder + MoG) are covered by the L3a/L3b unit tests and HostSmokeTest in harness/tests/test_components_parity.py",
+          "status": "PASS",
+          "steps": 1000
+        },
+        "passing_checks": 11,
+        "status": "PASS",
+        "thresholds": [
+          [
+            "u_kept",
+            ">=",
+            0.85
+          ],
+          [
+            "content_kept",
+            ">=",
+            0.75
+          ],
+          [
+            "leak_ratio",
+            "<=",
+            0.2
+          ],
+          [
+            "pole_rel_err_plus",
+            "<=",
+            0.2
+          ],
+          [
+            "pole_rel_err_minus",
+            "<=",
+            0.2
+          ],
+          [
+            "same_dir",
+            "<=",
+            0.25
+          ]
+        ]
+      },
+      "raw_status": "PASS",
+      "reason": null,
+      "role": "candidate",
+      "task_id": "cover_leftover"
+    },
+    {
+      "cost": {
+        "flops": null,
+        "flops_status": "unavailable",
+        "peak_gpu_mib": null,
+        "seconds": null,
+        "steps": null,
+        "train_seconds": null
+      },
+      "diagnostics": {},
+      "evidence": [
+        {
+          "git_blob": "ff178cd5313a1e3349452302b0727d2cd17d20db",
+          "path": "reports/toy100/lrfree-search/custom22/results.json",
+          "revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+          "sha256": "c29ee5fc2220d56b142a0947f622778928c47be83453ae7decde11abd32db454",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/custom22/results.json"
+        }
+      ],
+      "evidence_scope": "historical",
+      "gate_status": "PASS",
+      "metrics": {
+        "final": {
+          "arm": "locked",
+          "concept_cos_minus": 0.9999789595603943,
+          "concept_cos_plus": 0.9999059438705444,
+          "concept_mag_minus": 1.0015798807144165,
+          "concept_mag_plus": 0.9999365210533142,
+          "cover_weight": 1.5,
+          "device": "cpu",
+          "fail_reasons": "",
+          "host_pass": true,
+          "identity_at_0": 0.9953277546403974,
+          "identity_at_mid": 0.9959529531531325,
+          "leak_frac": -0.9999256134033203,
+          "pairing": "matched",
+          "per_scale": [
+            {
+              "identity_kept": 0.9969340455670327,
+              "on_concept": -1.005262851715088,
+              "scale": -1.0
+            },
+            {
+              "identity_kept": 0.9953277546403974,
+              "on_concept": -0.003704027272760868,
+              "scale": 0.0
+            },
+            {
+              "identity_kept": 0.9959529531531325,
+              "on_concept": 0.494193434715271,
+              "scale": 0.5
+            },
+            {
+              "identity_kept": 0.9983432076854405,
+              "on_concept": 0.9961384534835815,
+              "scale": 1.0
+            }
+          ],
+          "same_dir": 0.006116598276655332,
+          "scales": [
+            -1.0,
+            0.0,
+            0.5,
+            1.0
+          ],
+          "seed": 0,
+          "steps": 800
+        },
+        "final_streak": 16,
+        "first_arrival": 300,
+        "passing_checks": 16,
+        "thresholds": [
+          [
+            "concept_cos_plus",
+            ">=",
+            0.85
+          ],
+          [
+            "concept_cos_minus",
+            ">=",
+            0.85
+          ],
+          [
+            "concept_mag_plus",
+            ">=",
+            0.75
+          ],
+          [
+            "concept_mag_plus",
+            "<=",
+            1.25
+          ],
+          [
+            "concept_mag_minus",
+            ">=",
+            0.75
+          ],
+          [
+            "concept_mag_minus",
+            "<=",
+            1.25
+          ],
+          [
+            "identity_at_0",
+            ">=",
+            0.85
+          ],
+          [
+            "identity_at_mid",
+            ">=",
+            0.85
+          ]
+        ]
+      },
+      "raw_result": {
+        "binding_sha256": "620bf137c3ad7e74740722b16c0ecd0e4ab329c6d7a1758892a589c56b3e995e",
+        "engine_sha256": "39ab8f54885b066f06a0852133a90f556658988553d4acec76aa4d71ff484b25",
+        "final": {
+          "arm": "locked",
+          "concept_cos_minus": 0.9999789595603943,
+          "concept_cos_plus": 0.9999059438705444,
+          "concept_mag_minus": 1.0015798807144165,
+          "concept_mag_plus": 0.9999365210533142,
+          "cover_weight": 1.5,
+          "device": "cpu",
+          "fail_reasons": "",
+          "host_pass": true,
+          "identity_at_0": 0.9953277546403974,
+          "identity_at_mid": 0.9959529531531325,
+          "leak_frac": -0.9999256134033203,
+          "pairing": "matched",
+          "per_scale": [
+            {
+              "identity_kept": 0.9969340455670327,
+              "on_concept": -1.005262851715088,
+              "scale": -1.0
+            },
+            {
+              "identity_kept": 0.9953277546403974,
+              "on_concept": -0.003704027272760868,
+              "scale": 0.0
+            },
+            {
+              "identity_kept": 0.9959529531531325,
+              "on_concept": 0.494193434715271,
+              "scale": 0.5
+            },
+            {
+              "identity_kept": 0.9983432076854405,
+              "on_concept": 0.9961384534835815,
+              "scale": 1.0
+            }
+          ],
+          "same_dir": 0.006116598276655332,
+          "scales": [
+            -1.0,
+            0.0,
+            0.5,
+            1.0
+          ],
+          "seed": 0,
+          "steps": 800
+        },
+        "final_streak": 16,
+        "first_arrival": 300,
+        "parity": {
+          "file": "/ml2/hypergan/lrfree-20260926/runs/_parity/552cddfc287cb70e-df56cbd620dd-39ab8f54885b-97831f8c55ab.json",
+          "id": "552cddfc287cb70e-df56cbd620dd-39ab8f54885b-97831f8c55ab",
+          "scope": "per-package gate = components_parity c1 (scalar mode_hold) + c2 (sparse table) only; host-specific engine paths (initialization=None, second table + own A2, RoleView, encoder + MoG) are covered by the L3a/L3b unit tests and HostSmokeTest in harness/tests/test_components_parity.py",
+          "status": "PASS",
+          "steps": 1000
+        },
+        "passing_checks": 16,
+        "status": "PASS",
+        "thresholds": [
+          [
+            "concept_cos_plus",
+            ">=",
+            0.85
+          ],
+          [
+            "concept_cos_minus",
+            ">=",
+            0.85
+          ],
+          [
+            "concept_mag_plus",
+            ">=",
+            0.75
+          ],
+          [
+            "concept_mag_plus",
+            "<=",
+            1.25
+          ],
+          [
+            "concept_mag_minus",
+            ">=",
+            0.75
+          ],
+          [
+            "concept_mag_minus",
+            "<=",
+            1.25
+          ],
+          [
+            "identity_at_0",
+            ">=",
+            0.85
+          ],
+          [
+            "identity_at_mid",
+            ">=",
+            0.85
+          ]
+        ]
+      },
+      "raw_status": "PASS",
+      "reason": null,
+      "role": "candidate",
+      "task_id": "mid_scale_identity"
+    }
+  ]
+}

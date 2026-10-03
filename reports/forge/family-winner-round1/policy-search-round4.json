@@ -1,0 +1,153 @@
+{
+  "schema": "particlegan_policy_family_search_v1",
+  "id": "policy-family-defaults-round4-prior-balance-v1",
+  "families": [
+    "atlas",
+    "e22"
+  ],
+  "seed": 24002,
+  "grid": {
+    "lr": [
+      0.0053125,
+      0.006375
+    ],
+    "prior_lr_mult": [
+      0.5,
+      1.5
+    ]
+  },
+  "cases": [
+    {
+      "id": "image-develop-img_intensity2-source-transpose12",
+      "tier": 1,
+      "timeout_seconds": 180
+    },
+    {
+      "id": "api-vector-two-broad",
+      "tier": 1,
+      "timeout_seconds": 180
+    },
+    {
+      "id": "api-grid100",
+      "tier": 2,
+      "timeout_seconds": 2100
+    },
+    {
+      "id": "api-rotated100",
+      "tier": 2,
+      "timeout_seconds": 2100
+    },
+    {
+      "id": "api-staggered100",
+      "tier": 2,
+      "timeout_seconds": 2100
+    },
+    {
+      "id": "api-vector-unequal-mass",
+      "tier": 2,
+      "timeout_seconds": 180
+    },
+    {
+      "id": "api-vector-anisotropic",
+      "tier": 2,
+      "timeout_seconds": 180
+    },
+    {
+      "id": "image-develop-img_bars4-source-transpose12",
+      "tier": 2,
+      "timeout_seconds": 180
+    }
+  ],
+  "backend": "cuda",
+  "frames": 9,
+  "candidate_budget_seconds": 5400,
+  "budget_seconds": 9997.188535008114,
+  "family_budget_seconds": {
+    "atlas": 4994.908136234852,
+    "e22": 5002.280398773262
+  },
+  "export_grace_seconds": 120,
+  "stability": {
+    "confirmation_checks": 5,
+    "post_confirmation_hold_checks": 5,
+    "first_window_only": true,
+    "all_subsequent_primary_checks": true
+  },
+  "speed_ranking": false,
+  "default_adoption": false,
+  "representation_card": {
+    "path": "reports/forge/family-winner-round1/policy-representation.json",
+    "sha256": "729f084b5e7b076cfb5d06d65810cec1b823f5df0ebe645767d8cd43fcb74c38"
+  },
+  "rationale": "Final finite shared transport-balance grid. Keep the1.25x/1.5x public learning rates that produced actual intensity holds in earlier profiles, and test new prior-rate ceilings .5 or1.5. The1.25x/prior1 broad run reached a passing endpoint only at1200; the1.5x/prior2 run acquired earlier then failed retention. A lower table ceiling and intermediate G/prior balance are effective, substantive controls of acquisition/persistence, not proof of slower actual drift or a diagnosed optimizer cause. All four pairs are new; effects are observed nonmonotonic. No prediction of interpolation success, seed change, gate/horizon/sampler change or failed-setting repeat.",
+  "timeout_rationale": "Original full CPU1 API acquisition wall times on the historical 5d75e655 source were 1748.815,1720.797,1701.546s for grid/rotated/staggered; 21.605,22.684,23.453s for selected vectors; 11.998,12.243s for selected images. New2100s native caps exceed those observed original full CPU horizons;180s smaller-host caps permit substantial device/contention overhead. These old times are context, not current GPU speed estimates or convergence-time reuse. Original steps/batches/scoring/draw counts remain unchanged; time caps never adapt after failure.",
+  "budget_scope": "LAST finite screening grid in the SAME original10800s policy cap. Original CLI setup and all three completed grids remain paid and retained. Only exact unspent disjoint family quotas are available; no borrowing, new allowance, continuation, automatic tuning extension or budget/gate/horizon relaxation.",
+  "capacity_scope": "Current CPU public restored selected/served snapshot witnesses support the exact parameterization and numerical tolerance with zero ordinary optimizer updates. They are necessary capacity evidence, not trained quality/stability or guaranteed GPU convergence. Failed alternatives and original source identities remain separately retained.",
+  "execution_repair": {
+    "kind": "unsupported_cli_flag_removed",
+    "original_study_id": "policy-family-defaults-round1-v1",
+    "original_source_commit": "563cb337937a05494a1577376e5740f0aa2e2777",
+    "original_study_path": "/ml2/hypergan/forge-policy-family-round1-20261002/atlas/study.json",
+    "original_study_sha256": "bba8374f395d4c8040c87f8db0e83995b3f0e7f7e583d47f4294148d794493b9",
+    "original_paid_setup_seconds": 6.16541115893051,
+    "original_optimizer_updates": 0,
+    "original_scientific_status": "UNMEASURED",
+    "repair": "Use supported child CLI arguments; require actual case protocol seed24002 in preflight. Family/knobs/gates/horizons/samplers and protected source bindings are unchanged.",
+    "automatic_retry": false,
+    "round_paid_cap_including_original_setup_seconds": 10800
+  },
+  "parent_results": {
+    "study_id": "policy-family-defaults-round3-v1",
+    "source_commit": "531021742ad25cc47ed593bc3700f68673742ae3",
+    "combined_path": "/ml2/hypergan/forge-policy-family-round3-20261002/current-policy-family-results.json",
+    "combined_sha256": "7b55b4aa8b60bffb0d213f5b5863711691ea27875b96ef546e0b87b295cdd916",
+    "archive_manifest": "reports/forge/family-winner-round1/policy-round3-archive.json",
+    "paid_seconds": 338.82339419214986,
+    "family_paid_seconds": {
+      "atlas": 168.8133712040726,
+      "e22": 170.01002298807725
+    },
+    "earlier_parent_results": {
+      "study_id": "policy-family-defaults-round2-v1",
+      "source_commit": "0335ecf024ea8a6b337a216345f444abd41e3a6c",
+      "combined_path": "/ml2/hypergan/forge-policy-family-round2-20261002/current-policy-family-results.json",
+      "combined_sha256": "52b9b85f9c6e4139c6a51ad7dfa5641c241fa822ea2bd70877543616ebf8351c",
+      "archive_manifest": "reports/forge/family-winner-round1/policy-round2-archive.json",
+      "paid_seconds": 189.03142790216953,
+      "family_paid_seconds": {
+        "atlas": 93.26545849721879,
+        "e22": 95.76596940495074
+      },
+      "earlier_parent_results": {
+        "study_id": "policy-family-defaults-round1-cli-recovery-v2",
+        "source_commit": "eb2d77fbd776eab0d2ce5e2550ab9cdfdb6c1162",
+        "combined_path": "/ml2/hypergan/forge-policy-family-round1-cli-recovery-20261002/current-policy-family-results.json",
+        "combined_sha256": "62079914653b9c27efec277c2ce4a57c50b42c856bb25f827a46af16b1f3cd3f",
+        "archive_manifest": "reports/forge/family-winner-round1/policy-round1-archive.json",
+        "paid_seconds": 268.79123173863627,
+        "family_paid_seconds": {
+          "atlas": 136.84762290492654,
+          "e22": 131.94360883370973
+        },
+        "original_paid_cap_seconds": 10800,
+        "original_cli_setup_paid_seconds": 6.16541115893051,
+        "remaining_paid_seconds": 10525.043357102433
+      },
+      "original_paid_cap_seconds": 10800,
+      "total_prior_paid_seconds": 463.9880707997363,
+      "remaining_paid_seconds": 10336.011929200264
+    },
+    "original_paid_cap_seconds": 10800,
+    "total_prior_paid_seconds": 802.8114649918862,
+    "remaining_paid_seconds": 9997.188535008114
+  },
+  "source_cohort_scope": "New coordinator source admits exactly one additional complete LR/prior-grid pairing; independent axis recombination is rejected. PR245 integration adds the independently source-bound late-phase caption variant, examples/docs/tests/CI only; public selected study trainer/presets/cases/providers/scorers and capacity bindings are unchanged. Earlier trained passes do not fill this source cohort.",
+  "ordering_rationale": "Keep original case order: image fidelity smoke before broad-mixture shape smoke, then grid/rotated/staggered native quality and original unequal-mass/anisotropic/bar quality. Deeper cases remain required UNKNOWN after early failure.",
+  "observed_failure_rationale": {
+    "intensity_rates": "Prior1 atLR.0031875 and.0053125 retained full intensity holds; prior2 acquired too late. Earlier.006375/prior2 retained intensity.",
+    "broad_endpoint_vs_hold": "LR.0053125/prior1 finalKS.03368648 passes, but preceding four terminal observations failKS so original/studyFAIL; .006375/prior2 acquired950 then collapsed, endpointKS.0721952; .0031875/prior1 endpointKS.06071921>.06.",
+    "mechanism_limits": "prior_lr_mult is a genuine table-base ceiling; stationarity, row evidence and birth/death affect actual displacement. Saved output recentering identifies an observed location contribution, not a prior optimizer cause. Nonmonotonic results do not support smooth interpolation or a critic-rate causal claim."
+  },
+  "last_finite_screening_grid": true,
+  "after_grid": "Conclude this bounded screen, retaining all failures, costs, unknown deeper cases and every qualified whole configuration. No automatic new grid, seed study, shortened protocol or unchanged repeat. Without a retained whole positive, dynamics/calibration remain unresolved and require a separately justified question."
+}

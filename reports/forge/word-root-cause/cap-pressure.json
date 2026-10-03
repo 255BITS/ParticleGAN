@@ -1,0 +1,313 @@
+{
+  "schema_version": 1,
+  "scope": "Algebraic cap pressure on saved joint-gradient norms, no training or optimizer updates. Associated endpoint differences do not isolate cause.",
+  "parent_artifact_sha256": "60e516971fa5198f40157bf28a8cd162d1427832b026be24ec024aeb45cc94d4",
+  "states": [
+    {
+      "id": "k3p-clean-full-low-rate",
+      "state_sha256": "0fe978510114173138ea7573d850deef48226773e86e08a97dd332c0569716fb",
+      "full_joint_gradient_norms": {
+        "real": [
+          1.1134128950995728,
+          1.12254617942983,
+          0.720858090375271,
+          1.1646399840548756,
+          0.558367331778138
+        ],
+        "fake": [
+          0.7759868224342759,
+          0.821011182300191,
+          1.099478627981125,
+          0.558367331778138,
+          0.558367331778138
+        ]
+      },
+      "cap_pressure": [
+        {
+          "kappa": 1.0,
+          "real_mean_squared_excess": 0.010997275043460888,
+          "fake_mean_squared_excess": 0.0019791994850014154,
+          "real_active": 3,
+          "fake_active": 1
+        },
+        {
+          "kappa": 0.25,
+          "real_mean_squared_excess": 0.5320365431347074,
+          "fake_mean_squared_excess": 0.3029021339397999,
+          "real_active": 5,
+          "fake_active": 5
+        },
+        {
+          "kappa": 0.1,
+          "real_mean_squared_excess": 0.7603260119789684,
+          "fake_mean_squared_excess": 0.47919481171611206,
+          "real_active": 5,
+          "fake_active": 5
+        }
+      ],
+      "median_real_word_to_latent_gradient_ratio": 31.8554852933015,
+      "mechanism_notes": {
+        "k3p_pure_A_real_coefficient_per_norm_squared": 0.0029411764705882353,
+        "k3p_pure_A_fake_L2_cap": 13.038404810405298,
+        "declared_critic_formulation": "k3p",
+        "reg_arm": null,
+        "reg_coeff_end": null
+      }
+    },
+    {
+      "id": "ka2-clean-full-low-rate",
+      "state_sha256": "e68ba957e09a6f1f4783f886e9bc943157cb88c1b9211e44061982dd4bc90d84",
+      "full_joint_gradient_norms": {
+        "real": [
+          0.19617981904699391,
+          0.20900828103730987,
+          0.30515897101558476,
+          0.2349577301601937,
+          1.3145650625641812
+        ],
+        "fake": [
+          0.26794640155724486,
+          0.21685122030438206,
+          0.2349577301601937,
+          1.3145650625641812,
+          0.19617981904699391
+        ]
+      },
+      "cap_pressure": [
+        {
+          "kappa": 1.0,
+          "real_mean_squared_excess": 0.01979023571720144,
+          "fake_mean_squared_excess": 0.01979023571720144,
+          "real_active": 1,
+          "fake_active": 1
+        },
+        {
+          "kappa": 0.25,
+          "real_mean_squared_excess": 0.22726825690315539,
+          "fake_mean_squared_excess": 0.22672416915222654,
+          "real_active": 2,
+          "fake_active": 2
+        },
+        {
+          "kappa": 0.1,
+          "real_mean_squared_excess": 0.311321089289264,
+          "fake_mean_squared_excess": 0.3088985278412176,
+          "real_active": 5,
+          "fake_active": 5
+        }
+      ],
+      "median_real_word_to_latent_gradient_ratio": 8.426978139308853,
+      "mechanism_notes": {
+        "k3p_pure_A_real_coefficient_per_norm_squared": 0.0029411764705882353,
+        "k3p_pure_A_fake_L2_cap": 13.038404810405298,
+        "declared_critic_formulation": "ka2",
+        "reg_arm": null,
+        "reg_coeff_end": null
+      }
+    },
+    {
+      "id": "r1r2-low-rate-fast-roles",
+      "state_sha256": "7585d0710400a928543030025ebe52e2163bdce2c69a68e1f5fa61cf467abffe",
+      "full_joint_gradient_norms": {
+        "real": [
+          0.0039028826357204068,
+          0.0034708485655276446,
+          0.0031378262006037314,
+          0.003580730715893922,
+          0.0029281437963720298
+        ],
+        "fake": [
+          0.0031378262006037314,
+          0.0029281437963720298,
+          0.003580730715893922,
+          0.0039028826357204068,
+          0.0034708485655276446
+        ]
+      },
+      "cap_pressure": [
+        {
+          "kappa": 1.0,
+          "real_mean_squared_excess": 0.0,
+          "fake_mean_squared_excess": 0.0,
+          "real_active": 0,
+          "fake_active": 0
+        },
+        {
+          "kappa": 0.25,
+          "real_mean_squared_excess": 0.0,
+          "fake_mean_squared_excess": 0.0,
+          "real_active": 0,
+          "fake_active": 0
+        },
+        {
+          "kappa": 0.1,
+          "real_mean_squared_excess": 0.0,
+          "fake_mean_squared_excess": 0.0,
+          "real_active": 0,
+          "fake_active": 0
+        }
+      ],
+      "median_real_word_to_latent_gradient_ratio": 25.439763689952397,
+      "mechanism_notes": {
+        "k3p_pure_A_real_coefficient_per_norm_squared": 0.0029411764705882353,
+        "k3p_pure_A_fake_L2_cap": 13.038404810405298,
+        "declared_critic_formulation": "k3p",
+        "reg_arm": "a_r1r2",
+        "reg_coeff_end": 0.1
+      }
+    },
+    {
+      "id": "r1r2-mid-rate-fast-roles",
+      "state_sha256": "f4069bf859de6136607c99621d192745e4988719f6a7b5532d0be8a030b2afc6",
+      "full_joint_gradient_norms": {
+        "real": [
+          0.004324273577706568,
+          0.003543942350777964,
+          0.0028388195878458846,
+          0.0035176972270371193,
+          0.0036562329604545624
+        ],
+        "fake": [
+          0.0028388195878458846,
+          0.0036562329604545624,
+          0.0035176972270371193,
+          0.004324273577706568,
+          0.003543942350777964
+        ]
+      },
+      "cap_pressure": [
+        {
+          "kappa": 1.0,
+          "real_mean_squared_excess": 0.0,
+          "fake_mean_squared_excess": 0.0,
+          "real_active": 0,
+          "fake_active": 0
+        },
+        {
+          "kappa": 0.25,
+          "real_mean_squared_excess": 0.0,
+          "fake_mean_squared_excess": 0.0,
+          "real_active": 0,
+          "fake_active": 0
+        },
+        {
+          "kappa": 0.1,
+          "real_mean_squared_excess": 0.0,
+          "fake_mean_squared_excess": 0.0,
+          "real_active": 0,
+          "fake_active": 0
+        }
+      ],
+      "median_real_word_to_latent_gradient_ratio": 8.940867504240241,
+      "mechanism_notes": {
+        "k3p_pure_A_real_coefficient_per_norm_squared": 0.0029411764705882353,
+        "k3p_pure_A_fake_L2_cap": 13.038404810405298,
+        "declared_critic_formulation": "k3p",
+        "reg_arm": "a_r1r2",
+        "reg_coeff_end": 0.1
+      }
+    },
+    {
+      "id": "r1r2-low-rate-original-roles",
+      "state_sha256": "722646252390138dac03bd77a1a6aec0c6daa49134950ba457ec45919ef4eec7",
+      "full_joint_gradient_norms": {
+        "real": [
+          0.002753906877703366,
+          0.002361210617979332,
+          0.0031132950025235012,
+          0.0029913507972236793,
+          0.004318136900867474
+        ],
+        "fake": [
+          0.0031132950025235012,
+          0.004318136900867474,
+          0.0029913507972236793,
+          0.002753906877703366,
+          0.002361210617979332
+        ]
+      },
+      "cap_pressure": [
+        {
+          "kappa": 1.0,
+          "real_mean_squared_excess": 0.0,
+          "fake_mean_squared_excess": 0.0,
+          "real_active": 0,
+          "fake_active": 0
+        },
+        {
+          "kappa": 0.25,
+          "real_mean_squared_excess": 0.0,
+          "fake_mean_squared_excess": 0.0,
+          "real_active": 0,
+          "fake_active": 0
+        },
+        {
+          "kappa": 0.1,
+          "real_mean_squared_excess": 0.0,
+          "fake_mean_squared_excess": 0.0,
+          "real_active": 0,
+          "fake_active": 0
+        }
+      ],
+      "median_real_word_to_latent_gradient_ratio": 22.84585148889695,
+      "mechanism_notes": {
+        "k3p_pure_A_real_coefficient_per_norm_squared": 0.0029411764705882353,
+        "k3p_pure_A_fake_L2_cap": 13.038404810405298,
+        "declared_critic_formulation": "k3p",
+        "reg_arm": "a_r1r2",
+        "reg_coeff_end": 0.1
+      }
+    },
+    {
+      "id": "k3p-slow-prior-0p1",
+      "state_sha256": "a5bb5b07d410c211b18a868a81f3033489b2c7669a840caf32b9155f9302fa12",
+      "full_joint_gradient_norms": {
+        "real": [
+          0.9632038152684623,
+          1.1612889322659647,
+          0.7207639319947868,
+          0.6805285442076238,
+          1.3956482608868463
+        ],
+        "fake": [
+          0.6971280924452714,
+          1.1344328883024637,
+          0.6805285442076238,
+          0.9632038152684623,
+          1.0166843230171363
+        ]
+      },
+      "cap_pressure": [
+        {
+          "kappa": 1.0,
+          "real_mean_squared_excess": 0.036510333202856196,
+          "fake_mean_squared_excess": 0.0036701136183765653,
+          "real_active": 2,
+          "fake_active": 2
+        },
+        {
+          "kappa": 0.25,
+          "real_mean_squared_excess": 0.6117181289803433,
+          "fake_mean_squared_excess": 0.45279288512321136,
+          "real_active": 5,
+          "fake_active": 5
+        },
+        {
+          "kappa": 0.1,
+          "real_mean_squared_excess": 0.8545041380577644,
+          "fake_mean_squared_excess": 0.6698115449176688,
+          "real_active": 5,
+          "fake_active": 5
+        }
+      ],
+      "median_real_word_to_latent_gradient_ratio": 4.913317886167285,
+      "mechanism_notes": {
+        "k3p_pure_A_real_coefficient_per_norm_squared": 0.0029411764705882353,
+        "k3p_pure_A_fake_L2_cap": 13.038404810405298,
+        "declared_critic_formulation": "k3p",
+        "reg_arm": null,
+        "reg_coeff_end": null
+      }
+    }
+  ]
+}

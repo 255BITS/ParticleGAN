@@ -1,0 +1,15 @@
+{
+  "GPU_operations": 0,
+  "change": "Bind completed-suite declared source/test hashes to exact immutable commit snapshots rather than advanced live source files",
+  "commit": "b25de08cfbeef9fe8aa06522324e132c3e71ae0f",
+  "completed_suite_actual_counts_or_replay_checks_changed": false,
+  "corrected_source_sha256": "798c0574dadc2075c9c1866b9ff52bcfc364a84ab20343a026893f5a2eccc74a",
+  "model_calls": 0,
+  "original_numerical_gates_or_quality_criteria_changed": false,
+  "package_or_config_changed": false,
+  "previous_snapshot_preserved": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/final-v3-r2-attempt1",
+  "previous_source_sha256": "3615d1e71a0e21c0ca1e48798cab0599326642536998919e160754edb3a9ab71",
+  "snapshot_sha256": "44f866da84ea4735e5db08bf9c2427d9de3c9d6cb704b037d95dce9cdce22cb0",
+  "status": "PASS_HISTORICAL_COMPLETED_SOURCE_SNAPSHOT_EQUIVALENCE",
+  "tensor_loads": 0
+}

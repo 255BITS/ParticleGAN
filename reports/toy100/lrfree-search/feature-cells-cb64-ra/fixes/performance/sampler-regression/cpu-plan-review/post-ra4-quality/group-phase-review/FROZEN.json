@@ -1,0 +1,9 @@
+{
+  "status": "FROZEN_READ_ONLY_REVIEW",
+  "utc": "2026-09-30T05:33:11.074755+00:00",
+  "source_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra4-quality/group-phase-review/receipt.json": "359de6e872aef2c59b0069b88747231c9b8931e2ee4e55587b0a4c4ca457d26f",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra4-quality/group-phase-review/REPORT.md": "a1101051bb4c2fe382afed1863f32df56491bcc9d09b58a43354acc8b57a5f02"
+  },
+  "reviewed_phase_ready_sha256": "8dd57424f2c64bbfbe27ceff3e059cc8cd73e840c3319b253e5e66ad34f70d45"
+}

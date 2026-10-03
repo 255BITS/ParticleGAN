@@ -1,0 +1,22 @@
+{
+  "assertions": [
+    "Closed RA14 replay actual PASS/40 updates/zero training",
+    "Original RA13 training parity and replay FAIL retained",
+    "Actual RA12/13 final metrics copied from completed result JSON",
+    "Observed queue verdicts agree with corresponding completed receipt",
+    "RA13 suite count quoted from closed log, never transferred to RA14"
+  ],
+  "files": {
+    "INVENTORY.json": "484bb263f164473054c05d15ac5f428d5b47cda635700b17ed352f0f97087177",
+    "QUEUE-SNAPSHOT.json": "bc13a17a30b75942f62b116c37f55d37d9293b0410eb6b7a494c26b2e689b760",
+    "REPORT-DRAFT.md": "a00a5c3a25811a567dd45b63ea9b8fe0712c5c29d42c10cfc576f5a6f8a71bf0",
+    "build_inventory.py": "e74ec051723345b46b998d582029608c29a4cdbd3f92c98a97eb24bf47378ddc"
+  },
+  "model_calls": 0,
+  "numerical_reruns": 0,
+  "prepared_utc": "2026-09-30T22:46:28.225659+00:00",
+  "repository_writes": 0,
+  "source_reads": "stdlib source/JSON/log only",
+  "status": "PASS_ARCHIVE_PREPARATION_WITH_FINAL_GATES_PENDING",
+  "tensor_loads": 0
+}

@@ -1,0 +1,24 @@
+{
+  "closed_log_sha256": "7780cf6b5bbfff5640c2b46eebab327aa4ac8b757223110f5d9946e5ed2643b4",
+  "guard_count": 15,
+  "receipt_sha256": "215633e12e8451082777c6e6da3430e72214959a1d41e8a36e1fbc0f6fa09910",
+  "result_sha256": "559bf3b63e134ec58bcb02a8b4c596bd0efdac09422fb7b0fd3e9b7d4dd0ba3b",
+  "sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/optimizer-surprise-dynamics/scalar-reconstruction/EXIT.json": "d6a109d5eb3d9309b7c6845fa3818a5de5e91ea4a6feb6c2d8d9f37f6343f44b",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/optimizer-surprise-dynamics/scalar-reconstruction/INPUTS-FROZEN.json": "6b0011b236c4d6bff8799f44ad06dfe7fc5ee9d8b75336163ef333c98c4fa2b7",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/optimizer-surprise-dynamics/scalar-reconstruction/LAUNCH.json": "d4b54e5b02bc3f43466d38910bb39ce568e0698d86c1a8324b7074a84e7607af",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/optimizer-surprise-dynamics/scalar-reconstruction/PROTOCOL.md": "912fb7b32ce7b80cb38ea5fc9ed1f5d75118668ad90aa5cc9b0893b85b999b65",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/optimizer-surprise-dynamics/scalar-reconstruction/REPORT.md": "53b942188eb567ba71f53b63e8c71faa6d3b9a19e47d8a146217661cd2406d33",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/optimizer-surprise-dynamics/scalar-reconstruction/receipt.json": "215633e12e8451082777c6e6da3430e72214959a1d41e8a36e1fbc0f6fa09910",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/optimizer-surprise-dynamics/scalar-reconstruction/reconstruct.py": "af3d4f7b5abb56238baedc5779e97235a332503ef172dbf84f165cc00251b96b",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/optimizer-surprise-dynamics/scalar-reconstruction/result.json": "559bf3b63e134ec58bcb02a8b4c596bd0efdac09422fb7b0fd3e9b7d4dd0ba3b",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/optimizer-surprise-dynamics/scalar-reconstruction/run.log": "7780cf6b5bbfff5640c2b46eebab327aa4ac8b757223110f5d9946e5ed2643b4",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-moving-observe/window-1000/trace.jsonl": "439f2ca9bb63d188674d8d9be68f05f50505717516e63bdbfc14fb07da7f0b4a",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-moving-observe/window-500/trace.jsonl": "c0435f810a5db39cd6fa64420807915812bfeac5e33645676943ae848a655f24",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-observe/mnist/trace.jsonl": "26f8b0ae35aeb3eac2e6eb6e25d1edab5dd3ef80a17d0eb8f2694ee98f2f9691",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-observe/toy/trace.jsonl": "58ca9b634ba8bd3a2d4b1f2e2fbfa29d3f03515334c482d17f70622da37f09d5",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA12-auto/particlegan/continuous.py": "3b21b688a536f5060ba92f6db3dd6da92a8acf25f48895031dd31181998c4bfa",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/pkg-RA13-settled/particlegan/continuous.py": "0342b0b19a6e5e177ec38840775886576d22e21dc6608e6aa2bb49aa53e1bef4"
+  },
+  "status": "FROZEN_DETECTOR_ONLY_SCALAR_PASS"
+}

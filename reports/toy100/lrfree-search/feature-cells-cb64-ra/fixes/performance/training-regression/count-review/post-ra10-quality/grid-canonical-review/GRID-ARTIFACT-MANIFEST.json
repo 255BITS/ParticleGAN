@@ -1,0 +1,396 @@
+{
+  "inputs": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/execution-receipt.json": {
+      "sha256": "ab5c107688fb818998ff88a83936d8b5993f823ffde4aef3ac350e2101000909",
+      "bytes": 4126
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/final-state.pt": {
+      "sha256": "287e8f995c44467ec1a8b1721b23a650947765d7cd143dec54c2b1fab43ec36d",
+      "bytes": 5533469
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/job-header.json": {
+      "sha256": "4913d7a9d4a53f267ea51d2962b38e08fc0a96a1796f074f4df640896a030c53",
+      "bytes": 2625
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/metrics.jsonl": {
+      "sha256": "2957274387b7a2084284c5f9f86056d073aaf3f43f0c1c8666aa09d859e93b7b",
+      "bytes": 560291
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/config.json": {
+      "sha256": "2e132f55cfb0cb57e456b9334c3d1a2867516aaea289aaa818208f7902bd6aed",
+      "bytes": 602
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/events.jsonl": {
+      "sha256": "9ff20d2818fa191e5b0a5174dd5534d7941fb5301890536b2dc3d3d5b592f540",
+      "bytes": 70712
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/final_samples.npz": {
+      "sha256": "0b5766f41dc4a1a3b7009bfe299ee93cb2da4aa8fdc25b6dea9ced2660638f29",
+      "bytes": 415037
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/holdout_samples.npz": {
+      "sha256": "6cccefa84106e5fd601d866265017dae26b088128ece3cd5f06a8747f8425090",
+      "bytes": 2072206
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/quality_checks/step_006000.npz": {
+      "sha256": "d5b802617f0264383f435d0903c103792f6a3088ca64fa465a0f0ff08b6a34ce",
+      "bytes": 416221
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/quality_checks/step_006250.npz": {
+      "sha256": "41f1570b79872966feac0fe1db63fe9a033021a6c84bdbc79ae5dda506e001e7",
+      "bytes": 415705
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/quality_checks/step_006500.npz": {
+      "sha256": "0d783f514fccefdd8e41abc2845c0d0a44c6459d795bf0fdc18c81ff8a604106",
+      "bytes": 415609
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/quality_checks/step_006750.npz": {
+      "sha256": "465339bb9b021169d36850e48abd5ea23cfd6706822fa9def70876adbdc198ba",
+      "bytes": 415285
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/quality_checks/step_007000.npz": {
+      "sha256": "0b5766f41dc4a1a3b7009bfe299ee93cb2da4aa8fdc25b6dea9ced2660638f29",
+      "bytes": 415037
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_000000.npz": {
+      "sha256": "83da0f58a55a6332906d2c2d675f9f1550788ae8f6b612e2428508d28218bf9f",
+      "bytes": 89995
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_000001.npz": {
+      "sha256": "9966ce43d44edc80e202097f7089eb59b62e508e81cfc55262e61d1b7112ac3a",
+      "bytes": 90034
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_000010.npz": {
+      "sha256": "0a66ce9297f25725ccb7456ab38853725980ada9d549914323c1b249d0378e44",
+      "bytes": 90009
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_000025.npz": {
+      "sha256": "ff966eebf486c7afd2b3c0234bdf97a5cc54bf5fab682fe12e8139c7a8d228f0",
+      "bytes": 90021
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_000050.npz": {
+      "sha256": "f7f5c3fdd853fe45aa7bc1f0a24801664f13b7fc712087eb5e56a856fcf508b6",
+      "bytes": 89837
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_000100.npz": {
+      "sha256": "901a51342cd86ca1ea9ac52c9cd29c38e9c1ab9cbae49947892a2244f08a5d8f",
+      "bytes": 88952
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_000250.npz": {
+      "sha256": "1fc0ae46de17c912ff63af487a817edb02b5f6bf3f27b4e1a20dbc83169688f1",
+      "bytes": 87674
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_000500.npz": {
+      "sha256": "b7963503846a097ef02ceb1afe704dbe4fed4ce83cf18947ac21b384f5cb9391",
+      "bytes": 87525
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_000750.npz": {
+      "sha256": "93257f86141be129d186dccd624cf7ed8594dd3c72e54ca913bdcc7cc6d0fe57",
+      "bytes": 87495
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_001000.npz": {
+      "sha256": "9f809e0d14d2f5da29ac7c97642af37818c77216b5200d1e408495e2a90024ca",
+      "bytes": 87403
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_001250.npz": {
+      "sha256": "5788934cf0ead8f238c62623c2c40aca739c957dc5e22d4ba068b51154058c0a",
+      "bytes": 87213
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_001500.npz": {
+      "sha256": "7ec4333ee5542779b923e176947ccab920a1e40a2086d4e71eeacef2aa1d6e45",
+      "bytes": 86883
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_001750.npz": {
+      "sha256": "f8e7a86bc33c98a846d41d828e1e18c10b085dcfe30f4b5e90751ede52f306b2",
+      "bytes": 86603
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_002000.npz": {
+      "sha256": "8773af9f03713d8a36fde9e998b8b5241015c9a22e421ee4f2494d66000eb5f3",
+      "bytes": 86505
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_002250.npz": {
+      "sha256": "6cf11366e98551b3c56e07d03734da5063fad95382ad738e49d6c631b08801cd",
+      "bytes": 86381
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_002500.npz": {
+      "sha256": "1a45771800e4ad5a691b8f3d014ea7bc7bd3f9f3004cb9df60608b686c43fe82",
+      "bytes": 86179
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_002750.npz": {
+      "sha256": "56b5a1549fd506d35674c1136a3388a1cb2421dee5e7c5d2fec666557495fada",
+      "bytes": 86243
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_003000.npz": {
+      "sha256": "213df85f11efd740fa5b14992578efeeaeaad4a194b505dcb360525566b1d8ae",
+      "bytes": 86195
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_003250.npz": {
+      "sha256": "a815517e4b5380caf9e7bf17c09b752b52398ac8a8c0a200c59dd8756b5acf41",
+      "bytes": 86361
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_003500.npz": {
+      "sha256": "ea44f9ad032e0bd72c1ed89bbfa47f152196eafd5f022e1d5acf37d08cbb4e3b",
+      "bytes": 86389
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_003750.npz": {
+      "sha256": "5c5a849ce72d587df09b447f3f9ddfdbf954c5e332e3d452612a2a48d5579e40",
+      "bytes": 86369
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_004000.npz": {
+      "sha256": "afff1927bf6bc7faffd02957493beb9a26f14eb5f977e97c432c6c4913b12aba",
+      "bytes": 86531
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_004250.npz": {
+      "sha256": "fc7dc4ed531a122a2a1579eebb1b46920d5e6704c9604461cad6e5f7e773c643",
+      "bytes": 86513
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_004500.npz": {
+      "sha256": "fb7ad2c3a56353b461a149a28ebfa9b8af5643adfb24e50a5f3c7b10b4e61d49",
+      "bytes": 86227
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_004750.npz": {
+      "sha256": "fdcb6f1fdcec5dd29bf263ac92aad83b48b19a0685f5807a554e989e6a7323d2",
+      "bytes": 86167
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_005000.npz": {
+      "sha256": "1ee8197ea7047b1c1d8b5e2aa66edaa85455487c9fc87c8d3e91e3b2d134f3ec",
+      "bytes": 85997
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_005250.npz": {
+      "sha256": "fcb272e5ba3df0609b537ca1d56975d25065d5bf935d5614ffb8e3d9e1fb1a52",
+      "bytes": 85963
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_005500.npz": {
+      "sha256": "b9442be602a3087107c46235f441217281547ee976729d57b0ea8c7cdb04e564",
+      "bytes": 85809
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_005750.npz": {
+      "sha256": "5d515c5c86eccd6a21f05719f10ac90b673ddb4f19ad383fc9adecad9b965153",
+      "bytes": 85789
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_006000.npz": {
+      "sha256": "3cbb0ba2cab0385a4a9b406fc40c4fcf39e7fcfec73fed71f3241ee179f7a555",
+      "bytes": 85811
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_006250.npz": {
+      "sha256": "d2ceb626a4755d5370f605bf4ea7e2ced4c59689e77bee57a774b4cf27e3a34d",
+      "bytes": 85691
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_006500.npz": {
+      "sha256": "23e1d4cbd4afdc35179605e8d7bfe4aec5d34833e0e4cd589716c5975556d9c5",
+      "bytes": 85649
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_006750.npz": {
+      "sha256": "e8e3b1b1599030f48da4598d67e5f1e62f58fb7aa782731ad4935a8385eb4374",
+      "bytes": 85601
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/snapshots/step_007000.npz": {
+      "sha256": "5975df24fdda223e695978386babdc988a56d2db5cf4bdd3fa14c2ff49152fb5",
+      "bytes": 85555
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/summary.json": {
+      "sha256": "687512050a843b98d34c6c831b42254d64fa4b322a8d5dd3bce51908bdf3ca4d",
+      "bytes": 4570
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-clean/verdict.json": {
+      "sha256": "d2cbf93fa0c13e5b9f57a4c8910b81e84af98ff1f94481fd22c4715263dd97cc",
+      "bytes": 12606
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-fixture.json": {
+      "sha256": "2034d9667a14c991f4cbd9c12e00193f2e5bdca5273df5c93783627cf6482955",
+      "bytes": 2175
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/config.json": {
+      "sha256": "2e132f55cfb0cb57e456b9334c3d1a2867516aaea289aaa818208f7902bd6aed",
+      "bytes": 602
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/events.jsonl": {
+      "sha256": "697682774ad4dff19da45e25ec181c3a1afb8c66eb0495b709ae80fb5b88c789",
+      "bytes": 72134
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/final_samples.npz": {
+      "sha256": "bc29e8a669a209d84beb0a735949f955b90cfe12e393271a7fb8113ae4b4b3df",
+      "bytes": 427259
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/holdout_samples.npz": {
+      "sha256": "c22275b3f16de82837f2198ae28ea3ef7b2e379a3ffee54c1c8dc5834e220d0e",
+      "bytes": 2133672
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/quality_checks/step_006000.npz": {
+      "sha256": "f867d8c647b76ee5c7b4f1414b4772325357cde07c97abf6b2345ea674744e15",
+      "bytes": 427481
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/quality_checks/step_006250.npz": {
+      "sha256": "8ff17f40f50898eab162f127a5d71c043c4a1ae66ef04e2ba0bef2b39339e990",
+      "bytes": 427473
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/quality_checks/step_006500.npz": {
+      "sha256": "d79fca32e0d85bc1b74443703d6177d34778b87cfaece5794e49429f081b893a",
+      "bytes": 427377
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/quality_checks/step_006750.npz": {
+      "sha256": "5431a9e60a5819b47bab86ef4c02b633ccd2e640cc4176f87af02622800e019e",
+      "bytes": 427373
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/quality_checks/step_007000.npz": {
+      "sha256": "bc29e8a669a209d84beb0a735949f955b90cfe12e393271a7fb8113ae4b4b3df",
+      "bytes": 427259
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_000000.npz": {
+      "sha256": "db29ed1416603cc6cf3eb1f39e23978f4424d316bd2af5447e17d609c4791cee",
+      "bytes": 90021
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_000001.npz": {
+      "sha256": "9e56e0d94b8545072272aae98683b4c4bef1283287e5f65d894205e8b0020a1d",
+      "bytes": 90055
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_000010.npz": {
+      "sha256": "822a2f3975df4fca232b174fefb13d6cb0392fc8189376ee27383e50a878af70",
+      "bytes": 90029
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_000025.npz": {
+      "sha256": "4f0b299d9e2bea2e9f59ecadd9f226503766d2afdb1cd31fe3008f038041700a",
+      "bytes": 89995
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_000050.npz": {
+      "sha256": "c154eba63e7bedf3b4620178ab9837bf10f3367974d1670a4d17d1998069cd6e",
+      "bytes": 89863
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_000100.npz": {
+      "sha256": "62c6c42f74919b7aa149c4dbbdfbd8369eaff6e42abed1d055897fea9d284ff0",
+      "bytes": 89199
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_000250.npz": {
+      "sha256": "8a6dd647ef468b0cb4d2ccee01f9e1181f4de0daa84ed324029cbde3d602ea5b",
+      "bytes": 88369
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_000500.npz": {
+      "sha256": "203fa18b5e7b7ef2cc7522487aa4e3e3fd5a32f09b98913fb2308826a084e661",
+      "bytes": 88351
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_000750.npz": {
+      "sha256": "a94a208680cf098e8e73b26cfe12e8da913a5a76a5992423fe4af3452a991c0d",
+      "bytes": 88309
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_001000.npz": {
+      "sha256": "c07227270bdbbf84310364ba86b2be980721bed38aa1a3270a79621ba77f4cef",
+      "bytes": 88271
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_001250.npz": {
+      "sha256": "1bb60e7eb305d4571cf4165c437cdfee3d8d055dfe9a7b20f450bfcea022ed92",
+      "bytes": 88201
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_001500.npz": {
+      "sha256": "d306e0be155ce4c4645633aa3f911b6a6a7cf2dcd8f2fe834660ef7a0076f8f4",
+      "bytes": 88221
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_001750.npz": {
+      "sha256": "427cc8b348f34195c4d7f5a89b8882eb6d8191eee61e0c1613966e373eb5970a",
+      "bytes": 88137
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_002000.npz": {
+      "sha256": "695373c3ccce669077b9fea2c8774867978f7b5997cd5d682bf5b80ddba91bae",
+      "bytes": 88139
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_002250.npz": {
+      "sha256": "8520f13073c472bf5ef0da2b135dbf8953ea5d3280c59c8197a2f0b086f33e81",
+      "bytes": 88193
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_002500.npz": {
+      "sha256": "7b04f715ecec776ec169bf233ba929fb255c927d2f5b47d7d29bc5f1f20321e2",
+      "bytes": 88141
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_002750.npz": {
+      "sha256": "a5b77a7d5a696eff493d1dda1af063a6e453260397368819825174181c3cba98",
+      "bytes": 88109
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_003000.npz": {
+      "sha256": "4097d32cc2937f8ccf4d07578723289e851102f4ee1b3bbd668248272d499868",
+      "bytes": 88031
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_003250.npz": {
+      "sha256": "565cf3b6b22d85064e16aa339c7a74656e4d9a532f84f19d11a3142cc3a81521",
+      "bytes": 88117
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_003500.npz": {
+      "sha256": "81297887df51dd71400d2b9cb0d6ac36e7c83afacbf4d65825069379a04cfd99",
+      "bytes": 88085
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_003750.npz": {
+      "sha256": "02c61859baa40ab2fb7e9d3bedc3661d90b9cfac027c1125244908e74261f172",
+      "bytes": 88091
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_004000.npz": {
+      "sha256": "81b383b8150dfe1d01ed331b87ab8fc94898e8482d7fc9c56160ed29d7e43ffe",
+      "bytes": 88115
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_004250.npz": {
+      "sha256": "7ecf8b9be27adfe05feceb9e5acd5968b4d960de12e8389fd23fccef1b10b9f2",
+      "bytes": 88153
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_004500.npz": {
+      "sha256": "22c84238de90d84f18d7be8b4175b7911fd7cbc813d48aadf91392379b0ca674",
+      "bytes": 88073
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_004750.npz": {
+      "sha256": "4207e8f69b87b4cc5b98100f68ea79afe163f6d53e646ae2e8c8e664bacd4e67",
+      "bytes": 88055
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_005000.npz": {
+      "sha256": "24997ec6090131e4d4a0e28046e59092f3762024b1788d2040f4ac96dd3ee326",
+      "bytes": 88059
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_005250.npz": {
+      "sha256": "7d4cd9e08293f797a3ba4d25b3cdb8766710e593640896b4936876cba33ca7a6",
+      "bytes": 88101
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_005500.npz": {
+      "sha256": "181b8900da3d89c7f40e5c0b8652028e210bd6b016db2abae90044c372196b3a",
+      "bytes": 88079
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_005750.npz": {
+      "sha256": "b2350902932bdf72692d67ca4a4fd232637a780ba24c95d4c409171fe7c1d11e",
+      "bytes": 88035
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_006000.npz": {
+      "sha256": "0497b9c5860036d01b965d346c1594f0132a8408afad1e67d136ea4a8f3fbac2",
+      "bytes": 88005
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_006250.npz": {
+      "sha256": "38d30e62c38c702fc587368ce15dd44f818c0f0de3596f54f0b569e614c4b774",
+      "bytes": 88055
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_006500.npz": {
+      "sha256": "eaa6b830bd8bf194f0f4dced8d8b5ae322fd344068fa342edaa019cd26a23f27",
+      "bytes": 87979
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_006750.npz": {
+      "sha256": "8c7371ab555e684956821622fafdd9e2d2799bbb2a0bc4c788e75f34bbd249da",
+      "bytes": 87983
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/snapshots/step_007000.npz": {
+      "sha256": "9429e818dff02c2fb424084c189122713fe74444ffedb0fb08af1b24b5add1b3",
+      "bytes": 88041
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/summary.json": {
+      "sha256": "d8ae0fc9366757341a1b048631d46ad4217d3182c0229cc534e50ab9170100cf",
+      "bytes": 4570
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native-noisy/verdict.json": {
+      "sha256": "bad5c77046950395af84dc4451e83b71cec5c45d31df74ab54b7a7c3c946deb1",
+      "bytes": 12654
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/native100-diagnostics.jsonl": {
+      "sha256": "bc7b15fb6bd8e7f35998e353c1fdb6566c3a516ecf67193ce897486fdea2c4cd",
+      "bytes": 2079495
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/rates.jsonl": {
+      "sha256": "4fa32fdc2ed6e11865ed70922f66e39bd096d768cb3e31aae08f0721263d6554",
+      "bytes": 932053
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra10/screens/runs/grid100/result.json": {
+      "sha256": "91d289fc8c069732adc9e2ae9fa0216ce5c083ea614b71ff382a0917fc559547",
+      "bytes": 12700
+    }
+  }
+}

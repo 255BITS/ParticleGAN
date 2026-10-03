@@ -1,0 +1,22 @@
+{
+  "status": "ERROR",
+  "started_utc": "2026-09-30T21:56:55.863710+00:00",
+  "completed_utc": "2026-09-30T21:57:29.835904+00:00",
+  "returncode": 1,
+  "wall_seconds": 33.972215154906735,
+  "command": [
+    "/tmp/pr38-default-env/bin/python",
+    "-u",
+    "-B",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/replay.py",
+    "RA13-settled"
+  ],
+  "result": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/replay-RA13-settled.json",
+  "result_sha256": "64ef34a21d9d09cfde32a3e06e33dad2671846796b0723365e2b0950b7103d27",
+  "log": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/ra13-settled/logs/RA13-settled-replay.log",
+  "log_sha256": "3a7cfa087ef583d1698939b5e5987d868f84b7612442da94180dc68fea78ebc0",
+  "source_freeze_sha256": "26c3654df83056303135c12312e5f9b74c75b2063deda1cb84e598e17228c3a5",
+  "inputs_sha256": "86b89fc333279fa6a8dca22af4790b940314fec1b2fdbb71ef2db7ac4ade86b0",
+  "original_supervisor_still_parked": true,
+  "signaled_processes": []
+}

@@ -1,0 +1,196 @@
+diff -ruN '--exclude=__pycache__' pkg-E19/particlegan/birth_death.py pkg-E20/particlegan/birth_death.py
+--- pkg-E19/particlegan/birth_death.py	2026-09-29 08:30:47.994652497 -0600
++++ pkg-E20/particlegan/birth_death.py	2026-09-29 09:26:50.952706280 -0600
+@@ -116,7 +116,9 @@
+                                         "realised_births", "stays", "moves", "matched", "normalised",
+                                         "waited_deaths", "waited_births", "stale_resets")}
+         if self.isolation:
+-            self.counters.update({k: 0 for k in ("iso_evals", "iso_flagged", "iso_acted", "iso_skipped", "iso_moves")})
++            self.counters.update({k: 0 for k in ("iso_evals", "iso_flagged", "iso_acted", "iso_skipped", "iso_moves", "iso_dup_skips")})
++            self.iso_run = torch.zeros(n, device=device, dtype=torch.long)      # consecutive evaluations a row has been flagged (checkpointed: the ordinary evidence needs n >= 2 too)
++            self.iso_times = torch.zeros(n, device=device, dtype=torch.long)    # diagnostics only: how often a row was re-drawn (not checkpointed)
+         self.last = {}
+         self.moved_rows = None  # transient (not checkpointed): rows moved by the latest maybe_apply
+ 
+@@ -220,17 +222,22 @@
+ 
+     # --------------------------------------------------------------- support test
+     @torch.no_grad()
+-    def _isolated(self, q, R, k, fast):
+-        """Rows of the table that have no real support, in the critic's feature space: a split-conformal isolation test.
++    def _isolation_p(self, q, R, k, fast):
++        """Split-conformal isolation p-values of the rows ``q`` against the real reservoir ``R``, in the critic's feature space (None when the test
++        is not valid, see the duplicate guard).
+ 
+         Score of a point u: a(u) / b(u), with a(u) the distance to its k-th nearest point of the reference half R1 of the real reservoir and b(u)
+         the median, over its k nearest reference points, of their own leave-one-out k-th neighbour radius (the local real scale: a sparse
+         region is compared with itself, so a rare component is not flagged for being sparse). The other half R2 of the reservoir is exchangeable
+         with the fake law when that law equals the real law, so p_i = (1 + #{R2 scores >= score_i}) / (1 + |R2|) is a valid p-value for row i
+-        (a row scored at its clean centre is, if anything, closer to the bulk than a draw: conservative). Benjamini-Hochberg at Q over the table
+-        (conformal p-values with a shared calibration set are positively dependent, for which BH keeps its level). The local scale is floored at 1e-3 of the
+-        median positive leave-one-out radius so that exact duplicates in the reservoir cannot make it zero (numerical only)."""
++        (a row scored at its clean centre is, if anything, closer to the bulk than a draw: conservative). The local scale is floored at 1e-3 of the
++        median positive leave-one-out radius so that exact duplicates cannot make it zero (numerical only).
++        Duplicate guard: exchangeability fails when the reservoir contains exact copies of its own rows (a finite data pool sampled with replacement:
++        a copy of a reference point lands in the calibration half and looks perfectly supported, while a fresh row does not); the test is not run
++        when more than Q of the reservoir's feature rows are copies of another row (the same level as the test's own error budget)."""
+         R1, R2 = R[0::2], R[1::2]
++        if 1. - len(torch.unique(R, dim=0)) / len(R) > self.Q:
++            return None
+         rho = _knn(R1, R1, k, exclude=torch.arange(len(R1), device=R.device), shortlist_dtype=fast)[0][:, -1]
+         positive = rho[rho > 0]
+         floor = float(positive.median()) * 1e-3 if len(positive) else 1.
+@@ -239,7 +246,12 @@
+             return d[:, -1] / rho[ix].sort(dim=1).values[:, (k - 1) // 2].clamp_min(floor)      # the lower median (sort, not median: deterministic on CUDA)
+         null = score(R2).sort().values
+         s = score(q)
+-        p = (1. + (len(null) - torch.searchsorted(null, s)).double()) / (1. + len(null))
++        return (1. + (len(null) - torch.searchsorted(null, s)).double()) / (1. + len(null))
++
++    @torch.no_grad()
++    def _bh(self, p):
++        """Benjamini-Hochberg at Q over the p-values (ties flagged together). Conformal p-values with a shared calibration set are positively dependent,
++        for which BH keeps its level."""
+         m = len(p)
+         ps = p.sort().values
+         passed = (ps <= torch.arange(1, m + 1, device=p.device, dtype=p.dtype) * self.Q / m).nonzero()
+@@ -248,16 +260,20 @@
+         return p <= ps[int(passed[-1])]
+ 
+     @torch.no_grad()
+-    def _isolation_pick(self, trainer, flagged, child):
+-        """Rows to re-draw and their parents: every flagged row that the ordinary moves did not just re-draw becomes a clone of a uniformly drawn
+-        unflagged row among those at most twice as far from it (in the table's own latent space) as its nearest unflagged row: the mass without
+-        support goes back into the neighbourhood that has support nearest to it, and reaches into that neighbourhood's bulk instead of only its
+-        rim (the k nearest unflagged rows of a stray are the rim rows of the nearest mode; their clones sit at the rim and are flagged again).
+-        The candidates are also limited to the k^2 nearest unflagged rows: in a high-dimensional latent space "twice as far as the nearest" contains
+-        most of the table (distances concentrate) and the rule would become a uniform draw, which shuffles mass between modes; the rank cap keeps it
+-        local in any dimension and does not bind in the low-dimensional tables where the ball is small.
+-        Nothing is done while more than Q of the table is flagged (most of the table still in transit has no support to clone from; the same
+-        level as the test)."""
++    def _isolated(self, q, R, k, fast):
++        """Rows of the table that have no real support (BH flags of the isolation p-values); nothing is flagged when the duplicate guard stops the test."""
++        p = self._isolation_p(q, R, k, fast)
++        return torch.zeros(len(q), dtype=torch.bool, device=q.device) if p is None else self._bh(p)
++
++    @torch.no_grad()
++    def _isolation_pick(self, trainer, flagged, child, act=None, weight=None):
++        """Rows to re-draw and their parents. The guard is on ``flagged`` (all rows flagged this evaluation): nothing is done while more than Q of the
++        table is flagged (most of the table still in transit has no support to clone from; the same level as the test). The rows re-drawn are
++        ``act`` (default: ``flagged``; the trainer passes the rows flagged in two consecutive evaluations) minus the rows the ordinary moves just
++        re-drew. Each becomes a clone of an unflagged row drawn among the k^2 nearest unflagged rows in the table's own latent space, with probability
++        proportional to ``weight`` (the row's own isolation p-value: the mass without support goes back into the nearest supported neighbourhood and
++        into its bulk, not its rim: rim rows have small p and their clones are flagged again). The rank cap keeps the rule local in any latent
++        dimension."""
+         c, n_flag = self.counters, int(flagged.sum())
+         acted = 0 < n_flag <= self.Q * self.N
+         c["iso_evals"] += 1
+@@ -268,7 +284,7 @@
+         empty = child[:0]
+         if not acted:
+             return empty, empty
+-        dead = flagged.clone()
++        dead = (flagged if act is None else act).clone()
+         dead[child] = False
+         keep = ~flagged
+         keep[child] = False
+@@ -276,15 +292,19 @@
+         if not len(dead) or not len(keep):
+             return empty, empty
+         z = trainer.prior.z.detach()
++        log_w = None if weight is None else weight[keep].double().log()
+         parent, step, cap = [], max(1, (1 << 24) // len(keep)), min(self.k ** 2, len(keep))      # chunks of about 16M distances; at most k^2 candidates
+         for start in range(0, len(dead), step):
+             dist = torch.cdist(z[dead[start:start + step]], z[keep])                                                  # [chunk, keep]
+-            limit = torch.minimum(2. * dist.min(1, keepdim=True).values, dist.topk(cap, dim=1, largest=False).values[:, -1:])
+-            ball = dist <= limit
+-            draw = torch.rand(dist.shape, device=dist.device, generator=self.stream)
+-            parent.append(keep[torch.where(ball, draw, torch.full_like(draw, -1.)).argmax(1)])
++            near = dist.topk(cap, dim=1, largest=False).indices                                                       # [chunk, cap] positions in keep
++            u = torch.rand(near.shape, device=dist.device, generator=self.stream, dtype=torch.float64).clamp(1e-12, 1. - 1e-12)
++            key = -torch.log(-torch.log(u))                                                                           # Gumbel-max: a draw proportional to the weights
++            if log_w is not None:
++                key = key + log_w[near]
++            parent.append(keep[near.gather(1, key.argmax(1, keepdim=True)).squeeze(1)])
+         parent = torch.cat(parent)
+         c["iso_moves"] += len(dead)
++        self.iso_times[dead] += 1
+         self.last["iso_moves"] = len(dead)
+         return dead, parent
+ 
+@@ -332,7 +352,14 @@
+             fast = torch.float32
+             if self.feature_scale == "std":
+                 q, F, R = self._standardise(q, F, R)
+-            flagged = self._isolated(q, R, k, fast) if self.isolation else None
++            flagged = iso_p = persistent = None
++            if self.isolation:
++                iso_p = self._isolation_p(q, R, k, fast)
++                if iso_p is None:
++                    self.counters["iso_dup_skips"] += 1
++                flagged = torch.zeros(self.N, dtype=torch.bool, device=q.device) if iso_p is None else self._bh(iso_p)
++                self.iso_run = torch.where(flagged, self.iso_run + 1, torch.zeros_like(self.iso_run))
++                persistent = flagged & (self.iso_run >= 2)          # flagged in two consecutive evaluations (fresh real samples each time), like the ordinary evidence
+         else:
+             q_loc, rad_loc = q, None
+             fast = None
+@@ -455,7 +482,7 @@
+             self._move(trainer, child, parent)
+         iso_child = iso_parent = child[:0]
+         if self.isolation and self.space == "critic":
+-            iso_child, iso_parent = self._isolation_pick(trainer, flagged, child)
++            iso_child, iso_parent = self._isolation_pick(trainer, flagged, child, persistent, iso_p)
+             if len(iso_child):
+                 self._move(trainer, iso_child, iso_parent)
+                 last["moves"] = len(child) + len(iso_child)      # the trainer re-anchors the tester and resets the row evidence of every moved row
+@@ -476,6 +503,8 @@
+             self.S[moved] = 0.
+             self.W[moved] = 0.
+             self.n[moved] = 0
++            if self.isolation:
++                self.iso_run[moved] = 0
+             c["moves"] += len(child)
+             c["matched"] += pairs
+             c["normalised"] += normalised
+@@ -500,20 +529,25 @@
+     # --------------------------------------------------------------- state
+     _TENSORS = ("reservoir", "S", "W", "n", "anchor", "radius", "pending")
+ 
++    @property
++    def tensor_names(self):
++        return self._TENSORS + (("iso_run",) if self.isolation else ())
++
+     def diagnostics(self):
+         return dict(k=self.k, s_k=self.s_k, fill=self.fill, rows_since_eval=self.rows_since_eval,
+                     counters=dict(self.counters), last=self.last,
+                     in_excursion=int((self.n > 0).sum()), eligible_now=int((self.n >= 2).sum()),
+-                    **({"iso_recent": list(self.iso_log)} if self.isolation else {}))
++                    **({"iso_recent": list(self.iso_log), "iso_rows_redrawn": int((self.iso_times > 0).sum()), "iso_max_times": int(self.iso_times.max()),
++                        "iso_run_now": int((self.iso_run > 0).sum())} if self.isolation else {}))
+ 
+     def state_dict(self):
+-        return dict(**{k: getattr(self, k) for k in self._TENSORS},
++        return dict(**{k: getattr(self, k) for k in self.tensor_names},
+                     fill=self.fill, cursor=self.cursor, rows_since_eval=self.rows_since_eval,
+                     counters=dict(self.counters), last=dict(self.last), stream=self.stream.get_state())
+ 
+     def load_state_dict(self, state):
+         self.check_state(state)
+-        for key in self._TENSORS:
++        for key in self.tensor_names:
+             value = state[key]
+             setattr(self, key, None if value is None else value.clone().to(self.S.device))
+         self.fill, self.cursor, self.rows_since_eval = int(state["fill"]), int(state["cursor"]), int(state["rows_since_eval"])
+@@ -521,10 +555,10 @@
+         self.stream.set_state(state["stream"].cpu())
+ 
+     def check_state(self, state):
+-        keys = set(self._TENSORS) | {"fill", "cursor", "rows_since_eval", "counters", "last", "stream"}
++        keys = set(self.tensor_names) | {"fill", "cursor", "rows_since_eval", "counters", "last", "stream"}
+         if not isinstance(state, dict) or set(state) != keys:
+             raise ValueError("invalid birth-death state")
+-        for key in ("S", "W", "n", "radius", "pending"):
++        for key in ("S", "W", "n", "radius", "pending") + (("iso_run",) if self.isolation else ()):
+             if not isinstance(state[key], torch.Tensor) or state[key].shape != getattr(self, key).shape:
+                 raise ValueError(f"birth-death {key} does not match the table")
+         for key in ("reservoir", "anchor"):

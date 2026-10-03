@@ -1,0 +1,215 @@
+{
+  "schema_version": 1,
+  "scope": "saved-receipt and source algebra audit; no training, random sampling, or qualification",
+  "recipe_differences": {
+    "critic_formulation": {
+      "k3p-slow-prior-0p1": "k3p",
+      "ka2-slow-prior-0p1": null
+    },
+    "name": {
+      "k3p-slow-prior-0p1": "k3p",
+      "ka2-slow-prior-0p1": "ka2"
+    }
+  },
+  "initialization_identical": true,
+  "rng_manifest_identical": true,
+  "prior_declaration_identical": true,
+  "completed_updates": {
+    "k3p-slow-prior-0p1": 20001,
+    "ka2-slow-prior-0p1": 20001
+  },
+  "states": {
+    "k3p-slow-prior-0p1": {
+      "state_sha256": "a5bb5b07d410c211b18a868a81f3033489b2c7669a840caf32b9155f9302fa12",
+      "adapter_receipt_sha256": "400106be7fe4857467b4a3a1375dc786e6a2f592cd078e0e35a1d240507de14a",
+      "first_blend_penalty_call": 16028,
+      "pure_A_calls": 16027,
+      "blended_calls": 3974,
+      "final_blend_A_weight": 7.789308216643926e-08,
+      "mechanisms": {
+        "a2": {
+          "applied": 0,
+          "calls": 20001,
+          "eligible": 0,
+          "enabled": true,
+          "probe": {
+            "kind": "synthetic_public_component",
+            "measurements": {
+              "damping_branch_applied": true,
+              "initial_sparse_history_total": 8,
+              "optimizer_updates": 2
+            },
+            "status": "PASS",
+            "synthetic_state": true,
+            "training_evidence": false
+          },
+          "reason": "host conditions did not activate the branch; targeted component check required",
+          "requested": true
+        },
+        "critic_anchor": {
+          "applied": 3973,
+          "calls": 20001,
+          "eligible": 3974,
+          "enabled": true,
+          "reason": "actual host mechanism branch applied",
+          "requested": true
+        },
+        "critic_guard": {
+          "applied": 131,
+          "calls": 20001,
+          "eligible": 19801,
+          "enabled": true,
+          "reason": "actual host mechanism branch applied",
+          "requested": true
+        },
+        "critic_penalty": {
+          "applied": 20001,
+          "calls": 20001,
+          "eligible": 20001,
+          "enabled": true,
+          "reason": "actual host mechanism branch applied",
+          "requested": true
+        },
+        "direct_particle_gain": {
+          "applied": 0,
+          "calls": 0,
+          "eligible": 0,
+          "enabled": false,
+          "probe": {
+            "kind": "synthetic_public_component",
+            "measurements": {
+              "gain": 2.0,
+              "optimizer_updates": 2
+            },
+            "status": "PASS",
+            "synthetic_state": true,
+            "training_evidence": false
+          },
+          "reason": "host has no applicable component",
+          "requested": true
+        }
+      },
+      "critic_record": {
+        "lr_max": 0.0009,
+        "lr_last": 9e-06,
+        "anchor_started": true,
+        "calls": 20001,
+        "observed_steps": 20001
+      }
+    },
+    "ka2-slow-prior-0p1": {
+      "state_sha256": "0be28fcf5ed30ae44bab64655c829e7b92365958d952a6f58b074c5cc38b7833",
+      "adapter_receipt_sha256": "4ae213a87231948905f06f189fd975010e204ffbc373d0542eed1cebe20d1c26",
+      "first_blend_penalty_call": 800,
+      "pure_A_calls": 799,
+      "blended_calls": 19202,
+      "final_blend_A_weight": 0.5,
+      "mechanisms": {
+        "a2": {
+          "applied": 0,
+          "calls": 20001,
+          "eligible": 0,
+          "enabled": true,
+          "probe": {
+            "kind": "synthetic_public_component",
+            "measurements": {
+              "damping_branch_applied": true,
+              "initial_sparse_history_total": 8,
+              "optimizer_updates": 2
+            },
+            "status": "PASS",
+            "synthetic_state": true,
+            "training_evidence": false
+          },
+          "reason": "host conditions did not activate the branch; targeted component check required",
+          "requested": true
+        },
+        "critic_anchor": {
+          "applied": 19201,
+          "calls": 20001,
+          "eligible": 19202,
+          "enabled": true,
+          "reason": "actual host mechanism branch applied",
+          "requested": true
+        },
+        "critic_guard": {
+          "applied": 58,
+          "calls": 20001,
+          "eligible": 19801,
+          "enabled": true,
+          "reason": "actual host mechanism branch applied",
+          "requested": true
+        },
+        "critic_penalty": {
+          "applied": 20001,
+          "calls": 20001,
+          "eligible": 20001,
+          "enabled": true,
+          "reason": "actual host mechanism branch applied",
+          "requested": true
+        },
+        "direct_particle_gain": {
+          "applied": 0,
+          "calls": 0,
+          "eligible": 0,
+          "enabled": false,
+          "probe": {
+            "kind": "synthetic_public_component",
+            "measurements": {
+              "gain": 2.0,
+              "optimizer_updates": 2
+            },
+            "status": "PASS",
+            "synthetic_state": true,
+            "training_evidence": false
+          },
+          "reason": "host has no applicable component",
+          "requested": true
+        }
+      },
+      "critic_record": {
+        "anchor_min_decay": 0.9,
+        "lr_max": 0.0009,
+        "lr_last": 9e-06,
+        "anchor_started": true,
+        "calls": 20001,
+        "observed_steps": 20001,
+        "last_sur": 0.6439381241798401,
+        "sur_base": 0.5662010312080383,
+        "w": 1.0,
+        "low_streak": 0,
+        "alpha": 3.1493087685460177e-276,
+        "last_ratio": 0.7974807977491339,
+        "ema_updates": 9297,
+        "ema_skips": 9905,
+        "ema_reseeds": 0,
+        "formulation": "ka2"
+      }
+    }
+  },
+  "penalty_algebra": {
+    "joint_input_dimension": 170,
+    "reg_coeff": 1.0,
+    "reg_kappa": 1.0,
+    "pure_A_real_squared_L2_coefficient": 0.0029411764705882353,
+    "pure_A_fake_L2_cap_threshold": 13.038404810405298,
+    "pure_B_each_L2_cap_squared_coefficient": 0.5,
+    "pure_B_anchor_difference_squared_L2_coefficient": 0.0029411764705882353,
+    "KA2_blend_real_A_squared_L2_coefficient": 0.0014705882352941176,
+    "KA2_blend_each_B_L2_cap_squared_coefficient": 0.25,
+    "KA2_blend_anchor_difference_squared_L2_coefficient_before_controller_W": 0.0014705882352941176
+  },
+  "source_sha256": {
+    "particlegan/grad_regularizers.py": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747",
+    "particlegan/ka2.py": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703",
+    "particlegan/recipes.py": "1a7f9df746e242a2774068c819d70d50cd72dc4f7f6b22b0bd13e1345dcf8ab2",
+    "particlegan/policy.py": "8370e36b5b93afe95ae24d2b385aac8735a587f86ef2b87ed369ecfdfcb6fec5"
+  },
+  "attribution_guards": [
+    "Only recipe name and critic formulation differ in this matched pair; phase/controller/guard behavior is part of the existing formulation.",
+    "A2 was requested but eligible/applied zero times; direct-particle gain had no applicable host component. Synthetic checks are not training activation.",
+    "The successful endpoint has small joint critic gradients, but endpoint gradients cannot establish when or why modes were acquired.",
+    "Word-versus-latent gradient ratios overlap successful and failed cohorts; those ratios alone do not establish causal imbalance.",
+    "Changing positive existing reg_coeff/reg_kappa preserves the penalty equations. Disabling terms or changing phase rules would alter the technique."
+  ]
+}

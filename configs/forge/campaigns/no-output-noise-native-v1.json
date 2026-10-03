@@ -1,0 +1,28 @@
+{
+  "budgets": {
+    "campaign_seconds": 3600,
+    "candidate_seconds": 3600,
+    "task_seconds": {
+      "grid100_affine_square_named_v1": 3600
+    }
+  },
+  "cuda_model": "NVIDIA RTX A6000",
+  "execution_backend": "cuda",
+  "failure_policy": "continue_registered_diagnostics",
+  "id": "no-output-noise-native-v1",
+  "profile": "no-output-noise-reference-v1",
+  "profile_sha256": "eccef8c47375daceb53270524e0981550a229ea5850652926ac276a15bf47bff",
+  "purpose": "One native 7000-update reference-gap diagnostic; output_noise_std 0.029 -> 0. Keep A2, learned-MoG fixed sigma .025/uniform masses/no standardization, seed0/named streams, identity-affine/Xavier/uniform initialization, clean-live evaluation, full five terminal checks and 100k holdout. New allowance exactly one task with 3600s timeout, expected about 90s from saved control. This registration authorizes no other training. Stop on native FAIL; a PASS permits review for a separately frozen next batch, not a full-reference or production label. Retain all original controls/failures and 16 reference purposes.",
+  "qualification_reuse": false,
+  "schema_version": 1,
+  "selections": [
+    {
+      "lineage_id": "k3p-no-output-noise-diagnostic",
+      "reason": "Test the independent full-budget native bottleneck before spending on the screen or other families; remove only training output noise and pair with the explicitly imported K3P receipt.",
+      "tasks": [
+        "grid100_affine_square_named_v1"
+      ]
+    }
+  ],
+  "view": "host_profile_transfer"
+}

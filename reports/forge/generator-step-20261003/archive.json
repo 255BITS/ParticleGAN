@@ -1,0 +1,245 @@
+{
+  "all_member_hashes_verified": true,
+  "archive_member_count": 17366,
+  "availability": "LOCAL_ONLY",
+  "bytes": 111262244,
+  "capacity": {
+    "SUPPORTED": 16,
+    "required": 16
+  },
+  "costs": {
+    "clock": "New cohort durable supervised child intervals plus conservative interruption reserves; prior science and engineering are separately bound and debited once from remaining quotas; CPU capacity verification, queue wait and parent certification are separate diagnostics",
+    "combined_cap_seconds": 15360.0,
+    "combined_charged_seconds": 113.99425188452005,
+    "family_remaining_caps_seconds": {
+      "atlas": 7648.239041277208,
+      "e22": 7652.644278225023
+    },
+    "ordinary_paid_seconds": 54.87757138675079,
+    "ordinary_reserved_seconds": 0.0,
+    "prior_engineering_paid_seconds": 4.757908704923466,
+    "prior_scientific_paid_seconds": 54.3587717928458,
+    "prior_total_paid_seconds": 59.116680497769266,
+    "remaining_cohort_cap_seconds": 15300.88331950223
+  },
+  "current_durable_attempt_count": 2,
+  "durable_attempt_count": 5,
+  "files": [
+    {
+      "archive_path": "canonical-snapshots/0-ac779e01f99f725951778c5000443ae9c5c215f0fd17e74e9c6be53e6c929bd9/forge-source.json",
+      "bytes": 549995,
+      "original_path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/source-origins/20d8321f50da9608247dc1e39beb516ca1a41356156bad37ebef6b2abeba8ea5/snapshots/ac779e01f99f725951778c5000443ae9c5c215f0fd17e74e9c6be53e6c929bd9/forge-source.json",
+      "sha256": "99c488f96b5637f4495248ed6be3908e71d7ec947ab62f8f4aa3c5f331c90691"
+    },
+    {
+      "archive_path": "canonical-snapshots/1-103fc3fd5e990d907490d3a4a6283dedd857cca2c76fd4102b02a1623c1ba79a/forge-source.json",
+      "bytes": 549476,
+      "original_path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/source-origins/25611fa53e50281927b3c3607fced40313087e16e3feb3085118f33d367f980c/snapshots/103fc3fd5e990d907490d3a4a6283dedd857cca2c76fd4102b02a1623c1ba79a/forge-source.json",
+      "sha256": "6fd1ab597352eb710a784257ebdcb2d0e2ca5417aae91892b16e43f24cb3305c"
+    },
+    {
+      "archive_path": "canonical-snapshots/2-70f1cac5d588819bff7014cb1e65f5ee93e63d1f150c270765d4b6cd197a1cff/forge-source.json",
+      "bytes": 549595,
+      "original_path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/source-origins/333da6dd2096c43b6b9b53c8b8e1c9ea204b21ee41ba99feddc585431ff1b3e0/snapshots/70f1cac5d588819bff7014cb1e65f5ee93e63d1f150c270765d4b6cd197a1cff/forge-source.json",
+      "sha256": "14b7351e73b8e7ac528d0729868858e2a22bd04229a931e85b8fce1ff3224bfc"
+    },
+    {
+      "archive_path": "generator-step-cohort/atlas/atlas--d2e6767ae639367ca480c4271d72f20700a2d03e95242f4dd1ba75bfc01ed3f3/image-develop-img_intensity2-source-transpose12/receipt.json",
+      "bytes": 45911,
+      "original_path": "/ml2/hypergan/forge-generator-step-20261003/atlas/atlas--d2e6767ae639367ca480c4271d72f20700a2d03e95242f4dd1ba75bfc01ed3f3/image-develop-img_intensity2-source-transpose12/receipt.json",
+      "sha256": "3faae2709afbea454b747ecde87169015792bf1f9eb2f2561b6e090f8d8a40ad"
+    },
+    {
+      "archive_path": "generator-step-cohort/atlas/study.json",
+      "bytes": 1339184,
+      "original_path": "/ml2/hypergan/forge-generator-step-20261003/atlas/study.json",
+      "sha256": "02ed35c689ae1a6f5df11bab6e42b2a07bb389d6ea3db146f3357e226411e2f7"
+    },
+    {
+      "archive_path": "generator-step-cohort/capacity/capacity.json",
+      "bytes": 726581,
+      "original_path": "/ml2/hypergan/forge-generator-step-20261003/capacity/capacity.json",
+      "sha256": "64967978aef342e0b1fb40e046bd90e576fa0a1ce198b87b508ade09b845d141"
+    },
+    {
+      "archive_path": "generator-step-cohort/certification-execution.json",
+      "bytes": 2188,
+      "original_path": "/ml2/hypergan/forge-generator-step-20261003/certification-execution.json",
+      "sha256": "c71d214bac28459eee6352f308a501bd696e25fa27a5aa13441144b7c95b74f2"
+    },
+    {
+      "archive_path": "generator-step-cohort/certification.json",
+      "bytes": 11733,
+      "original_path": "/ml2/hypergan/forge-generator-step-20261003/certification.json",
+      "sha256": "6ba725612752bfaabf1fecd2b3b2bed6f59d150364092b322337f6e6a029cb6f"
+    },
+    {
+      "archive_path": "generator-step-cohort/combined.json",
+      "bytes": 1345994,
+      "original_path": "/ml2/hypergan/forge-generator-step-20261003/combined.json",
+      "sha256": "2de9d080f8fdacdbb504f7fda6f7ee8ab2ba2dce00a454b117210dcc02a17b23"
+    },
+    {
+      "archive_path": "generator-step-cohort/e22/e22--accb716670730414f49af2a9bce2cd4c373d7df69bdcebfbf495637349e928a1/image-develop-img_intensity2-source-transpose12/receipt.json",
+      "bytes": 45704,
+      "original_path": "/ml2/hypergan/forge-generator-step-20261003/e22/e22--accb716670730414f49af2a9bce2cd4c373d7df69bdcebfbf495637349e928a1/image-develop-img_intensity2-source-transpose12/receipt.json",
+      "sha256": "d20dd05b23c10a2ecaac760da441a6f53a44ef67e5041246ab1dd17f92682e90"
+    },
+    {
+      "archive_path": "generator-step-cohort/e22/study.json",
+      "bytes": 1338911,
+      "original_path": "/ml2/hypergan/forge-generator-step-20261003/e22/study.json",
+      "sha256": "6b0fcfd09df7d5b197cefc608a8ae59ef6583a8179e12685a6e117e9acaae5fa"
+    },
+    {
+      "archive_path": "generator-step-cohort/preflight-source/policy/source-origins/20d8321f50da9608247dc1e39beb516ca1a41356156bad37ebef6b2abeba8ea5/snapshots/ac779e01f99f725951778c5000443ae9c5c215f0fd17e74e9c6be53e6c929bd9/forge-source.json",
+      "bytes": 549995,
+      "original_path": "/ml2/hypergan/forge-generator-step-20261003/preflight-source/policy/source-origins/20d8321f50da9608247dc1e39beb516ca1a41356156bad37ebef6b2abeba8ea5/snapshots/ac779e01f99f725951778c5000443ae9c5c215f0fd17e74e9c6be53e6c929bd9/forge-source.json",
+      "sha256": "99c488f96b5637f4495248ed6be3908e71d7ec947ab62f8f4aa3c5f331c90691"
+    },
+    {
+      "archive_path": "generator-step-cohort/publication-v1/results.json",
+      "bytes": 92866,
+      "original_path": "/ml2/hypergan/forge-generator-step-20261003/publication-v1/results.json",
+      "sha256": "a9da2ae3af04d50873cc7f0199eedd34a0f2ba768efc86ada866a40d293c6c63"
+    },
+    {
+      "archive_path": "prior-bootstrap-cohort/atlas/study.json",
+      "bytes": 1329987,
+      "original_path": "/ml2/hypergan/forge-critic-balance-20261003/atlas/study.json",
+      "sha256": "560d42b13901714a6f09af706e5cbec01a25392e4ec3e575e2725fd010a3c3ce"
+    },
+    {
+      "archive_path": "prior-bootstrap-cohort/capacity/capacity.json",
+      "bytes": 726555,
+      "original_path": "/ml2/hypergan/forge-critic-balance-20261003/capacity/capacity.json",
+      "sha256": "135961ae8ebcd563940e5f03c6dff151dc2154e6b2fc0d4fe2b934e2e46a9b33"
+    },
+    {
+      "archive_path": "prior-critic-cohort/atlas/atlas--da2b715e4d88919fc314b718d11c27e0e6740a5ff30835d0137186337fafa1bc/image-develop-img_intensity2-source-transpose12/receipt.json",
+      "bytes": 45782,
+      "original_path": "/ml2/hypergan/forge-critic-balance-20261003-v2/atlas/atlas--da2b715e4d88919fc314b718d11c27e0e6740a5ff30835d0137186337fafa1bc/image-develop-img_intensity2-source-transpose12/receipt.json",
+      "sha256": "fba7d1202f13bb6ffe39a19e5620add8076c3bbc7be5d1173bd2dec61cba53ab"
+    },
+    {
+      "archive_path": "prior-critic-cohort/atlas/study.json",
+      "bytes": 1336798,
+      "original_path": "/ml2/hypergan/forge-critic-balance-20261003-v2/atlas/study.json",
+      "sha256": "9b66d1c64749896dcf7e4045f27a773c0e1d533ce6c558d19aeb75333413337c"
+    },
+    {
+      "archive_path": "prior-critic-cohort/certification.json",
+      "bytes": 10000,
+      "original_path": "/ml2/hypergan/forge-critic-balance-20261003-v2/certification.json",
+      "sha256": "e32d8dc2e906d737a592801050baf4fd6eb2599df840b82f3b18bd3786d34c97"
+    },
+    {
+      "archive_path": "prior-critic-cohort/combined.json",
+      "bytes": 1343621,
+      "original_path": "/ml2/hypergan/forge-critic-balance-20261003-v2/combined.json",
+      "sha256": "49d0b2286a0b5bcd599c918f421bc7b84e361a2dbbc6c045a5ba20df15368fb1"
+    },
+    {
+      "archive_path": "prior-critic-cohort/e22/e22--eb46d286391383c36160b8363ecfdc7d230528a8b50a2945dab4279f36e7e6eb/image-develop-img_intensity2-source-transpose12/receipt.json",
+      "bytes": 45568,
+      "original_path": "/ml2/hypergan/forge-critic-balance-20261003-v2/e22/e22--eb46d286391383c36160b8363ecfdc7d230528a8b50a2945dab4279f36e7e6eb/image-develop-img_intensity2-source-transpose12/receipt.json",
+      "sha256": "b2ad738b713340be049ac8de3d048c5643e557f91cf3e03ab504b07d728fbd80"
+    },
+    {
+      "archive_path": "prior-critic-cohort/e22/study.json",
+      "bytes": 1336522,
+      "original_path": "/ml2/hypergan/forge-critic-balance-20261003-v2/e22/study.json",
+      "sha256": "33b0ec4bcb4aa358131e7f460b867b39dd97c1415afd23306055b563e125df18"
+    },
+    {
+      "archive_path": "prior-critic-cohort/preflight-source/policy/source-origins/333da6dd2096c43b6b9b53c8b8e1c9ea204b21ee41ba99feddc585431ff1b3e0/snapshots/70f1cac5d588819bff7014cb1e65f5ee93e63d1f150c270765d4b6cd197a1cff/forge-source.json",
+      "bytes": 549595,
+      "original_path": "/ml2/hypergan/forge-critic-balance-20261003-v2/preflight-source/policy/source-origins/333da6dd2096c43b6b9b53c8b8e1c9ea204b21ee41ba99feddc585431ff1b3e0/snapshots/70f1cac5d588819bff7014cb1e65f5ee93e63d1f150c270765d4b6cd197a1cff/forge-source.json",
+      "sha256": "14b7351e73b8e7ac528d0729868858e2a22bd04229a931e85b8fce1ff3224bfc"
+    },
+    {
+      "archive_path": "prior-critic-cohort/publication-v1/results.json",
+      "bytes": 83682,
+      "original_path": "/ml2/hypergan/forge-critic-balance-20261003-v2/publication-v1/results.json",
+      "sha256": "b935f088d53dff90de31a9bec768e140a3505c0c03729cf5f3d814f9f993b35f"
+    },
+    {
+      "archive_path": "supervisors/0588dce78af5244d822779b71f3b4d165f726e7e99fe715e7017e9ee82eda89b/supervisor-terminal.json",
+      "bytes": 149,
+      "original_path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/0588dce78af5244d822779b71f3b4d165f726e7e99fe715e7017e9ee82eda89b/supervisor-terminal.json",
+      "sha256": "07b7f4e0fce8280a65e108a58565e1f7af9118e7328f43d9c4f60fe31fd539a1"
+    },
+    {
+      "archive_path": "supervisors/2973560028aed39ac58a28d84f95d2665de19b4d2ccc538c8bddbff73bbc2826/supervisor-terminal.json",
+      "bytes": 149,
+      "original_path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/2973560028aed39ac58a28d84f95d2665de19b4d2ccc538c8bddbff73bbc2826/supervisor-terminal.json",
+      "sha256": "2d09eb8b2c4cc654486fe9b9dbee8a9d9f7470ace43f46ac6fe4c6df142ab4fc"
+    },
+    {
+      "archive_path": "supervisors/9875f3fc81cdef471b64b2b00afbae203772500138416907c340a75e72b5e9ed/supervisor-terminal.json",
+      "bytes": 150,
+      "original_path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/9875f3fc81cdef471b64b2b00afbae203772500138416907c340a75e72b5e9ed/supervisor-terminal.json",
+      "sha256": "d2e206ac10c3878bc846f4c5ca392fddf64e9a3007c802984f5dd00700ff69ed"
+    },
+    {
+      "archive_path": "supervisors/c809da8fd82904078a535f5ae7f39976e23fbb882da2199b7f105c7ed55e52dc/supervisor-terminal.json",
+      "bytes": 150,
+      "original_path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/c809da8fd82904078a535f5ae7f39976e23fbb882da2199b7f105c7ed55e52dc/supervisor-terminal.json",
+      "sha256": "df7bd970b40f28716471ab727986a4b2c6278cc4a5fecf5cdcb1a509bc21b54d"
+    },
+    {
+      "archive_path": "supervisors/dc1292968329c395b2cbae4ebea2a4509d5d4c76a9ab7246a2e0c7b6644ae14e/supervisor-terminal.json",
+      "bytes": 151,
+      "original_path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/dc1292968329c395b2cbae4ebea2a4509d5d4c76a9ab7246a2e0c7b6644ae14e/supervisor-terminal.json",
+      "sha256": "0f77df4873905fbb3bf8d1ebb425150127b5fc253faeacab45e97f248cd4d644"
+    },
+    {
+      "archive_path": "full-index.json",
+      "bytes": 11870075,
+      "original_path": "/ml2/hypergan/forge-generator-step-archive-20261003/full-index.json",
+      "sha256": "62c42dd3a03570ed023d332e5a629191c30306296478d219c0a64881b65a3696"
+    }
+  ],
+  "full_index": {
+    "archive_path": "full-index.json",
+    "bytes": 11870075,
+    "original_path": "/ml2/hypergan/forge-generator-step-archive-20261003/full-index.json",
+    "sha256": "62c42dd3a03570ed023d332e5a629191c30306296478d219c0a64881b65a3696"
+  },
+  "learning": {
+    "FAIL": 2,
+    "UNKNOWN": 14,
+    "required": 16
+  },
+  "new_sampler_calls": 0,
+  "new_training_updates": 0,
+  "original_inputs_unchanged": true,
+  "path": "/ml2/hypergan/forge-generator-step-archive-20261003/generator-step-capacity16-learning2-v1.tar.gz",
+  "prior_engineering_attempt_count": 1,
+  "prior_qualification_credit": false,
+  "prior_scientific_attempt_count": 2,
+  "publication_required_input_count": 10466,
+  "qualification_changed": false,
+  "remote_replication": "NOT_PERFORMED",
+  "retain_until": "UNDECLARED",
+  "retention_owner": "UNASSIGNED",
+  "schema": "particlegan-generator-step-archive-card-v1",
+  "sha256": "271cf1c21a341d33d520311160c3d9c03f3ffcb6094dd544602e2084089c8949",
+  "source_cohorts": [
+    {
+      "digest": "103fc3fd5e990d907490d3a4a6283dedd857cca2c76fd4102b02a1623c1ba79a",
+      "files": 3396,
+      "origin_commit": "92167813cb2b04af0c4e0395984c503b7fb7d7fe"
+    },
+    {
+      "digest": "70f1cac5d588819bff7014cb1e65f5ee93e63d1f150c270765d4b6cd197a1cff",
+      "files": 3397,
+      "origin_commit": "a956c6fc447bbe1314ff43ec224825a0e941eb55"
+    },
+    {
+      "digest": "ac779e01f99f725951778c5000443ae9c5c215f0fd17e74e9c6be53e6c929bd9",
+      "files": 3400,
+      "origin_commit": "488b792e2fb875894f017cf7043420f2bb66190f"
+    }
+  ]
+}

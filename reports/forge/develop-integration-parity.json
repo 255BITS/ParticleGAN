@@ -1,0 +1,120 @@
+{
+  "comparison": {
+    "cases": {
+      "atlas/serial=False": {
+        "backend": "feature_cells",
+        "final": "79c7a2514edfe6fd4e3767c052322e8f419d6690158b400bfcab6c75408e5c25",
+        "initial": "bd46107907e76c03c90fb6fd201e289e8e539dcf27d55293cf96237a2b3e6d26",
+        "penalty_calls": 840,
+        "reaction_count": 105,
+        "resume_exact": true,
+        "sampling": {
+          "ema=False/output_noise=False": "a7a6cde74d666b5c753af63d063be1e0db620b0f6aa8deb1faba5e798257c223",
+          "ema=False/output_noise=True": "384645620eddb3405ebd6f59c81e2be9749b76226fb48793d9a4a5e5cce1c288",
+          "ema=True/output_noise=False": "efa625ad824edf3a633d437185848b5adfc322506ddddcb3d74a541a2ca39218",
+          "ema=True/output_noise=True": "5849a92a3de983bb03c0150be1b5959322b64ef3b607f38b675286f536139c2b"
+        },
+        "trajectory": "0616358385bd3a464656ef67447fd5ce5cfbb46ef571567b4bed516e7c8c8b0a",
+        "updates": 840
+      },
+      "atlas/serial=True": {
+        "backend": "feature_cells",
+        "final": "70bc1c930181b52e3c8bf7b9bf8c7214a792ce2d1c2547d44a59f4a406155161",
+        "initial": "4153dd43f579c951ca8d82adfe38368075590226f21531285b3659198e36b361",
+        "penalty_calls": 840,
+        "reaction_count": 105,
+        "resume_exact": true,
+        "sampling": {
+          "ema=False/output_noise=False": "a7a6cde74d666b5c753af63d063be1e0db620b0f6aa8deb1faba5e798257c223",
+          "ema=False/output_noise=True": "384645620eddb3405ebd6f59c81e2be9749b76226fb48793d9a4a5e5cce1c288",
+          "ema=True/output_noise=False": "efa625ad824edf3a633d437185848b5adfc322506ddddcb3d74a541a2ca39218",
+          "ema=True/output_noise=True": "5849a92a3de983bb03c0150be1b5959322b64ef3b607f38b675286f536139c2b"
+        },
+        "trajectory": "1a885ef9d237689da83870a27d30b17c0268a3e70c791c06a580478e38278363",
+        "updates": 840
+      },
+      "e22/serial=False": {
+        "backend": "knn",
+        "final": "fc312bb5139ed738795c0c80940d3db59cf0564ab012aa1b3c81ffbedf7a7f3c",
+        "initial": "eaf1a6ff5e8a044affd81294098c444e18c327b578193e4a4a00b02e2fce60eb",
+        "penalty_calls": 840,
+        "reaction_count": 105,
+        "resume_exact": true,
+        "sampling": {
+          "ema=False/output_noise=False": "9bbb1d0f0711323b41ee03ae3d6e15d08f6196117221b2a106ea0a652fbd6414",
+          "ema=False/output_noise=True": "9c90757e930e8c26aa6a757a041773c8e7cf51c7fd1e1a9ed7a88c4daf291dd3",
+          "ema=True/output_noise=False": "37bd7e2f0ccf2032a210ddea782fd26c13697222044bca9658c00f09e898bb10",
+          "ema=True/output_noise=True": "5b44d2462f4cf0d6229659a91e2f208b330ff50f8d080f000c630e6f2a0ca4a6"
+        },
+        "trajectory": "23d8a35894e8895f48db3e95f7be3cda194e4e83aaff1fd82ae46011d4c58e45",
+        "updates": 840
+      },
+      "e22/serial=True": {
+        "backend": "knn",
+        "final": "4cbe3ef892d781ccab42488962c13fe0c45963c7a88ae41365f442c4792eca2f",
+        "initial": "1135b6babcfd996169fea539224a3ef15c9f280cae08552e68431775d69c279e",
+        "penalty_calls": 840,
+        "reaction_count": 105,
+        "resume_exact": true,
+        "sampling": {
+          "ema=False/output_noise=False": "9bbb1d0f0711323b41ee03ae3d6e15d08f6196117221b2a106ea0a652fbd6414",
+          "ema=False/output_noise=True": "9c90757e930e8c26aa6a757a041773c8e7cf51c7fd1e1a9ed7a88c4daf291dd3",
+          "ema=True/output_noise=False": "37bd7e2f0ccf2032a210ddea782fd26c13697222044bca9658c00f09e898bb10",
+          "ema=True/output_noise=True": "5b44d2462f4cf0d6229659a91e2f208b330ff50f8d080f000c630e6f2a0ca4a6"
+        },
+        "trajectory": "ccfbc824108e73a2a38bb2af480c7a94af063f75071d8c3323ff4c5cee6df9af",
+        "updates": 840
+      }
+    },
+    "excluded_diagnostics": [
+      "birth_death.last.eval_seconds"
+    ],
+    "schema": 1,
+    "scope": "fixed CPU API conformance; not scientific gate qualification"
+  },
+  "exact": true,
+  "kind": "bounded_source_equivalence",
+  "limits": "Finite CPU API probe only; new Forge MoG, policy tasks, fixed penalties, runtime cohorts and scientific protocols require their own evidence.",
+  "qualified_source_commit": "bdf05d1be0f68cfdb0c71e81e7e0d3cce477572f",
+  "reference_tree_commit": "bc9d9aec23618e84b6b3cc8f5169638b0925671b",
+  "runtime": {
+    "device": "cpu",
+    "dtype": "torch.float32",
+    "python": "3.12.13",
+    "threads": 1,
+    "torch": "2.13.0+cu126"
+  },
+  "schema": 1,
+  "scientific_qualification": false,
+  "source_sha256": {
+    "particlegan/__init__.py": "b56efa562acc551d639548c299002e2cd76338b3fd7062699780add51f4f5e8c",
+    "particlegan/_qr.py": "b59cd62cc27ed557b41b2d17ed86ed578c762a3a8a392d63731a5a3b2b018916",
+    "particlegan/anchor_birth.py": "aa50983d8b61304acf4e1138f16fd4784798983df91e931863bcacd3b511f76f",
+    "particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+    "particlegan/birth_death.py": "b14c50c611a8cf188347e391739fca50a5171200eb6be90e4e3d1509d64e47ed",
+    "particlegan/birth_phase.py": "5ff929e5e9858aa24c4cc2f8999b5d0603e25e42ca3844d1da4cc28b1981d3d7",
+    "particlegan/capabilities.py": "39df9c67dbedf612740057e5fa743bc724678a1bc323d1f7cf550b37c0c01177",
+    "particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+    "particlegan/continuous.py": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41",
+    "particlegan/diffusion.py": "19c3aa8772703891551b9122fde8e74c07996f779892b7cb6be09553691efa61",
+    "particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+    "particlegan/feature_cells.py": "e0ea05f61abd7845c7437eed9a79c3a2511d5551ff04f4e619b6b9c8992e221a",
+    "particlegan/feature_policy.py": "de1a50f70a37d4c9174c8850ce3eac2a2597ed01f19fc4fe1a2ce0ec3176a8b2",
+    "particlegan/feature_reference.py": "58e076e9e04600be25e28afafc537a340de727371f4acbbfb2b7dd8bebac18b1",
+    "particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+    "particlegan/grad_regularizers.py": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747",
+    "particlegan/init.py": "e15d4de01eb49f7097bc249abacab907ff067385412346f54ab0d510cb8649d0",
+    "particlegan/k3p.py": "72fa32ae0d423d2904f310958721c0138823fa4d06ceca6ec451aaf86280607d",
+    "particlegan/ka2.py": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703",
+    "particlegan/mean_transport.py": "57a68e0a65c5424a4460f65002f3862a69e90af330a4d47c700dc773683a2c06",
+    "particlegan/output_moments.py": "dcf3e27228d2c3c9738e473c5b22ee9e6d5047ddcd60c538b66526adb53ef188",
+    "particlegan/particle_prior.py": "0220878bebea227da63abbf9f5b1ebdabdc6aea54fd2332fd2cab02ed734238f",
+    "particlegan/policy.py": "5b6877ab14170340433e54f5d0e0409b2f72721d31145b8d4867890686317ebc",
+    "particlegan/population_continuity.py": "378cd75cca45bc8da4da33e686a12cf99df853042687978314e37c532bc17fe6",
+    "particlegan/recipes.py": "77d2221985a71ed303c4eecb8fae9620d068fb9478b119f5c3fd9a11a1eca86b",
+    "particlegan/routing.py": "63249d808fccb3d4e113eb1d638a245ee665c3cade20a1542bb706f316b4abcc",
+    "particlegan/row_evidence.py": "78be40141ef3946860458e9842159be9321f05c217a4800dd4134113b6eba93e",
+    "particlegan/training.py": "319bc2d32f2ba106d428607575447dcda419f190cfe02fabdb22fc49ddcc5f77",
+    "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+  }
+}

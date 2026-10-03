@@ -12,6 +12,7 @@ import torch.nn as nn
 import torch
 import torch.nn.functional as F
 import numpy as np
+import particlegan.init
 from .upfirdn2d import upfirdn2d
 
 
@@ -59,6 +60,10 @@ class Conv2d(nn.Module):
       x = x + self.bias.reshape(1, -1, 1, 1)
 
     return x
+
+
+# Resampling Conv2d keeps its own kernel_init under particlegan.init.
+particlegan.init.register(Conv2d, lambda m: {n: particlegan.init.KEEP for n in ('weight', 'bias') if hasattr(m, n)})
 
 
 def naive_upsample_2d(x, factor=2):

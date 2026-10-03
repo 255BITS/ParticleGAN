@@ -1,0 +1,384 @@
+{
+  "actual_device": "cpu",
+  "actual_noise": {
+    "eval_output_applied": false,
+    "input_nonzero_steps": 0,
+    "input_std": 0.0,
+    "output_noise_learnable": false,
+    "output_nonzero_steps": 0
+  },
+  "actual_optimizers": [
+    "K3PGeneratorAdam",
+    "K3PCriticAdam"
+  ],
+  "actual_prior": {
+    "exception_reason": "This host optimizes explicit sample-particle coordinates directly, without a separate generator or latent sampling kernel.",
+    "kind": "particle_cloud",
+    "learnable": true,
+    "sigma": 0.0,
+    "standardize": false
+  },
+  "actual_training_schedules": {
+    "clock": "completed host updates; penalty observes completed critic updates",
+    "horizon": 80,
+    "optimizer_groups": {
+      "discriminator": {
+        "beta2": {
+          "first": 0.99,
+          "last": 0.99,
+          "maximum": 0.99,
+          "minimum": 0.99,
+          "observations": 80
+        },
+        "lr": {
+          "first": 0.00425,
+          "last": 0.0002222208330305027,
+          "maximum": 0.00425,
+          "minimum": 0.0002222208330305027,
+          "observations": 80
+        }
+      },
+      "prior": {
+        "beta2": {
+          "first": 0.99,
+          "last": 0.99,
+          "maximum": 0.99,
+          "minimum": 0.99,
+          "observations": 80
+        },
+        "lr": {
+          "first": 0.00425,
+          "last": 0.0002222208330305027,
+          "maximum": 0.00425,
+          "minimum": 0.0002222208330305027,
+          "observations": 80
+        }
+      }
+    },
+    "penalty_coefficient": {
+      "first": 6.0,
+      "last": 6.0,
+      "maximum": 6.0,
+      "minimum": 6.0,
+      "observations": 80
+    }
+  },
+  "applicability_note": "This direct-particle host has no latent table or scalar prior-spread objective. Both active optimizer roles use the observed network LR; prior multiplier2 is configured for latent-table hosts. EMA is not scored; disabled K3P hooks confer no mechanism credit.",
+  "artifact_archive": "reports/forge/release07-task-adaptation-archive.json",
+  "attempt_id": "df1794ebea6444c5a10c2a953843257d",
+  "campaign_budget_seconds": 44100,
+  "campaign_id": "release07-gan-v3-task-adapted-v1",
+  "candidate_id": "release07-gan-v3-task-adapted-v1",
+  "candidate_revision": "d5341d8d12528f9e34030480544dd84fa7b933eed8474ff19e568dfb56b26cbc",
+  "canonical_result_hash": "1a11e1784f0721066fabed8e98a116f720a6d76116bda08028f1df83892e8b43",
+  "compute_profiles": {
+    "cpu": {
+      "backend": "cpu",
+      "deterministic": true,
+      "machine": "x86_64",
+      "model": "AMD Ryzen 9 5900X 12-Core Processor",
+      "tf32": false,
+      "threads": 1
+    },
+    "cuda": {
+      "backend": "cuda",
+      "compute_capability": "8.6",
+      "deterministic": true,
+      "driver": "610.57.04",
+      "model": "NVIDIA RTX A6000",
+      "tf32": false,
+      "threads": 1
+    }
+  },
+  "cost": {
+    "adapter_seconds": 0.38841332599986345,
+    "charged_task": "two_pole",
+    "device": "cpu",
+    "execution_seconds": 5.508408382942434,
+    "flops": {
+      "kind": "unavailable",
+      "value": null
+    },
+    "runner_seconds": 2.42818194499705,
+    "wall_seconds": 5.508408382942434
+  },
+  "effective_recipe": {
+    "alpha_bar": [
+      1.0,
+      0.9,
+      0.5,
+      0.05,
+      0.0001
+    ],
+    "amsgrad": false,
+    "batch_size": 2048,
+    "beta2_anneal_end": 0.2,
+    "beta2_end": null,
+    "betas": [
+      0.0,
+      0.99
+    ],
+    "birth_death_backend": "knn",
+    "birth_death_cells": 64,
+    "birth_death_chunk": 256,
+    "birth_death_feature_scale": "none",
+    "birth_death_isolation": false,
+    "birth_death_metric_rank": 8,
+    "birth_death_parent_policy": "real_anchor",
+    "birth_death_space": "data",
+    "conditioning": "scalar",
+    "continuous_policy": null,
+    "critic_formulation": "k3p",
+    "critic_payoff_damping": true,
+    "critic_r1_real": true,
+    "d_guard_min_steps": 200,
+    "d_guard_ratio": 0.0,
+    "d_lr_mult": 1.0,
+    "direct_particle_betas": [
+      0.0,
+      0.9
+    ],
+    "direct_particle_gain": false,
+    "distance_reduction": "sum",
+    "ema_decay": 0.995,
+    "encoder_mode": "none",
+    "eps": 1e-08,
+    "input_noise_anneal_end": 0.1,
+    "input_noise_std": 0.0,
+    "latent_damping_max_rate": 0.0,
+    "lr": 0.00425,
+    "lr_anneal_start": 0.6,
+    "lr_control": "mobility",
+    "lr_floor": 0.05,
+    "model": "gan",
+    "name": "gan_v3",
+    "network_lr_floor": null,
+    "network_lr_horizon_cap": null,
+    "num_classes": null,
+    "num_particles": 20000,
+    "observation_sigma": 0.03,
+    "optimizer_family": "formulation",
+    "output_noise_mode": "fixed",
+    "output_noise_std": 0.0,
+    "output_noise_warmup": 0.2,
+    "particle_birth_death": false,
+    "prior_betas": null,
+    "prior_kind": "particles",
+    "prior_lr_mult": 2.0,
+    "prior_reg": 0.0,
+    "reconstruction_weight": 1.0,
+    "reg_anchor_min_decay": 0.9,
+    "reg_anchor_weight": 0.0,
+    "reg_arm": "b_cap",
+    "reg_coeff": 6.0,
+    "reg_coeff_anneal_end": 0.2,
+    "reg_coeff_end": null,
+    "reg_every": 1,
+    "reg_kappa": 1.25,
+    "reopen_anchor": "hold",
+    "reopen_guard": null,
+    "reopen_signal": "data",
+    "routing_temperature": 0.25,
+    "row_evidence_exclude": true,
+    "row_evidence_gate": false,
+    "row_evidence_hold": true,
+    "row_evidence_hot": true,
+    "row_evidence_null": "theory",
+    "row_policy": "independent",
+    "serve_average": 0.0,
+    "sigma_rel": 0.0,
+    "standardize": false,
+    "table_release_rule": "any",
+    "total_steps": 80,
+    "ucd_target": "class",
+    "ucd_weight": 0.02,
+    "z_dim": 2
+  },
+  "evaluator_summary": {
+    "attempted": true,
+    "confirmation_fraction": 2.0,
+    "convergence": {
+      "complete": true,
+      "confirmed_seconds": null,
+      "confirmed_step": null,
+      "first_pass_step": null,
+      "minimum_stable_checks": 5,
+      "observations": 24,
+      "passing_observations": 0,
+      "passing_suffix": 0,
+      "stable_from_seconds": null,
+      "stable_from_step": null
+    },
+    "metric_checks": {
+      "grad_med": {
+        "margin": 0.6893671452999115,
+        "metric": "grad_med",
+        "op": "<=",
+        "status": "PASS",
+        "threshold": 1.0,
+        "value": 0.3106328547000885
+      },
+      "mean_abs": {
+        "margin": -0.006279128789901722,
+        "metric": "mean_abs",
+        "op": ">=",
+        "status": "FAIL",
+        "threshold": 0.3,
+        "value": 0.29372087121009827
+      }
+    },
+    "passed": false,
+    "shortfall": 0.010465214649836204,
+    "status": "FAIL"
+  },
+  "final_metrics": {
+    "grad_med": 0.3106328547000885,
+    "mean_abs": 0.29372087121009827
+  },
+  "guards": {
+    "all_finite": true,
+    "hooks_exercised": true,
+    "mechanism_audit": {
+      "mechanisms": {
+        "a2": {
+          "applied": 0,
+          "calls": 0,
+          "eligible": 0,
+          "enabled": false,
+          "reason": "disabled by the declared formulation; no activation claimed",
+          "requested": false
+        },
+        "critic_anchor": {
+          "applied": 0,
+          "calls": 80,
+          "eligible": 0,
+          "enabled": false,
+          "reason": "disabled by the declared formulation; no activation claimed",
+          "requested": false
+        },
+        "critic_guard": {
+          "applied": 0,
+          "calls": 0,
+          "eligible": 0,
+          "enabled": false,
+          "reason": "disabled by the declared formulation; no activation claimed",
+          "requested": false
+        },
+        "critic_penalty": {
+          "applied": 80,
+          "calls": 80,
+          "eligible": 80,
+          "enabled": true,
+          "reason": "actual host mechanism branch applied",
+          "requested": true
+        },
+        "direct_particle_gain": {
+          "applied": 0,
+          "calls": 80,
+          "eligible": 80,
+          "enabled": false,
+          "reason": "disabled by the declared formulation; no activation claimed",
+          "requested": false
+        }
+      },
+      "schema_version": 1
+    },
+    "optimizer_updates": {
+      "discriminator": 80,
+      "prior": 80
+    },
+    "unintended_rng_deviations": 0
+  },
+  "host_adaptation": {
+    "contract": {
+      "recipe_fields": [
+        "alpha_bar",
+        "batch_size",
+        "conditioning",
+        "distance_reduction",
+        "encoder_mode",
+        "model",
+        "num_classes",
+        "num_particles",
+        "observation_sigma",
+        "prior_reg",
+        "reconstruction_weight",
+        "routing_temperature",
+        "total_steps",
+        "ucd_target",
+        "ucd_weight",
+        "z_dim"
+      ],
+      "schema_version": 1
+    },
+    "delegated_reference_values": {
+      "alpha_bar": [
+        1.0,
+        0.9,
+        0.5,
+        0.05,
+        0.0001
+      ],
+      "batch_size": 2048,
+      "conditioning": "scalar",
+      "distance_reduction": "sum",
+      "encoder_mode": "none",
+      "model": "gan",
+      "num_classes": null,
+      "num_particles": 20000,
+      "observation_sigma": 0.03,
+      "prior_reg": 0.05,
+      "reconstruction_weight": 1.0,
+      "routing_temperature": 0.25,
+      "total_steps": 7000,
+      "ucd_target": "class",
+      "ucd_weight": 0.02,
+      "z_dim": 2
+    },
+    "host_definition": {
+      "family": "existing_behavior",
+      "phase": "fit",
+      "runner": "legacy",
+      "split": "development",
+      "steps": 80
+    },
+    "note": "Effective recipe and active components are recorded separately. Behavioral host objectives replace delegated reference objectives; scalar trainer prior_reg is retained.",
+    "owner": "frozen task resources and original host objectives",
+    "schema_version": 1,
+    "task_id": "two_pole"
+  },
+  "preflight": {
+    "blocked_tasks": [],
+    "required_tasks": 24
+  },
+  "qualification_reuse": false,
+  "request_id": "f2ef545b54285551f616bbdd",
+  "sampling": {
+    "eval_output_noise": "not_applied_to_measurement",
+    "sampling_contract_version": 1,
+    "sampling_law": "learned_particles_and_critic_gradient",
+    "scoring_weights": "live"
+  },
+  "schema_version": 1,
+  "source_digest": "d091ec1f6b1db7cfad160b8dcd77f4b6dff432e88dab0c7421c59cff3da997dc",
+  "source_origin_commit": "fc66d7c49259a8977cbb4478b20dad1ffcc6c1cb",
+  "status_counts": {
+    "BLOCKED": 0,
+    "FAIL": 1,
+    "UNKNOWN": 23
+  },
+  "tier_counts": {
+    "1": {
+      "passed": 0,
+      "total": 3
+    },
+    "2": {
+      "passed": 0,
+      "total": 19
+    },
+    "3": {
+      "passed": 0,
+      "total": 2
+    }
+  }
+}

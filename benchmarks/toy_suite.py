@@ -3,9 +3,10 @@
 ``run`` creates fresh evidence for all three 100-mode problems and all 19
 canonical transfer cases. ``regrade`` checks their saved evidence without
 training. A separate installed-wheel public-default replay is an optional
-control. A common 22/22 PASS requires one identical global recipe *including*
-noise on every host, as well as each host's frozen live gate. Candidate runs
-without complete training-noise receipts remain INCOMPLETE for that claim.
+control. This is the legacy BCap served-sample regression, with output noise
+explicitly enabled on the native leg to match the frozen transfer hosts.
+A common 22/22 PASS requires matching training and sampling laws as well as
+each host's frozen live gate. It does not qualify the clean sampler or Atlas.
 
 python -u -m benchmarks.toy_suite run \
     --output /tmp/toy-suite-22
@@ -33,7 +34,7 @@ from benchmarks.toy100.problems import PROBLEM_NAMES, sample_real
 from benchmarks.toy100.models import linear_input_noise
 from benchmarks.toy100.train import (
     AFFINE_MODEL_POLICIES, EMPIRICAL_INIT_SEED_OFFSET,
-    POLICY_SOURCE_SCOPE_V2, make_trainer, policy_source_scope, resolve_config,
+    POLICY_SOURCE_SCOPE_V2, load_config, make_trainer, policy_source_scope, resolve_config,
 )
 from benchmarks.transfer_suite.compare_defaults import plan
 from benchmarks.transfer_suite.legacy_noise_adapters import EVAL_SCOPES
@@ -84,6 +85,20 @@ def _noise_identity(noise: dict) -> dict:
             raise ValueError("isolated output_noise_rng requires a positive peak")
     return {**noise, "output_noise_warmup": noise.get("output_noise_warmup", 0.0),
             "output_noise_learnable": learned}
+
+
+def _native_eval_output_noise(summary: dict, config: dict) -> bool:
+    # The pre-#209 native runner sampled its OutputNoise wrapper directly.
+    # New clean/served records name the law; never infer it from training sigma.
+    recorded = summary.get("eval_output_noise", "training_noise")
+    if recorded not in ("clean", "training_noise"):
+        raise ValueError("native evaluation sampling law is unknown")
+    enabled = recorded == "training_noise"
+    if "eval_output_noise" in config:
+        requested = config["eval_output_noise"]
+        if type(requested) is not bool or requested != enabled:
+            raise ValueError("native evaluation sampling law contradicts its configuration")
+    return enabled
 
 
 def _read(path: Path):
@@ -924,6 +939,8 @@ def _episode_rows(directory: Path, expected_names: tuple[str, ...], *, candidate
                                 for job in protocol["jobs"]]:
             raise ValueError("archived jobs differ from frozen declarations")
         if candidate:
+            if protocol.get("eval_output_noise", True) is not True:
+                raise ValueError("legacy transfer sampling law must include output noise")
             if protocol["frozen_discriminators"] != profile["discriminators"]:
                 raise ValueError("candidate discriminator profile differs from frozen card")
             recipe_fields = protocol["global_recipe"]
@@ -962,6 +979,9 @@ def _episode_rows(directory: Path, expected_names: tuple[str, ...], *, candidate
             if record["source_sha256"] != protocol["source_sha256"]:
                 raise ValueError(f"episode source differs: {name}")
             if candidate:
+                if ("eval_output_noise" in protocol
+                        and record.get("eval_output_noise") is not True):
+                    raise ValueError(f"episode evaluation sampling law differs: {name}")
                 if (record["recipe"] != protocol["global_recipe"]
                         or _noise_identity(record["noise"]) != _noise_identity(protocol["noise"])
                         or record.get("model_policy", {}) != protocol.get("model_policy", {})):
@@ -1088,8 +1108,16 @@ def _toy100_rows(directory: Path):
         config_fields = {name: getattr(recipe, name) for name in GLOBAL_RECIPE_FIELDS}
         policy_sources = None
         policy_scope = None
+        eval_output_noise = None
         for name in PROBLEM_NAMES:
             executed = _read(directory / name / "config.json")
+            observed_law = _native_eval_output_noise(
+                _read(directory / name / "summary.json"), executed,
+            )
+            if eval_output_noise is None:
+                eval_output_noise = observed_law
+            elif observed_law != eval_output_noise:
+                raise ValueError("100-mode evaluation sampling law varies between problems")
             expected_config, _ = resolve_config(manifest["resolved_problem_configs"][name])
             if executed != json.loads(json.dumps(expected_config)):
                 raise ValueError(f"executed 100-mode configuration differs: {name}")
@@ -1155,6 +1183,7 @@ def _toy100_rows(directory: Path):
         return dict(status=_status(passed, len(PROBLEM_NAMES), complete=True),
                     passed=passed, required=len(PROBLEM_NAMES), cases=cases,
                     recipe=legacy_dict(recipe), noise=noise,
+                    eval_output_noise=eval_output_noise,
                     model_policy=model_policy, policy_source_sha256=policy_sources,
                     policy_source_scope=policy_scope,
                     config_sha256=manifest["config_sha256"],
@@ -1223,8 +1252,13 @@ def regrade(output: Path):
                      and all(row["noise_applied"] for row in candidate["cases"].values()))
     if identity and not noise_covered:
         reason = "common noise mechanism lacks a complete host receipt"
+    sampling_identity = bool(identity and (
+        toy.get("eval_output_noise", True) == candidate.get("protocol", {}).get("eval_output_noise", True)
+        or toy.get("noise", {}).get("output_noise_std") == 0.0))
+    if identity and not sampling_identity:
+        reason = "100-mode and candidate-19 output-noise sampling laws differ"
     complete = toy["status"] in ("PASS", "FAIL") and candidate["status"] in ("PASS", "FAIL")
-    if not complete or not identity or not noise_covered:
+    if not complete or not identity or not noise_covered or not sampling_identity:
         status = "INCOMPLETE"
     elif toy["status"] == candidate["status"] == "PASS" and full_source_coverage is False:
         status = "INCOMPLETE"
@@ -1237,13 +1271,14 @@ def regrade(output: Path):
     report = dict(protocol="toy-suite-common22-v1", status=status,
                   observed_passes=observed_passes, required=22,
                   global_recipe_identical=identity, noise_applied_on_all_19=noise_covered,
+                  sampling_law_identical=sampling_identity,
                   policy_source_scope=toy.get("policy_source_scope"),
                   full_public_source_coverage=full_source_coverage,
                   reason=reason, toy100=toy, candidate19=candidate,
                   vector6=vector, public_default19_control=control)
     _write(output / "compatibility.json", report)
     lines = [f"# One-recipe 22-toy gate: {status}", "",
-             "A PASS requires the same global optimizer, loss, schedule, and noise settings "
+             "A PASS requires the same global optimizer, loss, schedule, noise settings and sampling law "
              "on all 22 hosts. The three 100-mode problems must pass both coverage and "
              "accuracy gates; the 19 canonical cases must sustain their frozen live gates. "
              "Architecture and host resource sizes follow the frozen task declarations.", "",
@@ -1255,6 +1290,11 @@ def regrade(output: Path):
              f"| Public v3 installed-wheel control | {control['passed']}/19 | {control['status']} |",
              "", f"Global fields identical: **{identity}**. Noise applied on all 19: "
              f"**{noise_covered}**. {reason or ''}", "",
+             f"Sampling law identical: **{sampling_identity}**. Native output noise: "
+             f"**{toy.get('eval_output_noise', 'unknown')}**. Transfer output noise: "
+             f"**{candidate.get('protocol', {}).get('eval_output_noise', True)}**.", "",
+             "This legacy served-sample regression does not qualify the public clean "
+             "sampler, E22 or Atlas.", "",
              f"Native policy archive scope: **{toy.get('policy_source_scope') or 'not applicable'}**. "
              f"Full public package source coverage: **{full_source_coverage}**.", "",
              "## Per-case result", "",
@@ -1292,6 +1332,11 @@ def run(config: Path, output: Path, *, with_default_control: bool = False,
     output = output.resolve()
     if output.exists():
         raise FileExistsError("use a new suite output directory")
+    # All frozen transfer hosts retain their original noisy evaluation policy.
+    # Bind the native leg explicitly to that same law before spending on training.
+    declaration = load_config(config)
+    if declaration.get("eval_output_noise", True) is not True:
+        raise ValueError("legacy common-22 requires eval_output_noise=True; use a separate clean qualification")
     output.mkdir(parents=True)
     from benchmarks.toy100.device import apply_device_policy, host_device
     apply_device_policy(device, log=True)
@@ -1305,7 +1350,7 @@ def run(config: Path, output: Path, *, with_default_control: bool = False,
     commands = [
         ([python, "-u", "-m", "benchmarks.toy100", "run", "--device", device_flag,
           "--config", str(config),
-          "--output", str(output / "toy100"), "--no-render"], ROOT, output / "toy100.log"),
+          "--output", str(output / "toy100"), "--no-render", "--eval-output-noise"], ROOT, output / "toy100.log"),
         ([python, "-u", "-m", "benchmarks.toy100.accuracy_gate", "--output",
           str(output / "toy100")], ROOT, output / "accuracy.log"),
         ([python, "-u", "-m", "benchmarks.transfer_suite.toy100_compatibility",
@@ -1346,7 +1391,7 @@ def main(argv=None):
     run_parser = commands.add_parser("run", help="train and grade fresh evidence")
     run_parser.add_argument("--config", type=Path,
                             default=Path("configs/toy100/constraints_simple_regularization.json"),
-                            help="candidate recipe (default: the verified shared 22-toy candidate)")
+                            help="legacy candidate recipe (default: BCap; original noisy sampling)")
     run_parser.add_argument("--output", type=Path, required=True)
     run_parser.add_argument("--with-default-control", action="store_true")
     run_parser.add_argument("--device", choices=("auto", "cuda", "cpu"), default="auto",

@@ -1,0 +1,129 @@
+{
+  "GPU_launch": false,
+  "added_target_rotation_deg": [
+    0,
+    0,
+    30,
+    60
+  ],
+  "animation_frames": 4,
+  "axes_limits": [
+    -6.8,
+    6.8
+  ],
+  "command": [
+    "/tmp/pr38-default-env/bin/python",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223/render_rotated100_comparison.py",
+    "--study-root",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930",
+    "--output-dir",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223"
+  ],
+  "current_source_execution_claimed": false,
+  "diagnostic_target_shift_frames": 0,
+  "figure_size": [
+    1200,
+    800
+  ],
+  "frame_durations_ms": [
+    1200,
+    2200,
+    2200,
+    4400
+  ],
+  "fresh_training": false,
+  "gif_bytes": 245027,
+  "header_separations": [
+    {
+      "minimum_vertical_gap_pixels": 9.775824652777828,
+      "step": 0
+    },
+    {
+      "minimum_vertical_gap_pixels": 9.775824652777828,
+      "step": 500
+    },
+    {
+      "minimum_vertical_gap_pixels": 9.775824652777828,
+      "step": 1000
+    },
+    {
+      "minimum_vertical_gap_pixels": 9.775824652777828,
+      "step": 1500
+    }
+  ],
+  "input_files_unchanged_after_render": true,
+  "input_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/configs/RA14-replay.json": "a3ee5c67ac6594014feeb1ec333131abb4b1d86832510b69923100ebd8510ad4",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/configs/RA15-partial-recovery.json": "a3ee5c67ac6594014feeb1ec333131abb4b1d86832510b69923100ebd8510ad4",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2/moving/grid100/COMPLETION.json": "ce0c4288ce6826038c1125264d6debd43cab819683b959fdc384e4f2b07ef7e0",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2/moving/grid100/LAUNCH.json": "254e964636bff69c191873f04d0ab89db0aa65d5230a70f02a0663211f785c55",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2/moving/grid100/adapted_runner.py": "4d94459b25892cd37427ee940e3ad863f3676b8e1b5d6cd5748525bfaf3a33db",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2/moving/grid100/frames.npz.verdict.json": "00e9f2911ce04d3e59174dc7f1082e105e26d921ea95991132fc70de33d8278e",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2/moving/rotated100/COMPLETION.json": "efd44347aa654153a5a7715565ee4fe785450cb13dea3db0172343dc85a1f964",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2/moving/rotated100/LAUNCH.json": "b23df43398500bbe3ae4801e6955e0ea32cc220e94c8f1c5a4ebb0b112036876",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2/moving/rotated100/adapted_runner.py": "4d94459b25892cd37427ee940e3ad863f3676b8e1b5d6cd5748525bfaf3a33db",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2/moving/rotated100/frames.npz": "fc9bbdbcb69fe79866a72fd10080c148174871cc78b43ac97a5fb7233a31924c",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2/moving/rotated100/frames.npz.verdict.json": "da2ccdf00de8bee927980a5e09bab7c6db3c8fd285f0dcc096a87255dc2fd819",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2/moving/staggered100/COMPLETION.json": "c7ff8a5f61657fe042e0207f89c2ab60edd50f28bd41e1c3eb4f0b48c8ff6b8f",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2/moving/staggered100/LAUNCH.json": "6ce22cccb24069f74f6f16d55ba2e401a2626a2101cad94744d5a68fb3881a41",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2/moving/staggered100/adapted_runner.py": "4d94459b25892cd37427ee940e3ad863f3676b8e1b5d6cd5748525bfaf3a33db",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2/moving/staggered100/frames.npz.verdict.json": "7cb4378348b97b949dcd7b83cc73a5ff70431bb7d9546b86b4905dc89c29d1e8",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15/moving/grid100/COMPLETION.json": "ed9d173e3c51ccf4e6070ee539a8b7c7984d41d41f0be54895880976d45a1d82",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15/moving/grid100/LAUNCH.json": "ea25d42f35ac3b3d734b11ba6f76e8d489a56f6d076eafa7b6dc4e30044c1121",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15/moving/grid100/adapted_runner.py": "930b1a62061e4e3b50d5f9239c1854d67ecd06ec760d970d986741b7db8cc369",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15/moving/grid100/frames.npz.verdict.json": "bbc1b65e6a3befc43998651a6716d9894f956cbaccdd376ecddd68a9d8de6785",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15/moving/rotated100/COMPLETION.json": "aada2905da7bcc7860fc17a615c5b9ccd8b2ea2e6d3c2a36f7404279b4aacfad",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15/moving/rotated100/LAUNCH.json": "a3d62ff4f1aacb281c75bf9b28ae9d997b0b0e6d299d3224e7aea0483d35e9a1",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15/moving/rotated100/adapted_runner.py": "930b1a62061e4e3b50d5f9239c1854d67ecd06ec760d970d986741b7db8cc369",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15/moving/rotated100/frames.npz": "ae6bf51e32303e2cb0b2cfbf7a7f213e64f343938735c8ddd15be3f72feed279",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15/moving/rotated100/frames.npz.verdict.json": "5089100e0caeebee9ae29b4566d93b2b2d8467cef8c6f094e97a26b36006b5a5",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15/moving/staggered100/COMPLETION.json": "3c4fcfdd2639afe1bc6674bc125bfb1171637ab6e0cc41654db20f64e82cb935",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15/moving/staggered100/LAUNCH.json": "e146e5a5284a277c9da269672e2ff5bc1003ed80c87a4ad4eb9d36b2f563369c",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15/moving/staggered100/adapted_runner.py": "930b1a62061e4e3b50d5f9239c1854d67ecd06ec760d970d986741b7db8cc369",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15/moving/staggered100/frames.npz.verdict.json": "e6d329eef1dc1958b6bd3bfb1a0130432c52173b7c5eb05fa3f712b162b9842d",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/visualization-pr223/render_rotated100_comparison.py": "ff64c7b7bc29f0bf3c41dc0efbf36fd8ba42dc5cc5d661cf669ca2ec89e95be6",
+    "/ml2/hypergan/gan-attempts/noout-20260928/gif/rotate_gate.py": "8057a8d4298d251edabcaeaaf02ef5b83834bdb56c296d2681c70aec6f277ed1"
+  },
+  "interpolation": false,
+  "limitations": [
+    "Only four recorded observations; recovery between snapshots is not shown.",
+    "Saved plotting samples have original float16 precision; gate scores use separate 20k draws.",
+    "RA14/RA15 historical sources are labelled explicitly; this is not a new RA17 run."
+  ],
+  "metric_draw_count": 20000,
+  "metric_source": "unchanged original gate verdicts",
+  "offline_model_sampling": false,
+  "output_sha256": {
+    "CAPTION.md": "c09eadacf54a90b6549a87946a00c7a90a9f8693222a8b0ea4e53028a493b795",
+    "README.md": "b65f0bdf68e369577cd42c9b12611aebff970ca90e6a3944d8d4e5002318cd23",
+    "moving-score-comparison.json": "deafeb7e61282e5809c28a404066c5ac016a5320d88f9352122b19763045b5b9",
+    "moving-score-comparison.md": "d8b796bf82517dc788a1a096be85e660638d314638c0c624e33ade54f8459f19",
+    "rotated100-shift-comparison.gif": "299861d5f83c906284414fc9b767c00d396fd9305db03647c3b6ba71c2d429f0",
+    "rotated100-shift-comparison.png": "1349bca168b0872508517dd20b485feb97b3d9b79d9c0b177623d7ce932c943c"
+  },
+  "package_RA14_sha256": "68f5706590683a44348cb04b3798917411bfaa54e5d45b17d57c345a4da33c15",
+  "package_RA15_sha256": "741fc3933654b985a74314b730b93be814d408ad46f6f7f6547b561f64619228",
+  "points_per_panel": 4096,
+  "same_axes_all_frames": true,
+  "samples_visible": "all 4096; no point filtering",
+  "saved_point_dtype": "float16",
+  "score_comparison_rows": 6,
+  "source_labels": [
+    "RA14",
+    "fresh RA15"
+  ],
+  "status": "CREATED_FROM_ORIGINAL_RECORDED_OBSERVATIONS",
+  "steps": [
+    0,
+    500,
+    1000,
+    1500
+  ],
+  "torch_imported": false,
+  "versions": {
+    "Pillow": "12.3.0",
+    "matplotlib": "3.11.2",
+    "numpy": "2.5.2",
+    "python": "3.12.13"
+  }
+}

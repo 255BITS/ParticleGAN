@@ -1,0 +1,818 @@
+{
+  "schema": "bounded_recent_particle_gan_pr_inventory_v1",
+  "created_utc": "2026-10-03T12:29:40.752943+00:00",
+  "review_scope": "One read-only primary metadata/context inventory; no fetch/rebase/Git mutation, science/output polling, models/draws/training/GPU, remote messages or PR actions. Root authenticated GitHub CLI supplied immutable inputs after reviewer transports failed.",
+  "inputs": {
+    "develop.json": {
+      "path": "/ml2/hypergan/pg-recent-pr-inventory-20261003/develop.json",
+      "bytes": 5241,
+      "sha256": "05156cfc1796c1a686112a884674ba7029c03092a19b09e6125584d12af8c745"
+    },
+    "compare.json": {
+      "path": "/ml2/hypergan/pg-recent-pr-inventory-20261003/compare.json",
+      "bytes": 10371,
+      "sha256": "a5c4ffbcb659ac999a9531be1204b79c42ce73c13fc1cd6a50563ccdb9bcde93"
+    },
+    "open-prs.json": {
+      "path": "/ml2/hypergan/pg-recent-pr-inventory-20261003/open-prs.json",
+      "bytes": 430231,
+      "sha256": "1d02f8ed604076afc25b88c69d45c87750abf964ed3be12ed2a87c5f2492fa5b"
+    }
+  },
+  "scientific_base": "4749b2780add539df4bd8d2dd1d3cc9f002f77ad",
+  "develop_head": "4749b2780add539df4bd8d2dd1d3cc9f002f77ad",
+  "develop_last_merge": {
+    "pr": 265,
+    "head_merged": "c68d77e8ee61de5edfd98828792cf55edbab285f",
+    "commit": "4749b2780add539df4bd8d2dd1d3cc9f002f77ad",
+    "date": "2026-10-03T07:46:44Z"
+  },
+  "merged_changes_after_scientific_base": {
+    "status": "IDENTICAL",
+    "commits": 0,
+    "files": 0,
+    "current_law_gate_api_config_change": false
+  },
+  "ongoing_experiment": "Generator-step scientific source488b remains unchanged; no grade pooling, retry or repeated-profile work is requested from source inventory alone.",
+  "coverage": {
+    "open_rows": 100,
+    "scope": "Latest100 open PRs returned in supplied packet",
+    "all_open_total_verified": false,
+    "older_updated_heads_verified": false,
+    "creation_update_times_provided": false,
+    "ci_provided": false,
+    "new_numbered_after_last_merged_pr": [
+      267,
+      266
+    ],
+    "config_repair_limit": "No merged config repair exists after4749. No separately identifiable new config JSON repair is established by this bounded packet; draft255 is a production optimizer repair with unverified current diff."
+  },
+  "records": [
+    {
+      "category": "new_report_and_test_cohort",
+      "question": "Two fixed shared critic-rate recipes: representation capacity versus learned intensity recovery and uninterrupted persistence across eight required cases.",
+      "result_scope": "16/16 zero-update capacity; two original FAIL/study FAIL and fourteen UNKNOWN, as published. No current-default or speed qualification.",
+      "reason_to_retain": "Adds measured failed learning evidence and actual media while preserving the denominator and engineering cost; supplies no repeated-profile request.",
+      "source_concern": "Only new report/test paths; copied-source discovery JSON is separately bound by the wrapper. Original targets, gates, package and configs are unchanged.",
+      "number": 267,
+      "title": "Report fixed critic-rate failures with capacity witnesses and goal GIFs",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/267",
+      "current_head_sha": "dc3256b61042a5aa2193bc5dfc16799c15521521",
+      "base_ref": "develop",
+      "draft": false,
+      "ci_status": "NOT_PRESENT_IN_PACKET_NOT_QUERIED",
+      "current_diff_verified": true,
+      "diff_scope": "Exact local Git objects: scientific-base mergepoint to current primary-packet head. PR254 includes inherited PR246; PR247 comparison here is scientific base, not master.",
+      "changed_paths": [
+        {
+          "status": "A",
+          "path": "reports/forge/critic-balance-20261003/ARCHIVE.md"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/critic-balance-20261003/CAPACITY.md"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/critic-balance-20261003/FROZEN_HOLD_ANALYSIS.md"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/critic-balance-20261003/INTENSITY_FAILURE_ANALYSIS.md"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/critic-balance-20261003/MEDIA_QA.md"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/critic-balance-20261003/PLAN.md"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/critic-balance-20261003/PUBLICATION.md"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/critic-balance-20261003/QUESTIONS_AND_MEDIA.md"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/critic-balance-20261003/README.md"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/critic-balance-20261003/analyze_retained_intensity.py"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/critic-balance-20261003/archive-verification.json"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/critic-balance-20261003/archive.json"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/critic-balance-20261003/bind_capacity.py"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/critic-balance-20261003/certification-execution.json"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/critic-balance-20261003/execution-error.json"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/critic-balance-20261003/frozen-hold-analysis.json"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/critic-balance-20261003/intensity-failure-analysis.json"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/critic-balance-20261003/media-qa.json"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/critic-balance-20261003/media/atlas/image-develop-img_intensity2-source-transpose12/goal.gif"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/critic-balance-20261003/media/e22/image-develop-img_intensity2-source-transpose12/goal.gif"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/critic-balance-20261003/publish_critic_balance.py"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/critic-balance-20261003/questions.json"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/critic-balance-20261003/results.json"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/critic-balance-20261003/run_critic_balance.py"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/critic-balance-20261003/snapshot-review.json"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/critic-balance-20261003/snapshot-review.md"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/critic-balance-20261003/test_bind_capacity.py"
+        },
+        {
+          "status": "A",
+          "path": "tests/test_critic_balance_publication.py"
+        },
+        {
+          "status": "A",
+          "path": "tests/test_critic_balance_runner.py"
+        }
+      ],
+      "production_or_config_paths": [],
+      "current_api_provider_or_original_scorer_paths": []
+    },
+    {
+      "category": "historical_replay_and_separate_hold_evidence",
+      "question": "Reproduce all nineteen original Atlas protocols and test the missing150-update persistence interval for the two original C6 broad checkpoints.",
+      "result_scope": "Original19 cohort PASS; both separately named continuation variants FAIL despite terminal recovery. Historical priors/gates/evaluation law remain separate.",
+      "reason_to_retain": "Faithful positive historical controls plus actual negative persistence counterexample; does not replace current MoG/served-policy qualification.",
+      "source_concern": "New report/test paths and one existing diagnostic Markdown update only; no production, current API provider or original scorer changes.",
+      "number": 266,
+      "title": "Publish faithful Atlas19 replay and measured C6 persistence failures",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/266",
+      "current_head_sha": "ced2dd4e413c3ff68bcc3163afa8b19ac4d69369",
+      "base_ref": "develop",
+      "draft": false,
+      "ci_status": "NOT_PRESENT_IN_PACKET_NOT_QUERIED",
+      "current_diff_verified": true,
+      "diff_scope": "Exact local Git objects: scientific-base mergepoint to current primary-packet head. PR254 includes inherited PR246; PR247 comparison here is scientific base, not master.",
+      "changed_paths": [
+        {
+          "status": "A",
+          "path": "reports/forge/continuous-baseline-20261003/ARCHIVE.md"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/continuous-baseline-20261003/FAMILY_CAPACITY_BOUNDARIES.json"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/continuous-baseline-20261003/FAMILY_CAPACITY_BOUNDARIES.md"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/continuous-baseline-20261003/GOAL_MEDIA_QA.json"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/continuous-baseline-20261003/GOAL_MEDIA_QA.md"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/continuous-baseline-20261003/HOLD_RESULTS.md"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/continuous-baseline-20261003/HORIZON_AUDIT.json"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/continuous-baseline-20261003/HORIZON_AUDIT.md"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/continuous-baseline-20261003/NEXT_CRITIC_BALANCE.md"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/continuous-baseline-20261003/OPEN_TOY_PR_REVIEW.md"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/continuous-baseline-20261003/ORIGINAL_POSITIVE_CHECK.json"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/continuous-baseline-20261003/ORIGINAL_POSITIVE_CHECK.md"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/continuous-baseline-20261003/PLAN.md"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/continuous-baseline-20261003/PR265_EVIDENCE_REVIEW.json"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/continuous-baseline-20261003/PR265_EVIDENCE_REVIEW.md"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/continuous-baseline-20261003/README.md"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/continuous-baseline-20261003/REMOTE_PR_CHECKPOINT.md"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/continuous-baseline-20261003/TIER1_EVIDENCE_REVIEW.json"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/continuous-baseline-20261003/TIER1_EVIDENCE_REVIEW.md"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/continuous-baseline-20261003/archive-verification.json"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/continuous-baseline-20261003/archive.json"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/continuous-baseline-20261003/export_moving_goal.py"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/continuous-baseline-20261003/export_native_goal.py"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/continuous-baseline-20261003/hold-results.json"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/continuous-baseline-20261003/media/atlas-original19-moving-grid100-retained-clouds.gif"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/continuous-baseline-20261003/media/atlas-original19-moving-grid100.gif"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/continuous-baseline-20261003/media/atlas-original19-moving-rotated100-retained-clouds.gif"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/continuous-baseline-20261003/media/atlas-original19-moving-rotated100.gif"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/continuous-baseline-20261003/media/atlas-original19-moving-staggered100-retained-clouds.gif"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/continuous-baseline-20261003/media/atlas-original19-moving-staggered100.gif"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/continuous-baseline-20261003/media/atlas-original19-native-grid100-retained-clouds.gif"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/continuous-baseline-20261003/media/atlas-original19-native-grid100.gif"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/continuous-baseline-20261003/media/atlas-original19-native-rotated100-retained-clouds.gif"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/continuous-baseline-20261003/media/atlas-original19-native-rotated100.gif"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/continuous-baseline-20261003/media/atlas-original19-native-staggered100-retained-clouds.gif"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/continuous-baseline-20261003/media/atlas-original19-native-staggered100.gif"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/continuous-baseline-20261003/media/atlas-original19-portability-img_bars4.gif"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/continuous-baseline-20261003/media/atlas-original19-portability-img_blobs4.gif"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/continuous-baseline-20261003/media/atlas-original19-portability-img_intensity2.gif"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/continuous-baseline-20261003/media/atlas-original19-portability-img_stripes2.gif"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/continuous-baseline-20261003/media/atlas-original19-portability-mode_hold.gif"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/continuous-baseline-20261003/media/atlas-original19-portability-ring_shift.gif"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/continuous-baseline-20261003/media/atlas-original19-portability-stationary.gif"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/continuous-baseline-20261003/media/atlas-original19-portability-vector_anisotropic.gif"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/continuous-baseline-20261003/media/atlas-original19-portability-vector_overlap.gif"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/continuous-baseline-20261003/media/atlas-original19-portability-vector_spiral.gif"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/continuous-baseline-20261003/media/atlas-original19-portability-vector_two_broad.gif"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/continuous-baseline-20261003/media/atlas-original19-portability-vector_unequal_mass.gif"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/continuous-baseline-20261003/media/atlas-original19-portability-vector_unequal_width.gif"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/continuous-baseline-20261003/media/c6-atlas-broad-hold-1200-to-1350.gif"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/continuous-baseline-20261003/media/c6-e22-broad-hold-1200-to-1350.gif"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/continuous-baseline-20261003/next-critic-balance.json"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/continuous-baseline-20261003/open-toy-pr-review.json"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/continuous-baseline-20261003/publish_results.py"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/continuous-baseline-20261003/remote-pr-checkpoint.json"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/continuous-baseline-20261003/results.json"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/continuous-baseline-20261003/run_atlas_baseline.py"
+        },
+        {
+          "status": "A",
+          "path": "reports/forge/continuous-baseline-20261003/run_hold_continuation.py"
+        },
+        {
+          "status": "M",
+          "path": "reports/forge/family-winner-round1/C6_DIAGNOSIS.md"
+        },
+        {
+          "status": "A",
+          "path": "tests/test_continuous_atlas_baseline.py"
+        },
+        {
+          "status": "A",
+          "path": "tests/test_continuous_moving_goal.py"
+        },
+        {
+          "status": "A",
+          "path": "tests/test_continuous_native_goal.py"
+        },
+        {
+          "status": "A",
+          "path": "tests/test_continuous_results_publication.py"
+        },
+        {
+          "status": "A",
+          "path": "tests/test_policy_hold_continuation.py"
+        }
+      ],
+      "production_or_config_paths": [],
+      "current_api_provider_or_original_scorer_paths": []
+    },
+    {
+      "category": "distinct_routed_toy_question",
+      "question": "At fixed architecture/native game, expand particle training-noise support from two seeds to eight and test held-out latent coverage.",
+      "result_scope": "Published generated-fixture full1024-per-arm PASS; draft full-task transfer remains separate/unresolved.",
+      "reason_to_retain": "Tests training-support generalization rather than larger batch, terminal cancellation or remote-cue recovery.",
+      "source_concern": "New standalone example/renderer and docs; no package/config edits. The new e22 example expands the public receipt source inventory glob; old receipts retain their original cohort.",
+      "number": 261,
+      "title": "Add routed latent-coverage convergence diagnostic",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/261",
+      "current_head_sha": "7943dda321c1011dd3c86fc598a92b3493159a83",
+      "base_ref": "develop",
+      "draft": true,
+      "ci_status": "NOT_PRESENT_IN_PACKET_NOT_QUERIED",
+      "current_diff_verified": true,
+      "diff_scope": "Exact local Git objects: scientific-base mergepoint to current primary-packet head. PR254 includes inherited PR246; PR247 comparison here is scientific base, not master.",
+      "changed_paths": [
+        {
+          "status": "A",
+          "path": "docs/e22_routed_latent_coverage.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/e22_routed_latent_coverage/media-v2/external-verification-receipt.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/e22_routed_latent_coverage/media-v2/goal-final.png"
+        },
+        {
+          "status": "A",
+          "path": "docs/e22_routed_latent_coverage/media-v2/goal.gif"
+        },
+        {
+          "status": "A",
+          "path": "docs/e22_routed_latent_coverage/media-v2/media-completion.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/e22_routed_latent_coverage/media-v2/quality-points.png"
+        },
+        {
+          "status": "A",
+          "path": "docs/e22_routed_latent_coverage/media-v2/saved-metric-review.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/e22_routed_latent_coverage_readout_v2.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/e22_routed_latent_coverage_v1.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/e22_routed_latent_coverage_v2.json"
+        },
+        {
+          "status": "A",
+          "path": "examples/e22_routed_latent_coverage.py"
+        },
+        {
+          "status": "A",
+          "path": "examples/render_e22_routed_latent_coverage.py"
+        }
+      ],
+      "production_or_config_paths": [],
+      "current_api_provider_or_original_scorer_paths": []
+    },
+    {
+      "category": "distinct_routed_toy_question",
+      "question": "Retain useful paired edits under constructed frozen terminal columns [W,-W], contrasting arithmetic precision with an independent teacher.",
+      "result_scope": "Published full512-per-arm original convergence FAIL; separate endpoint precision diagnostic supplies no convergence replacement.",
+      "reason_to_retain": "Tests terminal cancellation and useful code benefit, distinct from latent training-support or remote cue.",
+      "source_concern": "New standalone example/renderer/docs/tests/readers, no package/config edits. The new e22 example expands public receipt source inventory; original scientific gates remain frozen.",
+      "number": 253,
+      "title": "Add native routed terminal-cancellation convergence benchmark",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/253",
+      "current_head_sha": "a31ce8c1ddac831ae032ecaf4b43d84919cd6173",
+      "base_ref": "develop",
+      "draft": false,
+      "ci_status": "NOT_PRESENT_IN_PACKET_NOT_QUERIED",
+      "current_diff_verified": true,
+      "diff_scope": "Exact local Git objects: scientific-base mergepoint to current primary-packet head. PR254 includes inherited PR246; PR247 comparison here is scientific base, not master.",
+      "changed_paths": [
+        {
+          "status": "A",
+          "path": "docs/e22_routed_terminal_cancellation.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/e22_routed_terminal_cancellation_independent_review.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/e22_routed_terminal_cancellation_independent_review.json.completion.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/e22_routed_terminal_cancellation_independent_review_v2.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/e22_routed_terminal_cancellation_independent_review_v2.json.completion.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/e22_routed_terminal_cancellation_preparation.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/e22_routed_terminal_cancellation_qualification.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/e22_routed_terminal_cancellation_results.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/e22_routed_terminal_cancellation_results.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/e22_routed_terminal_cancellation_source_preparation.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/e22_routed_terminal_cancellation_v1.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/media/e22_routed_terminal_cancellation/goal-final.png"
+        },
+        {
+          "status": "A",
+          "path": "docs/media/e22_routed_terminal_cancellation/goal.gif"
+        },
+        {
+          "status": "A",
+          "path": "docs/media/e22_routed_terminal_cancellation/media-completion.json"
+        },
+        {
+          "status": "A",
+          "path": "examples/e22_routed_terminal_cancellation.py"
+        },
+        {
+          "status": "A",
+          "path": "examples/render_e22_routed_terminal_cancellation.py"
+        },
+        {
+          "status": "A",
+          "path": "reports/toy_audit/api_contract/terminal_cancellation/README.md"
+        },
+        {
+          "status": "A",
+          "path": "reports/toy_audit/api_contract/terminal_cancellation/e22_terminal_cancellation_reader_v1.json"
+        },
+        {
+          "status": "A",
+          "path": "reports/toy_audit/api_contract/terminal_cancellation/e22_terminal_cancellation_reader_v1.py"
+        },
+        {
+          "status": "A",
+          "path": "reports/toy_audit/api_contract/terminal_cancellation/e22_terminal_cancellation_reader_v2.json"
+        },
+        {
+          "status": "A",
+          "path": "reports/toy_audit/api_contract/terminal_cancellation/e22_terminal_cancellation_reader_v2.py"
+        },
+        {
+          "status": "A",
+          "path": "tests/test_e22_routed_terminal_cancellation.py"
+        }
+      ],
+      "production_or_config_paths": [],
+      "current_api_provider_or_original_scorer_paths": []
+    },
+    {
+      "category": "distinct_routed_toy_question",
+      "question": "Recover an observed remote conditioning cue, with two required10%-gain comparisons and the code-blind variance bound plus paired midpoint/contrast diagnostics.",
+      "result_scope": "Published complete400-update campaign FAIL; total error reduction does not establish conditioning recovery.",
+      "reason_to_retain": "A distinct observed-input conditioning question with meaningful negative evidence.",
+      "source_concern": "New standalone public caller/protocol/docs/tests only, no package/config or current eight-case gate changes.",
+      "number": 246,
+      "title": "Add routed conditioning toy with paired convergence diagnostics",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/246",
+      "current_head_sha": "b35dee597943c95499ca4a94d3cd141bd19f8fda",
+      "base_ref": "develop",
+      "draft": false,
+      "ci_status": "NOT_PRESENT_IN_PACKET_NOT_QUERIED",
+      "current_diff_verified": true,
+      "diff_scope": "Exact local Git objects: scientific-base mergepoint to current primary-packet head. PR254 includes inherited PR246; PR247 comparison here is scientific base, not master.",
+      "changed_paths": [
+        {
+          "status": "A",
+          "path": "docs/routed_remote_conditioning_20261002.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/routed_remote_conditioning_20261002_archive/scientific_driver.py.txt"
+        },
+        {
+          "status": "A",
+          "path": "docs/routed_remote_conditioning_20261002_archive/scientific_protocol.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/routed_remote_conditioning_results_20261002.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/routed_remote_conditioning_results_20261002.md"
+        },
+        {
+          "status": "A",
+          "path": "examples/routed_remote_conditioning.py"
+        },
+        {
+          "status": "A",
+          "path": "examples/routed_remote_conditioning_protocol.json"
+        },
+        {
+          "status": "A",
+          "path": "tests/test_routed_remote_conditioning_algebra.py"
+        },
+        {
+          "status": "A",
+          "path": "tests/test_routed_remote_conditioning_public.py"
+        }
+      ],
+      "production_or_config_paths": [],
+      "current_api_provider_or_original_scorer_paths": []
+    },
+    {
+      "category": "same_question_media_followup",
+      "question": "Illustrate PR246 using its three actual held evaluations and separately labelled endpoint contrast diagnostic.",
+      "result_scope": "Same400-update original FAIL; zero new updates/draws/rescoring. Earlier contrast is unavailable, endpoint diagnostic is not a new convergence gate.",
+      "reason_to_retain": "Completes the goal-media contract for PR246; count as the same remote-cue question, not a duplicate new scientific question.",
+      "source_concern": "Stacked on PR246 branch; integrate the original caller and media follow-up together. Do not double-count inherited files.",
+      "number": 254,
+      "title": "Illustrate the remote-cue toy with actual source-bound training observations",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/254",
+      "current_head_sha": "491756abc88d04ae3afe40893c5a7d6d819b5035",
+      "base_ref": "codex/routed-remote-conditioning-publication-20261002",
+      "draft": false,
+      "ci_status": "NOT_PRESENT_IN_PACKET_NOT_QUERIED",
+      "current_diff_verified": true,
+      "diff_scope": "Exact local Git objects: scientific-base mergepoint to current primary-packet head. PR254 includes inherited PR246; PR247 comparison here is scientific base, not master.",
+      "changed_paths": [
+        {
+          "status": "A",
+          "path": "benchmarks/toy_audit/remote_conditioning_media.py"
+        },
+        {
+          "status": "A",
+          "path": "docs/routed_remote_conditioning_20261002.md"
+        },
+        {
+          "status": "A",
+          "path": "docs/routed_remote_conditioning_20261002_archive/scientific_driver.py.txt"
+        },
+        {
+          "status": "A",
+          "path": "docs/routed_remote_conditioning_20261002_archive/scientific_protocol.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/routed_remote_conditioning_results_20261002.json"
+        },
+        {
+          "status": "A",
+          "path": "docs/routed_remote_conditioning_results_20261002.md"
+        },
+        {
+          "status": "A",
+          "path": "examples/routed_remote_conditioning.py"
+        },
+        {
+          "status": "A",
+          "path": "examples/routed_remote_conditioning_protocol.json"
+        },
+        {
+          "status": "A",
+          "path": "reports/toy_audit/api_contract/pr246/README.md"
+        },
+        {
+          "status": "A",
+          "path": "reports/toy_audit/api_contract/pr246/goal.gif"
+        },
+        {
+          "status": "A",
+          "path": "reports/toy_audit/api_contract/pr246/media-checks.json"
+        },
+        {
+          "status": "A",
+          "path": "reports/toy_audit/api_contract/pr246/receipt.json"
+        },
+        {
+          "status": "A",
+          "path": "tests/test_remote_conditioning_media.py"
+        },
+        {
+          "status": "A",
+          "path": "tests/test_routed_remote_conditioning_algebra.py"
+        },
+        {
+          "status": "A",
+          "path": "tests/test_routed_remote_conditioning_public.py"
+        }
+      ],
+      "production_or_config_paths": [],
+      "current_api_provider_or_original_scorer_paths": []
+    },
+    {
+      "category": "production_optimizer_repair_outside_scope",
+      "question": "Body describes ordinary Adam scalar step counters kept on CPU, preserving parameter-device counters for capturable/fused groups.",
+      "result_scope": "Draft explicitly says do not merge. Current head object/diff is unavailable in local objects; source effects are body-level only and unverified.",
+      "reason_to_retain": "Owned production repair is outside this report/test science scope; no merge or close recommendation from this inventory.",
+      "source_concern": "Body names particlegan/k3p.py and a scalar-device test. If integrated, optimizer/source identity changes and needs an explicitly distinct future compatibility/source decision; current488b remains frozen. Body still names stale bdbb6f6a rather than actual current0c43416e.",
+      "number": 255,
+      "title": "Keep Adam scalar counters independent of ambient device",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/255",
+      "current_head_sha": "0c43416e149043d492c07d55e81d3cb98c05618d",
+      "base_ref": "develop",
+      "draft": true,
+      "ci_status": "NOT_PRESENT_IN_PACKET_NOT_QUERIED",
+      "current_diff_verified": false
+    },
+    {
+      "category": "release_integration_context",
+      "question": "Require representation support, a complete shared-config gate sequence and persistence, then applicable matched confirmation before selecting defaults.",
+      "result_scope": "WIP integration head equals develop4749, selection pending; open narrative incorporates266/267 evidence without assigning a winner.",
+      "reason_to_retain": "Keep release decision open; historical success, capacity or a passing endpoint supplies no default/fastest-family decision.",
+      "source_concern": "Targets master; it is not a new toy-source delta after4749 and must not be counted as a new scientific question.",
+      "number": 247,
+      "title": "WIP: 0.9.0 \u2014 Forge-qualified solution and research review",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/247",
+      "current_head_sha": "4749b2780add539df4bd8d2dd1d3cc9f002f77ad",
+      "base_ref": "master",
+      "draft": false,
+      "ci_status": "NOT_PRESENT_IN_PACKET_NOT_QUERIED",
+      "current_diff_verified": true,
+      "diff_scope": "Exact local Git objects: scientific-base mergepoint to current primary-packet head. PR254 includes inherited PR246; PR247 comparison here is scientific base, not master.",
+      "changed_paths": [],
+      "production_or_config_paths": [],
+      "current_api_provider_or_original_scorer_paths": []
+    }
+  ],
+  "integration_constraints": [
+    "Keep all original/current/future source cohorts, recipes, law/gates, counters and grades separate.",
+    "A newly added standalone e22 example changes the public receipt file inventory even if existing eight mathematical cases are unchanged; retain old receipt provenance and handle compatibility explicitly without automatic scientific reruns.",
+    "Do not close distinct latent-coverage, terminal-cancellation or remote-cue questions merely because they produce a FAIL.",
+    "PR254 is the media follow-up for246, not an additional question.",
+    "PR255 production repair is outside this task, remains draft/do-not-merge, and cannot be treated as a validated config repair.",
+    "Report-only266/267 add useful evidence and test wrappers; no current default, speed or master/release decision follows."
+  ]
+}

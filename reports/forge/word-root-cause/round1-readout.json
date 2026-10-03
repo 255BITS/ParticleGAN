@@ -1,0 +1,1076 @@
+{
+  "cost_scope": "Adapter execution, evaluation and durable state/receipt writing; source inspection, imports, archive/export and media rendering are excluded. No speed ranking.",
+  "eligible_for_default": false,
+  "historical_metadata_note": "Round 1 request envelopes retain base configuration/search annotations as ancestor provenance; executed recipes and candidate_revision bind the new arms. Round 2 strips these annotations from the diagnostic candidate. No historical receipt is changed.",
+  "id": "word-root-cause-parameter-round1-v1",
+  "paid_adapter_seconds": 1400.7750152228982,
+  "prediction_results": [
+    {
+      "falsifier": "Neither low-rate clean/full K3P nor KA2 has five terminalpasses.",
+      "falsifier_triggered": true,
+      "id": "clean-long-optimization-bundle",
+      "limits": "Noise and horizon are a bundle, not isolated single-factor causal proof.",
+      "observed_passing_arms": [],
+      "prediction": "At least one low-rate clean/full K3P or KA2 arm has >=5 consecutive terminal passes on the unchanged full word gate.",
+      "prediction_met": false,
+      "question": "Does removing fake-output support mismatch and restoring the full network schedule improve the two current word failures?"
+    },
+    {
+      "falsifier": "All three R1/R2 rate arms fail.",
+      "falsifier_triggered": false,
+      "id": "existing-r1r2-capacity",
+      "limits": "Its original beta2 and gamma schedules remain fixed; no claim of global impossibility.",
+      "observed_passing_arms": [
+        "r1r2-low-rate-fast-roles",
+        "r1r2-mid-rate-fast-roles",
+        "r1r2-low-rate-original-roles"
+      ],
+      "prediction": "At least one of its three frozen rate arms passes the unchanged sustained gate.",
+      "prediction_met": true,
+      "question": "Can current R1/R2 learn the same joint/inverse problem through role-rate settings alone?"
+    }
+  ],
+  "protocol": {
+    "path": "reports/forge/word-root-cause/round1-protocol.json",
+    "sha256": "1bfe08d9b07f6a2d69d8bca6f3a51c42cbe1ba571b1ba2d82107a206b19ce760"
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "reserved_seconds": 8100,
+  "results_in_protocol_order": [
+    {
+      "a2": {
+        "applied": 0,
+        "calls": 20001,
+        "eligible": 0,
+        "enabled": true,
+        "probe": {
+          "kind": "synthetic_public_component",
+          "measurements": {
+            "damping_branch_applied": true,
+            "initial_sparse_history_total": 8,
+            "optimizer_updates": 2
+          },
+          "status": "PASS",
+          "synthetic_state": true,
+          "training_evidence": false
+        },
+        "reason": "host conditions did not activate the branch; targeted component check required",
+        "requested": true
+      },
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": null,
+        "first_pass_step": null,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 0,
+        "passing_suffix": 0,
+        "stable_from_seconds": null,
+        "stable_from_step": null
+      },
+      "cost": {
+        "adapter_loop_seconds": 149.01589733897708,
+        "completed_steps": 20001,
+        "optimizer_updates": {
+          "discriminator": 20001,
+          "encoder": 20001,
+          "generator": 20001,
+          "prior": 20001
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 145.11342496122234,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 25,
+              "seconds": 0.38717105088289827
+            },
+            "sampling": {
+              "calls": 0,
+              "seconds": 0
+            },
+            "training_updates": {
+              "calls": 20001,
+              "seconds": 144.72625391033944
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "reservation_seconds": 900,
+        "wall_seconds": 149.23373897298006
+      },
+      "family": "k3p",
+      "final_metrics": {
+        "completed_steps": 20001.0,
+        "mass_apple": 0.0,
+        "mass_berry": 0.4111328125,
+        "mass_grape": 0.0,
+        "mass_lemon": 0.3798828125,
+        "mass_melon": 0.0,
+        "mass_tv": 0.6,
+        "minimum_reconstruction_token_probability": 2.6647054340855902e-08,
+        "modes": 2,
+        "output_noise_added": 0.0,
+        "policy_latent_perturbation": 0.0,
+        "quality_fraction": 0.791015625,
+        "reconstruction_exact": 0,
+        "reconstruction_nll": 5.478310870601314,
+        "sample_count": 1024,
+        "served_averaged": 0.0,
+        "step": 20001
+      },
+      "grade": "FAIL",
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "optimizer_updates": {
+          "discriminator": 20001,
+          "encoder": 20001,
+          "generator": 20001,
+          "prior": 20001
+        },
+        "unintended_rng_deviations": 0
+      },
+      "id": "k3p-clean-full-low-rate",
+      "initial_hashes": {
+        "discriminator": "ac8796a85dc03a00c4499f92651bc0979963cf9638c2386bea14a9aaea289aab",
+        "encoder": "0e3c299f9cf1cd51e2974befafd12be08c15b1c2ce0d80f4e881aa07578c0f88",
+        "generator": "47d3b0dd73d03fbde55bd2d6a803fe38ab8b09a5b86658f452c19194df3b85b3",
+        "prior": "79eca3b55337f9e32cd3c5d276de19d25f03ae0026b9d4535f68b2c2fa299b89"
+      },
+      "receipt": {
+        "path": "reports/forge/word-root-cause/receipts/k3p-clean-full-low-rate.json",
+        "sha256": "1df9ef49a590ad4475abab6f4e70e51fd91e0f8c9ed2414a8d421cf6cee04863"
+      },
+      "recipe_delta": {
+        "d_lr_mult": 1.5,
+        "input_noise_std": 0.0,
+        "lr": 0.0006,
+        "network_lr_horizon_cap": null,
+        "output_noise_std": 0.0,
+        "prior_lr_mult": 2.0
+      },
+      "rng_manifest_sha256": "f05fb42ef7b73cb88e33df87711073ddcea840933f0210c9dfefb8ed59685868",
+      "source_commit": "ecc2dc8f48b7f2d3efa86412334d51c1afd0b9e0",
+      "source_digest": "a243817e934a3b889bc5233f804db3079e4f2dd3f7b1311edd1012434dd807d0",
+      "task_fingerprint": "99ff2ff6cdc71cc37f2b708e08a3a514f873d6c2dd3d112c76689140ba8b2837"
+    },
+    {
+      "a2": {
+        "applied": 0,
+        "calls": 20001,
+        "eligible": 0,
+        "enabled": true,
+        "probe": {
+          "kind": "synthetic_public_component",
+          "measurements": {
+            "damping_branch_applied": true,
+            "initial_sparse_history_total": 8,
+            "optimizer_updates": 2
+          },
+          "status": "PASS",
+          "synthetic_state": true,
+          "training_evidence": false
+        },
+        "reason": "host conditions did not activate the branch; targeted component check required",
+        "requested": true
+      },
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": null,
+        "first_pass_step": null,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 0,
+        "passing_suffix": 0,
+        "stable_from_seconds": null,
+        "stable_from_step": null
+      },
+      "cost": {
+        "adapter_loop_seconds": 177.6138688949868,
+        "completed_steps": 20001,
+        "optimizer_updates": {
+          "discriminator": 20001,
+          "encoder": 20001,
+          "generator": 20001,
+          "prior": 20001
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 172.90366235445254,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 25,
+              "seconds": 0.42660137492930517
+            },
+            "sampling": {
+              "calls": 0,
+              "seconds": 0
+            },
+            "training_updates": {
+              "calls": 20001,
+              "seconds": 172.47706097952323
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "reservation_seconds": 900,
+        "wall_seconds": 177.82825104997028
+      },
+      "family": "k3p",
+      "final_metrics": {
+        "completed_steps": 20001.0,
+        "mass_apple": 0.0,
+        "mass_berry": 0.0,
+        "mass_grape": 0.0,
+        "mass_lemon": 0.0,
+        "mass_melon": 0.0,
+        "mass_tv": 1.0,
+        "minimum_reconstruction_token_probability": 0.0,
+        "modes": 0,
+        "output_noise_added": 0.0,
+        "policy_latent_perturbation": 0.0,
+        "quality_fraction": 0.0,
+        "reconstruction_exact": 0,
+        "reconstruction_nll": 17.499646706754746,
+        "sample_count": 1024,
+        "served_averaged": 0.0,
+        "step": 20001
+      },
+      "grade": "FAIL",
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "optimizer_updates": {
+          "discriminator": 20001,
+          "encoder": 20001,
+          "generator": 20001,
+          "prior": 20001
+        },
+        "unintended_rng_deviations": 0
+      },
+      "id": "k3p-clean-full-original-rate",
+      "initial_hashes": {
+        "discriminator": "ac8796a85dc03a00c4499f92651bc0979963cf9638c2386bea14a9aaea289aab",
+        "encoder": "0e3c299f9cf1cd51e2974befafd12be08c15b1c2ce0d80f4e881aa07578c0f88",
+        "generator": "47d3b0dd73d03fbde55bd2d6a803fe38ab8b09a5b86658f452c19194df3b85b3",
+        "prior": "79eca3b55337f9e32cd3c5d276de19d25f03ae0026b9d4535f68b2c2fa299b89"
+      },
+      "receipt": {
+        "path": "reports/forge/word-root-cause/receipts/k3p-clean-full-original-rate.json",
+        "sha256": "51bf3b85ff196ec7c2e103a1644caf536e269db0887560fe9cfb52e83942b4f2"
+      },
+      "recipe_delta": {
+        "input_noise_std": 0.0,
+        "network_lr_horizon_cap": null,
+        "output_noise_std": 0.0
+      },
+      "rng_manifest_sha256": "f05fb42ef7b73cb88e33df87711073ddcea840933f0210c9dfefb8ed59685868",
+      "source_commit": "ecc2dc8f48b7f2d3efa86412334d51c1afd0b9e0",
+      "source_digest": "a243817e934a3b889bc5233f804db3079e4f2dd3f7b1311edd1012434dd807d0",
+      "task_fingerprint": "99ff2ff6cdc71cc37f2b708e08a3a514f873d6c2dd3d112c76689140ba8b2837"
+    },
+    {
+      "a2": {
+        "applied": 0,
+        "calls": 20001,
+        "eligible": 0,
+        "enabled": true,
+        "probe": {
+          "kind": "synthetic_public_component",
+          "measurements": {
+            "damping_branch_applied": true,
+            "initial_sparse_history_total": 8,
+            "optimizer_updates": 2
+          },
+          "status": "PASS",
+          "synthetic_state": true,
+          "training_evidence": false
+        },
+        "reason": "host conditions did not activate the branch; targeted component check required",
+        "requested": true
+      },
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": null,
+        "first_pass_step": null,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 0,
+        "passing_suffix": 0,
+        "stable_from_seconds": null,
+        "stable_from_step": null
+      },
+      "cost": {
+        "adapter_loop_seconds": 165.90468994999537,
+        "completed_steps": 20001,
+        "optimizer_updates": {
+          "discriminator": 20001,
+          "encoder": 20001,
+          "generator": 20001,
+          "prior": 20001
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 161.87453007965814,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 25,
+              "seconds": 0.4188125288928859
+            },
+            "sampling": {
+              "calls": 0,
+              "seconds": 0
+            },
+            "training_updates": {
+              "calls": 20001,
+              "seconds": 161.45571755076526
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "reservation_seconds": 900,
+        "wall_seconds": 166.12718254199717
+      },
+      "family": "k3p",
+      "final_metrics": {
+        "completed_steps": 20001.0,
+        "mass_apple": 0.201171875,
+        "mass_berry": 0.208984375,
+        "mass_grape": 0.0,
+        "mass_lemon": 0.4140625,
+        "mass_melon": 0.17578125,
+        "mass_tv": 0.22421875,
+        "minimum_reconstruction_token_probability": 0.00013700609270017594,
+        "modes": 4,
+        "output_noise_added": 0.0,
+        "policy_latent_perturbation": 0.0,
+        "quality_fraction": 1.0,
+        "reconstruction_exact": 0,
+        "reconstruction_nll": 0.8589650056841569,
+        "sample_count": 1024,
+        "served_averaged": 0.0,
+        "step": 20001
+      },
+      "grade": "FAIL",
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "optimizer_updates": {
+          "discriminator": 20001,
+          "encoder": 20001,
+          "generator": 20001,
+          "prior": 20001
+        },
+        "unintended_rng_deviations": 0
+      },
+      "id": "k3p-low-rate-original-noise",
+      "initial_hashes": {
+        "discriminator": "ac8796a85dc03a00c4499f92651bc0979963cf9638c2386bea14a9aaea289aab",
+        "encoder": "0e3c299f9cf1cd51e2974befafd12be08c15b1c2ce0d80f4e881aa07578c0f88",
+        "generator": "47d3b0dd73d03fbde55bd2d6a803fe38ab8b09a5b86658f452c19194df3b85b3",
+        "prior": "79eca3b55337f9e32cd3c5d276de19d25f03ae0026b9d4535f68b2c2fa299b89"
+      },
+      "receipt": {
+        "path": "reports/forge/word-root-cause/receipts/k3p-low-rate-original-noise.json",
+        "sha256": "6fa40bd34c044810f4617d6b2a91b3d0939b8a831de28b5c2034803561b3185f"
+      },
+      "recipe_delta": {
+        "d_lr_mult": 1.5,
+        "lr": 0.0006,
+        "prior_lr_mult": 2.0
+      },
+      "rng_manifest_sha256": "f05fb42ef7b73cb88e33df87711073ddcea840933f0210c9dfefb8ed59685868",
+      "source_commit": "ecc2dc8f48b7f2d3efa86412334d51c1afd0b9e0",
+      "source_digest": "a243817e934a3b889bc5233f804db3079e4f2dd3f7b1311edd1012434dd807d0",
+      "task_fingerprint": "99ff2ff6cdc71cc37f2b708e08a3a514f873d6c2dd3d112c76689140ba8b2837"
+    },
+    {
+      "a2": {
+        "applied": 0,
+        "calls": 20001,
+        "eligible": 0,
+        "enabled": true,
+        "probe": {
+          "kind": "synthetic_public_component",
+          "measurements": {
+            "damping_branch_applied": true,
+            "initial_sparse_history_total": 8,
+            "optimizer_updates": 2
+          },
+          "status": "PASS",
+          "synthetic_state": true,
+          "training_evidence": false
+        },
+        "reason": "host conditions did not activate the branch; targeted component check required",
+        "requested": true
+      },
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": null,
+        "first_pass_step": null,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 0,
+        "passing_suffix": 0,
+        "stable_from_seconds": null,
+        "stable_from_step": null
+      },
+      "cost": {
+        "adapter_loop_seconds": 181.54190533194924,
+        "completed_steps": 20001,
+        "optimizer_updates": {
+          "discriminator": 20001,
+          "encoder": 20001,
+          "generator": 20001,
+          "prior": 20001
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 177.52090586500708,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 25,
+              "seconds": 0.4112282342975959
+            },
+            "sampling": {
+              "calls": 0,
+              "seconds": 0
+            },
+            "training_updates": {
+              "calls": 20001,
+              "seconds": 177.10967763070948
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "reservation_seconds": 900,
+        "wall_seconds": 181.7703672599746
+      },
+      "family": "ka2",
+      "final_metrics": {
+        "completed_steps": 20001.0,
+        "mass_apple": 0.2099609375,
+        "mass_berry": 0.0,
+        "mass_grape": 0.17578125,
+        "mass_lemon": 0.2041015625,
+        "mass_melon": 0.208984375,
+        "mass_tv": 0.22421875,
+        "minimum_reconstruction_token_probability": 1.8521857381159634e-09,
+        "modes": 4,
+        "output_noise_added": 0.0,
+        "policy_latent_perturbation": 0.0,
+        "quality_fraction": 0.798828125,
+        "reconstruction_exact": 0,
+        "reconstruction_nll": 0.6704275641343094,
+        "sample_count": 1024,
+        "served_averaged": 0.0,
+        "step": 20001
+      },
+      "grade": "FAIL",
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "optimizer_updates": {
+          "discriminator": 20001,
+          "encoder": 20001,
+          "generator": 20001,
+          "prior": 20001
+        },
+        "unintended_rng_deviations": 0
+      },
+      "id": "ka2-clean-full-low-rate",
+      "initial_hashes": {
+        "discriminator": "ac8796a85dc03a00c4499f92651bc0979963cf9638c2386bea14a9aaea289aab",
+        "encoder": "0e3c299f9cf1cd51e2974befafd12be08c15b1c2ce0d80f4e881aa07578c0f88",
+        "generator": "47d3b0dd73d03fbde55bd2d6a803fe38ab8b09a5b86658f452c19194df3b85b3",
+        "prior": "79eca3b55337f9e32cd3c5d276de19d25f03ae0026b9d4535f68b2c2fa299b89"
+      },
+      "receipt": {
+        "path": "reports/forge/word-root-cause/receipts/ka2-clean-full-low-rate.json",
+        "sha256": "96afc81051be801bba6c03e533830c5c9dbf9b253ac279248c5029009b4a7a1a"
+      },
+      "recipe_delta": {
+        "d_lr_mult": 1.5,
+        "input_noise_std": 0.0,
+        "lr": 0.0006,
+        "network_lr_horizon_cap": null,
+        "output_noise_std": 0.0,
+        "prior_lr_mult": 2.0
+      },
+      "rng_manifest_sha256": "f05fb42ef7b73cb88e33df87711073ddcea840933f0210c9dfefb8ed59685868",
+      "source_commit": "ecc2dc8f48b7f2d3efa86412334d51c1afd0b9e0",
+      "source_digest": "22308b845a9c7b566c402e4972b1c06098745c1d79bae00e17e33523e08ceb92",
+      "task_fingerprint": "99ff2ff6cdc71cc37f2b708e08a3a514f873d6c2dd3d112c76689140ba8b2837"
+    },
+    {
+      "a2": {
+        "applied": 0,
+        "calls": 20001,
+        "eligible": 0,
+        "enabled": true,
+        "probe": {
+          "kind": "synthetic_public_component",
+          "measurements": {
+            "damping_branch_applied": true,
+            "initial_sparse_history_total": 8,
+            "optimizer_updates": 2
+          },
+          "status": "PASS",
+          "synthetic_state": true,
+          "training_evidence": false
+        },
+        "reason": "host conditions did not activate the branch; targeted component check required",
+        "requested": true
+      },
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": null,
+        "first_pass_step": null,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 0,
+        "passing_suffix": 0,
+        "stable_from_seconds": null,
+        "stable_from_step": null
+      },
+      "cost": {
+        "adapter_loop_seconds": 175.98262299696216,
+        "completed_steps": 20001,
+        "optimizer_updates": {
+          "discriminator": 20001,
+          "encoder": 20001,
+          "generator": 20001,
+          "prior": 20001
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 172.09138168330537,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 25,
+              "seconds": 0.4027363948407583
+            },
+            "sampling": {
+              "calls": 0,
+              "seconds": 0
+            },
+            "training_updates": {
+              "calls": 20001,
+              "seconds": 171.6886452884646
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "reservation_seconds": 900,
+        "wall_seconds": 176.20065547100967
+      },
+      "family": "ka2",
+      "final_metrics": {
+        "completed_steps": 20001.0,
+        "mass_apple": 0.0,
+        "mass_berry": 0.0,
+        "mass_grape": 0.6142578125,
+        "mass_lemon": 0.0,
+        "mass_melon": 0.0,
+        "mass_tv": 0.7999999999999999,
+        "minimum_reconstruction_token_probability": 0.0,
+        "modes": 1,
+        "output_noise_added": 0.0,
+        "policy_latent_perturbation": 0.0,
+        "quality_fraction": 0.6142578125,
+        "reconstruction_exact": 0,
+        "reconstruction_nll": 14.736544595161892,
+        "sample_count": 1024,
+        "served_averaged": 0.0,
+        "step": 20001
+      },
+      "grade": "FAIL",
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "optimizer_updates": {
+          "discriminator": 20001,
+          "encoder": 20001,
+          "generator": 20001,
+          "prior": 20001
+        },
+        "unintended_rng_deviations": 0
+      },
+      "id": "ka2-clean-full-original-rate",
+      "initial_hashes": {
+        "discriminator": "ac8796a85dc03a00c4499f92651bc0979963cf9638c2386bea14a9aaea289aab",
+        "encoder": "0e3c299f9cf1cd51e2974befafd12be08c15b1c2ce0d80f4e881aa07578c0f88",
+        "generator": "47d3b0dd73d03fbde55bd2d6a803fe38ab8b09a5b86658f452c19194df3b85b3",
+        "prior": "79eca3b55337f9e32cd3c5d276de19d25f03ae0026b9d4535f68b2c2fa299b89"
+      },
+      "receipt": {
+        "path": "reports/forge/word-root-cause/receipts/ka2-clean-full-original-rate.json",
+        "sha256": "328237bd975b638bc0e3cc89aaf06c65360b4b3be73b672f79c56173e36813d2"
+      },
+      "recipe_delta": {
+        "input_noise_std": 0.0,
+        "network_lr_horizon_cap": null,
+        "output_noise_std": 0.0
+      },
+      "rng_manifest_sha256": "f05fb42ef7b73cb88e33df87711073ddcea840933f0210c9dfefb8ed59685868",
+      "source_commit": "ecc2dc8f48b7f2d3efa86412334d51c1afd0b9e0",
+      "source_digest": "22308b845a9c7b566c402e4972b1c06098745c1d79bae00e17e33523e08ceb92",
+      "task_fingerprint": "99ff2ff6cdc71cc37f2b708e08a3a514f873d6c2dd3d112c76689140ba8b2837"
+    },
+    {
+      "a2": {
+        "applied": 0,
+        "calls": 20001,
+        "eligible": 0,
+        "enabled": true,
+        "probe": {
+          "kind": "synthetic_public_component",
+          "measurements": {
+            "damping_branch_applied": true,
+            "initial_sparse_history_total": 8,
+            "optimizer_updates": 2
+          },
+          "status": "PASS",
+          "synthetic_state": true,
+          "training_evidence": false
+        },
+        "reason": "host conditions did not activate the branch; targeted component check required",
+        "requested": true
+      },
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": null,
+        "first_pass_step": null,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 0,
+        "passing_suffix": 0,
+        "stable_from_seconds": null,
+        "stable_from_step": null
+      },
+      "cost": {
+        "adapter_loop_seconds": 178.8428922899766,
+        "completed_steps": 20001,
+        "optimizer_updates": {
+          "discriminator": 20001,
+          "encoder": 20001,
+          "generator": 20001,
+          "prior": 20001
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 174.92457233933965,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 25,
+              "seconds": 0.40002606593770906
+            },
+            "sampling": {
+              "calls": 0,
+              "seconds": 0
+            },
+            "training_updates": {
+              "calls": 20001,
+              "seconds": 174.52454627340194
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "reservation_seconds": 900,
+        "wall_seconds": 179.05430496297777
+      },
+      "family": "ka2",
+      "final_metrics": {
+        "completed_steps": 20001.0,
+        "mass_apple": 0.17578125,
+        "mass_berry": 0.201171875,
+        "mass_grape": 0.0,
+        "mass_lemon": 0.4189453125,
+        "mass_melon": 0.2041015625,
+        "mass_tv": 0.22421875,
+        "minimum_reconstruction_token_probability": 0.0010792616521939635,
+        "modes": 4,
+        "output_noise_added": 0.0,
+        "policy_latent_perturbation": 0.0,
+        "quality_fraction": 1.0,
+        "reconstruction_exact": 0,
+        "reconstruction_nll": 0.8217741922530735,
+        "sample_count": 1024,
+        "served_averaged": 0.0,
+        "step": 20001
+      },
+      "grade": "FAIL",
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "optimizer_updates": {
+          "discriminator": 20001,
+          "encoder": 20001,
+          "generator": 20001,
+          "prior": 20001
+        },
+        "unintended_rng_deviations": 0
+      },
+      "id": "ka2-low-rate-original-noise",
+      "initial_hashes": {
+        "discriminator": "ac8796a85dc03a00c4499f92651bc0979963cf9638c2386bea14a9aaea289aab",
+        "encoder": "0e3c299f9cf1cd51e2974befafd12be08c15b1c2ce0d80f4e881aa07578c0f88",
+        "generator": "47d3b0dd73d03fbde55bd2d6a803fe38ab8b09a5b86658f452c19194df3b85b3",
+        "prior": "79eca3b55337f9e32cd3c5d276de19d25f03ae0026b9d4535f68b2c2fa299b89"
+      },
+      "receipt": {
+        "path": "reports/forge/word-root-cause/receipts/ka2-low-rate-original-noise.json",
+        "sha256": "1e1ee50466041e0cdbb67c8b1ec5733f25d17a5c7b56daa77f3518b00accf2d1"
+      },
+      "recipe_delta": {
+        "d_lr_mult": 1.5,
+        "lr": 0.0006,
+        "prior_lr_mult": 2.0
+      },
+      "rng_manifest_sha256": "f05fb42ef7b73cb88e33df87711073ddcea840933f0210c9dfefb8ed59685868",
+      "source_commit": "ecc2dc8f48b7f2d3efa86412334d51c1afd0b9e0",
+      "source_digest": "22308b845a9c7b566c402e4972b1c06098745c1d79bae00e17e33523e08ceb92",
+      "task_fingerprint": "99ff2ff6cdc71cc37f2b708e08a3a514f873d6c2dd3d112c76689140ba8b2837"
+    },
+    {
+      "a2": {
+        "applied": 0,
+        "calls": 0,
+        "eligible": 0,
+        "enabled": false,
+        "reason": "disabled by the declared formulation; no activation claimed",
+        "requested": false
+      },
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": 19168,
+        "first_pass_step": 834,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 22,
+        "passing_suffix": 6,
+        "stable_from_seconds": null,
+        "stable_from_step": 15835
+      },
+      "cost": {
+        "adapter_loop_seconds": 123.10934570303652,
+        "completed_steps": 20001,
+        "optimizer_updates": {
+          "discriminator": 20001,
+          "encoder": 20001,
+          "generator": 20001,
+          "prior": 20001
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 119.13478023564676,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 25,
+              "seconds": 0.39589940704172477
+            },
+            "sampling": {
+              "calls": 0,
+              "seconds": 0
+            },
+            "training_updates": {
+              "calls": 20001,
+              "seconds": 118.73888082860503
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "reservation_seconds": 900,
+        "wall_seconds": 123.3147951120045
+      },
+      "family": "r1r2",
+      "final_metrics": {
+        "completed_steps": 20001.0,
+        "mass_apple": 0.201171875,
+        "mass_berry": 0.17578125,
+        "mass_grape": 0.2099609375,
+        "mass_lemon": 0.2041015625,
+        "mass_melon": 0.208984375,
+        "mass_tv": 0.024218749999999983,
+        "minimum_reconstruction_token_probability": 0.997265100479126,
+        "modes": 5,
+        "output_noise_added": 0.0,
+        "policy_latent_perturbation": 0.0,
+        "quality_fraction": 1.0,
+        "reconstruction_exact": 1,
+        "reconstruction_nll": 0.0001727575035549244,
+        "sample_count": 1024,
+        "served_averaged": 0.0,
+        "step": 20001
+      },
+      "grade": "PASS",
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "optimizer_updates": {
+          "discriminator": 20001,
+          "encoder": 20001,
+          "generator": 20001,
+          "prior": 20001
+        },
+        "unintended_rng_deviations": 0
+      },
+      "id": "r1r2-low-rate-fast-roles",
+      "initial_hashes": {
+        "discriminator": "ac8796a85dc03a00c4499f92651bc0979963cf9638c2386bea14a9aaea289aab",
+        "encoder": "0e3c299f9cf1cd51e2974befafd12be08c15b1c2ce0d80f4e881aa07578c0f88",
+        "generator": "47d3b0dd73d03fbde55bd2d6a803fe38ab8b09a5b86658f452c19194df3b85b3",
+        "prior": "79eca3b55337f9e32cd3c5d276de19d25f03ae0026b9d4535f68b2c2fa299b89"
+      },
+      "receipt": {
+        "path": "reports/forge/word-root-cause/receipts/r1r2-low-rate-fast-roles.json",
+        "sha256": "a5cadc9b59174dc939471acc9c452e388984a63c971ac5c3458ae01a174d302f"
+      },
+      "recipe_delta": {
+        "d_lr_mult": 1.5,
+        "lr": 0.0006,
+        "prior_lr_mult": 2.0
+      },
+      "rng_manifest_sha256": "f05fb42ef7b73cb88e33df87711073ddcea840933f0210c9dfefb8ed59685868",
+      "source_commit": "ecc2dc8f48b7f2d3efa86412334d51c1afd0b9e0",
+      "source_digest": "7a93dcd9515a0ffa1e92853d92fb304e30556332c424c4b3e2ac1fd763e62cc3",
+      "task_fingerprint": "99ff2ff6cdc71cc37f2b708e08a3a514f873d6c2dd3d112c76689140ba8b2837"
+    },
+    {
+      "a2": {
+        "applied": 0,
+        "calls": 0,
+        "eligible": 0,
+        "enabled": false,
+        "reason": "disabled by the declared formulation; no activation claimed",
+        "requested": false
+      },
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": 5834,
+        "first_pass_step": 834,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 23,
+        "passing_suffix": 22,
+        "stable_from_seconds": null,
+        "stable_from_step": 2501
+      },
+      "cost": {
+        "adapter_loop_seconds": 122.85520773200551,
+        "completed_steps": 20001,
+        "optimizer_updates": {
+          "discriminator": 20001,
+          "encoder": 20001,
+          "generator": 20001,
+          "prior": 20001
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 118.90539606963284,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 25,
+              "seconds": 0.39932316297199577
+            },
+            "sampling": {
+              "calls": 0,
+              "seconds": 0
+            },
+            "training_updates": {
+              "calls": 20001,
+              "seconds": 118.50607290666085
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "reservation_seconds": 900,
+        "wall_seconds": 123.07015241100453
+      },
+      "family": "r1r2",
+      "final_metrics": {
+        "completed_steps": 20001.0,
+        "mass_apple": 0.201171875,
+        "mass_berry": 0.17578125,
+        "mass_grape": 0.2099609375,
+        "mass_lemon": 0.2041015625,
+        "mass_melon": 0.208984375,
+        "mass_tv": 0.024218749999999983,
+        "minimum_reconstruction_token_probability": 0.9961368441581726,
+        "modes": 5,
+        "output_noise_added": 0.0,
+        "policy_latent_perturbation": 0.0,
+        "quality_fraction": 1.0,
+        "reconstruction_exact": 1,
+        "reconstruction_nll": 0.0001700372792314255,
+        "sample_count": 1024,
+        "served_averaged": 0.0,
+        "step": 20001
+      },
+      "grade": "PASS",
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "optimizer_updates": {
+          "discriminator": 20001,
+          "encoder": 20001,
+          "generator": 20001,
+          "prior": 20001
+        },
+        "unintended_rng_deviations": 0
+      },
+      "id": "r1r2-mid-rate-fast-roles",
+      "initial_hashes": {
+        "discriminator": "ac8796a85dc03a00c4499f92651bc0979963cf9638c2386bea14a9aaea289aab",
+        "encoder": "0e3c299f9cf1cd51e2974befafd12be08c15b1c2ce0d80f4e881aa07578c0f88",
+        "generator": "47d3b0dd73d03fbde55bd2d6a803fe38ab8b09a5b86658f452c19194df3b85b3",
+        "prior": "79eca3b55337f9e32cd3c5d276de19d25f03ae0026b9d4535f68b2c2fa299b89"
+      },
+      "receipt": {
+        "path": "reports/forge/word-root-cause/receipts/r1r2-mid-rate-fast-roles.json",
+        "sha256": "f6bea957a6eb13ef2ec377b576773de4cf66b30b721fefb8b202747d12c5adfd"
+      },
+      "recipe_delta": {
+        "d_lr_mult": 1.5,
+        "lr": 0.0012,
+        "prior_lr_mult": 2.0
+      },
+      "rng_manifest_sha256": "f05fb42ef7b73cb88e33df87711073ddcea840933f0210c9dfefb8ed59685868",
+      "source_commit": "ecc2dc8f48b7f2d3efa86412334d51c1afd0b9e0",
+      "source_digest": "7a93dcd9515a0ffa1e92853d92fb304e30556332c424c4b3e2ac1fd763e62cc3",
+      "task_fingerprint": "99ff2ff6cdc71cc37f2b708e08a3a514f873d6c2dd3d112c76689140ba8b2837"
+    },
+    {
+      "a2": {
+        "applied": 0,
+        "calls": 0,
+        "eligible": 0,
+        "enabled": false,
+        "reason": "disabled by the declared formulation; no activation claimed",
+        "requested": false
+      },
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": 16668,
+        "first_pass_step": 834,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 22,
+        "passing_suffix": 9,
+        "stable_from_seconds": null,
+        "stable_from_step": 13334
+      },
+      "cost": {
+        "adapter_loop_seconds": 123.95234347495716,
+        "completed_steps": 20001,
+        "optimizer_updates": {
+          "discriminator": 20001,
+          "encoder": 20001,
+          "generator": 20001,
+          "prior": 20001
+        },
+        "phase_timing": {
+          "coverage": "partial_adapter",
+          "measured_seconds": 119.94231640774524,
+          "method": "exclusive_synchronized_wall_time",
+          "phases": {
+            "evaluation": {
+              "calls": 25,
+              "seconds": 0.3964662487851456
+            },
+            "sampling": {
+              "calls": 0,
+              "seconds": 0
+            },
+            "training_updates": {
+              "calls": 20001,
+              "seconds": 119.54585015896009
+            }
+          },
+          "scope": "Training updates exclude input preparation; evaluation includes metrics and its artifact I/O but excludes separately measured sampling."
+        },
+        "reservation_seconds": 900,
+        "wall_seconds": 124.17556744097965
+      },
+      "family": "r1r2",
+      "final_metrics": {
+        "completed_steps": 20001.0,
+        "mass_apple": 0.201171875,
+        "mass_berry": 0.17578125,
+        "mass_grape": 0.2099609375,
+        "mass_lemon": 0.2041015625,
+        "mass_melon": 0.208984375,
+        "mass_tv": 0.024218749999999983,
+        "minimum_reconstruction_token_probability": 0.9976648092269897,
+        "modes": 5,
+        "output_noise_added": 0.0,
+        "policy_latent_perturbation": 0.0,
+        "quality_fraction": 1.0,
+        "reconstruction_exact": 1,
+        "reconstruction_nll": 0.0001542604390991672,
+        "sample_count": 1024,
+        "served_averaged": 0.0,
+        "step": 20001
+      },
+      "grade": "PASS",
+      "guards": {
+        "all_finite": true,
+        "hooks_exercised": true,
+        "optimizer_updates": {
+          "discriminator": 20001,
+          "encoder": 20001,
+          "generator": 20001,
+          "prior": 20001
+        },
+        "unintended_rng_deviations": 0
+      },
+      "id": "r1r2-low-rate-original-roles",
+      "initial_hashes": {
+        "discriminator": "ac8796a85dc03a00c4499f92651bc0979963cf9638c2386bea14a9aaea289aab",
+        "encoder": "0e3c299f9cf1cd51e2974befafd12be08c15b1c2ce0d80f4e881aa07578c0f88",
+        "generator": "47d3b0dd73d03fbde55bd2d6a803fe38ab8b09a5b86658f452c19194df3b85b3",
+        "prior": "79eca3b55337f9e32cd3c5d276de19d25f03ae0026b9d4535f68b2c2fa299b89"
+      },
+      "receipt": {
+        "path": "reports/forge/word-root-cause/receipts/r1r2-low-rate-original-roles.json",
+        "sha256": "2f35ad65ed5baffdd822692e94b2921b0d2b8aaeed97b0895d54a1000471a12a"
+      },
+      "recipe_delta": {
+        "lr": 0.0006
+      },
+      "rng_manifest_sha256": "f05fb42ef7b73cb88e33df87711073ddcea840933f0210c9dfefb8ed59685868",
+      "source_commit": "ecc2dc8f48b7f2d3efa86412334d51c1afd0b9e0",
+      "source_digest": "7a93dcd9515a0ffa1e92853d92fb304e30556332c424c4b3e2ac1fd763e62cc3",
+      "task_fingerprint": "99ff2ff6cdc71cc37f2b708e08a3a514f873d6c2dd3d112c76689140ba8b2837"
+    }
+  ],
+  "schema_version": 1,
+  "scope": "User-authorized parameter-only diagnosis and repair of existing K3P, KA2 and R1/R2 on the unchanged finite-word joint generator/inverse question. Standalone diagnostic reaches the word task directly; no main-view qualification or default adoption.",
+  "source_commits": [
+    "ecc2dc8f48b7f2d3efa86412334d51c1afd0b9e0"
+  ],
+  "source_digests": [
+    "22308b845a9c7b566c402e4972b1c06098745c1d79bae00e17e33523e08ceb92",
+    "7a93dcd9515a0ffa1e92853d92fb304e30556332c424c4b3e2ac1fd763e62cc3",
+    "a243817e934a3b889bc5233f804db3079e4f2dd3f7b1311edd1012434dd807d0"
+  ]
+}

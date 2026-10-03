@@ -1,0 +1,28 @@
+{
+  "budgets": {
+    "campaign_seconds": 3600,
+    "candidate_seconds": 3600,
+    "task_seconds": {
+      "grid100_affine_square_named_v1": 3600
+    }
+  },
+  "cuda_model": "NVIDIA RTX A6000",
+  "execution_backend": "cuda",
+  "failure_policy": "continue_registered_diagnostics",
+  "id": "host-profile-a2-off-native-v1",
+  "profile": "host-profile-a2-off-v1",
+  "profile_sha256": "5ab83d98bbbdca3b03fa538333ff5811b1e4553bb89cc2b034d0a26c82cb056a",
+  "purpose": "One bounded A2-off mechanism diagnostic paired with the existing certified K3P grid receipt, using source 5c9c929877c141ccf7352c16987d3a5aadf1aff3a0fedbfa78e7d9b8fe06fdb7. Only latent_damping_max_rate changes from 0.5 to 0; its required A2 capability is removed. Preserve seed 0, named affine/Xavier/uniform initialization, learned-MoG sigma 0.025, 7000 updates, clean live scoring, all five terminal checks and independent 100000-sample holdout. No predicted positive, whole-reference certificate, adoption or ordinary qualification credit. Select no other task or candidate; inspect this diagnostic before any further study.",
+  "qualification_reuse": false,
+  "schema_version": 1,
+  "selections": [
+    {
+      "lineage_id": "k3p-a2-off-native-diagnostic",
+      "reason": "Isolate the active sparse-row damping on the current native shape failure; prior evidence supports a controlled diagnostic, not a predicted positive.",
+      "tasks": [
+        "grid100_affine_square_named_v1"
+      ]
+    }
+  ],
+  "view": "host_profile_transfer"
+}

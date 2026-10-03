@@ -16,16 +16,19 @@ def without_name(values):
 
 
 def test_default_matches_every_recorded_winning_field():
-    # The frozen K3P config ran arm a_r1r2 under the K3P patch; the package
-    # has no arm/loss switches: K3P and RpGAN logistic are the formulation.
+    # The frozen K3P config ran arm a_r1r2 under the K3P patch. KA2 is now
+    # the default; legacy arms are explicit opt-ins and absent from its packet.
     actual = json.loads(json.dumps(get_recipe().to_dict()))
-    assert not {'reg_arm', 'loss_type', 'gan_mode', 'reg_method'} & set(actual)
+    assert not {'loss_type', 'gan_mode', 'reg_method'} & set(actual)
+    assert get_recipe().reg_arm is None and 'reg_arm' not in actual
     assert (K3P_CONFIG['loss_type'], K3P_CONFIG['gan_mode']) == ('logistic', 'rp')
-    shared = (set(actual) & set(K3P_CONFIG)) - {'name'}
+    shared = (set(actual) & set(K3P_CONFIG)) - {'name', 'reg_arm'}
     assert {key: actual[key] for key in shared} == {key: K3P_CONFIG[key] for key in shared}
     assert {'network_lr_floor', 'network_lr_horizon_cap', 'input_noise_std', 'output_noise_std',
             'output_noise_warmup', 'input_noise_anneal_end', 'batch_size', 'z_dim'} <= shared
-    assert actual['name'] == 'k3p'
+    # Same recorded fields; the critic penalty is now KA2 (K3P's fixed anchor decay is
+    # replaced by reg_anchor_min_decay, so it is not a shared field).
+    assert actual['name'] == 'ka2'
     assert get_recipe() == Recipe()
 
 
@@ -83,12 +86,21 @@ def test_named_recipe_overrides_and_small_objects():
 
 @pytest.mark.parametrize('name,overrides', [
     ('gan', dict(conditioning='ucd', num_classes=2)),
-    ('ae_gan', {}), ('vae_gan', {}), ('ddgan', {}), ('mog', {}),
+    ('ae_gan', {}), ('vae_gan', {}), ('ddgan', {}),
 ])
 def test_named_components_do_not_implicitly_choose_training_control_flow(name, overrides):
     recipe = get_recipe(name, **overrides)
     with pytest.raises(ValueError, match='unconditional scalar GANs'):
         GANTrainer(recipe, nn.Linear(recipe.z_dim, 2), nn.Linear(2, 1))
+
+
+def test_named_mog_uses_scalar_trainer_with_explicit_a2_eligibility():
+    recipe = get_recipe('mog', num_particles=8)
+    with pytest.raises(ValueError, match='standardized MoG reads couple rows'):
+        GANTrainer(recipe, nn.Linear(recipe.z_dim, 2), nn.Linear(2, 1))
+    row_local = recipe.replace(standardize=False)
+    trainer = GANTrainer(row_local, nn.Linear(row_local.z_dim, 2), nn.Linear(2, 1))
+    assert trainer.prior_mechanisms['a2']['enabled']
 
 
 def test_v3_optimizer_roles_resolve_to_recorded_absolute_rates():

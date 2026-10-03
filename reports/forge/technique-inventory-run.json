@@ -1,0 +1,341 @@
+{
+  "artifact_archive": "reports/forge/technique-inventory-archive.json",
+  "attempt_receipts": [
+    {
+      "attempt_id": "0142b29ed9154d9fbf065c2934545c0c",
+      "candidate_id": "ka2",
+      "candidate_revision": "2a6cb4b3f19e57bb16599e23df1a83750b1e992634c6428dacd711f0269c83d1",
+      "device": "cpu",
+      "gate_status": "FAIL",
+      "metrics": {
+        "grad_med": 0.049373187124729156,
+        "mean_abs": 0.11137516051530838
+      },
+      "observations": 24,
+      "original_result_hash": "ff8f6cf777517864e80d750bef2f898a70e8f1002722d655a9f5f30ebbe6f296",
+      "paid_seconds": 5.459934226993937,
+      "steps": 80,
+      "summary": "reports/forge/technique-receipts/0142b29ed9154d9fbf065c2934545c0c.json",
+      "summary_sha256": "2e809dfe00085aa6f9185e1622dadf2a4b9a7a1be75c851406f13498ab7d99ec",
+      "task_id": "two_pole"
+    },
+    {
+      "attempt_id": "0184ca1327794ab58168d853ce0ad978",
+      "candidate_id": "k3p-bcap-matched-v1",
+      "candidate_revision": "18096544dede6a02e09e34be118d13e5554caa5aba4216980dbb442e91761312",
+      "device": "cpu",
+      "gate_status": "PASS",
+      "metrics": {
+        "concept_cos_minus": 0.999994695186615,
+        "concept_cos_plus": 0.9999629855155945,
+        "concept_mag_minus": 1.005644679069519,
+        "concept_mag_plus": 0.9984474182128906,
+        "identity_at_0": 0.998119961206634,
+        "identity_at_mid": 0.9927391792070137
+      },
+      "observations": 24,
+      "original_result_hash": "d71a25927f2d4c924121b5142e7602fc7034781f3d53634b4e54ab75e2460473",
+      "paid_seconds": 12.786716587026604,
+      "steps": 800,
+      "summary": "reports/forge/technique-receipts/0184ca1327794ab58168d853ce0ad978.json",
+      "summary_sha256": "cc494b95b1dbcae5f7057b21eb499c5e5e177a06a4481a9403a407c4fc6b8c87",
+      "task_id": "mid_scale_identity"
+    },
+    {
+      "attempt_id": "275efc25a9e34f25824d502e7f9c20b6",
+      "candidate_id": "k3p-bcap-matched-v1",
+      "candidate_revision": "18096544dede6a02e09e34be118d13e5554caa5aba4216980dbb442e91761312",
+      "device": "cpu",
+      "gate_status": "PASS",
+      "metrics": {
+        "grad_med": 0.46526971459388733,
+        "mean_abs": 0.40319982171058655
+      },
+      "observations": 24,
+      "original_result_hash": "2fae4128e22b2d3a6b4eba95fa394dbd1ae2fae5f4d20ff602e8ac80eba0eb44",
+      "paid_seconds": 5.536816539010033,
+      "steps": 80,
+      "summary": "reports/forge/technique-receipts/275efc25a9e34f25824d502e7f9c20b6.json",
+      "summary_sha256": "1158c4a079493b293defcab8a6fda992f60d3cfb50669cd9c67e083a5c12790e",
+      "task_id": "two_pole"
+    },
+    {
+      "attempt_id": "297db233ae0d459caf35e6aa60f3d0d5",
+      "candidate_id": "k3p-bcap-matched-v1",
+      "candidate_revision": "18096544dede6a02e09e34be118d13e5554caa5aba4216980dbb442e91761312",
+      "device": "cpu",
+      "gate_status": "PASS",
+      "metrics": {
+        "hold": 0.004685889929533005,
+        "recon_mse": 0.00524659501388669
+      },
+      "observations": 24,
+      "original_result_hash": "e7cbfcd0d0a3765ac5d082cec56b81a0bc34fb33ca90a8b9f86f66f9e1f72c84",
+      "paid_seconds": 7.114446987048723,
+      "steps": 250,
+      "summary": "reports/forge/technique-receipts/297db233ae0d459caf35e6aa60f3d0d5.json",
+      "summary_sha256": "cb8327327f1be11fa7282be454e61a1841e1f4d6d590a0759f8bd118310ab982",
+      "task_id": "ae_gan_hold"
+    },
+    {
+      "attempt_id": "299aba837ed24be8a61b0b48074fc7a1",
+      "candidate_id": "forge-onboarding-anchor-ablation",
+      "candidate_revision": "e356a8bd7091ac1e130819a62c362fe3b40a5119a4c457793faa889abd9785c7",
+      "device": "cpu",
+      "gate_status": "FAIL",
+      "metrics": {
+        "grad_med": 0.07678461074829102,
+        "mean_abs": 0.10482493042945862
+      },
+      "observations": 24,
+      "original_result_hash": "309f2bd4d11a850ecc4e4824a430d8414e94db85d29315e8cc54cd6c608fae05",
+      "paid_seconds": 5.449001096014399,
+      "steps": 80,
+      "summary": "reports/forge/technique-receipts/299aba837ed24be8a61b0b48074fc7a1.json",
+      "summary_sha256": "2ce584a1b58ec4ed9f88cd72899c53608e930509ee68bc755cd402a8dc5c7abe",
+      "task_id": "two_pole"
+    },
+    {
+      "attempt_id": "2ff413e61d794dec8e3ce91c90ad16a2",
+      "candidate_id": "k3p-bcap-matched-v1",
+      "candidate_revision": "18096544dede6a02e09e34be118d13e5554caa5aba4216980dbb442e91761312",
+      "device": "cpu",
+      "gate_status": "PASS",
+      "metrics": {
+        "identity_mse": 0.0008810099097900093,
+        "success_rate": 1.0,
+        "wrong_pad_rate": 0.0
+      },
+      "observations": 24,
+      "original_result_hash": "81fd42cab8eea3dcec78e549a53e32aee3ab943e75315744a5db8c01af08c539",
+      "paid_seconds": 6.943519086984452,
+      "steps": 400,
+      "summary": "reports/forge/technique-receipts/2ff413e61d794dec8e3ce91c90ad16a2.json",
+      "summary_sha256": "c3c8a3e46648dc6d7c321a046d26d292602c2250f28a4b971ec0a2c4592b6708",
+      "task_id": "residual_student"
+    },
+    {
+      "attempt_id": "33bc62d63509425e9f7237ef19ee7374",
+      "candidate_id": "forge-no-critic-penalty",
+      "candidate_revision": "aa9e200be9f520bf97e8d3408829b852188c80e2b64aa6f02430f58eaec117c9",
+      "device": "cpu",
+      "gate_status": "FAIL",
+      "metrics": {
+        "grad_med": 1.2546037435531616,
+        "mean_abs": 0.4477476179599762
+      },
+      "observations": 24,
+      "original_result_hash": "df936efa36ecc13b2b5e3bd39266602ab10d6a0b63b07d75e40ea8cd3d8a96f8",
+      "paid_seconds": 7.827370991988573,
+      "steps": 80,
+      "summary": "reports/forge/technique-receipts/33bc62d63509425e9f7237ef19ee7374.json",
+      "summary_sha256": "c219cf9344c5cb1f1d65443d2ea018f1cf7f1cd36def1f6dffdb802354bbf984",
+      "task_id": "two_pole"
+    },
+    {
+      "attempt_id": "3e1d8ca0f47a4954b41119cbe605548e",
+      "candidate_id": "k3p",
+      "candidate_revision": "2a97b74e933cc5199847bc89b917f6643d9fd82f8deb2a8490d29b63fba718ce",
+      "device": "cpu",
+      "gate_status": "FAIL",
+      "metrics": {
+        "grad_med": 0.0637243241071701,
+        "mean_abs": 0.10652091354131699
+      },
+      "observations": 24,
+      "original_result_hash": "96085d9d195268205902eb0504d5d5fbe9fda9f8e59de5332404fa25f3be4b89",
+      "paid_seconds": 5.581290133995935,
+      "steps": 80,
+      "summary": "reports/forge/technique-receipts/3e1d8ca0f47a4954b41119cbe605548e.json",
+      "summary_sha256": "3fba0bc30018ebf550668178cfbfd6610335977a1db3cece95302e240db584d7",
+      "task_id": "two_pole"
+    },
+    {
+      "attempt_id": "4d69405651764ab6b700c6b1e37844db",
+      "candidate_id": "k3p-bcap-matched-v1",
+      "candidate_revision": "18096544dede6a02e09e34be118d13e5554caa5aba4216980dbb442e91761312",
+      "device": "cpu",
+      "gate_status": "PASS",
+      "metrics": {
+        "cover": 0.9993072350099297,
+        "neu_hold": 0.9915355993434787,
+        "off_caption": 7.029599094490724e-06
+      },
+      "observations": 24,
+      "original_result_hash": "3384cff1b3dee03d1c5290148fce9408858bae2cfaaf48ff7009810d82b151bd",
+      "paid_seconds": 7.384662661002949,
+      "steps": 400,
+      "summary": "reports/forge/technique-receipts/4d69405651764ab6b700c6b1e37844db.json",
+      "summary_sha256": "2de5933671c1abc149eea969be80aba1cdf85f8b08764ade06c18b8a177dad98",
+      "task_id": "unipolar"
+    },
+    {
+      "attempt_id": "813505867f5348bfbe113791d78ce0c5",
+      "candidate_id": "k3p-no-output-noise-diagnostic",
+      "candidate_revision": "7bb7527f2fa60cf20120b07fae977f953e66716f31a40ba180240c35a376d803",
+      "device": "cpu",
+      "gate_status": "FAIL",
+      "metrics": {
+        "grad_med": 0.13080213963985443,
+        "mean_abs": 0.2641167640686035
+      },
+      "observations": 24,
+      "original_result_hash": "b96355ea8a6d8e35dfa3b163849cacf01281488f55dfef9022c637fd6258a1a6",
+      "paid_seconds": 5.876473599986639,
+      "steps": 80,
+      "summary": "reports/forge/technique-receipts/813505867f5348bfbe113791d78ce0c5.json",
+      "summary_sha256": "07a2546bca0e92d8caefd317f2edef487ba867a274e1c83dff743f94561862c8",
+      "task_id": "two_pole"
+    },
+    {
+      "attempt_id": "87f406b78184409396a26f61680a5da0",
+      "candidate_id": "k3p-r1r2-matched-v1",
+      "candidate_revision": "0a2b2de1a8a75005f8f76ca17130010f477c520425761cff04dd2a4f81f2bc3a",
+      "device": "cpu",
+      "gate_status": "FAIL",
+      "metrics": {
+        "grad_med": 0.06404702365398407,
+        "mean_abs": 0.1786370873451233
+      },
+      "observations": 24,
+      "original_result_hash": "c49e47942c9a17ef278fa5f1ef446be2a198602d48e281e3c7bc2519fe68d623",
+      "paid_seconds": 5.811797589994967,
+      "steps": 80,
+      "summary": "reports/forge/technique-receipts/87f406b78184409396a26f61680a5da0.json",
+      "summary_sha256": "40b3b6c952bf498f5da40798c7d41c0bd2c986162af662bf424911dfe425c73d",
+      "task_id": "two_pole"
+    },
+    {
+      "attempt_id": "b86f62c3e4f84a43b85d366e4cc43824",
+      "candidate_id": "k3p-a2-off-native-diagnostic",
+      "candidate_revision": "b5ae40d1428d03591c42cb5cddb8adea5042caaa34c8ea2b131565c0ccca72e9",
+      "device": "cpu",
+      "gate_status": "FAIL",
+      "metrics": {
+        "grad_med": 0.0637243241071701,
+        "mean_abs": 0.10652091354131699
+      },
+      "observations": 24,
+      "original_result_hash": "c8c8412758a87271e9fc941935b0e88043e4e117abdaa16039af7fad53740718",
+      "paid_seconds": 5.425771753012668,
+      "steps": 80,
+      "summary": "reports/forge/technique-receipts/b86f62c3e4f84a43b85d366e4cc43824.json",
+      "summary_sha256": "939322169e11d80d84f9b4581f2f17fbee700b90ba521c6a544a5775fce5a55c",
+      "task_id": "two_pole"
+    },
+    {
+      "attempt_id": "b9e3dadcca1b4a4099814d1c5150db6b",
+      "candidate_id": "k3p-bcap-matched-v1",
+      "candidate_revision": "18096544dede6a02e09e34be118d13e5554caa5aba4216980dbb442e91761312",
+      "device": "cpu",
+      "gate_status": "PASS",
+      "metrics": {
+        "content_kept": 0.9936638131240145,
+        "leak_ratio": 0.0002619880968296335,
+        "pole_rel_err_minus": 0.009503724053502083,
+        "pole_rel_err_plus": 0.0153648117557168,
+        "same_dir": 0.004551637849364317,
+        "u_kept": 0.9771081707518371
+      },
+      "observations": 24,
+      "original_result_hash": "3e37b7700a17073379945a48cd232c97a78719d19382961f16dc3cf6de81fe2f",
+      "paid_seconds": 13.03948252403643,
+      "steps": 800,
+      "summary": "reports/forge/technique-receipts/b9e3dadcca1b4a4099814d1c5150db6b.json",
+      "summary_sha256": "4d2791a69a7b7b08168b7c49a725d5b8deef8b8a63d3a3f053ef75e7e41f6ce6",
+      "task_id": "cover_leftover"
+    },
+    {
+      "attempt_id": "bf43170e7806426c906d8f0134a7287c",
+      "candidate_id": "k3p-bcap-matched-v1",
+      "candidate_revision": "18096544dede6a02e09e34be118d13e5554caa5aba4216980dbb442e91761312",
+      "device": "cpu",
+      "gate_status": "PASS",
+      "metrics": {
+        "identity_mse": 0.0008982741856016219
+      },
+      "observations": 24,
+      "original_result_hash": "c8ec5cf24f1be27f1ceb51b3032b0377ab7ea46a4f3869a5c37a0470c646db69",
+      "paid_seconds": 7.055008236027788,
+      "steps": 400,
+      "summary": "reports/forge/technique-receipts/bf43170e7806426c906d8f0134a7287c.json",
+      "summary_sha256": "f5c48ba9b2118001296a56e6d18e7dbae2338315c7d8a3d30d99746b266ad408",
+      "task_id": "trajectory"
+    },
+    {
+      "attempt_id": "bfd92d6f12174f8289903745f545e83c",
+      "candidate_id": "k3p-bcap-matched-v1",
+      "candidate_revision": "18096544dede6a02e09e34be118d13e5554caa5aba4216980dbb442e91761312",
+      "device": "0",
+      "gate_status": "FAIL",
+      "metrics": {
+        "cover": 0.625,
+        "effective_modes": 4.520427227020264,
+        "hq": 0.999755859375,
+        "modes": 5,
+        "n_modes": 8,
+        "step": 1200
+      },
+      "observations": 24,
+      "original_result_hash": "c0dff1d078e833699c337a14c19f5b9521ee9e508cc3fe011d8e231f3eb0efcb",
+      "paid_seconds": 17.346143360016868,
+      "steps": 1200,
+      "summary": "reports/forge/technique-receipts/bfd92d6f12174f8289903745f545e83c.json",
+      "summary_sha256": "83a135ed5d68e74fbfbacf11b22eb5379d3320a3a3dd03dba9f36666f6aae1b3",
+      "task_id": "mode_hold"
+    },
+    {
+      "attempt_id": "df2a9933e92b4c59a1c872ab189be7b0",
+      "candidate_id": "k3p-bcap-matched-v1",
+      "candidate_revision": "18096544dede6a02e09e34be118d13e5554caa5aba4216980dbb442e91761312",
+      "device": "cpu",
+      "gate_status": "PASS",
+      "metrics": {
+        "concept_move": 0.9587822900436365,
+        "unused_hold": 0.9855841333046556
+      },
+      "observations": 24,
+      "original_result_hash": "6d1e1a35106edac512a521d5273f210162b7dc88a83b66544a579ab2a5f25973",
+      "paid_seconds": 9.149912377004512,
+      "steps": 200,
+      "summary": "reports/forge/technique-receipts/df2a9933e92b4c59a1c872ab189be7b0.json",
+      "summary_sha256": "e5c4c1e853b9fc1bb6abcaed26cb7c45155d3ea864cf03ac3a557e5201e20121",
+      "task_id": "unused_token_hold"
+    }
+  ],
+  "attempts": 16,
+  "calibration": "provisional",
+  "campaign_id": "technique-inventory-v1",
+  "candidate_budget_seconds": 44100,
+  "completed_updates": 5090,
+  "coordinator_recovery": "Report compilation was batched after a coordinator restart; already completed requests were reused, with no scientific retries or duplicate attempts.",
+  "declared_budget_seconds": 529200,
+  "eligible_techniques": 8,
+  "execution_errors": 0,
+  "paid_seconds": 127.78834775014548,
+  "policy_fingerprint": "e53331361a8fd5c55096494d259ddcd95a99f3012b7bb74e5c972f9dd466531f",
+  "promotion_eligible": false,
+  "required_task_counts": {
+    "BLOCKED": 90,
+    "FAIL": 8,
+    "PASS": 8,
+    "UNKNOWN": 182
+  },
+  "reserved_seconds": 0.0,
+  "schema_version": 1,
+  "source_digest": "bb31b3f77bee0199fa51df84856dd04171fb58baca7c9328270f3e2a7c67d62d",
+  "source_origin_commit": "b04b1b27296b0cba11b70eb9693fbe9200ed38a5",
+  "techniques": 12,
+  "upfront_blocked_techniques": 4,
+  "validation": {
+    "focused_inventory_and_knowledge_tests_passed": 53,
+    "forge_tests_passed": 749,
+    "frozen_implementation_forge_tests_passed": 708,
+    "publication_tests_passed": 14,
+    "scope": "Full final Forge suite: 749 passed; final publication guard revision: 14 passed. Focused counts overlap the full suite.",
+    "tasks_validated": 47,
+    "views_validated": 6
+  },
+  "view": "discriminator_stability",
+  "view_revision": 2
+}

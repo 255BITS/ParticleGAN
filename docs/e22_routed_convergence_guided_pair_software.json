@@ -1,0 +1,171 @@
+{
+  "task": "routed_convergence_guided_pair_v1",
+  "status": "software_ready_source_only",
+  "qualified": false,
+  "qualification_credit": "none",
+  "quality_training_launched": false,
+  "quality_optimizer_updates": 0,
+  "source_only_card_sha256": "bd524f6b7def926d11b9df3310dab1e9bd6b5d5fa30fa61200422cb1c4fec49f",
+  "final_software": {
+    "test_cases": 35,
+    "passed": 35,
+    "process_wall_seconds": 8.230147721013054,
+    "pytest_reported_seconds": 5.56,
+    "receipt": "runs/guided-pair-preparation/software-tests-final.json",
+    "raw_log_sha256": "b590f63e4d9b90bc0fef01a6c974afc354b58f4bea859db6e72ba3d6a9886c7e"
+  },
+  "source_readiness": {
+    "checks": 6,
+    "optimizer_updates": 0,
+    "execution_authorized": false,
+    "process_wall_seconds": 3.6412137020379305,
+    "receipt": "runs/guided-pair-preparation/source-readiness-final.json",
+    "receipt_sha256": "898a3b7fcc1ea2e85a1ebe82fa1679b1b0f939356a044a349adcf1234347b36e",
+    "reviewer_sha256": "25ed8f9cd4308864131c1b1f7a8b95d67ea828ca6822e117e049d0c4b42fe459"
+  },
+  "final_verification_process_seconds": 11.871361423050985,
+  "scope_of_cost": "Final subprocess wall measurements include process initialization. They exclude editing and earlier preparation; earlier observations are retained below rather than hidden. No quality run/budget has begun.",
+  "earlier_preparation_observations": [
+    {
+      "scope": "initial factory checks",
+      "tests": 11,
+      "passed": 11,
+      "pytest_reported_seconds": 5.16,
+      "process_wall_seconds": null,
+      "raw_output": "tool transcript; no retained log"
+    },
+    {
+      "scope": "factory checks after added audit/buffer corruption guards and factory manifest",
+      "tests": 18,
+      "passed": 18,
+      "pytest_reported_seconds": 3.02,
+      "process_wall_seconds": null,
+      "raw_output": "tool transcript; no retained log"
+    },
+    {
+      "scope": "campaign agent checks before final callback drift case",
+      "tests": 16,
+      "passed": 16,
+      "pytest_reported_seconds": 2.77,
+      "process_wall_seconds": null,
+      "evidence": "collaborator report"
+    },
+    {
+      "scope": "campaign agent checks after final callback drift case",
+      "tests": 17,
+      "passed": 17,
+      "pytest_reported_seconds": 2.81,
+      "process_wall_seconds": null,
+      "evidence": "collaborator report"
+    },
+    {
+      "scope": "combined checks before final callback binding guard",
+      "tests": 34,
+      "passed": 34,
+      "process_wall_seconds": 6.57365145185031,
+      "receipt": "runs/guided-pair-preparation/software-tests.json"
+    },
+    {
+      "scope": "earlier source-only check before final callback binding guard",
+      "checks": 6,
+      "passed": 6,
+      "optimizer_updates": 0,
+      "process_wall_seconds": null,
+      "receipt": "runs/guided-pair-preparation/source-readiness.json"
+    }
+  ],
+  "software_coverage": [
+    "Existing student/teacher parameter names, tensors and public named initialization seeds unchanged",
+    "Frozen CFG projection and exact mean-source buffers serialized in FAST/EMA; redigested corruption rejected",
+    "Distinct contexts verify conditional-all-B/unconditional-all-B ordering and inverse code concatenation",
+    "Public native DV12 gives independent half/site perturbations; native evidence still counts B4",
+    "Candidate change reruns both sites and recomputes the downstream keys and complete guided output",
+    "Native shared update/checkpoint/restore gives exact brief replay for all three arms and rejects old-task laws",
+    "Both families reproduce the complete guided teacher bitwise on fit/guard/test without updates",
+    "Neutral arm changes initial H/b only before policy/EMA, with C/table/router retained",
+    "Held globals, helper code and native package remain unchanged; direct callback drift is rejected",
+    "New schemas and bounded write/review completion companions are enforced; unqualified overruns remain explicit"
+  ],
+  "geometry_and_execution_witness": {
+    "optimizer_updates": 0,
+    "guidance": 3.0,
+    "rho": 0.027625366713810866,
+    "parent_data_digest": "c672c6e5f9bc758a216613992ea5244beaee0a402d44ff57f8b42d6085b1815a",
+    "data_digest": "cf2a96ecb6886c7402df6f0926afb2620feb64a3586d50022d8cfa884a1461e4",
+    "existing_student_and_teacher_tensors_unchanged": true,
+    "conditional_sources_and_input_panels_unchanged": true,
+    "unconditional_source_is_exact_parent_mean": true,
+    "neutral_fast_ema_initial_change_only_H_b": true,
+    "global_rng_unchanged": true,
+    "reachability": {
+      "ordinary": {
+        "fit": true,
+        "guard": true,
+        "test": true
+      },
+      "particle": {
+        "fit": true,
+        "guard": true,
+        "test": true
+      }
+    },
+    "raw_scale_min": 0.16161492466926575,
+    "raw_scale_max": 0.310838907957077,
+    "scale_floor_coordinates": 0,
+    "target_and_base_dtypes": {
+      "fit": {
+        "targets": "torch.float32",
+        "base": "torch.float32"
+      },
+      "guard": {
+        "targets": "torch.float32",
+        "base": "torch.float32"
+      },
+      "test": {
+        "targets": "torch.float32",
+        "base": "torch.float32"
+      }
+    }
+  },
+  "source_hashes": {
+    "docs/e22_routed_convergence_guided_pair_v1.json": "bd524f6b7def926d11b9df3310dab1e9bd6b5d5fa30fa61200422cb1c4fec49f",
+    "examples/e22_routed_convergence_guided_campaign.py": "0737b8baf169c457b47cd255d4130ab993da1d7e5eb60e5a57b178e9e54062b4",
+    "examples/run_e22_routed_convergence_guided_pair.py": "1a4ad6013f26d5172fb97f3d762acbf493735d260da2daa2395e67ade7c3d9ba",
+    "examples/review_e22_routed_convergence_guided_pair.py": "25ed8f9cd4308864131c1b1f7a8b95d67ea828ca6822e117e049d0c4b42fe459",
+    "examples/e22_routed_convergence_guided_pair.py": "5a0bcd4ef7ee31f8b25921c1957b9e7bdac619e162e9ca650db4b9ceddd7d1c0",
+    "tests/test_e22_routed_convergence_guided_pair.py": "83cabdbe8f2268fcac4ecfe20a5f04ec1a3c4b22352da66ad99635eff3dc59d2",
+    "tests/test_e22_routed_convergence_guided_campaign.py": "6188446585662fde6456bb73eb7d8bc833149c9685f5e266d3bc7e7ca2092ecb",
+    "examples/review_e22_routed_convergence_rotated_teacher.py": "1a5cf8461249ea4efe9481f71f17129544528ca123c0444d700070f3fef6f70d",
+    "docs/e22_routed_convergence_rotated_teacher_v1.json": "e3fe33fed68a04a8a915a8b8fdde9110e73e692cda646ecb74a5f53189ce162b",
+    "examples/run_e22_routed_convergence_rotated_teacher.py": "0a19c6aeffb29ad05e43351aca854e440a5420adb0e03fd4d942657a319b9461",
+    "examples/e22_routed_convergence_rotated_teacher.py": "de53b5b781d3d140d83a40531326a67ef170e06687be551c277d88a45df4266a",
+    "examples/e22_routed_convergence.py": "b814bc0cac728d02290f6f0ed712dd6bb9483074f11666c5c012e72cd4d8f6b6",
+    "examples/e22_routed_convergence_neutral.py": "1b9154bd653db5e5cc629877297eab6a06bbd3f1ac9cabb1858eef36a083724c",
+    "examples/run_e22_routed_convergence.py": "2421e447b79489d1f6be3721994f5edabed6af6ddbc3ebe7813ddcec109ce7c5",
+    "docs/e22_routed_convergence_v1.json": "8fbb7882ee2c57e4ea939a4cd642058fa5ddca21f6a139f16191b4822ff16d02",
+    "docs/e22_routed_convergence_neutral_v1.json": "7313909fc91b57d9945a62bd02dc4a2d3f71af667a9e309276dec1a7233e4e93",
+    "tests/test_e22_routed_convergence_rotated_teacher.py": "4650381ece669969d997f27a33df6a1f4f62e0211d627250b7d2767eb752b7a3"
+  },
+  "native_source_digest": "d0be475a055aae953c22dbd19f6d2357db041437e0679d2f2f2cfa356517f65b",
+  "future_quality_denominator": {
+    "arms": 3,
+    "updates_per_arm": 6400,
+    "states_per_arm": 35,
+    "curves_per_arm": 34,
+    "fixed_endpoints": [
+      5120,
+      6400
+    ],
+    "baseline_judges": 4,
+    "software_replay_updates": 6,
+    "per_arm_budget_seconds": 900,
+    "total_including_review_seconds": 2700
+  },
+  "completion_requirement": "For actual quality execution require execution-completion.json.complete=true and exact report SHAs. For final independent qualification require the review output .completion.json.complete=true and exact report SHA/total budget; report.status alone is insufficient.",
+  "limits": [
+    "No quality scores exist for this guided task; readiness is not scientific qualification.",
+    "Mean synthetic unconditional source differs from real Supra null-caption sequence/masks.",
+    "Guided target/base/scale and finalFP32 combination change with the execution law; absolute scores cannot be subtracted from unguided results.",
+    "This CPU surrogate grants no Forge/default/full-Supra qualification."
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "complete": true,
+  "report_sha256": "a6c7ea362704a48c41841fbf6e13be7f1f3b98f7701b61931664696831b47c79",
+  "completion_sha256": "071a3e98fdbdaf39e23f072cf431e3f08439c6c23d71c83fd4b75cb7ec2ba520",
+  "observed_media_sha256": "75d28d09cbb9546bbe5cd086d5f45e1bc727589453dc6b5bf5059ba6be25ae38",
+  "renderer_source_sha256": "1cdc113f648fabc506e093d23e13ba8b1ecf6b2ed970848c23c0b2159a6b2a7a",
+  "gif_sha256": "86ac7be8bb31a2ce1ebcf875154b5f5c3ea2786e6d51fbae8935919e8107f5a3",
+  "png_sha256": "e83c6c3e3ff6653647e44fa329f0f39fe1fd7dd00f79238ac4f45edf2df1d802",
+  "media_steps": [
+    0,
+    64,
+    128,
+    256,
+    384,
+    512
+  ],
+  "fixed_initial_only_color_limit": 0.026183441794510952,
+  "native_updates": 0,
+  "host_forwards": 0,
+  "scientific_status_unchanged": "FAIL",
+  "seconds": 1.3369465570431203,
+  "limit_seconds": 60
+}

@@ -1,0 +1,195 @@
+{
+  "candidate_id": "context:local-mog-envelope",
+  "candidate_revision": "7f6e13219e35948be5426b67d2248b9965941a6827ac314b13e119df54f70ade",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": 0.995,
+    "learning_regime": "historical scheduled custom loop; exact configs archived",
+    "sampling_law": {
+      "description": "Four selected positive-noise receipts score EMA G and EMA prior via archived evaluator; current public output-noise policy compatibility is unverified. Full study also includes zero-sigma controls.",
+      "eval_output_noise": null,
+      "options": {
+        "latent_mog_noise": true,
+        "selected_final_samples": 200000
+      }
+    },
+    "scoring_weights": "ema",
+    "training_and_public_sampling_identical": false
+  },
+  "conclusion": "Complete historical component-scale CSV: 26 rows, 6 C0-envelope passes and 20 failures; all 26 strict flags false. Positive-noise MoG: 4 envelope passes and 13 failures. Four exact selected receipt sets score EMA G/prior, 200k samples, seed 1, relative widths; none establishes current native or full-reference qualification. Full CSV includes nine zero-sigma cloud/atom controls (two envelope passes), while literal prior_kind is mog for every row.",
+  "evidence_scope": "historical",
+  "hypothesis": "Historical learned-MoG component count, relative-width, optimizer and duration study under the C0 observed envelope.",
+  "mechanism_class": "historical_learned_mog_component_scale",
+  "next_action": "Use as historical prior art with the archived evaluator and failures visible; obtain compatible full-reference evidence before treating any lineage as a current positive. No new run is authorized by this context import.",
+  "prior": {
+    "kind": "mixed",
+    "scope": "17 positive-noise learned-MoG rows and nine zero-sigma cloud/atom controls. The original CSV labels all 26 prior_kind=mog; that literal configuration is preserved. Four fully preserved receipt sets are positive-noise MoG with relative-width calibration. Exact configurations and widths are in the durable bundle.",
+    "sigma": null,
+    "standardize": null,
+    "trainable": true
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "all_study_rows_passed_strict": false,
+      "current_qualification_claim": false,
+      "family": "local-mog-envelope-v1",
+      "full_native_reference_claim": false,
+      "gaps": [
+        "Historical recorded verdicts only; no training, metric recomputation, or Forge regrading performed.",
+        "No compatibility key or certified reuse binding to current public API, native gates, or full reference suite.",
+        "No weights, sample arrays or per-step logs are included; other 22 rows retain CSV/narrative evidence only.",
+        "Preserved source-map hashes do not attest original clean Git state or independently authenticate execution.",
+        "Study narratives may refer to unbundled local artifacts; required imported context uses durable bundle paths.",
+        "Costs retain recorded train/total seconds only; unknown or incomparable costs are not inferred."
+      ],
+      "manifest": {
+        "path": "reports/forge/supplemental/local-mog-envelope-v1/manifest.json",
+        "revision": "a0ec34921c9dd3ebc5b789f60be8681900080f3e",
+        "revision_scope": "Recorded source revision of the historical runs; bundle manifest is generated context.",
+        "sha256": "7f6e13219e35948be5426b67d2248b9965941a6827ac314b13e119df54f70ade"
+      },
+      "narrative_sources": [
+        {
+          "path": "reports/forge/supplemental/local-mog-envelope-v1/README.md",
+          "sha256": "047099b594f8de6a32d049aaa5f3bf1cbc120ee5c1dece72b4a3896258a2c9ce"
+        },
+        {
+          "path": "reports/forge/supplemental/local-mog-envelope-v1/original/results/mog/COMPONENT_SCALE.md",
+          "sha256": "b6b30059e337bc1217191e4f32d925d0e7a8ca3dde737d56e2230e3731462a7c"
+        }
+      ],
+      "prior_scope": {
+        "comparison": "Positive-noise learned MoG versus zero-sigma finite-cloud/atom controls.",
+        "literal_csv_prior_kind_counts": {
+          "mog": 26
+        },
+        "positive_noise_rows": 17,
+        "selected_full_metadata_scope": "Four positive-noise MoG envelope passes only; other rows retain complete CSV/narrative evidence without independent per-run regrading.",
+        "zero_sigma_control_rows": 9
+      },
+      "selected_run_metadata": [
+        {
+          "path": "reports/forge/supplemental/local-mog-envelope-v1/original/results/mog/component_scale/n20000_r1over40_shipped_std0_7k_s1",
+          "raw_legacy_flags": {
+            "passed": true,
+            "passed_baseline": true,
+            "passed_strict": false
+          },
+          "recorded_cost": {
+            "total_seconds": 79.51277616200969,
+            "train_seconds": 61.7680390830792
+          },
+          "run": "n20000_r1over40_shipped_std0_7k_s1"
+        },
+        {
+          "path": "reports/forge/supplemental/local-mog-envelope-v1/original/results/mog/scale_longer/n20000_r1over16_shipped_std0_28k_s1",
+          "raw_legacy_flags": {
+            "passed": true,
+            "passed_baseline": true,
+            "passed_strict": false
+          },
+          "recorded_cost": {
+            "total_seconds": 302.69874719702057,
+            "train_seconds": 241.59716550190933
+          },
+          "run": "n20000_r1over16_shipped_std0_28k_s1"
+        },
+        {
+          "path": "reports/forge/supplemental/local-mog-envelope-v1/original/results/mog/scale_longer/n20000_r1over40_shipped_std0_28k_s1",
+          "raw_legacy_flags": {
+            "passed": true,
+            "passed_baseline": true,
+            "passed_strict": false
+          },
+          "recorded_cost": {
+            "total_seconds": 307.3439488070144,
+            "train_seconds": 244.66210910797236
+          },
+          "run": "n20000_r1over40_shipped_std0_28k_s1"
+        },
+        {
+          "path": "reports/forge/supplemental/local-mog-envelope-v1/original/results/mog/scale_longer/n400_r1over40_28k_s1",
+          "raw_legacy_flags": {
+            "passed": true,
+            "passed_baseline": true,
+            "passed_strict": false
+          },
+          "recorded_cost": {
+            "total_seconds": 292.9003796869947,
+            "train_seconds": 246.80308763304492
+          },
+          "run": "n400_r1over40_28k_s1"
+        }
+      ],
+      "structured_sources_imported": [
+        "reports/forge/supplemental/local-mog-envelope-v1/original/results/mog/component_scale_results.csv",
+        "reports/forge/supplemental/local-mog-envelope-v1/original/results/mog/component_scale/n20000_r1over40_shipped_std0_7k_s1/summary.json",
+        "reports/forge/supplemental/local-mog-envelope-v1/original/results/mog/scale_longer/n20000_r1over16_shipped_std0_28k_s1/summary.json",
+        "reports/forge/supplemental/local-mog-envelope-v1/original/results/mog/scale_longer/n20000_r1over40_shipped_std0_28k_s1/summary.json",
+        "reports/forge/supplemental/local-mog-envelope-v1/original/results/mog/scale_longer/n400_r1over40_28k_s1/summary.json"
+      ],
+      "study_counts": {
+        "all_rows": {
+          "c0_envelope_failures": 20,
+          "c0_envelope_passes": 6,
+          "rows": 26,
+          "strict_failures": 26,
+          "strict_passes": 0
+        },
+        "new_configuration_rows": {
+          "c0_envelope_failures": 16,
+          "c0_envelope_passes": 5,
+          "rows": 21,
+          "strict_failures": 21,
+          "strict_passes": 0
+        },
+        "new_positive_noise_rows": {
+          "c0_envelope_failures": 10,
+          "c0_envelope_passes": 4,
+          "rows": 14,
+          "strict_failures": 14,
+          "strict_passes": 0
+        },
+        "positive_noise_rows": {
+          "c0_envelope_failures": 13,
+          "c0_envelope_passes": 4,
+          "rows": 17,
+          "strict_failures": 17,
+          "strict_passes": 0
+        },
+        "reused_reference_rows": {
+          "c0_envelope_failures": 4,
+          "c0_envelope_passes": 1,
+          "rows": 5,
+          "strict_failures": 5,
+          "strict_passes": 0
+        },
+        "zero_sigma_rows": {
+          "c0_envelope_failures": 7,
+          "c0_envelope_passes": 2,
+          "rows": 9,
+          "strict_failures": 9,
+          "strict_passes": 0
+        }
+      },
+      "summary_excerpt": "Complete historical component-scale CSV: 26 rows, 6 C0-envelope passes and 20 failures; all 26 strict flags false. Positive-noise MoG: 4 envelope passes and 13 failures. Four exact selected receipt sets score EMA G/prior, 200k samples, seed 1, relative widths; none establishes current native or full-reference qualification. Full CSV includes nine zero-sigma cloud/atom controls (two envelope passes), while literal prior_kind is mog for every row."
+    },
+    "importer_version": "forge-supplemental-local-mog-envelope-v1",
+    "package_sha256": "b7db0a9deffabd771a6449d186c5a1ef293ea8196498a071e36d2e17754cd255",
+    "reuse_eligible": false,
+    "source_revision": "a0ec34921c9dd3ebc5b789f60be8681900080f3e",
+    "verification": "Copied original bytes; verified SHA-256 inventory, all four completion-to-summary bindings, configs, environments and all 41 source-member hashes. No scientific regrading.",
+    "verified_by_forge": false
+  },
+  "record_id": "context-local-mog-envelope-7f6e13219e35",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/supplemental/local-mog-envelope-v1/manifest.json",
+    "revision": "a0ec34921c9dd3ebc5b789f60be8681900080f3e",
+    "revision_scope": "Recorded source revision of the historical runs; bundle manifest is generated context.",
+    "sha256": "7f6e13219e35948be5426b67d2248b9965941a6827ac314b13e119df54f70ade"
+  },
+  "task_results": []
+}

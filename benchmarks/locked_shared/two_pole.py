@@ -94,7 +94,7 @@ def cell_wins(mean_abs: float, grad_med: float) -> bool:
 
 
 def train(*, pairing="live", gan_factory=None, cap_factory=None, particle_l2=None,
-          noise_policy=None) -> dict:
+          noise_policy=None, components=None) -> dict:
     """Run the original 80-step cloud experiment, including stranger arms."""
     torch.manual_seed(TOY_SEED)
     particle_l2 = LOCKED_SHARED.particle_l2 if particle_l2 is None else particle_l2
@@ -119,6 +119,10 @@ def train(*, pairing="live", gan_factory=None, cap_factory=None, particle_l2=Non
         noise_policy.register_generator_optimizer(opt_p, opt_d)
     gan = (gan_factory or make_gan_loss)()
     regularizer = (cap_factory or make_b_cap)()
+    if components is not None:
+        opt_p, opt_d, gan, regularizer = components.bind(
+            generator=None, critic=base_critic, direct_particles=[particles],
+            opt_g=opt_p, opt_d=opt_d)
     real = real_batch(LOCKED_SHARED.n_particles)
     stranger = torch.linspace(-3.0, 3.0, LOCKED_SHARED.n_particles).unsqueeze(1)
     for step in range(1, TOY_STEPS + 1):

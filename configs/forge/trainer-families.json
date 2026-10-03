@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "selection_policy": "canonical_configuration_unless_comparable_registered_search",
+  "families": [
+    {
+      "id": "r1r2",
+      "label": "R1/R2",
+      "canonical_candidate": "r3gan-stacked-training-toy-v1",
+      "candidates": [
+        "r3gan-stacked-training-toy-v1",
+        "k3p-r1r2-matched-v1",
+        "r1r2-global-repair-v1"
+      ],
+      "rationale": "The modern R3GAN Stacked-MNIST training adaptation is the canonical baseline. The older fixed R1/R2 penalty on a K3P recipe remains an explicit alternative; different recorded sources are not ranked against one another.",
+      "active_search_by_backend": {
+        "cpu": "r1r2-modern-toy-v1",
+        "cuda": "r1r2-tier1-refresh-v1"
+      }
+    },
+    {
+      "id": "bcap",
+      "label": "BCap",
+      "canonical_candidate": "k3p-bcap-matched-v1",
+      "candidates": [
+        "k3p-bcap-matched-v1"
+      ],
+      "rationale": "Frozen BCap penalty with its declared K3P optimizer and training law.",
+      "active_search_by_backend": {
+        "cuda": "bcap-tier1-refresh-v1"
+      }
+    },
+    {
+      "id": "k3p",
+      "label": "K3P",
+      "canonical_candidate": "k3p",
+      "candidates": [
+        "k3p",
+        "k3p-global-repair-v1"
+      ],
+      "rationale": "Public K3P formulation.",
+      "active_search_by_backend": {
+        "cuda": "k3p-tier1-refresh-v1"
+      }
+    },
+    {
+      "id": "ka2",
+      "label": "KA2",
+      "canonical_candidate": "ka2",
+      "candidates": [
+        "ka2",
+        "ka2-global-repair-v1"
+      ],
+      "rationale": "Public KA2 formulation retains its own training mechanism.",
+      "active_search_by_backend": {
+        "cuda": "ka2-tier1-refresh-v1"
+      },
+      "current_presentation_candidates": [
+        "five-word-joint-ka2-v1"
+      ]
+    },
+    {
+      "id": "e22",
+      "label": "E22",
+      "canonical_candidate": "e22",
+      "candidates": [
+        "e22"
+      ],
+      "rationale": "Policy-aware E22 formulation; unsupported frozen hosts remain blocked."
+    },
+    {
+      "id": "atlas",
+      "label": "Atlas",
+      "canonical_candidate": "atlas",
+      "candidates": [
+        "atlas"
+      ],
+      "rationale": "Policy-aware Atlas formulation; unsupported frozen hosts remain blocked."
+    },
+    {
+      "id": "release07-gan-v3-mog",
+      "label": "GAN v3 release 0.7 (MoG)",
+      "canonical_candidate": "release07-gan-v3-task-adapted-v1",
+      "candidates": [
+        "release07-gan-v3-task-adapted-v1",
+        "release07-gan-v3-mog-v1"
+      ],
+      "rationale": "The explicit task adaptation is the runnable MoG configuration. The earlier host-incompatible MoG card stays an archived alternative, with its original source and blockers.",
+      "active_search_by_backend": {
+        "cuda": "release07-gan-v3-mog-tier1-refresh-v1"
+      }
+    },
+    {
+      "id": "release07-gan-v3-cloud",
+      "label": "GAN v3 release 0.7 (cloud)",
+      "canonical_candidate": "release07-gan-v3-cloud-v1",
+      "candidates": [
+        "release07-gan-v3-cloud-v1"
+      ],
+      "rationale": "Particle-cloud prior and host law are separate from the learned-MoG family."
+    },
+    {
+      "id": "k3p-no-anchor",
+      "label": "K3P without critic anchor",
+      "canonical_candidate": "forge-onboarding-anchor-ablation",
+      "candidates": [
+        "forge-onboarding-anchor-ablation"
+      ],
+      "rationale": "Removing the critic anchor is a structural ablation, not a tuned K3P configuration."
+    },
+    {
+      "id": "k3p-no-penalty",
+      "label": "K3P without critic penalty",
+      "canonical_candidate": "forge-no-critic-penalty",
+      "candidates": [
+        "forge-no-critic-penalty"
+      ],
+      "rationale": "Removing the critic penalty is a structural ablation."
+    },
+    {
+      "id": "k3p-no-a2",
+      "label": "K3P without A2",
+      "canonical_candidate": "k3p-a2-off-native-diagnostic",
+      "candidates": [
+        "k3p-a2-off-native-diagnostic"
+      ],
+      "rationale": "Removing A2 is a structural ablation."
+    },
+    {
+      "id": "k3p-no-training-noise",
+      "label": "K3P without training output noise",
+      "canonical_candidate": "k3p-no-output-noise-diagnostic",
+      "candidates": [
+        "k3p-no-output-noise-diagnostic"
+      ],
+      "rationale": "Removing training output noise changes the training law and remains a separate technique."
+    }
+  ]
+}

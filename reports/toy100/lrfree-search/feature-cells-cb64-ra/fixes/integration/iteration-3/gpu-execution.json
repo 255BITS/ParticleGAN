@@ -1,0 +1,22 @@
+[
+  {
+    "name": "gpu-lineage",
+    "returncode": 0,
+    "wall_seconds": 29.974825381999835
+  },
+  {
+    "name": "gpu-count",
+    "returncode": 0,
+    "wall_seconds": 41.26258457102813
+  },
+  {
+    "name": "gpu-sampler-profile",
+    "returncode": 0,
+    "wall_seconds": 13.567141859093681
+  },
+  {
+    "name": "learned-phase",
+    "returncode": 0,
+    "wall_seconds": 1096.056753800949
+  }
+]

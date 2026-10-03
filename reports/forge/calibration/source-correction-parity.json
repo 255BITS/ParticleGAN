@@ -1,0 +1,218 @@
+{
+  "all_nine_cells_equal": true,
+  "cells": [
+    {
+      "candidate": "forge-no-critic-penalty",
+      "corrected": {
+        "attempt_id": "04e834fc82f24061af71572dce3a22d8",
+        "gate_status": "PASS",
+        "metrics": {
+          "hold": 0.002700746525079012,
+          "recon_mse": 0.0040340423583984375
+        },
+        "result_hash": "fb5128b1fd82d050703c607d62caae7b3cd2651e482db8c0d03eb1b3c5668f58"
+      },
+      "identical_saved_verdict_and_metrics": true,
+      "original": {
+        "attempt_id": "7ab18561c8bd48508ad4dec6d075f0ea",
+        "gate_status": "PASS",
+        "metrics": {
+          "hold": 0.002700746525079012,
+          "recon_mse": 0.0040340423583984375
+        },
+        "result_hash": "c6c64ab775bd6a277afbf14f2f23b332952cd7986c174a46bad526e074dcec6b"
+      },
+      "task": "ae_gan_hold"
+    },
+    {
+      "candidate": "forge-no-critic-penalty",
+      "corrected": {
+        "attempt_id": "2dcfab451e2b4c2087c4c2dcdcfddb44",
+        "gate_status": "FAIL",
+        "metrics": {
+          "grad_med": 1.2546037435531616,
+          "mean_abs": 0.4477476179599762
+        },
+        "result_hash": "92864bd7c0a9210cd3a48fe525ff0206d63ea66d40ab5833aadcd3d87dd876d1"
+      },
+      "identical_saved_verdict_and_metrics": true,
+      "original": {
+        "attempt_id": "fafc3da7cecf4b1780bbaedf66141092",
+        "gate_status": "FAIL",
+        "metrics": {
+          "grad_med": 1.2546037435531616,
+          "mean_abs": 0.4477476179599762
+        },
+        "result_hash": "30382e4d7600c29196275c273cb452d71ca8fc7479fb54ca160d0bf2509b1bf0"
+      },
+      "task": "two_pole"
+    },
+    {
+      "candidate": "forge-no-critic-penalty",
+      "corrected": {
+        "attempt_id": "0d955ecceae2440a94c617bac052a7f8",
+        "gate_status": "FAIL",
+        "metrics": {
+          "concept_move": 0.8801896789196206,
+          "unused_hold": 0.9732744097709656
+        },
+        "result_hash": "aa533c646223a591d80e23c9c6c16a63b6026c1ab88eb37df0dc1650c934be29"
+      },
+      "identical_saved_verdict_and_metrics": true,
+      "original": {
+        "attempt_id": "6f24cc4b4c814096bacc4fcc47110a98",
+        "gate_status": "FAIL",
+        "metrics": {
+          "concept_move": 0.8801896789196206,
+          "unused_hold": 0.9732744097709656
+        },
+        "result_hash": "4f64a2761ad277c0e7c7dae8d6260dc02cb469bad8545d82e2be435959b5a7ad"
+      },
+      "task": "unused_token_hold"
+    },
+    {
+      "candidate": "forge-onboarding-anchor-ablation",
+      "corrected": {
+        "attempt_id": "d0414263a3914641992efbbab6f7b951",
+        "gate_status": "PASS",
+        "metrics": {
+          "hold": 0.004501452203840017,
+          "recon_mse": 0.004509006626904011
+        },
+        "result_hash": "5607a94371a36af8ec94e8f9df3c78bf99635518e24c9371ea282eb62de359c8"
+      },
+      "identical_saved_verdict_and_metrics": true,
+      "original": {
+        "attempt_id": "e04676fe83e64552914c54aa75c06377",
+        "gate_status": "PASS",
+        "metrics": {
+          "hold": 0.004501452203840017,
+          "recon_mse": 0.004509006626904011
+        },
+        "result_hash": "a7e42742f26295c6efcdc7394165e2cb5923640fdf946197b4133bc23717bc5e"
+      },
+      "task": "ae_gan_hold"
+    },
+    {
+      "candidate": "forge-onboarding-anchor-ablation",
+      "corrected": {
+        "attempt_id": "e65951a61a764989b7b416e418130061",
+        "gate_status": "FAIL",
+        "metrics": {
+          "grad_med": 0.07678461074829102,
+          "mean_abs": 0.10482493042945862
+        },
+        "result_hash": "bcc6f16609e69a55052a3d629d83b207288f02394b2e51388f0a5fd511582c1e"
+      },
+      "identical_saved_verdict_and_metrics": true,
+      "original": {
+        "attempt_id": "633dcaca307e4e01b82b5281d82082fb",
+        "gate_status": "FAIL",
+        "metrics": {
+          "grad_med": 0.07678461074829102,
+          "mean_abs": 0.10482493042945862
+        },
+        "result_hash": "f12fe0c387159495226c1fcd21ebba139ef34c3fe547439f4030dc12d9f72712"
+      },
+      "task": "two_pole"
+    },
+    {
+      "candidate": "forge-onboarding-anchor-ablation",
+      "corrected": {
+        "attempt_id": "9cd112e7346b45ed8cb241e1498685ad",
+        "gate_status": "PASS",
+        "metrics": {
+          "concept_move": 0.9516344002587864,
+          "unused_hold": 0.9980412274599075
+        },
+        "result_hash": "b8cc094941fae63059fb558207e33c7678dfd3926e5c05b1ad24db299c3b218d"
+      },
+      "identical_saved_verdict_and_metrics": true,
+      "original": {
+        "attempt_id": "8f49adf865944a2db4ebee903147e24c",
+        "gate_status": "PASS",
+        "metrics": {
+          "concept_move": 0.9516344002587864,
+          "unused_hold": 0.9980412274599075
+        },
+        "result_hash": "47aaf8043f40ed4a57bc6e31b03a28ec07f39424ab634fe33d26c77948d78bfc"
+      },
+      "task": "unused_token_hold"
+    },
+    {
+      "candidate": "k3p",
+      "corrected": {
+        "attempt_id": "bfb3885a560345559ba8a09adbfdfb56",
+        "gate_status": "PASS",
+        "metrics": {
+          "hold": 0.004287836141884327,
+          "recon_mse": 0.004574489779770374
+        },
+        "result_hash": "ec9014dab7d75de7d4d1046a7ae42e46961704c512dd82624c0c59c107649456"
+      },
+      "identical_saved_verdict_and_metrics": true,
+      "original": {
+        "attempt_id": "93c1e10057044b85ac731b9b59f50a0c",
+        "gate_status": "PASS",
+        "metrics": {
+          "hold": 0.004287836141884327,
+          "recon_mse": 0.004574489779770374
+        },
+        "result_hash": "407d5ac621a479c889aeae54ee24a3d65857ade538ae8cf4b09f60df0733a80d"
+      },
+      "task": "ae_gan_hold"
+    },
+    {
+      "candidate": "k3p",
+      "corrected": {
+        "attempt_id": "a388612acc494fbbbe99cb86370559aa",
+        "gate_status": "FAIL",
+        "metrics": {
+          "grad_med": 0.0637243241071701,
+          "mean_abs": 0.10652091354131699
+        },
+        "result_hash": "353e6b2a67d6e9e98fb85d5a3a2e33fcc3dc921bb8269505a3dca8057a5c7b29"
+      },
+      "identical_saved_verdict_and_metrics": true,
+      "original": {
+        "attempt_id": "6577d4075c5042dea96c619ba197bd27",
+        "gate_status": "FAIL",
+        "metrics": {
+          "grad_med": 0.0637243241071701,
+          "mean_abs": 0.10652091354131699
+        },
+        "result_hash": "624cb6dd656a2539704ed513f20fddba92c5b1627af9c81ed54e215789128f66"
+      },
+      "task": "two_pole"
+    },
+    {
+      "candidate": "k3p",
+      "corrected": {
+        "attempt_id": "4ab4e77829044c73a7ea3d86981aac71",
+        "gate_status": "PASS",
+        "metrics": {
+          "concept_move": 0.9514550994835247,
+          "unused_hold": 0.9981992269167677
+        },
+        "result_hash": "8a303db9a88118555083983e2e0ee3f0228e2aa99898f0614e43b07dd2883b57"
+      },
+      "identical_saved_verdict_and_metrics": true,
+      "original": {
+        "attempt_id": "737c15e2ea6345d18b2b159924f9652c",
+        "gate_status": "PASS",
+        "metrics": {
+          "concept_move": 0.9514550994835247,
+          "unused_hold": 0.9981992269167677
+        },
+        "result_hash": "a9eb5029e6d3d03a71cd55a7ed0f9139effa2c183fa61bd2e8ec43cc7ee126e4"
+      },
+      "task": "unused_token_hold"
+    }
+  ],
+  "comparison_scope": "Saved task verdicts and metric dictionaries only; this is a reporting-correction check, not independent scientific repetitions or a full parameter-state equivalence proof.",
+  "profiles": [
+    "current-k3p-mog-v1",
+    "current-k3p-mog-v2"
+  ],
+  "schema_version": 1
+}

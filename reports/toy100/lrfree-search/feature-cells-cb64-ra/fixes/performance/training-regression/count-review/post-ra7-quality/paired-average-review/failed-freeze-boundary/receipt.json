@@ -1,0 +1,23 @@
+{
+  "status": "PRIVATE_FREEZE_WRAPPER_INVALID",
+  "defect": "The successful audit included its redirected log before the final print. Only that closed log changed.",
+  "preserved_original_freezes": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra7-quality/paired-average-review/FROZEN.json": "7e604a5b2a5c4792c1112f740c07e3738dde836c0678694059e058fe87811894",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra8/independent-source/FROZEN.json": "34eb766af23c38d856d80616a5c429400a6c0393b0113d053d8aae85fe28626c"
+  },
+  "exact_mismatches": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra7-quality/paired-average-review/FROZEN.json": {
+      "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra7-quality/paired-average-review/cpu-attempt2.log": {
+        "recorded": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "actual": "e3e1fbfbd4ee845811ce3a18ed981f0c3c53b6782cf051426a757d2decc8d423"
+      }
+    },
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra8/independent-source/FROZEN.json": {
+      "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra7-quality/paired-average-review/cpu-attempt2.log": {
+        "recorded": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "actual": "e3e1fbfbd4ee845811ce3a18ed981f0c3c53b6782cf051426a757d2decc8d423"
+      }
+    }
+  },
+  "candidate_owner_receipt_and_proof_unchanged": true
+}

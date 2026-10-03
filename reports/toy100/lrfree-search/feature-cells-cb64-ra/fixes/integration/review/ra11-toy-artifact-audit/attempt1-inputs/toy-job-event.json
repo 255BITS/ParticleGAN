@@ -1,0 +1,11 @@
+{
+  "event": "job_complete",
+  "utc": "2026-09-30T16:20:29.854410+00:00",
+  "name": "learned-toy-CB64-RA11",
+  "returncode": 0,
+  "status": "COMPLETE",
+  "wall_seconds": 120.27395418006927,
+  "result": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra11/learned/training/toy/CB64-RA11/result.json",
+  "log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra11/logs/learned-toy-CB64-RA11.log",
+  "result_sha256": "c6579ef8d596a6fc780c0244ecedd7e3ea11ac334466458019f6d90cdffa9963"
+}

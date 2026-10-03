@@ -1,0 +1,12 @@
+{
+  "status": "VALID",
+  "files": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra8-prospective/accepted-attempt1/checkpoint-1500.json": "2b73b6b74f2ed2805b43a7304da4a0acc6185d1b60bb78fd58c9f97d2985bbe5",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra8-prospective/audit_checkpoints.py": "2dbc740f3a81651173dd4b95a5601456953e542463893e15a313bbe36769b548",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra8-prospective/accepted-attempt1/SOURCE-RECEIPT.json": "1f684484044956f598c6c2aaa933a7b6da58794db3443b0146f9e824c08e4b00"
+  },
+  "artifacts": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra8/learned/training/toy/CB64-RA8/checkpoint-1500.pt": "eaea329b28a47a8d9f7c850b69c30fe36dae01936d1b69329dfb86bdfc3c909e",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra8/learned/training/toy/CB64-RA8/config.json": "cb90db457828339a952341d90fb695a5c2a24e0a01d9b3d8cd09f4d19187bfc0"
+  }
+}

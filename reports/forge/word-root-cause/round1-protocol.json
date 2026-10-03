@@ -1,0 +1,166 @@
+{
+  "schema_version": 1,
+  "id": "word-root-cause-parameter-round1-v1",
+  "task": "five_word_joint_acquisition",
+  "base_commit": "153c0dd4fc9b725785e133722c9194d849324f10",
+  "purpose": "User-authorized parameter-only diagnosis and repair of existing K3P, KA2 and R1/R2 on the unchanged finite-word joint generator/inverse question. Standalone diagnostic reaches the word task directly; no main-view qualification or default adoption.",
+  "qualification_input": false,
+  "protocol_seed": 0,
+  "device": "cuda:0",
+  "cpu_threads": 1,
+  "workers": 1,
+  "task_updates": 20001,
+  "observations": 24,
+  "terminal_passes": 5,
+  "run_timeout_seconds": 900,
+  "round_reserved_seconds": 8100,
+  "maximum_runs": 9,
+  "arms": [
+    {
+      "id": "k3p-clean-full-low-rate",
+      "family": "k3p",
+      "base_candidate": "configs/forge/configurations/k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c.json",
+      "base_candidate_sha256": "432ff0811c03199a767054db827a70df9ad28e9840434cf0b4d4f6c2504a20f9",
+      "recipe_delta": {
+        "lr": 0.0006,
+        "d_lr_mult": 1.5,
+        "prior_lr_mult": 2.0,
+        "input_noise_std": 0.0,
+        "output_noise_std": 0.0,
+        "network_lr_horizon_cap": null
+      },
+      "prior_reg": 0.0
+    },
+    {
+      "id": "k3p-clean-full-original-rate",
+      "family": "k3p",
+      "base_candidate": "configs/forge/configurations/k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c.json",
+      "base_candidate_sha256": "432ff0811c03199a767054db827a70df9ad28e9840434cf0b4d4f6c2504a20f9",
+      "recipe_delta": {
+        "input_noise_std": 0.0,
+        "output_noise_std": 0.0,
+        "network_lr_horizon_cap": null
+      },
+      "prior_reg": 0.0
+    },
+    {
+      "id": "k3p-low-rate-original-noise",
+      "family": "k3p",
+      "base_candidate": "configs/forge/configurations/k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c.json",
+      "base_candidate_sha256": "432ff0811c03199a767054db827a70df9ad28e9840434cf0b4d4f6c2504a20f9",
+      "recipe_delta": {
+        "lr": 0.0006,
+        "d_lr_mult": 1.5,
+        "prior_lr_mult": 2.0
+      },
+      "prior_reg": 0.0
+    },
+    {
+      "id": "ka2-clean-full-low-rate",
+      "family": "ka2",
+      "base_candidate": "configs/forge/configurations/ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f.json",
+      "base_candidate_sha256": "9f82bf1ab7f6e87f2ed7281dcb7658a3c88eb678abcfbfbca0c7ee07a62d83f7",
+      "recipe_delta": {
+        "lr": 0.0006,
+        "d_lr_mult": 1.5,
+        "prior_lr_mult": 2.0,
+        "input_noise_std": 0.0,
+        "output_noise_std": 0.0,
+        "network_lr_horizon_cap": null
+      },
+      "prior_reg": 0.0
+    },
+    {
+      "id": "ka2-clean-full-original-rate",
+      "family": "ka2",
+      "base_candidate": "configs/forge/configurations/ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f.json",
+      "base_candidate_sha256": "9f82bf1ab7f6e87f2ed7281dcb7658a3c88eb678abcfbfbca0c7ee07a62d83f7",
+      "recipe_delta": {
+        "input_noise_std": 0.0,
+        "output_noise_std": 0.0,
+        "network_lr_horizon_cap": null
+      },
+      "prior_reg": 0.0
+    },
+    {
+      "id": "ka2-low-rate-original-noise",
+      "family": "ka2",
+      "base_candidate": "configs/forge/configurations/ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f.json",
+      "base_candidate_sha256": "9f82bf1ab7f6e87f2ed7281dcb7658a3c88eb678abcfbfbca0c7ee07a62d83f7",
+      "recipe_delta": {
+        "lr": 0.0006,
+        "d_lr_mult": 1.5,
+        "prior_lr_mult": 2.0
+      },
+      "prior_reg": 0.0
+    },
+    {
+      "id": "r1r2-low-rate-fast-roles",
+      "family": "r1r2",
+      "base_candidate": "configs/forge/configurations/r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f.json",
+      "base_candidate_sha256": "b0366bf2383e2558bf19125117e9ac4c33c337e81dc671c114a7df4c2407398c",
+      "recipe_delta": {
+        "lr": 0.0006,
+        "d_lr_mult": 1.5,
+        "prior_lr_mult": 2.0
+      },
+      "prior_reg": 0.0
+    },
+    {
+      "id": "r1r2-mid-rate-fast-roles",
+      "family": "r1r2",
+      "base_candidate": "configs/forge/configurations/r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f.json",
+      "base_candidate_sha256": "b0366bf2383e2558bf19125117e9ac4c33c337e81dc671c114a7df4c2407398c",
+      "recipe_delta": {
+        "lr": 0.0012,
+        "d_lr_mult": 1.5,
+        "prior_lr_mult": 2.0
+      },
+      "prior_reg": 0.0
+    },
+    {
+      "id": "r1r2-low-rate-original-roles",
+      "family": "r1r2",
+      "base_candidate": "configs/forge/configurations/r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f.json",
+      "base_candidate_sha256": "b0366bf2383e2558bf19125117e9ac4c33c337e81dc671c114a7df4c2407398c",
+      "recipe_delta": {
+        "lr": 0.0006
+      },
+      "prior_reg": 0.0
+    }
+  ],
+  "changed_factors": [
+    "Learning-rate and existing role-rate multipliers",
+    "Existing Gaussian input/output noise amplitudes, including zero",
+    "Existing network learning-rate horizon cap, including full declared horizon"
+  ],
+  "held_fixed": [
+    "Five canonical words, six tokens, generator/encoder/joint-critic architecture",
+    "Task-owned nonstandardized learned five-row 2D particle cloud",
+    "Named initialization/data/prior/noise/evaluation streams and seed0",
+    "All GAN penalty, optimizer intervention flags, beta2/penalty schedules and auxiliary objectives of each parent",
+    "prior_reg stays0; no added spread, cycle, reconstruction, contrastive or stabilization objective",
+    "Clean/live evaluation, 1024samples, all24checks, five consecutive terminal passes"
+  ],
+  "predictions": [
+    {
+      "id": "clean-long-optimization-bundle",
+      "question": "Does removing fake-output support mismatch and restoring the full network schedule improve the two current word failures?",
+      "prediction": "At least one low-rate clean/full K3P or KA2 arm has >=5 consecutive terminal passes on the unchanged full word gate.",
+      "falsifier": "Neither low-rate clean/full K3P nor KA2 has five terminalpasses.",
+      "limits": "Noise and horizon are a bundle, not isolated single-factor causal proof."
+    },
+    {
+      "id": "existing-r1r2-capacity",
+      "question": "Can current R1/R2 learn the same joint/inverse problem through role-rate settings alone?",
+      "prediction": "At least one of its three frozen rate arms passes the unchanged sustained gate.",
+      "falsifier": "All three R1/R2 rate arms fail.",
+      "limits": "Its original beta2 and gamma schedules remain fixed; no claim of global impossibility."
+    }
+  ],
+  "historical_receipts": [
+    "reports/forge/technique-receipts/51169502a0e64466b5005e7c870b5592.json",
+    "reports/forge/technique-receipts/8e0a35381d6543bd8a3ecb6056351c06.json"
+  ],
+  "next_round_rule": "No automatic continuation. At most one additional <=9-run/8100-second parameter round may be frozen after this complete readout and root review, only if diagnostics suggest a concrete rate/schedule hypothesis. Never seed repeats or unchanged reruns."
+}

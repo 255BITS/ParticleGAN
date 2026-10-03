@@ -1,0 +1,26 @@
+{
+  "status": "FROZEN_READ_ONLY_DIAGNOSIS",
+  "variant": "CB64-RA6",
+  "milestone": 1000,
+  "files_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra5-saved-diagnosis/ra6-step1000/INTERPRETATION.md": "026ca9536a2be4f91d310ac9164339e047e0a892c8af11caced35f3929da9af4",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra5-saved-diagnosis/ra6-step1000/REPORT.md": "b49228d29c3287f288ea5e2fbc46ea35cc3bd68344c5d0d3b3fe869809e2d1dc",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra5-saved-diagnosis/ra6-step1000/birth-raw-annotation.json": "3a65f95b5bb458a51c954e1ad9451c2fc3544d29b622b667e666e1eeca7c6f65",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra5-saved-diagnosis/ra6-step1000/birth-raw-distance-correction.json": "a370c41cd36c1a6a4b5543d0d41b18c6419c9a67380dabc30619ac41ff7aaf59",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra5-saved-diagnosis/ra6-step1000/candidate-metrics-captured.jsonl": "f48c4535eb50a38620c6e2372c0d6032e0526b39d6b34dc53c5266d54759fbc8",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra5-saved-diagnosis/ra6-step1000/compute_birth_raw_distance.py": "f5e16880b2c7b04c5c88aba02f974263c397786f60d76d3bbec35ed4bde7d945",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra5-saved-diagnosis/ra6-step1000/e22-metrics-captured.jsonl": "3b7ed570f47baaa152cb0a1a6b4daa899c2d97b755200090e24d2e16462648f0",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra5-saved-diagnosis/ra6-step1000/motion-comparison.json": "629c422a8311f580f1e9ffc5c11b530a9cc1708e6f5e423a403b8d224e55e719",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra5-saved-diagnosis/ra6-step1000/ra4-metrics-captured.jsonl": "6751beed015d878d2445fb71e571cebe26014d1d85d3e21b421e1902c75302e8",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra5-saved-diagnosis/ra6-step1000/receipt.json": "d783b03a4ec6ccb589bd7ed87dd4113774d7c0a25b0d3ba594c52651432ac96e",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra5-saved-diagnosis/analyze_saved.py": "bf3e2001a703b1801f718bbacc185e24ea7bd631f9cf61997c32a817f505a735",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra5-saved-diagnosis/PROTOCOL.md": "e5147861cf3378a003cb6947c4cd52680787982c9d94eb8966f52da4759c4bf3",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra5-saved-diagnosis/compare_checkpoint_motion.py": "61974f346e7ea48e17dbf76f4a1b90bf693be800c87f1964ba91c3c0f2cb4e53",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra5-saved-diagnosis/ra6-step1000.log": "d5621b13e1f3b3fc929d57fc81bb636e6a92190d1c7eb6281f28871301335df9",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra5-saved-diagnosis/ra6-step1000-motion.log": "8c2df3a91190f8017119b840a28d89b9d4266d5f4b2768716e96be9a9f7e5132"
+  },
+  "cpu_only": true,
+  "frozen_source_writes": 0,
+  "quality_verdict": null,
+  "interpretation_scope": "Current saved tables/fixed coordinates, no birth incarnation lifetime claim."
+}

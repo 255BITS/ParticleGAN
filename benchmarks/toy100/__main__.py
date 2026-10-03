@@ -30,13 +30,17 @@ def _parser():
     commands = parser.add_subparsers(dest="command", required=True)
     run = commands.add_parser("run", help="train then gate all problems, or one named problem")
     run.add_argument("--config", type=Path, default=Path("configs/toy100/constraints_simple_regularization.json"),
-                     help="frozen JSON/TOML recipe (default: the verified shared 22-toy candidate)")
+                     help="JSON/TOML recipe (default: legacy BCap; scoring is clean unless explicitly changed)")
     run.add_argument("--output", type=Path, required=True, help="new run directory")
     run.add_argument("--problem", choices=PROBLEM_NAMES, help="individual deep dive")
     run.add_argument("--steps", type=int, help="override training budget for a deep dive")
     run.add_argument("--device", choices=("auto", "cuda", "cpu"), default="auto",
                      help="auto uses cuda when available, else cpu; overrides the config device")
     run.add_argument("--no-render", action="store_true", help="skip diagnostic GIF rendering")
+    run.add_argument("--eval-output-noise", action=argparse.BooleanOptionalAction, default=None,
+                     help="score the original served sampling law; default scoring remains clean")
+    run.add_argument("--init", default=None,
+                     help="deterministic weight and particle init name; omit to keep the PyTorch init")
     accuracy = run.add_mutually_exclusive_group()
     accuracy.add_argument("--require-accuracy", action="store_true", default=True,
                           help="require sustained fidelity and a 100k-sample holdout (default)")
@@ -56,12 +60,18 @@ def _run(args):
     if device_override is not None:
         apply_device_policy(device_override, log=True)
         device_override = str(host_device())
+    from benchmarks.init_research.init_registry import use_init
+    use_init(getattr(args, "init", None))
     config_bytes = args.config.read_bytes()
     manifest = load_config(args.config)
     # Preflight every declared problem, even for an individual deep dive. An
     # invalid hidden override cannot be ignored just because it was unselected.
     configs = {name: resolve_problem_config(manifest, name, steps=args.steps, device=device_override)
                for name in PROBLEM_NAMES}
+    eval_output_noise = getattr(args, "eval_output_noise", None)
+    if eval_output_noise is not None:
+        configs = {name: {**config, "eval_output_noise": eval_output_noise}
+                   for name, config in configs.items()}
     policy_source_hashes = None
     policy_source_receipt = None
     if any("toy100_model" in config or "network_lr_horizon_cap" in config
@@ -81,6 +91,8 @@ def _run(args):
                    "declared_manifest": manifest, "resolved_problem_configs": configs,
                    "command_overrides": {"steps": args.steps, "device": device_override},
                    "selected_problems": names}
+    if eval_output_noise is not None:
+        declaration["command_overrides"]["eval_output_noise"] = eval_output_noise
     if policy_source_hashes is not None:
         declaration["policy_source_sha256"] = policy_source_hashes
         declaration["policy_source_scope"] = policy_source_receipt["source_archive_scope"]

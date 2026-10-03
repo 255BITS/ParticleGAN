@@ -1,0 +1,430 @@
+{
+  "schema_version": 1,
+  "id": "forge-legacy-consumers",
+  "revision": 1,
+  "status": "retained_consumer_dispositions",
+  "source_table": {
+    "path": "reports/forge/LEGACY_CONSUMERS.md",
+    "section": "Launcher and consumer mapping",
+    "rows": 12
+  },
+  "sources": [
+    {
+      "path": "reports/forge/LEGACY_CONSUMERS.md",
+      "sha256": "2cf16670fcfa4e98f63c53c7353f95ae72369e7400b0735c28f1785bc1a702ef"
+    }
+  ],
+  "semantics": {
+    "owner": "unverified means no present domain/scheduler owner has accepted a handoff; historical process users are not a handoff.",
+    "replacement_task_ids": "Full consumer-contract replacements only; none declared. partial_forge_task_ids identify real related tasks without claiming equivalent recipes, fixtures or artifact coverage.",
+    "retention": "Retained uncovered domains and historical reproduction are explicit dispositions, not an obligation to port every domain.",
+    "adoption": "No launcher retirement, queue transfer, calibrated-screen adoption, permission to train, or scientific PASS is granted by this index.",
+    "seed_policy": "Historical seed-list interfaces remain available for reproduction; no new seed-only screening experiments."
+  },
+  "dispositions": {
+    "retain_compatibility": "Keep commands/artifacts for current uncovered domains or independent validation.",
+    "historical_reproduction": "Preserve exact archived protocols/evidence; identify any live owner before handoff.",
+    "external_unverified": "Preserve external/remote ownership; no current authority or replacement verified."
+  },
+  "observations": {
+    "as_of": "2026-09-30T04:35:00Z",
+    "status": "dated context, not live ownership or a reservation",
+    "external-applications": "The dated ownership audit reports HyperGAN queue empty at 2026-09-29 17:35:30 MDT and no queue/training child; NPC remained externally occupied. No transfer occurred.",
+    "remote-lrfree-harness": "Original /ml2 roots absent locally; remote ownership/pending work remain unverified.",
+    "details": "reports/forge/LEGACY_CONSUMERS.md"
+  },
+  "consumers": [
+    {
+      "id": "generic-grid",
+      "human_table_row": 1,
+      "paths": [
+        "experiments/run_grid.py",
+        "experiments/follow_grid.py",
+        "docs/experiment-runner.md"
+      ],
+      "repository": "ParticleGAN",
+      "scope": "Generic trainer/config grids, exact completion reuse and aggregated logs.",
+      "disposition": "retain_compatibility",
+      "owner": "unverified",
+      "artifacts": [
+        "requested_config.yaml",
+        "summary.json",
+        "run_grid_complete.json",
+        "log.txt",
+        ".run_grid_history/"
+      ],
+      "artifact_consumers": [
+        "experiments/follow_grid.py",
+        "legacy analyzers and downstream output consumers; complete roster unverified"
+      ],
+      "replacement_task_ids": [],
+      "partial_forge_task_ids": [],
+      "evidence": [
+        "docs/experiment-runner.md",
+        "experiments/run_grid.py"
+      ]
+    },
+    {
+      "id": "sparse-pipeline",
+      "human_table_row": 2,
+      "paths": [
+        "experiments/sparse_pipeline.sh",
+        "experiments/gen_sparse_configs.py",
+        "experiments/analyze_sparse.py"
+      ],
+      "repository": "ParticleGAN",
+      "scope": "Sparse/recipe/UCD/discrete/champion/fewshot stages and namespace-bound manifests.",
+      "disposition": "retain_compatibility",
+      "owner": "unverified",
+      "artifacts": [
+        "manifest.json",
+        "results/sparse/PIPELINE.log",
+        "results/sparse/runs/"
+      ],
+      "artifact_consumers": [
+        "experiments/analyze_sparse.py",
+        "experiments/sparse_pipeline.sh"
+      ],
+      "replacement_task_ids": [],
+      "partial_forge_task_ids": [],
+      "evidence": [
+        "experiments/sparse_pipeline.sh",
+        "docs/experiment-runner.md#sparse-pipeline"
+      ]
+    },
+    {
+      "id": "training-products",
+      "human_table_row": 3,
+      "paths": [
+        "experiments/train_100gaussians.py",
+        "experiments/train_cifar_ddgan.py",
+        "experiments/train_cifar_particle_ae.py",
+        "experiments/train_cifar_particle_ddgan.py",
+        "experiments/train_denoising.py",
+        "experiments/train_gym_control.py",
+        "experiments/train_gym_gan_control.py",
+        "experiments/train_gym_l2_finetune.py",
+        "experiments/train_gym_particle_finetune.py",
+        "experiments/train_gym_previous_gan.py",
+        "experiments/train_gym_slider_finetune.py",
+        "experiments/train_gym_slider_gan.py",
+        "experiments/train_gym_sparse_action.py",
+        "experiments/train_gym_state_control.py",
+        "experiments/train_gym_transition.py",
+        "experiments/train_mog_autoencoder.py",
+        "experiments/train_mog_encoder_fit.py",
+        "experiments/train_mog_vae.py",
+        "experiments/train_mog_vae_stability.py",
+        "experiments/train_sparse.py",
+        "experiments/train_trajectory.py",
+        "experiments/train_transition.py"
+      ],
+      "repository": "ParticleGAN",
+      "scope": "22 entrypoints: native/denoising, CIFAR, sparse, trajectory/transition, MoG AE/VAE and Gym. Toy adapters do not replace these complete products.",
+      "disposition": "retain_compatibility",
+      "owner": "unverified",
+      "artifacts": [
+        "trainer configs",
+        "summary.json",
+        "application checkpoints and logs"
+      ],
+      "artifact_consumers": [
+        "legacy analyzers/reports",
+        "application inference and resume clients; exact owners and roster unverified"
+      ],
+      "replacement_task_ids": [],
+      "partial_forge_task_ids": [],
+      "evidence": [
+        "reports/forge/LEGACY_CONSUMERS.md#launcher-and-consumer-mapping",
+        "docs/experiment-runner.md"
+      ]
+    },
+    {
+      "id": "native-and-toy-replay",
+      "human_table_row": 4,
+      "paths": [
+        "benchmarks/toy100/__main__.py",
+        "benchmarks/toy_suite.py",
+        "benchmarks/toy100/constraint_screen.py"
+      ],
+      "repository": "ParticleGAN",
+      "scope": "Historical/common-recipe 22-task replay and predeclared native constraint screens; original schedule and fixtures retained.",
+      "disposition": "historical_reproduction",
+      "owner": "unverified",
+      "artifacts": [
+        "events",
+        "sample clouds",
+        "holdout",
+        "config",
+        "coverage/accuracy reports"
+      ],
+      "artifact_consumers": [
+        ".github/workflows/toy100.yml",
+        "historical toy/native reports"
+      ],
+      "replacement_task_ids": [],
+      "partial_forge_task_ids": [
+        "grid100",
+        "rotated100",
+        "staggered100",
+        "grid100_affine_square_named_v1",
+        "rotated100_affine_square_named_v1",
+        "staggered100_affine_square_named_v1",
+        "ring_hold",
+        "ring_extension",
+        "target_shift_recovery"
+      ],
+      "evidence": [
+        "benchmarks/toy_suite.py",
+        "benchmarks/toy100/constraint_screen.py",
+        "reports/toy100/k3p-base/README.md"
+      ]
+    },
+    {
+      "id": "trained-ci-gate",
+      "human_table_row": 5,
+      "paths": [
+        ".github/workflows/toy100.yml"
+      ],
+      "repository": "ParticleGAN",
+      "scope": "Independent complete 22-toy public-default CPU gate and pinned dispatch/runtime contract; keep existing CI coverage.",
+      "disposition": "retain_compatibility",
+      "owner": "unverified",
+      "artifacts": [
+        "artifacts/toy-suite-ci/",
+        "common22-trained-gate"
+      ],
+      "artifact_consumers": [
+        "GitHub Actions trained-gate reviewers and artifact downloaders"
+      ],
+      "replacement_task_ids": [],
+      "partial_forge_task_ids": [],
+      "evidence": [
+        ".github/workflows/toy100.yml",
+        "reports/forge/COMPLETION_AUDIT.md"
+      ]
+    },
+    {
+      "id": "transfer-and-formulation-suites",
+      "human_table_row": 6,
+      "paths": [
+        "benchmarks/transfer_suite/",
+        "benchmarks/transfer_suite/public_default_verification.py",
+        "reports/transfer_suite/formulations/build.py"
+      ],
+      "repository": "ParticleGAN",
+      "scope": "Transfer/formulation comparisons, public-default verification, solver witnesses and reserved-family protocols.",
+      "disposition": "retain_compatibility",
+      "owner": "unverified",
+      "artifacts": [
+        "live/EMA curves",
+        "source/protocol archives",
+        "formulation reports",
+        "solver witness results"
+      ],
+      "artifact_consumers": [
+        "reports/transfer_suite/formulations/build.py",
+        "transfer-study reviewers"
+      ],
+      "replacement_task_ids": [],
+      "partial_forge_task_ids": [
+        "two_pole",
+        "unused_token_hold",
+        "ae_gan_hold",
+        "mode_hold",
+        "vector_unequal_mass_published",
+        "vector_unequal_width_published",
+        "img_intensity2_residual16",
+        "img_bars4_residual16"
+      ],
+      "evidence": [
+        "benchmarks/transfer_suite/README.md",
+        "reports/transfer_suite/solvability/README.md"
+      ]
+    },
+    {
+      "id": "reference-and-wheel-parity",
+      "human_table_row": 7,
+      "paths": [
+        "benchmarks/locked_shared/__main__.py",
+        "benchmarks/paired_error_2d/run.py"
+      ],
+      "repository": "ParticleGAN",
+      "scope": "Locked reference/wheel parity and paired-error task/arm/cloud state comparisons; no full Forge replacement.",
+      "disposition": "retain_compatibility",
+      "owner": "unverified",
+      "artifacts": [
+        "reports/locked_shared/",
+        "paired-error complete state/artifact comparisons"
+      ],
+      "artifact_consumers": [
+        "reference-package maintainers",
+        "parity report reviewers"
+      ],
+      "replacement_task_ids": [],
+      "partial_forge_task_ids": [],
+      "evidence": [
+        "benchmarks/locked_shared/__main__.py",
+        "benchmarks/paired_error_2d/run.py"
+      ]
+    },
+    {
+      "id": "archived-gap-fill",
+      "human_table_row": 8,
+      "paths": [
+        "reports/toy100/gap-fill-20260925/run_gap_fill.py",
+        "reports/toy100/gap-fill-20260925/run_supplement.py"
+      ],
+      "repository": "ParticleGAN",
+      "scope": "Frozen command manifests tied to the original /ml2 machine, fixtures and GPU identities; remote queue state unverified.",
+      "disposition": "historical_reproduction",
+      "owner": "unverified",
+      "artifacts": [
+        "per-job logs",
+        "progress.jsonl",
+        "status.json",
+        "completed.json",
+        "frozen source/fixture/runtime bundles"
+      ],
+      "artifact_consumers": [
+        "reports/toy100/gap-fill-20260925/README.md",
+        "Forge historical importer"
+      ],
+      "replacement_task_ids": [],
+      "partial_forge_task_ids": [
+        "grid100_affine_square_named_v1",
+        "rotated100_affine_square_named_v1",
+        "staggered100_affine_square_named_v1",
+        "ring_hold",
+        "ring_extension",
+        "target_shift_recovery"
+      ],
+      "evidence": [
+        "reports/toy100/gap-fill-20260925/README.md",
+        "reports/forge/LEGACY_CONSUMERS.md#observed-local-ownership"
+      ]
+    },
+    {
+      "id": "archived-toy-candidate-drivers",
+      "human_table_row": 9,
+      "paths": [
+        "reports/toy100/gpu-leaderboard/batch.py",
+        "reports/toy100/gpu-known-winner-control/batch.py",
+        "reports/toy100/formulation-round-20260924/",
+        "reports/toy100/direct-particle-base/"
+      ],
+      "repository": "ParticleGAN",
+      "scope": "Frozen candidate matrices/control replays and direct-particle research; copied implementations retain exact source identity.",
+      "disposition": "historical_reproduction",
+      "owner": "unverified",
+      "artifacts": [
+        "per-candidate probes",
+        "ledgers",
+        "generated boards",
+        "package/fixture hashes"
+      ],
+      "artifact_consumers": [
+        "historical toy leaderboard readers",
+        "Forge historical importer"
+      ],
+      "replacement_task_ids": [],
+      "partial_forge_task_ids": [
+        "mode_hold",
+        "two_pole",
+        "vector_unequal_mass_published",
+        "vector_unequal_width_published"
+      ],
+      "evidence": [
+        "reports/toy100/continuous-practical-leaderboard.md",
+        "reports/forge/LEGACY_CONSUMERS.md#launcher-and-consumer-mapping"
+      ]
+    },
+    {
+      "id": "archived-transfer-searches",
+      "human_table_row": 10,
+      "paths": [
+        "reports/transfer_suite/"
+      ],
+      "repository": "ParticleGAN",
+      "scope": "valid_search, rare_focus, solvability and stress driver families with frozen host/optimizer policies; no automatic public API port.",
+      "disposition": "historical_reproduction",
+      "owner": "unverified",
+      "artifacts": [
+        "protocol/source/evidence bundles",
+        "search summaries",
+        "live/EMA outcomes"
+      ],
+      "artifact_consumers": [
+        "transfer-study and solvability reports",
+        "Forge historical importer"
+      ],
+      "replacement_task_ids": [],
+      "partial_forge_task_ids": [],
+      "evidence": [
+        "reports/transfer_suite/solvability/README.md",
+        "reports/forge/LEGACY_CONSUMERS.md#launcher-and-consumer-mapping"
+      ]
+    },
+    {
+      "id": "remote-lrfree-harness",
+      "human_table_row": 11,
+      "paths": [
+        "reports/toy100/lrfree-search/harness/submit.py",
+        "reports/toy100/lrfree-search/harness/pool.py",
+        "reports/toy100/lrfree-search/harness/screen.py",
+        "reports/toy100/lrfree-search/harness/wait.py",
+        "reports/toy100/lrfree-search/harness/lrlib.py",
+        "/ml2/hypergan/lrfree-20260926"
+      ],
+      "repository": "ParticleGAN PR155 pinned historical machine",
+      "scope": "Pinned PR155 daemon, package-copy candidates and machine-local queues. Original host/owner unavailable locally; no drain or handoff inferred.",
+      "disposition": "external_unverified",
+      "owner": "unverified",
+      "artifacts": [
+        "queue/*.json",
+        "pool-config.json",
+        "ledger.jsonl",
+        "LEADERBOARD.md",
+        "pool.log",
+        "runs/<candidate>/<task>/"
+      ],
+      "artifact_consumers": [
+        "pinned LR-free pool/screen/board consumers",
+        "Forge historical importer"
+      ],
+      "replacement_task_ids": [],
+      "partial_forge_task_ids": [],
+      "evidence": [
+        "https://github.com/255BITS/ParticleGAN/blob/0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b/reports/toy100/lrfree-search/harness/README.md",
+        "reports/forge/LEGACY_CONSUMERS.md#observed-local-ownership"
+      ]
+    },
+    {
+      "id": "external-applications",
+      "human_table_row": 12,
+      "paths": [
+        "/home/martyn/dev/hypergan/training-runs/run-queue.sh",
+        "/home/martyn/dev/hypergan/training-runs/queue-gpu0.txt",
+        "/home/martyn/dev/games/mods/3.random_ai_npcs_and_presets/ml/tools/train_npc_misgan.py"
+      ],
+      "repository": "external HyperGAN and NPC repositories",
+      "scope": "HyperGAN and NPC MisGAN application training/checkpoint consumers in separate repositories; ownership never transfers with GPU availability.",
+      "disposition": "external_unverified",
+      "owner": "unverified",
+      "artifacts": [
+        "HyperGAN queue/logs/application outputs",
+        "NPC checkpoints/stdout logs"
+      ],
+      "artifact_consumers": [
+        "HyperGAN application/viewer clients",
+        "NPC application/checkpoint clients"
+      ],
+      "replacement_task_ids": [],
+      "partial_forge_task_ids": [],
+      "evidence": [
+        "reports/forge/LEGACY_CONSUMERS.md#ownership-update--2026-09-29",
+        "reports/forge/LEGACY_CONSUMERS.md#observed-local-ownership"
+      ]
+    }
+  ]
+}

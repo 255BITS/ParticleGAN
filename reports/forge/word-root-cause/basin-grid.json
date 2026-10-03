@@ -1,0 +1,266 @@
+{
+  "schema_version": 1,
+  "scope": "No training, no random draws, no prior-law or global-solvability claim",
+  "states": [
+    {
+      "id": "k3p-clean-full-low-rate",
+      "state_sha256": "0fe978510114173138ea7573d850deef48226773e86e08a97dd332c0569716fb",
+      "grid": {
+        "points": 6561,
+        "side": 81,
+        "lower": [
+          -1.6905624866485596,
+          -1.0565965175628662
+        ],
+        "upper": [
+          0.44352832436561584,
+          0.4289320111274719
+        ],
+        "law": "Uniform rectangular grid containing saved prior/encoder locations with .25 padding; diagnostic only"
+      },
+      "words": {
+        "apple": {
+          "correct_argmax_grid_points": 0,
+          "confident_grid_points": 0,
+          "maximum_minimum_correct_token_probability": 2.136184775736183e-06,
+          "best_grid_location": [
+            0.016710132360458374,
+            -0.4623851180076599
+          ]
+        },
+        "grape": {
+          "correct_argmax_grid_points": 0,
+          "confident_grid_points": 0,
+          "maximum_minimum_correct_token_probability": 3.880591975757852e-06,
+          "best_grid_location": [
+            0.043386269360780716,
+            -0.40667781233787537
+          ]
+        },
+        "lemon": {
+          "correct_argmax_grid_points": 3422,
+          "confident_grid_points": 2581,
+          "maximum_minimum_correct_token_probability": 0.9999737739562988,
+          "best_grid_location": [
+            -1.6905624866485596,
+            -0.3695395886898041
+          ]
+        },
+        "melon": {
+          "correct_argmax_grid_points": 0,
+          "confident_grid_points": 0,
+          "maximum_minimum_correct_token_probability": 0.0022244418505579233,
+          "best_grid_location": [
+            0.44352832436561584,
+            -0.6480761766433716
+          ]
+        },
+        "berry": {
+          "correct_argmax_grid_points": 2266,
+          "confident_grid_points": 1564,
+          "maximum_minimum_correct_token_probability": 0.9990397095680237,
+          "best_grid_location": [
+            -0.4634603261947632,
+            0.4289320111274719
+          ]
+        }
+      },
+      "invalid_argmax_grid_points": 873
+    },
+    {
+      "id": "ka2-clean-full-low-rate",
+      "state_sha256": "e68ba957e09a6f1f4783f886e9bc943157cb88c1b9211e44061982dd4bc90d84",
+      "grid": {
+        "points": 6561,
+        "side": 81,
+        "lower": [
+          -1.4508203268051147,
+          -1.4884604215621948
+        ],
+        "upper": [
+          0.5938167572021484,
+          0.6603419184684753
+        ],
+        "law": "Uniform rectangular grid containing saved prior/encoder locations with .25 padding; diagnostic only"
+      },
+      "words": {
+        "apple": {
+          "correct_argmax_grid_points": 931,
+          "confident_grid_points": 595,
+          "maximum_minimum_correct_token_probability": 0.9999613761901855,
+          "best_grid_location": [
+            -0.3773859143257141,
+            -0.11859890818595886
+          ]
+        },
+        "grape": {
+          "correct_argmax_grid_points": 772,
+          "confident_grid_points": 620,
+          "maximum_minimum_correct_token_probability": 0.9999997615814209,
+          "best_grid_location": [
+            -1.4508203268051147,
+            -0.41405922174453735
+          ]
+        },
+        "lemon": {
+          "correct_argmax_grid_points": 1343,
+          "confident_grid_points": 1126,
+          "maximum_minimum_correct_token_probability": 1.0,
+          "best_grid_location": [
+            -1.1185667514801025,
+            -1.4884604215621948
+          ]
+        },
+        "melon": {
+          "correct_argmax_grid_points": 1368,
+          "confident_grid_points": 1154,
+          "maximum_minimum_correct_token_probability": 1.0,
+          "best_grid_location": [
+            0.5427008271217346,
+            -1.0318399667739868
+          ]
+        },
+        "berry": {
+          "correct_argmax_grid_points": 0,
+          "confident_grid_points": 0,
+          "maximum_minimum_correct_token_probability": 0.00016728036280255765,
+          "best_grid_location": [
+            0.5427008271217346,
+            0.33802157640457153
+          ]
+        }
+      },
+      "invalid_argmax_grid_points": 2147
+    },
+    {
+      "id": "r1r2-low-rate-fast-roles",
+      "state_sha256": "7585d0710400a928543030025ebe52e2163bdce2c69a68e1f5fa61cf467abffe",
+      "grid": {
+        "points": 6561,
+        "side": 81,
+        "lower": [
+          -2.8802218437194824,
+          -1.9912109375
+        ],
+        "upper": [
+          1.1335031986236572,
+          0.9920085668563843
+        ],
+        "law": "Uniform rectangular grid containing saved prior/encoder locations with .25 padding; diagnostic only"
+      },
+      "words": {
+        "apple": {
+          "correct_argmax_grid_points": 593,
+          "confident_grid_points": 492,
+          "maximum_minimum_correct_token_probability": 0.9999996423721313,
+          "best_grid_location": [
+            0.2805866003036499,
+            0.9920085668563843
+          ]
+        },
+        "grape": {
+          "correct_argmax_grid_points": 614,
+          "confident_grid_points": 341,
+          "maximum_minimum_correct_token_probability": 0.999894380569458,
+          "best_grid_location": [
+            -0.27130061388015747,
+            -0.1266987919807434
+          ]
+        },
+        "lemon": {
+          "correct_argmax_grid_points": 881,
+          "confident_grid_points": 629,
+          "maximum_minimum_correct_token_probability": 0.9999994039535522,
+          "best_grid_location": [
+            -0.3214721977710724,
+            -1.9912109375
+          ]
+        },
+        "melon": {
+          "correct_argmax_grid_points": 516,
+          "confident_grid_points": 332,
+          "maximum_minimum_correct_token_probability": 0.9999926090240479,
+          "best_grid_location": [
+            1.1335031986236572,
+            -1.2454060316085815
+          ]
+        },
+        "berry": {
+          "correct_argmax_grid_points": 1026,
+          "confident_grid_points": 698,
+          "maximum_minimum_correct_token_probability": 0.9998548030853271,
+          "best_grid_location": [
+            -2.8802218437194824,
+            0.805557370185852
+          ]
+        }
+      },
+      "invalid_argmax_grid_points": 2931
+    },
+    {
+      "id": "k3p-slow-prior-0p25",
+      "state_sha256": "95709bc3bb8ff415f6be60810e5d2bbc1fb82ca533eb8d34e1123ba6c9e6f24c",
+      "grid": {
+        "points": 6561,
+        "side": 81,
+        "lower": [
+          -2.290703058242798,
+          -1.0653095245361328
+        ],
+        "upper": [
+          0.540257453918457,
+          1.1679294109344482
+        ],
+        "law": "Uniform rectangular grid containing saved prior/encoder locations with .25 padding; diagnostic only"
+      },
+      "words": {
+        "apple": {
+          "correct_argmax_grid_points": 0,
+          "confident_grid_points": 0,
+          "maximum_minimum_correct_token_probability": 0.008622224442660809,
+          "best_grid_location": [
+            -0.2736436724662781,
+            0.10714089870452881
+          ]
+        },
+        "grape": {
+          "correct_argmax_grid_points": 1363,
+          "confident_grid_points": 1096,
+          "maximum_minimum_correct_token_probability": 0.9999440908432007,
+          "best_grid_location": [
+            0.2217743992805481,
+            1.1679294109344482
+          ]
+        },
+        "lemon": {
+          "correct_argmax_grid_points": 1074,
+          "confident_grid_points": 652,
+          "maximum_minimum_correct_token_probability": 0.9884617328643799,
+          "best_grid_location": [
+            -1.3352539539337158,
+            -1.0653095245361328
+          ]
+        },
+        "melon": {
+          "correct_argmax_grid_points": 584,
+          "confident_grid_points": 360,
+          "maximum_minimum_correct_token_probability": 0.998902440071106,
+          "best_grid_location": [
+            0.540257453918457,
+            -1.0653095245361328
+          ]
+        },
+        "berry": {
+          "correct_argmax_grid_points": 1308,
+          "confident_grid_points": 571,
+          "maximum_minimum_correct_token_probability": 0.9953771829605103,
+          "best_grid_location": [
+            -2.290703058242798,
+            0.47004222869873047
+          ]
+        }
+      },
+      "invalid_argmax_grid_points": 2232
+    }
+  ]
+}

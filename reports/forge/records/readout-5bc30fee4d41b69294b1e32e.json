@@ -1,0 +1,368 @@
+{
+  "attempt_ids": [
+    "3c6a84341114445da149f04ab7541f01",
+    "6c44b7cbaff34277a9da6bb0ccb98321",
+    "8f6e156ef20f47ae939597d0fdcfde65",
+    "bcaebd15d92841d0b99aec185a446a46"
+  ],
+  "candidate_id": "r1r2--abf642c42c5346ad096c29202e4716db535c393c113478552133c1c22761ddbd",
+  "candidate_revision": "7c08dcbf6b2e1a90368368ba328f3597a260381ca68b67f2ac28904050ce3ee1",
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "comparison": "Four declared configurations share the trainer implementation, source, tasks, prior, initialization, fixed named-RNG protocol and sampling law. Only learning rate and paired penalty endpoints vary. Selection uses required smoke PASS count then configuration hash. The earlier paper-derived LR0.0002 result retains its different source and is not repeated.",
+  "conclusion": "Bounded R1/R2 Modern GAN toy-host configuration {'lr': 0.0085, 'reg_coeff': 1.0, 'reg_coeff_end': 0.1} under the fixed source/protocol/runtime produced [{'task': 'two_pole', 'gate_status': 'PASS', 'metrics': {'grad_med': 0.6198654174804688, 'mean_abs': 0.8125556111335754}}, {'task': 'unused_token_hold', 'gate_status': 'PASS', 'metrics': {'concept_move': 0.9999794960526742, 'unused_hold': 0.997301101218909}}, {'task': 'ae_gan_hold', 'gate_status': 'PASS', 'metrics': {'hold': 0.06419558823108673, 'recon_mse': 0.006500412710011005}}, {'task': 'trajectory', 'gate_status': 'FAIL', 'metrics': {'identity_mse': 0.23911647498607635}}]. Ordinary prerequisite stopping retained every unmeasured requirement.",
+  "evidence_scope": "current",
+  "full_readout_archive": "runs/forge/r1r2-modern-toy-search-v1/full-readouts/readout-5bc30fee4d41b69294b1e32e.json",
+  "goal": "discriminator_stability",
+  "hypothesis": "Under the unchanged fixed toy-host movement/convergence gates, larger constant learning rates and paired R1/R2 gamma schedules may improve the failed Modern GAN training adaptation.",
+  "lifecycle": "concluded",
+  "mechanism_class": "floor_constant",
+  "next_action": "Stop this exact failed configuration; review the provisional convergence screen before another parameter study. No downstream diagnostic, seed repeat or default adoption follows.",
+  "prior": {
+    "kind": "mog",
+    "learnable": true,
+    "sigma": 0.025,
+    "standardize": false
+  },
+  "provenance": {
+    "attempts": [
+      {
+        "attempt_id": "3c6a84341114445da149f04ab7541f01",
+        "result_hash": "324adf433feaaae8f34118e11876293def96ca6a08b273b5f7ba40bac9d4a77f",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "6c44b7cbaff34277a9da6bb0ccb98321",
+        "result_hash": "c7586d26c766eb9c008d537b07e2b510e5b76ce3fdf4bf66061fcd7b4e62670b",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "8f6e156ef20f47ae939597d0fdcfde65",
+        "result_hash": "cc547ab5c4f9bc9698d0f67dbc98b00dbb7101c979a6c0144674997b383b1c8d",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "bcaebd15d92841d0b99aec185a446a46",
+        "result_hash": "a294f458e025d89cb31588f5a6288cf68735346a2c96629ee7b2337b41d3a3ee",
+        "valid_receipt": true
+      }
+    ]
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "record_id": "readout-5bc30fee4d41b69294b1e32e",
+  "record_type": "scientific",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/technique-receipts/3c6a84341114445da149f04ab7541f01.json"
+  },
+  "summary_scope": "final_metrics_and_original_receipt_hashes",
+  "task_results": [
+    {
+      "api_version": "forge-api-v1",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "compatibility_key": "29b059fb1f16af196bd5c3cc26812e11958f83e1809280ae43b6a6d87fec09ae",
+      "cost": {
+        "adapter_seconds": 0.2873284930246882,
+        "charged_task": "two_pole",
+        "device": "cpu",
+        "execution_seconds": 5.441599176032469,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 2.320525393995922,
+        "wall_seconds": 5.441599176032469
+      },
+      "device": "cpu",
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 0.75,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 60,
+          "first_pass_step": 47,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 11,
+          "passing_suffix": 11,
+          "stable_from_seconds": null,
+          "stable_from_step": 47
+        },
+        "metric_checks": {
+          "grad_med": {
+            "margin": 0.38013458251953125,
+            "metric": "grad_med",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1.0,
+            "value": 0.6198654174804688
+          },
+          "mean_abs": {
+            "margin": 0.5125556111335754,
+            "metric": "mean_abs",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.3,
+            "value": 0.8125556111335754
+          }
+        },
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "execution_path": "public_components",
+      "gate_status": "PASS",
+      "metrics": {
+        "grad_med": 0.6198654174804688,
+        "mean_abs": 0.8125556111335754
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "sampling": {
+        "eval_output_noise": "not_applied_to_measurement",
+        "sampling_contract_version": 1,
+        "sampling_law": "learned_particles_and_critic_gradient",
+        "scoring_weights": "live"
+      },
+      "status": "PASS",
+      "task_id": "two_pole"
+    },
+    {
+      "api_version": "forge-api-v1",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "compatibility_key": "803431f0436c79eb9b62fa527704c2c72a5a95550e4405dac607c53fc4be683c",
+      "cost": {
+        "adapter_seconds": 0.531213092035614,
+        "charged_task": "unused_token_hold",
+        "device": "cpu",
+        "execution_seconds": 5.664743642031681,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 2.5381667600013316,
+        "wall_seconds": 5.664743642031681
+      },
+      "device": "cpu",
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 0.42,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 84,
+          "first_pass_step": 50,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 19,
+          "passing_suffix": 19,
+          "stable_from_seconds": null,
+          "stable_from_step": 50
+        },
+        "metric_checks": {
+          "concept_move": {
+            "margin": 0.14997949605267424,
+            "metric": "concept_move",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.9999794960526742
+          },
+          "unused_hold": {
+            "margin": 0.14730110121890905,
+            "metric": "unused_hold",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.997301101218909
+          }
+        },
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "execution_path": "public_components",
+      "gate_status": "PASS",
+      "metrics": {
+        "concept_move": 0.9999794960526742,
+        "unused_hold": 0.997301101218909
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "sampling": {
+        "eval_output_noise": "not_applied_to_measurement",
+        "sampling_contract_version": 1,
+        "sampling_law": "learned_parameter_measurement",
+        "scoring_weights": "live"
+      },
+      "status": "PASS",
+      "task_id": "unused_token_hold"
+    },
+    {
+      "api_version": "forge-api-v1",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "compatibility_key": "5ecf34948285b7ee774de601930434cb07280543b0559b07772211cce90223aa",
+      "cost": {
+        "adapter_seconds": 1.4768782919854857,
+        "charged_task": "trajectory",
+        "device": "cpu",
+        "execution_seconds": 6.636296234966721,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 3.4890128429979086,
+        "wall_seconds": 6.636296234966721
+      },
+      "device": "cpu",
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": null,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 0,
+          "passing_suffix": 0,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metric_checks": {
+          "identity_mse": {
+            "margin": -0.21911647498607636,
+            "metric": "identity_mse",
+            "op": "<=",
+            "status": "FAIL",
+            "threshold": 0.02,
+            "value": 0.23911647498607635
+          }
+        },
+        "passed": false,
+        "shortfall": 2.0,
+        "status": "FAIL"
+      },
+      "execution_path": "public_components",
+      "gate_status": "FAIL",
+      "metrics": {
+        "identity_mse": 0.23911647498607635
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "sampling": {
+        "eval_output_noise": "public_recipe_schedule",
+        "sampling_contract_version": 1,
+        "sampling_law": "conditional_prior_centers_with_scheduled_output_noise",
+        "scoring_weights": "live"
+      },
+      "status": "FAIL",
+      "task_id": "trajectory"
+    },
+    {
+      "api_version": "forge-api-v1",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "compatibility_key": "adc395508b5294fd175b88bc3335da3a622633f6b6614f20c826b307cafdce1b",
+      "cost": {
+        "adapter_seconds": 1.0420808260096237,
+        "charged_task": "ae_gan_hold",
+        "device": "cpu",
+        "execution_seconds": 6.228507560968865,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 3.042652663018089,
+        "wall_seconds": 6.228507560968865
+      },
+      "device": "cpu",
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 0.292,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 73,
+          "first_pass_step": 11,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 23,
+          "passing_suffix": 22,
+          "stable_from_seconds": null,
+          "stable_from_step": 32
+        },
+        "metric_checks": {
+          "hold": {
+            "margin": 0.28580441176891325,
+            "metric": "hold",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.35,
+            "value": 0.06419558823108673
+          },
+          "recon_mse": {
+            "margin": 0.043499587289989,
+            "metric": "recon_mse",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.05,
+            "value": 0.006500412710011005
+          }
+        },
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "execution_path": "public_components",
+      "gate_status": "PASS",
+      "metrics": {
+        "hold": 0.06419558823108673,
+        "recon_mse": 0.006500412710011005
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "sampling": {
+        "eval_output_noise": "public_recipe_schedule",
+        "sampling_contract_version": 1,
+        "sampling_law": "generated_and_reconstructed_prior_with_scheduled_output_noise",
+        "scoring_weights": "live"
+      },
+      "status": "PASS",
+      "task_id": "ae_gan_hold"
+    }
+  ]
+}

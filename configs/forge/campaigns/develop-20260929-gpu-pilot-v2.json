@@ -1,0 +1,35 @@
+{
+  "budgets": {
+    "campaign_seconds": 5400,
+    "candidate_seconds": 3600,
+    "task_seconds": {
+      "vector_two_broad": 1800
+    }
+  },
+  "cuda_model": "NVIDIA RTX A6000",
+  "execution_backend": "cuda",
+  "failure_policy": "continue_registered_diagnostics",
+  "id": "develop-20260929-gpu-pilot-v2",
+  "profile": "develop-20260929-quick-v2",
+  "profile_sha256": "bb24806e6b68afffe366f985951198dc3ae1b986c7ed6f931f16de64cd31c2e2",
+  "purpose": "Bounded physical two-GPU placement, duplicate submission, coordinator restart and one cancellation-repair pilot using two substantive lineages on vector_two_broad. Pins merged develop, clean public sampling and retained full-component MoG gates. Diagnostic-only; no ordinary qualification credit. Requires an available joint GPU window before enqueue/drain. Replaces unexecuted develop-20260929-gpu-pilot-v1 after the legacy RNG compatibility repair; previous source receipts are not imported.",
+  "qualification_reuse": false,
+  "schema_version": 1,
+  "selections": [
+    {
+      "lineage_id": "k3p",
+      "reason": "One independent learned-MoG reference cell for each substantive control, paired on the frozen source. Together they exercise real two-device placement, source/RNG binding and bounded coordinator recovery.",
+      "tasks": [
+        "vector_two_broad"
+      ]
+    },
+    {
+      "lineage_id": "forge-no-critic-penalty",
+      "reason": "One independent learned-MoG reference cell for each substantive control, paired on the frozen source. Together they exercise real two-device placement, source/RNG binding and bounded coordinator recovery.",
+      "tasks": [
+        "vector_two_broad"
+      ]
+    }
+  ],
+  "view": "discriminator_stability"
+}

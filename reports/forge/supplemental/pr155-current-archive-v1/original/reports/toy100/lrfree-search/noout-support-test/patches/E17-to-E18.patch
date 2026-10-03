@@ -1,0 +1,77 @@
+diff -ruN '--exclude=__pycache__' pkg-E17/particlegan/birth_death.py pkg-E18/particlegan/birth_death.py
+--- pkg-E17/particlegan/birth_death.py	2026-09-29 07:12:51.510453887 -0600
++++ pkg-E18/particlegan/birth_death.py	2026-09-29 08:04:05.140952722 -0600
+@@ -96,6 +96,7 @@
+         self.pending = torch.zeros(n, device=device, dtype=torch.bool)
+         self.space = trainer.recipe.birth_death_space
+         self.isolation = bool(trainer.recipe.birth_death_isolation)
++        self.feature_scale = trainer.recipe.birth_death_feature_scale
+         self.iso_log = []       # transient: [step, flagged rows, acted] of the latest evaluations (diagnostics only)
+         self.sample_shape = None
+         if self.space == "critic":
+@@ -206,6 +207,17 @@
+             D.train(was)
+         return torch.cat(captured).double()
+ 
++    @staticmethod
++    def _standardise(q, F, R):
++        """Divide every critic feature by its standard deviation on the reference half of the real reservoir (the even rows, the half the support test
++        uses as reference): invariant to the positive rescaling of any hidden unit (the exact symmetry group of ReLU-type networks: same critic function,
++        different Euclidean distances) and a function of the reference half only, so the split-conformal validity is untouched. A unit without spread on
++        the reference half (dead on every real row, or constant to 1e-8 of the largest spread) has no reference scale and is dropped: keeping its raw
++        scale would not be invariant, and a scale taken from the queries would leak them into the score."""
++        s = R[0::2].std(0)
++        s = torch.where(s > float(s.max()) * 1e-8, s, torch.full_like(s, float("inf")))
++        return q / s, F / s, R / s
++
+     # --------------------------------------------------------------- support test
+     @torch.no_grad()
+     def _isolated(self, q, R, k, fast):
+@@ -312,6 +324,8 @@
+             centre = R.mean(0, keepdim=True)
+             q, F, R = q - centre, F - centre, R - centre
+             fast = torch.float32
++            if self.feature_scale == "std":
++                q, F, R = self._standardise(q, F, R)
+             flagged = self._isolated(q, R, k, fast) if self.isolation else None
+         else:
+             q_loc, rad_loc = q, None
+diff -ruN '--exclude=__pycache__' pkg-E17/particlegan/recipes.py pkg-E18/particlegan/recipes.py
+--- pkg-E17/particlegan/recipes.py	2026-09-29 07:12:21.833334817 -0600
++++ pkg-E18/particlegan/recipes.py	2026-09-29 08:02:37.151192076 -0600
+@@ -132,6 +132,11 @@
+     # law equals the real law), Benjamini-Hochberg at the birth-death level over the table; flagged rows become clones of uniformly drawn unflagged
+     # rows, and only while the flagged fraction is at most that same level (a table that is still mostly in transit is not resampled).
+     birth_death_isolation: bool = False
++    # Scale of the critic's feature space in critic-space birth-death and the support test: "none" = the features as the critic delivers them;
++    # "std" = every feature divided by its standard deviation on the reference half (even rows) of the real reservoir. The critic function does not fix
++    # the scale of a hidden unit (rescale a ReLU-type unit and its outgoing weight inversely: same function, different Euclidean distances), so the
++    # raw metric depends on an arbitrary parametrisation; "std" is invariant to that symmetry and is a function of the reference half only.
++    birth_death_feature_scale: str = "none"
+ 
+     def __post_init__(self):
+         if self.continuous_policy not in (None, "dv1", "dv2", "dv3", "dv4", "dv5", "dv6", "dv7", "dv8", "dv9", "dv10", "dv11", "dv12"):
+@@ -234,6 +239,10 @@
+             raise ValueError("row_evidence_null must be theory or scaled")
+         if self.birth_death_space not in ("data", "critic"):
+             raise ValueError("birth_death_space must be data or critic")
++        if self.birth_death_feature_scale not in ("none", "std"):
++            raise ValueError("birth_death_feature_scale must be none or std")
++        if self.birth_death_feature_scale == "std" and not (self.particle_birth_death and self.birth_death_space == "critic"):
++            raise ValueError("birth_death_feature_scale='std' needs particle_birth_death with birth_death_space='critic'")
+         if type(self.birth_death_isolation) is not bool:
+             raise ValueError("birth_death_isolation must be a boolean")
+         if self.birth_death_isolation and not (self.particle_birth_death and self.birth_death_space == "critic"):
+diff -ruN '--exclude=__pycache__' pkg-E17/particlegan/training.py pkg-E18/particlegan/training.py
+--- pkg-E17/particlegan/training.py	2026-09-29 07:12:21.833448226 -0600
++++ pkg-E18/particlegan/training.py	2026-09-29 08:02:37.151420137 -0600
+@@ -55,7 +55,8 @@
+                         "row_evidence_gate": False, "table_release_rule": "any",
+                         "row_evidence_hot": True, "row_evidence_exclude": True, "row_evidence_hold": True,
+                         "birth_death_space": "data", "serve_average": 0.0, "reopen_signal": "data",
+-                        "row_evidence_null": "theory", "birth_death_isolation": False}
++                        "row_evidence_null": "theory", "birth_death_isolation": False,
++                        "birth_death_feature_scale": "none"}
+ 
+ 
+ class GANTrainer:

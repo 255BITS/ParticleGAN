@@ -1,0 +1,25 @@
+{
+  "closed_utc": "2026-09-30T22:59:44.082813+00:00",
+  "command": [
+    "python",
+    "-B",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/finalize_evidence.py",
+    "--output",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/release-prep/final-attempt1"
+  ],
+  "cuda_operations": 0,
+  "file_sha256": {
+    "FINALIZER-PROTOCOL.md": "0ce9aba30a9aeefca7423a457459eef65f7421d43debea9f3c22b655bb35477d",
+    "FROZEN.json": "456ea94ba6b57dfcb5123ceddfe06cea597513c32f344db93aea7af3b15addc2",
+    "INVENTORY.json": "484bb263f164473054c05d15ac5f428d5b47cda635700b17ed352f0f97087177",
+    "finalize_evidence.py": "577ea14877b80def725b61bec77cf2ff1067d80d477a0017cf7894b9eae83cd1"
+  },
+  "final_19_gates": "PENDING",
+  "final_ra14_full_suite": "PENDING",
+  "helper_invocations": 0,
+  "model_calls": 0,
+  "repository_mutations": 0,
+  "status": "FROZEN_SOURCE_ONLY_FINALIZER_NOT_INVOKED",
+  "syntax": "PASS_STDLIB_AST",
+  "tensor_reads": 0
+}

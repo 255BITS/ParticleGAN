@@ -1,0 +1,31 @@
+{
+  "completed_steps": [
+    0,
+    0
+  ],
+  "gpu": "NVIDIA RTX A6000",
+  "identical_initialization_receipts": true,
+  "identical_parameters": {
+    "D": true,
+    "G": true,
+    "prior": true
+  },
+  "physical_cuda_visible_devices": "0",
+  "prior_sigmas": [
+    0.02500000037252903,
+    0.02500000037252903
+  ],
+  "purpose": "native CPU/CUDA initialization placement parity; zero optimizer updates",
+  "schema_version": 1,
+  "source_files": {
+    "benchmarks/toy100/native_models.py": "9aef548e7dfd45229c53f41830a8790873454405fb7eeecf5ec66cd906ffbec4",
+    "experiments/forge/api.py": "e603405c7abdbe488f7f8cefe060a0093978d21a1c45cf9ee65b9c713ee027a8",
+    "experiments/forge/nativeprofiles.py": "28fd837ad0db8b6c970fe20a17dcbed7858c696f49b2ddfb9a256a0471efa4de",
+    "particlegan/init.py": "e15d4de01eb49f7097bc249abacab907ff067385412346f54ab0d510cb8649d0"
+  },
+  "torch": "2.14.0+cu130",
+  "training_streams_unchanged": [
+    true,
+    true
+  ]
+}

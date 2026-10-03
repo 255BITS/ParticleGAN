@@ -56,7 +56,7 @@ if str(_REPO_ROOT) not in sys.path:
 
 from experiments.config import read_config
 from particlegan import (  # noqa: E402
-    ParticlePrior, ParticleRegularizer, get_recipe, scale_learning_rates, ucd_loss,
+    ParticlePrior, ParticleRegularizer, get_recipe, init, scale_learning_rates, ucd_loss,
 )
 from lib.sparse_toy import SparseMixedToy  # noqa: E402
 from lib.sparse_models import (  # noqa: E402
@@ -248,7 +248,14 @@ def train(cfg: Dict, device: torch.device) -> Dict:
         raise ValueError("num_particles must be a multiple of n_classes for prior_partition='class'")
     block = P // C
 
-    prior = ParticlePrior(num_particles=P, z_dim=int(cfg["z_dim"]), learnable=learnable).to(device)
+    recipe = get_recipe(
+        z_dim=int(cfg["z_dim"]), num_particles=P, batch_size=B, total_steps=total_steps,
+        lr=float(cfg["lr"]), d_lr_mult=float(cfg["d_lr_mult"]), prior_lr_mult=float(cfg["prior_lr_mult"]),
+        betas=(float(cfg["beta1"]), 0.999),
+        reg_coeff=float(cfg["coeff"]), reg_kappa=float(cfg["kappa"]), ema_decay=float(cfg["ema_decay"]),
+        lr_anneal_start=float(cfg["lr_anneal_start"]), lr_floor=float(cfg["lr_floor"]))
+    # A learnable table starts on R2 points; a frozen Gaussian one is left as drawn.
+    prior = init.deterministic_orthogonal_(recipe.make_prior(learnable=learnable)).to(device)
     G = SparseCondGenerator(
         z_dim=int(cfg["z_dim"]), n_classes=C, d=d, n_symbols=K, k=toy.k, hidden=int(cfg["hidden"]),
         n_hidden=int(cfg["n_hidden"]), emb_dim=int(cfg["emb_dim"]), real_head=str(cfg["real_head"]),
@@ -258,6 +265,14 @@ def train(cfg: Dict, device: torch.device) -> Dict:
         d=d, n_symbols=K, n_classes=C, hidden=int(cfg["hidden"]), n_hidden=int(cfg["n_hidden"]),
         fourier=int(cfg["fourier"]), d_mode=str(cfg["d_mode"]),
     ).to(device)
+    # ---- losses / optimizers ----
+    gan_loss = recipe.make_loss()
+    vic = ParticleRegularizer()
+    # Replaces the constructors' Xavier init.
+    init.deterministic_orthogonal_(G, seed=0)
+    init.deterministic_orthogonal_(D, seed=1)
+    # [G, prior] groups (a frozen Gaussian table adds none) and the critic.
+    opt_G, opt_D = recipe.make_optimizers(G, D, prior, ema_critic=copy.deepcopy(D))
     ema_G, ema_prior = copy.deepcopy(G), copy.deepcopy(prior)
     for p in list(ema_G.parameters()) + list(ema_prior.parameters()):
         p.requires_grad_(False)
@@ -271,17 +286,6 @@ def train(cfg: Dict, device: torch.device) -> Dict:
             idx = pr.sample_indices(n, generator=gen)
         return pr(idx), idx
 
-    # ---- losses / optimizers ----
-    recipe = get_recipe(
-        z_dim=int(cfg["z_dim"]), num_particles=P, batch_size=B, total_steps=total_steps,
-        lr=float(cfg["lr"]), d_lr_mult=float(cfg["d_lr_mult"]), prior_lr_mult=float(cfg["prior_lr_mult"]),
-        betas=(float(cfg["beta1"]), 0.999),
-        reg_coeff=float(cfg["coeff"]), reg_kappa=float(cfg["kappa"]), ema_decay=float(cfg["ema_decay"]),
-        lr_anneal_start=float(cfg["lr_anneal_start"]), lr_floor=float(cfg["lr_floor"]))
-    gan_loss = recipe.make_loss()
-    vic = ParticleRegularizer()
-    # [G, prior] groups (a frozen Gaussian table adds none) and the critic.
-    opt_G, opt_D = recipe.make_optimizers(G, D, prior, ema_critic=copy.deepcopy(D))
     penalty_fn = recipe.make_critic_penalty(opt_D)
     opts = [opt_G, opt_D]
     base_lrs = [[g["lr"] for g in o.param_groups] for o in opts]

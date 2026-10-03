@@ -1,0 +1,76 @@
+{
+  "display_metric_order": [
+    "projection_ks",
+    "hq",
+    "mass_tv",
+    "sw1_normalized",
+    "component_covariance_error",
+    "max_component_spill"
+  ],
+  "goal_annotation": "Original shape bound: projection_ks <= 0.06.",
+  "media_steps": [
+    0,
+    150,
+    300,
+    450,
+    600,
+    750,
+    900,
+    1050,
+    1200
+  ],
+  "numeric_observation_sha256": "eb2b1fc0e97589e2854da0028bce3b65715556c42ee8e7c55bb93172fcd966ff",
+  "numeric_observations_changed": false,
+  "original_case_sha256": "e293cf19f2f235b30807f9782ec65ceea3693f78e3459b9f7eb117179168c8fc",
+  "original_gate": "PASS",
+  "publisher_source": {
+    "files_sha256": {
+      "reports/forge/family-winner-round1/policy_family_readout.py": "e4269840d790cf1855a1cbe6b0cc9ddd0fca3d779d997120179e4b21fcb10497",
+      "reports/forge/family-winner-round1/publish_policy_results.py": "8f0f0b929152316b88ddcf4aacb458f99c949ee68175b66eddb32c2e1503caf2"
+    },
+    "path": "reports/forge/family-winner-round1/publish_policy_results.py",
+    "publisher_committed_at_head": true,
+    "repository_head": "8021a1c50c4aff90ddea5010d368cffdc857b2f6",
+    "sha256": "8f0f0b929152316b88ddcf4aacb458f99c949ee68175b66eddb32c2e1503caf2"
+  },
+  "raw_artifacts": {
+    "final-state.pt": {
+      "bytes": 450187,
+      "sha256": "95401e3063a5f0bba29cae59835f50bd1e7f8387776944b09aceea5ba4738075"
+    },
+    "goal.gif": {
+      "bytes": 689019,
+      "sha256": "0848e7e9849ad2821456cd4f034a45108076f50ff61ad6122460632d5c8260e0"
+    },
+    "observations.npz": {
+      "bytes": 3070137,
+      "sha256": "c188d10dd45d8263443b4c085833d39aa0e5fe3ef92ae01f3cc910e369f4b28a"
+    }
+  },
+  "raw_files_unchanged": true,
+  "raw_receipt": "/ml2/hypergan/forge-policy-family-round4-20261002/atlas/atlas--abe34fb6f0c5f7802cec80e5a2d88aaffb4aa85e55e4021f646457630abec4f0/api-vector-two-broad/receipt.json",
+  "raw_receipt_sha256": "e2bfc5fdc66ea2c32e77b22d16a00346a83852b3192d9f4b4ee2da2619da20a6",
+  "render_annotations": {
+    "default_verdict_displayed": "PASS",
+    "goal_annotations": [],
+    "numeric_observations_changed": false
+  },
+  "renderer_source": {
+    "commit": "8021a1c50c4aff90ddea5010d368cffdc857b2f6",
+    "files_sha256": {
+      "benchmarks/toy_audit/api_contract.py": "2d23aacfb6107f1535ed04ea0d5bb67d8f33a260ac1aca9e1d1734bfaf0f2e28",
+      "benchmarks/toy_audit/api_reframe.py": "7254d231c609edd4186893ee75706924cbbf7359dac951381b2226d9f8ce8065",
+      "benchmarks/toy_audit/api_run.py": "d6a9d34022688c2b6b8df8c29f93c60deaecf47e8c0888c7c82728c897a43be1"
+    }
+  },
+  "reviewed_gif": {
+    "bytes": 708184,
+    "frames": 9,
+    "relative_path": "policy-family-media/policy-family-defaults-round4-prior-balance-v1--8021a1c50c4a/atlas/abe34fb6f0c5--api-vector-two-broad-reviewed.gif",
+    "sha256": "ab7d8afc20e40526581e4a78e3f9aa58a30a26021793987b157dd83544f010b7"
+  },
+  "schema": "policy_family_metric_media_review_v1",
+  "study_gate": "INCOMPLETE",
+  "training_or_rescoring": false,
+  "training_source_commit": "8021a1c50c4aff90ddea5010d368cffdc857b2f6"
+}

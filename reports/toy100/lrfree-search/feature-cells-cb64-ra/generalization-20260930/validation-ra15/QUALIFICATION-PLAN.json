@@ -1,0 +1,277 @@
+{
+  "bridge_path": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15/NO-FIRE-EXECUTION-BRIDGE.json",
+  "bridge_sha256": "f32b789b6bcb62af3b797844465d56b13182ab8207d486301844c66a98b2a8fe",
+  "candidate": "RA15-partial-recovery",
+  "causal_checkpoint_diagnostic": {
+    "candidate_final": {
+      "hq": 0.8984,
+      "modes": 99,
+      "period_end": 1500,
+      "target_deg": 60,
+      "task": "rotated100"
+    },
+    "completion": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/moving-rotated-window-ra15-r2/attempt-1/COMPLETION.json",
+    "completion_sha256": "1712dd3d8e39405b7001775074a00b20d31f1989552dc2dd8985f3b0dfc7803d",
+    "control_final": {
+      "hq": 0.8557,
+      "modes": 99,
+      "period_end": 1500,
+      "target_deg": 60,
+      "task": "rotated100"
+    },
+    "original_bar": 0.86481,
+    "scope": "500update continuation only; not fresh full quality gate",
+    "status": "PASS"
+  },
+  "commands": {
+    "full_suite": [
+      "/tmp/pr38-default-env/bin/python",
+      "-u",
+      "-B",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15/run_full_suite.py"
+    ],
+    "moving": [
+      "/tmp/pr38-default-env/bin/python",
+      "-u",
+      "-B",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15/run_all.py",
+      "--group",
+      "moving"
+    ],
+    "ring": [
+      "/tmp/pr38-default-env/bin/python",
+      "-u",
+      "-B",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15/run_screen.py",
+      "--task",
+      "ring_shift"
+    ],
+    "ring_collect": [
+      "/tmp/pr38-default-env/bin/python",
+      "-u",
+      "-B",
+      "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15/collect.py",
+      "--task",
+      "ring_shift"
+    ]
+  },
+  "config_sha256": "a3ee5c67ac6594014feeb1ec333131abb4b1d86832510b69923100ebd8510ad4",
+  "fresh_quality_updates_this_preparation": 0,
+  "full_quality_acceptance": "PENDING",
+  "gpu_operations_this_preparation": 0,
+  "latest_CUDA_learned_replay": {
+    "branches_per_fixture": 2,
+    "fixtures": 2,
+    "status": "PENDING",
+    "total_updates": 40,
+    "updates_per_branch": 10
+  },
+  "latest_integrated_full_suite": {
+    "actual_counts": null,
+    "actual_skip_reasons": null,
+    "new_recovery_contracts": 17,
+    "required_source": "All integrated packagebytes match immutable pkg-RA15",
+    "status": "PENDING"
+  },
+  "learned_training_labels": {
+    "RA14": "Restoration-only sourcebridge and40CUDAreplayupdates; zero freshtraining",
+    "RA15": "Unchanged no-fire source bridge; zero freshlearnedtraining so far",
+    "mnist": "RA13 fresh2000updates",
+    "toy": "RA13 fresh2000updates"
+  },
+  "original_quality_gates_unchanged": true,
+  "package_sha256": "741fc3933654b985a74314b730b93be814d408ad46f6f7f6547b561f64619228",
+  "quality_tasks": [
+    {
+      "endpoint_R1_fires": 0,
+      "fresh_RA15_execution": false,
+      "kind": "port",
+      "original_execution_source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14",
+      "original_receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/mode_hold/acceptance-receipt.json",
+      "route": "SOURCE_EQUIVALENCE_OF_ORIGINAL_RA14_EXECUTION",
+      "status": "PASS_ORIGINAL_RA14_WITH_UNCHANGED_PATH_PROOF",
+      "task": "mode_hold"
+    },
+    {
+      "endpoint_R1_fires": 0,
+      "fresh_RA15_execution": false,
+      "kind": "port",
+      "original_execution_source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14",
+      "original_receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/img_intensity2/acceptance-receipt.json",
+      "route": "SOURCE_EQUIVALENCE_OF_ORIGINAL_RA14_EXECUTION",
+      "status": "PASS_ORIGINAL_RA14_WITH_UNCHANGED_PATH_PROOF",
+      "task": "img_intensity2"
+    },
+    {
+      "endpoint_R1_fires": 0,
+      "fresh_RA15_execution": false,
+      "kind": "port",
+      "original_execution_source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14",
+      "original_receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/img_blobs4/acceptance-receipt.json",
+      "route": "SOURCE_EQUIVALENCE_OF_ORIGINAL_RA14_EXECUTION",
+      "status": "PASS_ORIGINAL_RA14_WITH_UNCHANGED_PATH_PROOF",
+      "task": "img_blobs4"
+    },
+    {
+      "endpoint_R1_fires": 0,
+      "fresh_RA15_execution": false,
+      "kind": "port",
+      "original_execution_source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14",
+      "original_receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/img_bars4/acceptance-receipt.json",
+      "route": "SOURCE_EQUIVALENCE_OF_ORIGINAL_RA14_EXECUTION",
+      "status": "PASS_ORIGINAL_RA14_WITH_UNCHANGED_PATH_PROOF",
+      "task": "img_bars4"
+    },
+    {
+      "endpoint_R1_fires": 0,
+      "fresh_RA15_execution": false,
+      "kind": "port",
+      "original_execution_source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14",
+      "original_receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/img_stripes2/acceptance-receipt.json",
+      "route": "SOURCE_EQUIVALENCE_OF_ORIGINAL_RA14_EXECUTION",
+      "status": "PASS_ORIGINAL_RA14_WITH_UNCHANGED_PATH_PROOF",
+      "task": "img_stripes2"
+    },
+    {
+      "endpoint_R1_fires": 0,
+      "fresh_RA15_execution": false,
+      "kind": "port",
+      "original_execution_source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14",
+      "original_receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_two_broad/acceptance-receipt.json",
+      "route": "SOURCE_EQUIVALENCE_OF_ORIGINAL_RA14_EXECUTION",
+      "status": "PASS_ORIGINAL_RA14_WITH_UNCHANGED_PATH_PROOF",
+      "task": "vector_two_broad"
+    },
+    {
+      "endpoint_R1_fires": 0,
+      "fresh_RA15_execution": false,
+      "kind": "port",
+      "original_execution_source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14",
+      "original_receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_unequal_mass/acceptance-receipt.json",
+      "route": "SOURCE_EQUIVALENCE_OF_ORIGINAL_RA14_EXECUTION",
+      "status": "PASS_ORIGINAL_RA14_WITH_UNCHANGED_PATH_PROOF",
+      "task": "vector_unequal_mass"
+    },
+    {
+      "endpoint_R1_fires": 0,
+      "fresh_RA15_execution": false,
+      "kind": "port",
+      "original_execution_source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14",
+      "original_receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_unequal_width/acceptance-receipt.json",
+      "route": "SOURCE_EQUIVALENCE_OF_ORIGINAL_RA14_EXECUTION",
+      "status": "PASS_ORIGINAL_RA14_WITH_UNCHANGED_PATH_PROOF",
+      "task": "vector_unequal_width"
+    },
+    {
+      "endpoint_R1_fires": 0,
+      "fresh_RA15_execution": false,
+      "kind": "port",
+      "original_execution_source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14",
+      "original_receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_anisotropic/acceptance-receipt.json",
+      "route": "SOURCE_EQUIVALENCE_OF_ORIGINAL_RA14_EXECUTION",
+      "status": "PASS_ORIGINAL_RA14_WITH_UNCHANGED_PATH_PROOF",
+      "task": "vector_anisotropic"
+    },
+    {
+      "endpoint_R1_fires": 0,
+      "fresh_RA15_execution": false,
+      "kind": "port",
+      "original_execution_source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14",
+      "original_receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_overlap/acceptance-receipt.json",
+      "route": "SOURCE_EQUIVALENCE_OF_ORIGINAL_RA14_EXECUTION",
+      "status": "PASS_ORIGINAL_RA14_WITH_UNCHANGED_PATH_PROOF",
+      "task": "vector_overlap"
+    },
+    {
+      "endpoint_R1_fires": 0,
+      "fresh_RA15_execution": false,
+      "kind": "port",
+      "original_execution_source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14",
+      "original_receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/vector_spiral/acceptance-receipt.json",
+      "route": "SOURCE_EQUIVALENCE_OF_ORIGINAL_RA14_EXECUTION",
+      "status": "PASS_ORIGINAL_RA14_WITH_UNCHANGED_PATH_PROOF",
+      "task": "vector_spiral"
+    },
+    {
+      "endpoint_R1_fires": 0,
+      "fresh_RA15_execution": false,
+      "kind": "port",
+      "original_execution_source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14",
+      "original_receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14/runs/stationary/acceptance-receipt.json",
+      "route": "SOURCE_EQUIVALENCE_OF_ORIGINAL_RA14_EXECUTION",
+      "status": "PASS_ORIGINAL_RA14_WITH_UNCHANGED_PATH_PROOF",
+      "task": "stationary"
+    },
+    {
+      "endpoint_R1_fires": 0,
+      "fresh_RA15_execution": false,
+      "kind": "native",
+      "original_execution_source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2",
+      "original_receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2/runs/grid100/acceptance-receipt.json",
+      "route": "SOURCE_EQUIVALENCE_OF_ORIGINAL_RA14_EXECUTION",
+      "status": "PASS_ORIGINAL_RA14_WITH_UNCHANGED_PATH_PROOF",
+      "task": "grid100"
+    },
+    {
+      "endpoint_R1_fires": 0,
+      "fresh_RA15_execution": false,
+      "kind": "native",
+      "original_execution_source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2",
+      "original_receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2/runs/rotated100/acceptance-receipt.json",
+      "route": "SOURCE_EQUIVALENCE_OF_ORIGINAL_RA14_EXECUTION",
+      "status": "PASS_ORIGINAL_RA14_WITH_UNCHANGED_PATH_PROOF",
+      "task": "rotated100"
+    },
+    {
+      "endpoint_R1_fires": 0,
+      "fresh_RA15_execution": false,
+      "kind": "native",
+      "original_execution_source": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2",
+      "original_receipt": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2/runs/staggered100/acceptance-receipt.json",
+      "route": "SOURCE_EQUIVALENCE_OF_ORIGINAL_RA14_EXECUTION",
+      "status": "PASS_ORIGINAL_RA14_WITH_UNCHANGED_PATH_PROOF",
+      "task": "staggered100"
+    },
+    {
+      "fresh_RA15_execution": false,
+      "kind": "port",
+      "required_updates": 4600,
+      "route": "FRESH_RA15_ORIGINAL_FULL_GATE",
+      "status": "PENDING",
+      "task": "ring_shift"
+    },
+    {
+      "fresh_RA15_execution": false,
+      "kind": "moving",
+      "required_updates": 1500,
+      "route": "FRESH_RA15_ORIGINAL_FULL_GATE",
+      "status": "PENDING",
+      "task": "grid100"
+    },
+    {
+      "fresh_RA15_execution": false,
+      "kind": "moving",
+      "required_updates": 1500,
+      "route": "FRESH_RA15_ORIGINAL_FULL_GATE",
+      "status": "PENDING",
+      "task": "rotated100"
+    },
+    {
+      "fresh_RA15_execution": false,
+      "kind": "moving",
+      "required_updates": 1500,
+      "route": "FRESH_RA15_ORIGINAL_FULL_GATE",
+      "status": "PENDING",
+      "task": "staggered100"
+    }
+  ],
+  "read_only_diagnostic_pins": {
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/moving-rotated-window-ra15-r2/attempt-1/COMPLETION.json": "1712dd3d8e39405b7001775074a00b20d31f1989552dc2dd8985f3b0dfc7803d"
+  },
+  "status": "SOURCE_PREPARED_REQUIRED_GATES_PENDING",
+  "task_counts": {
+    "bridged_original_execution": 15,
+    "required_fresh": 4,
+    "total": 19
+  }
+}

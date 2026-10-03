@@ -1,0 +1,35 @@
+{
+  "schema": "particlegan_api_toy_software_validation_v1",
+  "scope": "Software, scorer and evidence controls; no trained-model grades inferred",
+  "scientific_source_commit": "5d75e6556bb65726e71a602dbce708986a5b49f5",
+  "main_media_source_commit": "f8ecb7d64648d00d0a22fa56b518e2079b1bb0c2",
+  "recent_media_source_commit": "02215b50fae7189db3c132b72cfb0d7f93ee320f",
+  "runtime": {
+    "python": "3.12.13",
+    "torch": "2.13.0+cu126",
+    "device": "cpu",
+    "torch_threads": 1
+  },
+  "checks": {
+    "combined_repository": {
+      "source_commit": "4bb4208686992a0a3c4619c656ecabb79ffb48ee",
+      "passed": 3286,
+      "skipped": 63,
+      "expected_failures": 1,
+      "subtests_passed": 18,
+      "local_log": "/ml2/hypergan/toy-api-develop-full-suite-20261002.log",
+      "log_sha256": "5986cc5a40005573ef1b46f3b6ae00509e03c51bcb7389ffc7dcbc2c7d4cc8cb"
+    },
+    "integrated_focused": {
+      "source_commit": "ddb36343fea8ee427a3316f3d3af4d291fa84f03",
+      "passed": 663,
+      "skipped": 0,
+      "expected_failures": 0,
+      "subtests_passed": 0,
+      "local_log": "/ml2/hypergan/toy-api-final-integrated-focused-validation-20261002.log",
+      "log_sha256": "ed64ca52f9ef037f5d4362126c8829369648cb49f2e48968b0800aa390a8ea98"
+    }
+  },
+  "bulk_logs_committed": false,
+  "production_trees_changed": false
+}

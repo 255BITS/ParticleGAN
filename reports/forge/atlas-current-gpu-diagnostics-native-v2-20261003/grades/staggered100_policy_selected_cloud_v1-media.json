@@ -1,0 +1,83 @@
+{
+  "actual_steps": [
+    0,
+    50,
+    750,
+    1750,
+    2750,
+    4000,
+    5000,
+    6000,
+    7000
+  ],
+  "draws": 0,
+  "gif": {
+    "bytes": 301985,
+    "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/staggered100_policy_selected_cloud_v1/staggered100_policy_selected_cloud_v1-goal.gif",
+    "sha256": "fc68156fd1fcd135081feac7e6da2ea2440196ec76a5c905a7ebe9b7b35554c7"
+  },
+  "inputs": [
+    {
+      "bytes": 90991,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/staggered100_policy_selected_cloud_v1/native100/staggered100/snapshots/step_000000.npz",
+      "sha256": "cad26702b75525609c24d061e4a66419c59687e010b4c1435195dc86892a6ee2"
+    },
+    {
+      "bytes": 90848,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/staggered100_policy_selected_cloud_v1/native100/staggered100/snapshots/step_000050.npz",
+      "sha256": "cd620108a65b5e344d752b2f477708cea66b4de450ca19e7e80100cb6c4f0f65"
+    },
+    {
+      "bytes": 90214,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/staggered100_policy_selected_cloud_v1/native100/staggered100/snapshots/step_000750.npz",
+      "sha256": "3ca1cc96caeccbc81bf930f5bae1ccda180844259fddba5f7e209bb37693d32a"
+    },
+    {
+      "bytes": 88412,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/staggered100_policy_selected_cloud_v1/native100/staggered100/snapshots/step_001750.npz",
+      "sha256": "fe5a909854656fdebbe4d21a3c7ca94755b991663dd1ad4641d1dd2117f966f8"
+    },
+    {
+      "bytes": 87840,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/staggered100_policy_selected_cloud_v1/native100/staggered100/snapshots/step_002750.npz",
+      "sha256": "dec784c5d3554b400eb03267e4380675d1dcdda115b187da1cf528a41b01db5c"
+    },
+    {
+      "bytes": 87796,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/staggered100_policy_selected_cloud_v1/native100/staggered100/snapshots/step_004000.npz",
+      "sha256": "e8244797e207f0203a98525870fa9ac639d57a97074a456322f9c4bc1a20365c"
+    },
+    {
+      "bytes": 87741,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/staggered100_policy_selected_cloud_v1/native100/staggered100/snapshots/step_005000.npz",
+      "sha256": "fe79ee2c25945d670d5a9df76b499f54140805c5eb5780df0f13f9ea14994c88"
+    },
+    {
+      "bytes": 87828,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/staggered100_policy_selected_cloud_v1/native100/staggered100/snapshots/step_006000.npz",
+      "sha256": "9abbc8346e234dc22c7b47d5d3868d139083918e5b148bb3a13d921b8a924f45"
+    },
+    {
+      "bytes": 87885,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/staggered100_policy_selected_cloud_v1/native100/staggered100/snapshots/step_007000.npz",
+      "sha256": "dbc63c0a17a00dfe25465650aaab9e32a5df73e75ea6c76c5028d0d68eaad715"
+    },
+    {
+      "bytes": 7250,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/staggered100_policy_selected_cloud_v1/native100/staggered100/summary.json",
+      "sha256": "38ee114a336296e2ff8980993a8bb7d42ee5a2f67607f03217a67fa64b9e0156"
+    },
+    {
+      "bytes": 67869,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/staggered100_policy_selected_cloud_v1/native100/staggered100/events.jsonl",
+      "sha256": "d55a7da8e87fd6cfa93b3f4bc0e144f9674d322fe04b1cbe348a873d3ada1ed5"
+    }
+  ],
+  "optimizer_updates": 0,
+  "original_gate": "FAIL",
+  "qualification_input": false,
+  "renderer_sha256": "fda26cea46ce2dab200e418c3d04e288e3234d61609deecaebe53b1624bf4101",
+  "schema": "particlegan_atlas_current_gpu_diagnostics_v1_media",
+  "source_digest": "db5492df4aa5ef60ce9e7d5869b2b6be8d492f19191a2889967274555f8d0037",
+  "task": "staggered100_policy_selected_cloud_v1"
+}

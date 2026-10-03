@@ -1,0 +1,524 @@
+{
+  "scope": "Completed public full-routed-E22 toy plus separately frozen actual Nova-to-Qwen matched100 validation; neither qualifies a default",
+  "status": "passed",
+  "protocol_sha256": "f302530f82d9f0ff6ce28d7e6b38b3e547212c5313b7631813acbd7ee8f1bd3d",
+  "fixture_sha256": "64bb300b013d17037b51b0fed3de3cb8bfdd227d4ecebff6b5603531a7f24d5b",
+  "teacher_sha256": "6160025a256d7ac7a283b2505c691b81155c27c7048366ff235ac133bdcade0e",
+  "initial_hashes": {
+    "generator": "a9915f4ab080266834da7e1b67bd5b91365b0d89c8a2ccc09180353952344369",
+    "encoder": "05e97e39e2f53377e6d1b7c17f97aa40618b710950b36e38b7ecacedccfa641b",
+    "critic": "a159047df342f6fb75d5be7f929990f29b7244dbeb4ab78eaeccbbddb543a16e",
+    "router": "7c194d6cb69761b8c529b02342e9e5f1ef8ec2974caa43cfee3ffd81f2634401",
+    "table": "915c5697513d769386789424dfb80458c753b8c6032367b29b650bf667142759"
+  },
+  "checks": {
+    "completed_fixed_budget": true,
+    "caller_streams_match": true,
+    "frozen_sources_match": true,
+    "G16_finite_native_health": true,
+    "G16_converges_10_percent": true,
+    "G64_finite_native_health": true,
+    "G64_converges_10_percent": true,
+    "G64_improves_10_percent": true
+  },
+  "elapsed_seconds": 27.0727267479524,
+  "artifact_hashes": {
+    "result.json": "f644810d02a8e004178463bdf3c6fa1fba9fce836be9699e5cbcd38ae0062a52",
+    "G16.jsonl": "df65bcdcead90fa8d2645a2541d5affddc4b4bb3b59245cfe39b5d689908420e",
+    "G64.jsonl": "4f8cc99c3323d0a918cc2b78d5d2c37bebfcb8d7e95343a87e5040b9d1cc127c"
+  },
+  "endpoint_improvement": 0.1866663200465658,
+  "counterexample_100": {
+    "G16": 4.483586235437542e-05,
+    "G64": 4.610594260157086e-05,
+    "G64_relative_worsening": 0.02832732951932382
+  },
+  "arms": {
+    "G16": {
+      "steps": 500,
+      "initial": {
+        "live_excess_error": 0.0005141192814335227,
+        "served_excess_error": 0.0005141192814335227,
+        "served_source": "fast",
+        "irreducible_population_error": 0.0225,
+        "metric": "fixed64 held-context Euclidean population excess; evaluation only"
+      },
+      "endpoint": {
+        "live_excess_error": 1.0215697329840623e-05,
+        "served_excess_error": 1.0215697329840623e-05,
+        "served_source": "fast",
+        "irreducible_population_error": 0.0225,
+        "metric": "fixed64 held-context Euclidean population excess; evaluation only"
+      },
+      "health": {
+        "min_dense_rows": 128,
+        "finite_steps": 500,
+        "ka2_applied_calls": 500,
+        "critic_score_active_gradients": true,
+        "generator_live_gradients": true,
+        "ownership": true,
+        "frozen_host": true
+      },
+      "caller_stream_hashes": {
+        "d_data": "22a3d4212e7867cfe9e07d5f88978e29621ca2a5a55f7a28b4d49b5060810597",
+        "d_gaussian": "27167c5df3195a919a119d1a3fae1cac0b6fed04f9cd3c83729afc83549f5a8c",
+        "g_data": "7a1bce61f82cbbf5eb69ed83e7aa7754243a58fb03be1c3dab9b983dbcd45515",
+        "g_gaussian": "d8cadaa57a145fbf97d6257e84e9f15bf245ed25c46ebeebcb8a86d9e265a5cc"
+      },
+      "caller_panel_history_sha256": "59f411eb6e83811364905c693c3b4b492673f97a85a80529a2c72f7569974af9",
+      "control_counters": {
+        "evals": 31,
+        "probes": 248,
+        "proposals": 248,
+        "guard_rejections": 21,
+        "moves": 0,
+        "splits": 0
+      },
+      "row_counters": {
+        "updates": 500,
+        "resets": 0,
+        "global_resets": 0,
+        "flagged_rows_sum": 2832,
+        "hold_steps": 87
+      },
+      "evaluation_points": [
+        {
+          "step": 1,
+          "live_excess_error": 0.0005157925188541412,
+          "served_excess_error": 0.0005157925188541412,
+          "served_source": "fast",
+          "irreducible_population_error": 0.0225,
+          "metric": "fixed64 held-context Euclidean population excess; evaluation only"
+        },
+        {
+          "step": 50,
+          "live_excess_error": 0.00014636135892942548,
+          "served_excess_error": 0.00014636135892942548,
+          "served_source": "fast",
+          "irreducible_population_error": 0.0225,
+          "metric": "fixed64 held-context Euclidean population excess; evaluation only"
+        },
+        {
+          "step": 100,
+          "live_excess_error": 4.483586235437542e-05,
+          "served_excess_error": 4.483586235437542e-05,
+          "served_source": "fast",
+          "irreducible_population_error": 0.0225,
+          "metric": "fixed64 held-context Euclidean population excess; evaluation only"
+        },
+        {
+          "step": 150,
+          "live_excess_error": 4.717870615422726e-05,
+          "served_excess_error": 4.717870615422726e-05,
+          "served_source": "fast",
+          "irreducible_population_error": 0.0225,
+          "metric": "fixed64 held-context Euclidean population excess; evaluation only"
+        },
+        {
+          "step": 200,
+          "live_excess_error": 2.1085117623442784e-05,
+          "served_excess_error": 2.1085117623442784e-05,
+          "served_source": "fast",
+          "irreducible_population_error": 0.0225,
+          "metric": "fixed64 held-context Euclidean population excess; evaluation only"
+        },
+        {
+          "step": 250,
+          "live_excess_error": 1.768894617271144e-05,
+          "served_excess_error": 1.768894617271144e-05,
+          "served_source": "fast",
+          "irreducible_population_error": 0.0225,
+          "metric": "fixed64 held-context Euclidean population excess; evaluation only"
+        },
+        {
+          "step": 300,
+          "live_excess_error": 1.3724800737691112e-05,
+          "served_excess_error": 1.3724800737691112e-05,
+          "served_source": "fast",
+          "irreducible_population_error": 0.0225,
+          "metric": "fixed64 held-context Euclidean population excess; evaluation only"
+        },
+        {
+          "step": 350,
+          "live_excess_error": 1.7884945918922313e-05,
+          "served_excess_error": 1.7884945918922313e-05,
+          "served_source": "fast",
+          "irreducible_population_error": 0.0225,
+          "metric": "fixed64 held-context Euclidean population excess; evaluation only"
+        },
+        {
+          "step": 400,
+          "live_excess_error": 1.1181731679243967e-05,
+          "served_excess_error": 1.1181731679243967e-05,
+          "served_source": "fast",
+          "irreducible_population_error": 0.0225,
+          "metric": "fixed64 held-context Euclidean population excess; evaluation only"
+        },
+        {
+          "step": 450,
+          "live_excess_error": 1.176340265374165e-05,
+          "served_excess_error": 1.176340265374165e-05,
+          "served_source": "fast",
+          "irreducible_population_error": 0.0225,
+          "metric": "fixed64 held-context Euclidean population excess; evaluation only"
+        },
+        {
+          "step": 500,
+          "live_excess_error": 1.0215697329840623e-05,
+          "served_excess_error": 1.0215697329840623e-05,
+          "served_source": "fast",
+          "irreducible_population_error": 0.0225,
+          "metric": "fixed64 held-context Euclidean population excess; evaluation only"
+        }
+      ]
+    },
+    "G64": {
+      "steps": 500,
+      "initial": {
+        "live_excess_error": 0.0005141192814335227,
+        "served_excess_error": 0.0005141192814335227,
+        "served_source": "fast",
+        "irreducible_population_error": 0.0225,
+        "metric": "fixed64 held-context Euclidean population excess; evaluation only"
+      },
+      "endpoint": {
+        "live_excess_error": 8.308770702569745e-06,
+        "served_excess_error": 8.308770702569745e-06,
+        "served_source": "fast",
+        "irreducible_population_error": 0.0225,
+        "metric": "fixed64 held-context Euclidean population excess; evaluation only"
+      },
+      "health": {
+        "min_dense_rows": 128,
+        "finite_steps": 500,
+        "ka2_applied_calls": 500,
+        "critic_score_active_gradients": true,
+        "generator_live_gradients": true,
+        "ownership": true,
+        "frozen_host": true
+      },
+      "caller_stream_hashes": {
+        "d_data": "22a3d4212e7867cfe9e07d5f88978e29621ca2a5a55f7a28b4d49b5060810597",
+        "d_gaussian": "27167c5df3195a919a119d1a3fae1cac0b6fed04f9cd3c83729afc83549f5a8c",
+        "g_data": "7a1bce61f82cbbf5eb69ed83e7aa7754243a58fb03be1c3dab9b983dbcd45515",
+        "g_gaussian": "d8cadaa57a145fbf97d6257e84e9f15bf245ed25c46ebeebcb8a86d9e265a5cc"
+      },
+      "caller_panel_history_sha256": "59f411eb6e83811364905c693c3b4b492673f97a85a80529a2c72f7569974af9",
+      "control_counters": {
+        "evals": 31,
+        "probes": 248,
+        "proposals": 248,
+        "guard_rejections": 6,
+        "moves": 0,
+        "splits": 0
+      },
+      "row_counters": {
+        "updates": 500,
+        "resets": 0,
+        "global_resets": 0,
+        "flagged_rows_sum": 2954,
+        "hold_steps": 97
+      },
+      "evaluation_points": [
+        {
+          "step": 1,
+          "live_excess_error": 0.0005158475833013654,
+          "served_excess_error": 0.0005158475833013654,
+          "served_source": "fast",
+          "irreducible_population_error": 0.0225,
+          "metric": "fixed64 held-context Euclidean population excess; evaluation only"
+        },
+        {
+          "step": 50,
+          "live_excess_error": 0.0001420391781721264,
+          "served_excess_error": 0.0001420391781721264,
+          "served_source": "fast",
+          "irreducible_population_error": 0.0225,
+          "metric": "fixed64 held-context Euclidean population excess; evaluation only"
+        },
+        {
+          "step": 100,
+          "live_excess_error": 4.610594260157086e-05,
+          "served_excess_error": 4.610594260157086e-05,
+          "served_source": "fast",
+          "irreducible_population_error": 0.0225,
+          "metric": "fixed64 held-context Euclidean population excess; evaluation only"
+        },
+        {
+          "step": 150,
+          "live_excess_error": 3.989458491560072e-05,
+          "served_excess_error": 3.989458491560072e-05,
+          "served_source": "fast",
+          "irreducible_population_error": 0.0225,
+          "metric": "fixed64 held-context Euclidean population excess; evaluation only"
+        },
+        {
+          "step": 200,
+          "live_excess_error": 1.818881355575286e-05,
+          "served_excess_error": 1.818881355575286e-05,
+          "served_source": "fast",
+          "irreducible_population_error": 0.0225,
+          "metric": "fixed64 held-context Euclidean population excess; evaluation only"
+        },
+        {
+          "step": 250,
+          "live_excess_error": 1.4791850844630972e-05,
+          "served_excess_error": 1.4791850844630972e-05,
+          "served_source": "fast",
+          "irreducible_population_error": 0.0225,
+          "metric": "fixed64 held-context Euclidean population excess; evaluation only"
+        },
+        {
+          "step": 300,
+          "live_excess_error": 1.1492847988847643e-05,
+          "served_excess_error": 1.1492847988847643e-05,
+          "served_source": "fast",
+          "irreducible_population_error": 0.0225,
+          "metric": "fixed64 held-context Euclidean population excess; evaluation only"
+        },
+        {
+          "step": 350,
+          "live_excess_error": 1.1521033229655586e-05,
+          "served_excess_error": 1.1521033229655586e-05,
+          "served_source": "fast",
+          "irreducible_population_error": 0.0225,
+          "metric": "fixed64 held-context Euclidean population excess; evaluation only"
+        },
+        {
+          "step": 400,
+          "live_excess_error": 8.858814908307977e-06,
+          "served_excess_error": 8.858814908307977e-06,
+          "served_source": "fast",
+          "irreducible_population_error": 0.0225,
+          "metric": "fixed64 held-context Euclidean population excess; evaluation only"
+        },
+        {
+          "step": 450,
+          "live_excess_error": 7.919661584310234e-06,
+          "served_excess_error": 7.919661584310234e-06,
+          "served_source": "fast",
+          "irreducible_population_error": 0.0225,
+          "metric": "fixed64 held-context Euclidean population excess; evaluation only"
+        },
+        {
+          "step": 500,
+          "live_excess_error": 8.308770702569745e-06,
+          "served_excess_error": 8.308770702569745e-06,
+          "served_source": "fast",
+          "irreducible_population_error": 0.0225,
+          "metric": "fixed64 held-context Euclidean population excess; evaluation only"
+        }
+      ]
+    }
+  },
+  "source_author_review": {
+    "status": "passed_source_author_offline_evidence_review",
+    "checks": 18,
+    "path": "/ml2/hypergan/routed-generator-batch-v2-offline-review-20261002/receipt.json"
+  },
+  "publication_status": "draft_pending_independent_review_and_real100_transfer",
+  "scientific_authority": "Original V2 driver/protocol/result; publication packaging is not scientifically rerun",
+  "real100": {
+    "scope": "One frozen full native routed-E22 matched GAN-only continuation, best4600 to4700; validation only",
+    "status": "rejected",
+    "initial_step": 4600,
+    "endpoint_step": 4700,
+    "updates_per_arm": 100,
+    "rows": [
+      {
+        "arm": "starting_best4600",
+        "served_source": "fast",
+        "metrics": {
+          "lpips": 0.14271191012283618,
+          "teacher_lpips": 0.01060130489482121,
+          "lpips_vs_teacher": 0.14158534195104783,
+          "pixel_mse": 0.0041656926478026435,
+          "latent_nmse": 0.18466181312264365
+        }
+      },
+      {
+        "arm": "control_g16",
+        "served_source": "fast",
+        "metrics": {
+          "lpips": 0.14273446326313372,
+          "teacher_lpips": 0.01060130489482121,
+          "lpips_vs_teacher": 0.14148894240233031,
+          "pixel_mse": 0.004163847232617131,
+          "latent_nmse": 0.1851627960462462
+        }
+      },
+      {
+        "arm": "candidate_g64",
+        "served_source": "fast",
+        "metrics": {
+          "lpips": 0.14188948451456698,
+          "teacher_lpips": 0.01060130489482121,
+          "lpips_vs_teacher": 0.14076658359474756,
+          "pixel_mse": 0.004172924829617841,
+          "latent_nmse": 0.18354746242138473
+        }
+      }
+    ],
+    "quality_gate": {
+      "status": "FAILED",
+      "required_gain_from_start": 0.001,
+      "required_candidate_lpips_at_most": 0.14171191012283618,
+      "observed_gain_from_start": 0.0008224256082692005,
+      "observed_gain_vs_control": 0.0008449787485667326,
+      "shortfall": 0.00017757439173080036,
+      "matched_control_win": true,
+      "same_serving_pair": true,
+      "extension_authorized": false,
+      "default_promotion_authorized": false
+    },
+    "per_case_donor_lpips": {
+      "candidate_better_than_control": 146,
+      "candidate_worse_than_control": 30,
+      "candidate_better_than_start": 136
+    },
+    "cohort": {
+      "expanded_train_rows": 10806,
+      "fit_rows": 10486,
+      "guard_rows": 64,
+      "validation_rows": 176,
+      "original_validation_preserved": true,
+      "validation_kind_counts": {
+        "native_clean_estimate": 96,
+        "native_finished": 16,
+        "switched_clean_estimate": 48,
+        "switched_finished": 16
+      },
+      "snapshot_sha256": "7fa34adfeecccd11e6be7d83689f5141798804fcc9c7c2e576256c33c7b3e3ee",
+      "validation_records_sha256": "25f192a68963db7c7a323ed805253bad950193c39ccfee502f205c36cfcfb137",
+      "test_opened": false
+    },
+    "timing": {
+      "committed_training_updates": 200,
+      "copied_diagnostic_lifecycle_executions": 2,
+      "copied_diagnostic_committed_updates": 0,
+      "per_arm": {
+        "control_g16": {
+          "active_update_seconds": 28.076849843608215,
+          "preload_seconds": 74.52688022120856,
+          "endpoint176_decode_seconds": 45.90918849105947,
+          "max_active_update_seconds": 2.2240074151195586,
+          "max_preload_seconds": 1.046027691103518
+        },
+        "candidate_g64": {
+          "active_update_seconds": 96.10953027242795,
+          "preload_seconds": 61.131797428941354,
+          "endpoint176_decode_seconds": 46.129747710889205,
+          "max_active_update_seconds": 2.9226508389692754,
+          "max_preload_seconds": 1.49807545915246
+        }
+      },
+      "supervisor_observed_process_wall_seconds": 418.08033857215196
+    },
+    "scientific_definition": {
+      "public_full_E22": true,
+      "package_git_sha": "c4b53495d04a2052e266739a82053317b7f49698",
+      "D_batch": 16,
+      "G_batch_by_arm": {
+        "control_g16": 16,
+        "candidate_g64": 64
+      },
+      "routed_fit_observation_batch": 16,
+      "G64_data": "Same exact D16 IDs followed by48 auxiliary fit rows; both arms consume and hash48 extension rows/output Gaussians",
+      "coupled_caller_streams": "D16 identities, original data_rng/paired_rng, D Gaussian, first16 G Gaussian, auxiliary48 rows/Gaussians",
+      "native_DV12_private_identity_claim": false,
+      "native_G_perturbation": "One whole-batch public routed_generate perturb=True, native record=True; G64 consumption may change later native perturbations",
+      "G_update": "One post-D prediction, scalar antithetic mean, backward and optimizer/public lifecycle; G/E/table/noise owners native",
+      "objective": "GAN-only paired RpGAN plus native KA2 for D; no reconstruction/MSE/VIC backward",
+      "historical_recipe_reconstruction_weight": 1,
+      "effective_reconstruction_coefficient": 0,
+      "D_global_score_owned_buffer": 0.01,
+      "D_global_score_executed_gain": 0,
+      "local_score_gain": 0.0625,
+      "G_applied_rate_factor": 0.25,
+      "G_beta1": 0,
+      "CPU_row_cache_max_bytes": 1073741824,
+      "CPU_shard_cache_max_bytes": 134217728,
+      "scientific_phase_cache_misses_allowed": 0
+    },
+    "limits": [
+      "Single fixed matched100 continuation; no seed sweep or statistical/generalization claim",
+      "Candidate has lower LPIPS/latentNMSE but slightly higher pixelMSE",
+      "G64 sees four times as many G examples per update; no equal-compute speedup claim",
+      "Toy starts fresh and is not a reconstruction of the mature real checkpoint",
+      "Matched control win but .001 improvement gate failed; no extension/default promotion"
+    ],
+    "evidence": {
+      "protocol.json": {
+        "path": "/ml2/hypergan/nova-qwen-generator-data64-20261002/protocol.json",
+        "sha256": "5b15235646e42e9dfb76c41f413e3f2f3366298aab743cc192a34100da207163"
+      },
+      "result.json": {
+        "path": "/ml2/hypergan/nova-qwen-generator-data64-20261002/result.json",
+        "sha256": "e25d979722a0ca91719f1166810f650680c3002133eb2b13282121c730088422"
+      },
+      "supervisor.json": {
+        "path": "/ml2/hypergan/nova-qwen-generator-data64-20261002/supervisor.json",
+        "sha256": "544ee4cb21630c77b1603d55bbeaa45459264c9bd7a10a2e7591298d638951eb"
+      },
+      "source-manifest.json": {
+        "path": "/ml2/hypergan/nova-qwen-generator-data64-20261002/source-manifest.json",
+        "sha256": "d444001a7e8f09e8483e86593498688bf9d6969d75f6190ad661e13d2e9906bb"
+      },
+      "verification/starting-parity.json": {
+        "path": "/ml2/hypergan/nova-qwen-generator-data64-20261002/verification/starting-parity.json",
+        "sha256": "c0715aad189467a15296ac321f955de82931fa2044d1b14890746ae7986a8bba"
+      },
+      "verification/neutral-G16-replay.json": {
+        "path": "/ml2/hypergan/nova-qwen-generator-data64-20261002/verification/neutral-G16-replay.json",
+        "sha256": "2a7b9f56dbdb1c39fc342391ffe3201b7ad8f4b9064a0c78ece476f5bea654c1"
+      },
+      "verification/matched-caller.json": {
+        "path": "/ml2/hypergan/nova-qwen-generator-data64-20261002/verification/matched-caller.json",
+        "sha256": "caf4444f7bd3e19d2eea4bcb6f220a9599c1d3f31a2fca2b7afa002a35863e17"
+      },
+      "decoded-receipt.json": {
+        "path": "/ml2/hypergan/nova-qwen-generator-data64-20261002/decoded-receipt.json",
+        "sha256": "438059634cf91ffd68065e1b9c7a13e3ecd64b0de8081beb6cbef6f180b44ce7"
+      },
+      "control_g16/decoded-176-004700.json": {
+        "path": "/ml2/hypergan/nova-qwen-generator-data64-20261002/control_g16/decoded-176-004700.json",
+        "sha256": "ef3174dbf1eb19de2d8c3d574ad70dbea508704dd35261323c5e71910da1c949"
+      },
+      "candidate_g64/decoded-176-004700.json": {
+        "path": "/ml2/hypergan/nova-qwen-generator-data64-20261002/candidate_g64/decoded-176-004700.json",
+        "sha256": "80b72582cf48f65cfd8f9b1f6910d1c613f94f3cf70d17d03b324f100ac61675"
+      }
+    }
+  },
+  "separate_reviews": {
+    "toy_independent": {
+      "path": "/ml2/hypergan/nova-qwen-target-mechanism-audit-20261002/g-batch-toy-v2-review/independent-review.json",
+      "sha256": "083fcb3ddb371e9d629c42b237becd0f06c4f660a654dd507f5783ea8df22128"
+    },
+    "toy_author_offline": {
+      "path": "/ml2/hypergan/routed-generator-batch-v2-offline-review-20261002/receipt.json",
+      "sha256": "b94d234e7df0d0cb5b2d3a6c413708e8086df072b935fb2d6c3808ca548792c6"
+    },
+    "actual_data_projection": {
+      "path": "/ml2/hypergan/nova-qwen-target-mechanism-audit-20261002/current-data-projection/receipt.json",
+      "sha256": "baef07d44f4724028f3072a5e935fd3ad826bdf3cba9128b98e7e8e3119b609c"
+    },
+    "actual_data_projection_independent": {
+      "path": "/ml2/hypergan/nova-qwen-target-mechanism-audit-20261002/current-data-projection/independent-review.json",
+      "sha256": "957c954c6e7eb721edbfbc27f41004efd45cc5ac5aef916516f4bb2cb90368a6"
+    }
+  },
+  "publication": {
+    "status": "Packaging-only copy, not scientifically rerun",
+    "protocol_path": "examples/routed_generator_batch_protocol.json",
+    "protocol_sha256": "08c7d8f90ede0d2f8b416ad9434e0c55d89530158d53af8b58727d7540f5b088",
+    "base_git_sha": "45e621f11de05816204151a271e87144ebded90a",
+    "package_reference_git_sha": "c4b53495d04a2052e266739a82053317b7f49698",
+    "package_file_count": 30,
+    "protected_source_file_count": 37,
+    "original_scientific_driver_sha256": "85e23d03a3c8a583c2b928b024fa48b3c16a425364c64f0f92c03bb194d7adba",
+    "original_scientific_protocol_sha256": "f302530f82d9f0ff6ce28d7e6b38b3e547212c5313b7631813acbd7ee8f1bd3d",
+    "historical_original_tests_unchanged": true,
+    "new_contract": "Allows changed checkout HEAD/prose with bound sources equal, rejects scientific source drift/missing file"
+  }
+}

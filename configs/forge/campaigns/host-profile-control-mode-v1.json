@@ -1,0 +1,35 @@
+{
+  "budgets": {
+    "campaign_seconds": 3600,
+    "candidate_seconds": 1800,
+    "task_seconds": {
+      "mode_hold": 1800
+    }
+  },
+  "cuda_model": "NVIDIA RTX A6000",
+  "execution_backend": "cuda",
+  "failure_policy": "continue_registered_diagnostics",
+  "id": "host-profile-control-mode-v1",
+  "profile": "host-profile-transfer-v1",
+  "profile_sha256": "a6b6d2a1f9d875b9548d94352c642e784427d58490c1959c12b08375f2a913e3",
+  "purpose": "Finish only the cheapest first smoke predicate, mode_hold, for the two existing substantive controls under the unchanged host-profile-transfer-v1 source, cohort, seed, host and gates. Two cells only, serial GPU0 with one worker and no sharing. Inspect both results before selecting any additional cells; keep both candidates open. No K3P rerun, new candidate, positivity prediction, automatic native or whole-matrix execution, or qualification/adoption claim. BLOCKED and errors remain unknown.",
+  "qualification_reuse": false,
+  "schema_version": 1,
+  "selections": [
+    {
+      "lineage_id": "forge-onboarding-anchor-ablation",
+      "reason": "Measure the cheapest first smoke predicate for the already-declared EMA-anchor ablation; its outcome under this exact profile is unknown.",
+      "tasks": [
+        "mode_hold"
+      ]
+    },
+    {
+      "lineage_id": "forge-no-critic-penalty",
+      "reason": "Measure the cheapest first smoke predicate for the already-declared critic-penalty ablation; its outcome under this exact profile is unknown.",
+      "tasks": [
+        "mode_hold"
+      ]
+    }
+  ],
+  "view": "host_profile_transfer"
+}

@@ -1,0 +1,14 @@
+{
+  "status": "FROZEN_READ_ONLY_DIAGNOSIS_NO_QUALITY_VERDICT",
+  "files_sha256": {
+    "integration/review/training-regression/post-ra5-saved-diagnosis/ra6-step0100/INTERPRETATION.md": "5840ef344a79953ef883b1c8d0143a310822d26363a16a41cfdf5f80c935c095",
+    "integration/review/training-regression/post-ra5-saved-diagnosis/ra6-step0100/REPORT.md": "69926f6889995d20a0913ae0c7a0c24190e42279550a0b56b45dd76a3ee060fb",
+    "integration/review/training-regression/post-ra5-saved-diagnosis/ra6-step0100/candidate-metrics-captured.jsonl": "51c0c46e48d77a41a333f13066911b306630e937fed9762bf5d15d275f8b160c",
+    "integration/review/training-regression/post-ra5-saved-diagnosis/ra6-step0100/e22-metrics-captured.jsonl": "3b7ed570f47baaa152cb0a1a6b4daa899c2d97b755200090e24d2e16462648f0",
+    "integration/review/training-regression/post-ra5-saved-diagnosis/ra6-step0100/ra4-metrics-captured.jsonl": "6751beed015d878d2445fb71e571cebe26014d1d85d3e21b421e1902c75302e8",
+    "integration/review/training-regression/post-ra5-saved-diagnosis/ra6-step0100/receipt.json": "d4f1d2524fbad3070b6e1a7a1dd90db040af533a0c56bba1996fa45e6127dc58",
+    "integration/review/training-regression/post-ra5-saved-diagnosis/analyze_saved.py": "bf3e2001a703b1801f718bbacc185e24ea7bd631f9cf61997c32a817f505a735",
+    "integration/review/training-regression/post-ra5-saved-diagnosis/PROTOCOL.md": "e5147861cf3378a003cb6947c4cd52680787982c9d94eb8966f52da4759c4bf3",
+    "integration/review/training-regression/post-ra5-saved-diagnosis/ra6-step0100.log": "29a8c6c3ecabb6b096db64022e3ab602dee64aacd071846b652c40f4af107ef8"
+  }
+}

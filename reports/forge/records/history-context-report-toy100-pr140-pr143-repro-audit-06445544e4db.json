@@ -1,0 +1,62 @@
+{
+  "candidate_id": "context:report/toy100/pr140-pr143-repro-audit",
+  "candidate_revision": "f96a130d45ca38a9ecc946f750767fd241c40d0ad8dc2425ea1e56cbd4399ea4",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "unknown",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Narrative context only; no scientific pass is inferred.",
+  "evidence_scope": "historical",
+  "hypothesis": "PR140 / PR143 CPU reproduction audit",
+  "mechanism_class": "unknown",
+  "next_action": "Read the linked narrative and normalize any remaining exact experiment identities before scientific comparison.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "family": "report/toy100/pr140-pr143-repro-audit",
+      "narrative_sources": [
+        {
+          "git_blob": "8e6e218d4162c510af704f29db39aa9119d4fff2",
+          "path": "reports/toy100/pr140-pr143-repro-audit/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "70592113b8b0078934589cbd1e1e42f58409160d32585c6b0d88840436e69bef",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/pr140-pr143-repro-audit/README.md"
+        }
+      ],
+      "structured_sources_imported": [],
+      "summary_excerpt": "# PR140 / PR143 CPU reproduction audit\n\n**The saved acquisition and continuation results reproduce. The earlier local\nfailure is explained by MKL CPU-vendor dispatch, not the CPU-only PyTorch wheel.**\nPR143 remains a provisional keep: its five late misses are real, and ordinary\nAMD execution still fails acquisition. No release qualification or global\nleaderboard win is established.\n\nPinned sources: PR140 `ef4084a46d999af33c8c484ef36dfdafbe3fc517`; PR143\n`3384976cc6fb1931ac63f7b213e585654c9d8996`. Tests use seed 0 throughout, one CPU\nthread, PyTorch 2.14.0+cpu, and ATen AVX2 on an AMD Ryzen 9 5900X.\n\n| Execution | Cold ring at 1200 | Stay 1210\u20132400 | Worst modes / HQ | Final |\n| --- | --- | --- | --- | --- |\n| PR140, ordinary AMD dispatch | 7 / HQ 1 | 0/120 | 0 / 0 | 5 / .3826 |\n| PR143, ordinary AMD dispatch | 7 / HQ 1 | 0/120 | 0 / 0 | 5 / .3826 |\n| PR140, diagnostic Intel MKL dispatch | 8 / HQ .998779 | **114/120** | 5 / .362549 | 8 / 1 |\n| PR143, diagnostic Intel MKL dispatch | 8 / HQ .998779 | **115/120** | 7 / .622314 | 8 / 1 |\n\nFor **both PRs, all 2,400 recorded update rows and all 240 diagnostic rows match\ntheir submitted JSON exactly**. This is more than matching endpoint scores.\nPR143's warm summary also matches exactly, including initial, final, and identity\nstate hashes; identity and method each pass 200/200. Its separate cold trajectory\nand ring JSON match in every "
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-context-report-toy100-pr140-pr143-repro-audit-06445544e4db",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "8e6e218d4162c510af704f29db39aa9119d4fff2",
+    "path": "reports/toy100/pr140-pr143-repro-audit/README.md",
+    "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "sha256": "70592113b8b0078934589cbd1e1e42f58409160d32585c6b0d88840436e69bef",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/pr140-pr143-repro-audit/README.md"
+  },
+  "task_results": []
+}

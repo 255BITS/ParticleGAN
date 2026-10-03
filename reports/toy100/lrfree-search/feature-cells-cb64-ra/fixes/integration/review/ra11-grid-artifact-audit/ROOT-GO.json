@@ -1,0 +1,8 @@
+{
+  "status": "GO_ONE_COMPLETED_GRID_ARTIFACT_AUDIT",
+  "utc": "2026-09-30T17:02:28.915931+00:00",
+  "input_seal_sha256": "8e3e157819e4d47768cbd9fabf9b5aecb65a69d7b92e0bafca904014da081f77",
+  "root_verified_raw_guard_count": 285,
+  "invocations_allowed": 1,
+  "scope": "One presealed independent CPU audit of completed saved artifacts; no constructor/forward/draw/update/seed experiment/rescoring/CUDA."
+}

@@ -1,0 +1,24 @@
+{
+  "status": "STARTED_CPU_WATCHER",
+  "utc": "2026-09-30T05:02:08.198517+00:00",
+  "pid": 585174,
+  "startticks": 164634835,
+  "command": [
+    "/tmp/pr38-default-env/bin/python",
+    "-u",
+    "-B",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/monitor_validation.py",
+    "--validation",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra6",
+    "--output",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/validation-cb64-ra6-monitor",
+    "--watch"
+  ],
+  "validation": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra6",
+  "output": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/validation-cb64-ra6-monitor",
+  "log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra4-quality/ra6-lane-review/watcher.log",
+  "monitor_sha256": "4ee4cae810342b675a39b269112ca907be3ffe88ae9cadab157e4933c487328b",
+  "validation_source_freeze_sha256": "e13678688ba960084f23546a0311908d170e8619e403a6f990a57e4d7ed85c7a",
+  "new_gpu_jobs": 0,
+  "frozen_inputs_modified": false
+}

@@ -1,0 +1,96 @@
+{
+  "schema": 1,
+  "status": "DIAGNOSTIC_COMPLETE_UNQUALIFIED",
+  "created_utc": "2026-09-30T00:38:57.038430+00:00",
+  "scope": "CPU real-only bounded support diagnosis; no new quality seeds or GPU workloads",
+  "adopt_into_corrected_candidate": false,
+  "reason": "No coherent proposed support law passes all trained/frozen/highdim/nominal controls; original support remains explicit unresolved research issue.",
+  "sources": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/geometry/support-highdim/PROTOCOL.md": "c5952f81bc2f9daeaf9126888f96c50b5136294821e05cc4fd580332abec8ecb",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/geometry/support-highdim/REPORT.md": "c1db393c26029b1d41759d1182093e3eab6ce434b23cfd3fa47d29d0552751ab",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/geometry/support-highdim/diagnose_highdim.py": "6a18c0bffe83714711682a02fb929c7a9479d665eca4266f19191b51fb2769e2",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/geometry/support-highdim/diagnose_local_anchors.py": "3728332907da015bb89b5749fdbe4583aada4bb7d304966f813b90535bf7b58f",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/geometry/support-highdim/diagnose_nearest_local.py": "e6d76b26ee550a32017f5be95a6a65a89a15aa13b3fce3096b44ecc19647902e",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/geometry/support-highdim/diagnose_rank.py": "87af9b490da3a28996aee4a3ebf7602175ed8304b5055a7b5ba0cec4ad05ac48",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/geometry/support-highdim/fisher_rank.py": "ab67cbd221de191febe696207dfc088e3150c0feedc6c3ed79b62cdbef4b95d6",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/geometry/support-highdim/initial-numerics/fisher_rank.py": "10706113635963427a2d3a53a8ccaa8e925a42cd7fb5e504ca527ab354943c51",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/geometry/support-highdim/initial-numerics/strict-test_metric_contract.py": "986860b1be3049c29bed520c2234081d3f4e9e65abf67a27ad88e2a691226eea",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/geometry/support-highdim/initial-numerics/test_metric_contract.py": "56b1dd5b138a274c7fb3cc95b9da005bd2b4c1627ac20b9b1c196b5b4093c094",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/geometry/support-highdim/test_metric_contract.py": "986860b1be3049c29bed520c2234081d3f4e9e65abf67a27ad88e2a691226eea"
+  },
+  "evidence": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/geometry/support-highdim/FLOOR-DELTA.json": "71ea5b6dde4a78dca65d6fb9c16cc13bcf9ce73fc1cc77effe439379e5eacd2f",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/geometry/support-highdim/GPU-CONTRACT-REVIEW.json": "9bfda996eb20c77c776aaf5a5f7764f9c39242e97df94a6b89821db4d75f2ddb",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/geometry/support-highdim/REFERENCE-CONTEXT.json": "f876eb71ee47b886372aeb7e48969bfb563b8397117852f699b675ce17c80f01",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/geometry/support-highdim/diagnosis-local-anchors.json": "7843f6bf4498f7c5d8c3e85cbabf813e920d76b410381ed33c0256365e2612b7",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/geometry/support-highdim/diagnosis-local-anchors.log": "704a34b4915b8d91758d351bae2bd17de6d69134e5c8f3c5745c9bee556c59fe",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/geometry/support-highdim/diagnosis-nearest-local.json": "0e20c2017b1d069ad34856929a38e74dbd3d63f76809074a036c8b84b62f819c",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/geometry/support-highdim/diagnosis-nearest-local.log": "e8ef77f4d4201cd5dd1a5fc2f129d439f67705502f0e23f6384ecd79f6d7791c",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/geometry/support-highdim/diagnosis-rank.json": "bdcc93f405903162c300f739357c62c24b16f30b05d67068a3edd88846fd5bc9",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/geometry/support-highdim/diagnosis-rank.log": "f75eeeaea2cd735b2af530a8084111ed19418abe2efc5a6739ca6cc32bdf8e39",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/geometry/support-highdim/diagnosis.json": "cf5668de4f6c6d1f67749b2b21384fb69e29d11a70614fe1be5019eba3eaec27",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/geometry/support-highdim/diagnosis.log": "c99271f17c62adcd0cfa1117b7a33674cac7d71fba3ec63b1a80104526aae850",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/geometry/support-highdim/initial-numerics/metric-contract.json": "147a1c8989050dbc0d4b4637b037287a287c6e7ecdf7082527b7fa9af5e35f90",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/geometry/support-highdim/initial-numerics/metric-contract.log": "dbcb485c97eba0500d036e555118a7a2fe0ede4d783b24c4ac79510cf29c57d6",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/geometry/support-highdim/initial-numerics/strict-contract.json": "9c37d0f488e7dc10ddf429aebc13fa12ff33647f4754fdb7904bff7fe905b649",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/geometry/support-highdim/initial-numerics/strict-contract.log": "3b8326426f9e4771b5f5e1cc6a175422eedae7c943c30cbaf5a6173566f92df6",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/geometry/support-highdim/metric-contract.json": "c5971d33bf5c203260c5a06198ca7581feb1e9be8002e29784f68b0f396820c4",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/geometry/support-highdim/metric-contract.log": "c5ef6cc02b654163784ebd0d7e31c615f06a019cb032b6acdcea3b952d72bed0"
+  },
+  "external_reviewed_artifacts": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/support/diagnose_anchor_posterior.py": "02deb0aceec5c4892598f582b65bd6fb57057a89b16825b6dc65c631b44ce335",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/support/diagnosis-anchor-posterior.json": "07286c36252c4fd5d79c8439fa1ed10ee2e662f872598bd939257d29471565e2",
+    "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/audit/check_artifacts.py": "4b405136829b2275218db1406ba346dada3c62dd1b931cdd71fdb7069f739aae",
+    "/ml2/hypergan/gan-attempts/feature-cells-cuda-retest-20260929/audit/CHECKS.json": "6e35c4baf64d3bb8ffc5367b52c3141b728d48e5c7555c63796775cf29513f67",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/geometry/gpu-kernel-result.json": "9272e24d8530921eab9f02350a2c5b7fcbd4289a1b11173efb7525c5377701cf"
+  },
+  "numerical_contracts": {
+    "passed": 10,
+    "total": 10,
+    "cuda_initialized": false
+  },
+  "highdim_radial_fisher_detector": {
+    "sizes": [
+      1024,
+      2048,
+      4096,
+      8192
+    ],
+    "recall": [
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "bulk_fp": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "rare_fp": [
+      0,
+      0,
+      0,
+      0
+    ],
+    "diagnostic_only": true
+  },
+  "universal_anchor_posterior": {
+    "detector_gates_passed": 14,
+    "total": 18,
+    "rejected": true
+  },
+  "historical_source_preservation": {
+    "ranked_helper_previous_sha256": "10706113635963427a2d3a53a8ccaa8e925a42cd7fb5e504ca527ab354943c51",
+    "ranked_helper_current_sha256": "ab67cbd221de191febe696207dfc088e3150c0feedc6c3ed79b62cdbef4b95d6",
+    "added_floor_inactive_fixed_cases": 8
+  },
+  "partition_count_law": "unchanged",
+  "q": 0.05,
+  "seeds": [
+    90229,
+    20260929
+  ],
+  "gpu_protocol": "No GPU acceptance of an unqualified support law is scheduled."
+}

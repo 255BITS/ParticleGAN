@@ -1,0 +1,3959 @@
+{
+  "cost": {
+    "atlas_paid_seconds": 168.8133712040726,
+    "combined_paid_seconds": 338.82339419214986,
+    "e22_paid_seconds": 170.01002298807725,
+    "timing_ranking": false
+  },
+  "denominator": {
+    "actual_training_gifs": 12,
+    "case_cells": 64,
+    "completed_updates": 9600,
+    "default_adoption": false,
+    "families": 2,
+    "full_original_protocols": 12,
+    "fully_qualified_configurations": 0,
+    "original_failures": 4,
+    "original_passes": 8,
+    "paired_saved_array_comparisons": 500,
+    "required_cases_per_configuration": 8,
+    "speed_ranking": false,
+    "study_failures": 4,
+    "study_incomplete": 4,
+    "study_passes": 4,
+    "unknown": 52,
+    "whole_configurations": 8
+  },
+  "external_analysis": {
+    "bytes": 130936,
+    "path": "/ml2/hypergan/toy-policy-round3-diagnosis-20261002/final-snapshot.json",
+    "sha256": "feddb02d31eca0214cfcb15b24b7e50ec6162a2f993cbcf069140a1febf1ddf8"
+  },
+  "external_collector": {
+    "bytes": 9581,
+    "path": "/ml2/hypergan/toy-policy-round3-diagnosis-20261002/collector-source.py",
+    "sha256": "62d7ffa54b1f5dc88e9e8fd4e200fbc7091077b52f79f213dbef6edd0efd8391"
+  },
+  "historical_results_changed": false,
+  "inspection": {
+    "metric_rescoring": 0,
+    "model_construction": 0,
+    "model_sampling": 0,
+    "ordinary_training_updates": 0,
+    "state_comparison_rule": "Exact tensor dtype/shape/value-byte equality and scalar float-byte equality, including matched diagnostic NaN markers; no NaN accepted in recorded scientific metrics.",
+    "verification": "Bound artifacts and recorded protocol/outcome/state/cloud comparisons; root owns numerical recertification."
+  },
+  "limits": [
+    "Only retained boundaries are compared, not every optimizer update.",
+    "All original training budgets completed; study INCOMPLETE refers only to insufficient later hold observations.",
+    "All twelve monotone surprise.fires counters are zero; no accepted reopening event acted in this cohort.",
+    "Equal retained draws and learned endpoint states do not establish policy equivalence.",
+    "No native feature-cell quality host was reached.",
+    "Failed projection gates and timing are observed signatures; a causal optimizer mechanism remains unresolved."
+  ],
+  "records": [
+    {
+      "acquisition_hold": {
+        "acquired_seconds": 15.423192069865763,
+        "acquired_step": 475,
+        "hold_checks": 5,
+        "hold_passed": 5,
+        "reason": "first acquisition and uninterrupted hold",
+        "speed_eligible": false,
+        "status": "PASS"
+      },
+      "artifacts": {
+        "final-state.pt": {
+          "bytes": 346835,
+          "path": "/ml2/hypergan/forge-policy-family-round3-20261002/atlas/atlas--05ae5523eabcc40be1b3cc4a06afd52d5a1d442a2f66b7df427e67ca3b23d78d/image-develop-img_intensity2-source-transpose12/final-state.pt",
+          "sha256": "90280d209c713b9e874003a8805391e92bc6d3b90cb70d537ccd3c5d2d3f6ac0"
+        },
+        "goal.gif": {
+          "bytes": 219879,
+          "path": "/ml2/hypergan/forge-policy-family-round3-20261002/atlas/atlas--05ae5523eabcc40be1b3cc4a06afd52d5a1d442a2f66b7df427e67ca3b23d78d/image-develop-img_intensity2-source-transpose12/goal.gif",
+          "sha256": "de56f9017d660d14b0ef596663d30838fe3cbf437703b0d19337e40165badb11"
+        },
+        "observations.npz": {
+          "bytes": 6060965,
+          "path": "/ml2/hypergan/forge-policy-family-round3-20261002/atlas/atlas--05ae5523eabcc40be1b3cc4a06afd52d5a1d442a2f66b7df427e67ca3b23d78d/image-develop-img_intensity2-source-transpose12/observations.npz",
+          "sha256": "c0416b6dc43fa0e5e62e33295d70ba520f7df5b1bd0b2cfbc91afc58b11967ab"
+        }
+      },
+      "backend_selection": {
+        "actual_backend": "knn",
+        "generator_noise_factor": 1.0,
+        "raw_output_width": 64,
+        "sampling_backend": "controller_reference",
+        "selection_reason": "finite_resolution_infeasible"
+      },
+      "case_id": "image-develop-img_intensity2-source-transpose12",
+      "completed_updates": 600,
+      "config_id": "atlas--05ae5523eabcc40be1b3cc4a06afd52d5a1d442a2f66b7df427e67ca3b23d78d",
+      "effective_recipe_sha256": "6449478c4194917c0eb38a0d752e00c69eaa7de51b64596ee1d4e06ee505307e",
+      "execution_status": "COMPLETE",
+      "failed_after_confirmation": [],
+      "family": "atlas",
+      "final": {
+        "failed_bounds": [],
+        "metrics": {
+          "completed_steps": 600.0,
+          "distribution_tv": 0.005859375,
+          "finite_template_tv": 0.005859375,
+          "hq": 0.9990234375,
+          "mean_rmse": 0.016358178108930588,
+          "modes": 2.0,
+          "output_noise_added": 0.0,
+          "policy_latent_perturbation": 1.0,
+          "rejected_mass": 0.0009765625,
+          "samples": 1024.0,
+          "served_averaged": 0.0
+        },
+        "passed": true,
+        "step": 600
+      },
+      "final_role_lrs": [
+        [
+          0.00159375,
+          0.0031875,
+          0.0031875
+        ],
+        [
+          0.002360201350460432
+        ]
+      ],
+      "full_protocol_complete": true,
+      "initial_lrs": [
+        [
+          0.0031875,
+          0.0031875,
+          0.0031875
+        ],
+        [
+          0.0031875
+        ]
+      ],
+      "knobs": {
+        "lr": 0.0031875,
+        "prior_lr_mult": 1.0
+      },
+      "media": {
+        "actual_update_steps": [
+          0,
+          75,
+          150,
+          225,
+          300,
+          375,
+          450,
+          525,
+          600
+        ],
+        "decoded_frames": 9,
+        "dimensions": [
+          460,
+          627
+        ],
+        "displayed_original_verdict": "PASS",
+        "frames": 9,
+        "path": "/ml2/hypergan/forge-policy-family-round3-20261002/atlas/atlas--05ae5523eabcc40be1b3cc4a06afd52d5a1d442a2f66b7df427e67ca3b23d78d/image-develop-img_intensity2-source-transpose12/goal.gif"
+      },
+      "original_gate": "PASS",
+      "paid_seconds": 18.936468698084354,
+      "planned_case_cap": 180,
+      "protocol": {
+        "default_evaluation_samples": 1024,
+        "default_updates": 600,
+        "evaluation_samples": 1024,
+        "evaluation_steps": [
+          0,
+          25,
+          50,
+          75,
+          100,
+          125,
+          150,
+          175,
+          200,
+          225,
+          250,
+          275,
+          300,
+          325,
+          350,
+          375,
+          400,
+          425,
+          450,
+          475,
+          500,
+          525,
+          550,
+          575,
+          600
+        ],
+        "media_frames": 9,
+        "media_steps": [
+          0,
+          75,
+          150,
+          225,
+          300,
+          375,
+          450,
+          525,
+          600
+        ],
+        "metric_evaluation_steps": [
+          0,
+          25,
+          50,
+          75,
+          100,
+          125,
+          150,
+          175,
+          200,
+          225,
+          250,
+          275,
+          300,
+          325,
+          350,
+          375,
+          400,
+          425,
+          450,
+          475,
+          500,
+          525,
+          550,
+          575,
+          600
+        ],
+        "metric_observations": 24,
+        "terminal_observations": 5,
+        "updates": 600,
+        "wall_cap_seconds": 180.0
+      },
+      "raw_acquisition_seconds": 18.936468698084354,
+      "receipt": {
+        "bytes": 44491,
+        "path": "/ml2/hypergan/forge-policy-family-round3-20261002/atlas/atlas--05ae5523eabcc40be1b3cc4a06afd52d5a1d442a2f66b7df427e67ca3b23d78d/image-develop-img_intensity2-source-transpose12/receipt.json",
+        "sha256": "1f4a7a1e1c97baac138c878b80eab0b8910cdd658a0adf7341012a88d39f39c8"
+      },
+      "reopen_guard": {
+        "calm_network": {
+          "0.0": {
+            "role": "generator",
+            "scale": 0.5
+          }
+        },
+        "epoch_rebases": 0,
+        "excursion": {
+          "network": {
+            "0.0": {
+              "role": "generator",
+              "scale": 0.5
+            }
+          },
+          "step": 264
+        },
+        "ka2_anchor_started": false,
+        "schema": 1
+      },
+      "study_gate": "PASS",
+      "study_status": "PASS",
+      "surprise": {
+        "armed": true,
+        "fires": 0,
+        "last_ratio": 2.1274288059287,
+        "log": [],
+        "since_fire": null,
+        "streak": 0
+      },
+      "terminal_suffix": {
+        "failed": [],
+        "passed_count": 5,
+        "steps": [
+          500,
+          525,
+          550,
+          575,
+          600
+        ]
+      }
+    },
+    {
+      "acquisition_hold": {
+        "reason": "no five-check acquisition window",
+        "status": "FAIL"
+      },
+      "artifacts": {
+        "final-state.pt": {
+          "bytes": 448963,
+          "path": "/ml2/hypergan/forge-policy-family-round3-20261002/atlas/atlas--05ae5523eabcc40be1b3cc4a06afd52d5a1d442a2f66b7df427e67ca3b23d78d/api-vector-two-broad/final-state.pt",
+          "sha256": "3dd7b24a7d2b1e85215eb9a5bea64956a94f7b88b6c8a874550554b731a1f72e"
+        },
+        "goal.gif": {
+          "bytes": 676518,
+          "path": "/ml2/hypergan/forge-policy-family-round3-20261002/atlas/atlas--05ae5523eabcc40be1b3cc4a06afd52d5a1d442a2f66b7df427e67ca3b23d78d/api-vector-two-broad/goal.gif",
+          "sha256": "09a71bd3846c3eb932f3589966ab0474473c37934987fa8a5cde898d0961413e"
+        },
+        "observations.npz": {
+          "bytes": 3070209,
+          "path": "/ml2/hypergan/forge-policy-family-round3-20261002/atlas/atlas--05ae5523eabcc40be1b3cc4a06afd52d5a1d442a2f66b7df427e67ca3b23d78d/api-vector-two-broad/observations.npz",
+          "sha256": "e97fd6238463a8c331c8a60234cd2489fd3c58a871b8b696d4300a63cf9c2045"
+        }
+      },
+      "backend_selection": {
+        "actual_backend": "knn",
+        "generator_noise_factor": 1.0,
+        "raw_output_width": 2,
+        "sampling_backend": "controller_reference",
+        "selection_reason": "finite_resolution_infeasible"
+      },
+      "case_id": "api-vector-two-broad",
+      "completed_updates": 1200,
+      "config_id": "atlas--05ae5523eabcc40be1b3cc4a06afd52d5a1d442a2f66b7df427e67ca3b23d78d",
+      "effective_recipe_sha256": "65aad3182ef90071063538fd8805f082200f1c2e0a641b6abc7aa9e8b37b8578",
+      "execution_status": "COMPLETE",
+      "failed_after_confirmation": [],
+      "family": "atlas",
+      "final": {
+        "failed_bounds": [
+          "projection_ks <= 0.06"
+        ],
+        "metrics": {
+          "component_core_covariance_error": 0.11140469461679459,
+          "component_core_min_eigen_ratio": 0.8926618099212646,
+          "component_covariance_error": 0.11268256232142448,
+          "component_min_eigen_ratio": 0.8948085308074951,
+          "covariance_error": 0.06926125288009644,
+          "hq": 0.981201171875,
+          "mass_tv": 0.006591796875,
+          "max_component_spill": 0.01927710883319378,
+          "mean_error": 0.03128637373447418,
+          "min_mass_ratio": 0.98681640625,
+          "projection_ks": 0.06071920774396755,
+          "resolved_core_covariance_error": 0.11140469461679459,
+          "resolved_core_min_eigen_ratio": 0.8926618099212646,
+          "resolved_max_component_spill": 0.01927710883319378,
+          "sample_count": 4096,
+          "sw1_normalized": 0.033018880043710286,
+          "target_scale": 1.0555585622787476
+        },
+        "passed": false,
+        "step": 1200
+      },
+      "final_role_lrs": [
+        [
+          0.0031875,
+          0.0031875,
+          0.0031875
+        ],
+        [
+          0.0035859346877656485
+        ]
+      ],
+      "full_protocol_complete": true,
+      "initial_lrs": [
+        [
+          0.0031875,
+          0.0031875,
+          0.0031875
+        ],
+        [
+          0.00478125
+        ]
+      ],
+      "knobs": {
+        "lr": 0.0031875,
+        "prior_lr_mult": 1.0
+      },
+      "media": {
+        "actual_update_steps": [
+          0,
+          150,
+          300,
+          450,
+          600,
+          750,
+          900,
+          1050,
+          1200
+        ],
+        "decoded_frames": 9,
+        "dimensions": [
+          1380,
+          573
+        ],
+        "displayed_original_verdict": "FAIL",
+        "frames": 9,
+        "path": "/ml2/hypergan/forge-policy-family-round3-20261002/atlas/atlas--05ae5523eabcc40be1b3cc4a06afd52d5a1d442a2f66b7df427e67ca3b23d78d/api-vector-two-broad/goal.gif"
+      },
+      "original_gate": "FAIL",
+      "paid_seconds": 33.19988224306144,
+      "planned_case_cap": 180,
+      "protocol": {
+        "default_evaluation_samples": 4096,
+        "default_updates": 1200,
+        "evaluation_samples": 4096,
+        "evaluation_steps": [
+          0,
+          50,
+          100,
+          150,
+          200,
+          250,
+          300,
+          350,
+          400,
+          450,
+          500,
+          550,
+          600,
+          650,
+          700,
+          750,
+          800,
+          850,
+          900,
+          950,
+          1000,
+          1050,
+          1100,
+          1150,
+          1200
+        ],
+        "media_frames": 9,
+        "media_steps": [
+          0,
+          150,
+          300,
+          450,
+          600,
+          750,
+          900,
+          1050,
+          1200
+        ],
+        "metric_evaluation_steps": [
+          0,
+          50,
+          100,
+          150,
+          200,
+          250,
+          300,
+          350,
+          400,
+          450,
+          500,
+          550,
+          600,
+          650,
+          700,
+          750,
+          800,
+          850,
+          900,
+          950,
+          1000,
+          1050,
+          1100,
+          1150,
+          1200
+        ],
+        "metric_observations": 24,
+        "terminal_observations": 5,
+        "updates": 1200,
+        "wall_cap_seconds": 180.0
+      },
+      "raw_acquisition_seconds": 33.19988224306144,
+      "receipt": {
+        "bytes": 76124,
+        "path": "/ml2/hypergan/forge-policy-family-round3-20261002/atlas/atlas--05ae5523eabcc40be1b3cc4a06afd52d5a1d442a2f66b7df427e67ca3b23d78d/api-vector-two-broad/receipt.json",
+        "sha256": "af0203caec885640f71aecb503d97f0e82c3e5d6da2663be9a18b48363585b24"
+      },
+      "reopen_guard": {
+        "calm_network": {
+          "1.0": {
+            "role": "critic",
+            "scale": 0.25
+          }
+        },
+        "epoch_rebases": 1,
+        "excursion": null,
+        "ka2_anchor_started": true,
+        "schema": 1
+      },
+      "study_gate": "FAIL",
+      "study_status": "FAIL",
+      "surprise": {
+        "armed": true,
+        "fires": 0,
+        "last_ratio": 1.0157645655640641,
+        "log": [],
+        "since_fire": null,
+        "streak": 0
+      },
+      "terminal_suffix": {
+        "failed": [
+          {
+            "failed_bounds": [
+              "projection_ks <= 0.06"
+            ],
+            "failed_gate_values": {
+              "projection_ks": 0.07923459377607989
+            },
+            "step": 1000
+          },
+          {
+            "failed_bounds": [
+              "projection_ks <= 0.06"
+            ],
+            "failed_gate_values": {
+              "projection_ks": 0.0850587457425813
+            },
+            "step": 1050
+          },
+          {
+            "failed_bounds": [
+              "projection_ks <= 0.06"
+            ],
+            "failed_gate_values": {
+              "projection_ks": 0.06197438300365571
+            },
+            "step": 1100
+          },
+          {
+            "failed_bounds": [
+              "projection_ks <= 0.06"
+            ],
+            "failed_gate_values": {
+              "projection_ks": 0.07053331793417328
+            },
+            "step": 1150
+          },
+          {
+            "failed_bounds": [
+              "projection_ks <= 0.06"
+            ],
+            "failed_gate_values": {
+              "projection_ks": 0.06071920774396755
+            },
+            "step": 1200
+          }
+        ],
+        "passed_count": 0,
+        "steps": [
+          1000,
+          1050,
+          1100,
+          1150,
+          1200
+        ]
+      }
+    },
+    {
+      "case_id": "api-grid100",
+      "completed_updates": 0,
+      "config_id": "atlas--05ae5523eabcc40be1b3cc4a06afd52d5a1d442a2f66b7df427e67ca3b23d78d",
+      "effective_recipe_sha256": "e5e11db3eb42bc6f2bce579acaa229e55bc0037fb0452f2876a6ca43003b982d",
+      "family": "atlas",
+      "full_protocol_complete": false,
+      "knobs": {
+        "lr": 0.0031875,
+        "prior_lr_mult": 1.0
+      },
+      "original_gate": null,
+      "planned_case_cap": 2100,
+      "reason": "Not reached after this whole configuration stopped at its first study non-pass.",
+      "study_gate": null,
+      "study_status": "UNKNOWN"
+    },
+    {
+      "case_id": "api-rotated100",
+      "completed_updates": 0,
+      "config_id": "atlas--05ae5523eabcc40be1b3cc4a06afd52d5a1d442a2f66b7df427e67ca3b23d78d",
+      "effective_recipe_sha256": "e5e11db3eb42bc6f2bce579acaa229e55bc0037fb0452f2876a6ca43003b982d",
+      "family": "atlas",
+      "full_protocol_complete": false,
+      "knobs": {
+        "lr": 0.0031875,
+        "prior_lr_mult": 1.0
+      },
+      "original_gate": null,
+      "planned_case_cap": 2100,
+      "reason": "Not reached after this whole configuration stopped at its first study non-pass.",
+      "study_gate": null,
+      "study_status": "UNKNOWN"
+    },
+    {
+      "case_id": "api-staggered100",
+      "completed_updates": 0,
+      "config_id": "atlas--05ae5523eabcc40be1b3cc4a06afd52d5a1d442a2f66b7df427e67ca3b23d78d",
+      "effective_recipe_sha256": "e5e11db3eb42bc6f2bce579acaa229e55bc0037fb0452f2876a6ca43003b982d",
+      "family": "atlas",
+      "full_protocol_complete": false,
+      "knobs": {
+        "lr": 0.0031875,
+        "prior_lr_mult": 1.0
+      },
+      "original_gate": null,
+      "planned_case_cap": 2100,
+      "reason": "Not reached after this whole configuration stopped at its first study non-pass.",
+      "study_gate": null,
+      "study_status": "UNKNOWN"
+    },
+    {
+      "case_id": "api-vector-unequal-mass",
+      "completed_updates": 0,
+      "config_id": "atlas--05ae5523eabcc40be1b3cc4a06afd52d5a1d442a2f66b7df427e67ca3b23d78d",
+      "effective_recipe_sha256": "65aad3182ef90071063538fd8805f082200f1c2e0a641b6abc7aa9e8b37b8578",
+      "family": "atlas",
+      "full_protocol_complete": false,
+      "knobs": {
+        "lr": 0.0031875,
+        "prior_lr_mult": 1.0
+      },
+      "original_gate": null,
+      "planned_case_cap": 180,
+      "reason": "Not reached after this whole configuration stopped at its first study non-pass.",
+      "study_gate": null,
+      "study_status": "UNKNOWN"
+    },
+    {
+      "case_id": "api-vector-anisotropic",
+      "completed_updates": 0,
+      "config_id": "atlas--05ae5523eabcc40be1b3cc4a06afd52d5a1d442a2f66b7df427e67ca3b23d78d",
+      "effective_recipe_sha256": "65aad3182ef90071063538fd8805f082200f1c2e0a641b6abc7aa9e8b37b8578",
+      "family": "atlas",
+      "full_protocol_complete": false,
+      "knobs": {
+        "lr": 0.0031875,
+        "prior_lr_mult": 1.0
+      },
+      "original_gate": null,
+      "planned_case_cap": 180,
+      "reason": "Not reached after this whole configuration stopped at its first study non-pass.",
+      "study_gate": null,
+      "study_status": "UNKNOWN"
+    },
+    {
+      "case_id": "image-develop-img_bars4-source-transpose12",
+      "completed_updates": 0,
+      "config_id": "atlas--05ae5523eabcc40be1b3cc4a06afd52d5a1d442a2f66b7df427e67ca3b23d78d",
+      "effective_recipe_sha256": "6449478c4194917c0eb38a0d752e00c69eaa7de51b64596ee1d4e06ee505307e",
+      "family": "atlas",
+      "full_protocol_complete": false,
+      "knobs": {
+        "lr": 0.0031875,
+        "prior_lr_mult": 1.0
+      },
+      "original_gate": null,
+      "planned_case_cap": 180,
+      "reason": "Not reached after this whole configuration stopped at its first study non-pass.",
+      "study_gate": null,
+      "study_status": "UNKNOWN"
+    },
+    {
+      "acquisition_hold": {
+        "acquired_seconds": 17.896512668114156,
+        "acquired_step": 550,
+        "hold_checks": 2,
+        "hold_passed": 2,
+        "reason": "fewer than five post-confirmation hold observations",
+        "speed_eligible": false,
+        "status": "INCOMPLETE"
+      },
+      "artifacts": {
+        "final-state.pt": {
+          "bytes": 357067,
+          "path": "/ml2/hypergan/forge-policy-family-round3-20261002/atlas/atlas--112fe0214b6d64dc16a48f2c6d0418e209f73fb6abb924f502ccfb38afa50d65/image-develop-img_intensity2-source-transpose12/final-state.pt",
+          "sha256": "02711ea283efc8a4b5fcc1af557235374b2c60ff3d4c368e255367c1fffe189c"
+        },
+        "goal.gif": {
+          "bytes": 217444,
+          "path": "/ml2/hypergan/forge-policy-family-round3-20261002/atlas/atlas--112fe0214b6d64dc16a48f2c6d0418e209f73fb6abb924f502ccfb38afa50d65/image-develop-img_intensity2-source-transpose12/goal.gif",
+          "sha256": "e7e37cb249ad9088d69030820d6f8391bf0d017d03e08ee778e2af9743ecfe0d"
+        },
+        "observations.npz": {
+          "bytes": 6040197,
+          "path": "/ml2/hypergan/forge-policy-family-round3-20261002/atlas/atlas--112fe0214b6d64dc16a48f2c6d0418e209f73fb6abb924f502ccfb38afa50d65/image-develop-img_intensity2-source-transpose12/observations.npz",
+          "sha256": "b2f4439a84e41d2eff3c7929a3c4498c8774f645d508082eccf21139a92bb899"
+        }
+      },
+      "backend_selection": {
+        "actual_backend": "knn",
+        "generator_noise_factor": 1.0,
+        "raw_output_width": 64,
+        "sampling_backend": "controller_reference",
+        "selection_reason": "finite_resolution_infeasible"
+      },
+      "case_id": "image-develop-img_intensity2-source-transpose12",
+      "completed_updates": 600,
+      "config_id": "atlas--112fe0214b6d64dc16a48f2c6d0418e209f73fb6abb924f502ccfb38afa50d65",
+      "effective_recipe_sha256": "e3e72f5e5e18e9fd78d5d15b0db6a6651f23db90c092fdfcd9c241d00f4d85e9",
+      "execution_status": "COMPLETE",
+      "failed_after_confirmation": [],
+      "family": "atlas",
+      "final": {
+        "failed_bounds": [],
+        "metrics": {
+          "completed_steps": 600.0,
+          "distribution_tv": 0.0830078125,
+          "finite_template_tv": 0.0830078125,
+          "hq": 1.0,
+          "mean_rmse": 0.013239848427474499,
+          "modes": 2.0,
+          "output_noise_added": 0.0,
+          "policy_latent_perturbation": 1.0,
+          "rejected_mass": 0.0,
+          "samples": 1024.0,
+          "served_averaged": 0.0
+        },
+        "passed": true,
+        "step": 600
+      },
+      "final_role_lrs": [
+        [
+          0.00159375,
+          0.006375,
+          0.0031875
+        ],
+        [
+          0.003130699174575725
+        ]
+      ],
+      "full_protocol_complete": true,
+      "initial_lrs": [
+        [
+          0.0031875,
+          0.006375,
+          0.0031875
+        ],
+        [
+          0.0031875
+        ]
+      ],
+      "knobs": {
+        "lr": 0.0031875,
+        "prior_lr_mult": 2.0
+      },
+      "media": {
+        "actual_update_steps": [
+          0,
+          75,
+          150,
+          225,
+          300,
+          375,
+          450,
+          525,
+          600
+        ],
+        "decoded_frames": 9,
+        "dimensions": [
+          460,
+          627
+        ],
+        "displayed_original_verdict": "PASS",
+        "frames": 9,
+        "path": "/ml2/hypergan/forge-policy-family-round3-20261002/atlas/atlas--112fe0214b6d64dc16a48f2c6d0418e209f73fb6abb924f502ccfb38afa50d65/image-develop-img_intensity2-source-transpose12/goal.gif"
+      },
+      "original_gate": "PASS",
+      "paid_seconds": 19.327391088940203,
+      "planned_case_cap": 180,
+      "protocol": {
+        "default_evaluation_samples": 1024,
+        "default_updates": 600,
+        "evaluation_samples": 1024,
+        "evaluation_steps": [
+          0,
+          25,
+          50,
+          75,
+          100,
+          125,
+          150,
+          175,
+          200,
+          225,
+          250,
+          275,
+          300,
+          325,
+          350,
+          375,
+          400,
+          425,
+          450,
+          475,
+          500,
+          525,
+          550,
+          575,
+          600
+        ],
+        "media_frames": 9,
+        "media_steps": [
+          0,
+          75,
+          150,
+          225,
+          300,
+          375,
+          450,
+          525,
+          600
+        ],
+        "metric_evaluation_steps": [
+          0,
+          25,
+          50,
+          75,
+          100,
+          125,
+          150,
+          175,
+          200,
+          225,
+          250,
+          275,
+          300,
+          325,
+          350,
+          375,
+          400,
+          425,
+          450,
+          475,
+          500,
+          525,
+          550,
+          575,
+          600
+        ],
+        "metric_observations": 24,
+        "terminal_observations": 5,
+        "updates": 600,
+        "wall_cap_seconds": 180.0
+      },
+      "raw_acquisition_seconds": 19.327391088940203,
+      "receipt": {
+        "bytes": 44511,
+        "path": "/ml2/hypergan/forge-policy-family-round3-20261002/atlas/atlas--112fe0214b6d64dc16a48f2c6d0418e209f73fb6abb924f502ccfb38afa50d65/image-develop-img_intensity2-source-transpose12/receipt.json",
+        "sha256": "197d27d7f580e770eaba7d06c851fd6a305c5c4ecff5f90494f8f28327d398b3"
+      },
+      "reopen_guard": {
+        "calm_network": {
+          "0.0": {
+            "role": "generator",
+            "scale": 0.5
+          }
+        },
+        "epoch_rebases": 0,
+        "excursion": null,
+        "ka2_anchor_started": false,
+        "schema": 1
+      },
+      "study_gate": "INCOMPLETE",
+      "study_status": "INCOMPLETE",
+      "surprise": {
+        "armed": true,
+        "fires": 0,
+        "last_ratio": 1.1540035557633184,
+        "log": [],
+        "since_fire": null,
+        "streak": 0
+      },
+      "terminal_suffix": {
+        "failed": [],
+        "passed_count": 5,
+        "steps": [
+          500,
+          525,
+          550,
+          575,
+          600
+        ]
+      }
+    },
+    {
+      "case_id": "api-vector-two-broad",
+      "completed_updates": 0,
+      "config_id": "atlas--112fe0214b6d64dc16a48f2c6d0418e209f73fb6abb924f502ccfb38afa50d65",
+      "effective_recipe_sha256": "d168d0d8e523972f4401183c1702402d53c36e61445ca35dbc6292e322030d03",
+      "family": "atlas",
+      "full_protocol_complete": false,
+      "knobs": {
+        "lr": 0.0031875,
+        "prior_lr_mult": 2.0
+      },
+      "original_gate": null,
+      "planned_case_cap": 180,
+      "reason": "Not reached after this whole configuration stopped at its first study non-pass.",
+      "study_gate": null,
+      "study_status": "UNKNOWN"
+    },
+    {
+      "case_id": "api-grid100",
+      "completed_updates": 0,
+      "config_id": "atlas--112fe0214b6d64dc16a48f2c6d0418e209f73fb6abb924f502ccfb38afa50d65",
+      "effective_recipe_sha256": "7d59d9d4010d991e07132628620ab4ed5bf9b7264a5cdc8b08d95ef7883b28a8",
+      "family": "atlas",
+      "full_protocol_complete": false,
+      "knobs": {
+        "lr": 0.0031875,
+        "prior_lr_mult": 2.0
+      },
+      "original_gate": null,
+      "planned_case_cap": 2100,
+      "reason": "Not reached after this whole configuration stopped at its first study non-pass.",
+      "study_gate": null,
+      "study_status": "UNKNOWN"
+    },
+    {
+      "case_id": "api-rotated100",
+      "completed_updates": 0,
+      "config_id": "atlas--112fe0214b6d64dc16a48f2c6d0418e209f73fb6abb924f502ccfb38afa50d65",
+      "effective_recipe_sha256": "7d59d9d4010d991e07132628620ab4ed5bf9b7264a5cdc8b08d95ef7883b28a8",
+      "family": "atlas",
+      "full_protocol_complete": false,
+      "knobs": {
+        "lr": 0.0031875,
+        "prior_lr_mult": 2.0
+      },
+      "original_gate": null,
+      "planned_case_cap": 2100,
+      "reason": "Not reached after this whole configuration stopped at its first study non-pass.",
+      "study_gate": null,
+      "study_status": "UNKNOWN"
+    },
+    {
+      "case_id": "api-staggered100",
+      "completed_updates": 0,
+      "config_id": "atlas--112fe0214b6d64dc16a48f2c6d0418e209f73fb6abb924f502ccfb38afa50d65",
+      "effective_recipe_sha256": "7d59d9d4010d991e07132628620ab4ed5bf9b7264a5cdc8b08d95ef7883b28a8",
+      "family": "atlas",
+      "full_protocol_complete": false,
+      "knobs": {
+        "lr": 0.0031875,
+        "prior_lr_mult": 2.0
+      },
+      "original_gate": null,
+      "planned_case_cap": 2100,
+      "reason": "Not reached after this whole configuration stopped at its first study non-pass.",
+      "study_gate": null,
+      "study_status": "UNKNOWN"
+    },
+    {
+      "case_id": "api-vector-unequal-mass",
+      "completed_updates": 0,
+      "config_id": "atlas--112fe0214b6d64dc16a48f2c6d0418e209f73fb6abb924f502ccfb38afa50d65",
+      "effective_recipe_sha256": "d168d0d8e523972f4401183c1702402d53c36e61445ca35dbc6292e322030d03",
+      "family": "atlas",
+      "full_protocol_complete": false,
+      "knobs": {
+        "lr": 0.0031875,
+        "prior_lr_mult": 2.0
+      },
+      "original_gate": null,
+      "planned_case_cap": 180,
+      "reason": "Not reached after this whole configuration stopped at its first study non-pass.",
+      "study_gate": null,
+      "study_status": "UNKNOWN"
+    },
+    {
+      "case_id": "api-vector-anisotropic",
+      "completed_updates": 0,
+      "config_id": "atlas--112fe0214b6d64dc16a48f2c6d0418e209f73fb6abb924f502ccfb38afa50d65",
+      "effective_recipe_sha256": "d168d0d8e523972f4401183c1702402d53c36e61445ca35dbc6292e322030d03",
+      "family": "atlas",
+      "full_protocol_complete": false,
+      "knobs": {
+        "lr": 0.0031875,
+        "prior_lr_mult": 2.0
+      },
+      "original_gate": null,
+      "planned_case_cap": 180,
+      "reason": "Not reached after this whole configuration stopped at its first study non-pass.",
+      "study_gate": null,
+      "study_status": "UNKNOWN"
+    },
+    {
+      "case_id": "image-develop-img_bars4-source-transpose12",
+      "completed_updates": 0,
+      "config_id": "atlas--112fe0214b6d64dc16a48f2c6d0418e209f73fb6abb924f502ccfb38afa50d65",
+      "effective_recipe_sha256": "e3e72f5e5e18e9fd78d5d15b0db6a6651f23db90c092fdfcd9c241d00f4d85e9",
+      "family": "atlas",
+      "full_protocol_complete": false,
+      "knobs": {
+        "lr": 0.0031875,
+        "prior_lr_mult": 2.0
+      },
+      "original_gate": null,
+      "planned_case_cap": 180,
+      "reason": "Not reached after this whole configuration stopped at its first study non-pass.",
+      "study_gate": null,
+      "study_status": "UNKNOWN"
+    },
+    {
+      "acquisition_hold": {
+        "acquired_seconds": 16.482440545922145,
+        "acquired_step": 525,
+        "hold_checks": 3,
+        "hold_passed": 3,
+        "reason": "fewer than five post-confirmation hold observations",
+        "speed_eligible": false,
+        "status": "INCOMPLETE"
+      },
+      "artifacts": {
+        "final-state.pt": {
+          "bytes": 402023,
+          "path": "/ml2/hypergan/forge-policy-family-round3-20261002/atlas/atlas--3d633688c6ed81ea63c756bf91c908ca7615ea04fc6b7f6f956a9519b9957c7a/image-develop-img_intensity2-source-transpose12/final-state.pt",
+          "sha256": "e83614ab4df45ae96ebd1378cea56b517a3e946fd6a4c466a8e7b498ce935049"
+        },
+        "goal.gif": {
+          "bytes": 222143,
+          "path": "/ml2/hypergan/forge-policy-family-round3-20261002/atlas/atlas--3d633688c6ed81ea63c756bf91c908ca7615ea04fc6b7f6f956a9519b9957c7a/image-develop-img_intensity2-source-transpose12/goal.gif",
+          "sha256": "cec123d0e9c36f9b50e0becec2b56f88d929933e2d6a49a110c818c79e2c9f75"
+        },
+        "observations.npz": {
+          "bytes": 6083401,
+          "path": "/ml2/hypergan/forge-policy-family-round3-20261002/atlas/atlas--3d633688c6ed81ea63c756bf91c908ca7615ea04fc6b7f6f956a9519b9957c7a/image-develop-img_intensity2-source-transpose12/observations.npz",
+          "sha256": "c0396860fe9c9087a9c405a92acbb0dca53807f0139d20a5258a5984d553e791"
+        }
+      },
+      "backend_selection": {
+        "actual_backend": "knn",
+        "generator_noise_factor": 1.0,
+        "raw_output_width": 64,
+        "sampling_backend": "controller_reference",
+        "selection_reason": "finite_resolution_infeasible"
+      },
+      "case_id": "image-develop-img_intensity2-source-transpose12",
+      "completed_updates": 600,
+      "config_id": "atlas--3d633688c6ed81ea63c756bf91c908ca7615ea04fc6b7f6f956a9519b9957c7a",
+      "effective_recipe_sha256": "6092ff8cc7f660181042352e854a0f2f198e61f8ce2554bfc4e933dbf52d4357",
+      "execution_status": "COMPLETE",
+      "failed_after_confirmation": [],
+      "family": "atlas",
+      "final": {
+        "failed_bounds": [],
+        "metrics": {
+          "completed_steps": 600.0,
+          "distribution_tv": 0.017578125,
+          "finite_template_tv": 0.017578125,
+          "hq": 0.9970703125,
+          "mean_rmse": 0.01820686273276806,
+          "modes": 2.0,
+          "output_noise_added": 0.0,
+          "policy_latent_perturbation": 1.0,
+          "rejected_mass": 0.0029296875,
+          "samples": 1024.0,
+          "served_averaged": 0.0
+        },
+        "passed": true,
+        "step": 600
+      },
+      "final_role_lrs": [
+        [
+          0.00265625,
+          0.010625,
+          0.0053125
+        ],
+        [
+          0.0051720275485755965
+        ]
+      ],
+      "full_protocol_complete": true,
+      "initial_lrs": [
+        [
+          0.0053125,
+          0.010625,
+          0.0053125
+        ],
+        [
+          0.0053125
+        ]
+      ],
+      "knobs": {
+        "lr": 0.0053125,
+        "prior_lr_mult": 2.0
+      },
+      "media": {
+        "actual_update_steps": [
+          0,
+          75,
+          150,
+          225,
+          300,
+          375,
+          450,
+          525,
+          600
+        ],
+        "decoded_frames": 9,
+        "dimensions": [
+          460,
+          627
+        ],
+        "displayed_original_verdict": "PASS",
+        "frames": 9,
+        "path": "/ml2/hypergan/forge-policy-family-round3-20261002/atlas/atlas--3d633688c6ed81ea63c756bf91c908ca7615ea04fc6b7f6f956a9519b9957c7a/image-develop-img_intensity2-source-transpose12/goal.gif"
+      },
+      "original_gate": "PASS",
+      "paid_seconds": 18.61368547892198,
+      "planned_case_cap": 180,
+      "protocol": {
+        "default_evaluation_samples": 1024,
+        "default_updates": 600,
+        "evaluation_samples": 1024,
+        "evaluation_steps": [
+          0,
+          25,
+          50,
+          75,
+          100,
+          125,
+          150,
+          175,
+          200,
+          225,
+          250,
+          275,
+          300,
+          325,
+          350,
+          375,
+          400,
+          425,
+          450,
+          475,
+          500,
+          525,
+          550,
+          575,
+          600
+        ],
+        "media_frames": 9,
+        "media_steps": [
+          0,
+          75,
+          150,
+          225,
+          300,
+          375,
+          450,
+          525,
+          600
+        ],
+        "metric_evaluation_steps": [
+          0,
+          25,
+          50,
+          75,
+          100,
+          125,
+          150,
+          175,
+          200,
+          225,
+          250,
+          275,
+          300,
+          325,
+          350,
+          375,
+          400,
+          425,
+          450,
+          475,
+          500,
+          525,
+          550,
+          575,
+          600
+        ],
+        "metric_observations": 24,
+        "terminal_observations": 5,
+        "updates": 600,
+        "wall_cap_seconds": 180.0
+      },
+      "raw_acquisition_seconds": 18.61368547892198,
+      "receipt": {
+        "bytes": 44358,
+        "path": "/ml2/hypergan/forge-policy-family-round3-20261002/atlas/atlas--3d633688c6ed81ea63c756bf91c908ca7615ea04fc6b7f6f956a9519b9957c7a/image-develop-img_intensity2-source-transpose12/receipt.json",
+        "sha256": "c061dd0d4192415d83a72bd8f60e476a9cede2dbf4f9c8f646dec66688e8daea"
+      },
+      "reopen_guard": {
+        "calm_network": {
+          "0.0": {
+            "role": "generator",
+            "scale": 0.5
+          }
+        },
+        "epoch_rebases": 0,
+        "excursion": null,
+        "ka2_anchor_started": false,
+        "schema": 1
+      },
+      "study_gate": "INCOMPLETE",
+      "study_status": "INCOMPLETE",
+      "surprise": {
+        "armed": true,
+        "fires": 0,
+        "last_ratio": 1.0022576198307884,
+        "log": [],
+        "since_fire": null,
+        "streak": 0
+      },
+      "terminal_suffix": {
+        "failed": [],
+        "passed_count": 5,
+        "steps": [
+          500,
+          525,
+          550,
+          575,
+          600
+        ]
+      }
+    },
+    {
+      "case_id": "api-vector-two-broad",
+      "completed_updates": 0,
+      "config_id": "atlas--3d633688c6ed81ea63c756bf91c908ca7615ea04fc6b7f6f956a9519b9957c7a",
+      "effective_recipe_sha256": "b4e8cbbe5d793e751d819120d35a80cf086c53daf99db0f6567a1bffd36e01a7",
+      "family": "atlas",
+      "full_protocol_complete": false,
+      "knobs": {
+        "lr": 0.0053125,
+        "prior_lr_mult": 2.0
+      },
+      "original_gate": null,
+      "planned_case_cap": 180,
+      "reason": "Not reached after this whole configuration stopped at its first study non-pass.",
+      "study_gate": null,
+      "study_status": "UNKNOWN"
+    },
+    {
+      "case_id": "api-grid100",
+      "completed_updates": 0,
+      "config_id": "atlas--3d633688c6ed81ea63c756bf91c908ca7615ea04fc6b7f6f956a9519b9957c7a",
+      "effective_recipe_sha256": "140be434544daf33500c76564f46b48a51902c361f56ef900fd00ff561fb4065",
+      "family": "atlas",
+      "full_protocol_complete": false,
+      "knobs": {
+        "lr": 0.0053125,
+        "prior_lr_mult": 2.0
+      },
+      "original_gate": null,
+      "planned_case_cap": 2100,
+      "reason": "Not reached after this whole configuration stopped at its first study non-pass.",
+      "study_gate": null,
+      "study_status": "UNKNOWN"
+    },
+    {
+      "case_id": "api-rotated100",
+      "completed_updates": 0,
+      "config_id": "atlas--3d633688c6ed81ea63c756bf91c908ca7615ea04fc6b7f6f956a9519b9957c7a",
+      "effective_recipe_sha256": "140be434544daf33500c76564f46b48a51902c361f56ef900fd00ff561fb4065",
+      "family": "atlas",
+      "full_protocol_complete": false,
+      "knobs": {
+        "lr": 0.0053125,
+        "prior_lr_mult": 2.0
+      },
+      "original_gate": null,
+      "planned_case_cap": 2100,
+      "reason": "Not reached after this whole configuration stopped at its first study non-pass.",
+      "study_gate": null,
+      "study_status": "UNKNOWN"
+    },
+    {
+      "case_id": "api-staggered100",
+      "completed_updates": 0,
+      "config_id": "atlas--3d633688c6ed81ea63c756bf91c908ca7615ea04fc6b7f6f956a9519b9957c7a",
+      "effective_recipe_sha256": "140be434544daf33500c76564f46b48a51902c361f56ef900fd00ff561fb4065",
+      "family": "atlas",
+      "full_protocol_complete": false,
+      "knobs": {
+        "lr": 0.0053125,
+        "prior_lr_mult": 2.0
+      },
+      "original_gate": null,
+      "planned_case_cap": 2100,
+      "reason": "Not reached after this whole configuration stopped at its first study non-pass.",
+      "study_gate": null,
+      "study_status": "UNKNOWN"
+    },
+    {
+      "case_id": "api-vector-unequal-mass",
+      "completed_updates": 0,
+      "config_id": "atlas--3d633688c6ed81ea63c756bf91c908ca7615ea04fc6b7f6f956a9519b9957c7a",
+      "effective_recipe_sha256": "b4e8cbbe5d793e751d819120d35a80cf086c53daf99db0f6567a1bffd36e01a7",
+      "family": "atlas",
+      "full_protocol_complete": false,
+      "knobs": {
+        "lr": 0.0053125,
+        "prior_lr_mult": 2.0
+      },
+      "original_gate": null,
+      "planned_case_cap": 180,
+      "reason": "Not reached after this whole configuration stopped at its first study non-pass.",
+      "study_gate": null,
+      "study_status": "UNKNOWN"
+    },
+    {
+      "case_id": "api-vector-anisotropic",
+      "completed_updates": 0,
+      "config_id": "atlas--3d633688c6ed81ea63c756bf91c908ca7615ea04fc6b7f6f956a9519b9957c7a",
+      "effective_recipe_sha256": "b4e8cbbe5d793e751d819120d35a80cf086c53daf99db0f6567a1bffd36e01a7",
+      "family": "atlas",
+      "full_protocol_complete": false,
+      "knobs": {
+        "lr": 0.0053125,
+        "prior_lr_mult": 2.0
+      },
+      "original_gate": null,
+      "planned_case_cap": 180,
+      "reason": "Not reached after this whole configuration stopped at its first study non-pass.",
+      "study_gate": null,
+      "study_status": "UNKNOWN"
+    },
+    {
+      "case_id": "image-develop-img_bars4-source-transpose12",
+      "completed_updates": 0,
+      "config_id": "atlas--3d633688c6ed81ea63c756bf91c908ca7615ea04fc6b7f6f956a9519b9957c7a",
+      "effective_recipe_sha256": "6092ff8cc7f660181042352e854a0f2f198e61f8ce2554bfc4e933dbf52d4357",
+      "family": "atlas",
+      "full_protocol_complete": false,
+      "knobs": {
+        "lr": 0.0053125,
+        "prior_lr_mult": 2.0
+      },
+      "original_gate": null,
+      "planned_case_cap": 180,
+      "reason": "Not reached after this whole configuration stopped at its first study non-pass.",
+      "study_gate": null,
+      "study_status": "UNKNOWN"
+    },
+    {
+      "acquisition_hold": {
+        "acquired_seconds": 13.871436786837876,
+        "acquired_step": 425,
+        "hold_checks": 7,
+        "hold_passed": 7,
+        "reason": "first acquisition and uninterrupted hold",
+        "speed_eligible": false,
+        "status": "PASS"
+      },
+      "artifacts": {
+        "final-state.pt": {
+          "bytes": 404731,
+          "path": "/ml2/hypergan/forge-policy-family-round3-20261002/atlas/atlas--cf74ea1def0d0ea4afa16f47ac10ea1268664fe480c9f6ab578a48ea6a1eabe2/image-develop-img_intensity2-source-transpose12/final-state.pt",
+          "sha256": "51931041a789c265c3ff4bd8bf7addfd58b55c4250bc5253e4f90b7706d601ef"
+        },
+        "goal.gif": {
+          "bytes": 221546,
+          "path": "/ml2/hypergan/forge-policy-family-round3-20261002/atlas/atlas--cf74ea1def0d0ea4afa16f47ac10ea1268664fe480c9f6ab578a48ea6a1eabe2/image-develop-img_intensity2-source-transpose12/goal.gif",
+          "sha256": "a9044fe97a57d9609bd4692200301adc986469eeff33d14c6d3624cd30097f55"
+        },
+        "observations.npz": {
+          "bytes": 6079209,
+          "path": "/ml2/hypergan/forge-policy-family-round3-20261002/atlas/atlas--cf74ea1def0d0ea4afa16f47ac10ea1268664fe480c9f6ab578a48ea6a1eabe2/image-develop-img_intensity2-source-transpose12/observations.npz",
+          "sha256": "b1df34d5a85aa2729e88d46f9556f0964e9c4570b42256022443a66a2f49eeea"
+        }
+      },
+      "backend_selection": {
+        "actual_backend": "knn",
+        "generator_noise_factor": 1.0,
+        "raw_output_width": 64,
+        "sampling_backend": "controller_reference",
+        "selection_reason": "finite_resolution_infeasible"
+      },
+      "case_id": "image-develop-img_intensity2-source-transpose12",
+      "completed_updates": 600,
+      "config_id": "atlas--cf74ea1def0d0ea4afa16f47ac10ea1268664fe480c9f6ab578a48ea6a1eabe2",
+      "effective_recipe_sha256": "26fe03cf328c4cb2f42005a2b69cc05a9cfd0d31fb4ee7e263961bf35afe27ec",
+      "execution_status": "COMPLETE",
+      "failed_after_confirmation": [],
+      "family": "atlas",
+      "final": {
+        "failed_bounds": [],
+        "metrics": {
+          "completed_steps": 600.0,
+          "distribution_tv": 0.0341796875,
+          "finite_template_tv": 0.037109375,
+          "hq": 0.9853515625,
+          "mean_rmse": 0.029842611402273178,
+          "modes": 2.0,
+          "output_noise_added": 0.0,
+          "policy_latent_perturbation": 1.0,
+          "rejected_mass": 0.0146484375,
+          "samples": 1024.0,
+          "served_averaged": 0.0
+        },
+        "passed": true,
+        "step": 600
+      },
+      "final_role_lrs": [
+        [
+          0.00265625,
+          0.0053125,
+          0.0053125
+        ],
+        [
+          0.005188046442613427
+        ]
+      ],
+      "full_protocol_complete": true,
+      "initial_lrs": [
+        [
+          0.0053125,
+          0.0053125,
+          0.0053125
+        ],
+        [
+          0.0053125
+        ]
+      ],
+      "knobs": {
+        "lr": 0.0053125,
+        "prior_lr_mult": 1.0
+      },
+      "media": {
+        "actual_update_steps": [
+          0,
+          75,
+          150,
+          225,
+          300,
+          375,
+          450,
+          525,
+          600
+        ],
+        "decoded_frames": 9,
+        "dimensions": [
+          460,
+          627
+        ],
+        "displayed_original_verdict": "PASS",
+        "frames": 9,
+        "path": "/ml2/hypergan/forge-policy-family-round3-20261002/atlas/atlas--cf74ea1def0d0ea4afa16f47ac10ea1268664fe480c9f6ab578a48ea6a1eabe2/image-develop-img_intensity2-source-transpose12/goal.gif"
+      },
+      "original_gate": "PASS",
+      "paid_seconds": 18.787631965009496,
+      "planned_case_cap": 180,
+      "protocol": {
+        "default_evaluation_samples": 1024,
+        "default_updates": 600,
+        "evaluation_samples": 1024,
+        "evaluation_steps": [
+          0,
+          25,
+          50,
+          75,
+          100,
+          125,
+          150,
+          175,
+          200,
+          225,
+          250,
+          275,
+          300,
+          325,
+          350,
+          375,
+          400,
+          425,
+          450,
+          475,
+          500,
+          525,
+          550,
+          575,
+          600
+        ],
+        "media_frames": 9,
+        "media_steps": [
+          0,
+          75,
+          150,
+          225,
+          300,
+          375,
+          450,
+          525,
+          600
+        ],
+        "metric_evaluation_steps": [
+          0,
+          25,
+          50,
+          75,
+          100,
+          125,
+          150,
+          175,
+          200,
+          225,
+          250,
+          275,
+          300,
+          325,
+          350,
+          375,
+          400,
+          425,
+          450,
+          475,
+          500,
+          525,
+          550,
+          575,
+          600
+        ],
+        "metric_observations": 24,
+        "terminal_observations": 5,
+        "updates": 600,
+        "wall_cap_seconds": 180.0
+      },
+      "raw_acquisition_seconds": 18.787631965009496,
+      "receipt": {
+        "bytes": 44161,
+        "path": "/ml2/hypergan/forge-policy-family-round3-20261002/atlas/atlas--cf74ea1def0d0ea4afa16f47ac10ea1268664fe480c9f6ab578a48ea6a1eabe2/image-develop-img_intensity2-source-transpose12/receipt.json",
+        "sha256": "b6ed3e4a430a319b9b5fee1805ea914126383c530018770a6da4c6a67ff83f8b"
+      },
+      "reopen_guard": {
+        "calm_network": {
+          "0.0": {
+            "role": "generator",
+            "scale": 0.5
+          }
+        },
+        "epoch_rebases": 0,
+        "excursion": null,
+        "ka2_anchor_started": false,
+        "schema": 1
+      },
+      "study_gate": "PASS",
+      "study_status": "PASS",
+      "surprise": {
+        "armed": true,
+        "fires": 0,
+        "last_ratio": 0.8020984315409139,
+        "log": [],
+        "since_fire": null,
+        "streak": 0
+      },
+      "terminal_suffix": {
+        "failed": [],
+        "passed_count": 5,
+        "steps": [
+          500,
+          525,
+          550,
+          575,
+          600
+        ]
+      }
+    },
+    {
+      "acquisition_hold": {
+        "reason": "no five-check acquisition window",
+        "status": "FAIL"
+      },
+      "artifacts": {
+        "final-state.pt": {
+          "bytes": 470813,
+          "path": "/ml2/hypergan/forge-policy-family-round3-20261002/atlas/atlas--cf74ea1def0d0ea4afa16f47ac10ea1268664fe480c9f6ab578a48ea6a1eabe2/api-vector-two-broad/final-state.pt",
+          "sha256": "0c1e7b8194720db26e2be21e1c99eb826215014c163ee4d5b1e1364126bcd854"
+        },
+        "goal.gif": {
+          "bytes": 682542,
+          "path": "/ml2/hypergan/forge-policy-family-round3-20261002/atlas/atlas--cf74ea1def0d0ea4afa16f47ac10ea1268664fe480c9f6ab578a48ea6a1eabe2/api-vector-two-broad/goal.gif",
+          "sha256": "2701aadbc202f9d73c1a3cc63129bd4ae15e23a944f670f36284975ce19959ea"
+        },
+        "observations.npz": {
+          "bytes": 3070060,
+          "path": "/ml2/hypergan/forge-policy-family-round3-20261002/atlas/atlas--cf74ea1def0d0ea4afa16f47ac10ea1268664fe480c9f6ab578a48ea6a1eabe2/api-vector-two-broad/observations.npz",
+          "sha256": "ecc0a6982a8c6424e5dc9d153027248539d8bead3ddf009d118d766c44cb68e1"
+        }
+      },
+      "backend_selection": {
+        "actual_backend": "knn",
+        "generator_noise_factor": 1.0,
+        "raw_output_width": 2,
+        "sampling_backend": "controller_reference",
+        "selection_reason": "finite_resolution_infeasible"
+      },
+      "case_id": "api-vector-two-broad",
+      "completed_updates": 1200,
+      "config_id": "atlas--cf74ea1def0d0ea4afa16f47ac10ea1268664fe480c9f6ab578a48ea6a1eabe2",
+      "effective_recipe_sha256": "5efd6c1c3753b7c0171db23c89c42779f0eeed527a0cf284290e67ede3bedff6",
+      "execution_status": "COMPLETE",
+      "failed_after_confirmation": [],
+      "family": "atlas",
+      "final": {
+        "failed_bounds": [],
+        "metrics": {
+          "component_core_covariance_error": 0.13421965390443802,
+          "component_core_min_eigen_ratio": 0.860304594039917,
+          "component_covariance_error": 0.13767259567975998,
+          "component_min_eigen_ratio": 0.8620058298110962,
+          "covariance_error": 0.010527929291129112,
+          "hq": 0.98583984375,
+          "mass_tv": 0.0009765625,
+          "max_component_spill": 0.015107212588191032,
+          "mean_error": 0.020743660628795624,
+          "min_mass_ratio": 0.998046875,
+          "projection_ks": 0.033686475788986536,
+          "resolved_core_covariance_error": 0.13421965390443802,
+          "resolved_core_min_eigen_ratio": 0.860304594039917,
+          "resolved_max_component_spill": 0.015107212588191032,
+          "sample_count": 4096,
+          "sw1_normalized": 0.0168875139516822,
+          "target_scale": 1.0555585622787476
+        },
+        "passed": true,
+        "step": 1200
+      },
+      "final_role_lrs": [
+        [
+          0.0053125,
+          0.0053125,
+          0.0053125
+        ],
+        [
+          0.005976561340592262
+        ]
+      ],
+      "full_protocol_complete": true,
+      "initial_lrs": [
+        [
+          0.0053125,
+          0.0053125,
+          0.0053125
+        ],
+        [
+          0.00796875
+        ]
+      ],
+      "knobs": {
+        "lr": 0.0053125,
+        "prior_lr_mult": 1.0
+      },
+      "media": {
+        "actual_update_steps": [
+          0,
+          150,
+          300,
+          450,
+          600,
+          750,
+          900,
+          1050,
+          1200
+        ],
+        "decoded_frames": 9,
+        "dimensions": [
+          1380,
+          573
+        ],
+        "displayed_original_verdict": "FAIL",
+        "frames": 9,
+        "path": "/ml2/hypergan/forge-policy-family-round3-20261002/atlas/atlas--cf74ea1def0d0ea4afa16f47ac10ea1268664fe480c9f6ab578a48ea6a1eabe2/api-vector-two-broad/goal.gif"
+      },
+      "original_gate": "FAIL",
+      "paid_seconds": 32.3078489289619,
+      "planned_case_cap": 180,
+      "protocol": {
+        "default_evaluation_samples": 4096,
+        "default_updates": 1200,
+        "evaluation_samples": 4096,
+        "evaluation_steps": [
+          0,
+          50,
+          100,
+          150,
+          200,
+          250,
+          300,
+          350,
+          400,
+          450,
+          500,
+          550,
+          600,
+          650,
+          700,
+          750,
+          800,
+          850,
+          900,
+          950,
+          1000,
+          1050,
+          1100,
+          1150,
+          1200
+        ],
+        "media_frames": 9,
+        "media_steps": [
+          0,
+          150,
+          300,
+          450,
+          600,
+          750,
+          900,
+          1050,
+          1200
+        ],
+        "metric_evaluation_steps": [
+          0,
+          50,
+          100,
+          150,
+          200,
+          250,
+          300,
+          350,
+          400,
+          450,
+          500,
+          550,
+          600,
+          650,
+          700,
+          750,
+          800,
+          850,
+          900,
+          950,
+          1000,
+          1050,
+          1100,
+          1150,
+          1200
+        ],
+        "metric_observations": 24,
+        "terminal_observations": 5,
+        "updates": 1200,
+        "wall_cap_seconds": 180.0
+      },
+      "raw_acquisition_seconds": 32.3078489289619,
+      "receipt": {
+        "bytes": 75985,
+        "path": "/ml2/hypergan/forge-policy-family-round3-20261002/atlas/atlas--cf74ea1def0d0ea4afa16f47ac10ea1268664fe480c9f6ab578a48ea6a1eabe2/api-vector-two-broad/receipt.json",
+        "sha256": "56480f3bd412d537c98772b719150ea24fd66820717e8c17196ea9856d8de859"
+      },
+      "reopen_guard": {
+        "calm_network": {
+          "1.0": {
+            "role": "critic",
+            "scale": 0.0625
+          }
+        },
+        "epoch_rebases": 1,
+        "excursion": null,
+        "ka2_anchor_started": true,
+        "schema": 1
+      },
+      "study_gate": "FAIL",
+      "study_status": "FAIL",
+      "surprise": {
+        "armed": true,
+        "fires": 0,
+        "last_ratio": 1.0222561019786407,
+        "log": [],
+        "since_fire": null,
+        "streak": 0
+      },
+      "terminal_suffix": {
+        "failed": [
+          {
+            "failed_bounds": [
+              "projection_ks <= 0.06"
+            ],
+            "failed_gate_values": {
+              "projection_ks": 0.0751643349890786
+            },
+            "step": 1000
+          },
+          {
+            "failed_bounds": [
+              "projection_ks <= 0.06"
+            ],
+            "failed_gate_values": {
+              "projection_ks": 0.07344772124681465
+            },
+            "step": 1050
+          },
+          {
+            "failed_bounds": [
+              "projection_ks <= 0.06"
+            ],
+            "failed_gate_values": {
+              "projection_ks": 0.10604010664457594
+            },
+            "step": 1100
+          },
+          {
+            "failed_bounds": [
+              "projection_ks <= 0.06"
+            ],
+            "failed_gate_values": {
+              "projection_ks": 0.06730694642851398
+            },
+            "step": 1150
+          }
+        ],
+        "passed_count": 1,
+        "steps": [
+          1000,
+          1050,
+          1100,
+          1150,
+          1200
+        ]
+      }
+    },
+    {
+      "case_id": "api-grid100",
+      "completed_updates": 0,
+      "config_id": "atlas--cf74ea1def0d0ea4afa16f47ac10ea1268664fe480c9f6ab578a48ea6a1eabe2",
+      "effective_recipe_sha256": "b097d859dcd44766b15655257cba8f36572b991341f39c022b9d94d212912978",
+      "family": "atlas",
+      "full_protocol_complete": false,
+      "knobs": {
+        "lr": 0.0053125,
+        "prior_lr_mult": 1.0
+      },
+      "original_gate": null,
+      "planned_case_cap": 2100,
+      "reason": "Not reached after this whole configuration stopped at its first study non-pass.",
+      "study_gate": null,
+      "study_status": "UNKNOWN"
+    },
+    {
+      "case_id": "api-rotated100",
+      "completed_updates": 0,
+      "config_id": "atlas--cf74ea1def0d0ea4afa16f47ac10ea1268664fe480c9f6ab578a48ea6a1eabe2",
+      "effective_recipe_sha256": "b097d859dcd44766b15655257cba8f36572b991341f39c022b9d94d212912978",
+      "family": "atlas",
+      "full_protocol_complete": false,
+      "knobs": {
+        "lr": 0.0053125,
+        "prior_lr_mult": 1.0
+      },
+      "original_gate": null,
+      "planned_case_cap": 2100,
+      "reason": "Not reached after this whole configuration stopped at its first study non-pass.",
+      "study_gate": null,
+      "study_status": "UNKNOWN"
+    },
+    {
+      "case_id": "api-staggered100",
+      "completed_updates": 0,
+      "config_id": "atlas--cf74ea1def0d0ea4afa16f47ac10ea1268664fe480c9f6ab578a48ea6a1eabe2",
+      "effective_recipe_sha256": "b097d859dcd44766b15655257cba8f36572b991341f39c022b9d94d212912978",
+      "family": "atlas",
+      "full_protocol_complete": false,
+      "knobs": {
+        "lr": 0.0053125,
+        "prior_lr_mult": 1.0
+      },
+      "original_gate": null,
+      "planned_case_cap": 2100,
+      "reason": "Not reached after this whole configuration stopped at its first study non-pass.",
+      "study_gate": null,
+      "study_status": "UNKNOWN"
+    },
+    {
+      "case_id": "api-vector-unequal-mass",
+      "completed_updates": 0,
+      "config_id": "atlas--cf74ea1def0d0ea4afa16f47ac10ea1268664fe480c9f6ab578a48ea6a1eabe2",
+      "effective_recipe_sha256": "5efd6c1c3753b7c0171db23c89c42779f0eeed527a0cf284290e67ede3bedff6",
+      "family": "atlas",
+      "full_protocol_complete": false,
+      "knobs": {
+        "lr": 0.0053125,
+        "prior_lr_mult": 1.0
+      },
+      "original_gate": null,
+      "planned_case_cap": 180,
+      "reason": "Not reached after this whole configuration stopped at its first study non-pass.",
+      "study_gate": null,
+      "study_status": "UNKNOWN"
+    },
+    {
+      "case_id": "api-vector-anisotropic",
+      "completed_updates": 0,
+      "config_id": "atlas--cf74ea1def0d0ea4afa16f47ac10ea1268664fe480c9f6ab578a48ea6a1eabe2",
+      "effective_recipe_sha256": "5efd6c1c3753b7c0171db23c89c42779f0eeed527a0cf284290e67ede3bedff6",
+      "family": "atlas",
+      "full_protocol_complete": false,
+      "knobs": {
+        "lr": 0.0053125,
+        "prior_lr_mult": 1.0
+      },
+      "original_gate": null,
+      "planned_case_cap": 180,
+      "reason": "Not reached after this whole configuration stopped at its first study non-pass.",
+      "study_gate": null,
+      "study_status": "UNKNOWN"
+    },
+    {
+      "case_id": "image-develop-img_bars4-source-transpose12",
+      "completed_updates": 0,
+      "config_id": "atlas--cf74ea1def0d0ea4afa16f47ac10ea1268664fe480c9f6ab578a48ea6a1eabe2",
+      "effective_recipe_sha256": "26fe03cf328c4cb2f42005a2b69cc05a9cfd0d31fb4ee7e263961bf35afe27ec",
+      "family": "atlas",
+      "full_protocol_complete": false,
+      "knobs": {
+        "lr": 0.0053125,
+        "prior_lr_mult": 1.0
+      },
+      "original_gate": null,
+      "planned_case_cap": 180,
+      "reason": "Not reached after this whole configuration stopped at its first study non-pass.",
+      "study_gate": null,
+      "study_status": "UNKNOWN"
+    },
+    {
+      "acquisition_hold": {
+        "acquired_seconds": 16.608816373860464,
+        "acquired_step": 525,
+        "hold_checks": 3,
+        "hold_passed": 3,
+        "reason": "fewer than five post-confirmation hold observations",
+        "speed_eligible": false,
+        "status": "INCOMPLETE"
+      },
+      "artifacts": {
+        "final-state.pt": {
+          "bytes": 400551,
+          "path": "/ml2/hypergan/forge-policy-family-round3-20261002/e22/e22--233d9f6e49d46306187b00c2e9338b24092686c8819f4d7a35103596e3fcfaac/image-develop-img_intensity2-source-transpose12/final-state.pt",
+          "sha256": "1812c1f3128b8768443a710b0200d5199ef192f1c6cb2158f2b5e7e32be559e6"
+        },
+        "goal.gif": {
+          "bytes": 222143,
+          "path": "/ml2/hypergan/forge-policy-family-round3-20261002/e22/e22--233d9f6e49d46306187b00c2e9338b24092686c8819f4d7a35103596e3fcfaac/image-develop-img_intensity2-source-transpose12/goal.gif",
+          "sha256": "cec123d0e9c36f9b50e0becec2b56f88d929933e2d6a49a110c818c79e2c9f75"
+        },
+        "observations.npz": {
+          "bytes": 6083401,
+          "path": "/ml2/hypergan/forge-policy-family-round3-20261002/e22/e22--233d9f6e49d46306187b00c2e9338b24092686c8819f4d7a35103596e3fcfaac/image-develop-img_intensity2-source-transpose12/observations.npz",
+          "sha256": "c0396860fe9c9087a9c405a92acbb0dca53807f0139d20a5258a5984d553e791"
+        }
+      },
+      "backend_selection": null,
+      "case_id": "image-develop-img_intensity2-source-transpose12",
+      "completed_updates": 600,
+      "config_id": "e22--233d9f6e49d46306187b00c2e9338b24092686c8819f4d7a35103596e3fcfaac",
+      "effective_recipe_sha256": "b9925e01a99f32727aa8eb7c7dceafa50009fe0e85c04ddc6e5a2e67e15644a7",
+      "execution_status": "COMPLETE",
+      "failed_after_confirmation": [],
+      "family": "e22",
+      "final": {
+        "failed_bounds": [],
+        "metrics": {
+          "completed_steps": 600.0,
+          "distribution_tv": 0.017578125,
+          "finite_template_tv": 0.017578125,
+          "hq": 0.9970703125,
+          "mean_rmse": 0.01820686273276806,
+          "modes": 2.0,
+          "output_noise_added": 0.0,
+          "policy_latent_perturbation": 1.0,
+          "rejected_mass": 0.0029296875,
+          "samples": 1024.0,
+          "served_averaged": 0.0
+        },
+        "passed": true,
+        "step": 600
+      },
+      "final_role_lrs": [
+        [
+          0.00265625,
+          0.010625,
+          0.0053125
+        ],
+        [
+          0.0051720275485755965
+        ]
+      ],
+      "full_protocol_complete": true,
+      "initial_lrs": [
+        [
+          0.0053125,
+          0.010625,
+          0.0053125
+        ],
+        [
+          0.0053125
+        ]
+      ],
+      "knobs": {
+        "lr": 0.0053125,
+        "prior_lr_mult": 2.0
+      },
+      "media": {
+        "actual_update_steps": [
+          0,
+          75,
+          150,
+          225,
+          300,
+          375,
+          450,
+          525,
+          600
+        ],
+        "decoded_frames": 9,
+        "dimensions": [
+          460,
+          627
+        ],
+        "displayed_original_verdict": "PASS",
+        "frames": 9,
+        "path": "/ml2/hypergan/forge-policy-family-round3-20261002/e22/e22--233d9f6e49d46306187b00c2e9338b24092686c8819f4d7a35103596e3fcfaac/image-develop-img_intensity2-source-transpose12/goal.gif"
+      },
+      "original_gate": "PASS",
+      "paid_seconds": 18.69413589988835,
+      "planned_case_cap": 180,
+      "protocol": {
+        "default_evaluation_samples": 1024,
+        "default_updates": 600,
+        "evaluation_samples": 1024,
+        "evaluation_steps": [
+          0,
+          25,
+          50,
+          75,
+          100,
+          125,
+          150,
+          175,
+          200,
+          225,
+          250,
+          275,
+          300,
+          325,
+          350,
+          375,
+          400,
+          425,
+          450,
+          475,
+          500,
+          525,
+          550,
+          575,
+          600
+        ],
+        "media_frames": 9,
+        "media_steps": [
+          0,
+          75,
+          150,
+          225,
+          300,
+          375,
+          450,
+          525,
+          600
+        ],
+        "metric_evaluation_steps": [
+          0,
+          25,
+          50,
+          75,
+          100,
+          125,
+          150,
+          175,
+          200,
+          225,
+          250,
+          275,
+          300,
+          325,
+          350,
+          375,
+          400,
+          425,
+          450,
+          475,
+          500,
+          525,
+          550,
+          575,
+          600
+        ],
+        "metric_observations": 24,
+        "terminal_observations": 5,
+        "updates": 600,
+        "wall_cap_seconds": 180.0
+      },
+      "raw_acquisition_seconds": 18.69413589988835,
+      "receipt": {
+        "bytes": 44147,
+        "path": "/ml2/hypergan/forge-policy-family-round3-20261002/e22/e22--233d9f6e49d46306187b00c2e9338b24092686c8819f4d7a35103596e3fcfaac/image-develop-img_intensity2-source-transpose12/receipt.json",
+        "sha256": "bfc8c622371a81168e8227816e66f2fc222f6aa4cbbe67b0fd12d180c00da7ce"
+      },
+      "reopen_guard": null,
+      "study_gate": "INCOMPLETE",
+      "study_status": "INCOMPLETE",
+      "surprise": {
+        "armed": true,
+        "fires": 0,
+        "last_ratio": 1.0022576198307884,
+        "log": [],
+        "since_fire": null,
+        "streak": 0
+      },
+      "terminal_suffix": {
+        "failed": [],
+        "passed_count": 5,
+        "steps": [
+          500,
+          525,
+          550,
+          575,
+          600
+        ]
+      }
+    },
+    {
+      "case_id": "api-vector-two-broad",
+      "completed_updates": 0,
+      "config_id": "e22--233d9f6e49d46306187b00c2e9338b24092686c8819f4d7a35103596e3fcfaac",
+      "effective_recipe_sha256": "93d50de9f7d8280d3c1c0f2cf254fd2f2eefeda8cd7c30cc43ba9cb9615b3128",
+      "family": "e22",
+      "full_protocol_complete": false,
+      "knobs": {
+        "lr": 0.0053125,
+        "prior_lr_mult": 2.0
+      },
+      "original_gate": null,
+      "planned_case_cap": 180,
+      "reason": "Not reached after this whole configuration stopped at its first study non-pass.",
+      "study_gate": null,
+      "study_status": "UNKNOWN"
+    },
+    {
+      "case_id": "api-grid100",
+      "completed_updates": 0,
+      "config_id": "e22--233d9f6e49d46306187b00c2e9338b24092686c8819f4d7a35103596e3fcfaac",
+      "effective_recipe_sha256": "e36ed42152a5e6fe76c43ac2d19e1dca470a09f5572878eb13cdba1b219559f4",
+      "family": "e22",
+      "full_protocol_complete": false,
+      "knobs": {
+        "lr": 0.0053125,
+        "prior_lr_mult": 2.0
+      },
+      "original_gate": null,
+      "planned_case_cap": 2100,
+      "reason": "Not reached after this whole configuration stopped at its first study non-pass.",
+      "study_gate": null,
+      "study_status": "UNKNOWN"
+    },
+    {
+      "case_id": "api-rotated100",
+      "completed_updates": 0,
+      "config_id": "e22--233d9f6e49d46306187b00c2e9338b24092686c8819f4d7a35103596e3fcfaac",
+      "effective_recipe_sha256": "e36ed42152a5e6fe76c43ac2d19e1dca470a09f5572878eb13cdba1b219559f4",
+      "family": "e22",
+      "full_protocol_complete": false,
+      "knobs": {
+        "lr": 0.0053125,
+        "prior_lr_mult": 2.0
+      },
+      "original_gate": null,
+      "planned_case_cap": 2100,
+      "reason": "Not reached after this whole configuration stopped at its first study non-pass.",
+      "study_gate": null,
+      "study_status": "UNKNOWN"
+    },
+    {
+      "case_id": "api-staggered100",
+      "completed_updates": 0,
+      "config_id": "e22--233d9f6e49d46306187b00c2e9338b24092686c8819f4d7a35103596e3fcfaac",
+      "effective_recipe_sha256": "e36ed42152a5e6fe76c43ac2d19e1dca470a09f5572878eb13cdba1b219559f4",
+      "family": "e22",
+      "full_protocol_complete": false,
+      "knobs": {
+        "lr": 0.0053125,
+        "prior_lr_mult": 2.0
+      },
+      "original_gate": null,
+      "planned_case_cap": 2100,
+      "reason": "Not reached after this whole configuration stopped at its first study non-pass.",
+      "study_gate": null,
+      "study_status": "UNKNOWN"
+    },
+    {
+      "case_id": "api-vector-unequal-mass",
+      "completed_updates": 0,
+      "config_id": "e22--233d9f6e49d46306187b00c2e9338b24092686c8819f4d7a35103596e3fcfaac",
+      "effective_recipe_sha256": "93d50de9f7d8280d3c1c0f2cf254fd2f2eefeda8cd7c30cc43ba9cb9615b3128",
+      "family": "e22",
+      "full_protocol_complete": false,
+      "knobs": {
+        "lr": 0.0053125,
+        "prior_lr_mult": 2.0
+      },
+      "original_gate": null,
+      "planned_case_cap": 180,
+      "reason": "Not reached after this whole configuration stopped at its first study non-pass.",
+      "study_gate": null,
+      "study_status": "UNKNOWN"
+    },
+    {
+      "case_id": "api-vector-anisotropic",
+      "completed_updates": 0,
+      "config_id": "e22--233d9f6e49d46306187b00c2e9338b24092686c8819f4d7a35103596e3fcfaac",
+      "effective_recipe_sha256": "93d50de9f7d8280d3c1c0f2cf254fd2f2eefeda8cd7c30cc43ba9cb9615b3128",
+      "family": "e22",
+      "full_protocol_complete": false,
+      "knobs": {
+        "lr": 0.0053125,
+        "prior_lr_mult": 2.0
+      },
+      "original_gate": null,
+      "planned_case_cap": 180,
+      "reason": "Not reached after this whole configuration stopped at its first study non-pass.",
+      "study_gate": null,
+      "study_status": "UNKNOWN"
+    },
+    {
+      "case_id": "image-develop-img_bars4-source-transpose12",
+      "completed_updates": 0,
+      "config_id": "e22--233d9f6e49d46306187b00c2e9338b24092686c8819f4d7a35103596e3fcfaac",
+      "effective_recipe_sha256": "b9925e01a99f32727aa8eb7c7dceafa50009fe0e85c04ddc6e5a2e67e15644a7",
+      "family": "e22",
+      "full_protocol_complete": false,
+      "knobs": {
+        "lr": 0.0053125,
+        "prior_lr_mult": 2.0
+      },
+      "original_gate": null,
+      "planned_case_cap": 180,
+      "reason": "Not reached after this whole configuration stopped at its first study non-pass.",
+      "study_gate": null,
+      "study_status": "UNKNOWN"
+    },
+    {
+      "acquisition_hold": {
+        "acquired_seconds": 17.55713385110721,
+        "acquired_step": 550,
+        "hold_checks": 2,
+        "hold_passed": 2,
+        "reason": "fewer than five post-confirmation hold observations",
+        "speed_eligible": false,
+        "status": "INCOMPLETE"
+      },
+      "artifacts": {
+        "final-state.pt": {
+          "bytes": 355595,
+          "path": "/ml2/hypergan/forge-policy-family-round3-20261002/e22/e22--30110f79b68444ddc5b0d46c5b58fe87af7dc13a9b8c305f5613f8e9d542b37e/image-develop-img_intensity2-source-transpose12/final-state.pt",
+          "sha256": "ef665606f53aaea4f6d222769ef937c0d074f1a96fc743997a9b5b21809b7b55"
+        },
+        "goal.gif": {
+          "bytes": 217444,
+          "path": "/ml2/hypergan/forge-policy-family-round3-20261002/e22/e22--30110f79b68444ddc5b0d46c5b58fe87af7dc13a9b8c305f5613f8e9d542b37e/image-develop-img_intensity2-source-transpose12/goal.gif",
+          "sha256": "e7e37cb249ad9088d69030820d6f8391bf0d017d03e08ee778e2af9743ecfe0d"
+        },
+        "observations.npz": {
+          "bytes": 6040197,
+          "path": "/ml2/hypergan/forge-policy-family-round3-20261002/e22/e22--30110f79b68444ddc5b0d46c5b58fe87af7dc13a9b8c305f5613f8e9d542b37e/image-develop-img_intensity2-source-transpose12/observations.npz",
+          "sha256": "b2f4439a84e41d2eff3c7929a3c4498c8774f645d508082eccf21139a92bb899"
+        }
+      },
+      "backend_selection": null,
+      "case_id": "image-develop-img_intensity2-source-transpose12",
+      "completed_updates": 600,
+      "config_id": "e22--30110f79b68444ddc5b0d46c5b58fe87af7dc13a9b8c305f5613f8e9d542b37e",
+      "effective_recipe_sha256": "832c4fa189196469111b86c9af97d84e6f6f65c88f653d12654c4c36eae7caa6",
+      "execution_status": "COMPLETE",
+      "failed_after_confirmation": [],
+      "family": "e22",
+      "final": {
+        "failed_bounds": [],
+        "metrics": {
+          "completed_steps": 600.0,
+          "distribution_tv": 0.0830078125,
+          "finite_template_tv": 0.0830078125,
+          "hq": 1.0,
+          "mean_rmse": 0.013239848427474499,
+          "modes": 2.0,
+          "output_noise_added": 0.0,
+          "policy_latent_perturbation": 1.0,
+          "rejected_mass": 0.0,
+          "samples": 1024.0,
+          "served_averaged": 0.0
+        },
+        "passed": true,
+        "step": 600
+      },
+      "final_role_lrs": [
+        [
+          0.00159375,
+          0.006375,
+          0.0031875
+        ],
+        [
+          0.003130699174575725
+        ]
+      ],
+      "full_protocol_complete": true,
+      "initial_lrs": [
+        [
+          0.0031875,
+          0.006375,
+          0.0031875
+        ],
+        [
+          0.0031875
+        ]
+      ],
+      "knobs": {
+        "lr": 0.0031875,
+        "prior_lr_mult": 2.0
+      },
+      "media": {
+        "actual_update_steps": [
+          0,
+          75,
+          150,
+          225,
+          300,
+          375,
+          450,
+          525,
+          600
+        ],
+        "decoded_frames": 9,
+        "dimensions": [
+          460,
+          627
+        ],
+        "displayed_original_verdict": "PASS",
+        "frames": 9,
+        "path": "/ml2/hypergan/forge-policy-family-round3-20261002/e22/e22--30110f79b68444ddc5b0d46c5b58fe87af7dc13a9b8c305f5613f8e9d542b37e/image-develop-img_intensity2-source-transpose12/goal.gif"
+      },
+      "original_gate": "PASS",
+      "paid_seconds": 19.036745147081092,
+      "planned_case_cap": 180,
+      "protocol": {
+        "default_evaluation_samples": 1024,
+        "default_updates": 600,
+        "evaluation_samples": 1024,
+        "evaluation_steps": [
+          0,
+          25,
+          50,
+          75,
+          100,
+          125,
+          150,
+          175,
+          200,
+          225,
+          250,
+          275,
+          300,
+          325,
+          350,
+          375,
+          400,
+          425,
+          450,
+          475,
+          500,
+          525,
+          550,
+          575,
+          600
+        ],
+        "media_frames": 9,
+        "media_steps": [
+          0,
+          75,
+          150,
+          225,
+          300,
+          375,
+          450,
+          525,
+          600
+        ],
+        "metric_evaluation_steps": [
+          0,
+          25,
+          50,
+          75,
+          100,
+          125,
+          150,
+          175,
+          200,
+          225,
+          250,
+          275,
+          300,
+          325,
+          350,
+          375,
+          400,
+          425,
+          450,
+          475,
+          500,
+          525,
+          550,
+          575,
+          600
+        ],
+        "metric_observations": 24,
+        "terminal_observations": 5,
+        "updates": 600,
+        "wall_cap_seconds": 180.0
+      },
+      "raw_acquisition_seconds": 19.036745147081092,
+      "receipt": {
+        "bytes": 44296,
+        "path": "/ml2/hypergan/forge-policy-family-round3-20261002/e22/e22--30110f79b68444ddc5b0d46c5b58fe87af7dc13a9b8c305f5613f8e9d542b37e/image-develop-img_intensity2-source-transpose12/receipt.json",
+        "sha256": "26011ae8d44bb3c198a09fbf147f8c932afc3dfd0e570f8adf7ba5fab31d6ffa"
+      },
+      "reopen_guard": null,
+      "study_gate": "INCOMPLETE",
+      "study_status": "INCOMPLETE",
+      "surprise": {
+        "armed": true,
+        "fires": 0,
+        "last_ratio": 1.1540035557633184,
+        "log": [],
+        "since_fire": null,
+        "streak": 0
+      },
+      "terminal_suffix": {
+        "failed": [],
+        "passed_count": 5,
+        "steps": [
+          500,
+          525,
+          550,
+          575,
+          600
+        ]
+      }
+    },
+    {
+      "case_id": "api-vector-two-broad",
+      "completed_updates": 0,
+      "config_id": "e22--30110f79b68444ddc5b0d46c5b58fe87af7dc13a9b8c305f5613f8e9d542b37e",
+      "effective_recipe_sha256": "9b6eb63dae7d8148e3516181dea150f3635237fc28d6f13810da5f1093fa5b1e",
+      "family": "e22",
+      "full_protocol_complete": false,
+      "knobs": {
+        "lr": 0.0031875,
+        "prior_lr_mult": 2.0
+      },
+      "original_gate": null,
+      "planned_case_cap": 180,
+      "reason": "Not reached after this whole configuration stopped at its first study non-pass.",
+      "study_gate": null,
+      "study_status": "UNKNOWN"
+    },
+    {
+      "case_id": "api-grid100",
+      "completed_updates": 0,
+      "config_id": "e22--30110f79b68444ddc5b0d46c5b58fe87af7dc13a9b8c305f5613f8e9d542b37e",
+      "effective_recipe_sha256": "8f8415b5d3001aaa3fa5c056645fb88bc5eae8c3f310433ba7e36032bb6adcf2",
+      "family": "e22",
+      "full_protocol_complete": false,
+      "knobs": {
+        "lr": 0.0031875,
+        "prior_lr_mult": 2.0
+      },
+      "original_gate": null,
+      "planned_case_cap": 2100,
+      "reason": "Not reached after this whole configuration stopped at its first study non-pass.",
+      "study_gate": null,
+      "study_status": "UNKNOWN"
+    },
+    {
+      "case_id": "api-rotated100",
+      "completed_updates": 0,
+      "config_id": "e22--30110f79b68444ddc5b0d46c5b58fe87af7dc13a9b8c305f5613f8e9d542b37e",
+      "effective_recipe_sha256": "8f8415b5d3001aaa3fa5c056645fb88bc5eae8c3f310433ba7e36032bb6adcf2",
+      "family": "e22",
+      "full_protocol_complete": false,
+      "knobs": {
+        "lr": 0.0031875,
+        "prior_lr_mult": 2.0
+      },
+      "original_gate": null,
+      "planned_case_cap": 2100,
+      "reason": "Not reached after this whole configuration stopped at its first study non-pass.",
+      "study_gate": null,
+      "study_status": "UNKNOWN"
+    },
+    {
+      "case_id": "api-staggered100",
+      "completed_updates": 0,
+      "config_id": "e22--30110f79b68444ddc5b0d46c5b58fe87af7dc13a9b8c305f5613f8e9d542b37e",
+      "effective_recipe_sha256": "8f8415b5d3001aaa3fa5c056645fb88bc5eae8c3f310433ba7e36032bb6adcf2",
+      "family": "e22",
+      "full_protocol_complete": false,
+      "knobs": {
+        "lr": 0.0031875,
+        "prior_lr_mult": 2.0
+      },
+      "original_gate": null,
+      "planned_case_cap": 2100,
+      "reason": "Not reached after this whole configuration stopped at its first study non-pass.",
+      "study_gate": null,
+      "study_status": "UNKNOWN"
+    },
+    {
+      "case_id": "api-vector-unequal-mass",
+      "completed_updates": 0,
+      "config_id": "e22--30110f79b68444ddc5b0d46c5b58fe87af7dc13a9b8c305f5613f8e9d542b37e",
+      "effective_recipe_sha256": "9b6eb63dae7d8148e3516181dea150f3635237fc28d6f13810da5f1093fa5b1e",
+      "family": "e22",
+      "full_protocol_complete": false,
+      "knobs": {
+        "lr": 0.0031875,
+        "prior_lr_mult": 2.0
+      },
+      "original_gate": null,
+      "planned_case_cap": 180,
+      "reason": "Not reached after this whole configuration stopped at its first study non-pass.",
+      "study_gate": null,
+      "study_status": "UNKNOWN"
+    },
+    {
+      "case_id": "api-vector-anisotropic",
+      "completed_updates": 0,
+      "config_id": "e22--30110f79b68444ddc5b0d46c5b58fe87af7dc13a9b8c305f5613f8e9d542b37e",
+      "effective_recipe_sha256": "9b6eb63dae7d8148e3516181dea150f3635237fc28d6f13810da5f1093fa5b1e",
+      "family": "e22",
+      "full_protocol_complete": false,
+      "knobs": {
+        "lr": 0.0031875,
+        "prior_lr_mult": 2.0
+      },
+      "original_gate": null,
+      "planned_case_cap": 180,
+      "reason": "Not reached after this whole configuration stopped at its first study non-pass.",
+      "study_gate": null,
+      "study_status": "UNKNOWN"
+    },
+    {
+      "case_id": "image-develop-img_bars4-source-transpose12",
+      "completed_updates": 0,
+      "config_id": "e22--30110f79b68444ddc5b0d46c5b58fe87af7dc13a9b8c305f5613f8e9d542b37e",
+      "effective_recipe_sha256": "832c4fa189196469111b86c9af97d84e6f6f65c88f653d12654c4c36eae7caa6",
+      "family": "e22",
+      "full_protocol_complete": false,
+      "knobs": {
+        "lr": 0.0031875,
+        "prior_lr_mult": 2.0
+      },
+      "original_gate": null,
+      "planned_case_cap": 180,
+      "reason": "Not reached after this whole configuration stopped at its first study non-pass.",
+      "study_gate": null,
+      "study_status": "UNKNOWN"
+    },
+    {
+      "acquisition_hold": {
+        "acquired_seconds": 14.384013104019687,
+        "acquired_step": 425,
+        "hold_checks": 7,
+        "hold_passed": 7,
+        "reason": "first acquisition and uninterrupted hold",
+        "speed_eligible": false,
+        "status": "PASS"
+      },
+      "artifacts": {
+        "final-state.pt": {
+          "bytes": 403259,
+          "path": "/ml2/hypergan/forge-policy-family-round3-20261002/e22/e22--8385a62046dbf8d9bbf9d08b090d0d7b47147ae0849114a06a7919e9a32ac3f9/image-develop-img_intensity2-source-transpose12/final-state.pt",
+          "sha256": "2dc32e91f86b7f91d2a82c85248a0efdabf7494a29e399687babc5382a5d689a"
+        },
+        "goal.gif": {
+          "bytes": 221546,
+          "path": "/ml2/hypergan/forge-policy-family-round3-20261002/e22/e22--8385a62046dbf8d9bbf9d08b090d0d7b47147ae0849114a06a7919e9a32ac3f9/image-develop-img_intensity2-source-transpose12/goal.gif",
+          "sha256": "a9044fe97a57d9609bd4692200301adc986469eeff33d14c6d3624cd30097f55"
+        },
+        "observations.npz": {
+          "bytes": 6079209,
+          "path": "/ml2/hypergan/forge-policy-family-round3-20261002/e22/e22--8385a62046dbf8d9bbf9d08b090d0d7b47147ae0849114a06a7919e9a32ac3f9/image-develop-img_intensity2-source-transpose12/observations.npz",
+          "sha256": "b1df34d5a85aa2729e88d46f9556f0964e9c4570b42256022443a66a2f49eeea"
+        }
+      },
+      "backend_selection": null,
+      "case_id": "image-develop-img_intensity2-source-transpose12",
+      "completed_updates": 600,
+      "config_id": "e22--8385a62046dbf8d9bbf9d08b090d0d7b47147ae0849114a06a7919e9a32ac3f9",
+      "effective_recipe_sha256": "5f20b3362e908915e3b607a6740de7da5a541dfdb95832d960464fcbf1018d17",
+      "execution_status": "COMPLETE",
+      "failed_after_confirmation": [],
+      "family": "e22",
+      "final": {
+        "failed_bounds": [],
+        "metrics": {
+          "completed_steps": 600.0,
+          "distribution_tv": 0.0341796875,
+          "finite_template_tv": 0.037109375,
+          "hq": 0.9853515625,
+          "mean_rmse": 0.029842611402273178,
+          "modes": 2.0,
+          "output_noise_added": 0.0,
+          "policy_latent_perturbation": 1.0,
+          "rejected_mass": 0.0146484375,
+          "samples": 1024.0,
+          "served_averaged": 0.0
+        },
+        "passed": true,
+        "step": 600
+      },
+      "final_role_lrs": [
+        [
+          0.00265625,
+          0.0053125,
+          0.0053125
+        ],
+        [
+          0.005188046442613427
+        ]
+      ],
+      "full_protocol_complete": true,
+      "initial_lrs": [
+        [
+          0.0053125,
+          0.0053125,
+          0.0053125
+        ],
+        [
+          0.0053125
+        ]
+      ],
+      "knobs": {
+        "lr": 0.0053125,
+        "prior_lr_mult": 1.0
+      },
+      "media": {
+        "actual_update_steps": [
+          0,
+          75,
+          150,
+          225,
+          300,
+          375,
+          450,
+          525,
+          600
+        ],
+        "decoded_frames": 9,
+        "dimensions": [
+          460,
+          627
+        ],
+        "displayed_original_verdict": "PASS",
+        "frames": 9,
+        "path": "/ml2/hypergan/forge-policy-family-round3-20261002/e22/e22--8385a62046dbf8d9bbf9d08b090d0d7b47147ae0849114a06a7919e9a32ac3f9/image-develop-img_intensity2-source-transpose12/goal.gif"
+      },
+      "original_gate": "PASS",
+      "paid_seconds": 19.394599793013185,
+      "planned_case_cap": 180,
+      "protocol": {
+        "default_evaluation_samples": 1024,
+        "default_updates": 600,
+        "evaluation_samples": 1024,
+        "evaluation_steps": [
+          0,
+          25,
+          50,
+          75,
+          100,
+          125,
+          150,
+          175,
+          200,
+          225,
+          250,
+          275,
+          300,
+          325,
+          350,
+          375,
+          400,
+          425,
+          450,
+          475,
+          500,
+          525,
+          550,
+          575,
+          600
+        ],
+        "media_frames": 9,
+        "media_steps": [
+          0,
+          75,
+          150,
+          225,
+          300,
+          375,
+          450,
+          525,
+          600
+        ],
+        "metric_evaluation_steps": [
+          0,
+          25,
+          50,
+          75,
+          100,
+          125,
+          150,
+          175,
+          200,
+          225,
+          250,
+          275,
+          300,
+          325,
+          350,
+          375,
+          400,
+          425,
+          450,
+          475,
+          500,
+          525,
+          550,
+          575,
+          600
+        ],
+        "metric_observations": 24,
+        "terminal_observations": 5,
+        "updates": 600,
+        "wall_cap_seconds": 180.0
+      },
+      "raw_acquisition_seconds": 19.394599793013185,
+      "receipt": {
+        "bytes": 43950,
+        "path": "/ml2/hypergan/forge-policy-family-round3-20261002/e22/e22--8385a62046dbf8d9bbf9d08b090d0d7b47147ae0849114a06a7919e9a32ac3f9/image-develop-img_intensity2-source-transpose12/receipt.json",
+        "sha256": "94c376eafd45536269fb7fdb7cd79868633bea96bb3deaf6dbf1744117c00c15"
+      },
+      "reopen_guard": null,
+      "study_gate": "PASS",
+      "study_status": "PASS",
+      "surprise": {
+        "armed": true,
+        "fires": 0,
+        "last_ratio": 0.8020984315409139,
+        "log": [],
+        "since_fire": null,
+        "streak": 0
+      },
+      "terminal_suffix": {
+        "failed": [],
+        "passed_count": 5,
+        "steps": [
+          500,
+          525,
+          550,
+          575,
+          600
+        ]
+      }
+    },
+    {
+      "acquisition_hold": {
+        "reason": "no five-check acquisition window",
+        "status": "FAIL"
+      },
+      "artifacts": {
+        "final-state.pt": {
+          "bytes": 469405,
+          "path": "/ml2/hypergan/forge-policy-family-round3-20261002/e22/e22--8385a62046dbf8d9bbf9d08b090d0d7b47147ae0849114a06a7919e9a32ac3f9/api-vector-two-broad/final-state.pt",
+          "sha256": "ec03b174205aa5ccff58a7a0547759d471c448bfc5c960a4e803d1de1bd62b98"
+        },
+        "goal.gif": {
+          "bytes": 682542,
+          "path": "/ml2/hypergan/forge-policy-family-round3-20261002/e22/e22--8385a62046dbf8d9bbf9d08b090d0d7b47147ae0849114a06a7919e9a32ac3f9/api-vector-two-broad/goal.gif",
+          "sha256": "2701aadbc202f9d73c1a3cc63129bd4ae15e23a944f670f36284975ce19959ea"
+        },
+        "observations.npz": {
+          "bytes": 3070060,
+          "path": "/ml2/hypergan/forge-policy-family-round3-20261002/e22/e22--8385a62046dbf8d9bbf9d08b090d0d7b47147ae0849114a06a7919e9a32ac3f9/api-vector-two-broad/observations.npz",
+          "sha256": "ecc0a6982a8c6424e5dc9d153027248539d8bead3ddf009d118d766c44cb68e1"
+        }
+      },
+      "backend_selection": null,
+      "case_id": "api-vector-two-broad",
+      "completed_updates": 1200,
+      "config_id": "e22--8385a62046dbf8d9bbf9d08b090d0d7b47147ae0849114a06a7919e9a32ac3f9",
+      "effective_recipe_sha256": "175ca6eb3830af3c06dcae0a9b7eff50a2a42bcbb436f9c2ec40383c8abb8e7f",
+      "execution_status": "COMPLETE",
+      "failed_after_confirmation": [],
+      "family": "e22",
+      "final": {
+        "failed_bounds": [],
+        "metrics": {
+          "component_core_covariance_error": 0.13421965390443802,
+          "component_core_min_eigen_ratio": 0.860304594039917,
+          "component_covariance_error": 0.13767259567975998,
+          "component_min_eigen_ratio": 0.8620058298110962,
+          "covariance_error": 0.010527929291129112,
+          "hq": 0.98583984375,
+          "mass_tv": 0.0009765625,
+          "max_component_spill": 0.015107212588191032,
+          "mean_error": 0.020743660628795624,
+          "min_mass_ratio": 0.998046875,
+          "projection_ks": 0.033686475788986536,
+          "resolved_core_covariance_error": 0.13421965390443802,
+          "resolved_core_min_eigen_ratio": 0.860304594039917,
+          "resolved_max_component_spill": 0.015107212588191032,
+          "sample_count": 4096,
+          "sw1_normalized": 0.0168875139516822,
+          "target_scale": 1.0555585622787476
+        },
+        "passed": true,
+        "step": 1200
+      },
+      "final_role_lrs": [
+        [
+          0.0053125,
+          0.0053125,
+          0.0053125
+        ],
+        [
+          0.005976561340592262
+        ]
+      ],
+      "full_protocol_complete": true,
+      "initial_lrs": [
+        [
+          0.0053125,
+          0.0053125,
+          0.0053125
+        ],
+        [
+          0.00796875
+        ]
+      ],
+      "knobs": {
+        "lr": 0.0053125,
+        "prior_lr_mult": 1.0
+      },
+      "media": {
+        "actual_update_steps": [
+          0,
+          150,
+          300,
+          450,
+          600,
+          750,
+          900,
+          1050,
+          1200
+        ],
+        "decoded_frames": 9,
+        "dimensions": [
+          1380,
+          573
+        ],
+        "displayed_original_verdict": "FAIL",
+        "frames": 9,
+        "path": "/ml2/hypergan/forge-policy-family-round3-20261002/e22/e22--8385a62046dbf8d9bbf9d08b090d0d7b47147ae0849114a06a7919e9a32ac3f9/api-vector-two-broad/goal.gif"
+      },
+      "original_gate": "FAIL",
+      "paid_seconds": 32.75223085493781,
+      "planned_case_cap": 180,
+      "protocol": {
+        "default_evaluation_samples": 4096,
+        "default_updates": 1200,
+        "evaluation_samples": 4096,
+        "evaluation_steps": [
+          0,
+          50,
+          100,
+          150,
+          200,
+          250,
+          300,
+          350,
+          400,
+          450,
+          500,
+          550,
+          600,
+          650,
+          700,
+          750,
+          800,
+          850,
+          900,
+          950,
+          1000,
+          1050,
+          1100,
+          1150,
+          1200
+        ],
+        "media_frames": 9,
+        "media_steps": [
+          0,
+          150,
+          300,
+          450,
+          600,
+          750,
+          900,
+          1050,
+          1200
+        ],
+        "metric_evaluation_steps": [
+          0,
+          50,
+          100,
+          150,
+          200,
+          250,
+          300,
+          350,
+          400,
+          450,
+          500,
+          550,
+          600,
+          650,
+          700,
+          750,
+          800,
+          850,
+          900,
+          950,
+          1000,
+          1050,
+          1100,
+          1150,
+          1200
+        ],
+        "metric_observations": 24,
+        "terminal_observations": 5,
+        "updates": 1200,
+        "wall_cap_seconds": 180.0
+      },
+      "raw_acquisition_seconds": 32.75223085493781,
+      "receipt": {
+        "bytes": 75778,
+        "path": "/ml2/hypergan/forge-policy-family-round3-20261002/e22/e22--8385a62046dbf8d9bbf9d08b090d0d7b47147ae0849114a06a7919e9a32ac3f9/api-vector-two-broad/receipt.json",
+        "sha256": "734926328e16e4ff48791c1dd6225f5058c9a522a46d4e229b7a436efed918aa"
+      },
+      "reopen_guard": null,
+      "study_gate": "FAIL",
+      "study_status": "FAIL",
+      "surprise": {
+        "armed": true,
+        "fires": 0,
+        "last_ratio": 1.5278820209095862,
+        "log": [],
+        "since_fire": null,
+        "streak": 0
+      },
+      "terminal_suffix": {
+        "failed": [
+          {
+            "failed_bounds": [
+              "projection_ks <= 0.06"
+            ],
+            "failed_gate_values": {
+              "projection_ks": 0.0751643349890786
+            },
+            "step": 1000
+          },
+          {
+            "failed_bounds": [
+              "projection_ks <= 0.06"
+            ],
+            "failed_gate_values": {
+              "projection_ks": 0.07344772124681465
+            },
+            "step": 1050
+          },
+          {
+            "failed_bounds": [
+              "projection_ks <= 0.06"
+            ],
+            "failed_gate_values": {
+              "projection_ks": 0.10604010664457594
+            },
+            "step": 1100
+          },
+          {
+            "failed_bounds": [
+              "projection_ks <= 0.06"
+            ],
+            "failed_gate_values": {
+              "projection_ks": 0.06730694642851398
+            },
+            "step": 1150
+          }
+        ],
+        "passed_count": 1,
+        "steps": [
+          1000,
+          1050,
+          1100,
+          1150,
+          1200
+        ]
+      }
+    },
+    {
+      "case_id": "api-grid100",
+      "completed_updates": 0,
+      "config_id": "e22--8385a62046dbf8d9bbf9d08b090d0d7b47147ae0849114a06a7919e9a32ac3f9",
+      "effective_recipe_sha256": "af3ce2f3308c8b06aacbf6e11b8c817ce6b6bfb870fde7530963615142af3e74",
+      "family": "e22",
+      "full_protocol_complete": false,
+      "knobs": {
+        "lr": 0.0053125,
+        "prior_lr_mult": 1.0
+      },
+      "original_gate": null,
+      "planned_case_cap": 2100,
+      "reason": "Not reached after this whole configuration stopped at its first study non-pass.",
+      "study_gate": null,
+      "study_status": "UNKNOWN"
+    },
+    {
+      "case_id": "api-rotated100",
+      "completed_updates": 0,
+      "config_id": "e22--8385a62046dbf8d9bbf9d08b090d0d7b47147ae0849114a06a7919e9a32ac3f9",
+      "effective_recipe_sha256": "af3ce2f3308c8b06aacbf6e11b8c817ce6b6bfb870fde7530963615142af3e74",
+      "family": "e22",
+      "full_protocol_complete": false,
+      "knobs": {
+        "lr": 0.0053125,
+        "prior_lr_mult": 1.0
+      },
+      "original_gate": null,
+      "planned_case_cap": 2100,
+      "reason": "Not reached after this whole configuration stopped at its first study non-pass.",
+      "study_gate": null,
+      "study_status": "UNKNOWN"
+    },
+    {
+      "case_id": "api-staggered100",
+      "completed_updates": 0,
+      "config_id": "e22--8385a62046dbf8d9bbf9d08b090d0d7b47147ae0849114a06a7919e9a32ac3f9",
+      "effective_recipe_sha256": "af3ce2f3308c8b06aacbf6e11b8c817ce6b6bfb870fde7530963615142af3e74",
+      "family": "e22",
+      "full_protocol_complete": false,
+      "knobs": {
+        "lr": 0.0053125,
+        "prior_lr_mult": 1.0
+      },
+      "original_gate": null,
+      "planned_case_cap": 2100,
+      "reason": "Not reached after this whole configuration stopped at its first study non-pass.",
+      "study_gate": null,
+      "study_status": "UNKNOWN"
+    },
+    {
+      "case_id": "api-vector-unequal-mass",
+      "completed_updates": 0,
+      "config_id": "e22--8385a62046dbf8d9bbf9d08b090d0d7b47147ae0849114a06a7919e9a32ac3f9",
+      "effective_recipe_sha256": "175ca6eb3830af3c06dcae0a9b7eff50a2a42bcbb436f9c2ec40383c8abb8e7f",
+      "family": "e22",
+      "full_protocol_complete": false,
+      "knobs": {
+        "lr": 0.0053125,
+        "prior_lr_mult": 1.0
+      },
+      "original_gate": null,
+      "planned_case_cap": 180,
+      "reason": "Not reached after this whole configuration stopped at its first study non-pass.",
+      "study_gate": null,
+      "study_status": "UNKNOWN"
+    },
+    {
+      "case_id": "api-vector-anisotropic",
+      "completed_updates": 0,
+      "config_id": "e22--8385a62046dbf8d9bbf9d08b090d0d7b47147ae0849114a06a7919e9a32ac3f9",
+      "effective_recipe_sha256": "175ca6eb3830af3c06dcae0a9b7eff50a2a42bcbb436f9c2ec40383c8abb8e7f",
+      "family": "e22",
+      "full_protocol_complete": false,
+      "knobs": {
+        "lr": 0.0053125,
+        "prior_lr_mult": 1.0
+      },
+      "original_gate": null,
+      "planned_case_cap": 180,
+      "reason": "Not reached after this whole configuration stopped at its first study non-pass.",
+      "study_gate": null,
+      "study_status": "UNKNOWN"
+    },
+    {
+      "case_id": "image-develop-img_bars4-source-transpose12",
+      "completed_updates": 0,
+      "config_id": "e22--8385a62046dbf8d9bbf9d08b090d0d7b47147ae0849114a06a7919e9a32ac3f9",
+      "effective_recipe_sha256": "5f20b3362e908915e3b607a6740de7da5a541dfdb95832d960464fcbf1018d17",
+      "family": "e22",
+      "full_protocol_complete": false,
+      "knobs": {
+        "lr": 0.0053125,
+        "prior_lr_mult": 1.0
+      },
+      "original_gate": null,
+      "planned_case_cap": 180,
+      "reason": "Not reached after this whole configuration stopped at its first study non-pass.",
+      "study_gate": null,
+      "study_status": "UNKNOWN"
+    },
+    {
+      "acquisition_hold": {
+        "acquired_seconds": 15.674800268840045,
+        "acquired_step": 475,
+        "hold_checks": 5,
+        "hold_passed": 5,
+        "reason": "first acquisition and uninterrupted hold",
+        "speed_eligible": false,
+        "status": "PASS"
+      },
+      "artifacts": {
+        "final-state.pt": {
+          "bytes": 345299,
+          "path": "/ml2/hypergan/forge-policy-family-round3-20261002/e22/e22--d0348c27e9ce4f9acc96751820270b35fd1eb999c18e79b8ab7601667b174b21/image-develop-img_intensity2-source-transpose12/final-state.pt",
+          "sha256": "a7d428b0b11116376262d4a2bfb17e49613d8fe076c7958cf29b98265e267215"
+        },
+        "goal.gif": {
+          "bytes": 219879,
+          "path": "/ml2/hypergan/forge-policy-family-round3-20261002/e22/e22--d0348c27e9ce4f9acc96751820270b35fd1eb999c18e79b8ab7601667b174b21/image-develop-img_intensity2-source-transpose12/goal.gif",
+          "sha256": "de56f9017d660d14b0ef596663d30838fe3cbf437703b0d19337e40165badb11"
+        },
+        "observations.npz": {
+          "bytes": 6060965,
+          "path": "/ml2/hypergan/forge-policy-family-round3-20261002/e22/e22--d0348c27e9ce4f9acc96751820270b35fd1eb999c18e79b8ab7601667b174b21/image-develop-img_intensity2-source-transpose12/observations.npz",
+          "sha256": "c0416b6dc43fa0e5e62e33295d70ba520f7df5b1bd0b2cfbc91afc58b11967ab"
+        }
+      },
+      "backend_selection": null,
+      "case_id": "image-develop-img_intensity2-source-transpose12",
+      "completed_updates": 600,
+      "config_id": "e22--d0348c27e9ce4f9acc96751820270b35fd1eb999c18e79b8ab7601667b174b21",
+      "effective_recipe_sha256": "0ebeb20c830b0f35ab83ce016ed4defab211feaf7c92a490b12b346b2daa123c",
+      "execution_status": "COMPLETE",
+      "failed_after_confirmation": [],
+      "family": "e22",
+      "final": {
+        "failed_bounds": [],
+        "metrics": {
+          "completed_steps": 600.0,
+          "distribution_tv": 0.005859375,
+          "finite_template_tv": 0.005859375,
+          "hq": 0.9990234375,
+          "mean_rmse": 0.016358178108930588,
+          "modes": 2.0,
+          "output_noise_added": 0.0,
+          "policy_latent_perturbation": 1.0,
+          "rejected_mass": 0.0009765625,
+          "samples": 1024.0,
+          "served_averaged": 0.0
+        },
+        "passed": true,
+        "step": 600
+      },
+      "final_role_lrs": [
+        [
+          0.00159375,
+          0.0031875,
+          0.0031875
+        ],
+        [
+          0.002360201350460432
+        ]
+      ],
+      "full_protocol_complete": true,
+      "initial_lrs": [
+        [
+          0.0031875,
+          0.0031875,
+          0.0031875
+        ],
+        [
+          0.0031875
+        ]
+      ],
+      "knobs": {
+        "lr": 0.0031875,
+        "prior_lr_mult": 1.0
+      },
+      "media": {
+        "actual_update_steps": [
+          0,
+          75,
+          150,
+          225,
+          300,
+          375,
+          450,
+          525,
+          600
+        ],
+        "decoded_frames": 9,
+        "dimensions": [
+          460,
+          627
+        ],
+        "displayed_original_verdict": "PASS",
+        "frames": 9,
+        "path": "/ml2/hypergan/forge-policy-family-round3-20261002/e22/e22--d0348c27e9ce4f9acc96751820270b35fd1eb999c18e79b8ab7601667b174b21/image-develop-img_intensity2-source-transpose12/goal.gif"
+      },
+      "original_gate": "PASS",
+      "paid_seconds": 19.26214026589878,
+      "planned_case_cap": 180,
+      "protocol": {
+        "default_evaluation_samples": 1024,
+        "default_updates": 600,
+        "evaluation_samples": 1024,
+        "evaluation_steps": [
+          0,
+          25,
+          50,
+          75,
+          100,
+          125,
+          150,
+          175,
+          200,
+          225,
+          250,
+          275,
+          300,
+          325,
+          350,
+          375,
+          400,
+          425,
+          450,
+          475,
+          500,
+          525,
+          550,
+          575,
+          600
+        ],
+        "media_frames": 9,
+        "media_steps": [
+          0,
+          75,
+          150,
+          225,
+          300,
+          375,
+          450,
+          525,
+          600
+        ],
+        "metric_evaluation_steps": [
+          0,
+          25,
+          50,
+          75,
+          100,
+          125,
+          150,
+          175,
+          200,
+          225,
+          250,
+          275,
+          300,
+          325,
+          350,
+          375,
+          400,
+          425,
+          450,
+          475,
+          500,
+          525,
+          550,
+          575,
+          600
+        ],
+        "metric_observations": 24,
+        "terminal_observations": 5,
+        "updates": 600,
+        "wall_cap_seconds": 180.0
+      },
+      "raw_acquisition_seconds": 19.26214026589878,
+      "receipt": {
+        "bytes": 44282,
+        "path": "/ml2/hypergan/forge-policy-family-round3-20261002/e22/e22--d0348c27e9ce4f9acc96751820270b35fd1eb999c18e79b8ab7601667b174b21/image-develop-img_intensity2-source-transpose12/receipt.json",
+        "sha256": "761edd687fb586a749835f24f0e6ebc280d2a016d69759cfea577ad1d867ee48"
+      },
+      "reopen_guard": null,
+      "study_gate": "PASS",
+      "study_status": "PASS",
+      "surprise": {
+        "armed": true,
+        "fires": 0,
+        "last_ratio": 2.1274288059287,
+        "log": [],
+        "since_fire": null,
+        "streak": 0
+      },
+      "terminal_suffix": {
+        "failed": [],
+        "passed_count": 5,
+        "steps": [
+          500,
+          525,
+          550,
+          575,
+          600
+        ]
+      }
+    },
+    {
+      "acquisition_hold": {
+        "reason": "no five-check acquisition window",
+        "status": "FAIL"
+      },
+      "artifacts": {
+        "final-state.pt": {
+          "bytes": 447555,
+          "path": "/ml2/hypergan/forge-policy-family-round3-20261002/e22/e22--d0348c27e9ce4f9acc96751820270b35fd1eb999c18e79b8ab7601667b174b21/api-vector-two-broad/final-state.pt",
+          "sha256": "7926bb37c02ce2b3790a72c54c2cb6c35ac459010965f18acd2fdbc4aa65ef4f"
+        },
+        "goal.gif": {
+          "bytes": 676518,
+          "path": "/ml2/hypergan/forge-policy-family-round3-20261002/e22/e22--d0348c27e9ce4f9acc96751820270b35fd1eb999c18e79b8ab7601667b174b21/api-vector-two-broad/goal.gif",
+          "sha256": "09a71bd3846c3eb932f3589966ab0474473c37934987fa8a5cde898d0961413e"
+        },
+        "observations.npz": {
+          "bytes": 3070209,
+          "path": "/ml2/hypergan/forge-policy-family-round3-20261002/e22/e22--d0348c27e9ce4f9acc96751820270b35fd1eb999c18e79b8ab7601667b174b21/api-vector-two-broad/observations.npz",
+          "sha256": "e97fd6238463a8c331c8a60234cd2489fd3c58a871b8b696d4300a63cf9c2045"
+        }
+      },
+      "backend_selection": null,
+      "case_id": "api-vector-two-broad",
+      "completed_updates": 1200,
+      "config_id": "e22--d0348c27e9ce4f9acc96751820270b35fd1eb999c18e79b8ab7601667b174b21",
+      "effective_recipe_sha256": "03bbe7412be7c8a1873989bd98bbb9bbd5028779652bcfc02be360fb336d683d",
+      "execution_status": "COMPLETE",
+      "failed_after_confirmation": [],
+      "family": "e22",
+      "final": {
+        "failed_bounds": [
+          "projection_ks <= 0.06"
+        ],
+        "metrics": {
+          "component_core_covariance_error": 0.11140469461679459,
+          "component_core_min_eigen_ratio": 0.8926618099212646,
+          "component_covariance_error": 0.11268256232142448,
+          "component_min_eigen_ratio": 0.8948085308074951,
+          "covariance_error": 0.06926125288009644,
+          "hq": 0.981201171875,
+          "mass_tv": 0.006591796875,
+          "max_component_spill": 0.01927710883319378,
+          "mean_error": 0.03128637373447418,
+          "min_mass_ratio": 0.98681640625,
+          "projection_ks": 0.06071920774396755,
+          "resolved_core_covariance_error": 0.11140469461679459,
+          "resolved_core_min_eigen_ratio": 0.8926618099212646,
+          "resolved_max_component_spill": 0.01927710883319378,
+          "sample_count": 4096,
+          "sw1_normalized": 0.033018880043710286,
+          "target_scale": 1.0555585622787476
+        },
+        "passed": false,
+        "step": 1200
+      },
+      "final_role_lrs": [
+        [
+          0.0031875,
+          0.0031875,
+          0.0031875
+        ],
+        [
+          0.0035859346877656485
+        ]
+      ],
+      "full_protocol_complete": true,
+      "initial_lrs": [
+        [
+          0.0031875,
+          0.0031875,
+          0.0031875
+        ],
+        [
+          0.00478125
+        ]
+      ],
+      "knobs": {
+        "lr": 0.0031875,
+        "prior_lr_mult": 1.0
+      },
+      "media": {
+        "actual_update_steps": [
+          0,
+          150,
+          300,
+          450,
+          600,
+          750,
+          900,
+          1050,
+          1200
+        ],
+        "decoded_frames": 9,
+        "dimensions": [
+          1380,
+          573
+        ],
+        "displayed_original_verdict": "FAIL",
+        "frames": 9,
+        "path": "/ml2/hypergan/forge-policy-family-round3-20261002/e22/e22--d0348c27e9ce4f9acc96751820270b35fd1eb999c18e79b8ab7601667b174b21/api-vector-two-broad/goal.gif"
+      },
+      "original_gate": "FAIL",
+      "paid_seconds": 33.38159742904827,
+      "planned_case_cap": 180,
+      "protocol": {
+        "default_evaluation_samples": 4096,
+        "default_updates": 1200,
+        "evaluation_samples": 4096,
+        "evaluation_steps": [
+          0,
+          50,
+          100,
+          150,
+          200,
+          250,
+          300,
+          350,
+          400,
+          450,
+          500,
+          550,
+          600,
+          650,
+          700,
+          750,
+          800,
+          850,
+          900,
+          950,
+          1000,
+          1050,
+          1100,
+          1150,
+          1200
+        ],
+        "media_frames": 9,
+        "media_steps": [
+          0,
+          150,
+          300,
+          450,
+          600,
+          750,
+          900,
+          1050,
+          1200
+        ],
+        "metric_evaluation_steps": [
+          0,
+          50,
+          100,
+          150,
+          200,
+          250,
+          300,
+          350,
+          400,
+          450,
+          500,
+          550,
+          600,
+          650,
+          700,
+          750,
+          800,
+          850,
+          900,
+          950,
+          1000,
+          1050,
+          1100,
+          1150,
+          1200
+        ],
+        "metric_observations": 24,
+        "terminal_observations": 5,
+        "updates": 1200,
+        "wall_cap_seconds": 180.0
+      },
+      "raw_acquisition_seconds": 33.38159742904827,
+      "receipt": {
+        "bytes": 75914,
+        "path": "/ml2/hypergan/forge-policy-family-round3-20261002/e22/e22--d0348c27e9ce4f9acc96751820270b35fd1eb999c18e79b8ab7601667b174b21/api-vector-two-broad/receipt.json",
+        "sha256": "fbb3e80f945ba29524e0e06c6bdd47024ed51067ff01254d6a2d356f551b7f65"
+      },
+      "reopen_guard": null,
+      "study_gate": "FAIL",
+      "study_status": "FAIL",
+      "surprise": {
+        "armed": true,
+        "fires": 0,
+        "last_ratio": 1.023575485973165,
+        "log": [],
+        "since_fire": null,
+        "streak": 0
+      },
+      "terminal_suffix": {
+        "failed": [
+          {
+            "failed_bounds": [
+              "projection_ks <= 0.06"
+            ],
+            "failed_gate_values": {
+              "projection_ks": 0.07923459377607989
+            },
+            "step": 1000
+          },
+          {
+            "failed_bounds": [
+              "projection_ks <= 0.06"
+            ],
+            "failed_gate_values": {
+              "projection_ks": 0.0850587457425813
+            },
+            "step": 1050
+          },
+          {
+            "failed_bounds": [
+              "projection_ks <= 0.06"
+            ],
+            "failed_gate_values": {
+              "projection_ks": 0.06197438300365571
+            },
+            "step": 1100
+          },
+          {
+            "failed_bounds": [
+              "projection_ks <= 0.06"
+            ],
+            "failed_gate_values": {
+              "projection_ks": 0.07053331793417328
+            },
+            "step": 1150
+          },
+          {
+            "failed_bounds": [
+              "projection_ks <= 0.06"
+            ],
+            "failed_gate_values": {
+              "projection_ks": 0.06071920774396755
+            },
+            "step": 1200
+          }
+        ],
+        "passed_count": 0,
+        "steps": [
+          1000,
+          1050,
+          1100,
+          1150,
+          1200
+        ]
+      }
+    },
+    {
+      "case_id": "api-grid100",
+      "completed_updates": 0,
+      "config_id": "e22--d0348c27e9ce4f9acc96751820270b35fd1eb999c18e79b8ab7601667b174b21",
+      "effective_recipe_sha256": "74e69cde2576b291b0d10f564f96a3504b5da682711ec930747fe717c9a65df2",
+      "family": "e22",
+      "full_protocol_complete": false,
+      "knobs": {
+        "lr": 0.0031875,
+        "prior_lr_mult": 1.0
+      },
+      "original_gate": null,
+      "planned_case_cap": 2100,
+      "reason": "Not reached after this whole configuration stopped at its first study non-pass.",
+      "study_gate": null,
+      "study_status": "UNKNOWN"
+    },
+    {
+      "case_id": "api-rotated100",
+      "completed_updates": 0,
+      "config_id": "e22--d0348c27e9ce4f9acc96751820270b35fd1eb999c18e79b8ab7601667b174b21",
+      "effective_recipe_sha256": "74e69cde2576b291b0d10f564f96a3504b5da682711ec930747fe717c9a65df2",
+      "family": "e22",
+      "full_protocol_complete": false,
+      "knobs": {
+        "lr": 0.0031875,
+        "prior_lr_mult": 1.0
+      },
+      "original_gate": null,
+      "planned_case_cap": 2100,
+      "reason": "Not reached after this whole configuration stopped at its first study non-pass.",
+      "study_gate": null,
+      "study_status": "UNKNOWN"
+    },
+    {
+      "case_id": "api-staggered100",
+      "completed_updates": 0,
+      "config_id": "e22--d0348c27e9ce4f9acc96751820270b35fd1eb999c18e79b8ab7601667b174b21",
+      "effective_recipe_sha256": "74e69cde2576b291b0d10f564f96a3504b5da682711ec930747fe717c9a65df2",
+      "family": "e22",
+      "full_protocol_complete": false,
+      "knobs": {
+        "lr": 0.0031875,
+        "prior_lr_mult": 1.0
+      },
+      "original_gate": null,
+      "planned_case_cap": 2100,
+      "reason": "Not reached after this whole configuration stopped at its first study non-pass.",
+      "study_gate": null,
+      "study_status": "UNKNOWN"
+    },
+    {
+      "case_id": "api-vector-unequal-mass",
+      "completed_updates": 0,
+      "config_id": "e22--d0348c27e9ce4f9acc96751820270b35fd1eb999c18e79b8ab7601667b174b21",
+      "effective_recipe_sha256": "03bbe7412be7c8a1873989bd98bbb9bbd5028779652bcfc02be360fb336d683d",
+      "family": "e22",
+      "full_protocol_complete": false,
+      "knobs": {
+        "lr": 0.0031875,
+        "prior_lr_mult": 1.0
+      },
+      "original_gate": null,
+      "planned_case_cap": 180,
+      "reason": "Not reached after this whole configuration stopped at its first study non-pass.",
+      "study_gate": null,
+      "study_status": "UNKNOWN"
+    },
+    {
+      "case_id": "api-vector-anisotropic",
+      "completed_updates": 0,
+      "config_id": "e22--d0348c27e9ce4f9acc96751820270b35fd1eb999c18e79b8ab7601667b174b21",
+      "effective_recipe_sha256": "03bbe7412be7c8a1873989bd98bbb9bbd5028779652bcfc02be360fb336d683d",
+      "family": "e22",
+      "full_protocol_complete": false,
+      "knobs": {
+        "lr": 0.0031875,
+        "prior_lr_mult": 1.0
+      },
+      "original_gate": null,
+      "planned_case_cap": 180,
+      "reason": "Not reached after this whole configuration stopped at its first study non-pass.",
+      "study_gate": null,
+      "study_status": "UNKNOWN"
+    },
+    {
+      "case_id": "image-develop-img_bars4-source-transpose12",
+      "completed_updates": 0,
+      "config_id": "e22--d0348c27e9ce4f9acc96751820270b35fd1eb999c18e79b8ab7601667b174b21",
+      "effective_recipe_sha256": "0ebeb20c830b0f35ab83ce016ed4defab211feaf7c92a490b12b346b2daa123c",
+      "family": "e22",
+      "full_protocol_complete": false,
+      "knobs": {
+        "lr": 0.0031875,
+        "prior_lr_mult": 1.0
+      },
+      "original_gate": null,
+      "planned_case_cap": 180,
+      "reason": "Not reached after this whole configuration stopped at its first study non-pass.",
+      "study_gate": null,
+      "study_status": "UNKNOWN"
+    }
+  ],
+  "root_archive_manifest": {
+    "archived_raw_artifacts": {
+      "bytes": 69601720,
+      "ordinary_complete_cases": 12,
+      "paid_task_seconds": 338.82339419214986,
+      "path": "/ml2/hypergan/forge-policy-family-round3-20261002/receipts-states-gifs-and-source.tar.gz",
+      "raw_study_sha256": "7b55b4aa8b60bffb0d213f5b5863711691ea27875b96ef546e0b87b295cdd916",
+      "sha256": "45344c3a0ec090f747a93377d6a54107cf71530c89434d6ea4e1017ecf22fb41",
+      "source_commit": "531021742ad25cc47ed593bc3700f68673742ae3"
+    },
+    "bytes": 54361,
+    "file": "reports/forge/family-winner-round1/policy-round3-archive.json",
+    "sha256": "5fb16379ce60e008164071470cf924cf2b7f468641fbdab9b533b8eb904e270c"
+  },
+  "saved_pair_comparisons": [
+    {
+      "all_saved_arrays_bitwise_equal": true,
+      "atlas_config": "atlas--05ae5523eabcc40be1b3cc4a06afd52d5a1d442a2f66b7df427e67ca3b23d78d",
+      "bitwise_equal_array_count": 50,
+      "case_id": "image-develop-img_intensity2-source-transpose12",
+      "complete_api_state_equal": false,
+      "different_array_keys": [],
+      "e22_config": "e22--d0348c27e9ce4f9acc96751820270b35fd1eb999c18e79b8ab7601667b174b21",
+      "lr": 0.0031875,
+      "prior_lr_mult": 1.0,
+      "retained_array_count": 50,
+      "terminal_component_equal": {
+        "birth_death": true,
+        "controller": true,
+        "initial_lrs": true,
+        "lr_settle": true,
+        "models": true,
+        "optimizers": true,
+        "output_noise": true,
+        "policy": true,
+        "row_evidence": true,
+        "streams": true,
+        "surprise": true
+      }
+    },
+    {
+      "all_saved_arrays_bitwise_equal": true,
+      "atlas_config": "atlas--05ae5523eabcc40be1b3cc4a06afd52d5a1d442a2f66b7df427e67ca3b23d78d",
+      "bitwise_equal_array_count": 150,
+      "case_id": "api-vector-two-broad",
+      "complete_api_state_equal": false,
+      "different_array_keys": [],
+      "e22_config": "e22--d0348c27e9ce4f9acc96751820270b35fd1eb999c18e79b8ab7601667b174b21",
+      "lr": 0.0031875,
+      "prior_lr_mult": 1.0,
+      "retained_array_count": 150,
+      "terminal_component_equal": {
+        "birth_death": true,
+        "controller": true,
+        "initial_lrs": true,
+        "lr_settle": true,
+        "models": true,
+        "optimizers": true,
+        "output_noise": true,
+        "policy": true,
+        "row_evidence": true,
+        "streams": true,
+        "surprise": false
+      }
+    },
+    {
+      "all_saved_arrays_bitwise_equal": true,
+      "atlas_config": "atlas--112fe0214b6d64dc16a48f2c6d0418e209f73fb6abb924f502ccfb38afa50d65",
+      "bitwise_equal_array_count": 50,
+      "case_id": "image-develop-img_intensity2-source-transpose12",
+      "complete_api_state_equal": false,
+      "different_array_keys": [],
+      "e22_config": "e22--30110f79b68444ddc5b0d46c5b58fe87af7dc13a9b8c305f5613f8e9d542b37e",
+      "lr": 0.0031875,
+      "prior_lr_mult": 2.0,
+      "retained_array_count": 50,
+      "terminal_component_equal": {
+        "birth_death": true,
+        "controller": true,
+        "initial_lrs": true,
+        "lr_settle": true,
+        "models": true,
+        "optimizers": true,
+        "output_noise": true,
+        "policy": true,
+        "row_evidence": true,
+        "streams": true,
+        "surprise": true
+      }
+    },
+    {
+      "all_saved_arrays_bitwise_equal": true,
+      "atlas_config": "atlas--3d633688c6ed81ea63c756bf91c908ca7615ea04fc6b7f6f956a9519b9957c7a",
+      "bitwise_equal_array_count": 50,
+      "case_id": "image-develop-img_intensity2-source-transpose12",
+      "complete_api_state_equal": false,
+      "different_array_keys": [],
+      "e22_config": "e22--233d9f6e49d46306187b00c2e9338b24092686c8819f4d7a35103596e3fcfaac",
+      "lr": 0.0053125,
+      "prior_lr_mult": 2.0,
+      "retained_array_count": 50,
+      "terminal_component_equal": {
+        "birth_death": true,
+        "controller": true,
+        "initial_lrs": true,
+        "lr_settle": true,
+        "models": true,
+        "optimizers": true,
+        "output_noise": true,
+        "policy": true,
+        "row_evidence": true,
+        "streams": true,
+        "surprise": true
+      }
+    },
+    {
+      "all_saved_arrays_bitwise_equal": true,
+      "atlas_config": "atlas--cf74ea1def0d0ea4afa16f47ac10ea1268664fe480c9f6ab578a48ea6a1eabe2",
+      "bitwise_equal_array_count": 50,
+      "case_id": "image-develop-img_intensity2-source-transpose12",
+      "complete_api_state_equal": false,
+      "different_array_keys": [],
+      "e22_config": "e22--8385a62046dbf8d9bbf9d08b090d0d7b47147ae0849114a06a7919e9a32ac3f9",
+      "lr": 0.0053125,
+      "prior_lr_mult": 1.0,
+      "retained_array_count": 50,
+      "terminal_component_equal": {
+        "birth_death": true,
+        "controller": true,
+        "initial_lrs": true,
+        "lr_settle": true,
+        "models": true,
+        "optimizers": true,
+        "output_noise": true,
+        "policy": true,
+        "row_evidence": true,
+        "streams": true,
+        "surprise": true
+      }
+    },
+    {
+      "all_saved_arrays_bitwise_equal": true,
+      "atlas_config": "atlas--cf74ea1def0d0ea4afa16f47ac10ea1268664fe480c9f6ab578a48ea6a1eabe2",
+      "bitwise_equal_array_count": 150,
+      "case_id": "api-vector-two-broad",
+      "complete_api_state_equal": false,
+      "different_array_keys": [],
+      "e22_config": "e22--8385a62046dbf8d9bbf9d08b090d0d7b47147ae0849114a06a7919e9a32ac3f9",
+      "lr": 0.0053125,
+      "prior_lr_mult": 1.0,
+      "retained_array_count": 150,
+      "terminal_component_equal": {
+        "birth_death": true,
+        "controller": true,
+        "initial_lrs": true,
+        "lr_settle": true,
+        "models": true,
+        "optimizers": true,
+        "output_noise": true,
+        "policy": true,
+        "row_evidence": true,
+        "streams": true,
+        "surprise": false
+      }
+    }
+  ],
+  "schema": "particlegan_compact_policy_round3_diagnosis_v1",
+  "scope": "Eight fixed API questions, four complete common configurations per family; no Forge MoG, calibration, reserved robustness or all-toy/default qualification.",
+  "source_commit": "531021742ad25cc47ed593bc3700f68673742ae3",
+  "studies": {
+    "atlas": {
+      "all_executed_family_trials_terminal": true,
+      "original_mutable_path": "/ml2/hypergan/forge-policy-family-round3-20261002/atlas/study.json",
+      "snapshot": {
+        "bytes": 126777,
+        "path": "/ml2/hypergan/toy-policy-round3-diagnosis-20261002/atlas-study-snapshot.json",
+        "sha256": "3727e66d9a4c6ff2773e923b83aa7f4abdc6774ad7468a73fe606796a57aad66"
+      },
+      "source_commit": "531021742ad25cc47ed593bc3700f68673742ae3",
+      "spec_sha256": "c6cdef1d0a949160b5a6267818786abef3ef6b207e528caa699f97f2059a4083",
+      "spent_seconds": 168.8133712040726,
+      "trials": [
+        {
+          "id": "atlas--05ae5523eabcc40be1b3cc4a06afd52d5a1d442a2f66b7df427e67ca3b23d78d",
+          "recipe_overrides": {
+            "lr": 0.0031875,
+            "prior_lr_mult": 1.0
+          },
+          "status": "FAIL"
+        },
+        {
+          "id": "atlas--112fe0214b6d64dc16a48f2c6d0418e209f73fb6abb924f502ccfb38afa50d65",
+          "recipe_overrides": {
+            "lr": 0.0031875,
+            "prior_lr_mult": 2.0
+          },
+          "status": "INCOMPLETE"
+        },
+        {
+          "id": "atlas--3d633688c6ed81ea63c756bf91c908ca7615ea04fc6b7f6f956a9519b9957c7a",
+          "recipe_overrides": {
+            "lr": 0.0053125,
+            "prior_lr_mult": 2.0
+          },
+          "status": "INCOMPLETE"
+        },
+        {
+          "id": "atlas--cf74ea1def0d0ea4afa16f47ac10ea1268664fe480c9f6ab578a48ea6a1eabe2",
+          "recipe_overrides": {
+            "lr": 0.0053125,
+            "prior_lr_mult": 1.0
+          },
+          "status": "FAIL"
+        }
+      ]
+    },
+    "e22": {
+      "all_executed_family_trials_terminal": true,
+      "original_mutable_path": "/ml2/hypergan/forge-policy-family-round3-20261002/e22/study.json",
+      "snapshot": {
+        "bytes": 125143,
+        "path": "/ml2/hypergan/toy-policy-round3-diagnosis-20261002/e22-study-snapshot.json",
+        "sha256": "614ebf4d387f562253b558c5a8281170cb50d1d7ecf99ece156700001bea437c"
+      },
+      "source_commit": "531021742ad25cc47ed593bc3700f68673742ae3",
+      "spec_sha256": "c6cdef1d0a949160b5a6267818786abef3ef6b207e528caa699f97f2059a4083",
+      "spent_seconds": 170.01002298807725,
+      "trials": [
+        {
+          "id": "e22--233d9f6e49d46306187b00c2e9338b24092686c8819f4d7a35103596e3fcfaac",
+          "recipe_overrides": {
+            "lr": 0.0053125,
+            "prior_lr_mult": 2.0
+          },
+          "status": "INCOMPLETE"
+        },
+        {
+          "id": "e22--30110f79b68444ddc5b0d46c5b58fe87af7dc13a9b8c305f5613f8e9d542b37e",
+          "recipe_overrides": {
+            "lr": 0.0031875,
+            "prior_lr_mult": 2.0
+          },
+          "status": "INCOMPLETE"
+        },
+        {
+          "id": "e22--8385a62046dbf8d9bbf9d08b090d0d7b47147ae0849114a06a7919e9a32ac3f9",
+          "recipe_overrides": {
+            "lr": 0.0053125,
+            "prior_lr_mult": 1.0
+          },
+          "status": "FAIL"
+        },
+        {
+          "id": "e22--d0348c27e9ce4f9acc96751820270b35fd1eb999c18e79b8ab7601667b174b21",
+          "recipe_overrides": {
+            "lr": 0.0031875,
+            "prior_lr_mult": 1.0
+          },
+          "status": "FAIL"
+        }
+      ]
+    }
+  }
+}

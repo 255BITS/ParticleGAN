@@ -1,0 +1,102 @@
+{
+  "source-family-06": {
+    "actual_states": [
+      0,
+      1,
+      10,
+      25,
+      50,
+      100,
+      250,
+      500
+    ],
+    "bytes": 440811,
+    "decoded_rgb_sha256": [
+      "eaea1622b4de9209369b482c7fd28e1993f47d323659024b326132370e7619b0",
+      "74fda902ba9e87e85c955abfcf9dbc6332605711ba0d331f68df2e1f0d2a37b8",
+      "e7c75c71d26a6f60591f261172c94bb9a61e7c3de440c2d058342d7a81ac2e81",
+      "e3fb8c066f77195c26d259e9eaa752b458a4b26b1999cb8f82c0705e106f2d90",
+      "8d0eef61c3c11c484f1dfb17a052239d984081ab3d8d2d00fefccc7335b65bca",
+      "8ef9552f8c330a781d18c3851bb39e8bc1350a11bd6cc4282299e019bb01bc81",
+      "32d93072217950403f7ad366cd67df662f7e23a6a419e6beac36e1a211247420",
+      "4f91a72ef0e6cbd7747d2044970e2eda0d3c3b0921888b276f80368679a0c05f"
+    ],
+    "frames": 8,
+    "gif": "source-family-06.gif",
+    "interpolation": false,
+    "observations_jsonl_sha256": "7c73b5f0b029435f46412818c0fbf97efb907f38fe33a249e698b69c68dd1a29",
+    "observations_npz_sha256": "d9d6073c452b6d83a277528296b74fb2e518c57a7630209517789ec5a8a695ba",
+    "poster": "source-family-06.png",
+    "poster_sha256": "a2dd19c618af647ffe3bd4270fe9e42f0418d5014c26322cebb33312fb3ee7e9",
+    "renderer_sha256": "1b55cb5139b9e775a5c0010eaa946e5f9b91d45e4b9976023d0dd02e05d7e999",
+    "sampling": {
+      "contexts": 40,
+      "latent_law": "original MoG prior including its Gaussian component noise",
+      "latent_seed": 99000,
+      "original_endpoint_sampling_preserved": true,
+      "reference_seed": 99001,
+      "rows": 20480,
+      "rows_per_context": 512,
+      "split": "test",
+      "ticks": [
+        0,
+        16,
+        31,
+        46,
+        62
+      ]
+    },
+    "sha256": "cfaa09fcaeffc2d7791985420cd63ce1c666250545d69991e636afbc45ce8904",
+    "training_status": "INCOMPLETE"
+  },
+  "source-family-07": {
+    "actual_states": [
+      0,
+      1,
+      10,
+      25,
+      50,
+      100,
+      250,
+      500
+    ],
+    "bytes": 489111,
+    "decoded_rgb_sha256": [
+      "fa75c43e543d34960bd900c47aa3271c5056d151c55af3ed6783788b9cdd6af6",
+      "dcac4f04b3a946f2df914bd8607f4ca0b87eb307187e370cc92785c721977f05",
+      "cecd08b7b94c476433f56cc4b69f75e33c56e0475be140d35e7c222c0db431ba",
+      "13a3822b9e67a1e2e60f1004981a74eefb0827956b33b7df9375f4e4b92c5735",
+      "604d3bcc7f5ef652d5967376810c68eb38014bc626a669cd0872004ca681252f",
+      "234d54f7ec681dd88bfd9a13f90eaac20e11811cfb082c2c4fb1f4dbb8d314e3",
+      "4af8815ea77767b08f14a0794be2aaf626ed4643261ec2f9b829e69c51f9f38e",
+      "e3417c734668dc609126a0e276494795f73cc84a81ee738d65a9b4126947d21b"
+    ],
+    "frames": 8,
+    "gif": "source-family-07.gif",
+    "interpolation": false,
+    "observations_jsonl_sha256": "0fb9046f6c711b083a48128abca6142c96780f3614c988739de5631c843db747",
+    "observations_npz_sha256": "2deee7ee9d901a3d07dd74b86584b9780630bc1befffbc5d68e374430859f90c",
+    "poster": "source-family-07.png",
+    "poster_sha256": "07b8e18172dc94877aa33a9ff33450b0fc3f072b00185e593f372e4a40b288cc",
+    "renderer_sha256": "1b55cb5139b9e775a5c0010eaa946e5f9b91d45e4b9976023d0dd02e05d7e999",
+    "sampling": {
+      "contexts": 40,
+      "latent_law": "original MoG prior including its Gaussian component noise",
+      "latent_seed": 99000,
+      "original_endpoint_sampling_preserved": true,
+      "reference_seed": 99001,
+      "rows": 20480,
+      "rows_per_context": 512,
+      "split": "test",
+      "ticks": [
+        0,
+        16,
+        31,
+        46,
+        62
+      ]
+    },
+    "sha256": "6a486ec5ce1f7c991bee5a0b3b8d0c45ae14e02d878a4e13cd77edc209693304",
+    "training_status": "INCOMPLETE"
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "status": "FAIL",
+  "group": "moving",
+  "started": 1790812861.592395,
+  "results": [
+    {
+      "kind": "moving",
+      "task": "grid100",
+      "status": "PASS"
+    },
+    {
+      "kind": "moving",
+      "task": "rotated100",
+      "status": "FAIL"
+    },
+    {
+      "kind": "moving",
+      "task": "staggered100",
+      "status": "PASS"
+    }
+  ],
+  "integrity": {
+    "status": "VALID",
+    "files": 104,
+    "package_sha256": "68f5706590683a44348cb04b3798917411bfaa54e5d45b17d57c345a4da33c15",
+    "config_sha256": "a3ee5c67ac6594014feeb1ec333131abb4b1d86832510b69923100ebd8510ad4",
+    "source_freeze_sha256": "871322377b4f7330087760298dac5b1869f5bec01ae01d93ee8b3c6956760a5f"
+  },
+  "completed": 1790815181.6878228,
+  "integrity_after": {
+    "status": "VALID",
+    "files": 104,
+    "package_sha256": "68f5706590683a44348cb04b3798917411bfaa54e5d45b17d57c345a4da33c15",
+    "config_sha256": "a3ee5c67ac6594014feeb1ec333131abb4b1d86832510b69923100ebd8510ad4",
+    "source_freeze_sha256": "871322377b4f7330087760298dac5b1869f5bec01ae01d93ee8b3c6956760a5f"
+  }
+}

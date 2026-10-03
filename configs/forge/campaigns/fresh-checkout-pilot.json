@@ -1,0 +1,7 @@
+{
+  "schema_version": 1,
+  "id": "fresh-checkout-pilot",
+  "budget_seconds": 900,
+  "candidate_budget_seconds": 900,
+  "purpose": "Fresh-checkout onboarding for one substantive critic-penalty ablation, through Tier 1 only; CPU task workers and no GPU ownership."
+}

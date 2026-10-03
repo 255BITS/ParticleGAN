@@ -1,0 +1,12 @@
+{
+  "status": "FROZEN_HELPERS_BEFORE_API_EXECUTION",
+  "utc": "2026-09-30T08:55:11.948650+00:00",
+  "source_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution-api/check_api.py": "691288e5ff87e524139e78735906cdfbc9df2bb6f48a137d6e788c9e8970cf4f",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/sampler-regression/cpu-plan-review/post-ra8-quality/resolution-api/PROTOCOL.md": "a04f6af782f2a3173ea4327459d290cb879ca62ef43defd0edac040b3c2cb7a8",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra8/integration-contract/check_api.py": "36ab993ffcd9408ae84f9c35a1d35c41cb6d40176e42f54121878d416cddac61"
+  },
+  "numerical_executions": 0,
+  "cuda": false,
+  "execution_requires_composed_root_package": true
+}

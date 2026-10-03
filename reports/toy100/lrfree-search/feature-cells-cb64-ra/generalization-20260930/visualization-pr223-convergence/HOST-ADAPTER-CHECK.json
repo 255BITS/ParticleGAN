@@ -1,0 +1,26 @@
+{
+  "acceptance_draw_count": 20000,
+  "capture_cadence": 10,
+  "extra_observations": "state-guarded original draw with isolated derived geometry cache/work",
+  "original_gate_cadence": 500,
+  "status": "SOURCE_PASS",
+  "target_shift_steps": [
+    500,
+    1000
+  ],
+  "variants": {
+    "Atlas": {
+      "host_update_body_identical": true,
+      "original_draw_identical": true,
+      "original_gate_and_terminal_scorer_AST_identical": true,
+      "original_seed": 1234
+    },
+    "E22": {
+      "host_update_body_identical": true,
+      "original_draw_identical": true,
+      "original_gate_and_terminal_scorer_AST_identical": true,
+      "original_seed": 1234
+    }
+  },
+  "visualization_draw_count": 4096
+}

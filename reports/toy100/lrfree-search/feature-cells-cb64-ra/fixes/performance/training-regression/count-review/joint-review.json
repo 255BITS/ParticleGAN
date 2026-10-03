@@ -1,0 +1,181 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "even_only_boundary_original_geometry_support_and_rng",
+      "status": "PASS",
+      "cells": 6,
+      "fitted_rows": 32,
+      "ordinal": 31
+    },
+    {
+      "name": "exact_overlapping_K_plus_2K_null_with_unequal_sample_sizes_and_empty_bin",
+      "status": "PASS",
+      "nulls": [
+        {
+          "real_rows": 8,
+          "fake_rows": 8,
+          "allocations": 29,
+          "pooled_categories": [
+            6,
+            6,
+            4,
+            0
+          ],
+          "hypotheses": 6,
+          "rejection_probability": 0.013053613053613054,
+          "rejection_probability_exact": "28/2145",
+          "max_pvalue_error": 2.3314683517128287e-15
+        },
+        {
+          "real_rows": 5,
+          "fake_rows": 11,
+          "allocations": 20,
+          "pooled_categories": [
+            6,
+            6,
+            4,
+            0
+          ],
+          "hypotheses": 6,
+          "rejection_probability": 0.005494505494505495,
+          "rejection_probability_exact": "1/182",
+          "max_pvalue_error": 8.881784197001252e-16
+        }
+      ]
+    },
+    {
+      "name": "saved_actions_corrected_v4_mass_phase_exact_targets_shared_rows_and_supported_ledger",
+      "status": "PASS",
+      "cases": [
+        {
+          "name": "saved_toy_1000",
+          "mass_moves": 3,
+          "support_moves": 24,
+          "ordinary_moves": 27,
+          "isolation_moves": 0,
+          "flags": 887,
+          "discoveries": 28,
+          "zero_budget_enforced": true,
+          "v4_mass_phase_exact": true,
+          "support_certificate_reservations_valid": true,
+          "supported_ledger_exact": true,
+          "count_sample_scope": "saved emitted replay"
+        },
+        {
+          "name": "saved_toy_2000",
+          "mass_moves": 4,
+          "support_moves": 23,
+          "ordinary_moves": 27,
+          "isolation_moves": 0,
+          "flags": 710,
+          "discoveries": 19,
+          "zero_budget_enforced": true,
+          "v4_mass_phase_exact": true,
+          "support_certificate_reservations_valid": true,
+          "supported_ledger_exact": true,
+          "count_sample_scope": "saved emitted replay"
+        },
+        {
+          "name": "nominal",
+          "mass_moves": 0,
+          "support_moves": 0,
+          "ordinary_moves": 0,
+          "isolation_moves": 46,
+          "flags": 46,
+          "discoveries": 5,
+          "zero_budget_enforced": true,
+          "v4_mass_phase_exact": true,
+          "support_certificate_reservations_valid": true,
+          "supported_ledger_exact": true,
+          "count_sample_scope": "fixed clean table mechanical count comparison, not iid emitted replay"
+        },
+        {
+          "name": "rare_hole",
+          "mass_moves": 0,
+          "support_moves": 5,
+          "ordinary_moves": 5,
+          "isolation_moves": 41,
+          "flags": 46,
+          "discoveries": 11,
+          "zero_budget_enforced": true,
+          "v4_mass_phase_exact": true,
+          "support_certificate_reservations_valid": true,
+          "supported_ledger_exact": true,
+          "count_sample_scope": "fixed clean table mechanical count comparison, not iid emitted replay"
+        },
+        {
+          "name": "supported_mass_imbalance",
+          "mass_moves": 51,
+          "support_moves": 0,
+          "ordinary_moves": 51,
+          "isolation_moves": 0,
+          "flags": 0,
+          "discoveries": 6,
+          "zero_budget_enforced": true,
+          "v4_mass_phase_exact": true,
+          "support_certificate_reservations_valid": true,
+          "supported_ledger_exact": true,
+          "count_sample_scope": "deterministic fixed supported table, not iid quality sample"
+        },
+        {
+          "name": "supported_balanced_control",
+          "mass_moves": 0,
+          "support_moves": 0,
+          "ordinary_moves": 0,
+          "isolation_moves": 0,
+          "flags": 0,
+          "discoveries": 6,
+          "zero_budget_enforced": true,
+          "v4_mass_phase_exact": true,
+          "support_certificate_reservations_valid": true,
+          "supported_ledger_exact": true,
+          "count_sample_scope": "deterministic fixed supported table, not iid quality sample"
+        }
+      ]
+    },
+    {
+      "name": "mass_exhausts_refined_certificate_with_unused_parents_and_vacancy",
+      "status": "PASS",
+      "case": {
+        "name": "exhausted_refined_birth_certificate",
+        "mass_moves": 32,
+        "support_moves": 19,
+        "ordinary_moves": 51,
+        "isolation_moves": 0,
+        "flags": 704,
+        "discoveries": 5,
+        "zero_budget_enforced": true,
+        "v4_mass_phase_exact": true,
+        "support_certificate_reservations_valid": true,
+        "supported_ledger_exact": true,
+        "count_sample_scope": "specified deterministic planner contract, not a quality trajectory"
+      },
+      "left_cell": 1,
+      "raw_birth_capacity": 32,
+      "mass_spent_birth_capacity": 32,
+      "support_left_births": 0,
+      "unused_left_parents": 32,
+      "remaining_left_vacancy": 84
+    },
+    {
+      "name": "degenerate_ties_empty_categories_actual_K_controls_multiplicity",
+      "status": "PASS",
+      "cells": 3,
+      "hypotheses": 9
+    }
+  ],
+  "source_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/audit_joint.py": "9935b326389e681f37702181f7659fde24f48b05de9995a597edcaf3a671a69c",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/joint-count/pkg-joint-count/particlegan/feature_cells.py": "ada7f24862d915d1d7f768270d46a6c15701cfe949b23f4b9782fb74f9cade9f",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/joint-count/inputs.pt": "cbfa80167e106709ba534cac8f7f3fd3971148c60a9999b6e3975ddc19338904",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/joint-count/prepare-inputs.json": "fea3e5a8b049c6d2ba2d86d018a13761af4bffd3d70c67cfd47718a219d34b73",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/joint-count/PROTOCOL.md": "22c665479e83f46d49a425ca8482e00f8ca075aa090820dfc3b03f4dc41cb983",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/pkg-count-recovery/particlegan/feature_cells.py": "2f55fb6da21d2dc61645d4c9a2f0299f3f652ee7027de235661c8b2cce2f708a",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/support-count/pkg-support-count/particlegan/feature_cells.py": "a2be31d6dd4457dc9e35b9d19dacefe579faaf1601d50329699079e1f9de1dd9"
+  },
+  "cuda_initialized": false,
+  "new_seeds": 0,
+  "optimizer_updates": 0,
+  "scope": "Partition, conditional null and action contracts; no learned quality claim"
+}

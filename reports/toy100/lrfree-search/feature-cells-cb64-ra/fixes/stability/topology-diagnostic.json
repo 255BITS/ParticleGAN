@@ -1,0 +1,1133 @@
+{
+  "scope": "CPU fit-only topology causal diagnostic, oracle excluded from controller inputs",
+  "records": [
+    {
+      "scenario": "nominal",
+      "rule": "overlap real-only fit balls at existing 1-Q score envelope",
+      "envelope": 1.5783237001984272,
+      "groups": 41,
+      "group_oracle_counts": [
+        {
+          "cells": 6,
+          "real_rows": 220,
+          "oracle_counts": [
+            0,
+            220,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "cells": 1,
+          "real_rows": 2,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            2
+          ]
+        },
+        {
+          "cells": 1,
+          "real_rows": 7,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            0,
+            7,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "cells": 1,
+          "real_rows": 29,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            29,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "cells": 1,
+          "real_rows": 3,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            3,
+            0,
+            0
+          ]
+        },
+        {
+          "cells": 1,
+          "real_rows": 4,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            4,
+            0
+          ]
+        },
+        {
+          "cells": 2,
+          "real_rows": 21,
+          "oracle_counts": [
+            0,
+            0,
+            21,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "cells": 6,
+          "real_rows": 256,
+          "oracle_counts": [
+            256,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "cells": 1,
+          "real_rows": 3,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            3,
+            0,
+            0
+          ]
+        },
+        {
+          "cells": 1,
+          "real_rows": 13,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            0,
+            13,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "cells": 1,
+          "real_rows": 1,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "cells": 1,
+          "real_rows": 8,
+          "oracle_counts": [
+            0,
+            0,
+            8,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "cells": 2,
+          "real_rows": 9,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            9,
+            0,
+            0
+          ]
+        },
+        {
+          "cells": 1,
+          "real_rows": 10,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            10,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "cells": 1,
+          "real_rows": 5,
+          "oracle_counts": [
+            0,
+            5,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "cells": 2,
+          "real_rows": 8,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            8,
+            0,
+            0
+          ]
+        },
+        {
+          "cells": 4,
+          "real_rows": 63,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            0,
+            63,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "cells": 2,
+          "real_rows": 6,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            6,
+            0
+          ]
+        },
+        {
+          "cells": 1,
+          "real_rows": 4,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            4,
+            0,
+            0
+          ]
+        },
+        {
+          "cells": 2,
+          "real_rows": 18,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            18,
+            0,
+            0
+          ]
+        },
+        {
+          "cells": 5,
+          "real_rows": 151,
+          "oracle_counts": [
+            0,
+            0,
+            151,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "cells": 1,
+          "real_rows": 7,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            7,
+            0
+          ]
+        },
+        {
+          "cells": 2,
+          "real_rows": 38,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            38,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "cells": 1,
+          "real_rows": 2,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            2,
+            0,
+            0
+          ]
+        },
+        {
+          "cells": 1,
+          "real_rows": 5,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            5,
+            0,
+            0
+          ]
+        },
+        {
+          "cells": 1,
+          "real_rows": 3,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            3,
+            0
+          ]
+        },
+        {
+          "cells": 1,
+          "real_rows": 6,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            6
+          ]
+        },
+        {
+          "cells": 1,
+          "real_rows": 12,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            0,
+            12,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "cells": 1,
+          "real_rows": 3,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            3,
+            0
+          ]
+        },
+        {
+          "cells": 1,
+          "real_rows": 8,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            0,
+            8,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "cells": 1,
+          "real_rows": 9,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            9,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "cells": 1,
+          "real_rows": 4,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            4,
+            0
+          ]
+        },
+        {
+          "cells": 1,
+          "real_rows": 2,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            2,
+            0
+          ]
+        },
+        {
+          "cells": 1,
+          "real_rows": 7,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            7,
+            0,
+            0
+          ]
+        },
+        {
+          "cells": 1,
+          "real_rows": 6,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            6,
+            0,
+            0
+          ]
+        },
+        {
+          "cells": 1,
+          "real_rows": 1,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "cells": 1,
+          "real_rows": 4,
+          "oracle_counts": [
+            0,
+            0,
+            4,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "cells": 1,
+          "real_rows": 2,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            2,
+            0,
+            0
+          ]
+        },
+        {
+          "cells": 1,
+          "real_rows": 57,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            57,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "cells": 1,
+          "real_rows": 5,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            5,
+            0,
+            0
+          ]
+        },
+        {
+          "cells": 1,
+          "real_rows": 2,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            2,
+            0
+          ]
+        }
+      ],
+      "fine_l1_on_macro_balanced_clean_table": 730.0,
+      "coarse_l1": 294.0,
+      "oracle_macro_tv": 0.0
+    },
+    {
+      "scenario": "rare_hole",
+      "rule": "overlap real-only fit balls at existing 1-Q score envelope",
+      "envelope": 1.575339878309969,
+      "groups": 38,
+      "group_oracle_counts": [
+        {
+          "cells": 6,
+          "real_rows": 219,
+          "oracle_counts": [
+            0,
+            219,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "cells": 1,
+          "real_rows": 2,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            2
+          ]
+        },
+        {
+          "cells": 1,
+          "real_rows": 7,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            0,
+            7,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "cells": 1,
+          "real_rows": 32,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            32,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "cells": 1,
+          "real_rows": 3,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            3,
+            0,
+            0
+          ]
+        },
+        {
+          "cells": 2,
+          "real_rows": 8,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            8,
+            0
+          ]
+        },
+        {
+          "cells": 1,
+          "real_rows": 4,
+          "oracle_counts": [
+            0,
+            0,
+            4,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "cells": 6,
+          "real_rows": 262,
+          "oracle_counts": [
+            262,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "cells": 1,
+          "real_rows": 2,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            2,
+            0
+          ]
+        },
+        {
+          "cells": 1,
+          "real_rows": 4,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            4,
+            0,
+            0
+          ]
+        },
+        {
+          "cells": 1,
+          "real_rows": 15,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            0,
+            15,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "cells": 1,
+          "real_rows": 8,
+          "oracle_counts": [
+            0,
+            0,
+            8,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "cells": 1,
+          "real_rows": 8,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            8,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "cells": 1,
+          "real_rows": 6,
+          "oracle_counts": [
+            0,
+            6,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "cells": 1,
+          "real_rows": 6,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            6,
+            0,
+            0
+          ]
+        },
+        {
+          "cells": 7,
+          "real_rows": 172,
+          "oracle_counts": [
+            0,
+            0,
+            172,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "cells": 1,
+          "real_rows": 6,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            6,
+            0
+          ]
+        },
+        {
+          "cells": 4,
+          "real_rows": 65,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            0,
+            65,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "cells": 2,
+          "real_rows": 6,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            6,
+            0,
+            0
+          ]
+        },
+        {
+          "cells": 1,
+          "real_rows": 2,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            2,
+            0,
+            0
+          ]
+        },
+        {
+          "cells": 1,
+          "real_rows": 4,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            4,
+            0
+          ]
+        },
+        {
+          "cells": 2,
+          "real_rows": 9,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            9,
+            0,
+            0
+          ]
+        },
+        {
+          "cells": 2,
+          "real_rows": 39,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            39,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "cells": 1,
+          "real_rows": 4,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            4,
+            0,
+            0
+          ]
+        },
+        {
+          "cells": 3,
+          "real_rows": 9,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            9,
+            0
+          ]
+        },
+        {
+          "cells": 1,
+          "real_rows": 9,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            0,
+            9,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "cells": 1,
+          "real_rows": 3,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            3,
+            0
+          ]
+        },
+        {
+          "cells": 2,
+          "real_rows": 8,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            8,
+            0,
+            0
+          ]
+        },
+        {
+          "cells": 1,
+          "real_rows": 7,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            0,
+            7,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "cells": 1,
+          "real_rows": 7,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            7,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "cells": 1,
+          "real_rows": 2,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            2,
+            0,
+            0
+          ]
+        },
+        {
+          "cells": 1,
+          "real_rows": 2,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            2,
+            0,
+            0
+          ]
+        },
+        {
+          "cells": 1,
+          "real_rows": 1,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0
+          ]
+        },
+        {
+          "cells": 1,
+          "real_rows": 10,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            10,
+            0,
+            0
+          ]
+        },
+        {
+          "cells": 1,
+          "real_rows": 6,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            6,
+            0,
+            0
+          ]
+        },
+        {
+          "cells": 1,
+          "real_rows": 57,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            57,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "cells": 1,
+          "real_rows": 3,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            3,
+            0,
+            0
+          ]
+        },
+        {
+          "cells": 1,
+          "real_rows": 7,
+          "oracle_counts": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            7,
+            0,
+            0
+          ]
+        }
+      ],
+      "fine_l1_on_macro_balanced_clean_table": 696.0,
+      "coarse_l1": 260.0,
+      "oracle_macro_tv": 0.0
+    }
+  ]
+}

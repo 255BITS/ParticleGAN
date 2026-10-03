@@ -1,0 +1,430 @@
+{
+ "status": "FAIL",
+ "task": "vector_unequal_mass",
+ "cand": "CB64-RA11",
+ "passing_checks": 0,
+ "observations": 24,
+ "first_arrival": null,
+ "final_streak": 0,
+ "final": {
+  "step": 1200,
+  "sw1_normalized": 0.06760574658478656,
+  "mean_error": 0.07104989886283875,
+  "covariance_error": 0.05912083759903908,
+  "target_scale": 1.7948341369628906,
+  "sample_count": 4096,
+  "mass_tv": 0.06230468302965164,
+  "min_mass_ratio": 0.5615234375,
+  "hq": 0.9228515625,
+  "component_covariance_error": 1.67753317207098,
+  "component_covariance_errors": [
+   0.18520864844322205,
+   0.7468110918998718,
+   0.9523425698280334,
+   4.825770378112793
+  ],
+  "component_min_eigen_ratio": 0.9974013566970825,
+  "component_mass": [
+   0.6123046875,
+   0.25146484375,
+   0.125,
+   0.01123046875
+  ],
+  "target_mass": [
+   0.550000011920929,
+   0.30000001192092896,
+   0.12999999523162842,
+   0.019999999552965164
+  ],
+  "component_counts": [
+   2508,
+   1030,
+   512,
+   46
+  ],
+  "pass": false,
+  "seconds": 49.069
+ },
+ "ema_final": {
+  "sw1_normalized": 0.09594769682309434,
+  "mean_error": 0.11642782390117645,
+  "covariance_error": 0.18796132504940033,
+  "target_scale": 1.7948341369628906,
+  "sample_count": 4096,
+  "mass_tv": 0.08012694865465164,
+  "min_mass_ratio": 0.5615234375,
+  "hq": 0.911865234375,
+  "component_covariance_error": 1.613599993288517,
+  "component_covariance_errors": [
+   0.3861295282840729,
+   1.6103507280349731,
+   1.2238165140151978,
+   3.234103202819824
+  ],
+  "component_min_eigen_ratio": 1.0663233995437622,
+  "component_mass": [
+   0.630126953125,
+   0.23828125,
+   0.120361328125,
+   0.01123046875
+  ],
+  "target_mass": [
+   0.550000011920929,
+   0.30000001192092896,
+   0.12999999523162842,
+   0.019999999552965164
+  ],
+  "component_counts": [
+   2581,
+   976,
+   493,
+   46
+  ]
+ },
+ "final_lr": [
+  [
+   0.00053125,
+   0.0085,
+   0.0010625
+  ],
+  [
+   0.0031771645145672782
+  ]
+ ],
+ "seconds": 49.16,
+ "train_seconds": 49.09,
+ "stream_deviations": 0,
+ "warnings": [],
+ "completed_steps": 1200,
+ "recipe": {
+  "name": "ka2",
+  "model": "gan",
+  "z_dim": 4,
+  "num_particles": 256,
+  "prior_kind": "particles",
+  "sigma_rel": 0.0,
+  "standardize": true,
+  "num_classes": null,
+  "conditioning": "scalar",
+  "ucd_target": "class",
+  "ucd_weight": 0.02,
+  "alpha_bar": [
+   1.0,
+   0.9,
+   0.5,
+   0.05,
+   0.0001
+  ],
+  "batch_size": 128,
+  "total_steps": null,
+  "continuous_policy": "dv12",
+  "lr": 0.0010625,
+  "d_lr_mult": 4.0,
+  "prior_lr_mult": 8.0,
+  "betas": [
+   0.0,
+   0.999
+  ],
+  "prior_betas": null,
+  "reg_coeff": 3.0,
+  "reg_kappa": 1.0,
+  "reg_every": 1,
+  "prior_reg": 0.0,
+  "ema_decay": 0.995,
+  "lr_anneal_start": 0.6,
+  "lr_floor": 0.05,
+  "network_lr_floor": 0.01,
+  "network_lr_horizon_cap": 1600,
+  "reg_anchor_min_decay": 0.9,
+  "reg_anchor_weight": 1.0,
+  "direct_particle_gain": true,
+  "d_guard_ratio": 5.0,
+  "d_guard_min_steps": 200,
+  "latent_damping_max_rate": 0.5,
+  "direct_particle_betas": [
+   0.0,
+   0.9
+  ],
+  "input_noise_std": 0.0,
+  "input_noise_anneal_end": 0.1,
+  "output_noise_std": 0.029,
+  "output_noise_warmup": 0.0,
+  "encoder_mode": "none",
+  "routing_temperature": 0.25,
+  "distance_reduction": "sum",
+  "observation_sigma": 0.03,
+  "reconstruction_weight": 1.0,
+  "initialization": "batch_feature_zero",
+  "amsgrad": true,
+  "critic_r1_real": true,
+  "critic_payoff_damping": true,
+  "output_noise_mode": "learnable",
+  "lr_control": "stationarity",
+  "particle_birth_death": true,
+  "row_evidence_gate": true,
+  "table_release_rule": "anchor",
+  "row_evidence_hot": true,
+  "row_evidence_exclude": true,
+  "row_evidence_hold": true,
+  "birth_death_space": "critic",
+  "serve_average": 4.0,
+  "reopen_signal": "none",
+  "row_evidence_null": "scaled",
+  "birth_death_isolation": true,
+  "birth_death_feature_scale": "std",
+  "birth_death_backend": "feature_cells",
+  "birth_death_cells": 128,
+  "birth_death_metric_rank": 8,
+  "birth_death_chunk": 256,
+  "birth_death_parent_policy": "real_anchor"
+ },
+ "max_gpu_mib": 92.0,
+ "verdict": {
+  "status": "FAIL",
+  "attempted": true,
+  "passed": false,
+  "metrics": [
+   {
+    "metric": "sw1_normalized",
+    "value": 0.06760574658478656,
+    "op": "<=",
+    "threshold": 0.18,
+    "status": "PASS",
+    "margin": 0.11239425341521343
+   },
+   {
+    "metric": "mass_tv",
+    "value": 0.06230468302965164,
+    "op": "<=",
+    "threshold": 0.15,
+    "status": "PASS",
+    "margin": 0.08769531697034835
+   },
+   {
+    "metric": "hq",
+    "value": 0.9228515625,
+    "op": ">=",
+    "threshold": 0.85,
+    "status": "PASS",
+    "margin": 0.07285156250000002
+   },
+   {
+    "metric": "component_covariance_error",
+    "value": 1.67753317207098,
+    "op": "<=",
+    "threshold": 0.85,
+    "status": "FAIL",
+    "margin": -0.8275331720709801
+   },
+   {
+    "metric": "component_min_eigen_ratio",
+    "value": 0.9974013566970825,
+    "op": ">=",
+    "threshold": 0.15,
+    "status": "PASS",
+    "margin": 0.8474013566970825
+   },
+   {
+    "metric": "min_mass_ratio",
+    "value": 0.5615234375,
+    "op": ">=",
+    "threshold": 0.25,
+    "status": "PASS",
+    "margin": 0.3115234375
+   }
+  ],
+  "convergence": {
+   "complete": true,
+   "observations": 24,
+   "passing_observations": 0,
+   "minimum_stable_checks": 5,
+   "passing_suffix": 0,
+   "first_pass_step": null,
+   "stable_from_step": null,
+   "stable_from_seconds": null,
+   "confirmed_step": null,
+   "confirmed_seconds": null
+  },
+  "shortfall": 0.16226140628842747,
+  "confirmation_fraction": 2.0
+ },
+ "thresholds": [
+  [
+   "sw1_normalized",
+   "<=",
+   0.18
+  ],
+  [
+   "mass_tv",
+   "<=",
+   0.15
+  ],
+  [
+   "hq",
+   ">=",
+   0.85
+  ],
+  [
+   "component_covariance_error",
+   "<=",
+   0.85
+  ],
+  [
+   "component_min_eigen_ratio",
+   ">=",
+   0.15
+  ],
+  [
+   "min_mass_ratio",
+   ">=",
+   0.25
+  ]
+ ],
+ "clean_status": "FAIL",
+ "clean_passing_checks": 0,
+ "clean_first_arrival": null,
+ "clean_final_streak": 0,
+ "clean_final": {
+  "step": 1200,
+  "sw1_normalized": 0.06787491797377286,
+  "mean_error": 0.07066449522972107,
+  "covariance_error": 0.05892054736614227,
+  "target_scale": 1.7948341369628906,
+  "sample_count": 4096,
+  "mass_tv": 0.06230468302965164,
+  "min_mass_ratio": 0.5615234375,
+  "hq": 0.92724609375,
+  "component_covariance_error": 1.6368515491485596,
+  "component_covariance_errors": [
+   0.17300838232040405,
+   0.7156944870948792,
+   0.9212789535522461,
+   4.737424373626709
+  ],
+  "component_min_eigen_ratio": 0.9595922827720642,
+  "component_mass": [
+   0.6123046875,
+   0.25146484375,
+   0.125,
+   0.01123046875
+  ],
+  "target_mass": [
+   0.550000011920929,
+   0.30000001192092896,
+   0.12999999523162842,
+   0.019999999552965164
+  ],
+  "component_counts": [
+   2508,
+   1030,
+   512,
+   46
+  ]
+ },
+ "eval_output_noise": true,
+ "header": {
+  "cand": "CB64-RA11",
+  "task": "vector_unequal_mass",
+  "package_root": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA11",
+  "package_sha256": "1b54cb00461df0ad89fcad59bba1e3012bf94a71ac887ecf708aafdfadc18a93",
+  "overrides": {
+   "alpha_bar": [
+    1.0,
+    0.9,
+    0.5,
+    0.05,
+    0.0001
+   ],
+   "amsgrad": true,
+   "batch_size": 128,
+   "betas": [
+    0.0,
+    0.999
+   ],
+   "birth_death_feature_scale": "std",
+   "birth_death_isolation": true,
+   "birth_death_space": "critic",
+   "conditioning": "scalar",
+   "continuous_policy": "dv12",
+   "d_guard_min_steps": 200,
+   "d_guard_ratio": 5.0,
+   "d_lr_mult": 4.0,
+   "direct_particle_betas": [
+    0.0,
+    0.9
+   ],
+   "direct_particle_gain": true,
+   "distance_reduction": "sum",
+   "ema_decay": 0.995,
+   "encoder_mode": "none",
+   "initialization": "batch_feature_zero",
+   "input_noise_anneal_end": 0.1,
+   "input_noise_std": 0.0,
+   "latent_damping_max_rate": 0.5,
+   "lr": 0.0010625,
+   "lr_anneal_start": 0.6,
+   "lr_control": "stationarity",
+   "lr_floor": 0.05,
+   "model": "gan",
+   "network_lr_floor": 0.01,
+   "network_lr_horizon_cap": 1600,
+   "num_classes": null,
+   "num_particles": 12,
+   "observation_sigma": 0.03,
+   "output_noise_mode": "learnable",
+   "output_noise_std": 0.029,
+   "output_noise_warmup": 0.0,
+   "particle_birth_death": true,
+   "prior_betas": null,
+   "prior_kind": "particles",
+   "prior_lr_mult": 8.0,
+   "prior_reg": 0.0,
+   "reconstruction_weight": 1.0,
+   "reg_anchor_min_decay": 0.9,
+   "reg_anchor_weight": 1.0,
+   "reg_coeff": 3.0,
+   "reg_every": 1,
+   "reg_kappa": 1.0,
+   "reopen_signal": "none",
+   "routing_temperature": 0.25,
+   "row_evidence_gate": true,
+   "row_evidence_null": "scaled",
+   "serve_average": 4.0,
+   "sigma_rel": 0.0,
+   "standardize": true,
+   "table_release_rule": "anchor",
+   "total_steps": null,
+   "ucd_target": "class",
+   "ucd_weight": 0.02,
+   "z_dim": 4,
+   "birth_death_backend": "feature_cells",
+   "birth_death_cells": 128,
+   "birth_death_metric_rank": 8,
+   "birth_death_chunk": 256,
+   "birth_death_parent_policy": "real_anchor"
+  },
+  "options": {
+   "evaluation_generate": "indexed",
+   "serial_backward_argument": true,
+   "strict_streams": true,
+   "initialization": "batch_feature_zero",
+   "diagnostics": true,
+   "save_final_state": true,
+   "ring_frozen_control": false,
+   "eval_output_noise": true,
+   "image_prior_perturb": false
+  },
+  "auto_detected": {
+   "evaluation_generate": "indexed",
+   "serial_backward_argument": true
+  },
+  "declared_options": {},
+  "device": "cuda:0",
+  "cuda_visible_devices": "0",
+  "torch": "2.13.0+cu126",
+  "cuda": "12.6",
+  "gpu": "NVIDIA RTX A6000",
+  "host": "pop-os",
+  "python": "/tmp/pr38-default-env/bin/python"
+ }
+}

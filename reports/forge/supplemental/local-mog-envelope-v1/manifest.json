@@ -1,0 +1,588 @@
+{
+  "bundle_id": "local-mog-envelope-v1",
+  "discovery": {
+    "checkout_branch_at_import": "experiment/100gaussians-pacgan8-no-reg",
+    "checkout_head_at_import": "4410d03de07a84fb2478de40ddf738dd78d8f956",
+    "origin": "Local previously ignored result artifacts; the discovery checkout was read only.",
+    "original_root": "/home/martyn/dev/ParticleGAN",
+    "recorded_run_revision": "a0ec34921c9dd3ebc5b789f60be8681900080f3e",
+    "run_revision_is_recorded_not_a_clean_checkout_attestation": true
+  },
+  "evaluation": {
+    "all_study_rows_passed_strict": false,
+    "baseline_path": "original/results/mog/results.csv",
+    "criteria_path": "original/configs/mog/stage1_criteria.json",
+    "criteria_version": "c0_observed_envelope_v1",
+    "driver_archive_member": "experiments/train_100gaussians.py",
+    "ema_decay": 0.995,
+    "evaluator_archive_member": "lib/mog_metrics.py",
+    "final_samples_per_selected_run": 200000,
+    "full_native_reference_evidence": false,
+    "generated_sample_rng_seed": "original protocol seed + 999",
+    "mog_latent_noise_enabled_for_selected_runs": true,
+    "reference_sample_rng_seed": "original protocol seed + 1999",
+    "scoring_weights": "ema"
+  },
+  "evidence_scope": "historical",
+  "files": [
+    {
+      "bytes": 723,
+      "original_path": "configs/mog/stage1_criteria.json",
+      "path": "original/configs/mog/stage1_criteria.json",
+      "role": "original_study_context",
+      "sha256": "6eded9516b2e8215631ca7cfba753096dc4d30a705544b3832bb2a69abd319e3"
+    },
+    {
+      "bytes": 12280,
+      "original_path": "results/mog/COMPONENT_SCALE.md",
+      "path": "original/results/mog/COMPONENT_SCALE.md",
+      "role": "original_study_context",
+      "sha256": "b6b30059e337bc1217191e4f32d925d0e7a8ca3dde737d56e2230e3731462a7c"
+    },
+    {
+      "bytes": 4527,
+      "original_path": "results/mog/COMPONENT_SCALE_PLAN.md",
+      "path": "original/results/mog/COMPONENT_SCALE_PLAN.md",
+      "role": "original_study_context",
+      "sha256": "a4550f456dd981d8db0839b9a0b5b8b934636d22ef936ceeeebb53f19f5f5a74"
+    },
+    {
+      "bytes": 120,
+      "original_path": "results/mog/component_scale/n20000_r1over40_shipped_std0_7k_s1/environment.json",
+      "path": "original/results/mog/component_scale/n20000_r1over40_shipped_std0_7k_s1/environment.json",
+      "role": "original_run_metadata",
+      "sha256": "393f54d202bd65b60c8d1f3034aaa6941a9825fc5f91f17b5532f4d1adce3190"
+    },
+    {
+      "bytes": 4281,
+      "original_path": "results/mog/component_scale/n20000_r1over40_shipped_std0_7k_s1/provenance.json",
+      "path": "original/results/mog/component_scale/n20000_r1over40_shipped_std0_7k_s1/provenance.json",
+      "role": "original_run_metadata",
+      "sha256": "8867740d5c4c35d8b6320169645625ade766d2732824d7db8cf919e821d10583"
+    },
+    {
+      "bytes": 802,
+      "original_path": "results/mog/component_scale/n20000_r1over40_shipped_std0_7k_s1/requested_config.yaml",
+      "path": "original/results/mog/component_scale/n20000_r1over40_shipped_std0_7k_s1/requested_config.yaml",
+      "role": "original_run_metadata",
+      "sha256": "2a8d7924b03c7bc549b290dbc9f17ff294783abf2b7d95021c0e5beb30cea3c9"
+    },
+    {
+      "bytes": 5609,
+      "original_path": "results/mog/component_scale/n20000_r1over40_shipped_std0_7k_s1/run_grid_complete.json",
+      "path": "original/results/mog/component_scale/n20000_r1over40_shipped_std0_7k_s1/run_grid_complete.json",
+      "role": "original_run_metadata",
+      "sha256": "ed61594cc80c6cf245fd26c60ee3e4a72ba84d7c2628414eb50d69a1de0093d9"
+    },
+    {
+      "bytes": 7708,
+      "original_path": "results/mog/component_scale/n20000_r1over40_shipped_std0_7k_s1/summary.json",
+      "path": "original/results/mog/component_scale/n20000_r1over40_shipped_std0_7k_s1/summary.json",
+      "role": "original_run_metadata",
+      "sha256": "4ca6bf6da643dad10809d89b3faaee3fe58d230877e09f512602414034c6dc40"
+    },
+    {
+      "bytes": 33421,
+      "original_path": "results/mog/component_scale_results.csv",
+      "path": "original/results/mog/component_scale_results.csv",
+      "role": "original_study_context",
+      "sha256": "c068c24dcf5ff668706720cf7944f4ae6dfd5602593c74949d4e8232edb31089"
+    },
+    {
+      "bytes": 5929,
+      "original_path": "results/mog/results.csv",
+      "path": "original/results/mog/results.csv",
+      "role": "original_study_context",
+      "sha256": "57cc6dd57dd7fe4d60646a57b1e74464498ef6499554bf039febf5681f939db6"
+    },
+    {
+      "bytes": 120,
+      "original_path": "results/mog/scale_longer/n20000_r1over16_shipped_std0_28k_s1/environment.json",
+      "path": "original/results/mog/scale_longer/n20000_r1over16_shipped_std0_28k_s1/environment.json",
+      "role": "original_run_metadata",
+      "sha256": "fe1b571ddb0faff3b74dba5c5b034e89314023da204b077333c0ffbae17e11ff"
+    },
+    {
+      "bytes": 4281,
+      "original_path": "results/mog/scale_longer/n20000_r1over16_shipped_std0_28k_s1/provenance.json",
+      "path": "original/results/mog/scale_longer/n20000_r1over16_shipped_std0_28k_s1/provenance.json",
+      "role": "original_run_metadata",
+      "sha256": "8867740d5c4c35d8b6320169645625ade766d2732824d7db8cf919e821d10583"
+    },
+    {
+      "bytes": 802,
+      "original_path": "results/mog/scale_longer/n20000_r1over16_shipped_std0_28k_s1/requested_config.yaml",
+      "path": "original/results/mog/scale_longer/n20000_r1over16_shipped_std0_28k_s1/requested_config.yaml",
+      "role": "original_run_metadata",
+      "sha256": "f7bf1352a7b3190b5e27ab81b0d07c6628cea3b72fff5bd50159a50303741030"
+    },
+    {
+      "bytes": 5609,
+      "original_path": "results/mog/scale_longer/n20000_r1over16_shipped_std0_28k_s1/run_grid_complete.json",
+      "path": "original/results/mog/scale_longer/n20000_r1over16_shipped_std0_28k_s1/run_grid_complete.json",
+      "role": "original_run_metadata",
+      "sha256": "7f5f747a987a24db5ffd07027c30f9e2c66008a77d3df99d01ecb59c864a4f50"
+    },
+    {
+      "bytes": 7686,
+      "original_path": "results/mog/scale_longer/n20000_r1over16_shipped_std0_28k_s1/summary.json",
+      "path": "original/results/mog/scale_longer/n20000_r1over16_shipped_std0_28k_s1/summary.json",
+      "role": "original_run_metadata",
+      "sha256": "7be1ac6f43095573645d988c4e00de63b6cb03aab08c4fd25a79561c72ff96ed"
+    },
+    {
+      "bytes": 120,
+      "original_path": "results/mog/scale_longer/n20000_r1over40_shipped_std0_28k_s1/environment.json",
+      "path": "original/results/mog/scale_longer/n20000_r1over40_shipped_std0_28k_s1/environment.json",
+      "role": "original_run_metadata",
+      "sha256": "393f54d202bd65b60c8d1f3034aaa6941a9825fc5f91f17b5532f4d1adce3190"
+    },
+    {
+      "bytes": 4281,
+      "original_path": "results/mog/scale_longer/n20000_r1over40_shipped_std0_28k_s1/provenance.json",
+      "path": "original/results/mog/scale_longer/n20000_r1over40_shipped_std0_28k_s1/provenance.json",
+      "role": "original_run_metadata",
+      "sha256": "8867740d5c4c35d8b6320169645625ade766d2732824d7db8cf919e821d10583"
+    },
+    {
+      "bytes": 801,
+      "original_path": "results/mog/scale_longer/n20000_r1over40_shipped_std0_28k_s1/requested_config.yaml",
+      "path": "original/results/mog/scale_longer/n20000_r1over40_shipped_std0_28k_s1/requested_config.yaml",
+      "role": "original_run_metadata",
+      "sha256": "1c835e5d957c425ff872eab15cd6948b73a6899e8a74c39d6938c5cf9f1d0b6d"
+    },
+    {
+      "bytes": 5608,
+      "original_path": "results/mog/scale_longer/n20000_r1over40_shipped_std0_28k_s1/run_grid_complete.json",
+      "path": "original/results/mog/scale_longer/n20000_r1over40_shipped_std0_28k_s1/run_grid_complete.json",
+      "role": "original_run_metadata",
+      "sha256": "aa875e4584955d3f83fe9c1c314abe4e9d0e3ac21be0dfab239a803816516c8b"
+    },
+    {
+      "bytes": 7708,
+      "original_path": "results/mog/scale_longer/n20000_r1over40_shipped_std0_28k_s1/summary.json",
+      "path": "original/results/mog/scale_longer/n20000_r1over40_shipped_std0_28k_s1/summary.json",
+      "role": "original_run_metadata",
+      "sha256": "0ccdba398cfb5cd269499ca5ee2d0b41da32b12d17ab2ab548ab84331bb259da"
+    },
+    {
+      "bytes": 120,
+      "original_path": "results/mog/scale_longer/n400_r1over40_28k_s1/environment.json",
+      "path": "original/results/mog/scale_longer/n400_r1over40_28k_s1/environment.json",
+      "role": "original_run_metadata",
+      "sha256": "393f54d202bd65b60c8d1f3034aaa6941a9825fc5f91f17b5532f4d1adce3190"
+    },
+    {
+      "bytes": 4281,
+      "original_path": "results/mog/scale_longer/n400_r1over40_28k_s1/provenance.json",
+      "path": "original/results/mog/scale_longer/n400_r1over40_28k_s1/provenance.json",
+      "role": "original_run_metadata",
+      "sha256": "8867740d5c4c35d8b6320169645625ade766d2732824d7db8cf919e821d10583"
+    },
+    {
+      "bytes": 784,
+      "original_path": "results/mog/scale_longer/n400_r1over40_28k_s1/requested_config.yaml",
+      "path": "original/results/mog/scale_longer/n400_r1over40_28k_s1/requested_config.yaml",
+      "role": "original_run_metadata",
+      "sha256": "d84d10eccc5476e4c1bc62e6f82c3148fd31e502fc4b9b3bc762484f22472f33"
+    },
+    {
+      "bytes": 5591,
+      "original_path": "results/mog/scale_longer/n400_r1over40_28k_s1/run_grid_complete.json",
+      "path": "original/results/mog/scale_longer/n400_r1over40_28k_s1/run_grid_complete.json",
+      "role": "original_run_metadata",
+      "sha256": "c4a385f0a34551eee0445201076bf455f765556001ad2e30ba25f2eb90328204"
+    },
+    {
+      "bytes": 7675,
+      "original_path": "results/mog/scale_longer/n400_r1over40_28k_s1/summary.json",
+      "path": "original/results/mog/scale_longer/n400_r1over40_28k_s1/summary.json",
+      "role": "original_run_metadata",
+      "sha256": "137ac7eaefd7147ca58ef443f58ea89bb2d17ea587f92a925e883fc818237fd6"
+    },
+    {
+      "bytes": 108930,
+      "original_path": "results/mog/component_scale/n20000_r1over40_shipped_std0_7k_s1/source.zip",
+      "path": "source.zip",
+      "role": "shared_original_source_archive",
+      "sha256": "b7db0a9deffabd771a6449d186c5a1ef293ea8196498a071e36d2e17754cd255"
+    }
+  ],
+  "generated_files": [
+    {
+      "bytes": 5092,
+      "path": "README.md",
+      "sha256": "047099b594f8de6a32d049aaa5f3bf1cbc120ee5c1dece72b4a3896258a2c9ce"
+    }
+  ],
+  "importer_version": "forge-supplemental-local-mog-envelope-v1",
+  "limitations": [
+    "Historical recorded verdicts only; no training, metric recomputation, or Forge regrading performed.",
+    "No compatibility key or certified reuse binding to current public API, native gates, or full reference suite.",
+    "No weights, sample arrays or per-step logs are included; other 22 rows retain CSV/narrative evidence only.",
+    "Preserved source-map hashes do not attest original clean Git state or independently authenticate execution.",
+    "Study narratives may refer to unbundled local artifacts; required imported context uses durable bundle paths.",
+    "Costs retain recorded train/total seconds only; unknown or incomparable costs are not inferred."
+  ],
+  "original_bytes": 239797,
+  "original_file_count": 26,
+  "prior_scope": {
+    "comparison": "Positive-noise learned MoG versus zero-sigma finite-cloud/atom controls.",
+    "literal_csv_prior_kind_counts": {
+      "mog": 26
+    },
+    "positive_noise_rows": 17,
+    "selected_full_metadata_scope": "Four positive-noise MoG envelope passes only; other rows retain complete CSV/narrative evidence without independent per-run regrading.",
+    "zero_sigma_control_rows": 9
+  },
+  "reuse_eligible": false,
+  "schema_version": 1,
+  "selected_runs": [
+    {
+      "components": 20000,
+      "metadata_directory": "original/results/mog/component_scale/n20000_r1over40_shipped_std0_7k_s1",
+      "raw_legacy_flags": {
+        "passed": true,
+        "passed_baseline": true,
+        "passed_strict": false
+      },
+      "recorded_absolute_sigma": 0.004978389944881201,
+      "recorded_cost": {
+        "total_seconds": 79.51277616200969,
+        "train_seconds": 61.7680390830792
+      },
+      "recorded_git_sha": "a0ec34921c9dd3ebc5b789f60be8681900080f3e",
+      "run": "n20000_r1over40_shipped_std0_7k_s1",
+      "seed": 1,
+      "sigma_rel": 0.025,
+      "source_archive": "source.zip",
+      "standardize": false,
+      "updates": 7000
+    },
+    {
+      "components": 20000,
+      "metadata_directory": "original/results/mog/scale_longer/n20000_r1over16_shipped_std0_28k_s1",
+      "raw_legacy_flags": {
+        "passed": true,
+        "passed_baseline": true,
+        "passed_strict": false
+      },
+      "recorded_absolute_sigma": 0.012445974163711071,
+      "recorded_cost": {
+        "total_seconds": 302.69874719702057,
+        "train_seconds": 241.59716550190933
+      },
+      "recorded_git_sha": "a0ec34921c9dd3ebc5b789f60be8681900080f3e",
+      "run": "n20000_r1over16_shipped_std0_28k_s1",
+      "seed": 1,
+      "sigma_rel": 0.0625,
+      "source_archive": "source.zip",
+      "standardize": false,
+      "updates": 28000
+    },
+    {
+      "components": 20000,
+      "metadata_directory": "original/results/mog/scale_longer/n20000_r1over40_shipped_std0_28k_s1",
+      "raw_legacy_flags": {
+        "passed": true,
+        "passed_baseline": true,
+        "passed_strict": false
+      },
+      "recorded_absolute_sigma": 0.004978389944881201,
+      "recorded_cost": {
+        "total_seconds": 307.3439488070144,
+        "train_seconds": 244.66210910797236
+      },
+      "recorded_git_sha": "a0ec34921c9dd3ebc5b789f60be8681900080f3e",
+      "run": "n20000_r1over40_shipped_std0_28k_s1",
+      "seed": 1,
+      "sigma_rel": 0.025,
+      "source_archive": "source.zip",
+      "standardize": false,
+      "updates": 28000
+    },
+    {
+      "components": 400,
+      "metadata_directory": "original/results/mog/scale_longer/n400_r1over40_28k_s1",
+      "raw_legacy_flags": {
+        "passed": true,
+        "passed_baseline": true,
+        "passed_strict": false
+      },
+      "recorded_absolute_sigma": 0.013143531046807766,
+      "recorded_cost": {
+        "total_seconds": 292.9003796869947,
+        "train_seconds": 246.80308763304492
+      },
+      "recorded_git_sha": "a0ec34921c9dd3ebc5b789f60be8681900080f3e",
+      "run": "n400_r1over40_28k_s1",
+      "seed": 1,
+      "sigma_rel": 0.025,
+      "source_archive": "source.zip",
+      "standardize": true,
+      "updates": 28000
+    }
+  ],
+  "source_archive": {
+    "all_four_recorded_source_maps_match": true,
+    "identical_original_paths": [
+      "results/mog/component_scale/n20000_r1over40_shipped_std0_7k_s1/source.zip",
+      "results/mog/scale_longer/n20000_r1over16_shipped_std0_28k_s1/source.zip",
+      "results/mog/scale_longer/n20000_r1over40_shipped_std0_28k_s1/source.zip",
+      "results/mog/scale_longer/n400_r1over40_28k_s1/source.zip"
+    ],
+    "members": [
+      {
+        "bytes": 22774,
+        "path": "examples/100gaussians.py",
+        "sha256": "1a0155e6a245d878691a4c354e970adacdced24807278b9a55bd62eeac3736f9"
+      },
+      {
+        "bytes": 3029,
+        "path": "experiments/config.py",
+        "sha256": "e4b5261994560b4350883240ec28f44816b5d3f6b23d57885f5f2f1ae68af5e9"
+      },
+      {
+        "bytes": 17353,
+        "path": "experiments/run_grid.py",
+        "sha256": "2915b849d7a702f8ab23f422dd3906c864b2aa3feed74cff1dea2a38ca0aa02f"
+      },
+      {
+        "bytes": 5695,
+        "path": "experiments/train_100gaussians.py",
+        "sha256": "1a8a0cc9bf2a4a36415ea5170a764feb5771cfe98165af574ff9c7605222028d"
+      },
+      {
+        "bytes": 16809,
+        "path": "experiments/train_denoising.py",
+        "sha256": "01604e7967a6aa909d1e4ca1abe0ef1bac58bce93e49f7403935d1cda9df02e4"
+      },
+      {
+        "bytes": 2814,
+        "path": "lib/cifar_metrics.py",
+        "sha256": "7593a15822cb8cd99b48ed75127f99f1f856ebc1000d0acf9d7e369d9b2d44a3"
+      },
+      {
+        "bytes": 2337,
+        "path": "lib/cifar_speed.py",
+        "sha256": "c9caa8b2000c256c46e427f295f91c633b5bef4db94331b97ed2ad1272860af2"
+      },
+      {
+        "bytes": 58,
+        "path": "lib/ddgan_ncsnpp/__init__.py",
+        "sha256": "60a5d144f89ad8c2c39c2a57f5f3d4202970022133edfd372f2db4d497ce7a18"
+      },
+      {
+        "bytes": 3234,
+        "path": "lib/ddgan_ncsnpp/dense_layer.py",
+        "sha256": "d98df1532c1b7900bb08eda7af0c5f9aa9a710fbbeeda7b97ef5d56736510cda"
+      },
+      {
+        "bytes": 20853,
+        "path": "lib/ddgan_ncsnpp/layers.py",
+        "sha256": "152abf198a0bdf0fb6520de21ff139167471961f7299be9e1c8ea46d93f49b83"
+      },
+      {
+        "bytes": 12549,
+        "path": "lib/ddgan_ncsnpp/layerspp.py",
+        "sha256": "291cb4d45729b99832d6da7959dcba9c3605179db8deb1486b7fb8844caf6211"
+      },
+      {
+        "bytes": 15585,
+        "path": "lib/ddgan_ncsnpp/ncsnpp_generator_adagn.py",
+        "sha256": "a50b6609f174dbe46e1011c83fb713e39e38f169f396651853b3b0bff88d0e7b"
+      },
+      {
+        "bytes": 9105,
+        "path": "lib/ddgan_ncsnpp/up_or_down_sampling.py",
+        "sha256": "ca1f71d780cebf20faaf2162e18c16d2564b2a9bca0b3e606794d52da1e636b4"
+      },
+      {
+        "bytes": 2009,
+        "path": "lib/ddgan_ncsnpp/upfirdn2d.py",
+        "sha256": "22f1993059536a7828d912ccd81f0d135524d712b62a09ccbdf1649b366c6d8f"
+      },
+      {
+        "bytes": 4342,
+        "path": "lib/ddgan_ncsnpp/utils.py",
+        "sha256": "5a78caca1d5550859bdb844d7c3ee9ccb76a05c54515f1a65cd1dbcabbe647e9"
+      },
+      {
+        "bytes": 9669,
+        "path": "lib/denoising_toy.py",
+        "sha256": "163d59d0036fb77e8b7546b9fbff451614be43dfdcb4eb18c51fb2674ae4342f"
+      },
+      {
+        "bytes": 11976,
+        "path": "lib/game_jacobian.py",
+        "sha256": "a792d24cb82ec14fe1c602772d976b98f477e184213ea329fb46bac61407bbd5"
+      },
+      {
+        "bytes": 115,
+        "path": "lib/gan_loss.py",
+        "sha256": "be3f9874c565b4e190bc5e6e7cd702f47da1e7bf4f3d480352e4cfa9728328ad"
+      },
+      {
+        "bytes": 133,
+        "path": "lib/grad_regularizers.py",
+        "sha256": "70d44380309f527669db53eb235c5a02584c189fbe34f7693ff5b565ef5c732d"
+      },
+      {
+        "bytes": 6663,
+        "path": "lib/image_ddgan.py",
+        "sha256": "b49dd3ac6f43d55c9445d6813dc3c51203542bd54e81613a13f48e8b3268af2e"
+      },
+      {
+        "bytes": 7594,
+        "path": "lib/image_moonshots.py",
+        "sha256": "32609ae5ac95d017416ad8a9154dcf8d3a00483b78770bf606213cff41088bb8"
+      },
+      {
+        "bytes": 1308,
+        "path": "lib/image_ncsnpp.py",
+        "sha256": "4c85dafcbe71dbd9cb2d0f0a0e4c75cc77b067f4b437bcdac88808be926f1c9c"
+      },
+      {
+        "bytes": 7116,
+        "path": "lib/mog_metrics.py",
+        "sha256": "70389fe190357d9aa49b8dfe43c822c0eb167be3a2f3e39102c2a32fa8ff5f21"
+      },
+      {
+        "bytes": 6647,
+        "path": "lib/oadam.py",
+        "sha256": "bb00feeca65675a90beb28886ed0fef420963798e53d900d920cb3c531275de3"
+      },
+      {
+        "bytes": 127,
+        "path": "lib/particle_prior.py",
+        "sha256": "8a7ecf9b49c58a2d78b30f0237e586079a8353afd3ac1ea9029c53c837f63989"
+      },
+      {
+        "bytes": 13637,
+        "path": "lib/sparse_metrics.py",
+        "sha256": "e359fbddf67f00d4ab5b18b1a9feacd223649b2409d90f439418619918f98ef2"
+      },
+      {
+        "bytes": 11004,
+        "path": "lib/sparse_models.py",
+        "sha256": "7632a35e53118e8b98cc8e53fabed180a55ef5fef25241442fea5746a5656cf5"
+      },
+      {
+        "bytes": 7651,
+        "path": "lib/sparse_toy.py",
+        "sha256": "c356bc07a3510efc12eda6ea78ab02196cd5b6dfa2d5540c1602c8649551c979"
+      },
+      {
+        "bytes": 18527,
+        "path": "lib/toy_metrics.py",
+        "sha256": "12e8975fe31ed4d9973d53649ce940171da78739a3d7b80544ba5f4d2313367c"
+      },
+      {
+        "bytes": 5231,
+        "path": "lib/toy_models.py",
+        "sha256": "70f32797882de0dc88085afcf5e05821b65eb5f248c9690818a2494225d782a3"
+      },
+      {
+        "bytes": 13760,
+        "path": "lib/trajectory.py",
+        "sha256": "7af4817005b35144ea19cb156c475d8a654584a0913f773028e674916bd4fcf7"
+      },
+      {
+        "bytes": 7381,
+        "path": "lib/trajectory_visuals.py",
+        "sha256": "5e7e2534d6af396f6c0fcc0e32663f982769f5007abdfc7d21ae05d5873612bf"
+      },
+      {
+        "bytes": 121,
+        "path": "lib/vicreg_loss.py",
+        "sha256": "16eaf1f57450d8b81de801fe3c1d9e0f28b8842c8669a23bfa4a5f20db5b6cf8"
+      },
+      {
+        "bytes": 704,
+        "path": "particlegan/__init__.py",
+        "sha256": "b9b7e0e7d8fcc60ad05e586867808fce8bede1711dd974d28412c36da5cc4927"
+      },
+      {
+        "bytes": 4878,
+        "path": "particlegan/conditioning.py",
+        "sha256": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486"
+      },
+      {
+        "bytes": 5080,
+        "path": "particlegan/diffusion.py",
+        "sha256": "ec4acf8d6e15c30c5dfbb6fc7b93f10ee1c778214493223c50e08eb2e5047683"
+      },
+      {
+        "bytes": 7960,
+        "path": "particlegan/gan_loss.py",
+        "sha256": "9232adaafeaa8767cf102b05a0f303cb40dffed843ced5b0702041ddd8d057da"
+      },
+      {
+        "bytes": 16562,
+        "path": "particlegan/grad_regularizers.py",
+        "sha256": "45fb38532b4d0e6fa3b8483fdf18b3c822055363e68dbee4fc8e6222dabb19c6"
+      },
+      {
+        "bytes": 11956,
+        "path": "particlegan/particle_prior.py",
+        "sha256": "c344be387795e6473ec459ef23f61373eac5be80ece9c3ce7f71bf0f798e39ff"
+      },
+      {
+        "bytes": 6929,
+        "path": "particlegan/recipes.py",
+        "sha256": "476d807cc2e6775acf98720a8190396e1b257d6cbbf09ef98870047c68f6f11a"
+      },
+      {
+        "bytes": 2297,
+        "path": "particlegan/vicreg_loss.py",
+        "sha256": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+      }
+    ],
+    "path": "source.zip",
+    "sha256": "b7db0a9deffabd771a6449d186c5a1ef293ea8196498a071e36d2e17754cd255"
+  },
+  "study_counts": {
+    "all_rows": {
+      "c0_envelope_failures": 20,
+      "c0_envelope_passes": 6,
+      "rows": 26,
+      "strict_failures": 26,
+      "strict_passes": 0
+    },
+    "new_configuration_rows": {
+      "c0_envelope_failures": 16,
+      "c0_envelope_passes": 5,
+      "rows": 21,
+      "strict_failures": 21,
+      "strict_passes": 0
+    },
+    "new_positive_noise_rows": {
+      "c0_envelope_failures": 10,
+      "c0_envelope_passes": 4,
+      "rows": 14,
+      "strict_failures": 14,
+      "strict_passes": 0
+    },
+    "positive_noise_rows": {
+      "c0_envelope_failures": 13,
+      "c0_envelope_passes": 4,
+      "rows": 17,
+      "strict_failures": 17,
+      "strict_passes": 0
+    },
+    "reused_reference_rows": {
+      "c0_envelope_failures": 4,
+      "c0_envelope_passes": 1,
+      "rows": 5,
+      "strict_failures": 5,
+      "strict_passes": 0
+    },
+    "zero_sigma_rows": {
+      "c0_envelope_failures": 7,
+      "c0_envelope_passes": 2,
+      "rows": 9,
+      "strict_failures": 9,
+      "strict_passes": 0
+    }
+  }
+}

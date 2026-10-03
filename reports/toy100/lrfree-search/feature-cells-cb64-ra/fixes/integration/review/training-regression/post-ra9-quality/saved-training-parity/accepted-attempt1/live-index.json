@@ -1,0 +1,117 @@
+{
+  "status": "WATCHING",
+  "records": [
+    {
+      "step": 0,
+      "status": "EXACT_LEGACY_TRAINING_PARITY",
+      "unexpected_difference_count": 0,
+      "receipt_path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/saved-training-parity/accepted-attempt1/checkpoint-0000.json",
+      "receipt_sha256": "edf775389d91f416bd41cbdf6088aa8521b1a8f4502fa71bff28033944796606",
+      "paired_average_lease_live": false,
+      "actual_cells": 0,
+      "metric_rank": 0,
+      "coherent_rows": 0
+    },
+    {
+      "step": 100,
+      "status": "EXACT_LEGACY_TRAINING_PARITY",
+      "unexpected_difference_count": 0,
+      "receipt_path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/saved-training-parity/accepted-attempt1/checkpoint-0100.json",
+      "receipt_sha256": "ff326dc954a50fd7db30de716c799b391c34c86e80e9dce5342794c2fbf69ff5",
+      "paired_average_lease_live": false,
+      "actual_cells": 64,
+      "metric_rank": 8,
+      "coherent_rows": 95
+    },
+    {
+      "step": 250,
+      "status": "EXACT_LEGACY_TRAINING_PARITY",
+      "unexpected_difference_count": 0,
+      "receipt_path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/saved-training-parity/accepted-attempt1/checkpoint-0250.json",
+      "receipt_sha256": "fcfe1777a2fa7c2af27858ddaecb3f3e09ba09dbe74cc7e92ec749973fab92ee",
+      "paired_average_lease_live": false,
+      "actual_cells": 64,
+      "metric_rank": 8,
+      "coherent_rows": 259
+    },
+    {
+      "step": 500,
+      "status": "EXACT_LEGACY_TRAINING_PARITY",
+      "unexpected_difference_count": 0,
+      "receipt_path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/saved-training-parity/accepted-attempt1/checkpoint-0500.json",
+      "receipt_sha256": "3242b3bc1ab40e99e098d9f769d10ee384b52d9cd7971adcdbfc00d22bc32fa2",
+      "paired_average_lease_live": false,
+      "actual_cells": 64,
+      "metric_rank": 8,
+      "coherent_rows": 521
+    },
+    {
+      "step": 750,
+      "status": "EXACT_LEGACY_TRAINING_PARITY",
+      "unexpected_difference_count": 0,
+      "receipt_path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/saved-training-parity/accepted-attempt1/checkpoint-0750.json",
+      "receipt_sha256": "0999c1b6c91a869034d995d344e01e714e6545a61b1e8cee1937f0a21c2db834",
+      "paired_average_lease_live": false,
+      "actual_cells": 64,
+      "metric_rank": 8,
+      "coherent_rows": 852
+    },
+    {
+      "step": 1000,
+      "status": "EXACT_LEGACY_TRAINING_PARITY",
+      "unexpected_difference_count": 0,
+      "receipt_path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/saved-training-parity/accepted-attempt1/checkpoint-1000.json",
+      "receipt_sha256": "a9bb2c85e050fd6e37b7dedc68e70fa4c90eccfb8c2f656f8d7386f11181b254",
+      "paired_average_lease_live": false,
+      "actual_cells": 64,
+      "metric_rank": 8,
+      "coherent_rows": 638
+    },
+    {
+      "step": 1250,
+      "status": "EXACT_LEGACY_TRAINING_PARITY",
+      "unexpected_difference_count": 0,
+      "receipt_path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/saved-training-parity/accepted-attempt1/checkpoint-1250.json",
+      "receipt_sha256": "2bd04ae12fddc9286fed3aa78c22ada529e0c7666f0213cdf48a7da8b3973701",
+      "paired_average_lease_live": false,
+      "actual_cells": 64,
+      "metric_rank": 8,
+      "coherent_rows": 943
+    },
+    {
+      "step": 1500,
+      "status": "EXACT_LEGACY_TRAINING_PARITY",
+      "unexpected_difference_count": 0,
+      "receipt_path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/saved-training-parity/accepted-attempt1/checkpoint-1500.json",
+      "receipt_sha256": "77e1e5110bb7060da6868dac96825333f7e33be138c3b93cc86bc1a8519b6df7",
+      "paired_average_lease_live": false,
+      "actual_cells": 64,
+      "metric_rank": 8,
+      "coherent_rows": 881
+    },
+    {
+      "step": 1750,
+      "status": "EXACT_LEGACY_TRAINING_PARITY",
+      "unexpected_difference_count": 0,
+      "receipt_path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/saved-training-parity/accepted-attempt1/checkpoint-1750.json",
+      "receipt_sha256": "d17d6c259cbef8ea7d91345ae872bb6a175f42c5465ebf9213c9e7c2e1affb6e",
+      "paired_average_lease_live": false,
+      "actual_cells": 64,
+      "metric_rank": 8,
+      "coherent_rows": 963
+    },
+    {
+      "step": 2000,
+      "status": "EXACT_LEGACY_TRAINING_PARITY",
+      "unexpected_difference_count": 0,
+      "receipt_path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/training-regression/post-ra9-quality/saved-training-parity/accepted-attempt1/checkpoint-2000.json",
+      "receipt_sha256": "7b6fea99b4fe0ce1564c7f9da7b9d66826ea9bb294fdc76e1e9b3d9a976c4a10",
+      "paired_average_lease_live": true,
+      "actual_cells": 64,
+      "metric_rank": 8,
+      "coherent_rows": 977
+    }
+  ],
+  "numerical_replay": false,
+  "quality_verdict": null
+}

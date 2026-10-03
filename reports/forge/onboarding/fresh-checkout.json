@@ -1,0 +1,53 @@
+{
+  "attempt_id": "fafc3da7cecf4b1780bbaedf66141092",
+  "campaign": {
+    "definition": {
+      "budget_seconds": 900,
+      "candidate_budget_seconds": 900,
+      "id": "fresh-checkout-pilot",
+      "purpose": "Fresh-checkout onboarding for one substantive critic-penalty ablation, through Tier 1 only; CPU task workers and no GPU ownership.",
+      "schema_version": 1
+    },
+    "paused": false,
+    "reserved_seconds": 0.0,
+    "spent_seconds": 7.371452854000381
+  },
+  "candidate_revision": "ef50ff6fb20723ab9340fbb8d1a6c8abd45cb2e2950250578a13dd36207113b5",
+  "checkout_commit": "5a30cd3db3577404b4747ba9a2fae398c2257a23",
+  "checkout_method": "fresh local clone of the same feature branch, shared Git objects, independent working tree and queue",
+  "commands_completed": [
+    "validate",
+    "recall",
+    "new",
+    "plan",
+    "enqueue",
+    "drain --gpus cpu",
+    "logs",
+    "board",
+    "readout",
+    "compile",
+    "queue",
+    "stats"
+  ],
+  "gpu_attempts": 0,
+  "launched_attempts": 1,
+  "lifecycle": "concluded",
+  "logs_directory": "/home/martyn/dev/ParticleGAN-experiment-tiers/runs/forge/fresh-checkout/runs/forge/fresh-checkout-validation",
+  "readout_sha256": "8a3667695a5ca575b83df78d6e0ae98275cbc0fe4dc2fb4b7aabaaa99704921a",
+  "readout_snapshot": "reports/forge/onboarding/fresh-checkout-readout.json",
+  "request_id": "acde0787eb4675361a9ef0b8",
+  "result_sha256": "dd4c3c224806a995bd7ec894e6d42249d74ad9dcf23b5735c9a4c89d205857dd",
+  "runtime": {
+    "implementation": "CPython",
+    "machine": "x86_64",
+    "packages": {
+      "numpy": "2.5.3",
+      "scipy": "1.17.1",
+      "torch": "2.14.0"
+    },
+    "python": "3.14.7",
+    "system": "Linux"
+  },
+  "schema_version": 1,
+  "source_sha256": "a565c608c1871a1de6e9c7d326246ac976eaa08a573cc0d697421a377a0958a4"
+}

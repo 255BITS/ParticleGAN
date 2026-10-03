@@ -1,0 +1,62 @@
+{
+  "base_lane": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2",
+  "candidate": "RA15-partial-recovery",
+  "changes": [
+    "package/config routing in fresh freeze helper",
+    "candidate display tag in run_screen",
+    "RA15 run_moving docstring only"
+  ],
+  "fresh_candidate_source_configuration": "FROOT/pkg-RA15-partial-recovery and byte-identical configs/RA15-partial-recovery.json",
+  "gpu_operations": 0,
+  "local_files": {
+    "adapt_screen.py": {
+      "byte_identical": true,
+      "new_sha256": "d014da366bcbb9380d61cd4a5d01e80a18cc08be7d8dcbf68bf5c69f4bdd668d",
+      "original_sha256": "d014da366bcbb9380d61cd4a5d01e80a18cc08be7d8dcbf68bf5c69f4bdd668d"
+    },
+    "collect.py": {
+      "byte_identical": true,
+      "new_sha256": "984dfa2ada7ff7847af3977e3352f0c8d99ba3a2a8bf7b2c9ae5361779dd2218",
+      "original_sha256": "984dfa2ada7ff7847af3977e3352f0c8d99ba3a2a8bf7b2c9ae5361779dd2218"
+    },
+    "current_api_fixtures.py": {
+      "byte_identical": true,
+      "new_sha256": "856ad5ca6b65a8c233faa1718e89957d58de47a956ced2c79244c4e35a65fd12",
+      "original_sha256": "856ad5ca6b65a8c233faa1718e89957d58de47a956ced2c79244c4e35a65fd12"
+    },
+    "run_all.py": {
+      "byte_identical": true,
+      "new_sha256": "477e6869e67f0b0b3e535f991cae9999fe7bb3a77544aa5ca3c6193af24ed45c",
+      "original_sha256": "477e6869e67f0b0b3e535f991cae9999fe7bb3a77544aa5ca3c6193af24ed45c"
+    },
+    "run_full_suite.py": {
+      "byte_identical": true,
+      "new_sha256": "6a7f1684ab9fcb5f0c7c731b9ab653a444e449dd00413b029d4162a40842d229",
+      "original_sha256": "6a7f1684ab9fcb5f0c7c731b9ab653a444e449dd00413b029d4162a40842d229"
+    },
+    "run_moving.py": {
+      "byte_identical": false,
+      "new_sha256": "d44f1f320824fd4b1a55b9d738bd60f36caa028fd0eaf37b83b614553ba78348",
+      "original_sha256": "c2f8d399416b328886ba2452e86a1398f511c7357c915eb6437617f54cf69df9"
+    },
+    "run_screen.py": {
+      "byte_identical": false,
+      "new_sha256": "c29ac7680a0a6b8efaffc6eae6ea31cacc9eef64c0572fb9610c12003146dfb6",
+      "original_sha256": "9e432c55647df3ccd50eca753965f54bfca5a1aa20bd603eca48a537c19eba8b"
+    },
+    "screen_current.py": {
+      "byte_identical": true,
+      "new_sha256": "c60d76627f1846e807ae4fa36075a52516ddf568b70d616ad232b4d628118da2",
+      "original_sha256": "c60d76627f1846e807ae4fa36075a52516ddf568b70d616ad232b4d628118da2"
+    }
+  },
+  "new_lane": "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15",
+  "original_labels": "15 prior RA14 quality tasks plus RA13 learned2000updates remain labelled by actual execution source.",
+  "original_r2_adapter_corrections_retained": true,
+  "retained_metadata_files": [
+    "SCREEN-ADAPTER.json",
+    "ADAPTER-CORRECTIONS.json"
+  ],
+  "status": "SOURCE_PREPARED_NO_EXECUTION",
+  "unchanged_screen_host_scorer_schedule_budget_thresholds": true
+}

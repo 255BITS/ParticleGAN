@@ -1,0 +1,756 @@
+{
+  "api_changes": [],
+  "api_version": "forge-api-v1",
+  "changed_factors": [
+    "Recipe.lr=0.006375",
+    "Recipe.prior_lr_mult=0.009411764705882354"
+  ],
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "configuration_id": "4496b859e066d7a4b6279f2d34fbd58d083e0f18c2a22ade5ba12c964d01a7ca",
+  "decision_contract": {
+    "candidate_binding_sha256": "0a195aadb5085ec96e62f91730b21befd0918ca3c6062bfbda365c350012a746",
+    "competing_explanation": "Global rate increases also change critic/network dynamics and can still miss the frozen short-horizon gate or destabilize later tasks. The paired prior multiplier retains nominal table base LR, not the realized state-dependent optimizer trajectory. A complete failed configuration cannot be repaired by importing a task-only word witness or tuning one task.",
+    "control": {
+      "binding_sha256": "42b23694c40f18a8b0f4d240a183d0003287e1d266dc823a7aa9f2b442eef33c",
+      "candidate_id": "ka2-global-repair-v1",
+      "task_map": {
+        "ae_gan_hold": "ae_gan_hold",
+        "cover_leftover": "cover_leftover",
+        "five_word_joint_acquisition": "five_word_joint_acquisition",
+        "grid100": "grid100",
+        "img_bars4": "img_bars4",
+        "img_blobs4": "img_blobs4",
+        "img_intensity2": "img_intensity2",
+        "img_stripes2": "img_stripes2",
+        "mid_scale_identity": "mid_scale_identity",
+        "mode_hold": "mode_hold",
+        "residual_student": "residual_student",
+        "ring16_acquisition": "ring16_acquisition",
+        "ring_extension": "ring_extension",
+        "ring_hold": "ring_hold",
+        "rotated100": "rotated100",
+        "staggered100": "staggered100",
+        "trajectory": "trajectory",
+        "two_pole": "two_pole",
+        "unipolar": "unipolar",
+        "unused_token_hold": "unused_token_hold",
+        "vector_anisotropic": "vector_anisotropic",
+        "vector_overlap": "vector_overlap",
+        "vector_spiral": "vector_spiral",
+        "vector_two_broad": "vector_two_broad",
+        "vector_unequal_mass": "vector_unequal_mass",
+        "vector_unequal_width": "vector_unequal_width"
+      }
+    },
+    "falsifier": {
+      "metric": "mean_abs",
+      "op": "<",
+      "phase": "final",
+      "task_id": "two_pole",
+      "threshold": 0.3
+    },
+    "prediction": {
+      "metric": "mean_abs",
+      "op": ">=",
+      "phase": "final",
+      "task_id": "two_pole",
+      "threshold": 0.3
+    },
+    "prior_evidence": [
+      {
+        "identity": {
+          "attempt_id": "e2fcaf0f2965415db4c7234a024d3031",
+          "candidate_id": "ka2-global-repair-v1",
+          "candidate_revision": "71a50b7b10fdc6307c92b781224e73625f670377ffeb4a31b9f3abe4b34be108"
+        },
+        "path": "reports/forge/family-wide-word-repairs/initial/ka2-global-repair-v1.json",
+        "selector": [],
+        "sha256": "1af05d0c176e721b8916b822d8c9af5bcbd1339099b49941bb8b625f31dfcfde",
+        "use": "motivation_only"
+      }
+    ],
+    "schema_version": 1,
+    "scope": {
+      "campaign_budget_seconds": 97800,
+      "candidate_budget_seconds": 48900,
+      "execution_backend": "cuda",
+      "jobs_sha256": "205a8ec8815c07f9804f569fa2439bdb259ee5a137fe79a3d7f4092c96e54b7c",
+      "max_rounds": 1,
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "runtime_cohort_sha256": "e2f4acc3bb6543576475ece1bb0bce5b973eca2ed1852b13d096ec9145277c71",
+      "source_digest": "2aea8c53d1871625ff47b58a9a24c6259b46e4647669ad42d34bc4366a42508f",
+      "task_ids": [
+        "ae_gan_hold",
+        "cover_leftover",
+        "five_word_joint_acquisition",
+        "grid100",
+        "img_bars4",
+        "img_blobs4",
+        "img_intensity2",
+        "img_stripes2",
+        "mid_scale_identity",
+        "mode_hold",
+        "residual_student",
+        "ring16_acquisition",
+        "ring_extension",
+        "ring_hold",
+        "rotated100",
+        "staggered100",
+        "trajectory",
+        "two_pole",
+        "unipolar",
+        "unused_token_hold",
+        "vector_anisotropic",
+        "vector_overlap",
+        "vector_spiral",
+        "vector_two_broad",
+        "vector_unequal_mass",
+        "vector_unequal_width"
+      ],
+      "through_tier": 3,
+      "view": "discriminator_stability"
+    },
+    "status": "ready",
+    "substantive_delta": [
+      {
+        "after": 0.006375,
+        "before": 0.0006,
+        "path": [
+          "recipe",
+          "ae_gan_hold",
+          "lr"
+        ]
+      },
+      {
+        "after": 0.009411764705882354,
+        "before": 0.1,
+        "path": [
+          "recipe",
+          "ae_gan_hold",
+          "prior_lr_mult"
+        ]
+      },
+      {
+        "after": 0.006375,
+        "before": 0.0006,
+        "path": [
+          "recipe",
+          "cover_leftover",
+          "lr"
+        ]
+      },
+      {
+        "after": 0.009411764705882354,
+        "before": 0.1,
+        "path": [
+          "recipe",
+          "cover_leftover",
+          "prior_lr_mult"
+        ]
+      },
+      {
+        "after": 0.006375,
+        "before": 0.0006,
+        "path": [
+          "recipe",
+          "five_word_joint_acquisition",
+          "lr"
+        ]
+      },
+      {
+        "after": 0.009411764705882354,
+        "before": 0.1,
+        "path": [
+          "recipe",
+          "five_word_joint_acquisition",
+          "prior_lr_mult"
+        ]
+      },
+      {
+        "after": 0.006375,
+        "before": 0.0006,
+        "path": [
+          "recipe",
+          "grid100",
+          "lr"
+        ]
+      },
+      {
+        "after": 0.009411764705882354,
+        "before": 0.1,
+        "path": [
+          "recipe",
+          "grid100",
+          "prior_lr_mult"
+        ]
+      },
+      {
+        "after": 0.006375,
+        "before": 0.0006,
+        "path": [
+          "recipe",
+          "img_bars4",
+          "lr"
+        ]
+      },
+      {
+        "after": 0.009411764705882354,
+        "before": 0.1,
+        "path": [
+          "recipe",
+          "img_bars4",
+          "prior_lr_mult"
+        ]
+      },
+      {
+        "after": 0.006375,
+        "before": 0.0006,
+        "path": [
+          "recipe",
+          "img_blobs4",
+          "lr"
+        ]
+      },
+      {
+        "after": 0.009411764705882354,
+        "before": 0.1,
+        "path": [
+          "recipe",
+          "img_blobs4",
+          "prior_lr_mult"
+        ]
+      },
+      {
+        "after": 0.006375,
+        "before": 0.0006,
+        "path": [
+          "recipe",
+          "img_intensity2",
+          "lr"
+        ]
+      },
+      {
+        "after": 0.009411764705882354,
+        "before": 0.1,
+        "path": [
+          "recipe",
+          "img_intensity2",
+          "prior_lr_mult"
+        ]
+      },
+      {
+        "after": 0.006375,
+        "before": 0.0006,
+        "path": [
+          "recipe",
+          "img_stripes2",
+          "lr"
+        ]
+      },
+      {
+        "after": 0.009411764705882354,
+        "before": 0.1,
+        "path": [
+          "recipe",
+          "img_stripes2",
+          "prior_lr_mult"
+        ]
+      },
+      {
+        "after": 0.006375,
+        "before": 0.0006,
+        "path": [
+          "recipe",
+          "mid_scale_identity",
+          "lr"
+        ]
+      },
+      {
+        "after": 0.006375,
+        "before": 0.0006,
+        "path": [
+          "recipe",
+          "mode_hold",
+          "lr"
+        ]
+      },
+      {
+        "after": 0.009411764705882354,
+        "before": 0.1,
+        "path": [
+          "recipe",
+          "mode_hold",
+          "prior_lr_mult"
+        ]
+      },
+      {
+        "after": 0.006375,
+        "before": 0.0006,
+        "path": [
+          "recipe",
+          "residual_student",
+          "lr"
+        ]
+      },
+      {
+        "after": 0.009411764705882354,
+        "before": 0.1,
+        "path": [
+          "recipe",
+          "residual_student",
+          "prior_lr_mult"
+        ]
+      },
+      {
+        "after": 0.006375,
+        "before": 0.0006,
+        "path": [
+          "recipe",
+          "ring16_acquisition",
+          "lr"
+        ]
+      },
+      {
+        "after": 0.009411764705882354,
+        "before": 0.1,
+        "path": [
+          "recipe",
+          "ring16_acquisition",
+          "prior_lr_mult"
+        ]
+      },
+      {
+        "after": 0.006375,
+        "before": 0.0006,
+        "path": [
+          "recipe",
+          "ring_extension",
+          "lr"
+        ]
+      },
+      {
+        "after": 0.009411764705882354,
+        "before": 0.1,
+        "path": [
+          "recipe",
+          "ring_extension",
+          "prior_lr_mult"
+        ]
+      },
+      {
+        "after": 0.006375,
+        "before": 0.0006,
+        "path": [
+          "recipe",
+          "ring_hold",
+          "lr"
+        ]
+      },
+      {
+        "after": 0.009411764705882354,
+        "before": 0.1,
+        "path": [
+          "recipe",
+          "ring_hold",
+          "prior_lr_mult"
+        ]
+      },
+      {
+        "after": 0.006375,
+        "before": 0.0006,
+        "path": [
+          "recipe",
+          "rotated100",
+          "lr"
+        ]
+      },
+      {
+        "after": 0.009411764705882354,
+        "before": 0.1,
+        "path": [
+          "recipe",
+          "rotated100",
+          "prior_lr_mult"
+        ]
+      },
+      {
+        "after": 0.006375,
+        "before": 0.0006,
+        "path": [
+          "recipe",
+          "staggered100",
+          "lr"
+        ]
+      },
+      {
+        "after": 0.009411764705882354,
+        "before": 0.1,
+        "path": [
+          "recipe",
+          "staggered100",
+          "prior_lr_mult"
+        ]
+      },
+      {
+        "after": 0.006375,
+        "before": 0.0006,
+        "path": [
+          "recipe",
+          "trajectory",
+          "lr"
+        ]
+      },
+      {
+        "after": 0.009411764705882354,
+        "before": 0.1,
+        "path": [
+          "recipe",
+          "trajectory",
+          "prior_lr_mult"
+        ]
+      },
+      {
+        "after": 0.006375,
+        "before": 0.0006,
+        "path": [
+          "recipe",
+          "two_pole",
+          "lr"
+        ]
+      },
+      {
+        "after": 0.006375,
+        "before": 0.0006,
+        "path": [
+          "recipe",
+          "unipolar",
+          "lr"
+        ]
+      },
+      {
+        "after": 0.006375,
+        "before": 0.0006,
+        "path": [
+          "recipe",
+          "unused_token_hold",
+          "lr"
+        ]
+      },
+      {
+        "after": 0.006375,
+        "before": 0.0006,
+        "path": [
+          "recipe",
+          "vector_anisotropic",
+          "lr"
+        ]
+      },
+      {
+        "after": 0.009411764705882354,
+        "before": 0.1,
+        "path": [
+          "recipe",
+          "vector_anisotropic",
+          "prior_lr_mult"
+        ]
+      },
+      {
+        "after": 0.006375,
+        "before": 0.0006,
+        "path": [
+          "recipe",
+          "vector_overlap",
+          "lr"
+        ]
+      },
+      {
+        "after": 0.009411764705882354,
+        "before": 0.1,
+        "path": [
+          "recipe",
+          "vector_overlap",
+          "prior_lr_mult"
+        ]
+      },
+      {
+        "after": 0.006375,
+        "before": 0.0006,
+        "path": [
+          "recipe",
+          "vector_spiral",
+          "lr"
+        ]
+      },
+      {
+        "after": 0.009411764705882354,
+        "before": 0.1,
+        "path": [
+          "recipe",
+          "vector_spiral",
+          "prior_lr_mult"
+        ]
+      },
+      {
+        "after": 0.006375,
+        "before": 0.0006,
+        "path": [
+          "recipe",
+          "vector_two_broad",
+          "lr"
+        ]
+      },
+      {
+        "after": 0.009411764705882354,
+        "before": 0.1,
+        "path": [
+          "recipe",
+          "vector_two_broad",
+          "prior_lr_mult"
+        ]
+      },
+      {
+        "after": 0.006375,
+        "before": 0.0006,
+        "path": [
+          "recipe",
+          "vector_unequal_mass",
+          "lr"
+        ]
+      },
+      {
+        "after": 0.009411764705882354,
+        "before": 0.1,
+        "path": [
+          "recipe",
+          "vector_unequal_mass",
+          "prior_lr_mult"
+        ]
+      },
+      {
+        "after": 0.006375,
+        "before": 0.0006,
+        "path": [
+          "recipe",
+          "vector_unequal_width",
+          "lr"
+        ]
+      },
+      {
+        "after": 0.009411764705882354,
+        "before": 0.1,
+        "path": [
+          "recipe",
+          "vector_unequal_width",
+          "prior_lr_mult"
+        ]
+      }
+    ],
+    "terminal_rules": {
+      "falsified": "stop_revision",
+      "incomplete": "request_missing_evidence",
+      "inconclusive": "stop_and_readout",
+      "prediction_observed": "review_saved_diagnostics"
+    }
+  },
+  "diagnostic_ancestor": {
+    "qualification_reuse": false,
+    "receipt": {
+      "bytes": 40024,
+      "path": "reports/forge/word-root-cause/receipts/ka2-slow-prior-0p1.json",
+      "sha256": "bdf4c73e51647f79c2b7e485f442e92ad6334857e2f4a4cad5fc2e6ec022addc"
+    },
+    "use": "motivation_only"
+  },
+  "execution_path": "public_trainer",
+  "goal": "discriminator_stability",
+  "guide": "EXPERIMENTATION.md",
+  "hypothesis": "Increasing the global network/base rate while retaining the nominal absolute latent-table prior base rate may restore movement within the unchanged 80-update screen. Every complete configuration is then evaluated through all ordinary Tier 3 prerequisites; later failures remain part of this whole-candidate result.",
+  "id": "ka2--4496b859e066d7a4b6279f2d34fbd58d083e0f18c2a22ade5ba12c964d01a7ca",
+  "lifecycle": "proposed",
+  "mechanism_class": "floor_constant",
+  "mechanism_rationale": "Explicit global solution successor. Clean-noise/cap activation boundaries are declared rather than hidden in same-signature search; no new penalty kernel, optimizer family or auxiliary objective. Family membership describes solution lineage.",
+  "parent": "ka2-global-repair-v1",
+  "prior": {
+    "kind": "mog",
+    "learnable": true,
+    "sigma": 0.025,
+    "standardize": false
+  },
+  "prior_art": [
+    "reports/forge/word-root-cause/README.md",
+    "reports/forge/word-root-cause/receipts/ka2-slow-prior-0p1.json"
+  ],
+  "recipe_overrides": {
+    "amsgrad": false,
+    "beta2_anneal_end": 0.2,
+    "beta2_end": null,
+    "betas": [
+      0.0,
+      0.999
+    ],
+    "birth_death_backend": "knn",
+    "birth_death_cells": 64,
+    "birth_death_chunk": 256,
+    "birth_death_feature_scale": "none",
+    "birth_death_isolation": false,
+    "birth_death_metric_rank": 8,
+    "birth_death_parent_policy": "real_anchor",
+    "birth_death_space": "data",
+    "continuous_policy": null,
+    "critic_formulation": "ka2",
+    "critic_payoff_damping": true,
+    "critic_r1_real": true,
+    "d_guard_min_steps": 200,
+    "d_guard_ratio": 5.0,
+    "d_lr_mult": 1.5,
+    "direct_particle_betas": [
+      0.0,
+      0.9
+    ],
+    "direct_particle_gain": true,
+    "ema_decay": 0.995,
+    "eps": 1e-08,
+    "input_noise_anneal_end": 0.1,
+    "input_noise_std": 0.0,
+    "latent_damping_max_rate": 0.5,
+    "lr": 0.006375,
+    "lr_anneal_start": 0.6,
+    "lr_control": "mobility",
+    "lr_floor": 0.05,
+    "name": "ka2",
+    "network_lr_floor": 0.01,
+    "network_lr_horizon_cap": null,
+    "optimizer_family": "formulation",
+    "output_noise_mode": "fixed",
+    "output_noise_std": 0.0,
+    "output_noise_warmup": 0.2,
+    "particle_birth_death": false,
+    "prior_betas": null,
+    "prior_lr_mult": 0.009411764705882354,
+    "reg_anchor_min_decay": 0.9,
+    "reg_anchor_weight": 1.0,
+    "reg_arm": null,
+    "reg_coeff": 1.0,
+    "reg_coeff_anneal_end": 0.2,
+    "reg_coeff_end": null,
+    "reg_every": 1,
+    "reg_kappa": 1.0,
+    "reopen_anchor": "hold",
+    "reopen_guard": null,
+    "reopen_signal": "data",
+    "row_evidence_exclude": true,
+    "row_evidence_gate": false,
+    "row_evidence_hold": true,
+    "row_evidence_hot": true,
+    "row_evidence_null": "theory",
+    "row_policy": "independent",
+    "serve_average": 0.0,
+    "table_release_rule": "any"
+  },
+  "recipe_scope": "global_existing_settings_task_owned_conditions_only",
+  "requires_capabilities": [
+    "learned_locations",
+    "a2",
+    "named_rng"
+  ],
+  "resolved_configuration_recipe": {
+    "alpha_bar": [
+      1.0,
+      0.9,
+      0.5,
+      0.05,
+      0.0001
+    ],
+    "amsgrad": false,
+    "batch_size": 2048,
+    "beta2_anneal_end": 0.2,
+    "beta2_end": null,
+    "betas": [
+      0.0,
+      0.999
+    ],
+    "birth_death_backend": "knn",
+    "birth_death_cells": 64,
+    "birth_death_chunk": 256,
+    "birth_death_feature_scale": "none",
+    "birth_death_isolation": false,
+    "birth_death_metric_rank": 8,
+    "birth_death_parent_policy": "real_anchor",
+    "birth_death_space": "data",
+    "conditioning": "scalar",
+    "continuous_policy": null,
+    "critic_formulation": "ka2",
+    "critic_payoff_damping": true,
+    "critic_r1_real": true,
+    "d_guard_min_steps": 200,
+    "d_guard_ratio": 5.0,
+    "d_lr_mult": 1.5,
+    "direct_particle_betas": [
+      0.0,
+      0.9
+    ],
+    "direct_particle_gain": true,
+    "distance_reduction": "sum",
+    "ema_decay": 0.995,
+    "encoder_mode": "none",
+    "eps": 1e-08,
+    "input_noise_anneal_end": 0.1,
+    "input_noise_std": 0.0,
+    "latent_damping_max_rate": 0.5,
+    "lr": 0.006375,
+    "lr_anneal_start": 0.6,
+    "lr_control": "mobility",
+    "lr_floor": 0.05,
+    "model": "gan",
+    "name": "ka2",
+    "network_lr_floor": 0.01,
+    "network_lr_horizon_cap": null,
+    "num_classes": null,
+    "num_particles": 20000,
+    "observation_sigma": 0.03,
+    "optimizer_family": "formulation",
+    "output_noise_mode": "fixed",
+    "output_noise_std": 0.0,
+    "output_noise_warmup": 0.2,
+    "particle_birth_death": false,
+    "prior_betas": null,
+    "prior_kind": "mog",
+    "prior_lr_mult": 0.009411764705882354,
+    "prior_reg": 0.0,
+    "reconstruction_weight": 1.0,
+    "reg_anchor_min_decay": 0.9,
+    "reg_anchor_weight": 1.0,
+    "reg_arm": null,
+    "reg_coeff": 1.0,
+    "reg_coeff_anneal_end": 0.2,
+    "reg_coeff_end": null,
+    "reg_every": 1,
+    "reg_kappa": 1.0,
+    "reopen_anchor": "hold",
+    "reopen_guard": null,
+    "reopen_signal": "data",
+    "routing_temperature": 0.25,
+    "row_evidence_exclude": true,
+    "row_evidence_gate": false,
+    "row_evidence_hold": true,
+    "row_evidence_hot": true,
+    "row_evidence_null": "theory",
+    "row_policy": "independent",
+    "serve_average": 0.0,
+    "sigma_rel": 0.0,
+    "standardize": false,
+    "table_release_rule": "any",
+    "total_steps": 7000,
+    "ucd_target": "class",
+    "ucd_weight": 0.02,
+    "z_dim": 2
+  },
+  "schema_version": 2,
+  "search_report": "reports/forge/configuration-search/ka2-global-repair-rates-v1.json",
+  "search_study_id": "ka2-global-repair-rates-v1",
+  "trainer_family": "ka2"
+}

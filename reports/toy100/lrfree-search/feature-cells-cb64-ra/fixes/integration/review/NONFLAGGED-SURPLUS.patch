@@ -1,0 +1,32 @@
+--- a/particlegan/feature_cells.py
++++ b/particlegan/feature_cells.py
+@@ -676,7 +676,10 @@
+         death_capacity = torch.floor(len(features)*difference.clamp_min(0.)+1e-10).long()*comparison["excess"]
+         birth_capacity = torch.floor(len(features)*(-difference).clamp_min(0.)+1e-10).long()*comparison["deficit"]
+         target = self._mass_targets(len(features))
+-        clean_counts = torch.bincount(ids,minlength=self.cells)
++        table_counts = torch.bincount(ids,minlength=self.cells)
++        # Flagged holes are reserved for isolation. They cannot certify an
++        # ordinary surplus of legitimate survivors in their assigned cell.
++        clean_counts = torch.bincount(ids[~flags],minlength=self.cells)
+         excess = (clean_counts-target).clamp_min(0)
+         vacancies = (target-clean_counts).clamp_min(0)
+         # Emitted iid count evidence certifies direction. Actual clean rows
+@@ -748,7 +751,7 @@
+                       discoveries=int((comparison["excess"]|comparison["deficit"]).sum()),
+                       inaccessible_birth_quota=int(inaccessible),budget=budget,moves=len(child),
+                       death_allocation=deaths,birth_allocation=births,eligible_parent_counts=eligible_counts,
+-                      target_counts=target,clean_counts=clean_counts,clean_vacancies=vacancies,
++                      target_counts=target,clean_counts=clean_counts,table_counts=table_counts,clean_vacancies=vacancies,
+                       unique_parent_count=len(torch.unique(parent)),mass_topology=dict(self.mass_topology),
+                       group_target_counts=group_target,group_clean_counts=group_clean,
+                       within_group_moves=int(within.sum()),between_group_moves=cross_pairs)
+@@ -771,7 +774,7 @@
+                              real_anchors=1,parent_rank=None,
+                              latent_kernel="bounded_local_dv12",latent_neighbors=PARENT_RESERVOIR,
+                              latent_rank=recipe.birth_death_metric_rank,
+-                             mass_policy="reference_topology_vacancies_unique_parents_v2",
++                             mass_policy="reference_topology_vacancies_unique_parents_v3",
+                              isolation_parent_pool="supported_same_cell_without_replacement")
+         self.latent_geometry = BoundedLatentGeometry(rank=recipe.birth_death_metric_rank,
+                                                    neighbors=PARENT_RESERVOIR, chunk=recipe.birth_death_chunk)

@@ -1,0 +1,644 @@
+{
+  "format": "toy_convergence_review_addendum_v1",
+  "date": "2026-10-01",
+  "original_snapshot_prs": 134,
+  "original_base_sha": "4b16312e56328a679b92da69a287c0c9490259d9",
+  "supplemental_base_sha": "6ec7e5788e14ea15ddc3e16ac71110458108b6a6",
+  "scope": "Two additional problem reviews; retained evidence and observation only; no retraining or production config changes",
+  "reviewer_sha256": "7ba6443fb252ddca9b8f97f83cd00c2513fcc9a48096ba4f776f0d8e85026bd4",
+  "cases": [
+    {
+      "id": "pr226",
+      "name": "Paired residual critic-lag diagnostic",
+      "origin": "PR226",
+      "pr": 226,
+      "rating": 4,
+      "quality": "Good bounded mechanism diagnostic; affine path can bypass routing",
+      "verifies": "Verify the nonzero odd-critic force at correct paired predictions, then separate critic parity from D estimator variance in matched native training.",
+      "status": "All three improve; even critic lowers final RMSE 19.96%",
+      "media": "media/pr226.gif",
+      "explanation": "PR226_PR227.md",
+      "sampling": "clean stock-selected served output; live matches; disjoint reporting grid",
+      "head_sha": "0e69fa60bf151762f8edc49bb714c6b7f8cf4804",
+      "base_sha": "6ec7e5788e14ea15ddc3e16ac71110458108b6a6",
+      "spec": {
+        "protocol": "paired_residual_convergence_diagnostic_v1",
+        "output_shape": [
+          2,
+          1,
+          32
+        ],
+        "effective_clean_output_channels": 2,
+        "prior": "128x4 routed particle cloud",
+        "initialization": "public deterministic orthogonal plus R2",
+        "fit_contexts": 100,
+        "guard_contexts": 64,
+        "report_contexts": 144,
+        "steps_per_profile": 1200,
+        "training_objective": "paired RpGAN + native KA2; reporting RMSE never optimized",
+        "convergence_marker": "first recorded half-initial reporting RMSE; no absolute accuracy pass",
+        "protocol_url": "https://github.com/255BITS/ParticleGAN/blob/0e69fa60bf151762f8edc49bb714c6b7f8cf4804/reports/paired-residual-toy/protocol.json"
+      },
+      "arms": [
+        {
+          "id": "current",
+          "clean_reporting": {
+            "normalized_rmse": 0.05337701737880707,
+            "normalized_mse": 0.002849105978384614,
+            "bias": [
+              0.02419854886829853,
+              -0.025228163227438927
+            ],
+            "max_context_rmse": 0.13970990478992462
+          },
+          "half_error_step": 600
+        },
+        {
+          "id": "even_critic",
+          "clean_reporting": {
+            "normalized_rmse": 0.042723894119262695,
+            "normalized_mse": 0.001825331011787057,
+            "bias": [
+              -0.0020387645345181227,
+              -0.0012302468530833721
+            ],
+            "max_context_rmse": 0.07994207739830017
+          },
+          "half_error_step": 500
+        },
+        {
+          "id": "d_antithetic",
+          "clean_reporting": {
+            "normalized_rmse": 0.05203981325030327,
+            "normalized_mse": 0.0027081419248133898,
+            "bias": [
+              0.023526256904006004,
+              -0.02324465662240982
+            ],
+            "max_context_rmse": 0.13668403029441833
+          },
+          "half_error_step": 600
+        }
+      ],
+      "limitations": [
+        "64 tensor coordinates contain two repeated clean output channels",
+        "affine skip can solve without routing",
+        "frequent G decisions do not reproduce real-run stationarity delay",
+        "no decoded quality or Forge qualification"
+      ]
+    },
+    {
+      "id": "pr227",
+      "name": "Routed adapter hidden-initialization convergence",
+      "origin": "PR227",
+      "pr": 227,
+      "rating": 4,
+      "quality": "Good bounded initialization regression; beneficial-particle gate needs a signed check",
+      "verifies": "Test whether initial hidden bridge H/b causes a convergence gap in a teacher-aligned two-site adapter family, while the trained shared bank and routing remain useful.",
+      "status": "H/b control closes the gap; unsigned code-ablation gate needs tightening",
+      "media": "media/pr227.gif",
+      "explanation": "PR226_PR227.md",
+      "sampling": "clean FAST; no DV12/output noise in predictions; fixed private paired score panels sigma0.125",
+      "head_sha": "b0e4f420856d7607baa98cbef488e569d20a3f31",
+      "base_sha": "6ec7e5788e14ea15ddc3e16ac71110458108b6a6",
+      "spec": {
+        "protocol": "supra_conditional_two_site_convergence_v1 + hidden_neutral_v1",
+        "sites": 2,
+        "width": 16,
+        "tokens": 16,
+        "adapter_rank": 2,
+        "prior": "shared 128x4 routed particle cloud",
+        "initialization": "named public sampled networks; teacher shares ordinary initial down basis; up factors zero",
+        "fit_contexts": 96,
+        "guard_contexts": 24,
+        "test_contexts": 96,
+        "steps_per_arm": 6400,
+        "training_objective": "native paired RpGAN + token KA2; separately labelled historical MSE/AdamW reference",
+        "common_judges": [
+          "ordinary_native_game@800",
+          "ordinary_native_game@6400",
+          "particle_native_game@800",
+          "particle_native_game@6400"
+        ],
+        "convergence_gate": "endpoint particle/ordinary game gap >1e-4 under both endpoint critics; intervention improves all four and removes at least half the gap; no absolute accuracy pass",
+        "protocol_url": "https://github.com/255BITS/ParticleGAN/blob/b0e4f420856d7607baa98cbef488e569d20a3f31/docs/e22_routed_convergence_v1.json"
+      },
+      "arms": [
+        {
+          "id": "ordinary_native_game",
+          "common_judge_game": {
+            "ordinary_native_game@800": 0.7190849781036377,
+            "ordinary_native_game@6400": 0.9235867857933044,
+            "particle_native_game@800": 0.7252562642097473,
+            "particle_native_game@6400": 0.9307924509048462
+          },
+          "output_rmse_diagnostic": 0.047492627054452896
+        },
+        {
+          "id": "particle_native_game",
+          "common_judge_game": {
+            "ordinary_native_game@800": 1.0228853225708008,
+            "ordinary_native_game@6400": 1.5043978691101074,
+            "particle_native_game@800": 1.1854112148284912,
+            "particle_native_game@6400": 2.304943561553955
+          },
+          "output_rmse_diagnostic": 0.1356312483549118
+        },
+        {
+          "id": "ordinary_mse_reference",
+          "common_judge_game": {
+            "ordinary_native_game@800": 0.7091378569602966,
+            "ordinary_native_game@6400": 0.8198766112327576,
+            "particle_native_game@800": 0.7098462581634521,
+            "particle_native_game@6400": 0.8312075734138489
+          },
+          "output_rmse_diagnostic": 0.03127415105700493
+        },
+        {
+          "id": "neutral_particle",
+          "common_judge_game": {
+            "ordinary_native_game@800": 0.70229172706604,
+            "ordinary_native_game@6400": 0.8027129769325256,
+            "particle_native_game@800": 0.7045040130615234,
+            "particle_native_game@6400": 0.8007083535194397
+          },
+          "output_rmse_diagnostic": 0.03431996703147888
+        }
+      ],
+      "beneficial_code_ablation": {
+        "ordinary_native_game@800": 0.7556474208831787,
+        "ordinary_native_game@6400": 0.5848477482795715,
+        "particle_native_game@800": 1.1852797269821167,
+        "particle_native_game@6400": 0.9303701519966125
+      },
+      "findings": [
+        "Unsigned abs(delta) gate accepts harmful particle contribution; synthetic counterexample executed",
+        "Original scoring failure preserved; fresh-policy observational repair verified",
+        "Full opt-in subprocess campaign not retrained after repair; actual tensor assertions passed retained endpoints"
+      ],
+      "limitations": [
+        "teacher-aligned down basis",
+        "H and b changed together",
+        "initial ordinary/particle comparison includes owner/policy differences",
+        "no accepted structural moves",
+        "held-out times/latents share source identities",
+        "no Supra quality or Forge qualification"
+      ]
+    }
+  ],
+  "reviews": [
+    {
+      "pr": 226,
+      "status": "reviewed",
+      "retained_artifact_files_verified": 17,
+      "artifact_bindings_sha256": "850abc7820facab24711fba8843bac530b0c3612bdfa9b05778efb4b3fa07260",
+      "measured_runtime": {
+        "python": "3.11.15",
+        "torch": "2.11.0+cu128",
+        "device": "cpu",
+        "GPU_visible": false
+      },
+      "retained_metric_rows": 48,
+      "matched_update_records_per_profile": 1200,
+      "software_tests": "25 passed independently on Python3.12 / Torch2.13",
+      "final_metrics": {
+        "current": {
+          "normalized_rmse": 0.05337701737880707,
+          "normalized_mse": 0.002849105978384614,
+          "bias": [
+            0.02419854886829853,
+            -0.025228163227438927
+          ],
+          "max_context_rmse": 0.13970990478992462
+        },
+        "even_critic": {
+          "normalized_rmse": 0.042723894119262695,
+          "normalized_mse": 0.001825331011787057,
+          "bias": [
+            -0.0020387645345181227,
+            -0.0012302468530833721
+          ],
+          "max_context_rmse": 0.07994207739830017
+        },
+        "d_antithetic": {
+          "normalized_rmse": 0.05203981325030327,
+          "normalized_mse": 0.0027081419248133898,
+          "bias": [
+            0.023526256904006004,
+            -0.02324465662240982
+          ],
+          "max_context_rmse": 0.13668403029441833
+        }
+      },
+      "first_recorded_half_error": {
+        "current": 600,
+        "even_critic": 500,
+        "d_antithetic": 600
+      },
+      "comparison": {
+        "even_RMSE_relative_reduction": 0.19958258783815286,
+        "D_antithetic_RMSE_relative_reduction": 0.025052057873783062,
+        "fraction_MSE_gain_from_bias": 0.5940562910311671
+      },
+      "media": {
+        "gif": "pr226.gif",
+        "sha256": "28a01d30a3e66c5356b09b6532baf38dd2880e3ca99ba31c9f94c437e7253de8",
+        "bytes": 520583,
+        "frames": 16,
+        "steps": [
+          0,
+          10,
+          25,
+          50,
+          100,
+          200,
+          300,
+          400,
+          500,
+          600,
+          700,
+          800,
+          900,
+          1000,
+          1100,
+          1200
+        ],
+        "interpolation": false,
+        "poster": "pr226.png",
+        "poster_sha256": "adfd7c3775d96effb364c6b8db99269b6950b04169bf276c6b7757249f3d7494",
+        "sampling_law": "clean stock-selected served output; live matches; disjoint reporting grid"
+      },
+      "new_training_updates": 0,
+      "head_sha": "0e69fa60bf151762f8edc49bb714c6b7f8cf4804",
+      "base_sha": "6ec7e5788e14ea15ddc3e16ac71110458108b6a6",
+      "source_sha256": {
+        "examples/e22_paired_residual_toy.py": "54cc1817a4dee15aa760d654ef0f68aa5cbb09091c8fce25a227442b23395acd",
+        "experiments/paired_residual_oracle.py": "060b1770f67760c7abd7cbe69ff784a19719975c30efca72d0802d2aa409b7a2",
+        "reports/paired-residual-toy/README.md": "56a6fd0773d625db8aedc8e6c90b15a53285dc105054997f07b9677823147f44",
+        "reports/paired-residual-toy/convergence.svg": "42ed55cec571ed5cc26bb3c230336f885a474de284f4c2bd23e1dcdae359f01b",
+        "reports/paired-residual-toy/measurements.json": "1cd72f9726c3e03588c332cd6cee1a7d8b79f93cc0c350dc5a818f80782faa30",
+        "reports/paired-residual-toy/oracle.json": "98405f3c6ff69465ead5e1686e7da322a0323438b96e5e63b1cf62f5032696ac",
+        "reports/paired-residual-toy/protocol.json": "67a9e271792d589b0db48b9563c78cc540b2c270026391da5a94e2e5d57a7db3",
+        "tests/test_e22_paired_residual_toy.py": "88fb6974c820af32c02f366ffa3ddeda7d0512f3abb83ef79b5954509e5f385e",
+        "tests/test_paired_residual_oracle.py": "81ea3c3f64d0f485d90ef49455b489e7aea19874102d19d0e77f8ecec99a4f59"
+      },
+      "review_runtime": {
+        "python": "3.12.13",
+        "torch": "2.13.0+cu126",
+        "device": "cpu"
+      }
+    },
+    {
+      "pr": 227,
+      "status": "reviewed",
+      "retained_checkpoint_files_verified": 136,
+      "artifact_bindings_sha256": "8170d775f830ae4149a4cecef58721fc5b1715ad65428ba7e639a3493f26e52e",
+      "measured_runtime": {
+        "python": "3.12.13",
+        "torch": "2.13.0+cu126",
+        "cpu": "x86_64",
+        "platform": "Linux-7.0.11-76070011-generic-x86_64-with-glibc2.35",
+        "device": "cpu",
+        "threads": 1
+      },
+      "independently_rescored_test_rows": 132,
+      "mandatory_common_judges": 4,
+      "maximum_absolute_game_score_difference": 0.0,
+      "software_tests": "14 passed, 1 opt-in learned test skipped; tensor assertion separately passed retained artifacts",
+      "final_metrics": {
+        "ordinary_native_game@800": {
+          "ordinary_native_game": 0.7190849781036377,
+          "particle_native_game": 1.0228853225708008,
+          "ordinary_mse_reference": 0.7091378569602966,
+          "neutral_particle": 0.70229172706604,
+          "zero_code_minus_live": 0.7556474208831787
+        },
+        "ordinary_native_game@6400": {
+          "ordinary_native_game": 0.9235867857933044,
+          "particle_native_game": 1.5043978691101074,
+          "ordinary_mse_reference": 0.8198766112327576,
+          "neutral_particle": 0.8027129769325256,
+          "zero_code_minus_live": 0.5848477482795715
+        },
+        "particle_native_game@800": {
+          "ordinary_native_game": 0.7252562642097473,
+          "particle_native_game": 1.1854112148284912,
+          "ordinary_mse_reference": 0.7098462581634521,
+          "neutral_particle": 0.7045040130615234,
+          "zero_code_minus_live": 1.1852797269821167
+        },
+        "particle_native_game@6400": {
+          "ordinary_native_game": 0.9307924509048462,
+          "particle_native_game": 2.304943561553955,
+          "ordinary_mse_reference": 0.8312075734138489,
+          "neutral_particle": 0.8007083535194397,
+          "zero_code_minus_live": 0.9303701519966125
+        }
+      },
+      "observational_repair": {
+        "sole_change": "fresh neutral loop before fixed checkpoint evaluation",
+        "training_ast_unchanged": true
+      },
+      "original_scoring_failure_preserved": true,
+      "owned_state_and_RNG_unchanged": true,
+      "synthetic_gate_control": {
+        "harmful_particle_codes_accepted": true,
+        "zero_code_minus_live_by_judge": {
+          "ordinary_native_game@800": -0.010000000000000009,
+          "ordinary_native_game@6400": -0.010000000000000009,
+          "particle_native_game@800": -0.010000000000000009,
+          "particle_native_game@6400": -0.010000000000000009
+        },
+        "note": "Synthetic scoring control exposes abs(delta) accepting the wrong direction; not an alternate trained model."
+      },
+      "media": {
+        "gif": "pr227.gif",
+        "sha256": "564d15cb400485acd2c4def058eb7f13ae1622e03574a85b6f18b53920fe3469",
+        "bytes": 1279095,
+        "frames": 33,
+        "steps": [
+          0,
+          200,
+          400,
+          600,
+          800,
+          1000,
+          1200,
+          1400,
+          1600,
+          1800,
+          2000,
+          2200,
+          2400,
+          2600,
+          2800,
+          3000,
+          3200,
+          3400,
+          3600,
+          3800,
+          4000,
+          4200,
+          4400,
+          4600,
+          4800,
+          5000,
+          5200,
+          5400,
+          5600,
+          5800,
+          6000,
+          6200,
+          6400
+        ],
+        "interpolation": false,
+        "poster": "pr227.png",
+        "poster_sha256": "1bf62ff6cf758e7725b81c55ed1d84df054b5ea19e55c27b036343695f307c42",
+        "sampling_law": "clean FAST; no DV12/output noise in predictions; fixed private paired score panels sigma0.125"
+      },
+      "new_training_updates": 0,
+      "head_sha": "b0e4f420856d7607baa98cbef488e569d20a3f31",
+      "base_sha": "6ec7e5788e14ea15ddc3e16ac71110458108b6a6",
+      "source_sha256": {
+        ".gitignore": "4b54e4236448c89894d20e6e8689a51f5df37e590f03a3a7b0016d24c7be8ce3",
+        "docs/e22_routed_convergence.md": "b1e2b4330b2c49a8c0c8a8adad867165cfd5a760cb69a2eae36ae6b7df850b1d",
+        "docs/e22_routed_convergence_basis_results.json": "f34ea964d0758bca5c25d99fe18b3924ad7e1561fd84f4f4dc439cb1fbc08469",
+        "docs/e22_routed_convergence_neutral_results.json": "279ca602ff37f5a6358575be7695e630cd2c4537c0517e3b183d4b877617226d",
+        "docs/e22_routed_convergence_neutral_v1.json": "7313909fc91b57d9945a62bd02dc4a2d3f71af667a9e309276dec1a7233e4e93",
+        "docs/e22_routed_convergence_results.json": "dc88f42d4a075067603c7146a3bdee319f9823c7e809f8bdb3e49e730a2cc92b",
+        "docs/e22_routed_convergence_software.json": "2d72ea7a5b0bc70d1105f4ffe41e4626d68bce2dec3f997c6ff0cbab0485909c",
+        "docs/e22_routed_convergence_v1.json": "8fbb7882ee2c57e4ea939a4cd642058fa5ddca21f6a139f16191b4822ff16d02",
+        "examples/diagnose_e22_routed_convergence_basis.py": "82163e505c9692a86660fcd5f317b2dce7db387971954723854b67c184e9d596",
+        "examples/e22_routed_convergence.py": "b814bc0cac728d02290f6f0ed712dd6bb9483074f11666c5c012e72cd4d8f6b6",
+        "examples/e22_routed_convergence_neutral.py": "1b9154bd653db5e5cc629877297eab6a06bbd3f1ac9cabb1858eef36a083724c",
+        "examples/evaluate_e22_routed_convergence_neutral.py": "768e1a5204780fe511f857079bcc0dd017b8947c04c135224002e174dad4a438",
+        "examples/run_e22_routed_convergence.py": "2421e447b79489d1f6be3721994f5edabed6af6ddbc3ebe7813ddcec109ce7c5",
+        "tests/test_e22_routed_convergence.py": "8ed66cf19e261b61561e6c80a0d1635ec17111a0c6e0e4273e9333e0cc24be15",
+        "tests/test_e22_routed_convergence_long.py": "a2dfc34437fe860b8ab4d0c3b1dbe6ec88f98048e52088a73132a1b76a61d85b",
+        "tests/test_e22_routed_convergence_neutral.py": "a62dac6f2e2ef11ef3921c863b2833b09a4ff46a56343516c1a061ac68debd24"
+      },
+      "review_runtime": {
+        "python": "3.12.13",
+        "torch": "2.13.0+cu126",
+        "device": "cpu"
+      }
+    }
+  ],
+  "pull_requests": [
+    {
+      "number": 226,
+      "title": "Add GAN-only paired-residual convergence diagnostic",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/226",
+      "head_sha": "0e69fa60bf151762f8edc49bb714c6b7f8cf4804",
+      "base_sha": "6ec7e5788e14ea15ddc3e16ac71110458108b6a6",
+      "base": "develop",
+      "scope": "Supplemental native convergence test; pinned retained-evidence review",
+      "action": "All three improve; even critic lowers final RMSE 19.96%",
+      "python_files": [
+        "A\texamples/e22_paired_residual_toy.py",
+        "A\texperiments/paired_residual_oracle.py",
+        "A\ttests/test_e22_paired_residual_toy.py",
+        "A\ttests/test_paired_residual_oracle.py"
+      ],
+      "complete_local_diff": true
+    },
+    {
+      "number": 227,
+      "title": "Add routed convergence toy with particle initialization control",
+      "url": "https://github.com/255BITS/ParticleGAN/pull/227",
+      "head_sha": "b0e4f420856d7607baa98cbef488e569d20a3f31",
+      "base_sha": "6ec7e5788e14ea15ddc3e16ac71110458108b6a6",
+      "base": "develop",
+      "scope": "Supplemental native convergence test; pinned retained-evidence review",
+      "action": "H/b control closes the gap; unsigned code-ablation gate needs tightening",
+      "python_files": [
+        "A\texamples/diagnose_e22_routed_convergence_basis.py",
+        "A\texamples/e22_routed_convergence.py",
+        "A\texamples/e22_routed_convergence_neutral.py",
+        "A\texamples/evaluate_e22_routed_convergence_neutral.py",
+        "A\texamples/run_e22_routed_convergence.py",
+        "A\ttests/test_e22_routed_convergence.py",
+        "A\ttests/test_e22_routed_convergence_long.py",
+        "A\ttests/test_e22_routed_convergence_neutral.py"
+      ],
+      "complete_local_diff": true
+    }
+  ],
+  "source_receipts": [
+    {
+      "pr": 226,
+      "head_sha": "0e69fa60bf151762f8edc49bb714c6b7f8cf4804",
+      "path": "examples/e22_paired_residual_toy.py",
+      "sha256": "54cc1817a4dee15aa760d654ef0f68aa5cbb09091c8fce25a227442b23395acd",
+      "role": "supplemental reviewed source"
+    },
+    {
+      "pr": 226,
+      "head_sha": "0e69fa60bf151762f8edc49bb714c6b7f8cf4804",
+      "path": "experiments/paired_residual_oracle.py",
+      "sha256": "060b1770f67760c7abd7cbe69ff784a19719975c30efca72d0802d2aa409b7a2",
+      "role": "supplemental reviewed source"
+    },
+    {
+      "pr": 226,
+      "head_sha": "0e69fa60bf151762f8edc49bb714c6b7f8cf4804",
+      "path": "reports/paired-residual-toy/README.md",
+      "sha256": "56a6fd0773d625db8aedc8e6c90b15a53285dc105054997f07b9677823147f44",
+      "role": "supplemental reviewed source"
+    },
+    {
+      "pr": 226,
+      "head_sha": "0e69fa60bf151762f8edc49bb714c6b7f8cf4804",
+      "path": "reports/paired-residual-toy/convergence.svg",
+      "sha256": "42ed55cec571ed5cc26bb3c230336f885a474de284f4c2bd23e1dcdae359f01b",
+      "role": "supplemental reviewed source"
+    },
+    {
+      "pr": 226,
+      "head_sha": "0e69fa60bf151762f8edc49bb714c6b7f8cf4804",
+      "path": "reports/paired-residual-toy/measurements.json",
+      "sha256": "1cd72f9726c3e03588c332cd6cee1a7d8b79f93cc0c350dc5a818f80782faa30",
+      "role": "supplemental reviewed source"
+    },
+    {
+      "pr": 226,
+      "head_sha": "0e69fa60bf151762f8edc49bb714c6b7f8cf4804",
+      "path": "reports/paired-residual-toy/oracle.json",
+      "sha256": "98405f3c6ff69465ead5e1686e7da322a0323438b96e5e63b1cf62f5032696ac",
+      "role": "supplemental reviewed source"
+    },
+    {
+      "pr": 226,
+      "head_sha": "0e69fa60bf151762f8edc49bb714c6b7f8cf4804",
+      "path": "reports/paired-residual-toy/protocol.json",
+      "sha256": "67a9e271792d589b0db48b9563c78cc540b2c270026391da5a94e2e5d57a7db3",
+      "role": "supplemental reviewed source"
+    },
+    {
+      "pr": 226,
+      "head_sha": "0e69fa60bf151762f8edc49bb714c6b7f8cf4804",
+      "path": "tests/test_e22_paired_residual_toy.py",
+      "sha256": "88fb6974c820af32c02f366ffa3ddeda7d0512f3abb83ef79b5954509e5f385e",
+      "role": "supplemental reviewed source"
+    },
+    {
+      "pr": 226,
+      "head_sha": "0e69fa60bf151762f8edc49bb714c6b7f8cf4804",
+      "path": "tests/test_paired_residual_oracle.py",
+      "sha256": "81ea3c3f64d0f485d90ef49455b489e7aea19874102d19d0e77f8ecec99a4f59",
+      "role": "supplemental reviewed source"
+    },
+    {
+      "pr": 227,
+      "head_sha": "b0e4f420856d7607baa98cbef488e569d20a3f31",
+      "path": ".gitignore",
+      "sha256": "4b54e4236448c89894d20e6e8689a51f5df37e590f03a3a7b0016d24c7be8ce3",
+      "role": "supplemental reviewed source"
+    },
+    {
+      "pr": 227,
+      "head_sha": "b0e4f420856d7607baa98cbef488e569d20a3f31",
+      "path": "docs/e22_routed_convergence.md",
+      "sha256": "b1e2b4330b2c49a8c0c8a8adad867165cfd5a760cb69a2eae36ae6b7df850b1d",
+      "role": "supplemental reviewed source"
+    },
+    {
+      "pr": 227,
+      "head_sha": "b0e4f420856d7607baa98cbef488e569d20a3f31",
+      "path": "docs/e22_routed_convergence_basis_results.json",
+      "sha256": "f34ea964d0758bca5c25d99fe18b3924ad7e1561fd84f4f4dc439cb1fbc08469",
+      "role": "supplemental reviewed source"
+    },
+    {
+      "pr": 227,
+      "head_sha": "b0e4f420856d7607baa98cbef488e569d20a3f31",
+      "path": "docs/e22_routed_convergence_neutral_results.json",
+      "sha256": "279ca602ff37f5a6358575be7695e630cd2c4537c0517e3b183d4b877617226d",
+      "role": "supplemental reviewed source"
+    },
+    {
+      "pr": 227,
+      "head_sha": "b0e4f420856d7607baa98cbef488e569d20a3f31",
+      "path": "docs/e22_routed_convergence_neutral_v1.json",
+      "sha256": "7313909fc91b57d9945a62bd02dc4a2d3f71af667a9e309276dec1a7233e4e93",
+      "role": "supplemental reviewed source"
+    },
+    {
+      "pr": 227,
+      "head_sha": "b0e4f420856d7607baa98cbef488e569d20a3f31",
+      "path": "docs/e22_routed_convergence_results.json",
+      "sha256": "dc88f42d4a075067603c7146a3bdee319f9823c7e809f8bdb3e49e730a2cc92b",
+      "role": "supplemental reviewed source"
+    },
+    {
+      "pr": 227,
+      "head_sha": "b0e4f420856d7607baa98cbef488e569d20a3f31",
+      "path": "docs/e22_routed_convergence_software.json",
+      "sha256": "2d72ea7a5b0bc70d1105f4ffe41e4626d68bce2dec3f997c6ff0cbab0485909c",
+      "role": "supplemental reviewed source"
+    },
+    {
+      "pr": 227,
+      "head_sha": "b0e4f420856d7607baa98cbef488e569d20a3f31",
+      "path": "docs/e22_routed_convergence_v1.json",
+      "sha256": "8fbb7882ee2c57e4ea939a4cd642058fa5ddca21f6a139f16191b4822ff16d02",
+      "role": "supplemental reviewed source"
+    },
+    {
+      "pr": 227,
+      "head_sha": "b0e4f420856d7607baa98cbef488e569d20a3f31",
+      "path": "examples/diagnose_e22_routed_convergence_basis.py",
+      "sha256": "82163e505c9692a86660fcd5f317b2dce7db387971954723854b67c184e9d596",
+      "role": "supplemental reviewed source"
+    },
+    {
+      "pr": 227,
+      "head_sha": "b0e4f420856d7607baa98cbef488e569d20a3f31",
+      "path": "examples/e22_routed_convergence.py",
+      "sha256": "b814bc0cac728d02290f6f0ed712dd6bb9483074f11666c5c012e72cd4d8f6b6",
+      "role": "supplemental reviewed source"
+    },
+    {
+      "pr": 227,
+      "head_sha": "b0e4f420856d7607baa98cbef488e569d20a3f31",
+      "path": "examples/e22_routed_convergence_neutral.py",
+      "sha256": "1b9154bd653db5e5cc629877297eab6a06bbd3f1ac9cabb1858eef36a083724c",
+      "role": "supplemental reviewed source"
+    },
+    {
+      "pr": 227,
+      "head_sha": "b0e4f420856d7607baa98cbef488e569d20a3f31",
+      "path": "examples/evaluate_e22_routed_convergence_neutral.py",
+      "sha256": "768e1a5204780fe511f857079bcc0dd017b8947c04c135224002e174dad4a438",
+      "role": "supplemental reviewed source"
+    },
+    {
+      "pr": 227,
+      "head_sha": "b0e4f420856d7607baa98cbef488e569d20a3f31",
+      "path": "examples/run_e22_routed_convergence.py",
+      "sha256": "2421e447b79489d1f6be3721994f5edabed6af6ddbc3ebe7813ddcec109ce7c5",
+      "role": "supplemental reviewed source"
+    },
+    {
+      "pr": 227,
+      "head_sha": "b0e4f420856d7607baa98cbef488e569d20a3f31",
+      "path": "tests/test_e22_routed_convergence.py",
+      "sha256": "8ed66cf19e261b61561e6c80a0d1635ec17111a0c6e0e4273e9333e0cc24be15",
+      "role": "supplemental reviewed source"
+    },
+    {
+      "pr": 227,
+      "head_sha": "b0e4f420856d7607baa98cbef488e569d20a3f31",
+      "path": "tests/test_e22_routed_convergence_long.py",
+      "sha256": "a2dfc34437fe860b8ab4d0c3b1dbe6ec88f98048e52088a73132a1b76a61d85b",
+      "role": "supplemental reviewed source"
+    },
+    {
+      "pr": 227,
+      "head_sha": "b0e4f420856d7607baa98cbef488e569d20a3f31",
+      "path": "tests/test_e22_routed_convergence_neutral.py",
+      "sha256": "a62dac6f2e2ef11ef3921c863b2833b09a4ff46a56343516c1a061ac68debd24",
+      "role": "supplemental reviewed source"
+    }
+  ]
+}

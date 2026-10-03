@@ -1,0 +1,62 @@
+{
+  "candidate_id": "context:report/toy100/critic_signal_attempt",
+  "candidate_revision": "ffab87b90e4370c08c92b408e6ab52b806688f97f2b5510b576a03604fe27312",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "unknown",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Narrative context only; no scientific pass is inferred.",
+  "evidence_scope": "historical",
+  "hypothesis": "Constant-rate GAN acquisition leader H",
+  "mechanism_class": "unknown",
+  "next_action": "Read the linked narrative and normalize any remaining exact experiment identities before scientific comparison.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "family": "report/toy100/critic_signal_attempt",
+      "narrative_sources": [
+        {
+          "git_blob": "16b58fac869bb5ae985c86e9bbf5cf713621fb3a",
+          "path": "reports/toy100/critic_signal_attempt/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "216705b02d6e354170d583136aed1efbb63e243de5756230f41b2ae5563033bf",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/critic_signal_attempt/README.md"
+        }
+      ],
+      "structured_sources_imported": [],
+      "summary_excerpt": "# Constant-rate GAN acquisition leader H\n\n**H passes all ten frozen cold screening gates. Its own-state continuation fails,\nso it is an acquisition reference, not a stable production replacement.**\n\nCandidate: `h_n05r06_mixup_c0p01_lr15`. The generator and learned particles use\nonly the logistic relativistic-pair discriminator objective. The discriminator\nuses fixed input noise 0.05, R1+R2 coefficient 0.6 and interpolation consistency\ncoefficient 0.01. Actual Adam rates stay at G/D 0.0015 and particles 0.003, with\nbetas (0, 0.999). Legacy coverage, residual-target fitting and particle\nregularization are disabled. No mode labels or evaluation metrics enter updates.\n\nThe exact [recipe](best-candidate.json) includes both the base configuration and\nthe applied experimental overrides. The config alone does not implement H.\n\n| Measured evidence | Result | Seconds |\n| --- | --- | ---: |\n| Trajectory, 400 updates | PASS; MSE 0.002905043 | 2.15 |\n| Cold ring, 1,200 updates | PASS; 8/8 modes, HQ 0.999267578, five terminal passing checks | 11.52 |\n| Ten ordered cold toy gates | All PASS | 92.65 total |\n| Own-state hold, 1,200 further updates | FAIL; 750/1,200 dense checks pass; final 5 modes, HQ 0.209228516 | 18.08 |\n\nThe ten cold gates are trajectory, mode_hold, residual_student, img_stripes2,\nimg_bars4, vector_overlap, img_blobs4, img_intensity2, vector_unequal_mass and\nvector_unequal_w"
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-context-report-toy100-critic-signal-attempt-84c41c02a33e",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "16b58fac869bb5ae985c86e9bbf5cf713621fb3a",
+    "path": "reports/toy100/critic_signal_attempt/README.md",
+    "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "sha256": "216705b02d6e354170d583136aed1efbb63e243de5756230f41b2ae5563033bf",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/critic_signal_attempt/README.md"
+  },
+  "task_results": []
+}

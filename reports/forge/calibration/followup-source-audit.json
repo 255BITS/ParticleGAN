@@ -1,0 +1,70 @@
+{
+  "evidence": [
+    {
+      "git_blob": "5f97c55ae7ce3891efddc0c9104d7de6cece0dbb",
+      "path": "reports/toy100/lrfree-search/prior-ema-relaxation/README.md",
+      "revision": "bb9036e33557b23b30293811dd95829a04112388",
+      "sha256": "3b7fc301cb52343a8ecc4da3eca6c2f780aac2223aa06d872d3fc1c89a33001e",
+      "url": "https://github.com/255BITS/ParticleGAN/blob/bb9036e33557b23b30293811dd95829a04112388/reports/toy100/lrfree-search/prior-ema-relaxation/README.md"
+    },
+    {
+      "git_blob": "94769a2191b35292e234f2ebf59de65c66f8a090",
+      "path": "reports/toy100/lrfree-search/prior-ema-relaxation/manifest.json",
+      "revision": "bb9036e33557b23b30293811dd95829a04112388",
+      "sha256": "793ad255c4b7f6b839d6358598ab39f4733fc8777713f41e0dcc3476328a7e39",
+      "url": "https://github.com/255BITS/ParticleGAN/blob/bb9036e33557b23b30293811dd95829a04112388/reports/toy100/lrfree-search/prior-ema-relaxation/manifest.json"
+    },
+    {
+      "git_blob": "3bc7e0bb80283bf1c4f9133ad04fb7700966362c",
+      "path": "reports/toy100/lrfree-search/prior-ema-relaxation/overrides.json",
+      "revision": "bb9036e33557b23b30293811dd95829a04112388",
+      "sha256": "ea80e19b283cf921f162b2c01d9fccc992cffacd2e8bc581cdfd80659b7d6b9f",
+      "url": "https://github.com/255BITS/ParticleGAN/blob/bb9036e33557b23b30293811dd95829a04112388/reports/toy100/lrfree-search/prior-ema-relaxation/overrides.json"
+    },
+    {
+      "git_blob": "12d3d7ba5eb9fb6288de9e7fe29267e06ca33ad6",
+      "path": "reports/toy100/lrfree-search/prior-ema-relaxation/canonical-staggered100/native-noisy-verdict.json",
+      "revision": "bb9036e33557b23b30293811dd95829a04112388",
+      "sha256": "665080def9845e88ded1b18b9bb40ffff6580970d5d13f6ddb66137e244277c2",
+      "url": "https://github.com/255BITS/ParticleGAN/blob/bb9036e33557b23b30293811dd95829a04112388/reports/toy100/lrfree-search/prior-ema-relaxation/canonical-staggered100/native-noisy-verdict.json"
+    },
+    {
+      "git_blob": "ade7882627d96aaf7d30a47eb1d2f006a8b9296a",
+      "path": "reports/toy100/lrfree-search/prior-ema-relaxation/canonical-staggered100/job-header.json",
+      "revision": "bb9036e33557b23b30293811dd95829a04112388",
+      "sha256": "5dd03d28e992e533ead75f8c0601c5aaa0bb7e37f0cafee659655b5fb9501399",
+      "url": "https://github.com/255BITS/ParticleGAN/blob/bb9036e33557b23b30293811dd95829a04112388/reports/toy100/lrfree-search/prior-ema-relaxation/canonical-staggered100/job-header.json"
+    }
+  ],
+  "new_distinct_lineage": {
+    "canonical_host": {
+      "evidence": "canonical-staggered100/native-noisy-verdict.json",
+      "final_center_rms_sigma": 0.20266461741728897,
+      "passing_checks": 22,
+      "status": "FAIL",
+      "terminal_checks_passed": 4
+    },
+    "default_promotion": "BLOCKED",
+    "diagnostic_host": {
+      "current_qualification_reuse": false,
+      "host": "diagnostic fresh batch per callback; differs from original frozen cached callback",
+      "native_passes": 3,
+      "native_total": 3,
+      "reason": "Fresh callback batches change training inputs relative to the frozen cached-callback host.",
+      "status": "PASS"
+    },
+    "name": "prior-ema-relaxation",
+    "package_sha256": "64f82d9edba2a1422206b8474867cfdd35a793e42f24727c4e08fb79d0d532fc",
+    "scoring_weights": "live noisy; prior-EMA is a training mechanism, not output-EMA scoring"
+  },
+  "next_action": "Obtain exact missing-claim receipts; keep corrected diagnostic and canonical host cohorts separate.",
+  "pinned_original_revision": "0d52b2c8b4e985a7859ef7ac7f2f0c00b510379b",
+  "revision": "bb9036e33557b23b30293811dd95829a04112388",
+  "schema_version": 1,
+  "searched_scope": "Tracked PR155 report Markdown and latest PR metadata at this revision; no missing claim is treated as disproven.",
+  "unbound_user_reported_claims": [
+    "dt075 14k continuation",
+    "EMA .995 D-tracking native 3/3",
+    "sub-.03 sigma sensitivity"
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "status": "FROZEN_BEFORE_MEASUREMENT",
+  "source_and_input_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra8-quality/grid-neighbor-subset/PROTOCOL.md": "4c9373360df26bd0ea96c9a64c4ff0f5ff98e0987525402d74ff780757ce293e",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra8-quality/grid-neighbor-subset/probe.py": "1888044aa9cafc4f18e547f1d69c0a42460810ba14c573850f03f1fc2885363d",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra8-quality/grid-neighbor-subset/prepare.py": "db858038b583470dcdae3dcd741d1ab27bea117565a2db601b488e48e2e4bf50",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra8-quality/grid-covariance/FROZEN.json": "351686a047c44d4f2ba9875da8810b2f62801e88de3e0e10e8ce24fce54f483a",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/post-ra8-quality/grid-covariance/result.json": "453c0a6f02fd8403fdd7d6758b15f011a3b20dff62c8cf74fff4da6c820fd320",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/pkg-CB64-RA8/particlegan/feature_cells.py": "5d0d0f938b90bb1ae37c4b14709c220dd2334e3938d1821281df34ee85e37ddf",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra8/READY.json": "f2f117d650dbe8eca58c0313d07b661a25ad953bd6b3b30c99507510ca9e5949",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra8/screens/runs/grid100/final-state.pt": "6a76bdb24291213deb2ba1305e89be6d1d73ad31edc6574f91e9767137dfa229"
+  }
+}

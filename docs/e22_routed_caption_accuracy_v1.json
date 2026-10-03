@@ -1,0 +1,151 @@
+{
+  "task": "routed_caption_accuracy_v1",
+  "status": "prepared new fixed portable benchmark; no science executed",
+  "question": "Can the imported ParticleGAN API learn routed particle caption edits that beat ordinary LoRA at the fixed terminal budget, with beneficial codes across all six sources?",
+  "arms": [
+    "ordinary_BF16",
+    "particle_BF16"
+  ],
+  "geometry": {
+    "width": 576,
+    "text": 768,
+    "rank": 16,
+    "tokens": 256,
+    "length": 128,
+    "heads": 9,
+    "output": 16,
+    "frequency": 256
+  },
+  "sites": [
+    "ctx_proj",
+    "block.self_attn.qkv",
+    "block.self_attn.proj",
+    "block.cross_attn.q",
+    "block.cross_attn.kv",
+    "block.cross_attn.proj"
+  ],
+  "steps": 512,
+  "seconds": 300,
+  "device": "cuda:0",
+  "physical_gpu": 0,
+  "external_timeout_seconds": 300,
+  "external_kill_grace_seconds": 5,
+  "accuracy_thresholds": {
+    "relative_aggregate_improvement_gte": 0.001,
+    "source_harm_lte": 1e-06,
+    "relative_code_benefit_gte": 0.001,
+    "code_beneficial_every_source": true,
+    "bank_router_live_fraction_gte": 0.9,
+    "live_denominator": 511
+  },
+  "evaluation": {
+    "metric": "Unscaled physical source-prediction minus frozen positive-caption-teacher RMSE; float64 coordinate/context reductions. Offline only.",
+    "endpoint": 512,
+    "test_contexts": 48,
+    "sources": 6,
+    "contexts_per_source": 8,
+    "source_weighting": "Aggregate over all48 contexts; six separate equally sized source reductions.",
+    "code_ablation": "At512 only, native public routed generation with all six returned mixed codes replaced by zero; same model/teacher/context, no training.",
+    "no_output_training": "No output-MSE objective, structural guard, coefficient choice, checkpoint selection or stopping rule.",
+    "oracle_destructive_controls": "Exact-zero and unit-error oracle, known positive gate, no-change failure, one-source-harm failure and nonfinite rejection before any training."
+  },
+  "media_steps": [
+    0,
+    64,
+    128,
+    256,
+    384,
+    512
+  ],
+  "media_indices": [
+    0,
+    8,
+    16,
+    24,
+    32,
+    40,
+    1,
+    9
+  ],
+  "media": {
+    "role": "Visual-only actual clean native observations; does not alter the terminal scientific gate.",
+    "context": "First six indices give one query/source atTESTtime.18, latent occurrence3; last two are fixed occurrence4 B4 padding. Render first six.",
+    "arrays": "Actual observed physical residuals, zero target-residual arrays and fixed context/source identities; no stock or reconstructed training trajectory.",
+    "immutability": "Each capture checks native policy state including diagnostics/RNG, plus owned caller streams/globals, modes, gradient buffers and closed route lifecycle.",
+    "goal": "Target0 beside ordinary and particle16x16 maps of RMS over all16 physical patch coordinates.",
+    "axes_colors": "Constant16x16 patch axes, white0/redinitial observed maximum. Initial-only scale fixed across all frames.",
+    "render_seconds": 60,
+    "render_device": "cpu",
+    "render_models_or_native_updates": 0,
+    "optional_render_dependencies": "NumPy and Pillow>=10.1; rendering refuses to overwrite existing GIF, PNG or media receipt.",
+    "command": "python -m examples.render_e22_routed_caption_accuracy --run-directory runs/routed-caption-accuracy-v1"
+  },
+  "prior": {
+    "kind": "particle_cloud",
+    "sigma": 0,
+    "num_particles": 128,
+    "z_dim": 4,
+    "exception": "The task requires one shared trainable dense routing bank. This explicit particle-cloud/R2 exception supplies no Forge learned-MoG or public-default qualification.",
+    "initialization": "Public init.deterministic_orthogonal_ on recipe.make_prior(); preserve prior.to(device).z nn.Parameter ownership."
+  },
+  "initialization": {
+    "api": "Public init.initialize_(method=sample_distributions_v1), before EMA/policy construction.",
+    "named_stream": "sha256(routed-caption-geometry-v1:{role}:{full_parameter_name}) first8 little-endian modulo2**63-1; retained exactly from prior geometry fixture.",
+    "teacher": "Same public-initialized pure one-block frozen FP32-stored backbone; positive caption replaces source, same latent/time/empty half. No teacher adapters or reachability/alignment assumption.",
+    "branches": "Common named Down values; Up0; particle H/b0 and sampled nonzeroC. Both Down/Up use BF16 matmuls, stored parameters remainFP32.",
+    "restore": "Public E22Policy.load_state_dict; no initialization of restored learned owners. Explicit caller stream/mode/gradient restoration.",
+    "placeholder_change": "This new unexecuted fixture preserves the public prior nn.Parameter instead of the earlier geometry fixture plain Tensor. Initial values and mathematical routing law remain the same; ownership is recorded explicitly."
+  },
+  "native_law": {
+    "particle_recipe": "e22_routed",
+    "ordinary_recipe": "e22 with conditional rows and atom-only row evidence/birth controls disabled",
+    "sigma": 0.125,
+    "batch_size": 4,
+    "guidance": 3,
+    "cfg_layout": "physicalB4\u2192B8 conditional-first/unconditional-second; routed mixer sees B\u00d72 halves",
+    "generator_router_lr": 5e-05,
+    "bank_critic_noise_rates": "Recipe defaults",
+    "D_G_DV12": "Unchanged public native particle forwarding, perturb=True for both native game forwards.",
+    "row_controls": "Public RoutedRows, shared full-model reruns, feature-only decision law, max_context_harm0/output_error_guardFalse, probe_interval100/reopen_guardsettled.",
+    "penalty": "Recipe.make_critic_penalty on per-token view with token pooling cancellation,16-dimensional native penalty coordinates.",
+    "sampling": "CPU7 B4 fit rows with replacement; CPU43 two Gaussian arrays perupdate; owned CPU/CUDA900 native penalty streams; policyseed21."
+  },
+  "input_law": {
+    "captions": "13 fixed synthetic captions; retained measured masked pooled Gram/mask lengths/valid and padded scalar statistics, generated token and padding directions.",
+    "latent_stream": "CPU102",
+    "caption_residual_stream": "CPU103",
+    "fit": "48: sixsources\u00d7times[.1,.35,.6,.85]\u00d7two latent draws",
+    "guard": "12: sixsources\u00d7times[.22,.72]\u00d7one disjoint draw",
+    "test": "48: sixsources\u00d7times[.18,.43,.68,.93]\u00d7two disjoint draws",
+    "source_to_target": "Synthetic indices1..6\u21927..12; empty0. Distinct paired captions, live teacher in every host forward.",
+    "difference_from_actual_caption": "This toy TEST includes novel times as well as held-out latents. Actual caption FIT/TEST share their ten-time grid."
+  },
+  "precision_backend": {
+    "allow_tf32": false,
+    "float32_matmul_precision": "highest",
+    "allow_bf16_reduced_precision_reduction": true
+  },
+  "imported_api": "Record actual imported path/hash/recipes and require only within-run identity. No permanent native revision or hash allowlist; future APIs can PASS.",
+  "science_pass": "Terminal RMSE and six-source accuracy/code benefit plus livebank/router/nonzeroC at all six sites. No requirement to reproduce historical failure or agree with learned critic rankings.",
+  "cli": "CUDA_VISIBLE_DEVICES=0 python -m examples.e22_routed_caption_accuracy --run --out runs/routed-caption-accuracy-v1",
+  "exit_codes": {
+    "0": "completed scientificPASS",
+    "1": "completed scientificFAIL",
+    "2": "incomplete/error including resource overrun"
+  },
+  "budget": "One2\u00d7512 quality campaign;300s from process startup through native cleanup/report/completion writes includes zero-update full-host prerequisites and visual captures. Separate CPU-only60s saved-state GIF rendering. No metric-dependent horizon/stop.",
+  "software": "Reduced12-wide/16-text/rank2/T4/L5/3heads CPU model only; four native updates reserved for2+2 exact public replay, <=20 total softwareupdates. No fullhost/CUDA/quality by preparation agents.",
+  "historical_scope": {
+    "geometry_source_sha256": "5104ec3ce8ac20d32af637c74a633e93a58428262fd07dcbcd8d0283cbd1296d",
+    "earlier_game_gate": "Immutable executed scientificFAIL; this is a new explicit accuracy variant, not regrading.",
+    "actual_BF16": "Actual caption BF166400 failed to beat ordinary/FP32 particles and harmed two sources under code ablation. Precision is not a verified remedy.",
+    "full_goal": "Original full Supra top score remains unbeaten."
+  },
+  "limits": [
+    "No pretrained Supra/T5 weights or token directions.",
+    "Masked pooled caption Gram and scalar token scales do not establish actual activation/attention geometry.",
+    "Cross-caption padding covariance/direction is synthetic, not measured.",
+    "Two arms differ in bridge/routing/native population capabilities; BF16 fairness is fixture matching, not a causal precision proof.",
+    "PASS qualifies this generated paired game only, not actual caption/full-Supra improvement."
+  ]
+}

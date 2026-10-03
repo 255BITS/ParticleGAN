@@ -1,0 +1,113 @@
+{
+  "status": "FROZEN_ADAPTATION",
+  "base_path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/performance/training-regression/count-review/ra8-prospective/audit_checkpoints.py",
+  "base_sha256": "2dbc740f3a81651173dd4b95a5601456953e542463893e15a313bbe36769b548",
+  "new_sha256": "e9c55f1e45b487985201979413dc471864b55f390aea21dbe729164c87ae80e5",
+  "substitutions": [
+    {
+      "kind": "lane/variant labels",
+      "before": "RA8/ra8",
+      "after": "RA9/ra9"
+    },
+    {
+      "before": "f2f117d650dbe8eca58c0313d07b661a25ad953bd6b3b30c99507510ca9e5949",
+      "after": "ba558fff064f5e5613656a1c1550431091efc9989f4dd34f1d85a58d17d55990",
+      "occurrences": 1
+    },
+    {
+      "before": "1292ef86f6b16d8928923fda267fb9f1efc6d8ac746a1f091a01397e032a3cf3",
+      "after": "09e6e11fd7c862d7d98fca9b5209e93be971d034ab0c6553cbd9a18bdeb6bec2",
+      "occurrences": 1
+    },
+    {
+      "before": "da29f10340ddd0cf4c8452e234496579699bd8ea7e1154da22ffeac18796065c",
+      "after": "2d00c77ae0e7545ac253ff81aa729158d69016be82edc117e5597bdd664b86ce",
+      "occurrences": 1
+    },
+    {
+      "before": "from types import SimpleNamespace\n",
+      "after": "from types import SimpleNamespace\nfrom fractions import Fraction\n",
+      "occurrences": 1
+    },
+    {
+      "before": "assert ready['backend_schema']==7",
+      "after": "assert ready['backend_schema']==8",
+      "occurrences": 1
+    },
+    {
+      "before": "trainer_schema=5,backend_schema=7",
+      "after": "trainer_schema=5,backend_schema=8",
+      "occurrences": 1
+    },
+    {
+      "before": "BACKEND_SCHEMA=7",
+      "after": "BACKEND_SCHEMA=8",
+      "occurrences": 1
+    },
+    {
+      "before": "assert bd['backend']=='feature_cells' and bd['backend_schema']==7",
+      "after": "assert bd['backend']=='feature_cells' and bd['backend_schema']==8",
+      "occurrences": 1
+    },
+    {
+      "before": "old-backend6",
+      "after": "old-backend7",
+      "occurrences": 3
+    },
+    {
+      "before": "bad['backend_schema']=6",
+      "after": "bad['backend_schema']=7",
+      "occurrences": 1
+    },
+    {
+      "before": "=={'lr','prior_lr_mult','d_lr_mult'}",
+      "after": "=={'lr','prior_lr_mult','d_lr_mult','birth_death_cells'}",
+      "occurrences": 1
+    },
+    {
+      "before": "assert (ROOT/'configs/overrides-CB64-RA9.json').read_bytes()==(ROOT/'configs/overrides-CB64-RA7.json').read_bytes()",
+      "after": "assert (ROOT/'configs/overrides-CB64-RA9.json').read_text()==(ROOT/'configs/overrides-CB64-RA8.json').read_text().replace('\"birth_death_cells\": 64','\"birth_death_cells\": 128')",
+      "occurrences": 1
+    },
+    {
+      "before": "08359ed4406148faf6915144ef4265d930829de53775eeafc4f17a11b5667b4c",
+      "after": "b3656ea7494413106484c556e53877900dd5ccebf2597b3f80b7d0e7d5ba4437",
+      "occurrences": 1
+    },
+    {
+      "before": "    assert settings['latent_kernel']=='bounded_local_dv12_lineage'",
+      "after": "    assert settings['cells']==cfg['recipe']['birth_death_cells']==128\n    assert settings['resolution_policy']==paired_methods['CELL_RESOLUTION_POLICY']\n    assert settings['latent_kernel']=='bounded_local_dv12_lineage'",
+      "occurrences": 1
+    },
+    {
+      "before": "k=settings['cells'];assert last['count_multiplicity']==3*k+2",
+      "after": "k=last['cells'];assert k==paired_methods['_fit_cell_count'](settings['cells'],(n+1)//2,last['metric_rank'])\n        assert last['count_multiplicity']==3*k+2",
+      "occurrences": 1
+    },
+    {
+      "before": "backend7_geometry_stamp_consistent",
+      "after": "backend8_geometry_stamp_and_actual_cap_consistent",
+      "occurrences": 1
+    },
+    {
+      "before": "paired_methods=dict(math=math,Q=.05,torch=torch)\nexec(compile(ast.Module(body=definitions,type_ignores=[]),'<frozen-backend7-semantic-checks>','exec'),paired_methods)",
+      "after": "resolution_nodes=[deepcopy(n) for n in feature_tree.body if (isinstance(n,ast.FunctionDef) and n.name=='_fit_cell_count') or (isinstance(n,ast.Assign) and any(isinstance(t,ast.Name) and t.id=='CELL_RESOLUTION_POLICY' for t in n.targets))]\nassert len(resolution_nodes)==2\npaired_methods=dict(math=math,Q=.05,torch=torch,Fraction=Fraction)\nexec(compile(ast.Module(body=resolution_nodes+definitions,type_ignores=[]),'<frozen-backend8-semantic-checks>','exec'),paired_methods)",
+      "occurrences": 1
+    }
+  ],
+  "scope": "All original sealed endpoint population/graph/action checks, with declared backend8/request128/actual even-fit cap state validation; no training or quality changes.",
+  "original_artifact_auditor_path": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/audit_learned.py",
+  "original_artifact_auditor_sha256": "683acf472985084a911edd6763d63d411772563d7fcb71df4a547d2a502347ba",
+  "original_artifact_auditor_unchanged": true,
+  "original_toy_gate": {
+    "precision_min": 0.9,
+    "coverage": 25,
+    "mass_tv_max": 0.1
+  },
+  "model_forwards": 0,
+  "gradients": 0,
+  "optimizer_updates": 0,
+  "new_emissions": 0,
+  "new_seeds": 0,
+  "cuda": false
+}

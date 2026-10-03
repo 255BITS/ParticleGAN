@@ -1,0 +1,9 @@
+# Completed learned-toy saved-artifact validity
+
+Reuse the qualified RA10 checker and unchanged original audit_learned.py authority. Preparation and completed-input sealing use stdlib source/hashes only. Bind the frozen RA11 candidate, exact original initialization/config/fixture/scorer/runtime maps, completed toy journal prefix/event and all ten original checkpoints before importing Torch or interpreting any PT. No constructor, model forward, sample, optimizer/update, new draw, scorer or CUDA context is permitted.
+
+The only affected checker changes are actual backend10, mean schema2 constants and output projection metadata/rank, plus the required sample_shape argument to the exact candidate scalar validator. Learned critic chart K/rank and3K+3 counts, row balances, lineage, population state, serving lease/expiry, original GPU-typed artifact fingerprints and data/RNG placements retain their qualified checks. Initial/no-frame contexts retain their explicit sentinels. No frame or prepared packet is serialized as semantic authority.
+
+Call the actual full-row action validator only on raw checkpoint state. Reaction-boundary moment/history/reset/lineage checks use raw row IDs available in that saved PT; intervening gradients and unsaved reactions are not reconstructed. Compressed JSON lists disclose lengths without identifying rows and are never expanded into fabricated historical IDs. Unsaved isolation IDs remain a stated limit; cumulative reset totals are checked separately.
+
+The original artifact authority retains its narrower three-threshold toy quality subgate verbatim. Root owns the full unchanged final toy gate, including min mass, and the separate full native grid gate. A VALID artifact receipt does not imply quality PASS or claim trajectory parity with RA9/RA10. Seal closed outputs/logs after one audit invocation and preserve any failure.

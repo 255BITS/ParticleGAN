@@ -1,0 +1,213 @@
+{
+  "candidate_id": "rg5-bcap",
+  "candidate_revision": "92dac014115eeb11585c5269d5cff05f025b323cd00882d770766a1424dc360e",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "live",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Historical recorded task outcomes: FAIL=1",
+  "evidence_scope": "historical",
+  "hypothesis": "Unknown; consult the linked source narrative.",
+  "mechanism_class": "unknown",
+  "next_action": "Bind compatible task, fixture, package, scoring, and complete raw evidence before qualification reuse.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "attempt_id": "rg5-bcap-toy-vector_unequal_width",
+      "environment": {
+        "ATEN_CPU_CAPABILITY": "avx2",
+        "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+        "CUDA_VISIBLE_DEVICES": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+        "LD_PRELOAD": null,
+        "MKL_ENABLE_INSTRUCTIONS": "AVX2"
+      },
+      "floors": null,
+      "role": "candidate"
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-rg5-bcap-b6e145fc72c1",
+  "record_type": "scientific",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "0089356f12173badfd6dc8d985efb5de55a5f72f",
+    "path": "reports/toy100/gap-fill-20260925/results-summary.json",
+    "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "sha256": "8272fb8fb5442da91326131b7100c73812ffd91016a81f5d9a9ffca97903fda4",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results-summary.json"
+  },
+  "task_results": [
+    {
+      "cost": {
+        "flops": null,
+        "flops_status": "unavailable",
+        "peak_gpu_mib": null,
+        "seconds": 57.936947636073455,
+        "steps": null,
+        "train_seconds": null
+      },
+      "diagnostics": {},
+      "evidence": [
+        {
+          "git_blob": "0089356f12173badfd6dc8d985efb5de55a5f72f",
+          "original_evidence": {
+            "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-vector_unequal_width/result.json",
+            "artifact_sha256": "539c06c3bae0f5278bd4544371e4098f736ae9c091cfb68d513adc579e736999",
+            "id": "rg5-bcap-toy-vector_unequal_width",
+            "snapshot": "results/rg5-bcap-toy-vector_unequal_width.json.gz",
+            "snapshot_sha256": "9ec1d41435c88897b1a4d0749902cb72ae3d2646c3a6ba4a81f32c1336f15823"
+          },
+          "path": "reports/toy100/gap-fill-20260925/results-summary.json",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "8272fb8fb5442da91326131b7100c73812ffd91016a81f5d9a9ffca97903fda4",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/toy100/gap-fill-20260925/results-summary.json"
+        }
+      ],
+      "evidence_scope": "historical",
+      "gate_status": "FAIL",
+      "metrics": {},
+      "raw_result": {
+        "artifact": "/ml2/hypergan/gan-attempts/gap-fill-20260925/out/rg5-bcap-toy-vector_unequal_width/result.json",
+        "artifact_sha256": "539c06c3bae0f5278bd4544371e4098f736ae9c091cfb68d513adc579e736999",
+        "candidate": "rg5-bcap",
+        "environment": {
+          "ATEN_CPU_CAPABILITY": "avx2",
+          "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
+          "CUDA_VISIBLE_DEVICES": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+          "LD_PRELOAD": null,
+          "MKL_ENABLE_INSTRUCTIONS": "AVX2"
+        },
+        "error": null,
+        "floors": null,
+        "id": "rg5-bcap-toy-vector_unequal_width",
+        "kind": "toy",
+        "live": {
+          "component_counts": [
+            954,
+            1101,
+            913,
+            1128
+          ],
+          "component_covariance_error": 0.4872245229780674,
+          "component_covariance_errors": [
+            0.5885316133499146,
+            0.8456589579582214,
+            0.265826016664505,
+            0.2488815039396286
+          ],
+          "component_mass": [
+            0.23291015625,
+            0.268798828125,
+            0.222900390625,
+            0.275390625
+          ],
+          "component_min_eigen_ratio": 0.0901743620634079,
+          "covariance_error": 0.025457678362727165,
+          "hq": 0.975830078125,
+          "mass_tv": 0.044189453125,
+          "mean_error": 0.03968469426035881,
+          "min_mass_ratio": 0.8916015625,
+          "sample_count": 4096,
+          "sw1_normalized": 0.0415736492972054,
+          "target_mass": [
+            0.25,
+            0.25,
+            0.25,
+            0.25
+          ],
+          "target_scale": 2.138371229171753
+        },
+        "raw_status": "FAIL",
+        "seconds": 57.936947636073455,
+        "snapshot": "results/rg5-bcap-toy-vector_unequal_width.json.gz",
+        "snapshot_sha256": "9ec1d41435c88897b1a4d0749902cb72ae3d2646c3a6ba4a81f32c1336f15823",
+        "task": "vector_unequal_width",
+        "verdict": {
+          "attempted": true,
+          "confirmation_fraction": 2.0,
+          "convergence": {
+            "complete": true,
+            "confirmed_seconds": null,
+            "confirmed_step": null,
+            "first_pass_step": null,
+            "minimum_stable_checks": 5,
+            "observations": 24,
+            "passing_observations": 0,
+            "passing_suffix": 0,
+            "stable_from_seconds": null,
+            "stable_from_step": null
+          },
+          "metrics": [
+            {
+              "margin": 0.13842635070279458,
+              "metric": "sw1_normalized",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.18,
+              "value": 0.0415736492972054
+            },
+            {
+              "margin": 0.105810546875,
+              "metric": "mass_tv",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.15,
+              "value": 0.044189453125
+            },
+            {
+              "margin": 0.12583007812500002,
+              "metric": "hq",
+              "op": ">=",
+              "status": "PASS",
+              "threshold": 0.85,
+              "value": 0.975830078125
+            },
+            {
+              "margin": 0.3627754770219326,
+              "metric": "component_covariance_error",
+              "op": "<=",
+              "status": "PASS",
+              "threshold": 0.85,
+              "value": 0.4872245229780674
+            },
+            {
+              "margin": -0.059825637936592096,
+              "metric": "component_min_eigen_ratio",
+              "op": ">=",
+              "status": "FAIL",
+              "threshold": 0.15,
+              "value": 0.0901743620634079
+            }
+          ],
+          "passed": false,
+          "shortfall": 0.07976751724878947,
+          "status": "FAIL"
+        }
+      },
+      "raw_status": "FAIL",
+      "reason": null,
+      "role": "candidate",
+      "task_id": "vector_unequal_width"
+    }
+  ]
+}

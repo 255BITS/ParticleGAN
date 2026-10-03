@@ -1,0 +1,11 @@
+# RA13 frozen lane source review
+
+The original `validation-ra13` source freeze omitted the external CB64-RA11 `screens/collect.py` and `screens/lane.py` imported by its collector. Root retained that untrained frozen lane and prepared `validation-ra13-r2` with both unchanged files pinned. The r2 freeze has103 guards; the numerical adapters/collector/wrappers remain byte unchanged. That resolves the identified source-identity gap. No remaining blocker was found.
+
+The adapted static screen reverses to the complete original AST after undoing only13 construction calls, the fixed original harness path, helper import and declared ring sampling API repair. Its schedules, resources, thresholds, hosts, scorers, stream transactions and native live/noisy draw remain original. The candidate accepts the detected fifth positional `indices` argument and preserves the `rows` alias. Ring sampling explicitly selects noisy/clean with identical seed9 streams; its noisy result remains primary.
+
+The moving adapter reverses to the complete original byte stream after undoing declared package/config paths, row-ID forwarding, memory fraction and checkpoint/mechanism instrumentation plus the two-turn nonvacuity assertion. The unchanged angle/real-batch/gate code applies two30-degree turns after500/1000 updates and judges both completed1000/1500 periods against the500 baseline. Explicit three-row/two-turn checks prevent vacuous `all([])` acceptance. Original seeds,20k gate draws, thresholds and1500-update schedule remain.
+
+The static native path retains all34 observations, final five20k paired clouds and independent100k holdout. The collector directly reuses the original CB64-RA11 native validator for initial parameters/range, config resources, terminal/event schedule, cloud shapes and official coverage/accuracy/source receipts. Both validator and its plan module are now guarded. The runner/header digest is the original ordered relative-source-path/NUL/raw-byte algorithm, distinct from the owner's compact JSON source-map digest.
+
+This review verifies source and closed metadata only. It does not run a model, scorer, checkpoint read, draw or update; future numerical quality and artifact validity remain separate evidence. Current API backend/rate selection is a declared candidate law, while original data/host/gate controls remain fixed.

@@ -1,0 +1,97 @@
+{
+  "candidate_id": "context:report/mog-vae",
+  "candidate_revision": "9271e22327cb5565f09e29698cf118108452b35b3016ce28d14ac380ed815878",
+  "claim_contract": {
+    "clock_free_eligible": false,
+    "ema_decay": null,
+    "learning_regime": "unverified",
+    "sampling_law": {
+      "eval_output_noise": null,
+      "options": null
+    },
+    "scoring_weights": "unknown",
+    "training_and_public_sampling_identical": "unknown"
+  },
+  "conclusion": "Narrative context only; no scientific pass is inferred.",
+  "evidence_scope": "historical",
+  "hypothesis": "Particle VAE toy experiments",
+  "mechanism_class": "unknown",
+  "next_action": "Read the linked narrative and normalize any remaining exact experiment identities before scientific comparison.",
+  "prior": {
+    "kind": "unknown",
+    "scope": "historical; new learned-MoG defaults do not alter this receipt",
+    "sigma": null,
+    "standardize": null,
+    "trainable": "unknown"
+  },
+  "provenance": {
+    "config": null,
+    "context": {
+      "family": "report/mog-vae",
+      "narrative_sources": [
+        {
+          "git_blob": "7841318bdea9ec47cafca87b7d7a85bc1626ab7e",
+          "path": "reports/mog-vae/LEADERBOARD.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "f42ec9e476365aaa84994ab727c54105e66b2db6418ec03bc581c08c48fd0481",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/mog-vae/LEADERBOARD.md"
+        },
+        {
+          "git_blob": "8f4ac56a411a73687efe1ded909d479fcf0edf07",
+          "path": "reports/mog-vae/PROTOCOL.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "8425c37ac694acb9c877ddef247f0684f01fd070c9e310e42e0acd3865f6b2b4",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/mog-vae/PROTOCOL.md"
+        },
+        {
+          "git_blob": "edcea0e3d85543885affdff12deb7de7a6b1d663",
+          "path": "reports/mog-vae/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "503760efa7dfb7ab0d97e158e1fde6515c3e953a0fba63f5af34201e46972445",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/mog-vae/README.md"
+        },
+        {
+          "git_blob": "de71aba43d4bc3c263c9a2b19cbf0572b737b638",
+          "path": "reports/mog-vae/stability/LEADERBOARD.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "91ab475ccd1b134b1fc086fd813c63acba22672ffc8d8a67e54500fa07b9d636",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/mog-vae/stability/LEADERBOARD.md"
+        },
+        {
+          "git_blob": "c70d5d91d77ae19371840636aa77577f51fe1f19",
+          "path": "reports/mog-vae/stability/PROTOCOL.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "3147b1eae112b13f1c84de4b85bc84ae21ba1220760e4a4eaa640f7351f48899",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/mog-vae/stability/PROTOCOL.md"
+        },
+        {
+          "git_blob": "6fb30d7a8534823e66815210c1f80d4a9426bc12",
+          "path": "reports/mog-vae/stability/README.md",
+          "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+          "sha256": "1cf03a8e3484f3a039b618c446e0a334e2f77267e9a2167b6a8154cb48a65338",
+          "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/mog-vae/stability/README.md"
+        }
+      ],
+      "structured_sources_imported": [],
+      "summary_excerpt": "# Particle VAE toy experiments\n\n**Follow-up completed:** [lower-LR round and constant-KL particle VAE](stability/README.md).\nThe results below describe the original12-arm scout.\n\nAll 12 full runs completed on both GPUs in **4.4 minutes wall time**, with\n**7.57 GPU-minutes of training** (7.89 summed child-process minutes including\nevaluation/I/O). No full-run failures; nothing remains queued. One shared seed,\n6,000 updates per arm, final online weights. These are matched new controls,\nnot reuse of the earlier toy trajectories.\n\n| Model / setting | Modes /100 | HQ % | Sampled reconstruction MSE |\n|---|---:|---:|---:|\n| Stochastic particle AE-GAN, no KL | **95** | **76.01** | **0.004246** |\n| Categorical VAE-GAN, sharp, tau=.03 | 90 | 72.92 | 0.005626 |\n| Deterministic particle AE-GAN | 84 | 73.50 | 0.004629 |\n| GAN | 80 | 59.31 | \u2014 |\n\nThese generation numbers evaluate decoder means `G(z)` on 100k prior samples.\nFull [leaderboard](LEADERBOARD.md) includes all 12 settings, likelihood sampling,\nposterior diagnostics, learning curves, costs, and matched-count stability audit.\n\n**What worked:** a genuine VAE with categorical uncertainty over particles,\nfixed local noise and no learned per-input Gaussian ball. The best VAE by our\ncoverage-first ranking uses approximately 3.23 effective particles per input;\neight posterior draws on 8,192 held-out inputs give pair RMS .03864 while all\n65"
+    },
+    "importer_version": "forge-history-v1",
+    "local_bulk_artifacts": "Availability unverified; original local references are retained.",
+    "package_sha256": null,
+    "reuse_eligible": false,
+    "source_revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "verification": "Imported frozen recorded verdicts; no fresh regrading or qualification.",
+    "verified_by_forge": false
+  },
+  "record_id": "history-context-report-mog-vae-206767d0b95e",
+  "record_type": "family_context",
+  "schema_version": 1,
+  "source": {
+    "git_blob": "edcea0e3d85543885affdff12deb7de7a6b1d663",
+    "path": "reports/mog-vae/README.md",
+    "revision": "92dc03195080376ba6b56d273e5c3b929e54ce61",
+    "sha256": "503760efa7dfb7ab0d97e158e1fde6515c3e953a0fba63f5af34201e46972445",
+    "url": "https://github.com/255BITS/ParticleGAN/blob/92dc03195080376ba6b56d273e5c3b929e54ce61/reports/mog-vae/README.md"
+  },
+  "task_results": []
+}

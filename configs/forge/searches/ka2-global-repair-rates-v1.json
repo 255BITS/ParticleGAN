@@ -1,0 +1,33 @@
+{
+  "base_candidate": "ka2-global-repair-v1",
+  "campaign": {
+    "accept_shared_cost_transfer": false,
+    "budget_seconds": 97800,
+    "candidate_budget_seconds": 48900,
+    "id": "ka2-global-repair-rates-v1"
+  },
+  "cuda_model": "NVIDIA RTX A6000",
+  "execution_backend": "cuda",
+  "grid": {
+    "coupled_rates": [
+      {
+        "lr": 0.00425,
+        "prior_lr_mult": 0.014117647058823528
+      },
+      {
+        "lr": 0.006375,
+        "prior_lr_mult": 0.009411764705882354
+      }
+    ]
+  },
+  "guide": "EXPERIMENTATION.md",
+  "hypothesis": "Increasing the global network/base rate while retaining the nominal absolute latent-table prior base rate may restore movement within the unchanged 80-update screen. Every complete configuration is then evaluated through all ordinary Tier 3 prerequisites; later failures remain part of this whole-candidate result.",
+  "id": "ka2-global-repair-rates-v1",
+  "protocol": "screening",
+  "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+  "rationale": "The completed ka2-global-repair-v1 first gate had mean_abs=0.03632952273 below .3, with a passing gradient bound. These two coupled global numeric settings hold all existing penalty kernels, intervention flags, moments, noise/schedule laws and task conditions fixed. They preserve nominal latent-table prior base LR 6e-05; direct coordinates instead consume the existing global G-side base LR. Effective feedback rates can differ with training state. No per-task candidate override, new objective, seed study, gate change, repeat of the failed base, or automatic continuation is allowed.",
+  "schema_version": 1,
+  "trainer_family": "ka2",
+  "tuning_through_tier": 3,
+  "view": "discriminator_stability"
+}

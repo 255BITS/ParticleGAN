@@ -1,0 +1,233 @@
+{
+  "status": "VALID",
+  "scope": "sealed prospective saved endpoint; no model/optimizer update",
+  "step": 100,
+  "checkpoint_sha256": "2488adcaee88c108dccc4224f3f9ec36756b822b0ab5847a339c5ac52cfc4bda",
+  "receipt_sha256": "aaad04b7f592f37fa169d79a1bd91fcec3e6b8bdd29c1ed1d94fc8e4f161f250",
+  "checks": {
+    "sealed_post_save_log": true,
+    "record_and_metrics_exact": true,
+    "matched_sources_and_init": true,
+    "genuine_quarter_generator_and_sigma_base_rates": true,
+    "prior_and_critic_base_rates_exact": true,
+    "population_state_load_exact": true,
+    "old_law_atomic_rejections": [
+      "old-law",
+      "wrong-level",
+      "mask-dtype"
+    ],
+    "population_stamp_and_coverage_consistent": true,
+    "moved_row_reset_ledger_exact": true,
+    "graph_bounded_symmetric": true,
+    "novel_children_without_seed_links": true,
+    "common_count_family_and_phase_budget": true,
+    "paired_birth_support_and_true_certificate_accounting": true,
+    "semantic_timing_fields": [
+      "trainer.birth_death.last.eval_seconds"
+    ],
+    "last_metadata_json_serializable": true,
+    "rng_cpu_uint8": true
+  },
+  "population": {
+    "active": false,
+    "mask_rows": 0,
+    "required_rows": 973,
+    "s": 1.0,
+    "b": 4.0,
+    "last_decisive": 1,
+    "undo_s": null,
+    "coverage_rejections": 0,
+    "expiries": 0,
+    "accepted_stationary": 0,
+    "rebases": 12,
+    "last_population": {
+      "event": "decision",
+      "step": 24,
+      "participating_rows": null,
+      "required_rows": 973,
+      "coverage_rejected": false,
+      "scheduling_decision": "drift"
+    },
+    "last_decision": {
+      "decision": "drift",
+      "step": 24,
+      "tested_b": 1.0,
+      "verdict_b": 0,
+      "verdict_2b": 1,
+      "evidence_scale": 2.0,
+      "t_b": 1.7360267920349213,
+      "t_2b": 4.354180569965402,
+      "mean_r_b": 0.17611631751060486,
+      "mean_r_2b": 0.32248540967702866,
+      "n_b": 12,
+      "n_2b": 6,
+      "early": false,
+      "log_bf_b": NaN,
+      "log_bf_2b": NaN
+    },
+    "log": [
+      [
+        24,
+        "drift",
+        1.0,
+        4.0
+      ]
+    ],
+    "current_window_participants_b": 316,
+    "current_window_participants_2b": 365
+  },
+  "serving": {
+    "served_model": "fast",
+    "derived_from_original_predicate": true,
+    "average_rate": 0.0625,
+    "note": "Saved model tensors are fast training iterates; serving is derived by the unchanged predicate."
+  },
+  "base_learning_rates": [
+    [
+      0.0010625,
+      0.0085,
+      0.0010625
+    ],
+    [
+      0.00425
+    ]
+  ],
+  "applied_learning_rates": [
+    [
+      0.00053125,
+      0.0085,
+      0.0010625
+    ],
+    [
+      0.0031868848725320614
+    ]
+  ],
+  "birth_counters": {
+    "evals": 12,
+    "dim_skips": 0,
+    "discoveries": 374,
+    "realised_deaths": 544,
+    "realised_births": 544,
+    "stays": 0,
+    "moves": 544,
+    "matched": 498,
+    "normalised": 0,
+    "waited_deaths": 0,
+    "waited_births": 0,
+    "stale_resets": 10060,
+    "iso_evals": 12,
+    "iso_flagged": 11010,
+    "iso_acted": 0,
+    "iso_skipped": 12,
+    "iso_moves": 0,
+    "iso_dup_skips": 0,
+    "cell_evals": 12,
+    "cell_discoveries": 374,
+    "ordinary_moves": 544,
+    "feature_rebuilds": 12,
+    "feature_distance_cells": 24127360,
+    "projection_products": 278202368,
+    "count_test_terms": 50686,
+    "feature_forward_rows": 37408,
+    "invalidated_cells": 451,
+    "novel_birth_moves": 46,
+    "novel_birth_attempts": 48
+  },
+  "last_phase": {
+    "step": 96,
+    "ordinary_mass_moves": 0,
+    "ordinary_support_moves": 10,
+    "ordinary_global_moves": 37,
+    "ordinary_novel_birth_moves": 4,
+    "ordinary_copy_moves": 47,
+    "ordinary_moves": 51,
+    "iso_moves": 0,
+    "moves": 51
+  },
+  "row_evidence": {
+    "mature_rows": 0,
+    "flags": 0,
+    "neff_median": 8.975591893835938,
+    "neff_max": 21.64558578440604
+  },
+  "graph": {
+    "edges": 338,
+    "max_degree": 5
+  },
+  "metrics": {
+    "precision": 0.1470947265625,
+    "coverage": 2,
+    "mass_tv": 0.8529052734375,
+    "centre_distance": 0.18702742457389832,
+    "covered_centroid_rms": 0.008256671018898487,
+    "supported_mass": [
+      0.0008544921875,
+      0.00732421875,
+      0.0059814453125,
+      0.005859375,
+      0.0045166015625,
+      0.0069580078125,
+      0.006591796875,
+      0.0057373046875,
+      0.0059814453125,
+      0.0106201171875,
+      0.006103515625,
+      0.0042724609375,
+      0.00439453125,
+      0.0042724609375,
+      0.009033203125,
+      0.0057373046875,
+      0.0040283203125,
+      0.0079345703125,
+      0.005126953125,
+      0.005615234375,
+      0.0015869140625,
+      0.004638671875,
+      0.0150146484375,
+      0.006103515625,
+      0.0028076171875
+    ],
+    "unsupported_mass": 0.8529052734375,
+    "clean_particle_centres": {
+      "precision": 0.1376953125,
+      "coverage": 3,
+      "mass_tv": 0.8623046875,
+      "centre_distance": 0.1839563250541687,
+      "covered_centroid_rms": 0.010795782320201397,
+      "supported_mass": [
+        0.0009765625,
+        0.009765625,
+        0.005859375,
+        0.0068359375,
+        0.005859375,
+        0.005859375,
+        0.01171875,
+        0.00390625,
+        0.0068359375,
+        0.0068359375,
+        0.005859375,
+        0.001953125,
+        0.001953125,
+        0.001953125,
+        0.01171875,
+        0.0029296875,
+        0.0048828125,
+        0.0078125,
+        0.00390625,
+        0.0048828125,
+        0.0009765625,
+        0.00390625,
+        0.0146484375,
+        0.005859375,
+        0.0
+      ],
+      "unsupported_mass": 0.8623046875
+    }
+  },
+  "quality_verdict": null,
+  "quality_scope": "Watcher records frozen metrics only; numerical queue owns strict quality adjudication.",
+  "overall_target": "Toy AND original full Grid100 required; intermediate metrics have no acceptance verdict.",
+  "optimizer_updates": 0,
+  "new_seeds": 0,
+  "cuda_initialized": false
+}

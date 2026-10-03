@@ -1,0 +1,249 @@
+{
+  "checkpoint_loads": 1,
+  "cpu_rng_unchanged": true,
+  "cuda_initialized": false,
+  "gpu_operations": 0,
+  "input_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/moving-rotated-window-ra15-r2/check_source.py": "aa2d8a4f384f2b2254b6c6ae4748f15b342a453b837ea1e18bd42735676d8b48",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/moving-rotated-window-ra15-r2/run_pair.py": "657ebcb1a55c898b5d4026fc3f5c5dc1d330336b04a28971f796ae812553ed71",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/moving-rotated-window-ra15-r2/window_support.py": "4c7ca70291999ed0bb881a68fe25a772ae7e1cff1e4e2333cd63d9139c49f5c8",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/moving-rotated-window-ra15/SOURCE-FREEZE.json": "e8f0cdbac7a1a9241d39e5e779a4203baee112499029101ccce00dec512629f4",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/moving-rotated-window-ra15/attempt-1/ERROR.json": "9d2ad877920f1dd555acbb4a351db3b264deef349f01e70c78897b720323e39c",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/moving-rotated-window-ra15/attempt-1/control/LAUNCH.json": "f71efa0746d4b235db6fd60320df68c5f79cf8338672ea35082ae342305e8251",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/moving-rotated-window-ra15/attempt-1/control/run.log": "4c47802664ef73029b1b1adb3c7ca8f68f6ecc8f96130c9b37973fc7add8757a",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/moving-rotated-window-ra15/run_pair.py": "0405f5041fa3ad0d311c391baa09c1592d1141f08ede2a2104cc42dc0dc66b09",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/diagnostics/moving-rotated-window-ra15/window_support.py": "2fa89b91ea89f3cdff9ac876e96e5c27dfdded2ab2abdd55c45d52b4bef0f245",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra14-r2/moving/rotated100/adapted_runner.py": "4d94459b25892cd37427ee940e3ad863f3676b8e1b5d6cd5748525bfaf3a33db"
+  },
+  "limitation": "The failed worker saved no restored-state artifact. CPU-copy byte and NaN audit is exact; CUDA-restored state equality remains a required runtime gate.",
+  "model_calls": 0,
+  "original_seed": 1234,
+  "original_terminal_draw_scorer_gate_ast_identical": true,
+  "original_update_body_identical_except_passive_note": true,
+  "paired_window_only": [
+    1001,
+    1500
+  ],
+  "passive_profiler_reads_actual_locals": true,
+  "profiler_restored": true,
+  "source_ast_host_functions_identical": [
+    "draw",
+    "snap",
+    "angle",
+    "rotation",
+    "real_batch"
+  ],
+  "status": "CPU_PASS",
+  "strict_nan_comparator": {
+    "changed_NaN_payload_rejected": true,
+    "changed_NaN_positions_rejected": true,
+    "changed_shape_or_dtype_rejected": true,
+    "finite_changes_rejected": true,
+    "finite_to_NaN_rejected": true,
+    "matching_scalar_NaN_pass": true,
+    "matching_tensor_raw_bytes_pass": true,
+    "real_checkpoint1000_CPU_copy_exact": true,
+    "real_checkpoint_NaN_tensors": [
+      {
+        "dtype": "torch.float32",
+        "nan_count": 9064,
+        "nan_positions_identical": true,
+        "path": "lr_settle.0.1.blocks.0",
+        "raw_bytes_identical": true,
+        "shape": [
+          40000
+        ]
+      },
+      {
+        "dtype": "torch.float32",
+        "nan_count": 6452,
+        "nan_positions_identical": true,
+        "path": "lr_settle.0.1.blocks.1",
+        "raw_bytes_identical": true,
+        "shape": [
+          40000
+        ]
+      },
+      {
+        "dtype": "torch.float32",
+        "nan_count": 10952,
+        "nan_positions_identical": true,
+        "path": "lr_settle.0.1.r_b.0",
+        "raw_bytes_identical": true,
+        "shape": [
+          20000
+        ]
+      },
+      {
+        "dtype": "torch.float32",
+        "nan_count": 8296,
+        "nan_positions_identical": true,
+        "path": "lr_settle.0.1.r_b.1",
+        "raw_bytes_identical": true,
+        "shape": [
+          20000
+        ]
+      },
+      {
+        "dtype": "torch.float32",
+        "nan_count": 5615,
+        "nan_positions_identical": true,
+        "path": "lr_settle.0.1.r_b.2",
+        "raw_bytes_identical": true,
+        "shape": [
+          20000
+        ]
+      },
+      {
+        "dtype": "torch.float32",
+        "nan_count": 10265,
+        "nan_positions_identical": true,
+        "path": "lr_settle.0.1.r_2b.0",
+        "raw_bytes_identical": true,
+        "shape": [
+          20000
+        ]
+      },
+      {
+        "dtype": "torch.float32",
+        "nan_count": 6452,
+        "nan_positions_identical": true,
+        "path": "lr_settle.0.1.last_block",
+        "raw_bytes_identical": true,
+        "shape": [
+          40000
+        ]
+      },
+      {
+        "dtype": "torch.float32",
+        "nan_count": 1,
+        "nan_positions_identical": true,
+        "path": "lr_settle.0.2.r_b.0",
+        "raw_bytes_identical": true,
+        "shape": []
+      },
+      {
+        "dtype": "torch.float32",
+        "nan_count": 1,
+        "nan_positions_identical": true,
+        "path": "lr_settle.0.2.r_b.1",
+        "raw_bytes_identical": true,
+        "shape": []
+      },
+      {
+        "dtype": "torch.float32",
+        "nan_count": 1,
+        "nan_positions_identical": true,
+        "path": "lr_settle.0.2.r_b.2",
+        "raw_bytes_identical": true,
+        "shape": []
+      },
+      {
+        "dtype": "torch.float32",
+        "nan_count": 1,
+        "nan_positions_identical": true,
+        "path": "lr_settle.0.2.r_b.3",
+        "raw_bytes_identical": true,
+        "shape": []
+      },
+      {
+        "dtype": "torch.float32",
+        "nan_count": 1,
+        "nan_positions_identical": true,
+        "path": "lr_settle.0.2.r_b.4",
+        "raw_bytes_identical": true,
+        "shape": []
+      },
+      {
+        "dtype": "torch.float32",
+        "nan_count": 1,
+        "nan_positions_identical": true,
+        "path": "lr_settle.0.2.r_b.5",
+        "raw_bytes_identical": true,
+        "shape": []
+      },
+      {
+        "dtype": "torch.float32",
+        "nan_count": 1,
+        "nan_positions_identical": true,
+        "path": "lr_settle.0.2.r_b.6",
+        "raw_bytes_identical": true,
+        "shape": []
+      },
+      {
+        "dtype": "torch.float32",
+        "nan_count": 1,
+        "nan_positions_identical": true,
+        "path": "lr_settle.0.2.r_b.7",
+        "raw_bytes_identical": true,
+        "shape": []
+      },
+      {
+        "dtype": "torch.float32",
+        "nan_count": 1,
+        "nan_positions_identical": true,
+        "path": "lr_settle.0.2.r_b.8",
+        "raw_bytes_identical": true,
+        "shape": []
+      },
+      {
+        "dtype": "torch.float32",
+        "nan_count": 1,
+        "nan_positions_identical": true,
+        "path": "lr_settle.0.2.r_b.9",
+        "raw_bytes_identical": true,
+        "shape": []
+      },
+      {
+        "dtype": "torch.float32",
+        "nan_count": 1,
+        "nan_positions_identical": true,
+        "path": "lr_settle.0.2.r_b.10",
+        "raw_bytes_identical": true,
+        "shape": []
+      },
+      {
+        "dtype": "torch.float32",
+        "nan_count": 1,
+        "nan_positions_identical": true,
+        "path": "lr_settle.0.2.r_2b.0",
+        "raw_bytes_identical": true,
+        "shape": []
+      },
+      {
+        "dtype": "torch.float32",
+        "nan_count": 1,
+        "nan_positions_identical": true,
+        "path": "lr_settle.0.2.r_2b.1",
+        "raw_bytes_identical": true,
+        "shape": []
+      },
+      {
+        "dtype": "torch.float32",
+        "nan_count": 1,
+        "nan_positions_identical": true,
+        "path": "lr_settle.0.2.r_2b.2",
+        "raw_bytes_identical": true,
+        "shape": []
+      },
+      {
+        "dtype": "torch.float32",
+        "nan_count": 1,
+        "nan_positions_identical": true,
+        "path": "lr_settle.0.2.r_2b.3",
+        "raw_bytes_identical": true,
+        "shape": []
+      },
+      {
+        "dtype": "torch.float32",
+        "nan_count": 1,
+        "nan_positions_identical": true,
+        "path": "lr_settle.0.2.r_2b.4",
+        "raw_bytes_identical": true,
+        "shape": []
+      }
+    ],
+    "signedzero_bits_rejected": true
+  },
+  "training_updates": 0
+}

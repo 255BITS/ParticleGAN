@@ -1,0 +1,38 @@
+{
+  "status": "LAUNCHED_ORIGINAL_FULL_CUDA_GRID",
+  "started_utc": "2026-09-30T16:33:48.350723+00:00",
+  "pid": 1266793,
+  "startticks": "168784850",
+  "command": [
+    "/tmp/pr38-default-env/bin/python",
+    "-B",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/nested_slot.py",
+    "--lane",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra11",
+    "--through",
+    "2"
+  ],
+  "log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/results/RA11-grid-driver.log",
+  "original_updates": 7000,
+  "observations": 34,
+  "terminal_steps": [
+    6000,
+    6250,
+    6500,
+    6750,
+    7000
+  ],
+  "holdout_rows": 100000,
+  "source_and_input_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra11/learned/training/toy/CB64-RA11/result.json": "c6579ef8d596a6fc780c0244ecedd7e3ea11ac334466458019f6d90cdffa9963",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra11/owned-slot-through-1.json": "2d6a811dc95ba31b7f54a05833af607d94b366f72f0d666f4c7d557ed6c63a41",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/ra11-toy-artifact-audit/accepted-attempt1/receipt.json": "d5b0986b2ceba69e24cf5d62430526afd8043f30fb3ccc24b27abe3108ccac17",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/integration/review/ra11-toy-artifact-audit/accepted-attempt1/FINAL-FROZEN.json": "b3171d14d3558ae4cbb590f59d783ce1c65cbd460d70188b0498b3e882308473",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/ra11/READY.json": "f7a357d0a40d353fd72bc1377240d7f89f47b34758086d284d628e35989fa5b9",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra11/source-freeze.json": "d973828e057a63131e6498fc3188f82b8fff3a3f58ab1ace12615566fe9837fe",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/results/CB64-RA11-toy.json": "ccb69f354a2e8fa8098f7fbf58c6237b31451c02d9a422bd74a281beb52189e4",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/results/RA11-prelaunch-seal-verification.json": "90a2e2d327b81956d6f5ec8e9d2421bed94ec7b64c76617795af9eb0fd4833b3"
+  },
+  "verified_unique_raw_files": 594,
+  "quality_verdict": null
+}

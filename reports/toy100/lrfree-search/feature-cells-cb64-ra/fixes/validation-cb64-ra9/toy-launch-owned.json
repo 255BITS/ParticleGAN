@@ -1,0 +1,23 @@
+{
+  "status": "STARTED",
+  "utc": "2026-09-30T09:19:07.552089+00:00",
+  "pid": 860101,
+  "startticks": "166176770",
+  "command": [
+    "/tmp/pr38-default-env/bin/python",
+    "-u",
+    "-B",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/quality/nested_slot.py",
+    "--lane",
+    "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9",
+    "--through",
+    "1"
+  ],
+  "log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra9/owned-toy-launch.log",
+  "lane_freeze_sha256": "09e6e11fd7c862d7d98fca9b5209e93be971d034ab0c6553cbd9a18bdeb6bec2",
+  "ready_sha256": "ba558fff064f5e5613656a1c1550431091efc9989f4dd34f1d85a58d17d55990",
+  "helper_sha256": "39776a239efc3c47c22a3869d098f44480bf2278196a0687c69b2e251d2ae251",
+  "lane_review_seal_sha256": "4b9d1d579a542c88c99bf61df74767f304b2b72068968725a172d438d616d81d",
+  "prelaunch_verified_maps": 222,
+  "quality_verdict": null
+}

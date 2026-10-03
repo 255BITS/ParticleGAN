@@ -1,0 +1,11 @@
+[
+  {
+    "name": "learned-toy-CB64-RA6",
+    "returncode": 0,
+    "status": "COMPLETE",
+    "wall_seconds": 2200.3119459811132,
+    "result": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra6/learned/training/toy/CB64-RA6/result.json",
+    "log": "/ml2/hypergan/gan-attempts/feature-cells-fixes-20260929/validation-cb64-ra6/logs/learned-toy-CB64-RA6.log",
+    "result_sha256": "c93478330ba42a7a9001a314db071acda6905accf6e9d2cf2b5e75435f7750cd"
+  }
+]

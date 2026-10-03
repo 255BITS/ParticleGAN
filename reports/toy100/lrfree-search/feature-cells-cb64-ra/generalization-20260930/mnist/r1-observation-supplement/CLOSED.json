@@ -1,0 +1,13 @@
+{
+  "status": "COMPLETE_CPU_READ_ONLY_PREFIX_SCALES_AND_PROSE_CORRECTION",
+  "closed_utc": "2026-09-30T21:31:54.368611+00:00",
+  "training_updates": 0,
+  "scoring_calls": 0,
+  "file_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/r1-observation-supplement/ERRATUM.json": "9799e880231c1d7c22f76c6e88b4024380d36ebc6303d40350f4803b88390cc3",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/prefix-comparison.json": "e3c86b3b3e8286e937f38e7a5c4b17bf2f4251dc4bda8d389343a1802c2c8a66",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/mnist/e22-tester-scales.json": "60516ac1e520b6cccc4585fe991a27b51c692482d5fa5e9b4a916e33c820ea8b"
+  },
+  "original_static_trace_closure_sha256": "39f50d2f54e04c06ad0bcd441b6057295bc90a2944fb5c051d45c8baf087716c",
+  "original_moving_trace_closure_sha256": "72557765a534fb177b36bd0c33b5be5f7b93bd2a77c5cc8efc07f8ab09f54d48"
+}

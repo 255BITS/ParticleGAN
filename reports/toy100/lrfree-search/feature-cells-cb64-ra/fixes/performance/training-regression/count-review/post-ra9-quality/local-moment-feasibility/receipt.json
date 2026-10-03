@@ -1,0 +1,29 @@
+{
+  "status": "VALID_FIXED_SAVED_DIAGNOSTIC",
+  "evidence_status": "VALID",
+  "quality_verdict": null,
+  "original_quality": "RA9 full grid FAIL preserved",
+  "scope": "One frozen final-state128/r8 real-only local-moment feasibility diagnostic, no actions or scoring",
+  "pre_numerical_freeze_sha256": "c97b1e916b9e44156a687cd6a51305e257684417140c0b5a1f5aa486ed58347c",
+  "result_sha256": "45ce62de68a7b121a6d1a89f4d11e4547a1bbc18e7255a57f7924b2d8d1e3b44",
+  "helper_sha256": "f4b0404ea39a2713585a2337d539808772f1dfd9e4d8ae160a6144f3fddad8ec",
+  "source_and_input_files": 187,
+  "chart_groups": 100,
+  "backend_schema": 8,
+  "trainer_schema": 5,
+  "process_exited": true,
+  "one_run": true,
+  "failed_numerical_attempts": 0,
+  "training_updates": 0,
+  "new_emissions": 0,
+  "new_seeds": 0,
+  "cuda": false,
+  "report_sha256": "a49d367ea43e991a6bc6e5525854bc11e441483256be43fadaf92722063818d5",
+  "A_EMA": 0.045854478890222844,
+  "positive_EMA_groups": 81,
+  "limits": [
+    "Shared trained-D/FIFO dependence",
+    "Aggregate is not per-group authority",
+    "Covariance subtraction is not a calibrated target"
+  ]
+}

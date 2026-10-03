@@ -1,0 +1,73 @@
+{
+  "actual_steps": [
+    50,
+    200,
+    350,
+    500,
+    650,
+    750,
+    900,
+    1050,
+    1200
+  ],
+  "draws": 0,
+  "gif": {
+    "bytes": 372259,
+    "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/vector_overlap_policy_selected_cloud_v1/vector_overlap_policy_selected_cloud_v1-goal.gif",
+    "sha256": "4ecc952270f4f1a501ca50aa6b03012b8420675a5c3140c88499eeefbfb3865b"
+  },
+  "inputs": [
+    {
+      "bytes": 30581,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/vector_overlap_policy_selected_cloud_v1/policy-artifacts/observations/step_000050.npz",
+      "sha256": "c37235d5b4fd3a944150df162610708933036750a61d411e5b00b33c9cf2a793"
+    },
+    {
+      "bytes": 30604,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/vector_overlap_policy_selected_cloud_v1/policy-artifacts/observations/step_000200.npz",
+      "sha256": "f9282d7dba1b74c87cc2766492ba753dbe81d3d9ea6c4156f5000dfbb6b49b5d"
+    },
+    {
+      "bytes": 30606,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/vector_overlap_policy_selected_cloud_v1/policy-artifacts/observations/step_000350.npz",
+      "sha256": "5323e51378e04dc2319eda803a913c22e84c5fe9ac42c3409cd6efa0d15bb31e"
+    },
+    {
+      "bytes": 30579,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/vector_overlap_policy_selected_cloud_v1/policy-artifacts/observations/step_000500.npz",
+      "sha256": "2afd4f061a97130c6029bb46749999118aee7c93c0c8ad6f3bfffee648797c9b"
+    },
+    {
+      "bytes": 30611,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/vector_overlap_policy_selected_cloud_v1/policy-artifacts/observations/step_000650.npz",
+      "sha256": "f24cc72bc7a6b9dad7faaf8bda2fe973c5e8ca9efe5bbd409b9324cda6d9cd17"
+    },
+    {
+      "bytes": 30612,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/vector_overlap_policy_selected_cloud_v1/policy-artifacts/observations/step_000750.npz",
+      "sha256": "2789c65cdbe9753290522dfe71ece4f3af4aceea547a805c189b62d5c931ca5b"
+    },
+    {
+      "bytes": 30593,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/vector_overlap_policy_selected_cloud_v1/policy-artifacts/observations/step_000900.npz",
+      "sha256": "fcefb5c7b259284446e56fec1db1d74585fa6dac16e70f855455fe513efd30e8"
+    },
+    {
+      "bytes": 30599,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/vector_overlap_policy_selected_cloud_v1/policy-artifacts/observations/step_001050.npz",
+      "sha256": "e7b8f6aee83fe77447a98261ee3ab51fc659867bbf3d7795d95d3144f6b61f5c"
+    },
+    {
+      "bytes": 30587,
+      "path": "/ml2/hypergan/forge-atlas-current-gpu-diagnostics-20261003-native-v2/attempts/vector_overlap_policy_selected_cloud_v1/policy-artifacts/observations/step_001200.npz",
+      "sha256": "7f59f14d18790a6c250b961afe87d12d69e252eb7a8cc31cc855920c55740015"
+    }
+  ],
+  "optimizer_updates": 0,
+  "original_gate": "PASS",
+  "qualification_input": false,
+  "renderer_sha256": "fda26cea46ce2dab200e418c3d04e288e3234d61609deecaebe53b1624bf4101",
+  "schema": "particlegan_atlas_current_gpu_diagnostics_v1_media",
+  "source_digest": "db5492df4aa5ef60ce9e7d5869b2b6be8d492f19191a2889967274555f8d0037",
+  "task": "vector_overlap_policy_selected_cloud_v1"
+}

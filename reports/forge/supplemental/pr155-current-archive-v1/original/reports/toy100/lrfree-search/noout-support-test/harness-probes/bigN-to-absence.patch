@@ -1,0 +1,20 @@
+diff -ruN '--exclude=__pycache__' harness-bigN/hosts/vector_host.py harness-absence/hosts/vector_host.py
+--- harness-bigN/hosts/vector_host.py	2026-09-29 09:31:48.487259143 -0600
++++ harness-absence/hosts/vector_host.py	2026-09-29 09:42:05.310102134 -0600
+@@ -59,7 +59,15 @@
+     if kind == "gaussian_mixture":
+         means = torch.tensor(spec["means"], dtype=torch.float32)
+         cov = torch.tensor(spec["covariances"], dtype=torch.float32)
+-        index = torch.multinomial(torch.tensor(spec["masses"]), count, replacement=True, generator=rng)
++        masses = torch.tensor(spec["masses"])
++        import os
++        if count != 4096 and os.environ.get("ABSENT"):        # PROBE (copy of the harness): training batches lack some components for a window of steps; evaluation draws (4096) are untouched
++            s0, s1 = int(os.environ["ABSENT_START"]), int(os.environ["ABSENT_END"])
++            if s0 <= completed_steps <= s1:
++                masses = masses.clone()
++                for comp in os.environ["ABSENT"].split(","): masses[int(comp)] = 0.
++                masses = masses / masses.sum()
++        index = torch.multinomial(masses, count, replacement=True, generator=rng)
+         noise = torch.randn(count, 2, generator=rng)
+         points = means[index] + torch.bmm(torch.linalg.cholesky(cov)[index], noise.unsqueeze(2)).squeeze(2)
+     elif kind == "spiral":

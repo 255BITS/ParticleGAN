@@ -1,0 +1,19 @@
+{
+  "archive": "runs/forge/release07-gan-v3-task-adapted-v1/receipts-and-source.tar.gz",
+  "archive_bytes": 1464935,
+  "archive_sha256": "d2d228c91b2d6baf8106ad45e8805be218c555ecc7d8da19a82ede8e8966ea42",
+  "attempt_count": 1,
+  "campaign_id": "release07-gan-v3-task-adapted-v1",
+  "files": {
+    "reports/forge/attempts/df1794ebea6444c5a10c2a953843257d/evidence.json": "2a0a6fc959933450d585e19919a05b8b574e1f6f0e0b8fcd3c5721e7a0c93825",
+    "reports/forge/attempts/df1794ebea6444c5a10c2a953843257d/request.json": "019a85f75e74a8ec027e268e6855054504a9a29ae3ee50da480e8f9098656e57",
+    "reports/forge/attempts/df1794ebea6444c5a10c2a953843257d/result.json": "eb64dd676f48926cbd23be6ef82798c069024effc44f3998fd35daeea664827c"
+  },
+  "full_readouts": {
+    "runs/forge/release07-gan-v3-task-adapted-v1/full-readouts/readout-afd6d27c7d1eae64aa13299f.json": "75218465f9c074fded891ec60955601361a5aba702533c7fc65102e1744d6498"
+  },
+  "restoration": "Obtain the exact local archive, verify SHA256, extract from repository root. Original execution envelopes, worker artifacts, source snapshot, full readout and logs remain ignored. Regrade using the recorded source commit and matching runtime/hardware; compact projections are display-only and cannot qualify a technique.",
+  "schema_version": 1,
+  "source_digest": "d091ec1f6b1db7cfad160b8dcd77f4b6dff432e88dab0c7421c59cff3da997dc",
+  "source_origin_commit": "fc66d7c49259a8977cbb4478b20dad1ffcc6c1cb"
+}

@@ -1,0 +1,82 @@
+{
+  "adapted_runner_sha256": "930b1a62061e4e3b50d5f9239c1854d67ecd06ec760d970d986741b7db8cc369",
+  "command": [
+    "/tmp/pr38-default-env/bin/python",
+    "/ml2/hypergan/gan-attempts/feature-cells-generalization-20260930/validation-ra15/run_moving.py",
+    "--task",
+    "rotated100"
+  ],
+  "completed": 1790818101.8461733,
+  "numerical_started": 1790817873.8515022,
+  "original_runner_sha256": "8057a8d4298d251edabcaeaaf02ef5b83834bdb56c296d2681c70aec6f277ed1",
+  "peak_allocated_gpu_mib": 182.77587890625,
+  "peak_reserved_gpu_mib": 234.0,
+  "protocol": {
+    "degrees": 30,
+    "draw": 20000,
+    "seed": 1234,
+    "steps": 1500,
+    "turn_every": 500,
+    "turns": 2
+  },
+  "quality_status": "PASS",
+  "resources": {
+    "device": "cuda:0",
+    "gpu_name": "NVIDIA RTX A6000",
+    "gpu_uuid": "GPU-72c1b506-891d-b8bc-b353-e020585e1c47",
+    "memory_fraction": 0.2,
+    "physical_gpu": 0,
+    "total_gpu_bytes": 50896764928
+  },
+  "schedule_changed": false,
+  "scorer_changed": false,
+  "source_integrity_after": {
+    "config_sha256": "a3ee5c67ac6594014feeb1ec333131abb4b1d86832510b69923100ebd8510ad4",
+    "files": 376,
+    "package_sha256": "741fc3933654b985a74314b730b93be814d408ad46f6f7f6547b561f64619228",
+    "source_freeze_sha256": "78a8aaadaf97b58c7489e64632485ff66ebc3037a87a4e0ab8cd84dec19b2b4d",
+    "status": "VALID"
+  },
+  "source_integrity_before": {
+    "config_sha256": "a3ee5c67ac6594014feeb1ec333131abb4b1d86832510b69923100ebd8510ad4",
+    "files": 376,
+    "package_sha256": "741fc3933654b985a74314b730b93be814d408ad46f6f7f6547b561f64619228",
+    "source_freeze_sha256": "78a8aaadaf97b58c7489e64632485ff66ebc3037a87a4e0ab8cd84dec19b2b4d",
+    "status": "VALID"
+  },
+  "start": 1790817231.164036,
+  "status": "COMPLETE",
+  "task": "rotated100",
+  "thresholds_changed": false,
+  "verdict": {
+    "passed_periods": 2,
+    "periods": [
+      {
+        "hq": 0.9609,
+        "modes": 100,
+        "period_end": 500,
+        "target_deg": 0,
+        "task": "rotated100"
+      },
+      {
+        "hq": 0.9609,
+        "modes": 100,
+        "period_end": 1000,
+        "target_deg": 30,
+        "task": "rotated100"
+      },
+      {
+        "hq": 0.9259,
+        "modes": 98,
+        "period_end": 1500,
+        "target_deg": 60,
+        "task": "rotated100"
+      }
+    ],
+    "pre_turn_hq": 0.9609,
+    "rule": "after each turn: modes >= 95 and hq >= .9 x pre-turn hq",
+    "status": "PASS",
+    "task": "rotated100",
+    "turns": 2
+  }
+}

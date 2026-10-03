@@ -1,0 +1,63 @@
+{
+  "budgets": {
+    "campaign_seconds": 5400,
+    "candidate_seconds": 3600,
+    "task_seconds": {
+      "vector_two_broad": 1800
+    }
+  },
+  "campaign_id": "calibration-develop-20260929-gpu-pilot-v3",
+  "checkout": "/home/martyn/dev/ParticleGAN-experiment-tiers",
+  "commit": "cd5308ecbabbdec7fec3e8cd9ed8fd7861f48f01",
+  "compute_processes": [
+    {
+      "gpu_uuid": "GPU-548116b7-9dbe-de58-b3d9-a6e27b0f74ce",
+      "pid": 11101,
+      "used_memory_mb": "120"
+    },
+    {
+      "gpu_uuid": "GPU-548116b7-9dbe-de58-b3d9-a6e27b0f74ce",
+      "pid": 62189,
+      "used_memory_mb": "61"
+    }
+  ],
+  "devices": {
+    "0": {
+      "free_mb": 48521,
+      "name": "NVIDIA RTX A6000",
+      "uuid": "GPU-ed080e41-3193-3755-6756-f3d46c433331"
+    },
+    "1": {
+      "free_mb": 47414,
+      "name": "NVIDIA RTX A6000",
+      "uuid": "GPU-548116b7-9dbe-de58-b3d9-a6e27b0f74ce"
+    }
+  },
+  "execute_requested": true,
+  "fresh_clone": "/home/martyn/dev/ParticleGAN-experiment-tiers/runs/forge/fresh-checkout-develop-v3",
+  "ownership_note": "Accepted bounded pilot; both A6000s free of external training at preflight. Preserve reviewed desktop PIDs 11101 and 62189; only this pilot claims the two Forge slots.",
+  "preserved_desktop_processes": {
+    "11101": {
+      "command_line": [
+        "/opt/brave.com/brave/brave --type=gpu-process --ozone-platform=wayland --render-node-override=/dev/dri/renderD129 --crashpad-handler-pid=11061 --enable-crash-reporter=, --change-stack-guard-on-fork=enable --gpu-preferences=YAAAAAAAAAAgAQAEAAAAAAAAAAAAAGAASAAAAAAAAAABAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAwAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAMAAAAAQAAAAAAAAAAAAAACAAAAAAAAAAIAAAAAAAAAA== --shared-files --metrics-shmem-handle=4,i,1457649525245940427,18361179235895194320,262144 --field-trial-handle=3,i,5828848337864382938,8233359151147432393,262144 --disable-features=EyeDropper --variations-seed-version=main@ac7b120e60fb2bfa25cdf1c026ec26785f370dc6 --pseudonymization-salt-handle=7,i,995010162152866457,13821901469397371100,4 --trace-process-track-uuid=3190708988185955192"
+      ],
+      "pid": 11101,
+      "process_identity": "11101:91416"
+    },
+    "62189": {
+      "command_line": [
+        "Z:\\mnt\\ml7tb\\games\\modlists\\mer\\ModOrganizer.exe"
+      ],
+      "pid": 62189,
+      "process_identity": "62189:1893852"
+    }
+  },
+  "queue_root": "/home/martyn/dev/ParticleGAN/runs/forge",
+  "registration_id": "develop-20260929-gpu-pilot-v3",
+  "selected_keys": {
+    "forge-no-critic-penalty": "96f8372adc1fdc4d8ae442f06ae120e65bf1241411e59a6bd9846a3318ab8c65",
+    "k3p": "3c34579782bad8b6b2107201f160169c8b0dffe7c8dde1bca852e47444c95498"
+  },
+  "source_digest": "fc012b47b3714f8b7f67e21ce4d1bf3ff2809b3ff5aa001cff00b36663d1d39d",
+  "training_launched": false
+}

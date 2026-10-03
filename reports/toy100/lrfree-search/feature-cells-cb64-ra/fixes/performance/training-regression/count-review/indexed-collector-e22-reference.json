@@ -1,0 +1,75 @@
+{
+  "status": "PASS",
+  "historical_e22_native": {
+    "grid100": {
+      "path": "/ml2/hypergan/gan-attempts/noout-20260928/runs/E22a-grid100/result.json",
+      "original_cand": "E22a",
+      "options": {
+        "evaluation_generate": "plain",
+        "serial_backward_argument": true,
+        "strict_streams": true,
+        "initialization": "batch_feature_zero",
+        "diagnostics": true,
+        "save_final_state": true,
+        "ring_frozen_control": false,
+        "eval_output_noise": true,
+        "image_prior_perturb": false
+      },
+      "auto_detected": {
+        "evaluation_generate": "plain",
+        "serial_backward_argument": true
+      },
+      "archived_digest_matches": true
+    },
+    "rotated100": {
+      "path": "/ml2/hypergan/gan-attempts/noout-20260928/runs/E22a-rotated100/result.json",
+      "original_cand": "E22a",
+      "options": {
+        "evaluation_generate": "plain",
+        "serial_backward_argument": true,
+        "strict_streams": true,
+        "initialization": "batch_feature_zero",
+        "diagnostics": true,
+        "save_final_state": true,
+        "ring_frozen_control": false,
+        "eval_output_noise": true,
+        "image_prior_perturb": false
+      },
+      "auto_detected": {
+        "evaluation_generate": "plain",
+        "serial_backward_argument": true
+      },
+      "archived_digest_matches": true
+    },
+    "staggered100": {
+      "path": "/ml2/hypergan/gan-attempts/noout-20260928/runs/E22a-staggered100/result.json",
+      "original_cand": "E22a",
+      "options": {
+        "evaluation_generate": "plain",
+        "serial_backward_argument": true,
+        "strict_streams": true,
+        "initialization": "batch_feature_zero",
+        "diagnostics": true,
+        "save_final_state": true,
+        "ring_frozen_control": false,
+        "eval_output_noise": true,
+        "image_prior_perturb": false
+      },
+      "auto_detected": {
+        "evaluation_generate": "plain",
+        "serial_backward_argument": true
+      },
+      "archived_digest_matches": true
+    }
+  },
+  "all_e22_options_equal_original_collector_expected": true,
+  "ra4_differs_only_predeclared_indexed_api": true,
+  "source_sha256": {
+    "/ml2/hypergan/gan-attempts/feature-cells-config-20260929/validation/archived-E22-native.json": "a4b4c937ccbe9996a2fd7ba8da9b9b4753b216262f5f5875f1397fd0f01b4fd8",
+    "performance/training-regression/count-review/indexed-collector-pilot/review.json": "c38327bd146d26ee0f0e1502c47d9d2234d668ab00bdb2d1f0b1ef617ea25e57",
+    "/ml2/hypergan/gan-attempts/noout-20260928/runs/E22a-grid100/result.json": "0b1653f51c5b14d10de39cfb40d51843e4017605e3adf3a335dcebd7ee9bed5e",
+    "/ml2/hypergan/gan-attempts/noout-20260928/runs/E22a-rotated100/result.json": "9ee30e1b47dbf7e565edd6b9d03b505a100df23b52c41be398756301e77dbd6a",
+    "/ml2/hypergan/gan-attempts/noout-20260928/runs/E22a-staggered100/result.json": "a5e5f5e7f76313baeb7c90eb4a0e39daf5e5bc129f48acadc44b63c108ea3532"
+  },
+  "new_numerical_execution": false
+}

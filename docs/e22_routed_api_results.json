@@ -1,0 +1,149 @@
+{
+  "command": "PYTHONPATH=. python -u examples/e22_routed_sites.py --compare --steps 40 --tokens 128 --z-dim 4 --particles 128 --batch-size 8 --device cuda:1 --initialization api --warmup 1",
+  "hardware": "NVIDIA RTX A6000",
+  "torch_version": "2.13.0+cu126",
+  "initialization": "api",
+  "source_revision": "7083dfcb8d248a1dbc0daca789ff7c2a3d77a73e",
+  "source_sha256": {
+    "examples/e22_routed_sites.py": "43963bc5a35494fe1b142426365b26621cb7c6ae5fb74316f4aea81af66587c7",
+    "particlegan/routing.py": "b64764fccc1518085ecf92d54df3ea4ada163293bc88132622cc04d60dd5ce94",
+    "particlegan/policy.py": "803272dc136b7fb024fcf51692e70e7f49323c88f84f8f7bc9aa31292bc780ba",
+    "particlegan/recipes.py": "e1e2f478ce9d9f8774933cd4e98e0f91cfaf0e93a152ad0e4bdee782f52ae9d6"
+  },
+  "comparison": {
+    "event": "comparison",
+    "matched_initial_parameters": true,
+    "matched_batches_and_base_noise": true,
+    "matched_dv12_draw_schedule": true,
+    "dv12_draws_per_update": 4,
+    "dv12_draw_shape": [
+      1024,
+      4
+    ],
+    "device": "cuda:1",
+    "reports": [
+      {
+        "event": "complete",
+        "mode": "frozen",
+        "tokens": 128,
+        "z_dim": 4,
+        "particles": 128,
+        "batch_size": 8,
+        "initialization": "api",
+        "steps": 40,
+        "warmup_steps": 1,
+        "initial_rmse": 0.3414013385772705,
+        "heldout_rmse": 0.16728752851486206,
+        "heldout_max_error": 0.6154395937919617,
+        "served_source": "fast",
+        "training_seconds": 0.6408135117962956,
+        "seconds_per_update": 0.016020337794907392,
+        "row_diagnostics": {
+          "counters": {
+            "evals": 0,
+            "probes": 0,
+            "proposals": 0,
+            "guard_rejections": 0,
+            "moves": 0,
+            "splits": 0
+          },
+          "last": {},
+          "evidence_counters": {
+            "updates": 0,
+            "resets": 0,
+            "global_resets": 0,
+            "flagged_rows_sum": 0
+          }
+        }
+      },
+      {
+        "event": "complete",
+        "mode": "no_rows",
+        "tokens": 128,
+        "z_dim": 4,
+        "particles": 128,
+        "batch_size": 8,
+        "initialization": "api",
+        "steps": 40,
+        "warmup_steps": 1,
+        "initial_rmse": 0.3414013385772705,
+        "heldout_rmse": 0.21022117137908936,
+        "heldout_max_error": 0.7569118738174438,
+        "served_source": "fast",
+        "training_seconds": 0.6002392440568656,
+        "seconds_per_update": 0.01500598110142164,
+        "row_diagnostics": {
+          "counters": {
+            "evals": 0,
+            "probes": 0,
+            "proposals": 0,
+            "guard_rejections": 0,
+            "moves": 0,
+            "splits": 0
+          },
+          "last": {},
+          "evidence_counters": {
+            "updates": 0,
+            "resets": 0,
+            "global_resets": 0,
+            "flagged_rows_sum": 0
+          }
+        }
+      },
+      {
+        "event": "complete",
+        "mode": "full",
+        "tokens": 128,
+        "z_dim": 4,
+        "particles": 128,
+        "batch_size": 8,
+        "initialization": "api",
+        "steps": 40,
+        "warmup_steps": 1,
+        "initial_rmse": 0.3414013385772705,
+        "heldout_rmse": 0.21022117137908936,
+        "heldout_max_error": 0.7569118738174438,
+        "served_source": "fast",
+        "training_seconds": 2.044181809294969,
+        "seconds_per_update": 0.05110454523237422,
+        "row_diagnostics": {
+          "counters": {
+            "evals": 40,
+            "probes": 320,
+            "proposals": 312,
+            "guard_rejections": 32,
+            "moves": 0,
+            "splits": 0
+          },
+          "last": {
+            "step": 40,
+            "moves": 0,
+            "law": "routed_paired",
+            "fit_error": 0.41721214135847595,
+            "eligible_deaths": 55,
+            "eligible_births": 73,
+            "child": 100,
+            "parent": 76,
+            "variant": "antisymmetric",
+            "guard_error_before": 0.4942501430372631,
+            "guard_error_after": 0.4659038651478334,
+            "average_guard_error_before": 0.4315463812585217,
+            "average_guard_error_after": 0.4200788988347166,
+            "guard_gain": 0.028346277889429748,
+            "average_guard_gain": 0.01146748242380503,
+            "max_context_harm": 0.06029719279521137,
+            "average_max_context_harm": 0.0721707525483683,
+            "guard_contexts": 64,
+            "accepted": false
+          },
+          "evidence_counters": {
+            "updates": 40,
+            "resets": 0,
+            "global_resets": 0,
+            "flagged_rows_sum": 18
+          }
+        }
+      }
+    ]
+  }
+}
