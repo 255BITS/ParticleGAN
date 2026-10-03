@@ -111,11 +111,15 @@ class _SelectedStudent:
     """Read-only original scorer interface over the selected complete function."""
     def __init__(self, served):
         self.served = served
-        self.neu = served.models["generator"].neu
+        # The original scorer owns CPU reference constants. Keep the complete
+        # selected forward on its snapshot device; only independent inference
+        # values cross this scoring boundary, never models or policy state.
+        self.neu = served.models["generator"].neu.detach().cpu().clone()
 
     def embeds(self, scale):
-        context = slot_contexts([0, 1], scale=scale, device=self.neu.device, dtype=self.neu.dtype)
-        return self.served.routed_forward(context, perturb=False, output_noise=False)
+        context = slot_contexts([0, 1], scale=scale, device=self.served.table.device,
+                                dtype=self.served.table.dtype)
+        return self.served.routed_forward(context, perturb=False, output_noise=False).detach().cpu().clone()
 
 
 class UnusedTokenRoutedFixture:

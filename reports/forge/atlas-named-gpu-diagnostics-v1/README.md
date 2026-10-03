@@ -1,23 +1,28 @@
-# Eight named Atlas GPU host diagnostics
+# Three remaining named Atlas GPU diagnostics
 
-This is one corrected-source successor (`atlas-named-hosts-current-gpu-diagnostics-v3`), with the fixed shared Atlas pair
+This is the explicitly authorized device-boundary continuation
+`atlas-named-hosts-current-gpu-diagnostics-v4`, with the fixed shared Atlas pair
 `lr=.0053125`, `prior_lr_mult=1.5` and seed `0`. It preserves the original
 targets, objectives, gates and full horizons. Each actual named family retains
 its own complete 26-question view with Tier 1/2/3 denominators **5/19/2**.
-Only its adapted questions are executed here; every other slot is `NOT_RUN`.
+Only the three remaining GPU1 adaptations are executable here. Every other
+current-source slot is `NOT_RUN`. The five completed GPU0 outcomes remain
+separate in the pinned v3 publication under its original source.
 Results cannot fill another family, the original source, or an ordinary
 qualification, calibration, public default or speed comparison.
 
 | Physical lane | Actual family | Adapted questions | Updates | Full allowance |
 |---|---|---|---|---:|
-| GPU 0 | `atlas_conditional` | trajectory, residual student, unipolar, mid-scale identity | 400/400/400/800 | 7200 s |
-| GPU 0 | `atlas_ae_routed` | AE reconstruction and anchor hold | 250 | 300 s |
+| GPU 0, preserved only | `atlas_conditional` | four original v3 PASS outcomes; never re-executed | 400/400/400/800, original source | No v4 admission |
+| GPU 0, preserved only | `atlas_ae_routed` | original v3 AE PASS; never re-executed | 250, original source | No v4 admission |
 | GPU 1 | `atlas_routed` | unused slot hold and used concept edit | 200 | 300 s |
 | GPU 1 | `atlas_multibank` | leftover/content preservation and pole edit | 800 | 1800 s |
 | GPU 1 | `atlas_word_joint_min11` | five-word generation and paired inverse | 20001 | 900 s |
 
-The lanes are disjoint and each runs serially. Their ceilings are 7500 and
-3000 seconds, totalling **10500 seconds**. A full original allowance must fit
+The original physical-lane ceilings remain 7500 and 3000 seconds, totalling
+**10500 seconds**. This continuation exposes only physical GPU1 and executes
+unused token → cover → word serially. GPU0 is refused by the CLI and by direct
+family/lane dispatch. A full original allowance must fit
 before every admission. Grading and media share that allowance; export grace
 is zero. No automatic retries, extra seeds, shorter budgets, CPU fallback,
 disabled controls or extra sweep are permitted. Completed numerical `FAIL`
@@ -25,27 +30,43 @@ continues the diagnostic lane. Invalid source/contract/runtime/checkpoint/media
 or interrupted execution halts its lane and retains `INVALID`/`INCOMPLETE`
 and all unreached `NOT_RUN` cells.
 
-These are **inclusive lane ceilings**. The two original pre-update INVALID
-attempts remain unchanged and debit GPU0 `12.873334385920316` seconds and GPU1
-`12.449620655039325` seconds, with zero reserve. The exact
+These are **inclusive lane ceilings**, with no budget reset. The original
+v1 INVALID setup attempts retain GPU0 `12.873334385920316` seconds and GPU1
+`12.449620655039325` seconds, with zero reserve. Their exact
 [original failure summary](../atlas-named-gpu-diagnostics-invalid-20261003/summary.json)
-(`7fee64a4…`) and its old source and durable terminal proofs are frozen inputs.
-Initial remaining paid capacity is GPU0 `7487.12666561408` and GPU1
-`2987.5503793449607` seconds; together `10474.67704495904` seconds.
-The unadmitted native-v2 preparation supplies no cost or scientific credit.
+(`7fee64a4…`) and source/durable terminal proofs remain unchanged.
 
-Before **each job**, historical lane debit + verified completed predecessor
-families' charged costs + current family charged spend + the unchanged full
-job allowance must fit that physical lane. The separate family cap must also
-fit. Family caps stay 7200/300/300/1800/900; a debit is not subtracted from an
-unrelated 300-second family cap. Another lane cannot supply spare capacity.
-Predecessor study/source/grade/media and durable cost pins must verify in the
-exact lane order. Missing, interrupted or unfinished predecessor records
-refuse downstream admission. Current paid, interruption reserve, historical
-debit and inclusive lane charge remain separate in state and human readouts.
-Measured teardown overruns are durably retained as `BUDGET_EXCEEDED` and halt;
-they never reset the ceiling or admit a later job. No old failure supplies a
-current outcome. This authorization permits one successor and no retry sweep.
+The exact completed [v3 publication](../atlas-named-gpu-diagnostics-native-v3-20261003/results.json)
+(`8ba7230a…`, 518012 bytes) supplies a **separate cost-only carryover**:
+GPU0 `221.9527463898994` seconds and GPU1 `13.754588949028403` seconds,
+with zero reserve. Its original source is `ff94453b45e02fd451b21c26d5991f6ed435c292`
+/ `87fcd4e28bdcd9f347379b7db1fbcf0af3edcc0fbd5e97e4a98d9a49f8987a87`.
+The full original source/artifact index, three terminal studies, six durable
+terminals/supervisors and five original grade/GIF pairs must verify before
+new admission. The v3 unused-token error remains INVALID with no numerical
+grade; its completed-update count remains unavailable. It supplies no FAIL,
+PASS or fabricated GIF.
+
+Historical inclusive charge is therefore GPU0 `234.82608077581972` seconds
+and GPU1 `26.204209604067728` seconds: **261.03029037988745 seconds total**.
+Only GPU1's remaining `2973.7957903959323` seconds can fund v4. Spare GPU0
+capacity cannot be borrowed. The unadmitted native-v2 preparation supplies
+no cost or scientific credit. The five GPU0 PASS outcomes remain referenced
+under v3 only; none fills a current v4 slot or reruns.
+
+Before **each job**, this verified historical lane debit + completed v4
+predecessor families' charged costs + current family charged spend + the
+unchanged full job allowance must fit GPU1's original 3000-second ceiling.
+The separate current-family full allowance remains 300/1800/900 seconds.
+A job does not receive a reduced budget to make it fit, and historical cost
+is counted once. A worst-case full300 + full1800 cannot leave room for the
+final full900 after the historical debit; actual cheaper completed jobs may.
+Missing, interrupted or unfinished predecessor records refuse downstream
+admission. Current paid, interruption reserve, v1 engineering, v3 paid and
+inclusive lane charge remain distinct in state and human readouts.
+Measured teardown overruns are durably retained as `BUDGET_EXCEEDED` and halt.
+No automatic failed/interrupted retries, pass reruns, seed studies, new sweep,
+ordinary qualification, default or speed credit are authorized by this tool.
 
 The generic planner uses the inherited Atlas `public_trainer` reference
 context to resolve **metadata only**. Every adapted task overrides execution
@@ -76,6 +97,13 @@ eleven actual prior rows, same-effective-code DV12 generation, and words-only
 Original N5 remains `BLOCKED` under unchanged full-owner eligibility; min11
 has no old-source or resource-equivalence credit.
 
+The v4 device repair changes only the unused-token and cover scorer boundary.
+Complete selected forwards retain their snapshot device; unused-token contexts
+retain the selected table's device and dtype. Detached cloned output/reference
+values cross to the original CPU scorers. Live and selected modules are never
+moved, and original scorer formulas, gates, routing, noise and sampling remain
+unchanged. This is a new source cohort, with no old qualification transfer.
+
 Each host retains **24 post-update observations** and its original five
 terminal passing-check gate. This is not a first-window/all-later hold or a
 convergence-speed test. Goal GIFs use nine genuine retained NPZ boundaries:
@@ -91,9 +119,9 @@ Preparation constructs no model, executes no update and initializes no queue.
 Actual shared `PolicyCoordinator` admission is through the existing queue;
 the coordinator's first argument is that queue, not the source checkout.
 
-After root freezes a clean committed source and repins all eight declarations,
+After root freezes a clean committed source and repins the declarations,
 prepare a fresh external output. This captures the complete source, all parent
-and variant JSONs, actual Recipes, runtime, five views, compiler annotations,
+and variant JSONs, actual Recipes, runtime, five full views, compiler annotations, both historical cost cuts,
 and the source-bound delegated immutable pin/lease/charge utilities:
 
 ```sh
@@ -102,18 +130,15 @@ python reports/forge/atlas-named-gpu-diagnostics-v1/run_diagnostics.py \
   --prepare-only --output /path/to/new-named-diagnostic-output
 ```
 
-Root may then execute either disjoint lane or both in separate processes:
+Root may then execute only the remaining physical GPU1 lane:
 
 ```sh
-python reports/forge/atlas-named-gpu-diagnostics-v1/run_diagnostics.py \
-  --output /path/to/new-named-diagnostic-output --gpus 0 \
-  --queue-root /ml2/hypergan/ParticleGAN-single-recipe/runs/forge
 python reports/forge/atlas-named-gpu-diagnostics-v1/run_diagnostics.py \
   --output /path/to/new-named-diagnostic-output --gpus 1 \
   --queue-root /ml2/hypergan/ParticleGAN-single-recipe/runs/forge
 ```
 
-Only the declared physical lane is exposed as logical `cuda:0`. Before any
+Only physical GPU1 is exposed as logical `cuda:0`. Before any
 reservation/child, telemetry must report the exact RTX A6000, at least
 12288 MiB free and temperature at most 82 C. Children inherit admitted lease
 descriptors, CPU/BLAS threads 1, deterministic cuBLAS settings and a `.2`
@@ -124,5 +149,7 @@ reserve, whose charged total matches central admission. Neither wall time nor
 FLOPs establish fastest configuration here.
 
 Tail an actual child's `<output>/<family>/attempts/<task>/run.log`.
-Each family `study.json` and `README.md` retains its full denominator and every
-grade/GIF. This declaration and its CPU tests alone contain no scientific run.
+Each executed family `study.json` and `README.md` retains its full 26-slot
+denominator and every current grade/GIF. Unexecuted current family views and
+the separate old-source PASS references remain in the preparation packet.
+This declaration and its CPU tests alone contain no new scientific run.

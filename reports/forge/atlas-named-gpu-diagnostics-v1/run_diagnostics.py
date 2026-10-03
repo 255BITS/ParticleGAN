@@ -1,4 +1,4 @@
-"""Finite GPU diagnostics for eight explicit named Atlas host adaptations.
+"""Finite GPU1 continuation for three explicit named Atlas host adaptations.
 
 The public Forge runtime owns all updates; the independent evaluator owns all
 numerical decisions. This wrapper owns source reconstruction, disjoint lanes,
@@ -33,6 +33,18 @@ PRIOR_DEBITS = {"0": 12.873334385920316, "1": 12.449620655039325}
 ENGINEERING_REFERENCE = {"summary": {"path": PRIOR_SUMMARY, "sha256": "7fee64a49aa56b2cec25ffcf4861eccd91ba6886fd33f9e95565dce1b701cfd7", "bytes": 235580},
                          "source": PRIOR_SOURCE, "paid_seconds_by_lane": PRIOR_DEBITS,
                          "reserved_seconds": 0., "qualification_input": False, "authorized_successors": 1}
+PRIOR_PUBLICATION = "reports/forge/atlas-named-gpu-diagnostics-native-v3-20261003/results.json"
+V3_SOURCE = {"commit": "ff94453b45e02fd451b21c26d5991f6ed435c292",
+             "digest": "87fcd4e28bdcd9f347379b7db1fbcf0af3edcc0fbd5e97e4a98d9a49f8987a87"}
+V3_DEBITS = {"0": 221.9527463898994, "1": 13.754588949028403}
+HISTORICAL_LANE_DEBITS = {key: PRIOR_DEBITS[key] + V3_DEBITS[key] for key in PRIOR_DEBITS}
+CONTINUATION_REFERENCE = {
+    "publication": {"path": PRIOR_PUBLICATION, "sha256": "8ba7230a71041e3a0185528c9e76c5f39bff6eeadfb98b59d715ef72ff76b9e0", "bytes": 518012},
+    "source": V3_SOURCE, "current_paid_seconds_by_lane": V3_DEBITS,
+    "inclusive_historical_paid_seconds_by_lane": HISTORICAL_LANE_DEBITS,
+    "reserved_seconds": 0., "qualification_input": False, "outcomes_reused": False,
+    "completed_cases_reexecuted": False,
+}
 FLAGS = ("qualification_input", "ordinary_tier_credit", "calibration_credit",
          "default_adoption", "cross_cohort_pooling", "speed_ranking")
 ENVIRONMENT = {"CUDA_DEVICE_ORDER": "PCI_BUS_ID", "CUBLAS_WORKSPACE_CONFIG": ":4096:8",
@@ -51,6 +63,8 @@ FAMILIES = {
     "atlas_word_joint_min11": {"cohort": "word_joint_policy_min11_v1", "gpu": "1", "cap": 900,
                               "parents": ("five_word_joint_acquisition",)},
 }
+ACTIVE_FAMILIES = ("atlas_routed", "atlas_multibank", "atlas_word_joint_min11")
+PRESERVED_FAMILIES = ("atlas_conditional", "atlas_ae_routed")
 FIXED_HOSTS = {
     "trajectory": (400, 1800), "residual_student": (400, 1800), "unipolar": (400, 1800),
     "mid_scale_identity": (800, 1800), "ae_gan_hold": (250, 300), "unused_token_hold": (200, 300),
@@ -109,22 +123,25 @@ def active_rows(spec, family):
 
 
 def validate_spec(spec, root=None):
-    fixed = {"schema": SCHEMA, "id": "atlas-named-hosts-current-gpu-diagnostics-v3",
+    fixed = {"schema": SCHEMA, "id": "atlas-named-hosts-current-gpu-diagnostics-v4",
              "view": "discriminator_stability", "recipe_preset": "atlas", "recipe_overrides": OVERRIDES,
              "seed": 0, "cuda_model": "NVIDIA RTX A6000", "required_slots_per_family": 26,
-             "families": list(FAMILIES), "executable_slots": 8, "executable_jobs": 8,
+             "families": list(FAMILIES), "executable_families": list(ACTIVE_FAMILIES),
+             "preserved_v3_families": list(PRESERVED_FAMILIES), "executable_physical_gpus": ["1"],
+             "executable_slots": 3, "executable_jobs": 3,
              "diagnostic_cap_seconds": 10500, "lane_cap_seconds": {"0": 7500, "1": 3000},
              "full_view_tiers": {"1": 5, "2": 19, "3": 2}, "frames": 9, "export_grace_seconds": 0,
              "failure_policy": "continue_completed_numerical_FAIL_halt_invalid_lane_no_retry",
              "evidence_use": "named_policy_host_diagnostic", "engineering_carryover": ENGINEERING_REFERENCE,
+             "continuation_carryover": CONTINUATION_REFERENCE,
              "resources": {"host_memory_mb": 2048, "cpu_threads": 1, "minimum_free_gpu_memory_mib": 12288,
                            "maximum_gpu_temperature_c": 82, "memory_fraction": .2}}
     if any(canonical(spec.get(k)) != canonical(v) for k, v in fixed.items()) or any(spec.get(k) is not False for k in FLAGS):
         raise ValueError("the one finite named-family/device/budget/nonqualification contract changed")
     rows = spec.get("cases")
-    if not isinstance(rows, list) or len(rows) != 8:
-        raise ValueError("all eight named questions are required")
-    expected = [(family, parent) for family, info in FAMILIES.items() for parent in info["parents"]]
+    if not isinstance(rows, list) or len(rows) != 3:
+        raise ValueError("exactly the three remaining GPU1 named questions are required")
+    expected = [(family, parent) for family in ACTIVE_FAMILIES for parent in FAMILIES[family]["parents"]]
     if [(r.get("family"), r.get("parent_id")) for r in rows] != expected:
         raise ValueError("missing, duplicated, borrowed or reordered named family question")
     for row in rows:
@@ -203,6 +220,166 @@ def engineering_carryover(spec, root, *, durable=False):
     if prior["cost"].get("paid_seconds") != sum(PRIOR_DEBITS.values()):
         raise ValueError("old aggregate debit differs from the two durable measurements")
     return {"reference": deepcopy(ENGINEERING_REFERENCE), "attempts": records, "qualification_input": False}
+
+
+def continuation_carryover(spec, root, *, durable=False):
+    """The immutable v3 cut supplies paid costs and separate old outcomes only."""
+    if canonical(spec.get("continuation_carryover")) != canonical(CONTINUATION_REFERENCE):
+        raise ValueError("the exact v3 continuation debit/source cannot reset or change")
+    reference = CONTINUATION_REFERENCE["publication"]
+    path = Path(root) / reference["path"]
+    if path.is_symlink() or file_hash(path) != reference["sha256"] or path.stat().st_size != reference["bytes"]:
+        raise ValueError("the completed v3 publication is missing or changed")
+    previous = read(path)
+    if (previous.get("schema") != "particlegan_atlas_named_gpu_diagnostics_publication_v3"
+            or previous.get("source") != {"origin_commit": V3_SOURCE["commit"], "digest": V3_SOURCE["digest"]}
+            or any(previous.get(key) is not False for key in (*FLAGS, "reuse"))
+            or previous.get("counts") != {"attempted_adapted_questions": 6, "declared_adapted_questions": 8,
+                "required_family_cells": 130, "required_slots_per_family": 26,
+                "statuses": {"INVALID": 1, "NOT_RUN": 124, "PASS": 5}, "terminal_families": 3,
+                "tiers_per_family": {"1": 5, "2": 19, "3": 2}}
+            or previous.get("engineering_carryover", {}).get("reference") != ENGINEERING_REFERENCE
+            or set(previous.get("families", {})) != set(FAMILIES)):
+        raise ValueError("v3 source/full denominators/outcome-only scope changed")
+    cost = previous.get("cost", {})
+    if (cost.get("original_cap_seconds") != 10500 or cost.get("current_paid_seconds") != sum(V3_DEBITS.values())
+            or cost.get("current_reserved_seconds") != 0.
+            or cost.get("prior_engineering_paid_seconds") != sum(PRIOR_DEBITS.values())
+            or cost.get("inclusive_charged_seconds") != sum(V3_DEBITS.values()) + sum(PRIOR_DEBITS.values())
+            or set(cost.get("lanes", {})) != {"0", "1"}):
+        raise ValueError("v3 aggregate cost may not reset, duplicate or hide a reserve")
+    for physical in ("0", "1"):
+        if cost["lanes"][physical] != {"cap_seconds": spec["lane_cap_seconds"][physical],
+                "current_paid_seconds": V3_DEBITS[physical], "current_reserved_seconds": 0.,
+                "inclusive_charged_seconds": HISTORICAL_LANE_DEBITS[physical],
+                "prior_engineering_paid_seconds": PRIOR_DEBITS[physical]}:
+            raise ValueError("v3 costs cannot borrow another physical lane")
+    attempts, preserved, per_lane = [], [], {"0": 0., "1": 0.}
+    for family, info in FAMILIES.items():
+        old = previous["families"][family]
+        expected_status = "COMPLETE_DIAGNOSTIC" if family in PRESERVED_FAMILIES else "INVALID" if family == "atlas_routed" else "NOT_RUN"
+        expected_counts = {"PASS": len(info["parents"]), "NOT_RUN": 26 - len(info["parents"])} if family in PRESERVED_FAMILIES else {"INVALID": 1, "NOT_RUN": 25} if family == "atlas_routed" else {"NOT_RUN": 26}
+        expected_attempts = len(info["parents"]) if family in PRESERVED_FAMILIES or family == "atlas_routed" else 0
+        slot_names = [parent + "_" + info["cohort"] if parent in info["parents"] else parent for parent in legacy().PARENTS]
+        active_names = {parent + "_" + info["cohort"] for parent in info["parents"]}
+        slots = old.get("slots", {})
+        active_status = "PASS" if family in PRESERVED_FAMILIES else "INVALID" if family == "atlas_routed" else "NOT_RUN"
+        if (old.get("family") != family or old.get("cohort") != info["cohort"]
+                or old.get("physical_gpu") != info["gpu"] or old.get("family_cap_seconds") != info["cap"]
+                or old.get("required_slots") != 26 or old.get("tiers") != {"1": 5, "2": 19, "3": 2}
+                or old.get("status") != expected_status or old.get("counts") != expected_counts
+                or set(slots) != set(slot_names)
+                or any(row.get("qualification_input") is not False
+                    or row.get("diagnostic_status") != (active_status if name in active_names else "NOT_RUN")
+                    for name, row in slots.items())
+                or old.get("reserved_seconds") != 0.
+                or old.get("charged_seconds") != old.get("paid_seconds")
+                or len(old.get("attempts", [])) != expected_attempts
+                or any(old.get(key) is not False for key in FLAGS) or old.get("ordinary_qualified_tier") != 0):
+            raise ValueError("v3 family/source scope or complete terminal prefix changed")
+        if durable and expected_attempts:
+            state = read(check_pin(old["study_input"]))
+            source = state.get("source", {})
+            if (source.get("origin_commit") != V3_SOURCE["commit"] or source.get("digest") != V3_SOURCE["digest"]
+                    or digest(source.get("files")) != source.get("digest")
+                    or len(source.get("files", {})) != previous.get("source_file_count")
+                    or any(Path(name).is_absolute() or ".." in Path(name).parts for name in source.get("files", {}))
+                    or state.get("execution_source") != source or state.get("family") != family
+                    or state.get("status") != expected_status or state.get("spec_sha256") != previous["spec_sha256"]
+                    or state.get("spec", {}).get("id") != "atlas-named-hosts-current-gpu-diagnostics-v3"
+                    or state.get("measured_paid_seconds") != old["paid_seconds"]
+                    or state.get("unmeasured_interrupt_reserved_seconds") != 0.
+                    or state.get("spent_seconds") != old["paid_seconds"]
+                    or state.get("lane_runtime") != old.get("runtime") or state.get("slots") != old["slots"]
+                    or state.get("qualification_input") is not False or len(state.get("jobs", [])) != expected_attempts):
+                raise ValueError("v3 durable study/source/cost attribution changed")
+            manifest = Path(source["snapshot_path"]) / "forge-source.json"
+            if read(manifest) != {key: value for key, value in source.items() if key != "snapshot_path"}:
+                raise ValueError("v3 frozen source manifest differs from its executed study")
+        paid = 0.
+        for index, (item, parent) in enumerate(zip(old["attempts"], info["parents"])):
+            name = parent + "_" + info["cohort"]
+            complete = family in PRESERVED_FAMILIES
+            amount = legacy().number(item.get("paid_seconds"), "v3 measured paid")
+            if (item.get("status") != ("COMPLETE" if complete else "INVALID")
+                    or item.get("task_ids") != [name] or item.get("allowance_seconds") != FIXED_HOSTS[parent][1]
+                    or item.get("reserved_seconds") != 0. or item.get("charged_seconds") != amount
+                    or item.get("terminal_status") != "completed" or item.get("child_returncode") != (0 if complete else 1)
+                    or item.get("qualification_input") is not False
+                    or (complete and (item.get("outcome", {}).get("status") != "PASS"
+                        or item["outcome"].get("completed_steps") != FIXED_HOSTS[parent][0]
+                        or item["outcome"].get("observations") != 24))):
+                raise ValueError("v3 attempt terminal/allowance/grade cannot change")
+            if durable:
+                row = state["jobs"][index]; terminal = read(check_pin(item["terminal"]))
+                # The exact supervisor bytes are bound by the publication input index below.
+                supervisor = read(Path(item["terminal"]["path"]).with_name("supervisor-request.json"))
+                if (row.get("terminal") != item["terminal"] or row.get("attempt_key") != item.get("attempt_key")
+                        or row.get("compatibility_key") != item.get("compatibility_key") or row.get("task_ids") != [name]
+                        or row.get("status") != item["status"]
+                        or row.get("paid_wall_seconds") != amount or row.get("charged_seconds") != amount
+                        or row.get("unmeasured_interrupt_reserved_seconds") != 0.
+                        or terminal.get("token") != row.get("token") or supervisor.get("token") != row.get("token")
+                        or hashlib.sha256(str(row.get("token")).encode()).hexdigest() != item.get("token_sha256")
+                        or terminal.get("attempt_status") != "completed" or terminal.get("child_returncode") != item["child_returncode"]
+                        or terminal.get("paid_wall_seconds") != amount or supervisor.get("source") != source):
+                    raise ValueError("v3 durable terminal/supervisor source or paid proof changed")
+                job = next(job for job in state["request"]["jobs"] if job["task_ids"] == [name])
+                if job.get("budget_seconds") != item["allowance_seconds"] or job.get("compatibility_key") != item["compatibility_key"]:
+                    raise ValueError("v3 original job identity/allowance changed")
+                if complete:
+                    verify_predecessor_outcome(state, row, job)
+                    outcome = item["outcome"]
+                    if (row["outcome"]["raw"] != outcome["raw_input"]
+                            or row["outcome"]["grading"] != outcome["grading_input"]
+                            or row["outcome"]["media"][name] != outcome["media_input"]):
+                        raise ValueError("v3 publication outcome differs from its retained original grade/media")
+                else:
+                    check_pin(item["raw_error_input"])
+                    if "outcome" in row or item.get("numerical_gate") != "UNAVAILABLE" or item.get("goal_gif") is not None:
+                        raise ValueError("v3 engineering error cannot acquire a numerical gate or media")
+            attempts.append({"family": family, "physical_gpu": info["gpu"], "task_ids": [name],
+                "status": item["status"], "paid_seconds": amount, "reserved_seconds": 0.,
+                "terminal": deepcopy(item["terminal"]), "token_sha256": item["token_sha256"],
+                "study": deepcopy(old["study_input"]), "qualification_input": False})
+            if complete:
+                preserved.append({"family": family, "task_id": name, "status": "PASS",
+                    "original_source": deepcopy(V3_SOURCE), "grade": deepcopy(item["outcome"]["grade_publication"]),
+                    "gif": deepcopy(item["outcome"]["gif_publication"]), "qualification_input": False,
+                    "current_slots_reused": False, "reexecution_authorized": False})
+            paid += amount
+        if not math.isclose(old["paid_seconds"], paid, rel_tol=0, abs_tol=1e-10):
+            raise ValueError("v3 family debit differs from its exact measured terminals")
+        per_lane[info["gpu"]] += paid
+    if any(not math.isclose(per_lane[key], V3_DEBITS[key], rel_tol=0, abs_tol=1e-10) for key in per_lane):
+        raise ValueError("v3 lane cost does not match all six retained attempts")
+    if durable:
+        index_ref = previous["input_index"]
+        index_path = path.parent / index_ref["path"]
+        if index_path.is_symlink() or file_hash(index_path) != index_ref["sha256"] or index_path.stat().st_size != index_ref["bytes"]:
+            raise ValueError("v3 original source/artifact input index changed")
+        entries = read(index_path)
+        files = entries.get("files", [])
+        if (entries.get("raw_files_changed") is not False or entries.get("file_count") != index_ref["file_count"]
+                or len(files) != index_ref["file_count"] or len({item["path"] for item in files}) != len(files)):
+            raise ValueError("v3 input source/artifact closure is incomplete or duplicated")
+        identities = {item["path"]: item for item in files}
+        if identities.get(previous["trusted_cut"]["path"]) != previous["trusted_cut"]:
+            raise ValueError("v3 trusted terminal cut is absent from its original input closure")
+        for item in files:
+            check_pin(item)
+        for family in (*PRESERVED_FAMILIES, "atlas_routed"):
+            state = read(check_pin(previous["families"][family]["study_input"]))
+            snapshot = Path(state["source"]["snapshot_path"])
+            required = [snapshot / "forge-source.json", *[snapshot / name for name in state["source"]["files"]]]
+            required += [Path(item["terminal"]["path"]).with_name("supervisor-request.json")
+                         for item in previous["families"][family]["attempts"]]
+            if any(str(item) not in identities for item in required):
+                raise ValueError("v3 source or supervisor proof is absent from the original input closure")
+            if any(identities[str(snapshot / name)]["sha256"] != sha for name, sha in state["source"]["files"].items()):
+                raise ValueError("v3 actual source bytes differ from the executed manifest")
+    return {"reference": deepcopy(CONTINUATION_REFERENCE), "attempts": attempts,
+            "preserved_outcomes": preserved, "qualification_input": False, "outcomes_reused": False}
 
 
 def declaration(root, spec, family):
@@ -290,7 +467,8 @@ def build_requests(root, spec, source=None):
                 declaration=declaration(root, spec, family), view_id=spec["view"], through_tier=1,
                 freeze_source=False, execution_backend="cuda", cuda_model=spec["cuda_model"]) for family in FAMILIES}
     if source is None:
-        extras = {SELF, DELEGATE, DIRECTORY + "/protocol.json", DIRECTORY + "/README.md", PRIOR_SUMMARY}
+        extras = {SELF, DELEGATE, DIRECTORY + "/protocol.json", DIRECTORY + "/README.md", PRIOR_SUMMARY,
+                  PRIOR_PUBLICATION, str(Path(PRIOR_PUBLICATION).with_name("input-index.json"))}
         extras.update(str(p.relative_to(root)) for p in (Path(root) / "configs/forge").rglob("*.json"))
         for request in requests.values():
             extras.update(request["source"]["files"])
@@ -313,7 +491,8 @@ def case_definitions(requests, spec):
 def card_for(requests, spec, source):
     return {"schema": SCHEMA + "_structural_readiness", "source_digest": source["digest"], "contract_sha256": digest(spec),
             "task_preflight": {r["id"]: requests[r["family"]]["tasks"][r["id"]].get("preflight_blockers", []) for r in spec["cases"]},
-            "required_questions_per_family": 26, "declared_adapted_questions": 8,
+            "required_questions_per_family": 26, "declared_adapted_questions": 3,
+            "preserved_old_outcomes": 5, "old_outcomes_are_current_credit": False,
             "model_capacity_proved": False, "learned_quality_proved": False, "optimizer_updates": 0,
             "qualification_input": False, "claim": "Metadata/API/source readiness only; no capacity, CPU numerical or learned-quality proof."}
 
@@ -342,7 +521,8 @@ def prepare(spec_path, output):
               "requests": requests, "source": source, "execution_source": source, "capacity_preflight": card,
               "case_definitions": case_definitions(requests, spec), "runtime_contract": runtimes[0],
               "family_paid_budget_seconds": {family: info["cap"] for family, info in FAMILIES.items()},
-              "engineering_carryover": engineering_carryover(spec, ROOT, durable=True)}
+              "engineering_carryover": engineering_carryover(spec, ROOT, durable=True),
+              "continuation_carryover": continuation_carryover(spec, ROOT, durable=True)}
     path = preparation_path(output)
     if path.exists() and read(path) != packet:
         raise ValueError("preserve previous preparation/source; declare a new output")
@@ -365,6 +545,9 @@ def verify_packet(packet):
     if (source["files"].get(PRIOR_SUMMARY) != ENGINEERING_REFERENCE["summary"]["sha256"]
             or packet.get("engineering_carryover") != engineering_carryover(spec, snapshot, durable=True)):
         raise ValueError("frozen engineering debit/artifacts/source changed")
+    if (source["files"].get(PRIOR_PUBLICATION) != CONTINUATION_REFERENCE["publication"]["sha256"]
+            or packet.get("continuation_carryover") != continuation_carryover(spec, snapshot, durable=True)):
+        raise ValueError("frozen v3 source/terminal costs or separate preserved outcomes changed")
     requests, _ = build_requests(snapshot, spec, source)
     if canonical(requests) != canonical(packet["requests"]):
         raise ValueError("candidate/task/Recipe/runtime/compatibility reconstruction changed")
@@ -379,8 +562,8 @@ def verify_packet(packet):
 
 
 def family_packet(packet, family, predecessor_paths=()):
-    if family not in FAMILIES:
-        raise ValueError("unknown named family")
+    if family not in ACTIVE_FAMILIES:
+        raise ValueError("v4 executes only the three remaining GPU1 families; preserved families cannot rerun")
     result = deepcopy(packet)
     result.update(family=family, request=deepcopy(packet["requests"][family]),
                   lane_runtime=lane_runtime(packet["requests"][family], FAMILIES[family]["gpu"]),
@@ -397,15 +580,15 @@ def lane_runtime(request, physical):
 
 
 def configure_environment(physical=None):
-    if physical is not None and physical not in {"0", "1"}:
-        raise ValueError("only the two declared disjoint GPU lanes are supported")
+    if physical is not None and physical != "1":
+        raise ValueError("v4 has only the declared physical GPU1 continuation lane")
     os.environ.update(ENVIRONMENT)
     os.environ["CUDA_VISIBLE_DEVICES"] = physical or ""
 
 
 def gpu_readiness(spec, physical, query=None):
-    if physical not in {"0", "1"}:
-        raise ValueError("unknown physical GPU")
+    if physical != "1":
+        raise ValueError("v4 cannot admit the preserved physical GPU0 lane")
     command = ["nvidia-smi", "--id=" + physical, "--query-gpu=index,name,memory.free,temperature.gpu", "--format=csv,noheader,nounits"]
     value = query(command) if query else subprocess.check_output(command, text=True)
     rows = [line.strip().split(",") for line in value.splitlines() if line.strip()]
@@ -430,7 +613,9 @@ def executable_jobs(packet):
 
 
 def prior_lane_families(family):
-    names = [name for name, info in FAMILIES.items() if info["gpu"] == FAMILIES[family]["gpu"]]
+    if family not in ACTIVE_FAMILIES:
+        raise ValueError("preserved family has no current executable lane")
+    names = list(ACTIVE_FAMILIES)
     return names[:names.index(family)]
 
 
@@ -465,6 +650,9 @@ def lane_accounting(state, *, require_ready=False):
     if (canonical(state["spec"].get("engineering_carryover")) != canonical(ENGINEERING_REFERENCE)
             or state.get("engineering_carryover", {}).get("reference") != ENGINEERING_REFERENCE):
         raise ValueError("historical lane engineering debit cannot disappear or reset")
+    if (state["spec"].get("continuation_carryover") != CONTINUATION_REFERENCE
+            or state.get("continuation_carryover") != continuation_carryover(state["spec"], ROOT)):
+        raise ValueError("the full v3 paid/source/outcome history cannot disappear or become current credit")
     required = prior_lane_families(family); refs = state.get("lane_predecessors", [])
     names = [item.get("family") for item in refs]
     if names != required[:len(names)] or (require_ready and names != required):
@@ -477,6 +665,7 @@ def lane_accounting(state, *, require_ready=False):
                 or predecessor.get("source") != state["source"] or predecessor.get("execution_source") != state["execution_source"]
                 or predecessor.get("spec_sha256") != state["spec_sha256"] or predecessor.get("spec") != state["spec"]
                 or predecessor.get("engineering_carryover") != state["engineering_carryover"]
+                or predecessor.get("continuation_carryover") != state["continuation_carryover"]
                 or predecessor.get("request") != state["requests"][name]
                 or predecessor.get("requests") != state["requests"]
                 or predecessor.get("lane_runtime") != lane_runtime(state["requests"][name], physical)):
@@ -492,9 +681,11 @@ def lane_accounting(state, *, require_ready=False):
     charged = legacy().number(state.get("spent_seconds", 0.), "current family charged")
     return {"physical_gpu": physical, "lane_cap_seconds": state["spec"]["lane_cap_seconds"][physical],
             "historical_engineering_debit_seconds": PRIOR_DEBITS[physical],
+            "historical_v3_paid_seconds": V3_DEBITS[physical],
+            "historical_lane_debit_seconds": HISTORICAL_LANE_DEBITS[physical],
             "predecessor_paid_seconds": paid, "predecessor_reserved_seconds": reserved,
             "predecessor_charged_seconds": paid + reserved, "current_family_charged_seconds": charged,
-            "inclusive_lane_charged_seconds": PRIOR_DEBITS[physical] + paid + reserved + charged,
+            "inclusive_lane_charged_seconds": HISTORICAL_LANE_DEBITS[physical] + paid + reserved + charged,
             "all_predecessor_families_complete": names == required, "qualification_input": False}
 
 
@@ -531,7 +722,7 @@ def verify_state(state):
     for index, row in enumerate(state["jobs"]):
         job = executable[index]
         if (paid + reserved + job["budget_seconds"] > FAMILIES[family]["cap"]
-                or ledger["historical_engineering_debit_seconds"] + ledger["predecessor_charged_seconds"]
+                or ledger["historical_lane_debit_seconds"] + ledger["predecessor_charged_seconds"]
                    + paid + reserved + job["budget_seconds"] > ledger["lane_cap_seconds"]):
             raise ValueError("the full original allowance was unavailable before this attempt")
         if halted or row.get("compatibility_key") != job["compatibility_key"] or row.get("task_ids") != job["task_ids"]:
@@ -586,7 +777,7 @@ def verify_state(state):
 def validate_resolved(resolved):
     packet = resolved["packet"]; verify_packet(packet)
     family = packet.get("family")
-    if (family not in FAMILIES or resolved.get("packet_sha256") != digest(packet)
+    if (family not in ACTIVE_FAMILIES or resolved.get("packet_sha256") != digest(packet)
             or packet.get("request") != packet["requests"][family] or resolved.get("request") != packet["request"]):
         raise ValueError("child named family/request attribution changed")
     jobs = [j for j in selected_jobs(packet) if j["compatibility_key"] == resolved["job"].get("compatibility_key")]
@@ -779,7 +970,8 @@ def save_state(output, state):
     verify_state(state); write(Path(output) / "study.json", state)
     lines = ["# " + state["family"] + " GPU diagnostic", "", "All 26 required questions remain visible. Only this family's named adapted subset is executed; no ordinary/default/speed credit.", "",
              f"Measured paid {state['measured_paid_seconds']:.6f}s; reserve {state['unmeasured_interrupt_reserved_seconds']:.6f}s; charged {state['spent_seconds']:.6f}/{FAMILIES[state['family']]['cap']}s.", "",
-             f"Historical engineering debit {state['lane_accounting']['historical_engineering_debit_seconds']:.15g}s; completed predecessor families charged {state['lane_accounting']['predecessor_charged_seconds']:.15g}s; inclusive GPU{state['lane_accounting']['physical_gpu']} charge {state['lane_accounting']['inclusive_lane_charged_seconds']:.15g}/{state['lane_accounting']['lane_cap_seconds']}s. No earlier outcome supplies current qualification credit.", "",
+             f"Historical v1 engineering debit {state['lane_accounting']['historical_engineering_debit_seconds']:.15g}s; historical v3 paid {state['lane_accounting']['historical_v3_paid_seconds']:.15g}s; completed v4 predecessor families charged {state['lane_accounting']['predecessor_charged_seconds']:.15g}s; inclusive GPU{state['lane_accounting']['physical_gpu']} charge {state['lane_accounting']['inclusive_lane_charged_seconds']:.15g}/{state['lane_accounting']['lane_cap_seconds']}s. No earlier outcome supplies current qualification credit.", "",
+             "The five original GPU0 PASS outcomes remain only in the pinned v3 publication, under its original source. GPU0 is not executable in this continuation and no old PASS is assigned to these v4 slots.", "",
              "| Actual question | Tier | Original diagnostic gate | Goal GIF |", "|---|---:|---|---|"]
     for assignment in state["request"]["view"]["assignments"]:
         name = assignment["task"]; media = ""
@@ -797,10 +989,12 @@ def coordinator_for(queue_root):
 
 
 def run_family(output, packet, queue_root):
+    if packet.get("family") not in ACTIVE_FAMILIES:
+        raise ValueError("preserved GPU0 families are not executable in v4")
     output = Path(output).resolve(); verify_packet(packet); family = packet["family"]
     physical = FAMILIES[family]["gpu"]; runtime = lane_runtime(packet["request"], physical)
     state = read(output / "study.json") if (output / "study.json").exists() else initial_state(packet)
-    for key in ("spec", "spec_sha256", "source", "execution_source", "request", "requests", "family", "case_definitions", "runtime_contract", "family_paid_budget_seconds", "lane_runtime", "engineering_carryover", "lane_predecessors"):
+    for key in ("spec", "spec_sha256", "source", "execution_source", "request", "requests", "family", "case_definitions", "runtime_contract", "family_paid_budget_seconds", "lane_runtime", "engineering_carryover", "continuation_carryover", "lane_predecessors"):
         if state.get(key) != packet.get(key):
             raise ValueError("resume source/family/quota/runtime changed")
     verify_state(state)
@@ -822,6 +1016,8 @@ def run_family(output, packet, queue_root):
         if study_lease is None:
             raise RuntimeError("another owner holds this exact family study")
         for job in executable_jobs(packet)[len(state["jobs"]):]:
+            if state.get("continuation_carryover") != continuation_carryover(state["spec"], ROOT, durable=True):
+                raise ValueError("v3 terminal/source cost history must verify before each new full allowance")
             if not full_allowance_fits(state, job):
                 state.update(status="INCOMPLETE", stop_reason="next full allowance cannot fit the unchanged family and inclusive lane ceilings"); break
             telemetry = gpu_readiness(packet["spec"], physical)
@@ -884,11 +1080,11 @@ def run_family(output, packet, queue_root):
 
 
 def run_lane(output, queue_root, physical):
+    if physical != "1":
+        raise ValueError("the five preserved GPU0 outcomes cannot be re-executed")
     packet = read(preparation_path(output)); verify_packet(packet)
     summaries = []; predecessors = []
-    for family, info in FAMILIES.items():
-        if info["gpu"] != physical:
-            continue
+    for family in ACTIVE_FAMILIES:
         state = run_family(Path(output) / family, family_packet(packet, family, predecessors), queue_root)
         summaries.append({"family": family, "status": state["status"], "paid_seconds": state["measured_paid_seconds"],
                           "reserved_seconds": state["unmeasured_interrupt_reserved_seconds"],
@@ -903,7 +1099,7 @@ def parser():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument("--spec", type=Path, default=ROOT / DIRECTORY / "protocol.json")
     p.add_argument("--output", type=Path); p.add_argument("--queue-root", type=Path)
-    p.add_argument("--prepare-only", action="store_true"); p.add_argument("--gpus", choices=("0", "1"))
+    p.add_argument("--prepare-only", action="store_true"); p.add_argument("--gpus", choices=("1",))
     stages = p.add_mutually_exclusive_group()
     for flag in ("child", "execute", "evaluate"):
         stages.add_argument("--" + flag, type=Path)

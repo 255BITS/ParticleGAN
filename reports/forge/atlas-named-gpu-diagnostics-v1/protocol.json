@@ -2,80 +2,15 @@
   "calibration_credit": false,
   "cases": [
     {
-      "cohort": "conditional_policy_selected_cloud_v1",
-      "definition": "configs/forge/task-variants/conditional_policy_selected_cloud_v1/trajectory_conditional_policy_selected_cloud_v1.json",
-      "evaluation_sha256": "87a00f8508a724fd7cbbcd8e3153b587a0b423bd49932885c89e1b95d465bccc",
-      "execution_sha256": "ed0f9a02792b75aa10d19e0b67e411d9e148beab35c72b5eb10e70aad49cb1c9",
-      "family": "atlas_conditional",
-      "gpu": "0",
-      "id": "trajectory_conditional_policy_selected_cloud_v1",
-      "parent_id": "trajectory",
-      "sha256": "9f2f64b38974a257496ca6182cf929563c43d2dd7c36f03573d38dc614e16807",
-      "steps": 400,
-      "timeout_seconds": 1800
-    },
-    {
-      "cohort": "conditional_policy_selected_cloud_v1",
-      "definition": "configs/forge/task-variants/conditional_policy_selected_cloud_v1/residual_student_conditional_policy_selected_cloud_v1.json",
-      "evaluation_sha256": "cbdfcec0df851d94293019831de9d2a1193508a613d1cb7864415aeef16dc0f3",
-      "execution_sha256": "1ef97e40b3d35fea5f957d02681c91f69427caa3930319e944a03e65a70d1087",
-      "family": "atlas_conditional",
-      "gpu": "0",
-      "id": "residual_student_conditional_policy_selected_cloud_v1",
-      "parent_id": "residual_student",
-      "sha256": "bf9a509fec0e7f3aea331dd15f8bb044469c759f98342470b2414147c3870735",
-      "steps": 400,
-      "timeout_seconds": 1800
-    },
-    {
-      "cohort": "conditional_policy_selected_cloud_v1",
-      "definition": "configs/forge/task-variants/conditional_policy_selected_cloud_v1/unipolar_conditional_policy_selected_cloud_v1.json",
-      "evaluation_sha256": "05dcf936ffda03bf130fa23a4423df078b9683b4b627117fbb19eaf5b4c4d521",
-      "execution_sha256": "65d82a4d87928afb0670ee046d95e19426ac0a3d6f63bcf772910dc2b9783f46",
-      "family": "atlas_conditional",
-      "gpu": "0",
-      "id": "unipolar_conditional_policy_selected_cloud_v1",
-      "parent_id": "unipolar",
-      "sha256": "52650a9e9315bc4f78fc7b001fff0e05f2ea884de0ce33ef071744564eb1e4ac",
-      "steps": 400,
-      "timeout_seconds": 1800
-    },
-    {
-      "cohort": "conditional_policy_selected_cloud_v1",
-      "definition": "configs/forge/task-variants/conditional_policy_selected_cloud_v1/mid_scale_identity_conditional_policy_selected_cloud_v1.json",
-      "evaluation_sha256": "9e91ed41331e65fd85321f356d9c0fff53365f54ea5d6290204d20a786dffde6",
-      "execution_sha256": "2d0bcd0da8142025d6b1c5e3368376f1ecdb9fe1ecf103a86716e93d7421482c",
-      "family": "atlas_conditional",
-      "gpu": "0",
-      "id": "mid_scale_identity_conditional_policy_selected_cloud_v1",
-      "parent_id": "mid_scale_identity",
-      "sha256": "3cf2ad5b17ee00be15a18bb9f0f49c95c5264cc392f1a96ebac14c6e8a236660",
-      "steps": 800,
-      "timeout_seconds": 1800
-    },
-    {
-      "cohort": "ae_routed_policy_v1",
-      "definition": "configs/forge/task-variants/ae_routed_policy_v1/ae_gan_hold_ae_routed_policy_v1.json",
-      "evaluation_sha256": "eb3104d17beb0919337b0cc8a4261a28edbd0c0faba5736b035c8b5f6840b6cb",
-      "execution_sha256": "3f64d5e14dec73e6638d5c1c2fd61affc9f1c16ee8d1827e3730b377643e4e55",
-      "family": "atlas_ae_routed",
-      "gpu": "0",
-      "id": "ae_gan_hold_ae_routed_policy_v1",
-      "parent_id": "ae_gan_hold",
-      "sha256": "4bfb296d7a25979483cc16ef6c5e63b4833159ec842809b5857bdf35b408b2aa",
-      "steps": 250,
-      "timeout_seconds": 300
-    },
-    {
       "cohort": "routed_policy_selected_cloud_v1",
       "definition": "configs/forge/task-variants/routed_policy_selected_cloud_v1/unused_token_hold_routed_policy_selected_cloud_v1.json",
       "evaluation_sha256": "676542443392b8a3918991a31ee28c325c859874d9914d674780bf5555b0baac",
-      "execution_sha256": "7c248374526ff8916da3c5bf17ace51f0ca6d98c356dfcb4da0fab50abc755c2",
+      "execution_sha256": "4ed49e251a08a8f6aebfa40295509c27034ba97633078e24223541407a6c2a1e",
       "family": "atlas_routed",
       "gpu": "1",
       "id": "unused_token_hold_routed_policy_selected_cloud_v1",
       "parent_id": "unused_token_hold",
-      "sha256": "24640b52b3d45a37f27f01a3ba2719e3c7e3ccc8f67abfa9131181e6c89e4a04",
+      "sha256": "9cc7c0b53f929134bd8dcd27e80b3a55ca5e7572bdc607e0ec2542c96c76ed74",
       "steps": 200,
       "timeout_seconds": 300
     },
@@ -83,12 +18,12 @@
       "cohort": "multibank_policy_v1",
       "definition": "configs/forge/task-variants/multibank_policy_v1/cover_leftover_multibank_policy_v1.json",
       "evaluation_sha256": "dcda190c097644428f82ed4ac2cbe6a2603f57a0dcbeace09a6776a2dd371ece",
-      "execution_sha256": "5b2758041e3825f849594224bf601577c1c4a091602da183617f912113fefc1d",
+      "execution_sha256": "11ae869d165a08fa422cf41c7f5a524c416ae0f3768d8098541b51bfaed32fec",
       "family": "atlas_multibank",
       "gpu": "1",
       "id": "cover_leftover_multibank_policy_v1",
       "parent_id": "cover_leftover",
-      "sha256": "bf8b05898b98d170d37e7e1d6354637750781e14eb1ab148604b47c077f4ebe7",
+      "sha256": "8da5a372d8cb0cb7a16adaa4f1c9df8c59e34610ab97a7b7a5497949324cd3ae",
       "steps": 800,
       "timeout_seconds": 1800
     },
@@ -96,17 +31,40 @@
       "cohort": "word_joint_policy_min11_v1",
       "definition": "configs/forge/task-variants/word_joint_policy_min11_v1/five_word_joint_acquisition_word_joint_policy_min11_v1.json",
       "evaluation_sha256": "cf37c8e31ccc7333b5d5524945515fa94bb9c8f50ab16dba923ec17273b96481",
-      "execution_sha256": "a35c0515b116556b5c8f024d0c943472623770308e45bce8649be58974cb9c4f",
+      "execution_sha256": "7c2f841220c3806eb50fd3a75ee38003aafae7a2ca73a815249c90ecb784a4ce",
       "family": "atlas_word_joint_min11",
       "gpu": "1",
       "id": "five_word_joint_acquisition_word_joint_policy_min11_v1",
       "parent_id": "five_word_joint_acquisition",
-      "sha256": "9b184bdde78cffb52a5c8bea8b48d6b38885328bd0163c719a9d48bd2ec907b4",
+      "sha256": "cbb8fad29b406e9a997101be7ba5ca1d1669dc5be1d7f6f982409d2c092f2ebb",
       "steps": 20001,
       "timeout_seconds": 900
     }
   ],
-  "claim": "Eight separately named host adaptations preserve original targets/objectives/gates and each family full26 view; no old evidence, ordinary qualification or cross-family pooling.",
+  "claim": "Execute only the three remaining GPU1 adaptations under the inclusive original caps. Preserve five v3 GPU0 PASS outcomes separately under their original source; no re-execution, current-slot reuse, ordinary qualification or cross-cohort pooling.",
+  "continuation_carryover": {
+    "completed_cases_reexecuted": false,
+    "current_paid_seconds_by_lane": {
+      "0": 221.9527463898994,
+      "1": 13.754588949028403
+    },
+    "inclusive_historical_paid_seconds_by_lane": {
+      "0": 234.82608077581972,
+      "1": 26.204209604067728
+    },
+    "outcomes_reused": false,
+    "publication": {
+      "bytes": 518012,
+      "path": "reports/forge/atlas-named-gpu-diagnostics-native-v3-20261003/results.json",
+      "sha256": "8ba7230a71041e3a0185528c9e76c5f39bff6eeadfb98b59d715ef72ff76b9e0"
+    },
+    "qualification_input": false,
+    "reserved_seconds": 0.0,
+    "source": {
+      "commit": "ff94453b45e02fd451b21c26d5991f6ed435c292",
+      "digest": "87fcd4e28bdcd9f347379b7db1fbcf0af3edcc0fbd5e97e4a98d9a49f8987a87"
+    }
+  },
   "cross_cohort_pooling": false,
   "cuda_model": "NVIDIA RTX A6000",
   "default_adoption": false,
@@ -130,8 +88,16 @@
     }
   },
   "evidence_use": "named_policy_host_diagnostic",
-  "executable_jobs": 8,
-  "executable_slots": 8,
+  "executable_families": [
+    "atlas_routed",
+    "atlas_multibank",
+    "atlas_word_joint_min11"
+  ],
+  "executable_jobs": 3,
+  "executable_physical_gpus": [
+    "1"
+  ],
+  "executable_slots": 3,
   "export_grace_seconds": 0,
   "failure_policy": "continue_completed_numerical_FAIL_halt_invalid_lane_no_retry",
   "families": [
@@ -147,12 +113,16 @@
     "2": 19,
     "3": 2
   },
-  "id": "atlas-named-hosts-current-gpu-diagnostics-v3",
+  "id": "atlas-named-hosts-current-gpu-diagnostics-v4",
   "lane_cap_seconds": {
     "0": 7500,
     "1": 3000
   },
   "ordinary_tier_credit": false,
+  "preserved_v3_families": [
+    "atlas_conditional",
+    "atlas_ae_routed"
+  ],
   "qualification_input": false,
   "recipe_overrides": {
     "lr": 0.0053125,

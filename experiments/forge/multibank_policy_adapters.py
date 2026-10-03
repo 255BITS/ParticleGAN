@@ -32,6 +32,17 @@ class DeclaredResidual(host._Residual):
 init.register(DeclaredResidual, {"w_odd": init.KEEP, "w_even": init.KEEP})
 
 
+class _SelectedResidual:
+    """Original CPU scorer interface over independent selected outputs."""
+    def __init__(self, residual):
+        self.residual = residual
+
+    def delta(self, scale):
+        # The source scorer creates CPU basis vectors. Preserve each selected
+        # forward on its original device and detach only its scoring values.
+        return self.residual.delta(scale).detach().cpu().clone()
+
+
 class PolarRouter(nn.Module):
     def __init__(self, device):
         super().__init__()
@@ -307,10 +318,12 @@ class CoverMultibankFixture(CompleteRoutedState):
 
     def observe(self):
         def read(served):
-            scored = host.score_geometry(served.models["generator"], self.field,
-                                        self.poles_p, self.poles_m, self.neu)
+            selected = _SelectedResidual(served.models["generator"])
+            scored = host.score_geometry(selected, self.field,
+                self.poles_p.detach().cpu().clone(), self.poles_m.detach().cpu().clone(),
+                self.neu.detach().cpu().clone())
             self.last_views = dict(neu=self.neu.cpu().clone(), targets=torch.stack((self.poles_p, self.poles_m)).cpu(),
-                residual=torch.stack((served.generator.delta(1.), served.generator.delta(-1.))).cpu(),
+                residual=torch.stack((selected.delta(1.), selected.delta(-1.))),
                 selected_bank=served.table.cpu().clone(), bank_ids=served.models["router"].bank_ids.cpu().clone(),
                 log_mass=served.models["router"].log_mass.cpu().clone())
             return {k: v for k, v in scored.items() if type(v) in (int, float)}

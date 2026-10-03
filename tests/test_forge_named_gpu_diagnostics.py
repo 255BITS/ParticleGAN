@@ -67,15 +67,17 @@ def packet_for(spec):
             "execution_source": source, "requests": requests, "runtime_contract": requests["atlas_conditional"]["runtime"],
             "case_definitions": diagnostic.case_definitions(requests, spec),
             "engineering_carryover": diagnostic.engineering_carryover(spec, ROOT),
+            "continuation_carryover": diagnostic.continuation_carryover(spec, ROOT),
             "family_paid_budget_seconds": {f: v["cap"] for f, v in diagnostic.FAMILIES.items()}}
 
 
-def test_eight_cases_two_disjoint_lanes_and_five_complete_denominators(spec):
+def test_three_remaining_cases_and_five_complete_separate_denominators(spec):
     diagnostic.validate_spec(spec, ROOT)
     packet = packet_for(spec)
     assert sum(i["cap"] for i in diagnostic.FAMILIES.values()) == 10500
     assert {g: sum(i["cap"] for i in diagnostic.FAMILIES.values() if i["gpu"] == g) for g in ("0", "1")} == {"0": 7500, "1": 3000}
-    for family, info in diagnostic.FAMILIES.items():
+    for family in diagnostic.ACTIVE_FAMILIES:
+        info = diagnostic.FAMILIES[family]
         p = diagnostic.family_packet(packet, family); state = diagnostic.initial_state(p)
         assert len(state["slots"]) == 26 and all(v["diagnostic_status"] == "NOT_RUN" for v in state["slots"].values())
         assert [sum(a["tier"] == tier for a in state["slots"].values()) for tier in (1, 2, 3)] == [5, 19, 2]
@@ -98,7 +100,7 @@ def test_no_borrowed_case_or_changed_full_protocol(spec, change):
     if change == "missing": spec["cases"].pop()
     elif change == "duplicate": spec["cases"][1] = deepcopy(spec["cases"][0])
     else:
-        key, value = {"family": ("family", "atlas"), "gpu": ("gpu", "1"), "steps": ("steps", 399),
+        key, value = {"family": ("family", "atlas"), "gpu": ("gpu", "0"), "steps": ("steps", 199),
                       "cap": ("timeout_seconds", 1799), "source": ("sha256", "0" * 64), "gate": ("evaluation_sha256", "0" * 64)}[change]
         spec["cases"][0][key] = value
     with pytest.raises(ValueError): diagnostic.validate_spec(spec, ROOT)
@@ -156,7 +158,7 @@ def test_request_reconstruction_preserves_family_and_full_roster(spec, change):
     with pytest.raises(ValueError): diagnostic.request_from_base(base, spec, family, {"digest": "a" * 64, "files": {}})
 
 
-@pytest.mark.parametrize("physical", ["0", "1"])
+@pytest.mark.parametrize("physical", ["1"])
 def test_correct_physical_lane_telemetry_and_environment(spec, monkeypatch, physical):
     commands = []
     def query(command):
@@ -189,43 +191,45 @@ def result_row(state, job, tmp_path, status="COMPLETE", grade="FAIL", terminal_s
     return result
 
 
-def test_numerical_fail_advances_same_family_while_unknown_denominator_stays(spec, tmp_path):
-    packet = diagnostic.family_packet(packet_for(spec), "atlas_conditional"); state = diagnostic.initial_state(packet)
+def test_numerical_fail_completes_family_while_unknown_denominator_stays(spec, tmp_path):
+    packet = diagnostic.family_packet(packet_for(spec), "atlas_routed"); state = diagnostic.initial_state(packet)
     for job in diagnostic.selected_jobs(packet): result_row(state, job, tmp_path, grade="FAIL")
     state["status"] = "COMPLETE_DIAGNOSTIC"; diagnostic.verify_state(state)
-    assert sum(v["diagnostic_status"] == "FAIL" for v in state["slots"].values()) == 4
-    assert sum(v["diagnostic_status"] == "NOT_RUN" for v in state["slots"].values()) == 22
+    assert sum(v["diagnostic_status"] == "FAIL" for v in state["slots"].values()) == 1
+    assert sum(v["diagnostic_status"] == "NOT_RUN" for v in state["slots"].values()) == 25
 
 
 def test_infrastructure_halts_prefix_and_conservatively_charges_original_allowance(spec, tmp_path):
-    packet = diagnostic.family_packet(packet_for(spec), "atlas_conditional"); state = diagnostic.initial_state(packet)
+    packet = diagnostic.family_packet(packet_for(spec), "atlas_routed"); state = diagnostic.initial_state(packet)
     jobs = diagnostic.selected_jobs(packet)
-    result_row(state, jobs[0], tmp_path)
-    result_row(state, jobs[1], tmp_path, status="INVALID", terminal_status="error")
-    assert state["jobs"][1]["charged_seconds"] == 1800 and state["jobs"][1]["unmeasured_interrupt_reserved_seconds"] == 1799
+    result_row(state, jobs[0], tmp_path, status="INVALID", terminal_status="error")
+    assert state["jobs"][0]["charged_seconds"] == 300 and state["jobs"][0]["unmeasured_interrupt_reserved_seconds"] == 299
     diagnostic.verify_state(state)
-    result_row(state, jobs[2], tmp_path)
-    with pytest.raises(ValueError, match="prefix"): diagnostic.verify_state(state)
+    result_row(state, jobs[0], tmp_path)
+    with pytest.raises(ValueError, match="extra/duplicate"): diagnostic.verify_state(state)
 
 
 @pytest.mark.parametrize("change", ["paid", "quota", "unknown_pass", "ordinary", "early_complete", "duplicate"])
 def test_cost_denominator_and_credit_tamper_rejected(spec, tmp_path, change):
-    packet = diagnostic.family_packet(packet_for(spec), "atlas_conditional"); state = diagnostic.initial_state(packet)
+    packet = diagnostic.family_packet(packet_for(spec), "atlas_routed"); state = diagnostic.initial_state(packet)
     job = diagnostic.selected_jobs(packet)[0]; row = result_row(state, job, tmp_path)
     if change == "paid":
         row.update(paid_wall_seconds=0., charged_seconds=0.); state.update(spent_seconds=0., measured_paid_seconds=0.)
     elif change == "quota": state["family_paid_budget_seconds"]["atlas_conditional"] += 1
     elif change == "unknown_pass": state["slots"]["vector_two_broad"]["diagnostic_status"] = "PASS"
     elif change == "ordinary": state["ordinary_qualified_tier"] = 1
-    elif change == "early_complete": state["status"] = "COMPLETE_DIAGNOSTIC"
+    elif change == "early_complete":
+        state["jobs"].clear(); state.update(status="COMPLETE_DIAGNOSTIC", spent_seconds=0., measured_paid_seconds=0.)
+        state["slots"][job["task_id"]]["diagnostic_status"] = "NOT_RUN"
+        state["lane_accounting"] = diagnostic.lane_accounting(state)
     else: state["jobs"].append(deepcopy(row)); state.update(spent_seconds=2., measured_paid_seconds=2.)
     with pytest.raises(ValueError): diagnostic.verify_state(state)
 
 
 def test_blocked_active_host_has_zero_allocation_and_no_borrowed_parent_pass(spec):
-    packet = packet_for(spec); name = diagnostic.active_rows(spec, "atlas_conditional")[0]["id"]
-    packet["requests"]["atlas_conditional"]["tasks"][name]["preflight_blockers"] = ["explicit source/API blocker"]
-    state = diagnostic.initial_state(diagnostic.family_packet(packet, "atlas_conditional"))
+    packet = packet_for(spec); name = diagnostic.active_rows(spec, "atlas_routed")[0]["id"]
+    packet["requests"]["atlas_routed"]["tasks"][name]["preflight_blockers"] = ["explicit source/API blocker"]
+    state = diagnostic.initial_state(diagnostic.family_packet(packet, "atlas_routed"))
     assert state["slots"][name]["diagnostic_status"] == "BLOCKED" and not state["jobs"] and state["spent_seconds"] == 0
     assert name not in [j["task_id"] for j in diagnostic.executable_jobs(state)]
     diagnostic.verify_state(state)
@@ -240,16 +244,17 @@ def test_actual_coordinator_uses_private_supplied_queue_not_checkout(tmp_path):
     assert not (ROOT / "queue").exists()
 
 
-def test_real_parser_accepts_both_lanes_and_exact_generated_stage_commands(monkeypatch, tmp_path):
+def test_real_parser_accepts_only_gpu1_and_exact_generated_stage_commands(monkeypatch, tmp_path):
     calls = []
     monkeypatch.setattr(diagnostic, "stage", lambda path, execute: calls.append((path, execute)) or 0)
     for flag, execute in (("--execute", True), ("--evaluate", False)):
         assert diagnostic.main([flag, str(tmp_path / "resolved.json")]) == 0
         assert calls[-1][1] is execute
-    for gpu in ("0", "1"):
+    for gpu in ("1",):
         args = diagnostic.parser().parse_args(["--output", str(tmp_path), "--gpus", gpu, "--queue-root", str(tmp_path / "queue")])
         assert args.gpus == gpu
     with pytest.raises(SystemExit): diagnostic.parser().parse_args(["--gpus", "0,1"])
+    with pytest.raises(SystemExit): diagnostic.parser().parse_args(["--gpus", "0"])
 
 
 def test_child_executes_actual_stages_then_fresh_cpu_evaluator_and_keeps_numeric_fail(monkeypatch, tmp_path):
@@ -287,7 +292,9 @@ def test_real_inherited_descriptor_is_bound_to_exact_physical_family_source(spec
 
 @pytest.mark.parametrize("parent", list(diagnostic.FIXED_HOSTS))
 def test_goal_views_use_actual_recorded_inputs_and_full_requested_coordinates(spec, parent):
-    row = next(r for r in spec["cases"] if r["parent_id"] == parent); task = diagnostic.read(ROOT / row["definition"])
+    family, info = next((f, i) for f, i in diagnostic.FAMILIES.items() if parent in i["parents"])
+    row = {"family": family, "id": parent + "_" + info["cohort"]}
+    task = diagnostic.read(ROOT / "configs/forge/task-variants" / info["cohort"] / (row["id"] + ".json"))
     if row["family"] == "atlas_conditional":
         shapes = (3, 16) if parent in {"trajectory", "residual_student"} else (3, 4)
         target = np.arange(np.prod(shapes), dtype=np.float32).reshape(shapes)
@@ -335,8 +342,8 @@ def test_durable_timeout_teardown_overshoot_is_saved_and_never_reset(spec, tmp_p
 def test_recorded_signed_media_has_one_full_range_and_literal_original_badge(spec, tmp_path, monkeypatch, status):
     """Renderer inputs only: no model, draw or scientific grader is invoked."""
     from benchmarks.toy_audit import api_run
-    row = next(r for r in spec["cases"] if r["parent_id"] == "unipolar")
-    task = diagnostic.read(ROOT / row["definition"])
+    row = {"id": "unipolar_conditional_policy_selected_cloud_v1"}
+    task = diagnostic.read(ROOT / "configs/forge/task-variants/conditional_policy_selected_cloud_v1" / (row["id"] + ".json"))
     resolved = {"job": {"task_id": row["id"]}, "request": {"tasks": {row["id"]: task}, "source": {"digest": "a" * 64}}}
     dump(tmp_path / "raw-result.json", {"evidence": {"artifact_root": str(tmp_path), "artifact_manifest": {}}})
     points = [{"step": i + 1} for i in range(24)]; selected = [0, 3, 6, 9, 12, 15, 18, 21, 23]
@@ -409,24 +416,26 @@ def test_carryover_cannot_reset_change_or_supply_science(spec, change):
     with pytest.raises(ValueError): diagnostic.validate_spec(spec)
 
 
-def test_four_full_conditional_charges_refuse_ae_without_reducing_its_300_cap(spec, tmp_path):
-    prior = completed_predecessor(spec, "atlas_conditional", tmp_path, paid_each=1800.)
-    packet = diagnostic.family_packet(packet_for(spec), "atlas_ae_routed", [("atlas_conditional", prior)])
-    state = diagnostic.initial_state(packet); job = diagnostic.selected_jobs(packet)[0]
-    assert job["budget_seconds"] == diagnostic.FAMILIES["atlas_ae_routed"]["cap"] == 300
-    assert state["lane_accounting"]["predecessor_charged_seconds"] == 7200
-    assert state["lane_accounting"]["inclusive_lane_charged_seconds"] == 7200 + diagnostic.PRIOR_DEBITS["0"]
-    assert not diagnostic.full_allowance_fits(state, job)
-    assert not state["jobs"] and state["spent_seconds"] == 0.
+def test_completed_gpu0_families_are_never_executable_in_this_source(spec, tmp_path):
+    packet = packet_for(spec)
+    assert len(packet["continuation_carryover"]["preserved_outcomes"]) == 5
+    for family in diagnostic.PRESERVED_FAMILIES:
+        with pytest.raises(ValueError, match="cannot rerun"):
+            diagnostic.family_packet(packet, family)
+        with pytest.raises(ValueError, match="not executable"):
+            diagnostic.run_family(tmp_path / family, {**packet, "family": family}, tmp_path / "queue")
+    with pytest.raises(ValueError, match="re-executed"):
+        diagnostic.run_lane(tmp_path, tmp_path / "queue", "0")
 
 
-def test_cheap_conditional_completion_admits_original_full_ae_allowance(spec, tmp_path):
-    prior = completed_predecessor(spec, "atlas_conditional", tmp_path, paid_each=1.)
-    packet = diagnostic.family_packet(packet_for(spec), "atlas_ae_routed", [("atlas_conditional", prior)])
+def test_cheap_unused_completion_admits_original_full_cover_allowance(spec, tmp_path):
+    prior = completed_predecessor(spec, "atlas_routed", tmp_path, paid_each=1.)
+    packet = diagnostic.family_packet(packet_for(spec), "atlas_multibank", [("atlas_routed", prior)])
     state = diagnostic.initial_state(packet)
     assert diagnostic.full_allowance_fits(state, diagnostic.selected_jobs(packet)[0])
-    assert state["lane_accounting"]["historical_engineering_debit_seconds"] == diagnostic.PRIOR_DEBITS["0"]
-    assert state["lane_accounting"]["predecessor_paid_seconds"] == 4.
+    assert state["lane_accounting"]["historical_engineering_debit_seconds"] == diagnostic.PRIOR_DEBITS["1"]
+    assert state["lane_accounting"]["historical_v3_paid_seconds"] == diagnostic.V3_DEBITS["1"]
+    assert state["lane_accounting"]["predecessor_paid_seconds"] == 1.
 
 
 def test_unused_and_cover_full_charges_refuse_word_without_borrowing_gpu0(spec, tmp_path):
@@ -441,13 +450,13 @@ def test_unused_and_cover_full_charges_refuse_word_without_borrowing_gpu0(spec, 
 
 @pytest.mark.parametrize("change", ["missing", "foreign_family", "duplicate", "source", "unfinished", "unrecorded_terminal", "cost", "gate", "bytes"])
 def test_lane_prefix_forgery_stale_cost_and_unrecorded_crash_refuse_admission(spec, tmp_path, change):
-    prior = completed_predecessor(spec, "atlas_conditional", tmp_path)
-    paths = [("atlas_conditional", prior)]
+    prior = completed_predecessor(spec, "atlas_routed", tmp_path)
+    paths = [("atlas_routed", prior)]
     if change == "missing": paths = []
-    elif change == "foreign_family": paths = [("atlas_routed", prior)]
+    elif change == "foreign_family": paths = [("atlas_conditional", prior)]
     elif change == "duplicate": paths *= 2
     elif change == "bytes":
-        packet = diagnostic.family_packet(packet_for(spec), "atlas_ae_routed", paths)
+        packet = diagnostic.family_packet(packet_for(spec), "atlas_multibank", paths)
         prior.write_text(prior.read_text() + " ")
         with pytest.raises(ValueError): diagnostic.lane_accounting(packet, require_ready=True)
         return
@@ -464,12 +473,12 @@ def test_lane_prefix_forgery_stale_cost_and_unrecorded_crash_refuse_admission(sp
         elif change == "gate":
             row = state["jobs"][0]; name = row["task_ids"][0]; row["outcome"]["statuses"][name] = "PASS"; state["slots"][name]["diagnostic_status"] = "PASS"
         dump(prior, state)
-    packet = diagnostic.family_packet(packet_for(spec), "atlas_ae_routed", paths)
+    packet = diagnostic.family_packet(packet_for(spec), "atlas_multibank", paths)
     with pytest.raises(ValueError): diagnostic.lane_accounting(packet, require_ready=True)
 
 
 def test_inclusive_ledger_and_debit_cannot_be_reset_on_resume(spec, tmp_path):
-    state = diagnostic.initial_state(diagnostic.family_packet(packet_for(spec), "atlas_conditional"))
+    state = diagnostic.initial_state(diagnostic.family_packet(packet_for(spec), "atlas_routed"))
     result_row(state, diagnostic.selected_jobs(state)[0], tmp_path)
     diagnostic.verify_state(state)
     state["lane_accounting"]["historical_engineering_debit_seconds"] = 0.
@@ -484,6 +493,196 @@ def test_missing_supervisor_reservation_remains_charged_once_and_halts_lane(spec
     state["jobs"].append(row); state["slots"][job["task_id"]]["diagnostic_status"] = "INCOMPLETE"; state["status"] = "INCOMPLETE"
     folder = tmp_path / "atlas_routed"; folder.mkdir(); diagnostic.save_state(folder, state)
     assert state["measured_paid_seconds"] == 0. and state["unmeasured_interrupt_reserved_seconds"] == state["spent_seconds"] == 300.
-    assert state["lane_accounting"]["inclusive_lane_charged_seconds"] == 300. + diagnostic.PRIOR_DEBITS["1"]
+    assert state["lane_accounting"]["inclusive_lane_charged_seconds"] == 300. + diagnostic.HISTORICAL_LANE_DEBITS["1"]
     packet = diagnostic.family_packet(packet_for(spec), "atlas_multibank", [("atlas_routed", folder / "study.json")])
     with pytest.raises(ValueError, match="unfinished"): diagnostic.lane_accounting(packet, require_ready=True)
+
+
+def test_v3_cost_and_five_passes_remain_separate_from_all_current_slots(spec):
+    proof = diagnostic.continuation_carryover(spec, ROOT)
+    assert len(proof["attempts"]) == 6 and len(proof["preserved_outcomes"]) == 5
+    assert sum(row["paid_seconds"] for row in proof["attempts"]) == sum(diagnostic.V3_DEBITS.values())
+    assert all(row["current_slots_reused"] is False and row["reexecution_authorized"] is False
+               and row["qualification_input"] is False for row in proof["preserved_outcomes"])
+    packet = packet_for(spec)
+    for family in diagnostic.ACTIVE_FAMILIES:
+        state = diagnostic.initial_state(diagnostic.family_packet(packet, family))
+        assert len(state["slots"]) == 26 and not any(row["diagnostic_status"] == "PASS" for row in state["slots"].values())
+        assert state["lane_accounting"]["historical_lane_debit_seconds"] == 26.204209604067728
+        assert state["lane_accounting"]["historical_v3_paid_seconds"] == 13.754588949028403
+        assert state["spent_seconds"] == state["unmeasured_interrupt_reserved_seconds"] == 0.
+    assert diagnostic.HISTORICAL_LANE_DEBITS == {"0": 234.82608077581972, "1": 26.204209604067728}
+
+
+@pytest.mark.parametrize("change", ["missing", "reset", "source", "publication", "lane", "old_pass_credit", "rerun"])
+def test_v4_history_declaration_rejects_reset_source_and_outcome_reuse(spec, change):
+    if change == "missing": spec.pop("continuation_carryover")
+    elif change == "reset": spec["continuation_carryover"]["current_paid_seconds_by_lane"]["1"] = 0.
+    elif change == "source": spec["continuation_carryover"]["source"]["digest"] = "0" * 64
+    elif change == "publication": spec["continuation_carryover"]["publication"]["sha256"] = "0" * 64
+    elif change == "lane": spec["executable_physical_gpus"] = ["0", "1"]
+    elif change == "old_pass_credit": spec["continuation_carryover"]["outcomes_reused"] = True
+    else: spec["cases"].append({"family": "atlas_conditional", "parent_id": "trajectory"})
+    with pytest.raises(ValueError): diagnostic.validate_spec(spec)
+
+
+def test_v3_debit_is_counted_once_when_new_full_allowances_fit_or_fail(spec, tmp_path):
+    packet = diagnostic.family_packet(packet_for(spec), "atlas_routed")
+    state = diagnostic.initial_state(packet)
+    assert diagnostic.full_allowance_fits(state, diagnostic.selected_jobs(state)[0])
+    unused = completed_predecessor(spec, "atlas_routed", tmp_path, paid_each=300.)
+    cover = completed_predecessor(spec, "atlas_multibank", tmp_path, paid_each=1773., predecessor_paths=[("atlas_routed", unused)])
+    state = diagnostic.initial_state(diagnostic.family_packet(packet_for(spec), "atlas_word_joint_min11",
+                                [("atlas_routed", unused), ("atlas_multibank", cover)]))
+    assert state["lane_accounting"]["inclusive_lane_charged_seconds"] == 2073. + 26.204209604067728
+    assert diagnostic.full_allowance_fits(state, diagnostic.selected_jobs(state)[0])
+    assert state["spent_seconds"] == 0. and not state["jobs"]
+    # The existing full300+1800 case refuses the final900 allowance. No
+    # historical debit or reserve is subtracted twice from a family cap.
+
+
+def software_history(spec, tmp_path, monkeypatch):
+    """Self-contained historical metadata/byte fixtures, never trained evidence.
+
+    Replace only the fixture's immutable publication/source identity oracle.
+    Real file hashing, source-manifest joins, terminal/supervisor validation,
+    exact paid amounts, old outcomes and all denominator guards remain active.
+    """
+    previous = diagnostic.read(ROOT / diagnostic.PRIOR_PUBLICATION)
+    snapshot = tmp_path / "software-only-old-source"; snapshot.mkdir()
+    source_file = snapshot / "source.py"; source_file.write_text("# software-only source binding\n")
+    files = {"source.py": diagnostic.file_hash(source_file)}
+    expected_source = {"commit": diagnostic.V3_SOURCE["commit"], "digest": diagnostic.digest(files)}
+    source = {"schema_version": 1, "origin_commit": expected_source["commit"], "digest": expected_source["digest"],
+              "files": files, "snapshot_path": str(snapshot)}
+    dump(snapshot / "forge-source.json", {k: v for k, v in source.items() if k != "snapshot_path"})
+    previous["source"] = {"origin_commit": expected_source["commit"], "digest": expected_source["digest"]}
+    previous["source_file_count"] = len(files)
+    for family in (*diagnostic.PRESERVED_FAMILIES, "atlas_routed"):
+        old = previous["families"][family]
+        jobs = [{"task_id": item["task_ids"][0], "task_ids": item["task_ids"],
+                 "budget_seconds": item["allowance_seconds"], "compatibility_key": item["compatibility_key"]}
+                for item in old["attempts"]]
+        request = {"jobs": jobs, "software_only": True}
+        packet = {"source": source, "family": family, "lane_predecessors": []}
+        state = {"source": source, "execution_source": source, "family": family, "status": old["status"],
+                 "spec_sha256": previous["spec_sha256"], "spec": {"id": "atlas-named-hosts-current-gpu-diagnostics-v3"},
+                 "measured_paid_seconds": old["paid_seconds"], "spent_seconds": old["paid_seconds"],
+                 "unmeasured_interrupt_reserved_seconds": 0., "qualification_input": False,
+                 "slots": deepcopy(old["slots"]), "lane_runtime": deepcopy(old["runtime"]), "jobs": [],
+                 "request": request, "lane_predecessors": []}
+        for item, job in zip(old["attempts"], jobs):
+            directory = tmp_path / "software-attempts" / job["task_id"]; directory.mkdir(parents=True)
+            token = "software-only-" + job["task_id"]
+            terminal = {"token": token, "attempt_status": "completed", "child_returncode": item["child_returncode"],
+                        "paid_wall_seconds": item["paid_seconds"]}
+            item["terminal"] = diagnostic.pin(dump(directory / "supervisor-terminal.json", terminal))
+            item["token_sha256"] = diagnostic.hashlib.sha256(token.encode()).hexdigest()
+            dump(directory / "supervisor-request.json", {"token": token, "source": source})
+            row = {"task_ids": item["task_ids"], "status": item["status"], "attempt_key": item["attempt_key"],
+                   "compatibility_key": item["compatibility_key"], "terminal": item["terminal"], "token": token,
+                   "paid_wall_seconds": item["paid_seconds"], "charged_seconds": item["paid_seconds"],
+                   "unmeasured_interrupt_reserved_seconds": 0.}
+            raw = {"software_only": True}; raw_pin = diagnostic.pin(dump(directory / "raw.json", raw))
+            if family in diagnostic.PRESERVED_FAMILIES:
+                name = job["task_id"]
+                grading = {"raw_hash": diagnostic.digest(raw), "source_digest": source["digest"],
+                           "grades": {name: {"gate_status": "PASS"}}}
+                grade_pin = diagnostic.pin(dump(directory / "grade.json", grading))
+                gif = directory / "software-only.gif"; gif.write_bytes(b"software-only media binding; no generated image")
+                media = {"family": family, "task": name, "source_digest": source["digest"], "original_gate": "PASS",
+                         "qualification_input": False, "gif": diagnostic.pin(gif), "inputs": []}
+                media_input = {"receipt": diagnostic.pin(dump(directory / "media.json", media)), "gif": diagnostic.pin(gif)}
+                resolved = {"packet": packet, "packet_sha256": diagnostic.digest(packet), "request": request,
+                            "job": job, "worker": {"token": token}}
+                row["outcome"] = {"statuses": {name: "PASS"}, "qualification_input": False, "raw": raw_pin,
+                    "grading": grade_pin, "resolved": diagnostic.pin(dump(directory / "resolved.json", resolved)),
+                    "media": {name: media_input}}
+                item["outcome"].update(raw_input=raw_pin, grading_input=grade_pin, media_input=media_input)
+            else:
+                item["raw_error_input"] = raw_pin
+            state["jobs"].append(row)
+        old["study_input"] = diagnostic.pin(dump(tmp_path / (family + "-study.json"), state))
+    previous["trusted_cut"] = diagnostic.pin(dump(tmp_path / "software-only-cut.json", {"software_only": True}))
+    publication = tmp_path / diagnostic.PRIOR_PUBLICATION
+    publication.parent.mkdir(parents=True)
+    entries = [diagnostic.pin(p) for p in sorted(tmp_path.rglob("*")) if p.is_file()]
+    index_path = dump(publication.parent / "input-index.json", {"file_count": len(entries), "files": entries, "raw_files_changed": False})
+    previous["input_index"] = {"path": "input-index.json", "sha256": diagnostic.file_hash(index_path),
+                               "bytes": index_path.stat().st_size, "file_count": len(entries)}
+    reference = deepcopy(diagnostic.CONTINUATION_REFERENCE); reference["source"] = expected_source
+    dump(publication, previous)
+    reference["publication"].update(sha256=diagnostic.file_hash(publication), bytes=publication.stat().st_size)
+    monkeypatch.setattr(diagnostic, "V3_SOURCE", expected_source)
+    monkeypatch.setattr(diagnostic, "CONTINUATION_REFERENCE", reference)
+    spec = deepcopy(spec); spec["continuation_carryover"] = deepcopy(reference)
+    return spec, publication, previous
+
+
+def rebind_software_publication(spec, publication, previous, monkeypatch):
+    dump(publication, previous)
+    reference = deepcopy(diagnostic.CONTINUATION_REFERENCE)
+    reference["publication"].update(sha256=diagnostic.file_hash(publication), bytes=publication.stat().st_size)
+    monkeypatch.setattr(diagnostic, "CONTINUATION_REFERENCE", reference)
+    spec["continuation_carryover"] = deepcopy(reference)
+
+
+def test_complete_old_cost_source_and_terminal_proof_is_self_contained_software_only(spec, tmp_path, monkeypatch):
+    spec, publication, previous = software_history(spec, tmp_path, monkeypatch)
+    before = {p: diagnostic.file_hash(p) for p in tmp_path.rglob("*") if p.is_file()}
+    proof = diagnostic.continuation_carryover(spec, tmp_path, durable=True)
+    assert len(proof["attempts"]) == 6 and len(proof["preserved_outcomes"]) == 5
+    assert {p: diagnostic.file_hash(p) for p in before} == before
+    assert proof["outcomes_reused"] is False and proof["qualification_input"] is False
+
+
+@pytest.mark.parametrize("change", ["cost", "lane", "scope", "family_cap", "missing_attempt", "source", "old_grade", "slot", "terminal_bytes", "supervisor_source", "missing_source_index"])
+def test_coherent_old_history_and_durable_tamper_is_rejected_without_hash_masking(spec, tmp_path, monkeypatch, change):
+    spec, publication, previous = software_history(spec, tmp_path, monkeypatch)
+    if change == "cost": previous["cost"]["current_paid_seconds"] = 0.
+    elif change == "lane": previous["cost"]["lanes"]["1"]["current_paid_seconds"] = 0.
+    elif change == "scope": previous["qualification_input"] = True
+    elif change == "family_cap": previous["families"]["atlas_routed"]["family_cap_seconds"] = 301
+    elif change == "missing_attempt": previous["families"]["atlas_conditional"]["attempts"].pop()
+    elif change == "source": previous["source"]["origin_commit"] = "0" * 40
+    elif change == "old_grade": previous["families"]["atlas_conditional"]["attempts"][0]["outcome"]["status"] = "FAIL"
+    elif change == "slot": previous["families"]["atlas_multibank"]["slots"]["vector_two_broad"]["diagnostic_status"] = "PASS"
+    elif change == "terminal_bytes":
+        path = Path(previous["families"]["atlas_routed"]["attempts"][0]["terminal"]["path"])
+        path.write_text(path.read_text() + " ")
+    elif change == "supervisor_source":
+        path = Path(previous["families"]["atlas_routed"]["attempts"][0]["terminal"]["path"]).with_name("supervisor-request.json")
+        data = diagnostic.read(path); data["source"]["digest"] = "0" * 64; dump(path, data)
+        # Rebind the index/publication too, so the source attribution check,
+        # rather than the byte guard, must reject this coherent forgery.
+        index_path = publication.parent / "input-index.json"; index = diagnostic.read(index_path)
+        index["files"] = [diagnostic.pin(path) if item["path"] == str(path) else item for item in index["files"]]
+        dump(index_path, index); previous["input_index"].update(sha256=diagnostic.file_hash(index_path), bytes=index_path.stat().st_size)
+    else:
+        index_path = publication.parent / "input-index.json"; index = diagnostic.read(index_path)
+        index["files"] = [item for item in index["files"] if not item["path"].endswith("source.py")]
+        index["file_count"] = len(index["files"]); dump(index_path, index)
+        previous["input_index"].update(sha256=diagnostic.file_hash(index_path), bytes=index_path.stat().st_size, file_count=len(index["files"]))
+    rebind_software_publication(spec, publication, previous, monkeypatch)
+    with pytest.raises(ValueError): diagnostic.continuation_carryover(spec, tmp_path, durable=True)
+
+
+def test_lane_continues_numeric_fail_in_declared_order_and_never_calls_preserved_gpu0(spec, tmp_path, monkeypatch):
+    packet = packet_for(spec); dump(diagnostic.preparation_path(tmp_path / "output"), packet)
+    monkeypatch.setattr(diagnostic, "verify_packet", lambda value: None)
+    calls = []
+    def run_family(output, family_packet, queue_root):
+        family = family_packet["family"]; calls.append(family)
+        assert family_packet["lane_predecessors"] == [
+            {"family": name, "study": diagnostic.pin(tmp_path / "output" / name / "study.json")} for name in calls[:-1]]
+        state = {"status": "COMPLETE_DIAGNOSTIC", "measured_paid_seconds": 1.,
+                 "unmeasured_interrupt_reserved_seconds": 0., "lane_accounting": {"software_only": True},
+                 "slots": {name: {"diagnostic_status": "FAIL" if name in {row["id"] for row in diagnostic.active_rows(spec, family)}
+                                   else "NOT_RUN"} for name in family_packet["request"]["tasks"]}}
+        dump(output / "study.json", state)
+        return state
+    monkeypatch.setattr(diagnostic, "run_family", run_family)
+    assert len(diagnostic.run_lane(tmp_path / "output", tmp_path / "private-queue", "1")) == 3
+    assert calls == list(diagnostic.ACTIVE_FAMILIES)
+    with pytest.raises(ValueError): diagnostic.run_lane(tmp_path / "output", tmp_path / "private-queue", "0")
+    assert calls == list(diagnostic.ACTIVE_FAMILIES)
