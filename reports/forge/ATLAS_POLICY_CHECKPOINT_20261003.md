@@ -53,12 +53,17 @@ adapter and grader controls; 108 current-develop ownership/legacy controls;
 controls; and a final 347-check declaration/grading/publication/planning pass. These checks provide no convergence result. Raw logs and checkpoints
 stay outside Git.
 
-Next, finish the independently admitted GPU diagnostic launcher and run a
-source-frozen finite batch. The current 18 executable slots form 17 jobs with
+The shared-queue GPU diagnostic launcher is implemented and passes 63 CPU
+software controls, including actual shared-ledger construction, complete 17-job
+dispatch, invalid-execution stop and bounded interruption charging. Next, root
+will admit and run a source-frozen finite batch. The current 18 executable slots form 17 jobs with
 34,800 seconds of full allowances; the whole defined 26-slot suite is 45,300
 seconds. The two ring slots keep one uninterrupted run. Completed numerical
 failures can advance diagnostic inspection while ordinary tier promotion keeps
 its original fail-early rules. Native questions retain 7,000 updates, 34 checks,
 20,000-point observations and the independent 100,000-point accuracy holdout.
 Actual-training GIFs will use retained scored observations to illustrate each
-goal. Broader repo/PR coverage inventory is in progress.
+goal. The [broader repo/PR coverage inventory](toy-coverage-inventory-20261003/README.md)
+is complete at its stated source boundary: 29 behavior families, 49 Forge
+declarations, 176 public-API arms/goal GIFs and the primary 139-open-PR roster.
+Historical results in that map provide no new GPU qualification.
