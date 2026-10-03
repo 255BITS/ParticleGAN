@@ -1,0 +1,836 @@
+{
+  "artifacts": [
+    {
+      "bytes": 15418,
+      "case_id": "image-develop-img_intensity2-source-transpose12",
+      "family": "ka2",
+      "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/ka2/image-develop-img_intensity2-source-transpose12/samples.npz",
+      "review_check": "path/byte-count and SHA declaration syntax only; content SHA already source-certified by root, not rehashed or decoded here",
+      "role": "samples",
+      "sha256": "b425ef7d571357023536b95d12c1101fcd2bb9fc6fb075d8c9f6957b89959e23"
+    },
+    {
+      "bytes": 120793,
+      "case_id": "image-develop-img_intensity2-source-transpose12",
+      "family": "ka2",
+      "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/ka2/image-develop-img_intensity2-source-transpose12/state.pt",
+      "review_check": "path/byte-count and SHA declaration syntax only; content SHA already source-certified by root, not rehashed or decoded here",
+      "role": "state",
+      "sha256": "c5097a95929f34bbb82c7f52adc3e7d6c60bf115a75ca63fb11a72d09be3cea8"
+    },
+    {
+      "bytes": 82168,
+      "case_id": "api-vector-two-broad",
+      "family": "ka2",
+      "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/ka2/api-vector-two-broad/samples.npz",
+      "review_check": "path/byte-count and SHA declaration syntax only; content SHA already source-certified by root, not rehashed or decoded here",
+      "role": "samples",
+      "sha256": "78a5d8e896c393a5b66b65cb4b7eb33e671a84d7ae9eafacb2dfe1245840b537"
+    },
+    {
+      "bytes": 133480,
+      "case_id": "api-vector-two-broad",
+      "family": "ka2",
+      "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/ka2/api-vector-two-broad/state.pt",
+      "review_check": "path/byte-count and SHA declaration syntax only; content SHA already source-certified by root, not rehashed or decoded here",
+      "role": "state",
+      "sha256": "8018c52b460c97ce628fc0ad741cf7e5fab1590d2e73a6b36ba0acec465a6f98"
+    },
+    {
+      "bytes": 776382,
+      "case_id": "api-grid100",
+      "family": "ka2",
+      "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/ka2/api-grid100/samples.npz",
+      "review_check": "path/byte-count and SHA declaration syntax only; content SHA already source-certified by root, not rehashed or decoded here",
+      "role": "samples",
+      "sha256": "d53b6d94a8e9366b90e9d9b7035fbfd88877f91e4116b98de7386cd08bbff4aa"
+    },
+    {
+      "bytes": 804284,
+      "case_id": "api-grid100",
+      "family": "ka2",
+      "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/ka2/api-grid100/state.pt",
+      "review_check": "path/byte-count and SHA declaration syntax only; content SHA already source-certified by root, not rehashed or decoded here",
+      "role": "state",
+      "sha256": "2203e61b0d06c4dc958fcedccb6c95867e3cd139997985349abc82e5489237e0"
+    },
+    {
+      "bytes": 991528,
+      "case_id": "api-rotated100",
+      "family": "ka2",
+      "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/ka2/api-rotated100/samples.npz",
+      "review_check": "path/byte-count and SHA declaration syntax only; content SHA already source-certified by root, not rehashed or decoded here",
+      "role": "samples",
+      "sha256": "d4c24a0cec7f080cec94bad4e38140ec58d8c331eec331c5d2aa0e4fccd56343"
+    },
+    {
+      "bytes": 804284,
+      "case_id": "api-rotated100",
+      "family": "ka2",
+      "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/ka2/api-rotated100/state.pt",
+      "review_check": "path/byte-count and SHA declaration syntax only; content SHA already source-certified by root, not rehashed or decoded here",
+      "role": "state",
+      "sha256": "39b110418c552078e88fcafc48d7cab59e368b22b86d1fa539dfea6ad37a6060"
+    },
+    {
+      "bytes": 818812,
+      "case_id": "api-staggered100",
+      "family": "ka2",
+      "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/ka2/api-staggered100/samples.npz",
+      "review_check": "path/byte-count and SHA declaration syntax only; content SHA already source-certified by root, not rehashed or decoded here",
+      "role": "samples",
+      "sha256": "f31bc57e3793b5c8d198fdda22f74168e9c9cef3e9022a4d8ab7640ccf12229f"
+    },
+    {
+      "bytes": 804284,
+      "case_id": "api-staggered100",
+      "family": "ka2",
+      "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/ka2/api-staggered100/state.pt",
+      "review_check": "path/byte-count and SHA declaration syntax only; content SHA already source-certified by root, not rehashed or decoded here",
+      "role": "state",
+      "sha256": "4cdbd3782ff3af1e9eef259f8e8079382bcd381d74df642c68b794c963620388"
+    },
+    {
+      "bytes": 78833,
+      "case_id": "api-vector-unequal-mass",
+      "family": "ka2",
+      "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/ka2/api-vector-unequal-mass/samples.npz",
+      "review_check": "path/byte-count and SHA declaration syntax only; content SHA already source-certified by root, not rehashed or decoded here",
+      "role": "samples",
+      "sha256": "e7b167ba14751eb6facb68f95bb63853e286e5678b12963d99c0e539791caceb"
+    },
+    {
+      "bytes": 133544,
+      "case_id": "api-vector-unequal-mass",
+      "family": "ka2",
+      "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/ka2/api-vector-unequal-mass/state.pt",
+      "review_check": "path/byte-count and SHA declaration syntax only; content SHA already source-certified by root, not rehashed or decoded here",
+      "role": "state",
+      "sha256": "4cdf9774b1497b8aa970a58a21d69fea875761292ea1ec61ba54750ea86b632b"
+    },
+    {
+      "bytes": 82919,
+      "case_id": "api-vector-anisotropic",
+      "family": "ka2",
+      "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/ka2/api-vector-anisotropic/samples.npz",
+      "review_check": "path/byte-count and SHA declaration syntax only; content SHA already source-certified by root, not rehashed or decoded here",
+      "role": "samples",
+      "sha256": "05d71602edcfb166a39e55fa4515db5ff2cac254e9d37da508927ac5d8c61dc6"
+    },
+    {
+      "bytes": 133480,
+      "case_id": "api-vector-anisotropic",
+      "family": "ka2",
+      "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/ka2/api-vector-anisotropic/state.pt",
+      "review_check": "path/byte-count and SHA declaration syntax only; content SHA already source-certified by root, not rehashed or decoded here",
+      "role": "state",
+      "sha256": "3c8211f00e76c25a6be339630db7eb76de3b5d5b775736edc8f33f04a4b9b6c2"
+    },
+    {
+      "bytes": 15021,
+      "case_id": "image-develop-img_bars4-source-transpose12",
+      "family": "ka2",
+      "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/ka2/image-develop-img_bars4-source-transpose12/samples.npz",
+      "review_check": "path/byte-count and SHA declaration syntax only; content SHA already source-certified by root, not rehashed or decoded here",
+      "role": "samples",
+      "sha256": "8d0c210315f742b1f9b86115090daab24a88a0d86ee7d226e8f3b0e4e1fed6cc"
+    },
+    {
+      "bytes": 120345,
+      "case_id": "image-develop-img_bars4-source-transpose12",
+      "family": "ka2",
+      "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/ka2/image-develop-img_bars4-source-transpose12/state.pt",
+      "review_check": "path/byte-count and SHA declaration syntax only; content SHA already source-certified by root, not rehashed or decoded here",
+      "role": "state",
+      "sha256": "32f3913575ceeeb96bb626339ee6f0ad5ab04ad5f1d10297c730799bfd12459c"
+    },
+    {
+      "bytes": 15418,
+      "case_id": "image-develop-img_intensity2-source-transpose12",
+      "family": "k3p",
+      "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/k3p/image-develop-img_intensity2-source-transpose12/samples.npz",
+      "review_check": "path/byte-count and SHA declaration syntax only; content SHA already source-certified by root, not rehashed or decoded here",
+      "role": "samples",
+      "sha256": "b425ef7d571357023536b95d12c1101fcd2bb9fc6fb075d8c9f6957b89959e23"
+    },
+    {
+      "bytes": 120537,
+      "case_id": "image-develop-img_intensity2-source-transpose12",
+      "family": "k3p",
+      "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/k3p/image-develop-img_intensity2-source-transpose12/state.pt",
+      "review_check": "path/byte-count and SHA declaration syntax only; content SHA already source-certified by root, not rehashed or decoded here",
+      "role": "state",
+      "sha256": "951e5ad7436c52a840f0032d1ace280643c690b71b172960181e332d3cf8d755"
+    },
+    {
+      "bytes": 82168,
+      "case_id": "api-vector-two-broad",
+      "family": "k3p",
+      "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/k3p/api-vector-two-broad/samples.npz",
+      "review_check": "path/byte-count and SHA declaration syntax only; content SHA already source-certified by root, not rehashed or decoded here",
+      "role": "samples",
+      "sha256": "78a5d8e896c393a5b66b65cb4b7eb33e671a84d7ae9eafacb2dfe1245840b537"
+    },
+    {
+      "bytes": 133288,
+      "case_id": "api-vector-two-broad",
+      "family": "k3p",
+      "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/k3p/api-vector-two-broad/state.pt",
+      "review_check": "path/byte-count and SHA declaration syntax only; content SHA already source-certified by root, not rehashed or decoded here",
+      "role": "state",
+      "sha256": "974f71d4b211382a641ece1be5049ca7145020497d6eda8f54d65ef5ca9dcda3"
+    },
+    {
+      "bytes": 776382,
+      "case_id": "api-grid100",
+      "family": "k3p",
+      "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/k3p/api-grid100/samples.npz",
+      "review_check": "path/byte-count and SHA declaration syntax only; content SHA already source-certified by root, not rehashed or decoded here",
+      "role": "samples",
+      "sha256": "d53b6d94a8e9366b90e9d9b7035fbfd88877f91e4116b98de7386cd08bbff4aa"
+    },
+    {
+      "bytes": 804028,
+      "case_id": "api-grid100",
+      "family": "k3p",
+      "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/k3p/api-grid100/state.pt",
+      "review_check": "path/byte-count and SHA declaration syntax only; content SHA already source-certified by root, not rehashed or decoded here",
+      "role": "state",
+      "sha256": "a44813b249435d8c0a30ecb19d87b4b257f15f8118d45cadeb498c084c4dfa9c"
+    },
+    {
+      "bytes": 991528,
+      "case_id": "api-rotated100",
+      "family": "k3p",
+      "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/k3p/api-rotated100/samples.npz",
+      "review_check": "path/byte-count and SHA declaration syntax only; content SHA already source-certified by root, not rehashed or decoded here",
+      "role": "samples",
+      "sha256": "d4c24a0cec7f080cec94bad4e38140ec58d8c331eec331c5d2aa0e4fccd56343"
+    },
+    {
+      "bytes": 804028,
+      "case_id": "api-rotated100",
+      "family": "k3p",
+      "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/k3p/api-rotated100/state.pt",
+      "review_check": "path/byte-count and SHA declaration syntax only; content SHA already source-certified by root, not rehashed or decoded here",
+      "role": "state",
+      "sha256": "490542c3bca7988a72593a315793c54417289921647225cd1313b52a927a9ff7"
+    },
+    {
+      "bytes": 818812,
+      "case_id": "api-staggered100",
+      "family": "k3p",
+      "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/k3p/api-staggered100/samples.npz",
+      "review_check": "path/byte-count and SHA declaration syntax only; content SHA already source-certified by root, not rehashed or decoded here",
+      "role": "samples",
+      "sha256": "f31bc57e3793b5c8d198fdda22f74168e9c9cef3e9022a4d8ab7640ccf12229f"
+    },
+    {
+      "bytes": 804028,
+      "case_id": "api-staggered100",
+      "family": "k3p",
+      "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/k3p/api-staggered100/state.pt",
+      "review_check": "path/byte-count and SHA declaration syntax only; content SHA already source-certified by root, not rehashed or decoded here",
+      "role": "state",
+      "sha256": "d9886afc2c64f2b5e82ea73fd1632537a309fcc3bda7729fe280d0ba8e10fc01"
+    },
+    {
+      "bytes": 78833,
+      "case_id": "api-vector-unequal-mass",
+      "family": "k3p",
+      "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/k3p/api-vector-unequal-mass/samples.npz",
+      "review_check": "path/byte-count and SHA declaration syntax only; content SHA already source-certified by root, not rehashed or decoded here",
+      "role": "samples",
+      "sha256": "e7b167ba14751eb6facb68f95bb63853e286e5678b12963d99c0e539791caceb"
+    },
+    {
+      "bytes": 133288,
+      "case_id": "api-vector-unequal-mass",
+      "family": "k3p",
+      "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/k3p/api-vector-unequal-mass/state.pt",
+      "review_check": "path/byte-count and SHA declaration syntax only; content SHA already source-certified by root, not rehashed or decoded here",
+      "role": "state",
+      "sha256": "debde4d7a6d2f85d592f2702aec07f1bb22ffec88b9c14d3c4a901a69f8ad0f0"
+    },
+    {
+      "bytes": 82919,
+      "case_id": "api-vector-anisotropic",
+      "family": "k3p",
+      "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/k3p/api-vector-anisotropic/samples.npz",
+      "review_check": "path/byte-count and SHA declaration syntax only; content SHA already source-certified by root, not rehashed or decoded here",
+      "role": "samples",
+      "sha256": "05d71602edcfb166a39e55fa4515db5ff2cac254e9d37da508927ac5d8c61dc6"
+    },
+    {
+      "bytes": 133288,
+      "case_id": "api-vector-anisotropic",
+      "family": "k3p",
+      "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/k3p/api-vector-anisotropic/state.pt",
+      "review_check": "path/byte-count and SHA declaration syntax only; content SHA already source-certified by root, not rehashed or decoded here",
+      "role": "state",
+      "sha256": "2a9b2c750cc20cc100307433715876972d4f6f83deb64cdeccafe5e4f2841b71"
+    },
+    {
+      "bytes": 15021,
+      "case_id": "image-develop-img_bars4-source-transpose12",
+      "family": "k3p",
+      "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/k3p/image-develop-img_bars4-source-transpose12/samples.npz",
+      "review_check": "path/byte-count and SHA declaration syntax only; content SHA already source-certified by root, not rehashed or decoded here",
+      "role": "samples",
+      "sha256": "8d0c210315f742b1f9b86115090daab24a88a0d86ee7d226e8f3b0e4e1fed6cc"
+    },
+    {
+      "bytes": 120089,
+      "case_id": "image-develop-img_bars4-source-transpose12",
+      "family": "k3p",
+      "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/k3p/image-develop-img_bars4-source-transpose12/state.pt",
+      "review_check": "path/byte-count and SHA declaration syntax only; content SHA already source-certified by root, not rehashed or decoded here",
+      "role": "state",
+      "sha256": "2ce4020954c929dd68723ee8c036974d73c063f21a3704686307644662719e0d"
+    }
+  ],
+  "capacity_counts": {
+    "SUPPORTED": 16,
+    "required": 16
+  },
+  "checks": [
+    "Capacity packet byte hash matches the announced immutable SHA.",
+    "All16 unique ordered cells, full case hashes/horizons/counts and exact .006375/1/1 tuple match spec/preflight declarations.",
+    "Every snapshot is zero clock with empty-optimizer, one original public prelude, purity and no fitting/learning-credit metadata.",
+    "Fast-only, no DV12, fixed-sigma warmup, AMSGradFalse, actual particle-row read without standardization are consistent across all16.",
+    "Native primary output-noise request is true but effective output sigma is zero at capture; no terminal-noise claim.",
+    "All reported primary metrics are finite; recorded passed/failed_bounds metadata is consistent. No numerical gate recomputation.",
+    "All32 declared state/sample artifact paths exist and byte sizes match; artifact contents were neither decoded nor independently replayed."
+  ],
+  "cuda_calls_by_reviewer": 0,
+  "default_adoption": false,
+  "future_media_qa_requirements": [
+    "Wait for root-announced immutable completed/partial family boundaries; never infer outcomes from live paths.",
+    "Show actual fixed intensity and bars targets beside served outputs, with finite-template mass/TV goals.",
+    "For broad/mass/anisotropic vectors show target versus actual clouds and the specific shape/mass bounds.",
+    "For static100 native goals show geometry and noisy-fast primary; fixed25-degree rotated geometry is not a moving rotation task.",
+    "Retain original grade and added first-five/five-later-all-passing persistence grade together beside every GIF.",
+    "Keep original GIF bytes and grades immutable; no new draws, model calls or rescoring during media QA.",
+    "Label fast-only/no DV12 even though the inherited generic image caption mentions policy latent perturbation."
+  ],
+  "git_calls_by_reviewer": 0,
+  "inputs": {
+    "capacity": {
+      "bytes": 751955,
+      "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/capacity.json",
+      "sha256": "f291f8dc1d5c8557f7047580de52e4df3f0d7f5a86ea0b4e9f344486b557f923"
+    },
+    "snapshot_preflight": {
+      "bytes": 586616,
+      "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/snapshot-preflight.json",
+      "sha256": "4c204442a76836c03d09a6e0c978a63ed1bf6937281b4f744d8cbedd0296952d"
+    },
+    "spec": {
+      "bytes": 4511,
+      "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/spec.json",
+      "sha256": "8b2855f6c9231c526c0174469044953b452bd3ee089323b787ba711b6885dde2"
+    }
+  },
+  "learning_status_at_review_boundary": "UNEXECUTED_16_UNKNOWN",
+  "limits": [
+    "Snapshot capacity is necessary evidence only; it does not establish learning, persistence, robustness or terminal-horizon solvability.",
+    "Cold sigma0 native Q1 cannot certify the later fixed output sigma.029 noisy primary distribution.",
+    "Retained Atlas image fast parameters and analytic vector/native populations are parameter-construction inputs; old serving/optimizer/clock/grades carry no new credit.",
+    "Native primary versus output-noise-off diagnostic uses the same fast policy, not a separately forced EMA model.",
+    "Recipe standardize=True remains serialized, while ParticlePrior actually reads stored rows without that standardization.",
+    "Matching paired snapshot metrics reflect shared constructions and fixed evaluation seeds; public states/formulations differ and no algorithm equivalence follows.",
+    "This review is metadata-only. Root source-bound replay/preflight/certifier remains authoritative for actual sampler and state correctness.",
+    "The previously frozen shared index remains byte-exact at its earlier unexecuted boundary; this review is an addendum, not a rewrite."
+  ],
+  "model_or_state_restore_by_reviewer": 0,
+  "new_models_by_reviewer": 0,
+  "new_sampler_calls_by_reviewer": 0,
+  "new_scoring_calls_by_reviewer": 0,
+  "new_training_updates_by_reviewer": 0,
+  "paired_snapshot_checks": [
+    {
+      "case_id": "image-develop-img_intensity2-source-transpose12",
+      "complete_public_state_fingerprints_equal": false,
+      "inference": "Same zero-clock capacity construction; not independent trained replications or family equivalence.",
+      "recorded_primary_metrics_equal": true
+    },
+    {
+      "case_id": "api-vector-two-broad",
+      "complete_public_state_fingerprints_equal": false,
+      "inference": "Same zero-clock capacity construction; not independent trained replications or family equivalence.",
+      "recorded_primary_metrics_equal": true
+    },
+    {
+      "case_id": "api-grid100",
+      "complete_public_state_fingerprints_equal": false,
+      "inference": "Same zero-clock capacity construction; not independent trained replications or family equivalence.",
+      "recorded_primary_metrics_equal": true
+    },
+    {
+      "case_id": "api-rotated100",
+      "complete_public_state_fingerprints_equal": false,
+      "inference": "Same zero-clock capacity construction; not independent trained replications or family equivalence.",
+      "recorded_primary_metrics_equal": true
+    },
+    {
+      "case_id": "api-staggered100",
+      "complete_public_state_fingerprints_equal": false,
+      "inference": "Same zero-clock capacity construction; not independent trained replications or family equivalence.",
+      "recorded_primary_metrics_equal": true
+    },
+    {
+      "case_id": "api-vector-unequal-mass",
+      "complete_public_state_fingerprints_equal": false,
+      "inference": "Same zero-clock capacity construction; not independent trained replications or family equivalence.",
+      "recorded_primary_metrics_equal": true
+    },
+    {
+      "case_id": "api-vector-anisotropic",
+      "complete_public_state_fingerprints_equal": false,
+      "inference": "Same zero-clock capacity construction; not independent trained replications or family equivalence.",
+      "recorded_primary_metrics_equal": true
+    },
+    {
+      "case_id": "image-develop-img_bars4-source-transpose12",
+      "complete_public_state_fingerprints_equal": false,
+      "inference": "Same zero-clock capacity construction; not independent trained replications or family equivalence.",
+      "recorded_primary_metrics_equal": true
+    }
+  ],
+  "protected_scientific_base": "4749b2780add539df4bd8d2dd1d3cc9f002f77ad",
+  "records": [
+    {
+      "captured_completed_steps": 0,
+      "case_id": "image-develop-img_intensity2-source-transpose12",
+      "complete_public_state_fingerprint": "db91ff3f66e09108ea846d7cf5aa3c42ea66b9dc72b9f91a33fce6a4b2bde72e",
+      "evaluation_samples": 1024,
+      "evaluation_seed": 34002,
+      "failed_bounds": [],
+      "family": "ka2",
+      "full_schedule_horizon": 600,
+      "kind": "image",
+      "reported_hq": 1.0,
+      "reported_mass_tv": 0.0029296875,
+      "reported_native_radial_ks": null,
+      "reported_passed": true,
+      "reported_projection_ks": null,
+      "serving": {
+        "backend_selection": null,
+        "latent_perturbation_enabled": false,
+        "output_noise_primary": false,
+        "output_sigma": 0.0,
+        "source": "fast"
+      },
+      "status": "SUPPORTED"
+    },
+    {
+      "captured_completed_steps": 0,
+      "case_id": "api-vector-two-broad",
+      "complete_public_state_fingerprint": "46b22f40e139e9ac6b10442076811d0ec38e2360fad328a0bf854c24a6e30504",
+      "evaluation_samples": 4096,
+      "evaluation_seed": 34002,
+      "failed_bounds": [],
+      "family": "ka2",
+      "full_schedule_horizon": 1200,
+      "kind": "vector",
+      "reported_hq": 0.981201171875,
+      "reported_mass_tv": 0.006591796875,
+      "reported_native_radial_ks": null,
+      "reported_passed": true,
+      "reported_projection_ks": 0.03857414763903855,
+      "serving": {
+        "backend_selection": null,
+        "latent_perturbation_enabled": false,
+        "output_noise_primary": false,
+        "output_sigma": 0.0,
+        "source": "fast"
+      },
+      "status": "SUPPORTED"
+    },
+    {
+      "captured_completed_steps": 0,
+      "case_id": "api-grid100",
+      "complete_public_state_fingerprint": "ad49dec2a718e247df4a69ff2404963131e13f6283deec3819a3e04d95037f20",
+      "evaluation_samples": 20000,
+      "evaluation_seed": 34002,
+      "failed_bounds": [],
+      "family": "ka2",
+      "full_schedule_horizon": 7000,
+      "kind": "native100",
+      "reported_hq": 0.99005,
+      "reported_mass_tv": 0.026399999999999993,
+      "reported_native_radial_ks": 0.009597069435225869,
+      "reported_passed": true,
+      "reported_projection_ks": null,
+      "serving": {
+        "backend_selection": null,
+        "latent_perturbation_enabled": false,
+        "output_noise_primary": true,
+        "output_sigma": 0.0,
+        "source": "fast"
+      },
+      "status": "SUPPORTED"
+    },
+    {
+      "captured_completed_steps": 0,
+      "case_id": "api-rotated100",
+      "complete_public_state_fingerprint": "e7c63634a7e37a258337b14459ec018b4c78d008e7a9335318f88fa43749ae69",
+      "evaluation_samples": 20000,
+      "evaluation_seed": 34002,
+      "failed_bounds": [],
+      "family": "ka2",
+      "full_schedule_horizon": 7000,
+      "kind": "native100",
+      "reported_hq": 0.99005,
+      "reported_mass_tv": 0.026399999999999993,
+      "reported_native_radial_ks": 0.009595806995593148,
+      "reported_passed": true,
+      "reported_projection_ks": null,
+      "serving": {
+        "backend_selection": null,
+        "latent_perturbation_enabled": false,
+        "output_noise_primary": true,
+        "output_sigma": 0.0,
+        "source": "fast"
+      },
+      "status": "SUPPORTED"
+    },
+    {
+      "captured_completed_steps": 0,
+      "case_id": "api-staggered100",
+      "complete_public_state_fingerprint": "115186eca9543d0a7e33c4bde942146de8339dcab74a181086bba62f0afcf4a0",
+      "evaluation_samples": 20000,
+      "evaluation_seed": 34002,
+      "failed_bounds": [],
+      "family": "ka2",
+      "full_schedule_horizon": 7000,
+      "kind": "native100",
+      "reported_hq": 0.99005,
+      "reported_mass_tv": 0.026399999999999993,
+      "reported_native_radial_ks": 0.009596310349313852,
+      "reported_passed": true,
+      "reported_projection_ks": null,
+      "serving": {
+        "backend_selection": null,
+        "latent_perturbation_enabled": false,
+        "output_noise_primary": true,
+        "output_sigma": 0.0,
+        "source": "fast"
+      },
+      "status": "SUPPORTED"
+    },
+    {
+      "captured_completed_steps": 0,
+      "case_id": "api-vector-unequal-mass",
+      "complete_public_state_fingerprint": "d70db87a175d6d4e2778db32f83ec99593fb2140a8f69fdff21a7ae0cba2f421",
+      "evaluation_samples": 4096,
+      "evaluation_seed": 34002,
+      "failed_bounds": [],
+      "family": "ka2",
+      "full_schedule_horizon": 1200,
+      "kind": "vector",
+      "reported_hq": 0.98583984375,
+      "reported_mass_tv": 0.009208986535668373,
+      "reported_native_radial_ks": null,
+      "reported_passed": true,
+      "reported_projection_ks": 0.026140326127520874,
+      "serving": {
+        "backend_selection": null,
+        "latent_perturbation_enabled": false,
+        "output_noise_primary": false,
+        "output_sigma": 0.0,
+        "source": "fast"
+      },
+      "status": "SUPPORTED"
+    },
+    {
+      "captured_completed_steps": 0,
+      "case_id": "api-vector-anisotropic",
+      "complete_public_state_fingerprint": "2e6fc0487b5de846be3a9e63c7203e91d4aecbe5417884ddd15b8b415c11858e",
+      "evaluation_samples": 4096,
+      "evaluation_seed": 34002,
+      "failed_bounds": [],
+      "family": "ka2",
+      "full_schedule_horizon": 1200,
+      "kind": "vector",
+      "reported_hq": 0.989990234375,
+      "reported_mass_tv": 0.007731124758720398,
+      "reported_native_radial_ks": null,
+      "reported_passed": true,
+      "reported_projection_ks": 0.025898691476780034,
+      "serving": {
+        "backend_selection": null,
+        "latent_perturbation_enabled": false,
+        "output_noise_primary": false,
+        "output_sigma": 0.0,
+        "source": "fast"
+      },
+      "status": "SUPPORTED"
+    },
+    {
+      "captured_completed_steps": 0,
+      "case_id": "image-develop-img_bars4-source-transpose12",
+      "complete_public_state_fingerprint": "8b1310a100aa286b5c8f0d12dcc96f8f2a0f3a9c21a9bc4c30dd5c1e5ebf35e0",
+      "evaluation_samples": 1024,
+      "evaluation_seed": 34002,
+      "failed_bounds": [],
+      "family": "ka2",
+      "full_schedule_horizon": 600,
+      "kind": "image",
+      "reported_hq": 1.0,
+      "reported_mass_tv": 0.0146484375,
+      "reported_native_radial_ks": null,
+      "reported_passed": true,
+      "reported_projection_ks": null,
+      "serving": {
+        "backend_selection": null,
+        "latent_perturbation_enabled": false,
+        "output_noise_primary": false,
+        "output_sigma": 0.0,
+        "source": "fast"
+      },
+      "status": "SUPPORTED"
+    },
+    {
+      "captured_completed_steps": 0,
+      "case_id": "image-develop-img_intensity2-source-transpose12",
+      "complete_public_state_fingerprint": "1bb5296b00a2f9f9e8523c6b0e5821284cefd59c861050804d596c4064537d18",
+      "evaluation_samples": 1024,
+      "evaluation_seed": 34002,
+      "failed_bounds": [],
+      "family": "k3p",
+      "full_schedule_horizon": 600,
+      "kind": "image",
+      "reported_hq": 1.0,
+      "reported_mass_tv": 0.0029296875,
+      "reported_native_radial_ks": null,
+      "reported_passed": true,
+      "reported_projection_ks": null,
+      "serving": {
+        "backend_selection": null,
+        "latent_perturbation_enabled": false,
+        "output_noise_primary": false,
+        "output_sigma": 0.0,
+        "source": "fast"
+      },
+      "status": "SUPPORTED"
+    },
+    {
+      "captured_completed_steps": 0,
+      "case_id": "api-vector-two-broad",
+      "complete_public_state_fingerprint": "b3321444680f5095f753ec5960e84df1e9a6344f9d3cacb70b36ea0cbc790cf5",
+      "evaluation_samples": 4096,
+      "evaluation_seed": 34002,
+      "failed_bounds": [],
+      "family": "k3p",
+      "full_schedule_horizon": 1200,
+      "kind": "vector",
+      "reported_hq": 0.981201171875,
+      "reported_mass_tv": 0.006591796875,
+      "reported_native_radial_ks": null,
+      "reported_passed": true,
+      "reported_projection_ks": 0.03857414763903855,
+      "serving": {
+        "backend_selection": null,
+        "latent_perturbation_enabled": false,
+        "output_noise_primary": false,
+        "output_sigma": 0.0,
+        "source": "fast"
+      },
+      "status": "SUPPORTED"
+    },
+    {
+      "captured_completed_steps": 0,
+      "case_id": "api-grid100",
+      "complete_public_state_fingerprint": "cb3b30f2f13f8646546dba7dfa9b1798c1a4d796d036e51ca7b16bdc28ec3d1e",
+      "evaluation_samples": 20000,
+      "evaluation_seed": 34002,
+      "failed_bounds": [],
+      "family": "k3p",
+      "full_schedule_horizon": 7000,
+      "kind": "native100",
+      "reported_hq": 0.99005,
+      "reported_mass_tv": 0.026399999999999993,
+      "reported_native_radial_ks": 0.009597069435225869,
+      "reported_passed": true,
+      "reported_projection_ks": null,
+      "serving": {
+        "backend_selection": null,
+        "latent_perturbation_enabled": false,
+        "output_noise_primary": true,
+        "output_sigma": 0.0,
+        "source": "fast"
+      },
+      "status": "SUPPORTED"
+    },
+    {
+      "captured_completed_steps": 0,
+      "case_id": "api-rotated100",
+      "complete_public_state_fingerprint": "f561edc97d91c7552b2acceac72d11f4c05b7591fe67b7f4e72d213dd6f6b181",
+      "evaluation_samples": 20000,
+      "evaluation_seed": 34002,
+      "failed_bounds": [],
+      "family": "k3p",
+      "full_schedule_horizon": 7000,
+      "kind": "native100",
+      "reported_hq": 0.99005,
+      "reported_mass_tv": 0.026399999999999993,
+      "reported_native_radial_ks": 0.009595806995593148,
+      "reported_passed": true,
+      "reported_projection_ks": null,
+      "serving": {
+        "backend_selection": null,
+        "latent_perturbation_enabled": false,
+        "output_noise_primary": true,
+        "output_sigma": 0.0,
+        "source": "fast"
+      },
+      "status": "SUPPORTED"
+    },
+    {
+      "captured_completed_steps": 0,
+      "case_id": "api-staggered100",
+      "complete_public_state_fingerprint": "3f151f46ff971033e6d26a9fb3bc7cef75911baecae7ceab1283102cfbd51490",
+      "evaluation_samples": 20000,
+      "evaluation_seed": 34002,
+      "failed_bounds": [],
+      "family": "k3p",
+      "full_schedule_horizon": 7000,
+      "kind": "native100",
+      "reported_hq": 0.99005,
+      "reported_mass_tv": 0.026399999999999993,
+      "reported_native_radial_ks": 0.009596310349313852,
+      "reported_passed": true,
+      "reported_projection_ks": null,
+      "serving": {
+        "backend_selection": null,
+        "latent_perturbation_enabled": false,
+        "output_noise_primary": true,
+        "output_sigma": 0.0,
+        "source": "fast"
+      },
+      "status": "SUPPORTED"
+    },
+    {
+      "captured_completed_steps": 0,
+      "case_id": "api-vector-unequal-mass",
+      "complete_public_state_fingerprint": "a91d75853f01ac175809fbca3bae5aa7f1d2400ba831f0182ee214d53e68d0b4",
+      "evaluation_samples": 4096,
+      "evaluation_seed": 34002,
+      "failed_bounds": [],
+      "family": "k3p",
+      "full_schedule_horizon": 1200,
+      "kind": "vector",
+      "reported_hq": 0.98583984375,
+      "reported_mass_tv": 0.009208986535668373,
+      "reported_native_radial_ks": null,
+      "reported_passed": true,
+      "reported_projection_ks": 0.026140326127520874,
+      "serving": {
+        "backend_selection": null,
+        "latent_perturbation_enabled": false,
+        "output_noise_primary": false,
+        "output_sigma": 0.0,
+        "source": "fast"
+      },
+      "status": "SUPPORTED"
+    },
+    {
+      "captured_completed_steps": 0,
+      "case_id": "api-vector-anisotropic",
+      "complete_public_state_fingerprint": "295a5ec8d5f84e85e05ec2bab7bddb073e0c20cc7ea2fffbf9b3c80d66f98267",
+      "evaluation_samples": 4096,
+      "evaluation_seed": 34002,
+      "failed_bounds": [],
+      "family": "k3p",
+      "full_schedule_horizon": 1200,
+      "kind": "vector",
+      "reported_hq": 0.989990234375,
+      "reported_mass_tv": 0.007731124758720398,
+      "reported_native_radial_ks": null,
+      "reported_passed": true,
+      "reported_projection_ks": 0.025898691476780034,
+      "serving": {
+        "backend_selection": null,
+        "latent_perturbation_enabled": false,
+        "output_noise_primary": false,
+        "output_sigma": 0.0,
+        "source": "fast"
+      },
+      "status": "SUPPORTED"
+    },
+    {
+      "captured_completed_steps": 0,
+      "case_id": "image-develop-img_bars4-source-transpose12",
+      "complete_public_state_fingerprint": "1a2a4b9e89375fa1f642a1390459ad65b8d8c851b0f3b0a20ff6166bda5c855f",
+      "evaluation_samples": 1024,
+      "evaluation_seed": 34002,
+      "failed_bounds": [],
+      "family": "k3p",
+      "full_schedule_horizon": 600,
+      "kind": "image",
+      "reported_hq": 1.0,
+      "reported_mass_tv": 0.0146484375,
+      "reported_native_radial_ks": null,
+      "reported_passed": true,
+      "reported_projection_ks": null,
+      "serving": {
+        "backend_selection": null,
+        "latent_perturbation_enabled": false,
+        "output_noise_primary": false,
+        "output_sigma": 0.0,
+        "source": "fast"
+      },
+      "status": "SUPPORTED"
+    }
+  ],
+  "review_kind": "READ_ONLY_JSON_AND_ARTIFACT_METADATA_SANITY_NOT_SAMPLER_CERTIFIER",
+  "review_status": "CLEAR_WITH_EXPLICIT_SCOPE_LIMITS",
+  "root_capture_cost": {
+    "accounting_scope": "CPU construction/verification diagnostic, separate from the ordinary supervised GPU campaign paid clock.",
+    "ordinary_training_paid_credit": 0,
+    "packet_cpu_elapsed_seconds": 10.17120588105172,
+    "reported_process_seconds": 13.077
+  },
+  "root_preflight_reported": {
+    "all16_resolved_recipe_hashes": {
+      "k3p/api-grid100": "22ef4c5902330297f7586e6001b73c4314567334e6524cb385a5eb6d49ba5a91",
+      "k3p/api-rotated100": "22ef4c5902330297f7586e6001b73c4314567334e6524cb385a5eb6d49ba5a91",
+      "k3p/api-staggered100": "22ef4c5902330297f7586e6001b73c4314567334e6524cb385a5eb6d49ba5a91",
+      "k3p/api-vector-anisotropic": "ca91c59e59e1de7240ed983d553fb4b07ec378631889771fda7bf8ea6f5f496b",
+      "k3p/api-vector-two-broad": "ca91c59e59e1de7240ed983d553fb4b07ec378631889771fda7bf8ea6f5f496b",
+      "k3p/api-vector-unequal-mass": "ca91c59e59e1de7240ed983d553fb4b07ec378631889771fda7bf8ea6f5f496b",
+      "k3p/image-develop-img_bars4-source-transpose12": "5022fe00091f2b86d04158feed96383124b4db2c24b19c9249d3fda70ae6fec1",
+      "k3p/image-develop-img_intensity2-source-transpose12": "5022fe00091f2b86d04158feed96383124b4db2c24b19c9249d3fda70ae6fec1",
+      "ka2/api-grid100": "94bf7ca81f8a45d06e1193009b27395b142d7fc088d19bba54a6031d29eb29ca",
+      "ka2/api-rotated100": "94bf7ca81f8a45d06e1193009b27395b142d7fc088d19bba54a6031d29eb29ca",
+      "ka2/api-staggered100": "94bf7ca81f8a45d06e1193009b27395b142d7fc088d19bba54a6031d29eb29ca",
+      "ka2/api-vector-anisotropic": "a6cb1de23412017c31d3e686eb5eae21a71331a15032902ce896459ed1a2546e",
+      "ka2/api-vector-two-broad": "a6cb1de23412017c31d3e686eb5eae21a71331a15032902ce896459ed1a2546e",
+      "ka2/api-vector-unequal-mass": "a6cb1de23412017c31d3e686eb5eae21a71331a15032902ce896459ed1a2546e",
+      "ka2/image-develop-img_bars4-source-transpose12": "a728838b5086f43510d4f9c4a3dea196c055d8587805eb6862a3c5968d46cda4",
+      "ka2/image-develop-img_intensity2-source-transpose12": "a728838b5086f43510d4f9c4a3dea196c055d8587805eb6862a3c5968d46cda4"
+    },
+    "cuda_initialized": false,
+    "definitions": 177,
+    "eight_required_case_hashes": {
+      "api-grid100": "93ca5686f7358c701c58b34798b8e1f784a339c958a0fe8e1c9f90af4867f279",
+      "api-rotated100": "6e06e5ba492950d3f8063a27f82bf3d51e75574148235495cc1b331b7fb30754",
+      "api-staggered100": "9ba09451032b3741df8a30c936bd81cc31038866dd2f4d0eb92966e48b292f48",
+      "api-vector-anisotropic": "2ec941011f8398672ce85b1d4df41c6e22dce2e0f98354a75f1d9a6794d4e1b6",
+      "api-vector-two-broad": "e293cf19f2f235b30807f9782ec65ceea3693f78e3459b9f7eb117179168c8fc",
+      "api-vector-unequal-mass": "e29a36b2461a986a28ca950df869a4926f258b2bfca32bd46bc8b2188aebf32e",
+      "image-develop-img_bars4-source-transpose12": "d3145a02dd5e98155b006bf3e99899003707fe8fcf62318ba55fcd2fc6374b4d",
+      "image-develop-img_intensity2-source-transpose12": "e9fa47de6adbb31f083c0333b0c7c41352d2b890b16539d47839d3f9720c5dfb"
+    },
+    "new_models": 0,
+    "sampler_calls": 0,
+    "snapshot_files": 3404,
+    "status": "PASS",
+    "training_updates": 0
+  },
+  "schema": "particlegan_ka2_k3p_capacity_metadata_review_v1",
+  "source_commit": "26ff278c3796d775969391adc0bde52e3af11149",
+  "source_snapshot_digest": "48bc63ed6c48e7fdb0028313b950ebb0946598fd100f60a612c4ecec16bc990e",
+  "speed_winner": null
+}

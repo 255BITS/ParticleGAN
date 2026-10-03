@@ -1,0 +1,83 @@
+{
+  "all8_required_case_ids": [
+    "image-develop-img_intensity2-source-transpose12",
+    "api-vector-two-broad",
+    "api-grid100",
+    "api-rotated100",
+    "api-staggered100",
+    "api-vector-unequal-mass",
+    "api-vector-anisotropic",
+    "image-develop-img_bars4-source-transpose12"
+  ],
+  "baseline_source_commit": "26ff278c3796d775969391adc0bde52e3af11149",
+  "evidence": {
+    "pair_analysis": {
+      "path": "/ml2/hypergan/ka2-k3p-defaults-failure-analysis-20261003/pair-intensity-analysis.json",
+      "sha256": "d2d278899cef0d1593399e3029b6e792a1a2a6de5fe46452c1c771b8e1604c59"
+    },
+    "source_contract": {
+      "path": "/ml2/hypergan/ka2-k3p-defaults-failure-analysis-20261003/source-questions-and-observables.json",
+      "sha256": "30148473ed50a0aa22a6951c54161a032f6cc65a883899fba8429ce2efe033e8"
+    }
+  },
+  "execution_status": "DECLARED_NOT_EXECUTED",
+  "families": [
+    "ka2",
+    "k3p"
+  ],
+  "family_case_denominator": 16,
+  "limits": [
+    "No causal repair or monotonicity claim",
+    "No budgetreset",
+    "Full nominalpairquota15360 exceeds remainingcap; rootmustbind carryover/disjointresidualquotas",
+    "Zero-clock native capability is not terminal noisy reachability",
+    "Unreached outcomesremainUNKNOWN",
+    "No namedfamilywinner ordefaultpromotion"
+  ],
+  "motivation": {
+    "direction": "faster row transport is an unproven contrast; it may worsen frequency or quality",
+    "not_frequency_only": "nearestTV already inside.10; off-template quality deficit must also improve",
+    "observed_population_nearest_tv": 0.09375,
+    "observed_rejected_rows": {
+      "k3p": 3,
+      "ka2": 1
+    },
+    "observed_uniform_population_nearest_counts": [
+      19,
+      13
+    ]
+  },
+  "new_models_draws_or_captures": 0,
+  "new_optimization_updates": 0,
+  "original_tested_overrides": {
+    "d_lr_mult": 1.0,
+    "lr": 0.006375,
+    "prior_lr_mult": 1.0
+  },
+  "proposed_shared_overrides": {
+    "d_lr_mult": 1.0,
+    "lr": 0.006375,
+    "prior_lr_mult": 2.0
+  },
+  "remaining_seconds": 15218.812074924354,
+  "reserved_resources": false,
+  "retained_campaign_paid_seconds": 141.1879250756465,
+  "schema": "ka2_k3p_prior_rate_proposal_v1",
+  "scientific_admission": "new exact source/Recipe/state/sampler-bound16 capacity outcomes, eightSUPPORTED per independent family lane; oldfixedtuplecardsnotreused",
+  "status": "PROPOSED",
+  "unchanged_contracts": [
+    "target",
+    "host_architecture",
+    "init",
+    "named_seed24002",
+    "heldout_seed34002",
+    "sampling_law",
+    "gate_thresholds",
+    "24metricchecks",
+    "600/1200/7000horizons",
+    "original_final5",
+    "added_first5_plus_all_later_and_min5",
+    "family_mechanisms"
+  ],
+  "unchanged_original_cost_cap_seconds": 15360.0
+}

@@ -1,59 +1,55 @@
-# Named KA2/K3P defaults study
+# KA2/K3P recover brightness modes but fail finite-template fidelity
 
-This is one finite pair of whole configurations: `ka2` and `k3p`, each with the shared tuple `lr=0.006375`, `prior_lr_mult=1.0`, `d_lr_mult=1.0`. Each tuple stays unchanged across eight required public API questions. The two smoke prerequisites precede six quality cases; the first non-PASS stops that family. Unreached cells remain UNKNOWN in the full 16-cell denominator. A negative capacity outcome blocks its own family, while a fully supported sibling can proceed.
+Both shared `.006375 / 1 / 1` configurations completed the original 600-update intensity test and failed its original and added first-window gates. They recover both target brightness modes, but their generated images and frequencies miss the unchanged fidelity bounds. The first failure stops each family: **2 learning FAIL, 14 UNKNOWN, 16 cold capacity SUPPORTED**. Neither configuration is eligible for a public default or a speed ranking.
 
-These are explicitly family-owned laws. The unchanged public factories use fast-only serving, no DV12 controller, no particle birth/death or continuous row evidence, AMSGrad false, and fixed output sigma warmed from zero to 0.029 over the first 20% of the full host horizon. Learning rates retain the named recipe schedules. `ParticlePrior` reads its stored rows directly; the serialized Recipe `standardize` flag is not applied to those particle reads. Image/vector primary observations omit training output noise; native primary observations include the fixed scheduled output noise, with clean diagnostics separate. This is a new sampling/formulation cohort, and supplies no Atlas/E22, historical positive, Forge MoG, default-adoption or speed credit.
+| Family | Modes / required | HQ / minimum | Finite-template TV / maximum | Original | Added hold | Later required cases |
+| --- | --- | --- | --- | --- | --- | --- |
+| KA2 | 2 / 2 | .969727 / .90 | .128906 / .10 | FAIL | FAIL | 7 UNKNOWN |
+| K3P | 2 / 2 | .896484 / .90 | .202148 / .10 | FAIL | FAIL | 7 UNKNOWN |
 
-`protocol.py` mirrors the original factory Recipe adaptation, including `total_steps=600` for images, `1200` for ordinary vectors, and `7000` for the three native hosts. These schedules stay fixed even when a software control uses a short execution prefix. The narrow Recipe-aware grade adapter uses the unchanged public retained-receipt verifier, numerical scorer, checkpoint-health checks and first-window reducer. It corrects the legacy search resolver's omission of host horizons; it patches no old modules, private globals, factory, numerical gate or training loop. All training remains in the public `api_run.main()`.
+Both retain 19 dim and 13 bright distinct row outputs. The frozen 1,024-output draw contains 613 dim and 411 bright outputs; its nearest-template frequency TV is .098633. KA2 rejects one overshooting bright output (31 draws); K3P rejects three (106 draws). Their finite-template TV includes this rejected mass. KA2 passes mode coverage and HQ but fails the combined fidelity bound; K3P also falls below HQ .90. This is partial photometric recovery, with no passing five-check acquisition window in any of the 25 recorded checks.
 
-| Required order | Case | Tier | Full updates | Evaluation samples | Acquisition cap |
-| --- | --- | --- | --- | --- | --- |
-| 1 | `image-develop-img_intensity2-source-transpose12` | Smoke | 600 | 1,024 | 180s |
-| 2 | `api-vector-two-broad` | Smoke | 1,200 | 4,096 | 180s |
-| 3 | `api-grid100` | Quality | 7,000 | 20,000 | 2,100s |
-| 4 | `api-rotated100` | Quality | 7,000 | 20,000 | 2,100s |
-| 5 | `api-staggered100` | Quality | 7,000 | 20,000 | 2,100s |
-| 6 | `api-vector-unequal-mass` | Quality | 1,200 | 4,096 | 180s |
-| 7 | `api-vector-anisotropic` | Quality | 1,200 | 4,096 | 180s |
-| 8 | `image-develop-img_bars4-source-transpose12` | Quality | 600 | 1,024 | 180s |
+## Actual goal GIFs
 
-All eight original case hashes, numerical gates, full budgets, seed 24002, evaluation seed 34002, 24 post-update scoring observations, five terminal observations and nine actual-training GIF frames remain fixed. The added study grade requires the first five consecutive primary PASS observations, at least five later checks, and every later primary check passing. A later recovery does not replace a failed first hold. Original and added grades appear together beside each GIF. Native scope is 24 noisy-fast 20,000-output observations with five terminal checks; it supplies no independent 100,000-output gate.
+Targets are the original .35 and .85 center patches. These are nine original training frames, copied byte for byte. Their FAIL labels remain visible. The inherited generic caption mentions latent perturbation; the actual named-family image law is **fast-only, no DV12, no added primary output noise**, as confirmed by the retained flags. The adjacent grades above are authoritative for the unchanged original and added study gates.
 
-Before ordinary execution, root must commit/freeze these helpers and capture fresh candidate-bound capacity outcomes for all 16 cells. The binder checks the current public sampler, full Recipe/source/state/array identities and zero-update provenance. Capacity is necessary representability evidence, not learning or robustness evidence. Unknown, blocked and valid numerical failures remain visible; prior witnesses or grades cannot replace fresh cells.
+**KA2 — original FAIL; added hold FAIL.**
 
-The finite campaign retains its original 15,360-second ceiling. The one-time prior debit is 113.99425188452005 seconds: prior scientific intervals total 109.23634317959659 seconds, while the distinct startup ERROR costs 4.757908704923466 seconds. The latest generator-step combined/certification/publication and both family studies are pinned, with the original critic-rate studies and startup durable evidence checked recursively. Bookkeeping slot `ka2` inherits the former Atlas debit 59.797148591605946 seconds, leaving 7,620.202851408394 seconds; `k3p` inherits the former E22 debit 54.19710329291411 seconds, leaving 7,625.802896707086 seconds. The mapping carries paid cost only and grants no family grades. The pair has 15,246.00574811548 seconds remaining. Current paid time and conservative interruption reservation remain separate; prior costs are charged once.
+![KA2 intensity recovery](media/ka2/image-develop-img_intensity2-source-transpose12/goal.gif)
 
-Each task reserves its unchanged complete acquisition allowance plus 60 seconds of export grace before launch. Insufficient remaining allowance yields INCOMPLETE with deeper cells UNKNOWN; no shorter schedule, failed retry, seed change or extra budget is allowed. Physical GPU1 alone is admitted through the existing shared coordinator, with at least 12,288 MiB free, temperature at most 82 C, one CPU thread, deterministic CUDA settings and a 0.2 process memory fraction. External contention prevents speed ranking. The source snapshot includes the original pinned ring discovery JSON and explicitly binds this protocol, new runner/binder and unchanged delegated generator/critic helpers.
+**K3P — original FAIL; added hold FAIL.**
 
-Root owns capacity captures, queues, source freezes and ordinary launches. The following commands document the supported path; preparing these files executes none of them. Replace the capacity path after root's committed capture. The global shared queue path must be the same for both family owners.
+![K3P intensity recovery](media/k3p/image-develop-img_intensity2-source-transpose12/goal.gif)
 
-```bash
-# Read-only fixed spec, after fresh capacity has been captured.
-CUDA_VISIBLE_DEVICES='' OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 \
-python reports/forge/ka2-k3p-defaults-20261003/run_family_defaults.py spec \
-  /ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/capacity.json \
-  --output /ml2/hypergan/forge-ka2-k3p-defaults-20261003/spec.json
+## What each required problem verifies
 
-# Explicit CPU-only plan/replay; missing/invalid outcomes fail before queue creation.
-CUDA_VISIBLE_DEVICES='' OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 \
-python reports/forge/ka2-k3p-defaults-20261003/run_family_defaults.py plan \
-  /ml2/hypergan/forge-ka2-k3p-defaults-20261003/spec.json \
-  --output /ml2/hypergan/forge-ka2-k3p-defaults-20261003/plan.json
+Both family tuples stay unchanged across these eight questions. All original targets, host architectures, numeric gates, full horizons, seed 24002, evaluation seed 34002 and observation cadence remain fixed. The [full source-bound explanation](SOURCE_QUESTIONS_AND_OBSERVABLES.md) lists exact thresholds, distinct purposes, GIF goals and limitations.
 
-# Root alone launches one family owner at a time on physical GPU1.
-CUDA_VISIBLE_DEVICES=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 \
-python reports/forge/ka2-k3p-defaults-20261003/run_family_defaults.py run \
-  /ml2/hypergan/forge-ka2-k3p-defaults-20261003/spec.json --family ka2 \
-  --queue-root /ml2/hypergan/ParticleGAN-single-recipe/runs/forge \
-  --output /ml2/hypergan/forge-ka2-k3p-defaults-20261003/ka2
+| Required order | Original problem | Intended check | Full updates / evaluation count | KA2 learning | K3P learning | Cold Q1 |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | intensity2 | Accurate .35/.85 pixels, both modes and balanced template probabilities | 600 / 1,024 | FAIL | FAIL | Both SUPPORTED |
+| 2 | two-broad | Two equal Gaussian modes with continuous within-mode spread and analytic CDF fidelity | 1,200 / 4,096 | UNKNOWN | UNKNOWN | Both SUPPORTED |
+| 3 | grid100 | All 100 narrow modes, uniform mass, local width and density-fidelity bounds | 7,000 / 20,000 | UNKNOWN | UNKNOWN | Both SUPPORTED |
+| 4 | rotated100 | The same 100-mode requirements under a fixed 25-degree orientation change | 7,000 / 20,000 | UNKNOWN | UNKNOWN | Both SUPPORTED |
+| 5 | staggered100 | Narrow-mode fidelity on a compressed, row-offset lattice | 7,000 / 20,000 | UNKNOWN | UNKNOWN | Both SUPPORTED |
+| 6 | unequal-mass | Correct .55/.30/.13/.02 probabilities, including rare-mode occupancy and resolved shape | 1,200 / 4,096 | UNKNOWN | UNKNOWN | Both SUPPORTED |
+| 7 | anisotropic | Three oriented ellipses with correct signed covariance, narrow eigen-directions and spill | 1,200 / 4,096 | UNKNOWN | UNKNOWN | Both SUPPORTED |
+| 8 | bars4 | Four spatial bar templates with sharp pixels and balanced probabilities | 600 / 1,024 | UNKNOWN | UNKNOWN | Both SUPPORTED |
 
-# Repeat the owner command once with --family k3p and a distinct .../k3p output.
-# After both archives are immutable, root explicitly recertifies/composes them.
-CUDA_VISIBLE_DEVICES='' OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 \
-python reports/forge/ka2-k3p-defaults-20261003/run_family_defaults.py combine \
-  /ml2/hypergan/forge-ka2-k3p-defaults-20261003/ka2/study.json \
-  --archive /ml2/hypergan/forge-ka2-k3p-defaults-20261003/k3p/study.json \
-  --output /ml2/hypergan/forge-ka2-k3p-defaults-20261003/combined.json
-```
+Cold capacity is a necessary constructive witness with fresh public owners, zero optimizer updates and the real original first-data prelude. It uses the actual full-count public sampler and unchanged gates. Native noisy requests have sigma zero at that legitimate clock; this grants no terminal-noise solvability or learned convergence credit. The three native learning cases remain unmeasured. Rotated and staggered targets are stationary questions; none is credited as a moving-target test.
 
-Software validation uses CPU-only isolated fixtures and explicit synthetic receipt controls; those are not trained qualifications. Controls exercise exact resolver-versus-factory equality for all 16 hosts, real two-update optimizer ownership, the genuine primary numerical grader plus first-window semantics, corrupt learned-state rejection, source/snapshot/discovery/CLI identity, family-specific blockers, full denominators, finite budgets, immutable prior debit and durable interruption costs.
+## Diagnosis and next declared candidate
+
+[Retained pair diagnosis](PAIR_INTENSITY_ANALYSIS.md) establishes bitwise sample equality through step475 and differences at500–600. Final fast/EMA/prior weights and optimizer states differ. KA2's penalty is still in its 800-call pure-A period; K3P's anchor has started under its public rate-driven handover. Those family laws are retained. Missing intermediate weights and row-to-output IDs limit causal attribution; endpoint recovery is not a root-cause proof.
+
+The next [prior-rate contrast](NEXT_PRIOR_RATE.md) uses `.006375 / 2 / 1` for both families and all eight questions. It doubles the nominal prior learning-rate multiplier while leaving nominal G/D rates fixed; endogenous parameter movement need not double. It is an accepted, separate candidate under preparation, with no new capacity or learning credit at this publication boundary. It must acquire fresh candidate-bound proofs, preserve every original horizon/gate/seed, and charge the prior campaign once. It is a hypothesis, with no predicted repair.
+
+## Source, verification and accounting
+
+Scientific source: `26ff278c3796d775969391adc0bde52e3af11149`; publisher source: `5a74fc240f496164ef6ce6da7245145a60e489a8`. The original scientific package/configuration bytes remain at protected base `4749b2780add539df4bd8d2dd1d3cc9f002f77ad`. Family laws are fast-only, no DV12, AMSGrad false, fixed sigma warmed to .029 and the unchanged full-host cosine schedules. Image/vector primary samples omit output noise; native primary samples would include it. The original [plan and runnable API commands](PLAN.md), [capacity contract](CAPACITY.md) and [publication procedure](PUBLICATION.md) remain available.
+
+Root's 192 combined software controls and 78 publisher controls pass. Copied-source preflight checks 3,404 files, 177 discovered definitions, eight original case hashes and 16 resolved Recipes with zero model/sample/update/CUDA calls. The actual CPU capacity capture, capacity-sampler replay and retained numeric recertification are separate diagnostics. [Certification](certification.json) and [its actual execution record](certification-execution.json) bind the completed combine; draw-free publication checks **13,945 input identities**, copies the two GIFs and performs no model restores, samples, rescoring or optimizer updates.
+
+New science costs **27.193673191126436 seconds**; interruption reserve **0**. Prior science **109.23634317959659** plus startup ERROR **4.757908704923466** is charged once, yielding **141.1879250756465 / 15,360 seconds** for this campaign. CPU proof/verification, queue wait and historical Atlas19 replay belong to separate scopes. Failed time does not rank convergence speed. The later candidate inherits only paid costs, with 15,218.812075 seconds unspent; no earlier grades or capacity are transferred.
+
+The [machine-readable results](results.json) retain all 16 cells, both verdicts, source/law/Recipe/runtime identities, original requirements, durable supervision, cost distinctions and copied media hashes. The [shared score index V2](../shared-score-index-20261003-v2/README.md) links compatible rankings and separate historical cohorts; its [JSON projection](../shared-score-index-20261003-v2/index.json) pins all nine reports. The [verified raw archive](ARCHIVE.md) contains all 13,945 consumed inputs and 20,897 members; the [archive card](archive.json) records LOCAL_ONLY availability and undeclared retention, with no remote replication claim.
