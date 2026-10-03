@@ -14,7 +14,7 @@ from particlegan import Recipe
 from .taskrecipes import BEHAVIOR_HOST_FIELDS, RESOURCE_FIELDS, delegated_fields
 
 
-BOUNDARIES_VERSION = "forge-field-boundaries-v1"
+BOUNDARIES_VERSION = "forge-field-boundaries-v2"
 OWNERS = frozenset({"task", "technique", "hyperparameter", "protocol"})
 
 # Conservative finite search permission is narrower than numerical ownership.
@@ -71,6 +71,24 @@ def _behavior_host(task):
     execution = task.get("execution", {})
     return (execution.get("host", task.get("id"))
             if task.get("adapter") == "transfer_behavior" else None)
+
+
+def prior_control_binding(task):
+    """Separate direct generated coordinates from a sampled latent prior."""
+    if _behavior_host(task) == "two_pole":
+        return {"representation": "direct_sample_coordinates", "latent_table_controls": False,
+                "construction": "direct nn.Parameter; no ParticlePrior or latent-table optimizer",
+                "optimizer": "Recipe.make_generator_optimizer(direct_particles=...)",
+                "base_lr": "Recipe.lr", "base_betas": "Recipe.betas",
+                "lr_schedule": "prior", "note": "The existing direct-coordinate group uses the prior "
+                "decay schedule, but prior_lr_mult and prior_betas do not bind it. Formulation "
+                "optimizers retain their public DirectParticleResponse step controls."}
+    if task.get("execution", {}).get("prior_applicability") == "not_sampled":
+        return {"representation": "not_sampled", "latent_table_controls": False,
+                "construction": "no sampled latent prior or prior optimizer group"}
+    return {"representation": "latent_prior_locations", "latent_table_controls": True,
+            "base_lr": "Recipe.lr * Recipe.prior_lr_mult",
+            "base_betas": "Recipe.prior_betas or Recipe.betas", "lr_schedule": "prior"}
 
 
 def task_owned_recipe_fields(task):
@@ -173,6 +191,7 @@ def ownership_receipt(candidate, task, resolved_recipe, protocol=None, initializ
     if resolved_recipe["total_steps"] is not None and resolved_recipe["total_steps"] != horizon:
         raise ValueError("effective Recipe total_steps contradicts task-owned schedule horizon")
     host = _behavior_host(task)
+    prior_binding = prior_control_binding(task)
     behavior_owned = task_owned_recipe_fields(task) - TASK_RECIPE_FIELDS
     if host is not None and host != "mode_hold":
         behavior_owned |= RESOURCE_FIELDS - {"total_steps"}
@@ -204,7 +223,11 @@ def ownership_receipt(candidate, task, resolved_recipe, protocol=None, initializ
             owner, status = "technique", "legacy_reference"
         elif owner == "task":
             source = "frozen task host/adapter resource binding"
-        if name in behavior_owned:
+        if name in {"prior_lr_mult", "prior_betas"} and not prior_binding["latent_table_controls"]:
+            result[name] = _record(None, owner, "task prior-control applicability",
+                                   status="not_applicable", reference_recipe_value=_json_value(value),
+                                   representation=prior_binding["representation"])
+        elif name in behavior_owned:
             result[name] = _record(None, owner, "frozen behavioral host objective/component source",
                                    status="host_owned", reference_recipe_value=_json_value(value))
         else:
@@ -235,6 +258,10 @@ def ownership_receipt(candidate, task, resolved_recipe, protocol=None, initializ
         initialization["component_policies"] = _json_value(host_definition["initialization"])
     prior_record = _record(prior, "task", "task.execution.prior")
     prior_record["code_path"] = "MoGParticlePrior" if prior["kind"] == "mog" else "ParticlePrior"
+    if not prior_binding["latent_table_controls"]:
+        prior_record["declared_code_path"] = prior_record["code_path"]
+        prior_record["code_path"] = None
+    prior_record["control_binding"] = prior_binding
     prior_record["applicability"] = execution.get("prior_applicability", "sampled")
     budget = {name: execution[name] for name in ("steps", "incremental_steps", "preserve_prefix_steps", "original_schedule_horizon") if name in execution}
     budget["execution_resources"] = task.get("resources", {})

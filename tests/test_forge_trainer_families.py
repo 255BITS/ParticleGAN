@@ -22,6 +22,7 @@ def persist(root, report):
 @pytest.fixture
 def study(tmp_path):
     shutil.copytree(ROOT / "configs/forge", tmp_path / "configs/forge")
+    (tmp_path / families.CURRENT_SELECTION).unlink(missing_ok=True)
     spec = read_json(tmp_path / "configs/forge/searches/r1r2-modern-toy-v1.json")
     declarations = search._declarations(tmp_path, spec)
     assignments = read_json(tmp_path / "configs/forge/views/discriminator_stability.json")["assignments"]
@@ -220,9 +221,110 @@ def test_hardware_and_cpu_cuda_families_stay_separate(study):
     second_gpu = deepcopy(gpu)
     second_gpu["runtime_cohort"]["compute_profiles"]["cuda"]["model"] = "gpu-b"
     rows.extend([gpu, second_gpu])
-    result = select(study)
+    with pytest.raises(ValueError, match="explicit whole-row family selection"):
+        select(study)
+    recorded = read_json(root / "configs/forge/views/discriminator_stability.json")
+    result = select(study, view_policy=recorded)
     assert len(result["rows"]) == 3
     assert sum(row["selection"]["selection_kind"] == "best_observed" for row in result["rows"]) == 1
+
+
+def current_pin(study, row, *, kind="historical_incumbent"):
+    root, _, _, _, _, policy = study
+    row = deepcopy(row)
+    row["trainer_family"] = "r1r2"
+    card = {"schema_version": 1, "scope": "whole_candidate_family_current", "default_adoption": False,
+            "view": "discriminator_stability", "policy_fingerprint": policy,
+            "selections": [families.family_row_pin(row, selection_kind=kind, reason="Explicit whole-row choice.")]}
+    atomic_json(root / families.CURRENT_SELECTION, card)
+    return card
+
+
+def test_current_pin_selects_ordinary_idea_and_retains_all_other_cohorts_unranked(study):
+    root, rows, _, cards, _, _ = study
+    repaired = deepcopy(rows[0])
+    repaired.update(candidate_id="r1r2-global-repair-v1", candidate_revision="new-revision")
+    repaired["bindings"]["source_digest"] = "c" * 64
+    repaired["runtime_cohort"]["execution_backend"] = "cuda"
+    repaired["attempt_ids"] = ["ordinary-attempt"]
+    cards[repaired["candidate_id"]] = {"id": repaired["candidate_id"], "trainer_family": "r1r2"}
+    rows.append(repaired)
+    current_pin(study, rows[0])
+    result = select(study)
+    assert len(result["rows"]) == 1
+    assert result["rows"][0]["candidate_id"] == rows[0]["candidate_id"]
+    assert result["rows"][0]["selection"]["qualified"] is False
+    assert result["rows"][0]["tiers"] == rows[0]["tiers"]
+    assert len(result["configuration_rows"]) == len(rows)
+    assert {row["alternative_scope"] for row in result["configuration_rows"]} == {"selected", "archived_alternative"}
+    assert next(row for row in result["configuration_rows"] if row["candidate_id"] == repaired["candidate_id"])["tasks"] == repaired["tasks"]
+
+
+@pytest.mark.parametrize("field", ["candidate_revision", "cohort", "runtime_cohort", "source_digest", "recipe_sha256",
+                                   "task_keys_sha256", "protocol_sha256", "rng_sha256", "prior", "initializer",
+                                   "claim_contract", "tasks", "tiers", "attempt_ids"])
+def test_current_pin_binds_entire_scientific_row(study, field):
+    rows = study[1]
+    current_pin(study, rows[0])
+    if field in rows[0]["bindings"]:
+        rows[0]["bindings"][field] = "changed"
+    elif field == "runtime_cohort":
+        rows[0][field]["runtime"]["python"] = "changed"
+    else:
+        rows[0][field] = "changed"
+    with pytest.raises(ValueError, match="exact verified scientific row"):
+        select(study)
+
+
+def test_configured_standard_requires_complete_tier1_and_ordinary_measurement(study):
+    root, rows, _, _, _, _ = study
+    selected = rows[0]
+    current_pin(study, selected, kind="configured_standard")
+    with pytest.raises(ValueError, match="ordinary measured"):
+        select(study)
+    selected["attempt_ids"] = ["ordinary-attempt"]
+    current_pin(study, selected, kind="configured_standard")
+    with pytest.raises(ValueError, match="every required Tier 1"):
+        select(study)
+    tier1 = {a["task"] for a in read_json(root / "configs/forge/views/discriminator_stability.json")["assignments"]
+             if a["qualification_tier"] == 1 and a["importance"] == "required"}
+    for task in selected["tasks"]:
+        if task["task_id"] in tier1:
+            task["status"] = "PASS"
+    selected["qualified_tier"] = 1
+    selected["tiers"]["1"]["passed"] = len(tier1)
+    current_pin(study, selected, kind="configured_standard")
+    result = select(study)
+    assert result["rows"][0]["selection"]["qualified"] is True
+    assert result["rows"][0]["selection"]["default_adoption"] is False
+    assert result["rows"][0]["tasks"] == selected["tasks"]
+
+
+def test_current_pin_does_not_change_recorded_policy_selection(study):
+    current_pin(study, study[1][-1])
+    recorded = read_json(study[0] / "configs/forge/views/discriminator_stability.json")
+    assert select(study)["rows"][0]["candidate_id"] == study[1][-1]["candidate_id"]
+    assert select(study, view_policy=recorded)["rows"][0]["candidate_id"] == study[4]["selection"]["selected_candidate_id"]
+
+
+def test_generic_family_selection_filters_mixed_rows_by_requested_backend(study):
+    rows = study[1]
+    gpu = deepcopy(rows[-1])
+    gpu["runtime_cohort"] = {"execution_backend": "cuda", "compute_profiles": {"cuda": {"model": "gpu-a"}}}
+    rows.append(gpu)
+    current_pin(study, rows[0])
+    cpu = select(study, execution_backend="cpu")
+    assert len(cpu["rows"]) == 1 and len(cpu["configuration_rows"]) == 5
+    assert all(row["runtime_cohort"]["execution_backend"] == "cpu" for row in cpu["configuration_rows"])
+    assert cpu["rows"][0]["candidate_id"] == rows[0]["candidate_id"]
+    cuda = select(study, execution_backend="cuda")
+    assert len(cuda["rows"]) == len(cuda["configuration_rows"]) == 1
+    assert cuda["rows"][0]["runtime_cohort"]["execution_backend"] == "cuda"
+
+
+def test_current_only_task_history_membership_preserves_recorded_family_identity():
+    assert families.family_for_candidate(ROOT, "five-word-joint-ka2-v1", current_presentation=True)["id"] == "ka2"
+    assert families.family_for_candidate(ROOT, "five-word-joint-ka2-v1")["id"] == "five-word-joint-ka2-v1"
 
 
 def test_registry_keeps_modern_baseline_canonical_and_cloud_ablation_families_separate():
