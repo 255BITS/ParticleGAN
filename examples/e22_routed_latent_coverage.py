@@ -24,7 +24,7 @@ from torch.nn import functional as F
 from particlegan import E22Policy, RoutedRows, get_recipe, init
 from examples import e22_routed_caption_accuracy as public_loop
 
-TASK = "routed_latent_coverage_v1"
+TASK = "routed_latent_coverage_v2"
 ARMS = ("two_seed", "eight_seed")
 SITES = ("input", "edit")
 TRAIN_SEEDS = tuple(range(7063, 7071))
@@ -39,7 +39,7 @@ MEDIA_STEPS = (0, 128, 256, 512, 800, 1024)
 MEDIA_INDICES = (0, 40, 80, 120, 160, 200)
 GEOMETRY = public_loop.Geometry(width=32, text=16, rank=4, tokens=16,
                                length=1, heads=4, output=16, frequency=8)
-CARD = Path(__file__).resolve().parents[1] / "docs/e22_routed_latent_coverage_v1.json"
+CARD = Path(__file__).resolve().parents[1] / "docs/e22_routed_latent_coverage_v2.json"
 SOURCE_FILES = ("examples/e22_routed_latent_coverage.py",
                 "examples/render_e22_routed_latent_coverage.py",
                 "examples/e22_routed_caption_accuracy.py")
@@ -71,6 +71,7 @@ LAW = dict(task=TASK, arms=list(ARMS), geometry=asdict(GEOMETRY), sites=list(SIT
            guard="64 evenly selected adjacent-time midpoints of original FIT240; editing only",
            native_KA2="one penalty call/update; pure A calls1..799; blend starts800",
            arithmetic="generated carrier, teacher, adapters and critic all FP32; autocast disabled; not Supra BF16 parity",
+           checkpoint_recovery="fresh owners for both trained checkpoint replay and unresolved initial checkpoint restore",
            software_prerequisite=dict(device="cpu", seconds=SOFTWARE_LIMIT,
                                       native_updates=6, optimizer_steps=12,
                                       scope="software/API compatibility only; no scientific gate/rank"),
@@ -471,11 +472,16 @@ def preflight(data, device):
         if (public_loop.digest(public_loop.checkpoint(rebuilt)) != public_loop.digest(direct)
                 or public_loop.digest(second) != public_loop.digest(replay_second)):
             raise AssertionError("public native two-update1+1 recovery differs")
-        public_loop.restore(loop, entry)
-        if public_loop.digest(public_loop.checkpoint(loop)) != public_loop.digest(entry):
+        # An initial auto-backend checkpoint has not yet resolved its output
+        # shape. Restore it into a fresh owner, whose scope is also unresolved.
+        initial_owner = make_loop(arm, data[arm], device)
+        public_loop.restore(initial_owner, entry)
+        if public_loop.digest(public_loop.checkpoint(initial_owner)) != public_loop.digest(entry):
             raise AssertionError("preflight did not restore initial state")
-        recovery[arm] = dict(fresh_owner_public_resume_exact=True, restore_initial_exact=True)
-        del rebuilt
+        loops[arm] = initial_owner
+        recovery[arm] = dict(fresh_owner_public_resume_exact=True, restore_initial_exact=True,
+                             initial_restore_owner="fresh unresolved policy")
+        del rebuilt, loop
         budget()
     return loops, dict(common_initial_state_and_predictions_exact=True, recovery=recovery,
                        native_recovery_updates=6, optimizer_recovery_steps=12)

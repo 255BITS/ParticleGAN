@@ -24,7 +24,7 @@ import os
 from pathlib import Path
 
 
-TASK = "routed_latent_coverage_v1"
+TASK = "routed_latent_coverage_v2"
 ARMS = ("two_seed", "eight_seed")
 MEDIA_STEPS = (0, 128, 256, 512, 800, 1024)
 QUALITY_STEPS = (896, 928, 960, 992, 1024)
@@ -525,7 +525,7 @@ def main() -> int:
     parser.add_argument("--producer-report", type=Path, required=True)
     parser.add_argument("--producer-completion", type=Path, required=True)
     parser.add_argument("--protocol", type=Path, default=Path(__file__).resolve().parents[1] /
-                        "docs/e22_routed_latent_coverage_v1.json")
+                        "docs/e22_routed_latent_coverage_v2.json")
     parser.add_argument("--source-root", type=Path, default=Path(__file__).resolve().parents[1])
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument("--limit-seconds", type=float, default=LIMIT_SECONDS)

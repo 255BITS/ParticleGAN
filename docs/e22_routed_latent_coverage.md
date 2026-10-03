@@ -124,3 +124,17 @@ literal subset of saved TEST240. Native finiteness/recovery/gradient provenance
 remains producer evidence; the reader does not construct a model or execute
 ParticleGAN. Keep bulk traces/checkpoints/tensors/GIFs local, with compact
 receipts and the single current goal readout after execution.
+# Fresh-owner compatibility cohort v2
+
+The original v1 CPU prerequisite stopped before quality training: public restore
+rejects an unresolved initial output shape when its destination policy has
+already resolved a shape. The failed attempt took 4.445783 seconds of its 60
+second cap with all 41 source/input pins unchanged. Its source remains at commit
+`a9126b25`, and its original protocol is retained as
+`e22_routed_latent_coverage_v1.json`.
+
+The new v2 cohort restores both initial and trained checkpoints into fresh
+publicly constructed owners. It changes no native code, scientific gate,
+training data, sampling law, initialization, optimization or budget. Its protocol
+is `e22_routed_latent_coverage_v2.json`. This compatibility change has no claim
+about the previously observed Supra convergence failure.
