@@ -1,0 +1,63 @@
+{
+  "campaign_ceiling_seconds": 293400,
+  "configuration_ceiling_seconds": 48900,
+  "configuration_count": 6,
+  "cpu_threads": 1,
+  "family_ceiling_seconds": 97800,
+  "gpu": 0,
+  "grouped_job_ceiling_seconds": 271800,
+  "held_fixed": "Existing mechanism signatures, penalty kernels/intervention flags, moments, noise/schedule laws, architecture, initialization/named streams and all task-owned conditions/gates/budgets. Only the globally coupled lr and prior_lr_mult vary against each ordinary failed parent.",
+  "id": "family-wide-word-repair-rates-v1",
+  "prediction": "Each configuration two_pole.mean_abs >=0.3 under all unchanged gate conditions; falsifier <0.3. All subsequent eligible tasks must be measured under the same complete candidate.",
+  "prior_results": "reports/forge/family-wide-word-repairs/initial-summary.json",
+  "prior_round": "configs/forge/rounds/family-wide-word-repairs-v1.json",
+  "prior_witness_qualification_reuse": false,
+  "required_denominators": [
+    5,
+    19,
+    2
+  ],
+  "schema_version": 1,
+  "scientific_python_executable": "/usr/bin/python",
+  "scope": "six_complete_global_numeric_configurations",
+  "seed": 0,
+  "selection_rule": "Complete candidates and cohorts stay separate. A failed repair remains an alternative; a complete Tier1 PASS is necessary before any new configured family standard. Historical incomplete incumbents are not configured standards.",
+  "source_digest": "2aea8c53d1871625ff47b58a9a24c6259b46e4647669ad42d34bc4366a42508f",
+  "stop_rule": "Ordinary first required failure stops remaining work in the tier and higher tiers. No per-task recipe, prior-only first-gate twins, repeated unchanged candidate, seed study, technique/objective/architecture addition, gate weakening or automatic extra search.",
+  "studies": [
+    {
+      "configurations": [
+        "k3p--370894f9284090fc9771145a869f2d7fa617283c3736c8e461a47553c9668ce6",
+        "k3p--9f4bc2973d95cf1545e009ec044ed582a318e6d869d62f4d99f6eee529d1d93d"
+      ],
+      "family": "k3p",
+      "id": "k3p-global-repair-rates-v1",
+      "spec": "configs/forge/searches/k3p-global-repair-rates-v1.json",
+      "spec_sha256": "732b4cf9c855a2321cd88b0ac48eb65de499713baf09d21a9b16d6fa787ea499"
+    },
+    {
+      "configurations": [
+        "ka2--4496b859e066d7a4b6279f2d34fbd58d083e0f18c2a22ade5ba12c964d01a7ca",
+        "ka2--8d6bb101262f49dcef37111b37ab781ca09652b47ad95e783ccea4dfbec680b4"
+      ],
+      "family": "ka2",
+      "id": "ka2-global-repair-rates-v1",
+      "spec": "configs/forge/searches/ka2-global-repair-rates-v1.json",
+      "spec_sha256": "580dee185562a835f2e60e051896b55df9e0ce8eedd58d4d89b97aa9952ba1a2"
+    },
+    {
+      "configurations": [
+        "r1r2--724b3d52fbb2172a985d1bf29890b2ef9ba2598c9f1724d93a9afa7c872cbdad",
+        "r1r2--f78d5d603be1611025389c4ca0f7f485f3d2caa0a25fb6bc38b7c96da3509a3e"
+      ],
+      "family": "r1r2",
+      "id": "r1r2-global-repair-rates-v1",
+      "spec": "configs/forge/searches/r1r2-global-repair-rates-v1.json",
+      "spec_sha256": "73fc3c0539467a555ad38aeacd41d1c43afff87f5fbdb547997f119aaf17345c"
+    }
+  ],
+  "through_tier": 3,
+  "view": "discriminator_stability",
+  "view_revision": 3,
+  "workers": 1
+}

@@ -125,7 +125,8 @@ def test_tier1_refresh_materializes_only_all_32_existing_configuration_cards(tmp
     cards = tmp_path / "configs/forge/configurations"
     before = {path.name: path.read_bytes() for path in cards.glob("*.json")}
     expected = set(roster["configuration_ids"])
-    assert len(expected) == len(before) == 32
+    assert len(expected) == 32
+    assert expected <= {Path(name).stem for name in before}
     assert len(roster["candidate_ids"]) == len(set(roster["candidate_ids"])) == 47
     assert set(roster["candidate_ids"]) == expected | set(roster["idea_ids"])
     assert campaign["budget_seconds"] == 47 * 2100

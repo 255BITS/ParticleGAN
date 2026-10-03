@@ -704,7 +704,7 @@ def _current_markdown(result, root, path):
         lines.append("")
     archived = [row for row in result.get("configuration_rows", []) if row.get("alternative_scope") == "archived_alternative"]
     if archived:
-        lines += ["Archived alternatives retain their original outcomes and incompatible source/runtime bindings:", ""]
+        lines += ["Unranked alternatives retain their original outcomes and exact source/runtime bindings:", ""]
         for row in archived:
             source = row.get("bindings", {}).get("source_digest", "unresolved")
             lines.append(f"- `{row['candidate_id']}` ({row['trainer_family']}), source `{source[:12]}`; "

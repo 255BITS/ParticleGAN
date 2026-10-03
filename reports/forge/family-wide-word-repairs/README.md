@@ -17,6 +17,37 @@ task-specific selection workflow. K3P/KA2 clean noise/cap activation changes are
 declared as structural idea successors in their existing formulation families;
 strict same-signature configuration-search validation stays intact.
 
+## Initial measured phase
+
+All three global recipes failed the unchanged 80-update `two_pole` prerequisite.
+Their critic-gradient metric passed, but movement stayed below `mean_abs >=0.3`.
+Each run had finite state, 80 updates in each optimizer role, no unintended RNG
+deviations and zero passing observations among the 24 declared checks. The gate
+requires five consecutive terminal passes. The [exact summary](initial-summary.json)
+binds source `9d089ca777e6`, digest `2aea8c53d187`, and **17.662 paid seconds**.
+
+| Global recipe / ordinary receipt | Base LR | Movement (`>=0.3`) | Median gradient (`<=1`) | Tier 1 | Actual-training GIF |
+| --- | ---: | ---: | ---: | --- | --- |
+| [K3P](initial/k3p-global-repair-v1.json) | 0.0006 | 0.046871 | 0.004666 | 0/5; first FAIL, four UNKNOWN | [Training](media/k3p-global-repair-v1-two_pole.gif) |
+| [KA2](initial/ka2-global-repair-v1.json) | 0.0006 | 0.036330 | 0.004442 | 0/5; first FAIL, four UNKNOWN | [Training](media/ka2-global-repair-v1-two_pole.gif) |
+| [R1/R2](initial/r1r2-global-repair-v1.json) | 0.0012 | 0.039444 | 0.082594 | 0/5; first FAIL, four UNKNOWN | [Training](media/r1r2-global-repair-v1-two_pole.gif) |
+
+The failures reject these complete global candidates. **The word task was not
+measured**: prerequisites left 75 later cells unmeasured across the three runs,
+including all three word cells. The historical word passes remain direct-task
+evidence and cannot fill them. The main table retains its historical family
+incumbents; these failures do not establish a new configured standard or rank
+against an incumbent from another source cohort.
+
+The construction receipts expose the relevant rate distinction: direct sample
+coordinates use the G base rate and the existing direct response law, while
+learned latent tables consume `prior_lr_mult`. Its declared value does not
+accelerate `two_pole`. This supports a separately bounded **global coupled-rate
+search**, rather than a word-specific recipe or a changed movement gate.
+Increasing the shared base LR while preserving the reference absolute latent
+prior rate is a testable numerical hypothesis, not a demonstrated transfer fix.
+All other mechanisms, task budgets and qualification gates remain fixed.
+
 The [frozen round](../../../configs/forge/rounds/family-wide-word-repairs-v1.json)
 authorizes three candidates, seed 0, GPU 0 only, one worker and one CPU thread per
 task through Tier 3. The required denominator is 5/19/2. Its conservative cap is

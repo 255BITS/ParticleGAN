@@ -17,7 +17,7 @@ Records: 388. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Pending readouts
 
-None recorded.
+k3p-global-repair-v1, ka2-global-repair-v1, r1r2-global-repair-v1
 
 ## Experiment and family records
 
@@ -4472,4 +4472,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `4b0e71d942ba285e9f0804d19711827eeaf512ca2945f5dbfce83b6b7a78b5b0`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `0feda6d17c1e54187dce6953c7b2c2f0396cdd195ecf1a634c1aede81f0099eb`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

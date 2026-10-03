@@ -2,7 +2,7 @@
   "automation_digest": "625006792c1515ea89a3107942e770d45304311ecbce131c904321b70152bb85",
   "conflicts": [],
   "import_gap_count": 7,
-  "input_digest": "4b0e71d942ba285e9f0804d19711827eeaf512ca2945f5dbfce83b6b7a78b5b0",
+  "input_digest": "0feda6d17c1e54187dce6953c7b2c2f0396cdd195ecf1a634c1aede81f0099eb",
   "input_hashes": {
     "configs/forge/calibration-lane-template.json": "65f10d3061aa487bb32da43bb97cb91934a25d763f6bb634f1d3316fdcc6d9e5",
     "configs/forge/calibration/criteria-v1.json": "6eac2531eed68e392c11a57328999ac5dce509f8fe51d23e7b9031b7a4e3f9d1",
@@ -66,10 +66,14 @@
     "configs/forge/configurations/bcap--f65f1922d02456d3a4b7135bb3aa6483d1c76184d74608479b2634094b039383.json": "c5b1e1137f15972c254e34c67f02f3553f44d051bf33f3c4f0dec624ac3e70df",
     "configs/forge/configurations/k3p--00b69f56de29e1968b9d84f9b532afc535fa44555e235eb6c14cfc58b7baed9b.json": "4db928ac759699eec726ec7aeedaabe26f012eb0d3a45fd616bf3d51c3c8a01c",
     "configs/forge/configurations/k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c.json": "432ff0811c03199a767054db827a70df9ad28e9840434cf0b4d4f6c2504a20f9",
+    "configs/forge/configurations/k3p--370894f9284090fc9771145a869f2d7fa617283c3736c8e461a47553c9668ce6.json": "13c05344841467b8e60cb6911d1b680c3857de79d53aa98717c5af0dd8056d13",
+    "configs/forge/configurations/k3p--9f4bc2973d95cf1545e009ec044ed582a318e6d869d62f4d99f6eee529d1d93d.json": "df4aa6e2b513a32e3972b437ef8d6f5086b0ba84f047663b916decdd1e8a789a",
     "configs/forge/configurations/k3p--a4b78c36d9faacd837e079c3fd3b9623fc141f42737e03312053a86c560abb8a.json": "55b665878d63a81638d13d0971e15e5d41021f169b17338349b15c4a6b8eef68",
     "configs/forge/configurations/k3p--caa08ebf04c2b95ed480dd9c23e39a8624e39ae27b2b80a9af1ac74f13a86b9f.json": "8313d2668af153e9193bba9713e7c7cff8bd48791a43a63a75442d34501a658c",
     "configs/forge/configurations/ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f.json": "9f82bf1ab7f6e87f2ed7281dcb7658a3c88eb678abcfbfbca0c7ee07a62d83f7",
+    "configs/forge/configurations/ka2--4496b859e066d7a4b6279f2d34fbd58d083e0f18c2a22ade5ba12c964d01a7ca.json": "61f9b5365885bc982785a4900089fcb2f6062c2547a63cef6d182f5e4e0ae0b4",
     "configs/forge/configurations/ka2--6183426d7810463d5461ad936a42c67a38516fce8b32b23065da215fed8d145d.json": "e8ce4bcd66d8d0550f41049cf56dfadf8e5dc962de66e65876bf7fdb165d528d",
+    "configs/forge/configurations/ka2--8d6bb101262f49dcef37111b37ab781ca09652b47ad95e783ccea4dfbec680b4.json": "89723ef7d6965e018b812539027a1b5b523f22417104138fa80dde1ba49cba6d",
     "configs/forge/configurations/ka2--d02d7932342e1fa1db0a7a91537394297601e55516882d20ec033b4992bb527f.json": "7ffca5f5e11e6d26905a88818796f99a7d80710182db2e9a26cdc7a3031e448e",
     "configs/forge/configurations/ka2--e425fc18e432bbec6c1a1e2fc0b2f8024c7ad104fd5acf8908b6cfbbb5a3da03.json": "f65553e1d2d705cbb8627239339e56bd43d1d5e3ff87139c74bca72b7777895a",
     "configs/forge/configurations/r1r2--083deac11d390b7895cca37396e9caf2adf5706d4ce560ae70a089e305ab3b4b.json": "9d09fa07898c90e381d47595b65c90e8fa7ff093ee5946b87c80b081ff9eb42c",
@@ -77,6 +81,7 @@
     "configs/forge/configurations/r1r2--151d3b970d66ccb2956e2b914d518a0e5652e7164dccf000a29bbc82831b2d46.json": "f52588fed4c9e558410bbf0eae16da12aeae82574ec35164b1d47eef03b5fa23",
     "configs/forge/configurations/r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f.json": "b0366bf2383e2558bf19125117e9ac4c33c337e81dc671c114a7df4c2407398c",
     "configs/forge/configurations/r1r2--4363c95b3f6f2739729c7a104bd080a427e3efbef1f915ce14c191009bfa3a27.json": "c8315268e1601f8be698a32e339064ebbb10055dbed341510b2fe2dfcdcca254",
+    "configs/forge/configurations/r1r2--724b3d52fbb2172a985d1bf29890b2ef9ba2598c9f1724d93a9afa7c872cbdad.json": "75ed05a011bac23844c8f775b6e0427212718aa4865fba90e8d08ec9cafe27ef",
     "configs/forge/configurations/r1r2--7728cf93188b9fe122536244667789941da52d435cfb0a3ae42b90db200d7595.json": "45a6c1085c07e8add868cc18ddd3b99bb8f577f7c9b45bf8600c04ce1cc7607f",
     "configs/forge/configurations/r1r2--9481826257709128f1c864bac2950906d0ad940b8f75fbfa3d47317e7b26007d.json": "fd4cd3a659345e5f52ffba9ee8bb35dda58e3d1322230ee7bc740085d38d3374",
     "configs/forge/configurations/r1r2--abf642c42c5346ad096c29202e4716db535c393c113478552133c1c22761ddbd.json": "06bab5b89b7c5d49146854e618727133ebd7b2fc1325b3b1eeb158ff31ecb48c",
@@ -84,6 +89,7 @@
     "configs/forge/configurations/r1r2--dad6fdf50034381c106102df008e26b7687b04918cab85c13721e2a2dbbbe743.json": "3e945fcfdbba6bdccd1cd4e18e18a4b464ce7710e32b623139ce909878fae273",
     "configs/forge/configurations/r1r2--e033ba04e5b9609b896a084a182d785394869fcad19d4a15cffe86e9a973f3fe.json": "bb9ab3f6147f0b207f92fa120e20de7d0d68b4ead243aa8ead7d0fc9e4f1ba29",
     "configs/forge/configurations/r1r2--f398f6ea70a2d101c520a1a01db90ea968bbb16736e6cec7ffc887e1dd7e241a.json": "a1c18d0c0ef53d54c6360a49e85fae0449d678758345a33183e263969683adfe",
+    "configs/forge/configurations/r1r2--f78d5d603be1611025389c4ca0f7f485f3d2caa0a25fb6bc38b7c96da3509a3e.json": "3dad53e73c0f8bdd33fb5150f6e61af9ed948d345b400ee5b75a506bd5e5476a",
     "configs/forge/configurations/release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c.json": "16e248f5e004b906c1455ba022063173f122406dfad12ee4372b204d931a4ef9",
     "configs/forge/configurations/release07-gan-v3-mog--7311bde77895ceac2d493a6b102672cab0973b6685383339a2867d80956aa11f.json": "379d11801e7b7beff1b3fd00347a4ad99ee2695481a52b10d345f3c693267e30",
     "configs/forge/configurations/release07-gan-v3-mog--8bac47a479c2bb8dea2edee5378b642fbe5e6dd8c5fceab2d4e8077d6371345e.json": "3e21a2ede70fed9046068dbdc7178133267351bb45a2feb940e34101b08ea5dd",
@@ -112,14 +118,18 @@
     "configs/forge/promotion-template.json": "f9a254eeb6e05ff1e8d16fe3f77dc42f31d1156a1cc65f1ad626f8387ca581be",
     "configs/forge/protocols/screening.json": "3fefb4d47fd2cd8aa6ed110c0a9f5bffefaae700431d1f57ca7b162c8efbb803",
     "configs/forge/rounds/family-defaults-round1-v1.json": "395db17a29821d50314aa32552d602d9699c782797510b82a204eddf4a02b18a",
+    "configs/forge/rounds/family-wide-word-repair-rates-v1.json": "d8adcdd2c55ab3cc7daa5951113aa4cc5656375dbcfd2ef65647d7763f0e280f",
     "configs/forge/rounds/family-wide-word-repairs-v1.json": "2ef61cbeb67ff77fb6a839e038b620942d8934936909d39be1b32ea9904bb75d",
     "configs/forge/rounds/tier1-existing-configs-v1.json": "aea7193e563f282df7f96b54b75605fe4a10a9744fa4c565127e8aa6f98f9fd1",
     "configs/forge/searches/bcap-family-defaults-round1-v1.json": "80b71aedba00536c976e2116adf2dafa9df8ca577d5b2b89d45e4cf6c08db7d4",
     "configs/forge/searches/bcap-tier1-refresh-v1.json": "7b42fd0d6194e04eaee0df365bdbf8c630649bb7f273f2a7c6a00655fb578205",
     "configs/forge/searches/k3p-family-defaults-round1-v1.json": "be0b5cf290e094d68bbf21a712f47a11610edf83118632d5f03b58e59af06456",
+    "configs/forge/searches/k3p-global-repair-rates-v1.json": "732b4cf9c855a2321cd88b0ac48eb65de499713baf09d21a9b16d6fa787ea499",
     "configs/forge/searches/k3p-tier1-refresh-v1.json": "b6282e43e3955318e6da0fafa43a2db22c54369ce44414df3ef58e263c89c34a",
     "configs/forge/searches/ka2-family-defaults-round1-v1.json": "235535c02ad6d1fe6856a90147d695f66c0a92d2b11e7b6b72ff95a84a7b30ae",
+    "configs/forge/searches/ka2-global-repair-rates-v1.json": "580dee185562a835f2e60e051896b55df9e0ce8eedd58d4d89b97aa9952ba1a2",
     "configs/forge/searches/ka2-tier1-refresh-v1.json": "0fa27a24ba9b4096e65d0373937081f36d1783f124480c77f8b9bbdf5f445581",
+    "configs/forge/searches/r1r2-global-repair-rates-v1.json": "73fc3c0539467a555ad38aeacd41d1c43afff87f5fbdb547997f119aaf17345c",
     "configs/forge/searches/r1r2-modern-family-round1-v1.json": "0596f94955c483a012625e97faea3307226688aba4dfdbc7423764b1d71a0e0a",
     "configs/forge/searches/r1r2-modern-toy-v1.json": "ba9201d6a0302ee74da5b02ba845a7f6ccc585770b319709646d35ca1041261b",
     "configs/forge/searches/r1r2-tier1-refresh-v1.json": "177e7c95896a242b31a706e46f1b91c4a97e76919993ae27caa4a6a17db75165",
@@ -212,6 +222,9 @@
     "reports/forge/attempts/2dcfab451e2b4c2087c4c2dcdcfddb44/evidence.json": "8d8b1d5a9751b1b23262c28f68a72cc6037d7ec066de56527b18a748b3bc9bd0",
     "reports/forge/attempts/2dcfab451e2b4c2087c4c2dcdcfddb44/request.json": "589a65c5251d1f3771c6fad8e3e60510109c0fd805363e4b9da9cbc2f4c0bca5",
     "reports/forge/attempts/2dcfab451e2b4c2087c4c2dcdcfddb44/result.json": "1cccc2924fae8e4b2c3ce318990c44d586b6ff4f1a5a484526851ea73d244ed9",
+    "reports/forge/attempts/2f43521c43294c3a872be42d999debf1/evidence.json": "308380c7eaf362d24052d385d501c36a56b6e6dc335433d366cbf81a3f2566b2",
+    "reports/forge/attempts/2f43521c43294c3a872be42d999debf1/request.json": "15916570be0cf1b82c714a520c075501faa43088d1deb040ca131bb4a52a1031",
+    "reports/forge/attempts/2f43521c43294c3a872be42d999debf1/result.json": "d68c064e93215a333a3b64393fc1012afe3a60eb52c1da0ad40ec9a7e9bd6ca0",
     "reports/forge/attempts/49d41e284fde41698212677403ca5d67/evidence.json": "d20091b8031736451a80824570fa2091b82d9be329326214207770a1c024deee",
     "reports/forge/attempts/49d41e284fde41698212677403ca5d67/request.json": "10e16ccae1bf7d0a9b6d9b53d6b035b715c280077e81cc2144a0191dafa51cdd",
     "reports/forge/attempts/49d41e284fde41698212677403ca5d67/result.json": "01ec9f965e5629ef18405ea2eb4b7ec1b8e926d4355788d2e388d4039093569d",
@@ -275,6 +288,9 @@
     "reports/forge/attempts/a388612acc494fbbbe99cb86370559aa/evidence.json": "4debda885ba9bbb1573920786a29afd406570c130cef088e91d21d20e4b4e378",
     "reports/forge/attempts/a388612acc494fbbbe99cb86370559aa/request.json": "6be8c13486f14dd0f666e8b95b46b1aa0967449369d9b0cfb55312ebcb189498",
     "reports/forge/attempts/a388612acc494fbbbe99cb86370559aa/result.json": "dd9c8fe02d1b409f2375994e2b5eda1f5f6ceb924fa2a8baa9711b1bcfae4f2f",
+    "reports/forge/attempts/abb9e24f625d449da70f6641ec1bce0a/evidence.json": "9705839787f05f1a1181e237f297f3e4be04ec7aab3567a274b69941e3bc14e0",
+    "reports/forge/attempts/abb9e24f625d449da70f6641ec1bce0a/request.json": "356b94d4fb2976060c1afd7f403ab2fa6cf84ddce5d2e9d95825f4c4b14b778e",
+    "reports/forge/attempts/abb9e24f625d449da70f6641ec1bce0a/result.json": "05b632ce46301c162203b955564fe619082f0b4ddcb217473215cf60ea325107",
     "reports/forge/attempts/b766e89d1a0843ba9af94f2ce94e4273/evidence.json": "92598ca787f9472ad002596e61575492ec7d33f30e0101fe1ef06ddb0922e078",
     "reports/forge/attempts/b766e89d1a0843ba9af94f2ce94e4273/request.json": "2b0489ee69a8ed25c535e4bbf47a44ec70dd21a1c76ca144844dc297ce041c54",
     "reports/forge/attempts/b766e89d1a0843ba9af94f2ce94e4273/result.json": "43174dc97ece7ed90e77722c77adfc78a26265cde2fe8fd9c94195e85c2961cb",
@@ -302,6 +318,9 @@
     "reports/forge/attempts/e13557902b3544a081defbcac092c136/evidence.json": "c6d7f3f00725ac7f33bdb1eff8a2e7d88d630b4cdf3e8208cca6d76626dcc498",
     "reports/forge/attempts/e13557902b3544a081defbcac092c136/request.json": "211729b8cff162a4fdac168385d1b768f0b954faea88a94435f04a09f31fc865",
     "reports/forge/attempts/e13557902b3544a081defbcac092c136/result.json": "8c7449c62737ddd718148fca27bb2d2054f070d33beee76920e884db8f9f0099",
+    "reports/forge/attempts/e2fcaf0f2965415db4c7234a024d3031/evidence.json": "67001e4300385696ea65a6e851cbca309c0b237ec8f7efb2450d39a4a5b7364f",
+    "reports/forge/attempts/e2fcaf0f2965415db4c7234a024d3031/request.json": "ec0d56194346230e87f19901d56da6c7b990eee4518dff3dbdaddde61e2e4550",
+    "reports/forge/attempts/e2fcaf0f2965415db4c7234a024d3031/result.json": "3333b2206f2cbaa6f9e4ca51f0f5b6a1dc9a94af970f9c7066f53d97d5657ce0",
     "reports/forge/attempts/e40a18d4e33d488d896c9fe4a1122ceb/evidence.json": "47f2d70752833cd0b853a227dc69b8e42abe02d4cbce166535746e9a06bf4466",
     "reports/forge/attempts/e40a18d4e33d488d896c9fe4a1122ceb/request.json": "5802a9a398006b61d7b4eccb6378fb3446920cb47343b141aa183ac1dda76fbe",
     "reports/forge/attempts/e40a18d4e33d488d896c9fe4a1122ceb/result.json": "fa6c72fb9d21c2035b2b8280c0577e82232c7235f6782bd685d04109d0cd438c",
@@ -973,17 +992,21 @@
     "unclassified": [],
     "valid": true
   },
-  "operational_lifecycle_digest": "e80d58c2c0a11277b274b75296db28d73f210f78d2f3c8a5bac7e3124f745252",
+  "operational_lifecycle_digest": "b7b68ed15100a08f46090394c6597c2707df5002faed03502f29115ba3f14fca",
   "output_hashes": {
-    "reports/forge/EXPERIMENT_MEMORY.md": "ed5654c8efaec34b9f43de3b08aebfd356cca46303401ac487a365376558899a",
+    "reports/forge/EXPERIMENT_MEMORY.md": "d7d2d4cf849d5a87a6eb1473b2ab6232de8f239e9cc4ca7483669daffc70776e",
     "reports/forge/publication-records.json": "2ff5a6f22912d1a6bfc0727cc52a085d699db5a0dc762c3d0306b7f01a9f0dc6"
   },
-  "pending_readout": [],
+  "pending_readout": [
+    "k3p-global-repair-v1",
+    "ka2-global-repair-v1",
+    "r1r2-global-repair-v1"
+  ],
   "publication_record_count": 112,
   "qualification_refresh": {
     "mode": "preserved_published_evidence",
     "note": "Publication recall freshness grants no qualification; original evidence availability is separate.",
-    "source_manifest_digest": "9cfa896299145084ff880e2ace712d499a8ef876b4826d9ea0a4c0b13c8e7367"
+    "source_manifest_digest": "e4e9efe3aa3ad68db815fc4a01cb1622da1af5a336db78ef04269ffbecdfc893"
   },
   "record_count": 388,
   "reducer_hashes": {
@@ -995,7 +1018,7 @@
   "schema_version": 1,
   "scientific_normalization_complete": false,
   "scientific_source_digests": [
-    "f23a47fab9058c4e16590c5c8ebf6a8bbed9f1d6b5406d4107db395096658f54"
+    "2aea8c53d1871625ff47b58a9a24c6259b46e4647669ad42d34bc4366a42508f"
   ],
   "view_count": 6
 }
