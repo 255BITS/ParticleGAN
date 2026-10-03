@@ -1,0 +1,2754 @@
+{
+  "audit_runtime": {
+    "device": "no model/device construction",
+    "kind": "pure Recipe and preflight metadata checks",
+    "python": "3.12.13"
+  },
+  "blocked_cards": [
+    {
+      "blockers": [],
+      "candidate_id": "atlas",
+      "candidate_revision": "506319d4621e284ded8897c02670c7c51c2d50c759e6a459b39848114e346667",
+      "conclusion": "Stopped at two_pole (BLOCKED) after 0/5 Tier 1 passes; later work was not eligible.",
+      "cost": {
+        "measured_tasks": 0,
+        "unmeasured_tasks": 0,
+        "wall_seconds": null
+      },
+      "evidence": {
+        "attempt_ids": [],
+        "compact_receipts": [],
+        "publication_key": "926a4b2c7fdefacd51629577104eae4ee5c8c6da85e241f50e14ed215215ec3b"
+      },
+      "first_failed_required_task": null,
+      "first_stopping_required_task": {
+        "status": "BLOCKED",
+        "task_id": "two_pole"
+      },
+      "next_action": "Resolve the declared compatibility blocker before a new cohort.",
+      "status": "BLOCKED",
+      "stopping_reasons": [
+        "two_pole: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation; two_pole: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+      ],
+      "tasks": {
+        "ae_gan_hold": "BLOCKED",
+        "five_word_joint_acquisition": "BLOCKED",
+        "ring16_acquisition": "BLOCKED",
+        "two_pole": "BLOCKED",
+        "unused_token_hold": "BLOCKED"
+      },
+      "tier1_passed": 0,
+      "tier1_required": 5,
+      "trainer_family": "atlas"
+    },
+    {
+      "blockers": [],
+      "candidate_id": "e22",
+      "candidate_revision": "cf5d3fdcbb1d395a36dbaa487597185853433b7a4127127494d77b115630c242",
+      "conclusion": "Stopped at two_pole (BLOCKED) after 0/5 Tier 1 passes; later work was not eligible.",
+      "cost": {
+        "measured_tasks": 0,
+        "unmeasured_tasks": 0,
+        "wall_seconds": null
+      },
+      "evidence": {
+        "attempt_ids": [],
+        "compact_receipts": [],
+        "publication_key": "926a4b2c7fdefacd51629577104eae4ee5c8c6da85e241f50e14ed215215ec3b"
+      },
+      "first_failed_required_task": null,
+      "first_stopping_required_task": {
+        "status": "BLOCKED",
+        "task_id": "two_pole"
+      },
+      "next_action": "Resolve the declared compatibility blocker before a new cohort.",
+      "status": "BLOCKED",
+      "stopping_reasons": [
+        "two_pole: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation; two_pole: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+      ],
+      "tasks": {
+        "ae_gan_hold": "BLOCKED",
+        "five_word_joint_acquisition": "BLOCKED",
+        "ring16_acquisition": "BLOCKED",
+        "two_pole": "BLOCKED",
+        "unused_token_hold": "BLOCKED"
+      },
+      "tier1_passed": 0,
+      "tier1_required": 5,
+      "trainer_family": "e22"
+    }
+  ],
+  "boundaries": [
+    {
+      "class": "FORGE_CONTRACT_UNDECLARED",
+      "confidence": "PROVEN_SOURCE_AND_PREFLIGHT",
+      "effect": "All current policy candidates block before reservation; no scientific attempt or capacity rejection.",
+      "source": "experiments/forge/api.py:150-160"
+    },
+    {
+      "class": "PUBLIC_RECIPE_INCOMPATIBLE_PRIOR",
+      "confidence": "PROVEN_RECIPE_EXCEPTION",
+      "effect": "Full preset birth/death requiresParticlePrior; sigma=.025 MoG is a different codepath/cohort.",
+      "source": "particlegan/recipes.py:299-300"
+    },
+    {
+      "class": "CALLER_OWNED_LIFECYCLE_MISSING",
+      "confidence": "PROVEN_SOURCE",
+      "effect": "Current behavioral/publiccomponent adapters do not attest the ordered policy lifecycle.",
+      "source": "experiments/forge/api.py:309-314"
+    },
+    {
+      "class": "JOINT_OR_ROUTED_SCOPE_LIMIT",
+      "confidence": "PROVEN_SOURCE",
+      "effect": "Scalartrainer hasnoencoder; conditional joint rowcontrols require genuine routedcontract or explicit disabling derivative.",
+      "source": "particlegan/training.py:111-120;particlegan/policy.py:318-322"
+    }
+  ],
+  "full_presets": {
+    "atlas": {
+      "alpha_bar": [
+        1.0,
+        0.9,
+        0.5,
+        0.05,
+        0.0001
+      ],
+      "amsgrad": true,
+      "batch_size": 2048,
+      "betas": [
+        0.0,
+        0.999
+      ],
+      "birth_death_backend": "auto",
+      "birth_death_cells": 128,
+      "birth_death_chunk": 256,
+      "birth_death_feature_scale": "std",
+      "birth_death_isolation": true,
+      "birth_death_metric_rank": 8,
+      "birth_death_parent_policy": "real_anchor",
+      "birth_death_space": "critic",
+      "conditioning": "scalar",
+      "continuous_policy": "dv12",
+      "critic_payoff_damping": true,
+      "critic_r1_real": true,
+      "d_guard_min_steps": 200,
+      "d_guard_ratio": 5.0,
+      "d_lr_mult": 1.0,
+      "direct_particle_betas": [
+        0.0,
+        0.9
+      ],
+      "direct_particle_gain": true,
+      "distance_reduction": "sum",
+      "ema_decay": 0.995,
+      "encoder_mode": "none",
+      "input_noise_anneal_end": 0.1,
+      "input_noise_std": 0.0,
+      "latent_damping_max_rate": 0.5,
+      "lr": 0.00425,
+      "lr_anneal_start": 0.6,
+      "lr_control": "stationarity",
+      "lr_floor": 0.05,
+      "model": "gan",
+      "name": "atlas",
+      "network_lr_floor": 0.01,
+      "network_lr_horizon_cap": 1600,
+      "num_classes": null,
+      "num_particles": 20000,
+      "observation_sigma": 0.03,
+      "output_noise_mode": "learnable",
+      "output_noise_std": 0.029,
+      "output_noise_warmup": 0.0,
+      "particle_birth_death": true,
+      "prior_betas": null,
+      "prior_kind": "particles",
+      "prior_lr_mult": 2.0,
+      "prior_reg": 0.0,
+      "reconstruction_weight": 1.0,
+      "reg_anchor_min_decay": 0.9,
+      "reg_anchor_weight": 1.0,
+      "reg_coeff": 3.0,
+      "reg_every": 1,
+      "reg_kappa": 1.0,
+      "reopen_anchor": "release",
+      "reopen_guard": "settled",
+      "reopen_signal": "optimizer",
+      "routing_temperature": 0.25,
+      "row_evidence_exclude": true,
+      "row_evidence_gate": true,
+      "row_evidence_hold": true,
+      "row_evidence_hot": true,
+      "row_evidence_null": "scaled",
+      "row_policy": "independent",
+      "serve_average": 4.0,
+      "sigma_rel": 0.0,
+      "standardize": true,
+      "table_release_rule": "anchor",
+      "total_steps": null,
+      "ucd_target": "class",
+      "ucd_weight": 0.02,
+      "z_dim": 2
+    },
+    "e22": {
+      "alpha_bar": [
+        1.0,
+        0.9,
+        0.5,
+        0.05,
+        0.0001
+      ],
+      "amsgrad": true,
+      "batch_size": 2048,
+      "betas": [
+        0.0,
+        0.999
+      ],
+      "birth_death_feature_scale": "std",
+      "birth_death_isolation": true,
+      "birth_death_space": "critic",
+      "conditioning": "scalar",
+      "continuous_policy": "dv12",
+      "critic_payoff_damping": true,
+      "critic_r1_real": true,
+      "d_guard_min_steps": 200,
+      "d_guard_ratio": 5.0,
+      "d_lr_mult": 1.0,
+      "direct_particle_betas": [
+        0.0,
+        0.9
+      ],
+      "direct_particle_gain": true,
+      "distance_reduction": "sum",
+      "ema_decay": 0.995,
+      "encoder_mode": "none",
+      "input_noise_anneal_end": 0.1,
+      "input_noise_std": 0.0,
+      "latent_damping_max_rate": 0.5,
+      "lr": 0.00425,
+      "lr_anneal_start": 0.6,
+      "lr_control": "stationarity",
+      "lr_floor": 0.05,
+      "model": "gan",
+      "name": "e22",
+      "network_lr_floor": 0.01,
+      "network_lr_horizon_cap": 1600,
+      "num_classes": null,
+      "num_particles": 20000,
+      "observation_sigma": 0.03,
+      "output_noise_mode": "learnable",
+      "output_noise_std": 0.029,
+      "output_noise_warmup": 0.0,
+      "particle_birth_death": true,
+      "prior_betas": null,
+      "prior_kind": "particles",
+      "prior_lr_mult": 2.0,
+      "prior_reg": 0.0,
+      "reconstruction_weight": 1.0,
+      "reg_anchor_min_decay": 0.9,
+      "reg_anchor_weight": 1.0,
+      "reg_coeff": 3.0,
+      "reg_every": 1,
+      "reg_kappa": 1.0,
+      "reopen_anchor": "release",
+      "reopen_signal": "optimizer",
+      "routing_temperature": 0.25,
+      "row_evidence_exclude": true,
+      "row_evidence_gate": true,
+      "row_evidence_hold": true,
+      "row_evidence_hot": true,
+      "row_evidence_null": "scaled",
+      "row_policy": "independent",
+      "serve_average": 4.0,
+      "sigma_rel": 0.0,
+      "standardize": true,
+      "table_release_rule": "anchor",
+      "total_steps": null,
+      "ucd_target": "class",
+      "ucd_weight": 0.02,
+      "z_dim": 2
+    }
+  },
+  "new_draws": 0,
+  "new_rescoring": 0,
+  "new_training_updates": 0,
+  "ordinary_view_MoG_tasks": [
+    {
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "sampling": {
+        "eval_output_noise": "public_recipe_schedule",
+        "sampling_contract_version": 1,
+        "sampling_law": "generated_and_reconstructed_prior_with_scheduled_output_noise",
+        "scoring_weights": "live"
+      },
+      "task": {
+        "bytes": 2127,
+        "path": "configs/forge/tasks/ae_gan_hold.json",
+        "sha256": "14a4d34a990c7628ee13f8a64c91260cd953ddaf93a0059765db1a7d8e666168"
+      },
+      "task_id": "ae_gan_hold",
+      "tier": 1
+    },
+    {
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise",
+        "scoring_weights": "live"
+      },
+      "task": {
+        "bytes": 7181,
+        "path": "configs/forge/tasks/ring16_acquisition.json",
+        "sha256": "933b8202d5b1cc36eeaab843c49f628e77fd801f4b7c8a9c2ad5cb8d9f3c1e21"
+      },
+      "task_id": "ring16_acquisition",
+      "tier": 1
+    },
+    {
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise",
+        "scoring_weights": "live"
+      },
+      "task": {
+        "bytes": 1708,
+        "path": "configs/forge/tasks/mode_hold.json",
+        "sha256": "c6e87b2c38a5f5f6a62db7f0633c3d373e4f77ae54ed1c6db13972494cbed2eb"
+      },
+      "task_id": "mode_hold",
+      "tier": 2
+    },
+    {
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise",
+        "scoring_weights": "live"
+      },
+      "task": {
+        "bytes": 3276,
+        "path": "configs/forge/tasks/vector_two_broad.json",
+        "sha256": "5136a3ebe65c597c9a113879719db2a4187ce5412ec9b0bc62eae2b363baf421"
+      },
+      "task_id": "vector_two_broad",
+      "tier": 2
+    },
+    {
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise",
+        "scoring_weights": "live"
+      },
+      "task": {
+        "bytes": 3765,
+        "path": "configs/forge/tasks/vector_unequal_mass.json",
+        "sha256": "ea19cee2c3e30485167112d606a13054a1faa52519c903756dd2b3dc09f4b18f"
+      },
+      "task_id": "vector_unequal_mass",
+      "tier": 2
+    },
+    {
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise",
+        "scoring_weights": "live"
+      },
+      "task": {
+        "bytes": 3749,
+        "path": "configs/forge/tasks/vector_unequal_width.json",
+        "sha256": "1450bcfab5913fe4359807d89ceeb0194015dd2d299e9fcb10b4f060755cce3d"
+      },
+      "task_id": "vector_unequal_width",
+      "tier": 2
+    },
+    {
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise",
+        "scoring_weights": "live"
+      },
+      "task": {
+        "bytes": 3532,
+        "path": "configs/forge/tasks/vector_anisotropic.json",
+        "sha256": "9bcf9b942d2e5be583a85979fe906584491c8ac153738004d5c5c54084b5de6d"
+      },
+      "task_id": "vector_anisotropic",
+      "tier": 2
+    },
+    {
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise",
+        "scoring_weights": "live"
+      },
+      "task": {
+        "bytes": 3177,
+        "path": "configs/forge/tasks/vector_overlap.json",
+        "sha256": "7ea6074792c032148670fb8895d3fd7f532ebf622d70c43c3589e941f09ad901"
+      },
+      "task_id": "vector_overlap",
+      "tier": 2
+    },
+    {
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise",
+        "scoring_weights": "live"
+      },
+      "task": {
+        "bytes": 2686,
+        "path": "configs/forge/tasks/vector_spiral.json",
+        "sha256": "1728077d7b5cbd570a8358c16afd0f70e071d740c11785001ea031e3474e793b"
+      },
+      "task_id": "vector_spiral",
+      "tier": 2
+    },
+    {
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise",
+        "scoring_weights": "live"
+      },
+      "task": {
+        "bytes": 2639,
+        "path": "configs/forge/tasks/grid100.json",
+        "sha256": "64709b1544155fd3e19ac1aef96453e2183145cc2be029e7da5df3bfb4b291b5"
+      },
+      "task_id": "grid100",
+      "tier": 2
+    },
+    {
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise",
+        "scoring_weights": "live"
+      },
+      "task": {
+        "bytes": 2645,
+        "path": "configs/forge/tasks/rotated100.json",
+        "sha256": "f8691aa4152885a34dc4e32eda6bbbc5d7df2699cc7b582f9bc25c091ea9c35d"
+      },
+      "task_id": "rotated100",
+      "tier": 2
+    },
+    {
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise",
+        "scoring_weights": "live"
+      },
+      "task": {
+        "bytes": 2649,
+        "path": "configs/forge/tasks/staggered100.json",
+        "sha256": "5c39cf3faf007d146f861b9962965b92ec17bcf7d9bd906aa9f1f0d21c82d4a1"
+      },
+      "task_id": "staggered100",
+      "tier": 2
+    },
+    {
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise",
+        "scoring_weights": "live"
+      },
+      "task": {
+        "bytes": 1666,
+        "path": "configs/forge/tasks/ring_hold.json",
+        "sha256": "7d3e33f19db943f6f55016b9cbf2fe93221cc3e202c4c86190d5ff981b1fdfc9"
+      },
+      "task_id": "ring_hold",
+      "tier": 3
+    },
+    {
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise",
+        "scoring_weights": "live"
+      },
+      "task": {
+        "bytes": 1746,
+        "path": "configs/forge/tasks/ring_extension.json",
+        "sha256": "19361e1a0817f90a7fe13c1c4b35fff644745258063e87371099936df7461f50"
+      },
+      "task_id": "ring_extension",
+      "tier": 3
+    }
+  ],
+  "original_domains": {
+    "ae_gan_hold": {
+      "adapter": "transfer_behavior",
+      "evaluation": {
+        "eval_output_noise": "public_recipe_schedule",
+        "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+        "guards": {
+          "finite_state": true,
+          "mechanism_exercised": true,
+          "optimizer_roles": [
+            "encoder",
+            "generator",
+            "prior",
+            "discriminator"
+          ],
+          "rng_isolation": true
+        },
+        "kind": "transfer_sustained",
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "sampling_contract_version": 1,
+        "sampling_law": "generated_and_reconstructed_prior_with_scheduled_output_noise",
+        "scoring_weights": "live",
+        "sources": {
+          "benchmarks/locked_shared/baseline.py": "72ebe4ef6d3cfe28f1ab6073fc781a72b45173f3ce2a0b63040e84b27bed03cc",
+          "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+          "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97"
+        },
+        "thresholds": [
+          [
+            "recon_mse",
+            "<=",
+            0.05
+          ],
+          [
+            "hold",
+            "<=",
+            0.35
+          ]
+        ]
+      },
+      "execution": {
+        "device": "cpu",
+        "execution_path": "public_components",
+        "host": "ae_gan_hold",
+        "host_definition": {
+          "family": "existing_behavior",
+          "phase": "fit",
+          "runner": "legacy",
+          "split": "development",
+          "steps": 250
+        },
+        "host_source": "benchmarks/locked_shared/baseline.py",
+        "initializer": "deterministic_orthogonal",
+        "prior": {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.025,
+          "standardize": false
+        },
+        "produces_state": false,
+        "protocol": "screening",
+        "schedule_policy": "public_recipe_with_frozen_host_horizon",
+        "steps": 250
+      },
+      "resources": {
+        "allow_cpu": true,
+        "cpu_threads": 1,
+        "gpu_memory_mb": 0,
+        "gpus": 0,
+        "timeout_seconds": 300
+      },
+      "source": {
+        "bytes": 2127,
+        "path": "configs/forge/tasks/ae_gan_hold.json",
+        "sha256": "14a4d34a990c7628ee13f8a64c91260cd953ddaf93a0059765db1a7d8e666168"
+      }
+    },
+    "five_word_joint_acquisition": {
+      "adapter": "word_joint",
+      "evaluation": {
+        "eval_output_noise": "clean",
+        "eval_samples": 1024,
+        "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+        "evaluator_revision": {
+          "change": "Bind the current public fixture after bounded Recipe configuration API additions; retain the declared numerical bounds, task geometry and budget. Earlier evidence keeps its original source binding.",
+          "id": "joint-word-task-source-binding-v2",
+          "previous_api_images_sha256": "bedcb88841ef5cae8c9bfa60364bfacebbef29dea640036c1e30c4593ae71a3f"
+        },
+        "guards": {
+          "exact_optimizer_updates": true,
+          "finite_state": true,
+          "mechanism_exercised": true,
+          "optimizer_roles": [
+            "generator",
+            "encoder",
+            "prior",
+            "discriminator"
+          ],
+          "rng_isolation": true
+        },
+        "kind": "transfer_sustained",
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "sampling_contract_version": 1,
+        "sampling_law": "generated_and_paired_reconstructed_prior_without_output_noise",
+        "scoring_weights": "live",
+        "sources": {
+          "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+          "benchmarks/toy_audit/api_images.py": "243190aba0c5870668a63289b771dc6f784c9460b890bc6a77e12cc2796d7184",
+          "benchmarks/toy_audit/definition_quality.py": "42d835ab7a0937a6c3759dd719691c721663b7857cb990405253e90f7fbd4cc9",
+          "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97"
+        },
+        "thresholds": [
+          [
+            "sample_count",
+            ">=",
+            1024
+          ],
+          [
+            "quality_fraction",
+            ">=",
+            0.95
+          ],
+          [
+            "modes",
+            "==",
+            5
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.1
+          ],
+          [
+            "reconstruction_exact",
+            "==",
+            1
+          ],
+          [
+            "minimum_reconstruction_token_probability",
+            ">=",
+            0.9
+          ]
+        ]
+      },
+      "execution": {
+        "execution_path": "public_components",
+        "host": "five_word_joint",
+        "host_definition": {
+          "characters": "abcdefghijklmnopqrstuvwxyz_ ",
+          "encoder_widths": [
+            168,
+            128,
+            64,
+            2
+          ],
+          "generator_widths": [
+            2,
+            64,
+            128,
+            168
+          ],
+          "joint_critic_widths": [
+            170,
+            256,
+            128,
+            1
+          ],
+          "length": 6,
+          "resources": {
+            "batch_size": 256,
+            "num_particles": 5,
+            "z_dim": 2
+          },
+          "words": [
+            "apple",
+            "grape",
+            "lemon",
+            "melon",
+            "berry"
+          ]
+        },
+        "host_source": "benchmarks/toy_audit/api_images.py",
+        "initializer": "deterministic_orthogonal",
+        "original_schedule_horizon": 20000,
+        "prior": {
+          "exception_reason": "Retained finite-vocabulary joint BiGAN question explicitly uses five learned 2D rows, one possible code per word; a MoG-width question needs its own protocol.",
+          "kind": "particle_cloud",
+          "learnable": true,
+          "sigma": 0.0,
+          "standardize": false
+        },
+        "produces_state": false,
+        "protocol": "screening",
+        "steps": 20001
+      },
+      "resources": {
+        "cpu_threads": 1,
+        "gpu_memory_mb": 2048,
+        "gpus": 1,
+        "timeout_seconds": 900
+      },
+      "source": {
+        "bytes": 4046,
+        "path": "configs/forge/tasks/five_word_joint_acquisition.json",
+        "sha256": "90af71d8121c097565712d74c0a3297e0cfef7d95546ba0658f4ef8695459706"
+      }
+    },
+    "grid100": {
+      "adapter": "native100",
+      "evaluation": {
+        "accuracy_limits": {
+          "abs_cov_trace_bias": 0.1,
+          "center_rms_sigma": 0.2,
+          "mass_tv": 0.06,
+          "radial_ks": 0.04
+        },
+        "coverage_evaluator": "benchmarks.toy100.gate:evaluate_suite",
+        "coverage_thresholds": {
+          "all_finite": true,
+          "max_cov_eig_ratio": 1.7,
+          "max_mass_tv": 0.1,
+          "max_mode_mass": 0.02,
+          "max_radial_median_ratio": 1.4,
+          "min_cov_eig_ratio": 0.4,
+          "min_hq_mode_mass": 0.005,
+          "min_modes": 100,
+          "min_precision": 0.97,
+          "min_radial_median_ratio": 0.65,
+          "min_samples": 20000
+        },
+        "early_eval_steps": [
+          0,
+          1,
+          10,
+          25,
+          50,
+          100
+        ],
+        "eval_interval": 250,
+        "eval_output_noise": "clean",
+        "eval_samples": 20000,
+        "evaluator": "benchmarks.toy100.accuracy_gate:evaluate_suite",
+        "evaluator_revision": {
+          "change": "Validate explicit CLI evaluation-noise overrides; metric kernels, thresholds, clean sampling law and budgets unchanged.",
+          "id": "native100-manifest-sampling-v2",
+          "previous_gate_sha256": "55f6ef733f0b10f4c6ac05eb5ad9d30320d807ff520ea1b41c75d2d0b41e406a"
+        },
+        "holdout_samples": 100000,
+        "kind": "native_accuracy",
+        "minimum_stable_checks": 5,
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise",
+        "scoring_weights": "live",
+        "sources": {
+          "benchmarks/toy100/accuracy.py": "ee5c62049f8cdceb3d93b6d792cbaa96c815e12b3ce79ffaed244fb15a44fed2",
+          "benchmarks/toy100/accuracy_gate.py": "e66ede95d4b80eedd832a102841c2b0a5d6d710f646bfa34dc00647dc0ab3abe",
+          "benchmarks/toy100/gate.py": "2ddadf56a4ccd7645c8b4e391373818b1113fb6113a9c691310fb162684058e6",
+          "benchmarks/toy100/metrics.py": "a7fbef19082f8470eb392948da52a336a90a3e99c6b3b893343a9e75bcda9c7b"
+        }
+      },
+      "execution": {
+        "initializer": "deterministic_orthogonal",
+        "model": {
+          "fourier": 2,
+          "hidden": 128,
+          "layers": 3
+        },
+        "prior": {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.025,
+          "standardize": false
+        },
+        "problem": "grid100",
+        "produces_state": true,
+        "protocol": "screening",
+        "resources": {
+          "batch_size": 2048,
+          "num_particles": 20000,
+          "z_dim": 2
+        },
+        "steps": 7000
+      },
+      "resources": {
+        "cpu_threads": 1,
+        "gpu_memory_mb": 2048,
+        "gpus": 1,
+        "timeout_seconds": 3600
+      },
+      "source": {
+        "bytes": 2639,
+        "path": "configs/forge/tasks/grid100.json",
+        "sha256": "64709b1544155fd3e19ac1aef96453e2183145cc2be029e7da5df3bfb4b291b5"
+      }
+    },
+    "ring16_acquisition": {
+      "adapter": "transfer_vector",
+      "evaluation": {
+        "eval_output_noise": "clean",
+        "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+        "gate_policy": {
+          "finite_atom_exemptions": false,
+          "id": "ring16-acquisition-smoke-v1",
+          "rationale": "Provisional broad acquisition bounds: every cluster receives at least one quarter of its target mass; balance, 3-sigma precision and all-component spread reject collapsed surrogates. Thresholds are validated by independent target/destructive samples, not tuned to training."
+        },
+        "kind": "transfer_sustained",
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "sample_evaluator": "benchmarks.toy_audit.ring16_quality:score_samples",
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise",
+        "scoring_weights": "live",
+        "sources": {
+          "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+          "benchmarks/toy_audit/ring16_quality.py": "c666909ee8ed22ecb7a72f4185556f82b0b6d4ebd8aac871d58ed75b7ebf9db6",
+          "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97",
+          "benchmarks/transfer_suite/vector_tasks.py": "3ee4eb27759f61a430029c80b7772cac3dca2fb2ac84919ace0db94efca1e0b0"
+        },
+        "thresholds": [
+          [
+            "sample_count",
+            ">=",
+            4096
+          ],
+          [
+            "modes",
+            ">=",
+            16
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "component_covariance_error",
+            "<=",
+            0.85
+          ],
+          [
+            "component_min_eigen_ratio",
+            ">=",
+            0.15
+          ]
+        ]
+      },
+      "execution": {
+        "host": "ring16_acquisition",
+        "host_definition": {
+          "batch": 128,
+          "betas": [
+            0.0,
+            0.999
+          ],
+          "covariances": [
+            [
+              [
+                0.01,
+                0.0
+              ],
+              [
+                0.0,
+                0.01
+              ]
+            ],
+            [
+              [
+                0.01,
+                0.0
+              ],
+              [
+                0.0,
+                0.01
+              ]
+            ],
+            [
+              [
+                0.01,
+                0.0
+              ],
+              [
+                0.0,
+                0.01
+              ]
+            ],
+            [
+              [
+                0.01,
+                0.0
+              ],
+              [
+                0.0,
+                0.01
+              ]
+            ],
+            [
+              [
+                0.01,
+                0.0
+              ],
+              [
+                0.0,
+                0.01
+              ]
+            ],
+            [
+              [
+                0.01,
+                0.0
+              ],
+              [
+                0.0,
+                0.01
+              ]
+            ],
+            [
+              [
+                0.01,
+                0.0
+              ],
+              [
+                0.0,
+                0.01
+              ]
+            ],
+            [
+              [
+                0.01,
+                0.0
+              ],
+              [
+                0.0,
+                0.01
+              ]
+            ],
+            [
+              [
+                0.01,
+                0.0
+              ],
+              [
+                0.0,
+                0.01
+              ]
+            ],
+            [
+              [
+                0.01,
+                0.0
+              ],
+              [
+                0.0,
+                0.01
+              ]
+            ],
+            [
+              [
+                0.01,
+                0.0
+              ],
+              [
+                0.0,
+                0.01
+              ]
+            ],
+            [
+              [
+                0.01,
+                0.0
+              ],
+              [
+                0.0,
+                0.01
+              ]
+            ],
+            [
+              [
+                0.01,
+                0.0
+              ],
+              [
+                0.0,
+                0.01
+              ]
+            ],
+            [
+              [
+                0.01,
+                0.0
+              ],
+              [
+                0.0,
+                0.01
+              ]
+            ],
+            [
+              [
+                0.01,
+                0.0
+              ],
+              [
+                0.0,
+                0.01
+              ]
+            ],
+            [
+              [
+                0.01,
+                0.0
+              ],
+              [
+                0.0,
+                0.01
+              ]
+            ]
+          ],
+          "d_every": 1,
+          "d_lr_mult": 1.0,
+          "ema_decay": 0.995,
+          "family": "ring16_acquisition",
+          "fourier": 2,
+          "g_every": 1,
+          "hidden": 64,
+          "identifiable": true,
+          "kind": "gaussian_mixture",
+          "layers": 2,
+          "lr": 0.00425,
+          "masses": [
+            0.0625,
+            0.0625,
+            0.0625,
+            0.0625,
+            0.0625,
+            0.0625,
+            0.0625,
+            0.0625,
+            0.0625,
+            0.0625,
+            0.0625,
+            0.0625,
+            0.0625,
+            0.0625,
+            0.0625,
+            0.0625
+          ],
+          "means": [
+            [
+              3.0,
+              0.0
+            ],
+            [
+              2.77163859753386,
+              1.1480502970952693
+            ],
+            [
+              2.121320343559643,
+              2.1213203435596424
+            ],
+            [
+              1.1480502970952695,
+              2.77163859753386
+            ],
+            [
+              1.8369701987210297e-16,
+              3.0
+            ],
+            [
+              -1.1480502970952693,
+              2.77163859753386
+            ],
+            [
+              -2.1213203435596424,
+              2.121320343559643
+            ],
+            [
+              -2.77163859753386,
+              1.1480502970952697
+            ],
+            [
+              -3.0,
+              3.6739403974420594e-16
+            ],
+            [
+              -2.7716385975338604,
+              -1.148050297095269
+            ],
+            [
+              -2.121320343559643,
+              -2.1213203435596424
+            ],
+            [
+              -1.148050297095271,
+              -2.7716385975338595
+            ],
+            [
+              -5.51091059616309e-16,
+              -3.0
+            ],
+            [
+              1.14805029709527,
+              -2.77163859753386
+            ],
+            [
+              2.121320343559642,
+              -2.121320343559643
+            ],
+            [
+              2.7716385975338595,
+              -1.148050297095271
+            ]
+          ],
+          "particles": 256,
+          "prior_lr_mult": 2.0,
+          "prior_reg": 0.0,
+          "reg_arm": "k3p",
+          "reg_coeff": 1.0,
+          "reg_kappa": 1.0,
+          "split": "development",
+          "steps": 400,
+          "z_dim": 4
+        },
+        "host_source": "benchmarks/transfer_suite/vector_tasks.py",
+        "initializer": "deterministic_orthogonal",
+        "prior": {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.025,
+          "standardize": false
+        },
+        "produces_state": false,
+        "protocol": "screening",
+        "steps": 400
+      },
+      "resources": {
+        "cpu_threads": 1,
+        "gpu_memory_mb": 2048,
+        "gpus": 1,
+        "timeout_seconds": 300
+      },
+      "source": {
+        "bytes": 7181,
+        "path": "configs/forge/tasks/ring16_acquisition.json",
+        "sha256": "933b8202d5b1cc36eeaab843c49f628e77fd801f4b7c8a9c2ad5cb8d9f3c1e21"
+      }
+    },
+    "rotated100": {
+      "adapter": "native100",
+      "evaluation": {
+        "accuracy_limits": {
+          "abs_cov_trace_bias": 0.1,
+          "center_rms_sigma": 0.2,
+          "mass_tv": 0.06,
+          "radial_ks": 0.04
+        },
+        "coverage_evaluator": "benchmarks.toy100.gate:evaluate_suite",
+        "coverage_thresholds": {
+          "all_finite": true,
+          "max_cov_eig_ratio": 1.7,
+          "max_mass_tv": 0.1,
+          "max_mode_mass": 0.02,
+          "max_radial_median_ratio": 1.4,
+          "min_cov_eig_ratio": 0.4,
+          "min_hq_mode_mass": 0.005,
+          "min_modes": 100,
+          "min_precision": 0.97,
+          "min_radial_median_ratio": 0.65,
+          "min_samples": 20000
+        },
+        "early_eval_steps": [
+          0,
+          1,
+          10,
+          25,
+          50,
+          100
+        ],
+        "eval_interval": 250,
+        "eval_output_noise": "clean",
+        "eval_samples": 20000,
+        "evaluator": "benchmarks.toy100.accuracy_gate:evaluate_suite",
+        "evaluator_revision": {
+          "change": "Validate explicit CLI evaluation-noise overrides; metric kernels, thresholds, clean sampling law and budgets unchanged.",
+          "id": "native100-manifest-sampling-v2",
+          "previous_gate_sha256": "55f6ef733f0b10f4c6ac05eb5ad9d30320d807ff520ea1b41c75d2d0b41e406a"
+        },
+        "holdout_samples": 100000,
+        "kind": "native_accuracy",
+        "minimum_stable_checks": 5,
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise",
+        "scoring_weights": "live",
+        "sources": {
+          "benchmarks/toy100/accuracy.py": "ee5c62049f8cdceb3d93b6d792cbaa96c815e12b3ce79ffaed244fb15a44fed2",
+          "benchmarks/toy100/accuracy_gate.py": "e66ede95d4b80eedd832a102841c2b0a5d6d710f646bfa34dc00647dc0ab3abe",
+          "benchmarks/toy100/gate.py": "2ddadf56a4ccd7645c8b4e391373818b1113fb6113a9c691310fb162684058e6",
+          "benchmarks/toy100/metrics.py": "a7fbef19082f8470eb392948da52a336a90a3e99c6b3b893343a9e75bcda9c7b"
+        }
+      },
+      "execution": {
+        "initializer": "deterministic_orthogonal",
+        "model": {
+          "fourier": 2,
+          "hidden": 128,
+          "layers": 3
+        },
+        "prior": {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.025,
+          "standardize": false
+        },
+        "problem": "rotated100",
+        "produces_state": true,
+        "protocol": "screening",
+        "resources": {
+          "batch_size": 2048,
+          "num_particles": 20000,
+          "z_dim": 2
+        },
+        "steps": 7000
+      },
+      "resources": {
+        "cpu_threads": 1,
+        "gpu_memory_mb": 2048,
+        "gpus": 1,
+        "timeout_seconds": 3600
+      },
+      "source": {
+        "bytes": 2645,
+        "path": "configs/forge/tasks/rotated100.json",
+        "sha256": "f8691aa4152885a34dc4e32eda6bbbc5d7df2699cc7b582f9bc25c091ea9c35d"
+      }
+    },
+    "staggered100": {
+      "adapter": "native100",
+      "evaluation": {
+        "accuracy_limits": {
+          "abs_cov_trace_bias": 0.1,
+          "center_rms_sigma": 0.2,
+          "mass_tv": 0.06,
+          "radial_ks": 0.04
+        },
+        "coverage_evaluator": "benchmarks.toy100.gate:evaluate_suite",
+        "coverage_thresholds": {
+          "all_finite": true,
+          "max_cov_eig_ratio": 1.7,
+          "max_mass_tv": 0.1,
+          "max_mode_mass": 0.02,
+          "max_radial_median_ratio": 1.4,
+          "min_cov_eig_ratio": 0.4,
+          "min_hq_mode_mass": 0.005,
+          "min_modes": 100,
+          "min_precision": 0.97,
+          "min_radial_median_ratio": 0.65,
+          "min_samples": 20000
+        },
+        "early_eval_steps": [
+          0,
+          1,
+          10,
+          25,
+          50,
+          100
+        ],
+        "eval_interval": 250,
+        "eval_output_noise": "clean",
+        "eval_samples": 20000,
+        "evaluator": "benchmarks.toy100.accuracy_gate:evaluate_suite",
+        "evaluator_revision": {
+          "change": "Validate explicit CLI evaluation-noise overrides; metric kernels, thresholds, clean sampling law and budgets unchanged.",
+          "id": "native100-manifest-sampling-v2",
+          "previous_gate_sha256": "55f6ef733f0b10f4c6ac05eb5ad9d30320d807ff520ea1b41c75d2d0b41e406a"
+        },
+        "holdout_samples": 100000,
+        "kind": "native_accuracy",
+        "minimum_stable_checks": 5,
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise",
+        "scoring_weights": "live",
+        "sources": {
+          "benchmarks/toy100/accuracy.py": "ee5c62049f8cdceb3d93b6d792cbaa96c815e12b3ce79ffaed244fb15a44fed2",
+          "benchmarks/toy100/accuracy_gate.py": "e66ede95d4b80eedd832a102841c2b0a5d6d710f646bfa34dc00647dc0ab3abe",
+          "benchmarks/toy100/gate.py": "2ddadf56a4ccd7645c8b4e391373818b1113fb6113a9c691310fb162684058e6",
+          "benchmarks/toy100/metrics.py": "a7fbef19082f8470eb392948da52a336a90a3e99c6b3b893343a9e75bcda9c7b"
+        }
+      },
+      "execution": {
+        "initializer": "deterministic_orthogonal",
+        "model": {
+          "fourier": 2,
+          "hidden": 128,
+          "layers": 3
+        },
+        "prior": {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.025,
+          "standardize": false
+        },
+        "problem": "staggered100",
+        "produces_state": true,
+        "protocol": "screening",
+        "resources": {
+          "batch_size": 2048,
+          "num_particles": 20000,
+          "z_dim": 2
+        },
+        "steps": 7000
+      },
+      "resources": {
+        "cpu_threads": 1,
+        "gpu_memory_mb": 2048,
+        "gpus": 1,
+        "timeout_seconds": 3600
+      },
+      "source": {
+        "bytes": 2649,
+        "path": "configs/forge/tasks/staggered100.json",
+        "sha256": "5c39cf3faf007d146f861b9962965b92ec17bcf7d9bd906aa9f1f0d21c82d4a1"
+      }
+    },
+    "two_pole": {
+      "adapter": "transfer_behavior",
+      "evaluation": {
+        "eval_output_noise": "not_applied_to_measurement",
+        "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+        "guards": {
+          "finite_state": true,
+          "mechanism_exercised": true,
+          "optimizer_roles": [
+            "prior",
+            "discriminator"
+          ],
+          "rng_isolation": true
+        },
+        "kind": "transfer_sustained",
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "sampling_contract_version": 1,
+        "sampling_law": "learned_particles_and_critic_gradient",
+        "scoring_weights": "live",
+        "sources": {
+          "benchmarks/locked_shared/baseline.py": "72ebe4ef6d3cfe28f1ab6073fc781a72b45173f3ce2a0b63040e84b27bed03cc",
+          "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+          "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97"
+        },
+        "thresholds": [
+          [
+            "mean_abs",
+            ">=",
+            0.3
+          ],
+          [
+            "grad_med",
+            "<=",
+            1.0
+          ]
+        ]
+      },
+      "execution": {
+        "device": "cpu",
+        "execution_path": "public_components",
+        "fixed_initialization": {
+          "critic": "stored_host_weights",
+          "particles": "zeros"
+        },
+        "host": "two_pole",
+        "host_definition": {
+          "family": "existing_behavior",
+          "phase": "fit",
+          "runner": "legacy",
+          "split": "development",
+          "steps": 80
+        },
+        "host_source": "benchmarks/locked_shared/baseline.py",
+        "initializer": "deterministic_orthogonal",
+        "prior": {
+          "exception_reason": "This host optimizes explicit sample-particle coordinates directly, without a separate generator or latent sampling kernel.",
+          "kind": "particle_cloud",
+          "learnable": true,
+          "sigma": 0.0,
+          "standardize": false
+        },
+        "produces_state": false,
+        "protocol": "screening",
+        "schedule_policy": "public_recipe_with_frozen_host_horizon",
+        "steps": 80
+      },
+      "resources": {
+        "allow_cpu": true,
+        "cpu_threads": 1,
+        "gpu_memory_mb": 0,
+        "gpus": 0,
+        "timeout_seconds": 300
+      },
+      "source": {
+        "bytes": 2329,
+        "path": "configs/forge/tasks/two_pole.json",
+        "sha256": "7cf1d97a4683f89c0814cf327e335c489281c81a26730838fdc74d5cebd33a24"
+      }
+    },
+    "unused_token_hold": {
+      "adapter": "transfer_behavior",
+      "evaluation": {
+        "eval_output_noise": "not_applied_to_measurement",
+        "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+        "guards": {
+          "finite_state": true,
+          "mechanism_exercised": true,
+          "optimizer_roles": [
+            "generator",
+            "discriminator"
+          ],
+          "rng_isolation": true
+        },
+        "kind": "transfer_sustained",
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "sampling_contract_version": 1,
+        "sampling_law": "learned_parameter_measurement",
+        "scoring_weights": "live",
+        "sources": {
+          "benchmarks/locked_shared/baseline.py": "72ebe4ef6d3cfe28f1ab6073fc781a72b45173f3ce2a0b63040e84b27bed03cc",
+          "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+          "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97"
+        },
+        "thresholds": [
+          [
+            "unused_hold",
+            ">=",
+            0.85
+          ],
+          [
+            "concept_move",
+            ">=",
+            0.85
+          ]
+        ]
+      },
+      "execution": {
+        "device": "cpu",
+        "execution_path": "public_components",
+        "host": "unused_token_hold",
+        "host_definition": {
+          "family": "existing_behavior",
+          "phase": "fit",
+          "runner": "legacy",
+          "split": "development",
+          "steps": 200
+        },
+        "host_source": "benchmarks/locked_shared/baseline.py",
+        "initializer": "deterministic_orthogonal",
+        "prior": {
+          "exception_reason": "Deterministic embedding controls are parameter clouds; there is no sampled latent prior or separate prior optimizer.",
+          "kind": "particle_cloud",
+          "learnable": true,
+          "sigma": 0.0,
+          "standardize": false
+        },
+        "prior_applicability": "not_sampled",
+        "produces_state": false,
+        "protocol": "screening",
+        "schedule_policy": "public_recipe_with_frozen_host_horizon",
+        "steps": 200
+      },
+      "resources": {
+        "allow_cpu": true,
+        "cpu_threads": 1,
+        "gpu_memory_mb": 0,
+        "gpus": 0,
+        "timeout_seconds": 300
+      },
+      "source": {
+        "bytes": 2262,
+        "path": "configs/forge/tasks/unused_token_hold.json",
+        "sha256": "4de3cb6a42efd8a73fcc3d7ec0e9038fcb49b12f42488739310177e468f657be"
+      }
+    }
+  },
+  "original_results_changed": false,
+  "proposals": [
+    {
+      "capacity_clock": {
+        "claim": "one snapshot can satisfy unchanged output-distribution bounds under this exact public sampled law; no acquisition/persistence credit",
+        "completed_updates": 0,
+        "fit_updates": 0,
+        "full_declared_horizon": 400
+      },
+      "capacity_parameter_scope": "A disclosed analytic constructed-state witness may replace parameters before a zero-update observer; it is not a random-initialization training result.",
+      "capacity_state_binding": "Save actual full public fixture/trainer state,selected controller/backend/EMA copies and the firstsource-owned shape/lifecycleprelude,with completed_updates0. Never mutate sampler/controller fields.",
+      "capacity_verdict": "UNRESOLVED",
+      "component_attestation_replacement": "Only this new named sample-law decision contract changes ParticlePrior vs sigma=.025 MoG; the original task/card remains BLOCKED and unchanged.",
+      "data_law": "Exact16 equal Gaussian components; means radius3, covariance .01I.",
+      "family_controls": "Preserve full preset controls; no disabling row evidence, birth/death, DV12, stationarity, serving or reopen guard.",
+      "host_definition": {
+        "batch": 128,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "covariances": [
+          [
+            [
+              0.01,
+              0.0
+            ],
+            [
+              0.0,
+              0.01
+            ]
+          ],
+          [
+            [
+              0.01,
+              0.0
+            ],
+            [
+              0.0,
+              0.01
+            ]
+          ],
+          [
+            [
+              0.01,
+              0.0
+            ],
+            [
+              0.0,
+              0.01
+            ]
+          ],
+          [
+            [
+              0.01,
+              0.0
+            ],
+            [
+              0.0,
+              0.01
+            ]
+          ],
+          [
+            [
+              0.01,
+              0.0
+            ],
+            [
+              0.0,
+              0.01
+            ]
+          ],
+          [
+            [
+              0.01,
+              0.0
+            ],
+            [
+              0.0,
+              0.01
+            ]
+          ],
+          [
+            [
+              0.01,
+              0.0
+            ],
+            [
+              0.0,
+              0.01
+            ]
+          ],
+          [
+            [
+              0.01,
+              0.0
+            ],
+            [
+              0.0,
+              0.01
+            ]
+          ],
+          [
+            [
+              0.01,
+              0.0
+            ],
+            [
+              0.0,
+              0.01
+            ]
+          ],
+          [
+            [
+              0.01,
+              0.0
+            ],
+            [
+              0.0,
+              0.01
+            ]
+          ],
+          [
+            [
+              0.01,
+              0.0
+            ],
+            [
+              0.0,
+              0.01
+            ]
+          ],
+          [
+            [
+              0.01,
+              0.0
+            ],
+            [
+              0.0,
+              0.01
+            ]
+          ],
+          [
+            [
+              0.01,
+              0.0
+            ],
+            [
+              0.0,
+              0.01
+            ]
+          ],
+          [
+            [
+              0.01,
+              0.0
+            ],
+            [
+              0.0,
+              0.01
+            ]
+          ],
+          [
+            [
+              0.01,
+              0.0
+            ],
+            [
+              0.0,
+              0.01
+            ]
+          ],
+          [
+            [
+              0.01,
+              0.0
+            ],
+            [
+              0.0,
+              0.01
+            ]
+          ]
+        ],
+        "d_every": 1,
+        "d_lr_mult": 1.0,
+        "ema_decay": 0.995,
+        "family": "ring16_acquisition",
+        "fourier": 2,
+        "g_every": 1,
+        "hidden": 64,
+        "identifiable": true,
+        "kind": "gaussian_mixture",
+        "layers": 2,
+        "lr": 0.00425,
+        "masses": [
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625,
+          0.0625
+        ],
+        "means": [
+          [
+            3.0,
+            0.0
+          ],
+          [
+            2.77163859753386,
+            1.1480502970952693
+          ],
+          [
+            2.121320343559643,
+            2.1213203435596424
+          ],
+          [
+            1.1480502970952695,
+            2.77163859753386
+          ],
+          [
+            1.8369701987210297e-16,
+            3.0
+          ],
+          [
+            -1.1480502970952693,
+            2.77163859753386
+          ],
+          [
+            -2.1213203435596424,
+            2.121320343559643
+          ],
+          [
+            -2.77163859753386,
+            1.1480502970952697
+          ],
+          [
+            -3.0,
+            3.6739403974420594e-16
+          ],
+          [
+            -2.7716385975338604,
+            -1.148050297095269
+          ],
+          [
+            -2.121320343559643,
+            -2.1213203435596424
+          ],
+          [
+            -1.148050297095271,
+            -2.7716385975338595
+          ],
+          [
+            -5.51091059616309e-16,
+            -3.0
+          ],
+          [
+            1.14805029709527,
+            -2.77163859753386
+          ],
+          [
+            2.121320343559642,
+            -2.121320343559643
+          ],
+          [
+            2.7716385975338595,
+            -1.148050297095271
+          ]
+        ],
+        "particles": 256,
+        "prior_lr_mult": 2.0,
+        "prior_reg": 0.0,
+        "reg_arm": "k3p",
+        "reg_coeff": 1.0,
+        "reg_kappa": 1.0,
+        "split": "development",
+        "steps": 400,
+        "z_dim": 4
+      },
+      "id_template": "{atlas|e22}-cloud-ring16-capacity-v1",
+      "kind": "full-family sampled-output capacity question",
+      "old_MoG_credit": false,
+      "original_stable_checks": 5,
+      "output_gates": [
+        [
+          "sample_count",
+          ">=",
+          4096
+        ],
+        [
+          "modes",
+          ">=",
+          16
+        ],
+        [
+          "mass_tv",
+          "<=",
+          0.15
+        ],
+        [
+          "hq",
+          ">=",
+          0.85
+        ],
+        [
+          "component_covariance_error",
+          "<=",
+          0.85
+        ],
+        [
+          "component_min_eigen_ratio",
+          ">=",
+          0.15
+        ]
+      ],
+      "possible_followup_training": {
+        "automatic_execution": false,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "steps": 400,
+        "wall_cap_seconds": 300
+      },
+      "prior": {
+        "exception_reason": "Full independent Atlas/E22 learned-row representation; necessary output-law capacity; distinct from ordinary fixed-width MoG task.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "public_execution": "GANTrainer for the same unconditional scalar host, public first-real-shape declaration and full checkpoint; zero optimizer updates for capacity.",
+      "required_negative_controls": [
+        "all rows atone mode must fail occupancy/mass",
+        "balanced centers without width must fail covariance/spread",
+        "missing mode and uneven accepted mass must fail the unchanged bounds"
+      ],
+      "sample_count": 4096,
+      "serving": {
+        "diagnostic": "output_noise=False; retain selected serving and latent perturbation; report separately",
+        "positive_primary_chosen_before_sampling": true,
+        "primary": "state-selected ServedModel/GANTrainer.sample with output_noise=True and full native DV12 latent perturbation"
+      },
+      "status": "PROPOSED_NOT_EXECUTED",
+      "witness_strategy": "Declare a bounded analytic/constructive parameter witness in the actual original MLP before measurement. Retain any failed witness. Gate actual sampled cloud, not component labels or hidden sampler overrides."
+    },
+    {
+      "actual_backend_requirement": "Bind actual feature-cell/native backend selection; the small ring/reference kNN observation cannot fill it.",
+      "capacity_clock": {
+        "completed_updates": 0,
+        "fit_updates": 0,
+        "full_declared_horizon": 7000,
+        "independent_holdout": 100000,
+        "samples": 20000
+      },
+      "capacity_parameter_scope": "A disclosed analytic constructed-state witness may replace parameters before a zero-update observer; it is not a random-initialization training result.",
+      "capacity_state_binding": "Save actual full public fixture/trainer state,selected controller/backend/EMA copies and the firstsource-owned shape/lifecycleprelude,with completed_updates0. Never mutate sampler/controller fields.",
+      "capacity_verdict": "UNRESOLVED_FOR_THIS_NEW_BINDING",
+      "host_policy": "Retain each named task's exact target/model/resources/init and full configured preset; historical identity-affine RA15 host is a different binding if substituted.",
+      "id_template": "{atlas|e22}-cloud-native100-capacity-v1",
+      "kind": "full-family sampled-output capacity question",
+      "old_MoG_credit": false,
+      "output_gates": {
+        "grid100": {
+          "accuracy": {
+            "abs_cov_trace_bias": 0.1,
+            "center_rms_sigma": 0.2,
+            "mass_tv": 0.06,
+            "radial_ks": 0.04
+          },
+          "coverage": {
+            "all_finite": true,
+            "max_cov_eig_ratio": 1.7,
+            "max_mass_tv": 0.1,
+            "max_mode_mass": 0.02,
+            "max_radial_median_ratio": 1.4,
+            "min_cov_eig_ratio": 0.4,
+            "min_hq_mode_mass": 0.005,
+            "min_modes": 100,
+            "min_precision": 0.97,
+            "min_radial_median_ratio": 0.65,
+            "min_samples": 20000
+          }
+        },
+        "rotated100": {
+          "accuracy": {
+            "abs_cov_trace_bias": 0.1,
+            "center_rms_sigma": 0.2,
+            "mass_tv": 0.06,
+            "radial_ks": 0.04
+          },
+          "coverage": {
+            "all_finite": true,
+            "max_cov_eig_ratio": 1.7,
+            "max_mass_tv": 0.1,
+            "max_mode_mass": 0.02,
+            "max_radial_median_ratio": 1.4,
+            "min_cov_eig_ratio": 0.4,
+            "min_hq_mode_mass": 0.005,
+            "min_modes": 100,
+            "min_precision": 0.97,
+            "min_radial_median_ratio": 0.65,
+            "min_samples": 20000
+          }
+        },
+        "staggered100": {
+          "accuracy": {
+            "abs_cov_trace_bias": 0.1,
+            "center_rms_sigma": 0.2,
+            "mass_tv": 0.06,
+            "radial_ks": 0.04
+          },
+          "coverage": {
+            "all_finite": true,
+            "max_cov_eig_ratio": 1.7,
+            "max_mass_tv": 0.1,
+            "max_mode_mass": 0.02,
+            "max_radial_median_ratio": 1.4,
+            "min_cov_eig_ratio": 0.4,
+            "min_hq_mode_mass": 0.005,
+            "min_modes": 100,
+            "min_precision": 0.97,
+            "min_radial_median_ratio": 0.65,
+            "min_samples": 20000
+          }
+        }
+      },
+      "possible_followup_training": {
+        "automatic_execution": false,
+        "original_holdout_samples": 100000,
+        "original_terminal_checks": 5,
+        "steps": 7000,
+        "timeout_seconds": 3600
+      },
+      "prior": {
+        "kind": "particle_cloud",
+        "learnable": true,
+        "num_particles": 20000,
+        "sigma": 0.0,
+        "standardize": false,
+        "z_dim": 2
+      },
+      "related_evidence": {
+        "original_noisy_Atlas19": "separate original19/19 qualification with clean diagnosticsFAIL",
+        "previous16cell_API_capacity_packet": "related target/public sampler snapshot evidence only; source/host/preset manifests must match before reuse"
+      },
+      "serving": {
+        "diagnostic": "output noiseFalse under same selected weights/latent law; no cross-credit",
+        "primary": "selected served outputs with learned output noiseTrue; DV12/actual feature-cell sampling retained"
+      },
+      "source_tasks": [
+        "grid100",
+        "rotated100",
+        "staggered100"
+      ],
+      "status": "PROPOSED_NOT_EXECUTED"
+    },
+    {
+      "capacity_clock": {
+        "completed_updates": 0,
+        "declared_full_horizon": 20001,
+        "fit_updates": 0,
+        "samples": 1024
+      },
+      "capacity_verdict": "UNRESOLVED",
+      "full_Atlas_label_allowed": false,
+      "host": "same5words, WordGenerator/Encoder/JointCritic,5 particle rows,z2,batch256",
+      "id_template": "{atlas|e22}-derived-joint-word-capacity-v1",
+      "kind": "explicit supported-host derivative; not full Atlas/E22",
+      "mechanism_changes": {
+        "batch_size": 256,
+        "betas": [
+          0.0,
+          0.999
+        ],
+        "birth_death_backend": "knn",
+        "birth_death_cells": 64,
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "d_lr_mult": 1.5,
+        "ema_decay": 0.995,
+        "input_noise_std": 0.0,
+        "lr": 0.0006,
+        "network_lr_horizon_cap": null,
+        "num_particles": 5,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.0,
+        "particle_birth_death": false,
+        "prior_reg": 1.0,
+        "row_evidence_gate": false,
+        "z_dim": 2
+      },
+      "missing_full_family_contract": "Independent full row evidence/birth-death do not certify this conditional encoder/joint critic. A genuine RoutedRows adaptation would change the row/control law and requires its own paired fit/guard protocol and generation semantics; not a label-only repair.",
+      "negative_controls": [
+        "correct generated vocabulary but shuffled reconstruction pairs",
+        "correct argmax with low token confidence",
+        "missing/unequal generated word mass",
+        "padding corruption"
+      ],
+      "ordinary_task_credit": false,
+      "output_gates": [
+        [
+          "sample_count",
+          ">=",
+          1024
+        ],
+        [
+          "quality_fraction",
+          ">=",
+          0.95
+        ],
+        [
+          "modes",
+          "==",
+          5
+        ],
+        [
+          "mass_tv",
+          "<=",
+          0.1
+        ],
+        [
+          "reconstruction_exact",
+          "==",
+          1
+        ],
+        [
+          "minimum_reconstruction_token_probability",
+          ">=",
+          0.9
+        ]
+      ],
+      "possible_followup_training": {
+        "automatic_execution": false,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "steps": 20001,
+        "wall_cap_seconds": 900
+      },
+      "primary_scope": "necessary generation mass/confidence and inverse capacity under the declared rowless/no-additive-noise law; not full family controls",
+      "public_execution": "caller-owned Recipe public loss/optimizers/penalty plus ordered UpdatePolicy; no copied private loop",
+      "resolved_derived_recipes": {
+        "atlas": {
+          "alpha_bar": [
+            1.0,
+            0.9,
+            0.5,
+            0.05,
+            0.0001
+          ],
+          "amsgrad": true,
+          "batch_size": 256,
+          "betas": [
+            0.0,
+            0.999
+          ],
+          "birth_death_feature_scale": "none",
+          "birth_death_isolation": false,
+          "birth_death_space": "critic",
+          "conditioning": "scalar",
+          "continuous_policy": "dv12",
+          "critic_payoff_damping": true,
+          "critic_r1_real": true,
+          "d_guard_min_steps": 200,
+          "d_guard_ratio": 5.0,
+          "d_lr_mult": 1.5,
+          "direct_particle_betas": [
+            0.0,
+            0.9
+          ],
+          "direct_particle_gain": true,
+          "distance_reduction": "sum",
+          "ema_decay": 0.995,
+          "encoder_mode": "none",
+          "input_noise_anneal_end": 0.1,
+          "input_noise_std": 0.0,
+          "latent_damping_max_rate": 0.5,
+          "lr": 0.0006,
+          "lr_anneal_start": 0.6,
+          "lr_control": "stationarity",
+          "lr_floor": 0.05,
+          "model": "gan",
+          "name": "atlas",
+          "network_lr_floor": 0.01,
+          "network_lr_horizon_cap": null,
+          "num_classes": null,
+          "num_particles": 5,
+          "observation_sigma": 0.03,
+          "output_noise_mode": "fixed",
+          "output_noise_std": 0.0,
+          "output_noise_warmup": 0.0,
+          "particle_birth_death": false,
+          "prior_betas": null,
+          "prior_kind": "particles",
+          "prior_lr_mult": 2.0,
+          "prior_reg": 1.0,
+          "reconstruction_weight": 1.0,
+          "reg_anchor_min_decay": 0.9,
+          "reg_anchor_weight": 1.0,
+          "reg_coeff": 3.0,
+          "reg_every": 1,
+          "reg_kappa": 1.0,
+          "reopen_anchor": "release",
+          "reopen_guard": "settled",
+          "reopen_signal": "optimizer",
+          "routing_temperature": 0.25,
+          "row_evidence_exclude": true,
+          "row_evidence_gate": false,
+          "row_evidence_hold": true,
+          "row_evidence_hot": true,
+          "row_evidence_null": "scaled",
+          "row_policy": "independent",
+          "serve_average": 4.0,
+          "sigma_rel": 0.0,
+          "standardize": true,
+          "table_release_rule": "anchor",
+          "total_steps": null,
+          "ucd_target": "class",
+          "ucd_weight": 0.02,
+          "z_dim": 2
+        },
+        "e22": {
+          "alpha_bar": [
+            1.0,
+            0.9,
+            0.5,
+            0.05,
+            0.0001
+          ],
+          "amsgrad": true,
+          "batch_size": 256,
+          "betas": [
+            0.0,
+            0.999
+          ],
+          "birth_death_feature_scale": "none",
+          "birth_death_isolation": false,
+          "birth_death_space": "critic",
+          "conditioning": "scalar",
+          "continuous_policy": "dv12",
+          "critic_payoff_damping": true,
+          "critic_r1_real": true,
+          "d_guard_min_steps": 200,
+          "d_guard_ratio": 5.0,
+          "d_lr_mult": 1.5,
+          "direct_particle_betas": [
+            0.0,
+            0.9
+          ],
+          "direct_particle_gain": true,
+          "distance_reduction": "sum",
+          "ema_decay": 0.995,
+          "encoder_mode": "none",
+          "input_noise_anneal_end": 0.1,
+          "input_noise_std": 0.0,
+          "latent_damping_max_rate": 0.5,
+          "lr": 0.0006,
+          "lr_anneal_start": 0.6,
+          "lr_control": "stationarity",
+          "lr_floor": 0.05,
+          "model": "gan",
+          "name": "e22",
+          "network_lr_floor": 0.01,
+          "network_lr_horizon_cap": null,
+          "num_classes": null,
+          "num_particles": 5,
+          "observation_sigma": 0.03,
+          "output_noise_mode": "fixed",
+          "output_noise_std": 0.0,
+          "output_noise_warmup": 0.0,
+          "particle_birth_death": false,
+          "prior_betas": null,
+          "prior_kind": "particles",
+          "prior_lr_mult": 2.0,
+          "prior_reg": 1.0,
+          "reconstruction_weight": 1.0,
+          "reg_anchor_min_decay": 0.9,
+          "reg_anchor_weight": 1.0,
+          "reg_coeff": 3.0,
+          "reg_every": 1,
+          "reg_kappa": 1.0,
+          "reopen_anchor": "release",
+          "reopen_signal": "optimizer",
+          "routing_temperature": 0.25,
+          "row_evidence_exclude": true,
+          "row_evidence_gate": false,
+          "row_evidence_hold": true,
+          "row_evidence_hot": true,
+          "row_evidence_null": "scaled",
+          "row_policy": "independent",
+          "serve_average": 4.0,
+          "sigma_rel": 0.0,
+          "standardize": true,
+          "table_release_rule": "anchor",
+          "total_steps": null,
+          "ucd_target": "class",
+          "ucd_weight": 0.02,
+          "z_dim": 2
+        }
+      },
+      "reuse_existing_question": "Use the alreadydeclared WordFixture host/goal/scorer rather than add duplicate target credit.",
+      "serving": "actual selected ServedModel.generate, output noiseFalse, DV12 latent perturbation retained; matched served encoder/generator reconstruction on all5correct pairs",
+      "status": "PROPOSED_NOT_EXECUTED"
+    },
+    {
+      "capacity_verdict": "UNRESOLVED",
+      "full_family_label_allowed": false,
+      "id_template": "{atlas|e22}-derived-rowless-MoG-capacity-v1",
+      "kind": "optional structural derivative; not full Atlas/E22",
+      "mechanism_changes": {
+        "birth_death_backend": "knn",
+        "birth_death_cells": 64,
+        "birth_death_feature_scale": "none",
+        "birth_death_isolation": false,
+        "particle_birth_death": false,
+        "row_evidence_gate": false
+      },
+      "old_task_credit": false,
+      "optimizer_or_training_claim": false,
+      "prior": "Retain the task's MoG sigma=.025 uniform masses,learnedlocations,standardizeFalse; no kernel substitution",
+      "priority": "lower than full learned-row question for the user's full-family capacity goal",
+      "reason": "If the scientific question specifically requires MoG component semantics, remove incompatible independent-row mechanisms only under a named structural derivative.",
+      "resolved_derived_recipes": {
+        "atlas": {
+          "alpha_bar": [
+            1.0,
+            0.9,
+            0.5,
+            0.05,
+            0.0001
+          ],
+          "amsgrad": true,
+          "batch_size": 128,
+          "betas": [
+            0.0,
+            0.999
+          ],
+          "birth_death_feature_scale": "none",
+          "birth_death_isolation": false,
+          "birth_death_space": "critic",
+          "conditioning": "scalar",
+          "continuous_policy": "dv12",
+          "critic_payoff_damping": true,
+          "critic_r1_real": true,
+          "d_guard_min_steps": 200,
+          "d_guard_ratio": 5.0,
+          "d_lr_mult": 1.0,
+          "direct_particle_betas": [
+            0.0,
+            0.9
+          ],
+          "direct_particle_gain": true,
+          "distance_reduction": "sum",
+          "ema_decay": 0.995,
+          "encoder_mode": "none",
+          "input_noise_anneal_end": 0.1,
+          "input_noise_std": 0.0,
+          "latent_damping_max_rate": 0.5,
+          "lr": 0.00425,
+          "lr_anneal_start": 0.6,
+          "lr_control": "stationarity",
+          "lr_floor": 0.05,
+          "model": "gan",
+          "name": "atlas",
+          "network_lr_floor": 0.01,
+          "network_lr_horizon_cap": 1600,
+          "num_classes": null,
+          "num_particles": 256,
+          "observation_sigma": 0.03,
+          "output_noise_mode": "learnable",
+          "output_noise_std": 0.029,
+          "output_noise_warmup": 0.0,
+          "particle_birth_death": false,
+          "prior_betas": null,
+          "prior_kind": "mog",
+          "prior_lr_mult": 2.0,
+          "prior_reg": 0.0,
+          "reconstruction_weight": 1.0,
+          "reg_anchor_min_decay": 0.9,
+          "reg_anchor_weight": 1.0,
+          "reg_coeff": 3.0,
+          "reg_every": 1,
+          "reg_kappa": 1.0,
+          "reopen_anchor": "release",
+          "reopen_guard": "settled",
+          "reopen_signal": "optimizer",
+          "routing_temperature": 0.25,
+          "row_evidence_exclude": true,
+          "row_evidence_gate": false,
+          "row_evidence_hold": true,
+          "row_evidence_hot": true,
+          "row_evidence_null": "scaled",
+          "row_policy": "independent",
+          "serve_average": 4.0,
+          "sigma_rel": 0.0,
+          "standardize": true,
+          "table_release_rule": "anchor",
+          "total_steps": null,
+          "ucd_target": "class",
+          "ucd_weight": 0.02,
+          "z_dim": 4
+        },
+        "e22": {
+          "alpha_bar": [
+            1.0,
+            0.9,
+            0.5,
+            0.05,
+            0.0001
+          ],
+          "amsgrad": true,
+          "batch_size": 128,
+          "betas": [
+            0.0,
+            0.999
+          ],
+          "birth_death_feature_scale": "none",
+          "birth_death_isolation": false,
+          "birth_death_space": "critic",
+          "conditioning": "scalar",
+          "continuous_policy": "dv12",
+          "critic_payoff_damping": true,
+          "critic_r1_real": true,
+          "d_guard_min_steps": 200,
+          "d_guard_ratio": 5.0,
+          "d_lr_mult": 1.0,
+          "direct_particle_betas": [
+            0.0,
+            0.9
+          ],
+          "direct_particle_gain": true,
+          "distance_reduction": "sum",
+          "ema_decay": 0.995,
+          "encoder_mode": "none",
+          "input_noise_anneal_end": 0.1,
+          "input_noise_std": 0.0,
+          "latent_damping_max_rate": 0.5,
+          "lr": 0.00425,
+          "lr_anneal_start": 0.6,
+          "lr_control": "stationarity",
+          "lr_floor": 0.05,
+          "model": "gan",
+          "name": "e22",
+          "network_lr_floor": 0.01,
+          "network_lr_horizon_cap": 1600,
+          "num_classes": null,
+          "num_particles": 256,
+          "observation_sigma": 0.03,
+          "output_noise_mode": "learnable",
+          "output_noise_std": 0.029,
+          "output_noise_warmup": 0.0,
+          "particle_birth_death": false,
+          "prior_betas": null,
+          "prior_kind": "mog",
+          "prior_lr_mult": 2.0,
+          "prior_reg": 0.0,
+          "reconstruction_weight": 1.0,
+          "reg_anchor_min_decay": 0.9,
+          "reg_anchor_weight": 1.0,
+          "reg_coeff": 3.0,
+          "reg_every": 1,
+          "reg_kappa": 1.0,
+          "reopen_anchor": "release",
+          "reopen_signal": "optimizer",
+          "routing_temperature": 0.25,
+          "row_evidence_exclude": true,
+          "row_evidence_gate": false,
+          "row_evidence_hold": true,
+          "row_evidence_hot": true,
+          "row_evidence_null": "scaled",
+          "row_policy": "independent",
+          "serve_average": 4.0,
+          "sigma_rel": 0.0,
+          "standardize": true,
+          "table_release_rule": "anchor",
+          "total_steps": null,
+          "ucd_target": "class",
+          "ucd_weight": 0.02,
+          "z_dim": 4
+        }
+      },
+      "serving": "Explicit selected policy serving + MoG kernel + DV12 perturbation. Additive output noiseTrue/False separate predetermined cohorts; not original live-only law.",
+      "status": "PROPOSED_NOT_EXECUTED"
+    }
+  ],
+  "public_package_files_sha256": {
+    "particlegan/__init__.py": "b56efa562acc551d639548c299002e2cd76338b3fd7062699780add51f4f5e8c",
+    "particlegan/_qr.py": "b59cd62cc27ed557b41b2d17ed86ed578c762a3a8a392d63731a5a3b2b018916",
+    "particlegan/anchor_birth.py": "aa50983d8b61304acf4e1138f16fd4784798983df91e931863bcacd3b511f76f",
+    "particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+    "particlegan/birth_death.py": "b14c50c611a8cf188347e391739fca50a5171200eb6be90e4e3d1509d64e47ed",
+    "particlegan/birth_phase.py": "5ff929e5e9858aa24c4cc2f8999b5d0603e25e42ca3844d1da4cc28b1981d3d7",
+    "particlegan/capabilities.py": "39df9c67dbedf612740057e5fa743bc724678a1bc323d1f7cf550b37c0c01177",
+    "particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+    "particlegan/continuous.py": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41",
+    "particlegan/diffusion.py": "19c3aa8772703891551b9122fde8e74c07996f779892b7cb6be09553691efa61",
+    "particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+    "particlegan/feature_cells.py": "e0ea05f61abd7845c7437eed9a79c3a2511d5551ff04f4e619b6b9c8992e221a",
+    "particlegan/feature_policy.py": "de1a50f70a37d4c9174c8850ce3eac2a2597ed01f19fc4fe1a2ce0ec3176a8b2",
+    "particlegan/feature_reference.py": "58e076e9e04600be25e28afafc537a340de727371f4acbbfb2b7dd8bebac18b1",
+    "particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+    "particlegan/grad_regularizers.py": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747",
+    "particlegan/init.py": "e15d4de01eb49f7097bc249abacab907ff067385412346f54ab0d510cb8649d0",
+    "particlegan/k3p.py": "200ead2c27ab0b2aa6068f1b1b1b5c826b8125aa8602bfec08b31aaa2894401c",
+    "particlegan/ka2.py": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703",
+    "particlegan/mean_transport.py": "57a68e0a65c5424a4460f65002f3862a69e90af330a4d47c700dc773683a2c06",
+    "particlegan/output_moments.py": "dcf3e27228d2c3c9738e473c5b22ee9e6d5047ddcd60c538b66526adb53ef188",
+    "particlegan/particle_prior.py": "0220878bebea227da63abbf9f5b1ebdabdc6aea54fd2332fd2cab02ed734238f",
+    "particlegan/policy.py": "8370e36b5b93afe95ae24d2b385aac8735a587f86ef2b87ed369ecfdfcb6fec5",
+    "particlegan/population_continuity.py": "378cd75cca45bc8da4da33e686a12cf99df853042687978314e37c532bc17fe6",
+    "particlegan/recipe_schedules.py": "d05e459b3e9e5f938b01a854273b74343f2b6d382bec4ae5151dd1f1cd032500",
+    "particlegan/recipes.py": "1a7f9df746e242a2774068c819d70d50cd72dc4f7f6b22b0bd13e1345dcf8ab2",
+    "particlegan/routing.py": "63249d808fccb3d4e113eb1d638a245ee665c3cade20a1542bb706f316b4abcc",
+    "particlegan/row_evidence.py": "78be40141ef3946860458e9842159be9321f05c217a4800dd4134113b6eba93e",
+    "particlegan/training.py": "7dadc219135bc3e6bf657bfe9bc3fa81dd14d4b2a31c70d5ff61e2941db35c94",
+    "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+  },
+  "pure_metadata_checks": [
+    {
+      "family": "atlas",
+      "models_constructed": 0,
+      "reasons": [
+        "two_pole: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+      ],
+      "result": "BLOCKED",
+      "task": "two_pole"
+    },
+    {
+      "family": "atlas",
+      "models_constructed": 0,
+      "reasons": [
+        "unused_token_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+      ],
+      "result": "BLOCKED",
+      "task": "unused_token_hold"
+    },
+    {
+      "family": "atlas",
+      "models_constructed": 0,
+      "reasons": [
+        "ae_gan_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+      ],
+      "result": "BLOCKED",
+      "task": "ae_gan_hold"
+    },
+    {
+      "family": "atlas",
+      "models_constructed": 0,
+      "reasons": [
+        "ring16_acquisition: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+      ],
+      "result": "BLOCKED",
+      "task": "ring16_acquisition"
+    },
+    {
+      "family": "atlas",
+      "models_constructed": 0,
+      "reasons": [
+        "five_word_joint_acquisition: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+      ],
+      "result": "BLOCKED",
+      "task": "five_word_joint_acquisition"
+    },
+    {
+      "family": "atlas",
+      "models_constructed": 0,
+      "reasons": [
+        "grid100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+      ],
+      "result": "BLOCKED",
+      "task": "grid100"
+    },
+    {
+      "exception_type": "ValueError",
+      "family": "atlas",
+      "message": "particle_birth_death requires prior_kind='particles' (a trainable table)",
+      "models_constructed": 0,
+      "operation": "full preset plus task MoG prior",
+      "result": "RECIPE_REJECTED"
+    },
+    {
+      "family": "e22",
+      "models_constructed": 0,
+      "reasons": [
+        "two_pole: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+      ],
+      "result": "BLOCKED",
+      "task": "two_pole"
+    },
+    {
+      "family": "e22",
+      "models_constructed": 0,
+      "reasons": [
+        "unused_token_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+      ],
+      "result": "BLOCKED",
+      "task": "unused_token_hold"
+    },
+    {
+      "family": "e22",
+      "models_constructed": 0,
+      "reasons": [
+        "ae_gan_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+      ],
+      "result": "BLOCKED",
+      "task": "ae_gan_hold"
+    },
+    {
+      "family": "e22",
+      "models_constructed": 0,
+      "reasons": [
+        "ring16_acquisition: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+      ],
+      "result": "BLOCKED",
+      "task": "ring16_acquisition"
+    },
+    {
+      "family": "e22",
+      "models_constructed": 0,
+      "reasons": [
+        "five_word_joint_acquisition: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+      ],
+      "result": "BLOCKED",
+      "task": "five_word_joint_acquisition"
+    },
+    {
+      "family": "e22",
+      "models_constructed": 0,
+      "reasons": [
+        "grid100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation"
+      ],
+      "result": "BLOCKED",
+      "task": "grid100"
+    },
+    {
+      "exception_type": "ValueError",
+      "family": "e22",
+      "message": "particle_birth_death requires prior_kind='particles' (a trainable table)",
+      "models_constructed": 0,
+      "operation": "full preset plus task MoG prior",
+      "result": "RECIPE_REJECTED"
+    },
+    {
+      "capacity_measured": false,
+      "families": [
+        "atlas-derived",
+        "e22-derived"
+      ],
+      "models_constructed": 0,
+      "operation": "explicit rowless MoG/word derivative recipes",
+      "result": "VALID_RECIPE_ONLY"
+    }
+  ],
+  "qualification_input": false,
+  "schema": "particlegan_family_capacity_boundaries_v1",
+  "scientific_limits": [
+    "Pretraining BLOCKED does not prove family output incapacity or optimizer failure.",
+    "Snapshot capacity does not prove random-init learnability/full-budget sustained convergence.",
+    "Matching domain laws does not make MoG/cloud or live/selected/noisy cohorts interchangeable.",
+    "Keep fulltarget covariance/mass/precision/inverse gates unchanged; no finite-atom exemption to forcePASS.",
+    "Current Tier1 failures of other families remain measured failures; missing raw streams prevent exact optimization mechanism attribution.",
+    "Root reported newerPR265 at c68d77e8ee61de5edfd98828792cf55edbab285f; this153c report doesnot audit or incorporate its claims. No old word-objective bug is inferred."
+  ],
+  "source_bindings": {
+    "AGENTS.md": {
+      "bytes": 1861,
+      "path": "AGENTS.md",
+      "sha256": "66f37b7aa960ec7066d603f539c1e8ce88e3dd63e5bee3ad3b58a1a6ca6bc5f2"
+    },
+    "EXPERIMENTATION.md": {
+      "bytes": 40181,
+      "path": "EXPERIMENTATION.md",
+      "sha256": "b82d8c57121713266c17e1f919fbc618c055c732e5f62d29587ff3163d8d415c"
+    },
+    "benchmarks/toy_audit/api_images.py": {
+      "bytes": 86442,
+      "path": "benchmarks/toy_audit/api_images.py",
+      "sha256": "243190aba0c5870668a63289b771dc6f784c9460b890bc6a77e12cc2796d7184"
+    },
+    "benchmarks/toy_audit/api_ring16.py": {
+      "bytes": 2878,
+      "path": "benchmarks/toy_audit/api_ring16.py",
+      "sha256": "28b7bddc2a72538177431db7318bfd6778fe35fe06e1292b1701a315f75801ff"
+    },
+    "benchmarks/toy_audit/api_vectors.py": {
+      "bytes": 50536,
+      "path": "benchmarks/toy_audit/api_vectors.py",
+      "sha256": "9707af96fa43f76fad5481b6d6ec76e317957ec8e309ea96cc079ee95c2058af"
+    },
+    "benchmarks/toy_audit/definition_quality.py": {
+      "bytes": 19193,
+      "path": "benchmarks/toy_audit/definition_quality.py",
+      "sha256": "42d835ab7a0937a6c3759dd719691c721663b7857cb990405253e90f7fbd4cc9"
+    },
+    "benchmarks/toy_audit/ring16_quality.py": {
+      "bytes": 1027,
+      "path": "benchmarks/toy_audit/ring16_quality.py",
+      "sha256": "c666909ee8ed22ecb7a72f4185556f82b0b6d4ebd8aac871d58ed75b7ebf9db6"
+    },
+    "benchmarks/transfer_suite/vector_tasks.py": {
+      "bytes": 22296,
+      "path": "benchmarks/transfer_suite/vector_tasks.py",
+      "sha256": "3ee4eb27759f61a430029c80b7772cac3dca2fb2ac84919ace0db94efca1e0b0"
+    },
+    "configs/forge/ideas/atlas.json": {
+      "bytes": 1502,
+      "path": "configs/forge/ideas/atlas.json",
+      "sha256": "b8a7d65760d0c21d2b3ccd65564085a6e23cde20775791ecb0f8f932609cec65"
+    },
+    "configs/forge/ideas/e22.json": {
+      "bytes": 1494,
+      "path": "configs/forge/ideas/e22.json",
+      "sha256": "434aac4241443ad51ccac2e3e6d620eba9e8131336ca66d1e157b9b1937aaad0"
+    },
+    "configs/forge/views/discriminator_stability.json": {
+      "bytes": 4104,
+      "path": "configs/forge/views/discriminator_stability.json",
+      "sha256": "007660b1a48ed597ffe4a9b3bdfc33ed50fe3aa8086502908a2a4ca63f24d48b"
+    },
+    "docs/atlas.md": {
+      "bytes": 8836,
+      "path": "docs/atlas.md",
+      "sha256": "af794c6615eb0d61625e1d707c48d307bbcf0164a2209a2ffec4c00c56be401b"
+    },
+    "docs/e22.md": {
+      "bytes": 17837,
+      "path": "docs/e22.md",
+      "sha256": "d08fab46e24d1cb095697ce90bfc2ee4b639e333a050044905e4d88ad70ecc49"
+    },
+    "experiments/forge/api.py": {
+      "bytes": 34678,
+      "path": "experiments/forge/api.py",
+      "sha256": "ddcf837779f963bc4c38d6484274163734047dc54fe6dad242390c010e401b93"
+    },
+    "experiments/forge/behavior_adapters.py": {
+      "bytes": 25319,
+      "path": "experiments/forge/behavior_adapters.py",
+      "sha256": "938dc95bc6d1035c9fab61feaf0a42af784e412624195323929c6324274eddd4"
+    },
+    "experiments/forge/boundaries.py": {
+      "bytes": 15010,
+      "path": "experiments/forge/boundaries.py",
+      "sha256": "89a1782dd568295a981a03edf5868a140dd10f5d7fec75480a253dcc67590e66"
+    },
+    "experiments/forge/priors.py": {
+      "bytes": 2701,
+      "path": "experiments/forge/priors.py",
+      "sha256": "874466861600410f361fce6887546e6624d6d88b9884a821cb3bf88482106c2f"
+    },
+    "experiments/forge/sampling.py": {
+      "bytes": 8632,
+      "path": "experiments/forge/sampling.py",
+      "sha256": "b208ae580347d9f70375035ce26d0f7b628a273aa3443037ee8d5f8ee3855e70"
+    },
+    "experiments/forge/word_adapter.py": {
+      "bytes": 10238,
+      "path": "experiments/forge/word_adapter.py",
+      "sha256": "26b59497d3c5b4534b9c31e8d34fa0d84f52acdeb4ed9d5c54b73ae2be1eb5f8"
+    },
+    "reports/forge/DEVELOP_INTEGRATION.md": {
+      "bytes": 4772,
+      "path": "reports/forge/DEVELOP_INTEGRATION.md",
+      "sha256": "6ddc023cfe5e9dce4a12bd066eae8c08933976ef80a8ce48131f10a3ef8f44a1"
+    },
+    "reports/forge/EXPERIMENT_MEMORY.md": {
+      "bytes": 243448,
+      "path": "reports/forge/EXPERIMENT_MEMORY.md",
+      "sha256": "f94169e069b4f5c0fceaf7c9237c373bb15a983fb1f91a0c8b7a126acd5f4948"
+    },
+    "reports/forge/family-winner-round1/policy-representation.json": {
+      "bytes": 276377,
+      "path": "reports/forge/family-winner-round1/policy-representation.json",
+      "sha256": "729f084b5e7b076cfb5d06d65810cec1b823f5df0ebe645767d8cd43fcb74c38"
+    },
+    "reports/forge/tier1-refresh/archive.json": {
+      "bytes": 187553,
+      "path": "reports/forge/tier1-refresh/archive.json",
+      "sha256": "300031b86425c01c067af6ddead3abe4cdb6a33a0982a275b8d64a6a0fe5c60b"
+    },
+    "reports/forge/tier1-refresh/readout.json": {
+      "bytes": 94833,
+      "path": "reports/forge/tier1-refresh/readout.json",
+      "sha256": "69a607318bdc559acf3a779fc7a3251274b125ddc76b1750a869f1b023f86bc6"
+    },
+    "reports/toy_audit/api_contract/five_word_joint/publication.json": {
+      "bytes": 19559,
+      "path": "reports/toy_audit/api_contract/five_word_joint/publication.json",
+      "sha256": "9cf9c34a6e116fcd5f5c80edace68625e057217e0fff088922c1dfb0a2ed3e64"
+    }
+  },
+  "source_commit": "153c0dd4fc9b725785e133722c9194d849324f10"
+}
