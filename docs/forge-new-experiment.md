@@ -23,9 +23,13 @@ Two worked examples show the process:
 | The proposed solution or complete training configuration | Idea in `configs/forge/ideas/` | A substantive formulation change evaluated on existing tasks |
 | Which tasks support a claim, their tiers and required/diagnostic roles | Existing view in `configs/forge/views/` | Add ordinary acquisition tasks to Tier 1 of `discriminator_stability` |
 
-`python -m experiments.forge new` scaffolds an idea. Task and view registration
-currently require editing their declarations; the worked examples show those
-files and any necessary adapter changes.
+`python -m experiments.forge new` scaffolds a schema-v2 idea with a draft
+[hypothesis-to-decision contract](forge-decision-contract.md). It cannot enter
+ordinary execution until its evidence, actual delta, task/runtime bindings,
+numerical prediction, falsifier and one-round budget are reviewed and ready.
+Task and view registration require editing their declarations; the worked
+examples show those files and any necessary adapter changes. Their historical
+v1 cards retain their original identity and do not replace the new contract.
 
 Search existing tasks, API cases, readouts and memory before adding a task.
 An example can have useful successful evidence while lacking Forge registration;
@@ -137,6 +141,14 @@ plans all five required Tier 1 tasks for an existing candidate and does not
 authorize executing them. Inspect every task's compatibility and the full
 reservation ceiling before choosing a campaign.
 
+For a new v2 idea, plan its final view, tier and compute cohort after the actual
+formulation change. Inspect `decision_contract.actual_bindings` and `expected`,
+bind exact prior evidence with byte hashes and identifying fields, and follow the
+[draft-to-ready steps](forge-decision-contract.md#prepare-one-reviewable-question).
+Planning must show `READY` before submission with that same scope. A changed
+task, source, runtime or job map requires a newly reviewed binding; copying an
+old ready card supplies no authorization.
+
 Use focused tests for scorer counterexamples, shared API/adapter behavior,
 incompatibility preflight, initialization/RNG isolation and grading incomplete
 evidence. Preserve the relevant existing view contracts. A changed host need not
@@ -207,3 +219,9 @@ Lead the PR description with the question and links to the readout, task/view,
 compact evidence, GIF and generated guide. State the numerical result, whether
 full qualification exists, remaining limits and relevant validation. A passing
 code review or merged experiment registration does not promote a solution.
+
+After publication, refresh [source-bound recall](forge-research-memory.md) with
+`python -m experiments.forge compile --summaries-only`, then check
+`python -m experiments.forge compile --check`. Preserve the existing scientific
+tables and telemetry when only updating summaries; changing them requires the
+original execution envelopes and an explicitly reviewed reducer update.

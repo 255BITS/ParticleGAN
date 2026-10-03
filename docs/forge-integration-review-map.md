@@ -8,6 +8,13 @@ qualification. Preserve the [clean-MoG inventory](../reports/forge/technique-inv
 and [served-policy inventory](../reports/forge/policy-family-inventory.md) as the
 single authoritative board for each respective goal.
 
+All six preparation PRs merged into `develop` on 2026-10-03 at 02:57:40 UTC
+(2026-10-02 in America/Denver). The combined landed head is
+[`81f0b91f2478d71f86aabeb83b43bca8c7f5c587`](https://github.com/255BITS/ParticleGAN/commit/81f0b91f2478d71f86aabeb83b43bca8c7f5c587).
+Each focused head passed CI before the shared branch update. The merge includes
+the safe summary-only memory refresh and preserves the original scientific
+evidence, provenance pins and goal boards byte-for-byte.
+
 ## Review boundaries
 
 | Boundary | Review entry points | Reviewer must establish | Relevant controls |
@@ -30,14 +37,14 @@ Each branch starts independently from the inspected `develop` base. Acceptance
 records software controls and the combined integration rehearsal below; it does
 not establish empirical calibration or access to unavailable archives.
 
-| Audit priority | Focused change | Acceptance / remaining empirical work |
-| --- | --- | --- |
-| P1: repair recall and freshness | [#259](https://github.com/255BITS/ParticleGAN/pull/259), `codex/forge-audit-recall` | Concluded Forge configurations and policy trials are normalized source-bound recall inputs; exact IDs/failed bounds/mechanisms/goals link authoritative evidence; stale/missing publication coverage is visible without training |
-| P1: shared policy execution ownership | [#260](https://github.com/255BITS/ParticleGAN/pull/260), `codex/forge-audit-policy-ownership` | Immutable execution source, coordinated deduplication/admission, inherited leases and independently supervised absolute deadlines; crashed callers cannot extend paid children, and completed originals resume certification without reexecution. GPU aliases are normalized; unresolved UUID/MIG masks fail before admission. No clean-MoG qualification from policy results |
-| P1: retrieve original evidence | [#256](https://github.com/255BITS/ParticleGAN/pull/256), `codex/forge-audit-artifact-resolver` | Verified fresh-process fixture hydration of full request/evidence/result/source and selected checkpoint; pinned Git originals; explicit invalid/missing outcomes and retention ownership gaps. Actual `/ml2` archives still require a real mounted/transferred copy |
-| P1: prevent infeasible calibration spending | [#258](https://github.com/255BITS/ParticleGAN/pull/258), `codex/forge-audit-calibration-feasibility` | Read-only logical feasibility preflight and registration guard preserve bound published matrices and original hashes. **A justified new screen, independent positive/negative references, and empirical accepted calibration remain pending** |
-| P2: hypothesis-to-decision contract | [#262](https://github.com/255BITS/ParticleGAN/pull/262), `codex/forge-audit-decision-contract` | New bare research ideas require reviewed v2 contracts: exact prior evidence, effective recipe/prior/component initialization, full task/job/runtime bindings, numerical prediction/falsifier, competing explanation and bounded stop/review rules. Missing, nonfinite, invalid or duplicate metrics remain incomplete. Exact legacy declarations and separately verified registered searches/lanes/promotions retain their original contracts; causal judgment remains research review |
-| P2: maintain publication controls and make integration reviewable | [#257](https://github.com/255BITS/ParticleGAN/pull/257), `codex/forge-audit-publication` | Maintained reducers live in the experiment package; original negative controls enter default CI; frozen parity and deterministic bytes pass; original audit/reproduction identities and this review map are preserved |
+| Audit priority | Focused change | Merged commit | Acceptance / remaining empirical work |
+| --- | --- | --- | --- |
+| P1: repair recall and freshness | [#259](https://github.com/255BITS/ParticleGAN/pull/259), `codex/forge-audit-recall` | [`c6c5a3dd`](https://github.com/255BITS/ParticleGAN/commit/c6c5a3dd2bd3d247222bed72f22fbe80496a3ce6) | Concluded Forge configurations and policy trials are normalized source-bound recall inputs; exact IDs/failed bounds/mechanisms/goals link authoritative evidence; stale/missing publication coverage is visible without training |
+| P1: shared policy execution ownership | [#260](https://github.com/255BITS/ParticleGAN/pull/260), `codex/forge-audit-policy-ownership` | [`57f1b59a`](https://github.com/255BITS/ParticleGAN/commit/57f1b59ada2610d68437c0431eb7f8c451e4e62c) | Immutable execution source, coordinated deduplication/admission, inherited leases and independently supervised absolute deadlines; crashed callers cannot extend paid children, and completed originals resume certification without reexecution. GPU aliases are normalized; unresolved UUID/MIG masks fail before admission. No clean-MoG qualification from policy results |
+| P1: retrieve original evidence | [#256](https://github.com/255BITS/ParticleGAN/pull/256), `codex/forge-audit-artifact-resolver` | [`694aaf3f`](https://github.com/255BITS/ParticleGAN/commit/694aaf3fd0ca4f75c84261897291dbe63be82b7f) | Verified fresh-process fixture hydration of full request/evidence/result/source and selected checkpoint; pinned Git originals; explicit invalid/missing outcomes and retention ownership gaps. Actual `/ml2` archives still require a real mounted/transferred copy |
+| P1: prevent infeasible calibration spending | [#258](https://github.com/255BITS/ParticleGAN/pull/258), `codex/forge-audit-calibration-feasibility` | [`498a63ca`](https://github.com/255BITS/ParticleGAN/commit/498a63ca71de9a00e1858d56656064ef4a2b29f3) | Read-only logical feasibility preflight and registration guard preserve bound published matrices and original hashes. **A justified new screen, independent positive/negative references, and empirical accepted calibration remain pending** |
+| P2: hypothesis-to-decision contract | [#262](https://github.com/255BITS/ParticleGAN/pull/262), `codex/forge-audit-decision-contract` | [`da5aed2b`](https://github.com/255BITS/ParticleGAN/commit/da5aed2b24438959322836125c4e0aa8d1b8ebbb) | New bare research ideas require reviewed v2 contracts: exact prior evidence, effective recipe/prior/component initialization, full task/job/runtime bindings, numerical prediction/falsifier, competing explanation and bounded stop/review rules. Missing, nonfinite, invalid or duplicate metrics remain incomplete. Exact legacy declarations and separately verified registered searches/lanes/promotions retain their original contracts; causal judgment remains research review |
+| P2: maintain publication controls and make integration reviewable | [#257](https://github.com/255BITS/ParticleGAN/pull/257), `codex/forge-audit-publication` | [`81f0b91f`](https://github.com/255BITS/ParticleGAN/commit/81f0b91f2478d71f86aabeb83b43bca8c7f5c587) | Maintained reducers live in the experiment package; original negative controls enter default CI; frozen parity and deterministic bytes pass; original audit/reproduction identities and this review map are preserved |
 
 The calibration preparation does not produce new data or an accepted screen.
 Logical infeasibility can block wasteful matrix filling; engineering checks
@@ -57,15 +64,14 @@ provide global admission or spending guarantees. Use the same queue for these
 shared ownership and bounded-round guarantees. A descriptive initialization
 label alone is not proof that a changed mechanism was exercised.
 
-## Merge order and combined verification
+## Landed integration and combined verification
 
-Recommended order into `develop`: artifact access (#256), this publication PR,
-recall, policy ownership, calibration feasibility, then the decision contract.
-These are independent code-review units, not stacked PRs. The order exposes the
-evidence and publication surfaces before agents rely on fresh recall and launch
-contracts. Integrate the focused heads into a temporary verification checkout
-first; resolve any localized shared-file changes in `__main__.py`, planning,
-knowledge or contracts while preserving all scientific receipts.
+The six independent review units were integrated and verified in a temporary
+checkout before the combined update to `develop`. Historical rehearsal details
+below describe that preparation, rather than pending merge instructions. Shared
+CLI dispatch and catalog conflicts were resolved while preserving scientific
+receipts; no qualification regrade or training run was used to complete the
+merge.
 
 The initial local rehearsal combined #256, #257, #259, #258 and #260. Its only
 conflicts were catalog metadata and adjacent CLI early-return blocks. Preserve
@@ -84,12 +90,12 @@ The final six-head rehearsal used #256 `95a30442`, #257 `1ae7749f`, #258
 merge conflict was catalog metadata. The combined inventory covers
 11,720/11,720 tracked paths, retains the three original `pinned_sources` entries,
 and matches staged Git blob identities. The final documentation follow-up in
-this PR changes no tested implementation. This rehearsal did not merge any PR
-into `develop`.
+this PR changed no tested implementation. That rehearsal preceded the authorized
+merge; the merged commit identities are recorded above.
 
-After the final decision/readout hook changes a reducer hash, refresh recall in
-the integration checkout using `python -m experiments.forge compile
---summaries-only`, then verify `python -m experiments.forge compile --check`.
+For a later reporting or reducer-source change, refresh recall using
+`python -m experiments.forge compile --summaries-only`, then verify
+`python -m experiments.forge compile --check`.
 The summary-only mode preserves published qualification and telemetry snapshots.
 Plain `compile` is not the reporting-merge workflow: it can regrade historical
 scientific inputs through the live reducer. A stale reducer fingerprint warrants
