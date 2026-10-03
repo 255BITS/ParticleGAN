@@ -70,6 +70,54 @@ def _outputs(root):
     return {path: path.read_bytes() for path in (root / "reports/forge").glob("technique-inventory.*")}
 
 
+def _copy_word_diagnostics(root):
+    selection = read_json(ROOT / publication.WORD_TASK_SELECTION)
+    paths = [publication.WORD_TASK_SELECTION]
+    paths += [Path(row[key]["path"]) for row in selection["recipes"] for key in ("receipt", "parent")]
+    for relative in paths:
+        (root / relative).parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(ROOT / relative, root / relative)
+    return selection
+
+
+@pytest.mark.parametrize("tamper,match", [
+    ("scope", "nonqualifying"), ("qualification_input", "nonqualifying"),
+    ("receipt", "artifact identity"), ("recipe", "recipe identity"), ("omitted_recipe", "recipe identity"),
+    ("final_metrics", "final_metrics binding"), ("runtime", "runtime binding"),
+    ("convergence", "convergence binding"), ("budget", "task or convergence binding"),
+    ("escape", "artifact path"),
+])
+def test_word_diagnostics_reject_unbound_results(tmp_path, tamper, match):
+    selection = _copy_word_diagnostics(tmp_path)
+    row = selection["recipes"][0]
+    if tamper == "scope":
+        selection["scope"] = "qualification"
+    elif tamper == "qualification_input":
+        row[tamper] = True
+    elif tamper == "receipt":
+        (tmp_path / row["receipt"]["path"]).write_text("{}\n")
+    elif tamper == "recipe":
+        row["recipe"]["lr"] *= 2
+        row["full_recipe_sha256"] = stable_hash(row["recipe"])
+    elif tamper == "omitted_recipe":
+        assert "beta2_end" not in read_json(tmp_path / row["receipt"]["path"])["recipe"]
+        row["recipe"]["beta2_end"] = .99
+        row["full_recipe_sha256"] = stable_hash(row["recipe"])
+    elif tamper == "final_metrics":
+        row[tamper]["modes"] = 4
+    elif tamper == "runtime":
+        row[tamper]["device"] = "cpu"
+    elif tamper == "convergence":
+        row[tamper]["passing_suffix"] = 23
+    elif tamper == "budget":
+        row["task"]["updates"] -= 1
+    else:
+        row["receipt"]["path"] = "../outside.json"
+    atomic_json(tmp_path / publication.WORD_TASK_SELECTION, selection)
+    with pytest.raises(ValueError, match=match):
+        publication._word_task_diagnostics(tmp_path, None)
+
+
 def test_current_publication_needs_no_originals_and_is_idempotent(evidence):
     root, _ = evidence
     result = publication.publish_current(root)
@@ -535,3 +583,30 @@ def test_committed_cohorts_rebuild_every_scientific_row_in_a_checkout_without_ra
     assert all((tmp_path / relative).read_bytes() == original for relative, original in snapshot_bytes.items())
     assert not (tmp_path / "reports/forge/attempts").exists()
     assert len(list((tmp_path / "reports/forge").rglob("*.md"))) == 1
+    _copy_word_diagnostics(tmp_path)
+    updated = read_json(publication.publish_current(tmp_path)["json"])
+    for key in ("rows", "configuration_rows", "evidence_rows", "archived_evidence_rows", "tier_requirements"):
+        assert updated.get(key) == result.get(key)
+    diagnostics = updated["task_diagnostics"]
+    assert diagnostics["scope"] == "task_only_diagnostic"
+    assert diagnostics["qualification_input"] is False and diagnostics["qualification_reuse"] is False
+    assert [row["gate_status"] for row in diagnostics["rows"]] == ["PASS"] * 3
+    assert [row["convergence"]["passing_suffix"] for row in diagnostics["rows"]] == [24, 21, 22]
+    markdown = (tmp_path / "reports/forge/technique-inventory.md").read_text()
+    assert "do not replace the configurations above, fill Tier 1 cells, or qualify defaults" in markdown
+    assert "0.997103" in markdown and "0.999942" in markdown and "0.996137" in markdown
+    assert publication._word_task_diagnostics(tmp_path, "cpu") is None
+    assert publication._word_task_diagnostics(tmp_path, "cuda") == diagnostics
+    before = _outputs(tmp_path)
+    times = {path: path.stat().st_mtime_ns for path in before}
+    publication.publish_current(tmp_path)
+    assert _outputs(tmp_path) == before
+    assert times == {path: path.stat().st_mtime_ns for path in before}
+    historical = read_json(publication.publish_current(
+        tmp_path, recorded_policy="configs/forge/views/discriminator_stability.json")["json"])
+    assert "task_diagnostics" not in historical and historical["rows"] == updated["rows"]
+    publication.publish_current(tmp_path)
+    (tmp_path / diagnostics["rows"][0]["receipt"]["path"]).write_text("{}\n")
+    with pytest.raises(ValueError, match="artifact identity"):
+        publication.publish_current(tmp_path)
+    assert _outputs(tmp_path) == before

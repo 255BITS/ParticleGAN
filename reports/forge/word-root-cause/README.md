@@ -9,7 +9,8 @@ was added.
 
 These are **task-only diagnostic results**, not ordinary Tier 1 qualifications
 or new default selections. The existing [current technique leaderboard](../technique-inventory.md)
-and its old cells stay unchanged. K3P/KA2 clean/full arms disable existing training
+retains its original qualification cells and displays these diagnostics separately.
+K3P/KA2 clean/full arms disable existing training
 noise and the short network horizon cap, crossing Forge's strict mechanism
 activation boundaries relative to their original parents. They are authorized
 existing-control ablations, **not ordinary same-signature configuration searches**.

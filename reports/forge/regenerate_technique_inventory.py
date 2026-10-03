@@ -1,6 +1,7 @@
 """Update the single current technique leaderboard from validated evidence.
 
 Default regeneration uses committed numerical snapshots and compact receipts.
+Task-only word diagnostics are displayed separately and supply no tier credit.
 --source-commit independently regrades hydrated original receipts and registers
 new measured rows before updating the same leaderboard. No command trains.
 --recorded-policy rebuilds existing rows under their exact archived view policy.
@@ -575,6 +576,7 @@ def compose(root: Path | str = REPOSITORY_ROOT, *, original_report="reports/forg
 
 EVIDENCE_MANIFEST = Path("reports/forge/technique-evidence/manifest.json")
 CURRENT_PREFIX = Path("reports/forge/technique-inventory")
+WORD_TASK_SELECTION = Path("configs/forge/selections/word-joint-task-v1.json")
 CONTRACT_CATALOGS = ("recipe_contracts", "protocol_contracts", "task_contracts", "status_reasons")
 POLICY_FIELDS = ("view", "view_revision", "policy_fingerprint", "tier_requirements")
 
@@ -622,6 +624,71 @@ def _archived_reports(root, manifest):
         fingerprints.add(policy["policy_fingerprint"])
         reports.extend((policy, entry, *_snapshot(root, entry, policy)) for entry in policy["cohorts"])
     return reports
+
+
+def _word_task_diagnostics(root, execution_backend):
+    """Project committed recommendations without regrading or filling tier cells."""
+    path = root / WORD_TASK_SELECTION
+    if not path.is_file():
+        return None
+    selection = read_json(path)
+    flags = ("qualification_input", "qualification_reuse", "eligible_for_default")
+    if (selection.get("schema_version") != 1 or selection.get("scope") != "task_only_diagnostic"
+            or any(selection.get(flag) is not False for flag in flags)):
+        raise ValueError("word diagnostics must be explicitly nonqualifying")
+
+    def artifact(binding):
+        relative = Path(binding["path"])
+        target = (root / relative).resolve()
+        if relative.is_absolute() or not target.is_relative_to(root):
+            raise ValueError("invalid word diagnostic artifact path")
+        if (not target.is_file() or file_hash(target) != binding["sha256"]
+                or ("bytes" in binding and target.stat().st_size != binding["bytes"])):
+            raise ValueError("word diagnostic artifact identity mismatch")
+        return target
+
+    rows, families = [], set()
+    for selected in selection["recipes"]:
+        if (any(selected.get(flag) is not False for flag in flags)
+                or selected["family"] in families):
+            raise ValueError("word diagnostic selections must be unique and nonqualifying")
+        families.add(selected["family"])
+        receipt = read_json(artifact(selected["receipt"]))
+        artifact(selected["parent"])
+        if (receipt.get("qualification_input") is not False or receipt.get("eligible_for_default") is not False
+                or receipt["id"] != selected["arm"] or receipt["family"] != selected["family"]
+                or receipt["parent"] != selected["parent"]["path"]
+                or receipt["parent_sha256"] != selected["parent"]["sha256"]):
+            raise ValueError("word diagnostic receipt selection mismatch")
+        executed_recipe = {key: field["value"] for key, field in receipt["field_ownership"]["recipe_fields"].items()}
+        if (stable_hash(selected["recipe"]) != selected["full_recipe_sha256"]
+                or selected["full_recipe_sha256"] != stable_hash(executed_recipe)
+                or stable_hash(receipt["recipe"]) != selected["normalized_recipe_sha256"]
+                or any(selected["recipe"].get(key) != value for key, value in receipt["recipe"].items())):
+            raise ValueError("word diagnostic recipe identity mismatch")
+        for key in ("source_commit", "source_digest", "task_fingerprint", "prior", "initialization",
+                    "runtime", "rng_manifest_sha256", "final_metrics"):
+            if selected[key] != receipt[key]:
+                raise ValueError(f"word diagnostic {key} binding mismatch")
+        task, evaluation = receipt["task"], receipt["task"]["evaluation"]
+        if (task["id"] != "five_word_joint_acquisition"
+                or selected["task"]["path"] != "configs/forge/tasks/five_word_joint_acquisition.json"
+                or selected["task"]["updates"] != task["execution"]["steps"]
+                or selected["task"]["schedule_horizon"] != task["execution"]["original_schedule_horizon"]
+                or selected["task"]["observations"] != evaluation["observations"]
+                or selected["task"]["terminal_passes"] != evaluation["minimum_stable_checks"]
+                or selected["task"]["sampling_law"] != receipt["sampling_law"]
+                or receipt["sampling_law"] != evaluation["sampling_law"]
+                or selected["convergence"] != receipt["grade"]["evaluator_result"]["convergence"]):
+            raise ValueError("word diagnostic task or convergence binding mismatch")
+        backend = receipt["runtime"]["device"].split(":", 1)[0]
+        if execution_backend is None or execution_backend == backend:
+            rows.append(dict(deepcopy(selected), gate_status=receipt["grade"]["gate_status"]))
+    if not rows:
+        return None
+    result = {key: deepcopy(value) for key, value in selection.items() if key != "recipes"}
+    result.update(selection={"path": WORD_TASK_SELECTION.as_posix(), "sha256": file_hash(path)}, rows=rows)
+    return result
 
 
 def _current_markdown(result, root, path):
@@ -688,9 +755,33 @@ def _current_markdown(result, root, path):
               ("This command uses the exact archived policy and registered snapshots; it does not resolve new declarations. "
                "New evidence for a later view revision requires its own compatible evidence registration."
                if recorded_policy else
-               "After a new experiment, use `--source-commit <executed-commit>` to independently regrade its "
-               "hydrated original receipts and update this leaderboard. Source snapshots are provenance, not additional leaderboards."), "",
+               "For ordinary Forge qualification, use `--source-commit <executed-commit>` to independently regrade "
+               "hydrated original receipts and update this leaderboard. Task-only word diagnostics are read from their "
+               "committed recipe selections and compact receipts. Source snapshots are provenance, not additional leaderboards."), "",
               f"Publication input digest `{result['provenance']['input_digest']}`.", ""]
+    diagnostics = result.get("task_diagnostics")
+    if diagnostics:
+        selection_link = os.path.relpath(root / diagnostics["selection"]["path"], path.parent)
+        lines += ["## Five-word joint task diagnostics", "",
+                  "The bounded word-task study recommends the exact recipes below. These are **task-only diagnostics**: "
+                  "they do not replace the configurations above, fill Tier 1 cells, or qualify defaults. "
+                  "Each result retains its executed source, recipe, prior, initialization, budget and clean/live sampling law.", "",
+                  f"[Exact task-only recipes]({selection_link}) · "
+                  "[Root cause, all 18 runs and training GIFs](word-root-cause/README.md)", "",
+                  "| Family | Selected diagnostic / receipt | Result | Terminal passing suffix | Modes / quality | TV | Minimum inverse probability | Executed commit | Compute |",
+                  "| --- | --- | --- | ---: | --- | ---: | ---: | --- | --- |"]
+        labels = {"k3p": "K3P", "ka2": "KA2", "r1r2": "R1/R2"}
+        for row in diagnostics["rows"]:
+            receipt_link = os.path.relpath(root / row["receipt"]["path"], path.parent)
+            metrics, convergence, runtime = row["final_metrics"], row["convergence"], row["runtime"]
+            values = [labels.get(row["family"], row["family"]), f"[`{row['arm']}`]({receipt_link})", row["gate_status"],
+                      f"{convergence['passing_suffix']}/{convergence['observations']}",
+                      f"{metrics['modes']} / {metrics['quality_fraction']:.3f}", f"{metrics['mass_tv']:.6f}",
+                      f"{metrics['minimum_reconstruction_token_probability']:.6f}",
+                      f"`{row['source_commit'][:12]}`", runtime.get("gpu", runtime["device"])]
+            lines.append("| " + " | ".join(cell(value) for value in values) + " |")
+        lines += ["", "Use these recipes for this word host. Whole-configuration Tier 1 qualification still requires "
+                  "all required tasks under one compatible recipe and source cohort. No experiments were rerun for this publication.", ""]
     if result.get("archived_policies"):
         lines += ["Earlier view policies retain their exact numerical snapshots and receipt proofs in the companion JSON. "
                   "Their outcomes do not fill current requirements:", ""]
@@ -929,6 +1020,10 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
                                 qualification_input=False,
                                 evidence_policy={key: deepcopy(policy[key]) for key in POLICY_FIELDS})
                 result["archived_evidence_rows"].append(evidence)
+    if view_id == "discriminator_stability" and recorded_policy is None:
+        diagnostics = _word_task_diagnostics(root, execution_backend)
+        if diagnostics:
+            result["task_diagnostics"] = diagnostics
     result["provenance"] = {"publication_reducer_sha256": file_hash(Path(__file__)),
                             "evidence_manifest_sha256": stable_hash(manifest),
                             "trainer_family_registry_sha256": file_hash(root / "configs/forge/trainer-families.json")
