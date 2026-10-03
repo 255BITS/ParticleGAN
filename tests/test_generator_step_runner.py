@@ -60,6 +60,15 @@ def planned(tmp_path, cases, monkeypatch):
     return runner.plan_study(spec_for(tmp_path), cases=cases)
 
 
+@pytest.fixture
+def isolated_prior_for_capacity_control(monkeypatch):
+    """The synthetic capacity card has no local historical-artifact dependency.
+
+    Dedicated prior-carryover controls below exercise the genuine verifier.
+    """
+    monkeypatch.setattr(runner, "verify_prior_carryover", lambda: runner.prior_carryover())
+
+
 def refresh_card(spec, edit):
     path = Path(spec["representation_card"]["path"])
     data = json.loads(path.read_text())
@@ -117,7 +126,8 @@ def test_registered_gate_horizon_sampling_drift_rejected(tmp_path, cases, field,
 @pytest.mark.parametrize("edit", [lambda d: d["records"].pop(),
                                   lambda d: d["records"].__setitem__(1, deepcopy(d["records"][0])),
                                   lambda d: d["records"][0].update(case_id="unknown")])
-def test_missing_duplicate_unknown_capacity_denominator_rejected(tmp_path, cases, monkeypatch, edit):
+def test_missing_duplicate_unknown_capacity_denominator_rejected(
+        tmp_path, cases, monkeypatch, edit, isolated_prior_for_capacity_control):
     spec = spec_for(tmp_path)
     refresh_card(spec, edit)
     monkeypatch.setattr(runner, "capacity_module", lambda: pytest.fail("invalid card invoked replay"))
@@ -125,7 +135,8 @@ def test_missing_duplicate_unknown_capacity_denominator_rejected(tmp_path, cases
         runner.plan_study(spec, cases=cases)
 
 
-def test_source_stale_capacity_failure_propagates_before_queue(tmp_path, cases, monkeypatch):
+def test_source_stale_capacity_failure_propagates_before_queue(
+        tmp_path, cases, monkeypatch, isolated_prior_for_capacity_control):
     def reject(*args):
         raise ValueError("capacity source drift")
     monkeypatch.setattr(runner, "capacity_module", lambda: SimpleNamespace(SHARED_OVERRIDES=runner.OVERRIDES,
