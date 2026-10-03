@@ -1,0 +1,123 @@
+{
+  "deployments": 0,
+  "develop_commit": "4749b2780add539df4bd8d2dd1d3cc9f002f77ad",
+  "merged_word_pr": {
+    "baseRefName": "develop",
+    "headRefOid": "c68d77e8ee61de5edfd98828792cf55edbab285f",
+    "isDraft": false,
+    "mergeCommit": {
+      "oid": "4749b2780add539df4bd8d2dd1d3cc9f002f77ad"
+    },
+    "mergedAt": "2026-10-03T07:46:45Z",
+    "number": 265,
+    "state": "MERGED",
+    "statusCheckRollup": [
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-03T07:25:15Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/255BITS/ParticleGAN/actions/runs/37106179049/job/111155044775",
+        "name": "CPU / Python 3.10",
+        "startedAt": "2026-10-03T07:23:24Z",
+        "status": "COMPLETED",
+        "workflowName": "Tests"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-03T07:25:29Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/255BITS/ParticleGAN/actions/runs/37106179049/job/111155044872",
+        "name": "CPU / Python 3.11",
+        "startedAt": "2026-10-03T07:23:24Z",
+        "status": "COMPLETED",
+        "workflowName": "Tests"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-03T07:45:01Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/255BITS/ParticleGAN/actions/runs/37106179049/job/111155044941",
+        "name": "CPU / Python 3.12",
+        "startedAt": "2026-10-03T07:23:25Z",
+        "status": "COMPLETED",
+        "workflowName": "Tests"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-10-03T07:45:44Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/255BITS/ParticleGAN/actions/runs/37106179049/job/111158446034",
+        "name": "Build release distributions",
+        "startedAt": "2026-10-03T07:45:03Z",
+        "status": "COMPLETED",
+        "workflowName": "Tests"
+      }
+    ],
+    "title": "Repair five-word joint grading and publish passing K3P, KA2 and R1/R2 recipes"
+  },
+  "merges_by_this_task": 0,
+  "observed_utc": "2026-10-03T08:37:13Z",
+  "open_toy_and_integration_prs": [
+    {
+      "baseRefName": "develop",
+      "headRefName": "codex/routed-latent-coverage-fresh-owner",
+      "headRefOid": "7943dda321c1011dd3c86fc598a92b3493159a83",
+      "isDraft": true,
+      "number": 261,
+      "title": "Add routed latent-coverage convergence diagnostic",
+      "updatedAt": "2026-10-03T02:26:33Z"
+    },
+    {
+      "baseRefName": "codex/routed-remote-conditioning-publication-20261002",
+      "headRefName": "codex/toy-pr246-media-followup",
+      "headRefOid": "491756abc88d04ae3afe40893c5a7d6d819b5035",
+      "isDraft": false,
+      "number": 254,
+      "title": "Illustrate the remote-cue toy with actual source-bound training observations",
+      "updatedAt": "2026-10-02T21:19:57Z"
+    },
+    {
+      "baseRefName": "develop",
+      "headRefName": "codex/routed-terminal-cancellation",
+      "headRefOid": "a31ce8c1ddac831ae032ecaf4b43d84919cd6173",
+      "isDraft": false,
+      "number": 253,
+      "title": "Add native routed terminal-cancellation convergence benchmark",
+      "updatedAt": "2026-10-02T19:54:27Z"
+    },
+    {
+      "baseRefName": "master",
+      "headRefName": "develop",
+      "headRefOid": "4749b2780add539df4bd8d2dd1d3cc9f002f77ad",
+      "isDraft": false,
+      "number": 247,
+      "title": "WIP: 0.9.0 \u2014 Forge-qualified solution and research review",
+      "updatedAt": "2026-10-03T07:46:47Z"
+    },
+    {
+      "baseRefName": "develop",
+      "headRefName": "codex/routed-remote-conditioning-publication-20261002",
+      "headRefOid": "b35dee597943c95499ca4a94d3cd141bd19f8fda",
+      "isDraft": false,
+      "number": 246,
+      "title": "Add routed conditioning toy with paired convergence diagnostics",
+      "updatedAt": "2026-10-02T16:28:57Z"
+    }
+  ],
+  "qualification_input": false,
+  "query_evidence": [
+    {
+      "bytes": 39656,
+      "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/open-pr-checkpoint.json",
+      "sha256": "7d48305037b53e7813a786874ba3df1784d498d6de1b7132ad267219679b26f7"
+    },
+    {
+      "bytes": 1499,
+      "path": "/ml2/hypergan/forge-continuous-leaderboard-20261003/pr265-merged-checkpoint.json",
+      "sha256": "29106bdbe49aa2e29fa923e60e89f77c0b65e85b6e969d5383de717739ca6b5e"
+    }
+  ],
+  "schema": "remote_toy_pr_checkpoint_v1",
+  "scientific_replay_source_unchanged": true,
+  "source": "Authenticated read-only GitHub CLI and origin/develop fetch"
+}
