@@ -1,0 +1,61 @@
+{
+  "purpose": "diagnostic only",
+  "rows": [
+    {
+      "task": "two_pole",
+      "returncode": 0,
+      "status": "FAIL",
+      "seconds": 5.16705755610019,
+      "artifact": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/two_pole/h_n05r06_mixup_c0p01_lr15/status.json"
+    },
+    {
+      "task": "cover_leftover",
+      "returncode": 0,
+      "status": "FAIL",
+      "seconds": 9.056909475941211,
+      "artifact": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/cover_leftover/h_n05r06_mixup_c0p01_lr15/status.json"
+    },
+    {
+      "task": "mid_scale_identity",
+      "returncode": 0,
+      "status": "FAIL",
+      "seconds": 12.916565170045942,
+      "artifact": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/mid_scale_identity/h_n05r06_mixup_c0p01_lr15/status.json"
+    },
+    {
+      "task": "vector_anisotropic",
+      "returncode": 0,
+      "status": "PASS",
+      "seconds": 15.561716921860352,
+      "artifact": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/vector_anisotropic/h_n05r06_mixup_c0p01_lr15/status.json"
+    },
+    {
+      "task": "vector_two_broad",
+      "returncode": 0,
+      "status": "PASS",
+      "seconds": 11.027170618996024,
+      "artifact": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/vector_two_broad/h_n05r06_mixup_c0p01_lr15/status.json"
+    },
+    {
+      "task": "unused_token_hold",
+      "returncode": 0,
+      "status": "FAIL",
+      "seconds": 4.9993027141317725,
+      "artifact": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/unused_token_hold/h_n05r06_mixup_c0p01_lr15/status.json"
+    },
+    {
+      "task": "ae_gan_hold",
+      "returncode": 0,
+      "status": "FAIL",
+      "seconds": 5.305670032976195,
+      "artifact": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/ae_gan_hold/h_n05r06_mixup_c0p01_lr15/status.json"
+    },
+    {
+      "task": "vector_spiral",
+      "returncode": 0,
+      "status": "PASS",
+      "seconds": 12.72983189788647,
+      "artifact": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/vector_spiral/h_n05r06_mixup_c0p01_lr15/status.json"
+    }
+  ]
+}

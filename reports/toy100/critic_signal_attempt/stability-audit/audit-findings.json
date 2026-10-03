@@ -1,0 +1,185 @@
+{
+  "archive_sha256": "ed4a61dcfebc13f1134630db096aad043d60e4846083b4a1384e871ee9ebb334",
+  "archive_hash_matches": true,
+  "archived_source_file_count": 125,
+  "archived_source_mismatches": [],
+  "cold_checkpoint_sha256": "799181c2a68df02ee5a7a5963b4a5e4fbf23677623c4fcd9f8757460944155b2",
+  "cold_checkpoint_hash_matches": true,
+  "hold_state_differences": [],
+  "dense_metrics_bitwise_identical": true,
+  "cold_step": 1200,
+  "cold_prior_shape": [
+    12,
+    4
+  ],
+  "cold_optimizer_step_sets": {
+    "opt_g": [
+      1200
+    ],
+    "opt_d": [
+      1200
+    ]
+  },
+  "cold_noise": {
+    "output_std": 0.029,
+    "output_sigma": 0.029,
+    "total_steps": 1200,
+    "output_noise_warmup": 0.2,
+    "input_sigma_nominal": 0.0004166666666666763
+  },
+  "receipts": [
+    {
+      "path": "/ml2/hypergan/gan-attempts/batch-20260924T153037Z/critic_signal/20260924T153037Z-1298555/repo/reports/toy100/critic_signal_attempt/batch-h/h_n05r06_mixup_c0p01_lr15/mode_hold/signal-policy.json.gz",
+      "updates": 2400,
+      "rates": {
+        "g": [
+          0.0015
+        ],
+        "d": [
+          0.0015
+        ],
+        "prior": [
+          0.003
+        ]
+      },
+      "options": {
+        "consistency": "mixup",
+        "consistency_coeff": 0.01,
+        "consistency_sigma": 0.1,
+        "noise": "fixed",
+        "sigma": 0.05,
+        "smooth": 0.0
+      },
+      "noise": {
+        "calls": 10800,
+        "effective_sigma_max": 0.05,
+        "effective_sigma_min": 0.05
+      },
+      "signal_work": {
+        "consistency_applications": 1200,
+        "consistency_forwards": 3600
+      },
+      "objective": "GANLoss.g_loss only; no cover, L2, or VICReg"
+    },
+    {
+      "path": "/ml2/hypergan/gan-attempts/batch-20260924T153037Z/critic_signal/20260924T153037Z-1298555/repo/reports/toy100/critic_signal_attempt/h-own-hold/optimizer-receipt.json.gz",
+      "updates": 2400,
+      "rates": {
+        "g": [
+          0.0015
+        ],
+        "d": [
+          0.0015
+        ],
+        "prior": [
+          0.003
+        ]
+      },
+      "options": {
+        "consistency": "mixup",
+        "consistency_coeff": 0.01,
+        "consistency_sigma": 0.1,
+        "noise": "fixed",
+        "sigma": 0.05,
+        "smooth": 0.0
+      },
+      "noise": {
+        "calls": 10800,
+        "effective_sigma_min": 0.05,
+        "effective_sigma_max": 0.05
+      },
+      "signal_work": {
+        "consistency_forwards": 3600,
+        "consistency_applications": 1200
+      },
+      "objective": "GANLoss.g_loss only; no cover, L2, or VICReg"
+    }
+  ],
+  "hold_first_failure": {
+    "step": 1255,
+    "modes": 8,
+    "n_modes": 8,
+    "hq": 0.780517578125,
+    "cover": 1.0,
+    "effective_modes": 6.778642654418945,
+    "sample_count": 4096,
+    "hq_counts": [
+      21,
+      320,
+      332,
+      657,
+      314,
+      319,
+      542,
+      692
+    ],
+    "nearest_counts": [
+      345,
+      692,
+      341,
+      657,
+      314,
+      321,
+      701,
+      725
+    ],
+    "closest_distance_per_mode": [
+      0.16527581214904785,
+      0.10096919536590576,
+      0.05953027680516243,
+      0.0016914558364078403,
+      0.02480161190032959,
+      0.054407764226198196,
+      0.016658907756209373,
+      0.026002982631325722
+    ],
+    "hq_radius": 0.21000000000000002,
+    "missing_modes": []
+  },
+  "hold_passing_checks": 750,
+  "hold_final": {
+    "step": 2400,
+    "modes": 5,
+    "n_modes": 8,
+    "hq": 0.209228515625,
+    "cover": 0.625,
+    "effective_modes": 3.292175531387329,
+    "sample_count": 4096,
+    "hq_counts": [
+      19,
+      353,
+      125,
+      0,
+      0,
+      0,
+      338,
+      22
+    ],
+    "nearest_counts": [
+      714,
+      353,
+      680,
+      657,
+      314,
+      321,
+      701,
+      356
+    ],
+    "closest_distance_per_mode": [
+      0.17262519896030426,
+      0.010006788186728954,
+      0.1358756124973297,
+      0.41625282168388367,
+      0.45084095001220703,
+      0.6076902747154236,
+      0.0401579774916172,
+      0.14273856580257416
+    ],
+    "hq_radius": 0.21000000000000002,
+    "missing_modes": [
+      3,
+      4,
+      5
+    ]
+  }
+}

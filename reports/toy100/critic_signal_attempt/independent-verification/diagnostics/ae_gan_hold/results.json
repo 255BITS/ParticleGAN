@@ -1,0 +1,207 @@
+[
+  {
+    "seconds": 2.172818026971072,
+    "shared_gate_eligible": false,
+    "stages": [
+      {
+        "artifact": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/ae_gan_hold/h_n05r06_mixup_c0p01_lr15/ae_gan_hold/episodes/h_n05r06_mixup_c0p01_lr15__ae_gan_hold.json.gz",
+        "candidate": "h_n05r06_mixup_c0p01_lr15",
+        "gate": "ae_gan_hold",
+        "metrics": {
+          "frozen_evidence_audit": "FAIL",
+          "live": {
+            "hold": 0.0022318409755825996,
+            "recon_mse": 3.917919397354126
+          },
+          "observations": [
+            {
+              "hold": 1.3794245719909668,
+              "recon_mse": 1.1776657104492188,
+              "seconds": 1.1412694160826504,
+              "step": 11
+            },
+            {
+              "hold": 1.3301119804382324,
+              "recon_mse": 1.14486825466156,
+              "seconds": 1.177698114188388,
+              "step": 21
+            },
+            {
+              "hold": 1.1606264114379883,
+              "recon_mse": 1.1597691774368286,
+              "seconds": 1.218185804085806,
+              "step": 32
+            },
+            {
+              "hold": 0.9063096046447754,
+              "recon_mse": 1.2076516151428223,
+              "seconds": 1.257138520013541,
+              "step": 42
+            },
+            {
+              "hold": 0.5792884826660156,
+              "recon_mse": 1.2758334875106812,
+              "seconds": 1.2969847591593862,
+              "step": 53
+            },
+            {
+              "hold": 0.2883954346179962,
+              "recon_mse": 1.2633012533187866,
+              "seconds": 1.3346760300919414,
+              "step": 63
+            },
+            {
+              "hold": 0.02890392765402794,
+              "recon_mse": 1.2302981615066528,
+              "seconds": 1.3712515791412443,
+              "step": 73
+            },
+            {
+              "hold": 0.19087770581245422,
+              "recon_mse": 1.8921936750411987,
+              "seconds": 1.411450528074056,
+              "step": 84
+            },
+            {
+              "hold": 0.09244520962238312,
+              "recon_mse": 2.0154988765716553,
+              "seconds": 1.448608417995274,
+              "step": 94
+            },
+            {
+              "hold": 0.08271794766187668,
+              "recon_mse": 2.4701240062713623,
+              "seconds": 1.4915356771089137,
+              "step": 105
+            },
+            {
+              "hold": 0.08958858996629715,
+              "recon_mse": 2.771852493286133,
+              "seconds": 1.5261400290764868,
+              "step": 115
+            },
+            {
+              "hold": 0.05497492849826813,
+              "recon_mse": 2.941894054412842,
+              "seconds": 1.5631862280424684,
+              "step": 125
+            },
+            {
+              "hold": 0.04768902808427811,
+              "recon_mse": 2.91383957862854,
+              "seconds": 1.6044680119957775,
+              "step": 136
+            },
+            {
+              "hold": 0.048323627561330795,
+              "recon_mse": 2.8464338779449463,
+              "seconds": 1.6398269061464816,
+              "step": 146
+            },
+            {
+              "hold": 0.06494727730751038,
+              "recon_mse": 2.759460687637329,
+              "seconds": 1.680190176004544,
+              "step": 157
+            },
+            {
+              "hold": 0.07013947516679764,
+              "recon_mse": 2.7926013469696045,
+              "seconds": 1.7153662801720202,
+              "step": 167
+            },
+            {
+              "hold": 0.042175013571977615,
+              "recon_mse": 2.926953077316284,
+              "seconds": 1.755001018056646,
+              "step": 178
+            },
+            {
+              "hold": 0.017719142138957977,
+              "recon_mse": 3.0617640018463135,
+              "seconds": 1.7903762320056558,
+              "step": 188
+            },
+            {
+              "hold": 0.010807055979967117,
+              "recon_mse": 3.208378791809082,
+              "seconds": 1.8247767931316048,
+              "step": 198
+            },
+            {
+              "hold": 0.007935013622045517,
+              "recon_mse": 3.391098976135254,
+              "seconds": 1.863900300115347,
+              "step": 209
+            },
+            {
+              "hold": 0.006604994181543589,
+              "recon_mse": 3.5752294063568115,
+              "seconds": 1.8981612401548773,
+              "step": 219
+            },
+            {
+              "hold": 0.0038295756094157696,
+              "recon_mse": 3.6999588012695312,
+              "seconds": 1.9357641311362386,
+              "step": 230
+            },
+            {
+              "hold": 0.0018877077382057905,
+              "recon_mse": 3.8132073879241943,
+              "seconds": 1.9703115031588823,
+              "step": 240
+            },
+            {
+              "hold": 0.0022318409755825996,
+              "recon_mse": 3.917919397354126,
+              "seconds": 2.0051739159971476,
+              "step": 250
+            }
+          ],
+          "verdict": {
+            "attempted": true,
+            "confirmation_fraction": 2.0,
+            "convergence": {
+              "complete": true,
+              "confirmed_seconds": null,
+              "confirmed_step": null,
+              "first_pass_step": null,
+              "minimum_stable_checks": 5,
+              "observations": 24,
+              "passing_observations": 0,
+              "passing_suffix": 0,
+              "stable_from_seconds": null,
+              "stable_from_step": null
+            },
+            "metrics": [
+              {
+                "margin": -3.867919397354126,
+                "metric": "recon_mse",
+                "op": "<=",
+                "status": "FAIL",
+                "threshold": 0.05,
+                "value": 3.917919397354126
+              },
+              {
+                "margin": 0.3477681590244174,
+                "metric": "hold",
+                "op": "<=",
+                "status": "PASS",
+                "threshold": 0.35,
+                "value": 0.0022318409755825996
+              }
+            ],
+            "passed": false,
+            "shortfall": 1.0,
+            "status": "FAIL"
+          }
+        },
+        "seconds": 2.172373754903674,
+        "status": "FAIL"
+      }
+    ],
+    "status": "FAIL",
+    "tag": "h_n05r06_mixup_c0p01_lr15"
+  }
+]

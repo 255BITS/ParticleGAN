@@ -1,0 +1,58 @@
+{
+  "original": "/ml2/hypergan/gan-attempts/batch-20260924T153037Z/critic_signal/20260924T153037Z-1298555/repo/reports/toy100/critic_signal_attempt/batch-h/h_n05r06_mixup_c0p01_lr15/status.json",
+  "replay": "cold-replay/h_n05r06_mixup_c0p01_lr15/status.json",
+  "all_ten_live_metrics_and_nontiming_verdict_fields_identical": true,
+  "timing_excluded": true,
+  "gates": [
+    {
+      "gate": "trajectory",
+      "exact_live_metric_match": true,
+      "exact_verdict_match_excluding_timing": true
+    },
+    {
+      "gate": "mode_hold",
+      "exact_live_metric_match": true,
+      "exact_verdict_match_excluding_timing": true
+    },
+    {
+      "gate": "residual_student",
+      "exact_live_metric_match": true,
+      "exact_verdict_match_excluding_timing": true
+    },
+    {
+      "gate": "img_stripes2",
+      "exact_live_metric_match": true,
+      "exact_verdict_match_excluding_timing": true
+    },
+    {
+      "gate": "img_bars4",
+      "exact_live_metric_match": true,
+      "exact_verdict_match_excluding_timing": true
+    },
+    {
+      "gate": "vector_overlap",
+      "exact_live_metric_match": true,
+      "exact_verdict_match_excluding_timing": true
+    },
+    {
+      "gate": "img_blobs4",
+      "exact_live_metric_match": true,
+      "exact_verdict_match_excluding_timing": true
+    },
+    {
+      "gate": "img_intensity2",
+      "exact_live_metric_match": true,
+      "exact_verdict_match_excluding_timing": true
+    },
+    {
+      "gate": "vector_unequal_mass",
+      "exact_live_metric_match": true,
+      "exact_verdict_match_excluding_timing": true
+    },
+    {
+      "gate": "vector_unequal_width",
+      "exact_live_metric_match": true,
+      "exact_verdict_match_excluding_timing": true
+    }
+  ]
+}

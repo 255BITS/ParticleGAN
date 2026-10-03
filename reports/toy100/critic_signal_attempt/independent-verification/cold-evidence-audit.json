@@ -1,0 +1,222 @@
+{
+  "candidate": "h_n05r06_mixup_c0p01_lr15",
+  "status": "PASS",
+  "archived_sources_unchanged": true,
+  "archived_source_count": 125,
+  "sample_regraded_hosts": 9,
+  "sample_unavailable_hosts": [
+    "residual_student"
+  ],
+  "rows": [
+    {
+      "task": "trajectory",
+      "status": "PASS",
+      "budget": 400,
+      "actual_updates": 800,
+      "source_config_episode_regrade": "PASS",
+      "receipt_regrade": "PASS",
+      "actual_lrs": {
+        "g": 0.0015,
+        "d": 0.0015,
+        "prior": 0.003
+      },
+      "actual_noise_sigma": 0.05,
+      "consistency_applications": 400,
+      "consistency_forwards": 1200,
+      "generator_objective": "GANLoss.g_loss only; no cover, L2, or VICReg",
+      "sample_regrade": "PASS: archived raw final draws reproduced reported metrics",
+      "checkpoint_sha256": "8aafb855c597715d06a474ded1b7dadc6bd7da89c5dc0bab89329dd4f53f7da1"
+    },
+    {
+      "task": "mode_hold",
+      "status": "PASS",
+      "budget": 1200,
+      "actual_updates": 2400,
+      "source_config_episode_regrade": "PASS",
+      "receipt_regrade": "PASS",
+      "actual_lrs": {
+        "g": 0.0015,
+        "d": 0.0015,
+        "prior": 0.003
+      },
+      "actual_noise_sigma": 0.05,
+      "consistency_applications": 1200,
+      "consistency_forwards": 3600,
+      "generator_objective": "GANLoss.g_loss only; no cover, L2, or VICReg",
+      "sample_regrade": "PASS: archived raw final draws reproduced reported metrics",
+      "checkpoint_sha256": "799181c2a68df02ee5a7a5963b4a5e4fbf23677623c4fcd9f8757460944155b2"
+    },
+    {
+      "task": "residual_student",
+      "status": "PASS",
+      "budget": 400,
+      "actual_updates": 800,
+      "source_config_episode_regrade": "PASS",
+      "receipt_regrade": "PASS",
+      "actual_lrs": {
+        "g": 0.0015,
+        "d": 0.0015,
+        "prior": 0.003
+      },
+      "actual_noise_sigma": 0.05,
+      "consistency_applications": 400,
+      "consistency_forwards": 1200,
+      "generator_objective": "GANLoss.g_loss only; no cover, L2, or VICReg",
+      "sample_regrade": "UNAVAILABLE: archived screen did not capture this legacy host state; raw 24-check episode and all optimizer/noise receipts regraded"
+    },
+    {
+      "task": "img_stripes2",
+      "status": "PASS",
+      "budget": 600,
+      "actual_updates": 1200,
+      "source_config_episode_regrade": "PASS",
+      "receipt_regrade": "PASS",
+      "actual_lrs": {
+        "g": 0.0015,
+        "d": 0.0015,
+        "prior": 0.003
+      },
+      "actual_noise_sigma": 0.05,
+      "consistency_applications": 600,
+      "consistency_forwards": 1800,
+      "generator_objective": "GANLoss.g_loss only; no cover, L2, or VICReg",
+      "final_output_noise_sigma": 0.029,
+      "sample_regrade": "PASS: restored final weights and frozen evaluation draw exactly match all live metrics",
+      "restored_final_sample_file": "restored-final-samples/img_stripes2.pt",
+      "restored_final_sample_sha256": "82162a6283adfa74d73f0acfa8421910218671c7b19dedfbb04c8562c7d5507d",
+      "checkpoint_sha256": "0cfe9c4e389140f75fe1fe0688d4692ff1e4864715a564d1cf1d047c0fb40412"
+    },
+    {
+      "task": "img_bars4",
+      "status": "PASS",
+      "budget": 600,
+      "actual_updates": 1200,
+      "source_config_episode_regrade": "PASS",
+      "receipt_regrade": "PASS",
+      "actual_lrs": {
+        "g": 0.0015,
+        "d": 0.0015,
+        "prior": 0.003
+      },
+      "actual_noise_sigma": 0.05,
+      "consistency_applications": 600,
+      "consistency_forwards": 1800,
+      "generator_objective": "GANLoss.g_loss only; no cover, L2, or VICReg",
+      "final_output_noise_sigma": 0.029,
+      "sample_regrade": "PASS: restored final weights and frozen evaluation draw exactly match all live metrics",
+      "restored_final_sample_file": "restored-final-samples/img_bars4.pt",
+      "restored_final_sample_sha256": "10134172596a5a3ad78e9c11f37898403c7d62b68a5c671e89bfac8f3ac6dd75",
+      "checkpoint_sha256": "88bbcecee2e8ad5316e5a964882952c42005aff02c5978206b2dbf3361dba048"
+    },
+    {
+      "task": "vector_overlap",
+      "status": "PASS",
+      "budget": 1200,
+      "actual_updates": 2400,
+      "source_config_episode_regrade": "PASS",
+      "receipt_regrade": "PASS",
+      "actual_lrs": {
+        "g": 0.0015,
+        "d": 0.0015,
+        "prior": 0.003
+      },
+      "actual_noise_sigma": 0.05,
+      "consistency_applications": 1200,
+      "consistency_forwards": 3600,
+      "generator_objective": "GANLoss.g_loss only; no cover, L2, or VICReg",
+      "final_output_noise_sigma": 0.029,
+      "sample_regrade": "PASS: restored final weights and frozen evaluation draw exactly match all live metrics",
+      "restored_final_sample_file": "restored-final-samples/vector_overlap.pt",
+      "restored_final_sample_sha256": "1abd5f307c9117a59b1541faac064daa054261589484d41a5c0288ccd34cda3e",
+      "checkpoint_sha256": "2ebf041f76ca6e98b34c40a98b3aef3ae5728b5e55c32ce94b374daf5f3fca71"
+    },
+    {
+      "task": "img_blobs4",
+      "status": "PASS",
+      "budget": 600,
+      "actual_updates": 1200,
+      "source_config_episode_regrade": "PASS",
+      "receipt_regrade": "PASS",
+      "actual_lrs": {
+        "g": 0.0015,
+        "d": 0.0015,
+        "prior": 0.003
+      },
+      "actual_noise_sigma": 0.05,
+      "consistency_applications": 600,
+      "consistency_forwards": 1800,
+      "generator_objective": "GANLoss.g_loss only; no cover, L2, or VICReg",
+      "final_output_noise_sigma": 0.029,
+      "sample_regrade": "PASS: restored final weights and frozen evaluation draw exactly match all live metrics",
+      "restored_final_sample_file": "restored-final-samples/img_blobs4.pt",
+      "restored_final_sample_sha256": "c9276eac1f4685389d8b946f722578b76b484d983c6e06a5d45690d5e5d78c7d",
+      "checkpoint_sha256": "2c535d3d8667465d37fce0c9bab01c492e91ef46e44a9c44b2b022c8fba7f46c"
+    },
+    {
+      "task": "img_intensity2",
+      "status": "PASS",
+      "budget": 600,
+      "actual_updates": 1200,
+      "source_config_episode_regrade": "PASS",
+      "receipt_regrade": "PASS",
+      "actual_lrs": {
+        "g": 0.0015,
+        "d": 0.0015,
+        "prior": 0.003
+      },
+      "actual_noise_sigma": 0.05,
+      "consistency_applications": 600,
+      "consistency_forwards": 1800,
+      "generator_objective": "GANLoss.g_loss only; no cover, L2, or VICReg",
+      "final_output_noise_sigma": 0.029,
+      "sample_regrade": "PASS: restored final weights and frozen evaluation draw exactly match all live metrics",
+      "restored_final_sample_file": "restored-final-samples/img_intensity2.pt",
+      "restored_final_sample_sha256": "e998e6e48a3899f53c6496e4c747338da27165bf737c61e3b35857eaa3a7b4e4",
+      "checkpoint_sha256": "b4ffa874e0e3915608b79bdc938db8e5e74fe4a9460a4921e45fe2e6475c54ee"
+    },
+    {
+      "task": "vector_unequal_mass",
+      "status": "PASS",
+      "budget": 1200,
+      "actual_updates": 2400,
+      "source_config_episode_regrade": "PASS",
+      "receipt_regrade": "PASS",
+      "actual_lrs": {
+        "g": 0.0015,
+        "d": 0.0015,
+        "prior": 0.003
+      },
+      "actual_noise_sigma": 0.05,
+      "consistency_applications": 1200,
+      "consistency_forwards": 3600,
+      "generator_objective": "GANLoss.g_loss only; no cover, L2, or VICReg",
+      "final_output_noise_sigma": 0.029,
+      "sample_regrade": "PASS: restored final weights and frozen evaluation draw exactly match all live metrics",
+      "restored_final_sample_file": "restored-final-samples/vector_unequal_mass.pt",
+      "restored_final_sample_sha256": "c8c82fcf98f1e635627e7605da4d412a5fdcee3ef81241776f2b7a5dc282a66c",
+      "checkpoint_sha256": "8d15a9ed7eaf74a857ae2dde7a039f9ec8da958725e9f748953bf8ea8a60f3d3"
+    },
+    {
+      "task": "vector_unequal_width",
+      "status": "PASS",
+      "budget": 1200,
+      "actual_updates": 2400,
+      "source_config_episode_regrade": "PASS",
+      "receipt_regrade": "PASS",
+      "actual_lrs": {
+        "g": 0.0015,
+        "d": 0.0015,
+        "prior": 0.003
+      },
+      "actual_noise_sigma": 0.05,
+      "consistency_applications": 1200,
+      "consistency_forwards": 3600,
+      "generator_objective": "GANLoss.g_loss only; no cover, L2, or VICReg",
+      "final_output_noise_sigma": 0.029,
+      "sample_regrade": "PASS: restored final weights and frozen evaluation draw exactly match all live metrics",
+      "restored_final_sample_file": "restored-final-samples/vector_unequal_width.pt",
+      "restored_final_sample_sha256": "14d2c0c4bc619b204171e3689eb1ed473446d403652e0173e5e44bf0fc817483",
+      "checkpoint_sha256": "5b0ca5d9e78317dcb336efb7bd18a10dfd26dc37c56dd2896804c93be6b541e8"
+    }
+  ]
+}

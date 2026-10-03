@@ -1,0 +1,2 @@
+{"event": "PREDECLARED", "rows": 1, "output": "/ml2/hypergan/gan-attempts/selected-h-verification/diagnostics/unused_token_hold"}
+{"event": "CANDIDATE_DONE", "tag": "h_n05r06_mixup_c0p01_lr15", "status": "FAIL", "seconds": 1.731590481940657, "stages": [{"gate": "unused_token_hold", "status": "FAIL"}]}
