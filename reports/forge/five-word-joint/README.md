@@ -198,8 +198,19 @@ python -m experiments.forge board --goal discriminator_stability
 ```
 
 Ordinary failures stop remaining tasks in the same tier and all later tiers;
-word acquisition follows the four earlier Tier 1 checks. No full-budget current
-Forge word run has been launched, no smoke prerequisite has been bypassed for qualification, and
-no historical pass has been transferred into the new leaderboard. Review this
-registration and its controls before deciding whether to run, revise or retier
-the task. A release choice still needs full Forge qualification.
+word acquisition follows the four earlier Tier 1 checks. The
+[existing-config refresh](../tier1-refresh/README.md) measured two current word
+failures; R1/R2's word cell remained unmeasured after its ring prerequisite failed.
+The later [bounded root-cause study](../word-root-cause/README.md) completed 18
+direct task-only diagnostics and obtained sustained full passes for K3P, KA2 and
+R1/R2 with existing settings. Its
+[exact task recipes](../../../configs/forge/selections/word-joint-task-v1.json)
+and actual [K3P](../word-root-cause/media/k3p.gif),
+[KA2](../word-root-cause/media/ka2.gif) and
+[R1/R2](../word-root-cause/media/r1r2.gif) training GIFs retain the unchanged
+word core, gates and budget. All new generic diagnostic arms use prior_reg0;
+the historical/source-shaped KA2 card above retains prior_reg1. Noise/horizon
+ablations have explicit diagnostic identities rather than ordinary same-signature
+search credit. No prerequisite has been bypassed for qualification, no historical
+or diagnostic pass fills the ordinary leaderboard, and old receipts stay frozen.
+A release choice still needs full Forge qualification and calibration.

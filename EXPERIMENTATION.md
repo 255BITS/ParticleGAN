@@ -433,6 +433,18 @@ includes only ideas; use the readout's reproduction wrapper to include saved
 configurations through their registered studies. Failed prerequisites stop the
 remaining work, including later tasks within Tier 1.
 
+The [word-task root-cause readout](reports/forge/word-root-cause/README.md) shows
+full task-only K3P, KA2 and R1/R2 passes with explicit existing-control settings.
+Before blaming a formulation on a new host, verify effective G/E/D/prior rates
+and schedule horizons, whether output noise is added after a categorical softmax,
+and the penalty's units over the full joint input. Record active controllers as
+well as nominal rates. The word study repaired exact-equality grading and prior
+optimizer beta binding; it preserves old evidence and ordinary qualification.
+Clean/full noise and horizon ablations can cross technique activation boundaries,
+so declare their diagnostic scope instead of calling them ordinary same-signature
+configuration searches. These lessons do not add implicit recipe adaptation or
+establish that noise alone caused failure.
+
 To advance a published view policy, register its measured source explicitly with
 `--advance-policy --source-commit EXECUTED_COMMIT`. Earlier numerical cohorts
 and their original denominators are archived unchanged; their results cannot

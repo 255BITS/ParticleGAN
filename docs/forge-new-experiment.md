@@ -63,6 +63,17 @@ the task, as the five-word task does. Recipe-owned fields and fixed host-owned
 objectives must have an explicit compatible adaptation; disclose those
 exceptions rather than tuning them separately for each toy.
 
+Check what the host actually consumes before attributing failure to a candidate.
+The [five-word root-cause study](../reports/forge/word-root-cause/README.md) found
+an early network horizon cap combined with much faster prior updates, Gaussian
+noise added after categorical softmax, and critic penalty normalization over a
+170-dimensional joint input. Declare effective G/E/D/prior rates and horizons,
+including active controllers, and verify output-domain and penalty-unit controls.
+Honor declared optimizer group settings and test exact-equality gates. Any
+explicit noise/horizon ablation that crosses a technique activation boundary
+needs its scoped evidence identity; do not silently adapt recipes or claim a
+bundled comparison isolates noise as the cause.
+
 ## 3. Establish the scorer before training
 
 Freeze numerical bounds, sample count, observation cadence, terminal requirements,
