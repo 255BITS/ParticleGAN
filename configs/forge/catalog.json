@@ -39,7 +39,7 @@
       "experiment/toy": 3,
       "experiment/trajectory": 2,
       "experiment/transition": 7,
-      "forge_engine": 47,
+      "forge_engine": 49,
       "lrfree/feature-cells-cb64-ra": 4058,
       "report/atlas-explanation": 7,
       "report/behavioral_baseline": 32,
@@ -58,7 +58,7 @@
       "report/paired-residual-toy": 5,
       "report/paired_error_2d": 1,
       "report/prior-comparison": 4,
-      "report/project": 7,
+      "report/project": 8,
       "report/r1-integrations": 2,
       "report/readme-100gaussians": 5,
       "report/releases": 1,
@@ -102,27 +102,27 @@
       "candidate_patch": 26,
       "configuration": 807,
       "driver": 401,
-      "engine_support": 47,
+      "engine_support": 49,
       "evaluator_or_audit": 324,
       "evidence_artifact": 1574,
       "frozen_candidate_implementation": 15,
       "frozen_driver": 28,
       "frozen_evaluator_or_audit": 2,
       "frozen_support": 28,
-      "narrative": 993,
+      "narrative": 994,
       "structured_evidence": 5048,
       "support": 1525,
       "support_artifact": 60,
       "visualization": 22,
       "visualization_artifact": 721
     },
-    "files": 11713
+    "files": 11716
   },
   "coverage": {
-    "declared_count": 11713,
+    "declared_count": 11716,
     "missing": [],
     "stale": [],
-    "tracked_count": 11713,
+    "tracked_count": 11716,
     "unclassified": [],
     "valid": true
   },
@@ -7285,6 +7285,20 @@
     },
     {
       "family": "forge_engine",
+      "git_blob": "a2e3fe69051e5e6b70cc9eb5bde84d84a693eb90",
+      "path": "experiments/forge/policy_family_readout.py",
+      "role": "engine_support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "forge_engine",
+      "git_blob": "d6cd27ea0e8e3b6438d9e969bf71e10da80a07e3",
+      "path": "experiments/forge/policy_publication.py",
+      "role": "engine_support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "forge_engine",
       "git_blob": "add36e0fc4ada437f57ee1d258b1946d8144afff",
       "path": "experiments/forge/priors.py",
       "role": "engine_support",
@@ -13453,6 +13467,13 @@
       "git_blob": "c012ec6c4ee6dc0bf317d31c3656d6a8783dd2fa",
       "path": "reports/e22-animation/render_gif.py",
       "role": "visualization",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/project",
+      "git_blob": "6289dbd7b42abcb42cc2e02626c168aeb0b1dd06",
+      "path": "reports/forge-audit-2026-10-02.md",
+      "role": "narrative",
       "suggested_tiers": []
     },
     {
