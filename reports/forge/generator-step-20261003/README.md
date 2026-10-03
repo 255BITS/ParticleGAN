@@ -33,6 +33,8 @@ The final HQ and valid-mode counts are zero, assignment TV is .5 and rejected-ma
 
 [Retained-state diagnosis](PAIR_INTENSITY_ANALYSIS.md) separates measured output/gradient/controller signatures from unrecorded early forces. Smaller steps alone did not resolve brightness collapse. Different complete policies and earlier scientific cohorts retain separate identities.
 
+[Original finite declaration and runnable commands](PLAN.md) are retained beside the completed readout. The prospective plan assigns no result.
+
 ## Verification and qualification
 
 Scientific source: `488b792e2fb875894f017cf7043420f2bb66190f`; frozen execution snapshot: `ac779e01f99f725951778c5000443ae9c5c215f0fd17e74e9c6be53e6c929bd9`, 3,400 files. All 177 public definitions and all eight original case hashes loaded in a fresh copied-source process before GPU admission. The new runner, binder, unchanged delegated orchestration helper and original discovery JSON are explicitly bound. No package/configuration, original grader or existing result is modified.
