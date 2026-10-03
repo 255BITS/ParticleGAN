@@ -1,0 +1,3368 @@
+{
+  "cases": [
+    {
+      "acquisition_hold": {
+        "reason": "no five-check acquisition window",
+        "status": "FAIL"
+      },
+      "artifacts": {
+        "final-state.pt": {
+          "bytes": 171087,
+          "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/ka2/ka2--0e72647d9ecce0e92a1a2de81fc78b2e93e2cc8bdaf7a9ab0662a3de4775c236/image-develop-img_intensity2-source-transpose12/final-state.pt",
+          "sha256": "eccae36db0ec194be83d2c285cd660baf2717a12869424947f743b7f22a2c3bd"
+        },
+        "goal.gif": {
+          "bytes": 220159,
+          "caption": "Original gate: FAIL; added first-window hold: FAIL; confirm step unavailable; later unavailable/unavailable passing; at least 5 required, every later primary check must pass.",
+          "frames": 9,
+          "original_path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/ka2/ka2--0e72647d9ecce0e92a1a2de81fc78b2e93e2cc8bdaf7a9ab0662a3de4775c236/image-develop-img_intensity2-source-transpose12/goal.gif",
+          "path": "media/ka2/image-develop-img_intensity2-source-transpose12/goal.gif",
+          "sha256": "2fd6bdeb6133d30dc97cfe3d604ac9b3fabc6fd7f182b1b5776fc9240d586b61"
+        },
+        "observations.npz": {
+          "bytes": 347851,
+          "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/ka2/ka2--0e72647d9ecce0e92a1a2de81fc78b2e93e2cc8bdaf7a9ab0662a3de4775c236/image-develop-img_intensity2-source-transpose12/observations.npz",
+          "sha256": "fe36496ada1717941357337a66326b00b4129490ad1ba77248ecd1edc6db3032"
+        }
+      },
+      "capacity": {
+        "artifacts": {
+          "samples": {
+            "bytes": 15418,
+            "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/ka2/image-develop-img_intensity2-source-transpose12/samples.npz",
+            "sha256": "b425ef7d571357023536b95d12c1101fcd2bb9fc6fb075d8c9f6957b89959e23"
+          },
+          "state": {
+            "bytes": 120793,
+            "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/ka2/image-develop-img_intensity2-source-transpose12/state.pt",
+            "sha256": "c5097a95929f34bbb82c7f52adc3e7d6c60bf115a75ca63fb11a72d09be3cea8"
+          }
+        },
+        "available_artifacts": {},
+        "case_sha256": "e9fa47de6adbb31f083c0333b0c7c41352d2b890b16539d47839d3f9720c5dfb",
+        "error": null,
+        "error_artifact": null,
+        "family_law": {
+          "actual_read_standardize": false,
+          "amsgrad": false,
+          "continuous_policy": null,
+          "critic_formulation": "ka2",
+          "family": "ka2",
+          "lr_control": "declared_cosine_schedule",
+          "old_policy_credit": false,
+          "output_noise_mode": "fixed",
+          "output_noise_std": 0.029,
+          "output_noise_warmup_fraction": 0.2,
+          "primary_law": "fast_without_output_noise",
+          "primary_output_noise": false,
+          "prior_kind": "particles",
+          "prior_sigma_rel": 0,
+          "recipe_standardize_flag": true,
+          "schedule_horizon": 600,
+          "serve_average": 0.0,
+          "served_model": "fast_only"
+        },
+        "observations": [
+          {
+            "completed_steps": 0,
+            "evaluation_seed": 34002,
+            "failed_bounds": [],
+            "metrics": {
+              "distribution_tv": 0.0029296875,
+              "finite_template_tv": 0.0029296875,
+              "hq": 1.0,
+              "mean_rmse": 0.0005231625982560217,
+              "modes": 2.0,
+              "rejected_mass": 0.0,
+              "samples": 1024.0
+            },
+            "passed": true,
+            "samples": 1024
+          }
+        ],
+        "ordinary_training_updates": 0,
+        "recipe_sha256": "a728838b5086f43510d4f9c4a3dea196c055d8587805eb6862a3c5968d46cda4",
+        "source": {
+          "binder_sha256": "0a5a20366147178f504841f02aafb3ba8de4516e2600651223e70a52acad0409",
+          "files": 63,
+          "manifest_sha256": "91307c9101d7141186dff61b655aa8a3dc82a29ed0893bf4ed8d27a9688eae0b",
+          "new_test_files_sha256": {
+            "reports/forge/ka2-k3p-defaults-20261003/protocol.py": "edb996e2c51ae0d845145d7d918eaca37e9d3e8640392295a711e892ccbcb2a5"
+          },
+          "reproducer_commit": "26ff278c3796d775969391adc0bde52e3af11149",
+          "scientific_base_commit": "4749b2780add539df4bd8d2dd1d3cc9f002f77ad"
+        },
+        "status": "SUPPORTED"
+      },
+      "case_sha256": "e9fa47de6adbb31f083c0333b0c7c41352d2b890b16539d47839d3f9720c5dfb",
+      "completed_updates": 600,
+      "config_id": "ka2--0e72647d9ecce0e92a1a2de81fc78b2e93e2cc8bdaf7a9ab0662a3de4775c236",
+      "conservative_reserved_seconds": 0.0,
+      "family": "ka2",
+      "family_law": {
+        "actual_read_standardize": false,
+        "amsgrad": false,
+        "continuous_policy": null,
+        "critic_formulation": "ka2",
+        "family": "ka2",
+        "lr_control": "declared_cosine_schedule",
+        "old_policy_credit": false,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.029,
+        "output_noise_warmup_fraction": 0.2,
+        "primary_law": "fast_without_output_noise",
+        "primary_output_noise": false,
+        "prior_kind": "particles",
+        "prior_sigma_rel": 0,
+        "recipe_standardize_flag": true,
+        "schedule_horizon": 600,
+        "serve_average": 0.0,
+        "served_model": "fast_only"
+      },
+      "final_metrics": {
+        "completed_steps": 600.0,
+        "distribution_tv": 0.0986328125,
+        "finite_template_tv": 0.12890625,
+        "hq": 0.9697265625,
+        "mean_rmse": 0.03644286096096039,
+        "modes": 2.0,
+        "output_noise_added": 0.0,
+        "policy_latent_perturbation": 0.0,
+        "rejected_mass": 0.0302734375,
+        "samples": 1024.0,
+        "served_averaged": 0.0
+      },
+      "full_protocol_complete": true,
+      "id": "image-develop-img_intensity2-source-transpose12",
+      "media": {
+        "bytes": 220159,
+        "caption": "Original gate: FAIL; added first-window hold: FAIL; confirm step unavailable; later unavailable/unavailable passing; at least 5 required, every later primary check must pass.",
+        "frames": 9,
+        "original_path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/ka2/ka2--0e72647d9ecce0e92a1a2de81fc78b2e93e2cc8bdaf7a9ab0662a3de4775c236/image-develop-img_intensity2-source-transpose12/goal.gif",
+        "path": "media/ka2/image-develop-img_intensity2-source-transpose12/goal.gif",
+        "sha256": "2fd6bdeb6133d30dc97cfe3d604ac9b3fabc6fd7f182b1b5776fc9240d586b61"
+      },
+      "original_gate": "FAIL",
+      "paid_seconds": 13.617582915117964,
+      "question": "Recover both center-patch intensities (0.35 and 0.85) with correct brightness and balanced output mass.",
+      "reason": null,
+      "receipt": {
+        "bytes": 45768,
+        "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/ka2/ka2--0e72647d9ecce0e92a1a2de81fc78b2e93e2cc8bdaf7a9ab0662a3de4775c236/image-develop-img_intensity2-source-transpose12/receipt.json",
+        "sha256": "b60afb0fd92a55d3cd97dc5bdeaeb53af5004061653cc1722cf7a96b77f7aeb7"
+      },
+      "recipe_overrides": {
+        "d_lr_mult": 1.0,
+        "lr": 0.006375,
+        "prior_lr_mult": 1.0
+      },
+      "requirements": {
+        "batch_size": 32,
+        "default_steps": 600,
+        "eval_samples": 1024,
+        "evaluation_observations": 24,
+        "sampling": {
+          "cohort": "New public-API variant; historical results are not imported",
+          "evaluation": "Public ServedModel.sample/generate, fixed isolated per-context streams, output_noise=False; DV12 latent perturbation and selected weights retained",
+          "prior": "32 uniformly sampled trainable particle rows",
+          "prior_exception": "Finite-template architecture controls retain their original 32-row cloud; this is not a learned-MoG qualification host.",
+          "training_real": "Uniform ordered template IDs, independent N(0,.01^2) pixels, clipped to [0,1]"
+        },
+        "terminal_observations": null,
+        "thresholds": {
+          "distribution_tv_max": 0.1,
+          "finite_template_tv_max": 0.1,
+          "hq_min": 0.9,
+          "min_mode_fraction": 0.25,
+          "minimum_stable_checks": 5,
+          "modes": 2,
+          "observations": 24,
+          "quality_rmse": 0.06
+        }
+      },
+      "resolved_recipe_sha256": "a728838b5086f43510d4f9c4a3dea196c055d8587805eb6862a3c5968d46cda4",
+      "runtime": {
+        "cuda": "12.6",
+        "cuda_device_model": "NVIDIA RTX A6000",
+        "device": "cuda:0",
+        "python": "3.12.13",
+        "torch": "2.13.0+cu126",
+        "torch_threads": 1
+      },
+      "status": "FAIL",
+      "study_gate": "FAIL",
+      "supervision": {
+        "log": {
+          "bytes": 4686,
+          "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/ka2/ka2--0e72647d9ecce0e92a1a2de81fc78b2e93e2cc8bdaf7a9ab0662a3de4775c236/image-develop-img_intensity2-source-transpose12.log",
+          "sha256": "975af5e710fe391aeca5787b5d635b7035f99423895d84819652da531be3a3cf"
+        },
+        "supervisor-request.json": {
+          "bytes": 558574,
+          "path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/276467cbac6c0320c7f296c2ee7ae2dc0ddcde05885b43d9639a425dce2fea0c/supervisor-request.json",
+          "sha256": "c8d430f0e44622a0ad8872db23fdb6687b5a732e3999c6f7b2f06031126566fe"
+        },
+        "supervisor-terminal.json": {
+          "bytes": 151,
+          "path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/276467cbac6c0320c7f296c2ee7ae2dc0ddcde05885b43d9639a425dce2fea0c/supervisor-terminal.json",
+          "sha256": "3901b862a63f394240a81580c1ce78717a131a177ef13096a985561b3b072c47"
+        }
+      },
+      "tier": 1,
+      "title": "intensity2: transpose width 12"
+    },
+    {
+      "acquisition_hold": null,
+      "capacity": {
+        "artifacts": {
+          "samples": {
+            "bytes": 82168,
+            "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/ka2/api-vector-two-broad/samples.npz",
+            "sha256": "78a5d8e896c393a5b66b65cb4b7eb33e671a84d7ae9eafacb2dfe1245840b537"
+          },
+          "state": {
+            "bytes": 133480,
+            "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/ka2/api-vector-two-broad/state.pt",
+            "sha256": "8018c52b460c97ce628fc0ad741cf7e5fab1590d2e73a6b36ba0acec465a6f98"
+          }
+        },
+        "available_artifacts": {},
+        "case_sha256": "e293cf19f2f235b30807f9782ec65ceea3693f78e3459b9f7eb117179168c8fc",
+        "error": null,
+        "error_artifact": null,
+        "family_law": {
+          "actual_read_standardize": false,
+          "amsgrad": false,
+          "continuous_policy": null,
+          "critic_formulation": "ka2",
+          "family": "ka2",
+          "lr_control": "declared_cosine_schedule",
+          "old_policy_credit": false,
+          "output_noise_mode": "fixed",
+          "output_noise_std": 0.029,
+          "output_noise_warmup_fraction": 0.2,
+          "primary_law": "fast_without_output_noise",
+          "primary_output_noise": false,
+          "prior_kind": "particles",
+          "prior_sigma_rel": 0.0,
+          "recipe_standardize_flag": true,
+          "schedule_horizon": 1200,
+          "serve_average": 0.0,
+          "served_model": "fast_only"
+        },
+        "observations": [
+          {
+            "completed_steps": 0,
+            "evaluation_seed": 34002,
+            "failed_bounds": [],
+            "metrics": {
+              "component_core_covariance_error": 0.04707273282110691,
+              "component_core_min_eigen_ratio": 0.9772696495056152,
+              "component_covariance_error": 0.04707273282110691,
+              "component_min_eigen_ratio": 0.9772696495056152,
+              "covariance_error": 0.013306958600878716,
+              "hq": 0.981201171875,
+              "mass_tv": 0.006591796875,
+              "max_component_spill": 0.02078179083764553,
+              "mean_error": 0.006760362070053816,
+              "min_mass_ratio": 0.98681640625,
+              "projection_ks": 0.03857414763903855,
+              "resolved_core_covariance_error": 0.04707273282110691,
+              "resolved_core_min_eigen_ratio": 0.9772696495056152,
+              "resolved_max_component_spill": 0.02078179083764553,
+              "sample_count": 4096,
+              "sw1_normalized": 0.013303275020110864,
+              "target_scale": 1.0555585622787476
+            },
+            "passed": true,
+            "samples": 4096
+          }
+        ],
+        "ordinary_training_updates": 0,
+        "recipe_sha256": "a6cb1de23412017c31d3e686eb5eae21a71331a15032902ce896459ed1a2546e",
+        "source": {
+          "binder_sha256": "0a5a20366147178f504841f02aafb3ba8de4516e2600651223e70a52acad0409",
+          "files": 63,
+          "manifest_sha256": "91307c9101d7141186dff61b655aa8a3dc82a29ed0893bf4ed8d27a9688eae0b",
+          "new_test_files_sha256": {
+            "reports/forge/ka2-k3p-defaults-20261003/protocol.py": "edb996e2c51ae0d845145d7d918eaca37e9d3e8640392295a711e892ccbcb2a5"
+          },
+          "reproducer_commit": "26ff278c3796d775969391adc0bde52e3af11149",
+          "scientific_base_commit": "4749b2780add539df4bd8d2dd1d3cc9f002f77ad"
+        },
+        "status": "SUPPORTED"
+      },
+      "case_sha256": "e293cf19f2f235b30807f9782ec65ceea3693f78e3459b9f7eb117179168c8fc",
+      "completed_updates": null,
+      "config_id": "ka2--0e72647d9ecce0e92a1a2de81fc78b2e93e2cc8bdaf7a9ab0662a3de4775c236",
+      "conservative_reserved_seconds": 0.0,
+      "family": "ka2",
+      "family_law": {
+        "actual_read_standardize": false,
+        "amsgrad": false,
+        "continuous_policy": null,
+        "critic_formulation": "ka2",
+        "family": "ka2",
+        "lr_control": "declared_cosine_schedule",
+        "old_policy_credit": false,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.029,
+        "output_noise_warmup_fraction": 0.2,
+        "primary_law": "fast_without_output_noise",
+        "primary_output_noise": false,
+        "prior_kind": "particles",
+        "prior_sigma_rel": 0.0,
+        "recipe_standardize_flag": true,
+        "schedule_horizon": 1200,
+        "serve_average": 0.0,
+        "served_model": "fast_only"
+      },
+      "final_metrics": null,
+      "full_protocol_complete": false,
+      "id": "api-vector-two-broad",
+      "media": null,
+      "original_gate": null,
+      "paid_seconds": 0.0,
+      "question": "Basic learnable multimodal distribution and within-mode spread.",
+      "reason": null,
+      "recipe_overrides": {
+        "d_lr_mult": 1.0,
+        "lr": 0.006375,
+        "prior_lr_mult": 1.0
+      },
+      "requirements": {
+        "batch_size": 128,
+        "default_steps": 1200,
+        "eval_samples": 4096,
+        "evaluation_observations": 24,
+        "sampling": "public served latent law; independent evaluation RNG; output_noise=False removes additive output noise only; DV12/feature-cell latent perturbation remains when enabled",
+        "terminal_observations": null,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "component_covariance_error",
+            "<=",
+            0.85
+          ],
+          [
+            "component_min_eigen_ratio",
+            ">=",
+            0.15
+          ],
+          [
+            "sample_count",
+            ">=",
+            4096
+          ],
+          [
+            "projection_ks",
+            "<=",
+            0.06
+          ]
+        ]
+      },
+      "resolved_recipe_sha256": "a6cb1de23412017c31d3e686eb5eae21a71331a15032902ce896459ed1a2546e",
+      "runtime": {
+        "cuda": "12.6",
+        "cuda_device_model": "NVIDIA RTX A6000",
+        "device": "cuda:0",
+        "python": "3.12.13",
+        "torch": "2.13.0+cu126",
+        "torch_threads": 1
+      },
+      "status": "UNKNOWN",
+      "study_gate": null,
+      "supervision": {},
+      "tier": 1,
+      "title": "vector_two_broad"
+    },
+    {
+      "acquisition_hold": null,
+      "capacity": {
+        "artifacts": {
+          "samples": {
+            "bytes": 776382,
+            "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/ka2/api-grid100/samples.npz",
+            "sha256": "d53b6d94a8e9366b90e9d9b7035fbfd88877f91e4116b98de7386cd08bbff4aa"
+          },
+          "state": {
+            "bytes": 804284,
+            "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/ka2/api-grid100/state.pt",
+            "sha256": "2203e61b0d06c4dc958fcedccb6c95867e3cd139997985349abc82e5489237e0"
+          }
+        },
+        "available_artifacts": {},
+        "case_sha256": "93ca5686f7358c701c58b34798b8e1f784a339c958a0fe8e1c9f90af4867f279",
+        "error": null,
+        "error_artifact": null,
+        "family_law": {
+          "actual_read_standardize": false,
+          "amsgrad": false,
+          "continuous_policy": null,
+          "critic_formulation": "ka2",
+          "family": "ka2",
+          "lr_control": "declared_cosine_schedule",
+          "old_policy_credit": false,
+          "output_noise_mode": "fixed",
+          "output_noise_std": 0.029,
+          "output_noise_warmup_fraction": 0.2,
+          "primary_law": "noisy_fast",
+          "primary_output_noise": true,
+          "prior_kind": "particles",
+          "prior_sigma_rel": 0.0,
+          "recipe_standardize_flag": true,
+          "schedule_horizon": 7000,
+          "serve_average": 0.0,
+          "served_model": "fast_only"
+        },
+        "observations": [
+          {
+            "completed_steps": 0,
+            "evaluation_seed": 34002,
+            "failed_bounds": [],
+            "metrics": {
+              "accuracy_abs_cov_trace_bias": 0.002570725275315655,
+              "accuracy_center_max_sigma": 0.2109861944479632,
+              "accuracy_center_rms_sigma": 0.09518974425439002,
+              "accuracy_cov_frob_rms": 0.11405581658357916,
+              "accuracy_cov_trace_bias": -0.002570725275315655,
+              "accuracy_mass_tv": 0.026399999999999993,
+              "accuracy_n": 20000,
+              "accuracy_precision": 0.99005,
+              "accuracy_precision_gap": 0.0011589965382422518,
+              "accuracy_radial_ks": 0.009597069435225869,
+              "accuracy_valid_n": 20000,
+              "accuracy_within_radius_n": 19801,
+              "hq": 0.99005,
+              "mass_tv": 0.026399999999999993,
+              "max_cov_eig_ratio": 1.2884171769668327,
+              "max_mode_mass": 0.01145,
+              "max_radial_median_ratio": 1.0895157413082655,
+              "min_cov_eig_ratio": 0.7065772117645782,
+              "min_hq_count": 164,
+              "min_hq_mode_mass": 0.0082,
+              "min_radial_median_ratio": 0.8865828282268469,
+              "modes": 100,
+              "n": 20000,
+              "precision": 0.99005,
+              "valid_n": 20000
+            },
+            "passed": true,
+            "samples": 20000
+          }
+        ],
+        "ordinary_training_updates": 0,
+        "recipe_sha256": "94bf7ca81f8a45d06e1193009b27395b142d7fc088d19bba54a6031d29eb29ca",
+        "source": {
+          "binder_sha256": "0a5a20366147178f504841f02aafb3ba8de4516e2600651223e70a52acad0409",
+          "files": 63,
+          "manifest_sha256": "91307c9101d7141186dff61b655aa8a3dc82a29ed0893bf4ed8d27a9688eae0b",
+          "new_test_files_sha256": {
+            "reports/forge/ka2-k3p-defaults-20261003/protocol.py": "edb996e2c51ae0d845145d7d918eaca37e9d3e8640392295a711e892ccbcb2a5"
+          },
+          "reproducer_commit": "26ff278c3796d775969391adc0bde52e3af11149",
+          "scientific_base_commit": "4749b2780add539df4bd8d2dd1d3cc9f002f77ad"
+        },
+        "status": "SUPPORTED"
+      },
+      "case_sha256": "93ca5686f7358c701c58b34798b8e1f784a339c958a0fe8e1c9f90af4867f279",
+      "completed_updates": null,
+      "config_id": "ka2--0e72647d9ecce0e92a1a2de81fc78b2e93e2cc8bdaf7a9ab0662a3de4775c236",
+      "conservative_reserved_seconds": 0.0,
+      "family": "ka2",
+      "family_law": {
+        "actual_read_standardize": false,
+        "amsgrad": false,
+        "continuous_policy": null,
+        "critic_formulation": "ka2",
+        "family": "ka2",
+        "lr_control": "declared_cosine_schedule",
+        "old_policy_credit": false,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.029,
+        "output_noise_warmup_fraction": 0.2,
+        "primary_law": "noisy_fast",
+        "primary_output_noise": true,
+        "prior_kind": "particles",
+        "prior_sigma_rel": 0.0,
+        "recipe_standardize_flag": true,
+        "schedule_horizon": 7000,
+        "serve_average": 0.0,
+        "served_model": "fast_only"
+      },
+      "final_metrics": null,
+      "full_protocol_complete": false,
+      "id": "api-grid100",
+      "media": null,
+      "original_gate": null,
+      "paid_seconds": 0.0,
+      "question": "Recover all 100 equal-weight Gaussian modes, their mass and local width, including independent density-fidelity bounds.",
+      "reason": null,
+      "recipe_overrides": {
+        "d_lr_mult": 1.0,
+        "lr": 0.006375,
+        "prior_lr_mult": 1.0
+      },
+      "requirements": {
+        "batch_size": 2048,
+        "default_steps": 7000,
+        "eval_samples": 20000,
+        "evaluation_observations": 24,
+        "sampling": "public served latent law, including enabled DV12/feature-cell perturbation, plus the recipe's output noise; diagnostics remove additive output noise only",
+        "terminal_observations": null,
+        "thresholds": {
+          "accuracy": {
+            "abs_cov_trace_bias": 0.1,
+            "center_rms_sigma": 0.2,
+            "mass_tv": 0.06,
+            "radial_ks": 0.04
+          },
+          "native": {
+            "all_finite": true,
+            "max_cov_eig_ratio": 1.7,
+            "max_mass_tv": 0.1,
+            "max_mode_mass": 0.02,
+            "max_radial_median_ratio": 1.4,
+            "min_cov_eig_ratio": 0.4,
+            "min_hq_mode_mass": 0.005,
+            "min_modes": 100,
+            "min_precision": 0.97,
+            "min_radial_median_ratio": 0.65,
+            "min_samples": 20000
+          }
+        }
+      },
+      "resolved_recipe_sha256": "94bf7ca81f8a45d06e1193009b27395b142d7fc088d19bba54a6031d29eb29ca",
+      "runtime": {
+        "cuda": "12.6",
+        "cuda_device_model": "NVIDIA RTX A6000",
+        "device": "cuda:0",
+        "python": "3.12.13",
+        "torch": "2.13.0+cu126",
+        "torch_threads": 1
+      },
+      "status": "UNKNOWN",
+      "study_gate": null,
+      "supervision": {},
+      "tier": 2,
+      "title": "grid100"
+    },
+    {
+      "acquisition_hold": null,
+      "capacity": {
+        "artifacts": {
+          "samples": {
+            "bytes": 991528,
+            "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/ka2/api-rotated100/samples.npz",
+            "sha256": "d4c24a0cec7f080cec94bad4e38140ec58d8c331eec331c5d2aa0e4fccd56343"
+          },
+          "state": {
+            "bytes": 804284,
+            "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/ka2/api-rotated100/state.pt",
+            "sha256": "39b110418c552078e88fcafc48d7cab59e368b22b86d1fa539dfea6ad37a6060"
+          }
+        },
+        "available_artifacts": {},
+        "case_sha256": "6e06e5ba492950d3f8063a27f82bf3d51e75574148235495cc1b331b7fb30754",
+        "error": null,
+        "error_artifact": null,
+        "family_law": {
+          "actual_read_standardize": false,
+          "amsgrad": false,
+          "continuous_policy": null,
+          "critic_formulation": "ka2",
+          "family": "ka2",
+          "lr_control": "declared_cosine_schedule",
+          "old_policy_credit": false,
+          "output_noise_mode": "fixed",
+          "output_noise_std": 0.029,
+          "output_noise_warmup_fraction": 0.2,
+          "primary_law": "noisy_fast",
+          "primary_output_noise": true,
+          "prior_kind": "particles",
+          "prior_sigma_rel": 0.0,
+          "recipe_standardize_flag": true,
+          "schedule_horizon": 7000,
+          "serve_average": 0.0,
+          "served_model": "fast_only"
+        },
+        "observations": [
+          {
+            "completed_steps": 0,
+            "evaluation_seed": 34002,
+            "failed_bounds": [],
+            "metrics": {
+              "accuracy_abs_cov_trace_bias": 0.002570926878754154,
+              "accuracy_center_max_sigma": 0.21098673067434504,
+              "accuracy_center_rms_sigma": 0.09518976105559253,
+              "accuracy_cov_frob_rms": 0.11405588796794024,
+              "accuracy_cov_trace_bias": -0.002570926878754154,
+              "accuracy_mass_tv": 0.026399999999999993,
+              "accuracy_n": 20000,
+              "accuracy_precision": 0.99005,
+              "accuracy_precision_gap": 0.0011589965382422518,
+              "accuracy_radial_ks": 0.009595806995593148,
+              "accuracy_valid_n": 20000,
+              "accuracy_within_radius_n": 19801,
+              "hq": 0.99005,
+              "mass_tv": 0.026399999999999993,
+              "max_cov_eig_ratio": 1.2884164780463556,
+              "max_mode_mass": 0.01145,
+              "max_radial_median_ratio": 1.0895155241462084,
+              "min_cov_eig_ratio": 0.7065773585623768,
+              "min_hq_count": 164,
+              "min_hq_mode_mass": 0.0082,
+              "min_radial_median_ratio": 0.8865819222357,
+              "modes": 100,
+              "n": 20000,
+              "precision": 0.99005,
+              "valid_n": 20000
+            },
+            "passed": true,
+            "samples": 20000
+          }
+        ],
+        "ordinary_training_updates": 0,
+        "recipe_sha256": "94bf7ca81f8a45d06e1193009b27395b142d7fc088d19bba54a6031d29eb29ca",
+        "source": {
+          "binder_sha256": "0a5a20366147178f504841f02aafb3ba8de4516e2600651223e70a52acad0409",
+          "files": 63,
+          "manifest_sha256": "91307c9101d7141186dff61b655aa8a3dc82a29ed0893bf4ed8d27a9688eae0b",
+          "new_test_files_sha256": {
+            "reports/forge/ka2-k3p-defaults-20261003/protocol.py": "edb996e2c51ae0d845145d7d918eaca37e9d3e8640392295a711e892ccbcb2a5"
+          },
+          "reproducer_commit": "26ff278c3796d775969391adc0bde52e3af11149",
+          "scientific_base_commit": "4749b2780add539df4bd8d2dd1d3cc9f002f77ad"
+        },
+        "status": "SUPPORTED"
+      },
+      "case_sha256": "6e06e5ba492950d3f8063a27f82bf3d51e75574148235495cc1b331b7fb30754",
+      "completed_updates": null,
+      "config_id": "ka2--0e72647d9ecce0e92a1a2de81fc78b2e93e2cc8bdaf7a9ab0662a3de4775c236",
+      "conservative_reserved_seconds": 0.0,
+      "family": "ka2",
+      "family_law": {
+        "actual_read_standardize": false,
+        "amsgrad": false,
+        "continuous_policy": null,
+        "critic_formulation": "ka2",
+        "family": "ka2",
+        "lr_control": "declared_cosine_schedule",
+        "old_policy_credit": false,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.029,
+        "output_noise_warmup_fraction": 0.2,
+        "primary_law": "noisy_fast",
+        "primary_output_noise": true,
+        "prior_kind": "particles",
+        "prior_sigma_rel": 0.0,
+        "recipe_standardize_flag": true,
+        "schedule_horizon": 7000,
+        "serve_average": 0.0,
+        "served_model": "fast_only"
+      },
+      "final_metrics": null,
+      "full_protocol_complete": false,
+      "id": "api-rotated100",
+      "media": null,
+      "original_gate": null,
+      "paid_seconds": 0.0,
+      "question": "Recover all 100 equal-weight Gaussian modes, their mass and local width, including independent density-fidelity bounds.",
+      "reason": null,
+      "recipe_overrides": {
+        "d_lr_mult": 1.0,
+        "lr": 0.006375,
+        "prior_lr_mult": 1.0
+      },
+      "requirements": {
+        "batch_size": 2048,
+        "default_steps": 7000,
+        "eval_samples": 20000,
+        "evaluation_observations": 24,
+        "sampling": "public served latent law, including enabled DV12/feature-cell perturbation, plus the recipe's output noise; diagnostics remove additive output noise only",
+        "terminal_observations": null,
+        "thresholds": {
+          "accuracy": {
+            "abs_cov_trace_bias": 0.1,
+            "center_rms_sigma": 0.2,
+            "mass_tv": 0.06,
+            "radial_ks": 0.04
+          },
+          "native": {
+            "all_finite": true,
+            "max_cov_eig_ratio": 1.7,
+            "max_mass_tv": 0.1,
+            "max_mode_mass": 0.02,
+            "max_radial_median_ratio": 1.4,
+            "min_cov_eig_ratio": 0.4,
+            "min_hq_mode_mass": 0.005,
+            "min_modes": 100,
+            "min_precision": 0.97,
+            "min_radial_median_ratio": 0.65,
+            "min_samples": 20000
+          }
+        }
+      },
+      "resolved_recipe_sha256": "94bf7ca81f8a45d06e1193009b27395b142d7fc088d19bba54a6031d29eb29ca",
+      "runtime": {
+        "cuda": "12.6",
+        "cuda_device_model": "NVIDIA RTX A6000",
+        "device": "cuda:0",
+        "python": "3.12.13",
+        "torch": "2.13.0+cu126",
+        "torch_threads": 1
+      },
+      "status": "UNKNOWN",
+      "study_gate": null,
+      "supervision": {},
+      "tier": 2,
+      "title": "rotated100"
+    },
+    {
+      "acquisition_hold": null,
+      "capacity": {
+        "artifacts": {
+          "samples": {
+            "bytes": 818812,
+            "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/ka2/api-staggered100/samples.npz",
+            "sha256": "f31bc57e3793b5c8d198fdda22f74168e9c9cef3e9022a4d8ab7640ccf12229f"
+          },
+          "state": {
+            "bytes": 804284,
+            "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/ka2/api-staggered100/state.pt",
+            "sha256": "4cdbd3782ff3af1e9eef259f8e8079382bcd381d74df642c68b794c963620388"
+          }
+        },
+        "available_artifacts": {},
+        "case_sha256": "9ba09451032b3741df8a30c936bd81cc31038866dd2f4d0eb92966e48b292f48",
+        "error": null,
+        "error_artifact": null,
+        "family_law": {
+          "actual_read_standardize": false,
+          "amsgrad": false,
+          "continuous_policy": null,
+          "critic_formulation": "ka2",
+          "family": "ka2",
+          "lr_control": "declared_cosine_schedule",
+          "old_policy_credit": false,
+          "output_noise_mode": "fixed",
+          "output_noise_std": 0.029,
+          "output_noise_warmup_fraction": 0.2,
+          "primary_law": "noisy_fast",
+          "primary_output_noise": true,
+          "prior_kind": "particles",
+          "prior_sigma_rel": 0.0,
+          "recipe_standardize_flag": true,
+          "schedule_horizon": 7000,
+          "serve_average": 0.0,
+          "served_model": "fast_only"
+        },
+        "observations": [
+          {
+            "completed_steps": 0,
+            "evaluation_seed": 34002,
+            "failed_bounds": [],
+            "metrics": {
+              "accuracy_abs_cov_trace_bias": 0.0025707502954519512,
+              "accuracy_center_max_sigma": 0.2109862172686313,
+              "accuracy_center_rms_sigma": 0.09518974468793848,
+              "accuracy_cov_frob_rms": 0.11405581568459748,
+              "accuracy_cov_trace_bias": -0.0025707502954519512,
+              "accuracy_mass_tv": 0.026399999999999993,
+              "accuracy_n": 20000,
+              "accuracy_precision": 0.99005,
+              "accuracy_precision_gap": 0.0011589965382422518,
+              "accuracy_radial_ks": 0.009596310349313852,
+              "accuracy_valid_n": 20000,
+              "accuracy_within_radius_n": 19801,
+              "hq": 0.99005,
+              "mass_tv": 0.026399999999999993,
+              "max_cov_eig_ratio": 1.28841635165726,
+              "max_mode_mass": 0.01145,
+              "max_radial_median_ratio": 1.0895155675772954,
+              "min_cov_eig_ratio": 0.7065771968433837,
+              "min_hq_count": 164,
+              "min_hq_mode_mass": 0.0082,
+              "min_radial_median_ratio": 0.8865828282268469,
+              "modes": 100,
+              "n": 20000,
+              "precision": 0.99005,
+              "valid_n": 20000
+            },
+            "passed": true,
+            "samples": 20000
+          }
+        ],
+        "ordinary_training_updates": 0,
+        "recipe_sha256": "94bf7ca81f8a45d06e1193009b27395b142d7fc088d19bba54a6031d29eb29ca",
+        "source": {
+          "binder_sha256": "0a5a20366147178f504841f02aafb3ba8de4516e2600651223e70a52acad0409",
+          "files": 63,
+          "manifest_sha256": "91307c9101d7141186dff61b655aa8a3dc82a29ed0893bf4ed8d27a9688eae0b",
+          "new_test_files_sha256": {
+            "reports/forge/ka2-k3p-defaults-20261003/protocol.py": "edb996e2c51ae0d845145d7d918eaca37e9d3e8640392295a711e892ccbcb2a5"
+          },
+          "reproducer_commit": "26ff278c3796d775969391adc0bde52e3af11149",
+          "scientific_base_commit": "4749b2780add539df4bd8d2dd1d3cc9f002f77ad"
+        },
+        "status": "SUPPORTED"
+      },
+      "case_sha256": "9ba09451032b3741df8a30c936bd81cc31038866dd2f4d0eb92966e48b292f48",
+      "completed_updates": null,
+      "config_id": "ka2--0e72647d9ecce0e92a1a2de81fc78b2e93e2cc8bdaf7a9ab0662a3de4775c236",
+      "conservative_reserved_seconds": 0.0,
+      "family": "ka2",
+      "family_law": {
+        "actual_read_standardize": false,
+        "amsgrad": false,
+        "continuous_policy": null,
+        "critic_formulation": "ka2",
+        "family": "ka2",
+        "lr_control": "declared_cosine_schedule",
+        "old_policy_credit": false,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.029,
+        "output_noise_warmup_fraction": 0.2,
+        "primary_law": "noisy_fast",
+        "primary_output_noise": true,
+        "prior_kind": "particles",
+        "prior_sigma_rel": 0.0,
+        "recipe_standardize_flag": true,
+        "schedule_horizon": 7000,
+        "serve_average": 0.0,
+        "served_model": "fast_only"
+      },
+      "final_metrics": null,
+      "full_protocol_complete": false,
+      "id": "api-staggered100",
+      "media": null,
+      "original_gate": null,
+      "paid_seconds": 0.0,
+      "question": "Recover all 100 equal-weight Gaussian modes, their mass and local width, including independent density-fidelity bounds.",
+      "reason": null,
+      "recipe_overrides": {
+        "d_lr_mult": 1.0,
+        "lr": 0.006375,
+        "prior_lr_mult": 1.0
+      },
+      "requirements": {
+        "batch_size": 2048,
+        "default_steps": 7000,
+        "eval_samples": 20000,
+        "evaluation_observations": 24,
+        "sampling": "public served latent law, including enabled DV12/feature-cell perturbation, plus the recipe's output noise; diagnostics remove additive output noise only",
+        "terminal_observations": null,
+        "thresholds": {
+          "accuracy": {
+            "abs_cov_trace_bias": 0.1,
+            "center_rms_sigma": 0.2,
+            "mass_tv": 0.06,
+            "radial_ks": 0.04
+          },
+          "native": {
+            "all_finite": true,
+            "max_cov_eig_ratio": 1.7,
+            "max_mass_tv": 0.1,
+            "max_mode_mass": 0.02,
+            "max_radial_median_ratio": 1.4,
+            "min_cov_eig_ratio": 0.4,
+            "min_hq_mode_mass": 0.005,
+            "min_modes": 100,
+            "min_precision": 0.97,
+            "min_radial_median_ratio": 0.65,
+            "min_samples": 20000
+          }
+        }
+      },
+      "resolved_recipe_sha256": "94bf7ca81f8a45d06e1193009b27395b142d7fc088d19bba54a6031d29eb29ca",
+      "runtime": {
+        "cuda": "12.6",
+        "cuda_device_model": "NVIDIA RTX A6000",
+        "device": "cuda:0",
+        "python": "3.12.13",
+        "torch": "2.13.0+cu126",
+        "torch_threads": 1
+      },
+      "status": "UNKNOWN",
+      "study_gate": null,
+      "supervision": {},
+      "tier": 2,
+      "title": "staggered100"
+    },
+    {
+      "acquisition_hold": null,
+      "capacity": {
+        "artifacts": {
+          "samples": {
+            "bytes": 78833,
+            "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/ka2/api-vector-unequal-mass/samples.npz",
+            "sha256": "e7b167ba14751eb6facb68f95bb63853e286e5678b12963d99c0e539791caceb"
+          },
+          "state": {
+            "bytes": 133544,
+            "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/ka2/api-vector-unequal-mass/state.pt",
+            "sha256": "4cdf9774b1497b8aa970a58a21d69fea875761292ea1ec61ba54750ea86b632b"
+          }
+        },
+        "available_artifacts": {},
+        "case_sha256": "e29a36b2461a986a28ca950df869a4926f258b2bfca32bd46bc8b2188aebf32e",
+        "error": null,
+        "error_artifact": null,
+        "family_law": {
+          "actual_read_standardize": false,
+          "amsgrad": false,
+          "continuous_policy": null,
+          "critic_formulation": "ka2",
+          "family": "ka2",
+          "lr_control": "declared_cosine_schedule",
+          "old_policy_credit": false,
+          "output_noise_mode": "fixed",
+          "output_noise_std": 0.029,
+          "output_noise_warmup_fraction": 0.2,
+          "primary_law": "fast_without_output_noise",
+          "primary_output_noise": false,
+          "prior_kind": "particles",
+          "prior_sigma_rel": 0.0,
+          "recipe_standardize_flag": true,
+          "schedule_horizon": 1200,
+          "serve_average": 0.0,
+          "served_model": "fast_only"
+        },
+        "observations": [
+          {
+            "completed_steps": 0,
+            "evaluation_seed": 34002,
+            "failed_bounds": [],
+            "metrics": {
+              "component_core_covariance_error": 0.06383375590667129,
+              "component_core_min_eigen_ratio": 0.9245203733444214,
+              "component_covariance_error": 0.06383375590667129,
+              "component_min_eigen_ratio": 0.9245203733444214,
+              "covariance_error": 0.044349126517772675,
+              "hq": 0.98583984375,
+              "mass_tv": 0.009208986535668373,
+              "max_component_spill": 0.04805915057659149,
+              "mean_error": 0.029602527618408203,
+              "min_mass_ratio": 0.9521484375,
+              "projection_ks": 0.026140326127520874,
+              "resolved_core_covariance_error": 0.06606706666449706,
+              "resolved_core_min_eigen_ratio": 0.9498530626296997,
+              "resolved_max_component_spill": 0.04805915057659149,
+              "sample_count": 4096,
+              "sw1_normalized": 0.022674626016163758,
+              "target_scale": 1.7593294382095337
+            },
+            "passed": true,
+            "samples": 4096
+          }
+        ],
+        "ordinary_training_updates": 0,
+        "recipe_sha256": "a6cb1de23412017c31d3e686eb5eae21a71331a15032902ce896459ed1a2546e",
+        "source": {
+          "binder_sha256": "0a5a20366147178f504841f02aafb3ba8de4516e2600651223e70a52acad0409",
+          "files": 63,
+          "manifest_sha256": "91307c9101d7141186dff61b655aa8a3dc82a29ed0893bf4ed8d27a9688eae0b",
+          "new_test_files_sha256": {
+            "reports/forge/ka2-k3p-defaults-20261003/protocol.py": "edb996e2c51ae0d845145d7d918eaca37e9d3e8640392295a711e892ccbcb2a5"
+          },
+          "reproducer_commit": "26ff278c3796d775969391adc0bde52e3af11149",
+          "scientific_base_commit": "4749b2780add539df4bd8d2dd1d3cc9f002f77ad"
+        },
+        "status": "SUPPORTED"
+      },
+      "case_sha256": "e29a36b2461a986a28ca950df869a4926f258b2bfca32bd46bc8b2188aebf32e",
+      "completed_updates": null,
+      "config_id": "ka2--0e72647d9ecce0e92a1a2de81fc78b2e93e2cc8bdaf7a9ab0662a3de4775c236",
+      "conservative_reserved_seconds": 0.0,
+      "family": "ka2",
+      "family_law": {
+        "actual_read_standardize": false,
+        "amsgrad": false,
+        "continuous_policy": null,
+        "critic_formulation": "ka2",
+        "family": "ka2",
+        "lr_control": "declared_cosine_schedule",
+        "old_policy_credit": false,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.029,
+        "output_noise_warmup_fraction": 0.2,
+        "primary_law": "fast_without_output_noise",
+        "primary_output_noise": false,
+        "prior_kind": "particles",
+        "prior_sigma_rel": 0.0,
+        "recipe_standardize_flag": true,
+        "schedule_horizon": 1200,
+        "serve_average": 0.0,
+        "served_model": "fast_only"
+      },
+      "final_metrics": null,
+      "full_protocol_complete": false,
+      "id": "api-vector-unequal-mass",
+      "media": null,
+      "original_gate": null,
+      "paid_seconds": 0.0,
+      "question": "Checks target occupancy including the rare 2% component, not uniformity.",
+      "reason": null,
+      "recipe_overrides": {
+        "d_lr_mult": 1.0,
+        "lr": 0.006375,
+        "prior_lr_mult": 1.0
+      },
+      "requirements": {
+        "batch_size": 128,
+        "default_steps": 1200,
+        "eval_samples": 4096,
+        "evaluation_observations": 24,
+        "sampling": "public served latent law; independent evaluation RNG; output_noise=False removes additive output noise only; DV12/feature-cell latent perturbation remains when enabled",
+        "terminal_observations": null,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "resolved_core_covariance_error",
+            "<=",
+            0.5
+          ],
+          [
+            "resolved_core_min_eigen_ratio",
+            ">=",
+            0.15
+          ],
+          [
+            "resolved_max_component_spill",
+            "<=",
+            0.05
+          ],
+          [
+            "min_mass_ratio",
+            ">=",
+            0.25
+          ],
+          [
+            "sample_count",
+            ">=",
+            4096
+          ],
+          [
+            "projection_ks",
+            "<=",
+            0.06
+          ]
+        ]
+      },
+      "resolved_recipe_sha256": "a6cb1de23412017c31d3e686eb5eae21a71331a15032902ce896459ed1a2546e",
+      "runtime": {
+        "cuda": "12.6",
+        "cuda_device_model": "NVIDIA RTX A6000",
+        "device": "cuda:0",
+        "python": "3.12.13",
+        "torch": "2.13.0+cu126",
+        "torch_threads": 1
+      },
+      "status": "UNKNOWN",
+      "study_gate": null,
+      "supervision": {},
+      "tier": 2,
+      "title": "vector_unequal_mass"
+    },
+    {
+      "acquisition_hold": null,
+      "capacity": {
+        "artifacts": {
+          "samples": {
+            "bytes": 82919,
+            "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/ka2/api-vector-anisotropic/samples.npz",
+            "sha256": "05d71602edcfb166a39e55fa4515db5ff2cac254e9d37da508927ac5d8c61dc6"
+          },
+          "state": {
+            "bytes": 133480,
+            "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/ka2/api-vector-anisotropic/state.pt",
+            "sha256": "3c8211f00e76c25a6be339630db7eb76de3b5d5b775736edc8f33f04a4b9b6c2"
+          }
+        },
+        "available_artifacts": {},
+        "case_sha256": "2ec941011f8398672ce85b1d4df41c6e22dce2e0f98354a75f1d9a6794d4e1b6",
+        "error": null,
+        "error_artifact": null,
+        "family_law": {
+          "actual_read_standardize": false,
+          "amsgrad": false,
+          "continuous_policy": null,
+          "critic_formulation": "ka2",
+          "family": "ka2",
+          "lr_control": "declared_cosine_schedule",
+          "old_policy_credit": false,
+          "output_noise_mode": "fixed",
+          "output_noise_std": 0.029,
+          "output_noise_warmup_fraction": 0.2,
+          "primary_law": "fast_without_output_noise",
+          "primary_output_noise": false,
+          "prior_kind": "particles",
+          "prior_sigma_rel": 0.0,
+          "recipe_standardize_flag": true,
+          "schedule_horizon": 1200,
+          "serve_average": 0.0,
+          "served_model": "fast_only"
+        },
+        "observations": [
+          {
+            "completed_steps": 0,
+            "evaluation_seed": 34002,
+            "failed_bounds": [],
+            "metrics": {
+              "component_core_covariance_error": 0.026737092062830925,
+              "component_core_min_eigen_ratio": 0.9129617214202881,
+              "component_covariance_error": 0.026737092062830925,
+              "component_min_eigen_ratio": 0.9129617214202881,
+              "covariance_error": 0.01333538256585598,
+              "hq": 0.989990234375,
+              "mass_tv": 0.007731124758720398,
+              "max_component_spill": 0.011045655235648155,
+              "mean_error": 0.014872182160615921,
+              "min_mass_ratio": 0.982177734375,
+              "projection_ks": 0.025898691476780034,
+              "resolved_core_covariance_error": 0.026737092062830925,
+              "resolved_core_min_eigen_ratio": 0.9129617214202881,
+              "resolved_max_component_spill": 0.011045655235648155,
+              "sample_count": 4096,
+              "sw1_normalized": 0.013862245951853256,
+              "target_scale": 2.032285690307617
+            },
+            "passed": true,
+            "samples": 4096
+          }
+        ],
+        "ordinary_training_updates": 0,
+        "recipe_sha256": "a6cb1de23412017c31d3e686eb5eae21a71331a15032902ce896459ed1a2546e",
+        "source": {
+          "binder_sha256": "0a5a20366147178f504841f02aafb3ba8de4516e2600651223e70a52acad0409",
+          "files": 63,
+          "manifest_sha256": "91307c9101d7141186dff61b655aa8a3dc82a29ed0893bf4ed8d27a9688eae0b",
+          "new_test_files_sha256": {
+            "reports/forge/ka2-k3p-defaults-20261003/protocol.py": "edb996e2c51ae0d845145d7d918eaca37e9d3e8640392295a711e892ccbcb2a5"
+          },
+          "reproducer_commit": "26ff278c3796d775969391adc0bde52e3af11149",
+          "scientific_base_commit": "4749b2780add539df4bd8d2dd1d3cc9f002f77ad"
+        },
+        "status": "SUPPORTED"
+      },
+      "case_sha256": "2ec941011f8398672ce85b1d4df41c6e22dce2e0f98354a75f1d9a6794d4e1b6",
+      "completed_updates": null,
+      "config_id": "ka2--0e72647d9ecce0e92a1a2de81fc78b2e93e2cc8bdaf7a9ab0662a3de4775c236",
+      "conservative_reserved_seconds": 0.0,
+      "family": "ka2",
+      "family_law": {
+        "actual_read_standardize": false,
+        "amsgrad": false,
+        "continuous_policy": null,
+        "critic_formulation": "ka2",
+        "family": "ka2",
+        "lr_control": "declared_cosine_schedule",
+        "old_policy_credit": false,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.029,
+        "output_noise_warmup_fraction": 0.2,
+        "primary_law": "fast_without_output_noise",
+        "primary_output_noise": false,
+        "prior_kind": "particles",
+        "prior_sigma_rel": 0.0,
+        "recipe_standardize_flag": true,
+        "schedule_horizon": 1200,
+        "serve_average": 0.0,
+        "served_model": "fast_only"
+      },
+      "final_metrics": null,
+      "full_protocol_complete": false,
+      "id": "api-vector-anisotropic",
+      "media": null,
+      "original_gate": null,
+      "paid_seconds": 0.0,
+      "question": "Checks covariance shape: a narrow axis cannot be rescued by a wide one.",
+      "reason": null,
+      "recipe_overrides": {
+        "d_lr_mult": 1.0,
+        "lr": 0.006375,
+        "prior_lr_mult": 1.0
+      },
+      "requirements": {
+        "batch_size": 128,
+        "default_steps": 1200,
+        "eval_samples": 4096,
+        "evaluation_observations": 24,
+        "sampling": "public served latent law; independent evaluation RNG; output_noise=False removes additive output noise only; DV12/feature-cell latent perturbation remains when enabled",
+        "terminal_observations": null,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "resolved_core_covariance_error",
+            "<=",
+            0.5
+          ],
+          [
+            "resolved_core_min_eigen_ratio",
+            ">=",
+            0.15
+          ],
+          [
+            "resolved_max_component_spill",
+            "<=",
+            0.05
+          ],
+          [
+            "sample_count",
+            ">=",
+            4096
+          ],
+          [
+            "projection_ks",
+            "<=",
+            0.06
+          ]
+        ]
+      },
+      "resolved_recipe_sha256": "a6cb1de23412017c31d3e686eb5eae21a71331a15032902ce896459ed1a2546e",
+      "runtime": {
+        "cuda": "12.6",
+        "cuda_device_model": "NVIDIA RTX A6000",
+        "device": "cuda:0",
+        "python": "3.12.13",
+        "torch": "2.13.0+cu126",
+        "torch_threads": 1
+      },
+      "status": "UNKNOWN",
+      "study_gate": null,
+      "supervision": {},
+      "tier": 2,
+      "title": "vector_anisotropic"
+    },
+    {
+      "acquisition_hold": null,
+      "capacity": {
+        "artifacts": {
+          "samples": {
+            "bytes": 15021,
+            "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/ka2/image-develop-img_bars4-source-transpose12/samples.npz",
+            "sha256": "8d0c210315f742b1f9b86115090daab24a88a0d86ee7d226e8f3b0e4e1fed6cc"
+          },
+          "state": {
+            "bytes": 120345,
+            "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/ka2/image-develop-img_bars4-source-transpose12/state.pt",
+            "sha256": "32f3913575ceeeb96bb626339ee6f0ad5ab04ad5f1d10297c730799bfd12459c"
+          }
+        },
+        "available_artifacts": {},
+        "case_sha256": "d3145a02dd5e98155b006bf3e99899003707fe8fcf62318ba55fcd2fc6374b4d",
+        "error": null,
+        "error_artifact": null,
+        "family_law": {
+          "actual_read_standardize": false,
+          "amsgrad": false,
+          "continuous_policy": null,
+          "critic_formulation": "ka2",
+          "family": "ka2",
+          "lr_control": "declared_cosine_schedule",
+          "old_policy_credit": false,
+          "output_noise_mode": "fixed",
+          "output_noise_std": 0.029,
+          "output_noise_warmup_fraction": 0.2,
+          "primary_law": "fast_without_output_noise",
+          "primary_output_noise": false,
+          "prior_kind": "particles",
+          "prior_sigma_rel": 0,
+          "recipe_standardize_flag": true,
+          "schedule_horizon": 600,
+          "serve_average": 0.0,
+          "served_model": "fast_only"
+        },
+        "observations": [
+          {
+            "completed_steps": 0,
+            "evaluation_seed": 34002,
+            "failed_bounds": [],
+            "metrics": {
+              "distribution_tv": 0.0146484375,
+              "finite_template_tv": 0.0146484375,
+              "hq": 1.0,
+              "mean_rmse": 0.0004789124650415033,
+              "modes": 4.0,
+              "rejected_mass": 0.0,
+              "samples": 1024.0
+            },
+            "passed": true,
+            "samples": 1024
+          }
+        ],
+        "ordinary_training_updates": 0,
+        "recipe_sha256": "a728838b5086f43510d4f9c4a3dea196c055d8587805eb6862a3c5968d46cda4",
+        "source": {
+          "binder_sha256": "0a5a20366147178f504841f02aafb3ba8de4516e2600651223e70a52acad0409",
+          "files": 63,
+          "manifest_sha256": "91307c9101d7141186dff61b655aa8a3dc82a29ed0893bf4ed8d27a9688eae0b",
+          "new_test_files_sha256": {
+            "reports/forge/ka2-k3p-defaults-20261003/protocol.py": "edb996e2c51ae0d845145d7d918eaca37e9d3e8640392295a711e892ccbcb2a5"
+          },
+          "reproducer_commit": "26ff278c3796d775969391adc0bde52e3af11149",
+          "scientific_base_commit": "4749b2780add539df4bd8d2dd1d3cc9f002f77ad"
+        },
+        "status": "SUPPORTED"
+      },
+      "case_sha256": "d3145a02dd5e98155b006bf3e99899003707fe8fcf62318ba55fcd2fc6374b4d",
+      "completed_updates": null,
+      "config_id": "ka2--0e72647d9ecce0e92a1a2de81fc78b2e93e2cc8bdaf7a9ab0662a3de4775c236",
+      "conservative_reserved_seconds": 0.0,
+      "family": "ka2",
+      "family_law": {
+        "actual_read_standardize": false,
+        "amsgrad": false,
+        "continuous_policy": null,
+        "critic_formulation": "ka2",
+        "family": "ka2",
+        "lr_control": "declared_cosine_schedule",
+        "old_policy_credit": false,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.029,
+        "output_noise_warmup_fraction": 0.2,
+        "primary_law": "fast_without_output_noise",
+        "primary_output_noise": false,
+        "prior_kind": "particles",
+        "prior_sigma_rel": 0,
+        "recipe_standardize_flag": true,
+        "schedule_horizon": 600,
+        "serve_average": 0.0,
+        "served_model": "fast_only"
+      },
+      "final_metrics": null,
+      "full_protocol_complete": false,
+      "id": "image-develop-img_bars4-source-transpose12",
+      "media": null,
+      "original_gate": null,
+      "paid_seconds": 0.0,
+      "question": "Recover all four horizontal/vertical bar positions with sharp pixel fidelity and balanced output mass.",
+      "reason": null,
+      "recipe_overrides": {
+        "d_lr_mult": 1.0,
+        "lr": 0.006375,
+        "prior_lr_mult": 1.0
+      },
+      "requirements": {
+        "batch_size": 32,
+        "default_steps": 600,
+        "eval_samples": 1024,
+        "evaluation_observations": 24,
+        "sampling": {
+          "cohort": "New public-API variant; historical results are not imported",
+          "evaluation": "Public ServedModel.sample/generate, fixed isolated per-context streams, output_noise=False; DV12 latent perturbation and selected weights retained",
+          "prior": "32 uniformly sampled trainable particle rows",
+          "prior_exception": "Finite-template architecture controls retain their original 32-row cloud; this is not a learned-MoG qualification host.",
+          "training_real": "Uniform ordered template IDs, independent N(0,.01^2) pixels, clipped to [0,1]"
+        },
+        "terminal_observations": null,
+        "thresholds": {
+          "distribution_tv_max": 0.1,
+          "finite_template_tv_max": 0.1,
+          "hq_min": 0.9,
+          "min_mode_fraction": 0.125,
+          "minimum_stable_checks": 5,
+          "modes": 4,
+          "observations": 24,
+          "quality_rmse": 0.1
+        }
+      },
+      "resolved_recipe_sha256": "a728838b5086f43510d4f9c4a3dea196c055d8587805eb6862a3c5968d46cda4",
+      "runtime": {
+        "cuda": "12.6",
+        "cuda_device_model": "NVIDIA RTX A6000",
+        "device": "cuda:0",
+        "python": "3.12.13",
+        "torch": "2.13.0+cu126",
+        "torch_threads": 1
+      },
+      "status": "UNKNOWN",
+      "study_gate": null,
+      "supervision": {},
+      "tier": 2,
+      "title": "bars4: transpose width 12"
+    },
+    {
+      "acquisition_hold": {
+        "reason": "no five-check acquisition window",
+        "status": "FAIL"
+      },
+      "artifacts": {
+        "final-state.pt": {
+          "bytes": 170831,
+          "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/k3p/k3p--f78cc396dcc019a14b70121b463e9f609a65fbae249edbca74109873dde217f5/image-develop-img_intensity2-source-transpose12/final-state.pt",
+          "sha256": "24567ffd5c7e32768af2e3f3b32c60b31a2eb776a3f1c2ff0ceb1330d10745dc"
+        },
+        "goal.gif": {
+          "bytes": 219873,
+          "caption": "Original gate: FAIL; added first-window hold: FAIL; confirm step unavailable; later unavailable/unavailable passing; at least 5 required, every later primary check must pass.",
+          "frames": 9,
+          "original_path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/k3p/k3p--f78cc396dcc019a14b70121b463e9f609a65fbae249edbca74109873dde217f5/image-develop-img_intensity2-source-transpose12/goal.gif",
+          "path": "media/k3p/image-develop-img_intensity2-source-transpose12/goal.gif",
+          "sha256": "85f8d05174a7bd2d4f0960649f76dcd38f3afa4af583a9430a67bbed9d13b181"
+        },
+        "observations.npz": {
+          "bytes": 347836,
+          "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/k3p/k3p--f78cc396dcc019a14b70121b463e9f609a65fbae249edbca74109873dde217f5/image-develop-img_intensity2-source-transpose12/observations.npz",
+          "sha256": "572bf258fc4f835b4116aaf03aee6f65088afc0b780abec7c972ca3ddda8b2e1"
+        }
+      },
+      "capacity": {
+        "artifacts": {
+          "samples": {
+            "bytes": 15418,
+            "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/k3p/image-develop-img_intensity2-source-transpose12/samples.npz",
+            "sha256": "b425ef7d571357023536b95d12c1101fcd2bb9fc6fb075d8c9f6957b89959e23"
+          },
+          "state": {
+            "bytes": 120537,
+            "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/k3p/image-develop-img_intensity2-source-transpose12/state.pt",
+            "sha256": "951e5ad7436c52a840f0032d1ace280643c690b71b172960181e332d3cf8d755"
+          }
+        },
+        "available_artifacts": {},
+        "case_sha256": "e9fa47de6adbb31f083c0333b0c7c41352d2b890b16539d47839d3f9720c5dfb",
+        "error": null,
+        "error_artifact": null,
+        "family_law": {
+          "actual_read_standardize": false,
+          "amsgrad": false,
+          "continuous_policy": null,
+          "critic_formulation": "k3p",
+          "family": "k3p",
+          "lr_control": "declared_cosine_schedule",
+          "old_policy_credit": false,
+          "output_noise_mode": "fixed",
+          "output_noise_std": 0.029,
+          "output_noise_warmup_fraction": 0.2,
+          "primary_law": "fast_without_output_noise",
+          "primary_output_noise": false,
+          "prior_kind": "particles",
+          "prior_sigma_rel": 0,
+          "recipe_standardize_flag": true,
+          "schedule_horizon": 600,
+          "serve_average": 0.0,
+          "served_model": "fast_only"
+        },
+        "observations": [
+          {
+            "completed_steps": 0,
+            "evaluation_seed": 34002,
+            "failed_bounds": [],
+            "metrics": {
+              "distribution_tv": 0.0029296875,
+              "finite_template_tv": 0.0029296875,
+              "hq": 1.0,
+              "mean_rmse": 0.0005231625982560217,
+              "modes": 2.0,
+              "rejected_mass": 0.0,
+              "samples": 1024.0
+            },
+            "passed": true,
+            "samples": 1024
+          }
+        ],
+        "ordinary_training_updates": 0,
+        "recipe_sha256": "5022fe00091f2b86d04158feed96383124b4db2c24b19c9249d3fda70ae6fec1",
+        "source": {
+          "binder_sha256": "0a5a20366147178f504841f02aafb3ba8de4516e2600651223e70a52acad0409",
+          "files": 63,
+          "manifest_sha256": "91307c9101d7141186dff61b655aa8a3dc82a29ed0893bf4ed8d27a9688eae0b",
+          "new_test_files_sha256": {
+            "reports/forge/ka2-k3p-defaults-20261003/protocol.py": "edb996e2c51ae0d845145d7d918eaca37e9d3e8640392295a711e892ccbcb2a5"
+          },
+          "reproducer_commit": "26ff278c3796d775969391adc0bde52e3af11149",
+          "scientific_base_commit": "4749b2780add539df4bd8d2dd1d3cc9f002f77ad"
+        },
+        "status": "SUPPORTED"
+      },
+      "case_sha256": "e9fa47de6adbb31f083c0333b0c7c41352d2b890b16539d47839d3f9720c5dfb",
+      "completed_updates": 600,
+      "config_id": "k3p--f78cc396dcc019a14b70121b463e9f609a65fbae249edbca74109873dde217f5",
+      "conservative_reserved_seconds": 0.0,
+      "family": "k3p",
+      "family_law": {
+        "actual_read_standardize": false,
+        "amsgrad": false,
+        "continuous_policy": null,
+        "critic_formulation": "k3p",
+        "family": "k3p",
+        "lr_control": "declared_cosine_schedule",
+        "old_policy_credit": false,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.029,
+        "output_noise_warmup_fraction": 0.2,
+        "primary_law": "fast_without_output_noise",
+        "primary_output_noise": false,
+        "prior_kind": "particles",
+        "prior_sigma_rel": 0,
+        "recipe_standardize_flag": true,
+        "schedule_horizon": 600,
+        "serve_average": 0.0,
+        "served_model": "fast_only"
+      },
+      "final_metrics": {
+        "completed_steps": 600.0,
+        "distribution_tv": 0.0986328125,
+        "finite_template_tv": 0.2021484375,
+        "hq": 0.896484375,
+        "mean_rmse": 0.033563561737537384,
+        "modes": 2.0,
+        "output_noise_added": 0.0,
+        "policy_latent_perturbation": 0.0,
+        "rejected_mass": 0.103515625,
+        "samples": 1024.0,
+        "served_averaged": 0.0
+      },
+      "full_protocol_complete": true,
+      "id": "image-develop-img_intensity2-source-transpose12",
+      "media": {
+        "bytes": 219873,
+        "caption": "Original gate: FAIL; added first-window hold: FAIL; confirm step unavailable; later unavailable/unavailable passing; at least 5 required, every later primary check must pass.",
+        "frames": 9,
+        "original_path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/k3p/k3p--f78cc396dcc019a14b70121b463e9f609a65fbae249edbca74109873dde217f5/image-develop-img_intensity2-source-transpose12/goal.gif",
+        "path": "media/k3p/image-develop-img_intensity2-source-transpose12/goal.gif",
+        "sha256": "85f8d05174a7bd2d4f0960649f76dcd38f3afa4af583a9430a67bbed9d13b181"
+      },
+      "original_gate": "FAIL",
+      "paid_seconds": 13.576090276008472,
+      "question": "Recover both center-patch intensities (0.35 and 0.85) with correct brightness and balanced output mass.",
+      "reason": null,
+      "receipt": {
+        "bytes": 45853,
+        "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/k3p/k3p--f78cc396dcc019a14b70121b463e9f609a65fbae249edbca74109873dde217f5/image-develop-img_intensity2-source-transpose12/receipt.json",
+        "sha256": "2cb069fdd6cf3560385984f3a9d35d651e0d0df3e1aca28d864ea0582679c480"
+      },
+      "recipe_overrides": {
+        "d_lr_mult": 1.0,
+        "lr": 0.006375,
+        "prior_lr_mult": 1.0
+      },
+      "requirements": {
+        "batch_size": 32,
+        "default_steps": 600,
+        "eval_samples": 1024,
+        "evaluation_observations": 24,
+        "sampling": {
+          "cohort": "New public-API variant; historical results are not imported",
+          "evaluation": "Public ServedModel.sample/generate, fixed isolated per-context streams, output_noise=False; DV12 latent perturbation and selected weights retained",
+          "prior": "32 uniformly sampled trainable particle rows",
+          "prior_exception": "Finite-template architecture controls retain their original 32-row cloud; this is not a learned-MoG qualification host.",
+          "training_real": "Uniform ordered template IDs, independent N(0,.01^2) pixels, clipped to [0,1]"
+        },
+        "terminal_observations": null,
+        "thresholds": {
+          "distribution_tv_max": 0.1,
+          "finite_template_tv_max": 0.1,
+          "hq_min": 0.9,
+          "min_mode_fraction": 0.25,
+          "minimum_stable_checks": 5,
+          "modes": 2,
+          "observations": 24,
+          "quality_rmse": 0.06
+        }
+      },
+      "resolved_recipe_sha256": "5022fe00091f2b86d04158feed96383124b4db2c24b19c9249d3fda70ae6fec1",
+      "runtime": {
+        "cuda": "12.6",
+        "cuda_device_model": "NVIDIA RTX A6000",
+        "device": "cuda:0",
+        "python": "3.12.13",
+        "torch": "2.13.0+cu126",
+        "torch_threads": 1
+      },
+      "status": "FAIL",
+      "study_gate": "FAIL",
+      "supervision": {
+        "log": {
+          "bytes": 4704,
+          "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/k3p/k3p--f78cc396dcc019a14b70121b463e9f609a65fbae249edbca74109873dde217f5/image-develop-img_intensity2-source-transpose12.log",
+          "sha256": "5a77d450063213dc1f1704e9affcbb696060d117eea75f5fccf0d48cd8d4e2d9"
+        },
+        "supervisor-request.json": {
+          "bytes": 558574,
+          "path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/9530b2c8e35285a0b0f8791bc57183991a73d3e64766bf1866a7c2247f71c9cc/supervisor-request.json",
+          "sha256": "5d70c1d8c8b987d17bcc43b108e1804933f174c3241432e730e6c0b607313aad"
+        },
+        "supervisor-terminal.json": {
+          "bytes": 151,
+          "path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/9530b2c8e35285a0b0f8791bc57183991a73d3e64766bf1866a7c2247f71c9cc/supervisor-terminal.json",
+          "sha256": "ea2d9bcc5257efd235a182d32d2376e514851edc04190713aff7f8df6db146a5"
+        }
+      },
+      "tier": 1,
+      "title": "intensity2: transpose width 12"
+    },
+    {
+      "acquisition_hold": null,
+      "capacity": {
+        "artifacts": {
+          "samples": {
+            "bytes": 82168,
+            "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/k3p/api-vector-two-broad/samples.npz",
+            "sha256": "78a5d8e896c393a5b66b65cb4b7eb33e671a84d7ae9eafacb2dfe1245840b537"
+          },
+          "state": {
+            "bytes": 133288,
+            "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/k3p/api-vector-two-broad/state.pt",
+            "sha256": "974f71d4b211382a641ece1be5049ca7145020497d6eda8f54d65ef5ca9dcda3"
+          }
+        },
+        "available_artifacts": {},
+        "case_sha256": "e293cf19f2f235b30807f9782ec65ceea3693f78e3459b9f7eb117179168c8fc",
+        "error": null,
+        "error_artifact": null,
+        "family_law": {
+          "actual_read_standardize": false,
+          "amsgrad": false,
+          "continuous_policy": null,
+          "critic_formulation": "k3p",
+          "family": "k3p",
+          "lr_control": "declared_cosine_schedule",
+          "old_policy_credit": false,
+          "output_noise_mode": "fixed",
+          "output_noise_std": 0.029,
+          "output_noise_warmup_fraction": 0.2,
+          "primary_law": "fast_without_output_noise",
+          "primary_output_noise": false,
+          "prior_kind": "particles",
+          "prior_sigma_rel": 0.0,
+          "recipe_standardize_flag": true,
+          "schedule_horizon": 1200,
+          "serve_average": 0.0,
+          "served_model": "fast_only"
+        },
+        "observations": [
+          {
+            "completed_steps": 0,
+            "evaluation_seed": 34002,
+            "failed_bounds": [],
+            "metrics": {
+              "component_core_covariance_error": 0.04707273282110691,
+              "component_core_min_eigen_ratio": 0.9772696495056152,
+              "component_covariance_error": 0.04707273282110691,
+              "component_min_eigen_ratio": 0.9772696495056152,
+              "covariance_error": 0.013306958600878716,
+              "hq": 0.981201171875,
+              "mass_tv": 0.006591796875,
+              "max_component_spill": 0.02078179083764553,
+              "mean_error": 0.006760362070053816,
+              "min_mass_ratio": 0.98681640625,
+              "projection_ks": 0.03857414763903855,
+              "resolved_core_covariance_error": 0.04707273282110691,
+              "resolved_core_min_eigen_ratio": 0.9772696495056152,
+              "resolved_max_component_spill": 0.02078179083764553,
+              "sample_count": 4096,
+              "sw1_normalized": 0.013303275020110864,
+              "target_scale": 1.0555585622787476
+            },
+            "passed": true,
+            "samples": 4096
+          }
+        ],
+        "ordinary_training_updates": 0,
+        "recipe_sha256": "ca91c59e59e1de7240ed983d553fb4b07ec378631889771fda7bf8ea6f5f496b",
+        "source": {
+          "binder_sha256": "0a5a20366147178f504841f02aafb3ba8de4516e2600651223e70a52acad0409",
+          "files": 63,
+          "manifest_sha256": "91307c9101d7141186dff61b655aa8a3dc82a29ed0893bf4ed8d27a9688eae0b",
+          "new_test_files_sha256": {
+            "reports/forge/ka2-k3p-defaults-20261003/protocol.py": "edb996e2c51ae0d845145d7d918eaca37e9d3e8640392295a711e892ccbcb2a5"
+          },
+          "reproducer_commit": "26ff278c3796d775969391adc0bde52e3af11149",
+          "scientific_base_commit": "4749b2780add539df4bd8d2dd1d3cc9f002f77ad"
+        },
+        "status": "SUPPORTED"
+      },
+      "case_sha256": "e293cf19f2f235b30807f9782ec65ceea3693f78e3459b9f7eb117179168c8fc",
+      "completed_updates": null,
+      "config_id": "k3p--f78cc396dcc019a14b70121b463e9f609a65fbae249edbca74109873dde217f5",
+      "conservative_reserved_seconds": 0.0,
+      "family": "k3p",
+      "family_law": {
+        "actual_read_standardize": false,
+        "amsgrad": false,
+        "continuous_policy": null,
+        "critic_formulation": "k3p",
+        "family": "k3p",
+        "lr_control": "declared_cosine_schedule",
+        "old_policy_credit": false,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.029,
+        "output_noise_warmup_fraction": 0.2,
+        "primary_law": "fast_without_output_noise",
+        "primary_output_noise": false,
+        "prior_kind": "particles",
+        "prior_sigma_rel": 0.0,
+        "recipe_standardize_flag": true,
+        "schedule_horizon": 1200,
+        "serve_average": 0.0,
+        "served_model": "fast_only"
+      },
+      "final_metrics": null,
+      "full_protocol_complete": false,
+      "id": "api-vector-two-broad",
+      "media": null,
+      "original_gate": null,
+      "paid_seconds": 0.0,
+      "question": "Basic learnable multimodal distribution and within-mode spread.",
+      "reason": null,
+      "recipe_overrides": {
+        "d_lr_mult": 1.0,
+        "lr": 0.006375,
+        "prior_lr_mult": 1.0
+      },
+      "requirements": {
+        "batch_size": 128,
+        "default_steps": 1200,
+        "eval_samples": 4096,
+        "evaluation_observations": 24,
+        "sampling": "public served latent law; independent evaluation RNG; output_noise=False removes additive output noise only; DV12/feature-cell latent perturbation remains when enabled",
+        "terminal_observations": null,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "component_covariance_error",
+            "<=",
+            0.85
+          ],
+          [
+            "component_min_eigen_ratio",
+            ">=",
+            0.15
+          ],
+          [
+            "sample_count",
+            ">=",
+            4096
+          ],
+          [
+            "projection_ks",
+            "<=",
+            0.06
+          ]
+        ]
+      },
+      "resolved_recipe_sha256": "ca91c59e59e1de7240ed983d553fb4b07ec378631889771fda7bf8ea6f5f496b",
+      "runtime": {
+        "cuda": "12.6",
+        "cuda_device_model": "NVIDIA RTX A6000",
+        "device": "cuda:0",
+        "python": "3.12.13",
+        "torch": "2.13.0+cu126",
+        "torch_threads": 1
+      },
+      "status": "UNKNOWN",
+      "study_gate": null,
+      "supervision": {},
+      "tier": 1,
+      "title": "vector_two_broad"
+    },
+    {
+      "acquisition_hold": null,
+      "capacity": {
+        "artifacts": {
+          "samples": {
+            "bytes": 776382,
+            "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/k3p/api-grid100/samples.npz",
+            "sha256": "d53b6d94a8e9366b90e9d9b7035fbfd88877f91e4116b98de7386cd08bbff4aa"
+          },
+          "state": {
+            "bytes": 804028,
+            "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/k3p/api-grid100/state.pt",
+            "sha256": "a44813b249435d8c0a30ecb19d87b4b257f15f8118d45cadeb498c084c4dfa9c"
+          }
+        },
+        "available_artifacts": {},
+        "case_sha256": "93ca5686f7358c701c58b34798b8e1f784a339c958a0fe8e1c9f90af4867f279",
+        "error": null,
+        "error_artifact": null,
+        "family_law": {
+          "actual_read_standardize": false,
+          "amsgrad": false,
+          "continuous_policy": null,
+          "critic_formulation": "k3p",
+          "family": "k3p",
+          "lr_control": "declared_cosine_schedule",
+          "old_policy_credit": false,
+          "output_noise_mode": "fixed",
+          "output_noise_std": 0.029,
+          "output_noise_warmup_fraction": 0.2,
+          "primary_law": "noisy_fast",
+          "primary_output_noise": true,
+          "prior_kind": "particles",
+          "prior_sigma_rel": 0.0,
+          "recipe_standardize_flag": true,
+          "schedule_horizon": 7000,
+          "serve_average": 0.0,
+          "served_model": "fast_only"
+        },
+        "observations": [
+          {
+            "completed_steps": 0,
+            "evaluation_seed": 34002,
+            "failed_bounds": [],
+            "metrics": {
+              "accuracy_abs_cov_trace_bias": 0.002570725275315655,
+              "accuracy_center_max_sigma": 0.2109861944479632,
+              "accuracy_center_rms_sigma": 0.09518974425439002,
+              "accuracy_cov_frob_rms": 0.11405581658357916,
+              "accuracy_cov_trace_bias": -0.002570725275315655,
+              "accuracy_mass_tv": 0.026399999999999993,
+              "accuracy_n": 20000,
+              "accuracy_precision": 0.99005,
+              "accuracy_precision_gap": 0.0011589965382422518,
+              "accuracy_radial_ks": 0.009597069435225869,
+              "accuracy_valid_n": 20000,
+              "accuracy_within_radius_n": 19801,
+              "hq": 0.99005,
+              "mass_tv": 0.026399999999999993,
+              "max_cov_eig_ratio": 1.2884171769668327,
+              "max_mode_mass": 0.01145,
+              "max_radial_median_ratio": 1.0895157413082655,
+              "min_cov_eig_ratio": 0.7065772117645782,
+              "min_hq_count": 164,
+              "min_hq_mode_mass": 0.0082,
+              "min_radial_median_ratio": 0.8865828282268469,
+              "modes": 100,
+              "n": 20000,
+              "precision": 0.99005,
+              "valid_n": 20000
+            },
+            "passed": true,
+            "samples": 20000
+          }
+        ],
+        "ordinary_training_updates": 0,
+        "recipe_sha256": "22ef4c5902330297f7586e6001b73c4314567334e6524cb385a5eb6d49ba5a91",
+        "source": {
+          "binder_sha256": "0a5a20366147178f504841f02aafb3ba8de4516e2600651223e70a52acad0409",
+          "files": 63,
+          "manifest_sha256": "91307c9101d7141186dff61b655aa8a3dc82a29ed0893bf4ed8d27a9688eae0b",
+          "new_test_files_sha256": {
+            "reports/forge/ka2-k3p-defaults-20261003/protocol.py": "edb996e2c51ae0d845145d7d918eaca37e9d3e8640392295a711e892ccbcb2a5"
+          },
+          "reproducer_commit": "26ff278c3796d775969391adc0bde52e3af11149",
+          "scientific_base_commit": "4749b2780add539df4bd8d2dd1d3cc9f002f77ad"
+        },
+        "status": "SUPPORTED"
+      },
+      "case_sha256": "93ca5686f7358c701c58b34798b8e1f784a339c958a0fe8e1c9f90af4867f279",
+      "completed_updates": null,
+      "config_id": "k3p--f78cc396dcc019a14b70121b463e9f609a65fbae249edbca74109873dde217f5",
+      "conservative_reserved_seconds": 0.0,
+      "family": "k3p",
+      "family_law": {
+        "actual_read_standardize": false,
+        "amsgrad": false,
+        "continuous_policy": null,
+        "critic_formulation": "k3p",
+        "family": "k3p",
+        "lr_control": "declared_cosine_schedule",
+        "old_policy_credit": false,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.029,
+        "output_noise_warmup_fraction": 0.2,
+        "primary_law": "noisy_fast",
+        "primary_output_noise": true,
+        "prior_kind": "particles",
+        "prior_sigma_rel": 0.0,
+        "recipe_standardize_flag": true,
+        "schedule_horizon": 7000,
+        "serve_average": 0.0,
+        "served_model": "fast_only"
+      },
+      "final_metrics": null,
+      "full_protocol_complete": false,
+      "id": "api-grid100",
+      "media": null,
+      "original_gate": null,
+      "paid_seconds": 0.0,
+      "question": "Recover all 100 equal-weight Gaussian modes, their mass and local width, including independent density-fidelity bounds.",
+      "reason": null,
+      "recipe_overrides": {
+        "d_lr_mult": 1.0,
+        "lr": 0.006375,
+        "prior_lr_mult": 1.0
+      },
+      "requirements": {
+        "batch_size": 2048,
+        "default_steps": 7000,
+        "eval_samples": 20000,
+        "evaluation_observations": 24,
+        "sampling": "public served latent law, including enabled DV12/feature-cell perturbation, plus the recipe's output noise; diagnostics remove additive output noise only",
+        "terminal_observations": null,
+        "thresholds": {
+          "accuracy": {
+            "abs_cov_trace_bias": 0.1,
+            "center_rms_sigma": 0.2,
+            "mass_tv": 0.06,
+            "radial_ks": 0.04
+          },
+          "native": {
+            "all_finite": true,
+            "max_cov_eig_ratio": 1.7,
+            "max_mass_tv": 0.1,
+            "max_mode_mass": 0.02,
+            "max_radial_median_ratio": 1.4,
+            "min_cov_eig_ratio": 0.4,
+            "min_hq_mode_mass": 0.005,
+            "min_modes": 100,
+            "min_precision": 0.97,
+            "min_radial_median_ratio": 0.65,
+            "min_samples": 20000
+          }
+        }
+      },
+      "resolved_recipe_sha256": "22ef4c5902330297f7586e6001b73c4314567334e6524cb385a5eb6d49ba5a91",
+      "runtime": {
+        "cuda": "12.6",
+        "cuda_device_model": "NVIDIA RTX A6000",
+        "device": "cuda:0",
+        "python": "3.12.13",
+        "torch": "2.13.0+cu126",
+        "torch_threads": 1
+      },
+      "status": "UNKNOWN",
+      "study_gate": null,
+      "supervision": {},
+      "tier": 2,
+      "title": "grid100"
+    },
+    {
+      "acquisition_hold": null,
+      "capacity": {
+        "artifacts": {
+          "samples": {
+            "bytes": 991528,
+            "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/k3p/api-rotated100/samples.npz",
+            "sha256": "d4c24a0cec7f080cec94bad4e38140ec58d8c331eec331c5d2aa0e4fccd56343"
+          },
+          "state": {
+            "bytes": 804028,
+            "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/k3p/api-rotated100/state.pt",
+            "sha256": "490542c3bca7988a72593a315793c54417289921647225cd1313b52a927a9ff7"
+          }
+        },
+        "available_artifacts": {},
+        "case_sha256": "6e06e5ba492950d3f8063a27f82bf3d51e75574148235495cc1b331b7fb30754",
+        "error": null,
+        "error_artifact": null,
+        "family_law": {
+          "actual_read_standardize": false,
+          "amsgrad": false,
+          "continuous_policy": null,
+          "critic_formulation": "k3p",
+          "family": "k3p",
+          "lr_control": "declared_cosine_schedule",
+          "old_policy_credit": false,
+          "output_noise_mode": "fixed",
+          "output_noise_std": 0.029,
+          "output_noise_warmup_fraction": 0.2,
+          "primary_law": "noisy_fast",
+          "primary_output_noise": true,
+          "prior_kind": "particles",
+          "prior_sigma_rel": 0.0,
+          "recipe_standardize_flag": true,
+          "schedule_horizon": 7000,
+          "serve_average": 0.0,
+          "served_model": "fast_only"
+        },
+        "observations": [
+          {
+            "completed_steps": 0,
+            "evaluation_seed": 34002,
+            "failed_bounds": [],
+            "metrics": {
+              "accuracy_abs_cov_trace_bias": 0.002570926878754154,
+              "accuracy_center_max_sigma": 0.21098673067434504,
+              "accuracy_center_rms_sigma": 0.09518976105559253,
+              "accuracy_cov_frob_rms": 0.11405588796794024,
+              "accuracy_cov_trace_bias": -0.002570926878754154,
+              "accuracy_mass_tv": 0.026399999999999993,
+              "accuracy_n": 20000,
+              "accuracy_precision": 0.99005,
+              "accuracy_precision_gap": 0.0011589965382422518,
+              "accuracy_radial_ks": 0.009595806995593148,
+              "accuracy_valid_n": 20000,
+              "accuracy_within_radius_n": 19801,
+              "hq": 0.99005,
+              "mass_tv": 0.026399999999999993,
+              "max_cov_eig_ratio": 1.2884164780463556,
+              "max_mode_mass": 0.01145,
+              "max_radial_median_ratio": 1.0895155241462084,
+              "min_cov_eig_ratio": 0.7065773585623768,
+              "min_hq_count": 164,
+              "min_hq_mode_mass": 0.0082,
+              "min_radial_median_ratio": 0.8865819222357,
+              "modes": 100,
+              "n": 20000,
+              "precision": 0.99005,
+              "valid_n": 20000
+            },
+            "passed": true,
+            "samples": 20000
+          }
+        ],
+        "ordinary_training_updates": 0,
+        "recipe_sha256": "22ef4c5902330297f7586e6001b73c4314567334e6524cb385a5eb6d49ba5a91",
+        "source": {
+          "binder_sha256": "0a5a20366147178f504841f02aafb3ba8de4516e2600651223e70a52acad0409",
+          "files": 63,
+          "manifest_sha256": "91307c9101d7141186dff61b655aa8a3dc82a29ed0893bf4ed8d27a9688eae0b",
+          "new_test_files_sha256": {
+            "reports/forge/ka2-k3p-defaults-20261003/protocol.py": "edb996e2c51ae0d845145d7d918eaca37e9d3e8640392295a711e892ccbcb2a5"
+          },
+          "reproducer_commit": "26ff278c3796d775969391adc0bde52e3af11149",
+          "scientific_base_commit": "4749b2780add539df4bd8d2dd1d3cc9f002f77ad"
+        },
+        "status": "SUPPORTED"
+      },
+      "case_sha256": "6e06e5ba492950d3f8063a27f82bf3d51e75574148235495cc1b331b7fb30754",
+      "completed_updates": null,
+      "config_id": "k3p--f78cc396dcc019a14b70121b463e9f609a65fbae249edbca74109873dde217f5",
+      "conservative_reserved_seconds": 0.0,
+      "family": "k3p",
+      "family_law": {
+        "actual_read_standardize": false,
+        "amsgrad": false,
+        "continuous_policy": null,
+        "critic_formulation": "k3p",
+        "family": "k3p",
+        "lr_control": "declared_cosine_schedule",
+        "old_policy_credit": false,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.029,
+        "output_noise_warmup_fraction": 0.2,
+        "primary_law": "noisy_fast",
+        "primary_output_noise": true,
+        "prior_kind": "particles",
+        "prior_sigma_rel": 0.0,
+        "recipe_standardize_flag": true,
+        "schedule_horizon": 7000,
+        "serve_average": 0.0,
+        "served_model": "fast_only"
+      },
+      "final_metrics": null,
+      "full_protocol_complete": false,
+      "id": "api-rotated100",
+      "media": null,
+      "original_gate": null,
+      "paid_seconds": 0.0,
+      "question": "Recover all 100 equal-weight Gaussian modes, their mass and local width, including independent density-fidelity bounds.",
+      "reason": null,
+      "recipe_overrides": {
+        "d_lr_mult": 1.0,
+        "lr": 0.006375,
+        "prior_lr_mult": 1.0
+      },
+      "requirements": {
+        "batch_size": 2048,
+        "default_steps": 7000,
+        "eval_samples": 20000,
+        "evaluation_observations": 24,
+        "sampling": "public served latent law, including enabled DV12/feature-cell perturbation, plus the recipe's output noise; diagnostics remove additive output noise only",
+        "terminal_observations": null,
+        "thresholds": {
+          "accuracy": {
+            "abs_cov_trace_bias": 0.1,
+            "center_rms_sigma": 0.2,
+            "mass_tv": 0.06,
+            "radial_ks": 0.04
+          },
+          "native": {
+            "all_finite": true,
+            "max_cov_eig_ratio": 1.7,
+            "max_mass_tv": 0.1,
+            "max_mode_mass": 0.02,
+            "max_radial_median_ratio": 1.4,
+            "min_cov_eig_ratio": 0.4,
+            "min_hq_mode_mass": 0.005,
+            "min_modes": 100,
+            "min_precision": 0.97,
+            "min_radial_median_ratio": 0.65,
+            "min_samples": 20000
+          }
+        }
+      },
+      "resolved_recipe_sha256": "22ef4c5902330297f7586e6001b73c4314567334e6524cb385a5eb6d49ba5a91",
+      "runtime": {
+        "cuda": "12.6",
+        "cuda_device_model": "NVIDIA RTX A6000",
+        "device": "cuda:0",
+        "python": "3.12.13",
+        "torch": "2.13.0+cu126",
+        "torch_threads": 1
+      },
+      "status": "UNKNOWN",
+      "study_gate": null,
+      "supervision": {},
+      "tier": 2,
+      "title": "rotated100"
+    },
+    {
+      "acquisition_hold": null,
+      "capacity": {
+        "artifacts": {
+          "samples": {
+            "bytes": 818812,
+            "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/k3p/api-staggered100/samples.npz",
+            "sha256": "f31bc57e3793b5c8d198fdda22f74168e9c9cef3e9022a4d8ab7640ccf12229f"
+          },
+          "state": {
+            "bytes": 804028,
+            "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/k3p/api-staggered100/state.pt",
+            "sha256": "d9886afc2c64f2b5e82ea73fd1632537a309fcc3bda7729fe280d0ba8e10fc01"
+          }
+        },
+        "available_artifacts": {},
+        "case_sha256": "9ba09451032b3741df8a30c936bd81cc31038866dd2f4d0eb92966e48b292f48",
+        "error": null,
+        "error_artifact": null,
+        "family_law": {
+          "actual_read_standardize": false,
+          "amsgrad": false,
+          "continuous_policy": null,
+          "critic_formulation": "k3p",
+          "family": "k3p",
+          "lr_control": "declared_cosine_schedule",
+          "old_policy_credit": false,
+          "output_noise_mode": "fixed",
+          "output_noise_std": 0.029,
+          "output_noise_warmup_fraction": 0.2,
+          "primary_law": "noisy_fast",
+          "primary_output_noise": true,
+          "prior_kind": "particles",
+          "prior_sigma_rel": 0.0,
+          "recipe_standardize_flag": true,
+          "schedule_horizon": 7000,
+          "serve_average": 0.0,
+          "served_model": "fast_only"
+        },
+        "observations": [
+          {
+            "completed_steps": 0,
+            "evaluation_seed": 34002,
+            "failed_bounds": [],
+            "metrics": {
+              "accuracy_abs_cov_trace_bias": 0.0025707502954519512,
+              "accuracy_center_max_sigma": 0.2109862172686313,
+              "accuracy_center_rms_sigma": 0.09518974468793848,
+              "accuracy_cov_frob_rms": 0.11405581568459748,
+              "accuracy_cov_trace_bias": -0.0025707502954519512,
+              "accuracy_mass_tv": 0.026399999999999993,
+              "accuracy_n": 20000,
+              "accuracy_precision": 0.99005,
+              "accuracy_precision_gap": 0.0011589965382422518,
+              "accuracy_radial_ks": 0.009596310349313852,
+              "accuracy_valid_n": 20000,
+              "accuracy_within_radius_n": 19801,
+              "hq": 0.99005,
+              "mass_tv": 0.026399999999999993,
+              "max_cov_eig_ratio": 1.28841635165726,
+              "max_mode_mass": 0.01145,
+              "max_radial_median_ratio": 1.0895155675772954,
+              "min_cov_eig_ratio": 0.7065771968433837,
+              "min_hq_count": 164,
+              "min_hq_mode_mass": 0.0082,
+              "min_radial_median_ratio": 0.8865828282268469,
+              "modes": 100,
+              "n": 20000,
+              "precision": 0.99005,
+              "valid_n": 20000
+            },
+            "passed": true,
+            "samples": 20000
+          }
+        ],
+        "ordinary_training_updates": 0,
+        "recipe_sha256": "22ef4c5902330297f7586e6001b73c4314567334e6524cb385a5eb6d49ba5a91",
+        "source": {
+          "binder_sha256": "0a5a20366147178f504841f02aafb3ba8de4516e2600651223e70a52acad0409",
+          "files": 63,
+          "manifest_sha256": "91307c9101d7141186dff61b655aa8a3dc82a29ed0893bf4ed8d27a9688eae0b",
+          "new_test_files_sha256": {
+            "reports/forge/ka2-k3p-defaults-20261003/protocol.py": "edb996e2c51ae0d845145d7d918eaca37e9d3e8640392295a711e892ccbcb2a5"
+          },
+          "reproducer_commit": "26ff278c3796d775969391adc0bde52e3af11149",
+          "scientific_base_commit": "4749b2780add539df4bd8d2dd1d3cc9f002f77ad"
+        },
+        "status": "SUPPORTED"
+      },
+      "case_sha256": "9ba09451032b3741df8a30c936bd81cc31038866dd2f4d0eb92966e48b292f48",
+      "completed_updates": null,
+      "config_id": "k3p--f78cc396dcc019a14b70121b463e9f609a65fbae249edbca74109873dde217f5",
+      "conservative_reserved_seconds": 0.0,
+      "family": "k3p",
+      "family_law": {
+        "actual_read_standardize": false,
+        "amsgrad": false,
+        "continuous_policy": null,
+        "critic_formulation": "k3p",
+        "family": "k3p",
+        "lr_control": "declared_cosine_schedule",
+        "old_policy_credit": false,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.029,
+        "output_noise_warmup_fraction": 0.2,
+        "primary_law": "noisy_fast",
+        "primary_output_noise": true,
+        "prior_kind": "particles",
+        "prior_sigma_rel": 0.0,
+        "recipe_standardize_flag": true,
+        "schedule_horizon": 7000,
+        "serve_average": 0.0,
+        "served_model": "fast_only"
+      },
+      "final_metrics": null,
+      "full_protocol_complete": false,
+      "id": "api-staggered100",
+      "media": null,
+      "original_gate": null,
+      "paid_seconds": 0.0,
+      "question": "Recover all 100 equal-weight Gaussian modes, their mass and local width, including independent density-fidelity bounds.",
+      "reason": null,
+      "recipe_overrides": {
+        "d_lr_mult": 1.0,
+        "lr": 0.006375,
+        "prior_lr_mult": 1.0
+      },
+      "requirements": {
+        "batch_size": 2048,
+        "default_steps": 7000,
+        "eval_samples": 20000,
+        "evaluation_observations": 24,
+        "sampling": "public served latent law, including enabled DV12/feature-cell perturbation, plus the recipe's output noise; diagnostics remove additive output noise only",
+        "terminal_observations": null,
+        "thresholds": {
+          "accuracy": {
+            "abs_cov_trace_bias": 0.1,
+            "center_rms_sigma": 0.2,
+            "mass_tv": 0.06,
+            "radial_ks": 0.04
+          },
+          "native": {
+            "all_finite": true,
+            "max_cov_eig_ratio": 1.7,
+            "max_mass_tv": 0.1,
+            "max_mode_mass": 0.02,
+            "max_radial_median_ratio": 1.4,
+            "min_cov_eig_ratio": 0.4,
+            "min_hq_mode_mass": 0.005,
+            "min_modes": 100,
+            "min_precision": 0.97,
+            "min_radial_median_ratio": 0.65,
+            "min_samples": 20000
+          }
+        }
+      },
+      "resolved_recipe_sha256": "22ef4c5902330297f7586e6001b73c4314567334e6524cb385a5eb6d49ba5a91",
+      "runtime": {
+        "cuda": "12.6",
+        "cuda_device_model": "NVIDIA RTX A6000",
+        "device": "cuda:0",
+        "python": "3.12.13",
+        "torch": "2.13.0+cu126",
+        "torch_threads": 1
+      },
+      "status": "UNKNOWN",
+      "study_gate": null,
+      "supervision": {},
+      "tier": 2,
+      "title": "staggered100"
+    },
+    {
+      "acquisition_hold": null,
+      "capacity": {
+        "artifacts": {
+          "samples": {
+            "bytes": 78833,
+            "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/k3p/api-vector-unequal-mass/samples.npz",
+            "sha256": "e7b167ba14751eb6facb68f95bb63853e286e5678b12963d99c0e539791caceb"
+          },
+          "state": {
+            "bytes": 133288,
+            "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/k3p/api-vector-unequal-mass/state.pt",
+            "sha256": "debde4d7a6d2f85d592f2702aec07f1bb22ffec88b9c14d3c4a901a69f8ad0f0"
+          }
+        },
+        "available_artifacts": {},
+        "case_sha256": "e29a36b2461a986a28ca950df869a4926f258b2bfca32bd46bc8b2188aebf32e",
+        "error": null,
+        "error_artifact": null,
+        "family_law": {
+          "actual_read_standardize": false,
+          "amsgrad": false,
+          "continuous_policy": null,
+          "critic_formulation": "k3p",
+          "family": "k3p",
+          "lr_control": "declared_cosine_schedule",
+          "old_policy_credit": false,
+          "output_noise_mode": "fixed",
+          "output_noise_std": 0.029,
+          "output_noise_warmup_fraction": 0.2,
+          "primary_law": "fast_without_output_noise",
+          "primary_output_noise": false,
+          "prior_kind": "particles",
+          "prior_sigma_rel": 0.0,
+          "recipe_standardize_flag": true,
+          "schedule_horizon": 1200,
+          "serve_average": 0.0,
+          "served_model": "fast_only"
+        },
+        "observations": [
+          {
+            "completed_steps": 0,
+            "evaluation_seed": 34002,
+            "failed_bounds": [],
+            "metrics": {
+              "component_core_covariance_error": 0.06383375590667129,
+              "component_core_min_eigen_ratio": 0.9245203733444214,
+              "component_covariance_error": 0.06383375590667129,
+              "component_min_eigen_ratio": 0.9245203733444214,
+              "covariance_error": 0.044349126517772675,
+              "hq": 0.98583984375,
+              "mass_tv": 0.009208986535668373,
+              "max_component_spill": 0.04805915057659149,
+              "mean_error": 0.029602527618408203,
+              "min_mass_ratio": 0.9521484375,
+              "projection_ks": 0.026140326127520874,
+              "resolved_core_covariance_error": 0.06606706666449706,
+              "resolved_core_min_eigen_ratio": 0.9498530626296997,
+              "resolved_max_component_spill": 0.04805915057659149,
+              "sample_count": 4096,
+              "sw1_normalized": 0.022674626016163758,
+              "target_scale": 1.7593294382095337
+            },
+            "passed": true,
+            "samples": 4096
+          }
+        ],
+        "ordinary_training_updates": 0,
+        "recipe_sha256": "ca91c59e59e1de7240ed983d553fb4b07ec378631889771fda7bf8ea6f5f496b",
+        "source": {
+          "binder_sha256": "0a5a20366147178f504841f02aafb3ba8de4516e2600651223e70a52acad0409",
+          "files": 63,
+          "manifest_sha256": "91307c9101d7141186dff61b655aa8a3dc82a29ed0893bf4ed8d27a9688eae0b",
+          "new_test_files_sha256": {
+            "reports/forge/ka2-k3p-defaults-20261003/protocol.py": "edb996e2c51ae0d845145d7d918eaca37e9d3e8640392295a711e892ccbcb2a5"
+          },
+          "reproducer_commit": "26ff278c3796d775969391adc0bde52e3af11149",
+          "scientific_base_commit": "4749b2780add539df4bd8d2dd1d3cc9f002f77ad"
+        },
+        "status": "SUPPORTED"
+      },
+      "case_sha256": "e29a36b2461a986a28ca950df869a4926f258b2bfca32bd46bc8b2188aebf32e",
+      "completed_updates": null,
+      "config_id": "k3p--f78cc396dcc019a14b70121b463e9f609a65fbae249edbca74109873dde217f5",
+      "conservative_reserved_seconds": 0.0,
+      "family": "k3p",
+      "family_law": {
+        "actual_read_standardize": false,
+        "amsgrad": false,
+        "continuous_policy": null,
+        "critic_formulation": "k3p",
+        "family": "k3p",
+        "lr_control": "declared_cosine_schedule",
+        "old_policy_credit": false,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.029,
+        "output_noise_warmup_fraction": 0.2,
+        "primary_law": "fast_without_output_noise",
+        "primary_output_noise": false,
+        "prior_kind": "particles",
+        "prior_sigma_rel": 0.0,
+        "recipe_standardize_flag": true,
+        "schedule_horizon": 1200,
+        "serve_average": 0.0,
+        "served_model": "fast_only"
+      },
+      "final_metrics": null,
+      "full_protocol_complete": false,
+      "id": "api-vector-unequal-mass",
+      "media": null,
+      "original_gate": null,
+      "paid_seconds": 0.0,
+      "question": "Checks target occupancy including the rare 2% component, not uniformity.",
+      "reason": null,
+      "recipe_overrides": {
+        "d_lr_mult": 1.0,
+        "lr": 0.006375,
+        "prior_lr_mult": 1.0
+      },
+      "requirements": {
+        "batch_size": 128,
+        "default_steps": 1200,
+        "eval_samples": 4096,
+        "evaluation_observations": 24,
+        "sampling": "public served latent law; independent evaluation RNG; output_noise=False removes additive output noise only; DV12/feature-cell latent perturbation remains when enabled",
+        "terminal_observations": null,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "resolved_core_covariance_error",
+            "<=",
+            0.5
+          ],
+          [
+            "resolved_core_min_eigen_ratio",
+            ">=",
+            0.15
+          ],
+          [
+            "resolved_max_component_spill",
+            "<=",
+            0.05
+          ],
+          [
+            "min_mass_ratio",
+            ">=",
+            0.25
+          ],
+          [
+            "sample_count",
+            ">=",
+            4096
+          ],
+          [
+            "projection_ks",
+            "<=",
+            0.06
+          ]
+        ]
+      },
+      "resolved_recipe_sha256": "ca91c59e59e1de7240ed983d553fb4b07ec378631889771fda7bf8ea6f5f496b",
+      "runtime": {
+        "cuda": "12.6",
+        "cuda_device_model": "NVIDIA RTX A6000",
+        "device": "cuda:0",
+        "python": "3.12.13",
+        "torch": "2.13.0+cu126",
+        "torch_threads": 1
+      },
+      "status": "UNKNOWN",
+      "study_gate": null,
+      "supervision": {},
+      "tier": 2,
+      "title": "vector_unequal_mass"
+    },
+    {
+      "acquisition_hold": null,
+      "capacity": {
+        "artifacts": {
+          "samples": {
+            "bytes": 82919,
+            "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/k3p/api-vector-anisotropic/samples.npz",
+            "sha256": "05d71602edcfb166a39e55fa4515db5ff2cac254e9d37da508927ac5d8c61dc6"
+          },
+          "state": {
+            "bytes": 133288,
+            "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/k3p/api-vector-anisotropic/state.pt",
+            "sha256": "2a9b2c750cc20cc100307433715876972d4f6f83deb64cdeccafe5e4f2841b71"
+          }
+        },
+        "available_artifacts": {},
+        "case_sha256": "2ec941011f8398672ce85b1d4df41c6e22dce2e0f98354a75f1d9a6794d4e1b6",
+        "error": null,
+        "error_artifact": null,
+        "family_law": {
+          "actual_read_standardize": false,
+          "amsgrad": false,
+          "continuous_policy": null,
+          "critic_formulation": "k3p",
+          "family": "k3p",
+          "lr_control": "declared_cosine_schedule",
+          "old_policy_credit": false,
+          "output_noise_mode": "fixed",
+          "output_noise_std": 0.029,
+          "output_noise_warmup_fraction": 0.2,
+          "primary_law": "fast_without_output_noise",
+          "primary_output_noise": false,
+          "prior_kind": "particles",
+          "prior_sigma_rel": 0.0,
+          "recipe_standardize_flag": true,
+          "schedule_horizon": 1200,
+          "serve_average": 0.0,
+          "served_model": "fast_only"
+        },
+        "observations": [
+          {
+            "completed_steps": 0,
+            "evaluation_seed": 34002,
+            "failed_bounds": [],
+            "metrics": {
+              "component_core_covariance_error": 0.026737092062830925,
+              "component_core_min_eigen_ratio": 0.9129617214202881,
+              "component_covariance_error": 0.026737092062830925,
+              "component_min_eigen_ratio": 0.9129617214202881,
+              "covariance_error": 0.01333538256585598,
+              "hq": 0.989990234375,
+              "mass_tv": 0.007731124758720398,
+              "max_component_spill": 0.011045655235648155,
+              "mean_error": 0.014872182160615921,
+              "min_mass_ratio": 0.982177734375,
+              "projection_ks": 0.025898691476780034,
+              "resolved_core_covariance_error": 0.026737092062830925,
+              "resolved_core_min_eigen_ratio": 0.9129617214202881,
+              "resolved_max_component_spill": 0.011045655235648155,
+              "sample_count": 4096,
+              "sw1_normalized": 0.013862245951853256,
+              "target_scale": 2.032285690307617
+            },
+            "passed": true,
+            "samples": 4096
+          }
+        ],
+        "ordinary_training_updates": 0,
+        "recipe_sha256": "ca91c59e59e1de7240ed983d553fb4b07ec378631889771fda7bf8ea6f5f496b",
+        "source": {
+          "binder_sha256": "0a5a20366147178f504841f02aafb3ba8de4516e2600651223e70a52acad0409",
+          "files": 63,
+          "manifest_sha256": "91307c9101d7141186dff61b655aa8a3dc82a29ed0893bf4ed8d27a9688eae0b",
+          "new_test_files_sha256": {
+            "reports/forge/ka2-k3p-defaults-20261003/protocol.py": "edb996e2c51ae0d845145d7d918eaca37e9d3e8640392295a711e892ccbcb2a5"
+          },
+          "reproducer_commit": "26ff278c3796d775969391adc0bde52e3af11149",
+          "scientific_base_commit": "4749b2780add539df4bd8d2dd1d3cc9f002f77ad"
+        },
+        "status": "SUPPORTED"
+      },
+      "case_sha256": "2ec941011f8398672ce85b1d4df41c6e22dce2e0f98354a75f1d9a6794d4e1b6",
+      "completed_updates": null,
+      "config_id": "k3p--f78cc396dcc019a14b70121b463e9f609a65fbae249edbca74109873dde217f5",
+      "conservative_reserved_seconds": 0.0,
+      "family": "k3p",
+      "family_law": {
+        "actual_read_standardize": false,
+        "amsgrad": false,
+        "continuous_policy": null,
+        "critic_formulation": "k3p",
+        "family": "k3p",
+        "lr_control": "declared_cosine_schedule",
+        "old_policy_credit": false,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.029,
+        "output_noise_warmup_fraction": 0.2,
+        "primary_law": "fast_without_output_noise",
+        "primary_output_noise": false,
+        "prior_kind": "particles",
+        "prior_sigma_rel": 0.0,
+        "recipe_standardize_flag": true,
+        "schedule_horizon": 1200,
+        "serve_average": 0.0,
+        "served_model": "fast_only"
+      },
+      "final_metrics": null,
+      "full_protocol_complete": false,
+      "id": "api-vector-anisotropic",
+      "media": null,
+      "original_gate": null,
+      "paid_seconds": 0.0,
+      "question": "Checks covariance shape: a narrow axis cannot be rescued by a wide one.",
+      "reason": null,
+      "recipe_overrides": {
+        "d_lr_mult": 1.0,
+        "lr": 0.006375,
+        "prior_lr_mult": 1.0
+      },
+      "requirements": {
+        "batch_size": 128,
+        "default_steps": 1200,
+        "eval_samples": 4096,
+        "evaluation_observations": 24,
+        "sampling": "public served latent law; independent evaluation RNG; output_noise=False removes additive output noise only; DV12/feature-cell latent perturbation remains when enabled",
+        "terminal_observations": null,
+        "thresholds": [
+          [
+            "sw1_normalized",
+            "<=",
+            0.18
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.15
+          ],
+          [
+            "hq",
+            ">=",
+            0.85
+          ],
+          [
+            "resolved_core_covariance_error",
+            "<=",
+            0.5
+          ],
+          [
+            "resolved_core_min_eigen_ratio",
+            ">=",
+            0.15
+          ],
+          [
+            "resolved_max_component_spill",
+            "<=",
+            0.05
+          ],
+          [
+            "sample_count",
+            ">=",
+            4096
+          ],
+          [
+            "projection_ks",
+            "<=",
+            0.06
+          ]
+        ]
+      },
+      "resolved_recipe_sha256": "ca91c59e59e1de7240ed983d553fb4b07ec378631889771fda7bf8ea6f5f496b",
+      "runtime": {
+        "cuda": "12.6",
+        "cuda_device_model": "NVIDIA RTX A6000",
+        "device": "cuda:0",
+        "python": "3.12.13",
+        "torch": "2.13.0+cu126",
+        "torch_threads": 1
+      },
+      "status": "UNKNOWN",
+      "study_gate": null,
+      "supervision": {},
+      "tier": 2,
+      "title": "vector_anisotropic"
+    },
+    {
+      "acquisition_hold": null,
+      "capacity": {
+        "artifacts": {
+          "samples": {
+            "bytes": 15021,
+            "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/k3p/image-develop-img_bars4-source-transpose12/samples.npz",
+            "sha256": "8d0c210315f742b1f9b86115090daab24a88a0d86ee7d226e8f3b0e4e1fed6cc"
+          },
+          "state": {
+            "bytes": 120089,
+            "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/capacity/k3p/image-develop-img_bars4-source-transpose12/state.pt",
+            "sha256": "2ce4020954c929dd68723ee8c036974d73c063f21a3704686307644662719e0d"
+          }
+        },
+        "available_artifacts": {},
+        "case_sha256": "d3145a02dd5e98155b006bf3e99899003707fe8fcf62318ba55fcd2fc6374b4d",
+        "error": null,
+        "error_artifact": null,
+        "family_law": {
+          "actual_read_standardize": false,
+          "amsgrad": false,
+          "continuous_policy": null,
+          "critic_formulation": "k3p",
+          "family": "k3p",
+          "lr_control": "declared_cosine_schedule",
+          "old_policy_credit": false,
+          "output_noise_mode": "fixed",
+          "output_noise_std": 0.029,
+          "output_noise_warmup_fraction": 0.2,
+          "primary_law": "fast_without_output_noise",
+          "primary_output_noise": false,
+          "prior_kind": "particles",
+          "prior_sigma_rel": 0,
+          "recipe_standardize_flag": true,
+          "schedule_horizon": 600,
+          "serve_average": 0.0,
+          "served_model": "fast_only"
+        },
+        "observations": [
+          {
+            "completed_steps": 0,
+            "evaluation_seed": 34002,
+            "failed_bounds": [],
+            "metrics": {
+              "distribution_tv": 0.0146484375,
+              "finite_template_tv": 0.0146484375,
+              "hq": 1.0,
+              "mean_rmse": 0.0004789124650415033,
+              "modes": 4.0,
+              "rejected_mass": 0.0,
+              "samples": 1024.0
+            },
+            "passed": true,
+            "samples": 1024
+          }
+        ],
+        "ordinary_training_updates": 0,
+        "recipe_sha256": "5022fe00091f2b86d04158feed96383124b4db2c24b19c9249d3fda70ae6fec1",
+        "source": {
+          "binder_sha256": "0a5a20366147178f504841f02aafb3ba8de4516e2600651223e70a52acad0409",
+          "files": 63,
+          "manifest_sha256": "91307c9101d7141186dff61b655aa8a3dc82a29ed0893bf4ed8d27a9688eae0b",
+          "new_test_files_sha256": {
+            "reports/forge/ka2-k3p-defaults-20261003/protocol.py": "edb996e2c51ae0d845145d7d918eaca37e9d3e8640392295a711e892ccbcb2a5"
+          },
+          "reproducer_commit": "26ff278c3796d775969391adc0bde52e3af11149",
+          "scientific_base_commit": "4749b2780add539df4bd8d2dd1d3cc9f002f77ad"
+        },
+        "status": "SUPPORTED"
+      },
+      "case_sha256": "d3145a02dd5e98155b006bf3e99899003707fe8fcf62318ba55fcd2fc6374b4d",
+      "completed_updates": null,
+      "config_id": "k3p--f78cc396dcc019a14b70121b463e9f609a65fbae249edbca74109873dde217f5",
+      "conservative_reserved_seconds": 0.0,
+      "family": "k3p",
+      "family_law": {
+        "actual_read_standardize": false,
+        "amsgrad": false,
+        "continuous_policy": null,
+        "critic_formulation": "k3p",
+        "family": "k3p",
+        "lr_control": "declared_cosine_schedule",
+        "old_policy_credit": false,
+        "output_noise_mode": "fixed",
+        "output_noise_std": 0.029,
+        "output_noise_warmup_fraction": 0.2,
+        "primary_law": "fast_without_output_noise",
+        "primary_output_noise": false,
+        "prior_kind": "particles",
+        "prior_sigma_rel": 0,
+        "recipe_standardize_flag": true,
+        "schedule_horizon": 600,
+        "serve_average": 0.0,
+        "served_model": "fast_only"
+      },
+      "final_metrics": null,
+      "full_protocol_complete": false,
+      "id": "image-develop-img_bars4-source-transpose12",
+      "media": null,
+      "original_gate": null,
+      "paid_seconds": 0.0,
+      "question": "Recover all four horizontal/vertical bar positions with sharp pixel fidelity and balanced output mass.",
+      "reason": null,
+      "recipe_overrides": {
+        "d_lr_mult": 1.0,
+        "lr": 0.006375,
+        "prior_lr_mult": 1.0
+      },
+      "requirements": {
+        "batch_size": 32,
+        "default_steps": 600,
+        "eval_samples": 1024,
+        "evaluation_observations": 24,
+        "sampling": {
+          "cohort": "New public-API variant; historical results are not imported",
+          "evaluation": "Public ServedModel.sample/generate, fixed isolated per-context streams, output_noise=False; DV12 latent perturbation and selected weights retained",
+          "prior": "32 uniformly sampled trainable particle rows",
+          "prior_exception": "Finite-template architecture controls retain their original 32-row cloud; this is not a learned-MoG qualification host.",
+          "training_real": "Uniform ordered template IDs, independent N(0,.01^2) pixels, clipped to [0,1]"
+        },
+        "terminal_observations": null,
+        "thresholds": {
+          "distribution_tv_max": 0.1,
+          "finite_template_tv_max": 0.1,
+          "hq_min": 0.9,
+          "min_mode_fraction": 0.125,
+          "minimum_stable_checks": 5,
+          "modes": 4,
+          "observations": 24,
+          "quality_rmse": 0.1
+        }
+      },
+      "resolved_recipe_sha256": "5022fe00091f2b86d04158feed96383124b4db2c24b19c9249d3fda70ae6fec1",
+      "runtime": {
+        "cuda": "12.6",
+        "cuda_device_model": "NVIDIA RTX A6000",
+        "device": "cuda:0",
+        "python": "3.12.13",
+        "torch": "2.13.0+cu126",
+        "torch_threads": 1
+      },
+      "status": "UNKNOWN",
+      "study_gate": null,
+      "supervision": {},
+      "tier": 2,
+      "title": "bars4: transpose width 12"
+    }
+  ],
+  "certification": {
+    "bytes": 10802,
+    "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/certification.json",
+    "sha256": "e10765e3ae2c064d001207c9dd9aa6e864719645058b0c625c10d823e355f3a0"
+  },
+  "combined": {
+    "bytes": 1382102,
+    "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/combined.json",
+    "sha256": "f55d2e759196db5ae02a4733ccc3fdf26605e5c1054b451c327d455bfb7a0fd1"
+  },
+  "costs": {
+    "clock": "New cohort durable supervised child intervals plus conservative interruption reserves; prior science and engineering are separately bound and debited once from remaining quotas; CPU capacity verification, queue wait and parent certification are separate diagnostics",
+    "combined_cap_seconds": 15360.0,
+    "combined_charged_seconds": 141.1879250756465,
+    "family_remaining_caps_seconds": {
+      "k3p": 7625.802896707086,
+      "ka2": 7620.202851408394
+    },
+    "ordinary_paid_seconds": 27.193673191126436,
+    "ordinary_reserved_seconds": 0.0,
+    "prior_engineering_paid_seconds": 4.757908704923466,
+    "prior_scientific_paid_seconds": 109.23634317959659,
+    "prior_total_paid_seconds": 113.99425188452005,
+    "remaining_cohort_cap_seconds": 15246.00574811548
+  },
+  "counts": {
+    "capacity": {
+      "SUPPORTED": 16
+    },
+    "execution": {
+      "FAIL": 2,
+      "UNKNOWN": 14
+    },
+    "goal_gifs": 2,
+    "original_gates": {
+      "FAIL": 2,
+      "UNAVAILABLE": 14
+    },
+    "study_gates": {
+      "FAIL": 2,
+      "UNAVAILABLE": 14
+    }
+  },
+  "default_adoption": false,
+  "execution_snapshots": {
+    "k3p": {
+      "digest": "48bc63ed6c48e7fdb0028313b950ebb0946598fd100f60a612c4ecec16bc990e",
+      "files": 3404,
+      "origin_commit": "26ff278c3796d775969391adc0bde52e3af11149",
+      "snapshot_path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/source-origins/1f8197cd0de5203c6604f4f773908aa79cf4f1d1f6634cc28e6fa64e720c2cca/snapshots/48bc63ed6c48e7fdb0028313b950ebb0946598fd100f60a612c4ecec16bc990e"
+    },
+    "ka2": {
+      "digest": "48bc63ed6c48e7fdb0028313b950ebb0946598fd100f60a612c4ecec16bc990e",
+      "files": 3404,
+      "origin_commit": "26ff278c3796d775969391adc0bde52e3af11149",
+      "snapshot_path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/source-origins/1f8197cd0de5203c6604f4f773908aa79cf4f1d1f6634cc28e6fa64e720c2cca/snapshots/48bc63ed6c48e7fdb0028313b950ebb0946598fd100f60a612c4ecec16bc990e"
+    }
+  },
+  "family_law_scope": "Fast-only named KA2/K3P, no DV12; fixed-noise warmup and full-host schedules; cost-only prior slot inheritance",
+  "goal": "ka2-k3p-family-owned-defaults",
+  "input_index": {
+    "bytes": 5979825,
+    "files": 13945,
+    "path": "/ml2/hypergan/forge-ka2-k3p-defaults-20261003/publication-v1/input-index.json",
+    "sha256": "d585a262d7751e94ee2bc6f95cdba02ad8d52fd318430d5ef4b63c41253ee1b2"
+  },
+  "native_scope": "24 post-update noisy-fast 20k primary checks and five terminal checks; clean diagnostics separate, no independent 100k gate",
+  "prior_cohorts": {
+    "cost_only_slots": {
+      "k3p": "e22",
+      "ka2": "atlas"
+    },
+    "engineering": [
+      {
+        "artifacts": {
+          "log": {
+            "bytes": 2660,
+            "path": "/ml2/hypergan/forge-critic-balance-20261003/atlas/atlas--da2b715e4d88919fc314b718d11c27e0e6740a5ff30835d0137186337fafa1bc/image-develop-img_intensity2-source-transpose12.log",
+            "sha256": "8fa65d7c8bedf1cd3bb9c4c1e76a9d408a00edcb468b60ea1f65d9d140d40cc6"
+          },
+          "request": {
+            "bytes": 557510,
+            "path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/9875f3fc81cdef471b64b2b00afbae203772500138416907c340a75e72b5e9ed/supervisor-request.json",
+            "sha256": "48d8c341658c30851e05ebcb2ea1370964a23ac7956a667a4f29559c188bdcd5"
+          },
+          "study": {
+            "bytes": 1329987,
+            "path": "/ml2/hypergan/forge-critic-balance-20261003/atlas/study.json",
+            "sha256": "560d42b13901714a6f09af706e5cbec01a25392e4ec3e575e2725fd010a3c3ce"
+          },
+          "terminal": {
+            "bytes": 150,
+            "path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/9875f3fc81cdef471b64b2b00afbae203772500138416907c340a75e72b5e9ed/supervisor-terminal.json",
+            "sha256": "d2e206ac10c3878bc846f4c5ca392fddf64e9a3007c802984f5dd00700ff69ed"
+          }
+        },
+        "claim": "Original bootstrap ERROR before public fixture construction; no scientific credit",
+        "conservative_reserved_seconds": 0.0,
+        "execution_snapshot": {
+          "digest": "103fc3fd5e990d907490d3a4a6283dedd857cca2c76fd4102b02a1623c1ba79a",
+          "files": 3396,
+          "origin_commit": "92167813cb2b04af0c4e0395984c503b7fb7d7fe",
+          "snapshot_path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/source-origins/25611fa53e50281927b3c3607fced40313087e16e3feb3085118f33d367f980c/snapshots/103fc3fd5e990d907490d3a4a6283dedd857cca2c76fd4102b02a1623c1ba79a"
+        },
+        "family": "atlas",
+        "ordinary_training_updates": 0,
+        "paid_seconds": 4.757908704923466,
+        "source_commit": "92167813cb2b04af0c4e0395984c503b7fb7d7fe",
+        "status": "ERROR",
+        "study_id": "critic-balance-d225-20261003"
+      }
+    ],
+    "nested_publication_artifacts": {
+      "atlas/study.json": {
+        "bytes": 1336798,
+        "path": "/ml2/hypergan/forge-critic-balance-20261003-v2/atlas/study.json",
+        "sha256": "9b66d1c64749896dcf7e4045f27a773c0e1d533ce6c558d19aeb75333413337c"
+      },
+      "certification.json": {
+        "bytes": 10000,
+        "path": "/ml2/hypergan/forge-critic-balance-20261003-v2/certification.json",
+        "sha256": "e32d8dc2e906d737a592801050baf4fd6eb2599df840b82f3b18bd3786d34c97"
+      },
+      "combined.json": {
+        "bytes": 1343621,
+        "path": "/ml2/hypergan/forge-critic-balance-20261003-v2/combined.json",
+        "sha256": "49d0b2286a0b5bcd599c918f421bc7b84e361a2dbbc6c045a5ba20df15368fb1"
+      },
+      "e22/study.json": {
+        "bytes": 1336522,
+        "path": "/ml2/hypergan/forge-critic-balance-20261003-v2/e22/study.json",
+        "sha256": "33b0ec4bcb4aa358131e7f460b867b39dd97c1415afd23306055b563e125df18"
+      },
+      "publication-v1/results.json": {
+        "bytes": 83682,
+        "path": "/ml2/hypergan/forge-critic-balance-20261003-v2/publication-v1/results.json",
+        "sha256": "b935f088d53dff90de31a9bec768e140a3505c0c03729cf5f3d814f9f993b35f"
+      }
+    },
+    "paid_seconds": 113.99425188452005,
+    "publication_artifacts": {
+      "atlas/study.json": {
+        "bytes": 1339184,
+        "path": "/ml2/hypergan/forge-generator-step-20261003/atlas/study.json",
+        "sha256": "02ed35c689ae1a6f5df11bab6e42b2a07bb389d6ea3db146f3357e226411e2f7"
+      },
+      "certification.json": {
+        "bytes": 11733,
+        "path": "/ml2/hypergan/forge-generator-step-20261003/certification.json",
+        "sha256": "6ba725612752bfaabf1fecd2b3b2bed6f59d150364092b322337f6e6a029cb6f"
+      },
+      "combined.json": {
+        "bytes": 1345994,
+        "path": "/ml2/hypergan/forge-generator-step-20261003/combined.json",
+        "sha256": "2de9d080f8fdacdbb504f7fda6f7ee8ab2ba2dce00a454b117210dcc02a17b23"
+      },
+      "e22/study.json": {
+        "bytes": 1338911,
+        "path": "/ml2/hypergan/forge-generator-step-20261003/e22/study.json",
+        "sha256": "6b0fcfd09df7d5b197cefc608a8ae59ef6583a8179e12685a6e117e9acaae5fa"
+      },
+      "publication-v1/results.json": {
+        "bytes": 92866,
+        "path": "/ml2/hypergan/forge-generator-step-20261003/publication-v1/results.json",
+        "sha256": "a9da2ae3af04d50873cc7f0199eedd34a0f2ba768efc86ada866a40d293c6c63"
+      }
+    },
+    "scientific": [
+      {
+        "artifacts": {
+          "final-state.pt": {
+            "bytes": 341185,
+            "path": "/ml2/hypergan/forge-critic-balance-20261003-v2/atlas/atlas--da2b715e4d88919fc314b718d11c27e0e6740a5ff30835d0137186337fafa1bc/image-develop-img_intensity2-source-transpose12/final-state.pt",
+            "sha256": "fe5ac330274be516d432cd08ee5ff503c4462830d7eac63ee3d19f91a57c648d"
+          },
+          "goal.gif": {
+            "bytes": 191904,
+            "frames": 9,
+            "path": "/ml2/hypergan/forge-critic-balance-20261003-v2/atlas/atlas--da2b715e4d88919fc314b718d11c27e0e6740a5ff30835d0137186337fafa1bc/image-develop-img_intensity2-source-transpose12/goal.gif",
+            "sha256": "7aba76b1ed1bbcffda60a9fd0640550ec66b65697bb05effe5c92c6f786030c2"
+          },
+          "observations.npz": {
+            "bytes": 6339348,
+            "path": "/ml2/hypergan/forge-critic-balance-20261003-v2/atlas/atlas--da2b715e4d88919fc314b718d11c27e0e6740a5ff30835d0137186337fafa1bc/image-develop-img_intensity2-source-transpose12/observations.npz",
+            "sha256": "a84b44bdcbd0f62b9ce69d8eb8e8a63fb81d4bf2e6131df5589b1cf19d6aaf10"
+          }
+        },
+        "cohort": "critic_balance",
+        "execution_snapshot": {
+          "digest": "70f1cac5d588819bff7014cb1e65f5ee93e63d1f150c270765d4b6cd197a1cff",
+          "files": 3397,
+          "origin_commit": "a956c6fc447bbe1314ff43ec224825a0e941eb55",
+          "snapshot_path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/source-origins/333da6dd2096c43b6b9b53c8b8e1c9ea204b21ee41ba99feddc585431ff1b3e0/snapshots/70f1cac5d588819bff7014cb1e65f5ee93e63d1f150c270765d4b6cd197a1cff"
+        },
+        "family": "atlas",
+        "full_protocol_complete": true,
+        "new_cell_credit": false,
+        "ordinary_training_updates": 600,
+        "original_gate": "FAIL",
+        "paid_seconds": 27.0030500178691,
+        "receipt": {
+          "bytes": 45782,
+          "path": "/ml2/hypergan/forge-critic-balance-20261003-v2/atlas/atlas--da2b715e4d88919fc314b718d11c27e0e6740a5ff30835d0137186337fafa1bc/image-develop-img_intensity2-source-transpose12/receipt.json",
+          "sha256": "fba7d1202f13bb6ffe39a19e5620add8076c3bbc7be5d1173bd2dec61cba53ab"
+        },
+        "source_commit": "a956c6fc447bbe1314ff43ec224825a0e941eb55",
+        "status": "FAIL",
+        "study": {
+          "bytes": 1336798,
+          "path": "/ml2/hypergan/forge-critic-balance-20261003-v2/atlas/study.json",
+          "sha256": "9b66d1c64749896dcf7e4045f27a773c0e1d533ce6c558d19aeb75333413337c"
+        },
+        "study_gate": "FAIL",
+        "supervision": {
+          "log": {
+            "bytes": 5262,
+            "path": "/ml2/hypergan/forge-critic-balance-20261003-v2/atlas/atlas--da2b715e4d88919fc314b718d11c27e0e6740a5ff30835d0137186337fafa1bc/image-develop-img_intensity2-source-transpose12.log",
+            "sha256": "7205c5f0a27fc3ed3f03a188a30899d5fe233b33027fc7969455b3b0585f6fc9"
+          },
+          "supervisor-request.json": {
+            "bytes": 557637,
+            "path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/0588dce78af5244d822779b71f3b4d165f726e7e99fe715e7017e9ee82eda89b/supervisor-request.json",
+            "sha256": "d9ea7766162b2b3df069175f03817037877e49483706078023523f3ac24a2750"
+          },
+          "supervisor-terminal.json": {
+            "bytes": 149,
+            "path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/0588dce78af5244d822779b71f3b4d165f726e7e99fe715e7017e9ee82eda89b/supervisor-terminal.json",
+            "sha256": "07b7f4e0fce8280a65e108a58565e1f7af9118e7328f43d9c4f60fe31fd539a1"
+          }
+        }
+      },
+      {
+        "artifacts": {
+          "final-state.pt": {
+            "bytes": 339777,
+            "path": "/ml2/hypergan/forge-critic-balance-20261003-v2/e22/e22--eb46d286391383c36160b8363ecfdc7d230528a8b50a2945dab4279f36e7e6eb/image-develop-img_intensity2-source-transpose12/final-state.pt",
+            "sha256": "6502d2be1fed42c3158c8bc2e2a0b7e8201e00c4bf9884531b7ad278a4f6b0aa"
+          },
+          "goal.gif": {
+            "bytes": 191904,
+            "frames": 9,
+            "path": "/ml2/hypergan/forge-critic-balance-20261003-v2/e22/e22--eb46d286391383c36160b8363ecfdc7d230528a8b50a2945dab4279f36e7e6eb/image-develop-img_intensity2-source-transpose12/goal.gif",
+            "sha256": "7aba76b1ed1bbcffda60a9fd0640550ec66b65697bb05effe5c92c6f786030c2"
+          },
+          "observations.npz": {
+            "bytes": 6339348,
+            "path": "/ml2/hypergan/forge-critic-balance-20261003-v2/e22/e22--eb46d286391383c36160b8363ecfdc7d230528a8b50a2945dab4279f36e7e6eb/image-develop-img_intensity2-source-transpose12/observations.npz",
+            "sha256": "a84b44bdcbd0f62b9ce69d8eb8e8a63fb81d4bf2e6131df5589b1cf19d6aaf10"
+          }
+        },
+        "cohort": "critic_balance",
+        "execution_snapshot": {
+          "digest": "70f1cac5d588819bff7014cb1e65f5ee93e63d1f150c270765d4b6cd197a1cff",
+          "files": 3397,
+          "origin_commit": "a956c6fc447bbe1314ff43ec224825a0e941eb55",
+          "snapshot_path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/source-origins/333da6dd2096c43b6b9b53c8b8e1c9ea204b21ee41ba99feddc585431ff1b3e0/snapshots/70f1cac5d588819bff7014cb1e65f5ee93e63d1f150c270765d4b6cd197a1cff"
+        },
+        "family": "e22",
+        "full_protocol_complete": true,
+        "new_cell_credit": false,
+        "ordinary_training_updates": 600,
+        "original_gate": "FAIL",
+        "paid_seconds": 27.3557217749767,
+        "receipt": {
+          "bytes": 45568,
+          "path": "/ml2/hypergan/forge-critic-balance-20261003-v2/e22/e22--eb46d286391383c36160b8363ecfdc7d230528a8b50a2945dab4279f36e7e6eb/image-develop-img_intensity2-source-transpose12/receipt.json",
+          "sha256": "b2ad738b713340be049ac8de3d048c5643e557f91cf3e03ab504b07d728fbd80"
+        },
+        "source_commit": "a956c6fc447bbe1314ff43ec224825a0e941eb55",
+        "status": "FAIL",
+        "study": {
+          "bytes": 1336522,
+          "path": "/ml2/hypergan/forge-critic-balance-20261003-v2/e22/study.json",
+          "sha256": "33b0ec4bcb4aa358131e7f460b867b39dd97c1415afd23306055b563e125df18"
+        },
+        "study_gate": "FAIL",
+        "supervision": {
+          "log": {
+            "bytes": 5258,
+            "path": "/ml2/hypergan/forge-critic-balance-20261003-v2/e22/e22--eb46d286391383c36160b8363ecfdc7d230528a8b50a2945dab4279f36e7e6eb/image-develop-img_intensity2-source-transpose12.log",
+            "sha256": "1e006cf13422cfc8ceba1fd42c13bed4dc1bb9f942f6c87b3b8a8dc4783d3d78"
+          },
+          "supervisor-request.json": {
+            "bytes": 557625,
+            "path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/2973560028aed39ac58a28d84f95d2665de19b4d2ccc538c8bddbff73bbc2826/supervisor-request.json",
+            "sha256": "88b4267fccab0c60894af321e06226ccb458e0a6fab188a2e26a5b7c4e7e6813"
+          },
+          "supervisor-terminal.json": {
+            "bytes": 149,
+            "path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/2973560028aed39ac58a28d84f95d2665de19b4d2ccc538c8bddbff73bbc2826/supervisor-terminal.json",
+            "sha256": "2d09eb8b2c4cc654486fe9b9dbee8a9d9f7470ace43f46ac6fe4c6df142ab4fc"
+          }
+        }
+      },
+      {
+        "artifacts": {
+          "final-state.pt": {
+            "bytes": 342927,
+            "path": "/ml2/hypergan/forge-generator-step-20261003/atlas/atlas--d2e6767ae639367ca480c4271d72f20700a2d03e95242f4dd1ba75bfc01ed3f3/image-develop-img_intensity2-source-transpose12/final-state.pt",
+            "sha256": "105952ac248da404fb618660c1484c5f6f859dde9816765df025fbce6b0da352"
+          },
+          "goal.gif": {
+            "bytes": 192353,
+            "frames": 9,
+            "path": "/ml2/hypergan/forge-generator-step-20261003/atlas/atlas--d2e6767ae639367ca480c4271d72f20700a2d03e95242f4dd1ba75bfc01ed3f3/image-develop-img_intensity2-source-transpose12/goal.gif",
+            "sha256": "9a5b6e71bcee967383eab1a32c49add58192f984e1eef22970223761b35bc026"
+          },
+          "observations.npz": {
+            "bytes": 6303780,
+            "path": "/ml2/hypergan/forge-generator-step-20261003/atlas/atlas--d2e6767ae639367ca480c4271d72f20700a2d03e95242f4dd1ba75bfc01ed3f3/image-develop-img_intensity2-source-transpose12/observations.npz",
+            "sha256": "73008c2b60588078884dee72cb346e29ad83dad693bc2122c66e5d86998fec7d"
+          }
+        },
+        "cohort": "generator_step",
+        "execution_snapshot": {
+          "digest": "ac779e01f99f725951778c5000443ae9c5c215f0fd17e74e9c6be53e6c929bd9",
+          "files": 3400,
+          "origin_commit": "488b792e2fb875894f017cf7043420f2bb66190f",
+          "snapshot_path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/source-origins/20d8321f50da9608247dc1e39beb516ca1a41356156bad37ebef6b2abeba8ea5/snapshots/ac779e01f99f725951778c5000443ae9c5c215f0fd17e74e9c6be53e6c929bd9"
+        },
+        "family": "atlas",
+        "full_protocol_complete": true,
+        "new_cell_credit": false,
+        "ordinary_training_updates": 600,
+        "original_gate": "FAIL",
+        "paid_seconds": 28.03618986881338,
+        "receipt": {
+          "bytes": 45911,
+          "path": "/ml2/hypergan/forge-generator-step-20261003/atlas/atlas--d2e6767ae639367ca480c4271d72f20700a2d03e95242f4dd1ba75bfc01ed3f3/image-develop-img_intensity2-source-transpose12/receipt.json",
+          "sha256": "3faae2709afbea454b747ecde87169015792bf1f9eb2f2561b6e090f8d8a40ad"
+        },
+        "source_commit": "488b792e2fb875894f017cf7043420f2bb66190f",
+        "status": "FAIL",
+        "study": {
+          "bytes": 1339184,
+          "path": "/ml2/hypergan/forge-generator-step-20261003/atlas/study.json",
+          "sha256": "02ed35c689ae1a6f5df11bab6e42b2a07bb389d6ea3db146f3357e226411e2f7"
+        },
+        "study_gate": "FAIL",
+        "supervision": {
+          "log": {
+            "bytes": 5253,
+            "path": "/ml2/hypergan/forge-generator-step-20261003/atlas/atlas--d2e6767ae639367ca480c4271d72f20700a2d03e95242f4dd1ba75bfc01ed3f3/image-develop-img_intensity2-source-transpose12.log",
+            "sha256": "345e817e2426008c549113733f3d75ff5aa75ff430f88b1943fcd88cefcb8e0d"
+          },
+          "supervisor-request.json": {
+            "bytes": 558035,
+            "path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/c809da8fd82904078a535f5ae7f39976e23fbb882da2199b7f105c7ed55e52dc/supervisor-request.json",
+            "sha256": "d63c4b47cec0a5408965cd3b1db617dfc65d7ac448994fa0dee167f411655a2b"
+          },
+          "supervisor-terminal.json": {
+            "bytes": 150,
+            "path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/c809da8fd82904078a535f5ae7f39976e23fbb882da2199b7f105c7ed55e52dc/supervisor-terminal.json",
+            "sha256": "df7bd970b40f28716471ab727986a4b2c6278cc4a5fecf5cdcb1a509bc21b54d"
+          }
+        }
+      },
+      {
+        "artifacts": {
+          "final-state.pt": {
+            "bytes": 341519,
+            "path": "/ml2/hypergan/forge-generator-step-20261003/e22/e22--accb716670730414f49af2a9bce2cd4c373d7df69bdcebfbf495637349e928a1/image-develop-img_intensity2-source-transpose12/final-state.pt",
+            "sha256": "b085181cf7756d89a159637b1ac59e06d057c3b7c934e86acbf01404b33b8613"
+          },
+          "goal.gif": {
+            "bytes": 192353,
+            "frames": 9,
+            "path": "/ml2/hypergan/forge-generator-step-20261003/e22/e22--accb716670730414f49af2a9bce2cd4c373d7df69bdcebfbf495637349e928a1/image-develop-img_intensity2-source-transpose12/goal.gif",
+            "sha256": "9a5b6e71bcee967383eab1a32c49add58192f984e1eef22970223761b35bc026"
+          },
+          "observations.npz": {
+            "bytes": 6303780,
+            "path": "/ml2/hypergan/forge-generator-step-20261003/e22/e22--accb716670730414f49af2a9bce2cd4c373d7df69bdcebfbf495637349e928a1/image-develop-img_intensity2-source-transpose12/observations.npz",
+            "sha256": "73008c2b60588078884dee72cb346e29ad83dad693bc2122c66e5d86998fec7d"
+          }
+        },
+        "cohort": "generator_step",
+        "execution_snapshot": {
+          "digest": "ac779e01f99f725951778c5000443ae9c5c215f0fd17e74e9c6be53e6c929bd9",
+          "files": 3400,
+          "origin_commit": "488b792e2fb875894f017cf7043420f2bb66190f",
+          "snapshot_path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/source-origins/20d8321f50da9608247dc1e39beb516ca1a41356156bad37ebef6b2abeba8ea5/snapshots/ac779e01f99f725951778c5000443ae9c5c215f0fd17e74e9c6be53e6c929bd9"
+        },
+        "family": "e22",
+        "full_protocol_complete": true,
+        "new_cell_credit": false,
+        "ordinary_training_updates": 600,
+        "original_gate": "FAIL",
+        "paid_seconds": 26.841381517937407,
+        "receipt": {
+          "bytes": 45704,
+          "path": "/ml2/hypergan/forge-generator-step-20261003/e22/e22--accb716670730414f49af2a9bce2cd4c373d7df69bdcebfbf495637349e928a1/image-develop-img_intensity2-source-transpose12/receipt.json",
+          "sha256": "d20dd05b23c10a2ecaac760da441a6f53a44ef67e5041246ab1dd17f92682e90"
+        },
+        "source_commit": "488b792e2fb875894f017cf7043420f2bb66190f",
+        "status": "FAIL",
+        "study": {
+          "bytes": 1338911,
+          "path": "/ml2/hypergan/forge-generator-step-20261003/e22/study.json",
+          "sha256": "6b0fcfd09df7d5b197cefc608a8ae59ef6583a8179e12685a6e117e9acaae5fa"
+        },
+        "study_gate": "FAIL",
+        "supervision": {
+          "log": {
+            "bytes": 5256,
+            "path": "/ml2/hypergan/forge-generator-step-20261003/e22/e22--accb716670730414f49af2a9bce2cd4c373d7df69bdcebfbf495637349e928a1/image-develop-img_intensity2-source-transpose12.log",
+            "sha256": "d5169a54c5d8a8bb651bf677234d63c82ca6931ca850c5070310425f643e2533"
+          },
+          "supervisor-request.json": {
+            "bytes": 558027,
+            "path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/dc1292968329c395b2cbae4ebea2a4509d5d4c76a9ab7246a2e0c7b6644ae14e/supervisor-request.json",
+            "sha256": "20719b7517741b15d1156110d15baf43b4193ad49cbf1cdf9414234b1d28b643"
+          },
+          "supervisor-terminal.json": {
+            "bytes": 151,
+            "path": "/ml2/hypergan/ParticleGAN-single-recipe/runs/forge/policy/attempts/dc1292968329c395b2cbae4ebea2a4509d5d4c76a9ab7246a2e0c7b6644ae14e/supervisor-terminal.json",
+            "sha256": "0f77df4873905fbb3bf8d1ebb425150127b5fc253faeacab45e97f248cd4d644"
+          }
+        }
+      }
+    ],
+    "source": {
+      "commit": "488b792e2fb875894f017cf7043420f2bb66190f",
+      "discovery_inputs_sha256": {
+        "configs/forge/tasks/ring16_acquisition.json": "e6b53ba29fbe9ead47e842cfa01e40ba57821bd1b4e6aa5b297631fa0f6525c1"
+      },
+      "files": 73,
+      "manifest_sha256": "b9f32fbde362e471d99e9ae69bee1f60795b4a942697f350584f7caf3e21f76a",
+      "root": "/ml2/hypergan/ParticleGAN-generator-step-20261003"
+    },
+    "sources": [
+      {
+        "commit": "a956c6fc447bbe1314ff43ec224825a0e941eb55",
+        "discovery_inputs_sha256": {
+          "configs/forge/tasks/ring16_acquisition.json": "e6b53ba29fbe9ead47e842cfa01e40ba57821bd1b4e6aa5b297631fa0f6525c1"
+        },
+        "files": 72,
+        "manifest_sha256": "dded3b676e2ddf14b607ab39b9980b157fb9f5ea2ab09f77aa2e30b94d31f712",
+        "root": "/ml2/hypergan/ParticleGAN-critic-balance-20261003"
+      },
+      {
+        "commit": "488b792e2fb875894f017cf7043420f2bb66190f",
+        "discovery_inputs_sha256": {
+          "configs/forge/tasks/ring16_acquisition.json": "e6b53ba29fbe9ead47e842cfa01e40ba57821bd1b4e6aa5b297631fa0f6525c1"
+        },
+        "files": 73,
+        "manifest_sha256": "b9f32fbde362e471d99e9ae69bee1f60795b4a942697f350584f7caf3e21f76a",
+        "root": "/ml2/hypergan/ParticleGAN-generator-step-20261003"
+      }
+    ]
+  },
+  "publisher": {
+    "commit": "5a74fc240f496164ef6ce6da7245145a60e489a8",
+    "git_path": "reports/forge/ka2-k3p-defaults-20261003/publish_ka2_k3p_defaults.py",
+    "sha256": "67276610bd0e8f429edd65dc2ad146c03bbc5e8542d46a31cd8b7d3e72089f9a"
+  },
+  "required_cases_per_configuration": 8,
+  "required_cells": 16,
+  "required_configurations": 2,
+  "runtime_cohorts": {
+    "k3p": {
+      "cuda": "12.6",
+      "cuda_device_model": "NVIDIA RTX A6000",
+      "device": "cuda:0",
+      "python": "3.12.13",
+      "torch": "2.13.0+cu126",
+      "torch_threads": 1
+    },
+    "ka2": {
+      "cuda": "12.6",
+      "cuda_device_model": "NVIDIA RTX A6000",
+      "device": "cuda:0",
+      "python": "3.12.13",
+      "torch": "2.13.0+cu126",
+      "torch_threads": 1
+    }
+  },
+  "schema": "particlegan_ka2_k3p_defaults_publication_v1",
+  "scope": "Named KA2/K3P family-owned fast/scheduled/fixed-noise laws across eight public API cases; distinct from Atlas/E22 law, no old/MoG/default/speed qualification",
+  "selection": {
+    "attempts_concluded": true,
+    "best_observed_ids": [
+      "k3p--f78cc396dcc019a14b70121b463e9f609a65fbae249edbca74109873dde217f5",
+      "ka2--0e72647d9ecce0e92a1a2de81fc78b2e93e2cc8bdaf7a9ab0662a3de4775c236"
+    ],
+    "comparison_complete": true,
+    "default_adoption": false,
+    "fully_qualified_ids": [],
+    "outcome": "best_observed",
+    "required_cases_per_config": 8,
+    "required_cells": 16,
+    "required_configurations": 2,
+    "speed_winner": null
+  },
+  "source": {
+    "commit": "26ff278c3796d775969391adc0bde52e3af11149",
+    "discovery_inputs_sha256": {
+      "configs/forge/tasks/ring16_acquisition.json": "e6b53ba29fbe9ead47e842cfa01e40ba57821bd1b4e6aa5b297631fa0f6525c1"
+    },
+    "files": 75,
+    "manifest_sha256": "6414b7c3ac962ad1209bafd9957477f780829af58cf3ad387a5125b7d20f483e"
+  },
+  "speed_winner": null,
+  "study_id": "ka2-k3p-named-defaults-20261003-v1",
+  "verification": {
+    "publication_draws": 0,
+    "publication_model_restores": 0,
+    "publication_optimizer_updates": 0,
+    "publication_rescores": 0,
+    "root_certification": {
+      "capacity_sampler_replay": true,
+      "cpu_only": true,
+      "numeric_trace_rescore": true,
+      "ordinary_training_updates": 0
+    }
+  }
+}
