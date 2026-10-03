@@ -34,7 +34,7 @@
     "configs/forge/configurations/release07-gan-v3-mog--c1b747662d851c7c1ee0d8572e34c0438f28d5e0920c572b74622a25479f9e26.json": "7761dd9c39a22a668f639799f5000a0522a82e1a83cde608bc8e9c8a8f2f1597",
     "configs/forge/ideas/atlas.json": "b8a7d65760d0c21d2b3ccd65564085a6e23cde20775791ecb0f8f932609cec65",
     "configs/forge/ideas/e22.json": "434aac4241443ad51ccac2e3e6d620eba9e8131336ca66d1e157b9b1937aaad0",
-    "configs/forge/ideas/five-word-joint-ka2-v1.json": "afac13d8cc56a058029c4a505df59fa2a487efd32a20fd001738b65e4914600e",
+    "configs/forge/ideas/five-word-joint-ka2-v1.json": "f2cd3809340d8aece6cb24ecde8eb863061ad290de5aa09f4fc66c73bb984118",
     "configs/forge/ideas/forge-no-critic-penalty.json": "886040c69e790fea2dbe9b2457ff174b9518e1821af581b148f4df3a7886eb1f",
     "configs/forge/ideas/forge-onboarding-anchor-ablation.json": "b4b8b0ef96aaca94bdd29ef9b5edfe0f2bb17166571f7bd35c8b7b9aaf7249ac",
     "configs/forge/ideas/k3p-a2-off-native-diagnostic.json": "66e366ea1fced5d6575a5b4acd322e39564ce582ac591449cd5a79b5831907be",
@@ -48,6 +48,33 @@
     "configs/forge/ideas/release07-gan-v3-mog-v1.json": "5726a561ca5a92ff96cf93e53f47c3acba01e44622437534c67a00eaeb7f8bec",
     "configs/forge/ideas/release07-gan-v3-task-adapted-v1.json": "0c11aa5d44503f146fcfea3cb97267cfc63e02d3a4a24f36d87c7bbb9b801558"
   },
+  "metadata_migrations": [
+    {
+      "changed_fields": {
+        "goal": {
+          "after": "discriminator_stability",
+          "before": "five_word_joint"
+        }
+      },
+      "corrected": {
+        "commit": "65c8d7661030ee802c65a1b0a518e3fb3ade776c",
+        "git_blob": "0b2f792dda0c0b9308439cfd1892be322501d43d",
+        "sha256": "f2cd3809340d8aece6cb24ecde8eb863061ad290de5aa09f4fc66c73bb984118"
+      },
+      "declaration": "configs/forge/ideas/five-word-joint-ka2-v1.json",
+      "id": "five-word-joint-main-goal-registration-v1",
+      "original": {
+        "archive": "configs/forge/legacy-history/five-word-joint-ka2-v1-before-goal-correction.json",
+        "commit": "81f0b91f2478d71f86aabeb83b43bca8c7f5c587",
+        "git_blob": "7d544cb96f0f579bcc6b8c4f59d54632fb45be13",
+        "sha256": "afac13d8cc56a058029c4a505df59fa2a487efd32a20fd001738b65e4914600e"
+      },
+      "qualification_regraded": false,
+      "reason": "Align the admission pin with the user-directed main-view registration correction. Only goal metadata changed; recipe, mechanism and scientific execution identity are unchanged.",
+      "scientific_formulation_unchanged": true,
+      "training_launched": false
+    }
+  ],
   "purpose": "Exact pre-contract v1 declarations only; new or changed research ideas require v2 decision_contract. Saved evidence retains its original identity without admission.",
   "schema_version": 1
 }

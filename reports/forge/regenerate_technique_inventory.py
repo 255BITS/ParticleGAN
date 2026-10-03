@@ -4,6 +4,8 @@ Default regeneration uses committed numerical snapshots and compact receipts.
 --source-commit independently regrades hydrated original receipts and registers
 new measured rows before updating the same leaderboard. No command trains.
 --recorded-policy rebuilds existing rows under their exact archived view policy.
+--advance-policy explicitly archives an earlier policy before registering new
+source evidence under the current view. Archived outcomes are never regraded.
 """
 from __future__ import annotations
 
@@ -574,6 +576,7 @@ def compose(root: Path | str = REPOSITORY_ROOT, *, original_report="reports/forg
 EVIDENCE_MANIFEST = Path("reports/forge/technique-evidence/manifest.json")
 CURRENT_PREFIX = Path("reports/forge/technique-inventory")
 CONTRACT_CATALOGS = ("recipe_contracts", "protocol_contracts", "task_contracts", "status_reasons")
+POLICY_FIELDS = ("view", "view_revision", "policy_fingerprint", "tier_requirements")
 
 
 def _snapshot(root, entry, manifest):
@@ -605,6 +608,20 @@ def _snapshot(root, entry, manifest):
         _validate_published_row(root, report, row)
         selected[name] = row
     return report, selected
+
+
+def _archived_reports(root, manifest):
+    """Validate historical policies without admitting their rows to selection."""
+    reports, fingerprints = [], {manifest["policy_fingerprint"]}
+    for policy in manifest.get("archived_policies", []):
+        if (policy.get("view") != manifest["view"] or
+                not isinstance(policy.get("view_revision"), int) or
+                policy["view_revision"] >= manifest["view_revision"] or
+                policy.get("policy_fingerprint") in fingerprints):
+            raise ValueError("invalid archived technique evidence policy")
+        fingerprints.add(policy["policy_fingerprint"])
+        reports.extend((policy, entry, *_snapshot(root, entry, policy)) for entry in policy["cohorts"])
+    return reports
 
 
 def _current_markdown(result, root, path):
@@ -674,6 +691,14 @@ def _current_markdown(result, root, path):
                "After a new experiment, use `--source-commit <executed-commit>` to independently regrade its "
                "hydrated original receipts and update this leaderboard. Source snapshots are provenance, not additional leaderboards."), "",
               f"Publication input digest `{result['provenance']['input_digest']}`.", ""]
+    if result.get("archived_policies"):
+        lines += ["Earlier view policies retain their exact numerical snapshots and receipt proofs in the companion JSON. "
+                  "Their outcomes do not fill current requirements:", ""]
+        for policy in result["archived_policies"]:
+            totals = "/".join(str(len(policy["tier_requirements"][tier])) for tier in tiers)
+            lines.append(f"- `{policy['view']}` revision {policy['view_revision']}: recorded denominators {totals}; "
+                         f"{len(policy['cohorts'])} source cohorts.")
+        lines.append("")
     archived = [row for row in result.get("configuration_rows", []) if row.get("alternative_scope") == "archived_alternative"]
     if archived:
         lines += ["Archived alternatives retain their original outcomes and incompatible source/runtime bindings:", ""]
@@ -686,13 +711,15 @@ def _current_markdown(result, root, path):
 
 
 def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discriminator_stability",
-                    execution_backend=None, recorded_policy=None):
+                    execution_backend=None, recorded_policy=None, advance_policy=False):
     """Maintain one current table; registered source snapshots retain the history."""
     root = Path(root).resolve()
     manifest_path = root / EVIDENCE_MANIFEST
     manifest = read_json(manifest_path) if manifest_path.is_file() else None
     if recorded_policy is not None and source_commit is not None:
         raise ValueError("recorded policy publication cannot register new source evidence")
+    if advance_policy and (source_commit is None or recorded_policy is not None):
+        raise ValueError("advancing the evidence policy requires --source-commit and no recorded policy")
     recorded_view = None
     if recorded_policy is not None:
         if manifest is None:
@@ -702,7 +729,8 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
             recorded_path = root / recorded_path
         recorded_view = read_json(recorded_path)
         recorded_policy = os.path.relpath(recorded_path.resolve(), root)
-    reports = []
+    reports, archived_reports, advancing = [], [], False
+    policy = None
     if manifest is not None:
         if manifest.get("schema_version") != 1 or manifest.get("view") != view_id:
             raise ValueError("unsupported current technique evidence manifest/view")
@@ -712,8 +740,14 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
             if (policy.get("id") != view_id or policy.get("revision") != manifest["view_revision"]
                     or stable_hash(policy) != manifest["policy_fingerprint"]):
                 label = "recorded" if recorded_view is not None else "current"
-                raise ValueError(f"{label} view policy differs from registered technique evidence")
+                if not advance_policy:
+                    raise ValueError(f"{label} view policy differs from registered technique evidence")
+                if (policy.get("id") != view_id or type(policy.get("revision")) is not int
+                        or policy["revision"] <= manifest["view_revision"]):
+                    raise ValueError("advancing requires a later revision of the same view policy")
+                advancing = True
         reports = [(entry, *_snapshot(root, entry, manifest)) for entry in manifest["cohorts"]]
+        archived_reports = _archived_reports(root, manifest)
     pending_snapshot = None
     if source_commit is not None:
         with tempfile.TemporaryDirectory(prefix="forge-technique-evidence-") as temporary:
@@ -731,6 +765,16 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
             candidates[row["candidate_id"]] = max(times)
         if not candidates:
             raise ValueError("source regrade selected no measured technique rows; restore its recorded runtime/hardware")
+        if advancing:
+            if (report.get("view") != policy["id"] or report.get("view_revision") != policy["revision"]
+                    or report.get("policy_fingerprint") != stable_hash(policy)):
+                raise ValueError("new source evidence differs from the current view policy")
+            previous = {key: deepcopy(manifest[key]) for key in POLICY_FIELDS}
+            previous["cohorts"] = deepcopy(manifest["cohorts"])
+            archived_reports.extend((previous, entry, old_report, rows) for entry, old_report, rows in reports)
+            manifest = {**deepcopy(manifest), **{key: deepcopy(report[key]) for key in POLICY_FIELDS},
+                        "cohorts": [], "archived_policies": [*manifest.get("archived_policies", []), previous]}
+            reports = []
         if manifest is None:
             manifest = {"schema_version": 1, **{key: report[key] for key in
                         ("view", "view_revision", "policy_fingerprint", "tier_requirements")},
@@ -820,6 +864,8 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
               "qualification_input": False, **{key: manifest[key] for key in
               ("view", "view_revision", "policy_fingerprint", "tier_requirements")},
               "execution_backend": execution_backend, "rows": [], "evidence_sources": {}}
+    if manifest.get("archived_policies"):
+        result["archived_policies"] = deepcopy(manifest["archived_policies"])
     if recorded_policy is not None:
         result["recorded_policy"] = recorded_policy
     for _, entry, report, row in selected.values():
@@ -834,7 +880,8 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
     result["rows"].sort(key=lambda row: (-row["qualified_tier"], row["technique"], row.get("cohort") or ""))
     for catalog in CONTRACT_CATALOGS:
         combined = {}
-        for report in [data_report for _, data_report, _ in reports] + ([live] if live else []):
+        for report in ([data_report for _, data_report, _ in reports]
+                       + [data_report for _, _, data_report, _ in archived_reports] + ([live] if live else [])):
             for digest, contract in report.get(catalog, {}).items():
                 if digest != stable_hash(contract):
                     raise ValueError(f"invalid {catalog} identity in technique evidence")
@@ -857,6 +904,16 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
             evidence = deepcopy(original)
             evidence.update(publication_key=entry["json_sha256"], qualification_reuse=False, qualification_input=False)
             result["evidence_rows"].append(evidence)
+    if archived_reports:
+        result["archived_evidence_rows"] = []
+        for policy, entry, _, rows in archived_reports:
+            result["evidence_sources"][entry["json_sha256"]] = deepcopy(entry)
+            for original in rows.values():
+                evidence = deepcopy(original)
+                evidence.update(publication_key=entry["json_sha256"], qualification_reuse=False,
+                                qualification_input=False,
+                                evidence_policy={key: deepcopy(policy[key]) for key in POLICY_FIELDS})
+                result["archived_evidence_rows"].append(evidence)
     result["provenance"] = {"publication_reducer_sha256": file_hash(Path(__file__)),
                             "evidence_manifest_sha256": stable_hash(manifest),
                             "trainer_family_registry_sha256": file_hash(root / "configs/forge/trainer-families.json")
@@ -883,10 +940,13 @@ def main(argv=None):
     parser.add_argument("--source-commit", help="reconstruct and grade an exact recorded Git source cohort, independently of live HEAD")
     parser.add_argument("--recorded-policy", type=Path,
                         help="rebuild registered rows under this exact archived view policy, without resolving live declarations")
+    parser.add_argument("--advance-policy", action="store_true",
+                        help="with --source-commit, archive earlier policy cohorts and register evidence for the current view revision")
     args = parser.parse_args(argv)
     print(_json_text(publish_current(args.root, view_id=args.goal,
                                 execution_backend=None if args.device == "all" else args.device,
-                                source_commit=args.source_commit, recorded_policy=args.recorded_policy)), end="")
+                                source_commit=args.source_commit, recorded_policy=args.recorded_policy,
+                                advance_policy=args.advance_policy)), end="")
 
 
 if __name__ == "__main__":

@@ -2,6 +2,7 @@
 from copy import deepcopy
 import math
 from pathlib import Path
+import shutil
 
 import pytest
 
@@ -85,6 +86,70 @@ def test_plan_readonly_grid_correlations_full_denominators_and_pending(checkout,
     assert {t["resolved_recipe"]["name"] for t in report["trials"]} == {"ka2"}
     assert all(len(t["tasks"]) == 3 for t in report["trials"])
     assert before == {p: p.read_bytes() for p in checkout.rglob("*") if p.is_file()}
+
+
+def test_grid_union_retains_exact_existing_configuration_identities(checkout, spec):
+    first = deepcopy(spec)
+    first["grid"] = {"lr": [.003]}
+    second = deepcopy(spec)
+    second["grid"] = {"lr": [.005], "d_lr_mult": [.5, 2.]}
+    expected = search._declarations(checkout, first) + search._declarations(checkout, second)
+    for card, _ in expected:
+        atomic_json(checkout / f"configs/forge/configurations/{card['id']}.json", card)
+    before = {p: p.read_bytes() for p in checkout.rglob("*") if p.is_file()}
+    spec["grid"] = [first["grid"], second["grid"]]
+    report = search.plan_search(checkout, checkout / "runs", spec)
+    assert len(report["trials"]) == 3
+    assert {t["candidate_id"] for t in report["trials"]} == {card["id"] for card, _ in expected}
+    assert {stable_hash(t["settings"]) for t in report["trials"]} == {
+        stable_hash(settings) for _, settings in expected}
+    assert report["declared_worst_case_seconds"] == 30
+    assert before == {p: p.read_bytes() for p in checkout.rglob("*") if p.is_file()}
+
+
+@pytest.mark.parametrize("grid", [[], [{"lr": [.003]}, {"lr": [.003]}],
+                                  [[{"lr": [.003]}]], [{"seed": [0]}],
+                                  [{"lr": [.003]}, {"lr": list(range(256))}]])
+def test_invalid_grid_unions_are_rejected_before_declarations(checkout, spec, grid):
+    spec["grid"] = grid
+    with pytest.raises(ValueError):
+        search.materialize_search(checkout, spec)
+    assert not (checkout / "configs/forge/configurations").exists()
+
+
+def test_tier1_refresh_materializes_only_all_32_existing_configuration_cards(tmp_path):
+    root = Path(__file__).resolve().parents[1]
+    shutil.copytree(root / "configs/forge", tmp_path / "configs/forge")
+    roster = read_json(tmp_path / "configs/forge/rounds/tier1-existing-configs-v1.json")
+    campaign = read_json(tmp_path / roster["campaign"])
+    cards = tmp_path / "configs/forge/configurations"
+    before = {path.name: path.read_bytes() for path in cards.glob("*.json")}
+    expected = set(roster["configuration_ids"])
+    assert len(expected) == len(before) == 32
+    assert len(roster["candidate_ids"]) == len(set(roster["candidate_ids"])) == 47
+    assert set(roster["candidate_ids"]) == expected | set(roster["idea_ids"])
+    assert campaign["budget_seconds"] == 47 * 2100
+    assert campaign["candidate_budget_seconds"] == 2100
+    observed = []
+    for study_id in roster["studies"]:
+        spec = search._load_spec(tmp_path, study_id)
+        assert spec["tuning_through_tier"] == 1
+        assert spec["campaign"] == campaign
+        assert spec["execution_backend"] == "cuda"
+        paths = search.materialize_search(tmp_path, spec)
+        assert len(paths) == roster["configuration_count_by_family"][spec["trainer_family"]]
+        observed.extend(path.stem for path in paths)
+        for path in paths:
+            card = read_json(path)
+            search.validate_configuration_declaration(card, root=tmp_path)
+    assert len(observed) == len(set(observed)) == 32
+    assert set(observed) == expected
+    assert before == {path.name: path.read_bytes() for path in cards.glob("*.json")}
+    registry = read_json(tmp_path / "configs/forge/trainer-families.json")
+    family_pins = {family["id"]: family.get("active_search_by_backend", {})
+                   for family in registry["families"]}
+    assert family_pins["r1r2"]["cpu"] == "r1r2-modern-toy-v1"
+    assert {pins["cuda"] for pins in family_pins.values() if "cuda" in pins} == set(roster["studies"])
 
 
 @pytest.mark.parametrize("knob", ["seed", "prior", "task", "budget", "batch_size", "total_steps", "z_dim",

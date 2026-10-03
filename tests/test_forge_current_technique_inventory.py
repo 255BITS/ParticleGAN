@@ -230,6 +230,103 @@ def test_explicit_frozen_regrade_registers_evidence_and_updates_canonical(eviden
     assert publication.publish_current(root) == result
 
 
+def _later_policy_evidence(root, manifest, monkeypatch, *, revision=3):
+    policy = {"id": "discriminator_stability", "revision": revision}
+    atomic_json(root / "configs/forge/views/discriminator_stability.json", policy)
+    current = {**deepcopy(manifest), "view_revision": revision, "policy_fingerprint": stable_hash(policy),
+               "tier_requirements": {**deepcopy(manifest["tier_requirements"]),
+                                     "1": ["two_pole", "token", "ae", "ring", "word"]}, "cohorts": []}
+    _, report = _register(root, current, "bcap", "c", finished="2026-10-03T01:00:00+00:00")
+    _, unknown = _register(root, deepcopy(current), "atlas", "d")
+    report["rows"].extend(unknown["rows"])
+    report["provenance"].pop("input_digest")
+    report["provenance"]["input_digest"] = stable_hash(report)
+    atomic_json(root / publication.EVIDENCE_MANIFEST, manifest)
+    atomic_json(root / "reports/forge/attempts/attempt-c/result.json", {
+        "raw": {"finished_at": "2026-10-03T01:00:00+00:00"}})
+    def regrade(*args, output_prefix, **kwargs):
+        atomic_json(output_prefix.with_suffix(".json"), report)
+        return {"json": str(output_prefix.with_suffix(".json")), "source_commit": "commit-c"}
+    monkeypatch.setattr(publication, "regenerate", regrade)
+    monkeypatch.setattr(publication, "write_report", regrade)
+    return report
+
+
+def test_explicit_policy_advance_preserves_original_cohorts_without_new_credit(evidence, monkeypatch, capsys):
+    root, manifest = evidence
+    baseline = read_json(publication.publish_current(root)["json"])
+    protected = {entry["snapshot"]: (root / entry["snapshot"]).read_bytes() for entry in manifest["cohorts"]}
+    _later_policy_evidence(root, manifest, monkeypatch)
+    publication.main(["--root", str(root), "--source-commit", "commit-c", "--advance-policy"])
+    assert '"rows":2' in capsys.readouterr().out
+    updated = read_json(root / publication.EVIDENCE_MANIFEST)
+    assert updated["view_revision"] == 3
+    assert len(updated["cohorts"]) == 1 and len(updated["archived_policies"]) == 1
+    archive = updated["archived_policies"][0]
+    assert archive == {key: deepcopy(manifest[key]) for key in (*publication.POLICY_FIELDS, "cohorts")}
+    result = publication.publish_current(root)
+    current = read_json(result["json"])
+    bcap = next(row for row in current["rows"] if row["candidate_id"] == "bcap")
+    assert bcap["candidate_revision"] == "revision-c"
+    assert bcap["tiers"]["1"] == {"passed": 0, "total": 5}
+    assert bcap["qualified_tier"] == 0
+    assert all(row["candidate_revision"] != "revision-a" for row in current["configuration_rows"])
+    original = next(row for row in current["archived_evidence_rows"] if row["candidate_id"] == "bcap")
+    assert original["evidence_policy"]["view_revision"] == 2
+    assert original["tiers"]["1"] == {"passed": 3, "total": 3}
+    assert original["qualified_tier"] == 1
+    original.pop("evidence_policy")
+    assert original in baseline["evidence_rows"]
+    assert all((root / relative).read_bytes() == content for relative, content in protected.items())
+    assert "recorded denominators 3/19/2" in Path(result["report"]).read_text()
+    assert len(list((root / "reports/forge").rglob("*.md"))) == 1
+    outputs = _outputs(root)
+    assert publication.publish_current(root) == result
+    assert _outputs(root) == outputs
+    assert publication.publish_current(root, source_commit="commit-c", advance_policy=True) == result
+    assert read_json(root / publication.EVIDENCE_MANIFEST) == updated
+
+
+def test_policy_advance_refuses_old_source_and_retains_current_files(evidence, monkeypatch):
+    root, manifest = evidence
+    publication.publish_current(root)
+    report = _later_policy_evidence(root, manifest, monkeypatch)
+    report["policy_fingerprint"] = manifest["policy_fingerprint"]
+    before = _outputs(root)
+    manifest_bytes = (root / publication.EVIDENCE_MANIFEST).read_bytes()
+    with pytest.raises(ValueError, match="current view policy differs"):
+        publication.publish_current(root, source_commit="commit-c")
+    with pytest.raises(ValueError, match="new source evidence differs from the current view policy"):
+        publication.publish_current(root, source_commit="commit-c", advance_policy=True)
+    assert _outputs(root) == before
+    assert (root / publication.EVIDENCE_MANIFEST).read_bytes() == manifest_bytes
+
+
+def test_policy_advance_requires_later_revision_and_source(evidence, monkeypatch):
+    root, manifest = evidence
+    publication.publish_current(root)
+    before = _outputs(root)
+    with pytest.raises(ValueError, match="requires --source-commit"):
+        publication.publish_current(root, advance_policy=True)
+    _later_policy_evidence(root, manifest, monkeypatch, revision=1)
+    with pytest.raises(ValueError, match="later revision of the same view"):
+        publication.publish_current(root, source_commit="commit-c", advance_policy=True)
+    assert _outputs(root) == before
+
+
+def test_archived_policy_corruption_cannot_overwrite_current_publication(evidence, monkeypatch):
+    root, manifest = evidence
+    _later_policy_evidence(root, manifest, monkeypatch)
+    publication.publish_current(root, source_commit="commit-c", advance_policy=True)
+    before = _outputs(root)
+    updated = read_json(root / publication.EVIDENCE_MANIFEST)
+    path = root / updated["archived_policies"][0]["cohorts"][0]["snapshot"]
+    path.write_text("{}\n")
+    with pytest.raises(ValueError, match="snapshot hash mismatch"):
+        publication.publish_current(root)
+    assert _outputs(root) == before
+
+
 def test_same_source_cpu_registration_retains_cuda_evidence(evidence, monkeypatch):
     root, manifest = evidence
     original = read_json(root / manifest["cohorts"][0]["snapshot"])
@@ -409,8 +506,9 @@ def test_committed_cohorts_rebuild_every_scientific_row_in_a_checkout_without_ra
     for card in list((tmp_path / "configs/forge/ideas").glob("*.json")) + list((tmp_path / "configs/forge/configurations").glob("*.json")):
         if card.stem not in {key[0] for key in expected}:
             card.unlink()
-    result = read_json(publication.publish_current(
-        tmp_path, recorded_policy="configs/forge/view-history/discriminator_stability-v2.json")["json"])
+    recorded = ("configs/forge/view-history/discriminator_stability-v2.json"
+                if manifest["view_revision"] == 2 else None)
+    result = read_json(publication.publish_current(tmp_path, recorded_policy=recorded)["json"])
     display_fields = {"technique", "publication_key", "qualification_input", "qualification_reuse",
                       "trainer_family", "configuration_id", "comparison_cohort", "selected_configuration", "alternative_scope"}
     science = lambda row: {key: value for key, value in row.items() if key not in display_fields}

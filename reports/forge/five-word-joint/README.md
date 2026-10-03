@@ -123,6 +123,15 @@ matching the source's inclusive loop. Its explicit `host_adaptation` delegates
 word task keeps candidate spread 1.0. This preserves host ownership without
 discarding a formulation mechanism. No production recipe or default changes.
 
+The main-view registration changed only this card's `goal` metadata. Its
+[legacy admission registry](../../../configs/forge/legacy-ideas-v1.json) now pins
+that corrected card and records the original commit, Git blob and SHA-256 beside
+the corrected identities. The [exact original card](../../../configs/forge/legacy-history/five-word-joint-ka2-v1-before-goal-correction.json)
+is retained for comparison. Recipe and mechanism fields are identical; goal
+metadata does not enter the scientific candidate identity. Admission still
+requires the exact pinned declaration, and historical results keep their original
+scope.
+
 | Numerical condition at every terminal observation | Bound |
 | --- | --- |
 | Generated samples | 1,024 |
