@@ -1,100 +1,62 @@
-# Fixed generator-step sensitivity
+# Generator-step contrast: no candidate advances
 
-This is one prospective configuration per family, Atlas and E22, with shared
-overrides `lr=0.00265625`, `prior_lr_mult=3.0`, `d_lr_mult=4.5`. The nominal
-generator and output-noise base step is half the previous critic-rate contrast.
-Nominal prior and critic rates remain 0.00796875 and 0.011953125. Actual policy
-rates are endogenous, so the test cannot isolate a guaranteed causal mechanism.
+Both Atlas and E22 failed the complete 600-update brightness test after all sixteen fresh capacity witnesses were supported. The smaller generator/output-noise step changes the sampled values, but it produces zero qualified modes at every recorded check. **Capacity: 16 SUPPORTED. Learning: 2 FAIL, 14 UNKNOWN.** Neither configuration advances to quality tests or qualifies as a default.
 
-The source changes only this report-owned runner, a separate capacity binder,
-and software tests. Training remains the existing public `api_run` path, using
-unchanged public Recipe/optimizer/policy APIs and the maintained coordinator.
-Generic snapshot, safety, cost and prefix-admission functions are called from the
-unchanged previous report helper; its globals and frozen evidence are untouched.
-That delegated helper is explicitly bound in the new source manifest and frozen
-snapshot, and imported in the child bootstrap solely so the public receipt source
-collector records its bytes. The import executes no verification or science.
+One whole tuple is shared across all eight cases for each family: `lr=.00265625`, `prior_lr_mult=3.0`, `d_lr_mult=4.5`. Relative to [the preceding contrast](https://github.com/255BITS/ParticleGAN/pull/267), nominal generator/output-noise steps halve, while nominal prior and critic rates remain .00796875 and .011953125. Actual role rates remain endogenous. Both families retain their original mechanisms, initialization, target, host, sampling law, seed, gates, horizons and scoring cadence.
 
-Fresh capacity must record all 16 outcomes under the new exact recipe and source.
-Each family needs its own eight SUPPORTED public-sampler witnesses. A legitimate
-UNRESOLVED or BLOCKED capacity outcome blocks that family before training, while
-its fully supported sibling may proceed. These zero-update witnesses are
-necessary representation evidence and provide no learned-quality credit.
+| Required question | Capacity, both families | Atlas learning | E22 learning |
+| --- | --- | --- | --- |
+| Recover equal mass at center-patch brightness .35/.85 | SUPPORTED | FAIL, full 600 | FAIL, full 600 |
+| Recover two broad Gaussian modes and their spread | SUPPORTED | UNKNOWN | UNKNOWN |
+| Recover all 100 grid modes, occupancy and local width | SUPPORTED | UNKNOWN | UNKNOWN |
+| Recover the stationary law under a fixed 25° rotation | SUPPORTED | UNKNOWN | UNKNOWN |
+| Recover all modes of a staggered lattice | SUPPORTED | UNKNOWN | UNKNOWN |
+| Preserve 55/30/13/2% occupancy and the rare component | SUPPORTED | UNKNOWN | UNKNOWN |
+| Recover oriented covariance ellipses and narrow-axis spread | SUPPORTED | UNKNOWN | UNKNOWN |
+| Recover four bar positions, orientations and pixel fidelity | SUPPORTED | UNKNOWN | UNKNOWN |
 
-The ordered eight cases remain:
+[Exact test questions and numerical goals](QUESTIONS_AND_MEDIA.md) explain why each requirement exists. [Machine results](results.json) retain both complete eight-case denominators, all capacity records, both original and added study grades, source/Recipe/runtime identities and costs. UNKNOWN records are unreached after the failed smoke prerequisite.
 
-| Case | Tier | Full updates | Evaluation outputs/check | Acquisition cap |
-| --- | --- | --- | --- | --- |
-| intensity2, source transpose width 12 | Smoke | 600 | 1,024 | 180 s |
-| two-broad vector | Smoke | 1,200 | 4,096 | 180 s |
-| grid100 | Quality | 7,000 | 20,000 | 2,100 s |
-| rotated100 | Quality | 7,000 | 20,000 | 2,100 s |
-| staggered100 | Quality | 7,000 | 20,000 | 2,100 s |
-| unequal-mass vector | Quality | 1,200 | 4,096 | 180 s |
-| anisotropic vector | Quality | 1,200 | 4,096 | 180 s |
-| bars4, source transpose width 12 | Quality | 600 | 1,024 | 180 s |
+## Original training GIFs
 
-Batch sizes, initialization, seed 24002, held-out seed 34002, original numerical
-gates, serving laws and all 24 primary post-update scoring observations stay
-unchanged. Both smoke cases must pass before quality; the first non-PASS stops
-the candidate. Unreached cases remain UNKNOWN in the required eight-case
-denominator. Nine actual training GIF states retain the original public grade.
-The adjacent readout also displays the added first-window persistence grade:
-first five consecutive primary PASS checks, then at least five later checks,
-with every later primary check passing. No reacquisition, horizon extension or
-automatic failed retry is permitted. Original terminal grading remains separate.
+Both show the .35/.85 reference patches, actual generated tiles and fixed grayscale at nine retained training checkpoints. All 25 recorded metric checks fail; neither run acquires the first five-pass window. Original full-protocol gate **FAIL** and added first-window hold **FAIL** are paired explicitly; later-hold confirmation is unavailable.
 
-Native primary scoring uses the declared noisy served law; clean outputs are
-separate diagnostics. The 24 × 20,000-output scope does not inherit Atlas19's
-independent 100,000-output certification. Particle-cloud exceptions retain their
-own source/law identities and do not qualify current Forge MoG defaults.
+Atlas:
 
-The shared finite contrast ceiling remains **15,360 seconds**, including the
-previous source-bound 59.116680497769266 seconds: original engineering error
-4.757908704923466, Atlas scientific FAIL 27.0030500178691 and E22 scientific FAIL
-27.3557217749767. All prior grades, artifacts and costs remain unchanged.
-Remaining quotas are Atlas **7,648.239041277208**, E22 **7,652.6442782250235**, pair
-**15,300.883319502231** seconds. Prior costs are bound through the previous
-combined result, certification, published compact result, family studies and
-durable supervisor receipts, and are charged once. They fill no new test cell.
+![Atlas generator-step trial: desired patch intensities and failed outputs](media/atlas/image-develop-img_intensity2-source-transpose12/goal.gif)
 
-Every launch needs its complete acquisition allowance plus 60 seconds export
-grace. Insufficient remaining allowance yields INCOMPLETE; it cannot start a
-shorter task. Paid supervised time and conservative interruption reserves stay
-separate. CPU capacity replay, queue wait and parent certification are separate
-diagnostics. No default adoption, fair speed ranking or cross-source pooling is
-authorized.
+E22:
 
-Only root freezes sources, captures fresh capacity, reserves and launches. After
-that freeze, the explicit commands are:
+![E22 generator-step trial: desired patch intensities and failed outputs](media/e22/image-develop-img_intensity2-source-transpose12/goal.gif)
 
-```sh
-# CPU-only preparation; requires a new external output and committed binder.
-CUDA_VISIBLE_DEVICES='' OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 \
-  PYTHONDONTWRITEBYTECODE=1 python reports/forge/generator-step-20261003/bind_capacity.py \
-  --output /EXTERNAL/NEW-CAPACITY
+The final HQ and valid-mode counts are zero, assignment TV is .5 and rejected-mass-aware template TV is 1, above the .1 limits. All retained images are rejected by the per-image RMSE quality cutoff. The [media QA](MEDIA_QA.md) checked original bytes, first/middle/final frames, all finite sample arrays and ordered target banks. These two GIFs and NPZs are byte-identical; complete policy checkpoint files differ. This small host uses Atlas's reference backend; unreached native cases still test distinct family behavior.
 
-CUDA_VISIBLE_DEVICES='' OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 \
-  PYTHONDONTWRITEBYTECODE=1 python reports/forge/generator-step-20261003/run_generator_step.py \
-  spec /EXTERNAL/NEW-CAPACITY/capacity.json --output /EXTERNAL/NEW-SPEC.json
+[Retained-state diagnosis](PAIR_INTENSITY_ANALYSIS.md) separates measured output/gradient/controller signatures from unrecorded early forces. Smaller steps alone did not resolve brightness collapse. Different complete policies and earlier scientific cohorts retain separate identities.
 
-CUDA_VISIBLE_DEVICES='' OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 \
-  PYTHONDONTWRITEBYTECODE=1 python reports/forge/generator-step-20261003/run_generator_step.py \
-  plan /EXTERNAL/NEW-SPEC.json
+## Verification and qualification
 
-# Explicit serial launch on the shared physical GPU1 coordinator only.
-CUDA_VISIBLE_DEVICES=1 OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 \
-  PYTHONDONTWRITEBYTECODE=1 python reports/forge/generator-step-20261003/run_generator_step.py \
-  run /EXTERNAL/NEW-SPEC.json --family atlas --output /EXTERNAL/NEW-ATLAS \
-  --queue-root /ml2/hypergan/ParticleGAN-single-recipe/runs/forge
-```
+Scientific source: `488b792e2fb875894f017cf7043420f2bb66190f`; frozen execution snapshot: `ac779e01f99f725951778c5000443ae9c5c215f0fd17e74e9c6be53e6c929bd9`, 3,400 files. All 177 public definitions and all eight original case hashes loaded in a fresh copied-source process before GPU admission. The new runner, binder, unchanged delegated orchestration helper and original discovery JSON are explicitly bound. No package/configuration, original grader or existing result is modified.
 
-E22 uses the same command with `--family e22` and a separate new output, after
-root releases the serial lane. GPU1 must have at least 12,288 MiB free and be at
-or below 82°C; one CPU thread and a 0.2 CUDA memory fraction are enforced.
+Root separately replayed CPU capacity and certified retained traces at that frozen source; [execution receipt](certification-execution.json) records the actual successful combine. The [publisher](PUBLICATION.md), frozen separately at `e78ab3607d68216f26410f7b2025895fe2909f7f`, consumed that SHA-bound certification and verified **10,466 inputs**. Publication constructs/restores no model, draws no samples, rescales no images, performs no scoring and makes no optimizer update. [Independent publisher review](PUBLISHER_REVIEW.md) records the scope.
 
-Final read-only certification uses `combine ATLAS/study.json --archive
-E22/study.json`; it explicitly replays the CPU capacity sampler and certifies
-retained numeric traces, with no ordinary training. Run it at the frozen science
-source before introducing another Python publication helper into that inventory.
-Publish later from a separate checkout with exact source/artifact bindings.
+The original AND gates remain unchanged. Added persistence requires the first five consecutive post-update primary PASS checks, at least five later checks, and every later check passing. Images run 600 updates; vectors 1,200; native cases 7,000. Native primaries use the actual noisy served law, with clean outputs only diagnostic, 24 post-update 20,000-output checks and the final five. This supplies no historical Atlas19 independent 100,000-output credit. First smoke failure stops the whole candidate.
+
+## Cost and shared evidence
+
+| Charge | Seconds |
+| --- | ---: |
+| New Atlas scientific FAIL | 28.03618986881338 |
+| New E22 scientific FAIL | 26.841381517937407 |
+| Previous two scientific FAILs, counted once | 54.3587717928458 |
+| Previous pre-training engineering ERROR, counted once | 4.757908704923466 |
+| Cumulative campaign paid | **113.99425188452005** |
+| Interruption reserve | **0** |
+| Original shared campaign ceiling | **15,360** |
+
+The remaining shared campaign allowance is 15,246.00574811548 seconds. Neither a new tuple nor a new source/output directory resets paid work. Supervised child intervals provide the paid clock; CPU capacity, queue wait and parent certification are separate. External contention prevents a fair convergence-speed comparison, and no fully passing candidate exists here.
+
+Compact scores, questions and original GIFs are committed for review. [Raw archive and resolver instructions](ARCHIVE.md) disclose hash-bound bulk evidence, currently LOCAL_ONLY with no remote copy or retention assignment. The [bounded new-PR inventory](inventory-review.md) confirms develop remains source `4749b278`; no merged source/config/gate change intervened. Its latest-100 coverage limit is explicit.
+
+This follows [PR #247's representation and shared-default process](https://github.com/255BITS/ParticleGAN/pull/247), the faithful historical/hold evidence in [#266](https://github.com/255BITS/ParticleGAN/pull/266), and the preceding critic-rate failure in [#267](https://github.com/255BITS/ParticleGAN/pull/267). Historical positives and capacity witnesses provide no new learned-default credit. A distinct family-owned next hypothesis must supply fresh representation, learning, persistence and applicable matched confirmation/calibration evidence before shipping.
+
+The next accepted finite declaration is [KA2/K3P at shared .006375/1/1](KA2_K3P_NEXT_COHORT.md). It is unexecuted at this publication boundary. It keeps the eight target/gate questions but declares each public family's own fast/no-DV12/fixed-noise/scheduled serving law, with exact existing per-host horizon adaptations. The separate ordinary-board 4/5 results motivate the tuple and transfer no success. Fresh analytic no-fit capacity constructions remain unmeasured; all sixteen outcomes and the cumulative campaign debit are required before any learning admission.

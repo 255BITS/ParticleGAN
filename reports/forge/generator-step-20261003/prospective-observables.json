@@ -1,0 +1,127 @@
+{
+  "cuda_contexts": 0,
+  "files_sha256": {
+    "benchmarks/toy_audit/api_images.py": "2e6c65efff150f4fd393ad3b4ee3000d3f0f56b7a077a80f2624c4af46f7b491",
+    "benchmarks/toy_audit/api_run.py": "44a770e6fbeca4d9e2d7d1e74d3107ab2d9ef2f284d76d6e7a0d60cce6f1a5e7",
+    "particlegan/continuous.py": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41",
+    "particlegan/k3p.py": "200ead2c27ab0b2aa6068f1b1b1b5c826b8125aa8602bfec08b31aaa2894401c",
+    "particlegan/ka2.py": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703",
+    "particlegan/particle_prior.py": "0220878bebea227da63abbf9f5b1ebdabdc6aea54fd2332fd2cab02ed734238f",
+    "particlegan/policy.py": "8370e36b5b93afe95ae24d2b385aac8735a587f86ef2b87ed369ecfdfcb6fec5",
+    "particlegan/recipes.py": "1a7f9df746e242a2774068c819d70d50cd72dc4f7f6b22b0bd13e1345dcf8ab2",
+    "particlegan/training.py": "7dadc219135bc3e6bf657bfe9bc3fa81dd14d4b2a31c70d5ff61e2941db35c94"
+  },
+  "model_constructions": 0,
+  "model_restores": 0,
+  "new_draws": 0,
+  "new_parameters": {
+    "d_lr_mult": 4.5,
+    "lr": 0.00265625,
+    "prior_lr_mult": 3.0
+  },
+  "ordinary_updates": 0,
+  "previous_parameters": {
+    "d_lr_mult": 2.25,
+    "lr": 0.0053125,
+    "prior_lr_mult": 1.5
+  },
+  "prior_diagnosis": {
+    "path": "/ml2/hypergan/critic-balance-failure-analysis-20261003/intensity-failure-analysis.json",
+    "sha256": "5432d2329e4b0613ee6121fddd2f8bb1b2a09eef467a227231456162a199f779"
+  },
+  "public_boundary_notes": [
+    "The cloud host uses ParticlePrior: Recipe.make_prior removes standardize before construction. Do not interpret standardize=True as normalized latent-cloud reads.",
+    "DV12 kernel width uses raw prior coordinate spread and nearest nonzero support clipping; output_noise=False still retains this latent perturbation.",
+    "G and prior are jointly updated from the same GAN backward pass; this tuple also halves the learned-output-noise role. Nominal D/prior preservation does not hold their realized gradients, rates, clocks or paths fixed.",
+    "The API runner retains observations and only the terminal checkpoint; step() return losses are not retained in its loop. Missing per-update loss/rate/intermediate-state evidence must remain missing.",
+    "KA2 critic surprise reads decayed exp_avg_sq, while AMSGrad actual step/guard denominator uses max_exp_avg_sq. Keep these numerical functions distinct."
+  ],
+  "quality_archives_polled": false,
+  "schema": "particlegan_generator_step_prospective_read_only_diagnosis_v1",
+  "signatures": [
+    {
+      "available": "Saved step0/25/... image arrays and original metrics; final G gradient/optimizer state",
+      "can_establish": "The retained law and local output sensitivity fail or recover at those checkpoints",
+      "cannot_establish": "Unsaved updates1..24 force sequence or which owner caused saturation",
+      "mechanism": "foreground saturation",
+      "quantity": "Patch brightness, pixel-to-blank RMS, local sigmoid sensitivity p*(1-p), rejected mass/HQ and nearest-valid-mode mass"
+    },
+    {
+      "available": "Saved final raw prior z, EMA-prior, controller latent bandwidth/last applications, row evidence/birth-death counters",
+      "can_establish": "Terminal geometry differences and recorded discrete intervention activity",
+      "cannot_establish": "Prior path displacement from initialization without saved initial state, output attribution with fixed G, or a causal prior-only effect",
+      "mechanism": "learned-prior displacement",
+      "quantity": "Final table geometry and differences between matched-shape endpoint tables, latent perturbation radius/clip summaries and actual row-event counters"
+    },
+    {
+      "available": "Final assigned optimizer LRs, initial role rates, stationarity testers and controller payoff_error",
+      "can_establish": "Rate assignment and the known source control law at retained endpoint",
+      "cannot_establish": "Time-integrated D learning speed or per-update G/D balance from a smoothed endpoint",
+      "mechanism": "payoff damping",
+      "quantity": "Effective-to-nominal role ratios; reciprocal-square D damping with boundary lag disclosed"
+    },
+    {
+      "available": "Final previous_generator_gradient and Adam exp_avg/exp_avg_sq/max_exp_avg_sq/step, group betas and LR",
+      "can_establish": "Small local sensitivity, nonzero recovery gradient and retained moment scales",
+      "cannot_establish": "Initial-cause attribution, recovered outputs under a different optimizer, or controller surprise computed from the wrong max moment",
+      "mechanism": "optimizer memory/recovery",
+      "quantity": "Layerwise gradient norms and actual denominator scales, signed output-bias gradient"
+    },
+    {
+      "available": "Every image observation served_averaged flag, final policy/backend/EMA/guard state",
+      "can_establish": "Which law was sampled and which recorded interventions occurred",
+      "cannot_establish": "An unmeasured EMA grade or full Atlas/E22 equivalence from matching fast arrays",
+      "mechanism": "selected serving",
+      "quantity": "Actual chosen public fast or averaged law and whether recorded birth/reopen/surprise counters changed"
+    }
+  ],
+  "source_commit": "488b792e2fb875894f017cf7043420f2bb66190f",
+  "source_lines": {
+    "benchmarks/toy_audit/api_run.py": [
+      461,
+      485,
+      490,
+      530
+    ],
+    "particlegan/continuous.py": [
+      135,
+      145,
+      156,
+      314,
+      330
+    ],
+    "particlegan/ka2.py": [
+      46,
+      68
+    ],
+    "particlegan/particle_prior.py": [
+      130
+    ],
+    "particlegan/policy.py": [
+      650,
+      658,
+      713,
+      728,
+      762,
+      1047,
+      1065
+    ],
+    "particlegan/recipes.py": [
+      441,
+      443,
+      528,
+      548,
+      621
+    ],
+    "particlegan/training.py": [
+      344,
+      358,
+      381,
+      383,
+      386,
+      391
+    ]
+  },
+  "status": "PROSPECTIVE_NO_RESULT",
+  "trial_policy": "No further shared-config trial is declared in advance. First analyze the immutable new pair. A later sole-field prior or optimizer/penalty contrast requires measured support, exact public admission/capacity/source bindings, full16 denominator and an explicitly finite remaining budget. No unchanged-profile/seed-only repeats."
+}
