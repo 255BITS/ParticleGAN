@@ -87,6 +87,33 @@ def test_live_complete_sustained_curve_required_even_with_ema_or_stale_stamp():
     assert not verdict(task, nonfinite)["passed"]
 
 
+@pytest.mark.parametrize("modes,reconstruction", [(3, 1), (5, 0), (6, 1)])
+def test_exact_word_gates_reject_complete_wrong_counts_or_pairs(modes, reconstruction):
+    task = {**spec("words", "required"), "thresholds": [
+        ["modes", "==", 5], ["reconstruction_exact", "==", 1]]}
+    curve = [{"step": i, "modes": modes, "reconstruction_exact": reconstruction}
+             for i in range(1, 25)]
+    measured = verdict(task, {"live": curve[-1], "observations": curve})
+    assert measured["status"] == "FAIL"
+    assert measured["convergence"]["passing_observations"] == 0
+    assert any(cell["margin"] < 0 for cell in measured["metrics"])
+
+
+def test_exact_oracle_and_unknown_operator_are_explicit():
+    from benchmarks.locked_shared.baseline import score_metrics
+    from benchmarks.locked_shared.observation import sustained
+    requirements = [["modes", "==", 5], ["reconstruction_exact", "==", 1]]
+    curve = [{"step": i, "modes": 5, "reconstruction_exact": 1} for i in range(1, 25)]
+    task = {**spec("words", "required"), "thresholds": requirements}
+    validate_manifest({"tasks": [task]})
+    assert verdict(task, {"live": curve[-1], "observations": curve})["status"] == "PASS"
+    for check in (lambda: sustained([], [["modes", "!=", 5]], expected_steps=[]),
+                  lambda: score_metrics({}, [["modes", "!=", 5]])):
+        with pytest.raises(ValueError, match="unsupported metric operator"):
+            check()
+    assert sustained(curve, [["modes", ">=", float("nan")]], expected_steps=range(1, 25))["passing_suffix"] == 0
+
+
 def test_reference_solvability_does_not_change_importance():
     task = spec("hard", "ranking")
     original = copy.deepcopy(task)

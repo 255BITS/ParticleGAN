@@ -81,7 +81,7 @@ def validate_manifest(manifest):
         if not spec["thresholds"]:
             raise ValueError("behavioral thresholds required")
         for key, op, value in requirements(spec):
-            if not isinstance(key, str) or not key or op not in (">=", "<="):
+            if not isinstance(key, str) or not key or op not in (">=", "<=", "=="):
                 raise ValueError("invalid metric requirement")
             if isinstance(value, bool) or not isinstance(value, (int, float)) or not math.isfinite(value):
                 raise ValueError("threshold must be finite")
