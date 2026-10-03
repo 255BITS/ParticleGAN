@@ -88,9 +88,9 @@ def decision_feasibility(matrix: list[dict], criteria: dict) -> dict:
                 ta, fa, tr, fr = updated
                 # Even an optimistic assignment of all remaining lineages
                 # cannot dilute these fixed errors below the frozen maxima.
-                if fr > criteria["maximum_false_reject_fraction"] * (ta + fr + remaining):
+                if ta + fr + remaining and fr / (ta + fr + remaining) > criteria["maximum_false_reject_fraction"]:
                     continue
-                if fa > criteria["maximum_false_accept_fraction"] * (tr + fa + remaining):
+                if tr + fa + remaining and fa / (tr + fa + remaining) > criteria["maximum_false_accept_fraction"]:
                     continue
                 following.add(tuple(updated))
         states = following
@@ -109,6 +109,46 @@ def decision_feasibility(matrix: list[dict], criteria: dict) -> dict:
             "completion_scope": "Hypothetical complete decisions only; unknowns are not measured PASS or FAIL.",
             "cost_scope": "Missing costs remain unavailable; possible decision counts do not establish cost acceptance.",
             "qualification_input": False, "default_adoption": False, "training_authorized": False}
+
+
+def _unbound_receipts(root, saved, config, profile_hash):
+    """Reject stale receipt coverage without regrading archived decisions.
+
+    A later compatible attempt can change errors, retry accounting or cost.
+    Require a newly bound publication rather than selecting its older outcomes.
+    Unreadable new request identities cannot establish irrelevance either.
+    """
+    from .calibration import _foreign_unlisted, calibration_cohort, profile_task_ids
+    bound = {entry["attempt_id"] for row in saved["matrix"] for entry in row["inputs"]}
+    selected = {(row["candidate_id"], row["candidate_revision"]) for row in config["lineages"]}
+    reduction = {**config, "_profile_sha256": profile_hash}
+    issues = []
+    for directory in sorted((root / "reports/forge/attempts").glob("*")):
+        if not directory.is_dir() or directory.name in bound:
+            continue
+        try:
+            resolved = read_json(directory / "request.json")
+            request = resolved.get("request", resolved)
+            candidate = (request.get("candidate", {}).get("id"), request.get("candidate_revision"))
+            marker = request.get("calibration_lane", {})
+            imported_history = isinstance(marker, dict) and any(
+                entry["registration_id"] == marker.get("registration_id")
+                and (entry["candidate_id"], entry["candidate_revision"]) == candidate
+                for entry in config.get("diagnostic_imports", []))
+            retry = resolved.get("retry_of") or {}
+            bound_retry = isinstance(retry, dict) and retry.get("attempt_id") in bound
+            if _foreign_unlisted(request, reduction, directory.name) and not imported_history and not bound_retry:
+                continue
+            if candidate not in selected and not imported_history and not bound_retry:
+                continue
+            compatible = calibration_cohort(request, profile_task_ids(config)) == config["cohort"]
+            if compatible or imported_history or bound_retry:
+                issues.append({"attempt_id": directory.name,
+                               "reason": "unbound compatible attempt or retry; explicitly refresh the published receipt and cost coverage"})
+        except (OSError, ValueError, KeyError, TypeError, AttributeError):
+            issues.append({"attempt_id": directory.name,
+                           "reason": "unbound request identity is missing or malformed; relevance and paid retry costs cannot be verified"})
+    return issues
 
 
 def _bound_published(root, profile, config, config_path, criteria, criteria_path):
@@ -153,6 +193,7 @@ def _bound_published(root, profile, config, config_path, criteria, criteria_path
                 if not original.is_file() or file_hash(original) != digest:
                     issues.append({"attempt_id": identity, "file": name,
                                    "reason": "original receipt missing or byte hash differs; hydrate its exact archived source"})
+    issues.extend(_unbound_receipts(root, saved, config, file_hash(config_path)))
     return saved, path, issues
 
 

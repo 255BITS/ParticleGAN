@@ -66,6 +66,16 @@ def test_nonzero_error_tolerances_use_correct_reference_denominators():
     assert decision_feasibility(rows, criteria)["status"] == "INFEASIBLE"
 
 
+@pytest.mark.parametrize("error", ["reject", "accept"])
+def test_exact_fraction_boundary_uses_same_division_as_final_criteria(error):
+    criterion = "maximum_false_" + error + "_fraction"
+    pairs = ([("PASS", "PASS")] * 48 + [("FAIL", "PASS")] + [("FAIL", "FAIL")] * 2
+             if error == "reject" else
+             [("PASS", "PASS")] + [("PASS", "FAIL")] + [("FAIL", "FAIL")] * 48)
+    assert decision_feasibility(matrix(pairs), {**CRITERIA, criterion: 1 / 49})["status"] == "POSSIBLE"
+    assert decision_feasibility(matrix(pairs), {**CRITERIA, criterion: 1 / 50})["status"] == "INFEASIBLE"
+
+
 def test_diagnostics_cannot_rescue_reference_negatives():
     rows = matrix([("UNKNOWN", "FAIL")] * 3)
     for row in rows:
@@ -120,6 +130,42 @@ def test_bound_legacy_report_does_not_reapply_newer_host_validation(promotion_se
     result = preflight(root, "current-fixture")
     assert result["decision_source"]["scope"] == "bound_published_report"
     assert result["qualification_input"] is False
+
+
+@pytest.mark.parametrize("kind", ["conflict", "matching_extra_cost", "incomplete", "malformed", "retry"])
+def test_new_unbound_attempts_block_saved_publication_without_regrading(promotion_setup, monkeypatch, kind):
+    from experiments.forge import calibration
+    from test_forge_promotion import save_attempt
+    root, _, _, candidate = promotion_setup
+    published = read_json(root / "reports/forge/calibration/current-fixture.json")
+    directory = save_attempt(root, candidate, "later-attempt", score=0. if kind == "conflict" else 1.)
+    if kind == "incomplete":
+        (directory / "result.json").unlink()
+    elif kind == "malformed":
+        (directory / "request.json").write_text("{")
+    elif kind == "retry":
+        resolved = read_json(directory / "request.json")
+        resolved["retry_of"] = {"attempt_id": "qualification"}
+        atomic_json(directory / "request.json", resolved)
+    monkeypatch.setattr(calibration, "_evaluate_current", lambda *a: pytest.fail("archived decisions were regraded"))
+    result = preflight(root, "current-fixture")
+    assert result["status"] == "BLOCKED"
+    assert any(issue["attempt_id"] == "later-attempt" for issue in result["receipt_issues"])
+    assert result["observed_criteria_status"] == published["adoption"]
+    assert [(row["smoke"], row["reference"]) for row in result["matrix_decisions"]] == [
+        (row["smoke"]["decision"], row["reference"]["decision"]) for row in published["matrix"]]
+
+
+def test_unrelated_readable_candidate_and_scientific_cohort_do_not_stale_publication(promotion_setup):
+    from test_forge_promotion import save_attempt
+    root, _, _, candidate = promotion_setup
+    other = deepcopy(candidate)
+    other["candidate"]["id"] = "unrelated"
+    save_attempt(root, other, "unrelated-attempt")
+    other = deepcopy(candidate)
+    other["protocol"]["seed"] = 17
+    save_attempt(root, other, "incompatible-cohort")
+    assert preflight(root, "current-fixture")["status"] == "POSSIBLE"
 
 
 def test_unavailable_originals_block_new_registration_without_erasing_archived_decisions(lane_setup):
