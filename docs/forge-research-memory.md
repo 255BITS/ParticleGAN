@@ -47,14 +47,27 @@ drift is reported separately. `plan` and `recall` report the same CURRENT/STALE
 status and a concrete refresh command, so stale compiled coverage stays visible
 without hiding available live recall.
 
-After changing one of those scientific inputs, run `forge compile --summaries-only` and commit
+Input freshness is per checkout. Retaining or hydrating ignored historical
+request/result/evidence metadata can add local inputs and report `STALE` even
+when the reducer fingerprints, compiled memory and publication projection still
+match. Inspect the reported input differences; preserve those originals. This
+does not invalidate their qualified evidence or establish that complete raw
+envelopes, checkpoints and observation streams are available. A local
+`compile --summaries-only` refresh can include that checkout's metadata while
+preserving scientific snapshots. Keep its resulting manifest local when it binds
+only to unshared ignored artifacts; do not replace the repository-wide manifest
+with one other checkouts cannot reproduce.
+
+After changing shared scientific inputs, run `forge compile --summaries-only` and commit
 the compact generated memory, manifest and publication projection. Review the
 resulting denominators and source links. This refresh preserves published
 qualification tables and automation snapshots, retaining their original manifest
 identity. It never recomputes an archived verdict from missing envelopes. New view
 indexes are explicit pointers until original evidence supports their numerical
-table. Ordinary `forge compile` retains its existing receipt-reducer behavior and
-should be used when the original execution envelopes are available.
+table. Ordinary `forge compile` runs the receipt reducers; reserve it for an
+intentional qualification/telemetry update after verifying the complete original
+execution envelopes and scientific bindings. Additional local metadata alone
+does not authorize that update or a regrade.
 Default-discovered software tests verify
 freshness and all concluded published trial IDs without training or artifact
 hydration. Keep execution stdout local and easy to tail, for example:
