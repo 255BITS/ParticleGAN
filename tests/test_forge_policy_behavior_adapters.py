@@ -116,16 +116,33 @@ def test_original_task_remains_blocked_and_changed_measurement_is_not_admitted()
     assert behavior_preflight(changed, request["candidate"])
 
 
-def test_short_software_adapter_exports_actual_measurement_arrays_and_exact_state(tmp_path):
+def test_short_software_adapter_exports_actual_measurement_arrays_and_exact_state(tmp_path, monkeypatch):
     import numpy as np
     from experiments.forge.policy_behavior_adapters import run_behavior
     from experiments.forge.artifacts import verify_artifacts
+    from experiments.forge import policy_cohorts
     request, task = definition()
+    original = deepcopy(task)
     # Explicitly tiny execution fixture: it has three actual updates and never
     # supplies the original 80-update/24-observation scientific qualification.
     task["execution"]["steps"] = 3
+    validate = policy_cohorts.validate_policy_task
+    with pytest.raises(ValueError):
+        validate(task)
+    short_digest = typed_state_digest(task)
+
+    def structural_prefix_declaration(value, root=None):
+        # This exact software-only prefix substitutes only declaration checking;
+        # validate the full original parent and keep all real policy execution,
+        # observations, source/RNG/checkpoint and original numerical bounds.
+        if typed_state_digest(value) == short_digest:
+            return validate(original, root=root)
+        return validate(value, root=root)
+
+    monkeypatch.setattr(policy_cohorts, "validate_policy_task", structural_prefix_declaration)
     result = run_behavior(request, task, tmp_path)
     assert result["cost"]["completed_steps"] == 3
+    assert result["applied"]["policy_lifecycle"]["quality_qualification"] is False
     assert [row["step"] for row in result["evidence"]["observations"]] == [1, 2, 3]
     assert result["evidence"]["scoring_weights"] == "state_selected"
     assert result["evidence"]["policy_observation"]["sampler"] == "served_snapshot"

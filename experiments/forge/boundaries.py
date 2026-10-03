@@ -75,8 +75,37 @@ def _behavior_host(task):
 
 def prior_control_binding(task):
     """Separate direct generated coordinates from a sampled latent prior."""
+    from .policy_cohorts import is_policy_task, validate_policy_task
+    if is_policy_task(task):
+        contract = validate_policy_task(task)
+        if contract["cohort"] == "word_joint_policy_min11_v1":
+            return {"representation": "independent_complete_word_code_joint_atoms",
+                    "latent_table_controls": True, "constructed_prior": True,
+                    "table_owner": "prior.z", "auxiliary_encoder": "original_free_continuous_WordEncoder",
+                    "construction": "actual ParticlePrior with eleven learned uniform rows",
+                    "optimizer": "Recipe.make_generator_optimizer(latent_table=...)",
+                    "independent_direct_particle_response_owner": False,
+                    "base_lr": "Recipe.lr * Recipe.prior_lr_mult",
+                    "base_betas": "Recipe.prior_betas or Recipe.betas", "lr_schedule": "public stationarity",
+                    "sampling": "same effective code in generated word and complete joint critic atom",
+                    "note": "Explicit min11 whole-joint law and free auxiliary encoder; "
+                            "original five-row task and split-code DV12 evidence remain separate."}
+        if contract.get("row_policy") == "routed_paired":
+            table_owner = contract["table_owner"]
+            return {"representation": "conditional_MoG_locations" if task["execution"]["prior"]["kind"] == "mog"
+                    else "conditional_role_bank",
+                    "table_owner": table_owner, "latent_table_controls": True,
+                    "constructed_prior": table_owner == "prior.z",
+                    "sampling": "complete_context_routed_function; no independent atom sampling",
+                    "construction": "actual MoGParticlePrior" if task["execution"]["prior"]["kind"] == "mog" else
+                        "actual ParticlePrior master table" if table_owner == "prior.z" else "original generator matrix parameter",
+                    "optimizer": "Recipe.make_generator_optimizer(latent_table=...)",
+                    "independent_direct_particle_response_owner": False,
+                    "base_lr": "Recipe.lr * Recipe.prior_lr_mult",
+                    "base_betas": "Recipe.prior_betas or Recipe.betas", "lr_schedule": "public stationarity",
+                    "note": "Named conditional table ownership is distinct from a sampled latent prior; "
+                            "the original behavioral tasks retain their original optimizer law."}
     if _behavior_host(task) == "two_pole":
-        from .policy_contracts import is_policy_task
         if is_policy_task(task):
             return {"representation": "direct_sample_coordinates_public_policy_table",
                     "latent_table_controls": True,
@@ -110,7 +139,7 @@ def task_owned_recipe_fields(task):
         if host != "ae_gan_hold":
             owned |= {"routing_temperature", "distance_reduction"}
     if "policy_recipe_overrides" in task.get("execution", {}):
-        from .policy_contracts import policy_recipe_overrides
+        from .policy_cohorts import policy_recipe_overrides
         owned |= set(policy_recipe_overrides(task))
     return frozenset(owned)
 
@@ -190,7 +219,7 @@ def ownership_receipt(candidate, task, resolved_recipe, protocol=None, initializ
     execution = task.get("execution", {})
     policy_fields = {}
     if "policy_recipe_overrides" in execution:
-        from .policy_contracts import policy_recipe_overrides
+        from .policy_cohorts import policy_recipe_overrides
         policy_fields = policy_recipe_overrides(task)
     for name, value in policy_fields.items():
         if _json_value(resolved_recipe[name]) != _json_value(value):
@@ -219,6 +248,11 @@ def ownership_receipt(candidate, task, resolved_recipe, protocol=None, initializ
         behavior_owned |= RESOURCE_FIELDS - {"total_steps"}
         if host == "ae_gan_hold":
             behavior_owned -= {"encoder_mode", "z_dim", "num_particles", "batch_size"}
+        from .policy_cohorts import is_policy_task
+        if is_policy_task(task):
+            # Named producers consume these resolved public resource values;
+            # the original component hosts keep their inactive reference labels.
+            behavior_owned -= RESOURCE_FIELDS - {"total_steps"}
     result = {}
     for name in sorted(resolved_recipe):
         owner = recipe_field_owner(name, task)
@@ -284,7 +318,7 @@ def ownership_receipt(candidate, task, resolved_recipe, protocol=None, initializ
         initialization["component_policies"] = _json_value(host_definition["initialization"])
     prior_record = _record(prior, "task", "task.execution.prior")
     prior_record["code_path"] = "MoGParticlePrior" if prior["kind"] == "mog" else "ParticlePrior"
-    if not prior_binding["latent_table_controls"]:
+    if not prior_binding["latent_table_controls"] or prior_binding.get("constructed_prior") is False:
         prior_record["declared_code_path"] = prior_record["code_path"]
         prior_record["code_path"] = None
     prior_record["control_binding"] = prior_binding

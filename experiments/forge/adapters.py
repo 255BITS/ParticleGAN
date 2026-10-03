@@ -33,6 +33,27 @@ def _policy_task(task):
     return task.get("execution", {}).get("policy_contract") is not None
 
 
+_NAMED_POLICY_ADAPTERS = {
+    "conditional_policy_selected_cloud_v1": ("conditional_policy_adapters", "run_behavior"),
+    "routed_policy_selected_cloud_v1": ("routed_policy_adapters", "run_behavior"),
+    "multibank_policy_v1": ("multibank_policy_adapters", "run_behavior"),
+    "ae_routed_policy_v1": ("ae_routed_policy_adapters", "run_behavior"),
+    "word_joint_policy_min11_v1": ("word_joint_policy_adapters", "run_word"),
+}
+
+
+def _named_policy_module(task):
+    """Known, separately declared host laws; no arbitrary implementation loader."""
+    if not _policy_task(task) or task.get("task_cohort") == "policy_selected_cloud_v1":
+        return None
+    from .policy_cohorts import module_for_task, validate_policy_task
+    module = module_for_task(task)
+    validate_policy_task(task)
+    if task["task_cohort"] not in _NAMED_POLICY_ADAPTERS:
+        raise ValueError("named policy has no declared public execution producer")
+    return module
+
+
 def _policy_word_blocker(task):
     return (f"{task['id']}: the joint (word,E(word))/(G(z),z) game has no declared "
             "ordered policy ownership, independent-row birth/death geometry and selected conditional "
@@ -66,24 +87,36 @@ def adapter_preflight(task, candidate, *, root=None):
     except ValueError as error:
         return [str(error)]
     adapter = task["adapter"]
+    try:
+        named_policy = _named_policy_module(task)
+        if named_policy is not None:
+            # Public metadata must resolve the exact fixed family/configuration.
+            # Actual callback/owner binding is independently checked on execution.
+            named_policy.resolved_recipe(candidate, task)
+    except (KeyError, TypeError, ValueError) as error:
+        return [f"{task.get('id', '<task>')}: {error}"]
     if adapter == "word_joint":
-        if _policy_task(task):
+        if _policy_task(task) and named_policy is None:
             return [_policy_word_blocker(task)]
-        from .word_adapter import word_preflight
-        return word_preflight(task, candidate, root=root)
+        if named_policy is None:
+            from .word_adapter import word_preflight
+            return word_preflight(task, candidate, root=root)
     supported = {"transfer_behavior", "transfer_vector", "transfer_image", "native100",
-                 "native100_continuation", "ring_endurance", "clockfree_audit", "paired_adaptation"}
+                 "native100_continuation", "ring_endurance", "clockfree_audit", "paired_adaptation", "word_joint"}
     if adapter not in supported:
         return [f"no public adapter for {adapter}; implement its declared capability before training"]
     policy_blockers = task_policy_blockers(task, candidate)
     if policy_blockers:
         return policy_blockers
     if adapter == "transfer_behavior" and task["execution"].get("host") != "mode_hold":
-        if _policy_task(task):
+        if named_policy is not None:
+            blockers = []
+        elif _policy_task(task):
             from .policy_behavior_adapters import behavior_preflight
+            blockers = behavior_preflight(task, candidate)
         else:
             from .behavior_adapters import behavior_preflight
-        blockers = behavior_preflight(task, candidate)
+            blockers = behavior_preflight(task, candidate)
         if blockers:
             return blockers
     blockers = []
@@ -570,6 +603,12 @@ def _dispatch_task(request: dict, job: dict, output_dir: Path, device: str) -> d
     """Dispatch frozen task definitions; unsupported capabilities fail before work."""
     task = request["tasks"][job["task_id"]]
     adapter = task["adapter"]
+    if _named_policy_module(task) is not None:
+        import importlib
+        name, function = _NAMED_POLICY_ADAPTERS[task["task_cohort"]]
+        producer = importlib.import_module("." + name, package=__package__)
+        context = _context(request, task, device, task_recipe_resources(task))
+        return getattr(producer, function)(request, task, output_dir, device, context=context)
     if adapter == "word_joint":
         if _policy_task(task):
             raise CapabilityError([_policy_word_blocker(task)])

@@ -146,17 +146,34 @@ def test_fake_lifecycle_method_cannot_be_certified_as_public_execution():
 
 
 @pytest.mark.parametrize("parent_id", ["img_intensity2", "vector_two_broad"])
-def test_short_actual_scalar_host_exports_same_scored_selected_cloud(parent_id, tmp_path):
+def test_short_actual_scalar_host_exports_same_scored_selected_cloud(parent_id, tmp_path, monkeypatch):
     import numpy as np
     from experiments.forge.adapters import run_task, adapter_preflight
     from experiments.forge.artifacts import verify_artifacts
     from experiments.forge.policy_contracts import (COHORT, REQUIRED_POLICY_SOURCES,
                                                   _prospective_variant, _parent_record)
+    from experiments.forge import policy_cohorts
     path = ROOT / "configs/forge/tasks" / f"{parent_id}.json"
     parent = json.loads(path.read_text())
     sources = {name: hashlib.sha256((ROOT / name).read_bytes()).hexdigest() for name in REQUIRED_POLICY_SOURCES}
     task = _prospective_variant(parent, _parent_record(parent, hashlib.sha256(path.read_bytes()).hexdigest()), sources)
+    original = deepcopy(task)
+    validate = policy_cohorts.validate_policy_task
+    validate(original, root=ROOT)
     task["execution"]["steps"] = 2  # software prefix, never the original 600/1200 budget
+    with pytest.raises(ValueError):
+        validate(task, root=ROOT)
+    short_digest = typed_state_digest(task)
+
+    def structural_prefix_declaration(value, root=None):
+        # Only this exact two-update software fixture substitutes declaration
+        # checking. The original full task must validate; actual policy owners,
+        # arrays, observers, RNG and complete checkpoint checks remain real.
+        if typed_state_digest(value) == short_digest:
+            return validate(original, root=root)
+        return validate(value, root=root)
+
+    monkeypatch.setattr(policy_cohorts, "validate_policy_task", structural_prefix_declaration)
     candidate = {"recipe_preset": "atlas", "recipe_overrides": {"lr": .0053125, "prior_lr_mult": 1.5}, "task_cohort": COHORT}
     assert adapter_preflight(task, candidate, root=ROOT) == []
     request = {"candidate": candidate, "protocol": {"seed": 0}, "tasks": {task["id"]: task}}

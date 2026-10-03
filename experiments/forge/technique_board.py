@@ -47,6 +47,18 @@ def _policy_parent(parent, actual_id, cohort):
     return parent["id"]
 
 
+def _policy_slot_name(cohort, parent):
+    from .policy_contracts import COHORT, PARENT_TASK_IDS
+    from .named_policy_planning import NAMED_PARENTS
+    if parent not in PARENT_TASK_IDS:
+        raise ValueError("policy row contains an unknown required parent slot")
+    if cohort == COHORT:
+        return parent + "_" + cohort
+    if cohort in NAMED_PARENTS:
+        return parent + "_" + cohort if parent in NAMED_PARENTS[cohort] else parent
+    raise ValueError("policy row requires an explicitly supported source-bound cohort")
+
+
 def policy_row_metadata(request: dict) -> dict:
     """Retain real policy task IDs while binding their original display slots."""
     candidate = request.get("candidate", {})
@@ -54,7 +66,8 @@ def policy_row_metadata(request: dict) -> dict:
         return {}
     cohort = candidate["task_cohort"]
     view, tasks = request["view"], request["tasks"]
-    if cohort != "policy_selected_cloud_v1" or view.get("task_cohort") != cohort:
+    from .policy_cohorts import KNOWN_COHORTS
+    if cohort not in KNOWN_COHORTS or view.get("task_cohort") != cohort:
         raise ValueError("policy row requires the explicit resolved task cohort")
     actual_ids = [item["task"] for item in view["assignments"]]
     if len(actual_ids) != len(set(actual_ids)) or set(actual_ids) != set(tasks):
@@ -62,10 +75,20 @@ def policy_row_metadata(request: dict) -> dict:
     slots = {}
     for name in actual_ids:
         task = tasks[name]
+        if task.get("id") != name:
+            raise ValueError("policy row task dictionary differs from its actual identity")
+        if task.get("execution", {}).get("policy_contract") is None:
+            if (task.get("task_cohort") is not None or task.get("policy_parent") is not None
+                    or _policy_slot_name(cohort, name) != name):
+                raise ValueError("unadapted policy view slot differs from its original question")
+            slots[name] = name
+            continue
         parent = task.get("policy_parent", {})
         if task.get("task_cohort") != cohort or task.get("id") != name:
             raise ValueError("policy row lacks an actual task's parent-slot binding")
         slots[name] = _policy_parent(parent, name, cohort)
+        if _policy_slot_name(cohort, slots[name]) != name:
+            raise ValueError("policy row applies a variant outside its named-family scope")
     if len(set(slots.values())) != len(slots):
         raise ValueError("policy row parent slots must be one-to-one")
     return {"task_cohort": cohort, "qualification_view": deepcopy(view), "task_slot_map": slots}
@@ -201,7 +224,8 @@ def _row_assignments(row, common_view):
             raise ValueError("policy row is missing its actual qualification view")
         return common_view["assignments"]
     cohort, slots = row.get("task_cohort"), row.get("task_slot_map")
-    if (cohort != "policy_selected_cloud_v1" or actual.get("task_cohort") != cohort
+    from .policy_cohorts import KNOWN_COHORTS
+    if (cohort not in KNOWN_COHORTS or actual.get("task_cohort") != cohort
             or actual.get("id") != common_view["id"] or actual.get("goal") != common_view["goal"]
             or actual.get("revision") != common_view["revision"] + 1
             or actual.get("parent_view_fingerprint") != view_fingerprint(common_view)
@@ -210,7 +234,7 @@ def _row_assignments(row, common_view):
     assignments = actual["assignments"]
     names = [item["task"] for item in assignments]
     if (len(names) != len(set(names)) or set(names) != set(slots)
-            or any(not isinstance(slot, str) or name != slot + "_" + cohort
+            or any(not isinstance(slot, str) or name != _policy_slot_name(cohort, slot)
                    for name, slot in slots.items())
             or len(set(slots.values())) != len(slots)):
         raise ValueError("policy row task slots must be a complete one-to-one mapping")
@@ -234,6 +258,10 @@ def _row_assignments(row, common_view):
             raise ValueError("policy row scientific bindings differ from its actual view/slots")
         for name in names:
             task = bindings["tasks"][name]
+            if name == slots[name]:
+                if task.get("task_cohort") is not None or task.get("policy_parent") is not None:
+                    raise ValueError("unadapted scientific task contains a foreign policy binding")
+                continue
             if (task.get("task_cohort") != cohort
                     or _policy_parent(task.get("policy_parent"), name, cohort) != slots[name]):
                 raise ValueError("policy row scientific parent binding differs from its display slot")

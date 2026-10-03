@@ -1,0 +1,240 @@
+{
+  "adapter": "transfer_behavior",
+  "dependencies": [],
+  "evaluation": {
+    "eval_output_noise": "not_applied_to_measurement",
+    "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+    "evaluator_revision": {
+      "change": "Correct == grading and reject unsupported operators; >= and <= numerical gates unchanged. Word fixture now honors declared prior_betas. Bind current sources for future execution only; original receipts and verdicts remain unchanged.",
+      "id": "explicit-equality-and-word-prior-betas-v3",
+      "previous_revision": null,
+      "previous_source_sha256": {
+        "benchmarks/locked_shared/baseline.py": "72ebe4ef6d3cfe28f1ab6073fc781a72b45173f3ce2a0b63040e84b27bed03cc",
+        "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+        "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97"
+      }
+    },
+    "kind": "transfer_sustained",
+    "minimum_stable_checks": 5,
+    "observations": 24,
+    "policy_observation": {
+      "diagnostic_credit": false,
+      "diagnostic_weights": [],
+      "eval_streams": "forge-rng-v1_isolated",
+      "latent_policy": "not_applied_to_parameter_measurement",
+      "output_noise": false,
+      "parameter_measurement": "selected_original_odd_even_residual_geometry",
+      "row_selection": "original_two_conditioned_poles",
+      "sampler": "served_snapshot",
+      "schema_version": 1,
+      "weight_selector": "state_selected"
+    },
+    "sampling_contract_version": 1,
+    "sampling_law": "learned_parameter_measurement",
+    "scoring_weights": "state_selected",
+    "sources": {
+      "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
+      "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+      "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89"
+    },
+    "thresholds": [
+      [
+        "u_kept",
+        ">=",
+        0.85
+      ],
+      [
+        "content_kept",
+        ">=",
+        0.75
+      ],
+      [
+        "leak_ratio",
+        "<=",
+        0.2
+      ],
+      [
+        "pole_rel_err_plus",
+        "<=",
+        0.2
+      ],
+      [
+        "pole_rel_err_minus",
+        "<=",
+        0.2
+      ],
+      [
+        "same_dir",
+        "<=",
+        0.25
+      ]
+    ]
+  },
+  "execution": {
+    "device": "cuda",
+    "execution_path": "public_components",
+    "host": "cover_leftover",
+    "host_definition": {
+      "family": "existing_behavior",
+      "phase": "fit",
+      "runner": "legacy",
+      "split": "development",
+      "steps": 800
+    },
+    "host_source": "benchmarks/locked_shared/baseline.py",
+    "initializer": "deterministic_orthogonal",
+    "policy_contract": {
+      "bank_labels": "immutable_router_bank_ids_original_storage_strata",
+      "banks": {
+        "minus": [
+          12,
+          24
+        ],
+        "plus": [
+          0,
+          12
+        ]
+      },
+      "checkpoint": "complete_public_policy_models_optimizers_streams_and_cursor",
+      "cohort": "multibank_policy_v1",
+      "controls": "resolved_recipe_requested_enabled_eligible_applied",
+      "cpu_controls_scope": "structural_only",
+      "cross_bank_values": "explicit_guarded_candidate_copy_not_sampling_the_opposite_stratum",
+      "direct_response_reason": "public_routed_transport_rejects_coupled_direct_row_history",
+      "execution_device": "cuda",
+      "execution_path": "public_components",
+      "external_limit": "task.execution.steps",
+      "family": "atlas_multibank",
+      "independent_atlas_qualification": false,
+      "independent_direct_response_owner": false,
+      "inherited_auto_backend": "public_routed_owner_not_independent_feature_cells",
+      "initializer": "original_zero_residual_subclass_KEEP_original_two_separate_R2_prior_initializations_named_critic",
+      "lifecycle": "ordered_public_update",
+      "loss_normalization": "one_original_concat24_regularizer_and_two_separate_cover_means_no_factor2",
+      "numerical_equivalence_to_parent": false,
+      "original_objective": "RpGAN_plus_concat_VICReg_weight.05_target.05_L2.02_two_cover_terms_weight1.5",
+      "owner": "particlegan.UpdatePolicy",
+      "paired_controls": {
+        "feature_max_context_harm": 0.0,
+        "fit": "original_plus_minus_cloud_and_sampled_indices_jitter.01",
+        "guard": "both_original_teacher_poles_all24_rows_zero_host_jitter",
+        "guard_use": "structural_acceptance_only",
+        "heldout_generalization_claim": false,
+        "output_max_context_harm": 0.0
+      },
+      "precision": "preserve_original_fp32_no_autocast",
+      "routing": {
+        "callback": "complete_model_forward",
+        "fixed_bank_membership": true,
+        "log_mass": "router.log_mass",
+        "matched_logit": 0.0,
+        "other_bank_logit": -2097152.0,
+        "row_buffers": [],
+        "same_bank_fallback_logit": -1048576.0,
+        "sites": [
+          "polar_bank_lookup"
+        ]
+      },
+      "row_policy": "routed_paired",
+      "row_semantics": "conditional",
+      "schedule": "preserve_resolved_recipe_none",
+      "schema_version": 1,
+      "sources": {
+        "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
+        "benchmarks/locked_shared/hosts/cover_leftover.py": "f9bf24ace45678508c9d7e767e73db86116daece205bd78f3174737d13177838",
+        "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+        "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89",
+        "experiments/forge/adapters.py": "eaf04527f6b5f386d9484fd9d6b0e8c393a87ad84722993f6c5927bed2e4417f",
+        "experiments/forge/api.py": "f53e6afd4578d9233c8c60ba483831e367e4ebfd59d53386a02b11a7979ab71d",
+        "experiments/forge/boundaries.py": "155155f3ff95efc79308b8edfabb3c4357f45aee6c334da8bc6631eb4426b541",
+        "experiments/forge/contracts.py": "fcac35c47301f582bb19f2a4b12bd2b41f8630ec12b02912c3fc9f47539a81a8",
+        "experiments/forge/evaluate.py": "e1873f056c732b14c456a6a196f5756e855a63b7ae2f77dfde1c6ee671d221df",
+        "experiments/forge/mechanisms.py": "9e4e1fe1f8cb9a24148cab88b7bf2f980e805a2e488c16a982768519bbe1b23f",
+        "experiments/forge/multibank_policy_adapters.py": "55cc932a628113fb6b3e4091609d671ed6b46f5f16e148c8e650a35c7d64fd6f",
+        "experiments/forge/multibank_policy_contracts.py": "2244946f9651ac2dfbe12b7a073538eb506b4b10d1cc0dbafc2a9f28d7b1d1e6",
+        "experiments/forge/named_policy_planning.py": "e74124bfbfc10017d1e1b39d04ed0da97de13131bed79c30f25b52795863d3b9",
+        "experiments/forge/planning.py": "8f8ff63d586a48cb9f7bed5a93c9b1c45f00eb7aada4cf6f34e77e0c2a4a6f9b",
+        "experiments/forge/policy_adapters.py": "95f7bf03c878d484d01a0fdf0f6b5c9ad34b8df94106ff7a50b02f7f1dfe67cf",
+        "experiments/forge/policy_behavior_adapters.py": "eebf6b881f80ac95b26f80a018b20cd0fc67febca2b05e8986f2ca0caee08c7d",
+        "experiments/forge/policy_cohorts.py": "9cbb8addeee483c004b3b36833def111c393703eab9f6d62b79f81065f7f751f",
+        "experiments/forge/policy_declaration_sources.py": "374a176284199de724936d02e77ad8755250da273c75acfde096318e060ac717",
+        "experiments/forge/policy_snapshot_publication.py": "5a637679392b4b1869fb8d1ca15cf7f6855f54d50ea4cb6857ad07aa733aa9a9",
+        "experiments/forge/rng.py": "ae7b9a8d61da42136d970188a6f168e03e2d7c5b90cf6fdbd93ad929aba2f293",
+        "experiments/forge/routed_policy_adapters.py": "9a287a5c029aa6e96c12e1b6e6db86dac59a8ee5f127c2e74aed87c9fd0ce165",
+        "experiments/forge/routed_policy_contracts.py": "6f2f6d9ce984d7cf1a7ce8f8b41203a4a7c7cc42635a319b240caf8fe96d2a3c",
+        "experiments/forge/runtime.py": "8f82ec5da54a9c670e80e5691e6337e03120019a1071516479fd65c3724ad147",
+        "experiments/forge/sampling.py": "5f5013418a051ef18064aff5fea62c61b5b31bbcd20945e075e0aaf23d6985d7",
+        "experiments/forge/technique_board.py": "6eb7b31b9eab3fefad82cd773dc5ca8b2900d083e073b5aa7467c73ba1c85577",
+        "experiments/forge/views.py": "d0bafd90cb5bc727bb21b554678245e3d028bdd4c04fcd5cae8af40a513727d1",
+        "particlegan/birth_death.py": "b14c50c611a8cf188347e391739fca50a5171200eb6be90e4e3d1509d64e47ed",
+        "particlegan/init.py": "e15d4de01eb49f7097bc249abacab907ff067385412346f54ab0d510cb8649d0",
+        "particlegan/particle_prior.py": "0220878bebea227da63abbf9f5b1ebdabdc6aea54fd2332fd2cab02ed734238f",
+        "particlegan/policy.py": "6d2953cd21aefd637976266085fbc8f447183ccbb8fdec0caa06c525a146cc42",
+        "particlegan/recipes.py": "d7ef27d306d12c3035e509721d9a995ddb66edb07851976ef5106f21cc7d77f1",
+        "particlegan/routing.py": "63249d808fccb3d4e113eb1d638a245ee665c3cade20a1542bb706f316b4abcc",
+        "particlegan/training.py": "7dadc219135bc3e6bf657bfe9bc3fa81dd14d4b2a31c70d5ff61e2941db35c94",
+        "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+      },
+      "table_owner": "prior.z",
+      "transport": "public_master_table_and_mass_moments_with_fixed_bank_identity_and_both_pole_guards"
+    },
+    "policy_recipe_overrides": {
+      "row_policy": "routed_paired"
+    },
+    "policy_recipe_overrides_provenance": {
+      "bank_identity": "fixed_original_storage_strata",
+      "evidence_reuse": false,
+      "family": "atlas_multibank",
+      "new_storage": "concatenate_to_one24x4_parameter_without_new_degrees",
+      "original_two_banks": [
+        12,
+        12
+      ],
+      "table_history": "one_public_master_latent_history_not_two_independent_histories",
+      "transport_guards": "both_conditioned_poles"
+    },
+    "prior": {
+      "exception_reason": "This host uses two explicit learned clouds and separately declared host jitter; no implicit MoG kernel may replace that law.",
+      "kind": "particle_cloud",
+      "learnable": true,
+      "sigma": 0.0,
+      "standardize": false
+    },
+    "produces_state": false,
+    "protocol": "screening",
+    "resources": {
+      "batch_size": 32,
+      "num_particles": 24,
+      "z_dim": 4
+    },
+    "schedule_policy": "public_policy_stationarity_no_declared_horizon",
+    "steps": 800
+  },
+  "id": "cover_leftover_multibank_policy_v1",
+  "policy_family": "atlas_multibank",
+  "policy_parent": {
+    "evaluation_fingerprint": "d6a0b646e55e9c8e523f90485b3ec47844a18e18b12fd6046c1646487c9a1807",
+    "execution_fingerprint": "e79d755f2a61242af2d2fd043dd2c6d5b639dd331d705b6c48c6d6190aa798cc",
+    "id": "cover_leftover",
+    "task_sha256": "f40f960d80090f1b46cc326424cab7d781c36cc9ea3222aea7375c2834028e4e"
+  },
+  "requires_capabilities": [
+    "named_rng",
+    "served_sampling",
+    "policy_controls",
+    "policy_serving",
+    "routed_rows",
+    "learned_locations",
+    "particle_cloud"
+  ],
+  "resources": {
+    "allow_cpu": false,
+    "cpu_threads": 1,
+    "device": "cuda",
+    "gpu_memory_mb": 2048,
+    "gpus": 1,
+    "timeout_seconds": 1800
+  },
+  "schema_version": 1,
+  "task_cohort": "multibank_policy_v1"
+}

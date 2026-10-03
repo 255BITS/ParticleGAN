@@ -117,9 +117,11 @@ def _policy_claim(report, row):
                 if isinstance(contract, dict) and {"task_cohort", "policy_parent"} & contract.keys():
                     return True
     tasks = row.get("tasks", [])
+    from .policy_cohorts import KNOWN_COHORTS
     return isinstance(tasks, list) and any(
         isinstance(task, dict) and isinstance(task.get("task_id"), str)
-        and task["task_id"].endswith(policy.SUFFIX) for task in tasks)
+        and any(task["task_id"].endswith("_" + cohort) for cohort in KNOWN_COHORTS)
+        for task in tasks)
 
 
 def _execution_hash(task):
@@ -144,9 +146,9 @@ def _expected_contract(task):
         "steps": execution.get("steps"), "timeout_seconds": task.get("resources", {}).get("timeout_seconds"),
         "sampling": {key: evaluation.get(key) for key in (
             "sampling_contract_version", "sampling_law", "eval_output_noise", "scoring_weights")},
-        "task_cohort": task["task_cohort"], "policy_parent": task["policy_parent"],
-        "policy_recipe_overrides": execution["policy_recipe_overrides"],
-        "policy_recipe_overrides_provenance": execution["policy_recipe_overrides_provenance"],
+        "task_cohort": task.get("task_cohort"), "policy_parent": task.get("policy_parent"),
+        "policy_recipe_overrides": execution.get("policy_recipe_overrides", {}),
+        "policy_recipe_overrides_provenance": execution.get("policy_recipe_overrides_provenance"),
     }
 
 
@@ -163,7 +165,7 @@ def _verify_sources(reader, parent, variant):
                 raise ValueError("policy publication conflicting evaluator/implementation source bindings")
             sources[relative] = expected
     provenance = variant["execution"]["policy_recipe_overrides_provenance"]
-    if provenance is not None:
+    if provenance is not None and "recipe_group" in provenance:
         relative = provenance["source"]
         expected = provenance["source_sha256"]
         if relative in sources and sources[relative] != expected:
@@ -177,11 +179,16 @@ def _verify_sources(reader, parent, variant):
                 or not _same({name: group["recipe"].get(name) for name in policy.OVERRIDE_FIELDS},
                              variant["execution"]["policy_recipe_overrides"])):
             raise ValueError("policy publication C6 overrides differ from their source-pinned Recipe")
+    elif provenance is not None and "source" in provenance:
+        if provenance["source"] not in sources:
+            raise ValueError("policy publication host provenance lacks its bound implementation source")
     for relative, expected in sources.items():
         reader.verify(relative, expected)
 
 
 def _validate(root, report, row):
+    if row.get("task_cohort") != policy.COHORT:
+        return _validate_named(root, report, row)
     reader = _Sources(root, report)
     common = reader.json(f"configs/forge/views/{policy.PARENT_VIEW_ID}.json")
     parents, variants = {}, {}
@@ -200,7 +207,12 @@ def _validate(root, report, row):
     expected_view, _ = policy.resolve_policy_view(common, {**parents, **variants}, {"task_cohort": policy.COHORT})
     actual = row.get("qualification_view")
     slots = {name + policy.SUFFIX: name for name in policy.PARENT_TASK_IDS}
-    if (row.get("task_cohort") != policy.COHORT or not _same(actual, expected_view)
+    return _validate_projection(reader, report, row, common, expected_view, slots, variants, policy.COHORT)
+
+
+def _validate_projection(reader, report, row, common, expected_view, slots, variants, cohort):
+    actual = row.get("qualification_view")
+    if (row.get("task_cohort") != cohort or not _same(actual, expected_view)
             or not _same(row.get("task_slot_map"), slots)):
         raise ValueError("policy publication actual view/parent-slot mapping changed")
     if (report.get("view") != common["id"] or report.get("view_revision") != common["revision"]
@@ -239,7 +251,7 @@ def _validate(root, report, row):
         raise ValueError("policy publication attained tier exceeds its recorded task gates")
     bindings = row.get("bindings")
     if (not isinstance(bindings, dict) or bindings.get("available") is not True
-            or bindings.get("task_cohort") != policy.COHORT
+            or bindings.get("task_cohort") != cohort
             or bindings.get("qualification_view_revision") != expected_view["revision"]
             or bindings.get("qualification_view_sha256") != stable_hash(expected_view)
             or bindings.get("qualification_policy_fingerprint") != stable_hash(expected_view)
@@ -256,6 +268,80 @@ def _validate(root, report, row):
         if (not isinstance(ref, str) or not _SHA256.fullmatch(ref) or not isinstance(contract, dict)
                 or stable_hash(contract) != ref or not _same(contract, _expected_contract(variants[name]))):
             raise ValueError(f"policy publication compact task contract differs from pinned task: {name}")
+
+
+def _validate_named(root, report, row):
+    """Check frozen JSON/source bytes without importing a frozen host or scorer."""
+    from .named_policy_planning import NAMED_PARENTS, project_view
+    cohort = row.get("task_cohort")
+    families = {
+        "conditional_policy_selected_cloud_v1": "atlas_conditional",
+        "routed_policy_selected_cloud_v1": "atlas_routed",
+        "multibank_policy_v1": "atlas_multibank",
+        "ae_routed_policy_v1": "atlas_ae_routed",
+        "word_joint_policy_min11_v1": "atlas_word_joint_min11",
+    }
+    if not isinstance(cohort, str) or cohort not in families:
+        raise ValueError("policy publication unknown explicit named cohort")
+    if row.get("bindings", {}).get("trainer_family") != families[cohort]:
+        raise ValueError("named policy publication trainer family differs from its explicit cohort")
+    reader = _Sources(root, report)
+    common = reader.json(f"configs/forge/views/{policy.PARENT_VIEW_ID}.json")
+    if ([a.get("task") for a in common.get("assignments", [])] != list(policy.PARENT_TASK_IDS)
+            or type(common.get("revision")) is not int or common["revision"] != policy.PARENT_REVISION
+            or any(a.get("importance") != "required"
+                   or a.get("qualification_tier") != (1 if i < 5 else 2 if i < 24 else 3)
+                   or a.get("order") != i - (0 if i < 5 else 5 if i < 24 else 24)
+                   for i, a in enumerate(common["assignments"]))):
+        raise ValueError("named publication changed the original full 5/19/2 view")
+    selected, slots = {}, {}
+    for parent_id in policy.PARENT_TASK_IDS:
+        parent_path = f"configs/forge/tasks/{parent_id}.json"
+        parent = reader.json(parent_path)
+        if parent.get("id") != parent_id:
+            raise ValueError("named publication original parent identity changed")
+        if parent_id not in NAMED_PARENTS[cohort]:
+            for relative, sha in parent["evaluation"].get("sources", {}).items():
+                reader.verify(relative, sha)
+            selected[parent_id], slots[parent_id] = parent, parent_id
+            continue
+        name = parent_id + "_" + cohort
+        variant = reader.json(f"configs/forge/task-variants/{cohort}/{name}.json")
+        pin = policy._parent_record(parent, hashlib.sha256(reader.read(parent_path)).hexdigest())
+        contract = variant.get("execution", {}).get("policy_contract", {})
+        if (variant.get("id") != name or variant.get("task_cohort") != cohort
+                or variant.get("policy_family") != families[cohort]
+                or not _same(variant.get("policy_parent"), pin)
+                or contract.get("cohort") != cohort or contract.get("family") != families[cohort]
+                or contract.get("owner") != "particlegan.UpdatePolicy"
+                or contract.get("lifecycle") != "ordered_public_update"
+                or contract.get("execution_path") != "public_components"
+                or contract.get("execution_device") != "cuda"
+                or contract.get("cpu_controls_scope") != "structural_only"
+                or contract.get("numerical_equivalence_to_parent") is not False):
+            raise ValueError("named publication lacks exact parent/family/owner/source scope")
+        # These current, whitelisted contract modules perform only metadata
+        # transforms. Frozen Python is never imported; the original parent and
+        # implementation bytes are read through _Sources at the exact pin.
+        from .policy_cohorts import module_for_task
+        module = module_for_task(variant)
+        sources = contract.get("sources")
+        from .policy_declaration_sources import DECLARATION_SOURCES
+        required = DECLARATION_SOURCES | (policy.REQUIRED_POLICY_SOURCES - {"experiments/forge/policy_contracts.py"})
+        for field in ("SOURCES", "REQUIRED_SOURCES", "COMMON_SOURCES"):
+            if hasattr(module, field):
+                required = required | set(getattr(module, field))
+        if cohort == "conditional_policy_selected_cloud_v1":
+            required = required | {module.HOSTS[parent_id]["source"]}
+        if not isinstance(sources, dict) or not required <= sources.keys():
+            raise ValueError("named publication is missing public implementation source pins")
+        expected = module._variant(parent, pin, sources)
+        if not _same(variant, expected):
+            raise ValueError("named publication changes a frozen parent field or its explicit policy transformation")
+        _verify_sources(reader, parent, variant)
+        selected[name], slots[name] = variant, parent_id
+    expected_view = project_view(common, selected, cohort, families[cohort])
+    return _validate_projection(reader, report, row, common, expected_view, slots, selected, cohort)
 
 
 def validate_policy_publication(root, report, row) -> None:

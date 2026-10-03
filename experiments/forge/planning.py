@@ -129,9 +129,9 @@ def resolve_idea(root: Path, idea_id: str, *, view_id: str | None = None,
     view = load_view(root, view_id or idea["goal"])
     all_tasks = load_tasks(root)
     if "task_cohort" in idea:
-        from .policy_contracts import load_policy_variants, resolve_policy_view
-        all_tasks.update(load_policy_variants(root, all_tasks))
-        view, tasks = resolve_policy_view(view, all_tasks, idea)
+        from .named_policy_planning import load_task_variants, resolve_task_view
+        all_tasks.update(load_task_variants(root, all_tasks, idea["task_cohort"]))
+        view, tasks = resolve_task_view(view, all_tasks, idea)
     else:
         tasks = {a["task"]: deepcopy(all_tasks[a["task"]]) for a in view["assignments"]}
     validate_view(view, all_tasks)
@@ -180,6 +180,9 @@ def resolve_idea(root: Path, idea_id: str, *, view_id: str | None = None,
         # scan, so retain them explicitly for this opt-in cohort only.
         extra_sources.add(f"configs/forge/views/{view['id']}.json")
         for name, task in tasks.items():
+            if task.get("execution", {}).get("policy_contract") is None:
+                extra_sources.add(f"configs/forge/tasks/{name}.json")
+                continue
             parent = task["policy_parent"]["id"]
             extra_sources.update((f"configs/forge/tasks/{parent}.json",
                                   f"configs/forge/task-variants/{idea['task_cohort']}/{name}.json"))
@@ -187,7 +190,7 @@ def resolve_idea(root: Path, idea_id: str, *, view_id: str | None = None,
             extra_sources.update(execution["policy_contract"]["sources"])
             extra_sources.update(execution.get("policy_resource_sources", {}))
             provenance = execution.get("policy_recipe_overrides_provenance")
-            if provenance is not None:
+            if provenance is not None and "source" in provenance:
                 extra_sources.add(provenance["source"])
     # A view selects evidence, not a different candidate implementation. Capture
     # the same catalog evaluator support set for every view so quality/stability

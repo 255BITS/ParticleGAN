@@ -9,7 +9,7 @@
       "id": "two_pole_policy_selected_cloud_v1",
       "order": 0,
       "parent_id": "two_pole",
-      "sha256": "7de61994b6c7d29532cb428977455bc1b454ed4cb99da1530c66c632d3fb179c",
+      "sha256": "c38417487740683cf4170dccaf7dfc526fa56b72a2c9ccadc4e2426a65c4eee6",
       "steps": 80,
       "tier": 1,
       "timeout_seconds": 300
@@ -21,7 +21,7 @@
       "id": "unused_token_hold_policy_selected_cloud_v1",
       "order": 1,
       "parent_id": "unused_token_hold",
-      "sha256": "91d4e09920e2f18c0df90089942206ff386d307597682fd81f644891bb9fa22c",
+      "sha256": "70dbc29840e8f364533825db5bb02172da5dadf83d3b9194e48318c975e233a4",
       "steps": 200,
       "tier": 1,
       "timeout_seconds": 300
@@ -33,7 +33,7 @@
       "id": "ae_gan_hold_policy_selected_cloud_v1",
       "order": 2,
       "parent_id": "ae_gan_hold",
-      "sha256": "09282dc690278cb719e6d8bd35b9404728a24e61bd8c353f4a817abd3d92fb83",
+      "sha256": "8abb08e9efee306b187437b63c0edacde26833aae70eee5cf7b890fa44ad14dc",
       "steps": 250,
       "tier": 1,
       "timeout_seconds": 300
@@ -45,7 +45,7 @@
       "id": "ring16_acquisition_policy_selected_cloud_v1",
       "order": 3,
       "parent_id": "ring16_acquisition",
-      "sha256": "14210be9a058abd9a6db317a55a1f34b050a9991fa604e06920bf8e2dd147cb4",
+      "sha256": "7160fc66c3b41b38870dfe930cf0817d81bd72b34252a6bd3efaec81db1712ef",
       "steps": 400,
       "tier": 1,
       "timeout_seconds": 300
@@ -57,7 +57,7 @@
       "id": "five_word_joint_acquisition_policy_selected_cloud_v1",
       "order": 4,
       "parent_id": "five_word_joint_acquisition",
-      "sha256": "ce8bbbb1325325217340f47eb9444879141e9c871b31372984baa8e035dffa3a",
+      "sha256": "05d8f9978028a25bd0b0858eb4cc1eef667ddedde5f55b5e6f875d11cd91f558",
       "steps": 20001,
       "tier": 1,
       "timeout_seconds": 900
@@ -69,7 +69,7 @@
       "id": "trajectory_policy_selected_cloud_v1",
       "order": 0,
       "parent_id": "trajectory",
-      "sha256": "936a0ef000758a58714728ce657dd3d47388fa6fe355c996c0972ad23909b68f",
+      "sha256": "778649fc76c4175ba4b4a03d9a0c6493ac675f544f1e9df3d8cf6f5db853bdaa",
       "steps": 400,
       "tier": 2,
       "timeout_seconds": 1800
@@ -81,7 +81,7 @@
       "id": "residual_student_policy_selected_cloud_v1",
       "order": 1,
       "parent_id": "residual_student",
-      "sha256": "e2a1336a3186ced5f31ed0b4e6784f7b23e15d4e60d4483d63d5e909fe944011",
+      "sha256": "d10fd53696dceaa6f609c600e8fc6623232cc88c877900c15fa0edcf5b20dddf",
       "steps": 400,
       "tier": 2,
       "timeout_seconds": 1800
@@ -93,7 +93,7 @@
       "id": "unipolar_policy_selected_cloud_v1",
       "order": 2,
       "parent_id": "unipolar",
-      "sha256": "7bd420eee0f0cc3c496a9cbf7a18837f520cc3ce0578d932b949263812acd8e5",
+      "sha256": "62d7a3534973358d1aaedfd847779f5da19c63a4d266d4a36719ae69df2463ab",
       "steps": 400,
       "tier": 2,
       "timeout_seconds": 1800
@@ -105,7 +105,7 @@
       "id": "cover_leftover_policy_selected_cloud_v1",
       "order": 3,
       "parent_id": "cover_leftover",
-      "sha256": "a94ab5b1d86869a82caedbeda6eabe40a3de0aca0456be55f3ab292195d105a2",
+      "sha256": "557537afd9544c31d56e1505ed75bcccf32fd68243ada2c61fa6bf5bef5689b6",
       "steps": 800,
       "tier": 2,
       "timeout_seconds": 1800
@@ -117,7 +117,7 @@
       "id": "mid_scale_identity_policy_selected_cloud_v1",
       "order": 4,
       "parent_id": "mid_scale_identity",
-      "sha256": "8da8e6c08dc44c9efc2821a86c693a45c190886d83b3957e0e934b58862236ea",
+      "sha256": "5de47ef0f03a46ab90142c6b9f0d17901c7248d30886225e89f1ab48add6a0d4",
       "steps": 800,
       "tier": 2,
       "timeout_seconds": 1800
@@ -129,7 +129,7 @@
       "id": "mode_hold_policy_selected_cloud_v1",
       "order": 5,
       "parent_id": "mode_hold",
-      "sha256": "f407c5668061a4de22ddbb81aa237352e96138971833f3e7cbe8bea94f363c86",
+      "sha256": "a345bd0ca4725846dd3103b3578a1e0b4c046ee4bcc9b324841cb5eb615b61fc",
       "steps": 1200,
       "tier": 2,
       "timeout_seconds": 1800
@@ -141,7 +141,7 @@
       "id": "vector_two_broad_policy_selected_cloud_v1",
       "order": 6,
       "parent_id": "vector_two_broad",
-      "sha256": "d29bda7f64155d0743f25f95bce87f5a7791de473b446203c8812dfa45163f05",
+      "sha256": "4a8688e2804cf66d40243e5c7d27556afc34343e49e87f6856327965f1d84cbb",
       "steps": 1200,
       "tier": 2,
       "timeout_seconds": 1800
@@ -153,7 +153,7 @@
       "id": "vector_unequal_mass_policy_selected_cloud_v1",
       "order": 7,
       "parent_id": "vector_unequal_mass",
-      "sha256": "6205193592d02d5ee3927e9a5dfa678e5cf16c08d0156aac7d756b18b03653b1",
+      "sha256": "bc4f0f88c2143b418940dc9ca064aba21c3d75ab20d997cfc815c6857d8ee27f",
       "steps": 1200,
       "tier": 2,
       "timeout_seconds": 1800
@@ -165,7 +165,7 @@
       "id": "vector_unequal_width_policy_selected_cloud_v1",
       "order": 8,
       "parent_id": "vector_unequal_width",
-      "sha256": "29f88504beeafe174fae3319e34ae39d239fa5f64fcf678d4da8d165453fb408",
+      "sha256": "a24a4c6e1cd51016dd54a1760494dba2ca2f83d7b41fbe46efb0704d63c9d8d0",
       "steps": 1200,
       "tier": 2,
       "timeout_seconds": 1800
@@ -177,7 +177,7 @@
       "id": "vector_anisotropic_policy_selected_cloud_v1",
       "order": 9,
       "parent_id": "vector_anisotropic",
-      "sha256": "9de2588a94ad06fa4dfcdd53e1617f6afa94fcc9dead40baba6df7020b08d877",
+      "sha256": "0b52c55cf3160b7a1afa2ab0c03dc391a387ea94f2bab2cfe99ede7c430fc030",
       "steps": 1200,
       "tier": 2,
       "timeout_seconds": 1800
@@ -189,7 +189,7 @@
       "id": "vector_overlap_policy_selected_cloud_v1",
       "order": 10,
       "parent_id": "vector_overlap",
-      "sha256": "1a562d55b531b7c5f4d89e35a30d1f9e3ed8be4264ba74c2750d1778c24541c3",
+      "sha256": "d625b910161999554f9d4206e71b6d61e0a4cc3746afcf13ad71d6b2b62088d6",
       "steps": 1200,
       "tier": 2,
       "timeout_seconds": 1800
@@ -201,7 +201,7 @@
       "id": "vector_spiral_policy_selected_cloud_v1",
       "order": 11,
       "parent_id": "vector_spiral",
-      "sha256": "770ecb45190145d428f0376d78356b33be2a300cb70bc73b08d4bf9bb5c821c3",
+      "sha256": "e8783e96e75ab8028d407638383e038a75e818099c227481e8a9f7f9dee4abb0",
       "steps": 1600,
       "tier": 2,
       "timeout_seconds": 1800
@@ -213,7 +213,7 @@
       "id": "img_stripes2_policy_selected_cloud_v1",
       "order": 12,
       "parent_id": "img_stripes2",
-      "sha256": "cc35682806d14d7045b7578af20b3d5702c8d0af5881d84add31e79c55466105",
+      "sha256": "3d5baace54855bd2560f18a82ad428e617952c36f8c413154d9208d65373f012",
       "steps": 600,
       "tier": 2,
       "timeout_seconds": 1800
@@ -225,7 +225,7 @@
       "id": "img_bars4_policy_selected_cloud_v1",
       "order": 13,
       "parent_id": "img_bars4",
-      "sha256": "df18109793365efa86938458cebec4b28752655b7c44b1cd47c299be4fa96bc0",
+      "sha256": "2c29f68c8150c3c6d8e9e05fdce3b30b96f2b8056174b0987450df4537c94df7",
       "steps": 600,
       "tier": 2,
       "timeout_seconds": 1800
@@ -237,7 +237,7 @@
       "id": "img_blobs4_policy_selected_cloud_v1",
       "order": 14,
       "parent_id": "img_blobs4",
-      "sha256": "d52f8b4cc6fab46d9078732a9899e9116d67c88aaea9bbb1619f5769a49d62f6",
+      "sha256": "dbf1ec2c33a4df7f3d05ed56f801c8a10a40355211619f0e496cae7ec6df4324",
       "steps": 600,
       "tier": 2,
       "timeout_seconds": 1800
@@ -249,7 +249,7 @@
       "id": "img_intensity2_policy_selected_cloud_v1",
       "order": 15,
       "parent_id": "img_intensity2",
-      "sha256": "32e6aa94911e3d21804a5270729111f8cbb17fada318fd9b772f0d3bd980419c",
+      "sha256": "c507b84b6902af2f66eb2994285714e840ef41f56c8a61b22c7f61bff5e95a98",
       "steps": 600,
       "tier": 2,
       "timeout_seconds": 1800
@@ -261,7 +261,7 @@
       "id": "grid100_policy_selected_cloud_v1",
       "order": 16,
       "parent_id": "grid100",
-      "sha256": "d0ab5be7b54a48a0bc3f6be21c93f06b604c0b2b1a5c8bfc4f3cd760ae1e527c",
+      "sha256": "e98dcfdef404af1548e6272ba22d22758289f1151958e62b3eba960a4abc675b",
       "steps": 7000,
       "tier": 2,
       "timeout_seconds": 3600
@@ -273,7 +273,7 @@
       "id": "rotated100_policy_selected_cloud_v1",
       "order": 17,
       "parent_id": "rotated100",
-      "sha256": "663ff97d1eb6a559d0f9c2ff975349310eecb9329dee9e1fdc35c4e23c580a5e",
+      "sha256": "cf7bb60f86946112fbf109300022f5acf8e5124952d0288549a21c3d34efd704",
       "steps": 7000,
       "tier": 2,
       "timeout_seconds": 3600
@@ -285,7 +285,7 @@
       "id": "staggered100_policy_selected_cloud_v1",
       "order": 18,
       "parent_id": "staggered100",
-      "sha256": "81ada04ad0c77f620b85b3f9cd3a13806892c1ae9efcefda83ac1a78aadd4eed",
+      "sha256": "e00970728371801ace9087fc4d72d87471a540e93d1fe4831c0c167c460a988f",
       "steps": 7000,
       "tier": 2,
       "timeout_seconds": 3600
@@ -297,7 +297,7 @@
       "id": "ring_hold_policy_selected_cloud_v1",
       "order": 0,
       "parent_id": "ring_hold",
-      "sha256": "600f53256d0174611f51405492c9e807400f8d67bd0d77c551441eaeebbeec0d",
+      "sha256": "530040dc2af03136aee1501cfb03f6fb3395aec75be2d9aec3a33b242ac5b50e",
       "steps": 7500,
       "tier": 3,
       "timeout_seconds": 3600
@@ -309,7 +309,7 @@
       "id": "ring_extension_policy_selected_cloud_v1",
       "order": 1,
       "parent_id": "ring_extension",
-      "sha256": "f9e107c2b4d283e596a27769a8a46fab85ba71bd7310c54c78960c16dc25aedb",
+      "sha256": "fd13cb8b5a66c09e889900efd0adfaf706a6bed4649c8e17373e1c85a30ec10d",
       "steps": 7500,
       "tier": 3,
       "timeout_seconds": 3600

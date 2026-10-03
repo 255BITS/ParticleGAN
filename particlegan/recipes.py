@@ -296,7 +296,18 @@ class Recipe:
             raise ValueError("lr_control='stationarity' requires continuous_policy='dv12'")
         if type(self.particle_birth_death) is not bool:
             raise ValueError("particle_birth_death must be a boolean")
-        if self.particle_birth_death and self.prior_kind != "particles":
+        # A fixed-width AE bank is a conditional paired-error law, rather
+        # than independent Gaussian atoms. Its public policy must also bind
+        # the actual MoG/encoder and a complete named-site RoutedRows callback.
+        routed_ae_mog = (self.row_policy == "routed_paired" and self.prior_kind == "mog"
+                         and self.encoder_mode == "ae" and self.model == "gan"
+                         and self.conditioning == "scalar" and type(self.sigma_rel) in (int, float)
+                         and self.sigma_rel == 0
+                         and self.standardize is False)
+        if self.row_policy == "routed_paired" and self.prior_kind == "mog" and not routed_ae_mog:
+            raise ValueError("routed MoG requires scalar GAN + encoder_mode='ae', "
+                             "sigma_rel=0 and standardize=False")
+        if self.particle_birth_death and self.prior_kind != "particles" and not routed_ae_mog:
             raise ValueError("particle_birth_death requires prior_kind='particles' (a trainable table)")
         if (isinstance(self.serve_average, bool) or not isinstance(self.serve_average, (int, float))
                 or not math.isfinite(self.serve_average) or self.serve_average < 0):

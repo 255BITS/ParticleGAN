@@ -171,6 +171,41 @@ def _json_diagnostics(value):
     return value
 
 
+def routed_owner_receipt(policy):
+    """Read the actual guarded-forward owner without calling it or drawing.
+
+    Declaration metadata alone cannot establish that protected contexts and
+    mass-aware routing are attached to the executing public policy.
+    """
+    routed = policy.routed_control
+    if routed is None:
+        return None
+    state = routed.state_dict()
+    callback = routed.spec.model_forward
+    return {
+        "schema_version": 1,
+        "owner": "particlegan.routing.RoutedRowControl",
+        "config": _json_diagnostics(routed.spec.to_dict()),
+        "model_forward": {
+            "callable": callable(callback),
+            "module": getattr(callback, "__module__", None),
+            "qualname": getattr(callback, "__qualname__", None),
+        },
+        "model_roles": sorted(routed.models),
+        "table_matches_policy": routed.table is policy.table,
+        "averaged_table_matches_policy": routed.averaged_table is policy.averaged_table,
+        "table_shape": list(routed.table.shape),
+        "row_ownership": _json_diagnostics(state["row_ownership"]),
+        "fit_fill": routed.fit_fill,
+        "guard_fill": routed.guard_fill,
+        "probe_clock": dict(routed.probe_clock),
+        "counters": dict(routed.counters),
+        "state_sha256": typed_state_digest(state),
+        "state_digest_kind": DIGEST_KIND,
+        "counter_credit": "observed_only_no_claim_that_a_proposal_or_move_occurred",
+    }
+
+
 def controls_receipt(policy, completed_steps):
     """Read actual enabled owners/counters; inactive branches earn no firing."""
     if not isinstance(policy, UpdatePolicy):
@@ -211,14 +246,14 @@ def controls_receipt(policy, completed_steps):
                    "surprise": None if policy.surprise is None else policy.surprise.diagnostics(),
                    "reopen_guard": None if policy.reopen_guard is None else policy.reopen_guard.state_dict(),
                    "backend_selection": selection}
-    parameters = [value for module in (policy.G, policy.D, policy.prior) if module is not None
+    parameters = [value for module in policy._training_modules().values()
                   for value in module.parameters()]
     devices = sorted({str(value.device) for value in parameters})
     floating_dtypes = sorted({str(value.dtype) for value in parameters if value.is_floating_point()})
     device_types = {value.device.type for value in parameters}
     execution = {"model_devices": devices, "floating_dtypes": floating_dtypes,
                  "autocast_enabled": any(torch.is_autocast_enabled(kind) for kind in device_types)}
-    return {"schema_version": 1, "cohort": "policy_selected_cloud_v1", "lifecycle": lifecycle,
+    receipt = {"schema_version": 1, "cohort": "policy_selected_cloud_v1", "lifecycle": lifecycle,
             "requested": requested, "enabled": enabled, "requested_owners_bound": satisfied,
             "row_evidence_observations": row_updates,
             "row_semantics": policy.row_semantics, "roles": deepcopy(policy.roles),
@@ -232,6 +267,9 @@ def controls_receipt(policy, completed_steps):
             "diagnostic_nulls": "source-defined unavailable diagnostics; exact sentinels retained in checkpoint",
             "implementation_observed": bool(lifecycle["complete"] and satisfied),
             "quality_qualification": False}
+    if policy.routed_control is not None:
+        receipt["routed_owner"] = routed_owner_receipt(policy)
+    return receipt
 
 
 def observation_receipt(task, policy):

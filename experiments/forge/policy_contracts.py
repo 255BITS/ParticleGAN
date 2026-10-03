@@ -19,6 +19,7 @@ import hashlib
 import json
 import math
 from pathlib import Path, PurePosixPath
+from .policy_declaration_sources import DECLARATION_SOURCES
 
 
 COHORT = "policy_selected_cloud_v1"
