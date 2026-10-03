@@ -10,12 +10,26 @@ ROOT = Path(__file__).resolve().parents[1]
 DRIVER = ROOT / "examples" / "routed_generator_batch.py"
 
 
-def test_identity_accepts_new_checkout_and_prose_but_rejects_source_drift(tmp_path, monkeypatch):
+def test_archived_protocol_keeps_its_original_source_boundary():
     api = runpy.run_path(str(DRIVER))
     protocol = json.loads(DRIVER.with_name("routed_generator_batch_protocol.json").read_text())
-    actual = api["execution_identity"](protocol)
-    assert actual["verified_source_files"] == len(protocol["source_hashes"])
-    assert actual["reference_package_git_sha"] == api["BASE_SHA"]
+    # Later development can legitimately change scientific package bytes. The
+    # archived declaration must still reject them, rather than being repinned.
+    matches = all((ROOT / path).is_file()
+                  and hashlib.sha256((ROOT / path).read_bytes()).hexdigest() == expected
+                  for path, expected in protocol["source_hashes"].items())
+    assert api["source_readback"](protocol) is matches
+    if matches:
+        actual = api["execution_identity"](protocol)
+        assert actual["verified_source_files"] == len(protocol["source_hashes"])
+        assert actual["reference_package_git_sha"] == api["BASE_SHA"]
+    else:
+        with pytest.raises(RuntimeError, match="source identity differs"):
+            api["execution_identity"](protocol)
+
+
+def test_identity_accepts_new_checkout_and_prose_but_rejects_source_drift(tmp_path, monkeypatch):
+    api = runpy.run_path(str(DRIVER))
 
     # Only metadata changes when publication adds a commit or unbound report.
     scientific = tmp_path / "particlegan" / "policy.py"
