@@ -26,17 +26,17 @@ the authority for their original cohort.
 
 ## Focused preparation PRs and acceptance
 
-Each branch starts independently from the inspected `develop` base. A row marked
-pending is not a claim that the audit priority is complete. Implementation
-acceptance remains subject to the PR's tests and combined integration checks.
+Each branch starts independently from the inspected `develop` base. Acceptance
+records software controls and the combined integration rehearsal below; it does
+not establish empirical calibration or access to unavailable archives.
 
 | Audit priority | Focused change | Acceptance / remaining empirical work |
 | --- | --- | --- |
 | P1: repair recall and freshness | [#259](https://github.com/255BITS/ParticleGAN/pull/259), `codex/forge-audit-recall` | Concluded Forge configurations and policy trials are normalized source-bound recall inputs; exact IDs/failed bounds/mechanisms/goals link authoritative evidence; stale/missing publication coverage is visible without training |
-| P1: shared policy execution ownership | [#260](https://github.com/255BITS/ParticleGAN/pull/260), `codex/forge-audit-policy-ownership` | Immutable execution source, coordinated deduplication/admission, locks/leases and charged interrupted work; no clean-MoG qualification from policy results |
+| P1: shared policy execution ownership | [#260](https://github.com/255BITS/ParticleGAN/pull/260), `codex/forge-audit-policy-ownership` | Immutable execution source, coordinated deduplication/admission, inherited leases and independently supervised absolute deadlines; crashed callers cannot extend paid children, and completed originals resume certification without reexecution. GPU aliases are normalized; unresolved UUID/MIG masks fail before admission. No clean-MoG qualification from policy results |
 | P1: retrieve original evidence | [#256](https://github.com/255BITS/ParticleGAN/pull/256), `codex/forge-audit-artifact-resolver` | Verified fresh-process fixture hydration of full request/evidence/result/source and selected checkpoint; pinned Git originals; explicit invalid/missing outcomes and retention ownership gaps. Actual `/ml2` archives still require a real mounted/transferred copy |
 | P1: prevent infeasible calibration spending | [#258](https://github.com/255BITS/ParticleGAN/pull/258), `codex/forge-audit-calibration-feasibility` | Read-only logical feasibility preflight and registration guard preserve bound published matrices and original hashes. **A justified new screen, independent positive/negative references, and empirical accepted calibration remain pending** |
-| P2: hypothesis-to-decision contract | `codex/forge-audit-decision-contract` — branch/PR pending | Prior-evidence identities, substantive delta, numerical prediction, competing explanation, falsification observation and bounded terminal rule must bind mechanically; causal judgment remains explicit research review |
+| P2: hypothesis-to-decision contract | [#262](https://github.com/255BITS/ParticleGAN/pull/262), `codex/forge-audit-decision-contract` | New bare research ideas require reviewed v2 contracts: exact prior evidence, effective recipe/prior/component initialization, full task/job/runtime bindings, numerical prediction/falsifier, competing explanation and bounded stop/review rules. Missing, nonfinite, invalid or duplicate metrics remain incomplete. Exact legacy declarations and separately verified registered searches/lanes/promotions retain their original contracts; causal judgment remains research review |
 | P2: maintain publication controls and make integration reviewable | [#257](https://github.com/255BITS/ParticleGAN/pull/257), `codex/forge-audit-publication` | Maintained reducers live in the experiment package; original negative controls enter default CI; frozen parity and deterministic bytes pass; original audit/reproduction identities and this review map are preserved |
 
 The calibration preparation does not produce new data or an accepted screen.
@@ -47,6 +47,15 @@ bindings; projection or legacy-binding changes must not silently turn those
 recorded outcomes into a newer cohort. Unknown independent-reference coverage
 remains unknown. No new training, seed study, qualification regrade or promotion
 is authorized by this map.
+
+Execution ownership covers one cooperating Forge queue on one host. Campaign
+budgets retain their own frozen definitions. A v2 decision's stable scientific
+candidate-round identity additionally accumulates paid retries and live
+reservations across campaign owners in that queue; narrative edits, metadata
+revisions and job namespaces cannot reset its cap. Separate queue roots do not
+provide global admission or spending guarantees. Use the same queue for these
+shared ownership and bounded-round guarantees. A descriptive initialization
+label alone is not proof that a changed mechanism was exercised.
 
 ## Merge order and combined verification
 
@@ -62,11 +71,21 @@ The initial local rehearsal combined #256, #257, #259, #258 and #260. Its only
 conflicts were catalog metadata and adjacent CLI early-return blocks. Preserve
 both `artifacts` and `calibration-preflight` dispatch branches before any Queue
 construction. For `configs/forge/catalog.json`, preserve the original top-level
-fields and all `pinned_sources` entries, regenerate inventory fields from the
-combined tracked paths, then set coverage with `validate_inventory(root,
+fields and all `pinned_sources` entries, stage the resolved source changes so
+`inventory()` records their actual Git blobs, regenerate inventory fields from
+the combined tracked paths, then set coverage with `validate_inventory(root,
 merged_catalog)`. Do not choose one branch's catalog wholesale or replace it
 with `inventory()` alone. The five-PR rehearsal had valid 11,719/11,719 coverage;
-the complete six-PR checkout must recount its own tracked paths.
+the complete six-PR checkout must recount its own tracked paths. Coverage checks
+path presence, not blob equality; compare the staged blob identities separately.
+
+The final six-head rehearsal used #256 `95a30442`, #257 `1ae7749f`, #258
+`6766617f`, #259 `778cb6f8`, #260 `d5a2a980`, and #262 `b7973457`. Its remaining
+merge conflict was catalog metadata. The combined inventory covers
+11,720/11,720 tracked paths, retains the three original `pinned_sources` entries,
+and matches staged Git blob identities. The final documentation follow-up in
+this PR changes no tested implementation. This rehearsal did not merge any PR
+into `develop`.
 
 After the final decision/readout hook changes a reducer hash, refresh recall in
 the integration checkout using `python -m experiments.forge compile
@@ -75,6 +94,31 @@ The summary-only mode preserves published qualification and telemetry snapshots.
 Plain `compile` is not the reporting-merge workflow: it can regrade historical
 scientific inputs through the live reducer. A stale reducer fingerprint warrants
 this safe refresh, not new qualification, reconstructed passes or paid reruns.
+
+The final combined acceptance passed **1,333 software tests in 115.59 seconds**,
+with eight existing multiprocessing-fork deprecation warnings:
+
+```sh
+PYTHONUNBUFFERED=1 CUDA_VISIBLE_DEVICES='' OMP_NUM_THREADS=1 \
+  MKL_NUM_THREADS=1 MPLBACKEND=Agg python -m pytest -q \
+  tests/test_forge*.py tests/test_toy_api_family_search.py
+```
+
+The safe summary refresh completed, and `compile --check` reports `CURRENT`
+for 332 records, 75 published recall records and eight views. `validate` checks
+49 tasks and eight views without training. Both inspected failed calibration
+profiles remain `INFEASIBLE` from their bound published reports, with zero
+binding issues; this preserves their original scientific decisions.
+
+The combined diff preserves original attempts, experiment records, automation,
+calibration reports/receipts, technique reports, configuration-search archives,
+dated family-winner reproduction sources and scientific boards. Changes under
+`reports/forge` are the safe compiled memory/recall/tier projections, declaration
+pointers and publication migration/recall additions. Follow-up labels are
+declaration-only pointers; their presence infers no outcome or new measurement.
+The original audit and dated source bytes remain unchanged. These acceptance
+results establish code preparation, not empirical accepted calibration or
+availability of the missing originals.
 
 Run the affected software suites and normal default CI discovery in the combined
 checkout. Verify that read-only commands construct no worker/submission and that
