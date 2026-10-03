@@ -1,8 +1,10 @@
 # Trainer families and bounded configuration search
 
 The [current technique leaderboard](../reports/forge/technique-inventory.md)
-publishes one complete selected configuration per trainer family and runtime
-cohort. A configuration changes settings on the shared public trainer; it does
+publishes one complete selected configuration per formulation family. The
+generic [current family selection](../configs/forge/selections/family-current-v1.json)
+pins one exact ordinary evidence row; other source and runtime cohorts remain
+unranked alternatives. A configuration changes settings on the shared public trainer; it does
 not introduce another training loop or a new technique row. The companion JSON
 retains alternative configurations and the exact evidence behind their results.
 
@@ -14,15 +16,28 @@ Its convergence timing and speed objective are future additions; the implemented
 search behavior is described below.
 
 [`trainer-families.json`](../configs/forge/trainer-families.json) declares family
-membership and a canonical fallback. Families describe presentation lineage;
-each new search also records its actual public technique signature. Distinct
-mechanisms, including structural ablations, have explicit families. The older matched R1/R2 penalty swap and the
+membership and a canonical fallback. Families identify formulations;
+each new search also records its stricter public technique signature. Historical
+ablation families retain their identities. A structural control change within a
+formulation can be an ordinary idea in that family; a changed optimizer/loss
+formulation requires a new family. The older matched R1/R2 penalty swap and the
 Modern GAN recipe belong to the same R1/R2 family, but their historical source
 cohorts remain separate evidence. The canonical fallback is an explicit choice,
 not a claim that incomparable historical configurations have been ranked.
-An explicit `active_search_by_backend` setting selects the study used by a
-family. Completing a later study preserves earlier trials; switching the active
-study is a reviewable registry change.
+The current whole-row pin takes precedence over `active_search_by_backend`.
+That setting still selects registered studies when no current pin applies and
+when reconstructing archived policies. Completing a later study preserves earlier
+trials; changing a selection is a reviewable declaration change.
+
+An ordinary idea is a reusable global recipe, rather than a solution owned by
+one task. Evaluate it through the unchanged full view and prerequisite gates.
+It can become the configured family standard only after the complete required
+Tier 1 denominator passes. The pin validates every scientific row field,
+including unmeasured cells; it cannot combine outcomes across candidates or
+import direct-task diagnostics. A failed replacement remains an unranked family
+alternative while the recorded incumbent stays selected. Neither that retention
+nor a new standard ranks incompatible sources or changes public defaults.
+Calibration and independent confirmation still govern default adoption.
 
 ## Declare a search
 

@@ -11,6 +11,81 @@ from pathlib import Path
 from .contracts import identifier, read_json, stable_hash
 
 REGISTRY = Path("configs/forge/trainer-families.json")
+CURRENT_SELECTION = Path("configs/forge/selections/family-current-v1.json")
+
+# Editorial labels and publication receipts do not change a measured row. Bind
+# every scientific field, including the complete denominator and UNKNOWN cells.
+_DISPLAY_FIELDS = {"technique", "publication_key", "qualification_input", "qualification_reuse",
+                   "trainer_family", "configuration_id", "comparison_cohort", "selection",
+                   "selected_configuration", "alternative_scope"}
+
+
+def scientific_row_hash(row: dict) -> str:
+    return stable_hash({key: value for key, value in row.items() if key not in _DISPLAY_FIELDS})
+
+
+def family_row_pin(row: dict, *, selection_kind: str, reason: str) -> dict:
+    """Describe one exact ordinary measured row, never an aggregate of cells."""
+    bindings = row.get("bindings", {})
+    return {"trainer_family": row["trainer_family"], "candidate_id": row["candidate_id"],
+            "candidate_revision": row.get("candidate_revision"), "cohort": row.get("cohort"),
+            "execution_backend": row.get("runtime_cohort", {}).get("execution_backend"),
+            "runtime_cohort_sha256": stable_hash(row.get("runtime_cohort")),
+            **{key: bindings.get(key) for key in ("source_digest", "recipe_sha256", "task_keys_sha256",
+                                                "protocol_sha256", "rng_sha256")},
+            "scientific_row_sha256": scientific_row_hash(row),
+            "selection_kind": selection_kind, "reason": reason}
+
+
+def load_current_selection(root: Path | str, *, view_id: str, policy_fingerprint: str) -> dict:
+    path = Path(root) / CURRENT_SELECTION
+    if not path.is_file():
+        return {}
+    card = read_json(path)
+    if (card.get("schema_version") != 1 or card.get("scope") != "whole_candidate_family_current"
+            or card.get("default_adoption") is not False or not isinstance(card.get("selections"), list)):
+        raise ValueError("unsupported whole-row family selection")
+    if card.get("view") != view_id or card.get("policy_fingerprint") != policy_fingerprint:
+        raise ValueError("current family selection differs from the view policy")
+    pins = {}
+    for pin in card["selections"]:
+        family = identifier(pin.get("trainer_family"), "selected trainer family")
+        identifier(pin.get("candidate_id"), "selected candidate")
+        if family in pins:
+            raise ValueError("current family selection must contain one whole row per family")
+        if (pin.get("selection_kind") not in {"historical_incumbent", "configured_standard"}
+                or pin.get("execution_backend") not in {"cpu", "cuda"}
+                or not isinstance(pin.get("reason"), str) or not pin["reason"].strip()):
+            raise ValueError("current family selection needs an explicit cohort choice and reason")
+        pins[family] = pin
+    return pins
+
+
+def _current_pin(root, family_id, rows, pin, *, view_id):
+    from .views import load_view
+    matches = [row for row in rows if family_row_pin(
+        row, selection_kind=pin["selection_kind"], reason=pin["reason"]) == pin]
+    if len(matches) != 1:
+        raise ValueError("current family selection must match one exact verified scientific row")
+    selected = matches[0]
+    if pin["selection_kind"] == "configured_standard" and not selected.get("attempt_ids"):
+        raise ValueError("current family selection requires ordinary measured evidence")
+    required = {assignment["task"] for assignment in load_view(root, view_id).get("assignments", [])
+                if assignment["importance"] == "required" and assignment["qualification_tier"] == 1}
+    tasks = selected.get("tasks", [])
+    statuses = {task["task_id"]: task["status"] for task in tasks}
+    tier = selected.get("tiers", {}).get("1", {})
+    qualified = (bool(required) and all(statuses.get(task) == "PASS" for task in required)
+                 and tier.get("passed") == tier.get("total") == len(required)
+                 and selected.get("qualified_tier", 0) >= 1
+                 and len(statuses) == len(tasks))
+    if pin["selection_kind"] == "configured_standard" and not qualified:
+        raise ValueError("configured family standard requires every required Tier 1 task to PASS")
+    return selected, {"selection_kind": pin["selection_kind"], "qualified": qualified,
+                      "default_adoption": False, "reason": pin["reason"],
+                      "selection_card": CURRENT_SELECTION.as_posix(),
+                      "comparison_claim": "No ranking across incompatible source or runtime cohorts.",
+                      "calibration_status": "provisional", "independent_confirmation": "not_performed"}
 
 
 def load_families(root: Path | str) -> dict:
@@ -30,7 +105,10 @@ def load_families(root: Path | str) -> dict:
         members = family.get("candidates")
         if not isinstance(members, list) or not members or len(set(members)) != len(members):
             raise ValueError("trainer family needs distinct candidate ids")
-        for member in members:
+        current_members = family.get("current_presentation_candidates", [])
+        if not isinstance(current_members, list) or len(set(current_members)) != len(current_members):
+            raise ValueError("current family presentation needs distinct candidate ids")
+        for member in members + current_members:
             identifier(member, "candidate")
             if member in candidates:
                 raise ValueError("candidate belongs to more than one trainer family")
@@ -45,10 +123,13 @@ def load_families(root: Path | str) -> dict:
     return result
 
 
-def family_for_candidate(root: Path | str, candidate_id: str, declaration: dict | None = None) -> dict:
+def family_for_candidate(root: Path | str, candidate_id: str, declaration: dict | None = None,
+                         *, current_presentation: bool = False) -> dict:
     families = load_families(root)
     for family in families.values():
-        if candidate_id in family["candidates"]:
+        members = family["candidates"] + (family.get("current_presentation_candidates", [])
+                                           if current_presentation else [])
+        if candidate_id in members:
             if declaration and declaration.get("trainer_family", family["id"]) != family["id"]:
                 raise ValueError("candidate trainer_family contradicts its explicit registry")
             return family
@@ -238,16 +319,22 @@ def _search_pin(root, family_id, backend, rows, declarations, catalogs, *, view_
 
 def select_family_rows(root: Path | str, rows: list[dict], catalogs: dict, *, view_id: str,
                        policy_fingerprint: str, declarations: dict | None = None,
-                       view_policy: dict | None = None) -> dict:
-    """Choose one whole configuration per family/backend, retaining alternatives."""
+                       view_policy: dict | None = None, execution_backend: str | None = None) -> dict:
+    """Choose one current whole row per family; archived policies retain cohorts."""
     if view_policy is not None and (view_policy.get("id") != view_id
                                     or stable_hash(view_policy) != policy_fingerprint):
         raise ValueError("explicit family-selection view differs from its recorded policy")
     declarations = _declarations(root) if declarations is None else declarations
+    current_pins = (load_current_selection(root, view_id=view_id, policy_fingerprint=policy_fingerprint)
+                    if view_policy is None else {})
     grouped, families, variants = {}, {}, []
     for original in rows:
+        if (execution_backend is not None
+                and original.get("runtime_cohort", {}).get("execution_backend") != execution_backend):
+            continue
         row = deepcopy(original)
-        family = family_for_candidate(root, row["candidate_id"], declarations.get(row["candidate_id"]))
+        family = family_for_candidate(root, row["candidate_id"], declarations.get(row["candidate_id"]),
+                                      current_presentation=view_policy is None)
         family_id = family["id"]
         families[family_id] = family
         row.update(trainer_family=family_id,
@@ -257,31 +344,47 @@ def select_family_rows(root: Path | str, rows: list[dict], catalogs: dict, *, vi
         runtime_key = stable_hash(row.get("runtime_cohort"))
         grouped.setdefault((family_id, backend, runtime_key), []).append(row)
         variants.append(row)
-    selected_rows = []
+    expected_pins = {family for family, pin in current_pins.items()
+                     if execution_backend is None or pin["execution_backend"] == execution_backend}
+    if expected_pins - set(families):
+        raise ValueError("current family selection is missing its verified family evidence")
+    selected_rows, selected_families = [], set()
     for (family_id, backend, _), alternatives in sorted(grouped.items()):
         family = families[family_id]
-        pin = _search_pin(root, family_id, backend, alternatives, declarations, catalogs,
-                          view_id=view_id, policy_fingerprint=policy_fingerprint, view_policy=view_policy)
-        if pin:
-            selected, metadata = pin
+        explicit = current_pins.get(family_id)
+        all_alternatives = [row for row in variants if row["trainer_family"] == family_id]
+        use_explicit = explicit and (execution_backend is None or explicit["execution_backend"] == execution_backend)
+        if use_explicit:
+            if family_id in selected_families:
+                continue
+            selected, metadata = _current_pin(root, family_id, all_alternatives, explicit, view_id=view_id)
+            alternatives = all_alternatives
         else:
-            canonical = [row for row in alternatives if row["candidate_id"] == family["canonical_candidate"]]
-            if len(canonical) > 1:
-                raise ValueError("canonical configuration has multiple scientific rows in one runtime; select its recorded revision first")
-            if not canonical:
-                raise ValueError("family runtime cohort needs its canonical configuration row before selection")
-            selected = canonical[0]
-            metadata = {"selection_kind": "canonical_fallback" if canonical else "configuration_fallback",
-                        "qualified": selected.get("status") == "PASS",
-                        "reason": "Canonical configuration preferred; no outcome ranking across incomparable sources."}
-        selected_identity = selected["candidate_id"], selected.get("cohort")
+            if view_policy is None and family_id in selected_families:
+                raise ValueError("multiple current runtime cohorts require an explicit whole-row family selection")
+            pin = _search_pin(root, family_id, backend, alternatives, declarations, catalogs,
+                              view_id=view_id, policy_fingerprint=policy_fingerprint, view_policy=view_policy)
+            if pin:
+                selected, metadata = pin
+            else:
+                canonical = [row for row in alternatives if row["candidate_id"] == family["canonical_candidate"]]
+                if len(canonical) > 1:
+                    raise ValueError("canonical configuration has multiple scientific rows in one runtime; select its recorded revision first")
+                if not canonical:
+                    raise ValueError("family runtime cohort needs its canonical configuration row before selection")
+                selected = canonical[0]
+                metadata = {"selection_kind": "canonical_fallback", "qualified": selected.get("status") == "PASS",
+                            "reason": "Canonical configuration preferred; no outcome ranking across incomparable sources."}
+        selected_families.add(family_id)
+        selected_identity = scientific_row_hash(selected)
         display = deepcopy(selected)
         display.update(technique=family["label"], selection=metadata)
         selected_rows.append(display)
         for row in alternatives:
-            identity = row["candidate_id"], row.get("cohort")
+            identity = scientific_row_hash(row)
             row["selected_configuration"] = identity == selected_identity
-            row["alternative_scope"] = ("selected" if row["selected_configuration"] else "comparable_trial"
+            row["alternative_scope"] = ("selected" if row["selected_configuration"] else
+                                        "archived_alternative" if use_explicit else "comparable_trial"
                                         if row["comparison_cohort"] == selected["comparison_cohort"] else "archived_alternative")
     selected_rows.sort(key=lambda row: (-row.get("qualified_tier", 0), row["technique"],
                                         row.get("runtime_cohort", {}).get("execution_backend", "")))

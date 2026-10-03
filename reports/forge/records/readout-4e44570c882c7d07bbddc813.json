@@ -1,0 +1,1767 @@
+{
+  "attempt_ids": [
+    "3472d2f10e984168a3cb9877d287d069"
+  ],
+  "candidate_id": "k3p--370894f9284090fc9771145a869f2d7fa617283c3736c8e461a47553c9668ce6",
+  "candidate_revision": "1a9eb1831acf7de8a0a96d1a2db0fc239b9836d19cfaec2986937cb0cd00e7ed",
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "comparison": "Compare only complete configurations within the frozen same-source/runtime family grid. K3P/KA2 zero-pass tie choices use deterministic content hashes and do not establish superiority; historical incumbent source cohorts remain unranked.",
+  "conclusion": "This exact global configuration failed the first two_pole movement gate. Tier1 is0/5; word and25remainingcells are UNKNOWN. No configured standard or default adoption.",
+  "decision_outcomes": [
+    {
+      "attempt_ids": [
+        "3472d2f10e984168a3cb9877d287d069"
+      ],
+      "binding_errors": [],
+      "causal_judgment": "requires_review",
+      "cohort": {
+        "compute_profiles": {
+          "cpu": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          },
+          "cuda": {
+            "backend": "cuda",
+            "compute_capability": "8.6",
+            "deterministic": true,
+            "driver": "610.57.04",
+            "model": "NVIDIA RTX A6000",
+            "tf32": false,
+            "threads": 1
+          }
+        },
+        "contract_sha256": "4ea712557d07c4731a98a55255ad16b62bed55cf178f16b8c849619df10502e8",
+        "execution_backend": "cuda",
+        "round": {
+          "budget_seconds": 48900,
+          "job_keys": [
+            "01d73a58db13648bc2b5ddcb83bc7de37004bda94995403edf24e1e673f26126",
+            "07ef794aeea85327c21a1b0450a71395d2b0bbaff323f09a135ffbbc6e86f20f",
+            "1f0509612253436f07a68bd1ac116556eff12b71298d40aa8efb9d2c13f8539d",
+            "333b73eb8599c1511e99912cab7bca712219908887611c5e17b52d064155bea2",
+            "4740bc5d7e68b947712767a12718fefb70d25619dca251b621dfd98cfed2ac86",
+            "492fc62a926a793c181f40265cfa407f70ce6aa7330b6c9f13b45d47ab8fc1c6",
+            "4c4dc8de4db0728eef1acc6775371a5fc12aac34f066bde8b10a4277097ff31a",
+            "59900353c90327dd203f25d038767c0b110ef98678ddf8acf2c88710dda02452",
+            "602e008fb6e19487905e51b1815774f0a14e1fdf51aab5e2f1ea4684c06020a6",
+            "62c69c4e496e681534700fb8fc644537b4bb99490ba2ee42f28f0de41ecd4e54",
+            "650dfcff4754a691e8044daca1d02c032c1afc2dfbf27020bd50b9764c66a590",
+            "66f12a02a9c5d6bc9770256da2fa3273474e0ca39b28200aee7ebff2b0c071ca",
+            "6beaceab0bfea3113aea5c97571daab1ec1ce9c62c182a3a0c59d940c8d48784",
+            "73f45b5222d91a124be0ac110af033dc3afa261fbcebd34bd163d06c6a363e32",
+            "76eb1cbb728102f87e06c024e6cc1f752223241bd568d536b82fe1e9bfeff662",
+            "7a5fa294bf0cedc3bcd4d9c13d4cc15e00dc73ac9ffb3e039ec067a79fa50e25",
+            "82cba39b988360fc05213f8c11967e886b010f2e12a797724731ca95ea9e36e2",
+            "949a9b02367f72d07259da2bcf8aa200e960f8745edec0d064b6e27e52a51725",
+            "b205e5fa1fe23942675f3106a60205bffb1b423fad73a9648c1c958781d61524",
+            "b4ac440bd65b8d5734b5f37cf1a2ce8c077271a04dcb97dc8322b4a034c47dda",
+            "e5f378f191f620ad37e12dc3f5d03083ffdc00fb27d40b8cf688c4a3560647ee",
+            "eda903582d1d5c25fb846417803923f8a97d5366487f19fcd9770df8de372e37",
+            "f99b6986ce5f8610ef593347312f802c92be44ab4bbda2bdfd6bd8b8f4c4214f",
+            "fe10e7c6319c254122a8e5ca1b16da78733b7480b3afe2528954b49c1419e946",
+            "fe1c9e8669cbb916755742102c9367c3ff8dd54c9efb05cfe6f013b48db71770"
+          ],
+          "max_rounds": 1,
+          "round_id": "386c91d9c9617c5f9645d42aafa766ead9afb3541cdb45ace6ed7d7bbdcd0225"
+        },
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.3",
+            "scipy": "1.17.1",
+            "torch": "2.14.0"
+          },
+          "python": "3.14.7",
+          "system": "Linux"
+        },
+        "source_digest": "2aea8c53d1871625ff47b58a9a24c6259b46e4647669ad42d34bc4366a42508f"
+      },
+      "cohort_sha256": "2f58cd8fd4ac6f80ad8105399d2e56b7152299559f1753c3ea486237bdffd044",
+      "contract_sha256": "4ea712557d07c4731a98a55255ad16b62bed55cf178f16b8c849619df10502e8",
+      "duplicate_task_ids": [],
+      "execution_authorized": false,
+      "max_rounds": 1,
+      "next_action": "request_missing_evidence",
+      "observed": {
+        "falsifier": {
+          "satisfied": true,
+          "value": 0.12804390490055084
+        },
+        "prediction": {
+          "satisfied": false,
+          "value": 0.12804390490055084
+        }
+      },
+      "outcome": "incomplete",
+      "provenance": [
+        {
+          "attempt_id": "3472d2f10e984168a3cb9877d287d069",
+          "result_hash": "eda7588efc68d850460b79f968789372b6f999ca2f3555be9c2da837c9e456ef",
+          "valid_receipt": true
+        }
+      ],
+      "qualification_input": false,
+      "schema_version": 1
+    }
+  ],
+  "evidence_scope": "current",
+  "goal": "discriminator_stability",
+  "hypothesis": "Increasing the global network/base rate while retaining the nominal absolute latent-table prior base rate may restore movement within the unchanged 80-update screen. Every complete configuration is then evaluated through all ordinary Tier 3 prerequisites; later failures remain part of this whole-candidate result.",
+  "lifecycle": "concluded",
+  "mechanism_class": "floor_constant",
+  "next_action": "Bounded global search concluded. Retain the exact historical family incumbent as unqualified evidence. No further paid stage is authorized; require a separate bounded global proposal before any continuation.",
+  "prior": {
+    "kind": "mog",
+    "learnable": true,
+    "sigma": 0.025,
+    "standardize": false
+  },
+  "provenance": {
+    "attempts": [
+      {
+        "attempt_id": "3472d2f10e984168a3cb9877d287d069",
+        "result_hash": "eda7588efc68d850460b79f968789372b6f999ca2f3555be9c2da837c9e456ef",
+        "valid_receipt": true
+      }
+    ]
+  },
+  "qualification_reuse": true,
+  "record_id": "readout-4e44570c882c7d07bbddc813",
+  "record_type": "scientific",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/attempts/3472d2f10e984168a3cb9877d287d069/result.json"
+  },
+  "task_results": [
+    {
+      "_attempt_id": "3472d2f10e984168a3cb9877d287d069",
+      "api_changes": [],
+      "api_version": "forge-api-v1",
+      "applied": {
+        "active_roles": [
+          "discriminator",
+          "prior"
+        ],
+        "checkpoint_scope": "component states; these hosts do not support continuation",
+        "execution_path": "public_components",
+        "field_ownership": {
+          "delegated_reference_values": {},
+          "inactive_legacy_host_fields": {},
+          "protocol": {
+            "id": {
+              "owner": "protocol",
+              "source": "protocol.id",
+              "value": "screening"
+            },
+            "revision": {
+              "owner": "protocol",
+              "source": "protocol.revision",
+              "value": 1
+            },
+            "rng": {
+              "owner": "protocol",
+              "source": "protocol.rng",
+              "value": {
+                "candidate_identity_in_seed": false,
+                "component_scoped": true,
+                "derivation": "forge-rng-v1",
+                "streams": [
+                  "init",
+                  "data",
+                  "prior",
+                  "noise",
+                  "eval"
+                ],
+                "unintended_deviations": 0
+              }
+            },
+            "robustness": {
+              "owner": "protocol",
+              "source": "protocol.robustness",
+              "value": {
+                "cross_seed_reuse": false,
+                "enabled_for_screening": false,
+                "requires_frozen_candidate": true,
+                "requires_preregistered_seed_set": true
+              }
+            },
+            "scoring": {
+              "owner": "protocol",
+              "source": "protocol.scoring",
+              "value": {
+                "best_checkpoint": "diagnostic_only",
+                "ema": "separate_view_required",
+                "weights": "live"
+              }
+            },
+            "seed": {
+              "owner": "protocol",
+              "source": "protocol.seed",
+              "value": 0
+            }
+          },
+          "recipe_fields": {
+            "alpha_bar": {
+              "owner": "task",
+              "reference_recipe_value": [
+                1.0,
+                0.9,
+                0.5,
+                0.05,
+                0.0001
+              ],
+              "source": "frozen behavioral host objective/component source",
+              "status": "host_owned",
+              "value": null
+            },
+            "amsgrad": {
+              "owner": "hyperparameter",
+              "source": "candidate.recipe_overrides.amsgrad",
+              "status": "effective",
+              "value": false
+            },
+            "batch_size": {
+              "owner": "task",
+              "reference_recipe_value": 2048,
+              "source": "frozen behavioral host objective/component source",
+              "status": "host_owned",
+              "value": null
+            },
+            "beta2_anneal_end": {
+              "owner": "hyperparameter",
+              "source": "candidate.recipe_overrides.beta2_anneal_end",
+              "status": "effective",
+              "value": 0.2
+            },
+            "beta2_end": {
+              "owner": "hyperparameter",
+              "source": "candidate.recipe_overrides.beta2_end",
+              "status": "effective",
+              "value": null
+            },
+            "betas": {
+              "owner": "hyperparameter",
+              "source": "candidate.recipe_overrides.betas",
+              "status": "effective",
+              "value": [
+                0.0,
+                0.999
+              ]
+            },
+            "birth_death_backend": {
+              "owner": "technique",
+              "source": "candidate.recipe_overrides.birth_death_backend",
+              "status": "effective",
+              "value": "knn"
+            },
+            "birth_death_cells": {
+              "owner": "hyperparameter",
+              "source": "candidate.recipe_overrides.birth_death_cells",
+              "status": "effective",
+              "value": 64
+            },
+            "birth_death_chunk": {
+              "owner": "hyperparameter",
+              "source": "candidate.recipe_overrides.birth_death_chunk",
+              "status": "effective",
+              "value": 256
+            },
+            "birth_death_feature_scale": {
+              "owner": "technique",
+              "source": "candidate.recipe_overrides.birth_death_feature_scale",
+              "status": "effective",
+              "value": "none"
+            },
+            "birth_death_isolation": {
+              "owner": "technique",
+              "source": "candidate.recipe_overrides.birth_death_isolation",
+              "status": "effective",
+              "value": false
+            },
+            "birth_death_metric_rank": {
+              "owner": "hyperparameter",
+              "source": "candidate.recipe_overrides.birth_death_metric_rank",
+              "status": "effective",
+              "value": 8
+            },
+            "birth_death_parent_policy": {
+              "owner": "technique",
+              "source": "candidate.recipe_overrides.birth_death_parent_policy",
+              "status": "effective",
+              "value": "real_anchor"
+            },
+            "birth_death_space": {
+              "owner": "technique",
+              "source": "candidate.recipe_overrides.birth_death_space",
+              "status": "effective",
+              "value": "data"
+            },
+            "conditioning": {
+              "owner": "task",
+              "reference_recipe_value": "scalar",
+              "source": "frozen behavioral host objective/component source",
+              "status": "host_owned",
+              "value": null
+            },
+            "continuous_policy": {
+              "owner": "technique",
+              "source": "candidate.recipe_overrides.continuous_policy",
+              "status": "effective",
+              "value": null
+            },
+            "critic_formulation": {
+              "owner": "technique",
+              "source": "candidate.recipe_overrides.critic_formulation",
+              "status": "effective",
+              "value": "k3p"
+            },
+            "critic_payoff_damping": {
+              "owner": "technique",
+              "source": "candidate.recipe_overrides.critic_payoff_damping",
+              "status": "effective",
+              "value": true
+            },
+            "critic_r1_real": {
+              "owner": "technique",
+              "source": "candidate.recipe_overrides.critic_r1_real",
+              "status": "effective",
+              "value": true
+            },
+            "d_guard_min_steps": {
+              "owner": "hyperparameter",
+              "source": "candidate.recipe_overrides.d_guard_min_steps",
+              "status": "effective",
+              "value": 200
+            },
+            "d_guard_ratio": {
+              "owner": "hyperparameter",
+              "source": "candidate.recipe_overrides.d_guard_ratio",
+              "status": "effective",
+              "value": 5.0
+            },
+            "d_lr_mult": {
+              "owner": "hyperparameter",
+              "source": "candidate.recipe_overrides.d_lr_mult",
+              "status": "effective",
+              "value": 1.5
+            },
+            "direct_particle_betas": {
+              "owner": "hyperparameter",
+              "source": "candidate.recipe_overrides.direct_particle_betas",
+              "status": "effective",
+              "value": [
+                0.0,
+                0.9
+              ]
+            },
+            "direct_particle_gain": {
+              "owner": "technique",
+              "source": "candidate.recipe_overrides.direct_particle_gain",
+              "status": "effective",
+              "value": true
+            },
+            "distance_reduction": {
+              "owner": "task",
+              "reference_recipe_value": "sum",
+              "source": "frozen behavioral host objective/component source",
+              "status": "host_owned",
+              "value": null
+            },
+            "ema_decay": {
+              "owner": "hyperparameter",
+              "source": "candidate.recipe_overrides.ema_decay",
+              "status": "effective",
+              "value": 0.995
+            },
+            "encoder_mode": {
+              "owner": "task",
+              "reference_recipe_value": "none",
+              "source": "frozen behavioral host objective/component source",
+              "status": "host_owned",
+              "value": null
+            },
+            "eps": {
+              "owner": "hyperparameter",
+              "source": "candidate.recipe_overrides.eps",
+              "status": "effective",
+              "value": 1e-08
+            },
+            "input_noise_anneal_end": {
+              "owner": "hyperparameter",
+              "source": "candidate.recipe_overrides.input_noise_anneal_end",
+              "status": "effective",
+              "value": 0.1
+            },
+            "input_noise_std": {
+              "owner": "hyperparameter",
+              "source": "candidate.recipe_overrides.input_noise_std",
+              "status": "effective",
+              "value": 0.0
+            },
+            "latent_damping_max_rate": {
+              "owner": "hyperparameter",
+              "source": "candidate.recipe_overrides.latent_damping_max_rate",
+              "status": "effective",
+              "value": 0.5
+            },
+            "lr": {
+              "owner": "hyperparameter",
+              "source": "candidate.recipe_overrides.lr",
+              "status": "effective",
+              "value": 0.00425
+            },
+            "lr_anneal_start": {
+              "owner": "hyperparameter",
+              "source": "candidate.recipe_overrides.lr_anneal_start",
+              "status": "effective",
+              "value": 0.6
+            },
+            "lr_control": {
+              "owner": "technique",
+              "source": "candidate.recipe_overrides.lr_control",
+              "status": "effective",
+              "value": "mobility"
+            },
+            "lr_floor": {
+              "owner": "hyperparameter",
+              "source": "candidate.recipe_overrides.lr_floor",
+              "status": "effective",
+              "value": 0.05
+            },
+            "model": {
+              "owner": "task",
+              "reference_recipe_value": "gan",
+              "source": "frozen behavioral host objective/component source",
+              "status": "host_owned",
+              "value": null
+            },
+            "name": {
+              "owner": "technique",
+              "source": "candidate.recipe_overrides.name",
+              "status": "metadata",
+              "value": "k3p"
+            },
+            "network_lr_floor": {
+              "owner": "hyperparameter",
+              "source": "candidate.recipe_overrides.network_lr_floor",
+              "status": "effective",
+              "value": 0.01
+            },
+            "network_lr_horizon_cap": {
+              "owner": "hyperparameter",
+              "source": "candidate.recipe_overrides.network_lr_horizon_cap",
+              "status": "effective",
+              "value": null
+            },
+            "num_classes": {
+              "owner": "task",
+              "reference_recipe_value": null,
+              "source": "frozen behavioral host objective/component source",
+              "status": "host_owned",
+              "value": null
+            },
+            "num_particles": {
+              "owner": "task",
+              "reference_recipe_value": 20000,
+              "source": "frozen behavioral host objective/component source",
+              "status": "host_owned",
+              "value": null
+            },
+            "observation_sigma": {
+              "owner": "task",
+              "reference_recipe_value": 0.03,
+              "source": "frozen behavioral host objective/component source",
+              "status": "host_owned",
+              "value": null
+            },
+            "optimizer_family": {
+              "owner": "technique",
+              "source": "candidate.recipe_overrides.optimizer_family",
+              "status": "effective",
+              "value": "formulation"
+            },
+            "output_noise_mode": {
+              "owner": "technique",
+              "source": "candidate.recipe_overrides.output_noise_mode",
+              "status": "effective",
+              "value": "fixed"
+            },
+            "output_noise_std": {
+              "owner": "hyperparameter",
+              "source": "candidate.recipe_overrides.output_noise_std",
+              "status": "effective",
+              "value": 0.0
+            },
+            "output_noise_warmup": {
+              "owner": "hyperparameter",
+              "source": "candidate.recipe_overrides.output_noise_warmup",
+              "status": "effective",
+              "value": 0.2
+            },
+            "particle_birth_death": {
+              "owner": "technique",
+              "source": "candidate.recipe_overrides.particle_birth_death",
+              "status": "effective",
+              "value": false
+            },
+            "prior_betas": {
+              "owner": "hyperparameter",
+              "reference_recipe_value": null,
+              "representation": "direct_sample_coordinates",
+              "source": "task prior-control applicability",
+              "status": "not_applicable",
+              "value": null
+            },
+            "prior_kind": {
+              "owner": "task",
+              "source": "task.execution.prior.kind",
+              "status": "effective",
+              "value": "particles"
+            },
+            "prior_lr_mult": {
+              "owner": "hyperparameter",
+              "reference_recipe_value": 0.28235294117647053,
+              "representation": "direct_sample_coordinates",
+              "source": "task prior-control applicability",
+              "status": "not_applicable",
+              "value": null
+            },
+            "prior_reg": {
+              "owner": "task",
+              "reference_recipe_value": 0.0,
+              "source": "frozen behavioral host objective/component source",
+              "status": "host_owned",
+              "value": null
+            },
+            "reconstruction_weight": {
+              "owner": "task",
+              "reference_recipe_value": 1.0,
+              "source": "frozen behavioral host objective/component source",
+              "status": "host_owned",
+              "value": null
+            },
+            "reg_anchor_min_decay": {
+              "owner": "hyperparameter",
+              "source": "candidate.recipe_overrides.reg_anchor_min_decay",
+              "status": "effective",
+              "value": 0.9
+            },
+            "reg_anchor_weight": {
+              "owner": "hyperparameter",
+              "source": "candidate.recipe_overrides.reg_anchor_weight",
+              "status": "effective",
+              "value": 1.0
+            },
+            "reg_arm": {
+              "owner": "technique",
+              "source": "candidate.recipe_overrides.reg_arm",
+              "status": "effective",
+              "value": null
+            },
+            "reg_coeff": {
+              "owner": "hyperparameter",
+              "source": "candidate.recipe_overrides.reg_coeff",
+              "status": "effective",
+              "value": 170.0
+            },
+            "reg_coeff_anneal_end": {
+              "owner": "hyperparameter",
+              "source": "candidate.recipe_overrides.reg_coeff_anneal_end",
+              "status": "effective",
+              "value": 0.2
+            },
+            "reg_coeff_end": {
+              "owner": "hyperparameter",
+              "source": "candidate.recipe_overrides.reg_coeff_end",
+              "status": "effective",
+              "value": null
+            },
+            "reg_every": {
+              "owner": "hyperparameter",
+              "source": "candidate.recipe_overrides.reg_every",
+              "status": "effective",
+              "value": 1
+            },
+            "reg_kappa": {
+              "owner": "hyperparameter",
+              "source": "candidate.recipe_overrides.reg_kappa",
+              "status": "effective",
+              "value": 1.0
+            },
+            "reopen_anchor": {
+              "owner": "technique",
+              "source": "candidate.recipe_overrides.reopen_anchor",
+              "status": "effective",
+              "value": "hold"
+            },
+            "reopen_guard": {
+              "owner": "technique",
+              "source": "candidate.recipe_overrides.reopen_guard",
+              "status": "effective",
+              "value": null
+            },
+            "reopen_signal": {
+              "owner": "technique",
+              "source": "candidate.recipe_overrides.reopen_signal",
+              "status": "effective",
+              "value": "data"
+            },
+            "routing_temperature": {
+              "owner": "task",
+              "reference_recipe_value": 0.25,
+              "source": "frozen behavioral host objective/component source",
+              "status": "host_owned",
+              "value": null
+            },
+            "row_evidence_exclude": {
+              "owner": "technique",
+              "source": "candidate.recipe_overrides.row_evidence_exclude",
+              "status": "effective",
+              "value": true
+            },
+            "row_evidence_gate": {
+              "owner": "technique",
+              "source": "candidate.recipe_overrides.row_evidence_gate",
+              "status": "effective",
+              "value": false
+            },
+            "row_evidence_hold": {
+              "owner": "technique",
+              "source": "candidate.recipe_overrides.row_evidence_hold",
+              "status": "effective",
+              "value": true
+            },
+            "row_evidence_hot": {
+              "owner": "technique",
+              "source": "candidate.recipe_overrides.row_evidence_hot",
+              "status": "effective",
+              "value": true
+            },
+            "row_evidence_null": {
+              "owner": "technique",
+              "source": "candidate.recipe_overrides.row_evidence_null",
+              "status": "effective",
+              "value": "theory"
+            },
+            "row_policy": {
+              "owner": "technique",
+              "source": "candidate.recipe_overrides.row_policy",
+              "status": "effective",
+              "value": "independent"
+            },
+            "serve_average": {
+              "owner": "hyperparameter",
+              "source": "candidate.recipe_overrides.serve_average",
+              "status": "effective",
+              "value": 0.0
+            },
+            "sigma_rel": {
+              "owner": "task",
+              "source": "public prior binding: absolute task sigma replaces relative calibration",
+              "status": "effective",
+              "value": 0.0
+            },
+            "standardize": {
+              "owner": "task",
+              "source": "task.execution.prior.standardize",
+              "status": "effective",
+              "value": false
+            },
+            "table_release_rule": {
+              "owner": "technique",
+              "source": "candidate.recipe_overrides.table_release_rule",
+              "status": "effective",
+              "value": "any"
+            },
+            "total_steps": {
+              "owner": "task",
+              "source": "task.execution.steps",
+              "status": "effective",
+              "value": 80
+            },
+            "ucd_target": {
+              "owner": "task",
+              "reference_recipe_value": "class",
+              "source": "frozen behavioral host objective/component source",
+              "status": "host_owned",
+              "value": null
+            },
+            "ucd_weight": {
+              "owner": "task",
+              "reference_recipe_value": 0.02,
+              "source": "frozen behavioral host objective/component source",
+              "status": "host_owned",
+              "value": null
+            },
+            "z_dim": {
+              "owner": "task",
+              "reference_recipe_value": 2,
+              "source": "frozen behavioral host objective/component source",
+              "status": "host_owned",
+              "value": null
+            }
+          },
+          "reference_declarations": {
+            "prior": {
+              "kind": "mog",
+              "learnable": true,
+              "sigma": 0.025,
+              "standardize": false
+            },
+            "protocol_prior": {
+              "kind": "mog",
+              "learnable": true,
+              "sigma": 0.025,
+              "standardize": false
+            }
+          },
+          "schema_version": 1,
+          "task_contract": {
+            "budget": {
+              "owner": "task",
+              "source": "task.execution and task.resources",
+              "value": {
+                "execution_resources": {
+                  "allow_cpu": true,
+                  "cpu_threads": 1,
+                  "gpu_memory_mb": 0,
+                  "gpus": 0,
+                  "timeout_seconds": 300
+                },
+                "steps": 80
+              }
+            },
+            "evaluation": {
+              "owner": "task",
+              "source": "task.evaluation",
+              "value": {
+                "eval_output_noise": "not_applied_to_measurement",
+                "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+                "evaluator_revision": {
+                  "change": "Correct == grading and reject unsupported operators; >= and <= numerical gates unchanged. Word fixture now honors declared prior_betas. Bind current sources for future execution only; original receipts and verdicts remain unchanged.",
+                  "id": "explicit-equality-and-word-prior-betas-v3",
+                  "previous_revision": null,
+                  "previous_source_sha256": {
+                    "benchmarks/locked_shared/baseline.py": "72ebe4ef6d3cfe28f1ab6073fc781a72b45173f3ce2a0b63040e84b27bed03cc",
+                    "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+                    "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97"
+                  }
+                },
+                "guards": {
+                  "finite_state": true,
+                  "mechanism_exercised": true,
+                  "optimizer_roles": [
+                    "prior",
+                    "discriminator"
+                  ],
+                  "rng_isolation": true
+                },
+                "kind": "transfer_sustained",
+                "minimum_stable_checks": 5,
+                "observations": 24,
+                "sampling_contract_version": 1,
+                "sampling_law": "learned_particles_and_critic_gradient",
+                "scoring_weights": "live",
+                "sources": {
+                  "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
+                  "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+                  "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89"
+                },
+                "thresholds": [
+                  [
+                    "mean_abs",
+                    ">=",
+                    0.3
+                  ],
+                  [
+                    "grad_med",
+                    "<=",
+                    1.0
+                  ]
+                ]
+              }
+            },
+            "host": {
+              "owner": "task",
+              "source": "frozen task architecture/data declaration and host source",
+              "value": {
+                "definition": {
+                  "family": "existing_behavior",
+                  "phase": "fit",
+                  "runner": "legacy",
+                  "split": "development",
+                  "steps": 80
+                },
+                "model": null,
+                "native_profile": null,
+                "problem": null,
+                "recipe_resources": null,
+                "source": "benchmarks/locked_shared/baseline.py"
+              }
+            },
+            "initialization": {
+              "fixed_initialization": {
+                "critic": "stored_host_weights",
+                "particles": "zeros"
+              },
+              "owner": "task",
+              "source": "task.execution.initializer",
+              "value": "deterministic_orthogonal"
+            },
+            "prior": {
+              "applicability": "sampled",
+              "code_path": null,
+              "control_binding": {
+                "base_betas": "Recipe.betas",
+                "base_lr": "Recipe.lr",
+                "construction": "direct nn.Parameter; no ParticlePrior or latent-table optimizer",
+                "latent_table_controls": false,
+                "lr_schedule": "prior",
+                "note": "The existing direct-coordinate group uses the prior decay schedule, but prior_lr_mult and prior_betas do not bind it. Formulation optimizers retain their public DirectParticleResponse step controls.",
+                "optimizer": "Recipe.make_generator_optimizer(direct_particles=...)",
+                "representation": "direct_sample_coordinates"
+              },
+              "declared_code_path": "ParticlePrior",
+              "owner": "task",
+              "source": "task.execution.prior",
+              "value": {
+                "exception_reason": "This host optimizes explicit sample-particle coordinates directly, without a separate generator or latent sampling kernel.",
+                "kind": "particle_cloud",
+                "learnable": true,
+                "sigma": 0.0,
+                "standardize": false
+              }
+            }
+          },
+          "task_id": "two_pole",
+          "version": "forge-field-boundaries-v2"
+        },
+        "initialization": {},
+        "initializer": "deterministic_orthogonal",
+        "mechanism_applicability": {
+          "a2": "not applicable: host has no latent-table optimizer",
+          "critic_guard": "inactive before its declared minimum steps; see targeted component check"
+        },
+        "noise": {
+          "d_noise_seed": 5961379833291764029,
+          "eval_output_applied": false,
+          "generator_base_parameters": 12,
+          "generator_total_parameters": 12,
+          "input_anneal_end": 0.1,
+          "input_eval_calls": 0,
+          "input_eval_elements": 0,
+          "input_nonzero_steps": 0,
+          "input_sigma_first": 0.0,
+          "input_sigma_last": 0.0,
+          "input_std": 0.0,
+          "input_train_calls": 493,
+          "input_train_elements": 0,
+          "output_eval_calls": 0,
+          "output_eval_elements": 0,
+          "output_noise_eval_state_pairs": [],
+          "output_noise_eval_state_preserved": true,
+          "output_noise_learnable": false,
+          "output_noise_rng": "isolated",
+          "output_noise_seed": 9214932872906931917,
+          "output_noise_seed_offset": null,
+          "output_noise_train_state_final_sha256": "e6120399f1ed61ffb0c4cf6a35a6364a96c902b66a479e7e7e29c43e9dd67a0c",
+          "output_noise_train_state_initial_sha256": "e6120399f1ed61ffb0c4cf6a35a6364a96c902b66a479e7e7e29c43e9dd67a0c",
+          "output_noise_training_stream_isolated": true,
+          "output_noise_warmup": 0.2,
+          "output_nonzero_steps": 0,
+          "output_scale_ema_final": null,
+          "output_scale_final": 0.0,
+          "output_scale_initial": 0.0,
+          "output_scale_optimizer_owned": false,
+          "output_scale_parameter_count": 0,
+          "output_sigma_effective_ema_final_evaluation": null,
+          "output_sigma_effective_final_evaluation": 0.0,
+          "output_sigma_effective_first": 0.0,
+          "output_sigma_effective_last": 0.0,
+          "output_sigma_effective_step_trace": [
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "output_sigma_final_evaluation": 0.0,
+          "output_sigma_first": 0.0,
+          "output_sigma_last": 0.0,
+          "output_std": 0.0,
+          "output_train_calls": 160,
+          "output_train_elements": 0,
+          "rng_derivation": "forge-rng-v1",
+          "seed": 0,
+          "step_calls": 80,
+          "total_steps": 80,
+          "train_input_applied": false,
+          "train_output_applied": false
+        },
+        "optimizer_group_bindings": [
+          {
+            "base_betas": [
+              0.0,
+              0.999
+            ],
+            "base_lr": 0.00425,
+            "beta2_schedule_declared": false,
+            "counter_role": "prior",
+            "current_group_betas": [
+              0.0,
+              0.999
+            ],
+            "current_lr": 0.0002222208330305027,
+            "direct_particle_response": {
+              "gain_enabled": true,
+              "installed": true,
+              "lr_gain_range": [
+                1.0,
+                2.0
+              ],
+              "step_betas": [
+                0.0,
+                0.9
+              ]
+            },
+            "group_betas_overridden_during_step": true,
+            "group_index": 0,
+            "lr_schedule": "prior",
+            "optimizer": "K3PGeneratorAdam",
+            "optimizer_role": "generator",
+            "prior_betas_consumed": false,
+            "prior_lr_mult_consumed": false,
+            "representation": "direct_sample_coordinates"
+          },
+          {
+            "base_betas": [
+              0.0,
+              0.999
+            ],
+            "base_lr": 0.0063750000000000005,
+            "beta2_schedule_declared": false,
+            "counter_role": "discriminator",
+            "current_group_betas": [
+              0.0,
+              0.999
+            ],
+            "current_lr": 7.894519689504893e-05,
+            "direct_particle_response": {
+              "gain_enabled": false,
+              "installed": false,
+              "lr_gain_range": [
+                1.0,
+                1.0
+              ],
+              "step_betas": null
+            },
+            "group_betas_overridden_during_step": false,
+            "group_index": 0,
+            "lr_schedule": "network",
+            "optimizer": "K3PCriticAdam",
+            "optimizer_role": "discriminator",
+            "prior_betas_consumed": false,
+            "prior_lr_mult_consumed": false,
+            "representation": "network"
+          }
+        ],
+        "prior": {
+          "exception_reason": "This host optimizes explicit sample-particle coordinates directly, without a separate generator or latent sampling kernel.",
+          "kind": "particle_cloud",
+          "learnable": true,
+          "sigma": 0.0,
+          "standardize": false
+        },
+        "public_optimizers": [
+          "K3PGeneratorAdam",
+          "K3PCriticAdam"
+        ],
+        "recipe": {
+          "alpha_bar": [
+            1.0,
+            0.9,
+            0.5,
+            0.05,
+            0.0001
+          ],
+          "amsgrad": false,
+          "batch_size": 2048,
+          "beta2_anneal_end": 0.2,
+          "beta2_end": null,
+          "betas": [
+            0.0,
+            0.999
+          ],
+          "birth_death_backend": "knn",
+          "birth_death_cells": 64,
+          "birth_death_chunk": 256,
+          "birth_death_feature_scale": "none",
+          "birth_death_isolation": false,
+          "birth_death_metric_rank": 8,
+          "birth_death_parent_policy": "real_anchor",
+          "birth_death_space": "data",
+          "conditioning": "scalar",
+          "continuous_policy": null,
+          "critic_formulation": "k3p",
+          "critic_payoff_damping": true,
+          "critic_r1_real": true,
+          "d_guard_min_steps": 200,
+          "d_guard_ratio": 5.0,
+          "d_lr_mult": 1.5,
+          "direct_particle_betas": [
+            0.0,
+            0.9
+          ],
+          "direct_particle_gain": true,
+          "distance_reduction": "sum",
+          "ema_decay": 0.995,
+          "encoder_mode": "none",
+          "eps": 1e-08,
+          "input_noise_anneal_end": 0.1,
+          "input_noise_std": 0.0,
+          "latent_damping_max_rate": 0.5,
+          "lr": 0.00425,
+          "lr_anneal_start": 0.6,
+          "lr_control": "mobility",
+          "lr_floor": 0.05,
+          "model": "gan",
+          "name": "k3p",
+          "network_lr_floor": 0.01,
+          "network_lr_horizon_cap": null,
+          "num_classes": null,
+          "num_particles": 20000,
+          "observation_sigma": 0.03,
+          "optimizer_family": "formulation",
+          "output_noise_mode": "fixed",
+          "output_noise_std": 0.0,
+          "output_noise_warmup": 0.2,
+          "particle_birth_death": false,
+          "prior_betas": null,
+          "prior_kind": "particles",
+          "prior_lr_mult": 0.28235294117647053,
+          "prior_reg": 0.0,
+          "reconstruction_weight": 1.0,
+          "reg_anchor_min_decay": 0.9,
+          "reg_anchor_weight": 1.0,
+          "reg_arm": null,
+          "reg_coeff": 170.0,
+          "reg_coeff_anneal_end": 0.2,
+          "reg_coeff_end": null,
+          "reg_every": 1,
+          "reg_kappa": 1.0,
+          "reopen_anchor": "hold",
+          "reopen_guard": null,
+          "reopen_signal": "data",
+          "routing_temperature": 0.25,
+          "row_evidence_exclude": true,
+          "row_evidence_gate": false,
+          "row_evidence_hold": true,
+          "row_evidence_hot": true,
+          "row_evidence_null": "theory",
+          "row_policy": "independent",
+          "serve_average": 0.0,
+          "sigma_rel": 0.0,
+          "standardize": false,
+          "table_release_rule": "any",
+          "total_steps": 80,
+          "ucd_target": "class",
+          "ucd_weight": 0.02,
+          "z_dim": 2
+        },
+        "rng": {
+          "bindings": {
+            "[\"data\",\"host\",\"batches\",\"cpu\"]": {
+              "component": "host",
+              "device": "cpu",
+              "family": "data",
+              "initial_state_sha256": "7039c4b72687b2591817b12c435c9f9e1d045dd2d4b73bafb0a2c57d041ec254",
+              "purpose": "batches",
+              "seed": 2851662879287943591
+            },
+            "[\"data\",\"target\",\"training\",\"cpu\"]": {
+              "component": "target",
+              "device": "cpu",
+              "family": "data",
+              "initial_state_sha256": "5f6b6f690d2c5963f4945c7af5e1cd2653b1929e9d7b971fdd2222ad648f78f6",
+              "purpose": "training",
+              "seed": 2842969976240124311
+            },
+            "[\"eval\",\"critic\",\"input\",\"cpu\"]": {
+              "component": "critic",
+              "device": "cpu",
+              "family": "eval",
+              "initial_state_sha256": "4a034aa7210c152bc4bbdbeab7c34ca2a7ad508fb9bb14431ee3f227b39c3c91",
+              "purpose": "input",
+              "seed": 9568828741082014
+            },
+            "[\"eval\",\"generator\",\"output\",\"cpu\"]": {
+              "component": "generator",
+              "device": "cpu",
+              "family": "eval",
+              "initial_state_sha256": "92d818779ee8032edf6e0764292a7a6a5487b52a653b56d7d217efbd37d4ab1b",
+              "purpose": "output",
+              "seed": 88862971795736756
+            },
+            "[\"eval\",\"host\",\"global\",\"cpu\"]": {
+              "component": "host",
+              "device": "cpu",
+              "family": "eval",
+              "initial_state_sha256": "61ba6c2289b9b2cda96dad0aefb23ec1dc115a8e3a20fa88d8e68aaf1fb0451c",
+              "purpose": "global",
+              "seed": 5220779274985396091
+            },
+            "[\"eval\",\"sampler\",\"samples\",\"cpu\"]": {
+              "component": "sampler",
+              "device": "cpu",
+              "family": "eval",
+              "initial_state_sha256": "9488d65f11be2e232c210ae5b27c29426ac74687551e6bc1597afc56159f8726",
+              "purpose": "samples",
+              "seed": 212130830619035767
+            },
+            "[\"eval\",\"target\",\"reference\",\"cpu\"]": {
+              "component": "target",
+              "device": "cpu",
+              "family": "eval",
+              "initial_state_sha256": "905a51801f69a4375927533ecf1199816a077aea8b3164d15b2811fae33abf02",
+              "purpose": "reference",
+              "seed": 7189743471773393273
+            },
+            "[\"init\",\"discriminator\",\"construction\",\"cpu\"]": {
+              "component": "discriminator",
+              "device": "cpu",
+              "family": "init",
+              "initial_state_sha256": "8ed75e93293198624274eafa0c49cc43078dd4eee8571413a8bb487d1296d2db",
+              "purpose": "construction",
+              "seed": 3363721576689578451
+            },
+            "[\"init\",\"generator\",\"construction\",\"cpu\"]": {
+              "component": "generator",
+              "device": "cpu",
+              "family": "init",
+              "initial_state_sha256": "8a66406641fee82839e7b9d37e827e53b87f573b2aaeb3045200574f34e98a33",
+              "purpose": "construction",
+              "seed": 6942576180060350273
+            },
+            "[\"init\",\"prior\",\"locations\",\"cpu\"]": {
+              "component": "prior",
+              "device": "cpu",
+              "family": "init",
+              "initial_state_sha256": "ab1fa62c08db5e35d0b5c6be2418a849814f3490f8448c5b0e671be86de398ca",
+              "purpose": "locations",
+              "seed": 2562565386842645502
+            },
+            "[\"noise\",\"critic\",\"input\",\"cpu\"]": {
+              "component": "critic",
+              "device": "cpu",
+              "family": "noise",
+              "initial_state_sha256": "d45c4d304b060206d27bed2cfb50b4e02d8d3a2a3ebc2bd23198f3119b34be6d",
+              "purpose": "input",
+              "seed": 5961379833291764029
+            },
+            "[\"noise\",\"generator\",\"output\",\"cpu\"]": {
+              "component": "generator",
+              "device": "cpu",
+              "family": "noise",
+              "initial_state_sha256": "e6120399f1ed61ffb0c4cf6a35a6364a96c902b66a479e7e7e29c43e9dd67a0c",
+              "purpose": "output",
+              "seed": 9214932872906931917
+            },
+            "[\"noise\",\"models\",\"stochastic_layers\",\"cpu\"]": {
+              "component": "models",
+              "device": "cpu",
+              "family": "noise",
+              "initial_state_sha256": "c2f7ba3cac65f7a2c9f1da18c52f973980852aaa4a916683301b0efdbb50edf9",
+              "purpose": "stochastic_layers",
+              "seed": 4481608677977550636
+            },
+            "[\"noise\",\"penalty\",\"training\",\"cpu\"]": {
+              "component": "penalty",
+              "device": "cpu",
+              "family": "noise",
+              "initial_state_sha256": "e170727612c771e1a5db3740ca655a777d92c20f99fb8497de95c6cfdb6fdd84",
+              "purpose": "training",
+              "seed": 7930995805460461310
+            },
+            "[\"noise\",\"prior\",\"gaussian\",\"cpu\"]": {
+              "component": "prior",
+              "device": "cpu",
+              "family": "noise",
+              "initial_state_sha256": "d6261b40f0efc71cdced90af99c43969a0675e1827f184a56c8790fee5a820d8",
+              "purpose": "gaussian",
+              "seed": 939191808430552031
+            },
+            "[\"prior\",\"latent\",\"indices\",\"cpu\"]": {
+              "component": "latent",
+              "device": "cpu",
+              "family": "prior",
+              "initial_state_sha256": "c20d03989eda9e8650239603a2db8efb7df1bab81c5257cce0283964a570c14a",
+              "purpose": "indices",
+              "seed": 5876435880110660064
+            }
+          },
+          "runtime": {
+            "rng": "torch.Generator",
+            "torch": "2.14.0+cu130"
+          },
+          "seed": 0,
+          "version": "forge-rng-v1"
+        },
+        "rng_audits": [
+          {
+            "changed_streams": [],
+            "unintended_rng_deviations": 0,
+            "unintended_streams": []
+          },
+          {
+            "changed_streams": [],
+            "unintended_rng_deviations": 0,
+            "unintended_streams": []
+          },
+          {
+            "changed_streams": [],
+            "unintended_rng_deviations": 0,
+            "unintended_streams": []
+          },
+          {
+            "changed_streams": [],
+            "unintended_rng_deviations": 0,
+            "unintended_streams": []
+          },
+          {
+            "changed_streams": [],
+            "unintended_rng_deviations": 0,
+            "unintended_streams": []
+          },
+          {
+            "changed_streams": [],
+            "unintended_rng_deviations": 0,
+            "unintended_streams": []
+          },
+          {
+            "changed_streams": [],
+            "unintended_rng_deviations": 0,
+            "unintended_streams": []
+          },
+          {
+            "changed_streams": [],
+            "unintended_rng_deviations": 0,
+            "unintended_streams": []
+          },
+          {
+            "changed_streams": [],
+            "unintended_rng_deviations": 0,
+            "unintended_streams": []
+          },
+          {
+            "changed_streams": [],
+            "unintended_rng_deviations": 0,
+            "unintended_streams": []
+          },
+          {
+            "changed_streams": [],
+            "unintended_rng_deviations": 0,
+            "unintended_streams": []
+          },
+          {
+            "changed_streams": [],
+            "unintended_rng_deviations": 0,
+            "unintended_streams": []
+          },
+          {
+            "changed_streams": [],
+            "unintended_rng_deviations": 0,
+            "unintended_streams": []
+          },
+          {
+            "changed_streams": [],
+            "unintended_rng_deviations": 0,
+            "unintended_streams": []
+          },
+          {
+            "changed_streams": [],
+            "unintended_rng_deviations": 0,
+            "unintended_streams": []
+          },
+          {
+            "changed_streams": [],
+            "unintended_rng_deviations": 0,
+            "unintended_streams": []
+          },
+          {
+            "changed_streams": [],
+            "unintended_rng_deviations": 0,
+            "unintended_streams": []
+          },
+          {
+            "changed_streams": [],
+            "unintended_rng_deviations": 0,
+            "unintended_streams": []
+          },
+          {
+            "changed_streams": [],
+            "unintended_rng_deviations": 0,
+            "unintended_streams": []
+          },
+          {
+            "changed_streams": [],
+            "unintended_rng_deviations": 0,
+            "unintended_streams": []
+          },
+          {
+            "changed_streams": [],
+            "unintended_rng_deviations": 0,
+            "unintended_streams": []
+          },
+          {
+            "changed_streams": [],
+            "unintended_rng_deviations": 0,
+            "unintended_streams": []
+          },
+          {
+            "changed_streams": [],
+            "unintended_rng_deviations": 0,
+            "unintended_streams": []
+          },
+          {
+            "changed_streams": [],
+            "unintended_rng_deviations": 0,
+            "unintended_streams": []
+          }
+        ],
+        "training_schedules": {
+          "clock": "completed host updates; penalty observes completed critic updates",
+          "horizon": 80,
+          "optimizer_groups": {
+            "discriminator": {
+              "beta2": {
+                "first": 0.999,
+                "last": 0.999,
+                "maximum": 0.999,
+                "minimum": 0.999,
+                "observations": 80
+              },
+              "lr": {
+                "first": 0.0063750000000000005,
+                "last": 7.894519689504893e-05,
+                "maximum": 0.0063750000000000005,
+                "minimum": 7.894519689504893e-05,
+                "observations": 80
+              }
+            },
+            "prior": {
+              "beta2": {
+                "first": 0.999,
+                "last": 0.999,
+                "maximum": 0.999,
+                "minimum": 0.999,
+                "observations": 80
+              },
+              "lr": {
+                "first": 0.00425,
+                "last": 0.0002222208330305027,
+                "maximum": 0.00425,
+                "minimum": 0.0002222208330305027,
+                "observations": 80
+              }
+            }
+          },
+          "penalty_coefficient": {
+            "first": 170.0,
+            "last": 170.0,
+            "maximum": 170.0,
+            "minimum": 170.0,
+            "observations": 80
+          }
+        }
+      },
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "compatibility_key": "4c4dc8de4db0728eef1acc6775371a5fc12aac34f066bde8b10a4277097ff31a",
+      "cost": {
+        "adapter_seconds": 2.4837379280361347,
+        "charged_task": "two_pole",
+        "device": "cpu",
+        "execution_seconds": 8.084339857974555,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 4.5560127520002425,
+        "wall_seconds": 8.084339857974555
+      },
+      "device": "cpu",
+      "evaluator_result": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": null,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 0,
+          "passing_suffix": 0,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metrics": [
+          {
+            "margin": -0.17195609509944915,
+            "metric": "mean_abs",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 0.3,
+            "value": 0.12804390490055084
+          },
+          {
+            "margin": 0.9957587569952011,
+            "metric": "grad_med",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1.0,
+            "value": 0.004241243004798889
+          }
+        ],
+        "passed": false,
+        "shortfall": 0.2865934918324153,
+        "status": "FAIL"
+      },
+      "evidence": {
+        "eval_output_noise": "not_applied_to_measurement",
+        "guards": {
+          "all_finite": true,
+          "hooks_exercised": true,
+          "mechanism_audit": {
+            "mechanisms": {
+              "a2": {
+                "applied": 0,
+                "calls": 0,
+                "eligible": 0,
+                "enabled": false,
+                "probe": {
+                  "kind": "synthetic_public_component",
+                  "measurements": {
+                    "damping_branch_applied": true,
+                    "initial_sparse_history_total": 8,
+                    "optimizer_updates": 2
+                  },
+                  "status": "PASS",
+                  "synthetic_state": true,
+                  "training_evidence": false
+                },
+                "reason": "host has no applicable component",
+                "requested": true
+              },
+              "critic_anchor": {
+                "applied": 13,
+                "calls": 80,
+                "eligible": 14,
+                "enabled": true,
+                "reason": "actual host mechanism branch applied",
+                "requested": true
+              },
+              "critic_guard": {
+                "applied": 0,
+                "calls": 80,
+                "eligible": 0,
+                "enabled": true,
+                "probe": {
+                  "kind": "synthetic_public_component",
+                  "measurements": {
+                    "clipped_tensors": 1,
+                    "initial_adam_step": 200,
+                    "optimizer_updates": 1
+                  },
+                  "status": "PASS",
+                  "synthetic_state": true,
+                  "training_evidence": false
+                },
+                "reason": "host conditions did not activate the branch; targeted component check required",
+                "requested": true
+              },
+              "critic_penalty": {
+                "applied": 80,
+                "calls": 80,
+                "eligible": 80,
+                "enabled": true,
+                "reason": "actual host mechanism branch applied",
+                "requested": true
+              },
+              "direct_particle_gain": {
+                "applied": 78,
+                "calls": 80,
+                "eligible": 80,
+                "enabled": true,
+                "reason": "actual host mechanism branch applied",
+                "requested": true
+              }
+            },
+            "schema_version": 1
+          },
+          "optimizer_updates": {
+            "discriminator": 80,
+            "prior": 80
+          },
+          "unintended_rng_deviations": 0
+        },
+        "live": {
+          "grad_med": 0.004241243004798889,
+          "mean_abs": 0.12804390490055084
+        },
+        "observations": [
+          {
+            "grad_med": 0.020608022809028625,
+            "mean_abs": 0.017624853178858757,
+            "step": 4
+          },
+          {
+            "grad_med": 0.007508814334869385,
+            "mean_abs": 0.024583416059613228,
+            "step": 7
+          },
+          {
+            "grad_med": 0.0035472698509693146,
+            "mean_abs": 0.03204667940735817,
+            "step": 10
+          },
+          {
+            "grad_med": 0.0028773099184036255,
+            "mean_abs": 0.043446242809295654,
+            "step": 14
+          },
+          {
+            "grad_med": 0.0028596147894859314,
+            "mean_abs": 0.052888814359903336,
+            "step": 17
+          },
+          {
+            "grad_med": 0.002881772816181183,
+            "mean_abs": 0.06281761825084686,
+            "step": 20
+          },
+          {
+            "grad_med": 0.002915453165769577,
+            "mean_abs": 0.0763276219367981,
+            "step": 24
+          },
+          {
+            "grad_med": 0.002939511090517044,
+            "mean_abs": 0.08629361540079117,
+            "step": 27
+          },
+          {
+            "grad_med": 0.00296160951256752,
+            "mean_abs": 0.09580274671316147,
+            "step": 30
+          },
+          {
+            "grad_med": 0.0029867812991142273,
+            "mean_abs": 0.10730454325675964,
+            "step": 34
+          },
+          {
+            "grad_med": 0.003001641482114792,
+            "mean_abs": 0.11473175138235092,
+            "step": 37
+          },
+          {
+            "grad_med": 0.003012709319591522,
+            "mean_abs": 0.12091075628995895,
+            "step": 40
+          },
+          {
+            "grad_med": 0.003021102398633957,
+            "mean_abs": 0.12700523436069489,
+            "step": 44
+          },
+          {
+            "grad_med": 0.003022722899913788,
+            "mean_abs": 0.12995345890522003,
+            "step": 47
+          },
+          {
+            "grad_med": 0.0030206479132175446,
+            "mean_abs": 0.13163381814956665,
+            "step": 50
+          },
+          {
+            "grad_med": 0.003013666719198227,
+            "mean_abs": 0.13230180740356445,
+            "step": 54
+          },
+          {
+            "grad_med": 0.003007303923368454,
+            "mean_abs": 0.1320682317018509,
+            "step": 57
+          },
+          {
+            "grad_med": 0.0030000992119312286,
+            "mean_abs": 0.13157127797603607,
+            "step": 60
+          },
+          {
+            "grad_med": 0.002992715686559677,
+            "mean_abs": 0.13092289865016937,
+            "step": 64
+          },
+          {
+            "grad_med": 0.003112342208623886,
+            "mean_abs": 0.13033835589885712,
+            "step": 67
+          },
+          {
+            "grad_med": 0.0035343430936336517,
+            "mean_abs": 0.12953776121139526,
+            "step": 70
+          },
+          {
+            "grad_med": 0.003986526280641556,
+            "mean_abs": 0.12868835031986237,
+            "step": 74
+          },
+          {
+            "grad_med": 0.004172086715698242,
+            "mean_abs": 0.12829162180423737,
+            "step": 77
+          },
+          {
+            "grad_med": 0.004241243004798889,
+            "mean_abs": 0.12804390490055084,
+            "step": 80
+          }
+        ],
+        "sampling_contract_version": 1,
+        "sampling_law": "learned_particles_and_critic_gradient",
+        "scoring_weights": "live"
+      },
+      "execution_path": "public_components",
+      "gate_status": "FAIL",
+      "metrics": {
+        "grad_med": 0.004241243004798889,
+        "mean_abs": 0.12804390490055084
+      },
+      "raw": {
+        "cover_score": 0.19206583499908447,
+        "grad_med": 0.004241243004798889,
+        "mean_abs": 0.12804390490055084,
+        "nearest": 0.8719561100006104,
+        "verdict": "FAIL"
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "status": "FAIL",
+      "task_id": "two_pole",
+      "telemetry": {
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "memory": {
+          "cpu_scope": "this process lifetime, including imports",
+          "cuda_peak_allocated_bytes": null,
+          "cuda_peak_reserved_bytes": null,
+          "cuda_scope": "PyTorch allocator since probe reset; excludes other processes and non-PyTorch allocations",
+          "process_peak_rss_bytes": 731701248
+        },
+        "schema_version": 1,
+        "timing": {
+          "adapter_wall_seconds": 2.4837379280361347,
+          "runner_wall_seconds": 4.5560127520002425,
+          "scope": "Aggregate runner/adapter time includes setup, sampling, evaluation and artifact I/O; phase timing is separate.",
+          "unattributed_runner_seconds": null
+        }
+      }
+    }
+  ]
+}

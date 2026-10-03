@@ -23,6 +23,18 @@ Two worked examples show the process:
 | The proposed solution or complete training configuration | Idea in `configs/forge/ideas/` | A substantive formulation change evaluated on existing tasks |
 | Which tasks support a claim, their tiers and required/diagnostic roles | Existing view in `configs/forge/views/` | Add ordinary acquisition tasks to Tier 1 of `discriminator_stability` |
 
+Solutions are reusable candidates in a formulation family. Apply one global
+recipe to the existing task ladder; task-owned data, architecture, prior and
+applicability remain conditions. Do not create a task-specific solution axis or
+select a different optimizer recipe for each task. If the optimizer/loss
+formulation changes, register a new family. A structural control change within
+the same formulation is an ordinary idea with explicit activation deltas;
+numeric search still must preserve the base's strict technique signature.
+The main leaderboard selects one exact whole evidence row per family through
+the [generic current mapping](../configs/forge/selections/family-current-v1.json).
+A replacement becomes a configured standard only after all required Tier 1
+tasks pass; calibration and independent confirmation still apply to defaults.
+
 `python -m experiments.forge new` scaffolds a schema-v2 idea with a draft
 [hypothesis-to-decision contract](forge-decision-contract.md). It cannot enter
 ordinary execution until its evidence, actual delta, task/runtime bindings,

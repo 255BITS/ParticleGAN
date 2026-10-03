@@ -1,0 +1,67 @@
+{
+  "candidate": "ka2--4496b859e066d7a4b6279f2d34fbd58d083e0f18c2a22ade5ba12c964d01a7ca",
+  "candidate_revision": "0cb6ee2042006b122ef7c2c91b9ecdc74b703aa8ee51ac3e36a5164abde58a98",
+  "gif": {
+    "bytes": 95677,
+    "path": "reports/forge/family-wide-word-repairs/media/ka2-lr0.006375-two_pole.gif",
+    "sha256": "43598c08388ed8ef988c13ce37273783a3ed3a75a6b4ac7d3f4cb28cef3ca7c1"
+  },
+  "kind": "actual_training_numerical_goal_gif",
+  "observation_count": 24,
+  "observations_sha256": "2a5aeed0c134d6977eb66b6571b8cdba5924138de035d9b0f5c00237ee183a77",
+  "optimizer_updates": 0,
+  "raw_result": {
+    "bytes": 48380,
+    "path": "/home/martyn/dev/ParticleGAN-family-wide/runs/forge/family-wide-word-repair-rates-v1/queue/ka2-global-repair-rates-v1/a4a15aa781654502ae87fd689c75e346/raw-result.json",
+    "sha256": "169379b7a5baae9e057bc65e419d270523b9d291157aad1a002bcc50ae432fd2"
+  },
+  "renderer": {
+    "matplotlib": "3.11.1",
+    "pillow": "12.3.0",
+    "python": "3.12.13",
+    "source_sha256": "9b1fb30c93c26dd4d04e8f781ed6836e60929498755e22c4bbff814913d220f4"
+  },
+  "resolved_request": {
+    "bytes": 1608997,
+    "path": "/home/martyn/dev/ParticleGAN-family-wide/runs/forge/family-wide-word-repair-rates-v1/queue/ka2-global-repair-rates-v1/a4a15aa781654502ae87fd689c75e346/request.json",
+    "sha256": "e5e71f475348dbe38d206e306f4bd5533f9da4451c50939cc655ac32d54253f8"
+  },
+  "sampling_draws": 0,
+  "schema_version": 1,
+  "scope": "Saved API metric outputs against declared gate targets; no invented samples or parameter interpolation. Numerical grader retains all recorded observations.",
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "task": "two_pole",
+  "thresholds": [
+    [
+      "mean_abs",
+      ">=",
+      0.3
+    ],
+    [
+      "grad_med",
+      "<=",
+      1.0
+    ]
+  ],
+  "updates": [
+    4,
+    14,
+    24,
+    34,
+    44,
+    50,
+    60,
+    70,
+    80
+  ]
+}

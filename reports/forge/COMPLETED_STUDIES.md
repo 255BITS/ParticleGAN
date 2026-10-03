@@ -11,7 +11,7 @@ These publications answer different questions:
 | Critic-rate contrast | Does the unchanged higher-critic-rate recipe learn all eight required domains in each family? **2 FAIL / 14 UNKNOWN** after the first image gate fails; all 16 cold capacity checks are supported. |
 | Generator-half contrast | Does halving the generator rate while preserving nominal critic/prior rates fix that image gate? **2 FAIL / 14 UNKNOWN**, with the same full denominator and 16 supported cold capacity checks. |
 
-The ordinary family ranking and the task-only word diagnostics retain their original results. Historical and current protocols have different hosts and observation laws; their cells cannot qualify one another. Cold capacity uses no optimizer updates. No complete shipping default or fair speed winner has been established by these additions.
+The ordinary family selections retain their complete results. Earlier word-only diagnostics remain historical motivation and reproduction evidence. Historical and current protocols have different hosts and observation laws; their cells cannot qualify one another. Cold capacity uses no optimizer updates. No complete shipping default or fair speed winner has been established by these additions.
 
 From a checkout, rebuild the shared publication without training or raw-log hydration:
 

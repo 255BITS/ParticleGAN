@@ -8,7 +8,8 @@
       "canonical_candidate": "r3gan-stacked-training-toy-v1",
       "candidates": [
         "r3gan-stacked-training-toy-v1",
-        "k3p-r1r2-matched-v1"
+        "k3p-r1r2-matched-v1",
+        "r1r2-global-repair-v1"
       ],
       "rationale": "The modern R3GAN Stacked-MNIST training adaptation is the canonical baseline. The older fixed R1/R2 penalty on a K3P recipe remains an explicit alternative; different recorded sources are not ranked against one another.",
       "active_search_by_backend": {
@@ -33,7 +34,8 @@
       "label": "K3P",
       "canonical_candidate": "k3p",
       "candidates": [
-        "k3p"
+        "k3p",
+        "k3p-global-repair-v1"
       ],
       "rationale": "Public K3P formulation.",
       "active_search_by_backend": {
@@ -45,12 +47,16 @@
       "label": "KA2",
       "canonical_candidate": "ka2",
       "candidates": [
-        "ka2"
+        "ka2",
+        "ka2-global-repair-v1"
       ],
       "rationale": "Public KA2 formulation retains its own training mechanism.",
       "active_search_by_backend": {
         "cuda": "ka2-tier1-refresh-v1"
-      }
+      },
+      "current_presentation_candidates": [
+        "five-word-joint-ka2-v1"
+      ]
     },
     {
       "id": "e22",
