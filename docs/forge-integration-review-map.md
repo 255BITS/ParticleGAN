@@ -32,8 +32,8 @@ acceptance remains subject to the PR's tests and combined integration checks.
 
 | Audit priority | Focused change | Acceptance / remaining empirical work |
 | --- | --- | --- |
-| P1: repair recall and freshness | `codex/forge-audit-recall` — PR pending | Concluded Forge configurations and policy trials are normalized source-bound recall inputs; exact IDs/failed bounds/mechanisms/goals link authoritative evidence; stale/missing publication coverage is visible without training |
-| P1: shared policy execution ownership | `codex/forge-audit-policy-ownership` — PR pending | Immutable execution source, coordinated deduplication/admission, locks/leases and charged interrupted work; no clean-MoG qualification from policy results |
+| P1: repair recall and freshness | [#259](https://github.com/255BITS/ParticleGAN/pull/259), `codex/forge-audit-recall` | Concluded Forge configurations and policy trials are normalized source-bound recall inputs; exact IDs/failed bounds/mechanisms/goals link authoritative evidence; stale/missing publication coverage is visible without training |
+| P1: shared policy execution ownership | [#260](https://github.com/255BITS/ParticleGAN/pull/260), `codex/forge-audit-policy-ownership` | Immutable execution source, coordinated deduplication/admission, locks/leases and charged interrupted work; no clean-MoG qualification from policy results |
 | P1: retrieve original evidence | [#256](https://github.com/255BITS/ParticleGAN/pull/256), `codex/forge-audit-artifact-resolver` | Verified fresh-process fixture hydration of full request/evidence/result/source and selected checkpoint; pinned Git originals; explicit invalid/missing outcomes and retention ownership gaps. Actual `/ml2` archives still require a real mounted/transferred copy |
 | P1: prevent infeasible calibration spending | [#258](https://github.com/255BITS/ParticleGAN/pull/258), `codex/forge-audit-calibration-feasibility` | Read-only logical feasibility preflight and registration guard preserve bound published matrices and original hashes. **A justified new screen, independent positive/negative references, and empirical accepted calibration remain pending** |
 | P2: hypothesis-to-decision contract | `codex/forge-audit-decision-contract` — branch/PR pending | Prior-evidence identities, substantive delta, numerical prediction, competing explanation, falsification observation and bounded terminal rule must bind mechanically; causal judgment remains explicit research review |
@@ -58,6 +58,24 @@ contracts. Integrate the focused heads into a temporary verification checkout
 first; resolve any localized shared-file changes in `__main__.py`, planning,
 knowledge or contracts while preserving all scientific receipts.
 
+The initial local rehearsal combined #256, #257, #259, #258 and #260. Its only
+conflicts were catalog metadata and adjacent CLI early-return blocks. Preserve
+both `artifacts` and `calibration-preflight` dispatch branches before any Queue
+construction. For `configs/forge/catalog.json`, preserve the original top-level
+fields and all `pinned_sources` entries, regenerate inventory fields from the
+combined tracked paths, then set coverage with `validate_inventory(root,
+merged_catalog)`. Do not choose one branch's catalog wholesale or replace it
+with `inventory()` alone. The five-PR rehearsal had valid 11,719/11,719 coverage;
+the complete six-PR checkout must recount its own tracked paths.
+
+After the final decision/readout hook changes a reducer hash, refresh recall in
+the integration checkout using `python -m experiments.forge compile
+--summaries-only`, then verify `python -m experiments.forge compile --check`.
+The summary-only mode preserves published qualification and telemetry snapshots.
+Plain `compile` is not the reporting-merge workflow: it can regrade historical
+scientific inputs through the live reducer. A stale reducer fingerprint warrants
+this safe refresh, not new qualification, reconstructed passes or paid reruns.
+
 Run the affected software suites and normal default CI discovery in the combined
 checkout. Verify that read-only commands construct no worker/submission and that
 publication controls remain included by `testpaths = ["tests"]`. Validation
@@ -74,6 +92,13 @@ accepted calibration and preregistered promotion evidence. Framework readiness
 is a separate engineering decision. Focused preparation PRs can improve bounded
 agent research without claiming a shipping default or changing #247's release
 gate.
+
+Completion of these six code priorities means the requested agent preparation is
+implemented and reviewable; it does not mean an empirical accepted calibration
+or the author's archived states now exist here. Accepted calibration still needs
+a justified frozen successor and measured compatible references. Actual `/ml2`
+archive retrieval remains pending until a real copy is configured. Release
+qualification/adoption retain their separate original evidence requirements.
 
 ## Maintained publication entry points and frozen reproduction
 
@@ -104,11 +129,17 @@ records their exact baseline commit, Git blobs, byte hashes and maintained
 destinations. Do not replace those originals with wrappers: archived publisher
 contracts bind their bytes. The original audit is copied unchanged.
 
-The package migration changes only the publisher's implementation provenance,
-package import and repository-root lookup. Controls compare frozen and maintained
+The package migration changes the publisher's implementation provenance,
+package import and repository-root lookup. Maintained reducers also verify
+explicitly retained original evidence origins after source-byte-identical reuse:
+the actual original commit and runtime remain recorded, source bytes must match
+the new study, and only placement may differ within the same hardware/runtime
+cohort. A current-origin label cannot recertify a different original. Legacy
+inputs retain their frozen behavior. Controls compare frozen and maintained
 scientific projections and Markdown exactly, preserve receipt/artifact/source
 identity, compare repeated JSON/media bytes deterministically, exercise the
-readout CLI and retain the original source-bound negative cases. These are
+readout CLI, check retained-origin/runtime reuse and refusals, and retain the
+original source-bound negative cases. These are
 synthetic publication controls, not new toy training evidence.
 
 Tail local verification with `tail -F runs/forge/audit-publication/pytest.log`.

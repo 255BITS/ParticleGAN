@@ -25,6 +25,11 @@ def detail(row):
                      ("step", "elapsed_seconds", "passed", "failed_bounds", "metrics")})
 
 
+def _runtime_cohort(runtime):
+    # Placement may change on identical GPU hardware; every other field binds.
+    return {**runtime, "device": str(runtime.get("device", "cpu")).split(":", 1)[0]}
+
+
 def timeline(receipt):
     """Describe the saved verdict stream; supply no new scientific gate."""
     steps = receipt["protocol"]["metric_evaluation_steps"]
@@ -85,11 +90,23 @@ def project(study_path):
             if file_hash(path) != row["receipt_sha256"]:
                 raise ValueError("certified original receipt changed")
             receipt = json.loads(path.read_bytes())
+            evidence_source = row.get("evidence_source", study["source"])
+            if (not isinstance(evidence_source, dict)
+                    or evidence_source.get("files_sha256") != study["source"]["files_sha256"]):
+                raise ValueError("retained evidence source bytes differ from the scientific source cohort")
             if (receipt["status"] != "COMPLETE" or not receipt["default_protocol_complete"]
-                    or receipt["source"]["commit"] != study["source"]["commit"]
+                    or receipt["source"]["commit"] != evidence_source.get("commit")
                     or any(receipt["source"]["files_sha256"].get(name) != sha
                            for name, sha in study["source"]["files_sha256"].items())):
                 raise ValueError("complete original source-bound protocol required")
+            if "evidence_source" in row or "evidence_runtime" in row:
+                runtime = row.get("evidence_runtime", study["lane_runtime"])
+                if not isinstance(runtime, dict):
+                    raise ValueError("retained evidence runtime must be explicit")
+                if _runtime_cohort(runtime) != _runtime_cohort(study["lane_runtime"]):
+                    raise ValueError("retained evidence runtime differs from the scientific hardware cohort")
+                if receipt["runtime"] != runtime:
+                    raise ValueError("original receipt runtime differs from its retained evidence identity")
             if (receipt["verdict"] != row["original_gate"]
                     or receipt["recipe"] != row["recipe"]
                     or receipt["runtime"] != row["runtime"]

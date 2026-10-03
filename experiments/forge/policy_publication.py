@@ -174,6 +174,9 @@ def load_combined(path):
             item["title"] = case["title"]
             item["goal"] = case["goal"]
             item["actual_gif"] = None
+            for field in ("evidence_source", "evidence_runtime"):
+                if field in row:
+                    item[field] = deepcopy(row[field])
             if row.get("diagnostic"):
                 frames = _verify_case(row, original, packet, case)
                 item.update(diagnostic=brief_diagnostic(row["diagnostic"]), recipe=deepcopy(row["recipe"]),
