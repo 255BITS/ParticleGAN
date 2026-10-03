@@ -1,0 +1,230 @@
+{
+  "task": "routed_latent_coverage_v1",
+  "status": "FROZEN_PRE_EXECUTION",
+  "approved_for_execution": true,
+  "law": {
+    "task": "routed_latent_coverage_v1",
+    "arms": [
+      "two_seed",
+      "eight_seed"
+    ],
+    "geometry": {
+      "width": 32,
+      "text": 16,
+      "rank": 4,
+      "tokens": 16,
+      "length": 1,
+      "heads": 4,
+      "output": 16,
+      "frequency": 8
+    },
+    "sites": [
+      "input",
+      "edit"
+    ],
+    "steps": 1024,
+    "seconds": 300,
+    "score_steps": [
+      896,
+      928,
+      960,
+      992,
+      1024
+    ],
+    "media_steps": [
+      0,
+      128,
+      256,
+      512,
+      800,
+      1024
+    ],
+    "media_indices": [
+      0,
+      40,
+      80,
+      120,
+      160,
+      200
+    ],
+    "train_seeds": [
+      7063,
+      7064,
+      7065,
+      7066,
+      7067,
+      7068,
+      7069,
+      7070
+    ],
+    "baseline_seeds": [
+      7063,
+      7064
+    ],
+    "test_seeds": [
+      39001,
+      39002
+    ],
+    "times": [
+      0.0,
+      0.1,
+      0.2,
+      0.3,
+      0.4,
+      0.5,
+      0.6,
+      0.7,
+      0.8,
+      0.9
+    ],
+    "paths": [
+      "neutral",
+      "positive"
+    ],
+    "trajectory_steps": 50,
+    "guidance": 3.0,
+    "recipe_options": {
+      "num_particles": 32,
+      "z_dim": 4,
+      "batch_size": 4,
+      "output_noise_std": 0.125,
+      "birth_death_backend": "auto",
+      "reopen_guard": "settled",
+      "standardize": false
+    },
+    "branch_router_lr": 0.0005,
+    "thresholds": {
+      "baseline_test_fit_mse_ratio": 1.1,
+      "relative_rmse_gain": 0.001,
+      "source_harm": 1e-06,
+      "seed_harm": 1e-06,
+      "gap_fraction": 0.9,
+      "common_game_gain": 1e-06,
+      "code_gain": 1e-06,
+      "live_fraction": 0.9
+    },
+    "routing": "shared-Up gated V3; H/b neutral; both sites sequential",
+    "initializer": "public initialize_/sample_distributions_v1, named CPU generators",
+    "bank_initializer": "public initialize_, Normal(0,1) override for z, CPU role bank",
+    "prior": {
+      "kind": "particle_cloud",
+      "sigma": 0.0,
+      "standardize": false,
+      "learnable": true,
+      "exception": "conditional dense routed bank; no MoG sampling"
+    },
+    "support_counts": {
+      "two_seed": 240,
+      "eight_seed": 960,
+      "test": 240,
+      "guard": 64
+    },
+    "support_count_units": "ordered records; neutral/positive paths share each initial t0 context",
+    "unique_context_counts": {
+      "two_seed": 228,
+      "eight_seed": 912,
+      "test": 228,
+      "guard": 64
+    },
+    "addressed_training_slots": 960,
+    "sampled_contexts_per_arm": 4096,
+    "paired_addressing": "slot=160*source+20*j+10*path+time_index; baseline seed=floor(j/4), expanded seed=j",
+    "initial_noise": "one CPU seed panel reused across all sources and both paths",
+    "coordinate_units": "original two-seed FIT240 std(correction1), clamp_min .04; shared",
+    "guard": "64 evenly selected adjacent-time midpoints of original FIT240; editing only",
+    "native_KA2": "one penalty call/update; pure A calls1..799; blend starts800",
+    "arithmetic": "generated carrier, teacher, adapters and critic all FP32; autocast disabled; not Supra BF16 parity",
+    "software_prerequisite": {
+      "device": "cpu",
+      "seconds": 60,
+      "native_updates": 6,
+      "optimizer_steps": 12,
+      "scope": "software/API compatibility only; no scientific gate/rank"
+    },
+    "clean_serving": "FAST sigma0/perturbFalse; accuracy offline only",
+    "common_game": "both frozen terminal critics, 4 paired Gaussian panels at sigma .125",
+    "prohibited_feedback": "no output objective/guard/selection/stopping or applied accuracy gradient"
+  },
+  "sources": {
+    "examples/e22_routed_latent_coverage.py": "b13c1d2ec80dd0c8bbb9228a609e320017315d2be375bffb1cdb36f346b627ec",
+    "examples/render_e22_routed_latent_coverage.py": "60570b1471022c8465dea4c35221989b8b3cb741606f6866bf99319ef0ca3871",
+    "examples/e22_routed_caption_accuracy.py": "bae0f255d890e49bfbe4602bee7f8e84051b24a3cb0219c13b0a42b25768b8e3"
+  },
+  "native_package": {
+    "python_sha256": "7b814e32627ac5a332637d336ebaa13b6baab0b9373f6841d9a22fb8ab39cde9"
+  },
+  "native_python_files": {
+    "particlegan/__init__.py": "b56efa562acc551d639548c299002e2cd76338b3fd7062699780add51f4f5e8c",
+    "particlegan/_qr.py": "b59cd62cc27ed557b41b2d17ed86ed578c762a3a8a392d63731a5a3b2b018916",
+    "particlegan/anchor_birth.py": "aa50983d8b61304acf4e1138f16fd4784798983df91e931863bcacd3b511f76f",
+    "particlegan/autoencoder.py": "f3fbb9184e9f44112e15eccf0c0246dfba5ed490d3c7b81b0f837a5335916402",
+    "particlegan/birth_death.py": "b14c50c611a8cf188347e391739fca50a5171200eb6be90e4e3d1509d64e47ed",
+    "particlegan/birth_phase.py": "5ff929e5e9858aa24c4cc2f8999b5d0603e25e42ca3844d1da4cc28b1981d3d7",
+    "particlegan/capabilities.py": "39df9c67dbedf612740057e5fa743bc724678a1bc323d1f7cf550b37c0c01177",
+    "particlegan/conditioning.py": "8734fe338868ace4b5851a8fdb1f071e46d47396f66a3765e6b1ef37f0481486",
+    "particlegan/continuous.py": "4ceab49c7d51d1769ae91b7f8bc892eaf380ca6fbd77a948a086ade6627e9a41",
+    "particlegan/diffusion.py": "19c3aa8772703891551b9122fde8e74c07996f779892b7cb6be09553691efa61",
+    "particlegan/discriminators.py": "0e2efb125ffb314577612ab7a2eba66b0a1a2d28ad25f403f42c18b6f6ee333f",
+    "particlegan/feature_cells.py": "e0ea05f61abd7845c7437eed9a79c3a2511d5551ff04f4e619b6b9c8992e221a",
+    "particlegan/feature_policy.py": "de1a50f70a37d4c9174c8850ce3eac2a2597ed01f19fc4fe1a2ce0ec3176a8b2",
+    "particlegan/feature_reference.py": "58e076e9e04600be25e28afafc537a340de727371f4acbbfb2b7dd8bebac18b1",
+    "particlegan/gan_loss.py": "1c1019dfe71c583e32a05df0d2f794f9fff6d9ee1ea0332f57f6379ae70cf6b7",
+    "particlegan/grad_regularizers.py": "a540d05a4a992540b6a5f3b5ff7ccc11ebaf18592135b87c95638adbe68aa747",
+    "particlegan/init.py": "e15d4de01eb49f7097bc249abacab907ff067385412346f54ab0d510cb8649d0",
+    "particlegan/k3p.py": "200ead2c27ab0b2aa6068f1b1b1b5c826b8125aa8602bfec08b31aaa2894401c",
+    "particlegan/ka2.py": "95fdaa58a2bdc229d5d146ef89548bc3fe07582d06181a149ed1bb4f5d632703",
+    "particlegan/mean_transport.py": "57a68e0a65c5424a4460f65002f3862a69e90af330a4d47c700dc773683a2c06",
+    "particlegan/output_moments.py": "dcf3e27228d2c3c9738e473c5b22ee9e6d5047ddcd60c538b66526adb53ef188",
+    "particlegan/particle_prior.py": "0220878bebea227da63abbf9f5b1ebdabdc6aea54fd2332fd2cab02ed734238f",
+    "particlegan/policy.py": "8370e36b5b93afe95ae24d2b385aac8735a587f86ef2b87ed369ecfdfcb6fec5",
+    "particlegan/population_continuity.py": "378cd75cca45bc8da4da33e686a12cf99df853042687978314e37c532bc17fe6",
+    "particlegan/recipe_schedules.py": "d05e459b3e9e5f938b01a854273b74343f2b6d382bec4ae5151dd1f1cd032500",
+    "particlegan/recipes.py": "1a7f9df746e242a2774068c819d70d50cd72dc4f7f6b22b0bd13e1345dcf8ab2",
+    "particlegan/routing.py": "63249d808fccb3d4e113eb1d638a245ee665c3cade20a1542bb706f316b4abcc",
+    "particlegan/row_evidence.py": "78be40141ef3946860458e9842159be9321f05c217a4800dd4134113b6eba93e",
+    "particlegan/training.py": "7dadc219135bc3e6bf657bfe9bc3fa81dd14d4b2a31c70d5ff61e2941db35c94",
+    "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+  },
+  "backend_flags": {
+    "allow_tf32": false,
+    "float32_matmul_precision": "highest",
+    "allow_bf16_reduced_precision_reduction": true
+  },
+  "basis": {
+    "source_proposal_sha256": "bcbf37b3092d8a8f108a981bd964b220ba8308d42e26f35ccd935828878ccb8f",
+    "actual_stratified_review_path": "/ml2/hypergan/supra-final-precision-continuation/outputs/e22-supra-fit-test-stratified-tangents-v1/independent-review.json",
+    "actual_stratified_review_sha256": "023162c4dc72c00560cd1e719d3adbc4e72f422c17b627feb988e207404d3188"
+  },
+  "cost_review": {
+    "status": "ROOT_ACCEPTED_BOUNDED_STANDALONE_DIAGNOSTIC",
+    "quality_native_updates": 2048,
+    "gpu_recovery_native_updates": 6,
+    "cpu_prerequisite_native_updates": 6,
+    "frozen_trajectory_CFG_forwards": 7200,
+    "endpoint_B4_clean_forwards": 1200,
+    "zero_code_B4_clean_forwards": 60,
+    "common_critic_paired_B4_comparisons": 5280,
+    "common_critic_forward_calls": 10560,
+    "common_native_scalar_G_loss_calls": 21120,
+    "media_small_clean_forwards": 20,
+    "conditional_native_probe_and_candidate_cost": "additional, depends on native evidence; retained unchanged",
+    "fixed_scale_CFG_forwards": 120,
+    "root_review_note": "Root accepted generated GPU300 as bounded standalone diagnostic on 2026-10-02; freeze actual backend/source/card before CPU60 prerequisite. Operation counts are source-derived, timing unmeasured."
+  },
+  "scientific_scope": "Generated FP32 data-support example; actual reduced/full Supra transfer remains separately measured. No native bug/default/SOTA claim.",
+  "execution_note": "Root must review exact sources/gates/cost, bind actual backend_flags and freeze before either CPU prerequisite or GPU science; each output is fresh and failed sources preserved.",
+  "native_identity_law": "Sorted particlegan-relative UTF8 paths followed by raw bytes, plus each relative Python file SHA. Absolute imported package path is runtime provenance only; reader resolves native source under source-root.",
+  "root_review": {
+    "source_qa_sha256": "9b01022eea28f372921158841bc3cb473e80ea1b0f4ca93a04671917e1c4af73",
+    "interface_sha256": "053a106ede3fa163640c3d07fd78952ed3412b498a8740d1b28f3bcfe3d99c0f",
+    "backend_metadata_sha256": "2a12aa1016a5aeeffdb63d3a5fc99b65b27bc67bba69ddcaf50f89d62acfc7d7",
+    "original_draft_sha256": "f80b6e1ba84e5c148dde071352a1c1dc55d7af5da4e5481b5df4d34a001b0f0e",
+    "limits": {
+      "CPU_software_seconds": 60,
+      "generated_GPU_science_seconds": 300,
+      "CPU_saved_reader_seconds": 60
+    },
+    "full_Supra_quality_qualified": false,
+    "reason": "Support-size mechanism diagnostic; accuracy offline only"
+  }
+}

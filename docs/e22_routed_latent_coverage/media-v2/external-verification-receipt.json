@@ -1,0 +1,21 @@
+{
+  "task": "routed_latent_coverage_v2_saved_media_cpu60",
+  "complete": true,
+  "qualification": "PASS",
+  "scientific_status": null,
+  "producer_scientific_status_unchanged": "PASS",
+  "error": null,
+  "seconds": 2.201212373096496,
+  "limit_seconds": 60.0,
+  "child_exit_code": 0,
+  "plan_sha256": "ed3177a2e2d7b299265a0a6036806f57483808baf840930694039f19c6bf5cc3",
+  "child_media_completion_sha256": "03afa31eaa0b3ce18646b5e95d258f6b728fe99ed9359a007aec0705c2f79af0",
+  "stdout_sha256": "0e35a494ab82e454c90904602adfa0fda668e54a583ac908fbcef7dbee88b5a6",
+  "native_updates": 0,
+  "optimizer_steps": 0,
+  "model_forwards": 0,
+  "scope": "Saved-array metric verification and actual-training GIF; no training/science rerun",
+  "bound_file_count": 49,
+  "all_bound_files_stable": true,
+  "external_receipt_sha256": "860ef11243b4410b56b30c645526d0b09d5dd225d5fc401a976be64aca7b9145"
+}
