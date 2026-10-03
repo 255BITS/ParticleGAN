@@ -70,3 +70,24 @@ decision contract, complete shared configuration and unchanged numeric
 requirements. Atlas/E22 policy compatibility blockers remain visible until a
 faithful supported variant is explicitly declared. A passing historical
 positive cannot fill those cells.
+
+## Separate C6 persistence matrix
+
+The [saved horizon audit](HORIZON_AUDIT.md) found two C6 broad-mixture
+parents that complete their original 1,200 updates but have only two of five
+required later hold checks. After the original Atlas intensity control passes,
+run one named continuation per family, Atlas and E22, using the exact frozen
+`8021a1c5` scientific package and complete saved fixture. Restore under the
+original cap, verify the restored public sampler against retained step-1200
+arrays, then extend only the execution allowance to 1,350. Append exactly 150
+updates and the original 50-update observations at 1,250, 1,300 and 1,350.
+
+Each continuation reserves 180 seconds for acquisition and 60 for export;
+its separate two-row round is capped at 480 seconds. Together with Atlas19,
+these rounds reserve at most 11,280 paid seconds. They share the same serial
+GPU admission; neither can start while the other owns the lane. The new
+compound persistence result preserves all original observations and grades.
+It cannot fill any of the six unreached ordinary policy requirements or
+qualify a family, shipping default or speed comparison. Its GIF must combine
+retained original frames with the three actual appended states, with their
+provenance and the original INCOMPLETE grade visible.

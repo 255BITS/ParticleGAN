@@ -31,7 +31,7 @@ The observed numeric outcomes match in both families:
 | .0053125 / .5 | Intensity, 600 updates | FAIL / FAIL | Acquisition at 375, then failure at 525: HQ .62109375, finite-template TV / rejected mass .37890625, modes1. The endpoint recovers, but the final-five original window fails. |
 | .0053125 / 1.5 | Intensity, 600 updates | PASS / PASS | Confirmation at 475 and all five later hold observations pass. |
 | .0053125 / 1.5 | Two broad Gaussians, 1200 updates | PASS / INCOMPLETE | All seven retained observations 900–1200 pass; confirmation 1100 leaves only two later checks. Final projected KS .05444427, mass TV .00268555 and resolved core covariance error .10467603. |
-| .006375 / .5 | Intensity, 600 updates | PASS / FAIL | Confirmation at 450, then finite-template TV .123046875 exceeds .12 at 475, despite HQ .90136719. Five of six holds pass, and the original terminal window passes after recovery. |
+| .006375 / .5 | Intensity, 600 updates | PASS / FAIL | Confirmation at 450, then finite-template TV .123046875 exceeds the original .10 bound at 475, despite HQ .90136719. Five of six holds pass, and the original terminal window passes after recovery. |
 | .006375 / 1.5 | Intensity, 600 updates | PASS / PASS | Confirmation at 450 and all six later hold observations pass. |
 | .006375 / 1.5 | Two broad Gaussians, 1200 updates | FAIL / FAIL | No five-check acquisition window. KS .09767613 at 1000 and .09253538 at 1100 exceed .06. Final KS .04954829 passes instantaneously; only three of five terminal observations pass. |
 
