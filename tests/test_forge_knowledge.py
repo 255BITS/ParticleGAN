@@ -64,6 +64,21 @@ def test_historical_pass_never_promotes_matching_candidate(setup):
     assert result["historical_rows"][0]["cost"]["wall_seconds"] == 8
 
 
+def test_published_summary_cannot_qualify_or_conclude_an_attempt(setup, monkeypatch):
+    root, request = setup
+    save_attempt(root, request)
+    summary = {**historical(root), "record_id": "display-only", "evidence_scope": "published_summary",
+               "qualification_input": False, "lifecycle": "concluded", "attempt_ids": ["attempt-one"],
+               "provenance": {"attempts": [{"attempt_id": "attempt-one", "result_hash": "invented"}]}}
+    from experiments.forge import publication_memory
+    monkeypatch.setattr(publication_memory, "normalize", lambda root: [summary])
+    result = knowledge.board(root, "stability")
+    assert result["current_rows"][0]["qualified_tier"] == 1
+    assert result["current_rows"][0]["pending_readout"]
+    assert result["current_rows"][0]["qualification"]["required_passed"] == 1
+    assert all(row.get("record_id") != "display-only" for row in result["rows"])
+
+
 def test_current_curve_is_regraded_and_readout_pending(setup):
     root, request = setup
     save_attempt(root, request, final=2., stamp="PASS")

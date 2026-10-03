@@ -107,7 +107,9 @@ def parser():
     r.add_argument("--query", default="")
     r.add_argument("--goal")
     r.add_argument("--limit", type=int, default=8, help="maximum concise prior-art matches (default 8)")
-    commands.add_parser("compile", help="rebuild deterministic memory and leaderboards without training")
+    compile_parser = commands.add_parser("compile", help="rebuild deterministic memory and leaderboards without training")
+    compile_parser.add_argument("--check", action="store_true", help="read-only freshness check; exit nonzero for stale memory")
+    compile_parser.add_argument("--summaries-only", action="store_true", help="refresh recall while preserving published qualification/telemetry snapshots")
     h = commands.add_parser("history", help="classify and import pinned history without training")
     h.add_argument("--check", action="store_true", help="check inventory coverage instead of importing")
     commands.add_parser("validate", help="validate all task/view definitions without training")
@@ -225,6 +227,8 @@ def main(argv=None):
                                cuda_model=args.cuda_model)
         if command == "plan":
             summary = plan_summary(request, queue.inspect(), include_ownership=args.show_boundaries)
+            from .knowledge import freshness
+            summary["research_memory"] = freshness(root)
             if not args.all_tiers:
                 summary["deferred_tasks"] = [t["task"] for t in summary["tasks"] if not t["permitted_by_tier_cap"]]
                 summary["tasks"] = [t for t in summary["tasks"] if t["permitted_by_tier_cap"]]
@@ -292,13 +296,17 @@ def main(argv=None):
     elif command in {"compile", "recall", "board", "readout"}:
         from . import knowledge
         if command == "compile":
-            emit(knowledge.compile_memory(root))
+            if args.check:
+                result = knowledge.freshness(root)
+                emit(result)
+                return 0 if result["fresh"] else 1
+            emit(knowledge.compile_memory(root, summaries_only=args.summaries_only))
         elif command == "recall":
             if args.limit < 1:
                 raise ValueError("recall --limit must be positive")
             matches = knowledge.recall(root, query=args.query, goal=args.goal)
             emit({"matches_total": len(matches), "shown": min(len(matches), args.limit), "matches": matches[:args.limit],
-                  "memory": str(root / "reports/forge/EXPERIMENT_MEMORY.md")})
+                  "memory": str(root / "reports/forge/EXPERIMENT_MEMORY.md"), "research_memory": knowledge.freshness(root)})
         elif command == "board":
             result = knowledge.board(root, args.goal)
             from .board_filters import filter_rows
