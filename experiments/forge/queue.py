@@ -400,12 +400,19 @@ class Queue:
         with self.state() as state:
             self._refresh(state)
             running = [j for j in state["jobs"].values() if j["status"] == "running"]
+            from .policy_execution import active_reservations, recover_attempts
+            recover_attempts(state)
+            policy = active_reservations(state)
             capacity = host_capacity()
             reserved = [_host_request(j["definition"].get("resources", {})) for j in running]
+            reserved += [entry["worker"]["host_reservation"] for entry in policy]
             free_threads = capacity["cpu_threads"] - sum(r["cpu_threads"] for r in reserved)
             free_host_memory = capacity["available_memory_mb"] - sum(r["host_memory_mb"] for r in reserved)
             busy = {(j["worker"]["device"], j["worker"]["slot"]) for j in running}
             free = [s for s in slots if (s["device"], s["slot"]) not in busy]
+            exclusive = {str(entry["worker"]["device"]) for entry in policy
+                         if entry["worker"].get("exclusive_device")}
+            free = [slot for slot in free if str(slot["device"]) not in exclusive]
             pending = sorted(state["submissions"].items(), key=lambda kv: (
                 -(kv[1]["request"].get("priority", 0) + (time.time() - kv[1]["submitted_at"]) / 300), kv[0]))
             for request_id, entry in pending:
@@ -443,7 +450,7 @@ class Queue:
                                      lifecycle="awaiting_readout")
                         continue
                     if needed["cpu_threads"] > free_threads or needed["host_memory_mb"] > free_host_memory:
-                        if not running:
+                        if not (running or policy):
                             entry.update(status="blocked", reason="resource: insufficient currently available host RAM; retry when capacity is available",
                                          lifecycle="awaiting_readout")
                         continue
@@ -453,7 +460,7 @@ class Queue:
                     if not suitable:
                         # Distinguish occupied capacity from an impossible allocation.
                         feasible = [s for s in slots if _device_matches(s, resources, maximum=True)]
-                        if not feasible or not running:
+                        if not feasible or not (running or policy):
                             entry.update(status="blocked", reason="resource: no currently available configured device satisfies task memory/device requirements",
                                          lifecycle="awaiting_readout")
                         continue
@@ -529,9 +536,13 @@ class Queue:
                 atomic_json(directory / "process.json", job["worker"])
                 return process
 
-    def collect(self):
+    def collect(self, *, only_orphans=False):
         completions = 0
         with self.state() as state:
+            # Dedicated admission may recover abandoned reservations, but must
+            # not fence the collector's claim-to-launch registration window.
+            if only_orphans and lease_held(self.root / "coordinator.lock"):
+                return 0
             for key, job in state["jobs"].items():
                 if job["status"] != "running":
                     continue
@@ -539,6 +550,8 @@ class Queue:
                 directory = Path(worker["directory"])
                 self._collect_progress(state, job)
                 path = directory / "terminal.json"
+                if only_orphans and (path.exists() or lease_held(directory / "execution.lock")):
+                    continue
                 if not path.exists():
                     if lease_held(directory / "execution.lock"):
                         process = directory / "process.json"
