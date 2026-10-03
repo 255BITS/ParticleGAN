@@ -13,9 +13,11 @@ full-FIT **accuracy** gradient also opposes TEST (cosine `-0.12676040479199902`)
 These facts support testing latent coverage and do not isolate a game-specific
 failure. No measured accuracy direction is applied during this example.
 
-Source status: unexecuted draft. The
-[protocol](e22_routed_latent_coverage_v1.json) needs root source, backend and cost
-review before freezing. No software, scientific or media PASS is claimed here.
+The frozen [v2 protocol](e22_routed_latent_coverage_v2.json) completed with
+software PASS, scientific PASS and independent saved-array verification PASS.
+See the [qualified readout and actual-training GIF](e22_routed_latent_coverage_readout_v2.md).
+Eight-seed support reduced final held-out RMSE by 23.09%; actual Supra transfer
+remains untested. The original v1 failed prerequisite is preserved below.
 
 ## One changed factor
 
@@ -85,23 +87,23 @@ exits2. The score never controls training. A pass supports this support-size
 fixture only; coverage expansion can help regressors generally and does not
 prove defective native behavior.
 
-## Reproduction after freezing
+## Reproduction of the qualified v2 cohort
 
 Use the project environment from the repository root. Root's external watchdog
 must bind the frozen source/card/native cohort and enforce each whole budget.
 
 ```sh
 CUDA_VISIBLE_DEVICES='' python -m examples.e22_routed_latent_coverage \
-  --software-prerequisite --protocol docs/e22_routed_latent_coverage_v1.json \
+  --software-prerequisite --protocol docs/e22_routed_latent_coverage_v2.json \
   --out /tmp/NEW-coverage-software
 CUDA_VISIBLE_DEVICES=0 python -m examples.e22_routed_latent_coverage \
-  --run --protocol docs/e22_routed_latent_coverage_v1.json \
+  --run --protocol docs/e22_routed_latent_coverage_v2.json \
   --out /tmp/NEW-coverage-science
 CUDA_VISIBLE_DEVICES='' python -m examples.render_e22_routed_latent_coverage \
   --observed /tmp/NEW-coverage-science/observed-training.pt \
   --producer-report /tmp/NEW-coverage-science/report.json \
   --producer-completion /tmp/NEW-coverage-science/completion.json \
-  --protocol docs/e22_routed_latent_coverage_v1.json \
+  --protocol docs/e22_routed_latent_coverage_v2.json \
   --out /tmp/NEW-coverage-media
 ```
 
@@ -109,8 +111,8 @@ CPU prerequisite60s constructs exact data, validates scorer controls, executes
 six native recovery updates and restores fresh initial states. It emits software
 qualification and null scientific status; it supplies no score/rank. The GPU300s
 envelope includes data, the same recovery,2048 quality updates, all observations,
-both common judges, cleanup and final receipts. Budget feasibility is currently
-unmeasured. Fixed work includes7320 small frozen CFG data/scale forwards,
+both common judges, cleanup and final receipts. The qualified external GPU run
+took228.241 seconds within300. Fixed work includes7320 small frozen CFG data/scale forwards,
 1200 B4 clean FIT/TEST forwards,60 zero-code forwards,20 small camera forwards,
 and5280 paired critic comparisons (10560 critic forwards,21120 percontext native
 G-loss calls); native probes/candidate reruns add conditional work.
@@ -122,8 +124,8 @@ retention witnesses, and exports the actual six-frame training GIF at
 genuine endpoint score points and no interpolation. The final camera is the
 literal subset of saved TEST240. Native finiteness/recovery/gradient provenance
 remains producer evidence; the reader does not construct a model or execute
-ParticleGAN. Keep bulk traces/checkpoints/tensors/GIFs local, with compact
-receipts and the single current goal readout after execution.
+ParticleGAN. Keep bulk traces/checkpoints/tensors local; publish compact
+receipts, actual-training media and the single current goal readout after execution.
 # Fresh-owner compatibility cohort v2
 
 The original v1 CPU prerequisite stopped before quality training: public restore
