@@ -56,8 +56,8 @@ KA2 finishes with all endpoint bounds passing (5 modes, TV 0.01895,
 reconstruction exactness 1.0, minimum correct-token probability 0.94784), but
 recurrent reconstruction failures leave only **one of five required terminal
 passing observations**. Its good endpoint cannot turn that FAIL into a PASS.
-Both word runs complete all 20,001 declared updates. A2 is host-inapplicable
-here: eligible/applied updates are zero, and its separately labelled synthetic
+Both word runs complete all 20,001 declared updates. A2 was not activated under
+the observed host conditions: eligible/applied updates are zero, and its separately labelled synthetic
 component probe is a fidelity check. These failures cannot establish an effect
 of active A2 damping. Two R1/R2 movement failures likewise have passing endpoint
 metrics but insufficient terminal persistence.
