@@ -39,7 +39,7 @@
       "experiment/toy": 3,
       "experiment/trajectory": 2,
       "experiment/transition": 7,
-      "forge_engine": 58,
+      "forge_engine": 71,
       "lrfree/feature-cells-cb64-ra": 4058,
       "report/atlas-explanation": 7,
       "report/behavioral_baseline": 32,
@@ -102,7 +102,7 @@
       "candidate_patch": 26,
       "configuration": 807,
       "driver": 401,
-      "engine_support": 58,
+      "engine_support": 71,
       "evaluator_or_audit": 324,
       "evidence_artifact": 1574,
       "frozen_candidate_implementation": 15,
@@ -116,13 +116,13 @@
       "visualization": 22,
       "visualization_artifact": 721
     },
-    "files": 11725
+    "files": 11738
   },
   "coverage": {
-    "declared_count": 11725,
+    "declared_count": 11738,
     "missing": [],
     "stale": [],
-    "tracked_count": 11725,
+    "tracked_count": 11738,
     "unclassified": [],
     "valid": true
   },
@@ -7124,6 +7124,20 @@
     },
     {
       "family": "forge_engine",
+      "git_blob": "8b695ccd99c9269f2361825c2bf5a5c65cf03032",
+      "path": "experiments/forge/ae_routed_policy_adapters.py",
+      "role": "engine_support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "forge_engine",
+      "git_blob": "b35232e377164a2d3826af78b592b8ec40179b2f",
+      "path": "experiments/forge/ae_routed_policy_contracts.py",
+      "role": "engine_support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "forge_engine",
       "git_blob": "20ec10b113a5cbf1c8885a0e741b81bc7c7e7a3a",
       "path": "experiments/forge/api.py",
       "role": "engine_support",
@@ -7196,6 +7210,20 @@
       "family": "forge_engine",
       "git_blob": "c75a4dc107da7d0a3dfb6406141240b818de6125",
       "path": "experiments/forge/completed_studies.py",
+      "role": "engine_support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "forge_engine",
+      "git_blob": "e80273be7b1f767d9799bbc6fa64c3cd30548a2b",
+      "path": "experiments/forge/conditional_policy_adapters.py",
+      "role": "engine_support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "forge_engine",
+      "git_blob": "d1a89ea319b17314b1174484b61735ce6903fe19",
+      "path": "experiments/forge/conditional_policy_contracts.py",
       "role": "engine_support",
       "suggested_tiers": []
     },
@@ -7285,6 +7313,27 @@
     },
     {
       "family": "forge_engine",
+      "git_blob": "cc43aaaf89b37b44f9083753fde2b37ed7406bd0",
+      "path": "experiments/forge/multibank_policy_adapters.py",
+      "role": "engine_support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "forge_engine",
+      "git_blob": "ba217f20ca13604e0f91b5a6b579c83233c6d85b",
+      "path": "experiments/forge/multibank_policy_contracts.py",
+      "role": "engine_support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "forge_engine",
+      "git_blob": "ecc6eb254b6de4d4822224d62284ad78af857592",
+      "path": "experiments/forge/named_policy_planning.py",
+      "role": "engine_support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "forge_engine",
       "git_blob": "51516e3f0c3e445429889fe3f1dcfe3951d993e6",
       "path": "experiments/forge/nativeprofiles.py",
       "role": "engine_support",
@@ -7320,8 +7369,22 @@
     },
     {
       "family": "forge_engine",
+      "git_blob": "e41fa7264e69a752b33c182d7df9755a8e406c33",
+      "path": "experiments/forge/policy_cohorts.py",
+      "role": "engine_support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "forge_engine",
       "git_blob": "46fa88d2438794c4c6868f7c168761e38ae8485d",
       "path": "experiments/forge/policy_contracts.py",
+      "role": "engine_support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "forge_engine",
+      "git_blob": "d1955f368e59ad64b8683534a8ca560e863e259e",
+      "path": "experiments/forge/policy_declaration_sources.py",
       "role": "engine_support",
       "suggested_tiers": []
     },
@@ -7392,6 +7455,20 @@
       "family": "forge_engine",
       "git_blob": "43aaea505c037496d4ec8da5b51266c7b10eae85",
       "path": "experiments/forge/rng.py",
+      "role": "engine_support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "forge_engine",
+      "git_blob": "c22f46ab5e327aba7a3cb8e526b63c2616489b97",
+      "path": "experiments/forge/routed_policy_adapters.py",
+      "role": "engine_support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "forge_engine",
+      "git_blob": "66dfb6faeb77c2371c44bf2f3719ac034c5a4d41",
+      "path": "experiments/forge/routed_policy_contracts.py",
       "role": "engine_support",
       "suggested_tiers": []
     },
@@ -7490,6 +7567,20 @@
       "family": "forge_engine",
       "git_blob": "75c8cdaf29bb1c114c8548879935be9105b54002",
       "path": "experiments/forge/word_adapter.py",
+      "role": "engine_support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "forge_engine",
+      "git_blob": "0406f30dd5832e5eb759ab6555ffaec805535d70",
+      "path": "experiments/forge/word_joint_policy_adapters.py",
+      "role": "engine_support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "forge_engine",
+      "git_blob": "cf6790824549857f068d9fff09e7e1e214bb201f",
+      "path": "experiments/forge/word_joint_policy_contracts.py",
       "role": "engine_support",
       "suggested_tiers": []
     },
