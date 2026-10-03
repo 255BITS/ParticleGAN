@@ -31,6 +31,22 @@ source/API blockers are being evaluated as separately named family variants;
 the original blocked identities retain their original results. The older
 comparison scopes below and their `index.json` remain their original snapshots.
 
+## Named-family startup attempts
+
+The [native-v1 engineering report](../atlas-named-gpu-diagnostics-invalid-20261003/README.md)
+and [portable receipt](../atlas-named-gpu-diagnostics-invalid-20261003/summary.json)
+retain two **INVALID** attempts before training and six adapted questions
+**NOT_RUN**. Each of the five separately named families keeps all 26 required
+questions: 2 INVALID and 128 NOT_RUN cells across their separate ledgers.
+The measured engineering charge is **25.322955040959641 seconds**, reserve zero.
+There are no numerical PASS/FAIL outcomes, observations, checkpoints or GIFs.
+
+The exact failure was typed planner metadata reaching strict producer
+constructors; all scientific fields still match their frozen definitions.
+It supplies no capacity or optimizer conclusion. A correction must use a new
+frozen execution source and preserve these failed attempts and costs. This
+report cannot fill another family, original source or ordinary ranking.
+
 | Scope | Source / declared law | Comparable score | Status and cost | Team report |
 |---|---|---|---|---|
 | Ordinary MoG, current Forge | Origin `28990990`; live, scheduled, learned MoG prior σ = 0.025 | KA2 and K3P tie at 4/5 Tier 1; 19 Tier 2 and 2 Tier 3 requirements remain unknown | Both FAIL; qualified tier 0; no default or speed credit | [Primary ordinary board](https://github.com/255BITS/ParticleGAN/blob/4749b2780add539df4bd8d2dd1d3cc9f002f77ad/reports/forge/technique-inventory.md) |
