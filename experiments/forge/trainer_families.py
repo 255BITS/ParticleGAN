@@ -83,7 +83,7 @@ def load_current_selection(root: Path | str, *, view_id: str, policy_fingerprint
 
 
 def _current_pin(root, family_id, rows, pin, *, view_id, catalogs):
-    from .views import load_view, task_evaluation_fingerprint, task_execution_fingerprint
+    from .views import load_view, load_tasks, task_evaluation_fingerprint, task_execution_fingerprint
     matches = [row for row in rows if family_row_pin(
         row, selection_kind=pin["selection_kind"], reason=pin["reason"],
         measurement_views=pin.get("measurement_views"), measurement_tasks=pin.get("measurement_tasks")) == pin]
@@ -114,8 +114,9 @@ def _current_pin(root, family_id, rows, pin, *, view_id, catalogs):
         if (not required_measurements or len(observed) != len(measured)
                 or any(observed.get(task) not in {"PASS", "FAIL"} for task in required_measurements)):
             raise ValueError("current measurement requires every required Tier 1 task in its measurement views to be PASS or FAIL")
+        declarations = load_tasks(root)
         for name in required_measurements:
-            task = read_json(Path(root) / "configs/forge/tasks" / (name + ".json"))
+            task = declarations[name]
             digest = selected.get("bindings", {}).get("task_contracts", {}).get(name)
             contract = catalogs.get("task_contracts", {}).get(digest, {})
             if (contract.get("execution_sha256") != task_execution_fingerprint(task)

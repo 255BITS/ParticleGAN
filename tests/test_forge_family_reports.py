@@ -165,6 +165,19 @@ def test_task_devices_and_policy_parent_remain_visible_in_provenance(report):
     assert "original-parent-hash" in text and "no cells to the parent clean cohort" in text
 
 
+def test_scoped_task_variant_discovery_and_links_use_its_actual_declaration_path(report):
+    root, publication = report
+    original = root / "configs/forge/tasks/held.json"
+    variant = root / "configs/forge/task-variants/policy-cohort/held.json"
+    variant.parent.mkdir(parents=True)
+    original.rename(variant)
+    cohort = generate(report)
+    assert cohort["tasks"]["held"]["current_contract"] == "matches"
+    assert publication["family_progress"]["task_paths"]["held"] == variant.relative_to(root).as_posix()
+    text = next(iter(generated_pages(root, publication).values()))
+    assert "task-variants/policy-cohort/held.json" in text
+
+
 def test_leaderboard_clicks_resolve_to_family_tiers_including_empty_tiers(report):
     root, publication = report
     generate(report)

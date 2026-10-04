@@ -173,7 +173,12 @@ def build_progress(root: Path, publication: dict) -> dict:
         return read_json(root / path)
 
     views = [load(path.relative_to(root)) for path in sorted((root / "configs/forge/views").glob("*.json"))]
-    tasks = {path.stem: load(path.relative_to(root)) for path in sorted((root / "configs/forge/tasks").glob("*.json"))}
+    task_files = sorted([*(root / "configs/forge/tasks").glob("*.json"),
+                         *(root / "configs/forge/task-variants").rglob("*.json")])
+    tasks = {path.stem: load(path.relative_to(root)) for path in task_files}
+    if len(tasks) != len(task_files):
+        raise ValueError("family report task declarations have duplicate ids")
+    task_paths = {path.stem: path.relative_to(root).as_posix() for path in task_files}
     for view in views:
         identifier(view["id"], "view")
         names = [assignment["task"] for assignment in view["assignments"]]
@@ -275,6 +280,7 @@ def build_progress(root: Path, publication: dict) -> dict:
                 "qualification_reuse": False, "views": views, "diagnostic_views": [view["id"] for view in diagnostics],
                 "families": [family for family in families.values() if not family["historical_only"]],
                 "historical_families": [family for family in families.values() if family["historical_only"]],
+                "task_paths": task_paths,
                 "input_hashes": dict(sorted(inputs.items())),
                 "renderer_sha256": file_hash(Path(__file__))}
     if first_full_atlas is not None:
@@ -467,7 +473,7 @@ def render_family(root: Path, publication: dict, family: dict) -> str:
         lines += [*_heading(2, "Experiment metrics and pass criteria", base + "-experiments"), "One evidence entry per experiment is shared by its view rows. "
                   "CHANGED means the declared execution or evaluator differs from the recorded task; its earlier verdict is preserved.", ""]
         for name, result in cohort["tasks"].items():
-            task_path = Path("configs/forge/tasks") / (name + ".json")
+            task_path = Path(progress.get("task_paths", {}).get(name, "configs/forge/tasks/" + name + ".json"))
             task = read_json(root / task_path) if (root / task_path).is_file() else {}
             lines += [*_heading(3, name, base + "-experiment-" + name), f"**{name}: {result['status']}**. " +
                       _existing_link(root, page, "Current experiment declaration", task_path) + ".", "",

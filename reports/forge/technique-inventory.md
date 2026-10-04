@@ -104,4 +104,4 @@ This regenerates the leaderboard, family pages and experiments-by-tier report fr
 
 [Experiments, criteria and tier assignments](EXPERIMENTS_BY_TIER.md) · [Complete numerical publication and provenance](technique-inventory.json)
 
-Publication input digest `ad52cbdd7d847b5439bea5112f4c545975f1e8c0849c2ab0885c82ff14e59e01`.
+Publication input digest `74f9f701302352a2c012c830050b69a59b05131a69803bb78b166677c38cc2d5`.
