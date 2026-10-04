@@ -1,5 +1,39 @@
 {
   "default_adoption": false,
+  "historical_selections": [
+    {
+      "candidate_id": "release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c",
+      "candidate_revision": "47630167ae31039bb209a2245097e4b9d5b2379ae0c526d4d3aa57e6204b0f33",
+      "cohort": "f99998f9b0fa4054fac701e7ea0b5aaa8d5986b332d48ee8447f5878cd92cf3e",
+      "execution_backend": "cuda",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "reason": "Retain the exact recorded incumbent; its outcomes are historical best observed evidence where a registered search exists. Alternatives from another source or runtime are unranked.",
+      "recipe_sha256": "ad189b704ce2fced9b4cbf07955ee39cd9145e3d0e5fa4bbe9d92f7f4a74cff1",
+      "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+      "runtime_cohort_sha256": "7f9c23eb0e27de12841fb2be38a626c9569a150b2b4da231eec9d86bab8a1633",
+      "scientific_row_sha256": "068e0bef1125b3537e4f89ca76ec5e3267af606c2473e148fbe8561530ad5840",
+      "selection_kind": "historical_incumbent",
+      "source_digest": "7306340bac0a4ea67ea7b080513116457b7d72a8cb0d0c1f0727eaae6db38185",
+      "task_keys_sha256": "1faba9adcb1685d0d0d5d841630e8b7e365d4e11e538c922ea0f3feccec9ab82",
+      "trainer_family": "release07-gan-v3-mog"
+    },
+    {
+      "candidate_id": "release07-gan-v3-cloud-v1",
+      "candidate_revision": "95e403581ebf0d72da9e36b0bcc668ec4512daa4e1aafe06013b465b7a8b06da",
+      "cohort": "6cb4d268b94e96566fca7784d03bfe6e207700c448dba2471de72d51acadbe12",
+      "execution_backend": "cuda",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "reason": "Retain the exact recorded incumbent; its outcomes are historical best observed evidence where a registered search exists. Alternatives from another source or runtime are unranked.",
+      "recipe_sha256": "b9bb3c0216c0e10a3455f40082f0f50759fb30e58bf5bf9275c5bcba74c0fb2d",
+      "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+      "runtime_cohort_sha256": "7f9c23eb0e27de12841fb2be38a626c9569a150b2b4da231eec9d86bab8a1633",
+      "scientific_row_sha256": "bc7343973daec01bf2122348965eb2ba9ab496e44a1047a1a8e295300846c8a1",
+      "selection_kind": "historical_incumbent",
+      "source_digest": "7306340bac0a4ea67ea7b080513116457b7d72a8cb0d0c1f0727eaae6db38185",
+      "task_keys_sha256": "ce08b1fcc4160ccefb36b95b50b37a3804c8bfafcfbe40cf99fa61f9ec2855b4",
+      "trainer_family": "release07-gan-v3-cloud"
+    }
+  ],
   "policy_fingerprint": "c856f402249b71c8f877974e427dc7ed70bf7102f9bc0e433b933d7a024789fe",
   "schema_version": 1,
   "scope": "whole_candidate_family_current",
@@ -58,7 +92,7 @@
       "cohort": "f99998f9b0fa4054fac701e7ea0b5aaa8d5986b332d48ee8447f5878cd92cf3e",
       "execution_backend": "cuda",
       "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
-      "reason": "Retain the exact recorded incumbent; its outcomes are historical best observed evidence where a registered search exists. Alternatives from another source or runtime are unranked.",
+      "reason": "Retain this exact whole historical task-adapted configuration while current Tier 1 is measured. Priors belong to the tasks; separate historical cloud/MoG receipts never contribute individual cells. Forward default: release07-gan-v3-task-adapted-v1.",
       "recipe_sha256": "ad189b704ce2fced9b4cbf07955ee39cd9145e3d0e5fa4bbe9d92f7f4a74cff1",
       "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
       "runtime_cohort_sha256": "7f9c23eb0e27de12841fb2be38a626c9569a150b2b4da231eec9d86bab8a1633",
@@ -66,23 +100,7 @@
       "selection_kind": "historical_incumbent",
       "source_digest": "7306340bac0a4ea67ea7b080513116457b7d72a8cb0d0c1f0727eaae6db38185",
       "task_keys_sha256": "1faba9adcb1685d0d0d5d841630e8b7e365d4e11e538c922ea0f3feccec9ab82",
-      "trainer_family": "release07-gan-v3-mog"
-    },
-    {
-      "candidate_id": "release07-gan-v3-cloud-v1",
-      "candidate_revision": "95e403581ebf0d72da9e36b0bcc668ec4512daa4e1aafe06013b465b7a8b06da",
-      "cohort": "6cb4d268b94e96566fca7784d03bfe6e207700c448dba2471de72d51acadbe12",
-      "execution_backend": "cuda",
-      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
-      "reason": "Retain the exact recorded incumbent; its outcomes are historical best observed evidence where a registered search exists. Alternatives from another source or runtime are unranked.",
-      "recipe_sha256": "b9bb3c0216c0e10a3455f40082f0f50759fb30e58bf5bf9275c5bcba74c0fb2d",
-      "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
-      "runtime_cohort_sha256": "7f9c23eb0e27de12841fb2be38a626c9569a150b2b4da231eec9d86bab8a1633",
-      "scientific_row_sha256": "bc7343973daec01bf2122348965eb2ba9ab496e44a1047a1a8e295300846c8a1",
-      "selection_kind": "historical_incumbent",
-      "source_digest": "7306340bac0a4ea67ea7b080513116457b7d72a8cb0d0c1f0727eaae6db38185",
-      "task_keys_sha256": "ce08b1fcc4160ccefb36b95b50b37a3804c8bfafcfbe40cf99fa61f9ec2855b4",
-      "trainer_family": "release07-gan-v3-cloud"
+      "trainer_family": "release07-gan-v3"
     },
     {
       "candidate_id": "k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c",

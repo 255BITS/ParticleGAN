@@ -1222,9 +1222,28 @@ def _load_common26_display_choices(root):
 
 
 def _common26_display_projection(result, root):
-    """Reproject supplied declarations; no recognized fresh numeric producer exists."""
-    from experiments.forge.common26_comparison import project_common26
-    return project_common26(result["rows"], result,
+    """Keep the unscored original common-26 projection in its historical scope."""
+    from experiments.forge.common26_comparison import FAMILIES, TASKS_BY_TIER, project_common26
+    from experiments.forge.trainer_families import family_for_candidate
+    legacy_ids = {name for name, _ in FAMILIES}
+    rows = result["rows"]
+    if any(row.get("trainer_family") not in legacy_ids for row in rows):
+        indexed = {row["trainer_family"]: deepcopy(row) for row in
+                   result.get("historical_family_rows", []) if row["trainer_family"] in legacy_ids}
+        for original in rows:
+            row = deepcopy(original)
+            family = family_for_candidate(root, row["candidate_id"],
+                                          {"trainer_family": row["trainer_family"]}
+                                          if row.get("trainer_family") in legacy_ids else None)
+            if family["id"] in legacy_ids:
+                row["trainer_family"] = family["id"]
+                indexed.setdefault(family["id"], row)
+        rows = [indexed[name] for name, _ in FAMILIES if name in indexed]
+    catalogs = result
+    if result.get("view_revision") != 3 and (root / "configs/forge/view-history/discriminator_stability-v3.json").is_file():
+        catalogs = {**result, "view_revision": 3,
+                    "tier_requirements": {tier: list(tasks) for tier, tasks in TASKS_BY_TIER.items()}}
+    return project_common26(rows, catalogs,
                             chosen_configurations=_load_common26_display_choices(root))
 
 
@@ -1689,7 +1708,7 @@ def _standalone_api_scores(root):
 
 def refresh_publication(root=REPOSITORY_ROOT, *, view_id="discriminator_stability"):
     """Refresh the same board while preserving every registered scientific row."""
-    from experiments.forge.trainer_families import CURRENT_SELECTION, scientific_row_hash
+    from experiments.forge.trainer_families import CURRENT_SELECTION, REGISTRY, scientific_row_hash, select_family_rows
     from experiments.forge.views import load_view
     root = Path(root).resolve()
     manifest = read_json(root / EVIDENCE_MANIFEST)
@@ -1707,14 +1726,16 @@ def refresh_publication(root=REPOSITORY_ROOT, *, view_id="discriminator_stabilit
     if result["provenance"]["evidence_manifest_sha256"] != stable_hash(manifest):
         raise ValueError("registered evidence changed; use ordinary regeneration")
     selection_hash = result["provenance"].get("family_current_selection_sha256")
-    if selection_hash is not None and file_hash(root / CURRENT_SELECTION) != selection_hash:
+    registry_hash = file_hash(root / REGISTRY) if (root / REGISTRY).is_file() else None
+    regroup = registry_hash != result["provenance"].get("trainer_family_registry_sha256")
+    if not regroup and selection_hash is not None and file_hash(root / CURRENT_SELECTION) != selection_hash:
         raise ValueError("family selection changed; use ordinary regeneration")
     registered = set()
     for entry in manifest["cohorts"]:
         _, rows = _snapshot(root, entry, manifest)
         registered.update(scientific_row_hash(row) for row in rows.values())
     for key in ("rows", "configuration_rows", "evidence_rows"):
-        if any(scientific_row_hash(row) not in registered for row in result[key]):
+        if any(scientific_row_hash(row) not in registered for row in result.get(key, [])):
             raise ValueError("current publication contains an unregistered scientific row")
     archived = set()
     for _, _, _, rows in _archived_reports(root, manifest):
@@ -1724,6 +1745,8 @@ def refresh_publication(root=REPOSITORY_ROOT, *, view_id="discriminator_stabilit
         row.pop("evidence_policy", None)
         if scientific_row_hash(row) not in archived:
             raise ValueError("current publication contains an unregistered archived row")
+    if any(scientific_row_hash(row) not in registered | archived for row in result.get("historical_family_rows", [])):
+        raise ValueError("current publication contains an unregistered historical family row")
     declared = load_view(root, manifest["view"])
     if stable_hash(declared) != manifest["policy_fingerprint"]:
         frozen = root / "configs/forge/view-history" / f"{manifest['view']}-v{manifest['view_revision']}.json"
@@ -1737,6 +1760,16 @@ def refresh_publication(root=REPOSITORY_ROOT, *, view_id="discriminator_stabilit
                                "tier_requirements": requirements,
                                "added_required_tasks": {tier: [name for name in names if name not in manifest["tier_requirements"][tier]]
                                                         for tier, names in requirements.items()}}
+    if regroup:
+        result.update(select_family_rows(root, result["configuration_rows"], result, view_id=view_id,
+                                         policy_fingerprint=manifest["policy_fingerprint"],
+                                         historical_rows=[{**row, "publication_key": entry["json_sha256"]}
+                                             for _, entry, _, rows in _archived_reports(root, manifest)
+                                             for row in rows.values()]))
+        result["provenance"]["trainer_family_registry_sha256"] = registry_hash
+        result["provenance"]["selected_rows_sha256"] = stable_hash(result["rows"])
+        result["provenance"]["family_current_selection_sha256"] = (
+            file_hash(root / CURRENT_SELECTION) if (root / CURRENT_SELECTION).is_file() else None)
     result["standalone_api_scores"] = _standalone_api_scores(root)
     result["publication_refresh"] = {"scientific_rows_preserved": True, "qualification_regraded": False,
                                      "training_launched": False}
@@ -2008,7 +2041,9 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
         result[catalog] = dict(sorted(combined.items()))
     family_result = select_family_rows(root, result["rows"], result, view_id=view_id,
                                        policy_fingerprint=manifest["policy_fingerprint"], declarations=declarations,
-                                       view_policy=recorded_view, execution_backend=execution_backend)
+                                       view_policy=recorded_view, execution_backend=execution_backend,
+                                       historical_rows=[{**row, "publication_key": entry["json_sha256"]}
+                                           for _, entry, _, rows in archived_reports for row in rows.values()])
     result.update(family_result)
     # Immutable scientific history stays numerical, including earlier revisions
     # of the same configuration. It cannot fill cells in the selected row.

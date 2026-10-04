@@ -24,10 +24,10 @@ def scientific_row_hash(row: dict) -> str:
     return stable_hash({key: value for key, value in row.items() if key not in _DISPLAY_FIELDS})
 
 
-def family_row_pin(row: dict, *, selection_kind: str, reason: str) -> dict:
+def family_row_pin(row: dict, *, selection_kind: str, reason: str, measurement_views=None, measurement_tasks=None) -> dict:
     """Describe one exact ordinary measured row, never an aggregate of cells."""
     bindings = row.get("bindings", {})
-    return {"trainer_family": row["trainer_family"], "candidate_id": row["candidate_id"],
+    pin = {"trainer_family": row["trainer_family"], "candidate_id": row["candidate_id"],
             "candidate_revision": row.get("candidate_revision"), "cohort": row.get("cohort"),
             "execution_backend": row.get("runtime_cohort", {}).get("execution_backend"),
             "runtime_cohort_sha256": stable_hash(row.get("runtime_cohort")),
@@ -35,6 +35,11 @@ def family_row_pin(row: dict, *, selection_kind: str, reason: str) -> dict:
                                                 "protocol_sha256", "rng_sha256")},
             "scientific_row_sha256": scientific_row_hash(row),
             "selection_kind": selection_kind, "reason": reason}
+    if measurement_views is not None:
+        pin["measurement_views"] = list(measurement_views)
+    if measurement_tasks is not None:
+        pin["measurement_tasks"] = list(measurement_tasks)
+    return pin
 
 
 def load_current_selection(root: Path | str, *, view_id: str, policy_fingerprint: str) -> dict:
@@ -53,22 +58,39 @@ def load_current_selection(root: Path | str, *, view_id: str, policy_fingerprint
         identifier(pin.get("candidate_id"), "selected candidate")
         if family in pins:
             raise ValueError("current family selection must contain one whole row per family")
-        if (pin.get("selection_kind") not in {"historical_incumbent", "configured_standard"}
+        if (pin.get("selection_kind") not in {"historical_incumbent", "configured_standard", "current_measurement"}
                 or pin.get("execution_backend") not in {"cpu", "cuda"}
                 or not isinstance(pin.get("reason"), str) or not pin["reason"].strip()):
             raise ValueError("current family selection needs an explicit cohort choice and reason")
+        measurement_views = pin.get("measurement_views")
+        if pin["selection_kind"] == "current_measurement":
+            if (not isinstance(measurement_views, list) or not measurement_views
+                    or len(set(measurement_views)) != len(measurement_views)):
+                raise ValueError("current measurement requires explicit distinct measurement views")
+            for view in measurement_views:
+                identifier(view, "measurement view")
+        elif measurement_views is not None:
+            raise ValueError("measurement views require a current_measurement selection")
+        if "measurement_tasks" in pin:
+            tasks = pin["measurement_tasks"]
+            if (pin["selection_kind"] != "current_measurement" or not isinstance(tasks, list)
+                    or not tasks or len(set(tasks)) != len(tasks)):
+                raise ValueError("additional measurement tasks require an explicit current_measurement selection")
+            for task in tasks:
+                identifier(task, "measurement task")
         pins[family] = pin
     return pins
 
 
-def _current_pin(root, family_id, rows, pin, *, view_id):
-    from .views import load_view
+def _current_pin(root, family_id, rows, pin, *, view_id, catalogs):
+    from .views import load_view, task_evaluation_fingerprint, task_execution_fingerprint
     matches = [row for row in rows if family_row_pin(
-        row, selection_kind=pin["selection_kind"], reason=pin["reason"]) == pin]
+        row, selection_kind=pin["selection_kind"], reason=pin["reason"],
+        measurement_views=pin.get("measurement_views"), measurement_tasks=pin.get("measurement_tasks")) == pin]
     if len(matches) != 1:
         raise ValueError("current family selection must match one exact verified scientific row")
     selected = matches[0]
-    if pin["selection_kind"] == "configured_standard" and not selected.get("attempt_ids"):
+    if pin["selection_kind"] in {"configured_standard", "current_measurement"} and not selected.get("attempt_ids"):
         raise ValueError("current family selection requires ordinary measured evidence")
     required = {assignment["task"] for assignment in load_view(root, view_id).get("assignments", [])
                 if assignment["importance"] == "required" and assignment["qualification_tier"] == 1}
@@ -81,7 +103,30 @@ def _current_pin(root, family_id, rows, pin, *, view_id):
                  and len(statuses) == len(tasks))
     if pin["selection_kind"] == "configured_standard" and not qualified:
         raise ValueError("configured family standard requires every required Tier 1 task to PASS")
-    return selected, {"selection_kind": pin["selection_kind"], "qualified": qualified,
+    measurement = {}
+    if pin["selection_kind"] == "current_measurement":
+        required_measurements = {assignment["task"] for name in pin["measurement_views"]
+                                 for assignment in load_view(root, name)["assignments"]
+                                 if assignment["importance"] == "required" and assignment["qualification_tier"] == 1}
+        required_measurements.update(pin.get("measurement_tasks", []))
+        measured = selected.get("tasks", []) + selected.get("nonrequired_tasks", [])
+        observed = {task["task_id"]: task["status"] for task in measured}
+        if (not required_measurements or len(observed) != len(measured)
+                or any(observed.get(task) not in {"PASS", "FAIL"} for task in required_measurements)):
+            raise ValueError("current measurement requires every required Tier 1 task in its measurement views to be PASS or FAIL")
+        for name in required_measurements:
+            task = read_json(Path(root) / "configs/forge/tasks" / (name + ".json"))
+            digest = selected.get("bindings", {}).get("task_contracts", {}).get(name)
+            contract = catalogs.get("task_contracts", {}).get(digest, {})
+            if (contract.get("execution_sha256") != task_execution_fingerprint(task)
+                    or contract.get("evaluation_sha256") != task_evaluation_fingerprint(task)
+                    or contract.get("timeout_seconds") != task["resources"]["timeout_seconds"]):
+                raise ValueError("current measurement requires current execution, evaluation and budget contracts")
+        measurement = {"measurement_views": pin["measurement_views"], "measurement_complete": True,
+                       "measured_required_tasks": sorted(required_measurements)}
+        if pin.get("measurement_tasks"):
+            measurement["measurement_tasks"] = pin["measurement_tasks"]
+    return selected, {"selection_kind": pin["selection_kind"], "qualified": qualified, **measurement,
                       "default_adoption": False, "reason": pin["reason"],
                       "selection_card": CURRENT_SELECTION.as_posix(),
                       "comparison_claim": "No ranking across incompatible source or runtime cohorts.",
@@ -120,21 +165,52 @@ def load_families(root: Path | str) -> dict:
                 raise ValueError("family active search backend must be cpu or cuda")
             identifier(study, "family active search study")
         result[name] = deepcopy(family)
+    historical = registry.get("historical_families", [])
+    if not isinstance(historical, list):
+        raise ValueError("historical trainer families must be a list")
+    historical_ids = [identifier(family.get("id"), "historical trainer family") for family in historical]
+    if len(set(historical_ids)) != len(historical_ids) or set(historical_ids) & result.keys():
+        raise ValueError("historical trainer family identities must be distinct")
+    referenced = []
+    for family in result.values():
+        aliases = family.get("historical_family_ids", [])
+        if not isinstance(aliases, list) or len(set(aliases)) != len(aliases) or set(aliases) - set(historical_ids):
+            raise ValueError("trainer family aliases require exact registered historical identities")
+        referenced.extend(aliases)
+        for previous in historical:
+            if previous["id"] in aliases and not set(previous.get("candidates", [])) <= set(family["candidates"]):
+                raise ValueError("historical family members must remain in their current solution family")
+    if len(set(referenced)) != len(referenced):
+        raise ValueError("historical trainer family cannot belong to multiple solution families")
     return result
 
 
 def family_for_candidate(root: Path | str, candidate_id: str, declaration: dict | None = None,
                          *, current_presentation: bool = False) -> dict:
     families = load_families(root)
+    historical = (read_json(Path(root) / REGISTRY).get("historical_families", [])
+                  if (Path(root) / REGISTRY).is_file() else [])
+    historical_by_id = {family["id"]: family for family in historical}
     for family in families.values():
         members = family["candidates"] + (family.get("current_presentation_candidates", [])
                                            if current_presentation else [])
         if candidate_id in members:
-            if declaration and declaration.get("trainer_family", family["id"]) != family["id"]:
+            explicit = (declaration or {}).get("trainer_family")
+            aliases = family.get("historical_family_ids", [])
+            if explicit is not None and explicit not in [family["id"], *aliases]:
                 raise ValueError("candidate trainer_family contradicts its explicit registry")
+            if not current_presentation and explicit != family["id"]:
+                for name in aliases:
+                    previous = historical_by_id[name]
+                    if candidate_id in previous["candidates"]:
+                        return deepcopy(previous)
             return family
     explicit = (declaration or {}).get("trainer_family")
     if explicit is not None:
+        if explicit in historical_by_id:
+            if not current_presentation:
+                return deepcopy(historical_by_id[explicit])
+            return next(family for family in families.values() if explicit in family.get("historical_family_ids", []))
         if explicit not in families:
             raise ValueError(f"unregistered trainer family {explicit}")
         return families[explicit]
@@ -181,7 +257,11 @@ def _search_pin(root, family_id, backend, rows, declarations, catalogs, *, view_
     paths = set((Path(root) / "reports/forge/configuration-search").glob("*.json"))
     paths.update(Path(root) / card["search_report"] for card in declarations.values()
                  if card.get("trainer_family") == family_id and isinstance(card.get("search_report"), str))
-    active = load_families(root).get(family_id, {}).get("active_search_by_backend", {}).get(backend)
+    registry = load_families(root)
+    registry_path = Path(root) / REGISTRY
+    if registry_path.is_file():
+        registry.update({family["id"]: family for family in read_json(registry_path).get("historical_families", [])})
+    active = registry.get(family_id, {}).get("active_search_by_backend", {}).get(backend)
     if active is None:
         return None
     pins = []
@@ -319,7 +399,8 @@ def _search_pin(root, family_id, backend, rows, declarations, catalogs, *, view_
 
 def select_family_rows(root: Path | str, rows: list[dict], catalogs: dict, *, view_id: str,
                        policy_fingerprint: str, declarations: dict | None = None,
-                       view_policy: dict | None = None, execution_backend: str | None = None) -> dict:
+                       view_policy: dict | None = None, execution_backend: str | None = None,
+                       historical_rows: list[dict] | None = None) -> dict:
     """Choose one current whole row per family; archived policies retain cohorts."""
     if view_policy is not None and (view_policy.get("id") != view_id
                                     or stable_hash(view_policy) != policy_fingerprint):
@@ -357,7 +438,7 @@ def select_family_rows(root: Path | str, rows: list[dict], catalogs: dict, *, vi
         if use_explicit:
             if family_id in selected_families:
                 continue
-            selected, metadata = _current_pin(root, family_id, all_alternatives, explicit, view_id=view_id)
+            selected, metadata = _current_pin(root, family_id, all_alternatives, explicit, view_id=view_id, catalogs=catalogs)
             alternatives = all_alternatives
         else:
             if view_policy is None and family_id in selected_families:
@@ -388,4 +469,26 @@ def select_family_rows(root: Path | str, rows: list[dict], catalogs: dict, *, vi
                                         if row["comparison_cohort"] == selected["comparison_cohort"] else "archived_alternative")
     selected_rows.sort(key=lambda row: (-row.get("qualified_tier", 0), row["technique"],
                                         row.get("runtime_cohort", {}).get("execution_backend", "")))
-    return {"rows": selected_rows, "configuration_rows": variants, "trainer_families": families}
+    result = {"rows": selected_rows, "configuration_rows": variants, "trainer_families": families}
+    selection_path = Path(root) / CURRENT_SELECTION
+    if view_policy is None and selection_path.is_file():
+        history = []
+        for pin in read_json(selection_path).get("historical_selections", []):
+            matches = []
+            for original in rows + (historical_rows or []):
+                previous = deepcopy(original)
+                previous["trainer_family"] = pin["trainer_family"]
+                if family_row_pin(previous, selection_kind=pin["selection_kind"], reason=pin["reason"]) == pin:
+                    matches.append(previous)
+            if len(matches) != 1:
+                raise ValueError("historical family page must match one exact verified scientific row")
+            previous = matches[0]
+            family = family_for_candidate(root, previous["candidate_id"], {"trainer_family": pin["trainer_family"]})
+            if family["id"] != pin["trainer_family"]:
+                raise ValueError("historical family page needs its original registered family")
+            previous.update(technique=family["label"], selection={"selection_kind": "historical_incumbent",
+                            "reason": pin["reason"], "qualified": False, "default_adoption": False})
+            history.append(previous)
+        if history:
+            result["historical_family_rows"] = history
+    return result

@@ -217,7 +217,7 @@ def test_one_table_context_preserves_historical_and_all_ordinary_values(tmp_path
     text = renderer._current_markdown(report, tmp_path, tmp_path / "reports/forge/technique-inventory.md")
     table = [line for line in text.splitlines() if line.startswith("|")]
     assert text.count("| Family / view | Tier 1 | Tier 2 | Tier 3 | Total |") == 1
-    assert len([line for line in table if line.startswith("| **[")]) == 12
+    assert len([line for line in table if line.startswith("| **[")]) == 11
     assert "19/19" not in text and "5/19 PASS" not in text
     fresh = report["original_pr223_atlas"]["fresh_retest"]
     assert fresh["counts"] == {"PASS": 5, "NOT_RUN": 14} and fresh["status"] == "INCOMPLETE"

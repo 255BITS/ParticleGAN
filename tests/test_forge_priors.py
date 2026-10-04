@@ -90,6 +90,23 @@ def test_prior_change_changes_execution_identity_without_mutating_declaration():
     assert task_execution_fingerprint(value) != task_execution_fingerprint(original)
 
 
+@pytest.mark.parametrize("prior,expected", [(MOG, MoGParticlePrior), (PARTICLES, ParticlePrior)])
+def test_released_gan_v3_task_adaptation_uses_the_experiment_prior(prior, expected):
+    """One released trainer card works with both public prior implementations."""
+    candidate = json.loads((ROOT / "configs/forge/ideas/release07-gan-v3-task-adapted-v1.json").read_text())
+    value = task()
+    value["execution"]["host_definition"].update(particles=12, z_dim=2, batch=4)
+    value["execution"]["prior"] = deepcopy(prior)
+    value["requires_capabilities"] = ["mog_prior" if expected is MoGParticlePrior else "particle_cloud"]
+    before = deepcopy(candidate)
+    context = _context(dict(candidate=candidate, protocol=dict(seed=0)), value, "cpu",
+                       dict(num_particles=12, z_dim=2, batch_size=4))
+    assert type(context.build_prior()) is expected
+    assert context.recipe.batch_size == 4 and context.recipe.num_particles == 12
+    assert context.receipt()["prior"] == prior
+    assert candidate == before
+
+
 def test_frozen_behavior_host_cannot_claim_a_different_prior_code_path():
     value = json.loads((ROOT / "configs/forge/tasks/trajectory.json").read_text())
     value["execution"]["prior"] = deepcopy(MOG)

@@ -185,10 +185,12 @@ def build_progress(root: Path, publication: dict) -> dict:
                 and any(a["importance"] == "required" for a in view["assignments"])]
     diagnostics = [view for view in views if view not in ordinary]
     families = {}
-    for row_index, selected in enumerate(publication["rows"]):
+    selected_rows = publication["rows"] + publication.get("historical_family_rows", [])
+    for row_index, selected in enumerate(selected_rows):
         family_id = identifier(selected.get("trainer_family", selected["candidate_id"]), "trainer family")
         family = families.setdefault(family_id, {"id": family_id, "label": selected["technique"],
-                                                "page": (FAMILY_DIRECTORY / (family_id + ".md")).as_posix(), "cohorts": []})
+                                                "page": (FAMILY_DIRECTORY / (family_id + ".md")).as_posix(), "cohorts": [],
+                                                "historical_only": row_index >= len(publication["rows"])})
         backend = selected.get("runtime_cohort", {}).get("execution_backend", "unrecorded")
         cohort_anchor = "cohort-" + backend + "-" + stable_hash(selected.get("runtime_cohort", {}))[:12]
         if any(cohort["anchor"] == cohort_anchor for cohort in family["cohorts"]):
@@ -221,17 +223,37 @@ def build_progress(root: Path, publication: dict) -> dict:
             contract = publication.get("task_contracts", {}).get(contract_hash, {})
             task = tasks.get(name, {})
             match = "unbound"
+            changed = []
             if task and contract:
-                match = "matches" if (contract.get("execution_sha256") == task_execution_fingerprint(task)
-                                      and contract.get("evaluation_sha256") == task_evaluation_fingerprint(task)
-                                      and contract.get("timeout_seconds") == task.get("resources", {}).get("timeout_seconds")) else "CHANGED"
+                if contract.get("execution_sha256") != task_execution_fingerprint(task):
+                    changed.append("execution (host, recipe binding, prior, initialization or budget)")
+                if contract.get("evaluation_sha256") != task_evaluation_fingerprint(task):
+                    changed.append("evaluation (gates or sampling law)")
+                if contract.get("timeout_seconds") != task.get("resources", {}).get("timeout_seconds"):
+                    changed.append("timeout reservation")
+                match = "CHANGED" if changed else "matches"
             receipt = receipts.get(name, {})
             reasons = publication.get("status_reasons", {}).get(previous.get("reasons_sha256"), [])
+            status = previous.get("status", "UNKNOWN")
+            reason = ("; ".join(previous.get("reasons", reasons)) or previous.get("reason")
+                      or receipt.get("result", {}).get("reason"))
+            if not reason:
+                reason = ("; ".join(selected.get("blockers", [])) if status == "BLOCKED" else None)
+            reason = reason or {"UNKNOWN": "No recorded result for this selected configuration and source.",
+                                "NOT_RUN": "This task was not executed for the selected configuration and source.",
+                                "BLOCKED": "The frozen selected cohort lacks task support; no scientific measurement was admitted.",
+                                "INVALID": "The recorded execution violated its frozen contract; it supplies no valid measurement.",
+                                "INCOMPLETE": "The recorded execution or required observations did not complete."}.get(
+                                    status, "Recorded scientific gate " + status + ".")
+            coverage = ("Current coverage is stale: changed " + "; ".join(changed) + "." if changed else
+                        "No recorded task contract binds this cell to the current declaration." if match == "unbound" else
+                        "Current task contract matches the recorded conditions.")
             results[name] = {"task_id": name, "status": previous.get("status", "UNKNOWN"),
                              "current_contract": match, "receipt": receipt.get("path"),
                              "metrics": deepcopy(receipt.get("result", {})), "recorded_contract": contract_hash,
-                             "reason": "; ".join(previous.get("reasons", reasons)) or previous.get("reason")
-                                       or receipt.get("result", {}).get("reason") or "No recorded result for this selected configuration."}
+                             "reason": reason, "coverage_reason": coverage, "changed_contract_fields": changed,
+                             "device": receipt.get("result", {}).get("device", receipt.get("result", {}).get("cost", {}).get("device")),
+                             "policy_parent": deepcopy(task.get("policy_parent"))}
 
         def view_row(view):
             tiers = {}
@@ -251,7 +273,9 @@ def build_progress(root: Path, publication: dict) -> dict:
     first_full_atlas = _full_original_atlas_first_case(root, load)
     progress = {"schema_version": 1, "scope": "recorded_view_progress", "qualification_input": False,
                 "qualification_reuse": False, "views": views, "diagnostic_views": [view["id"] for view in diagnostics],
-                "families": list(families.values()), "input_hashes": dict(sorted(inputs.items())),
+                "families": [family for family in families.values() if not family["historical_only"]],
+                "historical_families": [family for family in families.values() if family["historical_only"]],
+                "input_hashes": dict(sorted(inputs.items())),
                 "renderer_sha256": file_hash(Path(__file__))}
     if first_full_atlas is not None:
         progress["full_original_atlas_common26"] = first_full_atlas
@@ -284,14 +308,17 @@ def render_leaderboard(root: Path, publication: dict, page: Path) -> str:
              *_full_original_atlas_status(root, page, progress), *_table_header()]
     for family in progress["families"]:
         for cohort in family["cohorts"]:
-            name = family["label"] + " (" + cohort["backend"] + ")"
+            name = family["label"]
+            if cohort["backend"] != "cuda" or len(family["cohorts"]) > 1:
+                name += " (" + cohort["backend"] + ")"
             cells = ["**" + link(root, page, name, family["page"], cohort["anchor"]) + "**"]
             cells += _score_cells(root, page, family, cohort, cohort, bold=True)
             lines.append("| " + " | ".join(cells) + " |")
             for view in cohort["views"]:
                 label = "↳ " + link(root, page, view["id"], family["page"], cohort["anchor"] + "-" + view["id"])
                 lines.append("| " + " | ".join([label, *_score_cells(root, page, family, cohort, view, view_id=view["id"])]) + " |")
-    lines += ["", r"\* indicates incomplete results. Missing, blocked, invalid or incomplete results and changed/unbound "
+    lines += ["", "Runtime cohorts and actual per-task devices are recorded on the family pages and in receipt provenance.", "",
+              r"\* indicates incomplete results. Missing, blocked, invalid or incomplete results and changed/unbound "
               "current contracts receive (*). Zero recorded passes always displays as 0, including unrun families.", "",
               "Counts retain recorded verdicts under their original recipe, prior, initialization, budget, serving law "
               "and source. Changed current contracts are identified on the family pages; recorded passes grant no "
@@ -343,10 +370,14 @@ def render_family(root: Path, publication: dict, family: dict) -> str:
              link(root, page, "← Family leaderboard", "reports/forge/technique-inventory.md"), "",
              "Generated from one selected configuration per runtime. Recorded verdicts retain their original scientific "
              "contracts; grouping them under current views grants no new qualification.", ""]
+    if family.get("historical_only"):
+        lines += ["**Historical cohort navigation.** This original recipe/prior row is retained for existing links. " +
+                  link(root, page, "Current GAN v3 solution family", FAMILY_DIRECTORY / "release07-gan-v3.md") +
+                  " uses one whole selected configuration and task-declared priors; these historical cells are not pooled into it.", ""]
     if family["id"] == "atlas":
         lines += _full_original_atlas_status(root, page, progress)
     for cohort in family["cohorts"]:
-        row = publication["rows"][cohort["row_index"]]
+        row = (publication["rows"] + publication.get("historical_family_rows", []))[cohort["row_index"]]
         base = cohort["anchor"]
         config = Path("configs/forge/configurations") / (row["candidate_id"] + ".json")
         if not (root / config).is_file():
@@ -368,6 +399,12 @@ def render_family(root: Path, publication: dict, family: dict) -> str:
                   "Selection: " + cell(row.get("selection", {}).get("selection_kind", "canonical fallback")) + ". " +
                   cell(row.get("selection", {}).get("reason", "No qualified configuration has been selected.")), "",
                   "</details>", "", *_table_header()]
+        if row.get("selection", {}).get("measurement_complete"):
+            lines[-2:-2] = ["Complete current Tier 1 measurement in: " +
+                            ", ".join(row["selection"]["measurement_views"]) +
+                            ("; additional scoped probes: " + ", ".join(row["selection"]["measurement_tasks"])
+                             if row["selection"].get("measurement_tasks") else "") +
+                            ". PASS and FAIL are both measured outcomes; other cohorts retain their own required cells.", ""]
         for view in cohort["views"]:
             lines.append("| " + " | ".join([link(root, page, view["id"], family["page"], base + "-" + view["id"]),
                                             *_score_cells(root, page, family, cohort, view, view_id=view["id"])]) + " |")
@@ -434,7 +471,17 @@ def render_family(root: Path, publication: dict, family: dict) -> str:
             task = read_json(root / task_path) if (root / task_path).is_file() else {}
             lines += [*_heading(3, name, base + "-experiment-" + name), f"**{name}: {result['status']}**. " +
                       _existing_link(root, page, "Current experiment declaration", task_path) + ".", "",
-                      "Current contract: **" + result["current_contract"] + "**. " + cell(result["reason"]), ""]
+                      "Current contract: **" + result["current_contract"] + "**. " + cell(result["coverage_reason"]) +
+                      " " + cell(result["reason"]), ""]
+            if result["device"]:
+                lines += ["Actual task device: `" + cell(result["device"]) + "` (recorded execution receipt).", ""]
+            if result["policy_parent"]:
+                parent = result["policy_parent"]
+                parent_id = parent.get("id", "unbound")
+                lines += ["Policy-cohort variant of " + _existing_link(root, page, parent_id,
+                           Path("configs/forge/tasks") / (parent_id + ".json")) +
+                          "; parent task SHA256 `" + cell(parent.get("task_sha256")) +
+                          "`. This measurement supplies no cells to the parent clean cohort.", ""]
             memberships = [link(root, page, view["id"] + " / Tier " + str(a["qualification_tier"]), family["page"],
                                 base + "-" + view["id"] + "-tier-" + str(a["qualification_tier"]))
                            for view in progress["views"] for a in view["assignments"] if a["task"] == name]
@@ -483,6 +530,10 @@ def render_family(root: Path, publication: dict, family: dict) -> str:
                 lines += [_existing_link(root, page, "Explanation and existing training artifacts", explanation), ""]
     lines += ["## Historical and diagnostic evidence", "",
               "Separate configurations, API variants and serving laws retain their own scopes and supply no cells above.", ""]
+    if family["id"] == "release07-gan-v3":
+        for previous in progress.get("historical_families", []):
+            if previous["id"].startswith("release07-gan-v3-"):
+                lines.append("- " + link(root, page, previous["label"] + " original cohort", previous["page"]))
     if family["id"] == "atlas":
         original = publication.get("original_pr223_atlas", {})
         for label, record in [("Original Atlas recipe and serving-law evidence", original), *[(name, original.get(name, {})) for name in
@@ -517,4 +568,5 @@ def render_family(root: Path, publication: dict, family: dict) -> str:
 
 def generated_pages(root: Path, publication: dict) -> dict[Path, str]:
     return {root / family["page"]: render_family(root, publication, family)
-            for family in publication["family_progress"]["families"]}
+            for family in (publication["family_progress"]["families"] +
+                           publication["family_progress"].get("historical_families", []))}

@@ -77,26 +77,19 @@
       "rationale": "Policy-aware Atlas formulation; unsupported frozen hosts remain blocked."
     },
     {
-      "id": "release07-gan-v3-mog",
-      "label": "GAN v3 release 0.7 (MoG)",
+      "id": "release07-gan-v3",
+      "label": "GAN v3 release 0.7",
       "canonical_candidate": "release07-gan-v3-task-adapted-v1",
       "candidates": [
         "release07-gan-v3-task-adapted-v1",
-        "release07-gan-v3-mog-v1"
-      ],
-      "rationale": "The explicit task adaptation is the runnable MoG configuration. The earlier host-incompatible MoG card stays an archived alternative, with its original source and blockers.",
-      "active_search_by_backend": {
-        "cuda": "release07-gan-v3-mog-tier1-refresh-v1"
-      }
-    },
-    {
-      "id": "release07-gan-v3-cloud",
-      "label": "GAN v3 release 0.7 (cloud)",
-      "canonical_candidate": "release07-gan-v3-cloud-v1",
-      "candidates": [
+        "release07-gan-v3-mog-v1",
         "release07-gan-v3-cloud-v1"
       ],
-      "rationale": "Particle-cloud prior and host law are separate from the learned-MoG family."
+      "historical_family_ids": [
+        "release07-gan-v3-mog",
+        "release07-gan-v3-cloud"
+      ],
+      "rationale": "One released GAN v3 solution family. The reusable task-adapted card delegates host resources and uses each task-declared prior. Historical MoG and cloud cards retain their exact recipe, prior, source, serving and qualification identities; alternative evidence never fills selected-row cells."
     },
     {
       "id": "k3p-no-anchor",
@@ -133,6 +126,30 @@
         "k3p-no-output-noise-diagnostic"
       ],
       "rationale": "Removing training output noise changes the training law and remains a separate technique."
+    }
+  ],
+  "historical_families": [
+    {
+      "id": "release07-gan-v3-mog",
+      "label": "GAN v3 release 0.7 (MoG)",
+      "canonical_candidate": "release07-gan-v3-task-adapted-v1",
+      "candidates": [
+        "release07-gan-v3-task-adapted-v1",
+        "release07-gan-v3-mog-v1"
+      ],
+      "rationale": "The explicit task adaptation is the runnable MoG configuration. The earlier host-incompatible MoG card stays an archived alternative, with its original source and blockers.",
+      "active_search_by_backend": {
+        "cuda": "release07-gan-v3-mog-tier1-refresh-v1"
+      }
+    },
+    {
+      "id": "release07-gan-v3-cloud",
+      "label": "GAN v3 release 0.7 (cloud)",
+      "canonical_candidate": "release07-gan-v3-cloud-v1",
+      "candidates": [
+        "release07-gan-v3-cloud-v1"
+      ],
+      "rationale": "Particle-cloud prior and host law are separate from the learned-MoG family."
     }
   ]
 }

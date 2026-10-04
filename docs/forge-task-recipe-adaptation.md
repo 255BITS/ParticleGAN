@@ -6,6 +6,22 @@ settings available across Forge's ordinary toy hosts. Its parent,
 its original failures and smoke blockers. The successor does not replace or
 qualify that evidence.
 
+The current inventory groups these cards under **GAN v3 release 0.7**, one
+solution family with `release07-gan-v3-task-adapted-v1` as its forward default.
+MoG and particle cloud are task conditions: `execution.prior` selects the actual
+public prior implementation. A candidate cannot replace that declaration.
+Historical MoG/cloud names, source bindings and verdicts remain available on
+their original family pages; their results never contribute individual cells to
+the selected configuration. CUDA labels are omitted from the overview when the
+runtime is unambiguous; runtime cohorts and actual task devices stay in receipts.
+
+`current_measurement` selections pin one complete scientific row and explicitly
+name `measurement_views` plus any additional scoped `measurement_tasks`.
+Every required Tier 1 measurement must be PASS or FAIL with matching current
+execution, evaluation and timeout contracts. This establishes measured coverage;
+it does not make a failing configuration qualified or adopt public defaults.
+`configured_standard` still requires every ordinary Tier 1 gate to pass.
+
 The new card retains the parent's complete reference `recipe_overrides` and
 adds an opt-in `host_adaptation` contract:
 
@@ -75,3 +91,21 @@ qualification across cohorts. No versioned leaderboard files are created.
 Raw execution envelopes, per-update streams and source snapshots remain under
 ignored `runs/forge/` or an artifact archive. Commit the compact readout, final
 metrics, archive manifest and publication summaries.
+
+When a completed measurement advances the view policy, update the whole-row
+selection and register its source together:
+
+1. Reconstruct the exact executed source with `technique_board.regenerate`, using
+   `execution_backend="cuda"`, `source_commit=<executed commit>` and an output
+   prefix under ignored `runs/forge/`. This reports evidence without registering
+   it or launching training.
+2. Build pins from those complete rows, using each candidate's current solution
+   family. Set the selection card's policy fingerprint to the reconstructed
+   report. Use `current_measurement` with explicit views/scoped probes for fully
+   measured rows; retain unsupported parent rows as exact `historical_incumbent`
+   selections from this source. Keep `historical_selections` unchanged.
+3. Run `python reports/forge/regenerate_technique_inventory.py --source-commit
+   <executed commit> --device cuda --advance-policy`. The publisher validates the
+   new pins against the pending snapshot before writing. Do not refresh between
+   changing the pins and this registration; the old publication still binds its
+   earlier policy. Original numerical snapshots remain archived without regrade.

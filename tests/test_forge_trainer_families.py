@@ -229,13 +229,14 @@ def test_hardware_and_cpu_cuda_families_stay_separate(study):
     assert sum(row["selection"]["selection_kind"] == "best_observed" for row in result["rows"]) == 1
 
 
-def current_pin(study, row, *, kind="historical_incumbent"):
+def current_pin(study, row, *, kind="historical_incumbent", measurement_views=None, measurement_tasks=None):
     root, _, _, _, _, policy = study
     row = deepcopy(row)
     row["trainer_family"] = "r1r2"
     card = {"schema_version": 1, "scope": "whole_candidate_family_current", "default_adoption": False,
             "view": "discriminator_stability", "policy_fingerprint": policy,
-            "selections": [families.family_row_pin(row, selection_kind=kind, reason="Explicit whole-row choice.")]}
+            "selections": [families.family_row_pin(row, selection_kind=kind, reason="Explicit whole-row choice.",
+                                                    measurement_views=measurement_views, measurement_tasks=measurement_tasks)]}
     atomic_json(root / families.CURRENT_SELECTION, card)
     return card
 
@@ -327,10 +328,110 @@ def test_current_only_task_history_membership_preserves_recorded_family_identity
     assert families.family_for_candidate(ROOT, "five-word-joint-ka2-v1")["id"] == "five-word-joint-ka2-v1"
 
 
-def test_registry_keeps_modern_baseline_canonical_and_cloud_ablation_families_separate():
+def test_registry_groups_gan_v3_task_priors_and_keeps_original_historical_identities():
     registry = families.load_families(ROOT)
-    assert len(registry) == 12
+    assert len(registry) == 11
     assert registry["r1r2"]["canonical_candidate"] == "r3gan-stacked-training-toy-v1"
     assert families.family_for_candidate(ROOT, "k3p-r1r2-matched-v1")["id"] == "r1r2"
     assert families.family_for_candidate(ROOT, "release07-gan-v3-cloud-v1")["id"] != families.family_for_candidate(ROOT, "release07-gan-v3-task-adapted-v1")["id"]
+    for candidate in ("release07-gan-v3-cloud-v1", "release07-gan-v3-mog-v1", "release07-gan-v3-task-adapted-v1"):
+        assert families.family_for_candidate(ROOT, candidate, current_presentation=True)["id"] == "release07-gan-v3"
+    assert registry["release07-gan-v3"]["canonical_candidate"] == "release07-gan-v3-task-adapted-v1"
     assert families.family_for_candidate(ROOT, "forge-no-critic-penalty")["id"] != families.family_for_candidate(ROOT, "k3p")["id"]
+
+
+def test_current_measurement_accepts_failures_without_qualification_and_requires_current_contracts(study):
+    from experiments.forge.views import task_execution_fingerprint, task_evaluation_fingerprint
+    root, rows, catalogs, _, _, _ = study
+    selected = rows[0]
+    selected["attempt_ids"] = ["ordinary-attempt"]
+    required = {assignment["task"] for assignment in read_json(root / "configs/forge/views/discriminator_stability.json")["assignments"]
+                if assignment["qualification_tier"] == 1 and assignment["importance"] == "required"}
+    for name in required:
+        task = read_json(root / "configs/forge/tasks" / (name + ".json"))
+        contract = {"execution_sha256": task_execution_fingerprint(task),
+                    "evaluation_sha256": task_evaluation_fingerprint(task),
+                    "timeout_seconds": task["resources"]["timeout_seconds"]}
+        digest = stable_hash(contract)
+        selected["bindings"]["task_contracts"][name] = digest
+        catalogs["task_contracts"][digest] = contract
+    current_pin(study, selected, kind="current_measurement", measurement_views=["discriminator_stability"])
+    result = select(study)
+    metadata = result["rows"][0]["selection"]
+    assert metadata["measurement_complete"] is True and metadata["qualified"] is False
+    assert metadata["measured_required_tasks"] == sorted(required)
+    first = next(task for task in selected["tasks"] if task["task_id"] in required)
+    first["status"] = "UNKNOWN"
+    current_pin(study, selected, kind="current_measurement", measurement_views=["discriminator_stability"])
+    with pytest.raises(ValueError, match="every required Tier 1 task"):
+        select(study)
+    first["status"] = "FAIL"
+    digest = selected["bindings"]["task_contracts"][first["task_id"]]
+    catalogs["task_contracts"][digest]["evaluation_sha256"] = "old-law"
+    current_pin(study, selected, kind="current_measurement", measurement_views=["discriminator_stability"])
+    with pytest.raises(ValueError, match="current execution, evaluation and budget"):
+        select(study)
+
+
+def test_current_measurement_requires_explicit_views_and_additional_probe(study):
+    selected = study[1][0]
+    selected["attempt_ids"] = ["ordinary-attempt"]
+    current_pin(study, selected, kind="current_measurement")
+    with pytest.raises(ValueError, match="explicit distinct measurement views"):
+        select(study)
+    current_pin(study, selected, kind="current_measurement", measurement_views=["discriminator_stability"],
+                measurement_tasks=["clockfree_audit"])
+    with pytest.raises(ValueError, match="every required Tier 1 task"):
+        select(study)
+
+
+def test_prior_family_regrouping_selects_one_whole_row_without_borrowing(study):
+    root, rows, catalogs, cards, _, policy = study
+    selected, alternative = deepcopy(rows[0]), deepcopy(rows[1])
+    selected.update(candidate_id="release07-gan-v3-task-adapted-v1", trainer_family="release07-gan-v3")
+    alternative.update(candidate_id="release07-gan-v3-cloud-v1", trainer_family="release07-gan-v3")
+    alternative["tasks"][0]["status"] = "PASS"
+    for row in (selected, alternative):
+        cards[row["candidate_id"]] = read_json(root / "configs/forge/ideas" / (row["candidate_id"] + ".json"))
+    card = {"schema_version": 1, "scope": "whole_candidate_family_current", "default_adoption": False,
+            "view": "discriminator_stability", "policy_fingerprint": policy,
+            "selections": [families.family_row_pin(selected, selection_kind="historical_incumbent", reason="Whole source.")]}
+    atomic_json(root / families.CURRENT_SELECTION, card)
+    result = families.select_family_rows(root, [selected, alternative], catalogs, declarations=cards,
+                                        view_id="discriminator_stability", policy_fingerprint=policy)
+    assert len(result["rows"]) == 1
+    assert result["rows"][0]["tasks"] == selected["tasks"]
+    assert result["rows"][0]["tasks"][0]["status"] == "FAIL"
+    assert result["configuration_rows"][1]["tasks"][0]["status"] == "PASS"
+
+
+def test_original_prior_page_survives_in_archived_policy_without_filling_current_cells(study):
+    root, rows, catalogs, cards, _, policy = study
+    current, previous = deepcopy(rows[0]), deepcopy(rows[1])
+    current.update(candidate_id="release07-gan-v3-task-adapted-v1", trainer_family="release07-gan-v3")
+    previous.update(candidate_id="release07-gan-v3-cloud-v1", trainer_family="release07-gan-v3-cloud")
+    previous["tasks"][0]["status"] = "PASS"
+    previous["bindings"]["source_digest"] = "original-source"
+    cards[current["candidate_id"]] = read_json(root / "configs/forge/ideas" / (current["candidate_id"] + ".json"))
+    card = {"schema_version": 1, "scope": "whole_candidate_family_current", "default_adoption": False,
+            "view": "discriminator_stability", "policy_fingerprint": policy,
+            "selections": [families.family_row_pin(current, selection_kind="historical_incumbent", reason="Current whole source.")],
+            "historical_selections": [families.family_row_pin(previous, selection_kind="historical_incumbent", reason="Exact archive.")]}
+    atomic_json(root / families.CURRENT_SELECTION, card)
+    result = families.select_family_rows(root, [current], catalogs, declarations=cards,
+                                        view_id="discriminator_stability", policy_fingerprint=policy,
+                                        historical_rows=[previous])
+    assert result["rows"][0]["tasks"][0]["status"] == "FAIL"
+    assert families.scientific_row_hash(result["historical_family_rows"][0]) == families.scientific_row_hash(previous)
+
+
+def test_new_release_search_can_use_current_family_without_rewriting_old_search_ids(study):
+    root = study[0]
+    old = read_json(root / "configs/forge/searches/release07-gan-v3-mog-tier1-refresh-v1.json")
+    spec = {**old, "trainer_family": "release07-gan-v3"}
+    declarations = search._declarations(root, spec)
+    assert all(card["trainer_family"] == "release07-gan-v3" for card, _ in declarations)
+    assert all(card["id"].startswith("release07-gan-v3--") for card, _ in declarations)
+    for card, _ in declarations:
+        search.validate_configuration_declaration(card, root=root)
+    assert read_json(root / "configs/forge/searches" / (old["id"] + ".json")) == old

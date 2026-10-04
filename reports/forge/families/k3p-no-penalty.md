@@ -507,7 +507,7 @@ One evidence entry per experiment is shared by its view rows. CHANGED means the 
 
 **ae_gan_hold: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/ae_gan_hold.json).
 
-Current contract: **CHANGED**. no compatible result
+Current contract: **CHANGED**. Current coverage is stale: changed evaluation (gates or sampling law). no compatible result
 
 Used by: [adaptation / Tier 1](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-1) · [clockfree_continuous / Tier 1](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-1) · [discriminator_stability / Tier 1](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1) · [formulation_comparison / Tier 1](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-1) · [host_profile_transfer / Tier 1](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-1) · [quality_coverage / Tier 1](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-1).
 
@@ -534,7 +534,7 @@ Current measurement: mog prior (sigma 0.025); generated_and_reconstructed_prior_
 
 **clockfree_audit: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/clockfree_audit.json).
 
-Current contract: **unbound**. No recorded result for this selected configuration.
+Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
 
 Used by: [clockfree_continuous / Tier 1](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-1).
 
@@ -552,7 +552,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **cover_leftover: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/cover_leftover.json).
 
-Current contract: **CHANGED**. no compatible result
+Current contract: **CHANGED**. Current coverage is stale: changed evaluation (gates or sampling law). no compatible result
 
 Used by: [adaptation / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [clockfree_continuous / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2).
 
@@ -582,7 +582,7 @@ Current measurement: particle_cloud prior (sigma 0); learned_parameter_measureme
 
 **five_word_joint_acquisition: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/five_word_joint_acquisition.json).
 
-Current contract: **CHANGED**. no compatible result
+Current contract: **CHANGED**. Current coverage is stale: changed evaluation (gates or sampling law). no compatible result
 
 Used by: [discriminator_stability / Tier 1](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1).
 
@@ -615,7 +615,7 @@ Current measurement: particle_cloud prior (sigma 0); generated_and_paired_recons
 
 **gaussian1d_acquisition: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/gaussian1d_acquisition.json).
 
-Current contract: **unbound**. No recorded result for this selected configuration.
+Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
 
 Used by: [discriminator_stability / Tier 1](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1).
 
@@ -645,7 +645,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **grid100: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/grid100.json).
 
-Current contract: **matches**. no compatible result
+Current contract: **matches**. Current task contract matches the recorded conditions. no compatible result
 
 Used by: [adaptation / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [clockfree_continuous / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2).
 
@@ -684,7 +684,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **grid100_14k: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/grid100_14k.json).
 
-Current contract: **unbound**. No recorded result for this selected configuration.
+Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
 
 Used by: [clockfree_continuous / Tier 3](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-3).
 
@@ -723,7 +723,7 @@ Dependencies: grid100 (checkpoint), clockfree_audit (gate).
 
 **grid100_affine_paired_laws_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/grid100_affine_paired_laws_v1.json).
 
-Current contract: **unbound**. No recorded result for this selected configuration.
+Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
 
 Used by: [formulation_comparison / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2).
 
@@ -760,7 +760,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **grid100_affine_square_named_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/grid100_affine_square_named_v1.json).
 
-Current contract: **unbound**. No recorded result for this selected configuration.
+Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
 
 Used by: [formulation_comparison / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2).
 
@@ -797,7 +797,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **grid100_release07_cloud_named_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/grid100_release07_cloud_named_v1.json).
 
-Current contract: **unbound**. No recorded result for this selected configuration.
+Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
 
 Used by: [formulation_comparison / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2).
 
@@ -834,7 +834,7 @@ Current measurement: particle_cloud prior (sigma 0); public_prior_without_output
 
 **img_bars4: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/img_bars4.json).
 
-Current contract: **CHANGED**. no compatible result
+Current contract: **CHANGED**. Current coverage is stale: changed evaluation (gates or sampling law). no compatible result
 
 Used by: [adaptation / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [clockfree_continuous / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2).
 
@@ -860,7 +860,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 **img_bars4_residual16: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/img_bars4_residual16.json).
 
-Current contract: **unbound**. No recorded result for this selected configuration.
+Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
 
 Used by: [formulation_comparison / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2).
 
@@ -884,7 +884,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 **img_blobs4: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/img_blobs4.json).
 
-Current contract: **CHANGED**. no compatible result
+Current contract: **CHANGED**. Current coverage is stale: changed evaluation (gates or sampling law). no compatible result
 
 Used by: [adaptation / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [clockfree_continuous / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2).
 
@@ -910,7 +910,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 **img_blobs4_residual16: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/img_blobs4_residual16.json).
 
-Current contract: **unbound**. No recorded result for this selected configuration.
+Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
 
 Used by: [formulation_comparison / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2).
 
@@ -934,7 +934,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 **img_intensity2: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/img_intensity2.json).
 
-Current contract: **CHANGED**. no compatible result
+Current contract: **CHANGED**. Current coverage is stale: changed evaluation (gates or sampling law). no compatible result
 
 Used by: [adaptation / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [clockfree_continuous / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2).
 
@@ -960,7 +960,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 **img_intensity2_residual16: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/img_intensity2_residual16.json).
 
-Current contract: **unbound**. No recorded result for this selected configuration.
+Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
 
 Used by: [formulation_comparison / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2).
 
@@ -984,7 +984,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 **img_stripes2: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/img_stripes2.json).
 
-Current contract: **CHANGED**. no compatible result
+Current contract: **CHANGED**. Current coverage is stale: changed evaluation (gates or sampling law). no compatible result
 
 Used by: [adaptation / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [clockfree_continuous / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2).
 
@@ -1010,7 +1010,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 **img_stripes2_residual16: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/img_stripes2_residual16.json).
 
-Current contract: **unbound**. No recorded result for this selected configuration.
+Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
 
 Used by: [formulation_comparison / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2).
 
@@ -1034,7 +1034,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 **mid_scale_identity: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/mid_scale_identity.json).
 
-Current contract: **CHANGED**. no compatible result
+Current contract: **CHANGED**. Current coverage is stale: changed evaluation (gates or sampling law). no compatible result
 
 Used by: [adaptation / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [clockfree_continuous / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2).
 
@@ -1066,7 +1066,7 @@ Current measurement: particle_cloud prior (sigma 0); learned_parameter_measureme
 
 **mode_hold: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/mode_hold.json).
 
-Current contract: **CHANGED**. no compatible result
+Current contract: **CHANGED**. Current coverage is stale: changed evaluation (gates or sampling law). no compatible result
 
 Used by: [adaptation / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [clockfree_continuous / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2).
 
@@ -1092,7 +1092,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **residual_student: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/residual_student.json).
 
-Current contract: **CHANGED**. no compatible result
+Current contract: **CHANGED**. Current coverage is stale: changed evaluation (gates or sampling law). no compatible result
 
 Used by: [adaptation / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [clockfree_continuous / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2).
 
@@ -1119,7 +1119,7 @@ Current measurement: particle_cloud prior (sigma 0); conditional_prior_centers_w
 
 **ring16_acquisition: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/ring16_acquisition.json).
 
-Current contract: **CHANGED**. no compatible result
+Current contract: **CHANGED**. Current coverage is stale: changed evaluation (gates or sampling law). no compatible result
 
 Used by: [discriminator_stability / Tier 1](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1).
 
@@ -1149,7 +1149,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **ring_extension: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/ring_extension.json).
 
-Current contract: **matches**. no compatible result
+Current contract: **matches**. Current task contract matches the recorded conditions. no compatible result
 
 Used by: [clockfree_continuous / Tier 3](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-3) · [discriminator_stability / Tier 3](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-3) · [formulation_comparison / Tier 3](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-3) · [host_profile_transfer / Tier 3](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-3).
 
@@ -1179,7 +1179,7 @@ Dependencies: ring_hold (checkpoint).
 
 **ring_hold: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/ring_hold.json).
 
-Current contract: **matches**. no compatible result
+Current contract: **matches**. Current task contract matches the recorded conditions. no compatible result
 
 Used by: [clockfree_continuous / Tier 3](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-3) · [discriminator_stability / Tier 3](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-3) · [formulation_comparison / Tier 3](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-3) · [host_profile_transfer / Tier 3](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-3).
 
@@ -1209,7 +1209,7 @@ Dependencies: mode_hold (gate).
 
 **rotated100: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/rotated100.json).
 
-Current contract: **matches**. no compatible result
+Current contract: **matches**. Current task contract matches the recorded conditions. no compatible result
 
 Used by: [adaptation / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [clockfree_continuous / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2).
 
@@ -1248,7 +1248,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **rotated100_14k: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/rotated100_14k.json).
 
-Current contract: **unbound**. No recorded result for this selected configuration.
+Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
 
 Used by: [clockfree_continuous / Tier 3](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-3).
 
@@ -1287,7 +1287,7 @@ Dependencies: rotated100 (checkpoint), clockfree_audit (gate).
 
 **rotated100_affine_square_named_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/rotated100_affine_square_named_v1.json).
 
-Current contract: **unbound**. No recorded result for this selected configuration.
+Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
 
 Used by: [formulation_comparison / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2).
 
@@ -1324,7 +1324,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **staggered100: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/staggered100.json).
 
-Current contract: **matches**. no compatible result
+Current contract: **matches**. Current task contract matches the recorded conditions. no compatible result
 
 Used by: [adaptation / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [clockfree_continuous / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2).
 
@@ -1363,7 +1363,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **staggered100_14k: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/staggered100_14k.json).
 
-Current contract: **unbound**. No recorded result for this selected configuration.
+Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
 
 Used by: [clockfree_continuous / Tier 3](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-3).
 
@@ -1402,7 +1402,7 @@ Dependencies: staggered100 (checkpoint), clockfree_audit (gate).
 
 **staggered100_affine_square_named_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/staggered100_affine_square_named_v1.json).
 
-Current contract: **unbound**. No recorded result for this selected configuration.
+Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
 
 Used by: [formulation_comparison / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2).
 
@@ -1439,7 +1439,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **target_shift_recovery: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/target_shift_recovery.json).
 
-Current contract: **unbound**. No recorded result for this selected configuration.
+Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
 
 Used by: [adaptation / Tier 3](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-3) · [clockfree_continuous / Tier 3](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-3).
 
@@ -1460,7 +1460,7 @@ Dependencies: mode_hold (gate).
 
 **trajectory: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/trajectory.json).
 
-Current contract: **CHANGED**. no compatible result
+Current contract: **CHANGED**. Current coverage is stale: changed evaluation (gates or sampling law). no compatible result
 
 Used by: [adaptation / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [clockfree_continuous / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2).
 
@@ -1485,7 +1485,9 @@ Current measurement: particle_cloud prior (sigma 0); conditional_prior_centers_w
 
 **two_pole: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/two_pole.json).
 
-Current contract: **CHANGED**. recomputed complete live curve and terminal suffix
+Current contract: **CHANGED**. Current coverage is stale: changed evaluation (gates or sampling law). recomputed complete live curve and terminal suffix
+
+Actual task device: `cpu` (recorded execution receipt).
 
 Used by: [adaptation / Tier 1](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-1) · [clockfree_continuous / Tier 1](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-1) · [discriminator_stability / Tier 1](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1) · [formulation_comparison / Tier 1](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-1) · [host_profile_transfer / Tier 1](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-1) · [quality_coverage / Tier 1](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-1).
 
@@ -1523,7 +1525,7 @@ Current measurement: particle_cloud prior (sigma 0); learned_particles_and_criti
 
 **two_pole_800_schedule800_diagnostic_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/two_pole_800_schedule800_diagnostic_v1.json).
 
-Current contract: **unbound**. No recorded result for this selected configuration.
+Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
 
 Used by: [k3p_two_pole_horizon / Tier 1](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-k3p_two_pole_horizon-tier-1).
 
@@ -1550,7 +1552,7 @@ Current measurement: particle_cloud prior (sigma 0); learned_particles_and_criti
 
 **two_pole_800_schedule80_diagnostic_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/two_pole_800_schedule80_diagnostic_v1.json).
 
-Current contract: **unbound**. No recorded result for this selected configuration.
+Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
 
 Used by: [k3p_two_pole_horizon / Tier 1](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-k3p_two_pole_horizon-tier-1).
 
@@ -1577,7 +1579,7 @@ Current measurement: particle_cloud prior (sigma 0); learned_particles_and_criti
 
 **unipolar: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/unipolar.json).
 
-Current contract: **CHANGED**. no compatible result
+Current contract: **CHANGED**. Current coverage is stale: changed evaluation (gates or sampling law). no compatible result
 
 Used by: [adaptation / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [clockfree_continuous / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2).
 
@@ -1604,7 +1606,7 @@ Current measurement: particle_cloud prior (sigma 0); learned_parameter_measureme
 
 **unused_token_hold: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/unused_token_hold.json).
 
-Current contract: **CHANGED**. no compatible result
+Current contract: **CHANGED**. Current coverage is stale: changed evaluation (gates or sampling law). no compatible result
 
 Used by: [adaptation / Tier 1](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-1) · [clockfree_continuous / Tier 1](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-1) · [discriminator_stability / Tier 1](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1) · [formulation_comparison / Tier 1](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-1) · [host_profile_transfer / Tier 1](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-1) · [quality_coverage / Tier 1](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-1).
 
@@ -1631,7 +1633,7 @@ Current measurement: particle_cloud prior (sigma 0); learned_parameter_measureme
 
 **vector_anisotropic: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/vector_anisotropic.json).
 
-Current contract: **CHANGED**. no compatible result
+Current contract: **CHANGED**. Current coverage is stale: changed evaluation (gates or sampling law). no compatible result
 
 Used by: [adaptation / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [clockfree_continuous / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2).
 
@@ -1660,7 +1662,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_anisotropic_published: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/vector_anisotropic_published.json).
 
-Current contract: **unbound**. No recorded result for this selected configuration.
+Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
 
 Used by: [formulation_comparison / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2).
 
@@ -1687,7 +1689,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_overlap: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/vector_overlap.json).
 
-Current contract: **CHANGED**. no compatible result
+Current contract: **CHANGED**. Current coverage is stale: changed evaluation (gates or sampling law). no compatible result
 
 Used by: [adaptation / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [clockfree_continuous / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2).
 
@@ -1714,7 +1716,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_overlap_published: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/vector_overlap_published.json).
 
-Current contract: **unbound**. No recorded result for this selected configuration.
+Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
 
 Used by: [formulation_comparison / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2).
 
@@ -1739,7 +1741,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_spiral: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/vector_spiral.json).
 
-Current contract: **CHANGED**. no compatible result
+Current contract: **CHANGED**. Current coverage is stale: changed evaluation (gates or sampling law). no compatible result
 
 Used by: [adaptation / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [clockfree_continuous / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2).
 
@@ -1766,7 +1768,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_spiral_published: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/vector_spiral_published.json).
 
-Current contract: **unbound**. No recorded result for this selected configuration.
+Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
 
 Used by: [formulation_comparison / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2).
 
@@ -1791,7 +1793,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_two_broad: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/vector_two_broad.json).
 
-Current contract: **CHANGED**. no compatible result
+Current contract: **CHANGED**. Current coverage is stale: changed evaluation (gates or sampling law). no compatible result
 
 Used by: [adaptation / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [clockfree_continuous / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2).
 
@@ -1820,7 +1822,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_two_broad_published: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/vector_two_broad_published.json).
 
-Current contract: **unbound**. No recorded result for this selected configuration.
+Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
 
 Used by: [formulation_comparison / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2).
 
@@ -1847,7 +1849,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_unequal_mass: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/vector_unequal_mass.json).
 
-Current contract: **CHANGED**. no compatible result
+Current contract: **CHANGED**. Current coverage is stale: changed evaluation (gates or sampling law). no compatible result
 
 Used by: [adaptation / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [clockfree_continuous / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2).
 
@@ -1877,7 +1879,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_unequal_mass_published: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/vector_unequal_mass_published.json).
 
-Current contract: **unbound**. No recorded result for this selected configuration.
+Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
 
 Used by: [formulation_comparison / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2).
 
@@ -1905,7 +1907,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_unequal_width: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/vector_unequal_width.json).
 
-Current contract: **CHANGED**. no compatible result
+Current contract: **CHANGED**. Current coverage is stale: changed evaluation (gates or sampling law). no compatible result
 
 Used by: [adaptation / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [clockfree_continuous / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2).
 
@@ -1934,7 +1936,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_unequal_width_published: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/vector_unequal_width_published.json).
 
-Current contract: **unbound**. No recorded result for this selected configuration.
+Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
 
 Used by: [formulation_comparison / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](k3p-no-penalty.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2).
 
