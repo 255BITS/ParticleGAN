@@ -1030,6 +1030,9 @@ def _original_pr223_atlas(result):
     native3 = result.get("passive_publications", {}).get("latest", {}).get("pg_pr223_native3_passive_publication_v1")
     if native3:
         original["native3_continuation"] = deepcopy(native3)
+    repaired = result.get("passive_publications", {}).get("latest", {}).get("pg_pr223_native3_passive_publication_v2")
+    if repaired:
+        original["native3_repaired_continuation"] = deepcopy(repaired)
     return original
 
 
@@ -1058,6 +1061,19 @@ def _original_pr223_score_line(original, root, path):
                     f" · overall {native3['status']} · source `{native3['source']['origin_commit'][:8]}`/"
                     f"`{native3['source']['digest'][:8]}` · [inclusive campaign charge "
                     f"{native3['cost']['charged_seconds']:.6f} / 10800 s]({cost_link}); prior cases and cumulative metadata counted once")
+    repaired = original.get("native3_repaired_continuation")
+    if repaired:
+        readout = os.path.relpath(root / repaired["readout"], path.parent)
+        cost_link = os.path.relpath(root / repaired["final_cost"]["path"], path.parent)
+        remaining = ", ".join(f"{n} {status}" for status, n in repaired["counts"].items()
+                              if status not in {"PASS", "FAIL"})
+        context += (f"<br>[Repaired native3 retest]({readout}): {repaired['accepted_counts']['PASS']}/3 PASS · "
+                    f"{repaired['accepted_counts']['FAIL']} FAIL · {repaired['accepted_counts']['UNAVAILABLE']} unavailable" +
+                    (f" · {remaining}" if remaining else "") +
+                    f" · overall {repaired['status']} · source `{repaired['source']['origin_commit'][:8]}`/"
+                    f"`{repaired['source']['digest'][:8]}` · [inclusive campaign charge "
+                    f"{repaired['cost']['charged_seconds']:.6f} / 10800 s]({cost_link}); "
+                    "original19 and pretraining-invalid case debits separately once, SAME cumulative metadata once; separate source, no pooled19 credit")
     return (f"| [Original PR223 Atlas FULL · LR .00425 / prior2]({link}) | "
             f"{original['representation']} | **19/19 PASS** · full original recipe/law replay "
             f"· [19 original goal GIFs]({link})<br>Policy-selected; averaging enabled; learned output kernel (init .029) "
