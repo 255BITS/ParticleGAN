@@ -197,6 +197,60 @@ def test_two_updates_observer_purity_complete_checkpoint_and_next_update_resume(
     assert typed_state_digest(saved)==pin
 
 
+def half_base_fixture():
+    """Actual two-update CPU engineering control, never word qualification."""
+    import json
+    from experiments.forge.api import task_formulation_context
+    from experiments.forge import word_joint_rate_policy_contracts as rates
+    request = dict(candidate=rates.candidate("half_base"), protocol=dict(seed=0))
+    task = rates.make_variant(ROOT)
+    # Exercise the same JSON compiler annotation transport used by admission.
+    task["preflight_blockers"] = []
+    request, task = json.loads(json.dumps((request, task)))
+    context = task_formulation_context(request["candidate"], task, request["protocol"], root=ROOT)
+    return WordJointPolicyFixture(request, task, context=context)
+
+
+def test_half_base_actual_public_owners_preserve_initialization_and_apply_all_nominal_rates():
+    from experiments.forge.api import task_formulation_context
+    from experiments.forge import word_joint_rate_policy_contracts as rates
+    old_request, old_task = definition()
+    old_request["candidate"].update(execution_path="public_trainer", prior=rates.candidate("half_base")["prior"])
+    old_context = task_formulation_context(old_request["candidate"], old_task, old_request["protocol"], root=ROOT)
+    old = WordJointPolicyFixture(old_request, old_task, context=old_context)
+    value = half_base_fixture()
+    for before, after in ((old.G, value.G), (old.E, value.E), (old.D, value.D), (old.prior, value.prior)):
+        assert typed_state_digest(before.state_dict()) == typed_state_digest(after.state_dict())
+    assert typed_state_digest(old.streams.state_dict()) == typed_state_digest(value.streams.state_dict())
+    assert [group["lr"] for group in value.opt_g.param_groups] == [.00265625, .00265625, .003984375, .00265625]
+    assert [group["lr"] for group in value.opt_d.param_groups] == [.00265625]
+    assert value.receipt()["recipe"] == rates.resolved_recipe(rates.candidate("half_base"), rates.make_variant(ROOT)).to_dict()
+    assert value.prior.z.shape == (11, 2) and value.policy.roles == old.policy.roles
+    for _ in range(2):
+        value.step()
+    assert value.guards()["optimizer_updates"] == dict(generator=2, encoder=2, prior=2, discriminator=2)
+    assert value.controls()["word_rate_binding"]["tuple_id"] == "word-min11-half_base-rates-v1"
+
+
+def test_half_base_actual_observer_and_checkpoint_next_update_parity():
+    a, b = half_base_fixture(), half_base_fixture()
+    for _ in range(2):
+        assert a.step() == b.step()
+        b.observe()
+    assert typed_state_digest(evaluation_state(a.state_dict())) == typed_state_digest(evaluation_state(b.state_dict()))
+    assert b.guards()["all_finite"] and all(row["pure"] for row in b.purity)
+    saved = b.state_dict()
+    pin = typed_state_digest(saved)
+    restored = half_base_fixture()
+    restored.load_state_dict(saved)
+    assert typed_state_digest(restored.state_dict()) == pin
+    assert restored.observe() == b.observe()
+    assert all(torch.equal(restored.last_views[key], b.last_views[key]) for key in b.last_views)
+    assert restored.step() == b.step()
+    assert typed_state_digest(restored.state_dict()) == typed_state_digest(b.state_dict())
+    assert typed_state_digest(saved) == pin
+
+
 @pytest.mark.parametrize("field",["gate","budget","source","encoder","recipe","observation","code_noise","parent","five_rows","six_rows","resource_provenance","cohort","controls"])
 def test_original_contract_or_new_joint_law_drift_rejected(field):
     request,task=definition()
