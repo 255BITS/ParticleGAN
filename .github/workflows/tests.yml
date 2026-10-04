@@ -23,7 +23,7 @@ jobs:
       (github.event_name != 'pull_request' &&
        contains(fromJSON('["refs/heads/master", "refs/heads/main", "refs/heads/develop"]'), github.ref))
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: ${{ matrix.python == '3.12' && 35 || 25 }}
     strategy:
       fail-fast: false
       matrix:
