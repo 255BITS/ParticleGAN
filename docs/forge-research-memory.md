@@ -50,6 +50,16 @@ current26, named-family, default or comparable-speed cells. Actual runtime is no
 included in the passive compact result; the projection labels the frozen runtime
 declaration separately.
 
+The separate native3 publication schema adds a source-linked continuation inside
+that same historical row. Its denominator is three: grid100, rotated100 and
+staggered100, each under the complete original recipe, noisy serving law and
+coverage AND accuracy gates. The original 16 passing cases remain parent
+evidence under their original source. The native3 cost includes those prior case
+charges once, the fresh native attempts, and the same cumulative 180-second
+metadata ledger once. Its FINAL_COST records the authoritative closed boundary;
+overlapping full19 and native3 cut costs must not be added together. Uncertified
+or unrun native cases remain unavailable and supply no accepted goal GIF.
+
 In-progress studies participate in freshness but are not called concluded.
 Unrecognized schemas fail explicitly rather than silently fabricating results.
 No raw log, checkpoint, per-update stream or remote `/ml2` path is opened. Compact

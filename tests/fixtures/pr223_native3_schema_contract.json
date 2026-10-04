@@ -1,0 +1,203 @@
+{
+  "accepted_native3_status": "PENDING_PUBLICATION_COST_FINALIZATION",
+  "accepted_original_gate_counts": {
+    "FAIL": "integer",
+    "PASS": "integer",
+    "UNAVAILABLE": "3 minus accepted cases"
+  },
+  "all_required_case_evidence_complete": "all3 accepted + original GIFs",
+  "claims": {
+    "clean_or_forced_ema_primary_credit": false,
+    "current26_qualification": false,
+    "default_adoption": false,
+    "full_new_source_original19_credit": false,
+    "named10500_cost_pooling": false,
+    "old_grades_are_current_credit": false,
+    "scope": "three fresh native geometry cases under the original full-winner noisy selected law",
+    "speed_ranking": false
+  },
+  "completed": "accepted full-evidence case count",
+  "cost_snapshot_before_publication": {
+    "aggregate_cap_seconds": 10800,
+    "aggregate_overrun_seconds": "max(0, inclusive charge minus10800); separate diagnostic, never additive charge",
+    "case_caps_sum_seconds": 4290,
+    "charged_seconds": "prior case + new paid/reserve + cumulative metadata ONCE",
+    "current_case_charged_seconds": "new paid + reserve",
+    "current_case_paid_wall_seconds": "measured new paid",
+    "current_case_reserved_seconds": "residual interruption reserve",
+    "export_grace_seconds": 0,
+    "halt_required": "boolean",
+    "metadata": "SAME cumulative180 ledger cost object",
+    "metadata_cap_seconds": 180,
+    "overrun_seconds": "sum(current case overrun diagnostics) + cumulative metadata overrun; never additive charge",
+    "prior_case_charged_seconds": 3165.841891122982,
+    "remaining_seconds": "10800 minus charge",
+    "retries": 0
+  },
+  "counts": "recorded execution counts; exactly three active cells",
+  "family": "atlas",
+  "final_cost": {
+    "authoritative_final_metadata_ledger": {
+      "bytes": "same closed bytes length",
+      "path": "unchanged canonical180 path bound to parent FINAL_COST",
+      "sha256": "same closed bytes SHA"
+    },
+    "consumed_closed_metadata_ledger": {
+      "bytes": "integer",
+      "path": "actual root-SHA-bound CLOSED input path",
+      "sha256": "root trusted final ledger SHA"
+    },
+    "costs": "same cost_snapshot_before_publication shape, including sum overruns and separate aggregate_overrun_seconds, with final cumulative metadata once",
+    "cumulative_metadata_once": true,
+    "full_new_source_original19_credit": false,
+    "ledger_input_is_copy": "boolean: consumed CLOSED path differs from root-declared canonical path; default finalizer requires canonical input path",
+    "metadata_phase_count": "includes legitimate phases after immutable12 prefix",
+    "metadata_phase_history": "exact final closed phase list; old full history unchanged, publication tail added",
+    "old_case_debit_once": true,
+    "old_grades_are_current_credit": false,
+    "original_case_verdicts_unchanged": true,
+    "original_terminal_cut_results_sha256": "results file SHA",
+    "raw_native3_protocol_gate": "retained raw full3 status",
+    "schema": "pg_pr223_native3_final_publication_cost_v1",
+    "status": "PASS/FAIL only all3 accepted and within cap; else INCOMPLETE",
+    "trusted_terminal_card_sha256": "root card SHA"
+  },
+  "latest_selection": "select this schema/source cohort separately; never replace full19 stopped17 or pool its16 PASS with native3",
+  "metadata_phase_count_before_publication": "integer count of immutable closed cut including later phases",
+  "metadata_phase_history_before_publication": "exact closed phase list, retaining byte-content original12 prefix",
+  "ordered_ids": [
+    "pr223-native3-continuation-v1-native-grid100",
+    "pr223-native3-continuation-v1-native-rotated100",
+    "pr223-native3-continuation-v1-native-staggered100"
+  ],
+  "original_required": 19,
+  "parent_metadata_anchor": {
+    "bytes": 2675,
+    "phases": 12,
+    "sha256": "ce949407c9a11b2d2873be0d51b2d147261f8b60cee411ea33381c8c5c6f4369",
+    "snapshot_relative": "reports/forge/pr223-native3-continuation-20261004/inputs/closed-parent-metadata.json"
+  },
+  "predecessor_contract_sha256": "b58a4aeb54ae90711f4a8632cd86badd462d68f4959f91c56f7c5f7ea7cec001",
+  "prior_reference": {
+    "accepted_original_gate_counts": {
+      "FAIL": 0,
+      "PASS": 16,
+      "UNAVAILABLE": 3
+    },
+    "case_charged_seconds": 3165.841891122982,
+    "execution_counts": {
+      "INVALID": 1,
+      "NOT_RUN": 2,
+      "PASS": 16
+    },
+    "files_sha256": {
+      "reports/forge/pr223-original-full-retest-stopped17-20261004/FINAL_COST.json": "2335c0da59f1155a329f72390078d1480f253ce1e17a5879a52138d53e3661d3",
+      "reports/forge/pr223-original-full-retest-stopped17-20261004/results.json": "4cca29c719ffe295712775be27167d7465090c40865d3b096aea247e61a3d4f3",
+      "reports/forge/pr223-original-full-retest-stopped17-20261004/verification.json": "a74262e6af196c7686f9275a0723ace989067f65552fb8b554a2c35948c26eb5"
+    },
+    "old_grades_are_current_credit": false,
+    "original_evidence_unchanged": true,
+    "required": 19,
+    "source": {
+      "digest": "00cadbfd06c770e16c35045b42387932b14ee3751954e5320f9e2c32799f7a2f",
+      "origin_commit": "2068a661331a45e0e283b0362dd58b7d92263c6f"
+    }
+  },
+  "producer": {
+    "draws": 0,
+    "models": 0,
+    "regrades": 0,
+    "rendered_frames": 0,
+    "scorer_calls": 0,
+    "sha256": "frozen passive helper SHA"
+  },
+  "publication_scope": "native3",
+  "raw_native3_protocol_gate": "PASS/FAIL only if all3 recorded completed; otherwise UNAVAILABLE",
+  "required": 3,
+  "rows": {
+    "acceptance_status": "ACCEPTED/UNAVAILABLE/UNAVAILABLE_BUDGET_EXCEEDED",
+    "accepted_original_gate": "PASS/FAIL/null",
+    "complete_recipe": "all source-bound Recipe fields",
+    "completed_steps": 7000,
+    "cost": "durable paid/reserve/charged/overrun with completed-only measured cost",
+    "execution_status": "saved execution status",
+    "full_protocol_complete": "accepted full evidence boolean",
+    "group": "native",
+    "id": "exact fresh ID",
+    "independent_holdout_samples": 100000,
+    "media": {
+      "actual_steps": [
+        0,
+        50,
+        750,
+        1750,
+        2750,
+        3750,
+        4750,
+        5750,
+        7000
+      ],
+      "bytes": "integer",
+      "caption": "FINAL full-protocol verdict; per-clock flags are original retained reads.",
+      "capture_metadata": "nine saved metadata records",
+      "file": "gifs/native-<task>.gif",
+      "frames": 9,
+      "original_gate": "accepted joint gate",
+      "sha256": "exact original SHA"
+    },
+    "metric_observations": 34,
+    "native_gates": {
+      "clean": {
+        "accuracy": "PASS/FAIL",
+        "coverage": "PASS/FAIL"
+      },
+      "noisy": {
+        "accuracy": "PASS/FAIL",
+        "coverage": "PASS/FAIL"
+      }
+    },
+    "observation_steps": "all34 original clocks",
+    "observer": "original metadata incl20k/final5/100k/seed basis",
+    "original_requirements": "all13 exact original bounds",
+    "parent_full19_retest_id": "pr223-faithful19-retest-v1-native-<task>",
+    "parent_original_id": "atlas-original19-native-<task>",
+    "raw_reported_status": "accuracy-only raw status, can differ from accepted gate",
+    "recorded_full_protocol_complete": "boolean",
+    "required_host": "unchanged original host object",
+    "task": "grid100/rotated100/staggered100",
+    "terminal_reads": [
+      6000,
+      6250,
+      6500,
+      6750,
+      7000
+    ]
+  },
+  "schema": "pg_pr223_native3_passive_publication_v1",
+  "source": {
+    "digest": "root must provide exact new 64hex",
+    "origin_commit": "root must provide exact new 40hex"
+  },
+  "status": "PROSPECTIVE_SCHEMA_ONLY_NOT_RESULTS",
+  "verification": {
+    "accepted_original_gate_counts": "current three only",
+    "accepted_original_gifs": "integer",
+    "bulk_state_arrays_logs_copied": false,
+    "consumed_inputs": "integer",
+    "counts": "execution counts",
+    "draws": 0,
+    "final_cost_pending": true,
+    "grader_calls": 0,
+    "models": 0,
+    "original_required": 19,
+    "private_nonce_values_copied": false,
+    "producer_sha256": "frozen helper SHA",
+    "rendered_frames": 0,
+    "required": 3,
+    "results_sha256": "actual compact result SHA",
+    "schema": "pg_pr223_native3_passive_verification_v1",
+    "scorer_calls": 0,
+    "status": "VERIFIED_PRE_PUBLICATION_COST_CUT",
+    "trusted_card_sha256": "root card SHA"
+  }
+}
