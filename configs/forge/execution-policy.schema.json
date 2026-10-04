@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Forge request execution_policy",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "mode"],
+  "properties": {
+    "schema_version": {"type": "integer", "const": 1},
+    "mode": {"enum": ["complete_current_tier", "fail_fast"]}
+  }
+}

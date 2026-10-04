@@ -10,6 +10,7 @@ import sys
 import time
 
 from .contracts import atomic_json, read_json
+from .execution_policy import policy as execution_policy
 
 
 def emit(value):
@@ -295,6 +296,7 @@ def main(argv=None):
         state = queue.inspect()
         emit({"queue_root": str(queue_root), "campaigns": state["campaigns"],
               "requests": [{"id": k, "candidate": v["request"]["candidate"]["id"],
+                            "execution_policy": execution_policy(v["request"]),
                             "status": v["status"], "reason": v["reason"], "lifecycle": v["lifecycle"]}
                            for k, v in state["submissions"].items()], "logs": str(queue_root / "events.jsonl")})
     elif command == "stats":

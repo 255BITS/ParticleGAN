@@ -21,7 +21,7 @@ def worker_request(tmp_path, program, *, budget=3):
     target = checkout / "experiments/forge"
     target.mkdir(parents=True)
     module_root = Path(__file__).resolve().parents[1] / "experiments/forge"
-    for name in ("__init__.py", "contracts.py", "sources.py", "queue.py", "worker.py", "telemetry.py"):
+    for name in ("__init__.py", "contracts.py", "sources.py", "execution_policy.py", "queue.py", "worker.py", "telemetry.py"):
         shutil.copyfile(module_root / name, target / name)
     (target / "runtime.py").write_text(program)
     source = inspect_source(checkout)

@@ -1,5 +1,6 @@
 """Inventory integration invariants without launching training."""
 from pathlib import Path
+import shutil
 
 import pytest
 
@@ -80,6 +81,50 @@ def test_known_blocked_first_task_spends_nothing_and_creates_no_attempt(checkout
     assert all(t["evidence_status"] == "UNKNOWN" for t in row["tasks"])
     assert not (checkout / "runs").exists()
     assert not (checkout / "reports").exists()
+
+
+def test_blocked_first_task_does_not_block_independent_current_tier(checkout):
+    task = read_json(checkout / "configs/forge/tasks/t1.json")
+    task["requires_capabilities"].append("unsupported_inventory_probe")
+    atomic_json(checkout / "configs/forge/tasks/t1.json", task)
+    view = read_json(checkout / "configs/forge/views/stability.json")
+    view["assignments"][1]["qualification_tier"] = 1
+    view["assignments"][2]["qualification_tier"] = 2
+    atomic_json(checkout / "configs/forge/views/stability.json", view)
+    result = inventory.enqueue_inventory(checkout, checkout / "runs", **options())
+    assert result["submitted_count"] == 1 and result["blocked_count"] == 0
+    row = result["candidates"][0]
+    assert row["tasks"][0]["preflight_status"] == "BLOCKED"
+    queue = Queue(checkout / "runs")
+    claim = queue.claim([{"device": "cpu", "slot": 0, "memory_mb": 100}])
+    assert claim["job"]["task_id"] == "t2"
+    assert sum(len(job["attempts"]) for job in queue.inspect()["jobs"].values()) == 1
+
+
+def test_frozen_preflight_recomputes_forged_readiness_and_validates_healthy_peers(checkout):
+    # Include real boundary modules in this otherwise small checkout. Admission
+    # must recompute a removed cache against the frozen declarations/source.
+    root = Path(__file__).resolve().parents[1]
+    for name in ("preflight", "sampling", "hostprofiles", "initialization"):
+        relative = f"experiments/forge/{name}.py"
+        target = checkout / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(root / relative, target)
+    view = read_json(checkout / "configs/forge/views/stability.json")
+    view["assignments"][1]["qualification_tier"] = 1
+    view["assignments"][2]["qualification_tier"] = 2
+    atomic_json(checkout / "configs/forge/views/stability.json", view)
+    task = read_json(checkout / "configs/forge/tasks/t1.json")
+    task["evaluation"].pop("sampling_contract_version")
+    atomic_json(checkout / "configs/forge/tasks/t1.json", task)
+    req = inventory.resolve_idea(checkout, "base", view_id="stability", through_tier=3,
+                                 execution_backend="cpu", freeze_source=True, queue_root=checkout / "runs")
+    req["tasks"]["t1"]["preflight_blockers"] = []
+    queue = Queue(checkout / "runs", report_root=checkout / "reports/forge")
+    entry = queue.submit(req, CAMPAIGN)
+    assert "sampling_contract_version" in entry["request"]["tasks"]["t1"]["preflight_blockers"][0]
+    assert req["tasks"]["t1"]["preflight_blockers"] == []  # Caller was not mutated.
+    assert queue.claim([{"device": "cpu", "slot": 0, "memory_mb": 100}])["job"]["task_id"] == "t2"
 
 
 def test_enqueue_is_restartable_and_duplicate_formulations_share_jobs(checkout):

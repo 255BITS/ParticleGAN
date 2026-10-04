@@ -126,8 +126,10 @@ target and protocol. Do not inherit execution settings invisibly at runtime.
 
 Required tiers in an ordinary view must be contiguous from Tier 1. A Tier 2
 task therefore needs meaningful required Tier 1 prerequisites. Existing failed,
-blocked or missing prerequisites stop remaining tasks in that tier and
-higher-tier work. Diagnostics use their declared role and cannot supply ordinary
+blocked or missing prerequisites prevent dependent jobs and higher-tier work.
+New requests finish independent jobs in the current tier under the versioned
+`complete_current_tier` policy. Legacy frozen requests without the policy retain
+fail-fast behavior. Diagnostics use their declared role and cannot supply ordinary
 qualification by bypassing a gate.
 
 For an ordinary new question, add the task as required Tier 1 in the existing

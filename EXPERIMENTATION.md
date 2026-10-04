@@ -62,8 +62,11 @@ compiled memory.
 
 Task declarations describe intended coverage. Preflight and execution check the
 public API, formulation, host and frozen source; unsupported capabilities remain
-`BLOCKED` in the required denominator. Ordinary prerequisite failures stop later
-tiers. Selected deeper comparisons require the separately registered calibration
+`BLOCKED` in the required denominator. New ordinary requests finish all runnable
+jobs in the current tier before applying required failures to higher tiers.
+Checkpoint/data and explicit gate dependencies still require passing parent
+evidence; unsupported tasks spend nothing and independent peers can run.
+Selected deeper comparisons require the separately registered calibration
 lane described below and confer no ordinary qualification.
 
 Historical cards preserve successes, failures, raw errors, negative controls and
@@ -216,6 +219,21 @@ wall time. `enqueue` freezes the source request and returns without starting
 training. An identical scientific request attaches to existing work or compatible
 evidence. Changing only prose does not justify rerunning the same experiment.
 
+New ordinary requests freeze `execution_policy` with `schema_version: 1` and
+`mode: "complete_current_tier"`. A FAIL, INCOMPLETE, INVALID or task-local BLOCKED
+result does not stop independent jobs in that tier. After runnable work finishes,
+any required non-PASS or unresolved required dependency blocks the next tier.
+The queue can run independent jobs concurrently, in frozen assignment order,
+subject to full reservations, host/device capacity, pause and cancellation.
+Known unsupported execution groups create no paid attempt or synthetic receipt.
+Budget exhaustion can leave cells unmeasured; it never relaxes a full reservation.
+Plans, queue summaries and submitted events expose the policy for log readers.
+Saved requests without this field retain their original fail-fast behavior;
+registered calibration and promotion lanes retain their frozen stopping rules.
+Scheduling policy changes request identity, but does not enter scientific job
+compatibility or grant qualification. Reuse still requires the exact recipe,
+task, source, prior, initialization, sampling and runtime bindings.
+
 The current six-task Tier 1 reserves up to 2,220 seconds: the 120-second
 scalar Gaussian acquisition, three existing 300-second behavior tasks,
 the 300-second ring acquisition and the 900-second word acquisition.
@@ -335,7 +353,9 @@ does not regrade them or transfer API demonstrations into Forge qualification.
 The expanded smoke profile needs calibration before scientific adoption.
 
 All required lower-tier tasks must pass before higher-tier work is eligible.
-Failed, missing, invalid, and blocked evidence stop downstream spending.
+Failed, missing, invalid, and blocked evidence stop higher-tier spending after
+the current tier's runnable work completes. Frozen legacy requests also stop
+the remaining tasks in that tier.
 Diagnostics remain visible without vetoing required passes. The hold and extension
 share one uninterrupted execution; the extension cannot borrow another
 candidate's trained state or hide behind a passing ordinary hold.
@@ -407,7 +427,7 @@ One refresh rebuilds the leaderboard, family pages and experiments-by-tier
 report; the older shared score index links here instead of copying the table.
 The [released v0.7 task-adaptation readout](reports/forge/RELEASE07_TASK_ADAPTATION_READOUT.md)
 adds one measured successor with all 24 integration preflights ready. Its
-required smoke failure stops the remaining ordinary tasks; the original native
+frozen legacy request's required smoke failure stopped the remaining tasks; the original native
 recipe cards and their blockers remain frozen.
 Numerical source snapshots and receipt proofs remain in
 `reports/forge/technique-evidence/` as provenance, without separate leaderboard
@@ -458,8 +478,9 @@ all 15 existing ideas and 32 saved configurations under revision 3, then refresh
 whole-configuration selections. Its frozen roster, five finite studies and
 shared campaign preserve the exact configuration recipes. `inventory` alone
 includes only ideas; use the readout's reproduction wrapper to include saved
-configurations through their registered studies. Failed prerequisites stop the
-remaining work, including later tasks within Tier 1.
+configurations through their registered studies. Those frozen historical
+requests stop remaining work after failed prerequisites, including later tasks
+within Tier 1; new complete-tier requests finish independent Tier 1 measurements.
 
 The [word-task root-cause readout](reports/forge/word-root-cause/README.md) shows
 full task-only K3P, KA2 and R1/R2 passes with explicit existing-control settings.
@@ -493,8 +514,9 @@ policy options above.
 The original default inventory campaign has explicit reservation ceilings for
 its 12-technique roster. New techniques require checking the expanded plan and
 a new immutable campaign ID with adequate budgets. The Modern GAN recipe uses
-its own one-candidate campaign; it does not rerun unchanged techniques. Ordinary
-failures stop later tasks, including remaining tasks in that tier; unsupported
+its own one-candidate campaign; it does not rerun unchanged techniques. New ordinary
+requests finish runnable tasks in a tier, then apply required failures to higher
+tiers. Frozen requests without the new policy retain fail-fast behavior; unsupported
 techniques reserve no training resources. Required denominators are 6/19/2
 for the current `discriminator_stability` view, including unknown and blocked
 cells. The current publication retains its recorded revision 3 (5/19/2) until

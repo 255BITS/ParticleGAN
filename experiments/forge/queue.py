@@ -7,6 +7,7 @@ inherited worker descriptor; heartbeat age alone never triggers a relaunch.
 from __future__ import annotations
 
 from contextlib import contextmanager
+from copy import deepcopy
 import fcntl
 import json
 import math
@@ -21,6 +22,7 @@ import uuid
 from .contracts import (atomic_json, canonical, file_lock, identifier, positive_number,
                         read_json, stable_hash, utc_now)
 from .sources import verify_snapshot
+from .execution_policy import completes_tier, group_blockers, policy
 
 
 def _optional_text(path):
@@ -217,6 +219,19 @@ class Queue:
 
     def submit(self, request: dict, campaign: dict) -> dict:
         """Request contains pinned view/tasks/protocol/source and fully resolved jobs."""
+        policy(request)  # Reject unknown versions before any queue mutation.
+        task_ids = None
+        if completes_tier(request):
+            request = deepcopy(request)
+            from .preflight import recheck_request
+            recheck_request(request)
+            authorized = {a["task"] for a in request["view"]["assignments"]
+                          if a["qualification_tier"] <= request["through_tier"]}
+            if authorized - request["tasks"].keys():
+                raise ValueError("authorized task lacks its frozen definition")
+            task_ids = {member for job in request["jobs"]
+                        if self._authorized(request, job) and not group_blockers(request, job)
+                        for member in job.get("task_ids", [job["task_id"]])}
         from .decision_contracts import validate_admission as validate_decision_admission
         validate_decision_admission(request, campaign,
                                     root=self.report_root.parent.parent if self.report_root else None)
@@ -237,9 +252,9 @@ class Queue:
         else:
             validate_screening_submission(request)
         from .sampling import validate_request_sampling
-        validate_request_sampling(request)
+        validate_request_sampling(request, task_ids=task_ids)
         from .hostprofiles import validate_request_host_profiles
-        validate_request_host_profiles(request)
+        validate_request_host_profiles(request, task_ids=task_ids)
         identifier(campaign["id"], "campaign")
         positive_number(campaign["budget_seconds"], "campaign budget_seconds")
         positive_number(campaign["candidate_budget_seconds"], "candidate_budget_seconds")
@@ -289,7 +304,8 @@ class Queue:
             state["submissions"][request_id] = entry
             atomic_json(self.root / "queue" / "requests" / f"{request_id}.json", request)
             self.event(state, "submitted", request=request_id, campaign=campaign["id"],
-                       candidate=request["candidate"]["id"], through_tier=request["through_tier"])
+                       candidate=request["candidate"]["id"], through_tier=request["through_tier"],
+                       execution_policy=policy(request))
             return entry
 
     @staticmethod
@@ -322,6 +338,8 @@ class Queue:
     def _eligible(self, state, submission):
         """Order within a tier is frozen; no speculative downstream reservation."""
         request = submission["request"]
+        if completes_tier(request):
+            return self._eligible_complete_tier(state, submission)
         assignments = sorted(request["view"]["assignments"], key=lambda a: (a["qualification_tier"], a.get("order", 0), a["task"]))
         results = {r["task_id"]: r for r in self._results(state, submission)}
         jobs = {member: j for j in request["jobs"] for member in j.get("task_ids", [j["task_id"]])}
@@ -366,6 +384,66 @@ class Queue:
             if request.get("calibration_lane") and any(a["task"] not in results for a in group):
                 return [], "selected calibration diagnostics lack required checkpoint/data prerequisites", False
         return [], None, any_running
+
+    def _eligible_complete_tier(self, state, submission):
+        """Finish runnable jobs in the current tier before applying its veto.
+
+        A task-local blocker never creates scientific evidence or a paid attempt.
+        Checkpoint/data and explicit gate dependencies remain mandatory. Whole
+        execution groups are admitted together; their internal dependencies are
+        enforced by the adapter rather than awaiting their own terminal receipt.
+        """
+        request = submission["request"]
+        assignments = sorted(request["view"]["assignments"],
+                             key=lambda a: (a["qualification_tier"], a.get("order", 0), a["task"]))
+        results = {r["task_id"]: r for r in self._results(state, submission)}
+        jobs = {member: job for job in request["jobs"]
+                for member in job.get("task_ids", [job["task_id"]])}
+        for tier in range(1, request["through_tier"] + 1):
+            group = [a for a in assignments if a["qualification_tier"] == tier]
+            eligible, seen, required_blockers, running = [], set(), [], False
+            for item in group:
+                task_id = item["task"]
+                row = results.get(task_id)
+                if row:
+                    if item["importance"] == "required" and row["gate_status"] != "PASS":
+                        required_blockers.append(f"{task_id}: {row['gate_status']} {row.get('reason', '')}".rstrip())
+                    continue
+                definition = jobs.get(task_id)
+                reason = None
+                if definition is None or not self._authorized(request, definition):
+                    reason = "required evidence is unavailable or execution group exceeds tier cap"
+                else:
+                    reasons = group_blockers(request, definition)
+                    if reasons:
+                        reason = "BLOCKED " + "; ".join(reasons)
+                    else:
+                        members = set(definition.get("task_ids", [definition["task_id"]]))
+                        dependencies = {d["task"] if isinstance(d, dict) else d
+                                        for member in members
+                                        for d in request["tasks"][member].get("dependencies", [])} - members
+                        unsatisfied = sorted(d for d in dependencies
+                                             if results.get(d, {}).get("gate_status") != "PASS")
+                        if unsatisfied:
+                            reason = "prerequisites are unsatisfied: " + ", ".join(unsatisfied)
+                        else:
+                            key = definition["compatibility_key"]
+                            job = state["jobs"][key]
+                            if job["status"] == "running":
+                                running = True
+                            elif job["status"] == "pending":
+                                if key not in seen:
+                                    eligible.append(key)
+                                    seen.add(key)
+                            else:
+                                reason = "required evidence is unavailable"
+                if reason and item["importance"] == "required":
+                    required_blockers.append(f"{task_id}: {reason}")
+            if eligible or running:
+                return eligible, None, running
+            if required_blockers:
+                return [], f"tier {tier}: " + "; ".join(required_blockers), False
+        return [], None, False
 
     def _refresh(self, state):
         for entry in state["submissions"].values():
@@ -693,7 +771,9 @@ class Queue:
                     seen_by_path[target].add(event_id)
             state["events"] = []
             atomic_json(self.root / "status.json", {"updated_at": utc_now(), "campaigns": state["campaigns"],
-                "submissions": {k: {f: v[f] for f in ("status", "lifecycle", "reason")} for k, v in state["submissions"].items()},
+                "submissions": {k: {**{f: v[f] for f in ("status", "lifecycle", "reason")},
+                                     "execution_policy": policy(v["request"])}
+                                for k, v in state["submissions"].items()},
                 "running": [j["worker"] for j in state["jobs"].values() if j["status"] == "running"]})
 
     def pause(self, campaign_id: str, paused: bool):
