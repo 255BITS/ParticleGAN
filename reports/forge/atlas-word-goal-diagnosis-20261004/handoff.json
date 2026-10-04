@@ -1,0 +1,50 @@
+{
+  "files": {
+    "WORD_GOALS.md": {
+      "bytes": 10061,
+      "sha256": "836b758716b1721d9a664d00b32789ca6bd0ee5c898eaa0398b78c0695f0265a"
+    },
+    "analysis.json": {
+      "bytes": 107003,
+      "sha256": "bbb53358b3288dd44c1591aab4c7d449ccac934e3c0ff8b451468926f2744c9f"
+    },
+    "inspect_retained.py": {
+      "bytes": 11262,
+      "sha256": "88bd157fbffaed4c668ecbeb25fcc31321fa4b60ebaba24af4233a631991334f"
+    },
+    "inspection.log": {
+      "bytes": 271,
+      "sha256": "08f829f5c2ef492f5a3e265de1f2216b1854f31d42f9d973acba002fb82e89c9"
+    }
+  },
+  "preserved": {
+    "all_consumed_inputs_unchanged": true,
+    "numeric_gate_status": "UNAVAILABLE",
+    "original_status": "INVALID",
+    "original_word_paid_seconds": 558.5739127129782,
+    "source_commit": "fb7acc775b3a1a6184d36b55e035b9da04531492",
+    "source_digest": "f380eed990931bacb205e6537beaf387fdbb676ffc97b6f32f19ff903ae1cfed"
+  },
+  "proposal_only": {
+    "attempt_count_at_most": 2,
+    "candidate_count": 2,
+    "extra_grace_seconds": 0,
+    "new_gpu1_cap_at_most_seconds": 1800,
+    "per_attempt_cap_seconds": 900,
+    "root_owns_freeze_admission_execution": true
+  },
+  "schema": "pg_word_goal_diagnosis_handoff_v1",
+  "scope": {
+    "cuda_initialized": false,
+    "forwards": 0,
+    "git_mutations": 0,
+    "models_constructed": 0,
+    "new_tests": 0,
+    "official_scorer_calls": 0,
+    "optimizer_updates": 0,
+    "public_state_restores": 0,
+    "read_only": true,
+    "sampler_calls": 0
+  },
+  "status": "NO_WRITE_HANDOFF"
+}

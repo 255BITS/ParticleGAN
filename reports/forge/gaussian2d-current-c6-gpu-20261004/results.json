@@ -1,0 +1,429 @@
+{
+  "accepted_numeric_status": "UNAVAILABLE",
+  "actual_full_original_exports": 0,
+  "cohort": "api_gaussian2d_c6_gpu_v1",
+  "completed_updates": 1000,
+  "costs": {
+    "charged_seconds": 180.21387464087456,
+    "export_grace_seconds": 0,
+    "inclusive_ceiling_seconds": 180,
+    "overrun_seconds": 0.21387464087456465,
+    "paid_wall_seconds": 180.21387464087456,
+    "scope": "additional_gaussian_question_only_not_named_10500",
+    "unmeasured_interrupt_reserved_seconds": 0.0
+  },
+  "default_adoption": false,
+  "execution": {
+    "eval_samples": 4096,
+    "heldout_seed": 34002,
+    "media_steps": [
+      0,
+      125,
+      250,
+      375,
+      500,
+      625,
+      750,
+      875,
+      1000
+    ],
+    "metric_steps": [
+      0,
+      42,
+      84,
+      125,
+      167,
+      209,
+      250,
+      292,
+      334,
+      375,
+      417,
+      459,
+      500,
+      542,
+      584,
+      625,
+      667,
+      709,
+      750,
+      792,
+      834,
+      875,
+      917,
+      959,
+      1000
+    ],
+    "protocol_seed": 24002,
+    "terminal_observations": 5,
+    "updates": 1000
+  },
+  "failure_reason": "Inclusive 180-second allowance exceeded; final supervisor attestation is unavailable.",
+  "family": "atlas_gaussian2d_c6_observer",
+  "historical_credit": false,
+  "input_index": {
+    "inputs": 1231,
+    "path": "input-index.json",
+    "sha256": "1625dbb3137b064f51f7902578a20cd660ab9b65653b928446334b4a07fc117d"
+  },
+  "law": {
+    "covariance": [
+      [
+        0.04,
+        0.0
+      ],
+      [
+        0.0,
+        0.04
+      ]
+    ],
+    "kind": "normal2d",
+    "mean": [
+      1.0,
+      1.0
+    ]
+  },
+  "legacy_ids": [
+    "source-family-16"
+  ],
+  "media": {
+    "byte_original": true,
+    "bytes": 327221,
+    "caption": "BUDGET_EXCEEDED / accepted numeric UNAVAILABLE. Byte-original raw FAIL badge is unaccepted; retained illustration only.",
+    "context": {
+      "bytes": 379,
+      "path": "gifs/goal-context.json",
+      "sha256": "2b08d6043d14e33c0272a45f4102ca49c3d473b05fe856c0049a09434643ec70"
+    },
+    "frames": 9,
+    "path": "gifs/goal.gif",
+    "retained_illustration_only": true,
+    "sha256": "77c14c8058f4cfd03922e34934dfdf1040997ea6945fbbe68b2d17601ec0ef36",
+    "steps": [
+      0,
+      125,
+      250,
+      375,
+      500,
+      625,
+      750,
+      875,
+      1000
+    ]
+  },
+  "new_catalog_question": false,
+  "ordinary_current_26_slot_credit": false,
+  "original_resources": {
+    "batch_size": 2048,
+    "evaluation_samples": 4096,
+    "particles": 20000,
+    "z_dim": 2
+  },
+  "original_status": "COMPLETE",
+  "original_verdict": null,
+  "publisher": {
+    "file": "publish_results.py",
+    "method": "stdlib/Pillow hash/header/receipt projection; no array restoration or numerical rescoring",
+    "sha256": "c4763a202a75e916358965672e752ec51fa86e5c5582e2081b2f9f4aab445e97"
+  },
+  "quality_from_owner_evidence": false,
+  "question": "Fit the mean, full covariance and radial/projected law of N((1,1),.04I); checkpoint continuation must preserve trainer and data-stream state.",
+  "question_id": "api-gaussian2d",
+  "raw_availability": "LOCAL_ONLY",
+  "requested_recipe": "atlas",
+  "requested_recipe_overrides": {
+    "lr": 0.0053125,
+    "prior_lr_mult": 1.5
+  },
+  "required_questions": 1,
+  "resolved_recipe": {
+    "alpha_bar": [
+      1.0,
+      0.9,
+      0.5,
+      0.05,
+      0.0001
+    ],
+    "amsgrad": true,
+    "batch_size": 2048,
+    "betas": [
+      0.0,
+      0.999
+    ],
+    "birth_death_backend": "auto",
+    "birth_death_cells": 128,
+    "birth_death_chunk": 256,
+    "birth_death_feature_scale": "std",
+    "birth_death_isolation": true,
+    "birth_death_metric_rank": 8,
+    "birth_death_parent_policy": "real_anchor",
+    "birth_death_space": "critic",
+    "conditioning": "scalar",
+    "continuous_policy": "dv12",
+    "critic_payoff_damping": true,
+    "critic_r1_real": true,
+    "d_guard_min_steps": 200,
+    "d_guard_ratio": 5.0,
+    "d_lr_mult": 1.0,
+    "direct_particle_betas": [
+      0.0,
+      0.9
+    ],
+    "direct_particle_gain": true,
+    "distance_reduction": "sum",
+    "ema_decay": 0.995,
+    "encoder_mode": "none",
+    "input_noise_anneal_end": 0.1,
+    "input_noise_std": 0.0,
+    "latent_damping_max_rate": 0.5,
+    "lr": 0.0053125,
+    "lr_anneal_start": 0.6,
+    "lr_control": "stationarity",
+    "lr_floor": 0.05,
+    "model": "gan",
+    "name": "atlas",
+    "network_lr_floor": 0.01,
+    "network_lr_horizon_cap": 1600,
+    "num_classes": null,
+    "num_particles": 20000,
+    "observation_sigma": 0.03,
+    "output_noise_mode": "learnable",
+    "output_noise_std": 0.029,
+    "output_noise_warmup": 0.0,
+    "particle_birth_death": true,
+    "prior_betas": null,
+    "prior_kind": "particles",
+    "prior_lr_mult": 1.5,
+    "prior_reg": 0.0,
+    "reconstruction_weight": 1.0,
+    "reg_anchor_min_decay": 0.9,
+    "reg_anchor_weight": 1.0,
+    "reg_coeff": 3.0,
+    "reg_every": 1,
+    "reg_kappa": 1.0,
+    "reopen_anchor": "release",
+    "reopen_guard": "settled",
+    "reopen_signal": "optimizer",
+    "routing_temperature": 0.25,
+    "row_evidence_exclude": true,
+    "row_evidence_gate": true,
+    "row_evidence_hold": true,
+    "row_evidence_hot": true,
+    "row_evidence_null": "scaled",
+    "row_policy": "independent",
+    "serve_average": 4.0,
+    "sigma_rel": 0.0,
+    "standardize": true,
+    "table_release_rule": "anchor",
+    "total_steps": null,
+    "ucd_target": "class",
+    "ucd_weight": 0.02,
+    "z_dim": 2
+  },
+  "retained_illustration": {
+    "accepted_numeric_status": "UNAVAILABLE",
+    "actual_owner_count": 8,
+    "caption": "BUDGET_EXCEEDED / accepted numeric UNAVAILABLE. Byte-original raw FAIL badge is unaccepted; retained illustration only.",
+    "checkpoint_state_sha256": "e4d667946d8bcbf1ee9428a7732cfba9d5561daf6f9e67f4c61684ae3cf1dcd7",
+    "completed_updates": 1000,
+    "final_failed_bounds": [
+      "max_projection_ks <= 0.06",
+      "min_cov_eigen >= 0.85",
+      "radial_ks <= 0.075",
+      "last 5 post-update metric observations do not all pass"
+    ],
+    "final_metrics": {
+      "max_cov_eigen": 0.6666346986167209,
+      "max_projection_ks": 0.07824196577406967,
+      "mean_error_sigma": 0.014819218700405784,
+      "min_cov_eigen": 0.606076433170545,
+      "radial_ks": 0.17269340832501756,
+      "sample_count": 4096
+    },
+    "latent_policy": "actual_selected_public_policy",
+    "media_steps": [
+      0,
+      125,
+      250,
+      375,
+      500,
+      625,
+      750,
+      875,
+      1000
+    ],
+    "missing_final_supervisor_attestation": true,
+    "original_status": "COMPLETE",
+    "original_verdict": "FAIL",
+    "output_noise": false,
+    "qualification_input": false,
+    "read_steps": [
+      0,
+      42,
+      84,
+      125,
+      167,
+      209,
+      250,
+      292,
+      334,
+      375,
+      417,
+      459,
+      500,
+      542,
+      584,
+      625,
+      667,
+      709,
+      750,
+      792,
+      834,
+      875,
+      917,
+      959,
+      1000
+    ],
+    "runtime": {
+      "cuda": "12.6",
+      "cuda_device_model": "NVIDIA RTX A6000",
+      "device": "cuda:0",
+      "python": "3.12.13",
+      "torch": "2.13.0+cu126",
+      "torch_threads": 1
+    },
+    "selected_sampler": "particlegan.GANTrainer.sample",
+    "selected_source": "fast",
+    "terminal_five": [
+      {
+        "failed_bounds": [
+          "max_projection_ks <= 0.06",
+          "min_cov_eigen >= 0.85"
+        ],
+        "metrics": {
+          "max_cov_eigen": 0.8941589464207561,
+          "max_projection_ks": 0.06032191312940782,
+          "mean_error_sigma": 0.06828849397592567,
+          "min_cov_eigen": 0.7555330187040997,
+          "radial_ks": 0.06787016689961956,
+          "sample_count": 4096
+        },
+        "passed": false,
+        "step": 834
+      },
+      {
+        "failed_bounds": [
+          "max_projection_ks <= 0.06",
+          "min_cov_eigen >= 0.85",
+          "radial_ks <= 0.075"
+        ],
+        "metrics": {
+          "max_cov_eigen": 0.6679841693399536,
+          "max_projection_ks": 0.0755780494590117,
+          "mean_error_sigma": 0.046392773419464746,
+          "min_cov_eigen": 0.5616474966598213,
+          "radial_ks": 0.1571600403046951,
+          "sample_count": 4096
+        },
+        "passed": false,
+        "step": 875
+      },
+      {
+        "failed_bounds": [
+          "max_projection_ks <= 0.06",
+          "min_cov_eigen >= 0.85",
+          "radial_ks <= 0.075"
+        ],
+        "metrics": {
+          "max_cov_eigen": 0.6641680893841239,
+          "max_projection_ks": 0.06885929364341387,
+          "mean_error_sigma": 0.03292208084686227,
+          "min_cov_eigen": 0.6269437115611741,
+          "radial_ks": 0.1497589395430441,
+          "sample_count": 4096
+        },
+        "passed": false,
+        "step": 917
+      },
+      {
+        "failed_bounds": [
+          "max_projection_ks <= 0.06",
+          "min_cov_eigen >= 0.85",
+          "radial_ks <= 0.075"
+        ],
+        "metrics": {
+          "max_cov_eigen": 0.6519501543337223,
+          "max_projection_ks": 0.07093086789644498,
+          "mean_error_sigma": 0.03305775655256135,
+          "min_cov_eigen": 0.6046723858224705,
+          "radial_ks": 0.17597114115335932,
+          "sample_count": 4096
+        },
+        "passed": false,
+        "step": 959
+      },
+      {
+        "failed_bounds": [
+          "max_projection_ks <= 0.06",
+          "min_cov_eigen >= 0.85",
+          "radial_ks <= 0.075"
+        ],
+        "metrics": {
+          "max_cov_eigen": 0.6666346986167209,
+          "max_projection_ks": 0.07824196577406967,
+          "mean_error_sigma": 0.014819218700405784,
+          "min_cov_eigen": 0.606076433170545,
+          "radial_ks": 0.17269340832501756,
+          "sample_count": 4096
+        },
+        "passed": false,
+        "step": 1000
+      }
+    ]
+  },
+  "retained_illustrative_exports": 1,
+  "retained_raw_failed_bound_count": 4,
+  "schema": "pg_gaussian2d_portable_publication_v1",
+  "source": {
+    "digest": "889fcdb097e3ed6e45296faf83b92364b41441d28cd3030c5eb8ce2fd127a2bd",
+    "files": 1214,
+    "origin_commit": "b1c33b79efaea16fe8c705af0f5c3af31d369fdf",
+    "parent_digest": "224f3c13af7281be157185a8938349e47195a0540b9fa6e05ca00106a68a6ab5",
+    "source_manifest_sha256": "261fe5d5a1e3f38a1b745db6a78cdf36195dc155fe8ce6c5ced8fe7a285bbe87"
+  },
+  "speed_ranking": false,
+  "supervised_status": "BUDGET_EXCEEDED",
+  "terminal_card_sha256": "e7fe31d335776e028151de055b651878da7344141c386322847d91d5b809a020",
+  "thresholds": [
+    [
+      "sample_count",
+      ">=",
+      1024
+    ],
+    [
+      "mean_error_sigma",
+      "<=",
+      0.1
+    ],
+    [
+      "min_cov_eigen",
+      ">=",
+      0.85
+    ],
+    [
+      "max_cov_eigen",
+      "<=",
+      1.15
+    ],
+    [
+      "radial_ks",
+      "<=",
+      0.075
+    ],
+    [
+      "max_projection_ks",
+      "<=",
+      0.06
+    ]
+  ]
+}

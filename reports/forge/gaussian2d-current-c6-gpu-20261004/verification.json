@@ -1,0 +1,18 @@
+{
+  "arrays_read": "NPY headers only for complete artifacts; no tensor/array restoration or scoring",
+  "consumed_inputs": 1231,
+  "input_index_sha256": "1625dbb3137b064f51f7902578a20cd660ab9b65653b928446334b4a07fc117d",
+  "models_restored": 0,
+  "original_gif_copies": 0,
+  "private_tokens_or_lease_fds_published": false,
+  "publisher_sha256": "c4763a202a75e916358965672e752ec51fa86e5c5582e2081b2f9f4aab445e97",
+  "results_sha256": "2ef6bdbbb22047b5448286a65bce0db4420b1047c07facf51dec5887d194d84a",
+  "retained_illustration_gif_copies": 1,
+  "sample_draws": 0,
+  "schema": "pg_gaussian2d_portable_publication_proof_v1",
+  "scorer_calls": 0,
+  "source_digest": "889fcdb097e3ed6e45296faf83b92364b41441d28cd3030c5eb8ce2fd127a2bd",
+  "status": "VERIFIED_DRAW_FREE",
+  "trusted_terminal_card_sha256": "e7fe31d335776e028151de055b651878da7344141c386322847d91d5b809a020",
+  "updates": 0
+}
