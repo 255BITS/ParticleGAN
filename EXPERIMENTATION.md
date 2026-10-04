@@ -207,7 +207,7 @@ screen is not a public-default promotion.
 ```sh
 python -m experiments.forge plan critic-anchor-v2 --through-tier 1
 python -m experiments.forge enqueue critic-anchor-v2 --through-tier 1 \
-  --campaign configs/forge/campaigns/tier1-acquisition-v1.json
+  --campaign configs/forge/campaigns/tier1-acquisition-v2.json
 python -m experiments.forge queue
 ```
 
@@ -216,11 +216,13 @@ wall time. `enqueue` freezes the source request and returns without starting
 training. An identical scientific request attaches to existing work or compatible
 evidence. Changing only prose does not justify rerunning the same experiment.
 
-The current five-task Tier 1 reserves up to 2,100 seconds: three existing
-300-second behavior tasks, the 300-second ring acquisition and the 900-second
-word acquisition. The explicit `tier1-acquisition-v1` campaign caps campaign and
-candidate reservations at that amount. The historical `smoke.json` campaign
-retains its 900-second ceiling and cannot cover the complete expanded Tier 1.
+The current six-task Tier 1 reserves up to 2,220 seconds: the 120-second
+scalar Gaussian acquisition, three existing 300-second behavior tasks,
+the 300-second ring acquisition and the 900-second word acquisition.
+The explicit `tier1-acquisition-v2` campaign caps campaign and candidate
+reservations at that amount. Revision 3's `tier1-acquisition-v1` retains its
+2,100-second cap; historical `smoke.json` retains its 900-second cap. Neither
+covers the complete revision-4 Tier 1.
 Task timeouts live in each task's `resources.timeout_seconds`. Larger campaigns
 need their own JSON definition and explicit budgets. The worker reserves a
 complete task allowance before starting it; a remaining budget too small for
@@ -232,7 +234,7 @@ python -m experiments.forge drain --gpus 0,1 --workers-per-gpu 1
 
 # Or submit and wait for this campaign on CPU for an applicable smoke task.
 python -m experiments.forge run critic-anchor-v2 --through-tier 1 --gpus cpu \
-  --campaign configs/forge/campaigns/tier1-acquisition-v1.json
+  --campaign configs/forge/campaigns/tier1-acquisition-v2.json
 ```
 
 Use `--device cpu` or `--device cuda` when planning/enqueuing; `run` infers the
@@ -321,14 +323,14 @@ Older snapshots retain their recorded execution contract.
 
 ## Tiers and views
 
-| Qualification tier | Current stability profile (revision 3) | Purpose |
+| Qualification tier | Current stability profile (revision 4) | Purpose |
 | --- | --- | --- |
-| 1: smoke | `two_pole`, `unused_token_hold`, `ae_gan_hold`, `ring16_acquisition`, `five_word_joint_acquisition`; 20,931 total host updates, up to 2,100 reserved seconds | Behavior, finite-state, intended-update, mechanism and acquisition checks; placement remains provisional |
+| 1: smoke | `gaussian1d_acquisition`, `two_pole`, `unused_token_hold`, `ae_gan_hold`, `ring16_acquisition`, `five_word_joint_acquisition`; 21,931 total host updates, up to 2,220 reserved seconds | Behavior, finite-state, intended-update, mechanism and acquisition checks; placement remains provisional |
 | 2: quality | 19 hosts, including three 7,000-update native coverage/accuracy gates | Require useful sustained live quality across families |
 | 3: endurance | Own-state ring hold and extension; reserve up to 7,500 total updates | Detect late failure after acquisition |
 
-The current required denominator is 5/19/2. Revision 2 and its published 3/19/2
-qualification results remain historical evidence; adding acquisition requirements
+The current required denominator is 6/19/2. Revision 3's 5/19/2 and revision 2's
+published 3/19/2 results remain historical evidence; adding acquisition requirements
 does not regrade them or transfer API demonstrations into Forge qualification.
 The expanded smoke profile needs calibration before scientific adoption.
 
@@ -412,7 +414,7 @@ and applicability rather than bespoke optimizer settings. A changed formulation
 needs a new family. Structural control changes within an existing formulation
 need ordinary idea cards and explicit deltas; they must not bypass the stricter
 same-signature configuration-search validator. A new configured family standard
-requires all five required Tier 1 tasks to PASS from that one candidate and
+requires all six required Tier 1 tasks to PASS from that one candidate and
 compatible evidence cohort. A failure leaves the recorded incumbent selected
 and the attempted replacement visible as an unranked alternative. Retaining an
 incumbent does not claim it beats a candidate from another source or runtime.
@@ -436,8 +438,8 @@ scientific ranking or default adoption.
 # Read-only cost/coverage plan, then explicit gated execution.
 python -m experiments.forge inventory plan --through-tier 3
 python -m experiments.forge inventory run --through-tier 3 --gpus 0,1
-# Regenerate the single current publication from registered compact evidence.
-python reports/forge/regenerate_technique_inventory.py
+# Refresh the single current publication without changing saved qualification.
+python reports/forge/regenerate_technique_inventory.py --refresh-publication
 python -m experiments.forge logs --follow --campaign technique-inventory-v1
 ```
 
@@ -468,15 +470,21 @@ To advance a published view policy, register its measured source explicitly with
 and their original denominators are archived unchanged; their results cannot
 fill new requirements. `--recorded-policy` only regenerates evidence for the
 manifest's exact policy and cannot be combined with new-source registration.
+Use `--refresh-publication` to update the displayed task coverage and standalone
+API results while retaining the registered scientific rows and family selections.
+It verifies the immutable evidence snapshots and exact archived policy, launches
+no training and does not regrade receipts. New required cells remain unknown
+until compatible ordinary evidence is explicitly registered.
 
 The original default inventory campaign has explicit reservation ceilings for
 its 12-technique roster. New techniques require checking the expanded plan and
 a new immutable campaign ID with adequate budgets. The Modern GAN recipe uses
 its own one-candidate campaign; it does not rerun unchanged techniques. Ordinary
 failures stop later tasks, including remaining tasks in that tier; unsupported
-techniques reserve no training resources. Required denominators are 5/19/2
+techniques reserve no training resources. Required denominators are 6/19/2
 for the current `discriminator_stability` view, including unknown and blocked
-cells. The current publication uses revision 3; earlier revision-2 3/19/2 cohorts
+cells. The current publication retains its recorded revision 3 (5/19/2) until
+ordinary evidence explicitly advances it; earlier revision-2 3/19/2 cohorts
 retain their original outcomes in its companion JSON and immutable snapshots.
 A zero passes/total cell alone does not establish a scientific failure.
 Unreached acquisition tasks remain unknown. New compatible evidence updates

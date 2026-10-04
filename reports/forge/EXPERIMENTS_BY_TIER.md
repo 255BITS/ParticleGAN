@@ -2,9 +2,9 @@
 
 Current task assignments, grouped by goal view and qualification tier. Required tasks gate progression; ranking and diagnostic tasks retain their declared roles.
 
-Catalog: **51 tasks**; **48 assigned** to at least one view; **3 unassigned**. Showing **7/7 views**.
+Catalog: **52 tasks**; **49 assigned** to at least one view; **3 unassigned**. Showing **7/7 views**.
 
-Declared priors across the catalog: **32 MoGParticlePrior**, **19 ParticlePrior** (including **3 nonsampled parameter controls**). Every experiment defines `execution.prior` explicitly; candidate and API defaults cannot supply it. `kind: mog` selects `MoGParticlePrior`; `kind: particle_cloud` selects `ParticlePrior`. Sigma alone does not identify the code path. Ordinary Forge MoG tasks require positive sigma; archived zero-sigma MoG evidence keeps its recorded kind. Task sigma is absolute; API demonstrations may instead record the recipe's relative `sigma_rel`.
+Declared priors across the catalog: **33 MoGParticlePrior**, **19 ParticlePrior** (including **3 nonsampled parameter controls**). Every experiment defines `execution.prior` explicitly; candidate and API defaults cannot supply it. `kind: mog` selects `MoGParticlePrior`; `kind: particle_cloud` selects `ParticlePrior`. Sigma alone does not identify the code path. Ordinary Forge MoG tasks require positive sigma; archived zero-sigma MoG evidence keeps its recorded kind. Task sigma is absolute; API demonstrations may instead record the recipe's relative `sigma_rel`.
 
 Regenerate from the repository root with `python -m experiments.forge experiments-by-tier --output reports/forge/EXPERIMENTS_BY_TIER.md`. Add `--json` for machine-readable output (use a `.json` output path when saving). Regeneration reads declarations and published artifacts and launches no training.
 
@@ -32,7 +32,7 @@ This report follows changing declarations and published evidence; it selects no 
 | --- | ---: | --- | --- | --- | --- |
 | [adaptation](../../configs/forge/views/adaptation.json) | 2 | 3 required | 19 required | 1 required | provisional |
 | [clockfree_continuous](../../configs/forge/views/clockfree_continuous.json) | 2 | 4 required | 19 required | 6 required | provisional |
-| [discriminator_stability](../../configs/forge/views/discriminator_stability.json) | 3 | 5 required | 19 required | 2 required | provisional |
+| [discriminator_stability](../../configs/forge/views/discriminator_stability.json) | 4 | 6 required | 19 required | 2 required | provisional |
 | [formulation_comparison](../../configs/forge/views/formulation_comparison.json) | 1 | 3 required | 19 required, 15 diagnostic | 2 required | provisional |
 | [host_profile_transfer](../../configs/forge/views/host_profile_transfer.json) | 4 | 3 required | 19 required, 13 diagnostic | 2 required | provisional |
 | [k3p_two_pole_horizon](../../configs/forge/views/k3p_two_pole_horizon.json) | 1 | 2 diagnostic | 0 tasks | 0 tasks | provisional |
@@ -154,20 +154,21 @@ Candidate outcomes, metrics and measured costs: [leaderboard](leaderboards/clock
 
 ## discriminator_stability
 
-Declaration: [discriminator_stability](../../configs/forge/views/discriminator_stability.json); revision 3; goal: `discriminator_stability`.
+Declaration: [discriminator_stability](../../configs/forge/views/discriminator_stability.json); revision 4; goal: `discriminator_stability`.
 
 Declared calibration status: **provisional**.
 
-Expanded five-task Tier 1 placement is provisional and requires a new bounded calibration; prior three-task profiles and revision 2 published qualification retain their original scope.
+Expanded six-task Tier 1 placement is provisional and requires bounded calibration. Revision 3 and prior profiles retain their original tasks and evidence; a standalone scalar pass gives no whole-view/default credit.
 
 Candidate outcomes, metrics and measured costs: [leaderboard](technique-inventory.md).
 
 ### Tier 1: smoke
 
-5 required.
+6 required.
 
 | Task | Importance | Prior code path | Experiment guide | Adapter / gate | Declared steps | Timeout (s) | Dependencies / shared execution |
 | --- | --- | --- | --- | --- | --- | --- | --- |
+| [gaussian1d_acquisition](../../configs/forge/tasks/gaussian1d_acquisition.json) | required | MoGParticlePrior (sigma=0.025) | [Question, results, GIFs](#experiment-gaussian1d-acquisition) | transfer_vector / transfer_sustained | 1000 | 120 | — |
 | [two_pole](../../configs/forge/tasks/two_pole.json) | required | ParticlePrior (sigma=0) | [Question, results, GIFs](#experiment-two-pole) | transfer_behavior / transfer_sustained | 80 | 300 | — |
 | [unused_token_hold](../../configs/forge/tasks/unused_token_hold.json) | required | ParticlePrior (sigma=0; not sampled) | [Question, results, GIFs](#experiment-unused-token-hold) | transfer_behavior / transfer_sustained | 200 | 300 | — |
 | [ae_gan_hold](../../configs/forge/tasks/ae_gan_hold.json) | required | MoGParticlePrior (sigma=0.025) | [Question, results, GIFs](#experiment-ae-gan-hold) | transfer_behavior / transfer_sustained | 250 | 300 | — |
@@ -572,6 +573,37 @@ Related public-API demonstrations, with their own recorded contracts:
 | --- | --- | --- | --- | --- | --- |
 | [forge-five-word-joint-api-demo-v1](../toy_audit/api_contract/five_word_joint/goal.gif) | Can a joint BiGAN generator, encoder and critic acquire five equally likely canonical words and reconstruct every correctly paired input with confident token probabilities, including padding? Scope: One bounded shared-API integration demonstration, not an ordinary Forge run or release qualification. Score the declared bounds honestly at 32 updates and grade the evidence INCOMPLETE against the 20,001-update task. | ParticlePrior (sigma=0) | COMPLETE / INCOMPLETE; 32/20001 updates; quality_fraction, modes, mass_tv, reconstruction_exact, minimum_reconstruction_token_probability | ka2 / cpu / 997c7f01b99a | [definition](../toy_audit/api_contract/five_word_joint/publication.json); [readout](../toy_audit/api_contract/five_word_joint/publication.json); [recipe and provenance](../toy_audit/api_contract/five_word_joint/publication.json) |
 | [image-five-words-joint-ae](../toy_audit/api_contract/media/image-five-words-joint-ae.gif) | Generate the five equally likely canonical words with confident normalized token probabilities, and reconstruct each of the five matched inputs including underscore padding. Scope: Finite vocabulary apple/grape/lemon/melon/berry only. Joint BiGAN inverse reconstruction; no unseen words or natural-language generation. New API-policy variant, not reuse of historical EMA PASS. | ParticlePrior (sigma=0) | COMPLETE / PASS; 20001/20001 updates | ka2 / cpu / 39eff89a9223 | [definition](../toy_audit/api_contract/cases.json); [readout](../toy_audit/api_contract/readout.json); [recipe and provenance](../toy_audit/api_contract/runs.json) |
+
+### Experiment: gaussian1d-acquisition
+
+Can the public ParticleGAN trainer acquire the scalar law N(2, 0.5^2) from random initialization within 1,000 updates, with correct location, width and CDF shape at five terminal checks?
+
+Explanation, interpretation and reproduction: [experiment readout](../toy_audit/api_contract/gaussian1d/README.md).
+
+Forge declarations: [gaussian1d_acquisition](../../configs/forge/tasks/gaussian1d_acquisition.json).
+
+<details>
+<summary>Declared Forge numerical gates and sampling</summary>
+
+[gaussian1d_acquisition](../../configs/forge/tasks/gaussian1d_acquisition.json)
+
+- **kind**: "transfer_sustained"
+- **thresholds**: [["sample_count", ">=", 4096], ["finite_fraction", "==", 1.0], ["mean_error_sigma", "<=", 0.2], ["std_ratio", ">=", 0.8], ["std_ratio", "<=", 1.2], ["cdf_ks", "<=", 0.05]]
+- **minimum_stable_checks**: 5
+- **prior**: {"kind": "mog", "learnable": true, "sigma": 0.025, "standardize": false}
+- **sampling_law**: "public_prior_without_output_noise"
+- **scoring_weights**: "live"
+- **eval_output_noise**: "clean"
+
+</details>
+
+No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
+
+Related public-API demonstrations, with their own recorded contracts:
+
+| Variant / actual-training GIF | What this variant tests | Recorded prior code path | Recorded result / failed bounds | Recipe / compute / source | Evidence |
+| --- | --- | --- | --- | --- | --- |
+| [api-gaussian1d-acquisition](../toy_audit/api_contract/gaussian1d/goal.gif) | Can the public ParticleGAN trainer acquire the scalar law N(2, 0.5^2) from random initialization within 1,000 updates, with correct location, width and CDF shape at five terminal checks? Scope: Acquire N(2, .5^2) in 1,000 updates from random initialization; exact Gaussian CDF, location and width gates must pass at five terminal checks. Tier 1 remains provisional; this standalone API cohort grants no whole-view qualification. | MoGParticlePrior (sigma_rel=0) | COMPLETE / FAIL; 1000/1000 updates; cdf_ks <= 0.05, last 5 post-update metric observations do not all pass | k3p / cpu / 666642486d3c | [definition](../toy_audit/api_contract/gaussian1d/results.json); [readout](../toy_audit/api_contract/gaussian1d/results.json); [recipe and provenance](../toy_audit/api_contract/gaussian1d/results.json) |
 
 ### Experiment: grid100
 
@@ -1280,6 +1312,6 @@ The wider question review also links standalone experiments outside the Forge ti
 - [Later questions](../toy_audit/api_contract/recent_prs/README.md)
 - [Caption questions](../toy_audit/api_contract/caption_prs/README.md)
 
-Declaration input digest: `3a0f2173afe1e309affe3304524b99748988595f4000a1d87aa96a017ff2c21c`. The JSON form includes the individual task and view file hashes.
+Declaration input digest: `adcdfd85cc335886698955a5cada9865918db70a411df410f52a6e0efb8493e9`. The JSON form includes the individual task and view file hashes.
 
-Published artifact input digest: `e8a498b7d9550da0419bb54f0b54c2a222ae987375a57918780531959bc68f7a`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.
+Published artifact input digest: `a535698a92442d592e5a80b4dd764f84cf152274dc98c1484a16be19b4d5ba59`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.

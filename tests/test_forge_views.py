@@ -71,12 +71,12 @@ def test_initial_inventory_has_complete_quality_and_distinct_claim_views():
     assert variant["importance"] == "diagnostic"
     assert all(a["task"] != variant["task"] for a in stability["assignments"] + quality["assignments"])
     smoke = [a["task"] for a in stability["assignments"] if a["qualification_tier"] == 1]
-    assert smoke == ["two_pole", "unused_token_hold", "ae_gan_hold", "ring16_acquisition",
+    assert smoke == ["gaussian1d_acquisition", "two_pole", "unused_token_hold", "ae_gan_hold", "ring16_acquisition",
                      "five_word_joint_acquisition"]
-    assert sum(tasks[n]["execution"]["steps"] for n in smoke[:3]) == 530
-    assert stability["revision"] == 3
+    assert sum(tasks[n]["execution"]["steps"] for n in smoke[1:4]) == 530
+    assert stability["revision"] == 4
     assert [sum(a["qualification_tier"] == tier and a["importance"] == "required"
-                for a in stability["assignments"]) for tier in (1, 2, 3)] == [5, 19, 2]
+                for a in stability["assignments"]) for tier in (1, 2, 3)] == [6, 19, 2]
     assert all("qualification_tier" not in t for t in tasks.values())
     assert tasks["ring_hold"]["execution"]["execution_group"] == tasks["ring_extension"]["execution"]["execution_group"]
     assert tasks["ring_hold"]["execution"]["max_total_steps"] == 7500
@@ -104,9 +104,10 @@ def test_default_plan_and_report_include_acquisition_smoke_without_new_views():
     assert not {"ring16_acquisition", "five_word_joint"} & {row["id"] for row in report["views"]}
     view = next(row for row in report["views"] if row["id"] == "discriminator_stability")
     smoke = next(row for row in view["tiers"] if row["qualification_tier"] == 1)
-    assert smoke["counts"] == {"required": 5, "ranking": 0, "diagnostic": 0}
+    assert smoke["counts"] == {"required": 6, "ranking": 0, "diagnostic": 0}
     reported = {row["id"]: row for row in smoke["tasks"]}
-    for name, updates, timeout in (("ring16_acquisition", 400, 300),
+    for name, updates, timeout in (("gaussian1d_acquisition", 1000, 120),
+                                   ("ring16_acquisition", 400, 300),
                                    ("five_word_joint_acquisition", 20001, 900)):
         assert planned[name]["qualification_tier"] == 1
         assert planned[name]["importance"] == "required" and planned[name]["permitted_by_tier_cap"]

@@ -30,6 +30,9 @@ def completed(tmp_path):
         target = tmp_path / relative
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(ROOT / relative, target)
+    # The completed study is pinned to revision 3, independent of later tasks.
+    shutil.copyfile(ROOT / "configs/forge/view-history/discriminator_stability-v3.json",
+                    tmp_path / f"configs/forge/views/{round_definition['view']}.json")
     view = read_json(tmp_path / f"configs/forge/views/{round_definition['view']}.json")
     assignments = sorted(view["assignments"], key=lambda row: (row["qualification_tier"], row["order"]))
     requirements = {str(tier): [row["task"] for row in assignments if row["qualification_tier"] == tier]

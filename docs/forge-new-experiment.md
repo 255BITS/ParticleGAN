@@ -6,7 +6,7 @@ with [EXPERIMENTATION.md](../EXPERIMENTATION.md), the
 [public-API toy contract](../reports/toy_audit/api_contract/README.md). They define
 the current gates, budgets, evidence rules and provisional calibration status.
 
-Two worked examples show the process:
+Three worked examples show the process:
 
 - [Sixteen Gaussian clusters](../reports/toy_audit/api_contract/ring16/README.md):
   reuse a vector host, add acquisition gates and scorer controls, and publish a
@@ -14,6 +14,8 @@ Two worked examples show the process:
 - [Five-word joint BiGAN](../reports/forge/five-word-joint/README.md): bind an
   existing successful API example into Forge, preserving paired reconstruction
   and keeping a short integration demo separate from full qualification.
+- [1-D Gaussian histogram matching](../reports/toy_audit/api_contract/gaussian1d/README.md):
+  a scalar public-trainer host with exact CDF controls and a 120-second cap.
 
 ## 1. Decide what is new
 
@@ -132,7 +134,8 @@ For an ordinary new question, add the task as required Tier 1 in the existing
 `discriminator_stability` view and increment its revision. Both worked acquisition
 examples follow this policy: `ring16_acquisition` and
 `five_word_joint_acquisition` are required Tier 1 tasks in revision 3, with a
-5/19/2 denominator. Create a new view only for an explicitly different claim or
+5/19/2 denominator. Revision 4 adds `gaussian1d_acquisition` as the first required
+Tier 1 task, giving 6/19/2. Create a new view only for an explicitly different claim or
 diagnostic scope, such as clock-free eligibility or architecture transfer.
 Keeping an existing denominator unchanged is not sufficient reason for a new
 view. Saved campaign requests, calibration/search contracts and recorded revision-2
@@ -142,8 +145,9 @@ Initial placement remains a hypothesis, even for a successful source example.
 Scientific adoption needs independent positive/negative references, false
 rejection/acceptance and cost measurements under a preregistered compute cap.
 Oracle controls or a single fast run do not calibrate a tier. Check the expanded
-reservation budget: these five Tier 1 tasks total 2,100 seconds, so the historical
-900-second smoke campaign is insufficient. A later tier change gets a new view
+reservation budget: the six revision-4 Tier 1 tasks total 2,220 seconds;
+`tier1-acquisition-v2` covers it. Historical campaigns retain their smaller caps.
+A later tier change gets a new view
 revision; changed task budgets, gates or sampling laws need a new protocol
 identity with the original evidence preserved.
 
@@ -160,7 +164,7 @@ python -m experiments.forge plan k3p --view discriminator_stability \
 
 Both commands are read-only. The plan shows blockers, compatible reuse,
 prerequisites and worst-case reserved cost; it launches no training. This example
-plans all five required Tier 1 tasks for an existing candidate and does not
+plans all six required Tier 1 tasks for an existing candidate and does not
 authorize executing them. Inspect every task's compatibility and the full
 reservation ceiling before choosing a campaign.
 

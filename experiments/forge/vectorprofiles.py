@@ -104,6 +104,16 @@ def _validate_spec(spec):
     for key in ("hidden", "layers", "z_dim", "particles", "batch", "steps", "d_hidden", "d_layers", "fourier"):
         if key in spec and (type(spec[key]) is not int or spec[key] < (0 if key == "fourier" else 1)):
             raise ValueError(f"invalid vector dimension: {key}")
+    if spec["kind"] == "gaussian_mixture":
+        dimension = len(spec["means"][0])
+        if dimension not in (1, 2) or any(len(mean) != dimension for mean in spec["means"]):
+            raise ValueError("Gaussian hosts require consistent one- or two-dimensional means")
+        if len(spec["covariances"]) != len(spec["means"]) or any(
+                len(covariance) != dimension or any(len(row) != dimension for row in covariance)
+                for covariance in spec["covariances"]):
+            raise ValueError("Gaussian covariance dimensions differ from the means")
+        if dimension == 1 and "research_discriminator" in spec:
+            raise ValueError("one-dimensional hosts require the declared MLP critic")
     if "research_discriminator" not in spec:
         return
     card = spec["research_discriminator"]
@@ -172,8 +182,15 @@ def build_vector_models(context, spec: dict):
         raise ValueError("vector latent dimension differs from its formulation context")
     from lib.toy_models import SimpleMLPGenerator
     from benchmarks.transfer_suite.public_default_verification import vector_discriminator
+    dimension = len(spec["means"][0]) if spec["kind"] == "gaussian_mixture" else 2
     generator = context.construct(lambda: SimpleMLPGenerator(
-        context.recipe.z_dim, spec["hidden"], spec["layers"], 2), component="generator").to(context.device)
-    discriminator = context.construct(lambda: vector_discriminator(
-        spec, spec.get("research_discriminator")), component="discriminator").to(context.device)
+        context.recipe.z_dim, spec["hidden"], spec["layers"], dimension), component="generator").to(context.device)
+    if dimension == 1:
+        from lib.toy_models import SimpleMLPDiscriminator
+        discriminator = context.construct(lambda: SimpleMLPDiscriminator(
+            1, spec.get("d_hidden", spec["hidden"]), spec.get("d_layers", spec["layers"]),
+            spec["fourier"]), component="discriminator").to(context.device)
+    else:
+        discriminator = context.construct(lambda: vector_discriminator(
+            spec, spec.get("research_discriminator")), component="discriminator").to(context.device)
     return generator, discriminator

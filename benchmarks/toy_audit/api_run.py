@@ -336,9 +336,14 @@ def render_gif(case, records, path, *, full_budget, requested_steps, final_verdi
                 a, b = target.reshape(-1), samples.reshape(-1)
                 if len(a) != len(b):
                     raise ValueError("bar goal reference and output must have matching bins")
-                x = np.arange(len(a))
-                ax.bar(x - .18, a, width=.36, color="#9ba8b6", label="Desired")
-                ax.bar(x + .18, b, width=.36, color="#ce476a", label="API output")
+                x = np.asarray(view.get("bin_centers", np.arange(len(a))))
+                if x.shape != a.shape or not np.isfinite(x).all():
+                    raise ValueError("bar bin centers must match finite reference bins")
+                width = view.get("bin_width", 1.)
+                if not isinstance(width, (int, float)) or not math.isfinite(width) or width <= 0:
+                    raise ValueError("bar bin width must be finite and positive")
+                ax.bar(x - .18 * width, a, width=.36 * width, color="#9ba8b6", label="Desired")
+                ax.bar(x + .18 * width, b, width=.36 * width, color="#ce476a", label="API output")
                 ax.legend(fontsize=7)
                 if index in fixed:
                     ax.set_ylim(min(0, float(fixed[index][0][1]) * 1.08),

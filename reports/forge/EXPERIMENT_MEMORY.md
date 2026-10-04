@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 448. Inventory coverage: complete. Unresolved import items: 7.
+Records: 449. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -660,6 +660,22 @@ Fresh, independently audited original Atlas replay passes 19/19 CUDA gates (3 na
 **Next:** Keep the integration on develop and the release branch held. Preserve every failed cohort; do not fill or tune the concluded failed profiles. Before main/default adoption, freeze a justified policy-aware qualification matching the intended prior, initialization, sampling law, serving weights and controls. No additional training is launched by this context record.
 
 [Evidence](../../reports/develop-gates-20261001/README.md) · [Record](records/develop-original-atlas19-and-gate-diagnosis-fae8ce2a6d7f.json)
+
+### k3p · gaussian1d-api-8e7f8be3b998d3daf08a0b50
+
+**Scope:** standalone_api; scientific; revision `0a8c525384fa50273be6c67c83fd65dc0f2379a57404847917e8f7246b100d21`.
+
+Can the public GANTrainer learn N(2, 0.5^2) from random initialization in 1,000 updates? One standalone K3P/learned-MoG cohort with 24 checks and five required terminal passes; no ordinary Forge qualification.
+
+**Observed:** {'FAIL': 1}; wall seconds 4.953; mechanism `existing_recipe_new_scalar_host`.
+
+
+
+Close scalar fit after 4.953 CPU seconds: mean 2.02749, std .52790 for target mean2/std.5. Strict FAIL: final KS .05674 exceeds .05, and only 3/5 terminal checks pass (12/24 overall). No recipe attribution, threshold adjustment, repeat or continuation. Oracle and seven destructive controls behave as declared; nine-state actual histogram GIF is published.
+
+**Next:** Keep the provisional fast Tier 1 test and its FAIL. Before a more complex target, preregister one substantive stability hypothesis with explicit recipe/budget/source binding; no seed-only repeat, ordinary qualification or default adoption.
+
+[Evidence](../../reports/toy_audit/api_contract/gaussian1d/results.json) · [Record](records/gaussian1d-api-8e7f8be3b998d3daf08a0b50.json)
 
 ### cf1-bdpair · history-cf1-bdpair-21ac56b45896
 
@@ -4659,4 +4675,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `8fc56357f4134dd988deb19f6d4f808c62b0ab2a7f0024ce03d7d8c0b235acf3`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `c400cc67956fb271ec22c91d8aa7b0313649e784001cc1bf5ac6580816011177`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

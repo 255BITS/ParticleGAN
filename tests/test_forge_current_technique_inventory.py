@@ -305,6 +305,87 @@ def test_recorded_policy_preserves_old_rows_after_view_and_declarations_change(e
     assert times == {path: path.stat().st_mtime_ns for path in outputs}
 
 
+def test_publication_refresh_preserves_science_and_shows_new_unknown_requirement(evidence):
+    root, manifest = evidence
+    baseline = read_json(publication.publish_current(root)["json"])
+    policy = read_json(root / "configs/forge/views/discriminator_stability.json")
+    atomic_json(root / "configs/forge/view-history/discriminator_stability-v2.json", policy)
+    policy["revision"] = 3
+    policy["assignments"].append(dict(task="new-scalar", qualification_tier=1, importance="required", order=3))
+    atomic_json(root / "configs/forge/views/discriminator_stability.json", policy)
+    protected = {path: path.read_bytes() for path in (root / publication.EVIDENCE_MANIFEST.parent).glob("*.json")}
+    metadata = publication.refresh_publication(root)
+    current = read_json(metadata["json"])
+    for key in ("rows", "configuration_rows", "evidence_rows", "archived_evidence_rows", *publication.POLICY_FIELDS):
+        assert current.get(key) == baseline.get(key)
+    assert current["declared_view"]["revision"] == 3
+    assert current["declared_view"]["added_required_tasks"]["1"] == ["new-scalar"]
+    assert current["publication_refresh"] == dict(scientific_rows_preserved=True,
+                                                 qualification_regraded=False, training_launched=False)
+    markdown = Path(metadata["report"]).read_text()
+    assert "Additional required cells are **UNKNOWN**" in markdown and "`new-scalar`" in markdown
+    assert "--refresh-publication" in markdown
+    assert all(path.read_bytes() == data for path, data in protected.items())
+    before = _outputs(root)
+    times = {path: path.stat().st_mtime_ns for path in before}
+    assert publication.refresh_publication(root) == metadata
+    assert _outputs(root) == before and times == {path: path.stat().st_mtime_ns for path in before}
+
+
+@pytest.mark.parametrize("tamper,message", [("digest", "input digest"), ("row", "unregistered scientific row")])
+def test_publication_refresh_rejects_changed_science_before_writing(evidence, tamper, message):
+    root, _ = evidence
+    publication.publish_current(root)
+    path = root / publication.CURRENT_PREFIX.with_suffix(".json")
+    report = read_json(path)
+    report["rows"][0]["qualified_tier"] = 99
+    if tamper == "row":
+        report["provenance"].pop("input_digest")
+        report["provenance"]["input_digest"] = stable_hash(report)
+    atomic_json(path, report)
+    before = _outputs(root)
+    with pytest.raises(ValueError, match=message):
+        publication.refresh_publication(root)
+    assert _outputs(root) == before
+
+
+def test_standalone_scalar_display_binds_actual_receipt_and_never_changes_qualification():
+    scores = publication._standalone_api_scores(ROOT)
+    score = next(score for score in scores if score["case"]["id"] == "api-gaussian1d-acquisition")
+    assert score["run"]["verdict"] == "FAIL"
+    assert score["run"]["final_metrics"]["cdf_ks"] == pytest.approx(.056740549361447234)
+    assert score["prior"] == dict(kind="mog", sigma=.025, standardize=False, learnable=True)
+    assert score["qualification_input"] is False
+    current = read_json(ROOT / publication.CURRENT_PREFIX.with_suffix(".json"))
+    current["standalone_api_scores"] = [score]
+    before = deepcopy(current["rows"])
+    markdown = publication._current_markdown(current, ROOT, ROOT / publication.CURRENT_PREFIX.with_suffix(".md"))
+    assert "1-D Gaussian: histogram matching" in markdown
+    assert "KS 0.05674 / ≤ 0.05" in markdown and "terminal 3/5" in markdown
+    assert current["rows"] == before
+
+
+@pytest.mark.parametrize("tamper,message", [("publication", "publication identity"),
+                                           ("gif", "GIF identity"), ("recipe", "binding mismatch")])
+def test_standalone_scalar_display_rejects_broken_source_bindings(tmp_path, tamper, message):
+    record_path = next((ROOT / "reports/forge/records").glob("gaussian1d-api-*.json"))
+    record = read_json(record_path)
+    report_dir = Path(record["source"]["path"]).parent
+    for relative in (record_path.relative_to(ROOT), report_dir / "results.json",
+                     report_dir / "README.md", report_dir / "goal.gif"):
+        target = tmp_path / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(ROOT / relative, target)
+    if tamper == "recipe":
+        record["provenance"]["recipe_sha256"] = "bad"
+        atomic_json(tmp_path / record_path.relative_to(ROOT), record)
+    else:
+        target = tmp_path / report_dir / ("results.json" if tamper == "publication" else "goal.gif")
+        target.write_bytes(target.read_bytes() + b" ")
+    with pytest.raises(ValueError, match=message):
+        publication._standalone_api_scores(tmp_path)
+
+
 @pytest.mark.parametrize("field", ["id", "revision", "assignments"])
 def test_recorded_policy_must_match_registered_identity(evidence, field):
     root, _ = evidence
@@ -804,7 +885,8 @@ def test_atlas_progress_is_source_bound_additive_display_and_preserves_every_ord
     assert "**4/26 PASS** · NOT_RUN 22" in markdown
     assert "**INVALID 1** · NOT_RUN 25 · numerical gate UNAVAILABLE" in markdown
     assert "7/8" not in markdown and "Atlas unblocking progress" not in markdown
-    assert "one unchanged family/configuration tuple must satisfy all 26 required" in markdown
+    required = sum(len(names) for names in before["tier_requirements"].values())
+    assert f"one unchanged family/configuration tuple must satisfy all {required} required" in markdown
     assert not any(line.lower().startswith("| atlas ·") for line in markdown.splitlines())
     # The synthetic ordinary reference remains unchanged in the data even
     # though the actual selected-policy result occupies the displayed row.
@@ -1105,7 +1187,8 @@ def test_one_visible_table_leads_with_actual_atlas_and_keeps_configuration_scope
     assert text.count("| --- | --- | --- |") == 1
     assert "<details>" not in text and "| Study | Result |" not in text
     table = [line for line in text.splitlines() if line.startswith("|")][2:]
-    assert len(table) == 19  # Original-law replay, seven diagnostics and 11 ordinary rows.
+    standalone_count = len(result.get("standalone_api_scores", []))
+    assert len(table) == 19 + standalone_count
     assert table[0].startswith("| [Original PR223 Atlas FULL · LR .00425 / prior2]")
     assert "| Particles | " in table[0] and "**19/19 PASS**" in table[0]
     assert table[1].startswith("| [Atlas C6 CHANGED-rate / noise-OFF · LR .0053125 / prior1.5")
@@ -1115,8 +1198,11 @@ def test_one_visible_table_leads_with_actual_atlas_and_keeps_configuration_scope
     assert not any(line.startswith("| Atlas ·") for line in table)
     assert any("0/26 PASS** · FAIL 1 · NOT_RUN 25 · COMPLETE" in line for line in table)
     assert any("INVALID 1** · NOT_RUN 25 · numerical gate UNAVAILABLE" in line for line in table)
-    assert all("ordinary qualification" in line for line in table[8:])
-    assert [line.split(" · ", 1)[0][2:] for line in table[8:]] == [row["technique"] for row in result["rows"] if row["trainer_family"] != "atlas"]
+    ordinary_start = 8 + standalone_count
+    assert all("standalone API" in line and "no ordinary tier credit" in line
+               for line in table[8:ordinary_start])
+    assert all("ordinary qualification" in line for line in table[ordinary_start:])
+    assert [line.split(" · ", 1)[0][2:] for line in table[ordinary_start:]] == [row["technique"] for row in result["rows"] if row["trainer_family"] != "atlas"]
     assert result == before
 
 
@@ -1211,6 +1297,10 @@ def test_committed_cohorts_rebuild_every_scientific_row_in_a_checkout_without_ra
     shutil.copyfile(ROOT / "configs/forge/trainer-families.json", tmp_path / "configs/forge/trainer-families.json")
     shutil.copyfile(ROOT / "configs/forge/defaults.json", tmp_path / "configs/forge/defaults.json")
     manifest = read_json(tmp_path / publication.EVIDENCE_MANIFEST)
+    # Rebuild this recorded publication against its exact archived denominator.
+    # The new scalar task does not relabel any of these scientific rows.
+    archived = tmp_path / "configs/forge/view-history" / f"discriminator_stability-v{manifest['view_revision']}.json"
+    shutil.copyfile(archived, tmp_path / "configs/forge/views/discriminator_stability.json")
     expected, all_snapshots, registered_rows, unregistered_shadows = {}, [], [], []
     snapshot_bytes = {}
     for entry in manifest["cohorts"]:

@@ -1,5 +1,7 @@
 # Shared ParticleGAN score index
 
+The declared view is revision **4 (6/19/2)**. Ordinary scores below retain their measured revision **3 (5/19/2)**. Additional required cells are **UNKNOWN** for every ordinary family: `gaussian1d_acquisition`. Standalone API results keep their own source, recipe and runtime; they do not fill these cells.
+
 Each row keeps its own configuration, source, representation and measured scope. Required denominators stay fixed; diagnostic and ordinary qualification scores remain separate.
 
 | Model/configuration | Actual representation | Measured score/status and scope |
@@ -12,6 +14,7 @@ Each row keeps its own configuration, source, representation and measured scope.
 | [`atlas_multibank` · C6 · `fb7acc77`](../atlas-named-gpu-diagnostics-native-v4b-20261004/README.md) | Particles (two routed clouds) | **1/26 PASS** · NOT_RUN 25<br>Named-family diagnostic · goal GIFs: [cover_leftover](../atlas-named-gpu-diagnostics-native-v4b-20261004/gifs/cover_leftover_multibank_policy_v1.gif) |
 | [`atlas_word_joint_min11` · C6 · `fb7acc77`](../atlas-word-retained-context-20261004/README.md) | Particles (N11 joint cloud; free encoder) | **INVALID 1** · NOT_RUN 25 · numerical gate UNAVAILABLE<br>Named-family diagnostic · retained INVALID illustration: [five_word_joint_acquisition](../atlas-word-retained-context-20261004/word-retained-goal.gif) |
 | [half_base LR .00265625 / prior1.5 / D1 · source `f9f7ed9d`](../word-half-base-20261004/README.md) | Particles (N11 joint cloud; free encoder) | **0/26 PASS** · FAIL 1 · NOT_RUN 25 · COMPLETE<br>Final quality 0.546875 · modes 2/5 · mass TV 0.622266 · all-five exact 0<br>[accepted 20,001-update goal GIF](../word-half-base-20261004/media/goal.gif) |
+| [K3P · 1-D Gaussian: histogram matching](../../toy_audit/api_contract/gaussian1d/README.md) | MoG (fixed σ 0.025) | **0/1 PASS · FAIL 1** · standalone API · cpu · 1,000 updates · terminal 3/5 · KS 0.05674 / ≤ 0.05<br>[Actual-training histogram GIF](../../toy_audit/api_contract/gaussian1d/goal.gif) · no ordinary tier credit |
 | BCap · [bcap · 08689a73c551](../../../configs/forge/configurations/bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212.json)<br>cuda · ordinary qualification | MoG + particles (per task) | Tier 1: 3/5<br>FAIL 1 · UNKNOWN 1<br>Tier 2: UNKNOWN (19 required)<br>Tier 3: UNKNOWN (2 required)<br>Recorded tier: 0 · [source](../technique-inventory.json) |
 | E22 · [e22](../../../configs/forge/ideas/e22.json)<br>cuda · ordinary qualification | Particles | Tier 1: BLOCKED (5 required)<br>Tier 2: BLOCKED (19 required)<br>Tier 3: BLOCKED (2 required)<br>Recorded tier: 0 · [source](../technique-inventory.json) |
 | GAN v3 release 0.7 (MoG) · [release07-gan-v3-mog · 1e266b5a2986](../../../configs/forge/configurations/release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c.json)<br>cuda · ordinary qualification | MoG + particles (per task) | Tier 1: 3/5<br>FAIL 1 · UNKNOWN 1<br>Tier 2: UNKNOWN (19 required)<br>Tier 3: UNKNOWN (2 required)<br>Recorded tier: 0 · [source](../technique-inventory.json) |
@@ -28,7 +31,7 @@ The C6 diagnostic/reference changes rates to LR .0053125 / prior-rate 1.5 and di
 
 ## Qualification and accounting
 
-Each model/configuration keeps its own source, law and full 26-slot denominator. MoG + particles (per task) is a mixture of separate suite hosts, not a hybrid-model claim. Named diagnostic passes do not fill ordinary cells or combine into a family score. INVALID supplies no accepted numerical grade; original N5 word execution remains BLOCKED. No family default or comparable speed winner is established.
+Each model/configuration keeps its own source, law and declared denominator. Existing C6 diagnostics retain their 26-slot protocol; standalone API rows use their own task gates. MoG + particles (per task) is a mixture of separate suite hosts, not a hybrid-model claim. Named diagnostic passes do not fill ordinary cells or combine into a family score. INVALID supplies no accepted numerical grade; original N5 word execution remains BLOCKED. No family default or comparable speed winner is established.
 
 The named campaign's predecessor-inclusive charge is **1466.669318475062 / 10500 seconds**, reserve zero: GPU0 **234.82608077581972 / 7500**, GPU1 **1231.8432376992423 / 3000**. The separate half_base attempt charged **556.4301753160544 / 900 seconds**, with zero reserve and overrun. Prior charges are included once; the original C6 word INVALID is unchanged.
 
