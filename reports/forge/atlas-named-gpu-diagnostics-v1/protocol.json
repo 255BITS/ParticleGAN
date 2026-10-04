@@ -1,0 +1,144 @@
+{
+  "calibration_credit": false,
+  "cases": [
+    {
+      "cohort": "routed_policy_selected_cloud_v1",
+      "definition": "configs/forge/task-variants/routed_policy_selected_cloud_v1/unused_token_hold_routed_policy_selected_cloud_v1.json",
+      "evaluation_sha256": "676542443392b8a3918991a31ee28c325c859874d9914d674780bf5555b0baac",
+      "execution_sha256": "4ed49e251a08a8f6aebfa40295509c27034ba97633078e24223541407a6c2a1e",
+      "family": "atlas_routed",
+      "gpu": "1",
+      "id": "unused_token_hold_routed_policy_selected_cloud_v1",
+      "parent_id": "unused_token_hold",
+      "sha256": "9cc7c0b53f929134bd8dcd27e80b3a55ca5e7572bdc607e0ec2542c96c76ed74",
+      "steps": 200,
+      "timeout_seconds": 300
+    },
+    {
+      "cohort": "multibank_policy_v1",
+      "definition": "configs/forge/task-variants/multibank_policy_v1/cover_leftover_multibank_policy_v1.json",
+      "evaluation_sha256": "dcda190c097644428f82ed4ac2cbe6a2603f57a0dcbeace09a6776a2dd371ece",
+      "execution_sha256": "11ae869d165a08fa422cf41c7f5a524c416ae0f3768d8098541b51bfaed32fec",
+      "family": "atlas_multibank",
+      "gpu": "1",
+      "id": "cover_leftover_multibank_policy_v1",
+      "parent_id": "cover_leftover",
+      "sha256": "8da5a372d8cb0cb7a16adaa4f1c9df8c59e34610ab97a7b7a5497949324cd3ae",
+      "steps": 800,
+      "timeout_seconds": 1800
+    },
+    {
+      "cohort": "word_joint_policy_min11_v1",
+      "definition": "configs/forge/task-variants/word_joint_policy_min11_v1/five_word_joint_acquisition_word_joint_policy_min11_v1.json",
+      "evaluation_sha256": "cf37c8e31ccc7333b5d5524945515fa94bb9c8f50ab16dba923ec17273b96481",
+      "execution_sha256": "7c2f841220c3806eb50fd3a75ee38003aafae7a2ca73a815249c90ecb784a4ce",
+      "family": "atlas_word_joint_min11",
+      "gpu": "1",
+      "id": "five_word_joint_acquisition_word_joint_policy_min11_v1",
+      "parent_id": "five_word_joint_acquisition",
+      "sha256": "cbb8fad29b406e9a997101be7ba5ca1d1669dc5be1d7f6f982409d2c092f2ebb",
+      "steps": 20001,
+      "timeout_seconds": 900
+    }
+  ],
+  "claim": "Execute only the three remaining GPU1 adaptations under the inclusive original caps. Preserve five v3 GPU0 PASS outcomes separately under their original source; no re-execution, current-slot reuse, ordinary qualification or cross-cohort pooling.",
+  "continuation_carryover": {
+    "completed_cases_reexecuted": false,
+    "current_paid_seconds_by_lane": {
+      "0": 221.9527463898994,
+      "1": 13.754588949028403
+    },
+    "inclusive_historical_paid_seconds_by_lane": {
+      "0": 234.82608077581972,
+      "1": 26.204209604067728
+    },
+    "outcomes_reused": false,
+    "publication": {
+      "bytes": 518012,
+      "path": "reports/forge/atlas-named-gpu-diagnostics-native-v3-20261003/results.json",
+      "sha256": "8ba7230a71041e3a0185528c9e76c5f39bff6eeadfb98b59d715ef72ff76b9e0"
+    },
+    "qualification_input": false,
+    "reserved_seconds": 0.0,
+    "source": {
+      "commit": "ff94453b45e02fd451b21c26d5991f6ed435c292",
+      "digest": "87fcd4e28bdcd9f347379b7db1fbcf0af3edcc0fbd5e97e4a98d9a49f8987a87"
+    }
+  },
+  "cross_cohort_pooling": false,
+  "cuda_model": "NVIDIA RTX A6000",
+  "default_adoption": false,
+  "diagnostic_cap_seconds": 10500,
+  "engineering_carryover": {
+    "authorized_successors": 1,
+    "paid_seconds_by_lane": {
+      "0": 12.873334385920316,
+      "1": 12.449620655039325
+    },
+    "qualification_input": false,
+    "reserved_seconds": 0.0,
+    "source": {
+      "commit": "aee59bea7f1a629d71052fbb010d930650a4ed26",
+      "digest": "73b00a75863383e4038a3731c8213a7fb072971712a05aab79efa181a93c0280"
+    },
+    "summary": {
+      "bytes": 235580,
+      "path": "reports/forge/atlas-named-gpu-diagnostics-invalid-20261003/summary.json",
+      "sha256": "7fee64a49aa56b2cec25ffcf4861eccd91ba6886fd33f9e95565dce1b701cfd7"
+    }
+  },
+  "evidence_use": "named_policy_host_diagnostic",
+  "executable_families": [
+    "atlas_routed",
+    "atlas_multibank",
+    "atlas_word_joint_min11"
+  ],
+  "executable_jobs": 3,
+  "executable_physical_gpus": [
+    "1"
+  ],
+  "executable_slots": 3,
+  "export_grace_seconds": 0,
+  "failure_policy": "continue_completed_numerical_FAIL_halt_invalid_lane_no_retry",
+  "families": [
+    "atlas_conditional",
+    "atlas_ae_routed",
+    "atlas_routed",
+    "atlas_multibank",
+    "atlas_word_joint_min11"
+  ],
+  "frames": 9,
+  "full_view_tiers": {
+    "1": 5,
+    "2": 19,
+    "3": 2
+  },
+  "id": "atlas-named-hosts-current-gpu-diagnostics-v4",
+  "lane_cap_seconds": {
+    "0": 7500,
+    "1": 3000
+  },
+  "ordinary_tier_credit": false,
+  "preserved_v3_families": [
+    "atlas_conditional",
+    "atlas_ae_routed"
+  ],
+  "qualification_input": false,
+  "recipe_overrides": {
+    "lr": 0.0053125,
+    "prior_lr_mult": 1.5
+  },
+  "recipe_preset": "atlas",
+  "required_slots_per_family": 26,
+  "resources": {
+    "cpu_threads": 1,
+    "host_memory_mb": 2048,
+    "maximum_gpu_temperature_c": 82,
+    "memory_fraction": 0.2,
+    "minimum_free_gpu_memory_mib": 12288
+  },
+  "schema": "particlegan_atlas_named_gpu_diagnostics_v1",
+  "seed": 0,
+  "speed_ranking": false,
+  "view": "discriminator_stability"
+}

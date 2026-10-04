@@ -132,6 +132,10 @@ def validate_idea(idea: dict) -> None:
         raise ValueError("unknown mechanism_class")
     if "seed" in idea:
         raise ValueError("screening seed belongs to the protocol, not the idea")
+    if "task_cohort" in idea:
+        from .policy_cohorts import KNOWN_COHORTS
+        if not isinstance(idea["task_cohort"], str) or idea["task_cohort"] not in KNOWN_COHORTS:
+            raise ValueError("task_cohort must explicitly opt into a known source-bound policy cohort")
     from .taskrecipes import validate_host_adaptation
     validate_host_adaptation(idea)
 

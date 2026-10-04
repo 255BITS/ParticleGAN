@@ -11,9 +11,10 @@ from copy import deepcopy
 import json
 import os
 from pathlib import Path
+import re
 
 from .contracts import atomic_text, file_hash, read_json, stable_hash
-from .views import task_evaluation_fingerprint, task_execution_fingerprint
+from .views import task_evaluation_fingerprint, task_execution_fingerprint, view_fingerprint
 
 REDUCER_VERSION = "forge-technique-board-v1"
 DEFAULT_LABELS = {
@@ -33,6 +34,64 @@ DEFAULT_LABELS = {
     "k3p-no-output-noise-diagnostic": "K3P without training output noise",
 }
 ARCHIVED_SCOPES = ("pinned", "calibration_diagnostic", "historical")
+
+
+def _policy_parent(parent, actual_id, cohort):
+    if (not isinstance(parent, dict)
+            or set(parent) != {"id", "task_sha256", "execution_fingerprint", "evaluation_fingerprint"}
+            or not isinstance(parent["id"], str) or not parent["id"]
+            or actual_id != parent["id"] + "_" + cohort
+            or any(not isinstance(parent[key], str) or not re.fullmatch(r"[0-9a-f]{64}", parent[key])
+                   for key in ("task_sha256", "execution_fingerprint", "evaluation_fingerprint"))):
+        raise ValueError("policy row lacks an exact actual-task/parent identity binding")
+    return parent["id"]
+
+
+def _policy_slot_name(cohort, parent):
+    from .policy_contracts import COHORT, PARENT_TASK_IDS
+    from .named_policy_planning import NAMED_PARENTS
+    if parent not in PARENT_TASK_IDS:
+        raise ValueError("policy row contains an unknown required parent slot")
+    if cohort == COHORT:
+        return parent + "_" + cohort
+    if cohort in NAMED_PARENTS:
+        return parent + "_" + cohort if parent in NAMED_PARENTS[cohort] else parent
+    raise ValueError("policy row requires an explicitly supported source-bound cohort")
+
+
+def policy_row_metadata(request: dict) -> dict:
+    """Retain real policy task IDs while binding their original display slots."""
+    candidate = request.get("candidate", {})
+    if "task_cohort" not in candidate:
+        return {}
+    cohort = candidate["task_cohort"]
+    view, tasks = request["view"], request["tasks"]
+    from .policy_cohorts import KNOWN_COHORTS
+    if cohort not in KNOWN_COHORTS or view.get("task_cohort") != cohort:
+        raise ValueError("policy row requires the explicit resolved task cohort")
+    actual_ids = [item["task"] for item in view["assignments"]]
+    if len(actual_ids) != len(set(actual_ids)) or set(actual_ids) != set(tasks):
+        raise ValueError("policy row must bind every actual task exactly once")
+    slots = {}
+    for name in actual_ids:
+        task = tasks[name]
+        if task.get("id") != name:
+            raise ValueError("policy row task dictionary differs from its actual identity")
+        if task.get("execution", {}).get("policy_contract") is None:
+            if (task.get("task_cohort") is not None or task.get("policy_parent") is not None
+                    or _policy_slot_name(cohort, name) != name):
+                raise ValueError("unadapted policy view slot differs from its original question")
+            slots[name] = name
+            continue
+        parent = task.get("policy_parent", {})
+        if task.get("task_cohort") != cohort or task.get("id") != name:
+            raise ValueError("policy row lacks an actual task's parent-slot binding")
+        slots[name] = _policy_parent(parent, name, cohort)
+        if _policy_slot_name(cohort, slots[name]) != name:
+            raise ValueError("policy row applies a variant outside its named-family scope")
+    if len(set(slots.values())) != len(slots):
+        raise ValueError("policy row parent slots must be one-to-one")
+    return {"task_cohort": cohort, "qualification_view": deepcopy(view), "task_slot_map": slots}
 
 
 def request_bindings(request: dict) -> dict:
@@ -67,7 +126,13 @@ def request_bindings(request: dict) -> dict:
         if candidate.get("host_adaptation") is not None:
             from .taskrecipes import adaptation_receipt
             task_bindings[name]["host_adaptation"] = adaptation_receipt(candidate, task)
-    return {"trainer_family": candidate.get("trainer_family"),
+        if "task_cohort" in candidate:
+            task_bindings[name].update(task_cohort=task.get("task_cohort"),
+                                      policy_parent=deepcopy(task.get("policy_parent")),
+                                      policy_recipe_overrides=deepcopy(execution.get("policy_recipe_overrides", {})),
+                                      policy_recipe_overrides_provenance=deepcopy(
+                                          execution.get("policy_recipe_overrides_provenance")))
+    result = {"trainer_family": candidate.get("trainer_family"),
             "configuration_id": candidate.get("configuration_id"),
             "recipe": candidate.get("resolved_recipe"),
             "recipe_sha256": stable_hash(candidate.get("resolved_recipe")),
@@ -79,6 +144,15 @@ def request_bindings(request: dict) -> dict:
             "source_digest": request.get("source", {}).get("digest"),
             "source_origin_commit": request.get("source", {}).get("origin_commit"),
             "tasks": task_bindings}
+    metadata = policy_row_metadata(request)
+    if metadata:
+        actual_view = metadata["qualification_view"]
+        result.update(task_cohort=metadata["task_cohort"],
+                      qualification_view_revision=actual_view["revision"],
+                      qualification_view_sha256=stable_hash(actual_view),
+                      qualification_policy_fingerprint=view_fingerprint(actual_view),
+                      task_slot_map=metadata["task_slot_map"])
+    return result
 
 
 def _status(value):
@@ -142,6 +216,58 @@ def _tier_cells(row, assignments, reason_catalog):
     return cells, tasks, nonrequired
 
 
+def _row_assignments(row, common_view):
+    """Check a policy row's slots; never rewrite its scientific task identities."""
+    actual = row.get("qualification_view")
+    if actual is None:
+        if "task_cohort" in row or "task_slot_map" in row:
+            raise ValueError("policy row is missing its actual qualification view")
+        return common_view["assignments"]
+    cohort, slots = row.get("task_cohort"), row.get("task_slot_map")
+    from .policy_cohorts import KNOWN_COHORTS
+    if (cohort not in KNOWN_COHORTS or actual.get("task_cohort") != cohort
+            or actual.get("id") != common_view["id"] or actual.get("goal") != common_view["goal"]
+            or actual.get("revision") != common_view["revision"] + 1
+            or actual.get("parent_view_fingerprint") != view_fingerprint(common_view)
+            or not isinstance(slots, dict)):
+        raise ValueError("policy row qualification view does not bind the common parent policy")
+    assignments = actual["assignments"]
+    names = [item["task"] for item in assignments]
+    if (len(names) != len(set(names)) or set(names) != set(slots)
+            or any(not isinstance(slot, str) or name != _policy_slot_name(cohort, slot)
+                   for name, slot in slots.items())
+            or len(set(slots.values())) != len(slots)):
+        raise ValueError("policy row task slots must be a complete one-to-one mapping")
+    mapped = [{**item, "task": slots[item["task"]]} for item in assignments]
+    if mapped != common_view["assignments"]:
+        raise ValueError("policy row changed a required task, tier, order or denominator")
+    qualified = row.get("qualification", {})
+    if (qualified.get("view_revision") != actual["revision"]
+            or qualified.get("policy_fingerprint") != view_fingerprint(actual)):
+        raise ValueError("policy row grade differs from its actual qualification view")
+    qualified_ids = [task["task_id"] for task in qualified.get("tasks", [])]
+    if len(qualified_ids) != len(set(qualified_ids)) or set(qualified_ids) != set(names):
+        raise ValueError("policy row grade must retain every actual scientific task ID")
+    bindings = row.get("scientific_bindings")
+    if bindings:
+        if (bindings.get("task_cohort") != cohort
+                or bindings.get("qualification_view_revision") != actual["revision"]
+                or bindings.get("qualification_view_sha256") != stable_hash(actual)
+                or bindings.get("qualification_policy_fingerprint") != view_fingerprint(actual)
+                or bindings.get("task_slot_map") != slots or set(bindings.get("tasks", {})) != set(names)):
+            raise ValueError("policy row scientific bindings differ from its actual view/slots")
+        for name in names:
+            task = bindings["tasks"][name]
+            if name == slots[name]:
+                if task.get("task_cohort") is not None or task.get("policy_parent") is not None:
+                    raise ValueError("unadapted scientific task contains a foreign policy binding")
+                continue
+            if (task.get("task_cohort") != cohort
+                    or _policy_parent(task.get("policy_parent"), name, cohort) != slots[name]):
+                raise ValueError("policy row scientific parent binding differs from its display slot")
+    return assignments
+
+
 def _compact_cost(cost):
     return {key: cost.get(key) for key in ("wall_seconds", "measured_tasks", "unmeasured_tasks")}
 
@@ -186,7 +312,8 @@ def reduce_board(board_result: dict, view: dict, *, execution_backend: str | Non
         runtime = original.get("runtime_cohort", {})
         if execution_backend and runtime.get("execution_backend") != execution_backend:
             continue
-        cells, tasks, nonrequired = _tier_cells(original, assignments, reason_catalog)
+        row_assignments = _row_assignments(original, view)
+        cells, tasks, nonrequired = _tier_cells(original, row_assignments, reason_catalog)
         bindings = _catalog_bindings(original, binding_catalog, recipes, protocols)
         row = {"technique": label_map.get(original["candidate_id"], original["candidate_id"]),
                "candidate_id": original["candidate_id"], "candidate_revision": original.get("candidate_revision"),
@@ -197,6 +324,9 @@ def reduce_board(board_result: dict, view: dict, *, execution_backend: str | Non
                "bindings": bindings,
                "blockers": original.get("preflight_blockers", original.get("blockers", [])),
                "lifecycle": original.get("lifecycle"), "pending_readout": original.get("pending_readout", False)}
+        if original.get("qualification_view") is not None:
+            row.update({key: deepcopy(original[key]) for key in
+                        ("task_cohort", "qualification_view", "task_slot_map")})
         rows.append(row)
     # Preserve the source board's attained-tier ordering. Display names do not
     # establish a second ranking or choose among outcomes of the same method.

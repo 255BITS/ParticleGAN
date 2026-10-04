@@ -1,0 +1,329 @@
+{
+  "adapter": "word_joint",
+  "dependencies": [],
+  "description": "Can a joint BiGAN generator, encoder and critic acquire five equally likely canonical words and reconstruct every correctly paired input with confident token probabilities, including padding?",
+  "evaluation": {
+    "eval_output_noise": "clean",
+    "eval_samples": 1024,
+    "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+    "evaluator_revision": {
+      "change": "Correct == grading and reject unsupported operators; >= and <= numerical gates unchanged. Word fixture now honors declared prior_betas. Bind current sources for future execution only; original receipts and verdicts remain unchanged.",
+      "id": "explicit-equality-and-word-prior-betas-v3",
+      "previous_revision": {
+        "change": "Bind the current public fixture after bounded Recipe configuration API additions; retain the declared numerical bounds, task geometry and budget. Earlier evidence keeps its original source binding.",
+        "id": "joint-word-task-source-binding-v2",
+        "previous_api_images_sha256": "bedcb88841ef5cae8c9bfa60364bfacebbef29dea640036c1e30c4593ae71a3f"
+      },
+      "previous_source_sha256": {
+        "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+        "benchmarks/toy_audit/api_images.py": "243190aba0c5870668a63289b771dc6f784c9460b890bc6a77e12cc2796d7184",
+        "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97"
+      }
+    },
+    "guards": {
+      "exact_optimizer_updates": true,
+      "finite_state": true,
+      "mechanism_exercised": true,
+      "optimizer_roles": [
+        "generator",
+        "encoder",
+        "prior",
+        "discriminator"
+      ],
+      "rng_isolation": true
+    },
+    "kind": "transfer_sustained",
+    "minimum_stable_checks": 5,
+    "observations": 24,
+    "policy_observation": {
+      "diagnostic_credit": false,
+      "diagnostic_weights": [],
+      "eval_streams": "forge-rng-v1_isolated",
+      "generated_output": "word_coordinates_of_complete_joint_atom",
+      "latent_policy": "actual_selected_public_policy",
+      "output_noise": false,
+      "reconstruction": "selected_free_encoder_on_all_five_known_canonical_inputs_then_same_served_generator",
+      "row_selection": "uniform_eleven_actual_prior_rows",
+      "sampler": "ServedModel.generate",
+      "schema_version": 1,
+      "unseen_word_generalization_claim": false,
+      "weight_selector": "state_selected"
+    },
+    "sampling_contract_version": 1,
+    "sampling_law": "generated_and_paired_reconstructed_prior_without_output_noise",
+    "scoring_weights": "state_selected",
+    "sources": {
+      "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
+      "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+      "benchmarks/toy_audit/api_images.py": "2e6c65efff150f4fd393ad3b4ee3000d3f0f56b7a077a80f2624c4af46f7b491",
+      "benchmarks/toy_audit/definition_quality.py": "42d835ab7a0937a6c3759dd719691c721663b7857cb990405253e90f7fbd4cc9",
+      "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89"
+    },
+    "thresholds": [
+      [
+        "sample_count",
+        ">=",
+        1024
+      ],
+      [
+        "quality_fraction",
+        ">=",
+        0.95
+      ],
+      [
+        "modes",
+        "==",
+        5
+      ],
+      [
+        "mass_tv",
+        "<=",
+        0.1
+      ],
+      [
+        "reconstruction_exact",
+        "==",
+        1
+      ],
+      [
+        "minimum_reconstruction_token_probability",
+        ">=",
+        0.9
+      ]
+    ]
+  },
+  "execution": {
+    "device": "cuda",
+    "execution_path": "public_components",
+    "host": "five_word_joint",
+    "host_definition": {
+      "characters": "abcdefghijklmnopqrstuvwxyz_ ",
+      "encoder_widths": [
+        168,
+        128,
+        64,
+        2
+      ],
+      "generator_widths": [
+        2,
+        64,
+        128,
+        168
+      ],
+      "joint_critic_widths": [
+        170,
+        256,
+        128,
+        1
+      ],
+      "length": 6,
+      "resources": {
+        "batch_size": 256,
+        "num_particles": 5,
+        "z_dim": 2
+      },
+      "words": [
+        "apple",
+        "grape",
+        "lemon",
+        "melon",
+        "berry"
+      ]
+    },
+    "host_source": "benchmarks/toy_audit/api_images.py",
+    "initializer": "deterministic_orthogonal",
+    "original_schedule_horizon": 20000,
+    "policy_contract": {
+      "checkpoint": "complete_public_policy_models_optimizers_streams_and_cursor",
+      "clean_function_and_gradient_equivalence": "matched_N11_clean_joint_function_only_not_DV12_on",
+      "cohort": "word_joint_policy_min11_v1",
+      "controls": "resolved_recipe_requested_enabled_eligible_applied",
+      "cpu_controls_scope": "structural_only",
+      "direct_response_scope": "latent_table_damping_only_not_direct_output_particle_response",
+      "encoder_mode": "none",
+      "encoder_optimizer_role": "encoder",
+      "encoder_owner": "auxiliary_original_free_continuous_WordEncoder",
+      "evaluation_output_noise": false,
+      "execution_device": "cuda",
+      "execution_path": "public_components",
+      "external_limit": "task.execution.steps",
+      "family": "atlas_word_joint_min11",
+      "free_reconstruction": "G(E(word))_under_selected_public_latent_sampling",
+      "generation_callback": "joint_generation(model,z_effective)=concat(model(z_effective),z_effective)",
+      "initializer": "parent_named_deterministic_orthogonal_original_classes",
+      "latent_law_change": "explicit_complete_joint_atom_for_independent_row_evidence_and_birth_death",
+      "learned_or_Atlas_qualification_reuse": false,
+      "lifecycle": "ordered_public_update",
+      "numerical_equivalence_to_parent": false,
+      "objective": "original_joint_RpGAN_real(word,E(word))_fake(G(z),z)_plus_Recipe.prior_reg_times_spread",
+      "original_five_row_task_status": "BLOCKED",
+      "original_scaffold": "G2_64_128_168_E168_128_64_2_D170_256_128_1_softmax28x6",
+      "original_split_code_law": "old_host_word_generator_receives_perturbed_code_but_joint_critic_receives_raw_code",
+      "owner": "particlegan.UpdatePolicy",
+      "precision": "preserve_original_fp32_no_autocast",
+      "prior_law": "eleven_uniform_raw_learned_2D_rows_for_five_words",
+      "prior_requirement": {
+        "actual_rows": 11,
+        "canonical_target_words": 5,
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "protected_contexts": "no_fabricated_RoutedBatch_guard_or_row_to_word_pairing",
+      "reconstruction_eval_is_training_signal": false,
+      "reconstruction_training_loss": false,
+      "resource_adaptation": {
+        "actual": {
+          "batch_size": 256,
+          "num_particles": 11,
+          "z_dim": 2
+        },
+        "comparisons": "Resource-matched N11 only; no N5 or N6 numerical-equivalence claim.",
+        "controls_disabled": false,
+        "eligibility_source": "particlegan/birth_death.py:ParticleBirthDeath.__init__",
+        "historical_capacity_or_qualification_credit": false,
+        "isolation": true,
+        "minimum_complete_public_owners": 11,
+        "numerical_equivalence_to_parent": false,
+        "original": {
+          "batch_size": 256,
+          "num_particles": 5,
+          "z_dim": 2
+        },
+        "owner": "task",
+        "reason": "Original N5 fails public k>=4; N6 through N10 fail isolation leave-one-out reference-half guard. N11 has k5<6.",
+        "schema_version": 1
+      },
+      "row_policy": "independent",
+      "row_semantics": "independent",
+      "schedule": "preserve_resolved_recipe_none",
+      "schema_version": 1,
+      "sources": {
+        "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
+        "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+        "benchmarks/toy_audit/api_images.py": "2e6c65efff150f4fd393ad3b4ee3000d3f0f56b7a077a80f2624c4af46f7b491",
+        "benchmarks/toy_audit/definition_quality.py": "42d835ab7a0937a6c3759dd719691c721663b7857cb990405253e90f7fbd4cc9",
+        "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89",
+        "experiments/forge/adapters.py": "dd503ac084fc91b9daf7fed13ab6540d302db323c91d9a08b92e97e8cad2ce7f",
+        "experiments/forge/api.py": "f53e6afd4578d9233c8c60ba483831e367e4ebfd59d53386a02b11a7979ab71d",
+        "experiments/forge/artifacts.py": "78da4ed4b4038b8a93918aa4b5de7fa6f7e4d36731b69467e1cd8b7edcd7ee1e",
+        "experiments/forge/boundaries.py": "155155f3ff95efc79308b8edfabb3c4357f45aee6c334da8bc6631eb4426b541",
+        "experiments/forge/contracts.py": "fcac35c47301f582bb19f2a4b12bd2b41f8630ec12b02912c3fc9f47539a81a8",
+        "experiments/forge/evaluate.py": "e1873f056c732b14c456a6a196f5756e855a63b7ae2f77dfde1c6ee671d221df",
+        "experiments/forge/mechanisms.py": "9e4e1fe1f8cb9a24148cab88b7bf2f980e805a2e488c16a982768519bbe1b23f",
+        "experiments/forge/named_policy_planning.py": "e74124bfbfc10017d1e1b39d04ed0da97de13131bed79c30f25b52795863d3b9",
+        "experiments/forge/planning.py": "8f8ff63d586a48cb9f7bed5a93c9b1c45f00eb7aada4cf6f34e77e0c2a4a6f9b",
+        "experiments/forge/policy_adapters.py": "95f7bf03c878d484d01a0fdf0f6b5c9ad34b8df94106ff7a50b02f7f1dfe67cf",
+        "experiments/forge/policy_behavior_adapters.py": "eebf6b881f80ac95b26f80a018b20cd0fc67febca2b05e8986f2ca0caee08c7d",
+        "experiments/forge/policy_cohorts.py": "9cbb8addeee483c004b3b36833def111c393703eab9f6d62b79f81065f7f751f",
+        "experiments/forge/policy_declaration_sources.py": "374a176284199de724936d02e77ad8755250da273c75acfde096318e060ac717",
+        "experiments/forge/policy_snapshot_publication.py": "5a637679392b4b1869fb8d1ca15cf7f6855f54d50ea4cb6857ad07aa733aa9a9",
+        "experiments/forge/rng.py": "ae7b9a8d61da42136d970188a6f168e03e2d7c5b90cf6fdbd93ad929aba2f293",
+        "experiments/forge/routed_policy_adapters.py": "6754a975f5054e9b31c036175592d85d52d62c00fb4c5753401ecfc708256007",
+        "experiments/forge/runtime.py": "8f82ec5da54a9c670e80e5691e6337e03120019a1071516479fd65c3724ad147",
+        "experiments/forge/sampling.py": "5f5013418a051ef18064aff5fea62c61b5b31bbcd20945e075e0aaf23d6985d7",
+        "experiments/forge/technique_board.py": "6eb7b31b9eab3fefad82cd773dc5ca8b2900d083e073b5aa7467c73ba1c85577",
+        "experiments/forge/views.py": "d0bafd90cb5bc727bb21b554678245e3d028bdd4c04fcd5cae8af40a513727d1",
+        "experiments/forge/word_joint_policy_adapters.py": "52405305a374e9631b76d50bd35a462adc2cb212f08f7c6dbdc7045b4d3dbf08",
+        "experiments/forge/word_joint_policy_contracts.py": "801a6d3420e4fee7c029c2507eb42b8a1b35c1e152f504d46d12d7d81c3a6dec",
+        "particlegan/birth_death.py": "b14c50c611a8cf188347e391739fca50a5171200eb6be90e4e3d1509d64e47ed",
+        "particlegan/init.py": "e15d4de01eb49f7097bc249abacab907ff067385412346f54ab0d510cb8649d0",
+        "particlegan/particle_prior.py": "0220878bebea227da63abbf9f5b1ebdabdc6aea54fd2332fd2cab02ed734238f",
+        "particlegan/policy.py": "6d2953cd21aefd637976266085fbc8f447183ccbb8fdec0caa06c525a146cc42",
+        "particlegan/recipes.py": "d7ef27d306d12c3035e509721d9a995ddb66edb07851976ef5106f21cc7d77f1",
+        "particlegan/training.py": "7dadc219135bc3e6bf657bfe9bc3fa81dd14d4b2a31c70d5ff61e2941db35c94",
+        "particlegan/vicreg_loss.py": "ab1c4dc266dec2c35337f449917240eb38afede7590d2154b63f6f471dc45a36"
+      },
+      "table_owner": "prior.z",
+      "training_latent_policy": "actual_DV12_same_effective_code_for_word_generator_and_joint_critic",
+      "training_output_noise": "public_learned_sigma_on168_word_coordinates_only_code2_coordinates_untouched"
+    },
+    "policy_recipe_overrides": {
+      "encoder_mode": "none",
+      "row_policy": "independent"
+    },
+    "policy_recipe_overrides_provenance": {
+      "complete_joint_atom": true,
+      "evidence_reuse": false,
+      "family": "atlas_word_joint_min11",
+      "historical_split_code_numerical_equivalence": false,
+      "original_free_encoder": true,
+      "same_code_DV12": true,
+      "words_only_output_noise": true
+    },
+    "prior": {
+      "exception_reason": "Explicit min11 independent joint-cloud variant: eleven actual raw learned rows for the unchanged five-word question; the original N5 and N6 isolation-invalid variant remain BLOCKED, with no historical capacity or qualification credit.",
+      "kind": "particle_cloud",
+      "learnable": true,
+      "sigma": 0.0,
+      "standardize": false
+    },
+    "produces_state": false,
+    "protocol": "screening",
+    "resource_adaptation": {
+      "actual": {
+        "batch_size": 256,
+        "num_particles": 11,
+        "z_dim": 2
+      },
+      "comparisons": "Resource-matched N11 only; no N5 or N6 numerical-equivalence claim.",
+      "controls_disabled": false,
+      "eligibility_source": "particlegan/birth_death.py:ParticleBirthDeath.__init__",
+      "historical_capacity_or_qualification_credit": false,
+      "isolation": true,
+      "minimum_complete_public_owners": 11,
+      "numerical_equivalence_to_parent": false,
+      "original": {
+        "batch_size": 256,
+        "num_particles": 5,
+        "z_dim": 2
+      },
+      "owner": "task",
+      "reason": "Original N5 fails public k>=4; N6 through N10 fail isolation leave-one-out reference-half guard. N11 has k5<6.",
+      "schema_version": 1
+    },
+    "resources": {
+      "batch_size": 256,
+      "num_particles": 11,
+      "z_dim": 2
+    },
+    "schedule_policy": "public_policy_stationarity_no_declared_horizon",
+    "steps": 20001
+  },
+  "id": "five_word_joint_acquisition_word_joint_policy_min11_v1",
+  "policy_family": "atlas_word_joint_min11",
+  "policy_parent": {
+    "evaluation_fingerprint": "acbaa1d733b4f2e47ed97102418481c608763aebcf7277e5248d542be1486540",
+    "execution_fingerprint": "b6e774afa975f91e3441c30844163058e2c84a993fd4d897be8e6dca617c8654",
+    "id": "five_word_joint_acquisition",
+    "task_sha256": "419dbbd4aa5116e093e543cd7cacc904185408806cefbc8758004edabcecd048"
+  },
+  "requires_capabilities": [
+    "public_components",
+    "checkpoint",
+    "named_rng",
+    "served_sampling",
+    "policy_controls",
+    "policy_serving",
+    "learned_locations",
+    "particle_cloud"
+  ],
+  "research_artifacts": {
+    "api_publication": "reports/toy_audit/api_contract/five_word_joint/publication.json",
+    "readout": "reports/forge/five-word-joint/README.md"
+  },
+  "resources": {
+    "allow_cpu": false,
+    "cpu_threads": 1,
+    "device": "cuda",
+    "gpu_memory_mb": 2048,
+    "gpus": 1,
+    "timeout_seconds": 900
+  },
+  "retained_question_ids": [
+    "source-family-15"
+  ],
+  "schema_version": 1,
+  "task_cohort": "word_joint_policy_min11_v1"
+}

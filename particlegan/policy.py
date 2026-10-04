@@ -305,6 +305,9 @@ class UpdatePolicy:
             from .routing import RoutedRows
             if not isinstance(routed_rows, RoutedRows):
                 raise TypeError("routed_rows must be a RoutedRows contract")
+            from .particle_prior import MoGParticlePrior
+            if recipe.prior_kind == "mog" or isinstance(prior, MoGParticlePrior):
+                self._validate_routed_mog()
             if self._routed_controls_enabled and not table.requires_grad:
                 raise ValueError("routed row evidence and birth/death require a trainable particle table; "
                                  "a frozen table requires both row controls disabled")
@@ -1201,15 +1204,77 @@ class UpdatePolicy:
                 self._serve_apply()
 
     @staticmethod
-    def _check_tensors(saved, expected, label):
+    def _fixed_mog_metadata(prior):
+        """Validate the explicit fixed-width source law, without changing it."""
+        from .particle_prior import MoGParticlePrior
+
+        if not isinstance(prior, MoGParticlePrior):
+            raise ValueError("routed AE MoG requires an actual MoGParticlePrior")
+        metadata = prior.get_extra_state()
+        if (type(metadata) is not dict or set(metadata) != {"sigma_rel", "standardize"}
+                or type(prior.sigma_rel) is not float or prior.sigma_rel != 0.
+                or type(prior.standardize) is not bool or prior.standardize is not False
+                or type(metadata["sigma_rel"]) is not float or metadata["sigma_rel"] != 0.
+                or type(metadata["standardize"]) is not bool or metadata["standardize"] is not False):
+            raise ValueError("routed AE MoG requires fixed sigma_rel=0 and standardize=False metadata")
+        for key in ("sigma", "d0"):
+            value = getattr(prior, key, None)
+            if (not isinstance(value, torch.Tensor) or value.ndim != 0
+                    or not value.is_floating_point() or value.requires_grad
+                    or prior._buffers.get(key) is not value
+                    or value.device != prior.z.device or value.dtype != prior.z.dtype
+                    or not torch.isfinite(value)
+                    or (key == "sigma" and not value > 0)
+                    or (key == "d0" and value != 0)):
+                raise ValueError("routed AE MoG requires a positive finite fixed sigma buffer and d0=0")
+        if getattr(prior, "_noise_enabled", None) is not True:
+            raise ValueError("routed AE MoG fixed positive sigma must enable its source sampling noise")
+        return metadata
+
+    def _validate_routed_mog(self):
+        recipe = self.recipe
+        if (recipe.row_policy != "routed_paired" or recipe.prior_kind != "mog"
+                or recipe.encoder_mode != "ae" or recipe.model != "gan"
+                or recipe.conditioning != "scalar" or type(recipe.sigma_rel) not in (int, float)
+                or recipe.sigma_rel != 0
+                or recipe.standardize is not False):
+            raise ValueError("routed MoG requires the explicit scalar fixed-width AE recipe")
+        self._fixed_mog_metadata(self.prior)
+        if self.prior.z is not self.table:
+            raise ValueError("routed AE MoG prior and policy must own the same table")
+        if not isinstance(self.encoder, nn.Module):
+            raise ValueError("routed AE MoG requires an actual encoder module")
+        rows = self._routed_rows
+        if (not callable(rows.model_forward) or not isinstance(rows.sites, tuple)
+                or not rows.sites or any(not isinstance(name, str) or not name for name in rows.sites)
+                or len(set(rows.sites)) != len(rows.sites)):
+            raise ValueError("routed AE MoG requires complete RoutedRows.model_forward with named sites")
+
+    @staticmethod
+    def _check_tensors(saved, expected, label, *, fixed_mog=None):
         if not isinstance(saved, dict) or saved.keys() != expected.keys():
             raise ValueError(f"incompatible policy {label}")
+        metadata = None if fixed_mog is None else UpdatePolicy._fixed_mog_metadata(fixed_mog)
         for key, tensor in expected.items():
             value = saved[key]
-            if not isinstance(value, torch.Tensor) or value.shape != tensor.shape or value.dtype != tensor.dtype:
+            # This is the source-defined metadata of the validated direct MoG
+            # owner only; arbitrary module extra_state remains unsupported.
+            if metadata is not None and key == "_extra_state":
+                if (type(value) is not dict or value.keys() != metadata.keys()
+                        or any(type(value[name]) is not type(current) or value[name] != current
+                               for name, current in metadata.items())):
+                    raise ValueError(f"incompatible policy {label} MoG metadata")
+                continue
+            if (not isinstance(tensor, torch.Tensor) or not isinstance(value, torch.Tensor)
+                    or value.shape != tensor.shape or value.dtype != tensor.dtype):
                 raise ValueError(f"incompatible policy {label} tensor {key}")
+            if metadata is not None and key in ("sigma", "d0"):
+                if value.requires_grad or not torch.equal(value.to(tensor.device), tensor):
+                    raise ValueError(f"incompatible policy {label} fixed MoG {key}")
 
     def _check_state(self, state):
+        if self.row_policy == "routed_paired" and self.recipe.prior_kind == "mog":
+            self._validate_routed_mog()
         if self._feature_selection is None and self.reopen_guard is None:
             expected = self.state_dict()
         else:
@@ -1234,8 +1299,12 @@ class UpdatePolicy:
         for label in ("models", "averages"):
             if not isinstance(state[label], dict) or state[label].keys() != expected[label].keys():
                 raise ValueError(f"incompatible policy {label}")
+            modules = self._training_modules() if label == "models" else self._average_modules()
             for name in expected[label]:
-                self._check_tensors(state[label][name], expected[label][name], f"{label}/{name}")
+                fixed_mog = (modules[name] if name == "prior" and self.row_policy == "routed_paired"
+                             and self.recipe.prior_kind == "mog" else None)
+                self._check_tensors(state[label][name], expected[label][name], f"{label}/{name}",
+                                    fixed_mog=fixed_mog)
         for name in ("table", "averaged_table", "output_noise"):
             value, current = state[name], expected[name]
             if current is None:

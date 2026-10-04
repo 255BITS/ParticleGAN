@@ -75,7 +75,46 @@ def _behavior_host(task):
 
 def prior_control_binding(task):
     """Separate direct generated coordinates from a sampled latent prior."""
+    from .policy_cohorts import is_policy_task, validate_policy_task
+    if is_policy_task(task):
+        contract = validate_policy_task(task)
+        if contract["cohort"] == "word_joint_policy_min11_v1":
+            return {"representation": "independent_complete_word_code_joint_atoms",
+                    "latent_table_controls": True, "constructed_prior": True,
+                    "table_owner": "prior.z", "auxiliary_encoder": "original_free_continuous_WordEncoder",
+                    "construction": "actual ParticlePrior with eleven learned uniform rows",
+                    "optimizer": "Recipe.make_generator_optimizer(latent_table=...)",
+                    "independent_direct_particle_response_owner": False,
+                    "base_lr": "Recipe.lr * Recipe.prior_lr_mult",
+                    "base_betas": "Recipe.prior_betas or Recipe.betas", "lr_schedule": "public stationarity",
+                    "sampling": "same effective code in generated word and complete joint critic atom",
+                    "note": "Explicit min11 whole-joint law and free auxiliary encoder; "
+                            "original five-row task and split-code DV12 evidence remain separate."}
+        if contract.get("row_policy") == "routed_paired":
+            table_owner = contract["table_owner"]
+            return {"representation": "conditional_MoG_locations" if task["execution"]["prior"]["kind"] == "mog"
+                    else "conditional_role_bank",
+                    "table_owner": table_owner, "latent_table_controls": True,
+                    "constructed_prior": table_owner == "prior.z",
+                    "sampling": "complete_context_routed_function; no independent atom sampling",
+                    "construction": "actual MoGParticlePrior" if task["execution"]["prior"]["kind"] == "mog" else
+                        "actual ParticlePrior master table" if table_owner == "prior.z" else "original generator matrix parameter",
+                    "optimizer": "Recipe.make_generator_optimizer(latent_table=...)",
+                    "independent_direct_particle_response_owner": False,
+                    "base_lr": "Recipe.lr * Recipe.prior_lr_mult",
+                    "base_betas": "Recipe.prior_betas or Recipe.betas", "lr_schedule": "public stationarity",
+                    "note": "Named conditional table ownership is distinct from a sampled latent prior; "
+                            "the original behavioral tasks retain their original optimizer law."}
     if _behavior_host(task) == "two_pole":
+        if is_policy_task(task):
+            return {"representation": "direct_sample_coordinates_public_policy_table",
+                    "latent_table_controls": True,
+                    "construction": "ParticlePrior table with parameterless identity generator",
+                    "optimizer": "Recipe.make_generator_optimizer(latent_table=..., direct_particles=...)",
+                    "base_lr": "Recipe.lr * Recipe.prior_lr_mult",
+                    "base_betas": "Recipe.prior_betas or Recipe.betas", "lr_schedule": "prior",
+                    "note": "The explicitly new policy task binds these coordinates to the public prior-table role; "
+                    "the original direct-coordinate task retains its generator-side optimizer law."}
         return {"representation": "direct_sample_coordinates", "latent_table_controls": False,
                 "construction": "direct nn.Parameter; no ParticlePrior or latent-table optimizer",
                 "optimizer": "Recipe.make_generator_optimizer(direct_particles=...)",
@@ -99,6 +138,9 @@ def task_owned_recipe_fields(task):
         owned |= BEHAVIOR_HOST_FIELDS
         if host != "ae_gan_hold":
             owned |= {"routing_temperature", "distance_reduction"}
+    if "policy_recipe_overrides" in task.get("execution", {}):
+        from .policy_cohorts import policy_recipe_overrides
+        owned |= set(policy_recipe_overrides(task))
     return frozenset(owned)
 
 
@@ -175,6 +217,13 @@ def ownership_receipt(candidate, task, resolved_recipe, protocol=None, initializ
     if set(extension_recipe_bindings) - RECIPE_FIELD_OWNERS.keys():
         raise ValueError("extension ownership receipt contains unknown public Recipe fields")
     execution = task.get("execution", {})
+    policy_fields = {}
+    if "policy_recipe_overrides" in execution:
+        from .policy_cohorts import policy_recipe_overrides
+        policy_fields = policy_recipe_overrides(task)
+    for name, value in policy_fields.items():
+        if _json_value(resolved_recipe[name]) != _json_value(value):
+            raise ValueError(f"effective Recipe {name} contradicts task-owned policy adaptation")
     prior = execution.get("prior")
     if not isinstance(prior, dict) or prior.get("kind") not in {"mog", "particle_cloud"}:
         raise ValueError("ownership receipt requires the task's explicit prior")
@@ -192,11 +241,18 @@ def ownership_receipt(candidate, task, resolved_recipe, protocol=None, initializ
         raise ValueError("effective Recipe total_steps contradicts task-owned schedule horizon")
     host = _behavior_host(task)
     prior_binding = prior_control_binding(task)
-    behavior_owned = task_owned_recipe_fields(task) - TASK_RECIPE_FIELDS
+    # Explicit policy adaptations are active Recipe values. They are distinct
+    # from legacy component objectives whose Recipe fields are inactive.
+    behavior_owned = task_owned_recipe_fields(task) - TASK_RECIPE_FIELDS - set(policy_fields)
     if host is not None and host != "mode_hold":
         behavior_owned |= RESOURCE_FIELDS - {"total_steps"}
         if host == "ae_gan_hold":
             behavior_owned -= {"encoder_mode", "z_dim", "num_particles", "batch_size"}
+        from .policy_cohorts import is_policy_task
+        if is_policy_task(task):
+            # Named producers consume these resolved public resource values;
+            # the original component hosts keep their inactive reference labels.
+            behavior_owned -= RESOURCE_FIELDS - {"total_steps"}
     result = {}
     for name in sorted(resolved_recipe):
         owner = recipe_field_owner(name, task)
@@ -215,6 +271,8 @@ def ownership_receipt(candidate, task, resolved_recipe, protocol=None, initializ
                           else "task.execution.steps")
         elif name in resources:
             source = resources[name][1]
+        elif name in policy_fields:
+            source = f"task.execution.policy_recipe_overrides.{name}"
         elif host == "ae_gan_hold" and name in {"encoder_mode", "z_dim", "num_particles", "batch_size"}:
             source = "frozen behavioral host HoldConfig and public encoder recipe binding"
         elif (name in RESOURCE_FIELDS - {"total_steps"}
@@ -231,12 +289,14 @@ def ownership_receipt(candidate, task, resolved_recipe, protocol=None, initializ
             result[name] = _record(None, owner, "frozen behavioral host objective/component source",
                                    status="host_owned", reference_recipe_value=_json_value(value))
         else:
-            result[name] = _record(value, owner, source, status=status)
+            extra = ({"provenance": _json_value(execution["policy_recipe_overrides_provenance"])}
+                     if name in policy_fields else {})
+            result[name] = _record(value, owner, source, status=status, **extra)
     host_definition = execution.get("host_definition", {})
     # Legacy optimizer and penalty settings are retained provenance. Scalar
     # adapters copy architecture, data and resources, never these settings.
     inactive_names = ((set(TECHNIQUE_RECIPE_FIELDS) | set(HYPERPARAMETER_RECIPE_FIELDS))
-                      - task_owned_recipe_fields(task)) | {
+                      - task_owned_recipe_fields(task)) | set(policy_fields) | {
                           "d_every", "g_every", "loss_type", "gan_mode", "reg_norm", "reg_lazy", "target_anneal"}
     inactive = {name: _record(value, "task", f"task.execution.host_definition.{name}", status="inactive_provenance")
                 for name, value in sorted(host_definition.items()) if name in inactive_names}
@@ -258,7 +318,7 @@ def ownership_receipt(candidate, task, resolved_recipe, protocol=None, initializ
         initialization["component_policies"] = _json_value(host_definition["initialization"])
     prior_record = _record(prior, "task", "task.execution.prior")
     prior_record["code_path"] = "MoGParticlePrior" if prior["kind"] == "mog" else "ParticlePrior"
-    if not prior_binding["latent_table_controls"]:
+    if not prior_binding["latent_table_controls"] or prior_binding.get("constructed_prior") is False:
         prior_record["declared_code_path"] = prior_record["code_path"]
         prior_record["code_path"] = None
     prior_record["control_binding"] = prior_binding
@@ -284,9 +344,17 @@ def ownership_receipt(candidate, task, resolved_recipe, protocol=None, initializ
     if protocol is not None:
         receipt["protocol"] = {name: _record(protocol[name], "protocol", f"protocol.{name}")
                                for name in ("id", "revision", "seed", "rng", "scoring", "robustness") if name in protocol}
+    if "task_cohort" in task:
+        receipt["task_contract"]["task_cohort"] = _record(
+            task["task_cohort"], "task", "task.task_cohort")
+    if policy_fields:
+        receipt["task_contract"]["policy_recipe_adaptation"] = _record(
+            {"overrides": policy_fields,
+             "provenance": execution["policy_recipe_overrides_provenance"]},
+            "task", "task.execution.policy_recipe_overrides and its source provenance")
     # These declarations are references, never a fallback for effective task
     # priors or initialization. Protocol.prior is likewise retained as policy.
-    reference = {name: candidate[name] for name in ("prior", "initializer") if name in candidate}
+    reference = {name: candidate[name] for name in ("prior", "initializer", "task_cohort") if name in candidate}
     if protocol is not None and "prior" in protocol:
         reference["protocol_prior"] = protocol["prior"]
     receipt["reference_declarations"] = _json_value(reference)

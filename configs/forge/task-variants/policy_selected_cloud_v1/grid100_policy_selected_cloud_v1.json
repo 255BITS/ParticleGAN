@@ -1,0 +1,202 @@
+{
+  "adapter": "native100",
+  "dependencies": [],
+  "evaluation": {
+    "accuracy_limits": {
+      "abs_cov_trace_bias": 0.1,
+      "center_rms_sigma": 0.2,
+      "mass_tv": 0.06,
+      "radial_ks": 0.04
+    },
+    "coverage_evaluator": "benchmarks.toy100.gate:evaluate_suite",
+    "coverage_thresholds": {
+      "all_finite": true,
+      "max_cov_eig_ratio": 1.7,
+      "max_mass_tv": 0.1,
+      "max_mode_mass": 0.02,
+      "max_radial_median_ratio": 1.4,
+      "min_cov_eig_ratio": 0.4,
+      "min_hq_mode_mass": 0.005,
+      "min_modes": 100,
+      "min_precision": 0.97,
+      "min_radial_median_ratio": 0.65,
+      "min_samples": 20000
+    },
+    "early_eval_steps": [
+      0,
+      1,
+      10,
+      25,
+      50,
+      100
+    ],
+    "eval_interval": 250,
+    "eval_output_noise": "clean",
+    "eval_samples": 20000,
+    "evaluator": "benchmarks.toy100.accuracy_gate:evaluate_suite",
+    "evaluator_revision": {
+      "change": "Validate explicit CLI evaluation-noise overrides; metric kernels, thresholds, clean sampling law and budgets unchanged.",
+      "id": "native100-manifest-sampling-v2",
+      "previous_gate_sha256": "55f6ef733f0b10f4c6ac05eb5ad9d30320d807ff520ea1b41c75d2d0b41e406a"
+    },
+    "holdout_samples": 100000,
+    "kind": "native_accuracy",
+    "minimum_stable_checks": 5,
+    "policy_observation": {
+      "diagnostic_credit": false,
+      "diagnostic_weights": [
+        "forced_ema"
+      ],
+      "eval_streams": "forge-rng-v1_isolated",
+      "latent_policy": "actual_selected_public_policy",
+      "output_noise": false,
+      "row_selection": "original_task_strategy",
+      "sampler": "GANTrainer.sample",
+      "schema_version": 1,
+      "weight_selector": "state_selected"
+    },
+    "sampling_contract_version": 1,
+    "sampling_law": "public_prior_without_output_noise",
+    "scoring_weights": "state_selected",
+    "sources": {
+      "benchmarks/toy100/accuracy.py": "ee5c62049f8cdceb3d93b6d792cbaa96c815e12b3ce79ffaed244fb15a44fed2",
+      "benchmarks/toy100/accuracy_gate.py": "e66ede95d4b80eedd832a102841c2b0a5d6d710f646bfa34dc00647dc0ab3abe",
+      "benchmarks/toy100/gate.py": "2ddadf56a4ccd7645c8b4e391373818b1113fb6113a9c691310fb162684058e6",
+      "benchmarks/toy100/metrics.py": "a7fbef19082f8470eb392948da52a336a90a3e99c6b3b893343a9e75bcda9c7b"
+    }
+  },
+  "execution": {
+    "device": "cuda",
+    "initializer": "deterministic_orthogonal",
+    "model": {
+      "fourier": 2,
+      "hidden": 128,
+      "layers": 3
+    },
+    "policy_contract": {
+      "checkpoint": "complete_public_policy_models_optimizers_streams_and_cursor",
+      "cohort": "policy_selected_cloud_v1",
+      "controls": "resolved_recipe_requested_enabled_eligible_applied",
+      "cpu_controls_scope": "structural_only",
+      "execution_device": "cuda",
+      "execution_path": "public_trainer",
+      "external_limit": "task.execution.steps",
+      "lifecycle": "ordered_public_update",
+      "numerical_equivalence_to_parent": false,
+      "owner": "particlegan.UpdatePolicy",
+      "precision": "preserve_task_tensor_dtypes_no_autocast",
+      "prior_requirement": {
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "row_semantics": "independent",
+      "schedule": "preserve_resolved_recipe_none",
+      "schema_version": 1,
+      "sources": {
+        "benchmarks/legacy/locked_shared.py": "9bac7def8e5c10d4d4532723ebbf7d7689d5e85c8823dbf07fb7225f91b455c0",
+        "benchmarks/locked_shared/two_pole.py": "eee207af6d12475f7dbb106087f9d9e269d284274e69e4d199f6d8a38cb54f5e",
+        "experiments/forge/adapters.py": "dd503ac084fc91b9daf7fed13ab6540d302db323c91d9a08b92e97e8cad2ce7f",
+        "experiments/forge/api.py": "f53e6afd4578d9233c8c60ba483831e367e4ebfd59d53386a02b11a7979ab71d",
+        "experiments/forge/boundaries.py": "155155f3ff95efc79308b8edfabb3c4357f45aee6c334da8bc6631eb4426b541",
+        "experiments/forge/contracts.py": "fcac35c47301f582bb19f2a4b12bd2b41f8630ec12b02912c3fc9f47539a81a8",
+        "experiments/forge/evaluate.py": "e1873f056c732b14c456a6a196f5756e855a63b7ae2f77dfde1c6ee671d221df",
+        "experiments/forge/mechanisms.py": "9e4e1fe1f8cb9a24148cab88b7bf2f980e805a2e488c16a982768519bbe1b23f",
+        "experiments/forge/named_policy_planning.py": "e74124bfbfc10017d1e1b39d04ed0da97de13131bed79c30f25b52795863d3b9",
+        "experiments/forge/planning.py": "8f8ff63d586a48cb9f7bed5a93c9b1c45f00eb7aada4cf6f34e77e0c2a4a6f9b",
+        "experiments/forge/policy_adapters.py": "95f7bf03c878d484d01a0fdf0f6b5c9ad34b8df94106ff7a50b02f7f1dfe67cf",
+        "experiments/forge/policy_behavior_adapters.py": "eebf6b881f80ac95b26f80a018b20cd0fc67febca2b05e8986f2ca0caee08c7d",
+        "experiments/forge/policy_cohorts.py": "9cbb8addeee483c004b3b36833def111c393703eab9f6d62b79f81065f7f751f",
+        "experiments/forge/policy_contracts.py": "bcf522b69040906cceddaa79f8c51d2935fe90fd74eb31944408b30cf6ab06e2",
+        "experiments/forge/policy_declaration_sources.py": "374a176284199de724936d02e77ad8755250da273c75acfde096318e060ac717",
+        "experiments/forge/policy_snapshot_publication.py": "5a637679392b4b1869fb8d1ca15cf7f6855f54d50ea4cb6857ad07aa733aa9a9",
+        "experiments/forge/runtime.py": "8f82ec5da54a9c670e80e5691e6337e03120019a1071516479fd65c3724ad147",
+        "experiments/forge/sampling.py": "5f5013418a051ef18064aff5fea62c61b5b31bbcd20945e075e0aaf23d6985d7",
+        "experiments/forge/technique_board.py": "6eb7b31b9eab3fefad82cd773dc5ca8b2900d083e073b5aa7467c73ba1c85577",
+        "experiments/forge/views.py": "d0bafd90cb5bc727bb21b554678245e3d028bdd4c04fcd5cae8af40a513727d1",
+        "particlegan/policy.py": "6d2953cd21aefd637976266085fbc8f447183ccbb8fdec0caa06c525a146cc42",
+        "particlegan/recipes.py": "d7ef27d306d12c3035e509721d9a995ddb66edb07851976ef5106f21cc7d77f1",
+        "particlegan/training.py": "7dadc219135bc3e6bf657bfe9bc3fa81dd14d4b2a31c70d5ff61e2941db35c94"
+      }
+    },
+    "policy_device_provenance": {
+      "change": "prospective_cuda_numerical_execution",
+      "cpu_controls_scope": "structural_only",
+      "numerical_equivalence_to_parent": false,
+      "parent_execution_device": null,
+      "parent_execution_fingerprint": "79e350c7dab4df726d3e361d537ff5ba240baeb5aec257651ea13c26d8d2873d",
+      "parent_resources": {
+        "cpu_threads": 1,
+        "gpu_memory_mb": 2048,
+        "gpus": 1,
+        "timeout_seconds": 3600
+      },
+      "schema_version": 1
+    },
+    "policy_recipe_overrides": {
+      "betas": [
+        0.0,
+        0.999
+      ],
+      "d_lr_mult": 1.0,
+      "prior_reg": 0.0
+    },
+    "policy_recipe_overrides_provenance": {
+      "evidence_reuse": false,
+      "fields": [
+        "betas",
+        "d_lr_mult",
+        "prior_reg"
+      ],
+      "owner": "task",
+      "recipe_group": "atlas-native100",
+      "reference_recipe_sha256": "802ef265b8abaa7146ef7051074982abc8f4ba284925793d9989dad0f5b8155b",
+      "reference_source_commit": "8021a1c50c4aff90ddea5010d368cffdc857b2f6",
+      "schema_version": 1,
+      "source": "reports/forge/c6-baseline-debug-20261003/BASELINE_SELECTION.json",
+      "source_sha256": "bb5dafad7f04305a579f498093ad65d27f9ef5cc096caa709d4ce6e1fc7c8114"
+    },
+    "prior": {
+      "exception_reason": "Explicit prospective Atlas policy-selected cloud cohort; original task law and evidence retain their own identity.",
+      "kind": "particle_cloud",
+      "learnable": true,
+      "sigma": 0.0,
+      "standardize": false
+    },
+    "problem": "grid100",
+    "produces_state": true,
+    "protocol": "screening",
+    "resources": {
+      "batch_size": 2048,
+      "num_particles": 20000,
+      "z_dim": 2
+    },
+    "steps": 7000
+  },
+  "id": "grid100_policy_selected_cloud_v1",
+  "policy_parent": {
+    "evaluation_fingerprint": "1b3166769127ddd7f98e31087a7fda9b7c3ebeff63413237c07f84c7dd7d4652",
+    "execution_fingerprint": "79e350c7dab4df726d3e361d537ff5ba240baeb5aec257651ea13c26d8d2873d",
+    "id": "grid100",
+    "task_sha256": "64709b1544155fd3e19ac1aef96453e2183145cc2be029e7da5df3bfb4b291b5"
+  },
+  "requires_capabilities": [
+    "checkpoint",
+    "named_rng",
+    "served_sampling",
+    "learned_locations",
+    "particle_cloud",
+    "policy_controls",
+    "policy_serving"
+  ],
+  "resources": {
+    "cpu_threads": 1,
+    "device": "cuda",
+    "gpu_memory_mb": 2048,
+    "gpus": 1,
+    "timeout_seconds": 3600
+  },
+  "schema_version": 1,
+  "task_cohort": "policy_selected_cloud_v1"
+}

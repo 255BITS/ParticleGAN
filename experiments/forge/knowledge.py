@@ -296,9 +296,17 @@ def _historical_row(record: dict) -> dict:
 
 
 def _current_request(root: Path, idea_id: str, view_id: str, execution_backend="cuda", cuda_model=None) -> dict:
-    from .planning import resolve_idea
-    return resolve_idea(root, idea_id, view_id=view_id, through_tier=3, freeze_source=False,
-                        execution_backend=execution_backend, cuda_model=cuda_model)
+    from .planning import load_idea, resolve_idea
+    declaration = load_idea(root, idea_id)
+    # The board still displays the full resolved view. A prospective policy
+    # decision authorizes only its frozen stage, so inspect that stage's actual
+    # bindings rather than silently requesting a larger research round.
+    through_tier = 3
+    if "task_cohort" in declaration and "decision_contract" in declaration:
+        through_tier = declaration["decision_contract"]["scope"]["through_tier"]
+    return resolve_idea(root, idea_id, view_id=view_id, through_tier=through_tier, freeze_source=False,
+                        execution_backend=execution_backend, cuda_model=cuda_model,
+                        declaration=declaration)
 
 
 def _runtime_cohort(request):
@@ -445,7 +453,8 @@ def board(root: Path, view_id: str, *, include_bindings=False) -> dict:
                 if task_id not in covered and task.get("preflight_blockers"):
                     safe.append({"task_id": task_id, "gate_status": "BLOCKED",
                                  "reason": "; ".join(task["preflight_blockers"])})
-            qualified = views.qualify(view, request["tasks"], safe, candidate=request["candidate"])
+            qualification_view = request["view"] if "task_cohort" in request["candidate"] else view
+            qualified = views.qualify(qualification_view, request["tasks"], safe, candidate=request["candidate"])
             if request.get("preflight_blockers"):
                 qualified.update(status="BLOCKED", eligible=False, qualified_tier=0)
                 qualified["blockers"] = [{"task_id": None, "status": "BLOCKED", "reasons": request["preflight_blockers"]},
@@ -466,7 +475,13 @@ def board(root: Path, view_id: str, *, include_bindings=False) -> dict:
                             "preflight_blockers": request.get("preflight_blockers", []),
                             "next_action": "Publish an explanation, comparison, and next action." if lifecycle["pending_readout"]
                                            else "Run the next eligible task within an explicit budget."}
-            if include_bindings:
+            if "task_cohort" in request["candidate"]:
+                from .technique_board import policy_row_metadata
+                row.update(policy_row_metadata(request))
+            # Policy rows require their exact task/view bindings even in the
+            # default compile snapshot. Ordinary rows retain the old optional
+            # detail switch; a display-slot alias never becomes evidence.
+            if include_bindings or "task_cohort" in request["candidate"]:
                 from .technique_board import request_bindings
                 row["scientific_bindings"] = request_bindings(request)
             current.append(row)
