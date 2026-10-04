@@ -296,8 +296,12 @@ def _historical_row(record: dict) -> dict:
 
 
 def _current_request(root: Path, idea_id: str, view_id: str, execution_backend="cuda", cuda_model=None) -> dict:
-    from .planning import resolve_idea
-    return resolve_idea(root, idea_id, view_id=view_id, through_tier=3, freeze_source=False,
+    from .planning import load_idea, resolve_idea
+    idea = load_idea(root, idea_id)
+    # Reconstruct the declared question. The resolver retains the full view's
+    # tasks regardless of this authorization cap, so qualification is unchanged.
+    through_tier = idea.get("decision_contract", {}).get("scope", {}).get("through_tier", 3)
+    return resolve_idea(root, idea_id, view_id=view_id, through_tier=through_tier, freeze_source=False,
                         execution_backend=execution_backend, cuda_model=cuda_model)
 
 

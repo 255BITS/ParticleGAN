@@ -1201,6 +1201,7 @@ def test_committed_cohorts_rebuild_every_scientific_row_in_a_checkout_without_ra
     for relative in (publication.EVIDENCE_MANIFEST.parent, Path("reports/forge/technique-receipts"),
                      Path("configs/forge/ideas"), Path("configs/forge/configurations"),
                      Path("configs/forge/searches"), Path("configs/forge/views"),
+                     Path("configs/forge/selections"),
                      Path("configs/forge/view-history"),
                      Path("configs/forge/tasks"), Path("configs/forge/protocols"),
                      Path("reports/forge/configuration-search")):

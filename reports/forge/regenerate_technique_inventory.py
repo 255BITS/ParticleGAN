@@ -271,6 +271,19 @@ for expected in manifests.values():
     actual = inspect_source(root, list(expected['files']))
     if actual['digest'] != expected['digest'] or actual['files'] != expected['files']:
         raise ValueError('reconstructed scientific source differs from original receipt manifest')
+# A read-only board must reconstruct the declared question, not request a new
+# Tier 3 admission for a contract authorized only through Tier 1. The normal
+# frozen resolver still checks every binding and returns the full task view;
+# no scope, scientific source, original receipt or numerical gate is edited.
+if (root / 'experiments/forge/knowledge.py').is_file():
+    from experiments.forge import knowledge, planning
+    def question_request(root, idea_id, view_id, execution_backend='cuda', cuda_model=None):
+        idea = planning.load_idea(root, idea_id)
+        through_tier = idea.get('decision_contract', {}).get('scope', {}).get('through_tier', 3)
+        return planning.resolve_idea(root, idea_id, view_id=view_id, through_tier=through_tier,
+                                    freeze_source=False, execution_backend=execution_backend,
+                                    cuda_model=cuda_model)
+    knowledge._current_request = question_request
 result = write_report(root, goal, execution_backend=None if backend == 'all' else backend, output_prefix=prefix)
 print(json.dumps(result, sort_keys=True))
 """

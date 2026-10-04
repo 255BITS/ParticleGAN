@@ -118,6 +118,31 @@ Actual paid time, failed attempts, remaining unknown tasks and reuse are recorde
 Raw logs, checkpoints and per-update traces remain under ignored `runs/` or in
 an artifact archive; the compact report and provenance receipts are committed.
 
+The [K3P five-task search](../reports/forge/k3p-global-tier1-v2/README.md)
+is a worked example starting from the global clean/full word-study successor.
+Its [declaration](../configs/forge/searches/k3p-global-tier1-v2.json) tests twelve
+complete recipes by varying positive critic coefficients and G/D rates. It
+holds the nominal latent-prior rate fixed and retains all five current Tier 1
+requirements. A historical word pass motivates the base; it cannot fill a new
+trial's word cell. Its separately bounded follow-up restores an existing input
+noise control as an explicit structural base, then searches eight numerical
+configurations within that base's signature. Both bases belong to K3P because
+their optimizer and loss formulation stay the same. The first required failure
+stops that trial, leaving later cells UNKNOWN. A 5/5 result is needed before
+replacing the current family pin.
+
+For a new v2 search, review and bind each derived card's decision contract to
+its actual tuning scope before enqueueing. An inherited full-view contract
+must be rebound when the study only authorizes Tier 1. The example's
+[preparation script](../reports/forge/k3p-global-tier1-v2/prepare.py) materializes
+cards, checks exact bindings and budgets, and records READY plans without
+training. Preparation refuses to change a registered or admitted study.
+Use the ordinary read-only search plan/report commands after registration.
+The [execution wrapper](../reports/forge/k3p-global-tier1-v2/run.py) freezes the
+reviewed commit, uses standard queue admission and grading, and defers global
+report generation until publication. The coordinator allows one GPU0 worker
+and one automatic CPU worker; declare that two-worker maximum explicitly.
+
 ## Select one configuration
 
 The declared objective ranks complete required tuning-task PASS counts, with

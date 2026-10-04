@@ -75,10 +75,11 @@ def word_preflight(task, candidate, *, root=None):
     return []
 
 
-def run_word(request, task, output, device, *, execution_limit=None, capture_media=False):
+def run_word(request, task, output, device, *, execution_limit=None, capture_media=False,
+             retain_scored_outputs=True):
     """Bounded API execution. A reduced cap is only an explicit integration demo."""
     from benchmarks.toy_audit.api_images import WordFixture
-    from .adapters import _event, _finite_tree, _host_receipt
+    from .adapters import _event, _finite_tree, _host_receipt, _save_observer_outputs
     from .mechanisms import MechanismAudit, mechanism_blockers
 
     context = word_context(request, task, device)
@@ -133,8 +134,8 @@ def run_word(request, task, output, device, *, execution_limit=None, capture_med
         row = {"step": step, **metrics}
         if step:
             observations.append(row)
-        if capture_media:
-            records.append({"step": step, **observed})
+        if capture_media or retain_scored_outputs:
+            records.append(deepcopy({"step": step, **observed}))
         _event("observation", task=task["id"], step=step, metrics=metrics,
                metric_passed=observed["passed"], failed_bounds=observed["failed_bounds"])
 
@@ -160,6 +161,10 @@ def run_word(request, task, output, device, *, execution_limit=None, capture_med
                  "adapter_loop_seconds": time.monotonic() - started, "phase_timing": timing.snapshot()},
         "scope": "ordinary_full_task" if steps == task["execution"]["steps"] else "integration_demo_only",
         "declared_task_updates": task["execution"]["steps"], "execution_limit": steps}
+    if retain_scored_outputs:
+        receipt["evidence"]["saved_observer_outputs"] = _save_observer_outputs(
+            output, "observed-records.pt", [record for record in records if record["step"]],
+            kind="scored_word_records_v1")
     # Durable bulk state remains local; it is not a continuation qualification.
     torch.save({"fixture": state, "streams": context.streams.state_dict()}, output / "state.pt")
     atomic_json(output / "adapter-receipt.json", receipt)

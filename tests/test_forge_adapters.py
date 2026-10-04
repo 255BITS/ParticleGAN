@@ -70,6 +70,44 @@ def test_vector_uses_public_mog_and_real_evaluator_with_isolated_rng(tmp_path):
     assert not (tmp_path / "state.pt").exists()
 
 
+@pytest.mark.parametrize("name", ["vector_two_broad", "ring16_acquisition"])
+def test_saved_vector_outputs_are_scored_draws_without_changing_state_or_rng(tmp_path, monkeypatch, name):
+    from experiments.forge.contracts import file_hash
+    from experiments.forge.state import state_digest
+    if name == "ring16_acquisition":
+        from benchmarks.toy_audit import ring16_quality as evaluator
+    else:
+        from benchmarks.transfer_suite import vector_tasks as evaluator
+    original, scored = evaluator.score_samples, []
+    def score(samples, spec, step):
+        scored.append({"step": step, "samples": samples.detach().clone()})
+        return original(samples, spec, step)
+    monkeypatch.setattr(evaluator, "score_samples", score)
+    value = task(name)
+    value["execution"]["produces_state"] = True
+    global_rng = torch.get_rng_state().clone()
+    receipts, states = [], []
+    for retain in (False, True):
+        output = tmp_path / str(retain)
+        options = {} if retain else {"retain_scored_outputs": False}
+        receipts.append(adapters._vector(request(value), value, output, "cpu", **options))
+        states.append(torch.load(output / "state.pt", weights_only=False))
+        assert torch.equal(global_rng, torch.get_rng_state())
+    assert state_digest(states[0]) == state_digest(states[1])
+    archived_path = tmp_path / "True/observed-samples.pt"
+    archived = torch.load(archived_path, weights_only=False)
+    assert len(scored) == 4  # Two original checks per run, no added draws.
+    assert state_digest(archived) == state_digest(scored[2:])
+    assert state_digest(scored[:2]) == state_digest(scored[2:])
+    assert [record["step"] for record in archived] == [1, 2]
+    descriptor = receipts[1]["evidence"].pop("saved_observer_outputs")
+    assert descriptor == {"path": "observed-samples.pt", "sha256": file_hash(archived_path),
+        "bytes": archived_path.stat().st_size, "observation_count": 2,
+        "kind": "scored_vector_samples_v1", "optimizer_updates_added": 0, "sampling_draws_added": 0}
+    assert receipts[0]["evidence"] == receipts[1]["evidence"]
+    assert not (tmp_path / "False/observed-samples.pt").exists()
+
+
 def test_image_explicit_cloud_scores_clean_enumeration_without_rng_draws(tmp_path, monkeypatch):
     original = GANTrainer.sample
     calls = []

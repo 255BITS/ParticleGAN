@@ -7117,7 +7117,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "06c7bd3bcf284e7b12a83548aeed716eec1cc162",
+      "git_blob": "ac075268d47f4b6a5cb347eba3dde43cf605b65d",
       "path": "experiments/forge/adapters.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -7264,7 +7264,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "7ccbeb1cd7954d6d230369cf9ed86cd184000e24",
+      "git_blob": "9470759844eb13d99e67325de3d11b72e70121ca",
       "path": "experiments/forge/knowledge.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -7285,7 +7285,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "5c38284f08e213a8a9a1cef8ea2d6ef121301235",
+      "git_blob": "c0e646853a1ff3e64dc18faa58faf4577a367f28",
       "path": "experiments/forge/native3_publication_memory.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -7467,7 +7467,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "75c8cdaf29bb1c114c8548879935be9105b54002",
+      "git_blob": "a972c546eaaa265df8c558cb5052b846ea982056",
       "path": "experiments/forge/word_adapter.py",
       "role": "engine_support",
       "suggested_tiers": []
