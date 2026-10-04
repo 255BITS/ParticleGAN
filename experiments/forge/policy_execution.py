@@ -204,12 +204,21 @@ class PolicyCoordinator:
             return state.get("policy_attempts", {}).get(key)
 
     def attempt_key(self, packet, trial, row):
-        return stable_hash({"cohort": "cloud-served-policy-v1", "case": packet["case_definitions"][row["id"]],
-                            "family": trial["family"], "recipe": trial["recipe_overrides"],
-                            "source_digest": packet["execution_source"]["digest"],
-                            "runtime": scientific_runtime(packet["lane_runtime"]), "timeout_seconds": row["timeout_seconds"],
-                            "export_grace_seconds": packet["spec"]["export_grace_seconds"],
-                            "frames": packet["spec"].get("frames", 9)})
+        identity = {"cohort": "cloud-served-policy-v1", "case": packet["case_definitions"][row["id"]],
+                    "family": trial["family"], "recipe": trial["recipe_overrides"],
+                    "source_digest": packet["execution_source"]["digest"],
+                    "runtime": scientific_runtime(packet["lane_runtime"]), "timeout_seconds": row["timeout_seconds"],
+                    "export_grace_seconds": packet["spec"]["export_grace_seconds"],
+                    "frames": packet["spec"].get("frames", 9)}
+        # Only this source-bound one-case envelope has a recognized fresh repeat.
+        # Ordinary policy studies retain their released identity byte-for-byte.
+        schema = packet.get("schema", "")
+        if ((isinstance(schema, str) and schema.startswith("pg_canonical_two_pole_first_case"))
+                or str(row.get("id", "")).startswith("canonical-two-pole-full-atlas-")
+                or "scientific_repeat" in packet or "scientific_repeat" in packet.get("protocol", {})):
+            from .canonical_two_pole_repeat import coordinator_repeat
+            identity["scientific_repeat"] = coordinator_repeat(packet, trial, row)
+        return stable_hash(identity)
 
     @contextmanager
     def admit(self, key, packet, row, device):
