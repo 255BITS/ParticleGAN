@@ -730,6 +730,87 @@ def test_main_policy_rows_link_separate_history_and_failed_hold_without_credit()
                                                 ROOT / "reports/forge/technique-inventory.md") == []
 
 
+def _copy_atlas_progress(root):
+    for relative, _, _ in publication.ATLAS_PROGRESS_INPUTS.values():
+        path = Path("reports/forge") / relative
+        for name in (path, path.with_name("README.md")):
+            (root / name).parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(ROOT / name, root / name)
+
+
+def test_atlas_progress_is_source_bound_additive_display_and_preserves_every_ordinary_row(evidence):
+    root, _ = evidence
+    before = read_json(publication.publish_current(root)["json"])
+    manifest = (root / publication.EVIDENCE_MANIFEST).read_bytes()
+    assert "atlas_unblocking_progress" not in before
+    _copy_atlas_progress(root)
+    published = publication.publish_current(root)
+    after = read_json(published["json"])
+    for key, value in before.items():
+        if key != "provenance":
+            assert after[key] == value
+    assert set(after) - set(before) == {"atlas_unblocking_progress"}
+    assert (root / publication.EVIDENCE_MANIFEST).read_bytes() == manifest
+    assert after["provenance"]["selected_rows_sha256"] == before["provenance"]["selected_rows_sha256"]
+    progress = after["atlas_unblocking_progress"]
+    assert progress["baseline"]["counts"] == {"PASS": 7, "FAIL": 11, "BLOCKED": 8}
+    assert (progress["passed"], progress["required"]) == (7, 8)
+    assert [row["passed"] for row in progress["adaptations"]] == [4, 1, 1, 1, 0]
+    assert len({row["source"]["digest"] for row in progress["adaptations"]}) == 2
+    assert progress["word"]["status"] == "INVALID"
+    assert progress["word"]["numerical_gate"] == "UNAVAILABLE"
+    assert progress["word"]["raw_completed_steps"] == 20001
+    assert progress["word"]["recorded_endpoint"]["mass_tv"] == .6
+    assert all(progress[key] is False for key in (
+        "qualification_input", "qualification_reuse", "ordinary_tier_credit", "cross_cohort_pooling",
+        "default_adoption", "speed_ranking"))
+    markdown = Path(published["report"]).read_text()
+    assert markdown.index("## Atlas unblocking progress") < markdown.index("## Ordinary MoG qualification")
+    assert "**7 PASS / 11 FAIL / 8 BLOCKED**" in markdown and "**7/8 previously blocked question gates**" in markdown
+    assert "INVALID; 20,001 updates; raw goals miss; numerical gate UNAVAILABLE" in markdown
+    assert "one unchanged family/configuration tuple must satisfy all 26 required" in markdown
+    atlas_row = next(line for line in markdown.splitlines() if line.lower().startswith("| atlas<br>"))
+    assert "[Adaptation progress](#atlas-unblocking-progress)" in atlas_row
+    assert after["rows"] == before["rows"]
+    outputs = _outputs(root)
+    assert publication.publish_current(root) == published and _outputs(root) == outputs
+
+
+@pytest.mark.parametrize("tamper", ["partial", "changed_count", "word_pass", "source", "credit"])
+def test_changed_progress_evidence_cannot_rewrite_ordinary_outputs(evidence, tamper):
+    root, _ = evidence
+    _copy_atlas_progress(root)
+    publication.publish_current(root)
+    before = _outputs(root)
+    if tamper == "partial":
+        (root / "reports/forge" / publication.ATLAS_PROGRESS_INPUTS["word_context"][0]).unlink()
+    else:
+        key = "word_context" if tamper == "word_pass" else "baseline"
+        path = root / "reports/forge" / publication.ATLAS_PROGRESS_INPUTS[key][0]
+        value = read_json(path)
+        if tamper == "changed_count":
+            value["counts"]["PASS"] = 26
+        elif tamper == "word_pass":
+            value["execution_status"] = "PASS"
+        elif tamper == "source":
+            value["source"]["origin_commit"] = "0" * 40
+        else:
+            value["qualification_input"] = True
+        atomic_json(path, value)
+    with pytest.raises((ValueError, FileNotFoundError)):
+        publication.publish_current(root)
+    assert _outputs(root) == before
+
+
+def test_committed_atlas_progress_display_matches_its_generator_without_raw_evidence():
+    result = read_json(ROOT / "reports/forge/technique-inventory.json")
+    expected = publication._atlas_unblocking_progress(ROOT)
+    assert result["atlas_unblocking_progress"] == expected
+    markdown = publication._current_markdown(result, ROOT, ROOT / "reports/forge/technique-inventory.md")
+    assert (ROOT / "reports/forge/technique-inventory.md").read_text() == markdown
+    assert "**7/8 previously blocked question gates**" in markdown
+
+
 def test_committed_cohorts_rebuild_every_scientific_row_in_a_checkout_without_raw_logs(tmp_path):
     for relative in (publication.EVIDENCE_MANIFEST.parent, Path("reports/forge/technique-receipts"),
                      Path("configs/forge/ideas"), Path("configs/forge/configurations"),

@@ -2,11 +2,29 @@
 
 Atlas's historical study has **19/19 original PASS**. The later C6 broad hold has **2/2 hold FAIL**, with six other domains UNKNOWN per family. See [completed source-bound studies](#completed-source-bound-studies) for the exact protocols and original goal GIFs. These separate results do not fill the ordinary qualification cells below.
 
+## Atlas unblocking progress
+
+The [initial 26-question policy GPU baseline](atlas-current-gpu-diagnostics-native-v2-20261003/README.md) recorded **7 PASS / 11 FAIL / 8 BLOCKED**. Adaptations have since met **7/8 previously blocked question gates** across distinct named families and retained sources. This is question coverage; the results do not combine into one qualified family or configuration.
+
+| Adaptation | Retained question gates | Source | Evidence |
+| --- | --- | --- | --- |
+| Conditional | 4/4 PASS | `ff94453b` | [Readout and actual goal GIFs](atlas-named-gpu-diagnostics-native-v3-20261003/README.md) |
+| AE routed | 1/1 PASS | `ff94453b` | [Readout and actual goal GIFs](atlas-named-gpu-diagnostics-native-v3-20261003/README.md) |
+| Unused token | 1/1 PASS | `fb7acc77` | [Readout and actual goal GIFs](atlas-named-gpu-diagnostics-native-v4b-20261004/README.md) |
+| Cover leftover | 1/1 PASS | `fb7acc77` | [Readout and actual goal GIFs](atlas-named-gpu-diagnostics-native-v4b-20261004/README.md) |
+| Word joint N11 | INVALID; 20,001 updates; raw goals miss; numerical gate UNAVAILABLE | `fb7acc77` | [Readout and actual goal GIFs](atlas-word-retained-context-20261004/README.md) |
+
+The ordinary MoG/clean-live task bindings below are incompatible with Atlas's particle-cloud and selected-policy serving law. The adapters declare their different priors, owners and resources explicitly; original N5 word execution remains BLOCKED. The N11 word clock and raw missed goals do not override its INVALID execution status.
+
+Before shipping defaults, one unchanged family/configuration tuple must satisfy all 26 required 5/19/2 gates with compatible source, runtime and serving evidence, followed by the separate calibration and robustness requirements. Speed selection additionally requires matched timing evidence. No diagnostic result above grants ordinary tier, default or speed credit.
+
+## Ordinary MoG qualification
+
 Each cell retains **passes / full required total** or **status (N required)** from one selected configuration. Mixed cells show the counts of failed, blocked and unmeasured tasks. Each formulation family has one current selected row; source and runtime alternatives remain unranked. Expand the configuration details below for selection, provenance, other outcomes and cost.
 
 | Trainer family / runtime | Tier 1 | Tier 2 | Tier 3 | Recorded tier |
 | --- | ---: | ---: | ---: | ---: |
-| Atlas<br>cuda<br>[Atlas history: 19/19 PASS](continuous-baseline-20261003/README.md)<br>[C6 Atlas hold FAIL](c6-baseline-debug-20261003/README.md) | BLOCKED (5 required) | BLOCKED (19 required) | BLOCKED (2 required) | 0 |
+| Atlas<br>cuda<br>[Atlas history: 19/19 PASS](continuous-baseline-20261003/README.md)<br>[C6 Atlas hold FAIL](c6-baseline-debug-20261003/README.md)<br>[Adaptation progress](#atlas-unblocking-progress) | BLOCKED (5 required) | BLOCKED (19 required) | BLOCKED (2 required) | 0 |
 | BCap<br>cuda | 3/5<br>FAIL 1 · UNKNOWN 1 | UNKNOWN (19 required) | UNKNOWN (2 required) | 0 |
 | E22<br>cuda<br>[Atlas history: 19/19 PASS](continuous-baseline-20261003/README.md)<br>[C6 E22 hold FAIL](c6-baseline-debug-20261003/README.md) | BLOCKED (5 required) | BLOCKED (19 required) | BLOCKED (2 required) | 0 |
 | GAN v3 release 0.7 (MoG)<br>cuda | 3/5<br>FAIL 1 · UNKNOWN 1 | UNKNOWN (19 required) | UNKNOWN (2 required) | 0 |
@@ -162,7 +180,7 @@ python reports/forge/regenerate_technique_inventory.py
 
 For ordinary Forge qualification, use `--source-commit <executed-commit>` to independently regrade hydrated original receipts and update this leaderboard. Reusable candidates use the same complete task ladder. Historical task-only diagnostics remain motivation and reproduction evidence. Source snapshots are provenance, not additional leaderboards.
 
-Publication input digest `0e0c19f5415ddc8dc7f0f581e251ad52defb656587869fb0d1413ed13b6ea5ed`.
+Publication input digest `96583ac83d69f3d948cbb957b07e0701733f995afce6c3897ae3ae8ed3bf5b9e`.
 
 The [whole-family repair readout](family-wide-word-repairs/README.md) records the ordinary candidate attempts and bounded global configuration search. Their complete rows remain unranked alternatives below and in the companion JSON; a failed replacement does not make its historical incumbent a qualified standard.
 
