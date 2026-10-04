@@ -21,7 +21,7 @@ OWNERS = frozenset({"task", "technique", "hyperparameter", "protocol"})
 # In particular, a numerical ablation switch still changes a technique when its
 # value removes an active mechanism; techniques.py checks that invariant.
 TUNABLE_FIELDS = frozenset({
-    "lr", "d_lr_mult", "prior_lr_mult", "betas", "prior_betas", "eps", "amsgrad",
+    "lr", "d_lr_mult", "prior_lr_mult", "betas", "prior_betas", "direct_particle_betas", "eps", "amsgrad",
     "reg_coeff", "reg_coeff_end", "reg_coeff_anneal_end", "reg_kappa", "reg_every", "prior_reg",
     "lr_anneal_start", "lr_floor", "network_lr_floor", "beta2_end", "beta2_anneal_end",
 })

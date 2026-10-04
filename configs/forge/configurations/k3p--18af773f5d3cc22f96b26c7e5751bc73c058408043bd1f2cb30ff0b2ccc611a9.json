@@ -1,0 +1,381 @@
+{
+  "api_changes": [],
+  "api_version": "forge-api-v1",
+  "changed_factors": [
+    "Recipe.direct_particle_betas=[0.0, 0.999]",
+    "Recipe.lr=0.0006",
+    "Recipe.prior_lr_mult=2.0"
+  ],
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "configuration_id": "18af773f5d3cc22f96b26c7e5751bc73c058408043bd1f2cb30ff0b2ccc611a9",
+  "decision_contract": {
+    "candidate_binding_sha256": "8fde401585ebca106ff651a6bbc93e89d06797389acad17572027ea3c0e1c38e",
+    "competing_explanation": "The upper bound is necessary eligibility, not a predicted trajectory: changing beta2 can retain an early large denominator and reduce movement when gradients decay. A movement pass does not establish low-rate ring acquisition or word transfer. All five sustained ordinary gates must pass from the same candidate; no historical word receipt or different task recipe supplies credit.",
+    "control": {
+      "binding_sha256": "5308d75119a24087f1363cb3462366244bcafc1ee9fc40c0033b993c5b49f34a",
+      "candidate_id": "k3p-global-repair-v1",
+      "task_map": {
+        "ae_gan_hold": "ae_gan_hold",
+        "five_word_joint_acquisition": "five_word_joint_acquisition",
+        "ring16_acquisition": "ring16_acquisition",
+        "two_pole": "two_pole",
+        "unused_token_hold": "unused_token_hold"
+      }
+    },
+    "falsifier": {
+      "metric": "mean_abs",
+      "op": "<",
+      "phase": "final",
+      "task_id": "two_pole",
+      "threshold": 0.3
+    },
+    "prediction": {
+      "metric": "mean_abs",
+      "op": ">=",
+      "phase": "final",
+      "task_id": "two_pole",
+      "threshold": 0.3
+    },
+    "prior_evidence": [
+      {
+        "identity": {
+          "candidate_revision": "7c9ea7c422fdacc4f9bbee35883893cf0d6abb2693341b515598e52b8a47cfa5",
+          "id": "k3p-coeff170-cap1",
+          "scope": "Independent bounded existing-parameter contrast after low-rate/noise/horizon and slower-prior diagnostics: tune positive K3P critic coefficient/cap strengths on the unchanged 170-dimensional word/latent joint host. Compare against the already-completed clean/full low-rate baseline without rerunning it. No penalty swap, new objective, seed study or qualification bypass credit.",
+          "source_digest": "4ff32ae9e41adf0814fbf9a35bb81376b1ff7940ca9a497a43bf4526722561ef"
+        },
+        "path": "reports/forge/word-root-cause/receipts/k3p-coeff170-cap1.json",
+        "selector": [],
+        "sha256": "32a5d05af53ef90843fcb155bd5593cf5780c4eba4e7cb254d3a8a05d26f04ed",
+        "use": "motivation_only"
+      },
+      {
+        "identity": {
+          "candidate_revision": "9bc3da4de808300aaa74effda23f1114910ce2c819bda3fcd579bb8b6d5f5e8e",
+          "scope": "ordinary_global_candidate",
+          "source_digest": "2aea8c53d1871625ff47b58a9a24c6259b46e4647669ad42d34bc4366a42508f"
+        },
+        "path": "reports/forge/family-wide-word-repairs/initial/k3p-global-repair-v1.json",
+        "selector": [],
+        "sha256": "ef721e05025ecb5e576c0b3c86f70fd4c3e5d1aea383834d2b80300b40839989",
+        "use": "motivation_only"
+      },
+      {
+        "identity": {
+          "id": "k3p-direct-rate-analysis-v1",
+          "scope": "read_only_analytic_and_saved_receipt_diagnostic",
+          "source_digest": "8778d4c7fc0d714b7b571dccabdfbd08093625e645b97519ea009f2b4b66f48d"
+        },
+        "path": "reports/forge/k3p-global-tier1-v3/direct-rate-analysis.json",
+        "selector": [],
+        "sha256": "c66f70e77c7eef5bfab2000d6d1155fbd6400d138b70b1f5dfe44f32f77247d3",
+        "use": "motivation_only"
+      }
+    ],
+    "schema_version": 1,
+    "scope": {
+      "campaign_budget_seconds": 8400,
+      "candidate_budget_seconds": 2100,
+      "execution_backend": "cuda",
+      "jobs_sha256": "7e9b6c0170015fda0451e38c0d1c1a25e5591924496ccf350cf4c23fdfe0b65a",
+      "max_rounds": 1,
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "runtime_cohort_sha256": "e2f4acc3bb6543576475ece1bb0bce5b973eca2ed1852b13d096ec9145277c71",
+      "source_digest": "730b77d2b4e1e6ec34f9aed7a5d061874e70eaebb5af0ff839cff1781b849a8d",
+      "task_ids": [
+        "ae_gan_hold",
+        "five_word_joint_acquisition",
+        "ring16_acquisition",
+        "two_pole",
+        "unused_token_hold"
+      ],
+      "through_tier": 1,
+      "view": "discriminator_stability"
+    },
+    "status": "ready",
+    "substantive_delta": [
+      {
+        "after": [
+          0.0,
+          0.999
+        ],
+        "before": [
+          0.0,
+          0.9
+        ],
+        "path": [
+          "recipe",
+          "ae_gan_hold",
+          "direct_particle_betas"
+        ]
+      },
+      {
+        "after": [
+          0.0,
+          0.999
+        ],
+        "before": [
+          0.0,
+          0.9
+        ],
+        "path": [
+          "recipe",
+          "five_word_joint_acquisition",
+          "direct_particle_betas"
+        ]
+      },
+      {
+        "after": [
+          0.0,
+          0.999
+        ],
+        "before": [
+          0.0,
+          0.9
+        ],
+        "path": [
+          "recipe",
+          "ring16_acquisition",
+          "direct_particle_betas"
+        ]
+      },
+      {
+        "after": [
+          0.0,
+          0.999
+        ],
+        "before": [
+          0.0,
+          0.9
+        ],
+        "path": [
+          "recipe",
+          "two_pole",
+          "direct_particle_betas"
+        ]
+      },
+      {
+        "after": [
+          0.0,
+          0.999
+        ],
+        "before": [
+          0.0,
+          0.9
+        ],
+        "path": [
+          "recipe",
+          "unused_token_hold",
+          "direct_particle_betas"
+        ]
+      }
+    ],
+    "terminal_rules": {
+      "falsified": "stop_revision",
+      "incomplete": "request_missing_evidence",
+      "inconclusive": "stop_and_readout",
+      "prediction_observed": "review_saved_diagnostics"
+    }
+  },
+  "diagnostic_ancestor": {
+    "qualification_reuse": false,
+    "receipt": {
+      "bytes": 40177,
+      "path": "reports/forge/word-root-cause/receipts/k3p-coeff170-cap1.json",
+      "sha256": "32a5d05af53ef90843fcb155bd5593cf5780c4eba4e7cb254d3a8a05d26f04ed"
+    },
+    "use": "motivation_only"
+  },
+  "execution_path": "public_trainer",
+  "goal": "discriminator_stability",
+  "guide": "EXPERIMENTATION.md",
+  "hypothesis": "The existing direct-particle beta2=.9 response imposes a finite 80-update displacement upper bound below .3 at base LR.0006. Changing its already-public positive beta2 to .999 loosens that bound and may permit one global clean K3P recipe, retaining coefficient170 and nominal latent-prior LR.0012, to pass all five ordinary Tier 1 tasks.",
+  "id": "k3p--18af773f5d3cc22f96b26c7e5751bc73c058408043bd1f2cb30ff0b2ccc611a9",
+  "lifecycle": "proposed",
+  "mechanism_class": "floor_constant",
+  "mechanism_rationale": "Explicit global solution successor. Clean-noise/cap activation boundaries are declared rather than hidden in same-signature search; no new penalty kernel, optimizer family or auxiliary objective. Family membership describes solution lineage.",
+  "parent": "k3p-global-repair-v1",
+  "prior": {
+    "kind": "mog",
+    "learnable": true,
+    "sigma": 0.025,
+    "standardize": false
+  },
+  "prior_art": [
+    "reports/forge/word-root-cause/README.md",
+    "reports/forge/word-root-cause/receipts/k3p-coeff170-cap1.json"
+  ],
+  "recipe_overrides": {
+    "amsgrad": false,
+    "beta2_anneal_end": 0.2,
+    "beta2_end": null,
+    "betas": [
+      0.0,
+      0.999
+    ],
+    "birth_death_backend": "knn",
+    "birth_death_cells": 64,
+    "birth_death_chunk": 256,
+    "birth_death_feature_scale": "none",
+    "birth_death_isolation": false,
+    "birth_death_metric_rank": 8,
+    "birth_death_parent_policy": "real_anchor",
+    "birth_death_space": "data",
+    "continuous_policy": null,
+    "critic_formulation": "k3p",
+    "critic_payoff_damping": true,
+    "critic_r1_real": true,
+    "d_guard_min_steps": 200,
+    "d_guard_ratio": 5.0,
+    "d_lr_mult": 1.5,
+    "direct_particle_betas": [
+      0.0,
+      0.999
+    ],
+    "direct_particle_gain": true,
+    "ema_decay": 0.995,
+    "eps": 1e-08,
+    "input_noise_anneal_end": 0.1,
+    "input_noise_std": 0.0,
+    "latent_damping_max_rate": 0.5,
+    "lr": 0.0006,
+    "lr_anneal_start": 0.6,
+    "lr_control": "mobility",
+    "lr_floor": 0.05,
+    "name": "k3p",
+    "network_lr_floor": 0.01,
+    "network_lr_horizon_cap": null,
+    "optimizer_family": "formulation",
+    "output_noise_mode": "fixed",
+    "output_noise_std": 0.0,
+    "output_noise_warmup": 0.2,
+    "particle_birth_death": false,
+    "prior_betas": null,
+    "prior_lr_mult": 2.0,
+    "reg_anchor_min_decay": 0.9,
+    "reg_anchor_weight": 1.0,
+    "reg_arm": null,
+    "reg_coeff": 170.0,
+    "reg_coeff_anneal_end": 0.2,
+    "reg_coeff_end": null,
+    "reg_every": 1,
+    "reg_kappa": 1.0,
+    "reopen_anchor": "hold",
+    "reopen_guard": null,
+    "reopen_signal": "data",
+    "row_evidence_exclude": true,
+    "row_evidence_gate": false,
+    "row_evidence_hold": true,
+    "row_evidence_hot": true,
+    "row_evidence_null": "theory",
+    "row_policy": "independent",
+    "serve_average": 0.0,
+    "table_release_rule": "any"
+  },
+  "recipe_scope": "global_existing_settings_task_owned_conditions_only",
+  "requires_capabilities": [
+    "learned_locations",
+    "a2",
+    "named_rng"
+  ],
+  "resolved_configuration_recipe": {
+    "alpha_bar": [
+      1.0,
+      0.9,
+      0.5,
+      0.05,
+      0.0001
+    ],
+    "amsgrad": false,
+    "batch_size": 2048,
+    "beta2_anneal_end": 0.2,
+    "beta2_end": null,
+    "betas": [
+      0.0,
+      0.999
+    ],
+    "birth_death_backend": "knn",
+    "birth_death_cells": 64,
+    "birth_death_chunk": 256,
+    "birth_death_feature_scale": "none",
+    "birth_death_isolation": false,
+    "birth_death_metric_rank": 8,
+    "birth_death_parent_policy": "real_anchor",
+    "birth_death_space": "data",
+    "conditioning": "scalar",
+    "continuous_policy": null,
+    "critic_formulation": "k3p",
+    "critic_payoff_damping": true,
+    "critic_r1_real": true,
+    "d_guard_min_steps": 200,
+    "d_guard_ratio": 5.0,
+    "d_lr_mult": 1.5,
+    "direct_particle_betas": [
+      0.0,
+      0.999
+    ],
+    "direct_particle_gain": true,
+    "distance_reduction": "sum",
+    "ema_decay": 0.995,
+    "encoder_mode": "none",
+    "eps": 1e-08,
+    "input_noise_anneal_end": 0.1,
+    "input_noise_std": 0.0,
+    "latent_damping_max_rate": 0.5,
+    "lr": 0.0006,
+    "lr_anneal_start": 0.6,
+    "lr_control": "mobility",
+    "lr_floor": 0.05,
+    "model": "gan",
+    "name": "k3p",
+    "network_lr_floor": 0.01,
+    "network_lr_horizon_cap": null,
+    "num_classes": null,
+    "num_particles": 20000,
+    "observation_sigma": 0.03,
+    "optimizer_family": "formulation",
+    "output_noise_mode": "fixed",
+    "output_noise_std": 0.0,
+    "output_noise_warmup": 0.2,
+    "particle_birth_death": false,
+    "prior_betas": null,
+    "prior_kind": "mog",
+    "prior_lr_mult": 2.0,
+    "prior_reg": 0.0,
+    "reconstruction_weight": 1.0,
+    "reg_anchor_min_decay": 0.9,
+    "reg_anchor_weight": 1.0,
+    "reg_arm": null,
+    "reg_coeff": 170.0,
+    "reg_coeff_anneal_end": 0.2,
+    "reg_coeff_end": null,
+    "reg_every": 1,
+    "reg_kappa": 1.0,
+    "reopen_anchor": "hold",
+    "reopen_guard": null,
+    "reopen_signal": "data",
+    "routing_temperature": 0.25,
+    "row_evidence_exclude": true,
+    "row_evidence_gate": false,
+    "row_evidence_hold": true,
+    "row_evidence_hot": true,
+    "row_evidence_null": "theory",
+    "row_policy": "independent",
+    "serve_average": 0.0,
+    "sigma_rel": 0.0,
+    "standardize": false,
+    "table_release_rule": "any",
+    "total_steps": 7000,
+    "ucd_target": "class",
+    "ucd_weight": 0.02,
+    "z_dim": 2
+  },
+  "schema_version": 2,
+  "search_report": "reports/forge/configuration-search/k3p-global-direct-moments-tier1-v1.json",
+  "search_study_id": "k3p-global-direct-moments-tier1-v1",
+  "trainer_family": "k3p"
+}

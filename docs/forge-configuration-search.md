@@ -73,6 +73,14 @@ the candidate's value. A mixed study can tune that scalar value only when one
 of its tuning tasks actually consumes it. Task bindings use the same pure
 resolver as execution, without constructing or training models.
 
+The existing `direct_particle_betas` pair can be searched when at least one
+tuning task actually constructs a formulation optimizer for direct generated
+coordinates, such as `two_pole`. It does not control sampled latent locations,
+word networks or plain Adam. Positive moment strengths can vary; enabling or
+removing either moment requires a structural idea. The ordinary pair validation,
+fixed task laws and whole-configuration selection rules still apply. This exposes
+an existing public optimizer setting without changing its update rule.
+
 Technique signatures are additional provenance in newly planned studies.
 Existing configuration hashes, saved studies, qualification results and
 historical family/cohort distinctions retain their original identity.
