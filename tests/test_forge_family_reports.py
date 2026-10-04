@@ -99,6 +99,8 @@ def test_changed_gate_preserves_recorded_failure_and_marks_coverage_incomplete(r
     cohort = generate(report)
     assert cohort["tasks"]["failed"]["status"] == "FAIL"
     assert cohort["tasks"]["failed"]["current_contract"] == "CHANGED"
+    assert cohort["tasks"]["failed"]["changed_contract_fields"] == ["evaluation (gates or sampling law)"]
+    assert "Current coverage is stale: changed evaluation" in cohort["tasks"]["failed"]["coverage_reason"]
     assert score(cohort["views"][0]["tiers"]["2"]) == "0(*)/1"
     text = next(iter(generated_pages(root, publication).values()))
     assert "| score | 0.25 | >= 0.5 | FAIL |" in text
@@ -130,6 +132,68 @@ def test_runtime_groups_never_sum_or_borrow_each_others_passes(report):
     publication["rows"].append(deepcopy(cpu))
     with pytest.raises(ValueError, match="multiple selected configurations"):
         build_progress(root, publication)
+
+
+def test_cuda_labels_are_omitted_only_when_one_runtime_is_unambiguous(report):
+    root, publication = report
+    generate(report)
+    page = root / "reports/forge/technique-inventory.md"
+    text = render_leaderboard(root, publication, page)
+    assert "**[K3P](" in text and "K3P (cuda)" not in text
+    cpu = deepcopy(publication["rows"][0])
+    cpu.update(runtime_cohort={"execution_backend": "cpu"}, attempt_ids=[], tasks=[])
+    publication["rows"].append(cpu)
+    generate(report)
+    text = render_leaderboard(root, publication, page)
+    assert "K3P (cuda)" in text and "K3P (cpu)" in text
+
+
+def test_task_devices_and_policy_parent_remain_visible_in_provenance(report):
+    root, publication = report
+    path = root / "reports/forge/technique-receipts/attempt-one.json"
+    receipt = read_json(path)
+    receipt["task_results"][0]["device"] = "cpu"
+    atomic_json(path, receipt)
+    task_path = root / "configs/forge/tasks/failed.json"
+    task = read_json(task_path)
+    task["policy_parent"] = {"id": "shared", "task_sha256": "original-parent-hash"}
+    atomic_json(task_path, task)
+    cohort = generate(report)
+    assert cohort["tasks"]["failed"]["device"] == "cpu"
+    text = next(iter(generated_pages(root, publication).values()))
+    assert "Actual task device: `cpu`" in text
+    assert "original-parent-hash" in text and "no cells to the parent clean cohort" in text
+
+
+def test_scoped_task_variant_discovery_and_links_use_its_actual_declaration_path(report):
+    root, publication = report
+    original = root / "configs/forge/tasks/held.json"
+    variant = root / "configs/forge/task-variants/policy-cohort/held.json"
+    variant.parent.mkdir(parents=True)
+    original.rename(variant)
+    cohort = generate(report)
+    assert cohort["tasks"]["held"]["current_contract"] == "matches"
+    assert publication["family_progress"]["task_paths"]["held"] == variant.relative_to(root).as_posix()
+    text = next(iter(generated_pages(root, publication).values()))
+    assert "task-variants/policy-cohort/held.json" in text
+
+
+def test_separate_policy_view_retains_required_results_without_expanding_parent_family_totals(report):
+    root, publication = report
+    original = generate(report)
+    definition = read_json(root / "configs/forge/views/beta.json")
+    definition.update(id="policy-coverage", reporting={"family_totals": False})
+    atomic_json(root / "configs/forge/views/policy-coverage.json", definition)
+    updated = generate(report)
+    assert updated["total"] == original["total"] and updated["tiers"] == original["tiers"]
+    assert publication["family_progress"]["scoped_views"] == ["policy-coverage"]
+    assert updated["scoped_views"][0]["tiers"]["1"] == {"passed": 1, "total": 1,
+        "incomplete": False, "counts": {"PASS": 1}}
+    text = next(iter(generated_pages(root, publication).values()))
+    assert "Separate cohort coverage (excluded from family totals)" in text
+    assert "This ordinary lane retains its own required gates" in text
+    overview = render_leaderboard(root, publication, root / "reports/forge/technique-inventory.md")
+    assert "↳ [policy-coverage]" not in overview
 
 
 def test_leaderboard_clicks_resolve_to_family_tiers_including_empty_tiers(report):
@@ -169,3 +233,24 @@ def test_committed_pages_and_every_drilldown_link_match_the_generator():
             assert linked.is_file(), (page, target)
             if fragment:
                 assert f'<a name="{fragment}"></a>' in pages.get(linked, linked.read_text()), (page, target)
+
+
+def test_legacy_gan_pages_preserve_original_whole_rows_and_do_not_enter_current_totals():
+    from experiments.forge.trainer_families import scientific_row_hash
+    root = Path(__file__).resolve().parents[1]
+    publication = read_json(root / "reports/forge/technique-inventory.json")
+    selection = read_json(root / "configs/forge/selections/family-current-v1.json")
+    current = [row for row in publication["rows"] if row["trainer_family"] == "release07-gan-v3"]
+    assert len(current) == 1
+    old_pins = {pin["trainer_family"]: pin for pin in selection["historical_selections"]}
+    for row in publication["historical_family_rows"]:
+        assert scientific_row_hash(row) == old_pins[row["trainer_family"]]["scientific_row_sha256"]
+    aliases = publication["family_progress"]["historical_families"]
+    assert {family["id"] for family in aliases} == set(old_pins)
+    assert not set(old_pins) & {family["id"] for family in publication["family_progress"]["families"]}
+    pages = generated_pages(root, publication)
+    for family in aliases:
+        text = pages[root / family["page"]]
+        assert "Historical cohort navigation" in text
+        assert '<a name="cohort-cuda-7f9c23eb0e27-tier-1"></a>' in text
+        assert "not pooled into it" in text

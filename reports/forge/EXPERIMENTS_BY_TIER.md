@@ -535,7 +535,7 @@ Recorded Forge task outcomes (exact saved configuration/source/runtime):
 | ae_gan_hold | [K3P](../../configs/forge/configurations/k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c.json) | MoGParticlePrior (sigma=0.025) | PASS | CHANGED; earlier contract | cuda / 2899099048c0 / 7ebaeb278a75 | [source-bound receipt index](technique-inventory.json) |
 | ae_gan_hold | [KA2](../../configs/forge/configurations/ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f.json) | MoGParticlePrior (sigma=0.025) | PASS | CHANGED; earlier contract | cuda / 2899099048c0 / 7be3028bd4fc | [source-bound receipt index](technique-inventory.json) |
 | ae_gan_hold | [R1/R2](../../configs/forge/configurations/r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f.json) | MoGParticlePrior (sigma=0.025) | PASS | CHANGED; earlier contract | cuda / 2899099048c0 / 4ff453a8a3ed | [source-bound receipt index](technique-inventory.json) |
-| ae_gan_hold | [GAN v3 release 0.7 (MoG)](../../configs/forge/configurations/release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c.json) | MoGParticlePrior (sigma=0.025) | PASS | CHANGED; earlier contract | cuda / 2899099048c0 / f99998f9b0fa | [source-bound receipt index](technique-inventory.json) |
+| ae_gan_hold | [GAN v3 release 0.7](../../configs/forge/configurations/release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c.json) | MoGParticlePrior (sigma=0.025) | PASS | CHANGED; earlier contract | cuda / 2899099048c0 / f99998f9b0fa | [source-bound receipt index](technique-inventory.json) |
 
 Related public-API demonstrations, with their own recorded contracts:
 
@@ -1206,7 +1206,7 @@ Recorded Forge task outcomes (exact saved configuration/source/runtime):
 | ring16_acquisition | [K3P](../../configs/forge/configurations/k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c.json) | MoGParticlePrior (sigma=0.025) | PASS | CHANGED; earlier contract | cuda / 2899099048c0 / 7ebaeb278a75 | [source-bound receipt index](technique-inventory.json) |
 | ring16_acquisition | [KA2](../../configs/forge/configurations/ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f.json) | MoGParticlePrior (sigma=0.025) | PASS | CHANGED; earlier contract | cuda / 2899099048c0 / 7be3028bd4fc | [source-bound receipt index](technique-inventory.json) |
 | ring16_acquisition | [R1/R2](../../configs/forge/configurations/r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f.json) | MoGParticlePrior (sigma=0.025) | FAIL | CHANGED; earlier contract | cuda / 2899099048c0 / 4ff453a8a3ed | [source-bound receipt index](technique-inventory.json) |
-| ring16_acquisition | [GAN v3 release 0.7 (MoG)](../../configs/forge/configurations/release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c.json) | MoGParticlePrior (sigma=0.025) | FAIL | CHANGED; earlier contract | cuda / 2899099048c0 / f99998f9b0fa | [source-bound receipt index](technique-inventory.json) |
+| ring16_acquisition | [GAN v3 release 0.7](../../configs/forge/configurations/release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c.json) | MoGParticlePrior (sigma=0.025) | FAIL | CHANGED; earlier contract | cuda / 2899099048c0 / f99998f9b0fa | [source-bound receipt index](technique-inventory.json) |
 
 Related public-API demonstrations, with their own recorded contracts:
 
@@ -1396,7 +1396,7 @@ Recorded Forge task outcomes (exact saved configuration/source/runtime):
 | two_pole | [K3P without training output noise](../../configs/forge/ideas/k3p-no-output-noise-diagnostic.json) | ParticlePrior (sigma=0) | FAIL | CHANGED; earlier contract | cuda / 2899099048c0 / edc93bce30da | [source-bound receipt index](technique-inventory.json) |
 | two_pole | [KA2](../../configs/forge/configurations/ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / 2899099048c0 / 7be3028bd4fc | [source-bound receipt index](technique-inventory.json) |
 | two_pole | [R1/R2](../../configs/forge/configurations/r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / 2899099048c0 / 4ff453a8a3ed | [source-bound receipt index](technique-inventory.json) |
-| two_pole | [GAN v3 release 0.7 (MoG)](../../configs/forge/configurations/release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / 2899099048c0 / f99998f9b0fa | [source-bound receipt index](technique-inventory.json) |
+| two_pole | [GAN v3 release 0.7](../../configs/forge/configurations/release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / 2899099048c0 / f99998f9b0fa | [source-bound receipt index](technique-inventory.json) |
 
 Related public-API demonstrations, with their own recorded contracts:
 
@@ -1490,7 +1490,7 @@ Recorded Forge task outcomes (exact saved configuration/source/runtime):
 | unused_token_hold | [K3P](../../configs/forge/configurations/k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / 2899099048c0 / 7ebaeb278a75 | [source-bound receipt index](technique-inventory.json) |
 | unused_token_hold | [KA2](../../configs/forge/configurations/ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / 2899099048c0 / 7be3028bd4fc | [source-bound receipt index](technique-inventory.json) |
 | unused_token_hold | [R1/R2](../../configs/forge/configurations/r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / 2899099048c0 / 4ff453a8a3ed | [source-bound receipt index](technique-inventory.json) |
-| unused_token_hold | [GAN v3 release 0.7 (MoG)](../../configs/forge/configurations/release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / 2899099048c0 / f99998f9b0fa | [source-bound receipt index](technique-inventory.json) |
+| unused_token_hold | [GAN v3 release 0.7](../../configs/forge/configurations/release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / 2899099048c0 / f99998f9b0fa | [source-bound receipt index](technique-inventory.json) |
 
 Related public-API demonstrations, with their own recorded contracts:
 
@@ -1723,4 +1723,4 @@ The wider question review also links standalone experiments outside the Forge ti
 
 Declaration input digest: `2c7db50aff2e2da092f28012bdbc0966d8876c51a4c160724539a5c103791070`. The JSON form includes the individual task and view file hashes.
 
-Published artifact input digest: `b1a5aff720b016faef6000cdb4ec941af382d4d39e0bdaf1f1ac5fa93c822d95`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.
+Published artifact input digest: `23f699d0dcdf8f967b1bfd128777aa4e64184a4ad166e505bc1a7440098e86f4`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.

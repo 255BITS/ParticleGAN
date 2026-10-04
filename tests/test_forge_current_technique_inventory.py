@@ -1008,7 +1008,7 @@ def test_committed_atlas_progress_display_matches_its_generator_without_raw_evid
     assert result["atlas_unblocking_progress"] == expected
     markdown = publication._current_markdown(result, ROOT, ROOT / "reports/forge/technique-inventory.md")
     assert (ROOT / "reports/forge/technique-inventory.md").read_text() == markdown
-    assert "4/26 PASS" not in markdown and sum(line.startswith("| **[") for line in markdown.splitlines()) == 12
+    assert "4/26 PASS" not in markdown and sum(line.startswith("| **[") for line in markdown.splitlines()) == 11
     assert "Atlas unblocking progress" not in markdown and "7/8" not in markdown
 
 
@@ -1239,15 +1239,15 @@ def test_half_base_render_keeps_old_invalid_and_separate_full_denominator():
 
 
 
-def test_one_visible_table_keeps_twelve_families_with_view_breakdowns_and_separate_evidence():
+def test_one_visible_table_keeps_solution_families_with_view_breakdowns_and_separate_evidence():
     result = read_json(ROOT / "reports/forge/technique-inventory.json")
     before = deepcopy(result)
-    assert len(result["rows"]) == 12
+    assert len(result["rows"]) == 11
     text = publication._current_markdown(result, ROOT, ROOT / "reports/forge/technique-inventory.md")
     assert text.count("| Family / view | Tier 1 | Tier 2 | Tier 3 | Total |") == 1
     table = [line for line in text.splitlines() if line.startswith("|")][2:]
-    assert len([line for line in table if line.startswith("| **[")]) == 12
-    assert len([line for line in table if line.startswith("| ↳ [")]) == 72
+    assert len([line for line in table if line.startswith("| **[")]) == 11
+    assert len([line for line in table if line.startswith("| ↳ [")]) == 66
     assert all("families/" in line for line in table)
     assert "19/19" not in text and "7/26 PASS" not in text and "0/26 PASS" not in text
     family_page = _family_text(ROOT, result, "atlas")
@@ -1273,7 +1273,7 @@ def test_original_pr223_score_uses_verified_full_original_law_not_changed_c6_cel
                                        "default_adoption", "speed_ranking", "new_current_retest_credit"))
     text = publication._current_markdown(result, ROOT, ROOT / "reports/forge/technique-inventory.md")
     assert "Original Atlas recipe and serving-law evidence" in _family_text(ROOT, result, "atlas")
-    assert "19/19" not in text and sum(line.startswith("| **[") for line in text.splitlines()) == 12
+    assert "19/19" not in text and sum(line.startswith("| **[") for line in text.splitlines()) == 11
     assert result == before
 
 
@@ -1394,7 +1394,8 @@ def test_committed_cohorts_rebuild_every_scientific_row_in_a_checkout_without_ra
     assert all((tmp_path / relative).read_bytes() == original for relative, original in snapshot_bytes.items())
     assert not (tmp_path / "reports/forge/attempts").exists()
     assert len(list((tmp_path / "reports/forge").glob("technique-inventory.md"))) == 1
-    assert len(list((tmp_path / "reports/forge/families").glob("*.md"))) == len(result["family_progress"]["families"])
+    assert len(list((tmp_path / "reports/forge/families").glob("*.md"))) == (
+        len(result["family_progress"]["families"]) + len(result["family_progress"].get("historical_families", [])))
     selection = _copy_word_diagnostics(tmp_path)
     updated = read_json(publication.publish_current(tmp_path)["json"])
     for key in ("rows", "configuration_rows", "evidence_rows", "archived_evidence_rows", "tier_requirements"):

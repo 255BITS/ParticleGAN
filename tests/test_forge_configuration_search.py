@@ -148,7 +148,7 @@ def test_tier1_refresh_materializes_only_all_32_existing_configuration_cards(tmp
     assert before == {path.name: path.read_bytes() for path in cards.glob("*.json")}
     registry = read_json(tmp_path / "configs/forge/trainer-families.json")
     family_pins = {family["id"]: family.get("active_search_by_backend", {})
-                   for family in registry["families"]}
+                   for family in registry["families"] + registry.get("historical_families", [])}
     assert family_pins["r1r2"]["cpu"] == "r1r2-modern-toy-v1"
     assert {pins["cuda"] for pins in family_pins.values() if "cuda" in pins} == set(roster["studies"])
 

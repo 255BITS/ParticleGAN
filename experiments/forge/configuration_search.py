@@ -217,7 +217,9 @@ def validate_configuration_declaration(candidate, *, root=None, _lineage=()):
         parent_recipe = _resolved_recipe(reference)
     from .trainer_families import family_for_candidate, load_families
     if (parent.get("trainer_family") not in (None, family)
-            or (load_families(root) and family_for_candidate(root, parent_id, parent)["id"] != family)):
+            or (load_families(root) and family not in {
+                family_for_candidate(root, parent_id, parent)["id"],
+                family_for_candidate(root, parent_id, parent, current_presentation=True)["id"]})):
         raise ValueError("configuration parent belongs to a different trainer_family")
     validate_same_technique(parent_recipe, frozen)
     laws = (set(FORMULATION_FIELDS) - {"recipe_overrides"}) | {"host_adaptation", "execution_path"}
@@ -236,7 +238,9 @@ def _declarations(root, spec):
     base = _base_declaration(root, spec)
     base_recipe = _resolved_recipe(base)
     from .trainer_families import family_for_candidate, load_families
-    if load_families(root) and family_for_candidate(root, base["id"], base)["id"] != spec["trainer_family"]:
+    if load_families(root) and spec["trainer_family"] not in {
+            family_for_candidate(root, base["id"], base)["id"],
+            family_for_candidate(root, base["id"], base, current_presentation=True)["id"]}:
         raise ValueError("base candidate belongs to a different registered trainer_family")
     if base.get("trainer_family") not in (None, spec["trainer_family"]):
         raise ValueError("base candidate belongs to a different trainer_family")

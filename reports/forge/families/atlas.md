@@ -509,7 +509,7 @@ One evidence entry per experiment is shared by its view rows. CHANGED means the 
 
 **ae_gan_hold: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/ae_gan_hold.json).
 
-Current contract: **CHANGED**. ae_gan_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation; ae_gan_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Current contract: **CHANGED**. Current coverage is stale: changed evaluation (gates or sampling law). ae_gan_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation; ae_gan_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
 
 Used by: [adaptation / Tier 1](atlas.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-1) · [clockfree_continuous / Tier 1](atlas.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-1) · [discriminator_stability / Tier 1](atlas.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1) · [formulation_comparison / Tier 1](atlas.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-1) · [host_profile_transfer / Tier 1](atlas.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-1) · [quality_coverage / Tier 1](atlas.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-1).
 
@@ -536,7 +536,7 @@ Current measurement: mog prior (sigma 0.025); generated_and_reconstructed_prior_
 
 **clockfree_audit: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/clockfree_audit.json).
 
-Current contract: **unbound**. No recorded result for this selected configuration.
+Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
 
 Used by: [clockfree_continuous / Tier 1](atlas.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-1).
 
@@ -554,7 +554,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **cover_leftover: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/cover_leftover.json).
 
-Current contract: **CHANGED**. cover_leftover: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation; cover_leftover: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Current contract: **CHANGED**. Current coverage is stale: changed evaluation (gates or sampling law). cover_leftover: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation; cover_leftover: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
 
 Used by: [adaptation / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [clockfree_continuous / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2).
 
@@ -584,7 +584,7 @@ Current measurement: particle_cloud prior (sigma 0); learned_parameter_measureme
 
 **five_word_joint_acquisition: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/five_word_joint_acquisition.json).
 
-Current contract: **CHANGED**. five_word_joint_acquisition: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation; five_word_joint_acquisition: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Current contract: **CHANGED**. Current coverage is stale: changed evaluation (gates or sampling law). five_word_joint_acquisition: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation; five_word_joint_acquisition: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
 
 Used by: [discriminator_stability / Tier 1](atlas.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1).
 
@@ -617,7 +617,7 @@ Current measurement: particle_cloud prior (sigma 0); generated_and_paired_recons
 
 **gaussian1d_acquisition: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/gaussian1d_acquisition.json).
 
-Current contract: **unbound**. No recorded result for this selected configuration.
+Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
 
 Used by: [discriminator_stability / Tier 1](atlas.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1).
 
@@ -647,7 +647,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **grid100: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/grid100.json).
 
-Current contract: **matches**. grid100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation; grid100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Current contract: **matches**. Current task contract matches the recorded conditions. grid100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation; grid100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
 
 Used by: [adaptation / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [clockfree_continuous / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2).
 
@@ -686,7 +686,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **grid100_14k: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/grid100_14k.json).
 
-Current contract: **unbound**. No recorded result for this selected configuration.
+Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
 
 Used by: [clockfree_continuous / Tier 3](atlas.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-3).
 
@@ -725,7 +725,7 @@ Dependencies: grid100 (checkpoint), clockfree_audit (gate).
 
 **grid100_affine_paired_laws_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/grid100_affine_paired_laws_v1.json).
 
-Current contract: **unbound**. No recorded result for this selected configuration.
+Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
 
 Used by: [formulation_comparison / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2).
 
@@ -762,7 +762,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **grid100_affine_square_named_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/grid100_affine_square_named_v1.json).
 
-Current contract: **unbound**. No recorded result for this selected configuration.
+Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
 
 Used by: [formulation_comparison / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2).
 
@@ -799,7 +799,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **grid100_release07_cloud_named_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/grid100_release07_cloud_named_v1.json).
 
-Current contract: **unbound**. No recorded result for this selected configuration.
+Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
 
 Used by: [formulation_comparison / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2).
 
@@ -836,7 +836,7 @@ Current measurement: particle_cloud prior (sigma 0); public_prior_without_output
 
 **img_bars4: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/img_bars4.json).
 
-Current contract: **CHANGED**. img_bars4: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation; img_bars4: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Current contract: **CHANGED**. Current coverage is stale: changed evaluation (gates or sampling law). img_bars4: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation; img_bars4: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
 
 Used by: [adaptation / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [clockfree_continuous / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2).
 
@@ -862,7 +862,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 **img_bars4_residual16: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/img_bars4_residual16.json).
 
-Current contract: **unbound**. No recorded result for this selected configuration.
+Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
 
 Used by: [formulation_comparison / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2).
 
@@ -886,7 +886,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 **img_blobs4: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/img_blobs4.json).
 
-Current contract: **CHANGED**. img_blobs4: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation; img_blobs4: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Current contract: **CHANGED**. Current coverage is stale: changed evaluation (gates or sampling law). img_blobs4: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation; img_blobs4: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
 
 Used by: [adaptation / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [clockfree_continuous / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2).
 
@@ -912,7 +912,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 **img_blobs4_residual16: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/img_blobs4_residual16.json).
 
-Current contract: **unbound**. No recorded result for this selected configuration.
+Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
 
 Used by: [formulation_comparison / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2).
 
@@ -936,7 +936,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 **img_intensity2: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/img_intensity2.json).
 
-Current contract: **CHANGED**. img_intensity2: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation; img_intensity2: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Current contract: **CHANGED**. Current coverage is stale: changed evaluation (gates or sampling law). img_intensity2: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation; img_intensity2: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
 
 Used by: [adaptation / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [clockfree_continuous / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2).
 
@@ -962,7 +962,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 **img_intensity2_residual16: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/img_intensity2_residual16.json).
 
-Current contract: **unbound**. No recorded result for this selected configuration.
+Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
 
 Used by: [formulation_comparison / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2).
 
@@ -986,7 +986,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 **img_stripes2: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/img_stripes2.json).
 
-Current contract: **CHANGED**. img_stripes2: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation; img_stripes2: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Current contract: **CHANGED**. Current coverage is stale: changed evaluation (gates or sampling law). img_stripes2: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation; img_stripes2: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
 
 Used by: [adaptation / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [clockfree_continuous / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2).
 
@@ -1012,7 +1012,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 **img_stripes2_residual16: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/img_stripes2_residual16.json).
 
-Current contract: **unbound**. No recorded result for this selected configuration.
+Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
 
 Used by: [formulation_comparison / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2).
 
@@ -1036,7 +1036,7 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 **mid_scale_identity: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/mid_scale_identity.json).
 
-Current contract: **CHANGED**. mid_scale_identity: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation; mid_scale_identity: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Current contract: **CHANGED**. Current coverage is stale: changed evaluation (gates or sampling law). mid_scale_identity: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation; mid_scale_identity: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
 
 Used by: [adaptation / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [clockfree_continuous / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2).
 
@@ -1068,7 +1068,7 @@ Current measurement: particle_cloud prior (sigma 0); learned_parameter_measureme
 
 **mode_hold: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/mode_hold.json).
 
-Current contract: **CHANGED**. mode_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation; mode_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Current contract: **CHANGED**. Current coverage is stale: changed evaluation (gates or sampling law). mode_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation; mode_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
 
 Used by: [adaptation / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [clockfree_continuous / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2).
 
@@ -1094,7 +1094,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **residual_student: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/residual_student.json).
 
-Current contract: **CHANGED**. residual_student: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation; residual_student: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Current contract: **CHANGED**. Current coverage is stale: changed evaluation (gates or sampling law). residual_student: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation; residual_student: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
 
 Used by: [adaptation / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [clockfree_continuous / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2).
 
@@ -1121,7 +1121,7 @@ Current measurement: particle_cloud prior (sigma 0); conditional_prior_centers_w
 
 **ring16_acquisition: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/ring16_acquisition.json).
 
-Current contract: **CHANGED**. ring16_acquisition: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation; ring16_acquisition: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Current contract: **CHANGED**. Current coverage is stale: changed evaluation (gates or sampling law). ring16_acquisition: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation; ring16_acquisition: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
 
 Used by: [discriminator_stability / Tier 1](atlas.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1).
 
@@ -1151,7 +1151,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **ring_extension: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/ring_extension.json).
 
-Current contract: **matches**. ring_extension: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation; ring_extension: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Current contract: **matches**. Current task contract matches the recorded conditions. ring_extension: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation; ring_extension: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
 
 Used by: [clockfree_continuous / Tier 3](atlas.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-3) · [discriminator_stability / Tier 3](atlas.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-3) · [formulation_comparison / Tier 3](atlas.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-3) · [host_profile_transfer / Tier 3](atlas.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-3).
 
@@ -1181,7 +1181,7 @@ Dependencies: ring_hold (checkpoint).
 
 **ring_hold: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/ring_hold.json).
 
-Current contract: **matches**. ring_hold: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation; ring_hold: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Current contract: **matches**. Current task contract matches the recorded conditions. ring_hold: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation; ring_hold: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
 
 Used by: [clockfree_continuous / Tier 3](atlas.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-3) · [discriminator_stability / Tier 3](atlas.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-3) · [formulation_comparison / Tier 3](atlas.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-3) · [host_profile_transfer / Tier 3](atlas.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-3).
 
@@ -1211,7 +1211,7 @@ Dependencies: mode_hold (gate).
 
 **rotated100: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/rotated100.json).
 
-Current contract: **matches**. rotated100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation; rotated100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Current contract: **matches**. Current task contract matches the recorded conditions. rotated100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation; rotated100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
 
 Used by: [adaptation / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [clockfree_continuous / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2).
 
@@ -1250,7 +1250,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **rotated100_14k: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/rotated100_14k.json).
 
-Current contract: **unbound**. No recorded result for this selected configuration.
+Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
 
 Used by: [clockfree_continuous / Tier 3](atlas.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-3).
 
@@ -1289,7 +1289,7 @@ Dependencies: rotated100 (checkpoint), clockfree_audit (gate).
 
 **rotated100_affine_square_named_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/rotated100_affine_square_named_v1.json).
 
-Current contract: **unbound**. No recorded result for this selected configuration.
+Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
 
 Used by: [formulation_comparison / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2).
 
@@ -1326,7 +1326,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **staggered100: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/staggered100.json).
 
-Current contract: **matches**. staggered100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation; staggered100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Current contract: **matches**. Current task contract matches the recorded conditions. staggered100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation; staggered100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
 
 Used by: [adaptation / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [clockfree_continuous / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2).
 
@@ -1365,7 +1365,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **staggered100_14k: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/staggered100_14k.json).
 
-Current contract: **unbound**. No recorded result for this selected configuration.
+Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
 
 Used by: [clockfree_continuous / Tier 3](atlas.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-3).
 
@@ -1404,7 +1404,7 @@ Dependencies: staggered100 (checkpoint), clockfree_audit (gate).
 
 **staggered100_affine_square_named_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/staggered100_affine_square_named_v1.json).
 
-Current contract: **unbound**. No recorded result for this selected configuration.
+Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
 
 Used by: [formulation_comparison / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2).
 
@@ -1441,7 +1441,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **target_shift_recovery: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/target_shift_recovery.json).
 
-Current contract: **unbound**. No recorded result for this selected configuration.
+Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
 
 Used by: [adaptation / Tier 3](atlas.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-3) · [clockfree_continuous / Tier 3](atlas.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-3).
 
@@ -1462,7 +1462,7 @@ Dependencies: mode_hold (gate).
 
 **trajectory: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/trajectory.json).
 
-Current contract: **CHANGED**. trajectory: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation; trajectory: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Current contract: **CHANGED**. Current coverage is stale: changed evaluation (gates or sampling law). trajectory: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation; trajectory: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
 
 Used by: [adaptation / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [clockfree_continuous / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2).
 
@@ -1487,7 +1487,7 @@ Current measurement: particle_cloud prior (sigma 0); conditional_prior_centers_w
 
 **two_pole: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/two_pole.json).
 
-Current contract: **CHANGED**. two_pole: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation; two_pole: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Current contract: **CHANGED**. Current coverage is stale: changed evaluation (gates or sampling law). two_pole: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation; two_pole: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
 
 Used by: [adaptation / Tier 1](atlas.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-1) · [clockfree_continuous / Tier 1](atlas.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-1) · [discriminator_stability / Tier 1](atlas.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1) · [formulation_comparison / Tier 1](atlas.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-1) · [host_profile_transfer / Tier 1](atlas.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-1) · [quality_coverage / Tier 1](atlas.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-1).
 
@@ -1514,7 +1514,7 @@ Current measurement: particle_cloud prior (sigma 0); learned_particles_and_criti
 
 **two_pole_800_schedule800_diagnostic_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/two_pole_800_schedule800_diagnostic_v1.json).
 
-Current contract: **unbound**. No recorded result for this selected configuration.
+Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
 
 Used by: [k3p_two_pole_horizon / Tier 1](atlas.md#cohort-cuda-7f9c23eb0e27-k3p_two_pole_horizon-tier-1).
 
@@ -1541,7 +1541,7 @@ Current measurement: particle_cloud prior (sigma 0); learned_particles_and_criti
 
 **two_pole_800_schedule80_diagnostic_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/two_pole_800_schedule80_diagnostic_v1.json).
 
-Current contract: **unbound**. No recorded result for this selected configuration.
+Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
 
 Used by: [k3p_two_pole_horizon / Tier 1](atlas.md#cohort-cuda-7f9c23eb0e27-k3p_two_pole_horizon-tier-1).
 
@@ -1568,7 +1568,7 @@ Current measurement: particle_cloud prior (sigma 0); learned_particles_and_criti
 
 **unipolar: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/unipolar.json).
 
-Current contract: **CHANGED**. unipolar: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation; unipolar: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Current contract: **CHANGED**. Current coverage is stale: changed evaluation (gates or sampling law). unipolar: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation; unipolar: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
 
 Used by: [adaptation / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [clockfree_continuous / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2).
 
@@ -1595,7 +1595,7 @@ Current measurement: particle_cloud prior (sigma 0); learned_parameter_measureme
 
 **unused_token_hold: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/unused_token_hold.json).
 
-Current contract: **CHANGED**. unused_token_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation; unused_token_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Current contract: **CHANGED**. Current coverage is stale: changed evaluation (gates or sampling law). unused_token_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation; unused_token_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
 
 Used by: [adaptation / Tier 1](atlas.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-1) · [clockfree_continuous / Tier 1](atlas.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-1) · [discriminator_stability / Tier 1](atlas.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1) · [formulation_comparison / Tier 1](atlas.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-1) · [host_profile_transfer / Tier 1](atlas.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-1) · [quality_coverage / Tier 1](atlas.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-1).
 
@@ -1622,7 +1622,7 @@ Current measurement: particle_cloud prior (sigma 0); learned_parameter_measureme
 
 **vector_anisotropic: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/vector_anisotropic.json).
 
-Current contract: **CHANGED**. vector_anisotropic: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation; vector_anisotropic: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Current contract: **CHANGED**. Current coverage is stale: changed evaluation (gates or sampling law). vector_anisotropic: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation; vector_anisotropic: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
 
 Used by: [adaptation / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [clockfree_continuous / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2).
 
@@ -1651,7 +1651,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_anisotropic_published: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/vector_anisotropic_published.json).
 
-Current contract: **unbound**. No recorded result for this selected configuration.
+Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
 
 Used by: [formulation_comparison / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2).
 
@@ -1678,7 +1678,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_overlap: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/vector_overlap.json).
 
-Current contract: **CHANGED**. vector_overlap: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation; vector_overlap: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Current contract: **CHANGED**. Current coverage is stale: changed evaluation (gates or sampling law). vector_overlap: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation; vector_overlap: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
 
 Used by: [adaptation / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [clockfree_continuous / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2).
 
@@ -1705,7 +1705,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_overlap_published: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/vector_overlap_published.json).
 
-Current contract: **unbound**. No recorded result for this selected configuration.
+Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
 
 Used by: [formulation_comparison / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2).
 
@@ -1730,7 +1730,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_spiral: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/vector_spiral.json).
 
-Current contract: **CHANGED**. vector_spiral: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation; vector_spiral: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Current contract: **CHANGED**. Current coverage is stale: changed evaluation (gates or sampling law). vector_spiral: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation; vector_spiral: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
 
 Used by: [adaptation / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [clockfree_continuous / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2).
 
@@ -1757,7 +1757,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_spiral_published: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/vector_spiral_published.json).
 
-Current contract: **unbound**. No recorded result for this selected configuration.
+Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
 
 Used by: [formulation_comparison / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2).
 
@@ -1782,7 +1782,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_two_broad: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/vector_two_broad.json).
 
-Current contract: **CHANGED**. vector_two_broad: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation; vector_two_broad: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Current contract: **CHANGED**. Current coverage is stale: changed evaluation (gates or sampling law). vector_two_broad: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation; vector_two_broad: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
 
 Used by: [adaptation / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [clockfree_continuous / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2).
 
@@ -1811,7 +1811,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_two_broad_published: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/vector_two_broad_published.json).
 
-Current contract: **unbound**. No recorded result for this selected configuration.
+Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
 
 Used by: [formulation_comparison / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2).
 
@@ -1838,7 +1838,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_unequal_mass: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/vector_unequal_mass.json).
 
-Current contract: **CHANGED**. vector_unequal_mass: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation; vector_unequal_mass: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Current contract: **CHANGED**. Current coverage is stale: changed evaluation (gates or sampling law). vector_unequal_mass: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation; vector_unequal_mass: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
 
 Used by: [adaptation / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [clockfree_continuous / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2).
 
@@ -1868,7 +1868,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_unequal_mass_published: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/vector_unequal_mass_published.json).
 
-Current contract: **unbound**. No recorded result for this selected configuration.
+Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
 
 Used by: [formulation_comparison / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2).
 
@@ -1896,7 +1896,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_unequal_width: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/vector_unequal_width.json).
 
-Current contract: **CHANGED**. vector_unequal_width: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation; vector_unequal_width: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Current contract: **CHANGED**. Current coverage is stale: changed evaluation (gates or sampling law). vector_unequal_width: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation; vector_unequal_width: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
 
 Used by: [adaptation / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-adaptation-tier-2) · [clockfree_continuous / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2).
 
@@ -1925,7 +1925,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_unequal_width_published: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/vector_unequal_width_published.json).
 
-Current contract: **unbound**. No recorded result for this selected configuration.
+Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
 
 Used by: [formulation_comparison / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2).
 
