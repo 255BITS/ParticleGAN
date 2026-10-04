@@ -1,0 +1,409 @@
+{
+  "api_changes": [],
+  "api_version": "forge-api-v1",
+  "changed_factors": [
+    "Recipe.lr=0.006375",
+    "Recipe.prior_lr_mult=0.18823529411764706",
+    "Recipe.reg_coeff=10.0"
+  ],
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "configuration_id": "b188804c4f52e27a2c1524f44c7e6d10b637f36846f71bdf17efada7180448e2",
+  "decision_contract": {
+    "candidate_binding_sha256": "0489b51a1ad1c3f94e932173add17f03fdb70382bfb9854fcb2d432aaaa92f0c",
+    "competing_explanation": "The first clean grid did not isolate noise as the cause of its movement failures. Input noise can change critic gradients and optimizer dynamics without yielding sustained movement or a word bijection. High global rates or insufficient critic regularization can still fail later tasks. Only this candidate's new ordinary measurements qualify; historical successes and unknown cells cannot be combined into a solution.",
+    "control": {
+      "binding_sha256": "8c153ead30bddc5cafb11cca1143a84718d48da673604959aa34da387b3f8a63",
+      "candidate_id": "k3p-global-input-noise-v1",
+      "task_map": {
+        "ae_gan_hold": "ae_gan_hold",
+        "five_word_joint_acquisition": "five_word_joint_acquisition",
+        "ring16_acquisition": "ring16_acquisition",
+        "two_pole": "two_pole",
+        "unused_token_hold": "unused_token_hold"
+      }
+    },
+    "falsifier": {
+      "metric": "mean_abs",
+      "op": "<",
+      "phase": "final",
+      "task_id": "two_pole",
+      "threshold": 0.3
+    },
+    "prediction": {
+      "metric": "mean_abs",
+      "op": ">=",
+      "phase": "final",
+      "task_id": "two_pole",
+      "threshold": 0.3
+    },
+    "prior_evidence": [
+      {
+        "identity": {
+          "source_digest": "964186eab95b336119d6d99ed1f4258ae586bcf1088cb79f0e826befae5cf654",
+          "study_id": "k3p-global-tier1-v2"
+        },
+        "path": "reports/forge/configuration-search/k3p-global-tier1-v2.json",
+        "selector": [],
+        "sha256": "3debcd9c4f27f407b811fcb33c923ac0aebaa123f0b517131a5f6b6d4eb27619",
+        "use": "motivation_only"
+      },
+      {
+        "identity": {
+          "candidate_revision": "7c9ea7c422fdacc4f9bbee35883893cf0d6abb2693341b515598e52b8a47cfa5",
+          "id": "k3p-coeff170-cap1"
+        },
+        "path": "reports/forge/word-root-cause/receipts/k3p-coeff170-cap1.json",
+        "selector": [],
+        "sha256": "32a5d05af53ef90843fcb155bd5593cf5780c4eba4e7cb254d3a8a05d26f04ed",
+        "use": "motivation_only"
+      }
+    ],
+    "schema_version": 1,
+    "scope": {
+      "campaign_budget_seconds": 16800,
+      "candidate_budget_seconds": 2100,
+      "execution_backend": "cuda",
+      "jobs_sha256": "f3c5f8a0f4c9a31af444aa9c64cd867752a834be0bc927fc4b76e02a87803918",
+      "max_rounds": 1,
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "runtime_cohort_sha256": "e2f4acc3bb6543576475ece1bb0bce5b973eca2ed1852b13d096ec9145277c71",
+      "source_digest": "964186eab95b336119d6d99ed1f4258ae586bcf1088cb79f0e826befae5cf654",
+      "task_ids": [
+        "ae_gan_hold",
+        "five_word_joint_acquisition",
+        "ring16_acquisition",
+        "two_pole",
+        "unused_token_hold"
+      ],
+      "through_tier": 1,
+      "view": "discriminator_stability"
+    },
+    "status": "ready",
+    "substantive_delta": [
+      {
+        "after": 0.006375,
+        "before": 0.0006,
+        "path": [
+          "recipe",
+          "ae_gan_hold",
+          "lr"
+        ]
+      },
+      {
+        "after": 0.18823529411764706,
+        "before": 2.0,
+        "path": [
+          "recipe",
+          "ae_gan_hold",
+          "prior_lr_mult"
+        ]
+      },
+      {
+        "after": 10.0,
+        "before": 170.0,
+        "path": [
+          "recipe",
+          "ae_gan_hold",
+          "reg_coeff"
+        ]
+      },
+      {
+        "after": 0.006375,
+        "before": 0.0006,
+        "path": [
+          "recipe",
+          "five_word_joint_acquisition",
+          "lr"
+        ]
+      },
+      {
+        "after": 0.18823529411764706,
+        "before": 2.0,
+        "path": [
+          "recipe",
+          "five_word_joint_acquisition",
+          "prior_lr_mult"
+        ]
+      },
+      {
+        "after": 10.0,
+        "before": 170.0,
+        "path": [
+          "recipe",
+          "five_word_joint_acquisition",
+          "reg_coeff"
+        ]
+      },
+      {
+        "after": 0.006375,
+        "before": 0.0006,
+        "path": [
+          "recipe",
+          "ring16_acquisition",
+          "lr"
+        ]
+      },
+      {
+        "after": 0.18823529411764706,
+        "before": 2.0,
+        "path": [
+          "recipe",
+          "ring16_acquisition",
+          "prior_lr_mult"
+        ]
+      },
+      {
+        "after": 10.0,
+        "before": 170.0,
+        "path": [
+          "recipe",
+          "ring16_acquisition",
+          "reg_coeff"
+        ]
+      },
+      {
+        "after": 0.006375,
+        "before": 0.0006,
+        "path": [
+          "recipe",
+          "two_pole",
+          "lr"
+        ]
+      },
+      {
+        "after": 10.0,
+        "before": 170.0,
+        "path": [
+          "recipe",
+          "two_pole",
+          "reg_coeff"
+        ]
+      },
+      {
+        "after": 0.006375,
+        "before": 0.0006,
+        "path": [
+          "recipe",
+          "unused_token_hold",
+          "lr"
+        ]
+      },
+      {
+        "after": 10.0,
+        "before": 170.0,
+        "path": [
+          "recipe",
+          "unused_token_hold",
+          "reg_coeff"
+        ]
+      }
+    ],
+    "terminal_rules": {
+      "falsified": "stop_revision",
+      "incomplete": "request_missing_evidence",
+      "inconclusive": "stop_and_readout",
+      "prediction_observed": "review_saved_diagnostics"
+    }
+  },
+  "diagnostic_ancestor": {
+    "qualification_reuse": false,
+    "receipt": {
+      "bytes": 40177,
+      "path": "reports/forge/word-root-cause/receipts/k3p-coeff170-cap1.json",
+      "sha256": "32a5d05af53ef90843fcb155bd5593cf5780c4eba4e7cb254d3a8a05d26f04ed"
+    },
+    "use": "motivation_only"
+  },
+  "execution_path": "public_trainer",
+  "goal": "discriminator_stability",
+  "guide": "EXPERIMENTATION.md",
+  "hypothesis": "Restoring the existing symmetric critic input-noise schedule, while retaining clean generator outputs and a full network horizon, may avoid the low-force two_pole plateaus observed across twelve clean K3P recipes. Early independent critic input perturbations can break the deterministic symmetry of the initially identical direct particles. Existing positive critic coefficients and coupled global rates test whether one complete recipe also passes ring and words. Ordinary prerequisites stop a candidate on its first required failure.",
+  "id": "k3p--b188804c4f52e27a2c1524f44c7e6d10b637f36846f71bdf17efada7180448e2",
+  "lifecycle": "proposed",
+  "mechanism_class": "floor_constant",
+  "mechanism_rationale": "Explicit activation of the already implemented positive critic input-noise control, within the existing K3P family. This crosses the clean parent's activation boundary and is declared as a structural successor rather than disguised as a strict numerical search. No optimizer, penalty kernel or GAN technique is added.",
+  "parent": "k3p-global-input-noise-v1",
+  "prior": {
+    "kind": "mog",
+    "learnable": true,
+    "sigma": 0.025,
+    "standardize": false
+  },
+  "prior_art": [
+    "reports/forge/configuration-search/k3p-global-tier1-v2.json",
+    "reports/forge/word-root-cause/receipts/k3p-coeff170-cap1.json"
+  ],
+  "recipe_overrides": {
+    "amsgrad": false,
+    "beta2_anneal_end": 0.2,
+    "beta2_end": null,
+    "betas": [
+      0.0,
+      0.999
+    ],
+    "birth_death_backend": "knn",
+    "birth_death_cells": 64,
+    "birth_death_chunk": 256,
+    "birth_death_feature_scale": "none",
+    "birth_death_isolation": false,
+    "birth_death_metric_rank": 8,
+    "birth_death_parent_policy": "real_anchor",
+    "birth_death_space": "data",
+    "continuous_policy": null,
+    "critic_formulation": "k3p",
+    "critic_payoff_damping": true,
+    "critic_r1_real": true,
+    "d_guard_min_steps": 200,
+    "d_guard_ratio": 5.0,
+    "d_lr_mult": 1.5,
+    "direct_particle_betas": [
+      0.0,
+      0.9
+    ],
+    "direct_particle_gain": true,
+    "ema_decay": 0.995,
+    "eps": 1e-08,
+    "input_noise_anneal_end": 0.1,
+    "input_noise_std": 0.5,
+    "latent_damping_max_rate": 0.5,
+    "lr": 0.006375,
+    "lr_anneal_start": 0.6,
+    "lr_control": "mobility",
+    "lr_floor": 0.05,
+    "name": "k3p",
+    "network_lr_floor": 0.01,
+    "network_lr_horizon_cap": null,
+    "optimizer_family": "formulation",
+    "output_noise_mode": "fixed",
+    "output_noise_std": 0.0,
+    "output_noise_warmup": 0.2,
+    "particle_birth_death": false,
+    "prior_betas": null,
+    "prior_lr_mult": 0.18823529411764706,
+    "reg_anchor_min_decay": 0.9,
+    "reg_anchor_weight": 1.0,
+    "reg_arm": null,
+    "reg_coeff": 10.0,
+    "reg_coeff_anneal_end": 0.2,
+    "reg_coeff_end": null,
+    "reg_every": 1,
+    "reg_kappa": 1.0,
+    "reopen_anchor": "hold",
+    "reopen_guard": null,
+    "reopen_signal": "data",
+    "row_evidence_exclude": true,
+    "row_evidence_gate": false,
+    "row_evidence_hold": true,
+    "row_evidence_hot": true,
+    "row_evidence_null": "theory",
+    "row_policy": "independent",
+    "serve_average": 0.0,
+    "table_release_rule": "any"
+  },
+  "recipe_scope": "global_existing_settings_task_owned_conditions_only",
+  "requires_capabilities": [
+    "learned_locations",
+    "a2",
+    "named_rng"
+  ],
+  "resolved_configuration_recipe": {
+    "alpha_bar": [
+      1.0,
+      0.9,
+      0.5,
+      0.05,
+      0.0001
+    ],
+    "amsgrad": false,
+    "batch_size": 2048,
+    "beta2_anneal_end": 0.2,
+    "beta2_end": null,
+    "betas": [
+      0.0,
+      0.999
+    ],
+    "birth_death_backend": "knn",
+    "birth_death_cells": 64,
+    "birth_death_chunk": 256,
+    "birth_death_feature_scale": "none",
+    "birth_death_isolation": false,
+    "birth_death_metric_rank": 8,
+    "birth_death_parent_policy": "real_anchor",
+    "birth_death_space": "data",
+    "conditioning": "scalar",
+    "continuous_policy": null,
+    "critic_formulation": "k3p",
+    "critic_payoff_damping": true,
+    "critic_r1_real": true,
+    "d_guard_min_steps": 200,
+    "d_guard_ratio": 5.0,
+    "d_lr_mult": 1.5,
+    "direct_particle_betas": [
+      0.0,
+      0.9
+    ],
+    "direct_particle_gain": true,
+    "distance_reduction": "sum",
+    "ema_decay": 0.995,
+    "encoder_mode": "none",
+    "eps": 1e-08,
+    "input_noise_anneal_end": 0.1,
+    "input_noise_std": 0.5,
+    "latent_damping_max_rate": 0.5,
+    "lr": 0.006375,
+    "lr_anneal_start": 0.6,
+    "lr_control": "mobility",
+    "lr_floor": 0.05,
+    "model": "gan",
+    "name": "k3p",
+    "network_lr_floor": 0.01,
+    "network_lr_horizon_cap": null,
+    "num_classes": null,
+    "num_particles": 20000,
+    "observation_sigma": 0.03,
+    "optimizer_family": "formulation",
+    "output_noise_mode": "fixed",
+    "output_noise_std": 0.0,
+    "output_noise_warmup": 0.2,
+    "particle_birth_death": false,
+    "prior_betas": null,
+    "prior_kind": "mog",
+    "prior_lr_mult": 0.18823529411764706,
+    "prior_reg": 0.0,
+    "reconstruction_weight": 1.0,
+    "reg_anchor_min_decay": 0.9,
+    "reg_anchor_weight": 1.0,
+    "reg_arm": null,
+    "reg_coeff": 10.0,
+    "reg_coeff_anneal_end": 0.2,
+    "reg_coeff_end": null,
+    "reg_every": 1,
+    "reg_kappa": 1.0,
+    "reopen_anchor": "hold",
+    "reopen_guard": null,
+    "reopen_signal": "data",
+    "routing_temperature": 0.25,
+    "row_evidence_exclude": true,
+    "row_evidence_gate": false,
+    "row_evidence_hold": true,
+    "row_evidence_hot": true,
+    "row_evidence_null": "theory",
+    "row_policy": "independent",
+    "serve_average": 0.0,
+    "sigma_rel": 0.0,
+    "standardize": false,
+    "table_release_rule": "any",
+    "total_steps": 7000,
+    "ucd_target": "class",
+    "ucd_weight": 0.02,
+    "z_dim": 2
+  },
+  "schema_version": 2,
+  "search_report": "reports/forge/configuration-search/k3p-global-input-noise-tier1-v1.json",
+  "search_study_id": "k3p-global-input-noise-tier1-v1",
+  "trainer_family": "k3p"
+}

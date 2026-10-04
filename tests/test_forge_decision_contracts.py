@@ -15,6 +15,10 @@ from forge_legacy_fixtures import pin_legacy
 
 @pytest.fixture
 def ready(checkout):
+    return _ready(checkout)
+
+
+def _ready(checkout):
     pin_legacy(checkout)
     path = new_idea(checkout, 'successor', 'base', goal='stability', hypothesis='A changed exercised learning rate')
     idea = read_json(path)
@@ -244,6 +248,57 @@ def test_readout_publishes_frozen_decision_without_rewriting_receipts(ready, mon
     assert result['decision_outcomes'][0]['outcome'] == 'prediction_observed'
     assert result['decision_outcomes'][0]['qualification_input'] is False
     assert hashes == {file.name: file_hash(file) for file in path.glob('*.json')}
+
+
+def test_live_board_reconstructs_tier1_scope_with_full_roster_and_original_receipt(checkout):
+    # A real planner/board round trip: only authorization is Tier 1, while all
+    # 26 tasks remain in the independently graded qualification denominator.
+    template = read_json(checkout / 'configs/forge/tasks/t1.json')
+    view_path = checkout / 'configs/forge/views/stability.json'
+    view = read_json(view_path)
+    view['assignments'] = []
+    for index in range(1, 27):
+        task = deepcopy(template)
+        task['id'] = f't{index}'
+        task['resources']['timeout_seconds'] = 1
+        atomic_json(checkout / f'configs/forge/tasks/{task["id"]}.json', task)
+        view['assignments'].append({'task': task['id'], 'qualification_tier': 1 if index <= 5 else 2 if index <= 24 else 3,
+                                    'importance': 'required', 'order': index})
+    atomic_json(view_path, view)
+    root, request, declaration_path = _ready(checkout)
+    assert request['decision_review']['status'] == 'READY'
+    assert len(request['candidate']['decision_contract']['control']['task_map']) == 5
+    rebuilt = knowledge._current_request(root, 'successor', 'stability', 'cpu')
+    assert rebuilt['through_tier'] == 1
+    assert rebuilt['candidate_revision'] == request['candidate_revision']
+    assert rebuilt['jobs'] == request['jobs']
+    assert len(rebuilt['tasks']) == 26
+    assert knowledge._current_request(root, 'base', 'stability', 'cpu')['through_tier'] == 3
+
+    path = save_attempt(root, request, name='original-tier1', score=.3)
+    result = read_json(path / 'result.json')
+    # The original PASS stamp must not replace the complete numerical curve.
+    result['task_results'][0]['evidence'] = {
+        'sampling_contract_version': 1, 'sampling_law': 'public_prior_without_output_noise', 'eval_output_noise': 'clean',
+        'observations': [{'step': (index * 80 + 23) // 24, 'score': .3} for index in range(1, 25)], 'live': {'score': .3}}
+    atomic_json(path / 'result.json', result)
+    atomic_json(path / 'evidence.json', {'result_hash': stable_hash(result), 'source': request['source'], 'runtime': request['runtime']})
+    original_hashes = {file.name: file_hash(file) for file in path.glob('*.json')}
+    report = knowledge.board(root, 'stability', include_bindings=True)
+    measured = next(row for row in report['current_rows'] if row['attempt_ids'] == ['original-tier1'])
+    assert measured['candidate_revision'] == request['candidate_revision']
+    assert measured['source_digest'] == request['source']['digest']
+    assert measured['qualification']['required_total'] == 26
+    assert [tier['required_total'] for tier in measured['qualification']['tiers']] == [5, 19, 2]
+    assert measured['counts'] == {'FAIL': 1, 'NOT_RUN': 25}
+    assert report['conflicts'] == report['archived_attempts'] == []
+    assert original_hashes == {file.name: file_hash(file) for file in path.glob('*.json')}
+
+    declaration = read_json(declaration_path)
+    declaration['decision_contract']['control']['task_map'].pop('t5')
+    atomic_json(declaration_path, declaration)
+    with pytest.raises(ValueError, match='control.task_map must bind every authorized task'):
+        knowledge._current_request(root, 'successor', 'stability', 'cpu')
 
 
 def test_outcomes_keep_compute_cohorts_and_original_receipt_provenance_separate(ready):

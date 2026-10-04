@@ -228,7 +228,16 @@ def _checkpoints(task):
     return sorted({math.ceil(i * task["execution"]["steps"] / 24) for i in range(1, 25)})
 
 
-def _vector(request, task, output, device):
+def _save_observer_outputs(output, filename, records, *, kind):
+    """Archive existing scored draws; serialization adds no observations."""
+    path = Path(output) / filename
+    torch.save(records, path)
+    return {"path": filename, "sha256": file_hash(path), "bytes": path.stat().st_size,
+            "observation_count": len(records), "kind": kind,
+            "optimizer_updates_added": 0, "sampling_draws_added": 0}
+
+
+def _vector(request, task, output, device, *, retain_scored_outputs=True):
     from benchmarks.transfer_suite.vector_tasks import sample_target, score_samples
     scorer = task["evaluation"].get("sample_evaluator")
     if scorer is not None:
@@ -245,15 +254,24 @@ def _vector(request, task, output, device):
     spec["thresholds"] = task["evaluation"]["thresholds"]
     run = _Run(context, trainer, output, task)
     data = context.streams.generator("data", component="target", purpose="training", device="cpu")
-    observations = []
+    observations, records = [], []
     checkpoints = set(_checkpoints(task))
+    def evaluate():
+        samples = run.sample(4096).cpu()
+        if retain_scored_outputs:
+            records.append({"step": step, "samples": samples.detach().clone()})
+        return score_samples(samples, spec, step)
     for step in range(1, task["execution"]["steps"] + 1):
         run.step(sample_target(spec, context.recipe.batch_size, data, step - 1).to(device))
         if step in checkpoints:
-            row = run.evaluate(lambda: score_samples(run.sample(4096).cpu(), spec, step))
+            row = run.evaluate(evaluate)
             observations.append({"step": step, **row})
             _event("observation", task=task["id"], step=step, metrics=row)
-    return run.receipt({"observations": observations, "live": observations[-1], "host": host_receipt},
+    evidence = {"observations": observations, "live": observations[-1], "host": host_receipt}
+    if retain_scored_outputs:
+        evidence["saved_observer_outputs"] = _save_observer_outputs(
+            output, "observed-samples.pt", records, kind="scored_vector_samples_v1")
+    return run.receipt(evidence,
                        save_state=task["execution"].get("produces_state", False))
 
 

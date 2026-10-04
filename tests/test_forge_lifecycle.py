@@ -12,12 +12,16 @@ from experiments.forge.contracts import atomic_json, read_json, stable_hash
 def cohort(tmp_path, monkeypatch):
     requests = {}
     for name, revision in (("idea", "revision-a"), ("successor", "revision-b")):
-        candidate = {"id": name, "hypothesis": "A substantive mechanism change",
+        # The resolver is mocked below, but board scope reconstruction still
+        # reads and validates the real candidate declaration.
+        candidate = {"schema_version": 1, "id": name, "hypothesis": "A substantive mechanism change",
+                     "changed_factors": ["mechanism"],
                      "goal": "stability", "mechanism_class": "structural"}
         atomic_json(tmp_path / f"configs/forge/ideas/{name}.json", candidate)
         requests[name] = {"candidate": candidate, "candidate_revision": revision,
                           "source": {"digest": "source-" + revision}, "runtime": {"python": "fixture"},
-                          "execution_backend": "cpu", "jobs": [{"task_id": "cheap", "compatibility_key": "key"}]}
+                          "execution_backend": "cpu", "through_tier": 1,
+                          "jobs": [{"task_id": "cheap", "compatibility_key": "key"}]}
     monkeypatch.setattr(planning, "resolve_idea", lambda root, name, **kwargs: deepcopy(requests[name]))
     return tmp_path, requests
 
@@ -358,6 +362,7 @@ def test_cli_supersession_and_board_preserve_failed_verdict_cost_and_successor(c
     certificate = read_json(directory / "evidence.json")
     certificate["result_hash"] = stable_hash(result)
     atomic_json(directory / "evidence.json", certificate)
+    original_attempt = {path.name: path.read_bytes() for path in directory.glob('*.json')}
     explanation = knowledge.readout(root, "idea", "Fails smoke", "Worse than the fixed control", "Test the successor")
     before = next(row for row in knowledge.board(root, "stability")["current_rows"] if row["candidate_id"] == "idea")
     readout_path = root / "reports/forge/records" / (explanation["record_id"] + ".json")
@@ -377,6 +382,8 @@ def test_cli_supersession_and_board_preserve_failed_verdict_cost_and_successor(c
     assert after["disposition_reason"] == "Address the measured failure"
     assert not after["pending_readout"]
     assert readout_path.read_bytes() == preserved
+    assert original_attempt == {path.name: path.read_bytes() for path in directory.glob('*.json')}
+    assert read_json(directory / 'request.json')['request']['through_tier'] == 1
     compiled = read_json(root / "reports/forge/leaderboards/stability.json")
     assert next(row for row in compiled["current_rows"] if row["candidate_id"] == "idea")["successor"] == "successor@revision-b"
     assert next(row for row in board["current_rows"] if row["candidate_id"] == "successor")["qualified_tier"] == 0
