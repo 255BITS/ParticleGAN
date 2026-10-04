@@ -102,7 +102,8 @@ def task_recipe_overrides(candidate, task):
         blockers = behavior_preflight(task, bound)
         if blockers:
             raise CapabilityError(blockers)
-        overrides = {**bound.get("recipe_overrides", {}), "total_steps": execution["steps"]}
+        overrides = {**bound.get("recipe_overrides", {}),
+                     "total_steps": execution.get("original_schedule_horizon", execution["steps"])}
         if execution.get("host") == "ae_gan_hold":
             from benchmarks.locked_shared.hosts.ae_gan_hold import HoldConfig
             cfg = HoldConfig(name="forge")

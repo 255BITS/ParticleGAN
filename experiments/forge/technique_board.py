@@ -32,7 +32,7 @@ DEFAULT_LABELS = {
     "k3p-a2-off-native-diagnostic": "K3P without A2",
     "k3p-no-output-noise-diagnostic": "K3P without training output noise",
 }
-ARCHIVED_SCOPES = ("pinned", "calibration_diagnostic", "historical")
+ARCHIVED_SCOPES = ("pinned", "calibration_diagnostic", "research_diagnostic", "historical")
 
 
 def request_bindings(request: dict) -> dict:
@@ -183,6 +183,8 @@ def reduce_board(board_result: dict, view: dict, *, execution_backend: str | Non
     tiers = sorted({item["qualification_tier"] for item in assignments})
     binding_catalog, recipes, protocols, reason_catalog, rows = {}, {}, {}, {}, []
     for original in board_result.get("current_rows", []):
+        if original.get("evidence_scope") == "research_diagnostic":
+            continue
         runtime = original.get("runtime_cohort", {})
         if execution_backend and runtime.get("execution_backend") != execution_backend:
             continue

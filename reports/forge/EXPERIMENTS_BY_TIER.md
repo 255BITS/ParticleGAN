@@ -2,9 +2,9 @@
 
 Current task assignments, grouped by goal view and qualification tier. Required tasks gate progression; ranking and diagnostic tasks retain their declared roles.
 
-Catalog: **49 tasks**; **46 assigned** to at least one view; **3 unassigned**. Showing **6/6 views**.
+Catalog: **51 tasks**; **48 assigned** to at least one view; **3 unassigned**. Showing **7/7 views**.
 
-Declared priors across the catalog: **32 MoGParticlePrior**, **17 ParticlePrior** (including **3 nonsampled parameter controls**). Every experiment defines `execution.prior` explicitly; candidate and API defaults cannot supply it. `kind: mog` selects `MoGParticlePrior`; `kind: particle_cloud` selects `ParticlePrior`. Sigma alone does not identify the code path. Ordinary Forge MoG tasks require positive sigma; archived zero-sigma MoG evidence keeps its recorded kind. Task sigma is absolute; API demonstrations may instead record the recipe's relative `sigma_rel`.
+Declared priors across the catalog: **32 MoGParticlePrior**, **19 ParticlePrior** (including **3 nonsampled parameter controls**). Every experiment defines `execution.prior` explicitly; candidate and API defaults cannot supply it. `kind: mog` selects `MoGParticlePrior`; `kind: particle_cloud` selects `ParticlePrior`. Sigma alone does not identify the code path. Ordinary Forge MoG tasks require positive sigma; archived zero-sigma MoG evidence keeps its recorded kind. Task sigma is absolute; API demonstrations may instead record the recipe's relative `sigma_rel`.
 
 Regenerate from the repository root with `python -m experiments.forge experiments-by-tier --output reports/forge/EXPERIMENTS_BY_TIER.md`. Add `--json` for machine-readable output (use a `.json` output path when saving). Regeneration reads declarations and published artifacts and launches no training.
 
@@ -35,6 +35,7 @@ This report follows changing declarations and published evidence; it selects no 
 | [discriminator_stability](../../configs/forge/views/discriminator_stability.json) | 3 | 5 required | 19 required | 2 required | provisional |
 | [formulation_comparison](../../configs/forge/views/formulation_comparison.json) | 1 | 3 required | 19 required, 15 diagnostic | 2 required | provisional |
 | [host_profile_transfer](../../configs/forge/views/host_profile_transfer.json) | 4 | 3 required | 19 required, 13 diagnostic | 2 required | provisional |
+| [k3p_two_pole_horizon](../../configs/forge/views/k3p_two_pole_horizon.json) | 1 | 2 diagnostic | 0 tasks | 0 tasks | provisional |
 | [quality_coverage](../../configs/forge/views/quality_coverage.json) | 2 | 3 required | 19 required | 0 tasks | provisional |
 
 ## adaptation
@@ -345,6 +346,39 @@ Candidate outcomes, metrics and measured costs: [leaderboard](leaderboards/host_
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | [ring_hold](../../configs/forge/tasks/ring_hold.json) | required | MoGParticlePrior (sigma=0.025) | [Question, results, GIFs](#experiment-mode-hold) | ring_endurance / ring_hold | up to 7500 total | 3600 | [mode_hold](../../configs/forge/tasks/mode_hold.json) (gate); group: ring_endurance (uninterrupted) |
 | [ring_extension](../../configs/forge/tasks/ring_extension.json) | required | MoGParticlePrior (sigma=0.025) | [Question, results, GIFs](#experiment-mode-hold) | ring_endurance / ring_extension | up to 7500 total; 300 extension | 3600 | [ring_hold](../../configs/forge/tasks/ring_hold.json) (checkpoint); group: ring_endurance (uninterrupted) |
+
+## k3p_two_pole_horizon
+
+Declaration: [k3p_two_pole_horizon](../../configs/forge/views/k3p_two_pole_horizon.json); revision 1; goal: `discriminator_stability`.
+
+Declared calibration status: **provisional**.
+
+Bounded budget/schedule diagnostic supplies no ordinary qualification, screen calibration or default adoption.
+
+Declared evidence scope: `research_diagnostic`.
+
+No published solution leaderboard for this view yet; task registration and related API media confer no candidate qualification.
+
+### Tier 1: smoke
+
+2 diagnostic.
+
+| Task | Importance | Prior code path | Experiment guide | Adapter / gate | Declared steps | Timeout (s) | Dependencies / shared execution |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| [two_pole_800_schedule80_diagnostic_v1](../../configs/forge/tasks/two_pole_800_schedule80_diagnostic_v1.json) | diagnostic | ParticlePrior (sigma=0) | [Question, results, GIFs](#experiment-two-pole) | transfer_behavior / transfer_sustained | 800 | 300 | — |
+| [two_pole_800_schedule800_diagnostic_v1](../../configs/forge/tasks/two_pole_800_schedule800_diagnostic_v1.json) | diagnostic | ParticlePrior (sigma=0) | [Question, results, GIFs](#experiment-two-pole) | transfer_behavior / transfer_sustained | 800 | 300 | — |
+
+### Tier 2: quality
+
+0 tasks.
+
+No tasks assigned.
+
+### Tier 3: endurance
+
+0 tasks.
+
+No tasks assigned.
 
 ## quality_coverage
 
@@ -955,14 +989,16 @@ Related public-API demonstrations, with their own recorded contracts:
 
 ### Experiment: two-pole
 
-Checks nonzero travel and bounded median critic gradient; its gate does not require both poles or a correct distribution.
+Does an unchanged global recipe move from zero by 800 updates with schedule horizon 800? Movement and bounded slope are the declared question; two-mode fidelity is diagnostic only.
 
-Forge declarations: [two_pole](../../configs/forge/tasks/two_pole.json).
+Explanation, interpretation and reproduction: [experiment readout](k3p-two-pole-horizon-v1/README.md).
+
+Forge declarations: [two_pole](../../configs/forge/tasks/two_pole.json), [two_pole_800_schedule800_diagnostic_v1](../../configs/forge/tasks/two_pole_800_schedule800_diagnostic_v1.json), [two_pole_800_schedule80_diagnostic_v1](../../configs/forge/tasks/two_pole_800_schedule80_diagnostic_v1.json).
 
 <details>
 <summary>Declared Forge numerical gates and sampling</summary>
 
-[two_pole](../../configs/forge/tasks/two_pole.json)
+[two_pole](../../configs/forge/tasks/two_pole.json), [two_pole_800_schedule800_diagnostic_v1](../../configs/forge/tasks/two_pole_800_schedule800_diagnostic_v1.json), [two_pole_800_schedule80_diagnostic_v1](../../configs/forge/tasks/two_pole_800_schedule80_diagnostic_v1.json)
 
 - **kind**: "transfer_sustained"
 - **thresholds**: [["mean_abs", ">=", 0.3], ["grad_med", "<=", 1.0]]
@@ -1244,6 +1280,6 @@ The wider question review also links standalone experiments outside the Forge ti
 - [Later questions](../toy_audit/api_contract/recent_prs/README.md)
 - [Caption questions](../toy_audit/api_contract/caption_prs/README.md)
 
-Declaration input digest: `e19612930696d10c45025db31cd5cd2dd7ab2891b0e2bbcb06ad793638eb419a`. The JSON form includes the individual task and view file hashes.
+Declaration input digest: `3a0f2173afe1e309affe3304524b99748988595f4000a1d87aa96a017ff2c21c`. The JSON form includes the individual task and view file hashes.
 
-Published artifact input digest: `0c66a79e946ebaeca16b7b6cf556bce3457b1a39e3d06a3208c670edcc162eff`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.
+Published artifact input digest: `6dfa4189bb8ece2a3d2153c997ffb983f1d255a080ad01bdc4f8c85f4c49edce`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.
