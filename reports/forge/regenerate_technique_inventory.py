@@ -984,19 +984,15 @@ def _half_base_score_line(half_base, root, path):
 
 
 def _atlas_progress_markdown(progress, root, path, *, half_base=None):
+    """Rows in the single current table, each with its own measured scope."""
     def link(relative):
         return os.path.relpath(root / relative, path.parent)
     baseline = progress["baseline"]
     counts = baseline["counts"]
-    lines = ["## Selected-policy GPU scores", "",
-             "Each row keeps its own configuration, execution source and 26 required slots. "
-             "These diagnostic scores remain separate from ordinary qualification.", "",
-             "| Model/configuration | Representation | Measured scores |",
-             "| --- | --- | --- |",
-             f"| [Atlas C6 · `{baseline['source']['origin_commit'][:8]}`]({link(baseline['readout'])}) "
+    lines = [f"| [Atlas C6 LR .0053125 / prior1.5 · source `{baseline['source']['origin_commit'][:8]}`]({link(baseline['readout'])}) "
              f"| {baseline['representation']['label']} | **{counts['PASS']}/26 PASS** · "
              f"FAIL {counts['FAIL']} · BLOCKED {counts['BLOCKED']} "
-             f"· [source and 18 goal GIFs]({link(baseline['readout'])}) |"]
+             f"<br>Selected-policy diagnostic · [source and 18 goal GIFs]({link(baseline['readout'])}) |"]
     for row in progress["adaptations"]:
         gates = f"**{row['passed']}/{row['required']} PASS** · NOT_RUN {row['counts'].get('NOT_RUN', 0)}"
         readout = row["readout"]
@@ -1007,18 +1003,22 @@ def _atlas_progress_markdown(progress, root, path, *, half_base=None):
         media = " · ".join(f"[{task.split('_' + row['cohort'])[0]}]({link(pin['path'])})"
                            for task, pin in sorted(row["media"].items()))
         lines.append(f"| [`{row['family']}` · C6 · `{row['source']['origin_commit'][:8]}`]({link(readout)}) "
-                     f"| {row['representation']['label']} | {gates}<br>{media_label}: {media} |")
+                     f"| {row['representation']['label']} | {gates}<br>Named-family diagnostic · {media_label}: {media} |")
     if half_base:
         lines.append(_half_base_score_line(half_base, root, path))
-    lines += ["", "C6 is the fixed LR .0053125 / prior-rate 1.5 configuration with declared host-specific "
+    return lines
+
+
+def _policy_score_scope(root, path, *, half_base=None):
+    link = os.path.relpath(root / "reports/forge/technique-inventory.json", path.parent)
+    return ["C6 is the fixed LR .0053125 / prior-rate 1.5 configuration with declared host-specific "
               "Recipe fields. Representation labels come from the pinned applied priors, Recipes and "
               "routed table owners; a parameter bank is not a sampled MoG. "
-              "[Full source and representation bindings](" + link("reports/forge/technique-inventory.json") + "). "
+              "[Full source and representation bindings](" + link + "). "
               "Original N5 word execution remains BLOCKED. " +
               ("The original C6 N11 illustration has no accepted numerical grade. The separate half_base run "
                "completed all 20,001 updates and 24 reads, with zero passing reads and an accepted numerical FAIL."
                if half_base else "The N11 illustration has no accepted numerical grade."), ""]
-    return lines
 
 
 def _separate_baseline_links(result, row, root, path):
@@ -1069,10 +1069,14 @@ def _current_markdown(result, root, path):
     progress = result.get("atlas_unblocking_progress") if ordinary_current else None
     half_base = result.get("word_half_base_diagnostic") if ordinary_current else None
     if ordinary_current:
-        lines += ["One selected configuration per family; full tier denominators stay fixed. "
-                  "Representation is read from its declared prior and task-owned hosts.", "",
-                  "| Model/configuration | Representation | Measured scores |",
+        lines += ["Each row keeps its own configuration, source, representation and measured scope. "
+                  "Required denominators stay fixed; diagnostic and ordinary qualification scores remain separate.", "",
+                  "| Model/configuration | Actual representation | Measured score/status and scope |",
                   "| --- | --- | --- |"]
+        if progress:
+            lines += _atlas_progress_markdown(progress, root, path, half_base=half_base)
+        elif half_base:
+            lines.append(_half_base_score_line(half_base, root, path))
     else:
         lines += ["Each cell retains **passes / full required total** or **status (N required)** from one selected configuration. "
              "Mixed cells show the counts of failed, blocked and unmeasured tasks. " +
@@ -1084,6 +1088,10 @@ def _current_markdown(result, root, path):
                  "| --- | " + " | ".join("---:" for _ in tiers) + " | ---: |"]
     details = ["<details>", "<summary>Selected configurations and provenance</summary>", ""]
     for row in result["rows"]:
+        # The actual C6 Atlas result occupies the displayed Atlas row. Its
+        # incompatible ordinary reference is retained verbatim in the JSON.
+        if ordinary_current and progress and row.get("trainer_family", row["candidate_id"]) == "atlas":
+            continue
         source = row.get("bindings", {}).get("source_digest")
         pointer = result["evidence_sources"].get(row.get("publication_key"))
         if pointer and source:
@@ -1122,9 +1130,10 @@ def _current_markdown(result, root, path):
             json_link = os.path.relpath(root / CURRENT_PREFIX.with_suffix(".json"), path.parent)
             scores = "<br>".join(f"Tier {tier}: " + _current_tier_cell(
                 row, tier, result["tier_requirements"][tier], json_link) for tier in tiers)
-            values = [f"{row['technique']} · {configuration_link}<br>{backend}",
+            unresolved = f"<br>Revision/cohort: {revision} / {cohort}" if not row.get("candidate_revision") or not row.get("cohort") else ""
+            values = [f"{row['technique']} · {configuration_link}<br>{backend} · ordinary qualification",
                       _ordinary_representation(result, row),
-                      scores + f"<br>Recorded tier: {row['qualified_tier']}"]
+                      scores + f"<br>Recorded tier: {row['qualified_tier']} · [source]({json_link})" + unresolved]
         lines.append("| " + " | ".join(cell(value) for value in values) + " |")
         details += [f"### {cell(row['technique'])} ({cell(backend)})", "",
                     f"- **Selected configuration:** {configuration_link}",
@@ -1139,11 +1148,7 @@ def _current_markdown(result, root, path):
                         "; no current tier credit.", ""]
     lines.append("")
     if progress:
-        lines += _atlas_progress_markdown(progress, root, path, half_base=half_base)
-    elif half_base:
-        lines += ["## Selected-policy GPU scores", "",
-                  "| Model/configuration | Representation | Measured scores |",
-                  "| --- | --- | --- |", _half_base_score_line(half_base, root, path), ""]
+        lines += _policy_score_scope(root, path, half_base=half_base)
     if ordinary_current:
         lines += ["## Qualification and scope", "",
                   "MoG + particles (per task) denotes separate declared host laws within a suite; "
@@ -1158,7 +1163,9 @@ def _current_markdown(result, root, path):
                       "**2/2 hold FAIL**, with six other domains UNKNOWN per family. "
                       "See [completed source-bound studies](#completed-source-bound-studies) for the exact "
                       "protocols and original goal GIFs. These separate results do not fill ordinary qualification.", ""]
-    lines += details + ["</details>", "", "Recorded results remain bound to their actual recipes, priors, initialization, budgets, sampling laws "
+    if not ordinary_current:
+        lines += details + ["</details>", ""]
+    lines += ["Recorded results remain bound to their actual recipes, priors, initialization, budgets, sampling laws "
               "and hardware. They do not pool qualification across sources or qualify the latest checkout. "
               "Selection never combines passing tasks or tiers from different configurations. A failed best-observed "
               "configuration is not a qualified winner. Search qualification covers only its declared tuning tiers; "
@@ -1202,8 +1209,17 @@ def _current_markdown(result, root, path):
                          f"recorded tier {row.get('qualified_tier', 0)}. Full evidence is in the companion JSON.")
         lines.append("")
     if result.get("completed_api_studies"):
-        from experiments.forge.completed_studies import render_completed_studies
-        lines += ["", render_completed_studies(result["completed_api_studies"], root, path), ""]
+        if ordinary_current:
+            lines += ["## Completed source-bound studies", "",
+                      "Historical protocols and distinct contrasts retain their exact scores, source and GIFs "
+                      "in their original readouts. They do not fill cells in the table above.", ""]
+            for study in result["completed_api_studies"]["rows"]:
+                link = os.path.relpath(root / study["readout"], path.parent)
+                lines.append(f"- [{study['label']}]({link}) · own {study['required_cells']}-cell scope.")
+            lines.append("")
+        else:
+            from experiments.forge.completed_studies import render_completed_studies
+            lines += ["", render_completed_studies(result["completed_api_studies"], root, path), ""]
     if result.get("baseline_debugging"):
         link = os.path.relpath(root / result["baseline_debugging"]["readout"], path.parent)
         lines += [f"[Exact C6 baseline and retained persistence diagnosis]({link}): "
@@ -1213,16 +1229,31 @@ def _current_markdown(result, root, path):
     return "\n".join(lines)
 
 
-def _shared_score_intro(root, result):
-    """Replace only the maintained navigation introduction, retaining its archive."""
+def _shared_score_archive(root):
+    """Move the original historical suffix intact out of the current chart."""
     path = root / "reports/forge/shared-score-index-20261003/README.md"
     if not path.is_file():
         return
-    original = path.read_text()
-    marker = "## Completed current Atlas GPU diagnostic\n"
-    if marker not in original:
+    archive = path.with_name("ARCHIVED_REPORTS.md")
+    original = path.read_bytes()
+    marker = b"## Completed current Atlas GPU diagnostic\n"
+    if marker in original:
+        suffix = marker + original.split(marker, 1)[1]
+        if archive.exists() and archive.read_bytes() != suffix:
+            raise ValueError("Shared score index historical archive differs from its preserved report boundary")
+    elif b"[Historical report archive](ARCHIVED_REPORTS.md)" in original and archive.is_file():
+        suffix = archive.read_bytes()
+    else:
         raise ValueError("Shared score index is missing its preserved report boundary")
-    suffix = marker + original.split(marker, 1)[1]
+    return archive, suffix.decode("utf-8")
+
+
+def _shared_score_intro(root, result):
+    """Render the one current table and link the separate unchanged archive."""
+    path = root / "reports/forge/shared-score-index-20261003/README.md"
+    if not path.is_file():
+        return
+    _shared_score_archive(root)  # Validate the legacy or already-moved boundary.
     leading = _current_markdown(result, root, path).split("## Qualification and scope\n", 1)[0]
     leading = leading.replace("# Current model/configuration scores", "# Shared ParticleGAN score index", 1)
     half_base = result.get("word_half_base_diagnostic")
@@ -1245,8 +1276,9 @@ def _shared_score_intro(root, result):
              "INVALID supplies no accepted numerical grade; original N5 word execution remains BLOCKED. "
              "No family default or comparable speed winner is established.\n\n"
              + account_text +
-             "The linked original report sections and their index.json below retain their separate snapshots.\n\n")
-    return path, leading + scope + suffix
+             "[Historical report archive](ARCHIVED_REPORTS.md) · [Original snapshot index](index.json). "
+             "The archived source, scores, costs and links retain their original bytes and separate scopes.\n")
+    return path, leading + scope
 
 
 def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discriminator_stability",
@@ -1525,6 +1557,8 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
     result["provenance"]["input_digest"] = stable_hash(result)
     json_path, markdown_path = root / CURRENT_PREFIX.with_suffix(".json"), root / CURRENT_PREFIX.with_suffix(".md")
     markdown = _current_markdown(result, root, markdown_path)
+    shared_archive = (_shared_score_archive(root)
+                      if not recorded_policy and view_id == "discriminator_stability" else None)
     shared_intro = (_shared_score_intro(root, result)
                     if not recorded_policy and view_id == "discriminator_stability" else None)
     # Validate all inputs before changing evidence registry or public outputs.
@@ -1533,6 +1567,8 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
         _write_changed(manifest_path, json.dumps(manifest, sort_keys=True, indent=2) + "\n")
     _write_changed(json_path, _json_text(result))
     _write_changed(markdown_path, markdown)
+    if shared_archive:
+        _write_changed(*shared_archive)
     if shared_intro:
         _write_changed(*shared_intro)
     return {"report": str(markdown_path), "json": str(json_path), "rows": len(result["rows"]),
