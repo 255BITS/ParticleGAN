@@ -20,6 +20,7 @@ NAMED_PARENTS = {
     "multibank_policy_v1": ("cover_leftover",),
     "ae_routed_policy_v1": ("ae_gan_hold",),
     "word_joint_policy_min11_v1": ("five_word_joint_acquisition",),
+    "word_joint_policy_min11_rates_v1": ("five_word_joint_acquisition",),
 }
 
 

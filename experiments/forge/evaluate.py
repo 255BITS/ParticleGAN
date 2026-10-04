@@ -24,7 +24,17 @@ def evaluate(path: Path):
     grades = {}
     for task_id in job.get("task_ids", [job["task_id"]]):
         member = raw.get("task_results", {}).get(task_id, raw)
-        grades[task_id] = grade_result(request["tasks"][task_id], member)
+        task = request["tasks"][task_id]
+        grade = grade_result(task, member)
+        if task.get("task_cohort") == "word_joint_policy_min11_rates_v1":
+            from .word_joint_rate_policy_contracts import validate_request, validate_result_binding
+            try:
+                validate_request(request, task)
+                if grade["status"] in {"PASS", "FAIL"}:
+                    validate_result_binding(request, task, member)
+            except (AttributeError, KeyError, OSError, TypeError, ValueError) as error:
+                grade = {"status": "INVALID", "reason": str(error)}
+        grades[task_id] = grade
     result = {"schema_version": 1, "grades": grades, "raw_hash": stable_hash(raw),
               "source_digest": request["source"]["digest"],
               "telemetry": {"independent_grading_seconds": time.monotonic() - started,

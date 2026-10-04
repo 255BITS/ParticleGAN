@@ -175,7 +175,7 @@ def grade_sampling(task: dict, evidence: dict) -> dict | None:
         if observed["controller"] != "dv12":
             return {"status": "INVALID", "reason": "measurement controller differs from this declared Atlas policy"}
         execution_contract = task["execution"]["policy_contract"]
-        if task["task_cohort"] == "word_joint_policy_min11_v1":
+        if task["task_cohort"] in {"word_joint_policy_min11_v1", "word_joint_policy_min11_rates_v1"}:
             if "family" not in observed:
                 return {"status": "INCOMPLETE", "reason": "word measurement lacks its actual min11 joint-cloud family"}
             if observed["family"] != execution_contract["family"]:

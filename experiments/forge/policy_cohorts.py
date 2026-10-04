@@ -24,6 +24,8 @@ _DISPATCH = {
         "validate_ae_observation", "ae_recipe_overrides", "ae_policy_contract_blockers"),
     "word_joint_policy_min11_v1": ("word_joint_policy_contracts", "atlas_word_joint_min11", "validate_task",
         "validate_word_observation", "word_recipe_overrides", "blockers"),
+    "word_joint_policy_min11_rates_v1": ("word_joint_rate_policy_contracts", "atlas_word_joint_min11_rates", "validate_task",
+        "validate_word_observation", "word_recipe_overrides", "blockers"),
 }
 KNOWN_COHORTS = frozenset(_DISPATCH)
 COMPILER_ANNOTATIONS = frozenset({"preflight_blockers", "field_ownership"})

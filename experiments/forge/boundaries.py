@@ -78,7 +78,7 @@ def prior_control_binding(task):
     from .policy_cohorts import is_policy_task, validate_policy_task
     if is_policy_task(task):
         contract = validate_policy_task(task)
-        if contract["cohort"] == "word_joint_policy_min11_v1":
+        if contract["cohort"] in {"word_joint_policy_min11_v1", "word_joint_policy_min11_rates_v1"}:
             return {"representation": "independent_complete_word_code_joint_atoms",
                     "latent_table_controls": True, "constructed_prior": True,
                     "table_owner": "prior.z", "auxiliary_encoder": "original_free_continuous_WordEncoder",

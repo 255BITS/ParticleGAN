@@ -354,7 +354,7 @@ def _named_policy_layout(task):
         counts = ("generator", "encoder", "prior", "discriminator")
         roles.insert(1, "encoder")
         models.extend(("encoder", "prior"))
-    elif cohort == "word_joint_policy_min11_v1":
+    elif cohort in {"word_joint_policy_min11_v1", "word_joint_policy_min11_rates_v1"}:
         callback, module = "joint_generation", "word_joint_policy_adapters"
         counts = ("generator", "encoder", "prior", "discriminator")
         roles.insert(1, "encoder")
@@ -509,6 +509,12 @@ def _word_joint_policy_guards(task, evidence, contract, steps):
     routed guards or evidence for the original five-row/independent Atlas task.
     """
     controls = evidence["policy_controls"]
+    if task["task_cohort"] == "word_joint_policy_min11_rates_v1":
+        from .word_joint_rate_policy_contracts import validate_binding_receipt
+        try:
+            validate_binding_receipt(controls.get("word_rate_binding"), task)
+        except (AttributeError, KeyError, TypeError, ValueError) as error:
+            return _verdict("INVALID", str(error))
     if (type(controls.get("schema_version")) is not int or controls["schema_version"] != 1
             or controls.get("family") != contract["family"]
             or controls.get("independent_atlas_qualification") is not False
@@ -716,7 +722,7 @@ def _policy_guards(task, evidence):
         return _verdict("INVALID", "unintended RNG stream deviations invalidate policy comparison")
     updates = guards.get("optimizer_updates")
     routed = contract["row_semantics"] == "conditional"
-    word = task["task_cohort"] == "word_joint_policy_min11_v1"
+    word = task["task_cohort"] in {"word_joint_policy_min11_v1", "word_joint_policy_min11_rates_v1"}
     named = routed or word
     roles = (_named_policy_layout(task)["counts"] if named else (
         ("prior", "discriminator") if task["execution"].get("host") == "two_pole" else

@@ -39,6 +39,7 @@ _NAMED_POLICY_ADAPTERS = {
     "multibank_policy_v1": ("multibank_policy_adapters", "run_behavior"),
     "ae_routed_policy_v1": ("ae_routed_policy_adapters", "run_behavior"),
     "word_joint_policy_min11_v1": ("word_joint_policy_adapters", "run_word"),
+    "word_joint_policy_min11_rates_v1": ("word_joint_policy_adapters", "run_word"),
 }
 
 

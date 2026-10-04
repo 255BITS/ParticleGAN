@@ -138,6 +138,10 @@ def task_formulation_context(candidate, task, protocol=None, *, device="cpu", ro
         try:
             task = policy_task_declaration(task)
             validate_policy_task(task, root=root)
+            if task["task_cohort"] == "word_joint_policy_min11_rates_v1":
+                from .word_joint_rate_policy_contracts import validate_request
+                validate_request({"candidate": candidate,
+                    "protocol": {"seed": (protocol or {}).get("seed", 0)}}, task, root=root)
         except (AttributeError, KeyError, OSError, TypeError, ValueError) as error:
             raise CapabilityError([str(error)]) from error
     bound = bind_task_candidate(candidate, task)
@@ -413,7 +417,8 @@ class FormulationContext:
     def capabilities(self):
         routed = self.recipe.row_policy == "routed_paired" and self.policy_task is not None
         joint = (self.policy_task is not None
-                 and self.policy_task["task_cohort"] == "word_joint_policy_min11_v1")
+                 and self.policy_task["task_cohort"] in {
+                     "word_joint_policy_min11_v1", "word_joint_policy_min11_rates_v1"})
         named_ae = bool(routed and self.policy_task["task_cohort"] == "ae_routed_policy_v1"
                         and self.recipe.encoder_mode == "ae" and self.prior_config["kind"] == "mog")
         scalar = (self.recipe.model == "gan" and self.recipe.conditioning == "scalar"
@@ -680,7 +685,7 @@ class FormulationContext:
         if policy.row_policy != "routed_paired":
             if policy.routed_control is not None:
                 raise CapabilityError(["independent task cannot bind a routed row owner"])
-            if self.policy_task["task_cohort"] == "word_joint_policy_min11_v1":
+            if self.policy_task["task_cohort"] in {"word_joint_policy_min11_v1", "word_joint_policy_min11_rates_v1"}:
                 self._validate_word_joint_owners(policy)
             return
         control = policy.routed_control

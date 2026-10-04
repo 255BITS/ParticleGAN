@@ -280,6 +280,7 @@ def _validate_named(root, report, row):
         "multibank_policy_v1": "atlas_multibank",
         "ae_routed_policy_v1": "atlas_ae_routed",
         "word_joint_policy_min11_v1": "atlas_word_joint_min11",
+        "word_joint_policy_min11_rates_v1": "atlas_word_joint_min11_rates",
     }
     if not isinstance(cohort, str) or cohort not in families:
         raise ValueError("policy publication unknown explicit named cohort")

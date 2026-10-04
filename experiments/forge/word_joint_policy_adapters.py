@@ -72,13 +72,33 @@ def _initialize_named(fixture, model, role):
         parameter_seeds=seeds, state_sha256=typed_state_digest(model.state_dict()))
 
 
+def _word_declaration(task):
+    """Fixed declaration dispatch; no injected resolver or runtime rate patch."""
+    cohort = task.get("task_cohort")
+    if cohort == declaration.COHORT:
+        return declaration
+    if cohort == "word_joint_policy_min11_rates_v1":
+        from . import word_joint_rate_policy_contracts
+        return word_joint_rate_policy_contracts
+    raise ValueError("unknown explicit min11 word policy cohort")
+
+
 class WordJointPolicyFixture:
     KIND = "forge_word_joint_policy_min11_v1"
 
     def __init__(self, request, task, *, device="cpu", context=None):
-        declaration.validate_task(task, root=ROOT)
+        self.declaration = _word_declaration(task)
+        self.declaration.validate_task(task, root=ROOT)
+        if self.declaration.COHORT == "word_joint_policy_min11_rates_v1":
+            from .policy_cohorts import policy_task_declaration
+            task = policy_task_declaration(task)
+            self.recipe = self.declaration.validate_request(request, task, root=ROOT)
+            self.rate_profile = self.declaration.profile_for(request["candidate"])
+            self.KIND = self.declaration.KIND
+        else:
+            self.recipe = declaration.resolved_recipe(request["candidate"], task)
+            self.rate_profile = None
         self.task, self.context, self.device = deepcopy(task), context, torch.device(device)
-        self.recipe = declaration.resolved_recipe(request["candidate"], task)
         self.max_steps = task["execution"]["steps"]
         seed = request.get("protocol", {}).get("seed", 0)
         if context is not None and (stable_hash(context.recipe.to_dict()) != stable_hash(self.recipe.to_dict())
@@ -183,13 +203,16 @@ class WordJointPolicyFixture:
             for p, flag in zip(self.D.parameters(), flags): p.requires_grad_(flag)
 
     def state_dict(self):
-        return dict(schema_version=1, kind=self.KIND, family=declaration.FAMILY,
+        result = dict(schema_version=1, kind=self.KIND, family=self.declaration.FAMILY,
             task_sha256=stable_hash(self.task), recipe=self.recipe.to_dict(), external_max_steps=self.max_steps,
             caller_cursor=self.completed_steps, initialization=deepcopy(self.initialization),
             module_modes=self.module_modes(),
             canonical_words=self.words.detach().clone(), streams=self.streams.state_dict(), policy=self.policy.state_dict(),
             lifecycle_audit=self.audit.receipt(self.completed_steps), mechanism_audit_state=deepcopy(self.mechanisms.rows),
             last_update=deepcopy(self.last_update))
+        if self.rate_profile is not None:
+            result["word_rate_binding"] = self.declaration.binding_receipt(self.recipe, self.rate_profile)
+        return result
 
     def modules(self):
         return {role + ("." + name if name else ""): module
@@ -217,7 +240,7 @@ class WordJointPolicyFixture:
                     or table.dtype != self.prior.z.dtype):
                 raise ValueError("word joint checkpoint requires eleven actual prior rows")
         for key in ("schema_version", "kind", "family", "task_sha256", "recipe", "external_max_steps",
-                    "initialization", "canonical_words"):
+                    "initialization", "canonical_words", *(["word_rate_binding"] if self.rate_profile is not None else [])):
             if typed_state_digest(state[key]) != typed_state_digest(expected[key]):
                 raise ValueError("word joint checkpoint identity differs: " + key)
         steps, audit = state["caller_cursor"], state["lifecycle_audit"]
@@ -289,18 +312,20 @@ class WordJointPolicyFixture:
         self.purity.append(dict(completed_steps=self.completed_steps, digest_kind=DIGEST_KIND,
             before_sha256=before, after_sha256=after, global_rng_before_sha256=global_before,
             global_rng_after_sha256=global_after, pure=pure))
-        self.policy_observations.append({**observation_receipt(self.task, self.policy), "family": declaration.FAMILY})
+        self.policy_observations.append({**observation_receipt(self.task, self.policy), "family": self.declaration.FAMILY})
         if not pure: raise RuntimeError("word observation changed training state/global/named RNG")
         return metrics
 
     def controls(self):
         row = controls_receipt(self.policy, self.completed_steps)
-        row.update(cohort=declaration.COHORT, family=declaration.FAMILY, independent_atlas_qualification=False,
+        row.update(cohort=self.declaration.COHORT, family=self.declaration.FAMILY, independent_atlas_qualification=False,
                    joint_atom_code="same_effective_code", output_noise_coordinates="words168_only",
                    actual_prior_rows=len(self.prior.z), canonical_target_words=len(self.words),
-                   resource_adaptation=deepcopy(declaration.RESOURCE_ADAPTATION),
+                   resource_adaptation=deepcopy(self.declaration.RESOURCE_ADAPTATION),
                    actual_birth_death=dict(rows=self.policy.birth_death.N, neighbours=self.policy.birth_death.k,
                        isolation=self.policy.birth_death.isolation, reference_half=(len(self.prior.z)+1)//2))
+        if self.rate_profile is not None:
+            row["word_rate_binding"] = self.declaration.binding_receipt(self.recipe, self.rate_profile)
         return row
 
     def guards(self):
@@ -318,11 +343,11 @@ class WordJointPolicyFixture:
     def receipt(self):
         base = self.context.receipt() if self.context is not None else dict(execution_path="public_components",
             recipe=self.recipe.to_dict(), rng=self.streams.manifest(), initialization=deepcopy(self.initialization))
-        return {**base, "family": declaration.FAMILY, "task_cohort": declaration.COHORT,
+        return {**base, "family": self.declaration.FAMILY, "task_cohort": self.declaration.COHORT,
             "policy_lifecycle": dict(owner="particlegan.UpdatePolicy", completed_steps=self.completed_steps,
                 external_max_steps=self.max_steps, controls=self.controls()),
-            "actual_resources": deepcopy(declaration.HOST_RESOURCES),
-            "resource_adaptation": deepcopy(declaration.RESOURCE_ADAPTATION),
+            "actual_resources": deepcopy(self.declaration.HOST_RESOURCES),
+            "resource_adaptation": deepcopy(self.declaration.RESOURCE_ADAPTATION),
             "table_ownership": dict(parameter="prior.z", kind="particle_cloud", shape=[11,2],
                 canonical_target_words=5, masses="uniform_actual_eleven_rows", sigma=0., standardize=False,
                 auxiliary_encoder="original_free_continuous_WordEncoder", encoder_mode="none",
@@ -334,6 +359,7 @@ def run_word(request, task, output_dir, device="cpu", *, context=None):
     from .artifacts import manifest_artifacts
     from .sampling import executed_receipt
     started = time.monotonic(); fixture = WordJointPolicyFixture(request, task, device=device, context=context)
+    binding = fixture.declaration
     output = Path(output_dir); output.mkdir(parents=True, exist_ok=True)
     artifacts = output / "word-joint-policy"; artifacts.mkdir(); views = artifacts / "observations"; views.mkdir()
     observations = []; cadence = {math.ceil(i * 20001 / 24) for i in range(1, 25)}
@@ -349,9 +375,9 @@ def run_word(request, task, output_dir, device="cpu", *, context=None):
         policy_observations=fixture.policy_observations, policy_purity=fixture.purity, rng_audits=fixture.rng_audits,
         artifact_root=str(artifacts.resolve()), artifact_manifest=manifest_artifacts(artifacts),
         checkpoint=dict(path="state.pt", sha256=file_hash(target), state_sha256=typed_state_digest(state), digest_kind=DIGEST_KIND),
-        host=dict(family=declaration.FAMILY, task_cohort=declaration.COHORT,
-            canonical_words=list(WORDS), actual_resources=deepcopy(declaration.HOST_RESOURCES),
-            resource_adaptation=deepcopy(declaration.RESOURCE_ADAPTATION),
+        host=dict(family=binding.FAMILY, task_cohort=binding.COHORT,
+            canonical_words=list(WORDS), actual_resources=deepcopy(binding.HOST_RESOURCES),
+            resource_adaptation=deepcopy(binding.RESOURCE_ADAPTATION),
             objective=task["execution"]["policy_contract"]["objective"],
             reconstruction_training_loss=False, original_capacity_or_qualification_credit=False),
         **executed_receipt(task["evaluation"]["sampling_law"], eval_output_noise=task["evaluation"]["eval_output_noise"]))
