@@ -10,7 +10,7 @@
       "benchmark/shared": 5,
       "benchmark/smart_descent": 9,
       "benchmark/toy100": 19,
-      "benchmark/toy_audit": 65,
+      "benchmark/toy_audit": 66,
       "benchmark/transfer_suite": 87,
       "config/100gaussians": 4,
       "config/cifar_ddgan": 77,
@@ -89,7 +89,7 @@
       "report/toy100/shared22": 201,
       "report/toy100/simpler22": 180,
       "report/toy100/torch214-gpu-check": 10,
-      "report/toy_audit": 521,
+      "report/toy_audit": 525,
       "report/trajectory": 175,
       "report/transfer_suite": 341,
       "report/transfer_suite/anisotropic_core_metric": 2,
@@ -109,20 +109,20 @@
       "frozen_driver": 28,
       "frozen_evaluator_or_audit": 2,
       "frozen_support": 28,
-      "narrative": 994,
-      "structured_evidence": 5048,
-      "support": 1525,
+      "narrative": 995,
+      "structured_evidence": 5050,
+      "support": 1526,
       "support_artifact": 60,
       "visualization": 22,
-      "visualization_artifact": 721
+      "visualization_artifact": 722
     },
-    "files": 11724
+    "files": 11729
   },
   "coverage": {
-    "declared_count": 11724,
+    "declared_count": 11729,
     "missing": [],
     "stale": [],
-    "tracked_count": 11724,
+    "tracked_count": 11729,
     "unclassified": [],
     "valid": true
   },
@@ -1120,6 +1120,13 @@
       "family": "benchmark/toy_audit",
       "git_blob": "dea2d5185752e606581186b6286a4a5b235fe745",
       "path": "benchmarks/toy_audit/recent_toy_media.py",
+      "role": "support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "955b6a91686369e4f299221408e377d4c7c51ca6",
+      "path": "benchmarks/toy_audit/remote_conditioning_media.py",
       "role": "support",
       "suggested_tiers": []
     },
@@ -77240,6 +77247,34 @@
       "family": "report/toy_audit",
       "git_blob": "795acf4ea48c6a4f350bcce86e5eea271fa50244",
       "path": "reports/toy_audit/api_contract/pr236/scientific-review.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "b04d59f15cd123c513cd63478a42bc1cfb7acfb0",
+      "path": "reports/toy_audit/api_contract/pr246/README.md",
+      "role": "narrative",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "8334a8128c88c7a1840e7d153f4710f0c16afcdc",
+      "path": "reports/toy_audit/api_contract/pr246/goal.gif",
+      "role": "visualization_artifact",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "1923472b6d4d7b93e61d5dd32201fb15e3a46e34",
+      "path": "reports/toy_audit/api_contract/pr246/media-checks.json",
+      "role": "structured_evidence",
+      "suggested_tiers": []
+    },
+    {
+      "family": "report/toy_audit",
+      "git_blob": "8638e59048a104f547ddde4114ac6a2480b7d009",
+      "path": "reports/toy_audit/api_contract/pr246/receipt.json",
       "role": "structured_evidence",
       "suggested_tiers": []
     },
