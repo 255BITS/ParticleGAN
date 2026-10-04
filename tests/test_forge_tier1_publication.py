@@ -1,5 +1,6 @@
 """Publication infrastructure fixtures; no training or scientific claims."""
 from pathlib import Path
+from copy import deepcopy
 import base64
 import json
 import shutil
@@ -342,3 +343,53 @@ def test_scoped_results_cannot_replace_an_existing_parent_cell(packet, monkeypat
     atlas["nonrequired_tasks"].append({"task_id": "two_pole_tier1_policy_selected_cloud_v1", "status": "PASS"})
     with pytest.raises(ValueError, match="replace selected parent cells"):
         build_progress(root, display)
+
+
+def frozen_rows():
+    bound = {"candidate_id": "executed", "candidate_revision": "revision", "cohort": "cohort",
+             "bindings": {"available": True, "source_digest": DIGEST}, "status": "FAIL", "qualified_tier": 0,
+             "attempt_ids": ["certified-final"], "tasks": [{"task_id": "question", "status": "FAIL"}]}
+    unresolved = {"candidate_id": "old-unresolved", "candidate_revision": None, "cohort": None,
+                  "bindings": {"available": False, "task_contracts": {}, "task_keys_sha256": stable_hash({})},
+                  "status": "BLOCKED", "qualified_tier": 0, "attempt_ids": [],
+                  "blockers": [{"reason": "old control mapping does not bind the new diagnostic"}],
+                  "cost": {"measured_tasks": 0, "wall_seconds": None},
+                  "tasks": [{"task_id": "question", "status": "BLOCKED"}],
+                  "nonrequired_tasks": [{"task_id": "clock_probe", "status": "BLOCKED"}]}
+    return bound, unresolved
+
+
+def test_unresolved_declarations_remain_explicit_without_source_or_attempt_credit():
+    publisher = publication._publisher(ROOT)
+    bound, unresolved = frozen_rows()
+    report = {"rows": [bound], "configuration_rows": [bound, unresolved]}
+    original = deepcopy(report)
+    measured, diagnostics = publisher._bound_publication_rows(report, {DIGEST})
+    assert measured == [bound] and diagnostics == [unresolved]
+    assert report == original
+    assert {attempt for row in measured for attempt in row["attempt_ids"]} == {"certified-final"}
+    assert all(row["qualified_tier"] == 0 and not row["attempt_ids"] for row in diagnostics)
+
+
+@pytest.mark.parametrize("change", ["other_source", "attempt", "pass_cell", "qualified_tier", "revision", "contract", "paid_measurement", "missing_blocker"])
+def test_unresolved_diagnostic_exception_rejects_source_mismatch_or_scientific_credit(change):
+    publisher = publication._publisher(ROOT)
+    _, row = frozen_rows()
+    if change == "other_source":
+        row["bindings"]["source_digest"] = "different-actual-source"
+    elif change == "attempt":
+        row["attempt_ids"] = ["uncertified-attempt"]
+    elif change == "pass_cell":
+        row["tasks"][0]["status"] = "PASS"
+    elif change == "qualified_tier":
+        row["qualified_tier"] = 1
+    elif change == "revision":
+        row["candidate_revision"] = "a-scientific-revision"
+    elif change == "contract":
+        row["bindings"]["task_contracts"] = {"question": "scientific-task-contract"}
+    elif change == "paid_measurement":
+        row["cost"]["measured_tasks"] = 1
+    else:
+        row["blockers"] = []
+    with pytest.raises(ValueError, match="absent from the validated original receipts"):
+        publisher._bound_publication_rows({"rows": [row]}, {DIGEST})
