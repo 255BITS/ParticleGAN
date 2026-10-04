@@ -565,7 +565,11 @@ Forge declarations: [gaussian1d_acquisition](../../configs/forge/tasks/gaussian1
 
 No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
 
-No related published API training GIF. This task retains its own declared numerical audit.
+Related public-API demonstrations, with their own recorded contracts:
+
+| Variant / actual-training GIF | What this variant tests | Recorded prior code path | Recorded result / failed bounds | Recipe / compute / source | Evidence |
+| --- | --- | --- | --- | --- | --- |
+| [api-gaussian1d-acquisition](../toy_audit/api_contract/gaussian1d/goal.gif) | Can the public ParticleGAN trainer acquire the scalar law N(2, 0.5^2) from random initialization within 1,000 updates, with correct location, width and CDF shape at five terminal checks? Scope: Acquire N(2, .5^2) in 1,000 updates from random initialization; exact Gaussian CDF, location and width gates must pass at five terminal checks. Tier 1 remains provisional; this standalone API cohort grants no whole-view qualification. | MoGParticlePrior (sigma_rel=0) | COMPLETE / FAIL; 1000/1000 updates; cdf_ks <= 0.05, last 5 post-update metric observations do not all pass | k3p / cpu / 666642486d3c | [definition](../toy_audit/api_contract/gaussian1d/results.json); [readout](../toy_audit/api_contract/gaussian1d/results.json); [recipe and provenance](../toy_audit/api_contract/gaussian1d/results.json) |
 
 ### Experiment: grid100
 
@@ -1274,4 +1278,4 @@ The wider question review also links standalone experiments outside the Forge ti
 
 Declaration input digest: `70ca396055c2e025027389950e431d87e1d03179f1917940859242ab0e5d9da6`. The JSON form includes the individual task and view file hashes.
 
-Published artifact input digest: `48385bf95b6483a877f4baa78d80e3fd3174d8092785b625649286d9cb75579c`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.
+Published artifact input digest: `897a7eb7d5236a9a53d66604ec729691d453247decc0257507affa3cd7b3abef`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.

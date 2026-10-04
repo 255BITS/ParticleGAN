@@ -1211,6 +1211,10 @@ def test_committed_cohorts_rebuild_every_scientific_row_in_a_checkout_without_ra
     shutil.copyfile(ROOT / "configs/forge/trainer-families.json", tmp_path / "configs/forge/trainer-families.json")
     shutil.copyfile(ROOT / "configs/forge/defaults.json", tmp_path / "configs/forge/defaults.json")
     manifest = read_json(tmp_path / publication.EVIDENCE_MANIFEST)
+    # Rebuild this recorded publication against its exact archived denominator.
+    # The new scalar task does not relabel any of these scientific rows.
+    archived = tmp_path / "configs/forge/view-history" / f"discriminator_stability-v{manifest['view_revision']}.json"
+    shutil.copyfile(archived, tmp_path / "configs/forge/views/discriminator_stability.json")
     expected, all_snapshots, registered_rows, unregistered_shadows = {}, [], [], []
     snapshot_bytes = {}
     for entry in manifest["cohorts"]:

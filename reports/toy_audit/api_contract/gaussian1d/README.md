@@ -67,4 +67,58 @@ The run returns nonzero on FAIL. Raw logs, observation arrays and checkpoints
 stay under ignored `runs/api`; publish only controls, endpoint/terminal metrics,
 provenance and the actual-training GIF. The existing
 [current solution leaderboard](../../../forge/technique-inventory.md) retains
-its source-bound results. This task readout creates no competing ranking.
+its source-bound revision-3 results. The [archived view](../../../../configs/forge/view-history/discriminator_stability-v3.json)
+preserves that exact five-task policy. Revision 4's additional scalar cell is
+unmeasured in ordinary qualification; the standalone result does not fill it.
+This task readout creates no competing ranking.
+
+## Completed result
+
+**A close scalar fit in 4.953 seconds; strict acquisition FAIL.** The single
+CPU run completed all 1,000 updates and 24 numerical checks. Twelve checks passed,
+including three of the five terminal checks. All terminal observations passed
+location, width and finite-output bounds; updates 875 and 1,000 failed the CDF
+shape bound. No retry, seed variation, continuation or threshold adjustment ran.
+
+| Endpoint metric | Measured | Target or bound | Result |
+| --- | ---: | ---: | --- |
+| Mean | 2.02749 | 2.0; error ≤ .10 | PASS |
+| Standard deviation | .52790 | .5; accepted [.4, .6] | PASS |
+| Mean error / sigma | .05498 | ≤ .20 | PASS |
+| Standard deviation ratio | 1.05580 | [.80, 1.20] | PASS |
+| Exact-CDF KS | .05674 | ≤ .05 | FAIL |
+| Finite fraction | 1 | 1 | PASS |
+| Evaluation samples | 4,096 | ≥ 4,096 | PASS |
+| Terminal joint checks | 3/5 | 5/5 | FAIL |
+
+The untrained generator had mean -.00153, standard deviation .02752 and KS
+.99980. Training therefore acquired the displaced mass and most of the spread.
+Terminal KS distances were .03174, .05208, .04563, .03802 and .05674 at updates
+834, 875, 917, 959 and 1,000. Their variation demonstrates that an isolated
+passing endpoint would not establish sustained acquisition. These finite-sample
+scores do not distinguish sampling fluctuation from training-state variation.
+The shape failure does not identify the critic formulation as the cause.
+
+The measured public recipe retained input noise .5, output noise .029 with a
+.2-budget warmup, and a 1,000-update horizon. Scoring removed additive output
+noise while retaining fixed MoG kernel noise. The full recipe, prior,
+initializer, sampling law and Python/Torch/CPU cohort are in the
+[compact endpoint and terminal receipt](results.json). Execution source is
+`f28dd8fd`; its full commit and Python file hashes are recorded there. The
+elapsed time covers construction, training and numerical evaluation; it excludes
+GIF rendering and supplies no speed ranking against other hardware.
+
+**Recommendation:** retain this inexpensive, provisional Tier 1 question and
+its numerical failure. Before introducing a more complex 1-D target, test one
+substantive, preregistered stability hypothesis on this same question; its
+recipe, budget and evidence identity must remain explicit. This result does not
+justify relaxing the CDF bound or adopting a training default.
+
+[Oracle and destructive controls](controls.json) all behaved as declared,
+with zero training updates. The [actual-training histogram GIF](goal.gif)
+contains nine retained states, fixed bins and axes, and numerical gate labels.
+The exporter verified original arrays, media hashes and the full protocol;
+publication added zero training or scoring updates. Bulk evidence remains in
+`runs/api/gaussian1d-acquisition-v1/` and is excluded from Git.
+
+![Actual training toward the scalar Gaussian target](goal.gif)

@@ -6,7 +6,7 @@ with [EXPERIMENTATION.md](../EXPERIMENTATION.md), the
 [public-API toy contract](../reports/toy_audit/api_contract/README.md). They define
 the current gates, budgets, evidence rules and provisional calibration status.
 
-Two worked examples show the process:
+Three worked examples show the process:
 
 - [Sixteen Gaussian clusters](../reports/toy_audit/api_contract/ring16/README.md):
   reuse a vector host, add acquisition gates and scorer controls, and publish a
