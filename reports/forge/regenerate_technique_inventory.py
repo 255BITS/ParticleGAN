@@ -7,6 +7,8 @@ new measured rows before updating the same leaderboard. No command trains.
 --recorded-policy rebuilds existing rows under their exact archived view policy.
 --advance-policy explicitly archives an earlier policy before registering new
 source evidence under the current view. Archived outcomes are never regraded.
+--refresh-publication updates display evidence and declared-view coverage while
+preserving verified selected rows and their recorded qualification policy.
 """
 from __future__ import annotations
 
@@ -1177,6 +1179,16 @@ def _current_markdown(result, root, path):
     progress = result.get("atlas_unblocking_progress") if ordinary_current else None
     half_base = result.get("word_half_base_diagnostic") if ordinary_current else None
     original_pr223 = result.get("original_pr223_atlas") if ordinary_current else None
+    declared = result.get("declared_view", {})
+    if ordinary_current and declared and declared["policy_fingerprint"] != result["policy_fingerprint"]:
+        recorded_totals = "/".join(str(len(result["tier_requirements"][tier])) for tier in tiers)
+        declared_totals = "/".join(str(len(declared["tier_requirements"].get(tier, []))) for tier in tiers)
+        additions = [task for names in declared["added_required_tasks"].values() for task in names]
+        lines += [f"The declared view is revision **{declared['revision']} ({declared_totals})**. "
+                  f"Ordinary scores below retain their measured revision **{result['view_revision']} ({recorded_totals})**. "
+                  "Additional required cells are **UNKNOWN** for every ordinary family: " +
+                  ", ".join(f"`{task}`" for task in additions) + ". "
+                  "Standalone API results keep their own source, recipe and runtime; they do not fill these cells.", ""]
     if ordinary_current:
         lines += ["Each row keeps its own configuration, source, representation and measured scope. "
                   "Required denominators stay fixed; diagnostic and ordinary qualification scores remain separate.", "",
@@ -1188,6 +1200,26 @@ def _current_markdown(result, root, path):
             lines += _atlas_progress_markdown(progress, root, path, half_base=half_base)
         elif half_base:
             lines.append(_half_base_score_line(half_base, root, path))
+        for score in result.get("standalone_api_scores", []):
+            row, case = score["run"], score["case"]
+            readout = os.path.relpath(root / score["readout"], path.parent)
+            gif = os.path.relpath(root / score["gif"], path.parent)
+            metrics = row["final_metrics"]
+            terminal = row["terminal_metrics"]
+            passing = sum(observation["passed"] for observation in terminal)
+            bound = next((value for name, op, value in case["thresholds"]
+                          if name == "cdf_ks" and op == "<="), None)
+            fidelity = (f" · KS {metrics['cdf_ks']:.5f} / ≤ {bound}"
+                        if "cdf_ks" in metrics and bound is not None else "")
+            label = f"{score['trainer_family'].upper()} · {case['title']}"
+            status = row["verdict"]
+            prior = score["prior"]
+            representation = f"MoG (fixed σ {prior['sigma']})" if prior["kind"] == "mog" else "Particles"
+            lines.append(f"| [{cell(label)}]({readout}) | {representation} | "
+                         f"**{int(status == 'PASS')}/1 PASS · {status} 1** · standalone API · "
+                         f"{row['runtime']['device']} · {row['completed_updates']:,} updates · "
+                         f"terminal {passing}/{len(terminal)}{fidelity}<br>"
+                         f"[Actual-training histogram GIF]({gif}) · no ordinary tier credit |")
     else:
         lines += ["Each cell retains **passes / full required total** or **status (N required)** from one selected configuration. "
              "Mixed cells show the counts of failed, blocked and unmeasured tasks. " +
@@ -1261,12 +1293,15 @@ def _current_markdown(result, root, path):
     if progress:
         lines += _policy_score_scope(root, path, half_base=half_base)
     if ordinary_current:
+        required = declared.get("tier_requirements", result["tier_requirements"])
+        required_totals = "/".join(str(len(required.get(tier, []))) for tier in tiers)
+        required_count = sum(len(names) for names in required.values())
         lines += ["## Qualification and scope", "",
                   "MoG + particles (per task) denotes separate declared host laws within a suite; "
                   "it does not assert a hybrid model. The release-0.7 cloud-labelled row retains its "
                   "archived MoG declaration. BLOCKED rows show requested representations, not successful execution.", "",
-                  "Before shipping defaults, one unchanged family/configuration tuple must satisfy all 26 required "
-                  "5/19/2 gates with compatible source, runtime and serving evidence, followed by the separate "
+                  f"Before shipping defaults, one unchanged family/configuration tuple must satisfy all {required_count} required "
+                  f"{required_totals} gates with compatible source, runtime and serving evidence, followed by the separate "
                   "calibration and robustness requirements. Named diagnostic rows do not pool passing cells "
                   "across families or sources and grant no ordinary tier, default or speed credit.", ""]
         if result.get("completed_api_studies"):
@@ -1290,7 +1325,8 @@ def _current_markdown(result, root, path):
               f"[Evidence and archived publication identities]({os.path.relpath(root / EVIDENCE_MANIFEST, path.parent)})", "",
               "Regenerate this same leaderboard from committed evidence, without training or raw-log hydration:", "",
               "```sh", "python reports/forge/regenerate_technique_inventory.py" +
-              (" --recorded-policy " + shlex.quote(recorded_policy) if recorded_policy else ""), "```", "",
+              (" --recorded-policy " + shlex.quote(recorded_policy) if recorded_policy else
+               " --refresh-publication" if result.get("publication_refresh") else ""), "```", "",
               ("This command uses the exact archived policy and registered snapshots; it does not resolve new declarations. "
                "New evidence for a later view revision requires its own compatible evidence registration."
                if recorded_policy else
@@ -1381,7 +1417,8 @@ def _shared_score_intro(root, result):
                         "reserve zero: GPU0 **234.82608077581972 / 7500**, GPU1 **675.4130623831879 / 3000**. "
                         "The half-base contrast has no completed measurement in these tables.\n\n")
     scope = ("## Qualification and accounting\n\n"
-             "Each model/configuration keeps its own source, law and full 26-slot denominator. "
+             "Each model/configuration keeps its own source, law and declared denominator. "
+             "Existing C6 diagnostics retain their 26-slot protocol; standalone API rows use their own task gates. "
              "MoG + particles (per task) is a mixture of separate suite hosts, not a hybrid-model claim. "
              "Named diagnostic passes do not fill ordinary cells or combine into a family score. "
              "INVALID supplies no accepted numerical grade; original N5 word execution remains BLOCKED. "
@@ -1390,6 +1427,129 @@ def _shared_score_intro(root, result):
              "[Historical report archive](ARCHIVED_REPORTS.md) · [Original snapshot index](index.json). "
              "The archived source, scores, costs and links retain their original bytes and separate scopes.\n")
     return path, leading + scope
+
+
+def _standalone_api_scores(root):
+    """Project source-pinned API receipts without training, rescoring or selection."""
+    scores = []
+    for path in sorted((root / "reports/forge/records").glob("*.json")):
+        record = read_json(path)
+        if record.get("evidence_scope") != "standalone_api" or record.get("goal") != "discriminator_stability":
+            continue
+        if record.get("qualification_input") is not False or record.get("qualification_reuse") is not False:
+            raise ValueError("standalone API display cannot confer qualification")
+        source = record["source"]
+        publication = (root / source["path"]).resolve()
+        if (not publication.is_relative_to(root / "reports/toy_audit/api_contract")
+                or file_hash(publication) != source["sha256"]):
+            raise ValueError("standalone API publication identity mismatch")
+        report = read_json(publication)
+        if report.get("schema") != "particlegan_api_toy_supplement_v1":
+            raise ValueError("unsupported standalone API publication")
+        cases = {case["id"]: case for case in report["cases"]}
+        if len(cases) != len(report["cases"]) or len(report["runs"]) != 1:
+            raise ValueError("standalone API display requires one exact run")
+        row = report["runs"][0]
+        case = cases[row["id"]]
+        identity = report["source_identities"][row["source_identity"]]
+        provenance = record["provenance"]
+        if (row["qualification_input"] is not False
+                or row["source_identity"] != provenance["source_identity"]
+                or identity["commit"] != provenance["source_commit"]
+                or stable_hash(row["recipe"]) != provenance["recipe_sha256"]
+                or row["raw_receipt_sha256"] != provenance["raw_receipt_sha256"]
+                or case["task_sha256"] != provenance["task_sha256"]
+                or row["verdict"] != record["task_results"][0]["gate_status"]):
+            raise ValueError("standalone API recipe/source/verdict binding mismatch")
+        if row["verdict"] not in {"PASS", "FAIL"}:
+            raise ValueError("standalone API display requires a recorded numerical verdict")
+        prior = provenance["prior"]
+        expected_kind = {"mog": "mog", "particle_cloud": "particles"}.get(prior["kind"])
+        if (row["recipe"].get("prior_kind") != expected_kind
+                or row["prior_options"].get("sigma") != prior["sigma"]
+                or row["recipe"].get("standardize") != prior["standardize"]):
+            raise ValueError("standalone API prior binding mismatch")
+        gif = (publication.parent / row["gif"]).resolve()
+        if (not gif.is_relative_to(root / "reports/toy_audit/api_contract")
+                or file_hash(gif) != row["gif_sha256"]):
+            raise ValueError("standalone API GIF identity mismatch")
+        readout = publication.parent / "README.md"
+        if not readout.is_file():
+            raise ValueError("standalone API readout is missing")
+        scores.append({"record": str(path.relative_to(root)), "record_sha256": file_hash(path),
+                       "publication": str(publication.relative_to(root)), "publication_sha256": source["sha256"],
+                       "readout": str(readout.relative_to(root)), "readout_sha256": file_hash(readout),
+                       "gif": str(gif.relative_to(root)), "trainer_family": record["trainer_family"],
+                       "prior": prior, "case": case, "run": row, "qualification_input": False})
+    return scores
+
+
+def refresh_publication(root=REPOSITORY_ROOT, *, view_id="discriminator_stability"):
+    """Refresh the same board while preserving every registered scientific row."""
+    from experiments.forge.trainer_families import CURRENT_SELECTION, scientific_row_hash
+    from experiments.forge.views import load_view
+    root = Path(root).resolve()
+    manifest = read_json(root / EVIDENCE_MANIFEST)
+    result = read_json(root / CURRENT_PREFIX.with_suffix(".json"))
+    if result.get("view") != view_id or manifest.get("view") != view_id:
+        raise ValueError("refresh must retain the registered publication view")
+    copy = deepcopy(result)
+    claimed = copy["provenance"].pop("input_digest", None)
+    if claimed != stable_hash(copy):
+        raise ValueError("current publication input digest mismatch")
+    if result.get("publication_scope") != "current_technique_inventory" or result.get("recorded_policy"):
+        raise ValueError("refresh requires the current registered publication")
+    if any(result.get(key) != manifest[key] for key in POLICY_FIELDS):
+        raise ValueError("current publication differs from its registered evidence policy")
+    if result["provenance"]["evidence_manifest_sha256"] != stable_hash(manifest):
+        raise ValueError("registered evidence changed; use ordinary regeneration")
+    selection_hash = result["provenance"].get("family_current_selection_sha256")
+    if selection_hash is not None and file_hash(root / CURRENT_SELECTION) != selection_hash:
+        raise ValueError("family selection changed; use ordinary regeneration")
+    registered = set()
+    for entry in manifest["cohorts"]:
+        _, rows = _snapshot(root, entry, manifest)
+        registered.update(scientific_row_hash(row) for row in rows.values())
+    for key in ("rows", "configuration_rows", "evidence_rows"):
+        if any(scientific_row_hash(row) not in registered for row in result[key]):
+            raise ValueError("current publication contains an unregistered scientific row")
+    archived = set()
+    for _, _, _, rows in _archived_reports(root, manifest):
+        archived.update(scientific_row_hash(row) for row in rows.values())
+    for original in result.get("archived_evidence_rows", []):
+        row = deepcopy(original)
+        row.pop("evidence_policy", None)
+        if scientific_row_hash(row) not in archived:
+            raise ValueError("current publication contains an unregistered archived row")
+    declared = load_view(root, manifest["view"])
+    if stable_hash(declared) != manifest["policy_fingerprint"]:
+        frozen = root / "configs/forge/view-history" / f"{manifest['view']}-v{manifest['view_revision']}.json"
+        if (declared["revision"] <= manifest["view_revision"]
+                or not frozen.is_file() or stable_hash(read_json(frozen)) != manifest["policy_fingerprint"]):
+            raise ValueError("declared-view refresh requires the exact archived publication policy")
+    requirements = {tier: [row["task"] for row in sorted(declared["assignments"], key=lambda row: row.get("order", 0))
+                           if str(row["qualification_tier"]) == tier and row["importance"] == "required"]
+                    for tier in result["tier_requirements"]}
+    result["declared_view"] = {"revision": declared["revision"], "policy_fingerprint": stable_hash(declared),
+                               "tier_requirements": requirements,
+                               "added_required_tasks": {tier: [name for name in names if name not in manifest["tier_requirements"][tier]]
+                                                        for tier, names in requirements.items()}}
+    result["standalone_api_scores"] = _standalone_api_scores(root)
+    result["publication_refresh"] = {"scientific_rows_preserved": True, "qualification_regraded": False,
+                                     "training_launched": False}
+    result["provenance"]["publication_reducer_sha256"] = file_hash(Path(__file__))
+    result["provenance"].pop("input_digest", None)
+    result["provenance"]["input_digest"] = stable_hash(result)
+    json_path, markdown_path = root / CURRENT_PREFIX.with_suffix(".json"), root / CURRENT_PREFIX.with_suffix(".md")
+    markdown = _current_markdown(result, root, markdown_path)
+    shared = _shared_score_intro(root, result) if result["view"] == "discriminator_stability" else None
+    _write_changed(json_path, _json_text(result))
+    _write_changed(markdown_path, markdown)
+    if shared:
+        _write_changed(*shared)
+    return {"report": str(markdown_path), "json": str(json_path), "rows": len(result["rows"]),
+            "input_digest": result["provenance"]["input_digest"], "qualification_reuse": False,
+            **result["publication_refresh"]}
 
 
 def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discriminator_stability",
@@ -1637,6 +1797,7 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
     if completed_studies:
         result["completed_api_studies"] = completed_studies
     if not recorded_policy and view_id == "discriminator_stability":
+        result["standalone_api_scores"] = _standalone_api_scores(root)
         from experiments.forge import publication_memory
         passive = publication_memory.load_passive_publications(root)
         if passive:
@@ -1705,7 +1866,14 @@ def main(argv=None):
                         help="rebuild registered rows under this exact archived view policy, without resolving live declarations")
     parser.add_argument("--advance-policy", action="store_true",
                         help="with --source-commit, archive earlier policy cohorts and register evidence for the current view revision")
+    parser.add_argument("--refresh-publication", action="store_true",
+                        help="refresh displayed evidence and view coverage, preserving registered scores and selections")
     args = parser.parse_args(argv)
+    if args.refresh_publication:
+        if args.source_commit or args.recorded_policy or args.advance_policy or args.device != "all":
+            parser.error("--refresh-publication preserves the existing cohorts; source, policy and device overrides are unsupported")
+        print(_json_text(refresh_publication(args.root, view_id=args.goal)), end="")
+        return
     print(_json_text(publish_current(args.root, view_id=args.goal,
                                 execution_backend=None if args.device == "all" else args.device,
                                 source_commit=args.source_commit, recorded_policy=args.recorded_policy,

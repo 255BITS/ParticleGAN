@@ -69,7 +69,13 @@ provenance and the actual-training GIF. The existing
 [current solution leaderboard](../../../forge/technique-inventory.md) retains
 its source-bound revision-3 results. The [archived view](../../../../configs/forge/view-history/discriminator_stability-v3.json)
 preserves that exact five-task policy. Revision 4's additional scalar cell is
-unmeasured in ordinary qualification; the standalone result does not fill it.
+unmeasured in ordinary qualification; the standalone result has its own row and
+does not fill it. Refresh the same leaderboard without training or regrading:
+
+```sh
+python reports/forge/regenerate_technique_inventory.py --refresh-publication
+```
+
 This task readout creates no competing ranking.
 
 ## Completed result

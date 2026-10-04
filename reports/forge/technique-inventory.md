@@ -1,5 +1,7 @@
 # Current model/configuration scores
 
+The declared view is revision **4 (6/19/2)**. Ordinary scores below retain their measured revision **3 (5/19/2)**. Additional required cells are **UNKNOWN** for every ordinary family: `gaussian1d_acquisition`. Standalone API results keep their own source, recipe and runtime; they do not fill these cells.
+
 Each row keeps its own configuration, source, representation and measured scope. Required denominators stay fixed; diagnostic and ordinary qualification scores remain separate.
 
 | Model/configuration | Actual representation | Measured score/status and scope |
@@ -12,6 +14,7 @@ Each row keeps its own configuration, source, representation and measured scope.
 | [`atlas_multibank` · C6 · `fb7acc77`](atlas-named-gpu-diagnostics-native-v4b-20261004/README.md) | Particles (two routed clouds) | **1/26 PASS** · NOT_RUN 25<br>Named-family diagnostic · goal GIFs: [cover_leftover](atlas-named-gpu-diagnostics-native-v4b-20261004/gifs/cover_leftover_multibank_policy_v1.gif) |
 | [`atlas_word_joint_min11` · C6 · `fb7acc77`](atlas-word-retained-context-20261004/README.md) | Particles (N11 joint cloud; free encoder) | **INVALID 1** · NOT_RUN 25 · numerical gate UNAVAILABLE<br>Named-family diagnostic · retained INVALID illustration: [five_word_joint_acquisition](atlas-word-retained-context-20261004/word-retained-goal.gif) |
 | [half_base LR .00265625 / prior1.5 / D1 · source `f9f7ed9d`](word-half-base-20261004/README.md) | Particles (N11 joint cloud; free encoder) | **0/26 PASS** · FAIL 1 · NOT_RUN 25 · COMPLETE<br>Final quality 0.546875 · modes 2/5 · mass TV 0.622266 · all-five exact 0<br>[accepted 20,001-update goal GIF](word-half-base-20261004/media/goal.gif) |
+| [K3P · 1-D Gaussian: histogram matching](../toy_audit/api_contract/gaussian1d/README.md) | MoG (fixed σ 0.025) | **0/1 PASS · FAIL 1** · standalone API · cpu · 1,000 updates · terminal 3/5 · KS 0.05674 / ≤ 0.05<br>[Actual-training histogram GIF](../toy_audit/api_contract/gaussian1d/goal.gif) · no ordinary tier credit |
 | BCap · [bcap · 08689a73c551](../../configs/forge/configurations/bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212.json)<br>cuda · ordinary qualification | MoG + particles (per task) | Tier 1: 3/5<br>FAIL 1 · UNKNOWN 1<br>Tier 2: UNKNOWN (19 required)<br>Tier 3: UNKNOWN (2 required)<br>Recorded tier: 0 · [source](technique-inventory.json) |
 | E22 · [e22](../../configs/forge/ideas/e22.json)<br>cuda · ordinary qualification | Particles | Tier 1: BLOCKED (5 required)<br>Tier 2: BLOCKED (19 required)<br>Tier 3: BLOCKED (2 required)<br>Recorded tier: 0 · [source](technique-inventory.json) |
 | GAN v3 release 0.7 (MoG) · [release07-gan-v3-mog · 1e266b5a2986](../../configs/forge/configurations/release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c.json)<br>cuda · ordinary qualification | MoG + particles (per task) | Tier 1: 3/5<br>FAIL 1 · UNKNOWN 1<br>Tier 2: UNKNOWN (19 required)<br>Tier 3: UNKNOWN (2 required)<br>Recorded tier: 0 · [source](technique-inventory.json) |
@@ -30,7 +33,7 @@ The C6 diagnostic/reference changes rates to LR .0053125 / prior-rate 1.5 and di
 
 MoG + particles (per task) denotes separate declared host laws within a suite; it does not assert a hybrid model. The release-0.7 cloud-labelled row retains its archived MoG declaration. BLOCKED rows show requested representations, not successful execution.
 
-Before shipping defaults, one unchanged family/configuration tuple must satisfy all 26 required 5/19/2 gates with compatible source, runtime and serving evidence, followed by the separate calibration and robustness requirements. Named diagnostic rows do not pool passing cells across families or sources and grant no ordinary tier, default or speed credit.
+Before shipping defaults, one unchanged family/configuration tuple must satisfy all 27 required 6/19/2 gates with compatible source, runtime and serving evidence, followed by the separate calibration and robustness requirements. Named diagnostic rows do not pool passing cells across families or sources and grant no ordinary tier, default or speed credit.
 
 Atlas's historical study has **19/19 original PASS**. The later C6 broad hold has **2/2 hold FAIL**, with six other domains UNKNOWN per family. See [completed source-bound studies](#completed-source-bound-studies) for the exact protocols and original goal GIFs. These separate results do not fill ordinary qualification.
 
@@ -43,12 +46,12 @@ BLOCKED means execution was incompatible or a prerequisite was unavailable. NOT 
 Regenerate this same leaderboard from committed evidence, without training or raw-log hydration:
 
 ```sh
-python reports/forge/regenerate_technique_inventory.py
+python reports/forge/regenerate_technique_inventory.py --refresh-publication
 ```
 
 For ordinary Forge qualification, use `--source-commit <executed-commit>` to independently regrade hydrated original receipts and update this leaderboard. Reusable candidates use the same complete task ladder. Historical task-only diagnostics remain motivation and reproduction evidence. Source snapshots are provenance, not additional leaderboards.
 
-Publication input digest `95d14600e1f0167d326c2948f058a6adf9fcf33a8dcaf5229f4103f448c025c6`.
+Publication input digest `52939580d600d1d7f749076ee72c9d53ef7a2f6f5b5dfa66bc419c610fe699a4`.
 
 The [whole-family repair readout](family-wide-word-repairs/README.md) records the ordinary candidate attempts and bounded global configuration search. Their complete rows remain unranked alternatives below and in the companion JSON; a failed replacement does not make its historical incumbent a qualified standard.
 

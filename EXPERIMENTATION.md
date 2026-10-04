@@ -438,8 +438,8 @@ scientific ranking or default adoption.
 # Read-only cost/coverage plan, then explicit gated execution.
 python -m experiments.forge inventory plan --through-tier 3
 python -m experiments.forge inventory run --through-tier 3 --gpus 0,1
-# Regenerate the single current publication from registered compact evidence.
-python reports/forge/regenerate_technique_inventory.py
+# Refresh the single current publication without changing saved qualification.
+python reports/forge/regenerate_technique_inventory.py --refresh-publication
 python -m experiments.forge logs --follow --campaign technique-inventory-v1
 ```
 
@@ -470,6 +470,11 @@ To advance a published view policy, register its measured source explicitly with
 and their original denominators are archived unchanged; their results cannot
 fill new requirements. `--recorded-policy` only regenerates evidence for the
 manifest's exact policy and cannot be combined with new-source registration.
+Use `--refresh-publication` to update the displayed task coverage and standalone
+API results while retaining the registered scientific rows and family selections.
+It verifies the immutable evidence snapshots and exact archived policy, launches
+no training and does not regrade receipts. New required cells remain unknown
+until compatible ordinary evidence is explicitly registered.
 
 The original default inventory campaign has explicit reservation ceilings for
 its 12-technique roster. New techniques require checking the expanded plan and
