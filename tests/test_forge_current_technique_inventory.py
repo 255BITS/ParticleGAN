@@ -971,7 +971,7 @@ def test_sealed_half_base_is_additive_keeps_invalid_and_charges_predecessors_onc
     markdown = (root / "reports/forge/technique-inventory.md").read_text()
     assert "**0/26 PASS** · FAIL 1 · NOT_RUN 25 · COMPLETE" in markdown
     assert "**INVALID 1** · NOT_RUN 25 · numerical gate UNAVAILABLE" in markdown
-    assert "Final quality 0.546875 · modes 2/5 · mass TV 0.622266 · paired exact 0" in markdown
+    assert "Final quality 0.546875 · modes 2/5 · mass TV 0.622266 · all-five exact 0" in markdown
     assert "original C6 N11 illustration has no accepted numerical grade" in markdown
     outputs = _outputs(root)
     publication.publish_current(root)
