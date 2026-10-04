@@ -675,8 +675,24 @@ ATLAS_PROGRESS_INPUTS = {
 }
 
 
+def _representation_kind(prior):
+    """Read the declared law; family names are not representation evidence."""
+    kind = (prior or {}).get("kind")
+    return {"mog": "MoG", "particle_cloud": "Particles", "particles": "Particles"}.get(kind, "UNKNOWN")
+
+
+def _ordinary_representation(result, row):
+    reference = _representation_kind(row.get("bindings", {}).get("prior"))
+    if reference != "MoG":
+        return reference
+    contracts = result.get("task_contracts", {})
+    task_kinds = {_representation_kind(contracts.get(digest, {}).get("prior"))
+                  for digest in row.get("bindings", {}).get("task_contracts", {}).values()}
+    return "MoG + particles (per task)" if "Particles" in task_kinds else reference
+
+
 def _atlas_unblocking_progress(root):
-    """Project immutable diagnostic question coverage, never qualification rows."""
+    """Project separate source-scoped model scores, never qualification rows."""
     directory = Path(root) / "reports/forge"
     paths = {key: directory / values[0] for key, values in ATLAS_PROGRESS_INPUTS.items()}
     if not any(path.exists() for path in paths.values()):
@@ -703,6 +719,20 @@ def _atlas_unblocking_progress(root):
             or {tier: row["required"] for tier, row in baseline["tier_counts"].items()}
                != {"1": 5, "2": 19, "3": 2}):
         raise ValueError("Atlas baseline diagnostic denominator changed")
+    executed = [case for case in baseline["cases"] if case["diagnostic_status"] in {"PASS", "FAIL"}]
+    if (len(executed) != 18 or any(
+            _representation_kind(case["applied"].get("prior")) != "Particles"
+            or case["applied"]["prior"].get("sigma") != 0.0
+            or case["applied_recipe"].get("prior_kind") != "particles"
+            or case["applied_recipe"].get("standardize") is not False
+            or case["applied_recipe"].get("sigma_rel") != 0.0 for case in executed)):
+        raise ValueError("Atlas baseline representation requires its actual applied particle law")
+    baseline_representation = dict(label="Particles", evidence_source="actual applied priors and complete Recipes",
+        report=inputs["baseline"]["report"], report_sha256=inputs["baseline"]["sha256"],
+        cases={case["id"]: dict(prior=case["applied"]["prior"],
+                               applied_recipe_sha256=case["applied_recipe_sha256"],
+                               frozen_definition=case["frozen_definition"])
+               for case in executed})
     for key in ("adaptations_v3", "adaptations_v4b"):
         report = reports[key]
         if (report["counts"]["required_family_cells"] != 130
@@ -722,22 +752,70 @@ def _atlas_unblocking_progress(root):
     rows = []
     for label, family, key, parents, cohort in groups:
         report = reports[key]
+        family_report = report["families"][family]
         required = [parent + "_" + cohort for parent in parents]
-        statuses = [report["families"][family]["slots"][task]["diagnostic_status"] for task in required]
-        rows.append(dict(label=label, family=family, cohort=cohort, task_ids=required, required=len(required),
-                         passed=statuses.count("PASS"), counts=dict(Counter(statuses)), source=report["source"],
-                         readout=inputs[key]["readout"], qualification_input=False))
+        statuses = [family_report["slots"][task]["diagnostic_status"] for task in required]
+        declarations = {task: report["questions"][task] for task in required}
+        kinds = {_representation_kind(question["prior"]) for question in declarations.values()}
+        if len(kinds) != 1 or "UNKNOWN" in kinds:
+            raise ValueError("Named model representation requires its declared question laws")
+        representation = next(iter(kinds))
+        if family == "atlas_ae_routed":
+            representation = "MoG (fixed σ .025; routed AE)"
+        elif family == "atlas_conditional":
+            representation = "Particles (conditional clouds / role banks)"
+        elif family == "atlas_routed":
+            representation = "Particles (shared / slot parameter bank)"
+        elif family == "atlas_multibank":
+            representation = "Particles (two routed clouds)"
+        else:
+            representation = "Particles (N11 joint cloud; free encoder)"
+        media, applied = {}, {}
+        for attempt in family_report["attempts"]:
+            outcome = attempt.get("outcome", {})
+            task = outcome.get("task_id")
+            if task in required:
+                actual = outcome["applied"]
+                if (_representation_kind({"kind": actual["recipe"].get("prior_kind")})
+                        != _representation_kind(declarations[task]["prior"])
+                        or actual.get("prior") and _representation_kind(actual["prior"])
+                           != _representation_kind(declarations[task]["prior"])):
+                    raise ValueError("Named representation conflicts with its actual applied owner law")
+                applied[task] = dict(recipe=outcome["applied"]["recipe"],
+                                     table_ownership=outcome["applied"].get("table_ownership"),
+                                     prior=outcome["applied"].get("prior"))
+                media[task] = dict(outcome["gif_publication"],
+                    path=(Path(inputs[key]["report"]).parent / outcome["gif_publication"]["path"]).as_posix())
+        rows.append(dict(label=label, family=family, cohort=cohort, task_ids=required, required=26,
+                         targeted_required=len(required), passed=statuses.count("PASS"),
+                         targeted_counts=dict(Counter(statuses)), counts=family_report["counts"],
+                         source=report["source"], readout=inputs[key]["readout"], media=media,
+                         representation=dict(label=representation, report=inputs[key]["report"],
+                            report_sha256=inputs[key]["sha256"],
+                            declarations={task: dict(prior=q["prior"], policy_contract=q["policy_contract"],
+                                execution_sha256=q["execution_sha256"], evaluation_sha256=q["evaluation_sha256"])
+                                for task, q in declarations.items()}, applied=applied),
+                         qualification_input=False))
     word = reports["word_context"]
-    if (rows[-1]["counts"] != {"INVALID": 1} or word["execution_status"] != "INVALID"
+    if (rows[-1]["targeted_counts"] != {"INVALID": 1} or word["execution_status"] != "INVALID"
             or word["certified_numerical_gate"] != "UNAVAILABLE"
             or any(word["source"].get(key) != value
                    for key, value in reports["adaptations_v4b"]["source"].items())
             or word["raw_reported_clock"]["completed_steps"] != 20001
+            or word["actual_prior_rows"] != 11 or word["canonical_target_words"] != 5
             or set(word["raw_reported_clock"]["optimizer_updates"].values()) != {20001}):
         raise ValueError("Atlas retained word clock/grade/source identity changed")
-    return dict(schema_version=1, scope="retained_question_coverage_across_distinct_named_sources",
-                baseline=dict(required=26, counts=counts, source=baseline["source"], readout=inputs["baseline"]["readout"]),
-                adaptations=rows, passed=sum(row["passed"] for row in rows), required=sum(row["required"] for row in rows),
+    illustration = word["retained_illustration"]
+    rows[-1]["media"][word["task_id"]] = dict(path=(Path(inputs["word_context"]["report"]).parent /
+        illustration["path"]).as_posix(), sha256=illustration["sha256"], bytes=illustration["bytes"],
+        accepted_numeric_verdict="UNAVAILABLE", caption_required=True)
+    return dict(schema_version=2, scope="separate_source_scoped_model_scores",
+                baseline=dict(required=26, counts=counts, source=baseline["source"],
+                              candidate_id=baseline["candidate_id"],
+                              shared_recipe_overrides=baseline["shared_recipe_overrides"],
+                              representation=baseline_representation,
+                              readout=inputs["baseline"]["readout"]),
+                adaptations=rows,
                 word=dict(status="INVALID", numerical_gate="UNAVAILABLE", raw_completed_steps=20001,
                           recorded_endpoint=word["recorded_endpoint"], readout=inputs["word_context"]["readout"]),
                 inputs=inputs, qualification_input=False, qualification_reuse=False,
@@ -749,30 +827,31 @@ def _atlas_progress_markdown(progress, root, path):
         return os.path.relpath(root / relative, path.parent)
     baseline = progress["baseline"]
     counts = baseline["counts"]
-    lines = ["## Atlas unblocking progress", "",
-             f"The [initial 26-question policy GPU baseline]({link(baseline['readout'])}) recorded "
-             f"**{counts['PASS']} PASS / {counts['FAIL']} FAIL / {counts['BLOCKED']} BLOCKED**. "
-             f"Adaptations have since met **{progress['passed']}/{progress['required']} previously blocked question gates** "
-             "across distinct named families and retained sources. This is question coverage; "
-             "the results do not combine into one qualified family or configuration.", "",
-             "| Adaptation | Retained question gates | Source | Evidence |",
-             "| --- | --- | --- | --- |"]
+    lines = ["## Selected-policy GPU scores", "",
+             "Each row keeps its own configuration, execution source and 26 required slots. "
+             "These diagnostic scores remain separate from ordinary qualification.", "",
+             "| Model/configuration | Representation | Measured scores |",
+             "| --- | --- | --- |",
+             f"| [Atlas C6 · `{baseline['source']['origin_commit'][:8]}`]({link(baseline['readout'])}) "
+             f"| {baseline['representation']['label']} | **{counts['PASS']}/26 PASS** · "
+             f"FAIL {counts['FAIL']} · BLOCKED {counts['BLOCKED']} "
+             f"· [source and 18 goal GIFs]({link(baseline['readout'])}) |"]
     for row in progress["adaptations"]:
-        gates = f"{row['passed']}/{row['required']} PASS"
+        gates = f"**{row['passed']}/{row['required']} PASS** · NOT_RUN {row['counts'].get('NOT_RUN', 0)}"
         readout = row["readout"]
         if row["family"] == "atlas_word_joint_min11":
-            gates = "INVALID; 20,001 updates; raw goals miss; numerical gate UNAVAILABLE"
+            gates = "**INVALID 1** · NOT_RUN 25 · numerical gate UNAVAILABLE"
             readout = progress["word"]["readout"]
-        lines.append(f"| {row['label']} | {gates} | `{row['source']['origin_commit'][:8]}` | "
-                     f"[Readout and actual goal GIFs]({link(readout)}) |")
-    lines += ["", "The ordinary MoG/clean-live task bindings below are incompatible with Atlas's "
-              "particle-cloud and selected-policy serving law. The adapters declare their different priors, "
-              "owners and resources explicitly; original N5 word execution remains BLOCKED. "
-              "The N11 word clock and raw missed goals do not override its INVALID execution status.", "",
-              "Before shipping defaults, one unchanged family/configuration tuple must satisfy all 26 required "
-              "5/19/2 gates with compatible source, runtime and serving evidence, followed by the separate "
-              "calibration and robustness requirements. Speed selection additionally requires matched timing "
-              "evidence. No diagnostic result above grants ordinary tier, default or speed credit.", ""]
+        media_label = "retained INVALID illustration" if row["family"] == "atlas_word_joint_min11" else "goal GIFs"
+        media = " · ".join(f"[{task.split('_' + row['cohort'])[0]}]({link(pin['path'])})"
+                           for task, pin in sorted(row["media"].items()))
+        lines.append(f"| [`{row['family']}` · C6 · `{row['source']['origin_commit'][:8]}`]({link(readout)}) "
+                     f"| {row['representation']['label']} | {gates}<br>{media_label}: {media} |")
+    lines += ["", "C6 is the fixed LR .0053125 / prior-rate 1.5 configuration with declared host-specific "
+              "Recipe fields. Representation labels come from the pinned applied priors, Recipes and "
+              "routed table owners; a parameter bank is not a sampled MoG. "
+              "[Full source and representation bindings](" + link("reports/forge/technique-inventory.json") + "). "
+              "Original N5 word execution remains BLOCKED. The N11 illustration has no accepted numerical grade.", ""]
     return lines
 
 
@@ -804,8 +883,10 @@ def _current_markdown(result, root, path):
         return str(value if value is not None else "unknown").replace("|", "\\|").replace("\n", " ")
     tiers = list(result["tier_requirements"])
     recorded_policy = result.get("recorded_policy")
+    ordinary_current = not recorded_policy and result["view"] == "discriminator_stability"
     title = "Recorded" if recorded_policy else "Current"
-    lines = [f"# {title} Forge trainer-family leaderboard", ""]
+    lines = ["# Current model/configuration scores" if ordinary_current else
+             f"# {title} Forge trainer-family leaderboard", ""]
     if recorded_policy:
         denominators = ", ".join(f"Tier {tier}: {len(result['tier_requirements'][tier])}" for tier in tiers)
         policy_link = os.path.relpath(root / recorded_policy, path.parent)
@@ -813,26 +894,27 @@ def _current_markdown(result, root, path):
                   f"with recorded required denominators **{denominators}**. "
                   "Current task placement is listed in [experiments by tier](EXPERIMENTS_BY_TIER.md). "
                   "The recorded outcomes supply no qualification for a later view revision.", ""]
-    if result.get("completed_api_studies"):
+    if result.get("completed_api_studies") and not ordinary_current:
         lines += ["Atlas's historical study has **19/19 original PASS**. The later C6 broad hold has "
                   "**2/2 hold FAIL**, with six other domains UNKNOWN per family. "
                   "See [completed source-bound studies](#completed-source-bound-studies) for the exact "
                   "protocols and original goal GIFs. These separate results do not fill the ordinary "
                   "qualification cells below.", ""]
-    ordinary_current = not recorded_policy and result["view"] == "discriminator_stability"
     progress = result.get("atlas_unblocking_progress") if ordinary_current else None
-    if progress:
-        lines += _atlas_progress_markdown(progress, root, path)
     if ordinary_current:
-        lines += ["## Ordinary MoG qualification", ""]
-    lines += ["Each cell retains **passes / full required total** or **status (N required)** from one selected configuration. "
+        lines += ["One selected configuration per family; full tier denominators stay fixed. "
+                  "Representation is read from its declared prior and task-owned hosts.", "",
+                  "| Model/configuration | Representation | Measured scores |",
+                  "| --- | --- | --- |"]
+    else:
+        lines += ["Each cell retains **passes / full required total** or **status (N required)** from one selected configuration. "
              "Mixed cells show the counts of failed, blocked and unmeasured tasks. " +
              ("Each trainer family and runtime has one archived row; its alternatives remain recorded separately. "
               if recorded_policy else "Each formulation family has one current selected row; source and runtime alternatives remain unranked. ") +
              "Expand the configuration details below for selection, provenance, other outcomes and cost.", "",
              "| Trainer family / runtime | " +
              " | ".join(f"Tier {tier}" for tier in tiers) + " | Recorded tier |",
-             "| --- | " + " | ".join("---:" for _ in tiers) + " | ---: |"]
+                 "| --- | " + " | ".join("---:" for _ in tiers) + " | ---: |"]
     details = ["<details>", "<summary>Selected configurations and provenance</summary>", ""]
     for row in result["rows"]:
         source = row.get("bindings", {}).get("source_digest")
@@ -864,13 +946,18 @@ def _current_markdown(result, root, path):
         configuration_link = f"[{configuration_label}]({os.path.relpath(card, path.parent)})"
         backend = runtime.get("execution_backend", "unrecorded")
         baseline_links = _separate_baseline_links(result, row, root, path)
-        adaptation_links = (["[Adaptation progress](#atlas-unblocking-progress)"]
-                            if progress and row.get("trainer_family") == "atlas" else [])
-        family_label = "<br>".join([f"{row['technique']}", backend, *baseline_links, *adaptation_links])
+        family_label = "<br>".join([f"{row['technique']}", backend, *baseline_links])
         values = [family_label,
                   *[_current_tier_cell(row, tier, result["tier_requirements"][tier],
                                       path.with_suffix('.json').name) for tier in tiers],
                   row["qualified_tier"]]
+        if ordinary_current:
+            json_link = os.path.relpath(root / CURRENT_PREFIX.with_suffix(".json"), path.parent)
+            scores = "<br>".join(f"Tier {tier}: " + _current_tier_cell(
+                row, tier, result["tier_requirements"][tier], json_link) for tier in tiers)
+            values = [f"{row['technique']} · {configuration_link}<br>{backend}",
+                      _ordinary_representation(result, row),
+                      scores + f"<br>Recorded tier: {row['qualified_tier']}"]
         lines.append("| " + " | ".join(cell(value) for value in values) + " |")
         details += [f"### {cell(row['technique'])} ({cell(backend)})", "",
                     f"- **Selected configuration:** {configuration_link}",
@@ -883,7 +970,24 @@ def _current_markdown(result, root, path):
         if baseline_links:
             details += ["- **Separate baseline evidence:** " + " · ".join(baseline_links) +
                         "; no current tier credit.", ""]
-    lines += [""] + details + ["</details>", "", "Recorded results remain bound to their actual recipes, priors, initialization, budgets, sampling laws "
+    lines.append("")
+    if progress:
+        lines += _atlas_progress_markdown(progress, root, path)
+    if ordinary_current:
+        lines += ["## Qualification and scope", "",
+                  "MoG + particles (per task) denotes separate declared host laws within a suite; "
+                  "it does not assert a hybrid model. The release-0.7 cloud-labelled row retains its "
+                  "archived MoG declaration. BLOCKED rows show requested representations, not successful execution.", "",
+                  "Before shipping defaults, one unchanged family/configuration tuple must satisfy all 26 required "
+                  "5/19/2 gates with compatible source, runtime and serving evidence, followed by the separate "
+                  "calibration and robustness requirements. Named diagnostic rows do not pool passing cells "
+                  "across families or sources and grant no ordinary tier, default or speed credit.", ""]
+        if result.get("completed_api_studies"):
+            lines += ["Atlas's historical study has **19/19 original PASS**. The later C6 broad hold has "
+                      "**2/2 hold FAIL**, with six other domains UNKNOWN per family. "
+                      "See [completed source-bound studies](#completed-source-bound-studies) for the exact "
+                      "protocols and original goal GIFs. These separate results do not fill ordinary qualification.", ""]
+    lines += details + ["</details>", "", "Recorded results remain bound to their actual recipes, priors, initialization, budgets, sampling laws "
               "and hardware. They do not pool qualification across sources or qualify the latest checkout. "
               "Selection never combines passing tasks or tiers from different configurations. A failed best-observed "
               "configuration is not a qualified winner. Search qualification covers only its declared tuning tiers; "
@@ -936,6 +1040,31 @@ def _current_markdown(result, root, path):
                   "the added broad hold fails on projected-CDF shape excursions. "
                   "The source-bound diagnostic preserves all original gates and supplies no default or speed credit.", ""]
     return "\n".join(lines)
+
+
+def _shared_score_intro(root, result):
+    """Replace only the maintained navigation introduction, retaining its archive."""
+    path = root / "reports/forge/shared-score-index-20261003/README.md"
+    if not path.is_file():
+        return
+    original = path.read_text()
+    marker = "## Completed current Atlas GPU diagnostic\n"
+    if marker not in original:
+        raise ValueError("Shared score index is missing its preserved report boundary")
+    suffix = marker + original.split(marker, 1)[1]
+    leading = _current_markdown(result, root, path).split("## Qualification and scope\n", 1)[0]
+    leading = leading.replace("# Current model/configuration scores", "# Shared ParticleGAN score index", 1)
+    scope = ("## Qualification and accounting\n\n"
+             "Each model/configuration keeps its own source, law and full 26-slot denominator. "
+             "MoG + particles (per task) is a mixture of separate suite hosts, not a hybrid-model claim. "
+             "Named diagnostic passes do not fill ordinary cells or combine into a family score. "
+             "INVALID supplies no accepted numerical grade; original N5 word execution remains BLOCKED. "
+             "No family default or comparable speed winner is established.\n\n"
+             "The named campaign's predecessor-inclusive charge remains **910.2391431590077 / 10500 seconds**, "
+             "reserve zero: GPU0 **234.82608077581972 / 7500**, GPU1 **675.4130623831879 / 3000**. "
+             "Prospective rate proposals are unexecuted and add no measurement to these tables.\n\n"
+             "The linked original report sections and their index.json below retain their separate snapshots.\n\n")
+    return path, leading + scope + suffix
 
 
 def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discriminator_stability",
@@ -1211,12 +1340,16 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
     result["provenance"]["input_digest"] = stable_hash(result)
     json_path, markdown_path = root / CURRENT_PREFIX.with_suffix(".json"), root / CURRENT_PREFIX.with_suffix(".md")
     markdown = _current_markdown(result, root, markdown_path)
+    shared_intro = (_shared_score_intro(root, result)
+                    if not recorded_policy and view_id == "discriminator_stability" else None)
     # Validate all inputs before changing evidence registry or public outputs.
     if pending_snapshot:
         _write_changed(*pending_snapshot)
         _write_changed(manifest_path, json.dumps(manifest, sort_keys=True, indent=2) + "\n")
     _write_changed(json_path, _json_text(result))
     _write_changed(markdown_path, markdown)
+    if shared_intro:
+        _write_changed(*shared_intro)
     return {"report": str(markdown_path), "json": str(json_path), "rows": len(result["rows"]),
             "input_digest": result["provenance"]["input_digest"], "qualification_reuse": False}
 

@@ -177,7 +177,7 @@ def test_completed_studies_cannot_replace_selected_family_configs_or_history(evi
     assert "Five-word joint task diagnostics" not in markdown
     assert "<summary>Selected configurations and provenance</summary>" in markdown
     assert "19/19 original PASS" in markdown and "2/2 new hold FAIL" in markdown
-    assert "19/19 original PASS" in markdown.split("| Trainer family / runtime", 1)[0]
+    assert markdown.index("| Model/configuration | Representation | Measured scores |") < markdown.index("19/19 original PASS")
     outputs = _outputs(root)
     mtimes = {path: path.stat().st_mtime_ns for path in outputs}
     assert publication.publish_current(root) == published
@@ -670,7 +670,7 @@ def test_current_tier_cells_keep_blocked_and_unmeasured_denominators(tmp_path, s
     result = _tier_display_fixture([status] * 5, later=status)
     before = deepcopy(result)
     markdown = publication._current_markdown(result, tmp_path, tmp_path / "reports/forge/table.md")
-    row = next(line for line in markdown.splitlines() if line.startswith("| Atlas<br>"))
+    row = next(line for line in markdown.splitlines() if line.startswith("| Atlas ·"))
     for total in (5, 19, 2):
         assert f"{label} ({total} required)" in row
     assert "FAIL" not in row
@@ -690,7 +690,7 @@ def test_current_tier_cells_show_actual_mixed_gate_counts(tmp_path, statuses, ex
     result = _tier_display_fixture(statuses)
     before = deepcopy(result)
     markdown = publication._current_markdown(result, tmp_path, tmp_path / "reports/forge/table.md")
-    row = next(line for line in markdown.splitlines() if line.startswith("| Atlas<br>"))
+    row = next(line for line in markdown.splitlines() if line.startswith("| Atlas ·"))
     assert expected in row
     assert "UNKNOWN (19 required)" in row and "UNKNOWN (2 required)" in row
     assert result == before
@@ -715,13 +715,13 @@ def test_main_policy_rows_link_separate_history_and_failed_hold_without_credit()
     assert {row["trainer_family"] for row in result["rows"]} == {"atlas", "e22"}
     before = deepcopy(result)
     markdown = publication._current_markdown(result, ROOT, ROOT / "reports/forge/technique-inventory.md")
-    table_rows = [line for line in markdown.splitlines() if line.startswith(("| Atlas<br>", "| E22<br>"))]
+    table_rows = [line for line in markdown.splitlines() if line.startswith(("| Atlas ·", "| E22 ·"))]
     assert len(table_rows) == 2
     for line, label in zip(table_rows, ("Atlas", "E22")):
-        assert "[Atlas history: 19/19 PASS](continuous-baseline-20261003/README.md)" in line
-        assert f"[C6 {label} hold FAIL](c6-baseline-debug-20261003/README.md)" in line
+        assert "[Atlas history: 19/19 PASS](continuous-baseline-20261003/README.md)" in markdown
+        assert f"[C6 {label} hold FAIL](c6-baseline-debug-20261003/README.md)" in markdown
         assert all(f"BLOCKED ({total} required)" in line for total in (5, 19, 2))
-        assert line.endswith("| 0 |")
+        assert line.endswith("Recorded tier: 0 |")
     assert "E22 history: 19/19" not in markdown
     assert "no current tier credit" in markdown and result == before
     without_history = deepcopy(result)
@@ -754,7 +754,9 @@ def test_atlas_progress_is_source_bound_additive_display_and_preserves_every_ord
     assert after["provenance"]["selected_rows_sha256"] == before["provenance"]["selected_rows_sha256"]
     progress = after["atlas_unblocking_progress"]
     assert progress["baseline"]["counts"] == {"PASS": 7, "FAIL": 11, "BLOCKED": 8}
-    assert (progress["passed"], progress["required"]) == (7, 8)
+    assert "passed" not in progress and "required" not in progress
+    assert [row["required"] for row in progress["adaptations"]] == [26] * 5
+    assert [row["counts"].get("NOT_RUN") for row in progress["adaptations"]] == [22, 25, 25, 25, 25]
     assert [row["passed"] for row in progress["adaptations"]] == [4, 1, 1, 1, 0]
     assert len({row["source"]["digest"] for row in progress["adaptations"]}) == 2
     assert progress["word"]["status"] == "INVALID"
@@ -765,12 +767,15 @@ def test_atlas_progress_is_source_bound_additive_display_and_preserves_every_ord
         "qualification_input", "qualification_reuse", "ordinary_tier_credit", "cross_cohort_pooling",
         "default_adoption", "speed_ranking"))
     markdown = Path(published["report"]).read_text()
-    assert markdown.index("## Atlas unblocking progress") < markdown.index("## Ordinary MoG qualification")
-    assert "**7 PASS / 11 FAIL / 8 BLOCKED**" in markdown and "**7/8 previously blocked question gates**" in markdown
-    assert "INVALID; 20,001 updates; raw goals miss; numerical gate UNAVAILABLE" in markdown
+    assert markdown.index("| Model/configuration | Representation | Measured scores |") < markdown.index("## Selected-policy GPU scores")
+    assert markdown.index("## Selected-policy GPU scores") < markdown.index("## Qualification and scope")
+    assert "**7/26 PASS** · FAIL 11 · BLOCKED 8" in markdown
+    assert "**4/26 PASS** · NOT_RUN 22" in markdown
+    assert "**INVALID 1** · NOT_RUN 25 · numerical gate UNAVAILABLE" in markdown
+    assert "7/8" not in markdown and "Atlas unblocking progress" not in markdown
     assert "one unchanged family/configuration tuple must satisfy all 26 required" in markdown
-    atlas_row = next(line for line in markdown.splitlines() if line.lower().startswith("| atlas<br>"))
-    assert "[Adaptation progress](#atlas-unblocking-progress)" in atlas_row
+    atlas_row = next(line for line in markdown.splitlines() if line.lower().startswith("| atlas ·"))
+    assert "| MoG |" in atlas_row  # Synthetic reference prior; never infer from the name.
     assert after["rows"] == before["rows"]
     outputs = _outputs(root)
     assert publication.publish_current(root) == published and _outputs(root) == outputs
@@ -829,7 +834,82 @@ def test_committed_atlas_progress_display_matches_its_generator_without_raw_evid
     assert result["atlas_unblocking_progress"] == expected
     markdown = publication._current_markdown(result, ROOT, ROOT / "reports/forge/technique-inventory.md")
     assert (ROOT / "reports/forge/technique-inventory.md").read_text() == markdown
-    assert "**7/8 previously blocked question gates**" in markdown
+    assert "**4/26 PASS** · NOT_RUN 22" in markdown
+    assert "Atlas unblocking progress" not in markdown and "7/8" not in markdown
+
+
+@pytest.mark.parametrize("name,prior,expected", [
+    ("atlas", {"kind": "mog", "sigma": .025}, "MoG"),
+    ("misleading-mog-name", {"kind": "particle_cloud", "sigma": 0.0}, "Particles"),
+    ("release07-gan-v3-cloud", {"kind": "mog", "sigma": .025}, "MoG"),
+    ("atlas", {}, "UNKNOWN"),
+])
+def test_representation_uses_declaration_not_model_name(name, prior, expected):
+    row = dict(candidate_id=name, bindings=dict(prior=prior))
+    assert publication._ordinary_representation({}, row) == expected
+
+
+def test_suite_representation_discloses_separate_task_owned_particle_laws():
+    result = {"task_contracts": {"particle-host": {"prior": {"kind": "particle_cloud"}},
+                                 "mog-host": {"prior": {"kind": "mog"}}}}
+    row = {"bindings": {"prior": {"kind": "mog"},
+                        "task_contracts": {"two_pole": "particle-host", "ring": "mog-host"}}}
+    before = deepcopy((result, row))
+    assert publication._ordinary_representation(result, row) == "MoG + particles (per task)"
+    # A requested particle family blocked on MoG tasks is not a measured hybrid.
+    row["bindings"]["prior"] = {"kind": "particle_cloud"}
+    assert publication._ordinary_representation(result, row) == "Particles"
+    row["bindings"]["prior"] = before[1]["bindings"]["prior"]
+    assert (result, row) == before
+
+
+def test_source_scoped_representation_binds_applied_baseline_and_named_owners():
+    progress = publication._atlas_unblocking_progress(ROOT)
+    baseline = progress["baseline"]["representation"]
+    assert baseline["label"] == "Particles" and len(baseline["cases"]) == 18
+    assert all(case["prior"]["kind"] == "particle_cloud" and case["prior"]["sigma"] == 0.0
+               for case in baseline["cases"].values())
+    rows = {row["family"]: row for row in progress["adaptations"]}
+    ae = rows["atlas_ae_routed"]["representation"]
+    assert ae["label"] == "MoG (fixed σ .025; routed AE)"
+    assert next(iter(ae["applied"].values()))["prior"]["sigma"] == .025
+    conditional = rows["atlas_conditional"]["representation"]
+    assert {item["table_ownership"]["owner"] for item in conditional["applied"].values()} == {"prior.z", "generator.bank"}
+    unused = rows["atlas_routed"]["representation"]
+    assert next(iter(unused["applied"].values()))["table_ownership"]["sampled_independent_prior"] is False
+    assert next(iter(rows["atlas_multibank"]["representation"]["applied"].values()))["prior"]["sigma"] == 0.0
+    word = rows["atlas_word_joint_min11"]
+    assert word["counts"] == {"INVALID": 1, "NOT_RUN": 25}
+    assert not word["representation"]["applied"]
+    assert next(iter(word["media"].values()))["accepted_numeric_verdict"] == "UNAVAILABLE"
+
+
+def test_shared_score_intro_preserves_unrelated_index_and_rebuilds_idempotently(evidence):
+    root, _ = evidence
+    _copy_atlas_progress(root)
+    path = root / "reports/forge/shared-score-index-20261003/README.md"
+    path.parent.mkdir(parents=True)
+    unrelated = "## Completed current Atlas GPU diagnostic\n\nMartyn's existing report, costs, links and snapshots.\n"
+    path.write_text("# Shared ParticleGAN score index\n\n## Atlas unblocking progress\n\nOld intro.\n\n" + unrelated)
+    published = publication.publish_current(root)
+    content = path.read_text()
+    assert content.endswith(unrelated)
+    assert content.index("| Model/configuration | Representation | Measured scores |") < content.index("## Qualification and accounting")
+    assert "## Atlas unblocking progress" not in content and "7/8" not in content
+    assert "[trajectory](../atlas-named-gpu-diagnostics-native-v3-20261003/gifs/trajectory_conditional_policy_selected_cloud_v1.gif)" in content
+    assert publication.publish_current(root) == published and path.read_text() == content
+
+
+def test_unknown_shared_index_boundary_rejects_before_public_output_changes(evidence):
+    root, _ = evidence
+    publication.publish_current(root)
+    before = _outputs(root)
+    path = root / "reports/forge/shared-score-index-20261003/README.md"
+    path.parent.mkdir(parents=True)
+    path.write_text("Unrelated index without the maintained boundary.\n")
+    with pytest.raises(ValueError, match="preserved report boundary"):
+        publication.publish_current(root)
+    assert _outputs(root) == before and path.read_text() == "Unrelated index without the maintained boundary.\n"
 
 
 def test_committed_cohorts_rebuild_every_scientific_row_in_a_checkout_without_raw_logs(tmp_path):
