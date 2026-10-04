@@ -1351,6 +1351,9 @@ def _common26_current_markdown(result, root, path):
 
 
 def _current_markdown(result, root, path):
+    if result.get("family_progress"):
+        from experiments.forge.family_reports import render_leaderboard
+        return render_leaderboard(root, result, path)
     if not result.get('recorded_policy') and result['view'] == 'discriminator_stability':
         return _common26_current_markdown(result, root, path)
     def cell(value):
@@ -1599,8 +1602,10 @@ def _shared_score_intro(root, result):
     if not path.is_file():
         return
     _shared_score_archive(root)  # Validate the legacy or already-moved boundary.
-    leading = _current_markdown(result, root, path).split("## Qualification and scope\n", 1)[0]
-    leading = leading.replace("# Current model/configuration scores", "# Shared ParticleGAN score index", 1)
+    leading = ("# Shared ParticleGAN score index\n\n"
+               "The [current family leaderboard](../technique-inventory.md) contains the generated "
+               "family/view totals and links to each family's experiments, metrics and pass criteria. "
+               "Refresh it with `python reports/forge/regenerate_technique_inventory.py`.\n\n")
     half_base = result.get("word_half_base_diagnostic")
     if half_base:
         accounting = half_base["accounting"]
@@ -1735,6 +1740,9 @@ def refresh_publication(root=REPOSITORY_ROOT, *, view_id="discriminator_stabilit
     result["standalone_api_scores"] = _standalone_api_scores(root)
     result["publication_refresh"] = {"scientific_rows_preserved": True, "qualification_regraded": False,
                                      "training_launched": False}
+    if view_id == "discriminator_stability":
+        from experiments.forge.family_reports import build_progress
+        result["family_progress"] = build_progress(root, result)
     if result["view"] == "discriminator_stability":
         result["common26_display"] = _common26_display_projection(result, root)
         result["provenance"]["common26_comparison_projector_sha256"] = file_hash(
@@ -1747,14 +1755,42 @@ def refresh_publication(root=REPOSITORY_ROOT, *, view_id="discriminator_stabilit
     result["provenance"]["input_digest"] = stable_hash(result)
     json_path, markdown_path = root / CURRENT_PREFIX.with_suffix(".json"), root / CURRENT_PREFIX.with_suffix(".md")
     markdown = _current_markdown(result, root, markdown_path)
+    pages = _family_pages(root, result)
     shared = _shared_score_intro(root, result) if result["view"] == "discriminator_stability" else None
     _write_changed(json_path, _json_text(result))
     _write_changed(markdown_path, markdown)
+    _write_family_pages(root, pages)
     if shared:
         _write_changed(*shared)
     return {"report": str(markdown_path), "json": str(json_path), "rows": len(result["rows"]),
             "input_digest": result["provenance"]["input_digest"], "qualification_reuse": False,
             **result["publication_refresh"]}
+
+
+def _family_pages(root, result):
+    if not result.get("family_progress"):
+        return {}
+    from experiments.forge.family_reports import generated_pages
+    pages = generated_pages(root, result)
+    from experiments.forge.tier_report import REPORT_PATH, build_report, render_markdown as render_tiers
+    # Registered tier navigation is prepared against the new in-memory
+    # publication, so validation precedes writes and its hashes are fresh.
+    if (root / REPORT_PATH).is_file():
+        report = build_report(root, publication=result)
+        pages[root / REPORT_PATH] = render_tiers(report, root, root / REPORT_PATH)
+    return pages
+
+
+def _write_family_pages(root, pages):
+    if not pages:
+        return
+    from experiments.forge.family_reports import FAMILY_DIRECTORY
+    for path, content in pages.items():
+        _write_changed(path, content)
+    # Only this generator's pages are disposable; retained evidence is elsewhere.
+    for path in (root / FAMILY_DIRECTORY).glob("*.md"):
+        if path not in pages and path.read_text().startswith("<!-- Generated Forge family report -->"):
+            path.unlink()
 
 
 def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discriminator_stability",
@@ -2047,9 +2083,13 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
             Path(completed_studies_projection.__file__))
     if result.get("passive_publications"):
         result["provenance"]["passive_publications_reducer_sha256"] = file_hash(Path(publication_memory.__file__))
+    if not recorded_policy and view_id == "discriminator_stability":
+        from experiments.forge.family_reports import build_progress
+        result["family_progress"] = build_progress(root, result)
     result["provenance"]["input_digest"] = stable_hash(result)
     json_path, markdown_path = root / CURRENT_PREFIX.with_suffix(".json"), root / CURRENT_PREFIX.with_suffix(".md")
     markdown = _current_markdown(result, root, markdown_path)
+    pages = _family_pages(root, result)
     shared_archive = (_shared_score_archive(root)
                       if not recorded_policy and view_id == "discriminator_stability" else None)
     shared_intro = (_shared_score_intro(root, result)
@@ -2060,6 +2100,7 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
         _write_changed(manifest_path, json.dumps(manifest, sort_keys=True, indent=2) + "\n")
     _write_changed(json_path, _json_text(result))
     _write_changed(markdown_path, markdown)
+    _write_family_pages(root, pages)
     if shared_archive:
         _write_changed(*shared_archive)
     if shared_intro:
@@ -2081,6 +2122,16 @@ def main(argv=None):
     parser.add_argument("--refresh-publication", action="store_true",
                         help="refresh displayed evidence and view coverage, preserving registered scores and selections")
     args = parser.parse_args(argv)
+    # A later declared view can refresh navigation without advancing/regrading
+    # the immutable recorded policy. Keep the default one-command workflow usable.
+    if not (args.refresh_publication or args.source_commit or args.recorded_policy
+            or args.advance_policy or args.device != "all"):
+        manifest_path = args.root / EVIDENCE_MANIFEST
+        view_path = args.root / "configs/forge/views" / (args.goal + ".json")
+        if manifest_path.is_file() and view_path.is_file():
+            manifest = read_json(manifest_path)
+            if stable_hash(read_json(view_path)) != manifest.get("policy_fingerprint"):
+                args.refresh_publication = True
     if args.refresh_publication:
         if args.source_commit or args.recorded_policy or args.advance_policy or args.device != "all":
             parser.error("--refresh-publication preserves the existing cohorts; source, policy and device overrides are unsupported")

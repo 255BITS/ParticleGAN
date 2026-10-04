@@ -284,7 +284,7 @@ class FreshCommon26DisplayControls(unittest.TestCase):
             finally:
                 display["_common26_display_projection"] = saved
 
-    def test_shared_index_reuses_leading_table_links_and_preserves_accounting_scope(self):
+    def test_shared_index_links_single_leaderboard_and_preserves_accounting_scope(self):
         path = self.root / "reports/forge/shared-score-index-20261003/README.md"
         path.parent.mkdir(parents=True)
         path.write_text("private archived-boundary fixture")
@@ -295,11 +295,10 @@ class FreshCommon26DisplayControls(unittest.TestCase):
         calls = []
         display["_shared_score_archive"] = lambda root: calls.append(root)
         actual_path, content = display["_shared_score_intro"](self.root, self.result)
-        expected = display["_current_markdown"](self.result, self.root, path).split("## Qualification and scope\n", 1)[0]
-        expected = expected.replace("# Current model/configuration scores", "# Shared ParticleGAN score index", 1)
-        self.assertTrue(content.startswith(expected))
+        self.assertTrue(content.startswith("# Shared ParticleGAN score index"))
+        self.assertIn("[current family leaderboard](../technique-inventory.md)", content)
         self.assertEqual(actual_path, path)
-        self.assertEqual(content.count("NOT_RUN (26 required)"), 12)
+        self.assertEqual(content.count("NOT_RUN (26 required)"), 0)
         self.assertIn("21 / 10500 seconds", content)
         self.assertEqual(calls, [self.root])
 

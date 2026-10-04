@@ -395,6 +395,16 @@ and selects one complete configuration for each formulation family. The generic
 pins its exact measured revision, recipe, source, runtime and task identities.
 Alternative configurations retain their recorded results and source identities
 as unranked alternatives in the companion JSON and evidence snapshots.
+The generated leaderboard has bold family totals followed by view rows, with
+Tier 1, Tier 2, Tier 3 and total passes/required. Family totals sum the views;
+shared experiments count once per requiring view, rather than as unique runs.
+`(*)` marks incomplete evidence, including changed or unbound current contracts.
+Zero recorded passes display as `0(*)/N` when results are unavailable. Every
+table link opens the generated family page at its view or tier breakdown, with
+recorded metrics, current criteria, missing results and original evidence links.
+Diagnostic-only views and historical/API studies are separate from the totals.
+One refresh rebuilds the leaderboard, family pages and experiments-by-tier
+report; the older shared score index links here instead of copying the table.
 The [released v0.7 task-adaptation readout](reports/forge/RELEASE07_TASK_ADAPTATION_READOUT.md)
 adds one measured successor with all 24 integration preflights ready. Its
 required smoke failure stops the remaining ordinary tasks; the original native
@@ -439,7 +449,7 @@ scientific ranking or default adoption.
 python -m experiments.forge inventory plan --through-tier 3
 python -m experiments.forge inventory run --through-tier 3 --gpus 0,1
 # Refresh the single current publication without changing saved qualification.
-python reports/forge/regenerate_technique_inventory.py --refresh-publication
+python reports/forge/regenerate_technique_inventory.py
 python -m experiments.forge logs --follow --campaign technique-inventory-v1
 ```
 
@@ -475,6 +485,10 @@ API results while retaining the registered scientific rows and family selections
 It verifies the immutable evidence snapshots and exact archived policy, launches
 no training and does not regrade receipts. New required cells remain unknown
 until compatible ordinary evidence is explicitly registered.
+The default command selects that safe publication refresh automatically when
+the declared view is newer than the registered evidence policy. The explicit
+flag remains available; advancing qualification still requires the source and
+policy options above.
 
 The original default inventory campaign has explicit reservation ceilings for
 its 12-technique roster. New techniques require checking the expanded plan and

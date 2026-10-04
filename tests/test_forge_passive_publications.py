@@ -216,10 +216,14 @@ def test_one_table_context_preserves_historical_and_all_ordinary_values(tmp_path
     report["original_pr223_atlas"] = renderer._original_pr223_atlas(report)
     text = renderer._current_markdown(report, tmp_path, tmp_path / "reports/forge/technique-inventory.md")
     table = [line for line in text.splitlines() if line.startswith("|")]
-    assert text.count("| --- | --- | --- |") == 1 and len(table) == 21
-    assert "**19/19 PASS**" in table[2] and "fresh retest" in table[2]
-    assert "5/19 PASS" in table[2] and "14 NOT_RUN" in table[2] and "overall INCOMPLETE" in table[2]
-    assert "FINAL_COST.json" in table[2] and "final charge 7.000000 / 10800 s" in table[2]
+    assert text.count("| Family / view | Tier 1 | Tier 2 | Tier 3 | Total |") == 1
+    assert len([line for line in table if line.startswith("| **[")]) == 12
+    assert "19/19" not in text and "5/19 PASS" not in text
+    fresh = report["original_pr223_atlas"]["fresh_retest"]
+    assert fresh["counts"] == {"PASS": 5, "NOT_RUN": 14} and fresh["status"] == "INCOMPLETE"
+    from experiments.forge.family_reports import generated_pages
+    family = generated_pages(tmp_path, report)[tmp_path / "reports/forge/families/atlas.md"]
+    assert "Original Atlas recipe and serving-law evidence" in family and "fresh_retest" in family
     assert report["rows"] == before["rows"] and report["evidence_sources"] == before["evidence_sources"]
     assert report["original_pr223_atlas"]["counts"] == {"PASS": 19}
     for scope in ("recorded", "quality"):
