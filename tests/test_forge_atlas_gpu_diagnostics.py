@@ -30,6 +30,21 @@ def spec():
     return diagnostic.read(DIRECTORY / "protocol.json")
 
 
+@pytest.fixture
+def current_source_spec(spec):
+    """Private software metadata for today's declarations, never old evidence.
+
+    The historical protocol stays byte-for-byte intact. These controls exercise
+    reconstruction against current source; its different hashes create a
+    different contract digest and confer no scientific or qualification credit.
+    """
+    current = deepcopy(spec)
+    for row in current["cases"]:
+        row["sha256"] = diagnostic.file_hash(ROOT / row["definition"])
+    diagnostic.validate_spec(current, ROOT)
+    return current
+
+
 def base_request(spec):
     tasks = {}
     jobs = {}
@@ -72,7 +87,8 @@ def dumped(path, value):
     return path
 
 
-def test_actual_26_definitions_gpu_gates_and_group_caps(spec):
+def test_current_26_definitions_gpu_gates_and_group_caps(current_source_spec):
+    spec = current_source_spec
     diagnostic.validate_spec(spec, ROOT)
     packet = packet_for(spec)
     state = diagnostic.initial_state(packet)
@@ -94,6 +110,15 @@ def test_actual_26_definitions_gpu_gates_and_group_caps(spec):
         assert task["evaluation"]["holdout_samples"] == 100000
     assert all(s["qualification_input"] is False for s in state["slots"].values())
     assert state["ordinary_qualified_tier"] == 0
+
+
+def test_historical_source_contract_rejects_current_declaration_drift(spec, current_source_spec):
+    original = diagnostic.read(DIRECTORY / "protocol.json")
+    assert spec == original
+    assert diagnostic.digest(current_source_spec) != diagnostic.digest(original)
+    with pytest.raises(ValueError, match="frozen task declaration changed"):
+        diagnostic.validate_spec(original, ROOT)
+    assert diagnostic.read(DIRECTORY / "protocol.json") == original
 
 
 @pytest.mark.parametrize("key,value", [("seed", 1), ("seed", False), ("physical_gpu", "0"),
@@ -131,7 +156,7 @@ def test_candidate_review_is_retained_and_only_exact_decision_blockers_are_advis
 
 
 @pytest.mark.parametrize("change", [None, "recipe", "numeric_type", "runtime", "gate", "job", "source"])
-def test_serialized_preparation_reconstructs_actual_recipe_metadata_and_rejects_drift(spec, tmp_path, monkeypatch, change):
+def test_serialized_preparation_reconstructs_actual_recipe_metadata_and_rejects_drift(current_source_spec, tmp_path, monkeypatch, change):
     """Exercise the durable entry point with public Recipe tuples and a real snapshot.
 
     Only planner discovery/import routing is replaced by private software metadata;
@@ -141,6 +166,7 @@ def test_serialized_preparation_reconstructs_actual_recipe_metadata_and_rejects_
     from experiments.forge.contracts import stable_hash
     from experiments.forge import planning
 
+    spec = current_source_spec
     snapshot = tmp_path / "source"
     files = {}
     for relative in [diagnostic.SELF] + [row["definition"] for row in spec["cases"]]:

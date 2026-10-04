@@ -11,6 +11,7 @@ from experiments.forge import routed_policy_contracts as routed
 from experiments.forge import multibank_policy_contracts as multibank
 from experiments.forge import ae_routed_policy_contracts as ae
 from experiments.forge import word_joint_policy_contracts as word
+from experiments.forge import word_joint_rate_policy_contracts as word_rates
 from experiments.forge.policy_contracts import PARENT_TASK_IDS
 
 
@@ -23,7 +24,8 @@ def declared(cohort):
     return [{routed.COHORT: routed.make_unused_variant,
              multibank.COHORT: multibank.make_variant,
              ae.COHORT: ae.make_ae_variant,
-             word.COHORT: word.make_variant}[cohort](ROOT)]
+             word.COHORT: word.make_variant,
+             word_rates.COHORT: word_rates.make_variant}[cohort](ROOT)]
 
 
 def inputs(cohort):

@@ -30,6 +30,20 @@ def spec():
     return diagnostic.read(DIRECTORY / "protocol.json")
 
 
+@pytest.fixture
+def current_source_spec(spec):
+    """Separate current-source software checks from frozen historical outcomes."""
+    current = deepcopy(spec)
+    for row in current["cases"]:
+        path = ROOT / row["definition"]
+        task = diagnostic.read(path)
+        row.update(sha256=diagnostic.file_hash(path),
+                   execution_sha256=diagnostic.digest(task["execution"]),
+                   evaluation_sha256=diagnostic.digest(task["evaluation"]))
+    diagnostic.validate_spec(current, ROOT)
+    return current
+
+
 def dump(path, data):
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(data, sort_keys=True))
@@ -71,7 +85,8 @@ def packet_for(spec):
             "family_paid_budget_seconds": {f: v["cap"] for f, v in diagnostic.FAMILIES.items()}}
 
 
-def test_three_remaining_cases_and_five_complete_separate_denominators(spec):
+def test_current_three_cases_and_five_complete_separate_denominators(current_source_spec):
+    spec = current_source_spec
     diagnostic.validate_spec(spec, ROOT)
     packet = packet_for(spec)
     assert sum(i["cap"] for i in diagnostic.FAMILIES.values()) == 10500
@@ -86,6 +101,15 @@ def test_three_remaining_cases_and_five_complete_separate_denominators(spec):
         diagnostic.verify_state(state)
 
 
+def test_historical_named_contract_rejects_current_source_drift(spec, current_source_spec):
+    original = diagnostic.read(DIRECTORY / "protocol.json")
+    assert spec == original
+    assert diagnostic.digest(current_source_spec) != diagnostic.digest(original)
+    with pytest.raises(ValueError, match="named task source drift"):
+        diagnostic.validate_spec(original, ROOT)
+    assert diagnostic.read(DIRECTORY / "protocol.json") == original
+
+
 @pytest.mark.parametrize("key,value", [("seed", False), ("seed", 1), ("diagnostic_cap_seconds", 10501),
     ("lane_cap_seconds", {"0": 3000, "1": 7500}), ("export_grace_seconds", 60), ("qualification_input", True),
     ("ordinary_tier_credit", True), ("cross_cohort_pooling", True), ("default_adoption", True), ("speed_ranking", True),
@@ -96,7 +120,8 @@ def test_fixed_protocol_scope_fails_closed(spec, key, value):
 
 
 @pytest.mark.parametrize("change", ["missing", "duplicate", "family", "gpu", "steps", "cap", "source", "gate"])
-def test_no_borrowed_case_or_changed_full_protocol(spec, change):
+def test_no_borrowed_case_or_changed_full_protocol(current_source_spec, change):
+    spec = current_source_spec
     if change == "missing": spec["cases"].pop()
     elif change == "duplicate": spec["cases"][1] = deepcopy(spec["cases"][0])
     else:
