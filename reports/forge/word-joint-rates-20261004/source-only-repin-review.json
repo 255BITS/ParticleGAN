@@ -1,0 +1,2024 @@
+{
+  "all_current_variants_validate": true,
+  "current_variants_validated": 35,
+  "existing_declarations_changed": 34,
+  "health_repair_preexisting_source_pin_drift_included": true,
+  "only_source_hash_values_changed": true,
+  "original_gates_horizons_resources_owners_laws_unchanged": true,
+  "original_published_receipts_and_costs_unchanged": true,
+  "rows": [
+    {
+      "after_sha256": "c51506a7f93b667462593d2fee995ec7ca14fd93da0fc44fa0e3fe5315c348f0",
+      "all_other_fields_identical": true,
+      "before_sha256": "4bfb296d7a25979483cc16ef6c5e63b4833159ec842809b5857bdf35b408b2aa",
+      "changed_source_keys": [
+        {
+          "current_sha256": "04297493b688dbbe870683803fdafa8730d83942576ff4ffa38569a4deeda780",
+          "path": "experiments/forge/adapters.py",
+          "stored_sha256": "dd503ac084fc91b9daf7fed13ab6540d302db323c91d9a08b92e97e8cad2ce7f"
+        },
+        {
+          "current_sha256": "2df76b239ae44d81cfc9d8bd1469c569aa36d9deb135e36a49220309c7d54694",
+          "path": "experiments/forge/api.py",
+          "stored_sha256": "f53e6afd4578d9233c8c60ba483831e367e4ebfd59d53386a02b11a7979ab71d"
+        },
+        {
+          "current_sha256": "3599a45ba7a83d96aa12ce2a5c13ff00bba170b81ccfdfc996552fb8aa747621",
+          "path": "experiments/forge/boundaries.py",
+          "stored_sha256": "155155f3ff95efc79308b8edfabb3c4357f45aee6c334da8bc6631eb4426b541"
+        },
+        {
+          "current_sha256": "69b9cca335dae0f6d4560861ef417d5dfb34008b939d93a30e500a750f7b8416",
+          "path": "experiments/forge/evaluate.py",
+          "stored_sha256": "e1873f056c732b14c456a6a196f5756e855a63b7ae2f77dfde1c6ee671d221df"
+        },
+        {
+          "current_sha256": "a0a80fdfb519a830149c8876df53d716fcbda652031ded1102384bfeba70cb12",
+          "path": "experiments/forge/named_policy_planning.py",
+          "stored_sha256": "e74124bfbfc10017d1e1b39d04ed0da97de13131bed79c30f25b52795863d3b9"
+        },
+        {
+          "current_sha256": "5192a24571d1c6a5b65011a4550c2a134db880a7e85baf07fcbc8b85d628bc13",
+          "path": "experiments/forge/policy_adapters.py",
+          "stored_sha256": "95f7bf03c878d484d01a0fdf0f6b5c9ad34b8df94106ff7a50b02f7f1dfe67cf"
+        },
+        {
+          "current_sha256": "d738fc16824a2ccc7bdf5a1a3742e4dc3fe421a4413eb2fc65ccdd5240b01917",
+          "path": "experiments/forge/policy_cohorts.py",
+          "stored_sha256": "9cbb8addeee483c004b3b36833def111c393703eab9f6d62b79f81065f7f751f"
+        },
+        {
+          "current_sha256": "9cd859971e158a25112cdbb928e98d2a030f11729a2b8e970dd650f4b38e5b60",
+          "path": "experiments/forge/policy_snapshot_publication.py",
+          "stored_sha256": "5a637679392b4b1869fb8d1ca15cf7f6855f54d50ea4cb6857ad07aa733aa9a9"
+        },
+        {
+          "current_sha256": "117d07dcf5f4c40401166d0960dc6b06228fd7c52d062543cca9d62964f0345e",
+          "path": "experiments/forge/sampling.py",
+          "stored_sha256": "5f5013418a051ef18064aff5fea62c61b5b31bbcd20945e075e0aaf23d6985d7"
+        },
+        {
+          "current_sha256": "8615984eeb7674fc124892527b00385d1e4fce6da907928da861c9af2d7e95d3",
+          "path": "experiments/forge/views.py",
+          "stored_sha256": "d0bafd90cb5bc727bb21b554678245e3d028bdd4c04fcd5cae8af40a513727d1"
+        }
+      ],
+      "path": "configs/forge/task-variants/ae_routed_policy_v1/ae_gan_hold_ae_routed_policy_v1.json",
+      "task_id": "ae_gan_hold_ae_routed_policy_v1"
+    },
+    {
+      "after_sha256": "e8f8f02fc874b04d6c3407abcd62ac757edfae0ed445e5d638b5f6e7caad3942",
+      "all_other_fields_identical": true,
+      "before_sha256": "3cf2ad5b17ee00be15a18bb9f0f49c95c5264cc392f1a96ebac14c6e8a236660",
+      "changed_source_keys": [
+        {
+          "current_sha256": "04297493b688dbbe870683803fdafa8730d83942576ff4ffa38569a4deeda780",
+          "path": "experiments/forge/adapters.py",
+          "stored_sha256": "dd503ac084fc91b9daf7fed13ab6540d302db323c91d9a08b92e97e8cad2ce7f"
+        },
+        {
+          "current_sha256": "2df76b239ae44d81cfc9d8bd1469c569aa36d9deb135e36a49220309c7d54694",
+          "path": "experiments/forge/api.py",
+          "stored_sha256": "f53e6afd4578d9233c8c60ba483831e367e4ebfd59d53386a02b11a7979ab71d"
+        },
+        {
+          "current_sha256": "3599a45ba7a83d96aa12ce2a5c13ff00bba170b81ccfdfc996552fb8aa747621",
+          "path": "experiments/forge/boundaries.py",
+          "stored_sha256": "155155f3ff95efc79308b8edfabb3c4357f45aee6c334da8bc6631eb4426b541"
+        },
+        {
+          "current_sha256": "69b9cca335dae0f6d4560861ef417d5dfb34008b939d93a30e500a750f7b8416",
+          "path": "experiments/forge/evaluate.py",
+          "stored_sha256": "e1873f056c732b14c456a6a196f5756e855a63b7ae2f77dfde1c6ee671d221df"
+        },
+        {
+          "current_sha256": "a0a80fdfb519a830149c8876df53d716fcbda652031ded1102384bfeba70cb12",
+          "path": "experiments/forge/named_policy_planning.py",
+          "stored_sha256": "e74124bfbfc10017d1e1b39d04ed0da97de13131bed79c30f25b52795863d3b9"
+        },
+        {
+          "current_sha256": "5192a24571d1c6a5b65011a4550c2a134db880a7e85baf07fcbc8b85d628bc13",
+          "path": "experiments/forge/policy_adapters.py",
+          "stored_sha256": "95f7bf03c878d484d01a0fdf0f6b5c9ad34b8df94106ff7a50b02f7f1dfe67cf"
+        },
+        {
+          "current_sha256": "d738fc16824a2ccc7bdf5a1a3742e4dc3fe421a4413eb2fc65ccdd5240b01917",
+          "path": "experiments/forge/policy_cohorts.py",
+          "stored_sha256": "9cbb8addeee483c004b3b36833def111c393703eab9f6d62b79f81065f7f751f"
+        },
+        {
+          "current_sha256": "9cd859971e158a25112cdbb928e98d2a030f11729a2b8e970dd650f4b38e5b60",
+          "path": "experiments/forge/policy_snapshot_publication.py",
+          "stored_sha256": "5a637679392b4b1869fb8d1ca15cf7f6855f54d50ea4cb6857ad07aa733aa9a9"
+        },
+        {
+          "current_sha256": "117d07dcf5f4c40401166d0960dc6b06228fd7c52d062543cca9d62964f0345e",
+          "path": "experiments/forge/sampling.py",
+          "stored_sha256": "5f5013418a051ef18064aff5fea62c61b5b31bbcd20945e075e0aaf23d6985d7"
+        },
+        {
+          "current_sha256": "8615984eeb7674fc124892527b00385d1e4fce6da907928da861c9af2d7e95d3",
+          "path": "experiments/forge/views.py",
+          "stored_sha256": "d0bafd90cb5bc727bb21b554678245e3d028bdd4c04fcd5cae8af40a513727d1"
+        }
+      ],
+      "path": "configs/forge/task-variants/conditional_policy_selected_cloud_v1/mid_scale_identity_conditional_policy_selected_cloud_v1.json",
+      "task_id": "mid_scale_identity_conditional_policy_selected_cloud_v1"
+    },
+    {
+      "after_sha256": "201e4129626ddbbe25013ac56234b9233db5061e54932e8b4d4bc31534e8a95f",
+      "all_other_fields_identical": true,
+      "before_sha256": "bf9a509fec0e7f3aea331dd15f8bb044469c759f98342470b2414147c3870735",
+      "changed_source_keys": [
+        {
+          "current_sha256": "04297493b688dbbe870683803fdafa8730d83942576ff4ffa38569a4deeda780",
+          "path": "experiments/forge/adapters.py",
+          "stored_sha256": "dd503ac084fc91b9daf7fed13ab6540d302db323c91d9a08b92e97e8cad2ce7f"
+        },
+        {
+          "current_sha256": "2df76b239ae44d81cfc9d8bd1469c569aa36d9deb135e36a49220309c7d54694",
+          "path": "experiments/forge/api.py",
+          "stored_sha256": "f53e6afd4578d9233c8c60ba483831e367e4ebfd59d53386a02b11a7979ab71d"
+        },
+        {
+          "current_sha256": "3599a45ba7a83d96aa12ce2a5c13ff00bba170b81ccfdfc996552fb8aa747621",
+          "path": "experiments/forge/boundaries.py",
+          "stored_sha256": "155155f3ff95efc79308b8edfabb3c4357f45aee6c334da8bc6631eb4426b541"
+        },
+        {
+          "current_sha256": "69b9cca335dae0f6d4560861ef417d5dfb34008b939d93a30e500a750f7b8416",
+          "path": "experiments/forge/evaluate.py",
+          "stored_sha256": "e1873f056c732b14c456a6a196f5756e855a63b7ae2f77dfde1c6ee671d221df"
+        },
+        {
+          "current_sha256": "a0a80fdfb519a830149c8876df53d716fcbda652031ded1102384bfeba70cb12",
+          "path": "experiments/forge/named_policy_planning.py",
+          "stored_sha256": "e74124bfbfc10017d1e1b39d04ed0da97de13131bed79c30f25b52795863d3b9"
+        },
+        {
+          "current_sha256": "5192a24571d1c6a5b65011a4550c2a134db880a7e85baf07fcbc8b85d628bc13",
+          "path": "experiments/forge/policy_adapters.py",
+          "stored_sha256": "95f7bf03c878d484d01a0fdf0f6b5c9ad34b8df94106ff7a50b02f7f1dfe67cf"
+        },
+        {
+          "current_sha256": "d738fc16824a2ccc7bdf5a1a3742e4dc3fe421a4413eb2fc65ccdd5240b01917",
+          "path": "experiments/forge/policy_cohorts.py",
+          "stored_sha256": "9cbb8addeee483c004b3b36833def111c393703eab9f6d62b79f81065f7f751f"
+        },
+        {
+          "current_sha256": "9cd859971e158a25112cdbb928e98d2a030f11729a2b8e970dd650f4b38e5b60",
+          "path": "experiments/forge/policy_snapshot_publication.py",
+          "stored_sha256": "5a637679392b4b1869fb8d1ca15cf7f6855f54d50ea4cb6857ad07aa733aa9a9"
+        },
+        {
+          "current_sha256": "117d07dcf5f4c40401166d0960dc6b06228fd7c52d062543cca9d62964f0345e",
+          "path": "experiments/forge/sampling.py",
+          "stored_sha256": "5f5013418a051ef18064aff5fea62c61b5b31bbcd20945e075e0aaf23d6985d7"
+        },
+        {
+          "current_sha256": "8615984eeb7674fc124892527b00385d1e4fce6da907928da861c9af2d7e95d3",
+          "path": "experiments/forge/views.py",
+          "stored_sha256": "d0bafd90cb5bc727bb21b554678245e3d028bdd4c04fcd5cae8af40a513727d1"
+        }
+      ],
+      "path": "configs/forge/task-variants/conditional_policy_selected_cloud_v1/residual_student_conditional_policy_selected_cloud_v1.json",
+      "task_id": "residual_student_conditional_policy_selected_cloud_v1"
+    },
+    {
+      "after_sha256": "97af4d87cb9713645d90dc3b5870660caa40d1b00a56924f211379a2387beace",
+      "all_other_fields_identical": true,
+      "before_sha256": "9f2f64b38974a257496ca6182cf929563c43d2dd7c36f03573d38dc614e16807",
+      "changed_source_keys": [
+        {
+          "current_sha256": "04297493b688dbbe870683803fdafa8730d83942576ff4ffa38569a4deeda780",
+          "path": "experiments/forge/adapters.py",
+          "stored_sha256": "dd503ac084fc91b9daf7fed13ab6540d302db323c91d9a08b92e97e8cad2ce7f"
+        },
+        {
+          "current_sha256": "2df76b239ae44d81cfc9d8bd1469c569aa36d9deb135e36a49220309c7d54694",
+          "path": "experiments/forge/api.py",
+          "stored_sha256": "f53e6afd4578d9233c8c60ba483831e367e4ebfd59d53386a02b11a7979ab71d"
+        },
+        {
+          "current_sha256": "3599a45ba7a83d96aa12ce2a5c13ff00bba170b81ccfdfc996552fb8aa747621",
+          "path": "experiments/forge/boundaries.py",
+          "stored_sha256": "155155f3ff95efc79308b8edfabb3c4357f45aee6c334da8bc6631eb4426b541"
+        },
+        {
+          "current_sha256": "69b9cca335dae0f6d4560861ef417d5dfb34008b939d93a30e500a750f7b8416",
+          "path": "experiments/forge/evaluate.py",
+          "stored_sha256": "e1873f056c732b14c456a6a196f5756e855a63b7ae2f77dfde1c6ee671d221df"
+        },
+        {
+          "current_sha256": "a0a80fdfb519a830149c8876df53d716fcbda652031ded1102384bfeba70cb12",
+          "path": "experiments/forge/named_policy_planning.py",
+          "stored_sha256": "e74124bfbfc10017d1e1b39d04ed0da97de13131bed79c30f25b52795863d3b9"
+        },
+        {
+          "current_sha256": "5192a24571d1c6a5b65011a4550c2a134db880a7e85baf07fcbc8b85d628bc13",
+          "path": "experiments/forge/policy_adapters.py",
+          "stored_sha256": "95f7bf03c878d484d01a0fdf0f6b5c9ad34b8df94106ff7a50b02f7f1dfe67cf"
+        },
+        {
+          "current_sha256": "d738fc16824a2ccc7bdf5a1a3742e4dc3fe421a4413eb2fc65ccdd5240b01917",
+          "path": "experiments/forge/policy_cohorts.py",
+          "stored_sha256": "9cbb8addeee483c004b3b36833def111c393703eab9f6d62b79f81065f7f751f"
+        },
+        {
+          "current_sha256": "9cd859971e158a25112cdbb928e98d2a030f11729a2b8e970dd650f4b38e5b60",
+          "path": "experiments/forge/policy_snapshot_publication.py",
+          "stored_sha256": "5a637679392b4b1869fb8d1ca15cf7f6855f54d50ea4cb6857ad07aa733aa9a9"
+        },
+        {
+          "current_sha256": "117d07dcf5f4c40401166d0960dc6b06228fd7c52d062543cca9d62964f0345e",
+          "path": "experiments/forge/sampling.py",
+          "stored_sha256": "5f5013418a051ef18064aff5fea62c61b5b31bbcd20945e075e0aaf23d6985d7"
+        },
+        {
+          "current_sha256": "8615984eeb7674fc124892527b00385d1e4fce6da907928da861c9af2d7e95d3",
+          "path": "experiments/forge/views.py",
+          "stored_sha256": "d0bafd90cb5bc727bb21b554678245e3d028bdd4c04fcd5cae8af40a513727d1"
+        }
+      ],
+      "path": "configs/forge/task-variants/conditional_policy_selected_cloud_v1/trajectory_conditional_policy_selected_cloud_v1.json",
+      "task_id": "trajectory_conditional_policy_selected_cloud_v1"
+    },
+    {
+      "after_sha256": "2a9f05e8db0ec199201ee1955215d7ecf0037360ad9224fa9bfaaa3f33ff3d38",
+      "all_other_fields_identical": true,
+      "before_sha256": "52650a9e9315bc4f78fc7b001fff0e05f2ea884de0ce33ef071744564eb1e4ac",
+      "changed_source_keys": [
+        {
+          "current_sha256": "04297493b688dbbe870683803fdafa8730d83942576ff4ffa38569a4deeda780",
+          "path": "experiments/forge/adapters.py",
+          "stored_sha256": "dd503ac084fc91b9daf7fed13ab6540d302db323c91d9a08b92e97e8cad2ce7f"
+        },
+        {
+          "current_sha256": "2df76b239ae44d81cfc9d8bd1469c569aa36d9deb135e36a49220309c7d54694",
+          "path": "experiments/forge/api.py",
+          "stored_sha256": "f53e6afd4578d9233c8c60ba483831e367e4ebfd59d53386a02b11a7979ab71d"
+        },
+        {
+          "current_sha256": "3599a45ba7a83d96aa12ce2a5c13ff00bba170b81ccfdfc996552fb8aa747621",
+          "path": "experiments/forge/boundaries.py",
+          "stored_sha256": "155155f3ff95efc79308b8edfabb3c4357f45aee6c334da8bc6631eb4426b541"
+        },
+        {
+          "current_sha256": "69b9cca335dae0f6d4560861ef417d5dfb34008b939d93a30e500a750f7b8416",
+          "path": "experiments/forge/evaluate.py",
+          "stored_sha256": "e1873f056c732b14c456a6a196f5756e855a63b7ae2f77dfde1c6ee671d221df"
+        },
+        {
+          "current_sha256": "a0a80fdfb519a830149c8876df53d716fcbda652031ded1102384bfeba70cb12",
+          "path": "experiments/forge/named_policy_planning.py",
+          "stored_sha256": "e74124bfbfc10017d1e1b39d04ed0da97de13131bed79c30f25b52795863d3b9"
+        },
+        {
+          "current_sha256": "5192a24571d1c6a5b65011a4550c2a134db880a7e85baf07fcbc8b85d628bc13",
+          "path": "experiments/forge/policy_adapters.py",
+          "stored_sha256": "95f7bf03c878d484d01a0fdf0f6b5c9ad34b8df94106ff7a50b02f7f1dfe67cf"
+        },
+        {
+          "current_sha256": "d738fc16824a2ccc7bdf5a1a3742e4dc3fe421a4413eb2fc65ccdd5240b01917",
+          "path": "experiments/forge/policy_cohorts.py",
+          "stored_sha256": "9cbb8addeee483c004b3b36833def111c393703eab9f6d62b79f81065f7f751f"
+        },
+        {
+          "current_sha256": "9cd859971e158a25112cdbb928e98d2a030f11729a2b8e970dd650f4b38e5b60",
+          "path": "experiments/forge/policy_snapshot_publication.py",
+          "stored_sha256": "5a637679392b4b1869fb8d1ca15cf7f6855f54d50ea4cb6857ad07aa733aa9a9"
+        },
+        {
+          "current_sha256": "117d07dcf5f4c40401166d0960dc6b06228fd7c52d062543cca9d62964f0345e",
+          "path": "experiments/forge/sampling.py",
+          "stored_sha256": "5f5013418a051ef18064aff5fea62c61b5b31bbcd20945e075e0aaf23d6985d7"
+        },
+        {
+          "current_sha256": "8615984eeb7674fc124892527b00385d1e4fce6da907928da861c9af2d7e95d3",
+          "path": "experiments/forge/views.py",
+          "stored_sha256": "d0bafd90cb5bc727bb21b554678245e3d028bdd4c04fcd5cae8af40a513727d1"
+        }
+      ],
+      "path": "configs/forge/task-variants/conditional_policy_selected_cloud_v1/unipolar_conditional_policy_selected_cloud_v1.json",
+      "task_id": "unipolar_conditional_policy_selected_cloud_v1"
+    },
+    {
+      "after_sha256": "db1b1369b849d9aef7cdec590f9923e238b4e77602283f1f644e0b74fe0018b9",
+      "all_other_fields_identical": true,
+      "before_sha256": "8da5a372d8cb0cb7a16adaa4f1c9df8c59e34610ab97a7b7a5497949324cd3ae",
+      "changed_source_keys": [
+        {
+          "current_sha256": "04297493b688dbbe870683803fdafa8730d83942576ff4ffa38569a4deeda780",
+          "path": "experiments/forge/adapters.py",
+          "stored_sha256": "dd503ac084fc91b9daf7fed13ab6540d302db323c91d9a08b92e97e8cad2ce7f"
+        },
+        {
+          "current_sha256": "2df76b239ae44d81cfc9d8bd1469c569aa36d9deb135e36a49220309c7d54694",
+          "path": "experiments/forge/api.py",
+          "stored_sha256": "f53e6afd4578d9233c8c60ba483831e367e4ebfd59d53386a02b11a7979ab71d"
+        },
+        {
+          "current_sha256": "3599a45ba7a83d96aa12ce2a5c13ff00bba170b81ccfdfc996552fb8aa747621",
+          "path": "experiments/forge/boundaries.py",
+          "stored_sha256": "155155f3ff95efc79308b8edfabb3c4357f45aee6c334da8bc6631eb4426b541"
+        },
+        {
+          "current_sha256": "69b9cca335dae0f6d4560861ef417d5dfb34008b939d93a30e500a750f7b8416",
+          "path": "experiments/forge/evaluate.py",
+          "stored_sha256": "e1873f056c732b14c456a6a196f5756e855a63b7ae2f77dfde1c6ee671d221df"
+        },
+        {
+          "current_sha256": "a0a80fdfb519a830149c8876df53d716fcbda652031ded1102384bfeba70cb12",
+          "path": "experiments/forge/named_policy_planning.py",
+          "stored_sha256": "e74124bfbfc10017d1e1b39d04ed0da97de13131bed79c30f25b52795863d3b9"
+        },
+        {
+          "current_sha256": "5192a24571d1c6a5b65011a4550c2a134db880a7e85baf07fcbc8b85d628bc13",
+          "path": "experiments/forge/policy_adapters.py",
+          "stored_sha256": "95f7bf03c878d484d01a0fdf0f6b5c9ad34b8df94106ff7a50b02f7f1dfe67cf"
+        },
+        {
+          "current_sha256": "d738fc16824a2ccc7bdf5a1a3742e4dc3fe421a4413eb2fc65ccdd5240b01917",
+          "path": "experiments/forge/policy_cohorts.py",
+          "stored_sha256": "9cbb8addeee483c004b3b36833def111c393703eab9f6d62b79f81065f7f751f"
+        },
+        {
+          "current_sha256": "9cd859971e158a25112cdbb928e98d2a030f11729a2b8e970dd650f4b38e5b60",
+          "path": "experiments/forge/policy_snapshot_publication.py",
+          "stored_sha256": "5a637679392b4b1869fb8d1ca15cf7f6855f54d50ea4cb6857ad07aa733aa9a9"
+        },
+        {
+          "current_sha256": "117d07dcf5f4c40401166d0960dc6b06228fd7c52d062543cca9d62964f0345e",
+          "path": "experiments/forge/sampling.py",
+          "stored_sha256": "5f5013418a051ef18064aff5fea62c61b5b31bbcd20945e075e0aaf23d6985d7"
+        },
+        {
+          "current_sha256": "8615984eeb7674fc124892527b00385d1e4fce6da907928da861c9af2d7e95d3",
+          "path": "experiments/forge/views.py",
+          "stored_sha256": "d0bafd90cb5bc727bb21b554678245e3d028bdd4c04fcd5cae8af40a513727d1"
+        }
+      ],
+      "path": "configs/forge/task-variants/multibank_policy_v1/cover_leftover_multibank_policy_v1.json",
+      "task_id": "cover_leftover_multibank_policy_v1"
+    },
+    {
+      "after_sha256": "5d1183fa266dcdfaaeea101365383ad3326de85c47fa5a199bece6866fc20612",
+      "all_other_fields_identical": true,
+      "before_sha256": "2b7415e7311a9c2aca2a4a65d3f46f27ca660071c1fd947c85d32c7cbc0cf01b",
+      "changed_source_keys": [
+        {
+          "current_sha256": "04297493b688dbbe870683803fdafa8730d83942576ff4ffa38569a4deeda780",
+          "path": "experiments/forge/adapters.py",
+          "stored_sha256": "dd503ac084fc91b9daf7fed13ab6540d302db323c91d9a08b92e97e8cad2ce7f"
+        },
+        {
+          "current_sha256": "2df76b239ae44d81cfc9d8bd1469c569aa36d9deb135e36a49220309c7d54694",
+          "path": "experiments/forge/api.py",
+          "stored_sha256": "f53e6afd4578d9233c8c60ba483831e367e4ebfd59d53386a02b11a7979ab71d"
+        },
+        {
+          "current_sha256": "3599a45ba7a83d96aa12ce2a5c13ff00bba170b81ccfdfc996552fb8aa747621",
+          "path": "experiments/forge/boundaries.py",
+          "stored_sha256": "155155f3ff95efc79308b8edfabb3c4357f45aee6c334da8bc6631eb4426b541"
+        },
+        {
+          "current_sha256": "69b9cca335dae0f6d4560861ef417d5dfb34008b939d93a30e500a750f7b8416",
+          "path": "experiments/forge/evaluate.py",
+          "stored_sha256": "e1873f056c732b14c456a6a196f5756e855a63b7ae2f77dfde1c6ee671d221df"
+        },
+        {
+          "current_sha256": "a0a80fdfb519a830149c8876df53d716fcbda652031ded1102384bfeba70cb12",
+          "path": "experiments/forge/named_policy_planning.py",
+          "stored_sha256": "e74124bfbfc10017d1e1b39d04ed0da97de13131bed79c30f25b52795863d3b9"
+        },
+        {
+          "current_sha256": "5192a24571d1c6a5b65011a4550c2a134db880a7e85baf07fcbc8b85d628bc13",
+          "path": "experiments/forge/policy_adapters.py",
+          "stored_sha256": "95f7bf03c878d484d01a0fdf0f6b5c9ad34b8df94106ff7a50b02f7f1dfe67cf"
+        },
+        {
+          "current_sha256": "d738fc16824a2ccc7bdf5a1a3742e4dc3fe421a4413eb2fc65ccdd5240b01917",
+          "path": "experiments/forge/policy_cohorts.py",
+          "stored_sha256": "9cbb8addeee483c004b3b36833def111c393703eab9f6d62b79f81065f7f751f"
+        },
+        {
+          "current_sha256": "9cd859971e158a25112cdbb928e98d2a030f11729a2b8e970dd650f4b38e5b60",
+          "path": "experiments/forge/policy_snapshot_publication.py",
+          "stored_sha256": "5a637679392b4b1869fb8d1ca15cf7f6855f54d50ea4cb6857ad07aa733aa9a9"
+        },
+        {
+          "current_sha256": "117d07dcf5f4c40401166d0960dc6b06228fd7c52d062543cca9d62964f0345e",
+          "path": "experiments/forge/sampling.py",
+          "stored_sha256": "5f5013418a051ef18064aff5fea62c61b5b31bbcd20945e075e0aaf23d6985d7"
+        },
+        {
+          "current_sha256": "8615984eeb7674fc124892527b00385d1e4fce6da907928da861c9af2d7e95d3",
+          "path": "experiments/forge/views.py",
+          "stored_sha256": "d0bafd90cb5bc727bb21b554678245e3d028bdd4c04fcd5cae8af40a513727d1"
+        }
+      ],
+      "path": "configs/forge/task-variants/policy_selected_cloud_v1/ae_gan_hold_policy_selected_cloud_v1.json",
+      "task_id": "ae_gan_hold_policy_selected_cloud_v1"
+    },
+    {
+      "after_sha256": "6838162afab57885b6c06119629c087bd69a8d224af093ced5aa492d6cf3113c",
+      "all_other_fields_identical": true,
+      "before_sha256": "29fd1b7438d4e606487421619ff0caad30fa76bdfe7e709f0ed7208cbefc2f92",
+      "changed_source_keys": [
+        {
+          "current_sha256": "04297493b688dbbe870683803fdafa8730d83942576ff4ffa38569a4deeda780",
+          "path": "experiments/forge/adapters.py",
+          "stored_sha256": "dd503ac084fc91b9daf7fed13ab6540d302db323c91d9a08b92e97e8cad2ce7f"
+        },
+        {
+          "current_sha256": "2df76b239ae44d81cfc9d8bd1469c569aa36d9deb135e36a49220309c7d54694",
+          "path": "experiments/forge/api.py",
+          "stored_sha256": "f53e6afd4578d9233c8c60ba483831e367e4ebfd59d53386a02b11a7979ab71d"
+        },
+        {
+          "current_sha256": "3599a45ba7a83d96aa12ce2a5c13ff00bba170b81ccfdfc996552fb8aa747621",
+          "path": "experiments/forge/boundaries.py",
+          "stored_sha256": "155155f3ff95efc79308b8edfabb3c4357f45aee6c334da8bc6631eb4426b541"
+        },
+        {
+          "current_sha256": "69b9cca335dae0f6d4560861ef417d5dfb34008b939d93a30e500a750f7b8416",
+          "path": "experiments/forge/evaluate.py",
+          "stored_sha256": "e1873f056c732b14c456a6a196f5756e855a63b7ae2f77dfde1c6ee671d221df"
+        },
+        {
+          "current_sha256": "a0a80fdfb519a830149c8876df53d716fcbda652031ded1102384bfeba70cb12",
+          "path": "experiments/forge/named_policy_planning.py",
+          "stored_sha256": "e74124bfbfc10017d1e1b39d04ed0da97de13131bed79c30f25b52795863d3b9"
+        },
+        {
+          "current_sha256": "5192a24571d1c6a5b65011a4550c2a134db880a7e85baf07fcbc8b85d628bc13",
+          "path": "experiments/forge/policy_adapters.py",
+          "stored_sha256": "95f7bf03c878d484d01a0fdf0f6b5c9ad34b8df94106ff7a50b02f7f1dfe67cf"
+        },
+        {
+          "current_sha256": "d738fc16824a2ccc7bdf5a1a3742e4dc3fe421a4413eb2fc65ccdd5240b01917",
+          "path": "experiments/forge/policy_cohorts.py",
+          "stored_sha256": "9cbb8addeee483c004b3b36833def111c393703eab9f6d62b79f81065f7f751f"
+        },
+        {
+          "current_sha256": "9cd859971e158a25112cdbb928e98d2a030f11729a2b8e970dd650f4b38e5b60",
+          "path": "experiments/forge/policy_snapshot_publication.py",
+          "stored_sha256": "5a637679392b4b1869fb8d1ca15cf7f6855f54d50ea4cb6857ad07aa733aa9a9"
+        },
+        {
+          "current_sha256": "117d07dcf5f4c40401166d0960dc6b06228fd7c52d062543cca9d62964f0345e",
+          "path": "experiments/forge/sampling.py",
+          "stored_sha256": "5f5013418a051ef18064aff5fea62c61b5b31bbcd20945e075e0aaf23d6985d7"
+        },
+        {
+          "current_sha256": "8615984eeb7674fc124892527b00385d1e4fce6da907928da861c9af2d7e95d3",
+          "path": "experiments/forge/views.py",
+          "stored_sha256": "d0bafd90cb5bc727bb21b554678245e3d028bdd4c04fcd5cae8af40a513727d1"
+        }
+      ],
+      "path": "configs/forge/task-variants/policy_selected_cloud_v1/cover_leftover_policy_selected_cloud_v1.json",
+      "task_id": "cover_leftover_policy_selected_cloud_v1"
+    },
+    {
+      "after_sha256": "347e9da30be5a9c8389788bd3c7b700a2760e6519d533f8a18adf34c45b1fa73",
+      "all_other_fields_identical": true,
+      "before_sha256": "2ac4099f6abd9e17285841b31b598d284907ab1cc7d4a815dafe72af37148868",
+      "changed_source_keys": [
+        {
+          "current_sha256": "04297493b688dbbe870683803fdafa8730d83942576ff4ffa38569a4deeda780",
+          "path": "experiments/forge/adapters.py",
+          "stored_sha256": "dd503ac084fc91b9daf7fed13ab6540d302db323c91d9a08b92e97e8cad2ce7f"
+        },
+        {
+          "current_sha256": "2df76b239ae44d81cfc9d8bd1469c569aa36d9deb135e36a49220309c7d54694",
+          "path": "experiments/forge/api.py",
+          "stored_sha256": "f53e6afd4578d9233c8c60ba483831e367e4ebfd59d53386a02b11a7979ab71d"
+        },
+        {
+          "current_sha256": "3599a45ba7a83d96aa12ce2a5c13ff00bba170b81ccfdfc996552fb8aa747621",
+          "path": "experiments/forge/boundaries.py",
+          "stored_sha256": "155155f3ff95efc79308b8edfabb3c4357f45aee6c334da8bc6631eb4426b541"
+        },
+        {
+          "current_sha256": "69b9cca335dae0f6d4560861ef417d5dfb34008b939d93a30e500a750f7b8416",
+          "path": "experiments/forge/evaluate.py",
+          "stored_sha256": "e1873f056c732b14c456a6a196f5756e855a63b7ae2f77dfde1c6ee671d221df"
+        },
+        {
+          "current_sha256": "a0a80fdfb519a830149c8876df53d716fcbda652031ded1102384bfeba70cb12",
+          "path": "experiments/forge/named_policy_planning.py",
+          "stored_sha256": "e74124bfbfc10017d1e1b39d04ed0da97de13131bed79c30f25b52795863d3b9"
+        },
+        {
+          "current_sha256": "5192a24571d1c6a5b65011a4550c2a134db880a7e85baf07fcbc8b85d628bc13",
+          "path": "experiments/forge/policy_adapters.py",
+          "stored_sha256": "95f7bf03c878d484d01a0fdf0f6b5c9ad34b8df94106ff7a50b02f7f1dfe67cf"
+        },
+        {
+          "current_sha256": "d738fc16824a2ccc7bdf5a1a3742e4dc3fe421a4413eb2fc65ccdd5240b01917",
+          "path": "experiments/forge/policy_cohorts.py",
+          "stored_sha256": "9cbb8addeee483c004b3b36833def111c393703eab9f6d62b79f81065f7f751f"
+        },
+        {
+          "current_sha256": "9cd859971e158a25112cdbb928e98d2a030f11729a2b8e970dd650f4b38e5b60",
+          "path": "experiments/forge/policy_snapshot_publication.py",
+          "stored_sha256": "5a637679392b4b1869fb8d1ca15cf7f6855f54d50ea4cb6857ad07aa733aa9a9"
+        },
+        {
+          "current_sha256": "117d07dcf5f4c40401166d0960dc6b06228fd7c52d062543cca9d62964f0345e",
+          "path": "experiments/forge/sampling.py",
+          "stored_sha256": "5f5013418a051ef18064aff5fea62c61b5b31bbcd20945e075e0aaf23d6985d7"
+        },
+        {
+          "current_sha256": "8615984eeb7674fc124892527b00385d1e4fce6da907928da861c9af2d7e95d3",
+          "path": "experiments/forge/views.py",
+          "stored_sha256": "d0bafd90cb5bc727bb21b554678245e3d028bdd4c04fcd5cae8af40a513727d1"
+        }
+      ],
+      "path": "configs/forge/task-variants/policy_selected_cloud_v1/five_word_joint_acquisition_policy_selected_cloud_v1.json",
+      "task_id": "five_word_joint_acquisition_policy_selected_cloud_v1"
+    },
+    {
+      "after_sha256": "e9dd9eafe8fc9b88ae0ed2f48c241e6c03ea8249e74d41d87bf268a42f699d17",
+      "all_other_fields_identical": true,
+      "before_sha256": "bd1cc13149521b18178860132fb3b5ca10a653ad6811d816c813b894789962f9",
+      "changed_source_keys": [
+        {
+          "current_sha256": "04297493b688dbbe870683803fdafa8730d83942576ff4ffa38569a4deeda780",
+          "path": "experiments/forge/adapters.py",
+          "stored_sha256": "dd503ac084fc91b9daf7fed13ab6540d302db323c91d9a08b92e97e8cad2ce7f"
+        },
+        {
+          "current_sha256": "2df76b239ae44d81cfc9d8bd1469c569aa36d9deb135e36a49220309c7d54694",
+          "path": "experiments/forge/api.py",
+          "stored_sha256": "f53e6afd4578d9233c8c60ba483831e367e4ebfd59d53386a02b11a7979ab71d"
+        },
+        {
+          "current_sha256": "3599a45ba7a83d96aa12ce2a5c13ff00bba170b81ccfdfc996552fb8aa747621",
+          "path": "experiments/forge/boundaries.py",
+          "stored_sha256": "155155f3ff95efc79308b8edfabb3c4357f45aee6c334da8bc6631eb4426b541"
+        },
+        {
+          "current_sha256": "69b9cca335dae0f6d4560861ef417d5dfb34008b939d93a30e500a750f7b8416",
+          "path": "experiments/forge/evaluate.py",
+          "stored_sha256": "e1873f056c732b14c456a6a196f5756e855a63b7ae2f77dfde1c6ee671d221df"
+        },
+        {
+          "current_sha256": "a0a80fdfb519a830149c8876df53d716fcbda652031ded1102384bfeba70cb12",
+          "path": "experiments/forge/named_policy_planning.py",
+          "stored_sha256": "e74124bfbfc10017d1e1b39d04ed0da97de13131bed79c30f25b52795863d3b9"
+        },
+        {
+          "current_sha256": "5192a24571d1c6a5b65011a4550c2a134db880a7e85baf07fcbc8b85d628bc13",
+          "path": "experiments/forge/policy_adapters.py",
+          "stored_sha256": "95f7bf03c878d484d01a0fdf0f6b5c9ad34b8df94106ff7a50b02f7f1dfe67cf"
+        },
+        {
+          "current_sha256": "d738fc16824a2ccc7bdf5a1a3742e4dc3fe421a4413eb2fc65ccdd5240b01917",
+          "path": "experiments/forge/policy_cohorts.py",
+          "stored_sha256": "9cbb8addeee483c004b3b36833def111c393703eab9f6d62b79f81065f7f751f"
+        },
+        {
+          "current_sha256": "9cd859971e158a25112cdbb928e98d2a030f11729a2b8e970dd650f4b38e5b60",
+          "path": "experiments/forge/policy_snapshot_publication.py",
+          "stored_sha256": "5a637679392b4b1869fb8d1ca15cf7f6855f54d50ea4cb6857ad07aa733aa9a9"
+        },
+        {
+          "current_sha256": "117d07dcf5f4c40401166d0960dc6b06228fd7c52d062543cca9d62964f0345e",
+          "path": "experiments/forge/sampling.py",
+          "stored_sha256": "5f5013418a051ef18064aff5fea62c61b5b31bbcd20945e075e0aaf23d6985d7"
+        },
+        {
+          "current_sha256": "8615984eeb7674fc124892527b00385d1e4fce6da907928da861c9af2d7e95d3",
+          "path": "experiments/forge/views.py",
+          "stored_sha256": "d0bafd90cb5bc727bb21b554678245e3d028bdd4c04fcd5cae8af40a513727d1"
+        }
+      ],
+      "path": "configs/forge/task-variants/policy_selected_cloud_v1/grid100_policy_selected_cloud_v1.json",
+      "task_id": "grid100_policy_selected_cloud_v1"
+    },
+    {
+      "after_sha256": "424504f1b95133ef47d0c3366c5debe4b5735f2c8a674dae381397dfaa555222",
+      "all_other_fields_identical": true,
+      "before_sha256": "a51be330bfaeb860bdb01475580ab8a9e3d4bf09f03343ee9eafba05e54c66f2",
+      "changed_source_keys": [
+        {
+          "current_sha256": "04297493b688dbbe870683803fdafa8730d83942576ff4ffa38569a4deeda780",
+          "path": "experiments/forge/adapters.py",
+          "stored_sha256": "dd503ac084fc91b9daf7fed13ab6540d302db323c91d9a08b92e97e8cad2ce7f"
+        },
+        {
+          "current_sha256": "2df76b239ae44d81cfc9d8bd1469c569aa36d9deb135e36a49220309c7d54694",
+          "path": "experiments/forge/api.py",
+          "stored_sha256": "f53e6afd4578d9233c8c60ba483831e367e4ebfd59d53386a02b11a7979ab71d"
+        },
+        {
+          "current_sha256": "3599a45ba7a83d96aa12ce2a5c13ff00bba170b81ccfdfc996552fb8aa747621",
+          "path": "experiments/forge/boundaries.py",
+          "stored_sha256": "155155f3ff95efc79308b8edfabb3c4357f45aee6c334da8bc6631eb4426b541"
+        },
+        {
+          "current_sha256": "69b9cca335dae0f6d4560861ef417d5dfb34008b939d93a30e500a750f7b8416",
+          "path": "experiments/forge/evaluate.py",
+          "stored_sha256": "e1873f056c732b14c456a6a196f5756e855a63b7ae2f77dfde1c6ee671d221df"
+        },
+        {
+          "current_sha256": "a0a80fdfb519a830149c8876df53d716fcbda652031ded1102384bfeba70cb12",
+          "path": "experiments/forge/named_policy_planning.py",
+          "stored_sha256": "e74124bfbfc10017d1e1b39d04ed0da97de13131bed79c30f25b52795863d3b9"
+        },
+        {
+          "current_sha256": "5192a24571d1c6a5b65011a4550c2a134db880a7e85baf07fcbc8b85d628bc13",
+          "path": "experiments/forge/policy_adapters.py",
+          "stored_sha256": "95f7bf03c878d484d01a0fdf0f6b5c9ad34b8df94106ff7a50b02f7f1dfe67cf"
+        },
+        {
+          "current_sha256": "d738fc16824a2ccc7bdf5a1a3742e4dc3fe421a4413eb2fc65ccdd5240b01917",
+          "path": "experiments/forge/policy_cohorts.py",
+          "stored_sha256": "9cbb8addeee483c004b3b36833def111c393703eab9f6d62b79f81065f7f751f"
+        },
+        {
+          "current_sha256": "9cd859971e158a25112cdbb928e98d2a030f11729a2b8e970dd650f4b38e5b60",
+          "path": "experiments/forge/policy_snapshot_publication.py",
+          "stored_sha256": "5a637679392b4b1869fb8d1ca15cf7f6855f54d50ea4cb6857ad07aa733aa9a9"
+        },
+        {
+          "current_sha256": "117d07dcf5f4c40401166d0960dc6b06228fd7c52d062543cca9d62964f0345e",
+          "path": "experiments/forge/sampling.py",
+          "stored_sha256": "5f5013418a051ef18064aff5fea62c61b5b31bbcd20945e075e0aaf23d6985d7"
+        },
+        {
+          "current_sha256": "8615984eeb7674fc124892527b00385d1e4fce6da907928da861c9af2d7e95d3",
+          "path": "experiments/forge/views.py",
+          "stored_sha256": "d0bafd90cb5bc727bb21b554678245e3d028bdd4c04fcd5cae8af40a513727d1"
+        }
+      ],
+      "path": "configs/forge/task-variants/policy_selected_cloud_v1/img_bars4_policy_selected_cloud_v1.json",
+      "task_id": "img_bars4_policy_selected_cloud_v1"
+    },
+    {
+      "after_sha256": "23a78cbc7f7f806988f4116a6f188dc2eb6104aa49e9b06bdc39dd13152a9610",
+      "all_other_fields_identical": true,
+      "before_sha256": "1c6aac27c68b5526807e18166ef6f1e0347b11febcb69d1df27d938d462281ab",
+      "changed_source_keys": [
+        {
+          "current_sha256": "04297493b688dbbe870683803fdafa8730d83942576ff4ffa38569a4deeda780",
+          "path": "experiments/forge/adapters.py",
+          "stored_sha256": "dd503ac084fc91b9daf7fed13ab6540d302db323c91d9a08b92e97e8cad2ce7f"
+        },
+        {
+          "current_sha256": "2df76b239ae44d81cfc9d8bd1469c569aa36d9deb135e36a49220309c7d54694",
+          "path": "experiments/forge/api.py",
+          "stored_sha256": "f53e6afd4578d9233c8c60ba483831e367e4ebfd59d53386a02b11a7979ab71d"
+        },
+        {
+          "current_sha256": "3599a45ba7a83d96aa12ce2a5c13ff00bba170b81ccfdfc996552fb8aa747621",
+          "path": "experiments/forge/boundaries.py",
+          "stored_sha256": "155155f3ff95efc79308b8edfabb3c4357f45aee6c334da8bc6631eb4426b541"
+        },
+        {
+          "current_sha256": "69b9cca335dae0f6d4560861ef417d5dfb34008b939d93a30e500a750f7b8416",
+          "path": "experiments/forge/evaluate.py",
+          "stored_sha256": "e1873f056c732b14c456a6a196f5756e855a63b7ae2f77dfde1c6ee671d221df"
+        },
+        {
+          "current_sha256": "a0a80fdfb519a830149c8876df53d716fcbda652031ded1102384bfeba70cb12",
+          "path": "experiments/forge/named_policy_planning.py",
+          "stored_sha256": "e74124bfbfc10017d1e1b39d04ed0da97de13131bed79c30f25b52795863d3b9"
+        },
+        {
+          "current_sha256": "5192a24571d1c6a5b65011a4550c2a134db880a7e85baf07fcbc8b85d628bc13",
+          "path": "experiments/forge/policy_adapters.py",
+          "stored_sha256": "95f7bf03c878d484d01a0fdf0f6b5c9ad34b8df94106ff7a50b02f7f1dfe67cf"
+        },
+        {
+          "current_sha256": "d738fc16824a2ccc7bdf5a1a3742e4dc3fe421a4413eb2fc65ccdd5240b01917",
+          "path": "experiments/forge/policy_cohorts.py",
+          "stored_sha256": "9cbb8addeee483c004b3b36833def111c393703eab9f6d62b79f81065f7f751f"
+        },
+        {
+          "current_sha256": "9cd859971e158a25112cdbb928e98d2a030f11729a2b8e970dd650f4b38e5b60",
+          "path": "experiments/forge/policy_snapshot_publication.py",
+          "stored_sha256": "5a637679392b4b1869fb8d1ca15cf7f6855f54d50ea4cb6857ad07aa733aa9a9"
+        },
+        {
+          "current_sha256": "117d07dcf5f4c40401166d0960dc6b06228fd7c52d062543cca9d62964f0345e",
+          "path": "experiments/forge/sampling.py",
+          "stored_sha256": "5f5013418a051ef18064aff5fea62c61b5b31bbcd20945e075e0aaf23d6985d7"
+        },
+        {
+          "current_sha256": "8615984eeb7674fc124892527b00385d1e4fce6da907928da861c9af2d7e95d3",
+          "path": "experiments/forge/views.py",
+          "stored_sha256": "d0bafd90cb5bc727bb21b554678245e3d028bdd4c04fcd5cae8af40a513727d1"
+        }
+      ],
+      "path": "configs/forge/task-variants/policy_selected_cloud_v1/img_blobs4_policy_selected_cloud_v1.json",
+      "task_id": "img_blobs4_policy_selected_cloud_v1"
+    },
+    {
+      "after_sha256": "1ce3321e8fea4064d883b22157d36cbda062042aae127153e58888addbb610e3",
+      "all_other_fields_identical": true,
+      "before_sha256": "4588a94afae5014e81eb03916989aeed988574de144841832224088fedcfd137",
+      "changed_source_keys": [
+        {
+          "current_sha256": "04297493b688dbbe870683803fdafa8730d83942576ff4ffa38569a4deeda780",
+          "path": "experiments/forge/adapters.py",
+          "stored_sha256": "dd503ac084fc91b9daf7fed13ab6540d302db323c91d9a08b92e97e8cad2ce7f"
+        },
+        {
+          "current_sha256": "2df76b239ae44d81cfc9d8bd1469c569aa36d9deb135e36a49220309c7d54694",
+          "path": "experiments/forge/api.py",
+          "stored_sha256": "f53e6afd4578d9233c8c60ba483831e367e4ebfd59d53386a02b11a7979ab71d"
+        },
+        {
+          "current_sha256": "3599a45ba7a83d96aa12ce2a5c13ff00bba170b81ccfdfc996552fb8aa747621",
+          "path": "experiments/forge/boundaries.py",
+          "stored_sha256": "155155f3ff95efc79308b8edfabb3c4357f45aee6c334da8bc6631eb4426b541"
+        },
+        {
+          "current_sha256": "69b9cca335dae0f6d4560861ef417d5dfb34008b939d93a30e500a750f7b8416",
+          "path": "experiments/forge/evaluate.py",
+          "stored_sha256": "e1873f056c732b14c456a6a196f5756e855a63b7ae2f77dfde1c6ee671d221df"
+        },
+        {
+          "current_sha256": "a0a80fdfb519a830149c8876df53d716fcbda652031ded1102384bfeba70cb12",
+          "path": "experiments/forge/named_policy_planning.py",
+          "stored_sha256": "e74124bfbfc10017d1e1b39d04ed0da97de13131bed79c30f25b52795863d3b9"
+        },
+        {
+          "current_sha256": "5192a24571d1c6a5b65011a4550c2a134db880a7e85baf07fcbc8b85d628bc13",
+          "path": "experiments/forge/policy_adapters.py",
+          "stored_sha256": "95f7bf03c878d484d01a0fdf0f6b5c9ad34b8df94106ff7a50b02f7f1dfe67cf"
+        },
+        {
+          "current_sha256": "d738fc16824a2ccc7bdf5a1a3742e4dc3fe421a4413eb2fc65ccdd5240b01917",
+          "path": "experiments/forge/policy_cohorts.py",
+          "stored_sha256": "9cbb8addeee483c004b3b36833def111c393703eab9f6d62b79f81065f7f751f"
+        },
+        {
+          "current_sha256": "9cd859971e158a25112cdbb928e98d2a030f11729a2b8e970dd650f4b38e5b60",
+          "path": "experiments/forge/policy_snapshot_publication.py",
+          "stored_sha256": "5a637679392b4b1869fb8d1ca15cf7f6855f54d50ea4cb6857ad07aa733aa9a9"
+        },
+        {
+          "current_sha256": "117d07dcf5f4c40401166d0960dc6b06228fd7c52d062543cca9d62964f0345e",
+          "path": "experiments/forge/sampling.py",
+          "stored_sha256": "5f5013418a051ef18064aff5fea62c61b5b31bbcd20945e075e0aaf23d6985d7"
+        },
+        {
+          "current_sha256": "8615984eeb7674fc124892527b00385d1e4fce6da907928da861c9af2d7e95d3",
+          "path": "experiments/forge/views.py",
+          "stored_sha256": "d0bafd90cb5bc727bb21b554678245e3d028bdd4c04fcd5cae8af40a513727d1"
+        }
+      ],
+      "path": "configs/forge/task-variants/policy_selected_cloud_v1/img_intensity2_policy_selected_cloud_v1.json",
+      "task_id": "img_intensity2_policy_selected_cloud_v1"
+    },
+    {
+      "after_sha256": "d3651273a608eed321819abce9b8cf9fd927a0007265d42507f4860fc14645b1",
+      "all_other_fields_identical": true,
+      "before_sha256": "4b445f3cdd43ca2df24543a299c1e09a3f43804a284674fe26ae86383a7cddff",
+      "changed_source_keys": [
+        {
+          "current_sha256": "04297493b688dbbe870683803fdafa8730d83942576ff4ffa38569a4deeda780",
+          "path": "experiments/forge/adapters.py",
+          "stored_sha256": "dd503ac084fc91b9daf7fed13ab6540d302db323c91d9a08b92e97e8cad2ce7f"
+        },
+        {
+          "current_sha256": "2df76b239ae44d81cfc9d8bd1469c569aa36d9deb135e36a49220309c7d54694",
+          "path": "experiments/forge/api.py",
+          "stored_sha256": "f53e6afd4578d9233c8c60ba483831e367e4ebfd59d53386a02b11a7979ab71d"
+        },
+        {
+          "current_sha256": "3599a45ba7a83d96aa12ce2a5c13ff00bba170b81ccfdfc996552fb8aa747621",
+          "path": "experiments/forge/boundaries.py",
+          "stored_sha256": "155155f3ff95efc79308b8edfabb3c4357f45aee6c334da8bc6631eb4426b541"
+        },
+        {
+          "current_sha256": "69b9cca335dae0f6d4560861ef417d5dfb34008b939d93a30e500a750f7b8416",
+          "path": "experiments/forge/evaluate.py",
+          "stored_sha256": "e1873f056c732b14c456a6a196f5756e855a63b7ae2f77dfde1c6ee671d221df"
+        },
+        {
+          "current_sha256": "a0a80fdfb519a830149c8876df53d716fcbda652031ded1102384bfeba70cb12",
+          "path": "experiments/forge/named_policy_planning.py",
+          "stored_sha256": "e74124bfbfc10017d1e1b39d04ed0da97de13131bed79c30f25b52795863d3b9"
+        },
+        {
+          "current_sha256": "5192a24571d1c6a5b65011a4550c2a134db880a7e85baf07fcbc8b85d628bc13",
+          "path": "experiments/forge/policy_adapters.py",
+          "stored_sha256": "95f7bf03c878d484d01a0fdf0f6b5c9ad34b8df94106ff7a50b02f7f1dfe67cf"
+        },
+        {
+          "current_sha256": "d738fc16824a2ccc7bdf5a1a3742e4dc3fe421a4413eb2fc65ccdd5240b01917",
+          "path": "experiments/forge/policy_cohorts.py",
+          "stored_sha256": "9cbb8addeee483c004b3b36833def111c393703eab9f6d62b79f81065f7f751f"
+        },
+        {
+          "current_sha256": "9cd859971e158a25112cdbb928e98d2a030f11729a2b8e970dd650f4b38e5b60",
+          "path": "experiments/forge/policy_snapshot_publication.py",
+          "stored_sha256": "5a637679392b4b1869fb8d1ca15cf7f6855f54d50ea4cb6857ad07aa733aa9a9"
+        },
+        {
+          "current_sha256": "117d07dcf5f4c40401166d0960dc6b06228fd7c52d062543cca9d62964f0345e",
+          "path": "experiments/forge/sampling.py",
+          "stored_sha256": "5f5013418a051ef18064aff5fea62c61b5b31bbcd20945e075e0aaf23d6985d7"
+        },
+        {
+          "current_sha256": "8615984eeb7674fc124892527b00385d1e4fce6da907928da861c9af2d7e95d3",
+          "path": "experiments/forge/views.py",
+          "stored_sha256": "d0bafd90cb5bc727bb21b554678245e3d028bdd4c04fcd5cae8af40a513727d1"
+        }
+      ],
+      "path": "configs/forge/task-variants/policy_selected_cloud_v1/img_stripes2_policy_selected_cloud_v1.json",
+      "task_id": "img_stripes2_policy_selected_cloud_v1"
+    },
+    {
+      "after_sha256": "c3be00dac0110a0a7ec7ae460ffb5170d529e80f08e9cbf46b24ae3cad2f1f22",
+      "all_other_fields_identical": true,
+      "before_sha256": "5ca4e679c9374a66e3c93b451ef627b36c3d9f8e19151052b58dcc8e4de6a285",
+      "changed_source_keys": [
+        {
+          "current_sha256": "04297493b688dbbe870683803fdafa8730d83942576ff4ffa38569a4deeda780",
+          "path": "experiments/forge/adapters.py",
+          "stored_sha256": "dd503ac084fc91b9daf7fed13ab6540d302db323c91d9a08b92e97e8cad2ce7f"
+        },
+        {
+          "current_sha256": "2df76b239ae44d81cfc9d8bd1469c569aa36d9deb135e36a49220309c7d54694",
+          "path": "experiments/forge/api.py",
+          "stored_sha256": "f53e6afd4578d9233c8c60ba483831e367e4ebfd59d53386a02b11a7979ab71d"
+        },
+        {
+          "current_sha256": "3599a45ba7a83d96aa12ce2a5c13ff00bba170b81ccfdfc996552fb8aa747621",
+          "path": "experiments/forge/boundaries.py",
+          "stored_sha256": "155155f3ff95efc79308b8edfabb3c4357f45aee6c334da8bc6631eb4426b541"
+        },
+        {
+          "current_sha256": "69b9cca335dae0f6d4560861ef417d5dfb34008b939d93a30e500a750f7b8416",
+          "path": "experiments/forge/evaluate.py",
+          "stored_sha256": "e1873f056c732b14c456a6a196f5756e855a63b7ae2f77dfde1c6ee671d221df"
+        },
+        {
+          "current_sha256": "a0a80fdfb519a830149c8876df53d716fcbda652031ded1102384bfeba70cb12",
+          "path": "experiments/forge/named_policy_planning.py",
+          "stored_sha256": "e74124bfbfc10017d1e1b39d04ed0da97de13131bed79c30f25b52795863d3b9"
+        },
+        {
+          "current_sha256": "5192a24571d1c6a5b65011a4550c2a134db880a7e85baf07fcbc8b85d628bc13",
+          "path": "experiments/forge/policy_adapters.py",
+          "stored_sha256": "95f7bf03c878d484d01a0fdf0f6b5c9ad34b8df94106ff7a50b02f7f1dfe67cf"
+        },
+        {
+          "current_sha256": "d738fc16824a2ccc7bdf5a1a3742e4dc3fe421a4413eb2fc65ccdd5240b01917",
+          "path": "experiments/forge/policy_cohorts.py",
+          "stored_sha256": "9cbb8addeee483c004b3b36833def111c393703eab9f6d62b79f81065f7f751f"
+        },
+        {
+          "current_sha256": "9cd859971e158a25112cdbb928e98d2a030f11729a2b8e970dd650f4b38e5b60",
+          "path": "experiments/forge/policy_snapshot_publication.py",
+          "stored_sha256": "5a637679392b4b1869fb8d1ca15cf7f6855f54d50ea4cb6857ad07aa733aa9a9"
+        },
+        {
+          "current_sha256": "117d07dcf5f4c40401166d0960dc6b06228fd7c52d062543cca9d62964f0345e",
+          "path": "experiments/forge/sampling.py",
+          "stored_sha256": "5f5013418a051ef18064aff5fea62c61b5b31bbcd20945e075e0aaf23d6985d7"
+        },
+        {
+          "current_sha256": "8615984eeb7674fc124892527b00385d1e4fce6da907928da861c9af2d7e95d3",
+          "path": "experiments/forge/views.py",
+          "stored_sha256": "d0bafd90cb5bc727bb21b554678245e3d028bdd4c04fcd5cae8af40a513727d1"
+        }
+      ],
+      "path": "configs/forge/task-variants/policy_selected_cloud_v1/mid_scale_identity_policy_selected_cloud_v1.json",
+      "task_id": "mid_scale_identity_policy_selected_cloud_v1"
+    },
+    {
+      "after_sha256": "408e7a221cf30b5dbc3e4e943bed3114a5db15854ac50ca667b14515ab096b60",
+      "all_other_fields_identical": true,
+      "before_sha256": "fd7e60d340a284e67f1bfcb3faba3167d356a72b32b0ea75b7f5444a066cfa9c",
+      "changed_source_keys": [
+        {
+          "current_sha256": "04297493b688dbbe870683803fdafa8730d83942576ff4ffa38569a4deeda780",
+          "path": "experiments/forge/adapters.py",
+          "stored_sha256": "dd503ac084fc91b9daf7fed13ab6540d302db323c91d9a08b92e97e8cad2ce7f"
+        },
+        {
+          "current_sha256": "2df76b239ae44d81cfc9d8bd1469c569aa36d9deb135e36a49220309c7d54694",
+          "path": "experiments/forge/api.py",
+          "stored_sha256": "f53e6afd4578d9233c8c60ba483831e367e4ebfd59d53386a02b11a7979ab71d"
+        },
+        {
+          "current_sha256": "3599a45ba7a83d96aa12ce2a5c13ff00bba170b81ccfdfc996552fb8aa747621",
+          "path": "experiments/forge/boundaries.py",
+          "stored_sha256": "155155f3ff95efc79308b8edfabb3c4357f45aee6c334da8bc6631eb4426b541"
+        },
+        {
+          "current_sha256": "69b9cca335dae0f6d4560861ef417d5dfb34008b939d93a30e500a750f7b8416",
+          "path": "experiments/forge/evaluate.py",
+          "stored_sha256": "e1873f056c732b14c456a6a196f5756e855a63b7ae2f77dfde1c6ee671d221df"
+        },
+        {
+          "current_sha256": "a0a80fdfb519a830149c8876df53d716fcbda652031ded1102384bfeba70cb12",
+          "path": "experiments/forge/named_policy_planning.py",
+          "stored_sha256": "e74124bfbfc10017d1e1b39d04ed0da97de13131bed79c30f25b52795863d3b9"
+        },
+        {
+          "current_sha256": "5192a24571d1c6a5b65011a4550c2a134db880a7e85baf07fcbc8b85d628bc13",
+          "path": "experiments/forge/policy_adapters.py",
+          "stored_sha256": "95f7bf03c878d484d01a0fdf0f6b5c9ad34b8df94106ff7a50b02f7f1dfe67cf"
+        },
+        {
+          "current_sha256": "d738fc16824a2ccc7bdf5a1a3742e4dc3fe421a4413eb2fc65ccdd5240b01917",
+          "path": "experiments/forge/policy_cohorts.py",
+          "stored_sha256": "9cbb8addeee483c004b3b36833def111c393703eab9f6d62b79f81065f7f751f"
+        },
+        {
+          "current_sha256": "9cd859971e158a25112cdbb928e98d2a030f11729a2b8e970dd650f4b38e5b60",
+          "path": "experiments/forge/policy_snapshot_publication.py",
+          "stored_sha256": "5a637679392b4b1869fb8d1ca15cf7f6855f54d50ea4cb6857ad07aa733aa9a9"
+        },
+        {
+          "current_sha256": "117d07dcf5f4c40401166d0960dc6b06228fd7c52d062543cca9d62964f0345e",
+          "path": "experiments/forge/sampling.py",
+          "stored_sha256": "5f5013418a051ef18064aff5fea62c61b5b31bbcd20945e075e0aaf23d6985d7"
+        },
+        {
+          "current_sha256": "8615984eeb7674fc124892527b00385d1e4fce6da907928da861c9af2d7e95d3",
+          "path": "experiments/forge/views.py",
+          "stored_sha256": "d0bafd90cb5bc727bb21b554678245e3d028bdd4c04fcd5cae8af40a513727d1"
+        }
+      ],
+      "path": "configs/forge/task-variants/policy_selected_cloud_v1/mode_hold_policy_selected_cloud_v1.json",
+      "task_id": "mode_hold_policy_selected_cloud_v1"
+    },
+    {
+      "after_sha256": "65eab674e9bdd9822b0f8b58f6abd31d249a5c13a6fde00300f2fa09ab361057",
+      "all_other_fields_identical": true,
+      "before_sha256": "396eb80ad47baf5a0a9078fe76c08a3b6f26ccff6a53d38f0127c81ea99a70ec",
+      "changed_source_keys": [
+        {
+          "current_sha256": "04297493b688dbbe870683803fdafa8730d83942576ff4ffa38569a4deeda780",
+          "path": "experiments/forge/adapters.py",
+          "stored_sha256": "dd503ac084fc91b9daf7fed13ab6540d302db323c91d9a08b92e97e8cad2ce7f"
+        },
+        {
+          "current_sha256": "2df76b239ae44d81cfc9d8bd1469c569aa36d9deb135e36a49220309c7d54694",
+          "path": "experiments/forge/api.py",
+          "stored_sha256": "f53e6afd4578d9233c8c60ba483831e367e4ebfd59d53386a02b11a7979ab71d"
+        },
+        {
+          "current_sha256": "3599a45ba7a83d96aa12ce2a5c13ff00bba170b81ccfdfc996552fb8aa747621",
+          "path": "experiments/forge/boundaries.py",
+          "stored_sha256": "155155f3ff95efc79308b8edfabb3c4357f45aee6c334da8bc6631eb4426b541"
+        },
+        {
+          "current_sha256": "69b9cca335dae0f6d4560861ef417d5dfb34008b939d93a30e500a750f7b8416",
+          "path": "experiments/forge/evaluate.py",
+          "stored_sha256": "e1873f056c732b14c456a6a196f5756e855a63b7ae2f77dfde1c6ee671d221df"
+        },
+        {
+          "current_sha256": "a0a80fdfb519a830149c8876df53d716fcbda652031ded1102384bfeba70cb12",
+          "path": "experiments/forge/named_policy_planning.py",
+          "stored_sha256": "e74124bfbfc10017d1e1b39d04ed0da97de13131bed79c30f25b52795863d3b9"
+        },
+        {
+          "current_sha256": "5192a24571d1c6a5b65011a4550c2a134db880a7e85baf07fcbc8b85d628bc13",
+          "path": "experiments/forge/policy_adapters.py",
+          "stored_sha256": "95f7bf03c878d484d01a0fdf0f6b5c9ad34b8df94106ff7a50b02f7f1dfe67cf"
+        },
+        {
+          "current_sha256": "d738fc16824a2ccc7bdf5a1a3742e4dc3fe421a4413eb2fc65ccdd5240b01917",
+          "path": "experiments/forge/policy_cohorts.py",
+          "stored_sha256": "9cbb8addeee483c004b3b36833def111c393703eab9f6d62b79f81065f7f751f"
+        },
+        {
+          "current_sha256": "9cd859971e158a25112cdbb928e98d2a030f11729a2b8e970dd650f4b38e5b60",
+          "path": "experiments/forge/policy_snapshot_publication.py",
+          "stored_sha256": "5a637679392b4b1869fb8d1ca15cf7f6855f54d50ea4cb6857ad07aa733aa9a9"
+        },
+        {
+          "current_sha256": "117d07dcf5f4c40401166d0960dc6b06228fd7c52d062543cca9d62964f0345e",
+          "path": "experiments/forge/sampling.py",
+          "stored_sha256": "5f5013418a051ef18064aff5fea62c61b5b31bbcd20945e075e0aaf23d6985d7"
+        },
+        {
+          "current_sha256": "8615984eeb7674fc124892527b00385d1e4fce6da907928da861c9af2d7e95d3",
+          "path": "experiments/forge/views.py",
+          "stored_sha256": "d0bafd90cb5bc727bb21b554678245e3d028bdd4c04fcd5cae8af40a513727d1"
+        }
+      ],
+      "path": "configs/forge/task-variants/policy_selected_cloud_v1/residual_student_policy_selected_cloud_v1.json",
+      "task_id": "residual_student_policy_selected_cloud_v1"
+    },
+    {
+      "after_sha256": "ab2efa5575c969ed0a570ad8dcc6bdff0c215454e57abd11343d80c0896c6aae",
+      "all_other_fields_identical": true,
+      "before_sha256": "64d054a35f658eb8fec2b96848fabeb760c78c97baebcbc0352bf49e033f8f1d",
+      "changed_source_keys": [
+        {
+          "current_sha256": "04297493b688dbbe870683803fdafa8730d83942576ff4ffa38569a4deeda780",
+          "path": "experiments/forge/adapters.py",
+          "stored_sha256": "dd503ac084fc91b9daf7fed13ab6540d302db323c91d9a08b92e97e8cad2ce7f"
+        },
+        {
+          "current_sha256": "2df76b239ae44d81cfc9d8bd1469c569aa36d9deb135e36a49220309c7d54694",
+          "path": "experiments/forge/api.py",
+          "stored_sha256": "f53e6afd4578d9233c8c60ba483831e367e4ebfd59d53386a02b11a7979ab71d"
+        },
+        {
+          "current_sha256": "3599a45ba7a83d96aa12ce2a5c13ff00bba170b81ccfdfc996552fb8aa747621",
+          "path": "experiments/forge/boundaries.py",
+          "stored_sha256": "155155f3ff95efc79308b8edfabb3c4357f45aee6c334da8bc6631eb4426b541"
+        },
+        {
+          "current_sha256": "69b9cca335dae0f6d4560861ef417d5dfb34008b939d93a30e500a750f7b8416",
+          "path": "experiments/forge/evaluate.py",
+          "stored_sha256": "e1873f056c732b14c456a6a196f5756e855a63b7ae2f77dfde1c6ee671d221df"
+        },
+        {
+          "current_sha256": "a0a80fdfb519a830149c8876df53d716fcbda652031ded1102384bfeba70cb12",
+          "path": "experiments/forge/named_policy_planning.py",
+          "stored_sha256": "e74124bfbfc10017d1e1b39d04ed0da97de13131bed79c30f25b52795863d3b9"
+        },
+        {
+          "current_sha256": "5192a24571d1c6a5b65011a4550c2a134db880a7e85baf07fcbc8b85d628bc13",
+          "path": "experiments/forge/policy_adapters.py",
+          "stored_sha256": "95f7bf03c878d484d01a0fdf0f6b5c9ad34b8df94106ff7a50b02f7f1dfe67cf"
+        },
+        {
+          "current_sha256": "d738fc16824a2ccc7bdf5a1a3742e4dc3fe421a4413eb2fc65ccdd5240b01917",
+          "path": "experiments/forge/policy_cohorts.py",
+          "stored_sha256": "9cbb8addeee483c004b3b36833def111c393703eab9f6d62b79f81065f7f751f"
+        },
+        {
+          "current_sha256": "9cd859971e158a25112cdbb928e98d2a030f11729a2b8e970dd650f4b38e5b60",
+          "path": "experiments/forge/policy_snapshot_publication.py",
+          "stored_sha256": "5a637679392b4b1869fb8d1ca15cf7f6855f54d50ea4cb6857ad07aa733aa9a9"
+        },
+        {
+          "current_sha256": "117d07dcf5f4c40401166d0960dc6b06228fd7c52d062543cca9d62964f0345e",
+          "path": "experiments/forge/sampling.py",
+          "stored_sha256": "5f5013418a051ef18064aff5fea62c61b5b31bbcd20945e075e0aaf23d6985d7"
+        },
+        {
+          "current_sha256": "8615984eeb7674fc124892527b00385d1e4fce6da907928da861c9af2d7e95d3",
+          "path": "experiments/forge/views.py",
+          "stored_sha256": "d0bafd90cb5bc727bb21b554678245e3d028bdd4c04fcd5cae8af40a513727d1"
+        }
+      ],
+      "path": "configs/forge/task-variants/policy_selected_cloud_v1/ring16_acquisition_policy_selected_cloud_v1.json",
+      "task_id": "ring16_acquisition_policy_selected_cloud_v1"
+    },
+    {
+      "after_sha256": "db92a624c493e1ae572c9775684be925905bcbbe72c8066d226fc0cb1a45490b",
+      "all_other_fields_identical": true,
+      "before_sha256": "d283349ed62f2586b5da33a9d37f8e75c3e615426f8e7b382de79c1f242549f1",
+      "changed_source_keys": [
+        {
+          "current_sha256": "04297493b688dbbe870683803fdafa8730d83942576ff4ffa38569a4deeda780",
+          "path": "experiments/forge/adapters.py",
+          "stored_sha256": "dd503ac084fc91b9daf7fed13ab6540d302db323c91d9a08b92e97e8cad2ce7f"
+        },
+        {
+          "current_sha256": "2df76b239ae44d81cfc9d8bd1469c569aa36d9deb135e36a49220309c7d54694",
+          "path": "experiments/forge/api.py",
+          "stored_sha256": "f53e6afd4578d9233c8c60ba483831e367e4ebfd59d53386a02b11a7979ab71d"
+        },
+        {
+          "current_sha256": "3599a45ba7a83d96aa12ce2a5c13ff00bba170b81ccfdfc996552fb8aa747621",
+          "path": "experiments/forge/boundaries.py",
+          "stored_sha256": "155155f3ff95efc79308b8edfabb3c4357f45aee6c334da8bc6631eb4426b541"
+        },
+        {
+          "current_sha256": "69b9cca335dae0f6d4560861ef417d5dfb34008b939d93a30e500a750f7b8416",
+          "path": "experiments/forge/evaluate.py",
+          "stored_sha256": "e1873f056c732b14c456a6a196f5756e855a63b7ae2f77dfde1c6ee671d221df"
+        },
+        {
+          "current_sha256": "a0a80fdfb519a830149c8876df53d716fcbda652031ded1102384bfeba70cb12",
+          "path": "experiments/forge/named_policy_planning.py",
+          "stored_sha256": "e74124bfbfc10017d1e1b39d04ed0da97de13131bed79c30f25b52795863d3b9"
+        },
+        {
+          "current_sha256": "5192a24571d1c6a5b65011a4550c2a134db880a7e85baf07fcbc8b85d628bc13",
+          "path": "experiments/forge/policy_adapters.py",
+          "stored_sha256": "95f7bf03c878d484d01a0fdf0f6b5c9ad34b8df94106ff7a50b02f7f1dfe67cf"
+        },
+        {
+          "current_sha256": "d738fc16824a2ccc7bdf5a1a3742e4dc3fe421a4413eb2fc65ccdd5240b01917",
+          "path": "experiments/forge/policy_cohorts.py",
+          "stored_sha256": "9cbb8addeee483c004b3b36833def111c393703eab9f6d62b79f81065f7f751f"
+        },
+        {
+          "current_sha256": "9cd859971e158a25112cdbb928e98d2a030f11729a2b8e970dd650f4b38e5b60",
+          "path": "experiments/forge/policy_snapshot_publication.py",
+          "stored_sha256": "5a637679392b4b1869fb8d1ca15cf7f6855f54d50ea4cb6857ad07aa733aa9a9"
+        },
+        {
+          "current_sha256": "117d07dcf5f4c40401166d0960dc6b06228fd7c52d062543cca9d62964f0345e",
+          "path": "experiments/forge/sampling.py",
+          "stored_sha256": "5f5013418a051ef18064aff5fea62c61b5b31bbcd20945e075e0aaf23d6985d7"
+        },
+        {
+          "current_sha256": "8615984eeb7674fc124892527b00385d1e4fce6da907928da861c9af2d7e95d3",
+          "path": "experiments/forge/views.py",
+          "stored_sha256": "d0bafd90cb5bc727bb21b554678245e3d028bdd4c04fcd5cae8af40a513727d1"
+        }
+      ],
+      "path": "configs/forge/task-variants/policy_selected_cloud_v1/ring_extension_policy_selected_cloud_v1.json",
+      "task_id": "ring_extension_policy_selected_cloud_v1"
+    },
+    {
+      "after_sha256": "4994635eb18d9e92701d871107513276ecfbb6f6ae3c64a5d2a04e565b1954d2",
+      "all_other_fields_identical": true,
+      "before_sha256": "e5618c68df6ce9eeb6a84d47fa93719f8b5bf4c54d26dd506bc45896b663d8a6",
+      "changed_source_keys": [
+        {
+          "current_sha256": "04297493b688dbbe870683803fdafa8730d83942576ff4ffa38569a4deeda780",
+          "path": "experiments/forge/adapters.py",
+          "stored_sha256": "dd503ac084fc91b9daf7fed13ab6540d302db323c91d9a08b92e97e8cad2ce7f"
+        },
+        {
+          "current_sha256": "2df76b239ae44d81cfc9d8bd1469c569aa36d9deb135e36a49220309c7d54694",
+          "path": "experiments/forge/api.py",
+          "stored_sha256": "f53e6afd4578d9233c8c60ba483831e367e4ebfd59d53386a02b11a7979ab71d"
+        },
+        {
+          "current_sha256": "3599a45ba7a83d96aa12ce2a5c13ff00bba170b81ccfdfc996552fb8aa747621",
+          "path": "experiments/forge/boundaries.py",
+          "stored_sha256": "155155f3ff95efc79308b8edfabb3c4357f45aee6c334da8bc6631eb4426b541"
+        },
+        {
+          "current_sha256": "69b9cca335dae0f6d4560861ef417d5dfb34008b939d93a30e500a750f7b8416",
+          "path": "experiments/forge/evaluate.py",
+          "stored_sha256": "e1873f056c732b14c456a6a196f5756e855a63b7ae2f77dfde1c6ee671d221df"
+        },
+        {
+          "current_sha256": "a0a80fdfb519a830149c8876df53d716fcbda652031ded1102384bfeba70cb12",
+          "path": "experiments/forge/named_policy_planning.py",
+          "stored_sha256": "e74124bfbfc10017d1e1b39d04ed0da97de13131bed79c30f25b52795863d3b9"
+        },
+        {
+          "current_sha256": "5192a24571d1c6a5b65011a4550c2a134db880a7e85baf07fcbc8b85d628bc13",
+          "path": "experiments/forge/policy_adapters.py",
+          "stored_sha256": "95f7bf03c878d484d01a0fdf0f6b5c9ad34b8df94106ff7a50b02f7f1dfe67cf"
+        },
+        {
+          "current_sha256": "d738fc16824a2ccc7bdf5a1a3742e4dc3fe421a4413eb2fc65ccdd5240b01917",
+          "path": "experiments/forge/policy_cohorts.py",
+          "stored_sha256": "9cbb8addeee483c004b3b36833def111c393703eab9f6d62b79f81065f7f751f"
+        },
+        {
+          "current_sha256": "9cd859971e158a25112cdbb928e98d2a030f11729a2b8e970dd650f4b38e5b60",
+          "path": "experiments/forge/policy_snapshot_publication.py",
+          "stored_sha256": "5a637679392b4b1869fb8d1ca15cf7f6855f54d50ea4cb6857ad07aa733aa9a9"
+        },
+        {
+          "current_sha256": "117d07dcf5f4c40401166d0960dc6b06228fd7c52d062543cca9d62964f0345e",
+          "path": "experiments/forge/sampling.py",
+          "stored_sha256": "5f5013418a051ef18064aff5fea62c61b5b31bbcd20945e075e0aaf23d6985d7"
+        },
+        {
+          "current_sha256": "8615984eeb7674fc124892527b00385d1e4fce6da907928da861c9af2d7e95d3",
+          "path": "experiments/forge/views.py",
+          "stored_sha256": "d0bafd90cb5bc727bb21b554678245e3d028bdd4c04fcd5cae8af40a513727d1"
+        }
+      ],
+      "path": "configs/forge/task-variants/policy_selected_cloud_v1/ring_hold_policy_selected_cloud_v1.json",
+      "task_id": "ring_hold_policy_selected_cloud_v1"
+    },
+    {
+      "after_sha256": "ca42b5ba869c781dc47b12d699d2bd9934246e4c2dc7fb38626a6f97bd9535b5",
+      "all_other_fields_identical": true,
+      "before_sha256": "bebf27f1f91e8818996b9b8310a514bb9f11ec9df200a6c06bf2656e80dddc0c",
+      "changed_source_keys": [
+        {
+          "current_sha256": "04297493b688dbbe870683803fdafa8730d83942576ff4ffa38569a4deeda780",
+          "path": "experiments/forge/adapters.py",
+          "stored_sha256": "dd503ac084fc91b9daf7fed13ab6540d302db323c91d9a08b92e97e8cad2ce7f"
+        },
+        {
+          "current_sha256": "2df76b239ae44d81cfc9d8bd1469c569aa36d9deb135e36a49220309c7d54694",
+          "path": "experiments/forge/api.py",
+          "stored_sha256": "f53e6afd4578d9233c8c60ba483831e367e4ebfd59d53386a02b11a7979ab71d"
+        },
+        {
+          "current_sha256": "3599a45ba7a83d96aa12ce2a5c13ff00bba170b81ccfdfc996552fb8aa747621",
+          "path": "experiments/forge/boundaries.py",
+          "stored_sha256": "155155f3ff95efc79308b8edfabb3c4357f45aee6c334da8bc6631eb4426b541"
+        },
+        {
+          "current_sha256": "69b9cca335dae0f6d4560861ef417d5dfb34008b939d93a30e500a750f7b8416",
+          "path": "experiments/forge/evaluate.py",
+          "stored_sha256": "e1873f056c732b14c456a6a196f5756e855a63b7ae2f77dfde1c6ee671d221df"
+        },
+        {
+          "current_sha256": "a0a80fdfb519a830149c8876df53d716fcbda652031ded1102384bfeba70cb12",
+          "path": "experiments/forge/named_policy_planning.py",
+          "stored_sha256": "e74124bfbfc10017d1e1b39d04ed0da97de13131bed79c30f25b52795863d3b9"
+        },
+        {
+          "current_sha256": "5192a24571d1c6a5b65011a4550c2a134db880a7e85baf07fcbc8b85d628bc13",
+          "path": "experiments/forge/policy_adapters.py",
+          "stored_sha256": "95f7bf03c878d484d01a0fdf0f6b5c9ad34b8df94106ff7a50b02f7f1dfe67cf"
+        },
+        {
+          "current_sha256": "d738fc16824a2ccc7bdf5a1a3742e4dc3fe421a4413eb2fc65ccdd5240b01917",
+          "path": "experiments/forge/policy_cohorts.py",
+          "stored_sha256": "9cbb8addeee483c004b3b36833def111c393703eab9f6d62b79f81065f7f751f"
+        },
+        {
+          "current_sha256": "9cd859971e158a25112cdbb928e98d2a030f11729a2b8e970dd650f4b38e5b60",
+          "path": "experiments/forge/policy_snapshot_publication.py",
+          "stored_sha256": "5a637679392b4b1869fb8d1ca15cf7f6855f54d50ea4cb6857ad07aa733aa9a9"
+        },
+        {
+          "current_sha256": "117d07dcf5f4c40401166d0960dc6b06228fd7c52d062543cca9d62964f0345e",
+          "path": "experiments/forge/sampling.py",
+          "stored_sha256": "5f5013418a051ef18064aff5fea62c61b5b31bbcd20945e075e0aaf23d6985d7"
+        },
+        {
+          "current_sha256": "8615984eeb7674fc124892527b00385d1e4fce6da907928da861c9af2d7e95d3",
+          "path": "experiments/forge/views.py",
+          "stored_sha256": "d0bafd90cb5bc727bb21b554678245e3d028bdd4c04fcd5cae8af40a513727d1"
+        }
+      ],
+      "path": "configs/forge/task-variants/policy_selected_cloud_v1/rotated100_policy_selected_cloud_v1.json",
+      "task_id": "rotated100_policy_selected_cloud_v1"
+    },
+    {
+      "after_sha256": "d39f81ca14bbd9fab3bf07910e4201f00cec582a0e88c716dd9befa90e257db9",
+      "all_other_fields_identical": true,
+      "before_sha256": "d3d6e7f07bbedd544e5900e02d9e2c7916e41c84557c08f489c1472193dda67f",
+      "changed_source_keys": [
+        {
+          "current_sha256": "04297493b688dbbe870683803fdafa8730d83942576ff4ffa38569a4deeda780",
+          "path": "experiments/forge/adapters.py",
+          "stored_sha256": "dd503ac084fc91b9daf7fed13ab6540d302db323c91d9a08b92e97e8cad2ce7f"
+        },
+        {
+          "current_sha256": "2df76b239ae44d81cfc9d8bd1469c569aa36d9deb135e36a49220309c7d54694",
+          "path": "experiments/forge/api.py",
+          "stored_sha256": "f53e6afd4578d9233c8c60ba483831e367e4ebfd59d53386a02b11a7979ab71d"
+        },
+        {
+          "current_sha256": "3599a45ba7a83d96aa12ce2a5c13ff00bba170b81ccfdfc996552fb8aa747621",
+          "path": "experiments/forge/boundaries.py",
+          "stored_sha256": "155155f3ff95efc79308b8edfabb3c4357f45aee6c334da8bc6631eb4426b541"
+        },
+        {
+          "current_sha256": "69b9cca335dae0f6d4560861ef417d5dfb34008b939d93a30e500a750f7b8416",
+          "path": "experiments/forge/evaluate.py",
+          "stored_sha256": "e1873f056c732b14c456a6a196f5756e855a63b7ae2f77dfde1c6ee671d221df"
+        },
+        {
+          "current_sha256": "a0a80fdfb519a830149c8876df53d716fcbda652031ded1102384bfeba70cb12",
+          "path": "experiments/forge/named_policy_planning.py",
+          "stored_sha256": "e74124bfbfc10017d1e1b39d04ed0da97de13131bed79c30f25b52795863d3b9"
+        },
+        {
+          "current_sha256": "5192a24571d1c6a5b65011a4550c2a134db880a7e85baf07fcbc8b85d628bc13",
+          "path": "experiments/forge/policy_adapters.py",
+          "stored_sha256": "95f7bf03c878d484d01a0fdf0f6b5c9ad34b8df94106ff7a50b02f7f1dfe67cf"
+        },
+        {
+          "current_sha256": "d738fc16824a2ccc7bdf5a1a3742e4dc3fe421a4413eb2fc65ccdd5240b01917",
+          "path": "experiments/forge/policy_cohorts.py",
+          "stored_sha256": "9cbb8addeee483c004b3b36833def111c393703eab9f6d62b79f81065f7f751f"
+        },
+        {
+          "current_sha256": "9cd859971e158a25112cdbb928e98d2a030f11729a2b8e970dd650f4b38e5b60",
+          "path": "experiments/forge/policy_snapshot_publication.py",
+          "stored_sha256": "5a637679392b4b1869fb8d1ca15cf7f6855f54d50ea4cb6857ad07aa733aa9a9"
+        },
+        {
+          "current_sha256": "117d07dcf5f4c40401166d0960dc6b06228fd7c52d062543cca9d62964f0345e",
+          "path": "experiments/forge/sampling.py",
+          "stored_sha256": "5f5013418a051ef18064aff5fea62c61b5b31bbcd20945e075e0aaf23d6985d7"
+        },
+        {
+          "current_sha256": "8615984eeb7674fc124892527b00385d1e4fce6da907928da861c9af2d7e95d3",
+          "path": "experiments/forge/views.py",
+          "stored_sha256": "d0bafd90cb5bc727bb21b554678245e3d028bdd4c04fcd5cae8af40a513727d1"
+        }
+      ],
+      "path": "configs/forge/task-variants/policy_selected_cloud_v1/staggered100_policy_selected_cloud_v1.json",
+      "task_id": "staggered100_policy_selected_cloud_v1"
+    },
+    {
+      "after_sha256": "03ef126f87131c7c604d874c1510e7fb39083023bc40fab7bc2681db3e2100d3",
+      "all_other_fields_identical": true,
+      "before_sha256": "04667687ceb0dd14d771a3fb4d5e7802943329b4596942e2f12b77c61de5d734",
+      "changed_source_keys": [
+        {
+          "current_sha256": "04297493b688dbbe870683803fdafa8730d83942576ff4ffa38569a4deeda780",
+          "path": "experiments/forge/adapters.py",
+          "stored_sha256": "dd503ac084fc91b9daf7fed13ab6540d302db323c91d9a08b92e97e8cad2ce7f"
+        },
+        {
+          "current_sha256": "2df76b239ae44d81cfc9d8bd1469c569aa36d9deb135e36a49220309c7d54694",
+          "path": "experiments/forge/api.py",
+          "stored_sha256": "f53e6afd4578d9233c8c60ba483831e367e4ebfd59d53386a02b11a7979ab71d"
+        },
+        {
+          "current_sha256": "3599a45ba7a83d96aa12ce2a5c13ff00bba170b81ccfdfc996552fb8aa747621",
+          "path": "experiments/forge/boundaries.py",
+          "stored_sha256": "155155f3ff95efc79308b8edfabb3c4357f45aee6c334da8bc6631eb4426b541"
+        },
+        {
+          "current_sha256": "69b9cca335dae0f6d4560861ef417d5dfb34008b939d93a30e500a750f7b8416",
+          "path": "experiments/forge/evaluate.py",
+          "stored_sha256": "e1873f056c732b14c456a6a196f5756e855a63b7ae2f77dfde1c6ee671d221df"
+        },
+        {
+          "current_sha256": "a0a80fdfb519a830149c8876df53d716fcbda652031ded1102384bfeba70cb12",
+          "path": "experiments/forge/named_policy_planning.py",
+          "stored_sha256": "e74124bfbfc10017d1e1b39d04ed0da97de13131bed79c30f25b52795863d3b9"
+        },
+        {
+          "current_sha256": "5192a24571d1c6a5b65011a4550c2a134db880a7e85baf07fcbc8b85d628bc13",
+          "path": "experiments/forge/policy_adapters.py",
+          "stored_sha256": "95f7bf03c878d484d01a0fdf0f6b5c9ad34b8df94106ff7a50b02f7f1dfe67cf"
+        },
+        {
+          "current_sha256": "d738fc16824a2ccc7bdf5a1a3742e4dc3fe421a4413eb2fc65ccdd5240b01917",
+          "path": "experiments/forge/policy_cohorts.py",
+          "stored_sha256": "9cbb8addeee483c004b3b36833def111c393703eab9f6d62b79f81065f7f751f"
+        },
+        {
+          "current_sha256": "9cd859971e158a25112cdbb928e98d2a030f11729a2b8e970dd650f4b38e5b60",
+          "path": "experiments/forge/policy_snapshot_publication.py",
+          "stored_sha256": "5a637679392b4b1869fb8d1ca15cf7f6855f54d50ea4cb6857ad07aa733aa9a9"
+        },
+        {
+          "current_sha256": "117d07dcf5f4c40401166d0960dc6b06228fd7c52d062543cca9d62964f0345e",
+          "path": "experiments/forge/sampling.py",
+          "stored_sha256": "5f5013418a051ef18064aff5fea62c61b5b31bbcd20945e075e0aaf23d6985d7"
+        },
+        {
+          "current_sha256": "8615984eeb7674fc124892527b00385d1e4fce6da907928da861c9af2d7e95d3",
+          "path": "experiments/forge/views.py",
+          "stored_sha256": "d0bafd90cb5bc727bb21b554678245e3d028bdd4c04fcd5cae8af40a513727d1"
+        }
+      ],
+      "path": "configs/forge/task-variants/policy_selected_cloud_v1/trajectory_policy_selected_cloud_v1.json",
+      "task_id": "trajectory_policy_selected_cloud_v1"
+    },
+    {
+      "after_sha256": "0be2f7583a0c2cd6146e1c3ea0784e613574348f5e6dc1f13879b2404a23c761",
+      "all_other_fields_identical": true,
+      "before_sha256": "d533379d6978ec76a90e4e91f57bda3dceee468f67f35fda59d5e9c4bc56633c",
+      "changed_source_keys": [
+        {
+          "current_sha256": "04297493b688dbbe870683803fdafa8730d83942576ff4ffa38569a4deeda780",
+          "path": "experiments/forge/adapters.py",
+          "stored_sha256": "dd503ac084fc91b9daf7fed13ab6540d302db323c91d9a08b92e97e8cad2ce7f"
+        },
+        {
+          "current_sha256": "2df76b239ae44d81cfc9d8bd1469c569aa36d9deb135e36a49220309c7d54694",
+          "path": "experiments/forge/api.py",
+          "stored_sha256": "f53e6afd4578d9233c8c60ba483831e367e4ebfd59d53386a02b11a7979ab71d"
+        },
+        {
+          "current_sha256": "3599a45ba7a83d96aa12ce2a5c13ff00bba170b81ccfdfc996552fb8aa747621",
+          "path": "experiments/forge/boundaries.py",
+          "stored_sha256": "155155f3ff95efc79308b8edfabb3c4357f45aee6c334da8bc6631eb4426b541"
+        },
+        {
+          "current_sha256": "69b9cca335dae0f6d4560861ef417d5dfb34008b939d93a30e500a750f7b8416",
+          "path": "experiments/forge/evaluate.py",
+          "stored_sha256": "e1873f056c732b14c456a6a196f5756e855a63b7ae2f77dfde1c6ee671d221df"
+        },
+        {
+          "current_sha256": "a0a80fdfb519a830149c8876df53d716fcbda652031ded1102384bfeba70cb12",
+          "path": "experiments/forge/named_policy_planning.py",
+          "stored_sha256": "e74124bfbfc10017d1e1b39d04ed0da97de13131bed79c30f25b52795863d3b9"
+        },
+        {
+          "current_sha256": "5192a24571d1c6a5b65011a4550c2a134db880a7e85baf07fcbc8b85d628bc13",
+          "path": "experiments/forge/policy_adapters.py",
+          "stored_sha256": "95f7bf03c878d484d01a0fdf0f6b5c9ad34b8df94106ff7a50b02f7f1dfe67cf"
+        },
+        {
+          "current_sha256": "d738fc16824a2ccc7bdf5a1a3742e4dc3fe421a4413eb2fc65ccdd5240b01917",
+          "path": "experiments/forge/policy_cohorts.py",
+          "stored_sha256": "9cbb8addeee483c004b3b36833def111c393703eab9f6d62b79f81065f7f751f"
+        },
+        {
+          "current_sha256": "9cd859971e158a25112cdbb928e98d2a030f11729a2b8e970dd650f4b38e5b60",
+          "path": "experiments/forge/policy_snapshot_publication.py",
+          "stored_sha256": "5a637679392b4b1869fb8d1ca15cf7f6855f54d50ea4cb6857ad07aa733aa9a9"
+        },
+        {
+          "current_sha256": "117d07dcf5f4c40401166d0960dc6b06228fd7c52d062543cca9d62964f0345e",
+          "path": "experiments/forge/sampling.py",
+          "stored_sha256": "5f5013418a051ef18064aff5fea62c61b5b31bbcd20945e075e0aaf23d6985d7"
+        },
+        {
+          "current_sha256": "8615984eeb7674fc124892527b00385d1e4fce6da907928da861c9af2d7e95d3",
+          "path": "experiments/forge/views.py",
+          "stored_sha256": "d0bafd90cb5bc727bb21b554678245e3d028bdd4c04fcd5cae8af40a513727d1"
+        }
+      ],
+      "path": "configs/forge/task-variants/policy_selected_cloud_v1/two_pole_policy_selected_cloud_v1.json",
+      "task_id": "two_pole_policy_selected_cloud_v1"
+    },
+    {
+      "after_sha256": "3432e10642e70f33040d4244ae4fd1735b4b084841a23ce03b8993645d5a6b05",
+      "all_other_fields_identical": true,
+      "before_sha256": "839c41b53f33fcd52e9ee81dea5a54f0ae4072da3c65201ad39432c7da2c6fa0",
+      "changed_source_keys": [
+        {
+          "current_sha256": "04297493b688dbbe870683803fdafa8730d83942576ff4ffa38569a4deeda780",
+          "path": "experiments/forge/adapters.py",
+          "stored_sha256": "dd503ac084fc91b9daf7fed13ab6540d302db323c91d9a08b92e97e8cad2ce7f"
+        },
+        {
+          "current_sha256": "2df76b239ae44d81cfc9d8bd1469c569aa36d9deb135e36a49220309c7d54694",
+          "path": "experiments/forge/api.py",
+          "stored_sha256": "f53e6afd4578d9233c8c60ba483831e367e4ebfd59d53386a02b11a7979ab71d"
+        },
+        {
+          "current_sha256": "3599a45ba7a83d96aa12ce2a5c13ff00bba170b81ccfdfc996552fb8aa747621",
+          "path": "experiments/forge/boundaries.py",
+          "stored_sha256": "155155f3ff95efc79308b8edfabb3c4357f45aee6c334da8bc6631eb4426b541"
+        },
+        {
+          "current_sha256": "69b9cca335dae0f6d4560861ef417d5dfb34008b939d93a30e500a750f7b8416",
+          "path": "experiments/forge/evaluate.py",
+          "stored_sha256": "e1873f056c732b14c456a6a196f5756e855a63b7ae2f77dfde1c6ee671d221df"
+        },
+        {
+          "current_sha256": "a0a80fdfb519a830149c8876df53d716fcbda652031ded1102384bfeba70cb12",
+          "path": "experiments/forge/named_policy_planning.py",
+          "stored_sha256": "e74124bfbfc10017d1e1b39d04ed0da97de13131bed79c30f25b52795863d3b9"
+        },
+        {
+          "current_sha256": "5192a24571d1c6a5b65011a4550c2a134db880a7e85baf07fcbc8b85d628bc13",
+          "path": "experiments/forge/policy_adapters.py",
+          "stored_sha256": "95f7bf03c878d484d01a0fdf0f6b5c9ad34b8df94106ff7a50b02f7f1dfe67cf"
+        },
+        {
+          "current_sha256": "d738fc16824a2ccc7bdf5a1a3742e4dc3fe421a4413eb2fc65ccdd5240b01917",
+          "path": "experiments/forge/policy_cohorts.py",
+          "stored_sha256": "9cbb8addeee483c004b3b36833def111c393703eab9f6d62b79f81065f7f751f"
+        },
+        {
+          "current_sha256": "9cd859971e158a25112cdbb928e98d2a030f11729a2b8e970dd650f4b38e5b60",
+          "path": "experiments/forge/policy_snapshot_publication.py",
+          "stored_sha256": "5a637679392b4b1869fb8d1ca15cf7f6855f54d50ea4cb6857ad07aa733aa9a9"
+        },
+        {
+          "current_sha256": "117d07dcf5f4c40401166d0960dc6b06228fd7c52d062543cca9d62964f0345e",
+          "path": "experiments/forge/sampling.py",
+          "stored_sha256": "5f5013418a051ef18064aff5fea62c61b5b31bbcd20945e075e0aaf23d6985d7"
+        },
+        {
+          "current_sha256": "8615984eeb7674fc124892527b00385d1e4fce6da907928da861c9af2d7e95d3",
+          "path": "experiments/forge/views.py",
+          "stored_sha256": "d0bafd90cb5bc727bb21b554678245e3d028bdd4c04fcd5cae8af40a513727d1"
+        }
+      ],
+      "path": "configs/forge/task-variants/policy_selected_cloud_v1/unipolar_policy_selected_cloud_v1.json",
+      "task_id": "unipolar_policy_selected_cloud_v1"
+    },
+    {
+      "after_sha256": "b6620cd3569e6af34f54a55fdd9f0429ac00ccd814b2e0f08e0b7a327a8355ad",
+      "all_other_fields_identical": true,
+      "before_sha256": "b732375b4920edcb812b4aaed6b550095967b138156d71dacd160698643f8707",
+      "changed_source_keys": [
+        {
+          "current_sha256": "04297493b688dbbe870683803fdafa8730d83942576ff4ffa38569a4deeda780",
+          "path": "experiments/forge/adapters.py",
+          "stored_sha256": "dd503ac084fc91b9daf7fed13ab6540d302db323c91d9a08b92e97e8cad2ce7f"
+        },
+        {
+          "current_sha256": "2df76b239ae44d81cfc9d8bd1469c569aa36d9deb135e36a49220309c7d54694",
+          "path": "experiments/forge/api.py",
+          "stored_sha256": "f53e6afd4578d9233c8c60ba483831e367e4ebfd59d53386a02b11a7979ab71d"
+        },
+        {
+          "current_sha256": "3599a45ba7a83d96aa12ce2a5c13ff00bba170b81ccfdfc996552fb8aa747621",
+          "path": "experiments/forge/boundaries.py",
+          "stored_sha256": "155155f3ff95efc79308b8edfabb3c4357f45aee6c334da8bc6631eb4426b541"
+        },
+        {
+          "current_sha256": "69b9cca335dae0f6d4560861ef417d5dfb34008b939d93a30e500a750f7b8416",
+          "path": "experiments/forge/evaluate.py",
+          "stored_sha256": "e1873f056c732b14c456a6a196f5756e855a63b7ae2f77dfde1c6ee671d221df"
+        },
+        {
+          "current_sha256": "a0a80fdfb519a830149c8876df53d716fcbda652031ded1102384bfeba70cb12",
+          "path": "experiments/forge/named_policy_planning.py",
+          "stored_sha256": "e74124bfbfc10017d1e1b39d04ed0da97de13131bed79c30f25b52795863d3b9"
+        },
+        {
+          "current_sha256": "5192a24571d1c6a5b65011a4550c2a134db880a7e85baf07fcbc8b85d628bc13",
+          "path": "experiments/forge/policy_adapters.py",
+          "stored_sha256": "95f7bf03c878d484d01a0fdf0f6b5c9ad34b8df94106ff7a50b02f7f1dfe67cf"
+        },
+        {
+          "current_sha256": "d738fc16824a2ccc7bdf5a1a3742e4dc3fe421a4413eb2fc65ccdd5240b01917",
+          "path": "experiments/forge/policy_cohorts.py",
+          "stored_sha256": "9cbb8addeee483c004b3b36833def111c393703eab9f6d62b79f81065f7f751f"
+        },
+        {
+          "current_sha256": "9cd859971e158a25112cdbb928e98d2a030f11729a2b8e970dd650f4b38e5b60",
+          "path": "experiments/forge/policy_snapshot_publication.py",
+          "stored_sha256": "5a637679392b4b1869fb8d1ca15cf7f6855f54d50ea4cb6857ad07aa733aa9a9"
+        },
+        {
+          "current_sha256": "117d07dcf5f4c40401166d0960dc6b06228fd7c52d062543cca9d62964f0345e",
+          "path": "experiments/forge/sampling.py",
+          "stored_sha256": "5f5013418a051ef18064aff5fea62c61b5b31bbcd20945e075e0aaf23d6985d7"
+        },
+        {
+          "current_sha256": "8615984eeb7674fc124892527b00385d1e4fce6da907928da861c9af2d7e95d3",
+          "path": "experiments/forge/views.py",
+          "stored_sha256": "d0bafd90cb5bc727bb21b554678245e3d028bdd4c04fcd5cae8af40a513727d1"
+        }
+      ],
+      "path": "configs/forge/task-variants/policy_selected_cloud_v1/unused_token_hold_policy_selected_cloud_v1.json",
+      "task_id": "unused_token_hold_policy_selected_cloud_v1"
+    },
+    {
+      "after_sha256": "01a31fe45af6ade10a6ac1aa5f52ba82620e2138a42f2a68b763d61b6f5e3363",
+      "all_other_fields_identical": true,
+      "before_sha256": "b790bdc56b7d7ed2ad46c25896fa1356e9a20a2503ce73fcc9b625db81d93ba9",
+      "changed_source_keys": [
+        {
+          "current_sha256": "04297493b688dbbe870683803fdafa8730d83942576ff4ffa38569a4deeda780",
+          "path": "experiments/forge/adapters.py",
+          "stored_sha256": "dd503ac084fc91b9daf7fed13ab6540d302db323c91d9a08b92e97e8cad2ce7f"
+        },
+        {
+          "current_sha256": "2df76b239ae44d81cfc9d8bd1469c569aa36d9deb135e36a49220309c7d54694",
+          "path": "experiments/forge/api.py",
+          "stored_sha256": "f53e6afd4578d9233c8c60ba483831e367e4ebfd59d53386a02b11a7979ab71d"
+        },
+        {
+          "current_sha256": "3599a45ba7a83d96aa12ce2a5c13ff00bba170b81ccfdfc996552fb8aa747621",
+          "path": "experiments/forge/boundaries.py",
+          "stored_sha256": "155155f3ff95efc79308b8edfabb3c4357f45aee6c334da8bc6631eb4426b541"
+        },
+        {
+          "current_sha256": "69b9cca335dae0f6d4560861ef417d5dfb34008b939d93a30e500a750f7b8416",
+          "path": "experiments/forge/evaluate.py",
+          "stored_sha256": "e1873f056c732b14c456a6a196f5756e855a63b7ae2f77dfde1c6ee671d221df"
+        },
+        {
+          "current_sha256": "a0a80fdfb519a830149c8876df53d716fcbda652031ded1102384bfeba70cb12",
+          "path": "experiments/forge/named_policy_planning.py",
+          "stored_sha256": "e74124bfbfc10017d1e1b39d04ed0da97de13131bed79c30f25b52795863d3b9"
+        },
+        {
+          "current_sha256": "5192a24571d1c6a5b65011a4550c2a134db880a7e85baf07fcbc8b85d628bc13",
+          "path": "experiments/forge/policy_adapters.py",
+          "stored_sha256": "95f7bf03c878d484d01a0fdf0f6b5c9ad34b8df94106ff7a50b02f7f1dfe67cf"
+        },
+        {
+          "current_sha256": "d738fc16824a2ccc7bdf5a1a3742e4dc3fe421a4413eb2fc65ccdd5240b01917",
+          "path": "experiments/forge/policy_cohorts.py",
+          "stored_sha256": "9cbb8addeee483c004b3b36833def111c393703eab9f6d62b79f81065f7f751f"
+        },
+        {
+          "current_sha256": "9cd859971e158a25112cdbb928e98d2a030f11729a2b8e970dd650f4b38e5b60",
+          "path": "experiments/forge/policy_snapshot_publication.py",
+          "stored_sha256": "5a637679392b4b1869fb8d1ca15cf7f6855f54d50ea4cb6857ad07aa733aa9a9"
+        },
+        {
+          "current_sha256": "117d07dcf5f4c40401166d0960dc6b06228fd7c52d062543cca9d62964f0345e",
+          "path": "experiments/forge/sampling.py",
+          "stored_sha256": "5f5013418a051ef18064aff5fea62c61b5b31bbcd20945e075e0aaf23d6985d7"
+        },
+        {
+          "current_sha256": "8615984eeb7674fc124892527b00385d1e4fce6da907928da861c9af2d7e95d3",
+          "path": "experiments/forge/views.py",
+          "stored_sha256": "d0bafd90cb5bc727bb21b554678245e3d028bdd4c04fcd5cae8af40a513727d1"
+        }
+      ],
+      "path": "configs/forge/task-variants/policy_selected_cloud_v1/vector_anisotropic_policy_selected_cloud_v1.json",
+      "task_id": "vector_anisotropic_policy_selected_cloud_v1"
+    },
+    {
+      "after_sha256": "38fa6a55cdea7219eea60b3c02c73e1438185f056c38a9843a6037dd54b46802",
+      "all_other_fields_identical": true,
+      "before_sha256": "994c75244667cd048d800381606caba94ec832578080d3172c540def23c6168b",
+      "changed_source_keys": [
+        {
+          "current_sha256": "04297493b688dbbe870683803fdafa8730d83942576ff4ffa38569a4deeda780",
+          "path": "experiments/forge/adapters.py",
+          "stored_sha256": "dd503ac084fc91b9daf7fed13ab6540d302db323c91d9a08b92e97e8cad2ce7f"
+        },
+        {
+          "current_sha256": "2df76b239ae44d81cfc9d8bd1469c569aa36d9deb135e36a49220309c7d54694",
+          "path": "experiments/forge/api.py",
+          "stored_sha256": "f53e6afd4578d9233c8c60ba483831e367e4ebfd59d53386a02b11a7979ab71d"
+        },
+        {
+          "current_sha256": "3599a45ba7a83d96aa12ce2a5c13ff00bba170b81ccfdfc996552fb8aa747621",
+          "path": "experiments/forge/boundaries.py",
+          "stored_sha256": "155155f3ff95efc79308b8edfabb3c4357f45aee6c334da8bc6631eb4426b541"
+        },
+        {
+          "current_sha256": "69b9cca335dae0f6d4560861ef417d5dfb34008b939d93a30e500a750f7b8416",
+          "path": "experiments/forge/evaluate.py",
+          "stored_sha256": "e1873f056c732b14c456a6a196f5756e855a63b7ae2f77dfde1c6ee671d221df"
+        },
+        {
+          "current_sha256": "a0a80fdfb519a830149c8876df53d716fcbda652031ded1102384bfeba70cb12",
+          "path": "experiments/forge/named_policy_planning.py",
+          "stored_sha256": "e74124bfbfc10017d1e1b39d04ed0da97de13131bed79c30f25b52795863d3b9"
+        },
+        {
+          "current_sha256": "5192a24571d1c6a5b65011a4550c2a134db880a7e85baf07fcbc8b85d628bc13",
+          "path": "experiments/forge/policy_adapters.py",
+          "stored_sha256": "95f7bf03c878d484d01a0fdf0f6b5c9ad34b8df94106ff7a50b02f7f1dfe67cf"
+        },
+        {
+          "current_sha256": "d738fc16824a2ccc7bdf5a1a3742e4dc3fe421a4413eb2fc65ccdd5240b01917",
+          "path": "experiments/forge/policy_cohorts.py",
+          "stored_sha256": "9cbb8addeee483c004b3b36833def111c393703eab9f6d62b79f81065f7f751f"
+        },
+        {
+          "current_sha256": "9cd859971e158a25112cdbb928e98d2a030f11729a2b8e970dd650f4b38e5b60",
+          "path": "experiments/forge/policy_snapshot_publication.py",
+          "stored_sha256": "5a637679392b4b1869fb8d1ca15cf7f6855f54d50ea4cb6857ad07aa733aa9a9"
+        },
+        {
+          "current_sha256": "117d07dcf5f4c40401166d0960dc6b06228fd7c52d062543cca9d62964f0345e",
+          "path": "experiments/forge/sampling.py",
+          "stored_sha256": "5f5013418a051ef18064aff5fea62c61b5b31bbcd20945e075e0aaf23d6985d7"
+        },
+        {
+          "current_sha256": "8615984eeb7674fc124892527b00385d1e4fce6da907928da861c9af2d7e95d3",
+          "path": "experiments/forge/views.py",
+          "stored_sha256": "d0bafd90cb5bc727bb21b554678245e3d028bdd4c04fcd5cae8af40a513727d1"
+        }
+      ],
+      "path": "configs/forge/task-variants/policy_selected_cloud_v1/vector_overlap_policy_selected_cloud_v1.json",
+      "task_id": "vector_overlap_policy_selected_cloud_v1"
+    },
+    {
+      "after_sha256": "3698f00da9648cd75eb110a512a8c943bb50126c632716836fc1a026f242dfc9",
+      "all_other_fields_identical": true,
+      "before_sha256": "e752c279026ebbbf0d45abe111cb5d6de62bf108618bb7292db0370d4a62d88f",
+      "changed_source_keys": [
+        {
+          "current_sha256": "04297493b688dbbe870683803fdafa8730d83942576ff4ffa38569a4deeda780",
+          "path": "experiments/forge/adapters.py",
+          "stored_sha256": "dd503ac084fc91b9daf7fed13ab6540d302db323c91d9a08b92e97e8cad2ce7f"
+        },
+        {
+          "current_sha256": "2df76b239ae44d81cfc9d8bd1469c569aa36d9deb135e36a49220309c7d54694",
+          "path": "experiments/forge/api.py",
+          "stored_sha256": "f53e6afd4578d9233c8c60ba483831e367e4ebfd59d53386a02b11a7979ab71d"
+        },
+        {
+          "current_sha256": "3599a45ba7a83d96aa12ce2a5c13ff00bba170b81ccfdfc996552fb8aa747621",
+          "path": "experiments/forge/boundaries.py",
+          "stored_sha256": "155155f3ff95efc79308b8edfabb3c4357f45aee6c334da8bc6631eb4426b541"
+        },
+        {
+          "current_sha256": "69b9cca335dae0f6d4560861ef417d5dfb34008b939d93a30e500a750f7b8416",
+          "path": "experiments/forge/evaluate.py",
+          "stored_sha256": "e1873f056c732b14c456a6a196f5756e855a63b7ae2f77dfde1c6ee671d221df"
+        },
+        {
+          "current_sha256": "a0a80fdfb519a830149c8876df53d716fcbda652031ded1102384bfeba70cb12",
+          "path": "experiments/forge/named_policy_planning.py",
+          "stored_sha256": "e74124bfbfc10017d1e1b39d04ed0da97de13131bed79c30f25b52795863d3b9"
+        },
+        {
+          "current_sha256": "5192a24571d1c6a5b65011a4550c2a134db880a7e85baf07fcbc8b85d628bc13",
+          "path": "experiments/forge/policy_adapters.py",
+          "stored_sha256": "95f7bf03c878d484d01a0fdf0f6b5c9ad34b8df94106ff7a50b02f7f1dfe67cf"
+        },
+        {
+          "current_sha256": "d738fc16824a2ccc7bdf5a1a3742e4dc3fe421a4413eb2fc65ccdd5240b01917",
+          "path": "experiments/forge/policy_cohorts.py",
+          "stored_sha256": "9cbb8addeee483c004b3b36833def111c393703eab9f6d62b79f81065f7f751f"
+        },
+        {
+          "current_sha256": "9cd859971e158a25112cdbb928e98d2a030f11729a2b8e970dd650f4b38e5b60",
+          "path": "experiments/forge/policy_snapshot_publication.py",
+          "stored_sha256": "5a637679392b4b1869fb8d1ca15cf7f6855f54d50ea4cb6857ad07aa733aa9a9"
+        },
+        {
+          "current_sha256": "117d07dcf5f4c40401166d0960dc6b06228fd7c52d062543cca9d62964f0345e",
+          "path": "experiments/forge/sampling.py",
+          "stored_sha256": "5f5013418a051ef18064aff5fea62c61b5b31bbcd20945e075e0aaf23d6985d7"
+        },
+        {
+          "current_sha256": "8615984eeb7674fc124892527b00385d1e4fce6da907928da861c9af2d7e95d3",
+          "path": "experiments/forge/views.py",
+          "stored_sha256": "d0bafd90cb5bc727bb21b554678245e3d028bdd4c04fcd5cae8af40a513727d1"
+        }
+      ],
+      "path": "configs/forge/task-variants/policy_selected_cloud_v1/vector_spiral_policy_selected_cloud_v1.json",
+      "task_id": "vector_spiral_policy_selected_cloud_v1"
+    },
+    {
+      "after_sha256": "3d12f3cb9c5b4640731d2da84515c69b450982f3199a0c1873e5152b0634f53c",
+      "all_other_fields_identical": true,
+      "before_sha256": "c9a254cc13aaec4f82640afab6f7c322c9d3a49e893c5242b8dd735f2d7efa32",
+      "changed_source_keys": [
+        {
+          "current_sha256": "04297493b688dbbe870683803fdafa8730d83942576ff4ffa38569a4deeda780",
+          "path": "experiments/forge/adapters.py",
+          "stored_sha256": "dd503ac084fc91b9daf7fed13ab6540d302db323c91d9a08b92e97e8cad2ce7f"
+        },
+        {
+          "current_sha256": "2df76b239ae44d81cfc9d8bd1469c569aa36d9deb135e36a49220309c7d54694",
+          "path": "experiments/forge/api.py",
+          "stored_sha256": "f53e6afd4578d9233c8c60ba483831e367e4ebfd59d53386a02b11a7979ab71d"
+        },
+        {
+          "current_sha256": "3599a45ba7a83d96aa12ce2a5c13ff00bba170b81ccfdfc996552fb8aa747621",
+          "path": "experiments/forge/boundaries.py",
+          "stored_sha256": "155155f3ff95efc79308b8edfabb3c4357f45aee6c334da8bc6631eb4426b541"
+        },
+        {
+          "current_sha256": "69b9cca335dae0f6d4560861ef417d5dfb34008b939d93a30e500a750f7b8416",
+          "path": "experiments/forge/evaluate.py",
+          "stored_sha256": "e1873f056c732b14c456a6a196f5756e855a63b7ae2f77dfde1c6ee671d221df"
+        },
+        {
+          "current_sha256": "a0a80fdfb519a830149c8876df53d716fcbda652031ded1102384bfeba70cb12",
+          "path": "experiments/forge/named_policy_planning.py",
+          "stored_sha256": "e74124bfbfc10017d1e1b39d04ed0da97de13131bed79c30f25b52795863d3b9"
+        },
+        {
+          "current_sha256": "5192a24571d1c6a5b65011a4550c2a134db880a7e85baf07fcbc8b85d628bc13",
+          "path": "experiments/forge/policy_adapters.py",
+          "stored_sha256": "95f7bf03c878d484d01a0fdf0f6b5c9ad34b8df94106ff7a50b02f7f1dfe67cf"
+        },
+        {
+          "current_sha256": "d738fc16824a2ccc7bdf5a1a3742e4dc3fe421a4413eb2fc65ccdd5240b01917",
+          "path": "experiments/forge/policy_cohorts.py",
+          "stored_sha256": "9cbb8addeee483c004b3b36833def111c393703eab9f6d62b79f81065f7f751f"
+        },
+        {
+          "current_sha256": "9cd859971e158a25112cdbb928e98d2a030f11729a2b8e970dd650f4b38e5b60",
+          "path": "experiments/forge/policy_snapshot_publication.py",
+          "stored_sha256": "5a637679392b4b1869fb8d1ca15cf7f6855f54d50ea4cb6857ad07aa733aa9a9"
+        },
+        {
+          "current_sha256": "117d07dcf5f4c40401166d0960dc6b06228fd7c52d062543cca9d62964f0345e",
+          "path": "experiments/forge/sampling.py",
+          "stored_sha256": "5f5013418a051ef18064aff5fea62c61b5b31bbcd20945e075e0aaf23d6985d7"
+        },
+        {
+          "current_sha256": "8615984eeb7674fc124892527b00385d1e4fce6da907928da861c9af2d7e95d3",
+          "path": "experiments/forge/views.py",
+          "stored_sha256": "d0bafd90cb5bc727bb21b554678245e3d028bdd4c04fcd5cae8af40a513727d1"
+        }
+      ],
+      "path": "configs/forge/task-variants/policy_selected_cloud_v1/vector_two_broad_policy_selected_cloud_v1.json",
+      "task_id": "vector_two_broad_policy_selected_cloud_v1"
+    },
+    {
+      "after_sha256": "e8550f354327b67dd1623419ac22c9000a0a7578f66fddb5484995ab5adc4309",
+      "all_other_fields_identical": true,
+      "before_sha256": "a5a9e43a3b20eb2ec168c7f02bf40d01c0cb369c0c4dee2170d753a41fef407c",
+      "changed_source_keys": [
+        {
+          "current_sha256": "04297493b688dbbe870683803fdafa8730d83942576ff4ffa38569a4deeda780",
+          "path": "experiments/forge/adapters.py",
+          "stored_sha256": "dd503ac084fc91b9daf7fed13ab6540d302db323c91d9a08b92e97e8cad2ce7f"
+        },
+        {
+          "current_sha256": "2df76b239ae44d81cfc9d8bd1469c569aa36d9deb135e36a49220309c7d54694",
+          "path": "experiments/forge/api.py",
+          "stored_sha256": "f53e6afd4578d9233c8c60ba483831e367e4ebfd59d53386a02b11a7979ab71d"
+        },
+        {
+          "current_sha256": "3599a45ba7a83d96aa12ce2a5c13ff00bba170b81ccfdfc996552fb8aa747621",
+          "path": "experiments/forge/boundaries.py",
+          "stored_sha256": "155155f3ff95efc79308b8edfabb3c4357f45aee6c334da8bc6631eb4426b541"
+        },
+        {
+          "current_sha256": "69b9cca335dae0f6d4560861ef417d5dfb34008b939d93a30e500a750f7b8416",
+          "path": "experiments/forge/evaluate.py",
+          "stored_sha256": "e1873f056c732b14c456a6a196f5756e855a63b7ae2f77dfde1c6ee671d221df"
+        },
+        {
+          "current_sha256": "a0a80fdfb519a830149c8876df53d716fcbda652031ded1102384bfeba70cb12",
+          "path": "experiments/forge/named_policy_planning.py",
+          "stored_sha256": "e74124bfbfc10017d1e1b39d04ed0da97de13131bed79c30f25b52795863d3b9"
+        },
+        {
+          "current_sha256": "5192a24571d1c6a5b65011a4550c2a134db880a7e85baf07fcbc8b85d628bc13",
+          "path": "experiments/forge/policy_adapters.py",
+          "stored_sha256": "95f7bf03c878d484d01a0fdf0f6b5c9ad34b8df94106ff7a50b02f7f1dfe67cf"
+        },
+        {
+          "current_sha256": "d738fc16824a2ccc7bdf5a1a3742e4dc3fe421a4413eb2fc65ccdd5240b01917",
+          "path": "experiments/forge/policy_cohorts.py",
+          "stored_sha256": "9cbb8addeee483c004b3b36833def111c393703eab9f6d62b79f81065f7f751f"
+        },
+        {
+          "current_sha256": "9cd859971e158a25112cdbb928e98d2a030f11729a2b8e970dd650f4b38e5b60",
+          "path": "experiments/forge/policy_snapshot_publication.py",
+          "stored_sha256": "5a637679392b4b1869fb8d1ca15cf7f6855f54d50ea4cb6857ad07aa733aa9a9"
+        },
+        {
+          "current_sha256": "117d07dcf5f4c40401166d0960dc6b06228fd7c52d062543cca9d62964f0345e",
+          "path": "experiments/forge/sampling.py",
+          "stored_sha256": "5f5013418a051ef18064aff5fea62c61b5b31bbcd20945e075e0aaf23d6985d7"
+        },
+        {
+          "current_sha256": "8615984eeb7674fc124892527b00385d1e4fce6da907928da861c9af2d7e95d3",
+          "path": "experiments/forge/views.py",
+          "stored_sha256": "d0bafd90cb5bc727bb21b554678245e3d028bdd4c04fcd5cae8af40a513727d1"
+        }
+      ],
+      "path": "configs/forge/task-variants/policy_selected_cloud_v1/vector_unequal_mass_policy_selected_cloud_v1.json",
+      "task_id": "vector_unequal_mass_policy_selected_cloud_v1"
+    },
+    {
+      "after_sha256": "63bc03c39506140fc473f4d40ead90e3ff82f0c5b376e1f8fbadc29021333c5a",
+      "all_other_fields_identical": true,
+      "before_sha256": "074ab74b7c5c04cea059a203b955d9f3462b0b800a74ae004adc874829ea0bfa",
+      "changed_source_keys": [
+        {
+          "current_sha256": "04297493b688dbbe870683803fdafa8730d83942576ff4ffa38569a4deeda780",
+          "path": "experiments/forge/adapters.py",
+          "stored_sha256": "dd503ac084fc91b9daf7fed13ab6540d302db323c91d9a08b92e97e8cad2ce7f"
+        },
+        {
+          "current_sha256": "2df76b239ae44d81cfc9d8bd1469c569aa36d9deb135e36a49220309c7d54694",
+          "path": "experiments/forge/api.py",
+          "stored_sha256": "f53e6afd4578d9233c8c60ba483831e367e4ebfd59d53386a02b11a7979ab71d"
+        },
+        {
+          "current_sha256": "3599a45ba7a83d96aa12ce2a5c13ff00bba170b81ccfdfc996552fb8aa747621",
+          "path": "experiments/forge/boundaries.py",
+          "stored_sha256": "155155f3ff95efc79308b8edfabb3c4357f45aee6c334da8bc6631eb4426b541"
+        },
+        {
+          "current_sha256": "69b9cca335dae0f6d4560861ef417d5dfb34008b939d93a30e500a750f7b8416",
+          "path": "experiments/forge/evaluate.py",
+          "stored_sha256": "e1873f056c732b14c456a6a196f5756e855a63b7ae2f77dfde1c6ee671d221df"
+        },
+        {
+          "current_sha256": "a0a80fdfb519a830149c8876df53d716fcbda652031ded1102384bfeba70cb12",
+          "path": "experiments/forge/named_policy_planning.py",
+          "stored_sha256": "e74124bfbfc10017d1e1b39d04ed0da97de13131bed79c30f25b52795863d3b9"
+        },
+        {
+          "current_sha256": "5192a24571d1c6a5b65011a4550c2a134db880a7e85baf07fcbc8b85d628bc13",
+          "path": "experiments/forge/policy_adapters.py",
+          "stored_sha256": "95f7bf03c878d484d01a0fdf0f6b5c9ad34b8df94106ff7a50b02f7f1dfe67cf"
+        },
+        {
+          "current_sha256": "d738fc16824a2ccc7bdf5a1a3742e4dc3fe421a4413eb2fc65ccdd5240b01917",
+          "path": "experiments/forge/policy_cohorts.py",
+          "stored_sha256": "9cbb8addeee483c004b3b36833def111c393703eab9f6d62b79f81065f7f751f"
+        },
+        {
+          "current_sha256": "9cd859971e158a25112cdbb928e98d2a030f11729a2b8e970dd650f4b38e5b60",
+          "path": "experiments/forge/policy_snapshot_publication.py",
+          "stored_sha256": "5a637679392b4b1869fb8d1ca15cf7f6855f54d50ea4cb6857ad07aa733aa9a9"
+        },
+        {
+          "current_sha256": "117d07dcf5f4c40401166d0960dc6b06228fd7c52d062543cca9d62964f0345e",
+          "path": "experiments/forge/sampling.py",
+          "stored_sha256": "5f5013418a051ef18064aff5fea62c61b5b31bbcd20945e075e0aaf23d6985d7"
+        },
+        {
+          "current_sha256": "8615984eeb7674fc124892527b00385d1e4fce6da907928da861c9af2d7e95d3",
+          "path": "experiments/forge/views.py",
+          "stored_sha256": "d0bafd90cb5bc727bb21b554678245e3d028bdd4c04fcd5cae8af40a513727d1"
+        }
+      ],
+      "path": "configs/forge/task-variants/policy_selected_cloud_v1/vector_unequal_width_policy_selected_cloud_v1.json",
+      "task_id": "vector_unequal_width_policy_selected_cloud_v1"
+    },
+    {
+      "after_sha256": "069f61c78ec898cf880f87636177d81521743de6aa651abced0fe4a61f3b4e8f",
+      "all_other_fields_identical": true,
+      "before_sha256": "9cc7c0b53f929134bd8dcd27e80b3a55ca5e7572bdc607e0ec2542c96c76ed74",
+      "changed_source_keys": [
+        {
+          "current_sha256": "04297493b688dbbe870683803fdafa8730d83942576ff4ffa38569a4deeda780",
+          "path": "experiments/forge/adapters.py",
+          "stored_sha256": "dd503ac084fc91b9daf7fed13ab6540d302db323c91d9a08b92e97e8cad2ce7f"
+        },
+        {
+          "current_sha256": "2df76b239ae44d81cfc9d8bd1469c569aa36d9deb135e36a49220309c7d54694",
+          "path": "experiments/forge/api.py",
+          "stored_sha256": "f53e6afd4578d9233c8c60ba483831e367e4ebfd59d53386a02b11a7979ab71d"
+        },
+        {
+          "current_sha256": "3599a45ba7a83d96aa12ce2a5c13ff00bba170b81ccfdfc996552fb8aa747621",
+          "path": "experiments/forge/boundaries.py",
+          "stored_sha256": "155155f3ff95efc79308b8edfabb3c4357f45aee6c334da8bc6631eb4426b541"
+        },
+        {
+          "current_sha256": "69b9cca335dae0f6d4560861ef417d5dfb34008b939d93a30e500a750f7b8416",
+          "path": "experiments/forge/evaluate.py",
+          "stored_sha256": "e1873f056c732b14c456a6a196f5756e855a63b7ae2f77dfde1c6ee671d221df"
+        },
+        {
+          "current_sha256": "a0a80fdfb519a830149c8876df53d716fcbda652031ded1102384bfeba70cb12",
+          "path": "experiments/forge/named_policy_planning.py",
+          "stored_sha256": "e74124bfbfc10017d1e1b39d04ed0da97de13131bed79c30f25b52795863d3b9"
+        },
+        {
+          "current_sha256": "5192a24571d1c6a5b65011a4550c2a134db880a7e85baf07fcbc8b85d628bc13",
+          "path": "experiments/forge/policy_adapters.py",
+          "stored_sha256": "95f7bf03c878d484d01a0fdf0f6b5c9ad34b8df94106ff7a50b02f7f1dfe67cf"
+        },
+        {
+          "current_sha256": "d738fc16824a2ccc7bdf5a1a3742e4dc3fe421a4413eb2fc65ccdd5240b01917",
+          "path": "experiments/forge/policy_cohorts.py",
+          "stored_sha256": "9cbb8addeee483c004b3b36833def111c393703eab9f6d62b79f81065f7f751f"
+        },
+        {
+          "current_sha256": "9cd859971e158a25112cdbb928e98d2a030f11729a2b8e970dd650f4b38e5b60",
+          "path": "experiments/forge/policy_snapshot_publication.py",
+          "stored_sha256": "5a637679392b4b1869fb8d1ca15cf7f6855f54d50ea4cb6857ad07aa733aa9a9"
+        },
+        {
+          "current_sha256": "117d07dcf5f4c40401166d0960dc6b06228fd7c52d062543cca9d62964f0345e",
+          "path": "experiments/forge/sampling.py",
+          "stored_sha256": "5f5013418a051ef18064aff5fea62c61b5b31bbcd20945e075e0aaf23d6985d7"
+        },
+        {
+          "current_sha256": "8615984eeb7674fc124892527b00385d1e4fce6da907928da861c9af2d7e95d3",
+          "path": "experiments/forge/views.py",
+          "stored_sha256": "d0bafd90cb5bc727bb21b554678245e3d028bdd4c04fcd5cae8af40a513727d1"
+        }
+      ],
+      "path": "configs/forge/task-variants/routed_policy_selected_cloud_v1/unused_token_hold_routed_policy_selected_cloud_v1.json",
+      "task_id": "unused_token_hold_routed_policy_selected_cloud_v1"
+    },
+    {
+      "after_sha256": "4b00873af496e064f45b193e6765daedb671280cec5930f94fc03d5a3d5dd396",
+      "all_other_fields_identical": true,
+      "before_sha256": "cbb8fad29b406e9a997101be7ba5ca1d1669dc5be1d7f6f982409d2c092f2ebb",
+      "changed_source_keys": [
+        {
+          "current_sha256": "04297493b688dbbe870683803fdafa8730d83942576ff4ffa38569a4deeda780",
+          "path": "experiments/forge/adapters.py",
+          "stored_sha256": "dd503ac084fc91b9daf7fed13ab6540d302db323c91d9a08b92e97e8cad2ce7f"
+        },
+        {
+          "current_sha256": "2df76b239ae44d81cfc9d8bd1469c569aa36d9deb135e36a49220309c7d54694",
+          "path": "experiments/forge/api.py",
+          "stored_sha256": "f53e6afd4578d9233c8c60ba483831e367e4ebfd59d53386a02b11a7979ab71d"
+        },
+        {
+          "current_sha256": "3599a45ba7a83d96aa12ce2a5c13ff00bba170b81ccfdfc996552fb8aa747621",
+          "path": "experiments/forge/boundaries.py",
+          "stored_sha256": "155155f3ff95efc79308b8edfabb3c4357f45aee6c334da8bc6631eb4426b541"
+        },
+        {
+          "current_sha256": "69b9cca335dae0f6d4560861ef417d5dfb34008b939d93a30e500a750f7b8416",
+          "path": "experiments/forge/evaluate.py",
+          "stored_sha256": "e1873f056c732b14c456a6a196f5756e855a63b7ae2f77dfde1c6ee671d221df"
+        },
+        {
+          "current_sha256": "a0a80fdfb519a830149c8876df53d716fcbda652031ded1102384bfeba70cb12",
+          "path": "experiments/forge/named_policy_planning.py",
+          "stored_sha256": "e74124bfbfc10017d1e1b39d04ed0da97de13131bed79c30f25b52795863d3b9"
+        },
+        {
+          "current_sha256": "5192a24571d1c6a5b65011a4550c2a134db880a7e85baf07fcbc8b85d628bc13",
+          "path": "experiments/forge/policy_adapters.py",
+          "stored_sha256": "95f7bf03c878d484d01a0fdf0f6b5c9ad34b8df94106ff7a50b02f7f1dfe67cf"
+        },
+        {
+          "current_sha256": "d738fc16824a2ccc7bdf5a1a3742e4dc3fe421a4413eb2fc65ccdd5240b01917",
+          "path": "experiments/forge/policy_cohorts.py",
+          "stored_sha256": "9cbb8addeee483c004b3b36833def111c393703eab9f6d62b79f81065f7f751f"
+        },
+        {
+          "current_sha256": "9cd859971e158a25112cdbb928e98d2a030f11729a2b8e970dd650f4b38e5b60",
+          "path": "experiments/forge/policy_snapshot_publication.py",
+          "stored_sha256": "5a637679392b4b1869fb8d1ca15cf7f6855f54d50ea4cb6857ad07aa733aa9a9"
+        },
+        {
+          "current_sha256": "117d07dcf5f4c40401166d0960dc6b06228fd7c52d062543cca9d62964f0345e",
+          "path": "experiments/forge/sampling.py",
+          "stored_sha256": "5f5013418a051ef18064aff5fea62c61b5b31bbcd20945e075e0aaf23d6985d7"
+        },
+        {
+          "current_sha256": "8615984eeb7674fc124892527b00385d1e4fce6da907928da861c9af2d7e95d3",
+          "path": "experiments/forge/views.py",
+          "stored_sha256": "d0bafd90cb5bc727bb21b554678245e3d028bdd4c04fcd5cae8af40a513727d1"
+        },
+        {
+          "current_sha256": "251464fb223d2b9513dbbe14fa2706f768f82e90903e7cce0ea86f8a6e7b0194",
+          "path": "experiments/forge/word_joint_policy_adapters.py",
+          "stored_sha256": "52405305a374e9631b76d50bd35a462adc2cb212f08f7c6dbdc7045b4d3dbf08"
+        }
+      ],
+      "path": "configs/forge/task-variants/word_joint_policy_min11_v1/five_word_joint_acquisition_word_joint_policy_min11_v1.json",
+      "task_id": "five_word_joint_acquisition_word_joint_policy_min11_v1"
+    }
+  ],
+  "schema": "pg_half_base_current_source_only_repin_review_v1",
+  "source_values_changed": 341
+}

@@ -1,7 +1,7 @@
 # Prospective N11 word half-base binding
 
 This is an unexecuted rate contrast. It adds one fixed candidate to a separate
-cohort and reuses the existing public word fixture. The software controls
+cohort and reuses the existing public word fixture. The initial model-free controls
 construct no training model, optimizer or policy and make no forward, sampler
 or learned-capacity claim. Earlier quarter-base and slower-prior proposals are
 unexecuted history and are excluded from this executable whitelist.
@@ -68,10 +68,10 @@ integrated source commit and regenerate this new source binding if integration
 changes a pinned file. It must retain the full planner/import/config closure,
 the screening seed-zero protocol, all original parent task/view JSONs and the
 new variant JSON, and check imported module identities against that snapshot.
-The isolated branch's pins are not evidence for a later source. Existing C6
-declarations were not edited or repinned; a future current-source run of them
-would separately need its own source-only repin. Earlier frozen rows still
-use their original source.
+The isolated branch's pins are not evidence for a later source. That initial
+implementation left existing C6 declarations unchanged. Root's current-source
+hash refresh is documented below; earlier frozen rows still use their
+original source.
 
 Root owns the prospective single 900-second inclusive GPU1 allowance, inherited
 leases, source freeze and any actual attempt. Independent grading, rendering
@@ -97,5 +97,20 @@ The final CPU-only run passed 307 controls in 12.58 seconds across the new
 ```sh
 CUDA_VISIBLE_DEVICES='' OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 \
   python -m pytest -p no:cacheprovider -q tests/test_forge_word_joint_rates.py \
-  tests/test_forge_named_policy_grading.py tests/test_forge_policy_snapshot_publication.py
+tests/test_forge_named_policy_grading.py tests/test_forge_policy_snapshot_publication.py
 ```
+
+Root's affected integration run passed **438 controls in 34.19 seconds**.
+Two actual tiny CPU controls confirmed unchanged old/new model and named-stream
+initialization, the requested G/E/prior/noise/D optimizer rates, observer purity
+and complete checkpoint next-update parity. These are engineering controls and
+provide no full-horizon numerical learning or GPU qualification credit.
+[Bound control receipt](source-controls.json) and
+[independent source review](independent-source-review.json).
+
+The current-source refresh changes only implementation hash values in the 34
+existing variant declarations, including earlier health-repair source-pin drift.
+All gates, horizons, resources, objectives, laws, parent identities and every
+other field remain identical; all 35 current variants validate. The old frozen
+results, source identities and costs are unchanged.
+[Exact source-only refresh](source-only-repin-review.json).

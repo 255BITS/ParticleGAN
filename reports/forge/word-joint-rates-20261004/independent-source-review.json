@@ -1,0 +1,151 @@
+{
+  "author_software_controls": {
+    "elapsed_seconds": 12.58,
+    "log": "/ml2/hypergan/word-rate-binding-final-model-free-tests-20261004.log",
+    "log_sha256": "39c351537caaf6a6823b8c7b41cd1fdfa0352cd61906bcc41424fed535eab4d5",
+    "model_free": true,
+    "new_passed": 86,
+    "passed": 307
+  },
+  "base_commit": "b1c33b79efaea16fe8c705af0f5c3af31d369fdf",
+  "capacity_or_learned_credit": false,
+  "commit": "7419d7dedf4ad855d59a56007a7e05ee68a13af6",
+  "default_adoption": false,
+  "files_reviewed": {
+    "configs/forge/task-variants/word_joint_policy_min11_rates_v1/five_word_joint_acquisition_word_joint_policy_min11_rates_v1.json": {
+      "bytes": 16091,
+      "sha256": "7bea93c7370f3d000b7d551a1120892727a4b7fda23022209ce7506d4c886278"
+    },
+    "experiments/forge/adapters.py": {
+      "bytes": 37133,
+      "sha256": "04297493b688dbbe870683803fdafa8730d83942576ff4ffa38569a4deeda780"
+    },
+    "experiments/forge/api.py": {
+      "bytes": 54525,
+      "sha256": "2df76b239ae44d81cfc9d8bd1469c569aa36d9deb135e36a49220309c7d54694"
+    },
+    "experiments/forge/boundaries.py": {
+      "bytes": 22066,
+      "sha256": "3599a45ba7a83d96aa12ce2a5c13ff00bba170b81ccfdfc996552fb8aa747621"
+    },
+    "experiments/forge/evaluate.py": {
+      "bytes": 2048,
+      "sha256": "69b9cca335dae0f6d4560861ef417d5dfb34008b939d93a30e500a750f7b8416"
+    },
+    "experiments/forge/named_policy_planning.py": {
+      "bytes": 5944,
+      "sha256": "a0a80fdfb519a830149c8876df53d716fcbda652031ded1102384bfeba70cb12"
+    },
+    "experiments/forge/policy_cohorts.py": {
+      "bytes": 10322,
+      "sha256": "d738fc16824a2ccc7bdf5a1a3742e4dc3fe421a4413eb2fc65ccdd5240b01917"
+    },
+    "experiments/forge/policy_snapshot_publication.py": {
+      "bytes": 19928,
+      "sha256": "9cd859971e158a25112cdbb928e98d2a030f11729a2b8e970dd650f4b38e5b60"
+    },
+    "experiments/forge/sampling.py": {
+      "bytes": 13537,
+      "sha256": "117d07dcf5f4c40401166d0960dc6b06228fd7c52d062543cca9d62964f0345e"
+    },
+    "experiments/forge/views.py": {
+      "bytes": 74523,
+      "sha256": "8615984eeb7674fc124892527b00385d1e4fce6da907928da861c9af2d7e95d3"
+    },
+    "experiments/forge/word_joint_policy_adapters.py": {
+      "bytes": 25692,
+      "sha256": "251464fb223d2b9513dbbe14fa2706f768f82e90903e7cce0ea86f8a6e7b0194"
+    },
+    "experiments/forge/word_joint_rate_policy_contracts.py": {
+      "bytes": 11577,
+      "sha256": "0c725c5c4b8ea7e09554bf7022b62950bb42a3d41ea4fb49dca932428a61ca11"
+    },
+    "reports/forge/word-joint-rates-20261004/README.md": {
+      "bytes": 6382,
+      "sha256": "6ce3741a60b5b54efaf94467148d44ada5fea45114fe8c5aa5265b2446f83026"
+    },
+    "tests/test_forge_word_joint_rates.py": {
+      "bytes": 27577,
+      "sha256": "d7fc94c4f9667c6d7d40b01430310b05b24733075e121521b917a5daab4d625d"
+    }
+  },
+  "findings": {
+    "binding": {
+      "actual_applied_complete_recipe_and_both_control_receipts_bound": true,
+      "checkpoint_kind_family_task_recipe_profile_full_schema_bound_before_restore": true,
+      "independent_evaluator_rejects_substitution": true,
+      "only_one_executable_profile": true,
+      "original_C6_default_dispatch_unchanged": true,
+      "request_candidate_profile_tuple_prior_and_seed_bound": true,
+      "retired_profiles_rejected": true
+    },
+    "declared_implementation_pins_verified": 36,
+    "material_code_blockers": [],
+    "old_variant_jsons_byte_unchanged": 34,
+    "original_objective_generation_noise_and_update_functions_AST_unchanged": true,
+    "original_parent_tasks_views_package_unchanged": true,
+    "original_word_contracts_byte_unchanged": true,
+    "protocol": {
+      "eval_samples": 1024,
+      "full_26_tier_counts": [
+        5,
+        19,
+        2
+      ],
+      "observations": 24,
+      "old_gates_unchanged": true,
+      "seed": 0,
+      "steps": 20001
+    },
+    "raw_particle_prior": {
+      "learnable": true,
+      "rows": 11,
+      "sigma": 0,
+      "standardize": false,
+      "z_dim": 2
+    }
+  },
+  "git_mutations": 0,
+  "gpu_or_queue_actions": 0,
+  "independent_software_controls": {
+    "deselected": 64,
+    "log": {
+      "bytes": 114,
+      "path": "/ml2/hypergan/word-half-base-independent-controls-20261004.log",
+      "sha256": "7de39cde0d4a8a656e7b983ceb4954ae4290f63044668c3b33c05fa62df3fae2"
+    },
+    "passed": 22,
+    "scope": "Model-free metadata/Recipe/evaluator/synthetic checkpoint controls; no real model, optimizer, policy, draw, forward or official scorer.",
+    "seconds": 3.56
+  },
+  "integration_prerequisites": [
+    "Refresh current-source implementation pins after combining the committed changes; keep every archived source and grade unchanged.",
+    "Root must freeze the full source/request/runtime, preserve the existing inclusive cost debit, and perform the prospective supervised attempt; this review creates no learned evidence."
+  ],
+  "no_write_handoff": true,
+  "profile": {
+    "cohort": "word_joint_policy_min11_rates_v1",
+    "family": "atlas_word_joint_min11_rates",
+    "name": "half_base",
+    "recipe_overrides": {
+      "d_lr_mult": 1.0,
+      "lr": 0.00265625,
+      "prior_lr_mult": 1.5
+    },
+    "tuple_id": "word-min11-half_base-rates-v1"
+  },
+  "qualification_input": false,
+  "schema_version": 1,
+  "source_handoff": {
+    "bytes": 4216,
+    "path": "/ml2/hypergan/pg-word-half-base-source-handoff-20261004/handoff.json",
+    "sha256": "0457a0ab82cb0477064cf9ba7e121565587acf6db3c3cbdb9929e997f9033a53"
+  },
+  "source_pin_fallout": {
+    "bytes": 138193,
+    "path": "/ml2/hypergan/pg-word-half-base-source-handoff-20261004/SOURCE_PINS.json",
+    "sha256": "6809545c0957d63ac79f4c8e8a846ffcb88a9e98b1f66fa650ea4e2ed3d05004"
+  },
+  "speed_ranking": false,
+  "status": "READ_ONLY_SOFTWARE_REVIEW_CLEAR"
+}

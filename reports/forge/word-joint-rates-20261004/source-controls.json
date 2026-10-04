@@ -1,0 +1,56 @@
+{
+  "code_pins": {
+    "experiments/forge/word_joint_policy_adapters.py": {
+      "bytes": 25692,
+      "sha256": "251464fb223d2b9513dbbe14fa2706f768f82e90903e7cce0ea86f8a6e7b0194"
+    },
+    "experiments/forge/word_joint_rate_policy_contracts.py": {
+      "bytes": 11577,
+      "sha256": "0c725c5c4b8ea7e09554bf7022b62950bb42a3d41ea4fb49dca932428a61ca11"
+    },
+    "tests/test_forge_word_joint_policy_adapters.py": {
+      "bytes": 18940,
+      "sha256": "8e473b2bbed041bea862b8a7d6ea1c9874dd29881fc0032305dba3e1b808097a"
+    }
+  },
+  "default_adoption": false,
+  "gpu_jobs": 0,
+  "independent_model_free_review": {
+    "passed": 22,
+    "receipt": "independent-source-review.json",
+    "sha256": "2e5cebf92c5429944cd3449c7bc2c62f507211db7a7156bbf54572f67f33fac7"
+  },
+  "numerical_learning_credit": false,
+  "overrides": {
+    "d_lr_mult": 1.0,
+    "lr": 0.00265625,
+    "prior_lr_mult": 1.5
+  },
+  "prior_invalid_and_costs_preserved": true,
+  "profile": "half_base",
+  "qualification_credit": false,
+  "root_affected_controls": {
+    "actual_cuda_initialization": false,
+    "actual_tiny_cpu_controls": [
+      "test_half_base_actual_public_owners_preserve_initialization_and_apply_all_nominal_rates",
+      "test_half_base_actual_observer_and_checkpoint_next_update_parity"
+    ],
+    "elapsed_seconds": 34.19,
+    "log_availability": "LOCAL_ONLY",
+    "log_sha256": "c94613c3bd5fc1df42b633266d20df74f52656b172dce4bf71cefc4caadf919d",
+    "passed": 438
+  },
+  "schema": "pg_word_half_base_source_control_receipt_v1",
+  "scientific_attempts": 0,
+  "source_only_repin": {
+    "current_variants_validated": 35,
+    "existing_declarations_changed": 34,
+    "other_fields_identical": true,
+    "receipt": "source-only-repin-review.json",
+    "sha256": "69d31e68802f426c84a6d5a4b83971c927b479ede76357b29345890618f93e92",
+    "source_values_changed": 341
+  },
+  "speed_ranking": false,
+  "status": "ENGINEERING_CONTROLS_PASS",
+  "tuple_id": "word-min11-half_base-rates-v1"
+}
