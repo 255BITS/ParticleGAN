@@ -90,6 +90,22 @@ UNAVAILABLE. The [separate sentinel diagnosis](../atlas-word-dimension-health-20
 traces the rejection to a safely skipped undefined reference-dimension
 diagnostic. Saved model tensors are finite; the recorded word goals are missed.
 
+The [passive word-goal analysis](../atlas-word-goal-diagnosis-20261004/WORD_GOALS.md)
+shows that the encoder was active. The original joint objective has no explicit
+inverse reconstruction term, and public DV12 perturbation remains in the
+reconstruction question. A zero all-five flag still allowed one to three
+individually correct words. Lower shared motion and slower prior rows are two
+proposed rate-only contrasts; neither is executed or a predicted repair.
+Critic damping and stochastic joint coupling remain competing explanations.
+
+The [independent word-law review](../atlas-word-joint-law-review-20261004/WORD_LAW.md)
+reproduces 24,576 generated-code perturbations and 120 inverse-code
+perturbations from saved arrays. At those observed states, the ideal continuous
+fake-code law and the five deterministic real-code atoms cannot match exactly.
+This does not prove that the finite word gates are impossible or identify the
+cause of training failure. The original INVALID and costs remain unchanged;
+the proposed rate contrasts retain the objective and measurement law.
+
 All **130 current-source cells** remain visible: **2 PASS, 1 INVALID and 127
 NOT_RUN**. Execution source is `fb7acc775b3a1a6184d36b55e035b9da04531492` /
 `f380eed990931bacb205e6537beaf387fdbb676ffc97b6f32f19ff903ae1cfed`.
@@ -113,6 +129,29 @@ The old clean FAIL remains unchanged. The two endpoint engineering attempts
 cost **11.62249431014061 / 180 seconds**, with zero new optimizer updates and
 zero convergence/default/speed credit. Full noisy-law acquisition and hold
 remain unexecuted.
+
+## Additional Gaussian density question
+
+The [source-bound Gaussian report and original goal GIF](../gaussian2d-current-c6-gpu-20261004/README.md)
+cover the existing `api-gaussian2d` / source-family-16 question. It asks whether
+the public selected policy recovers the mean, covariance and distribution of
+`N((1,1), .04 I)`, beyond reaching the target center. The full 1,000 G/D/prior
+updates and 25 original 4,096-sample reads were exported, including all nine
+goal frames. The retained raw verdict is FAIL: each of the last five reads
+misses the covariance lower bound; the endpoint also misses radial and
+projected KS. Mean error at the endpoint is .0148192 sigma, while covariance
+eigenvalues are .606076 and .666635 instead of the required [.85, 1.15].
+
+The supervisor exceeded its inclusive 180-second allowance before final
+attestation, so the accepted status is **BUDGET_EXCEEDED** and the numerical
+score is **UNAVAILABLE**. The byte-original raw FAIL badge is an unaccepted
+illustration and is captioned accordingly. Measured paid cost is
+**180.21387464087456 seconds**, reserve zero, overrun .21387464087456465.
+This is a separate additional-question scope, supplies no current 26-slot,
+default or speed credit, and is not added to the named 10,500-second campaign.
+There is no retry. The [independent publication review](../gaussian2d-current-c6-gpu-20261004/root-publication-review.json)
+verifies 1,231 pinned inputs and the original nine-frame media bytes without
+restoring a model, drawing samples or recomputing a numerical score.
 
 | Scope | Source / declared law | Comparable score | Status and cost | Team report |
 |---|---|---|---|---|
