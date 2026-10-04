@@ -1342,17 +1342,26 @@ def test_committed_cohorts_rebuild_every_scientific_row_in_a_checkout_without_ra
                      Path("configs/forge/view-history"),
                      Path("configs/forge/tasks"), Path("configs/forge/protocols"),
                      Path("configs/forge/task-variants"),
-                     Path("reports/forge/configuration-search")):
+                     Path("reports/forge/configuration-search"),
+                     Path("reports/forge/tier1-completion")):
         if not (ROOT / relative).is_dir():
             continue
         shutil.copytree(ROOT / relative, tmp_path / relative)
     shutil.copyfile(ROOT / "configs/forge/trainer-families.json", tmp_path / "configs/forge/trainer-families.json")
     shutil.copyfile(ROOT / "configs/forge/defaults.json", tmp_path / "configs/forge/defaults.json")
+    scoped_registry = Path("reports/forge/scoped-publications.json")
+    if (ROOT / scoped_registry).is_file():
+        shutil.copyfile(ROOT / scoped_registry, tmp_path / scoped_registry)
+        from experiments.forge.scoped_publications import load_publications
+        assert load_publications(tmp_path) == load_publications(ROOT)
     manifest = read_json(tmp_path / publication.EVIDENCE_MANIFEST)
     # Rebuild this recorded publication against its exact archived denominator.
     # The new scalar task does not relabel any of these scientific rows.
     archived = tmp_path / "configs/forge/view-history" / f"discriminator_stability-v{manifest['view_revision']}.json"
-    shutil.copyfile(archived, tmp_path / "configs/forge/views/discriminator_stability.json")
+    policy_path = tmp_path / "configs/forge/views/discriminator_stability.json"
+    if archived.is_file():
+        shutil.copyfile(archived, policy_path)
+    assert stable_hash(read_json(policy_path)) == manifest["policy_fingerprint"]
     expected, all_snapshots, registered_rows, unregistered_shadows = {}, [], [], []
     snapshot_bytes = {}
     for entry in manifest["cohorts"]:
