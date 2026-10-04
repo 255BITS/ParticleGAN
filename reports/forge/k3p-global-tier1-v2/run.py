@@ -1,4 +1,4 @@
-"""Execute the frozen twelve-configuration ordinary Tier 1 search.
+"""Execute a frozen bounded ordinary Tier 1 family search.
 
 Uses existing Forge search/queue admission, independent grading and budget
 accounting. GPU0 and the coordinator's CPU fallback each permit one worker.
@@ -23,17 +23,20 @@ def emit(value):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--expected-commit", required=True)
+    parser.add_argument("--plans", type=Path, default=ROOT / "reports/forge/k3p-global-tier1-v2/plans.json")
     args = parser.parse_args()
     head = subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip()
     if head != args.expected_commit or sys.executable != "/usr/bin/python":
         raise ValueError("Run the reviewed commit with the declared scientific Python")
     subprocess.run(["git", "diff", "--quiet", "HEAD"], cwd=ROOT, check=True)
-    plan = read_json(ROOT / "reports/forge/k3p-global-tier1-v2/plans.json")
-    queue_root = ROOT / "runs/forge/k3p-global-tier1-v2/queue"
+    plan = read_json(args.plans)
+    study = plan["study"]
+    count = plan["configuration_count"]
+    queue_root = ROOT / "runs/forge" / study / "queue"
     queue = Queue(queue_root, report_root=ROOT / "reports/forge", on_completion=None)
-    spec = "configs/forge/searches/k3p-global-tier1-v2.json"
+    spec = plan["spec"]
     summary = enqueue_search(ROOT, queue_root, spec, queue=queue)
-    assert summary["blocked_count"] == 0 and summary["submitted_count"] == 12
+    assert summary["blocked_count"] == 0 and summary["submitted_count"] == count
     assert summary["source_digest"] == plan["source_digest"]
     for trial in summary["trials"]:
         request = queue.inspect()["submissions"][trial["request_id"]]["request"]
@@ -41,10 +44,10 @@ def main():
         assert request["runtime"]["python"] == "3.14.7"
         assert request["decision_review"]["status"] == "READY"
     emit({"event": "search_enqueued", "source_commit": head,
-          "source_digest": summary["source_digest"], "configurations": 12,
-          "logs": str(queue_root / "events.jsonl"), "maximum_workers": 2})
+          "source_digest": summary["source_digest"], "configurations": count,
+          "logs": str(queue_root / "events.jsonl"), "maximum_workers": plan["maximum_global_workers"]})
     drain(queue, ["0"], workers_per_gpu=1, allow_sharing=False,
-          campaign="k3p-global-tier1-v2")
+          campaign=study)
     summary = report_search(ROOT, queue_root, spec, queue=queue)
     assert summary["selection"]["all_trials_terminal"]
     emit({"event": "search_complete", "selection": summary["selection"],
