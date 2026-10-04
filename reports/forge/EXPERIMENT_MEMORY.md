@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 445. Inventory coverage: complete. Unresolved import items: 7.
+Records: 446. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -4608,6 +4608,7 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 - **k3p-global-tier1-v2**: Concluded 12 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/k3p-global-tier1-v2.json) · [Board](../../reports/forge/technique-inventory.md)
 - **pr223-native3-continuation**: Native3 continuation: 0/3 PASS, 0 FAIL, 3 unavailable; final accepted INCOMPLETE. Original19 parent remains 16 PASS/1 INVALID/2 NOT_RUN under its own source. Current cost includes prior case debit once and cumulative metadata once. [Source](../../reports/forge/pr223-native3-first-invalid-20261004/results.json) · [Board](../../reports/forge/technique-inventory.md)
 - **release07-gan-v3-mog-tier1-refresh-v1**: Concluded 4 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/release07-gan-v3-mog-tier1-refresh-v1.json) · [Board](../../reports/forge/technique-inventory.md)
+- **pr223-native3-repaired-continuation**: Repaired native3 continuation: 3/3 PASS, 0 FAIL, 0 unavailable; final accepted PASS. Original19 parent remains 16 PASS/1 INVALID/2 NOT_RUN under its own source. Current cost includes original19 and pretraining-invalid debits separately once and SAME cumulative metadata once. [Source](../../reports/forge/pr223-native3-repaired-20261004/results.json) · [Board](../../reports/forge/technique-inventory.md)
 - **bcap-family-defaults-round1-v1**: Concluded 8 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/bcap-family-defaults-round1-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **release07-gan-v3-mog-family-defaults-round1-v1**: Concluded 4 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/release07-gan-v3-mog-family-defaults-round1-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **ka2-family-defaults-round1-v1**: Concluded 4 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/ka2-family-defaults-round1-v1.json) · [Board](../../reports/forge/technique-inventory.md)
@@ -4626,4 +4627,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `24e2eee4b003d3e7f0f5999b9b06239104251165fa51178ba6c201e6dca95687`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `7b08b7212856aeb6cb6ada2f6faa4f93a1aa28f5f889fa8ae86e5cab5b34b6f8`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
