@@ -71,6 +71,49 @@ results remain separate. No complete family, shipping default or speed winner
 is established. The five completed passes are retained for the repaired
 continuation, which may execute only the three remaining questions.
 
+## Completed named-family continuation
+
+The [v4b portable results and original goal GIFs](../atlas-named-gpu-diagnostics-native-v4b-20261004/README.md)
+record **2 PASS and 1 INVALID** among the three remaining adaptations.
+Unused-token passes its full 200 updates and cover its full 800 updates, both
+with 24 recorded reads and the original terminal-five bounds. Their questions
+are preservation of concept geometry under nuisance variation, and separation
+of residual poles while preserving content and identity. The min11 word
+producer is rejected by the original health guard; INVALID carries no numerical
+grade. Five v3 passes remain separate source-bound references, with no reruns.
+
+The [word retained-evidence companion](../atlas-word-retained-context-20261004/README.md)
+supplies its original nine-frame illustration, recorded 20,001 G/E/prior/D
+updates and 24 finite/pure reads. It corrects the frozen publisher's clock,
+error and GIF-availability wording while retaining INVALID and numerical
+UNAVAILABLE. The [separate sentinel diagnosis](../atlas-word-dimension-health-20261004/README.md)
+traces the rejection to a safely skipped undefined reference-dimension
+diagnostic. Saved model tensors are finite; the recorded word goals are missed.
+
+All **130 current-source cells** remain visible: **2 PASS, 1 INVALID and 127
+NOT_RUN**. Execution source is `fb7acc775b3a1a6184d36b55e035b9da04531492` /
+`f380eed990931bacb205e6537beaf387fdbb676ffc97b6f32f19ff903ae1cfed`.
+Current paid cost is **649.2088527791202 seconds**, reserve zero. Including the
+unchanged v1 and v3 debits once, the campaign is **910.2391431590077 / 10500
+seconds**; GPU1 is **675.4130623831879 / 3000**. The original N5 word question
+remains BLOCKED. No complete family, default or speed winner is established.
+
+The [two actual CUDA scorer controls](../routed-cuda-scorer-control-20261004/README.md)
+passed on GPU1 before this continuation. Their two earlier collection failures
+stay INVALID. Inclusive engineering cost is **17.023810611106455 / 120 seconds**,
+separate from the named campaign; these controls supply structural evidence.
+
+## Grid100 output-kernel diagnosis
+
+The [corrected saved-endpoint diagnostic](../grid100-output-kernel-endpoint-20261004/README.md)
+reproduces the old clean 100,000-sample holdout exactly. Clean samples retain
+all 100 modes but lack Gaussian width; the existing public output kernel
+restores width and passes the native and accuracy bounds at this endpoint.
+The old clean FAIL remains unchanged. The two endpoint engineering attempts
+cost **11.62249431014061 / 180 seconds**, with zero new optimizer updates and
+zero convergence/default/speed credit. Full noisy-law acquisition and hold
+remain unexecuted.
+
 | Scope | Source / declared law | Comparable score | Status and cost | Team report |
 |---|---|---|---|---|
 | Ordinary MoG, current Forge | Origin `28990990`; live, scheduled, learned MoG prior σ = 0.025 | KA2 and K3P tie at 4/5 Tier 1; 19 Tier 2 and 2 Tier 3 requirements remain unknown | Both FAIL; qualified tier 0; no default or speed credit | [Primary ordinary board](https://github.com/255BITS/ParticleGAN/blob/4749b2780add539df4bd8d2dd1d3cc9f002f77ad/reports/forge/technique-inventory.md) |
@@ -122,4 +165,7 @@ The original/policy primary boards above are pinned to the last verified develop
 
 Reported paid seconds are supervisory attempt intervals. Reservation is separate, and CPU capacity construction/replay/verification is diagnostic work outside ordinary learning credit. The D2.25 engineering startup is charged once in its own readout and once as prior cost within the generator-half cumulative campaign; do not add that cumulative figure to the earlier total again. Ordinary selected-row wall times and historical replay costs belong to different declared studies and are not summed into this campaign or used as a fair speed ranking.
 
-All inputs and their hashes are in [index.json](index.json). This projection performed zero training updates, sampler calls, metric rescoring, gate changes or remote queries. The existing primary reports and their source-bound receipts remain authoritative.
+The older comparison projection's inputs and hashes remain in [index.json](index.json).
+Each newer report has its own linked input index and scope. The navigation
+index itself adds no training updates, sampler calls, metric rescoring or gate
+changes. Primary reports and their source-bound receipts remain authoritative.

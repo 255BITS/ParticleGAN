@@ -1,0 +1,109 @@
+{
+  "grades": {
+    "cover_leftover_multibank_policy_v1": {
+      "evaluator_result": {
+        "attempted": true,
+        "confirmation_fraction": 0.58375,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 467,
+          "first_pass_step": 334,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 15,
+          "passing_suffix": 15,
+          "stable_from_seconds": null,
+          "stable_from_step": 334
+        },
+        "metrics": [
+          {
+            "margin": 0.1307248017467072,
+            "metric": "u_kept",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.9807248017467072
+          },
+          {
+            "margin": 0.25089873314738886,
+            "metric": "content_kept",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.75,
+            "value": 1.0008987331473889
+          },
+          {
+            "margin": 0.19992422693318457,
+            "metric": "leak_ratio",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.2,
+            "value": 7.577306681544693e-05
+          },
+          {
+            "margin": 0.1872874626889825,
+            "metric": "pole_rel_err_plus",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.2,
+            "value": 0.012712537311017513
+          },
+          {
+            "margin": 0.18804314620792867,
+            "metric": "pole_rel_err_minus",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.2,
+            "value": 0.011956853792071342
+          },
+          {
+            "margin": 0.24909583499815316,
+            "metric": "same_dir",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.25,
+            "value": 0.0009041650018468281
+          }
+        ],
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "content_kept": 1.0008987331473889,
+        "even_norm": 0.0010179493110626936,
+        "leak_frac": -0.9999983310699463,
+        "leak_ratio": 7.577306681544693e-05,
+        "odd_norm": 1.1248266696929932,
+        "on_content": 0.5504943132400513,
+        "on_e": 7.431252743117511e-05,
+        "on_u": 0.9807248115539551,
+        "pole_rel_err_minus": 0.011956853792071342,
+        "pole_rel_err_plus": 0.012712537311017513,
+        "same_dir": 0.0009041650018468281,
+        "step": 800,
+        "u_kept": 0.9807248017467072
+      },
+      "reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "status": "PASS"
+    }
+  },
+  "raw_hash": "002f5b2559ceca3db4db3fbc84f3def1b65858d5fdebf02f3528662c3bf9e4b3",
+  "schema_version": 1,
+  "source_digest": "f380eed990931bacb205e6537beaf387fdbb676ffc97b6f32f19ff903ae1cfed",
+  "telemetry": {
+    "independent_grading_seconds": 0.8176833020988852,
+    "memory": {
+      "cpu_scope": "this process lifetime, including imports",
+      "cuda_peak_allocated_bytes": null,
+      "cuda_peak_reserved_bytes": null,
+      "cuda_scope": "PyTorch allocator since probe reset; excludes other processes and non-PyTorch allocations",
+      "process_peak_rss_bytes": 662601728
+    },
+    "scope": "Independent CPU evaluator process, including evaluator artifact reads."
+  }
+}
