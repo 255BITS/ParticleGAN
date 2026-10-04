@@ -1,7 +1,7 @@
 {
   "cross_cohort_pooling": false,
   "latest": {
-    "pg_pr223_full19_passive_publication_v1": "pr223-original-full-retest-prefix5-20261004"
+    "pg_pr223_full19_passive_publication_v1": "pr223-original-full-retest-stopped17-20261004"
   },
   "publications": [
     {
@@ -63,6 +63,122 @@
         "bytes": 821,
         "path": "reports/forge/pr223-original-full-retest-prefix5-20261004/verification.json",
         "sha256": "cec967bb9578fa4f19f49eae201a18d81628b543a1b186883602777c747bd239"
+      }
+    },
+    {
+      "final_cost": {
+        "bytes": 1318,
+        "path": "reports/forge/pr223-original-full-retest-stopped17-20261004/FINAL_COST.json",
+        "sha256": "2335c0da59f1155a329f72390078d1480f253ce1e17a5879a52138d53e3661d3"
+      },
+      "id": "pr223-original-full-retest-stopped17-20261004",
+      "media": [
+        {
+          "bytes": 303366,
+          "path": "reports/forge/pr223-original-full-retest-stopped17-20261004/gifs/portability-img_intensity2.gif",
+          "sha256": "b311fb87aa5f57a1e5f1f3d886afc00f2092290822aa0e5c13ea40787c904986"
+        },
+        {
+          "bytes": 108210,
+          "path": "reports/forge/pr223-original-full-retest-stopped17-20261004/gifs/portability-mode_hold.gif",
+          "sha256": "f752f39844b26d955dbd083611ad8861f6b669afb78604743cbce1c5c7397c38"
+        },
+        {
+          "bytes": 244508,
+          "path": "reports/forge/pr223-original-full-retest-stopped17-20261004/gifs/portability-img_blobs4.gif",
+          "sha256": "aade7613cf4c63fe2204766e915a877ee6d42514474e8065fc77ddd4dac07dec"
+        },
+        {
+          "bytes": 276054,
+          "path": "reports/forge/pr223-original-full-retest-stopped17-20261004/gifs/portability-img_bars4.gif",
+          "sha256": "7175bf6fad99b09bac8a50a8722c339b383a23a1b5586eb9992dd54df721ab6e"
+        },
+        {
+          "bytes": 279320,
+          "path": "reports/forge/pr223-original-full-retest-stopped17-20261004/gifs/portability-img_stripes2.gif",
+          "sha256": "cf9f9d9001220221c5125b8c1e63e080d5cc4e76fb8aa420c3444de15afa2f5e"
+        },
+        {
+          "bytes": 304251,
+          "path": "reports/forge/pr223-original-full-retest-stopped17-20261004/gifs/portability-vector_two_broad.gif",
+          "sha256": "e2b5eaefe1e1b27f77b7f6ff546c01a894529054eae206f356e158816da354c1"
+        },
+        {
+          "bytes": 132420,
+          "path": "reports/forge/pr223-original-full-retest-stopped17-20261004/gifs/portability-vector_unequal_mass.gif",
+          "sha256": "7c7d782e0d162473987451a07716b7b7fb9fc7a028fb34fd723cfb6143d0d6c9"
+        },
+        {
+          "bytes": 198046,
+          "path": "reports/forge/pr223-original-full-retest-stopped17-20261004/gifs/portability-vector_unequal_width.gif",
+          "sha256": "97c0ed1677fcc0e5bd94352467c3b853f5aa00954448deecf06bf6d48b381afb"
+        },
+        {
+          "bytes": 166800,
+          "path": "reports/forge/pr223-original-full-retest-stopped17-20261004/gifs/portability-vector_anisotropic.gif",
+          "sha256": "f12fd3f880a8a439ddd118398720275b1c8b1428cda783b689351b3fb81d582a"
+        },
+        {
+          "bytes": 462487,
+          "path": "reports/forge/pr223-original-full-retest-stopped17-20261004/gifs/portability-vector_overlap.gif",
+          "sha256": "6b4a3fac0eb119059c0694195c0f1a8b1339e387dc85228541dd1b7278700210"
+        },
+        {
+          "bytes": 385161,
+          "path": "reports/forge/pr223-original-full-retest-stopped17-20261004/gifs/portability-vector_spiral.gif",
+          "sha256": "aae875c5a20ccfbbedb08e5fd5466ca93e45271e6e8968b44f56648ebc20177d"
+        },
+        {
+          "bytes": 70881,
+          "path": "reports/forge/pr223-original-full-retest-stopped17-20261004/gifs/portability-stationary.gif",
+          "sha256": "2ebbab1d0c42b0bac89c309a3103a86255abe4961b28993510f5f5284790d234"
+        },
+        {
+          "bytes": 103291,
+          "path": "reports/forge/pr223-original-full-retest-stopped17-20261004/gifs/portability-ring_shift.gif",
+          "sha256": "6e3589c81cea8abf522171077733e2ca0c1968486685a9ea61673e2e389ae2ff"
+        },
+        {
+          "bytes": 109334,
+          "path": "reports/forge/pr223-original-full-retest-stopped17-20261004/gifs/moving-grid100.gif",
+          "sha256": "a7fe0079ad5c57cb4bed8625c106f8f50dcca5a036c6568c61285ca9eef17d95"
+        },
+        {
+          "bytes": 109796,
+          "path": "reports/forge/pr223-original-full-retest-stopped17-20261004/gifs/moving-rotated100.gif",
+          "sha256": "478ee155f09ed1e54cedf4a109d6b193231b5c8d09326b79f192985217a816ea"
+        },
+        {
+          "bytes": 109124,
+          "path": "reports/forge/pr223-original-full-retest-stopped17-20261004/gifs/moving-staggered100.gif",
+          "sha256": "49e4746d9b477c0a010912a8c426746e2940c4e760b680f33de30435f6021160"
+        }
+      ],
+      "protocol": {
+        "bytes": 157526,
+        "path": "reports/forge/pr223-original-full-retest-20261004/protocol.json",
+        "sha256": "8a5f0f63839e613b051562f030486388e8fcf962b6b6987fe5aaa27ea1f59786"
+      },
+      "readout": {
+        "bytes": 4366,
+        "path": "reports/forge/pr223-original-full-retest-stopped17-20261004/README.md",
+        "sha256": "248cc00b72dfe5b70fb5788bbe41a2a958b219caa1437aa978cf049780b201c5"
+      },
+      "result": {
+        "bytes": 254229,
+        "path": "reports/forge/pr223-original-full-retest-stopped17-20261004/results.json",
+        "sha256": "4cca29c719ffe295712775be27167d7465090c40865d3b096aea247e61a3d4f3"
+      },
+      "schema": "pg_pr223_full19_passive_publication_v1",
+      "source": {
+        "digest": "00cadbfd06c770e16c35045b42387932b14ee3751954e5320f9e2c32799f7a2f",
+        "origin_commit": "2068a661331a45e0e283b0362dd58b7d92263c6f"
+      },
+      "terminal_card_sha256": "d26716f60c89ca9499d8c4aa5a5a7baeb4bf6429861d1a081c943883058b6eff",
+      "verification": {
+        "bytes": 822,
+        "path": "reports/forge/pr223-original-full-retest-stopped17-20261004/verification.json",
+        "sha256": "a74262e6af196c7686f9275a0723ace989067f65552fb8b554a2c35948c26eb5"
       }
     }
   ],

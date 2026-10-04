@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 407. Inventory coverage: complete. Unresolved import items: 7.
+Records: 408. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -4592,6 +4592,7 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 - **r1r2-modern-family-round1-v1**: Concluded 8 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/r1r2-modern-family-round1-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **policy-family-defaults-round2-v1**: Concluded 8 configurations; recorded outcome incomplete_comparison. Original terminal gates and study persistence gates remain distinct. [Source](../../reports/forge/policy-family-inventory.json) · [Board](../../reports/forge/policy-family-inventory.md)
 - **policy-family-defaults-round3-v1**: Concluded 8 configurations; recorded outcome incomplete_comparison. Original terminal gates and study persistence gates remain distinct. [Source](../../reports/forge/policy-family-inventory.json) · [Board](../../reports/forge/policy-family-inventory.md)
+- **pr223-original-full19-retest**: Closed original19 cut: 16/19 PASS, 0 FAIL, 3 unavailable. Final accepted status INCOMPLETE; required execution counts {'INVALID': 1, 'NOT_RUN': 2, 'PASS': 16}. Historical positives and overlapping cut costs are not pooled. [Source](../../reports/forge/pr223-original-full-retest-stopped17-20261004/results.json) · [Board](../../reports/forge/technique-inventory.md)
 - **ka2-tier1-refresh-v1**: Concluded 4 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/ka2-tier1-refresh-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **r1r2-tier1-refresh-v1**: Concluded 12 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/r1r2-tier1-refresh-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **policy-family-defaults-round1-cli-recovery-v2**: Concluded 8 configurations; recorded outcome incomplete_comparison. Original terminal gates and study persistence gates remain distinct. [Source](../../reports/forge/policy-family-inventory.json) · [Board](../../reports/forge/policy-family-inventory.md)
@@ -4620,4 +4621,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `0468d23f0f7e63ca543317c02db5e037453a600bc11c9672ba674f0fe423660a`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `409e51c2ea44a72d63e7afa1cb79de48796628ecb6342160d6a80cd212a606c2`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

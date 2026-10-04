@@ -1,0 +1,28 @@
+{
+  "accepted_original_gifs": 16,
+  "bulk_state_arrays_logs_copied": false,
+  "consumed_inputs": 4304,
+  "counts": {
+    "BLOCKED": 0,
+    "BUDGET_EXCEEDED": 0,
+    "FAIL": 0,
+    "INCOMPLETE": 0,
+    "INVALID": 1,
+    "NOT_RUN": 2,
+    "PASS": 16,
+    "UNKNOWN": 0
+  },
+  "draws": 0,
+  "final_cost_pending": true,
+  "grader_calls": 0,
+  "models": 0,
+  "private_nonce_values_copied": false,
+  "producer_sha256": "b11aa00c805a840a588364675c8187ca7f0861672d3c991296096919cb752f87",
+  "rendered_frames": 0,
+  "required": 19,
+  "results_sha256": "4cca29c719ffe295712775be27167d7465090c40865d3b096aea247e61a3d4f3",
+  "schema": "pg_pr223_passive_verification_v1",
+  "scorer_calls": 0,
+  "status": "VERIFIED_PRE_PUBLICATION_COST_CUT",
+  "trusted_card_sha256": "d26716f60c89ca9499d8c4aa5a5a7baeb4bf6429861d1a081c943883058b6eff"
+}
