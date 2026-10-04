@@ -56,13 +56,52 @@ def typed_state_digest(value):
     return digest.hexdigest()
 
 
+def _undefined_birth_dimension_skip(policy):
+    """Recognize only the public reference-kNN undefined-dimension branch.
+
+    Its NaN is stored as diagnostic evidence before maybe_apply returns without
+    a move.  This does not exempt any learned tensor or other diagnostic leaf.
+    """
+    birth = policy.get("birth_death")
+    last = birth.get("last") if isinstance(birth, dict) else None
+    if not isinstance(last, dict) or set(last) != {"step", "k", "d_R", "d_F", "skip"}:
+        return False
+    if (type(last["d_R"]) is not float or not math.isnan(last["d_R"])
+            or last["skip"] != "dimension undefined"
+            or type(last["d_F"]) is not float or not math.isfinite(last["d_F"])):
+        return False
+    completed, step = policy.get("completed_steps"), last["step"]
+    shape = birth.get("config", {}).get("table_shape") if isinstance(birth.get("config"), dict) else None
+    if (type(completed) is not int or type(step) is not int or not 0 < step <= completed
+            or not isinstance(shape, tuple) or len(shape) != 2
+            or any(type(size) is not int or size <= 0 for size in shape)):
+        return False
+    from particlegan.birth_death import ParticleBirthDeath
+    try:
+        k = min(math.ceil((math.log2(shape[0] / ParticleBirthDeath.Q) + 1) / 2), shape[0] - 2)
+    except (ValueError, OverflowError):
+        return False
+    if type(last["k"]) is not int or last["k"] != k or k < 4:
+        return False
+    counters = birth.get("counters")
+    if (not isinstance(counters, dict)
+            or any(type(counters.get(key)) is not int or counters[key] < 0 for key in ("evals", "dim_skips"))
+            or not 0 < counters["dim_skips"] <= counters["evals"] <= completed
+            or "moved_rows" not in birth or birth["moved_rows"] is not None):
+        return False
+    return True
+
+
 def finite_policy_state(value, path=()):
-    """Strict learned-state health with narrow public LR diagnostic exceptions.
+    """Strict learned-state health with narrow public diagnostic exceptions.
 
     SettleTest stores NaN for masked/no-evidence displacement/cosine values;
     unavailable last/last_look statistics also use NaN.  A zero-variance t may
     be infinite, and the early log-BF is -Inf before sufficient evidence.
     These named leaves remain untouched and never become a quality PASS.
+    The public birth/death reference-dimension NaN is also retained, only for
+    its exact clocked, no-move "dimension undefined" diagnostic branch with a
+    finite fake dimension. Other nonfinite birth/death values remain errors.
     The public policy loader still owns schema validation on restoration.
     """
     # Both GANTrainer and caller-owned UpdatePolicy checkpoint envelopes are
@@ -78,6 +117,17 @@ def finite_policy_state(value, path=()):
         masked = settle and normalized[3] in {"r_b", "r_2b", "blocks", "last_block"}
         return bool((~torch.isinf(value)).all()) if masked else bool(torch.isfinite(value).all())
     if isinstance(value, dict):
+        birth = value.get("birth_death")
+        last = birth.get("last") if isinstance(birth, dict) else None
+        if (not normalized and isinstance(last, dict)
+                and type(last.get("d_R")) is float and math.isnan(last["d_R"])):
+            if not _undefined_birth_dimension_skip(value):
+                return False
+            # Do not rewrite the checkpoint or digest its NaN differently.
+            # Exclude just this confirmed sentinel from the health recursion.
+            checked_birth = {**birth, "last": {key: child for key, child in last.items() if key != "d_R"}}
+            return all(finite_policy_state(checked_birth if key == "birth_death" else child, path + (key,))
+                       for key, child in value.items())
         return all(finite_policy_state(child, path + (key,)) for key, child in value.items())
     if isinstance(value, (tuple, list)):
         return all(finite_policy_state(child, path + (index,)) for index, child in enumerate(value))
