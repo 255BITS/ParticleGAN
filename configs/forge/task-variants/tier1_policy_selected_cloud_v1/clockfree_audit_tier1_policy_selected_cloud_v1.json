@@ -1,0 +1,188 @@
+{
+  "adapter": "clockfree_audit",
+  "dependencies": [],
+  "evaluation": {
+    "conditions": [
+      "step_label",
+      "horizon",
+      "evaluation_cadence",
+      "restart"
+    ],
+    "eval_output_noise": "clean",
+    "evaluator": "experiments.forge.views:_clockfree",
+    "kind": "clockfree_parity",
+    "policy_observation": {
+      "diagnostic_credit": false,
+      "eval_streams": "forge-rng-v1_isolated",
+      "latent_policy": "actual_selected_public_policy",
+      "output_noise": false,
+      "row_selection": "original_task_strategy",
+      "sampler": "GANTrainer.sample",
+      "schema_version": 1,
+      "weight_selector": "state_selected"
+    },
+    "sampling_contract_version": 1,
+    "sampling_law": "tier1_selected_public_prior_without_output_noise",
+    "scoring_weights": "state_selected",
+    "sources": {
+      "configs/forge/tasks/clockfree_audit.json": "d7748d04db85633e5c678622486b94b2a44f0e462ffb9c4b0179216db7840258",
+      "experiments/forge/adapters.py": "e2902ef9f39f39067a8d275616f78bb07e672af69c562833bc1e7ffa681d08c7",
+      "experiments/forge/api.py": "e745bfc9f7246055e4d3cea0b3943493ccdf3769527a54684182514a6dc767cd",
+      "experiments/forge/boundaries.py": "17ce3e0da65d62158955ed03f5a7ba6f4a3526c74730019a5dc51f2d189b7218",
+      "experiments/forge/clockfree.py": "1197581130829f4c293383fd093190e79eaa35bded45aade0f010ba9684cc8b7",
+      "experiments/forge/mechanisms.py": "9e4e1fe1f8cb9a24148cab88b7bf2f980e805a2e488c16a982768519bbe1b23f",
+      "experiments/forge/policy_adapters.py": "714046ea1655f1946e09dc2aeed27c43cf93f2841237c2be47f0f0049a5df9fa",
+      "experiments/forge/policy_behavior_adapters.py": "5eba85fbdd2e2675269eb7c283d3228b0def908e24e2dd06879035dd4ff370a0",
+      "experiments/forge/sampling.py": "10e7c17dd4ca30c1f2f3797aa323690db7f4bfdbfe295f23770bb6293ba3aab1",
+      "experiments/forge/tier1_policy.py": "175dbf1a0f15372c37c8f196347bd109d2ba7f082c37c754c2394ef554feb337",
+      "experiments/forge/views.py": "673331e6fd93e56d69db83f034fa2e431ee5f2015f368c7de8029009da739e77",
+      "particlegan/policy.py": "8370e36b5b93afe95ae24d2b385aac8735a587f86ef2b87ed369ecfdfcb6fec5",
+      "particlegan/recipes.py": "1a7f9df746e242a2774068c819d70d50cd72dc4f7f6b22b0bd13e1345dcf8ab2",
+      "particlegan/training.py": "7dadc219135bc3e6bf657bfe9bc3fa81dd14d4b2a31c70d5ff61e2941db35c94"
+    },
+    "training_feedback": false
+  },
+  "execution": {
+    "device": "cuda",
+    "evaluation_samples": 16,
+    "initializer": "deterministic_orthogonal",
+    "model": {
+      "fourier": 2,
+      "hidden": 16,
+      "layers": 2
+    },
+    "original_schedule_horizon": 128,
+    "perturbed_horizon": 4096,
+    "policy_clock_horizon": "independent_GANTrainer_max_steps_preserving_Recipe_total_steps_None",
+    "policy_contract": {
+      "checkpoint": "complete_public_policy_models_optimizers_streams_and_cursor",
+      "cohort": "tier1_policy_selected_cloud_v1",
+      "execution_path": "public_trainer",
+      "external_limit": "task.execution.steps",
+      "lifecycle": "ordered_public_update",
+      "original_parent_credit": false,
+      "owner": "particlegan.UpdatePolicy",
+      "recipe_overrides": {},
+      "row_semantics": "independent",
+      "schedule": "preserve_resolved_recipe_none",
+      "schema_version": 1,
+      "sources": {
+        "experiments/forge/adapters.py": "e2902ef9f39f39067a8d275616f78bb07e672af69c562833bc1e7ffa681d08c7",
+        "experiments/forge/api.py": "e745bfc9f7246055e4d3cea0b3943493ccdf3769527a54684182514a6dc767cd",
+        "experiments/forge/boundaries.py": "17ce3e0da65d62158955ed03f5a7ba6f4a3526c74730019a5dc51f2d189b7218",
+        "experiments/forge/clockfree.py": "1197581130829f4c293383fd093190e79eaa35bded45aade0f010ba9684cc8b7",
+        "experiments/forge/mechanisms.py": "9e4e1fe1f8cb9a24148cab88b7bf2f980e805a2e488c16a982768519bbe1b23f",
+        "experiments/forge/policy_adapters.py": "714046ea1655f1946e09dc2aeed27c43cf93f2841237c2be47f0f0049a5df9fa",
+        "experiments/forge/policy_behavior_adapters.py": "5eba85fbdd2e2675269eb7c283d3228b0def908e24e2dd06879035dd4ff370a0",
+        "experiments/forge/sampling.py": "10e7c17dd4ca30c1f2f3797aa323690db7f4bfdbfe295f23770bb6293ba3aab1",
+        "experiments/forge/tier1_policy.py": "175dbf1a0f15372c37c8f196347bd109d2ba7f082c37c754c2394ef554feb337",
+        "experiments/forge/views.py": "673331e6fd93e56d69db83f034fa2e431ee5f2015f368c7de8029009da739e77",
+        "particlegan/policy.py": "8370e36b5b93afe95ae24d2b385aac8735a587f86ef2b87ed369ecfdfcb6fec5",
+        "particlegan/recipes.py": "1a7f9df746e242a2774068c819d70d50cd72dc4f7f6b22b0bd13e1345dcf8ab2",
+        "particlegan/training.py": "7dadc219135bc3e6bf657bfe9bc3fa81dd14d4b2a31c70d5ff61e2941db35c94"
+      }
+    },
+    "policy_parent_definition": {
+      "adapter": "clockfree_audit",
+      "dependencies": [],
+      "evaluation": {
+        "conditions": [
+          "step_label",
+          "horizon",
+          "evaluation_cadence",
+          "restart"
+        ],
+        "eval_output_noise": "clean",
+        "evaluator": "experiments.forge.views:_clockfree",
+        "kind": "clockfree_parity",
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise",
+        "scoring_weights": "live",
+        "training_feedback": false
+      },
+      "execution": {
+        "evaluation_samples": 16,
+        "initializer": "deterministic_orthogonal",
+        "model": {
+          "fourier": 2,
+          "hidden": 16,
+          "layers": 2
+        },
+        "original_schedule_horizon": 128,
+        "perturbed_horizon": 4096,
+        "prior": {
+          "kind": "mog",
+          "learnable": true,
+          "sigma": 0.025,
+          "standardize": false
+        },
+        "probe_steps": 4,
+        "protocol": "screening",
+        "resources": {
+          "batch_size": 8,
+          "num_particles": 16,
+          "z_dim": 2
+        },
+        "step_label_offset": 8192,
+        "steps": 24,
+        "warmup_steps": 4
+      },
+      "id": "clockfree_audit",
+      "requires_capabilities": [
+        "checkpoint",
+        "named_rng",
+        "live_sampling",
+        "learned_locations",
+        "mog_prior"
+      ],
+      "resources": {
+        "cpu_threads": 1,
+        "gpu_memory_mb": 2048,
+        "gpus": 1,
+        "timeout_seconds": 300
+      },
+      "schema_version": 1
+    },
+    "prior": {
+      "exception_reason": "Independent Atlas/E22 row controls require an explicit equal-mass cloud; this scoped selected-policy variant supplies no original MoG/live credit.",
+      "kind": "particle_cloud",
+      "learnable": true,
+      "sigma": 0.0,
+      "standardize": false
+    },
+    "probe_steps": 4,
+    "protocol": "screening",
+    "resources": {
+      "batch_size": 8,
+      "num_particles": 16,
+      "z_dim": 2
+    },
+    "step_label_offset": 8192,
+    "steps": 24,
+    "warmup_steps": 4
+  },
+  "id": "clockfree_audit_tier1_policy_selected_cloud_v1",
+  "policy_parent": {
+    "evaluation_fingerprint": "06c264e7d0c6ec1433c2055786b92600da4f83af5c796ec85bc231c5027ed96f",
+    "execution_fingerprint": "046bcb9371d7fe72f12bb6daa46cf7e90e99737385e1c1be08717625ceaf7477",
+    "id": "clockfree_audit",
+    "task_sha256": "d7748d04db85633e5c678622486b94b2a44f0e462ffb9c4b0179216db7840258"
+  },
+  "requires_capabilities": [
+    "checkpoint",
+    "named_rng",
+    "served_sampling",
+    "learned_locations",
+    "particle_cloud",
+    "policy_controls",
+    "policy_serving"
+  ],
+  "resources": {
+    "cpu_threads": 1,
+    "gpu_memory_mb": 2048,
+    "gpus": 1,
+    "timeout_seconds": 300
+  },
+  "schema_version": 1,
+  "task_cohort": "tier1_policy_selected_cloud_v1"
+}

@@ -59,13 +59,21 @@ def learning_state(state):
             "training_rng": named}
 
 
+def _proof_digest(value, proof):
+    if proof["recipe"].get("continuous_policy") is not None:
+        from .policy_adapters import typed_state_digest
+        return typed_state_digest(value)
+    return state_digest(value)
+
+
 def _comparisons(proof):
+    digest = lambda value: _proof_digest(value, proof)
     initial = learning_state(proof["initial"])
-    common = {"permitted_state_sha256": state_digest(initial),
-              "rng_state_sha256": state_digest(initial["training_rng"])}
-    reference = state_digest([learning_state(s) for s in proof["trajectories"]["reference"]])
+    common = {"permitted_state_sha256": digest(initial),
+              "rng_state_sha256": digest(initial["training_rng"])}
+    reference = digest([learning_state(s) for s in proof["trajectories"]["reference"]])
     return [{"condition": name, **common, "reference_sha256": reference,
-             "changed_sha256": state_digest([learning_state(s) for s in proof["trajectories"][name]])}
+             "changed_sha256": digest([learning_state(s) for s in proof["trajectories"][name]])}
             for name in ("step_label", "horizon", "evaluation_cadence", "restart")]
 
 
@@ -112,8 +120,14 @@ def run_clockfree(request, task, output, device):
         if name == "step_label":
             trainer.completed_steps += offset
         elif name == "horizon":
-            context.recipe = context.recipe.replace(total_steps=spec["perturbed_horizon"])
-            trainer.recipe = context.recipe
+            if context.recipe.total_steps is None:
+                # Public continuous Recipes reject a training horizon. Their
+                # only legal horizon is the independent external execution cap.
+                trainer.max_steps = spec["perturbed_horizon"]
+            else:
+                context.recipe = context.recipe.replace(total_steps=spec["perturbed_horizon"])
+                trainer.recipe = context.recipe
+                trainer.policy.recipe = context.recipe
         trajectory = []
         for _ in range(probe_steps):
             if name == "evaluation_cadence":
@@ -124,7 +138,9 @@ def run_clockfree(request, task, output, device):
         proof["trajectories"][name] = trajectory
         _event("clock_probe", task=task["id"], condition=name, updates=probe_steps)
     torch.save(proof, directory / "comparisons.pt")
-    evidence = {**executed_receipt(PUBLIC_PRIOR_CLEAN, eval_output_noise="clean"),
+    law = (task["evaluation"]["sampling_law"] if context.policy_task is not None else PUBLIC_PRIOR_CLEAN)
+    evidence = {**executed_receipt(law, eval_output_noise="clean"),
+                "scoring_weights": task["evaluation"].get("scoring_weights", "live"),
                 "comparisons": _comparisons(proof),
                 "source_audit": source_audit(proof["recipe"], proof["extensions"]),
                 "artifact_root": str(directory.resolve()), "artifact_manifest": manifest_artifacts(directory),
@@ -146,7 +162,8 @@ def verify_probe(task, evidence):
     names = {"reference", "step_label", "horizon", "evaluation_cadence", "restart"}
     if set(proof["trajectories"]) != names or set(proof["branch_initial"]) != names:
         raise ValueError("clock probe must preserve every comparison branch")
-    initial_hash = state_digest(proof["initial"])
+    digest = lambda value: _proof_digest(value, proof)
+    initial_hash = digest(proof["initial"])
     if proof["initial"]["trainer"]["completed_steps"] != task["execution"]["warmup_steps"]:
         raise ValueError("clock initial state is not at the declared warmup")
     require_optimizer_steps(proof["initial"], task["execution"]["warmup_steps"])
@@ -155,10 +172,10 @@ def verify_probe(task, evidence):
             or proof["recipe"] != proof["initial"]["trainer"]["recipe"]
             or proof["extensions"] != proof["initial"]["extensions"]):
         raise ValueError("clock source audit formulation differs from the measured initial state")
-    if initial_hash != state_digest(torch.load(root / "initial.pt", map_location="cpu", weights_only=True)):
+    if initial_hash != digest(torch.load(root / "initial.pt", map_location="cpu", weights_only=True)):
         raise ValueError("serialized restart differs from the measured initial state")
     for name in names:
-        if state_digest(proof["branch_initial"][name]) != initial_hash:
+        if digest(proof["branch_initial"][name]) != initial_hash:
             raise ValueError("clock comparison did not start from identical own state")
         trajectory = proof["trajectories"][name]
         if len(trajectory) != task["execution"]["probe_steps"]:
@@ -169,7 +186,14 @@ def verify_probe(task, evidence):
             require_consistent_rng(state)
             if state["trainer"]["completed_steps"] != task["execution"]["warmup_steps"] + offset + index:
                 raise ValueError("clock perturbation labels do not match the declared probe")
-            horizon = task["execution"]["perturbed_horizon"] if name == "horizon" else task["execution"]["original_schedule_horizon"]
+            continuous = proof["recipe"].get("continuous_policy") is not None
+            horizon = (task["execution"]["perturbed_horizon"] if name == "horizon" and not continuous
+                       else proof["recipe"]["total_steps"])
+            if continuous:
+                maximum = (task["execution"]["perturbed_horizon"] if name == "horizon"
+                           else proof["initial"]["trainer"]["max_steps"])
+                if state["trainer"].get("max_steps") != maximum:
+                    raise ValueError("continuous clock probe external horizon differs")
             expected_recipe = {**proof["recipe"], "total_steps": horizon}
             if (state["recipe"] != expected_recipe or state["trainer"]["recipe"] != expected_recipe
                     or state["extensions"] != proof["extensions"]

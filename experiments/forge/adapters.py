@@ -49,6 +49,23 @@ def adapter_preflight(task, candidate, *, root=None):
     except ValueError as error:
         return [str(error)]
     adapter = task["adapter"]
+    if task.get("task_cohort") == "tier1_policy_selected_cloud_v1":
+        from .tier1_policy import validate
+        try:
+            validate(task, root=root)
+        except (ValueError, KeyError, OSError) as error:
+            return [str(error)]
+        blockers = task_policy_blockers(task, candidate)
+        if blockers:
+            return blockers
+        if adapter == "transfer_behavior":
+            from .policy_behavior_adapters import behavior_preflight
+            return behavior_preflight(task, candidate)
+        try:
+            task_formulation_context(candidate, task, device="cpu", root=root)
+        except (ValueError, KeyError) as error:
+            return error.blockers if isinstance(error, CapabilityError) else [str(error)]
+        return []
     if adapter == "word_joint":
         from .word_adapter import word_preflight
         return word_preflight(task, candidate, root=root)
@@ -96,7 +113,7 @@ def adapter_preflight(task, candidate, *, root=None):
         blockers.extend(image_profile_blockers(task, root=root))
         if blockers:
             return blockers
-    if adapter == "clockfree_audit":
+    if adapter == "clockfree_audit" and task["execution"].get("clock_audit_scope") != "measure_known_dependencies":
         from .clockfree import source_audit
         recipe = candidate.get("resolved_recipe")
         if recipe and "lr_floor" in recipe:
@@ -149,6 +166,13 @@ class _Run:
         self.finite = True
         self.rng_audits = []
         self.last_update = {}
+        self.policy_audit = None
+        self.policy_purity, self.policy_observations = [], []
+        if context.policy_task is not None:
+            from .policy_adapters import PolicyLifecycleAudit
+            self.policy_audit = PolicyLifecycleAudit(trainer.policy)
+            self.sampling_policy = executed_receipt(task["evaluation"]["sampling_law"],
+                eval_output_noise=task["evaluation"]["eval_output_noise"])
         self.mechanism_audit = MechanismAudit(context.recipe, trainer.opt_d, [trainer.opt_g])
         self.timing = PhaseTimer(synchronize=(lambda: torch.cuda.synchronize(context.device))
                                 if context.device.type == "cuda" else None)
@@ -175,6 +199,10 @@ class _Run:
             raise FloatingPointError("nonfinite public training loss")
 
     def evaluate(self, function):
+        policy_before = None
+        if self.policy_audit is not None:
+            from .policy_adapters import evaluation_state, typed_state_digest
+            policy_before = typed_state_digest(evaluation_state(self.context.state_dict()))
         before = self.context.streams.audit()
         cpu = torch.get_rng_state().clone()
         cuda = torch.cuda.get_rng_state(self.context.device).clone() if self.context.device.type == "cuda" else None
@@ -191,6 +219,15 @@ class _Run:
             audit["unintended_rng_deviations"] += 1
             audit["unintended_streams"].append("global_cuda")
         self.rng_audits.append(audit)
+        if policy_before is not None:
+            from .policy_adapters import observation_receipt
+            after_digest = typed_state_digest(evaluation_state(self.context.state_dict()))
+            pure = policy_before == after_digest
+            self.policy_purity.append({"completed_steps": self.trainer.completed_steps,
+                "before_sha256": policy_before, "after_sha256": after_digest, "pure": pure})
+            self.policy_observations.append(observation_receipt(self.task, self.trainer.policy))
+            if not pure:
+                raise RuntimeError("selected-policy observation changed public training state")
         self.finite = self.finite and _finite_tree(result)
         return result
 
@@ -201,7 +238,11 @@ class _Run:
     def receipt(self, evidence, *, save_state=True):
         trainer = self.trainer
         state = self.context.state_dict()
-        self.finite = self.finite and _finite_tree(state)
+        if self.policy_audit is not None:
+            from .policy_adapters import finite_policy_state
+            self.finite = self.finite and finite_policy_state(state)
+        else:
+            self.finite = self.finite and _finite_tree(state)
         # Count actual Adam state steps, rather than echoing the task budget.
         def updates(optimizer, parameters):
             observed = [int(optimizer.state[p]["step"]) for p in parameters
@@ -219,6 +260,13 @@ class _Run:
                   "unintended_rng_deviations": sum(a["unintended_rng_deviations"] for a in self.rng_audits)}
         evidence = {**evidence, "guards": guards, "rng_audits": self.rng_audits,
                     **self.sampling_policy}
+        if self.policy_audit is not None:
+            from .policy_adapters import controls_receipt
+            controls = controls_receipt(trainer.policy, trainer.completed_steps)
+            controls["cohort"] = self.task["task_cohort"]
+            evidence.update(scoring_weights="state_selected", policy_controls=controls,
+                policy_purity=self.policy_purity, policy_observations=self.policy_observations)
+            guards["hooks_exercised"] = guards["hooks_exercised"] and controls["implementation_observed"]
         if evidence.get("artifact_root"):
             evidence["artifact_manifest"] = manifest_artifacts(evidence["artifact_root"])
             evidence["artifact_portability"] = {
@@ -507,6 +555,9 @@ def _dispatch_task(request: dict, job: dict, output_dir: Path, device: str) -> d
         from .word_adapter import run_word
         return run_word(request, task, output_dir, device)
     if adapter == "transfer_behavior":
+        if task.get("task_cohort") == "tier1_policy_selected_cloud_v1":
+            from .policy_behavior_adapters import run_behavior
+            return run_behavior(request, task, output_dir, device)
         if task["execution"].get("host") == "mode_hold":
             return _ring(request, task, output_dir, device)
         from .behavior_adapters import run_behavior
