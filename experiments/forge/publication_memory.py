@@ -219,7 +219,9 @@ def _pr223_cut(root, entry, report, final, proof):
 
 # Add adapters here for reviewed passive schemas; paths and latest-cut pointers
 # belong to the optional committed registry, not a hard-coded report date.
-PASSIVE_ADAPTERS = {PR223_SCHEMA: _pr223_cut}
+from .native3_publication_memory import SCHEMA as NATIVE3_SCHEMA, project_native3
+
+PASSIVE_ADAPTERS = {PR223_SCHEMA: _pr223_cut, NATIVE3_SCHEMA: project_native3}
 
 
 def passive_publication_entry(root, directory):
@@ -239,6 +241,9 @@ def passive_publication_entry(root, directory):
     entry["media"] = [{"path": directory + "/" + row["media"]["file"],
                        "sha256": row["media"]["sha256"], "bytes": row["media"]["bytes"]}
                       for row in report["rows"] if row.get("media")]
+    if entry["schema"] == NATIVE3_SCHEMA:
+        from .native3_publication_memory import PARENT_METADATA_PIN_PATH
+        entry["parent_metadata_anchor"] = _pin(root, PARENT_METADATA_PIN_PATH)
     return entry
 
 
@@ -268,7 +273,7 @@ def load_passive_publications(root):
             if role != "readout": values[role] = _json(data)
         _require(values["result"].get("schema") == entry["schema"], "registered/report schema mismatch")
         cut = PASSIVE_ADAPTERS[entry["schema"]](root, entry, values["result"], values["final_cost"], values["verification"])
-        cuts.append(cut);pins += [deepcopy(entry["protocol"]), *deepcopy(entry["media"])]
+        cuts.append(cut);pins += [deepcopy(entry["protocol"]), *deepcopy(entry["media"]), *deepcopy(cut.get("inputs", []))]
     latest = registry.get("latest", {})
     _require(set(latest) == {cut["schema"] for cut in cuts}, "one explicit latest cut per schema required")
     selected = {}
@@ -302,6 +307,8 @@ def input_paths(root: Path) -> list[Path]:
     if passive:
         paths.add(root / PASSIVE_REGISTRY)
         paths.update(root / pin["path"] for pin in passive["inputs"])
+        if any(cut["schema"] == NATIVE3_SCHEMA for cut in passive["cuts"]):
+            paths.add(root / "experiments/forge/native3_publication_memory.py")
     return sorted(paths)
 
 
@@ -440,6 +447,10 @@ def normalize(root: Path) -> list[dict]:
     root = Path(root)
     records = []
     for cut in load_passive_publications(root).get("cuts", []):
+        if cut["schema"] == NATIVE3_SCHEMA:
+            from .native3_publication_memory import recall_record
+            records.append(recall_record(root, cut))
+            continue
         source = {**cut["publication"], "board": "reports/forge/technique-inventory.md"}
         record = _base(source, "pr223-original-full19-retest", "atlas",
                        {"publication": cut["publication"], "source": cut["source"]},
