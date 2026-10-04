@@ -78,7 +78,7 @@ def native3_module():
 
 
 def scoped_module(packet):
-    return native3_module() if packet.get('schema')=='pg_pr223_native3_continuation_v1' else None
+    return native3_module() if packet.get('schema')=='pg_pr223_native3_continuation_v2' else None
 
 
 def reservation(packet,snapshot,next_allowance):
@@ -402,6 +402,8 @@ def validate_request(request):
     if len(rows)!=1 or rows[0]!=request['row']:
         raise ValueError('child case substituted after reservation')
     row=rows[0]
+    scope=scoped_module(packet)
+    if scope: scope.validate_current_request(request,sys.modules[__name__])
     if row.get('status') not in {'NOT_RUN','RUNNING'}: raise ValueError('no unchanged scientific retry')
     target=Path(request['target']).resolve()
     canonical=Path(packet['coordinator']['canonical_output']).resolve()
@@ -411,6 +413,15 @@ def validate_request(request):
               '--child',str(target/'request.json'),'--lease-fd',str(request['worker']['lease_fd'])]
     if request['command']!=expected: raise ValueError('admitted child command changed')
     return packet,row,target
+
+
+def make_request(packet,row,target,command,worker):
+    """Copy current admission metadata only after its native3 state is saved."""
+    request={'packet':deepcopy(packet),'row':deepcopy(row),'target':str(target),
+             'command':list(command),'worker':deepcopy(worker)}
+    scope=scoped_module(packet)
+    if scope: scope.validate_current_request(request,sys.modules[__name__])
+    return request
 
 
 def _load_source(name,path,source):
@@ -753,12 +764,17 @@ def run(output,*,root=ROOT,queue_root=None,max_new_attempts=None,native3_anchor=
                             command=[sys.executable,'-u','-B',str(Path(packet['execution_source']['snapshot_path'])/SELF),
                                      '--child',str(request_path),'--lease-fd',str(lease.fileno())]
                             row.update(status='RUNNING',attempt_token=admission['token'])
-                            request={'packet':deepcopy(packet),'row':deepcopy(row),'target':str(target),'command':command,
-                                'worker':{'lease_fd':lease.fileno(),'lease_fds':[study_lease.fileno(),lease.fileno()],
+                            # DECLARED remains a pristine preparation contract.
+                            # Persist native3's current admission before copying
+                            # the request, so its RUNNING row has current status.
+                            if scoped_module(packet): _save(canonical/'study.json',packet,ledger)
+                            request=make_request(packet,row,target,command,
+                                {'lease_fd':lease.fileno(),'lease_fds':[study_lease.fileno(),lease.fileno()],
                                     'lease_path':admission['lease_path'],'token':admission['token'],
                                     'started_monotonic':admission['started_monotonic'],
-                                    'deadline_monotonic':admission['deadline_monotonic'],'physical_gpu':1,'device':'cuda:0'}}
-                            atomic_json(request_path,request);_save(canonical/'study.json',packet,ledger)
+                                    'deadline_monotonic':admission['deadline_monotonic'],'physical_gpu':1,'device':'cuda:0'})
+                            atomic_json(request_path,request)
+                            if not scoped_module(packet): _save(canonical/'study.json',packet,ledger)
                             print(json.dumps({'event':'start','case':row['id'],'attempt_key':attempt_key,'log':str(target/'run.log')}),flush=True)
                             try:
                                 # The durable case supervisor owns all child
@@ -819,6 +835,8 @@ def copied_preflight(prepared):
     scope=scoped_module(prepared)
     boundary=(module(scope.DIRECTORY+'/scorer_boundary_control.py','_pr223_native3_boundary').run(prepared,sys.modules[__name__])
               if scope else None)
+    request_boundary=(module(scope.DIRECTORY+'/request_boundary_control.py','_pr223_native3_request_boundary').run(prepared,sys.modules[__name__])
+                      if scope else None)
     guard_imports(prepared['execution_source'])
     if any(n=='torch' or n=='particlegan' or n.startswith('particlegan.') for n in sys.modules):
         raise ValueError('model-free preflight imported a model package')
@@ -826,7 +844,9 @@ def copied_preflight(prepared):
             'protocol_sha256':stable_hash(prepared['protocol']),'cases':3 if scope else 19,'updates':21000 if scope else 48800,
             'compiled_original_wrappers':3 if scope else 19,'native_scorer_imports':native_imports,
             'models':0,'sampler_calls':0,'scorer_calls':0,'queue_calls':0,'numeric_credit':False}
-    if scope: result['native_scorer_boundary_control']=boundary
+    if scope:
+        result['native_scorer_boundary_control']=boundary
+        result['native_request_boundary_control']=request_boundary
     return result
 
 
@@ -880,6 +900,8 @@ def require_copied_preflight(prepared):
     if scope:
         boundary=module(scope.DIRECTORY+'/scorer_boundary_control.py','_pr223_native3_boundary')
         boundary.validate_proof(result.get('native_scorer_boundary_control'),prepared,sys.modules[__name__])
+        request_boundary=module(scope.DIRECTORY+'/request_boundary_control.py','_pr223_native3_request_boundary')
+        request_boundary.validate_proof(result.get('native_request_boundary_control'),prepared,sys.modules[__name__])
     return result
 
 

@@ -15,15 +15,22 @@ from pathlib import Path
 
 DIRECTORY = 'reports/forge/pr223-native3-continuation-20261004'
 SELF = DIRECTORY + '/run_native3.py'
-SCHEMA = 'pg_pr223_native3_continuation_v1'
-PROTOCOL_SCHEMA = 'pg_pr223_native3_continuation_protocol_v1'
-ATTESTATION_SCHEMA = 'pr223_native3_case_attestation_v1'
-PREFLIGHT_SCHEMA = 'pg_pr223_native3_copied_source_preflight_v1'
+SCHEMA = 'pg_pr223_native3_continuation_v2'
+PROTOCOL_SCHEMA = 'pg_pr223_native3_continuation_protocol_v2'
+ATTESTATION_SCHEMA = 'pr223_native3_case_attestation_v2'
+PREFLIGHT_SCHEMA = 'pg_pr223_native3_copied_source_preflight_v2'
 ORDER = ('grid100', 'rotated100', 'staggered100')
 IDS = tuple('pr223-native3-continuation-v1-native-' + task for task in ORDER)
 CAPS = (1470, 1440, 1380)
 PRIOR_CASE_SECONDS = 3165.841891122982
 PRIOR_METADATA_SECONDS = 44.37232269323431
+PRETRAINING_INVALID_SECONDS = 2.0496059330180287
+PREDECESSOR_ANCHOR = DIRECTORY + '/fixtures/first-invalid-debit-anchor.json'
+PREDECESSOR_LEDGER = DIRECTORY + '/fixtures/closed-metadata-22.json'
+PREDECESSOR_PINS = {
+    PREDECESSOR_ANCHOR:('301b8036304c14f0c1a352af280e4c0dd2c8267f675294e62fadf3259fcd5ecb',1948),
+    PREDECESSOR_LEDGER:('1cb2f30350c37bedec8e012eb674bda05641093248b9f1658db0bbab8026aaf2',4644),
+}
 METADATA_CAP = 180
 TOTAL_CAP = 10800
 CANONICAL_LEDGER = '/ml2/hypergan/.pg-pr223-full-original-retest-20261004.pr223-full19-metadata-cost.json'
@@ -41,7 +48,7 @@ HISTORY_PINS = {
 PORTABLE_CONTROL_FILES = ('reports/forge/pr223-original-full-retest-20261004/fixtures/native100_score.py.txt',
                           'reports/forge/pr223-original-full-retest-20261004/fixtures/README.md',
                           DIRECTORY + '/fixtures/closed-parent-metadata.json',
-                          DIRECTORY + '/fixtures/README.md')
+                          DIRECTORY + '/fixtures/README.md',*PREDECESSOR_PINS)
 PRIOR_SOURCE = {'origin_commit': '2068a661331a45e0e283b0362dd58b7d92263c6f',
                 'digest': '00cadbfd06c770e16c35045b42387932b14ee3751954e5320f9e2c32799f7a2f'}
 CLAIMS = dict(old_results_are_current_credit=False, qualification_input=False,
@@ -77,6 +84,46 @@ def reference_summary():
                 accepted_original_gate_counts={'PASS': 16, 'FAIL': 0, 'UNAVAILABLE': 3},
                 case_charged_seconds=PRIOR_CASE_SECONDS, original_evidence_unchanged=True,
                 old_grades_are_current_credit=False)
+
+
+def predecessor_cost_summary():
+    """An explicit additional debit, never an active case or historical grade."""
+    return dict(schema='pg_pr223_native3_predecessor_cost_v1',
+        source=dict(origin_commit='0fa92c5b599da8ab2c891e544aafc09cf802a70d',
+                    digest='b2d0e98000d06a9731a4a40e52e226fedece194c097a1f5d939f501a9360aaa6'),
+        files={name:dict(sha256=pin,bytes=size) for name,(pin,size) in PREDECESSOR_PINS.items()},
+        execution_counts={'INVALID':1,'NOT_RUN':2},accepted_original_gate_counts={'PASS':0,'FAIL':0,'UNAVAILABLE':3},
+        pretraining_invalid_case_charged_seconds=PRETRAINING_INVALID_SECONDS,
+        original19_case_charged_seconds=PRIOR_CASE_SECONDS,
+        combined_prior_case_charged_seconds=math.fsum((PRIOR_CASE_SECONDS,PRETRAINING_INVALID_SECONDS)),
+        canonical_metadata_ledger=CANONICAL_LEDGER,required_closed_prefix_phases=22,
+        numerical_credit=False,old_grades_are_current_credit=False,training_started=False)
+
+
+def predecessor_metadata(root,helper):
+    """Read only committed root-sealed metadata; never follow provenance paths."""
+    root=Path(root)
+    for name,(wanted,size) in PREDECESSOR_PINS.items():
+        path=root/name
+        if path.is_symlink() or not path.is_file() or path.stat().st_size!=size or sha(path)!=wanted:
+            raise ValueError('pretraining-invalid debit metadata changed: '+name)
+    anchor=helper.read_json(root/PREDECESSOR_ANCHOR)
+    state=helper.read_json(root/PREDECESSOR_LEDGER)
+    helper.ledger_module()._validate_snapshot(state)
+    if (state['current_phase'] is not None or state['blocked'] or len(state['phases'])!=22
+            or anchor['schema']!='pg_pr223_native3_first_invalid_debit_anchor_v1'
+            or anchor['source']!=predecessor_cost_summary()['source']
+            or anchor['training_started'] is not False or anchor['numerical_credit'] is not False
+            or anchor['supervisor']['attempt_status']!='completed'
+            or anchor['execution_counts']!={'INVALID':1,'NOT_RUN':2}
+            or anchor['closed_metadata_before_sealing']['canonical_path']!=CANONICAL_LEDGER
+            or anchor['closed_metadata_before_sealing']['sha256']!=PREDECESSOR_PINS[PREDECESSOR_LEDGER][0]):
+        raise ValueError('pretraining-invalid debit source/closed-prefix ownership changed')
+    _equal(anchor['case_cost']['charged_seconds'],PRETRAINING_INVALID_SECONDS,'pretraining invalid debit')
+    _equal(anchor['old19_case_charged_seconds'],PRIOR_CASE_SECONDS,'original19 prior debit')
+    _equal(anchor['closed_metadata_before_sealing']['charged_seconds'],state['charged_seconds'],'closed22 metadata')
+    _equal(anchor['case_cost']['reserved_seconds'],0.,'completed pretraining reserve')
+    return state
 
 
 def history(root, helper):
@@ -131,8 +178,13 @@ def validate_anchor(anchor, helper, *, state=None):
 def validate_live_history(packet, snapshot, helper):
     """Require the exact old history prefix; never grant a new metadata clock."""
     helper.ledger_module()._validate_snapshot(snapshot)
-    old = packet['metadata_history']['closed_state']
-    validate_anchor(packet['metadata_history']['closed_anchor'], helper, state=old)
+    original = packet['metadata_history']['closed_state']
+    validate_anchor(packet['metadata_history']['closed_anchor'], helper, state=original)
+    old=packet['metadata_history']['predecessor_closed_state']
+    expected=predecessor_metadata(helper.ROOT,helper)
+    if (packet.get('predecessor_cost')!=predecessor_cost_summary() or old!=expected
+            or old['phases'][:len(original['phases'])]!=original['phases']):
+        raise ValueError('cost-only predecessor or same CLOSED22 ledger prefix changed')
     if (snapshot['phases'][:len(old['phases'])] != old['phases']
             or len(snapshot['phases']) < len(old['phases'])
             or snapshot['charged_seconds'] + 1e-9 < old['charged_seconds']):
@@ -151,18 +203,22 @@ def _protocol(original, reference):
                 original_required=19, required=3, rows=rows, runtime=deepcopy(original['runtime']),
                 parent_reference=reference, claims=deepcopy(CLAIMS),
                 budget=dict(prior_case_charged_seconds=PRIOR_CASE_SECONDS,
+                    pretraining_invalid_case_charged_seconds=PRETRAINING_INVALID_SECONDS,
+                    combined_prior_case_charged_seconds=math.fsum((PRIOR_CASE_SECONDS,PRETRAINING_INVALID_SECONDS)),
                     case_caps_sum_seconds=4290, shared_metadata_cap_seconds=180,
                     shared_metadata_already_charged_seconds=PRIOR_METADATA_SECONDS,
                     shared_metadata_remaining_at_parent_seconds=180-PRIOR_METADATA_SECONDS,
-                    aggregate_cap_seconds=10800, maximum_inclusive_campaign_seconds=PRIOR_CASE_SECONDS+4290+180,
+                    aggregate_cap_seconds=10800,
+                    maximum_inclusive_campaign_seconds=math.fsum((PRIOR_CASE_SECONDS,PRETRAINING_INVALID_SECONDS,4290,180)),
                     export_grace_seconds=0, retries=0))
 
 
 def spec(original_protocol_path):
-    return dict(id='pr223-native3-continuation-20261004',
+    return dict(id='pr223-native3-continuation-20261004-v2',
         representation_card={'path':original_protocol_path,'sha256':ORIGINAL_PROTOCOL_SHA},
         export_grace_seconds=0,retries=0,total_paid_cap_seconds=10800,case_caps_sum_seconds=4290,
         shared_metadata_and_finalization_seconds=180,prior_case_charged_seconds=PRIOR_CASE_SECONDS,
+        pretraining_invalid_case_charged_seconds=PRETRAINING_INVALID_SECONDS,
         resources={'host_memory_mb':2048},diagnostic_independent_tests=True,
         media_contract='original native primary/reference;9existing clocks')
 
@@ -171,6 +227,9 @@ def plan(root, helper, closed_anchor):
     root = Path(root).resolve()
     raw, _ = history(root, helper)
     closed = validate_anchor(closed_anchor, helper)
+    predecessor=predecessor_metadata(root,helper)
+    if predecessor['phases'][:len(closed['phases'])]!=closed['phases']:
+        raise ValueError('pretraining-invalid CLOSED22 prefix is not the original CLOSED12 successor')
     prefix=raw['metadata_phase_history_before_publication']
     if closed['phases'][:len(prefix)] != prefix:
         raise ValueError('closed metadata history is not the parent cut successor')
@@ -202,9 +261,10 @@ def plan(root, helper, closed_anchor):
         preflight={**base['preflight'], 'cases':3, 'updates':21000, 'original_catalog_cases':19},
         case_definitions=definitions, external_inputs=base['external_inputs'],
         recipe_overrides=deepcopy(base['recipe_overrides']), rows=rows, status='DECLARED',
-        spent_seconds=PRIOR_CASE_SECONDS+closed['charged_seconds'], new_paid_seconds=0.,
+        spent_seconds=math.fsum((PRIOR_CASE_SECONDS,PRETRAINING_INVALID_SECONDS,predecessor['charged_seconds'])),new_paid_seconds=0.,
+        predecessor_cost=predecessor_cost_summary(),
         metadata_history=dict(canonical_path=CANONICAL_LEDGER, closed_anchor=deepcopy(closed_anchor),
-                              closed_state=closed, snapshot_relative=ANCHOR_RELATIVE),
+                              closed_state=closed,predecessor_closed_state=predecessor,snapshot_relative=ANCHOR_RELATIVE),
         qualification_input=False, default_adoption=False, current_forge_mog_clean_qualification=False,
         speed_ranking=False, old_results_are_current_credit=False)
     return validate_packet(packet, helper)
@@ -229,6 +289,10 @@ def validate_packet(packet, helper, *, source=False):
     if history_binding.get('canonical_path') != CANONICAL_LEDGER or history_binding.get('snapshot_relative') != ANCHOR_RELATIVE:
         raise ValueError('foreign or reset metadata ledger identity')
     validate_anchor(history_binding['closed_anchor'], helper, state=history_binding['closed_state'])
+    if (packet.get('predecessor_cost')!=predecessor_cost_summary()
+            or history_binding.get('predecessor_closed_state')!=predecessor_metadata(helper.ROOT,helper)
+            or history_binding['predecessor_closed_state']['phases'][:12]!=history_binding['closed_state']['phases']):
+        raise ValueError('required explicit pretraining-invalid debit/CLOSED22 prefix omitted or changed')
     if [r.get('id') for r in packet['rows']] != list(IDS) or set(packet['case_definitions']) != set(IDS):
         raise ValueError('only exact ordered native3 execution rows may be present')
     if packet.get('status')=='DECLARED' and any(r.get('status')!='NOT_RUN' or
@@ -259,11 +323,17 @@ def validate_packet(packet, helper, *, source=False):
         if (helper.read_json(snapshot/'forge-source.json') != {k:v for k,v in execution.items() if k!='snapshot_path'}
                 or packet['source']['execution_digest'] != execution['digest']
                 or packet['source']['commit'] != execution['origin_commit']
-                or execution['origin_commit'] == PRIOR_SOURCE['origin_commit']
+                or execution['origin_commit'] in {PRIOR_SOURCE['origin_commit'],predecessor_cost_summary()['source']['origin_commit']}
+                or execution['digest'] in {PRIOR_SOURCE['digest'],predecessor_cost_summary()['source']['digest']}
                 or any(execution['files'].get(p) != h for p,h in packet['source']['files_sha256'].items())):
             raise ValueError('native3 new source manifest/origin changed')
         if any(name not in execution['files'] for name in PORTABLE_CONTROL_FILES):
             raise ValueError('portable copied-source test fixture closure missing')
+        for name,(wanted,_) in PREDECESSOR_PINS.items():
+            if execution['files'].get(name)!=wanted:
+                raise ValueError('copied pretraining-invalid debit source is unbound')
+        if predecessor_metadata(snapshot,helper)!=history_binding['predecessor_closed_state']:
+            raise ValueError('copied CLOSED22 predecessor prefix changed')
         history(snapshot, helper)
         if helper.protocol.load(snapshot) != original or helper.sha(snapshot/helper.protocol.PROTOCOL) != actual_spec['representation_card']['sha256']:
             raise ValueError('copied original protocol/config changed')
@@ -280,6 +350,56 @@ def validate_packet(packet, helper, *, source=False):
             if definition['fresh_retest']['goal_observer_sha256'] != execution['files'].get(helper.DIRECTORY+'/goal_observer.py'):
                 raise ValueError('native3 observer is not bound to actual source')
     return packet
+
+
+def validate_current_request(request, helper):
+    """Current admitted transport is distinct from a pristine DECLARED plan.
+
+    This proves metadata ownership only. The unchanged child lease check still
+    requires both real inherited descriptors and their durable source/deadline.
+    """
+    packet=request['packet'];row=request['row'];worker=request['worker']
+    index=next((i for i,r in enumerate(packet['rows']) if r['id']==row.get('id')),None)
+    if index is None or packet['rows'][index]!=row or row.get('status')!='RUNNING':
+        raise ValueError('native3 request must own exactly its current RUNNING row; no retry')
+    keys={'id','group','task','status','case_sha256','timeout_seconds','allowance_seconds','attempt_key','attempt_token'}
+    if set(row)!=keys:
+        raise ValueError('current native3 row cannot carry prior grade, cost, media or attempt credit')
+    for old in packet['rows'][:index]:
+        if old.get('status') not in {'PASS','FAIL'} or old.get('full_protocol_complete') is not True or not old.get('media'):
+            raise ValueError('current native3 request requires a completed same-study prefix')
+    pristine={'id','group','task','status','case_sha256','timeout_seconds','allowance_seconds'}
+    for later in packet['rows'][index+1:]:
+        if later.get('status')!='NOT_RUN' or set(later)!=pristine:
+            raise ValueError('native3 request tail must remain unexecuted and uncredited')
+    expected_status='READY' if index<2 else 'INCOMPLETE'
+    if (packet.get('status')!=expected_status or packet.get('scientific_status')!=expected_status
+            or packet.get('budget_status')!='WITHIN_DECLARED_CAPS' or packet.get('budget_overruns')!=[]
+            or packet.get('budget_accounting',{}).get('halt_required') is not False):
+        raise ValueError('native3 admission must use saved current state, never DECLARED or halted metadata')
+    token=row.get('attempt_token')
+    if type(token) is not str or len(token)!=32 or any(c not in '0123456789abcdef' for c in token) or worker.get('token')!=token:
+        raise ValueError('native3 current row and worker token differ')
+    expected_key=helper.PolicyCoordinator.attempt_key(None,packet,
+        {'family':'atlas','recipe_overrides':packet['recipe_overrides']},row)
+    if row.get('attempt_key')!=expected_key:
+        raise ValueError('native3 current attempt key differs from exact case/source/runtime')
+    started=worker.get('started_monotonic');deadline=worker.get('deadline_monotonic')
+    if (type(started) not in (int,float) or type(deadline) not in (int,float)
+            or not math.isfinite(started) or not math.isfinite(deadline) or started<0
+            or deadline-started!=row['allowance_seconds']):
+        raise ValueError('native3 current deadline must cover the exact whole allowance')
+    fds=worker.get('lease_fds');fd=worker.get('lease_fd')
+    if (type(fds) is not list or len(fds)!=2 or any(type(v) is not int or v<0 for v in fds)
+            or len(set(fds))!=2 or type(fd) is not int or fd not in fds
+            or type(worker.get('physical_gpu')) is not int or worker.get('physical_gpu')!=1 or worker.get('device')!='cuda:0'):
+        raise ValueError('native3 current request requires its two descriptor identities and GPU1')
+    coordinator=packet['coordinator']
+    if (coordinator.get('canonical_output')!=packet['prepared_output']
+            or coordinator.get('queue_root')!=packet['queue_root']
+            or Path(request['target']).resolve()!=Path(packet['prepared_output'])/'native'/row['task']):
+        raise ValueError('native3 current request changed canonical study ownership')
+    return request
 
 
 def require_existing_ledger():
@@ -321,12 +441,14 @@ def require_next_reservation(packet, snapshot, next_allowance, helper):
             raise ValueError('native cost differs from conservative durable terminal accounting')
         paid.append(expected['paid_wall_seconds']);reserved.append(expected['reserved_seconds']);overruns.append(expected['overrun_seconds'])
     current_paid, current_reserved = math.fsum(paid), math.fsum(reserved)
-    total = PRIOR_CASE_SECONDS + current_paid + current_reserved + snapshot['charged_seconds']
+    total = math.fsum((PRIOR_CASE_SECONDS,PRETRAINING_INVALID_SECONDS,current_paid,current_reserved,snapshot['charged_seconds']))
     overrun = math.fsum(overruns) + snapshot['overrun_seconds']
     halt = snapshot['blocked'] or overrun > 0 or total > TOTAL_CAP
     if next_allowance > 0 and (halt or total + next_allowance > TOTAL_CAP):
         raise budget.BudgetExceeded('whole native allowance does not fit the SAME original10800/180 campaign')
     return dict(prior_case_charged_seconds=PRIOR_CASE_SECONDS,
+                pretraining_invalid_case_charged_seconds=PRETRAINING_INVALID_SECONDS,
+                combined_prior_case_charged_seconds=math.fsum((PRIOR_CASE_SECONDS,PRETRAINING_INVALID_SECONDS)),
                 current_case_paid_wall_seconds=current_paid, current_case_reserved_seconds=current_reserved,
                 current_case_charged_seconds=current_paid+current_reserved,
                 metadata_charged_seconds=snapshot['charged_seconds'], charged_seconds=total,
