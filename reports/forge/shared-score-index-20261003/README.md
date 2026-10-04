@@ -1,6 +1,42 @@
 # Shared ParticleGAN score index
 
-No configuration is eligible to ship, and no fair speed winner is established. This is a read-only navigation and comparison index of pinned reports, not a new certifier. The local JSON preserves source, law, denominator, original grade, study grade, costs and availability separately.
+## Atlas unblocking progress
+
+**Seven of the eight targeted adapted questions now PASS.** These are measured
+results across separately named variants and retained execution sources. The
+original fixed-C6 suite remains **7 PASS / 11 FAIL / 8 BLOCKED out of 26**;
+the adaptations make seven formerly blocked questions runnable and passing
+under their explicit host laws. They do not rewrite those original results.
+
+| Tested variant | Targeted progress | What the passing questions verify | Original evidence |
+|---|---|---|---|
+| Conditional Atlas | **4/4 PASS** | Paired trajectories and padding; positive edits without leakage; both edit polarities and identity at intermediate scale | [v3 goals and four GIFs](../atlas-named-gpu-diagnostics-native-v3-20261003/README.md), source `ff94453b` |
+| Routed AE Atlas | **1/1 PASS** | Reconstruction of known inputs and retention of both protected anchors | [v3 AE goal and GIF](../atlas-named-gpu-diagnostics-native-v3-20261003/README.md), source `ff94453b` |
+| Routed Atlas | **1/1 PASS** | Preserve the unused token while the used token follows its concept target | [v4b unused-token goal and GIF](../atlas-named-gpu-diagnostics-native-v4b-20261004/README.md), source `fb7acc77` |
+| Multi-bank Atlas | **1/1 PASS** | Separate both residual poles while preserving content, identity and low leakage | [v4b cover goal and GIF](../atlas-named-gpu-diagnostics-native-v4b-20261004/README.md), source `fb7acc77` |
+| Joint-word N11 Atlas | **INVALID** | All 20,001 updates completed; retained coverage, confidence and paired inverse goals were missed | [Original word GIF and audit context](../atlas-word-retained-context-20261004/README.md), source `fb7acc77` |
+
+The original Atlas row in ordinary MoG qualification is still incompatible
+with that trainer/prior contract. Its BLOCKED cells are not a count of this
+adaptation work. Each adapted family retains **26 required questions**;
+conditional has 22 unexecuted questions in its own v3 ledger, and each other
+variant has 25 in its measured ledger. Before a default can qualify, one
+declared family and one complete tuple must cover its required questions with
+compatible source, host and serving laws, sustained original gates and the
+workflow's calibration/evidence requirements. Seven subset passes across
+different variants cannot supply that qualification. Speed is compared only
+among fully qualified comparable candidates.
+
+The named campaign's predecessor-inclusive charge is **910.2391431590077 /
+10500 seconds**, reserve zero: GPU0 **234.82608077581972 / 7500**, GPU1
+**675.4130623831879 / 3000**. Next is one separately pinned **global half-base
+step-size contrast**, LR .00265625 / prior multiplier 1.5 / D multiplier 1,
+with a full inclusive 900-second allowance. It is not yet prepared or executed.
+Earlier quarter-base/slower-prior proposals remain unexecuted history.
+
+This navigation index preserves source, law, denominator, original grade,
+study grade, costs and availability separately. No family default or fair
+speed winner is established.
 
 ## Completed current Atlas GPU diagnostic
 
