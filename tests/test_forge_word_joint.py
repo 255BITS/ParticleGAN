@@ -148,6 +148,49 @@ def test_joint_api_updates_encoder_and_all_roles_with_isolated_clean_sampling(tm
     assert set(raw["evidence"]["host"]["models"]) == {"generator", "discriminator", "encoder"}
 
 
+@pytest.mark.parametrize("capture_media", [False, True])
+def test_saved_word_records_preserve_scored_views_update_state_and_rng(tmp_path, monkeypatch, capture_media):
+    from experiments.forge.contracts import file_hash
+    from experiments.forge.state import state_digest
+    original, scored = WordFixture.observe, []
+    def observe(fixture, *args, **kwargs):
+        observed = original(fixture, *args, **kwargs)
+        scored.append(deepcopy({"step": fixture.completed_steps, **observed}))
+        return observed
+    monkeypatch.setattr(WordFixture, "observe", observe)
+    frozen, task = request()
+    global_rng = torch.get_rng_state().clone()
+    receipts, states = [], []
+    for retain in (False, True):
+        output = tmp_path / str(retain)
+        options = {} if retain else {"retain_scored_outputs": False}
+        result = run_word(frozen, task, output, "cpu", execution_limit=2,
+                          capture_media=capture_media, **options)
+        if capture_media:
+            raw, records = result
+            assert [record["step"] for record in records] == [0, 1, 2]
+        else:
+            raw = result
+        receipts.append(raw)
+        states.append(torch.load(output / "state.pt", weights_only=False))
+        assert torch.equal(global_rng, torch.get_rng_state())
+    assert state_digest(states[0]) == state_digest(states[1])
+    checks_per_run = 3 if capture_media else 2
+    assert len(scored) == 2 * checks_per_run
+    expected = [record for record in scored[checks_per_run:] if record["step"]]
+    archived_path = tmp_path / "True/observed-records.pt"
+    archived = torch.load(archived_path, weights_only=False)
+    assert state_digest(archived) == state_digest(expected)
+    assert [record["step"] for record in archived] == [1, 2]
+    assert state_digest(scored[:checks_per_run]) == state_digest(scored[checks_per_run:])
+    descriptor = receipts[1]["evidence"].pop("saved_observer_outputs")
+    assert descriptor == {"path": "observed-records.pt", "sha256": file_hash(archived_path),
+        "bytes": archived_path.stat().st_size, "observation_count": 2,
+        "kind": "scored_word_records_v1", "optimizer_updates_added": 0, "sampling_draws_added": 0}
+    assert receipts[0]["evidence"] == receipts[1]["evidence"]
+    assert not (tmp_path / "False/observed-records.pt").exists()
+
+
 def test_standalone_word_fixture_retains_its_public_recipe_and_seed_offsets():
     # Existing published cases remain on the original constructor path.
     fixture = WordFixture(device="cpu", seed=24002, recipe_name="ka2", max_steps=1)
