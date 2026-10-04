@@ -1,0 +1,23 @@
+{
+  "base_candidate": "k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c",
+  "campaign": {
+    "budget_seconds": 55440,
+    "candidate_budget_seconds": 5040,
+    "description": "One fixed recipe per family; complete Tier 1 only. One documented infrastructure-repair retry per task at most; no scientific retry or tuning.",
+    "id": "tier1-completion-v1"
+  },
+  "execution_backend": "cuda",
+  "grid": {
+    "lr": [
+      0.006375
+    ]
+  },
+  "id": "tier1-completion-v1-k3p",
+  "protocol": "screening",
+  "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+  "rationale": "Admission registration for one existing selected configuration; no tuning, new card, recipe change or independent confirmation.",
+  "schema_version": 1,
+  "trainer_family": "k3p",
+  "tuning_through_tier": 1,
+  "view": "discriminator_stability"
+}

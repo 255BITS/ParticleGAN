@@ -4,6 +4,10 @@
 the eleven current trainer families. MoG/cloud remains task-owned. The roster
 freezes candidate declarations, task definitions, view fingerprints and task
 budgets; it introduces no recipe search, seed repeat or default promotion.
+Five selected configuration cards use singleton search registrations for the
+current source, task scope and campaign. Each registration retains the exact
+existing card and already declared setting. Enqueue registers all five through
+Forge's bounded search workflow before admitting the full eleven-family roster.
 
 Nine ordinary recipes have six required discriminator-stability tests and a
 separately scoped clock audit diagnostic. Atlas and E22 have seven separately
@@ -38,5 +42,7 @@ Publish only compact metrics, original evidence certificates, reproduction
 sources and actual-training GIFs. Raw logs, saved arrays, state and frozen source
 snapshots stay in the ignored local queue and byte-exact artifact archive. Its
 hash and members are recorded in `artifact-inventory.json` after execution.
+Use `archive --archive-path /path/to/external/artifacts.tar.gz` to keep the bulk
+archive on another volume; the receipt records its exact location and hash.
 The final inventory remains the single current leaderboard. Complete current
 measurements can contain FAIL; qualification still requires the declared gates.

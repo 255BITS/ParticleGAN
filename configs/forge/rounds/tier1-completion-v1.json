@@ -322,6 +322,33 @@
       "view_fingerprint": "29b429a70ee3a1537b93025aa19dac1637db15fd8004fb2d4527756da1f79541"
     }
   ],
+  "configuration_searches": [
+    {
+      "candidate_id": "bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212",
+      "spec": "configs/forge/searches/tier1-completion-v1-bcap.json",
+      "spec_sha256": "5c21e0a261eadaf4495c6494ff43fe9baaa3b034f1ba327d0151a9323701f5d6"
+    },
+    {
+      "candidate_id": "k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c",
+      "spec": "configs/forge/searches/tier1-completion-v1-k3p.json",
+      "spec_sha256": "863b2ecb289bab659acfc440fbf0b975d4aa8a2da3dceed9396828f50decb649"
+    },
+    {
+      "candidate_id": "ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f",
+      "spec": "configs/forge/searches/tier1-completion-v1-ka2.json",
+      "spec_sha256": "26347f179a9cdcd4603e273845536f171068a4e4e000bc1515b276b6ef12efa4"
+    },
+    {
+      "candidate_id": "r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f",
+      "spec": "configs/forge/searches/tier1-completion-v1-r1r2.json",
+      "spec_sha256": "c29d3ca6a53e5463cbb4f266845ef621273f32b1d4fb33b8cc5997b9a884c397"
+    },
+    {
+      "candidate_id": "release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c",
+      "spec": "configs/forge/searches/tier1-completion-v1-release07-gan-v3.json",
+      "spec_sha256": "a5d1c354656f703d595bdda0385df6cc73fb33e4ffe1053c7cd16b1016b4fbc2"
+    }
+  ],
   "declared_first_attempt_ceiling_seconds": 27720,
   "execution_backend": "cuda",
   "gpus": [
