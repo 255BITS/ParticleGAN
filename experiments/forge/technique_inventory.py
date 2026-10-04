@@ -3,7 +3,7 @@
 This is a batch interface to the existing planner and queue, not a second
 execution lane. Tier prerequisites, frozen recipes and scientific reuse retain
 their ordinary semantics. Unsupported declarations remain visible in the plan
-without manufacturing an attempt or spending on a known blocked first task.
+without manufacturing an attempt or spending on known blocked tasks.
 """
 from __future__ import annotations
 
@@ -11,6 +11,7 @@ from copy import deepcopy
 from pathlib import Path
 
 from .contracts import identifier, positive_number, read_json, stable_hash
+from .execution_policy import completes_tier, group_blockers
 from .planning import plan_summary, resolve_idea
 from .queue import Queue, drain
 
@@ -42,6 +43,20 @@ def _first_task_blockers(request):
                          key=lambda a: (a["qualification_tier"], a.get("order", 0), a["task"]))
     if not assignments:
         return []
+    if completes_tier(request):
+        # Reject only a wholly blocked initial tier. One unsupported task must
+        # not erase independent measurements from this ordinary batch.
+        tier = assignments[0]["qualification_tier"]
+        by_task = {member: job for job in request["jobs"]
+                   for member in job.get("task_ids", [job["task_id"]])}
+        first_tier = [item for item in assignments if item["qualification_tier"] == tier]
+        reasons = []
+        for item in first_tier:
+            blocked = group_blockers(request, by_task[item["task"]])
+            if not blocked:
+                return []
+            reasons.extend(blocked)
+        return list(dict.fromkeys(reasons))
     first = assignments[0]
     if first["importance"] != "required":
         return []
@@ -50,9 +65,12 @@ def _first_task_blockers(request):
 
 
 def _signature(request):
-    return stable_hash({key: request[key] for key in (
+    value = {key: request[key] for key in (
         "candidate", "candidate_revision", "policy_fingerprint", "tasks", "jobs", "through_tier",
-        "protocol", "rng", "runtime", "execution_backend", "compute_profiles")})
+        "protocol", "rng", "runtime", "execution_backend", "compute_profiles")}
+    if "execution_policy" in request:
+        value["execution_policy"] = request["execution_policy"]
+    return stable_hash(value)
 
 
 def _prepare(root, queue_root, *, view_id, through_tier, execution_backend, cuda_model, campaign, queue):

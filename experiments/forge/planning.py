@@ -6,7 +6,9 @@ from dataclasses import asdict
 from pathlib import Path
 
 from .contracts import atomic_json, identifier, read_json, stable_hash, validate_idea
-from .sampling import candidate_blockers, task_blockers
+from .sampling import candidate_blockers
+from .execution_policy import DEFAULT as DEFAULT_EXECUTION_POLICY, group_blockers, policy
+from .preflight import task_preflight
 from .priors import task_prior
 from .sources import compute_profile, inspect_source, runtime_manifest, snapshot_source
 from .views import (load_tasks, load_view, task_evaluation_fingerprint,
@@ -136,7 +138,7 @@ def resolve_idea(root: Path, idea_id: str, *, view_id: str | None = None,
         blockers.append("extensions require api_changes describing variables, provider, affected hosts and migration")
     if idea.get("implementation"):
         blockers.append("custom implementation loaders are unsupported; implement reusable changes in the public package and declare their Recipe/API bindings")
-    from .api import CapabilityError, FormulationContext, task_formulation_context
+    from .api import CapabilityError, FormulationContext
     from .initialization import task_initializer
     try:
         context = FormulationContext(recipe_preset=idea.get("recipe_preset"),
@@ -182,30 +184,12 @@ def resolve_idea(root: Path, idea_id: str, *, view_id: str | None = None,
         extra_sources.update(relative for relative in profile_sources
                              if (root / relative).is_file())
     for task in tasks.values():
-        for relative, digest in task["evaluation"].get("sources", {}).items():
-            extra_sources.add(relative)
-            from .contracts import file_hash
-            if file_hash(root / relative) != digest:
-                blockers.append(f"{task['id']}: evaluator source changed; revise the task definition: {relative}")
+        for relative in task["evaluation"].get("sources", {}):
+            if (root / relative).is_file():
+                extra_sources.add(relative)
         # The task owns its sampling law. Candidate priors describe the reference
         # formulation and cannot replace even a task's MoG width or code path.
-        try:
-            task_context = task_formulation_context(candidate, task, protocol, root=root)
-            task["field_ownership"] = task_context.receipt()["field_ownership"]
-            available = {name for name, enabled in task_context.capabilities().items() if enabled}
-            missing = set(task["requires_capabilities"]) - available
-            task["preflight_blockers"] = [f"missing capability {cap}" for cap in sorted(missing)]
-        except ValueError as error:
-            task["preflight_blockers"] = getattr(error, "blockers", [str(error)])
-        from .adapters import adapter_preflight
-        task["preflight_blockers"].extend(adapter_preflight(task, candidate, root=root))
-        task["preflight_blockers"].extend(task_blockers(task))
-        if task["adapter"] == "native100_continuation":
-            from .nativeprofiles import validate_native_continuation
-            try:
-                validate_native_continuation(tasks[task["execution"]["continuation_of"]], task, root=root)
-            except (KeyError, TypeError, ValueError, OSError) as error:
-                task["preflight_blockers"].append(f"{task['id']}: {error}")
+        task["preflight_blockers"] = task_preflight(task, candidate, protocol, root=root, tasks=tasks)
     source = inspect_source(root, sorted(extra_sources))
     candidate_revision = candidate_revision_for(source["digest"], candidate)
     runtime = runtime_manifest()
@@ -258,6 +242,7 @@ def resolve_idea(root: Path, idea_id: str, *, view_id: str | None = None,
                                    "backend": backend, "gpu_model": compute_profiles[backend].get("model") if backend == "cuda" else None}})
     rekey_jobs(jobs)
     request = {"schema_version": 1, "candidate": candidate, "candidate_revision": candidate_revision,
+               "execution_policy": deepcopy(DEFAULT_EXECUTION_POLICY),
                "requires_independent_grading": True,
                "source": source, "runtime": runtime, "protocol": protocol, "rng": rng,
                "execution_backend": execution_backend, "compute_profiles": compute_profiles,
@@ -303,10 +288,12 @@ def plan_summary(request: dict, queue_state: dict | None = None, *, include_owne
                       "permitted_by_tier_cap": allowed, "budget_seconds": job["budget_seconds"],
                       "execution_group": job["execution_group"],
                       "blockers": request["tasks"][task_id].get("preflight_blockers", []),
+                      "execution_group_blockers": group_blockers(request, job),
                       **({"field_ownership": request["tasks"][task_id].get("field_ownership")}
                          if include_ownership else {})})
     return {"candidate": request["candidate"]["id"], "candidate_revision": request["candidate_revision"],
             "view": request["view"]["id"], "policy_fingerprint": request["policy_fingerprint"],
             "through_tier": request["through_tier"], "tasks": tasks, "worst_case_seconds": total,
+            "execution_policy": policy(request),
             **({"decision_contract": request["decision_review"]} if "decision_review" in request else {}),
             "preflight_blockers": request["preflight_blockers"], "guide": "EXPERIMENTATION.md"}

@@ -121,7 +121,11 @@ inputs; compact search reports and leaderboard publications are display records.
 
 The four-trial campaign reserves at most 3,600 seconds, with 900 seconds per
 configuration. Its three existing smoke tasks each have a 300-second allowance.
-Ordinary prerequisites stop a configuration after its first failed task.
+The original frozen requests stop a configuration after its first failed task.
+New ordinary search requests freeze `complete_current_tier`: all independent
+runnable jobs in that tier finish before a required non-PASS blocks higher tiers.
+Per-task dependencies, complete reservations and the study's frozen budgets
+still apply; changing scheduling policy does not combine configuration evidence.
 Actual paid time, failed attempts, remaining unknown tasks and reuse are recorded.
 Raw logs, checkpoints and per-update traces remain under ignored `runs/` or in
 an artifact archive; the compact report and provenance receipts are committed.

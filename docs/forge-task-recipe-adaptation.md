@@ -48,9 +48,11 @@ evidence.
 
 The immutable one-candidate campaign reserves at most 44,100 seconds: 900 for
 smoke, 39,600 for quality and 3,600 for grouped endurance. These are reservation
-ceilings, not observed costs. The ordinary scheduler stops at the first required
-failure, including remaining tasks in that tier; it does not spend to fill a
-matrix after rejection. All 3/19/2 required cells remain in the denominator.
+ceilings, not observed costs. That historical request retains its original
+fail-fast policy. New ordinary requests freeze `complete_current_tier`: they
+finish independent runnable tasks in the current tier, then block higher tiers
+if any required gate failed or remains unavailable. Unsupported task groups
+spend nothing. Recorded 3/19/2 denominators and qualification remain unchanged.
 
 ```sh
 python -m experiments.forge plan release07-gan-v3-task-adapted-v1 --through-tier 3

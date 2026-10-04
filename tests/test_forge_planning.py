@@ -44,6 +44,8 @@ def test_plan_does_not_write_and_honors_tier_cap(checkout):
     assert summary["worst_case_seconds"] == 10
     assert [r["permitted_by_tier_cap"] for r in summary["tasks"]] == [True, False, False]
     assert request["rng"]["bindings"]
+    assert request["execution_policy"] == summary["execution_policy"] == {
+        "schema_version": 1, "mode": "complete_current_tier"}
 
 
 def test_planning_exposes_task_bound_values_and_protocol_ownership(checkout):
@@ -290,3 +292,21 @@ def test_new_planning_blocks_unversioned_tasks_despite_task_delegation(checkout)
     request = resolve_idea(checkout, "base")
     assert any("sampling_contract_version" in value for value in request["tasks"]["t1"]["preflight_blockers"])
     assert not (checkout / "runs").exists()
+
+
+@pytest.mark.parametrize("missing", [True, False])
+def test_task_local_evaluator_source_blocker_does_not_block_freezing_peers(checkout, missing):
+    relative = "reports/frozen/changed-evaluator.py"
+    if not missing:
+        path = checkout / relative
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text("threshold = 2\n")
+    path = checkout / "configs/forge/tasks/t2.json"
+    task = read_json(path)
+    task["evaluation"]["sources"] = {relative: "0" * 64}
+    atomic_json(path, task)
+    request = resolve_idea(checkout, "base", through_tier=2, freeze_source=True, queue_root=checkout / "runs")
+    assert request["preflight_blockers"] == []
+    assert request["tasks"]["t1"]["preflight_blockers"] == []
+    assert "evaluator source" in request["tasks"]["t2"]["preflight_blockers"][0]
+    assert Path(request["source"]["snapshot_path"]).exists()
