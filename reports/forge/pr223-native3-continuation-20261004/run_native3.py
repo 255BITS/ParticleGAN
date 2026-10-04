@@ -76,7 +76,8 @@ def main(argv=None):
         packet = metadata_plan(closed,output=args.plan_file)
         print(json.dumps(dict(status=packet['status'],required=3,original_catalog_required=19,
             active_case_ids=list(scope.IDS),prior_case_charged_seconds=scope.PRIOR_CASE_SECONDS,
-            case_caps_sum_seconds=4290,maximum_inclusive_campaign_seconds=scope.PRIOR_CASE_SECONDS+4290+180,
+            pretraining_invalid_case_charged_seconds=scope.PRETRAINING_INVALID_SECONDS,
+            case_caps_sum_seconds=4290,maximum_inclusive_campaign_seconds=packet['protocol']['budget']['maximum_inclusive_campaign_seconds'],
             metadata_ledger_path=scope.CANONICAL_LEDGER,source=packet['source']['commit']),sort_keys=True))
         return 0
     if args.output is None: parser.error('--output required for prepare/run')
