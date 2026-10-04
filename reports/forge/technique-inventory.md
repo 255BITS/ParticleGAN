@@ -183,7 +183,7 @@ python reports/forge/regenerate_technique_inventory.py
 
 For ordinary Forge qualification, use `--source-commit <executed-commit>` to independently regrade hydrated original receipts and update this leaderboard. Reusable candidates use the same complete task ladder. Historical task-only diagnostics remain motivation and reproduction evidence. Source snapshots are provenance, not additional leaderboards.
 
-Publication input digest `567c8342c6a0f767a0a011dfd019d7c1b2abbb2a9160310968b62f2f9b899621`.
+Publication input digest `4581ce365d54c29a6e8fbe91f6c381a52d0d299177254b6aab0c26ee907b014f`.
 
 The [whole-family repair readout](family-wide-word-repairs/README.md) records the ordinary candidate attempts and bounded global configuration search. Their complete rows remain unranked alternatives below and in the companion JSON; a failed replacement does not make its historical incumbent a qualified standard.
 
