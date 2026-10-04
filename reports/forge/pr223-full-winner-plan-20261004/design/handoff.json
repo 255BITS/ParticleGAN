@@ -1,0 +1,39 @@
+{
+  "blockers_before_runtime": [
+    "root final clean source and complete imported/external closure",
+    "new zero-grace inclusive supervisor and pure original-array observation capture",
+    "actual copied-source metadata preflight and parity controls",
+    "fresh root admission and original19 full allowances"
+  ],
+  "files": {
+    "DESIGN.md": {
+      "bytes": 14155,
+      "path": "/ml2/hypergan/pg-pr223-faithful-winner-retest-design-20261004/DESIGN.md",
+      "sha256": "cfcc735d72aad59dbad04ce78e2214469488b9dab6673e934d4b011716917f09"
+    },
+    "derive_design.py": {
+      "bytes": 24267,
+      "path": "/ml2/hypergan/pg-pr223-faithful-winner-retest-design-20261004/derive_design.py",
+      "sha256": "a3b6210d5a15d9b0f35155b55011a7de377bd0adce3195c5afc8e20ac924d37e"
+    },
+    "design.json": {
+      "bytes": 247039,
+      "path": "/ml2/hypergan/pg-pr223-faithful-winner-retest-design-20261004/design.json",
+      "sha256": "9b1e42243d325272e746f6090a3f945c78530861bc717036d92910a7141fe50a"
+    },
+    "input-index.json": {
+      "bytes": 28554,
+      "path": "/ml2/hypergan/pg-pr223-faithful-winner-retest-design-20261004/input-index.json",
+      "sha256": "7f55b32ab2b5e0c7856370b2fc6d6e5ba2844ba2f6419b559a3d20877eaa99d1"
+    },
+    "verification.json": {
+      "bytes": 929,
+      "path": "/ml2/hypergan/pg-pr223-faithful-winner-retest-design-20261004/verification.json",
+      "sha256": "822223477b4efe223b6366c7c492dd30fa05a1982543bcc6b787a6b4d9706c8f"
+    }
+  },
+  "root_owns": "source preparation, supervision, GPU admission/run, integration/publication",
+  "schema": "pg_pr223_faithful_winner_retest_design_handoff_v1",
+  "scientific_work_done": false,
+  "status": "NO_WRITE_DESIGN_ONLY"
+}

@@ -1,0 +1,19 @@
+{
+  "all19_retest_required": true,
+  "consumed_inputs": 107,
+  "files": {
+    "README.md": {
+      "bytes": 9431,
+      "sha256": "02d22a4342e8ee79a02c3784c6d95a73f1af5c2cf63a79ff13bea0d526246c80"
+    },
+    "mapping.json": {
+      "bytes": 167757,
+      "sha256": "d263b2494c71c026e1792d5a3569ac5eb8ae1011110df0c8c0c3e2e8a15138de"
+    }
+  },
+  "inputs_unchanged": true,
+  "new_science_or_queue_actions": 0,
+  "privacy_key_audit": "PASS",
+  "schema": "pg_pr223_mapping_handoff_v1",
+  "status": "NO_WRITE"
+}
