@@ -973,7 +973,7 @@ def _half_base_score_line(half_base, root, path):
         return os.path.relpath(root / relative, path.parent)
     metrics = half_base.get("result", {}).get("final_metrics")
     endpoint = (f"<br>Final quality {metrics['quality_fraction']:.6f} · modes {metrics['modes']}/5 · "
-                f"mass TV {metrics['mass_tv']:.6f} · paired exact {metrics['reconstruction_exact']}"
+                f"mass TV {metrics['mass_tv']:.6f} · all-five exact {metrics['reconstruction_exact']}"
                 if metrics else "")
     return (f"| [half_base LR .00265625 / prior1.5 / D1 · source `{half_base['source']['origin_commit'][:8]}`]"
             f"({link(half_base['readout'])}) | {half_base['representation']['label']} | "
