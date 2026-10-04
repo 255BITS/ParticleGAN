@@ -1087,8 +1087,23 @@ def _original_pr223_score_line(original, root, path):
                     f"`{repaired['source']['digest'][:8]}` · [inclusive campaign charge "
                     f"{repaired['cost']['charged_seconds']:.6f} / 10800 s]({cost_link}); "
                     "original19 and pretraining-invalid case debits separately once, SAME cumulative metadata once; separate source, no pooled19 credit")
+    headline = "**19/19 PASS** · full original recipe/law replay "
+    if (fresh and repaired and fresh.get("required") == 19 and fresh.get("completed") == 16
+            and fresh.get("accepted_counts") == {"PASS": 16, "FAIL": 0, "UNAVAILABLE": 3}
+            and fresh.get("counts") == {"PASS": 16, "INVALID": 1, "NOT_RUN": 2}
+            and repaired.get("required") == 3 and repaired.get("completed") == 3
+            and repaired.get("accepted_counts") == {"PASS": 3, "FAIL": 0, "UNAVAILABLE": 0}
+            and repaired.get("status") == "PASS" and fresh.get("recipe")
+            and repaired.get("recipe") == fresh["recipe"]
+            and repaired.get("prior_reference", {}).get("source") == fresh.get("source")
+            and repaired.get("source") != fresh.get("source")
+            and fresh.get("publication", {}).get("sha256")
+            and repaired.get("prior_reference", {}).get("files_sha256", {}).get(
+                fresh["publication"]["path"]) == fresh["publication"]["sha256"]):
+        headline = ("**19/19 original cases PASS — verified across two source-bound runs** · "
+                    "historical **19/19 PASS** · full original recipe/law replay ")
     return (f"| [Original PR223 Atlas FULL · LR .00425 / prior2]({link}) | "
-            f"{original['representation']} | **19/19 PASS** · full original recipe/law replay "
+            f"{original['representation']} | {headline}"
             f"· [19 original goal GIFs]({link})<br>Policy-selected; averaging enabled; learned output kernel (init .029) "
             f"· native/moving seed1234, portability seed0 · {context}; no current-26/default credit |")
 
