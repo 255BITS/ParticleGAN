@@ -163,6 +163,12 @@ def verify_probe(task, evidence):
     if set(proof["trajectories"]) != names or set(proof["branch_initial"]) != names:
         raise ValueError("clock probe must preserve every comparison branch")
     digest = lambda value: _proof_digest(value, proof)
+    if proof["recipe"].get("continuous_policy") is not None:
+        from .policy_adapters import finite_policy_state
+        states = [proof["initial"], *proof["branch_initial"].values(),
+                  *(state for trajectory in proof["trajectories"].values() for state in trajectory)]
+        if not all(finite_policy_state(state) for state in states):
+            raise ValueError("clock proof contains nonfinite learned public policy state")
     initial_hash = digest(proof["initial"])
     if proof["initial"]["trainer"]["completed_steps"] != task["execution"]["warmup_steps"]:
         raise ValueError("clock initial state is not at the declared warmup")

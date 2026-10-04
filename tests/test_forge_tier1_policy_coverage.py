@@ -127,6 +127,16 @@ def test_policy_clockproof_roundtrip_is_a_property_control(tmp_path):
     assert grade['status'] in {'FAIL', 'BLOCKED'}
     from experiments.forge.tier1_media import render
     assert render(variant, {**result, 'gate_status': grade['status']}, tmp_path, tmp_path / 'goal.gif')['observation_count'] == 4
+    from experiments.forge.artifacts import manifest_artifacts
+    proof_path = tmp_path / 'clockfree-proof/comparisons.pt'
+    proof = torch.load(proof_path, map_location='cpu', weights_only=True)
+    parameter = next(iter(proof['trajectories']['reference'][0]['trainer']['models']['G'].values()))
+    parameter.fill_(float('inf'))
+    torch.save(proof, proof_path)
+    invalid = deepcopy(result['evidence'])
+    invalid['artifact_manifest'] = manifest_artifacts(tmp_path / 'clockfree-proof')
+    with pytest.raises(ValueError, match='nonfinite learned'):
+        verify_probe(variant, invalid)
 
 
 def test_clean_scheduled_clock_measurement_returns_failure(tmp_path):
@@ -148,3 +158,27 @@ def test_frozen_request_contains_parents_and_revalidates_sources(family, tmp_pat
         assert (snapshot / 'configs/forge/tasks' / (parent_name + '.json')).is_file()
         reasons = adapter_preflight(variant, request['candidate'], root=snapshot)
         assert bool(reasons) == (parent_name in {'unused_token_hold', 'ae_gan_hold', 'five_word_joint_acquisition'})
+
+
+@pytest.mark.parametrize('family', ['atlas', 'e22'])
+def test_frozen_complete_tier_submission_preserves_policy_sibling_blockers(family, tmp_path):
+    from experiments.forge.planning import resolve_idea
+    from experiments.forge.queue import Queue
+    from experiments.forge.contracts import atomic_json
+    import shutil
+    metadata = tmp_path / 'metadata'
+    for name in ['configs/forge/defaults.json', 'configs/forge/legacy-ideas-v1.json',
+                 'configs/forge/ideas/' + family + '.json']:
+        destination = metadata / name
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(ROOT / name, destination)
+    queue = Queue(tmp_path / 'queue', report_root=metadata / 'reports/forge')
+    request = resolve_idea(ROOT, family, view_id='tier1_policy_coverage', queue_root=queue.root, freeze_source=True)
+    queue.submit(request, {'schema_version': 1, 'id': 'policy-coverage-software',
+                          'budget_seconds': 2520, 'candidate_budget_seconds': 2520,
+                          'accept_shared_cost_transfer': False})
+    state = queue.inspect()
+    submission = next(iter(state['submissions'].values()))
+    assert submission['request']['execution_policy']['mode'] == 'complete_current_tier'
+    assert sum(not bool(task.get('preflight_blockers')) for task in submission['request']['tasks'].values()) == 4
+    assert all(not job['attempts'] for job in state['jobs'].values())
