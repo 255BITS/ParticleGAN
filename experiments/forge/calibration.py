@@ -372,6 +372,9 @@ def _validate_imports(config):
 
 def _foreign_unlisted(request, config, attempt_id):
     """Unselected foreign diagnostics cannot contribute or poison this profile."""
+    from .views import diagnostic_evidence_scope
+    if diagnostic_evidence_scope(request) == "research_diagnostic":
+        return True
     marker = request.get("calibration_lane", {})
     return (isinstance(marker, dict) and marker.get("profile_sha256") is not None
             and marker["profile_sha256"] != config.get("_profile_sha256")

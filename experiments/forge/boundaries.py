@@ -263,7 +263,7 @@ def ownership_receipt(candidate, task, resolved_recipe, protocol=None, initializ
         prior_record["code_path"] = None
     prior_record["control_binding"] = prior_binding
     prior_record["applicability"] = execution.get("prior_applicability", "sampled")
-    budget = {name: execution[name] for name in ("steps", "incremental_steps", "preserve_prefix_steps", "original_schedule_horizon") if name in execution}
+    budget = {name: execution[name] for name in ("steps", "incremental_steps", "preserve_prefix_steps", "original_schedule_horizon", "horizon_diagnostic") if name in execution}
     budget["execution_resources"] = task.get("resources", {})
     receipt = {
         "schema_version": 1, "version": BOUNDARIES_VERSION, "task_id": task.get("id"),

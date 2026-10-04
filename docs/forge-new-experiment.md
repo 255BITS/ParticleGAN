@@ -248,3 +248,14 @@ After publication, refresh [source-bound recall](forge-research-memory.md) with
 `python -m experiments.forge compile --check`. Preserve the existing scientific
 tables and telemetry when only updating summaries; changing them requires the
 original execution envelopes and an explicitly reviewed reducer update.
+
+An explicitly scoped research diagnostic can declare a separate view with
+`evidence_scope: "research_diagnostic"` and only diagnostic Tier 1 assignments.
+It requires a ready v2 bounded decision contract and the fixed screening seed;
+it does not use the registered calibration lane. Its scientific job keys include
+the diagnostic scope, so its measurements cannot fill ordinary qualification
+cells. PASS/FAIL gates and costs remain recorded, while qualification stays at
+Tier 0 with no eligibility or reuse. Reuse an existing solution declaration with
+only the study decision contract replaced; a changed question does not create a
+task-specific solution. Diagnostic readouts store final summaries and exact
+attempt hashes, then refresh recall without replaying the published goal tables.

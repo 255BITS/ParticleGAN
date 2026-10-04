@@ -13,6 +13,7 @@ from pathlib import Path
 import re
 
 from .contracts import atomic_json, atomic_text, file_hash, file_lock, identifier, read_json, stable_hash
+from .views import diagnostic_evidence_scope
 
 REDUCER_VERSION = "forge-knowledge-v2"
 DECLARATION_ONLY_BOARD = "<!-- forge: declaration-only; no measured outcomes -->"
@@ -355,14 +356,14 @@ def _pinned_row(group, records, queue_states):
     active = [row for attempt in group if not attempt.get("superseded_by") for row in attempt["task_results"]]
     counts = dict(sorted(Counter(row.get("gate_status", "NOT_RUN") for row in active).items()))
     status = next((s for s in ("INVALID", "FAIL", "BLOCKED", "INCOMPLETE", "NOT_RUN", "PASS") if counts.get(s)), "NOT_RUN")
-    diagnostic = bool(request.get("calibration_lane"))
+    diagnostic = diagnostic_evidence_scope(request)
     return {"candidate_id": request["candidate"]["id"], "candidate_revision": request["candidate_revision"],
-            "evidence_scope": "calibration_diagnostic" if diagnostic else "pinned",
+            "evidence_scope": diagnostic or "pinned",
             "calibration_lane": request.get("calibration_lane"),
             "cohort": stable_hash({"revision": request["candidate_revision"],
                 "runtime": _runtime_cohort(request), "protocol": request.get("protocol"),
                 "tasks": {k: v for k, v in request.get("tasks", {}).items()}}),
-            "runtime_cohort": _runtime_cohort(request), "qualified_tier": None,
+            "runtime_cohort": _runtime_cohort(request), "qualified_tier": 0 if diagnostic == "research_diagnostic" else None,
             "status": "DIAGNOSTIC" if diagnostic else status, "counts": counts, "cost": _cost(tasks),
             "attempt_ids": sorted(a["attempt_id"] for a in group),
             "retry_history": _retry_history(group),
@@ -374,6 +375,7 @@ def _pinned_row(group, records, queue_states):
                        "path": str(Path(group[0]["source"]).with_name("request.json"))},
             "recorded_view": request.get("view"),
             "qualification_reuse": False, "grading": "Recorded verdicts under pinned source; never regraded with a changed live evaluator.",
+            **({"qualification_input": False, "eligible": False} if diagnostic == "research_diagnostic" else {}),
             **_lifecycle(request, group, records, queue_states),
             "next_action": "Publish the stopped cohort readout, or declare a new compatible revision before further qualification."}
 
@@ -420,7 +422,7 @@ def board(root: Path, view_id: str, *, include_bindings=False) -> dict:
             selected, evidence_attempts, invalid_tasks = [], [], set()
             for attempt in attempts:
                 original = attempt["request"]
-                if original.get("calibration_lane"):
+                if diagnostic_evidence_scope(original):
                     continue
                 if (original.get("candidate_revision") != request["candidate_revision"]
                         or original.get("source", {}).get("digest") != request.get("source", {}).get("digest")
@@ -456,7 +458,7 @@ def board(root: Path, view_id: str, *, include_bindings=False) -> dict:
                                          *qualified["blockers"]]
             lifecycle = _lifecycle(request, evidence_attempts, records, states)
             row = {"candidate_id": idea_id, "candidate_revision": request["candidate_revision"],
-                            "evidence_scope": "current", "cohort": cohort,
+                            "evidence_scope": "research_diagnostic" if view.get("evidence_scope") == "research_diagnostic" else "current", "cohort": cohort,
                             "runtime_cohort": _runtime_cohort(request),
                             "source_digest": request.get("source", {}).get("digest"),
                             "status": qualified["status"], "qualified_tier": qualified["qualified_tier"],
@@ -484,20 +486,22 @@ def board(root: Path, view_id: str, *, include_bindings=False) -> dict:
             request = attempt["request"]
             identity = {k: request.get(k) for k in ("candidate_revision", "source", "protocol", "tasks")}
             identity["runtime"] = _runtime_cohort(request)
-            identity["evidence_use"] = "calibration_diagnostic" if request.get("calibration_lane") else "qualification"
+            identity["evidence_use"] = diagnostic_evidence_scope(request) or "qualification"
             archived_groups[stable_hash(identity)].append(attempt)
     archived_rows = [_pinned_row(group, records, states) for _, group in sorted(archived_groups.items())]
     pinned = [row for row in archived_rows if row["evidence_scope"] == "pinned"]
     diagnostic = [row for row in archived_rows if row["evidence_scope"] == "calibration_diagnostic"]
+    research = [row for row in archived_rows if row["evidence_scope"] == "research_diagnostic"]
     archived = [{"attempt_id": a["attempt_id"], "candidate_id": a["request"].get("candidate", {}).get("id"),
                  "candidate_revision": a["request"].get("candidate_revision"), "source": a["source"],
-                 "cost": _cost(a["task_results"]), "reason": "Registered calibration diagnostics cannot qualify a candidate."
-                 if a["request"].get("calibration_lane") else "Pinned source/task/protocol/runtime differs from the current cohort."}
+                 "cost": _cost(a["task_results"]), "reason": "Bounded diagnostics cannot qualify a candidate."
+                 if diagnostic_evidence_scope(a["request"]) else "Pinned source/task/protocol/runtime differs from the current cohort."}
                 for a in attempts if a["attempt_id"] not in matched_attempts]
     result = {"schema_version": 1, "view": view_id, "view_revision": view["revision"],
             "policy_fingerprint": views.view_fingerprint(view), "calibration": view.get("calibration"),
-            "rows": current + pinned + diagnostic + historical, "current_rows": current, "historical_rows": historical,
+            "rows": current + pinned + diagnostic + research + historical, "current_rows": current, "historical_rows": historical,
             "calibration_rows": diagnostic,
+            "research_rows": research,
             "pinned_rows": pinned, "archived_attempts": archived, "conflicts": conflicts, "import_gaps": _gaps(root),
             "ranking_note": "Ordered by attained tier, then candidate name/cohort; raw metrics and cost remain separate, with no aggregate metric ranking. CPU/CUDA and GPU models remain separate; pinned and historical verdicts are unranked and never automatically reused."}
     from .board_filters import annotate_rows
@@ -595,6 +599,8 @@ def compile_memory(root: Path, *, summaries_only: bool = False) -> dict:
         records, conflicts = _memory_records(root)
         boards = []
         for path in sorted((root / "configs/forge/views").glob("*.json")):
+            if read_json(path).get("evidence_scope") == "research_diagnostic":
+                continue
             if summaries_only:
                 result = {"view": path.stem, "current_rows": [], "pinned_rows": [], "calibration_rows": [], "conflicts": []}
             else:
@@ -628,7 +634,7 @@ def compile_memory(root: Path, *, summaries_only: bool = False) -> dict:
         except Exception as exc:
             # Repo-less fixtures and exported artifacts can still be read, never called complete.
             coverage = {"valid": False, "reason": str(exc)}
-        pending = sorted({row["candidate_id"] for result in boards for row in result["current_rows"] + result.get("pinned_rows", []) + result.get("calibration_rows", [])
+        pending = sorted({row["candidate_id"] for result in boards for row in result["current_rows"] + result.get("pinned_rows", []) + result.get("calibration_rows", []) + result.get("research_rows", [])
                           if row.get("pending_readout")})
         scientific_sources = sorted({row["source_digest"] for result in boards for row in result["current_rows"]
                                      if row.get("source_digest")})
@@ -641,7 +647,9 @@ def compile_memory(root: Path, *, summaries_only: bool = False) -> dict:
                     "reducer_hashes": reducer_hashes,
                     "input_hashes": inputs, "scientific_source_digests": scientific_sources,
                     "input_digest": stable_hash({"files": inputs, "sources": scientific_sources, "reducers": reducer_hashes}),
-                    "record_count": len(records), "view_count": len(boards), "inventory_coverage": coverage,
+                    "record_count": len(records),
+                    "view_count": len(list((root / "configs/forge/views").glob("*.json"))),
+                    "inventory_coverage": coverage,
                     "conflicts": conflicts + [issue for result in boards for issue in result["conflicts"]],
                     "pending_readout": pending, "import_gap_count": len(gaps.get("gaps", [])),
                     "scientific_normalization_complete": gaps.get("scientific_normalization_complete", False)}
@@ -652,7 +660,7 @@ def compile_memory(root: Path, *, summaries_only: bool = False) -> dict:
             "note": "Publication recall freshness grants no qualification; original evidence availability is separate."}
         manifest["operational_lifecycle_digest"] = stable_hash([
             {"cohort": row.get("cohort"), "lifecycle": row.get("lifecycle"), "requests": row.get("queue_submissions", [])}
-            for result in boards for row in result["current_rows"] + result.get("pinned_rows", []) + result.get("calibration_rows", [])])
+            for result in boards for row in result["current_rows"] + result.get("pinned_rows", []) + result.get("calibration_rows", []) + result.get("research_rows", [])])
         if summaries_only:
             manifest["operational_lifecycle_digest"] = previous.get("operational_lifecycle_digest")
             automation = read_json(output / "automation.json") if (output / "automation.json").is_file() else {
@@ -746,10 +754,14 @@ def readout(root: Path, candidate_id: str, conclusion: str, comparison: str, nex
         raise ValueError("Multiple revisions have attempts; use candidate-id@revision to bind the readout.")
     revision = revisions.pop()
     candidate = selected[0]["request"]["candidate"]
-    diagnostic_only = all(a["request"].get("calibration_lane") for a in selected)
+    scopes = {diagnostic_evidence_scope(a["request"]) for a in selected}
+    if "research_diagnostic" in scopes and len(scopes) != 1:
+        raise ValueError("research diagnostic readouts cannot combine ordinary or calibration evidence")
+    diagnostic_scope = next(iter(scopes)) if len(scopes) == 1 else None
+    diagnostic_only = diagnostic_scope is not None
     record = {"schema_version": 1, "record_id": "readout-" + stable_hash({"candidate": candidate_id, "revision": revision})[:24],
               "record_type": "scientific", "candidate_id": candidate_id, "candidate_revision": revision,
-              "evidence_scope": "calibration_diagnostic" if diagnostic_only else "current",
+              "evidence_scope": diagnostic_scope or "current",
               "qualification_reuse": not diagnostic_only, "lifecycle": "concluded", "goal": candidate.get("goal"),
               "hypothesis": candidate.get("hypothesis", "See immutable candidate declaration."),
               "mechanism_class": candidate.get("mechanism_class", "unknown"), "prior": candidate.get("prior"),
@@ -760,6 +772,13 @@ def readout(root: Path, candidate_id: str, conclusion: str, comparison: str, nex
               "provenance": {"attempts": [{"attempt_id": a["attempt_id"], "result_hash": a["result_hash"],
                                              "valid_receipt": a["valid_receipt"]} for a in selected]},
               "conclusion": conclusion.strip(), "comparison": comparison.strip(), "next_action": next_action.strip()}
+    if diagnostic_scope == "research_diagnostic":
+        from reports.forge.regenerate_technique_inventory import _evaluator_summary
+        record.update(qualification_input=False, qualified_tier=0, eligible=False)
+        record["task_results"] = [{**{key: row[key] for key in (
+            "task_id", "compatibility_key", "gate_status", "raw_status", "reason", "metrics", "cost") if key in row},
+            "evaluator_summary": _evaluator_summary(row.get("evaluator_result", {}))}
+            for attempt in selected for row in attempt["task_results"]]
     if candidate.get("decision_contract") is not None:
         from .decision_contracts import concluded_outcomes
         record["decision_outcomes"] = concluded_outcomes(selected)
@@ -784,5 +803,8 @@ def readout(root: Path, candidate_id: str, conclusion: str, comparison: str, nex
                 entry.update(status="concluded", lifecycle="concluded", readout_record_id=record["record_id"],
                              readout_attempt_ids=record["attempt_ids"])
             atomic_json(Path(location) / "queue/state.json", state)
-    compile_memory(root)
+    if diagnostic_scope == "research_diagnostic":
+        compile_memory(root, summaries_only=True)
+    else:
+        compile_memory(root)
     return record

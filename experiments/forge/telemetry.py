@@ -183,6 +183,7 @@ def summarize_automation(root: Path, queue_root: Path | None = None) -> dict:
     describe evidence consumed, may overlap, and must not be summed as spending.
     """
     from .knowledge import _attempts, _queue_states
+    from .views import diagnostic_evidence_scope
     root = Path(root).resolve()
     attempts, issues = _attempts(root)
     if queue_root is None:
@@ -212,6 +213,7 @@ def summarize_automation(root: Path, queue_root: Path | None = None) -> dict:
         result = read_json(directory / "result.json")
         terminal = result.get("raw", {})
         valid = attempt["valid_receipt"]
+        diagnostic = diagnostic_evidence_scope(attempt["request"]) or attempt["request"].get("promotion")
         outcomes[terminal.get("attempt_status", "unrecorded") if valid else "invalid_receipt"] += 1
         seconds = _number(terminal.get("elapsed_seconds")) if valid else None
         if name in charges and seconds is not None and charges[name] != seconds:
@@ -224,7 +226,8 @@ def summarize_automation(root: Path, queue_root: Path | None = None) -> dict:
         if not valid:
             for row in attempt["task_results"]:
                 gates["INVALID"] += 1
-                selected[row["compatibility_key"]].append({**row, "gate_status": "INVALID"})
+                if not diagnostic:
+                    selected[row["compatibility_key"]].append({**row, "gate_status": "INVALID"})
             continue
         interval = terminal.get("telemetry", {}).get("interval")
         if isinstance(interval, dict):
@@ -246,8 +249,6 @@ def summarize_automation(root: Path, queue_root: Path | None = None) -> dict:
             # These are certified frozen evaluator verdicts. Regrading with the
             # current checkout would silently change pinned scientific history.
             gates[row.get("gate_status", "INVALID")] += 1
-            diagnostic = (attempt["request"].get("calibration_lane") or attempt["request"].get("promotion")
-                          or attempt["request"].get("view", {}).get("evidence_scope") == "calibration_diagnostic")
             if not attempt.get("superseded_by") and not diagnostic:
                 selected[row["compatibility_key"]].append(row)
     all_costs = {**charges, **costs}
@@ -264,7 +265,7 @@ def summarize_automation(root: Path, queue_root: Path | None = None) -> dict:
     units, use_counts, demand, unavailable_caps = {}, Counter(), 0, 0
     for (location, request_id), entry in sorted(entries.items(), key=lambda item: str(item[0])):
         request = entry["request"]
-        if request.get("calibration_lane") or request.get("promotion"):
+        if diagnostic_evidence_scope(request) or request.get("promotion"):
             continue
         if type(request.get("through_tier")) is not int or request["through_tier"] not in (1, 2, 3):
             unavailable_caps += 1

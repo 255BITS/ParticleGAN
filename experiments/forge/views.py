@@ -24,6 +24,16 @@ from .initialization import task_initializer
 ROOT = Path(__file__).resolve().parents[2]
 IMPORTANCES = {"required", "ranking", "diagnostic"}
 GATE_STATUSES = {"PASS", "FAIL", "INCOMPLETE", "INVALID", "NOT_RUN", "BLOCKED"}
+DIAGNOSTIC_SCOPES = frozenset({"calibration_diagnostic", "research_diagnostic"})
+
+
+def diagnostic_evidence_scope(request: dict) -> str | None:
+    """Keep diagnostic evidence nonqualifying across saved-request reducers."""
+    markers = {request.get("view", {}).get("evidence_scope")}
+    markers.update(job.get("science", {}).get("evidence_use") for job in request.get("jobs", []))
+    if request.get("calibration_lane") or "calibration_diagnostic" in markers:
+        return "calibration_diagnostic"
+    return "research_diagnostic" if "research_diagnostic" in markers else None
 
 
 def _hash(value):
@@ -218,9 +228,9 @@ def validate_view(view: dict, tasks: dict) -> None:
         if assignment["importance"] == "required":
             required_tiers.add(tier)
     highest = max(a["qualification_tier"] for a in assignments)
-    diagnostic = view.get("evidence_scope") == "calibration_diagnostic"
+    diagnostic = view.get("evidence_scope") in DIAGNOSTIC_SCOPES
     if diagnostic and any(a["importance"] != "diagnostic" or a["qualification_tier"] != 1 for a in assignments):
-        raise ValueError("calibration diagnostic views require only diagnostic tasks in Tier 1")
+        raise ValueError("diagnostic views require only diagnostic tasks in Tier 1")
     if not diagnostic and required_tiers != set(range(1, highest + 1)):
         raise ValueError("empty required tier: qualification tiers must be contiguous from Tier 1")
     execution_groups = {}
@@ -642,10 +652,11 @@ def qualify(view: dict, tasks: dict, results: list[dict], *, candidate: dict | N
                               if a.get("mode") == "verified_checkpoint" else
                               "checkpoint continuation is not bound to the producer's own state")
                     row.update(_verdict("BLOCKED", reason))
-    if view.get("evidence_scope") == "calibration_diagnostic":
+    if view.get("evidence_scope") in DIAGNOSTIC_SCOPES:
         return {"view": view["id"], "view_revision": view["revision"], "policy_fingerprint": view_fingerprint(view),
                 "status": "DIAGNOSTIC", "qualified_tier": 0, "eligible": False,
-                "evidence_scope": "calibration_diagnostic", "current_qualification_reuse": False,
+                "evidence_scope": view["evidence_scope"], "current_qualification_reuse": False,
+                "qualification_input": False, "qualification_reuse": False,
                 "diagnostic_complete": all(row["status"] in {"PASS", "FAIL"} for row in rows.values()),
                 "tiers": [], "tasks": list(rows.values()),
                 "task_statuses": {name: row["status"] for name, row in rows.items()},

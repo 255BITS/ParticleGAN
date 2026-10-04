@@ -1,0 +1,249 @@
+{
+  "attempt_ids": [
+    "200fd64ddd1a42a5bf300e5cae01e0b6",
+    "aa10c29d2ca84f2f96ae2ddb9b13088f"
+  ],
+  "candidate_id": "k3p-global-repair-v1",
+  "candidate_revision": "bf98d947a19472491d60388e43c6af2039f0f98fb874a6498614febba5fdfbe6",
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "comparison": "The schedule80 variant exactly reproduces all24 historical80-update measurements and its effective recipe. The schedule800 contrast changes the declared schedule bundle; both variants start from matching states. Historical words and current main-view cells retain their original identities.",
+  "conclusion": "Both800-update diagnostics FAIL movement: original-schedule .0896976665 and stretched-schedule .1111024097 versus .3. More steps did not rescue this existing global word-positive recipe.",
+  "decision_outcomes": [
+    {
+      "attempt_ids": [
+        "200fd64ddd1a42a5bf300e5cae01e0b6",
+        "aa10c29d2ca84f2f96ae2ddb9b13088f"
+      ],
+      "binding_errors": [],
+      "causal_judgment": "requires_review",
+      "cohort": {
+        "compute_profiles": {
+          "cpu": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          }
+        },
+        "contract_sha256": "80440f2683d0aa22ace80e856acdf22d27a72cd5ba3f65951c034219fce7d298",
+        "execution_backend": "cpu",
+        "round": {
+          "budget_seconds": 600,
+          "job_keys": [
+            "6311c731f23521d06486f512a23d124a9c300bfce32342f05318afb8de9e69fa",
+            "c41c886c335f1a78dd2d8db6479d9602855b0e53f541862d50b96e9955a6556a"
+          ],
+          "max_rounds": 1,
+          "round_id": "4629fa6c005593588c66f84804512b35c2af1dd108e7d114ae5ce22fe2b16060"
+        },
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.3",
+            "scipy": "1.17.1",
+            "torch": "2.14.0"
+          },
+          "python": "3.14.7",
+          "system": "Linux"
+        },
+        "source_digest": "966d7d0b0cb55bd88c42791b1120bd27c02f184ee1b62ae97873cd5b3bb25bb0"
+      },
+      "cohort_sha256": "13d7825cf470822ef11e294b0e5ae99698cc68c02ba8baa592e719a8f6e13040",
+      "contract_sha256": "80440f2683d0aa22ace80e856acdf22d27a72cd5ba3f65951c034219fce7d298",
+      "duplicate_task_ids": [],
+      "execution_authorized": false,
+      "max_rounds": 1,
+      "next_action": "stop_revision",
+      "observed": {
+        "falsifier": {
+          "satisfied": true,
+          "value": 0.11110240966081619
+        },
+        "prediction": {
+          "satisfied": false,
+          "value": 0.11110240966081619
+        }
+      },
+      "outcome": "falsified",
+      "provenance": [
+        {
+          "attempt_id": "200fd64ddd1a42a5bf300e5cae01e0b6",
+          "result_hash": "4f815f66d9c828c5c8525659683925242631881bb739045f908e49f8aee7cfd9",
+          "valid_receipt": true
+        },
+        {
+          "attempt_id": "aa10c29d2ca84f2f96ae2ddb9b13088f",
+          "result_hash": "cdea89b41dea1007329a0abf3d46bb94c8b4d7c34c9f345d53e6bff6a85ed5bb",
+          "valid_receipt": true
+        }
+      ],
+      "qualification_input": false,
+      "schema_version": 1
+    }
+  ],
+  "eligible": false,
+  "evidence_scope": "research_diagnostic",
+  "goal": "discriminator_stability",
+  "hypothesis": "The exact repaired global recipe acquires the five-word inverse task and transfers without task-specific optimizer tuning across every eligible required discriminator-stability task under ordinary prerequisites.",
+  "lifecycle": "concluded",
+  "mechanism_class": "structural",
+  "next_action": "See reports/forge/k3p-two-pole-horizon-v1/README.md and saved force analysis. Retain the main gate and family selection. Investigate existing global critic/particle balance before any new separately bounded search; no automatic follow-on work.",
+  "prior": {
+    "kind": "mog",
+    "learnable": true,
+    "sigma": 0.025,
+    "standardize": false
+  },
+  "provenance": {
+    "attempts": [
+      {
+        "attempt_id": "200fd64ddd1a42a5bf300e5cae01e0b6",
+        "result_hash": "4f815f66d9c828c5c8525659683925242631881bb739045f908e49f8aee7cfd9",
+        "valid_receipt": true
+      },
+      {
+        "attempt_id": "aa10c29d2ca84f2f96ae2ddb9b13088f",
+        "result_hash": "cdea89b41dea1007329a0abf3d46bb94c8b4d7c34c9f345d53e6bff6a85ed5bb",
+        "valid_receipt": true
+      }
+    ]
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "qualified_tier": 0,
+  "record_id": "readout-dd6ff59094d1d766c5b0fe2b",
+  "record_type": "scientific",
+  "schema_version": 1,
+  "source": {
+    "path": "reports/forge/attempts/200fd64ddd1a42a5bf300e5cae01e0b6/result.json"
+  },
+  "task_results": [
+    {
+      "compatibility_key": "c41c886c335f1a78dd2d8db6479d9602855b0e53f541862d50b96e9955a6556a",
+      "cost": {
+        "adapter_seconds": 3.3422648680279963,
+        "charged_task": "two_pole_800_schedule80_diagnostic_v1",
+        "device": "cpu",
+        "execution_seconds": 8.153427460987587,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 5.155324010003824,
+        "wall_seconds": 8.153427460987587
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": null,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 0,
+          "passing_suffix": 0,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metric_checks": {
+          "grad_med": {
+            "margin": 0.9936460256576538,
+            "metric": "grad_med",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1.0,
+            "value": 0.006353974342346191
+          },
+          "mean_abs": {
+            "margin": -0.21030233353376387,
+            "metric": "mean_abs",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 0.3,
+            "value": 0.08969766646623611
+          }
+        },
+        "passed": false,
+        "shortfall": 0.3505038892229398,
+        "status": "FAIL"
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "grad_med": 0.006353974342346191,
+        "mean_abs": 0.08969766646623611
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "two_pole_800_schedule80_diagnostic_v1"
+    },
+    {
+      "compatibility_key": "6311c731f23521d06486f512a23d124a9c300bfce32342f05318afb8de9e69fa",
+      "cost": {
+        "adapter_seconds": 3.2963369030039757,
+        "charged_task": "two_pole_800_schedule800_diagnostic_v1",
+        "device": "cpu",
+        "execution_seconds": 10.303621676983312,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 5.13525801000651,
+        "wall_seconds": 10.303621676983312
+      },
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": null,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 0,
+          "passing_suffix": 0,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metric_checks": {
+          "grad_med": {
+            "margin": 0.9955318793654442,
+            "metric": "grad_med",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1.0,
+            "value": 0.004468120634555817
+          },
+          "mean_abs": {
+            "margin": -0.1888975903391838,
+            "metric": "mean_abs",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 0.3,
+            "value": 0.11110240966081619
+          }
+        },
+        "passed": false,
+        "shortfall": 0.314829317231973,
+        "status": "FAIL"
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "grad_med": 0.004468120634555817,
+        "mean_abs": 0.11110240966081619
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "task_id": "two_pole_800_schedule800_diagnostic_v1"
+    }
+  ]
+}

@@ -1,0 +1,121 @@
+{
+  "archive_bytes": 12411184,
+  "archive_sha256": "68ca93892345822ff2b4c3c549afbe3831549cc753aee243dfaa16ea154b5bd0",
+  "attempts": [
+    {
+      "arm_id": "word_positive_schedule80",
+      "attempt_id": "200fd64ddd1a42a5bf300e5cae01e0b6",
+      "candidate_id": "k3p-global-repair-v1",
+      "candidate_revision": "bf98d947a19472491d60388e43c6af2039f0f98fb874a6498614febba5fdfbe6",
+      "source_commit": "d376a1d0426dce945b51e7f662c0a65aa69ca740",
+      "source_digest": "966d7d0b0cb55bd88c42791b1120bd27c02f184ee1b62ae97873cd5b3bb25bb0",
+      "task_ids": [
+        "two_pole_800_schedule80_diagnostic_v1"
+      ]
+    },
+    {
+      "arm_id": "word_positive_schedule800",
+      "attempt_id": "aa10c29d2ca84f2f96ae2ddb9b13088f",
+      "candidate_id": "k3p-global-repair-v1",
+      "candidate_revision": "bf98d947a19472491d60388e43c6af2039f0f98fb874a6498614febba5fdfbe6",
+      "source_commit": "d376a1d0426dce945b51e7f662c0a65aa69ca740",
+      "source_digest": "966d7d0b0cb55bd88c42791b1120bd27c02f184ee1b62ae97873cd5b3bb25bb0",
+      "task_ids": [
+        "two_pole_800_schedule800_diagnostic_v1"
+      ]
+    },
+    {
+      "arm_id": "movement_control_schedule80",
+      "attempt_id": "bd148c44722a49ceb91c21c309c25514",
+      "candidate_id": "k3p--01eca360219ea5225a6e30a31800c7bbe70ca08c3800e259c17a67f0ea528ab5",
+      "candidate_revision": "3041a40a01932d40c304875add3e4e2689f4e535636861f3319a1a1f6792c402",
+      "source_commit": "d376a1d0426dce945b51e7f662c0a65aa69ca740",
+      "source_digest": "966d7d0b0cb55bd88c42791b1120bd27c02f184ee1b62ae97873cd5b3bb25bb0",
+      "task_ids": [
+        "two_pole_800_schedule80_diagnostic_v1"
+      ]
+    },
+    {
+      "arm_id": "movement_control_schedule800",
+      "attempt_id": "21bdde76d2f045e98b829627eb9071f1",
+      "candidate_id": "k3p--01eca360219ea5225a6e30a31800c7bbe70ca08c3800e259c17a67f0ea528ab5",
+      "candidate_revision": "3041a40a01932d40c304875add3e4e2689f4e535636861f3319a1a1f6792c402",
+      "source_commit": "d376a1d0426dce945b51e7f662c0a65aa69ca740",
+      "source_digest": "966d7d0b0cb55bd88c42791b1120bd27c02f184ee1b62ae97873cd5b3bb25bb0",
+      "task_ids": [
+        "two_pole_800_schedule800_diagnostic_v1"
+      ]
+    }
+  ],
+  "charged_wall_seconds": 34.66696714202408,
+  "default_adoption": false,
+  "execution_concurrency": {
+    "intervals": [
+      {
+        "attempt_id": "200fd64ddd1a42a5bf300e5cae01e0b6",
+        "device": "cpu",
+        "finished_at": 1791131759.1134276,
+        "scope": "supervised attempt, including process startup and independent grading",
+        "started_at": 1791131750.9600177
+      },
+      {
+        "attempt_id": "aa10c29d2ca84f2f96ae2ddb9b13088f",
+        "device": "cpu",
+        "finished_at": 1791131770.1797497,
+        "scope": "supervised attempt, including process startup and independent grading",
+        "started_at": 1791131759.8761458
+      },
+      {
+        "attempt_id": "bd148c44722a49ceb91c21c309c25514",
+        "device": "cpu",
+        "finished_at": 1791131778.951235,
+        "scope": "supervised attempt, including process startup and independent grading",
+        "started_at": 1791131770.8058112
+      },
+      {
+        "attempt_id": "21bdde76d2f045e98b829627eb9071f1",
+        "device": "cpu",
+        "finished_at": 1791131787.8027828,
+        "scope": "supervised attempt, including process startup and independent grading",
+        "started_at": 1791131779.7383254
+      }
+    ],
+    "max_supervised_attempts": 1
+  },
+  "inventory_entries": 1270,
+  "inventory_sha256": "8eb375efc76581b1398244f5ca0afac8fb9c8e47e1b695beebb6bbdff9ad0199",
+  "primary_archive_path": "/home/martyn/dev/ParticleGAN-k3p-two-pole/artifacts/forge/k3p-two-pole-horizon-v1-v1.tar.gz",
+  "qualification_input": false,
+  "readouts": [
+    {
+      "archive_member": "readouts/readout-a91dbccf086504f9accaee6b.json",
+      "attempt_ids": [
+        "21bdde76d2f045e98b829627eb9071f1",
+        "bd148c44722a49ceb91c21c309c25514"
+      ],
+      "record_id": "readout-a91dbccf086504f9accaee6b",
+      "sha256": "a9911efcddec0b1667d982cb94c405288a79c36322db11f60d52eadf799f689a"
+    },
+    {
+      "archive_member": "readouts/readout-dd6ff59094d1d766c5b0fe2b.json",
+      "attempt_ids": [
+        "200fd64ddd1a42a5bf300e5cae01e0b6",
+        "aa10c29d2ca84f2f96ae2ddb9b13088f"
+      ],
+      "record_id": "readout-dd6ff59094d1d766c5b0fe2b",
+      "sha256": "63cd32d46895e1cd2118d7984f8a6dad785885eaecdeea68a6aa645383282751"
+    }
+  ],
+  "regular_files": 1271,
+  "restore": "Extract into an isolated directory. Durable certificates, exact raw traces/checkpoints/logs, queue metadata, executed source snapshots, declarations and final publication are retained. Preserve embedded scientific identities and original absolute paths.",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "scope": "exact_nonqualifying_horizon_diagnostic_evidence",
+  "sources": {
+    "d376a1d0426dce945b51e7f662c0a65aa69ca740": {
+      "digest": "966d7d0b0cb55bd88c42791b1120bd27c02f184ee1b62ae97873cd5b3bb25bb0",
+      "file_count": 1143
+    }
+  },
+  "training_updates_added": 0
+}

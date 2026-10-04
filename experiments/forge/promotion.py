@@ -346,9 +346,27 @@ def validate_screening_submission(request: dict) -> None:
     jobs = request.get("jobs")
     if not isinstance(jobs, list) or not jobs:
         _block("screening request lacks resolved scientific jobs")
+    research_diagnostic = request.get("view", {}).get("evidence_scope") == "research_diagnostic"
+    if research_diagnostic:
+        views.validate_view(request["view"], request.get("tasks", {}))
+        contract = candidate.get("decision_contract")
+        from .decision_contracts import validate_shape
+        if candidate.get("schema_version") != 2 or not isinstance(contract, dict):
+            _block("research diagnostics require a ready v2 bounded decision_contract")
+        validate_shape(contract)
+        review = request.get("decision_review", {})
+        if (contract.get("status") != "ready" or review.get("status") != "READY"
+                or request.get("decision_admission") != review.get("receipt") or not review.get("receipt")
+                or request.get("through_tier") != 1 or contract["scope"]["view"] != request["view"]["id"]
+                or contract["scope"]["through_tier"] != 1
+                or set(contract["scope"]["task_ids"]) != {item["task"] for item in request["view"]["assignments"]}):
+            _block("research diagnostics require exact ready bounded scope and decision admission")
     for job in jobs:
         science = job.get("science", {})
-        if ("evidence_use" in science or "qualification_compatibility_key" in job
+        marker_ok = (science.get("evidence_use") == "research_diagnostic" if research_diagnostic
+                     else "evidence_use" not in science)
+        if (not marker_ok or (research_diagnostic and job.get("compatibility_key") != stable_hash(science))
+                or "qualification_compatibility_key" in job
                 or type(science.get("seed")) is not int or science["seed"] != SCREENING_SEED
                 or canonical(science.get("protocol")) != canonical(protocol)
                 or canonical(science.get("rng")) != canonical(expected_rng)):
