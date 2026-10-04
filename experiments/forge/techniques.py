@@ -35,6 +35,8 @@ def technique_signature(value):
                            "prior_changing": recipe.beta2_end is not None and beta2_end != prior_betas[1]},
         "network_moments": [value > 0 for value in recipe.betas],
         "prior_moments": [value > 0 for value in prior_betas],
+        "direct_particle_moments": ([value > 0 for value in recipe.direct_particle_betas]
+                                    if recipe.optimizer_family == "formulation" else None),
         "terminal_second_moment": beta2_end > 0,
         "amsgrad": recipe.amsgrad,
         "prior_regularization": recipe.prior_reg > 0,
@@ -82,6 +84,9 @@ def recipe_field_active(name, value, *, task=None):
     execution = {} if task is None else task.get("execution", {})
     prior_active = ((task is None or prior_control_binding(task)["latent_table_controls"])
                     and execution.get("prior", {}).get("learnable", True))
+    if name == "direct_particle_betas":
+        return recipe.optimizer_family == "formulation" and (
+            task is None or prior_control_binding(task)["representation"] == "direct_sample_coordinates")
     penalty_end = recipe.reg_coeff if recipe.reg_coeff_end is None else recipe.reg_coeff_end
     if name in {"reg_kappa", "reg_every", "reg_coeff_anneal_end"}:
         if recipe.reg_coeff == 0 and penalty_end == 0:

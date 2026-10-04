@@ -1,0 +1,47 @@
+{
+  "base_candidate": "k3p-global-repair-v1",
+  "campaign": {
+    "accept_shared_cost_transfer": false,
+    "budget_seconds": 8400,
+    "candidate_budget_seconds": 2100,
+    "id": "k3p-global-direct-moments-tier1-v1"
+  },
+  "cuda_model": "NVIDIA RTX A6000",
+  "execution_backend": "cuda",
+  "grid": {
+    "coupled_rates": [
+      {
+        "lr": 0.0006,
+        "prior_lr_mult": 2.0
+      },
+      {
+        "lr": 0.0012,
+        "prior_lr_mult": 1.0
+      },
+      {
+        "lr": 0.002125,
+        "prior_lr_mult": 0.5647058823529411
+      },
+      {
+        "lr": 0.00425,
+        "prior_lr_mult": 0.28235294117647053
+      }
+    ],
+    "direct_particle_betas": [
+      [
+        0.0,
+        0.999
+      ]
+    ]
+  },
+  "guide": "EXPERIMENTATION.md",
+  "hypothesis": "The existing direct-particle beta2=.9 response imposes a finite 80-update displacement upper bound below .3 at base LR.0006. Changing its already-public positive beta2 to .999 loosens that bound and may permit one global clean K3P recipe, retaining coefficient170 and nominal latent-prior LR.0012, to pass all five ordinary Tier 1 tasks.",
+  "id": "k3p-global-direct-moments-tier1-v1",
+  "protocol": "screening",
+  "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+  "rationale": "The historical coefficient170 word recipe passed all24 checks at LR.0006/D1.5/prior2 with clean outputs and a full horizon. Its global transfer failed movement; higher base rates with the original direct beta2 also failed. This finite grid retains the same penalty kernel/coefficient170, D1.5, zero training noise, full schedule and other mechanisms. Global base LR varies over .0006/.0012/.002125/.00425, paired to preserve nominal latent prior LR.0012. The fixed direct betas[0,.999] use an existing public optimizer setting consumed only by direct-coordinate groups. No task-ID override, new response formula or stabilization mechanism is introduced. LR.0006 retains the old word-active recipe, but its historical pass cannot fill new ordinary cells. A looser theoretical movement bound does not predict actual acceleration; persistent second moments can slow decaying gradients. Low shared rates and strong penalty may still fail ring400. One separately bounded round of complete global K3P recipes under all five ordinary Tier 1 tasks. Existing numerical controls only; no new technique, task-specific optimizer override, objective, architecture, initializer, sampling law, seed study, gate change, unchanged whole-recipe repeat, paid base/control run, higher-tier execution or automatic further paid round. Ordinary required failures stop later tasks, which remain UNKNOWN. Historical word passes motivate the design and grant no qualification. Screening is provisional; no public-default adoption.",
+  "schema_version": 1,
+  "trainer_family": "k3p",
+  "tuning_through_tier": 1,
+  "view": "discriminator_stability"
+}

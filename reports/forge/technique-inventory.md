@@ -48,7 +48,7 @@ python reports/forge/regenerate_technique_inventory.py
 
 For ordinary Forge qualification, use `--source-commit <executed-commit>` to independently regrade hydrated original receipts and update this leaderboard. Reusable candidates use the same complete task ladder. Historical task-only diagnostics remain motivation and reproduction evidence. Source snapshots are provenance, not additional leaderboards.
 
-Publication input digest `39b1b40bc1f60835a6f486711c58dc418468a6595b245d211c4ccef11aab3f14`.
+Publication input digest `95d14600e1f0167d326c2948f058a6adf9fcf33a8dcaf5229f4103f448c025c6`.
 
 The [whole-family repair readout](family-wide-word-repairs/README.md) records the ordinary candidate attempts and bounded global configuration search. Their complete rows remain unranked alternatives below and in the companion JSON; a failed replacement does not make its historical incumbent a qualified standard.
 
@@ -78,29 +78,41 @@ Unranked alternatives retain their original outcomes and exact source/runtime bi
 - `bcap--f65f1922d02456d3a4b7135bb3aa6483d1c76184d74608479b2634094b039383` (bcap), source `7306340bac0a`; recorded tier 0. Full evidence is in the companion JSON.
 - `five-word-joint-ka2-v1` (ka2), source `7306340bac0a`; recorded tier 0. Full evidence is in the companion JSON.
 - `k3p--00b69f56de29e1968b9d84f9b532afc535fa44555e235eb6c14cfc58b7baed9b` (k3p), source `7306340bac0a`; recorded tier 0. Full evidence is in the companion JSON.
+- `k3p--01eca360219ea5225a6e30a31800c7bbe70ca08c3800e259c17a67f0ea528ab5` (k3p), source `730b77d2b4e1`; recorded tier 0. Full evidence is in the companion JSON.
 - `k3p--0ababb7bec701731ff473ae925c5aaebc92aec05056db9f0d01e881aa1a451b5` (k3p), source `964186eab95b`; recorded tier 0. Full evidence is in the companion JSON.
 - `k3p--15b66aa393dfb7f3e75c6241b985a5c19e6c3b6ee4122df3abe170cd5a5521b1` (k3p), source `964186eab95b`; recorded tier 0. Full evidence is in the companion JSON.
+- `k3p--18af773f5d3cc22f96b26c7e5751bc73c058408043bd1f2cb30ff0b2ccc611a9` (k3p), source `730b77d2b4e1`; recorded tier 0. Full evidence is in the companion JSON.
 - `k3p--1c04efed544cabaab50ebd306711bfe83db8615beede38114fe5d3a6f337a9d0` (k3p), source `964186eab95b`; recorded tier 0. Full evidence is in the companion JSON.
+- `k3p--1d5fb8e62263de7b98df3fe6ae33c669bac9dfd5207651734e2ae38fe2b9fc8c` (k3p), source `730b77d2b4e1`; recorded tier 0. Full evidence is in the companion JSON.
+- `k3p--209c3438a7f0f4576d1dc07746ed2c202ab382ba1c90f1ac58c559ce466d4c11` (k3p), source `730b77d2b4e1`; recorded tier 0. Full evidence is in the companion JSON.
 - `k3p--239cdcf7cbe2739c63a0abc5cd27d38adfe73f1e09103ed5e1be2c0df1073176` (k3p), source `964186eab95b`; recorded tier 0. Full evidence is in the companion JSON.
+- `k3p--2f125618edc4e05825b879fd34cccf20f4cb4f3c2ac43001c262f8ba580c3201` (k3p), source `730b77d2b4e1`; recorded tier 0. Full evidence is in the companion JSON.
 - `k3p--370894f9284090fc9771145a869f2d7fa617283c3736c8e461a47553c9668ce6` (k3p), source `2aea8c53d187`; recorded tier 0. Full evidence is in the companion JSON.
 - `k3p--370894f9284090fc9771145a869f2d7fa617283c3736c8e461a47553c9668ce6` (k3p), source `964186eab95b`; recorded tier 0. Full evidence is in the companion JSON.
 - `k3p--607bd2f2bf44f748b7acddcca0456c4cb92cda1371c9f1c5e93672f5d782046e` (k3p), source `964186eab95b`; recorded tier 0. Full evidence is in the companion JSON.
 - `k3p--74219b54461b106a1f780a72ce43035f47611df4760a34a448292e6a40597503` (k3p), source `964186eab95b`; recorded tier 0. Full evidence is in the companion JSON.
 - `k3p--8072e0db5de655465437a1de7db530340beb273340f909fcfc0e8c731e92bd6f` (k3p), source `964186eab95b`; recorded tier 0. Full evidence is in the companion JSON.
+- `k3p--810e39e941cafd725e3a103f019a6b3f2d616c5b78256e0d7a20d7e61f415fae` (k3p), source `730b77d2b4e1`; recorded tier 0. Full evidence is in the companion JSON.
 - `k3p--862c7c23a730daa7bae2c2076b47e192483f4731012e3faa97e9881c708edb0f` (k3p), source `964186eab95b`; recorded tier 0. Full evidence is in the companion JSON.
+- `k3p--8721c414567d7c056864f46e71b53c73b0848a91d6a384c69e4804c4d61cf696` (k3p), source `730b77d2b4e1`; recorded tier 0. Full evidence is in the companion JSON.
 - `k3p--8951909fddc06a4529927659598aa380f0368268ff1fd71115b0003eee5620b4` (k3p), source `964186eab95b`; recorded tier 0. Full evidence is in the companion JSON.
 - `k3p--8c14d4a6a059d0954eb79a8d100d1c4de0eb13c039f49a8ac6f8f66ca544b8df` (k3p), source `964186eab95b`; recorded tier 0. Full evidence is in the companion JSON.
+- `k3p--8e32578b69ab9a2d42d46002e22ee6bb3efb23fffee381067d8eacdc1e6f9b6d` (k3p), source `730b77d2b4e1`; recorded tier 0. Full evidence is in the companion JSON.
 - `k3p--922f620215f1e76351aeca2f68b79ddefeb7a44c1f824d9fdb867a27e5a03ade` (k3p), source `964186eab95b`; recorded tier 0. Full evidence is in the companion JSON.
 - `k3p--9c6f1ae673fc7b51dbdeac0a826695ceb94c869ba886e750177b73c6727af687` (k3p), source `964186eab95b`; recorded tier 0. Full evidence is in the companion JSON.
 - `k3p--9f4bc2973d95cf1545e009ec044ed582a318e6d869d62f4d99f6eee529d1d93d` (k3p), source `2aea8c53d187`; recorded tier 0. Full evidence is in the companion JSON.
 - `k3p--9f4bc2973d95cf1545e009ec044ed582a318e6d869d62f4d99f6eee529d1d93d` (k3p), source `964186eab95b`; recorded tier 0. Full evidence is in the companion JSON.
+- `k3p--a338cc158d705aada992b1fdec6ba1d24b458371d5f715190496099e2f7d918d` (k3p), source `730b77d2b4e1`; recorded tier 0. Full evidence is in the companion JSON.
 - `k3p--a4b78c36d9faacd837e079c3fd3b9623fc141f42737e03312053a86c560abb8a` (k3p), source `7306340bac0a`; recorded tier 0. Full evidence is in the companion JSON.
 - `k3p--a5ef4da177f58c3bd3aa6f3af5a6ffb6145889635d2a303ecb7534711b698993` (k3p), source `964186eab95b`; recorded tier 0. Full evidence is in the companion JSON.
 - `k3p--a9f37c77c97987a31d1ae35ae01de536de29d59914640ebcdc06bfebaf1ceadc` (k3p), source `964186eab95b`; recorded tier 0. Full evidence is in the companion JSON.
 - `k3p--adbcdd335837dcd7c340e2fe7f4b98ade162bf5a3e8f1e4f78e64e316d7a47b7` (k3p), source `964186eab95b`; recorded tier 0. Full evidence is in the companion JSON.
 - `k3p--b188804c4f52e27a2c1524f44c7e6d10b637f36846f71bdf17efada7180448e2` (k3p), source `964186eab95b`; recorded tier 0. Full evidence is in the companion JSON.
+- `k3p--b1bac237024d49da20182f1a15ce2298c18475fe6c7a286a569a0f145d6936f7` (k3p), source `730b77d2b4e1`; recorded tier 0. Full evidence is in the companion JSON.
+- `k3p--bf75899e6d6805fc9779dbbb56e2ed937ffcb838f70e7b64ca422e48cea37d82` (k3p), source `730b77d2b4e1`; recorded tier 0. Full evidence is in the companion JSON.
 - `k3p--c4458f4c26996e5e889dfabcae38099962017f164e1bbc1085d5f8084fcb39d7` (k3p), source `964186eab95b`; recorded tier 0. Full evidence is in the companion JSON.
 - `k3p--caa08ebf04c2b95ed480dd9c23e39a8624e39ae27b2b80a9af1ac74f13a86b9f` (k3p), source `7306340bac0a`; recorded tier 0. Full evidence is in the companion JSON.
+- `k3p--d9270948218dc559ecd52946f251ab755bc201f72aae5bcca8a11b7439965510` (k3p), source `730b77d2b4e1`; recorded tier 0. Full evidence is in the companion JSON.
 - `k3p--e99f7210e7272e65ba80cd6793b63a073862cff90ce2de25ea1ea4726bc7442f` (k3p), source `964186eab95b`; recorded tier 0. Full evidence is in the companion JSON.
 - `k3p--fcf67be558ec42242657e9b103c7698896a1021a7fc88325348058e7800bdfaa` (k3p), source `964186eab95b`; recorded tier 0. Full evidence is in the companion JSON.
 - `k3p--fd2c44a2f5c0e6194db14cc1c464a17e43dc2aa4340046bf76b47b3ad66019bf` (k3p), source `964186eab95b`; recorded tier 0. Full evidence is in the companion JSON.

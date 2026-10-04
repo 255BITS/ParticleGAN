@@ -126,7 +126,7 @@ def _validate_grid_value(name, value):
         valid = type(value) is bool
     elif name == "reg_every":
         valid = type(value) is int and value > 0
-    elif name in {"betas", "prior_betas"}:
+    elif name in {"betas", "prior_betas", "direct_particle_betas"}:
         valid = (name == "prior_betas" and value is None) or (
             isinstance(value, (list, tuple)) and len(value) == 2
             and all(type(item) in (int, float) and math.isfinite(item) and 0 <= item < 1
