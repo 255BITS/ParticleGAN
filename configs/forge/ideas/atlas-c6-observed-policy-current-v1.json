@@ -1,0 +1,151 @@
+{
+  "schema_version": 2,
+  "id": "atlas-c6-observed-policy-current-v1",
+  "parent": "atlas",
+  "trainer_family": "atlas",
+  "goal": "discriminator_stability",
+  "hypothesis": "The best observed original C6 Atlas LR/prior-rate pair can execute faithfully through explicitly declared policy-selected cloud variants of the current required questions; all five unchanged Tier 1 numerical gates must pass before any quality task is eligible.",
+  "changed_factors": [
+    "Resolve an explicit prospective policy-selected particle-cloud cohort instead of incompatible clean/live learned-MoG tasks",
+    "Use the fixed original C6 shared lr=.0053125 and prior_lr_mult=1.5; retain source-bound task-owned D/betas/prior-regularization exceptions on exactly the 13 original scalar hosts"
+  ],
+  "mechanism_class": "structural",
+  "mechanism_rationale": "Faithful public UpdatePolicy ownership, selected-state sampling and complete checkpointing replace the API refusal on an explicitly new source/law cohort. No task gate, horizon, seed or provisional calibration criterion is relaxed.",
+  "api_version": "forge-api-v1",
+  "execution_path": "public_trainer",
+  "recipe_overrides": {
+    "lr": 0.0053125,
+    "prior_lr_mult": 1.5
+  },
+  "requires_capabilities": [
+    "particle_cloud",
+    "a2",
+    "named_rng",
+    "policy_controls",
+    "policy_serving"
+  ],
+  "api_changes": [
+    {
+      "provider": "experiments.forge.policy_contracts and policy adapters",
+      "variables": [
+        "task_cohort",
+        "execution.policy_contract",
+        "execution.policy_recipe_overrides"
+      ],
+      "affected_hosts": "The unchanged 26 original main-view questions, with distinct suffixed task identities",
+      "migration": "Explicit opt-in only; original revision-3 live/MoG tasks and published evidence remain unchanged"
+    }
+  ],
+  "claim_contract": {
+    "schedule": "schedule_free",
+    "scoring_weights": "state_selected",
+    "sampling_law": "task_declared"
+  },
+  "lifecycle": "proposed",
+  "prior_art": [
+    "reports/forge/c6-baseline-debug-20261003/BASELINE_SELECTION.json",
+    "reports/forge/c6-baseline-debug-20261003/retained-hold-debug.json",
+    "reports/forge/continuous-baseline-20261003/results.json"
+  ],
+  "guide": "EXPERIMENTATION.md",
+  "recipe_preset": "atlas",
+  "prior": {
+    "kind": "particle_cloud",
+    "sigma": 0.0,
+    "standardize": false,
+    "learnable": true,
+    "exception_reason": "Independent E22 row controls require an explicit equal-mass particle cloud; this is separate from Forge learned-MoG cohorts."
+  },
+  "task_cohort": "policy_selected_cloud_v1",
+  "decision_contract": {
+    "schema_version": 1,
+    "status": "draft",
+    "prior_evidence": [
+      {
+        "path": "reports/forge/c6-baseline-debug-20261003/BASELINE_SELECTION.json",
+        "sha256": "bb5dafad7f04305a579f498093ad65d27f9ef5cc096caa709d4ce6e1fc7c8114",
+        "selector": [
+          "selected",
+          0
+        ],
+        "identity": {
+          "source_commit": "8021a1c50c4aff90ddea5010d368cffdc857b2f6",
+          "original_passes": 2,
+          "study_passes": 1,
+          "required": 8,
+          "unknown": 6,
+          "id": "atlas--abe34fb6f0c5f7802cec80e5a2d88aaffb4aa85e55e4021f646457630abec4f0",
+          "status": "INCOMPLETE"
+        },
+        "use": "motivation_only"
+      }
+    ],
+    "control": {
+      "candidate_id": "ka2",
+      "task_map": {
+        "two_pole_policy_selected_cloud_v1": "two_pole",
+        "unused_token_hold_policy_selected_cloud_v1": "unused_token_hold",
+        "ae_gan_hold_policy_selected_cloud_v1": "ae_gan_hold",
+        "ring16_acquisition_policy_selected_cloud_v1": "ring16_acquisition",
+        "five_word_joint_acquisition_policy_selected_cloud_v1": "five_word_joint_acquisition"
+      },
+      "binding_sha256": "TODO: freeze actual KA2 original-task bindings"
+    },
+    "candidate_binding_sha256": "TODO: freeze current policy-task bindings",
+    "substantive_delta": [],
+    "scope": {
+      "view": "discriminator_stability",
+      "through_tier": 1,
+      "task_ids": [
+        "two_pole_policy_selected_cloud_v1",
+        "unused_token_hold_policy_selected_cloud_v1",
+        "ae_gan_hold_policy_selected_cloud_v1",
+        "ring16_acquisition_policy_selected_cloud_v1",
+        "five_word_joint_acquisition_policy_selected_cloud_v1"
+      ],
+      "max_rounds": 1,
+      "candidate_budget_seconds": 44100,
+      "campaign_budget_seconds": 44100,
+      "protocol_sha256": "TODO: freeze screening seed-0 protocol",
+      "source_digest": "TODO: freeze final source closure",
+      "execution_backend": "cuda",
+      "runtime_cohort_sha256": "TODO: bind approved runtime",
+      "jobs_sha256": "TODO: bind five Tier 1 execution slots"
+    },
+    "prediction": {
+      "task_id": "two_pole_policy_selected_cloud_v1",
+      "metric": "mean_abs",
+      "op": ">=",
+      "threshold": 0.3,
+      "phase": "final"
+    },
+    "falsifier": {
+      "task_id": "two_pole_policy_selected_cloud_v1",
+      "metric": "mean_abs",
+      "op": "<",
+      "threshold": 0.3,
+      "phase": "final"
+    },
+    "competing_explanation": "The policy mechanism may execute faithfully while its selected-state law still fails numerical acquisition or hold. A different host/prior/serving law prevents an equivalent-cohort causal or speed comparison with KA2 or old C6.",
+    "terminal_rules": {
+      "falsified": "stop_revision",
+      "prediction_observed": "review_saved_diagnostics",
+      "inconclusive": "stop_and_readout",
+      "incomplete": "request_missing_evidence"
+    }
+  },
+  "qualification_scope": {
+    "current_protocol_seed": 0,
+    "reference_protocol_seed": 24002,
+    "reference_source_commit": "8021a1c50c4aff90ddea5010d368cffdc857b2f6",
+    "evidence_reuse": false,
+    "shipping_default": false,
+    "historical_atlas19_credit": false,
+    "speed_comparison": false,
+    "initial_through_tier": 1,
+    "first_stage_worst_allowance_seconds": 2100,
+    "full_suite_grouped_allowance_seconds": 45300,
+    "finite_paid_cap_seconds": 44100,
+    "later_stage_authorization": "Requires an explicit next-stage contract from actual Tier 1 receipts while retaining the same accumulated 44100-second ceiling."
+  }
+}

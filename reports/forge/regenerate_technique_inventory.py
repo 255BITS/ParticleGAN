@@ -412,6 +412,8 @@ def _validate_published_row(root, report, row, visited=None):
             raise ValueError("composed row differs from its original scientific publication")
         _validate_published_row(root, source, matches[0], visited)
         return
+    from experiments.forge.policy_snapshot_publication import validate_policy_publication
+    validate_policy_publication(root, report, row)
     proofs = report.get("provenance", {}).get("qualified_receipts", {})
     for attempt in row.get("attempt_ids", []):
         identifier(attempt, "attempt")

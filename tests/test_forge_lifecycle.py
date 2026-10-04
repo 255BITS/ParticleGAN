@@ -12,7 +12,8 @@ from experiments.forge.contracts import atomic_json, read_json, stable_hash
 def cohort(tmp_path, monkeypatch):
     requests = {}
     for name, revision in (("idea", "revision-a"), ("successor", "revision-b")):
-        candidate = {"id": name, "hypothesis": "A substantive mechanism change",
+        candidate = {"schema_version": 1, "id": name, "hypothesis": "A substantive mechanism change",
+                     "changed_factors": ["Synthetic substantive mechanism for lifecycle software controls"],
                      "goal": "stability", "mechanism_class": "structural"}
         atomic_json(tmp_path / f"configs/forge/ideas/{name}.json", candidate)
         requests[name] = {"candidate": candidate, "candidate_revision": revision,
@@ -343,6 +344,10 @@ def test_cli_supersession_and_board_preserve_failed_verdict_cost_and_successor(c
     from test_forge_knowledge import make_task
     from experiments.forge.__main__ import main
     root, requests = cohort
+    # The real board validates declarations before the synthetic resolver.
+    # Exercise that validation rather than mocking away a malformed fixture.
+    for name, request in requests.items():
+        assert planning.load_idea(root, name) == request["candidate"]
     task = make_task("cheap")
     view = {"schema_version": 1, "id": "stability", "revision": 1, "goal": "stability", "eligibility": {},
             "assignments": [{"task": "cheap", "qualification_tier": 1, "importance": "required", "order": 0}]}

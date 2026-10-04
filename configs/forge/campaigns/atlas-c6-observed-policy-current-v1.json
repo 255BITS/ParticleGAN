@@ -1,0 +1,8 @@
+{
+  "schema_version": 1,
+  "id": "atlas-c6-observed-policy-current-v1",
+  "budget_seconds": 44100,
+  "candidate_budget_seconds": 44100,
+  "accept_shared_cost_transfer": false,
+  "purpose": "One fixed best-observed C6 Atlas pair in the explicitly new policy-selected cloud cohort. Initially authorize only the five original Tier 1 questions (2100 seconds full allowance). Required non-PASS stops later ordinary tasks. Any later stage needs an explicit source/receipt-bound contract and retains this same accumulated 44100-second ceiling; the full grouped suite allowance is 45300, so stop budget-INCOMPLETE whenever the entire next slot cannot fit. No seed search, configuration sweep, default adoption or equivalent-cohort speed claim."
+}

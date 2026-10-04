@@ -1,0 +1,12 @@
+{
+  "draft_idea": "atlas-c6-observed-policy-current-v1",
+  "focused_checks_passed": 78,
+  "generator_full_rebuild_passed": true,
+  "gpu_actions": 0,
+  "main_rows_byte_values_preserved": 12,
+  "new_measured_results": false,
+  "qualification_input": false,
+  "schema": "pg_current_selection_metadata_root_fix_v1",
+  "strict_selection_guard_preserved": true,
+  "trainer_family": "atlas"
+}

@@ -8,6 +8,7 @@ from dataclasses import asdict, dataclass, fields
 import hashlib
 import inspect
 import math
+from pathlib import Path
 
 import torch
 
@@ -29,7 +30,8 @@ TRAINER_STREAM_BINDINGS = {
 BUILTIN_CAPABILITIES = (
     "public_trainer", "public_components", "scalar_gan", "mog_prior", "particle_cloud", "learned_locations",
     "uniform_masses", "fixed_prior_width", "a2", "checkpoint", "named_rng", "live_sampling",
-    "policy_controls", "policy_serving",
+    "policy_controls", "policy_serving", "served_sampling",
+    "routed_rows", "mog_encoder", "ae_encoder",
 )
 _MISSING = object()
 
@@ -78,6 +80,10 @@ def host_recipe_overrides(candidate, execution, resources):
 def task_recipe_resources(task):
     """Resolve only the resources consumed by the task's existing adapter."""
     execution, adapter = task["execution"], task["adapter"]
+    from .policy_cohorts import is_policy_task, validate_policy_task
+    if is_policy_task(task) and "resources" in execution:
+        validate_policy_task(task)
+        return deepcopy(execution["resources"])
     if adapter in {"transfer_vector", "paired_adaptation", "transfer_image"}:
         spec = execution["host_definition"]
         return {"num_particles": spec["particles"], "z_dim": spec["z_dim"],
@@ -97,6 +103,16 @@ def task_recipe_overrides(candidate, task):
     from .taskrecipes import bind_task_candidate
     bound = bind_task_candidate(candidate, task)
     execution = task["execution"]
+    from .policy_cohorts import is_policy_task
+    if is_policy_task(task):
+        # A prospective policy host explicitly owns these frozen exceptions.
+        # This does not enlarge the original host_adaptation allowlist.
+        from .policy_cohorts import policy_recipe_overrides
+        if candidate.get("task_cohort") != task.get("task_cohort"):
+            raise CapabilityError(["candidate must explicitly opt in to the task's named policy cohort"])
+        bound["recipe_overrides"] = {
+            **bound.get("recipe_overrides", {}), **policy_recipe_overrides(task)}
+        return host_recipe_overrides(bound, execution, task_recipe_resources(task))
     if task["adapter"] == "transfer_behavior" and execution.get("host") != "mode_hold":
         from .behavior_adapters import behavior_preflight
         blockers = behavior_preflight(task, bound)
@@ -117,6 +133,17 @@ def task_formulation_context(candidate, task, protocol=None, *, device="cpu", ro
     from .nativeprofiles import native_host_initialization
     from .priors import task_prior
     from .taskrecipes import adaptation_receipt, bind_task_candidate
+    from .policy_cohorts import is_policy_task, policy_task_declaration, validate_policy_task
+    if is_policy_task(task):
+        try:
+            task = policy_task_declaration(task)
+            validate_policy_task(task, root=root)
+            if task["task_cohort"] == "word_joint_policy_min11_rates_v1":
+                from .word_joint_rate_policy_contracts import validate_request
+                validate_request({"candidate": candidate,
+                    "protocol": {"seed": (protocol or {}).get("seed", 0)}}, task, root=root)
+        except (AttributeError, KeyError, OSError, TypeError, ValueError) as error:
+            raise CapabilityError([str(error)]) from error
     bound = bind_task_candidate(candidate, task)
     blockers = task_policy_blockers(task, bound)
     if blockers:
@@ -127,11 +154,16 @@ def task_formulation_context(candidate, task, protocol=None, *, device="cpu", ro
         requires_capabilities=tuple(bound.get("requires_capabilities", ())) + tuple(task["requires_capabilities"]),
         extensions=bound.get("extensions", {}), initializer=task_initializer(task, candidate),
         host_initialization=native_host_initialization(task, root=root),
+        policy_contract=task["execution"].get("policy_contract"),
+        policy_task=task if is_policy_task(task) else None,
+        policy_root=root,
         execution_path=task["execution"].get("execution_path", bound.get("execution_path", "public_trainer")))
     # Typed extensions receive the same ownership and policy checks as ordinary
     # overrides before a worker can reserve this task.
-    blockers = task_policy_blockers(task, {"recipe_overrides": asdict(context.recipe)})
-    if task["adapter"] == "transfer_behavior" and task["execution"].get("host") != "mode_hold":
+    blockers = task_policy_blockers(task, {**bound, "recipe_preset": None,
+                                         "recipe_overrides": asdict(context.recipe)})
+    if (task["adapter"] == "transfer_behavior" and task["execution"].get("host") != "mode_hold"
+            and task["execution"].get("policy_contract") is None):
         from .behavior_adapters import behavior_preflight
         blockers.extend(behavior_preflight(task, {"recipe_overrides": context.bindings["recipe"]}))
     if blockers:
@@ -141,6 +173,7 @@ def task_formulation_context(candidate, task, protocol=None, *, device="cpu", ro
                       initializer=context.initializer,
                       extension_recipe_bindings=context.bindings["recipe"])
     context.host_adaptation = adaptation_receipt(candidate, task)
+    context._policy_expected_max_steps = task["execution"]["steps"]
     context.ownership_contract = {"candidate": deepcopy(candidate), "task": deepcopy(task),
                                   "protocol": deepcopy(protocol or {}),
                                   "extension_recipe_bindings": deepcopy(context.bindings["recipe"])}
@@ -150,9 +183,21 @@ def task_formulation_context(candidate, task, protocol=None, *, device="cpu", ro
 def task_policy_blockers(task, candidate):
     """Current Forge tasks certify clean/live component laws, not E22 controls."""
     try:
-        recipe = resolve_public_recipe(candidate)
-    except CapabilityError as error:
-        return error.blockers
+        from .policy_cohorts import is_policy_task, validate_policy_task, policy_contract_blockers
+        execution = task.get("execution", {})
+        if is_policy_task(task):
+            validate_policy_task(task)
+            prior = _resolved_prior(execution.get("prior"))
+            recipe = resolve_public_recipe({
+                **candidate, "recipe_overrides": task_recipe_overrides(candidate, task)},
+                prior_kind="mog" if prior["kind"] == "mog" else "particles",
+                sigma_rel=0., standardize=prior["standardize"])
+        else:
+            recipe = resolve_public_recipe(candidate)
+    except (CapabilityError, AttributeError, KeyError, OSError, TypeError, ValueError) as error:
+        return error.blockers if isinstance(error, CapabilityError) else [str(error)]
+    if is_policy_task(task):
+        return policy_contract_blockers(task, recipe)
     if not policy_controls(recipe):
         return []
     host = "public components" if task.get("adapter") == "transfer_behavior" else "clean/live scoring"
@@ -280,10 +325,23 @@ class FormulationContext:
                  requires_capabilities=(), registry=None, extensions=None,
                  initializer="deterministic_orthogonal", rng_version=RNG_VERSION,
                  execution_path="public_trainer", host_initialization=None,
-                 initializer_requirements=None):
+                 initializer_requirements=None, policy_contract=None, policy_task=None, policy_root=None):
         if execution_path not in ("public_trainer", "public_components"):
             raise CapabilityError(["unsupported public execution path"])
         self.execution_path = execution_path
+        self.policy_contract = deepcopy(policy_contract)
+        self.policy_task = deepcopy(policy_task)
+        self._policy_root = (Path(__file__).resolve().parents[2] if policy_root is None
+                             else Path(policy_root).resolve())
+        if policy_contract is not None or policy_task is not None:
+            from .policy_cohorts import policy_task_declaration, validate_policy_task
+            try:
+                self.policy_task = policy_task_declaration(self.policy_task)
+                declared = validate_policy_task(self.policy_task)
+            except (AttributeError, KeyError, OSError, TypeError, ValueError) as error:
+                raise CapabilityError([str(error)]) from error
+            if declared != policy_contract or declared["execution_path"] != execution_path:
+                raise CapabilityError(["context policy contract differs from its validated named task"])
         self.registry = registry if registry is not None else default_registry()
         self.extension_values, self.bindings = self.registry.resolve(extensions or {})
         incompatible = [name for name in self.extension_values
@@ -305,12 +363,23 @@ class FormulationContext:
         self.recipe_preset = recipe_preset
         self.recipe = resolve_public_recipe({"recipe_preset": recipe_preset,
                                              "recipe_overrides": overrides}, **prior_fields)
-        if self.recipe.row_policy != "independent":
+        if self.recipe.row_policy != "independent" and self.policy_task is None:
             raise CapabilityError(["Forge has no RoutedRows host binding; declare a separate routed task"])
         if self.prior_config["kind"] != "particle_cloud" and (
-                self.recipe.row_evidence_gate or self.recipe.particle_birth_death):
+                self.recipe.row_evidence_gate or self.recipe.particle_birth_death) and self.recipe.row_policy == "independent":
             raise CapabilityError(["independent policy row controls require an explicit particle_cloud cohort; MoG is unsupported"])
-        if execution_path == "public_components" and policy_controls(self.recipe):
+        if self.policy_task is not None:
+            from .policy_cohorts import policy_contract_blockers
+            blockers = policy_contract_blockers(self.policy_task, self.recipe)
+            if blockers:
+                raise CapabilityError(blockers)
+            if self.prior_config != _resolved_prior(self.policy_task["execution"]["prior"]):
+                raise CapabilityError(["context prior differs from the named task's actual law"])
+        if execution_path == "public_components" and policy_controls(self.recipe) and (
+                not isinstance(self.policy_contract, dict)
+                or self.policy_contract.get("owner") != "particlegan.UpdatePolicy"
+                or self.policy_contract.get("lifecycle") != "ordered_public_update"
+                or self.policy_contract.get("execution_path") != "public_components"):
             raise CapabilityError(["public_components hosts do not bind the ordered UpdatePolicy lifecycle"])
         if initializer not in ("deterministic_orthogonal", "supplied"):
             raise CapabilityError(["unsupported initializer"])
@@ -339,20 +408,35 @@ class FormulationContext:
         self.requires_capabilities = tuple(requires_capabilities)
         self.initialization = {}
         self._trainer = None
+        self._policy = None
+        self._policy_max_steps = None
+        self._policy_expected_max_steps = (None if self.policy_task is None
+                                           else self.policy_task["execution"]["steps"])
         self._check_capabilities()
 
     def capabilities(self):
-        scalar = self.recipe.model == "gan" and self.recipe.conditioning == "scalar" and self.recipe.encoder_mode == "none"
+        routed = self.recipe.row_policy == "routed_paired" and self.policy_task is not None
+        joint = (self.policy_task is not None
+                 and self.policy_task["task_cohort"] in {
+                     "word_joint_policy_min11_v1", "word_joint_policy_min11_rates_v1"})
+        named_ae = bool(routed and self.policy_task["task_cohort"] == "ae_routed_policy_v1"
+                        and self.recipe.encoder_mode == "ae" and self.prior_config["kind"] == "mog")
+        scalar = (self.recipe.model == "gan" and self.recipe.conditioning == "scalar"
+                  and (self.recipe.encoder_mode == "none" or named_ae))
         p = self.prior_config
         a2 = (p["learnable"] and not p["standardize"] and self.recipe.latent_damping_max_rate > 0
               and (self.recipe.prior_betas or self.recipe.betas)[0] == 0)
-        return {"public_trainer": scalar, "public_components": True, "scalar_gan": scalar,
+        return {"public_trainer": scalar and self.recipe.encoder_mode == "none" and not routed and not joint,
+                "public_components": True, "scalar_gan": scalar,
                 "mog_prior": p["kind"] == "mog", "particle_cloud": p["kind"] == "particle_cloud",
-                "learned_locations": p["learnable"], "uniform_masses": True, "fixed_prior_width": True,
+                "learned_locations": p["learnable"], "uniform_masses": not routed, "fixed_prior_width": True,
                 "a2": a2, "checkpoint": True, "named_rng": True,
                 "live_sampling": not (self.recipe.serve_average or self.recipe.continuous_policy),
                 "policy_controls": policy_controls(self.recipe),
                 "policy_serving": self.recipe.serve_average > 0,
+                "served_sampling": bool(policy_controls(self.recipe) and self.recipe.serve_average > 0),
+                "routed_rows": routed,
+                "mog_encoder": named_ae, "ae_encoder": named_ae,
                 **{name: True for name in self.extension_values}}
 
     def _check_capabilities(self):
@@ -532,6 +616,175 @@ class FormulationContext:
                                    seed=self.streams.seed, **options)
         return self._trainer
 
+    @property
+    def policy(self):
+        """The actual public lifecycle owned by this one task attempt."""
+        return self._trainer.policy if self._trainer is not None else self._policy
+
+    def bind_update_policy(self, policy, *, external_max_steps):
+        """Bind caller-owned components to a real, declared public lifecycle."""
+        from particlegan import UpdatePolicy
+        if self.execution_path != "public_components" or self.policy_contract is None:
+            raise CapabilityError(["caller-owned policy requires a declared public-components task contract"])
+        if not isinstance(policy, UpdatePolicy):
+            raise TypeError("policy must be a particlegan.UpdatePolicy")
+        if self._trainer is not None or self._policy is not None:
+            raise ValueError("a context owns one public update lifecycle")
+        if policy.recipe.to_dict() != self.recipe.to_dict():
+            raise CapabilityError(["bound policy Recipe differs from the resolved task Recipe"])
+        if type(external_max_steps) is not int or external_max_steps < 1:
+            raise ValueError("external_max_steps must be a positive integer")
+        if (self._policy_expected_max_steps is not None
+                and external_max_steps != self._policy_expected_max_steps):
+            raise CapabilityError(["bound policy execution limit differs from its frozen task budget"])
+        if policy.device != self.device or policy.row_semantics != self.policy_contract["row_semantics"]:
+            raise CapabilityError(["bound policy device or row semantics differ from its task contract"])
+        precision = self.policy_contract["precision"]
+        if ((precision.endswith("_no_autocast") and torch.is_autocast_enabled(policy.device.type))
+                or (precision == "preserve_original_fp32_no_autocast" and policy.table.dtype != torch.float32)):
+            raise CapabilityError(["bound policy must preserve the named task's FP32/no-autocast execution"])
+        if self.policy_task is None:
+            raise CapabilityError(["bound policy requires its validated named task identity"])
+        from .policy_cohorts import policy_contract_blockers
+        blockers = policy_contract_blockers(self.policy_task, policy.recipe)
+        if blockers:
+            raise CapabilityError(blockers)
+        self._validate_policy_owners(policy)
+        self._policy = policy
+        self._policy_max_steps = external_max_steps
+        return policy
+
+    bind_policy = bind_update_policy
+
+    def _validate_policy_owners(self, policy):
+        """Bind the real public row/serving owner, rather than a declared label."""
+        from particlegan.particle_prior import MoGParticlePrior, ParticlePrior
+        table_owner = self.policy_contract.get("table_owner", "prior.z")
+        owner, _, key = table_owner.partition(".")
+        if policy._table_location != (owner, key):
+            raise CapabilityError(["bound policy table owner differs from the named task"])
+        if policy.table.requires_grad is not self.prior_config["learnable"]:
+            raise CapabilityError(["bound policy table learning law differs from the named task"])
+        if policy.table.shape != (self.recipe.num_particles, self.recipe.z_dim):
+            raise CapabilityError(["bound policy table shape differs from the frozen task resources"])
+        if owner == "prior":
+            if self.prior_config["kind"] == "mog":
+                if not isinstance(policy.prior, MoGParticlePrior):
+                    raise CapabilityError(["named AE requires its real fixed-width MoG owner"])
+                policy._validate_routed_mog()
+                if float(policy.prior.sigma) != float(policy.prior.sigma.new_tensor(self.prior_config["sigma"])):
+                    raise CapabilityError(["bound MoG width differs from the named task"])
+            elif not isinstance(policy.prior, ParticlePrior) or isinstance(policy.prior, MoGParticlePrior):
+                raise CapabilityError(["bound policy requires its actual particle-cloud prior owner"])
+            if policy.prior.z is not policy.table:
+                raise CapabilityError(["bound policy prior and table are not the same owner"])
+        elif policy.prior is not None:
+            raise CapabilityError(["named parameter-bank task cannot acquire a substituted sampled prior"])
+        if policy.row_policy != self.recipe.row_policy:
+            raise CapabilityError(["bound policy row law differs from the named task"])
+        if policy.row_policy != "routed_paired":
+            if policy.routed_control is not None:
+                raise CapabilityError(["independent task cannot bind a routed row owner"])
+            if self.policy_task["task_cohort"] in {"word_joint_policy_min11_v1", "word_joint_policy_min11_rates_v1"}:
+                self._validate_word_joint_owners(policy)
+            return
+        control = policy.routed_control
+        rows = getattr(control, "spec", None)
+        routing = self.policy_contract["routing"]
+        if (rows is None or not callable(rows.model_forward) or tuple(routing["sites"]) != rows.sites
+                or tuple(routing["row_buffers"]) != rows.row_buffers
+                or "router." + rows.log_mass_key != routing["log_mass"]):
+            raise CapabilityError(["bound policy needs the exact complete named routing sites and mass owner"])
+        fast_models = policy._training_modules()
+        selected_models = {**fast_models, **policy._average_modules()}
+        if (control.table is not policy.table or control.averaged_table is not policy.averaged_table
+                or control.spec is not policy._routed_rows
+                or set(control.models) != set(fast_models)
+                or any(control.models[name] is not model for name, model in fast_models.items())
+                or set(control.averaged_models) != set(selected_models)
+                or any(control.averaged_models[name] is not model for name, model in selected_models.items())
+                or len(control.optimizers) != len(policy.optimizers)
+                or any(a is not b for a, b in zip(control.optimizers, policy.optimizers))
+                or control.table_optimizer is not policy.table_optimizer
+                or control.controller is not policy.controller):
+            raise CapabilityError(["routed control must bind this policy's actual models, table and optimizers"])
+        callbacks = {
+            "conditional_policy_selected_cloud_v1": ("conditional_policy_adapters",
+                "complete_arc_forward" if self.policy_task["execution"]["host"] in {"trajectory", "residual_student"}
+                else "complete_basis_forward"),
+            "routed_policy_selected_cloud_v1": ("routed_policy_adapters", "complete_slot_forward"),
+            "multibank_policy_v1": ("multibank_policy_adapters", "complete_polar_forward"),
+            "ae_routed_policy_v1": ("ae_routed_policy_adapters", "complete_ae_forward"),
+        }
+        module_name, function_name = callbacks[self.policy_task["task_cohort"]]
+        self._validate_complete_callback(rows.model_forward, module_name, function_name)
+        if self.recipe.particle_birth_death and policy.birth_death is not policy.routed_control:
+            raise CapabilityError(["requested routed birth/death owner is missing"])
+        if self.recipe.row_evidence_gate and policy.row_evidence is not policy.routed_control.evidence:
+            raise CapabilityError(["requested routed evidence owner is missing"])
+        policy.routed_control.validate_optimizer_transport()
+
+    def _validate_complete_callback(self, fn, module_name, function_name):
+        if not inspect.isfunction(fn):
+            raise CapabilityError(["bound policy requires its frozen complete generation callback"])
+        relative = "experiments/forge/" + module_name + ".py"
+        source = inspect.getsourcefile(fn)
+        if (getattr(fn, "__module__", None) != "experiments.forge." + module_name
+                or getattr(fn, "__name__", None) != function_name or source is None
+                or Path(source).resolve() != (self._policy_root / relative).resolve()
+                or hashlib.sha256(Path(source).read_bytes()).hexdigest() != self.policy_contract["sources"].get(relative)):
+            raise CapabilityError(["bound complete routing callback differs from its frozen named source"])
+
+    def _validate_word_joint_owners(self, policy):
+        """Independent whole-joint atoms retain their auxiliary free encoder."""
+        from particlegan.birth_death import ParticleBirthDeath, ScalarHeadFeatures
+        from particlegan.row_evidence import RowEvidence
+        self._validate_complete_callback(policy.generation, "word_joint_policy_adapters", "joint_generation")
+        relative = "benchmarks/toy_audit/api_images.py"
+        for model, name in ((policy.G, "WordGenerator"), (policy.D, "WordJointCritic"),
+                            (policy.encoder, "WordEncoder"), (policy.ema_G, "WordGenerator"),
+                            (policy.ema_encoder, "WordEncoder")):
+            model_type = type(model)
+            source = inspect.getsourcefile(model_type) if model is not None else None
+            if (model_type.__name__ != name or model_type.__module__ != "benchmarks.toy_audit.api_images"
+                    or source is None or Path(source).resolve() != (self._policy_root / relative).resolve()
+                    or hashlib.sha256(Path(source).read_bytes()).hexdigest() != self.policy_contract["sources"].get(relative)):
+                raise CapabilityError(["word joint policy requires its original G, D and free encoder owners"])
+        if (any(not p.requires_grad for model in (policy.G, policy.D, policy.encoder) for p in model.parameters())
+                or any(p.requires_grad for model in (policy.ema_G, policy.ema_encoder) for p in model.parameters())):
+            raise CapabilityError(["word joint keeps trainable G/D/free E and frozen selected averages"])
+        parameters = {id(p): name for name, module in policy._training_modules().items()
+                      for p in module.parameters()}
+        parameters[id(policy.table)] = "table"
+        if policy.log_output_sigma is not None:
+            parameters[id(policy.log_output_sigma)] = "noise"
+        seen = set()
+        if len(policy.roles) != len(policy.optimizers):
+            raise CapabilityError(["word joint optimizer roles differ from its public owners"])
+        for optimizer, roles in zip(policy.optimizers, policy.roles):
+            if len(roles) != len(optimizer.param_groups):
+                raise CapabilityError(["word joint optimizer roles differ from its public owners"])
+            for group, role in zip(optimizer.param_groups, roles):
+                for parameter in group["params"]:
+                    if parameters.get(id(parameter)) != role or id(parameter) in seen:
+                        raise CapabilityError(["word joint G/E/table/noise parameters need exact public optimizer ownership"])
+                    seen.add(id(parameter))
+        if seen != set(parameters):
+            raise CapabilityError(["word joint G/E/table/noise parameters need exact public optimizer ownership"])
+        if self.recipe.particle_birth_death:
+            birth = policy.birth_death
+            if (not isinstance(birth, ParticleBirthDeath) or birth.rows.table is not policy.table
+                    or birth.rows.averaged_table is not policy.averaged_table
+                    or birth.rows.optimizer is not policy.table_optimizer
+                    or birth.rows.controller is not policy.controller
+                    or policy.encoder not in birth.rows.evaluation_modules
+                    or not isinstance(birth.rows.critic_features, ScalarHeadFeatures)
+                    or birth.rows.critic_features.critic is not policy.D):
+                raise CapabilityError(["word joint birth/death must own the actual complete independent atoms"])
+        if self.recipe.row_evidence_gate and (not isinstance(policy.row_evidence, RowEvidence)
+                or (policy.row_evidence.n, policy.row_evidence.d) != tuple(policy.table.shape)):
+            raise CapabilityError(["word joint needs its actual independent row evidence owner"])
+
     def receipt(self):
         ownership = {}
         if getattr(self, "ownership_contract", None) is not None:
@@ -539,10 +792,11 @@ class FormulationContext:
             ownership["field_ownership"] = ownership_receipt(**self.ownership_contract,
                 resolved_recipe=asdict(self.recipe), initializer=self.initializer)
         policy = None
-        if self._trainer is not None and policy_controls(self.recipe):
-            birth = self._trainer.birth_death
-            policy = {"owner": "particlegan.UpdatePolicy", "completed_steps": self._trainer.completed_steps,
-                      "external_max_steps": self._trainer.max_steps,
+        if self.policy is not None and policy_controls(self.recipe):
+            actual_policy = self.policy
+            birth = actual_policy.birth_death
+            policy = {"owner": "particlegan.UpdatePolicy", "completed_steps": actual_policy.completed_steps,
+                      "external_max_steps": self._trainer.max_steps if self._trainer is not None else self._policy_max_steps,
                       "continuous_policy": self.recipe.continuous_policy,
                       "lr_control": self.recipe.lr_control, "row_policy": self.recipe.row_policy,
                       "serving": "state_selected" if self.recipe.serve_average else "fast",
@@ -551,7 +805,17 @@ class FormulationContext:
                           "owner": "UpdatePolicy.birth_death", "seed": self.streams.seed + 6,
                           "derivation": "public policy seed + 6; independent of Forge named streams",
                           "state_sha256": hashlib.sha256(birth.stream.get_state().cpu().numpy().tobytes()).hexdigest(),
-                          "checkpoint_path": "trainer.birth_death.stream"}]}
+                          "checkpoint_path": "trainer.birth_death.stream" if self._trainer is not None else "policy.birth_death.stream"}]}
+            if self.policy_contract is not None:
+                from .policy_adapters import controls_receipt
+                policy["contract"] = deepcopy(self.policy_contract)
+                controls = controls_receipt(actual_policy, actual_policy.completed_steps)
+                controls.update(cohort=self.policy_contract["cohort"], row_policy=actual_policy.row_policy)
+                if "family" in self.policy_contract:
+                    controls.update(family=self.policy_contract["family"], independent_atlas_qualification=False)
+                if "table_optimizer_semantics" in self.policy_contract:
+                    controls["table_optimizer_semantics"] = deepcopy(self.policy_contract["table_optimizer_semantics"])
+                policy["controls"] = controls
         return {"api_version": API_VERSION, "execution_path": self.execution_path,
                 **ownership,
                 **({"host_adaptation": self.host_adaptation} if getattr(self, "host_adaptation", None) else {}),
@@ -565,29 +829,43 @@ class FormulationContext:
                 "prior_mechanisms": None if self._trainer is None else deepcopy(self._trainer.prior_mechanisms)}
 
     def state_dict(self):
-        if self._trainer is None:
-            raise ValueError("build a trainer before checkpointing")
+        owner = self._trainer if self._trainer is not None else self._policy
+        if owner is None:
+            raise ValueError("build a trainer or bind a public policy before checkpointing")
+        kind = "trainer" if self._trainer is not None else "policy"
         return {"schema": 1, "api_version": API_VERSION, "recipe": self.recipe.to_dict(),
                 "prior": deepcopy(self.prior_config), "extensions": deepcopy(self.extension_values),
                 "initializer": self.initializer, "initialization": deepcopy(self.initialization),
-                "streams": self.streams.state_dict(), "trainer": self._trainer.state_dict()}
+                "streams": self.streams.state_dict(), kind: owner.state_dict(),
+                **({} if kind == "trainer" else {"policy_contract": deepcopy(self.policy_contract),
+                                                "external_max_steps": self._policy_max_steps})}
 
     def load_state_dict(self, state):
-        if self._trainer is None:
-            raise ValueError("build a trainer before restoring")
+        owner = self._trainer if self._trainer is not None else self._policy
+        if owner is None:
+            raise ValueError("build a trainer or bind a public policy before restoring")
+        kind = "trainer" if self._trainer is not None else "policy"
         expected = self.state_dict()
         if not isinstance(state, dict) or state.keys() != expected.keys():
             raise ValueError("invalid context checkpoint schema")
         for key in ("schema", "api_version", "recipe", "prior", "extensions", "initializer", "initialization"):
             if state[key] != expected[key]:
                 raise ValueError(f"context checkpoint {key} mismatch")
+        if not isinstance(state[kind], dict):
+            raise ValueError(f"context checkpoint {kind} must be a mapping")
+        if kind == "policy":
+            if (state["policy_contract"] != expected["policy_contract"]
+                    or state["external_max_steps"] != expected["external_max_steps"]
+                    or type(state["policy"].get("completed_steps")) is not int
+                    or not 0 <= state["policy"]["completed_steps"] <= self._policy_max_steps):
+                raise ValueError("context checkpoint policy contract/budget mismatch")
         self.streams.validate_state_dict(state["streams"])
         # A trainer and named registry refer to the same stream objects. Reject
         # conflicting duplicated states before either loader mutates anything.
-        for name, value in state["trainer"].get("streams", {}).items():
-            stream = getattr(self._trainer, name, None)
+        for name, value in state[kind].get("streams", {}).items():
+            stream = getattr(owner, name, None)
             key = next((key for key, registered in self.streams._streams.items() if registered is stream), None)
             if key is None or key not in state["streams"]["states"] or not torch.equal(value, state["streams"]["states"][key]):
-                raise ValueError("trainer/named RNG checkpoint mismatch")
-        self._trainer.load_state_dict(state["trainer"])
+                raise ValueError(f"{kind}/named RNG checkpoint mismatch")
+        owner.load_state_dict(state[kind])
         self.streams.load_state_dict(state["streams"])

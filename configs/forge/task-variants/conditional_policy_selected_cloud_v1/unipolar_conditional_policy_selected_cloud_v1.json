@@ -1,0 +1,224 @@
+{
+  "adapter": "transfer_behavior",
+  "dependencies": [],
+  "evaluation": {
+    "eval_output_noise": "not_applied_to_measurement",
+    "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+    "evaluator_revision": {
+      "change": "Correct == grading and reject unsupported operators; >= and <= numerical gates unchanged. Word fixture now honors declared prior_betas. Bind current sources for future execution only; original receipts and verdicts remain unchanged.",
+      "id": "explicit-equality-and-word-prior-betas-v3",
+      "previous_revision": null,
+      "previous_source_sha256": {
+        "benchmarks/locked_shared/baseline.py": "72ebe4ef6d3cfe28f1ab6073fc781a72b45173f3ce2a0b63040e84b27bed03cc",
+        "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+        "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97"
+      }
+    },
+    "kind": "transfer_sustained",
+    "minimum_stable_checks": 5,
+    "observations": 24,
+    "policy_observation": {
+      "diagnostic_credit": false,
+      "diagnostic_weights": [],
+      "eval_streams": "forge-rng-v1_isolated",
+      "latent_policy": "not_applied_to_original_enumerated_measurement",
+      "output_noise": false,
+      "parameter_measurement": "selected_complete_routed_basis_function",
+      "row_selection": "original_scale_grid",
+      "sampler": "served_snapshot",
+      "schema_version": 1,
+      "weight_selector": "state_selected"
+    },
+    "sampling_contract_version": 1,
+    "sampling_law": "learned_parameter_measurement",
+    "scoring_weights": "state_selected",
+    "sources": {
+      "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
+      "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+      "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89"
+    },
+    "thresholds": [
+      [
+        "cover",
+        ">=",
+        0.85
+      ],
+      [
+        "off_caption",
+        "<=",
+        0.05
+      ],
+      [
+        "neu_hold",
+        ">=",
+        0.85
+      ]
+    ]
+  },
+  "execution": {
+    "device": "cuda",
+    "execution_path": "public_components",
+    "host": "unipolar",
+    "host_definition": {
+      "family": "existing_behavior",
+      "phase": "fit",
+      "runner": "legacy",
+      "split": "development",
+      "steps": 400
+    },
+    "host_source": "benchmarks/locked_shared/baseline.py",
+    "initializer": "deterministic_orthogonal",
+    "policy_contract": {
+      "checkpoint": "complete_public_policy_models_optimizers_streams_and_cursor",
+      "cohort": "conditional_policy_selected_cloud_v1",
+      "control_scope": "conditional_paired_evidence_and_guarded_mass_transport",
+      "controls": "resolved_recipe_requested_enabled_eligible_applied",
+      "cpu_controls_scope": "structural_only",
+      "execution_device": "cuda",
+      "execution_path": "public_components",
+      "external_limit": "task.execution.steps",
+      "family": "atlas_conditional",
+      "independent_atom_bh_or_feature_cell_claim": false,
+      "initialization": "new_subclass_bank_KEEP_original_zeros_and_parent_named_orthogonal_critic",
+      "lifecycle": "ordered_public_update",
+      "numerical_equivalence_to_parent": false,
+      "original_objective": "original_equal_RpGAN_scales_0_and_1_no_auxiliary_loss",
+      "owner": "particlegan.UpdatePolicy",
+      "paired_controls": {
+        "all_original_training_contexts_preserved": true,
+        "feature_max_context_harm": 0.0,
+        "fit_context": "original_scale1",
+        "guard_context": "original_scale0",
+        "guard_tensors_never_used_for_training_or_candidate_choice": true,
+        "guard_use": "structural_acceptance_only",
+        "guards_are_known_original_training_contexts": true,
+        "heldout_generalization_claim": false,
+        "output_max_context_harm": 0.0
+      },
+      "precision": "preserve_original_fp32_no_autocast",
+      "routing": {
+        "callback": "complete_model_forward",
+        "counterfactual": "complete_context_mass_aware_retire_split_rerun",
+        "log_mass": "router.log_mass",
+        "matched_logit": 0.0,
+        "row_buffers": [
+          "row_roles"
+        ],
+        "sites": [
+          "odd",
+          "even",
+          "origin"
+        ],
+        "unmatched_logit": -1048576.0
+      },
+      "row_policy": "routed_paired",
+      "row_semantics": "conditional",
+      "schedule": "preserve_resolved_recipe_none",
+      "schema_version": 1,
+      "sources": {
+        "benchmarks/legacy/locked_shared.py": "9bac7def8e5c10d4d4532723ebbf7d7689d5e85c8823dbf07fb7225f91b455c0",
+        "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
+        "benchmarks/locked_shared/hosts/cover_leftover.py": "f9bf24ace45678508c9d7e767e73db86116daece205bd78f3174737d13177838",
+        "benchmarks/locked_shared/hosts/unipolar.py": "c66b2c48ed00eb9ce4ed91c4e2efafa4f844f8f2fe57338901a754d3e023acb5",
+        "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+        "benchmarks/locked_shared/trajectory.py": "9d9ac0313e53142107fea6ae231b44be0852679aa267d6d423873f948abeea4d",
+        "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89",
+        "experiments/forge/adapters.py": "04297493b688dbbe870683803fdafa8730d83942576ff4ffa38569a4deeda780",
+        "experiments/forge/api.py": "2df76b239ae44d81cfc9d8bd1469c569aa36d9deb135e36a49220309c7d54694",
+        "experiments/forge/boundaries.py": "3599a45ba7a83d96aa12ce2a5c13ff00bba170b81ccfdfc996552fb8aa747621",
+        "experiments/forge/conditional_policy_adapters.py": "ecebd5360341c27488fc3e23bfe26338e45a3bfd0d8241b11f752ee6d40cf8b9",
+        "experiments/forge/conditional_policy_contracts.py": "b31e3398495179a88be8025b3b1d4ca172ba7c26dcba5d3825ba02d9c54fff25",
+        "experiments/forge/contracts.py": "fcac35c47301f582bb19f2a4b12bd2b41f8630ec12b02912c3fc9f47539a81a8",
+        "experiments/forge/evaluate.py": "69b9cca335dae0f6d4560861ef417d5dfb34008b939d93a30e500a750f7b8416",
+        "experiments/forge/mechanisms.py": "9e4e1fe1f8cb9a24148cab88b7bf2f980e805a2e488c16a982768519bbe1b23f",
+        "experiments/forge/named_policy_planning.py": "a0a80fdfb519a830149c8876df53d716fcbda652031ded1102384bfeba70cb12",
+        "experiments/forge/planning.py": "8f8ff63d586a48cb9f7bed5a93c9b1c45f00eb7aada4cf6f34e77e0c2a4a6f9b",
+        "experiments/forge/policy_adapters.py": "5192a24571d1c6a5b65011a4550c2a134db880a7e85baf07fcbc8b85d628bc13",
+        "experiments/forge/policy_behavior_adapters.py": "eebf6b881f80ac95b26f80a018b20cd0fc67febca2b05e8986f2ca0caee08c7d",
+        "experiments/forge/policy_cohorts.py": "d738fc16824a2ccc7bdf5a1a3742e4dc3fe421a4413eb2fc65ccdd5240b01917",
+        "experiments/forge/policy_declaration_sources.py": "374a176284199de724936d02e77ad8755250da273c75acfde096318e060ac717",
+        "experiments/forge/policy_snapshot_publication.py": "9cd859971e158a25112cdbb928e98d2a030f11729a2b8e970dd650f4b38e5b60",
+        "experiments/forge/rng.py": "ae7b9a8d61da42136d970188a6f168e03e2d7c5b90cf6fdbd93ad929aba2f293",
+        "experiments/forge/runtime.py": "8f82ec5da54a9c670e80e5691e6337e03120019a1071516479fd65c3724ad147",
+        "experiments/forge/sampling.py": "117d07dcf5f4c40401166d0960dc6b06228fd7c52d062543cca9d62964f0345e",
+        "experiments/forge/technique_board.py": "6eb7b31b9eab3fefad82cd773dc5ca8b2900d083e073b5aa7467c73ba1c85577",
+        "experiments/forge/views.py": "8615984eeb7674fc124892527b00385d1e4fce6da907928da861c9af2d7e95d3",
+        "particlegan/init.py": "e15d4de01eb49f7097bc249abacab907ff067385412346f54ab0d510cb8649d0",
+        "particlegan/policy.py": "6d2953cd21aefd637976266085fbc8f447183ccbb8fdec0caa06c525a146cc42",
+        "particlegan/recipes.py": "d7ef27d306d12c3035e509721d9a995ddb66edb07851976ef5106f21cc7d77f1",
+        "particlegan/routing.py": "63249d808fccb3d4e113eb1d638a245ee665c3cade20a1542bb706f316b4abcc",
+        "particlegan/training.py": "7dadc219135bc3e6bf657bfe9bc3fa81dd14d4b2a31c70d5ff61e2941db35c94"
+      },
+      "storage_adaptation": "original_zero_basis_vectors_pack_into_new_subclass_matrix_parameter_same_formula_and_degrees",
+      "table_optimizer_semantics": {
+        "independent_direct_particle_response_owner": false,
+        "latent_damping_owner": true,
+        "reason": "public_routed_transport_rejects_coupled_direct_row_history",
+        "recipe_direct_particle_gain_preserved": true
+      },
+      "table_owner": "generator.bank",
+      "training_latent_policy": "actual_public_DV12_mixed_codes_at_each_declared_site"
+    },
+    "policy_recipe_overrides": {
+      "row_policy": "routed_paired"
+    },
+    "policy_recipe_overrides_provenance": {
+      "all_original_training_contexts_preserved": true,
+      "change": "complete_conditional_routing_and_selected_public_policy",
+      "evidence_reuse": false,
+      "family": "atlas_conditional",
+      "independent_atlas_equivalence": false,
+      "initializer_adaptation": "new_subclass_bank_KEEP_original_zeros_and_parent_named_orthogonal_critic",
+      "original_objective": "original_equal_RpGAN_scales_0_and_1_no_auxiliary_loss",
+      "schema_version": 1,
+      "source": "benchmarks/locked_shared/hosts/unipolar.py",
+      "storage_adaptation": "original_zero_basis_vectors_pack_into_new_subclass_matrix_parameter_same_formula_and_degrees",
+      "table_owner": "generator.bank",
+      "table_rate_owner": "explicit_prior_lr_mult_group_also_for_basis_bank",
+      "training_law_change": "public_routed_DV12_jitter_and_mass_aware_counterfactuals"
+    },
+    "prior": {
+      "exception_reason": "Deterministic student residual controls are parameter clouds, not draws from a sampled latent prior.",
+      "kind": "particle_cloud",
+      "learnable": true,
+      "sigma": 0.0,
+      "standardize": false
+    },
+    "prior_applicability": "not_sampled",
+    "produces_state": false,
+    "protocol": "screening",
+    "resources": {
+      "batch_size": 8,
+      "num_particles": 3,
+      "z_dim": 4
+    },
+    "schedule_policy": "public_policy_stationarity_no_declared_horizon",
+    "steps": 400
+  },
+  "id": "unipolar_conditional_policy_selected_cloud_v1",
+  "policy_family": "atlas_conditional",
+  "policy_parent": {
+    "evaluation_fingerprint": "77034fcfe01b1c1601d48241d9ccf6afc0c94761eef5b44fdd744794f8e82b16",
+    "execution_fingerprint": "bc1df14a2bbf785a6ac7c17f759f87a300dfd33844bbba08e608fd678e44d106",
+    "id": "unipolar",
+    "task_sha256": "a2df5eb0fdb119e0cf0d744002ac4cc6460037a4960a51119947af396cc71d39"
+  },
+  "requires_capabilities": [
+    "named_rng",
+    "served_sampling",
+    "particle_cloud",
+    "policy_controls",
+    "policy_serving",
+    "routed_rows"
+  ],
+  "resources": {
+    "allow_cpu": false,
+    "cpu_threads": 1,
+    "device": "cuda",
+    "gpu_memory_mb": 2048,
+    "gpus": 1,
+    "timeout_seconds": 1800
+  },
+  "schema_version": 1,
+  "task_cohort": "conditional_policy_selected_cloud_v1"
+}
