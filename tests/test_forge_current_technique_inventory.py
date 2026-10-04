@@ -1341,6 +1341,7 @@ def test_committed_cohorts_rebuild_every_scientific_row_in_a_checkout_without_ra
                      Path("configs/forge/selections"),
                      Path("configs/forge/view-history"),
                      Path("configs/forge/tasks"), Path("configs/forge/protocols"),
+                     Path("configs/forge/task-variants"),
                      Path("reports/forge/configuration-search")):
         if not (ROOT / relative).is_dir():
             continue
