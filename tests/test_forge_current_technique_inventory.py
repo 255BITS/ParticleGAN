@@ -175,9 +175,10 @@ def test_completed_studies_cannot_replace_selected_family_configs_or_history(evi
     markdown = Path(published["report"]).read_text()
     assert "task_diagnostics" not in current
     assert "Five-word joint task diagnostics" not in markdown
-    assert "<summary>Selected configurations and provenance</summary>" in markdown
-    assert "19/19 original PASS" in markdown and "2/2 new hold FAIL" in markdown
-    assert markdown.index("| Model/configuration | Representation | Measured scores |") < markdown.index("19/19 original PASS")
+    assert "<summary>Selected configurations and provenance</summary>" not in markdown
+    assert "19/19 original PASS" in markdown and "2/2 hold FAIL" in markdown
+    assert markdown.index("| Model/configuration | Actual representation | Measured score/status and scope |") < markdown.index("19/19 original PASS")
+    assert markdown.count("| --- | --- | --- |") == 1
     outputs = _outputs(root)
     mtimes = {path: path.stat().st_mtime_ns for path in outputs}
     assert publication.publish_current(root) == published
@@ -716,14 +717,17 @@ def test_main_policy_rows_link_separate_history_and_failed_hold_without_credit()
     before = deepcopy(result)
     markdown = publication._current_markdown(result, ROOT, ROOT / "reports/forge/technique-inventory.md")
     table_rows = [line for line in markdown.splitlines() if line.startswith(("| Atlas ·", "| E22 ·"))]
-    assert len(table_rows) == 2
-    for line, label in zip(table_rows, ("Atlas", "E22")):
-        assert "[Atlas history: 19/19 PASS](continuous-baseline-20261003/README.md)" in markdown
-        assert f"[C6 {label} hold FAIL](c6-baseline-debug-20261003/README.md)" in markdown
-        assert all(f"BLOCKED ({total} required)" in line for total in (5, 19, 2))
-        assert line.endswith("Recorded tier: 0 |")
+    assert len(table_rows) == 1 and table_rows[0].startswith("| E22 ·")
+    assert any(line.startswith("| [Atlas C6") for line in markdown.splitlines())
+    for row, label in zip(result["rows"], ("Atlas", "E22")):
+        links = publication._separate_baseline_links(result, row, ROOT, ROOT / "reports/forge/technique-inventory.md")
+        assert "[Atlas history: 19/19 PASS](continuous-baseline-20261003/README.md)" in links
+        assert f"[C6 {label} hold FAIL](c6-baseline-debug-20261003/README.md)" in links
+        assert row["qualified_tier"] == 0
+    assert all(f"BLOCKED ({total} required)" in table_rows[0] for total in (5, 19, 2))
+    assert "Recorded tier: 0" in table_rows[0]
     assert "E22 history: 19/19" not in markdown
-    assert "no current tier credit" in markdown and result == before
+    assert "no ordinary tier, default or speed credit" in markdown and result == before
     without_history = deepcopy(result)
     without_history.pop("completed_api_studies")
     assert publication._separate_baseline_links(without_history, result["rows"][0], ROOT,
@@ -767,15 +771,20 @@ def test_atlas_progress_is_source_bound_additive_display_and_preserves_every_ord
         "qualification_input", "qualification_reuse", "ordinary_tier_credit", "cross_cohort_pooling",
         "default_adoption", "speed_ranking"))
     markdown = Path(published["report"]).read_text()
-    assert markdown.index("| Model/configuration | Representation | Measured scores |") < markdown.index("## Selected-policy GPU scores")
-    assert markdown.index("## Selected-policy GPU scores") < markdown.index("## Qualification and scope")
+    assert markdown.count("| Model/configuration | Actual representation | Measured score/status and scope |") == 1
+    assert markdown.count("| --- | --- | --- |") == 1
+    first = next(line for line in markdown.splitlines() if line.startswith("| [Atlas C6"))
+    assert "| Particles | **7/26 PASS** · FAIL 11 · BLOCKED 8" in first
+    assert "## Selected-policy GPU scores" not in markdown
     assert "**7/26 PASS** · FAIL 11 · BLOCKED 8" in markdown
     assert "**4/26 PASS** · NOT_RUN 22" in markdown
     assert "**INVALID 1** · NOT_RUN 25 · numerical gate UNAVAILABLE" in markdown
     assert "7/8" not in markdown and "Atlas unblocking progress" not in markdown
     assert "one unchanged family/configuration tuple must satisfy all 26 required" in markdown
-    atlas_row = next(line for line in markdown.splitlines() if line.lower().startswith("| atlas ·"))
-    assert "| MoG |" in atlas_row  # Synthetic reference prior; never infer from the name.
+    assert not any(line.lower().startswith("| atlas ·") for line in markdown.splitlines())
+    # The synthetic ordinary reference remains unchanged in the data even
+    # though the actual selected-policy result occupies the displayed row.
+    assert next(row for row in after["rows"] if row["candidate_id"] == "atlas")["bindings"]["prior"]["kind"] == "mog"
     assert after["rows"] == before["rows"]
     outputs = _outputs(root)
     assert publication.publish_current(root) == published and _outputs(root) == outputs
@@ -893,8 +902,10 @@ def test_shared_score_intro_preserves_unrelated_index_and_rebuilds_idempotently(
     path.write_text("# Shared ParticleGAN score index\n\n## Atlas unblocking progress\n\nOld intro.\n\n" + unrelated)
     published = publication.publish_current(root)
     content = path.read_text()
-    assert content.endswith(unrelated)
-    assert content.index("| Model/configuration | Representation | Measured scores |") < content.index("## Qualification and accounting")
+    assert path.with_name("ARCHIVED_REPORTS.md").read_text() == unrelated
+    assert "[Historical report archive](ARCHIVED_REPORTS.md)" in content
+    assert content.index("| Model/configuration | Actual representation | Measured score/status and scope |") < content.index("## Qualification and accounting")
+    assert content.count("| --- | --- | --- |") == 1
     assert "## Atlas unblocking progress" not in content and "7/8" not in content
     assert "[trajectory](../atlas-named-gpu-diagnostics-native-v3-20261003/gifs/trajectory_conditional_policy_selected_cloud_v1.gif)" in content
     assert publication.publish_current(root) == published and path.read_text() == content
@@ -1026,12 +1037,21 @@ def test_half_base_shared_index_cost_updates_without_touching_archived_index(evi
     path.parent.mkdir(parents=True)
     original = (ROOT / relative).read_text()
     path.write_text(original)
+    marker = "## Completed current Atlas GPU diagnostic\n"
+    original_archive = (ROOT / relative).with_name("ARCHIVED_REPORTS.md")
+    if original_archive.exists():
+        archive_bytes = original_archive.read_bytes()
+        shutil.copyfile(original_archive, path.with_name("ARCHIVED_REPORTS.md"))
+    else:
+        archive_bytes = (marker + original.split(marker, 1)[1]).encode()
     _copy_atlas_progress(root)
     _copy_half_base_report(root)
     publication.publish_current(root)
     rendered = path.read_text()
-    boundary = "## Completed current Atlas GPU diagnostic\n"
-    assert rendered[rendered.index(boundary):] == original[original.index(boundary):]
+    assert path.with_name("ARCHIVED_REPORTS.md").read_bytes() == archive_bytes
+    assert rendered.count("| --- | --- | --- |") == 1
+    assert rendered.count("| Model/configuration | Actual representation | Measured score/status and scope |") == 1
+    assert "[Historical report archive](ARCHIVED_REPORTS.md)" in rendered
     assert "1466.669318475062 / 10500 seconds" in rendered
     assert "1231.8432376992423 / 3000" in rendered
     assert "556.4301753160544 / 900 seconds" in rendered
@@ -1050,6 +1070,26 @@ def test_half_base_render_keeps_old_invalid_and_separate_full_denominator():
     assert "original C6 N11 illustration has no accepted numerical grade" in markdown
     assert "accepted 20,001-update goal GIF" in markdown
     assert "half_base LR .00265625 / prior1.5 / D1" in markdown
+    assert result == before
+
+
+def test_one_visible_table_leads_with_actual_atlas_and_keeps_configuration_scopes():
+    result = read_json(ROOT / "reports/forge/technique-inventory.json")
+    before = deepcopy(result)
+    assert len(result["rows"]) == 12
+    text = publication._current_markdown(result, ROOT, ROOT / "reports/forge/technique-inventory.md")
+    assert text.count("| --- | --- | --- |") == 1
+    assert "<details>" not in text and "| Study | Result |" not in text
+    table = [line for line in text.splitlines() if line.startswith("|")][2:]
+    assert len(table) == 18  # Seven scoped diagnostic rows and 11 ordinary rows.
+    assert table[0].startswith("| [Atlas C6 LR .0053125 / prior1.5")
+    assert "| Particles | **7/26 PASS** · FAIL 11 · BLOCKED 8" in table[0]
+    assert sum(line.startswith("| [Atlas C6") for line in table) == 1
+    assert not any(line.startswith("| Atlas ·") for line in table)
+    assert any("0/26 PASS** · FAIL 1 · NOT_RUN 25 · COMPLETE" in line for line in table)
+    assert any("INVALID 1** · NOT_RUN 25 · numerical gate UNAVAILABLE" in line for line in table)
+    assert all("ordinary qualification" in line for line in table[7:])
+    assert [line.split(" · ", 1)[0][2:] for line in table[7:]] == [row["technique"] for row in result["rows"] if row["trainer_family"] != "atlas"]
     assert result == before
 
 
