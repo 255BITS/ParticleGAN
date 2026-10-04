@@ -11,6 +11,7 @@ import argparse
 import ast
 from concurrent.futures import ProcessPoolExecutor, as_completed
 from contextlib import contextmanager
+from copy import deepcopy
 import hashlib
 import json
 import math
@@ -416,7 +417,8 @@ def render_gif(case, records, path, *, full_budget, requested_steps, final_verdi
 
 
 def run_case(case, output, *, device="cpu", recipe_name=None, steps=None,
-             eval_samples=None, frames=9, seed=24002, recipe_overrides=None, wall_cap_seconds=None):
+             eval_samples=None, frames=9, seed=24002, recipe_overrides=None, wall_cap_seconds=None,
+             fixture_factory=None, receipt_finalizer=None):
     output = Path(output)
     output.mkdir(parents=True, exist_ok=False)
     steps = case["default_steps"] if steps is None else steps
@@ -475,8 +477,13 @@ def run_case(case, output, *, device="cpu", recipe_name=None, steps=None,
                           "elapsed_seconds": record["elapsed_seconds"],
                           "failed_bounds": record["failed_bounds"][:5]}, allow_nan=False), flush=True)
     try:
+        if fixture_factory is not None and not callable(fixture_factory):
+            raise TypeError("fixture_factory must be callable")
+        if receipt_finalizer is not None and not callable(receipt_finalizer):
+            raise TypeError("receipt_finalizer must be callable")
         options = {"recipe_overrides": recipe_overrides} if recipe_overrides else {}
-        fixture = contract.build(case, device=device, seed=seed, recipe_name=recipe_name, max_steps=steps, **options)
+        builder = contract.build if fixture_factory is None else fixture_factory
+        fixture = builder(case, device=device, seed=seed, recipe_name=recipe_name, max_steps=steps, **options)
         receipt["recipe"] = json_value(fixture.recipe.to_dict())
         receipt["api_components"] = list(fixture.api_components)
         if torch.device(device).type == "cuda":
@@ -518,6 +525,21 @@ def run_case(case, output, *, device="cpu", recipe_name=None, steps=None,
                 receipt["partial_terminal_observation_added"] = True
             except Exception as capture_error:
                 receipt["failed_bounds"].append(f"partial goal observation unavailable: {capture_error}")
+    if receipt_finalizer is not None and fixture is not None:
+        # The numerical grade remains authoritative. An observer receives an
+        # independent receipt and can only add separately scoped evidence.
+        numeric = {key: deepcopy(receipt[key]) for key in (
+            "status", "verdict", "passed", "failed_bounds", "completed_updates",
+            "default_protocol_complete", "metric_passed", "sustained_metric_passed") if key in receipt}
+        try:
+            observer = receipt_finalizer(fixture, deepcopy(receipt))
+            if not isinstance(observer, dict) or not observer:
+                raise TypeError("receipt_finalizer must return a nonempty evidence dictionary")
+            receipt["policy_observer"] = observer
+        except Exception as error:
+            receipt["numerical_before_observer_error"] = numeric
+            receipt.update(status="ERROR", passed=False, verdict="FAIL", default_protocol_complete=False)
+            receipt["failed_bounds"].append(f"observer finalizer error: {type(error).__name__}: {error}")
     receipt["elapsed_seconds"] = time.monotonic() - started
     receipt["artifacts"] = {}
     receipt["gif_frames"] = 0
