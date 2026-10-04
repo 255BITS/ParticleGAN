@@ -11,6 +11,7 @@ import argparse
 from copy import deepcopy
 import hashlib
 import importlib.metadata
+import importlib.machinery
 import importlib.util
 import json
 import math
@@ -264,6 +265,69 @@ def guard_imports(source,*,modules=None,derived=None):
         if sha(path)!=wanted: raise ValueError('executed derived source mutated')
 
 
+def native_scorer_import_metadata(source,native_root,*,paths):
+    """Resolve the separate original scorer's imports without executing them.
+
+    Its relocated native root owns the original scorer's package and hosts.
+    The envelope root has already supplied the loaded, pinned control helpers;
+    leaving that root searchable would merge two distinct PEP420 lib roots.
+    Remove only that exact inherited root, retain every other distinct path,
+    and refuse any foreign/ambiguous resolution before a host is imported.
+    """
+    snapshot=Path(source['snapshot_path']).resolve()
+    native=Path(native_root).resolve()
+    if native!=snapshot/'atlas19-external/native_root':
+        raise ValueError('native scorer import root is not the pinned relocated owner')
+    search=[];seen=set()
+    for value in [str(native),*paths]:
+        path=str(Path(value or os.getcwd()).resolve())
+        if path==str(snapshot) or path in seen: continue
+        search.append(path);seen.add(path)
+    resolved={}
+    specs={}
+    for name in ('lib','lib.toy_models','particlegan','benchmarks',
+                 'benchmarks.toy100','benchmarks.toy100.gate',
+                 'benchmarks.toy100.accuracy_gate','benchmarks.toy100.train'):
+        parent=name.rpartition('.')[0]
+        scope=specs[parent].submodule_search_locations if parent else search
+        spec=importlib.machinery.PathFinder.find_spec(name,scope)
+        if spec is None: raise ValueError('missing native scorer import '+name)
+        specs[name]=spec
+        expected=native.joinpath(*name.split('.'))
+        if name=='lib':
+            locations=[str(Path(p).resolve()) for p in spec.submodule_search_locations or ()]
+            if spec.origin is not None or spec.loader is not None or locations!=[str(expected)]:
+                raise ValueError('ambiguous/foreign native scorer namespace lib')
+            relative=expected.relative_to(snapshot).as_posix()
+            if not any(p.startswith(relative+'/') for p in source['files']):
+                raise ValueError('unpinned native scorer namespace lib')
+            resolved[name]={'kind':'namespace','path':relative,'locations':1}
+        else:
+            expected=expected/'__init__.py' if spec.submodule_search_locations is not None else expected.with_suffix('.py')
+            if spec.origin is None or Path(spec.origin).resolve()!=expected:
+                raise ValueError('foreign native scorer import '+name)
+            relative=expected.relative_to(snapshot).as_posix()
+            wanted=source['files'].get(relative)
+            if wanted is None or sha(expected)!=wanted:
+                raise ValueError('unpinned/changed native scorer import '+name)
+            if spec.submodule_search_locations is not None and [str(Path(p).resolve()) for p in spec.submodule_search_locations]!=[str(expected.parent)]:
+                raise ValueError('ambiguous native scorer package '+name)
+            resolved[name]={'kind':'source','path':relative,'sha256':wanted}
+    proof={'status':'PASS_NATIVE_SCORER_IMPORT_METADATA_ONLY',
+           'source_digest':source['digest'],'resolved_modules':resolved,
+           'executed_modules':0,'models':0,'sampler_calls':0,'scorer_calls':0}
+    return search,proof
+
+
+def normalize_native_scorer_paths(source,native_root):
+    """Bind the original scorer's isolated import owner; never relax the guard."""
+    if any(name.split('.',1)[0] in {'lib','benchmarks','particlegan'} for name in sys.modules):
+        raise ValueError('native scorer requires fresh original package imports')
+    search,proof=native_scorer_import_metadata(source,native_root,paths=sys.path)
+    sys.path[:]=search
+    return proof
+
+
 def verify_lease(request,fd,*,now=None):
     """Inherited exact descriptor + durable token/source/deadline, never a flag."""
     now=time.monotonic() if now is None else now
@@ -340,6 +404,8 @@ def build_wrappers(packet,row,target,worker):
     score_source=legacy._replace(score_source,
         "FIXTURE = json.loads((Path(__file__).resolve().parent / 'tasks' / 'native100_fixture.json').read_text())",
         f"FIXTURE = json.loads(Path({str(Path(loc['harness'])/'tasks/native100_fixture.json')!r}).read_text())")
+    score_source=legacy._replace(score_source,'    sys.path.insert(0, str(ROOT))',
+        '    sys.path.insert(0, str(ROOT))\n    _r.normalize_native_scorer_paths(_q[\'packet\'][\'execution_source\'],ROOT)')
     score_source=legacy._replace(score_source,'    coverage = gate.score_run(run_dir, problem)',
                                 '    _retest_check()\n    coverage = gate.score_run(run_dir, problem)')
     score_source=legacy._replace(score_source,'    print(json.dumps(dict(coverage=coverage, accuracy=accuracy, sources=checked), default=str))',
@@ -352,7 +418,7 @@ def build_wrappers(packet,row,target,worker):
         "_pins={_P(x['executed_path']).resolve():x['executed_sha256'] for x in _derivative['records']}\n"
         f"def _retest_check():\n    _r.verify_lease(_q,{worker['lease_fd']})\n    _r.guard_imports(_q['packet']['execution_source'],derived=_pins)\n")
     score_script=retain('native-score-observed-wrapper',scorer,prefix+score_source,scorer.read_text(),
-                         {'kind':'same original scorer calls; relocated root + imported-source/deadline checks'})
+                         {'kind':'same original scorer calls; isolated relocated root + imported-source/deadline checks'})
     # The unchanged native scorer inherits both owners and remains in its
     # leader's fenced process group. No new score call or sibling session.
     base=legacy._replace(base,"str(HARNESS / 'native100_score.py')",repr(str(score_script)))
@@ -695,12 +761,15 @@ def copied_preflight(prepared):
         entries=build_wrappers(prepared,row,Path('/unused-metadata-only-output')/row['id'],
                                {'lease_fd':101,'lease_fds':[100,101]})
         if not entries: raise ValueError('missing original compiled child wrapper')
+    _,native_imports=native_scorer_import_metadata(prepared['execution_source'],
+        loc['native_root'],paths=[str(ROOT),*sys.path])
     guard_imports(prepared['execution_source'])
     if any(n=='torch' or n=='particlegan' or n.startswith('particlegan.') for n in sys.modules):
         raise ValueError('model-free preflight imported a model package')
     return {'status':'PASS_COPIED_METADATA_ONLY','source_digest':prepared['execution_source']['digest'],
             'protocol_sha256':stable_hash(prepared['protocol']),'cases':19,'updates':48800,
-            'compiled_original_wrappers':19,'models':0,'sampler_calls':0,'scorer_calls':0,'queue_calls':0,'numeric_credit':False}
+            'compiled_original_wrappers':19,'native_scorer_imports':native_imports,
+            'models':0,'sampler_calls':0,'scorer_calls':0,'queue_calls':0,'numeric_credit':False}
 
 
 def bounded_copied_preflight(prepared):
@@ -735,6 +804,12 @@ def require_copied_preflight(prepared):
             or any(result.get(k)!=0 for k in ('models','sampler_calls','scorer_calls','queue_calls'))
             or result.get('numeric_credit') is not False):
         raise ValueError('copied-source preflight receipt is stale, foreign or incomplete')
+    # The copied helper's native import plan is checked without importing the
+    # scorer or a model package. Missing/foreign proof cannot reach admission.
+    _,native_imports=native_scorer_import_metadata(prepared['execution_source'],
+        prepared['snapshot_locations']['native_root'],paths=[prepared['execution_source']['snapshot_path']])
+    if result.get('native_scorer_imports')!=native_imports:
+        raise ValueError('copied-source preflight native import proof is stale or missing')
     return result
 
 
