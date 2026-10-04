@@ -1,0 +1,72 @@
+{
+  "accepted_numeric_credit": false,
+  "admission_checks": 2,
+  "factory_calls": 1,
+  "historical_checkpoint_loaded": false,
+  "initial_owner": {
+    "completed_steps": 0,
+    "critic": {
+      "state_sha256": "5f680a59df187a306c125ac4f9e2818458458be177506169c9a8d30329400aa8",
+      "stored_weights_exact": true,
+      "type": "benchmarks.locked_shared.two_pole.HostCritic"
+    },
+    "generator": {
+      "trainable_parameters": 0,
+      "type": "torch.nn.Identity"
+    },
+    "object_bindings": {
+      "policy_critic": true,
+      "policy_generator": true,
+      "policy_table": true,
+      "table_optimizer": true,
+      "unique_parameter_ownership": true
+    },
+    "optimizer_state_entries": {
+      "discriminator": 0,
+      "prior": 0
+    },
+    "optimizer_updates": {
+      "discriminator": 0,
+      "noise": 0,
+      "prior": 0
+    },
+    "phase": "ready",
+    "resolved_recipe_sha256": "e6774c620e267474e6db4cf227b80fa8ee72b7f3c8ef2f352cd2789335f70b3f",
+    "restored": false,
+    "rng_version": "forge-rng-v1",
+    "schema": "pg_canonical_two_pole_initial_owner_v1",
+    "seed": 0,
+    "source_contract_sha256": "d97a28909aa7520a0204fbf09f0ad6abbeafee16c8530c09df9747b4a4b614a5",
+    "table": {
+      "all_zero": true,
+      "requires_grad": true,
+      "shape": [
+        12,
+        1
+      ]
+    }
+  },
+  "repeat": {
+    "authority_sequence": 552,
+    "candidate_digest": "516a27df90094abfa92240ae118c6796b236f3b1c8727dae4fda2283f843cbe4",
+    "case_id": "canonical-two-pole-full-atlas-ember552-v1",
+    "config_sha256": "a3ee5c67ac6594014feeb1ec333131abb4b1d86832510b69923100ebd8510ad4",
+    "effective_recipe_digest": "e6774c620e267474e6db4cf227b80fa8ee72b7f3c8ef2f352cd2789335f70b3f",
+    "execution_updates": 80,
+    "initialization": "new_owner_factory",
+    "protocol_digest": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+    "recipe_schedule_horizon": null,
+    "repeat_id": "canonical-common26-two-pole-ember552-fresh-init-seed0-v1",
+    "rng_version": "forge-rng-v1",
+    "runtime_digest": "7f8ae2ff2b1242db33e3ddbf0c1ae248e723f7adf18a98cdceb7720174e83840",
+    "schema": "forge_canonical_two_pole_fresh_repeat_v1",
+    "seed": 0,
+    "source_contract_sha256": "d97a28909aa7520a0204fbf09f0ad6abbeafee16c8530c09df9747b4a4b614a5",
+    "source_digest": "316a06746b89287fe46fe71dd163992e3d0f5748e533551ba1bb2f2633f63e85",
+    "source_origin_commit": "c6dbe8f6cdbe5c4df1c25ca67d807f075939e99d",
+    "task_digest": "2f0207310d6bb7b290bdc520d7992eb4e6da411becae69a76d76b1232897db8b",
+    "task_id": "two_pole"
+  },
+  "schema": "forge_canonical_two_pole_initialization_witness_v1",
+  "source_checks": 2
+}
