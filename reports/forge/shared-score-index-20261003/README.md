@@ -1,42 +1,44 @@
 # Shared ParticleGAN score index
 
-## Atlas unblocking progress
+One selected configuration per family; full tier denominators stay fixed. Representation is read from its declared prior and task-owned hosts.
 
-**Seven of the eight targeted adapted questions now PASS.** These are measured
-results across separately named variants and retained execution sources. The
-original fixed-C6 suite remains **7 PASS / 11 FAIL / 8 BLOCKED out of 26**;
-the adaptations make seven formerly blocked questions runnable and passing
-under their explicit host laws. They do not rewrite those original results.
+| Model/configuration | Representation | Measured scores |
+| --- | --- | --- |
+| Atlas · [atlas](../../../configs/forge/ideas/atlas.json)<br>cuda | Particles | Tier 1: BLOCKED (5 required)<br>Tier 2: BLOCKED (19 required)<br>Tier 3: BLOCKED (2 required)<br>Recorded tier: 0 |
+| BCap · [bcap · 08689a73c551](../../../configs/forge/configurations/bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212.json)<br>cuda | MoG + particles (per task) | Tier 1: 3/5<br>FAIL 1 · UNKNOWN 1<br>Tier 2: UNKNOWN (19 required)<br>Tier 3: UNKNOWN (2 required)<br>Recorded tier: 0 |
+| E22 · [e22](../../../configs/forge/ideas/e22.json)<br>cuda | Particles | Tier 1: BLOCKED (5 required)<br>Tier 2: BLOCKED (19 required)<br>Tier 3: BLOCKED (2 required)<br>Recorded tier: 0 |
+| GAN v3 release 0.7 (MoG) · [release07-gan-v3-mog · 1e266b5a2986](../../../configs/forge/configurations/release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c.json)<br>cuda | MoG + particles (per task) | Tier 1: 3/5<br>FAIL 1 · UNKNOWN 1<br>Tier 2: UNKNOWN (19 required)<br>Tier 3: UNKNOWN (2 required)<br>Recorded tier: 0 |
+| GAN v3 release 0.7 (cloud) · [release07-gan-v3-cloud-v1](../../../configs/forge/ideas/release07-gan-v3-cloud-v1.json)<br>cuda | MoG + particles (per task) | Tier 1: BLOCKED (5 required)<br>Tier 2: BLOCKED (19 required)<br>Tier 3: BLOCKED (2 required)<br>Recorded tier: 0 |
+| K3P · [k3p · 0b37e98a01e3](../../../configs/forge/configurations/k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c.json)<br>cuda | MoG + particles (per task) | Tier 1: 4/5<br>FAIL 1<br>Tier 2: UNKNOWN (19 required)<br>Tier 3: UNKNOWN (2 required)<br>Recorded tier: 0 |
+| K3P without A2 · [k3p-a2-off-native-diagnostic](../../../configs/forge/ideas/k3p-a2-off-native-diagnostic.json)<br>cuda | MoG + particles (per task) | Tier 1: 0/5<br>FAIL 1 · UNKNOWN 4<br>Tier 2: UNKNOWN (19 required)<br>Tier 3: UNKNOWN (2 required)<br>Recorded tier: 0 |
+| K3P without critic anchor · [forge-onboarding-anchor-ablation](../../../configs/forge/ideas/forge-onboarding-anchor-ablation.json)<br>cuda | MoG + particles (per task) | Tier 1: 0/5<br>FAIL 1 · UNKNOWN 4<br>Tier 2: UNKNOWN (19 required)<br>Tier 3: UNKNOWN (2 required)<br>Recorded tier: 0 |
+| K3P without critic penalty · [forge-no-critic-penalty](../../../configs/forge/ideas/forge-no-critic-penalty.json)<br>cuda | MoG + particles (per task) | Tier 1: 0/5<br>FAIL 1 · UNKNOWN 4<br>Tier 2: UNKNOWN (19 required)<br>Tier 3: UNKNOWN (2 required)<br>Recorded tier: 0 |
+| K3P without training output noise · [k3p-no-output-noise-diagnostic](../../../configs/forge/ideas/k3p-no-output-noise-diagnostic.json)<br>cuda | MoG + particles (per task) | Tier 1: 0/5<br>FAIL 1 · UNKNOWN 4<br>Tier 2: UNKNOWN (19 required)<br>Tier 3: UNKNOWN (2 required)<br>Recorded tier: 0 |
+| KA2 · [ka2 · 093c6f2bd417](../../../configs/forge/configurations/ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f.json)<br>cuda | MoG + particles (per task) | Tier 1: 4/5<br>FAIL 1<br>Tier 2: UNKNOWN (19 required)<br>Tier 3: UNKNOWN (2 required)<br>Recorded tier: 0 |
+| R1/R2 · [r1r2 · 302b6baa44f6](../../../configs/forge/configurations/r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f.json)<br>cuda | MoG + particles (per task) | Tier 1: 3/5<br>FAIL 1 · UNKNOWN 1<br>Tier 2: UNKNOWN (19 required)<br>Tier 3: UNKNOWN (2 required)<br>Recorded tier: 0 |
 
-| Tested variant | Targeted progress | What the passing questions verify | Original evidence |
-|---|---|---|---|
-| Conditional Atlas | **4/4 PASS** | Paired trajectories and padding; positive edits without leakage; both edit polarities and identity at intermediate scale | [v3 goals and four GIFs](../atlas-named-gpu-diagnostics-native-v3-20261003/README.md), source `ff94453b` |
-| Routed AE Atlas | **1/1 PASS** | Reconstruction of known inputs and retention of both protected anchors | [v3 AE goal and GIF](../atlas-named-gpu-diagnostics-native-v3-20261003/README.md), source `ff94453b` |
-| Routed Atlas | **1/1 PASS** | Preserve the unused token while the used token follows its concept target | [v4b unused-token goal and GIF](../atlas-named-gpu-diagnostics-native-v4b-20261004/README.md), source `fb7acc77` |
-| Multi-bank Atlas | **1/1 PASS** | Separate both residual poles while preserving content, identity and low leakage | [v4b cover goal and GIF](../atlas-named-gpu-diagnostics-native-v4b-20261004/README.md), source `fb7acc77` |
-| Joint-word N11 Atlas | **INVALID** | All 20,001 updates completed; retained coverage, confidence and paired inverse goals were missed | [Original word GIF and audit context](../atlas-word-retained-context-20261004/README.md), source `fb7acc77` |
+## Selected-policy GPU scores
 
-The original Atlas row in ordinary MoG qualification is still incompatible
-with that trainer/prior contract. Its BLOCKED cells are not a count of this
-adaptation work. Each adapted family retains **26 required questions**;
-conditional has 22 unexecuted questions in its own v3 ledger, and each other
-variant has 25 in its measured ledger. Before a default can qualify, one
-declared family and one complete tuple must cover its required questions with
-compatible source, host and serving laws, sustained original gates and the
-workflow's calibration/evidence requirements. Seven subset passes across
-different variants cannot supply that qualification. Speed is compared only
-among fully qualified comparable candidates.
+Each row keeps its own configuration, execution source and 26 required slots. These diagnostic scores remain separate from ordinary qualification.
 
-The named campaign's predecessor-inclusive charge is **910.2391431590077 /
-10500 seconds**, reserve zero: GPU0 **234.82608077581972 / 7500**, GPU1
-**675.4130623831879 / 3000**. Next is one separately pinned **global half-base
-step-size contrast**, LR .00265625 / prior multiplier 1.5 / D multiplier 1,
-with a full inclusive 900-second allowance. It is not yet prepared or executed.
-Earlier quarter-base/slower-prior proposals remain unexecuted history.
+| Model/configuration | Representation | Measured scores |
+| --- | --- | --- |
+| [Atlas C6 · `9563dea5`](../atlas-current-gpu-diagnostics-native-v2-20261003/README.md) | Particles | **7/26 PASS** · FAIL 11 · BLOCKED 8 · [source and 18 goal GIFs](../atlas-current-gpu-diagnostics-native-v2-20261003/README.md) |
+| [`atlas_conditional` · C6 · `ff94453b`](../atlas-named-gpu-diagnostics-native-v3-20261003/README.md) | Particles (conditional clouds / role banks) | **4/26 PASS** · NOT_RUN 22<br>goal GIFs: [mid_scale_identity](../atlas-named-gpu-diagnostics-native-v3-20261003/gifs/mid_scale_identity_conditional_policy_selected_cloud_v1.gif) · [residual_student](../atlas-named-gpu-diagnostics-native-v3-20261003/gifs/residual_student_conditional_policy_selected_cloud_v1.gif) · [trajectory](../atlas-named-gpu-diagnostics-native-v3-20261003/gifs/trajectory_conditional_policy_selected_cloud_v1.gif) · [unipolar](../atlas-named-gpu-diagnostics-native-v3-20261003/gifs/unipolar_conditional_policy_selected_cloud_v1.gif) |
+| [`atlas_ae_routed` · C6 · `ff94453b`](../atlas-named-gpu-diagnostics-native-v3-20261003/README.md) | MoG (fixed σ .025; routed AE) | **1/26 PASS** · NOT_RUN 25<br>goal GIFs: [ae_gan_hold](../atlas-named-gpu-diagnostics-native-v3-20261003/gifs/ae_gan_hold_ae_routed_policy_v1.gif) |
+| [`atlas_routed` · C6 · `fb7acc77`](../atlas-named-gpu-diagnostics-native-v4b-20261004/README.md) | Particles (shared / slot parameter bank) | **1/26 PASS** · NOT_RUN 25<br>goal GIFs: [unused_token_hold](../atlas-named-gpu-diagnostics-native-v4b-20261004/gifs/unused_token_hold_routed_policy_selected_cloud_v1.gif) |
+| [`atlas_multibank` · C6 · `fb7acc77`](../atlas-named-gpu-diagnostics-native-v4b-20261004/README.md) | Particles (two routed clouds) | **1/26 PASS** · NOT_RUN 25<br>goal GIFs: [cover_leftover](../atlas-named-gpu-diagnostics-native-v4b-20261004/gifs/cover_leftover_multibank_policy_v1.gif) |
+| [`atlas_word_joint_min11` · C6 · `fb7acc77`](../atlas-word-retained-context-20261004/README.md) | Particles (N11 joint cloud; free encoder) | **INVALID 1** · NOT_RUN 25 · numerical gate UNAVAILABLE<br>retained INVALID illustration: [five_word_joint_acquisition](../atlas-word-retained-context-20261004/word-retained-goal.gif) |
 
-This navigation index preserves source, law, denominator, original grade,
-study grade, costs and availability separately. No family default or fair
-speed winner is established.
+C6 is the fixed LR .0053125 / prior-rate 1.5 configuration with declared host-specific Recipe fields. Representation labels come from the pinned applied priors, Recipes and routed table owners; a parameter bank is not a sampled MoG. [Full source and representation bindings](../technique-inventory.json). Original N5 word execution remains BLOCKED. The N11 illustration has no accepted numerical grade.
+
+## Qualification and accounting
+
+Each model/configuration keeps its own source, law and full 26-slot denominator. MoG + particles (per task) is a mixture of separate suite hosts, not a hybrid-model claim. Named diagnostic passes do not fill ordinary cells or combine into a family score. INVALID supplies no accepted numerical grade; original N5 word execution remains BLOCKED. No family default or comparable speed winner is established.
+
+The named campaign's predecessor-inclusive charge remains **910.2391431590077 / 10500 seconds**, reserve zero: GPU0 **234.82608077581972 / 7500**, GPU1 **675.4130623831879 / 3000**. Prospective rate proposals are unexecuted and add no measurement to these tables.
+
+The linked original report sections and their index.json below retain their separate snapshots.
 
 ## Completed current Atlas GPU diagnostic
 

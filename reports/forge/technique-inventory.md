@@ -1,41 +1,44 @@
-# Current Forge trainer-family leaderboard
+# Current model/configuration scores
 
-Atlas's historical study has **19/19 original PASS**. The later C6 broad hold has **2/2 hold FAIL**, with six other domains UNKNOWN per family. See [completed source-bound studies](#completed-source-bound-studies) for the exact protocols and original goal GIFs. These separate results do not fill the ordinary qualification cells below.
+One selected configuration per family; full tier denominators stay fixed. Representation is read from its declared prior and task-owned hosts.
 
-## Atlas unblocking progress
+| Model/configuration | Representation | Measured scores |
+| --- | --- | --- |
+| Atlas · [atlas](../../configs/forge/ideas/atlas.json)<br>cuda | Particles | Tier 1: BLOCKED (5 required)<br>Tier 2: BLOCKED (19 required)<br>Tier 3: BLOCKED (2 required)<br>Recorded tier: 0 |
+| BCap · [bcap · 08689a73c551](../../configs/forge/configurations/bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212.json)<br>cuda | MoG + particles (per task) | Tier 1: 3/5<br>FAIL 1 · UNKNOWN 1<br>Tier 2: UNKNOWN (19 required)<br>Tier 3: UNKNOWN (2 required)<br>Recorded tier: 0 |
+| E22 · [e22](../../configs/forge/ideas/e22.json)<br>cuda | Particles | Tier 1: BLOCKED (5 required)<br>Tier 2: BLOCKED (19 required)<br>Tier 3: BLOCKED (2 required)<br>Recorded tier: 0 |
+| GAN v3 release 0.7 (MoG) · [release07-gan-v3-mog · 1e266b5a2986](../../configs/forge/configurations/release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c.json)<br>cuda | MoG + particles (per task) | Tier 1: 3/5<br>FAIL 1 · UNKNOWN 1<br>Tier 2: UNKNOWN (19 required)<br>Tier 3: UNKNOWN (2 required)<br>Recorded tier: 0 |
+| GAN v3 release 0.7 (cloud) · [release07-gan-v3-cloud-v1](../../configs/forge/ideas/release07-gan-v3-cloud-v1.json)<br>cuda | MoG + particles (per task) | Tier 1: BLOCKED (5 required)<br>Tier 2: BLOCKED (19 required)<br>Tier 3: BLOCKED (2 required)<br>Recorded tier: 0 |
+| K3P · [k3p · 0b37e98a01e3](../../configs/forge/configurations/k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c.json)<br>cuda | MoG + particles (per task) | Tier 1: 4/5<br>FAIL 1<br>Tier 2: UNKNOWN (19 required)<br>Tier 3: UNKNOWN (2 required)<br>Recorded tier: 0 |
+| K3P without A2 · [k3p-a2-off-native-diagnostic](../../configs/forge/ideas/k3p-a2-off-native-diagnostic.json)<br>cuda | MoG + particles (per task) | Tier 1: 0/5<br>FAIL 1 · UNKNOWN 4<br>Tier 2: UNKNOWN (19 required)<br>Tier 3: UNKNOWN (2 required)<br>Recorded tier: 0 |
+| K3P without critic anchor · [forge-onboarding-anchor-ablation](../../configs/forge/ideas/forge-onboarding-anchor-ablation.json)<br>cuda | MoG + particles (per task) | Tier 1: 0/5<br>FAIL 1 · UNKNOWN 4<br>Tier 2: UNKNOWN (19 required)<br>Tier 3: UNKNOWN (2 required)<br>Recorded tier: 0 |
+| K3P without critic penalty · [forge-no-critic-penalty](../../configs/forge/ideas/forge-no-critic-penalty.json)<br>cuda | MoG + particles (per task) | Tier 1: 0/5<br>FAIL 1 · UNKNOWN 4<br>Tier 2: UNKNOWN (19 required)<br>Tier 3: UNKNOWN (2 required)<br>Recorded tier: 0 |
+| K3P without training output noise · [k3p-no-output-noise-diagnostic](../../configs/forge/ideas/k3p-no-output-noise-diagnostic.json)<br>cuda | MoG + particles (per task) | Tier 1: 0/5<br>FAIL 1 · UNKNOWN 4<br>Tier 2: UNKNOWN (19 required)<br>Tier 3: UNKNOWN (2 required)<br>Recorded tier: 0 |
+| KA2 · [ka2 · 093c6f2bd417](../../configs/forge/configurations/ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f.json)<br>cuda | MoG + particles (per task) | Tier 1: 4/5<br>FAIL 1<br>Tier 2: UNKNOWN (19 required)<br>Tier 3: UNKNOWN (2 required)<br>Recorded tier: 0 |
+| R1/R2 · [r1r2 · 302b6baa44f6](../../configs/forge/configurations/r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f.json)<br>cuda | MoG + particles (per task) | Tier 1: 3/5<br>FAIL 1 · UNKNOWN 1<br>Tier 2: UNKNOWN (19 required)<br>Tier 3: UNKNOWN (2 required)<br>Recorded tier: 0 |
 
-The [initial 26-question policy GPU baseline](atlas-current-gpu-diagnostics-native-v2-20261003/README.md) recorded **7 PASS / 11 FAIL / 8 BLOCKED**. Adaptations have since met **7/8 previously blocked question gates** across distinct named families and retained sources. This is question coverage; the results do not combine into one qualified family or configuration.
+## Selected-policy GPU scores
 
-| Adaptation | Retained question gates | Source | Evidence |
-| --- | --- | --- | --- |
-| Conditional | 4/4 PASS | `ff94453b` | [Readout and actual goal GIFs](atlas-named-gpu-diagnostics-native-v3-20261003/README.md) |
-| AE routed | 1/1 PASS | `ff94453b` | [Readout and actual goal GIFs](atlas-named-gpu-diagnostics-native-v3-20261003/README.md) |
-| Unused token | 1/1 PASS | `fb7acc77` | [Readout and actual goal GIFs](atlas-named-gpu-diagnostics-native-v4b-20261004/README.md) |
-| Cover leftover | 1/1 PASS | `fb7acc77` | [Readout and actual goal GIFs](atlas-named-gpu-diagnostics-native-v4b-20261004/README.md) |
-| Word joint N11 | INVALID; 20,001 updates; raw goals miss; numerical gate UNAVAILABLE | `fb7acc77` | [Readout and actual goal GIFs](atlas-word-retained-context-20261004/README.md) |
+Each row keeps its own configuration, execution source and 26 required slots. These diagnostic scores remain separate from ordinary qualification.
 
-The ordinary MoG/clean-live task bindings below are incompatible with Atlas's particle-cloud and selected-policy serving law. The adapters declare their different priors, owners and resources explicitly; original N5 word execution remains BLOCKED. The N11 word clock and raw missed goals do not override its INVALID execution status.
+| Model/configuration | Representation | Measured scores |
+| --- | --- | --- |
+| [Atlas C6 · `9563dea5`](atlas-current-gpu-diagnostics-native-v2-20261003/README.md) | Particles | **7/26 PASS** · FAIL 11 · BLOCKED 8 · [source and 18 goal GIFs](atlas-current-gpu-diagnostics-native-v2-20261003/README.md) |
+| [`atlas_conditional` · C6 · `ff94453b`](atlas-named-gpu-diagnostics-native-v3-20261003/README.md) | Particles (conditional clouds / role banks) | **4/26 PASS** · NOT_RUN 22<br>goal GIFs: [mid_scale_identity](atlas-named-gpu-diagnostics-native-v3-20261003/gifs/mid_scale_identity_conditional_policy_selected_cloud_v1.gif) · [residual_student](atlas-named-gpu-diagnostics-native-v3-20261003/gifs/residual_student_conditional_policy_selected_cloud_v1.gif) · [trajectory](atlas-named-gpu-diagnostics-native-v3-20261003/gifs/trajectory_conditional_policy_selected_cloud_v1.gif) · [unipolar](atlas-named-gpu-diagnostics-native-v3-20261003/gifs/unipolar_conditional_policy_selected_cloud_v1.gif) |
+| [`atlas_ae_routed` · C6 · `ff94453b`](atlas-named-gpu-diagnostics-native-v3-20261003/README.md) | MoG (fixed σ .025; routed AE) | **1/26 PASS** · NOT_RUN 25<br>goal GIFs: [ae_gan_hold](atlas-named-gpu-diagnostics-native-v3-20261003/gifs/ae_gan_hold_ae_routed_policy_v1.gif) |
+| [`atlas_routed` · C6 · `fb7acc77`](atlas-named-gpu-diagnostics-native-v4b-20261004/README.md) | Particles (shared / slot parameter bank) | **1/26 PASS** · NOT_RUN 25<br>goal GIFs: [unused_token_hold](atlas-named-gpu-diagnostics-native-v4b-20261004/gifs/unused_token_hold_routed_policy_selected_cloud_v1.gif) |
+| [`atlas_multibank` · C6 · `fb7acc77`](atlas-named-gpu-diagnostics-native-v4b-20261004/README.md) | Particles (two routed clouds) | **1/26 PASS** · NOT_RUN 25<br>goal GIFs: [cover_leftover](atlas-named-gpu-diagnostics-native-v4b-20261004/gifs/cover_leftover_multibank_policy_v1.gif) |
+| [`atlas_word_joint_min11` · C6 · `fb7acc77`](atlas-word-retained-context-20261004/README.md) | Particles (N11 joint cloud; free encoder) | **INVALID 1** · NOT_RUN 25 · numerical gate UNAVAILABLE<br>retained INVALID illustration: [five_word_joint_acquisition](atlas-word-retained-context-20261004/word-retained-goal.gif) |
 
-Before shipping defaults, one unchanged family/configuration tuple must satisfy all 26 required 5/19/2 gates with compatible source, runtime and serving evidence, followed by the separate calibration and robustness requirements. Speed selection additionally requires matched timing evidence. No diagnostic result above grants ordinary tier, default or speed credit.
+C6 is the fixed LR .0053125 / prior-rate 1.5 configuration with declared host-specific Recipe fields. Representation labels come from the pinned applied priors, Recipes and routed table owners; a parameter bank is not a sampled MoG. [Full source and representation bindings](technique-inventory.json). Original N5 word execution remains BLOCKED. The N11 illustration has no accepted numerical grade.
 
-## Ordinary MoG qualification
+## Qualification and scope
 
-Each cell retains **passes / full required total** or **status (N required)** from one selected configuration. Mixed cells show the counts of failed, blocked and unmeasured tasks. Each formulation family has one current selected row; source and runtime alternatives remain unranked. Expand the configuration details below for selection, provenance, other outcomes and cost.
+MoG + particles (per task) denotes separate declared host laws within a suite; it does not assert a hybrid model. The release-0.7 cloud-labelled row retains its archived MoG declaration. BLOCKED rows show requested representations, not successful execution.
 
-| Trainer family / runtime | Tier 1 | Tier 2 | Tier 3 | Recorded tier |
-| --- | ---: | ---: | ---: | ---: |
-| Atlas<br>cuda<br>[Atlas history: 19/19 PASS](continuous-baseline-20261003/README.md)<br>[C6 Atlas hold FAIL](c6-baseline-debug-20261003/README.md)<br>[Adaptation progress](#atlas-unblocking-progress) | BLOCKED (5 required) | BLOCKED (19 required) | BLOCKED (2 required) | 0 |
-| BCap<br>cuda | 3/5<br>FAIL 1 · UNKNOWN 1 | UNKNOWN (19 required) | UNKNOWN (2 required) | 0 |
-| E22<br>cuda<br>[Atlas history: 19/19 PASS](continuous-baseline-20261003/README.md)<br>[C6 E22 hold FAIL](c6-baseline-debug-20261003/README.md) | BLOCKED (5 required) | BLOCKED (19 required) | BLOCKED (2 required) | 0 |
-| GAN v3 release 0.7 (MoG)<br>cuda | 3/5<br>FAIL 1 · UNKNOWN 1 | UNKNOWN (19 required) | UNKNOWN (2 required) | 0 |
-| GAN v3 release 0.7 (cloud)<br>cuda | BLOCKED (5 required) | BLOCKED (19 required) | BLOCKED (2 required) | 0 |
-| K3P<br>cuda | 4/5<br>FAIL 1 | UNKNOWN (19 required) | UNKNOWN (2 required) | 0 |
-| K3P without A2<br>cuda | 0/5<br>FAIL 1 · UNKNOWN 4 | UNKNOWN (19 required) | UNKNOWN (2 required) | 0 |
-| K3P without critic anchor<br>cuda | 0/5<br>FAIL 1 · UNKNOWN 4 | UNKNOWN (19 required) | UNKNOWN (2 required) | 0 |
-| K3P without critic penalty<br>cuda | 0/5<br>FAIL 1 · UNKNOWN 4 | UNKNOWN (19 required) | UNKNOWN (2 required) | 0 |
-| K3P without training output noise<br>cuda | 0/5<br>FAIL 1 · UNKNOWN 4 | UNKNOWN (19 required) | UNKNOWN (2 required) | 0 |
-| KA2<br>cuda | 4/5<br>FAIL 1 | UNKNOWN (19 required) | UNKNOWN (2 required) | 0 |
-| R1/R2<br>cuda | 3/5<br>FAIL 1 · UNKNOWN 1 | UNKNOWN (19 required) | UNKNOWN (2 required) | 0 |
+Before shipping defaults, one unchanged family/configuration tuple must satisfy all 26 required 5/19/2 gates with compatible source, runtime and serving evidence, followed by the separate calibration and robustness requirements. Named diagnostic rows do not pool passing cells across families or sources and grant no ordinary tier, default or speed credit.
+
+Atlas's historical study has **19/19 original PASS**. The later C6 broad hold has **2/2 hold FAIL**, with six other domains UNKNOWN per family. See [completed source-bound studies](#completed-source-bound-studies) for the exact protocols and original goal GIFs. These separate results do not fill ordinary qualification.
 
 <details>
 <summary>Selected configurations and provenance</summary>
@@ -180,7 +183,7 @@ python reports/forge/regenerate_technique_inventory.py
 
 For ordinary Forge qualification, use `--source-commit <executed-commit>` to independently regrade hydrated original receipts and update this leaderboard. Reusable candidates use the same complete task ladder. Historical task-only diagnostics remain motivation and reproduction evidence. Source snapshots are provenance, not additional leaderboards.
 
-Publication input digest `b2b0a37c8b3cec276d995d681d4677b169c632616fc6338afc370708a2f5d0df`.
+Publication input digest `567c8342c6a0f767a0a011dfd019d7c1b2abbb2a9160310968b62f2f9b899621`.
 
 The [whole-family repair readout](family-wide-word-repairs/README.md) records the ordinary candidate attempts and bounded global configuration search. Their complete rows remain unranked alternatives below and in the companion JSON; a failed replacement does not make its historical incumbent a qualified standard.
 
