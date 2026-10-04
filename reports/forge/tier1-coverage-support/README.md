@@ -65,3 +65,47 @@ zero added updates/draws. Stdout, checkpoint/state proof and per-observation
 arrays stay in the local Forge attempt archive; publish compact receipts and
 actual-training GIFs. Queue/campaign logs remain available through Forge's
 `logs --follow` command.
+
+Publication readiness for the full Tier 1 round
+---------------------------------------------
+
+The frozen roster has 77 question cells: 63 clean-family measurements, eight
+supported policy measurements and six policy capability blockers. Report
+execution failures separately from numerical FAIL, and retain the six blockers
+without assigning them attempt cost or inventing measurements. Scoped policy
+rows never complete their original clean/MoG parent cells. The clock diagnostic
+does not establish original clock-free eligibility.
+
+Use one current readout with a seven-question matrix, separate clean and policy
+sections, and per-family PASS/FAIL/BLOCKED/INVALID/INCOMPLETE counts. Alongside each
+numerical verdict, show the failed metric and bound, terminal-check range, paid
+seconds, actual device and linked attempt/source receipt. For clock results,
+show each perturbation's full-state equality and declared dependency reasons.
+Compare clean recipes by required-task passes and report elapsed cost separately;
+show clock diagnostics separately. Compare policy recipes only within their
+explicit scoped cohort. Do not rank missing measurements as scientific failure.
+
+Recommendations should follow measured constraints: identify recipes satisfying
+all required gates, describe each failed acquisition or retention objective,
+and separate compatibility work from numerical quality. This round supports
+coverage decisions; it neither adopts defaults nor calibrates later tiers.
+
+Saved media inputs are `observed-samples.pt` for Gaussian/ring,
+`observed-records.pt` for words, numerical observation histories for two-pole,
+unused-token and AE controls, and manifested `comparisons.pt` for clock probes.
+The policy Gaussian/ring/two-pole/clock variants use those same artifact kinds
+with their own law and lifecycle receipts. Preserve these files until GIF
+export and archival checks finish; exporting adds no model updates or draws.
+
+Before publishing, join the chosen completed numerical rows to `media.json` by
+family, task and attempt. Every measured PASS/FAIL needs an actual-training GIF
+and verified media receipt. The driver presently skips attempts lacking
+`evidence.json`; a successful media command alone does not prove this coverage.
+Document no-attempt blockers and unsuccessful infrastructure attempts explicitly.
+Check receipts against the final selected attempt after any permitted repair.
+An exporter failure is a publication problem and does not justify repeating an
+unchanged scientific experiment.
+
+Clock animation positions currently label the four post-warmup probe indices
+as updates 1–4. Treat these as probe positions when describing the GIF; the
+saved proof and numeric receipt remain the authoritative update/state evidence.
