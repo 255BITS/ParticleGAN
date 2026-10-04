@@ -1,0 +1,337 @@
+{
+  "campaign": {
+    "budget_seconds": 55440,
+    "candidate_budget_seconds": 5040,
+    "description": "One fixed recipe per family; complete Tier 1 only. One documented infrastructure-repair retry per task at most; no scientific retry or tuning.",
+    "id": "tier1-completion-v1"
+  },
+  "candidate_roster": [
+    {
+      "allowance_seconds": 2520,
+      "candidate_id": "atlas",
+      "declaration_sha256": "0159e47bc672f26feb5e941332d566cdf1cbc52ada76bc63b5d2fe60a07c6123",
+      "family": "atlas",
+      "measurement_tasks": [],
+      "task_definition_sha256": {
+        "ae_gan_hold_tier1_policy_selected_cloud_v1": "5f2cb10de45f2f8ea723b8259c4083cf82608a4725bc2b013cd0ce5ef3826c3f",
+        "clockfree_audit_tier1_policy_selected_cloud_v1": "ccd5ce087d5764bad8578d75c77674172340f2b51d434daac6de466c56db203e",
+        "five_word_joint_acquisition_tier1_policy_selected_cloud_v1": "ba2e9ea65a9b0b415d68d064571617ad1a7fde9177afc736a558cc2f231076de",
+        "gaussian1d_acquisition_tier1_policy_selected_cloud_v1": "87e487a66611604e46099ef505f88940eb1fb6ed5003a1407aad285515270209",
+        "ring16_acquisition_tier1_policy_selected_cloud_v1": "dfc27cf5605a2f4ce4684c9fa13f885326adfbee8d8e190f1e7407acab07fb4b",
+        "two_pole_tier1_policy_selected_cloud_v1": "7e5dddfc4106720eea92cbe8bf2acd1020a733c757d0e2a6a7ed89eff95bcfed",
+        "unused_token_hold_tier1_policy_selected_cloud_v1": "714af5893aa46cd72e99a24bd792680ed641978a1f3409e5eab6a279194cc851"
+      },
+      "task_ids": [
+        "ae_gan_hold_tier1_policy_selected_cloud_v1",
+        "clockfree_audit_tier1_policy_selected_cloud_v1",
+        "five_word_joint_acquisition_tier1_policy_selected_cloud_v1",
+        "gaussian1d_acquisition_tier1_policy_selected_cloud_v1",
+        "ring16_acquisition_tier1_policy_selected_cloud_v1",
+        "two_pole_tier1_policy_selected_cloud_v1",
+        "unused_token_hold_tier1_policy_selected_cloud_v1"
+      ],
+      "view": "tier1_policy_coverage",
+      "view_fingerprint": "8bbcc385c79532adaf9050dfff9713fb9dc52bf5d43648b5a1c6295ca899c372"
+    },
+    {
+      "allowance_seconds": 2520,
+      "candidate_id": "bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212",
+      "declaration_sha256": "ebcb4dac8bbe4601fdca69b16094a0a9dd23d6739f0cb50a167ccee5fc3a1d92",
+      "family": "bcap",
+      "measurement_tasks": [
+        "clockfree_audit_measurement_v1"
+      ],
+      "task_definition_sha256": {
+        "ae_gan_hold": "d7ce55cf6c7679fdb2dc7a5292bc7dfdb964f602daec09a39610599d20e4e103",
+        "clockfree_audit_measurement_v1": "260b5233c5b1fcb0cb4993f10301773757c4b71a6907d8b8b5a733a0f780e61e",
+        "five_word_joint_acquisition": "99165420d774856850586956237eff2b18b12c497784774aeb877a03d2cdf813",
+        "gaussian1d_acquisition": "2ee559cdf9589c0051d463b20d03b00c28801442b9c903bcebd63bf38200ec0c",
+        "ring16_acquisition": "6858cca00f8efa1313da89a0e0dcb18d726ea593a5f44ebfb2f03a155523ec3c",
+        "two_pole": "2f0207310d6bb7b290bdc520d7992eb4e6da411becae69a76d76b1232897db8b",
+        "unused_token_hold": "925288dba6c301657ae595ab6389d355a4c71662edd6d2a1931ce63516a8a169"
+      },
+      "task_ids": [
+        "ae_gan_hold",
+        "clockfree_audit_measurement_v1",
+        "five_word_joint_acquisition",
+        "gaussian1d_acquisition",
+        "ring16_acquisition",
+        "two_pole",
+        "unused_token_hold"
+      ],
+      "view": "discriminator_stability",
+      "view_fingerprint": "29b429a70ee3a1537b93025aa19dac1637db15fd8004fb2d4527756da1f79541"
+    },
+    {
+      "allowance_seconds": 2520,
+      "candidate_id": "e22",
+      "declaration_sha256": "a3e4de528c2a8f6f86248c7da16312c871772bd12f9a5f93dd10f00cdebdcad7",
+      "family": "e22",
+      "measurement_tasks": [],
+      "task_definition_sha256": {
+        "ae_gan_hold_tier1_policy_selected_cloud_v1": "5f2cb10de45f2f8ea723b8259c4083cf82608a4725bc2b013cd0ce5ef3826c3f",
+        "clockfree_audit_tier1_policy_selected_cloud_v1": "ccd5ce087d5764bad8578d75c77674172340f2b51d434daac6de466c56db203e",
+        "five_word_joint_acquisition_tier1_policy_selected_cloud_v1": "ba2e9ea65a9b0b415d68d064571617ad1a7fde9177afc736a558cc2f231076de",
+        "gaussian1d_acquisition_tier1_policy_selected_cloud_v1": "87e487a66611604e46099ef505f88940eb1fb6ed5003a1407aad285515270209",
+        "ring16_acquisition_tier1_policy_selected_cloud_v1": "dfc27cf5605a2f4ce4684c9fa13f885326adfbee8d8e190f1e7407acab07fb4b",
+        "two_pole_tier1_policy_selected_cloud_v1": "7e5dddfc4106720eea92cbe8bf2acd1020a733c757d0e2a6a7ed89eff95bcfed",
+        "unused_token_hold_tier1_policy_selected_cloud_v1": "714af5893aa46cd72e99a24bd792680ed641978a1f3409e5eab6a279194cc851"
+      },
+      "task_ids": [
+        "ae_gan_hold_tier1_policy_selected_cloud_v1",
+        "clockfree_audit_tier1_policy_selected_cloud_v1",
+        "five_word_joint_acquisition_tier1_policy_selected_cloud_v1",
+        "gaussian1d_acquisition_tier1_policy_selected_cloud_v1",
+        "ring16_acquisition_tier1_policy_selected_cloud_v1",
+        "two_pole_tier1_policy_selected_cloud_v1",
+        "unused_token_hold_tier1_policy_selected_cloud_v1"
+      ],
+      "view": "tier1_policy_coverage",
+      "view_fingerprint": "8bbcc385c79532adaf9050dfff9713fb9dc52bf5d43648b5a1c6295ca899c372"
+    },
+    {
+      "allowance_seconds": 2520,
+      "candidate_id": "k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c",
+      "declaration_sha256": "a4c12148c35cdd697bc1f438a8338c7e52e495ca08f7150453d617f7406a59af",
+      "family": "k3p",
+      "measurement_tasks": [
+        "clockfree_audit_measurement_v1"
+      ],
+      "task_definition_sha256": {
+        "ae_gan_hold": "d7ce55cf6c7679fdb2dc7a5292bc7dfdb964f602daec09a39610599d20e4e103",
+        "clockfree_audit_measurement_v1": "260b5233c5b1fcb0cb4993f10301773757c4b71a6907d8b8b5a733a0f780e61e",
+        "five_word_joint_acquisition": "99165420d774856850586956237eff2b18b12c497784774aeb877a03d2cdf813",
+        "gaussian1d_acquisition": "2ee559cdf9589c0051d463b20d03b00c28801442b9c903bcebd63bf38200ec0c",
+        "ring16_acquisition": "6858cca00f8efa1313da89a0e0dcb18d726ea593a5f44ebfb2f03a155523ec3c",
+        "two_pole": "2f0207310d6bb7b290bdc520d7992eb4e6da411becae69a76d76b1232897db8b",
+        "unused_token_hold": "925288dba6c301657ae595ab6389d355a4c71662edd6d2a1931ce63516a8a169"
+      },
+      "task_ids": [
+        "ae_gan_hold",
+        "clockfree_audit_measurement_v1",
+        "five_word_joint_acquisition",
+        "gaussian1d_acquisition",
+        "ring16_acquisition",
+        "two_pole",
+        "unused_token_hold"
+      ],
+      "view": "discriminator_stability",
+      "view_fingerprint": "29b429a70ee3a1537b93025aa19dac1637db15fd8004fb2d4527756da1f79541"
+    },
+    {
+      "allowance_seconds": 2520,
+      "candidate_id": "k3p-a2-off-native-diagnostic",
+      "declaration_sha256": "2bb99ea77fc5cf54531a77b77b0511257b6dea9913a1ac041a403bee6fef4466",
+      "family": "k3p-no-a2",
+      "measurement_tasks": [
+        "clockfree_audit_measurement_v1"
+      ],
+      "task_definition_sha256": {
+        "ae_gan_hold": "d7ce55cf6c7679fdb2dc7a5292bc7dfdb964f602daec09a39610599d20e4e103",
+        "clockfree_audit_measurement_v1": "260b5233c5b1fcb0cb4993f10301773757c4b71a6907d8b8b5a733a0f780e61e",
+        "five_word_joint_acquisition": "99165420d774856850586956237eff2b18b12c497784774aeb877a03d2cdf813",
+        "gaussian1d_acquisition": "2ee559cdf9589c0051d463b20d03b00c28801442b9c903bcebd63bf38200ec0c",
+        "ring16_acquisition": "6858cca00f8efa1313da89a0e0dcb18d726ea593a5f44ebfb2f03a155523ec3c",
+        "two_pole": "2f0207310d6bb7b290bdc520d7992eb4e6da411becae69a76d76b1232897db8b",
+        "unused_token_hold": "925288dba6c301657ae595ab6389d355a4c71662edd6d2a1931ce63516a8a169"
+      },
+      "task_ids": [
+        "ae_gan_hold",
+        "clockfree_audit_measurement_v1",
+        "five_word_joint_acquisition",
+        "gaussian1d_acquisition",
+        "ring16_acquisition",
+        "two_pole",
+        "unused_token_hold"
+      ],
+      "view": "discriminator_stability",
+      "view_fingerprint": "29b429a70ee3a1537b93025aa19dac1637db15fd8004fb2d4527756da1f79541"
+    },
+    {
+      "allowance_seconds": 2520,
+      "candidate_id": "forge-onboarding-anchor-ablation",
+      "declaration_sha256": "315e8fb2ead146fefbae2e96e2f0381ffcfb05c2a48127c3ed2fab67e930e5b1",
+      "family": "k3p-no-anchor",
+      "measurement_tasks": [
+        "clockfree_audit_measurement_v1"
+      ],
+      "task_definition_sha256": {
+        "ae_gan_hold": "d7ce55cf6c7679fdb2dc7a5292bc7dfdb964f602daec09a39610599d20e4e103",
+        "clockfree_audit_measurement_v1": "260b5233c5b1fcb0cb4993f10301773757c4b71a6907d8b8b5a733a0f780e61e",
+        "five_word_joint_acquisition": "99165420d774856850586956237eff2b18b12c497784774aeb877a03d2cdf813",
+        "gaussian1d_acquisition": "2ee559cdf9589c0051d463b20d03b00c28801442b9c903bcebd63bf38200ec0c",
+        "ring16_acquisition": "6858cca00f8efa1313da89a0e0dcb18d726ea593a5f44ebfb2f03a155523ec3c",
+        "two_pole": "2f0207310d6bb7b290bdc520d7992eb4e6da411becae69a76d76b1232897db8b",
+        "unused_token_hold": "925288dba6c301657ae595ab6389d355a4c71662edd6d2a1931ce63516a8a169"
+      },
+      "task_ids": [
+        "ae_gan_hold",
+        "clockfree_audit_measurement_v1",
+        "five_word_joint_acquisition",
+        "gaussian1d_acquisition",
+        "ring16_acquisition",
+        "two_pole",
+        "unused_token_hold"
+      ],
+      "view": "discriminator_stability",
+      "view_fingerprint": "29b429a70ee3a1537b93025aa19dac1637db15fd8004fb2d4527756da1f79541"
+    },
+    {
+      "allowance_seconds": 2520,
+      "candidate_id": "forge-no-critic-penalty",
+      "declaration_sha256": "70b3bdcace23fbb52cff5a6db8eb1eb48ffe9d1f4bb700ee05ba25ea4516c03d",
+      "family": "k3p-no-penalty",
+      "measurement_tasks": [
+        "clockfree_audit_measurement_v1"
+      ],
+      "task_definition_sha256": {
+        "ae_gan_hold": "d7ce55cf6c7679fdb2dc7a5292bc7dfdb964f602daec09a39610599d20e4e103",
+        "clockfree_audit_measurement_v1": "260b5233c5b1fcb0cb4993f10301773757c4b71a6907d8b8b5a733a0f780e61e",
+        "five_word_joint_acquisition": "99165420d774856850586956237eff2b18b12c497784774aeb877a03d2cdf813",
+        "gaussian1d_acquisition": "2ee559cdf9589c0051d463b20d03b00c28801442b9c903bcebd63bf38200ec0c",
+        "ring16_acquisition": "6858cca00f8efa1313da89a0e0dcb18d726ea593a5f44ebfb2f03a155523ec3c",
+        "two_pole": "2f0207310d6bb7b290bdc520d7992eb4e6da411becae69a76d76b1232897db8b",
+        "unused_token_hold": "925288dba6c301657ae595ab6389d355a4c71662edd6d2a1931ce63516a8a169"
+      },
+      "task_ids": [
+        "ae_gan_hold",
+        "clockfree_audit_measurement_v1",
+        "five_word_joint_acquisition",
+        "gaussian1d_acquisition",
+        "ring16_acquisition",
+        "two_pole",
+        "unused_token_hold"
+      ],
+      "view": "discriminator_stability",
+      "view_fingerprint": "29b429a70ee3a1537b93025aa19dac1637db15fd8004fb2d4527756da1f79541"
+    },
+    {
+      "allowance_seconds": 2520,
+      "candidate_id": "k3p-no-output-noise-diagnostic",
+      "declaration_sha256": "1da93010c83d4cc643fa03f29099fecc2a2865a642c07e7e42425aa1f0752f99",
+      "family": "k3p-no-training-noise",
+      "measurement_tasks": [
+        "clockfree_audit_measurement_v1"
+      ],
+      "task_definition_sha256": {
+        "ae_gan_hold": "d7ce55cf6c7679fdb2dc7a5292bc7dfdb964f602daec09a39610599d20e4e103",
+        "clockfree_audit_measurement_v1": "260b5233c5b1fcb0cb4993f10301773757c4b71a6907d8b8b5a733a0f780e61e",
+        "five_word_joint_acquisition": "99165420d774856850586956237eff2b18b12c497784774aeb877a03d2cdf813",
+        "gaussian1d_acquisition": "2ee559cdf9589c0051d463b20d03b00c28801442b9c903bcebd63bf38200ec0c",
+        "ring16_acquisition": "6858cca00f8efa1313da89a0e0dcb18d726ea593a5f44ebfb2f03a155523ec3c",
+        "two_pole": "2f0207310d6bb7b290bdc520d7992eb4e6da411becae69a76d76b1232897db8b",
+        "unused_token_hold": "925288dba6c301657ae595ab6389d355a4c71662edd6d2a1931ce63516a8a169"
+      },
+      "task_ids": [
+        "ae_gan_hold",
+        "clockfree_audit_measurement_v1",
+        "five_word_joint_acquisition",
+        "gaussian1d_acquisition",
+        "ring16_acquisition",
+        "two_pole",
+        "unused_token_hold"
+      ],
+      "view": "discriminator_stability",
+      "view_fingerprint": "29b429a70ee3a1537b93025aa19dac1637db15fd8004fb2d4527756da1f79541"
+    },
+    {
+      "allowance_seconds": 2520,
+      "candidate_id": "ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f",
+      "declaration_sha256": "66c01b5f0204912e40982c86f5eb10d6a964f3a408a8a925d1c244df7bee3092",
+      "family": "ka2",
+      "measurement_tasks": [
+        "clockfree_audit_measurement_v1"
+      ],
+      "task_definition_sha256": {
+        "ae_gan_hold": "d7ce55cf6c7679fdb2dc7a5292bc7dfdb964f602daec09a39610599d20e4e103",
+        "clockfree_audit_measurement_v1": "260b5233c5b1fcb0cb4993f10301773757c4b71a6907d8b8b5a733a0f780e61e",
+        "five_word_joint_acquisition": "99165420d774856850586956237eff2b18b12c497784774aeb877a03d2cdf813",
+        "gaussian1d_acquisition": "2ee559cdf9589c0051d463b20d03b00c28801442b9c903bcebd63bf38200ec0c",
+        "ring16_acquisition": "6858cca00f8efa1313da89a0e0dcb18d726ea593a5f44ebfb2f03a155523ec3c",
+        "two_pole": "2f0207310d6bb7b290bdc520d7992eb4e6da411becae69a76d76b1232897db8b",
+        "unused_token_hold": "925288dba6c301657ae595ab6389d355a4c71662edd6d2a1931ce63516a8a169"
+      },
+      "task_ids": [
+        "ae_gan_hold",
+        "clockfree_audit_measurement_v1",
+        "five_word_joint_acquisition",
+        "gaussian1d_acquisition",
+        "ring16_acquisition",
+        "two_pole",
+        "unused_token_hold"
+      ],
+      "view": "discriminator_stability",
+      "view_fingerprint": "29b429a70ee3a1537b93025aa19dac1637db15fd8004fb2d4527756da1f79541"
+    },
+    {
+      "allowance_seconds": 2520,
+      "candidate_id": "r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f",
+      "declaration_sha256": "1e05d01d2a5efaeca0dc56ce47b454adedba78a64405f97d55b6d7ce9accb069",
+      "family": "r1r2",
+      "measurement_tasks": [
+        "clockfree_audit_measurement_v1"
+      ],
+      "task_definition_sha256": {
+        "ae_gan_hold": "d7ce55cf6c7679fdb2dc7a5292bc7dfdb964f602daec09a39610599d20e4e103",
+        "clockfree_audit_measurement_v1": "260b5233c5b1fcb0cb4993f10301773757c4b71a6907d8b8b5a733a0f780e61e",
+        "five_word_joint_acquisition": "99165420d774856850586956237eff2b18b12c497784774aeb877a03d2cdf813",
+        "gaussian1d_acquisition": "2ee559cdf9589c0051d463b20d03b00c28801442b9c903bcebd63bf38200ec0c",
+        "ring16_acquisition": "6858cca00f8efa1313da89a0e0dcb18d726ea593a5f44ebfb2f03a155523ec3c",
+        "two_pole": "2f0207310d6bb7b290bdc520d7992eb4e6da411becae69a76d76b1232897db8b",
+        "unused_token_hold": "925288dba6c301657ae595ab6389d355a4c71662edd6d2a1931ce63516a8a169"
+      },
+      "task_ids": [
+        "ae_gan_hold",
+        "clockfree_audit_measurement_v1",
+        "five_word_joint_acquisition",
+        "gaussian1d_acquisition",
+        "ring16_acquisition",
+        "two_pole",
+        "unused_token_hold"
+      ],
+      "view": "discriminator_stability",
+      "view_fingerprint": "29b429a70ee3a1537b93025aa19dac1637db15fd8004fb2d4527756da1f79541"
+    },
+    {
+      "allowance_seconds": 2520,
+      "candidate_id": "release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c",
+      "declaration_sha256": "031a4068b02ae94bd681ec5a4f70609fb6a007e40ce6f2505a1a34541f6aaa7b",
+      "family": "release07-gan-v3",
+      "measurement_tasks": [
+        "clockfree_audit_measurement_v1"
+      ],
+      "task_definition_sha256": {
+        "ae_gan_hold": "d7ce55cf6c7679fdb2dc7a5292bc7dfdb964f602daec09a39610599d20e4e103",
+        "clockfree_audit_measurement_v1": "260b5233c5b1fcb0cb4993f10301773757c4b71a6907d8b8b5a733a0f780e61e",
+        "five_word_joint_acquisition": "99165420d774856850586956237eff2b18b12c497784774aeb877a03d2cdf813",
+        "gaussian1d_acquisition": "2ee559cdf9589c0051d463b20d03b00c28801442b9c903bcebd63bf38200ec0c",
+        "ring16_acquisition": "6858cca00f8efa1313da89a0e0dcb18d726ea593a5f44ebfb2f03a155523ec3c",
+        "two_pole": "2f0207310d6bb7b290bdc520d7992eb4e6da411becae69a76d76b1232897db8b",
+        "unused_token_hold": "925288dba6c301657ae595ab6389d355a4c71662edd6d2a1931ce63516a8a169"
+      },
+      "task_ids": [
+        "ae_gan_hold",
+        "clockfree_audit_measurement_v1",
+        "five_word_joint_acquisition",
+        "gaussian1d_acquisition",
+        "ring16_acquisition",
+        "two_pole",
+        "unused_token_hold"
+      ],
+      "view": "discriminator_stability",
+      "view_fingerprint": "29b429a70ee3a1537b93025aa19dac1637db15fd8004fb2d4527756da1f79541"
+    }
+  ],
+  "declared_first_attempt_ceiling_seconds": 27720,
+  "execution_backend": "cuda",
+  "gpus": [
+    "0",
+    "1"
+  ],
+  "id": "tier1-completion-v1",
+  "max_infrastructure_retries_per_task": 1,
+  "schema_version": 1,
+  "scope": "Current Tier 1 coverage; scoped policy and clock diagnostics retain separate identities. No default adoption or later-tier execution.",
+  "through_tier": 1,
+  "workers_per_gpu": 1
+}

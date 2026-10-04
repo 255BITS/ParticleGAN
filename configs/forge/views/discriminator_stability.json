@@ -1,170 +1,176 @@
 {
   "schema_version": 1,
   "id": "discriminator_stability",
-  "revision": 4,
+  "revision": 5,
   "goal": "discriminator_stability",
   "assignments": [
     {
-      "task": "gaussian1d_acquisition",
+      "importance": "required",
+      "order": 0,
       "qualification_tier": 1,
-      "importance": "required",
-      "order": 0
+      "task": "gaussian1d_acquisition"
     },
     {
-      "task": "two_pole",
+      "importance": "required",
+      "order": 1,
       "qualification_tier": 1,
-      "importance": "required",
-      "order": 1
+      "task": "two_pole"
     },
     {
-      "task": "unused_token_hold",
+      "importance": "required",
+      "order": 2,
       "qualification_tier": 1,
-      "importance": "required",
-      "order": 2
+      "task": "unused_token_hold"
     },
     {
-      "task": "ae_gan_hold",
+      "importance": "required",
+      "order": 3,
       "qualification_tier": 1,
-      "importance": "required",
-      "order": 3
+      "task": "ae_gan_hold"
     },
     {
-      "task": "ring16_acquisition",
+      "importance": "required",
+      "order": 4,
       "qualification_tier": 1,
-      "importance": "required",
-      "order": 4
+      "task": "ring16_acquisition"
     },
     {
-      "task": "five_word_joint_acquisition",
+      "importance": "required",
+      "order": 5,
       "qualification_tier": 1,
-      "importance": "required",
-      "order": 5
+      "task": "five_word_joint_acquisition"
     },
     {
-      "task": "trajectory",
+      "importance": "required",
+      "order": 0,
       "qualification_tier": 2,
-      "importance": "required",
-      "order": 0
+      "task": "trajectory"
     },
     {
-      "task": "residual_student",
+      "importance": "required",
+      "order": 1,
       "qualification_tier": 2,
-      "importance": "required",
-      "order": 1
+      "task": "residual_student"
     },
     {
-      "task": "unipolar",
+      "importance": "required",
+      "order": 2,
       "qualification_tier": 2,
-      "importance": "required",
-      "order": 2
+      "task": "unipolar"
     },
     {
-      "task": "cover_leftover",
+      "importance": "required",
+      "order": 3,
       "qualification_tier": 2,
-      "importance": "required",
-      "order": 3
+      "task": "cover_leftover"
     },
     {
-      "task": "mid_scale_identity",
+      "importance": "required",
+      "order": 4,
       "qualification_tier": 2,
-      "importance": "required",
-      "order": 4
+      "task": "mid_scale_identity"
     },
     {
-      "task": "mode_hold",
+      "importance": "required",
+      "order": 5,
       "qualification_tier": 2,
-      "importance": "required",
-      "order": 5
+      "task": "mode_hold"
     },
     {
-      "task": "vector_two_broad",
+      "importance": "required",
+      "order": 6,
       "qualification_tier": 2,
-      "importance": "required",
-      "order": 6
+      "task": "vector_two_broad"
     },
     {
-      "task": "vector_unequal_mass",
+      "importance": "required",
+      "order": 7,
       "qualification_tier": 2,
-      "importance": "required",
-      "order": 7
+      "task": "vector_unequal_mass"
     },
     {
-      "task": "vector_unequal_width",
+      "importance": "required",
+      "order": 8,
       "qualification_tier": 2,
-      "importance": "required",
-      "order": 8
+      "task": "vector_unequal_width"
     },
     {
-      "task": "vector_anisotropic",
+      "importance": "required",
+      "order": 9,
       "qualification_tier": 2,
-      "importance": "required",
-      "order": 9
+      "task": "vector_anisotropic"
     },
     {
-      "task": "vector_overlap",
+      "importance": "required",
+      "order": 10,
       "qualification_tier": 2,
-      "importance": "required",
-      "order": 10
+      "task": "vector_overlap"
     },
     {
-      "task": "vector_spiral",
+      "importance": "required",
+      "order": 11,
       "qualification_tier": 2,
-      "importance": "required",
-      "order": 11
+      "task": "vector_spiral"
     },
     {
-      "task": "img_stripes2",
+      "importance": "required",
+      "order": 12,
       "qualification_tier": 2,
-      "importance": "required",
-      "order": 12
+      "task": "img_stripes2"
     },
     {
-      "task": "img_bars4",
+      "importance": "required",
+      "order": 13,
       "qualification_tier": 2,
-      "importance": "required",
-      "order": 13
+      "task": "img_bars4"
     },
     {
-      "task": "img_blobs4",
+      "importance": "required",
+      "order": 14,
       "qualification_tier": 2,
-      "importance": "required",
-      "order": 14
+      "task": "img_blobs4"
     },
     {
-      "task": "img_intensity2",
+      "importance": "required",
+      "order": 15,
       "qualification_tier": 2,
-      "importance": "required",
-      "order": 15
+      "task": "img_intensity2"
     },
     {
-      "task": "grid100",
+      "importance": "required",
+      "order": 16,
       "qualification_tier": 2,
-      "importance": "required",
-      "order": 16
+      "task": "grid100"
     },
     {
-      "task": "rotated100",
+      "importance": "required",
+      "order": 17,
       "qualification_tier": 2,
-      "importance": "required",
-      "order": 17
+      "task": "rotated100"
     },
     {
-      "task": "staggered100",
+      "importance": "required",
+      "order": 18,
       "qualification_tier": 2,
-      "importance": "required",
-      "order": 18
+      "task": "staggered100"
     },
     {
-      "task": "ring_hold",
+      "importance": "required",
+      "order": 0,
       "qualification_tier": 3,
-      "importance": "required",
-      "order": 0
+      "task": "ring_hold"
     },
     {
-      "task": "ring_extension",
-      "qualification_tier": 3,
       "importance": "required",
-      "order": 1
+      "order": 1,
+      "qualification_tier": 3,
+      "task": "ring_extension"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 100,
+      "qualification_tier": 1,
+      "task": "clockfree_audit_measurement_v1"
     }
   ],
   "eligibility": {},
@@ -177,5 +183,5 @@
     "compare_compatible_cohorts": true,
     "cost_separate": true
   },
-  "policy_change_reason": "Add scalar Gaussian acquisition as the first required Tier 1 check. Revision 4 has 6/19/2 required tasks, reserving 2,220 seconds for Tier 1. All saved view revisions and qualification receipts retain their original scope."
+  "policy_change_reason": "Revision 5 retains the six required Tier 1 tests and adds a separately scoped clock-audit measurement diagnostic. This full-tier measurement round does not calibrate placement or promote a default; original clock-free eligibility and archived view grades remain unchanged."
 }

@@ -46,6 +46,7 @@ def prepare(root=ROOT):
         view["revision"] += 1
         view["assignments"].append({"task": audit, "qualification_tier": 1,
                                     "importance": "diagnostic", "order": 100})
+        view["policy_change_reason"] = "Revision 5 retains the six required Tier 1 tests and adds a separately scoped clock-audit measurement diagnostic. This full-tier measurement round does not calibrate placement or promote a default; original clock-free eligibility and archived view grades remain unchanged."
         atomic_json(view_path, view)
     families = load_families(root)
     selections = read_json(root / "configs/forge/selections/family-current-v1.json")
