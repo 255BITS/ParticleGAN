@@ -29,14 +29,15 @@ Each row keeps its own configuration, execution source and 26 required slots. Th
 | [`atlas_routed` · C6 · `fb7acc77`](../atlas-named-gpu-diagnostics-native-v4b-20261004/README.md) | Particles (shared / slot parameter bank) | **1/26 PASS** · NOT_RUN 25<br>goal GIFs: [unused_token_hold](../atlas-named-gpu-diagnostics-native-v4b-20261004/gifs/unused_token_hold_routed_policy_selected_cloud_v1.gif) |
 | [`atlas_multibank` · C6 · `fb7acc77`](../atlas-named-gpu-diagnostics-native-v4b-20261004/README.md) | Particles (two routed clouds) | **1/26 PASS** · NOT_RUN 25<br>goal GIFs: [cover_leftover](../atlas-named-gpu-diagnostics-native-v4b-20261004/gifs/cover_leftover_multibank_policy_v1.gif) |
 | [`atlas_word_joint_min11` · C6 · `fb7acc77`](../atlas-word-retained-context-20261004/README.md) | Particles (N11 joint cloud; free encoder) | **INVALID 1** · NOT_RUN 25 · numerical gate UNAVAILABLE<br>retained INVALID illustration: [five_word_joint_acquisition](../atlas-word-retained-context-20261004/word-retained-goal.gif) |
+| [half_base LR .00265625 / prior1.5 / D1 · source `f9f7ed9d`](../word-half-base-20261004/README.md) | Particles (N11 joint cloud; free encoder) | **0/26 PASS** · FAIL 1 · NOT_RUN 25 · COMPLETE<br>Final quality 0.546875 · modes 2/5 · mass TV 0.622266 · paired exact 0<br>[accepted 20,001-update goal GIF](../word-half-base-20261004/media/goal.gif) |
 
-C6 is the fixed LR .0053125 / prior-rate 1.5 configuration with declared host-specific Recipe fields. Representation labels come from the pinned applied priors, Recipes and routed table owners; a parameter bank is not a sampled MoG. [Full source and representation bindings](../technique-inventory.json). Original N5 word execution remains BLOCKED. The N11 illustration has no accepted numerical grade.
+C6 is the fixed LR .0053125 / prior-rate 1.5 configuration with declared host-specific Recipe fields. Representation labels come from the pinned applied priors, Recipes and routed table owners; a parameter bank is not a sampled MoG. [Full source and representation bindings](../technique-inventory.json). Original N5 word execution remains BLOCKED. The original C6 N11 illustration has no accepted numerical grade. The separate half_base run completed all 20,001 updates and 24 reads, with zero passing reads and an accepted numerical FAIL.
 
 ## Qualification and accounting
 
 Each model/configuration keeps its own source, law and full 26-slot denominator. MoG + particles (per task) is a mixture of separate suite hosts, not a hybrid-model claim. Named diagnostic passes do not fill ordinary cells or combine into a family score. INVALID supplies no accepted numerical grade; original N5 word execution remains BLOCKED. No family default or comparable speed winner is established.
 
-The named campaign's predecessor-inclusive charge remains **910.2391431590077 / 10500 seconds**, reserve zero: GPU0 **234.82608077581972 / 7500**, GPU1 **675.4130623831879 / 3000**. The half-base contrast has no completed measurement in these tables.
+The named campaign's predecessor-inclusive charge is **1466.669318475062 / 10500 seconds**, reserve zero: GPU0 **234.82608077581972 / 7500**, GPU1 **1231.8432376992423 / 3000**. The separate half_base attempt charged **556.4301753160544 / 900 seconds**, with zero reserve and overrun. Prior charges are included once; the original C6 word INVALID is unchanged.
 
 The linked original report sections and their index.json below retain their separate snapshots.
 
