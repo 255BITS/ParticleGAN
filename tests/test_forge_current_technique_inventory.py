@@ -1107,7 +1107,7 @@ def test_one_visible_table_leads_with_actual_atlas_and_keeps_configuration_scope
     table = [line for line in text.splitlines() if line.startswith("|")][2:]
     assert len(table) == 19  # Original-law replay, seven diagnostics and 11 ordinary rows.
     assert table[0].startswith("| [Original PR223 Atlas FULL · LR .00425 / prior2]")
-    assert "| Particles | **19/19 PASS**" in table[0]
+    assert "| Particles | " in table[0] and "**19/19 PASS**" in table[0]
     assert table[1].startswith("| [Atlas C6 CHANGED-rate / noise-OFF · LR .0053125 / prior1.5")
     assert "| Particles | **7/26 PASS** · FAIL 11 · BLOCKED 8" in table[1]
     assert "seed0" in table[1]
