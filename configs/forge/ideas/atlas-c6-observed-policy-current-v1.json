@@ -2,6 +2,7 @@
   "schema_version": 2,
   "id": "atlas-c6-observed-policy-current-v1",
   "parent": "atlas",
+  "trainer_family": "atlas",
   "goal": "discriminator_stability",
   "hypothesis": "The best observed original C6 Atlas LR/prior-rate pair can execute faithfully through explicitly declared policy-selected cloud variants of the current required questions; all five unchanged Tier 1 numerical gates must pass before any quality task is eligible.",
   "changed_factors": [
