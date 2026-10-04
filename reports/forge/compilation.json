@@ -2,7 +2,7 @@
   "automation_digest": "625006792c1515ea89a3107942e770d45304311ecbce131c904321b70152bb85",
   "conflicts": [],
   "import_gap_count": 7,
-  "input_digest": "8007169f8b9ce947f3d03f1b82cec14009286b5b913be8ab66d1948d5e030e3e",
+  "input_digest": "0ec25a3446b85af9539a397a1f5459cbcbbcdb74090569b9e272dfdd6224c6b2",
   "input_hashes": {
     "configs/forge/calibration-lane-template.json": "65f10d3061aa487bb32da43bb97cb91934a25d763f6bb634f1d3316fdcc6d9e5",
     "configs/forge/calibration/criteria-v1.json": "6eac2531eed68e392c11a57328999ac5dce509f8fe51d23e7b9031b7a4e3f9d1",
@@ -145,7 +145,7 @@
     "configs/forge/task-variants/conditional_policy_selected_cloud_v1/residual_student_conditional_policy_selected_cloud_v1.json": "bf9a509fec0e7f3aea331dd15f8bb044469c759f98342470b2414147c3870735",
     "configs/forge/task-variants/conditional_policy_selected_cloud_v1/trajectory_conditional_policy_selected_cloud_v1.json": "9f2f64b38974a257496ca6182cf929563c43d2dd7c36f03573d38dc614e16807",
     "configs/forge/task-variants/conditional_policy_selected_cloud_v1/unipolar_conditional_policy_selected_cloud_v1.json": "52650a9e9315bc4f78fc7b001fff0e05f2ea884de0ce33ef071744564eb1e4ac",
-    "configs/forge/task-variants/multibank_policy_v1/cover_leftover_multibank_policy_v1.json": "bf8b05898b98d170d37e7e1d6354637750781e14eb1ab148604b47c077f4ebe7",
+    "configs/forge/task-variants/multibank_policy_v1/cover_leftover_multibank_policy_v1.json": "8da5a372d8cb0cb7a16adaa4f1c9df8c59e34610ab97a7b7a5497949324cd3ae",
     "configs/forge/task-variants/policy_selected_cloud_v1/ae_gan_hold_policy_selected_cloud_v1.json": "2b7415e7311a9c2aca2a4a65d3f46f27ca660071c1fd947c85d32c7cbc0cf01b",
     "configs/forge/task-variants/policy_selected_cloud_v1/cover_leftover_policy_selected_cloud_v1.json": "29fd1b7438d4e606487421619ff0caad30fa76bdfe7e709f0ed7208cbefc2f92",
     "configs/forge/task-variants/policy_selected_cloud_v1/five_word_joint_acquisition_policy_selected_cloud_v1.json": "2ac4099f6abd9e17285841b31b598d284907ab1cc7d4a815dafe72af37148868",
@@ -172,8 +172,8 @@
     "configs/forge/task-variants/policy_selected_cloud_v1/vector_two_broad_policy_selected_cloud_v1.json": "c9a254cc13aaec4f82640afab6f7c322c9d3a49e893c5242b8dd735f2d7efa32",
     "configs/forge/task-variants/policy_selected_cloud_v1/vector_unequal_mass_policy_selected_cloud_v1.json": "a5a9e43a3b20eb2ec168c7f02bf40d01c0cb369c0c4dee2170d753a41fef407c",
     "configs/forge/task-variants/policy_selected_cloud_v1/vector_unequal_width_policy_selected_cloud_v1.json": "074ab74b7c5c04cea059a203b955d9f3462b0b800a74ae004adc874829ea0bfa",
-    "configs/forge/task-variants/routed_policy_selected_cloud_v1/unused_token_hold_routed_policy_selected_cloud_v1.json": "24640b52b3d45a37f27f01a3ba2719e3c7e3ccc8f67abfa9131181e6c89e4a04",
-    "configs/forge/task-variants/word_joint_policy_min11_v1/five_word_joint_acquisition_word_joint_policy_min11_v1.json": "9b184bdde78cffb52a5c8bea8b48d6b38885328bd0163c719a9d48bd2ec907b4",
+    "configs/forge/task-variants/routed_policy_selected_cloud_v1/unused_token_hold_routed_policy_selected_cloud_v1.json": "9cc7c0b53f929134bd8dcd27e80b3a55ca5e7572bdc607e0ec2542c96c76ed74",
+    "configs/forge/task-variants/word_joint_policy_min11_v1/five_word_joint_acquisition_word_joint_policy_min11_v1.json": "cbb8fad29b406e9a997101be7ba5ca1d1669dc5be1d7f6f982409d2c092f2ebb",
     "configs/forge/tasks/ae_gan_hold.json": "53a400c3f2b27ef347076f3cc603345e1442d2d8f97f8052f0b9496ba35bae79",
     "configs/forge/tasks/clockfree_audit.json": "d7748d04db85633e5c678622486b94b2a44f0e462ffb9c4b0179216db7840258",
     "configs/forge/tasks/cover_leftover.json": "f40f960d80090f1b46cc326424cab7d781c36cc9ea3222aea7375c2834028e4e",
@@ -911,7 +911,7 @@
   },
   "operational_lifecycle_digest": "b7b68ed15100a08f46090394c6597c2707df5002faed03502f29115ba3f14fca",
   "output_hashes": {
-    "reports/forge/EXPERIMENT_MEMORY.md": "73107dabac7ba58b680e140c9c009d3fd389cd2f8980af1fbd31f9a70820c406",
+    "reports/forge/EXPERIMENT_MEMORY.md": "9cdfa6f6bf99d1cdf9693d2050ec733744de2346a12287ee9941a2c057a9ce8c",
     "reports/forge/publication-records.json": "5177f6ec85e2b8bb03cee7a3b2cfa0eba3600d84a5988f79f53d63519ecd984e"
   },
   "pending_readout": [
