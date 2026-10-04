@@ -304,18 +304,24 @@ def test_missing_foreign_or_partial_preflight_never_reaches_registration(helper,
         helper.run(tmp_path/'never-created',root=ROOT)
 
 
-def test_matching_copied_preflight_is_accepted_without_any_model_or_queue_call(helper,planned,tmp_path):
-    packet=deepcopy(planned)
+def test_matching_copied_preflight_is_accepted_without_any_model_or_queue_call(helper,tmp_path,monkeypatch):
+    # This generic receipt control isolates the native import prerequisite.
+    # The separate native suite resolves real synthetic namespaces and checks
+    # the complete matching/stale proof with no original host execution.
+    native_imports={'status':'PASS_SYNTHETIC_NATIVE_IMPORT_PREREQUISITE'}
+    monkeypatch.setattr(helper,'native_scorer_import_metadata',lambda *a,**k:([],native_imports))
+    packet={'protocol':{'synthetic_only':True}}
     packet.update(execution_source={'digest':'synthetic','snapshot_path':'synthetic_only',
                   'origin_commit':'synthetic','files':{helper.SELF:helper.sha(HERE/'run_retest.py')}},
-                  copied_preflight_receipt_path=str(tmp_path/'copied.json'))
+                  copied_preflight_receipt_path=str(tmp_path/'copied.json'),
+                  snapshot_locations={'native_root':'synthetic_only'})
     record={'schema':'pg_pr223_copied_source_preflight_v1','status':'PASS_COPIED_METADATA_ONLY',
             'prepared_packet_sha256':helper.stable_hash(packet),'source_digest':'synthetic',
             'protocol_sha256':helper.stable_hash(packet['protocol']),
             'snapshot_path':'synthetic_only','origin_commit':'synthetic',
             'helper_sha256':helper.sha(HERE/'run_retest.py'),'cases':19,'updates':48800,
             'compiled_original_wrappers':19,'models':0,'sampler_calls':0,'scorer_calls':0,'queue_calls':0,
-            'numeric_credit':False}
+            'numeric_credit':False,'native_scorer_imports':native_imports}
     helper.atomic_json(packet['copied_preflight_receipt_path'],record)
     assert helper.require_copied_preflight(packet)==record
 
