@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import argparse
 from collections import Counter
+import hashlib
 import json
 from pathlib import Path
 import subprocess
@@ -66,7 +67,8 @@ def prepare(root=ROOT):
         view = load_view(root, row["view"])
         names = {a["task"] for a in view["assignments"] if a["qualification_tier"] == 1}
         budget = sum(tasks[name]["resources"]["timeout_seconds"] for name in names)
-        row.update(task_ids=sorted(names), view_fingerprint=stable_hash(view), allowance_seconds=budget)
+        row.update(task_ids=sorted(names), view_fingerprint=stable_hash(view), allowance_seconds=budget,
+                   task_definition_sha256={name: stable_hash(tasks[name]) for name in sorted(names)})
         allowance += budget
         maximum = max(maximum, budget)
     campaign = {"id": ID, "budget_seconds": 2 * allowance,
@@ -89,18 +91,24 @@ def prepare(root=ROOT):
 
 def requests(root, queue_root, *, freeze=False):
     definition = read_json(root / ROUND)
+    tasks = load_tasks(root)
     resolved = []
     for row in definition["candidate_roster"]:
         if stable_hash(load_idea(root, row["candidate_id"])) != row["declaration_sha256"]:
             raise ValueError("recipe declaration changed after roster freeze")
         if stable_hash(load_view(root, row["view"])) != row["view_fingerprint"]:
             raise ValueError("view changed after roster freeze")
+        if {name: stable_hash(tasks[name]) for name in row["task_ids"]} != row["task_definition_sha256"]:
+            raise ValueError("task definition changed after roster freeze")
         req = resolve_idea(root, row["candidate_id"], view_id=row["view"], through_tier=1,
                            execution_backend="cuda", queue_root=queue_root, freeze_source=freeze)
         if req.get("execution_policy", {}).get("mode") != "complete_current_tier":
             raise ValueError("merge complete-tier execution before this round")
         if req["preflight_blockers"]:
             raise ValueError(f"candidate admission blocked: {row['family']}: {req['preflight_blockers']}")
+        allowance = sum(job["budget_seconds"] for job in req["jobs"] if Queue._authorized(req, job))
+        if allowance != row["allowance_seconds"]:
+            raise ValueError("resolved task allowance differs from frozen budget")
         resolved.append((row, req))
     if len({req["source"]["digest"] for _, req in resolved}) != 1:
         raise ValueError("one frozen implementation source is required across this round")
@@ -118,6 +126,7 @@ def plan(root, queue_root):
 
 def enqueue(root, queue_root):
     definition, resolved = requests(root, queue_root, freeze=True)
+    verify_committed_source(root, resolved[0][1]["source"])
     queue = Queue(queue_root, report_root=root / "reports/forge")
     entries = []
     for row, req in resolved:
@@ -127,6 +136,28 @@ def enqueue(root, queue_root):
         emit("submitted", **entries[-1])
     atomic_json(queue_root / ID / "roster.json", entries)
     return queue
+
+
+def verify_committed_source(root, source):
+    """Every captured byte must exist at the reviewed Git origin, even ignored files."""
+    names = list(source["files"])
+    if any("\n" in name or "\r" in name for name in names):
+        raise ValueError("source paths cannot contain line delimiters")
+    references = "".join(source["origin_commit"] + ":" + name + "\n" for name in names)
+    data = subprocess.run(["git", "cat-file", "--batch"], input=references.encode(),
+                          cwd=root, stdout=subprocess.PIPE, check=True).stdout
+    cursor = 0
+    for name in names:
+        end = data.index(b"\n", cursor)
+        header = data[cursor:end].split()
+        if len(header) != 3 or header[1] != b"blob":
+            raise ValueError("captured source is not committed: " + name)
+        size = int(header[2])
+        cursor = end + 1
+        content = data[cursor:cursor + size]
+        cursor += size + 1
+        if hashlib.sha256(content).hexdigest() != source["files"][name]:
+            raise ValueError("captured source differs from reviewed Git bytes: " + name)
 
 
 def summarize(root, queue_root):
@@ -139,6 +170,8 @@ def summarize(root, queue_root):
         request = entry["request"]
         names = {a["task"] for a in request["view"]["assignments"] if a["qualification_tier"] == 1}
         results = {r["task_id"]: r for r in queue._results(state, entry)}
+        owners = {member: state["jobs"][job["compatibility_key"]].get("result") or {}
+                  for job in request["jobs"] for member in job.get("task_ids", [job["task_id"]])}
         tasks = []
         for name in sorted(names):
             result = results.get(name, {})
@@ -146,7 +179,9 @@ def summarize(root, queue_root):
             tasks.append({"task_id": name, "status": result.get("gate_status", "BLOCKED" if blockers else "UNKNOWN"),
                           "reason": result.get("reason") or "; ".join(blockers),
                           "metrics": result.get("metrics", {}), "cost": result.get("cost", {}),
-                          "device": result.get("device"), "attempt_id": result.get("attempt_id"),
+                          "device": result.get("device", result.get("cost", {}).get("device")),
+                          "attempt_id": owners[name].get("attempt_id"),
+                          "canonical_result_hash": stable_hash(owners[name]) if owners[name] else None,
                           "compatibility_key": next(j["compatibility_key"] for j in request["jobs"] if name in j.get("task_ids", [j["task_id"]]))})
         rows.append({**row, "source": request["source"]["digest"],
                      "source_commit": request["source"].get("origin_commit"), "view": request["view"]["id"],
@@ -170,6 +205,8 @@ def archive(root, queue_root):
         request = state["submissions"][row["request_id"]]["request"]
         sources.add(request["source"]["digest"])
         for job in request["jobs"]:
+            if not Queue._authorized(request, job):
+                continue
             for attempt in state["jobs"][job["compatibility_key"]]["attempts"]:
                 attempts.add(attempt["attempt_id"])
                 attempt_paths[attempt["attempt_id"]] = Path(attempt["path"])
@@ -217,6 +254,8 @@ def export_media(root, queue_root):
         request = state["submissions"][row["request_id"]]["request"]
         seen = set()
         for job in request["jobs"]:
+            if not Queue._authorized(request, job):
+                continue
             for attempt in state["jobs"][job["compatibility_key"]]["attempts"]:
                 name = attempt["attempt_id"]
                 if name in seen:
@@ -236,12 +275,28 @@ def export_media(root, queue_root):
     return media
 
 
+def retry(root, queue_root, compatibility_key, reason):
+    queue = Queue(queue_root, report_root=root / "reports/forge")
+    state = queue.inspect()
+    entries = read_json(queue_root / ID / "roster.json")
+    allowed = {job["compatibility_key"] for row in entries
+               for job in state["submissions"][row["request_id"]]["request"]["jobs"]
+               if Queue._authorized(state["submissions"][row["request_id"]]["request"], job)}
+    if compatibility_key not in allowed or len(state["jobs"][compatibility_key]["attempts"]) != 1:
+        raise ValueError("this round permits one documented infrastructure retry per authorized task")
+    if not reason or not reason.strip():
+        raise ValueError("document the completed infrastructure repair")
+    return queue.retry(compatibility_key, reason=reason)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("stage", choices=("prepare", "plan", "enqueue", "run", "report", "media", "archive"))
+    parser.add_argument("stage", choices=("prepare", "plan", "enqueue", "run", "report", "media", "archive", "retry"))
     parser.add_argument("--root", type=Path, default=ROOT)
     parser.add_argument("--queue-root", type=Path, required=True)
     parser.add_argument("--expected-commit")
+    parser.add_argument("--compatibility-key")
+    parser.add_argument("--reason")
     args = parser.parse_args()
     root, queue_root = args.root.resolve(), args.queue_root.resolve()
     if args.stage in {"enqueue", "run"}:
@@ -264,6 +319,8 @@ def main():
         archive(root, queue_root)
     elif args.stage == "media":
         export_media(root, queue_root)
+    elif args.stage == "retry":
+        retry(root, queue_root, args.compatibility_key, args.reason)
 
 
 if __name__ == "__main__":
