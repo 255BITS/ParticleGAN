@@ -474,6 +474,309 @@
       "trainer_family": "e22"
     },
     {
+      "candidate_id": "k3p--18af773f5d3cc22f96b26c7e5751bc73c058408043bd1f2cb30ff0b2ccc611a9",
+      "candidate_revision": "614f94db55f827d16b9761e063c3226968504273b19aec9ab41d935e4956506e",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "conclusion": "Recorded FAIL; required outcomes {'FAIL': 1, 'UNKNOWN': 25}. Failed requirements: two_pole.",
+      "configuration_id": "18af773f5d3cc22f96b26c7e5751bc73c058408043bd1f2cb30ff0b2ccc611a9",
+      "evidence_scope": "published_summary",
+      "goal": "discriminator_stability",
+      "hypothesis": "The existing direct-particle beta2=.9 response imposes a finite 80-update displacement upper bound below .3 at base LR.0006. Changing its already-public positive beta2 to .999 loosens that bound and may permit one global clean K3P recipe, retaining coefficient170 and nominal latent-prior LR.0012, to pass all five ordinary Tier 1 tasks.",
+      "lifecycle": "concluded",
+      "materialization": "reports/forge/publication-records.json",
+      "mechanism_class": "floor_constant",
+      "next_action": "Read the source-bound study and original evidence before another bounded hypothesis. Unknown requirements remain unknown; this projection grants no qualification or adoption.",
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "provenance": {
+        "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "receipt_bindings": [
+          {
+            "attempt_id": "0f59d88b5de34584b7a67124e262c016",
+            "result_hash": "ec9345806f5975517051e397487479da38effbcc2f2b6b3b51cc83ed708cd71a",
+            "valid_receipt": true
+          }
+        ],
+        "recipe_sha256": "eef1eab1228b5f0c9643c748a4baab8539aeb483d160fc941adfd9a5541bd391",
+        "runtime_cohort": {
+          "compute_profiles": {
+            "cpu": {
+              "backend": "cpu",
+              "deterministic": true,
+              "machine": "x86_64",
+              "model": "AMD Ryzen 9 5900X 12-Core Processor",
+              "tf32": false,
+              "threads": 1
+            },
+            "cuda": {
+              "backend": "cuda",
+              "compute_capability": "8.6",
+              "deterministic": true,
+              "driver": "610.57.04",
+              "model": "NVIDIA RTX A6000",
+              "tf32": false,
+              "threads": 1
+            }
+          },
+          "execution_backend": "cuda",
+          "runtime": {
+            "implementation": "CPython",
+            "machine": "x86_64",
+            "packages": {
+              "numpy": "2.5.3",
+              "scipy": "1.17.1",
+              "torch": "2.14.0"
+            },
+            "python": "3.14.7",
+            "system": "Linux"
+          }
+        },
+        "source_digest": "730b77d2b4e1e6ec34f9aed7a5d061874e70eaebb5af0ff839cff1781b849a8d"
+      },
+      "qualification_input": false,
+      "qualification_reuse": false,
+      "record_id": "publication-0d2a3d06ba1636dcae140d80",
+      "record_type": "published_trial",
+      "recorded_cost": {
+        "evidence_wall_seconds": 5.667987680004444,
+        "new_paid_wall_seconds": 5.667987680004444,
+        "wall_seconds": 5.667987680004444
+      },
+      "recorded_qualification": {
+        "full_view_qualified": false,
+        "qualified_tier": 0,
+        "required_passed": 0,
+        "required_statuses": {
+          "FAIL": 1,
+          "UNKNOWN": 25
+        },
+        "required_total": 26,
+        "tiers": [
+          {
+            "required_passed": 0,
+            "required_total": 5,
+            "statuses": {
+              "FAIL": 1,
+              "UNKNOWN": 4
+            },
+            "tier": 1
+          },
+          {
+            "required_passed": 0,
+            "required_total": 19,
+            "statuses": {
+              "UNKNOWN": 19
+            },
+            "tier": 2
+          },
+          {
+            "required_passed": 0,
+            "required_total": 2,
+            "statuses": {
+              "UNKNOWN": 2
+            },
+            "tier": 3
+          }
+        ],
+        "tuning_qualified": false,
+        "tuning_required_passed": 0,
+        "tuning_required_total": 5
+      },
+      "schema_version": 1,
+      "settings": {
+        "direct_particle_betas": [
+          0.0,
+          0.999
+        ],
+        "lr": 0.0006,
+        "prior_lr_mult": 2.0
+      },
+      "source": {
+        "board": "reports/forge/technique-inventory.md",
+        "path": "reports/forge/configuration-search/k3p-global-direct-moments-tier1-v1.json",
+        "sha256": "14def7a1fcf4497275323ec75e5f0f2a0a816653d7b02e7babcd2c7a78ece256"
+      },
+      "status": "FAIL",
+      "study_id": "k3p-global-direct-moments-tier1-v1",
+      "task_results": [
+        {
+          "_attempt_id": "0f59d88b5de34584b7a67124e262c016",
+          "compatibility_key": "25714e2f0d5950994b49926c6b72c7b2d0fb2ee4c80d063d7697ae2f26f9daf1",
+          "cost": {
+            "wall_seconds": 5.667987680004444
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "grad_med": 0.004704862833023071,
+            "mean_abs": 0.03008131869137287
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "two_pole"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 1,
+          "task_id": "unused_token_hold"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 1,
+          "task_id": "ae_gan_hold"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 1,
+          "task_id": "ring16_acquisition"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 1,
+          "task_id": "five_word_joint_acquisition"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "trajectory"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "residual_student"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "unipolar"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "cover_leftover"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "mid_scale_identity"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "mode_hold"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_two_broad"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_unequal_mass"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_unequal_width"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_anisotropic"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_overlap"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_spiral"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_stripes2"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_bars4"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_blobs4"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_intensity2"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "grid100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "rotated100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "staggered100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 3,
+          "task_id": "ring_hold"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 3,
+          "task_id": "ring_extension"
+        }
+      ],
+      "trainer_family": "k3p"
+    },
+    {
       "candidate_id": "atlas",
       "cohort": "00cadbfd06c770e16c35045b42387932b14ee3751954e5320f9e2c32799f7a2f",
       "conclusion": "Closed original19 cut: 5/19 PASS, 0 FAIL, 14 unavailable. Final accepted status INCOMPLETE; required execution counts {'NOT_RUN': 14, 'PASS': 5}. Historical positives and overlapping cut costs are not pooled.",
@@ -3081,6 +3384,371 @@
         "bcap--c5f3aebf586c1da32ddfbaad77fab841eb2c43c7da652f56e9ffe622382d803e",
         "bcap--f65f1922d02456d3a4b7135bb3aa6483d1c76184d74608479b2634094b039383"
       ]
+    },
+    {
+      "candidate_id": "k3p--810e39e941cafd725e3a103f019a6b3f2d616c5b78256e0d7a20d7e61f415fae",
+      "candidate_revision": "f49fafbae45f1e233927f463e5ac19227052d9d43934ec8190c5891435d3d426",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "conclusion": "Recorded FAIL; required outcomes {'FAIL': 1, 'PASS': 3, 'UNKNOWN': 22}. Failed requirements: ring16_acquisition.",
+      "configuration_id": "810e39e941cafd725e3a103f019a6b3f2d616c5b78256e0d7a20d7e61f415fae",
+      "evidence_scope": "published_summary",
+      "goal": "discriminator_stability",
+      "hypothesis": "Within the existing input-noisy/output-clean full-horizon K3P recipe, slower critic rates and faster learned-prior transport may reduce ring within-mode covariance error. Positive critic coefficients .5/1 test this tradeoff while each complete global recipe must pass all five ordinary Tier 1 tasks.",
+      "lifecycle": "concluded",
+      "materialization": "reports/forge/publication-records.json",
+      "mechanism_class": "floor_constant",
+      "next_action": "Read the source-bound study and original evidence before another bounded hypothesis. Unknown requirements remain unknown; this projection grants no qualification or adoption.",
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "provenance": {
+        "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "receipt_bindings": [
+          {
+            "attempt_id": "200712fae5a34130ba6132225d8424eb",
+            "result_hash": "96879d71785f015b66af4da231368c6ce002111c4063ea9e878b36a165ee4256",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "645740e214f0417ebe4615e800eb171b",
+            "result_hash": "44edddac366b3736ff1ef399bf151d0a81e6c0f836d3bac870a955bc8006dba7",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "783f7d13f29f4cca84d7f56c93878141",
+            "result_hash": "ec3cd3b7d054c1f91b1224b5553cebd532c2f8ee876c90a773e73eb02db0a32e",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "91a4f995ec474d4da3ad8a44c52b3865",
+            "result_hash": "eedceeb7e22f5e44af5cb8afa14691ddb30cb000427e98d2bdb352ef24897291",
+            "valid_receipt": true
+          }
+        ],
+        "recipe_sha256": "3761ca7402f8da386c97cefc35951a1bc8894595463d940b8dae5c2fa24cb77d",
+        "runtime_cohort": {
+          "compute_profiles": {
+            "cpu": {
+              "backend": "cpu",
+              "deterministic": true,
+              "machine": "x86_64",
+              "model": "AMD Ryzen 9 5900X 12-Core Processor",
+              "tf32": false,
+              "threads": 1
+            },
+            "cuda": {
+              "backend": "cuda",
+              "compute_capability": "8.6",
+              "deterministic": true,
+              "driver": "610.57.04",
+              "model": "NVIDIA RTX A6000",
+              "tf32": false,
+              "threads": 1
+            }
+          },
+          "execution_backend": "cuda",
+          "runtime": {
+            "implementation": "CPython",
+            "machine": "x86_64",
+            "packages": {
+              "numpy": "2.5.3",
+              "scipy": "1.17.1",
+              "torch": "2.14.0"
+            },
+            "python": "3.14.7",
+            "system": "Linux"
+          }
+        },
+        "source_digest": "730b77d2b4e1e6ec34f9aed7a5d061874e70eaebb5af0ff839cff1781b849a8d"
+      },
+      "qualification_input": false,
+      "qualification_reuse": false,
+      "record_id": "publication-1203922d8cfc1f15f5ff6dd1",
+      "record_type": "published_trial",
+      "recorded_cost": {
+        "evidence_wall_seconds": 29.39433853997616,
+        "new_paid_wall_seconds": 29.39433853997616,
+        "wall_seconds": 29.39433853997616
+      },
+      "recorded_qualification": {
+        "full_view_qualified": false,
+        "qualified_tier": 0,
+        "required_passed": 3,
+        "required_statuses": {
+          "FAIL": 1,
+          "PASS": 3,
+          "UNKNOWN": 22
+        },
+        "required_total": 26,
+        "tiers": [
+          {
+            "required_passed": 3,
+            "required_total": 5,
+            "statuses": {
+              "FAIL": 1,
+              "PASS": 3,
+              "UNKNOWN": 1
+            },
+            "tier": 1
+          },
+          {
+            "required_passed": 0,
+            "required_total": 19,
+            "statuses": {
+              "UNKNOWN": 19
+            },
+            "tier": 2
+          },
+          {
+            "required_passed": 0,
+            "required_total": 2,
+            "statuses": {
+              "UNKNOWN": 2
+            },
+            "tier": 3
+          }
+        ],
+        "tuning_qualified": false,
+        "tuning_required_passed": 3,
+        "tuning_required_total": 5
+      },
+      "schema_version": 1,
+      "settings": {
+        "d_lr_mult": 0.5,
+        "lr": 0.006375,
+        "prior_lr_mult": 0.5,
+        "reg_coeff": 1.0
+      },
+      "source": {
+        "board": "reports/forge/technique-inventory.md",
+        "path": "reports/forge/configuration-search/k3p-global-tier1-v3.json",
+        "sha256": "1b587f0e4d2d72ba2bd91def230114d4dbd2570ad91b8f68a77c4105ccc0e142"
+      },
+      "status": "FAIL",
+      "study_id": "k3p-global-tier1-v3",
+      "task_results": [
+        {
+          "_attempt_id": "200712fae5a34130ba6132225d8424eb",
+          "compatibility_key": "da6f629b7f95adebdb180a879e0bc34b05b56d60b01be5613f1a392ce230ab0f",
+          "cost": {
+            "wall_seconds": 5.72829343698686
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "grad_med": 0.16297583281993866,
+            "mean_abs": 0.4034171998500824
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "two_pole"
+        },
+        {
+          "_attempt_id": "783f7d13f29f4cca84d7f56c93878141",
+          "compatibility_key": "39bcd3bfd4df96cb15db80dcb26fd7802646c069062564f70899b96903ee572d",
+          "cost": {
+            "wall_seconds": 5.953434857015964
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "concept_move": 0.9991443753242493,
+            "unused_hold": 0.9999303052463802
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "unused_token_hold"
+        },
+        {
+          "_attempt_id": "91a4f995ec474d4da3ad8a44c52b3865",
+          "compatibility_key": "fc78f49b55650c7bb57cd6ef3d59c9838e844e2b2340695625d18996488d8d1f",
+          "cost": {
+            "wall_seconds": 6.74127681000391
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "hold": 0.0018258141353726387,
+            "recon_mse": 0.004030896350741386
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "ae_gan_hold"
+        },
+        {
+          "_attempt_id": "645740e214f0417ebe4615e800eb171b",
+          "compatibility_key": "c7e69fc5aa6dc9a67fae49f8dcaf43e48755e45548090e259202c658fa15c631",
+          "cost": {
+            "wall_seconds": 10.971333435969427
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "component_core_covariance_error": 1.096138833090663,
+            "component_core_min_eigen_ratio": 0.21099376678466797,
+            "component_covariance_error": 5.011431083083153,
+            "component_min_eigen_ratio": 0.21099412441253662,
+            "covariance_error": 0.0208661500364542,
+            "hq": 0.747802734375,
+            "mass_tv": 0.083984375,
+            "max_component_spill": 0.6360543966293335,
+            "mean_error": 0.05805772542953491,
+            "min_hq_mass_ratio": 0.41796875,
+            "min_mass_ratio": 0.6953125,
+            "modes": 16,
+            "resolved_core_covariance_error": 0.0,
+            "resolved_core_min_eigen_ratio": 1.0,
+            "resolved_max_component_spill": 0.0,
+            "sample_count": 4096,
+            "step": 400,
+            "sw1_normalized": 0.04614093057207533,
+            "target_scale": 3.0029242038726807
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "ring16_acquisition"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 1,
+          "task_id": "five_word_joint_acquisition"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "trajectory"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "residual_student"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "unipolar"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "cover_leftover"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "mid_scale_identity"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "mode_hold"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_two_broad"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_unequal_mass"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_unequal_width"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_anisotropic"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_overlap"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_spiral"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_stripes2"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_bars4"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_blobs4"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_intensity2"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "grid100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "rotated100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "staggered100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 3,
+          "task_id": "ring_hold"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 3,
+          "task_id": "ring_extension"
+        }
+      ],
+      "trainer_family": "k3p"
     },
     {
       "candidate_id": "k3p--74219b54461b106a1f780a72ce43035f47611df4760a34a448292e6a40597503",
@@ -12383,6 +13051,736 @@
       "trainer_family": "atlas"
     },
     {
+      "candidate_id": "k3p--8721c414567d7c056864f46e71b53c73b0848a91d6a384c69e4804c4d61cf696",
+      "candidate_revision": "47b8e59c6606134d9ed6dcc082af91b9057592ae7ac103fec91efbc7ab95926f",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "conclusion": "Recorded FAIL; required outcomes {'FAIL': 1, 'PASS': 3, 'UNKNOWN': 22}. Failed requirements: ring16_acquisition.",
+      "configuration_id": "8721c414567d7c056864f46e71b53c73b0848a91d6a384c69e4804c4d61cf696",
+      "evidence_scope": "published_summary",
+      "goal": "discriminator_stability",
+      "hypothesis": "Within the existing input-noisy/output-clean full-horizon K3P recipe, slower critic rates and faster learned-prior transport may reduce ring within-mode covariance error. Positive critic coefficients .5/1 test this tradeoff while each complete global recipe must pass all five ordinary Tier 1 tasks.",
+      "lifecycle": "concluded",
+      "materialization": "reports/forge/publication-records.json",
+      "mechanism_class": "floor_constant",
+      "next_action": "Read the source-bound study and original evidence before another bounded hypothesis. Unknown requirements remain unknown; this projection grants no qualification or adoption.",
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "provenance": {
+        "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "receipt_bindings": [
+          {
+            "attempt_id": "347f571fc2c247f1a53ac6d6574be359",
+            "result_hash": "0610762d2ae4e665f6f3f5a94fb04095e067d25b54db080bdf02be2cceb6dea0",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "adbe8d3800024ccf8174293733431ec4",
+            "result_hash": "bc761c101a2d59045516bb57660c6e3ee648448caea1ca368b894ef3a037b060",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "fe612baed94349a2acdb30cd5c181c7c",
+            "result_hash": "175d10b13fcde6371092903b90e34db239e2d71df97f07eb2c2512ad728540fc",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "fe63673fc1054f268d3fc14109466519",
+            "result_hash": "11122ba2a4c415c650f50af8b5951e593902831856f0f80b2899a7d80ab4cd0b",
+            "valid_receipt": true
+          }
+        ],
+        "recipe_sha256": "a12f846288e3e3ad4b56e9bc8d0807a6c1c3c4d2d734ee9b003f04da7b768ee9",
+        "runtime_cohort": {
+          "compute_profiles": {
+            "cpu": {
+              "backend": "cpu",
+              "deterministic": true,
+              "machine": "x86_64",
+              "model": "AMD Ryzen 9 5900X 12-Core Processor",
+              "tf32": false,
+              "threads": 1
+            },
+            "cuda": {
+              "backend": "cuda",
+              "compute_capability": "8.6",
+              "deterministic": true,
+              "driver": "610.57.04",
+              "model": "NVIDIA RTX A6000",
+              "tf32": false,
+              "threads": 1
+            }
+          },
+          "execution_backend": "cuda",
+          "runtime": {
+            "implementation": "CPython",
+            "machine": "x86_64",
+            "packages": {
+              "numpy": "2.5.3",
+              "scipy": "1.17.1",
+              "torch": "2.14.0"
+            },
+            "python": "3.14.7",
+            "system": "Linux"
+          }
+        },
+        "source_digest": "730b77d2b4e1e6ec34f9aed7a5d061874e70eaebb5af0ff839cff1781b849a8d"
+      },
+      "qualification_input": false,
+      "qualification_reuse": false,
+      "record_id": "publication-2434c3be5b305ed3c0f41bca",
+      "record_type": "published_trial",
+      "recorded_cost": {
+        "evidence_wall_seconds": 31.640115142974537,
+        "new_paid_wall_seconds": 31.640115142974537,
+        "wall_seconds": 31.640115142974537
+      },
+      "recorded_qualification": {
+        "full_view_qualified": false,
+        "qualified_tier": 0,
+        "required_passed": 3,
+        "required_statuses": {
+          "FAIL": 1,
+          "PASS": 3,
+          "UNKNOWN": 22
+        },
+        "required_total": 26,
+        "tiers": [
+          {
+            "required_passed": 3,
+            "required_total": 5,
+            "statuses": {
+              "FAIL": 1,
+              "PASS": 3,
+              "UNKNOWN": 1
+            },
+            "tier": 1
+          },
+          {
+            "required_passed": 0,
+            "required_total": 19,
+            "statuses": {
+              "UNKNOWN": 19
+            },
+            "tier": 2
+          },
+          {
+            "required_passed": 0,
+            "required_total": 2,
+            "statuses": {
+              "UNKNOWN": 2
+            },
+            "tier": 3
+          }
+        ],
+        "tuning_qualified": false,
+        "tuning_required_passed": 3,
+        "tuning_required_total": 5
+      },
+      "schema_version": 1,
+      "settings": {
+        "d_lr_mult": 1.0,
+        "lr": 0.006375,
+        "prior_lr_mult": 1.0,
+        "reg_coeff": 0.5
+      },
+      "source": {
+        "board": "reports/forge/technique-inventory.md",
+        "path": "reports/forge/configuration-search/k3p-global-tier1-v3.json",
+        "sha256": "1b587f0e4d2d72ba2bd91def230114d4dbd2570ad91b8f68a77c4105ccc0e142"
+      },
+      "status": "FAIL",
+      "study_id": "k3p-global-tier1-v3",
+      "task_results": [
+        {
+          "_attempt_id": "adbe8d3800024ccf8174293733431ec4",
+          "compatibility_key": "0e91f0d126e9e306b45cb747cbca01ce2d8343b19be199d4524c7386d5f60bfc",
+          "cost": {
+            "wall_seconds": 5.961797435011249
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "grad_med": 0.30152904987335205,
+            "mean_abs": 0.6357372403144836
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "two_pole"
+        },
+        {
+          "_attempt_id": "347f571fc2c247f1a53ac6d6574be359",
+          "compatibility_key": "9311e35bbba7efb476aacb460b7b160bb955de9eadd60bdf75c8da0614ff8ae7",
+          "cost": {
+            "wall_seconds": 6.179720471962355
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "concept_move": 0.9984639883041382,
+            "unused_hold": 0.9998396907612914
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "unused_token_hold"
+        },
+        {
+          "_attempt_id": "fe612baed94349a2acdb30cd5c181c7c",
+          "compatibility_key": "d9eb0d2292c76d63a1de8ea0bb4aa437243016cce4b3bacff7d4a2c7dec372df",
+          "cost": {
+            "wall_seconds": 8.585163521987852
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "hold": 0.0016899844631552696,
+            "recon_mse": 0.002771602012217045
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "ae_gan_hold"
+        },
+        {
+          "_attempt_id": "fe63673fc1054f268d3fc14109466519",
+          "compatibility_key": "a8582ceda76e4fe818c344af306dbb618444a8fe41c453fca8a039552b15a854",
+          "cost": {
+            "wall_seconds": 10.913433714013081
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "component_core_covariance_error": 0.6012805309146643,
+            "component_core_min_eigen_ratio": 0.31296417117118835,
+            "component_covariance_error": 2.072623146697879,
+            "component_min_eigen_ratio": 0.31296417117118835,
+            "covariance_error": 0.07000691443681717,
+            "hq": 0.912841796875,
+            "mass_tv": 0.073486328125,
+            "max_component_spill": 0.16917292773723602,
+            "mean_error": 0.036738619208335876,
+            "min_hq_mass_ratio": 0.515625,
+            "min_mass_ratio": 0.515625,
+            "modes": 16,
+            "resolved_core_covariance_error": 0.0,
+            "resolved_core_min_eigen_ratio": 1.0,
+            "resolved_max_component_spill": 0.0,
+            "sample_count": 4096,
+            "step": 400,
+            "sw1_normalized": 0.03532794735635712,
+            "target_scale": 3.0029242038726807
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "ring16_acquisition"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 1,
+          "task_id": "five_word_joint_acquisition"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "trajectory"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "residual_student"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "unipolar"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "cover_leftover"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "mid_scale_identity"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "mode_hold"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_two_broad"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_unequal_mass"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_unequal_width"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_anisotropic"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_overlap"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_spiral"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_stripes2"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_bars4"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_blobs4"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_intensity2"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "grid100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "rotated100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "staggered100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 3,
+          "task_id": "ring_hold"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 3,
+          "task_id": "ring_extension"
+        }
+      ],
+      "trainer_family": "k3p"
+    },
+    {
+      "candidate_id": "k3p--d9270948218dc559ecd52946f251ab755bc201f72aae5bcca8a11b7439965510",
+      "candidate_revision": "a9f80ff4399e15220ef7b3565b2e49cc161ab9b48e4b2f6d07af06d1c625af93",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "conclusion": "Recorded FAIL; required outcomes {'FAIL': 1, 'PASS': 3, 'UNKNOWN': 22}. Failed requirements: ring16_acquisition.",
+      "configuration_id": "d9270948218dc559ecd52946f251ab755bc201f72aae5bcca8a11b7439965510",
+      "evidence_scope": "published_summary",
+      "goal": "discriminator_stability",
+      "hypothesis": "Within the existing input-noisy/output-clean full-horizon K3P recipe, slower critic rates and faster learned-prior transport may reduce ring within-mode covariance error. Positive critic coefficients .5/1 test this tradeoff while each complete global recipe must pass all five ordinary Tier 1 tasks.",
+      "lifecycle": "concluded",
+      "materialization": "reports/forge/publication-records.json",
+      "mechanism_class": "floor_constant",
+      "next_action": "Read the source-bound study and original evidence before another bounded hypothesis. Unknown requirements remain unknown; this projection grants no qualification or adoption.",
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "provenance": {
+        "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "receipt_bindings": [
+          {
+            "attempt_id": "1e1207ff8dab4d8a99c75fa8af5ee79e",
+            "result_hash": "9a0f0190aceb859692226681e87fdaf53ae1378d19e2131947452a3e5eee891b",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "4a1613210f46474aae45b2250aed6c81",
+            "result_hash": "c69ef269e67705aac1167cb6331150a016d2acc797cf40d2bd518a66cedffd65",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "d915d671d9db4e7489f18609774a3d7a",
+            "result_hash": "e8d3f26c73ed2c1bb2be80ed2d82a07b15737d858e216a78bf77cecdfa595a57",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "e28b29e981574360ac20f6a8b4922052",
+            "result_hash": "54ba9d6697358f80fef39adc2af89ff9314a2b3970793b4fd7a178b8c7e0cfd7",
+            "valid_receipt": true
+          }
+        ],
+        "recipe_sha256": "b10f95ee442b3fd90ba4bb841218e6d08a90bff242144d5981d87be5db3194bd",
+        "runtime_cohort": {
+          "compute_profiles": {
+            "cpu": {
+              "backend": "cpu",
+              "deterministic": true,
+              "machine": "x86_64",
+              "model": "AMD Ryzen 9 5900X 12-Core Processor",
+              "tf32": false,
+              "threads": 1
+            },
+            "cuda": {
+              "backend": "cuda",
+              "compute_capability": "8.6",
+              "deterministic": true,
+              "driver": "610.57.04",
+              "model": "NVIDIA RTX A6000",
+              "tf32": false,
+              "threads": 1
+            }
+          },
+          "execution_backend": "cuda",
+          "runtime": {
+            "implementation": "CPython",
+            "machine": "x86_64",
+            "packages": {
+              "numpy": "2.5.3",
+              "scipy": "1.17.1",
+              "torch": "2.14.0"
+            },
+            "python": "3.14.7",
+            "system": "Linux"
+          }
+        },
+        "source_digest": "730b77d2b4e1e6ec34f9aed7a5d061874e70eaebb5af0ff839cff1781b849a8d"
+      },
+      "qualification_input": false,
+      "qualification_reuse": false,
+      "record_id": "publication-249b52cac37c30bd016ea634",
+      "record_type": "published_trial",
+      "recorded_cost": {
+        "evidence_wall_seconds": 32.61475797794992,
+        "new_paid_wall_seconds": 32.61475797794992,
+        "wall_seconds": 32.61475797794992
+      },
+      "recorded_qualification": {
+        "full_view_qualified": false,
+        "qualified_tier": 0,
+        "required_passed": 3,
+        "required_statuses": {
+          "FAIL": 1,
+          "PASS": 3,
+          "UNKNOWN": 22
+        },
+        "required_total": 26,
+        "tiers": [
+          {
+            "required_passed": 3,
+            "required_total": 5,
+            "statuses": {
+              "FAIL": 1,
+              "PASS": 3,
+              "UNKNOWN": 1
+            },
+            "tier": 1
+          },
+          {
+            "required_passed": 0,
+            "required_total": 19,
+            "statuses": {
+              "UNKNOWN": 19
+            },
+            "tier": 2
+          },
+          {
+            "required_passed": 0,
+            "required_total": 2,
+            "statuses": {
+              "UNKNOWN": 2
+            },
+            "tier": 3
+          }
+        ],
+        "tuning_qualified": false,
+        "tuning_required_passed": 3,
+        "tuning_required_total": 5
+      },
+      "schema_version": 1,
+      "settings": {
+        "d_lr_mult": 0.5,
+        "lr": 0.006375,
+        "prior_lr_mult": 0.5,
+        "reg_coeff": 0.5
+      },
+      "source": {
+        "board": "reports/forge/technique-inventory.md",
+        "path": "reports/forge/configuration-search/k3p-global-tier1-v3.json",
+        "sha256": "1b587f0e4d2d72ba2bd91def230114d4dbd2570ad91b8f68a77c4105ccc0e142"
+      },
+      "status": "FAIL",
+      "study_id": "k3p-global-tier1-v3",
+      "task_results": [
+        {
+          "_attempt_id": "e28b29e981574360ac20f6a8b4922052",
+          "compatibility_key": "d5eb2d5492414c4e2627a1670694eef473eeffccb9eaff7c4823941fd13a71f7",
+          "cost": {
+            "wall_seconds": 5.638789607968647
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "grad_med": 0.3384133577346802,
+            "mean_abs": 0.49516940116882324
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "two_pole"
+        },
+        {
+          "_attempt_id": "4a1613210f46474aae45b2250aed6c81",
+          "compatibility_key": "607dd6e232e0a9b050f481792220ad964c52c57ead6223a8a5f87ae013fc2e4e",
+          "cost": {
+            "wall_seconds": 5.938838568981737
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "concept_move": 0.9999335408210754,
+            "unused_hold": 0.9999987105543369
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "unused_token_hold"
+        },
+        {
+          "_attempt_id": "1e1207ff8dab4d8a99c75fa8af5ee79e",
+          "compatibility_key": "9aa8e79074a1f5c046b1e2c9e2a98cd1950b5a3313df9b7543362a088a79b445",
+          "cost": {
+            "wall_seconds": 10.59807288099546
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "hold": 0.0015817158855497837,
+            "recon_mse": 0.005845433566719294
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "ae_gan_hold"
+        },
+        {
+          "_attempt_id": "d915d671d9db4e7489f18609774a3d7a",
+          "compatibility_key": "edd9fc1943b6a72d3f074cdb1ec8ecd667004ca1345c919b96db4cd7cbdf71bb",
+          "cost": {
+            "wall_seconds": 10.439056920004077
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "component_core_covariance_error": 1.1329778637737036,
+            "component_core_min_eigen_ratio": 0.22657328844070435,
+            "component_covariance_error": 14.093453325331211,
+            "component_min_eigen_ratio": 0.635587215423584,
+            "covariance_error": 0.04213452339172363,
+            "hq": 0.688232421875,
+            "mass_tv": 0.1181640625,
+            "max_component_spill": 0.5480427145957947,
+            "mean_error": 0.047081612050533295,
+            "min_hq_mass_ratio": 0.21875,
+            "min_mass_ratio": 0.29296875,
+            "modes": 15,
+            "resolved_core_covariance_error": 0.0,
+            "resolved_core_min_eigen_ratio": 1.0,
+            "resolved_max_component_spill": 0.0,
+            "sample_count": 4096,
+            "step": 400,
+            "sw1_normalized": 0.05838292308238304,
+            "target_scale": 3.0029242038726807
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "ring16_acquisition"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 1,
+          "task_id": "five_word_joint_acquisition"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "trajectory"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "residual_student"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "unipolar"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "cover_leftover"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "mid_scale_identity"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "mode_hold"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_two_broad"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_unequal_mass"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_unequal_width"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_anisotropic"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_overlap"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_spiral"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_stripes2"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_bars4"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_blobs4"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_intensity2"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "grid100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "rotated100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "staggered100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 3,
+          "task_id": "ring_hold"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 3,
+          "task_id": "ring_extension"
+        }
+      ],
+      "trainer_family": "k3p"
+    },
+    {
       "candidate_id": "ka2-tier1-refresh-v1",
       "conclusion": "Concluded 4 whole configurations. Recorded selection: best_observed; default adoption False.",
       "evidence_scope": "published_summary",
@@ -13237,6 +14635,371 @@
         }
       ],
       "trainer_family": "release07-gan-v3-mog"
+    },
+    {
+      "candidate_id": "k3p--01eca360219ea5225a6e30a31800c7bbe70ca08c3800e259c17a67f0ea528ab5",
+      "candidate_revision": "6d51dba8dfc9eaec9c9eead65aeb5a59706fcb65c7b492b88647043eb322d0b9",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "conclusion": "Recorded FAIL; required outcomes {'FAIL': 1, 'PASS': 3, 'UNKNOWN': 22}. Failed requirements: ring16_acquisition.",
+      "configuration_id": "01eca360219ea5225a6e30a31800c7bbe70ca08c3800e259c17a67f0ea528ab5",
+      "evidence_scope": "published_summary",
+      "goal": "discriminator_stability",
+      "hypothesis": "Within the existing input-noisy/output-clean full-horizon K3P recipe, slower critic rates and faster learned-prior transport may reduce ring within-mode covariance error. Positive critic coefficients .5/1 test this tradeoff while each complete global recipe must pass all five ordinary Tier 1 tasks.",
+      "lifecycle": "concluded",
+      "materialization": "reports/forge/publication-records.json",
+      "mechanism_class": "floor_constant",
+      "next_action": "Read the source-bound study and original evidence before another bounded hypothesis. Unknown requirements remain unknown; this projection grants no qualification or adoption.",
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "provenance": {
+        "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "receipt_bindings": [
+          {
+            "attempt_id": "1e0e2fbd6d1840bd9271785ac1eaf2ca",
+            "result_hash": "7bd4f84c7adbacdffb8454196e66905215bd3be6747bee379276192e2ed995b3",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "b500cc0dc0a84fcfabdf2f19f68976a6",
+            "result_hash": "386a7c2aafb7409c1ff305f9827bb586d869ce08b9ae1accf252567674d483a7",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "dc228b4ab4974ad4972a45344e8071d3",
+            "result_hash": "94233334d2e38456d8b76a1d79d04efe26a4ca996fec938acfad1d80e53fc58e",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "e882ffdc0d8c44dfb0325662ebe385e7",
+            "result_hash": "3b699c20232b778949e8e2f705d8961f4d8dc403274bf469a59df5b658973e02",
+            "valid_receipt": true
+          }
+        ],
+        "recipe_sha256": "5eec8cc17f99db3ffb15c4f422e8742f60d552af1bd559f5e3b48e845f4543b3",
+        "runtime_cohort": {
+          "compute_profiles": {
+            "cpu": {
+              "backend": "cpu",
+              "deterministic": true,
+              "machine": "x86_64",
+              "model": "AMD Ryzen 9 5900X 12-Core Processor",
+              "tf32": false,
+              "threads": 1
+            },
+            "cuda": {
+              "backend": "cuda",
+              "compute_capability": "8.6",
+              "deterministic": true,
+              "driver": "610.57.04",
+              "model": "NVIDIA RTX A6000",
+              "tf32": false,
+              "threads": 1
+            }
+          },
+          "execution_backend": "cuda",
+          "runtime": {
+            "implementation": "CPython",
+            "machine": "x86_64",
+            "packages": {
+              "numpy": "2.5.3",
+              "scipy": "1.17.1",
+              "torch": "2.14.0"
+            },
+            "python": "3.14.7",
+            "system": "Linux"
+          }
+        },
+        "source_digest": "730b77d2b4e1e6ec34f9aed7a5d061874e70eaebb5af0ff839cff1781b849a8d"
+      },
+      "qualification_input": false,
+      "qualification_reuse": false,
+      "record_id": "publication-2c27d89a49489bfdf4637dd3",
+      "record_type": "published_trial",
+      "recorded_cost": {
+        "evidence_wall_seconds": 29.3436288270168,
+        "new_paid_wall_seconds": 29.3436288270168,
+        "wall_seconds": 29.3436288270168
+      },
+      "recorded_qualification": {
+        "full_view_qualified": false,
+        "qualified_tier": 0,
+        "required_passed": 3,
+        "required_statuses": {
+          "FAIL": 1,
+          "PASS": 3,
+          "UNKNOWN": 22
+        },
+        "required_total": 26,
+        "tiers": [
+          {
+            "required_passed": 3,
+            "required_total": 5,
+            "statuses": {
+              "FAIL": 1,
+              "PASS": 3,
+              "UNKNOWN": 1
+            },
+            "tier": 1
+          },
+          {
+            "required_passed": 0,
+            "required_total": 19,
+            "statuses": {
+              "UNKNOWN": 19
+            },
+            "tier": 2
+          },
+          {
+            "required_passed": 0,
+            "required_total": 2,
+            "statuses": {
+              "UNKNOWN": 2
+            },
+            "tier": 3
+          }
+        ],
+        "tuning_qualified": false,
+        "tuning_required_passed": 3,
+        "tuning_required_total": 5
+      },
+      "schema_version": 1,
+      "settings": {
+        "d_lr_mult": 1.0,
+        "lr": 0.006375,
+        "prior_lr_mult": 1.0,
+        "reg_coeff": 1.0
+      },
+      "source": {
+        "board": "reports/forge/technique-inventory.md",
+        "path": "reports/forge/configuration-search/k3p-global-tier1-v3.json",
+        "sha256": "1b587f0e4d2d72ba2bd91def230114d4dbd2570ad91b8f68a77c4105ccc0e142"
+      },
+      "status": "FAIL",
+      "study_id": "k3p-global-tier1-v3",
+      "task_results": [
+        {
+          "_attempt_id": "1e0e2fbd6d1840bd9271785ac1eaf2ca",
+          "compatibility_key": "fbe96f600efa9fb111292bb772d73c2ab8b190128dcedeb0a18e82a4be959e7b",
+          "cost": {
+            "wall_seconds": 5.627766090969089
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "grad_med": 0.2004294991493225,
+            "mean_abs": 0.5928364992141724
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "two_pole"
+        },
+        {
+          "_attempt_id": "e882ffdc0d8c44dfb0325662ebe385e7",
+          "compatibility_key": "d75d73d5587d918163e2d9da67ed3f2788a5b6b81752e74cd4468cca7ea05557",
+          "cost": {
+            "wall_seconds": 5.96807316300692
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "concept_move": 0.99427330493927,
+            "unused_hold": 0.9996328618726693
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "unused_token_hold"
+        },
+        {
+          "_attempt_id": "dc228b4ab4974ad4972a45344e8071d3",
+          "compatibility_key": "a7804b830eabe702e9ad4a1ecd24508959d418932cfdf317c741325b5fa0bf22",
+          "cost": {
+            "wall_seconds": 6.611213262018282
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "hold": 0.0007900556665845215,
+            "recon_mse": 0.034115683287382126
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "ae_gan_hold"
+        },
+        {
+          "_attempt_id": "b500cc0dc0a84fcfabdf2f19f68976a6",
+          "compatibility_key": "59dc32df0a3625554353fb86956b2a0085ab2cd1bb8e0f0ea63a9c64ccff0ecf",
+          "cost": {
+            "wall_seconds": 11.136576311022509
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "component_core_covariance_error": 0.6650410424917936,
+            "component_core_min_eigen_ratio": 0.3081517815589905,
+            "component_covariance_error": 1.4863335117697716,
+            "component_min_eigen_ratio": 0.3081517815589905,
+            "covariance_error": 0.015216750092804432,
+            "hq": 0.89990234375,
+            "mass_tv": 0.059814453125,
+            "max_component_spill": 0.20529800653457642,
+            "mean_error": 0.011718385852873325,
+            "min_hq_mass_ratio": 0.625,
+            "min_mass_ratio": 0.7265625,
+            "modes": 16,
+            "resolved_core_covariance_error": 0.0,
+            "resolved_core_min_eigen_ratio": 1.0,
+            "resolved_max_component_spill": 0.0,
+            "sample_count": 4096,
+            "step": 400,
+            "sw1_normalized": 0.019925558608664254,
+            "target_scale": 3.0029242038726807
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "ring16_acquisition"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 1,
+          "task_id": "five_word_joint_acquisition"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "trajectory"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "residual_student"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "unipolar"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "cover_leftover"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "mid_scale_identity"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "mode_hold"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_two_broad"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_unequal_mass"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_unequal_width"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_anisotropic"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_overlap"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_spiral"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_stripes2"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_bars4"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_blobs4"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_intensity2"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "grid100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "rotated100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "staggered100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 3,
+          "task_id": "ring_hold"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 3,
+          "task_id": "ring_extension"
+        }
+      ],
+      "trainer_family": "k3p"
     },
     {
       "candidate_id": "ka2--d02d7932342e1fa1db0a7a91537394297601e55516882d20ec033b4992bb527f",
@@ -22413,6 +24176,385 @@
       "trainer_family": "bcap"
     },
     {
+      "candidate_id": "k3p-global-direct-moments-tier1-v1",
+      "conclusion": "Concluded 4 whole configurations. Recorded selection: best_observed; default adoption False.",
+      "evidence_scope": "published_summary",
+      "goal": "discriminator_stability",
+      "hypothesis": "The existing direct-particle beta2=.9 response imposes a finite 80-update displacement upper bound below .3 at base LR.0006. Changing its already-public positive beta2 to .999 loosens that bound and may permit one global clean K3P recipe, retaining coefficient170 and nominal latent-prior LR.0012, to pass all five ordinary Tier 1 tasks.",
+      "lifecycle": "concluded",
+      "materialization": "reports/forge/publication-records.json",
+      "mechanism_class": "bounded_configuration_search",
+      "next_action": "Read the source-bound study and original evidence before another bounded hypothesis. Unknown requirements remain unknown; this projection grants no qualification or adoption.",
+      "provenance": {
+        "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "runtime_cohort": {
+          "compute_profiles": {
+            "cpu": {
+              "backend": "cpu",
+              "deterministic": true,
+              "machine": "x86_64",
+              "model": "AMD Ryzen 9 5900X 12-Core Processor",
+              "tf32": false,
+              "threads": 1
+            },
+            "cuda": {
+              "backend": "cuda",
+              "compute_capability": "8.6",
+              "deterministic": true,
+              "driver": "610.57.04",
+              "model": "NVIDIA RTX A6000",
+              "tf32": false,
+              "threads": 1
+            }
+          },
+          "execution_backend": "cuda",
+          "runtime": {
+            "implementation": "CPython",
+            "machine": "x86_64",
+            "packages": {
+              "numpy": "2.5.3",
+              "scipy": "1.17.1",
+              "torch": "2.14.0"
+            },
+            "python": "3.14.7",
+            "system": "Linux"
+          }
+        },
+        "source_digests": [
+          "730b77d2b4e1e6ec34f9aed7a5d061874e70eaebb5af0ff839cff1781b849a8d"
+        ],
+        "spec_hash": "92c590ba6a651512510f2574e72911a797a64cd15f028a844261c5b3a77a489e"
+      },
+      "qualification_input": false,
+      "qualification_reuse": false,
+      "record_id": "publication-63c455814625a9655a38a338",
+      "record_type": "published_study",
+      "recorded_cost": {
+        "evidence_wall_seconds": 24.505615011032205,
+        "new_paid_wall_seconds": 24.505615011032205,
+        "observed_attempts": 4,
+        "wall_seconds": 24.505615011032205
+      },
+      "schema_version": 1,
+      "source": {
+        "board": "reports/forge/technique-inventory.md",
+        "path": "reports/forge/configuration-search/k3p-global-direct-moments-tier1-v1.json",
+        "sha256": "14def7a1fcf4497275323ec75e5f0f2a0a816653d7b02e7babcd2c7a78ece256"
+      },
+      "study_id": "k3p-global-direct-moments-tier1-v1",
+      "task_results": [],
+      "trainer_family": "k3p",
+      "trial_ids": [
+        "k3p--18af773f5d3cc22f96b26c7e5751bc73c058408043bd1f2cb30ff0b2ccc611a9",
+        "k3p--209c3438a7f0f4576d1dc07746ed2c202ab382ba1c90f1ac58c559ce466d4c11",
+        "k3p--8e32578b69ab9a2d42d46002e22ee6bb3efb23fffee381067d8eacdc1e6f9b6d",
+        "k3p--a338cc158d705aada992b1fdec6ba1d24b458371d5f715190496099e2f7d918d"
+      ]
+    },
+    {
+      "candidate_id": "k3p--8e32578b69ab9a2d42d46002e22ee6bb3efb23fffee381067d8eacdc1e6f9b6d",
+      "candidate_revision": "62581fc650df842ed0f8bddb61171de281f233c5e64761e0533f16484726cffc",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "conclusion": "Recorded FAIL; required outcomes {'FAIL': 1, 'UNKNOWN': 25}. Failed requirements: two_pole.",
+      "configuration_id": "8e32578b69ab9a2d42d46002e22ee6bb3efb23fffee381067d8eacdc1e6f9b6d",
+      "evidence_scope": "published_summary",
+      "goal": "discriminator_stability",
+      "hypothesis": "The existing direct-particle beta2=.9 response imposes a finite 80-update displacement upper bound below .3 at base LR.0006. Changing its already-public positive beta2 to .999 loosens that bound and may permit one global clean K3P recipe, retaining coefficient170 and nominal latent-prior LR.0012, to pass all five ordinary Tier 1 tasks.",
+      "lifecycle": "concluded",
+      "materialization": "reports/forge/publication-records.json",
+      "mechanism_class": "floor_constant",
+      "next_action": "Read the source-bound study and original evidence before another bounded hypothesis. Unknown requirements remain unknown; this projection grants no qualification or adoption.",
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "provenance": {
+        "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "receipt_bindings": [
+          {
+            "attempt_id": "3e65d4b3cc604d9fa53e9e65c20cd4b8",
+            "result_hash": "f7f47d38772f71d48c92748a11a2cf760cc0ef9397dfb62b1b50dd87072ff09e",
+            "valid_receipt": true
+          }
+        ],
+        "recipe_sha256": "83e2e2d6e8e7bbdad92e9c057fbeaebdafad6cdacecbd0f635fabfd955abec34",
+        "runtime_cohort": {
+          "compute_profiles": {
+            "cpu": {
+              "backend": "cpu",
+              "deterministic": true,
+              "machine": "x86_64",
+              "model": "AMD Ryzen 9 5900X 12-Core Processor",
+              "tf32": false,
+              "threads": 1
+            },
+            "cuda": {
+              "backend": "cuda",
+              "compute_capability": "8.6",
+              "deterministic": true,
+              "driver": "610.57.04",
+              "model": "NVIDIA RTX A6000",
+              "tf32": false,
+              "threads": 1
+            }
+          },
+          "execution_backend": "cuda",
+          "runtime": {
+            "implementation": "CPython",
+            "machine": "x86_64",
+            "packages": {
+              "numpy": "2.5.3",
+              "scipy": "1.17.1",
+              "torch": "2.14.0"
+            },
+            "python": "3.14.7",
+            "system": "Linux"
+          }
+        },
+        "source_digest": "730b77d2b4e1e6ec34f9aed7a5d061874e70eaebb5af0ff839cff1781b849a8d"
+      },
+      "qualification_input": false,
+      "qualification_reuse": false,
+      "record_id": "publication-650844d6f881ba8b8735842e",
+      "record_type": "published_trial",
+      "recorded_cost": {
+        "evidence_wall_seconds": 5.553667445026804,
+        "new_paid_wall_seconds": 5.553667445026804,
+        "wall_seconds": 5.553667445026804
+      },
+      "recorded_qualification": {
+        "full_view_qualified": false,
+        "qualified_tier": 0,
+        "required_passed": 0,
+        "required_statuses": {
+          "FAIL": 1,
+          "UNKNOWN": 25
+        },
+        "required_total": 26,
+        "tiers": [
+          {
+            "required_passed": 0,
+            "required_total": 5,
+            "statuses": {
+              "FAIL": 1,
+              "UNKNOWN": 4
+            },
+            "tier": 1
+          },
+          {
+            "required_passed": 0,
+            "required_total": 19,
+            "statuses": {
+              "UNKNOWN": 19
+            },
+            "tier": 2
+          },
+          {
+            "required_passed": 0,
+            "required_total": 2,
+            "statuses": {
+              "UNKNOWN": 2
+            },
+            "tier": 3
+          }
+        ],
+        "tuning_qualified": false,
+        "tuning_required_passed": 0,
+        "tuning_required_total": 5
+      },
+      "schema_version": 1,
+      "settings": {
+        "direct_particle_betas": [
+          0.0,
+          0.999
+        ],
+        "lr": 0.002125,
+        "prior_lr_mult": 0.5647058823529411
+      },
+      "source": {
+        "board": "reports/forge/technique-inventory.md",
+        "path": "reports/forge/configuration-search/k3p-global-direct-moments-tier1-v1.json",
+        "sha256": "14def7a1fcf4497275323ec75e5f0f2a0a816653d7b02e7babcd2c7a78ece256"
+      },
+      "status": "FAIL",
+      "study_id": "k3p-global-direct-moments-tier1-v1",
+      "task_results": [
+        {
+          "_attempt_id": "3e65d4b3cc604d9fa53e9e65c20cd4b8",
+          "compatibility_key": "9f49a2c8a6fc5e38ea9b46bb00476afc7f1b7778ee6b067c9f76f69c279af673",
+          "cost": {
+            "wall_seconds": 5.553667445026804
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "grad_med": 0.003615438938140869,
+            "mean_abs": 0.07390967756509781
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "two_pole"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 1,
+          "task_id": "unused_token_hold"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 1,
+          "task_id": "ae_gan_hold"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 1,
+          "task_id": "ring16_acquisition"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 1,
+          "task_id": "five_word_joint_acquisition"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "trajectory"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "residual_student"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "unipolar"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "cover_leftover"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "mid_scale_identity"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "mode_hold"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_two_broad"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_unequal_mass"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_unequal_width"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_anisotropic"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_overlap"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_spiral"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_stripes2"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_bars4"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_blobs4"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_intensity2"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "grid100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "rotated100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "staggered100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 3,
+          "task_id": "ring_hold"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 3,
+          "task_id": "ring_extension"
+        }
+      ],
+      "trainer_family": "k3p"
+    },
+    {
       "candidate_id": "atlas--236d48b6033ff1abd0ac59fb54e42ce14b18465dc98b365fbb0ac669353dc656",
       "candidate_revision": null,
       "cohort": "policy-family-defaults-round4-prior-balance-v1--8021a1c50c4a",
@@ -23623,6 +25765,309 @@
         }
       ],
       "trainer_family": "e22"
+    },
+    {
+      "candidate_id": "k3p--209c3438a7f0f4576d1dc07746ed2c202ab382ba1c90f1ac58c559ce466d4c11",
+      "candidate_revision": "363b778863bfdecd014779fcd035d18ddf8fe59bc9d46f51b6f1ca46d8b78ec7",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "conclusion": "Recorded FAIL; required outcomes {'FAIL': 1, 'UNKNOWN': 25}. Failed requirements: two_pole.",
+      "configuration_id": "209c3438a7f0f4576d1dc07746ed2c202ab382ba1c90f1ac58c559ce466d4c11",
+      "evidence_scope": "published_summary",
+      "goal": "discriminator_stability",
+      "hypothesis": "The existing direct-particle beta2=.9 response imposes a finite 80-update displacement upper bound below .3 at base LR.0006. Changing its already-public positive beta2 to .999 loosens that bound and may permit one global clean K3P recipe, retaining coefficient170 and nominal latent-prior LR.0012, to pass all five ordinary Tier 1 tasks.",
+      "lifecycle": "concluded",
+      "materialization": "reports/forge/publication-records.json",
+      "mechanism_class": "floor_constant",
+      "next_action": "Read the source-bound study and original evidence before another bounded hypothesis. Unknown requirements remain unknown; this projection grants no qualification or adoption.",
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "provenance": {
+        "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "receipt_bindings": [
+          {
+            "attempt_id": "f7edba755e874accaf24ceb6b35beaed",
+            "result_hash": "dcbd5c95cb282702e830df352fee87d68e19783dbc1f36df480a788b5d76bdc0",
+            "valid_receipt": true
+          }
+        ],
+        "recipe_sha256": "5cd3a3d92b19f0611cb9144db12d6b867e4bd3b1ecff7333e576eea0212e0569",
+        "runtime_cohort": {
+          "compute_profiles": {
+            "cpu": {
+              "backend": "cpu",
+              "deterministic": true,
+              "machine": "x86_64",
+              "model": "AMD Ryzen 9 5900X 12-Core Processor",
+              "tf32": false,
+              "threads": 1
+            },
+            "cuda": {
+              "backend": "cuda",
+              "compute_capability": "8.6",
+              "deterministic": true,
+              "driver": "610.57.04",
+              "model": "NVIDIA RTX A6000",
+              "tf32": false,
+              "threads": 1
+            }
+          },
+          "execution_backend": "cuda",
+          "runtime": {
+            "implementation": "CPython",
+            "machine": "x86_64",
+            "packages": {
+              "numpy": "2.5.3",
+              "scipy": "1.17.1",
+              "torch": "2.14.0"
+            },
+            "python": "3.14.7",
+            "system": "Linux"
+          }
+        },
+        "source_digest": "730b77d2b4e1e6ec34f9aed7a5d061874e70eaebb5af0ff839cff1781b849a8d"
+      },
+      "qualification_input": false,
+      "qualification_reuse": false,
+      "record_id": "publication-721dec41bf445e830a4679a3",
+      "record_type": "published_trial",
+      "recorded_cost": {
+        "evidence_wall_seconds": 5.537006305996329,
+        "new_paid_wall_seconds": 5.537006305996329,
+        "wall_seconds": 5.537006305996329
+      },
+      "recorded_qualification": {
+        "full_view_qualified": false,
+        "qualified_tier": 0,
+        "required_passed": 0,
+        "required_statuses": {
+          "FAIL": 1,
+          "UNKNOWN": 25
+        },
+        "required_total": 26,
+        "tiers": [
+          {
+            "required_passed": 0,
+            "required_total": 5,
+            "statuses": {
+              "FAIL": 1,
+              "UNKNOWN": 4
+            },
+            "tier": 1
+          },
+          {
+            "required_passed": 0,
+            "required_total": 19,
+            "statuses": {
+              "UNKNOWN": 19
+            },
+            "tier": 2
+          },
+          {
+            "required_passed": 0,
+            "required_total": 2,
+            "statuses": {
+              "UNKNOWN": 2
+            },
+            "tier": 3
+          }
+        ],
+        "tuning_qualified": false,
+        "tuning_required_passed": 0,
+        "tuning_required_total": 5
+      },
+      "schema_version": 1,
+      "settings": {
+        "direct_particle_betas": [
+          0.0,
+          0.999
+        ],
+        "lr": 0.00425,
+        "prior_lr_mult": 0.28235294117647053
+      },
+      "source": {
+        "board": "reports/forge/technique-inventory.md",
+        "path": "reports/forge/configuration-search/k3p-global-direct-moments-tier1-v1.json",
+        "sha256": "14def7a1fcf4497275323ec75e5f0f2a0a816653d7b02e7babcd2c7a78ece256"
+      },
+      "status": "FAIL",
+      "study_id": "k3p-global-direct-moments-tier1-v1",
+      "task_results": [
+        {
+          "_attempt_id": "f7edba755e874accaf24ceb6b35beaed",
+          "compatibility_key": "c1a13f3baf5b9d3645b03ef296da4cd8a894c8fa13530817b5e94d0ce19430d9",
+          "cost": {
+            "wall_seconds": 5.537006305996329
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "grad_med": 0.004203088581562042,
+            "mean_abs": 0.1193917915225029
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "two_pole"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 1,
+          "task_id": "unused_token_hold"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 1,
+          "task_id": "ae_gan_hold"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 1,
+          "task_id": "ring16_acquisition"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 1,
+          "task_id": "five_word_joint_acquisition"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "trajectory"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "residual_student"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "unipolar"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "cover_leftover"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "mid_scale_identity"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "mode_hold"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_two_broad"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_unequal_mass"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_unequal_width"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_anisotropic"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_overlap"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_spiral"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_stripes2"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_bars4"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_blobs4"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_intensity2"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "grid100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "rotated100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "staggered100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 3,
+          "task_id": "ring_hold"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 3,
+          "task_id": "ring_extension"
+        }
+      ],
+      "trainer_family": "k3p"
     },
     {
       "candidate_id": "release07-gan-v3-mog--8bac47a479c2bb8dea2edee5378b642fbe5e6dd8c5fceab2d4e8077d6371345e",
@@ -25394,6 +27839,309 @@
       "trainer_family": "bcap"
     },
     {
+      "candidate_id": "k3p--a338cc158d705aada992b1fdec6ba1d24b458371d5f715190496099e2f7d918d",
+      "candidate_revision": "e8e3f82cd380be93899845d80352890ca6b9108f9be037389fe32ae0bd274440",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "conclusion": "Recorded FAIL; required outcomes {'FAIL': 1, 'UNKNOWN': 25}. Failed requirements: two_pole.",
+      "configuration_id": "a338cc158d705aada992b1fdec6ba1d24b458371d5f715190496099e2f7d918d",
+      "evidence_scope": "published_summary",
+      "goal": "discriminator_stability",
+      "hypothesis": "The existing direct-particle beta2=.9 response imposes a finite 80-update displacement upper bound below .3 at base LR.0006. Changing its already-public positive beta2 to .999 loosens that bound and may permit one global clean K3P recipe, retaining coefficient170 and nominal latent-prior LR.0012, to pass all five ordinary Tier 1 tasks.",
+      "lifecycle": "concluded",
+      "materialization": "reports/forge/publication-records.json",
+      "mechanism_class": "floor_constant",
+      "next_action": "Read the source-bound study and original evidence before another bounded hypothesis. Unknown requirements remain unknown; this projection grants no qualification or adoption.",
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "provenance": {
+        "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "receipt_bindings": [
+          {
+            "attempt_id": "6d7f698a7b09455993b1ee8745d3ef03",
+            "result_hash": "fbaa42d8929353f87dab74add2c30740df4c235ecce88713d06c472788d8f254",
+            "valid_receipt": true
+          }
+        ],
+        "recipe_sha256": "24c4eb97eb1c2c72ca01b3da7ae60c4ea04c9ccf6773342e0ccf0a0f1fd334aa",
+        "runtime_cohort": {
+          "compute_profiles": {
+            "cpu": {
+              "backend": "cpu",
+              "deterministic": true,
+              "machine": "x86_64",
+              "model": "AMD Ryzen 9 5900X 12-Core Processor",
+              "tf32": false,
+              "threads": 1
+            },
+            "cuda": {
+              "backend": "cuda",
+              "compute_capability": "8.6",
+              "deterministic": true,
+              "driver": "610.57.04",
+              "model": "NVIDIA RTX A6000",
+              "tf32": false,
+              "threads": 1
+            }
+          },
+          "execution_backend": "cuda",
+          "runtime": {
+            "implementation": "CPython",
+            "machine": "x86_64",
+            "packages": {
+              "numpy": "2.5.3",
+              "scipy": "1.17.1",
+              "torch": "2.14.0"
+            },
+            "python": "3.14.7",
+            "system": "Linux"
+          }
+        },
+        "source_digest": "730b77d2b4e1e6ec34f9aed7a5d061874e70eaebb5af0ff839cff1781b849a8d"
+      },
+      "qualification_input": false,
+      "qualification_reuse": false,
+      "record_id": "publication-7efada7169615e2dd1f29629",
+      "record_type": "published_trial",
+      "recorded_cost": {
+        "evidence_wall_seconds": 7.746953580004629,
+        "new_paid_wall_seconds": 7.746953580004629,
+        "wall_seconds": 7.746953580004629
+      },
+      "recorded_qualification": {
+        "full_view_qualified": false,
+        "qualified_tier": 0,
+        "required_passed": 0,
+        "required_statuses": {
+          "FAIL": 1,
+          "UNKNOWN": 25
+        },
+        "required_total": 26,
+        "tiers": [
+          {
+            "required_passed": 0,
+            "required_total": 5,
+            "statuses": {
+              "FAIL": 1,
+              "UNKNOWN": 4
+            },
+            "tier": 1
+          },
+          {
+            "required_passed": 0,
+            "required_total": 19,
+            "statuses": {
+              "UNKNOWN": 19
+            },
+            "tier": 2
+          },
+          {
+            "required_passed": 0,
+            "required_total": 2,
+            "statuses": {
+              "UNKNOWN": 2
+            },
+            "tier": 3
+          }
+        ],
+        "tuning_qualified": false,
+        "tuning_required_passed": 0,
+        "tuning_required_total": 5
+      },
+      "schema_version": 1,
+      "settings": {
+        "direct_particle_betas": [
+          0.0,
+          0.999
+        ],
+        "lr": 0.0012,
+        "prior_lr_mult": 1.0
+      },
+      "source": {
+        "board": "reports/forge/technique-inventory.md",
+        "path": "reports/forge/configuration-search/k3p-global-direct-moments-tier1-v1.json",
+        "sha256": "14def7a1fcf4497275323ec75e5f0f2a0a816653d7b02e7babcd2c7a78ece256"
+      },
+      "status": "FAIL",
+      "study_id": "k3p-global-direct-moments-tier1-v1",
+      "task_results": [
+        {
+          "_attempt_id": "6d7f698a7b09455993b1ee8745d3ef03",
+          "compatibility_key": "c0ee4386182efba0b049db607efbf64100fd9c0860c51bb2d597fcab319fda52",
+          "cost": {
+            "wall_seconds": 7.746953580004629
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "grad_med": 0.0032124966382980347,
+            "mean_abs": 0.045951638370752335
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "two_pole"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 1,
+          "task_id": "unused_token_hold"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 1,
+          "task_id": "ae_gan_hold"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 1,
+          "task_id": "ring16_acquisition"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 1,
+          "task_id": "five_word_joint_acquisition"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "trajectory"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "residual_student"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "unipolar"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "cover_leftover"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "mid_scale_identity"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "mode_hold"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_two_broad"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_unequal_mass"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_unequal_width"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_anisotropic"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_overlap"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_spiral"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_stripes2"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_bars4"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_blobs4"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_intensity2"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "grid100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "rotated100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "staggered100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 3,
+          "task_id": "ring_hold"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 3,
+          "task_id": "ring_extension"
+        }
+      ],
+      "trainer_family": "k3p"
+    },
+    {
       "candidate_id": "k3p--862c7c23a730daa7bae2c2076b47e192483f4731012e3faa97e9881c708edb0f",
       "candidate_revision": "220de27f8bd988f7bc660140ad6d7262957cc366d417129e8106ff25018c957c",
       "claim_contract": {
@@ -25766,6 +28514,86 @@
       "trial_ids": [
         "k3p--370894f9284090fc9771145a869f2d7fa617283c3736c8e461a47553c9668ce6",
         "k3p--9f4bc2973d95cf1545e009ec044ed582a318e6d869d62f4d99f6eee529d1d93d"
+      ]
+    },
+    {
+      "candidate_id": "k3p-global-tier1-v3",
+      "conclusion": "Concluded 8 whole configurations. Recorded selection: best_observed; default adoption False.",
+      "evidence_scope": "published_summary",
+      "goal": "discriminator_stability",
+      "hypothesis": "Within the existing input-noisy/output-clean full-horizon K3P recipe, slower critic rates and faster learned-prior transport may reduce ring within-mode covariance error. Positive critic coefficients .5/1 test this tradeoff while each complete global recipe must pass all five ordinary Tier 1 tasks.",
+      "lifecycle": "concluded",
+      "materialization": "reports/forge/publication-records.json",
+      "mechanism_class": "bounded_configuration_search",
+      "next_action": "Read the source-bound study and original evidence before another bounded hypothesis. Unknown requirements remain unknown; this projection grants no qualification or adoption.",
+      "provenance": {
+        "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "runtime_cohort": {
+          "compute_profiles": {
+            "cpu": {
+              "backend": "cpu",
+              "deterministic": true,
+              "machine": "x86_64",
+              "model": "AMD Ryzen 9 5900X 12-Core Processor",
+              "tf32": false,
+              "threads": 1
+            },
+            "cuda": {
+              "backend": "cuda",
+              "compute_capability": "8.6",
+              "deterministic": true,
+              "driver": "610.57.04",
+              "model": "NVIDIA RTX A6000",
+              "tf32": false,
+              "threads": 1
+            }
+          },
+          "execution_backend": "cuda",
+          "runtime": {
+            "implementation": "CPython",
+            "machine": "x86_64",
+            "packages": {
+              "numpy": "2.5.3",
+              "scipy": "1.17.1",
+              "torch": "2.14.0"
+            },
+            "python": "3.14.7",
+            "system": "Linux"
+          }
+        },
+        "source_digests": [
+          "730b77d2b4e1e6ec34f9aed7a5d061874e70eaebb5af0ff839cff1781b849a8d"
+        ],
+        "spec_hash": "23c0fc11dae653e8531c252d022fd637eb1db2f9fbe87d10f432fb12db99f798"
+      },
+      "qualification_input": false,
+      "qualification_reuse": false,
+      "record_id": "publication-849f210dd683c11f59c90935",
+      "record_type": "published_study",
+      "recorded_cost": {
+        "evidence_wall_seconds": 248.85844791977433,
+        "new_paid_wall_seconds": 248.85844791977433,
+        "observed_attempts": 32,
+        "wall_seconds": 248.85844791977433
+      },
+      "schema_version": 1,
+      "source": {
+        "board": "reports/forge/technique-inventory.md",
+        "path": "reports/forge/configuration-search/k3p-global-tier1-v3.json",
+        "sha256": "1b587f0e4d2d72ba2bd91def230114d4dbd2570ad91b8f68a77c4105ccc0e142"
+      },
+      "study_id": "k3p-global-tier1-v3",
+      "task_results": [],
+      "trainer_family": "k3p",
+      "trial_ids": [
+        "k3p--01eca360219ea5225a6e30a31800c7bbe70ca08c3800e259c17a67f0ea528ab5",
+        "k3p--1d5fb8e62263de7b98df3fe6ae33c669bac9dfd5207651734e2ae38fe2b9fc8c",
+        "k3p--2f125618edc4e05825b879fd34cccf20f4cb4f3c2ac43001c262f8ba580c3201",
+        "k3p--810e39e941cafd725e3a103f019a6b3f2d616c5b78256e0d7a20d7e61f415fae",
+        "k3p--8721c414567d7c056864f46e71b53c73b0848a91d6a384c69e4804c4d61cf696",
+        "k3p--b1bac237024d49da20182f1a15ce2298c18475fe6c7a286a569a0f145d6936f7",
+        "k3p--bf75899e6d6805fc9779dbbb56e2ed937ffcb838f70e7b64ca422e48cea37d82",
+        "k3p--d9270948218dc559ecd52946f251ab755bc201f72aae5bcca8a11b7439965510"
       ]
     },
     {
@@ -33127,6 +35955,371 @@
       "trainer_family": "ka2"
     },
     {
+      "candidate_id": "k3p--2f125618edc4e05825b879fd34cccf20f4cb4f3c2ac43001c262f8ba580c3201",
+      "candidate_revision": "009033b7b05d1f0ffe122586e66277a72279cd6822903bffac56f5bc588bbde6",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "conclusion": "Recorded FAIL; required outcomes {'FAIL': 1, 'PASS': 3, 'UNKNOWN': 22}. Failed requirements: ring16_acquisition.",
+      "configuration_id": "2f125618edc4e05825b879fd34cccf20f4cb4f3c2ac43001c262f8ba580c3201",
+      "evidence_scope": "published_summary",
+      "goal": "discriminator_stability",
+      "hypothesis": "Within the existing input-noisy/output-clean full-horizon K3P recipe, slower critic rates and faster learned-prior transport may reduce ring within-mode covariance error. Positive critic coefficients .5/1 test this tradeoff while each complete global recipe must pass all five ordinary Tier 1 tasks.",
+      "lifecycle": "concluded",
+      "materialization": "reports/forge/publication-records.json",
+      "mechanism_class": "floor_constant",
+      "next_action": "Read the source-bound study and original evidence before another bounded hypothesis. Unknown requirements remain unknown; this projection grants no qualification or adoption.",
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "provenance": {
+        "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "receipt_bindings": [
+          {
+            "attempt_id": "324388e67c8a49538002ad603e3619c8",
+            "result_hash": "06520e4b092b01563863d8fdef6818fa780059c0cce1783feeaca070da29dcbd",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "3eed78484b4942498edc9941132f5f47",
+            "result_hash": "b108ffb72e7bb692bbfba45d1e7e9a3ebc168db9b12638a76825c253d0c82ae6",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "880125bd2dd2494d8796a57ca72bd64e",
+            "result_hash": "c46da60a3ecf54a6ad3f4d3120be93720b2c122df483af43b7483442c366f6b8",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "a76942b9b8a54ee69dd3d219523f1c61",
+            "result_hash": "f9d7b4cdba2973df0cc258105dcaa849d5d65b2ddf32140da13933e950b5733d",
+            "valid_receipt": true
+          }
+        ],
+        "recipe_sha256": "d1c5de93a3576f1ea14f8c4733d7a37cf0bf98b8cd4affaa894d090f1638274f",
+        "runtime_cohort": {
+          "compute_profiles": {
+            "cpu": {
+              "backend": "cpu",
+              "deterministic": true,
+              "machine": "x86_64",
+              "model": "AMD Ryzen 9 5900X 12-Core Processor",
+              "tf32": false,
+              "threads": 1
+            },
+            "cuda": {
+              "backend": "cuda",
+              "compute_capability": "8.6",
+              "deterministic": true,
+              "driver": "610.57.04",
+              "model": "NVIDIA RTX A6000",
+              "tf32": false,
+              "threads": 1
+            }
+          },
+          "execution_backend": "cuda",
+          "runtime": {
+            "implementation": "CPython",
+            "machine": "x86_64",
+            "packages": {
+              "numpy": "2.5.3",
+              "scipy": "1.17.1",
+              "torch": "2.14.0"
+            },
+            "python": "3.14.7",
+            "system": "Linux"
+          }
+        },
+        "source_digest": "730b77d2b4e1e6ec34f9aed7a5d061874e70eaebb5af0ff839cff1781b849a8d"
+      },
+      "qualification_input": false,
+      "qualification_reuse": false,
+      "record_id": "publication-ae61539e8e8fdf1f9ace50ed",
+      "record_type": "published_trial",
+      "recorded_cost": {
+        "evidence_wall_seconds": 32.00680957001168,
+        "new_paid_wall_seconds": 32.00680957001168,
+        "wall_seconds": 32.00680957001168
+      },
+      "recorded_qualification": {
+        "full_view_qualified": false,
+        "qualified_tier": 0,
+        "required_passed": 3,
+        "required_statuses": {
+          "FAIL": 1,
+          "PASS": 3,
+          "UNKNOWN": 22
+        },
+        "required_total": 26,
+        "tiers": [
+          {
+            "required_passed": 3,
+            "required_total": 5,
+            "statuses": {
+              "FAIL": 1,
+              "PASS": 3,
+              "UNKNOWN": 1
+            },
+            "tier": 1
+          },
+          {
+            "required_passed": 0,
+            "required_total": 19,
+            "statuses": {
+              "UNKNOWN": 19
+            },
+            "tier": 2
+          },
+          {
+            "required_passed": 0,
+            "required_total": 2,
+            "statuses": {
+              "UNKNOWN": 2
+            },
+            "tier": 3
+          }
+        ],
+        "tuning_qualified": false,
+        "tuning_required_passed": 3,
+        "tuning_required_total": 5
+      },
+      "schema_version": 1,
+      "settings": {
+        "d_lr_mult": 0.5,
+        "lr": 0.006375,
+        "prior_lr_mult": 1.0,
+        "reg_coeff": 0.5
+      },
+      "source": {
+        "board": "reports/forge/technique-inventory.md",
+        "path": "reports/forge/configuration-search/k3p-global-tier1-v3.json",
+        "sha256": "1b587f0e4d2d72ba2bd91def230114d4dbd2570ad91b8f68a77c4105ccc0e142"
+      },
+      "status": "FAIL",
+      "study_id": "k3p-global-tier1-v3",
+      "task_results": [
+        {
+          "_attempt_id": "324388e67c8a49538002ad603e3619c8",
+          "compatibility_key": "7b4ad52faa0a2f2c20005976b02caf268cca4392d46b1699d852c3219edcc757",
+          "cost": {
+            "wall_seconds": 5.8493998919730075
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "grad_med": 0.3384133577346802,
+            "mean_abs": 0.49516940116882324
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "two_pole"
+        },
+        {
+          "_attempt_id": "880125bd2dd2494d8796a57ca72bd64e",
+          "compatibility_key": "0b2af9ad3181c786b308a550a982c961723a0da5e8772ae616e6c281042ca2dc",
+          "cost": {
+            "wall_seconds": 6.119411097024567
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "concept_move": 0.9999335408210754,
+            "unused_hold": 0.9999987105543369
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "unused_token_hold"
+        },
+        {
+          "_attempt_id": "a76942b9b8a54ee69dd3d219523f1c61",
+          "compatibility_key": "441bd8abe51e06ad67800ce705428f4e63dbf8cf6ff5d8a60e122a73797eaf12",
+          "cost": {
+            "wall_seconds": 6.619788472016808
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "hold": 0.0025990637950599194,
+            "recon_mse": 0.0047431825660169125
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "ae_gan_hold"
+        },
+        {
+          "_attempt_id": "3eed78484b4942498edc9941132f5f47",
+          "compatibility_key": "a727502df910041bee9f604fe4c4fca4bf5c3b97df1f67edde0ee1c2a58e1f04",
+          "cost": {
+            "wall_seconds": 13.4182101089973
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "component_core_covariance_error": 0.6575234457850456,
+            "component_core_min_eigen_ratio": 0.2561658024787903,
+            "component_covariance_error": 7.529915865510702,
+            "component_min_eigen_ratio": 0.4011024236679077,
+            "covariance_error": 0.057259853929281235,
+            "hq": 0.853271484375,
+            "mass_tv": 0.105712890625,
+            "max_component_spill": 0.38425925374031067,
+            "mean_error": 0.08373689651489258,
+            "min_hq_mass_ratio": 0.43359375,
+            "min_mass_ratio": 0.66015625,
+            "modes": 16,
+            "resolved_core_covariance_error": 0.0,
+            "resolved_core_min_eigen_ratio": 1.0,
+            "resolved_max_component_spill": 0.0,
+            "sample_count": 4096,
+            "step": 400,
+            "sw1_normalized": 0.07128054849884205,
+            "target_scale": 3.0029242038726807
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "ring16_acquisition"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 1,
+          "task_id": "five_word_joint_acquisition"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "trajectory"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "residual_student"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "unipolar"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "cover_leftover"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "mid_scale_identity"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "mode_hold"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_two_broad"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_unequal_mass"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_unequal_width"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_anisotropic"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_overlap"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_spiral"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_stripes2"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_bars4"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_blobs4"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_intensity2"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "grid100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "rotated100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "staggered100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 3,
+          "task_id": "ring_hold"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 3,
+          "task_id": "ring_extension"
+        }
+      ],
+      "trainer_family": "k3p"
+    },
+    {
       "candidate_id": "k3p--b188804c4f52e27a2c1524f44c7e6d10b637f36846f71bdf17efada7180448e2",
       "candidate_revision": "9d3b3e89bbf2c2ff3c9ec25336d05f8971cd53515b948f7b15d743c05928b280",
       "claim_contract": {
@@ -36679,6 +39872,371 @@
       "trainer_family": "atlas"
     },
     {
+      "candidate_id": "k3p--1d5fb8e62263de7b98df3fe6ae33c669bac9dfd5207651734e2ae38fe2b9fc8c",
+      "candidate_revision": "669e0189c00752af10fc2e646383e69a1ac5194159bd7bab273b22aab8e5d13c",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "conclusion": "Recorded FAIL; required outcomes {'FAIL': 1, 'PASS': 3, 'UNKNOWN': 22}. Failed requirements: ring16_acquisition.",
+      "configuration_id": "1d5fb8e62263de7b98df3fe6ae33c669bac9dfd5207651734e2ae38fe2b9fc8c",
+      "evidence_scope": "published_summary",
+      "goal": "discriminator_stability",
+      "hypothesis": "Within the existing input-noisy/output-clean full-horizon K3P recipe, slower critic rates and faster learned-prior transport may reduce ring within-mode covariance error. Positive critic coefficients .5/1 test this tradeoff while each complete global recipe must pass all five ordinary Tier 1 tasks.",
+      "lifecycle": "concluded",
+      "materialization": "reports/forge/publication-records.json",
+      "mechanism_class": "floor_constant",
+      "next_action": "Read the source-bound study and original evidence before another bounded hypothesis. Unknown requirements remain unknown; this projection grants no qualification or adoption.",
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "provenance": {
+        "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "receipt_bindings": [
+          {
+            "attempt_id": "59fd1c25000146b29e8992b1e701786d",
+            "result_hash": "46c224a8570052d0ef0eb777b117b40ccd2d460fd8b634a80eddb8103cae53ec",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "a645f67a4a8e4f3292daabcc00860727",
+            "result_hash": "681b2b7f58ad5c27acdae6b2ce2aeedec7925cd101799b73e28406855705e393",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "cdcf4e351ab649afab5dd619be0bf5a2",
+            "result_hash": "f31dc3396d82b4326e96e68224defe90621573ae911e9cdc245bd4f6b70040f3",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "eaa606369fa649ffb9149629dbfccad6",
+            "result_hash": "506b72f4117bb3d7938bc40fe533f5efb1a95a3e4fecf5fdcbe07bec56115d30",
+            "valid_receipt": true
+          }
+        ],
+        "recipe_sha256": "4ab9927d9a0873e79e61e5ea0e70d00e1cee9aefa9eb7e5b731a350c54849b50",
+        "runtime_cohort": {
+          "compute_profiles": {
+            "cpu": {
+              "backend": "cpu",
+              "deterministic": true,
+              "machine": "x86_64",
+              "model": "AMD Ryzen 9 5900X 12-Core Processor",
+              "tf32": false,
+              "threads": 1
+            },
+            "cuda": {
+              "backend": "cuda",
+              "compute_capability": "8.6",
+              "deterministic": true,
+              "driver": "610.57.04",
+              "model": "NVIDIA RTX A6000",
+              "tf32": false,
+              "threads": 1
+            }
+          },
+          "execution_backend": "cuda",
+          "runtime": {
+            "implementation": "CPython",
+            "machine": "x86_64",
+            "packages": {
+              "numpy": "2.5.3",
+              "scipy": "1.17.1",
+              "torch": "2.14.0"
+            },
+            "python": "3.14.7",
+            "system": "Linux"
+          }
+        },
+        "source_digest": "730b77d2b4e1e6ec34f9aed7a5d061874e70eaebb5af0ff839cff1781b849a8d"
+      },
+      "qualification_input": false,
+      "qualification_reuse": false,
+      "record_id": "publication-c01728befdeea2f86efc41b3",
+      "record_type": "published_trial",
+      "recorded_cost": {
+        "evidence_wall_seconds": 31.140212779922877,
+        "new_paid_wall_seconds": 31.140212779922877,
+        "wall_seconds": 31.140212779922877
+      },
+      "recorded_qualification": {
+        "full_view_qualified": false,
+        "qualified_tier": 0,
+        "required_passed": 3,
+        "required_statuses": {
+          "FAIL": 1,
+          "PASS": 3,
+          "UNKNOWN": 22
+        },
+        "required_total": 26,
+        "tiers": [
+          {
+            "required_passed": 3,
+            "required_total": 5,
+            "statuses": {
+              "FAIL": 1,
+              "PASS": 3,
+              "UNKNOWN": 1
+            },
+            "tier": 1
+          },
+          {
+            "required_passed": 0,
+            "required_total": 19,
+            "statuses": {
+              "UNKNOWN": 19
+            },
+            "tier": 2
+          },
+          {
+            "required_passed": 0,
+            "required_total": 2,
+            "statuses": {
+              "UNKNOWN": 2
+            },
+            "tier": 3
+          }
+        ],
+        "tuning_qualified": false,
+        "tuning_required_passed": 3,
+        "tuning_required_total": 5
+      },
+      "schema_version": 1,
+      "settings": {
+        "d_lr_mult": 0.5,
+        "lr": 0.006375,
+        "prior_lr_mult": 1.0,
+        "reg_coeff": 1.0
+      },
+      "source": {
+        "board": "reports/forge/technique-inventory.md",
+        "path": "reports/forge/configuration-search/k3p-global-tier1-v3.json",
+        "sha256": "1b587f0e4d2d72ba2bd91def230114d4dbd2570ad91b8f68a77c4105ccc0e142"
+      },
+      "status": "FAIL",
+      "study_id": "k3p-global-tier1-v3",
+      "task_results": [
+        {
+          "_attempt_id": "cdcf4e351ab649afab5dd619be0bf5a2",
+          "compatibility_key": "f62d1dd40b8de74381c51e101f8785043110a617a13d07156b96b71301dce655",
+          "cost": {
+            "wall_seconds": 5.874981401953846
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "grad_med": 0.16297583281993866,
+            "mean_abs": 0.4034171998500824
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "two_pole"
+        },
+        {
+          "_attempt_id": "eaa606369fa649ffb9149629dbfccad6",
+          "compatibility_key": "0be7bcd97a8209582ad384e13065aaa515e2eb66cecfca0906b321992ad8c1ff",
+          "cost": {
+            "wall_seconds": 5.951125842984766
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "concept_move": 0.9991443753242493,
+            "unused_hold": 0.9999303052463802
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "unused_token_hold"
+        },
+        {
+          "_attempt_id": "a645f67a4a8e4f3292daabcc00860727",
+          "compatibility_key": "132d90a61825a8e8e3b79f79b3badb23ba04c5210ee0536a4062b1b84cb195b8",
+          "cost": {
+            "wall_seconds": 8.572921698971186
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "hold": 0.0006905339541845024,
+            "recon_mse": 0.004336394835263491
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "ae_gan_hold"
+        },
+        {
+          "_attempt_id": "59fd1c25000146b29e8992b1e701786d",
+          "compatibility_key": "4bef65b6a590255a4cc5f73a09f74e57358c9419c10635cc95ecbe259d79ee0f",
+          "cost": {
+            "wall_seconds": 10.741183836013079
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "component_core_covariance_error": 0.7614992149174213,
+            "component_core_min_eigen_ratio": 0.6002148985862732,
+            "component_covariance_error": 5.014576422981918,
+            "component_min_eigen_ratio": 0.6306583881378174,
+            "covariance_error": 0.06493867933750153,
+            "hq": 0.8154296875,
+            "mass_tv": 0.1123046875,
+            "max_component_spill": 0.3860294222831726,
+            "mean_error": 0.09056802839040756,
+            "min_hq_mass_ratio": 0.390625,
+            "min_mass_ratio": 0.55078125,
+            "modes": 16,
+            "resolved_core_covariance_error": 0.0,
+            "resolved_core_min_eigen_ratio": 1.0,
+            "resolved_max_component_spill": 0.0,
+            "sample_count": 4096,
+            "step": 400,
+            "sw1_normalized": 0.07148475364816231,
+            "target_scale": 3.0029242038726807
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "ring16_acquisition"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 1,
+          "task_id": "five_word_joint_acquisition"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "trajectory"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "residual_student"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "unipolar"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "cover_leftover"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "mid_scale_identity"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "mode_hold"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_two_broad"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_unequal_mass"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_unequal_width"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_anisotropic"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_overlap"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_spiral"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_stripes2"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_bars4"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_blobs4"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_intensity2"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "grid100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "rotated100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "staggered100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 3,
+          "task_id": "ring_hold"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 3,
+          "task_id": "ring_extension"
+        }
+      ],
+      "trainer_family": "k3p"
+    },
+    {
       "candidate_id": "release07-gan-v3-mog-tier1-refresh-v1",
       "conclusion": "Concluded 4 whole configurations. Recorded selection: best_observed; default adoption False.",
       "evidence_scope": "published_summary",
@@ -36936,1392 +40494,6 @@
           "metrics": {},
           "qualification_tier": 2,
           "task_id": "image-develop-img_bars4-source-transpose12"
-        }
-      ],
-      "trainer_family": "atlas"
-    },
-    {
-      "candidate_id": "atlas",
-      "cohort": "a208861906aba4acf0a271c6883a7047980a023cf188580de9c81c9fabd600f3",
-      "conclusion": "Repaired native3 continuation: 3/3 PASS, 0 FAIL, 0 unavailable; final accepted PASS. Original19 parent remains 16 PASS/1 INVALID/2 NOT_RUN under its own source. Current cost includes original19 and pretraining-invalid debits separately once and SAME cumulative metadata once.",
-      "configuration_id": "pr223-native3-repaired-20261004",
-      "evidence_scope": "published_summary",
-      "goal": "discriminator_stability",
-      "lifecycle": "concluded",
-      "materialization": "reports/forge/publication-records.json",
-      "mechanism_class": "faithful_original_native3_repaired_continuation",
-      "next_action": "Read the repaired three-case cut and authoritative SAME-ledger FINAL_COST. The original 16 remain old-source evidence; no fresh single-source 19, current 26, default or speed credit.",
-      "original_required": 19,
-      "predecessor_cost": {
-        "accepted_original_gate_counts": {
-          "FAIL": 0,
-          "PASS": 0,
-          "UNAVAILABLE": 3
-        },
-        "canonical_metadata_ledger": "/ml2/hypergan/.pg-pr223-full-original-retest-20261004.pr223-full19-metadata-cost.json",
-        "combined_prior_case_charged_seconds": 3167.891497056,
-        "execution_counts": {
-          "INVALID": 1,
-          "NOT_RUN": 2
-        },
-        "files": {
-          "reports/forge/pr223-native3-continuation-20261004/fixtures/closed-metadata-22.json": {
-            "bytes": 4644,
-            "sha256": "1cb2f30350c37bedec8e012eb674bda05641093248b9f1658db0bbab8026aaf2"
-          },
-          "reports/forge/pr223-native3-continuation-20261004/fixtures/first-invalid-debit-anchor.json": {
-            "bytes": 1948,
-            "sha256": "301b8036304c14f0c1a352af280e4c0dd2c8267f675294e62fadf3259fcd5ecb"
-          }
-        },
-        "numerical_credit": false,
-        "old_grades_are_current_credit": false,
-        "original19_case_charged_seconds": 3165.841891122982,
-        "pretraining_invalid_case_charged_seconds": 2.0496059330180287,
-        "required_closed_prefix_phases": 22,
-        "schema": "pg_pr223_native3_predecessor_cost_v1",
-        "source": {
-          "digest": "b2d0e98000d06a9731a4a40e52e226fedece194c097a1f5d939f501a9360aaa6",
-          "origin_commit": "0fa92c5b599da8ab2c891e544aafc09cf802a70d"
-        },
-        "training_started": false
-      },
-      "prior_reference": {
-        "accepted_original_gate_counts": {
-          "FAIL": 0,
-          "PASS": 16,
-          "UNAVAILABLE": 3
-        },
-        "case_charged_seconds": 3165.841891122982,
-        "execution_counts": {
-          "INVALID": 1,
-          "NOT_RUN": 2,
-          "PASS": 16
-        },
-        "files_sha256": {
-          "reports/forge/pr223-original-full-retest-stopped17-20261004/FINAL_COST.json": "2335c0da59f1155a329f72390078d1480f253ce1e17a5879a52138d53e3661d3",
-          "reports/forge/pr223-original-full-retest-stopped17-20261004/results.json": "4cca29c719ffe295712775be27167d7465090c40865d3b096aea247e61a3d4f3",
-          "reports/forge/pr223-original-full-retest-stopped17-20261004/verification.json": "a74262e6af196c7686f9275a0723ace989067f65552fb8b554a2c35948c26eb5"
-        },
-        "old_grades_are_current_credit": false,
-        "original_evidence_unchanged": true,
-        "required": 19,
-        "source": {
-          "digest": "00cadbfd06c770e16c35045b42387932b14ee3751954e5320f9e2c32799f7a2f",
-          "origin_commit": "2068a661331a45e0e283b0362dd58b7d92263c6f"
-        }
-      },
-      "provenance": {
-        "execution_digest": "a208861906aba4acf0a271c6883a7047980a023cf188580de9c81c9fabd600f3",
-        "final_cost": {
-          "bytes": 12158,
-          "path": "reports/forge/pr223-native3-repaired-20261004/FINAL_COST.json",
-          "sha256": "2b3ebdf1f7f38de990513153debcce976a757ba3f06821b6f27aeaa297871338"
-        },
-        "source_commit": "2557cfc1997a530033e48d3af1fd50b29985af49",
-        "terminal_card_sha256": "af98840f1f626b31510bf37ba8ad696f97da66ac871dc12c02bcab1a5e197fe6"
-      },
-      "qualification_input": false,
-      "qualification_reuse": false,
-      "record_id": "publication-c3f3b6808f0e8d9d99c29fb3",
-      "record_type": "published_study",
-      "recorded_cost": {
-        "aggregate_cap_seconds": 10800,
-        "aggregate_overrun_seconds": 0.0,
-        "case_caps_sum_seconds": 4290,
-        "charged_seconds": 5778.858767953003,
-        "combined_prior_case_charged_seconds": 3167.891497056,
-        "current_case_charged_seconds": 2494.779808399966,
-        "current_case_paid_wall_seconds": 2494.779808399966,
-        "current_case_reserved_seconds": 0.0,
-        "export_grace_seconds": 0,
-        "halt_required": false,
-        "metadata": {
-          "blocked": false,
-          "charged_seconds": 116.1874624970369,
-          "overrun_seconds": 0.0,
-          "paid_wall_seconds": 116.1874624970369,
-          "reserved_seconds": 0.0
-        },
-        "metadata_cap_seconds": 180,
-        "overrun_seconds": 0.0,
-        "pretraining_invalid_case_charged_seconds": 2.0496059330180287,
-        "prior_case_charged_seconds": 3165.841891122982,
-        "remaining_seconds": 5021.141232046997,
-        "retries": 0
-      },
-      "required": 3,
-      "schema_version": 1,
-      "settings": {
-        "d_lr_mult": 1.0,
-        "lr": 0.00425,
-        "prior_lr_mult": 2.0
-      },
-      "source": {
-        "board": "reports/forge/technique-inventory.md",
-        "bytes": 67385,
-        "path": "reports/forge/pr223-native3-repaired-20261004/results.json",
-        "sha256": "c6da054082feb369a83c8073f893a550763a872904e83d95404f39a80ba127bb"
-      },
-      "status": "PASS",
-      "study_id": "pr223-native3-repaired-continuation",
-      "task_results": [
-        {
-          "cost": {
-            "allowance_seconds": 1470.0,
-            "certified": true,
-            "charged_seconds": 805.900968670845,
-            "completed_terminal": true,
-            "overrun_seconds": 0.0,
-            "paid_wall_seconds": 805.900968670845,
-            "reserved_seconds": 0.0,
-            "terminal_status": "completed",
-            "unmeasured_interrupt_reserved_seconds": 0.0
-          },
-          "execution_status": "PASS",
-          "gate_status": "PASS",
-          "media": {
-            "actual_steps": [
-              0,
-              50,
-              750,
-              1750,
-              2750,
-              3750,
-              4750,
-              5750,
-              7000
-            ],
-            "bytes": 309964,
-            "caption": "FINAL full-protocol verdict; per-clock flags are original retained reads.",
-            "capture_metadata": [
-              {
-                "dtypes": {
-                  "centers": "float32",
-                  "reference_sigma": "float64",
-                  "samples": "float32",
-                  "target": "float32"
-                },
-                "output_sigma": 0.029000001028180122,
-                "primary_source": "original_native_noisy_saved_live",
-                "selected_source": "fast",
-                "shapes": {
-                  "centers": [
-                    100,
-                    2
-                  ],
-                  "reference_sigma": [],
-                  "samples": [
-                    4096,
-                    2
-                  ],
-                  "target": [
-                    4096,
-                    2
-                  ]
-                },
-                "step": 0,
-                "target_kind": "original_reference"
-              },
-              {
-                "dtypes": {
-                  "centers": "float32",
-                  "reference_sigma": "float64",
-                  "samples": "float32",
-                  "target": "float32"
-                },
-                "output_sigma": 0.028999999165534973,
-                "primary_source": "original_native_noisy_saved_live",
-                "selected_source": "fast",
-                "shapes": {
-                  "centers": [
-                    100,
-                    2
-                  ],
-                  "reference_sigma": [],
-                  "samples": [
-                    4096,
-                    2
-                  ],
-                  "target": [
-                    4096,
-                    2
-                  ]
-                },
-                "step": 50,
-                "target_kind": "original_reference"
-              },
-              {
-                "dtypes": {
-                  "centers": "float32",
-                  "reference_sigma": "float64",
-                  "samples": "float32",
-                  "target": "float32"
-                },
-                "output_sigma": 0.028999999165534973,
-                "primary_source": "original_native_noisy_saved_live",
-                "selected_source": "averaged",
-                "shapes": {
-                  "centers": [
-                    100,
-                    2
-                  ],
-                  "reference_sigma": [],
-                  "samples": [
-                    4096,
-                    2
-                  ],
-                  "target": [
-                    4096,
-                    2
-                  ]
-                },
-                "step": 750,
-                "target_kind": "original_reference"
-              },
-              {
-                "dtypes": {
-                  "centers": "float32",
-                  "reference_sigma": "float64",
-                  "samples": "float32",
-                  "target": "float32"
-                },
-                "output_sigma": 0.028999999165534973,
-                "primary_source": "original_native_noisy_saved_live",
-                "selected_source": "averaged",
-                "shapes": {
-                  "centers": [
-                    100,
-                    2
-                  ],
-                  "reference_sigma": [],
-                  "samples": [
-                    4096,
-                    2
-                  ],
-                  "target": [
-                    4096,
-                    2
-                  ]
-                },
-                "step": 1750,
-                "target_kind": "original_reference"
-              },
-              {
-                "dtypes": {
-                  "centers": "float32",
-                  "reference_sigma": "float64",
-                  "samples": "float32",
-                  "target": "float32"
-                },
-                "output_sigma": 0.028999999165534973,
-                "primary_source": "original_native_noisy_saved_live",
-                "selected_source": "averaged",
-                "shapes": {
-                  "centers": [
-                    100,
-                    2
-                  ],
-                  "reference_sigma": [],
-                  "samples": [
-                    4096,
-                    2
-                  ],
-                  "target": [
-                    4096,
-                    2
-                  ]
-                },
-                "step": 2750,
-                "target_kind": "original_reference"
-              },
-              {
-                "dtypes": {
-                  "centers": "float32",
-                  "reference_sigma": "float64",
-                  "samples": "float32",
-                  "target": "float32"
-                },
-                "output_sigma": 0.028999999165534973,
-                "primary_source": "original_native_noisy_saved_live",
-                "selected_source": "averaged",
-                "shapes": {
-                  "centers": [
-                    100,
-                    2
-                  ],
-                  "reference_sigma": [],
-                  "samples": [
-                    4096,
-                    2
-                  ],
-                  "target": [
-                    4096,
-                    2
-                  ]
-                },
-                "step": 3750,
-                "target_kind": "original_reference"
-              },
-              {
-                "dtypes": {
-                  "centers": "float32",
-                  "reference_sigma": "float64",
-                  "samples": "float32",
-                  "target": "float32"
-                },
-                "output_sigma": 0.028999999165534973,
-                "primary_source": "original_native_noisy_saved_live",
-                "selected_source": "averaged",
-                "shapes": {
-                  "centers": [
-                    100,
-                    2
-                  ],
-                  "reference_sigma": [],
-                  "samples": [
-                    4096,
-                    2
-                  ],
-                  "target": [
-                    4096,
-                    2
-                  ]
-                },
-                "step": 4750,
-                "target_kind": "original_reference"
-              },
-              {
-                "dtypes": {
-                  "centers": "float32",
-                  "reference_sigma": "float64",
-                  "samples": "float32",
-                  "target": "float32"
-                },
-                "output_sigma": 0.028999999165534973,
-                "primary_source": "original_native_noisy_saved_live",
-                "selected_source": "averaged",
-                "shapes": {
-                  "centers": [
-                    100,
-                    2
-                  ],
-                  "reference_sigma": [],
-                  "samples": [
-                    4096,
-                    2
-                  ],
-                  "target": [
-                    4096,
-                    2
-                  ]
-                },
-                "step": 5750,
-                "target_kind": "original_reference"
-              },
-              {
-                "dtypes": {
-                  "centers": "float32",
-                  "reference_sigma": "float64",
-                  "samples": "float32",
-                  "target": "float32"
-                },
-                "output_sigma": 0.028999999165534973,
-                "primary_source": "original_native_noisy_saved_live",
-                "selected_source": "averaged",
-                "shapes": {
-                  "centers": [
-                    100,
-                    2
-                  ],
-                  "reference_sigma": [],
-                  "samples": [
-                    4096,
-                    2
-                  ],
-                  "target": [
-                    4096,
-                    2
-                  ]
-                },
-                "step": 7000,
-                "target_kind": "original_reference"
-              }
-            ],
-            "file": "gifs/native-grid100.gif",
-            "frames": 9,
-            "original_gate": "PASS",
-            "sha256": "9e0e8c9b85a086bfc5ab83705d3bfffb6a0d2ee9cbd5e38499c878db1221e805"
-          },
-          "metrics": {
-            "acc_abs_cov_trace_bias": 0.014538749700289122,
-            "acc_accuracy_pass": true,
-            "acc_accuracy_score": 0.46727010256809565,
-            "acc_center_rms_sigma": 0.16660712176422504,
-            "acc_cov_trace_bias": 0.014538749700289122,
-            "acc_frozen_pass": true,
-            "acc_mass_tv": 0.03280000000000001,
-            "acc_passed": true,
-            "acc_radial_ks": 0.01375962551126797,
-            "holdout_abs_cov_trace_bias": 0.012156725314119488,
-            "holdout_accuracy_pass": true,
-            "holdout_accuracy_score": 0.34655958134088716,
-            "holdout_center_rms_sigma": 0.13973261075607618,
-            "holdout_cov_trace_bias": 0.012156725314119488,
-            "holdout_frozen_pass": true,
-            "holdout_mass_tv": 0.019510000000000003,
-            "holdout_passed": true,
-            "holdout_precision": 0.98453,
-            "holdout_radial_ks": 0.009633654071012243,
-            "hq": 0.9825,
-            "mass_tv": 0.032799999999999996,
-            "max_cov_eig_ratio": 1.3475564418456727,
-            "max_mode_mass": 0.01155,
-            "max_radial_median_ratio": 1.1780665798263272,
-            "min_cov_eig_ratio": 0.6634834837761125,
-            "min_hq_mode_mass": 0.0084,
-            "min_radial_median_ratio": 0.8814416511708483,
-            "modes": 100,
-            "output_sigma": 0.028999999165534973,
-            "precision": 0.9825,
-            "sharp_clean": 0.29834476113319397,
-            "sharp_noisy": 1.1995784044265747,
-            "step": 7000
-          },
-          "original_gate": "PASS",
-          "original_requirements": [
-            [
-              "modes",
-              ">=",
-              100
-            ],
-            [
-              "precision",
-              ">=",
-              0.97
-            ],
-            [
-              "min_hq_mode_mass",
-              ">=",
-              0.005
-            ],
-            [
-              "mass_tv",
-              "<=",
-              0.1
-            ],
-            [
-              "max_mode_mass",
-              "<=",
-              0.02
-            ],
-            [
-              "min_cov_eig_ratio",
-              ">=",
-              0.4
-            ],
-            [
-              "max_cov_eig_ratio",
-              "<=",
-              1.7
-            ],
-            [
-              "min_radial_median_ratio",
-              ">=",
-              0.65
-            ],
-            [
-              "max_radial_median_ratio",
-              "<=",
-              1.4
-            ],
-            [
-              "acc_mass_tv",
-              "<=",
-              0.06
-            ],
-            [
-              "acc_center_rms_sigma",
-              "<=",
-              0.2
-            ],
-            [
-              "acc_abs_cov_trace_bias",
-              "<=",
-              0.1
-            ],
-            [
-              "acc_radial_ks",
-              "<=",
-              0.04
-            ]
-          ],
-          "parent_original_id": "atlas-original19-native-grid100",
-          "raw_status": "PASS",
-          "recipe_sha256": "49f4ea356bd3349334b2048d74f13ea78a15ec2abc1ab2d005df8f1081e7c15a",
-          "sampling": {
-            "clean_diagnostic": "output-noise-off same selected law",
-            "evaluation_noise_seed": 1636,
-            "evaluation_prior_seed": 1637,
-            "evaluation_target_seed": 1635,
-            "forced_ema_diagnostic": "separate original EMA branch",
-            "holdout_seed_offsets": {
-              "latent": 1603,
-              "noise": 1602,
-              "target": 1601
-            },
-            "independent_holdout_samples": 100000,
-            "observations": 34,
-            "primary_law": "state-selected weights/current learned output kernel",
-            "public_policy_latent_perturbation": "retained",
-            "samples": 20000,
-            "terminal_steps": [
-              6000,
-              6250,
-              6500,
-              6750,
-              7000
-            ]
-          },
-          "task_id": "pr223-native3-continuation-v1-native-grid100"
-        },
-        {
-          "cost": {
-            "allowance_seconds": 1440.0,
-            "certified": true,
-            "charged_seconds": 782.1624106580857,
-            "completed_terminal": true,
-            "overrun_seconds": 0.0,
-            "paid_wall_seconds": 782.1624106580857,
-            "reserved_seconds": 0.0,
-            "terminal_status": "completed",
-            "unmeasured_interrupt_reserved_seconds": 0.0
-          },
-          "execution_status": "PASS",
-          "gate_status": "PASS",
-          "media": {
-            "actual_steps": [
-              0,
-              50,
-              750,
-              1750,
-              2750,
-              3750,
-              4750,
-              5750,
-              7000
-            ],
-            "bytes": 290232,
-            "caption": "FINAL full-protocol verdict; per-clock flags are original retained reads.",
-            "capture_metadata": [
-              {
-                "dtypes": {
-                  "centers": "float32",
-                  "reference_sigma": "float64",
-                  "samples": "float32",
-                  "target": "float32"
-                },
-                "output_sigma": 0.029000001028180122,
-                "primary_source": "original_native_noisy_saved_live",
-                "selected_source": "fast",
-                "shapes": {
-                  "centers": [
-                    100,
-                    2
-                  ],
-                  "reference_sigma": [],
-                  "samples": [
-                    4096,
-                    2
-                  ],
-                  "target": [
-                    4096,
-                    2
-                  ]
-                },
-                "step": 0,
-                "target_kind": "original_reference"
-              },
-              {
-                "dtypes": {
-                  "centers": "float32",
-                  "reference_sigma": "float64",
-                  "samples": "float32",
-                  "target": "float32"
-                },
-                "output_sigma": 0.028999999165534973,
-                "primary_source": "original_native_noisy_saved_live",
-                "selected_source": "fast",
-                "shapes": {
-                  "centers": [
-                    100,
-                    2
-                  ],
-                  "reference_sigma": [],
-                  "samples": [
-                    4096,
-                    2
-                  ],
-                  "target": [
-                    4096,
-                    2
-                  ]
-                },
-                "step": 50,
-                "target_kind": "original_reference"
-              },
-              {
-                "dtypes": {
-                  "centers": "float32",
-                  "reference_sigma": "float64",
-                  "samples": "float32",
-                  "target": "float32"
-                },
-                "output_sigma": 0.028999999165534973,
-                "primary_source": "original_native_noisy_saved_live",
-                "selected_source": "averaged",
-                "shapes": {
-                  "centers": [
-                    100,
-                    2
-                  ],
-                  "reference_sigma": [],
-                  "samples": [
-                    4096,
-                    2
-                  ],
-                  "target": [
-                    4096,
-                    2
-                  ]
-                },
-                "step": 750,
-                "target_kind": "original_reference"
-              },
-              {
-                "dtypes": {
-                  "centers": "float32",
-                  "reference_sigma": "float64",
-                  "samples": "float32",
-                  "target": "float32"
-                },
-                "output_sigma": 0.028999999165534973,
-                "primary_source": "original_native_noisy_saved_live",
-                "selected_source": "averaged",
-                "shapes": {
-                  "centers": [
-                    100,
-                    2
-                  ],
-                  "reference_sigma": [],
-                  "samples": [
-                    4096,
-                    2
-                  ],
-                  "target": [
-                    4096,
-                    2
-                  ]
-                },
-                "step": 1750,
-                "target_kind": "original_reference"
-              },
-              {
-                "dtypes": {
-                  "centers": "float32",
-                  "reference_sigma": "float64",
-                  "samples": "float32",
-                  "target": "float32"
-                },
-                "output_sigma": 0.028999999165534973,
-                "primary_source": "original_native_noisy_saved_live",
-                "selected_source": "averaged",
-                "shapes": {
-                  "centers": [
-                    100,
-                    2
-                  ],
-                  "reference_sigma": [],
-                  "samples": [
-                    4096,
-                    2
-                  ],
-                  "target": [
-                    4096,
-                    2
-                  ]
-                },
-                "step": 2750,
-                "target_kind": "original_reference"
-              },
-              {
-                "dtypes": {
-                  "centers": "float32",
-                  "reference_sigma": "float64",
-                  "samples": "float32",
-                  "target": "float32"
-                },
-                "output_sigma": 0.028999999165534973,
-                "primary_source": "original_native_noisy_saved_live",
-                "selected_source": "averaged",
-                "shapes": {
-                  "centers": [
-                    100,
-                    2
-                  ],
-                  "reference_sigma": [],
-                  "samples": [
-                    4096,
-                    2
-                  ],
-                  "target": [
-                    4096,
-                    2
-                  ]
-                },
-                "step": 3750,
-                "target_kind": "original_reference"
-              },
-              {
-                "dtypes": {
-                  "centers": "float32",
-                  "reference_sigma": "float64",
-                  "samples": "float32",
-                  "target": "float32"
-                },
-                "output_sigma": 0.028999999165534973,
-                "primary_source": "original_native_noisy_saved_live",
-                "selected_source": "averaged",
-                "shapes": {
-                  "centers": [
-                    100,
-                    2
-                  ],
-                  "reference_sigma": [],
-                  "samples": [
-                    4096,
-                    2
-                  ],
-                  "target": [
-                    4096,
-                    2
-                  ]
-                },
-                "step": 4750,
-                "target_kind": "original_reference"
-              },
-              {
-                "dtypes": {
-                  "centers": "float32",
-                  "reference_sigma": "float64",
-                  "samples": "float32",
-                  "target": "float32"
-                },
-                "output_sigma": 0.028999999165534973,
-                "primary_source": "original_native_noisy_saved_live",
-                "selected_source": "averaged",
-                "shapes": {
-                  "centers": [
-                    100,
-                    2
-                  ],
-                  "reference_sigma": [],
-                  "samples": [
-                    4096,
-                    2
-                  ],
-                  "target": [
-                    4096,
-                    2
-                  ]
-                },
-                "step": 5750,
-                "target_kind": "original_reference"
-              },
-              {
-                "dtypes": {
-                  "centers": "float32",
-                  "reference_sigma": "float64",
-                  "samples": "float32",
-                  "target": "float32"
-                },
-                "output_sigma": 0.028999999165534973,
-                "primary_source": "original_native_noisy_saved_live",
-                "selected_source": "averaged",
-                "shapes": {
-                  "centers": [
-                    100,
-                    2
-                  ],
-                  "reference_sigma": [],
-                  "samples": [
-                    4096,
-                    2
-                  ],
-                  "target": [
-                    4096,
-                    2
-                  ]
-                },
-                "step": 7000,
-                "target_kind": "original_reference"
-              }
-            ],
-            "file": "gifs/native-rotated100.gif",
-            "frames": 9,
-            "original_gate": "PASS",
-            "sha256": "030e74ee3315fd0347f1cf8d7d29d691444607eea6353270304e29fc57b9964f"
-          },
-          "metrics": {
-            "acc_abs_cov_trace_bias": 0.017777074394604186,
-            "acc_accuracy_pass": true,
-            "acc_accuracy_score": 0.4288592283949333,
-            "acc_center_rms_sigma": 0.1364375762756252,
-            "acc_cov_trace_bias": 0.017777074394604186,
-            "acc_frozen_pass": true,
-            "acc_mass_tv": 0.030449999999999998,
-            "acc_passed": true,
-            "acc_radial_ks": 0.013919131530222617,
-            "holdout_abs_cov_trace_bias": 0.006633538810075557,
-            "holdout_accuracy_pass": true,
-            "holdout_accuracy_score": 0.26187963059897773,
-            "holdout_center_rms_sigma": 0.11644842800795982,
-            "holdout_cov_trace_bias": 0.006633538810075557,
-            "holdout_frozen_pass": true,
-            "holdout_mass_tv": 0.014029999999999997,
-            "holdout_passed": true,
-            "holdout_precision": 0.98462,
-            "holdout_radial_ks": 0.0066043064368809246,
-            "hq": 0.98535,
-            "mass_tv": 0.030450000000000005,
-            "max_cov_eig_ratio": 1.3948209113094188,
-            "max_mode_mass": 0.01195,
-            "max_radial_median_ratio": 1.1508061909538145,
-            "min_cov_eig_ratio": 0.69270186331834,
-            "min_hq_mode_mass": 0.0083,
-            "min_radial_median_ratio": 0.8851457552813397,
-            "modes": 100,
-            "output_sigma": 0.028999999165534973,
-            "precision": 0.98535,
-            "sharp_clean": 0.2781251072883606,
-            "sharp_noisy": 1.1951535940170288,
-            "step": 7000
-          },
-          "original_gate": "PASS",
-          "original_requirements": [
-            [
-              "modes",
-              ">=",
-              100
-            ],
-            [
-              "precision",
-              ">=",
-              0.97
-            ],
-            [
-              "min_hq_mode_mass",
-              ">=",
-              0.005
-            ],
-            [
-              "mass_tv",
-              "<=",
-              0.1
-            ],
-            [
-              "max_mode_mass",
-              "<=",
-              0.02
-            ],
-            [
-              "min_cov_eig_ratio",
-              ">=",
-              0.4
-            ],
-            [
-              "max_cov_eig_ratio",
-              "<=",
-              1.7
-            ],
-            [
-              "min_radial_median_ratio",
-              ">=",
-              0.65
-            ],
-            [
-              "max_radial_median_ratio",
-              "<=",
-              1.4
-            ],
-            [
-              "acc_mass_tv",
-              "<=",
-              0.06
-            ],
-            [
-              "acc_center_rms_sigma",
-              "<=",
-              0.2
-            ],
-            [
-              "acc_abs_cov_trace_bias",
-              "<=",
-              0.1
-            ],
-            [
-              "acc_radial_ks",
-              "<=",
-              0.04
-            ]
-          ],
-          "parent_original_id": "atlas-original19-native-rotated100",
-          "raw_status": "PASS",
-          "recipe_sha256": "49f4ea356bd3349334b2048d74f13ea78a15ec2abc1ab2d005df8f1081e7c15a",
-          "sampling": {
-            "clean_diagnostic": "output-noise-off same selected law",
-            "evaluation_noise_seed": 1636,
-            "evaluation_prior_seed": 1637,
-            "evaluation_target_seed": 1635,
-            "forced_ema_diagnostic": "separate original EMA branch",
-            "holdout_seed_offsets": {
-              "latent": 1603,
-              "noise": 1602,
-              "target": 1601
-            },
-            "independent_holdout_samples": 100000,
-            "observations": 34,
-            "primary_law": "state-selected weights/current learned output kernel",
-            "public_policy_latent_perturbation": "retained",
-            "samples": 20000,
-            "terminal_steps": [
-              6000,
-              6250,
-              6500,
-              6750,
-              7000
-            ]
-          },
-          "task_id": "pr223-native3-continuation-v1-native-rotated100"
-        },
-        {
-          "cost": {
-            "allowance_seconds": 1380.0,
-            "certified": true,
-            "charged_seconds": 906.7164290710352,
-            "completed_terminal": true,
-            "overrun_seconds": 0.0,
-            "paid_wall_seconds": 906.7164290710352,
-            "reserved_seconds": 0.0,
-            "terminal_status": "completed",
-            "unmeasured_interrupt_reserved_seconds": 0.0
-          },
-          "execution_status": "PASS",
-          "gate_status": "PASS",
-          "media": {
-            "actual_steps": [
-              0,
-              50,
-              750,
-              1750,
-              2750,
-              3750,
-              4750,
-              5750,
-              7000
-            ],
-            "bytes": 291484,
-            "caption": "FINAL full-protocol verdict; per-clock flags are original retained reads.",
-            "capture_metadata": [
-              {
-                "dtypes": {
-                  "centers": "float32",
-                  "reference_sigma": "float64",
-                  "samples": "float32",
-                  "target": "float32"
-                },
-                "output_sigma": 0.029000001028180122,
-                "primary_source": "original_native_noisy_saved_live",
-                "selected_source": "fast",
-                "shapes": {
-                  "centers": [
-                    100,
-                    2
-                  ],
-                  "reference_sigma": [],
-                  "samples": [
-                    4096,
-                    2
-                  ],
-                  "target": [
-                    4096,
-                    2
-                  ]
-                },
-                "step": 0,
-                "target_kind": "original_reference"
-              },
-              {
-                "dtypes": {
-                  "centers": "float32",
-                  "reference_sigma": "float64",
-                  "samples": "float32",
-                  "target": "float32"
-                },
-                "output_sigma": 0.028999999165534973,
-                "primary_source": "original_native_noisy_saved_live",
-                "selected_source": "fast",
-                "shapes": {
-                  "centers": [
-                    100,
-                    2
-                  ],
-                  "reference_sigma": [],
-                  "samples": [
-                    4096,
-                    2
-                  ],
-                  "target": [
-                    4096,
-                    2
-                  ]
-                },
-                "step": 50,
-                "target_kind": "original_reference"
-              },
-              {
-                "dtypes": {
-                  "centers": "float32",
-                  "reference_sigma": "float64",
-                  "samples": "float32",
-                  "target": "float32"
-                },
-                "output_sigma": 0.028999999165534973,
-                "primary_source": "original_native_noisy_saved_live",
-                "selected_source": "averaged",
-                "shapes": {
-                  "centers": [
-                    100,
-                    2
-                  ],
-                  "reference_sigma": [],
-                  "samples": [
-                    4096,
-                    2
-                  ],
-                  "target": [
-                    4096,
-                    2
-                  ]
-                },
-                "step": 750,
-                "target_kind": "original_reference"
-              },
-              {
-                "dtypes": {
-                  "centers": "float32",
-                  "reference_sigma": "float64",
-                  "samples": "float32",
-                  "target": "float32"
-                },
-                "output_sigma": 0.028999999165534973,
-                "primary_source": "original_native_noisy_saved_live",
-                "selected_source": "averaged",
-                "shapes": {
-                  "centers": [
-                    100,
-                    2
-                  ],
-                  "reference_sigma": [],
-                  "samples": [
-                    4096,
-                    2
-                  ],
-                  "target": [
-                    4096,
-                    2
-                  ]
-                },
-                "step": 1750,
-                "target_kind": "original_reference"
-              },
-              {
-                "dtypes": {
-                  "centers": "float32",
-                  "reference_sigma": "float64",
-                  "samples": "float32",
-                  "target": "float32"
-                },
-                "output_sigma": 0.028999999165534973,
-                "primary_source": "original_native_noisy_saved_live",
-                "selected_source": "averaged",
-                "shapes": {
-                  "centers": [
-                    100,
-                    2
-                  ],
-                  "reference_sigma": [],
-                  "samples": [
-                    4096,
-                    2
-                  ],
-                  "target": [
-                    4096,
-                    2
-                  ]
-                },
-                "step": 2750,
-                "target_kind": "original_reference"
-              },
-              {
-                "dtypes": {
-                  "centers": "float32",
-                  "reference_sigma": "float64",
-                  "samples": "float32",
-                  "target": "float32"
-                },
-                "output_sigma": 0.028999999165534973,
-                "primary_source": "original_native_noisy_saved_live",
-                "selected_source": "averaged",
-                "shapes": {
-                  "centers": [
-                    100,
-                    2
-                  ],
-                  "reference_sigma": [],
-                  "samples": [
-                    4096,
-                    2
-                  ],
-                  "target": [
-                    4096,
-                    2
-                  ]
-                },
-                "step": 3750,
-                "target_kind": "original_reference"
-              },
-              {
-                "dtypes": {
-                  "centers": "float32",
-                  "reference_sigma": "float64",
-                  "samples": "float32",
-                  "target": "float32"
-                },
-                "output_sigma": 0.028999999165534973,
-                "primary_source": "original_native_noisy_saved_live",
-                "selected_source": "averaged",
-                "shapes": {
-                  "centers": [
-                    100,
-                    2
-                  ],
-                  "reference_sigma": [],
-                  "samples": [
-                    4096,
-                    2
-                  ],
-                  "target": [
-                    4096,
-                    2
-                  ]
-                },
-                "step": 4750,
-                "target_kind": "original_reference"
-              },
-              {
-                "dtypes": {
-                  "centers": "float32",
-                  "reference_sigma": "float64",
-                  "samples": "float32",
-                  "target": "float32"
-                },
-                "output_sigma": 0.028999999165534973,
-                "primary_source": "original_native_noisy_saved_live",
-                "selected_source": "averaged",
-                "shapes": {
-                  "centers": [
-                    100,
-                    2
-                  ],
-                  "reference_sigma": [],
-                  "samples": [
-                    4096,
-                    2
-                  ],
-                  "target": [
-                    4096,
-                    2
-                  ]
-                },
-                "step": 5750,
-                "target_kind": "original_reference"
-              },
-              {
-                "dtypes": {
-                  "centers": "float32",
-                  "reference_sigma": "float64",
-                  "samples": "float32",
-                  "target": "float32"
-                },
-                "output_sigma": 0.028999999165534973,
-                "primary_source": "original_native_noisy_saved_live",
-                "selected_source": "averaged",
-                "shapes": {
-                  "centers": [
-                    100,
-                    2
-                  ],
-                  "reference_sigma": [],
-                  "samples": [
-                    4096,
-                    2
-                  ],
-                  "target": [
-                    4096,
-                    2
-                  ]
-                },
-                "step": 7000,
-                "target_kind": "original_reference"
-              }
-            ],
-            "file": "gifs/native-staggered100.gif",
-            "frames": 9,
-            "original_gate": "PASS",
-            "sha256": "930b402dac983b56fbb8792a7f926625a26200ab71857d7d5bf3e6f6fe0caa6b"
-          },
-          "metrics": {
-            "acc_abs_cov_trace_bias": 0.003013395044575873,
-            "acc_accuracy_pass": true,
-            "acc_accuracy_score": 0.33241022167893947,
-            "acc_center_rms_sigma": 0.13574737701973882,
-            "acc_cov_trace_bias": -0.003013395044575873,
-            "acc_frozen_pass": true,
-            "acc_mass_tv": 0.029099999999999997,
-            "acc_passed": true,
-            "acc_radial_ks": 0.005430802046852201,
-            "holdout_abs_cov_trace_bias": 0.013583609196344826,
-            "holdout_accuracy_pass": true,
-            "holdout_accuracy_score": 0.2709135386538677,
-            "holdout_center_rms_sigma": 0.11397180765418091,
-            "holdout_cov_trace_bias": -0.013583609196344826,
-            "holdout_frozen_pass": true,
-            "holdout_mass_tv": 0.015850000000000003,
-            "holdout_passed": true,
-            "holdout_precision": 0.98659,
-            "holdout_radial_ks": 0.004551694308578047,
-            "hq": 0.9863,
-            "mass_tv": 0.0291,
-            "max_cov_eig_ratio": 1.309702555511581,
-            "max_mode_mass": 0.0122,
-            "max_radial_median_ratio": 1.165496004207532,
-            "min_cov_eig_ratio": 0.6405448350673867,
-            "min_hq_mode_mass": 0.0082,
-            "min_radial_median_ratio": 0.8673405272585325,
-            "modes": 100,
-            "output_sigma": 0.028999999165534973,
-            "precision": 0.9863,
-            "sharp_clean": 0.21592609584331512,
-            "sharp_noisy": 1.1808825731277466,
-            "step": 7000
-          },
-          "original_gate": "PASS",
-          "original_requirements": [
-            [
-              "modes",
-              ">=",
-              100
-            ],
-            [
-              "precision",
-              ">=",
-              0.97
-            ],
-            [
-              "min_hq_mode_mass",
-              ">=",
-              0.005
-            ],
-            [
-              "mass_tv",
-              "<=",
-              0.1
-            ],
-            [
-              "max_mode_mass",
-              "<=",
-              0.02
-            ],
-            [
-              "min_cov_eig_ratio",
-              ">=",
-              0.4
-            ],
-            [
-              "max_cov_eig_ratio",
-              "<=",
-              1.7
-            ],
-            [
-              "min_radial_median_ratio",
-              ">=",
-              0.65
-            ],
-            [
-              "max_radial_median_ratio",
-              "<=",
-              1.4
-            ],
-            [
-              "acc_mass_tv",
-              "<=",
-              0.06
-            ],
-            [
-              "acc_center_rms_sigma",
-              "<=",
-              0.2
-            ],
-            [
-              "acc_abs_cov_trace_bias",
-              "<=",
-              0.1
-            ],
-            [
-              "acc_radial_ks",
-              "<=",
-              0.04
-            ]
-          ],
-          "parent_original_id": "atlas-original19-native-staggered100",
-          "raw_status": "PASS",
-          "recipe_sha256": "49f4ea356bd3349334b2048d74f13ea78a15ec2abc1ab2d005df8f1081e7c15a",
-          "sampling": {
-            "clean_diagnostic": "output-noise-off same selected law",
-            "evaluation_noise_seed": 1636,
-            "evaluation_prior_seed": 1637,
-            "evaluation_target_seed": 1635,
-            "forced_ema_diagnostic": "separate original EMA branch",
-            "holdout_seed_offsets": {
-              "latent": 1603,
-              "noise": 1602,
-              "target": 1601
-            },
-            "independent_holdout_samples": 100000,
-            "observations": 34,
-            "primary_law": "state-selected weights/current learned output kernel",
-            "public_policy_latent_perturbation": "retained",
-            "samples": 20000,
-            "terminal_steps": [
-              6000,
-              6250,
-              6500,
-              6750,
-              7000
-            ]
-          },
-          "task_id": "pr223-native3-continuation-v1-native-staggered100"
         }
       ],
       "trainer_family": "atlas"
@@ -40881,6 +43053,371 @@
       ]
     },
     {
+      "candidate_id": "k3p--b1bac237024d49da20182f1a15ce2298c18475fe6c7a286a569a0f145d6936f7",
+      "candidate_revision": "0727127ac7cf39f58b1676a20b2beb93562b256672c099530f247e6b37625405",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "conclusion": "Recorded FAIL; required outcomes {'FAIL': 1, 'PASS': 3, 'UNKNOWN': 22}. Failed requirements: ring16_acquisition.",
+      "configuration_id": "b1bac237024d49da20182f1a15ce2298c18475fe6c7a286a569a0f145d6936f7",
+      "evidence_scope": "published_summary",
+      "goal": "discriminator_stability",
+      "hypothesis": "Within the existing input-noisy/output-clean full-horizon K3P recipe, slower critic rates and faster learned-prior transport may reduce ring within-mode covariance error. Positive critic coefficients .5/1 test this tradeoff while each complete global recipe must pass all five ordinary Tier 1 tasks.",
+      "lifecycle": "concluded",
+      "materialization": "reports/forge/publication-records.json",
+      "mechanism_class": "floor_constant",
+      "next_action": "Read the source-bound study and original evidence before another bounded hypothesis. Unknown requirements remain unknown; this projection grants no qualification or adoption.",
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "provenance": {
+        "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "receipt_bindings": [
+          {
+            "attempt_id": "05d0b47f2cb949baa8a10958793a6e10",
+            "result_hash": "5dd14ee970c226f185155708a245eb62a3fd0c21288f653c77850e162feede36",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "90dfe39b882048b783e55370af8503f9",
+            "result_hash": "53b30f3ff0229fbafe6afb59fe58e32c8dcbb1741fac6e467c2eccc7e26fbf1c",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "a7b9eea211ed494890fbaf831e865717",
+            "result_hash": "6a1738c47af1a6bc845ec6eb3e4b82164f704440236e1fa48b46469648f6cac2",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "abdadee7d5374eb697c8b6090f301e2e",
+            "result_hash": "53a5f1b5346d16be6bc464660dd0081aee8ac410d3e9b1a34fb1f6ef8734076e",
+            "valid_receipt": true
+          }
+        ],
+        "recipe_sha256": "8218df6d2afec817b644e5fd6ce94dd9a39184e3b11f625145510c18aa316fbb",
+        "runtime_cohort": {
+          "compute_profiles": {
+            "cpu": {
+              "backend": "cpu",
+              "deterministic": true,
+              "machine": "x86_64",
+              "model": "AMD Ryzen 9 5900X 12-Core Processor",
+              "tf32": false,
+              "threads": 1
+            },
+            "cuda": {
+              "backend": "cuda",
+              "compute_capability": "8.6",
+              "deterministic": true,
+              "driver": "610.57.04",
+              "model": "NVIDIA RTX A6000",
+              "tf32": false,
+              "threads": 1
+            }
+          },
+          "execution_backend": "cuda",
+          "runtime": {
+            "implementation": "CPython",
+            "machine": "x86_64",
+            "packages": {
+              "numpy": "2.5.3",
+              "scipy": "1.17.1",
+              "torch": "2.14.0"
+            },
+            "python": "3.14.7",
+            "system": "Linux"
+          }
+        },
+        "source_digest": "730b77d2b4e1e6ec34f9aed7a5d061874e70eaebb5af0ff839cff1781b849a8d"
+      },
+      "qualification_input": false,
+      "qualification_reuse": false,
+      "record_id": "publication-d877c72dec27f7d20d4bbc65",
+      "record_type": "published_trial",
+      "recorded_cost": {
+        "evidence_wall_seconds": 30.841897670004983,
+        "new_paid_wall_seconds": 30.841897670004983,
+        "wall_seconds": 30.841897670004983
+      },
+      "recorded_qualification": {
+        "full_view_qualified": false,
+        "qualified_tier": 0,
+        "required_passed": 3,
+        "required_statuses": {
+          "FAIL": 1,
+          "PASS": 3,
+          "UNKNOWN": 22
+        },
+        "required_total": 26,
+        "tiers": [
+          {
+            "required_passed": 3,
+            "required_total": 5,
+            "statuses": {
+              "FAIL": 1,
+              "PASS": 3,
+              "UNKNOWN": 1
+            },
+            "tier": 1
+          },
+          {
+            "required_passed": 0,
+            "required_total": 19,
+            "statuses": {
+              "UNKNOWN": 19
+            },
+            "tier": 2
+          },
+          {
+            "required_passed": 0,
+            "required_total": 2,
+            "statuses": {
+              "UNKNOWN": 2
+            },
+            "tier": 3
+          }
+        ],
+        "tuning_qualified": false,
+        "tuning_required_passed": 3,
+        "tuning_required_total": 5
+      },
+      "schema_version": 1,
+      "settings": {
+        "d_lr_mult": 1.0,
+        "lr": 0.006375,
+        "prior_lr_mult": 0.5,
+        "reg_coeff": 0.5
+      },
+      "source": {
+        "board": "reports/forge/technique-inventory.md",
+        "path": "reports/forge/configuration-search/k3p-global-tier1-v3.json",
+        "sha256": "1b587f0e4d2d72ba2bd91def230114d4dbd2570ad91b8f68a77c4105ccc0e142"
+      },
+      "status": "FAIL",
+      "study_id": "k3p-global-tier1-v3",
+      "task_results": [
+        {
+          "_attempt_id": "abdadee7d5374eb697c8b6090f301e2e",
+          "compatibility_key": "6a8fa775328c6adea7959c75b61c9c5806da4865c5c8113aa32491b6ae2644ea",
+          "cost": {
+            "wall_seconds": 5.761498062987812
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "grad_med": 0.30152904987335205,
+            "mean_abs": 0.6357372403144836
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "two_pole"
+        },
+        {
+          "_attempt_id": "a7b9eea211ed494890fbaf831e865717",
+          "compatibility_key": "35b57fac3dd7af7443076b72a285d3ddb4a8960a070ea5ddb739a36755c3db5e",
+          "cost": {
+            "wall_seconds": 6.086791103996802
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "concept_move": 0.9984639883041382,
+            "unused_hold": 0.9998396907612914
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "unused_token_hold"
+        },
+        {
+          "_attempt_id": "90dfe39b882048b783e55370af8503f9",
+          "compatibility_key": "ca2cac899724f39bb1a27d24ca2f0598322507eebd45dd38992f7e505a006656",
+          "cost": {
+            "wall_seconds": 6.549084755009972
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "hold": 0.0011708573438227177,
+            "recon_mse": 0.002898577833548188
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "ae_gan_hold"
+        },
+        {
+          "_attempt_id": "05d0b47f2cb949baa8a10958793a6e10",
+          "compatibility_key": "26b7665afd5bad12784788112882ccc889867c33734f799da6aae4241e1d18cf",
+          "cost": {
+            "wall_seconds": 12.444523748010397
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "component_core_covariance_error": 0.6687921769917011,
+            "component_core_min_eigen_ratio": 0.2374284565448761,
+            "component_covariance_error": 2.367654570378363,
+            "component_min_eigen_ratio": 0.2294418215751648,
+            "covariance_error": 0.05070202797651291,
+            "hq": 0.859375,
+            "mass_tv": 0.086181640625,
+            "max_component_spill": 0.2866666615009308,
+            "mean_error": 0.030288012698292732,
+            "min_hq_mass_ratio": 0.51171875,
+            "min_mass_ratio": 0.6015625,
+            "modes": 16,
+            "resolved_core_covariance_error": 0.0,
+            "resolved_core_min_eigen_ratio": 1.0,
+            "resolved_max_component_spill": 0.0,
+            "sample_count": 4096,
+            "step": 400,
+            "sw1_normalized": 0.03435971959743003,
+            "target_scale": 3.0029242038726807
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "ring16_acquisition"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 1,
+          "task_id": "five_word_joint_acquisition"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "trajectory"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "residual_student"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "unipolar"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "cover_leftover"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "mid_scale_identity"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "mode_hold"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_two_broad"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_unequal_mass"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_unequal_width"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_anisotropic"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_overlap"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_spiral"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_stripes2"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_bars4"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_blobs4"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_intensity2"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "grid100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "rotated100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "staggered100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 3,
+          "task_id": "ring_hold"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 3,
+          "task_id": "ring_extension"
+        }
+      ],
+      "trainer_family": "k3p"
+    },
+    {
       "candidate_id": "ka2-family-defaults-round1-v1",
       "conclusion": "Concluded 4 whole configurations. Recorded selection: best_observed; default adoption False.",
       "evidence_scope": "published_summary",
@@ -41255,6 +43792,371 @@
         }
       ],
       "trainer_family": "bcap"
+    },
+    {
+      "candidate_id": "k3p--bf75899e6d6805fc9779dbbb56e2ed937ffcb838f70e7b64ca422e48cea37d82",
+      "candidate_revision": "9ce1b2733db4d846e33751368f2dab174c00270b1b738eb214fc7adb682e0dcc",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "conclusion": "Recorded FAIL; required outcomes {'FAIL': 1, 'PASS': 3, 'UNKNOWN': 22}. Failed requirements: ring16_acquisition.",
+      "configuration_id": "bf75899e6d6805fc9779dbbb56e2ed937ffcb838f70e7b64ca422e48cea37d82",
+      "evidence_scope": "published_summary",
+      "goal": "discriminator_stability",
+      "hypothesis": "Within the existing input-noisy/output-clean full-horizon K3P recipe, slower critic rates and faster learned-prior transport may reduce ring within-mode covariance error. Positive critic coefficients .5/1 test this tradeoff while each complete global recipe must pass all five ordinary Tier 1 tasks.",
+      "lifecycle": "concluded",
+      "materialization": "reports/forge/publication-records.json",
+      "mechanism_class": "floor_constant",
+      "next_action": "Read the source-bound study and original evidence before another bounded hypothesis. Unknown requirements remain unknown; this projection grants no qualification or adoption.",
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "provenance": {
+        "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "receipt_bindings": [
+          {
+            "attempt_id": "30190918db2e4ec59565af2cb7296660",
+            "result_hash": "27f959c3b1736109fcf57358fe9d98546517ac4e2811480755864848f7456ca5",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "59b331d1e8eb4d7e8b593307b52e67ce",
+            "result_hash": "30fe4e9ca1c37041a3fe1139bf66686ff634c49e020627b482fa82c9d02a8795",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "bf7e9ec8e1264c2186efcf7fb23d49ba",
+            "result_hash": "aef5ba59bc133732f239d59ab31d9a8c7074959df8b94c3f44f9cae7dbf6590b",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "c9577754c4ad479a8b402108be5c363a",
+            "result_hash": "7ca72f9473e25a8bc90b6f250ce9a11c55c7771ce016ad9df28ed9d382418256",
+            "valid_receipt": true
+          }
+        ],
+        "recipe_sha256": "4ab2168bae8fc394a7a7e4a4c279b94417abe46fa208658f685be048341f5e9c",
+        "runtime_cohort": {
+          "compute_profiles": {
+            "cpu": {
+              "backend": "cpu",
+              "deterministic": true,
+              "machine": "x86_64",
+              "model": "AMD Ryzen 9 5900X 12-Core Processor",
+              "tf32": false,
+              "threads": 1
+            },
+            "cuda": {
+              "backend": "cuda",
+              "compute_capability": "8.6",
+              "deterministic": true,
+              "driver": "610.57.04",
+              "model": "NVIDIA RTX A6000",
+              "tf32": false,
+              "threads": 1
+            }
+          },
+          "execution_backend": "cuda",
+          "runtime": {
+            "implementation": "CPython",
+            "machine": "x86_64",
+            "packages": {
+              "numpy": "2.5.3",
+              "scipy": "1.17.1",
+              "torch": "2.14.0"
+            },
+            "python": "3.14.7",
+            "system": "Linux"
+          }
+        },
+        "source_digest": "730b77d2b4e1e6ec34f9aed7a5d061874e70eaebb5af0ff839cff1781b849a8d"
+      },
+      "qualification_input": false,
+      "qualification_reuse": false,
+      "record_id": "publication-df99db9f9c2e4a6dcb76a841",
+      "record_type": "published_trial",
+      "recorded_cost": {
+        "evidence_wall_seconds": 31.876687411917374,
+        "new_paid_wall_seconds": 31.876687411917374,
+        "wall_seconds": 31.876687411917374
+      },
+      "recorded_qualification": {
+        "full_view_qualified": false,
+        "qualified_tier": 0,
+        "required_passed": 3,
+        "required_statuses": {
+          "FAIL": 1,
+          "PASS": 3,
+          "UNKNOWN": 22
+        },
+        "required_total": 26,
+        "tiers": [
+          {
+            "required_passed": 3,
+            "required_total": 5,
+            "statuses": {
+              "FAIL": 1,
+              "PASS": 3,
+              "UNKNOWN": 1
+            },
+            "tier": 1
+          },
+          {
+            "required_passed": 0,
+            "required_total": 19,
+            "statuses": {
+              "UNKNOWN": 19
+            },
+            "tier": 2
+          },
+          {
+            "required_passed": 0,
+            "required_total": 2,
+            "statuses": {
+              "UNKNOWN": 2
+            },
+            "tier": 3
+          }
+        ],
+        "tuning_qualified": false,
+        "tuning_required_passed": 3,
+        "tuning_required_total": 5
+      },
+      "schema_version": 1,
+      "settings": {
+        "d_lr_mult": 1.0,
+        "lr": 0.006375,
+        "prior_lr_mult": 0.5,
+        "reg_coeff": 1.0
+      },
+      "source": {
+        "board": "reports/forge/technique-inventory.md",
+        "path": "reports/forge/configuration-search/k3p-global-tier1-v3.json",
+        "sha256": "1b587f0e4d2d72ba2bd91def230114d4dbd2570ad91b8f68a77c4105ccc0e142"
+      },
+      "status": "FAIL",
+      "study_id": "k3p-global-tier1-v3",
+      "task_results": [
+        {
+          "_attempt_id": "bf7e9ec8e1264c2186efcf7fb23d49ba",
+          "compatibility_key": "d3fb910a96f320f7f31add4c7dac00cded84beec36ee1362367602cfdc00a961",
+          "cost": {
+            "wall_seconds": 5.918004537001252
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "grad_med": 0.2004294991493225,
+            "mean_abs": 0.5928364992141724
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "two_pole"
+        },
+        {
+          "_attempt_id": "59b331d1e8eb4d7e8b593307b52e67ce",
+          "compatibility_key": "d783253ace91f47db2c8c6be21641c9257e109742b401eca9ce2b2ca51ce9c1d",
+          "cost": {
+            "wall_seconds": 8.497418282961007
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "concept_move": 0.99427330493927,
+            "unused_hold": 0.9996328618726693
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "unused_token_hold"
+        },
+        {
+          "_attempt_id": "c9577754c4ad479a8b402108be5c363a",
+          "compatibility_key": "7535b13f8ff641b228a9119a6e504b437a23c21f8ed4fa919a5bcee8ac27eaec",
+          "cost": {
+            "wall_seconds": 6.529726450971793
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "hold": 0.001068799290806055,
+            "recon_mse": 0.00302989617921412
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "ae_gan_hold"
+        },
+        {
+          "_attempt_id": "30190918db2e4ec59565af2cb7296660",
+          "compatibility_key": "ece53a86b95d4ea565358b5ec3af88ad9b6a5776baf375508c6d1c0bbd5b4cc9",
+          "cost": {
+            "wall_seconds": 10.93153814098332
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "component_core_covariance_error": 0.9736837856471539,
+            "component_core_min_eigen_ratio": 0.12638874351978302,
+            "component_covariance_error": 2.0370697788894176,
+            "component_min_eigen_ratio": 0.21420183777809143,
+            "covariance_error": 0.05208088085055351,
+            "hq": 0.839599609375,
+            "mass_tv": 0.062255859375,
+            "max_component_spill": 0.3813559412956238,
+            "mean_error": 0.04341632127761841,
+            "min_hq_mass_ratio": 0.4765625,
+            "min_mass_ratio": 0.74609375,
+            "modes": 16,
+            "resolved_core_covariance_error": 0.0,
+            "resolved_core_min_eigen_ratio": 1.0,
+            "resolved_max_component_spill": 0.0,
+            "sample_count": 4096,
+            "step": 400,
+            "sw1_normalized": 0.035084391827125576,
+            "target_scale": 3.0029242038726807
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "ring16_acquisition"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 1,
+          "task_id": "five_word_joint_acquisition"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "trajectory"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "residual_student"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "unipolar"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "cover_leftover"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "mid_scale_identity"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "mode_hold"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_two_broad"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_unequal_mass"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_unequal_width"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_anisotropic"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_overlap"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_spiral"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_stripes2"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_bars4"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_blobs4"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_intensity2"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "grid100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "rotated100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "staggered100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 3,
+          "task_id": "ring_hold"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 3,
+          "task_id": "ring_extension"
+        }
+      ],
+      "trainer_family": "k3p"
     },
     {
       "candidate_id": "r1r2--4363c95b3f6f2739729c7a104bd080a427e3efbef1f915ce14c191009bfa3a27",

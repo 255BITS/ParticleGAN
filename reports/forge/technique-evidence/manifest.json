@@ -232,6 +232,25 @@
       "json_sha256": "b3c0d57e51c7a70dc369e99c786df2c256958a8c4f8fc75440aacf1bc539d791",
       "snapshot": "reports/forge/technique-evidence/c1ab2a9c22978670e09dbd20ee66c206bfc9a59ab1d7a0aa970c1041096d055f.json",
       "source_commit": "846190389b0e423054fc9912ab1a69d06bd5348c"
+    },
+    {
+      "candidates": {
+        "k3p--01eca360219ea5225a6e30a31800c7bbe70ca08c3800e259c17a67f0ea528ab5": "2026-10-04T14:29:51.609+00:00",
+        "k3p--18af773f5d3cc22f96b26c7e5751bc73c058408043bd1f2cb30ff0b2ccc611a9": "2026-10-04T14:33:59.015+00:00",
+        "k3p--1d5fb8e62263de7b98df3fe6ae33c669bac9dfd5207651734e2ae38fe2b9fc8c": "2026-10-04T14:30:17.030+00:00",
+        "k3p--209c3438a7f0f4576d1dc07746ed2c202ab382ba1c90f1ac58c559ce466d4c11": "2026-10-04T14:34:05.152+00:00",
+        "k3p--2f125618edc4e05825b879fd34cccf20f4cb4f3c2ac43001c262f8ba580c3201": "2026-10-04T14:30:44.911+00:00",
+        "k3p--810e39e941cafd725e3a103f019a6b3f2d616c5b78256e0d7a20d7e61f415fae": "2026-10-04T14:31:11.866+00:00",
+        "k3p--8721c414567d7c056864f46e71b53c73b0848a91d6a384c69e4804c4d61cf696": "2026-10-04T14:31:38.128+00:00",
+        "k3p--8e32578b69ab9a2d42d46002e22ee6bb3efb23fffee381067d8eacdc1e6f9b6d": "2026-10-04T14:34:11.735+00:00",
+        "k3p--a338cc158d705aada992b1fdec6ba1d24b458371d5f715190496099e2f7d918d": "2026-10-04T14:34:20.508+00:00",
+        "k3p--b1bac237024d49da20182f1a15ce2298c18475fe6c7a286a569a0f145d6936f7": "2026-10-04T14:32:02.952+00:00",
+        "k3p--bf75899e6d6805fc9779dbbb56e2ed937ffcb838f70e7b64ca422e48cea37d82": "2026-10-04T14:32:27.853+00:00",
+        "k3p--d9270948218dc559ecd52946f251ab755bc201f72aae5bcca8a11b7439965510": "2026-10-04T14:32:55.008+00:00"
+      },
+      "json_sha256": "e741990f91396bb999e27a05fd677af86a9e2b7101adb83c8120d9b5a7bd854b",
+      "snapshot": "reports/forge/technique-evidence/7b21e94e3c6274857892f4afb52558d9cdbc38218d8809efc3ee0403d1048230.json",
+      "source_commit": "72da7275034422bc171f9b9b1955c9b150cda045"
     }
   ],
   "note": "Numerical evidence/provenance only. The sole current technique leaderboard is reports/forge/technique-inventory.md; snapshots cannot qualify the latest checkout.",

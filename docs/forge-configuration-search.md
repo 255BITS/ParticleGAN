@@ -73,6 +73,14 @@ the candidate's value. A mixed study can tune that scalar value only when one
 of its tuning tasks actually consumes it. Task bindings use the same pure
 resolver as execution, without constructing or training models.
 
+The existing `direct_particle_betas` pair can be searched when at least one
+tuning task actually constructs a formulation optimizer for direct generated
+coordinates, such as `two_pole`. It does not control sampled latent locations,
+word networks or plain Adam. Positive moment strengths can vary; enabling or
+removing either moment requires a structural idea. The ordinary pair validation,
+fixed task laws and whole-configuration selection rules still apply. This exposes
+an existing public optimizer setting without changing its update rule.
+
 Technique signatures are additional provenance in newly planned studies.
 Existing configuration hashes, saved studies, qualification results and
 historical family/cohort distinctions retain their original identity.
@@ -130,6 +138,13 @@ configurations within that base's signature. Both bases belong to K3P because
 their optimizer and loss formulation stay the same. The first required failure
 stops that trial, leaving later cells UNKNOWN. A 5/5 result is needed before
 replacing the current family pin.
+
+The [continuation readout](../reports/forge/k3p-global-tier1-v3/README.md)
+adds a bounded eight-recipe rate search and four-recipe direct-moment search.
+Saved outputs distinguish fitting ring cores from fitting the full served tails.
+An analytic direct-Adam displacement bound motivates tuning its existing beta2,
+without promising actual movement. The continuation retains the same five-task
+ladder, complete global recipes and incumbent selection when no recipe qualifies.
 
 For a new v2 search, review and bind each derived card's decision contract to
 its actual tuning scope before enqueueing. An inherited full-view contract
