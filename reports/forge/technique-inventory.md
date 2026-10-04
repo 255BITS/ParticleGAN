@@ -4,6 +4,8 @@ Recorded passes / required experiments, grouped by family and view. Click any co
 
 Family totals sum the view rows. A shared experiment counts once per view requiring it; these totals measure requirements across views, not unique training runs or scientific rank.
 
+**Full original Atlas — fresh common-26 diagnostic: two_pole FAIL; completed 1/26; remaining 25 NOT_RUN.** mean_abs 0.00244565 >= 0.3 (FAIL); grad_med 0.010897 <= 1 (PASS). The accepted first case completed 80 updates and 24 ordinary live observations at seed 0. [Verified first-case result and goal GIF](common26-first-two-pole-full-atlas-20261004/README.md) · [Pinned result, full Recipe and source](common26-first-two-pole-full-atlas-20261004/results.json). This full original configuration is separate from the canonical Atlas configuration selected in the recorded table. The requested continuation uses the original revision-3 common-26 gates and continues after numerical FAIL; the remaining cases are pending adapter and budget resolution. No selected-table cells, prerequisite credit, default adoption or speed ranking are awarded.
+
 | Family / view | Tier 1 | Tier 2 | Tier 3 | Total |
 | --- | ---: | ---: | ---: | ---: |
 | **[Atlas (cuda)](families/atlas.md#cohort-cuda-7f9c23eb0e27)** | **[0(*)/22](families/atlas.md#cohort-cuda-7f9c23eb0e27-tier-1)** | **[0(*)/114](families/atlas.md#cohort-cuda-7f9c23eb0e27-tier-2)** | **[0(*)/13](families/atlas.md#cohort-cuda-7f9c23eb0e27-tier-3)** | **[0(*)/149](families/atlas.md#cohort-cuda-7f9c23eb0e27)** |
@@ -107,4 +109,4 @@ This regenerates the leaderboard, family pages and experiments-by-tier report fr
 
 [Experiments, criteria and tier assignments](EXPERIMENTS_BY_TIER.md) · [Complete numerical publication and provenance](technique-inventory.json)
 
-Publication input digest `eb89a0583c757853e4e6a00b50dda182733031e66e3086aa8a04624ea87c2e39`.
+Publication input digest `160d3e77d97b32dc69423c1016318bf855773fa190ca1929d9327675cdb4de99`.

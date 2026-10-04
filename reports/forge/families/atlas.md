@@ -6,6 +6,8 @@
 
 Generated from one selected configuration per runtime. Recorded verdicts retain their original scientific contracts; grouping them under current views grants no new qualification.
 
+**Full original Atlas — fresh common-26 diagnostic: two_pole FAIL; completed 1/26; remaining 25 NOT_RUN.** mean_abs 0.00244565 >= 0.3 (FAIL); grad_med 0.010897 <= 1 (PASS). The accepted first case completed 80 updates and 24 ordinary live observations at seed 0. [Verified first-case result and goal GIF](../common26-first-two-pole-full-atlas-20261004/README.md) · [Pinned result, full Recipe and source](../common26-first-two-pole-full-atlas-20261004/results.json). This full original configuration is separate from the canonical Atlas configuration selected in the recorded table. The requested continuation uses the original revision-3 common-26 gates and continues after numerical FAIL; the remaining cases are pending adapter and budget resolution. No selected-table cells, prerequisite credit, default adoption or speed ranking are awarded.
+
 <a name="cohort-cuda-7f9c23eb0e27"></a>
 
 ## CUDA results

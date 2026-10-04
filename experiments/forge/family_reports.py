@@ -20,6 +20,80 @@ COMPLETE = {"PASS", "FAIL"}
 TIERS = ("1", "2", "3")
 
 
+FIRST_FULL_ATLAS_RESULT = Path("reports/forge/common26-first-two-pole-full-atlas-20261004/results.json")
+FIRST_FULL_ATLAS_RESULT_SHA256 = "66551a0018a22cc96ffe88bd27754634ddb5768c5fd896cf6f5dd262e72aa38b"
+FULL_ORIGINAL_ATLAS_CONFIG_SHA256 = "a3ee5c67ac6594014feeb1ec333131abb4b1d86832510b69923100ebd8510ad4"
+
+
+def _full_original_atlas_first_case(root, load):
+    """Navigation over one immutable accepted result; never a selected-row grade."""
+    if not (root / FIRST_FULL_ATLAS_RESULT).is_file():
+        return None
+    if file_hash(root / FIRST_FULL_ATLAS_RESULT) != FIRST_FULL_ATLAS_RESULT_SHA256:
+        raise ValueError("retained first Full Atlas result changed")
+    record = load(FIRST_FULL_ATLAS_RESULT)
+    result = record.get("result", {})
+    certificate = result.get("certificate", {})
+    grade = certificate.get("grade", {})
+    candidate = record.get("candidate", {})
+    binding = record.get("binding", {})
+    source = record.get("source", {})
+    repeat = record.get("protocol", {}).get("scientific_repeat", {})
+    convergence = grade.get("evaluator_result", {}).get("convergence", {})
+    if (record.get("schema") != "pg_canonical_two_pole_first_case_public_v1"
+            or record.get("task_id") != "two_pole" or result.get("task_id") != "two_pole"
+            or candidate.get("id") != "atlas-full-original-common26-ember552"
+            or candidate.get("trainer_family") != "atlas"
+            or binding.get("config_sha256") != FULL_ORIGINAL_ATLAS_CONFIG_SHA256
+            or repeat.get("config_sha256") != FULL_ORIGINAL_ATLAS_CONFIG_SHA256
+            or repeat.get("source_digest") != source.get("digest")
+            or repeat.get("source_origin_commit") != source.get("origin_commit")
+            or type(repeat.get("execution_updates")) is not int or repeat["execution_updates"] != 80
+            or type(repeat.get("seed")) is not int or repeat["seed"] != 0
+            or certificate.get("full_protocol_complete") is not True
+            or result.get("status") not in COMPLETE
+            or grade.get("status") != result["status"] or grade.get("gate_status") != result["status"]
+            or grade.get("evaluator_result", {}).get("status") != result["status"]
+            or convergence.get("complete") is not True
+            or type(convergence.get("observations")) is not int or convergence["observations"] != 24):
+        raise ValueError("retained first Full Atlas result has conflicting scope or completeness")
+    checks = grade.get("evaluator_result", {}).get("metrics", [])
+    if {check.get("metric") for check in checks} != {"mean_abs", "grad_med"} or len(checks) != 2:
+        raise ValueError("retained first Full Atlas result has incomplete metric receipts")
+    return {"schema": "pg_full_original_atlas_common26_navigation_v1", "qualification_input": False,
+            "configuration_id": candidate["id"], "config_sha256": binding["config_sha256"],
+            "readout": FIRST_FULL_ATLAS_RESULT.with_name("README.md").as_posix(),
+            "public_result": FIRST_FULL_ATLAS_RESULT.as_posix(), "public_result_sha256": FIRST_FULL_ATLAS_RESULT_SHA256,
+            "source": {key: source[key] for key in ("origin_commit", "digest")},
+            "first_case": {"task_id": "two_pole", "status": result["status"], "completed_updates": 80,
+                           "observations": 24, "seed": 0, "metric_receipts": [
+                               {key: deepcopy(check[key]) for key in ("metric", "value", "op", "threshold", "status")}
+                               for check in checks]},
+            "completed": 1, "required": 26, "remaining_not_run": 25,
+            "campaign": None, "campaign_status": "PENDING_ADAPTER_AND_BUDGET",
+            "current_selected_configuration_credit": False, "prerequisite_credit": False,
+            "default_adoption": False, "speed_ranking": False}
+
+
+def _full_original_atlas_status(root, page, progress):
+    context = progress.get("full_original_atlas_common26")
+    if context is None:
+        return []
+    first = context["first_case"]
+    metrics = "; ".join(cell(check["metric"]) + " " + number(check["value"]) + " " + cell(check["op"]) + " " +
+                        number(check["threshold"]) + " (" + cell(check["status"]) + ")"
+                        for check in first["metric_receipts"])
+    return ["**Full original Atlas — fresh common-26 diagnostic: two_pole " + first["status"] +
+            "; completed 1/26; remaining 25 NOT_RUN.** " + metrics + ". " +
+            "The accepted first case completed 80 updates and 24 ordinary live observations at seed 0. " +
+            link(root, page, "Verified first-case result and goal GIF", context["readout"]) + " · " +
+            link(root, page, "Pinned result, full Recipe and source", context["public_result"]) + ". " +
+            "This full original configuration is separate from the canonical Atlas configuration selected in the recorded table. " +
+            "The requested continuation uses the original revision-3 common-26 gates and continues after numerical FAIL; " +
+            "the remaining cases are pending adapter and budget resolution. No selected-table cells, prerequisite credit, " +
+            "default adoption or speed ranking are awarded.", ""]
+
+
 def cell(value):
     return str(value if value is not None else "unavailable").replace("|", "\\|").replace("\n", " ")
 
@@ -174,10 +248,14 @@ def build_progress(root: Path, publication: dict) -> dict:
                                    "row_index": row_index, "tasks": results, "views": view_rows,
                                    "tiers": {tier: _sum([view["tiers"][tier] for view in view_rows]) for tier in TIERS},
                                    "total": _sum([view["total"] for view in view_rows])})
-    return {"schema_version": 1, "scope": "recorded_view_progress", "qualification_input": False,
-            "qualification_reuse": False, "views": views, "diagnostic_views": [view["id"] for view in diagnostics],
-            "families": list(families.values()), "input_hashes": dict(sorted(inputs.items())),
-            "renderer_sha256": file_hash(Path(__file__))}
+    first_full_atlas = _full_original_atlas_first_case(root, load)
+    progress = {"schema_version": 1, "scope": "recorded_view_progress", "qualification_input": False,
+                "qualification_reuse": False, "views": views, "diagnostic_views": [view["id"] for view in diagnostics],
+                "families": list(families.values()), "input_hashes": dict(sorted(inputs.items())),
+                "renderer_sha256": file_hash(Path(__file__))}
+    if first_full_atlas is not None:
+        progress["full_original_atlas_common26"] = first_full_atlas
+    return progress
 
 
 def _table_header():
@@ -202,7 +280,8 @@ def render_leaderboard(root: Path, publication: dict, page: Path) -> str:
              "Recorded passes / required experiments, grouped by family and view. Click any count for the experiment results. "
              "Each family/runtime uses one complete selected configuration and source.", "",
              "Family totals sum the view rows. A shared experiment counts once per view requiring it; "
-             "these totals measure requirements across views, not unique training runs or scientific rank.", "", *_table_header()]
+             "these totals measure requirements across views, not unique training runs or scientific rank.", "",
+             *_full_original_atlas_status(root, page, progress), *_table_header()]
     for family in progress["families"]:
         for cohort in family["cohorts"]:
             name = family["label"] + " (" + cohort["backend"] + ")"
@@ -264,6 +343,8 @@ def render_family(root: Path, publication: dict, family: dict) -> str:
              link(root, page, "← Family leaderboard", "reports/forge/technique-inventory.md"), "",
              "Generated from one selected configuration per runtime. Recorded verdicts retain their original scientific "
              "contracts; grouping them under current views grants no new qualification.", ""]
+    if family["id"] == "atlas":
+        lines += _full_original_atlas_status(root, page, progress)
     for cohort in family["cohorts"]:
         row = publication["rows"][cohort["row_index"]]
         base = cohort["anchor"]
