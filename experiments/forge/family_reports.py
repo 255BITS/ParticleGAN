@@ -163,6 +163,17 @@ def score(count, *, marker=True):
     return f"{count['passed']}" + ("(*)" if marker and count["incomplete"] else "") + f"/{count['total']}"
 
 
+def _same_active_runtime(left, right):
+    """Match served hardware/software while retaining separate cohort identities."""
+    backend = left.get("execution_backend")
+    runtime = left.get("runtime")
+    profile = left.get("compute_profiles", {}).get(backend)
+    return (backend in {"cpu", "cuda"} and backend == right.get("execution_backend")
+            and isinstance(runtime, dict) and bool(runtime) and runtime == right.get("runtime")
+            and isinstance(profile, dict) and bool(profile)
+            and profile == right.get("compute_profiles", {}).get(backend))
+
+
 def build_progress(root: Path, publication: dict) -> dict:
     """Project current view placement over immutable selected task outcomes."""
     root = Path(root)
@@ -214,7 +225,7 @@ def build_progress(root: Path, publication: dict) -> dict:
         separate = [item for item in scoped_publications if item["family"] == family_id
                     and item["row"]["candidate_id"] == selected["candidate_id"]
                     and item["row"].get("candidate_revision") == selected.get("candidate_revision")
-                    and item["row"].get("runtime_cohort") == selected.get("runtime_cohort")
+                    and _same_active_runtime(item["row"].get("runtime_cohort", {}), selected.get("runtime_cohort", {}))
                     and item["row"]["bindings"]["source_digest"] == selected.get("bindings", {}).get("source_digest")]
         scoped_names = {assignment["task"] for view in scoped for assignment in view["assignments"]}
         scoped_attempts = []
@@ -300,7 +311,9 @@ def build_progress(root: Path, publication: dict) -> dict:
             if matching_media:
                 results[name]["training_media"] = matching_media
             audit = attachments["clock_audits"].get((family_id, name))
-            if audit and name in final_measurements:
+            if (audit and name in final_measurements
+                    and audit["attempt_id"] in selected.get("attempt_ids", []) + scoped_attempts
+                    and audit["recorded_grade"] == status):
                 results[name]["clock_audit"] = audit
 
         def view_row(view):
@@ -317,7 +330,9 @@ def build_progress(root: Path, publication: dict) -> dict:
         family["cohorts"].append({"anchor": cohort_anchor, "backend": backend,
                                    "row_index": row_index, "tasks": results, "views": view_rows,
                                    "scoped_views": [view_row(view) for view in scoped],
-                                   "scoped_publications": [{key: item[key] for key in ("path", "view", "source_commit")}
+                                   "scoped_publications": [{**{key: item[key] for key in ("path", "view", "source_commit")},
+                                                            "cohort": item["row"].get("cohort"),
+                                                            "runtime_cohort_sha256": stable_hash(item["row"].get("runtime_cohort", {}))}
                                                            for item in separate],
                                    "tiers": {tier: _sum([view["tiers"][tier] for view in view_rows]) for tier in TIERS},
                                    "total": _sum([view["total"] for view in view_rows])})
@@ -440,6 +455,12 @@ def render_family(root: Path, publication: dict, family: dict) -> str:
         configuration_label = " · ".join([label[0], label[1][:12]]) if len(label) == 2 else label[0]
         source = row.get("bindings", {}).get("source_digest")
         pointer = publication.get("evidence_sources", {}).get(row.get("publication_key"), {})
+        # publish_current validates this snapshot's complete identity before
+        # rendering, then writes a pending snapshot alongside the pages. Its
+        # first-write link must not depend on that later filesystem mutation.
+        frozen_evidence = (link(root, page, "Frozen numerical evidence", pointer["snapshot"])
+                           if pointer.get("snapshot") and pointer.get("json_sha256") else
+                           _existing_link(root, page, "Frozen numerical evidence", pointer.get("snapshot")))
         lines += [*_heading(2, cohort["backend"].upper() + " results", base), f"Runtime: **{cohort['backend']}**. Selected configuration: " +
                   _existing_link(root, page, configuration_label, config) + ".", "",
                   f"Recorded qualification: **tier {row.get('qualified_tier', 0)}**, "
@@ -448,7 +469,7 @@ def render_family(root: Path, publication: dict, family: dict) -> str:
                   "<details>", "<summary>Configuration, source and runtime provenance</summary>", "",
                   f"Source digest: `{source or 'unbound'}`. Candidate revision: `{row.get('candidate_revision') or 'unbound'}`. "
                   f"Runtime cohort: `{row.get('cohort') or 'unbound'}`.", "",
-                  _existing_link(root, page, "Frozen numerical evidence", pointer.get("snapshot")) + " · " +
+                  frozen_evidence + " · " +
                   link(root, page, "Complete recipe, prior, initialization and sampling bindings", "reports/forge/technique-inventory.json"), "",
                   "Selection: " + cell(row.get("selection", {}).get("selection_kind", "canonical fallback")) + ". " +
                   cell(row.get("selection", {}).get("reason", "No qualified configuration has been selected.")), "",
@@ -469,7 +490,9 @@ def render_family(root: Path, publication: dict, family: dict) -> str:
                                                 *_score_cells(root, page, family, cohort, view, view_id=view["id"])]) + " |")
             for item in cohort.get("scoped_publications", []):
                 lines += ["", link(root, page, "Frozen separate-cohort numerical evidence", item["path"]) +
-                          "; source commit `" + item["source_commit"] + "`. These cells give no parent-cohort credit."]
+                          "; source commit `" + item["source_commit"] + "`; exact scoped cohort `" +
+                          cell(item.get("cohort")) + "` (runtime SHA256 `" + cell(item.get("runtime_cohort_sha256")) +
+                          "`). These cells give no parent-cohort credit."]
         lines += ["", r"\* indicates incomplete results, including changed or unbound current contracts.", ""]
         for tier in TIERS:
             members = {}

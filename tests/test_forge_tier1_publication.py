@@ -59,7 +59,8 @@ def packet(tmp_path):
                     status = "BLOCKED" if policy else "FAIL" if a["qualification_tier"] == 1 else "UNKNOWN"
                 statuses.append({"task_id": name, "status": status, "role": a["importance"]})
             return {"candidate_id": candidate, "candidate_revision": stable_hash(candidate), "cohort": stable_hash(names),
-                    "runtime_cohort": {"execution_backend": "cuda"}, "qualified_tier": 0,
+                    "runtime_cohort": {"execution_backend": "cuda", "runtime": {"python": "fixture-runtime"},
+                                       "compute_profiles": {"cuda": {"model": "fixture-gpu", "threads": 1}}}, "qualified_tier": 0,
                     "status": "INCOMPLETE" if scoped else "BLOCKED" if policy else "FAIL",
                     "attempt_ids": [family + "-policy-final"] if scoped else [] if policy else [family + "-final"],
                     "bindings": {"source_digest": DIGEST, "task_contracts": bindings},
@@ -393,3 +394,70 @@ def test_unresolved_diagnostic_exception_rejects_source_mismatch_or_scientific_c
         row["blockers"] = []
     with pytest.raises(ValueError, match="absent from the validated original receipts"):
         publisher._bound_publication_rows({"rows": [row]}, {DIGEST})
+
+
+@pytest.mark.parametrize("change", ["inactive_cpu", "active_cuda", "runtime", "backend", "missing_profile", "missing_runtime"])
+def test_scoped_display_matches_only_exact_active_backend_and_runtime(packet, monkeypatch, change):
+    root, _, _, main, scoped = packet
+    runtime = {"execution_backend": "cuda", "runtime": {"python": "fixture-runtime"},
+               "compute_profiles": {"cuda": {"model": "fixture-gpu", "threads": 1}}}
+    parent = next(row for row in main["rows"] if row["candidate_id"] == "atlas")
+    variant = next(row for row in scoped["rows"] if row["candidate_id"] == "atlas")
+    parent["runtime_cohort"] = deepcopy(runtime)
+    variant["runtime_cohort"] = deepcopy(runtime)
+    if change == "inactive_cpu":
+        parent["runtime_cohort"]["compute_profiles"]["cpu"] = {"model": "extra-inactive-cpu", "threads": 7}
+    elif change == "active_cuda":
+        variant["runtime_cohort"]["compute_profiles"]["cuda"]["model"] = "different-gpu"
+    elif change == "runtime":
+        variant["runtime_cohort"]["runtime"]["python"] = "different-runtime"
+    elif change == "missing_profile":
+        variant["runtime_cohort"]["compute_profiles"] = {}
+        parent["runtime_cohort"]["compute_profiles"] = {}
+    elif change == "missing_runtime":
+        variant["runtime_cohort"].pop("runtime")
+        parent["runtime_cohort"].pop("runtime")
+    else:
+        variant["runtime_cohort"]["execution_backend"] = "cpu"
+        # Staging requires one exact CUDA source row, so this regression tests
+        # the display comparison directly rather than admitting that row.
+    if change == "backend":
+        from experiments.forge.family_reports import _same_active_runtime
+        assert not _same_active_runtime(variant["runtime_cohort"], parent["runtime_cohort"])
+        return
+    frozen_identity = scientific_row_hash(variant)
+    staged, _ = staged_fixture(packet, monkeypatch)
+    install_staged(packet, staged)
+    display = display_fixture(packet)
+    display["family_progress"] = build_progress(root, display)
+    cohort = next(family for family in display["family_progress"]["families"] if family["id"] == "atlas")["cohorts"][0]
+    clock = cohort["tasks"]["clockfree_audit_tier1_policy_selected_cloud_v1"]
+    if change == "inactive_cpu":
+        assert clock["status"] == "FAIL" and clock["current_contract"] == "matches"
+        assert clock.get("clock_audit") and len(clock["training_media"]) == 1
+        assert cohort["scoped_views"][0]["total"]["counts"] == {"FAIL": 4, "BLOCKED": 3}
+        assert cohort["scoped_publications"][0]["runtime_cohort_sha256"] == stable_hash(runtime)
+        assert cohort["tasks"]["two_pole"]["status"] == "BLOCKED"
+    else:
+        assert clock["status"] == "UNKNOWN" and not clock.get("clock_audit") and not clock.get("training_media")
+        assert not cohort["scoped_publications"]
+    assert scientific_row_hash(variant) == frozen_identity
+
+
+def test_first_write_snapshot_link_uses_validated_registration_before_file_exists(packet, monkeypatch):
+    staged, _ = staged_fixture(packet, monkeypatch)
+    install_staged(packet, staged)
+    root = packet[0]
+    display = display_fixture(packet)
+    row = next(row for row in display["rows"] if row["trainer_family"] == "bcap")
+    row["publication_key"] = "registered-snapshot"
+    snapshot = "reports/forge/technique-evidence/pending-first-snapshot.json"
+    display["evidence_sources"] = {row["publication_key"]: {"snapshot": snapshot, "json_sha256": "c" * 64}}
+    display["family_progress"] = build_progress(root, display)
+    family = next(family for family in display["family_progress"]["families"] if family["id"] == "bcap")
+    page = root / family["page"]
+    first = generated_pages(root, display)[page]
+    assert not (root / snapshot).exists()
+    assert "[Frozen numerical evidence](../technique-evidence/pending-first-snapshot.json)" in first
+    atomic_json(root / snapshot, {"fixture": "validated pending snapshot"})
+    assert generated_pages(root, display)[page] == first
