@@ -31,6 +31,25 @@ Study and trial cost summaries overlap and must not be added together.
 
 The normalizer recognizes versioned Forge configuration-search reports, the
 policy-family goal inventory and the bounded campaign completion receipt.
+An optional `reports/forge/passive-publications.json` registers reviewed passive
+schemas with exact committed result, `FINAL_COST.json`, verification, protocol,
+readout and original GIF pins. Original PR223 full19 retest cuts enter recall as
+non-qualifying summaries. A closed prefix remains INCOMPLETE with its full19
+denominator, even when every reached case passed. The final cost addendum is
+authoritative over the earlier in-phase snapshot; its source-card/result and
+closed-ledger identities must agree. Raw ledger and snapshot paths are inert
+provenance and are never opened by recall.
+
+Append a later cut as a new registration and update the registry's explicit
+`latest` pointer. Old cuts remain searchable and unchanged. The same-source
+history must preserve every accepted case, coverage and cumulative costs; do not
+sum overlapping prefix and full-run costs. The ONE current score table keeps the
+historical PR223 19/19 first and shows the latest fresh retest inside that row as
+separate context. Neither historical nor fresh original19 results fill ordinary
+current26, named-family, default or comparable-speed cells. Actual runtime is not
+included in the passive compact result; the projection labels the frozen runtime
+declaration separately.
+
 In-progress studies participate in freshness but are not called concluded.
 Unrecognized schemas fail explicitly rather than silently fabricating results.
 No raw log, checkpoint, per-update stream or remote `/ml2` path is opened. Compact

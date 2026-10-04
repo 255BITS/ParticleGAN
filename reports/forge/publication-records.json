@@ -474,6 +474,2235 @@
       "trainer_family": "e22"
     },
     {
+      "candidate_id": "atlas",
+      "cohort": "00cadbfd06c770e16c35045b42387932b14ee3751954e5320f9e2c32799f7a2f",
+      "conclusion": "Closed original19 cut: 5/19 PASS, 0 FAIL, 14 unavailable. Final accepted status INCOMPLETE; required execution counts {'NOT_RUN': 14, 'PASS': 5}. Historical positives and overlapping cut costs are not pooled.",
+      "configuration_id": "pr223-original-full-retest-prefix5-20261004",
+      "evidence_scope": "published_summary",
+      "goal": "discriminator_stability",
+      "lifecycle": "closed_partial_cut",
+      "materialization": "reports/forge/publication-records.json",
+      "mechanism_class": "faithful_original_full19_retest",
+      "next_action": "Read the latest closed cut and authoritative FINAL_COST. Original19 results grant no current26 qualification, default or speed credit; continuation requires its own retained evidence.",
+      "provenance": {
+        "execution_digest": "00cadbfd06c770e16c35045b42387932b14ee3751954e5320f9e2c32799f7a2f",
+        "final_cost": {
+          "bytes": 1323,
+          "path": "reports/forge/pr223-original-full-retest-prefix5-20261004/FINAL_COST.json",
+          "sha256": "d000104095aaa303f84792ebabb506c170b3e0ae63c2740b7153c215c794886b"
+        },
+        "source_commit": "2068a661331a45e0e283b0362dd58b7d92263c6f",
+        "terminal_card_sha256": "350d5f3bf963869009992d2e88b727135c19a8d93a22c31bbb084d98bcefe41a"
+      },
+      "qualification_input": false,
+      "qualification_reuse": false,
+      "record_id": "publication-0e0b661420f7b134052b6ebf",
+      "record_type": "published_study",
+      "recorded_cost": {
+        "aggregate_cap_seconds": 10800,
+        "case_caps_sum_seconds": 9810,
+        "case_charged_seconds": 205.96353361709043,
+        "case_paid_wall_seconds": 205.96353361709043,
+        "case_reserved_seconds": 0.0,
+        "charged_seconds": 223.58710767910816,
+        "export_grace_seconds": 0,
+        "halt_required": false,
+        "metadata": {
+          "blocked": false,
+          "charged_seconds": 17.623574062017724,
+          "overrun_seconds": 0.0,
+          "paid_wall_seconds": 17.623574062017724,
+          "reserved_seconds": 0.0
+        },
+        "metadata_cap_seconds": 180,
+        "remaining_seconds": 10576.412892320892,
+        "retries": 0
+      },
+      "schema_version": 1,
+      "settings": {
+        "d_lr_mult": 1.0,
+        "lr": 0.00425,
+        "prior_lr_mult": 2.0
+      },
+      "source": {
+        "board": "reports/forge/technique-inventory.md",
+        "bytes": 171157,
+        "path": "reports/forge/pr223-original-full-retest-prefix5-20261004/results.json",
+        "sha256": "6fca9cdc00bef68929dc875184c762e326422ff8fef39739773932a5f26bef48"
+      },
+      "status": "INCOMPLETE",
+      "study_id": "pr223-original-full19-retest",
+      "task_results": [
+        {
+          "case_sha256": "f1a92d6db7db1105af82198581fc5d461857cbc5947951bee8ace91b556f8fa4",
+          "cost": {
+            "allowance_seconds": 150.0,
+            "certified": true,
+            "charged_seconds": 38.21642275596969,
+            "completed_terminal": true,
+            "overrun_seconds": 0.0,
+            "paid_wall_seconds": 38.21642275596969,
+            "reserved_seconds": 0.0,
+            "terminal_status": "completed",
+            "unmeasured_interrupt_reserved_seconds": 0.0
+          },
+          "gate_status": "PASS",
+          "media": {
+            "actual_steps": [
+              25,
+              75,
+              150,
+              225,
+              300,
+              375,
+              450,
+              525,
+              600
+            ],
+            "bytes": 303366,
+            "caption": "FINAL full-protocol verdict; per-clock flags are original retained reads.",
+            "capture_metadata": [
+              {
+                "dtypes": {
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_image_noisy_input",
+                "selected_source": "fast",
+                "shapes": {
+                  "samples": [
+                    32,
+                    1,
+                    8,
+                    8
+                  ],
+                  "target": [
+                    2,
+                    1,
+                    8,
+                    8
+                  ]
+                },
+                "step": 25,
+                "target_kind": "original_image_template_bank"
+              },
+              {
+                "dtypes": {
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_image_noisy_input",
+                "selected_source": "fast",
+                "shapes": {
+                  "samples": [
+                    32,
+                    1,
+                    8,
+                    8
+                  ],
+                  "target": [
+                    2,
+                    1,
+                    8,
+                    8
+                  ]
+                },
+                "step": 75,
+                "target_kind": "original_image_template_bank"
+              },
+              {
+                "dtypes": {
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_image_noisy_input",
+                "selected_source": "fast",
+                "shapes": {
+                  "samples": [
+                    32,
+                    1,
+                    8,
+                    8
+                  ],
+                  "target": [
+                    2,
+                    1,
+                    8,
+                    8
+                  ]
+                },
+                "step": 150,
+                "target_kind": "original_image_template_bank"
+              },
+              {
+                "dtypes": {
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_image_noisy_input",
+                "selected_source": "fast",
+                "shapes": {
+                  "samples": [
+                    32,
+                    1,
+                    8,
+                    8
+                  ],
+                  "target": [
+                    2,
+                    1,
+                    8,
+                    8
+                  ]
+                },
+                "step": 225,
+                "target_kind": "original_image_template_bank"
+              },
+              {
+                "dtypes": {
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_image_noisy_input",
+                "selected_source": "fast",
+                "shapes": {
+                  "samples": [
+                    32,
+                    1,
+                    8,
+                    8
+                  ],
+                  "target": [
+                    2,
+                    1,
+                    8,
+                    8
+                  ]
+                },
+                "step": 300,
+                "target_kind": "original_image_template_bank"
+              },
+              {
+                "dtypes": {
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_image_noisy_input",
+                "selected_source": "fast",
+                "shapes": {
+                  "samples": [
+                    32,
+                    1,
+                    8,
+                    8
+                  ],
+                  "target": [
+                    2,
+                    1,
+                    8,
+                    8
+                  ]
+                },
+                "step": 375,
+                "target_kind": "original_image_template_bank"
+              },
+              {
+                "dtypes": {
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_image_noisy_input",
+                "selected_source": "fast",
+                "shapes": {
+                  "samples": [
+                    32,
+                    1,
+                    8,
+                    8
+                  ],
+                  "target": [
+                    2,
+                    1,
+                    8,
+                    8
+                  ]
+                },
+                "step": 450,
+                "target_kind": "original_image_template_bank"
+              },
+              {
+                "dtypes": {
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_image_noisy_input",
+                "selected_source": "fast",
+                "shapes": {
+                  "samples": [
+                    32,
+                    1,
+                    8,
+                    8
+                  ],
+                  "target": [
+                    2,
+                    1,
+                    8,
+                    8
+                  ]
+                },
+                "step": 525,
+                "target_kind": "original_image_template_bank"
+              },
+              {
+                "dtypes": {
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_image_noisy_input",
+                "selected_source": "fast",
+                "shapes": {
+                  "samples": [
+                    32,
+                    1,
+                    8,
+                    8
+                  ],
+                  "target": [
+                    2,
+                    1,
+                    8,
+                    8
+                  ]
+                },
+                "step": 600,
+                "target_kind": "original_image_template_bank"
+              }
+            ],
+            "file": "gifs/portability-img_intensity2.gif",
+            "frames": 9,
+            "original_gate": "PASS",
+            "sha256": "b311fb87aa5f57a1e5f1f3d886afc00f2092290822aa0e5c13ea40787c904986"
+          },
+          "metrics": {
+            "distribution_tv": 0.03125,
+            "hq": 1.0,
+            "mean_rmse": 0.031898438930511475,
+            "mode_fractions": [
+              0.46875,
+              0.53125
+            ],
+            "modes": 2,
+            "pass": true,
+            "quality_mode_fractions": [
+              0.46875,
+              0.53125
+            ],
+            "seconds": 24.799,
+            "sharp_rmse_clean": 0.009162217378616333,
+            "sharp_rmse_noisy": 0.03143363073468208,
+            "step": 600
+          },
+          "original_gate": "PASS",
+          "original_requirements": [
+            [
+              "modes",
+              ">=",
+              2
+            ],
+            [
+              "hq",
+              ">=",
+              0.9
+            ]
+          ],
+          "raw_status": "PASS",
+          "recipe_sha256": "e22a72f5ee938d1654e83d49aa8d0093b35f3981f3d18fcc18c82e9cec097f54",
+          "sampling": "original noisy state-selected primary; clean diagnostics separate",
+          "task_id": "pr223-faithful19-retest-v1-portability-img_intensity2"
+        },
+        {
+          "case_sha256": "581b474e5522d27e99a70a12ea8755b45584d973e3671ada5fae4704ec9e0d5c",
+          "cost": {
+            "allowance_seconds": 180.0,
+            "certified": true,
+            "charged_seconds": 56.061063786037266,
+            "completed_terminal": true,
+            "overrun_seconds": 0.0,
+            "paid_wall_seconds": 56.061063786037266,
+            "reserved_seconds": 0.0,
+            "terminal_status": "completed",
+            "unmeasured_interrupt_reserved_seconds": 0.0
+          },
+          "gate_status": "PASS",
+          "media": {
+            "actual_steps": [
+              50,
+              150,
+              300,
+              450,
+              600,
+              750,
+              900,
+              1050,
+              1200
+            ],
+            "bytes": 108210,
+            "caption": "FINAL full-protocol verdict; per-clock flags are original retained reads.",
+            "capture_metadata": [
+              {
+                "dtypes": {
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_mode_noisy_input",
+                "selected_source": "fast",
+                "shapes": {
+                  "samples": [
+                    4096,
+                    2
+                  ],
+                  "target": [
+                    8,
+                    2
+                  ]
+                },
+                "step": 50,
+                "target_kind": "original_ring_centers"
+              },
+              {
+                "dtypes": {
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_mode_noisy_input",
+                "selected_source": "fast",
+                "shapes": {
+                  "samples": [
+                    4096,
+                    2
+                  ],
+                  "target": [
+                    8,
+                    2
+                  ]
+                },
+                "step": 150,
+                "target_kind": "original_ring_centers"
+              },
+              {
+                "dtypes": {
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_mode_noisy_input",
+                "selected_source": "fast",
+                "shapes": {
+                  "samples": [
+                    4096,
+                    2
+                  ],
+                  "target": [
+                    8,
+                    2
+                  ]
+                },
+                "step": 300,
+                "target_kind": "original_ring_centers"
+              },
+              {
+                "dtypes": {
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_mode_noisy_input",
+                "selected_source": "fast",
+                "shapes": {
+                  "samples": [
+                    4096,
+                    2
+                  ],
+                  "target": [
+                    8,
+                    2
+                  ]
+                },
+                "step": 450,
+                "target_kind": "original_ring_centers"
+              },
+              {
+                "dtypes": {
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_mode_noisy_input",
+                "selected_source": "fast",
+                "shapes": {
+                  "samples": [
+                    4096,
+                    2
+                  ],
+                  "target": [
+                    8,
+                    2
+                  ]
+                },
+                "step": 600,
+                "target_kind": "original_ring_centers"
+              },
+              {
+                "dtypes": {
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_mode_noisy_input",
+                "selected_source": "fast",
+                "shapes": {
+                  "samples": [
+                    4096,
+                    2
+                  ],
+                  "target": [
+                    8,
+                    2
+                  ]
+                },
+                "step": 750,
+                "target_kind": "original_ring_centers"
+              },
+              {
+                "dtypes": {
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_mode_noisy_input",
+                "selected_source": "fast",
+                "shapes": {
+                  "samples": [
+                    4096,
+                    2
+                  ],
+                  "target": [
+                    8,
+                    2
+                  ]
+                },
+                "step": 900,
+                "target_kind": "original_ring_centers"
+              },
+              {
+                "dtypes": {
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_mode_noisy_input",
+                "selected_source": "fast",
+                "shapes": {
+                  "samples": [
+                    4096,
+                    2
+                  ],
+                  "target": [
+                    8,
+                    2
+                  ]
+                },
+                "step": 1050,
+                "target_kind": "original_ring_centers"
+              },
+              {
+                "dtypes": {
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_mode_noisy_input",
+                "selected_source": "fast",
+                "shapes": {
+                  "samples": [
+                    4096,
+                    2
+                  ],
+                  "target": [
+                    8,
+                    2
+                  ]
+                },
+                "step": 1200,
+                "target_kind": "original_ring_centers"
+              }
+            ],
+            "file": "gifs/portability-mode_hold.gif",
+            "frames": 9,
+            "original_gate": "PASS",
+            "sha256": "f752f39844b26d955dbd083611ad8861f6b669afb78604743cbce1c5c7397c38"
+          },
+          "metrics": {
+            "cover": 1.0,
+            "effective_modes": 7.494993209838867,
+            "hq": 0.976806640625,
+            "modes": 8,
+            "n_modes": 8,
+            "pass": true,
+            "seconds": 42.216,
+            "sharp_clean": 1.2606853246688843,
+            "sharp_noisy": 1.3520134687423706,
+            "step": 1200
+          },
+          "original_gate": "PASS",
+          "original_requirements": [
+            [
+              "modes",
+              ">=",
+              8
+            ],
+            [
+              "hq",
+              ">=",
+              0.9
+            ]
+          ],
+          "raw_status": "PASS",
+          "recipe_sha256": "4f38f00b1defb408ee093feed6a0c8174c6c238af2fca52b0b691ec292f9bb46",
+          "sampling": "original noisy state-selected primary; clean diagnostics separate",
+          "task_id": "pr223-faithful19-retest-v1-portability-mode_hold"
+        },
+        {
+          "case_sha256": "e1ba7001489df1025b084309d038a3f5cac1b322046fbe41d34efde728e31c58",
+          "cost": {
+            "allowance_seconds": 150.0,
+            "certified": true,
+            "charged_seconds": 36.71131757902913,
+            "completed_terminal": true,
+            "overrun_seconds": 0.0,
+            "paid_wall_seconds": 36.71131757902913,
+            "reserved_seconds": 0.0,
+            "terminal_status": "completed",
+            "unmeasured_interrupt_reserved_seconds": 0.0
+          },
+          "gate_status": "PASS",
+          "media": {
+            "actual_steps": [
+              25,
+              75,
+              150,
+              225,
+              300,
+              375,
+              450,
+              525,
+              600
+            ],
+            "bytes": 244508,
+            "caption": "FINAL full-protocol verdict; per-clock flags are original retained reads.",
+            "capture_metadata": [
+              {
+                "dtypes": {
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_image_noisy_input",
+                "selected_source": "fast",
+                "shapes": {
+                  "samples": [
+                    32,
+                    1,
+                    8,
+                    8
+                  ],
+                  "target": [
+                    4,
+                    1,
+                    8,
+                    8
+                  ]
+                },
+                "step": 25,
+                "target_kind": "original_image_template_bank"
+              },
+              {
+                "dtypes": {
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_image_noisy_input",
+                "selected_source": "fast",
+                "shapes": {
+                  "samples": [
+                    32,
+                    1,
+                    8,
+                    8
+                  ],
+                  "target": [
+                    4,
+                    1,
+                    8,
+                    8
+                  ]
+                },
+                "step": 75,
+                "target_kind": "original_image_template_bank"
+              },
+              {
+                "dtypes": {
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_image_noisy_input",
+                "selected_source": "fast",
+                "shapes": {
+                  "samples": [
+                    32,
+                    1,
+                    8,
+                    8
+                  ],
+                  "target": [
+                    4,
+                    1,
+                    8,
+                    8
+                  ]
+                },
+                "step": 150,
+                "target_kind": "original_image_template_bank"
+              },
+              {
+                "dtypes": {
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_image_noisy_input",
+                "selected_source": "fast",
+                "shapes": {
+                  "samples": [
+                    32,
+                    1,
+                    8,
+                    8
+                  ],
+                  "target": [
+                    4,
+                    1,
+                    8,
+                    8
+                  ]
+                },
+                "step": 225,
+                "target_kind": "original_image_template_bank"
+              },
+              {
+                "dtypes": {
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_image_noisy_input",
+                "selected_source": "fast",
+                "shapes": {
+                  "samples": [
+                    32,
+                    1,
+                    8,
+                    8
+                  ],
+                  "target": [
+                    4,
+                    1,
+                    8,
+                    8
+                  ]
+                },
+                "step": 300,
+                "target_kind": "original_image_template_bank"
+              },
+              {
+                "dtypes": {
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_image_noisy_input",
+                "selected_source": "fast",
+                "shapes": {
+                  "samples": [
+                    32,
+                    1,
+                    8,
+                    8
+                  ],
+                  "target": [
+                    4,
+                    1,
+                    8,
+                    8
+                  ]
+                },
+                "step": 375,
+                "target_kind": "original_image_template_bank"
+              },
+              {
+                "dtypes": {
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_image_noisy_input",
+                "selected_source": "fast",
+                "shapes": {
+                  "samples": [
+                    32,
+                    1,
+                    8,
+                    8
+                  ],
+                  "target": [
+                    4,
+                    1,
+                    8,
+                    8
+                  ]
+                },
+                "step": 450,
+                "target_kind": "original_image_template_bank"
+              },
+              {
+                "dtypes": {
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_image_noisy_input",
+                "selected_source": "fast",
+                "shapes": {
+                  "samples": [
+                    32,
+                    1,
+                    8,
+                    8
+                  ],
+                  "target": [
+                    4,
+                    1,
+                    8,
+                    8
+                  ]
+                },
+                "step": 525,
+                "target_kind": "original_image_template_bank"
+              },
+              {
+                "dtypes": {
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_image_noisy_input",
+                "selected_source": "fast",
+                "shapes": {
+                  "samples": [
+                    32,
+                    1,
+                    8,
+                    8
+                  ],
+                  "target": [
+                    4,
+                    1,
+                    8,
+                    8
+                  ]
+                },
+                "step": 600,
+                "target_kind": "original_image_template_bank"
+              }
+            ],
+            "file": "gifs/portability-img_blobs4.gif",
+            "frames": 9,
+            "original_gate": "PASS",
+            "sha256": "aade7613cf4c63fe2204766e915a877ee6d42514474e8065fc77ddd4dac07dec"
+          },
+          "metrics": {
+            "distribution_tv": 0.03125,
+            "hq": 1.0,
+            "mean_rmse": 0.032342731952667236,
+            "mode_fractions": [
+              0.25,
+              0.28125,
+              0.21875,
+              0.25
+            ],
+            "modes": 4,
+            "pass": true,
+            "quality_mode_fractions": [
+              0.25,
+              0.28125,
+              0.21875,
+              0.25
+            ],
+            "seconds": 23.624,
+            "sharp_rmse_clean": 0.0007570504676550627,
+            "sharp_rmse_noisy": 0.030378051102161407,
+            "step": 600
+          },
+          "original_gate": "PASS",
+          "original_requirements": [
+            [
+              "modes",
+              ">=",
+              4
+            ],
+            [
+              "hq",
+              ">=",
+              0.9
+            ]
+          ],
+          "raw_status": "PASS",
+          "recipe_sha256": "e22a72f5ee938d1654e83d49aa8d0093b35f3981f3d18fcc18c82e9cec097f54",
+          "sampling": "original noisy state-selected primary; clean diagnostics separate",
+          "task_id": "pr223-faithful19-retest-v1-portability-img_blobs4"
+        },
+        {
+          "case_sha256": "0280145d8274620aa2c5aefce80228e03d78e5a3608e08da140cc1feed110e4c",
+          "cost": {
+            "allowance_seconds": 150.0,
+            "certified": true,
+            "charged_seconds": 37.85409521404654,
+            "completed_terminal": true,
+            "overrun_seconds": 0.0,
+            "paid_wall_seconds": 37.85409521404654,
+            "reserved_seconds": 0.0,
+            "terminal_status": "completed",
+            "unmeasured_interrupt_reserved_seconds": 0.0
+          },
+          "gate_status": "PASS",
+          "media": {
+            "actual_steps": [
+              25,
+              75,
+              150,
+              225,
+              300,
+              375,
+              450,
+              525,
+              600
+            ],
+            "bytes": 276054,
+            "caption": "FINAL full-protocol verdict; per-clock flags are original retained reads.",
+            "capture_metadata": [
+              {
+                "dtypes": {
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.03174441307783127,
+                "primary_source": "original_image_noisy_input",
+                "selected_source": "fast",
+                "shapes": {
+                  "samples": [
+                    32,
+                    1,
+                    8,
+                    8
+                  ],
+                  "target": [
+                    4,
+                    1,
+                    8,
+                    8
+                  ]
+                },
+                "step": 25,
+                "target_kind": "original_image_template_bank"
+              },
+              {
+                "dtypes": {
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.02977915108203888,
+                "primary_source": "original_image_noisy_input",
+                "selected_source": "fast",
+                "shapes": {
+                  "samples": [
+                    32,
+                    1,
+                    8,
+                    8
+                  ],
+                  "target": [
+                    4,
+                    1,
+                    8,
+                    8
+                  ]
+                },
+                "step": 75,
+                "target_kind": "original_image_template_bank"
+              },
+              {
+                "dtypes": {
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_image_noisy_input",
+                "selected_source": "fast",
+                "shapes": {
+                  "samples": [
+                    32,
+                    1,
+                    8,
+                    8
+                  ],
+                  "target": [
+                    4,
+                    1,
+                    8,
+                    8
+                  ]
+                },
+                "step": 150,
+                "target_kind": "original_image_template_bank"
+              },
+              {
+                "dtypes": {
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_image_noisy_input",
+                "selected_source": "fast",
+                "shapes": {
+                  "samples": [
+                    32,
+                    1,
+                    8,
+                    8
+                  ],
+                  "target": [
+                    4,
+                    1,
+                    8,
+                    8
+                  ]
+                },
+                "step": 225,
+                "target_kind": "original_image_template_bank"
+              },
+              {
+                "dtypes": {
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_image_noisy_input",
+                "selected_source": "fast",
+                "shapes": {
+                  "samples": [
+                    32,
+                    1,
+                    8,
+                    8
+                  ],
+                  "target": [
+                    4,
+                    1,
+                    8,
+                    8
+                  ]
+                },
+                "step": 300,
+                "target_kind": "original_image_template_bank"
+              },
+              {
+                "dtypes": {
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_image_noisy_input",
+                "selected_source": "fast",
+                "shapes": {
+                  "samples": [
+                    32,
+                    1,
+                    8,
+                    8
+                  ],
+                  "target": [
+                    4,
+                    1,
+                    8,
+                    8
+                  ]
+                },
+                "step": 375,
+                "target_kind": "original_image_template_bank"
+              },
+              {
+                "dtypes": {
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_image_noisy_input",
+                "selected_source": "fast",
+                "shapes": {
+                  "samples": [
+                    32,
+                    1,
+                    8,
+                    8
+                  ],
+                  "target": [
+                    4,
+                    1,
+                    8,
+                    8
+                  ]
+                },
+                "step": 450,
+                "target_kind": "original_image_template_bank"
+              },
+              {
+                "dtypes": {
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_image_noisy_input",
+                "selected_source": "fast",
+                "shapes": {
+                  "samples": [
+                    32,
+                    1,
+                    8,
+                    8
+                  ],
+                  "target": [
+                    4,
+                    1,
+                    8,
+                    8
+                  ]
+                },
+                "step": 525,
+                "target_kind": "original_image_template_bank"
+              },
+              {
+                "dtypes": {
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_image_noisy_input",
+                "selected_source": "fast",
+                "shapes": {
+                  "samples": [
+                    32,
+                    1,
+                    8,
+                    8
+                  ],
+                  "target": [
+                    4,
+                    1,
+                    8,
+                    8
+                  ]
+                },
+                "step": 600,
+                "target_kind": "original_image_template_bank"
+              }
+            ],
+            "file": "gifs/portability-img_bars4.gif",
+            "frames": 9,
+            "original_gate": "PASS",
+            "sha256": "7175bf6fad99b09bac8a50a8722c339b383a23a1b5586eb9992dd54df721ab6e"
+          },
+          "metrics": {
+            "distribution_tv": 0.0625,
+            "hq": 0.9375,
+            "mean_rmse": 0.036570727825164795,
+            "mode_fractions": [
+              0.3125,
+              0.25,
+              0.1875,
+              0.25
+            ],
+            "modes": 4,
+            "pass": true,
+            "quality_mode_fractions": [
+              0.25,
+              0.25,
+              0.1875,
+              0.25
+            ],
+            "seconds": 24.692,
+            "sharp_rmse_clean": 0.00031166852568276227,
+            "sharp_rmse_noisy": 0.030419325456023216,
+            "step": 600
+          },
+          "original_gate": "PASS",
+          "original_requirements": [
+            [
+              "modes",
+              ">=",
+              4
+            ],
+            [
+              "hq",
+              ">=",
+              0.9
+            ]
+          ],
+          "raw_status": "PASS",
+          "recipe_sha256": "e22a72f5ee938d1654e83d49aa8d0093b35f3981f3d18fcc18c82e9cec097f54",
+          "sampling": "original noisy state-selected primary; clean diagnostics separate",
+          "task_id": "pr223-faithful19-retest-v1-portability-img_bars4"
+        },
+        {
+          "case_sha256": "a5fc275c333efd73193049d03d6df4a2f1a419997978f268f8ea4fa252b268b4",
+          "cost": {
+            "allowance_seconds": 150.0,
+            "certified": true,
+            "charged_seconds": 37.12063428200781,
+            "completed_terminal": true,
+            "overrun_seconds": 0.0,
+            "paid_wall_seconds": 37.12063428200781,
+            "reserved_seconds": 0.0,
+            "terminal_status": "completed",
+            "unmeasured_interrupt_reserved_seconds": 0.0
+          },
+          "gate_status": "PASS",
+          "media": {
+            "actual_steps": [
+              25,
+              75,
+              150,
+              225,
+              300,
+              375,
+              450,
+              525,
+              600
+            ],
+            "bytes": 279320,
+            "caption": "FINAL full-protocol verdict; per-clock flags are original retained reads.",
+            "capture_metadata": [
+              {
+                "dtypes": {
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_image_noisy_input",
+                "selected_source": "fast",
+                "shapes": {
+                  "samples": [
+                    32,
+                    1,
+                    8,
+                    8
+                  ],
+                  "target": [
+                    2,
+                    1,
+                    8,
+                    8
+                  ]
+                },
+                "step": 25,
+                "target_kind": "original_image_template_bank"
+              },
+              {
+                "dtypes": {
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_image_noisy_input",
+                "selected_source": "fast",
+                "shapes": {
+                  "samples": [
+                    32,
+                    1,
+                    8,
+                    8
+                  ],
+                  "target": [
+                    2,
+                    1,
+                    8,
+                    8
+                  ]
+                },
+                "step": 75,
+                "target_kind": "original_image_template_bank"
+              },
+              {
+                "dtypes": {
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_image_noisy_input",
+                "selected_source": "fast",
+                "shapes": {
+                  "samples": [
+                    32,
+                    1,
+                    8,
+                    8
+                  ],
+                  "target": [
+                    2,
+                    1,
+                    8,
+                    8
+                  ]
+                },
+                "step": 150,
+                "target_kind": "original_image_template_bank"
+              },
+              {
+                "dtypes": {
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_image_noisy_input",
+                "selected_source": "fast",
+                "shapes": {
+                  "samples": [
+                    32,
+                    1,
+                    8,
+                    8
+                  ],
+                  "target": [
+                    2,
+                    1,
+                    8,
+                    8
+                  ]
+                },
+                "step": 225,
+                "target_kind": "original_image_template_bank"
+              },
+              {
+                "dtypes": {
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_image_noisy_input",
+                "selected_source": "fast",
+                "shapes": {
+                  "samples": [
+                    32,
+                    1,
+                    8,
+                    8
+                  ],
+                  "target": [
+                    2,
+                    1,
+                    8,
+                    8
+                  ]
+                },
+                "step": 300,
+                "target_kind": "original_image_template_bank"
+              },
+              {
+                "dtypes": {
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_image_noisy_input",
+                "selected_source": "fast",
+                "shapes": {
+                  "samples": [
+                    32,
+                    1,
+                    8,
+                    8
+                  ],
+                  "target": [
+                    2,
+                    1,
+                    8,
+                    8
+                  ]
+                },
+                "step": 375,
+                "target_kind": "original_image_template_bank"
+              },
+              {
+                "dtypes": {
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_image_noisy_input",
+                "selected_source": "fast",
+                "shapes": {
+                  "samples": [
+                    32,
+                    1,
+                    8,
+                    8
+                  ],
+                  "target": [
+                    2,
+                    1,
+                    8,
+                    8
+                  ]
+                },
+                "step": 450,
+                "target_kind": "original_image_template_bank"
+              },
+              {
+                "dtypes": {
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_image_noisy_input",
+                "selected_source": "fast",
+                "shapes": {
+                  "samples": [
+                    32,
+                    1,
+                    8,
+                    8
+                  ],
+                  "target": [
+                    2,
+                    1,
+                    8,
+                    8
+                  ]
+                },
+                "step": 525,
+                "target_kind": "original_image_template_bank"
+              },
+              {
+                "dtypes": {
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_image_noisy_input",
+                "selected_source": "fast",
+                "shapes": {
+                  "samples": [
+                    32,
+                    1,
+                    8,
+                    8
+                  ],
+                  "target": [
+                    2,
+                    1,
+                    8,
+                    8
+                  ]
+                },
+                "step": 600,
+                "target_kind": "original_image_template_bank"
+              }
+            ],
+            "file": "gifs/portability-img_stripes2.gif",
+            "frames": 9,
+            "original_gate": "PASS",
+            "sha256": "cf9f9d9001220221c5125b8c1e63e080d5cc4e76fb8aa420c3444de15afa2f5e"
+          },
+          "metrics": {
+            "distribution_tv": 0.0,
+            "hq": 1.0,
+            "mean_rmse": 0.03383317217230797,
+            "mode_fractions": [
+              0.5,
+              0.5
+            ],
+            "modes": 2,
+            "pass": true,
+            "quality_mode_fractions": [
+              0.5,
+              0.5
+            ],
+            "seconds": 23.947,
+            "sharp_rmse_clean": 0.009935623034834862,
+            "sharp_rmse_noisy": 0.03268525004386902,
+            "step": 600
+          },
+          "original_gate": "PASS",
+          "original_requirements": [
+            [
+              "modes",
+              ">=",
+              2
+            ],
+            [
+              "hq",
+              ">=",
+              0.9
+            ]
+          ],
+          "raw_status": "PASS",
+          "recipe_sha256": "e22a72f5ee938d1654e83d49aa8d0093b35f3981f3d18fcc18c82e9cec097f54",
+          "sampling": "original noisy state-selected primary; clean diagnostics separate",
+          "task_id": "pr223-faithful19-retest-v1-portability-img_stripes2"
+        },
+        {
+          "case_sha256": "95222e45ba06f39e72a73d51a66fb4a1f18decc5c375aee6044c61089b23d8ff",
+          "cost": {
+            "allowance_seconds": 180.0,
+            "certified": false,
+            "charged_seconds": 0.0,
+            "completed_terminal": false,
+            "overrun_seconds": 0.0,
+            "paid_wall_seconds": 0.0,
+            "reserved_seconds": 0.0,
+            "terminal_status": "missing",
+            "unmeasured_interrupt_reserved_seconds": 0.0
+          },
+          "gate_status": "NOT_RUN",
+          "media": null,
+          "metrics": {},
+          "original_gate": null,
+          "original_requirements": [
+            [
+              "sw1_normalized",
+              "<=",
+              0.18
+            ],
+            [
+              "mass_tv",
+              "<=",
+              0.15
+            ],
+            [
+              "hq",
+              ">=",
+              0.85
+            ],
+            [
+              "component_covariance_error",
+              "<=",
+              0.85
+            ],
+            [
+              "component_min_eigen_ratio",
+              ">=",
+              0.15
+            ]
+          ],
+          "raw_status": null,
+          "recipe_sha256": "95735511213379b68856bbaf7ece9b27bbbf82f722a33d870e430eaf975e60bc",
+          "sampling": "original noisy state-selected primary; clean diagnostics separate",
+          "task_id": "pr223-faithful19-retest-v1-portability-vector_two_broad"
+        },
+        {
+          "case_sha256": "5dc3c26050c1d6ad7d315a46ea662ce9dda66f6e8c7fddf7bc703288bc8e24c1",
+          "cost": {
+            "allowance_seconds": 180.0,
+            "certified": false,
+            "charged_seconds": 0.0,
+            "completed_terminal": false,
+            "overrun_seconds": 0.0,
+            "paid_wall_seconds": 0.0,
+            "reserved_seconds": 0.0,
+            "terminal_status": "missing",
+            "unmeasured_interrupt_reserved_seconds": 0.0
+          },
+          "gate_status": "NOT_RUN",
+          "media": null,
+          "metrics": {},
+          "original_gate": null,
+          "original_requirements": [
+            [
+              "sw1_normalized",
+              "<=",
+              0.18
+            ],
+            [
+              "mass_tv",
+              "<=",
+              0.15
+            ],
+            [
+              "hq",
+              ">=",
+              0.85
+            ],
+            [
+              "component_covariance_error",
+              "<=",
+              0.85
+            ],
+            [
+              "component_min_eigen_ratio",
+              ">=",
+              0.15
+            ],
+            [
+              "min_mass_ratio",
+              ">=",
+              0.25
+            ]
+          ],
+          "raw_status": null,
+          "recipe_sha256": "95735511213379b68856bbaf7ece9b27bbbf82f722a33d870e430eaf975e60bc",
+          "sampling": "original noisy state-selected primary; clean diagnostics separate",
+          "task_id": "pr223-faithful19-retest-v1-portability-vector_unequal_mass"
+        },
+        {
+          "case_sha256": "8215c1e42747e8952435d03cb424eff5b53c29ba9b0b7dd4ea6cda2455b44404",
+          "cost": {
+            "allowance_seconds": 180.0,
+            "certified": false,
+            "charged_seconds": 0.0,
+            "completed_terminal": false,
+            "overrun_seconds": 0.0,
+            "paid_wall_seconds": 0.0,
+            "reserved_seconds": 0.0,
+            "terminal_status": "missing",
+            "unmeasured_interrupt_reserved_seconds": 0.0
+          },
+          "gate_status": "NOT_RUN",
+          "media": null,
+          "metrics": {},
+          "original_gate": null,
+          "original_requirements": [
+            [
+              "sw1_normalized",
+              "<=",
+              0.18
+            ],
+            [
+              "mass_tv",
+              "<=",
+              0.15
+            ],
+            [
+              "hq",
+              ">=",
+              0.85
+            ],
+            [
+              "component_covariance_error",
+              "<=",
+              0.85
+            ],
+            [
+              "component_min_eigen_ratio",
+              ">=",
+              0.15
+            ]
+          ],
+          "raw_status": null,
+          "recipe_sha256": "95735511213379b68856bbaf7ece9b27bbbf82f722a33d870e430eaf975e60bc",
+          "sampling": "original noisy state-selected primary; clean diagnostics separate",
+          "task_id": "pr223-faithful19-retest-v1-portability-vector_unequal_width"
+        },
+        {
+          "case_sha256": "2f6ec9cb53a70bb741a11e1fe2b7248ed18c94bfb71133837800477768e1ba86",
+          "cost": {
+            "allowance_seconds": 180.0,
+            "certified": false,
+            "charged_seconds": 0.0,
+            "completed_terminal": false,
+            "overrun_seconds": 0.0,
+            "paid_wall_seconds": 0.0,
+            "reserved_seconds": 0.0,
+            "terminal_status": "missing",
+            "unmeasured_interrupt_reserved_seconds": 0.0
+          },
+          "gate_status": "NOT_RUN",
+          "media": null,
+          "metrics": {},
+          "original_gate": null,
+          "original_requirements": [
+            [
+              "sw1_normalized",
+              "<=",
+              0.18
+            ],
+            [
+              "mass_tv",
+              "<=",
+              0.15
+            ],
+            [
+              "hq",
+              ">=",
+              0.85
+            ],
+            [
+              "component_covariance_error",
+              "<=",
+              0.85
+            ],
+            [
+              "component_min_eigen_ratio",
+              ">=",
+              0.15
+            ]
+          ],
+          "raw_status": null,
+          "recipe_sha256": "95735511213379b68856bbaf7ece9b27bbbf82f722a33d870e430eaf975e60bc",
+          "sampling": "original noisy state-selected primary; clean diagnostics separate",
+          "task_id": "pr223-faithful19-retest-v1-portability-vector_anisotropic"
+        },
+        {
+          "case_sha256": "7666be0d015c63d7e7cb6efef2da51e81e54d459608bcb979f8ae5f107cef1a5",
+          "cost": {
+            "allowance_seconds": 180.0,
+            "certified": false,
+            "charged_seconds": 0.0,
+            "completed_terminal": false,
+            "overrun_seconds": 0.0,
+            "paid_wall_seconds": 0.0,
+            "reserved_seconds": 0.0,
+            "terminal_status": "missing",
+            "unmeasured_interrupt_reserved_seconds": 0.0
+          },
+          "gate_status": "NOT_RUN",
+          "media": null,
+          "metrics": {},
+          "original_gate": null,
+          "original_requirements": [
+            [
+              "sw1_normalized",
+              "<=",
+              0.18
+            ],
+            [
+              "mean_error",
+              "<=",
+              0.15
+            ],
+            [
+              "covariance_error",
+              "<=",
+              0.45
+            ]
+          ],
+          "raw_status": null,
+          "recipe_sha256": "95735511213379b68856bbaf7ece9b27bbbf82f722a33d870e430eaf975e60bc",
+          "sampling": "original noisy state-selected primary; clean diagnostics separate",
+          "task_id": "pr223-faithful19-retest-v1-portability-vector_overlap"
+        },
+        {
+          "case_sha256": "e0e75048c7a29817f19c968bf4e2dfe05baf73e03dfa280570e2c57bf74ff3c3",
+          "cost": {
+            "allowance_seconds": 180.0,
+            "certified": false,
+            "charged_seconds": 0.0,
+            "completed_terminal": false,
+            "overrun_seconds": 0.0,
+            "paid_wall_seconds": 0.0,
+            "reserved_seconds": 0.0,
+            "terminal_status": "missing",
+            "unmeasured_interrupt_reserved_seconds": 0.0
+          },
+          "gate_status": "NOT_RUN",
+          "media": null,
+          "metrics": {},
+          "original_gate": null,
+          "original_requirements": [
+            [
+              "sw1_normalized",
+              "<=",
+              0.18
+            ],
+            [
+              "mean_error",
+              "<=",
+              0.15
+            ],
+            [
+              "covariance_error",
+              "<=",
+              0.45
+            ]
+          ],
+          "raw_status": null,
+          "recipe_sha256": "95735511213379b68856bbaf7ece9b27bbbf82f722a33d870e430eaf975e60bc",
+          "sampling": "original noisy state-selected primary; clean diagnostics separate",
+          "task_id": "pr223-faithful19-retest-v1-portability-vector_spiral"
+        },
+        {
+          "case_sha256": "8787f613cd952e4374b2c2b569497363f04b718dc179db67d35821b68235a199",
+          "cost": {
+            "allowance_seconds": 1470.0,
+            "certified": false,
+            "charged_seconds": 0.0,
+            "completed_terminal": false,
+            "overrun_seconds": 0.0,
+            "paid_wall_seconds": 0.0,
+            "reserved_seconds": 0.0,
+            "terminal_status": "missing",
+            "unmeasured_interrupt_reserved_seconds": 0.0
+          },
+          "gate_status": "NOT_RUN",
+          "media": null,
+          "metrics": {},
+          "original_gate": null,
+          "original_requirements": [
+            [
+              "modes",
+              "==",
+              8
+            ],
+            [
+              "hq",
+              ">=",
+              0.9
+            ]
+          ],
+          "raw_status": null,
+          "recipe_sha256": "49f4ea356bd3349334b2048d74f13ea78a15ec2abc1ab2d005df8f1081e7c15a",
+          "sampling": "original noisy state-selected primary; clean diagnostics separate",
+          "task_id": "pr223-faithful19-retest-v1-portability-stationary"
+        },
+        {
+          "case_sha256": "6d10ac296181083fb182e633c569aafd14fd3db394add49419164d7d317a0b97",
+          "cost": {
+            "allowance_seconds": 960.0,
+            "certified": false,
+            "charged_seconds": 0.0,
+            "completed_terminal": false,
+            "overrun_seconds": 0.0,
+            "paid_wall_seconds": 0.0,
+            "reserved_seconds": 0.0,
+            "terminal_status": "missing",
+            "unmeasured_interrupt_reserved_seconds": 0.0
+          },
+          "gate_status": "NOT_RUN",
+          "media": null,
+          "metrics": {},
+          "original_gate": null,
+          "original_requirements": [
+            [
+              "modes",
+              "==",
+              8
+            ],
+            [
+              "hq",
+              ">=",
+              0.9
+            ]
+          ],
+          "raw_status": null,
+          "recipe_sha256": "49f4ea356bd3349334b2048d74f13ea78a15ec2abc1ab2d005df8f1081e7c15a",
+          "sampling": "original noisy state-selected primary; clean diagnostics separate",
+          "task_id": "pr223-faithful19-retest-v1-portability-ring_shift"
+        },
+        {
+          "case_sha256": "d45f389a6134fb5204622e7f6b7579328bb3ba2f73987f2035d3bda0002ad26a",
+          "cost": {
+            "allowance_seconds": 390.0,
+            "certified": false,
+            "charged_seconds": 0.0,
+            "completed_terminal": false,
+            "overrun_seconds": 0.0,
+            "paid_wall_seconds": 0.0,
+            "reserved_seconds": 0.0,
+            "terminal_status": "missing",
+            "unmeasured_interrupt_reserved_seconds": 0.0
+          },
+          "gate_status": "NOT_RUN",
+          "media": null,
+          "metrics": {},
+          "original_gate": null,
+          "original_requirements": [
+            [
+              "modes",
+              ">=",
+              95
+            ],
+            [
+              "hq",
+              ">=",
+              "0.9 * observed pre_turn_hq"
+            ]
+          ],
+          "raw_status": null,
+          "recipe_sha256": "49f4ea356bd3349334b2048d74f13ea78a15ec2abc1ab2d005df8f1081e7c15a",
+          "sampling": "original noisy state-selected primary; clean diagnostics separate",
+          "task_id": "pr223-faithful19-retest-v1-moving-grid100"
+        },
+        {
+          "case_sha256": "a1c2cb361389818589627435c49a0890c3b9de5d6e652028f82874421300583b",
+          "cost": {
+            "allowance_seconds": 420.0,
+            "certified": false,
+            "charged_seconds": 0.0,
+            "completed_terminal": false,
+            "overrun_seconds": 0.0,
+            "paid_wall_seconds": 0.0,
+            "reserved_seconds": 0.0,
+            "terminal_status": "missing",
+            "unmeasured_interrupt_reserved_seconds": 0.0
+          },
+          "gate_status": "NOT_RUN",
+          "media": null,
+          "metrics": {},
+          "original_gate": null,
+          "original_requirements": [
+            [
+              "modes",
+              ">=",
+              95
+            ],
+            [
+              "hq",
+              ">=",
+              "0.9 * observed pre_turn_hq"
+            ]
+          ],
+          "raw_status": null,
+          "recipe_sha256": "49f4ea356bd3349334b2048d74f13ea78a15ec2abc1ab2d005df8f1081e7c15a",
+          "sampling": "original noisy state-selected primary; clean diagnostics separate",
+          "task_id": "pr223-faithful19-retest-v1-moving-rotated100"
+        },
+        {
+          "case_sha256": "d839f3a9a18ab8cb00fa2e359cc4d3f8ce478ac8969b3432b76c11c1f4083516",
+          "cost": {
+            "allowance_seconds": 420.0,
+            "certified": false,
+            "charged_seconds": 0.0,
+            "completed_terminal": false,
+            "overrun_seconds": 0.0,
+            "paid_wall_seconds": 0.0,
+            "reserved_seconds": 0.0,
+            "terminal_status": "missing",
+            "unmeasured_interrupt_reserved_seconds": 0.0
+          },
+          "gate_status": "NOT_RUN",
+          "media": null,
+          "metrics": {},
+          "original_gate": null,
+          "original_requirements": [
+            [
+              "modes",
+              ">=",
+              95
+            ],
+            [
+              "hq",
+              ">=",
+              "0.9 * observed pre_turn_hq"
+            ]
+          ],
+          "raw_status": null,
+          "recipe_sha256": "49f4ea356bd3349334b2048d74f13ea78a15ec2abc1ab2d005df8f1081e7c15a",
+          "sampling": "original noisy state-selected primary; clean diagnostics separate",
+          "task_id": "pr223-faithful19-retest-v1-moving-staggered100"
+        },
+        {
+          "case_sha256": "1d81c55b5f1ffab1ae7c6a3ad25d6f654135a7b451983c2ba69e027028dcb5ba",
+          "cost": {
+            "allowance_seconds": 1470.0,
+            "certified": false,
+            "charged_seconds": 0.0,
+            "completed_terminal": false,
+            "overrun_seconds": 0.0,
+            "paid_wall_seconds": 0.0,
+            "reserved_seconds": 0.0,
+            "terminal_status": "missing",
+            "unmeasured_interrupt_reserved_seconds": 0.0
+          },
+          "gate_status": "NOT_RUN",
+          "media": null,
+          "metrics": {},
+          "original_gate": null,
+          "original_requirements": [
+            [
+              "modes",
+              ">=",
+              100
+            ],
+            [
+              "precision",
+              ">=",
+              0.97
+            ],
+            [
+              "min_hq_mode_mass",
+              ">=",
+              0.005
+            ],
+            [
+              "mass_tv",
+              "<=",
+              0.1
+            ],
+            [
+              "max_mode_mass",
+              "<=",
+              0.02
+            ],
+            [
+              "min_cov_eig_ratio",
+              ">=",
+              0.4
+            ],
+            [
+              "max_cov_eig_ratio",
+              "<=",
+              1.7
+            ],
+            [
+              "min_radial_median_ratio",
+              ">=",
+              0.65
+            ],
+            [
+              "max_radial_median_ratio",
+              "<=",
+              1.4
+            ],
+            [
+              "acc_mass_tv",
+              "<=",
+              0.06
+            ],
+            [
+              "acc_center_rms_sigma",
+              "<=",
+              0.2
+            ],
+            [
+              "acc_abs_cov_trace_bias",
+              "<=",
+              0.1
+            ],
+            [
+              "acc_radial_ks",
+              "<=",
+              0.04
+            ]
+          ],
+          "raw_status": null,
+          "recipe_sha256": "49f4ea356bd3349334b2048d74f13ea78a15ec2abc1ab2d005df8f1081e7c15a",
+          "sampling": "original noisy state-selected primary; clean diagnostics separate",
+          "task_id": "pr223-faithful19-retest-v1-native-grid100"
+        },
+        {
+          "case_sha256": "fbfc0ed4e178baab8a1f52e029e17c2749b6c53231a3de915e620e6f4c220643",
+          "cost": {
+            "allowance_seconds": 1440.0,
+            "certified": false,
+            "charged_seconds": 0.0,
+            "completed_terminal": false,
+            "overrun_seconds": 0.0,
+            "paid_wall_seconds": 0.0,
+            "reserved_seconds": 0.0,
+            "terminal_status": "missing",
+            "unmeasured_interrupt_reserved_seconds": 0.0
+          },
+          "gate_status": "NOT_RUN",
+          "media": null,
+          "metrics": {},
+          "original_gate": null,
+          "original_requirements": [
+            [
+              "modes",
+              ">=",
+              100
+            ],
+            [
+              "precision",
+              ">=",
+              0.97
+            ],
+            [
+              "min_hq_mode_mass",
+              ">=",
+              0.005
+            ],
+            [
+              "mass_tv",
+              "<=",
+              0.1
+            ],
+            [
+              "max_mode_mass",
+              "<=",
+              0.02
+            ],
+            [
+              "min_cov_eig_ratio",
+              ">=",
+              0.4
+            ],
+            [
+              "max_cov_eig_ratio",
+              "<=",
+              1.7
+            ],
+            [
+              "min_radial_median_ratio",
+              ">=",
+              0.65
+            ],
+            [
+              "max_radial_median_ratio",
+              "<=",
+              1.4
+            ],
+            [
+              "acc_mass_tv",
+              "<=",
+              0.06
+            ],
+            [
+              "acc_center_rms_sigma",
+              "<=",
+              0.2
+            ],
+            [
+              "acc_abs_cov_trace_bias",
+              "<=",
+              0.1
+            ],
+            [
+              "acc_radial_ks",
+              "<=",
+              0.04
+            ]
+          ],
+          "raw_status": null,
+          "recipe_sha256": "49f4ea356bd3349334b2048d74f13ea78a15ec2abc1ab2d005df8f1081e7c15a",
+          "sampling": "original noisy state-selected primary; clean diagnostics separate",
+          "task_id": "pr223-faithful19-retest-v1-native-rotated100"
+        },
+        {
+          "case_sha256": "a9ac355d98798b1aa4ce06a29ee4867f7293b2a9c21fad29758c7b873a9d8ab8",
+          "cost": {
+            "allowance_seconds": 1380.0,
+            "certified": false,
+            "charged_seconds": 0.0,
+            "completed_terminal": false,
+            "overrun_seconds": 0.0,
+            "paid_wall_seconds": 0.0,
+            "reserved_seconds": 0.0,
+            "terminal_status": "missing",
+            "unmeasured_interrupt_reserved_seconds": 0.0
+          },
+          "gate_status": "NOT_RUN",
+          "media": null,
+          "metrics": {},
+          "original_gate": null,
+          "original_requirements": [
+            [
+              "modes",
+              ">=",
+              100
+            ],
+            [
+              "precision",
+              ">=",
+              0.97
+            ],
+            [
+              "min_hq_mode_mass",
+              ">=",
+              0.005
+            ],
+            [
+              "mass_tv",
+              "<=",
+              0.1
+            ],
+            [
+              "max_mode_mass",
+              "<=",
+              0.02
+            ],
+            [
+              "min_cov_eig_ratio",
+              ">=",
+              0.4
+            ],
+            [
+              "max_cov_eig_ratio",
+              "<=",
+              1.7
+            ],
+            [
+              "min_radial_median_ratio",
+              ">=",
+              0.65
+            ],
+            [
+              "max_radial_median_ratio",
+              "<=",
+              1.4
+            ],
+            [
+              "acc_mass_tv",
+              "<=",
+              0.06
+            ],
+            [
+              "acc_center_rms_sigma",
+              "<=",
+              0.2
+            ],
+            [
+              "acc_abs_cov_trace_bias",
+              "<=",
+              0.1
+            ],
+            [
+              "acc_radial_ks",
+              "<=",
+              0.04
+            ]
+          ],
+          "raw_status": null,
+          "recipe_sha256": "49f4ea356bd3349334b2048d74f13ea78a15ec2abc1ab2d005df8f1081e7c15a",
+          "sampling": "original noisy state-selected primary; clean diagnostics separate",
+          "task_id": "pr223-faithful19-retest-v1-native-staggered100"
+        }
+      ],
+      "trainer_family": "atlas"
+    },
+    {
       "candidate_id": "bcap-tier1-refresh-v1",
       "conclusion": "Concluded 8 whole configurations. Recorded selection: best_observed; default adoption False.",
       "evidence_scope": "published_summary",

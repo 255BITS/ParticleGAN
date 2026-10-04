@@ -6,6 +6,8 @@ envelopes, per-update streams, or paths on the machine that ran the study.
 from __future__ import annotations
 
 from collections import Counter
+from copy import deepcopy
+import math
 from pathlib import Path
 
 from .contracts import file_hash, read_json, stable_hash
@@ -14,6 +16,276 @@ VERSION = "forge-publication-memory-v1"
 OUTPUT = "reports/forge/publication-records.json"
 POLICY_BOARD = "reports/forge/policy-family-inventory.json"
 COMPLETION = "reports/forge/family-winner-round1/campaign-completion.json"
+PASSIVE_REGISTRY = "reports/forge/passive-publications.json"
+PR223_SCHEMA = "pg_pr223_full19_passive_publication_v1"
+PR223_PROTOCOL = "reports/forge/pr223-original-full-retest-20261004/protocol.json"
+PR223_PROTOCOL_SHA = "8a5f0f63839e613b051562f030486388e8fcf962b6b6987fe5aaa27ea1f59786"
+
+
+def _require(condition, message):
+    if not condition:
+        raise ValueError("passive publication: " + message)
+
+
+def _equal_cost(actual, expected):
+    _require(type(actual) in (int, float) and math.isfinite(actual) and actual >= 0,
+             "finite nonnegative cost required")
+    _require(math.isclose(actual, expected, rel_tol=0, abs_tol=1e-8), "cost arithmetic changed")
+
+
+def _same_json(actual, expected):
+    return stable_hash(actual) == stable_hash(expected)
+
+
+def _public_fields(value):
+    if isinstance(value, dict):
+        for key, child in value.items():
+            _require(key not in {"token", "attempt_token", "lease_fd", "lease_fds", "credential", "credentials"},
+                     "private execution fields cannot enter recall")
+            _public_fields(child)
+    elif isinstance(value, list):
+        for child in value:
+            _public_fields(child)
+
+
+def _pr223_cut(root, entry, report, final, proof):
+    """Project recorded gates and final costs; never open an execution path."""
+    from .completed_studies import _json, _read_pin
+
+    _require(entry["protocol"]["path"] == PR223_PROTOCOL
+             and entry["protocol"]["sha256"] == PR223_PROTOCOL_SHA, "original protocol identity changed")
+    protocol = _json(_read_pin(root, entry["protocol"]))
+    _public_fields(report)
+    _public_fields(final)
+    _require(report.get("family") == "atlas" and report.get("required") == 19
+             and type(report.get("required")) is int, "all 19 original questions required")
+    rows = report.get("rows", [])
+    _require(len(rows) == 19 and [r.get("id") for r in rows] == [r["id"] for r in protocol["rows"]],
+             "original ordered question denominator changed")
+    source = report.get("source", {})
+    from .completed_studies import HEX
+    import re
+    _require(re.fullmatch(r"[0-9a-f]{40}", source.get("origin_commit", ""))
+             and HEX.fullmatch(source.get("digest", "")), "exact execution source required")
+    _require(_same_json(source, entry.get("source")), "registered execution source changed")
+    claims = report.get("claims", {})
+    for key in ("historical_passes_are_current_credit", "current26_qualification", "default_adoption",
+                "speed_ranking", "named10500_cost_pooling"):
+        _require(claims.get(key) is False, "original retest cannot grant pooled/default/speed credit")
+    _require(report.get("accepted_full_retest_status") == "PENDING_PUBLICATION_COST_FINALIZATION",
+             "immutable cut must retain its pre-finalization status")
+    statuses = {"PASS", "FAIL", "INVALID", "INCOMPLETE", "BUDGET_EXCEEDED", "BLOCKED", "NOT_RUN", "UNKNOWN"}
+    cells, media, reached_end = [], [], False
+    for row, declared in zip(rows, protocol["rows"]):
+        definition = declared["original_definition"]
+        for key in ("group", "task"):
+            _require(row.get(key) == declared[key], "original host identity changed")
+        for key in ("original_requirements", "observation_steps", "original_options", "sampling"):
+            _require(_same_json(row.get(key), definition[key]), "original gate/cadence/sampling changed")
+        _require(_same_json(row.get("required_host"), definition["original_host"])
+                 and _same_json(row.get("complete_recipe"), declared["resolved_recipe"]), "full original host/Recipe changed")
+        _require(isinstance(row.get("case_sha256"), str) and HEX.fullmatch(row["case_sha256"]),
+                 "case fingerprint required")
+        status = row.get("execution_status")
+        _require(status in statuses and type(row.get("full_protocol_complete")) is bool, "unknown execution status")
+        accepted = status in {"PASS", "FAIL"}
+        _require(row.get("accepted_original_gate") == (status if accepted else None)
+                 and row["full_protocol_complete"] is accepted, "raw/accepted gate distinction changed")
+        if not accepted:
+            reached_end = True
+        elif accepted:
+            _require(not reached_end and row.get("raw_reported_status") == status,
+                     "accepted result after an unreached slot or changed raw verdict")
+            _require(row.get("completed_steps") == definition["original_host"]["steps"]
+                     and row.get("metric_observations") == len(definition["observation_steps"]),
+                     "accepted gate lacks full original execution")
+            if row["group"] == "native":
+                noisy = row.get("native_gates", {}).get("noisy", {})
+                _require(set(noisy) == {"coverage", "accuracy"}
+                         and set(noisy.values()) <= {"PASS", "FAIL"}
+                         and (all(v == "PASS" for v in noisy.values())) is (status == "PASS"),
+                         "native primary coverage/accuracy joint grade changed")
+        value = row.get("media")
+        if accepted:
+            _require(isinstance(value, dict) and value.get("original_gate") == status
+                     and value.get("actual_steps") == declared["media_steps"]
+                     and value.get("frames") == len(declared["media_steps"]), "original goal media scope changed")
+            directory = str(Path(entry["result"]["path"]).parent)
+            media.append({"path": directory + "/" + value["file"], "sha256": value["sha256"], "bytes": value["bytes"]})
+        else:
+            _require(value is None, "unaccepted gate cannot acquire goal media credit")
+        cost = row.get("cost", {})
+        allowance = declared["proposed_inclusive_allowance_seconds"]
+        _equal_cost(cost.get("allowance_seconds"), allowance)
+        for key in ("paid_wall_seconds", "reserved_seconds", "charged_seconds", "overrun_seconds"):
+            _equal_cost(cost.get(key), cost.get(key, -1))
+        paid, reserve = cost["paid_wall_seconds"], cost["reserved_seconds"]
+        _equal_cost(cost["charged_seconds"], paid + reserve)
+        _equal_cost(cost.get("unmeasured_interrupt_reserved_seconds"), reserve)
+        _equal_cost(cost["overrun_seconds"], max(0, paid - allowance))
+        terminal = cost.get("terminal_status")
+        _require(terminal in {"completed", "missing", "error", "timeout", "cancelled"}
+                 and cost.get("completed_terminal") is (terminal == "completed")
+                 and cost.get("certified") is accepted, "durable completion/certification distinction changed")
+        if status in {"NOT_RUN", "UNKNOWN", "BLOCKED"}:
+            _equal_cost(paid + reserve, 0)
+        elif terminal == "completed":
+            _equal_cost(reserve, 0)
+        else:
+            _equal_cost(reserve, max(0, allowance - paid))
+        if accepted:
+            _require(terminal == "completed", "accepted gate requires a completed durable attempt")
+        cells.append({"task_id": row["id"], "gate_status": status,
+                      "original_gate": row["accepted_original_gate"], "raw_status": row.get("raw_reported_status"),
+                      "metrics": deepcopy(row.get("final_metrics", {})), "cost": deepcopy(cost),
+                      "case_sha256": row["case_sha256"], "recipe_sha256": stable_hash(row["complete_recipe"]),
+                      "sampling": row["sampling"], "original_requirements": deepcopy(row["original_requirements"]),
+                      "media": deepcopy(value)})
+    counts = dict(sorted(Counter(row["execution_status"] for row in rows).items()))
+    _require(type(report.get("counts")) is dict and set(report["counts"]) == statuses
+             and all(type(n) is int and n >= 0 for n in report["counts"].values())
+             and counts == {k: v for k, v in report["counts"].items() if v}, "execution count drift")
+    completed = sum(row["full_protocol_complete"] for row in rows)
+    accepted_counts = {"PASS": counts.get("PASS", 0), "FAIL": counts.get("FAIL", 0), "UNAVAILABLE": 19 - completed}
+    _require(type(report.get("completed")) is int and report["completed"] == completed
+             and all(type(n) is int for n in report.get("accepted_original_gate_counts", {}).values())
+             and report.get("accepted_original_gate_counts") == accepted_counts
+             and report.get("all_required_case_evidence_complete") is (completed == 19), "accepted count drift")
+    raw_gate = ("PASS" if counts.get("PASS") == 19 else "FAIL") if completed == 19 else "UNAVAILABLE"
+    _require(report.get("raw_full_protocol_gate") == raw_gate, "partial cut cannot supply full19 grade")
+    _require(entry["media"] == media, "all accepted original GIFs must be pinned")
+    for pin in media:
+        _require(_read_pin(root, pin)[:6] in (b"GIF89a", b"GIF87a"), "original goal GIF required")
+    card = report.get("trusted_terminal_card", {})
+    _require(isinstance(card.get("sha256"), str) and HEX.fullmatch(card["sha256"]), "trusted terminal-card pin required")
+    _require(card["sha256"] == entry.get("terminal_card_sha256"), "registered terminal-card identity changed")
+    _require(final.get("schema") == "pg_pr223_final_publication_cost_v1"
+             and final.get("original_terminal_cut_results_sha256") == entry["result"]["sha256"]
+             and final.get("trusted_terminal_card_sha256") == card["sha256"]
+             and final.get("original_case_verdicts_unchanged") is True
+             and final.get("no_old_cost_or_qualification_pooling") is True
+             and final.get("raw_full_protocol_gate") == raw_gate, "FINAL_COST/result/source-card join changed")
+    costs = deepcopy(final["costs"])
+    for key, expected in (("aggregate_cap_seconds", 10800), ("metadata_cap_seconds", 180),
+                          ("case_caps_sum_seconds", 9810), ("export_grace_seconds", 0), ("retries", 0)):
+        _equal_cost(costs.get(key), expected)
+    paid = math.fsum(row["cost"]["paid_wall_seconds"] for row in rows)
+    reserve = math.fsum(row["cost"]["reserved_seconds"] for row in rows)
+    for key, expected in (("case_paid_wall_seconds", paid), ("case_reserved_seconds", reserve),
+                          ("case_charged_seconds", paid + reserve)):
+        _equal_cost(costs.get(key), expected)
+    metadata = costs["metadata"]
+    _require(type(metadata.get("blocked")) is bool and type(costs.get("halt_required")) is bool,
+             "explicit final budget status required")
+    for key in ("paid_wall_seconds", "reserved_seconds", "overrun_seconds", "charged_seconds"):
+        _equal_cost(metadata.get(key), metadata.get(key, -1))
+    _equal_cost(metadata["charged_seconds"], metadata["paid_wall_seconds"] + metadata["reserved_seconds"])
+    _equal_cost(metadata["overrun_seconds"], max(0, metadata["paid_wall_seconds"] - 180))
+    _equal_cost(metadata["reserved_seconds"], max(0, 180 - metadata["paid_wall_seconds"]) if metadata["blocked"] else 0)
+    _equal_cost(costs.get("charged_seconds"), paid + reserve + metadata["charged_seconds"])
+    _require(type(costs.get("remaining_seconds")) in (int, float)
+             and math.isclose(costs["remaining_seconds"], 10800 - costs["charged_seconds"], abs_tol=1e-8), "final remaining budget changed")
+    halt = (metadata["blocked"] or metadata["overrun_seconds"] > 0 or costs["charged_seconds"] > 10800
+            or any(row["cost"]["overrun_seconds"] > 0 for row in rows))
+    _require(costs["halt_required"] is halt, "final budget halt changed")
+    status = "INCOMPLETE" if halt or completed != 19 else raw_gate
+    _require(final.get("status") == status, "final accepted status changed")
+    snapshot = report["cost_snapshot_before_publication"]
+    _require(metadata["charged_seconds"] >= snapshot["metadata"]["charged_seconds"]
+             and type(final.get("metadata_phase_count")) is int
+             and type(report.get("metadata_phase_count_before_publication")) is int
+             and final["metadata_phase_count"] > report["metadata_phase_count_before_publication"], "final metadata cost/history rewound")
+    _require(proof.get("schema") == "pg_pr223_passive_verification_v1"
+             and proof.get("results_sha256") == entry["result"]["sha256"]
+             and proof.get("trusted_card_sha256") == card["sha256"]
+             and proof.get("counts") == report["counts"] and proof.get("required") == 19
+             and proof.get("accepted_original_gifs") == completed, "passive certification join changed")
+    for key in ("models", "draws", "scorer_calls", "grader_calls", "rendered_frames"):
+        _require(type(proof.get(key)) is int and proof[key] == 0, "projection cannot perform scientific work")
+    ledger = final.get("authoritative_final_metadata_ledger", {})
+    _require(isinstance(ledger.get("sha256"), str) and HEX.fullmatch(ledger["sha256"])
+             and type(ledger.get("bytes")) is int and ledger["bytes"] >= 0
+             and ledger.get("path") == report.get("authoritative_metadata_ledger_path"), "final closed-ledger pin required")
+    return {"id": entry["id"], "schema": report["schema"], "source": deepcopy(source),
+            "required": 19, "completed": completed, "counts": counts, "accepted_counts": accepted_counts,
+            "status": status, "raw_full_protocol_gate": raw_gate, "cost": costs, "cells": cells,
+            "runtime_declaration": deepcopy(protocol["runtime"]),
+            "actual_runtime_in_compact_result": False, "recipe": deepcopy(protocol["common_resolved_recipe"]),
+            "publication": deepcopy(entry["result"]), "final_cost": deepcopy(entry["final_cost"]),
+            "terminal_card_sha256": card["sha256"], "readout": entry["readout"]["path"],
+            "qualification_input": False, "qualification_reuse": False, "default_adoption": False,
+            "speed_ranking": False, "cost_scope": "Cumulative within this retest only; never sum overlapping cuts."}
+
+
+# Add adapters here for reviewed passive schemas; paths and latest-cut pointers
+# belong to the optional committed registry, not a hard-coded report date.
+PASSIVE_ADAPTERS = {PR223_SCHEMA: _pr223_cut}
+
+
+def passive_publication_entry(root, directory):
+    """Create a byte-bound registration; caller owns reviewing and writing it."""
+    from .completed_studies import _json, _pin
+    root = Path(root).resolve()
+    entry = {"id": Path(directory).name}
+    for role, filename in (("result", "results.json"), ("final_cost", "FINAL_COST.json"),
+                           ("verification", "verification.json"), ("readout", "README.md")):
+        entry[role] = _pin(root, directory + "/" + filename)
+    report = _json((root / entry["result"]["path"]).read_bytes())
+    entry["schema"] = report["schema"]
+    entry["source"] = deepcopy(report["source"])
+    entry["terminal_card_sha256"] = report["trusted_terminal_card"]["sha256"]
+    _require(entry["schema"] in PASSIVE_ADAPTERS, "unsupported passive schema")
+    entry["protocol"] = _pin(root, PR223_PROTOCOL)
+    entry["media"] = [{"path": directory + "/" + row["media"]["file"],
+                       "sha256": row["media"]["sha256"], "bytes": row["media"]["bytes"]}
+                      for row in report["rows"] if row.get("media")]
+    return entry
+
+
+def load_passive_publications(root):
+    """Read committed summaries only; raw/source snapshot paths stay inert."""
+    from .completed_studies import _file, _json, _read_pin
+    root = Path(root).resolve()
+    if not (root / PASSIVE_REGISTRY).exists() and not (root / PASSIVE_REGISTRY).is_symlink():
+        return {}
+    registry = _json(_file(root, PASSIVE_REGISTRY).read_bytes())
+    _require(registry.get("schema") == "forge_passive_publications_registry_v1"
+             and all(registry.get(k) is False for k in ("qualification_input", "reuse", "cross_cohort_pooling")),
+             "registry scope changed")
+    entries = registry.get("publications", [])
+    _require(isinstance(entries, list) and entries and len({e["id"] for e in entries}) == len(entries),
+             "distinct passive cuts required")
+    cuts, pins = [], []
+    for entry in entries:
+        _require(entry["schema"] in PASSIVE_ADAPTERS, "unsupported passive schema")
+        directory = str(Path(entry["result"]["path"]).parent)
+        _require(directory.startswith("reports/forge/") and entry["id"] == Path(directory).name, "committed report identity required")
+        values = {}
+        for role, suffix in (("result", "results.json"), ("final_cost", "FINAL_COST.json"),
+                             ("verification", "verification.json"), ("readout", "README.md")):
+            _require(entry[role]["path"] == directory + "/" + suffix, "cohort-local report input required")
+            data = _read_pin(root, entry[role]);pins.append(deepcopy(entry[role]))
+            if role != "readout": values[role] = _json(data)
+        _require(values["result"].get("schema") == entry["schema"], "registered/report schema mismatch")
+        cut = PASSIVE_ADAPTERS[entry["schema"]](root, entry, values["result"], values["final_cost"], values["verification"])
+        cuts.append(cut);pins += [deepcopy(entry["protocol"]), *deepcopy(entry["media"])]
+    latest = registry.get("latest", {})
+    _require(set(latest) == {cut["schema"] for cut in cuts}, "one explicit latest cut per schema required")
+    selected = {}
+    for schema, identifier in latest.items():
+        matching = [cut for cut in cuts if cut["schema"] == schema and cut["id"] == identifier]
+        _require(len(matching) == 1, "latest cut missing or substituted")
+        chosen = matching[0]
+        for earlier in [c for c in cuts if c["schema"] == schema]:
+            _require(earlier["source"] == chosen["source"], "one retest source per latest-cut history")
+            _require(earlier["completed"] <= chosen["completed"], "latest cut rewinds accepted coverage")
+            _require(earlier["cost"]["charged_seconds"] <= chosen["cost"]["charged_seconds"], "latest cut resets cumulative costs")
+            for old, new in zip(earlier["cells"], chosen["cells"]):
+                if old["gate_status"] in {"PASS", "FAIL"}:
+                    _require(old == new, "later cut rewrites an accepted historical case")
+        selected[schema] = deepcopy(chosen)
+    return {"registry": PASSIVE_REGISTRY, "cuts": cuts, "latest": selected, "inputs": pins,
+            "qualification_input": False, "qualification_reuse": False, "cross_cohort_pooling": False}
 
 
 def input_paths(root: Path) -> list[Path]:
@@ -26,6 +298,10 @@ def input_paths(root: Path) -> list[Path]:
         path = root / "reports/forge" / name
         if path.is_file():
             paths.add(path)
+    passive = load_passive_publications(root)
+    if passive:
+        paths.add(root / PASSIVE_REGISTRY)
+        paths.update(root / pin["path"] for pin in passive["inputs"])
     return sorted(paths)
 
 
@@ -163,6 +439,26 @@ def normalize(root: Path) -> list[dict]:
     """Produce stable recall records from available, recognized publications."""
     root = Path(root)
     records = []
+    for cut in load_passive_publications(root).get("cuts", []):
+        source = {**cut["publication"], "board": "reports/forge/technique-inventory.md"}
+        record = _base(source, "pr223-original-full19-retest", "atlas",
+                       {"publication": cut["publication"], "source": cut["source"]},
+                       "discriminator_stability", "published_study")
+        record.update(lifecycle="concluded" if cut["completed"] == 19 else "closed_partial_cut",
+                      status=cut["status"], trainer_family="atlas", cohort=cut["source"]["digest"],
+                      mechanism_class="faithful_original_full19_retest", configuration_id=cut["id"],
+                      settings={"lr": .00425, "prior_lr_mult": 2., "d_lr_mult": 1.},
+                      task_results=cut["cells"], recorded_cost=cut["cost"],
+                      provenance={"source_commit": cut["source"]["origin_commit"],
+                                  "execution_digest": cut["source"]["digest"], "final_cost": cut["final_cost"],
+                                  "terminal_card_sha256": cut["terminal_card_sha256"]},
+                      next_action="Read the latest closed cut and authoritative FINAL_COST. Original19 results grant "
+                                  "no current26 qualification, default or speed credit; continuation requires its own retained evidence.",
+                      conclusion=f"Closed original19 cut: {cut['accepted_counts']['PASS']}/19 PASS, "
+                                 f"{cut['accepted_counts']['FAIL']} FAIL, {cut['accepted_counts']['UNAVAILABLE']} unavailable. "
+                                 f"Final accepted status {cut['status']}; required execution counts {cut['counts']}. "
+                                 "Historical positives and overlapping cut costs are not pooled.")
+        records.append(record)
     for path in sorted((root / "reports/forge/configuration-search").glob("*.json")):
         records.extend(_search_records(root, path, read_json(path)))
     path = root / POLICY_BOARD

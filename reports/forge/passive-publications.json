@@ -1,0 +1,72 @@
+{
+  "cross_cohort_pooling": false,
+  "latest": {
+    "pg_pr223_full19_passive_publication_v1": "pr223-original-full-retest-prefix5-20261004"
+  },
+  "publications": [
+    {
+      "final_cost": {
+        "bytes": 1323,
+        "path": "reports/forge/pr223-original-full-retest-prefix5-20261004/FINAL_COST.json",
+        "sha256": "d000104095aaa303f84792ebabb506c170b3e0ae63c2740b7153c215c794886b"
+      },
+      "id": "pr223-original-full-retest-prefix5-20261004",
+      "media": [
+        {
+          "bytes": 303366,
+          "path": "reports/forge/pr223-original-full-retest-prefix5-20261004/gifs/portability-img_intensity2.gif",
+          "sha256": "b311fb87aa5f57a1e5f1f3d886afc00f2092290822aa0e5c13ea40787c904986"
+        },
+        {
+          "bytes": 108210,
+          "path": "reports/forge/pr223-original-full-retest-prefix5-20261004/gifs/portability-mode_hold.gif",
+          "sha256": "f752f39844b26d955dbd083611ad8861f6b669afb78604743cbce1c5c7397c38"
+        },
+        {
+          "bytes": 244508,
+          "path": "reports/forge/pr223-original-full-retest-prefix5-20261004/gifs/portability-img_blobs4.gif",
+          "sha256": "aade7613cf4c63fe2204766e915a877ee6d42514474e8065fc77ddd4dac07dec"
+        },
+        {
+          "bytes": 276054,
+          "path": "reports/forge/pr223-original-full-retest-prefix5-20261004/gifs/portability-img_bars4.gif",
+          "sha256": "7175bf6fad99b09bac8a50a8722c339b383a23a1b5586eb9992dd54df721ab6e"
+        },
+        {
+          "bytes": 279320,
+          "path": "reports/forge/pr223-original-full-retest-prefix5-20261004/gifs/portability-img_stripes2.gif",
+          "sha256": "cf9f9d9001220221c5125b8c1e63e080d5cc4e76fb8aa420c3444de15afa2f5e"
+        }
+      ],
+      "protocol": {
+        "bytes": 157526,
+        "path": "reports/forge/pr223-original-full-retest-20261004/protocol.json",
+        "sha256": "8a5f0f63839e613b051562f030486388e8fcf962b6b6987fe5aaa27ea1f59786"
+      },
+      "readout": {
+        "bytes": 4027,
+        "path": "reports/forge/pr223-original-full-retest-prefix5-20261004/README.md",
+        "sha256": "2baf8e2332fa8571a273db6f253272dcd6e85f72f08f9eb83c4a29bf79e4944e"
+      },
+      "result": {
+        "bytes": 171157,
+        "path": "reports/forge/pr223-original-full-retest-prefix5-20261004/results.json",
+        "sha256": "6fca9cdc00bef68929dc875184c762e326422ff8fef39739773932a5f26bef48"
+      },
+      "schema": "pg_pr223_full19_passive_publication_v1",
+      "source": {
+        "digest": "00cadbfd06c770e16c35045b42387932b14ee3751954e5320f9e2c32799f7a2f",
+        "origin_commit": "2068a661331a45e0e283b0362dd58b7d92263c6f"
+      },
+      "terminal_card_sha256": "350d5f3bf963869009992d2e88b727135c19a8d93a22c31bbb084d98bcefe41a",
+      "verification": {
+        "bytes": 821,
+        "path": "reports/forge/pr223-original-full-retest-prefix5-20261004/verification.json",
+        "sha256": "cec967bb9578fa4f19f49eae201a18d81628b543a1b186883602777c747bd239"
+      }
+    }
+  ],
+  "qualification_input": false,
+  "reuse": false,
+  "schema": "forge_passive_publications_registry_v1"
+}

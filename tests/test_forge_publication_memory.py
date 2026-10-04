@@ -258,9 +258,12 @@ def test_current_published_campaign_has_complete_discoverable_trial_coverage():
                 record.get("candidate_revision"), record.get("cohort"))
 
     assert len(trials) == len(expected) and {identity(trial) for trial in trials} == set(expected)
+    # Other published studies can contain fixed task results rather than search
+    # trials. Trial coverage applies only to the two configuration-search forms.
     actual_studies = {(record["source"]["path"], record["study_id"], record.get("cohort")): record["trial_ids"]
                       for record in records if record["record_type"] == "published_study"
-                      and record["source"]["path"] != publication_memory.COMPLETION}
+                      and record["mechanism_class"] in {
+                          "bounded_configuration_search", "policy_configuration_search"}}
     assert actual_studies == studies
     groups = defaultdict(list)
     for trial in trials:

@@ -693,7 +693,8 @@ def compile_memory(root: Path, *, summaries_only: bool = False) -> dict:
                       str(record.get("conclusion", "Conclusion pending.")), "",
                       f"**Next:** {record.get('next_action', 'Readout pending.')}", "",
                       f"[Evidence]({_link(record.get('source'))}) · [Record](records/{record['record_id']}.json)", ""]
-        lines += ["## Concluded compact publications", "",
+        closed_partial = any(record.get("lifecycle") == "closed_partial_cut" for record in publication_records)
+        lines += ["## Compact publications and closed partial cuts" if closed_partial else "## Concluded compact publications", "",
                   "These study and trial projections preserve recorded outcomes, unknowns and source cohorts. "
                   "They do not regrade archived science or replace original receipts. Overlapping study/trial costs must not be summed.", "",
                   "[Normalized publication records](publication-records.json). "

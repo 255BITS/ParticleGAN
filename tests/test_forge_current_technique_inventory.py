@@ -188,6 +188,29 @@ def test_completed_studies_cannot_replace_selected_family_configs_or_history(evi
     assert (root / publication.EVIDENCE_MANIFEST).read_bytes() == manifest
 
 
+def test_fresh_original_retest_context_preserves_whole_ordinary_selection(evidence):
+    root, _ = evidence
+    _copy_completed_studies(root)
+    before = read_json(publication.publish_current(root)["json"])
+    manifest = (root / publication.EVIDENCE_MANIFEST).read_bytes()
+    helper_spec = importlib.util.spec_from_file_location(
+        "private_passive_metadata_fixture", ROOT / "tests/test_forge_passive_publications.py")
+    helper = importlib.util.module_from_spec(helper_spec);helper_spec.loader.exec_module(helper)
+    helper.make_cut(root)
+    current = read_json(publication.publish_current(root)["json"])
+    for key, value in before.items():
+        if key not in {"original_pr223_atlas", "provenance"}:
+            assert current[key] == value
+    assert current["original_pr223_atlas"]["counts"] == {"PASS": 19}
+    fresh = current["original_pr223_atlas"]["fresh_retest"]
+    assert fresh["counts"] == {"PASS": 5, "NOT_RUN": 14} and fresh["status"] == "INCOMPLETE"
+    assert current["provenance"]["selected_rows_sha256"] == before["provenance"]["selected_rows_sha256"]
+    assert (root / publication.EVIDENCE_MANIFEST).read_bytes() == manifest
+    outputs = _outputs(root)
+    publication.publish_current(root)
+    assert outputs == _outputs(root)
+
+
 @pytest.mark.parametrize("role", ["report", "archive_readout", "gif"])
 def test_completed_study_input_drift_preserves_public_outputs_and_evidence(evidence, role):
     root, _ = evidence

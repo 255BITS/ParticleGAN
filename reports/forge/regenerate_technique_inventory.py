@@ -1016,7 +1016,7 @@ def _original_pr223_atlas(result):
             if group == "native" and cell.get("native_gates", {}).get("noisy") != {
                     "coverage": "PASS", "accuracy": "PASS"}:
                 raise ValueError("Original PR223 display requires noisy native coverage and accuracy")
-    return dict(label="Original PR223 Atlas FULL", representation="Particles", required=19,
+    original = dict(label="Original PR223 Atlas FULL", representation="Particles", required=19,
                 counts={"PASS": 19}, readout=study["readout"], publication=deepcopy(study["publication"]),
                 source=deepcopy(study["source"]), recipe=deepcopy(recipe),
                 seeds={group: seed for group, (_, seed) in expected.items()},
@@ -1024,14 +1024,29 @@ def _original_pr223_atlas(result):
                 scope="Faithful replay of the full original 19-question noisy-law protocol",
                 qualification_input=False, qualification_reuse=False, default_adoption=False,
                 speed_ranking=False, new_current_retest_credit=False)
+    fresh = result.get("passive_publications", {}).get("latest", {}).get("pg_pr223_full19_passive_publication_v1")
+    if fresh:
+        original["fresh_retest"] = deepcopy(fresh)
+    return original
 
 
 def _original_pr223_score_line(original, root, path):
     link = os.path.relpath(root / original["readout"], path.parent)
+    fresh = original.get("fresh_retest")
+    context = "fresh retest PENDING"
+    if fresh:
+        readout = os.path.relpath(root / fresh["readout"], path.parent)
+        cost_link = os.path.relpath(root / fresh["final_cost"]["path"], path.parent)
+        counts = fresh["counts"]
+        remaining = ", ".join(f"{n} {status}" for status, n in counts.items() if status not in {"PASS", "FAIL"})
+        context = (f"[fresh retest]({readout}): {fresh['accepted_counts']['PASS']}/19 PASS · "
+                   f"{fresh['accepted_counts']['FAIL']} FAIL" + (f" · {remaining}" if remaining else "") +
+                   f" · overall {fresh['status']} · source `{fresh['source']['origin_commit'][:8]}`/"
+                   f"`{fresh['source']['digest'][:8]}` · [final charge {fresh['cost']['charged_seconds']:.6f} / 10800 s]({cost_link})")
     return (f"| [Original PR223 Atlas FULL · LR .00425 / prior2]({link}) | "
             f"{original['representation']} | **19/19 PASS** · full original recipe/law replay "
             f"· [19 original goal GIFs]({link})<br>Policy-selected; averaging enabled; learned output kernel (init .029) "
-            "· native/moving seed1234, portability seed0 · fresh retest PENDING; no current-26/default credit |")
+            f"· native/moving seed1234, portability seed0 · {context}; no current-26/default credit |")
 
 
 def _half_base_score_line(half_base, root, path):
@@ -1594,6 +1609,10 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
     if completed_studies:
         result["completed_api_studies"] = completed_studies
     if not recorded_policy and view_id == "discriminator_stability":
+        from experiments.forge import publication_memory
+        passive = publication_memory.load_passive_publications(root)
+        if passive:
+            result["passive_publications"] = passive
         original_pr223 = _original_pr223_atlas(result)
         if original_pr223:
             result["original_pr223_atlas"] = original_pr223
@@ -1625,6 +1644,8 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
     if completed_studies:
         result["provenance"]["completed_studies_projector_sha256"] = file_hash(
             Path(completed_studies_projection.__file__))
+    if result.get("passive_publications"):
+        result["provenance"]["passive_publications_reducer_sha256"] = file_hash(Path(publication_memory.__file__))
     result["provenance"]["input_digest"] = stable_hash(result)
     json_path, markdown_path = root / CURRENT_PREFIX.with_suffix(".json"), root / CURRENT_PREFIX.with_suffix(".md")
     markdown = _current_markdown(result, root, markdown_path)

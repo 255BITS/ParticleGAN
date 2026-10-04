@@ -4,7 +4,7 @@ Each row keeps its own configuration, source, representation and measured scope.
 
 | Model/configuration | Actual representation | Measured score/status and scope |
 | --- | --- | --- |
-| [Original PR223 Atlas FULL · LR .00425 / prior2](continuous-baseline-20261003/README.md) | Particles | **19/19 PASS** · full original recipe/law replay · [19 original goal GIFs](continuous-baseline-20261003/README.md)<br>Policy-selected; averaging enabled; learned output kernel (init .029) · native/moving seed1234, portability seed0 · fresh retest PENDING; no current-26/default credit |
+| [Original PR223 Atlas FULL · LR .00425 / prior2](continuous-baseline-20261003/README.md) | Particles | **19/19 PASS** · full original recipe/law replay · [19 original goal GIFs](continuous-baseline-20261003/README.md)<br>Policy-selected; averaging enabled; learned output kernel (init .029) · native/moving seed1234, portability seed0 · [fresh retest](pr223-original-full-retest-prefix5-20261004/README.md): 5/19 PASS · 0 FAIL · 14 NOT_RUN · overall INCOMPLETE · source `2068a661`/`00cadbfd` · [final charge 223.587108 / 10800 s](pr223-original-full-retest-prefix5-20261004/FINAL_COST.json); no current-26/default credit |
 | [Atlas C6 CHANGED-rate / noise-OFF · LR .0053125 / prior1.5 · source `9563dea5`](atlas-current-gpu-diagnostics-native-v2-20261003/README.md) | Particles | **7/26 PASS** · FAIL 11 · BLOCKED 8 <br>Selected-policy diagnostic/reference · seed0 · [source and 18 goal GIFs](atlas-current-gpu-diagnostics-native-v2-20261003/README.md) |
 | [`atlas_conditional` · C6 · `ff94453b`](atlas-named-gpu-diagnostics-native-v3-20261003/README.md) | Particles (conditional clouds / role banks) | **4/26 PASS** · NOT_RUN 22<br>Named-family diagnostic · goal GIFs: [mid_scale_identity](atlas-named-gpu-diagnostics-native-v3-20261003/gifs/mid_scale_identity_conditional_policy_selected_cloud_v1.gif) · [residual_student](atlas-named-gpu-diagnostics-native-v3-20261003/gifs/residual_student_conditional_policy_selected_cloud_v1.gif) · [trajectory](atlas-named-gpu-diagnostics-native-v3-20261003/gifs/trajectory_conditional_policy_selected_cloud_v1.gif) · [unipolar](atlas-named-gpu-diagnostics-native-v3-20261003/gifs/unipolar_conditional_policy_selected_cloud_v1.gif) |
 | [`atlas_ae_routed` · C6 · `ff94453b`](atlas-named-gpu-diagnostics-native-v3-20261003/README.md) | MoG (fixed σ .025; routed AE) | **1/26 PASS** · NOT_RUN 25<br>Named-family diagnostic · goal GIFs: [ae_gan_hold](atlas-named-gpu-diagnostics-native-v3-20261003/gifs/ae_gan_hold_ae_routed_policy_v1.gif) |
@@ -48,7 +48,7 @@ python reports/forge/regenerate_technique_inventory.py
 
 For ordinary Forge qualification, use `--source-commit <executed-commit>` to independently regrade hydrated original receipts and update this leaderboard. Reusable candidates use the same complete task ladder. Historical task-only diagnostics remain motivation and reproduction evidence. Source snapshots are provenance, not additional leaderboards.
 
-Publication input digest `29c6a55b803adeeeb0320ca2902da84e4c92ae25083abc620414261025b18c5a`.
+Publication input digest `2bfdaf514409219bf9c6184c47cfd66a4032004b5c6ab63f8ab8f9f4c451bdc5`.
 
 The [whole-family repair readout](family-wide-word-repairs/README.md) records the ordinary candidate attempts and bounded global configuration search. Their complete rows remain unranked alternatives below and in the companion JSON; a failed replacement does not make its historical incumbent a qualified standard.
 
