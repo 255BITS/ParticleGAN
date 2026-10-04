@@ -1,0 +1,501 @@
+{
+  "accepted_numeric": "FAIL",
+  "candidate_id": "word-min11-half_base-rates-v1",
+  "cost": {
+    "allowance_seconds": 900,
+    "charged_seconds": 556.4301753160544,
+    "export_grace_seconds": 0,
+    "inclusive_charged_seconds": 1466.669318475062,
+    "lanes": {
+      "0": {
+        "cap_seconds": 7500,
+        "current_charged_seconds": 0.0,
+        "inclusive_charged_seconds": 234.82608077581972,
+        "prior_charged_seconds": 234.82608077581972
+      },
+      "1": {
+        "cap_seconds": 3000,
+        "current_charged_seconds": 556.4301753160544,
+        "inclusive_charged_seconds": 1231.8432376992423,
+        "prior_charged_seconds": 675.4130623831879
+      }
+    },
+    "original_cap_seconds": 10500,
+    "overrun_seconds": 0.0,
+    "paid_seconds": 556.4301753160544,
+    "paid_vs_reserve_separate": true,
+    "prior_charged_seconds": 910.2391431590077,
+    "reserved_seconds": 0.0,
+    "speed_comparison_available": false
+  },
+  "counts": {
+    "FAIL": 1,
+    "NOT_RUN": 25
+  },
+  "cross_tuple_pooling": false,
+  "default_adoption": false,
+  "family": "atlas_word_joint_min11_rates",
+  "historical_credit": false,
+  "historical_word": {
+    "accepted_numeric": "UNAVAILABLE",
+    "already_in_prior_total": true,
+    "paid_seconds": 558.5739127129782,
+    "qualification_input": false,
+    "recertified": false,
+    "source": {
+      "digest": "f380eed990931bacb205e6537beaf387fdbb676ffc97b6f32f19ff903ae1cfed",
+      "origin_commit": "fb7acc775b3a1a6184d36b55e035b9da04531492"
+    },
+    "status": "INVALID"
+  },
+  "not_run_slots": 25,
+  "ordinary_tier_credit": false,
+  "parent_task_id": "five_word_joint_acquisition",
+  "profile": "half_base",
+  "protocol": {
+    "eval_samples": 1024,
+    "metric_steps": [
+      834,
+      1667,
+      2501,
+      3334,
+      4167,
+      5001,
+      5834,
+      6667,
+      7501,
+      8334,
+      9168,
+      10001,
+      10834,
+      11668,
+      12501,
+      13334,
+      14168,
+      15001,
+      15835,
+      16668,
+      17501,
+      18335,
+      19168,
+      20001
+    ],
+    "objective": "original joint RpGAN plus original regularizers; free continuous E; no reconstruction training loss",
+    "resources": {
+      "batch_size": 256,
+      "num_particles": 11,
+      "z_dim": 2
+    },
+    "schedule_horizon": 20000,
+    "seed": 0,
+    "serving": "actual policy-selected G/E/raw ParticlePrior; DV12 retained, output noise off",
+    "terminal_steps": [
+      16668,
+      17501,
+      18335,
+      19168,
+      20001
+    ],
+    "thresholds": [
+      [
+        "sample_count",
+        ">=",
+        1024
+      ],
+      [
+        "quality_fraction",
+        ">=",
+        0.95
+      ],
+      [
+        "modes",
+        "==",
+        5
+      ],
+      [
+        "mass_tv",
+        "<=",
+        0.1
+      ],
+      [
+        "reconstruction_exact",
+        "==",
+        1
+      ],
+      [
+        "minimum_reconstruction_token_probability",
+        ">=",
+        0.9
+      ]
+    ],
+    "updates": 20001
+  },
+  "provenance": {
+    "independent_review_sha256": "fab44ce9db3faa50a6908e08d10b02e73b540a178f89879c8fdd455f7b2f67de",
+    "preflight_sha256": "e2fad29d9f049d8427b02e319eba4b650624fbec7d6432aabdd3df0cc452266e",
+    "prepared_sha256": "70aef35d0d237ae20d273cdb3221f7756af5c87e12d6fedd70e3f3cadc1a6433",
+    "recovery_proof_sha256": "84c447356f26f2370a1cf1183f28736dc4726a639dbddcd8f094af5194e5252b",
+    "root_preflight_review_sha256": "b9b1efdb3c49ca09c5cfaacc303f426f09db0b089edb3f0417303fc0d9b423c1",
+    "trusted_card_sha256": "bebd5cc7e5580df7decceea6f5f7e7ca8e0d449a96732d0f26020bdc8be7b814"
+  },
+  "publisher_source": {
+    "bytes": 47824,
+    "runtime": {
+      "pillow": "12.3.0",
+      "python": "3.12.13"
+    },
+    "sha256": "defbd33a4a0ef2df4e498c84fc4b8141605abff94ffb880843740e3e286d7ea5"
+  },
+  "qualification_input": false,
+  "question": "Acquire all five words and their paired free-E reconstructions under the complete same-code joint cloud law.",
+  "raw_availability": "LOCAL_ONLY; bulk states, arrays, traces and private supervision fields are not copied",
+  "recipe_overrides": {
+    "d_lr_mult": 1.0,
+    "lr": 0.00265625,
+    "prior_lr_mult": 1.5
+  },
+  "required_slots": 26,
+  "resolved_recipe": {
+    "alpha_bar": [
+      1.0,
+      0.9,
+      0.5,
+      0.05,
+      0.0001
+    ],
+    "amsgrad": true,
+    "batch_size": 256,
+    "betas": [
+      0.0,
+      0.999
+    ],
+    "birth_death_backend": "auto",
+    "birth_death_cells": 128,
+    "birth_death_chunk": 256,
+    "birth_death_feature_scale": "std",
+    "birth_death_isolation": true,
+    "birth_death_metric_rank": 8,
+    "birth_death_parent_policy": "real_anchor",
+    "birth_death_space": "critic",
+    "conditioning": "scalar",
+    "continuous_policy": "dv12",
+    "critic_payoff_damping": true,
+    "critic_r1_real": true,
+    "d_guard_min_steps": 200,
+    "d_guard_ratio": 5.0,
+    "d_lr_mult": 1.0,
+    "direct_particle_betas": [
+      0.0,
+      0.9
+    ],
+    "direct_particle_gain": true,
+    "distance_reduction": "sum",
+    "ema_decay": 0.995,
+    "encoder_mode": "none",
+    "input_noise_anneal_end": 0.1,
+    "input_noise_std": 0.0,
+    "latent_damping_max_rate": 0.5,
+    "lr": 0.00265625,
+    "lr_anneal_start": 0.6,
+    "lr_control": "stationarity",
+    "lr_floor": 0.05,
+    "model": "gan",
+    "name": "atlas",
+    "network_lr_floor": 0.01,
+    "network_lr_horizon_cap": 1600,
+    "num_classes": null,
+    "num_particles": 11,
+    "observation_sigma": 0.03,
+    "output_noise_mode": "learnable",
+    "output_noise_std": 0.029,
+    "output_noise_warmup": 0.0,
+    "particle_birth_death": true,
+    "prior_betas": null,
+    "prior_kind": "particles",
+    "prior_lr_mult": 1.5,
+    "prior_reg": 0.0,
+    "reconstruction_weight": 1.0,
+    "reg_anchor_min_decay": 0.9,
+    "reg_anchor_weight": 1.0,
+    "reg_coeff": 3.0,
+    "reg_every": 1,
+    "reg_kappa": 1.0,
+    "reopen_anchor": "release",
+    "reopen_guard": "settled",
+    "reopen_signal": "optimizer",
+    "routing_temperature": 0.25,
+    "row_evidence_exclude": true,
+    "row_evidence_gate": true,
+    "row_evidence_hold": true,
+    "row_evidence_hot": true,
+    "row_evidence_null": "scaled",
+    "row_policy": "independent",
+    "serve_average": 4.0,
+    "sigma_rel": 0.0,
+    "standardize": false,
+    "table_release_rule": "anchor",
+    "total_steps": null,
+    "ucd_target": "class",
+    "ucd_weight": 0.02,
+    "z_dim": 2
+  },
+  "resolved_recipe_sha256": "ea470cca5c55a31e6f726945402f0dfad945fea2ec95b654afba922e93c8ac69",
+  "result": {
+    "actual_birth_death": {
+      "isolation": true,
+      "neighbours": 5,
+      "reference_half": 6,
+      "rows": 11
+    },
+    "actual_goal_gif": {
+      "actual_steps": [
+        834,
+        3334,
+        5834,
+        8334,
+        10834,
+        12501,
+        15001,
+        17501,
+        20001
+      ],
+      "bytes": 449923,
+      "frames": 9,
+      "path": "media/goal.gif",
+      "sha256": "2d94247b902d6384ef172faa99db0ae4d655bd0171ae6a4ef4d77eaadbc1012b"
+    },
+    "artifact_manifest_sha256": "eccae189092c4cf4df1977767246b3fabb5b3d466eb8ef90af649ccdd1ad0099",
+    "checkpoint_sha256": "5b28a08545855fdf2ea533df28c52d54bc00b0f3d84a5befc951c8f318f587af",
+    "checkpoint_typed_state_sha256": "48cd26533006ab9241f6aa955ef67af13b4cf0cb7075bf9f3b57a264fb2417a9",
+    "completed_steps": 20001,
+    "cross_tuple_pooling": false,
+    "default_adoption": false,
+    "enabled_owners": [
+      "birth_death",
+      "continuous_controller",
+      "learned_output_noise",
+      "optimizer_surprise",
+      "reopen_guard",
+      "row_evidence",
+      "selected_averaging",
+      "stationarity_lr"
+    ],
+    "final_metrics": {
+      "mass_apple": 0.0,
+      "mass_berry": 0.0,
+      "mass_grape": 0.177734375,
+      "mass_lemon": 0.0,
+      "mass_melon": 0.369140625,
+      "mass_tv": 0.622265625,
+      "minimum_reconstruction_token_probability": 1.7624218057177288e-12,
+      "modes": 2,
+      "quality_fraction": 0.546875,
+      "reconstruction_exact": 0,
+      "reconstruction_nll": 7.767373127248521,
+      "sample_count": 1024,
+      "step": 20001
+    },
+    "historical_credit": false,
+    "independent_atlas_qualification": false,
+    "lifecycle_calls": {
+      "after_critic_step": 20001,
+      "after_generator_backward": 20001,
+      "after_generator_step": 20001,
+      "begin_step": 20001,
+      "finish_step": 20001
+    },
+    "metric_steps": [
+      834,
+      1667,
+      2501,
+      3334,
+      4167,
+      5001,
+      5834,
+      6667,
+      7501,
+      8334,
+      9168,
+      10001,
+      10834,
+      11668,
+      12501,
+      13334,
+      14168,
+      15001,
+      15835,
+      16668,
+      17501,
+      18335,
+      19168,
+      20001
+    ],
+    "optimizer_updates": {
+      "discriminator": 20001,
+      "encoder": 20001,
+      "generator": 20001,
+      "prior": 20001
+    },
+    "ordinary_tier_credit": false,
+    "original_gate": "FAIL",
+    "original_grader_summary": {
+      "complete": true,
+      "confirmed_seconds": null,
+      "confirmed_step": null,
+      "first_pass_step": null,
+      "minimum_stable_checks": 5,
+      "observations": 24,
+      "passing_observations": 0,
+      "passing_suffix": 0,
+      "stable_from_seconds": null,
+      "stable_from_step": null
+    },
+    "policy_owner": "particlegan.UpdatePolicy",
+    "qualification_input": false,
+    "raw_local_only": true,
+    "requested_owners": [
+      "birth_death",
+      "continuous_controller",
+      "learned_output_noise",
+      "optimizer_surprise",
+      "reopen_guard",
+      "row_evidence",
+      "selected_averaging",
+      "stationarity_lr"
+    ],
+    "selected_source": "fast",
+    "speed_ranking": false,
+    "synthetic_mechanism_probes_are_learning_credit": false,
+    "terminal_steps": [
+      16668,
+      17501,
+      18335,
+      19168,
+      20001
+    ]
+  },
+  "runtime": {
+    "compute": {
+      "backend": "cuda",
+      "compute_capability": "8.6",
+      "deterministic": true,
+      "driver": "580.173.02",
+      "model": "NVIDIA RTX A6000",
+      "tf32": false,
+      "threads": 1
+    },
+    "device": "cuda:0",
+    "implementation": "CPython",
+    "machine": "x86_64",
+    "packages": {
+      "numpy": "2.5.2",
+      "scipy": "1.17.1",
+      "torch": "2.13.0+cu126"
+    },
+    "physical_gpu": "1",
+    "python": "3.12.13",
+    "render_packages": {
+      "Pillow": "12.3.0",
+      "matplotlib": "3.11.2"
+    },
+    "system": "Linux",
+    "torch_threads": 1
+  },
+  "scheduled_slots": 1,
+  "schema": "pg_word_half_base_publication_v1",
+  "slots": {
+    "ae_gan_hold": {
+      "status": "NOT_RUN"
+    },
+    "cover_leftover": {
+      "status": "NOT_RUN"
+    },
+    "five_word_joint_acquisition_word_joint_policy_min11_rates_v1": {
+      "status": "FAIL"
+    },
+    "grid100": {
+      "status": "NOT_RUN"
+    },
+    "img_bars4": {
+      "status": "NOT_RUN"
+    },
+    "img_blobs4": {
+      "status": "NOT_RUN"
+    },
+    "img_intensity2": {
+      "status": "NOT_RUN"
+    },
+    "img_stripes2": {
+      "status": "NOT_RUN"
+    },
+    "mid_scale_identity": {
+      "status": "NOT_RUN"
+    },
+    "mode_hold": {
+      "status": "NOT_RUN"
+    },
+    "residual_student": {
+      "status": "NOT_RUN"
+    },
+    "ring16_acquisition": {
+      "status": "NOT_RUN"
+    },
+    "ring_extension": {
+      "status": "NOT_RUN"
+    },
+    "ring_hold": {
+      "status": "NOT_RUN"
+    },
+    "rotated100": {
+      "status": "NOT_RUN"
+    },
+    "staggered100": {
+      "status": "NOT_RUN"
+    },
+    "trajectory": {
+      "status": "NOT_RUN"
+    },
+    "two_pole": {
+      "status": "NOT_RUN"
+    },
+    "unipolar": {
+      "status": "NOT_RUN"
+    },
+    "unused_token_hold": {
+      "status": "NOT_RUN"
+    },
+    "vector_anisotropic": {
+      "status": "NOT_RUN"
+    },
+    "vector_overlap": {
+      "status": "NOT_RUN"
+    },
+    "vector_spiral": {
+      "status": "NOT_RUN"
+    },
+    "vector_two_broad": {
+      "status": "NOT_RUN"
+    },
+    "vector_unequal_mass": {
+      "status": "NOT_RUN"
+    },
+    "vector_unequal_width": {
+      "status": "NOT_RUN"
+    }
+  },
+  "source": {
+    "digest": "5995590d3c303207c664fe3b0ba7dc1e09dd3da7a90abf87086634c789175026",
+    "files": 1444,
+    "origin_commit": "f9f7ed9d7a06c48d4ec56999107658983d7e8efc",
+    "supervisor_sha256": "dae842935a1ea3c4c7aae1694cb91e2f6c8b55815095f7230e64c7dc0ec368a1"
+  },
+  "speed_ranking": false,
+  "status": "COMPLETE",
+  "task_cohort": "word_joint_policy_min11_rates_v1",
+  "task_id": "five_word_joint_acquisition_word_joint_policy_min11_rates_v1",
+  "tiers": {
+    "1": 5,
+    "2": 19,
+    "3": 2
+  }
+}
