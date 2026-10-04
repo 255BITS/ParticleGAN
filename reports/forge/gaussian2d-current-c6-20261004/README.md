@@ -160,6 +160,6 @@ sampler, scorer, real optimizer update or CUDA execution occurs in these tests.
 
 ```sh
 CUDA_VISIBLE_DEVICES='' OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 \
-  /tmp/pr155-e22-venv/bin/python -m pytest -p no:cacheprovider -q \
+  python -m pytest -p no:cacheprovider -q \
   tests/test_toy_gaussian2d_observer.py
 ```
