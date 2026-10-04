@@ -29952,6 +29952,438 @@
       "trainer_family": "ka2"
     },
     {
+      "candidate_id": "atlas",
+      "cohort": "b2d0e98000d06a9731a4a40e52e226fedece194c097a1f5d939f501a9360aaa6",
+      "conclusion": "Native3 continuation: 0/3 PASS, 0 FAIL, 3 unavailable; final accepted INCOMPLETE. Original19 parent remains 16 PASS/1 INVALID/2 NOT_RUN under its own source. Current cost includes prior case debit once and cumulative metadata once.",
+      "configuration_id": "pr223-native3-first-invalid-20261004",
+      "evidence_scope": "published_summary",
+      "goal": "discriminator_stability",
+      "lifecycle": "closed_partial_cut",
+      "materialization": "reports/forge/publication-records.json",
+      "mechanism_class": "faithful_original_native3_continuation",
+      "next_action": "Read the three-case continuation and authoritative SAME-ledger FINAL_COST. The original 16 remain old-source evidence; no fresh single-source 19, current 26, default or speed credit.",
+      "original_required": 19,
+      "prior_reference": {
+        "accepted_original_gate_counts": {
+          "FAIL": 0,
+          "PASS": 16,
+          "UNAVAILABLE": 3
+        },
+        "case_charged_seconds": 3165.841891122982,
+        "execution_counts": {
+          "INVALID": 1,
+          "NOT_RUN": 2,
+          "PASS": 16
+        },
+        "files_sha256": {
+          "reports/forge/pr223-original-full-retest-stopped17-20261004/FINAL_COST.json": "2335c0da59f1155a329f72390078d1480f253ce1e17a5879a52138d53e3661d3",
+          "reports/forge/pr223-original-full-retest-stopped17-20261004/results.json": "4cca29c719ffe295712775be27167d7465090c40865d3b096aea247e61a3d4f3",
+          "reports/forge/pr223-original-full-retest-stopped17-20261004/verification.json": "a74262e6af196c7686f9275a0723ace989067f65552fb8b554a2c35948c26eb5"
+        },
+        "old_grades_are_current_credit": false,
+        "original_evidence_unchanged": true,
+        "required": 19,
+        "source": {
+          "digest": "00cadbfd06c770e16c35045b42387932b14ee3751954e5320f9e2c32799f7a2f",
+          "origin_commit": "2068a661331a45e0e283b0362dd58b7d92263c6f"
+        }
+      },
+      "provenance": {
+        "execution_digest": "b2d0e98000d06a9731a4a40e52e226fedece194c097a1f5d939f501a9360aaa6",
+        "final_cost": {
+          "bytes": 6769,
+          "path": "reports/forge/pr223-native3-first-invalid-20261004/FINAL_COST.json",
+          "sha256": "78baba6a44bb0ffb0530bc57862c796cd3b059b3abb38ef07a61afa863761b77"
+        },
+        "source_commit": "0fa92c5b599da8ab2c891e544aafc09cf802a70d",
+        "terminal_card_sha256": "a11ce814dfde25872e921311ae2b1f7b50417f8585ce6ca8b025714723e36b8f"
+      },
+      "qualification_input": false,
+      "qualification_reuse": false,
+      "record_id": "publication-b728375bb6a804148ec88f03",
+      "record_type": "published_study",
+      "recorded_cost": {
+        "aggregate_cap_seconds": 10800,
+        "aggregate_overrun_seconds": 0.0,
+        "case_caps_sum_seconds": 4290,
+        "charged_seconds": 3227.941695485264,
+        "current_case_charged_seconds": 2.0496059330180287,
+        "current_case_paid_wall_seconds": 2.0496059330180287,
+        "current_case_reserved_seconds": 0.0,
+        "export_grace_seconds": 0,
+        "halt_required": false,
+        "metadata": {
+          "blocked": false,
+          "charged_seconds": 60.05019842926413,
+          "overrun_seconds": 0.0,
+          "paid_wall_seconds": 60.05019842926413,
+          "reserved_seconds": 0.0
+        },
+        "metadata_cap_seconds": 180,
+        "overrun_seconds": 0.0,
+        "prior_case_charged_seconds": 3165.841891122982,
+        "remaining_seconds": 7572.058304514736,
+        "retries": 0
+      },
+      "required": 3,
+      "schema_version": 1,
+      "settings": {
+        "d_lr_mult": 1.0,
+        "lr": 0.00425,
+        "prior_lr_mult": 2.0
+      },
+      "source": {
+        "board": "reports/forge/technique-inventory.md",
+        "bytes": 28761,
+        "path": "reports/forge/pr223-native3-first-invalid-20261004/results.json",
+        "sha256": "b9cdf4b75e551dcb892394107fd5a0424c57247027e718d190723fe9e9df3a0b"
+      },
+      "status": "INCOMPLETE",
+      "study_id": "pr223-native3-continuation",
+      "task_results": [
+        {
+          "cost": {
+            "allowance_seconds": 1470.0,
+            "certified": false,
+            "charged_seconds": 2.0496059330180287,
+            "completed_terminal": true,
+            "overrun_seconds": 0.0,
+            "paid_wall_seconds": 2.0496059330180287,
+            "reserved_seconds": 0.0,
+            "terminal_status": "completed",
+            "unmeasured_interrupt_reserved_seconds": 0.0
+          },
+          "execution_status": "INVALID",
+          "gate_status": "INVALID",
+          "media": null,
+          "metrics": {},
+          "original_gate": null,
+          "original_requirements": [
+            [
+              "modes",
+              ">=",
+              100
+            ],
+            [
+              "precision",
+              ">=",
+              0.97
+            ],
+            [
+              "min_hq_mode_mass",
+              ">=",
+              0.005
+            ],
+            [
+              "mass_tv",
+              "<=",
+              0.1
+            ],
+            [
+              "max_mode_mass",
+              "<=",
+              0.02
+            ],
+            [
+              "min_cov_eig_ratio",
+              ">=",
+              0.4
+            ],
+            [
+              "max_cov_eig_ratio",
+              "<=",
+              1.7
+            ],
+            [
+              "min_radial_median_ratio",
+              ">=",
+              0.65
+            ],
+            [
+              "max_radial_median_ratio",
+              "<=",
+              1.4
+            ],
+            [
+              "acc_mass_tv",
+              "<=",
+              0.06
+            ],
+            [
+              "acc_center_rms_sigma",
+              "<=",
+              0.2
+            ],
+            [
+              "acc_abs_cov_trace_bias",
+              "<=",
+              0.1
+            ],
+            [
+              "acc_radial_ks",
+              "<=",
+              0.04
+            ]
+          ],
+          "parent_original_id": "atlas-original19-native-grid100",
+          "raw_status": null,
+          "recipe_sha256": "49f4ea356bd3349334b2048d74f13ea78a15ec2abc1ab2d005df8f1081e7c15a",
+          "sampling": {
+            "clean_diagnostic": "output-noise-off same selected law",
+            "evaluation_noise_seed": 1636,
+            "evaluation_prior_seed": 1637,
+            "evaluation_target_seed": 1635,
+            "forced_ema_diagnostic": "separate original EMA branch",
+            "holdout_seed_offsets": {
+              "latent": 1603,
+              "noise": 1602,
+              "target": 1601
+            },
+            "independent_holdout_samples": 100000,
+            "observations": 34,
+            "primary_law": "state-selected weights/current learned output kernel",
+            "public_policy_latent_perturbation": "retained",
+            "samples": 20000,
+            "terminal_steps": [
+              6000,
+              6250,
+              6500,
+              6750,
+              7000
+            ]
+          },
+          "task_id": "pr223-native3-continuation-v1-native-grid100"
+        },
+        {
+          "cost": {
+            "allowance_seconds": 1440.0,
+            "certified": false,
+            "charged_seconds": 0.0,
+            "completed_terminal": false,
+            "overrun_seconds": 0.0,
+            "paid_wall_seconds": 0.0,
+            "reserved_seconds": 0.0,
+            "terminal_status": "missing",
+            "unmeasured_interrupt_reserved_seconds": 0.0
+          },
+          "execution_status": "NOT_RUN",
+          "gate_status": "NOT_RUN",
+          "media": null,
+          "metrics": {},
+          "original_gate": null,
+          "original_requirements": [
+            [
+              "modes",
+              ">=",
+              100
+            ],
+            [
+              "precision",
+              ">=",
+              0.97
+            ],
+            [
+              "min_hq_mode_mass",
+              ">=",
+              0.005
+            ],
+            [
+              "mass_tv",
+              "<=",
+              0.1
+            ],
+            [
+              "max_mode_mass",
+              "<=",
+              0.02
+            ],
+            [
+              "min_cov_eig_ratio",
+              ">=",
+              0.4
+            ],
+            [
+              "max_cov_eig_ratio",
+              "<=",
+              1.7
+            ],
+            [
+              "min_radial_median_ratio",
+              ">=",
+              0.65
+            ],
+            [
+              "max_radial_median_ratio",
+              "<=",
+              1.4
+            ],
+            [
+              "acc_mass_tv",
+              "<=",
+              0.06
+            ],
+            [
+              "acc_center_rms_sigma",
+              "<=",
+              0.2
+            ],
+            [
+              "acc_abs_cov_trace_bias",
+              "<=",
+              0.1
+            ],
+            [
+              "acc_radial_ks",
+              "<=",
+              0.04
+            ]
+          ],
+          "parent_original_id": "atlas-original19-native-rotated100",
+          "raw_status": null,
+          "recipe_sha256": "49f4ea356bd3349334b2048d74f13ea78a15ec2abc1ab2d005df8f1081e7c15a",
+          "sampling": {
+            "clean_diagnostic": "output-noise-off same selected law",
+            "evaluation_noise_seed": 1636,
+            "evaluation_prior_seed": 1637,
+            "evaluation_target_seed": 1635,
+            "forced_ema_diagnostic": "separate original EMA branch",
+            "holdout_seed_offsets": {
+              "latent": 1603,
+              "noise": 1602,
+              "target": 1601
+            },
+            "independent_holdout_samples": 100000,
+            "observations": 34,
+            "primary_law": "state-selected weights/current learned output kernel",
+            "public_policy_latent_perturbation": "retained",
+            "samples": 20000,
+            "terminal_steps": [
+              6000,
+              6250,
+              6500,
+              6750,
+              7000
+            ]
+          },
+          "task_id": "pr223-native3-continuation-v1-native-rotated100"
+        },
+        {
+          "cost": {
+            "allowance_seconds": 1380.0,
+            "certified": false,
+            "charged_seconds": 0.0,
+            "completed_terminal": false,
+            "overrun_seconds": 0.0,
+            "paid_wall_seconds": 0.0,
+            "reserved_seconds": 0.0,
+            "terminal_status": "missing",
+            "unmeasured_interrupt_reserved_seconds": 0.0
+          },
+          "execution_status": "NOT_RUN",
+          "gate_status": "NOT_RUN",
+          "media": null,
+          "metrics": {},
+          "original_gate": null,
+          "original_requirements": [
+            [
+              "modes",
+              ">=",
+              100
+            ],
+            [
+              "precision",
+              ">=",
+              0.97
+            ],
+            [
+              "min_hq_mode_mass",
+              ">=",
+              0.005
+            ],
+            [
+              "mass_tv",
+              "<=",
+              0.1
+            ],
+            [
+              "max_mode_mass",
+              "<=",
+              0.02
+            ],
+            [
+              "min_cov_eig_ratio",
+              ">=",
+              0.4
+            ],
+            [
+              "max_cov_eig_ratio",
+              "<=",
+              1.7
+            ],
+            [
+              "min_radial_median_ratio",
+              ">=",
+              0.65
+            ],
+            [
+              "max_radial_median_ratio",
+              "<=",
+              1.4
+            ],
+            [
+              "acc_mass_tv",
+              "<=",
+              0.06
+            ],
+            [
+              "acc_center_rms_sigma",
+              "<=",
+              0.2
+            ],
+            [
+              "acc_abs_cov_trace_bias",
+              "<=",
+              0.1
+            ],
+            [
+              "acc_radial_ks",
+              "<=",
+              0.04
+            ]
+          ],
+          "parent_original_id": "atlas-original19-native-staggered100",
+          "raw_status": null,
+          "recipe_sha256": "49f4ea356bd3349334b2048d74f13ea78a15ec2abc1ab2d005df8f1081e7c15a",
+          "sampling": {
+            "clean_diagnostic": "output-noise-off same selected law",
+            "evaluation_noise_seed": 1636,
+            "evaluation_prior_seed": 1637,
+            "evaluation_target_seed": 1635,
+            "forced_ema_diagnostic": "separate original EMA branch",
+            "holdout_seed_offsets": {
+              "latent": 1603,
+              "noise": 1602,
+              "target": 1601
+            },
+            "independent_holdout_samples": 100000,
+            "observations": 34,
+            "primary_law": "state-selected weights/current learned output kernel",
+            "public_policy_latent_perturbation": "retained",
+            "samples": 20000,
+            "terminal_steps": [
+              6000,
+              6250,
+              6500,
+              6750,
+              7000
+            ]
+          },
+          "task_id": "pr223-native3-continuation-v1-native-staggered100"
+        }
+      ],
+      "trainer_family": "atlas"
+    },
+    {
       "candidate_id": "bcap--4cb8358e1e3eefdb6744ae63e84ce724bf73a47e471a12817aaf3a14466c2dd3",
       "candidate_revision": "d6130d9a1603dd91600b59c03e04582409f53e1eb872616d4ffc1c938a6306a1",
       "claim_contract": {

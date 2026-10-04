@@ -247,13 +247,17 @@ def project_native3(root, entry, report, final, proof):
             _require(row.get("acceptance_status") in {"UNAVAILABLE", "UNAVAILABLE_BUDGET_EXCEEDED"},
                      "unaccepted gate must remain unavailable")
             reached_stop = True
-        gates = row.get("native_gates", {})
+        gates = row.get("native_gates")
+        if gates is None and not accepted:
+            gates = {}
+        _require(isinstance(gates, dict), "native gates must be a mapping or an unavailable null")
         if accepted:
             _require(isinstance(gates, dict) and set(gates) == {"noisy", "clean"}
                      and all(isinstance(value, dict) and set(value) == {"coverage", "accuracy"}
                              and set(value.values()) <= {"PASS", "FAIL"} for value in gates.values()),
                      "accepted full native protocol requires both noisy and clean receipts")
         noisy = gates.get("noisy", {})
+        _require(isinstance(noisy, dict), "native noisy gates must be a mapping")
         joint = None
         if set(noisy) == {"coverage", "accuracy"} and set(noisy.values()) <= {"PASS", "FAIL"}:
             joint = "PASS" if all(value == "PASS" for value in noisy.values()) else "FAIL"

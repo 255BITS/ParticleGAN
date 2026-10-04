@@ -1,0 +1,34 @@
+{
+  "accepted_original_gate_counts": {
+    "FAIL": 0,
+    "PASS": 0,
+    "UNAVAILABLE": 3
+  },
+  "accepted_original_gifs": 0,
+  "bulk_state_arrays_logs_copied": false,
+  "consumed_inputs": 3916,
+  "counts": {
+    "BLOCKED": 0,
+    "BUDGET_EXCEEDED": 0,
+    "FAIL": 0,
+    "INCOMPLETE": 0,
+    "INVALID": 1,
+    "NOT_RUN": 2,
+    "PASS": 0,
+    "UNKNOWN": 0
+  },
+  "draws": 0,
+  "final_cost_pending": true,
+  "grader_calls": 0,
+  "models": 0,
+  "original_required": 19,
+  "private_nonce_values_copied": false,
+  "producer_sha256": "45db8cc53106317840e0ca1751f727c86e3dbaf0a5a0bf69ca04c2a0b644bf74",
+  "rendered_frames": 0,
+  "required": 3,
+  "results_sha256": "b9cdf4b75e551dcb892394107fd5a0424c57247027e718d190723fe9e9df3a0b",
+  "schema": "pg_pr223_native3_passive_verification_v1",
+  "scorer_calls": 0,
+  "status": "VERIFIED_PRE_PUBLICATION_COST_CUT",
+  "trusted_card_sha256": "a11ce814dfde25872e921311ae2b1f7b50417f8585ce6ca8b025714723e36b8f"
+}

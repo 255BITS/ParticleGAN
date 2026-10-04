@@ -1,7 +1,8 @@
 {
   "cross_cohort_pooling": false,
   "latest": {
-    "pg_pr223_full19_passive_publication_v1": "pr223-original-full-retest-stopped17-20261004"
+    "pg_pr223_full19_passive_publication_v1": "pr223-original-full-retest-stopped17-20261004",
+    "pg_pr223_native3_passive_publication_v1": "pr223-native3-first-invalid-20261004"
   },
   "publications": [
     {
@@ -179,6 +180,46 @@
         "bytes": 822,
         "path": "reports/forge/pr223-original-full-retest-stopped17-20261004/verification.json",
         "sha256": "a74262e6af196c7686f9275a0723ace989067f65552fb8b554a2c35948c26eb5"
+      }
+    },
+    {
+      "final_cost": {
+        "bytes": 6769,
+        "path": "reports/forge/pr223-native3-first-invalid-20261004/FINAL_COST.json",
+        "sha256": "78baba6a44bb0ffb0530bc57862c796cd3b059b3abb38ef07a61afa863761b77"
+      },
+      "id": "pr223-native3-first-invalid-20261004",
+      "media": [],
+      "parent_metadata_anchor": {
+        "bytes": 2675,
+        "path": "reports/forge/pr223-native3-continuation-20261004/fixtures/closed-parent-metadata.json",
+        "sha256": "ce949407c9a11b2d2873be0d51b2d147261f8b60cee411ea33381c8c5c6f4369"
+      },
+      "protocol": {
+        "bytes": 157526,
+        "path": "reports/forge/pr223-original-full-retest-20261004/protocol.json",
+        "sha256": "8a5f0f63839e613b051562f030486388e8fcf962b6b6987fe5aaa27ea1f59786"
+      },
+      "readout": {
+        "bytes": 4230,
+        "path": "reports/forge/pr223-native3-first-invalid-20261004/README.md",
+        "sha256": "c5aa76f0edfe627bb111abff198b58ac8a48e0cc14153b08339c48a5306ca7be"
+      },
+      "result": {
+        "bytes": 28761,
+        "path": "reports/forge/pr223-native3-first-invalid-20261004/results.json",
+        "sha256": "b9cdf4b75e551dcb892394107fd5a0424c57247027e718d190723fe9e9df3a0b"
+      },
+      "schema": "pg_pr223_native3_passive_publication_v1",
+      "source": {
+        "digest": "b2d0e98000d06a9731a4a40e52e226fedece194c097a1f5d939f501a9360aaa6",
+        "origin_commit": "0fa92c5b599da8ab2c891e544aafc09cf802a70d"
+      },
+      "terminal_card_sha256": "a11ce814dfde25872e921311ae2b1f7b50417f8585ce6ca8b025714723e36b8f",
+      "verification": {
+        "bytes": 947,
+        "path": "reports/forge/pr223-native3-first-invalid-20261004/verification.json",
+        "sha256": "b8da9e61ddc3ebad9a1b34f13f7f0747108f86857166f697fb2afa534dfb091f"
       }
     }
   ],

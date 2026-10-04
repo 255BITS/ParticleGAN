@@ -200,6 +200,34 @@ class Native3PassivePublicationTests(unittest.TestCase):
         self.assertEqual(cut["cost"]["current_case_reserved_seconds"], 0.)
         self.assertIsNone(cut["cells"][0]["media"])
 
+    def test_pretraining_invalid_and_unrun_null_gates_remain_unavailable(self):
+        cut = make_cut(self.root, completed=0, invalid=0)
+        for row in cut["report"]["rows"]:
+            row.update(native_gates=None, final_metrics=None, raw_reported_status=None)
+        refresh(cut)
+        projected = self.latest()
+        self.assertEqual(projected["counts"], {"INVALID": 1, "NOT_RUN": 2})
+        self.assertEqual(projected["accepted_counts"], {"PASS": 0, "FAIL": 0, "UNAVAILABLE": 3})
+        self.assertEqual(projected["status"], "INCOMPLETE")
+        self.assertEqual(projected["cost"]["current_case_paid_wall_seconds"], 1.)
+        self.assertTrue(all(row["original_gate"] is None and row["raw_status"] is None
+                            and row["media"] is None for row in projected["cells"]))
+
+    def test_null_gates_do_not_supply_an_accepted_score(self):
+        cut = make_cut(self.root)
+        cut["report"]["rows"][0]["native_gates"] = None
+        refresh(cut)
+        with self.assertRaises(ValueError):
+            self.latest()
+
+    def test_unavailable_gates_reject_malformed_nonmapping_values(self):
+        cut = make_cut(self.root, completed=0, invalid=0)
+        for value in ([], ["PASS"], "", "PASS", 0, False, {"noisy": None}):
+            with self.subTest(value=value):
+                cut["report"]["rows"][0]["native_gates"] = value
+                refresh(cut)
+                with self.assertRaises(ValueError):
+                    self.latest()
     def test_timeout_reserves_residual_full_allowance_and_no_additional_metadata_debit(self):
         make_cut(self.root, completed=0, invalid=0, timeout=True)
         cut = self.latest()
