@@ -817,11 +817,13 @@ def _current_markdown(result, root, path):
                   "See [completed source-bound studies](#completed-source-bound-studies) for the exact "
                   "protocols and original goal GIFs. These separate results do not fill the ordinary "
                   "qualification cells below.", ""]
-    progress = result.get("atlas_unblocking_progress")
+    ordinary_current = not recorded_policy and result["view"] == "discriminator_stability"
+    progress = result.get("atlas_unblocking_progress") if ordinary_current else None
     if progress:
         lines += _atlas_progress_markdown(progress, root, path)
-    lines += ["## Ordinary MoG qualification", "",
-             "Each cell retains **passes / full required total** or **status (N required)** from one selected configuration. "
+    if ordinary_current:
+        lines += ["## Ordinary MoG qualification", ""]
+    lines += ["Each cell retains **passes / full required total** or **status (N required)** from one selected configuration. "
              "Mixed cells show the counts of failed, blocked and unmeasured tasks. " +
              ("Each trainer family and runtime has one archived row; its alternatives remain recorded separately. "
               if recorded_policy else "Each formulation family has one current selected row; source and runtime alternatives remain unranked. ") +

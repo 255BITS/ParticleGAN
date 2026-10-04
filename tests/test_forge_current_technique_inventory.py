@@ -776,6 +776,27 @@ def test_atlas_progress_is_source_bound_additive_display_and_preserves_every_ord
     assert publication.publish_current(root) == published and _outputs(root) == outputs
 
 
+@pytest.mark.parametrize("view,recorded_policy", [
+    ("discriminator_stability", "configs/forge/view-history/discriminator_stability-v2.json"),
+    ("quality_coverage", None),
+])
+def test_ordinary_atlas_progress_does_not_change_recorded_or_other_view_rendering(view, recorded_policy):
+    result = _tier_display_fixture(["UNKNOWN"] * 5)
+    result.update(view=view, view_revision=2)
+    if recorded_policy:
+        result["recorded_policy"] = recorded_policy
+    path = ROOT / "reports/forge/another-view.md"
+    original = publication._current_markdown(result, ROOT, path)
+    result["atlas_unblocking_progress"] = publication._atlas_unblocking_progress(ROOT)
+    before = deepcopy(result)
+    rendered = publication._current_markdown(result, ROOT, path)
+    assert rendered == original
+    assert "## Ordinary MoG qualification" not in rendered
+    assert "## Atlas unblocking progress" not in rendered
+    assert "[Adaptation progress]" not in rendered
+    assert result == before
+
+
 @pytest.mark.parametrize("tamper", ["partial", "changed_count", "word_pass", "source", "credit"])
 def test_changed_progress_evidence_cannot_rewrite_ordinary_outputs(evidence, tamper):
     root, _ = evidence
