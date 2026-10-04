@@ -70,6 +70,23 @@ def ledger_module():
     return module(DIRECTORY+'/budget_ledger.py','_pr223_retest_budget')
 
 
+def native3_module():
+    """Explicit metadata-only successor; never an alternate scientific loop."""
+    found=sys.modules.get('_pr223_native3_contract')
+    return found or module('reports/forge/pr223-native3-continuation-20261004/native3_contract.py',
+                           '_pr223_native3_contract')
+
+
+def scoped_module(packet):
+    return native3_module() if packet.get('schema')=='pg_pr223_native3_continuation_v1' else None
+
+
+def reservation(packet,snapshot,next_allowance):
+    scope=scoped_module(packet)
+    return (scope.require_next_reservation(packet,snapshot,next_allowance,sys.modules[__name__]) if scope
+            else ledger_module().require_next_reservation(packet['rows'],snapshot,next_allowance))
+
+
 def sha(path): return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
@@ -131,6 +148,8 @@ def plan(root=ROOT):
 
 
 def validate_packet(packet,*,source=False):
+    scope=scoped_module(packet)
+    if scope: return scope.validate_packet(packet,sys.modules[__name__],source=source)
     card=protocol.validate(packet['protocol'])
     if (packet.get('schema')!='pg_pr223_original_full_retest_v1' or packet.get('family')!='atlas'
             or packet.get('required')!=19 or packet['spec'].get('export_grace_seconds')!=0
@@ -179,22 +198,33 @@ def validate_packet(packet,*,source=False):
     return packet
 
 
-def prepare(output,*,root=ROOT,queue_root=None,ledger=None):
+def prepare(output,*,root=ROOT,queue_root=None,ledger=None,native3_anchor=None):
     """Root-only source preparation. It runs no models, samplers or scoring."""
     output=Path(output).resolve();root=Path(root).resolve()
-    metadata=sidecar(output)
+    scope=native3_module() if native3_anchor is not None else None
+    metadata=scope.sidecar(output) if scope else sidecar(output)
     # Invocations are charged to one durable180-second parent allowance, not
     # granted new export/preparation grace on each resume.
-    ledger=ledger or ledger_module().SharedMetadataLedger(metadata_path(output))
+    ledger=ledger or ledger_module().SharedMetadataLedger(scope.require_existing_ledger() if scope else metadata_path(output))
+    if scope and Path(ledger.path).resolve()!=Path(scope.CANONICAL_LEDGER):
+        raise ValueError('native3 preparation must use the exact existing parent metadata ledger')
     with ledger.phase('original_source_preflight_and_snapshot'):
         if metadata.exists():
-            saved=read_json(metadata);validate_packet(saved,source=True);return saved
+            saved=read_json(metadata);validate_packet(saved,source=True)
+            if bool(scoped_module(saved))!=bool(scope): raise ValueError('prepared execution scope changed')
+            if scope:
+                if saved['metadata_history']['closed_anchor']!=native3_anchor: raise ValueError('closed parent input substituted')
+                scope.validate_live_history(saved,ledger.snapshot(),sys.modules[__name__])
+            return saved
         if output.exists() and any(output.iterdir()): raise ValueError('fresh nonempty output cannot be prepared')
         queue_root=queue_location(root,queue_root)
-        packet=plan(root)
+        packet=scope.plan(root,sys.modules[__name__],native3_anchor) if scope else plan(root)
+        if scope: scope.validate_live_history(packet,ledger.snapshot(),sys.modules[__name__])
         expected=deepcopy(packet['source'])
         expected['files_sha256'].pop(protocol.REFERENCE)
         expected['files_sha256'].pop(protocol.PROTOCOL)
+        if scope:
+            for name in [*scope.HISTORY_PINS,*scope.PORTABLE_CONTROL_FILES]: expected['files_sha256'].pop(name)
         base=freeze_source(root,queue_root,expected)
         with tempfile.TemporaryDirectory(prefix='pr223-full19-source-',dir=queue_root) as tmp:
             staging=Path(tmp);files=dict(base['files'])
@@ -204,20 +234,31 @@ def prepare(output,*,root=ROOT,queue_root=None,ledger=None):
             for name in (protocol.REFERENCE,protocol.PROTOCOL):
                 target=staging/name;target.parent.mkdir(parents=True,exist_ok=True)
                 shutil.copyfile(root/name,target);files[name]=sha(root/name)
+            if scope:
+                for name in [*scope.HISTORY_PINS,*scope.PORTABLE_CONTROL_FILES]:
+                    wanted=packet['source']['files_sha256'][name]
+                    if sha(root/name)!=wanted: raise ValueError('committed carry source changed')
+                    target=staging/name;target.parent.mkdir(parents=True,exist_ok=True)
+                    shutil.copyfile(root/name,target);files[name]=wanted
+                anchor=packet['metadata_history']['closed_anchor']
+                scope.validate_anchor(anchor,sys.modules[__name__])
+                target=staging/scope.ANCHOR_RELATIVE;target.parent.mkdir(parents=True,exist_ok=True)
+                shutil.copyfile(anchor['path'],target);files[scope.ANCHOR_RELATIVE]=anchor['sha256']
             for filename,wanted in packet['external_inputs']['files'].items():
                 if sha(filename)!=wanted: raise ValueError('external original source/data changed during freeze')
                 relative=legacy._external_relative(filename,packet).as_posix()
                 target=staging/relative;target.parent.mkdir(parents=True,exist_ok=True)
                 shutil.copyfile(filename,target);files[relative]=wanted
             manifest={'schema_version':1,'digest':stable_hash(files),'files':files,'origin_commit':packet['source']['commit']}
-            snapshot=snapshot_source(staging,queue_root/'policy/pr223-full19-retest',manifest)
+            namespace='policy/pr223-native3-continuation' if scope else 'policy/pr223-full19-retest'
+            snapshot=snapshot_source(staging,queue_root/namespace,manifest)
         packet['execution_source']={**manifest,'snapshot_path':str(snapshot)}
         packet['source']['execution_digest']=manifest['digest']
         packet['snapshot_locations']={k:str(snapshot/'atlas19-external'/k) for k in ('harness','initializer','native_root','adapter')}
         packet['snapshot_locations'].update(rotate=str(snapshot/'atlas19-external/rotate_gate.py'),package=str(snapshot))
         packet['queue_root']=str(queue_root);packet['prepared_output']=str(output)
-        packet['metadata_ledger_path']=str(metadata_path(output))
-        packet['copied_preflight_receipt_path']=str(copied_preflight_path(output))
+        packet['metadata_ledger_path']=scope.CANONICAL_LEDGER if scope else str(metadata_path(output))
+        packet['copied_preflight_receipt_path']=str(scope.copied_preflight_path(output) if scope else copied_preflight_path(output))
         validate_packet(packet,source=True)
         atomic_json(metadata,packet)
     return packet
@@ -508,7 +549,8 @@ def child(path,lease_fd):
         media=obs.render(target,case,grade['status'],guard_callback=check)
         check();validate_packet(packet,source=True);check()
         grade['artifacts']=artifacts(target)
-        result={'schema':'pr223_full19_case_attestation_v1','status':'COMPLETE','original_gate':grade['status'],
+        scope=scoped_module(packet)
+        result={'schema':scope.ATTESTATION_SCHEMA if scope else 'pr223_full19_case_attestation_v1','status':'COMPLETE','original_gate':grade['status'],
                 'case_id':row['id'],'case_sha256':row['case_sha256'],'source_digest':packet['execution_source']['digest'],
                 'protocol_sha256':stable_hash(packet['protocol']),'request_sha256':sha(path),
                 'attempt_token':request['worker']['token'],'completed_before_deadline':True,
@@ -516,7 +558,8 @@ def child(path,lease_fd):
                 'attested_monotonic':time.monotonic(),'deadline_monotonic':request['worker']['deadline_monotonic'],
                 'scientific_returncode':scientific_returncode,'expected_child_returncode':0 if grade['status']=='PASS' else 1,
                 'grade':grade,'goal_media':media,'complete_recipe':case['resolved_recipe'],
-                'fresh_full_original19_only':True,'qualification_input':False,'speed_ranking':False}
+                'fresh_full_original19_only':not bool(scope),'qualification_input':False,'speed_ranking':False}
+        if scope: result.update(execution_scope=scope.execution_scope(),full_original19_credit=False)
         atomic_json(target/'case-attestation.json',result);check()
         return result['expected_child_returncode']
     except BaseException as error:
@@ -541,8 +584,15 @@ def verify_attestation(packet,row,target,terminal):
             raise ValueError('nonfinite final attestation time')
     if paid+1e-6<attestation['attested_monotonic']-attestation['started_monotonic']:
         raise ValueError('durable paid time does not cover final attestation')
+    scope=scoped_module(packet)
+    if scope and paid>row['allowance_seconds']:
+        raise ValueError('native3 supervisor paid time exceeded the whole inclusive case cap')
+    if scope and (attestation.get('execution_scope')!=scope.execution_scope()
+                  or attestation.get('full_original19_credit') is not False
+                  or attestation.get('fresh_full_original19_only') is not False):
+        raise ValueError('native3 attestation cannot borrow full19 credit')
     if (terminal.get('attempt_status')!='completed' or terminal.get('token')!=row['attempt_token']
-            or attestation.get('schema')!='pr223_full19_case_attestation_v1'
+            or attestation.get('schema')!=(scope.ATTESTATION_SCHEMA if scope else 'pr223_full19_case_attestation_v1')
             or attestation.get('status')!='COMPLETE' or attestation['attempt_token']!=terminal['token']
             or attestation['case_id']!=row['id'] or attestation['case_sha256']!=row['case_sha256']
             or attestation['source_digest']!=packet['execution_source']['digest']
@@ -554,6 +604,7 @@ def verify_attestation(packet,row,target,terminal):
         raise ValueError('missing/late/substituted full case attestation')
     declared=next(c for c in packet['protocol']['rows'] if c['id']==row['id'])
     grade=attestation['grade'];status=attestation['original_gate']
+    if scope: scope.validate_grade_metadata(grade)
     if (status not in {'PASS','FAIL'} or grade['status']!=status or grade['original_gate']!=status
             or grade.get('full_protocol_complete') is not True
             or grade.get('completed_steps')!=declared['original_definition']['original_host']['steps']
@@ -614,10 +665,10 @@ def runtime_metadata():
 
 def _save(path,packet,ledger):
     packet['metadata_cost']=ledger.snapshot()
-    accounting=ledger_module().require_next_reservation(packet['rows'],packet['metadata_cost'],0)
+    accounting=reservation(packet,packet['metadata_cost'],0)
     packet['budget_accounting']=accounting
     packet['spent_seconds']=accounting['charged_seconds']
-    packet['new_paid_seconds']=accounting['case_paid_wall_seconds']
+    packet['new_paid_seconds']=accounting.get('current_case_paid_wall_seconds',accounting.get('case_paid_wall_seconds'))
     packet['completed']=sum(r.get('full_protocol_complete') is True for r in packet['rows'])
     packet['media_completed']=sum(bool(r.get('media')) for r in packet['rows'])
     terminal=all(r['status']!='NOT_RUN' for r in packet['rows'])
@@ -631,16 +682,18 @@ def _save(path,packet,ledger):
     packet['budget_status']='EXCEEDED_OR_INTERRUPTED' if overruns else 'WITHIN_DECLARED_CAPS'
     packet['budget_overruns']=overruns
     packet['status']='INCOMPLETE' if overruns else packet['scientific_status']
-    packet['required_evidence_complete']=packet['completed']==19 and packet['media_completed']==19
+    packet['required_evidence_complete']=packet['completed']==packet['required'] and packet['media_completed']==packet['required']
     packet['accepted_retest_complete']=packet['required_evidence_complete'] and not overruns
     atomic_json(path,packet)
 
 
-def run(output,*,root=ROOT,queue_root=None,max_new_attempts=None):
-    output=Path(output).resolve();ledger=ledger_module().SharedMetadataLedger(metadata_path(output))
-    prepared=prepare(output,root=root,queue_root=queue_root,ledger=ledger)
+def run(output,*,root=ROOT,queue_root=None,max_new_attempts=None,native3_anchor=None):
+    output=Path(output).resolve();scope=native3_module() if native3_anchor is not None else None
+    ledger=ledger_module().SharedMetadataLedger(scope.require_existing_ledger() if scope else metadata_path(output))
+    prepared=prepare(output,root=root,queue_root=queue_root,ledger=ledger,native3_anchor=native3_anchor)
     with ledger.phase('registration_parent_validation_and_finalization'):
         validate_packet(prepared,source=True)
+        if scope: scope.validate_live_history(prepared,ledger.snapshot(),sys.modules[__name__])
         require_copied_preflight(prepared)
         if os.environ.get('CUDA_VISIBLE_DEVICES')!='1': raise ValueError('physical GPU1 numeric placement required')
         prepared['lane_runtime']=runtime_metadata()
@@ -663,7 +716,7 @@ def run(output,*,root=ROOT,queue_root=None,max_new_attempts=None):
                 trial={'family':'atlas','recipe_overrides':packet['recipe_overrides']}
                 attempt_key=coordinator.attempt_key(packet,trial,row);row['attempt_key']=attempt_key
                 retained=coordinator.retained(attempt_key)
-                ledger_module().require_next_reservation(packet['rows'],ledger.snapshot(),0 if retained else row['allowance_seconds'])
+                reservation(packet,ledger.snapshot(),0 if retained else row['allowance_seconds'])
                 if not retained:
                     if max_new_attempts is not None and launched>=max_new_attempts: break
                     readiness=legacy.gpu_readiness()
@@ -729,7 +782,7 @@ def run(output,*,root=ROOT,queue_root=None,max_new_attempts=None):
                 row['raw_result']=retained_result(row,target)
                 _save(canonical/'study.json',packet,ledger)
                 print(json.dumps({'event':'complete','case':row['id'],'status':row['status'],
-                                  'completed':packet['completed'],'required':19,'charged_seconds':row['charged_seconds']}),flush=True)
+                                  'completed':packet['completed'],'required':packet['required'],'charged_seconds':row['charged_seconds']}),flush=True)
                 if row['status'] not in {'PASS','FAIL'} or row.get('overrun_seconds',0)>0:
                     packet['waiting_reason']='first invalid/interrupted/overrun retained; no retry';break
             _save(canonical/'study.json',packet,ledger)
@@ -763,21 +816,34 @@ def copied_preflight(prepared):
         if not entries: raise ValueError('missing original compiled child wrapper')
     _,native_imports=native_scorer_import_metadata(prepared['execution_source'],
         loc['native_root'],paths=[str(ROOT),*sys.path])
+    scope=scoped_module(prepared)
+    boundary=(module(scope.DIRECTORY+'/scorer_boundary_control.py','_pr223_native3_boundary').run(prepared,sys.modules[__name__])
+              if scope else None)
     guard_imports(prepared['execution_source'])
     if any(n=='torch' or n=='particlegan' or n.startswith('particlegan.') for n in sys.modules):
         raise ValueError('model-free preflight imported a model package')
-    return {'status':'PASS_COPIED_METADATA_ONLY','source_digest':prepared['execution_source']['digest'],
-            'protocol_sha256':stable_hash(prepared['protocol']),'cases':19,'updates':48800,
-            'compiled_original_wrappers':19,'native_scorer_imports':native_imports,
+    result={'status':'PASS_COPIED_METADATA_ONLY','source_digest':prepared['execution_source']['digest'],
+            'protocol_sha256':stable_hash(prepared['protocol']),'cases':3 if scope else 19,'updates':21000 if scope else 48800,
+            'compiled_original_wrappers':3 if scope else 19,'native_scorer_imports':native_imports,
             'models':0,'sampler_calls':0,'scorer_calls':0,'queue_calls':0,'numeric_credit':False}
+    if scope: result['native_scorer_boundary_control']=boundary
+    return result
 
 
 def bounded_copied_preflight(prepared):
     """The actual copied-source proof spends the same retained180-second cap."""
+    scope=scoped_module(prepared)
+    if scope:
+        if prepared.get('metadata_ledger_path')!=scope.CANONICAL_LEDGER:
+            raise ValueError('copied native3 proof must use the SAME canonical parent ledger')
+        scope.require_existing_ledger()
     ledger=ledger_module().SharedMetadataLedger(prepared['metadata_ledger_path'])
     with ledger.phase('copied_source_model_free_preflight'):
+        if scope:
+            validate_packet(prepared,source=True)
+            scope.validate_live_history(prepared,ledger.snapshot(),sys.modules[__name__])
         result=copied_preflight(prepared)
-        result.update(schema='pg_pr223_copied_source_preflight_v1',
+        result.update(schema=scope.PREFLIGHT_SCHEMA if scope else 'pg_pr223_copied_source_preflight_v1',
                       prepared_packet_sha256=stable_hash(prepared),
                       snapshot_path=prepared['execution_source']['snapshot_path'],
                       origin_commit=prepared['execution_source']['origin_commit'],
@@ -791,7 +857,8 @@ def require_copied_preflight(prepared):
     path=Path(prepared['copied_preflight_receipt_path'])
     if not path.is_file(): raise ValueError('copied-source preflight receipt is missing')
     result=read_json(path)
-    if (result.get('schema')!='pg_pr223_copied_source_preflight_v1'
+    scope=scoped_module(prepared)
+    if (result.get('schema')!=(scope.PREFLIGHT_SCHEMA if scope else 'pg_pr223_copied_source_preflight_v1')
             or result.get('status')!='PASS_COPIED_METADATA_ONLY'
             or result.get('prepared_packet_sha256')!=stable_hash(prepared)
             or result.get('source_digest')!=prepared['execution_source']['digest']
@@ -799,8 +866,8 @@ def require_copied_preflight(prepared):
             or result.get('snapshot_path')!=prepared['execution_source']['snapshot_path']
             or result.get('origin_commit')!=prepared['execution_source']['origin_commit']
             or result.get('helper_sha256')!=prepared['execution_source']['files'].get(SELF)
-            or result.get('cases')!=19 or result.get('updates')!=48800
-            or result.get('compiled_original_wrappers')!=19
+            or result.get('cases')!=(3 if scope else 19) or result.get('updates')!=(21000 if scope else 48800)
+            or result.get('compiled_original_wrappers')!=(3 if scope else 19)
             or any(result.get(k)!=0 for k in ('models','sampler_calls','scorer_calls','queue_calls'))
             or result.get('numeric_credit') is not False):
         raise ValueError('copied-source preflight receipt is stale, foreign or incomplete')
@@ -810,6 +877,9 @@ def require_copied_preflight(prepared):
         prepared['snapshot_locations']['native_root'],paths=[prepared['execution_source']['snapshot_path']])
     if result.get('native_scorer_imports')!=native_imports:
         raise ValueError('copied-source preflight native import proof is stale or missing')
+    if scope:
+        boundary=module(scope.DIRECTORY+'/scorer_boundary_control.py','_pr223_native3_boundary')
+        boundary.validate_proof(result.get('native_scorer_boundary_control'),prepared,sys.modules[__name__])
     return result
 
 
