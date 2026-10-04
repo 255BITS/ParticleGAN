@@ -178,6 +178,24 @@ def test_scoped_task_variant_discovery_and_links_use_its_actual_declaration_path
     assert "task-variants/policy-cohort/held.json" in text
 
 
+def test_separate_policy_view_retains_required_results_without_expanding_parent_family_totals(report):
+    root, publication = report
+    original = generate(report)
+    definition = read_json(root / "configs/forge/views/beta.json")
+    definition.update(id="policy-coverage", reporting={"family_totals": False})
+    atomic_json(root / "configs/forge/views/policy-coverage.json", definition)
+    updated = generate(report)
+    assert updated["total"] == original["total"] and updated["tiers"] == original["tiers"]
+    assert publication["family_progress"]["scoped_views"] == ["policy-coverage"]
+    assert updated["scoped_views"][0]["tiers"]["1"] == {"passed": 1, "total": 1,
+        "incomplete": False, "counts": {"PASS": 1}}
+    text = next(iter(generated_pages(root, publication).values()))
+    assert "Separate cohort coverage (excluded from family totals)" in text
+    assert "This ordinary lane retains its own required gates" in text
+    overview = render_leaderboard(root, publication, root / "reports/forge/technique-inventory.md")
+    assert "↳ [policy-coverage]" not in overview
+
+
 def test_leaderboard_clicks_resolve_to_family_tiers_including_empty_tiers(report):
     root, publication = report
     generate(report)

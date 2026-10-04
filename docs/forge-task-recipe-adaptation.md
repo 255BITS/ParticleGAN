@@ -21,6 +21,10 @@ Every required Tier 1 measurement must be PASS or FAIL with matching current
 execution, evaluation and timeout contracts. This establishes measured coverage;
 it does not make a failing configuration qualified or adopt public defaults.
 `configured_standard` still requires every ordinary Tier 1 gate to pass.
+An ordinary view for a different prior/serving cohort sets
+`reporting.family_totals: false`: its required gates and queue behavior remain
+ordinary, while its coverage appears separately on family pages and does not
+expand the parent cohort's displayed denominator or grant it qualification.
 
 The new card retains the parent's complete reference `recipe_overrides` and
 adds an opt-in `host_adaptation` contract:

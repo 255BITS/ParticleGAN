@@ -92,7 +92,7 @@ Runtime cohorts and actual per-task devices are recorded on the family pages and
 
 Counts retain recorded verdicts under their original recipe, prior, initialization, budget, serving law and source. Changed current contracts are identified on the family pages; recorded passes grant no new qualification. Required lower tiers must pass before later work is eligible. The declared calibration and eligibility requirements appear on each family page.
 
-Diagnostic-only views and historical/API studies are available on the family pages and excluded from totals.
+Separately scoped cohort views, diagnostic-only views and historical/API studies are available on the family pages and excluded from totals.
 
 ## Refresh
 
@@ -104,4 +104,4 @@ This regenerates the leaderboard, family pages and experiments-by-tier report fr
 
 [Experiments, criteria and tier assignments](EXPERIMENTS_BY_TIER.md) · [Complete numerical publication and provenance](technique-inventory.json)
 
-Publication input digest `74f9f701302352a2c012c830050b69a59b05131a69803bb78b166677c38cc2d5`.
+Publication input digest `5b107a840a4e39a12a2df26a60eb162590ad62365ced5153df52ef156fb05a53`.

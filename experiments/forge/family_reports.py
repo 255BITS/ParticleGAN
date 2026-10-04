@@ -186,9 +186,11 @@ def build_progress(root: Path, publication: dict) -> dict:
             raise ValueError("family report view has duplicate assignments")
         if tasks and set(names) - tasks.keys():
             raise ValueError("family report view references a missing task")
-    ordinary = [view for view in views if view.get("evidence_scope") not in {"research_diagnostic", "calibration_diagnostic"}
+    scoped = [view for view in views if view.get("reporting", {}).get("family_totals") is False]
+    ordinary = [view for view in views if view not in scoped
+                and view.get("evidence_scope") not in {"research_diagnostic", "calibration_diagnostic"}
                 and any(a["importance"] == "required" for a in view["assignments"])]
-    diagnostics = [view for view in views if view not in ordinary]
+    diagnostics = [view for view in views if view not in ordinary and view not in scoped]
     families = {}
     selected_rows = publication["rows"] + publication.get("historical_family_rows", [])
     for row_index, selected in enumerate(selected_rows):
@@ -273,11 +275,13 @@ def build_progress(root: Path, publication: dict) -> dict:
         view_rows = [view_row(view) for view in ordinary]
         family["cohorts"].append({"anchor": cohort_anchor, "backend": backend,
                                    "row_index": row_index, "tasks": results, "views": view_rows,
+                                   "scoped_views": [view_row(view) for view in scoped],
                                    "tiers": {tier: _sum([view["tiers"][tier] for view in view_rows]) for tier in TIERS},
                                    "total": _sum([view["total"] for view in view_rows])})
     first_full_atlas = _full_original_atlas_first_case(root, load)
     progress = {"schema_version": 1, "scope": "recorded_view_progress", "qualification_input": False,
                 "qualification_reuse": False, "views": views, "diagnostic_views": [view["id"] for view in diagnostics],
+                "scoped_views": [view["id"] for view in scoped],
                 "families": [family for family in families.values() if not family["historical_only"]],
                 "historical_families": [family for family in families.values() if family["historical_only"]],
                 "task_paths": task_paths,
@@ -330,7 +334,8 @@ def render_leaderboard(root: Path, publication: dict, page: Path) -> str:
               "and source. Changed current contracts are identified on the family pages; recorded passes grant no "
               "new qualification. Required lower tiers must pass before later work is eligible. "
               "The declared calibration and eligibility requirements appear on each family page.", "",
-              "Diagnostic-only views and historical/API studies are available on the family pages and excluded from totals.", "",
+              "Separately scoped cohort views, diagnostic-only views and historical/API studies are available on the "
+              "family pages and excluded from totals.", "",
               "## Refresh", "", "```sh", "python reports/forge/regenerate_technique_inventory.py", "```", "",
               "This regenerates the leaderboard, family pages and experiments-by-tier report from committed evidence "
               "and declarations. Register newly measured evidence with `--source-commit <executed-commit>`; "
@@ -414,11 +419,16 @@ def render_family(root: Path, publication: dict, family: dict) -> str:
         for view in cohort["views"]:
             lines.append("| " + " | ".join([link(root, page, view["id"], family["page"], base + "-" + view["id"]),
                                             *_score_cells(root, page, family, cohort, view, view_id=view["id"])]) + " |")
+        if cohort.get("scoped_views"):
+            lines += ["", "Separate cohort coverage (excluded from family totals):", "", *_table_header()]
+            for view in cohort["scoped_views"]:
+                lines.append("| " + " | ".join([link(root, page, view["id"], family["page"], base + "-" + view["id"]),
+                                                *_score_cells(root, page, family, cohort, view, view_id=view["id"])]) + " |")
         lines += ["", r"\* indicates incomplete results, including changed or unbound current contracts.", ""]
         for tier in TIERS:
             members = {}
             for definition in progress["views"]:
-                if definition["id"] in progress["diagnostic_views"]:
+                if definition["id"] in progress["diagnostic_views"] + progress.get("scoped_views", []):
                     continue
                 for assignment in definition["assignments"]:
                     if str(assignment["qualification_tier"]) == tier and assignment["importance"] == "required":
@@ -437,11 +447,15 @@ def render_family(root: Path, publication: dict, family: dict) -> str:
             view_id = definition["id"]
             anchor = base + "-" + view_id
             diagnostic = view_id in progress["diagnostic_views"]
+            separate_cohort = view_id in progress.get("scoped_views", [])
             lines += [*_heading(2, view_id, anchor), "**" + view_id + f" — revision {definition['revision']}**. " +
                       _existing_link(root, page, "View declaration", Path("configs/forge/views") / (view_id + ".json")) + ".", ""]
             if diagnostic:
                 lines += ["Diagnostic-only view; its outcomes are excluded from the family totals and grant no qualification.", ""]
             else:
+                if separate_cohort:
+                    lines += ["Separately scoped cohort. This ordinary lane retains its own required gates and execution "
+                              "policy; its measurements are excluded from family totals and give no parent-cohort credit.", ""]
                 requirements = [sum(a["importance"] == "required" and str(a["qualification_tier"]) == tier
                                     for a in definition["assignments"]) for tier in TIERS]
                 lines += ["Qualification requires every required experiment to pass, with all lower tiers and "
