@@ -1,0 +1,74 @@
+{
+  "actual_steps": [
+    834,
+    3334,
+    5834,
+    8334,
+    10834,
+    12501,
+    15001,
+    17501,
+    20001
+  ],
+  "draws": 0,
+  "family": "atlas_word_joint_min11",
+  "gif": {
+    "bytes": 513356,
+    "path": "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/five_word_joint_acquisition_word_joint_policy_min11_v1-goal.gif",
+    "sha256": "6e70906af5df22fb369de292955fe9c5a077a963f8174f99cf5645fb3ea42b4e"
+  },
+  "inputs": [
+    {
+      "bytes": 673600,
+      "path": "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_000834.npz",
+      "sha256": "94b1e358af8f8d385b4b84e34cc78528499d627a9ffdf9ae16887077293f90fd"
+    },
+    {
+      "bytes": 534709,
+      "path": "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_003334.npz",
+      "sha256": "0479401dc35618f4fcdede300376186f13717e6261088cfbf84c9dcb61516cd7"
+    },
+    {
+      "bytes": 682046,
+      "path": "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_005834.npz",
+      "sha256": "8857ccc7c3d1d3a478fad9461549a13d1e65382e1bbc8e7074bf0982f2e1d38c"
+    },
+    {
+      "bytes": 681647,
+      "path": "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_008334.npz",
+      "sha256": "89404a8dcf672903bab180fcba628adc408cb3379e245f6c7f6b32ae97d8efd8"
+    },
+    {
+      "bytes": 667941,
+      "path": "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_010834.npz",
+      "sha256": "dd824e1cfa43e3d00c842ebd2f85ac1e6b4c56f10a72683def8e4ee693f7e613"
+    },
+    {
+      "bytes": 62719,
+      "path": "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_012501.npz",
+      "sha256": "d2f45255f845a5d5733fc609bf6645a78d64134dd14943da55dfaf6f08501800"
+    },
+    {
+      "bytes": 173084,
+      "path": "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_015001.npz",
+      "sha256": "87fd590e14487dbc0ec600a744d1e70426e7c4c1cf5be7538a5e17ac4c35fd96"
+    },
+    {
+      "bytes": 19827,
+      "path": "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_017501.npz",
+      "sha256": "c0750bab99566b2bbb3ebdb04511d3154a55abdfe2fb41b7f78654f786a44bbf"
+    },
+    {
+      "bytes": 21372,
+      "path": "/ml2/hypergan/pg-atlas-named-gpu-v4b-20261003/native-v4b/atlas_word_joint_min11/attempts/five_word_joint_acquisition_word_joint_policy_min11_v1/word-joint-policy/observations/step_020001.npz",
+      "sha256": "a3b12b4fd82b0064367e32a557ca3d7c3be779113884ea5761039bec4c5eb213"
+    }
+  ],
+  "optimizer_updates": 0,
+  "original_gate": "FAIL",
+  "qualification_input": false,
+  "renderer_sha256": "f61f4e3a7e03fc7ca35775dd5d08b63afd950df30583847ddbd6de4c15e29d08",
+  "schema": "particlegan_atlas_named_gpu_diagnostics_v1_media",
+  "source_digest": "f380eed990931bacb205e6537beaf387fdbb676ffc97b6f32f19ff903ae1cfed",
+  "task": "five_word_joint_acquisition_word_joint_policy_min11_v1"
+}
