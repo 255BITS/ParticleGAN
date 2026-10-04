@@ -15,6 +15,31 @@ import pytest
 
 HERE=Path(__file__).resolve().parent
 ROOT=HERE.parents[2]
+SCORER_FIXTURE=HERE/'fixtures/native100_score.py.txt'
+SCORER_FIXTURE_SHA256='10cc14edfcd98ab34fd3768aaba2ee835dc2241dc1face2e18998c8f2b687feb'
+
+
+def scorer_fixture_bytes(path=SCORER_FIXTURE):
+    data=Path(path).read_bytes()
+    if len(data)!=1660 or hashlib.sha256(data).hexdigest()!=SCORER_FIXTURE_SHA256:
+        raise ValueError('inert original scorer source fixture changed')
+    return data
+
+
+def test_original_scorer_source_fixture_is_exact_and_inert():
+    data=scorer_fixture_bytes()
+    assert SCORER_FIXTURE.suffix=='.txt'
+    assert importlib.util.spec_from_file_location('_never_imported_original_scorer',SCORER_FIXTURE) is None
+    assert data.count(b'coverage = gate.score_run(run_dir, problem)')==1
+    assert data.count(b'accuracy = accuracy_gate.score_run(run_dir, problem, coverage)')==1
+
+
+@pytest.mark.parametrize('change',['length','same_length_hash'])
+def test_tampered_scorer_source_fixture_is_refused(tmp_path,change):
+    data=scorer_fixture_bytes()
+    changed=data+b'\n' if change=='length' else bytes([data[0]^1])+data[1:]
+    path=tmp_path/'synthetic-tampered-source.py.txt';path.write_bytes(changed)
+    with pytest.raises(ValueError,match='source fixture changed'): scorer_fixture_bytes(path)
 
 
 @pytest.fixture(scope='module')
@@ -182,10 +207,9 @@ def test_exact_generated_scorer_bootstrap_with_real_pythonpath_and_fake_hosts(
     copy_control_sources(root,helper)
     harness=root/'atlas19-external/harness';adapter=root/'atlas19-external/adapter'
     harness.mkdir();adapter.mkdir()
-    # Read/copy ONLY original source. Native host/scorer function calls below
-    # are synthetic stubs and abort before any score/data operation.
-    original_scorer=Path(helper.legacy.HARNESS)/'native100_score.py'
-    (harness/'native100_score.py').write_bytes(original_scorer.read_bytes())
+    # Copy the SHA-pinned inert fixture, never a local archived scorer. The
+    # generated wrapper imports fake hosts and aborts before any score call.
+    (harness/'native100_score.py').write_bytes(scorer_fixture_bytes())
     for name in ('current_api_fixtures.py','screen_current.py'):
         (adapter/name).write_bytes((ROOT/helper.legacy.ADAPTER/name).read_bytes())
     fixture={'frozen_repo':str(native),'host_source_sha256':{
@@ -215,7 +239,14 @@ def test_exact_generated_scorer_bootstrap_with_real_pythonpath_and_fake_hosts(
     (foreign/'lib/unexpected.py').write_text('# synthetic foreign namespace, no execution\n')
     pythonpath=[str(root),str(root)+os.sep+'.']
     if repair=='foreign_namespace': pythonpath.append(str(foreign))
-    code=("import importlib.util,json,sys\n"
+    code=("import importlib.util,json,sys\nfrom pathlib import Path as _AuditPath\n"
+        f"_original_scorer=_AuditPath({str(Path(helper.legacy.HARNESS)/'native100_score.py')!r}).resolve()\n"
+        "def _no_original_source_read(event,args):\n"
+        "    if event=='open' and isinstance(args[0],(str,bytes)):\n"
+        "        path=_AuditPath(args[0].decode() if isinstance(args[0],bytes) else args[0]).resolve()\n"
+        "        if path==_original_scorer:\n"
+        "            raise AssertionError('portable control attempted original external scorer read')\n"
+        "sys.addaudithook(_no_original_source_read)\n"
         f"s=importlib.util.spec_from_file_location('_synthetic_native_wrapper',{scorer['executed_path']!r})\n"
         "w=importlib.util.module_from_spec(s);sys.modules[s.name]=w;s.loader.exec_module(w)\n"
         "class StoppedBeforeScore(Exception): pass\n"

@@ -198,8 +198,11 @@ def test_original_scorer_location_and_calls_are_unchanged(helper):
     marker="capture_output=True, text=True, env=dict(os.environ, PYTHONDONTWRITEBYTECODE='1')"
     assert screen.count(marker)==1
     assert screen.count("str(HARNESS / 'native100_score.py')")==1
-    scorer=Path(helper.legacy.HARNESS)/'native100_score.py'
-    source=scorer.read_text()
+    # The original scorer fixture is inert source, not an archived dependency.
+    data=(HERE/'fixtures/native100_score.py.txt').read_bytes()
+    assert len(data)==1660
+    assert hashlib.sha256(data).hexdigest()=='10cc14edfcd98ab34fd3768aaba2ee835dc2241dc1face2e18998c8f2b687feb'
+    source=data.decode()
     assert source.count('    coverage = gate.score_run(run_dir, problem)')==1
     assert source.count('    accuracy = accuracy_gate.score_run(run_dir, problem, coverage)')==1
 
