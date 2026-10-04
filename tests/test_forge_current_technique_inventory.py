@@ -912,6 +912,161 @@ def test_unknown_shared_index_boundary_rejects_before_public_output_changes(evid
     assert _outputs(root) == before and path.read_text() == "Unrelated index without the maintained boundary.\n"
 
 
+def _synthetic_half_base_display():
+    """Renderer-only fixture: no trained receipt, model or qualification."""
+    return {"source": {"origin_commit": "f" * 40},
+            "readout": "reports/forge/synthetic-half-base/README.md",
+            "representation": {"label": "Particles (N11 joint cloud; free encoder)"},
+            "media": {"path": "reports/forge/synthetic-half-base/goal.gif"},
+            "cost": {"paid_seconds": 556.4301753160544},
+            "accounting": {"inclusive_charged_seconds": 1466.669318475062,
+                           "gpu0_charged_seconds": 234.82608077581972,
+                           "gpu1_charged_seconds": 1231.8432376992423}}
+
+
+def _copy_half_base_report(root):
+    """Copy a sealed display input, without reading any raw tensors or streams."""
+    relative = Path("reports/forge") / publication.WORD_HALF_BASE_INPUT[0]
+    for path in (relative, relative.with_name("README.md"), relative.parent / "media/goal.gif"):
+        (root / path).parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(ROOT / path, root / path)
+    return root / relative
+
+
+def test_sealed_half_base_is_additive_keeps_invalid_and_charges_predecessors_once(evidence):
+    root, _ = evidence
+    _copy_atlas_progress(root)
+    before = read_json(publication.publish_current(root)["json"])
+    manifest = (root / publication.EVIDENCE_MANIFEST).read_bytes()
+    _copy_half_base_report(root)
+    after = read_json(publication.publish_current(root)["json"])
+    for key, value in before.items():
+        if key != "provenance":
+            assert after[key] == value
+    assert set(after) - set(before) == {"word_half_base_diagnostic"}
+    assert (root / publication.EVIDENCE_MANIFEST).read_bytes() == manifest
+    assert after["provenance"]["selected_rows_sha256"] == before["provenance"]["selected_rows_sha256"]
+    row = after["word_half_base_diagnostic"]
+    assert row["status"] == "COMPLETE" and row["numerical_gate"] == "FAIL"
+    assert row["passed"] == 0 and row["required"] == 26 and row["counts"] == {"FAIL": 1, "NOT_RUN": 25}
+    assert row["representation"]["label"] == "Particles (N11 joint cloud; free encoder)"
+    assert row["result"]["final_metrics"]["quality_fraction"] == .546875
+    assert row["historical_word"]["status"] == "INVALID" and row["historical_word"]["recertified"] is False
+    assert row["cost"]["prior_charged_seconds"] == 910.2391431590077
+    assert row["cost"]["inclusive_charged_seconds"] == 1466.669318475062
+    assert row["media"]["frames"] == 9 and row["result"]["original_grader_summary"]["passing_observations"] == 0
+    assert all(row[flag] is False for flag in ("qualification_input", "qualification_reuse", "ordinary_tier_credit",
+                                              "default_adoption", "speed_ranking", "cross_cohort_pooling"))
+    markdown = (root / "reports/forge/technique-inventory.md").read_text()
+    assert "**0/26 PASS** · FAIL 1 · NOT_RUN 25 · COMPLETE" in markdown
+    assert "**INVALID 1** · NOT_RUN 25 · numerical gate UNAVAILABLE" in markdown
+    assert "Final quality 0.546875 · modes 2/5 · mass TV 0.622266 · paired exact 0" in markdown
+    assert "original C6 N11 illustration has no accepted numerical grade" in markdown
+    outputs = _outputs(root)
+    publication.publish_current(root)
+    assert _outputs(root) == outputs
+
+
+@pytest.mark.parametrize("tamper", ["report_bytes", "report_missing", "gif_bytes", "readout_bytes", "status",
+    "denominator", "source", "recipe", "particle_law", "cadence", "owners", "clock", "old_invalid",
+    "cost", "credit"])
+def test_half_base_input_or_scientific_summary_drift_cannot_rewrite_ordinary_outputs(evidence, monkeypatch, tamper):
+    root, _ = evidence
+    path = _copy_half_base_report(root)
+    publication.publish_current(root)
+    before = _outputs(root)
+    manifest = (root / publication.EVIDENCE_MANIFEST).read_bytes()
+    if tamper == "report_bytes":
+        path.write_bytes(path.read_bytes() + b"\n")
+    elif tamper == "report_missing":
+        path.unlink()
+    elif tamper == "gif_bytes":
+        gif = path.parent / "media/goal.gif"
+        gif.write_bytes(gif.read_bytes() + b"changed")
+    elif tamper == "readout_bytes":
+        path.with_name("README.md").write_text("Changed readout.\n")
+    else:
+        report = read_json(path)
+        if tamper == "status":
+            report["accepted_numeric"] = "PASS"
+        elif tamper == "denominator":
+            report["slots"].pop("grid100")
+        elif tamper == "source":
+            report["source"]["origin_commit"] = "0" * 40
+        elif tamper in {"recipe", "particle_law"}:
+            report["resolved_recipe"]["lr" if tamper == "recipe" else "standardize"] = .0053125 if tamper == "recipe" else True
+            report["resolved_recipe_sha256"] = stable_hash(report["resolved_recipe"])
+        elif tamper == "cadence":
+            report["protocol"]["metric_steps"] = report["protocol"]["metric_steps"][:-1]
+        elif tamper == "owners":
+            report["result"]["enabled_owners"].remove("birth_death")
+        elif tamper == "clock":
+            report["result"]["optimizer_updates"]["encoder"] = 0
+        elif tamper == "old_invalid":
+            report["historical_word"]["status"] = "FAIL"
+        elif tamper == "cost":
+            report["cost"]["inclusive_charged_seconds"] = report["cost"]["paid_seconds"]
+        elif tamper == "credit":
+            report["qualification_input"] = True
+        atomic_json(path, report)
+        # A coherent byte-pin substitution must still fail the named summary
+        # guards, rather than hiding every negative behind one hash assertion.
+        monkeypatch.setattr(publication, "WORD_HALF_BASE_INPUT",
+                            (publication.WORD_HALF_BASE_INPUT[0], file_hash(path), publication.WORD_HALF_BASE_INPUT[2]))
+    with pytest.raises(ValueError, match="half_base"):
+        publication.publish_current(root)
+    assert _outputs(root) == before
+    assert (root / publication.EVIDENCE_MANIFEST).read_bytes() == manifest
+
+
+def test_half_base_shared_index_cost_updates_without_touching_archived_index(evidence):
+    root, _ = evidence
+    relative = Path("reports/forge/shared-score-index-20261003/README.md")
+    path = root / relative
+    path.parent.mkdir(parents=True)
+    original = (ROOT / relative).read_text()
+    path.write_text(original)
+    _copy_atlas_progress(root)
+    _copy_half_base_report(root)
+    publication.publish_current(root)
+    rendered = path.read_text()
+    boundary = "## Completed current Atlas GPU diagnostic\n"
+    assert rendered[rendered.index(boundary):] == original[original.index(boundary):]
+    assert "1466.669318475062 / 10500 seconds" in rendered
+    assert "1231.8432376992423 / 3000" in rendered
+    assert "556.4301753160544 / 900 seconds" in rendered
+    assert "Prior charges are included once" in rendered
+    assert "original C6 word INVALID is unchanged" in rendered
+
+
+def test_half_base_render_keeps_old_invalid_and_separate_full_denominator():
+    result = _tier_display_fixture(["BLOCKED"] * 5)
+    result["atlas_unblocking_progress"] = publication._atlas_unblocking_progress(ROOT)
+    result["word_half_base_diagnostic"] = _synthetic_half_base_display()
+    before = deepcopy(result)
+    markdown = publication._current_markdown(result, ROOT, ROOT / "reports/forge/synthetic-table.md")
+    assert "**0/26 PASS** · FAIL 1 · NOT_RUN 25 · COMPLETE" in markdown
+    assert "**INVALID 1** · NOT_RUN 25 · numerical gate UNAVAILABLE" in markdown
+    assert "original C6 N11 illustration has no accepted numerical grade" in markdown
+    assert "accepted 20,001-update goal GIF" in markdown
+    assert "half_base LR .00265625 / prior1.5 / D1" in markdown
+    assert result == before
+
+
+@pytest.mark.parametrize("scope", ["recorded", "quality_coverage"])
+def test_half_base_metadata_is_byte_inert_for_older_render_scopes(scope):
+    result = _tier_display_fixture(["UNKNOWN"] * 5)
+    result.update(view="quality_coverage" if scope == "quality_coverage" else "discriminator_stability", view_revision=2)
+    if scope == "recorded":
+        result["recorded_policy"] = "configs/forge/view-history/discriminator_stability-v2.json"
+    path = ROOT / "reports/forge/older-view.md"
+    original = publication._current_markdown(result, ROOT, path)
+    result["word_half_base_diagnostic"] = _synthetic_half_base_display()
+    before = deepcopy(result)
+    assert publication._current_markdown(result, ROOT, path) == original
+    assert result == before
+
+
 def test_committed_cohorts_rebuild_every_scientific_row_in_a_checkout_without_raw_logs(tmp_path):
     for relative in (publication.EVIDENCE_MANIFEST.parent, Path("reports/forge/technique-receipts"),
                      Path("configs/forge/ideas"), Path("configs/forge/configurations"),

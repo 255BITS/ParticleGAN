@@ -15,6 +15,7 @@ from collections import Counter
 from copy import deepcopy
 import hashlib
 import json
+import math
 import os
 from pathlib import Path
 import shlex
@@ -672,6 +673,153 @@ ATLAS_PROGRESS_INPUTS = {
                      "pg_atlas_word_retained_context_v1"),
 }
 
+# A separate, accepted numerical diagnostic, bound to its immutable passive
+# export. The earlier C6 INVALID remains a different row.
+WORD_HALF_BASE_INPUT = ("word-half-base-20261004/results.json",
+                       "d2bc198d65c935ca31160505510b8efc7aa2cf9e5f62ac6429f758173e7ca8b7",
+                       "pg_word_half_base_publication_v1")
+WORD_HALF_BASE_READOUT_SHA256 = "08db1485b912d00558af0f3496dff6332c9b27d2cb13dfca68496f8a90d54bbe"
+WORD_HALF_BASE_RECIPE_SHA256 = "ea470cca5c55a31e6f726945402f0dfad945fea2ec95b654afba922e93c8ac69"
+WORD_HALF_BASE_GIF_SHA256 = "2d94247b902d6384ef172faa99db0ae4d655bd0171ae6a4ef4d77eaadbc1012b"
+
+
+def _word_half_base_diagnostic(root):
+    """Read one sealed completed export; never grade, sample or select a winner."""
+    root = Path(root)
+    relative, digest, schema = WORD_HALF_BASE_INPUT
+    report_path = root / "reports/forge" / relative
+    if not report_path.exists():
+        if report_path.parent.exists():
+            raise ValueError("half_base retained report is unavailable")
+        return {}
+    report = read_json(report_path)
+    if file_hash(report_path) != digest or report.get("schema") != schema:
+        raise ValueError("half_base display requires the exact retained report")
+    cohort = "word_joint_policy_min11_rates_v1"
+    task = "five_word_joint_acquisition_" + cohort
+    flags = ("qualification_input", "ordinary_tier_credit", "historical_credit",
+             "default_adoption", "speed_ranking", "cross_tuple_pooling")
+    if any(report.get(flag) is not False for flag in flags):
+        raise ValueError("half_base display cannot confer qualification, default or speed credit")
+    if (report.get("candidate_id") != "word-min11-half_base-rates-v1"
+            or report.get("profile") != "half_base"
+            or report.get("family") != "atlas_word_joint_min11_rates"
+            or report.get("task_cohort") != cohort or report.get("task_id") != task
+            or report.get("parent_task_id") != "five_word_joint_acquisition"
+            or report.get("status") != "COMPLETE" or report.get("accepted_numeric") != "FAIL"):
+        raise ValueError("half_base configuration or accepted numerical status changed")
+    parents = ("two_pole", "unused_token_hold", "ae_gan_hold", "ring16_acquisition",
+               "five_word_joint_acquisition", "trajectory", "residual_student", "unipolar",
+               "cover_leftover", "mid_scale_identity", "mode_hold", "vector_two_broad",
+               "vector_unequal_mass", "vector_unequal_width", "vector_anisotropic", "vector_overlap",
+               "vector_spiral", "img_stripes2", "img_bars4", "img_blobs4", "img_intensity2",
+               "grid100", "rotated100", "staggered100", "ring_hold", "ring_extension")
+    slots = {task if parent == "five_word_joint_acquisition" else parent:
+             {"status": "FAIL" if parent == "five_word_joint_acquisition" else "NOT_RUN"}
+             for parent in parents}
+    if (report.get("slots") != slots or report.get("counts") != {"FAIL": 1, "NOT_RUN": 25}
+            or report.get("required_slots") != 26 or report.get("scheduled_slots") != 1
+            or report.get("not_run_slots") != 25 or report.get("tiers") != {"1": 5, "2": 19, "3": 2}):
+        raise ValueError("half_base separate 26-slot denominator changed")
+    source = report.get("source", {})
+    if source != dict(origin_commit="f9f7ed9d7a06c48d4ec56999107658983d7e8efc",
+                      digest="5995590d3c303207c664fe3b0ba7dc1e09dd3da7a90abf87086634c789175026",
+                      files=1444,
+                      supervisor_sha256="dae842935a1ea3c4c7aae1694cb91e2f6c8b55815095f7230e64c7dc0ec368a1"):
+        raise ValueError("half_base executed source identity changed")
+    recipe = report.get("resolved_recipe", {})
+    overrides = dict(lr=.00265625, prior_lr_mult=1.5, d_lr_mult=1.)
+    if (report.get("recipe_overrides") != overrides
+            or report.get("resolved_recipe_sha256") != WORD_HALF_BASE_RECIPE_SHA256
+            or stable_hash(recipe) != WORD_HALF_BASE_RECIPE_SHA256
+            or any(recipe.get(key) != value for key, value in overrides.items())
+            or recipe.get("prior_kind") != "particles" or recipe.get("sigma_rel") != 0.0
+            or recipe.get("standardize") is not False or recipe.get("encoder_mode") != "none"):
+        raise ValueError("half_base actual Recipe or raw particle representation changed")
+    steps = [(i * 20001 + 23) // 24 for i in range(1, 25)]
+    protocol = report.get("protocol", {})
+    if (protocol.get("resources") != dict(num_particles=11, z_dim=2, batch_size=256)
+            or protocol.get("seed") != 0 or protocol.get("updates") != 20001
+            or protocol.get("schedule_horizon") != 20000 or protocol.get("eval_samples") != 1024
+            or protocol.get("metric_steps") != steps or protocol.get("terminal_steps") != steps[-5:]
+            or protocol.get("thresholds") != [["sample_count", ">=", 1024], ["quality_fraction", ">=", .95],
+                ["modes", "==", 5], ["mass_tv", "<=", .1], ["reconstruction_exact", "==", 1],
+                ["minimum_reconstruction_token_probability", ">=", .9]]
+            or protocol.get("serving") != "actual policy-selected G/E/raw ParticlePrior; DV12 retained, output noise off"
+            or protocol.get("objective") != "original joint RpGAN plus original regularizers; free continuous E; no reconstruction training loss"):
+        raise ValueError("half_base original word protocol or selected serving law changed")
+    result = report.get("result", {})
+    owners = sorted(("continuous_controller", "stationarity_lr", "row_evidence", "birth_death",
+                     "learned_output_noise", "selected_averaging", "optimizer_surprise", "reopen_guard"))
+    hooks = ("begin_step", "after_critic_step", "after_generator_backward", "after_generator_step", "finish_step")
+    summary = result.get("original_grader_summary", {})
+    if (result.get("original_gate") != "FAIL" or result.get("completed_steps") != 20001
+            or result.get("policy_owner") != "particlegan.UpdatePolicy"
+            or result.get("optimizer_updates") != {key: 20001 for key in ("generator", "encoder", "prior", "discriminator")}
+            or result.get("lifecycle_calls") != {key: 20001 for key in hooks}
+            or result.get("requested_owners") != owners or result.get("enabled_owners") != owners
+            or result.get("actual_birth_death") != dict(rows=11, neighbours=5, reference_half=6, isolation=True)
+            or result.get("metric_steps") != steps or result.get("terminal_steps") != steps[-5:]
+            or result.get("selected_source") not in {"fast", "averaged"}
+            or summary.get("complete") is not True or summary.get("observations") != 24
+            or summary.get("minimum_stable_checks") != 5 or summary.get("passing_observations") != 0
+            or summary.get("passing_suffix") != 0 or any(result.get(flag) is not False for flag in flags)):
+        raise ValueError("half_base full public ownership, clocks or numerical decision changed")
+    metrics = result.get("final_metrics", {})
+    if (not {"sample_count", "step", "quality_fraction", "modes", "mass_tv", "reconstruction_exact",
+             "minimum_reconstruction_token_probability"}.issubset(metrics)
+            or metrics.get("step") != 20001 or metrics.get("sample_count") != 1024
+            or any(type(value) not in (int, float) or not math.isfinite(value) for value in metrics.values())
+            or result.get("independent_atlas_qualification") is not False
+            or result.get("synthetic_mechanism_probes_are_learning_credit") is not False):
+        raise ValueError("half_base endpoint metrics must retain scalar numbers")
+    historical = report.get("historical_word", {})
+    if (historical.get("status") != "INVALID" or historical.get("accepted_numeric") != "UNAVAILABLE"
+            or historical.get("paid_seconds") != 558.5739127129782
+            or historical.get("already_in_prior_total") is not True or historical.get("recertified") is not False):
+        raise ValueError("half_base display cannot replace the original C6 INVALID")
+    cost = report.get("cost", {})
+    expected_cost = dict(paid_seconds=556.4301753160544, reserved_seconds=0., charged_seconds=556.4301753160544,
+                         overrun_seconds=0., prior_charged_seconds=910.2391431590077,
+                         inclusive_charged_seconds=1466.669318475062, original_cap_seconds=10500,
+                         allowance_seconds=900, export_grace_seconds=0)
+    lanes = {"0": dict(prior_charged_seconds=234.82608077581972, current_charged_seconds=0.,
+                       inclusive_charged_seconds=234.82608077581972, cap_seconds=7500),
+             "1": dict(prior_charged_seconds=675.4130623831879, current_charged_seconds=556.4301753160544,
+                       inclusive_charged_seconds=1231.8432376992423, cap_seconds=3000)}
+    if (any(cost.get(key) != value for key, value in expected_cost.items()) or cost.get("lanes") != lanes
+            or cost.get("paid_vs_reserve_separate") is not True or cost.get("speed_comparison_available") is not False):
+        raise ValueError("half_base inclusive cost or unchanged lane ceilings changed")
+    media = result.get("actual_goal_gif", {})
+    media_steps = [steps[i] for i in (0, 3, 6, 9, 12, 14, 17, 20, 23)]
+    if (media.get("path") != "media/goal.gif" or media.get("frames") != 9
+            or media.get("actual_steps") != media_steps or media.get("sha256") != WORD_HALF_BASE_GIF_SHA256):
+        raise ValueError("half_base accepted goal media identity changed")
+    gif_path = report_path.parent / media["path"]
+    readout = report_path.with_name("README.md")
+    if (not gif_path.is_file() or gif_path.stat().st_size != media.get("bytes")
+            or file_hash(gif_path) != media["sha256"] or not readout.is_file()
+            or file_hash(readout) != WORD_HALF_BASE_READOUT_SHA256):
+        raise ValueError("half_base retained goal media or readout bytes changed")
+    return dict(schema_version=1, scope="separate_named_configuration_diagnostic",
+                candidate_id=report["candidate_id"], profile=report["profile"], family=report["family"],
+                task_cohort=cohort, task_id=task, status="COMPLETE", numerical_gate="FAIL",
+                required=26, passed=0, counts=report["counts"], source=source,
+                recipe_overrides=overrides, resolved_recipe=recipe, resolved_recipe_sha256=WORD_HALF_BASE_RECIPE_SHA256,
+                protocol=protocol, result=result, historical_word=historical, cost=cost,
+                representation=dict(label="Particles (N11 joint cloud; free encoder)",
+                    prior_kind=recipe["prior_kind"], sigma_rel=recipe["sigma_rel"], standardize=recipe["standardize"],
+                    actual_prior_rows=11, canonical_target_words=5, encoder_mode=recipe["encoder_mode"]),
+                media=dict(media, path=gif_path.relative_to(root).as_posix()),
+                readout=readout.relative_to(root).as_posix(),
+                input=dict(report=report_path.relative_to(root).as_posix(), sha256=digest,
+                           readout_sha256=WORD_HALF_BASE_READOUT_SHA256),
+                accounting=dict(inclusive_charged_seconds=cost["inclusive_charged_seconds"],
+                    gpu0_charged_seconds=lanes["0"]["inclusive_charged_seconds"],
+                    gpu1_charged_seconds=lanes["1"]["inclusive_charged_seconds"]),
+                qualification_input=False, qualification_reuse=False, ordinary_tier_credit=False,
+                cross_cohort_pooling=False, default_adoption=False, speed_ranking=False)
+
 
 def _representation_kind(prior):
     """Read the declared law; family names are not representation evidence."""
@@ -820,7 +968,20 @@ def _atlas_unblocking_progress(root):
                 ordinary_tier_credit=False, cross_cohort_pooling=False, default_adoption=False, speed_ranking=False)
 
 
-def _atlas_progress_markdown(progress, root, path):
+def _half_base_score_line(half_base, root, path):
+    def link(relative):
+        return os.path.relpath(root / relative, path.parent)
+    metrics = half_base.get("result", {}).get("final_metrics")
+    endpoint = (f"<br>Final quality {metrics['quality_fraction']:.6f} · modes {metrics['modes']}/5 · "
+                f"mass TV {metrics['mass_tv']:.6f} · paired exact {metrics['reconstruction_exact']}"
+                if metrics else "")
+    return (f"| [half_base LR .00265625 / prior1.5 / D1 · source `{half_base['source']['origin_commit'][:8]}`]"
+            f"({link(half_base['readout'])}) | {half_base['representation']['label']} | "
+            f"**0/26 PASS** · FAIL 1 · NOT_RUN 25 · COMPLETE{endpoint}<br>"
+            f"[accepted 20,001-update goal GIF]({link(half_base['media']['path'])}) |")
+
+
+def _atlas_progress_markdown(progress, root, path, *, half_base=None):
     def link(relative):
         return os.path.relpath(root / relative, path.parent)
     baseline = progress["baseline"]
@@ -845,11 +1006,16 @@ def _atlas_progress_markdown(progress, root, path):
                            for task, pin in sorted(row["media"].items()))
         lines.append(f"| [`{row['family']}` · C6 · `{row['source']['origin_commit'][:8]}`]({link(readout)}) "
                      f"| {row['representation']['label']} | {gates}<br>{media_label}: {media} |")
+    if half_base:
+        lines.append(_half_base_score_line(half_base, root, path))
     lines += ["", "C6 is the fixed LR .0053125 / prior-rate 1.5 configuration with declared host-specific "
               "Recipe fields. Representation labels come from the pinned applied priors, Recipes and "
               "routed table owners; a parameter bank is not a sampled MoG. "
               "[Full source and representation bindings](" + link("reports/forge/technique-inventory.json") + "). "
-              "Original N5 word execution remains BLOCKED. The N11 illustration has no accepted numerical grade.", ""]
+              "Original N5 word execution remains BLOCKED. " +
+              ("The original C6 N11 illustration has no accepted numerical grade. The separate half_base run "
+               "completed all 20,001 updates and 24 reads, with zero passing reads and an accepted numerical FAIL."
+               if half_base else "The N11 illustration has no accepted numerical grade."), ""]
     return lines
 
 
@@ -899,6 +1065,7 @@ def _current_markdown(result, root, path):
                   "protocols and original goal GIFs. These separate results do not fill the ordinary "
                   "qualification cells below.", ""]
     progress = result.get("atlas_unblocking_progress") if ordinary_current else None
+    half_base = result.get("word_half_base_diagnostic") if ordinary_current else None
     if ordinary_current:
         lines += ["One selected configuration per family; full tier denominators stay fixed. "
                   "Representation is read from its declared prior and task-owned hosts.", "",
@@ -970,7 +1137,11 @@ def _current_markdown(result, root, path):
                         "; no current tier credit.", ""]
     lines.append("")
     if progress:
-        lines += _atlas_progress_markdown(progress, root, path)
+        lines += _atlas_progress_markdown(progress, root, path, half_base=half_base)
+    elif half_base:
+        lines += ["## Selected-policy GPU scores", "",
+                  "| Model/configuration | Representation | Measured scores |",
+                  "| --- | --- | --- |", _half_base_score_line(half_base, root, path), ""]
     if ordinary_current:
         lines += ["## Qualification and scope", "",
                   "MoG + particles (per task) denotes separate declared host laws within a suite; "
@@ -1052,15 +1223,26 @@ def _shared_score_intro(root, result):
     suffix = marker + original.split(marker, 1)[1]
     leading = _current_markdown(result, root, path).split("## Qualification and scope\n", 1)[0]
     leading = leading.replace("# Current model/configuration scores", "# Shared ParticleGAN score index", 1)
+    half_base = result.get("word_half_base_diagnostic")
+    if half_base:
+        accounting = half_base["accounting"]
+        account_text = (
+            f"The named campaign's predecessor-inclusive charge is **{accounting['inclusive_charged_seconds']} / 10500 seconds**, "
+            f"reserve zero: GPU0 **{accounting['gpu0_charged_seconds']} / 7500**, "
+            f"GPU1 **{accounting['gpu1_charged_seconds']} / 3000**. "
+            f"The separate half_base attempt charged **{half_base['cost']['paid_seconds']} / 900 seconds**, "
+            "with zero reserve and overrun. Prior charges are included once; the original C6 word INVALID is unchanged.\n\n")
+    else:
+        account_text = ("The named campaign's predecessor-inclusive charge remains **910.2391431590077 / 10500 seconds**, "
+                        "reserve zero: GPU0 **234.82608077581972 / 7500**, GPU1 **675.4130623831879 / 3000**. "
+                        "The half-base contrast has no completed measurement in these tables.\n\n")
     scope = ("## Qualification and accounting\n\n"
              "Each model/configuration keeps its own source, law and full 26-slot denominator. "
              "MoG + particles (per task) is a mixture of separate suite hosts, not a hybrid-model claim. "
              "Named diagnostic passes do not fill ordinary cells or combine into a family score. "
              "INVALID supplies no accepted numerical grade; original N5 word execution remains BLOCKED. "
              "No family default or comparable speed winner is established.\n\n"
-             "The named campaign's predecessor-inclusive charge remains **910.2391431590077 / 10500 seconds**, "
-             "reserve zero: GPU0 **234.82608077581972 / 7500**, GPU1 **675.4130623831879 / 3000**. "
-             "The half-base contrast has no completed measurement in these tables.\n\n"
+             + account_text +
              "The linked original report sections and their index.json below retain their separate snapshots.\n\n")
     return path, leading + scope + suffix
 
@@ -1313,6 +1495,9 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
         atlas_progress = _atlas_unblocking_progress(root)
         if atlas_progress:
             result["atlas_unblocking_progress"] = atlas_progress
+        half_base = _word_half_base_diagnostic(root)
+        if half_base:
+            result["word_half_base_diagnostic"] = half_base
     debug_root = root / "reports/forge/c6-baseline-debug-20261003"
     if debug_root.is_dir():
         debug_names = ("README.md", "BASELINE_SELECTION.md", "BASELINE_SELECTION.json",

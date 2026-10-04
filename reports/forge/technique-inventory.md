@@ -29,8 +29,9 @@ Each row keeps its own configuration, execution source and 26 required slots. Th
 | [`atlas_routed` · C6 · `fb7acc77`](atlas-named-gpu-diagnostics-native-v4b-20261004/README.md) | Particles (shared / slot parameter bank) | **1/26 PASS** · NOT_RUN 25<br>goal GIFs: [unused_token_hold](atlas-named-gpu-diagnostics-native-v4b-20261004/gifs/unused_token_hold_routed_policy_selected_cloud_v1.gif) |
 | [`atlas_multibank` · C6 · `fb7acc77`](atlas-named-gpu-diagnostics-native-v4b-20261004/README.md) | Particles (two routed clouds) | **1/26 PASS** · NOT_RUN 25<br>goal GIFs: [cover_leftover](atlas-named-gpu-diagnostics-native-v4b-20261004/gifs/cover_leftover_multibank_policy_v1.gif) |
 | [`atlas_word_joint_min11` · C6 · `fb7acc77`](atlas-word-retained-context-20261004/README.md) | Particles (N11 joint cloud; free encoder) | **INVALID 1** · NOT_RUN 25 · numerical gate UNAVAILABLE<br>retained INVALID illustration: [five_word_joint_acquisition](atlas-word-retained-context-20261004/word-retained-goal.gif) |
+| [half_base LR .00265625 / prior1.5 / D1 · source `f9f7ed9d`](word-half-base-20261004/README.md) | Particles (N11 joint cloud; free encoder) | **0/26 PASS** · FAIL 1 · NOT_RUN 25 · COMPLETE<br>Final quality 0.546875 · modes 2/5 · mass TV 0.622266 · paired exact 0<br>[accepted 20,001-update goal GIF](word-half-base-20261004/media/goal.gif) |
 
-C6 is the fixed LR .0053125 / prior-rate 1.5 configuration with declared host-specific Recipe fields. Representation labels come from the pinned applied priors, Recipes and routed table owners; a parameter bank is not a sampled MoG. [Full source and representation bindings](technique-inventory.json). Original N5 word execution remains BLOCKED. The N11 illustration has no accepted numerical grade.
+C6 is the fixed LR .0053125 / prior-rate 1.5 configuration with declared host-specific Recipe fields. Representation labels come from the pinned applied priors, Recipes and routed table owners; a parameter bank is not a sampled MoG. [Full source and representation bindings](technique-inventory.json). Original N5 word execution remains BLOCKED. The original C6 N11 illustration has no accepted numerical grade. The separate half_base run completed all 20,001 updates and 24 reads, with zero passing reads and an accepted numerical FAIL.
 
 ## Qualification and scope
 
@@ -183,7 +184,7 @@ python reports/forge/regenerate_technique_inventory.py
 
 For ordinary Forge qualification, use `--source-commit <executed-commit>` to independently regrade hydrated original receipts and update this leaderboard. Reusable candidates use the same complete task ladder. Historical task-only diagnostics remain motivation and reproduction evidence. Source snapshots are provenance, not additional leaderboards.
 
-Publication input digest `4581ce365d54c29a6e8fbe91f6c381a52d0d299177254b6aab0c26ee907b014f`.
+Publication input digest `9f5c3700dad2c6be9e8becd106ab27a549492e9ae7ca5f56b9ec9ef1ec32ed6a`.
 
 The [whole-family repair readout](family-wide-word-repairs/README.md) records the ordinary candidate attempts and bounded global configuration search. Their complete rows remain unranked alternatives below and in the companion JSON; a failed replacement does not make its historical incumbent a qualified standard.
 
