@@ -453,20 +453,25 @@ Checks reconstruction/identity and an acquired adversarial edit during the decla
 
 Forge declarations: [ae_gan_hold](../../configs/forge/tasks/ae_gan_hold.json).
 
-<details>
-<summary>Declared Forge numerical gates and sampling</summary>
+Declared Forge numerical gates and sampling:
 
 [ae_gan_hold](../../configs/forge/tasks/ae_gan_hold.json)
 
-- **kind**: "transfer_sustained"
-- **thresholds**: [["recon_mse", "<=", 0.05], ["hold", "<=", 0.35]]
-- **minimum_stable_checks**: 5
-- **prior**: {"kind": "mog", "learnable": true, "sigma": 0.025, "standardize": false}
-- **sampling_law**: "generated_and_reconstructed_prior_with_scheduled_output_noise"
-- **scoring_weights**: "live"
-- **eval_output_noise**: "public_recipe_schedule"
+| Metric | Required bound |
+| --- | --- |
+| recon_mse | <= 0.05 |
+| hold | <= 0.35 |
 
-</details>
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; optimizer roles = encoder, generator, prior, discriminator; mechanism exercised = True; rng isolation = True.
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | MoGParticlePrior (sigma=0.025) |
+| Sampling law | generated_and_reconstructed_prior_with_scheduled_output_noise |
+| Scoring weights | live |
+| Evaluation output noise | public_recipe_schedule |
 
 Recorded Forge task outcomes (exact saved configuration/source/runtime):
 
@@ -490,19 +495,18 @@ Check saved public trainer state under step_label, horizon, evaluation_cadence, 
 
 Forge declarations: [clockfree_audit](../../configs/forge/tasks/clockfree_audit.json).
 
-<details>
-<summary>Declared Forge numerical gates and sampling</summary>
+Declared Forge numerical gates and sampling:
 
 [clockfree_audit](../../configs/forge/tasks/clockfree_audit.json)
 
-- **kind**: "clockfree_parity"
-- **conditions**: ["step_label", "horizon", "evaluation_cadence", "restart"]
-- **prior**: {"kind": "mog", "learnable": true, "sigma": 0.025, "standardize": false}
-- **sampling_law**: "public_prior_without_output_noise"
-- **scoring_weights**: "live"
-- **eval_output_noise**: "clean"
+Exact state/output parity for: step_label, horizon, evaluation_cadence, restart; bound source audit required.
 
-</details>
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | MoGParticlePrior (sigma=0.025) |
+| Sampling law | public_prior_without_output_noise |
+| Scoring weights | live |
+| Evaluation output noise | clean |
 
 No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
 
@@ -514,20 +518,28 @@ Checks target coverage plus the separate unwanted-remainder/content constraints.
 
 Forge declarations: [cover_leftover](../../configs/forge/tasks/cover_leftover.json).
 
-<details>
-<summary>Declared Forge numerical gates and sampling</summary>
+Declared Forge numerical gates and sampling:
 
 [cover_leftover](../../configs/forge/tasks/cover_leftover.json)
 
-- **kind**: "transfer_sustained"
-- **thresholds**: [["u_kept", ">=", 0.85], ["content_kept", ">=", 0.75], ["leak_ratio", "<=", 0.2], ["pole_rel_err_plus", "<=", 0.2], ["pole_rel_err_minus", "<=", 0.2], ["same_dir", "<=", 0.25]]
-- **minimum_stable_checks**: 5
-- **prior**: {"exception_reason": "This host uses two explicit learned clouds and separately declared host jitter; no implicit MoG kernel may replace that law.", "kind": "particle_cloud", "learnable": true, "sigma": 0.0, "standardize": false}
-- **sampling_law**: "learned_parameter_measurement"
-- **scoring_weights**: "live"
-- **eval_output_noise**: "not_applied_to_measurement"
+| Metric | Required bound |
+| --- | --- |
+| u_kept | >= 0.85 |
+| content_kept | >= 0.75 |
+| leak_ratio | <= 0.2 |
+| pole_rel_err_plus | <= 0.2 |
+| pole_rel_err_minus | <= 0.2 |
+| same_dir | <= 0.25 |
 
-</details>
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | ParticlePrior (sigma=0) |
+| Sampling law | learned_parameter_measurement |
+| Scoring weights | live |
+| Evaluation output noise | not_applied_to_measurement |
 
 No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
 
@@ -545,20 +557,29 @@ Explanation, interpretation and reproduction: [experiment readout](five-word-joi
 
 Forge declarations: [five_word_joint_acquisition](../../configs/forge/tasks/five_word_joint_acquisition.json).
 
-<details>
-<summary>Declared Forge numerical gates and sampling</summary>
+Declared Forge numerical gates and sampling:
 
 [five_word_joint_acquisition](../../configs/forge/tasks/five_word_joint_acquisition.json)
 
-- **kind**: "transfer_sustained"
-- **thresholds**: [["sample_count", ">=", 1024], ["quality_fraction", ">=", 0.95], ["modes", "==", 5], ["mass_tv", "<=", 0.1], ["reconstruction_exact", "==", 1], ["minimum_reconstruction_token_probability", ">=", 0.9]]
-- **minimum_stable_checks**: 5
-- **prior**: {"exception_reason": "Retained finite-vocabulary joint BiGAN question explicitly uses five learned 2D rows, one possible code per word; a MoG-width question needs its own protocol.", "kind": "particle_cloud", "learnable": true, "sigma": 0.0, "standardize": false}
-- **sampling_law**: "generated_and_paired_reconstructed_prior_without_output_noise"
-- **scoring_weights**: "live"
-- **eval_output_noise**: "clean"
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 1024 |
+| quality_fraction | >= 0.95 |
+| modes | == 5 |
+| mass_tv | <= 0.1 |
+| reconstruction_exact | == 1 |
+| minimum_reconstruction_token_probability | >= 0.9 |
 
-</details>
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; optimizer roles = generator, encoder, prior, discriminator; mechanism exercised = True; rng isolation = True; exact optimizer updates = True.
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | ParticlePrior (sigma=0) |
+| Sampling law | generated_and_paired_reconstructed_prior_without_output_noise |
+| Scoring weights | live |
+| Evaluation output noise | clean |
 
 Recorded Forge task outcomes (exact saved configuration/source/runtime):
 
@@ -582,20 +603,28 @@ Explanation, interpretation and reproduction: [experiment readout](../toy_audit/
 
 Forge declarations: [gaussian1d_acquisition](../../configs/forge/tasks/gaussian1d_acquisition.json).
 
-<details>
-<summary>Declared Forge numerical gates and sampling</summary>
+Declared Forge numerical gates and sampling:
 
 [gaussian1d_acquisition](../../configs/forge/tasks/gaussian1d_acquisition.json)
 
-- **kind**: "transfer_sustained"
-- **thresholds**: [["sample_count", ">=", 4096], ["finite_fraction", "==", 1.0], ["mean_error_sigma", "<=", 0.2], ["std_ratio", ">=", 0.8], ["std_ratio", "<=", 1.2], ["cdf_ks", "<=", 0.05]]
-- **minimum_stable_checks**: 5
-- **prior**: {"kind": "mog", "learnable": true, "sigma": 0.025, "standardize": false}
-- **sampling_law**: "public_prior_without_output_noise"
-- **scoring_weights**: "live"
-- **eval_output_noise**: "clean"
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 4096 |
+| finite_fraction | == 1 |
+| mean_error_sigma | <= 0.2 |
+| std_ratio | >= 0.8 |
+| std_ratio | <= 1.2 |
+| cdf_ks | <= 0.05 |
 
-</details>
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | MoGParticlePrior (sigma=0.025) |
+| Sampling law | public_prior_without_output_noise |
+| Scoring weights | live |
+| Evaluation output noise | clean |
 
 No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
 
@@ -611,32 +640,67 @@ Recover all 100 Gaussian components, balanced mass, centers and within-mode cova
 
 Forge declarations: [grid100](../../configs/forge/tasks/grid100.json), [grid100_14k](../../configs/forge/tasks/grid100_14k.json), [grid100_affine_paired_laws_v1](../../configs/forge/tasks/grid100_affine_paired_laws_v1.json), [grid100_affine_square_named_v1](../../configs/forge/tasks/grid100_affine_square_named_v1.json), [grid100_affine_square_named_v1_14k](../../configs/forge/tasks/grid100_affine_square_named_v1_14k.json), [grid100_release07_cloud_named_v1](../../configs/forge/tasks/grid100_release07_cloud_named_v1.json).
 
-<details>
-<summary>Declared Forge numerical gates and sampling</summary>
+Declared Forge numerical gates and sampling:
 
 [grid100](../../configs/forge/tasks/grid100.json), [grid100_14k](../../configs/forge/tasks/grid100_14k.json), [grid100_affine_paired_laws_v1](../../configs/forge/tasks/grid100_affine_paired_laws_v1.json), [grid100_affine_square_named_v1](../../configs/forge/tasks/grid100_affine_square_named_v1.json), [grid100_affine_square_named_v1_14k](../../configs/forge/tasks/grid100_affine_square_named_v1_14k.json)
 
-- **kind**: "native_accuracy"
-- **coverage_thresholds**: {"all_finite": true, "max_cov_eig_ratio": 1.7, "max_mass_tv": 0.1, "max_mode_mass": 0.02, "max_radial_median_ratio": 1.4, "min_cov_eig_ratio": 0.4, "min_hq_mode_mass": 0.005, "min_modes": 100, "min_precision": 0.97, "min_radial_median_ratio": 0.65, "min_samples": 20000}
-- **accuracy_limits**: {"abs_cov_trace_bias": 0.1, "center_rms_sigma": 0.2, "mass_tv": 0.06, "radial_ks": 0.04}
-- **minimum_stable_checks**: 5
-- **prior**: {"kind": "mog", "learnable": true, "sigma": 0.025, "standardize": false}
-- **sampling_law**: "public_prior_without_output_noise"
-- **scoring_weights**: "live"
-- **eval_output_noise**: "clean"
+| Metric | Required bound |
+| --- | --- |
+| coverage.min_samples | >= 20000 |
+| coverage.min_modes | >= 100 |
+| coverage.min_hq_mode_mass | >= 0.005 |
+| coverage.min_precision | >= 0.97 |
+| coverage.max_mass_tv | <= 0.1 |
+| coverage.max_mode_mass | <= 0.02 |
+| coverage.min_cov_eig_ratio | >= 0.4 |
+| coverage.max_cov_eig_ratio | <= 1.7 |
+| coverage.min_radial_median_ratio | >= 0.65 |
+| coverage.max_radial_median_ratio | <= 1.4 |
+| coverage.all_finite | == True |
+| accuracy.mass_tv | <= 0.06 |
+| accuracy.center_rms_sigma | <= 0.2 |
+| accuracy.abs_cov_trace_bias | <= 0.1 |
+| accuracy.radial_ks | <= 0.04 |
+
+At least 5 consecutive passing terminal observations.
+Both sustained coverage and independent holdout accuracy must pass.
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | MoGParticlePrior (sigma=0.025) |
+| Sampling law | public_prior_without_output_noise |
+| Scoring weights | live |
+| Evaluation output noise | clean |
 
 [grid100_release07_cloud_named_v1](../../configs/forge/tasks/grid100_release07_cloud_named_v1.json)
 
-- **kind**: "native_accuracy"
-- **coverage_thresholds**: {"all_finite": true, "max_cov_eig_ratio": 1.7, "max_mass_tv": 0.1, "max_mode_mass": 0.02, "max_radial_median_ratio": 1.4, "min_cov_eig_ratio": 0.4, "min_hq_mode_mass": 0.005, "min_modes": 100, "min_precision": 0.97, "min_radial_median_ratio": 0.65, "min_samples": 20000}
-- **accuracy_limits**: {"abs_cov_trace_bias": 0.1, "center_rms_sigma": 0.2, "mass_tv": 0.06, "radial_ks": 0.04}
-- **minimum_stable_checks**: 5
-- **prior**: {"exception_reason": "Faithful v0.7.0 GAN v3 public ParticlePrior law; sigma_rel and standardize are inert on its particle branch. Separate diagnostic, no MoG qualification.", "kind": "particle_cloud", "learnable": true, "sigma": 0, "standardize": false}
-- **sampling_law**: "public_prior_without_output_noise"
-- **scoring_weights**: "live"
-- **eval_output_noise**: "clean"
+| Metric | Required bound |
+| --- | --- |
+| coverage.min_samples | >= 20000 |
+| coverage.min_modes | >= 100 |
+| coverage.min_hq_mode_mass | >= 0.005 |
+| coverage.min_precision | >= 0.97 |
+| coverage.max_mass_tv | <= 0.1 |
+| coverage.max_mode_mass | <= 0.02 |
+| coverage.min_cov_eig_ratio | >= 0.4 |
+| coverage.max_cov_eig_ratio | <= 1.7 |
+| coverage.min_radial_median_ratio | >= 0.65 |
+| coverage.max_radial_median_ratio | <= 1.4 |
+| coverage.all_finite | == True |
+| accuracy.mass_tv | <= 0.06 |
+| accuracy.center_rms_sigma | <= 0.2 |
+| accuracy.abs_cov_trace_bias | <= 0.1 |
+| accuracy.radial_ks | <= 0.04 |
 
-</details>
+At least 5 consecutive passing terminal observations.
+Both sustained coverage and independent holdout accuracy must pass.
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | ParticlePrior (sigma=0) |
+| Sampling law | public_prior_without_output_noise |
+| Scoring weights | live |
+| Evaluation output noise | clean |
 
 No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
 
@@ -652,20 +716,24 @@ Healthy location transfer: four horizontal/vertical bar positions test spatial c
 
 Forge declarations: [img_bars4](../../configs/forge/tasks/img_bars4.json), [img_bars4_residual16](../../configs/forge/tasks/img_bars4_residual16.json).
 
-<details>
-<summary>Declared Forge numerical gates and sampling</summary>
+Declared Forge numerical gates and sampling:
 
 [img_bars4](../../configs/forge/tasks/img_bars4.json), [img_bars4_residual16](../../configs/forge/tasks/img_bars4_residual16.json)
 
-- **kind**: "transfer_sustained"
-- **thresholds**: [["modes", ">=", 4], ["hq", ">=", 0.9]]
-- **minimum_stable_checks**: 5
-- **prior**: {"exception_reason": "Frozen image evaluation enumerates finite learned centers; stochastic MoG sampling requires separately calibrated measurement.", "kind": "particle_cloud", "learnable": true, "sigma": 0.0, "standardize": false}
-- **sampling_law**: "enumerated_prior_without_output_noise"
-- **scoring_weights**: "live"
-- **eval_output_noise**: "clean"
+| Metric | Required bound |
+| --- | --- |
+| modes | >= 4 |
+| hq | >= 0.9 |
 
-</details>
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | ParticlePrior (sigma=0) |
+| Sampling law | enumerated_prior_without_output_noise |
+| Scoring weights | live |
+| Evaluation output noise | clean |
 
 No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
 
@@ -682,20 +750,24 @@ Healthy location transfer: four small corner patches test localized quality and 
 
 Forge declarations: [img_blobs4](../../configs/forge/tasks/img_blobs4.json), [img_blobs4_residual16](../../configs/forge/tasks/img_blobs4_residual16.json).
 
-<details>
-<summary>Declared Forge numerical gates and sampling</summary>
+Declared Forge numerical gates and sampling:
 
 [img_blobs4](../../configs/forge/tasks/img_blobs4.json), [img_blobs4_residual16](../../configs/forge/tasks/img_blobs4_residual16.json)
 
-- **kind**: "transfer_sustained"
-- **thresholds**: [["modes", ">=", 4], ["hq", ">=", 0.9]]
-- **minimum_stable_checks**: 5
-- **prior**: {"exception_reason": "Frozen image evaluation enumerates finite learned centers; stochastic MoG sampling requires separately calibrated measurement.", "kind": "particle_cloud", "learnable": true, "sigma": 0.0, "standardize": false}
-- **sampling_law**: "enumerated_prior_without_output_noise"
-- **scoring_weights**: "live"
-- **eval_output_noise**: "clean"
+| Metric | Required bound |
+| --- | --- |
+| modes | >= 4 |
+| hq | >= 0.9 |
 
-</details>
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | ParticlePrior (sigma=0) |
+| Sampling law | enumerated_prior_without_output_noise |
+| Scoring weights | live |
+| Evaluation output noise | clean |
 
 No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
 
@@ -712,20 +784,24 @@ Healthy photometric transfer: two patch intensities require intensity fidelity a
 
 Forge declarations: [img_intensity2](../../configs/forge/tasks/img_intensity2.json), [img_intensity2_residual16](../../configs/forge/tasks/img_intensity2_residual16.json).
 
-<details>
-<summary>Declared Forge numerical gates and sampling</summary>
+Declared Forge numerical gates and sampling:
 
 [img_intensity2](../../configs/forge/tasks/img_intensity2.json), [img_intensity2_residual16](../../configs/forge/tasks/img_intensity2_residual16.json)
 
-- **kind**: "transfer_sustained"
-- **thresholds**: [["modes", ">=", 2], ["hq", ">=", 0.9]]
-- **minimum_stable_checks**: 5
-- **prior**: {"exception_reason": "Frozen image evaluation enumerates finite learned centers; stochastic MoG sampling requires separately calibrated measurement.", "kind": "particle_cloud", "learnable": true, "sigma": 0.0, "standardize": false}
-- **sampling_law**: "enumerated_prior_without_output_noise"
-- **scoring_weights**: "live"
-- **eval_output_noise**: "clean"
+| Metric | Required bound |
+| --- | --- |
+| modes | >= 2 |
+| hq | >= 0.9 |
 
-</details>
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | ParticlePrior (sigma=0) |
+| Sampling law | enumerated_prior_without_output_noise |
+| Scoring weights | live |
+| Evaluation output noise | clean |
 
 No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
 
@@ -742,20 +818,24 @@ Healthy orientation transfer: two distinct stripe orientations with an adequatel
 
 Forge declarations: [img_stripes2](../../configs/forge/tasks/img_stripes2.json), [img_stripes2_residual16](../../configs/forge/tasks/img_stripes2_residual16.json).
 
-<details>
-<summary>Declared Forge numerical gates and sampling</summary>
+Declared Forge numerical gates and sampling:
 
 [img_stripes2](../../configs/forge/tasks/img_stripes2.json), [img_stripes2_residual16](../../configs/forge/tasks/img_stripes2_residual16.json)
 
-- **kind**: "transfer_sustained"
-- **thresholds**: [["modes", ">=", 2], ["hq", ">=", 0.9]]
-- **minimum_stable_checks**: 5
-- **prior**: {"exception_reason": "Frozen image evaluation enumerates finite learned centers; stochastic MoG sampling requires separately calibrated measurement.", "kind": "particle_cloud", "learnable": true, "sigma": 0.0, "standardize": false}
-- **sampling_law**: "enumerated_prior_without_output_noise"
-- **scoring_weights**: "live"
-- **eval_output_noise**: "clean"
+| Metric | Required bound |
+| --- | --- |
+| modes | >= 2 |
+| hq | >= 0.9 |
 
-</details>
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | ParticlePrior (sigma=0) |
+| Sampling law | enumerated_prior_without_output_noise |
+| Scoring weights | live |
+| Evaluation output noise | clean |
 
 No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
 
@@ -772,20 +852,30 @@ Checks identity preservation and target edit magnitude at intermediate control s
 
 Forge declarations: [mid_scale_identity](../../configs/forge/tasks/mid_scale_identity.json).
 
-<details>
-<summary>Declared Forge numerical gates and sampling</summary>
+Declared Forge numerical gates and sampling:
 
 [mid_scale_identity](../../configs/forge/tasks/mid_scale_identity.json)
 
-- **kind**: "transfer_sustained"
-- **thresholds**: [["concept_cos_plus", ">=", 0.85], ["concept_cos_minus", ">=", 0.85], ["concept_mag_plus", ">=", 0.75], ["concept_mag_plus", "<=", 1.25], ["concept_mag_minus", ">=", 0.75], ["concept_mag_minus", "<=", 1.25], ["identity_at_0", ">=", 0.85], ["identity_at_mid", ">=", 0.85]]
-- **minimum_stable_checks**: 5
-- **prior**: {"exception_reason": "Deterministic scale-conditioned residual controls are parameter clouds, with no sampled latent prior.", "kind": "particle_cloud", "learnable": true, "sigma": 0.0, "standardize": false}
-- **sampling_law**: "learned_parameter_measurement"
-- **scoring_weights**: "live"
-- **eval_output_noise**: "not_applied_to_measurement"
+| Metric | Required bound |
+| --- | --- |
+| concept_cos_plus | >= 0.85 |
+| concept_cos_minus | >= 0.85 |
+| concept_mag_plus | >= 0.75 |
+| concept_mag_plus | <= 1.25 |
+| concept_mag_minus | >= 0.75 |
+| concept_mag_minus | <= 1.25 |
+| identity_at_0 | >= 0.85 |
+| identity_at_mid | >= 0.85 |
 
-</details>
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | ParticlePrior (sigma=0) |
+| Sampling law | learned_parameter_measurement |
+| Scoring weights | live |
+| Evaluation output noise | not_applied_to_measurement |
 
 No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
 
@@ -801,57 +891,74 @@ Checks all eight ring modes and HQ through the sampled terminal hold; not within
 
 Forge declarations: [mode_hold](../../configs/forge/tasks/mode_hold.json), [ring_extension](../../configs/forge/tasks/ring_extension.json), [ring_hold](../../configs/forge/tasks/ring_hold.json), [target_shift_recovery](../../configs/forge/tasks/target_shift_recovery.json).
 
-<details>
-<summary>Declared Forge numerical gates and sampling</summary>
+Declared Forge numerical gates and sampling:
 
 [mode_hold](../../configs/forge/tasks/mode_hold.json)
 
-- **kind**: "transfer_sustained"
-- **thresholds**: [["modes", ">=", 8], ["hq", ">=", 0.9]]
-- **minimum_stable_checks**: 5
-- **prior**: {"kind": "mog", "learnable": true, "sigma": 0.025, "standardize": false}
-- **sampling_law**: "public_prior_without_output_noise"
-- **scoring_weights**: "live"
-- **eval_output_noise**: "clean"
+| Metric | Required bound |
+| --- | --- |
+| modes | >= 8 |
+| hq | >= 0.9 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | MoGParticlePrior (sigma=0.025) |
+| Sampling law | public_prior_without_output_noise |
+| Scoring weights | live |
+| Evaluation output noise | clean |
 
 [ring_extension](../../configs/forge/tasks/ring_extension.json)
 
-- **kind**: "ring_extension"
-- **thresholds**: [["modes", "==", 8], ["hq", ">=", 0.9], ["hq", "<=", 1.0]]
-- **confirmation_checks**: 200
-- **hold_budget**: 1200
-- **extension_steps**: 300
-- **prior**: {"kind": "mog", "learnable": true, "sigma": 0.025, "standardize": false}
-- **sampling_law**: "public_prior_without_output_noise"
-- **scoring_weights**: "live"
-- **eval_output_noise**: "clean"
+| Metric | Required bound |
+| --- | --- |
+| modes | == 8 |
+| hq | >= 0.9 |
+| hq | <= 1 |
+
+Confirmation checks: 200.
+Hold updates: 1200.
+Extension updates: 300.
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | MoGParticlePrior (sigma=0.025) |
+| Sampling law | public_prior_without_output_noise |
+| Scoring weights | live |
+| Evaluation output noise | clean |
 
 [ring_hold](../../configs/forge/tasks/ring_hold.json)
 
-- **kind**: "ring_hold"
-- **thresholds**: [["modes", "==", 8], ["hq", ">=", 0.9], ["hq", "<=", 1.0]]
-- **confirmation_checks**: 200
-- **hold_budget**: 1200
-- **extension_steps**: 300
-- **prior**: {"kind": "mog", "learnable": true, "sigma": 0.025, "standardize": false}
-- **sampling_law**: "public_prior_without_output_noise"
-- **scoring_weights**: "live"
-- **eval_output_noise**: "clean"
+| Metric | Required bound |
+| --- | --- |
+| modes | == 8 |
+| hq | >= 0.9 |
+| hq | <= 1 |
+
+Confirmation checks: 200.
+Hold updates: 1200.
+Extension updates: 300.
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | MoGParticlePrior (sigma=0.025) |
+| Sampling law | public_prior_without_output_noise |
+| Scoring weights | live |
+| Evaluation output noise | clean |
 
 [target_shift_recovery](../../configs/forge/tasks/target_shift_recovery.json)
 
-- **kind**: "paired_adaptation"
-- **recovery_deadline**: 400
-- **stationary_checks**: 5
-- **deadline_checks**: 81
-- **minimum_frozen_passing**: 0
-- **requires_pair_artifacts**: true
-- **prior**: {"kind": "mog", "learnable": true, "sigma": 0.025, "standardize": false}
-- **sampling_law**: "public_prior_without_output_noise"
-- **scoring_weights**: "live"
-- **eval_output_noise**: "clean"
+Recovery deadline in updates: 400.
+Active quality must hold before the shift and throughout the post-deadline window; the matched frozen control must have zero passing post-deadline checks.
 
-</details>
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | MoGParticlePrior (sigma=0.025) |
+| Sampling law | public_prior_without_output_noise |
+| Scoring weights | live |
+| Evaluation output noise | clean |
 
 No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
 
@@ -870,20 +977,25 @@ Checks whether the intended residual moves toward the correct paired target.
 
 Forge declarations: [residual_student](../../configs/forge/tasks/residual_student.json).
 
-<details>
-<summary>Declared Forge numerical gates and sampling</summary>
+Declared Forge numerical gates and sampling:
 
 [residual_student](../../configs/forge/tasks/residual_student.json)
 
-- **kind**: "transfer_sustained"
-- **thresholds**: [["identity_mse", "<=", 0.02], ["success_rate", ">=", 1.0], ["wrong_pad_rate", "<=", 0.0]]
-- **minimum_stable_checks**: 5
-- **prior**: {"exception_reason": "The conditional residual objective directly enumerates prior.z; stochastic latent sampling needs a separately calibrated task.", "kind": "particle_cloud", "learnable": true, "sigma": 0.0, "standardize": false}
-- **sampling_law**: "conditional_prior_centers_with_scheduled_output_noise"
-- **scoring_weights**: "live"
-- **eval_output_noise**: "public_recipe_schedule"
+| Metric | Required bound |
+| --- | --- |
+| identity_mse | <= 0.02 |
+| success_rate | >= 1 |
+| wrong_pad_rate | <= 0 |
 
-</details>
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | ParticlePrior (sigma=0) |
+| Sampling law | conditional_prior_centers_with_scheduled_output_noise |
+| Scoring weights | live |
+| Evaluation output noise | public_recipe_schedule |
 
 No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
 
@@ -899,20 +1011,28 @@ Acquire all 16 equally weighted two-dimensional Gaussian clusters from scratch: 
 
 Forge declarations: [ring16_acquisition](../../configs/forge/tasks/ring16_acquisition.json).
 
-<details>
-<summary>Declared Forge numerical gates and sampling</summary>
+Declared Forge numerical gates and sampling:
 
 [ring16_acquisition](../../configs/forge/tasks/ring16_acquisition.json)
 
-- **kind**: "transfer_sustained"
-- **thresholds**: [["sample_count", ">=", 4096], ["modes", ">=", 16], ["mass_tv", "<=", 0.15], ["hq", ">=", 0.85], ["component_covariance_error", "<=", 0.85], ["component_min_eigen_ratio", ">=", 0.15]]
-- **minimum_stable_checks**: 5
-- **prior**: {"kind": "mog", "learnable": true, "sigma": 0.025, "standardize": false}
-- **sampling_law**: "public_prior_without_output_noise"
-- **scoring_weights**: "live"
-- **eval_output_noise**: "clean"
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 4096 |
+| modes | >= 16 |
+| mass_tv | <= 0.15 |
+| hq | >= 0.85 |
+| component_covariance_error | <= 0.85 |
+| component_min_eigen_ratio | >= 0.15 |
 
-</details>
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | MoGParticlePrior (sigma=0.025) |
+| Sampling law | public_prior_without_output_noise |
+| Scoring weights | live |
+| Evaluation output noise | clean |
 
 Recorded Forge task outcomes (exact saved configuration/source/runtime):
 
@@ -936,21 +1056,37 @@ Recover all 100 Gaussian components, balanced mass, centers and within-mode cova
 
 Forge declarations: [rotated100](../../configs/forge/tasks/rotated100.json), [rotated100_14k](../../configs/forge/tasks/rotated100_14k.json), [rotated100_affine_square_named_v1](../../configs/forge/tasks/rotated100_affine_square_named_v1.json), [rotated100_affine_square_named_v1_14k](../../configs/forge/tasks/rotated100_affine_square_named_v1_14k.json).
 
-<details>
-<summary>Declared Forge numerical gates and sampling</summary>
+Declared Forge numerical gates and sampling:
 
 [rotated100](../../configs/forge/tasks/rotated100.json), [rotated100_14k](../../configs/forge/tasks/rotated100_14k.json), [rotated100_affine_square_named_v1](../../configs/forge/tasks/rotated100_affine_square_named_v1.json), [rotated100_affine_square_named_v1_14k](../../configs/forge/tasks/rotated100_affine_square_named_v1_14k.json)
 
-- **kind**: "native_accuracy"
-- **coverage_thresholds**: {"all_finite": true, "max_cov_eig_ratio": 1.7, "max_mass_tv": 0.1, "max_mode_mass": 0.02, "max_radial_median_ratio": 1.4, "min_cov_eig_ratio": 0.4, "min_hq_mode_mass": 0.005, "min_modes": 100, "min_precision": 0.97, "min_radial_median_ratio": 0.65, "min_samples": 20000}
-- **accuracy_limits**: {"abs_cov_trace_bias": 0.1, "center_rms_sigma": 0.2, "mass_tv": 0.06, "radial_ks": 0.04}
-- **minimum_stable_checks**: 5
-- **prior**: {"kind": "mog", "learnable": true, "sigma": 0.025, "standardize": false}
-- **sampling_law**: "public_prior_without_output_noise"
-- **scoring_weights**: "live"
-- **eval_output_noise**: "clean"
+| Metric | Required bound |
+| --- | --- |
+| coverage.min_samples | >= 20000 |
+| coverage.min_modes | >= 100 |
+| coverage.min_hq_mode_mass | >= 0.005 |
+| coverage.min_precision | >= 0.97 |
+| coverage.max_mass_tv | <= 0.1 |
+| coverage.max_mode_mass | <= 0.02 |
+| coverage.min_cov_eig_ratio | >= 0.4 |
+| coverage.max_cov_eig_ratio | <= 1.7 |
+| coverage.min_radial_median_ratio | >= 0.65 |
+| coverage.max_radial_median_ratio | <= 1.4 |
+| coverage.all_finite | == True |
+| accuracy.mass_tv | <= 0.06 |
+| accuracy.center_rms_sigma | <= 0.2 |
+| accuracy.abs_cov_trace_bias | <= 0.1 |
+| accuracy.radial_ks | <= 0.04 |
 
-</details>
+At least 5 consecutive passing terminal observations.
+Both sustained coverage and independent holdout accuracy must pass.
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | MoGParticlePrior (sigma=0.025) |
+| Sampling law | public_prior_without_output_noise |
+| Scoring weights | live |
+| Evaluation output noise | clean |
 
 No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
 
@@ -966,21 +1102,37 @@ Recover all 100 Gaussian components, balanced mass, centers and within-mode cova
 
 Forge declarations: [staggered100](../../configs/forge/tasks/staggered100.json), [staggered100_14k](../../configs/forge/tasks/staggered100_14k.json), [staggered100_affine_square_named_v1](../../configs/forge/tasks/staggered100_affine_square_named_v1.json), [staggered100_affine_square_named_v1_14k](../../configs/forge/tasks/staggered100_affine_square_named_v1_14k.json).
 
-<details>
-<summary>Declared Forge numerical gates and sampling</summary>
+Declared Forge numerical gates and sampling:
 
 [staggered100](../../configs/forge/tasks/staggered100.json), [staggered100_14k](../../configs/forge/tasks/staggered100_14k.json), [staggered100_affine_square_named_v1](../../configs/forge/tasks/staggered100_affine_square_named_v1.json), [staggered100_affine_square_named_v1_14k](../../configs/forge/tasks/staggered100_affine_square_named_v1_14k.json)
 
-- **kind**: "native_accuracy"
-- **coverage_thresholds**: {"all_finite": true, "max_cov_eig_ratio": 1.7, "max_mass_tv": 0.1, "max_mode_mass": 0.02, "max_radial_median_ratio": 1.4, "min_cov_eig_ratio": 0.4, "min_hq_mode_mass": 0.005, "min_modes": 100, "min_precision": 0.97, "min_radial_median_ratio": 0.65, "min_samples": 20000}
-- **accuracy_limits**: {"abs_cov_trace_bias": 0.1, "center_rms_sigma": 0.2, "mass_tv": 0.06, "radial_ks": 0.04}
-- **minimum_stable_checks**: 5
-- **prior**: {"kind": "mog", "learnable": true, "sigma": 0.025, "standardize": false}
-- **sampling_law**: "public_prior_without_output_noise"
-- **scoring_weights**: "live"
-- **eval_output_noise**: "clean"
+| Metric | Required bound |
+| --- | --- |
+| coverage.min_samples | >= 20000 |
+| coverage.min_modes | >= 100 |
+| coverage.min_hq_mode_mass | >= 0.005 |
+| coverage.min_precision | >= 0.97 |
+| coverage.max_mass_tv | <= 0.1 |
+| coverage.max_mode_mass | <= 0.02 |
+| coverage.min_cov_eig_ratio | >= 0.4 |
+| coverage.max_cov_eig_ratio | <= 1.7 |
+| coverage.min_radial_median_ratio | >= 0.65 |
+| coverage.max_radial_median_ratio | <= 1.4 |
+| coverage.all_finite | == True |
+| accuracy.mass_tv | <= 0.06 |
+| accuracy.center_rms_sigma | <= 0.2 |
+| accuracy.abs_cov_trace_bias | <= 0.1 |
+| accuracy.radial_ks | <= 0.04 |
 
-</details>
+At least 5 consecutive passing terminal observations.
+Both sustained coverage and independent holdout accuracy must pass.
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | MoGParticlePrior (sigma=0.025) |
+| Sampling law | public_prior_without_output_noise |
+| Scoring weights | live |
+| Evaluation output noise | clean |
 
 No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
 
@@ -996,20 +1148,23 @@ Checks the extracted trajectory edit while preserving identity in finite paired 
 
 Forge declarations: [trajectory](../../configs/forge/tasks/trajectory.json).
 
-<details>
-<summary>Declared Forge numerical gates and sampling</summary>
+Declared Forge numerical gates and sampling:
 
 [trajectory](../../configs/forge/tasks/trajectory.json)
 
-- **kind**: "transfer_sustained"
-- **thresholds**: [["identity_mse", "<=", 0.02]]
-- **minimum_stable_checks**: 5
-- **prior**: {"exception_reason": "The conditional host enumerates prior.z in its identity objective; a stochastic latent read changes the frozen host law.", "kind": "particle_cloud", "learnable": true, "sigma": 0.0, "standardize": false}
-- **sampling_law**: "conditional_prior_centers_with_scheduled_output_noise"
-- **scoring_weights**: "live"
-- **eval_output_noise**: "public_recipe_schedule"
+| Metric | Required bound |
+| --- | --- |
+| identity_mse | <= 0.02 |
 
-</details>
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | ParticlePrior (sigma=0) |
+| Sampling law | conditional_prior_centers_with_scheduled_output_noise |
+| Scoring weights | live |
+| Evaluation output noise | public_recipe_schedule |
 
 No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
 
@@ -1027,20 +1182,25 @@ Explanation, interpretation and reproduction: [experiment readout](k3p-two-pole-
 
 Forge declarations: [two_pole](../../configs/forge/tasks/two_pole.json), [two_pole_800_schedule800_diagnostic_v1](../../configs/forge/tasks/two_pole_800_schedule800_diagnostic_v1.json), [two_pole_800_schedule80_diagnostic_v1](../../configs/forge/tasks/two_pole_800_schedule80_diagnostic_v1.json).
 
-<details>
-<summary>Declared Forge numerical gates and sampling</summary>
+Declared Forge numerical gates and sampling:
 
 [two_pole](../../configs/forge/tasks/two_pole.json), [two_pole_800_schedule800_diagnostic_v1](../../configs/forge/tasks/two_pole_800_schedule800_diagnostic_v1.json), [two_pole_800_schedule80_diagnostic_v1](../../configs/forge/tasks/two_pole_800_schedule80_diagnostic_v1.json)
 
-- **kind**: "transfer_sustained"
-- **thresholds**: [["mean_abs", ">=", 0.3], ["grad_med", "<=", 1.0]]
-- **minimum_stable_checks**: 5
-- **prior**: {"exception_reason": "This host optimizes explicit sample-particle coordinates directly, without a separate generator or latent sampling kernel.", "kind": "particle_cloud", "learnable": true, "sigma": 0.0, "standardize": false}
-- **sampling_law**: "learned_particles_and_critic_gradient"
-- **scoring_weights**: "live"
-- **eval_output_noise**: "not_applied_to_measurement"
+| Metric | Required bound |
+| --- | --- |
+| mean_abs | >= 0.3 |
+| grad_med | <= 1 |
 
-</details>
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; optimizer roles = prior, discriminator; mechanism exercised = True; rng isolation = True.
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | ParticlePrior (sigma=0) |
+| Sampling law | learned_particles_and_critic_gradient |
+| Scoring weights | live |
+| Evaluation output noise | not_applied_to_measurement |
 
 Recorded Forge task outcomes (exact saved configuration/source/runtime):
 
@@ -1068,20 +1228,25 @@ Checks an intended edit with preservation of unrelated content.
 
 Forge declarations: [unipolar](../../configs/forge/tasks/unipolar.json).
 
-<details>
-<summary>Declared Forge numerical gates and sampling</summary>
+Declared Forge numerical gates and sampling:
 
 [unipolar](../../configs/forge/tasks/unipolar.json)
 
-- **kind**: "transfer_sustained"
-- **thresholds**: [["cover", ">=", 0.85], ["off_caption", "<=", 0.05], ["neu_hold", ">=", 0.85]]
-- **minimum_stable_checks**: 5
-- **prior**: {"exception_reason": "Deterministic student residual controls are parameter clouds, not draws from a sampled latent prior.", "kind": "particle_cloud", "learnable": true, "sigma": 0.0, "standardize": false}
-- **sampling_law**: "learned_parameter_measurement"
-- **scoring_weights**: "live"
-- **eval_output_noise**: "not_applied_to_measurement"
+| Metric | Required bound |
+| --- | --- |
+| cover | >= 0.85 |
+| off_caption | <= 0.05 |
+| neu_hold | >= 0.85 |
 
-</details>
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | ParticlePrior (sigma=0) |
+| Sampling law | learned_parameter_measurement |
+| Scoring weights | live |
+| Evaluation output noise | not_applied_to_measurement |
 
 No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
 
@@ -1097,20 +1262,25 @@ Checks that active controls move and unused controls remain unchanged.
 
 Forge declarations: [unused_token_hold](../../configs/forge/tasks/unused_token_hold.json).
 
-<details>
-<summary>Declared Forge numerical gates and sampling</summary>
+Declared Forge numerical gates and sampling:
 
 [unused_token_hold](../../configs/forge/tasks/unused_token_hold.json)
 
-- **kind**: "transfer_sustained"
-- **thresholds**: [["unused_hold", ">=", 0.85], ["concept_move", ">=", 0.85]]
-- **minimum_stable_checks**: 5
-- **prior**: {"exception_reason": "Deterministic embedding controls are parameter clouds; there is no sampled latent prior or separate prior optimizer.", "kind": "particle_cloud", "learnable": true, "sigma": 0.0, "standardize": false}
-- **sampling_law**: "learned_parameter_measurement"
-- **scoring_weights**: "live"
-- **eval_output_noise**: "not_applied_to_measurement"
+| Metric | Required bound |
+| --- | --- |
+| unused_hold | >= 0.85 |
+| concept_move | >= 0.85 |
 
-</details>
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; optimizer roles = generator, discriminator; mechanism exercised = True; rng isolation = True.
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | ParticlePrior (sigma=0) |
+| Sampling law | learned_parameter_measurement |
+| Scoring weights | live |
+| Evaluation output noise | not_applied_to_measurement |
 
 Recorded Forge task outcomes (exact saved configuration/source/runtime):
 
@@ -1134,20 +1304,27 @@ Checks covariance shape: a narrow axis cannot be rescued by a wide one.
 
 Forge declarations: [vector_anisotropic](../../configs/forge/tasks/vector_anisotropic.json), [vector_anisotropic_published](../../configs/forge/tasks/vector_anisotropic_published.json).
 
-<details>
-<summary>Declared Forge numerical gates and sampling</summary>
+Declared Forge numerical gates and sampling:
 
 [vector_anisotropic](../../configs/forge/tasks/vector_anisotropic.json), [vector_anisotropic_published](../../configs/forge/tasks/vector_anisotropic_published.json)
 
-- **kind**: "transfer_sustained"
-- **thresholds**: [["sw1_normalized", "<=", 0.18], ["mass_tv", "<=", 0.15], ["hq", ">=", 0.85], ["component_covariance_error", "<=", 0.85], ["component_min_eigen_ratio", ">=", 0.15]]
-- **minimum_stable_checks**: 5
-- **prior**: {"kind": "mog", "learnable": true, "sigma": 0.025, "standardize": false}
-- **sampling_law**: "public_prior_without_output_noise"
-- **scoring_weights**: "live"
-- **eval_output_noise**: "clean"
+| Metric | Required bound |
+| --- | --- |
+| sw1_normalized | <= 0.18 |
+| mass_tv | <= 0.15 |
+| hq | >= 0.85 |
+| component_covariance_error | <= 0.85 |
+| component_min_eigen_ratio | >= 0.15 |
 
-</details>
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | MoGParticlePrior (sigma=0.025) |
+| Sampling law | public_prior_without_output_noise |
+| Scoring weights | live |
+| Evaluation output noise | clean |
 
 No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
 
@@ -1163,20 +1340,25 @@ Scores the observable distribution when latent components are not identifiable.
 
 Forge declarations: [vector_overlap](../../configs/forge/tasks/vector_overlap.json), [vector_overlap_published](../../configs/forge/tasks/vector_overlap_published.json).
 
-<details>
-<summary>Declared Forge numerical gates and sampling</summary>
+Declared Forge numerical gates and sampling:
 
 [vector_overlap](../../configs/forge/tasks/vector_overlap.json), [vector_overlap_published](../../configs/forge/tasks/vector_overlap_published.json)
 
-- **kind**: "transfer_sustained"
-- **thresholds**: [["sw1_normalized", "<=", 0.18], ["mean_error", "<=", 0.15], ["covariance_error", "<=", 0.45]]
-- **minimum_stable_checks**: 5
-- **prior**: {"kind": "mog", "learnable": true, "sigma": 0.025, "standardize": false}
-- **sampling_law**: "public_prior_without_output_noise"
-- **scoring_weights**: "live"
-- **eval_output_noise**: "clean"
+| Metric | Required bound |
+| --- | --- |
+| sw1_normalized | <= 0.18 |
+| mean_error | <= 0.15 |
+| covariance_error | <= 0.45 |
 
-</details>
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | MoGParticlePrior (sigma=0.025) |
+| Sampling law | public_prior_without_output_noise |
+| Scoring weights | live |
+| Evaluation output noise | clean |
 
 No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
 
@@ -1192,20 +1374,25 @@ Checks continuous curved mass rather than a finite list of target mode centers.
 
 Forge declarations: [vector_spiral](../../configs/forge/tasks/vector_spiral.json), [vector_spiral_published](../../configs/forge/tasks/vector_spiral_published.json).
 
-<details>
-<summary>Declared Forge numerical gates and sampling</summary>
+Declared Forge numerical gates and sampling:
 
 [vector_spiral](../../configs/forge/tasks/vector_spiral.json), [vector_spiral_published](../../configs/forge/tasks/vector_spiral_published.json)
 
-- **kind**: "transfer_sustained"
-- **thresholds**: [["sw1_normalized", "<=", 0.18], ["mean_error", "<=", 0.15], ["covariance_error", "<=", 0.45]]
-- **minimum_stable_checks**: 5
-- **prior**: {"kind": "mog", "learnable": true, "sigma": 0.025, "standardize": false}
-- **sampling_law**: "public_prior_without_output_noise"
-- **scoring_weights**: "live"
-- **eval_output_noise**: "clean"
+| Metric | Required bound |
+| --- | --- |
+| sw1_normalized | <= 0.18 |
+| mean_error | <= 0.15 |
+| covariance_error | <= 0.45 |
 
-</details>
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | MoGParticlePrior (sigma=0.025) |
+| Sampling law | public_prior_without_output_noise |
+| Scoring weights | live |
+| Evaluation output noise | clean |
 
 No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
 
@@ -1221,20 +1408,27 @@ Basic learnable multimodal distribution and within-mode spread.
 
 Forge declarations: [vector_two_broad](../../configs/forge/tasks/vector_two_broad.json), [vector_two_broad_published](../../configs/forge/tasks/vector_two_broad_published.json).
 
-<details>
-<summary>Declared Forge numerical gates and sampling</summary>
+Declared Forge numerical gates and sampling:
 
 [vector_two_broad](../../configs/forge/tasks/vector_two_broad.json), [vector_two_broad_published](../../configs/forge/tasks/vector_two_broad_published.json)
 
-- **kind**: "transfer_sustained"
-- **thresholds**: [["sw1_normalized", "<=", 0.18], ["mass_tv", "<=", 0.15], ["hq", ">=", 0.85], ["component_covariance_error", "<=", 0.85], ["component_min_eigen_ratio", ">=", 0.15]]
-- **minimum_stable_checks**: 5
-- **prior**: {"kind": "mog", "learnable": true, "sigma": 0.025, "standardize": false}
-- **sampling_law**: "public_prior_without_output_noise"
-- **scoring_weights**: "live"
-- **eval_output_noise**: "clean"
+| Metric | Required bound |
+| --- | --- |
+| sw1_normalized | <= 0.18 |
+| mass_tv | <= 0.15 |
+| hq | >= 0.85 |
+| component_covariance_error | <= 0.85 |
+| component_min_eigen_ratio | >= 0.15 |
 
-</details>
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | MoGParticlePrior (sigma=0.025) |
+| Sampling law | public_prior_without_output_noise |
+| Scoring weights | live |
+| Evaluation output noise | clean |
 
 No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
 
@@ -1250,20 +1444,28 @@ Checks target occupancy including the rare 2% component, not uniformity.
 
 Forge declarations: [vector_unequal_mass](../../configs/forge/tasks/vector_unequal_mass.json), [vector_unequal_mass_published](../../configs/forge/tasks/vector_unequal_mass_published.json).
 
-<details>
-<summary>Declared Forge numerical gates and sampling</summary>
+Declared Forge numerical gates and sampling:
 
 [vector_unequal_mass](../../configs/forge/tasks/vector_unequal_mass.json), [vector_unequal_mass_published](../../configs/forge/tasks/vector_unequal_mass_published.json)
 
-- **kind**: "transfer_sustained"
-- **thresholds**: [["sw1_normalized", "<=", 0.18], ["mass_tv", "<=", 0.15], ["hq", ">=", 0.85], ["component_covariance_error", "<=", 0.85], ["component_min_eigen_ratio", ">=", 0.15], ["min_mass_ratio", ">=", 0.25]]
-- **minimum_stable_checks**: 5
-- **prior**: {"kind": "mog", "learnable": true, "sigma": 0.025, "standardize": false}
-- **sampling_law**: "public_prior_without_output_noise"
-- **scoring_weights**: "live"
-- **eval_output_noise**: "clean"
+| Metric | Required bound |
+| --- | --- |
+| sw1_normalized | <= 0.18 |
+| mass_tv | <= 0.15 |
+| hq | >= 0.85 |
+| component_covariance_error | <= 0.85 |
+| component_min_eigen_ratio | >= 0.15 |
+| min_mass_ratio | >= 0.25 |
 
-</details>
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | MoGParticlePrior (sigma=0.025) |
+| Sampling law | public_prior_without_output_noise |
+| Scoring weights | live |
+| Evaluation output noise | clean |
 
 No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
 
@@ -1279,20 +1481,27 @@ Checks component-specific scales without imposing one shared Gaussian width.
 
 Forge declarations: [vector_unequal_width](../../configs/forge/tasks/vector_unequal_width.json), [vector_unequal_width_published](../../configs/forge/tasks/vector_unequal_width_published.json).
 
-<details>
-<summary>Declared Forge numerical gates and sampling</summary>
+Declared Forge numerical gates and sampling:
 
 [vector_unequal_width](../../configs/forge/tasks/vector_unequal_width.json), [vector_unequal_width_published](../../configs/forge/tasks/vector_unequal_width_published.json)
 
-- **kind**: "transfer_sustained"
-- **thresholds**: [["sw1_normalized", "<=", 0.18], ["mass_tv", "<=", 0.15], ["hq", ">=", 0.85], ["component_covariance_error", "<=", 0.85], ["component_min_eigen_ratio", ">=", 0.15]]
-- **minimum_stable_checks**: 5
-- **prior**: {"kind": "mog", "learnable": true, "sigma": 0.025, "standardize": false}
-- **sampling_law**: "public_prior_without_output_noise"
-- **scoring_weights**: "live"
-- **eval_output_noise**: "clean"
+| Metric | Required bound |
+| --- | --- |
+| sw1_normalized | <= 0.18 |
+| mass_tv | <= 0.15 |
+| hq | >= 0.85 |
+| component_covariance_error | <= 0.85 |
+| component_min_eigen_ratio | >= 0.15 |
 
-</details>
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | MoGParticlePrior (sigma=0.025) |
+| Sampling law | public_prior_without_output_noise |
+| Scoring weights | live |
+| Evaluation output noise | clean |
 
 No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
 
@@ -1314,4 +1523,4 @@ The wider question review also links standalone experiments outside the Forge ti
 
 Declaration input digest: `adcdfd85cc335886698955a5cada9865918db70a411df410f52a6e0efb8493e9`. The JSON form includes the individual task and view file hashes.
 
-Published artifact input digest: `ac64409c3b7648c4b9ccd2590e8ebfdb5ecd90ad91c5c296d7f10bca42db0733`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.
+Published artifact input digest: `c6e4db71ad3a8fe5d254255f022457385bc28c186a618c73259823fe37a523ab`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.

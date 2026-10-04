@@ -12,6 +12,7 @@ from .contracts import atomic_json, atomic_text, file_hash, read_json, stable_ha
 from .knowledge import DECLARATION_ONLY_BOARD, leaderboard_path
 from .priors import PRIOR_CODE_PATHS, task_prior
 from .research_artifacts import build_artifacts
+from .family_reports import evaluation_notes, evaluation_rows, number
 from .views import load_tasks, load_view
 
 
@@ -20,7 +21,7 @@ TIER_NAMES = {1: "smoke", 2: "quality", 3: "endurance"}
 IMPORTANCES = ("required", "ranking", "diagnostic")
 
 
-def build_report(root: Path, view_id: str | None = None) -> dict:
+def build_report(root: Path, view_id: str | None = None, *, publication: dict | None = None) -> dict:
     """Read validated declarations, including tasks not assigned to any view."""
     root = Path(root)
     tasks = load_tasks(root)
@@ -92,7 +93,7 @@ def build_report(root: Path, view_id: str | None = None) -> dict:
         "unassigned_tasks": [task_row(name) for name in sorted(tasks.keys() - assigned)],
         "task_sources": task_paths,
         "input_hashes": inputs, "input_digest": stable_hash(inputs),
-        **build_artifacts(root, tasks, task_paths),
+        **build_artifacts(root, tasks, task_paths, publication=publication),
     }
 
 
@@ -255,20 +256,30 @@ def render_markdown(report: dict, root: Path, output_path: Path | None = None) -
             evaluation, execution = task["evaluation"], task["execution"]
             fields = ("kind", "thresholds", "coverage_thresholds", "accuracy_limits", "minimum_stable_checks",
                       "conditions", "confirmation_checks", "hold_budget", "extension_steps", "recovery_deadline",
-                      "stationary_checks", "deadline_checks", "minimum_frozen_passing", "requires_pair_artifacts")
+                      "stationary_checks", "deadline_checks", "minimum_frozen_passing", "requires_pair_artifacts",
+                      "guards", "observations")
             numeric = {key: evaluation[key] for key in fields if key in evaluation}
             sampling = {"prior": execution.get("prior"), "sampling_law": evaluation.get("sampling_law"),
                         "scoring_weights": evaluation.get("scoring_weights"),
                         "eval_output_noise": evaluation.get("eval_output_noise")}
             key = stable_hash({"numeric": numeric, "sampling": sampling})
             contracts.setdefault(key, {"tasks": [], "numeric": numeric, "sampling": sampling})["tasks"].append(task)
-        lines += ["<details>", "<summary>Declared Forge numerical gates and sampling</summary>", ""]
+        lines += ["Declared Forge numerical gates and sampling:", ""]
         for contract in contracts.values():
             lines += [", ".join(link(task["id"], task["source"]) for task in contract["tasks"]), ""]
-            for key, value in {**contract["numeric"], **contract["sampling"]}.items():
-                lines.append(f"- **{key}**: {_cell(json.dumps(value, sort_keys=True))}")
+            bounds = evaluation_rows(contract["numeric"])
+            if bounds:
+                lines += ["| Metric | Required bound |", "| --- | --- |"]
+                lines += [f"| {_cell(metric)} | {_cell(op)} {number(bound)} |" for metric, op, bound in bounds]
+                lines.append("")
+            lines += evaluation_notes(contract["numeric"])
             lines.append("")
-        lines += ["</details>", ""]
+            sampling = contract["sampling"]
+            lines += ["| Measurement | Declared condition |", "| --- | --- |",
+                      "| Prior | " + _prior_cell(sampling["prior"]) + " |",
+                      "| Sampling law | " + _cell(sampling["sampling_law"]) + " |",
+                      "| Scoring weights | " + _cell(sampling["scoring_weights"]) + " |",
+                      "| Evaluation output noise | " + _cell(sampling["eval_output_noise"]) + " |", ""]
         if guide["forge_results"]:
             lines += ["Recorded Forge task outcomes (exact saved configuration/source/runtime):", "",
                       "| Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |",

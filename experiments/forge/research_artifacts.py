@@ -6,6 +6,8 @@ retain their own scopes; only exact task IDs select recorded Forge outcomes.
 from __future__ import annotations
 
 from collections import defaultdict
+import hashlib
+import json
 from pathlib import Path
 
 from .contracts import file_hash, read_json, stable_hash
@@ -26,12 +28,16 @@ REVIEW_ARTIFACTS = {
 }
 
 
-def build_artifacts(root: Path, tasks: dict, task_paths: dict) -> dict:
+def build_artifacts(root: Path, tasks: dict, task_paths: dict, *, publication: dict | None = None) -> dict:
     """Read compact, committed indexes without model construction or regrading."""
     root = Path(root).resolve()
     inputs = {}
 
     def load(path):
+        if publication is not None and str(path) == REVIEW_ARTIFACTS["solution_evidence"]:
+            content = json.dumps(publication, sort_keys=True, separators=(",", ":"), allow_nan=False) + "\n"
+            inputs[str(path)] = hashlib.sha256(content.encode()).hexdigest()
+            return publication
         source = root / path
         if not source.is_file():
             return {}
