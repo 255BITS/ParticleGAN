@@ -970,6 +970,72 @@ def _atlas_unblocking_progress(root):
                 ordinary_tier_credit=False, cross_cohort_pooling=False, default_adoption=False, speed_ranking=False)
 
 
+def _original_pr223_atlas(result):
+    """Expose the verified original-law replay without changing selected rows."""
+    studies = result.get("completed_api_studies", {}).get("rows", [])
+    matches = [row for row in studies if row.get("id") == "atlas19_original"]
+    if not matches:
+        return None
+    if len(matches) != 1:
+        raise ValueError("Original PR223 display requires one complete replay publication")
+    study = matches[0]
+    config_sha = "a3ee5c67ac6594014feeb1ec333131abb4b1d86832510b69923100ebd8510ad4"
+    reference_sha = "1e1b536bfd66e20a240436b417d429059d22ea55c2b6ecfff31e796b96c470fa"
+    recipe = study.get("recipe", {})
+    options = recipe.get("overrides", {})
+    requested = dict(lr=.00425, prior_lr_mult=2., d_lr_mult=1., prior_kind="particles",
+                     sigma_rel=0., output_noise_mode="learnable", output_noise_std=.029,
+                     serve_average=4., ema_decay=.995, total_steps=None)
+    if (study.get("required_cells") != 19 or study.get("counts") != {"PASS": 19}
+            or study.get("declared_updates") != 48800
+            or study.get("qualification_input") is not False or study.get("reuse") is not False
+            or study.get("cross_cohort_pooling") is not False
+            or recipe.get("sha256") != config_sha
+            or recipe.get("path_in_snapshot") != "configs/100gaussians/atlas.json"
+            or any(options.get(key) != value for key, value in requested.items())
+            or study.get("source", {}).get("protected_files_sha256", {}).get(
+                "configs/100gaussians/atlas.json") != config_sha):
+        raise ValueError("Original PR223 display recipe, source or original scope changed")
+    cells = study.get("cells", [])
+    expected = {"native": (3, 1234), "moving": (3, 1234), "portability": (13, 0)}
+    if len(cells) != 19 or len({cell["id"] for cell in cells}) != 19:
+        raise ValueError("Original PR223 display requires all 19 distinct full questions")
+    for group, (count, seed) in expected.items():
+        members = [cell for cell in cells if cell["definition"].get("group") == group]
+        if len(members) != count:
+            raise ValueError("Original PR223 display question groups changed")
+        for cell in members:
+            definition = cell["definition"]
+            if (cell.get("full_protocol_complete") is not True
+                    or cell.get("execution_status") != "PASS" or cell.get("scientific_status") != "PASS"
+                    or definition.get("config_sha256") != config_sha
+                    or definition.get("reference_sha256") != reference_sha
+                    or definition.get("sampling") != "original noisy state-selected primary; clean diagnostics separate"
+                    or definition.get("original_host", {}).get("seed") != seed
+                    or not definition.get("original_requirements") or not definition.get("observation_steps")
+                    or not cell.get("media")):
+                raise ValueError("Original PR223 display full gates, seeds or noisy law changed")
+            if group == "native" and cell.get("native_gates", {}).get("noisy") != {
+                    "coverage": "PASS", "accuracy": "PASS"}:
+                raise ValueError("Original PR223 display requires noisy native coverage and accuracy")
+    return dict(label="Original PR223 Atlas FULL", representation="Particles", required=19,
+                counts={"PASS": 19}, readout=study["readout"], publication=deepcopy(study["publication"]),
+                source=deepcopy(study["source"]), recipe=deepcopy(recipe),
+                seeds={group: seed for group, (_, seed) in expected.items()},
+                question_ids=[cell["id"] for cell in cells],
+                scope="Faithful replay of the full original 19-question noisy-law protocol",
+                qualification_input=False, qualification_reuse=False, default_adoption=False,
+                speed_ranking=False, new_current_retest_credit=False)
+
+
+def _original_pr223_score_line(original, root, path):
+    link = os.path.relpath(root / original["readout"], path.parent)
+    return (f"| [Original PR223 Atlas FULL · LR .00425 / prior2]({link}) | "
+            f"{original['representation']} | **19/19 PASS** · full original recipe/law replay "
+            f"· [19 original goal GIFs]({link})<br>Policy-selected; averaging enabled; learned output kernel (init .029) "
+            "· native/moving seed1234, portability seed0 · fresh retest PENDING; no current-26/default credit |")
+
+
 def _half_base_score_line(half_base, root, path):
     def link(relative):
         return os.path.relpath(root / relative, path.parent)
@@ -989,10 +1055,10 @@ def _atlas_progress_markdown(progress, root, path, *, half_base=None):
         return os.path.relpath(root / relative, path.parent)
     baseline = progress["baseline"]
     counts = baseline["counts"]
-    lines = [f"| [Atlas C6 LR .0053125 / prior1.5 · source `{baseline['source']['origin_commit'][:8]}`]({link(baseline['readout'])}) "
+    lines = [f"| [Atlas C6 CHANGED-rate / noise-OFF · LR .0053125 / prior1.5 · source `{baseline['source']['origin_commit'][:8]}`]({link(baseline['readout'])}) "
              f"| {baseline['representation']['label']} | **{counts['PASS']}/26 PASS** · "
              f"FAIL {counts['FAIL']} · BLOCKED {counts['BLOCKED']} "
-             f"<br>Selected-policy diagnostic · [source and 18 goal GIFs]({link(baseline['readout'])}) |"]
+             f"<br>Selected-policy diagnostic/reference · seed0 · [source and 18 goal GIFs]({link(baseline['readout'])}) |"]
     for row in progress["adaptations"]:
         gates = f"**{row['passed']}/{row['required']} PASS** · NOT_RUN {row['counts'].get('NOT_RUN', 0)}"
         readout = row["readout"]
@@ -1011,7 +1077,8 @@ def _atlas_progress_markdown(progress, root, path, *, half_base=None):
 
 def _policy_score_scope(root, path, *, half_base=None):
     link = os.path.relpath(root / "reports/forge/technique-inventory.json", path.parent)
-    return ["C6 is the fixed LR .0053125 / prior-rate 1.5 configuration with declared host-specific "
+    return ["The C6 diagnostic/reference changes rates to LR .0053125 / prior-rate 1.5 and disables "
+              "evaluation output noise, with seed0 and declared host-specific "
               "Recipe fields. Representation labels come from the pinned applied priors, Recipes and "
               "routed table owners; a parameter bank is not a sampled MoG. "
               "[Full source and representation bindings](" + link + "). "
@@ -1068,11 +1135,14 @@ def _current_markdown(result, root, path):
                   "qualification cells below.", ""]
     progress = result.get("atlas_unblocking_progress") if ordinary_current else None
     half_base = result.get("word_half_base_diagnostic") if ordinary_current else None
+    original_pr223 = result.get("original_pr223_atlas") if ordinary_current else None
     if ordinary_current:
         lines += ["Each row keeps its own configuration, source, representation and measured scope. "
                   "Required denominators stay fixed; diagnostic and ordinary qualification scores remain separate.", "",
                   "| Model/configuration | Actual representation | Measured score/status and scope |",
                   "| --- | --- | --- |"]
+        if original_pr223:
+            lines.append(_original_pr223_score_line(original_pr223, root, path))
         if progress:
             lines += _atlas_progress_markdown(progress, root, path, half_base=half_base)
         elif half_base:
@@ -1526,6 +1596,9 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
     if completed_studies:
         result["completed_api_studies"] = completed_studies
     if not recorded_policy and view_id == "discriminator_stability":
+        original_pr223 = _original_pr223_atlas(result)
+        if original_pr223:
+            result["original_pr223_atlas"] = original_pr223
         atlas_progress = _atlas_unblocking_progress(root)
         if atlas_progress:
             result["atlas_unblocking_progress"] = atlas_progress
