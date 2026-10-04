@@ -18,6 +18,9 @@ ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT))
 
 from experiments.forge.contracts import atomic_json, file_hash, read_json, stable_hash
+from experiments.forge.boundaries import TUNABLE_FIELDS
+from experiments.forge.configuration_search import _declarations, _load_spec, enqueue_search
+from experiments.forge.decision_contracts import validate_admission
 from experiments.forge.planning import load_idea, plan_summary, resolve_idea
 from experiments.forge.queue import Queue, drain
 from experiments.forge.trainer_families import load_families
@@ -27,6 +30,47 @@ ROUND = Path("configs/forge/rounds/tier1-completion-v1.json")
 CAMPAIGN = Path("configs/forge/campaigns/tier1-completion-v1.json")
 REPORT = Path("reports/forge/tier1-completion")
 ID = "tier1-completion-v1"
+
+
+def singleton_search(root, row, campaign):
+    """Register the selected card unchanged, without another configuration choice."""
+    card = load_idea(root, row["candidate_id"])
+    if "configuration_id" not in card:
+        return None
+    names = set(card["recipe_overrides"]) & TUNABLE_FIELDS
+    axis = next((name for name in ("lr", "d_lr_mult") if name in names), None)
+    if axis is None:
+        axis = next(iter(sorted(names)), None)
+    if axis is None:
+        raise ValueError("selected configuration needs an already declared tunable setting")
+    protocol = read_json(root / "configs/forge/defaults.json")["protocol"]
+    spec = {"schema_version": 1, "id": ID + "-" + row["family"],
+            "trainer_family": card["trainer_family"], "base_candidate": card["id"],
+            "grid": {axis: [card["recipe_overrides"][axis]]}, "tuning_through_tier": 1,
+            "view": row["view"], "execution_backend": "cuda", "protocol": protocol,
+            "protocol_hash": stable_hash(read_json(root / "configs/forge/protocols" / (protocol + ".json"))),
+            "campaign": campaign,
+            "rationale": "Admission registration for one existing selected configuration; no tuning, new card, recipe change or independent confirmation."}
+    declarations = _declarations(root, _load_spec(root, spec))
+    if len(declarations) != 1 or stable_hash(declarations[0][0]) != row["declaration_sha256"]:
+        raise ValueError("singleton registration must retain the exact selected card")
+    return spec
+
+
+def registration_specs(root, definition):
+    """Revalidate every frozen registration before any admission can mutate the queue."""
+    rows = {row["candidate_id"]: row for row in definition["candidate_roster"]}
+    expected = {name for name in rows if "configuration_id" in load_idea(root, name)}
+    references = definition["configuration_searches"]
+    if len(references) != len(expected) or {item["candidate_id"] for item in references} != expected:
+        raise ValueError("registration roster must cover exactly the selected configuration cards")
+    specs = []
+    for item in references:
+        spec = _load_spec(root, item["spec"])
+        if stable_hash(spec) != item["spec_sha256"] or spec != singleton_search(root, rows[item["candidate_id"]], definition["campaign"]):
+            raise ValueError("singleton registration differs from the frozen roster")
+        specs.append(spec)
+    return specs
 
 
 def emit(event, **values):
@@ -80,10 +124,27 @@ def prepare(root=ROOT):
                   "candidate_roster": roster, "declared_first_attempt_ceiling_seconds": allowance,
                   "max_infrastructure_retries_per_task": 1, "campaign": campaign,
                   "scope": "Current Tier 1 coverage; scoped policy and clock diagnostics retain separate identities. No default adoption or later-tier execution."}
+    definition["configuration_searches"] = []
+    for row in roster:
+        spec = singleton_search(root, row, campaign)
+        if spec is None:
+            continue
+        relative = Path("configs/forge/searches") / (spec["id"] + ".json")
+        path = root / relative
+        if path.exists() and read_json(path) != spec:
+            raise ValueError("frozen singleton registration already differs: " + str(relative))
+        atomic_json(path, spec)
+        definition["configuration_searches"].append({"candidate_id": row["candidate_id"],
+            "spec": relative.as_posix(), "spec_sha256": stable_hash(spec)})
     for relative, data in ((ROUND, definition), (CAMPAIGN, campaign)):
         path = root / relative
         if path.exists() and read_json(path) != data:
-            raise ValueError(f"frozen round already differs: {relative}; do not replenish its budget")
+            previous = read_json(path)
+            # The stopped pre-training round can add admission references only;
+            # its exact recipe/task roster and both budget caps remain frozen.
+            if relative != ROUND or "configuration_searches" in previous or previous != {
+                    key: value for key, value in data.items() if key != "configuration_searches"}:
+                raise ValueError(f"frozen round already differs: {relative}; do not replenish its budget")
         atomic_json(path, data)
     emit("prepared", families=len(roster), first_attempt_ceiling_seconds=allowance,
          retry_inclusive_ceiling_seconds=campaign["budget_seconds"])
@@ -92,6 +153,7 @@ def prepare(root=ROOT):
 
 def requests(root, queue_root, *, freeze=False):
     definition = read_json(root / ROUND)
+    registration_specs(root, definition)
     tasks = load_tasks(root)
     resolved = []
     for row in definition["candidate_roster"]:
@@ -129,6 +191,17 @@ def enqueue(root, queue_root):
     definition, resolved = requests(root, queue_root, freeze=True)
     verify_committed_source(root, resolved[0][1]["source"])
     queue = Queue(queue_root, report_root=root / "reports/forge")
+    # Check every ordinary legacy declaration before registering configurations.
+    # Search admission itself retains the existing exact bounded-registration
+    # validation; the shared campaign and scientific requests do not change.
+    for _, req in resolved:
+        if "configuration_id" not in req["candidate"]:
+            validate_admission(req, definition["campaign"], root=root)
+    for spec in registration_specs(root, definition):
+        registered = enqueue_search(root, queue_root, spec, queue=queue)
+        if registered["submitted_count"] != 1:
+            raise ValueError("singleton configuration registration was not admitted")
+        emit("registered", study=spec["id"], candidate=spec["base_candidate"])
     entries = []
     for row, req in resolved:
         entry = queue.submit(req, definition["campaign"])
@@ -197,7 +270,7 @@ def summarize(root, queue_root):
     return report
 
 
-def archive(root, queue_root):
+def archive(root, queue_root, destination=None):
     """Archive byte-exact originals locally; commit only the hash receipt."""
     state = Queue(queue_root, report_root=root / "reports/forge").inspect()
     entries = read_json(queue_root / ID / "roster.json")
@@ -211,7 +284,7 @@ def archive(root, queue_root):
             for attempt in state["jobs"][job["compatibility_key"]]["attempts"]:
                 attempts.add(attempt["attempt_id"])
                 attempt_paths[attempt["attempt_id"]] = Path(attempt["path"])
-    destination = root / "artifacts/forge" / (ID + ".tar.gz")
+    destination = Path(destination).resolve() if destination is not None else root / "artifacts/forge" / (ID + ".tar.gz")
     destination.parent.mkdir(parents=True, exist_ok=True)
     if destination.exists():
         raise ValueError("archive already exists; preserve its exact published identity")
@@ -298,6 +371,7 @@ def main():
     parser.add_argument("--expected-commit")
     parser.add_argument("--compatibility-key")
     parser.add_argument("--reason")
+    parser.add_argument("--archive-path", type=Path)
     args = parser.parse_args()
     root, queue_root = args.root.resolve(), args.queue_root.resolve()
     if args.stage in {"enqueue", "run"}:
@@ -317,7 +391,7 @@ def main():
     elif args.stage == "report":
         summarize(root, queue_root)
     elif args.stage == "archive":
-        archive(root, queue_root)
+        archive(root, queue_root, args.archive_path)
     elif args.stage == "media":
         export_media(root, queue_root)
     elif args.stage == "retry":

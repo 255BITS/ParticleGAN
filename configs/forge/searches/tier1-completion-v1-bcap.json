@@ -1,0 +1,23 @@
+{
+  "base_candidate": "bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212",
+  "campaign": {
+    "budget_seconds": 55440,
+    "candidate_budget_seconds": 5040,
+    "description": "One fixed recipe per family; complete Tier 1 only. One documented infrastructure-repair retry per task at most; no scientific retry or tuning.",
+    "id": "tier1-completion-v1"
+  },
+  "execution_backend": "cuda",
+  "grid": {
+    "d_lr_mult": [
+      2.0
+    ]
+  },
+  "id": "tier1-completion-v1-bcap",
+  "protocol": "screening",
+  "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+  "rationale": "Admission registration for one existing selected configuration; no tuning, new card, recipe change or independent confirmation.",
+  "schema_version": 1,
+  "trainer_family": "bcap",
+  "tuning_through_tier": 1,
+  "view": "discriminator_stability"
+}
