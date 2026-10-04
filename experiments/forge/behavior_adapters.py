@@ -47,6 +47,8 @@ FROZEN_HOST_RECIPE_FIELDS = BEHAVIOR_HOST_FIELDS
 def behavior_preflight(task: dict, candidate: dict) -> list[str]:
     """Return unsupported explicit overrides before constructing any host state."""
     try:
+        from .two_pole_observer import diagnostic_contract
+        diagnostic_contract(task)
         prior = task_prior(task)
         task_initializer(task, candidate)
         candidate = bind_task_candidate(candidate, task)
@@ -119,6 +121,8 @@ class _PenaltyBinding:
     def penalty(self, critic, real, fake, step=None, **kwargs):
         self.calls += 1
         value = self.bound(critic, real, fake)
+        if getattr(self, "diagnostic", None) is not None:
+            self.diagnostic.penalty_gradient(value)
         _observe_range(self.coefficient_observations, self.bound.regularizer.coeff)
         self.audit.observe_penalty(self.bound.last_stats)
         return value, self.bound.last_stats
@@ -206,6 +210,7 @@ class BehaviorComponents:
         self.models, self.optimizers, self.base_rates, self.role_parameters = {}, {}, {}, {}
         self.direct_particle_ids, self.initial_group_betas = set(), {}
         self.rng_audits, self.observations = [], []
+        self.diagnostic, self.diagnostic_observations = None, []
         self.penalty = None
         self.schedule_observations = {}
         self.noise = _NamedNoise(self)
@@ -265,7 +270,7 @@ class BehaviorComponents:
             model = _base(model)
             self.models[role] = model
             self.role_parameters[role] = list(model.parameters())
-            if self.task["id"] != "two_pole":
+            if self.task["execution"].get("host", self.task["id"]) != "two_pole":
                 self.context.initialize(model, component=role)
         for index, prior in enumerate(priors):
             name = f"prior{index}"
@@ -301,6 +306,11 @@ class BehaviorComponents:
         # Host constructors may seed global RNG for fixed fixtures. Training
         # starts on the independent data stream after construction is complete.
         torch.set_rng_state(self.context.streams.generator("data", component="host", purpose="batches").get_state())
+        if self.diagnostic is not None:
+            if len(parts) != 1 or len(direct_particles) != 1:
+                raise CapabilityError(["two-pole diagnostics require the existing single direct-coordinate optimizer"])
+            self.diagnostic.bind(self, direct_particles[0], parts[0], public_d)
+            self.penalty.diagnostic = self.diagnostic
         return public_g, public_d, self.recipe.make_loss(), self.penalty
 
     def schedule_optimizer(self, optimizer, completed_updates):
@@ -317,12 +327,16 @@ class BehaviorComponents:
     def checkpoint(self, step, measure):
         budget = self.task["execution"]["steps"]
         expected = {math.ceil(i * budget / 24) for i in range(1, 25)}
-        if step not in expected:
+        diagnostic_steps = self.diagnostic.observation_steps if self.diagnostic is not None else set()
+        if step not in expected | diagnostic_steps:
             return
         with self.noise.evaluation(step):
             values = measure()
-        self.observations.append({**values, "step": step})
-        print(json.dumps(dict(event="observation", task=self.task["id"], step=step,
+        if step in expected:
+            self.observations.append({**values, "step": step})
+        if step in diagnostic_steps:
+            self.diagnostic_observations.append({**values, "step": step})
+        print(json.dumps(dict(event="observation" if step in expected else "diagnostic_observation", task=self.task["id"], step=step,
                               budget=budget, metrics=values), allow_nan=False), flush=True)
 
     def guards(self):
@@ -433,6 +447,9 @@ def run_behavior(request: dict, task: dict, output_dir: Path | str, device="cpu"
     previous_threads = torch.get_num_threads()
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
+    if task["execution"].get("horizon_diagnostic") is not None:
+        from .two_pole_observer import TwoPoleObserver
+        components.diagnostic = TwoPoleObserver(task, output_dir)
     try:
         torch.set_num_threads(1)
         with torch.device("cpu"), components.context.streams.fork("data", component="host", purpose="batches"), ExitStack() as stack:
@@ -478,7 +495,12 @@ def run_behavior(request: dict, task: dict, output_dir: Path | str, device="cpu"
                       scoring_weights="live", guards=components.guards(), **policy),
                       execution_path="public_components", device="cpu", applied=components.receipt(),
                       raw=raw, cost=dict(wall_seconds=time.monotonic()-started))
+        if components.diagnostic is not None:
+            result["evidence"].update(diagnostic_observations=components.diagnostic_observations,
+                                     horizon_diagnostic=components.diagnostic.finish())
         atomic_json(output_dir / "result.json", result)
         return result
     finally:
+        if components.diagnostic is not None:
+            components.diagnostic.close()
         torch.set_num_threads(previous_threads)

@@ -16,7 +16,7 @@ FAMILIES = {"transfer_behavior": "behavioral", "transfer_vector": "vector",
             "paired_adaptation": "adaptation", "clockfree_audit": "clockfree"}
 EVIDENCE_QUALITIES = frozenset({"certified_current", "certified_pinned", "certified_diagnostic",
                               "imported_recorded", "unmeasured", "invalid_receipt", "unverified"})
-CATEGORIES = ("current_rows", "pinned_rows", "calibration_rows", "historical_rows")
+CATEGORIES = ("current_rows", "pinned_rows", "calibration_rows", "research_rows", "historical_rows")
 
 
 def _identity(row):
@@ -101,7 +101,8 @@ def _annotate(row, catalog, attempts, records):
             labels.add("imported_recorded")
     else:
         certification = {"current": "certified_current", "pinned": "certified_pinned",
-                         "calibration_diagnostic": "certified_diagnostic"}.get(scope)
+                         "calibration_diagnostic": "certified_diagnostic",
+                         "research_diagnostic": "certified_diagnostic"}.get(scope)
         if valid and certification:
             labels.add(certification)
         if invalid:

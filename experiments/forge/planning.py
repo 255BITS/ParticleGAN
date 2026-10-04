@@ -231,6 +231,9 @@ def resolve_idea(root: Path, idea_id: str, *, view_id: str | None = None,
                    "initializer": idea.get("initializer", "deterministic_orthogonal"), "runtime": runtime,
                    "task_initializers": {m: task_initializer(tasks[m]) for m in members},
                    "compute": {**compute_profiles[backend], "threads": task["resources"]["cpu_threads"]}}
+        if view.get("evidence_scope") == "research_diagnostic":
+            # Diagnostic measurements cannot alias an ordinary qualification job.
+            science["evidence_use"] = "research_diagnostic"
         prerequisites = set()
         def collect_dependencies(name):
             for dependency in tasks[name].get("dependencies", []):

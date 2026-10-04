@@ -1,0 +1,8 @@
+{
+  "accept_shared_cost_transfer": false,
+  "budget_seconds": 1200,
+  "candidate_budget_seconds": 600,
+  "id": "k3p-two-pole-horizon-v1",
+  "purpose": "Four fixed-seed substantive budget/schedule diagnostics; two unchanged global recipes, two800-step tasks, sequentialCPU execution, no ordinary qualification.",
+  "schema_version": 1
+}

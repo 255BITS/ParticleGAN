@@ -2,7 +2,8 @@
   "cross_cohort_pooling": false,
   "latest": {
     "pg_pr223_full19_passive_publication_v1": "pr223-original-full-retest-stopped17-20261004",
-    "pg_pr223_native3_passive_publication_v1": "pr223-native3-first-invalid-20261004"
+    "pg_pr223_native3_passive_publication_v1": "pr223-native3-first-invalid-20261004",
+    "pg_pr223_native3_passive_publication_v2": "pr223-native3-repaired-20261004"
   },
   "publications": [
     {
@@ -220,6 +221,72 @@
         "bytes": 947,
         "path": "reports/forge/pr223-native3-first-invalid-20261004/verification.json",
         "sha256": "b8da9e61ddc3ebad9a1b34f13f7f0747108f86857166f697fb2afa534dfb091f"
+      }
+    },
+    {
+      "final_cost": {
+        "bytes": 12158,
+        "path": "reports/forge/pr223-native3-repaired-20261004/FINAL_COST.json",
+        "sha256": "2b3ebdf1f7f38de990513153debcce976a757ba3f06821b6f27aeaa297871338"
+      },
+      "id": "pr223-native3-repaired-20261004",
+      "media": [
+        {
+          "bytes": 309964,
+          "path": "reports/forge/pr223-native3-repaired-20261004/gifs/native-grid100.gif",
+          "sha256": "9e0e8c9b85a086bfc5ab83705d3bfffb6a0d2ee9cbd5e38499c878db1221e805"
+        },
+        {
+          "bytes": 290232,
+          "path": "reports/forge/pr223-native3-repaired-20261004/gifs/native-rotated100.gif",
+          "sha256": "030e74ee3315fd0347f1cf8d7d29d691444607eea6353270304e29fc57b9964f"
+        },
+        {
+          "bytes": 291484,
+          "path": "reports/forge/pr223-native3-repaired-20261004/gifs/native-staggered100.gif",
+          "sha256": "930b402dac983b56fbb8792a7f926625a26200ab71857d7d5bf3e6f6fe0caa6b"
+        }
+      ],
+      "parent_metadata_anchor": {
+        "bytes": 2675,
+        "path": "reports/forge/pr223-native3-continuation-20261004/fixtures/closed-parent-metadata.json",
+        "sha256": "ce949407c9a11b2d2873be0d51b2d147261f8b60cee411ea33381c8c5c6f4369"
+      },
+      "predecessor_anchor": {
+        "bytes": 1948,
+        "path": "reports/forge/pr223-native3-continuation-20261004/fixtures/first-invalid-debit-anchor.json",
+        "sha256": "301b8036304c14f0c1a352af280e4c0dd2c8267f675294e62fadf3259fcd5ecb"
+      },
+      "predecessor_metadata_anchor": {
+        "bytes": 4644,
+        "path": "reports/forge/pr223-native3-continuation-20261004/fixtures/closed-metadata-22.json",
+        "sha256": "1cb2f30350c37bedec8e012eb674bda05641093248b9f1658db0bbab8026aaf2"
+      },
+      "protocol": {
+        "bytes": 157526,
+        "path": "reports/forge/pr223-original-full-retest-20261004/protocol.json",
+        "sha256": "8a5f0f63839e613b051562f030486388e8fcf962b6b6987fe5aaa27ea1f59786"
+      },
+      "readout": {
+        "bytes": 3832,
+        "path": "reports/forge/pr223-native3-repaired-20261004/README.md",
+        "sha256": "ba8ec57813530ce0594516e7e6061c08e35a97e13b532112dd7484b61d76db27"
+      },
+      "result": {
+        "bytes": 67385,
+        "path": "reports/forge/pr223-native3-repaired-20261004/results.json",
+        "sha256": "c6da054082feb369a83c8073f893a550763a872904e83d95404f39a80ba127bb"
+      },
+      "schema": "pg_pr223_native3_passive_publication_v2",
+      "source": {
+        "digest": "a208861906aba4acf0a271c6883a7047980a023cf188580de9c81c9fabd600f3",
+        "origin_commit": "2557cfc1997a530033e48d3af1fd50b29985af49"
+      },
+      "terminal_card_sha256": "af98840f1f626b31510bf37ba8ad696f97da66ac871dc12c02bcab1a5e197fe6",
+      "verification": {
+        "bytes": 1450,
+        "path": "reports/forge/pr223-native3-repaired-20261004/verification.json",
+        "sha256": "b944fe86431e4aa181d1d236109d9a78e1ec2843d8a3c9e9dbfdfbce7d83ea10"
       }
     }
   ],

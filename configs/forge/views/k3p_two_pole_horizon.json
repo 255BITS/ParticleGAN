@@ -1,0 +1,32 @@
+{
+  "assignments": [
+    {
+      "importance": "diagnostic",
+      "order": 0,
+      "qualification_tier": 1,
+      "task": "two_pole_800_schedule80_diagnostic_v1"
+    },
+    {
+      "importance": "diagnostic",
+      "order": 1,
+      "qualification_tier": 1,
+      "task": "two_pole_800_schedule800_diagnostic_v1"
+    }
+  ],
+  "calibration": {
+    "adoption_blocker": "Bounded budget/schedule diagnostic supplies no ordinary qualification, screen calibration or default adoption.",
+    "status": "provisional"
+  },
+  "eligibility": {},
+  "evidence_scope": "research_diagnostic",
+  "goal": "discriminator_stability",
+  "id": "k3p_two_pole_horizon",
+  "policy_change_reason": "Explicitly scoped two-pole budget and schedule diagnostic; continue both registered tasks after numerical failure. Original80-step main-view gate and recipe selections remain unchanged.",
+  "ranking": {
+    "compare_compatible_cohorts": true,
+    "cost_separate": true,
+    "policy": "raw_metrics_only"
+  },
+  "revision": 1,
+  "schema_version": 1
+}

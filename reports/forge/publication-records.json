@@ -40499,6 +40499,1392 @@
       "trainer_family": "atlas"
     },
     {
+      "candidate_id": "atlas",
+      "cohort": "a208861906aba4acf0a271c6883a7047980a023cf188580de9c81c9fabd600f3",
+      "conclusion": "Repaired native3 continuation: 3/3 PASS, 0 FAIL, 0 unavailable; final accepted PASS. Original19 parent remains 16 PASS/1 INVALID/2 NOT_RUN under its own source. Current cost includes original19 and pretraining-invalid debits separately once and SAME cumulative metadata once.",
+      "configuration_id": "pr223-native3-repaired-20261004",
+      "evidence_scope": "published_summary",
+      "goal": "discriminator_stability",
+      "lifecycle": "concluded",
+      "materialization": "reports/forge/publication-records.json",
+      "mechanism_class": "faithful_original_native3_repaired_continuation",
+      "next_action": "Read the repaired three-case cut and authoritative SAME-ledger FINAL_COST. The original 16 remain old-source evidence; no fresh single-source 19, current 26, default or speed credit.",
+      "original_required": 19,
+      "predecessor_cost": {
+        "accepted_original_gate_counts": {
+          "FAIL": 0,
+          "PASS": 0,
+          "UNAVAILABLE": 3
+        },
+        "canonical_metadata_ledger": "/ml2/hypergan/.pg-pr223-full-original-retest-20261004.pr223-full19-metadata-cost.json",
+        "combined_prior_case_charged_seconds": 3167.891497056,
+        "execution_counts": {
+          "INVALID": 1,
+          "NOT_RUN": 2
+        },
+        "files": {
+          "reports/forge/pr223-native3-continuation-20261004/fixtures/closed-metadata-22.json": {
+            "bytes": 4644,
+            "sha256": "1cb2f30350c37bedec8e012eb674bda05641093248b9f1658db0bbab8026aaf2"
+          },
+          "reports/forge/pr223-native3-continuation-20261004/fixtures/first-invalid-debit-anchor.json": {
+            "bytes": 1948,
+            "sha256": "301b8036304c14f0c1a352af280e4c0dd2c8267f675294e62fadf3259fcd5ecb"
+          }
+        },
+        "numerical_credit": false,
+        "old_grades_are_current_credit": false,
+        "original19_case_charged_seconds": 3165.841891122982,
+        "pretraining_invalid_case_charged_seconds": 2.0496059330180287,
+        "required_closed_prefix_phases": 22,
+        "schema": "pg_pr223_native3_predecessor_cost_v1",
+        "source": {
+          "digest": "b2d0e98000d06a9731a4a40e52e226fedece194c097a1f5d939f501a9360aaa6",
+          "origin_commit": "0fa92c5b599da8ab2c891e544aafc09cf802a70d"
+        },
+        "training_started": false
+      },
+      "prior_reference": {
+        "accepted_original_gate_counts": {
+          "FAIL": 0,
+          "PASS": 16,
+          "UNAVAILABLE": 3
+        },
+        "case_charged_seconds": 3165.841891122982,
+        "execution_counts": {
+          "INVALID": 1,
+          "NOT_RUN": 2,
+          "PASS": 16
+        },
+        "files_sha256": {
+          "reports/forge/pr223-original-full-retest-stopped17-20261004/FINAL_COST.json": "2335c0da59f1155a329f72390078d1480f253ce1e17a5879a52138d53e3661d3",
+          "reports/forge/pr223-original-full-retest-stopped17-20261004/results.json": "4cca29c719ffe295712775be27167d7465090c40865d3b096aea247e61a3d4f3",
+          "reports/forge/pr223-original-full-retest-stopped17-20261004/verification.json": "a74262e6af196c7686f9275a0723ace989067f65552fb8b554a2c35948c26eb5"
+        },
+        "old_grades_are_current_credit": false,
+        "original_evidence_unchanged": true,
+        "required": 19,
+        "source": {
+          "digest": "00cadbfd06c770e16c35045b42387932b14ee3751954e5320f9e2c32799f7a2f",
+          "origin_commit": "2068a661331a45e0e283b0362dd58b7d92263c6f"
+        }
+      },
+      "provenance": {
+        "execution_digest": "a208861906aba4acf0a271c6883a7047980a023cf188580de9c81c9fabd600f3",
+        "final_cost": {
+          "bytes": 12158,
+          "path": "reports/forge/pr223-native3-repaired-20261004/FINAL_COST.json",
+          "sha256": "2b3ebdf1f7f38de990513153debcce976a757ba3f06821b6f27aeaa297871338"
+        },
+        "source_commit": "2557cfc1997a530033e48d3af1fd50b29985af49",
+        "terminal_card_sha256": "af98840f1f626b31510bf37ba8ad696f97da66ac871dc12c02bcab1a5e197fe6"
+      },
+      "qualification_input": false,
+      "qualification_reuse": false,
+      "record_id": "publication-c3f3b6808f0e8d9d99c29fb3",
+      "record_type": "published_study",
+      "recorded_cost": {
+        "aggregate_cap_seconds": 10800,
+        "aggregate_overrun_seconds": 0.0,
+        "case_caps_sum_seconds": 4290,
+        "charged_seconds": 5778.858767953003,
+        "combined_prior_case_charged_seconds": 3167.891497056,
+        "current_case_charged_seconds": 2494.779808399966,
+        "current_case_paid_wall_seconds": 2494.779808399966,
+        "current_case_reserved_seconds": 0.0,
+        "export_grace_seconds": 0,
+        "halt_required": false,
+        "metadata": {
+          "blocked": false,
+          "charged_seconds": 116.1874624970369,
+          "overrun_seconds": 0.0,
+          "paid_wall_seconds": 116.1874624970369,
+          "reserved_seconds": 0.0
+        },
+        "metadata_cap_seconds": 180,
+        "overrun_seconds": 0.0,
+        "pretraining_invalid_case_charged_seconds": 2.0496059330180287,
+        "prior_case_charged_seconds": 3165.841891122982,
+        "remaining_seconds": 5021.141232046997,
+        "retries": 0
+      },
+      "required": 3,
+      "schema_version": 1,
+      "settings": {
+        "d_lr_mult": 1.0,
+        "lr": 0.00425,
+        "prior_lr_mult": 2.0
+      },
+      "source": {
+        "board": "reports/forge/technique-inventory.md",
+        "bytes": 67385,
+        "path": "reports/forge/pr223-native3-repaired-20261004/results.json",
+        "sha256": "c6da054082feb369a83c8073f893a550763a872904e83d95404f39a80ba127bb"
+      },
+      "status": "PASS",
+      "study_id": "pr223-native3-repaired-continuation",
+      "task_results": [
+        {
+          "cost": {
+            "allowance_seconds": 1470.0,
+            "certified": true,
+            "charged_seconds": 805.900968670845,
+            "completed_terminal": true,
+            "overrun_seconds": 0.0,
+            "paid_wall_seconds": 805.900968670845,
+            "reserved_seconds": 0.0,
+            "terminal_status": "completed",
+            "unmeasured_interrupt_reserved_seconds": 0.0
+          },
+          "execution_status": "PASS",
+          "gate_status": "PASS",
+          "media": {
+            "actual_steps": [
+              0,
+              50,
+              750,
+              1750,
+              2750,
+              3750,
+              4750,
+              5750,
+              7000
+            ],
+            "bytes": 309964,
+            "caption": "FINAL full-protocol verdict; per-clock flags are original retained reads.",
+            "capture_metadata": [
+              {
+                "dtypes": {
+                  "centers": "float32",
+                  "reference_sigma": "float64",
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.029000001028180122,
+                "primary_source": "original_native_noisy_saved_live",
+                "selected_source": "fast",
+                "shapes": {
+                  "centers": [
+                    100,
+                    2
+                  ],
+                  "reference_sigma": [],
+                  "samples": [
+                    4096,
+                    2
+                  ],
+                  "target": [
+                    4096,
+                    2
+                  ]
+                },
+                "step": 0,
+                "target_kind": "original_reference"
+              },
+              {
+                "dtypes": {
+                  "centers": "float32",
+                  "reference_sigma": "float64",
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_native_noisy_saved_live",
+                "selected_source": "fast",
+                "shapes": {
+                  "centers": [
+                    100,
+                    2
+                  ],
+                  "reference_sigma": [],
+                  "samples": [
+                    4096,
+                    2
+                  ],
+                  "target": [
+                    4096,
+                    2
+                  ]
+                },
+                "step": 50,
+                "target_kind": "original_reference"
+              },
+              {
+                "dtypes": {
+                  "centers": "float32",
+                  "reference_sigma": "float64",
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_native_noisy_saved_live",
+                "selected_source": "averaged",
+                "shapes": {
+                  "centers": [
+                    100,
+                    2
+                  ],
+                  "reference_sigma": [],
+                  "samples": [
+                    4096,
+                    2
+                  ],
+                  "target": [
+                    4096,
+                    2
+                  ]
+                },
+                "step": 750,
+                "target_kind": "original_reference"
+              },
+              {
+                "dtypes": {
+                  "centers": "float32",
+                  "reference_sigma": "float64",
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_native_noisy_saved_live",
+                "selected_source": "averaged",
+                "shapes": {
+                  "centers": [
+                    100,
+                    2
+                  ],
+                  "reference_sigma": [],
+                  "samples": [
+                    4096,
+                    2
+                  ],
+                  "target": [
+                    4096,
+                    2
+                  ]
+                },
+                "step": 1750,
+                "target_kind": "original_reference"
+              },
+              {
+                "dtypes": {
+                  "centers": "float32",
+                  "reference_sigma": "float64",
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_native_noisy_saved_live",
+                "selected_source": "averaged",
+                "shapes": {
+                  "centers": [
+                    100,
+                    2
+                  ],
+                  "reference_sigma": [],
+                  "samples": [
+                    4096,
+                    2
+                  ],
+                  "target": [
+                    4096,
+                    2
+                  ]
+                },
+                "step": 2750,
+                "target_kind": "original_reference"
+              },
+              {
+                "dtypes": {
+                  "centers": "float32",
+                  "reference_sigma": "float64",
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_native_noisy_saved_live",
+                "selected_source": "averaged",
+                "shapes": {
+                  "centers": [
+                    100,
+                    2
+                  ],
+                  "reference_sigma": [],
+                  "samples": [
+                    4096,
+                    2
+                  ],
+                  "target": [
+                    4096,
+                    2
+                  ]
+                },
+                "step": 3750,
+                "target_kind": "original_reference"
+              },
+              {
+                "dtypes": {
+                  "centers": "float32",
+                  "reference_sigma": "float64",
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_native_noisy_saved_live",
+                "selected_source": "averaged",
+                "shapes": {
+                  "centers": [
+                    100,
+                    2
+                  ],
+                  "reference_sigma": [],
+                  "samples": [
+                    4096,
+                    2
+                  ],
+                  "target": [
+                    4096,
+                    2
+                  ]
+                },
+                "step": 4750,
+                "target_kind": "original_reference"
+              },
+              {
+                "dtypes": {
+                  "centers": "float32",
+                  "reference_sigma": "float64",
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_native_noisy_saved_live",
+                "selected_source": "averaged",
+                "shapes": {
+                  "centers": [
+                    100,
+                    2
+                  ],
+                  "reference_sigma": [],
+                  "samples": [
+                    4096,
+                    2
+                  ],
+                  "target": [
+                    4096,
+                    2
+                  ]
+                },
+                "step": 5750,
+                "target_kind": "original_reference"
+              },
+              {
+                "dtypes": {
+                  "centers": "float32",
+                  "reference_sigma": "float64",
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_native_noisy_saved_live",
+                "selected_source": "averaged",
+                "shapes": {
+                  "centers": [
+                    100,
+                    2
+                  ],
+                  "reference_sigma": [],
+                  "samples": [
+                    4096,
+                    2
+                  ],
+                  "target": [
+                    4096,
+                    2
+                  ]
+                },
+                "step": 7000,
+                "target_kind": "original_reference"
+              }
+            ],
+            "file": "gifs/native-grid100.gif",
+            "frames": 9,
+            "original_gate": "PASS",
+            "sha256": "9e0e8c9b85a086bfc5ab83705d3bfffb6a0d2ee9cbd5e38499c878db1221e805"
+          },
+          "metrics": {
+            "acc_abs_cov_trace_bias": 0.014538749700289122,
+            "acc_accuracy_pass": true,
+            "acc_accuracy_score": 0.46727010256809565,
+            "acc_center_rms_sigma": 0.16660712176422504,
+            "acc_cov_trace_bias": 0.014538749700289122,
+            "acc_frozen_pass": true,
+            "acc_mass_tv": 0.03280000000000001,
+            "acc_passed": true,
+            "acc_radial_ks": 0.01375962551126797,
+            "holdout_abs_cov_trace_bias": 0.012156725314119488,
+            "holdout_accuracy_pass": true,
+            "holdout_accuracy_score": 0.34655958134088716,
+            "holdout_center_rms_sigma": 0.13973261075607618,
+            "holdout_cov_trace_bias": 0.012156725314119488,
+            "holdout_frozen_pass": true,
+            "holdout_mass_tv": 0.019510000000000003,
+            "holdout_passed": true,
+            "holdout_precision": 0.98453,
+            "holdout_radial_ks": 0.009633654071012243,
+            "hq": 0.9825,
+            "mass_tv": 0.032799999999999996,
+            "max_cov_eig_ratio": 1.3475564418456727,
+            "max_mode_mass": 0.01155,
+            "max_radial_median_ratio": 1.1780665798263272,
+            "min_cov_eig_ratio": 0.6634834837761125,
+            "min_hq_mode_mass": 0.0084,
+            "min_radial_median_ratio": 0.8814416511708483,
+            "modes": 100,
+            "output_sigma": 0.028999999165534973,
+            "precision": 0.9825,
+            "sharp_clean": 0.29834476113319397,
+            "sharp_noisy": 1.1995784044265747,
+            "step": 7000
+          },
+          "original_gate": "PASS",
+          "original_requirements": [
+            [
+              "modes",
+              ">=",
+              100
+            ],
+            [
+              "precision",
+              ">=",
+              0.97
+            ],
+            [
+              "min_hq_mode_mass",
+              ">=",
+              0.005
+            ],
+            [
+              "mass_tv",
+              "<=",
+              0.1
+            ],
+            [
+              "max_mode_mass",
+              "<=",
+              0.02
+            ],
+            [
+              "min_cov_eig_ratio",
+              ">=",
+              0.4
+            ],
+            [
+              "max_cov_eig_ratio",
+              "<=",
+              1.7
+            ],
+            [
+              "min_radial_median_ratio",
+              ">=",
+              0.65
+            ],
+            [
+              "max_radial_median_ratio",
+              "<=",
+              1.4
+            ],
+            [
+              "acc_mass_tv",
+              "<=",
+              0.06
+            ],
+            [
+              "acc_center_rms_sigma",
+              "<=",
+              0.2
+            ],
+            [
+              "acc_abs_cov_trace_bias",
+              "<=",
+              0.1
+            ],
+            [
+              "acc_radial_ks",
+              "<=",
+              0.04
+            ]
+          ],
+          "parent_original_id": "atlas-original19-native-grid100",
+          "raw_status": "PASS",
+          "recipe_sha256": "49f4ea356bd3349334b2048d74f13ea78a15ec2abc1ab2d005df8f1081e7c15a",
+          "sampling": {
+            "clean_diagnostic": "output-noise-off same selected law",
+            "evaluation_noise_seed": 1636,
+            "evaluation_prior_seed": 1637,
+            "evaluation_target_seed": 1635,
+            "forced_ema_diagnostic": "separate original EMA branch",
+            "holdout_seed_offsets": {
+              "latent": 1603,
+              "noise": 1602,
+              "target": 1601
+            },
+            "independent_holdout_samples": 100000,
+            "observations": 34,
+            "primary_law": "state-selected weights/current learned output kernel",
+            "public_policy_latent_perturbation": "retained",
+            "samples": 20000,
+            "terminal_steps": [
+              6000,
+              6250,
+              6500,
+              6750,
+              7000
+            ]
+          },
+          "task_id": "pr223-native3-continuation-v1-native-grid100"
+        },
+        {
+          "cost": {
+            "allowance_seconds": 1440.0,
+            "certified": true,
+            "charged_seconds": 782.1624106580857,
+            "completed_terminal": true,
+            "overrun_seconds": 0.0,
+            "paid_wall_seconds": 782.1624106580857,
+            "reserved_seconds": 0.0,
+            "terminal_status": "completed",
+            "unmeasured_interrupt_reserved_seconds": 0.0
+          },
+          "execution_status": "PASS",
+          "gate_status": "PASS",
+          "media": {
+            "actual_steps": [
+              0,
+              50,
+              750,
+              1750,
+              2750,
+              3750,
+              4750,
+              5750,
+              7000
+            ],
+            "bytes": 290232,
+            "caption": "FINAL full-protocol verdict; per-clock flags are original retained reads.",
+            "capture_metadata": [
+              {
+                "dtypes": {
+                  "centers": "float32",
+                  "reference_sigma": "float64",
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.029000001028180122,
+                "primary_source": "original_native_noisy_saved_live",
+                "selected_source": "fast",
+                "shapes": {
+                  "centers": [
+                    100,
+                    2
+                  ],
+                  "reference_sigma": [],
+                  "samples": [
+                    4096,
+                    2
+                  ],
+                  "target": [
+                    4096,
+                    2
+                  ]
+                },
+                "step": 0,
+                "target_kind": "original_reference"
+              },
+              {
+                "dtypes": {
+                  "centers": "float32",
+                  "reference_sigma": "float64",
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_native_noisy_saved_live",
+                "selected_source": "fast",
+                "shapes": {
+                  "centers": [
+                    100,
+                    2
+                  ],
+                  "reference_sigma": [],
+                  "samples": [
+                    4096,
+                    2
+                  ],
+                  "target": [
+                    4096,
+                    2
+                  ]
+                },
+                "step": 50,
+                "target_kind": "original_reference"
+              },
+              {
+                "dtypes": {
+                  "centers": "float32",
+                  "reference_sigma": "float64",
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_native_noisy_saved_live",
+                "selected_source": "averaged",
+                "shapes": {
+                  "centers": [
+                    100,
+                    2
+                  ],
+                  "reference_sigma": [],
+                  "samples": [
+                    4096,
+                    2
+                  ],
+                  "target": [
+                    4096,
+                    2
+                  ]
+                },
+                "step": 750,
+                "target_kind": "original_reference"
+              },
+              {
+                "dtypes": {
+                  "centers": "float32",
+                  "reference_sigma": "float64",
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_native_noisy_saved_live",
+                "selected_source": "averaged",
+                "shapes": {
+                  "centers": [
+                    100,
+                    2
+                  ],
+                  "reference_sigma": [],
+                  "samples": [
+                    4096,
+                    2
+                  ],
+                  "target": [
+                    4096,
+                    2
+                  ]
+                },
+                "step": 1750,
+                "target_kind": "original_reference"
+              },
+              {
+                "dtypes": {
+                  "centers": "float32",
+                  "reference_sigma": "float64",
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_native_noisy_saved_live",
+                "selected_source": "averaged",
+                "shapes": {
+                  "centers": [
+                    100,
+                    2
+                  ],
+                  "reference_sigma": [],
+                  "samples": [
+                    4096,
+                    2
+                  ],
+                  "target": [
+                    4096,
+                    2
+                  ]
+                },
+                "step": 2750,
+                "target_kind": "original_reference"
+              },
+              {
+                "dtypes": {
+                  "centers": "float32",
+                  "reference_sigma": "float64",
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_native_noisy_saved_live",
+                "selected_source": "averaged",
+                "shapes": {
+                  "centers": [
+                    100,
+                    2
+                  ],
+                  "reference_sigma": [],
+                  "samples": [
+                    4096,
+                    2
+                  ],
+                  "target": [
+                    4096,
+                    2
+                  ]
+                },
+                "step": 3750,
+                "target_kind": "original_reference"
+              },
+              {
+                "dtypes": {
+                  "centers": "float32",
+                  "reference_sigma": "float64",
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_native_noisy_saved_live",
+                "selected_source": "averaged",
+                "shapes": {
+                  "centers": [
+                    100,
+                    2
+                  ],
+                  "reference_sigma": [],
+                  "samples": [
+                    4096,
+                    2
+                  ],
+                  "target": [
+                    4096,
+                    2
+                  ]
+                },
+                "step": 4750,
+                "target_kind": "original_reference"
+              },
+              {
+                "dtypes": {
+                  "centers": "float32",
+                  "reference_sigma": "float64",
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_native_noisy_saved_live",
+                "selected_source": "averaged",
+                "shapes": {
+                  "centers": [
+                    100,
+                    2
+                  ],
+                  "reference_sigma": [],
+                  "samples": [
+                    4096,
+                    2
+                  ],
+                  "target": [
+                    4096,
+                    2
+                  ]
+                },
+                "step": 5750,
+                "target_kind": "original_reference"
+              },
+              {
+                "dtypes": {
+                  "centers": "float32",
+                  "reference_sigma": "float64",
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_native_noisy_saved_live",
+                "selected_source": "averaged",
+                "shapes": {
+                  "centers": [
+                    100,
+                    2
+                  ],
+                  "reference_sigma": [],
+                  "samples": [
+                    4096,
+                    2
+                  ],
+                  "target": [
+                    4096,
+                    2
+                  ]
+                },
+                "step": 7000,
+                "target_kind": "original_reference"
+              }
+            ],
+            "file": "gifs/native-rotated100.gif",
+            "frames": 9,
+            "original_gate": "PASS",
+            "sha256": "030e74ee3315fd0347f1cf8d7d29d691444607eea6353270304e29fc57b9964f"
+          },
+          "metrics": {
+            "acc_abs_cov_trace_bias": 0.017777074394604186,
+            "acc_accuracy_pass": true,
+            "acc_accuracy_score": 0.4288592283949333,
+            "acc_center_rms_sigma": 0.1364375762756252,
+            "acc_cov_trace_bias": 0.017777074394604186,
+            "acc_frozen_pass": true,
+            "acc_mass_tv": 0.030449999999999998,
+            "acc_passed": true,
+            "acc_radial_ks": 0.013919131530222617,
+            "holdout_abs_cov_trace_bias": 0.006633538810075557,
+            "holdout_accuracy_pass": true,
+            "holdout_accuracy_score": 0.26187963059897773,
+            "holdout_center_rms_sigma": 0.11644842800795982,
+            "holdout_cov_trace_bias": 0.006633538810075557,
+            "holdout_frozen_pass": true,
+            "holdout_mass_tv": 0.014029999999999997,
+            "holdout_passed": true,
+            "holdout_precision": 0.98462,
+            "holdout_radial_ks": 0.0066043064368809246,
+            "hq": 0.98535,
+            "mass_tv": 0.030450000000000005,
+            "max_cov_eig_ratio": 1.3948209113094188,
+            "max_mode_mass": 0.01195,
+            "max_radial_median_ratio": 1.1508061909538145,
+            "min_cov_eig_ratio": 0.69270186331834,
+            "min_hq_mode_mass": 0.0083,
+            "min_radial_median_ratio": 0.8851457552813397,
+            "modes": 100,
+            "output_sigma": 0.028999999165534973,
+            "precision": 0.98535,
+            "sharp_clean": 0.2781251072883606,
+            "sharp_noisy": 1.1951535940170288,
+            "step": 7000
+          },
+          "original_gate": "PASS",
+          "original_requirements": [
+            [
+              "modes",
+              ">=",
+              100
+            ],
+            [
+              "precision",
+              ">=",
+              0.97
+            ],
+            [
+              "min_hq_mode_mass",
+              ">=",
+              0.005
+            ],
+            [
+              "mass_tv",
+              "<=",
+              0.1
+            ],
+            [
+              "max_mode_mass",
+              "<=",
+              0.02
+            ],
+            [
+              "min_cov_eig_ratio",
+              ">=",
+              0.4
+            ],
+            [
+              "max_cov_eig_ratio",
+              "<=",
+              1.7
+            ],
+            [
+              "min_radial_median_ratio",
+              ">=",
+              0.65
+            ],
+            [
+              "max_radial_median_ratio",
+              "<=",
+              1.4
+            ],
+            [
+              "acc_mass_tv",
+              "<=",
+              0.06
+            ],
+            [
+              "acc_center_rms_sigma",
+              "<=",
+              0.2
+            ],
+            [
+              "acc_abs_cov_trace_bias",
+              "<=",
+              0.1
+            ],
+            [
+              "acc_radial_ks",
+              "<=",
+              0.04
+            ]
+          ],
+          "parent_original_id": "atlas-original19-native-rotated100",
+          "raw_status": "PASS",
+          "recipe_sha256": "49f4ea356bd3349334b2048d74f13ea78a15ec2abc1ab2d005df8f1081e7c15a",
+          "sampling": {
+            "clean_diagnostic": "output-noise-off same selected law",
+            "evaluation_noise_seed": 1636,
+            "evaluation_prior_seed": 1637,
+            "evaluation_target_seed": 1635,
+            "forced_ema_diagnostic": "separate original EMA branch",
+            "holdout_seed_offsets": {
+              "latent": 1603,
+              "noise": 1602,
+              "target": 1601
+            },
+            "independent_holdout_samples": 100000,
+            "observations": 34,
+            "primary_law": "state-selected weights/current learned output kernel",
+            "public_policy_latent_perturbation": "retained",
+            "samples": 20000,
+            "terminal_steps": [
+              6000,
+              6250,
+              6500,
+              6750,
+              7000
+            ]
+          },
+          "task_id": "pr223-native3-continuation-v1-native-rotated100"
+        },
+        {
+          "cost": {
+            "allowance_seconds": 1380.0,
+            "certified": true,
+            "charged_seconds": 906.7164290710352,
+            "completed_terminal": true,
+            "overrun_seconds": 0.0,
+            "paid_wall_seconds": 906.7164290710352,
+            "reserved_seconds": 0.0,
+            "terminal_status": "completed",
+            "unmeasured_interrupt_reserved_seconds": 0.0
+          },
+          "execution_status": "PASS",
+          "gate_status": "PASS",
+          "media": {
+            "actual_steps": [
+              0,
+              50,
+              750,
+              1750,
+              2750,
+              3750,
+              4750,
+              5750,
+              7000
+            ],
+            "bytes": 291484,
+            "caption": "FINAL full-protocol verdict; per-clock flags are original retained reads.",
+            "capture_metadata": [
+              {
+                "dtypes": {
+                  "centers": "float32",
+                  "reference_sigma": "float64",
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.029000001028180122,
+                "primary_source": "original_native_noisy_saved_live",
+                "selected_source": "fast",
+                "shapes": {
+                  "centers": [
+                    100,
+                    2
+                  ],
+                  "reference_sigma": [],
+                  "samples": [
+                    4096,
+                    2
+                  ],
+                  "target": [
+                    4096,
+                    2
+                  ]
+                },
+                "step": 0,
+                "target_kind": "original_reference"
+              },
+              {
+                "dtypes": {
+                  "centers": "float32",
+                  "reference_sigma": "float64",
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_native_noisy_saved_live",
+                "selected_source": "fast",
+                "shapes": {
+                  "centers": [
+                    100,
+                    2
+                  ],
+                  "reference_sigma": [],
+                  "samples": [
+                    4096,
+                    2
+                  ],
+                  "target": [
+                    4096,
+                    2
+                  ]
+                },
+                "step": 50,
+                "target_kind": "original_reference"
+              },
+              {
+                "dtypes": {
+                  "centers": "float32",
+                  "reference_sigma": "float64",
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_native_noisy_saved_live",
+                "selected_source": "averaged",
+                "shapes": {
+                  "centers": [
+                    100,
+                    2
+                  ],
+                  "reference_sigma": [],
+                  "samples": [
+                    4096,
+                    2
+                  ],
+                  "target": [
+                    4096,
+                    2
+                  ]
+                },
+                "step": 750,
+                "target_kind": "original_reference"
+              },
+              {
+                "dtypes": {
+                  "centers": "float32",
+                  "reference_sigma": "float64",
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_native_noisy_saved_live",
+                "selected_source": "averaged",
+                "shapes": {
+                  "centers": [
+                    100,
+                    2
+                  ],
+                  "reference_sigma": [],
+                  "samples": [
+                    4096,
+                    2
+                  ],
+                  "target": [
+                    4096,
+                    2
+                  ]
+                },
+                "step": 1750,
+                "target_kind": "original_reference"
+              },
+              {
+                "dtypes": {
+                  "centers": "float32",
+                  "reference_sigma": "float64",
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_native_noisy_saved_live",
+                "selected_source": "averaged",
+                "shapes": {
+                  "centers": [
+                    100,
+                    2
+                  ],
+                  "reference_sigma": [],
+                  "samples": [
+                    4096,
+                    2
+                  ],
+                  "target": [
+                    4096,
+                    2
+                  ]
+                },
+                "step": 2750,
+                "target_kind": "original_reference"
+              },
+              {
+                "dtypes": {
+                  "centers": "float32",
+                  "reference_sigma": "float64",
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_native_noisy_saved_live",
+                "selected_source": "averaged",
+                "shapes": {
+                  "centers": [
+                    100,
+                    2
+                  ],
+                  "reference_sigma": [],
+                  "samples": [
+                    4096,
+                    2
+                  ],
+                  "target": [
+                    4096,
+                    2
+                  ]
+                },
+                "step": 3750,
+                "target_kind": "original_reference"
+              },
+              {
+                "dtypes": {
+                  "centers": "float32",
+                  "reference_sigma": "float64",
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_native_noisy_saved_live",
+                "selected_source": "averaged",
+                "shapes": {
+                  "centers": [
+                    100,
+                    2
+                  ],
+                  "reference_sigma": [],
+                  "samples": [
+                    4096,
+                    2
+                  ],
+                  "target": [
+                    4096,
+                    2
+                  ]
+                },
+                "step": 4750,
+                "target_kind": "original_reference"
+              },
+              {
+                "dtypes": {
+                  "centers": "float32",
+                  "reference_sigma": "float64",
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_native_noisy_saved_live",
+                "selected_source": "averaged",
+                "shapes": {
+                  "centers": [
+                    100,
+                    2
+                  ],
+                  "reference_sigma": [],
+                  "samples": [
+                    4096,
+                    2
+                  ],
+                  "target": [
+                    4096,
+                    2
+                  ]
+                },
+                "step": 5750,
+                "target_kind": "original_reference"
+              },
+              {
+                "dtypes": {
+                  "centers": "float32",
+                  "reference_sigma": "float64",
+                  "samples": "float32",
+                  "target": "float32"
+                },
+                "output_sigma": 0.028999999165534973,
+                "primary_source": "original_native_noisy_saved_live",
+                "selected_source": "averaged",
+                "shapes": {
+                  "centers": [
+                    100,
+                    2
+                  ],
+                  "reference_sigma": [],
+                  "samples": [
+                    4096,
+                    2
+                  ],
+                  "target": [
+                    4096,
+                    2
+                  ]
+                },
+                "step": 7000,
+                "target_kind": "original_reference"
+              }
+            ],
+            "file": "gifs/native-staggered100.gif",
+            "frames": 9,
+            "original_gate": "PASS",
+            "sha256": "930b402dac983b56fbb8792a7f926625a26200ab71857d7d5bf3e6f6fe0caa6b"
+          },
+          "metrics": {
+            "acc_abs_cov_trace_bias": 0.003013395044575873,
+            "acc_accuracy_pass": true,
+            "acc_accuracy_score": 0.33241022167893947,
+            "acc_center_rms_sigma": 0.13574737701973882,
+            "acc_cov_trace_bias": -0.003013395044575873,
+            "acc_frozen_pass": true,
+            "acc_mass_tv": 0.029099999999999997,
+            "acc_passed": true,
+            "acc_radial_ks": 0.005430802046852201,
+            "holdout_abs_cov_trace_bias": 0.013583609196344826,
+            "holdout_accuracy_pass": true,
+            "holdout_accuracy_score": 0.2709135386538677,
+            "holdout_center_rms_sigma": 0.11397180765418091,
+            "holdout_cov_trace_bias": -0.013583609196344826,
+            "holdout_frozen_pass": true,
+            "holdout_mass_tv": 0.015850000000000003,
+            "holdout_passed": true,
+            "holdout_precision": 0.98659,
+            "holdout_radial_ks": 0.004551694308578047,
+            "hq": 0.9863,
+            "mass_tv": 0.0291,
+            "max_cov_eig_ratio": 1.309702555511581,
+            "max_mode_mass": 0.0122,
+            "max_radial_median_ratio": 1.165496004207532,
+            "min_cov_eig_ratio": 0.6405448350673867,
+            "min_hq_mode_mass": 0.0082,
+            "min_radial_median_ratio": 0.8673405272585325,
+            "modes": 100,
+            "output_sigma": 0.028999999165534973,
+            "precision": 0.9863,
+            "sharp_clean": 0.21592609584331512,
+            "sharp_noisy": 1.1808825731277466,
+            "step": 7000
+          },
+          "original_gate": "PASS",
+          "original_requirements": [
+            [
+              "modes",
+              ">=",
+              100
+            ],
+            [
+              "precision",
+              ">=",
+              0.97
+            ],
+            [
+              "min_hq_mode_mass",
+              ">=",
+              0.005
+            ],
+            [
+              "mass_tv",
+              "<=",
+              0.1
+            ],
+            [
+              "max_mode_mass",
+              "<=",
+              0.02
+            ],
+            [
+              "min_cov_eig_ratio",
+              ">=",
+              0.4
+            ],
+            [
+              "max_cov_eig_ratio",
+              "<=",
+              1.7
+            ],
+            [
+              "min_radial_median_ratio",
+              ">=",
+              0.65
+            ],
+            [
+              "max_radial_median_ratio",
+              "<=",
+              1.4
+            ],
+            [
+              "acc_mass_tv",
+              "<=",
+              0.06
+            ],
+            [
+              "acc_center_rms_sigma",
+              "<=",
+              0.2
+            ],
+            [
+              "acc_abs_cov_trace_bias",
+              "<=",
+              0.1
+            ],
+            [
+              "acc_radial_ks",
+              "<=",
+              0.04
+            ]
+          ],
+          "parent_original_id": "atlas-original19-native-staggered100",
+          "raw_status": "PASS",
+          "recipe_sha256": "49f4ea356bd3349334b2048d74f13ea78a15ec2abc1ab2d005df8f1081e7c15a",
+          "sampling": {
+            "clean_diagnostic": "output-noise-off same selected law",
+            "evaluation_noise_seed": 1636,
+            "evaluation_prior_seed": 1637,
+            "evaluation_target_seed": 1635,
+            "forced_ema_diagnostic": "separate original EMA branch",
+            "holdout_seed_offsets": {
+              "latent": 1603,
+              "noise": 1602,
+              "target": 1601
+            },
+            "independent_holdout_samples": 100000,
+            "observations": 34,
+            "primary_law": "state-selected weights/current learned output kernel",
+            "public_policy_latent_perturbation": "retained",
+            "samples": 20000,
+            "terminal_steps": [
+              6000,
+              6250,
+              6500,
+              6750,
+              7000
+            ]
+          },
+          "task_id": "pr223-native3-continuation-v1-native-staggered100"
+        }
+      ],
+      "trainer_family": "atlas"
+    },
+    {
       "candidate_id": "ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f",
       "candidate_revision": "ea9e173c4ef275b10ba679ce23423b41e97776f27b2bcc0a45375f4b35e87503",
       "claim_contract": {
