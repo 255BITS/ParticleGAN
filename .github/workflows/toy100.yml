@@ -2,7 +2,7 @@ name: Legacy BCap served-sample 22-toy gate
 
 on:
   push:
-    branches: [master, main, develop]
+    branches: [master]
     paths:
       - "benchmarks/toy100/**"
       - "benchmarks/toy_suite.py"
@@ -25,10 +25,10 @@ permissions:
 jobs:
   trained-gate:
     name: CPU / Python 3.11 / BCap with original output-noise sampling
-    # Train only merged primary-branch code, including manual dispatches.
+    # Train only master code, including manual dispatches.
     if: >-
       github.event_name != 'pull_request' &&
-      contains(fromJSON('["refs/heads/master", "refs/heads/main", "refs/heads/develop"]'), github.ref)
+      github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
     timeout-minutes: 75
     env:
