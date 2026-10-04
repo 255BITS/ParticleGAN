@@ -103,6 +103,10 @@ def _validate_measurement_contract(task):
     evaluation = task["evaluation"]
     kind = evaluation["kind"]
     fixed = {"scoring_weights": "live"}
+    if task.get("task_cohort") == "tier1_policy_selected_cloud_v1":
+        from .tier1_policy import validate
+        validate(task)
+        fixed["scoring_weights"] = "state_selected"
     if kind == "transfer_sustained":
         from benchmarks.locked_shared.observation import OBSERVATIONS, MIN_STABLE_CHECKS
         fixed.update(evaluator="benchmarks.transfer_suite.protocol:test_verdict",
@@ -179,6 +183,10 @@ def load_tasks(root: Path | str) -> dict:
         tasks[task["id"]] = task
     if not tasks:
         raise ValueError("no Forge tasks found")
+    from .tier1_policy import load_variants
+    for name, task in load_variants(root, tasks).items():
+        _validate_task(task)
+        tasks[name] = task
     return tasks
 
 
@@ -510,6 +518,9 @@ def _clockfree(task, evidence):
             or not isinstance(dependencies, list)):
         return _verdict("INCOMPLETE", "source audit must bind code and explain permitted state/counters")
     if audit["unexplained_clock_dependencies"]:
+        if task["execution"].get("clock_audit_scope") == "measure_known_dependencies":
+            return _verdict("FAIL", "; ".join(audit["unexplained_clock_dependencies"]),
+                            metrics={"clock_dependency_count": len(audit["unexplained_clock_dependencies"]), "parity_comparisons": len(comparisons)})
         return _verdict("BLOCKED", "unexplained clock dependencies prevent clock-free eligibility")
     return _verdict("PASS", "declared state/horizon/cadence/restart comparisons agree; source audit bound",
                     metrics={"parity_comparisons": len(comparisons)})
@@ -544,6 +555,11 @@ def grade_result(task: dict, result: dict | None) -> dict:
     sampling = grade_sampling(task, evidence)
     if sampling is not None:
         return _verdict(sampling["status"], sampling["reason"])
+    if task.get("task_cohort") == "tier1_policy_selected_cloud_v1" and task["adapter"] != "clockfree_audit":
+        from .tier1_policy import validate_evidence
+        policy_grade = validate_evidence(task, evidence)
+        if policy_grade is not None:
+            return _verdict(policy_grade["status"], policy_grade["reason"])
     guard = _guards(task, evidence)
     if guard is not None:
         return guard

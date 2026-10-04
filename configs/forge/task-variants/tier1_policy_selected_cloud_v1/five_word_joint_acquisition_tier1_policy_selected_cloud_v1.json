@@ -1,0 +1,372 @@
+{
+  "adapter": "word_joint",
+  "dependencies": [],
+  "description": "Can a joint BiGAN generator, encoder and critic acquire five equally likely canonical words and reconstruct every correctly paired input with confident token probabilities, including padding?",
+  "evaluation": {
+    "eval_output_noise": "clean",
+    "eval_samples": 1024,
+    "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+    "evaluator_revision": {
+      "change": "Correct == grading and reject unsupported operators; >= and <= numerical gates unchanged. Word fixture now honors declared prior_betas. Bind current sources for future execution only; original receipts and verdicts remain unchanged.",
+      "id": "explicit-equality-and-word-prior-betas-v3",
+      "previous_revision": {
+        "change": "Bind the current public fixture after bounded Recipe configuration API additions; retain the declared numerical bounds, task geometry and budget. Earlier evidence keeps its original source binding.",
+        "id": "joint-word-task-source-binding-v2",
+        "previous_api_images_sha256": "bedcb88841ef5cae8c9bfa60364bfacebbef29dea640036c1e30c4593ae71a3f"
+      },
+      "previous_source_sha256": {
+        "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+        "benchmarks/toy_audit/api_images.py": "243190aba0c5870668a63289b771dc6f784c9460b890bc6a77e12cc2796d7184",
+        "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97"
+      }
+    },
+    "guards": {
+      "exact_optimizer_updates": true,
+      "finite_state": true,
+      "mechanism_exercised": true,
+      "optimizer_roles": [
+        "generator",
+        "encoder",
+        "prior",
+        "discriminator"
+      ],
+      "rng_isolation": true
+    },
+    "kind": "transfer_sustained",
+    "minimum_stable_checks": 5,
+    "observations": 24,
+    "policy_observation": {
+      "diagnostic_credit": false,
+      "eval_streams": "forge-rng-v1_isolated",
+      "latent_policy": "actual_selected_public_policy",
+      "output_noise": false,
+      "row_selection": "original_task_strategy",
+      "sampler": "GANTrainer.sample",
+      "schema_version": 1,
+      "weight_selector": "state_selected"
+    },
+    "sampling_contract_version": 1,
+    "sampling_law": "tier1_selected_generated_and_paired_reconstructed_prior_without_output_noise",
+    "scoring_weights": "state_selected",
+    "sources": {
+      "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
+      "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+      "benchmarks/toy_audit/api_images.py": "2e6c65efff150f4fd393ad3b4ee3000d3f0f56b7a077a80f2624c4af46f7b491",
+      "benchmarks/toy_audit/definition_quality.py": "42d835ab7a0937a6c3759dd719691c721663b7857cb990405253e90f7fbd4cc9",
+      "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89",
+      "configs/forge/tasks/five_word_joint_acquisition.json": "419dbbd4aa5116e093e543cd7cacc904185408806cefbc8758004edabcecd048",
+      "experiments/forge/adapters.py": "e2902ef9f39f39067a8d275616f78bb07e672af69c562833bc1e7ffa681d08c7",
+      "experiments/forge/api.py": "e745bfc9f7246055e4d3cea0b3943493ccdf3769527a54684182514a6dc767cd",
+      "experiments/forge/boundaries.py": "17ce3e0da65d62158955ed03f5a7ba6f4a3526c74730019a5dc51f2d189b7218",
+      "experiments/forge/clockfree.py": "e6510f0824f436d07d488667bd78799d7224a6f78efed345510ee4c434543c46",
+      "experiments/forge/mechanisms.py": "9e4e1fe1f8cb9a24148cab88b7bf2f980e805a2e488c16a982768519bbe1b23f",
+      "experiments/forge/policy_adapters.py": "714046ea1655f1946e09dc2aeed27c43cf93f2841237c2be47f0f0049a5df9fa",
+      "experiments/forge/policy_behavior_adapters.py": "5eba85fbdd2e2675269eb7c283d3228b0def908e24e2dd06879035dd4ff370a0",
+      "experiments/forge/sampling.py": "10e7c17dd4ca30c1f2f3797aa323690db7f4bfdbfe295f23770bb6293ba3aab1",
+      "experiments/forge/tier1_policy.py": "2b92022a3bc6213826fadfaaa98b0c4aae0f4afab19f2206e6812c69ac23e5ce",
+      "experiments/forge/views.py": "673331e6fd93e56d69db83f034fa2e431ee5f2015f368c7de8029009da739e77",
+      "particlegan/policy.py": "8370e36b5b93afe95ae24d2b385aac8735a587f86ef2b87ed369ecfdfcb6fec5",
+      "particlegan/recipes.py": "1a7f9df746e242a2774068c819d70d50cd72dc4f7f6b22b0bd13e1345dcf8ab2",
+      "particlegan/training.py": "7dadc219135bc3e6bf657bfe9bc3fa81dd14d4b2a31c70d5ff61e2941db35c94"
+    },
+    "thresholds": [
+      [
+        "sample_count",
+        ">=",
+        1024
+      ],
+      [
+        "quality_fraction",
+        ">=",
+        0.95
+      ],
+      [
+        "modes",
+        "==",
+        5
+      ],
+      [
+        "mass_tv",
+        "<=",
+        0.1
+      ],
+      [
+        "reconstruction_exact",
+        "==",
+        1
+      ],
+      [
+        "minimum_reconstruction_token_probability",
+        ">=",
+        0.9
+      ]
+    ]
+  },
+  "execution": {
+    "device": "cuda",
+    "execution_path": "public_components",
+    "host": "five_word_joint",
+    "host_definition": {
+      "characters": "abcdefghijklmnopqrstuvwxyz_ ",
+      "encoder_widths": [
+        168,
+        128,
+        64,
+        2
+      ],
+      "generator_widths": [
+        2,
+        64,
+        128,
+        168
+      ],
+      "joint_critic_widths": [
+        170,
+        256,
+        128,
+        1
+      ],
+      "length": 6,
+      "resources": {
+        "batch_size": 256,
+        "num_particles": 5,
+        "z_dim": 2
+      },
+      "words": [
+        "apple",
+        "grape",
+        "lemon",
+        "melon",
+        "berry"
+      ]
+    },
+    "host_source": "benchmarks/toy_audit/api_images.py",
+    "initializer": "deterministic_orthogonal",
+    "original_schedule_horizon": 20000,
+    "policy_contract": {
+      "checkpoint": "complete_public_policy_models_optimizers_streams_and_cursor",
+      "cohort": "tier1_policy_selected_cloud_v1",
+      "execution_path": "public_components",
+      "external_limit": "task.execution.steps",
+      "lifecycle": "ordered_public_update",
+      "original_parent_credit": false,
+      "owner": "particlegan.UpdatePolicy",
+      "recipe_overrides": {},
+      "row_semantics": "independent",
+      "schedule": "preserve_resolved_recipe_none",
+      "schema_version": 1,
+      "sources": {
+        "experiments/forge/adapters.py": "e2902ef9f39f39067a8d275616f78bb07e672af69c562833bc1e7ffa681d08c7",
+        "experiments/forge/api.py": "e745bfc9f7246055e4d3cea0b3943493ccdf3769527a54684182514a6dc767cd",
+        "experiments/forge/boundaries.py": "17ce3e0da65d62158955ed03f5a7ba6f4a3526c74730019a5dc51f2d189b7218",
+        "experiments/forge/clockfree.py": "e6510f0824f436d07d488667bd78799d7224a6f78efed345510ee4c434543c46",
+        "experiments/forge/mechanisms.py": "9e4e1fe1f8cb9a24148cab88b7bf2f980e805a2e488c16a982768519bbe1b23f",
+        "experiments/forge/policy_adapters.py": "714046ea1655f1946e09dc2aeed27c43cf93f2841237c2be47f0f0049a5df9fa",
+        "experiments/forge/policy_behavior_adapters.py": "5eba85fbdd2e2675269eb7c283d3228b0def908e24e2dd06879035dd4ff370a0",
+        "experiments/forge/sampling.py": "10e7c17dd4ca30c1f2f3797aa323690db7f4bfdbfe295f23770bb6293ba3aab1",
+        "experiments/forge/tier1_policy.py": "2b92022a3bc6213826fadfaaa98b0c4aae0f4afab19f2206e6812c69ac23e5ce",
+        "experiments/forge/views.py": "673331e6fd93e56d69db83f034fa2e431ee5f2015f368c7de8029009da739e77",
+        "particlegan/policy.py": "8370e36b5b93afe95ae24d2b385aac8735a587f86ef2b87ed369ecfdfcb6fec5",
+        "particlegan/recipes.py": "1a7f9df746e242a2774068c819d70d50cd72dc4f7f6b22b0bd13e1345dcf8ab2",
+        "particlegan/training.py": "7dadc219135bc3e6bf657bfe9bc3fa81dd14d4b2a31c70d5ff61e2941db35c94"
+      }
+    },
+    "policy_parent_definition": {
+      "adapter": "word_joint",
+      "dependencies": [],
+      "description": "Can a joint BiGAN generator, encoder and critic acquire five equally likely canonical words and reconstruct every correctly paired input with confident token probabilities, including padding?",
+      "evaluation": {
+        "eval_output_noise": "clean",
+        "eval_samples": 1024,
+        "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
+        "evaluator_revision": {
+          "change": "Correct == grading and reject unsupported operators; >= and <= numerical gates unchanged. Word fixture now honors declared prior_betas. Bind current sources for future execution only; original receipts and verdicts remain unchanged.",
+          "id": "explicit-equality-and-word-prior-betas-v3",
+          "previous_revision": {
+            "change": "Bind the current public fixture after bounded Recipe configuration API additions; retain the declared numerical bounds, task geometry and budget. Earlier evidence keeps its original source binding.",
+            "id": "joint-word-task-source-binding-v2",
+            "previous_api_images_sha256": "bedcb88841ef5cae8c9bfa60364bfacebbef29dea640036c1e30c4593ae71a3f"
+          },
+          "previous_source_sha256": {
+            "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+            "benchmarks/toy_audit/api_images.py": "243190aba0c5870668a63289b771dc6f784c9460b890bc6a77e12cc2796d7184",
+            "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97"
+          }
+        },
+        "guards": {
+          "exact_optimizer_updates": true,
+          "finite_state": true,
+          "mechanism_exercised": true,
+          "optimizer_roles": [
+            "generator",
+            "encoder",
+            "prior",
+            "discriminator"
+          ],
+          "rng_isolation": true
+        },
+        "kind": "transfer_sustained",
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "sampling_contract_version": 1,
+        "sampling_law": "generated_and_paired_reconstructed_prior_without_output_noise",
+        "scoring_weights": "live",
+        "sources": {
+          "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
+          "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+          "benchmarks/toy_audit/api_images.py": "2e6c65efff150f4fd393ad3b4ee3000d3f0f56b7a077a80f2624c4af46f7b491",
+          "benchmarks/toy_audit/definition_quality.py": "42d835ab7a0937a6c3759dd719691c721663b7857cb990405253e90f7fbd4cc9",
+          "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89"
+        },
+        "thresholds": [
+          [
+            "sample_count",
+            ">=",
+            1024
+          ],
+          [
+            "quality_fraction",
+            ">=",
+            0.95
+          ],
+          [
+            "modes",
+            "==",
+            5
+          ],
+          [
+            "mass_tv",
+            "<=",
+            0.1
+          ],
+          [
+            "reconstruction_exact",
+            "==",
+            1
+          ],
+          [
+            "minimum_reconstruction_token_probability",
+            ">=",
+            0.9
+          ]
+        ]
+      },
+      "execution": {
+        "execution_path": "public_components",
+        "host": "five_word_joint",
+        "host_definition": {
+          "characters": "abcdefghijklmnopqrstuvwxyz_ ",
+          "encoder_widths": [
+            168,
+            128,
+            64,
+            2
+          ],
+          "generator_widths": [
+            2,
+            64,
+            128,
+            168
+          ],
+          "joint_critic_widths": [
+            170,
+            256,
+            128,
+            1
+          ],
+          "length": 6,
+          "resources": {
+            "batch_size": 256,
+            "num_particles": 5,
+            "z_dim": 2
+          },
+          "words": [
+            "apple",
+            "grape",
+            "lemon",
+            "melon",
+            "berry"
+          ]
+        },
+        "host_source": "benchmarks/toy_audit/api_images.py",
+        "initializer": "deterministic_orthogonal",
+        "original_schedule_horizon": 20000,
+        "prior": {
+          "exception_reason": "Retained finite-vocabulary joint BiGAN question explicitly uses five learned 2D rows, one possible code per word; a MoG-width question needs its own protocol.",
+          "kind": "particle_cloud",
+          "learnable": true,
+          "sigma": 0.0,
+          "standardize": false
+        },
+        "produces_state": false,
+        "protocol": "screening",
+        "steps": 20001
+      },
+      "id": "five_word_joint_acquisition",
+      "requires_capabilities": [
+        "public_components",
+        "checkpoint",
+        "named_rng",
+        "live_sampling",
+        "learned_locations",
+        "particle_cloud"
+      ],
+      "research_artifacts": {
+        "api_publication": "reports/toy_audit/api_contract/five_word_joint/publication.json",
+        "readout": "reports/forge/five-word-joint/README.md"
+      },
+      "resources": {
+        "cpu_threads": 1,
+        "gpu_memory_mb": 2048,
+        "gpus": 1,
+        "timeout_seconds": 900
+      },
+      "retained_question_ids": [
+        "source-family-15"
+      ],
+      "schema_version": 1
+    },
+    "prior": {
+      "exception_reason": "Independent Atlas/E22 row controls require an explicit equal-mass cloud; this scoped selected-policy variant supplies no original MoG/live credit.",
+      "kind": "particle_cloud",
+      "learnable": true,
+      "sigma": 0.0,
+      "standardize": false
+    },
+    "produces_state": false,
+    "protocol": "screening",
+    "steps": 20001
+  },
+  "id": "five_word_joint_acquisition_tier1_policy_selected_cloud_v1",
+  "policy_parent": {
+    "evaluation_fingerprint": "acbaa1d733b4f2e47ed97102418481c608763aebcf7277e5248d542be1486540",
+    "execution_fingerprint": "b6e774afa975f91e3441c30844163058e2c84a993fd4d897be8e6dca617c8654",
+    "id": "five_word_joint_acquisition",
+    "task_sha256": "419dbbd4aa5116e093e543cd7cacc904185408806cefbc8758004edabcecd048"
+  },
+  "requires_capabilities": [
+    "public_components",
+    "checkpoint",
+    "named_rng",
+    "served_sampling",
+    "learned_locations",
+    "particle_cloud",
+    "policy_controls",
+    "policy_serving"
+  ],
+  "research_artifacts": {
+    "api_publication": "reports/toy_audit/api_contract/five_word_joint/publication.json",
+    "readout": "reports/forge/five-word-joint/README.md"
+  },
+  "resources": {
+    "cpu_threads": 1,
+    "gpu_memory_mb": 2048,
+    "gpus": 1,
+    "timeout_seconds": 900
+  },
+  "retained_question_ids": [
+    "source-family-15"
+  ],
+  "schema_version": 1,
+  "task_cohort": "tier1_policy_selected_cloud_v1"
+}

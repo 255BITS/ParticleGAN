@@ -2,9 +2,9 @@
 
 Current task assignments, grouped by goal view and qualification tier. Required tasks gate progression; ranking and diagnostic tasks retain their declared roles.
 
-Catalog: **52 tasks**; **49 assigned** to at least one view; **3 unassigned**. Showing **7/7 views**.
+Catalog: **60 tasks**; **56 assigned** to at least one view; **4 unassigned**. Showing **8/8 views**.
 
-Declared priors across the catalog: **33 MoGParticlePrior**, **19 ParticlePrior** (including **3 nonsampled parameter controls**). Every experiment defines `execution.prior` explicitly; candidate and API defaults cannot supply it. `kind: mog` selects `MoGParticlePrior`; `kind: particle_cloud` selects `ParticlePrior`. Sigma alone does not identify the code path. Ordinary Forge MoG tasks require positive sigma; archived zero-sigma MoG evidence keeps its recorded kind. Task sigma is absolute; API demonstrations may instead record the recipe's relative `sigma_rel`.
+Declared priors across the catalog: **34 MoGParticlePrior**, **26 ParticlePrior** (including **4 nonsampled parameter controls**). Every experiment defines `execution.prior` explicitly; candidate and API defaults cannot supply it. `kind: mog` selects `MoGParticlePrior`; `kind: particle_cloud` selects `ParticlePrior`. Sigma alone does not identify the code path. Ordinary Forge MoG tasks require positive sigma; archived zero-sigma MoG evidence keeps its recorded kind. Task sigma is absolute; API demonstrations may instead record the recipe's relative `sigma_rel`.
 
 Regenerate from the repository root with `python -m experiments.forge experiments-by-tier --output reports/forge/EXPERIMENTS_BY_TIER.md`. Add `--json` for machine-readable output (use a `.json` output path when saving). Regeneration reads declarations and published artifacts and launches no training.
 
@@ -37,6 +37,7 @@ This report follows changing declarations and published evidence; it selects no 
 | [host_profile_transfer](../../configs/forge/views/host_profile_transfer.json) | 4 | 3 required | 19 required, 13 diagnostic | 2 required | provisional |
 | [k3p_two_pole_horizon](../../configs/forge/views/k3p_two_pole_horizon.json) | 1 | 2 diagnostic | 0 tasks | 0 tasks | provisional |
 | [quality_coverage](../../configs/forge/views/quality_coverage.json) | 2 | 3 required | 19 required | 0 tasks | provisional |
+| [tier1_policy_coverage](../../configs/forge/views/tier1_policy_coverage.json) | 1 | 7 required | 0 tasks | 0 tasks | undeclared |
 
 ## adaptation
 
@@ -433,12 +434,47 @@ Candidate outcomes, metrics and measured costs: [leaderboard](leaderboards/quali
 
 No tasks assigned.
 
+## tier1_policy_coverage
+
+Declaration: [tier1_policy_coverage](../../configs/forge/views/tier1_policy_coverage.json); revision 1; goal: `discriminator_stability`.
+
+Declared calibration status: **undeclared**.
+
+No published solution leaderboard for this view yet; task registration and related API media confer no candidate qualification.
+
+### Tier 1: smoke
+
+7 required.
+
+| Task | Importance | Prior code path | Experiment guide | Adapter / gate | Declared steps | Timeout (s) | Dependencies / shared execution |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| [gaussian1d_acquisition_tier1_policy_selected_cloud_v1](../../configs/forge/task-variants/tier1_policy_selected_cloud_v1/gaussian1d_acquisition_tier1_policy_selected_cloud_v1.json) | required | ParticlePrior (sigma=0) | [Question, results, GIFs](#experiment-gaussian1d-acquisition) | transfer_vector / transfer_sustained | 1000 | 120 | — |
+| [two_pole_tier1_policy_selected_cloud_v1](../../configs/forge/task-variants/tier1_policy_selected_cloud_v1/two_pole_tier1_policy_selected_cloud_v1.json) | required | ParticlePrior (sigma=0) | [Question, results, GIFs](#experiment-two-pole) | transfer_behavior / transfer_sustained | 80 | 300 | — |
+| [unused_token_hold_tier1_policy_selected_cloud_v1](../../configs/forge/task-variants/tier1_policy_selected_cloud_v1/unused_token_hold_tier1_policy_selected_cloud_v1.json) | required | ParticlePrior (sigma=0; not sampled) | [Question, results, GIFs](#experiment-unused-token-hold) | transfer_behavior / transfer_sustained | 200 | 300 | — |
+| [ae_gan_hold_tier1_policy_selected_cloud_v1](../../configs/forge/task-variants/tier1_policy_selected_cloud_v1/ae_gan_hold_tier1_policy_selected_cloud_v1.json) | required | ParticlePrior (sigma=0) | [Question, results, GIFs](#experiment-ae-gan-hold) | transfer_behavior / transfer_sustained | 250 | 300 | — |
+| [ring16_acquisition_tier1_policy_selected_cloud_v1](../../configs/forge/task-variants/tier1_policy_selected_cloud_v1/ring16_acquisition_tier1_policy_selected_cloud_v1.json) | required | ParticlePrior (sigma=0) | [Question, results, GIFs](#experiment-ring16-acquisition) | transfer_vector / transfer_sustained | 400 | 300 | — |
+| [five_word_joint_acquisition_tier1_policy_selected_cloud_v1](../../configs/forge/task-variants/tier1_policy_selected_cloud_v1/five_word_joint_acquisition_tier1_policy_selected_cloud_v1.json) | required | ParticlePrior (sigma=0) | [Question, results, GIFs](#experiment-five-word-joint) | word_joint / transfer_sustained | 20001 | 900 | — |
+| [clockfree_audit_tier1_policy_selected_cloud_v1](../../configs/forge/task-variants/tier1_policy_selected_cloud_v1/clockfree_audit_tier1_policy_selected_cloud_v1.json) | required | ParticlePrior (sigma=0) | [Question, results, GIFs](#experiment-clockfree-audit-tier1-policy-selected-cloud-v1) | clockfree_audit / clockfree_parity | 24 | 300 | — |
+
+### Tier 2: quality
+
+0 tasks.
+
+No tasks assigned.
+
+### Tier 3: endurance
+
+0 tasks.
+
+No tasks assigned.
+
 ## Tasks unassigned to any view
 
 These catalog tasks have no tier placement. Add an assignment to a view to include them in its policy.
 
 | Task | Prior code path | Experiment guide | Adapter / gate | Declared steps | Timeout (s) | Dependencies / shared execution |
 | --- | --- | --- | --- | --- | --- | --- |
+| [clockfree_audit_measurement_v1](../../configs/forge/tasks/clockfree_audit_measurement_v1.json) | MoGParticlePrior (sigma=0.025) | [Question, results, GIFs](#experiment-clockfree-audit-measurement-v1) | clockfree_audit / clockfree_parity | 24 | 300 | — |
 | [grid100_affine_square_named_v1_14k](../../configs/forge/tasks/grid100_affine_square_named_v1_14k.json) | MoGParticlePrior (sigma=0.025) | [Question, results, GIFs](#experiment-grid100) | native100_continuation / native_accuracy | 14000 total; 7000 additional | 7200 | [grid100_affine_square_named_v1](../../configs/forge/tasks/grid100_affine_square_named_v1.json) (checkpoint); [clockfree_audit](../../configs/forge/tasks/clockfree_audit.json) (gate) |
 | [rotated100_affine_square_named_v1_14k](../../configs/forge/tasks/rotated100_affine_square_named_v1_14k.json) | MoGParticlePrior (sigma=0.025) | [Question, results, GIFs](#experiment-rotated100) | native100_continuation / native_accuracy | 14000 total; 7000 additional | 7200 | [rotated100_affine_square_named_v1](../../configs/forge/tasks/rotated100_affine_square_named_v1.json) (checkpoint); [clockfree_audit](../../configs/forge/tasks/clockfree_audit.json) (gate) |
 | [staggered100_affine_square_named_v1_14k](../../configs/forge/tasks/staggered100_affine_square_named_v1_14k.json) | MoGParticlePrior (sigma=0.025) | [Question, results, GIFs](#experiment-staggered100) | native100_continuation / native_accuracy | 14000 total; 7000 additional | 7200 | [staggered100_affine_square_named_v1](../../configs/forge/tasks/staggered100_affine_square_named_v1.json) (checkpoint); [clockfree_audit](../../configs/forge/tasks/clockfree_audit.json) (gate) |
@@ -451,7 +487,7 @@ Task variants share a guide when their declarations name the same host or proble
 
 Checks reconstruction/identity and an acquired adversarial edit during the declared hold.
 
-Forge declarations: [ae_gan_hold](../../configs/forge/tasks/ae_gan_hold.json).
+Forge declarations: [ae_gan_hold](../../configs/forge/tasks/ae_gan_hold.json), [ae_gan_hold_tier1_policy_selected_cloud_v1](../../configs/forge/task-variants/tier1_policy_selected_cloud_v1/ae_gan_hold_tier1_policy_selected_cloud_v1.json).
 
 Declared Forge numerical gates and sampling:
 
@@ -471,6 +507,24 @@ Execution guards: finite state = True; optimizer roles = encoder, generator, pri
 | Prior | MoGParticlePrior (sigma=0.025) |
 | Sampling law | generated_and_reconstructed_prior_with_scheduled_output_noise |
 | Scoring weights | live |
+| Evaluation output noise | public_recipe_schedule |
+
+[ae_gan_hold_tier1_policy_selected_cloud_v1](../../configs/forge/task-variants/tier1_policy_selected_cloud_v1/ae_gan_hold_tier1_policy_selected_cloud_v1.json)
+
+| Metric | Required bound |
+| --- | --- |
+| recon_mse | <= 0.05 |
+| hold | <= 0.35 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; mechanism exercised = True; optimizer roles = encoder, generator, prior, discriminator; rng isolation = True.
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | ParticlePrior (sigma=0) |
+| Sampling law | tier1_selected_generated_and_reconstructed_prior_with_scheduled_output_noise |
+| Scoring weights | state_selected |
 | Evaluation output noise | public_recipe_schedule |
 
 Recorded Forge task outcomes (exact saved configuration/source/runtime):
@@ -506,6 +560,52 @@ Exact state/output parity for: step_label, horizon, evaluation_cadence, restart;
 | Prior | MoGParticlePrior (sigma=0.025) |
 | Sampling law | public_prior_without_output_noise |
 | Scoring weights | live |
+| Evaluation output noise | clean |
+
+No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
+
+No related published API training GIF. This task retains its own declared numerical audit.
+
+### Experiment: clockfree-audit-measurement-v1
+
+Measure the original four clock/state parity conditions and zero-dependency condition for an explicitly scheduled recipe; diagnostic FAIL grants no clock-free claim or qualification.
+
+Forge declarations: [clockfree_audit_measurement_v1](../../configs/forge/tasks/clockfree_audit_measurement_v1.json).
+
+Declared Forge numerical gates and sampling:
+
+[clockfree_audit_measurement_v1](../../configs/forge/tasks/clockfree_audit_measurement_v1.json)
+
+Exact state/output parity for: step_label, horizon, evaluation_cadence, restart; bound source audit required.
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | MoGParticlePrior (sigma=0.025) |
+| Sampling law | public_prior_without_output_noise |
+| Scoring weights | live |
+| Evaluation output noise | clean |
+
+No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
+
+No related published API training GIF. This task retains its own declared numerical audit.
+
+### Experiment: clockfree-audit-tier1-policy-selected-cloud-v1
+
+Check saved public trainer state under step_label, horizon, evaluation_cadence, restart perturbations.
+
+Forge declarations: [clockfree_audit_tier1_policy_selected_cloud_v1](../../configs/forge/task-variants/tier1_policy_selected_cloud_v1/clockfree_audit_tier1_policy_selected_cloud_v1.json).
+
+Declared Forge numerical gates and sampling:
+
+[clockfree_audit_tier1_policy_selected_cloud_v1](../../configs/forge/task-variants/tier1_policy_selected_cloud_v1/clockfree_audit_tier1_policy_selected_cloud_v1.json)
+
+Exact state/output parity for: step_label, horizon, evaluation_cadence, restart; bound source audit required.
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | ParticlePrior (sigma=0) |
+| Sampling law | tier1_selected_public_prior_without_output_noise |
+| Scoring weights | state_selected |
 | Evaluation output noise | clean |
 
 No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
@@ -555,7 +655,7 @@ Can a joint BiGAN generator, encoder and critic acquire five equally likely cano
 
 Explanation, interpretation and reproduction: [experiment readout](five-word-joint/README.md).
 
-Forge declarations: [five_word_joint_acquisition](../../configs/forge/tasks/five_word_joint_acquisition.json).
+Forge declarations: [five_word_joint_acquisition](../../configs/forge/tasks/five_word_joint_acquisition.json), [five_word_joint_acquisition_tier1_policy_selected_cloud_v1](../../configs/forge/task-variants/tier1_policy_selected_cloud_v1/five_word_joint_acquisition_tier1_policy_selected_cloud_v1.json).
 
 Declared Forge numerical gates and sampling:
 
@@ -581,6 +681,28 @@ Execution guards: finite state = True; optimizer roles = generator, encoder, pri
 | Scoring weights | live |
 | Evaluation output noise | clean |
 
+[five_word_joint_acquisition_tier1_policy_selected_cloud_v1](../../configs/forge/task-variants/tier1_policy_selected_cloud_v1/five_word_joint_acquisition_tier1_policy_selected_cloud_v1.json)
+
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 1024 |
+| quality_fraction | >= 0.95 |
+| modes | == 5 |
+| mass_tv | <= 0.1 |
+| reconstruction_exact | == 1 |
+| minimum_reconstruction_token_probability | >= 0.9 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: exact optimizer updates = True; finite state = True; mechanism exercised = True; optimizer roles = generator, encoder, prior, discriminator; rng isolation = True.
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | ParticlePrior (sigma=0) |
+| Sampling law | tier1_selected_generated_and_paired_reconstructed_prior_without_output_noise |
+| Scoring weights | state_selected |
+| Evaluation output noise | clean |
+
 Recorded Forge task outcomes (exact saved configuration/source/runtime):
 
 | Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
@@ -601,7 +723,7 @@ Can the public ParticleGAN trainer acquire the scalar law N(2, 0.5^2) from rando
 
 Explanation, interpretation and reproduction: [experiment readout](../toy_audit/api_contract/gaussian1d/README.md).
 
-Forge declarations: [gaussian1d_acquisition](../../configs/forge/tasks/gaussian1d_acquisition.json).
+Forge declarations: [gaussian1d_acquisition](../../configs/forge/tasks/gaussian1d_acquisition.json), [gaussian1d_acquisition_tier1_policy_selected_cloud_v1](../../configs/forge/task-variants/tier1_policy_selected_cloud_v1/gaussian1d_acquisition_tier1_policy_selected_cloud_v1.json).
 
 Declared Forge numerical gates and sampling:
 
@@ -624,6 +746,27 @@ All 24 declared observations and final live metrics are required.
 | Prior | MoGParticlePrior (sigma=0.025) |
 | Sampling law | public_prior_without_output_noise |
 | Scoring weights | live |
+| Evaluation output noise | clean |
+
+[gaussian1d_acquisition_tier1_policy_selected_cloud_v1](../../configs/forge/task-variants/tier1_policy_selected_cloud_v1/gaussian1d_acquisition_tier1_policy_selected_cloud_v1.json)
+
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 4096 |
+| finite_fraction | == 1 |
+| mean_error_sigma | <= 0.2 |
+| std_ratio | >= 0.8 |
+| std_ratio | <= 1.2 |
+| cdf_ks | <= 0.05 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | ParticlePrior (sigma=0) |
+| Sampling law | tier1_selected_public_prior_without_output_noise |
+| Scoring weights | state_selected |
 | Evaluation output noise | clean |
 
 No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
@@ -1009,7 +1152,7 @@ Related public-API demonstrations, with their own recorded contracts:
 
 Acquire all 16 equally weighted two-dimensional Gaussian clusters from scratch: radius 3, sigma 0.1; require meaningful occupancy in every cluster, roughly balanced mass and noncollapsed local spread within 400 updates. No extended hold phase.
 
-Forge declarations: [ring16_acquisition](../../configs/forge/tasks/ring16_acquisition.json).
+Forge declarations: [ring16_acquisition](../../configs/forge/tasks/ring16_acquisition.json), [ring16_acquisition_tier1_policy_selected_cloud_v1](../../configs/forge/task-variants/tier1_policy_selected_cloud_v1/ring16_acquisition_tier1_policy_selected_cloud_v1.json).
 
 Declared Forge numerical gates and sampling:
 
@@ -1032,6 +1175,27 @@ All 24 declared observations and final live metrics are required.
 | Prior | MoGParticlePrior (sigma=0.025) |
 | Sampling law | public_prior_without_output_noise |
 | Scoring weights | live |
+| Evaluation output noise | clean |
+
+[ring16_acquisition_tier1_policy_selected_cloud_v1](../../configs/forge/task-variants/tier1_policy_selected_cloud_v1/ring16_acquisition_tier1_policy_selected_cloud_v1.json)
+
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 4096 |
+| modes | >= 16 |
+| mass_tv | <= 0.15 |
+| hq | >= 0.85 |
+| component_covariance_error | <= 0.85 |
+| component_min_eigen_ratio | >= 0.15 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | ParticlePrior (sigma=0) |
+| Sampling law | tier1_selected_public_prior_without_output_noise |
+| Scoring weights | state_selected |
 | Evaluation output noise | clean |
 
 Recorded Forge task outcomes (exact saved configuration/source/runtime):
@@ -1180,7 +1344,7 @@ Does an unchanged global recipe move from zero by 800 updates with schedule hori
 
 Explanation, interpretation and reproduction: [experiment readout](k3p-two-pole-horizon-v1/README.md).
 
-Forge declarations: [two_pole](../../configs/forge/tasks/two_pole.json), [two_pole_800_schedule800_diagnostic_v1](../../configs/forge/tasks/two_pole_800_schedule800_diagnostic_v1.json), [two_pole_800_schedule80_diagnostic_v1](../../configs/forge/tasks/two_pole_800_schedule80_diagnostic_v1.json).
+Forge declarations: [two_pole](../../configs/forge/tasks/two_pole.json), [two_pole_800_schedule800_diagnostic_v1](../../configs/forge/tasks/two_pole_800_schedule800_diagnostic_v1.json), [two_pole_800_schedule80_diagnostic_v1](../../configs/forge/tasks/two_pole_800_schedule80_diagnostic_v1.json), [two_pole_tier1_policy_selected_cloud_v1](../../configs/forge/task-variants/tier1_policy_selected_cloud_v1/two_pole_tier1_policy_selected_cloud_v1.json).
 
 Declared Forge numerical gates and sampling:
 
@@ -1200,6 +1364,24 @@ Execution guards: finite state = True; optimizer roles = prior, discriminator; m
 | Prior | ParticlePrior (sigma=0) |
 | Sampling law | learned_particles_and_critic_gradient |
 | Scoring weights | live |
+| Evaluation output noise | not_applied_to_measurement |
+
+[two_pole_tier1_policy_selected_cloud_v1](../../configs/forge/task-variants/tier1_policy_selected_cloud_v1/two_pole_tier1_policy_selected_cloud_v1.json)
+
+| Metric | Required bound |
+| --- | --- |
+| mean_abs | >= 0.3 |
+| grad_med | <= 1 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; mechanism exercised = True; optimizer roles = prior, discriminator; rng isolation = True.
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | ParticlePrior (sigma=0) |
+| Sampling law | tier1_selected_learned_particles_and_critic_gradient |
+| Scoring weights | state_selected |
 | Evaluation output noise | not_applied_to_measurement |
 
 Recorded Forge task outcomes (exact saved configuration/source/runtime):
@@ -1260,7 +1442,7 @@ Related public-API demonstrations, with their own recorded contracts:
 
 Checks that active controls move and unused controls remain unchanged.
 
-Forge declarations: [unused_token_hold](../../configs/forge/tasks/unused_token_hold.json).
+Forge declarations: [unused_token_hold](../../configs/forge/tasks/unused_token_hold.json), [unused_token_hold_tier1_policy_selected_cloud_v1](../../configs/forge/task-variants/tier1_policy_selected_cloud_v1/unused_token_hold_tier1_policy_selected_cloud_v1.json).
 
 Declared Forge numerical gates and sampling:
 
@@ -1280,6 +1462,24 @@ Execution guards: finite state = True; optimizer roles = generator, discriminato
 | Prior | ParticlePrior (sigma=0) |
 | Sampling law | learned_parameter_measurement |
 | Scoring weights | live |
+| Evaluation output noise | not_applied_to_measurement |
+
+[unused_token_hold_tier1_policy_selected_cloud_v1](../../configs/forge/task-variants/tier1_policy_selected_cloud_v1/unused_token_hold_tier1_policy_selected_cloud_v1.json)
+
+| Metric | Required bound |
+| --- | --- |
+| unused_hold | >= 0.85 |
+| concept_move | >= 0.85 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; mechanism exercised = True; optimizer roles = generator, discriminator; rng isolation = True.
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | ParticlePrior (sigma=0) |
+| Sampling law | tier1_selected_learned_parameter_measurement |
+| Scoring weights | state_selected |
 | Evaluation output noise | not_applied_to_measurement |
 
 Recorded Forge task outcomes (exact saved configuration/source/runtime):
@@ -1521,6 +1721,6 @@ The wider question review also links standalone experiments outside the Forge ti
 - [Later questions](../toy_audit/api_contract/recent_prs/README.md)
 - [Caption questions](../toy_audit/api_contract/caption_prs/README.md)
 
-Declaration input digest: `adcdfd85cc335886698955a5cada9865918db70a411df410f52a6e0efb8493e9`. The JSON form includes the individual task and view file hashes.
+Declaration input digest: `2c7db50aff2e2da092f28012bdbc0966d8876c51a4c160724539a5c103791070`. The JSON form includes the individual task and view file hashes.
 
 Published artifact input digest: `b1a5aff720b016faef6000cdb4ec941af382d4d39e0bdaf1f1ac5fa93c822d95`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.

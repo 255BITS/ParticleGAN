@@ -39,6 +39,8 @@ def _probe(recipe, name):
             optimizer.state[parameter] = {"step": torch.tensor(float(step)),
                 "exp_avg": torch.zeros_like(parameter),
                 "exp_avg_sq": torch.full_like(parameter, 1. - beta2 ** step)}
+            if optimizer.param_groups[0]["amsgrad"]:
+                optimizer.state[parameter]["max_exp_avg_sq"] = optimizer.state[parameter]["exp_avg_sq"].clone()
             parameter.grad = torch.full_like(parameter, recipe.d_guard_ratio * 2)
             optimizer.step()
             applied = optimizer.guard.clipped_tensors

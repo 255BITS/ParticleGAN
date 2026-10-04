@@ -30,7 +30,8 @@ def build_report(root: Path, view_id: str | None = None, *, publication: dict | 
             if dependency["task"] not in tasks:
                 raise ValueError(f"{task['id']}: missing catalog dependency {dependency['task']!r}")
     task_paths = {read_json(path)["id"]: path.relative_to(root).as_posix()
-                  for path in sorted((root / "configs/forge/tasks").glob("*.json"))}
+                  for path in sorted([*(root / "configs/forge/tasks").glob("*.json"),
+                                      *(root / "configs/forge/task-variants").glob("*/*.json")])}
     view_paths = sorted((root / "configs/forge/views").glob("*.json"))
     if not view_paths:
         raise ValueError("no Forge views found")

@@ -28,6 +28,9 @@ POLICIES = {
     PARTICLES_AND_GRADIENT: "not_applied_to_measurement",
     PARAMETER_MEASUREMENT: "not_applied_to_measurement",
 }
+# Scoped selected-policy laws cannot impersonate the original clean/live laws.
+POLICIES.update({"tier1_selected_" + law: noise for law, noise in list(POLICIES.items())})
+
 ADAPTER_POLICIES = {
     "word_joint": JOINT_WORDS_CLEAN,
     "transfer_vector": PUBLIC_PRIOR_CLEAN,
@@ -69,6 +72,12 @@ def executed_receipt(sampling_law: str, *, eval_output_noise: str) -> dict:
 
 def expected_policy(task: dict) -> dict:
     """One central binding of implemented adapter/host paths to their policies."""
+    if task.get("task_cohort") == "tier1_policy_selected_cloud_v1":
+        from .tier1_policy import validate
+        parent = validate(task)
+        original = expected_policy(parent)
+        return executed_receipt("tier1_selected_" + original["sampling_law"],
+                                eval_output_noise=original["eval_output_noise"])
     adapter = task.get("adapter")
     if adapter == "transfer_behavior":
         host = task.get("execution", {}).get("host", task.get("id"))
