@@ -347,7 +347,7 @@ def main():
         "ordinary_gate_changes": 0, "ordinary_qualification_reuse": 0,
         "publication_optimizer_updates": 0, "publication_sampling_draws": 0,
         "interpretation_limits": ["Movement and bounded slope do not establish two-pole mass balance or coverage.",
-            "Clean identical zero coordinates have no symmetry-breaking source in this deterministic host; equal-coordinate movement is permitted by the behavior gate.",
+            "Clean zero-origin coordinates can separate through the existing paired relativistic payoff; report measured sign balance and spread rather than infer two-mode acquisition from movement.",
             "Horizon800 stretches input-noise duration8 to80 for the noisy recipe and changes LR-dependent penalty/anchor timing. Continuing800updates may activate the existing fixed200-step critic guard.",
             "Neither diagnostic horizon supplies ordinary Tier1 qualification, word-task evidence, calibrated screening or default adoption."],
         "validation": {"four_durable_certificates_and_raw_grades": True, "full_source_snapshots": True,

@@ -39,7 +39,7 @@
       "experiment/toy": 3,
       "experiment/trajectory": 2,
       "experiment/transition": 7,
-      "forge_engine": 56,
+      "forge_engine": 57,
       "lrfree/feature-cells-cb64-ra": 4058,
       "report/atlas-explanation": 7,
       "report/behavioral_baseline": 32,
@@ -102,7 +102,7 @@
       "candidate_patch": 26,
       "configuration": 807,
       "driver": 401,
-      "engine_support": 56,
+      "engine_support": 57,
       "evaluator_or_audit": 324,
       "evidence_artifact": 1574,
       "frozen_candidate_implementation": 15,
@@ -116,13 +116,13 @@
       "visualization": 22,
       "visualization_artifact": 721
     },
-    "files": 11723
+    "files": 11724
   },
   "coverage": {
-    "declared_count": 11723,
+    "declared_count": 11724,
     "missing": [],
     "stale": [],
-    "tracked_count": 11723,
+    "tracked_count": 11724,
     "unclassified": [],
     "valid": true
   },
@@ -7124,7 +7124,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "41fff96e83a9e47932d7c4bf13f9e24582256301",
+      "git_blob": "d0ea66691c574eecd7d8e704ee0b4d9f45aed002",
       "path": "experiments/forge/api.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -7145,28 +7145,28 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "30ab9594f8896ba65d109eeb9936d0edf3e3e888",
+      "git_blob": "97c64be63a6d2c6de248f75528601fb6a727f424",
       "path": "experiments/forge/behavior_adapters.py",
       "role": "engine_support",
       "suggested_tiers": []
     },
     {
       "family": "forge_engine",
-      "git_blob": "1ddd98415852d5b84e1a3b1d6cf0fb8a67441465",
+      "git_blob": "5a5a45a4dc90988d22ff7a640c0cb5ec16483568",
       "path": "experiments/forge/board_filters.py",
       "role": "engine_support",
       "suggested_tiers": []
     },
     {
       "family": "forge_engine",
-      "git_blob": "5da99c0965635ca920090f585f7fee7f582c6e6c",
+      "git_blob": "5e45397efdebb2cbe94c7c436a8885d74e2a5ebd",
       "path": "experiments/forge/boundaries.py",
       "role": "engine_support",
       "suggested_tiers": []
     },
     {
       "family": "forge_engine",
-      "git_blob": "b21333c677ccb687b233997cde185e497e396b11",
+      "git_blob": "96a506e481ba89cde9f94b92e5fe7d7fac9c9354",
       "path": "experiments/forge/calibration.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -7264,7 +7264,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "9470759844eb13d99e67325de3d11b72e70121ca",
+      "git_blob": "d80324bdb54cfe84c98cafa9c780f8d892956d53",
       "path": "experiments/forge/knowledge.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -7313,7 +7313,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "9eb9c0319ebc1c66c51d0b8d2919dabf2ae748bd",
+      "git_blob": "853c4e9e1dbff51e23d1db5360ed68a8059171fe",
       "path": "experiments/forge/planning.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -7348,7 +7348,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "45e64a70f0c12fbf2a629aeb61fc3d0f88efc5b3",
+      "git_blob": "22cf63d2c7af552f431b585f86175931bde326ba",
       "path": "experiments/forge/promotion.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -7418,7 +7418,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "49edc2f469d8eb6430bf0e0f1fc4ce2766c90aad",
+      "git_blob": "9b7af203c4d68389b0eee97637a7ffc389cc863d",
       "path": "experiments/forge/technique_board.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -7439,7 +7439,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "a65367033a5fa7d1b7b6fb56ef1a0dc63e9e329c",
+      "git_blob": "e4d1d9de159111f534fec0aa187a6843b7c07f59",
       "path": "experiments/forge/telemetry.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -7460,6 +7460,13 @@
     },
     {
       "family": "forge_engine",
+      "git_blob": "ddcb48ec456f812419a83b58854e2611cdbaf9b1",
+      "path": "experiments/forge/two_pole_observer.py",
+      "role": "engine_support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "forge_engine",
       "git_blob": "1c62aac5fcbbbb7e5a3b2dfad3c6dae88d2bbdc1",
       "path": "experiments/forge/vectorprofiles.py",
       "role": "engine_support",
@@ -7467,7 +7474,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "b0c928bbda307b1a086eaaa00954c84dc62221be",
+      "git_blob": "e9ea774a40ed0407539eefc1c9a2fecd87d19aa7",
       "path": "experiments/forge/views.py",
       "role": "engine_support",
       "suggested_tiers": []

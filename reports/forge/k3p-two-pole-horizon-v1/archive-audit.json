@@ -1,0 +1,14 @@
+{
+  "actual_training_gifs_verified": 4,
+  "archive_sha256": "68ca93892345822ff2b4c3c549afbe3831549cc753aee243dfaa16ea154b5bd0",
+  "certified_attempts_verified": 4,
+  "concluded_readouts_verified": 2,
+  "executed_source_git_blobs_verified": 1143,
+  "max_supervised_attempts_verified": 1,
+  "qualification_input": false,
+  "regular_files_verified": 1271,
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "status": "PASS",
+  "training_updates_added": 0
+}

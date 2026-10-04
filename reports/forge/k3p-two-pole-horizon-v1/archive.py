@@ -36,7 +36,7 @@ def create(output):
     assert len(summary["arms"]) == 4
     assert (REPORT / "README.md").is_file(), "Final readout must exist before archiving"
     assert not output.exists() and not (REPORT / "archive.json").exists(), "Archive identity is immutable; use a new version"
-    members, attempts, sources, queue_roots = {}, [], {}, set()
+    members, attempts, sources, queue_roots, intervals = {}, [], {}, set(), []
 
     def add(name, data):
         safe(name)
@@ -56,6 +56,8 @@ def create(output):
         envelope = json.loads((durable / "request.json").read_text())
         request = envelope["request"]
         certificate = json.loads((durable / "evidence.json").read_text())
+        result = json.loads((durable / "result.json").read_text())
+        intervals.append({"attempt_id": attempt, **result["raw"]["telemetry"]["interval"]})
         local = Path(certificate["local_artifact_root"]).resolve()
         queue = Path(request["queue_root"]).resolve()
         assert local.is_relative_to(queue) and queue.is_relative_to(ROOT / "runs/forge")
@@ -92,8 +94,26 @@ def create(output):
             data = Path(artifact["path"]).read_bytes()
             assert sha(data) == artifact["sha256"] and len(data) == artifact["bytes"]
             add(artifact["archive_member"], data)
+    candidate_pairs = {(a["candidate_id"], a["candidate_revision"]) for a in attempts}
+    readouts = []
+    for file in sorted((ROOT / "reports/forge/records").glob("readout-*.json")):
+        value = json.loads(file.read_bytes())
+        if (value.get("candidate_id"), value.get("candidate_revision")) not in candidate_pairs:
+            continue
+        assert value["evidence_scope"] == "research_diagnostic" and value["lifecycle"] == "concluded"
+        assert value["qualification_input"] is value["qualification_reuse"] is False
+        member = f"readouts/{file.name}"
+        add(member, file.read_bytes())
+        readouts.append({"record_id": value["record_id"], "archive_member": member,
+                         "sha256": sha(members[member]), "attempt_ids": value["attempt_ids"]})
+    assert len(readouts) == 2
+    assert {a for r in readouts for a in r["attempt_ids"]} == {a["attempt_id"] for a in attempts}
+    intervals.sort(key=lambda row: row["started_at"])
+    assert all(row["device"] == "cpu" and row["started_at"] < row["finished_at"] for row in intervals)
+    assert all(a["finished_at"] <= b["started_at"] for a, b in zip(intervals, intervals[1:]))
+    concurrency = {"max_supervised_attempts": 1, "intervals": intervals}
     inventory = {"schema_version": 1, "scope": "exact_nonqualifying_horizon_diagnostic_evidence",
-                 "attempts": attempts,
+                 "attempts": attempts, "readouts": readouts, "execution_concurrency": concurrency,
                  "sources": {commit: {"digest": m["digest"], "file_count": len(m["files"])} for commit, m in sources.items()},
                  "entries": [{"path": name, "bytes": len(data), "sha256": sha(data)} for name, data in sorted(members.items())]}
     add("inventory.json", encode(inventory))
@@ -108,6 +128,7 @@ def create(output):
             "archive_sha256": sha(output.read_bytes()), "archive_bytes": output.stat().st_size,
             "inventory_sha256": sha(members["inventory.json"]), "inventory_entries": len(inventory["entries"]),
             "regular_files": len(members), "attempts": attempts, "sources": inventory["sources"],
+            "readouts": readouts, "execution_concurrency": concurrency,
             "charged_wall_seconds": summary["charged_wall_seconds"], "qualification_input": False,
             "default_adoption": False, "training_updates_added": 0, "sampling_draws_added": 0,
             "restore": "Extract into an isolated directory. Durable certificates, exact raw traces/checkpoints/logs, queue metadata, executed source snapshots, declarations and final publication are retained. Preserve embedded scientific identities and original absolute paths."}
@@ -132,6 +153,24 @@ def verify(card, output):
     for e in inventory["entries"]:
         assert len(data[e["path"]]) == e["bytes"] and sha(data[e["path"]]) == e["sha256"]
     assert inventory["attempts"] == card["attempts"] and inventory["sources"] == card["sources"]
+    assert inventory["readouts"] == card["readouts"] and inventory["execution_concurrency"] == card["execution_concurrency"]
+    for readout in inventory["readouts"]:
+        value = data[readout["archive_member"]]
+        assert sha(value) == readout["sha256"]
+        record = json.loads(value)
+        assert record["record_id"] == readout["record_id"] and record["attempt_ids"] == readout["attempt_ids"]
+        assert record["evidence_scope"] == "research_diagnostic" and record["lifecycle"] == "concluded"
+        assert record["qualification_input"] is record["qualification_reuse"] is False
+    assert len(inventory["readouts"]) == 2
+    assert {a for r in inventory["readouts"] for a in r["attempt_ids"]} == {a["attempt_id"] for a in inventory["attempts"]}
+    intervals = inventory["execution_concurrency"]["intervals"]
+    assert len(intervals) == 4 and intervals == sorted(intervals, key=lambda row: row["started_at"])
+    assert inventory["execution_concurrency"]["max_supervised_attempts"] == 1
+    assert all(row["device"] == "cpu" and row["started_at"] < row["finished_at"] for row in intervals)
+    assert all(a["finished_at"] <= b["started_at"] for a, b in zip(intervals, intervals[1:]))
+    for interval in intervals:
+        result = json.loads(data[f"durable/{interval['attempt_id']}/result.json"])
+        assert interval == {"attempt_id": interval["attempt_id"], **result["raw"]["telemetry"]["interval"]}
     for commit, source in inventory["sources"].items():
         prefix = f"sources/{commit}/"
         manifest = json.loads(data[prefix + "forge-source.json"])
@@ -194,6 +233,7 @@ def verify(card, output):
              "regular_files_verified": len(data), "certified_attempts_verified": 4,
              "executed_source_git_blobs_verified": sum(s["file_count"] for s in inventory["sources"].values()),
              "actual_training_gifs_verified": 4, "qualification_input": False,
+             "concluded_readouts_verified": 2, "max_supervised_attempts_verified": 1,
              "training_updates_added": 0, "sampling_draws_added": 0}
     output.write_bytes(encode(audit))
     return audit

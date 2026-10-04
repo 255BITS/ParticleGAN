@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 446. Inventory coverage: complete. Unresolved import items: 7.
+Records: 448. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -4005,6 +4005,22 @@ Ordinary global candidate failed two_pole movement: mean_abs=0.0394435711<0.3; q
 
 [Evidence](../../reports/forge/attempts/2f43521c43294c3a872be42d999debf1/result.json) · [Record](records/readout-9e297f3a07ea06f0abc19272.json)
 
+### k3p--01eca360219ea5225a6e30a31800c7bbe70ca08c3800e259c17a67f0ea528ab5 · readout-a91dbccf086504f9accaee6b
+
+**Scope:** research_diagnostic; scientific; revision `3041a40a01932d40c304875add3e4e2689f4e535636861f3319a1a1f6792c402`.
+
+Within the existing input-noisy/output-clean full-horizon K3P recipe, slower critic rates and faster learned-prior transport may reduce ring within-mode covariance error. Positive critic coefficients .5/1 test this tradeoff while each complete global recipe must pass all five ordinary Tier 1 tasks.
+
+**Observed:** {'PASS': 2}; wall seconds 16.21; mechanism `floor_constant`.
+
+
+
+Both800-update diagnostic variants PASS movement/slope: original-schedule1.0542289019 and stretched-schedule .9759703279. These are diagnostic passes only and grant no ordinary qualification.
+
+**Next:** See reports/forge/k3p-two-pole-horizon-v1/README.md and saved force analysis. Retain the main gate and family selection. Investigate existing global critic/particle balance before any new separately bounded search; no automatic follow-on work.
+
+[Evidence](../../reports/forge/attempts/21bdde76d2f045e98b829627eb9071f1/result.json) · [Record](records/readout-a91dbccf086504f9accaee6b.json)
+
 ### k3p-r1r2-matched-v1 · readout-a9c44ece3a8e2265db452db4
 
 **Scope:** current; scientific; revision `0a2b2de1a8a75005f8f76ca17130010f477c520425761cff04dd2a4f81f2bc3a`.
@@ -4196,6 +4212,22 @@ Bounded R1/R2 Modern GAN toy-host configuration {'lr': 0.00425, 'reg_coeff': 1.0
 **Next:** Stop this exact failed configuration; review the provisional convergence screen before another parameter study. No downstream diagnostic, seed repeat or default adoption follows.
 
 [Evidence](../../reports/forge/technique-receipts/b686547339464e94a60fd692675f1545.json) · [Record](records/readout-dc31730b85dde3cf85253359.json)
+
+### k3p-global-repair-v1 · readout-dd6ff59094d1d766c5b0fe2b
+
+**Scope:** research_diagnostic; scientific; revision `bf98d947a19472491d60388e43c6af2039f0f98fb874a6498614febba5fdfbe6`.
+
+The exact repaired global recipe acquires the five-word inverse task and transfers without task-specific optimizer tuning across every eligible required discriminator-stability task under ordinary prerequisites.
+
+**Observed:** {'FAIL': 2}; wall seconds 18.457; mechanism `structural`.
+
+
+
+Both800-update diagnostics FAIL movement: original-schedule .0896976665 and stretched-schedule .1111024097 versus .3. More steps did not rescue this existing global word-positive recipe.
+
+**Next:** See reports/forge/k3p-two-pole-horizon-v1/README.md and saved force analysis. Retain the main gate and family selection. Investigate existing global critic/particle balance before any new separately bounded search; no automatic follow-on work.
+
+[Evidence](../../reports/forge/attempts/200fd64ddd1a42a5bf300e5cae01e0b6/result.json) · [Record](records/readout-dd6ff59094d1d766c5b0fe2b.json)
 
 ### ka2--4496b859e066d7a4b6279f2d34fbd58d083e0f18c2a22ade5ba12c964d01a7ca · readout-e3ab30a3f7ae4a6debe66e5d
 
@@ -4627,4 +4659,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `cd01889e310544e3b70b959c054879d4f8995ac7ab67597dbf731eadceecc88a`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `3caf3efa464f5d6decbc2e5835fe003169695d4887752d6d9b408e04bbedc3ce`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
