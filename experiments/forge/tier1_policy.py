@@ -197,6 +197,6 @@ def write_declarations(root):
     view = {'schema_version': 1, 'id': 'tier1_policy_coverage', 'goal': 'discriminator_stability',
         'revision': 1, 'description': 'Separate Atlas/E22 selected-policy cloud Tier 1 coverage. Original live/MoG parents receive no pass credit; incompatible independent objectives retain explicit blockers.',
         'assignments': [{'task': name + SUFFIX, 'qualification_tier': 1, 'importance': 'required', 'order': index} for index, name in enumerate(PARENTS)],
-        'eligibility': {}}
+        'eligibility': {}, 'reporting': {'family_totals': False}}
     atomic_json(root / 'configs/forge/views/tier1_policy_coverage.json', view)
     return view

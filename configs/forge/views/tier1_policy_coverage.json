@@ -47,6 +47,9 @@
   "eligibility": {},
   "goal": "discriminator_stability",
   "id": "tier1_policy_coverage",
+  "reporting": {
+    "family_totals": false
+  },
   "revision": 1,
   "schema_version": 1
 }
