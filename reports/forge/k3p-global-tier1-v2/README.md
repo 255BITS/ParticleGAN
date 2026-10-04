@@ -2,6 +2,8 @@
 
 Neither bounded round produced a global K3P recipe that passed all five Tier 1 tasks. The two strongest observed recipes passed movement, token hold and AE hold, then failed ring quality. All 20 word cells remain UNKNOWN. These results reject the measured complete recipes without establishing that the K3P family cannot work.
 
+The verified [historical `k3p-coeff170-cap1` word receipt](../word-root-cause/receipts/k3p-coeff170-cap1.json) passed all 24 word checks and motivated this search; it grants no qualification credit to these 20 trials.
+
 The [single current family leaderboard](../technique-inventory.md) owns family selection. This report retains the research explanation and exact receipts without creating a second leaderboard. Qualification requires all five ordinary Tier 1 tasks to pass for one complete recipe: `two_pole`, `unused_token_hold`, `ae_gan_hold`, `ring16_acquisition`, and `five_word_joint_acquisition`. The screening profile remains provisional. Passing it can support a configured family standard; it never adopts public defaults or establishes higher-tier qualification.
 
 The [first declaration](plans.json) tested critic coefficients 10, 30 and 85, base learning rates .00425 and .006375, and critic multipliers .25 and 1.5. Every combination retained the same clean-output, full-horizon global K3P controls. The latent-prior multiplier was .0012 divided by the base rate. This fixes the nominal latent-prior base rate, not the realized learning-rate trajectory. `two_pole` directly optimizes generated coordinates using the public direct-particle optimizer: its base rate is the candidate learning rate, and latent-table `prior_lr_mult` and `prior_betas` are inapplicable there.
