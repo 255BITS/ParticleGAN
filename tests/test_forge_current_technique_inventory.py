@@ -164,7 +164,8 @@ def test_completed_studies_cannot_replace_selected_family_configs_or_history(evi
     for key, value in baseline.items():
         if key != "provenance":
             assert current[key] == value
-    assert set(current) - set(baseline) == {"completed_api_studies"}
+    assert set(current) - set(baseline) == {"completed_api_studies", "original_pr223_atlas"}
+    assert current["original_pr223_atlas"]["counts"] == {"PASS": 19}
     assert current["provenance"]["selected_rows_sha256"] == baseline["provenance"]["selected_rows_sha256"]
     assert current["provenance"]["input_digest"] != baseline["provenance"]["input_digest"]
     rows = current["completed_api_studies"]["rows"]
@@ -1081,15 +1082,81 @@ def test_one_visible_table_leads_with_actual_atlas_and_keeps_configuration_scope
     assert text.count("| --- | --- | --- |") == 1
     assert "<details>" not in text and "| Study | Result |" not in text
     table = [line for line in text.splitlines() if line.startswith("|")][2:]
-    assert len(table) == 18  # Seven scoped diagnostic rows and 11 ordinary rows.
-    assert table[0].startswith("| [Atlas C6 LR .0053125 / prior1.5")
-    assert "| Particles | **7/26 PASS** · FAIL 11 · BLOCKED 8" in table[0]
+    assert len(table) == 19  # Original-law replay, seven diagnostics and 11 ordinary rows.
+    assert table[0].startswith("| [Original PR223 Atlas FULL · LR .00425 / prior2]")
+    assert "| Particles | **19/19 PASS**" in table[0]
+    assert table[1].startswith("| [Atlas C6 CHANGED-rate / noise-OFF · LR .0053125 / prior1.5")
+    assert "| Particles | **7/26 PASS** · FAIL 11 · BLOCKED 8" in table[1]
+    assert "seed0" in table[1]
     assert sum(line.startswith("| [Atlas C6") for line in table) == 1
     assert not any(line.startswith("| Atlas ·") for line in table)
     assert any("0/26 PASS** · FAIL 1 · NOT_RUN 25 · COMPLETE" in line for line in table)
     assert any("INVALID 1** · NOT_RUN 25 · numerical gate UNAVAILABLE" in line for line in table)
-    assert all("ordinary qualification" in line for line in table[7:])
-    assert [line.split(" · ", 1)[0][2:] for line in table[7:]] == [row["technique"] for row in result["rows"] if row["trainer_family"] != "atlas"]
+    assert all("ordinary qualification" in line for line in table[8:])
+    assert [line.split(" · ", 1)[0][2:] for line in table[8:]] == [row["technique"] for row in result["rows"] if row["trainer_family"] != "atlas"]
+    assert result == before
+
+
+def test_original_pr223_score_uses_verified_full_original_law_not_changed_c6_cells():
+    result = read_json(ROOT / "reports/forge/technique-inventory.json")
+    before = deepcopy(result)
+    row = publication._original_pr223_atlas(result)
+    assert row == result["original_pr223_atlas"]
+    assert row["counts"] == {"PASS": 19} and row["required"] == len(row["question_ids"]) == 19
+    assert row["representation"] == "Particles"
+    assert row["seeds"] == {"native": 1234, "moving": 1234, "portability": 0}
+    assert row["publication"]["sha256"] == "4cdbec6b54e31ecdaac5ee2cd887258004c5da7c9a7102261e1c1c8c3939b66a"
+    assert row["recipe"]["overrides"]["lr"] == .00425
+    assert row["recipe"]["overrides"]["prior_lr_mult"] == 2.
+    assert row["recipe"]["overrides"]["output_noise_mode"] == "learnable"
+    assert not any(row[key] for key in ("qualification_input", "qualification_reuse",
+                                       "default_adoption", "speed_ranking", "new_current_retest_credit"))
+    text = publication._current_markdown(result, ROOT, ROOT / "reports/forge/technique-inventory.md")
+    assert "native/moving seed1234, portability seed0" in text
+    assert "no current-26/default credit" in text
+    assert result == before
+
+
+@pytest.mark.parametrize("tamper", ["scope", "duplicate", "partial", "clean_credit", "gate", "seed", "recipe", "source", "reuse"])
+def test_original_pr223_display_rejects_changed_or_partial_original_claim(tamper):
+    # Mutations are synthetic metadata controls, never new scientific evidence.
+    result = deepcopy(read_json(ROOT / "reports/forge/technique-inventory.json"))
+    study = next(row for row in result["completed_api_studies"]["rows"] if row["id"] == "atlas19_original")
+    native = next(cell for cell in study["cells"] if cell["definition"]["group"] == "native")
+    if tamper == "scope":
+        study["required_cells"] = 26
+    elif tamper == "duplicate":
+        study["cells"][-1] = deepcopy(study["cells"][0])
+    elif tamper == "partial":
+        native["full_protocol_complete"] = False
+    elif tamper == "clean_credit":
+        native["native_gates"]["noisy"] = deepcopy(native["native_gates"]["clean"])
+    elif tamper == "gate":
+        native["definition"]["original_requirements"] = []
+    elif tamper == "seed":
+        study["cells"][0]["definition"]["original_host"]["seed"] = 1234
+    elif tamper == "recipe":
+        study["recipe"]["overrides"]["lr"] = .0053125
+    elif tamper == "source":
+        study["source"]["protected_files_sha256"]["configs/100gaussians/atlas.json"] = "0" * 64
+    else:
+        study["reuse"] = True
+    with pytest.raises(ValueError, match="Original PR223"):
+        publication._original_pr223_atlas(result)
+
+
+@pytest.mark.parametrize("scope", ["recorded", "quality_coverage"])
+def test_original_pr223_metadata_is_byte_inert_for_older_render_scopes(scope):
+    result = _tier_display_fixture(["UNKNOWN"] * 5)
+    result.update(view="quality_coverage" if scope == "quality_coverage" else "discriminator_stability", view_revision=2)
+    if scope == "recorded":
+        result["recorded_policy"] = "configs/forge/view-history/discriminator_stability-v2.json"
+    path = ROOT / "reports/forge/older-view.md"
+    original = publication._current_markdown(result, ROOT, path)
+    result["original_pr223_atlas"] = publication._original_pr223_atlas(
+        read_json(ROOT / "reports/forge/technique-inventory.json"))
+    before = deepcopy(result)
+    assert publication._current_markdown(result, ROOT, path) == original
     assert result == before
 
 
