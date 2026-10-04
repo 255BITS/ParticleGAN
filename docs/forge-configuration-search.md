@@ -124,8 +124,12 @@ Its [declaration](../configs/forge/searches/k3p-global-tier1-v2.json) tests twel
 complete recipes by varying positive critic coefficients and G/D rates. It
 holds the nominal latent-prior rate fixed and retains all five current Tier 1
 requirements. A historical word pass motivates the base; it cannot fill a new
-trial's word cell. The first required failure stops that trial, leaving later
-cells UNKNOWN. A 5/5 result is needed before replacing the current family pin.
+trial's word cell. Its separately bounded follow-up restores an existing input
+noise control as an explicit structural base, then searches eight numerical
+configurations within that base's signature. Both bases belong to K3P because
+their optimizer and loss formulation stay the same. The first required failure
+stops that trial, leaving later cells UNKNOWN. A 5/5 result is needed before
+replacing the current family pin.
 
 For a new v2 search, review and bind each derived card's decision contract to
 its actual tuning scope before enqueueing. An inherited full-view contract

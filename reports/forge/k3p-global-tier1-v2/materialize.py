@@ -14,6 +14,7 @@ REPORT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT))
 from experiments.forge.api import task_formulation_context
 from experiments.forge.contracts import file_hash, stable_hash
+from reports.forge.regenerate_technique_inventory import _evaluator_summary
 
 METRIC_RENDERER = ROOT / "reports/forge/family-wide-word-repairs/render.py"
 OPS = {"==": operator.eq, ">=": operator.ge, "<=": operator.le,
@@ -36,6 +37,12 @@ def identity(path):
 
 def binding(row):
     return row if "recipe" in row else row["applied"]
+
+
+def evaluator_projection(evaluator):
+    # Final metric-bound rows are compact; per-check trajectories are archived.
+    return (_evaluator_summary(evaluator) if any(isinstance(value, list) and key != "metrics"
+            for key, value in evaluator.items()) else evaluator)
 
 
 def render_outputs(local, request, task, row, output):
@@ -64,6 +71,7 @@ def render_outputs(local, request, task, row, output):
             views = record["views"]
         else:
             assert task["id"] == "ring16_acquisition" and record["samples"].shape == (4096, 2)
+            metrics = {name: point[name] for name, _, _ in task["evaluation"]["thresholds"]}
             # Declared centers are a deterministic reference, not sampled data.
             views = [{"kind": "scatter", "title": "Ring centers and actual scored samples",
                 "target": torch.tensor(task["execution"]["host_definition"]["means"]),
@@ -184,7 +192,7 @@ def main():
             assert math.isfinite(wall) and wall >= 0
             measured_wall += wall
             effective = binding(row)
-            compact.update(metrics=row["metrics"], evaluator_result=row["evaluator_result"],
+            compact.update(metrics=row["metrics"], evaluator_result=evaluator_projection(row["evaluator_result"]),
                 guards=row["evidence"]["guards"], execution_steps=task["execution"]["steps"],
                 thresholds=task["evaluation"]["thresholds"], effective_recipe=effective["recipe"],
                 prior=effective["prior"], initializer=effective["initializer"], initialization=effective["initialization"],

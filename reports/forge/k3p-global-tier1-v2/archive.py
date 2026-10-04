@@ -1,6 +1,7 @@
 """Archive or independently verify this finite study's exact saved evidence."""
 import argparse
 from collections import Counter
+from datetime import datetime
 import gzip
 import hashlib
 import io
@@ -8,10 +9,13 @@ import json
 import math
 from pathlib import Path, PurePosixPath
 import subprocess
+import sys
 import tarfile
 
 ROOT = Path(__file__).resolve().parents[3]
 REPORT = Path(__file__).resolve().parent
+sys.path.insert(0, str(ROOT))
+from reports.forge.regenerate_technique_inventory import _evaluator_summary
 DEFAULT_ARCHIVE = Path("/home/martyn/dev/ParticleGAN/artifacts/forge/k3p-global-tier1-v2-v1.tar.gz")
 
 
@@ -99,6 +103,7 @@ def create(output):
         "benchmarks/toy_audit/api_run.py", "benchmarks/toy_audit/api_reframe.py", "benchmarks/toy_audit/api_contract.py"}
     for relative in sorted(renderer_names):
         add(f"renderers/{relative}", (ROOT / relative).read_bytes())
+    add("publication/evaluator-projection.py", (ROOT / "reports/forge/regenerate_technique_inventory.py").read_bytes())
     inventory = {"schema_version": 1, "scope": "exact_ordinary_evidence_and_executed_sources",
         "entries": [{"path": name, "bytes": len(data), "sha256": digest(data)} for name, data in sorted(members.items())],
         "attempts": attempts, "sources": {commit: {"digest": manifest["digest"], "files": len(manifest["files"])}
@@ -214,7 +219,8 @@ def verify(card, output, root):
             compact = compact_tasks[(attempt_id, task_id)]
             assert row["raw_status"] == "completed" and row["gate_status"] == grading["grades"][task_id]["gate_status"] == compact["status"]
             assert row["compatibility_key"] == envelope["job"]["compatibility_key"] == compact["compatibility_key"]
-            assert row["evaluator_result"] == compact["evaluator_result"] and row["metrics"] == compact["metrics"]
+            assert compact["evaluator_result"] in (row["evaluator_result"], _evaluator_summary(row["evaluator_result"]))
+            assert row["metrics"] == compact["metrics"]
             assert row["evaluator_result"]["convergence"]["observations"] == len(row["evidence"]["observations"]) == 24
             assert row["evidence"]["guards"]["all_finite"] and row["evidence"]["guards"]["unintended_rng_deviations"] == 0
             effective = row if "recipe" in row else row["applied"]
@@ -271,11 +277,46 @@ def verify(card, output, root):
     assert outcomes["UNKNOWN"] == summary["unknown_count"] and sum(outcomes.values()) == summary["task_cells"] == 26 * card["candidate_count"]
     assert math.isclose(sum(row["cost"]["wall_seconds"] for row in rows.values()), summary["charged_wall_seconds"], abs_tol=1e-6)
     assert summary["charged_wall_seconds"] == card["charged_wall_seconds"]
+    # The immutable archive predates this additive concurrency disclosure.
+    for addendum in card.get("publication_addenda", []):
+        value = (root / addendum["path"]).read_bytes()
+        assert digest(value) == addendum["sha256"] and len(value) == addendum["bytes"]
+        if not addendum["path"].endswith("execution-concurrency.json"):
+            continue
+        disclosure = json.loads(value)
+        assert disclosure["archive_sha256"] == card["archive_sha256"]
+        for phase in disclosure["phases"]:
+            events = data[phase["archived_events"]["path"]]
+            assert digest(events) == phase["archived_events"]["sha256"]
+            assert len(events) == phase["archived_events"]["bytes"]
+            active, intervals, peak = {}, {}, 0
+            for event in sorted(map(json.loads, events.splitlines()), key=lambda event: event["timestamp"]):
+                if event["event"] == "claimed":
+                    active[event["attempt"]] = True
+                    peak = max(peak, len(active))
+                    intervals[event["attempt"]] = {"start": event["timestamp"], "backend": "cpu" if event["gpu"] == "cpu" else "cuda:" + event["gpu"], "task": event["task"]}
+                elif event["event"] == "completed":
+                    intervals[event["attempt"]]["end"] = event["timestamp"]
+                    del active[event["attempt"]]
+            assert not active and len(intervals) == phase["attempt_count"] and peak == phase["observed_maximum_workers"]
+            expected = {}
+            for first, left in intervals.items():
+                for second, right in intervals.items():
+                    start, end = max(left["start"], right["start"]), min(left["end"], right["end"])
+                    if first < second and start < end:
+                        expected[frozenset((first, second))] = (start, end)
+            assert len(expected) == len(phase["overlaps"])
+            for overlap in phase["overlaps"]:
+                assert expected[frozenset(overlap["attempts"])] == (overlap["start"], overlap["end"])
+                assert overlap["seconds"] == (datetime.fromisoformat(overlap["end"]) - datetime.fromisoformat(overlap["start"])).total_seconds()
+                assert overlap["backends"] == [intervals[attempt]["backend"] for attempt in overlap["attempts"]]
+                assert overlap["tasks"] == [intervals[attempt]["task"] for attempt in overlap["attempts"]]
     proof = {"schema_version": 1, "status": "PASS", "archive_sha256": card["archive_sha256"],
         "archive_bytes": len(archive_bytes), "inventory_entries": len(inventory["entries"]),
         "regular_files": len(data), "ordinary_certificates": len(requests), "source_git_blob_files": source_counts,
         "actual_training_media_receipts": media, "measured_pass": outcomes["PASS"], "measured_fail": outcomes["FAIL"],
         "unknown_count": outcomes["UNKNOWN"], "reproducer_sha256": digest(Path(__file__).read_bytes()),
+        "publication_addenda_checked": len(card.get("publication_addenda", [])),
         "training_updates_added": 0, "sampling_draws_added": 0,
         "scope": "Exact member hashes, safe unique archive paths, ordinary durable/grader certificates, executed Git blobs, complete recipe/prior/init metadata and saved-observation/media identities. This checks provenance without training, resampling, rescoring or independent qualification."}
     output.write_bytes(encode(proof))

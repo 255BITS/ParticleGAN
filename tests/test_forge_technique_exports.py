@@ -288,6 +288,67 @@ def write_report(root, goal, *, execution_backend, output_prefix):
         assert (root / "reports/forge/technique-receipts/attempt-one.json").is_file()
 
 
+def test_frozen_publication_reconstructs_tier1_question_without_losing_full_denominator(
+        frozen_checkout, monkeypatch):
+    root, directory, _ = frozen_checkout
+    code = root / "experiments/forge"
+    atomic_json(root / "configs/forge/ideas/new-technique.json", {
+        "id": "new-technique", "decision_contract": {"scope": {"through_tier": 1}}})
+    (code / "planning.py").write_text('''
+from .contracts import read_json
+def load_idea(root, idea_id):
+    return read_json(root / 'configs/forge/ideas' / (idea_id + '.json'))
+def resolve_idea(root, idea_id, *, view_id, through_tier, freeze_source, execution_backend, cuda_model):
+    assert through_tier == load_idea(root, idea_id)['decision_contract']['scope']['through_tier'], 'changed question scope'
+    assert freeze_source is False
+    return {'through_tier': through_tier}
+''')
+    (code / "knowledge.py").write_text('''
+from .planning import resolve_idea
+def _current_request(root, idea_id, view_id, execution_backend='cuda', cuda_model=None):
+    return resolve_idea(root, idea_id, view_id=view_id, through_tier=3, freeze_source=False,
+                        execution_backend=execution_backend, cuda_model=cuda_model)
+''')
+    (code / "technique_board.py").write_text('''
+import json
+from pathlib import Path
+from . import knowledge
+from .sources import inspect_source
+def write_report(root, goal, *, execution_backend, output_prefix):
+    knowledge._current_request(root, 'new-technique', goal, execution_backend)
+    source = inspect_source(root, ['reports/helpers/evaluator.py'])
+    requirements = {'1': ['toy', 'token', 'ae', 'ring', 'words'],
+                    '2': ['q-' + str(i) for i in range(19)], '3': ['hold', 'extension']}
+    row = {'candidate_id': 'new-technique', 'candidate_revision': 'revision-one',
+           'attempt_ids': ['attempt-one'], 'bindings': {'source_digest': source['digest']},
+           'tasks': [{'task_id': name, 'status': 'FAIL' if name == 'toy' else 'UNKNOWN'}
+                     for names in requirements.values() for name in names]}
+    path = Path(str(output_prefix) + '.json')
+    path.write_text(json.dumps({'rows': [row], 'tier_requirements': requirements,
+                               'provenance': {'view_sha256': 'stable-view', 'reducer_sha256': 'stable-reducer'}}))
+    return {'json': str(path), 'rows': 1}
+''')
+    _git(root, "add", "experiments/forge", "configs/forge/ideas")
+    _git(root, "commit", "-qm", "freeze Tier 1 question")
+    commit = _git(root, "rev-parse", "HEAD")
+    request = read_json(directory / "request.json")
+    request["request"].update(through_tier=1, source=inspect_source(root, ["reports/helpers/evaluator.py"]))
+    atomic_json(directory / "request.json", request)
+    certificate = read_json(directory / "evidence.json")
+    certificate["source"] = request["request"]["source"]
+    atomic_json(directory / "evidence.json", certificate)
+    originals = {path: path.read_bytes() for path in directory.iterdir()}
+    monkeypatch.setattr(publication, "render_markdown", lambda *args, **kwargs: "Snapshot\nrows\n")
+    result = read_json(publication.regenerate(root, source_commit=commit)["json"])
+    assert [len(tasks) for tasks in result["tier_requirements"].values()] == [5, 19, 2]
+    row = result["rows"][0]
+    assert row["candidate_revision"] == "revision-one" and row["attempt_ids"] == ["attempt-one"]
+    assert len(row["tasks"]) == 26
+    assert sum(task["status"] == "FAIL" for task in row["tasks"]) == 1
+    assert sum(task["status"] == "UNKNOWN" for task in row["tasks"]) == 25
+    assert originals == {path: path.read_bytes() for path in directory.iterdir()}
+
+
 def test_frozen_subprocess_regrades_exact_source_after_live_source_advance(frozen_checkout, monkeypatch):
     root, directory, commit = frozen_checkout
 
