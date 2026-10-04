@@ -1,0 +1,636 @@
+{
+  "automatic_cpu_workers": 1,
+  "campaign_ceiling_seconds": 25200,
+  "candidate_ceiling_seconds": 2100,
+  "configuration_count": 12,
+  "cpu_threads": 1,
+  "gpu": 0,
+  "historical_word_receipts_reused_for_qualification": 0,
+  "hypothesis": "Intermediate positive K3P critic coefficients and a slower existing critic rate may restore two_pole movement against its unchanged particle_l2 restoring term while retaining sufficient regularization for the words joint critic. Each complete global recipe is tested through all five ordinary Tier 1 tasks, with the first required failure stopping progression.",
+  "limits": "Twelve complete global configurations in one bounded round. Existing positive numerical controls only; no new technique, task-specific override, objective, architecture, seed study, changed gate, historical word witness import, unchanged repeat, higher-tier execution or automatic paid follow-up. The nominal latent prior base rate is fixed, not its realized trajectory. Later tasks after a prerequisite failure remain UNKNOWN.",
+  "maximum_global_workers": 2,
+  "nominal_absolute_latent_prior_base_lr": 0.0012,
+  "policy_fingerprint": "c856f402249b71c8f877974e427dc7ed70bf7102f9bc0e433b933d7a024789fe",
+  "preparation_checkout_commit": "0fa92c5b599da8ab2c891e544aafc09cf802a70d",
+  "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+  "qualification_input": false,
+  "required_tier1_count": 5,
+  "runtime_cohort": {
+    "compute_profiles": {
+      "cpu": {
+        "backend": "cpu",
+        "deterministic": true,
+        "machine": "x86_64",
+        "model": "AMD Ryzen 9 5900X 12-Core Processor",
+        "tf32": false,
+        "threads": 1
+      },
+      "cuda": {
+        "backend": "cuda",
+        "compute_capability": "8.6",
+        "deterministic": true,
+        "driver": "610.57.04",
+        "model": "NVIDIA RTX A6000",
+        "tf32": false,
+        "threads": 1
+      }
+    },
+    "execution_backend": "cuda",
+    "runtime": {
+      "implementation": "CPython",
+      "machine": "x86_64",
+      "packages": {
+        "numpy": "2.5.3",
+        "scipy": "1.17.1",
+        "torch": "2.14.0"
+      },
+      "python": "3.14.7",
+      "system": "Linux"
+    }
+  },
+  "schema_version": 1,
+  "scientific_python_executable": "/usr/bin/python",
+  "scope": "bounded_global_existing_hyperparameter_search",
+  "seed": 0,
+  "source_digest": "7007025b3bc3a5a6503e7d37d491512f58c803673a893c6eeb5a6ff67a23c5b9",
+  "spec": "configs/forge/searches/k3p-global-tier1-v2.json",
+  "spec_semantic_sha256": "80da0b663a315dbfd637b40ccdeab2cf16b19013f88865c2ac0460426e8d05ab",
+  "spec_sha256": "f9244897a06e08d5d438cd04dc51a9236d0147642a95bf3ccef9e0f47063f983",
+  "study": "k3p-global-tier1-v2",
+  "task_bindings": 60,
+  "technique_signature": {
+    "digest": "a8d9b9c2248c7cd74c6f00e3cebe29ec75e8f9a73570bf31588aee20e2ada07b",
+    "fixed_recipe_fields": {
+      "birth_death_backend": "knn",
+      "birth_death_feature_scale": "none",
+      "birth_death_isolation": false,
+      "birth_death_parent_policy": "real_anchor",
+      "birth_death_space": "data",
+      "conditioning": "scalar",
+      "continuous_policy": null,
+      "critic_formulation": "k3p",
+      "critic_payoff_damping": true,
+      "critic_r1_real": true,
+      "direct_particle_gain": true,
+      "distance_reduction": "sum",
+      "encoder_mode": "none",
+      "lr_control": "mobility",
+      "model": "gan",
+      "num_classes": null,
+      "optimizer_family": "formulation",
+      "output_noise_mode": "fixed",
+      "particle_birth_death": false,
+      "reg_arm": null,
+      "reopen_anchor": "hold",
+      "reopen_guard": null,
+      "reopen_signal": "data",
+      "row_evidence_exclude": true,
+      "row_evidence_gate": false,
+      "row_evidence_hold": true,
+      "row_evidence_hot": true,
+      "row_evidence_null": "theory",
+      "row_policy": "independent",
+      "table_release_rule": "any",
+      "ucd_target": "class"
+    },
+    "mechanisms": {
+      "amsgrad": false,
+      "averaged_serving": false,
+      "beta2_schedule": {
+        "declared": false,
+        "network_changing": false,
+        "prior_changing": false
+      },
+      "critic_anchor": true,
+      "critic_guard": true,
+      "critic_penalty": {
+        "initial": true,
+        "terminal": true
+      },
+      "gradient_cap": true,
+      "k3p_penalty_lr_floor": true,
+      "latent_damping": true,
+      "network_horizon_cap": false,
+      "network_moments": [
+        false,
+        true
+      ],
+      "network_terminal_updates": true,
+      "output_noise_warmup": false,
+      "penalty_schedule": {
+        "changing": false,
+        "declared": false
+      },
+      "prior_moments": [
+        false,
+        true
+      ],
+      "prior_regularization": false,
+      "prior_terminal_updates": true,
+      "reconstruction_objective": null,
+      "scheduled_learning_rates": true,
+      "terminal_second_moment": true,
+      "training_input_noise": false,
+      "training_output_noise": false,
+      "ucd_objective": null
+    },
+    "schema_version": 1
+  },
+  "through_tier": 1,
+  "trials": [
+    {
+      "candidate": "k3p--0ababb7bec701731ff473ae925c5aaebc92aec05056db9f0d01e881aa1a451b5",
+      "candidate_binding_sha256": "c09cd0b1f84d99fc39f4a9623021cc0bb1020b32cc24dfa297f81f42fd0421c9",
+      "candidate_revision": "ea9acc11ebb4d950d5847995b06234609f5e29e89ccde059748541dce3541d0c",
+      "configuration_id": "0ababb7bec701731ff473ae925c5aaebc92aec05056db9f0d01e881aa1a451b5",
+      "control_binding_sha256": "5308d75119a24087f1363cb3462366244bcafc1ee9fc40c0033b993c5b49f34a",
+      "decision_contract_sha256": "d9ed251c7ef69a2f68def721377019adfb45ca56354331196d48ef132afecdf0",
+      "decision_status": "READY",
+      "declaration": "configs/forge/configurations/k3p--0ababb7bec701731ff473ae925c5aaebc92aec05056db9f0d01e881aa1a451b5.json",
+      "declaration_sha256": "812e3a84ca03284b82bf55cbe460f8f718fffa7f3ed0553cd8f0e375c22ef3c3",
+      "jobs_sha256": "adf0d4c66bf2eafcd08f78b6e4d44d102884176a472e6895bff3005d818142d2",
+      "scientific_signature": "7c2409ecf43e4dfab3f2442085294883ce636b004ba08e89ac68cbde2c177d2f",
+      "settings": {
+        "d_lr_mult": 1.5,
+        "lr": 0.00425,
+        "prior_lr_mult": 0.28235294117647053,
+        "reg_coeff": 30.0
+      },
+      "task_bindings": {
+        "ae_gan_hold": {
+          "evaluation": "ed43ab7e1de06ff544118767e9e338f865b369aae6a8be7c41ffab802de16c10",
+          "execution": "7783e1624cf86e193cfa771154c69f7232f22d3bcbbaf4741f9b1ea617da04b7"
+        },
+        "five_word_joint_acquisition": {
+          "evaluation": "acbaa1d733b4f2e47ed97102418481c608763aebcf7277e5248d542be1486540",
+          "execution": "b6e774afa975f91e3441c30844163058e2c84a993fd4d897be8e6dca617c8654"
+        },
+        "ring16_acquisition": {
+          "evaluation": "b361c512f05ebb898fcf5ab3386ad47cfa87f8fc6c56a3f14b90bc979083d433",
+          "execution": "91325802a2cd0d09a3066e24a716f01d8d851802c23bb73784aec8994eadf996"
+        },
+        "two_pole": {
+          "evaluation": "cffa9a9722e4ca72028aa9b4cb8ae0dc119746f08581f2e6d8eae65690c562c1",
+          "execution": "3d15ff9d4ae9428d07dbf539db15e5783f55ef08b9ec9a90db678b91ea701f83"
+        },
+        "unused_token_hold": {
+          "evaluation": "f63357ca9f6af37fe09b6d999794150d0052ce80605c059c9267c895ffae35df",
+          "execution": "4e8f55ac47bb0ed4220ed77e480e697d5509aa2ab99a21ddf5fa4d9e2fd5a7d7"
+        }
+      }
+    },
+    {
+      "candidate": "k3p--607bd2f2bf44f748b7acddcca0456c4cb92cda1371c9f1c5e93672f5d782046e",
+      "candidate_binding_sha256": "58fc2455b593b479cb80323f118e50316935347a58191fce96206ed117815bc5",
+      "candidate_revision": "5510ab727a3c4ca6f36abbfea3680076ac669d5d85714b1731d4f86d27154ee6",
+      "configuration_id": "607bd2f2bf44f748b7acddcca0456c4cb92cda1371c9f1c5e93672f5d782046e",
+      "control_binding_sha256": "5308d75119a24087f1363cb3462366244bcafc1ee9fc40c0033b993c5b49f34a",
+      "decision_contract_sha256": "aecfd95d794402b44be8ab5a7d516cde559aeca8758cc2ae22f4e209d9f85ea0",
+      "decision_status": "READY",
+      "declaration": "configs/forge/configurations/k3p--607bd2f2bf44f748b7acddcca0456c4cb92cda1371c9f1c5e93672f5d782046e.json",
+      "declaration_sha256": "58079300735d7af75673ed063ba1fbef8398c184aa5c5bcc2668a7962c33b2b7",
+      "jobs_sha256": "e29a437362410f73abd83ce455551603869152b4f4353b4d1ac47ec008dece12",
+      "scientific_signature": "a4cf33c81a8c802b60c7b434cde9b737865c174fc372017c5537c8b9852e719b",
+      "settings": {
+        "d_lr_mult": 0.25,
+        "lr": 0.00425,
+        "prior_lr_mult": 0.28235294117647053,
+        "reg_coeff": 85.0
+      },
+      "task_bindings": {
+        "ae_gan_hold": {
+          "evaluation": "ed43ab7e1de06ff544118767e9e338f865b369aae6a8be7c41ffab802de16c10",
+          "execution": "7783e1624cf86e193cfa771154c69f7232f22d3bcbbaf4741f9b1ea617da04b7"
+        },
+        "five_word_joint_acquisition": {
+          "evaluation": "acbaa1d733b4f2e47ed97102418481c608763aebcf7277e5248d542be1486540",
+          "execution": "b6e774afa975f91e3441c30844163058e2c84a993fd4d897be8e6dca617c8654"
+        },
+        "ring16_acquisition": {
+          "evaluation": "b361c512f05ebb898fcf5ab3386ad47cfa87f8fc6c56a3f14b90bc979083d433",
+          "execution": "91325802a2cd0d09a3066e24a716f01d8d851802c23bb73784aec8994eadf996"
+        },
+        "two_pole": {
+          "evaluation": "cffa9a9722e4ca72028aa9b4cb8ae0dc119746f08581f2e6d8eae65690c562c1",
+          "execution": "3d15ff9d4ae9428d07dbf539db15e5783f55ef08b9ec9a90db678b91ea701f83"
+        },
+        "unused_token_hold": {
+          "evaluation": "f63357ca9f6af37fe09b6d999794150d0052ce80605c059c9267c895ffae35df",
+          "execution": "4e8f55ac47bb0ed4220ed77e480e697d5509aa2ab99a21ddf5fa4d9e2fd5a7d7"
+        }
+      }
+    },
+    {
+      "candidate": "k3p--862c7c23a730daa7bae2c2076b47e192483f4731012e3faa97e9881c708edb0f",
+      "candidate_binding_sha256": "77719adea804fde0dba366b191f2b124b9f4d0d75ce1755f90e52cb2f54c9f95",
+      "candidate_revision": "fd00222e4a4bdeca70d0f91ba55e204bc032acb16921e7377765145bc6be7e60",
+      "configuration_id": "862c7c23a730daa7bae2c2076b47e192483f4731012e3faa97e9881c708edb0f",
+      "control_binding_sha256": "5308d75119a24087f1363cb3462366244bcafc1ee9fc40c0033b993c5b49f34a",
+      "decision_contract_sha256": "1da7ef3a056d3d6ae489efaa421937c6981d7533d49fb8c973f90c1c3a9d3185",
+      "decision_status": "READY",
+      "declaration": "configs/forge/configurations/k3p--862c7c23a730daa7bae2c2076b47e192483f4731012e3faa97e9881c708edb0f.json",
+      "declaration_sha256": "d20fdb317186678811bdb0b06747a1bc20f8db78ddb4023ad4605a5a4e48482f",
+      "jobs_sha256": "10aaf271bb9792c5c989e0a7ad08b38ead30adf8737f678802199a13edf2d1ec",
+      "scientific_signature": "32745d7e444d7b71a9466100469ebf3f30d86e51da65415390e3f8172e4adfeb",
+      "settings": {
+        "d_lr_mult": 1.5,
+        "lr": 0.006375,
+        "prior_lr_mult": 0.18823529411764706,
+        "reg_coeff": 30.0
+      },
+      "task_bindings": {
+        "ae_gan_hold": {
+          "evaluation": "ed43ab7e1de06ff544118767e9e338f865b369aae6a8be7c41ffab802de16c10",
+          "execution": "7783e1624cf86e193cfa771154c69f7232f22d3bcbbaf4741f9b1ea617da04b7"
+        },
+        "five_word_joint_acquisition": {
+          "evaluation": "acbaa1d733b4f2e47ed97102418481c608763aebcf7277e5248d542be1486540",
+          "execution": "b6e774afa975f91e3441c30844163058e2c84a993fd4d897be8e6dca617c8654"
+        },
+        "ring16_acquisition": {
+          "evaluation": "b361c512f05ebb898fcf5ab3386ad47cfa87f8fc6c56a3f14b90bc979083d433",
+          "execution": "91325802a2cd0d09a3066e24a716f01d8d851802c23bb73784aec8994eadf996"
+        },
+        "two_pole": {
+          "evaluation": "cffa9a9722e4ca72028aa9b4cb8ae0dc119746f08581f2e6d8eae65690c562c1",
+          "execution": "3d15ff9d4ae9428d07dbf539db15e5783f55ef08b9ec9a90db678b91ea701f83"
+        },
+        "unused_token_hold": {
+          "evaluation": "f63357ca9f6af37fe09b6d999794150d0052ce80605c059c9267c895ffae35df",
+          "execution": "4e8f55ac47bb0ed4220ed77e480e697d5509aa2ab99a21ddf5fa4d9e2fd5a7d7"
+        }
+      }
+    },
+    {
+      "candidate": "k3p--8c14d4a6a059d0954eb79a8d100d1c4de0eb13c039f49a8ac6f8f66ca544b8df",
+      "candidate_binding_sha256": "eca0c4f65475e0b4fed7f4727ef4b6fa5ce067f41281403600730a563e26fe3c",
+      "candidate_revision": "3c3964dfa939718a84de7a992cd5c43c7d863df158284ceeb4d11b5c9b48e9cf",
+      "configuration_id": "8c14d4a6a059d0954eb79a8d100d1c4de0eb13c039f49a8ac6f8f66ca544b8df",
+      "control_binding_sha256": "5308d75119a24087f1363cb3462366244bcafc1ee9fc40c0033b993c5b49f34a",
+      "decision_contract_sha256": "e74907c9ebd55f0e110402dafb9e9b0e3857e7e41a311a2f16aba70f3190588d",
+      "decision_status": "READY",
+      "declaration": "configs/forge/configurations/k3p--8c14d4a6a059d0954eb79a8d100d1c4de0eb13c039f49a8ac6f8f66ca544b8df.json",
+      "declaration_sha256": "c5c637cd87dbc272555a66787278473b69410ad5b2e58f8e8a668d0e77091825",
+      "jobs_sha256": "6b30f5b6434fadc8f44683a48cec1e84aaf014cbee66b9f3d653810682d57f45",
+      "scientific_signature": "b63b8c75cc8aaaa47501a1162245f89493a5302a634927f96e6f5b47d0857869",
+      "settings": {
+        "d_lr_mult": 0.25,
+        "lr": 0.00425,
+        "prior_lr_mult": 0.28235294117647053,
+        "reg_coeff": 10.0
+      },
+      "task_bindings": {
+        "ae_gan_hold": {
+          "evaluation": "ed43ab7e1de06ff544118767e9e338f865b369aae6a8be7c41ffab802de16c10",
+          "execution": "7783e1624cf86e193cfa771154c69f7232f22d3bcbbaf4741f9b1ea617da04b7"
+        },
+        "five_word_joint_acquisition": {
+          "evaluation": "acbaa1d733b4f2e47ed97102418481c608763aebcf7277e5248d542be1486540",
+          "execution": "b6e774afa975f91e3441c30844163058e2c84a993fd4d897be8e6dca617c8654"
+        },
+        "ring16_acquisition": {
+          "evaluation": "b361c512f05ebb898fcf5ab3386ad47cfa87f8fc6c56a3f14b90bc979083d433",
+          "execution": "91325802a2cd0d09a3066e24a716f01d8d851802c23bb73784aec8994eadf996"
+        },
+        "two_pole": {
+          "evaluation": "cffa9a9722e4ca72028aa9b4cb8ae0dc119746f08581f2e6d8eae65690c562c1",
+          "execution": "3d15ff9d4ae9428d07dbf539db15e5783f55ef08b9ec9a90db678b91ea701f83"
+        },
+        "unused_token_hold": {
+          "evaluation": "f63357ca9f6af37fe09b6d999794150d0052ce80605c059c9267c895ffae35df",
+          "execution": "4e8f55ac47bb0ed4220ed77e480e697d5509aa2ab99a21ddf5fa4d9e2fd5a7d7"
+        }
+      }
+    },
+    {
+      "candidate": "k3p--922f620215f1e76351aeca2f68b79ddefeb7a44c1f824d9fdb867a27e5a03ade",
+      "candidate_binding_sha256": "416dbd53a2ffab6cef49a19474fa3c0f664bdb2084698caeb209d970f10d1b17",
+      "candidate_revision": "c3903ffd51af12f272b96531a36853de8ea363d360db213e765a05f8882a8438",
+      "configuration_id": "922f620215f1e76351aeca2f68b79ddefeb7a44c1f824d9fdb867a27e5a03ade",
+      "control_binding_sha256": "5308d75119a24087f1363cb3462366244bcafc1ee9fc40c0033b993c5b49f34a",
+      "decision_contract_sha256": "906ab5096706429fff5d9bbcecd844296d0318464c7cd32de60444c5bd87ffa1",
+      "decision_status": "READY",
+      "declaration": "configs/forge/configurations/k3p--922f620215f1e76351aeca2f68b79ddefeb7a44c1f824d9fdb867a27e5a03ade.json",
+      "declaration_sha256": "da0c5b9e1d5d8b8f0a9ec464bde1eec31a88991853b5bee40ef1ee53198295c3",
+      "jobs_sha256": "fc5336a0bb076ce4074cd2c431db82c1a8be73444602c11e39e4b3dde6598c3d",
+      "scientific_signature": "9c37a22ba5eab154ed49d9f781256d5aacd3deb482e3976fe45257d7909b6ce3",
+      "settings": {
+        "d_lr_mult": 1.5,
+        "lr": 0.00425,
+        "prior_lr_mult": 0.28235294117647053,
+        "reg_coeff": 10.0
+      },
+      "task_bindings": {
+        "ae_gan_hold": {
+          "evaluation": "ed43ab7e1de06ff544118767e9e338f865b369aae6a8be7c41ffab802de16c10",
+          "execution": "7783e1624cf86e193cfa771154c69f7232f22d3bcbbaf4741f9b1ea617da04b7"
+        },
+        "five_word_joint_acquisition": {
+          "evaluation": "acbaa1d733b4f2e47ed97102418481c608763aebcf7277e5248d542be1486540",
+          "execution": "b6e774afa975f91e3441c30844163058e2c84a993fd4d897be8e6dca617c8654"
+        },
+        "ring16_acquisition": {
+          "evaluation": "b361c512f05ebb898fcf5ab3386ad47cfa87f8fc6c56a3f14b90bc979083d433",
+          "execution": "91325802a2cd0d09a3066e24a716f01d8d851802c23bb73784aec8994eadf996"
+        },
+        "two_pole": {
+          "evaluation": "cffa9a9722e4ca72028aa9b4cb8ae0dc119746f08581f2e6d8eae65690c562c1",
+          "execution": "3d15ff9d4ae9428d07dbf539db15e5783f55ef08b9ec9a90db678b91ea701f83"
+        },
+        "unused_token_hold": {
+          "evaluation": "f63357ca9f6af37fe09b6d999794150d0052ce80605c059c9267c895ffae35df",
+          "execution": "4e8f55ac47bb0ed4220ed77e480e697d5509aa2ab99a21ddf5fa4d9e2fd5a7d7"
+        }
+      }
+    },
+    {
+      "candidate": "k3p--9c6f1ae673fc7b51dbdeac0a826695ceb94c869ba886e750177b73c6727af687",
+      "candidate_binding_sha256": "70d9311ae70efb1797122d4688a6f5a712d6cd477af927009c879262fd4f7bd5",
+      "candidate_revision": "18c0e11c0e6aed5c3a1fa8a215217dac2a60c4358805bc7c16676c9e45903c67",
+      "configuration_id": "9c6f1ae673fc7b51dbdeac0a826695ceb94c869ba886e750177b73c6727af687",
+      "control_binding_sha256": "5308d75119a24087f1363cb3462366244bcafc1ee9fc40c0033b993c5b49f34a",
+      "decision_contract_sha256": "a043a7421a9ba86b09e3cdcc5578f08854ac49c7e733af2528175c050bc9f649",
+      "decision_status": "READY",
+      "declaration": "configs/forge/configurations/k3p--9c6f1ae673fc7b51dbdeac0a826695ceb94c869ba886e750177b73c6727af687.json",
+      "declaration_sha256": "cf2a854d9a17ec66d1f6f3eb29e2887340a3855cf68aaa47470e6d0747c4d57d",
+      "jobs_sha256": "c1e4d2febad7997ce682f6f01dea3fef2ddbab688a40d3635093c80042b90730",
+      "scientific_signature": "349205862a96fb2cc4fc54b60ffc7030cbd1a8f64743293f1f95737cf85b0e7c",
+      "settings": {
+        "d_lr_mult": 1.5,
+        "lr": 0.00425,
+        "prior_lr_mult": 0.28235294117647053,
+        "reg_coeff": 85.0
+      },
+      "task_bindings": {
+        "ae_gan_hold": {
+          "evaluation": "ed43ab7e1de06ff544118767e9e338f865b369aae6a8be7c41ffab802de16c10",
+          "execution": "7783e1624cf86e193cfa771154c69f7232f22d3bcbbaf4741f9b1ea617da04b7"
+        },
+        "five_word_joint_acquisition": {
+          "evaluation": "acbaa1d733b4f2e47ed97102418481c608763aebcf7277e5248d542be1486540",
+          "execution": "b6e774afa975f91e3441c30844163058e2c84a993fd4d897be8e6dca617c8654"
+        },
+        "ring16_acquisition": {
+          "evaluation": "b361c512f05ebb898fcf5ab3386ad47cfa87f8fc6c56a3f14b90bc979083d433",
+          "execution": "91325802a2cd0d09a3066e24a716f01d8d851802c23bb73784aec8994eadf996"
+        },
+        "two_pole": {
+          "evaluation": "cffa9a9722e4ca72028aa9b4cb8ae0dc119746f08581f2e6d8eae65690c562c1",
+          "execution": "3d15ff9d4ae9428d07dbf539db15e5783f55ef08b9ec9a90db678b91ea701f83"
+        },
+        "unused_token_hold": {
+          "evaluation": "f63357ca9f6af37fe09b6d999794150d0052ce80605c059c9267c895ffae35df",
+          "execution": "4e8f55ac47bb0ed4220ed77e480e697d5509aa2ab99a21ddf5fa4d9e2fd5a7d7"
+        }
+      }
+    },
+    {
+      "candidate": "k3p--a5ef4da177f58c3bd3aa6f3af5a6ffb6145889635d2a303ecb7534711b698993",
+      "candidate_binding_sha256": "525e6cfb99cf56499e4ef7a23e1311fcec1f19bc710f39827c7a9f53415b1fff",
+      "candidate_revision": "02875e33edebcacb4c1c1ac90b3a172a3d9cc35276d34016bb50aa3defd9c3c7",
+      "configuration_id": "a5ef4da177f58c3bd3aa6f3af5a6ffb6145889635d2a303ecb7534711b698993",
+      "control_binding_sha256": "5308d75119a24087f1363cb3462366244bcafc1ee9fc40c0033b993c5b49f34a",
+      "decision_contract_sha256": "24ec4e6c7859a6d6c8fc9ebd89c1bbf63a75301052f4c4fa4f6a63192312cd6d",
+      "decision_status": "READY",
+      "declaration": "configs/forge/configurations/k3p--a5ef4da177f58c3bd3aa6f3af5a6ffb6145889635d2a303ecb7534711b698993.json",
+      "declaration_sha256": "27ad2a7a2b360fe4e7170d08a6f559e9cfb059a0be97471259f006361984e627",
+      "jobs_sha256": "0749ed6124e0fb5ca86a93245511c0d76a1a2cdf6ddb7b2506c21f60710de43c",
+      "scientific_signature": "af0128f9042d952c94fda4dd6574bcc2d7e25d86b48338ed500e53eb45116138",
+      "settings": {
+        "d_lr_mult": 0.25,
+        "lr": 0.00425,
+        "prior_lr_mult": 0.28235294117647053,
+        "reg_coeff": 30.0
+      },
+      "task_bindings": {
+        "ae_gan_hold": {
+          "evaluation": "ed43ab7e1de06ff544118767e9e338f865b369aae6a8be7c41ffab802de16c10",
+          "execution": "7783e1624cf86e193cfa771154c69f7232f22d3bcbbaf4741f9b1ea617da04b7"
+        },
+        "five_word_joint_acquisition": {
+          "evaluation": "acbaa1d733b4f2e47ed97102418481c608763aebcf7277e5248d542be1486540",
+          "execution": "b6e774afa975f91e3441c30844163058e2c84a993fd4d897be8e6dca617c8654"
+        },
+        "ring16_acquisition": {
+          "evaluation": "b361c512f05ebb898fcf5ab3386ad47cfa87f8fc6c56a3f14b90bc979083d433",
+          "execution": "91325802a2cd0d09a3066e24a716f01d8d851802c23bb73784aec8994eadf996"
+        },
+        "two_pole": {
+          "evaluation": "cffa9a9722e4ca72028aa9b4cb8ae0dc119746f08581f2e6d8eae65690c562c1",
+          "execution": "3d15ff9d4ae9428d07dbf539db15e5783f55ef08b9ec9a90db678b91ea701f83"
+        },
+        "unused_token_hold": {
+          "evaluation": "f63357ca9f6af37fe09b6d999794150d0052ce80605c059c9267c895ffae35df",
+          "execution": "4e8f55ac47bb0ed4220ed77e480e697d5509aa2ab99a21ddf5fa4d9e2fd5a7d7"
+        }
+      }
+    },
+    {
+      "candidate": "k3p--adbcdd335837dcd7c340e2fe7f4b98ade162bf5a3e8f1e4f78e64e316d7a47b7",
+      "candidate_binding_sha256": "1d1508212701e6f0b20a8aea2a3e7b21f69a378ca0fa436e70138bcc8714389a",
+      "candidate_revision": "439802b94055e1236875be5677b326fd03abcbc17e80d678ede596c1a5f1687c",
+      "configuration_id": "adbcdd335837dcd7c340e2fe7f4b98ade162bf5a3e8f1e4f78e64e316d7a47b7",
+      "control_binding_sha256": "5308d75119a24087f1363cb3462366244bcafc1ee9fc40c0033b993c5b49f34a",
+      "decision_contract_sha256": "6a14f5009aa230530702f5e658f52a569e78e1357578de7657bbccc6d3686156",
+      "decision_status": "READY",
+      "declaration": "configs/forge/configurations/k3p--adbcdd335837dcd7c340e2fe7f4b98ade162bf5a3e8f1e4f78e64e316d7a47b7.json",
+      "declaration_sha256": "4c5fdfc374a913faafd87ff84e8538b7730111f8461ae5cc3919bd0581d4800a",
+      "jobs_sha256": "6b4869a52b610ad41804efd86b57deb757c3de7ed3440538b04176d7e1b7191c",
+      "scientific_signature": "59eecf28a5d319187e10a64c9a0039c5c68a61c36d2f7bedaf4059b07f0f1512",
+      "settings": {
+        "d_lr_mult": 1.5,
+        "lr": 0.006375,
+        "prior_lr_mult": 0.18823529411764706,
+        "reg_coeff": 85.0
+      },
+      "task_bindings": {
+        "ae_gan_hold": {
+          "evaluation": "ed43ab7e1de06ff544118767e9e338f865b369aae6a8be7c41ffab802de16c10",
+          "execution": "7783e1624cf86e193cfa771154c69f7232f22d3bcbbaf4741f9b1ea617da04b7"
+        },
+        "five_word_joint_acquisition": {
+          "evaluation": "acbaa1d733b4f2e47ed97102418481c608763aebcf7277e5248d542be1486540",
+          "execution": "b6e774afa975f91e3441c30844163058e2c84a993fd4d897be8e6dca617c8654"
+        },
+        "ring16_acquisition": {
+          "evaluation": "b361c512f05ebb898fcf5ab3386ad47cfa87f8fc6c56a3f14b90bc979083d433",
+          "execution": "91325802a2cd0d09a3066e24a716f01d8d851802c23bb73784aec8994eadf996"
+        },
+        "two_pole": {
+          "evaluation": "cffa9a9722e4ca72028aa9b4cb8ae0dc119746f08581f2e6d8eae65690c562c1",
+          "execution": "3d15ff9d4ae9428d07dbf539db15e5783f55ef08b9ec9a90db678b91ea701f83"
+        },
+        "unused_token_hold": {
+          "evaluation": "f63357ca9f6af37fe09b6d999794150d0052ce80605c059c9267c895ffae35df",
+          "execution": "4e8f55ac47bb0ed4220ed77e480e697d5509aa2ab99a21ddf5fa4d9e2fd5a7d7"
+        }
+      }
+    },
+    {
+      "candidate": "k3p--c4458f4c26996e5e889dfabcae38099962017f164e1bbc1085d5f8084fcb39d7",
+      "candidate_binding_sha256": "1dc11bfd9c9d5cdd64dd7cbb676c3ff7b02f2e4023c3a5230a07384e3976af40",
+      "candidate_revision": "e4c2c58a583c0751a53ab701817f98b57bd0a6dca99864d74a41397be7e09c33",
+      "configuration_id": "c4458f4c26996e5e889dfabcae38099962017f164e1bbc1085d5f8084fcb39d7",
+      "control_binding_sha256": "5308d75119a24087f1363cb3462366244bcafc1ee9fc40c0033b993c5b49f34a",
+      "decision_contract_sha256": "4f17fdb12016a155032c78a6528dfbd4895a5d25dc38679014cfa7fcdcdf9667",
+      "decision_status": "READY",
+      "declaration": "configs/forge/configurations/k3p--c4458f4c26996e5e889dfabcae38099962017f164e1bbc1085d5f8084fcb39d7.json",
+      "declaration_sha256": "dee03a01453b76ef0ac3a6028995caa2384afccf9a4687f2f0768858c62c8278",
+      "jobs_sha256": "cd0c9ee01615cf2ea3193522831d7aedadde451025525d3da22e0e46fd7e66e3",
+      "scientific_signature": "b8b3b70e9c112399ad48974a9f353d4cb6dc1b308079bb69165be2a8f4b71589",
+      "settings": {
+        "d_lr_mult": 0.25,
+        "lr": 0.006375,
+        "prior_lr_mult": 0.18823529411764706,
+        "reg_coeff": 30.0
+      },
+      "task_bindings": {
+        "ae_gan_hold": {
+          "evaluation": "ed43ab7e1de06ff544118767e9e338f865b369aae6a8be7c41ffab802de16c10",
+          "execution": "7783e1624cf86e193cfa771154c69f7232f22d3bcbbaf4741f9b1ea617da04b7"
+        },
+        "five_word_joint_acquisition": {
+          "evaluation": "acbaa1d733b4f2e47ed97102418481c608763aebcf7277e5248d542be1486540",
+          "execution": "b6e774afa975f91e3441c30844163058e2c84a993fd4d897be8e6dca617c8654"
+        },
+        "ring16_acquisition": {
+          "evaluation": "b361c512f05ebb898fcf5ab3386ad47cfa87f8fc6c56a3f14b90bc979083d433",
+          "execution": "91325802a2cd0d09a3066e24a716f01d8d851802c23bb73784aec8994eadf996"
+        },
+        "two_pole": {
+          "evaluation": "cffa9a9722e4ca72028aa9b4cb8ae0dc119746f08581f2e6d8eae65690c562c1",
+          "execution": "3d15ff9d4ae9428d07dbf539db15e5783f55ef08b9ec9a90db678b91ea701f83"
+        },
+        "unused_token_hold": {
+          "evaluation": "f63357ca9f6af37fe09b6d999794150d0052ce80605c059c9267c895ffae35df",
+          "execution": "4e8f55ac47bb0ed4220ed77e480e697d5509aa2ab99a21ddf5fa4d9e2fd5a7d7"
+        }
+      }
+    },
+    {
+      "candidate": "k3p--e99f7210e7272e65ba80cd6793b63a073862cff90ce2de25ea1ea4726bc7442f",
+      "candidate_binding_sha256": "6d1cb0639dacfb25e26334a4f7705b4a43fb7ec13c84860fbf0defeb080190dc",
+      "candidate_revision": "2c4977b5dcbd4ed563ef95acac258200390ce415e4f859291f9ca2622eace3db",
+      "configuration_id": "e99f7210e7272e65ba80cd6793b63a073862cff90ce2de25ea1ea4726bc7442f",
+      "control_binding_sha256": "5308d75119a24087f1363cb3462366244bcafc1ee9fc40c0033b993c5b49f34a",
+      "decision_contract_sha256": "4d3c5bd0ba1d1b264f3bdd5bf3c27d1961b1b5d90e7a94c8c6341ff629643b22",
+      "decision_status": "READY",
+      "declaration": "configs/forge/configurations/k3p--e99f7210e7272e65ba80cd6793b63a073862cff90ce2de25ea1ea4726bc7442f.json",
+      "declaration_sha256": "00d36b18d03e12591142913c7d421632e39ca418c1c9fc676c652f34a53dfd38",
+      "jobs_sha256": "56bdb8925e2d5ef4bd0ce1c8a458a0313b64684167b43dde9476bb2a06f8b001",
+      "scientific_signature": "ec97dcef4e361f6b69bd5481aa633fddd3150cc2e0e07b9e14408bd8beec1264",
+      "settings": {
+        "d_lr_mult": 0.25,
+        "lr": 0.006375,
+        "prior_lr_mult": 0.18823529411764706,
+        "reg_coeff": 85.0
+      },
+      "task_bindings": {
+        "ae_gan_hold": {
+          "evaluation": "ed43ab7e1de06ff544118767e9e338f865b369aae6a8be7c41ffab802de16c10",
+          "execution": "7783e1624cf86e193cfa771154c69f7232f22d3bcbbaf4741f9b1ea617da04b7"
+        },
+        "five_word_joint_acquisition": {
+          "evaluation": "acbaa1d733b4f2e47ed97102418481c608763aebcf7277e5248d542be1486540",
+          "execution": "b6e774afa975f91e3441c30844163058e2c84a993fd4d897be8e6dca617c8654"
+        },
+        "ring16_acquisition": {
+          "evaluation": "b361c512f05ebb898fcf5ab3386ad47cfa87f8fc6c56a3f14b90bc979083d433",
+          "execution": "91325802a2cd0d09a3066e24a716f01d8d851802c23bb73784aec8994eadf996"
+        },
+        "two_pole": {
+          "evaluation": "cffa9a9722e4ca72028aa9b4cb8ae0dc119746f08581f2e6d8eae65690c562c1",
+          "execution": "3d15ff9d4ae9428d07dbf539db15e5783f55ef08b9ec9a90db678b91ea701f83"
+        },
+        "unused_token_hold": {
+          "evaluation": "f63357ca9f6af37fe09b6d999794150d0052ce80605c059c9267c895ffae35df",
+          "execution": "4e8f55ac47bb0ed4220ed77e480e697d5509aa2ab99a21ddf5fa4d9e2fd5a7d7"
+        }
+      }
+    },
+    {
+      "candidate": "k3p--fcf67be558ec42242657e9b103c7698896a1021a7fc88325348058e7800bdfaa",
+      "candidate_binding_sha256": "16c8963a3c2a1506ba34bfd9d0cd9bb0969a00d0f7c1211632a075c4edd4ba8e",
+      "candidate_revision": "3abdd1fc65df181e96e2a04782d5d789b500655da9e891d77625fd7bbd5d5416",
+      "configuration_id": "fcf67be558ec42242657e9b103c7698896a1021a7fc88325348058e7800bdfaa",
+      "control_binding_sha256": "5308d75119a24087f1363cb3462366244bcafc1ee9fc40c0033b993c5b49f34a",
+      "decision_contract_sha256": "1ff49d2bd2036c173b82d60195d7b2e1331ab3510e69eb04b2d6c5c1a92d753b",
+      "decision_status": "READY",
+      "declaration": "configs/forge/configurations/k3p--fcf67be558ec42242657e9b103c7698896a1021a7fc88325348058e7800bdfaa.json",
+      "declaration_sha256": "0a03cf30646dbf95cd7df8d8d39314b9e841880eefc649f7764b66c4fc48b342",
+      "jobs_sha256": "7f08e477651f451398d69260c856abdf6067e093934c6fbcd4ce1b73e7a2571d",
+      "scientific_signature": "54d45c8175cca8946e6da6912b0d7c9ddf57768042732c28bfbfe7263de05e74",
+      "settings": {
+        "d_lr_mult": 0.25,
+        "lr": 0.006375,
+        "prior_lr_mult": 0.18823529411764706,
+        "reg_coeff": 10.0
+      },
+      "task_bindings": {
+        "ae_gan_hold": {
+          "evaluation": "ed43ab7e1de06ff544118767e9e338f865b369aae6a8be7c41ffab802de16c10",
+          "execution": "7783e1624cf86e193cfa771154c69f7232f22d3bcbbaf4741f9b1ea617da04b7"
+        },
+        "five_word_joint_acquisition": {
+          "evaluation": "acbaa1d733b4f2e47ed97102418481c608763aebcf7277e5248d542be1486540",
+          "execution": "b6e774afa975f91e3441c30844163058e2c84a993fd4d897be8e6dca617c8654"
+        },
+        "ring16_acquisition": {
+          "evaluation": "b361c512f05ebb898fcf5ab3386ad47cfa87f8fc6c56a3f14b90bc979083d433",
+          "execution": "91325802a2cd0d09a3066e24a716f01d8d851802c23bb73784aec8994eadf996"
+        },
+        "two_pole": {
+          "evaluation": "cffa9a9722e4ca72028aa9b4cb8ae0dc119746f08581f2e6d8eae65690c562c1",
+          "execution": "3d15ff9d4ae9428d07dbf539db15e5783f55ef08b9ec9a90db678b91ea701f83"
+        },
+        "unused_token_hold": {
+          "evaluation": "f63357ca9f6af37fe09b6d999794150d0052ce80605c059c9267c895ffae35df",
+          "execution": "4e8f55ac47bb0ed4220ed77e480e697d5509aa2ab99a21ddf5fa4d9e2fd5a7d7"
+        }
+      }
+    },
+    {
+      "candidate": "k3p--fd2c44a2f5c0e6194db14cc1c464a17e43dc2aa4340046bf76b47b3ad66019bf",
+      "candidate_binding_sha256": "4a525510add1d9cf4fae76e9aadf2938a960fdc3930aca21e144ee65d3186712",
+      "candidate_revision": "ea4600dac9c37a0fbeef1cca93cbbc23ab4f2d0d347eb1f1e4567188b2e44600",
+      "configuration_id": "fd2c44a2f5c0e6194db14cc1c464a17e43dc2aa4340046bf76b47b3ad66019bf",
+      "control_binding_sha256": "5308d75119a24087f1363cb3462366244bcafc1ee9fc40c0033b993c5b49f34a",
+      "decision_contract_sha256": "a1660903c4e915de49c913e4f7b03a06ca8df22c8e202ff39ca74d0dae6c403f",
+      "decision_status": "READY",
+      "declaration": "configs/forge/configurations/k3p--fd2c44a2f5c0e6194db14cc1c464a17e43dc2aa4340046bf76b47b3ad66019bf.json",
+      "declaration_sha256": "c33bd256dc093bb255229f8547bb487b7cbf3536baaa68cecb5fba75f2f88e09",
+      "jobs_sha256": "424baa272e6e4f372a7cf396ad55276ce9f0de1c7296a7e9a50d1722e90c97ce",
+      "scientific_signature": "ae915427b92f56793fd85bf8f3986fca68841610cf985bab228fac77dc78890d",
+      "settings": {
+        "d_lr_mult": 1.5,
+        "lr": 0.006375,
+        "prior_lr_mult": 0.18823529411764706,
+        "reg_coeff": 10.0
+      },
+      "task_bindings": {
+        "ae_gan_hold": {
+          "evaluation": "ed43ab7e1de06ff544118767e9e338f865b369aae6a8be7c41ffab802de16c10",
+          "execution": "7783e1624cf86e193cfa771154c69f7232f22d3bcbbaf4741f9b1ea617da04b7"
+        },
+        "five_word_joint_acquisition": {
+          "evaluation": "acbaa1d733b4f2e47ed97102418481c608763aebcf7277e5248d542be1486540",
+          "execution": "b6e774afa975f91e3441c30844163058e2c84a993fd4d897be8e6dca617c8654"
+        },
+        "ring16_acquisition": {
+          "evaluation": "b361c512f05ebb898fcf5ab3386ad47cfa87f8fc6c56a3f14b90bc979083d433",
+          "execution": "91325802a2cd0d09a3066e24a716f01d8d851802c23bb73784aec8994eadf996"
+        },
+        "two_pole": {
+          "evaluation": "cffa9a9722e4ca72028aa9b4cb8ae0dc119746f08581f2e6d8eae65690c562c1",
+          "execution": "3d15ff9d4ae9428d07dbf539db15e5783f55ef08b9ec9a90db678b91ea701f83"
+        },
+        "unused_token_hold": {
+          "evaluation": "f63357ca9f6af37fe09b6d999794150d0052ce80605c059c9267c895ffae35df",
+          "execution": "4e8f55ac47bb0ed4220ed77e480e697d5509aa2ab99a21ddf5fa4d9e2fd5a7d7"
+        }
+      }
+    }
+  ],
+  "view": "discriminator_stability",
+  "workers_per_gpu": 1
+}

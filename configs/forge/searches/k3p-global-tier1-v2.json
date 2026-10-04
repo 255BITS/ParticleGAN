@@ -1,0 +1,42 @@
+{
+  "base_candidate": "k3p-global-repair-v1",
+  "campaign": {
+    "accept_shared_cost_transfer": false,
+    "budget_seconds": 25200,
+    "candidate_budget_seconds": 2100,
+    "id": "k3p-global-tier1-v2"
+  },
+  "cuda_model": "NVIDIA RTX A6000",
+  "execution_backend": "cuda",
+  "grid": {
+    "coupled_rates": [
+      {
+        "lr": 0.00425,
+        "prior_lr_mult": 0.28235294117647053
+      },
+      {
+        "lr": 0.006375,
+        "prior_lr_mult": 0.18823529411764706
+      }
+    ],
+    "d_lr_mult": [
+      0.25,
+      1.5
+    ],
+    "reg_coeff": [
+      10.0,
+      30.0,
+      85.0
+    ]
+  },
+  "guide": "EXPERIMENTATION.md",
+  "hypothesis": "Intermediate positive K3P critic coefficients and a slower existing critic rate may restore two_pole movement against its unchanged particle_l2 restoring term while retaining sufficient regularization for the words joint critic. Each complete global recipe is tested through all five ordinary Tier 1 tasks, with the first required failure stopping progression.",
+  "id": "k3p-global-tier1-v2",
+  "protocol": "screening",
+  "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+  "rationale": "Historical clean/full LR .0006 K3P words passed at coefficient170 but failed at coefficient1. Its global coefficient170 transfers failed two_pole even at LR .00425/.006375, with small critic slopes and movement .128044/.122587. The unchanged host includes particle_l2=.02; saved movement plateaus motivate a force/restoring term hypothesis, not causal proof. Positive intermediate coefficients 10/30/85 and critic multipliers .25/1.5 test that tradeoff at two global movement-scale rates. Noise0, full schedule, cap1, optimizer mechanisms, moments, priors, initialization, budgets and sampling laws remain fixed. Coupled prior multipliers preserve nominal latent-table base LR .0012; direct coordinates consume G base LR. Twelve complete global configurations in one bounded round. Existing positive numerical controls only; no new technique, task-specific override, objective, architecture, seed study, changed gate, historical word witness import, unchanged repeat, higher-tier execution or automatic paid follow-up. The nominal latent prior base rate is fixed, not its realized trajectory. Later tasks after a prerequisite failure remain UNKNOWN.",
+  "schema_version": 1,
+  "trainer_family": "k3p",
+  "tuning_through_tier": 1,
+  "view": "discriminator_stability"
+}
