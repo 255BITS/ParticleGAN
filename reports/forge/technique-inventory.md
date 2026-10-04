@@ -47,7 +47,7 @@ python reports/forge/regenerate_technique_inventory.py
 
 For ordinary Forge qualification, use `--source-commit <executed-commit>` to independently regrade hydrated original receipts and update this leaderboard. Reusable candidates use the same complete task ladder. Historical task-only diagnostics remain motivation and reproduction evidence. Source snapshots are provenance, not additional leaderboards.
 
-Publication input digest `65b55db7d81705d11b0a129b2be61533e02143c057b3e588b1039ae8522daf99`.
+Publication input digest `c975d973050601b812acc810c8a874b21c3ce3f4381ec66a7ae8f4307b923916`.
 
 The [whole-family repair readout](family-wide-word-repairs/README.md) records the ordinary candidate attempts and bounded global configuration search. Their complete rows remain unranked alternatives below and in the companion JSON; a failed replacement does not make its historical incumbent a qualified standard.
 
@@ -64,6 +64,8 @@ Unranked alternatives retain their original outcomes and exact source/runtime bi
 - `ka2` (ka2), source `7306340bac0a`; recorded tier 0. Full evidence is in the companion JSON.
 - `k3p-r1r2-matched-v1` (r1r2), source `7306340bac0a`; recorded tier 0. Full evidence is in the companion JSON.
 - `r3gan-stacked-training-toy-v1` (r1r2), source `7306340bac0a`; recorded tier 0. Full evidence is in the companion JSON.
+- `atlas-c6-observed-policy-current-v1` (atlas), source `5ccb75040527`; recorded tier 0. Full evidence is in the companion JSON.
+- `atlas-c6-observed-policy-current-v1` (atlas), source `5ccb75040527`; recorded tier 0. Full evidence is in the companion JSON.
 - `bcap--0fc5834c2f114d83b8b7ace471dbc8271d0afddd8c92ba1b84d5db8325a8ecd5` (bcap), source `7306340bac0a`; recorded tier 0. Full evidence is in the companion JSON.
 - `bcap--46afd334b69b00edb05f5487d7e00d2c5f52d82ab2d3adaa6d7c6d9158e73604` (bcap), source `7306340bac0a`; recorded tier 0. Full evidence is in the companion JSON.
 - `bcap--4cb8358e1e3eefdb6744ae63e84ce724bf73a47e471a12817aaf3a14466c2dd3` (bcap), source `7306340bac0a`; recorded tier 0. Full evidence is in the companion JSON.

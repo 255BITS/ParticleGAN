@@ -1,0 +1,343 @@
+{
+  "actions": {
+    "aborted_before_public_write": true,
+    "draws": 0,
+    "git_mutations": 0,
+    "gpu_jobs": 0,
+    "models": 0,
+    "public_writes": 0,
+    "queue_actions": 0,
+    "raw_hydration": 0,
+    "repository_edits": 0,
+    "scorer_calls": 0
+  },
+  "current_selection": {
+    "overwritten": false,
+    "pin_count": 12,
+    "pins": [
+      "atlas",
+      "bcap",
+      "e22",
+      "k3p",
+      "k3p-no-a2",
+      "k3p-no-anchor",
+      "k3p-no-penalty",
+      "k3p-no-training-noise",
+      "ka2",
+      "r1r2",
+      "release07-gan-v3-cloud",
+      "release07-gan-v3-mog"
+    ],
+    "sha256": "a15b4a04d7159f1414ea510742a8471f4a3300c9b86b0201502c2e51b68853f1",
+    "unchanged_files": [
+      "configs/forge/trainer-families.json",
+      "configs/forge/selections/family-current-v1.json"
+    ]
+  },
+  "declaration": {
+    "decision_status": "draft",
+    "id": "atlas-c6-observed-policy-current-v1",
+    "lifecycle": "proposed",
+    "new_since_comparison_base": true,
+    "parent": "atlas",
+    "recipe_preset": "atlas",
+    "task_cohort": "policy_selected_cloud_v1",
+    "trainer_family_present": false
+  },
+  "failure": {
+    "file": "experiments/forge/trainer_families.py",
+    "line": 364,
+    "message": "multiple current runtime cohorts require an explicit whole-row family selection",
+    "unpinned_family": "atlas-c6-observed-policy-current-v1"
+  },
+  "inputs": {
+    "capture.log": {
+      "bytes": 336,
+      "sha256": "2e7c026fa2e8a620c53f0566af761687fb7f1574c51a8a5773f722dd351fe929"
+    },
+    "capture_selection.py": {
+      "bytes": 3037,
+      "sha256": "3d6bdd142c2a619357eafc1fb50ede2648c2ca281bc5e7428a19e8cf9130e3b1"
+    },
+    "prewrite.json": {
+      "bytes": 215163,
+      "sha256": "9be531997a30b20eba811fecbdcc1451649c397a77f64aea5c9b5c52a5b0ad74"
+    }
+  },
+  "limits": [
+    "Root active integration checkout was not used to infer missing files; the absent-file comparison is against exact base221f.",
+    "Read-only policy snapshot validation was not bypassed and supplied no extra measured row; no evidence it caused this ambiguity.",
+    "A metadata report was generated in a temporary directory solely to capture inputs; public writes and scientific reconstruction were forbidden.",
+    "Concurrent root-owned edits may follow this committed capture; this report binds exact37b4 source."
+  ],
+  "mechanism": {
+    "cause_scope": "declaration/discovery/selection metadata; no numerical failure",
+    "classification": "unclassified_independent_technique singleton because no registry membership or trainer_family",
+    "fresh_missing_candidate_rows": [
+      "cpu",
+      "cuda"
+    ],
+    "guard_behavior": "first unpinned runtime selects the singleton; second runtime raises, without comparing speed or pooling evidence"
+  },
+  "minimal_proposal": {
+    "alternative_if_genuinely_new_family": "Declare an explicit exact whole-row selection for that new family with its unmeasured status; do not weaken the ambiguity guard.",
+    "change": {
+      "trainer_family": "atlas"
+    },
+    "effect": "Explicitly classify this same-mechanism prospective Atlas configuration. The existing exact Atlas incumbent selection remains authoritative; both unmeasured draft rows remain alternatives. No new pin, grade, source credit or runtime ranking.",
+    "file": "configs/forge/ideas/atlas-c6-observed-policy-current-v1.json",
+    "status": "PROPOSED_NOT_APPLIED"
+  },
+  "pure_check": {
+    "classification_with_in_memory_trainer_family_atlas": "atlas",
+    "existing_classification": "atlas-c6-observed-policy-current-v1",
+    "source_not_mutated": true
+  },
+  "rows": [
+    {
+      "attempts": [],
+      "candidate_id": "atlas-c6-observed-policy-current-v1",
+      "candidate_revision": "8601f8fbfb54ef6b610521be593e5ead0388018c1f0c0e86f2af1cdb05698bb1",
+      "canonical_candidate": "atlas-c6-observed-policy-current-v1",
+      "cohort": "233fb1fe79e00ad8b61949fab2ca1162c5e9cb7f3be2554b0c75f14a4aa40ae7",
+      "publication_key": null,
+      "runtime_cohort": {
+        "compute_profiles": {
+          "cuda": {
+            "availability": "unavailable",
+            "backend": "cuda",
+            "deterministic": true,
+            "model": null,
+            "tf32": false,
+            "threads": 1
+          }
+        },
+        "execution_backend": "cuda",
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.2",
+            "scipy": "1.17.1",
+            "torch": "2.13.0+cu126"
+          },
+          "python": "3.12.13",
+          "system": "Linux"
+        }
+      },
+      "runtime_sha256": "f3893f6c1871924dfb0e23f9d7d2c8279acddcd8888a768c2b90d00bd3d193dd",
+      "scientific_row_sha256": "f92c8833f20ee539c7d658f4b9eb33b5ad7e97d5a11af965fb18929c6fba7b52",
+      "source_digest": "5ccb75040527d3f04e0bf740321a93e08573f29b2ff7eb36a719f95c164a9b68",
+      "task_statuses": {
+        "ae_gan_hold_policy_selected_cloud_v1": "BLOCKED",
+        "cover_leftover_policy_selected_cloud_v1": "BLOCKED",
+        "five_word_joint_acquisition_policy_selected_cloud_v1": "BLOCKED",
+        "grid100_policy_selected_cloud_v1": "UNKNOWN",
+        "img_bars4_policy_selected_cloud_v1": "UNKNOWN",
+        "img_blobs4_policy_selected_cloud_v1": "UNKNOWN",
+        "img_intensity2_policy_selected_cloud_v1": "UNKNOWN",
+        "img_stripes2_policy_selected_cloud_v1": "UNKNOWN",
+        "mid_scale_identity_policy_selected_cloud_v1": "BLOCKED",
+        "mode_hold_policy_selected_cloud_v1": "UNKNOWN",
+        "residual_student_policy_selected_cloud_v1": "BLOCKED",
+        "ring16_acquisition_policy_selected_cloud_v1": "UNKNOWN",
+        "ring_extension_policy_selected_cloud_v1": "UNKNOWN",
+        "ring_hold_policy_selected_cloud_v1": "UNKNOWN",
+        "rotated100_policy_selected_cloud_v1": "UNKNOWN",
+        "staggered100_policy_selected_cloud_v1": "UNKNOWN",
+        "trajectory_policy_selected_cloud_v1": "BLOCKED",
+        "two_pole_policy_selected_cloud_v1": "UNKNOWN",
+        "unipolar_policy_selected_cloud_v1": "BLOCKED",
+        "unused_token_hold_policy_selected_cloud_v1": "BLOCKED",
+        "vector_anisotropic_policy_selected_cloud_v1": "UNKNOWN",
+        "vector_overlap_policy_selected_cloud_v1": "UNKNOWN",
+        "vector_spiral_policy_selected_cloud_v1": "UNKNOWN",
+        "vector_two_broad_policy_selected_cloud_v1": "UNKNOWN",
+        "vector_unequal_mass_policy_selected_cloud_v1": "UNKNOWN",
+        "vector_unequal_width_policy_selected_cloud_v1": "UNKNOWN"
+      },
+      "tiers": {
+        "1": {
+          "counts": {
+            "BLOCKED": 3,
+            "UNKNOWN": 2
+          },
+          "passed": 0,
+          "total": 5
+        },
+        "2": {
+          "counts": {
+            "BLOCKED": 5,
+            "UNKNOWN": 14
+          },
+          "passed": 0,
+          "total": 19
+        },
+        "3": {
+          "counts": {
+            "UNKNOWN": 2
+          },
+          "passed": 0,
+          "total": 2
+        }
+      }
+    },
+    {
+      "attempts": [],
+      "candidate_id": "atlas-c6-observed-policy-current-v1",
+      "candidate_revision": "8601f8fbfb54ef6b610521be593e5ead0388018c1f0c0e86f2af1cdb05698bb1",
+      "canonical_candidate": "atlas-c6-observed-policy-current-v1",
+      "cohort": "340ac652d4bd66da8788de77b53d5d3253862e38477d43dca141df80ee190d76",
+      "publication_key": null,
+      "runtime_cohort": {
+        "compute_profiles": {
+          "cpu": {
+            "backend": "cpu",
+            "deterministic": true,
+            "machine": "x86_64",
+            "model": "AMD Ryzen 9 5900X 12-Core Processor",
+            "tf32": false,
+            "threads": 1
+          }
+        },
+        "execution_backend": "cpu",
+        "runtime": {
+          "implementation": "CPython",
+          "machine": "x86_64",
+          "packages": {
+            "numpy": "2.5.2",
+            "scipy": "1.17.1",
+            "torch": "2.13.0+cu126"
+          },
+          "python": "3.12.13",
+          "system": "Linux"
+        }
+      },
+      "runtime_sha256": "7a6597960d0e0d4b26be3e8b38531d826d80d622b5dd688b8b60c47df4570463",
+      "scientific_row_sha256": "e699c98c327a8b497f30e62a3eb4f3673a75951d9667896963f79157b3f55d44",
+      "source_digest": "5ccb75040527d3f04e0bf740321a93e08573f29b2ff7eb36a719f95c164a9b68",
+      "task_statuses": {
+        "ae_gan_hold_policy_selected_cloud_v1": "BLOCKED",
+        "cover_leftover_policy_selected_cloud_v1": "BLOCKED",
+        "five_word_joint_acquisition_policy_selected_cloud_v1": "BLOCKED",
+        "grid100_policy_selected_cloud_v1": "UNKNOWN",
+        "img_bars4_policy_selected_cloud_v1": "UNKNOWN",
+        "img_blobs4_policy_selected_cloud_v1": "UNKNOWN",
+        "img_intensity2_policy_selected_cloud_v1": "UNKNOWN",
+        "img_stripes2_policy_selected_cloud_v1": "UNKNOWN",
+        "mid_scale_identity_policy_selected_cloud_v1": "BLOCKED",
+        "mode_hold_policy_selected_cloud_v1": "UNKNOWN",
+        "residual_student_policy_selected_cloud_v1": "BLOCKED",
+        "ring16_acquisition_policy_selected_cloud_v1": "UNKNOWN",
+        "ring_extension_policy_selected_cloud_v1": "UNKNOWN",
+        "ring_hold_policy_selected_cloud_v1": "UNKNOWN",
+        "rotated100_policy_selected_cloud_v1": "UNKNOWN",
+        "staggered100_policy_selected_cloud_v1": "UNKNOWN",
+        "trajectory_policy_selected_cloud_v1": "BLOCKED",
+        "two_pole_policy_selected_cloud_v1": "UNKNOWN",
+        "unipolar_policy_selected_cloud_v1": "BLOCKED",
+        "unused_token_hold_policy_selected_cloud_v1": "BLOCKED",
+        "vector_anisotropic_policy_selected_cloud_v1": "UNKNOWN",
+        "vector_overlap_policy_selected_cloud_v1": "UNKNOWN",
+        "vector_spiral_policy_selected_cloud_v1": "UNKNOWN",
+        "vector_two_broad_policy_selected_cloud_v1": "UNKNOWN",
+        "vector_unequal_mass_policy_selected_cloud_v1": "UNKNOWN",
+        "vector_unequal_width_policy_selected_cloud_v1": "UNKNOWN"
+      },
+      "tiers": {
+        "1": {
+          "counts": {
+            "BLOCKED": 3,
+            "UNKNOWN": 2
+          },
+          "passed": 0,
+          "total": 5
+        },
+        "2": {
+          "counts": {
+            "BLOCKED": 5,
+            "UNKNOWN": 14
+          },
+          "passed": 0,
+          "total": 19
+        },
+        "3": {
+          "counts": {
+            "UNKNOWN": 2
+          },
+          "passed": 0,
+          "total": 2
+        }
+      }
+    }
+  ],
+  "schema": "pg_feature_current_family_selection_diagnosis_v1",
+  "source": {
+    "commit": "37b4f05b697a529b88b9a02a1a324bbeb9da185e",
+    "comparison_base": "221f1c70447e7934f1aaf56ae30164c39f6e0aec",
+    "files": {
+      "configs/forge/ideas/atlas-c6-observed-policy-current-v1.json": {
+        "bytes": 6154,
+        "sha256": "4b2cdbc67e4ceee5b373c262122c767f59baf23b584773a1167bea715483d5b9"
+      },
+      "configs/forge/selections/family-current-v1.json": {
+        "bytes": 15429,
+        "sha256": "a15b4a04d7159f1414ea510742a8471f4a3300c9b86b0201502c2e51b68853f1"
+      },
+      "configs/forge/trainer-families.json": {
+        "bytes": 4371,
+        "sha256": "c12a45c70bdce4d4f0371640e371cd706ac7df6d7292239c7d8d61f6e5305307"
+      },
+      "experiments/forge/policy_snapshot_publication.py": {
+        "bytes": 19928,
+        "sha256": "9cd859971e158a25112cdbb928e98d2a030f11729a2b8e970dd650f4b38e5b60"
+      },
+      "experiments/forge/trainer_families.py": {
+        "bytes": 25531,
+        "sha256": "0cbaceeb510a7e7b62d280e8f61d81e27250ee35b98cb79a211a30e4b96b17ad"
+      },
+      "reports/forge/regenerate_technique_inventory.py": {
+        "bytes": 106363,
+        "sha256": "be3ef3decb9b5b58541a3ced8ffa706a4fb2aa413d907e41b58fef960fc27968"
+      },
+      "reports/forge/technique-evidence/manifest.json": {
+        "bytes": 17619,
+        "sha256": "a51cb0da6ec07a62ef7f4413275f2ff63094d1cd1e0224802fb29ea47c979fc3"
+      }
+    },
+    "root": "/ml2/hypergan/ParticleGAN-atlas-forge-unblock-20261003"
+  },
+  "source_locations": [
+    {
+      "file": "experiments/forge/trainer_families.py",
+      "line": 126,
+      "purpose": "registry/explicit declaration/singleton classification"
+    },
+    {
+      "file": "experiments/forge/trainer_families.py",
+      "line": 320,
+      "purpose": "whole-family runtime grouping and pin guard"
+    },
+    {
+      "file": "reports/forge/regenerate_technique_inventory.py",
+      "line": 1393,
+      "purpose": "discovers the added draft idea"
+    },
+    {
+      "file": "reports/forge/regenerate_technique_inventory.py",
+      "line": 1434,
+      "purpose": "fresh metadata report for missing declarations"
+    },
+    {
+      "file": "reports/forge/regenerate_technique_inventory.py",
+      "line": 1453,
+      "purpose": "retains exact original incumbent rows"
+    },
+    {
+      "file": "reports/forge/regenerate_technique_inventory.py",
+      "line": 1497,
+      "purpose": "family selection before public write"
+    }
+  ],
+  "status": "SOURCE_METADATA_CAUSE_IDENTIFIED"
+}
