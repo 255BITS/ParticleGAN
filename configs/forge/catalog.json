@@ -39,7 +39,7 @@
       "experiment/toy": 3,
       "experiment/trajectory": 2,
       "experiment/transition": 7,
-      "forge_engine": 57,
+      "forge_engine": 58,
       "lrfree/feature-cells-cb64-ra": 4058,
       "report/atlas-explanation": 7,
       "report/behavioral_baseline": 32,
@@ -102,7 +102,7 @@
       "candidate_patch": 26,
       "configuration": 807,
       "driver": 401,
-      "engine_support": 57,
+      "engine_support": 58,
       "evaluator_or_audit": 324,
       "evidence_artifact": 1574,
       "frozen_candidate_implementation": 15,
@@ -116,13 +116,13 @@
       "visualization": 22,
       "visualization_artifact": 723
     },
-    "files": 11736
+    "files": 11737
   },
   "coverage": {
-    "declared_count": 11736,
+    "declared_count": 11737,
     "missing": [],
     "stale": [],
-    "tracked_count": 11736,
+    "tracked_count": 11737,
     "unclassified": [],
     "valid": true
   },
@@ -7217,6 +7217,13 @@
       "family": "forge_engine",
       "git_blob": "cadaa3c59f4796647e35e32a4a8d80ae78255b49",
       "path": "experiments/forge/clockfree.py",
+      "role": "engine_support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "forge_engine",
+      "git_blob": "8f1c0afc34aaa22d4339e3d715d43ff8347c5516",
+      "path": "experiments/forge/common26_comparison.py",
       "role": "engine_support",
       "suggested_tiers": []
     },

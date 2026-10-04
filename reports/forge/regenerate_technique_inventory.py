@@ -1185,7 +1185,174 @@ def _separate_baseline_links(result, row, root, path):
     return links
 
 
+COMMON26_DISPLAY_AUDIT = Path("configs/forge/selections/common26-display-audit-v1.json")
+
+
+def _load_common26_display_choices(root):
+    """Load explicit display identities; a cached score or selection cannot choose."""
+    path = root / COMMON26_DISPLAY_AUDIT
+    if not path.is_file():
+        return None
+    raw = path.read_bytes()
+
+    def unique_fields(pairs):
+        value = {}
+        for key, item in pairs:
+            if key in value:
+                raise ValueError("duplicate common-26 audit field")
+            value[key] = item
+        return value
+
+    manifest = json.loads(raw, object_pairs_hook=unique_fields)
+    if (not isinstance(manifest, dict)
+            or set(manifest) != {"schema", "chosen_configurations"}
+            or manifest["schema"] != "pg_common26_display_identity_audit_v1"
+            or not isinstance(manifest["chosen_configurations"], dict)):
+        raise ValueError("common-26 audit requires the explicit display-only identity schema")
+    reference = {"path": COMMON26_DISPLAY_AUDIT.as_posix(),
+                 "sha256": hashlib.sha256(raw).hexdigest(), "bytes": len(raw)}
+    choices = deepcopy(manifest["chosen_configurations"])
+    for family, choice in choices.items():
+        if choice is None:
+            continue
+        if not isinstance(choice, dict) or "audit_reference" in choice:
+            raise ValueError("raw common-26 identities must omit their injected audit reference")
+        choice["audit_reference"] = deepcopy(reference)
+    return choices
+
+
+def _common26_display_projection(result, root):
+    """Reproject supplied declarations; no recognized fresh numeric producer exists."""
+    from experiments.forge.common26_comparison import project_common26
+    return project_common26(result["rows"], result,
+                            chosen_configurations=_load_common26_display_choices(root))
+
+
+def _common26_link(root, path, relative):
+    if (not isinstance(relative, str) or not relative or "\\" in relative or ":" in relative
+            or any(ord(char) < 32 for char in relative)
+            or any(part in {"", ".", ".."} for part in relative.split("/"))):
+        raise ValueError("common-26 evidence links require portable repository paths")
+    return os.path.relpath(root / relative, path.parent)
+
+
+def _common26_label(value):
+    return (str(value).replace("\\", "\\\\").replace("|", "\\|")
+            .replace("[", "\\[").replace("]", "\\]")
+            .replace("\n", " ").replace("\r", " "))
+
+
+def _common26_reference_card(row, root):
+    name = row["candidate_id"]
+    # This link names the retained canonical reference, never a fresh execution.
+    relative = Path("configs/forge/configurations") / (name + ".json")
+    if not (root / relative).is_file():
+        relative = Path("configs/forge/ideas") / (name + ".json")
+    return relative.as_posix()
+
+
+def _common26_evidence_links(result, root, path):
+    """Retain source-scoped readouts outside the comparison, without old scores."""
+    links, seen = [], set()
+
+    def add(label, metadata):
+        readout = metadata.get("readout") if isinstance(metadata, dict) else None
+        if readout and readout not in seen:
+            links.append(f"- [{_common26_label(label)}]({_common26_link(root, path, readout)})")
+            seen.add(readout)
+
+    original = result.get("original_pr223_atlas", {})
+    add("Original Atlas recipe and serving-law evidence", original)
+    for key, label in (("fresh_retest", "Original-suite stopped retest"),
+                       ("native3_continuation", "Native continuation first attempt"),
+                       ("native3_repaired_continuation", "Repaired native continuation")):
+        add(label, original.get(key, {}))
+    progress = result.get("atlas_unblocking_progress", {})
+    add("C6 changed-rate / output-noise-off diagnostic", progress.get("baseline", {}))
+    for row in progress.get("adaptations", []):
+        add(str(row.get("family", "Named-family")) + " adaptation evidence", row)
+    add("Retained word context", progress.get("word", {}))
+    add("Word half-base rate contrast", result.get("word_half_base_diagnostic", {}))
+    add("C6 baseline selection and retained diagnosis", result.get("baseline_debugging", {}))
+    for study in result.get("completed_api_studies", {}).get("rows", []):
+        add("Separate completed study: " + str(study.get("id", "source-bound readout")), study)
+    for score in result.get("standalone_api_scores", []):
+        label = ("Standalone API evidence: " + str(score.get("trainer_family", "recorded family"))
+                 + " · " + str(score.get("case", {}).get("title", "recorded question")))
+        add(label, score)
+        gif = score.get("gif")
+        if gif and gif not in seen:
+            links.append(f"- [{_common26_label(label)} · actual-training GIF]"
+                         f"({_common26_link(root, path, gif)})")
+            seen.add(gif)
+    atlas = next(row for row in result["rows"] if row["trainer_family"] == "atlas")
+    reference = _common26_reference_card(atlas, root)
+    links.append("- [Differing canonical Atlas reference; not the requested Full Atlas configuration]"
+                 f"({_common26_link(root, path, reference)})")
+    return links
+
+
+def _common26_current_markdown(result, root, path):
+    projection = _common26_display_projection(result, root)
+    scientific = {row["trainer_family"]: row for row in result["rows"]}
+    json_link = path.with_suffix(".json").name
+    lines = ["# Current model/configuration scores", "",
+             "One configuration slot per family uses the same fresh common-26 comparison. "
+             "NOT_RUN means accepted fresh comparison evidence is unavailable; eligibility is a separate status.", "",
+             "| Model/configuration | Representation | Fresh common-26 score/status |",
+             "| --- | --- | --- |"]
+    for row in projection["rows"]:
+        family = row["family_id"]
+        label = _common26_label(row["label"])
+        requested, chosen = row["requested_configuration"], row["chosen_configuration"]
+        if requested:
+            label += (f" · [{requested['path']}@{requested['sha256'][:12]}]"
+                      f"({_common26_link(root, path, requested['path'])})")
+        if chosen:
+            identity = _common26_label(chosen["candidate_id"])
+            label += (f"<br>[{identity}]"
+                      f"({_common26_link(root, path, chosen['audit_reference']['path'])})")
+        else:
+            if family != "atlas":
+                reference = scientific[family]
+                identity = _common26_label(reference["candidate_id"])
+                label += (f" · [canonical reference: {identity}]"
+                          f"({_common26_link(root, path, _common26_reference_card(reference, root))})")
+            label += "<br>Configuration freeze pending"
+        representation = row["representation"]["kind"]
+        if row["representation"]["basis"] == "DECLARED":
+            representation += " (declared per task)" if representation == "MoG / Particles" else " (declared)"
+        status = ("NOT_RUN (26 required)<br>"
+                  f"[Eligibility: {row['eligibility']['status']}]({json_link}#common26_display)")
+        lines.append(f"| {label} | {representation} | {status} |")
+    lines += ["", "Historical and diagnostic evidence has separate configurations, serving laws and scopes. "
+              "These links supply no fresh common-26 score:", ""]
+    lines += _common26_evidence_links(result, root, path)
+    if result.get("declared_view"):
+        lines += ["", f"[Current declared view and additional-task scope]({json_link}#declared_view): "
+                  "these separate declarations do not fill the fresh common-26 comparison."]
+    lines += ["", "## Qualification and scope", "",
+              "Fresh comparison evidence must bind the chosen configuration, unchanged required tasks, "
+              "gates, budgets, source, runtime and serving law to a recognized new initialization and "
+              "independent grade. Earlier source-bound records remain evidence in their own scopes.", "",
+              "Representation describes a declared prior or per-task host law. UNKNOWN means the chosen "
+              "identity and complete prior contracts are not bound. The Full Atlas Particles label describes "
+              "its requested original configuration; its common-task eligibility remains BLOCKED.", "",
+              "This display grants no current qualification, default adoption or speed comparison. "
+              "The underlying scientific selection and historical records remain unchanged.", "",
+              f"[Canonical rows, configuration alternatives and source-scoped evidence]({json_link}) · "
+              f"[Evidence and archived publication identities]({os.path.relpath(root / EVIDENCE_MANIFEST, path.parent)})", "",
+              "Regenerate this presentation from committed metadata:", "",
+              "```sh", "python reports/forge/regenerate_technique_inventory.py" +
+              (" --refresh-publication" if result.get("publication_refresh") else ""), "```", "",
+              f"Publication input digest `{result['provenance']['input_digest']}`.", ""]
+    return "\n".join(lines)
+
+
+
 def _current_markdown(result, root, path):
+    if not result.get('recorded_policy') and result['view'] == 'discriminator_stability':
+        return _common26_current_markdown(result, root, path)
     def cell(value):
         return str(value if value is not None else "unknown").replace("|", "\\|").replace("\n", " ")
     tiers = list(result["tier_requirements"])
@@ -1568,6 +1735,13 @@ def refresh_publication(root=REPOSITORY_ROOT, *, view_id="discriminator_stabilit
     result["standalone_api_scores"] = _standalone_api_scores(root)
     result["publication_refresh"] = {"scientific_rows_preserved": True, "qualification_regraded": False,
                                      "training_launched": False}
+    if result["view"] == "discriminator_stability":
+        result["common26_display"] = _common26_display_projection(result, root)
+        result["provenance"]["common26_comparison_projector_sha256"] = file_hash(
+            Path(__file__).resolve().parents[2] / "experiments/forge/common26_comparison.py")
+        audit = root / COMMON26_DISPLAY_AUDIT
+        result["provenance"]["common26_display_audit_sha256"] = (
+            file_hash(audit) if audit.is_file() else None)
     result["provenance"]["publication_reducer_sha256"] = file_hash(Path(__file__))
     result["provenance"].pop("input_digest", None)
     result["provenance"]["input_digest"] = stable_hash(result)
@@ -1861,6 +2035,13 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
                             "selected_rows_sha256": stable_hash(result["rows"]),
                             "family_current_selection_sha256": file_hash(root / CURRENT_SELECTION)
                                 if current_pins else None}
+    if not recorded_policy and view_id == "discriminator_stability":
+        result["common26_display"] = _common26_display_projection(result, root)
+        result["provenance"]["common26_comparison_projector_sha256"] = file_hash(
+            Path(__file__).resolve().parents[2] / "experiments/forge/common26_comparison.py")
+        audit = root / COMMON26_DISPLAY_AUDIT
+        result["provenance"]["common26_display_audit_sha256"] = (
+            file_hash(audit) if audit.is_file() else None)
     if completed_studies:
         result["provenance"]["completed_studies_projector_sha256"] = file_hash(
             Path(completed_studies_projection.__file__))

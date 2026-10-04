@@ -50,6 +50,19 @@ def _register(root, manifest, name, source, *, finished=None, passed=0):
     return entry, report
 
 
+
+def _as_common26_display_fixture(result):
+    """Explicit pure comparison fixture; no new evidence or scientific row edits."""
+    from experiments.forge.common26_comparison import FAMILIES, TASKS_BY_TIER
+    value = deepcopy(result)
+    indexed = {row.get("trainer_family", row["candidate_id"]): row for row in value["rows"]}
+    value["rows"] = [indexed.get(family, {"trainer_family": family,
+                      "candidate_id": "synthetic-" + family}) for family, _ in FAMILIES]
+    value.update(view="discriminator_stability", view_revision=3,
+                 tier_requirements={tier: list(tasks) for tier, tasks in TASKS_BY_TIER.items()})
+    return value
+
+
 @pytest.fixture
 def evidence(tmp_path, monkeypatch):
     policy = {"id": "discriminator_stability", "revision": 2,
@@ -70,6 +83,13 @@ def evidence(tmp_path, monkeypatch):
     # declarations; only the complete committed-checkout test uses real tasks.
     monkeypatch.setattr("experiments.forge.views.load_view", lambda root, view_id:
                         read_json(Path(root) / f"configs/forge/views/{view_id}.json"))
+    # The cached metadata tests intentionally retain their two-row v2 science fixture.
+    # Standalone common-26 controls enforce the real 12-row/v3 boundary without this adapter.
+    projector, formatter = publication._common26_display_projection, publication._common26_current_markdown
+    monkeypatch.setattr(publication, "_common26_display_projection",
+                        lambda result, root: projector(_as_common26_display_fixture(result), root))
+    monkeypatch.setattr(publication, "_common26_current_markdown",
+                        lambda result, root, path: formatter(_as_common26_display_fixture(result), root, path))
     return tmp_path, manifest
 
 
@@ -177,8 +197,10 @@ def test_completed_studies_cannot_replace_selected_family_configs_or_history(evi
     assert "task_diagnostics" not in current
     assert "Five-word joint task diagnostics" not in markdown
     assert "<summary>Selected configurations and provenance</summary>" not in markdown
-    assert "19/19 original PASS" in markdown and "2/2 hold FAIL" in markdown
-    assert markdown.index("| Model/configuration | Actual representation | Measured score/status and scope |") < markdown.index("19/19 original PASS")
+    assert "19/19" not in markdown and "2/2 hold FAIL" not in markdown
+    assert "Original Atlas recipe and serving-law evidence" in markdown
+    assert markdown.index("Original Atlas recipe and serving-law evidence") < markdown.index("## Qualification and scope")
+    assert markdown.count("NOT_RUN (26 required)") == 12
     assert markdown.count("| --- | --- | --- |") == 1
     outputs = _outputs(root)
     mtimes = {path: path.stat().st_mtime_ns for path in outputs}
@@ -323,7 +345,9 @@ def test_publication_refresh_preserves_science_and_shows_new_unknown_requirement
     assert current["publication_refresh"] == dict(scientific_rows_preserved=True,
                                                  qualification_regraded=False, training_launched=False)
     markdown = Path(metadata["report"]).read_text()
-    assert "Additional required cells are **UNKNOWN**" in markdown and "`new-scalar`" in markdown
+    assert "Current declared view and additional-task scope" in markdown
+    assert current["declared_view"]["added_required_tasks"]["1"] == ["new-scalar"]
+    assert markdown.count("NOT_RUN (26 required)") == 12
     assert "--refresh-publication" in markdown
     assert all(path.read_bytes() == data for path, data in protected.items())
     before = _outputs(root)
@@ -360,8 +384,12 @@ def test_standalone_scalar_display_binds_actual_receipt_and_never_changes_qualif
     current["standalone_api_scores"] = [score]
     before = deepcopy(current["rows"])
     markdown = publication._current_markdown(current, ROOT, ROOT / publication.CURRENT_PREFIX.with_suffix(".md"))
-    assert "1-D Gaussian: histogram matching" in markdown
-    assert "KS 0.05674 / ≤ 0.05" in markdown and "terminal 3/5" in markdown
+    assert "Standalone API evidence: " + score["trainer_family"] + " · " + score["case"]["title"] in markdown
+    assert "actual-training GIF" in markdown and "KS 0.05674" not in markdown
+    leading = markdown.split("## Qualification and scope", 1)[0]
+    assert __import__("os").path.relpath(ROOT / score["readout"], ROOT / "reports/forge") in leading
+    assert __import__("os").path.relpath(ROOT / score["gif"], ROOT / "reports/forge") in leading
+    assert markdown.count("NOT_RUN (26 required)") == 12
     assert current["rows"] == before
 
 
@@ -465,7 +493,14 @@ def test_new_card_is_discovered_with_truthful_unknown_or_blocked_status(evidence
     assert new["tiers"]["1"] == {"passed": 0, "total": 3}
     assert not new["attempt_ids"] and "publication_key" not in new
     if unresolved:
-        assert "unresolved / unresolved" in (root / "reports/forge/technique-inventory.md").read_text()
+        assert new["candidate_revision"] is None
+        assert new["bindings"] == {"source_origin_commit": None}
+        markdown = (root / "reports/forge/technique-inventory.md").read_text()
+        assert markdown.count("Configuration freeze pending") == 12
+        assert markdown.count("NOT_RUN (26 required)") == 12
+        assert all(slot["fresh_common"]["passed"] is None
+                   and slot["fresh_common"]["accepted_record"] is None
+                   for slot in result["common26_display"]["rows"])
 
 
 def test_explicit_frozen_regrade_registers_evidence_and_updates_canonical(evidence, monkeypatch):
@@ -546,12 +581,15 @@ def test_explicit_policy_advance_preserves_original_cohorts_without_new_credit(e
     assert all(row["candidate_revision"] != "revision-a" for row in current["configuration_rows"])
     original = next(row for row in current["archived_evidence_rows"] if row["candidate_id"] == "bcap")
     assert original["evidence_policy"]["view_revision"] == 2
+    assert original["evidence_policy"]["tier_requirements"] == manifest["tier_requirements"]
     assert original["tiers"]["1"] == {"passed": 3, "total": 3}
     assert original["qualified_tier"] == 1
     original.pop("evidence_policy")
     assert original in baseline["evidence_rows"]
     assert all((root / relative).read_bytes() == content for relative, content in protected.items())
-    assert "recorded denominators 3/19/2" in Path(result["report"]).read_text()
+    markdown = Path(result["report"]).read_text()
+    assert markdown.count("NOT_RUN (26 required)") == 12
+    assert "Evidence and archived publication identities" in markdown
     assert len(list((root / "reports/forge").rglob("*.md"))) == 1
     outputs = _outputs(root)
     assert publication.publish_current(root) == result
@@ -772,14 +810,15 @@ def _tier_display_fixture(tier1, later="UNKNOWN"):
     ("BLOCKED", "BLOCKED"), ("UNKNOWN", "UNKNOWN"), ("NOT_RUN", "NOT RUN"),
     ("INCOMPLETE", "INCOMPLETE"), ("INVALID", "INVALID"),
 ])
+
 def test_current_tier_cells_keep_blocked_and_unmeasured_denominators(tmp_path, status, label):
     result = _tier_display_fixture([status] * 5, later=status)
     before = deepcopy(result)
-    markdown = publication._current_markdown(result, tmp_path, tmp_path / "reports/forge/table.md")
-    row = next(line for line in markdown.splitlines() if line.startswith("| Atlas ·"))
-    for total in (5, 19, 2):
-        assert f"{label} ({total} required)" in row
-    assert "FAIL" not in row
+    row = result["rows"][0]
+    for tier, required in result["tier_requirements"].items():
+        rendered = publication._current_tier_cell(row, tier, required, "table.json")
+        assert f"{label} ({len(required)} required)" == rendered
+        assert "FAIL" not in rendered
     assert result == before
 
 
@@ -792,13 +831,14 @@ def test_current_tier_cells_keep_blocked_and_unmeasured_denominators(tmp_path, s
      "NOT RUN/UNKNOWN (5 required)"),
     (["PASS"] * 5, "5/5 PASS"),
 ])
+
 def test_current_tier_cells_show_actual_mixed_gate_counts(tmp_path, statuses, expected):
     result = _tier_display_fixture(statuses)
     before = deepcopy(result)
-    markdown = publication._current_markdown(result, tmp_path, tmp_path / "reports/forge/table.md")
-    row = next(line for line in markdown.splitlines() if line.startswith("| Atlas ·"))
-    assert expected in row
-    assert "UNKNOWN (19 required)" in row and "UNKNOWN (2 required)" in row
+    row = result["rows"][0]
+    assert publication._current_tier_cell(row, "1", result["tier_requirements"]["1"], "table.json") == expected
+    assert publication._current_tier_cell(row, "2", result["tier_requirements"]["2"], "table.json") == "UNKNOWN (19 required)"
+    assert publication._current_tier_cell(row, "3", result["tier_requirements"]["3"], "table.json") == "UNKNOWN (2 required)"
     assert result == before
 
 
@@ -815,27 +855,25 @@ def test_legacy_tier_display_does_not_invent_an_all_failed_breakdown(tmp_path):
     assert "FAIL" not in rendered and result == before
 
 
+
 def test_main_policy_rows_link_separate_history_and_failed_hold_without_credit():
     result = read_json(ROOT / "reports/forge/technique-inventory.json")
-    result["rows"] = [row for row in result["rows"] if row["trainer_family"] in {"atlas", "e22"}]
-    assert {row["trainer_family"] for row in result["rows"]} == {"atlas", "e22"}
     before = deepcopy(result)
     markdown = publication._current_markdown(result, ROOT, ROOT / "reports/forge/technique-inventory.md")
-    table_rows = [line for line in markdown.splitlines() if line.startswith(("| Atlas ·", "| E22 ·"))]
-    assert len(table_rows) == 1 and table_rows[0].startswith("| E22 ·")
-    assert any(line.startswith("| [Atlas C6") for line in markdown.splitlines())
-    for row, label in zip(result["rows"], ("Atlas", "E22")):
+    selected = [row for row in result["rows"] if row["trainer_family"] in {"atlas", "e22"}]
+    assert {row["trainer_family"] for row in selected} == {"atlas", "e22"}
+    for row in selected:
+        label = {"atlas": "Atlas", "e22": "E22"}[row["trainer_family"]]
         links = publication._separate_baseline_links(result, row, ROOT, ROOT / "reports/forge/technique-inventory.md")
         assert "[Atlas history: 19/19 PASS](continuous-baseline-20261003/README.md)" in links
         assert f"[C6 {label} hold FAIL](c6-baseline-debug-20261003/README.md)" in links
         assert row["qualified_tier"] == 0
-    assert all(f"BLOCKED ({total} required)" in table_rows[0] for total in (5, 19, 2))
-    assert "Recorded tier: 0" in table_rows[0]
-    assert "E22 history: 19/19" not in markdown
-    assert "no ordinary tier, default or speed credit" in markdown and result == before
+    assert markdown.count("NOT_RUN (26 required)") == 12 and "19/19" not in markdown
+    assert "C6 baseline selection and retained diagnosis" in markdown and result == before
+    assert "Differing canonical Atlas reference" in markdown
     without_history = deepcopy(result)
     without_history.pop("completed_api_studies")
-    assert publication._separate_baseline_links(without_history, result["rows"][0], ROOT,
+    assert publication._separate_baseline_links(without_history, selected[0], ROOT,
                                                 ROOT / "reports/forge/technique-inventory.md") == []
 
 
@@ -876,20 +914,17 @@ def test_atlas_progress_is_source_bound_additive_display_and_preserves_every_ord
         "qualification_input", "qualification_reuse", "ordinary_tier_credit", "cross_cohort_pooling",
         "default_adoption", "speed_ranking"))
     markdown = Path(published["report"]).read_text()
-    assert markdown.count("| Model/configuration | Actual representation | Measured score/status and scope |") == 1
+    assert markdown.count("| Model/configuration | Representation | Fresh common-26 score/status |") == 1
     assert markdown.count("| --- | --- | --- |") == 1
-    first = next(line for line in markdown.splitlines() if line.startswith("| [Atlas C6"))
-    assert "| Particles | **7/26 PASS** · FAIL 11 · BLOCKED 8" in first
-    assert "## Selected-policy GPU scores" not in markdown
-    assert "**7/26 PASS** · FAIL 11 · BLOCKED 8" in markdown
-    assert "**4/26 PASS** · NOT_RUN 22" in markdown
-    assert "**INVALID 1** · NOT_RUN 25 · numerical gate UNAVAILABLE" in markdown
-    assert "7/8" not in markdown and "Atlas unblocking progress" not in markdown
-    required = sum(len(names) for names in before["tier_requirements"].values())
-    assert f"one unchanged family/configuration tuple must satisfy all {required} required" in markdown
-    assert not any(line.lower().startswith("| atlas ·") for line in markdown.splitlines())
-    # The synthetic ordinary reference remains unchanged in the data even
-    # though the actual selected-policy result occupies the displayed row.
+    assert markdown.count("NOT_RUN (26 required)") == 12
+    assert "7/26 PASS" not in markdown and "4/26 PASS" not in markdown
+    assert "INVALID 1" not in markdown and "7/8" not in markdown
+    for item in [progress["baseline"], *progress["adaptations"], progress["word"]]:
+        link = __import__("os").path.relpath(root / item["readout"], Path(published["report"]).parent)
+        assert f"]({link})" in markdown.split("## Qualification and scope", 1)[0]
+    assert len(after["common26_display"]["rows"]) == 12
+    assert all(row["fresh_common"]["passed"] is None for row in after["common26_display"]["rows"])
+    # Scientific diagnostics and ordinary reference remain byte-identical data.
     assert next(row for row in after["rows"] if row["candidate_id"] == "atlas")["bindings"]["prior"]["kind"] == "mog"
     assert after["rows"] == before["rows"]
     outputs = _outputs(root)
@@ -949,7 +984,7 @@ def test_committed_atlas_progress_display_matches_its_generator_without_raw_evid
     assert result["atlas_unblocking_progress"] == expected
     markdown = publication._current_markdown(result, ROOT, ROOT / "reports/forge/technique-inventory.md")
     assert (ROOT / "reports/forge/technique-inventory.md").read_text() == markdown
-    assert "**4/26 PASS** · NOT_RUN 22" in markdown
+    assert "4/26 PASS" not in markdown and markdown.count("NOT_RUN (26 required)") == 12
     assert "Atlas unblocking progress" not in markdown and "7/8" not in markdown
 
 
@@ -1010,10 +1045,11 @@ def test_shared_score_intro_preserves_unrelated_index_and_rebuilds_idempotently(
     content = path.read_text()
     assert path.with_name("ARCHIVED_REPORTS.md").read_text() == unrelated
     assert "[Historical report archive](ARCHIVED_REPORTS.md)" in content
-    assert content.index("| Model/configuration | Actual representation | Measured score/status and scope |") < content.index("## Qualification and accounting")
+    assert content.index("| Model/configuration | Representation | Fresh common-26 score/status |") < content.index("## Qualification and accounting")
     assert content.count("| --- | --- | --- |") == 1
     assert "## Atlas unblocking progress" not in content and "7/8" not in content
-    assert "[trajectory](../atlas-named-gpu-diagnostics-native-v3-20261003/gifs/trajectory_conditional_policy_selected_cloud_v1.gif)" in content
+    assert "atlas_conditional adaptation evidence" in content
+    assert "../atlas-named-gpu-diagnostics-native-v3-20261003/README.md" in content
     assert publication.publish_current(root) == published and path.read_text() == content
 
 
@@ -1075,10 +1111,9 @@ def test_sealed_half_base_is_additive_keeps_invalid_and_charges_predecessors_onc
     assert all(row[flag] is False for flag in ("qualification_input", "qualification_reuse", "ordinary_tier_credit",
                                               "default_adoption", "speed_ranking", "cross_cohort_pooling"))
     markdown = (root / "reports/forge/technique-inventory.md").read_text()
-    assert "**0/26 PASS** · FAIL 1 · NOT_RUN 25 · COMPLETE" in markdown
-    assert "**INVALID 1** · NOT_RUN 25 · numerical gate UNAVAILABLE" in markdown
-    assert "Final quality 0.546875 · modes 2/5 · mass TV 0.622266 · all-five exact 0" in markdown
-    assert "original C6 N11 illustration has no accepted numerical grade" in markdown
+    assert "0/26 PASS" not in markdown and "INVALID 1" not in markdown
+    assert "Word half-base rate contrast" in markdown and "Retained word context" in markdown
+    assert markdown.count("NOT_RUN (26 required)") == 12
     outputs = _outputs(root)
     publication.publish_current(root)
     assert _outputs(root) == outputs
@@ -1156,7 +1191,7 @@ def test_half_base_shared_index_cost_updates_without_touching_archived_index(evi
     rendered = path.read_text()
     assert path.with_name("ARCHIVED_REPORTS.md").read_bytes() == archive_bytes
     assert rendered.count("| --- | --- | --- |") == 1
-    assert rendered.count("| Model/configuration | Actual representation | Measured score/status and scope |") == 1
+    assert rendered.count("| Model/configuration | Representation | Fresh common-26 score/status |") == 1
     assert "[Historical report archive](ARCHIVED_REPORTS.md)" in rendered
     assert "1466.669318475062 / 10500 seconds" in rendered
     assert "1231.8432376992423 / 3000" in rendered
@@ -1165,44 +1200,38 @@ def test_half_base_shared_index_cost_updates_without_touching_archived_index(evi
     assert "original C6 word INVALID is unchanged" in rendered
 
 
+
 def test_half_base_render_keeps_old_invalid_and_separate_full_denominator():
-    result = _tier_display_fixture(["BLOCKED"] * 5)
+    result = _as_common26_display_fixture(_tier_display_fixture(["BLOCKED"] * 5))
     result["atlas_unblocking_progress"] = publication._atlas_unblocking_progress(ROOT)
     result["word_half_base_diagnostic"] = _synthetic_half_base_display()
     before = deepcopy(result)
     markdown = publication._current_markdown(result, ROOT, ROOT / "reports/forge/synthetic-table.md")
-    assert "**0/26 PASS** · FAIL 1 · NOT_RUN 25 · COMPLETE" in markdown
-    assert "**INVALID 1** · NOT_RUN 25 · numerical gate UNAVAILABLE" in markdown
-    assert "original C6 N11 illustration has no accepted numerical grade" in markdown
-    assert "accepted 20,001-update goal GIF" in markdown
-    assert "half_base LR .00265625 / prior1.5 / D1" in markdown
+    assert markdown.count("NOT_RUN (26 required)") == 12
+    assert "0/26 PASS" not in markdown and "INVALID 1" not in markdown
+    assert "Word half-base rate contrast" in markdown and "Retained word context" in markdown
     assert result == before
 
 
-def test_one_visible_table_leads_with_actual_atlas_and_keeps_configuration_scopes():
+
+def test_one_visible_table_keeps_twelve_unscored_family_slots_and_separate_evidence():
+    from experiments.forge.common26_comparison import FAMILIES
     result = read_json(ROOT / "reports/forge/technique-inventory.json")
     before = deepcopy(result)
     assert len(result["rows"]) == 12
     text = publication._current_markdown(result, ROOT, ROOT / "reports/forge/technique-inventory.md")
     assert text.count("| --- | --- | --- |") == 1
-    assert "<details>" not in text and "| Study | Result |" not in text
     table = [line for line in text.splitlines() if line.startswith("|")][2:]
-    standalone_count = len(result.get("standalone_api_scores", []))
-    assert len(table) == 19 + standalone_count
-    assert table[0].startswith("| [Original PR223 Atlas FULL · LR .00425 / prior2]")
-    assert "| Particles | " in table[0] and "**19/19 PASS**" in table[0]
-    assert table[1].startswith("| [Atlas C6 CHANGED-rate / noise-OFF · LR .0053125 / prior1.5")
-    assert "| Particles | **7/26 PASS** · FAIL 11 · BLOCKED 8" in table[1]
-    assert "seed0" in table[1]
-    assert sum(line.startswith("| [Atlas C6") for line in table) == 1
-    assert not any(line.startswith("| Atlas ·") for line in table)
-    assert any("0/26 PASS** · FAIL 1 · NOT_RUN 25 · COMPLETE" in line for line in table)
-    assert any("INVALID 1** · NOT_RUN 25 · numerical gate UNAVAILABLE" in line for line in table)
-    ordinary_start = 8 + standalone_count
-    assert all("standalone API" in line and "no ordinary tier credit" in line
-               for line in table[8:ordinary_start])
-    assert all("ordinary qualification" in line for line in table[ordinary_start:])
-    assert [line.split(" · ", 1)[0][2:] for line in table[ordinary_start:]] == [row["technique"] for row in result["rows"] if row["trainer_family"] != "atlas"]
+    assert len(table) == 12 and all("NOT_RUN (26 required)" in line for line in table)
+    labels = [line[2:].split(" | ", 1)[0].split(" · ", 1)[0].split("<br>", 1)[0]
+              for line in table]
+    assert labels == [label for _, label in FAMILIES]
+    atlas = next(line for line in table if line.startswith("| Full Atlas ·"))
+    assert "configs/100gaussians/atlas.json@a3ee5c67" in atlas and "Eligibility: BLOCKED" in atlas
+    assert "19/19" not in text and "7/26 PASS" not in text and "0/26 PASS" not in text
+    leading = text.split("## Qualification and scope", 1)[0]
+    assert "Original Atlas recipe and serving-law evidence" in leading
+    assert "Word half-base rate contrast" in leading and "Differing canonical Atlas reference" in leading
     assert result == before
 
 
@@ -1221,8 +1250,8 @@ def test_original_pr223_score_uses_verified_full_original_law_not_changed_c6_cel
     assert not any(row[key] for key in ("qualification_input", "qualification_reuse",
                                        "default_adoption", "speed_ranking", "new_current_retest_credit"))
     text = publication._current_markdown(result, ROOT, ROOT / "reports/forge/technique-inventory.md")
-    assert "native/moving seed1234, portability seed0" in text
-    assert "no current-26/default credit" in text
+    assert "Original Atlas recipe and serving-law evidence" in text
+    assert "19/19" not in text and text.count("NOT_RUN (26 required)") == 12
     assert result == before
 
 
