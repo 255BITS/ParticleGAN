@@ -1062,7 +1062,7 @@ def _shared_score_intro(root, result):
              "No family default or comparable speed winner is established.\n\n"
              "The named campaign's predecessor-inclusive charge remains **910.2391431590077 / 10500 seconds**, "
              "reserve zero: GPU0 **234.82608077581972 / 7500**, GPU1 **675.4130623831879 / 3000**. "
-             "Prospective rate proposals are unexecuted and add no measurement to these tables.\n\n"
+             "The half-base contrast has no completed measurement in these tables.\n\n"
              "The linked original report sections and their index.json below retain their separate snapshots.\n\n")
     return path, leading + scope + suffix
 

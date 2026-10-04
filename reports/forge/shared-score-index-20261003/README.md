@@ -36,7 +36,7 @@ C6 is the fixed LR .0053125 / prior-rate 1.5 configuration with declared host-sp
 
 Each model/configuration keeps its own source, law and full 26-slot denominator. MoG + particles (per task) is a mixture of separate suite hosts, not a hybrid-model claim. Named diagnostic passes do not fill ordinary cells or combine into a family score. INVALID supplies no accepted numerical grade; original N5 word execution remains BLOCKED. No family default or comparable speed winner is established.
 
-The named campaign's predecessor-inclusive charge remains **910.2391431590077 / 10500 seconds**, reserve zero: GPU0 **234.82608077581972 / 7500**, GPU1 **675.4130623831879 / 3000**. Prospective rate proposals are unexecuted and add no measurement to these tables.
+The named campaign's predecessor-inclusive charge remains **910.2391431590077 / 10500 seconds**, reserve zero: GPU0 **234.82608077581972 / 7500**, GPU1 **675.4130623831879 / 3000**. The half-base contrast has no completed measurement in these tables.
 
 The linked original report sections and their index.json below retain their separate snapshots.
 
