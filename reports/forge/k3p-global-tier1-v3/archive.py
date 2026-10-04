@@ -36,11 +36,52 @@ def safe_name(name):
     assert name and not path.is_absolute() and ".." not in path.parts and str(path) == name, name
 
 
+def execution_concurrency(data, inventory):
+    """Reconstruct worker claim/completion windows from exact archived events."""
+    by_study = {}
+    for attempt in inventory["attempts"]:
+        request = json.loads(data[f"durable/{attempt['attempt_id']}/request.json"])["request"]
+        by_study.setdefault(request["campaign_id"], set()).add(attempt["attempt_id"])
+    phases = []
+    for study, expected_attempts in by_study.items():
+        path = f"queue/{study}/queue/events.jsonl"
+        events = data[path]
+        active, intervals, peak, backend_peaks = {}, {}, 0, {}
+        for event in sorted(map(json.loads, events.splitlines()), key=lambda row: row["timestamp"]):
+            if event["event"] == "claimed":
+                attempt = event["attempt"]
+                assert attempt in expected_attempts and attempt not in intervals and event["campaign"] == study
+                backend = "cpu" if event["gpu"] == "cpu" else "cuda:" + event["gpu"]
+                active[attempt] = backend
+                intervals[attempt] = {"start": event["timestamp"], "backend": backend}
+                peak = max(peak, len(active))
+                for device, count in Counter(active.values()).items():
+                    backend_peaks[device] = max(backend_peaks.get(device, 0), count)
+            elif event["event"] == "completed":
+                attempt = event["attempt"]
+                assert attempt in active and event["campaign"] == study
+                intervals[attempt]["end"] = event["timestamp"]
+                assert intervals[attempt]["start"] <= intervals[attempt]["end"]
+                del active[attempt]
+        assert not active and set(intervals) == expected_attempts
+        phases.append({"study": study, "attempt_count": len(intervals), "observed_maximum_workers": peak,
+            "observed_backend_maximum_workers": backend_peaks,
+            "first_claimed_at": min(row["start"] for row in intervals.values()),
+            "last_completed_at": max(row["end"] for row in intervals.values()),
+            "archived_events": {"path": path, "sha256": digest(events), "bytes": len(events)}})
+    phases.sort(key=lambda phase: phase["first_claimed_at"])
+    sequential = all(left["last_completed_at"] <= right["first_claimed_at"]
+                     for left, right in zip(phases, phases[1:]))
+    assert sequential
+    return {"interval_scope": "Queue worker claim through completion, including process startup and grading; not optimizer time.",
+            "studies_sequential": sequential, "phases": phases}
+
+
 def create(output):
     summaries = [json.loads(path.read_text()) for path in (REPORT / "summary.json", REPORT / "direct-moments/summary.json")]
     plans = [json.loads((REPORT / name).read_text()) for name in ("plans.json", "plans-direct-moments.json")]
     candidates = {row["candidate_id"] for summary in summaries for row in summary["candidates"]}
-    members, attempts, sources, run_roots = {}, [], {}, set()
+    members, attempts, sources, snapshot_paths, run_roots = {}, [], {}, {}, set()
 
     def add(name, data):
         safe_name(name)
@@ -70,14 +111,18 @@ def create(output):
                     add(f"{prefix}/{file.relative_to(directory)}", file.read_bytes())
         manifest = request["source"]
         commit = manifest["origin_commit"]
-        assert commit not in sources or sources[commit] == manifest
-        sources[commit] = manifest
+        assert commit not in sources or {key: value for key, value in sources[commit].items() if key != "snapshot_path"} == {
+            key: value for key, value in manifest.items() if key != "snapshot_path"}
+        sources.setdefault(commit, manifest)
+        snapshot_paths.setdefault(commit, set()).add(manifest["snapshot_path"])
         snapshot = Path(request["queue_root"]) / "snapshots" / manifest["digest"]
         for relative, expected in manifest["files"].items():
             data = (snapshot / relative).read_bytes()
             assert digest(data) == expected
             add(f"sources/{commit}/{relative}", data)
-        add(f"sources/{commit}/forge-source.json", encode(manifest))
+        # Exact queue-specific manifests remain in every durable request/evidence.
+        # Code blobs are shared only when every scientific identity field matches.
+        add(f"sources/{commit}/forge-source.json", encode(sources[commit]))
         attempts.append({"attempt_id": attempt_id, "candidate_id": request["candidate"]["id"],
             "candidate_revision": request["candidate_revision"], "source_commit": commit,
             "source_digest": manifest["digest"], "task_ids": envelope["job"]["task_ids"]})
@@ -106,7 +151,8 @@ def create(output):
     add("publication/evaluator-projection.py", (ROOT / "reports/forge/regenerate_technique_inventory.py").read_bytes())
     inventory = {"schema_version": 1, "scope": "exact_ordinary_evidence_and_executed_sources",
         "entries": [{"path": name, "bytes": len(data), "sha256": digest(data)} for name, data in sorted(members.items())],
-        "attempts": attempts, "sources": {commit: {"digest": manifest["digest"], "files": len(manifest["files"])}
+        "attempts": attempts, "sources": {commit: {"digest": manifest["digest"], "files": len(manifest["files"]),
+                                                   "snapshot_paths": sorted(snapshot_paths[commit])}
                                           for commit, manifest in sorted(sources.items())}}
     add("inventory.json", encode(inventory))
     output.parent.mkdir(parents=True, exist_ok=True)
@@ -125,6 +171,7 @@ def create(output):
         "attempt_ids": attempt_ids, "candidate_count": len(candidates), "measured_task_count": len(measured),
         "source_manifests": inventory["sources"], "studies": [summary["study"] for summary in summaries],
         "charged_wall_seconds": sum(summary["charged_wall_seconds"] for summary in summaries),
+        "execution_concurrency": execution_concurrency(members, inventory),
         "original_local_logs_retained": True, "training_updates_added": 0, "sampling_draws_added": 0,
         "restore": "Extract into an isolated directory. durable/ retains certified envelopes; raw/ retains exact worker outputs, scored tensors, states and logs; sources/<commit>/ retains each actual executed source. Queue metadata, frozen declarations and publication reproduction sources are included. Preserve embedded absolute paths and scientific identities.",
         "qualification": "Archive preserves certified ordinary PASS/FAIL and UNKNOWN cells. This card, readout and GIFs do not independently qualify or adopt a candidate."}
@@ -157,6 +204,7 @@ def verify(card, output, root):
         prefix = f"sources/{commit}/"
         manifest = json.loads(data[prefix + "forge-source.json"])
         assert manifest["origin_commit"] == commit and manifest["digest"] == source["digest"] == stable(manifest["files"])
+        assert manifest["snapshot_path"] in source["snapshot_paths"]
         names = list(manifest["files"])
         assert source["files"] == len(names)
         blobs = subprocess.check_output(["git", "cat-file", "--batch"], cwd=root,
@@ -207,7 +255,10 @@ def verify(card, output, root):
         assert evidence["runtime"] == request["runtime"] and result["attempt_id"] == attempt_id
         assert result["candidate_revision"] == request["candidate_revision"] == attempt["candidate_revision"]
         assert request["candidate"]["id"] == attempt["candidate_id"]
-        assert request["source"] == json.loads(data[f"sources/{attempt['source_commit']}/forge-source.json"])
+        shared_source = json.loads(data[f"sources/{attempt['source_commit']}/forge-source.json"])
+        assert {key: value for key, value in request["source"].items() if key != "snapshot_path"} == {
+            key: value for key, value in shared_source.items() if key != "snapshot_path"}
+        assert request["source"]["snapshot_path"] in inventory["sources"][attempt["source_commit"]]["snapshot_paths"]
         raw, grading = [json.loads(data[raw_prefix + name]) for name in ("raw-result.json", "graded-result.json")]
         assert grading["raw_hash"] == stable(raw) and grading["source_digest"] == request["source"]["digest"]
         assert result["raw"]["grading"] == grading
@@ -277,6 +328,8 @@ def verify(card, output, root):
     assert outcomes["UNKNOWN"] == summary["unknown_count"] and sum(outcomes.values()) == summary["task_cells"] == 26 * card["candidate_count"]
     assert math.isclose(sum(row["cost"]["wall_seconds"] for row in rows.values()), summary["charged_wall_seconds"], abs_tol=1e-6)
     assert summary["charged_wall_seconds"] == card["charged_wall_seconds"]
+    concurrency = execution_concurrency(data, inventory)
+    assert concurrency == card["execution_concurrency"]
     # The immutable archive predates this additive concurrency disclosure.
     for addendum in card.get("publication_addenda", []):
         value = (root / addendum["path"]).read_bytes()
@@ -317,6 +370,7 @@ def verify(card, output, root):
         "actual_training_media_receipts": media, "measured_pass": outcomes["PASS"], "measured_fail": outcomes["FAIL"],
         "unknown_count": outcomes["UNKNOWN"], "reproducer_sha256": digest(Path(__file__).read_bytes()),
         "publication_addenda_checked": len(card.get("publication_addenda", [])),
+        "execution_concurrency": concurrency,
         "training_updates_added": 0, "sampling_draws_added": 0,
         "scope": "Exact member hashes, safe unique archive paths, ordinary durable/grader certificates, executed Git blobs, complete recipe/prior/init metadata and saved-observation/media identities. This checks provenance without training, resampling, rescoring or independent qualification."}
     output.write_bytes(encode(proof))

@@ -139,6 +139,13 @@ their optimizer and loss formulation stay the same. The first required failure
 stops that trial, leaving later cells UNKNOWN. A 5/5 result is needed before
 replacing the current family pin.
 
+The [continuation readout](../reports/forge/k3p-global-tier1-v3/README.md)
+adds a bounded eight-recipe rate search and four-recipe direct-moment search.
+Saved outputs distinguish fitting ring cores from fitting the full served tails.
+An analytic direct-Adam displacement bound motivates tuning its existing beta2,
+without promising actual movement. The continuation retains the same five-task
+ladder, complete global recipes and incumbent selection when no recipe qualifies.
+
 For a new v2 search, review and bind each derived card's decision contract to
 its actual tuning scope before enqueueing. An inherited full-view contract
 must be rebound when the study only authorizes Tier 1. The example's
