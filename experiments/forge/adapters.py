@@ -74,10 +74,21 @@ def adapter_preflight(task, candidate, *, root=None):
             return blockers
     if adapter == "transfer_vector":
         scorer = task["evaluation"].get("sample_evaluator")
-        if scorer not in (None, "benchmarks.toy_audit.ring16_quality:score_samples"):
+        if scorer not in (None, "benchmarks.toy_audit.ring16_quality:score_samples",
+                          "benchmarks.toy_audit.gaussian1d_quality:score_samples"):
             blockers.append(f"unsupported vector sample evaluator: {scorer}")
         from .vectorprofiles import vector_profile_blockers
         blockers.extend(vector_profile_blockers(task, root=root))
+        spec = task["execution"].get("host_definition", {})
+        scalar = spec.get("kind") == "gaussian_mixture" and spec.get("means") and len(spec["means"][0]) == 1
+        if scalar and scorer != "benchmarks.toy_audit.gaussian1d_quality:score_samples":
+            blockers.append("one-dimensional vector host requires the explicit Gaussian scalar scorer")
+        if scorer == "benchmarks.toy_audit.gaussian1d_quality:score_samples":
+            from benchmarks.toy_audit.gaussian1d_quality import score_samples
+            try:
+                score_samples(torch.zeros(1, 1), spec)
+            except (ValueError, KeyError, IndexError, TypeError) as error:
+                blockers.append(f"unsupported scalar target: {error}")
         if blockers:
             return blockers
     if adapter == "transfer_image":
@@ -241,9 +252,12 @@ def _vector(request, task, output, device, *, retain_scored_outputs=True):
     from benchmarks.transfer_suite.vector_tasks import sample_target, score_samples
     scorer = task["evaluation"].get("sample_evaluator")
     if scorer is not None:
-        if scorer != "benchmarks.toy_audit.ring16_quality:score_samples":
+        if scorer == "benchmarks.toy_audit.gaussian1d_quality:score_samples":
+            from benchmarks.toy_audit.gaussian1d_quality import sample_target, score_samples
+        elif scorer == "benchmarks.toy_audit.ring16_quality:score_samples":
+            from benchmarks.toy_audit.ring16_quality import score_samples
+        else:
             raise CapabilityError([f"unsupported vector sample evaluator: {scorer}"])
-        from benchmarks.toy_audit.ring16_quality import score_samples
     from .vectorprofiles import build_vector_models, resolve_vector_spec
     spec = resolve_vector_spec(task)
     context = _context(request, task, device, {"num_particles": spec["particles"],

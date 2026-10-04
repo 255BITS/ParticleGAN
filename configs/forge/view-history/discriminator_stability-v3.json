@@ -1,44 +1,38 @@
 {
   "schema_version": 1,
   "id": "discriminator_stability",
-  "revision": 4,
+  "revision": 3,
   "goal": "discriminator_stability",
   "assignments": [
     {
-      "task": "gaussian1d_acquisition",
+      "task": "two_pole",
       "qualification_tier": 1,
       "importance": "required",
       "order": 0
     },
     {
-      "task": "two_pole",
+      "task": "unused_token_hold",
       "qualification_tier": 1,
       "importance": "required",
       "order": 1
     },
     {
-      "task": "unused_token_hold",
+      "task": "ae_gan_hold",
       "qualification_tier": 1,
       "importance": "required",
       "order": 2
     },
     {
-      "task": "ae_gan_hold",
+      "task": "ring16_acquisition",
       "qualification_tier": 1,
       "importance": "required",
       "order": 3
     },
     {
-      "task": "ring16_acquisition",
-      "qualification_tier": 1,
-      "importance": "required",
-      "order": 4
-    },
-    {
       "task": "five_word_joint_acquisition",
       "qualification_tier": 1,
       "importance": "required",
-      "order": 5
+      "order": 4
     },
     {
       "task": "trajectory",
@@ -170,12 +164,12 @@
   "eligibility": {},
   "calibration": {
     "status": "provisional",
-    "adoption_blocker": "Expanded six-task Tier 1 placement is provisional and requires bounded calibration. Revision 3 and prior profiles retain their original tasks and evidence; a standalone scalar pass gives no whole-view/default credit."
+    "adoption_blocker": "Expanded five-task Tier 1 placement is provisional and requires a new bounded calibration; prior three-task profiles and revision 2 published qualification retain their original scope."
   },
   "ranking": {
     "policy": "qualified_tier_only_with_raw_metrics",
     "compare_compatible_cohorts": true,
     "cost_separate": true
   },
-  "policy_change_reason": "Add scalar Gaussian acquisition as the first required Tier 1 check. Revision 4 has 6/19/2 required tasks, reserving 2,220 seconds for Tier 1. All saved view revisions and qualification receipts retain their original scope."
+  "policy_change_reason": "Correct acquisition task registration by user decision: ring16_acquisition and five_word_joint_acquisition are required Tier 1 tasks in the existing main view. Placement remains provisional; task gates, budgets and saved evidence retain their original identities."
 }

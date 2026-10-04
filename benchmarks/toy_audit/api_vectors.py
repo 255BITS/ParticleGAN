@@ -440,16 +440,19 @@ def score_case(metadata, samples, completed_steps=0):
         if not accuracy.passes_accuracy(exact) and not any(x.startswith("accuracy_") for x in failed):
             failed.append("accuracy sample validity")
     elif kind == "vector":
-        if points.shape[1] != 2:
-            raise ValueError("vector points need two coordinates")
         spec = metadata["spec"]
+        dimension = len(spec["means"][0]) if spec["kind"] == "gaussian_mixture" else 2
+        if points.shape[1] != dimension:
+            raise ValueError("vector points differ from the declared target dimension")
         scorer = vector_tasks.score_samples
         if metadata.get("metric_family") == "ring16_acquisition":
             from .ring16_quality import score_samples as scorer
+        if metadata.get("metric_family") == "gaussian1d_acquisition":
+            from .gaussian1d_quality import score_samples as scorer
         metrics = _scalar_metrics(scorer(points, spec, completed_steps))
-        if spec["kind"] == "gaussian_mixture":
+        if dimension != 1 and spec["kind"] == "gaussian_mixture":
             metrics["projection_ks"] = projection_ks(points, spec, completed_steps)
-        else:
+        elif dimension != 1:
             reference = vector_tasks.sample_target(spec, 8192, torch.Generator().manual_seed(89213), completed_steps)
             metrics["projection_ks"] = _empirical_projection_ks(points.numpy(), reference.numpy())
         failed = _bounds(metrics, metadata["thresholds"])
@@ -497,6 +500,9 @@ def _target(case, n, rng, step, *, device="cpu"):
         return problems.sample_real(case["problem"], n, device=device, generator=rng) @ _rotation(_native_angle(case, step), device=device).T
     if kind == "vector":
         # Mathematical helper accepts CPU generators; the caller moves only data.
+        if case.get("metric_family") == "gaussian1d_acquisition":
+            from .gaussian1d_quality import sample_target
+            return sample_target(case["spec"], n, rng, step).to(device)
         return vector_tasks.sample_target(case["spec"], n, rng, step).to(device)
     if kind == "gaussian":
         return 1 + .2 * torch.randn(n, 2, generator=rng, device=device)
@@ -578,12 +584,13 @@ class VectorFixture:
                 else:
                     width = 96 if case["kind"] == "ring" else spec.get("hidden", 64)
                     depth = 3 if case["kind"] == "ring" else spec.get("layers", 2)
-                    generator = SimpleMLPGenerator(self.recipe.z_dim, width, depth, 2)
+                    dimension = len(spec["means"][0]) if spec.get("kind") == "gaussian_mixture" else 2
+                    generator = SimpleMLPGenerator(self.recipe.z_dim, width, depth, dimension)
                     profile = case.get("profile", {})
                     if profile.get("kind") == "batch_distance":
-                        critic = BatchDistanceDiscriminator(2, profile["width"], profile["layers"], scales=tuple(profile["scales"]), beta=6.)
+                        critic = BatchDistanceDiscriminator(dimension, profile["width"], profile["layers"], scales=tuple(profile["scales"]), beta=6.)
                     else:
-                        critic = SimpleMLPDiscriminator(2, profile.get("width", spec.get("d_hidden", width)),
+                        critic = SimpleMLPDiscriminator(dimension, profile.get("width", spec.get("d_hidden", width)),
                                                         profile.get("layers", spec.get("d_layers", depth)),
                                                         profile.get("fourier", 3 if case["kind"] == "ring" else spec.get("fourier", 2)))
                     init.deterministic_orthogonal_(generator, seed=seed)
