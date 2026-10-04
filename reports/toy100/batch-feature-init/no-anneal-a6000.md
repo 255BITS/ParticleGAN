@@ -11,8 +11,9 @@ fixture copy.
 
 ## Anneal removal, local to that run
 
-Anneal removal was local to that run, not in this PR. `learning_rate_scale` still checked its
-arguments, then returned `1.0` for every step. Generator, critic, and prior
+Anneal removal was local to that run, not in this PR. `learning_rate_scale`
+still checked its arguments, then returned `1.0` for every step. Generator,
+critic, and prior
 stayed at the recipe initial rates (`0.00425`, prior `0.0085`) for all 3,600
 steps. `mode_hold` multipliers stayed `1.0` through step 1199. No salt, width,
 or seed changes.
