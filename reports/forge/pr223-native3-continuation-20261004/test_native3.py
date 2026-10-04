@@ -11,6 +11,7 @@ import math
 import os
 from pathlib import Path
 import shutil
+import stat
 import subprocess
 import sys
 from types import SimpleNamespace
@@ -26,16 +27,126 @@ CONTROL_OUTPUT=os.environ.get('PARTICLEGAN_NATIVE3_SOFTWARE_OUTPUT')
 ALLOWED_WORKSPACE=(ROOT.resolve(),)+(tuple([Path(CONTROL_OUTPUT).resolve()]) if CONTROL_OUTPUT else ())
 
 
-def refuse_live_ledger_open(event,values):
+class CheckedPaths:
+    def __init__(self, permitted, *, stat_impl=None, lstat_impl=None, readlink_impl=None):
+        self.permitted = permitted
+        self.original_stat = stat_impl or os.stat
+        self.original_lstat = lstat_impl or os.lstat
+        self.original_readlink = readlink_impl or os.readlink
+        self.calls = []
+        self.denied = []
+
+    def check(self, value, operation):
+        path = Path(os.path.normpath(os.fsdecode(os.fspath(value))))
+        if not self.permitted(path, operation):
+            self.denied.append((operation, str(path)))
+            raise AssertionError('software controls must never read or mutate LIVE ledgers, raw studies or queues: '+str(path))
+        return os.fspath(path)
+
+    def checked_lstat(self, value):
+        self.check(value, 'lstat')
+        self.calls.append(('lstat', os.fspath(value)))
+        return self.original_lstat(value)
+
+    def checked_readlink(self, value):
+        self.check(value, 'readlink')
+        self.calls.append(('readlink', os.fspath(value)))
+        return os.fsdecode(self.original_readlink(value))
+
+    def fd_target(self, value):
+        target = self.checked_readlink('/proc/self/fd/' + str(value))
+        if not os.path.isabs(target):
+            raise AssertionError('nonabsolute descriptor owner refused')
+        self.check(target, 'fd_owner')
+        return target
+
+    def resolve(self, value, operation, *, follow_final=True, dir_fd=None):
+        if isinstance(value, int):
+            return self.fd_target(value)
+        raw = os.fsdecode(os.fspath(value))
+        if not os.path.isabs(raw):
+            raw = (self.fd_target(dir_fd) if dir_fd is not None else os.getcwd()) + '/' + raw
+        self.check(raw, operation)
+        # Keep uncollapsed components until each preceding inode/link is checked.
+        pending = raw.split('/')
+        current = '/'
+        links = 0
+        missing = False
+        while pending:
+            part = pending.pop(0)
+            if part in ('', '.'):
+                continue
+            if part == '..':
+                current = os.path.dirname(current.rstrip('/')) or '/'
+                self.check(current, operation)
+                continue
+            candidate = current.rstrip('/') + '/' + part
+            self.check(candidate, 'lstat')
+            if not follow_final and not any(p not in ('', '.') for p in pending):
+                return self.check(candidate, operation)
+            if missing:
+                current = candidate
+                continue
+            try:
+                info = self.checked_lstat(candidate)
+            except (FileNotFoundError, NotADirectoryError):
+                missing = True
+                current = candidate
+                continue
+            if not stat.S_ISLNK(info.st_mode):
+                current = candidate
+                continue
+            links += 1
+            if links > 40:
+                raise AssertionError('cyclic source aliases refused')
+            target = self.checked_readlink(candidate)
+            joined = target if os.path.isabs(target) else current.rstrip('/') + '/' + target
+            self.check(joined, operation)
+            pending = joined.split('/') + pending
+            current = '/'
+        return self.check(current, operation)
+
+    def stat(self, value, *args, **kwargs):
+        if args:
+            raise ValueError('positional metadata options refused')
+        target = self.resolve(value, 'stat', follow_final=kwargs.get('follow_symlinks', True), dir_fd=kwargs.get('dir_fd'))
+        self.check(target, 'stat')
+        self.calls.append(('stat', target))
+        return self.original_stat(target, **{k:v for k,v in kwargs.items() if k != 'dir_fd'})
+
+    def lstat(self, value, *args, **kwargs):
+        if args:
+            raise ValueError('positional metadata options refused')
+        target = self.resolve(value, 'lstat', follow_final=False, dir_fd=kwargs.get('dir_fd'))
+        return self.checked_lstat(target)
+
+    def readlink(self, value, *args, **kwargs):
+        if args:
+            raise ValueError('positional metadata options refused')
+        target = self.resolve(value, 'readlink', follow_final=False, dir_fd=kwargs.get('dir_fd'))
+        return self.checked_readlink(target)
+
+
+# Each retained predicate still checks every component itself. When the outer
+# software auditor already wraps OS metadata, use its saved primitive to avoid
+# resolving the same guarded path quadratically; there is no guard exemption.
+_outer_auditor=sys.modules.get('__main__')
+_outer_checker=getattr(_outer_auditor,'checker',None)
+_retained_lstat=getattr(_outer_checker,'original_lstat',os.lstat)
+_retained_readlink=getattr(_outer_checker,'original_readlink',os.readlink)
+
+
+def refuse_live_ledger_open(event,values,*,lstat=_retained_lstat,readlink=_retained_readlink):
     if event=='open' and isinstance(values[0],(str,bytes)):
-        path=Path(os.fsdecode(values[0])).resolve()
-        ledger_family=(path.parent==LIVE_LEDGER.parent and
-                       (path.name.startswith(LIVE_LEDGER.name) or path.name.startswith('.'+LIVE_LEDGER.name)))
-        foreign_workspace=(path.is_relative_to('/ml2/hypergan') and
-                           not any(path.is_relative_to(p) for p in ALLOWED_WORKSPACE))
-        queue=path.is_relative_to(ROOT/'runs/forge')
-        if ledger_family or foreign_workspace or queue or path.is_relative_to('/home/martyn/dev/ParticleGAN/artifacts'):
-            raise AssertionError('software controls must never read or mutate LIVE ledgers, raw studies or queues')
+        def permitted(path,operation):
+            ledger_family=(path.parent==LIVE_LEDGER.parent and
+                (path.name.startswith(LIVE_LEDGER.name) or path.name.startswith('.'+LIVE_LEDGER.name)))
+            ancestor=operation in {'stat','lstat'} and any(p.is_relative_to(path) for p in ALLOWED_WORKSPACE)
+            foreign_workspace=(path.is_relative_to('/ml2/hypergan') and not ancestor and
+                not any(path.is_relative_to(p) for p in ALLOWED_WORKSPACE))
+            return not (ledger_family or foreign_workspace or path.is_relative_to(ROOT/'runs/forge')
+                or path.is_relative_to('/home/martyn/dev/ParticleGAN/artifacts'))
+        CheckedPaths(permitted,lstat_impl=lstat,readlink_impl=readlink).resolve(values[0],'open')
 
 
 # An isolation mistake must fail before opening the authoritative path even if
@@ -63,10 +174,33 @@ def test_software_isolation_also_refuses_lock_temporary_raw_queue_and_alias_path
     elif relative=='shared_queue': path=Path('/ml2/hypergan/runs/forge/queue.json')
     elif relative=='checkout_queue': path=ROOT/'runs/forge/queue.json'
     else:
-        path=tmp_path/'private-alias';path.symlink_to(LIVE_LEDGER)
+        path=tmp_path/'private-alias'
+        # Pure virtual alias: never create or inspect a link to an actual input.
+        def virtual_stat(value):
+            return SimpleNamespace(st_mode=0o120777 if Path(value)==path else 0o040755)
+        with pytest.raises(AssertionError,match='never read or mutate'):
+            refuse_live_ledger_open('open',(str(path),'r',0),lstat=virtual_stat,readlink=lambda value:str(LIVE_LEDGER))
+        return
     # Call the predicate directly: no real forbidden OS open is attempted.
     with pytest.raises(AssertionError,match='never read or mutate'):
         refuse_live_ledger_open('open',(str(path),'r',0))
+
+
+@pytest.mark.parametrize('target',[str(LIVE_LEDGER),str(LIVE_LEDGER)+'.lock',
+    '/ml2/hypergan/runs/forge/queue.json','/home/martyn/dev/ParticleGAN/artifacts/model.pt'])
+def test_retained_auditor_refuses_original_identity_and_link_target_before_metadata(target):
+    calls=[]
+    def refused_probe(path):calls.append(str(path));raise AssertionError('original metadata must not be probed')
+    with pytest.raises(AssertionError,match='never read or mutate'):
+        refuse_live_ledger_open('open',(target,'r',0),lstat=refused_probe,readlink=refused_probe)
+    assert calls==[]
+    alias=Path('/tmp/private-virtual-alias')
+    def virtual_stat(path):
+        calls.append(str(path))
+        return SimpleNamespace(st_mode=0o120777 if Path(path)==alias else 0o040755)
+    with pytest.raises(AssertionError,match='never read or mutate'):
+        refuse_live_ledger_open('open',(str(alias),'r',0),lstat=virtual_stat,readlink=lambda path:target)
+    assert not any(Path(p)==Path(target) or Path(p).is_relative_to(Path(target).parent) for p in calls)
 
 
 @pytest.fixture
@@ -125,12 +259,13 @@ def test_exact_closed_parent_fixture_and_later_same_ledger_phase_are_preserved(h
     closed=scope.validate_anchor(anchor,helper)
     assert len(closed['phases'])==12 and closed['current_phase'] is None
     assert packet['metadata_history']['closed_state']==closed
-    later=deepcopy(closed)
-    later['phases'].append(dict(index=12,name='native_three_parent_anchor_sealing',status='COMPLETE',
+    later=deepcopy(packet['metadata_history']['predecessor_closed_state'])
+    later['phases'].append(dict(index=22,name='synthetic_post_closed22',status='COMPLETE',
                                paid_wall_seconds=.002600732957944,paused_wall_seconds=0.))
     helper.ledger_module()._update_totals(later)
     assert scope.validate_live_history(packet,later,helper) is later
-    assert math.isclose(later['charged_seconds'],44.374923426192254,rel_tol=0.,abs_tol=1e-9)
+    assert math.isclose(later['charged_seconds'],packet['metadata_history']['predecessor_closed_state']['charged_seconds']+.002600732957944,
+                        rel_tol=0.,abs_tol=1e-9)
 
 
 def test_actual_committed_history_is_bound_without_raw_or_ledger_reads(helper,scope):
@@ -198,8 +333,8 @@ def test_wrong_scope_source_cost_and_old_credit_refused(helper,scope,packet,chan
 
 
 def extended_snapshot(packet,helper,paid=.2):
-    state=deepcopy(packet['metadata_history']['closed_state'])
-    state['phases'].append(dict(index=12,name='synthetic_new_metadata',status='COMPLETE',paid_wall_seconds=paid,paused_wall_seconds=0.))
+    state=deepcopy(packet['metadata_history']['predecessor_closed_state'])
+    state['phases'].append(dict(index=len(state['phases']),name='synthetic_new_metadata',status='COMPLETE',paid_wall_seconds=paid,paused_wall_seconds=0.))
     helper.ledger_module()._update_totals(state)
     return state
 
@@ -207,10 +342,11 @@ def extended_snapshot(packet,helper,paid=.2):
 def test_same_metadata_once_prior_cost_once_and_full_next_native_reservation(helper,scope,packet):
     state=extended_snapshot(packet,helper)
     cost=scope.require_next_reservation(packet,state,1470,helper)
-    assert math.isclose(cost['charged_seconds'],scope.PRIOR_CASE_SECONDS+scope.PRIOR_METADATA_SECONDS+.2)
+    assert math.isclose(cost['charged_seconds'],scope.PRIOR_CASE_SECONDS+scope.PRETRAINING_INVALID_SECONDS+state['charged_seconds'])
     assert cost['prior_case_charged_seconds']==scope.PRIOR_CASE_SECONDS
     assert cost['current_case_charged_seconds']==0
-    assert scope.PRIOR_CASE_SECONDS+4290+180==7635.841891122982
+    assert math.isclose(scope.PRIOR_CASE_SECONDS+scope.PRETRAINING_INVALID_SECONDS+4290+180,7637.891497056)
+    assert cost['pretraining_invalid_case_charged_seconds']==scope.PRETRAINING_INVALID_SECONDS
     assert cost['next_allowance_seconds']==1470
 
 
@@ -263,7 +399,9 @@ def boundary_packet(helper,scope,tmp_path):
     for path in (ROOT/'experiments/forge').rglob('*.py'):
         target=root/path.relative_to(ROOT);target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes(path.read_bytes())
     for name in (helper.SELF,helper.DIRECTORY+'/protocol.py',helper.protocol.LEGACY,
-                 scope.DIRECTORY+'/scorer_boundary_control.py'):
+                 scope.DIRECTORY+'/scorer_boundary_control.py',
+                 scope.DIRECTORY+'/request_boundary_control.py',
+                 scope.DIRECTORY+'/native3_contract.py'):
         target=root/name;target.parent.mkdir(parents=True,exist_ok=True);target.write_bytes((ROOT/name).read_bytes())
     harness=root/'atlas19-external/harness';adapter=root/'atlas19-external/adapter';native=root/'atlas19-external/native_root'
     harness.mkdir(parents=True);adapter.mkdir(parents=True)
@@ -289,6 +427,13 @@ def boundary(helper,scope):
 
 def test_exact_source_generated_prefix_regression_is_fake_and_stops_before_score(helper,scope,boundary_packet,monkeypatch):
     monkeypatch.setenv('CUDA_VISIBLE_DEVICES','')
+    # Execute only the unchanged observer's pure source-overlay functions;
+    # importing its array/render runtime is unnecessary for this prefix control.
+    tree=ast.parse((OLD/'goal_observer.py').read_text())
+    pure=ast.Module(body=[node for node in tree.body if isinstance(node,ast.FunctionDef)
+        and node.name in {'patches','overlay','remove_overlay'}],type_ignores=[])
+    namespace={'hashlib':hashlib};exec(compile(pure,str(OLD/'goal_observer.py'),'exec'),namespace)
+    monkeypatch.setattr(helper,'observer',lambda:SimpleNamespace(**namespace))
     before=set(sys.modules)
     proof=boundary(helper,scope).run(boundary_packet,helper)
     assert proof['outcomes']=={'repaired':'PASS_STOPPED_BEFORE_SCORE','predecessor':'REFUSED_AMBIGUOUS_NAMESPACE',
@@ -304,16 +449,24 @@ def preflight_receipt(helper,scope,packet):
     proof=dict(schema=checker.SCHEMA,status='PASS_SYNTHETIC_SCORER_BOUNDARY',binding=checker.binding(packet,helper),
         outcomes=checker.EXPECTED,synthetic_only=True,models=0,sampler_calls=0,scorer_calls=0,queue_calls=0,
         numerical_credit=False,old_arrays_read=False)
+    current=helper.module(scope.DIRECTORY+'/request_boundary_control.py','_pr223_native3_request_boundary')
+    request_proof=dict(schema=current.SCHEMA,status='PASS_SYNTHETIC_MAINTAINED_REQUEST_BOUNDARY',
+        binding=current.binding(packet,helper),outcomes=deepcopy(current.OUTCOMES),synthetic_only=True,
+        actual_queue_calls=0,actual_admissions=0,models=0,sampler_calls=0,scorer_calls=0,
+        simulated_coordinator_requests=1,simulated_registrations=1,simulated_admissions=1,
+        observer_calls=0,numerical_credit=False,old_arrays_read=False)
     return dict(schema=scope.PREFLIGHT_SCHEMA,status='PASS_COPIED_METADATA_ONLY',
         prepared_packet_sha256=helper.stable_hash(packet),source_digest=packet['execution_source']['digest'],
         protocol_sha256=helper.stable_hash(packet['protocol']),snapshot_path=packet['execution_source']['snapshot_path'],
         origin_commit=packet['execution_source']['origin_commit'],helper_sha256=packet['execution_source']['files'][helper.SELF],
         cases=3,updates=21000,compiled_original_wrappers=3,native_scorer_imports=imports,
-        native_scorer_boundary_control=proof,models=0,sampler_calls=0,scorer_calls=0,queue_calls=0,numeric_credit=False)
+        native_scorer_boundary_control=proof,native_request_boundary_control=request_proof,
+        models=0,sampler_calls=0,scorer_calls=0,queue_calls=0,numeric_credit=False)
 
 
 @pytest.mark.parametrize('change',['missing','wrong_schema','foreign_source','full19','wrong_helper','missing_boundary',
-    'boundary_foreign','boundary_cached_missing','scorer_changed','model_calls'])
+    'boundary_foreign','boundary_cached_missing','scorer_changed','model_calls',
+    'missing_request_boundary','request_foreign','request_missing_lease_negative','request_actual_admission'])
 def test_missing_foreign_or_partial_copied_proof_never_satisfies_prerequisite(helper,scope,boundary_packet,change):
     path=Path(boundary_packet['copied_preflight_receipt_path'])
     record=preflight_receipt(helper,scope,boundary_packet)
@@ -327,6 +480,10 @@ def test_missing_foreign_or_partial_copied_proof_never_satisfies_prerequisite(he
     elif change=='missing_boundary': record.pop('native_scorer_boundary_control')
     elif change=='boundary_foreign': record['native_scorer_boundary_control']['binding']['source_digest']='old source'
     elif change=='boundary_cached_missing': record['native_scorer_boundary_control']['outcomes'].pop('cached')
+    elif change=='missing_request_boundary': record.pop('native_request_boundary_control')
+    elif change=='request_foreign': record['native_request_boundary_control']['binding']['source_digest']='old source'
+    elif change=='request_missing_lease_negative': record['native_request_boundary_control']['outcomes'].pop('foreign_lease')
+    elif change=='request_actual_admission': record['native_request_boundary_control']['actual_admissions']=1
     elif change=='scorer_changed': (Path(boundary_packet['snapshot_locations']['harness'])/'native100_score.py').write_text('changed\n')
     else: record['models']=1
     if change!='missing': helper.atomic_json(path,record)
@@ -451,7 +608,8 @@ def test_no_old_or_incomplete_native_attestation_credit(helper,scope,packet,tmp_
 
 def fake_dispatch(helper,scope,packet,monkeypatch,tmp_path,*,missing_preflight=False,invalid=False):
     """Exercise ONLY real orchestration with a private inert coordinator/clock."""
-    budget=helper.ledger_module();events=[];state=deepcopy(packet['metadata_history']['closed_state'])
+    budget=helper.ledger_module();events=[];state=deepcopy(packet['metadata_history']['predecessor_closed_state'])
+    maintained_coordinator=helper.PolicyCoordinator
     class Ledger:
         path=Path(scope.CANONICAL_LEDGER)
         def __init__(self,path): assert Path(path)==self.path
@@ -479,13 +637,13 @@ def fake_dispatch(helper,scope,packet,monkeypatch,tmp_path,*,missing_preflight=F
         def study_lease(self,key): yield Lease(100)
         def recover(self): events.append('recover')
         def retained(self,key): return None
-        def attempt_key(self,p,t,row): return row['id']
+        def attempt_key(self,p,t,row): return maintained_coordinator.attempt_key(None,p,t,row)
         @contextmanager
         def admit(self,key,p,row,device):
             assert row['id'] in scope.IDS and row['group']=='native'
             events.append(('admit',row['id']))
             folder=tmp_path/'synthetic-durable'/row['task'];folder.mkdir(parents=True)
-            yield dict(status='running',lease_path=str(folder/'execution.lock'),token=row['task'],
+            yield dict(status='running',lease_path=str(folder/'execution.lock'),token=hashlib.sha256(row['task'].encode()).hexdigest()[:32],
                        started_monotonic=1.,deadline_monotonic=1.+row['allowance_seconds']),Lease(101)
         def launch(self,command,p,log,leases,allowance):
             events.append(('launch',allowance))
@@ -493,7 +651,7 @@ def fake_dispatch(helper,scope,packet,monkeypatch,tmp_path,*,missing_preflight=F
             request=helper.read_json(Path(log).parent/'request.json')
             assert request['worker']['lease_fds']==[100,101]
             row=request['row'];folder=tmp_path/'synthetic-durable'/row['task']
-            helper.atomic_json(folder/'supervisor-terminal.json',dict(attempt_status='completed',token=row['task'],
+            helper.atomic_json(folder/'supervisor-terminal.json',dict(attempt_status='completed',token=request['worker']['token'],
                               paid_wall_seconds=2.,child_returncode=0))
             return SimpleNamespace(returncode=0,paid_wall_seconds=2.)
         def complete(self,key,result): events.append(('complete',key))
@@ -501,7 +659,7 @@ def fake_dispatch(helper,scope,packet,monkeypatch,tmp_path,*,missing_preflight=F
     def prepared(output,**kwargs):
         assert kwargs['native3_anchor']==packet['metadata_history']['closed_anchor']
         value=deepcopy(packet);value['execution_source']=dict(snapshot_path=str(tmp_path/'SYNTHETIC-source'),digest='synthetic')
-        value['queue_root']=str(tmp_path);return value
+        value['queue_root']=str(tmp_path);value['prepared_output']=str(output);return value
     def proof(p,row,target,terminal):
         events.append(('verify_current_attestation',row['id']))
         if invalid: raise ValueError('synthetic current attestation refused')
@@ -542,7 +700,8 @@ def test_only_three_new_cases_can_reach_maintained_dispatch(helper,scope,packet,
     assert len(result['rows'])==3 and result['completed']==3 and result['new_paid_seconds']==6.
     assert result['budget_accounting']['prior_case_charged_seconds']==scope.PRIOR_CASE_SECONDS
     assert result['prior_reference']['execution_counts']=={'PASS':16,'INVALID':1,'NOT_RUN':2}
-    assert result['budget_accounting']['charged_seconds']==scope.PRIOR_CASE_SECONDS+6.+result['metadata_cost']['charged_seconds']
+    assert math.isclose(result['budget_accounting']['charged_seconds'],
+                        scope.PRIOR_CASE_SECONDS+scope.PRETRAINING_INVALID_SECONDS+6.+result['metadata_cost']['charged_seconds'])
 
 
 def test_first_invalid_attempt_stops_without_retry_or_old_grade_transfer(helper,scope,packet,monkeypatch,tmp_path):
@@ -557,13 +716,85 @@ def test_first_invalid_attempt_stops_without_retry_or_old_grade_transfer(helper,
 def test_scientific_functions_are_byte_exact_to_frozen_portability_source():
     original=subprocess.check_output(['git','show','f57bc3ebc5e2d9091b3700a2f770648635962b90:reports/forge/pr223-original-full-retest-20261004/run_retest.py'],cwd=ROOT,text=True)
     current=(OLD/'run_retest.py').read_text()
+    addition="    scope=scoped_module(packet)\n    if scope: scope.validate_current_request(request,sys.modules[__name__])\n"
     wanted={'science','build_wrappers','guard_imports','native_scorer_import_metadata','normalize_native_scorer_paths',
             'verify_lease','validate_request','retained_result','recertify_row','runtime_metadata'}
     def slices(source):
         nodes=ast.parse(source).body;lines=source.splitlines(keepends=True)
         return {n.name:''.join(lines[n.lineno-1:n.end_lineno]) for n in nodes if isinstance(n,ast.FunctionDef) and n.name in wanted}
-    assert slices(current)==slices(original) and set(slices(current))==wanted
+    actual=slices(current)
+    assert actual['validate_request'].count(addition)==1
+    # Explicit request-only guard addition; its removal must recover the exact
+    # predecessor function. All actual scientific functions stay byte-exact.
+    actual['validate_request']=actual['validate_request'].replace(addition,'',1)
+    assert actual==slices(original) and set(actual)==wanted
     for prefix in ('particlegan','benchmarks','configs','reports/forge/pr223-original-full-retest-20261004/protocol.py',
                    'reports/forge/pr223-original-full-retest-20261004/protocol.json','reports/forge/pr223-original-full-retest-20261004/goal_observer.py',
                    'reports/forge/pr223-original-full-retest-20261004/budget_ledger.py'):
         assert subprocess.check_output(['git','diff','f57bc3eb','--',prefix],cwd=ROOT)==b''
+
+
+# Virtual-only component and parent-alias audit proofs; originals are fake.
+AUDIT_QUEUE=ROOT/'runs/forge'
+AUDIT_LIVE=LIVE_LEDGER
+
+def virtual_metadata(aliases):
+    calls=[]
+    def permit(path,operation):
+        return not (path.is_relative_to(AUDIT_QUEUE) or path==AUDIT_LIVE or path.is_relative_to('/ml2/hypergan/forbidden-raw'))
+    def lstat(path):
+        path=Path(path);assert permit(path,'lstat');calls.append(('lstat',str(path)))
+        return SimpleNamespace(st_mode=stat.S_IFLNK if str(path) in aliases else stat.S_IFDIR)
+    def readlink(path):
+        path=Path(path);assert permit(path,'readlink');calls.append(('readlink',str(path)))
+        return aliases[str(path)]
+    def getstat(path,**kwargs):
+        assert permit(Path(path),'stat');calls.append(('stat',str(path)))
+        return SimpleNamespace(st_mode=stat.S_IFREG)
+    return CheckedPaths(permit,stat_impl=getstat,lstat_impl=lstat,readlink_impl=readlink),calls
+
+@pytest.mark.parametrize('operation,path,aliases,kwargs',[
+    ('resolve',str(AUDIT_QUEUE)+'/../allowed-file',{},{}),
+    ('resolve','/tmp/private-alias/../allowed-file',{'/tmp/private-alias':str(AUDIT_QUEUE)},{}),
+    ('resolve','/tmp/alias1/../allowed-file',{'/tmp/alias1':'/tmp/alias2','/tmp/alias2':str(AUDIT_QUEUE)},{}),
+    ('resolve','/tmp/alias1/file',{'/tmp/alias1':'../ml2/hypergan/forbidden-raw'},{}),
+    ('stat','file',{'/proc/self/fd/17':str(AUDIT_QUEUE)},{'dir_fd':17}),
+    ('lstat','../file',{'/proc/self/fd/17':'/tmp/alias1','/tmp/alias1':str(AUDIT_QUEUE)},{'dir_fd':17}),
+    ('readlink','/tmp/alias1/file',{'/tmp/alias1':str(AUDIT_QUEUE)},{}),
+    ('stat',17,{'/proc/self/fd/17':str(AUDIT_LIVE)},{}),
+    ('resolve','/tmp/a/../f',{'/tmp/a':'/ml2/hypergan/forbidden-raw/../allowed'},{}),
+])
+def test_protected_components_parent_alias_relative_and_fd_refuse_before_original(operation,path,aliases,kwargs):
+    check,calls=virtual_metadata(aliases)
+    with pytest.raises(AssertionError,match='never read or mutate'):
+        if operation=='resolve':check.resolve(path,'open',**kwargs)
+        else:getattr(check,operation)(path,**kwargs)
+    assert not any(Path(p).is_relative_to(AUDIT_QUEUE) or Path(p)==AUDIT_LIVE or Path(p).is_relative_to('/ml2/hypergan/forbidden-raw') for _,p in calls)
+
+def test_virtual_allowed_nested_alias_and_parent_semantics_preserve_targets():
+    check,calls=virtual_metadata({'/tmp/a':'/tmp/b/c','/tmp/b':'/tmp/real'})
+    assert check.resolve('/tmp/a/../safe','open')=='/tmp/real/safe'
+    assert calls and not any(Path(p).is_relative_to(AUDIT_QUEUE) for _,p in calls)
+
+def test_final_link_inode_lstat_does_not_probe_the_protected_target():
+    check,calls=virtual_metadata({'/tmp/a':str(AUDIT_LIVE)})
+    assert check.lstat('/tmp/a').st_mode==stat.S_IFLNK
+    assert not any(op=='readlink' or p==str(AUDIT_LIVE) for op,p in calls)
+
+@pytest.mark.parametrize('path,aliases',[
+    (str(AUDIT_QUEUE)+'/../allowed',{}),
+    ('/tmp/private-alias/../allowed',{'/tmp/private-alias':str(AUDIT_QUEUE)}),
+    ('/tmp/one/../allowed',{'/tmp/one':'/tmp/two','/tmp/two':str(AUDIT_QUEUE)}),
+])
+def test_retained_open_predicate_itself_keeps_protected_components(path,aliases):
+    source=Path(__file__)
+    tree=ast.parse(source.read_text())
+    nodes=[n for n in tree.body if isinstance(n,(ast.ClassDef,ast.FunctionDef)) and n.name in {'CheckedPaths','refuse_live_ledger_open'}]
+    import os
+    space={'Path':Path,'os':os,'stat':stat,'ROOT':ROOT,'LIVE_LEDGER':AUDIT_LIVE,'ALLOWED_WORKSPACE':ALLOWED_WORKSPACE,
+           '_retained_lstat':os.lstat,'_retained_readlink':os.readlink}
+    exec(compile(ast.Module(body=nodes,type_ignores=[]),str(source),'exec'),space)
+    check,calls=virtual_metadata(aliases)
+    with pytest.raises(AssertionError,match='never read or mutate'):
+        space['refuse_live_ledger_open']('open',(path,),lstat=check.original_lstat,readlink=check.original_readlink)
+    assert not any(Path(p).is_relative_to(AUDIT_QUEUE) for _,p in calls)
