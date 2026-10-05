@@ -31,8 +31,8 @@ def publication(tmp_path, monkeypatch, request):
     results = {"status": "COMPLETE", "qualification_input": False, "candidates": [], "campaign_accounting": {}}
     frozen = {}
 
-    def add(candidate, campaign, source_character, task_names, passing):
-        source_files = {"particlegan/fixture.py": source_character * 64}
+    def add(candidate, campaign, source_character, task_names, passing, source_file_character=None):
+        source_files = {"particlegan/fixture.py": (source_file_character or source_character) * 64}
         source = {"files": source_files, "digest": stable_hash(source_files), "origin_commit": source_character * 40}
         job = {"task_id": task_names[0], "task_ids": task_names, "compatibility_key": candidate}
         declared = {"candidate": {"id": candidate}, "candidate_revision": candidate + "-revision",
@@ -80,7 +80,11 @@ def publication(tmp_path, monkeypatch, request):
         frozen[source["origin_commit"]] = {"view": view["id"], "view_revision": 6,
             "policy_fingerprint": view_fingerprint(view), "tier_requirements": {"1": names}, "rows": rows,
             "task_contracts": {source["digest"]: {"fixture": group}}}
-    add("incumbent", repair.DIAGNOSTIC, "c", ["gaussian-longer", "ring-longer"], 0)
+    # Both cohorts execute identical scientific bytes at different commits.
+    # The ordinary rows must retain their exact attempt commit even though
+    # digest-level publication provenance has two recorded origins.
+    add("incumbent", repair.DIAGNOSTIC, "c", ["gaussian-longer", "ring-longer"], 0,
+        source_file_character="b" if request.param else "a")
     results["campaign_accounting"][repair.DIAGNOSTIC] = {"reserved_seconds": 0}
     atomic_json(root / repair.DIRECTORY / "results.json", results)
     atomic_json(root / "runs/forge/bcap-tier1-repair/queue/queue/state.json", state)
@@ -182,3 +186,35 @@ def test_stale_complete_readout_cannot_hide_new_admission(publication):
 
 def test_no_registration_yields_no_display_section(tmp_path):
     assert repair.display_section(tmp_path, tmp_path / "board.md") == ""
+
+
+def test_identical_source_bytes_accept_distinct_recorded_origins(publication):
+    root, results, _, _, _ = publication
+    repair.freeze(root)
+    report = repair._verified_snapshot(root)
+    shared_origin = "b" * 40 if len(report["repair_studies"]) == 2 else "a" * 40
+    shared_rows = [row for row in report["rows"] if shared_origin in row["bindings"]["recorded_source_origin_commits"]]
+    assert shared_rows
+    assert all(row["bindings"]["source_origin_commit"] is None for row in shared_rows)
+    assert all(set(row["bindings"]["recorded_source_origin_commits"]) == {shared_origin, "c" * 40}
+               for row in shared_rows)
+    assert any(row["executed_commit"] == shared_origin for row in results["candidates"])
+    assert repair._verified_readout(root, report) == results
+    repair.register(root)
+
+
+def test_shared_digest_cannot_substitute_another_recorded_execution_commit(publication):
+    root, results, _, _, _ = publication
+    repair.freeze(root)
+    report = repair._verified_snapshot(root)
+    shared_origin = "b" * 40 if len(report["repair_studies"]) == 2 else "a" * 40
+    ordinary = next(row for row in results["candidates"] if row["executed_commit"] == shared_origin)
+    # This forged commit really occurs in the digest-level origin list. Only
+    # the later exact certified attempt check detects the substitution.
+    ordinary["executed_commit"] = "c" * 40
+    atomic_json(root / repair.DIRECTORY / "results.json", results)
+    with pytest.raises(ValueError, match="certified numerical receipt"):
+        repair._verified_readout(root, report)
+    with pytest.raises(ValueError, match="certified numerical receipt"):
+        repair.register(root)
+    assert not (root / repair.REGISTRY).exists()

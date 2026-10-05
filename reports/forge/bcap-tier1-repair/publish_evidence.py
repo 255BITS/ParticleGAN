@@ -263,11 +263,18 @@ def _verified_readout(root, report):
         raise ValueError("final repair readout omits a declared configuration")
     for row in rates:
         original = expected[row["candidate"]]
+        origin = original["bindings"].get("source_origin_commit")
+        origins = original["bindings"].get("recorded_source_origin_commits", [])
+        # Publication provenance groups identical scientific bytes across
+        # commits. An ambiguous shared digest retains every recorded origin;
+        # the exact per-attempt origin check below still binds this execution.
+        origin_matches = (row["executed_commit"] == origin if origin is not None
+                          else row["executed_commit"] in origins)
         statuses = {task["task_id"]: task["status"] for task in row["tasks"]}
         scored = {task["task_id"]: task["status"] for task in original["tasks"]
                   if task["task_id"] in report["tier_requirements"]["1"]}
         if (row["candidate_revision"] != original["candidate_revision"] or
-                row["executed_commit"] != original["bindings"]["source_origin_commit"] or
+                not origin_matches or
                 row["source_digest"] != original["bindings"]["source_digest"] or statuses != scored):
             raise ValueError("final repair readout differs from independent frozen regrade")
     diagnostic = report.get("duration_diagnostics", {})
