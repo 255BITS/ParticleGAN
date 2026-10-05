@@ -322,11 +322,25 @@ def _composition_fixture(completed, monkeypatch, *, dual=False):
     return root, plan, readout, before, reports, calls
 
 
-def test_publication_composes_one_new_pin_without_readmitting_retained_science(completed, monkeypatch):
+@pytest.mark.parametrize("current_id", ["bcap-pure", "bcap"])
+def test_publication_composes_one_new_pin_without_readmitting_retained_science(completed, monkeypatch, current_id):
     root, _, readout, before, _, calls = _composition_fixture(completed, monkeypatch)
+    if current_id == "bcap":
+        from experiments.forge.trainer_families import REGISTRY
+        registry = read_json(root / REGISTRY)
+        registry["families"][0].update(id=current_id, recorded_id="bcap-pure")
+        registry["families"].append({"id": "bcap-with-k3p", "recorded_id": "bcap", "label": "BCAP with K3P",
+                                      "candidates": ["saved-bcap"], "canonical_candidate": "saved-bcap"})
+        atomic_json(root / REGISTRY, registry)
+        for key in ("rows", "configuration_rows"):
+            before[key] = [{**row, "trainer_family": "bcap-with-k3p"} for row in before[key]]
+        before["provenance"].pop("input_digest")
+        before["provenance"]["input_digest"] = stable_hash(before)
+        atomic_json(root / publication.inventory.CURRENT_PREFIX.with_suffix(".json"), before)
     old_card = read_json(root / CURRENT_SELECTION)
     result = publication.publish(root)
     after = read_json(root / publication.inventory.CURRENT_PREFIX.with_suffix(".json"))
+    assert after["rows"][-1]["trainer_family"] == current_id
     assert after["rows"][:1] == before["rows"]
     assert after["task_contracts"] == before["task_contracts"]
     assert read_json(root / CURRENT_SELECTION)["selections"][:1] == old_card["selections"]

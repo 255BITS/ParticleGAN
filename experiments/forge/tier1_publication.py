@@ -82,8 +82,9 @@ def prepare_selection(root, definition, results, main_report, scoped_report):
                 or set(tasks) != expected_tasks):
             raise ValueError("results changed the frozen Tier 1 task denominator")
         row = _one_row(main_report, frozen["candidate_id"], source_digest)
-        row["trainer_family"] = family_for_candidate(root, row["candidate_id"], load_idea(root, row["candidate_id"]),
-                                                     current_presentation=True)["id"]
+        registered = family_for_candidate(root, row["candidate_id"], load_idea(root, row["candidate_id"]),
+                                          current_presentation=True)
+        row["trainer_family"] = registered.get("recorded_id", registered["id"])
         if row["trainer_family"] != family:
             raise ValueError("roster candidate differs from its registered solution family")
         if family in POLICY_FAMILIES:

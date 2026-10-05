@@ -22,7 +22,7 @@ if str(ROOT) not in sys.path:
 
 from experiments.forge.configuration_search import select_configuration
 from experiments.forge.contracts import atomic_json, file_hash, read_json, stable_hash
-from experiments.forge.trainer_families import CURRENT_SELECTION, family_row_pin, scientific_row_hash
+from experiments.forge.trainer_families import CURRENT_SELECTION, current_family_pin, family_row_pin, scientific_row_hash
 from reports.forge import regenerate_technique_inventory as inventory
 
 REPORT = Path("reports/forge/pure-bcap")
@@ -244,12 +244,12 @@ def selected_pin(frozen, plan, readout, selection, *, selection_kind="current_me
                            if selection_kind == "current_measurement" else None))
 
 
-def preserved_science(before, after):
+def preserved_science(before, after, *, family_id=FAMILY):
     """Adding the new family cannot edit any already selected scientific row."""
     expected = {row["trainer_family"]: scientific_row_hash(row) for row in before["rows"]
-                if row["trainer_family"] != FAMILY}
+                if row["trainer_family"] != family_id}
     actual = {row["trainer_family"]: scientific_row_hash(row) for row in after["rows"]
-              if row["trainer_family"] != FAMILY}
+              if row["trainer_family"] != family_id}
     if expected != actual:
         raise ValueError("Pure BCAP publication changed existing selected family science")
     for key in ("view", "view_revision", "policy_fingerprint", "tier_requirements"):
@@ -313,6 +313,9 @@ def compose_scientific_publication(root, before, frozen, plan, readout, selectio
     from experiments.forge.family_reports import build_progress
     from experiments.forge.trainer_families import REGISTRY, _current_pin, comparison_cohort, load_families
     root = Path(root).resolve()
+    current_family = next(family for family in load_families(root, current_presentation=True).values()
+                          if family.get("recorded_id", family["id"]) == FAMILY)
+    current_id = current_family["id"]
     manifest = read_json(root / inventory.EVIDENCE_MANIFEST)
     card = read_json(root / CURRENT_SELECTION)
     old_pins = [pin for pin in card["selections"] if pin["trainer_family"] != FAMILY]
@@ -378,12 +381,11 @@ def compose_scientific_publication(root, before, frozen, plan, readout, selectio
         raise ValueError("Pure BCAP publication cannot replace its exact frozen family selection")
     if not existing:
         card["selections"].append(pin)
-    label = load_families(root)[FAMILY]["label"]
     winner = deepcopy(selected)
-    winner.update(technique=label, selection=metadata,
+    winner.update(trainer_family=current_id, technique=current_family["label"], selection=metadata,
                   configuration_id=selection["selected_configuration_id"], comparison_cohort=comparison_cohort(selected, result))
-    result["rows"] = [row for row in result["rows"] if row.get("trainer_family") != FAMILY] + [winner]
-    result.setdefault("trainer_families", {})[FAMILY] = load_families(root)[FAMILY]
+    result["rows"] = [row for row in result["rows"] if row.get("trainer_family") != current_id] + [winner]
+    result.setdefault("trainer_families", {})[current_id] = current_family
     for key in ("configuration_rows", "evidence_rows"):
         seen = {(scientific_row_hash(row), row.get("publication_key")) for row in result.get(key, [])}
         target = result.setdefault(key, [])
@@ -392,11 +394,12 @@ def compose_scientific_publication(root, before, frozen, plan, readout, selectio
             if identity not in seen:
                 variant = deepcopy(row)
                 if key == "configuration_rows":
-                    variant.update(selected_configuration=scientific_row_hash(row) == scientific_row_hash(winner),
+                    variant.update(trainer_family=current_id,
+                                   selected_configuration=scientific_row_hash(row) == scientific_row_hash(winner),
                                    alternative_scope="selected" if scientific_row_hash(row) == scientific_row_hash(winner)
                                    else "archived_alternative")
                 target.append(variant); seen.add(identity)
-    preserved = preserved_science(before, result)
+    preserved = preserved_science(before, result, family_id=current_id)
     if [pin for pin in card["selections"] if pin["trainer_family"] != FAMILY] != old_pins:
         raise ValueError("Pure BCAP composition changed an existing selected pin")
     for key in inventory.CONTRACT_CATALOGS:
@@ -499,7 +502,8 @@ def verified_registered_publication(root):
     for catalog in inventory.CONTRACT_CATALOGS:
         if any(digest != stable_hash(contract) for digest, contract in result.get(catalog, {}).items()):
             raise ValueError("Pending display contains an invalid recorded scientific contract")
-    for pin in read_json(selection)["selections"]:
+    for original in read_json(selection)["selections"]:
+        pin = current_family_pin(root, original)
         matches = [row for row in result["rows"] if family_row_pin(row,
             selection_kind=pin["selection_kind"], reason=pin["reason"],
             measurement_views=pin.get("measurement_views"), measurement_tasks=pin.get("measurement_tasks")) == pin]

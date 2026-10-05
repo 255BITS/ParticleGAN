@@ -14,6 +14,37 @@ from experiments.forge.contracts import atomic_json, read_json, stable_hash
 ROOT = Path(__file__).resolve().parents[1]
 
 
+@pytest.mark.parametrize("original,current,base", [
+    ("bcap", "bcap-with-k3p", "k3p-bcap-matched-v1"),
+    ("bcap-pure", "bcap", "bcap-pure-adam-v2"),
+])
+def test_bcap_renaming_keeps_frozen_and_current_names_distinct(original, current, base):
+    card = read_json(ROOT / "configs/forge/ideas" / (base + ".json"))
+    assert families.family_for_candidate(ROOT, base, card)["id"] == original
+    assert families.family_for_candidate(ROOT, base, card, current_presentation=True)["id"] == current
+    cards = sorted((ROOT / "configs/forge/configurations").glob(original + "--*.json"))
+    assert cards
+    for path in cards:
+        configuration = read_json(path)
+        search.validate_configuration_declaration(configuration)
+        assert families.family_for_candidate(ROOT, path.stem, configuration)["id"] == original
+        assert families.family_for_candidate(ROOT, path.stem, configuration, current_presentation=True)["id"] == current
+    future = {**card, "id": current + "--future", "parent": base,
+              "configuration_id": "future", "trainer_family": current}
+    assert families.family_for_candidate(ROOT, future["id"], future, current_presentation=True)["id"] == current
+
+
+def test_current_selection_resolves_both_bcap_names_without_rewriting_pins():
+    original = (ROOT / families.CURRENT_SELECTION).read_bytes()
+    card = read_json(ROOT / families.CURRENT_SELECTION)
+    pins = families.load_current_selection(ROOT, view_id=card["view"], policy_fingerprint=card["policy_fingerprint"])
+    for recorded, current in (("bcap", "bcap-with-k3p"), ("bcap-pure", "bcap")):
+        source = next(pin for pin in card["selections"] if pin["trainer_family"] == recorded)
+        assert pins[current] == {**source, "trainer_family": current}
+    assert "bcap-pure" not in pins
+    assert (ROOT / families.CURRENT_SELECTION).read_bytes() == original
+
+
 def persist(root, report):
     report["input_digest"] = stable_hash({key: value for key, value in report.items() if key != "input_digest"})
     atomic_json(root / f"reports/forge/configuration-search/{report['study_id']}.json", report)

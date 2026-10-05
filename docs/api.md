@@ -902,6 +902,11 @@ historical `Recipe(reg_arm="b_cap")` configurations. A declared MoG prior still
 has its kernel noise; that distribution is independent of additive training
 noise. Models, initialization, prior and execution budget belong to the caller.
 
+Forge names the native-Adam family `bcap` and the K3P-derived family
+`bcap-with-k3p`. Frozen declarations, searches and receipts keep their original
+`bcap-pure` and `bcap` IDs respectively; renaming current reports does not change
+their recipes or qualification results.
+
 ### `ParticleRegularizer`
 
 ```python

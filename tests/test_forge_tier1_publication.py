@@ -42,7 +42,17 @@ def packet(tmp_path):
     assert len(frozen_families) == len(frozen["candidate_roster"]) == 11
     registry_path = tmp_path / "configs/forge/trainer-families.json"
     registry = read_json(registry_path)
-    registry["families"] = [family for family in registry["families"] if family["id"] in frozen_families]
+    recorded = []
+    for family in registry["families"]:
+        original_id = family.get("recorded_id", family["id"])
+        if original_id not in frozen_families:
+            continue
+        if original_id != family["id"]:
+            documentation = tmp_path / "configs/forge/family-documentation"
+            shutil.copyfile(documentation / (family["id"] + ".json"), documentation / (original_id + ".json"))
+        family["id"] = family.pop("recorded_id", family["id"])
+        recorded.append(family)
+    registry["families"] = recorded
     assert {family["id"] for family in registry["families"]} == frozen_families
     atomic_json(registry_path, registry)
     choices = read_json(tmp_path / CURRENT_SELECTION)

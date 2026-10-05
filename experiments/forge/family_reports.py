@@ -296,6 +296,10 @@ def build_progress(root: Path, publication: dict) -> dict:
         inputs[path.as_posix()] = file_hash(root / path)
         return read_json(root / path)
 
+    registry_path = Path("configs/forge/trainer-families.json")
+    current_families = ({family["id"]: family for family in load(registry_path)["families"]}
+                        if (root / registry_path).is_file() else {})
+
     views = [load(path.relative_to(root)) for path in sorted((root / "configs/forge/views").glob("*.json"))]
     task_files = sorted([*(root / "configs/forge/tasks").glob("*.json"),
                          *(root / "configs/forge/task-variants").rglob("*.json")])
@@ -323,6 +327,7 @@ def build_progress(root: Path, publication: dict) -> dict:
     selected_rows = publication["rows"] + publication.get("historical_family_rows", [])
     for row_index, selected in enumerate(selected_rows):
         family_id = identifier(selected.get("trainer_family", selected["candidate_id"]), "trainer family")
+        recorded_family_id = current_families.get(family_id, {}).get("recorded_id", family_id)
         family = families.setdefault(family_id, {"id": family_id, "label": selected["technique"],
                                                 "page": (FAMILY_DIRECTORY / (family_id + ".md")).as_posix(), "cohorts": [],
                                                 "historical_only": row_index >= len(publication["rows"])})
@@ -335,7 +340,7 @@ def build_progress(root: Path, publication: dict) -> dict:
         bindings = dict(selected.get("bindings", {}).get("task_contracts", {}))
         catalogs = dict(publication.get("task_contracts", {}))
         reason_catalog = dict(publication.get("status_reasons", {}))
-        separate = [item for item in scoped_publications if item["family"] == family_id
+        separate = [item for item in scoped_publications if item["family"] == recorded_family_id
                     and item["row"]["candidate_id"] == selected["candidate_id"]
                     and item["row"].get("candidate_revision") == selected.get("candidate_revision")
                     and _same_active_runtime(item["row"].get("runtime_cohort", {}), selected.get("runtime_cohort", {}))
@@ -343,7 +348,7 @@ def build_progress(root: Path, publication: dict) -> dict:
         scoped_names = {assignment["task"] for view in scoped for assignment in view["assignments"]}
         scoped_attempts = []
         final_measurements = {task: measured for (family, task), measured in attachments["final_measurements"].items()
-                              if family == family_id and measured["candidate_id"] == selected["candidate_id"]
+                              if family == recorded_family_id and measured["candidate_id"] == selected["candidate_id"]
                               and measured["candidate_revision"] == selected.get("candidate_revision")
                               and measured["source_digest"] == selected.get("bindings", {}).get("source_digest")}
         for item in separate:
@@ -420,13 +425,13 @@ def build_progress(root: Path, publication: dict) -> dict:
                              "device": receipt.get("result", {}).get("device", receipt.get("result", {}).get("cost", {}).get("device")),
                              "policy_parent": deepcopy(task.get("policy_parent"))}
             matching_media = [item for (family, task_id, attempt), item in media.items()
-                              if family == family_id and task_id == name
+                              if family == recorded_family_id and task_id == name
                               and attempt in selected.get("attempt_ids", []) + scoped_attempts
                               and (name not in final_measurements or attempt == final_measurements[name]["attempt_id"])
                               and item["recorded_grade"] == status]
             if matching_media:
                 results[name]["training_media"] = matching_media
-            audit = attachments["clock_audits"].get((family_id, name))
+            audit = attachments["clock_audits"].get((recorded_family_id, name))
             if (audit and name in final_measurements
                     and audit["attempt_id"] in selected.get("attempt_ids", []) + scoped_attempts
                     and audit["recorded_grade"] == status):

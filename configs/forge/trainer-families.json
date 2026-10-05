@@ -27,7 +27,8 @@
         "k3p-bcap-matched-v1"
       ],
       "canonical_candidate": "k3p-bcap-matched-v1",
-      "id": "bcap",
+      "id": "bcap-with-k3p",
+      "recorded_id": "bcap",
       "label": "BCAP with K3P",
       "rationale": "Frozen BCap penalty with its declared K3P optimizer and training law.",
       "tags": [
@@ -200,7 +201,8 @@
         "bcap-pure-least-squares-joint-v2"
       ],
       "canonical_candidate": "bcap-pure-adam-v2",
-      "id": "bcap-pure",
+      "id": "bcap",
+      "recorded_id": "bcap-pure",
       "label": "BCAP",
       "rationale": "Native Adam, fixed real/fake BCAP, constant rates and moments, selectable adversarial loss. No optimizer interventions or additive training noise. Historical K3P-derived BCAP remains a separate family.",
       "tags": [

@@ -42,6 +42,23 @@ def family_row_pin(row: dict, *, selection_kind: str, reason: str, measurement_v
     return pin
 
 
+def current_family_pin(root: Path | str, original: dict) -> dict:
+    """Project only a pin's family name; leave its recorded scientific identity intact."""
+    current_names = {family.get("recorded_id", family["id"]): family["id"]
+                     for family in load_families(root, current_presentation=True).values()}
+    pin = deepcopy(original)
+    candidate_id = identifier(pin.get("candidate_id"), "selected candidate")
+    pin["trainer_family"] = current_names.get(pin.get("trainer_family"), pin.get("trainer_family"))
+    for directory in ("ideas", "configurations"):
+        declaration = Path(root) / "configs/forge" / directory / (candidate_id + ".json")
+        if current_names and declaration.is_file():
+            pin["trainer_family"] = family_for_candidate(
+                root, candidate_id, {**read_json(declaration), "trainer_family": original.get("trainer_family")},
+                current_presentation=True)["id"]
+            break
+    return pin
+
+
 def load_current_selection(root: Path | str, *, view_id: str, policy_fingerprint: str) -> dict:
     path = Path(root) / CURRENT_SELECTION
     if not path.is_file():
@@ -53,7 +70,8 @@ def load_current_selection(root: Path | str, *, view_id: str, policy_fingerprint
     if card.get("view") != view_id or card.get("policy_fingerprint") != policy_fingerprint:
         raise ValueError("current family selection differs from the view policy")
     pins = {}
-    for pin in card["selections"]:
+    for original in card["selections"]:
+        pin = current_family_pin(root, original)
         family = identifier(pin.get("trainer_family"), "selected trainer family")
         identifier(pin.get("candidate_id"), "selected candidate")
         if family in pins:
@@ -134,18 +152,23 @@ def _current_pin(root, family_id, rows, pin, *, view_id, catalogs):
                       "calibration_status": "provisional", "independent_confirmation": "not_performed"}
 
 
-def load_families(root: Path | str) -> dict:
+def load_families(root: Path | str, *, current_presentation: bool = False) -> dict:
+    """Read current names or the original namespace of frozen declarations."""
     path = Path(root) / REGISTRY
     if not path.is_file():
         return {}
     registry = read_json(path)
     if registry.get("schema_version") != 1 or not isinstance(registry.get("families"), list):
         raise ValueError("unsupported trainer family registry")
-    result, candidates = {}, set()
+    result, candidates, recorded_ids = {}, set(), set()
     for family in registry["families"]:
         if not isinstance(family, dict):
             raise ValueError("trainer family must be an object")
         name = identifier(family.get("id"), "trainer family")
+        recorded = identifier(family.get("recorded_id", name), "recorded trainer family")
+        if recorded in recorded_ids:
+            raise ValueError("recorded trainer family identities must be distinct")
+        recorded_ids.add(recorded)
         if name in result or not isinstance(family.get("label"), str) or not family["label"].strip():
             raise ValueError("trainer families need unique ids and nonempty labels")
         members = family.get("candidates")
@@ -172,6 +195,8 @@ def load_families(root: Path | str) -> dict:
     historical_ids = [identifier(family.get("id"), "historical trainer family") for family in historical]
     if len(set(historical_ids)) != len(historical_ids) or set(historical_ids) & result.keys():
         raise ValueError("historical trainer family identities must be distinct")
+    if set(historical_ids) & recorded_ids:
+        raise ValueError("recorded and historical trainer family identities must be distinct")
     referenced = []
     for family in result.values():
         aliases = family.get("historical_family_ids", [])
@@ -183,22 +208,31 @@ def load_families(root: Path | str) -> dict:
                 raise ValueError("historical family members must remain in their current solution family")
     if len(set(referenced)) != len(referenced):
         raise ValueError("historical trainer family cannot belong to multiple solution families")
+    if not current_presentation:
+        result = {family.get("recorded_id", name): {**family, "id": family.get("recorded_id", name)}
+                  for name, family in result.items()}
     return result
 
 
 def family_for_candidate(root: Path | str, candidate_id: str, declaration: dict | None = None,
                          *, current_presentation: bool = False) -> dict:
-    families = load_families(root)
+    current_families = load_families(root, current_presentation=True)
+    current_names = {family.get("recorded_id", family["id"]): family["id"] for family in current_families.values()}
+    families = current_families if current_presentation else load_families(root)
     historical = (read_json(Path(root) / REGISTRY).get("historical_families", [])
                   if (Path(root) / REGISTRY).is_file() else [])
     historical_by_id = {family["id"]: family for family in historical}
     for family in families.values():
         members = family["candidates"] + (family.get("current_presentation_candidates", [])
                                            if current_presentation else [])
-        if candidate_id in members:
+        # Configuration parents identify the formulation even when a renamed
+        # current id reuses another formulation's old name.
+        parent = (declaration or {}).get("parent") if (declaration or {}).get("configuration_id") else None
+        if candidate_id in members or (family.get("recorded_id") and parent in members):
             explicit = (declaration or {}).get("trainer_family")
             aliases = family.get("historical_family_ids", [])
-            if explicit is not None and explicit not in [family["id"], *aliases]:
+            current_id = current_names.get(family.get("recorded_id", family["id"]), family["id"])
+            if explicit is not None and explicit not in [family["id"], family.get("recorded_id"), current_id, *aliases]:
                 raise ValueError("candidate trainer_family contradicts its explicit registry")
             if not current_presentation and explicit != family["id"]:
                 for name in aliases:
@@ -208,6 +242,10 @@ def family_for_candidate(root: Path | str, candidate_id: str, declaration: dict 
             return family
     explicit = (declaration or {}).get("trainer_family")
     if explicit is not None:
+        if current_presentation and explicit not in families:
+            recorded = {family.get("recorded_id", family["id"]): family for family in families.values()}
+            if explicit in recorded:
+                return deepcopy(recorded[explicit])
         if explicit in historical_by_id:
             if not current_presentation:
                 return deepcopy(historical_by_id[explicit])
@@ -255,6 +293,10 @@ def _search_pin(root, family_id, backend, rows, declarations, catalogs, *, view_
     from .configuration_search import _grid, _load_spec, configuration_id, select_configuration
     from .planning import FORMULATION_FIELDS
     from .views import load_view
+    current_family_id = family_id
+    if view_policy is None:
+        family = load_families(root, current_presentation=True).get(family_id, {})
+        family_id = family.get("recorded_id", family_id)
     paths = set((Path(root) / "reports/forge/configuration-search").glob("*.json"))
     paths.update(Path(root) / card["search_report"] for card in declarations.values()
                  if card.get("trainer_family") == family_id and isinstance(card.get("search_report"), str))
@@ -265,6 +307,11 @@ def _search_pin(root, family_id, backend, rows, declarations, catalogs, *, view_
     active = registry.get(family_id, {}).get("active_search_by_backend", {}).get(backend)
     if active is None:
         return None
+    spec_path = Path(root) / "configs/forge/searches" / (active + ".json")
+    if view_policy is None and spec_path.is_file():
+        declared_family = read_json(spec_path).get("trainer_family")
+        if declared_family in {family_id, current_family_id}:
+            family_id = declared_family
     pins = []
     for path in sorted(paths):
         if not path.is_file():

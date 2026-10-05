@@ -18,10 +18,9 @@ spec.loader.exec_module(publication)
 
 
 def _current_family_roster():
-    pins = read_json(ROOT / CURRENT_SELECTION)["selections"]
-    families = {pin["trainer_family"] for pin in pins}
-    assert len(families) == len(pins)
-    return families
+    from experiments.forge.trainer_families import load_current_selection
+    card = read_json(ROOT / CURRENT_SELECTION)
+    return set(load_current_selection(ROOT, view_id=card["view"], policy_fingerprint=card["policy_fingerprint"]))
 
 
 def _register(root, manifest, name, source, *, finished=None, passed=0):
@@ -388,7 +387,8 @@ def test_publication_refresh_rejects_changed_science_before_writing(evidence, ta
     assert _outputs(root) == before
 
 
-def test_editorial_family_refresh_preserves_exact_pin_and_drifted_science(evidence, monkeypatch):
+@pytest.mark.parametrize("current_id", ["bcap", "bcap-with-k3p"])
+def test_editorial_family_refresh_preserves_exact_pin_and_drifted_science(evidence, monkeypatch, current_id):
     from experiments.forge.trainer_families import REGISTRY, scientific_row_hash
     root, manifest = evidence
     registry = {"schema_version": 1, "families": [{"id": "bcap", "label": "BCap",
@@ -408,17 +408,22 @@ def test_editorial_family_refresh_preserves_exact_pin_and_drifted_science(eviden
     policy["assignments"].append({"task": "new-word-contract", "qualification_tier": 1, "importance": "required"})
     atomic_json(root / "configs/forge/views/discriminator_stability.json", policy)
     registry["families"][0].update(label="BCAP with K3P", tags=["critic-gradient-penalty"])
+    if current_id != "bcap":
+        registry["families"][0].update(id=current_id, recorded_id="bcap")
     atomic_json(root / REGISTRY, registry)
     monkeypatch.setattr("experiments.forge.trainer_families._current_pin",
                         lambda *args, **kwargs: pytest.fail("editorial refresh cannot re-admit a historical pin"))
     metadata = publication.refresh_publication(root)
     current = read_json(metadata["json"])
+    assert current["rows"][0]["trainer_family"] == current_id
     assert current["rows"][0]["technique"] == "BCAP with K3P"
     assert [scientific_row_hash(row) for row in current["rows"]] == [scientific_row_hash(row) for row in baseline["rows"]]
-    for key in ("configuration_rows", "evidence_rows", "historical_family_rows", "archived_evidence_rows"):
+    assert [scientific_row_hash(row) for row in current.get("configuration_rows", [])] == [
+        scientific_row_hash(row) for row in baseline.get("configuration_rows", [])]
+    for key in ("evidence_rows", "historical_family_rows", "archived_evidence_rows"):
         assert current.get(key) == baseline.get(key)
     assert [row.get("selection") for row in current["rows"]] == [row.get("selection") for row in baseline["rows"]]
-    assert current["trainer_families"]["bcap"] == registry["families"][0]
+    assert current["trainer_families"][current_id] == registry["families"][0]
     assert current["trainer_family_registry"] == registry
     assert current["provenance"]["trainer_family_registry_sha256"] == file_hash(root / REGISTRY)
     assert (root / CURRENT_SELECTION).read_bytes() == pin_bytes
@@ -1546,7 +1551,8 @@ def test_original_completion_cohorts_rebuild_every_scientific_row_without_raw_lo
     atomic_json(tmp_path / CURRENT_SELECTION, selection)
     assert file_hash(tmp_path / CURRENT_SELECTION) == original["selection_sha256"]
     registry_path = tmp_path / "configs/forge/trainer-families.json"
-    registry = read_json(registry_path)
+    registry = __import__("json").loads(subprocess.check_output(
+        ["git", "show", original["source_commit"] + ":configs/forge/trainer-families.json"], cwd=ROOT, text=True))
     registry["families"] = [family for family in registry["families"] if family["id"] in original_families]
     atomic_json(registry_path, registry)
     manifest = read_json(tmp_path / publication.EVIDENCE_MANIFEST)

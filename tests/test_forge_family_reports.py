@@ -312,8 +312,10 @@ def test_current_clock_measurement_retains_original_evidence_alongside_contract_
     assert progress["qualification_input"] is False
     round_definition = read_json(root / "configs/forge/rounds/tier1-completion-v1.json")
     original_families = {row["family"] for row in round_definition["candidate_roster"]}
-    cohorts = {family["id"]: family["cohorts"][0] for family in progress["families"]
-               if family["id"] in original_families}
+    registry = read_json(root / "configs/forge/trainer-families.json")
+    recorded_ids = {family["id"]: family.get("recorded_id", family["id"]) for family in registry["families"]}
+    cohorts = {recorded_ids[family["id"]]: family["cohorts"][0] for family in progress["families"]
+               if recorded_ids[family["id"]] in original_families}
     assert set(cohorts) == original_families
     for name, cohort in cohorts.items():
         clock = cohort["tasks"]["clockfree_audit_measurement_v1"]

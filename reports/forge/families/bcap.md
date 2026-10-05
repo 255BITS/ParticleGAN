@@ -1,22 +1,22 @@
 <!-- Generated Forge family report -->
 
-# BCAP with K3P
+# BCAP
 
 [← Family leaderboard](../technique-inventory.md)
 
-**Tags:** [adversarial-training](../technique-inventory.md#tag-adversarial-training) · [capped-input-gradients](../technique-inventory.md#tag-capped-input-gradients) · [critic-gradient-penalty](../technique-inventory.md#tag-critic-gradient-penalty) · [optimizer-interventions](../technique-inventory.md#tag-optimizer-interventions)
+**Tags:** [adversarial-training](../technique-inventory.md#tag-adversarial-training) · [capped-input-gradients](../technique-inventory.md#tag-capped-input-gradients) · [constant-learning-rate](../technique-inventory.md#tag-constant-learning-rate) · [critic-gradient-penalty](../technique-inventory.md#tag-critic-gradient-penalty) · [native-adam](../technique-inventory.md#tag-native-adam) · [selectable-loss](../technique-inventory.md#tag-selectable-loss)
 
 ## Technique overview
 
-BCAP with K3P replaces the K3P critic penalty with the fixed BCAP real/fake gradient cap, while retaining the K3P training machinery. It therefore combines a simple cap loss with scheduled learning rates, a critic gradient-spike guard, sparse latent-row damping and the declared training noise.
+BCAP trains an adversarial generator with one extra critic loss: a squared penalty whenever the critic input-gradient norm exceeds a threshold, evaluated separately on real and generated data. The simple family uses native Adam at constant rates, with no clipping, A2 damping or additive training noise.
 
 ![Real and generated samples share a critic; a soft penalty discourages excessive input-gradient slopes and adds to the critic loss.](assets/bcap-explainer.png)
 
-Conceptual illustration of the BCAP critic-loss mechanism, not measured training results. Generator/prior updates and K3P optimizer controls are described below.
+Conceptual illustration of the BCAP critic-loss mechanism, not measured training results. Generator/prior updates are described below.
 
 ## Mathematical formulation
 
-$G$ is the generator, $D$ the raw-score critic, $P$ the task prior, $x$ a real batch, $z\sim P$ a latent batch and $y$ the generated batch, including any declared output noise. $C$ is the critic actually evaluated: $C=D$ without input noise; otherwise every forward evaluates $D(u+\epsilon_{\mathrm{in}})$ with a fresh draw. $\mathbb E$ means a sample mean, $\lVert\cdot\rVert_2$ is the Euclidean norm, $(a)_+=\max(a,0)$ and $\operatorname{softplus}(a)=\log(1+e^a)$. The scalar sketch detaches $y$ during the critic update and resamples differentiable $y$ after that update; joint and auxiliary hosts retain task-owned objectives. $g_r=\nabla_x C(x)$ and $g_f=\nabla_y C(y)$ are per-sample input gradients; $d$ counts critic-input coordinates. $\lambda$ is penalty strength and $\kappa$ the cap threshold. $h_i$ is latent row $i$'s current gradient, $h_i^{\mathrm{prev}}$ its last observed gradient, $\rho_i$ the A2 response multiplier and $\Delta z_i$ the corresponding row update. $\operatorname{cos}$ denotes the implementation's bounded cosine similarity, including its handling of zero-length history. For the separate spike guard, $g_p$ is a critic parameter gradient, $v_p$ its Adam second moment, $\tau_p$ its stored step count and $c_{\mathrm{guard}}$ its threshold.
+$G$ is the generator, $D$ the raw-score critic, $P$ the task prior, $x$ a real batch, $z\sim P$ a latent batch and $y$ the generated batch, including any declared output noise. $C$ is the critic actually evaluated: $C=D$ without input noise; otherwise every forward evaluates $D(u+\epsilon_{\mathrm{in}})$ with a fresh draw. $\mathbb E$ means a sample mean, $\lVert\cdot\rVert_2$ is the Euclidean norm, $(a)_+=\max(a,0)$ and $\operatorname{softplus}(a)=\log(1+e^a)$. The scalar sketch detaches $y$ during the critic update and resamples differentiable $y$ after that update; joint and auxiliary hosts retain task-owned objectives. $g_r=\nabla_x C(x)$ and $g_f=\nabla_y C(y)$ are per-sample input gradients; $d$ counts critic-input coordinates. $\lambda$ is penalty strength and $\kappa$ the cap threshold. $\eta_0$ is the global base LR, $m_D$ and $m_P$ the role multipliers. A joint host also has an encoder $E$, whose adversarial objective must train both joint critic streams.
 
 **Default paired adversarial loss**
 
@@ -24,7 +24,7 @@ $$
 \begin{aligned}\ell_D&=\mathbb E\!\left[\operatorname{softplus}(C(y)-C(x))\right],\\\ell_G&=\mathbb E\!\left[\operatorname{softplus}(C(x)-C(y))\right].\end{aligned}
 $$
 
-These scalar losses are minimized. The critic objective is $\ell_D+R$; the generator adds only its declared auxiliary objectives. Critic fakes are detached, and generator fakes and both scores are recomputed after the critic step. $C$ includes any declared fresh input noise.
+These scalar losses are minimized. The critic objective is $\ell_D+R$; the generator adds only its declared auxiliary objectives. Critic fakes are detached, and generator fakes and both scores are recomputed after the critic step. $C$ includes any declared fresh input noise. This equation is the canonical paired-loss example; non-saturating, hinge, Wasserstein and least-squares options keep their own loss formulas, and joint hosts use their explicit generator/encoder objective.
 
 **Fixed capped input-gradient penalty**
 
@@ -34,74 +34,61 @@ $$
 
 The cap is a soft loss penalty on real and fake critic input-gradient norms, without division by input dimension. It does not directly clip critic parameter gradients or weights. The canonical BCAP cards use $\lambda=1$ and $\kappa=1$; source-bound selected recipes may differ.
 
-**A2 sparse-row response**
+**Constant native-Adam learning rates**
 
 $$
-\begin{aligned}\rho_i&=\begin{cases}0.75+0.25\operatorname{cos}(h_i,h_i^{\mathrm{prev}}),&\text{with row history},\\1,&\text{without row history},\end{cases}\\\Delta z_i^{\mathrm{A2}}&=\rho_i\Delta z_i^{\mathrm{Adam}}.\end{aligned}
+\eta_G(t)=\eta_0,\qquad \eta_D(t)=m_D\eta_0,\qquad \eta_P(t)=m_P\eta_0.
 $$
 
-A2 acts only on an eligible row-local table with existing Adam state, some zero-gradient rows, and cumulative observed-row fraction below the configured cutoff (baseline $0.5$). Then $\rho_i\in[0.5,1]$. Adam still accumulates the raw gradient second moment; unsupported or ineligible hosts keep their ordinary response.
-
-**Adam-state critic spike guard**
-
-$$
-\begin{aligned}v_p^{\mathrm{RMS}}&=\frac{\operatorname{mean}(v_p)}{1-\beta_2^{\tau_p}},\\u_p&=\frac{\operatorname{RMS}(g_p)}{\sqrt{\max(v_p^{\mathrm{RMS}},10^{-30})}},\\g_p^{\mathrm{guarded}}&=\begin{cases}\dfrac{c_{\mathrm{guard}}}{u_p}g_p,&\tau_p\ge\tau_{\min}\text{ and }u_p>c_{\mathrm{guard}},\\g_p,&\text{otherwise}.\end{cases}\end{aligned}
-$$
-
-This clipping rule applies per critic tensor only after its Adam history reaches the declared warmup (baseline $\tau_{\min}=200$ steps). $g_p$ is its parameter gradient, $v_p$ the stored second moment, $\tau_p$ its Adam step count and $c_{\mathrm{guard}}=5$ the baseline threshold. With AMSGrad use its stored running maximum. Before warmup the guard leaves gradients unchanged.
+The public pure-BCAP defaults are $\eta_0=0.00425$, $m_D=1$, $m_P=2$, $\beta_1=0$ and $\beta_2=0.999$. Rates and moments remain constant. The recorded search also tests $\eta_0=0.0010625$; the exact candidate sets its rates. No guard, A2, anchor, additive training noise or EMA is enabled.
 
 ## Simplified pseudocode
 
 ```text
+Choose an adversarial loss and constant Adam learning rates for G, D and P.
 For each training update:
-  Apply the declared split cosine learning-rate schedules to network and prior parameter groups.
-  Wrap D so each forward adds fresh scheduled critic-input noise.
-  Sample real x and latent z; form fake y=G(z) with declared generated-output training noise.
-  Critic objective = mean softplus(D(stop_gradient(y))-D(x)) + BCAP.
+  Sample real x and latent z from P; compute y=G(z).
+  Critic objective = adversarial_D(D(x), D(stop_gradient(y))) + BCAP.
   Compute BCAP from the real and fake input-gradient norms using the coefficient and cap shown above.
   For penalty derivatives, detach samples from G and treat them as differentiable critic inputs; the penalty updates D only.
-  Backpropagate; after the guard warmup, shrink each critic tensor’s gradient if its RMS exceeds the configured multiple of Adam’s historical RMS.
-  Take the K3P critic Adam step. The BCAP penalty does not use K3P’s early/late penalty blend or EMA anchor.
-  With D fixed, resample latent z and recompute differentiable fake y and both critic scores.
-  Generator objective = mean softplus(D(x)-D(y)) + task-owned auxiliary losses; backpropagate.
-  A2 is active only for an eligible latent table when some rows have zero gradient and the cumulative observed-row fraction is below its configured threshold.
-  With Adam history, scale each active row response using A2 gradient agreement; rows without history stay unchanged.
-  Take the K3P generator/prior Adam step; direct sample-particle hosts may use their declared coherent-gradient response gain.
+  Backpropagate the critic objective and take a native Adam step on D.
+  With D fixed, resample latent z, recompute differentiable fake y and scores; backpropagate adversarial_G + task-owned auxiliary losses.
+  Take native Adam steps on G and trainable prior locations P (and encoder E on joint hosts).
+  On joint encoder/generator hosts, reverse labels on both critic streams so E also receives a gradient.
 ```
 
 ## Training details
 
 | Characteristic | Behavior |
 | --- | --- |
-| Adversarial loss | Canonical paired relativistic logistic on raw critic scores: $D$ minimizes $\mathbb E[\operatorname{softplus}(C(y)-C(x))]$; $G$ minimizes the reverse. Host-owned auxiliary losses remain explicit. |
-| Optimizer | K3PCriticAdam and K3PGeneratorAdam, built through public recipe factories. Base Adam moments default to $(\beta_1,\beta_2)=(0,0.999)$; the wrappers apply critic guards and eligible latent/direct-particle interventions. |
-| Learning rates and annealing | Annealing is retained. Canonical network LR holds for $60\%$ of min(task budget, $1600$ steps), then cosine-decays to $1\%$ and holds. Prior LR holds for $60\%$ of the full task budget, then cosine-decays to $5\%$. Canonical global LR $0.00425$, D multiplier $1$, prior multiplier $2$; recorded searches change role multipliers. Resolve the selected recipe for exact horizons/floors. |
-| Parameter-gradient clipping | Adaptive tensorwise critic gradient clipping via the spike guard: after at least $200$ prior Adam steps per tensor, gradient RMS is limited to $5$ times the bias-corrected second-moment RMS. This is separate from BCAP and is not a single global norm clip. |
-| Critic penalties and anchors | Fixed BCAP real/fake squared one-sided L2 cap; canonical $\lambda=1$ and $\kappa=1$, every update. The historical search includes $\lambda=0.5$ alternatives. K3P’s LR-dependent penalty handover and EMA-anchor penalty are bypassed by reg_arm=b_cap. |
-| Damping and update guards | A2 requires an eligible sparse learnable latent table, some zero-gradient rows on the current update, and cumulative observed-row fraction below latent_damping_max_rate (canonical $0.5$). When Adam state and row history exist, it scales the row response by $0.75+0.25\operatorname{cos}(h_i,h_i^{\mathrm{prev}})$, within $[0.5,1]$; rows without history use $1$. Adam’s second moment still tracks the raw gradient. Direct sample-particle hosts may additionally use coherent-gradient gain and dedicated moments; ordinary learned-prior networks do not automatically receive that gain. |
-| Training and sampling noise | Canonical recipe retains critic input noise, starting at std $0.5$ and linearly decaying to zero over the first $10\%$ of training, and generated-output noise warming toward std $0.029$ over the first $20\%$. Task/source-specific adaptations determine actual served and training noise; clean and noisy cohorts remain separate. Critic-input noise is sampled afresh by the noise-wrapped critic on each forward, including penalty evaluation; generated-output noise is separately added to fake samples. |
-| Parameter averaging and serving | Canonical generator EMA decay=$0.995$ may be maintained by the host, but the card declares live-weight scoring. Fixed BCAP bypasses critic-anchor evaluation, even if an EMA critic copy exists in optimizer state. |
+| Adversarial loss | Selectable paired relativistic logistic (canonical/default), non-saturating logistic, hinge, Wasserstein or least squares. The scalar losses are minimized. Relativistic $D$: $\mathbb E[\operatorname{softplus}(C(y)-C(x))]$; $G$ reverses the difference. Joint hosts use the explicit generator/encoder objective. |
+| Optimizer | Native PyTorch Adam. Canonical $\beta_1=0$, $\beta_2=0.999$ and $\varepsilon=10^{-8}$; moments are constant. |
+| Learning rates and annealing | Constant: canonical global LR $0.00425$, D multiplier $1$ and prior multiplier $2$. The measured round also tested global LR $0.0010625$. Network and prior LR floors are $1$, so the scheduled API path performs no annealing. |
+| Parameter-gradient clipping | None. Critic spike guard is disabled; BCAP acts through the loss, not parameter-gradient clipping. |
+| Critic penalties and anchors | Fixed real/fake one-sided squared L2 cap. Canonical $\lambda=1$, $\kappa=1$, applied every critic update. No K3P early/late blend or critic-anchor term. |
+| Damping and update guards | No A2 latent-row damping, direct-particle response gain, or adaptive critic step intervention. |
+| Training and sampling noise | No additive critic-input or generator-output training noise. Sampling noise inherent to a task-declared MoG prior remains part of that prior, not an extra BCAP intervention. |
+| Parameter averaging and serving | Canonical generator EMA decay=$0$ and no critic-anchor penalty; the reported round scores clean live weights. |
 
 ## Configuration differences
 
 - The pseudocode describes the family mechanism; the selected configuration and each task determine architectures, initialization, prior, sampling, update count and task-owned auxiliary losses.
 - The cap is a soft penalty on gradients with respect to critic inputs, not a hard bound on model-parameter gradients. Its L2 norm is not divided by input dimension.
 - Configuration alternatives are complete recipes; passing cells from different recipes or sources are not combined.
-- BCAP with K3P is an editorial rename of family ID bcap; the candidate remains k3p-bcap-matched-v1. It is distinct from the native-Adam BCAP family (ID bcap-pure).
-- Canonical values describe the reusable baseline. Selected historical configurations can change penalty coefficient and role rates; source-bound measurement receipts remain authoritative.
-- The declared A2 capability may be blocked on an incompatible host; do not infer that damping ran merely from the family name.
+- The original v1 non-relativistic joint-host implementations omitted the encoder-side adversarial term. Corrected v2 candidates use joint_g_loss; original receipts and source identities remain historical evidence.
+- The current family ID and public recipe preset are bcap. Frozen bcap-pure declarations and receipts retain their original IDs; BCAP with K3P uses bcap-with-k3p.
 
 <details>
 <summary>Implementation and recipe sources</summary>
 
 These links support the explanation. Recorded results below remain bound to their own executed source.
 
-- [configs/forge/ideas/k3p-bcap-matched-v1.json](../../../configs/forge/ideas/k3p-bcap-matched-v1.json)
-- [configs/forge/searches/bcap-tier1-refresh-v1.json](../../../configs/forge/searches/bcap-tier1-refresh-v1.json)
 - [particlegan/recipes.py](../../../particlegan/recipes.py)
-- [particlegan/k3p.py](../../../particlegan/k3p.py)
+- [particlegan/gan_loss.py](../../../particlegan/gan_loss.py)
 - [particlegan/grad_regularizers.py](../../../particlegan/grad_regularizers.py)
-- [particlegan/training.py](../../../particlegan/training.py)
+- [particlegan/recipe_schedules.py](../../../particlegan/recipe_schedules.py)
+- [configs/forge/ideas/bcap-pure-adam-v2.json](../../../configs/forge/ideas/bcap-pure-adam-v2.json)
+- [reports/forge/pure-bcap/README.md](../pure-bcap/README.md)
 
 </details>
 
@@ -111,28 +98,26 @@ Generated from one selected configuration per runtime. Recorded verdicts retain 
 
 ## CUDA results
 
-Runtime: **cuda**. Selected configuration: [bcap · 08689a73c551](../../../configs/forge/configurations/bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212.json).
+Runtime: **cuda**. Selected configuration: [bcap-pure · 5ea5bdbb2d71](../../../configs/forge/configurations/bcap-pure--5ea5bdbb2d71403dd316e201a51fb2b2b9c1868a8e053156b21b7cecb344d4be.json).
 
 Recorded qualification: **tier 0**, discriminator_stability revision 5. Other view rows below are navigation over recorded task evidence, not recomputed qualification.
 
 <details>
 <summary>Configuration, source and runtime provenance</summary>
 
-Source digest: `21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f`. Candidate revision: `1f1d81a0aa3f60e2a3f3187dacfa29e7688bb6509b16daf439036ed5f9951c4e`. Runtime cohort: `de1faf2ca5cd1417f6fec32350070a74ded53fef94424a96667e51be3886d769`.
+Source digest: `eede2a3a5780805489664b7354e8748a4020fa8eb5023aa6cad50c8e3f9d05ac`. Candidate revision: `9139a994e2a88403955e5bc8a0ce95be8c2cd5be8f0b2fad0652350d24b6971c`. Runtime cohort: `38c2e05b80ccb1949cd578d6ba808da0afc90b199e22d39e9817b2e6abdc0d89`.
 
-[Frozen numerical evidence](../technique-evidence/ddde64ee936114becac42863847a51e88ec0301bad9f7f69767d0a2fbc3f3d69.json) · [Complete recipe, prior, initialization and sampling bindings](../technique-inventory.json)
+[Frozen numerical evidence](../technique-evidence/029cb9bf5e422826f1cf0243f5ebfc0bf3e1e342292e592bae90dc00ac3f70c8.json) · [Complete recipe, prior, initialization and sampling bindings](../technique-inventory.json)
 
-Selection: current_measurement. Complete current Tier 1 measurement at one frozen recipe and executed source. FAIL completes a measurement; calibration and confirmation remain separate.
+Selection: historical_incumbent. Initial finite Pure BCAP round: required Tier 1 PASS count descending, then configuration hash ascending. One complete recipe; no calibrated default adoption.
 
 </details>
-
-Complete current Tier 1 measurement in: discriminator_stability; additional scoped probes: clockfree_audit_measurement_v1. PASS and FAIL are both measured outcomes; other cohorts retain their own required cells.
 
 | Family / view | Tier 1 | Tier 2 | Tier 3 | Total |
 | --- | ---: | ---: | ---: | ---: |
 | [adaptation](bcap.md#cohort-cuda-0d83d78027c5-adaptation) | [3/3](bcap.md#cohort-cuda-0d83d78027c5-adaptation-tier-1) | [0(*)/19](bcap.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) | [0(*)/1](bcap.md#cohort-cuda-0d83d78027c5-adaptation-tier-3) | [3(*)/23](bcap.md#cohort-cuda-0d83d78027c5-adaptation) |
-| [clockfree_continuous](bcap.md#cohort-cuda-0d83d78027c5-clockfree_continuous) | [3/4](bcap.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1) | [0(*)/19](bcap.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) | [0(*)/7](bcap.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3) | [3(*)/30](bcap.md#cohort-cuda-0d83d78027c5-clockfree_continuous) |
-| [discriminator_stability](bcap.md#cohort-cuda-0d83d78027c5-discriminator_stability) | [4/6](bcap.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | [0(*)/19](bcap.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) | [0(*)/2](bcap.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-3) | [4(*)/27](bcap.md#cohort-cuda-0d83d78027c5-discriminator_stability) |
+| [clockfree_continuous](bcap.md#cohort-cuda-0d83d78027c5-clockfree_continuous) | [4/4](bcap.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1) | [0(*)/19](bcap.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) | [0(*)/7](bcap.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3) | [4(*)/30](bcap.md#cohort-cuda-0d83d78027c5-clockfree_continuous) |
+| [discriminator_stability](bcap.md#cohort-cuda-0d83d78027c5-discriminator_stability) | [3/6](bcap.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | [0(*)/19](bcap.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) | [0(*)/2](bcap.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-3) | [3(*)/27](bcap.md#cohort-cuda-0d83d78027c5-discriminator_stability) |
 | [formulation_comparison](bcap.md#cohort-cuda-0d83d78027c5-formulation_comparison) | [3/3](bcap.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-1) | [0(*)/19](bcap.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) | [0(*)/2](bcap.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-3) | [3(*)/24](bcap.md#cohort-cuda-0d83d78027c5-formulation_comparison) |
 | [host_profile_transfer](bcap.md#cohort-cuda-0d83d78027c5-host_profile_transfer) | [3/3](bcap.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-1) | [0(*)/19](bcap.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) | [0(*)/2](bcap.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-3) | [3(*)/24](bcap.md#cohort-cuda-0d83d78027c5-host_profile_transfer) |
 | [quality_coverage](bcap.md#cohort-cuda-0d83d78027c5-quality_coverage) | [3/3](bcap.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-1) | [0(*)/19](bcap.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | [0/0](bcap.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-3) | [3(*)/22](bcap.md#cohort-cuda-0d83d78027c5-quality_coverage) |
@@ -154,8 +139,8 @@ Shared experiments appear once in this list; the family numerator/denominator co
 | Experiment | Required by | Recorded result | Test definition |
 | --- | --- | --- | --- |
 | [ae_gan_hold](bcap.md#cohort-cuda-0d83d78027c5-experiment-ae_gan_hold) | [adaptation](bcap.md#cohort-cuda-0d83d78027c5-adaptation-tier-1), [clockfree_continuous](bcap.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1), [discriminator_stability](bcap.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1), [formulation_comparison](bcap.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-1), [host_profile_transfer](bcap.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-1), [quality_coverage](bcap.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-1) | PASS | matches recorded run |
-| [clockfree_audit_measurement_v1](bcap.md#cohort-cuda-0d83d78027c5-experiment-clockfree_audit_measurement_v1) | [clockfree_continuous](bcap.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1) | FAIL | matches recorded run |
-| [five_word_joint_acquisition](bcap.md#cohort-cuda-0d83d78027c5-experiment-five_word_joint_acquisition) | [discriminator_stability](bcap.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | PASS | changed since run |
+| [clockfree_audit_measurement_v1](bcap.md#cohort-cuda-0d83d78027c5-experiment-clockfree_audit_measurement_v1) | [clockfree_continuous](bcap.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1) | PASS | matches recorded run |
+| [five_word_joint_acquisition](bcap.md#cohort-cuda-0d83d78027c5-experiment-five_word_joint_acquisition) | [discriminator_stability](bcap.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | FAIL | changed since run |
 | [gaussian1d_acquisition](bcap.md#cohort-cuda-0d83d78027c5-experiment-gaussian1d_acquisition) | [discriminator_stability](bcap.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | FAIL | matches recorded run |
 | [ring16_acquisition](bcap.md#cohort-cuda-0d83d78027c5-experiment-ring16_acquisition) | [discriminator_stability](bcap.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | FAIL | matches recorded run |
 | [two_pole](bcap.md#cohort-cuda-0d83d78027c5-experiment-two_pole) | [adaptation](bcap.md#cohort-cuda-0d83d78027c5-adaptation-tier-1), [clockfree_continuous](bcap.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1), [discriminator_stability](bcap.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1), [formulation_comparison](bcap.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-1), [host_profile_transfer](bcap.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-1), [quality_coverage](bcap.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-1) | PASS | matches recorded run |
@@ -285,7 +270,7 @@ Additional eligibility requirements:
 | [two_pole](bcap.md#cohort-cuda-0d83d78027c5-experiment-two_pole) | required | PASS | matches recorded run |
 | [unused_token_hold](bcap.md#cohort-cuda-0d83d78027c5-experiment-unused_token_hold) | required | PASS | matches recorded run |
 | [ae_gan_hold](bcap.md#cohort-cuda-0d83d78027c5-experiment-ae_gan_hold) | required | PASS | matches recorded run |
-| [clockfree_audit_measurement_v1](bcap.md#cohort-cuda-0d83d78027c5-experiment-clockfree_audit_measurement_v1) | required | FAIL | matches recorded run |
+| [clockfree_audit_measurement_v1](bcap.md#cohort-cuda-0d83d78027c5-experiment-clockfree_audit_measurement_v1) | required | PASS | matches recorded run |
 
 <a name="cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2"></a>
 
@@ -348,8 +333,8 @@ Calibration: **provisional**. Expanded six-task Tier 1 placement is provisional 
 | [unused_token_hold](bcap.md#cohort-cuda-0d83d78027c5-experiment-unused_token_hold) | required | PASS | matches recorded run |
 | [ae_gan_hold](bcap.md#cohort-cuda-0d83d78027c5-experiment-ae_gan_hold) | required | PASS | matches recorded run |
 | [ring16_acquisition](bcap.md#cohort-cuda-0d83d78027c5-experiment-ring16_acquisition) | required | FAIL | matches recorded run |
-| [five_word_joint_acquisition](bcap.md#cohort-cuda-0d83d78027c5-experiment-five_word_joint_acquisition) | required | PASS | changed since run |
-| [clockfree_audit_measurement_v1](bcap.md#cohort-cuda-0d83d78027c5-experiment-clockfree_audit_measurement_v1) | diagnostic | FAIL | matches recorded run |
+| [five_word_joint_acquisition](bcap.md#cohort-cuda-0d83d78027c5-experiment-five_word_joint_acquisition) | required | FAIL | changed since run |
+| [clockfree_audit_measurement_v1](bcap.md#cohort-cuda-0d83d78027c5-experiment-clockfree_audit_measurement_v1) | diagnostic | PASS | matches recorded run |
 
 <a name="cohort-cuda-0d83d78027c5-discriminator_stability-tier-2"></a>
 
@@ -667,14 +652,14 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| hold | 0.00857694 | <= 0.35 | PASS |
-| recon_mse | 0.00370552 | <= 0.05 | PASS |
+| hold | 0.0237108 | <= 0.35 | PASS |
+| recon_mse | 0.00691841 | <= 0.05 | PASS |
 
 Recorded terminal passing observations: **23**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/99b2e68810ba4379a860e467e8a818ca.json)
+[Compact metrics and receipt provenance](../technique-receipts/d342f0ff8c4d421aa26360478dbf7680.json)
 
-[Actual-training GIF](../tier1-completion/media/bcap/99b2e68810ba4379a860e467e8a818ca/ae_gan_hold.gif); 24 saved observations; no new optimizer updates or sampling draws.
+[Actual-training GIF](../pure-bcap/media/5ea5bdbb2d71/ae_gan_hold.gif); 24 saved observations; no new optimizer updates or sampling draws.
 
 Recorded conditions: mog prior (sigma 0.025); generated_and_reconstructed_prior_with_scheduled_output_noise; weights live; output noise public_recipe_schedule.
 
@@ -746,35 +731,23 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 ### clockfree_audit_measurement_v1
 
-**clockfree_audit_measurement_v1: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/clockfree_audit_measurement_v1.json).
+**clockfree_audit_measurement_v1: PASS**. [Current experiment declaration](../../../configs/forge/tasks/clockfree_audit_measurement_v1.json).
 
-Test definition: **matches recorded run**. Test definition matches the recorded conditions. step_label changed the update or common-prefix state
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. declared state/horizon/cadence/restart comparisons agree; source audit bound
 
-Actual task device: `1` (recorded execution receipt).
+Actual task device: `0` (recorded execution receipt).
 
 Used by: [clockfree_continuous / Tier 1](bcap.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1) · [discriminator_stability / Tier 1](bcap.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1).
 
-[Compact metrics and receipt provenance](../technique-receipts/5732e526ff764977af157e194f8a5749.json)
+Recorded final metrics:
 
-[Actual-training GIF](../tier1-completion/media/bcap/5732e526ff764977af157e194f8a5749/clockfree_audit_measurement_v1.gif); 4 saved observations; no new optimizer updates or sampling draws.
+| Metric | Measured |
+| --- | ---: |
+| parity_comparisons | 4 |
 
-Recorded clock parity diagnostics:
+[Compact metrics and receipt provenance](../technique-receipts/288936eb39174fd3bf07f60e97763a64.json)
 
-| Condition | Exact state digest equality |
-| --- | --- |
-| evaluation_cadence | equal |
-| horizon | different |
-| restart | equal |
-| step_label | different |
-
-Recorded unexplained clock dependencies: **4**.
-
-- learning-rate annealing depends on completed steps and horizon
-- input-noise annealing depends on completed steps and horizon
-- output-noise warmup depends on completed steps and horizon
-- critic guard releases at a fixed minimum update count
-
-[Certified parity digests and source audit](../tier1-completion/scoped-evidence.json). These display diagnostics preserve the recorded gate FAIL.
+[Actual-training GIF](../pure-bcap/media/5ea5bdbb2d71/clockfree_audit_measurement_v1.gif); 4 saved observations; no new optimizer updates or sampling draws.
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -844,11 +817,11 @@ Current measurement: particle_cloud prior (sigma 0); learned_parameter_measureme
 
 ### five_word_joint_acquisition
 
-**five_word_joint_acquisition: PASS**. [Current experiment declaration](../../../configs/forge/tasks/five_word_joint_acquisition.json).
+**five_word_joint_acquisition: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/five_word_joint_acquisition.json).
 
 Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. recomputed complete live curve and terminal suffix
 
-Actual task device: `0` (recorded execution receipt).
+Actual task device: `1` (recorded execution receipt).
 
 Used by: [discriminator_stability / Tier 1](bcap.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1).
 
@@ -856,18 +829,18 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| mass_tv | 0.0189453 | <= 0.1 | PASS |
-| minimum_reconstruction_token_probability | 0.996322 | >= 0.9 | PASS |
-| modes | 5 | == 5 | PASS |
-| quality_fraction | 1 | >= 0.95 | PASS |
-| reconstruction_exact | 1 | == 1 | PASS |
+| mass_tv | 1 | <= 0.1 | FAIL |
+| minimum_reconstruction_token_probability | 0 | >= 0.9 | FAIL |
+| modes | 0 | == 5 | FAIL |
+| quality_fraction | 0 | >= 0.95 | FAIL |
+| reconstruction_exact | 0 | == 1 | FAIL |
 | sample_count | 1024 | >= 1024 | PASS |
 
-Recorded terminal passing observations: **18**; required: 5.
+Recorded terminal passing observations: **0**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/8b88bf0491144e35b637e68eda852310.json)
+[Compact metrics and receipt provenance](../technique-receipts/6f806410852b4ff0a3482569b3b3fc99.json)
 
-[Actual-training GIF](../tier1-completion/media/bcap/8b88bf0491144e35b637e68eda852310/five_word_joint_acquisition.gif); 24 saved observations; no new optimizer updates or sampling draws.
+[Actual-training GIF](../pure-bcap/media/5ea5bdbb2d71/five_word_joint_acquisition.gif); 24 saved observations; no new optimizer updates or sampling draws.
 
 Recorded conditions: particle_cloud prior (sigma 0); generated_and_paired_reconstructed_prior_without_output_noise; weights live; output noise clean.
 
@@ -943,17 +916,17 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| cdf_ks | 0.174963 | <= 0.05 | FAIL |
+| cdf_ks | 0.0967443 | <= 0.05 | FAIL |
 | finite_fraction | 1 | == 1 | PASS |
-| mean_error_sigma | 0.417016 | <= 0.2 | FAIL |
+| mean_error_sigma | 0.00782638 | <= 0.2 | PASS |
 | sample_count | 4096 | >= 4096 | PASS |
-| std_ratio | 1.08263 | <= 1.2 | PASS |
+| std_ratio | 1.26168 | <= 1.2 | FAIL |
 
 Recorded terminal passing observations: **0**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/d0638ad5ce5a47e5b2fcb00b369768b2.json)
+[Compact metrics and receipt provenance](../technique-receipts/80f86665c2924acabb3807936ca9af19.json)
 
-[Actual-training GIF](../tier1-completion/media/bcap/d0638ad5ce5a47e5b2fcb00b369768b2/gaussian1d_acquisition.gif); 24 saved observations; no new optimizer updates or sampling draws.
+[Actual-training GIF](../pure-bcap/media/5ea5bdbb2d71/gaussian1d_acquisition.gif); 24 saved observations; no new optimizer updates or sampling draws.
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -1533,18 +1506,18 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| component_covariance_error | 4.457 | <= 0.85 | FAIL |
-| component_min_eigen_ratio | 0.134501 | >= 0.15 | FAIL |
-| hq | 0.938477 | >= 0.85 | PASS |
-| mass_tv | 0.12207 | <= 0.15 | PASS |
+| component_covariance_error | 5.36652 | <= 0.85 | FAIL |
+| component_min_eigen_ratio | 0.34812 | >= 0.15 | PASS |
+| hq | 0.822754 | >= 0.85 | FAIL |
+| mass_tv | 0.0998535 | <= 0.15 | PASS |
 | modes | 16 | >= 16 | PASS |
 | sample_count | 4096 | >= 4096 | PASS |
 
 Recorded terminal passing observations: **0**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/d8185ca486b54af79ef422395eac8065.json)
+[Compact metrics and receipt provenance](../technique-receipts/aae235aaaaa64ac2b5e36c18f4af3155.json)
 
-[Actual-training GIF](../tier1-completion/media/bcap/d8185ca486b54af79ef422395eac8065/ring16_acquisition.gif); 24 saved observations; no new optimizer updates or sampling draws.
+[Actual-training GIF](../pure-bcap/media/5ea5bdbb2d71/ring16_acquisition.gif); 24 saved observations; no new optimizer updates or sampling draws.
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -1970,14 +1943,14 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| grad_med | 0.753464 | <= 1 | PASS |
-| mean_abs | 0.434628 | >= 0.3 | PASS |
+| grad_med | 0.344867 | <= 1 | PASS |
+| mean_abs | 0.421174 | >= 0.3 | PASS |
 
-Recorded terminal passing observations: **9**; required: 5.
+Recorded terminal passing observations: **5**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/bde4745f31864cc08c42880d0fa36272.json)
+[Compact metrics and receipt provenance](../technique-receipts/d295b50685f34011822aa9836946482d.json)
 
-[Actual-training GIF](../tier1-completion/media/bcap/bde4745f31864cc08c42880d0fa36272/two_pole.gif); 24 saved observations; no new optimizer updates or sampling draws.
+[Actual-training GIF](../pure-bcap/media/5ea5bdbb2d71/two_pole.gif); 24 saved observations; no new optimizer updates or sampling draws.
 
 Recorded conditions: particle_cloud prior (sigma 0); learned_particles_and_critic_gradient; weights live; output noise not_applied_to_measurement.
 
@@ -2128,14 +2101,14 @@ Recorded final metric checks:
 
 | Metric | Measured | Recorded bound | Recorded check |
 | --- | ---: | --- | --- |
-| concept_move | 0.947523 | >= 0.85 | PASS |
-| unused_hold | 0.99325 | >= 0.85 | PASS |
+| concept_move | 0.983446 | >= 0.85 | PASS |
+| unused_hold | 0.988603 | >= 0.85 | PASS |
 
-Recorded terminal passing observations: **13**; required: 5.
+Recorded terminal passing observations: **15**; required: 5.
 
-[Compact metrics and receipt provenance](../technique-receipts/329006823c804cdfbd01ab414d10d1cd.json)
+[Compact metrics and receipt provenance](../technique-receipts/aa60b1572b3f403ca23204b47806a5e1.json)
 
-[Actual-training GIF](../tier1-completion/media/bcap/329006823c804cdfbd01ab414d10d1cd/unused_token_hold.gif); 24 saved observations; no new optimizer updates or sampling draws.
+[Actual-training GIF](../pure-bcap/media/5ea5bdbb2d71/unused_token_hold.gif); 24 saved observations; no new optimizer updates or sampling draws.
 
 Recorded conditions: particle_cloud prior (sigma 0); learned_parameter_measurement; weights live; output noise not_applied_to_measurement.
 
@@ -2557,3 +2530,7 @@ This page is generated alongside the leaderboard. Register new source evidence b
 - [Adam: A Method for Stochastic Optimization](https://arxiv.org/abs/1412.6980). Base optimizer. Repository-specific guards and damping are separate mechanisms.
 - [The relativistic discriminator: a key element missing from standard GAN](https://arxiv.org/abs/1807.00734). Paired relativistic logistic objective; this implementation pairs scores, rather than subtracting batch-average scores.
 - [On the regularization of Wasserstein GANs](https://arxiv.org/abs/1709.08894). Related work on one-sided gradient penalties. The repository BCAP kernel uses real/fake inputs directly and is not a reproduction of this paper or its sampling scheme.
+- [Generative Adversarial Networks](https://arxiv.org/abs/1406.2661). Non-saturating logistic loss option.
+- [Wasserstein GAN](https://arxiv.org/abs/1701.07875). Wasserstein score-loss option. This BCAP recipe does not adopt the paper’s weight clipping or full training algorithm.
+- [Least Squares Generative Adversarial Networks](https://arxiv.org/abs/1611.04076). Least-squares loss option; repository targets are real=1, fake=0 and generator=1.
+- [Spectral Normalization for Generative Adversarial Networks](https://arxiv.org/abs/1802.05957). Reference for the hinge adversarial objective option; selecting hinge does not itself enable spectral normalization.

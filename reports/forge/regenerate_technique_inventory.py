@@ -1256,6 +1256,8 @@ def _common26_display_projection(result, root):
     """Keep the unscored original common-26 projection in its historical scope."""
     from experiments.forge.common26_comparison import FAMILIES, TASKS_BY_TIER, project_common26
     from experiments.forge.trainer_families import family_for_candidate
+    current = ({} if result.get("recorded_policy") else
+               {family["id"]: family for family in result.get("trainer_family_registry", {}).get("families", [])})
     legacy_ids = {name for name, _ in FAMILIES}
     rows = result["rows"]
     if any(row.get("trainer_family") not in legacy_ids for row in rows):
@@ -1263,9 +1265,9 @@ def _common26_display_projection(result, root):
                    result.get("historical_family_rows", []) if row["trainer_family"] in legacy_ids}
         for original in rows:
             row = deepcopy(original)
+            recorded = current.get(row.get("trainer_family"), {}).get("recorded_id", row.get("trainer_family"))
             family = family_for_candidate(root, row["candidate_id"],
-                                          {"trainer_family": row["trainer_family"]}
-                                          if row.get("trainer_family") in legacy_ids else None)
+                                          {"trainer_family": recorded} if recorded in legacy_ids else None)
             if family["id"] in legacy_ids:
                 row["trainer_family"] = family["id"]
                 indexed.setdefault(family["id"], row)
@@ -1760,10 +1762,11 @@ def _declaration_only_configuration(row):
 
 
 def _family_registry_structure(registry):
-    """Only labels and categorization tags are editable without reselection."""
+    """Names, labels and tags can change while recorded membership stays fixed."""
     value = deepcopy(registry)
     for key in ("families", "historical_families"):
         for family in value.get(key, []):
+            family["id"] = family.pop("recorded_id", family["id"])
             family.pop("label", None)
             family.pop("tags", None)
     return value
@@ -1785,18 +1788,24 @@ def _previous_family_registry(root, result):
     return json.loads(source)
 
 
-def _refresh_family_presentation(root, result, registry):
+def _refresh_family_presentation(root, result, registry, previous):
     from experiments.forge.trainer_families import load_families
-    active = load_families(root)  # Retain existing registry structure validation.
+    active = load_families(root, current_presentation=True)
+    recorded = {family.get("recorded_id", family["id"]): family for family in active.values()}
+    renamed = {family["id"]: recorded[family.get("recorded_id", family["id"])]
+               for family in previous["families"]}
     historical = {family["id"]: family for family in registry.get("historical_families", [])}
-    for key, families in (("rows", active), ("historical_family_rows", historical)):
+    for key, families in (("rows", renamed), ("configuration_rows", renamed), ("historical_family_rows", historical)):
         for row in result.get(key, []):
             family = families.get(row.get("trainer_family"))
             if family is not None:
-                row["technique"] = family["label"]
-    for name in result.get("trainer_families", {}):
-        if name in active:
-            result["trainer_families"][name] = deepcopy(active[name])
+                if key != "configuration_rows":
+                    row["technique"] = family["label"]
+                row["trainer_family"] = family["id"]
+    result["trainer_families"] = {
+        renamed[name]["id"] if name in renamed else name:
+        deepcopy(renamed[name]) if name in renamed else family
+        for name, family in result.get("trainer_families", {}).items()}
 
 
 def refresh_publication(root=REPOSITORY_ROOT, *, view_id="discriminator_stability"):
@@ -1863,7 +1872,7 @@ def refresh_publication(root=REPOSITORY_ROOT, *, view_id="discriminator_stabilit
         if (registry is None or previous is None
                 or _family_registry_structure(previous) != _family_registry_structure(registry)):
             raise ValueError("trainer family selection structure changed; use ordinary regeneration")
-        _refresh_family_presentation(root, result, registry)
+        _refresh_family_presentation(root, result, registry, previous)
         result["provenance"]["trainer_family_registry_sha256"] = registry_hash
         result["provenance"]["selected_rows_sha256"] = stable_hash(result["rows"])
     if registry_hash is not None:

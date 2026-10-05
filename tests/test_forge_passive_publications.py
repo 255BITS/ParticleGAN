@@ -218,7 +218,8 @@ def test_one_table_context_preserves_historical_and_all_ordinary_values(tmp_path
     text = renderer._current_markdown(report, tmp_path, tmp_path / "reports/forge/technique-inventory.md")
     table = [line for line in text.splitlines() if line.startswith("|")]
     assert text.count("| Family / view | Tier 1 | Tier 2 | Tier 3 | Total |") == 1
-    pins = read_json(ROOT / CURRENT_SELECTION)["selections"]
+    from experiments.forge.trainer_families import current_family_pin
+    pins = [current_family_pin(ROOT, pin) for pin in read_json(ROOT / CURRENT_SELECTION)["selections"]]
     families = {pin["trainer_family"] for pin in pins}
     assert len(pins) == len(families) == len(report["rows"])
     assert {row["trainer_family"] for row in report["rows"]} == families

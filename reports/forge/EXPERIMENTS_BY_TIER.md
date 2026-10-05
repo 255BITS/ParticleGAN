@@ -534,8 +534,8 @@ Recorded Forge task outcomes (exact saved configuration/source/runtime):
 
 | Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| ae_gan_hold | [BCAP with K3P](../../configs/forge/configurations/bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212.json) | MoGParticlePrior (sigma=0.025) | PASS | matches; source remains frozen | cuda / 928b485ffbe6 / de1faf2ca5cd | [source-bound receipt index](technique-inventory.json) |
 | ae_gan_hold | [BCAP](../../configs/forge/configurations/bcap-pure--5ea5bdbb2d71403dd316e201a51fb2b2b9c1868a8e053156b21b7cecb344d4be.json) | MoGParticlePrior (sigma=0.025) | PASS | matches; source remains frozen | cuda / af75a3fea19a / 38c2e05b80cc | [source-bound receipt index](technique-inventory.json) |
+| ae_gan_hold | [BCAP with K3P](../../configs/forge/configurations/bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212.json) | MoGParticlePrior (sigma=0.025) | PASS | matches; source remains frozen | cuda / 928b485ffbe6 / de1faf2ca5cd | [source-bound receipt index](technique-inventory.json) |
 | ae_gan_hold | [K3P](../../configs/forge/configurations/k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c.json) | MoGParticlePrior (sigma=0.025) | PASS | matches; source remains frozen | cuda / 928b485ffbe6 / 942ae9802bd8 | [source-bound receipt index](technique-inventory.json) |
 | ae_gan_hold | [K3P without A2](../../configs/forge/ideas/k3p-a2-off-native-diagnostic.json) | MoGParticlePrior (sigma=0.025) | PASS | matches; source remains frozen | cuda / 928b485ffbe6 / e17da7e5ab34 | [source-bound receipt index](technique-inventory.json) |
 | ae_gan_hold | [K3P without critic anchor](../../configs/forge/ideas/forge-onboarding-anchor-ablation.json) | MoGParticlePrior (sigma=0.025) | PASS | matches; source remains frozen | cuda / 928b485ffbe6 / 7b8167f5367d | [source-bound receipt index](technique-inventory.json) |
@@ -715,8 +715,8 @@ Recorded Forge task outcomes (exact saved configuration/source/runtime):
 
 | Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| five_word_joint_acquisition | [BCAP with K3P](../../configs/forge/configurations/bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / 928b485ffbe6 / de1faf2ca5cd | [source-bound receipt index](technique-inventory.json) |
 | five_word_joint_acquisition | [BCAP](../../configs/forge/configurations/bcap-pure--5ea5bdbb2d71403dd316e201a51fb2b2b9c1868a8e053156b21b7cecb344d4be.json) | ParticlePrior (sigma=0) | FAIL | CHANGED; earlier contract | cuda / af75a3fea19a / 38c2e05b80cc | [source-bound receipt index](technique-inventory.json) |
+| five_word_joint_acquisition | [BCAP with K3P](../../configs/forge/configurations/bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / 928b485ffbe6 / de1faf2ca5cd | [source-bound receipt index](technique-inventory.json) |
 | five_word_joint_acquisition | [K3P](../../configs/forge/configurations/k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c.json) | ParticlePrior (sigma=0) | FAIL | CHANGED; earlier contract | cuda / 928b485ffbe6 / 942ae9802bd8 | [source-bound receipt index](technique-inventory.json) |
 | five_word_joint_acquisition | [K3P without A2](../../configs/forge/ideas/k3p-a2-off-native-diagnostic.json) | ParticlePrior (sigma=0) | FAIL | CHANGED; earlier contract | cuda / 928b485ffbe6 / e17da7e5ab34 | [source-bound receipt index](technique-inventory.json) |
 | five_word_joint_acquisition | [K3P without critic anchor](../../configs/forge/ideas/forge-onboarding-anchor-ablation.json) | ParticlePrior (sigma=0) | FAIL | CHANGED; earlier contract | cuda / 928b485ffbe6 / 7b8167f5367d | [source-bound receipt index](technique-inventory.json) |
@@ -789,8 +789,8 @@ Recorded Forge task outcomes (exact saved configuration/source/runtime):
 
 | Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| gaussian1d_acquisition | [BCAP with K3P](../../configs/forge/configurations/bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212.json) | MoGParticlePrior (sigma=0.025) | FAIL | matches; source remains frozen | cuda / 928b485ffbe6 / de1faf2ca5cd | [source-bound receipt index](technique-inventory.json) |
 | gaussian1d_acquisition | [BCAP](../../configs/forge/configurations/bcap-pure--5ea5bdbb2d71403dd316e201a51fb2b2b9c1868a8e053156b21b7cecb344d4be.json) | MoGParticlePrior (sigma=0.025) | FAIL | matches; source remains frozen | cuda / af75a3fea19a / 38c2e05b80cc | [source-bound receipt index](technique-inventory.json) |
+| gaussian1d_acquisition | [BCAP with K3P](../../configs/forge/configurations/bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212.json) | MoGParticlePrior (sigma=0.025) | FAIL | matches; source remains frozen | cuda / 928b485ffbe6 / de1faf2ca5cd | [source-bound receipt index](technique-inventory.json) |
 | gaussian1d_acquisition | [K3P](../../configs/forge/configurations/k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c.json) | MoGParticlePrior (sigma=0.025) | FAIL | matches; source remains frozen | cuda / 928b485ffbe6 / 942ae9802bd8 | [source-bound receipt index](technique-inventory.json) |
 | gaussian1d_acquisition | [K3P without A2](../../configs/forge/ideas/k3p-a2-off-native-diagnostic.json) | MoGParticlePrior (sigma=0.025) | FAIL | matches; source remains frozen | cuda / 928b485ffbe6 / e17da7e5ab34 | [source-bound receipt index](technique-inventory.json) |
 | gaussian1d_acquisition | [K3P without critic anchor](../../configs/forge/ideas/forge-onboarding-anchor-ablation.json) | MoGParticlePrior (sigma=0.025) | FAIL | matches; source remains frozen | cuda / 928b485ffbe6 / 7b8167f5367d | [source-bound receipt index](technique-inventory.json) |
@@ -1231,8 +1231,8 @@ Recorded Forge task outcomes (exact saved configuration/source/runtime):
 
 | Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| ring16_acquisition | [BCAP with K3P](../../configs/forge/configurations/bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212.json) | MoGParticlePrior (sigma=0.025) | FAIL | matches; source remains frozen | cuda / 928b485ffbe6 / de1faf2ca5cd | [source-bound receipt index](technique-inventory.json) |
 | ring16_acquisition | [BCAP](../../configs/forge/configurations/bcap-pure--5ea5bdbb2d71403dd316e201a51fb2b2b9c1868a8e053156b21b7cecb344d4be.json) | MoGParticlePrior (sigma=0.025) | FAIL | matches; source remains frozen | cuda / af75a3fea19a / 38c2e05b80cc | [source-bound receipt index](technique-inventory.json) |
+| ring16_acquisition | [BCAP with K3P](../../configs/forge/configurations/bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212.json) | MoGParticlePrior (sigma=0.025) | FAIL | matches; source remains frozen | cuda / 928b485ffbe6 / de1faf2ca5cd | [source-bound receipt index](technique-inventory.json) |
 | ring16_acquisition | [K3P](../../configs/forge/configurations/k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c.json) | MoGParticlePrior (sigma=0.025) | PASS | matches; source remains frozen | cuda / 928b485ffbe6 / 942ae9802bd8 | [source-bound receipt index](technique-inventory.json) |
 | ring16_acquisition | [K3P without A2](../../configs/forge/ideas/k3p-a2-off-native-diagnostic.json) | MoGParticlePrior (sigma=0.025) | FAIL | matches; source remains frozen | cuda / 928b485ffbe6 / e17da7e5ab34 | [source-bound receipt index](technique-inventory.json) |
 | ring16_acquisition | [K3P without critic anchor](../../configs/forge/ideas/forge-onboarding-anchor-ablation.json) | MoGParticlePrior (sigma=0.025) | FAIL | matches; source remains frozen | cuda / 928b485ffbe6 / 7b8167f5367d | [source-bound receipt index](technique-inventory.json) |
@@ -1422,8 +1422,8 @@ Recorded Forge task outcomes (exact saved configuration/source/runtime):
 
 | Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| two_pole | [BCAP with K3P](../../configs/forge/configurations/bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / 928b485ffbe6 / de1faf2ca5cd | [source-bound receipt index](technique-inventory.json) |
 | two_pole | [BCAP](../../configs/forge/configurations/bcap-pure--5ea5bdbb2d71403dd316e201a51fb2b2b9c1868a8e053156b21b7cecb344d4be.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / af75a3fea19a / 38c2e05b80cc | [source-bound receipt index](technique-inventory.json) |
+| two_pole | [BCAP with K3P](../../configs/forge/configurations/bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / 928b485ffbe6 / de1faf2ca5cd | [source-bound receipt index](technique-inventory.json) |
 | two_pole | [K3P](../../configs/forge/configurations/k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / 928b485ffbe6 / 942ae9802bd8 | [source-bound receipt index](technique-inventory.json) |
 | two_pole | [K3P without A2](../../configs/forge/ideas/k3p-a2-off-native-diagnostic.json) | ParticlePrior (sigma=0) | FAIL | matches; source remains frozen | cuda / 928b485ffbe6 / e17da7e5ab34 | [source-bound receipt index](technique-inventory.json) |
 | two_pole | [K3P without critic anchor](../../configs/forge/ideas/forge-onboarding-anchor-ablation.json) | ParticlePrior (sigma=0) | FAIL | matches; source remains frozen | cuda / 928b485ffbe6 / 7b8167f5367d | [source-bound receipt index](technique-inventory.json) |
@@ -1521,8 +1521,8 @@ Recorded Forge task outcomes (exact saved configuration/source/runtime):
 
 | Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| unused_token_hold | [BCAP with K3P](../../configs/forge/configurations/bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / 928b485ffbe6 / de1faf2ca5cd | [source-bound receipt index](technique-inventory.json) |
 | unused_token_hold | [BCAP](../../configs/forge/configurations/bcap-pure--5ea5bdbb2d71403dd316e201a51fb2b2b9c1868a8e053156b21b7cecb344d4be.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / af75a3fea19a / 38c2e05b80cc | [source-bound receipt index](technique-inventory.json) |
+| unused_token_hold | [BCAP with K3P](../../configs/forge/configurations/bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / 928b485ffbe6 / de1faf2ca5cd | [source-bound receipt index](technique-inventory.json) |
 | unused_token_hold | [K3P](../../configs/forge/configurations/k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / 928b485ffbe6 / 942ae9802bd8 | [source-bound receipt index](technique-inventory.json) |
 | unused_token_hold | [K3P without A2](../../configs/forge/ideas/k3p-a2-off-native-diagnostic.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / 928b485ffbe6 / e17da7e5ab34 | [source-bound receipt index](technique-inventory.json) |
 | unused_token_hold | [K3P without critic anchor](../../configs/forge/ideas/forge-onboarding-anchor-ablation.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / 928b485ffbe6 / 7b8167f5367d | [source-bound receipt index](technique-inventory.json) |
@@ -1763,4 +1763,4 @@ The wider question review also links standalone experiments outside the Forge ti
 
 Declaration input digest: `60fd23e02342fd54cdc12b4754e2f29640cba3bbaadeecc8a26866c28a4b6f1a`. The JSON form includes the individual task and view file hashes.
 
-Published artifact input digest: `e8db591421f445c6ec47095251e912ab8306e48e273e61f3cb826279613bdd9d`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.
+Published artifact input digest: `da2a989a13738a5f61954698a7059f69101aeb699d891b06c524df23a9c5b543`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.
