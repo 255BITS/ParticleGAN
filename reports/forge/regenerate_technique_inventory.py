@@ -1766,12 +1766,31 @@ def refresh_publication(root=REPOSITORY_ROOT, *, view_id="discriminator_stabilit
     regroup = registry_hash != result["provenance"].get("trainer_family_registry_sha256")
     if not regroup and selection_hash is not None and file_hash(root / CURRENT_SELECTION) != selection_hash:
         raise ValueError("family selection changed; use ordinary regeneration")
-    registered = set()
+    registered, snapshot_hashes = set(), set()
     for entry in manifest["cohorts"]:
-        _, rows = _snapshot(root, entry, manifest)
+        snapshot, rows = _snapshot(root, entry, manifest)
         registered.update(scientific_row_hash(row) for row in rows.values())
-    for key in ("rows", "configuration_rows", "evidence_rows"):
+        snapshot_hashes.update(scientific_row_hash(row) for row in snapshot["rows"])
+    for key in ("rows", "evidence_rows"):
         if any(scientific_row_hash(row) not in registered for row in result.get(key, [])):
+            raise ValueError("current publication contains an unregistered scientific row")
+    # Legacy publication rendered zero-credit live declaration alternatives.
+    # Retain them only when every scientific field matches an immutable prior
+    # Git publication. They cannot supply measurement or become selected rows.
+    import importlib.util
+    roster_path = Path(__file__).parent / "legacy_display_roster.py"
+    legacy_hashes, legacy_alternative = set(), lambda row: False
+    if roster_path.is_file():
+        spec = importlib.util.spec_from_file_location("forge_legacy_display_roster", roster_path)
+        roster = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(roster)
+        legacy_hashes = roster.verified_hashes(root, result, snapshot_hashes)
+        legacy_alternative = roster.unmeasured_alternative
+    elif (root / "reports/forge/technique-evidence/legacy-display-roster.json").is_file():
+        raise ValueError("legacy display roster verifier is missing")
+    for row in result.get("configuration_rows", []):
+        identity = scientific_row_hash(row)
+        if identity not in registered and not (identity in snapshot_hashes | legacy_hashes and legacy_alternative(row)):
             raise ValueError("current publication contains an unregistered scientific row")
     archived = set()
     for _, _, _, rows in _archived_reports(root, manifest):
