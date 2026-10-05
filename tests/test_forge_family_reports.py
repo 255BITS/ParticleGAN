@@ -90,7 +90,7 @@ def test_unrun_family_defaults_to_zero_with_full_denominators(report):
     assert [score(cohort["tiers"][tier]) for tier in ("1", "2", "3")] == ["0(*)/2", "0(*)/2", "0(*)/1"]
 
 
-def test_changed_gate_preserves_recorded_failure_and_marks_coverage_incomplete(report):
+def test_changed_gate_preserves_recorded_failure_without_unrun_marker(report):
     root, publication = report
     path = root / "configs/forge/tasks/failed.json"
     declaration = read_json(path)
@@ -100,12 +100,76 @@ def test_changed_gate_preserves_recorded_failure_and_marks_coverage_incomplete(r
     assert cohort["tasks"]["failed"]["status"] == "FAIL"
     assert cohort["tasks"]["failed"]["current_contract"] == "CHANGED"
     assert cohort["tasks"]["failed"]["changed_contract_fields"] == ["evaluation (gates or sampling law)"]
-    assert "Current coverage is stale: changed evaluation" in cohort["tasks"]["failed"]["coverage_reason"]
-    assert score(cohort["views"][0]["tiers"]["2"]) == "0(*)/1"
+    assert "Test definition changed since this run: evaluation" in cohort["tasks"]["failed"]["coverage_reason"]
+    assert cohort["tasks"]["failed"]["execution_recorded"] is True
+    assert score(cohort["views"][0]["tiers"]["2"]) == "0/1"
     text = next(iter(generated_pages(root, publication).values()))
     assert "| score | 0.25 | >= 0.5 | FAIL |" in text
     assert "| score | >= 0.75 |" in text
     assert "All 24 declared observations" in text and "5 consecutive passing terminal" in text
+
+
+@pytest.mark.parametrize("status", ["PASS", "FAIL"])
+def test_missing_recorded_definition_does_not_hide_an_executed_result(report, status):
+    root, publication = report
+    selected = publication["rows"][0]
+    selected["tasks"][1]["status"] = status
+    selected["bindings"]["task_contracts"].pop("failed")
+    cohort = generate(report)
+    result = cohort["tasks"]["failed"]
+    assert result["current_contract"] == "unbound"
+    assert result["execution_recorded"] is True
+    assert score(cohort["views"][0]["tiers"]["2"]) == ("1/1" if status == "PASS" else "0/1")
+    assert "Recorded test definition unavailable" in result["coverage_reason"]
+
+
+@pytest.mark.parametrize("status,raw_status", [("ERROR", "error"), ("INVALID", "completed"),
+                                               ("INCOMPLETE", "timeout"), ("INCOMPLETE", "cancelled")])
+def test_attempted_errors_show_cause_attempt_and_cost_without_pass_credit(report, status, raw_status):
+    root, publication = report
+    publication["rows"][0]["tasks"][1]["status"] = status
+    path = root / "reports/forge/technique-receipts/attempt-one.json"
+    receipt = read_json(path)
+    receipt["task_results"][0].update(gate_status=status, raw_status=raw_status,
+        reason="specific failure: missing evaluator certificate" if status == "INVALID" else "specific worker failure",
+        cost={"execution_seconds": 12.5, "wall_seconds": 0, "charged_task": "shared"})
+    atomic_json(path, receipt)
+    cohort = generate(report)
+    assert cohort["tasks"]["failed"]["execution_recorded"] is True
+    assert cohort["tasks"]["failed"]["attempt_id"] == "attempt-one"
+    assert score(cohort["views"][0]["tiers"]["2"]) == "0/1"
+    assert cohort["views"][0]["tiers"]["2"]["counts"] == {status: 1}
+    text = next(iter(generated_pages(root, publication).values()))
+    expected_reason = "specific failure: missing evaluator certificate" if status == "INVALID" else "specific worker failure"
+    assert expected_reason in text
+    assert "Attempt: `attempt-one`; raw outcome: " + raw_status in text
+    assert "Recorded execution seconds: 12.5; charged wall seconds: 0" in text
+    assert "charged once to shared" in text
+    assert "Compact metrics and receipt provenance" in text
+
+
+@pytest.mark.parametrize("status", ["UNKNOWN", "NOT_RUN", "BLOCKED", "INVALID", "INCOMPLETE", "ERROR"])
+def test_no_task_execution_evidence_retains_marker_even_when_cohort_has_an_attempt(report, status):
+    root, publication = report
+    publication["rows"][0]["tasks"][2]["status"] = status
+    cohort = generate(report)
+    assert cohort["tasks"]["missing"]["execution_recorded"] is False
+    assert cohort["tasks"]["missing"]["attempt_id"] is None
+    assert score(cohort["views"][0]["tiers"]["3"]) == "0(*)/1"
+
+
+def test_worker_launch_failure_with_zero_execution_retains_unrun_marker(report):
+    root, publication = report
+    publication["rows"][0]["tasks"][1]["status"] = "INCOMPLETE"
+    path = root / "reports/forge/technique-receipts/attempt-one.json"
+    receipt = read_json(path)
+    receipt["task_results"][0].update(raw_status="error", reason="worker launch failed",
+                                     cost={"execution_seconds": 0, "wall_seconds": 0})
+    atomic_json(path, receipt)
+    cohort = generate(report)
+    assert cohort["tasks"]["failed"]["execution_recorded"] is False
+    assert score(cohort["views"][0]["tiers"]["2"]) == "0(*)/1"
+    assert "worker launch failed" in next(iter(generated_pages(root, publication).values()))
 
 
 @pytest.mark.parametrize("field", ["candidate_id", "candidate_revision", "source_digest"])
@@ -257,23 +321,41 @@ def test_current_clock_measurement_retains_original_evidence_alongside_contract_
             assert cohort["tiers"]["1"]["incomplete"] is True
             assert clock["status"] == "BLOCKED"
             continue
-        # A later scorer binding leaves the old recorded grades visible but
-        # cannot claim complete coverage of the changed word task contract.
-        word = cohort["tasks"]["five_word_joint_acquisition"]
-        assert cohort["tiers"]["1"]["incomplete"] is (word["current_contract"] != "matches")
+        # A later scorer binding does not make an executed word test unrun;
+        # its recorded grade still supplies no new qualification.
+        assert cohort["tiers"]["1"]["incomplete"] is False
         assert sum(cohort["tiers"]["1"]["counts"].values()) == 22
         assert clock["status"] == "FAIL" and clock["current_contract"] == "matches"
         assert cohort["tasks"]["clockfree_audit"]["status"] == "UNKNOWN"
         assert cohort["tasks"]["clockfree_audit"]["current_contract"] == "unbound"
         assert recorded[cohort["row_index"]]["qualified_tier"] == 0
     bcap = cohorts["bcap"]
-    assert score(bcap["tiers"]["1"]) == ("19(*)/22" if bcap["tiers"]["1"]["incomplete"] else "19/22")
+    assert score(bcap["tiers"]["1"]) == "19/22"
     clock_view = next(view for view in bcap["views"] if view["id"] == "clockfree_continuous")
     assert score(clock_view["tiers"]["1"]) == "3/4"
     clock = bcap["tasks"]["clockfree_audit_measurement_v1"]
     assert clock["clock_audit"]["comparisons"]["step_label"]["digest_equal"] is False
     assert clock["clock_audit"]["comparisons"]["horizon"]["digest_equal"] is False
     assert clock["training_media"][0]["recorded_grade"] == "FAIL"
+
+
+def test_all_current_non_policy_families_have_executed_tier1_without_new_qualification():
+    root = Path(__file__).resolve().parents[1]
+    publication = read_json(root / "reports/forge/technique-inventory.json")
+    rows = deepcopy(publication["rows"])
+    progress = build_progress(root, publication)
+    ordinary = [family for family in progress["families"] if family["id"] not in {"atlas", "e22"}]
+    assert len(ordinary) == 10
+    for family in ordinary:
+        for cohort in family["cohorts"]:
+            assert cohort["tiers"]["1"]["incomplete"] is False
+            assert "(*)" not in score(cohort["tiers"]["1"])
+            assert set(cohort["tiers"]["1"]["counts"]) <= {"PASS", "FAIL"}
+            assert rows[cohort["row_index"]]["qualified_tier"] == 0
+    publication["family_progress"] = progress
+    text = render_leaderboard(root, publication, root / "reports/forge/technique-inventory.md")
+    assert "Atlas/E22 retain (*) for blocked, unrun tests" in text
+    assert publication["rows"] == rows
 
 
 def test_legacy_gan_pages_preserve_original_whole_rows_and_do_not_enter_current_totals():

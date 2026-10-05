@@ -166,7 +166,8 @@ class AtlasEvidenceNavigationTests(unittest.TestCase):
         self.assertEqual(nav, original)
         self.assertNotIn("passed", nav)
     def test_navigation_does_not_change_scientific_counts(self):
-        tasks = [{"task_id": "grid100", "status": "BLOCKED", "current_contract": "matches"}]
+        tasks = [{"task_id": "grid100", "status": "BLOCKED", "current_contract": "matches",
+                  "execution_recorded": False}]
         retained = deepcopy(tasks)
         count = deepcopy(self.ns["_count"](tasks))
         data = fixtures(); before = deepcopy(data)

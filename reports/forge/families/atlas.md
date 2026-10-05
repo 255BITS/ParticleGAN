@@ -156,7 +156,7 @@ Separate cohort coverage (excluded from family totals):
 
 [Frozen separate-cohort numerical evidence](../tier1-completion/scoped-evidence.json); source commit `928b485ffbe6e17d79b41d307ae8b6275489b37a`; exact scoped cohort `df620730e3d310e590a2841155c9a78fb3cacbb57a97be2e4f9a3799ff0e243c` (runtime SHA256 `957e45749c6edd39d55ad206e3911d627884a6e8d49bfb3d3b803093cbf7eaf7`). These cells give no parent-cohort credit.
 
-\* indicates incomplete results, including changed or unbound current contracts.
+(*) means at least one required experiment has no recorded execution, including preflight blockers. PASS and FAIL both count as executed. Attempted errors retain their status and cause; test-definition compatibility is shown separately and does not add (*).
 
 <a name="cohort-cuda-0d83d78027c5-tier-1"></a>
 
@@ -164,15 +164,15 @@ Separate cohort coverage (excluded from family totals):
 
 Shared experiments appear once in this list; the family numerator/denominator count their view requirements.
 
-| Experiment | Required by | Recorded result | Current contract |
+| Experiment | Required by | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [ae_gan_hold](atlas.md#cohort-cuda-0d83d78027c5-experiment-ae_gan_hold) | [adaptation](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-1), [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1), [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1), [formulation_comparison](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-1), [host_profile_transfer](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-1), [quality_coverage](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-1) | BLOCKED | matches |
-| [clockfree_audit_measurement_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-clockfree_audit_measurement_v1) | [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1) | BLOCKED | matches |
-| [five_word_joint_acquisition](atlas.md#cohort-cuda-0d83d78027c5-experiment-five_word_joint_acquisition) | [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | BLOCKED | CHANGED |
-| [gaussian1d_acquisition](atlas.md#cohort-cuda-0d83d78027c5-experiment-gaussian1d_acquisition) | [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | BLOCKED | matches |
-| [ring16_acquisition](atlas.md#cohort-cuda-0d83d78027c5-experiment-ring16_acquisition) | [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | BLOCKED | matches |
-| [two_pole](atlas.md#cohort-cuda-0d83d78027c5-experiment-two_pole) | [adaptation](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-1), [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1), [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1), [formulation_comparison](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-1), [host_profile_transfer](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-1), [quality_coverage](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-1) | BLOCKED | matches |
-| [unused_token_hold](atlas.md#cohort-cuda-0d83d78027c5-experiment-unused_token_hold) | [adaptation](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-1), [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1), [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1), [formulation_comparison](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-1), [host_profile_transfer](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-1), [quality_coverage](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-1) | BLOCKED | matches |
+| [ae_gan_hold](atlas.md#cohort-cuda-0d83d78027c5-experiment-ae_gan_hold) | [adaptation](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-1), [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1), [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1), [formulation_comparison](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-1), [host_profile_transfer](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-1), [quality_coverage](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-1) | BLOCKED | matches recorded run |
+| [clockfree_audit_measurement_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-clockfree_audit_measurement_v1) | [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1) | BLOCKED | matches recorded run |
+| [five_word_joint_acquisition](atlas.md#cohort-cuda-0d83d78027c5-experiment-five_word_joint_acquisition) | [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | BLOCKED | changed since run |
+| [gaussian1d_acquisition](atlas.md#cohort-cuda-0d83d78027c5-experiment-gaussian1d_acquisition) | [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | BLOCKED | matches recorded run |
+| [ring16_acquisition](atlas.md#cohort-cuda-0d83d78027c5-experiment-ring16_acquisition) | [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | BLOCKED | matches recorded run |
+| [two_pole](atlas.md#cohort-cuda-0d83d78027c5-experiment-two_pole) | [adaptation](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-1), [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1), [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1), [formulation_comparison](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-1), [host_profile_transfer](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-1), [quality_coverage](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-1) | BLOCKED | matches recorded run |
+| [unused_token_hold](atlas.md#cohort-cuda-0d83d78027c5-experiment-unused_token_hold) | [adaptation](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-1), [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1), [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1), [formulation_comparison](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-1), [host_profile_transfer](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-1), [quality_coverage](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-1) | BLOCKED | matches recorded run |
 
 <a name="cohort-cuda-0d83d78027c5-tier-2"></a>
 
@@ -180,27 +180,27 @@ Shared experiments appear once in this list; the family numerator/denominator co
 
 Shared experiments appear once in this list; the family numerator/denominator count their view requirements.
 
-| Experiment | Required by | Recorded result | Current contract |
+| Experiment | Required by | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [cover_leftover](atlas.md#cohort-cuda-0d83d78027c5-experiment-cover_leftover) | [adaptation](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | BLOCKED | matches |
-| [grid100](atlas.md#cohort-cuda-0d83d78027c5-experiment-grid100) | [adaptation](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | BLOCKED | matches |
-| [img_bars4](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_bars4) | [adaptation](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | BLOCKED | matches |
-| [img_blobs4](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_blobs4) | [adaptation](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | BLOCKED | matches |
-| [img_intensity2](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_intensity2) | [adaptation](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | BLOCKED | matches |
-| [img_stripes2](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_stripes2) | [adaptation](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | BLOCKED | matches |
-| [mid_scale_identity](atlas.md#cohort-cuda-0d83d78027c5-experiment-mid_scale_identity) | [adaptation](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | BLOCKED | matches |
-| [mode_hold](atlas.md#cohort-cuda-0d83d78027c5-experiment-mode_hold) | [adaptation](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | BLOCKED | matches |
-| [residual_student](atlas.md#cohort-cuda-0d83d78027c5-experiment-residual_student) | [adaptation](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | BLOCKED | matches |
-| [rotated100](atlas.md#cohort-cuda-0d83d78027c5-experiment-rotated100) | [adaptation](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | BLOCKED | matches |
-| [staggered100](atlas.md#cohort-cuda-0d83d78027c5-experiment-staggered100) | [adaptation](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | BLOCKED | matches |
-| [trajectory](atlas.md#cohort-cuda-0d83d78027c5-experiment-trajectory) | [adaptation](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | BLOCKED | matches |
-| [unipolar](atlas.md#cohort-cuda-0d83d78027c5-experiment-unipolar) | [adaptation](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | BLOCKED | matches |
-| [vector_anisotropic](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_anisotropic) | [adaptation](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | BLOCKED | matches |
-| [vector_overlap](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_overlap) | [adaptation](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | BLOCKED | matches |
-| [vector_spiral](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_spiral) | [adaptation](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | BLOCKED | matches |
-| [vector_two_broad](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_two_broad) | [adaptation](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | BLOCKED | matches |
-| [vector_unequal_mass](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_mass) | [adaptation](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | BLOCKED | matches |
-| [vector_unequal_width](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_width) | [adaptation](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | BLOCKED | matches |
+| [cover_leftover](atlas.md#cohort-cuda-0d83d78027c5-experiment-cover_leftover) | [adaptation](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | BLOCKED | matches recorded run |
+| [grid100](atlas.md#cohort-cuda-0d83d78027c5-experiment-grid100) | [adaptation](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | BLOCKED | matches recorded run |
+| [img_bars4](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_bars4) | [adaptation](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | BLOCKED | matches recorded run |
+| [img_blobs4](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_blobs4) | [adaptation](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | BLOCKED | matches recorded run |
+| [img_intensity2](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_intensity2) | [adaptation](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | BLOCKED | matches recorded run |
+| [img_stripes2](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_stripes2) | [adaptation](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | BLOCKED | matches recorded run |
+| [mid_scale_identity](atlas.md#cohort-cuda-0d83d78027c5-experiment-mid_scale_identity) | [adaptation](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | BLOCKED | matches recorded run |
+| [mode_hold](atlas.md#cohort-cuda-0d83d78027c5-experiment-mode_hold) | [adaptation](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | BLOCKED | matches recorded run |
+| [residual_student](atlas.md#cohort-cuda-0d83d78027c5-experiment-residual_student) | [adaptation](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | BLOCKED | matches recorded run |
+| [rotated100](atlas.md#cohort-cuda-0d83d78027c5-experiment-rotated100) | [adaptation](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | BLOCKED | matches recorded run |
+| [staggered100](atlas.md#cohort-cuda-0d83d78027c5-experiment-staggered100) | [adaptation](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | BLOCKED | matches recorded run |
+| [trajectory](atlas.md#cohort-cuda-0d83d78027c5-experiment-trajectory) | [adaptation](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | BLOCKED | matches recorded run |
+| [unipolar](atlas.md#cohort-cuda-0d83d78027c5-experiment-unipolar) | [adaptation](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | BLOCKED | matches recorded run |
+| [vector_anisotropic](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_anisotropic) | [adaptation](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | BLOCKED | matches recorded run |
+| [vector_overlap](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_overlap) | [adaptation](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | BLOCKED | matches recorded run |
+| [vector_spiral](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_spiral) | [adaptation](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | BLOCKED | matches recorded run |
+| [vector_two_broad](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_two_broad) | [adaptation](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | BLOCKED | matches recorded run |
+| [vector_unequal_mass](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_mass) | [adaptation](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | BLOCKED | matches recorded run |
+| [vector_unequal_width](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_width) | [adaptation](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | BLOCKED | matches recorded run |
 
 <a name="cohort-cuda-0d83d78027c5-tier-3"></a>
 
@@ -208,15 +208,15 @@ Shared experiments appear once in this list; the family numerator/denominator co
 
 Shared experiments appear once in this list; the family numerator/denominator count their view requirements.
 
-| Experiment | Required by | Recorded result | Current contract |
+| Experiment | Required by | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [clockfree_audit](atlas.md#cohort-cuda-0d83d78027c5-experiment-clockfree_audit) | [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3) | UNKNOWN | unbound |
-| [grid100_14k](atlas.md#cohort-cuda-0d83d78027c5-experiment-grid100_14k) | [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3) | UNKNOWN | unbound |
-| [ring_extension](atlas.md#cohort-cuda-0d83d78027c5-experiment-ring_extension) | [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3), [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-3), [formulation_comparison](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-3), [host_profile_transfer](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-3) | BLOCKED | matches |
-| [ring_hold](atlas.md#cohort-cuda-0d83d78027c5-experiment-ring_hold) | [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3), [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-3), [formulation_comparison](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-3), [host_profile_transfer](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-3) | BLOCKED | matches |
-| [rotated100_14k](atlas.md#cohort-cuda-0d83d78027c5-experiment-rotated100_14k) | [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3) | UNKNOWN | unbound |
-| [staggered100_14k](atlas.md#cohort-cuda-0d83d78027c5-experiment-staggered100_14k) | [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3) | UNKNOWN | unbound |
-| [target_shift_recovery](atlas.md#cohort-cuda-0d83d78027c5-experiment-target_shift_recovery) | [adaptation](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-3), [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3) | UNKNOWN | unbound |
+| [clockfree_audit](atlas.md#cohort-cuda-0d83d78027c5-experiment-clockfree_audit) | [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3) | UNKNOWN | recorded definition unavailable |
+| [grid100_14k](atlas.md#cohort-cuda-0d83d78027c5-experiment-grid100_14k) | [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3) | UNKNOWN | recorded definition unavailable |
+| [ring_extension](atlas.md#cohort-cuda-0d83d78027c5-experiment-ring_extension) | [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3), [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-3), [formulation_comparison](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-3), [host_profile_transfer](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-3) | BLOCKED | matches recorded run |
+| [ring_hold](atlas.md#cohort-cuda-0d83d78027c5-experiment-ring_hold) | [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3), [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-3), [formulation_comparison](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-3), [host_profile_transfer](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-3) | BLOCKED | matches recorded run |
+| [rotated100_14k](atlas.md#cohort-cuda-0d83d78027c5-experiment-rotated100_14k) | [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3) | UNKNOWN | recorded definition unavailable |
+| [staggered100_14k](atlas.md#cohort-cuda-0d83d78027c5-experiment-staggered100_14k) | [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3) | UNKNOWN | recorded definition unavailable |
+| [target_shift_recovery](atlas.md#cohort-cuda-0d83d78027c5-experiment-target_shift_recovery) | [adaptation](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-3), [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3) | UNKNOWN | recorded definition unavailable |
 
 <a name="cohort-cuda-0d83d78027c5-adaptation"></a>
 
@@ -232,45 +232,45 @@ Calibration: **provisional**. Phase D historical calibration remains required
 
 ### Tier 1
 
-| Experiment | Role | Recorded result | Current contract |
+| Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [two_pole](atlas.md#cohort-cuda-0d83d78027c5-experiment-two_pole) | required | BLOCKED | matches |
-| [unused_token_hold](atlas.md#cohort-cuda-0d83d78027c5-experiment-unused_token_hold) | required | BLOCKED | matches |
-| [ae_gan_hold](atlas.md#cohort-cuda-0d83d78027c5-experiment-ae_gan_hold) | required | BLOCKED | matches |
+| [two_pole](atlas.md#cohort-cuda-0d83d78027c5-experiment-two_pole) | required | BLOCKED | matches recorded run |
+| [unused_token_hold](atlas.md#cohort-cuda-0d83d78027c5-experiment-unused_token_hold) | required | BLOCKED | matches recorded run |
+| [ae_gan_hold](atlas.md#cohort-cuda-0d83d78027c5-experiment-ae_gan_hold) | required | BLOCKED | matches recorded run |
 
 <a name="cohort-cuda-0d83d78027c5-adaptation-tier-2"></a>
 
 ### Tier 2
 
-| Experiment | Role | Recorded result | Current contract |
+| Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [trajectory](atlas.md#cohort-cuda-0d83d78027c5-experiment-trajectory) | required | BLOCKED | matches |
-| [residual_student](atlas.md#cohort-cuda-0d83d78027c5-experiment-residual_student) | required | BLOCKED | matches |
-| [unipolar](atlas.md#cohort-cuda-0d83d78027c5-experiment-unipolar) | required | BLOCKED | matches |
-| [cover_leftover](atlas.md#cohort-cuda-0d83d78027c5-experiment-cover_leftover) | required | BLOCKED | matches |
-| [mid_scale_identity](atlas.md#cohort-cuda-0d83d78027c5-experiment-mid_scale_identity) | required | BLOCKED | matches |
-| [mode_hold](atlas.md#cohort-cuda-0d83d78027c5-experiment-mode_hold) | required | BLOCKED | matches |
-| [vector_two_broad](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_two_broad) | required | BLOCKED | matches |
-| [vector_unequal_mass](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_mass) | required | BLOCKED | matches |
-| [vector_unequal_width](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_width) | required | BLOCKED | matches |
-| [vector_anisotropic](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_anisotropic) | required | BLOCKED | matches |
-| [vector_overlap](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_overlap) | required | BLOCKED | matches |
-| [vector_spiral](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_spiral) | required | BLOCKED | matches |
-| [img_stripes2](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_stripes2) | required | BLOCKED | matches |
-| [img_bars4](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_bars4) | required | BLOCKED | matches |
-| [img_blobs4](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_blobs4) | required | BLOCKED | matches |
-| [img_intensity2](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_intensity2) | required | BLOCKED | matches |
-| [grid100](atlas.md#cohort-cuda-0d83d78027c5-experiment-grid100) | required | BLOCKED | matches |
-| [rotated100](atlas.md#cohort-cuda-0d83d78027c5-experiment-rotated100) | required | BLOCKED | matches |
-| [staggered100](atlas.md#cohort-cuda-0d83d78027c5-experiment-staggered100) | required | BLOCKED | matches |
+| [trajectory](atlas.md#cohort-cuda-0d83d78027c5-experiment-trajectory) | required | BLOCKED | matches recorded run |
+| [residual_student](atlas.md#cohort-cuda-0d83d78027c5-experiment-residual_student) | required | BLOCKED | matches recorded run |
+| [unipolar](atlas.md#cohort-cuda-0d83d78027c5-experiment-unipolar) | required | BLOCKED | matches recorded run |
+| [cover_leftover](atlas.md#cohort-cuda-0d83d78027c5-experiment-cover_leftover) | required | BLOCKED | matches recorded run |
+| [mid_scale_identity](atlas.md#cohort-cuda-0d83d78027c5-experiment-mid_scale_identity) | required | BLOCKED | matches recorded run |
+| [mode_hold](atlas.md#cohort-cuda-0d83d78027c5-experiment-mode_hold) | required | BLOCKED | matches recorded run |
+| [vector_two_broad](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_two_broad) | required | BLOCKED | matches recorded run |
+| [vector_unequal_mass](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_mass) | required | BLOCKED | matches recorded run |
+| [vector_unequal_width](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_width) | required | BLOCKED | matches recorded run |
+| [vector_anisotropic](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_anisotropic) | required | BLOCKED | matches recorded run |
+| [vector_overlap](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_overlap) | required | BLOCKED | matches recorded run |
+| [vector_spiral](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_spiral) | required | BLOCKED | matches recorded run |
+| [img_stripes2](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_stripes2) | required | BLOCKED | matches recorded run |
+| [img_bars4](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_bars4) | required | BLOCKED | matches recorded run |
+| [img_blobs4](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_blobs4) | required | BLOCKED | matches recorded run |
+| [img_intensity2](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_intensity2) | required | BLOCKED | matches recorded run |
+| [grid100](atlas.md#cohort-cuda-0d83d78027c5-experiment-grid100) | required | BLOCKED | matches recorded run |
+| [rotated100](atlas.md#cohort-cuda-0d83d78027c5-experiment-rotated100) | required | BLOCKED | matches recorded run |
+| [staggered100](atlas.md#cohort-cuda-0d83d78027c5-experiment-staggered100) | required | BLOCKED | matches recorded run |
 
 <a name="cohort-cuda-0d83d78027c5-adaptation-tier-3"></a>
 
 ### Tier 3
 
-| Experiment | Role | Recorded result | Current contract |
+| Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [target_shift_recovery](atlas.md#cohort-cuda-0d83d78027c5-experiment-target_shift_recovery) | required | UNKNOWN | unbound |
+| [target_shift_recovery](atlas.md#cohort-cuda-0d83d78027c5-experiment-target_shift_recovery) | required | UNKNOWN | recorded definition unavailable |
 
 <a name="cohort-cuda-0d83d78027c5-clockfree_continuous"></a>
 
@@ -293,52 +293,52 @@ Additional eligibility requirements:
 
 ### Tier 1
 
-| Experiment | Role | Recorded result | Current contract |
+| Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [two_pole](atlas.md#cohort-cuda-0d83d78027c5-experiment-two_pole) | required | BLOCKED | matches |
-| [unused_token_hold](atlas.md#cohort-cuda-0d83d78027c5-experiment-unused_token_hold) | required | BLOCKED | matches |
-| [ae_gan_hold](atlas.md#cohort-cuda-0d83d78027c5-experiment-ae_gan_hold) | required | BLOCKED | matches |
-| [clockfree_audit_measurement_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-clockfree_audit_measurement_v1) | required | BLOCKED | matches |
+| [two_pole](atlas.md#cohort-cuda-0d83d78027c5-experiment-two_pole) | required | BLOCKED | matches recorded run |
+| [unused_token_hold](atlas.md#cohort-cuda-0d83d78027c5-experiment-unused_token_hold) | required | BLOCKED | matches recorded run |
+| [ae_gan_hold](atlas.md#cohort-cuda-0d83d78027c5-experiment-ae_gan_hold) | required | BLOCKED | matches recorded run |
+| [clockfree_audit_measurement_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-clockfree_audit_measurement_v1) | required | BLOCKED | matches recorded run |
 
 <a name="cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2"></a>
 
 ### Tier 2
 
-| Experiment | Role | Recorded result | Current contract |
+| Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [trajectory](atlas.md#cohort-cuda-0d83d78027c5-experiment-trajectory) | required | BLOCKED | matches |
-| [residual_student](atlas.md#cohort-cuda-0d83d78027c5-experiment-residual_student) | required | BLOCKED | matches |
-| [unipolar](atlas.md#cohort-cuda-0d83d78027c5-experiment-unipolar) | required | BLOCKED | matches |
-| [cover_leftover](atlas.md#cohort-cuda-0d83d78027c5-experiment-cover_leftover) | required | BLOCKED | matches |
-| [mid_scale_identity](atlas.md#cohort-cuda-0d83d78027c5-experiment-mid_scale_identity) | required | BLOCKED | matches |
-| [mode_hold](atlas.md#cohort-cuda-0d83d78027c5-experiment-mode_hold) | required | BLOCKED | matches |
-| [vector_two_broad](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_two_broad) | required | BLOCKED | matches |
-| [vector_unequal_mass](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_mass) | required | BLOCKED | matches |
-| [vector_unequal_width](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_width) | required | BLOCKED | matches |
-| [vector_anisotropic](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_anisotropic) | required | BLOCKED | matches |
-| [vector_overlap](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_overlap) | required | BLOCKED | matches |
-| [vector_spiral](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_spiral) | required | BLOCKED | matches |
-| [img_stripes2](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_stripes2) | required | BLOCKED | matches |
-| [img_bars4](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_bars4) | required | BLOCKED | matches |
-| [img_blobs4](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_blobs4) | required | BLOCKED | matches |
-| [img_intensity2](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_intensity2) | required | BLOCKED | matches |
-| [grid100](atlas.md#cohort-cuda-0d83d78027c5-experiment-grid100) | required | BLOCKED | matches |
-| [rotated100](atlas.md#cohort-cuda-0d83d78027c5-experiment-rotated100) | required | BLOCKED | matches |
-| [staggered100](atlas.md#cohort-cuda-0d83d78027c5-experiment-staggered100) | required | BLOCKED | matches |
+| [trajectory](atlas.md#cohort-cuda-0d83d78027c5-experiment-trajectory) | required | BLOCKED | matches recorded run |
+| [residual_student](atlas.md#cohort-cuda-0d83d78027c5-experiment-residual_student) | required | BLOCKED | matches recorded run |
+| [unipolar](atlas.md#cohort-cuda-0d83d78027c5-experiment-unipolar) | required | BLOCKED | matches recorded run |
+| [cover_leftover](atlas.md#cohort-cuda-0d83d78027c5-experiment-cover_leftover) | required | BLOCKED | matches recorded run |
+| [mid_scale_identity](atlas.md#cohort-cuda-0d83d78027c5-experiment-mid_scale_identity) | required | BLOCKED | matches recorded run |
+| [mode_hold](atlas.md#cohort-cuda-0d83d78027c5-experiment-mode_hold) | required | BLOCKED | matches recorded run |
+| [vector_two_broad](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_two_broad) | required | BLOCKED | matches recorded run |
+| [vector_unequal_mass](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_mass) | required | BLOCKED | matches recorded run |
+| [vector_unequal_width](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_width) | required | BLOCKED | matches recorded run |
+| [vector_anisotropic](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_anisotropic) | required | BLOCKED | matches recorded run |
+| [vector_overlap](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_overlap) | required | BLOCKED | matches recorded run |
+| [vector_spiral](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_spiral) | required | BLOCKED | matches recorded run |
+| [img_stripes2](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_stripes2) | required | BLOCKED | matches recorded run |
+| [img_bars4](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_bars4) | required | BLOCKED | matches recorded run |
+| [img_blobs4](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_blobs4) | required | BLOCKED | matches recorded run |
+| [img_intensity2](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_intensity2) | required | BLOCKED | matches recorded run |
+| [grid100](atlas.md#cohort-cuda-0d83d78027c5-experiment-grid100) | required | BLOCKED | matches recorded run |
+| [rotated100](atlas.md#cohort-cuda-0d83d78027c5-experiment-rotated100) | required | BLOCKED | matches recorded run |
+| [staggered100](atlas.md#cohort-cuda-0d83d78027c5-experiment-staggered100) | required | BLOCKED | matches recorded run |
 
 <a name="cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3"></a>
 
 ### Tier 3
 
-| Experiment | Role | Recorded result | Current contract |
+| Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [clockfree_audit](atlas.md#cohort-cuda-0d83d78027c5-experiment-clockfree_audit) | required | UNKNOWN | unbound |
-| [ring_hold](atlas.md#cohort-cuda-0d83d78027c5-experiment-ring_hold) | required | BLOCKED | matches |
-| [ring_extension](atlas.md#cohort-cuda-0d83d78027c5-experiment-ring_extension) | required | BLOCKED | matches |
-| [grid100_14k](atlas.md#cohort-cuda-0d83d78027c5-experiment-grid100_14k) | required | UNKNOWN | unbound |
-| [rotated100_14k](atlas.md#cohort-cuda-0d83d78027c5-experiment-rotated100_14k) | required | UNKNOWN | unbound |
-| [staggered100_14k](atlas.md#cohort-cuda-0d83d78027c5-experiment-staggered100_14k) | required | UNKNOWN | unbound |
-| [target_shift_recovery](atlas.md#cohort-cuda-0d83d78027c5-experiment-target_shift_recovery) | required | UNKNOWN | unbound |
+| [clockfree_audit](atlas.md#cohort-cuda-0d83d78027c5-experiment-clockfree_audit) | required | UNKNOWN | recorded definition unavailable |
+| [ring_hold](atlas.md#cohort-cuda-0d83d78027c5-experiment-ring_hold) | required | BLOCKED | matches recorded run |
+| [ring_extension](atlas.md#cohort-cuda-0d83d78027c5-experiment-ring_extension) | required | BLOCKED | matches recorded run |
+| [grid100_14k](atlas.md#cohort-cuda-0d83d78027c5-experiment-grid100_14k) | required | UNKNOWN | recorded definition unavailable |
+| [rotated100_14k](atlas.md#cohort-cuda-0d83d78027c5-experiment-rotated100_14k) | required | UNKNOWN | recorded definition unavailable |
+| [staggered100_14k](atlas.md#cohort-cuda-0d83d78027c5-experiment-staggered100_14k) | required | UNKNOWN | recorded definition unavailable |
+| [target_shift_recovery](atlas.md#cohort-cuda-0d83d78027c5-experiment-target_shift_recovery) | required | UNKNOWN | recorded definition unavailable |
 
 <a name="cohort-cuda-0d83d78027c5-discriminator_stability"></a>
 
@@ -354,50 +354,50 @@ Calibration: **provisional**. Expanded six-task Tier 1 placement is provisional 
 
 ### Tier 1
 
-| Experiment | Role | Recorded result | Current contract |
+| Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [gaussian1d_acquisition](atlas.md#cohort-cuda-0d83d78027c5-experiment-gaussian1d_acquisition) | required | BLOCKED | matches |
-| [two_pole](atlas.md#cohort-cuda-0d83d78027c5-experiment-two_pole) | required | BLOCKED | matches |
-| [unused_token_hold](atlas.md#cohort-cuda-0d83d78027c5-experiment-unused_token_hold) | required | BLOCKED | matches |
-| [ae_gan_hold](atlas.md#cohort-cuda-0d83d78027c5-experiment-ae_gan_hold) | required | BLOCKED | matches |
-| [ring16_acquisition](atlas.md#cohort-cuda-0d83d78027c5-experiment-ring16_acquisition) | required | BLOCKED | matches |
-| [five_word_joint_acquisition](atlas.md#cohort-cuda-0d83d78027c5-experiment-five_word_joint_acquisition) | required | BLOCKED | CHANGED |
-| [clockfree_audit_measurement_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-clockfree_audit_measurement_v1) | diagnostic | BLOCKED | matches |
+| [gaussian1d_acquisition](atlas.md#cohort-cuda-0d83d78027c5-experiment-gaussian1d_acquisition) | required | BLOCKED | matches recorded run |
+| [two_pole](atlas.md#cohort-cuda-0d83d78027c5-experiment-two_pole) | required | BLOCKED | matches recorded run |
+| [unused_token_hold](atlas.md#cohort-cuda-0d83d78027c5-experiment-unused_token_hold) | required | BLOCKED | matches recorded run |
+| [ae_gan_hold](atlas.md#cohort-cuda-0d83d78027c5-experiment-ae_gan_hold) | required | BLOCKED | matches recorded run |
+| [ring16_acquisition](atlas.md#cohort-cuda-0d83d78027c5-experiment-ring16_acquisition) | required | BLOCKED | matches recorded run |
+| [five_word_joint_acquisition](atlas.md#cohort-cuda-0d83d78027c5-experiment-five_word_joint_acquisition) | required | BLOCKED | changed since run |
+| [clockfree_audit_measurement_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-clockfree_audit_measurement_v1) | diagnostic | BLOCKED | matches recorded run |
 
 <a name="cohort-cuda-0d83d78027c5-discriminator_stability-tier-2"></a>
 
 ### Tier 2
 
-| Experiment | Role | Recorded result | Current contract |
+| Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [trajectory](atlas.md#cohort-cuda-0d83d78027c5-experiment-trajectory) | required | BLOCKED | matches |
-| [residual_student](atlas.md#cohort-cuda-0d83d78027c5-experiment-residual_student) | required | BLOCKED | matches |
-| [unipolar](atlas.md#cohort-cuda-0d83d78027c5-experiment-unipolar) | required | BLOCKED | matches |
-| [cover_leftover](atlas.md#cohort-cuda-0d83d78027c5-experiment-cover_leftover) | required | BLOCKED | matches |
-| [mid_scale_identity](atlas.md#cohort-cuda-0d83d78027c5-experiment-mid_scale_identity) | required | BLOCKED | matches |
-| [mode_hold](atlas.md#cohort-cuda-0d83d78027c5-experiment-mode_hold) | required | BLOCKED | matches |
-| [vector_two_broad](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_two_broad) | required | BLOCKED | matches |
-| [vector_unequal_mass](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_mass) | required | BLOCKED | matches |
-| [vector_unequal_width](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_width) | required | BLOCKED | matches |
-| [vector_anisotropic](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_anisotropic) | required | BLOCKED | matches |
-| [vector_overlap](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_overlap) | required | BLOCKED | matches |
-| [vector_spiral](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_spiral) | required | BLOCKED | matches |
-| [img_stripes2](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_stripes2) | required | BLOCKED | matches |
-| [img_bars4](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_bars4) | required | BLOCKED | matches |
-| [img_blobs4](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_blobs4) | required | BLOCKED | matches |
-| [img_intensity2](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_intensity2) | required | BLOCKED | matches |
-| [grid100](atlas.md#cohort-cuda-0d83d78027c5-experiment-grid100) | required | BLOCKED | matches |
-| [rotated100](atlas.md#cohort-cuda-0d83d78027c5-experiment-rotated100) | required | BLOCKED | matches |
-| [staggered100](atlas.md#cohort-cuda-0d83d78027c5-experiment-staggered100) | required | BLOCKED | matches |
+| [trajectory](atlas.md#cohort-cuda-0d83d78027c5-experiment-trajectory) | required | BLOCKED | matches recorded run |
+| [residual_student](atlas.md#cohort-cuda-0d83d78027c5-experiment-residual_student) | required | BLOCKED | matches recorded run |
+| [unipolar](atlas.md#cohort-cuda-0d83d78027c5-experiment-unipolar) | required | BLOCKED | matches recorded run |
+| [cover_leftover](atlas.md#cohort-cuda-0d83d78027c5-experiment-cover_leftover) | required | BLOCKED | matches recorded run |
+| [mid_scale_identity](atlas.md#cohort-cuda-0d83d78027c5-experiment-mid_scale_identity) | required | BLOCKED | matches recorded run |
+| [mode_hold](atlas.md#cohort-cuda-0d83d78027c5-experiment-mode_hold) | required | BLOCKED | matches recorded run |
+| [vector_two_broad](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_two_broad) | required | BLOCKED | matches recorded run |
+| [vector_unequal_mass](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_mass) | required | BLOCKED | matches recorded run |
+| [vector_unequal_width](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_width) | required | BLOCKED | matches recorded run |
+| [vector_anisotropic](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_anisotropic) | required | BLOCKED | matches recorded run |
+| [vector_overlap](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_overlap) | required | BLOCKED | matches recorded run |
+| [vector_spiral](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_spiral) | required | BLOCKED | matches recorded run |
+| [img_stripes2](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_stripes2) | required | BLOCKED | matches recorded run |
+| [img_bars4](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_bars4) | required | BLOCKED | matches recorded run |
+| [img_blobs4](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_blobs4) | required | BLOCKED | matches recorded run |
+| [img_intensity2](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_intensity2) | required | BLOCKED | matches recorded run |
+| [grid100](atlas.md#cohort-cuda-0d83d78027c5-experiment-grid100) | required | BLOCKED | matches recorded run |
+| [rotated100](atlas.md#cohort-cuda-0d83d78027c5-experiment-rotated100) | required | BLOCKED | matches recorded run |
+| [staggered100](atlas.md#cohort-cuda-0d83d78027c5-experiment-staggered100) | required | BLOCKED | matches recorded run |
 
 <a name="cohort-cuda-0d83d78027c5-discriminator_stability-tier-3"></a>
 
 ### Tier 3
 
-| Experiment | Role | Recorded result | Current contract |
+| Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [ring_hold](atlas.md#cohort-cuda-0d83d78027c5-experiment-ring_hold) | required | BLOCKED | matches |
-| [ring_extension](atlas.md#cohort-cuda-0d83d78027c5-experiment-ring_extension) | required | BLOCKED | matches |
+| [ring_hold](atlas.md#cohort-cuda-0d83d78027c5-experiment-ring_hold) | required | BLOCKED | matches recorded run |
+| [ring_extension](atlas.md#cohort-cuda-0d83d78027c5-experiment-ring_extension) | required | BLOCKED | matches recorded run |
 
 <a name="cohort-cuda-0d83d78027c5-formulation_comparison"></a>
 
@@ -413,61 +413,61 @@ Calibration: **provisional**. Host-profile transfer and full current-cohort posi
 
 ### Tier 1
 
-| Experiment | Role | Recorded result | Current contract |
+| Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [two_pole](atlas.md#cohort-cuda-0d83d78027c5-experiment-two_pole) | required | BLOCKED | matches |
-| [unused_token_hold](atlas.md#cohort-cuda-0d83d78027c5-experiment-unused_token_hold) | required | BLOCKED | matches |
-| [ae_gan_hold](atlas.md#cohort-cuda-0d83d78027c5-experiment-ae_gan_hold) | required | BLOCKED | matches |
+| [two_pole](atlas.md#cohort-cuda-0d83d78027c5-experiment-two_pole) | required | BLOCKED | matches recorded run |
+| [unused_token_hold](atlas.md#cohort-cuda-0d83d78027c5-experiment-unused_token_hold) | required | BLOCKED | matches recorded run |
+| [ae_gan_hold](atlas.md#cohort-cuda-0d83d78027c5-experiment-ae_gan_hold) | required | BLOCKED | matches recorded run |
 
 <a name="cohort-cuda-0d83d78027c5-formulation_comparison-tier-2"></a>
 
 ### Tier 2
 
-| Experiment | Role | Recorded result | Current contract |
+| Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [trajectory](atlas.md#cohort-cuda-0d83d78027c5-experiment-trajectory) | required | BLOCKED | matches |
-| [residual_student](atlas.md#cohort-cuda-0d83d78027c5-experiment-residual_student) | required | BLOCKED | matches |
-| [unipolar](atlas.md#cohort-cuda-0d83d78027c5-experiment-unipolar) | required | BLOCKED | matches |
-| [cover_leftover](atlas.md#cohort-cuda-0d83d78027c5-experiment-cover_leftover) | required | BLOCKED | matches |
-| [mid_scale_identity](atlas.md#cohort-cuda-0d83d78027c5-experiment-mid_scale_identity) | required | BLOCKED | matches |
-| [mode_hold](atlas.md#cohort-cuda-0d83d78027c5-experiment-mode_hold) | required | BLOCKED | matches |
-| [vector_two_broad](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_two_broad) | required | BLOCKED | matches |
-| [vector_unequal_mass](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_mass) | required | BLOCKED | matches |
-| [vector_unequal_width](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_width) | required | BLOCKED | matches |
-| [vector_anisotropic](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_anisotropic) | required | BLOCKED | matches |
-| [vector_overlap](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_overlap) | required | BLOCKED | matches |
-| [vector_spiral](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_spiral) | required | BLOCKED | matches |
-| [img_stripes2](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_stripes2) | required | BLOCKED | matches |
-| [img_bars4](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_bars4) | required | BLOCKED | matches |
-| [img_blobs4](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_blobs4) | required | BLOCKED | matches |
-| [img_intensity2](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_intensity2) | required | BLOCKED | matches |
-| [grid100](atlas.md#cohort-cuda-0d83d78027c5-experiment-grid100) | required | BLOCKED | matches |
-| [rotated100](atlas.md#cohort-cuda-0d83d78027c5-experiment-rotated100) | required | BLOCKED | matches |
-| [staggered100](atlas.md#cohort-cuda-0d83d78027c5-experiment-staggered100) | required | BLOCKED | matches |
-| [img_intensity2_residual16](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_intensity2_residual16) | diagnostic | UNKNOWN | unbound |
-| [vector_two_broad_published](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_two_broad_published) | diagnostic | UNKNOWN | unbound |
-| [vector_unequal_mass_published](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_mass_published) | diagnostic | UNKNOWN | unbound |
-| [vector_unequal_width_published](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_width_published) | diagnostic | UNKNOWN | unbound |
-| [vector_anisotropic_published](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_anisotropic_published) | diagnostic | UNKNOWN | unbound |
-| [vector_overlap_published](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_overlap_published) | diagnostic | UNKNOWN | unbound |
-| [vector_spiral_published](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_spiral_published) | diagnostic | UNKNOWN | unbound |
-| [img_stripes2_residual16](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_stripes2_residual16) | diagnostic | UNKNOWN | unbound |
-| [img_bars4_residual16](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_bars4_residual16) | diagnostic | UNKNOWN | unbound |
-| [img_blobs4_residual16](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_blobs4_residual16) | diagnostic | UNKNOWN | unbound |
-| [grid100_affine_square_named_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-grid100_affine_square_named_v1) | diagnostic | UNKNOWN | unbound |
-| [rotated100_affine_square_named_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-rotated100_affine_square_named_v1) | diagnostic | UNKNOWN | unbound |
-| [staggered100_affine_square_named_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-staggered100_affine_square_named_v1) | diagnostic | UNKNOWN | unbound |
-| [grid100_affine_paired_laws_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-grid100_affine_paired_laws_v1) | diagnostic | UNKNOWN | unbound |
-| [grid100_release07_cloud_named_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-grid100_release07_cloud_named_v1) | diagnostic | UNKNOWN | unbound |
+| [trajectory](atlas.md#cohort-cuda-0d83d78027c5-experiment-trajectory) | required | BLOCKED | matches recorded run |
+| [residual_student](atlas.md#cohort-cuda-0d83d78027c5-experiment-residual_student) | required | BLOCKED | matches recorded run |
+| [unipolar](atlas.md#cohort-cuda-0d83d78027c5-experiment-unipolar) | required | BLOCKED | matches recorded run |
+| [cover_leftover](atlas.md#cohort-cuda-0d83d78027c5-experiment-cover_leftover) | required | BLOCKED | matches recorded run |
+| [mid_scale_identity](atlas.md#cohort-cuda-0d83d78027c5-experiment-mid_scale_identity) | required | BLOCKED | matches recorded run |
+| [mode_hold](atlas.md#cohort-cuda-0d83d78027c5-experiment-mode_hold) | required | BLOCKED | matches recorded run |
+| [vector_two_broad](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_two_broad) | required | BLOCKED | matches recorded run |
+| [vector_unequal_mass](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_mass) | required | BLOCKED | matches recorded run |
+| [vector_unequal_width](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_width) | required | BLOCKED | matches recorded run |
+| [vector_anisotropic](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_anisotropic) | required | BLOCKED | matches recorded run |
+| [vector_overlap](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_overlap) | required | BLOCKED | matches recorded run |
+| [vector_spiral](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_spiral) | required | BLOCKED | matches recorded run |
+| [img_stripes2](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_stripes2) | required | BLOCKED | matches recorded run |
+| [img_bars4](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_bars4) | required | BLOCKED | matches recorded run |
+| [img_blobs4](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_blobs4) | required | BLOCKED | matches recorded run |
+| [img_intensity2](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_intensity2) | required | BLOCKED | matches recorded run |
+| [grid100](atlas.md#cohort-cuda-0d83d78027c5-experiment-grid100) | required | BLOCKED | matches recorded run |
+| [rotated100](atlas.md#cohort-cuda-0d83d78027c5-experiment-rotated100) | required | BLOCKED | matches recorded run |
+| [staggered100](atlas.md#cohort-cuda-0d83d78027c5-experiment-staggered100) | required | BLOCKED | matches recorded run |
+| [img_intensity2_residual16](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_intensity2_residual16) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [vector_two_broad_published](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_two_broad_published) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [vector_unequal_mass_published](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_mass_published) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [vector_unequal_width_published](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_width_published) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [vector_anisotropic_published](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_anisotropic_published) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [vector_overlap_published](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_overlap_published) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [vector_spiral_published](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_spiral_published) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [img_stripes2_residual16](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_stripes2_residual16) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [img_bars4_residual16](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_bars4_residual16) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [img_blobs4_residual16](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_blobs4_residual16) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [grid100_affine_square_named_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-grid100_affine_square_named_v1) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [rotated100_affine_square_named_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-rotated100_affine_square_named_v1) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [staggered100_affine_square_named_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-staggered100_affine_square_named_v1) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [grid100_affine_paired_laws_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-grid100_affine_paired_laws_v1) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [grid100_release07_cloud_named_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-grid100_release07_cloud_named_v1) | diagnostic | UNKNOWN | recorded definition unavailable |
 
 <a name="cohort-cuda-0d83d78027c5-formulation_comparison-tier-3"></a>
 
 ### Tier 3
 
-| Experiment | Role | Recorded result | Current contract |
+| Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [ring_hold](atlas.md#cohort-cuda-0d83d78027c5-experiment-ring_hold) | required | BLOCKED | matches |
-| [ring_extension](atlas.md#cohort-cuda-0d83d78027c5-experiment-ring_extension) | required | BLOCKED | matches |
+| [ring_hold](atlas.md#cohort-cuda-0d83d78027c5-experiment-ring_hold) | required | BLOCKED | matches recorded run |
+| [ring_extension](atlas.md#cohort-cuda-0d83d78027c5-experiment-ring_extension) | required | BLOCKED | matches recorded run |
 
 <a name="cohort-cuda-0d83d78027c5-host_profile_transfer"></a>
 
@@ -483,59 +483,59 @@ Calibration: **provisional**. Host-profile transfer and full current-cohort posi
 
 ### Tier 1
 
-| Experiment | Role | Recorded result | Current contract |
+| Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [two_pole](atlas.md#cohort-cuda-0d83d78027c5-experiment-two_pole) | required | BLOCKED | matches |
-| [unused_token_hold](atlas.md#cohort-cuda-0d83d78027c5-experiment-unused_token_hold) | required | BLOCKED | matches |
-| [ae_gan_hold](atlas.md#cohort-cuda-0d83d78027c5-experiment-ae_gan_hold) | required | BLOCKED | matches |
+| [two_pole](atlas.md#cohort-cuda-0d83d78027c5-experiment-two_pole) | required | BLOCKED | matches recorded run |
+| [unused_token_hold](atlas.md#cohort-cuda-0d83d78027c5-experiment-unused_token_hold) | required | BLOCKED | matches recorded run |
+| [ae_gan_hold](atlas.md#cohort-cuda-0d83d78027c5-experiment-ae_gan_hold) | required | BLOCKED | matches recorded run |
 
 <a name="cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2"></a>
 
 ### Tier 2
 
-| Experiment | Role | Recorded result | Current contract |
+| Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [trajectory](atlas.md#cohort-cuda-0d83d78027c5-experiment-trajectory) | required | BLOCKED | matches |
-| [residual_student](atlas.md#cohort-cuda-0d83d78027c5-experiment-residual_student) | required | BLOCKED | matches |
-| [unipolar](atlas.md#cohort-cuda-0d83d78027c5-experiment-unipolar) | required | BLOCKED | matches |
-| [cover_leftover](atlas.md#cohort-cuda-0d83d78027c5-experiment-cover_leftover) | required | BLOCKED | matches |
-| [mid_scale_identity](atlas.md#cohort-cuda-0d83d78027c5-experiment-mid_scale_identity) | required | BLOCKED | matches |
-| [mode_hold](atlas.md#cohort-cuda-0d83d78027c5-experiment-mode_hold) | required | BLOCKED | matches |
-| [vector_two_broad](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_two_broad) | required | BLOCKED | matches |
-| [vector_unequal_mass](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_mass) | required | BLOCKED | matches |
-| [vector_unequal_width](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_width) | required | BLOCKED | matches |
-| [vector_anisotropic](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_anisotropic) | required | BLOCKED | matches |
-| [vector_overlap](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_overlap) | required | BLOCKED | matches |
-| [vector_spiral](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_spiral) | required | BLOCKED | matches |
-| [img_stripes2](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_stripes2) | required | BLOCKED | matches |
-| [img_bars4](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_bars4) | required | BLOCKED | matches |
-| [img_blobs4](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_blobs4) | required | BLOCKED | matches |
-| [img_intensity2](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_intensity2) | required | BLOCKED | matches |
-| [grid100](atlas.md#cohort-cuda-0d83d78027c5-experiment-grid100) | required | BLOCKED | matches |
-| [rotated100](atlas.md#cohort-cuda-0d83d78027c5-experiment-rotated100) | required | BLOCKED | matches |
-| [staggered100](atlas.md#cohort-cuda-0d83d78027c5-experiment-staggered100) | required | BLOCKED | matches |
-| [img_intensity2_residual16](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_intensity2_residual16) | diagnostic | UNKNOWN | unbound |
-| [vector_two_broad_published](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_two_broad_published) | diagnostic | UNKNOWN | unbound |
-| [vector_unequal_mass_published](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_mass_published) | diagnostic | UNKNOWN | unbound |
-| [vector_unequal_width_published](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_width_published) | diagnostic | UNKNOWN | unbound |
-| [vector_anisotropic_published](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_anisotropic_published) | diagnostic | UNKNOWN | unbound |
-| [vector_overlap_published](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_overlap_published) | diagnostic | UNKNOWN | unbound |
-| [vector_spiral_published](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_spiral_published) | diagnostic | UNKNOWN | unbound |
-| [img_stripes2_residual16](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_stripes2_residual16) | diagnostic | UNKNOWN | unbound |
-| [img_bars4_residual16](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_bars4_residual16) | diagnostic | UNKNOWN | unbound |
-| [img_blobs4_residual16](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_blobs4_residual16) | diagnostic | UNKNOWN | unbound |
-| [grid100_affine_square_named_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-grid100_affine_square_named_v1) | diagnostic | UNKNOWN | unbound |
-| [rotated100_affine_square_named_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-rotated100_affine_square_named_v1) | diagnostic | UNKNOWN | unbound |
-| [staggered100_affine_square_named_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-staggered100_affine_square_named_v1) | diagnostic | UNKNOWN | unbound |
+| [trajectory](atlas.md#cohort-cuda-0d83d78027c5-experiment-trajectory) | required | BLOCKED | matches recorded run |
+| [residual_student](atlas.md#cohort-cuda-0d83d78027c5-experiment-residual_student) | required | BLOCKED | matches recorded run |
+| [unipolar](atlas.md#cohort-cuda-0d83d78027c5-experiment-unipolar) | required | BLOCKED | matches recorded run |
+| [cover_leftover](atlas.md#cohort-cuda-0d83d78027c5-experiment-cover_leftover) | required | BLOCKED | matches recorded run |
+| [mid_scale_identity](atlas.md#cohort-cuda-0d83d78027c5-experiment-mid_scale_identity) | required | BLOCKED | matches recorded run |
+| [mode_hold](atlas.md#cohort-cuda-0d83d78027c5-experiment-mode_hold) | required | BLOCKED | matches recorded run |
+| [vector_two_broad](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_two_broad) | required | BLOCKED | matches recorded run |
+| [vector_unequal_mass](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_mass) | required | BLOCKED | matches recorded run |
+| [vector_unequal_width](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_width) | required | BLOCKED | matches recorded run |
+| [vector_anisotropic](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_anisotropic) | required | BLOCKED | matches recorded run |
+| [vector_overlap](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_overlap) | required | BLOCKED | matches recorded run |
+| [vector_spiral](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_spiral) | required | BLOCKED | matches recorded run |
+| [img_stripes2](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_stripes2) | required | BLOCKED | matches recorded run |
+| [img_bars4](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_bars4) | required | BLOCKED | matches recorded run |
+| [img_blobs4](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_blobs4) | required | BLOCKED | matches recorded run |
+| [img_intensity2](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_intensity2) | required | BLOCKED | matches recorded run |
+| [grid100](atlas.md#cohort-cuda-0d83d78027c5-experiment-grid100) | required | BLOCKED | matches recorded run |
+| [rotated100](atlas.md#cohort-cuda-0d83d78027c5-experiment-rotated100) | required | BLOCKED | matches recorded run |
+| [staggered100](atlas.md#cohort-cuda-0d83d78027c5-experiment-staggered100) | required | BLOCKED | matches recorded run |
+| [img_intensity2_residual16](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_intensity2_residual16) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [vector_two_broad_published](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_two_broad_published) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [vector_unequal_mass_published](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_mass_published) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [vector_unequal_width_published](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_width_published) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [vector_anisotropic_published](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_anisotropic_published) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [vector_overlap_published](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_overlap_published) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [vector_spiral_published](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_spiral_published) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [img_stripes2_residual16](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_stripes2_residual16) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [img_bars4_residual16](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_bars4_residual16) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [img_blobs4_residual16](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_blobs4_residual16) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [grid100_affine_square_named_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-grid100_affine_square_named_v1) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [rotated100_affine_square_named_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-rotated100_affine_square_named_v1) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [staggered100_affine_square_named_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-staggered100_affine_square_named_v1) | diagnostic | UNKNOWN | recorded definition unavailable |
 
 <a name="cohort-cuda-0d83d78027c5-host_profile_transfer-tier-3"></a>
 
 ### Tier 3
 
-| Experiment | Role | Recorded result | Current contract |
+| Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [ring_hold](atlas.md#cohort-cuda-0d83d78027c5-experiment-ring_hold) | required | BLOCKED | matches |
-| [ring_extension](atlas.md#cohort-cuda-0d83d78027c5-experiment-ring_extension) | required | BLOCKED | matches |
+| [ring_hold](atlas.md#cohort-cuda-0d83d78027c5-experiment-ring_hold) | required | BLOCKED | matches recorded run |
+| [ring_extension](atlas.md#cohort-cuda-0d83d78027c5-experiment-ring_extension) | required | BLOCKED | matches recorded run |
 
 <a name="cohort-cuda-0d83d78027c5-k3p_two_pole_horizon"></a>
 
@@ -551,10 +551,10 @@ Calibration: **provisional**. Bounded budget/schedule diagnostic supplies no ord
 
 ### Tier 1
 
-| Experiment | Role | Recorded result | Current contract |
+| Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [two_pole_800_schedule80_diagnostic_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-two_pole_800_schedule80_diagnostic_v1) | diagnostic | UNKNOWN | unbound |
-| [two_pole_800_schedule800_diagnostic_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-two_pole_800_schedule800_diagnostic_v1) | diagnostic | UNKNOWN | unbound |
+| [two_pole_800_schedule80_diagnostic_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-two_pole_800_schedule80_diagnostic_v1) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [two_pole_800_schedule800_diagnostic_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-two_pole_800_schedule800_diagnostic_v1) | diagnostic | UNKNOWN | recorded definition unavailable |
 
 <a name="cohort-cuda-0d83d78027c5-k3p_two_pole_horizon-tier-2"></a>
 
@@ -582,37 +582,37 @@ Calibration: **provisional**. Phase D historical calibration remains required
 
 ### Tier 1
 
-| Experiment | Role | Recorded result | Current contract |
+| Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [two_pole](atlas.md#cohort-cuda-0d83d78027c5-experiment-two_pole) | required | BLOCKED | matches |
-| [unused_token_hold](atlas.md#cohort-cuda-0d83d78027c5-experiment-unused_token_hold) | required | BLOCKED | matches |
-| [ae_gan_hold](atlas.md#cohort-cuda-0d83d78027c5-experiment-ae_gan_hold) | required | BLOCKED | matches |
+| [two_pole](atlas.md#cohort-cuda-0d83d78027c5-experiment-two_pole) | required | BLOCKED | matches recorded run |
+| [unused_token_hold](atlas.md#cohort-cuda-0d83d78027c5-experiment-unused_token_hold) | required | BLOCKED | matches recorded run |
+| [ae_gan_hold](atlas.md#cohort-cuda-0d83d78027c5-experiment-ae_gan_hold) | required | BLOCKED | matches recorded run |
 
 <a name="cohort-cuda-0d83d78027c5-quality_coverage-tier-2"></a>
 
 ### Tier 2
 
-| Experiment | Role | Recorded result | Current contract |
+| Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [trajectory](atlas.md#cohort-cuda-0d83d78027c5-experiment-trajectory) | required | BLOCKED | matches |
-| [residual_student](atlas.md#cohort-cuda-0d83d78027c5-experiment-residual_student) | required | BLOCKED | matches |
-| [unipolar](atlas.md#cohort-cuda-0d83d78027c5-experiment-unipolar) | required | BLOCKED | matches |
-| [cover_leftover](atlas.md#cohort-cuda-0d83d78027c5-experiment-cover_leftover) | required | BLOCKED | matches |
-| [mid_scale_identity](atlas.md#cohort-cuda-0d83d78027c5-experiment-mid_scale_identity) | required | BLOCKED | matches |
-| [mode_hold](atlas.md#cohort-cuda-0d83d78027c5-experiment-mode_hold) | required | BLOCKED | matches |
-| [vector_two_broad](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_two_broad) | required | BLOCKED | matches |
-| [vector_unequal_mass](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_mass) | required | BLOCKED | matches |
-| [vector_unequal_width](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_width) | required | BLOCKED | matches |
-| [vector_anisotropic](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_anisotropic) | required | BLOCKED | matches |
-| [vector_overlap](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_overlap) | required | BLOCKED | matches |
-| [vector_spiral](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_spiral) | required | BLOCKED | matches |
-| [img_stripes2](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_stripes2) | required | BLOCKED | matches |
-| [img_bars4](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_bars4) | required | BLOCKED | matches |
-| [img_blobs4](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_blobs4) | required | BLOCKED | matches |
-| [img_intensity2](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_intensity2) | required | BLOCKED | matches |
-| [grid100](atlas.md#cohort-cuda-0d83d78027c5-experiment-grid100) | required | BLOCKED | matches |
-| [rotated100](atlas.md#cohort-cuda-0d83d78027c5-experiment-rotated100) | required | BLOCKED | matches |
-| [staggered100](atlas.md#cohort-cuda-0d83d78027c5-experiment-staggered100) | required | BLOCKED | matches |
+| [trajectory](atlas.md#cohort-cuda-0d83d78027c5-experiment-trajectory) | required | BLOCKED | matches recorded run |
+| [residual_student](atlas.md#cohort-cuda-0d83d78027c5-experiment-residual_student) | required | BLOCKED | matches recorded run |
+| [unipolar](atlas.md#cohort-cuda-0d83d78027c5-experiment-unipolar) | required | BLOCKED | matches recorded run |
+| [cover_leftover](atlas.md#cohort-cuda-0d83d78027c5-experiment-cover_leftover) | required | BLOCKED | matches recorded run |
+| [mid_scale_identity](atlas.md#cohort-cuda-0d83d78027c5-experiment-mid_scale_identity) | required | BLOCKED | matches recorded run |
+| [mode_hold](atlas.md#cohort-cuda-0d83d78027c5-experiment-mode_hold) | required | BLOCKED | matches recorded run |
+| [vector_two_broad](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_two_broad) | required | BLOCKED | matches recorded run |
+| [vector_unequal_mass](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_mass) | required | BLOCKED | matches recorded run |
+| [vector_unequal_width](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_width) | required | BLOCKED | matches recorded run |
+| [vector_anisotropic](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_anisotropic) | required | BLOCKED | matches recorded run |
+| [vector_overlap](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_overlap) | required | BLOCKED | matches recorded run |
+| [vector_spiral](atlas.md#cohort-cuda-0d83d78027c5-experiment-vector_spiral) | required | BLOCKED | matches recorded run |
+| [img_stripes2](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_stripes2) | required | BLOCKED | matches recorded run |
+| [img_bars4](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_bars4) | required | BLOCKED | matches recorded run |
+| [img_blobs4](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_blobs4) | required | BLOCKED | matches recorded run |
+| [img_intensity2](atlas.md#cohort-cuda-0d83d78027c5-experiment-img_intensity2) | required | BLOCKED | matches recorded run |
+| [grid100](atlas.md#cohort-cuda-0d83d78027c5-experiment-grid100) | required | BLOCKED | matches recorded run |
+| [rotated100](atlas.md#cohort-cuda-0d83d78027c5-experiment-rotated100) | required | BLOCKED | matches recorded run |
+| [staggered100](atlas.md#cohort-cuda-0d83d78027c5-experiment-staggered100) | required | BLOCKED | matches recorded run |
 
 <a name="cohort-cuda-0d83d78027c5-quality_coverage-tier-3"></a>
 
@@ -636,15 +636,15 @@ Calibration: **undeclared**. Calibration and robustness are separate from record
 
 ### Tier 1
 
-| Experiment | Role | Recorded result | Current contract |
+| Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [gaussian1d_acquisition_tier1_policy_selected_cloud_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-gaussian1d_acquisition_tier1_policy_selected_cloud_v1) | required | FAIL | CHANGED |
-| [two_pole_tier1_policy_selected_cloud_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-two_pole_tier1_policy_selected_cloud_v1) | required | FAIL | CHANGED |
-| [unused_token_hold_tier1_policy_selected_cloud_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-unused_token_hold_tier1_policy_selected_cloud_v1) | required | BLOCKED | CHANGED |
-| [ae_gan_hold_tier1_policy_selected_cloud_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-ae_gan_hold_tier1_policy_selected_cloud_v1) | required | BLOCKED | CHANGED |
-| [ring16_acquisition_tier1_policy_selected_cloud_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-ring16_acquisition_tier1_policy_selected_cloud_v1) | required | FAIL | CHANGED |
-| [five_word_joint_acquisition_tier1_policy_selected_cloud_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-five_word_joint_acquisition_tier1_policy_selected_cloud_v1) | required | BLOCKED | CHANGED |
-| [clockfree_audit_tier1_policy_selected_cloud_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-clockfree_audit_tier1_policy_selected_cloud_v1) | required | FAIL | CHANGED |
+| [gaussian1d_acquisition_tier1_policy_selected_cloud_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-gaussian1d_acquisition_tier1_policy_selected_cloud_v1) | required | FAIL | changed since run |
+| [two_pole_tier1_policy_selected_cloud_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-two_pole_tier1_policy_selected_cloud_v1) | required | FAIL | changed since run |
+| [unused_token_hold_tier1_policy_selected_cloud_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-unused_token_hold_tier1_policy_selected_cloud_v1) | required | BLOCKED | changed since run |
+| [ae_gan_hold_tier1_policy_selected_cloud_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-ae_gan_hold_tier1_policy_selected_cloud_v1) | required | BLOCKED | changed since run |
+| [ring16_acquisition_tier1_policy_selected_cloud_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-ring16_acquisition_tier1_policy_selected_cloud_v1) | required | FAIL | changed since run |
+| [five_word_joint_acquisition_tier1_policy_selected_cloud_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-five_word_joint_acquisition_tier1_policy_selected_cloud_v1) | required | BLOCKED | changed since run |
+| [clockfree_audit_tier1_policy_selected_cloud_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-clockfree_audit_tier1_policy_selected_cloud_v1) | required | FAIL | changed since run |
 
 <a name="cohort-cuda-0d83d78027c5-tier1_policy_coverage-tier-2"></a>
 
@@ -662,7 +662,7 @@ No experiments assigned.
 
 ## Experiment metrics and pass criteria
 
-One evidence entry per experiment is shared by its view rows. CHANGED means the declared execution or evaluator differs from the recorded task; its earlier verdict is preserved.
+One evidence entry per experiment is shared by its view rows. Test-definition changes describe differences from the recorded run, independently of whether it was executed. Earlier verdicts are preserved.
 
 <a name="cohort-cuda-0d83d78027c5-experiment-ae_gan_hold"></a>
 
@@ -670,7 +670,9 @@ One evidence entry per experiment is shared by its view rows. CHANGED means the 
 
 **ae_gan_hold: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/ae_gan_hold.json).
 
-Current contract: **matches**. Current task contract matches the recorded conditions. ae_gan_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. ae_gan_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+
+Execution: **no recorded execution (*)**.
 
 Used by: [adaptation / Tier 1](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-1) · [clockfree_continuous / Tier 1](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1) · [discriminator_stability / Tier 1](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) · [formulation_comparison / Tier 1](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-1) · [host_profile_transfer / Tier 1](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-1) · [quality_coverage / Tier 1](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-1).
 
@@ -697,7 +699,9 @@ Current measurement: mog prior (sigma 0.025); generated_and_reconstructed_prior_
 
 **ae_gan_hold_tier1_policy_selected_cloud_v1: BLOCKED**. [Current experiment declaration](../../../configs/forge/task-variants/tier1_policy_selected_cloud_v1/ae_gan_hold_tier1_policy_selected_cloud_v1.json).
 
-Current contract: **CHANGED**. Current coverage is stale: changed execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). ae_gan_hold_tier1_policy_selected_cloud_v1: the frozen posterior/encoder MoG law needs a routed AE formulation; an independent cloud policy is not that law
+Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. ae_gan_hold_tier1_policy_selected_cloud_v1: the frozen posterior/encoder MoG law needs a routed AE formulation; an independent cloud policy is not that law
+
+Execution: **no recorded execution (*)**.
 
 Policy-cohort variant of [ae_gan_hold](../../../configs/forge/tasks/ae_gan_hold.json); parent task SHA256 `53a400c3f2b27ef347076f3cc603345e1442d2d8f97f8052f0b9496ba35bae79`. This measurement supplies no cells to the parent clean cohort.
 
@@ -726,7 +730,9 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_generated_an
 
 **clockfree_audit: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/clockfree_audit.json).
 
-Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **no recorded execution (*)**.
 
 Used by: [clockfree_continuous / Tier 3](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3).
 
@@ -744,7 +750,9 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **clockfree_audit_measurement_v1: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/clockfree_audit_measurement_v1.json).
 
-Current contract: **matches**. Current task contract matches the recorded conditions. clockfree_audit_measurement_v1: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. clockfree_audit_measurement_v1: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+
+Execution: **no recorded execution (*)**.
 
 Used by: [clockfree_continuous / Tier 1](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1) · [discriminator_stability / Tier 1](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1).
 
@@ -764,7 +772,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **clockfree_audit_tier1_policy_selected_cloud_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/tier1_policy_selected_cloud_v1/clockfree_audit_tier1_policy_selected_cloud_v1.json).
 
-Current contract: **CHANGED**. Current coverage is stale: changed execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). step_label changed the update or common-prefix state
+Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. step_label changed the update or common-prefix state
 
 Actual task device: `1` (recorded execution receipt).
 
@@ -809,7 +817,9 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_public_prior
 
 **cover_leftover: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/cover_leftover.json).
 
-Current contract: **matches**. Current task contract matches the recorded conditions. cover_leftover: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. cover_leftover: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+
+Execution: **no recorded execution (*)**.
 
 Used by: [adaptation / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [clockfree_continuous / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
 
@@ -839,7 +849,9 @@ Current measurement: particle_cloud prior (sigma 0); learned_parameter_measureme
 
 **five_word_joint_acquisition: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/five_word_joint_acquisition.json).
 
-Current contract: **CHANGED**. Current coverage is stale: changed evaluation (gates or sampling law). five_word_joint_acquisition: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. five_word_joint_acquisition: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+
+Execution: **no recorded execution (*)**.
 
 Used by: [discriminator_stability / Tier 1](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1).
 
@@ -872,7 +884,9 @@ Current measurement: particle_cloud prior (sigma 0); generated_and_paired_recons
 
 **five_word_joint_acquisition_tier1_policy_selected_cloud_v1: BLOCKED**. [Current experiment declaration](../../../configs/forge/task-variants/tier1_policy_selected_cloud_v1/five_word_joint_acquisition_tier1_policy_selected_cloud_v1.json).
 
-Current contract: **CHANGED**. Current coverage is stale: changed execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). five_word_joint_acquisition_tier1_policy_selected_cloud_v1: the frozen five-row joint BiGAN needs complete generator/encoder/policy ownership and a separately scoped minimum-population contract
+Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. five_word_joint_acquisition_tier1_policy_selected_cloud_v1: the frozen five-row joint BiGAN needs complete generator/encoder/policy ownership and a separately scoped minimum-population contract
+
+Execution: **no recorded execution (*)**.
 
 Policy-cohort variant of [five_word_joint_acquisition](../../../configs/forge/tasks/five_word_joint_acquisition.json); parent task SHA256 `26875d18d2d8572a479fe8170894bb8cde0798de38e639514fb077c88344d1f8`. This measurement supplies no cells to the parent clean cohort.
 
@@ -907,7 +921,9 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_generated_an
 
 **gaussian1d_acquisition: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/gaussian1d_acquisition.json).
 
-Current contract: **matches**. Current task contract matches the recorded conditions. gaussian1d_acquisition: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. gaussian1d_acquisition: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+
+Execution: **no recorded execution (*)**.
 
 Used by: [discriminator_stability / Tier 1](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1).
 
@@ -939,7 +955,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **gaussian1d_acquisition_tier1_policy_selected_cloud_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/tier1_policy_selected_cloud_v1/gaussian1d_acquisition_tier1_policy_selected_cloud_v1.json).
 
-Current contract: **CHANGED**. Current coverage is stale: changed execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). recomputed complete live curve and terminal suffix
+Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. recomputed complete live curve and terminal suffix
 
 Actual task device: `0` (recorded execution receipt).
 
@@ -991,7 +1007,9 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_public_prior
 
 **grid100: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/grid100.json).
 
-Current contract: **matches**. Current task contract matches the recorded conditions. grid100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. grid100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+
+Execution: **no recorded execution (*)**.
 
 Used by: [adaptation / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [clockfree_continuous / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
 
@@ -1030,7 +1048,9 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **grid100_14k: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/grid100_14k.json).
 
-Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **no recorded execution (*)**.
 
 Used by: [clockfree_continuous / Tier 3](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3).
 
@@ -1069,7 +1089,9 @@ Dependencies: grid100 (checkpoint), clockfree_audit (gate).
 
 **grid100_affine_paired_laws_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/grid100_affine_paired_laws_v1.json).
 
-Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **no recorded execution (*)**.
 
 Used by: [formulation_comparison / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2).
 
@@ -1106,7 +1128,9 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **grid100_affine_square_named_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/grid100_affine_square_named_v1.json).
 
-Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **no recorded execution (*)**.
 
 Used by: [formulation_comparison / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2).
 
@@ -1143,7 +1167,9 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **grid100_release07_cloud_named_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/grid100_release07_cloud_named_v1.json).
 
-Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **no recorded execution (*)**.
 
 Used by: [formulation_comparison / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2).
 
@@ -1180,7 +1206,9 @@ Current measurement: particle_cloud prior (sigma 0); public_prior_without_output
 
 **img_bars4: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/img_bars4.json).
 
-Current contract: **matches**. Current task contract matches the recorded conditions. img_bars4: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. img_bars4: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+
+Execution: **no recorded execution (*)**.
 
 Used by: [adaptation / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [clockfree_continuous / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
 
@@ -1206,7 +1234,9 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 **img_bars4_residual16: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/img_bars4_residual16.json).
 
-Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **no recorded execution (*)**.
 
 Used by: [formulation_comparison / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2).
 
@@ -1230,7 +1260,9 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 **img_blobs4: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/img_blobs4.json).
 
-Current contract: **matches**. Current task contract matches the recorded conditions. img_blobs4: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. img_blobs4: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+
+Execution: **no recorded execution (*)**.
 
 Used by: [adaptation / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [clockfree_continuous / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
 
@@ -1256,7 +1288,9 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 **img_blobs4_residual16: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/img_blobs4_residual16.json).
 
-Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **no recorded execution (*)**.
 
 Used by: [formulation_comparison / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2).
 
@@ -1280,7 +1314,9 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 **img_intensity2: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/img_intensity2.json).
 
-Current contract: **matches**. Current task contract matches the recorded conditions. img_intensity2: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. img_intensity2: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+
+Execution: **no recorded execution (*)**.
 
 Used by: [adaptation / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [clockfree_continuous / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
 
@@ -1306,7 +1342,9 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 **img_intensity2_residual16: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/img_intensity2_residual16.json).
 
-Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **no recorded execution (*)**.
 
 Used by: [formulation_comparison / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2).
 
@@ -1330,7 +1368,9 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 **img_stripes2: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/img_stripes2.json).
 
-Current contract: **matches**. Current task contract matches the recorded conditions. img_stripes2: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. img_stripes2: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+
+Execution: **no recorded execution (*)**.
 
 Used by: [adaptation / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [clockfree_continuous / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
 
@@ -1356,7 +1396,9 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 **img_stripes2_residual16: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/img_stripes2_residual16.json).
 
-Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **no recorded execution (*)**.
 
 Used by: [formulation_comparison / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2).
 
@@ -1380,7 +1422,9 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 **mid_scale_identity: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/mid_scale_identity.json).
 
-Current contract: **matches**. Current task contract matches the recorded conditions. mid_scale_identity: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. mid_scale_identity: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+
+Execution: **no recorded execution (*)**.
 
 Used by: [adaptation / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [clockfree_continuous / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
 
@@ -1412,7 +1456,9 @@ Current measurement: particle_cloud prior (sigma 0); learned_parameter_measureme
 
 **mode_hold: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/mode_hold.json).
 
-Current contract: **matches**. Current task contract matches the recorded conditions. mode_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. mode_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+
+Execution: **no recorded execution (*)**.
 
 Used by: [adaptation / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [clockfree_continuous / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
 
@@ -1438,7 +1484,9 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **residual_student: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/residual_student.json).
 
-Current contract: **matches**. Current task contract matches the recorded conditions. residual_student: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. residual_student: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+
+Execution: **no recorded execution (*)**.
 
 Used by: [adaptation / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [clockfree_continuous / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
 
@@ -1465,7 +1513,9 @@ Current measurement: particle_cloud prior (sigma 0); conditional_prior_centers_w
 
 **ring16_acquisition: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/ring16_acquisition.json).
 
-Current contract: **matches**. Current task contract matches the recorded conditions. ring16_acquisition: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. ring16_acquisition: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+
+Execution: **no recorded execution (*)**.
 
 Used by: [discriminator_stability / Tier 1](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1).
 
@@ -1495,7 +1545,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **ring16_acquisition_tier1_policy_selected_cloud_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/tier1_policy_selected_cloud_v1/ring16_acquisition_tier1_policy_selected_cloud_v1.json).
 
-Current contract: **CHANGED**. Current coverage is stale: changed execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). recomputed complete live curve and terminal suffix
+Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. recomputed complete live curve and terminal suffix
 
 Actual task device: `0` (recorded execution receipt).
 
@@ -1546,7 +1596,9 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_public_prior
 
 **ring_extension: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/ring_extension.json).
 
-Current contract: **matches**. Current task contract matches the recorded conditions. ring_extension: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. ring_extension: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+
+Execution: **no recorded execution (*)**.
 
 Used by: [clockfree_continuous / Tier 3](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3) · [discriminator_stability / Tier 3](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-3) · [formulation_comparison / Tier 3](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-3) · [host_profile_transfer / Tier 3](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-3).
 
@@ -1576,7 +1628,9 @@ Dependencies: ring_hold (checkpoint).
 
 **ring_hold: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/ring_hold.json).
 
-Current contract: **matches**. Current task contract matches the recorded conditions. ring_hold: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. ring_hold: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+
+Execution: **no recorded execution (*)**.
 
 Used by: [clockfree_continuous / Tier 3](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3) · [discriminator_stability / Tier 3](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-3) · [formulation_comparison / Tier 3](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-3) · [host_profile_transfer / Tier 3](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-3).
 
@@ -1606,7 +1660,9 @@ Dependencies: mode_hold (gate).
 
 **rotated100: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/rotated100.json).
 
-Current contract: **matches**. Current task contract matches the recorded conditions. rotated100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. rotated100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+
+Execution: **no recorded execution (*)**.
 
 Used by: [adaptation / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [clockfree_continuous / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
 
@@ -1645,7 +1701,9 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **rotated100_14k: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/rotated100_14k.json).
 
-Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **no recorded execution (*)**.
 
 Used by: [clockfree_continuous / Tier 3](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3).
 
@@ -1684,7 +1742,9 @@ Dependencies: rotated100 (checkpoint), clockfree_audit (gate).
 
 **rotated100_affine_square_named_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/rotated100_affine_square_named_v1.json).
 
-Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **no recorded execution (*)**.
 
 Used by: [formulation_comparison / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2).
 
@@ -1721,7 +1781,9 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **staggered100: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/staggered100.json).
 
-Current contract: **matches**. Current task contract matches the recorded conditions. staggered100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. staggered100: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+
+Execution: **no recorded execution (*)**.
 
 Used by: [adaptation / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [clockfree_continuous / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
 
@@ -1760,7 +1822,9 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **staggered100_14k: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/staggered100_14k.json).
 
-Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **no recorded execution (*)**.
 
 Used by: [clockfree_continuous / Tier 3](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3).
 
@@ -1799,7 +1863,9 @@ Dependencies: staggered100 (checkpoint), clockfree_audit (gate).
 
 **staggered100_affine_square_named_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/staggered100_affine_square_named_v1.json).
 
-Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **no recorded execution (*)**.
 
 Used by: [formulation_comparison / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2).
 
@@ -1836,7 +1902,9 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **target_shift_recovery: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/target_shift_recovery.json).
 
-Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **no recorded execution (*)**.
 
 Used by: [adaptation / Tier 3](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-3) · [clockfree_continuous / Tier 3](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3).
 
@@ -1857,7 +1925,9 @@ Dependencies: mode_hold (gate).
 
 **trajectory: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/trajectory.json).
 
-Current contract: **matches**. Current task contract matches the recorded conditions. trajectory: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. trajectory: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+
+Execution: **no recorded execution (*)**.
 
 Used by: [adaptation / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [clockfree_continuous / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
 
@@ -1882,7 +1952,9 @@ Current measurement: particle_cloud prior (sigma 0); conditional_prior_centers_w
 
 **two_pole: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/two_pole.json).
 
-Current contract: **matches**. Current task contract matches the recorded conditions. two_pole: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. two_pole: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+
+Execution: **no recorded execution (*)**.
 
 Used by: [adaptation / Tier 1](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-1) · [clockfree_continuous / Tier 1](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1) · [discriminator_stability / Tier 1](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) · [formulation_comparison / Tier 1](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-1) · [host_profile_transfer / Tier 1](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-1) · [quality_coverage / Tier 1](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-1).
 
@@ -1909,7 +1981,9 @@ Current measurement: particle_cloud prior (sigma 0); learned_particles_and_criti
 
 **two_pole_800_schedule800_diagnostic_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/two_pole_800_schedule800_diagnostic_v1.json).
 
-Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **no recorded execution (*)**.
 
 Used by: [k3p_two_pole_horizon / Tier 1](atlas.md#cohort-cuda-0d83d78027c5-k3p_two_pole_horizon-tier-1).
 
@@ -1936,7 +2010,9 @@ Current measurement: particle_cloud prior (sigma 0); learned_particles_and_criti
 
 **two_pole_800_schedule80_diagnostic_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/two_pole_800_schedule80_diagnostic_v1.json).
 
-Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **no recorded execution (*)**.
 
 Used by: [k3p_two_pole_horizon / Tier 1](atlas.md#cohort-cuda-0d83d78027c5-k3p_two_pole_horizon-tier-1).
 
@@ -1963,7 +2039,7 @@ Current measurement: particle_cloud prior (sigma 0); learned_particles_and_criti
 
 **two_pole_tier1_policy_selected_cloud_v1: FAIL**. [Current experiment declaration](../../../configs/forge/task-variants/tier1_policy_selected_cloud_v1/two_pole_tier1_policy_selected_cloud_v1.json).
 
-Current contract: **CHANGED**. Current coverage is stale: changed execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). recomputed complete live curve and terminal suffix
+Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. recomputed complete live curve and terminal suffix
 
 Actual task device: `cuda:0` (recorded execution receipt).
 
@@ -2007,7 +2083,9 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_learned_part
 
 **unipolar: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/unipolar.json).
 
-Current contract: **matches**. Current task contract matches the recorded conditions. unipolar: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. unipolar: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+
+Execution: **no recorded execution (*)**.
 
 Used by: [adaptation / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [clockfree_continuous / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
 
@@ -2034,7 +2112,9 @@ Current measurement: particle_cloud prior (sigma 0); learned_parameter_measureme
 
 **unused_token_hold: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/unused_token_hold.json).
 
-Current contract: **matches**. Current task contract matches the recorded conditions. unused_token_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. unused_token_hold: public components has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+
+Execution: **no recorded execution (*)**.
 
 Used by: [adaptation / Tier 1](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-1) · [clockfree_continuous / Tier 1](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1) · [discriminator_stability / Tier 1](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) · [formulation_comparison / Tier 1](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-1) · [host_profile_transfer / Tier 1](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-1) · [quality_coverage / Tier 1](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-1).
 
@@ -2061,7 +2141,9 @@ Current measurement: particle_cloud prior (sigma 0); learned_parameter_measureme
 
 **unused_token_hold_tier1_policy_selected_cloud_v1: BLOCKED**. [Current experiment declaration](../../../configs/forge/task-variants/tier1_policy_selected_cloud_v1/unused_token_hold_tier1_policy_selected_cloud_v1.json).
 
-Current contract: **CHANGED**. Current coverage is stale: changed execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). unused_token_hold_tier1_policy_selected_cloud_v1: shared/slot parameters require a conditional RoutedRows mechanism; independent Atlas/E22 cannot claim its protected-context law
+Test definition: **changed since run**. Test definition changed since this run: execution (host, recipe binding, prior, initialization or budget); evaluation (gates or sampling law). Earlier verdict preserved. unused_token_hold_tier1_policy_selected_cloud_v1: shared/slot parameters require a conditional RoutedRows mechanism; independent Atlas/E22 cannot claim its protected-context law
+
+Execution: **no recorded execution (*)**.
 
 Policy-cohort variant of [unused_token_hold](../../../configs/forge/tasks/unused_token_hold.json); parent task SHA256 `ef8ccde8d1fa54af8bfce01c044e3671de8131c980eb4e8022d12ffc8caf51d8`. This measurement supplies no cells to the parent clean cohort.
 
@@ -2090,7 +2172,9 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_learned_para
 
 **vector_anisotropic: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/vector_anisotropic.json).
 
-Current contract: **matches**. Current task contract matches the recorded conditions. vector_anisotropic: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. vector_anisotropic: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+
+Execution: **no recorded execution (*)**.
 
 Used by: [adaptation / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [clockfree_continuous / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
 
@@ -2119,7 +2203,9 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_anisotropic_published: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/vector_anisotropic_published.json).
 
-Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **no recorded execution (*)**.
 
 Used by: [formulation_comparison / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2).
 
@@ -2146,7 +2232,9 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_overlap: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/vector_overlap.json).
 
-Current contract: **matches**. Current task contract matches the recorded conditions. vector_overlap: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. vector_overlap: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+
+Execution: **no recorded execution (*)**.
 
 Used by: [adaptation / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [clockfree_continuous / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
 
@@ -2173,7 +2261,9 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_overlap_published: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/vector_overlap_published.json).
 
-Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **no recorded execution (*)**.
 
 Used by: [formulation_comparison / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2).
 
@@ -2198,7 +2288,9 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_spiral: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/vector_spiral.json).
 
-Current contract: **matches**. Current task contract matches the recorded conditions. vector_spiral: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. vector_spiral: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+
+Execution: **no recorded execution (*)**.
 
 Used by: [adaptation / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [clockfree_continuous / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
 
@@ -2225,7 +2317,9 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_spiral_published: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/vector_spiral_published.json).
 
-Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **no recorded execution (*)**.
 
 Used by: [formulation_comparison / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2).
 
@@ -2250,7 +2344,9 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_two_broad: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/vector_two_broad.json).
 
-Current contract: **matches**. Current task contract matches the recorded conditions. vector_two_broad: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. vector_two_broad: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+
+Execution: **no recorded execution (*)**.
 
 Used by: [adaptation / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [clockfree_continuous / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
 
@@ -2279,7 +2375,9 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_two_broad_published: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/vector_two_broad_published.json).
 
-Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **no recorded execution (*)**.
 
 Used by: [formulation_comparison / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2).
 
@@ -2306,7 +2404,9 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_unequal_mass: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/vector_unequal_mass.json).
 
-Current contract: **matches**. Current task contract matches the recorded conditions. vector_unequal_mass: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. vector_unequal_mass: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+
+Execution: **no recorded execution (*)**.
 
 Used by: [adaptation / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [clockfree_continuous / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
 
@@ -2336,7 +2436,9 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_unequal_mass_published: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/vector_unequal_mass_published.json).
 
-Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **no recorded execution (*)**.
 
 Used by: [formulation_comparison / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2).
 
@@ -2364,7 +2466,9 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_unequal_width: BLOCKED**. [Current experiment declaration](../../../configs/forge/tasks/vector_unequal_width.json).
 
-Current contract: **matches**. Current task contract matches the recorded conditions. vector_unequal_width: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. vector_unequal_width: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
+
+Execution: **no recorded execution (*)**.
 
 Used by: [adaptation / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [clockfree_continuous / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
 
@@ -2393,7 +2497,9 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_unequal_width_published: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/vector_unequal_width_published.json).
 
-Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **no recorded execution (*)**.
 
 Used by: [formulation_comparison / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2).
 

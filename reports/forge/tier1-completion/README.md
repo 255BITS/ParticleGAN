@@ -38,8 +38,10 @@ checks. Atlas and E22 each have four measured scoped FAILs and three
 explicit ownership blockers (unused-token, AE and joint words). Their clock
 probes also detect restart differences. These policy measurements neither
 replace clean/MoG parent results nor establish clock-free eligibility. Remaining
-incomplete markers identify real unsupported or unmeasured contracts; they are
-not relabeled as completed clean results.
+execution markers (*) identify tests with no recorded execution, including
+preflight blockers. A recorded FAIL completes execution coverage. Differences
+between a recorded run and today's test definition are shown separately and
+do not add (*); the recorded result supplies no new qualification.
 
 The current `clockfree_continuous` view revision 3 counts the already measured
 `clockfree_audit_measurement_v1` as its required Tier 1 clock test. All nine
