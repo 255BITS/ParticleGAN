@@ -304,8 +304,9 @@ class Recipe:
             raise ValueError("lr_control='stationarity' requires continuous_policy='dv12'")
         if type(self.particle_birth_death) is not bool:
             raise ValueError("particle_birth_death must be a boolean")
-        if self.particle_birth_death and self.prior_kind not in ("particles", "noisy_particles"):
-            raise ValueError("particle_birth_death requires an explicit trainable particle table prior")
+        if self.particle_birth_death and (self.prior_kind not in ("particles", "noisy_particles", "mog")
+                or self.prior_kind == "mog" and self.standardize):
+            raise ValueError("particle_birth_death requires a row-local trainable prior; standardized MoG is unsupported")
         if (isinstance(self.serve_average, bool) or not isinstance(self.serve_average, (int, float))
                 or not math.isfinite(self.serve_average) or self.serve_average < 0):
             raise ValueError("serve_average must be a finite number >= 0")

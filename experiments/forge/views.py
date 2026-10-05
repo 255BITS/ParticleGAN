@@ -569,6 +569,11 @@ def grade_result(task: dict, result: dict | None) -> dict:
         noisy_grade = validate_noisy_evidence(task, evidence)
         if noisy_grade is not None:
             return _verdict(noisy_grade["status"], noisy_grade["reason"])
+    if "existing_mog717" in evidence:
+        from .atlas_existing_mog import validate_evidence as validate_existing_mog_evidence
+        existing_grade = validate_existing_mog_evidence(task, evidence)
+        if existing_grade is not None:
+            return _verdict(existing_grade["status"], existing_grade["reason"])
     guard = _guards(task, evidence)
     if guard is not None:
         return guard

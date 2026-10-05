@@ -179,7 +179,7 @@ def resolve_idea(root: Path, idea_id: str, *, view_id: str | None = None,
             recipe_overrides=idea.get("recipe_overrides", {}), prior=prior,
             seed=protocol["seed"], requires_capabilities=idea.get("requires_capabilities", []),
             extensions=idea.get("extensions", {}), initializer=idea.get("initializer", "deterministic_orthogonal"),
-            execution_path=idea.get("execution_path", "public_trainer"))
+            execution_path=idea.get("execution_path", "public_trainer"), candidate_id=idea["id"])
         recipe = asdict(context.recipe)
         if "configuration_id" in idea:
             from .configuration_search import recipe_identity_fields
@@ -227,9 +227,11 @@ def resolve_idea(root: Path, idea_id: str, *, view_id: str | None = None,
         task["preflight_blockers"] = task_preflight(task, candidate, protocol, root=root, tasks=tasks)
     from .atlas_two_pole import supporting_source_paths
     from .noisy_prior_adapters import supporting_source_paths as noisy_supporting_source_paths
+    from .atlas_existing_mog import supporting_source_paths as existing_mog_supporting_source_paths
     for task in all_tasks.values():
         extra_sources.update(supporting_source_paths(task))
         extra_sources.update(noisy_supporting_source_paths(task))
+        extra_sources.update(existing_mog_supporting_source_paths(task, candidate, root=root))
     source = inspect_source(root, sorted(extra_sources))
     candidate_revision = candidate_revision_for(source["digest"], candidate)
     runtime = runtime_manifest()
