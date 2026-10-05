@@ -94,6 +94,13 @@ remaining allowance is not a reason to repeat unchanged failed experiments.
 
 ## Provenance and reproduction
 
+[Independent aggregate verification](readout-audit.md) checks all 86 canonical
+receipts, both frozen source snapshots, 1,786 temporal observations and terminal
+suffixes, and 634 saved Gaussian/ring draws. Every recorded classification agrees.
+The software checks include 1,750 broad Forge tests and 120 focused checks after
+review fixes. Admission-only fixes after training do not rewrite the paid source
+cohorts or trigger unchanged scientific reruns.
+
 Rates executed source commit `1f0cf74c`, digest `a16f577e680b…`; moments executed
 `2cdce7be`, digest `888d8710147b…`. Duration diagnostics executed `a7e4cdf5` with
 that second digest. Its source difference enables duration admission; the

@@ -1,0 +1,19 @@
+{
+  "files": {
+    "evidence": {
+      "path": "reports/forge/bcap-tier1-repair/rates-evidence.json",
+      "sha256": "b0ceb5990edac4daa83914c23aedf8fb33bf88c9796496456324f6d7b61ec7fc"
+    },
+    "readout": {
+      "path": "reports/forge/bcap-tier1-repair/README.md",
+      "sha256": "e97c79b9c9d4dff314ba0222001e6e4534294f9c92bf1ddc4a00d72c842aa2c5"
+    },
+    "results": {
+      "path": "reports/forge/bcap-tier1-repair/results.json",
+      "sha256": "54d0b97345bcd807c857bfb0602a6e69906d04843f872af9962397c53009426c"
+    }
+  },
+  "qualification_input": false,
+  "schema_version": 1,
+  "scope": "bcap_repair_display_navigation"
+}
