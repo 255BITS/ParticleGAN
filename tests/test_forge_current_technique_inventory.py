@@ -16,6 +16,13 @@ publication = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(publication)
 
 
+def _current_family_roster():
+    pins = read_json(ROOT / CURRENT_SELECTION)["selections"]
+    families = {pin["trainer_family"] for pin in pins}
+    assert len(families) == len(pins)
+    return families
+
+
 def _register(root, manifest, name, source, *, finished=None, passed=0):
     attempt = "attempt-" + source if finished else None
     row = {"candidate_id": name, "candidate_revision": "revision-" + source,
@@ -1008,7 +1015,9 @@ def test_committed_atlas_progress_display_matches_its_generator_without_raw_evid
     assert result["atlas_unblocking_progress"] == expected
     markdown = publication._current_markdown(result, ROOT, ROOT / "reports/forge/technique-inventory.md")
     assert (ROOT / "reports/forge/technique-inventory.md").read_text() == markdown
-    assert "4/26 PASS" not in markdown and sum(line.startswith("| **[") for line in markdown.splitlines()) == 11
+    families = _current_family_roster()
+    assert {row["trainer_family"] for row in result["rows"]} == families
+    assert "4/26 PASS" not in markdown and sum(line.startswith("| **[") for line in markdown.splitlines()) == len(families)
     assert "Atlas unblocking progress" not in markdown and "7/8" not in markdown
 
 
@@ -1242,12 +1251,16 @@ def test_half_base_render_keeps_old_invalid_and_separate_full_denominator():
 def test_one_visible_table_keeps_solution_families_with_view_breakdowns_and_separate_evidence():
     result = read_json(ROOT / "reports/forge/technique-inventory.json")
     before = deepcopy(result)
-    assert len(result["rows"]) == 11
+    families = _current_family_roster()
+    assert len(result["rows"]) == len(families)
+    assert {row["trainer_family"] for row in result["rows"]} == families
     text = publication._current_markdown(result, ROOT, ROOT / "reports/forge/technique-inventory.md")
     assert text.count("| Family / view | Tier 1 | Tier 2 | Tier 3 | Total |") == 1
     table = [line for line in text.splitlines() if line.startswith("|")][2:]
-    assert len([line for line in table if line.startswith("| **[")]) == 11
-    assert len([line for line in table if line.startswith("| ↳ [")]) == 66
+    assert len([line for line in table if line.startswith("| **[")]) == len(families)
+    view_rows = sum(len(cohort["views"]) for family in result["family_progress"]["families"]
+                    for cohort in family["cohorts"])
+    assert len([line for line in table if line.startswith("| ↳ [")]) == view_rows
     assert all("families/" in line for line in table)
     assert "19/19" not in text and "7/26 PASS" not in text and "0/26 PASS" not in text
     family_page = _family_text(ROOT, result, "atlas")
@@ -1273,7 +1286,9 @@ def test_original_pr223_score_uses_verified_full_original_law_not_changed_c6_cel
                                        "default_adoption", "speed_ranking", "new_current_retest_credit"))
     text = publication._current_markdown(result, ROOT, ROOT / "reports/forge/technique-inventory.md")
     assert "Original Atlas recipe and serving-law evidence" in _family_text(ROOT, result, "atlas")
-    assert "19/19" not in text and sum(line.startswith("| **[") for line in text.splitlines()) == 11
+    families = _current_family_roster()
+    assert {row["trainer_family"] for row in result["rows"]} == families
+    assert "19/19" not in text and sum(line.startswith("| **[") for line in text.splitlines()) == len(families)
     assert result == before
 
 
@@ -1334,7 +1349,7 @@ def test_half_base_metadata_is_byte_inert_for_older_render_scopes(scope):
     assert result == before
 
 
-def test_committed_cohorts_rebuild_every_scientific_row_in_a_checkout_without_raw_logs(tmp_path):
+def test_original_completion_cohorts_rebuild_every_scientific_row_without_raw_logs(tmp_path):
     for relative in (publication.EVIDENCE_MANIFEST.parent, Path("reports/forge/technique-receipts"),
                      Path("configs/forge/ideas"), Path("configs/forge/configurations"),
                      Path("configs/forge/searches"), Path("configs/forge/views"),
@@ -1349,12 +1364,40 @@ def test_committed_cohorts_rebuild_every_scientific_row_in_a_checkout_without_ra
         shutil.copytree(ROOT / relative, tmp_path / relative)
     shutil.copyfile(ROOT / "configs/forge/trainer-families.json", tmp_path / "configs/forge/trainer-families.json")
     shutil.copyfile(ROOT / "configs/forge/defaults.json", tmp_path / "configs/forge/defaults.json")
+    original = read_json(ROOT / "reports/forge/tier1-completion/publication.json")
     scoped_registry = Path("reports/forge/scoped-publications.json")
     if (ROOT / scoped_registry).is_file():
-        shutil.copyfile(ROOT / scoped_registry, tmp_path / scoped_registry)
+        # Replay the original navigation inputs, including its unchanged GIF
+        # index, rather than the later pure BCAP media successor.
+        registry = read_json(ROOT / scoped_registry)
+        original_media = Path("reports/forge/tier1-completion/media.json")
+        registry["media"] = {"path": original_media.as_posix(),
+                             "sha256": file_hash(tmp_path / original_media)}
+        atomic_json(tmp_path / scoped_registry, registry)
+        assert file_hash(tmp_path / scoped_registry) == original["scoped_registry_sha256"]
         from experiments.forge.scoped_publications import load_publications
-        assert load_publications(tmp_path) == load_publications(ROOT)
+        assert load_publications(tmp_path) == load_publications(
+            ROOT, load=lambda path: registry if path == scoped_registry else read_json(ROOT / path))
+    # This private checkout reconstructs the original completed publication.
+    # Later source cohorts need their own task bindings, which the pure BCAP
+    # composition controls exercise separately; no live admission guard changes.
+    frozen = read_json(ROOT / "configs/forge/rounds/tier1-completion-v1.json")
+    original_families = {row["family"] for row in frozen["candidate_roster"]}
+    assert len(original_families) == len(frozen["candidate_roster"]) == 11
+    selection = read_json(tmp_path / CURRENT_SELECTION)
+    selection["selections"] = [pin for pin in selection["selections"]
+                               if pin["trainer_family"] in original_families]
+    atomic_json(tmp_path / CURRENT_SELECTION, selection)
+    assert file_hash(tmp_path / CURRENT_SELECTION) == original["selection_sha256"]
+    registry_path = tmp_path / "configs/forge/trainer-families.json"
+    registry = read_json(registry_path)
+    registry["families"] = [family for family in registry["families"] if family["id"] in original_families]
+    atomic_json(registry_path, registry)
     manifest = read_json(tmp_path / publication.EVIDENCE_MANIFEST)
+    manifest["cohorts"] = [entry for entry in manifest["cohorts"]
+                           if entry["source_commit"] == original["source_commit"]]
+    assert len(manifest["cohorts"]) == 1
+    atomic_json(tmp_path / publication.EVIDENCE_MANIFEST, manifest)
     # Rebuild this recorded publication against its exact archived denominator.
     # The new scalar task does not relabel any of these scientific rows.
     archived = tmp_path / "configs/forge/view-history" / f"discriminator_stability-v{manifest['view_revision']}.json"
@@ -1362,6 +1405,14 @@ def test_committed_cohorts_rebuild_every_scientific_row_in_a_checkout_without_ra
     if archived.is_file():
         shutil.copyfile(archived, policy_path)
     assert stable_hash(read_json(policy_path)) == manifest["policy_fingerprint"]
+    # Restore the archived parent declarations carried by the committed policy
+    # variants. Cached scientific reconstruction uses their original scorer
+    # contracts, even when the live word fixture has acquired another loss.
+    for variant_path in (tmp_path / "configs/forge/task-variants").rglob("*.json"):
+        variant = read_json(variant_path)
+        parent = variant.get("execution", {}).get("policy_parent_definition")
+        if parent is not None:
+            atomic_json(tmp_path / "configs/forge/tasks" / (parent["id"] + ".json"), parent)
     expected, all_snapshots, registered_rows, unregistered_shadows = {}, [], [], []
     snapshot_bytes = {}
     for entry in manifest["cohorts"]:

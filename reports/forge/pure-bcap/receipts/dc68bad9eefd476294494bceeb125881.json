@@ -1,0 +1,130 @@
+{
+  "attempt_id": "dc68bad9eefd476294494bceeb125881",
+  "attempt_status": "completed",
+  "campaign_id": "pure-bcap-losses-v1",
+  "candidate_id": "bcap-pure--3e15a0db3d78c35a3f5a2a5fa70a069f255119566a38b4254098991fac6a3893",
+  "candidate_revision": "119874f7a52a7536f7e258626ed102170d405abddd21983822787849dfa6c854",
+  "certificate_validated": true,
+  "cost_owner": {
+    "campaign": "pure-bcap-losses-v1",
+    "request": "987e6033f371da739bf7e125",
+    "revision": "119874f7a52a7536f7e258626ed102170d405abddd21983822787849dfa6c854"
+  },
+  "evidence_scope": "published_summary",
+  "note": "Display summary only. Regrading requires the byte-exact archived original receipts; this projection cannot qualify a technique.",
+  "provenance": {
+    "canonical_result_hash": "ff5c84c50bf7baa2af45d2d61f404bd7562cdc11e00e454f750610ae013a9287",
+    "original_files": {
+      "evidence": {
+        "path": "reports/forge/attempts/dc68bad9eefd476294494bceeb125881/evidence.json",
+        "sha256": "905d4a6cb76a6b6d1f4bff763b7c4ca60aa40601c044f2b919f2b8509f66ad25"
+      },
+      "request": {
+        "path": "reports/forge/attempts/dc68bad9eefd476294494bceeb125881/request.json",
+        "sha256": "2a4d8cf5de44d1625cfc8139e39cfae27f687b3120c9afd96122a4e2e9cb2946"
+      },
+      "result": {
+        "path": "reports/forge/attempts/dc68bad9eefd476294494bceeb125881/result.json",
+        "sha256": "f2edce1b7140782c8be20d3105304e3661d05d04db877f4cf32787201473b8d2"
+      }
+    },
+    "source_digest": "eede2a3a5780805489664b7354e8748a4020fa8eb5023aa6cad50c8e3f9d05ac",
+    "source_origin_commit": "af75a3fea19aa6e4d1ca2be867b9c50a02931e33"
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "request_id": "987e6033f371da739bf7e125",
+  "runtime": {
+    "implementation": "CPython",
+    "machine": "x86_64",
+    "packages": {
+      "numpy": "2.5.2",
+      "scipy": "1.17.1",
+      "torch": "2.14.0"
+    },
+    "python": "3.12.13",
+    "system": "Linux"
+  },
+  "schema_version": 1,
+  "summary_version": "forge-technique-receipt-summary-v1",
+  "task_results": [
+    {
+      "api_version": "forge-api-v1",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "compatibility_key": "d1c450c68225f929ca78b7c294bd449ba7a7703bc3194f08e2b1d20eca08ad5e",
+      "cost": {
+        "adapter_seconds": 0.5441385649610311,
+        "charged_task": "unused_token_hold",
+        "device": "cpu",
+        "execution_seconds": 6.719901676056907,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 2.9337571259820834,
+        "wall_seconds": 6.719901676056907
+      },
+      "device": "cpu",
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": null,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 0,
+          "passing_suffix": 0,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metric_checks": {
+          "concept_move": {
+            "margin": -0.23350210956212292,
+            "metric": "concept_move",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 0.85,
+            "value": 0.6164978904378771
+          },
+          "unused_hold": {
+            "margin": 0.13947944771498444,
+            "metric": "unused_hold",
+            "op": ">=",
+            "status": "PASS",
+            "threshold": 0.85,
+            "value": 0.9894794477149844
+          }
+        },
+        "passed": false,
+        "shortfall": 0.13735418209536643,
+        "status": "FAIL"
+      },
+      "execution_path": "public_components",
+      "gate_status": "FAIL",
+      "metrics": {
+        "concept_move": 0.6164978904378771,
+        "unused_hold": 0.9894794477149844
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "sampling": {
+        "eval_output_noise": "not_applied_to_measurement",
+        "sampling_contract_version": 1,
+        "sampling_law": "learned_parameter_measurement",
+        "scoring_weights": "live"
+      },
+      "status": "FAIL",
+      "task_id": "unused_token_hold"
+    }
+  ]
+}

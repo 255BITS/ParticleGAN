@@ -164,7 +164,21 @@ def test_frozen_thresholds_reference_the_declared_gate_policy_and_current_scorer
             changed_upstream.add(name)
     assert changed_upstream == {"vector_anisotropic", "vector_unequal_width", "vector_unequal_mass"}
     for task in tasks.values():
+        historical_policy_sources = task["execution"].get("policy_contract", {}).get("sources", {})
+        if historical_policy_sources:
+            from experiments.forge.tier1_policy import validate
+            parent = validate(task)
+            historical_policy_sources = {
+                **parent["evaluation"].get("sources", {}),
+                **historical_policy_sources,
+                "configs/forge/tasks/" + parent["id"] + ".json": task["policy_parent"]["task_sha256"],
+            }
         for path, digest in task["evaluation"].get("sources", {}).items():
+            if path in historical_policy_sources:
+                # Frozen policy execution bytes may deliberately be blocked
+                # by a newer package. Their source pins remain immutable.
+                assert digest == historical_policy_sources[path]
+                continue
             assert hashlib.sha256((ROOT / path).read_bytes()).hexdigest() == digest
 
 

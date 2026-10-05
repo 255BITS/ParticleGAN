@@ -1,0 +1,130 @@
+{
+  "attempt_id": "ee65b34fe5f74eaeb8f8580624820485",
+  "attempt_status": "completed",
+  "campaign_id": "pure-bcap-losses-v1",
+  "candidate_id": "bcap-pure--3cea01f3ef1ecc2f9677a29e12ffdb7a9aa969a7473b49802574b944a8477eef",
+  "candidate_revision": "ce10ac45edd1813770796c8413248c0619b9cb1af3f9b91ab3506b7ef6f9c81d",
+  "certificate_validated": true,
+  "cost_owner": {
+    "campaign": "pure-bcap-losses-v1",
+    "request": "18076fc3a99ea36263414c4e",
+    "revision": "ce10ac45edd1813770796c8413248c0619b9cb1af3f9b91ab3506b7ef6f9c81d"
+  },
+  "evidence_scope": "published_summary",
+  "note": "Display summary only. Regrading requires the byte-exact archived original receipts; this projection cannot qualify a technique.",
+  "provenance": {
+    "canonical_result_hash": "e151e1cd1dc08eade45c3744c4f2dfcde2d249de1fab44a68658129a903ce6c0",
+    "original_files": {
+      "evidence": {
+        "path": "reports/forge/attempts/ee65b34fe5f74eaeb8f8580624820485/evidence.json",
+        "sha256": "a67bb64bff3b6d1e2b99b9bf9f5691fea765bb4ee7eb4b7a210ea33f97d1ca92"
+      },
+      "request": {
+        "path": "reports/forge/attempts/ee65b34fe5f74eaeb8f8580624820485/request.json",
+        "sha256": "b833e9bfefd9a3944a2c390df2d8415bd31192728d5f8c40cfd78dc548c0f8a9"
+      },
+      "result": {
+        "path": "reports/forge/attempts/ee65b34fe5f74eaeb8f8580624820485/result.json",
+        "sha256": "1a0d46aa89a6b78e481ed3b21876a6cd89d3d7209745a829af88d3ae406edba1"
+      }
+    },
+    "source_digest": "eede2a3a5780805489664b7354e8748a4020fa8eb5023aa6cad50c8e3f9d05ac",
+    "source_origin_commit": "af75a3fea19aa6e4d1ca2be867b9c50a02931e33"
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "request_id": "18076fc3a99ea36263414c4e",
+  "runtime": {
+    "implementation": "CPython",
+    "machine": "x86_64",
+    "packages": {
+      "numpy": "2.5.2",
+      "scipy": "1.17.1",
+      "torch": "2.14.0"
+    },
+    "python": "3.12.13",
+    "system": "Linux"
+  },
+  "schema_version": 1,
+  "summary_version": "forge-technique-receipt-summary-v1",
+  "task_results": [
+    {
+      "api_version": "forge-api-v1",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "compatibility_key": "3df0d6cb394ef8cd9856d0ba393c1497c43aef98e437e7c8c6ace3eb8b2719da",
+      "cost": {
+        "adapter_seconds": 1.062340809032321,
+        "charged_task": "ae_gan_hold",
+        "device": "cpu",
+        "execution_seconds": 7.019753145053983,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 3.344528157962486,
+        "wall_seconds": 7.019753145053983
+      },
+      "device": "cpu",
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 0.252,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 63,
+          "first_pass_step": 21,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 23,
+          "passing_suffix": 23,
+          "stable_from_seconds": null,
+          "stable_from_step": 21
+        },
+        "metric_checks": {
+          "hold": {
+            "margin": 0.33885438591241834,
+            "metric": "hold",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.35,
+            "value": 0.011145614087581635
+          },
+          "recon_mse": {
+            "margin": 0.0439223169349134,
+            "metric": "recon_mse",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.05,
+            "value": 0.006077683065086603
+          }
+        },
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "execution_path": "public_components",
+      "gate_status": "PASS",
+      "metrics": {
+        "hold": 0.011145614087581635,
+        "recon_mse": 0.006077683065086603
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "sampling": {
+        "eval_output_noise": "public_recipe_schedule",
+        "sampling_contract_version": 1,
+        "sampling_law": "generated_and_reconstructed_prior_with_scheduled_output_noise",
+        "scoring_weights": "live"
+      },
+      "status": "PASS",
+      "task_id": "ae_gan_hold"
+    }
+  ]
+}

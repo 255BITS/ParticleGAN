@@ -516,15 +516,39 @@ def test_capacity_header_scope_and_complete_denominator_rejected(tmp_path, cases
 
 
 def test_real_snapshot_public_discovery_has_original_task_and_all_eight_definitions(tmp_path, cases):
-    """Exercise the omitted dependency in an isolated copied source, without models."""
-    from experiments.forge.sources import verify_snapshot
-    execution = runner.freeze_execution_source(ROOT, tmp_path / "source-cache", runner.source(cases))
+    """Replay discovery from the registered execution bytes, without models."""
+    from experiments.forge.sources import SOURCE_DIRS, SOURCE_SUFFIXES, verify_snapshot
+    registered = json.loads((ROOT / "reports/forge/critic-balance-20261003/results.json").read_text())
+    revision = registered["source"]["commit"]
+    historical = tmp_path / "historical-checkout"
+    subprocess.run(["git", "clone", "--shared", "--no-checkout", "--quiet", str(ROOT), str(historical)], check=True)
+    subprocess.run(["git", "update-ref", "--no-deref", "HEAD", revision], cwd=historical, check=True)
+    tracked = subprocess.check_output(["git", "ls-tree", "-r", "--name-only", revision], cwd=ROOT, text=True).splitlines()
+    paths = [name for name in tracked if
+             (Path(name).parts[0] in SOURCE_DIRS and Path(name).suffix in SOURCE_SUFFIXES)
+             or (name.startswith("configs/") and "forge" not in Path(name).parts and Path(name).suffix in SOURCE_SUFFIXES)
+             or (name.startswith(("examples/", "reports/")) and name.endswith(".py"))
+             or name in {*runner.DISCOVERY_INPUTS, "reports/toy_audit/catalog.json"}]
+    subprocess.run(["git", "checkout", revision, "--", *paths], cwd=historical, check=True)
+    environment = os.environ.copy()
+    environment.update(CUDA_VISIBLE_DEVICES="", PYTHONPATH=str(historical), PYTHONDONTWRITEBYTECODE="1",
+                       OMP_NUM_THREADS="1", MKL_NUM_THREADS="1", OPENBLAS_NUM_THREADS="1")
+    metadata = tmp_path / "execution.json"
+    prepare = ("import json, pathlib, runpy; from benchmarks.toy_audit import api_contract; "
+               "r=runpy.run_path(" + repr(str(historical / runner.RELATIVE)) + "); "
+               "c=api_contract.discover(); "
+               "e=r['freeze_execution_source'](r['ROOT'], " + repr(str(tmp_path / "source-cache")) + ", r['source'](c)); "
+               "pathlib.Path(" + repr(str(metadata)) + ").write_text(json.dumps(e))")
+    process = subprocess.run([sys.executable, "-B", "-c", prepare], cwd=historical, env=environment,
+                             capture_output=True, text=True, timeout=60)
+    assert process.returncode == 0, process.stderr
+    execution = json.loads(metadata.read_text())
+    assert execution["origin_commit"] == revision
     snapshot = Path(execution["snapshot_path"])
     verify_snapshot(snapshot, execution)
     for relative, sha in runner.DISCOVERY_INPUTS.items():
         assert execution["files"][relative] == sha
         assert api_run.file_hash(snapshot / relative) == sha
-    environment = os.environ.copy()
     environment.update(CUDA_VISIBLE_DEVICES="", PYTHONPATH=str(snapshot), PYTHONDONTWRITEBYTECODE="1",
                        OMP_NUM_THREADS="1", MKL_NUM_THREADS="1", OPENBLAS_NUM_THREADS="1")
     code = ("import json, pathlib, torch; from benchmarks.toy_audit import api_contract; "

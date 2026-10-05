@@ -292,6 +292,8 @@ def _frozen_report(root, source_commit, *, view_id, execution_backend, temporary
     # modules cannot grade a reconstructed older checkout faithfully.
     program = """
 import json, sys
+import torch
+torch.set_num_threads(1)
 from pathlib import Path
 from experiments.forge.sources import inspect_source
 from experiments.forge.technique_board import write_report
@@ -318,7 +320,8 @@ if (root / 'experiments/forge/knowledge.py').is_file():
 result = write_report(root, goal, execution_backend=None if backend == 'all' else backend, output_prefix=prefix)
 print(json.dumps(result, sort_keys=True))
 """
-    environment = {**os.environ, "PYTHONPATH": str(frozen_root), "PYTHONDONTWRITEBYTECODE": "1"}
+    environment = {**os.environ, "PYTHONPATH": str(frozen_root), "PYTHONDONTWRITEBYTECODE": "1",
+                   "OMP_NUM_THREADS": "1", "MKL_NUM_THREADS": "1", "OPENBLAS_NUM_THREADS": "1"}
     try:
         output = subprocess.check_output([os.path.abspath(sys.executable), "-c", program, str(frozen_root),
                                           str(contract), str(prefix), view_id, execution_backend or "all"],
@@ -1400,7 +1403,15 @@ def _common26_current_markdown(result, root, path):
 def _current_markdown(result, root, path):
     if result.get("family_progress"):
         from experiments.forge.family_reports import render_leaderboard
-        return render_leaderboard(root, result, path)
+        markdown = render_leaderboard(root, result, path)
+        pure = root / "reports/forge/pure-bcap"
+        if any((pure / name).is_file() for name in ("publication.json", "original-initial-readout.json")):
+            import importlib.util
+            spec = importlib.util.spec_from_file_location("pure_bcap_navigation", pure / "publish.py")
+            helper = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(helper)
+            markdown += helper.display_section(root, path)
+        return markdown
     if not result.get('recorded_policy') and result['view'] == 'discriminator_stability':
         return _common26_current_markdown(result, root, path)
     def cell(value):

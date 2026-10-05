@@ -812,18 +812,55 @@ tracks device and dtype.
 ### `GANLoss`
 
 ```python
-gan = recipe.make_loss()  # GANLoss(): relativistic pairing (RpGAN), logistic link
+gan = recipe.make_loss()  # GANLoss(recipe.loss); default: paired logistic RpGAN
+recipe = get_recipe("bcap", loss="hinge", lr=.0010625)
+gan = recipe.make_loss()
 ```
 
-`d_loss(real_logits, fake_logits)` and `g_loss(fake_logits, real_logits)`
+`d_loss(real_logits, fake_logits)` and `g_loss(fake_logits, real_logits=None)`
 return scalar tensors to minimize. Both preserve their input gradient paths;
 the caller decides which scores to detach. Inputs are critic scores, without
-a sigmoid; use matching shapes such as `[B]` or `[B, 1]`.
+a sigmoid. Use matching shapes such as `[B]` or `[B, 1]` for paired scores.
 
-The D loss is `softplus(fake - real).mean()`; the G loss reverses that
-difference, so `g_loss` requires real scores paired row by row. Recompute D's
-scores after updating D; freeze its weights during the G step while retaining
-the gradient path through the fake input.
+`Recipe.loss` selects one of these objectives. `r` and `f` are raw real/fake
+scores, and `mean` averages each score tensor independently except for paired
+`relativistic` differences.
+
+| `loss` | D loss | G loss |
+| --- | --- | --- |
+| `relativistic` (default) | `mean(softplus(f-r))` | `mean(softplus(r-f))` |
+| `non_saturating` | `mean(softplus(-r)) + mean(softplus(f))` | `mean(softplus(-f))` |
+| `hinge` | `mean(relu(1-r)) + mean(relu(1+f))` | `-mean(f)` |
+| `wasserstein` | `mean(f) - mean(r)` | `-mean(f)` |
+| `least_squares` | `(mean((r-1)**2) + mean(f**2))/2` | `mean((f-1)**2)/2` |
+
+Only `relativistic` requires real scores in `g_loss`, paired row by row. The
+other losses ignore that optional argument. Recompute D's scores after updating
+D; freeze its weights during the G step while retaining the gradient path
+through the fake input. Unknown loss names raise `ValueError` when constructing
+`Recipe` or `GANLoss`. Alternative objectives are explicit in `recipe.to_dict()`;
+the historical default stays implicit to preserve older configuration packets.
+
+These are the paired objective from
+[the relativistic discriminator paper](https://arxiv.org/abs/1807.00734),
+the non-saturating objective from
+[the original GAN paper](https://arxiv.org/abs/1406.2661), the hinge objective from
+[SAGAN](https://arxiv.org/abs/1805.08318), the linear critic objective from
+[WGAN](https://arxiv.org/abs/1701.07875), and the real=1/fake=0/generator=1
+parameterization in [LSGAN](https://arxiv.org/abs/1611.04076). Selecting
+`wasserstein` changes the objective only; it does not add weight clipping,
+WGAN-GP or a global Lipschitz constraint. Critic regularization is independent.
+
+Joint [BiGAN](https://arxiv.org/abs/1605.09782) loops train an encoder through
+real pairs `(x, E(x))` as well as a generator through fake pairs `(G(z), z)`.
+Use `joint_g_loss(fake_logits, real_logits)` for that shared generator/encoder
+step, with D frozen. It preserves gradient paths through both streams and
+reverses both discriminator labels. The paired relativistic objective is
+identical to `g_loss(fake, real)`. For other losses, it adds an encoder term to
+the scalar G loss: `mean(softplus(real))` for `non_saturating`, `mean(real)` for
+`hinge`/`wasserstein`, and `mean(real**2)/2` for `least_squares`. Real scores are
+required. Ordinary scalar GANs continue to use `g_loss`, whose unpaired losses
+depend only on fake scores. The five-word joint fixture uses `joint_g_loss`.
 
 ### Critic penalty
 
@@ -853,6 +890,17 @@ explicit recipe choices; selecting BCap alone does not restore the full v0.7
 recipe. Explicit legacy arms select the K3P optimizer; `reg_arm="k3p"` selects
 the earlier K3P penalty too. `reg_arm=None` follows `critic_formulation`, whose
 default is KA2. These choices are recorded in new source/formulation cohorts.
+
+`get_recipe("bcap")` selects a simpler family: native `torch.optim.Adam`, the
+fixed cap above, and constant G/D/prior rates. It disables the critic spike
+guard, EMA anchor, A2 latent damping, direct-particle gain, prior regularization,
+EMA averaging, and additive input/output training noise. Its defaults are
+coefficient 1, cap 1, penalty every update, Adam `(0, .999)`, G/D LR `.00425`
+and prior LR `.0085`; `loss` defaults to `relativistic` and can be overridden.
+The resolved formulation is `bcap`. Selecting this preset does not change
+historical `Recipe(reg_arm="b_cap")` configurations. A declared MoG prior still
+has its kernel noise; that distribution is independent of additive training
+noise. Models, initialization, prior and execution budget belong to the caller.
 
 ### `ParticleRegularizer`
 
@@ -980,6 +1028,7 @@ examples, gradient caveats, DDGAN integration and measured evidence.
 
 ```python
 get_recipe("gan", **overrides) # Named components, current shared hyperparameters.
+get_recipe("bcap", loss="hinge", lr=.0010625) # Fixed BCAP, native Adam, constant rates.
 get_recipe("e22", **overrides) # Schedule-free E22 policy, explicit task settings.
 get_recipe("e22_routed", **overrides) # Conditional dense-bank paired adaptation.
 recipe.replace(**overrides)   # A new immutable Recipe.
@@ -990,6 +1039,8 @@ Recipe(**resolved_dict)       # Restore explicit fields from a saved run.
 `get_recipe(name="gan", **overrides)` selects components without constructing a
 training loop. Explicit keyword fields override the selected configuration.
 Model families share the default optimizer, loss, penalty and schedule. The
+`bcap` preset supplies fixed caps, native Adam and constant rates without
+optimizer interventions or additive training noise. The
 `e22` preset selects DV12 stationarity control with per-row evidence,
 critic-feature birth/death, learned output noise and served averaging; it
 requires no research JSON or training horizon.
@@ -1000,6 +1051,7 @@ and fields are rejected. Restore a complete saved configuration with
 | Name | Components and dimensions |
 | --- | --- |
 | `gan` (default) | Scalar GAN, 20,000 particles, latent dimension 2, no sampling noise |
+| `bcap` | Scalar GAN, 20,000 particles, latent dimension 2; pure fixed BCAP and native Adam at constant rates |
 | `e22` | Scalar GAN, 20,000 particles, latent dimension 2, batch 2,048; E22 controls with learned output noise initially .029 |
 | `e22_routed` | Same E22 controls with `row_policy="routed_paired"`; requires explicit context/routing/feature callbacks and guard observations |
 | `mog` | GAN, 400 MoG components, latent dimension 2, relative sigma .025 |
@@ -1074,6 +1126,7 @@ opt_g, opt_d = recipe.make_optimizers(G, D, prior)
 | `prior_kind`, `sigma_rel`, `standardize` | `particles`, `0`, `True` (standardize applies only to MoG) |
 | `lr`, `d_lr_mult`, `prior_lr_mult` | `.00425`, `1`, `2` |
 | `betas`, `prior_betas` | `(0, .999)`, `None` (inherit betas) |
+| `loss` | `relativistic` (also `non_saturating`, `hinge`, `wasserstein`, `least_squares`) |
 | `critic_formulation`, `reg_arm` | `ka2`, `None` (`k3p`, `a_r1r2`, `b_cap` explicitly select legacy K3P/fixed penalties) |
 | `reg_coeff`, `reg_kappa` | `1`, `1` (critic penalty strength and cap) |
 | `reg_every` | `1` (apply the penalty every k-th step at k× coefficient) |
@@ -1096,7 +1149,7 @@ caller.
 | Optional factory | Result |
 | --- | --- |
 | `recipe.make_prior(**kwargs)` | Prior selected by `prior_kind`, tables drawn at random ([initialize](#initializing-priors) for R2) |
-| `recipe.make_loss()` | `GANLoss` (RpGAN logistic) |
+| `recipe.make_loss()` | `GANLoss(recipe.loss)` (default RpGAN logistic) |
 | `recipe.make_optimizers(G, D, prior=None, *, encoder=None, ema_critic=None, **adam_kwargs)` | Build `(opt_g, opt_d)` over the weights as given (see below) |
 | `recipe.make_critic_optimizer(D, *, ema_critic=None, **adam_kwargs)` | Adam for one (additional) critic (see below) |
 | `recipe.make_generator_optimizer(params, *, latent_table=None, direct_particles=None, **adam_kwargs)` | Adam for generator-side params (see below) |

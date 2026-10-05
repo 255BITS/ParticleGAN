@@ -51,7 +51,7 @@ unresolved prediction/evidence intent. Existing behavioral host-owned settings
 can refuse this exact pure recipe; those cells remain BLOCKED and no override
 is removed to make them run.
 
-Candidate: [`configs/forge/ideas/bcap-pure-adam-v1.json`](../configs/forge/ideas/bcap-pure-adam-v1.json).
+Candidate: [`configs/forge/ideas/bcap-pure-adam-example-v3.json`](../configs/forge/ideas/bcap-pure-adam-example-v3.json).
 
 ```json
 {
@@ -69,7 +69,7 @@ Candidate: [`configs/forge/ideas/bcap-pure-adam-v1.json`](../configs/forge/ideas
   },
   "execution_path": "public_trainer",
   "guide": "EXPERIMENTATION.md",
-  "id": "bcap-pure-adam-v1",
+  "id": "bcap-pure-adam-example-v3",
   "mechanism_class": "structural",
   "mechanism_rationale": "Pure BCAP training baseline: public relativistic-pairing logistic loss plus the fixed one-sided L2 critic-input gradient cap on real and generated samples, updated by native Adam. This is a complete baseline definition, not a single-factor causal ablation.",
   "parent": "k3p-bcap-matched-v1",
@@ -268,7 +268,7 @@ qualification. No candidate, source, job, runtime or evidence SHA is authored.
   "schema_version": 1,
   "id": "pure-bcap-example",
   "status": "draft",
-  "candidate": "bcap-pure-adam-v1",
+  "candidate": "bcap-pure-adam-example-v3",
   "control": {
     "candidate_id": "k3p-bcap-matched-v1",
     "task_map": {}
@@ -338,7 +338,7 @@ means the same declared tasks for the control; an explicit mapping must cover
 every authorized task. Neither controls nor prior evidence silently launch runs.
 
 ```sh
-python -m experiments.forge plan bcap-pure-adam-v1 --study pure-bcap-example \
+python -m experiments.forge plan bcap-pure-adam-example-v3 --study pure-bcap-example \
   --show-boundaries
 ```
 
@@ -351,8 +351,8 @@ unsupported scope and insufficient caps cannot obtain admission by setting ready
 
 ```sh
 # Explicit submission freezes source and study bindings; starts no workers.
-python -m experiments.forge enqueue bcap-pure-adam-v1 --study pure-bcap-example
-python -m experiments.forge logs --follow --candidate bcap-pure-adam-v1
+python -m experiments.forge enqueue bcap-pure-adam-example-v3 --study pure-bcap-example
+python -m experiments.forge logs --follow --candidate bcap-pure-adam-example-v3
 ```
 
 The study owns its campaign; omit `--campaign`. Optional view/tier/device/model
@@ -374,10 +374,10 @@ IDs, schema downgrades and removal of a legacy embedded contract grant no bypass
 
 ```sh
 python -m experiments.forge study new --id pure-bcap-second-question \
-  --candidate bcap-pure-adam-v1 --control k3p-bcap-matched-v1 \
+  --candidate bcap-pure-adam-example-v3 --control k3p-bcap-matched-v1 \
   --view discriminator_stability --device cpu \
   --hypothesis "State another bounded question for the same recipe"
-python -m experiments.forge plan bcap-pure-adam-v1 --study pure-bcap-second-question
+python -m experiments.forge plan bcap-pure-adam-example-v3 --study pure-bcap-second-question
 ```
 
 Only the new study file is created. It can select another allowed view/tier,
@@ -396,7 +396,7 @@ no training. Ordinary qualification still uses the full view and sustained gates
 ## Read out the frozen study
 
 ```sh
-python -m experiments.forge readout bcap-pure-adam-v1 --study pure-bcap-example \
+python -m experiments.forge readout bcap-pure-adam-example-v3 --study pure-bcap-example \
   --conclusion "State the measured result and limits" \
   --comparison "Compare the original compatible control evidence" \
   --next-action "Stop or name the next separately bounded question"

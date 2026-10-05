@@ -112,7 +112,7 @@
       "exact_optimizer_updates": true
     },
     "sources": {
-      "benchmarks/toy_audit/api_images.py": "2e6c65efff150f4fd393ad3b4ee3000d3f0f56b7a077a80f2624c4af46f7b491",
+      "benchmarks/toy_audit/api_images.py": "65d5ab6be9e80d3633922dca958a3dcd0e1b01b770e470e3c69a66654e800016",
       "benchmarks/toy_audit/definition_quality.py": "42d835ab7a0937a6c3759dd719691c721663b7857cb990405253e90f7fbd4cc9",
       "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89",
       "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",

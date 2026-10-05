@@ -317,7 +317,7 @@ def test_task_local_binding_refusal_does_not_remove_runnable_peers(checkout):
 
 def test_pure_bcap_recipe_matches_pinned_draft_training_definition():
     root = Path(__file__).resolve().parents[1]
-    candidate = read_json(root / "configs/forge/ideas/bcap-pure-adam-v1.json")
+    candidate = read_json(root / "configs/forge/ideas/bcap-pure-adam-example-v3.json")
     original = read_json(root / "tests/fixtures/forge/pure-bcap-b509c065.json")
     assert file_hash(root / "tests/fixtures/forge/pure-bcap-b509c065.json") == "f9e291389fb2207fb701696b4f3ae17c185f4eab60864f69a92977fa5979d7f6"
     assert candidate["recipe_overrides"] == original["recipe_overrides"]

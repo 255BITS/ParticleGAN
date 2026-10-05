@@ -8,6 +8,7 @@ import pytest
 
 from experiments.forge import knowledge, publication_memory as memory
 from experiments.forge.contracts import atomic_json, file_hash, read_json, stable_hash
+from experiments.forge.trainer_families import CURRENT_SELECTION
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -217,7 +218,11 @@ def test_one_table_context_preserves_historical_and_all_ordinary_values(tmp_path
     text = renderer._current_markdown(report, tmp_path, tmp_path / "reports/forge/technique-inventory.md")
     table = [line for line in text.splitlines() if line.startswith("|")]
     assert text.count("| Family / view | Tier 1 | Tier 2 | Tier 3 | Total |") == 1
-    assert len([line for line in table if line.startswith("| **[")]) == 11
+    pins = read_json(ROOT / CURRENT_SELECTION)["selections"]
+    families = {pin["trainer_family"] for pin in pins}
+    assert len(pins) == len(families) == len(report["rows"])
+    assert {row["trainer_family"] for row in report["rows"]} == families
+    assert len([line for line in table if line.startswith("| **[")]) == len(families)
     assert "19/19" not in text and "5/19 PASS" not in text
     fresh = report["original_pr223_atlas"]["fresh_retest"]
     assert fresh["counts"] == {"PASS": 5, "NOT_RUN": 14} and fresh["status"] == "INCOMPLETE"

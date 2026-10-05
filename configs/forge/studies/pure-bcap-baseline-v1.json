@@ -4,7 +4,7 @@
     "candidate_budget_seconds": 900,
     "id": "pure-bcap-baseline-v1"
   },
-  "candidate": "bcap-pure-adam-v1",
+  "candidate": "bcap-pure-adam-example-v3",
   "competing_explanation": "Removing several interventions together defines a baseline but cannot attribute a pass or failure to one removed mechanism. A different adversarial loss must be a separately implemented and declared formulation.",
   "control": {
     "candidate_id": "k3p-bcap-matched-v1",

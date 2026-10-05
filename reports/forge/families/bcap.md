@@ -31,7 +31,7 @@ Complete current Tier 1 measurement in: discriminator_stability; additional scop
 | --- | ---: | ---: | ---: | ---: |
 | [adaptation](bcap.md#cohort-cuda-0d83d78027c5-adaptation) | [3/3](bcap.md#cohort-cuda-0d83d78027c5-adaptation-tier-1) | [0(*)/19](bcap.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) | [0(*)/1](bcap.md#cohort-cuda-0d83d78027c5-adaptation-tier-3) | [3(*)/23](bcap.md#cohort-cuda-0d83d78027c5-adaptation) |
 | [clockfree_continuous](bcap.md#cohort-cuda-0d83d78027c5-clockfree_continuous) | [3/4](bcap.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1) | [0(*)/19](bcap.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) | [0(*)/7](bcap.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3) | [3(*)/30](bcap.md#cohort-cuda-0d83d78027c5-clockfree_continuous) |
-| [discriminator_stability](bcap.md#cohort-cuda-0d83d78027c5-discriminator_stability) | [4/6](bcap.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | [0(*)/19](bcap.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) | [0(*)/2](bcap.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-3) | [4(*)/27](bcap.md#cohort-cuda-0d83d78027c5-discriminator_stability) |
+| [discriminator_stability](bcap.md#cohort-cuda-0d83d78027c5-discriminator_stability) | [4(*)/6](bcap.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | [0(*)/19](bcap.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) | [0(*)/2](bcap.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-3) | [4(*)/27](bcap.md#cohort-cuda-0d83d78027c5-discriminator_stability) |
 | [formulation_comparison](bcap.md#cohort-cuda-0d83d78027c5-formulation_comparison) | [3/3](bcap.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-1) | [0(*)/19](bcap.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) | [0(*)/2](bcap.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-3) | [3(*)/24](bcap.md#cohort-cuda-0d83d78027c5-formulation_comparison) |
 | [host_profile_transfer](bcap.md#cohort-cuda-0d83d78027c5-host_profile_transfer) | [3/3](bcap.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-1) | [0(*)/19](bcap.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) | [0(*)/2](bcap.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-3) | [3(*)/24](bcap.md#cohort-cuda-0d83d78027c5-host_profile_transfer) |
 | [quality_coverage](bcap.md#cohort-cuda-0d83d78027c5-quality_coverage) | [3/3](bcap.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-1) | [0(*)/19](bcap.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | [0/0](bcap.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-3) | [3(*)/22](bcap.md#cohort-cuda-0d83d78027c5-quality_coverage) |
@@ -54,7 +54,7 @@ Shared experiments appear once in this list; the family numerator/denominator co
 | --- | --- | --- | --- |
 | [ae_gan_hold](bcap.md#cohort-cuda-0d83d78027c5-experiment-ae_gan_hold) | [adaptation](bcap.md#cohort-cuda-0d83d78027c5-adaptation-tier-1), [clockfree_continuous](bcap.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1), [discriminator_stability](bcap.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1), [formulation_comparison](bcap.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-1), [host_profile_transfer](bcap.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-1), [quality_coverage](bcap.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-1) | PASS | matches |
 | [clockfree_audit_measurement_v1](bcap.md#cohort-cuda-0d83d78027c5-experiment-clockfree_audit_measurement_v1) | [clockfree_continuous](bcap.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1) | FAIL | matches |
-| [five_word_joint_acquisition](bcap.md#cohort-cuda-0d83d78027c5-experiment-five_word_joint_acquisition) | [discriminator_stability](bcap.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | PASS | matches |
+| [five_word_joint_acquisition](bcap.md#cohort-cuda-0d83d78027c5-experiment-five_word_joint_acquisition) | [discriminator_stability](bcap.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | PASS | CHANGED |
 | [gaussian1d_acquisition](bcap.md#cohort-cuda-0d83d78027c5-experiment-gaussian1d_acquisition) | [discriminator_stability](bcap.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | FAIL | matches |
 | [ring16_acquisition](bcap.md#cohort-cuda-0d83d78027c5-experiment-ring16_acquisition) | [discriminator_stability](bcap.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | FAIL | matches |
 | [two_pole](bcap.md#cohort-cuda-0d83d78027c5-experiment-two_pole) | [adaptation](bcap.md#cohort-cuda-0d83d78027c5-adaptation-tier-1), [clockfree_continuous](bcap.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1), [discriminator_stability](bcap.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1), [formulation_comparison](bcap.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-1), [host_profile_transfer](bcap.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-1), [quality_coverage](bcap.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-1) | PASS | matches |
@@ -247,7 +247,7 @@ Calibration: **provisional**. Expanded six-task Tier 1 placement is provisional 
 | [unused_token_hold](bcap.md#cohort-cuda-0d83d78027c5-experiment-unused_token_hold) | required | PASS | matches |
 | [ae_gan_hold](bcap.md#cohort-cuda-0d83d78027c5-experiment-ae_gan_hold) | required | PASS | matches |
 | [ring16_acquisition](bcap.md#cohort-cuda-0d83d78027c5-experiment-ring16_acquisition) | required | FAIL | matches |
-| [five_word_joint_acquisition](bcap.md#cohort-cuda-0d83d78027c5-experiment-five_word_joint_acquisition) | required | PASS | matches |
+| [five_word_joint_acquisition](bcap.md#cohort-cuda-0d83d78027c5-experiment-five_word_joint_acquisition) | required | PASS | CHANGED |
 | [clockfree_audit_measurement_v1](bcap.md#cohort-cuda-0d83d78027c5-experiment-clockfree_audit_measurement_v1) | diagnostic | FAIL | matches |
 
 <a name="cohort-cuda-0d83d78027c5-discriminator_stability-tier-2"></a>
@@ -737,7 +737,7 @@ Current measurement: particle_cloud prior (sigma 0); learned_parameter_measureme
 
 **five_word_joint_acquisition: PASS**. [Current experiment declaration](../../../configs/forge/tasks/five_word_joint_acquisition.json).
 
-Current contract: **matches**. Current task contract matches the recorded conditions. recomputed complete live curve and terminal suffix
+Current contract: **CHANGED**. Current coverage is stale: changed evaluation (gates or sampling law). recomputed complete live curve and terminal suffix
 
 Actual task device: `0` (recorded execution receipt).
 

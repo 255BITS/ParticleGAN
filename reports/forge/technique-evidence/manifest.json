@@ -312,6 +312,38 @@
       "json_sha256": "e1cae161e72aff5f7fc727d9e2c726960e7e26858744a2c9cb5a38d05a98d7d8",
       "snapshot": "reports/forge/technique-evidence/ddde64ee936114becac42863847a51e88ec0301bad9f7f69767d0a2fbc3f3d69.json",
       "source_commit": "928b485ffbe6e17d79b41d307ae8b6275489b37a"
+    },
+    {
+      "candidates": {
+        "bcap-pure--3cea01f3ef1ecc2f9677a29e12ffdb7a9aa969a7473b49802574b944a8477eef": "2026-10-05T04:32:42.957+00:00",
+        "bcap-pure--3e15a0db3d78c35a3f5a2a5fa70a069f255119566a38b4254098991fac6a3893": "2026-10-05T04:34:49.590+00:00",
+        "bcap-pure--43e5a096518483467894280fbcce22b525e75a6816f360af9022b0ea11ddfe2c": "2026-10-05T04:30:53.345+00:00",
+        "bcap-pure--5ea5bdbb2d71403dd316e201a51fb2b2b9c1868a8e053156b21b7cecb344d4be": "2026-10-05T04:29:43.003+00:00",
+        "bcap-pure--93c9484d09ce9d3eb4f2f5deb1cdf4d3a012ff5d8e60146059360b2ad8e279f4": "2026-10-05T04:32:02.544+00:00",
+        "bcap-pure--b0ef1448e7edabed8559973102800ff2f8c65a0ce947e2beba5cf94566a033f9": "2026-10-05T04:31:29.691+00:00",
+        "bcap-pure--bd568a24c6eff240b90d4d1a0421b2a5f0c4cc010bcd86720ee349c6331bb81b": "2026-10-05T04:33:32.236+00:00",
+        "bcap-pure--e94cef26b873872b35a6dd7f7386e9e73d1ed0473b4561cae0b63d6a84040a33": "2026-10-05T04:32:36.572+00:00",
+        "bcap-pure--f4e80008ca454e71ca469b21ce9e2178029505ce402baedec88644f40839f7a1": "2026-10-05T04:34:46.605+00:00",
+        "bcap-pure--ffc04f2456779326082320073842ba6e9d65416e107861996d12376446b38c3c": "2026-10-05T04:30:28.616+00:00"
+      },
+      "json_sha256": "1d1e3de2efde794fc891af22f5f5f2b7e3358961c25f2db33eaa11ef3cec9ac4",
+      "snapshot": "reports/forge/technique-evidence/029cb9bf5e422826f1cf0243f5ebfc0bf3e1e342292e592bae90dc00ac3f70c8.json",
+      "source_commit": "af75a3fea19aa6e4d1ca2be867b9c50a02931e33"
+    },
+    {
+      "candidates": {
+        "bcap-pure--023915c9fd7c40786d1a4790539547147134610285b98821f411a3529f57f7e4": "2026-10-05T12:46:51.815+00:00",
+        "bcap-pure--06f49dc26a020d0ffb6b887e7156a203bc22927b2a6b96a8e5021bb16d4d2cf7": "2026-10-05T12:43:50.436+00:00",
+        "bcap-pure--08c06b8b567f6729df12e544dd19fe9ed3a1402500397739d2df772dc9f4711d": "2026-10-05T12:47:42.784+00:00",
+        "bcap-pure--6532492dc44ac33fea7a61332f0d62faba0bc351c68dd07fde38eb40c7a8537c": "2026-10-05T12:37:53.663+00:00",
+        "bcap-pure--af8db09ebc6580e3d94cd29b89b2624cb6c8107947e4b44aa714d23a64ea096c": "2026-10-05T12:38:35.972+00:00",
+        "bcap-pure--b097e283dc35eb5ff38878e138eacc4845dc3fc6e1a9d5d14bba34899d763657": "2026-10-05T12:40:56.124+00:00",
+        "bcap-pure--dc8f9b409a2b40ab12abbdc38707c69f25bf7cfab45895c1369700a8236b3844": "2026-10-05T12:44:38.361+00:00",
+        "bcap-pure--fd25cf2436cc9b68ebf995ebe006a326976082bc711a57a6e116f17efb7b991d": "2026-10-05T12:41:43.077+00:00"
+      },
+      "json_sha256": "4d526ac0d17f6d7da1608f66584da44101336d127d1e967e6513a61196f1d2ac",
+      "snapshot": "reports/forge/technique-evidence/61d504db3ddc68c4144e1c633c178994e680e79231c745cf97f7d76c9caee0c2.json",
+      "source_commit": "44cc66d78495cb913e0ea064840e2de37c8a4ae5"
     }
   ],
   "note": "Numerical evidence/provenance only. The sole current technique leaderboard is reports/forge/technique-inventory.md; snapshots cannot qualify the latest checkout.",

@@ -146,6 +146,14 @@ def _validate_grid_value(name, value):
         raise ValueError(f"invalid hyperparameter value for Recipe.{name}: {value!r}")
 
 
+def recipe_identity_fields(recipe):
+    """Preserve the formerly implicit objective without rewriting saved cards."""
+    recipe = deepcopy(recipe)
+    if recipe.get("loss") == "relativistic":
+        recipe.pop("loss")
+    return recipe
+
+
 def configuration_id(candidate, *, resolved_recipe=None):
     """Hash actual configuration and fixed laws; exclude labels and source code."""
     formulation = {key: candidate.get(key) for key in FORMULATION_FIELDS}
@@ -155,8 +163,11 @@ def configuration_id(candidate, *, resolved_recipe=None):
     formulation["recipe_overrides"].pop("name", None)
     if resolved_recipe is None:
         resolved_recipe = candidate.get("resolved_configuration_recipe") or _resolved_recipe(candidate)
-    recipe = deepcopy(resolved_recipe)
+    recipe = recipe_identity_fields(resolved_recipe)
     recipe.pop("name", None)
+    # Historical recipes had one implicit paired-logistic objective. Adding
+    # its public selector must not rename those immutable configuration cards.
+    # Explicit loss overrides remain in formulation; alternatives stay bound.
     formulation.update(resolved_recipe=recipe, host_adaptation=candidate.get("host_adaptation"),
                        initializer=candidate.get("initializer", "deterministic_orthogonal"),
                        execution_path=candidate.get("execution_path", "public_trainer"))
@@ -200,7 +211,7 @@ def validate_configuration_declaration(candidate, *, root=None, _lineage=()):
         raise ValueError("configuration declaration hash does not match its actual Recipe and fixed laws")
     if root is None:
         return
-    if stable_hash(_resolved_recipe(candidate)) != stable_hash(frozen):
+    if stable_hash(recipe_identity_fields(_resolved_recipe(candidate))) != stable_hash(recipe_identity_fields(frozen)):
         raise ValueError("configuration frozen Recipe differs from current public defaults or API bindings; "
                          "declare a new configuration")
     parent_id = identifier(candidate.get("parent"), "configuration parent")

@@ -32,8 +32,10 @@ def test_original_24_task_adaptations_stay_ready_and_original_reference_stays_bl
     assert not adapted["preflight_blockers"]
     # The recorded integration covered these 24 hosts. New required smoke hosts
     # retain their own compatibility checks; they do not inherit that readiness.
-    original_hosts = set(adapted["tasks"]) - {"gaussian1d_acquisition", "ring16_acquisition", "five_word_joint_acquisition"}
-    assert len(adapted["tasks"]) == 27 and len(original_hosts) == 24
+    additions = {"gaussian1d_acquisition", "ring16_acquisition", "five_word_joint_acquisition",
+                 "clockfree_audit_measurement_v1"}
+    original_hosts = set(adapted["tasks"]) - additions
+    assert additions <= set(adapted["tasks"]) and len(original_hosts) == 24
     assert all(not adapted["tasks"][name]["preflight_blockers"] for name in original_hosts)
     assert sum(bool(original["tasks"][name]["preflight_blockers"]) for name in original_hosts) == 21
     assert original["tasks"]["two_pole"]["preflight_blockers"]

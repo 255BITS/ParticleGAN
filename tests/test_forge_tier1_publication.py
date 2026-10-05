@@ -23,6 +23,20 @@ DIGEST = "b" * 64
 @pytest.fixture
 def packet(tmp_path):
     shutil.copytree(ROOT / "configs/forge", tmp_path / "configs/forge")
+    # This fixture represents the concluded eleven-family round. Later family
+    # registrations must not silently expand its immutable scientific roster.
+    frozen = read_json(tmp_path / publication.ROUND)
+    frozen_families = {row["family"] for row in frozen["candidate_roster"]}
+    assert len(frozen_families) == len(frozen["candidate_roster"]) == 11
+    registry_path = tmp_path / "configs/forge/trainer-families.json"
+    registry = read_json(registry_path)
+    registry["families"] = [family for family in registry["families"] if family["id"] in frozen_families]
+    assert {family["id"] for family in registry["families"]} == frozen_families
+    atomic_json(registry_path, registry)
+    choices = read_json(tmp_path / CURRENT_SELECTION)
+    choices["selections"] = [pin for pin in choices["selections"] if pin["trainer_family"] in frozen_families]
+    assert {pin["trainer_family"] for pin in choices["selections"]} == frozen_families
+    atomic_json(tmp_path / CURRENT_SELECTION, choices)
     path = tmp_path / "configs/forge/views/discriminator_stability.json"
     main = read_json(path)
     if not any(row["task"] == "clockfree_audit_measurement_v1" for row in main["assignments"]):
@@ -31,7 +45,6 @@ def packet(tmp_path):
                                     "importance": "diagnostic", "order": 100})
         atomic_json(path, main)
     tasks = load_tasks(tmp_path)
-    choices = read_json(tmp_path / CURRENT_SELECTION)
     main_rows, policy_rows, roster, results, catalog = [], [], [], [], {}
     for pin in choices["selections"]:
         family, candidate = pin["trainer_family"], pin["candidate_id"]

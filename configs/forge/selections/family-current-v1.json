@@ -267,6 +267,22 @@
       "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f",
       "task_keys_sha256": "9b3866d15e168d771833d758b7322c0e47947f444859b94be904b7aa2f9ccbf7",
       "trainer_family": "release07-gan-v3"
+    },
+    {
+      "candidate_id": "bcap-pure--5ea5bdbb2d71403dd316e201a51fb2b2b9c1868a8e053156b21b7cecb344d4be",
+      "candidate_revision": "9139a994e2a88403955e5bc8a0ce95be8c2cd5be8f0b2fad0652350d24b6971c",
+      "cohort": "38c2e05b80ccb1949cd578d6ba808da0afc90b199e22d39e9817b2e6abdc0d89",
+      "execution_backend": "cuda",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "reason": "Initial finite Pure BCAP round: required Tier 1 PASS count descending, then configuration hash ascending. One complete recipe; no calibrated default adoption.",
+      "recipe_sha256": "e5404e93760d0e20cfabf9af6e6eea31694141eb6e6966adf5bdd2005c8a7439",
+      "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+      "runtime_cohort_sha256": "0d83d78027c55d8fcf998f70a5b04d52863322a4f81151a200301a40e371695e",
+      "scientific_row_sha256": "251ceee5771b4e2ab2c75dadd32952844aab9805796a261c63b05248f68cad96",
+      "selection_kind": "historical_incumbent",
+      "source_digest": "eede2a3a5780805489664b7354e8748a4020fa8eb5023aa6cad50c8e3f9d05ac",
+      "task_keys_sha256": "6755f0277a3afc96c320b3c3b51cd3888a4a263a3209b05d5a900ca5c3e99118",
+      "trainer_family": "bcap-pure"
     }
   ],
   "view": "discriminator_stability"

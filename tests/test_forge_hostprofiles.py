@@ -227,6 +227,63 @@ def test_diagnostic_namespace_is_retained_without_granting_ordinary_keys(tmp_pat
     assert all(j["compatibility_key"] != j["qualification_compatibility_key"] for j in req["jobs"])
 
 
+def declared_configuration_request(card):
+    """Bind only a declaration; construction and candidate checks draw no RNG."""
+    from dataclasses import asdict
+    from experiments.forge.api import FormulationContext
+    from experiments.forge.planning import candidate_revision_for
+    candidate = deepcopy(card)
+    # Runtime requests carry a resolved prior even when reusable v3 cards do
+    # not author one. Match the planner's default binding in this fixture.
+    candidate["prior"] = {**read_json(ROOT / "configs/forge/defaults.json")["prior"],
+                          **candidate.get("prior", {})}
+    candidate["resolved_recipe"] = asdict(FormulationContext(
+        recipe_preset=candidate.get("recipe_preset"),
+        recipe_overrides=candidate.get("recipe_overrides", {}), prior=candidate.get("prior"),
+        requires_capabilities=candidate.get("requires_capabilities", ()),
+        initializer=candidate.get("initializer", "deterministic_orthogonal")).recipe)
+    source = {"digest": "a" * 64}
+    return {"candidate": candidate, "source": source,
+            "candidate_revision": candidate_revision_for(source["digest"], candidate)}
+
+
+def test_historical_configuration_default_loss_is_implicit_without_weakening_identity():
+    from experiments.forge.hostprofiles import _validate_candidate_identity
+    paths = sorted((ROOT / "configs/forge/configurations").glob("r1r2--*.json"))
+    card = next(read_json(path) for path in paths
+                if "loss" not in read_json(path)["resolved_configuration_recipe"])
+    request = declared_configuration_request(card)
+    assert request["candidate"]["resolved_recipe"]["loss"] == "relativistic"
+    before = deepcopy(request)
+    _validate_candidate_identity(request)
+    assert request == before
+    # The compatibility normalization must preserve nondefault objectives and
+    # cannot accept an alternative loss under the old configuration identity.
+    request["candidate"]["resolved_configuration_recipe"]["loss"] = "hinge"
+    with pytest.raises(ValueError, match="configuration declaration hash"):
+        _validate_candidate_identity(request)
+    request = deepcopy(before)
+    request["candidate"]["resolved_recipe"]["loss"] = "hinge"
+    with pytest.raises(ValueError, match="candidate resolved_recipe differs"):
+        _validate_candidate_identity(request)
+
+
+@pytest.mark.parametrize("loss", ["relativistic", "non_saturating", "hinge", "wasserstein", "least_squares"])
+def test_pure_configuration_checks_keep_exact_declared_loss_and_request_identity(loss):
+    from experiments.forge.hostprofiles import _validate_candidate_identity
+    cards = [read_json(path) for path in sorted((ROOT / "configs/forge/configurations").glob("bcap-pure--*.json"))]
+    card = next(card for card in cards if card["resolved_configuration_recipe"]["loss"] == loss)
+    request = declared_configuration_request(card)
+    assert stable_hash(request["candidate"]["resolved_recipe"]) == stable_hash(card["resolved_configuration_recipe"])
+    assert request["candidate"]["resolved_recipe"]["loss"] == loss
+    before = deepcopy(request)
+    _validate_candidate_identity(request)
+    assert request == before
+    request["candidate"]["resolved_recipe"]["loss"] = "hinge" if loss != "hinge" else "relativistic"
+    with pytest.raises(ValueError, match="candidate resolved_recipe differs"):
+        _validate_candidate_identity(request)
+
+
 def test_runtime_rechecks_grouped_member_before_adapter(tmp_path, monkeypatch):
     from experiments.forge import runtime
     req = prospective(tmp_path, grouped=True)

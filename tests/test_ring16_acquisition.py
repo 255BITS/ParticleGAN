@@ -52,7 +52,7 @@ def test_shared_declaration_is_required_smoke_and_preserves_original_mode_hold()
     view = load_view(ROOT, "discriminator_stability")
     assert view["calibration"]["status"] == "provisional"
     assert next(a for a in view["assignments"] if a["task"] == "ring16_acquisition") == dict(
-        task="ring16_acquisition", qualification_tier=1, importance="required", order=3)
+        task="ring16_acquisition", qualification_tier=1, importance="required", order=4)
     assert next(a for a in view["assignments"] if a["task"] == "mode_hold")["qualification_tier"] == 2
     assert task["resources"]["timeout_seconds"] == 300
     candidate = json.loads((ROOT / "configs/forge/ideas/k3p.json").read_text())

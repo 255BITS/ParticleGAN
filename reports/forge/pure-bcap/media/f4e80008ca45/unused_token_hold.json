@@ -1,0 +1,25 @@
+{
+  "gif_sha256": "688ef3f8e0bf7e737a2e504d8957a60aa7ffb176f7a2f84bc5b8959e406b76a6",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "4a2347b8fb7a1eef6fa59a41e177f504288f4cfe5b892d852a53bee651dba153",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "7c3f6bf4491c1daa2c6c11a12c36ff1afe9450df774a0cd7aac17201002e7a09",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {},
+  "task_id": "unused_token_hold"
+}
