@@ -271,10 +271,13 @@ def test_historical_configuration_default_loss_is_implicit_without_weakening_ide
 @pytest.mark.parametrize("loss", ["relativistic", "non_saturating", "hinge", "wasserstein", "least_squares"])
 def test_pure_configuration_checks_keep_exact_declared_loss_and_request_identity(loss):
     from experiments.forge.hostprofiles import _validate_candidate_identity
+    from particlegan.recipe_compat import without_default_additions
     cards = [read_json(path) for path in sorted((ROOT / "configs/forge/configurations").glob("bcap-pure--*.json"))]
     card = next(card for card in cards if card["resolved_configuration_recipe"]["loss"] == loss)
     request = declared_configuration_request(card)
-    assert stable_hash(request["candidate"]["resolved_recipe"]) == stable_hash(card["resolved_configuration_recipe"])
+    # Default additions stay implicit in archived cards. The runtime request
+    # still records the complete current recipe and retains strict identity.
+    assert stable_hash(without_default_additions(request["candidate"]["resolved_recipe"])) == stable_hash(card["resolved_configuration_recipe"])
     assert request["candidate"]["resolved_recipe"]["loss"] == loss
     before = deepcopy(request)
     _validate_candidate_identity(request)

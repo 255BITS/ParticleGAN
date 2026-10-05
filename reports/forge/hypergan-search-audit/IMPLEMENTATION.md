@@ -55,9 +55,41 @@ tail -F runs/forge/hypergan-search-audit/api-proof.log
 ```
 
 The output directory is exclusive. A 60-second ceiling covers 8 updates per
-variant and the explicit four-update replay. Raw checkpoints and observations
-stay local; compact receipts and the actual-training GIF accompany the final
-implementation readout.
+variant and the explicit four-update replay. The
+[source-bound receipt](implementation-proof.json) passes every declared gate:
+initial states/batches match, full checkpoint continuation and samples are
+exact, and the maximum final G difference between Adam variants is
+`0.0006936814655116308`. The training/checkpoint checks took `.157` seconds on
+the recorded CPU environment. Raw checkpoints and observations stay local.
+
+![Actual public-API training, target and both Adam variants](implementation-training.gif)
+
+## Validation
+
+The final Forge/core sweep passed **2,025 tests and 113 subtests**, with one
+CUDA-only test skipped, on Python 3.12.13 / Torch 2.14.0. It covers every
+`test_forge*.py` module plus Halloween, plain BCAP, adversarial losses, recipe
+schedules and the public trainer. A separate overlapping integration run passed
+318 tests, including publication preservation, archived identities and memory
+freshness. The larger CPU run exercised 5,386 passing tests; its seven
+archive/generated-output checks were corrected and passed in those final runs.
+
+`forge validate`, `forge compile --check`, example compilation/planning,
+relative-link checks and `git diff --check` passed. The source catalog retains
+its pinned historical sources. Publication refresh and memory compilation
+preserve every scientific row, score and selection from develop. They add no
+qualification or second leaderboard.
+
+Raw test output stays in `runs/forge/hypergan-search-audit/`; tail
+`final-forge-core-tests.log` or `api-proof-5dafb438.log` for the corresponding
+software checks. Reproduce the final sweep with:
+
+```sh
+CUDA_VISIBLE_DEVICES='' OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -m pytest \
+  tests/test_forge*.py tests/test_halloween_recipe.py \
+  tests/test_pure_bcap_recipe.py tests/test_adversarial_losses.py \
+  tests/test_recipe_schedules.py tests/test_training.py -q
+```
 
 ## Research use
 
