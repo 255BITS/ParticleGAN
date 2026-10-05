@@ -30,9 +30,9 @@ def list_cases():
         evaluation_observations=24, terminal_observations=5,
         recipe_overrides=dict(prior_kind="mog", sigma_rel=0., standardize=prior["standardize"]),
         prior_options=dict(sigma=prior["sigma"]), profile=dict(init_std=.5),
-        initialization=dict(generator="deterministic_orthogonal seed0", discriminator="deterministic_orthogonal seed1", prior="Gaussian init_std=.5 seed0"),
+        initialization=dict(generator="deterministic_orthogonal seed0", discriminator="deterministic_orthogonal seed1", prior="deterministic_orthogonal R2Normal init_std=.5"),
         sampling="Live public GANTrainer.sample(output_noise=False); uniformly sampled learned MoG locations with fixed sigma=.025 latent Gaussian noise; standardize=False; no EMA.",
-        scope="Acquire N(2, .5^2) in 1,000 updates from random initialization; exact Gaussian CDF, location and width gates must pass at five terminal checks. Tier 1 remains provisional; this standalone API cohort grants no whole-view qualification.",
+        scope="Acquire N(2, .5^2) in 1,000 updates from deterministic initialization; exact Gaussian CDF, location and width gates must pass at five terminal checks. Tier 1 remains provisional; this standalone API cohort grants no whole-view qualification.",
         adaptation="New scalar question. Reuses vector MLPs, explicit learned MoG and GANTrainer; output dimension is one. All prior 2-D targets and recorded results retain their identities.")]
 
 

@@ -72,6 +72,29 @@ def test_eval_isolation_preserves_all_ambient_rngs():
     assert torch.equal(cpu, torch.get_rng_state())
 
 
+def test_entire_run_isolates_ambient_training_rng_and_restores_execution_settings(tmp_path, monkeypatch):
+    class AmbientFixture(PublicSoftwareFixture):
+        def step(self):
+            self.trainer.step(torch.randn(16, 2))
+
+    monkeypatch.setattr(api_run.contract, "build", lambda *args, **kwargs: AmbientFixture())
+    case = {"id": "ambient-training-control", "goal": "Repeat public GAN updates with ambient data RNG",
+            "default_steps": 8, "eval_samples": 32}
+    results = []
+    from experiments.forge.state import state_digest
+    for name in ("first", "repeat"):
+        torch.randn(17)  # Simulate unrelated work between identical requests.
+        before = torch.get_rng_state().clone()
+        deterministic = torch.are_deterministic_algorithms_enabled()
+        results.append(api_run.run_case(case, tmp_path / name, steps=2, frames=2))
+        assert torch.equal(before, torch.get_rng_state())
+        assert torch.are_deterministic_algorithms_enabled() == deterministic
+    assert all(row["status"] == "COMPLETE" for row in results)
+    assert all(row["runtime"]["deterministic_algorithms"] and row["runtime"]["torch_threads"] == 1 for row in results)
+    states = [torch.load(tmp_path / name / "final-state.pt", weights_only=True) for name in ("first", "repeat")]
+    assert state_digest(states[0]) == state_digest(states[1])
+
+
 def test_sparse_gif_frames_do_not_reduce_frozen_metric_cadence(tmp_path, monkeypatch):
     torch.set_num_threads(1)
     fixture = PublicSoftwareFixture()

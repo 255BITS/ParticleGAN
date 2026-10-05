@@ -50,6 +50,10 @@ def build_report(root: Path, view_id: str | None = None, *, publication: dict | 
             "prior": task_prior(task),
             "prior_code_path": PRIOR_CODE_PATHS[execution["prior"]["kind"]],
             "prior_applicability": execution.get("prior_applicability"),
+            "initializer": execution["initializer"],
+            "fixed_initialization": execution.get("fixed_initialization"),
+            "host_initialization": execution.get("host_definition", {}).get("initialization"),
+            "protocol": execution.get("protocol"),
             "steps": execution.get("steps"),
             "incremental_steps": execution.get("incremental_steps"),
             "extension_steps": execution.get("extension_steps"),
@@ -144,6 +148,12 @@ def render_markdown(report: dict, root: Path, output_path: Path | None = None) -
         "Sigma alone does not identify the code path. Ordinary Forge MoG tasks require positive sigma; "
         "archived zero-sigma MoG evidence keeps its recorded kind. "
         "Task sigma is absolute; API demonstrations may instead record the recipe's relative `sigma_rel`.", "",
+        "Reproducible comparisons use the fixed screening seed `0` and candidate-independent named RNG streams. "
+        "Within each task, candidates share architecture, data law, batch size, prior, initialization, "
+        "training budget, evaluation cadence and sampling law. Only the declared trainer change varies. "
+        "The initialization column exposes fixed controls and component policies that take precedence over "
+        "the deterministic orthogonal fallback; these are separate comparison cohorts. "
+        "Historical results retain their original bindings.", "",
         f"Regenerate from the repository root with `{command}`. Add `--json` for machine-readable output "
         "(use a `.json` output path when saving). Regeneration reads declarations and published artifacts and launches no training.", "",
         "Tier 1 is smoke, Tier 2 is quality, and Tier 3 is endurance. "
@@ -193,7 +203,7 @@ def render_markdown(report: dict, root: Path, output_path: Path | None = None) -
 
     def task_table(tasks, assigned=True):
         headers = ["Task"] + (["Importance"] if assigned else [])
-        headers += ["Prior code path", "Experiment guide", "Adapter / gate", "Declared steps", "Timeout (s)", "Dependencies / shared execution"]
+        headers += ["Prior code path", "Initialization / protocol", "Experiment guide", "Adapter / gate", "Declared steps", "Timeout (s)", "Dependencies / shared execution"]
         table = ["| " + " | ".join(headers) + " |", "| " + " | ".join(["---"] * len(headers)) + " |"]
         for task in tasks:
             steps = _cell(task["steps"])
@@ -212,6 +222,10 @@ def render_markdown(report: dict, root: Path, output_path: Path | None = None) -
                              + (" (uninterrupted)" if task["uninterrupted"] else ""))
             cells = [link(task["id"], task["source"])] + ([_cell(task["importance"])] if assigned else [])
             cells += [_prior_cell(task["prior"], task["prior_applicability"]),
+                      _cell(task["initializer"]) +
+                      ("; fixed: " + _cell(json.dumps(task["fixed_initialization"], sort_keys=True)) if task["fixed_initialization"] else "") +
+                      ("; component policy" if task["host_initialization"] else "") +
+                      "; " + _cell(task["protocol"]),
                       f"[Question, results, GIFs](#experiment-{task['guide_id'].replace('_', '-')})",
                       _cell(task["adapter"]) + " / " + _cell(task["evaluation_kind"]),
                       _cell(steps), _cell(task["timeout_seconds"]), "; ".join(notes) or "—"]

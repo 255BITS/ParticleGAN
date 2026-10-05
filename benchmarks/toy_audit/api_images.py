@@ -8,6 +8,8 @@ row controls, which do not support conditional atoms in the public API.
 """
 from __future__ import annotations
 
+from .reproducibility import DEFAULT_SEED
+
 import base64
 from copy import deepcopy
 import hashlib
@@ -24,7 +26,6 @@ from .definition_quality import five_word_metrics
 
 
 VERSION = "public-api-images-v1"
-DEFAULT_SEED = 24002
 MASS_TV_MAX = 0.10
 
 # Generated once from retained banks and pinned source declarations. No

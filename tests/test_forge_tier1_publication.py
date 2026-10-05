@@ -23,6 +23,18 @@ DIGEST = "b" * 64
 @pytest.fixture
 def packet(tmp_path):
     shutil.copytree(ROOT / "configs/forge", tmp_path / "configs/forge")
+    # Publication renders validated implementation links. Keep the fixture's
+    # local documentation sources available without changing their contracts.
+    for card in (tmp_path / "configs/forge/family-documentation").glob("*.json"):
+        documentation = read_json(card)
+        sources = documentation.get("sources", [])
+        if "illustration" in documentation:
+            sources = [*sources, documentation["illustration"]["path"]]
+        for source in sources:
+            if "://" not in source:
+                destination = tmp_path / source
+                destination.parent.mkdir(parents=True, exist_ok=True)
+                shutil.copyfile(ROOT / source, destination)
     # This fixture represents the concluded eleven-family round. Later family
     # registrations must not silently expand its immutable scientific roster.
     frozen = read_json(tmp_path / publication.ROUND)

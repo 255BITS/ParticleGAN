@@ -10,6 +10,16 @@ summarize and give explanations, leaderboard, recommendations on experiments aft
 establish metrics/leaderboards and use them over viewing images
 only keep one generated leaderboard per goal, the current one
 
+For new comparisons, use protocol seed 0 and the repository's public
+deterministic initializer. Hold each task's architecture, target/data law,
+seen batch sequence, prior, sampling, update budget and evaluation cadence
+fixed across trainer candidates. Use one global trainer configuration across
+tasks; declare the trainer delta explicitly. Isolate constructor, data,
+training-noise and evaluation RNGs, and checkpoint every consumed stream.
+Fixed identity/zero fixtures and initialization diagnostics must be explicit
+separate cohorts, never silently substituted for the shared baseline. Preserve
+archived evidence under its original source, seed and initialization contract.
+
 Keep bulk research logs and per-update metric/event streams out of Git. Store
 raw stdout, JSONL traces, JUnit logs, checkpoints, and tensor/state dumps locally
 or in an artifact archive. Commit compact reports, final metrics, provenance

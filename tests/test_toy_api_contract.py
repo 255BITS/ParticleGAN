@@ -1,12 +1,30 @@
 """Fail closed at the API/metric/media boundary, independently of model quality."""
 from copy import deepcopy
+import random
 
 import numpy as np
 import pytest
+import torch
 
 from benchmarks.toy_audit.api_contract import (
     coverage, evaluation_steps, metric_observations, validate_case, validate_observation,
 )
+
+
+def test_shared_seed_and_constructor_isolation_for_every_provider():
+    from benchmarks.toy_audit.api_contract import discover
+    from benchmarks.toy_audit.reproducibility import DEFAULT_SEED, construction_rng
+    assert DEFAULT_SEED == 0
+    assert {case["protocol_seed"] for case in discover().values()} == {0}
+    python, numpy, cpu = random.getstate(), np.random.get_state(), torch.get_rng_state().clone()
+    draws = []
+    for _ in range(2):
+        with construction_rng(DEFAULT_SEED, "cpu"):
+            draws.append((random.random(), np.random.random(), torch.randn(4)))
+    assert draws[0][:2] == draws[1][:2] and torch.equal(draws[0][2], draws[1][2])
+    assert random.getstate() == python and torch.equal(torch.get_rng_state(), cpu)
+    restored = np.random.get_state()
+    assert numpy[0] == restored[0] and np.array_equal(numpy[1], restored[1]) and numpy[2:] == restored[2:]
 
 
 def observation():

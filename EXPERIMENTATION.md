@@ -220,6 +220,27 @@ the evidence identity. A future public-default promotion requires the plan's
 separately registered robustness stage after the candidate is frozen; a passing
 screen is not a public-default promotion.
 
+New public-API toy comparisons also default to seed `0`. Construct fixtures in
+the shared isolated RNG scope and initialize learned networks and priors through
+`particlegan.init`; vector priors use its R2 table instead of constructor draws.
+The public runner scopes the entire execution to the fixed seed, uses one Torch
+thread, requires deterministic algorithms, disables cuDNN benchmarking and TF32,
+and restores the caller's RNG and execution settings after the run.
+Critic and generator target batches use separate checkpointed streams and are
+drawn once per update, so changing the loss cannot shift later critic batches.
+Receipts expose initial model hashes and the vector batch-sequence digest.
+Keep architecture, prior, data law, sampling, budget and scoring cadence fixed
+within a task while comparing declared trainer changes. Use one whole global
+configuration across tasks. Explicit fixed controls and initialization-profile
+diagnostics keep their distinct cohorts and original evidence.
+
+The [bounded reproducibility audit](reports/forge/reproducibility/README.md)
+checks exact same-seed repeat states and matched initial models/batches across
+two public trainers, with actual-training GIFs. It supplies software evidence,
+not full-budget quality qualification. The new vector checkpoint and policy
+search schema versions prevent old stream/seed contracts being reused silently;
+reproduce archived studies from their pinned original source.
+
 ## Inspect cost, then submit
 
 ```sh

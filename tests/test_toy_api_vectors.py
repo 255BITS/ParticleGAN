@@ -47,6 +47,49 @@ def assert_nested_equal(left, right):
         assert left == right
 
 
+def test_deterministic_prior_and_identical_batches_across_loss_paths():
+    case = definition("api-vector-two-broad")
+    fixtures = []
+    for loss in ("relativistic", "non_saturating"):
+        changed = deepcopy(case)
+        changed["recipe_overrides"] = {"loss": loss}
+        fixtures.append(api.VectorFixture(changed, recipe_name="k3p", max_steps=3))
+    left, right = fixtures
+    expected = api.init.deterministic_orthogonal_(left.recipe.make_prior(init_std=.5))
+    assert torch.equal(left.trainer.prior.z, expected.z)
+    for role in ("G", "D", "prior"):
+        assert_nested_equal(getattr(left.trainer, role).state_dict(), getattr(right.trainer, role).state_dict())
+    for _ in range(3):
+        left.step()
+        right.step()
+        assert left.batch_sequence_sha256 == right.batch_sequence_sha256
+        assert torch.equal(left.data_rng.get_state(), right.data_rng.get_state())
+        assert torch.equal(left.generator_data_rng.get_state(), right.generator_data_rng.get_state())
+
+
+def test_old_data_stream_checkpoint_is_rejected_before_mutation():
+    fixture = api.build_case("api-vector-two-broad", max_steps=2)
+    before = fixture.state_dict()
+    legacy = deepcopy(before)
+    legacy["version"] = "toy-public-api-vectors-v1"
+    with pytest.raises(ValueError, match="identity/recipe"):
+        fixture.load_state_dict(legacy)
+    assert_nested_equal(before, fixture.state_dict())
+
+
+@pytest.mark.parametrize("changed_condition", ["seed", "target"])
+def test_checkpoint_cannot_transfer_to_a_different_comparison_condition(changed_condition):
+    original = api.build_case("api-vector-two-broad", max_steps=2)
+    case = definition("api-vector-two-broad")
+    if changed_condition == "target":
+        case["spec"]["means"][0][0] += 1.
+    recipient = api.VectorFixture(case, seed=1 if changed_condition == "seed" else 0, max_steps=2)
+    before = recipient.state_dict()
+    with pytest.raises(ValueError, match="identity/recipe"):
+        recipient.load_state_dict(original.state_dict())
+    assert_nested_equal(before, recipient.state_dict())
+
+
 def test_every_owned_historical_question_and_all_proposal_arms_are_mapped():
     cases = api.list_cases()
     assert len(cases) == len({case["id"] for case in cases}) == 54

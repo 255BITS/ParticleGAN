@@ -23,8 +23,9 @@ import numpy as np
 from particlegan import get_recipe
 from experiments.forge.contracts import stable_hash
 from . import api_contract as contract, api_run, api_publish
+from .reproducibility import DEFAULT_SEED
 
-SCHEMA = "particlegan_policy_family_search_v1"
+SCHEMA = "particlegan_policy_family_search_v2"
 FAMILIES = ("atlas", "e22")
 TUNING_FIELDS = {"lr", "prior_lr_mult"}
 GRID_PROFILES = (
@@ -63,6 +64,7 @@ def proof_bindings(case, family):
     root = contract.ROOT
     paths = list((root / "particlegan").glob("*.py"))
     paths += [root / "benchmarks/toy_audit/api_contract.py",
+              root / "benchmarks/toy_audit/reproducibility.py",
               root / f"benchmarks/toy_audit/{case['provider']}.py"]
     if case["provider"] == "api_vectors":
         paths += [root / "lib/toy_models.py", root / "benchmarks/toy_audit/definition_quality.py",
@@ -122,8 +124,9 @@ def validate_spec(spec, cases):
     """Freeze all candidates, denominators, timeouts and study-only hold rules."""
     if spec.get("schema") != SCHEMA or not isinstance(spec.get("id"), str) or not contract.CASE_ID.fullmatch(spec["id"]):
         raise ValueError("invalid policy-family search schema/id")
-    if spec.get("families") != list(FAMILIES) or spec.get("seed") != 24002:
-        raise ValueError("this round requires declared atlas/e22 families and the unchanged seed24002")
+    if (spec.get("families") != list(FAMILIES) or type(spec.get("seed")) is not int
+            or spec.get("seed") != DEFAULT_SEED):
+        raise ValueError("this round requires declared atlas/e22 families and the fixed comparison seed0")
     _validated_grid(spec)
     assignments = spec.get("cases", [])
     if [(item.get("id"), item.get("tier")) for item in assignments] != list(DEFAULT_CASES):
@@ -133,7 +136,7 @@ def validate_spec(spec, cases):
     for item in assignments:
         # api_run's CLI takes the seed from registered metadata, not an
         # arbitrary --seed flag. Bind its actual default before any child.
-        protocol_seed = cases[item["id"]].get("protocol_seed", 24002)
+        protocol_seed = cases[item["id"]].get("protocol_seed", DEFAULT_SEED)
         if type(protocol_seed) is not int or protocol_seed != spec["seed"]:
             raise ValueError("registered case protocol seed differs from the frozen study seed")
         _positive(item.get("timeout_seconds"), "case timeout")
@@ -346,7 +349,7 @@ def _same_state(left, right):
 def _replay_capacity(record, case, family, state, arrays):
     """Pair capacity arrays to their real public restored sampler, zero updates."""
     with api_run.isolated_evaluation():
-        fixture = contract.build(case, device="cpu", seed=24002, recipe_name=family,
+        fixture = contract.build(case, device="cpu", seed=DEFAULT_SEED, recipe_name=family,
                                  max_steps=case["default_steps"], recipe_overrides=record.get("recipe_overrides", {}))
         if case["provider"] == "api_vectors":
             fixture.load_state_dict(state)
@@ -403,7 +406,7 @@ def _check_numeric_trace(path, receipt, case):
 
 def verify_case(path, case, family, knobs, source, *, returncode, runtime=None, wall_cap_seconds, frames=None):
     receipt = api_publish.verify_run(path)
-    if (digest(receipt["case"]) != digest(case) or receipt.get("seed") != 24002
+    if (digest(receipt["case"]) != digest(case) or receipt.get("seed") != DEFAULT_SEED
             or receipt.get("requested_recipe_overrides") != knobs
             or receipt["recipe"] != resolved_recipe(case, family, knobs)):
         raise ValueError("case/family/seed/requested and actual Recipe differ from frozen study")
