@@ -4,7 +4,7 @@
   "changed_factors": [
     "Native Adam and fixed BCAP only",
     "Constant rates and moments; zero additive training noise",
-    "Adversarial loss: relativistic"
+    "Adversarial loss: hinge"
   ],
   "claim_contract": {
     "sampling_law": "task_declared",
@@ -70,8 +70,8 @@
   "execution_path": "public_trainer",
   "goal": "discriminator_stability",
   "guide": "EXPERIMENTATION.md",
-  "hypothesis": "Pure BCAP with relativistic loss and constant Adam rates may acquire Tier 1 distributions without optimizer interventions.",
-  "id": "bcap-pure-adam-v1",
+  "hypothesis": "Pure BCAP with hinge loss and constant Adam rates may acquire Tier 1 distributions without optimizer interventions.",
+  "id": "bcap-pure-hinge-v1",
   "lifecycle": "proposed",
   "mechanism_class": "structural",
   "mechanism_rationale": "A simple reusable baseline; loss choice is a structural objective change, not a numeric search axis. Several removed interventions prevent single-factor causal attribution.",
@@ -86,7 +86,7 @@
     "k3p-bcap-matched-v1"
   ],
   "recipe_overrides": {
-    "loss": "relativistic"
+    "loss": "hinge"
   },
   "recipe_preset": "bcap",
   "requires_capabilities": [

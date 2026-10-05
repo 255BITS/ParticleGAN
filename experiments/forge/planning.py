@@ -147,9 +147,10 @@ def resolve_idea(root: Path, idea_id: str, *, view_id: str | None = None,
             extensions=idea.get("extensions", {}), initializer=idea.get("initializer", "deterministic_orthogonal"),
             execution_path=idea.get("execution_path", "public_trainer"))
         recipe = asdict(context.recipe)
-        if ("configuration_id" in idea
-                and stable_hash(recipe) != stable_hash(idea.get("resolved_configuration_recipe"))):
-            raise ValueError("configuration frozen Recipe differs from current public defaults or API bindings; declare a new configuration")
+        if "configuration_id" in idea:
+            from .configuration_search import recipe_identity_fields
+            if stable_hash(recipe_identity_fields(recipe)) != stable_hash(recipe_identity_fields(idea["resolved_configuration_recipe"])):
+                raise ValueError("configuration frozen Recipe differs from current public defaults or API bindings; declare a new configuration")
         capabilities = [name for name, enabled in context.capabilities().items() if enabled]
         rng = context.streams.manifest()
     except CapabilityError as exc:

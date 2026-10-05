@@ -173,8 +173,12 @@ class Recipe:
     beta2_anneal_end: float = 0.2
     reg_coeff_end: float | None = None
     reg_coeff_anneal_end: float = 0.2
+    # Objective on raw scores; regularization is selected independently.
+    loss: str = "relativistic"
 
     def __post_init__(self):
+        from .gan_loss import GANLoss
+        GANLoss(self.loss)  # reject invalid objectives before constructing a trainer
         if self.optimizer_family not in ("formulation", "adam"):
             raise ValueError("optimizer_family must be formulation or adam")
         if isinstance(self.eps, bool) or not math.isfinite(self.eps) or self.eps <= 0:
@@ -203,9 +207,11 @@ class Recipe:
             raise ValueError("scheduled reg_coeff requires a fixed R1/R2 or BCap reg_arm")
         if (self.beta2_end is not None or self.reg_coeff_end is not None) and self.total_steps is None:
             raise ValueError("recipe cosine schedules require a declared total_steps horizon")
-        if self.critic_formulation not in ("ka2", "k3p"):
-            raise ValueError("critic_formulation must be ka2 or k3p")
-        if self.reg_arm is not None:
+        if self.critic_formulation not in ("ka2", "k3p", "bcap"):
+            raise ValueError("critic_formulation must be ka2, k3p or bcap")
+        if self.critic_formulation == "bcap" and (self.optimizer_family != "adam" or self.reg_arm != "b_cap"):
+            raise ValueError("bcap formulation requires plain Adam and reg_arm='b_cap'")
+        if self.reg_arm is not None and self.critic_formulation != "bcap":
             # Keep resolved recipe/Forge provenance truthful about the optimizer
             # family selected by an explicit legacy arm.
             object.__setattr__(self, "critic_formulation", "k3p")
@@ -388,6 +394,10 @@ class Recipe:
 
     def to_dict(self):
         result = asdict(self)
+        if self.loss == "relativistic":
+            # Older recipes/checkpoints had this one fixed objective. Preserve
+            # their packets while recording every alternative explicitly.
+            result.pop("loss")
         if self.optimizer_family == "formulation":
             result.pop("optimizer_family")
         if self.eps == 1e-8:
@@ -464,9 +474,9 @@ class Recipe:
         raise ValueError("this recipe has no encoder")
 
     def make_loss(self):
-        """The adversarial loss (RpGAN logistic): ``d_loss(real, fake)``, ``g_loss(fake, real)``."""
+        """The selected objective: ``d_loss(real, fake)``, ``g_loss(fake, real=None)``."""
         from .gan_loss import GANLoss
-        return GANLoss()
+        return GANLoss(self.loss)
 
     def make_critic_penalty(self, optimizer, *, output=None, collect_stats=False, **penalty_overrides):
         """The critic gradient penalty paired with one critic optimizer.
@@ -481,7 +491,7 @@ class Recipe:
         recipe's ``coeff``, ``kappa``, ``lazy_k``,
         ``anchor_weight`` or ``r1_real`` for this penalty.
         """
-        if self.effective_critic_formulation == "k3p":
+        if self.effective_critic_formulation in ("k3p", "bcap"):
             from .k3p import CriticPenalty
         else:
             from .ka2 import CriticPenalty
@@ -490,9 +500,9 @@ class Recipe:
 
     def _penalty_options(self, **overrides):
         """Resolved kernel settings for ``make_critic_penalty``."""
-        if self.critic_formulation not in ("ka2", "k3p"):
-            raise ValueError("critic_formulation must be ka2 or k3p")
-        if self.effective_critic_formulation == "k3p":
+        if self.critic_formulation not in ("ka2", "k3p", "bcap"):
+            raise ValueError("critic_formulation must be ka2, k3p or bcap")
+        if self.effective_critic_formulation in ("k3p", "bcap"):
             if not self.critic_r1_real:
                 raise ValueError("critic_r1_real=False requires the KA2 formulation")
             floor = self.resolved_network_lr_floor
@@ -551,11 +561,11 @@ class Recipe:
         Plain ``optimizer_family='adam'`` returns native Adam without A2 or
         direct-particle response, including when role annotations are supplied.
         """
-        from .k3p import K3PGeneratorAdam
         options = {"lr": self.lr, "betas": self.betas, "amsgrad": self.amsgrad, "eps": self.eps, **adam_kwargs}
         if self.optimizer_family == "adam":
             from .recipe_schedules import make_plain_adam
             return make_plain_adam(self, params, **options)
+        from .k3p import K3PGeneratorAdam
         return K3PGeneratorAdam(params, latent_table=latent_table, direct_particles=direct_particles,
                                 latent_max_rate=self.latent_damping_max_rate,
                                 direct_betas=self.direct_particle_betas,
@@ -564,6 +574,8 @@ class Recipe:
     @property
     def effective_critic_formulation(self):
         """Explicit legacy arms retain their K3P optimizer and penalty family."""
+        if self.critic_formulation == "bcap":
+            return "bcap"
         return "k3p" if self.reg_arm is not None else self.critic_formulation
 
     @property
@@ -651,6 +663,9 @@ def get_recipe(name="gan", **overrides):
     ``"atlas"`` adds automatic feature-cell selection (128 cells) and the
     settled optimizer-reopen guard to E22. ``"ka2"`` names the default;
     ``"k3p"`` explicitly selects the earlier critic formulation.
+    ``"bcap"`` selects native Adam, fixed real/fake input-gradient caps and
+    constant learning rates, with no guard, anchor, latent damping, extra
+    regularization, EMA serving or additive training noise.
     No research configuration file is read at runtime.
 
     Use ``Recipe(**saved_fields)`` for resolved checkpoints and
@@ -660,6 +675,14 @@ def get_recipe(name="gan", **overrides):
         "gan": {},
         "ka2": {},
         "k3p": dict(critic_formulation="k3p"),
+        "bcap": dict(critic_formulation="bcap", optimizer_family="adam", reg_arm="b_cap",
+                     reg_coeff=1., reg_kappa=1., reg_every=1,
+                     lr=.00425, d_lr_mult=1., prior_lr_mult=2., betas=(0., .999),
+                     lr_floor=1., network_lr_floor=1., network_lr_horizon_cap=None,
+                     beta2_end=None, reg_coeff_end=None, d_guard_ratio=0., reg_anchor_weight=0.,
+                     latent_damping_max_rate=0., direct_particle_gain=False,
+                     prior_reg=0., ema_decay=0., input_noise_std=0., output_noise_std=0.,
+                     output_noise_warmup=0.),
         "e22": dict(continuous_policy="dv12", total_steps=None,
                     lr_control="stationarity", amsgrad=True, reg_coeff=3.0,
                     input_noise_std=0.0, output_noise_warmup=0.0,
@@ -700,6 +723,8 @@ def learning_rate_scale(step, total_steps, start=0.6, floor=0.05):
     """
     if total_steps <= 0 or not 0 <= start < 1 or not 0 <= floor <= 1:
         raise ValueError("invalid learning-rate schedule")
+    if floor == 1:
+        return 1.0
     fraction = min(1.0, max(0.0, (step - start * total_steps) / ((1 - start) * total_steps)))
     return floor + (1 - floor) * 0.5 * (1 + math.cos(math.pi * fraction))
 

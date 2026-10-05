@@ -1,41 +1,77 @@
-# Pure BCAP baseline draft
+# Pure BCAP initial loss comparison
 
-Prepared on `research/pure-bcap` from develop commit
-`5f2ac0116de93ab697a7d2faa840245430a3af90`, separately from PR #291's
-K3P-derived BCAP repair study. No training or sampling has started.
+This family starts from develop `5f2ac0116de93ab697a7d2faa840245430a3af90`.
+It uses native PyTorch Adam, constant learning rates and moments, and one fixed
+critic-input gradient penalty on both real and generated samples:
 
-The [candidate card](../../../configs/forge/ideas/bcap-pure-adam-v1.json)
-defines a plain-Adam GAN with the public relativistic-pairing logistic loss and
-only the fixed BCAP critic penalty. Its coefficient and cap are both 1, applied
-every update. LR is .00425, critic multiplier 1, prior multiplier 2, with fixed
-Adam betas (0,.999) and constant learning rates.
+```text
+D loss = adversarial_D(real_scores, fake_scores)
+       + coefficient / 2 * (mean(max(norm(grad_x D(real)) - cap, 0)^2)
+                          + mean(max(norm(grad_x D(fake)) - cap, 0)^2))
+G loss = adversarial_G(fake_scores, real_scores)
+Adam.step(D loss); Adam.step(G loss)
+```
 
-Critic clipping, A2 latent damping, direct-particle response, EMA anchoring,
-prior regularization and additive training input/output noise are disabled.
-Scoring uses live weights. The task owns architecture, initialization, particle
-count, batch size, duration, learned MoG width and sampling law. MoG kernel noise
-is part of the declared prior distribution and remains present.
+The coefficient and L2 cap are both 1; the penalty runs every critic update.
+There is no gradient clipping, A2 damping, adaptive particle gain, EMA anchor,
+prior regularization, averaged serving, additive input/output noise, or cosine
+annealing. Learned MoG kernel noise remains part of each task's distribution.
 
-`Recipe.make_loss()` currently fixes RpGAN logistic loss; `loss` is not an
-accepted recipe field. An alternative adversarial loss needs a public API
-implementation and a separately declared comparison. BCAP specifies the
-penalty, independently of that loss choice.
+The public formulation is small:
 
-The legacy kernel dispatch still records `critic_formulation="k3p"` when
-`reg_arm="b_cap"`. `optimizer_family="adam"` selects native PyTorch Adam, and
-the fixed BCAP kernel uses no K3P blend or EMA-gradient anchor. A zero-update CPU
-construction check verified both optimizer types, absent intervention hooks,
-fixed BCAP selection and constant rates at updates 0, 200, 600 and 999.
+```python
+from particlegan import GANTrainer, get_recipe
 
-Forge metadata does not add training mechanisms. `requires_capabilities` lists
-prerequisites, `claim_contract` declares schedule/scoring/sampling scope, and
-`parent` records lineage rather than live parameter inheritance. Active fields
-come from public defaults or a preset, candidate recipe overrides and task-owned
-resources; execution receipts contain the resolved values.
+recipe = get_recipe("bcap", loss="hinge", lr=.0010625)
+trainer = GANTrainer(recipe, generator, discriminator)
+```
 
-The decision contract remains **draft**. Before executing, freeze a finite round,
-current task/source/runtime bindings, an actual comparable control and a numerical
-prediction/falsifier. This baseline removes several interventions together and
-cannot isolate the causal contribution of any single removed feature. Preserve
-existing gates, failed evidence and the single current leaderboard; no seed-only
-trials. Both GPUs remain available under the user's authorization.
+The five supported losses are `relativistic` (paired logistic),
+`non_saturating` (logistic), `hinge`, `wasserstein`, and `least_squares`.
+They consume raw critic scores. Loss choice is independent of the BCAP penalty;
+Wasserstein plus BCAP does not use weight clipping or an interpolation penalty.
+The [API guide](../../../docs/api.md#ganloss) defines their exact reductions.
+
+The initial round evaluates each loss at global LR `.0010625` and `.00425`.
+D uses the same LR; learned latent locations use twice that LR. Adam betas
+remain `(0, .999)`. These are ten complete global recipes, not per-task tuning.
+Five [search declarations](../../../configs/forge/searches/pure-bcap-relativistic-rates-v1.json)
+share one campaign. Loss changes have structural cards; each numeric search
+varies only LR. The [frozen plan](plans.json) records the complete roster.
+
+All six required Tier 1 tests retain their original numerical gates,
+initialization, resources, prior, sampling law, and training allowance. The
+three CPU behavioral hosts retain their task-owned particle L2, hold or
+reconstruction objectives. The candidate supplies their adversarial objective,
+optimizer and BCAP penalty. Gaussian, ring, words and the clock measurement
+diagnostic run across GPU 0 and GPU 1, one worker per GPU; one CPU worker runs
+the behavioral tests. All runnable Tier 1 peers finish after a scientific
+failure. Higher tiers are outside this round.
+
+The ceiling is 2,520 seconds per candidate (2,220 required plus 300 diagnostic),
+25,200 seconds overall. The shared campaign does not replenish budgets between
+loss searches. The overall display choice uses required PASS count, descending,
+then configuration hash, ascending. Only one whole candidate supplies a family
+row. A good final endpoint cannot replace the sustained terminal gate.
+Calibration remains provisional, and this round cannot change public defaults.
+
+Historical K3P-derived BCAP stays a separate family and retains its evidence.
+Removing several mechanisms at once defines a baseline, so comparison with that
+history cannot isolate the causal effect of one removal. Generated Forge
+admission metadata is separate from the simple public training recipe; its
+numerical prediction is not the scientific pass/fail criterion.
+
+Reproduction preparation is read-only with respect to training, and refuses
+to overwrite a frozen round:
+
+```sh
+python reports/forge/pure-bcap/prepare.py
+python reports/forge/pure-bcap/run.py --expected-commit EXECUTED_COMMIT
+tail -F runs/forge/pure-bcap-losses-v1/coordinator.log
+tail -F runs/forge/pure-bcap-losses-v1/queue/events.jsonl
+```
+
+Raw logs, saved samples, source snapshots and checkpoints stay local or in the
+artifact archive. Publication exports certified final metrics and GIFs from
+the actual saved training observations, without new updates or sampling.
+The [single current leaderboard](../technique-inventory.md) is updated in place.
