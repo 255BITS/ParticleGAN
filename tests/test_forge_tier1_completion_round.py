@@ -60,17 +60,44 @@ def test_registration_drift_rejected_before_queue_admission(tmp_path, change):
     assert not (tmp_path / "runs").exists()
 
 
-def test_actual_full_roster_submit_registration_and_resume_without_training(tmp_path):
+def test_historical_round_rejects_changed_task_before_admission(tmp_path):
+    # Current training source can change without rewriting this historical round.
+    definition = read_json(ROOT / DRIVER.ROUND)
+    from experiments.forge.views import load_tasks
+    tasks = load_tasks(ROOT)
+    assert any(stable_hash(tasks[name]) != row["task_definition_sha256"][name]
+               for row in definition["candidate_roster"] for name in row["task_ids"])
+    with pytest.raises(ValueError, match="task definition changed after roster freeze"):
+        DRIVER.requests(ROOT, tmp_path / "queue")
+    assert not (tmp_path / "queue").exists()
+
+
+def test_private_full_roster_submit_registration_and_resume_without_training(tmp_path):
     root = tmp_path / "checkout"
     queue_root = tmp_path / "queue"
-    definition, original = DRIVER.requests(ROOT, queue_root)
+    original_round = (ROOT / DRIVER.ROUND).read_bytes()
+    definition = read_json(ROOT / DRIVER.ROUND)
+    from experiments.forge.planning import resolve_idea
+    current = resolve_idea(ROOT, "k3p")
     # A compact real checkout includes all frozen evaluator/host source bytes and
     # ordinary admission manifests, without copying existing research logs.
-    for relative in original[0][1]["source"]["files"]:
+    for relative in current["source"]["files"]:
         target = root / relative
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(ROOT / relative, target)
     shutil.copytree(ROOT / "configs/forge", root / "configs/forge", dirs_exist_ok=True)
+    # This is a private software checkout, not a rewrite of historical tasks.
+    # Bind its policy fixtures to the copied current implementation so the
+    # positive admission path can be exercised after public API changes.
+    from experiments.forge.tier1_policy import write_declarations
+    write_declarations(root)
+    from experiments.forge.views import load_tasks
+    tasks = load_tasks(root)
+    for row in definition["candidate_roster"]:
+        row["task_definition_sha256"] = {
+            name: stable_hash(tasks[name]) for name in row["task_ids"]}
+    atomic_json(root / DRIVER.ROUND, definition)
+    assert (ROOT / DRIVER.ROUND).read_bytes() == original_round
     subprocess.run(["git", "init", "-q", str(root)], check=True)
     subprocess.run(["git", "add", "."], cwd=root, check=True)
     subprocess.run(["git", "-c", "user.name=Forge controls", "-c", "user.email=forge@example.invalid",

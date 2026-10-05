@@ -1362,6 +1362,14 @@ def test_committed_cohorts_rebuild_every_scientific_row_in_a_checkout_without_ra
     if archived.is_file():
         shutil.copyfile(archived, policy_path)
     assert stable_hash(read_json(policy_path)) == manifest["policy_fingerprint"]
+    # Restore the archived parent declarations carried by the committed policy
+    # variants. Cached scientific reconstruction uses their original scorer
+    # contracts, even when the live word fixture has acquired another loss.
+    for variant_path in (tmp_path / "configs/forge/task-variants").rglob("*.json"):
+        variant = read_json(variant_path)
+        parent = variant.get("execution", {}).get("policy_parent_definition")
+        if parent is not None:
+            atomic_json(tmp_path / "configs/forge/tasks" / (parent["id"] + ".json"), parent)
     expected, all_snapshots, registered_rows, unregistered_shadows = {}, [], [], []
     snapshot_bytes = {}
     for entry in manifest["cohorts"]:

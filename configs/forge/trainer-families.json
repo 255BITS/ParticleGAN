@@ -131,9 +131,14 @@
         "bcap-pure-non-saturating-v1",
         "bcap-pure-hinge-v1",
         "bcap-pure-wasserstein-v1",
-        "bcap-pure-least-squares-v1"
+        "bcap-pure-least-squares-v1",
+        "bcap-pure-adam-v2",
+        "bcap-pure-non-saturating-joint-v2",
+        "bcap-pure-hinge-joint-v2",
+        "bcap-pure-wasserstein-joint-v2",
+        "bcap-pure-least-squares-joint-v2"
       ],
-      "canonical_candidate": "bcap-pure-adam-v1",
+      "canonical_candidate": "bcap-pure-adam-v2",
       "id": "bcap-pure",
       "label": "Pure BCAP",
       "rationale": "Native Adam, fixed real/fake BCAP, constant rates and moments, selectable adversarial loss. No optimizer interventions or additive training noise. Historical K3P-derived BCAP remains a separate family."

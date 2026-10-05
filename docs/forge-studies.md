@@ -51,7 +51,7 @@ unresolved prediction/evidence intent. Existing behavioral host-owned settings
 can refuse this exact pure recipe; those cells remain BLOCKED and no override
 is removed to make them run.
 
-Candidate: [`configs/forge/ideas/bcap-pure-adam-v1.json`](../configs/forge/ideas/bcap-pure-adam-v1.json).
+Candidate: [`configs/forge/ideas/bcap-pure-adam-example-v3.json`](../configs/forge/ideas/bcap-pure-adam-example-v3.json).
 
 ```json
 {

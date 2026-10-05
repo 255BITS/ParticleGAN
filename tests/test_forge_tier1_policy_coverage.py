@@ -23,6 +23,22 @@ def candidate(name):
     return json.loads((ROOT / 'configs/forge/ideas' / (name + '.json')).read_text())
 
 
+def current_software_checkout(tmp_path):
+    """Private positive controls bind current bytes; historical cards stay frozen."""
+    import shutil
+    from experiments.forge.planning import resolve_idea
+    from experiments.forge.tier1_policy import write_declarations
+    checkout = tmp_path / 'software-checkout'
+    source = resolve_idea(ROOT, 'k3p')['source']
+    for relative in source['files']:
+        destination = checkout / relative
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(ROOT / relative, destination)
+    shutil.copytree(ROOT / 'configs/forge', checkout / 'configs/forge', dirs_exist_ok=True)
+    write_declarations(checkout)
+    return checkout
+
+
 @pytest.mark.parametrize('family', ['atlas', 'e22'])
 @pytest.mark.parametrize('name', ['gaussian1d_acquisition', 'two_pole', 'ring16_acquisition', 'clockfree_audit'])
 def test_supported_policy_preflight_keeps_family_recipe(family, name):
@@ -149,7 +165,8 @@ def test_clean_scheduled_clock_measurement_returns_failure(tmp_path):
 @pytest.mark.parametrize('family', ['atlas', 'e22'])
 def test_frozen_request_contains_parents_and_revalidates_sources(family, tmp_path):
     from experiments.forge.planning import resolve_idea
-    request = resolve_idea(ROOT, family, view_id='tier1_policy_coverage', queue_root=tmp_path,
+    checkout = current_software_checkout(tmp_path)
+    request = resolve_idea(checkout, family, view_id='tier1_policy_coverage', queue_root=tmp_path,
                            freeze_source=True)
     snapshot = Path(request['source']['snapshot_path'])
     assert not request['preflight_blockers']
@@ -166,14 +183,15 @@ def test_frozen_complete_tier_submission_preserves_policy_sibling_blockers(famil
     from experiments.forge.queue import Queue
     from experiments.forge.contracts import atomic_json
     import shutil
+    checkout = current_software_checkout(tmp_path)
     metadata = tmp_path / 'metadata'
     for name in ['configs/forge/defaults.json', 'configs/forge/legacy-ideas-v1.json',
                  'configs/forge/ideas/' + family + '.json']:
         destination = metadata / name
         destination.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copyfile(ROOT / name, destination)
+        shutil.copyfile(checkout / name, destination)
     queue = Queue(tmp_path / 'queue', report_root=metadata / 'reports/forge')
-    request = resolve_idea(ROOT, family, view_id='tier1_policy_coverage', queue_root=queue.root, freeze_source=True)
+    request = resolve_idea(checkout, family, view_id='tier1_policy_coverage', queue_root=queue.root, freeze_source=True)
     queue.submit(request, {'schema_version': 1, 'id': 'policy-coverage-software',
                           'budget_seconds': 2520, 'candidate_budget_seconds': 2520,
                           'accept_shared_cost_transfer': False})

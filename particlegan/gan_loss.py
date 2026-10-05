@@ -43,3 +43,21 @@ class GANLoss:
         if self.loss in ("hinge", "wasserstein"):
             return -fake_logits.mean()
         return .5 * (fake_logits - 1).square().mean()
+
+    def joint_g_loss(self, fake_logits: torch.Tensor, real_logits: torch.Tensor) -> torch.Tensor:
+        """Generator/encoder loss for a joint BiGAN critic.
+
+        Both scores have trainable inputs: fake pairs ``(G(z), z)`` must look
+        real, while encoded real pairs ``(x, E(x))`` must look fake. Scalar
+        GANs use ``g_loss`` instead. The paired default is exactly its original
+        expression; unpaired losses add the reversed-label real-stream term.
+        """
+        if real_logits is None:
+            raise ValueError("joint_g_loss requires real_logits for the encoder stream")
+        if self.loss == "relativistic":
+            return self.g_loss(fake_logits, real_logits)
+        if self.loss == "non_saturating":
+            return self.g_loss(fake_logits) + F.softplus(real_logits).mean()
+        if self.loss in ("hinge", "wasserstein"):
+            return self.g_loss(fake_logits) + real_logits.mean()
+        return self.g_loss(fake_logits) + .5 * real_logits.square().mean()

@@ -1147,8 +1147,8 @@ class WordFixture:
             encoded = self.E(real_words)
             latent, rows = self.prior.sample(len(real_words), generator=self.policy.latent_generator)
             fake_words = self.policy.generate(latent, sigma=noise.output_sigma, rows=rows)
-            loss_gan = self.loss.g_loss(self.noisy_critic(_join_words(fake_words, latent)),
-                                        self.noisy_critic(_join_words(real_words, encoded)))
+            loss_gan = self.loss.joint_g_loss(self.noisy_critic(_join_words(fake_words, latent)),
+                                              self.noisy_critic(_join_words(real_words, encoded)))
             loss_g = loss_gan + self.recipe.prior_reg * self.spread(self.prior.z)
             self.opt_g.zero_grad(set_to_none=True)
             self.policy.before_generator_backward()

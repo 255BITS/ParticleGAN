@@ -148,3 +148,55 @@ def test_historical_default_packet_keeps_fixed_loss_implicit():
         assert recipe.loss == "relativistic"
         assert "loss" not in recipe.to_dict()
 
+
+@pytest.mark.parametrize("loss", GANLoss.LOSSES)
+def test_joint_generator_encoder_objective_has_both_reversed_label_gradients(loss):
+    real = torch.tensor(REAL, dtype=torch.float64, requires_grad=True)
+    fake = torch.tensor(FAKE, dtype=torch.float64, requires_grad=True)
+    objective = GANLoss(loss)
+    value = objective.joint_g_loss(fake, real)
+    grad_real, grad_fake = torch.autograd.grad(value, (real, fake))
+    base_g = expected_values(loss)[1]
+    if loss == "relativistic":
+        expected = base_g
+        real_derivative = [sigmoid(r - f) / 3 for r, f in zip(REAL, FAKE)]
+        fake_derivative = [-sigmoid(r - f) / 3 for r, f in zip(REAL, FAKE)]
+    elif loss == "non_saturating":
+        expected = base_g + sum(math.log1p(math.exp(r)) for r in REAL) / 3
+        real_derivative = [sigmoid(r) / 3 for r in REAL]
+        fake_derivative = [-sigmoid(-f) / 3 for f in FAKE]
+    elif loss in ("hinge", "wasserstein"):
+        expected = base_g + sum(REAL) / 3
+        real_derivative = [1 / 3] * 3
+        fake_derivative = [-1 / 3] * 3
+    else:
+        expected = base_g + sum(r * r for r in REAL) / 6
+        real_derivative = [r / 3 for r in REAL]
+        fake_derivative = [(f - 1) / 3 for f in FAKE]
+    assert value.item() == pytest.approx(expected, rel=1e-14)
+    assert grad_real.tolist() == pytest.approx(real_derivative)
+    assert grad_fake.tolist() == pytest.approx(fake_derivative)
+    assert grad_real.abs().sum() > 0 and grad_fake.abs().sum() > 0
+    with pytest.raises(ValueError, match="encoder stream"):
+        objective.joint_g_loss(fake, None)
+
+
+@pytest.mark.parametrize("dtype", [torch.float32, torch.float64])
+def test_joint_relativistic_value_and_both_gradient_streams_are_bit_exact(dtype):
+    real = torch.tensor(REAL, dtype=dtype, requires_grad=True)
+    fake = torch.tensor(FAKE, dtype=dtype, requires_grad=True)
+    actual = GANLoss().joint_g_loss(fake, real)
+    original = F.softplus(-(fake - real)).mean()
+    assert torch.equal(actual, original)
+    actual_gradients = torch.autograd.grad(actual, (real, fake))
+    original_gradients = torch.autograd.grad(original, (real, fake))
+    assert all(torch.equal(left, right) for left, right in zip(actual_gradients, original_gradients))
+
+
+@pytest.mark.parametrize("loss", ["relativistic", "non_saturating", "least_squares"])
+def test_joint_nonlinear_objective_supports_second_order_autograd(loss):
+    real = torch.tensor(REAL, dtype=torch.float64, requires_grad=True)
+    fake = torch.tensor(FAKE, dtype=torch.float64, requires_grad=True)
+    objective = GANLoss(loss)
+    assert torch.autograd.gradcheck(objective.joint_g_loss, (fake, real))
+    assert torch.autograd.gradgradcheck(objective.joint_g_loss, (fake, real))

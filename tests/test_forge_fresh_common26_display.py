@@ -25,7 +25,7 @@ spec.loader.exec_module(contract)
 
 
 def load_display(source):
-    """Compile only named pure functions; replace the exact lazy pure import."""
+    """Compile named pure functions; replace their exact comparison imports."""
     tree = ast.parse(source)
     names = {"_load_common26_display_choices", "_common26_display_projection", "_common26_link",
              "_common26_label", "_common26_reference_card", "_common26_evidence_links",
@@ -36,20 +36,44 @@ def load_display(source):
         if isinstance(node, ast.FunctionDef) and node.name in names:
             node = deepcopy(node)
             if node.name == "_common26_display_projection":
-                lazy = node.body[1]
-                if (not isinstance(lazy, ast.ImportFrom)
-                        or lazy.module != "experiments.forge.common26_comparison"
-                        or [(item.name, item.asname) for item in lazy.names] != [("project_common26", None)]):
+                allowed = [
+                    ("experiments.forge.common26_comparison",
+                     [("FAMILIES", None), ("TASKS_BY_TIER", None), ("project_common26", None)]),
+                    ("experiments.forge.trainer_families", [("family_for_candidate", None)]),
+                ]
+                imports = [item for item in ast.walk(node)
+                           if isinstance(item, (ast.Import, ast.ImportFrom))]
+                if len(imports) != 2 or len(node.body[1:3]) != 2:
                     raise AssertionError("unexpected pure comparison dependency")
-                node.body.pop(1)
+                for lazy, (module, imported) in zip(node.body[1:3], allowed):
+                    if (not isinstance(lazy, ast.ImportFrom) or lazy.module != module
+                            or lazy.level != 0
+                            or [(item.name, item.asname) for item in lazy.names] != imported):
+                        raise AssertionError("unexpected pure comparison dependency")
+                del node.body[1:3]
             nodes.append(node)
     scope = {"Path": Path, "Counter": Counter, "deepcopy": deepcopy, "hashlib": hashlib,
              "json": json, "os": os, "shlex": shlex, "project_common26": contract.project_common26,
+             "FAMILIES": contract.FAMILIES, "TASKS_BY_TIER": contract.TASKS_BY_TIER,
+             "family_for_candidate": private_family_for_candidate,
              "CURRENT_PREFIX": Path("reports/forge/technique-inventory"),
              "EVIDENCE_MANIFEST": Path("reports/forge/technique-evidence/manifest.json"),
              "COMMON26_DISPLAY_AUDIT": Path("configs/forge/selections/common26-display-audit-v1.json")}
     exec(compile(ast.Module(body=nodes, type_ignores=[]), "private-display-functions", "exec"), scope)
     return scope
+
+
+def private_family_for_candidate(root, candidate_id, declaration=None):
+    """Read only a test's private registry; import no production family module."""
+    path = Path(root) / "configs/forge/trainer-families.json"
+    families = json.loads(path.read_text())["families"] if path.is_file() else []
+    for family in families:
+        if candidate_id in family["candidates"]:
+            explicit = (declaration or {}).get("trainer_family")
+            if explicit is not None and explicit != family["id"]:
+                raise ValueError("private candidate contradicts its registered family")
+            return deepcopy(family)
+    return {"id": candidate_id}
 
 
 display = load_display(RENDERER_PATH.read_text())
@@ -165,6 +189,38 @@ class FreshCommon26DisplayControls(unittest.TestCase):
             change(value)
             with self.subTest(change=change), self.assertRaises(ValueError):
                 display["_common26_display_projection"](value, self.root)
+
+    def test_additional_pure_bcap_family_cannot_fill_historical_common26_cells(self):
+        registry_path = self.root / "configs/forge/trainer-families.json"
+        registry_path.parent.mkdir(parents=True)
+        families = [{"id": family, "candidates": ["canonical-" + family]}
+                    for family, _ in contract.FAMILIES]
+        families.append({"id": "bcap-pure", "candidates": ["canonical-bcap-pure"]})
+        registry_path.write_text(json.dumps({"families": families}))
+        expected = display["_common26_display_projection"](self.result, self.root)
+        historical_bcap = next(row for row in self.result["rows"] if row["trainer_family"] == "bcap")
+        new_family = {**deepcopy(historical_bcap), "trainer_family": "bcap-pure",
+                      "candidate_id": "canonical-bcap-pure", "technique": "Pure BCAP"}
+        self.result["rows"].append(new_family)
+        before = deepcopy(self.result)
+        self.assertEqual(display["_common26_display_projection"](self.result, self.root), expected)
+        self.assertEqual(self.result, before)
+        self.assertTrue(all(row["fresh_common"] == contract.UNSCORED for row in expected["rows"]))
+        # Even an all-pass pure candidate cannot stand in for the original BCAP
+        # slot; only the original supplied historical row can recover that slot.
+        self.result["rows"].remove(historical_bcap)
+        with self.assertRaises(ValueError):
+            display["_common26_display_projection"](self.result, self.root)
+        self.result["historical_family_rows"] = [deepcopy(historical_bcap)]
+        self.assertEqual(display["_common26_display_projection"](self.result, self.root), expected)
+
+    def test_standalone_harness_refuses_other_comparison_imports(self):
+        source = RENDERER_PATH.read_text()
+        original = "from experiments.forge.trainer_families import family_for_candidate"
+        for replacement in ("from pathlib import Path", original + "\n    import torch"):
+            with self.subTest(replacement=replacement), self.assertRaisesRegex(
+                    AssertionError, "unexpected pure comparison dependency"):
+                load_display(source.replace(original, replacement))
 
     def test_current_campaign_name_or_flags_cannot_enable_numeric_acceptance(self):
         self.result.update(CURRENT=True, fresh=True, campaign_id="brand-new", created_at="2099-01-01")

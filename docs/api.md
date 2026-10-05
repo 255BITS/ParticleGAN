@@ -851,6 +851,17 @@ parameterization in [LSGAN](https://arxiv.org/abs/1611.04076). Selecting
 `wasserstein` changes the objective only; it does not add weight clipping,
 WGAN-GP or a global Lipschitz constraint. Critic regularization is independent.
 
+Joint [BiGAN](https://arxiv.org/abs/1605.09782) loops train an encoder through
+real pairs `(x, E(x))` as well as a generator through fake pairs `(G(z), z)`.
+Use `joint_g_loss(fake_logits, real_logits)` for that shared generator/encoder
+step, with D frozen. It preserves gradient paths through both streams and
+reverses both discriminator labels. The paired relativistic objective is
+identical to `g_loss(fake, real)`. For other losses, it adds an encoder term to
+the scalar G loss: `mean(softplus(real))` for `non_saturating`, `mean(real)` for
+`hinge`/`wasserstein`, and `mean(real**2)/2` for `least_squares`. Real scores are
+required. Ordinary scalar GANs continue to use `g_loss`, whose unpaired losses
+depend only on fake scores. The five-word joint fixture uses `joint_g_loss`.
+
 ### Critic penalty
 
 ```python

@@ -139,9 +139,13 @@ def _validate_candidate_identity(request):
         execution_path=candidate.get("execution_path", "public_trainer"))
     resolved_recipe = asdict(context.recipe)
     if "configuration_id" in candidate:
-        from .configuration_search import validate_configuration_declaration
+        from .configuration_search import recipe_identity_fields, validate_configuration_declaration
         validate_configuration_declaration(candidate)
-        if canonical(candidate.get("resolved_configuration_recipe")) != canonical(resolved_recipe):
+        # Older immutable cards recorded the one paired-logistic objective
+        # implicitly. Normalize only that default for this legacy comparison;
+        # the actual request, alternative objectives and source identity stay
+        # explicit and continue through the strict checks below.
+        if canonical(recipe_identity_fields(candidate["resolved_configuration_recipe"])) != canonical(recipe_identity_fields(resolved_recipe)):
             raise ValueError("configuration frozen Recipe differs from its actual public formulation")
     if canonical(candidate.get("resolved_recipe")) != canonical(resolved_recipe):
         raise ValueError("candidate resolved_recipe differs from its actual public formulation")

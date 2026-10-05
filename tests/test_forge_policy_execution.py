@@ -149,7 +149,7 @@ def frozen_control(tmp_path):
     package = root / "experiments/forge"
     package.mkdir(parents=True)
     original = Path(execution.__file__).parent
-    for name in ("__init__", "policy_execution", "contracts", "queue", "sources"):
+    for name in ("__init__", "policy_execution", "contracts", "queue", "sources", "execution_policy"):
         (package / f"{name}.py").write_bytes((original / f"{name}.py").read_bytes())
     expected = {"commit": "control", "files_sha256": {"particlegan/control.py": api_run.file_hash(code)}}
     manifest = execution.freeze_source(root, tmp_path / "queue", expected)

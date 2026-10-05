@@ -222,7 +222,8 @@ def test_committed_pages_and_every_drilldown_link_match_the_generator():
     assert publication["family_progress"] == build_progress(root, publication)
     pages = generated_pages(root, publication)
     overview = root / "reports/forge/technique-inventory.md"
-    pages[overview] = render_leaderboard(root, publication, overview)
+    from reports.forge.regenerate_technique_inventory import _current_markdown
+    pages[overview] = _current_markdown(publication, root, overview)
     for page, text in pages.items():
         assert page.read_text() == text
         for target in re.findall(r"\]\(([^)]+)\)", text):
@@ -235,28 +236,35 @@ def test_committed_pages_and_every_drilldown_link_match_the_generator():
                 assert f'<a name="{fragment}"></a>' in pages.get(linked, linked.read_text()), (page, target)
 
 
-def test_current_clock_measurement_completes_tier1_without_relabeling_original_evidence():
+def test_current_clock_measurement_retains_original_evidence_alongside_contract_drift():
     root = Path(__file__).resolve().parents[1]
     publication = read_json(root / "reports/forge/technique-inventory.json")
     recorded = deepcopy(publication["rows"])
     progress = build_progress(root, publication)
     assert publication["rows"] == recorded
     assert progress["qualification_input"] is False
-    cohorts = {family["id"]: family["cohorts"][0] for family in progress["families"]}
+    round_definition = read_json(root / "configs/forge/rounds/tier1-completion-v1.json")
+    original_families = {row["family"] for row in round_definition["candidate_roster"]}
+    cohorts = {family["id"]: family["cohorts"][0] for family in progress["families"]
+               if family["id"] in original_families}
+    assert set(cohorts) == original_families
     for name, cohort in cohorts.items():
         clock = cohort["tasks"]["clockfree_audit_measurement_v1"]
         if name in {"atlas", "e22"}:
             assert cohort["tiers"]["1"]["incomplete"] is True
             assert clock["status"] == "BLOCKED"
             continue
-        assert cohort["tiers"]["1"]["incomplete"] is False
+        # A later scorer binding leaves the old recorded grades visible but
+        # cannot claim complete coverage of the changed word task contract.
+        word = cohort["tasks"]["five_word_joint_acquisition"]
+        assert cohort["tiers"]["1"]["incomplete"] is (word["current_contract"] != "matches")
         assert sum(cohort["tiers"]["1"]["counts"].values()) == 22
         assert clock["status"] == "FAIL" and clock["current_contract"] == "matches"
         assert cohort["tasks"]["clockfree_audit"]["status"] == "UNKNOWN"
         assert cohort["tasks"]["clockfree_audit"]["current_contract"] == "unbound"
         assert recorded[cohort["row_index"]]["qualified_tier"] == 0
     bcap = cohorts["bcap"]
-    assert score(bcap["tiers"]["1"]) == "19/22"
+    assert score(bcap["tiers"]["1"]) == ("19(*)/22" if bcap["tiers"]["1"]["incomplete"] else "19/22")
     clock_view = next(view for view in bcap["views"] if view["id"] == "clockfree_continuous")
     assert score(clock_view["tiers"]["1"]) == "3/4"
     clock = bcap["tasks"]["clockfree_audit_measurement_v1"]

@@ -105,7 +105,10 @@ def test_all_four_declared_configuration_ids_bind_actual_forge_prior_context(stu
                                through_tier=1, execution_backend="cpu")
         recipe = request["candidate"]["resolved_recipe"]
         bindings = request_bindings(request)
-        assert stable_hash(recipe) == stable_hash(card["resolved_configuration_recipe"]) == stable_hash(trial["resolved_recipe"])
+        identity = stable_hash(search.recipe_identity_fields(recipe))
+        assert identity == stable_hash(search.recipe_identity_fields(card["resolved_configuration_recipe"]))
+        assert identity == stable_hash(search.recipe_identity_fields(trial["resolved_recipe"]))
+        assert recipe["loss"] == card["resolved_configuration_recipe"].get("loss", "relativistic")
         assert recipe["prior_kind"] == "mog" and recipe["standardize"] is False
         assert request["candidate"]["prior"] == card["prior"] == report["base_declaration"]["prior"]
         assert search.configuration_id(card, resolved_recipe=recipe) == trial["configuration_id"]
@@ -330,7 +333,13 @@ def test_current_only_task_history_membership_preserves_recorded_family_identity
 
 def test_registry_groups_gan_v3_task_priors_and_keeps_original_historical_identities():
     registry = families.load_families(ROOT)
-    assert len(registry) == 11
+    retained = {"r1r2", "bcap", "k3p", "ka2", "e22", "atlas", "release07-gan-v3",
+                "k3p-no-anchor", "k3p-no-penalty", "k3p-no-a2", "k3p-no-training-noise"}
+    assert set(registry) == retained | {"bcap-pure"}
+    assert registry["bcap-pure"]["canonical_candidate"] == "bcap-pure-adam-v2"
+    assert set(registry["bcap-pure"]["candidates"]).isdisjoint(registry["bcap"]["candidates"])
+    assert families.family_for_candidate(ROOT, "bcap-pure-adam-v1")["id"] == "bcap-pure"
+    assert families.family_for_candidate(ROOT, "k3p-bcap-matched-v1")["id"] == "bcap"
     assert registry["r1r2"]["canonical_candidate"] == "r3gan-stacked-training-toy-v1"
     assert families.family_for_candidate(ROOT, "k3p-r1r2-matched-v1")["id"] == "r1r2"
     assert families.family_for_candidate(ROOT, "release07-gan-v3-cloud-v1")["id"] != families.family_for_candidate(ROOT, "release07-gan-v3-task-adapted-v1")["id"]
