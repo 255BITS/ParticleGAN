@@ -251,6 +251,35 @@ def _publication_rows(result):
     return rows
 
 
+def _bound_publication_rows(result, allowed_sources):
+    """Separate unresolved declarations from reconstructed scientific cohorts."""
+    bound, unresolved = [], []
+    for row in _publication_rows(result):
+        bindings = row.get("bindings", {})
+        source = bindings.get("source_digest")
+        if source in allowed_sources:
+            bound.append(row)
+            continue
+        # A declaration that failed resolution has no source cohort to attest.
+        # Retain its complete blocker diagnostics, but register no task result,
+        # attempt identity or scientific binding from it. Actual source claims
+        # and attempted/graded rows still require validated receipt manifests.
+        tasks = row.get("tasks", []) + row.get("nonrequired_tasks", [])
+        if (source is None and bindings.get("available") is False
+                and not row.get("attempt_ids") and row.get("status") == "BLOCKED"
+                and row.get("candidate_revision") is None and row.get("cohort") is None
+                and row.get("qualified_tier") == 0 and row.get("blockers")
+                and not bindings.get("task_contracts")
+                and not any(bindings.get(key) for key in ("recipe_sha256", "protocol_sha256", "rng_sha256"))
+                and row.get("cost", {}).get("measured_tasks", 0) == 0
+                and tasks and all(task.get("status") == "BLOCKED" for task in tasks)):
+            unresolved.append(row)
+            continue
+        raise ValueError("frozen report contains a source cohort absent from the validated original receipts: "
+                         + row["candidate_id"] + " / " + str(source))
+    return bound, unresolved
+
+
 def _frozen_report(root, source_commit, *, view_id, execution_backend, temporary):
     commit = _resolve_commit(root, source_commit)
     manifests = _receipt_manifests(root, commit)
@@ -298,12 +327,11 @@ print(json.dumps(result, sort_keys=True))
         raise ValueError("frozen independent report failed: " + error.stderr.strip()) from error
     metadata = json.loads(output)
     result = read_json(metadata["json"])
-    result["rows"] = _publication_rows(result)
+    result["rows"], unresolved = _bound_publication_rows(result, set(manifests))
+    if unresolved:
+        result["unresolved_configuration_rows"] = unresolved
     if "configuration_rows" in result:
         result["snapshot_row_scope"] = "all_configuration_variants"
-    allowed = set(manifests)
-    if any(row.get("bindings", {}).get("source_digest") not in allowed for row in result["rows"]):
-        raise ValueError("frozen report contains a source cohort absent from the validated original receipts")
     return metadata, result, commit, sorted(manifests)
 
 

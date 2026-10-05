@@ -39,8 +39,18 @@ def leaderboard_path(root: Path, view_id: str) -> Path:
     if metadata.is_file() and (Path(root) / current).is_file():
         publication = read_json(metadata)
         if (publication.get("publication_scope") == "current_technique_inventory"
-                and publication.get("view") == view_id):
-            return current
+                and isinstance(publication.get("view"), str)):
+            published_view = publication.get("view")
+            if published_view == view_id:
+                return current
+            declaration = Path(root) / "configs/forge/views" / (view_id + ".json")
+            if declaration.is_file():
+                view = read_json(declaration)
+                published_declaration = Path(root) / "configs/forge/views" / (published_view + ".json")
+                goal = (read_json(published_declaration).get("goal", published_view)
+                        if published_declaration.is_file() else published_view)
+                if view.get("reporting", {}).get("family_totals") is False and view.get("goal") == goal:
+                    return current
     return Path("reports/forge/leaderboards") / (view_id + ".md")
 
 

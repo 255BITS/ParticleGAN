@@ -163,6 +163,17 @@ def score(count, *, marker=True):
     return f"{count['passed']}" + ("(*)" if marker and count["incomplete"] else "") + f"/{count['total']}"
 
 
+def _same_active_runtime(left, right):
+    """Match served hardware/software while retaining separate cohort identities."""
+    backend = left.get("execution_backend")
+    runtime = left.get("runtime")
+    profile = left.get("compute_profiles", {}).get(backend)
+    return (backend in {"cpu", "cuda"} and backend == right.get("execution_backend")
+            and isinstance(runtime, dict) and bool(runtime) and runtime == right.get("runtime")
+            and isinstance(profile, dict) and bool(profile)
+            and profile == right.get("compute_profiles", {}).get(backend))
+
+
 def build_progress(root: Path, publication: dict) -> dict:
     """Project current view placement over immutable selected task outcomes."""
     root = Path(root)
@@ -179,6 +190,10 @@ def build_progress(root: Path, publication: dict) -> dict:
     if len(tasks) != len(task_files):
         raise ValueError("family report task declarations have duplicate ids")
     task_paths = {path.stem: path.relative_to(root).as_posix() for path in task_files}
+    from .scoped_publications import load_publications
+    attachments = load_publications(root, load)
+    scoped_publications, media = attachments["cohorts"], attachments["media"]
+    inputs.update({item["gif"]: item["gif_sha256"] for item in media.values()})
     for view in views:
         identifier(view["id"], "view")
         names = [assignment["task"] for assignment in view["assignments"]]
@@ -204,8 +219,31 @@ def build_progress(root: Path, publication: dict) -> dict:
             raise ValueError("family report cannot pool multiple selected configurations in one runtime")
         recorded = {task["task_id"]: task for task in selected.get("tasks", [])}
         recorded.update({task["task_id"]: task for task in selected.get("nonrequired_tasks", [])})
+        bindings = dict(selected.get("bindings", {}).get("task_contracts", {}))
+        catalogs = dict(publication.get("task_contracts", {}))
+        reason_catalog = dict(publication.get("status_reasons", {}))
+        separate = [item for item in scoped_publications if item["family"] == family_id
+                    and item["row"]["candidate_id"] == selected["candidate_id"]
+                    and item["row"].get("candidate_revision") == selected.get("candidate_revision")
+                    and _same_active_runtime(item["row"].get("runtime_cohort", {}), selected.get("runtime_cohort", {}))
+                    and item["row"]["bindings"]["source_digest"] == selected.get("bindings", {}).get("source_digest")]
+        scoped_names = {assignment["task"] for view in scoped for assignment in view["assignments"]}
+        scoped_attempts = []
+        final_measurements = {task: measured for (family, task), measured in attachments["final_measurements"].items()
+                              if family == family_id and measured["candidate_id"] == selected["candidate_id"]
+                              and measured["candidate_revision"] == selected.get("candidate_revision")
+                              and measured["source_digest"] == selected.get("bindings", {}).get("source_digest")}
+        for item in separate:
+            measured = item["row"].get("tasks", []) + item["row"].get("nonrequired_tasks", [])
+            if any(result["task_id"] not in scoped_names or result["task_id"] in recorded for result in measured):
+                raise ValueError("separate cohort results cannot replace selected parent cells")
+            recorded.update({result["task_id"]: result for result in measured})
+            bindings.update(item["row"]["bindings"].get("task_contracts", {}))
+            catalogs.update(item["task_contracts"])
+            reason_catalog.update(item["status_reasons"])
+            scoped_attempts.extend(item["row"].get("attempt_ids", []))
         receipts = {}
-        for attempt in selected.get("attempt_ids", []):
+        for attempt in selected.get("attempt_ids", []) + scoped_attempts:
             identifier(attempt, "attempt")
             path = Path("reports/forge/technique-receipts") / (attempt + ".json")
             summary = load(path)
@@ -217,6 +255,9 @@ def build_progress(root: Path, publication: dict) -> dict:
                 # Grades belong to the selected scientific row. Compact metrics
                 # enrich its navigation only; a receipt never creates a pass.
                 if result["task_id"] in recorded:
+                    final = final_measurements.get(result["task_id"])
+                    if final and final["attempt_id"] != attempt:
+                        continue
                     prior = receipts.get(result["task_id"])
                     if prior and prior["result"] != result:
                         raise ValueError("family report has conflicting compact task results")
@@ -226,8 +267,8 @@ def build_progress(root: Path, publication: dict) -> dict:
         assigned = {assignment["task"] for view in views for assignment in view["assignments"]}
         for name in sorted(assigned):
             previous = recorded.get(name, {})
-            contract_hash = selected.get("bindings", {}).get("task_contracts", {}).get(name)
-            contract = publication.get("task_contracts", {}).get(contract_hash, {})
+            contract_hash = bindings.get(name)
+            contract = catalogs.get(contract_hash, {})
             task = tasks.get(name, {})
             match = "unbound"
             changed = []
@@ -240,7 +281,7 @@ def build_progress(root: Path, publication: dict) -> dict:
                     changed.append("timeout reservation")
                 match = "CHANGED" if changed else "matches"
             receipt = receipts.get(name, {})
-            reasons = publication.get("status_reasons", {}).get(previous.get("reasons_sha256"), [])
+            reasons = reason_catalog.get(previous.get("reasons_sha256"), [])
             status = previous.get("status", "UNKNOWN")
             reason = ("; ".join(previous.get("reasons", reasons)) or previous.get("reason")
                       or receipt.get("result", {}).get("reason"))
@@ -258,9 +299,22 @@ def build_progress(root: Path, publication: dict) -> dict:
             results[name] = {"task_id": name, "status": previous.get("status", "UNKNOWN"),
                              "current_contract": match, "receipt": receipt.get("path"),
                              "metrics": deepcopy(receipt.get("result", {})), "recorded_contract": contract_hash,
+                             "recorded_conditions": {key: deepcopy(contract.get(key, {})) for key in ("prior", "sampling")},
                              "reason": reason, "coverage_reason": coverage, "changed_contract_fields": changed,
                              "device": receipt.get("result", {}).get("device", receipt.get("result", {}).get("cost", {}).get("device")),
                              "policy_parent": deepcopy(task.get("policy_parent"))}
+            matching_media = [item for (family, task_id, attempt), item in media.items()
+                              if family == family_id and task_id == name
+                              and attempt in selected.get("attempt_ids", []) + scoped_attempts
+                              and (name not in final_measurements or attempt == final_measurements[name]["attempt_id"])
+                              and item["recorded_grade"] == status]
+            if matching_media:
+                results[name]["training_media"] = matching_media
+            audit = attachments["clock_audits"].get((family_id, name))
+            if (audit and name in final_measurements
+                    and audit["attempt_id"] in selected.get("attempt_ids", []) + scoped_attempts
+                    and audit["recorded_grade"] == status):
+                results[name]["clock_audit"] = audit
 
         def view_row(view):
             tiers = {}
@@ -276,6 +330,10 @@ def build_progress(root: Path, publication: dict) -> dict:
         family["cohorts"].append({"anchor": cohort_anchor, "backend": backend,
                                    "row_index": row_index, "tasks": results, "views": view_rows,
                                    "scoped_views": [view_row(view) for view in scoped],
+                                   "scoped_publications": [{**{key: item[key] for key in ("path", "view", "source_commit")},
+                                                            "cohort": item["row"].get("cohort"),
+                                                            "runtime_cohort_sha256": stable_hash(item["row"].get("runtime_cohort", {}))}
+                                                           for item in separate],
                                    "tiers": {tier: _sum([view["tiers"][tier] for view in view_rows]) for tier in TIERS},
                                    "total": _sum([view["total"] for view in view_rows])})
     first_full_atlas = _full_original_atlas_first_case(root, load)
@@ -397,6 +455,12 @@ def render_family(root: Path, publication: dict, family: dict) -> str:
         configuration_label = " · ".join([label[0], label[1][:12]]) if len(label) == 2 else label[0]
         source = row.get("bindings", {}).get("source_digest")
         pointer = publication.get("evidence_sources", {}).get(row.get("publication_key"), {})
+        # publish_current validates this snapshot's complete identity before
+        # rendering, then writes a pending snapshot alongside the pages. Its
+        # first-write link must not depend on that later filesystem mutation.
+        frozen_evidence = (link(root, page, "Frozen numerical evidence", pointer["snapshot"])
+                           if pointer.get("snapshot") and pointer.get("json_sha256") else
+                           _existing_link(root, page, "Frozen numerical evidence", pointer.get("snapshot")))
         lines += [*_heading(2, cohort["backend"].upper() + " results", base), f"Runtime: **{cohort['backend']}**. Selected configuration: " +
                   _existing_link(root, page, configuration_label, config) + ".", "",
                   f"Recorded qualification: **tier {row.get('qualified_tier', 0)}**, "
@@ -405,7 +469,7 @@ def render_family(root: Path, publication: dict, family: dict) -> str:
                   "<details>", "<summary>Configuration, source and runtime provenance</summary>", "",
                   f"Source digest: `{source or 'unbound'}`. Candidate revision: `{row.get('candidate_revision') or 'unbound'}`. "
                   f"Runtime cohort: `{row.get('cohort') or 'unbound'}`.", "",
-                  _existing_link(root, page, "Frozen numerical evidence", pointer.get("snapshot")) + " · " +
+                  frozen_evidence + " · " +
                   link(root, page, "Complete recipe, prior, initialization and sampling bindings", "reports/forge/technique-inventory.json"), "",
                   "Selection: " + cell(row.get("selection", {}).get("selection_kind", "canonical fallback")) + ". " +
                   cell(row.get("selection", {}).get("reason", "No qualified configuration has been selected.")), "",
@@ -424,6 +488,11 @@ def render_family(root: Path, publication: dict, family: dict) -> str:
             for view in cohort["scoped_views"]:
                 lines.append("| " + " | ".join([link(root, page, view["id"], family["page"], base + "-" + view["id"]),
                                                 *_score_cells(root, page, family, cohort, view, view_id=view["id"])]) + " |")
+            for item in cohort.get("scoped_publications", []):
+                lines += ["", link(root, page, "Frozen separate-cohort numerical evidence", item["path"]) +
+                          "; source commit `" + item["source_commit"] + "`; exact scoped cohort `" +
+                          cell(item.get("cohort")) + "` (runtime SHA256 `" + cell(item.get("runtime_cohort_sha256")) +
+                          "`). These cells give no parent-cohort credit."]
         lines += ["", r"\* indicates incomplete results, including changed or unbound current contracts.", ""]
         for tier in TIERS:
             members = {}
@@ -525,8 +594,22 @@ def render_family(root: Path, publication: dict, family: dict) -> str:
                           f"required: {convergence.get('minimum_stable_checks', 'unavailable')}.", ""]
             if result["receipt"]:
                 lines += [link(root, page, "Compact metrics and receipt provenance", result["receipt"]), ""]
+            for artifact in result.get("training_media", []):
+                lines += [link(root, page, "Actual-training GIF", artifact["gif"]) +
+                          "; " + str(artifact["observation_count"]) + " saved observations; "
+                          "no new optimizer updates or sampling draws.", ""]
+            if result.get("clock_audit"):
+                audit = result["clock_audit"]
+                lines += ["Recorded clock parity diagnostics:", "", "| Condition | Exact state digest equality |",
+                          "| --- | --- |"]
+                lines += ["| " + cell(condition) + " | " + ("equal" if check["digest_equal"] else "different") + " |"
+                          for condition, check in audit["comparisons"].items()]
+                lines += ["", "Recorded unexplained clock dependencies: **" + str(audit["clock_dependency_count"]) + "**.", ""]
+                lines += ["- " + cell(dependency) for dependency in audit["unexplained_clock_dependencies"]]
+                lines += ["", link(root, page, "Certified parity digests and source audit", audit["path"]) +
+                          ". These display diagnostics preserve the recorded gate " + cell(audit["recorded_grade"]) + ".", ""]
             if result["recorded_contract"]:
-                old = publication.get("task_contracts", {}).get(result["recorded_contract"], {})
+                old = publication.get("task_contracts", {}).get(result["recorded_contract"], result.get("recorded_conditions", {}))
                 sampling = old.get("sampling", {})
                 prior = old.get("prior", {})
                 lines += ["Recorded conditions: " + cell(prior.get("kind", "unbound")) +

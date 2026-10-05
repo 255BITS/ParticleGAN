@@ -244,6 +244,9 @@ def test_compiler_links_to_single_published_table_instead_of_creating_another(se
     current.parent.mkdir(parents=True, exist_ok=True)
     current.write_text("# Current technique leaderboard\n")
     atomic_json(current.with_suffix(".json"), {"publication_scope": "current_technique_inventory", "view": "stability"})
+    scoped = {**read_json(root / "configs/forge/views/stability.json"), "id": "policy-coverage",
+              "goal": "stability", "reporting": {"family_totals": False}}
+    atomic_json(root / "configs/forge/views/policy-coverage.json", scoped)
     duplicate = root / "reports/forge/leaderboards/stability.md"
     duplicate.parent.mkdir(parents=True, exist_ok=True)
     duplicate.write_text("Old generated goal table\n")
@@ -251,9 +254,16 @@ def test_compiler_links_to_single_published_table_instead_of_creating_another(se
     assert current.read_text() == "# Current technique leaderboard\n"
     assert not duplicate.exists()
     assert "[stability](technique-inventory.md)" in (root / "reports/forge/EXPERIMENT_MEMORY.md").read_text()
+    assert "[policy-coverage](technique-inventory.md)" in (root / "reports/forge/EXPERIMENT_MEMORY.md").read_text()
+    assert knowledge.leaderboard_path(root, "policy-coverage") == Path("reports/forge/technique-inventory.md")
+    assert not (root / "reports/forge/leaderboards/policy-coverage.md").exists()
     # The full qualification reducer remains available as numerical evidence.
     assert (root / "reports/forge/leaderboards/stability.json").is_file()
     assert knowledge.leaderboard_path(root, "another-goal") == Path("reports/forge/leaderboards/another-goal.md")
+    atomic_json(root / "configs/forge/views/unrelated-scope.json", {**scoped, "id": "unrelated-scope", "goal": "another-goal"})
+    atomic_json(root / "configs/forge/views/ordinary-view.json", {**scoped, "id": "ordinary-view", "reporting": {}})
+    assert knowledge.leaderboard_path(root, "unrelated-scope") == Path("reports/forge/leaderboards/unrelated-scope.md")
+    assert knowledge.leaderboard_path(root, "ordinary-view") == Path("reports/forge/leaderboards/ordinary-view.md")
 
 
 def test_recall_returns_useful_negative_history_and_unknown_goal(setup):
