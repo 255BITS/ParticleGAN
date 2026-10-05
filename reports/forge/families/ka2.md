@@ -10,36 +10,70 @@
 
 KA2 replaces K3P's learning-rate-driven handover with a critic-local controller. It uses the early penalty for 799 applied calls, then mixes early and late penalties equally. Adam moment surprise releases or restores the critic-gradient anchor and controls how quickly its averaged critic follows the live critic. It shares K3P's spike guard and eligible sparse latent-row damping.
 
-## Simplified pseudocode
+## Mathematical formulation
 
-G: generator; D: critic; x: real batch; z: latent batch sampled from the task's prior; fake: generated batch; d: number of coordinates per critic input; g_r and g_f: critic input gradients on real and fake samples; D_bar: critic parameter exponential moving average; coefficient: penalty strength; cap: allowed input-gradient norm. mean averages samples, norm is Euclidean, relu(a)=max(a,0), softplus(a)=log(1+exp(a)), and detach stops gradients. The sketch is a scalar GAN loop; joint, conditional and reconstruction hosts supply their own inputs and auxiliary objectives. A is the early RMS-normalized penalty; B_caps is the late real/fake L2 cap penalty. W is the anchor on/off weight. Surprise is critic gradient RMS divided by its completed Adam second-moment RMS; ratio compares recent surprise with its initial calm reference. rho and max_rate describe sparse latent-row damping.
+$G$ is the generator, $D$ the raw-score critic, $P$ the task prior, $x$ a real batch, $z\sim P$ a latent batch and $y$ the generated batch, including any declared output noise. $C$ is the critic actually evaluated: $C=D$ without input noise; otherwise every forward evaluates $D(u+\epsilon_{\mathrm{in}})$ with a fresh draw. $\mathbb E$ means a sample mean, $\lVert\cdot\rVert_2$ is the Euclidean norm, $(a)_+=\max(a,0)$ and $\operatorname{softplus}(a)=\log(1+e^a)$. The scalar sketch detaches $y$ during the critic update and resamples differentiable $y$ after that update; joint and auxiliary hosts retain task-owned objectives. $g_r=\nabla_x C(x)$ and $g_f=\nabla_y C(y)$ are per-sample input gradients; $d$ counts critic-input coordinates. $\lambda$ is penalty strength and $\kappa$ the cap threshold. $\bar C$ evaluates the critic parameter EMA with the same fresh-input-noise law as $C$. $A$ is the early RMS-scaled penalty, $B_{\mathrm{cap}}$ the late L2 cap term and $P_{\mathrm{anchor}}$ the dimension-normalized gradient proximity. $w$ is the configured anchor weight. $n$ counts applied penalty calls, $W\in\{0,1\}$ releases or restores the anchor, and $\alpha\in[0,1]$ is the moment-surprise tracking state. $\delta$ is critic EMA decay and $\theta$ the live critic parameters. Moment surprise compares critic gradient RMS with completed Adam second-moment RMS. $h_i$ is latent row $i$'s current gradient, $h_i^{\mathrm{prev}}$ its last observed gradient, $\rho_i$ the A2 response multiplier and $\Delta z_i$ the corresponding row update. $\operatorname{cos}$ denotes the implementation's bounded cosine similarity, including its handling of zero-length history.
+
+**Default paired adversarial loss**
+
+$$
+\begin{aligned}\ell_D&=\mathbb E\!\left[\operatorname{softplus}(C(y)-C(x))\right],\\\ell_G&=\mathbb E\!\left[\operatorname{softplus}(C(x)-C(y))\right].\end{aligned}
+$$
+
+These scalar losses are minimized. The critic objective is $\ell_D+R$; the generator adds only its declared auxiliary objectives. Critic fakes are detached, and generator fakes and both scores are recomputed after the critic step. $C$ includes any declared fresh input noise.
+
+**Early, capped and anchor terms**
+
+$$
+\begin{aligned} A&=\mathbb E\!\left[\frac{\lVert g_r\rVert_2^2}{d}\right]+\mathbb E\!\left[\left(\frac{\lVert g_f\rVert_2}{\sqrt d}-\kappa\right)_+^2\right],\\ B_{\mathrm{cap}}&=\mathbb E\!\left[(\lVert g_r\rVert_2-\kappa)_+^2\right]+\mathbb E\!\left[(\lVert g_f\rVert_2-\kappa)_+^2\right],\\ P_{\mathrm{anchor}}&=\mathbb E\!\left[\frac{\lVert g_r-\nabla_x\bar C(x)\rVert_2^2}{d}\right].\end{aligned}
+$$
+
+$A$ uses RMS input-gradient units; $B_{\mathrm{cap}}$ uses unnormalized L2 caps. When the anchor first starts, copy the live critic and set $P_{\mathrm{anchor}}=0$ for that call. Subsequent calls evaluate its EMA; its fresh input-noise draws follow the same law as the live critic.
+
+**KA2 applied-call handover**
+
+$$
+R_{\mathrm{KA2}}=\begin{cases}\dfrac{\lambda}{2}A,&n<800,\\\dfrac{\lambda}{2}\left[\dfrac12 A+\dfrac12\left(B_{\mathrm{cap}}+WwP_{\mathrm{anchor}}\right)\right],&n\ge800.\end{cases}
+$$
+
+The first $799$ applied penalty calls use $A$ alone. Starting at call $800$, the equal blend operates even at constant LR. Moment-surprise ratios release $W$ above $3$ and restore it below $1.75$ once reference history exists. Lazy skips do not increment $n$; an applied lazy penalty includes its cadence multiplier.
+
+**KA2 adaptive critic average**
+
+$$
+\delta_t=1-0.1\alpha_t,\qquad \bar\theta_t=\delta_t\bar\theta_{t-1}+(1-\delta_t)\theta_t.
+$$
+
+After the critic Adam step, the controller records surprise and updates the started anchor using its last penalty-call tracking decision. Here $\delta_t\in[0.9,1]$: calm tracking can freeze the average, while surprise speeds it up. First activation and sustained-surprise reseeding copy the live critic instead of taking this ordinary EMA update.
+
+## Simplified pseudocode
 
 ```text
 For each training iteration:
   Set role-specific learning rates and noise from the resolved recipe or policy.
   Draw real x and latent z; fake = detach(G(z) + generated-output training noise).
   Dn(u) evaluates D(u + fresh critic-input noise on each forward); D_bar_n uses the same noise law with fresh draws.
-  L_D = mean(softplus(Dn(fake) - Dn(x))).
+  Compute the paired critic adversarial loss shown above.
   g_r = gradient(Dn(x), x); g_f = gradient(Dn(fake), fake), using detached input copies.
-  A = mean(norm(g_r)^2 / d) + mean(relu(norm(g_f)/sqrt(d) - cap)^2).
-  B_caps = mean(relu(norm(g_r)-cap)^2) + mean(relu(norm(g_f)-cap)^2).
+  Compute the early RMS-scaled real-gradient/fake-cap term A shown above.
+  Compute the late unnormalized real/fake cap term B_caps shown above.
   Increment the applied penalty-call counter; lazy skips do not advance it.
-  Calls 1..799: penalty = coefficient/2 * A.
+  Calls 1..799: apply the early term A only.
   From call 800:
     When the anchor first becomes active, copy D into D_bar and set proximity = 0 for that call.
-    Subsequently proximity = mean(norm(g_r - gradient(D_bar_n,x))^2 / d).
+    On later blended calls, measure real-input gradient proximity to the noise-wrapped critic average.
     ratio = recent median critic moment surprise / its initial reference median.
     Release W to 0 when ratio > 3; restore W to 1 when ratio < 1.75.
-    penalty = coefficient/2 * (.5*A + .5*(B_caps + W*anchor_weight*proximity)).
+    Use the equal early/late KA2 blend with the current anchor release weight.
   Add penalty every configured k-th step, multiplying its strength by k for lazy application.
   Backpropagate L_D; apply the critic spike guard, then take the critic Adam step.
   After Adam, record moment surprise; update/reseed the critic EMA using the last penalty-call tracking decision.
   Freeze D parameters; draw a fresh latent batch and recompute fake and both critic scores.
-  L_G = mean(softplus(Dn(x) - Dn(G(z) + generated-output training noise))).
+  Compute the paired generator adversarial loss from the updated critic.
   Backpropagate L_G through G and the learned prior.
   For an eligible sparse latent table with existing Adam state: if some rows received no gradient and
     cumulative observed-row fraction < max_rate, multiply each row's Adam response by rho.
-    rho = .75 + .25*cos(current gradient, last observed gradient); rho = 1 without row history.
+    Use the A2 cosine-agreement multiplier shown above; without row history use an unchanged response.
   Apply direct sample-particle response gain only when the host explicitly binds that separate parameter group.
   Take the generator/prior Adam step; maintain configured averages; score with the task's declared law.
 ```
@@ -48,14 +82,14 @@ For each training iteration:
 
 | Characteristic | Behavior |
 | --- | --- |
-| Adversarial loss | Paired relativistic logistic on raw scores: D minimizes mean softplus(D(fake)-D(real)); G reverses the difference. Input noise wraps the critic in both losses and the penalty; fresh noise is drawn per forward. Joint and auxiliary losses are host-owned. |
-| Optimizer | KA2CriticAdam supplies private penalty-call, moment-surprise and adaptive critic-EMA state. The generator/prior uses the shared K3PGeneratorAdam. Selected beta1=0, beta2=.999 and AMSGrad off. KA2 checkpoints retain their own controller identity. |
-| Learning rates and annealing | The public base rate is .00425, critic multiplier 1 and latent-prior multiplier 2. The selected whole configuration uses .006375 and prior multiplier 1. G/D hold through 60% of min(resolved task horizon,1600), then cosine-decay to 1%; the prior follows its full resolved horizon to 5%. Hosts may explicitly bind another horizon or transition. |
-| Parameter-gradient clipping | The spike guard is adaptive per-tensor clipping: after 200 prior Adam steps, scale a critic tensor's gradient down when its RMS exceeds 5 times the RMS predicted by Adam's bias-corrected second moment. It is separate from the input-gradient loss. The family adds no fixed global norm clip. |
-| Critic penalties and anchors | Strength 1 and cap 1. A and B use the same RMS/L2 units as K3P. KA2 retains pure A for 799 applied penalty calls, then uses .5*A + .5*(B caps + W*proximity). The handover remains active at constant LR. Anchor release uses recent/baseline surprise thresholds 3 and 1.75. |
-| Damping and update guards | A2 is sparse latent-row damping, with rho in [.5,1] and max_rate=.5. It changes the row's Adam response while preserving the raw second-moment update. Nonstandardized row-local priors can expose this hook; standardized or unsupported hosts cannot. Direct sample-particle gain is a separate host-bound rule, up to 2 times LR when centered gradients agree. |
-| Training and sampling noise | Base critic-input standard deviation .5 decreases linearly to zero over the first 10% of the resolved horizon. Generated-output training noise rises from zero to .029 over its first 20%. Latent MoG sampling noise is task-owned. Clean gates remove generated-output noise according to their declared sampling law. |
-| Parameter averaging and serving | The critic anchor starts at the first blended call. Its EMA decay adapts between .9 and 1 using moment surprise; sustained released/high-surprise calls can reseed it. This differs from K3P's fixed .999 critic EMA. Generator/prior averaging remains a separate configured .995 state; ordinary selected gates score live weights. |
+| Adversarial loss | Paired relativistic logistic on raw scores: $D$ minimizes $\mathbb E[\operatorname{softplus}(C(y)-C(x))]$; $G$ reverses the difference. Input noise wraps the critic in both losses and the penalty; fresh noise is drawn per forward. Joint and auxiliary losses are host-owned. |
+| Optimizer | KA2CriticAdam supplies private penalty-call, moment-surprise and adaptive critic-EMA state. The generator/prior uses the shared K3PGeneratorAdam. Selected $\beta_1=0$, $\beta_2=0.999$ and AMSGrad off. KA2 checkpoints retain their own controller identity. |
+| Learning rates and annealing | The public base rate is $0.00425$, critic multiplier $1$ and latent-prior multiplier $2$. The selected whole configuration uses $0.006375$ and prior multiplier $1$. $G$ and $D$ hold through $60\%$ of min(resolved task horizon,$1600$), then cosine-decay to $1\%$; the prior follows its full resolved horizon to $5\%$. Hosts may explicitly bind another horizon or transition. |
+| Parameter-gradient clipping | The spike guard is adaptive per-tensor clipping: after $200$ prior Adam steps, scale a critic tensor's gradient down when its RMS exceeds $5$ times the RMS predicted by Adam's bias-corrected second moment. It is separate from the input-gradient loss. The family adds no fixed global norm clip. |
+| Critic penalties and anchors | $\lambda=1$ and $\kappa=1$. The early $A$ and late $B_{\mathrm{cap}}$ terms use the same RMS/L2 units as K3P. KA2 applies $\lambda A/2$ for the first $799$ penalty calls, then $\frac{\lambda}{2}[\frac12 A+\frac12(B_{\mathrm{cap}}+WwP_{\mathrm{anchor}})]$. This handover remains active at constant LR. Recent/baseline surprise releases $W$ above $3$ and restores it below $1.75$. |
+| Damping and update guards | A2 is sparse latent-row damping, with $\rho_i$ in $[0.5,1]$ and $\texttt{max\_rate}=0.5$. It changes the row's Adam response while preserving the raw second-moment update. Nonstandardized row-local priors can expose this hook; standardized or unsupported hosts cannot. Direct sample-particle gain is a separate host-bound rule, up to $2$ times LR when centered gradients agree. |
+| Training and sampling noise | Base critic-input standard deviation $0.5$ decreases linearly to zero over the first $10\%$ of the resolved horizon. Generated-output training noise rises from zero to $0.029$ over its first $20\%$. Latent MoG sampling noise is task-owned. Clean gates remove generated-output noise according to their declared sampling law. |
+| Parameter averaging and serving | The critic anchor starts at the first blended call. Its EMA decay adapts between $0.9$ and $1$ using moment surprise; sustained released/high-surprise calls can reseed it. This differs from K3P's fixed $0.999$ critic EMA. Generator/prior averaging remains a separate configured $0.995$ state; ordinary selected gates score live weights. |
 
 ## Configuration differences
 

@@ -10,9 +10,43 @@
 
 K3P without critic penalty sets the full critic regularization coefficient to zero. That removes both its early gradient regularization and its later caps and anchor contribution from the objective. K3P's optimizer interventions remain, so this is a test of critic regularization rather than plain Adam training.
 
-## Simplified pseudocode
+## Mathematical formulation
 
-G: generator; D: critic; D_bar: exponential moving average of the critic; x: real samples; z: sampled latent input; d: number of coordinates per critic input. norm is the Euclidean norm, mean averages samples, relu(a)=max(a,0), and softplus(a)=log(1+exp(a)). The training sketch shows the scalar GAN host; joint/auxiliary hosts add task-owned objectives. Remove the entire critic penalty. stop_gradient detaches generated values from G and the prior during the critic update.
+$G$ is the generator, $D$ the raw-score critic, $P$ the task prior, $x$ a real batch, $z\sim P$ a latent batch and $y$ the generated batch, including any declared output noise. $C$ is the critic actually evaluated: $C=D$ without input noise; otherwise every forward evaluates $D(u+\epsilon_{\mathrm{in}})$ with a fresh draw. $\mathbb E$ means a sample mean, $\lVert\cdot\rVert_2$ is the Euclidean norm, $(a)_+=\max(a,0)$ and $\operatorname{softplus}(a)=\log(1+e^a)$. The scalar sketch detaches $y$ during the critic update and resamples differentiable $y$ after that update; joint and auxiliary hosts retain task-owned objectives. $h_i$ is latent row $i$'s current gradient, $h_i^{\mathrm{prev}}$ its last observed gradient, $\rho_i$ the A2 response multiplier and $\Delta z_i$ the corresponding row update. $\operatorname{cos}$ denotes the implementation's bounded cosine similarity, including its handling of zero-length history. For the guard, $g_p$ is a critic tensor gradient, $v_p$ its Adam second moment, $\tau_p$ its stored step count and $c_{\mathrm{guard}}$ its threshold.
+
+**Default paired adversarial loss**
+
+$$
+\begin{aligned}\ell_D&=\mathbb E\!\left[\operatorname{softplus}(C(y)-C(x))\right],\\\ell_G&=\mathbb E\!\left[\operatorname{softplus}(C(x)-C(y))\right].\end{aligned}
+$$
+
+These scalar losses are minimized. The critic objective is $\ell_D+R$; the generator adds only its declared auxiliary objectives. Critic fakes are detached, and generator fakes and both scores are recomputed after the critic step. $C$ includes any declared fresh input noise.
+
+**Removed critic penalty**
+
+$$
+\lambda=0,\qquad R=0,\qquad L_D=\ell_D.
+$$
+
+This ablation removes all input-gradient and anchor loss contributions. The inherited K3P Adam wrappers, spike guard, eligible A2 and host-bound direct-particle controls remain; this is not a switch to native Adam.
+
+**A2 sparse-row response**
+
+$$
+\begin{aligned}\rho_i&=\begin{cases}0.75+0.25\operatorname{cos}(h_i,h_i^{\mathrm{prev}}),&\text{with row history},\\1,&\text{without row history},\end{cases}\\\Delta z_i^{\mathrm{A2}}&=\rho_i\Delta z_i^{\mathrm{Adam}}.\end{aligned}
+$$
+
+A2 acts only on an eligible row-local table with existing Adam state, some zero-gradient rows, and cumulative observed-row fraction below the configured cutoff (baseline $0.5$). Then $\rho_i\in[0.5,1]$. Adam still accumulates the raw gradient second moment; unsupported or ineligible hosts keep their ordinary response.
+
+**Adam-state critic spike guard**
+
+$$
+\begin{aligned}v_p^{\mathrm{RMS}}&=\frac{\operatorname{mean}(v_p)}{1-\beta_2^{\tau_p}},\\u_p&=\frac{\operatorname{RMS}(g_p)}{\sqrt{\max(v_p^{\mathrm{RMS}},10^{-30})}},\\g_p^{\mathrm{guarded}}&=\begin{cases}\dfrac{c_{\mathrm{guard}}}{u_p}g_p,&\tau_p\ge\tau_{\min}\text{ and }u_p>c_{\mathrm{guard}},\\g_p,&\text{otherwise}.\end{cases}\end{aligned}
+$$
+
+This clipping rule applies per critic tensor only after its Adam history reaches the declared warmup (baseline $\tau_{\min}=200$ steps). $g_p$ is its parameter gradient, $v_p$ the stored second moment, $\tau_p$ its Adam step count and $c_{\mathrm{guard}}=5$ the baseline threshold. With AMSGrad use its stored running maximum. Before warmup the guard leaves gradients unchanged.
+
+## Simplified pseudocode
 
 ```text
 Start from the K3P recipe and apply: coefficient = 0; penalty = 0
@@ -20,14 +54,14 @@ For each training iteration:
   Set G/D learning rates from their network schedule; set prior rate from its full-budget schedule.
   Draw real x and latent z from the task; fake = stop_gradient(G(z)) for the critic update.
   Evaluate D through the scheduled input-noise wrapper (fresh noise per forward); add generated-output training noise to fake.
-  L_D = mean(softplus(D(fake) - D(x))).
+  Compute the paired critic adversarial loss shown above.
   Do not add any critic gradient penalty to L_D.
   Backpropagate L_D; after warmup, scale each critic gradient tensor down if its RMS exceeds
     guard_ratio * RMS expected from Adam's bias-corrected second moment; take the critic Adam step.
   Resample latent input and recompute differentiable fake and critic scores using the updated D; retain declared training noise.
-  L_G = mean(softplus(D(x) - D(fake))); backpropagate through G and learned prior with D fixed.
+  Compute the paired generator adversarial loss from the updated critic; backpropagate through G and learned prior with D fixed.
   If some latent rows have zero gradient, the cumulative observed-row fraction is below max_rate, and Adam history exists:
-    scale observed-row Adam responses by 0.75+0.25*cos(current,last observed gradient); use 1 without row history.
+    Scale observed-row Adam responses using the A2 cosine-agreement rule; leave rows without history unchanged.
   Otherwise leave the latent-row Adam response unchanged.
   Retain any host-eligible direct-particle response gain; update G and prior.
   Maintain any configured moving averages; score with the task's declared weights and sampling law.
@@ -37,12 +71,12 @@ For each training iteration:
 
 | Characteristic | Behavior |
 | --- | --- |
-| Adversarial loss | Paired relativistic logistic by default: critic mean softplus(D(fake)-D(real)); generator reverses that score difference. Task-owned joint or reconstruction terms remain separate. |
+| Adversarial loss | Paired relativistic logistic by default: critic $\mathbb E[\operatorname{softplus}(C(y)-C(x))]$; generator reverses that score difference. Task-owned joint or reconstruction terms remain separate. |
 | Optimizer | Inherited K3P Adam wrappers for critic and generator/prior, with recipe-specific moments and per-role rates. This ablation does not switch to native Adam without interventions. |
-| Learning rates and annealing | Inherited scheduled training. G/D use the network cosine schedule, capped at a configured horizon; the learned prior uses its full-budget cosine schedule. In the public baseline, rates hold through 60% of their horizon before decaying to their floors. Resolved recorded configurations own exact rates and horizons. |
+| Learning rates and annealing | Inherited scheduled training. $G$ and $D$ use the network cosine schedule, capped at a configured horizon; the learned prior uses its full-budget cosine schedule. In the public baseline, rates hold through $60\%$ of their horizon before decaying to their floors. Resolved recorded configurations own exact rates and horizons. |
 | Parameter-gradient clipping | Adaptive per-tensor critic gradient scaling remains via the spike guard; it is clipping-like and uses Adam second-moment history rather than a fixed global norm threshold. No generic global gradient-norm clipping is added by this candidate. |
 | Critic penalties and anchors | Disabled: coefficient zero removes the entire K3P penalty, including the anchor contribution. The optimizer can retain anchor bookkeeping, which contributes no penalty to the objective. |
-| Damping and update guards | A2 acts only on eligible sparse latent rows: responses are scaled within [0.5,1] according to consecutive gradient agreement, while Adam's second moment still tracks the raw gradient. The critic spike guard remains. Direct sample-particle gain is a separate inherited, host-dependent mechanism; it does not automatically apply to every learned prior. A2 activates only when some rows have zero gradient, the cumulative observed-row fraction is below the configured max_rate (baseline 0.5), and Adam state exists; missing row history gives scale 1. |
+| Damping and update guards | A2 acts only on eligible sparse latent rows: responses are scaled within $[0.5,1]$ according to consecutive gradient agreement, while Adam's second moment still tracks the raw gradient. The critic spike guard remains. Direct sample-particle gain is a separate inherited, host-dependent mechanism; it does not automatically apply to every learned prior. A2 activates only when some rows have zero gradient, the cumulative observed-row fraction is below the configured max_rate (baseline $0.5$), and Adam state exists; missing row history gives scale $1$. |
 | Training and sampling noise | Inherited scheduled critic-input noise and generated-output training noise. Prior sampling noise belongs to the task. Public clean sampling does not automatically include the generated-output training noise. Critic-input noise is independently drawn on each forward of the wrapped critic, including gradient-penalty evaluation. |
 | Parameter averaging and serving | No effective critic-anchor force because the whole penalty is zero. Critic-anchor bookkeeping and generator/prior moving averages may remain; they do not change the live scoring law. |
 
