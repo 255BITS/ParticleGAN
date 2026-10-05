@@ -1,0 +1,197 @@
+{
+  "execution_group": null,
+  "grade": {
+    "evaluator_result": {
+      "attempted": true,
+      "confirmation_fraction": 2.0,
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": null,
+        "first_pass_step": null,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 0,
+        "passing_suffix": 0,
+        "stable_from_seconds": null,
+        "stable_from_step": null
+      },
+      "metrics": [
+        {
+          "margin": -3,
+          "metric": "modes",
+          "op": ">=",
+          "status": "FAIL",
+          "threshold": 4,
+          "value": 1
+        },
+        {
+          "margin": -0.18125000000000002,
+          "metric": "hq",
+          "op": ">=",
+          "status": "FAIL",
+          "threshold": 0.9,
+          "value": 0.71875
+        }
+      ],
+      "passed": false,
+      "shortfall": 0.4756944444444444,
+      "status": "FAIL"
+    },
+    "gate_status": "FAIL",
+    "metrics": {
+      "distribution_tv": 0.5,
+      "hq": 0.71875,
+      "mean_rmse": 0.03848831355571747,
+      "mode_fractions": [
+        0.71875,
+        0.28125,
+        0.0,
+        0.0
+      ],
+      "modes": 1,
+      "quality_mode_fractions": [
+        0.71875,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "step": 600
+    },
+    "reasons": [
+      "recomputed complete live curve and terminal suffix"
+    ],
+    "status": "FAIL"
+  },
+  "raw_task_grades": {
+    "img_bars4": {
+      "evaluator_result": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": null,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 0,
+          "passing_suffix": 0,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metrics": [
+          {
+            "margin": -3,
+            "metric": "modes",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 4,
+            "value": 1
+          },
+          {
+            "margin": -0.18125000000000002,
+            "metric": "hq",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 0.9,
+            "value": 0.71875
+          }
+        ],
+        "passed": false,
+        "shortfall": 0.4756944444444444,
+        "status": "FAIL"
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "distribution_tv": 0.5,
+        "hq": 0.71875,
+        "mean_rmse": 0.03848831355571747,
+        "mode_fractions": [
+          0.71875,
+          0.28125,
+          0.0,
+          0.0
+        ],
+        "modes": 1,
+        "quality_mode_fractions": [
+          0.71875,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "step": 600
+      },
+      "reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "status": "FAIL"
+    }
+  },
+  "schema": "pg_common26_full_atlas_grade_projection_v1",
+  "task_grades": {
+    "img_bars4": {
+      "evaluator_result": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": null,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 0,
+          "passing_suffix": 0,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metrics": [
+          {
+            "margin": -3,
+            "metric": "modes",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 4,
+            "value": 1
+          },
+          {
+            "margin": -0.18125000000000002,
+            "metric": "hq",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 0.9,
+            "value": 0.71875
+          }
+        ],
+        "passed": false,
+        "shortfall": 0.4756944444444444,
+        "status": "FAIL"
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "distribution_tv": 0.5,
+        "hq": 0.71875,
+        "mean_rmse": 0.03848831355571747,
+        "mode_fractions": [
+          0.71875,
+          0.28125,
+          0.0,
+          0.0
+        ],
+        "modes": 1,
+        "quality_mode_fractions": [
+          0.71875,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "step": 600
+      },
+      "reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "status": "FAIL"
+    }
+  }
+}
