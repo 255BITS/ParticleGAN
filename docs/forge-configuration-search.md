@@ -1,5 +1,11 @@
 # Trainer families and bounded configuration search
 
+The [HyperGAN/Hyperchamber search audit](../reports/forge/hypergan-search-audit/README.md)
+compares the historical dictionary selector with this machinery and checks
+the optimizer/loss representation gaps in a preserved Halloween config.
+It includes reproducible software checks and proposed follow-up work; it
+launches no training and changes no search or qualification behavior.
+
 The [current technique leaderboard](../reports/forge/technique-inventory.md)
 publishes one complete selected configuration per formulation family. The
 generic [current family selection](../configs/forge/selections/family-current-v1.json)
