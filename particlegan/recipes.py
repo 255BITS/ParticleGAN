@@ -168,6 +168,11 @@ class Recipe:
     # betas[1]/reg_coeff over anneal_end * total_steps completed updates, then
     # hold. External execution limits do not change that declared horizon.
     optimizer_family: str = "formulation"
+    # Dual-norm experiments retain the fixed loss/penalty and LR multiplier.
+    # lr is their step size; isolation arms can pin native Adam groups to the
+    # original baseline rate independently of the normalized-step sweep.
+    optimizer_momentum: float = 0.0
+    optimizer_adam_lr: float | None = None
     eps: float = 1e-8
     beta2_end: float | None = None
     beta2_anneal_end: float = 0.2
@@ -179,8 +184,19 @@ class Recipe:
     def __post_init__(self):
         from .gan_loss import GANLoss
         GANLoss(self.loss)  # reject invalid objectives before constructing a trainer
-        if self.optimizer_family not in ("formulation", "adam"):
-            raise ValueError("optimizer_family must be formulation or adam")
+        from .optim.dualnorm import NORMALIZED_FAMILIES
+        if self.optimizer_family not in ("formulation", "adam", *NORMALIZED_FAMILIES):
+            raise ValueError("unknown optimizer_family")
+        if isinstance(self.optimizer_momentum, bool) or self.optimizer_momentum not in (0., .5, .9):
+            raise ValueError("optimizer_momentum must be 0, 0.5 or 0.9")
+        if self.optimizer_momentum != 0 and self.optimizer_family not in ("dualnorm", "dualnorm_D_only"):
+            raise ValueError("optimizer_momentum requires a dualnorm optimizer family")
+        if self.optimizer_adam_lr is not None:
+            if (isinstance(self.optimizer_adam_lr, bool) or not math.isfinite(self.optimizer_adam_lr)
+                    or self.optimizer_adam_lr <= 0):
+                raise ValueError("optimizer_adam_lr must be None or finite and positive")
+            if self.optimizer_family not in ("dualnorm_D_only", "particle_rownorm_only"):
+                raise ValueError("optimizer_adam_lr is supported only by isolation arms")
         if isinstance(self.eps, bool) or not math.isfinite(self.eps) or self.eps <= 0:
             raise ValueError("eps must be finite and positive")
         for name in ("beta2_anneal_end", "reg_coeff_anneal_end"):
@@ -193,14 +209,17 @@ class Recipe:
         if self.reg_coeff_end is not None and (
                 isinstance(self.reg_coeff_end, bool) or not math.isfinite(self.reg_coeff_end) or self.reg_coeff_end < 0):
             raise ValueError("reg_coeff_end must be None or finite and nonnegative")
-        if self.optimizer_family == "adam":
+        if self.optimizer_family != "formulation":
             if self.reg_arm not in ("a_r1r2", "b_cap"):
-                raise ValueError("plain Adam requires an explicit fixed R1/R2 or BCap reg_arm")
+                raise ValueError("plain optimizers require an explicit fixed R1/R2 or BCap reg_arm")
             if (self.d_guard_ratio != 0 or self.reg_anchor_weight != 0
                     or self.latent_damping_max_rate != 0 or self.direct_particle_gain):
-                raise ValueError("plain Adam requires disabled guard, anchor, latent damping and direct particle gain")
+                raise ValueError("plain optimizers require disabled guard, anchor, latent damping and direct particle gain")
             if self.continuous_policy is not None:
-                raise ValueError("plain Adam does not implement a continuous update policy")
+                raise ValueError("plain optimizers do not implement a continuous update policy")
+        if self.optimizer_family == "ada_nsgda" and (
+                self.betas[0] != 0 or (self.prior_betas is not None and self.prior_betas[0] != 0)):
+            raise ValueError("ada_nsgda requires beta1=0 for networks and prior")
         if self.beta2_end is not None and self.optimizer_family != "adam":
             raise ValueError("scheduled beta2 requires optimizer_family='adam'")
         if self.reg_coeff_end is not None and self.reg_arm not in ("a_r1r2", "b_cap"):
@@ -209,8 +228,8 @@ class Recipe:
             raise ValueError("recipe cosine schedules require a declared total_steps horizon")
         if self.critic_formulation not in ("ka2", "k3p", "bcap"):
             raise ValueError("critic_formulation must be ka2, k3p or bcap")
-        if self.critic_formulation == "bcap" and (self.optimizer_family != "adam" or self.reg_arm != "b_cap"):
-            raise ValueError("bcap formulation requires plain Adam and reg_arm='b_cap'")
+        if self.critic_formulation == "bcap" and (self.optimizer_family == "formulation" or self.reg_arm != "b_cap"):
+            raise ValueError("bcap formulation requires a plain optimizer and reg_arm='b_cap'")
         if self.reg_arm is not None and self.critic_formulation != "bcap":
             # Keep resolved recipe/Forge provenance truthful about the optimizer
             # family selected by an explicit legacy arm.
@@ -400,6 +419,10 @@ class Recipe:
             result.pop("loss")
         if self.optimizer_family == "formulation":
             result.pop("optimizer_family")
+        if self.optimizer_momentum == 0:
+            result.pop("optimizer_momentum")
+        if self.optimizer_adam_lr is None:
+            result.pop("optimizer_adam_lr")
         if self.eps == 1e-8:
             result.pop("eps")
         if self.beta2_end is None:
@@ -523,7 +546,7 @@ class Recipe:
         return options
 
     def make_critic_optimizer(self, critic, *, ema_critic=None, **adam_kwargs):
-        """Adam over ``critic``'s trainable parameters whose ``step()`` does the
+        """Optimizer over ``critic``'s trainable parameters whose ``step()`` does the
         recipe's critic-side work (KA2: spike guard, moment surprise, adaptive
         EMA-critic update and guarded reseed).
 
@@ -534,12 +557,20 @@ class Recipe:
         ``lr * d_lr_mult``, ``betas`` and ``amsgrad`` or add options such as ``fused``.
         ``optimizer_family='adam'`` returns native Adam with disabled intervention
         metadata and an observation-only checkpointed critic step counter.
+        Normalized families use the same fixed penalty and step observer;
+        ``lr * d_lr_mult`` is their scheduled critic step size.
         """
         options = {"lr": self.lr * self.d_lr_mult, "betas": self.betas, "amsgrad": self.amsgrad, "eps": self.eps,
                    **adam_kwargs}
         if self.optimizer_family == "adam":
             from .recipe_schedules import make_plain_adam
             return make_plain_adam(self, [p for p in critic.parameters() if p.requires_grad], critic=critic, **options)
+        if self.optimizer_family != "formulation":
+            from .optim.dualnorm import make_normalized_optimizer
+            if self.optimizer_family == "particle_rownorm_only" and self.optimizer_adam_lr is not None:
+                options["lr"] = self.optimizer_adam_lr * self.d_lr_mult
+            params = [{"params": [p for p in critic.parameters() if p.requires_grad], "role": "critic"}]
+            return make_normalized_optimizer(self, params, critic=critic, **options)
         if self.effective_critic_formulation == "k3p":
             from .k3p import K3PCriticAdam
             return K3PCriticAdam([p for p in critic.parameters() if p.requires_grad], critic=critic,
@@ -551,7 +582,7 @@ class Recipe:
                              guard_ratio=self.d_guard_ratio, guard_min_steps=self.d_guard_min_steps, **options)
 
     def make_generator_optimizer(self, params, *, latent_table=None, direct_particles=None, **adam_kwargs):
-        """Adam over ``params`` (tensors or param groups) whose ``step()`` does the
+        """Optimizer over ``params`` (tensors or param groups) whose ``step()`` does the
         recipe's generator-side work (A2 damping of the sparse
         ``latent_table``, e.g. ``prior.z`` alone in its group with beta1 == 0,
         and the direct-particle response for the param group ``direct_particles``).
@@ -560,11 +591,38 @@ class Recipe:
         override the recipe's ``lr``, ``betas`` and ``amsgrad`` or add Adam options.
         Plain ``optimizer_family='adam'`` returns native Adam without A2 or
         direct-particle response, including when role annotations are supplied.
+        Normalized families accept role-named groups. Their row-normalized
+        prior requires ``set_sampled_rows(prior.z, indices)`` before stepping;
+        the public trainer/policy records generator-side sample IDs automatically.
         """
         options = {"lr": self.lr, "betas": self.betas, "amsgrad": self.amsgrad, "eps": self.eps, **adam_kwargs}
         if self.optimizer_family == "adam":
             from .recipe_schedules import make_plain_adam
             return make_plain_adam(self, params, **options)
+        if self.optimizer_family != "formulation":
+            from .optim.dualnorm import make_normalized_optimizer
+            params = list(params)
+            if params and not isinstance(params[0], dict):
+                params = [{"params": params}]
+            groups = []
+            direct_ids = set() if direct_particles is None else {id(p) for p in direct_particles}
+            for original in params:
+                group = dict(original)
+                group["params"] = list(group["params"])
+                group.setdefault("role", group.get("forge_role", "generator"))
+                if latent_table is not None and any(p is latent_table for p in group["params"]):
+                    group["role"] = "prior"
+                if direct_ids and any(id(p) in direct_ids for p in group["params"]):
+                    # Direct generated coordinates are the generator player;
+                    # this fixture has no sampled latent table.
+                    group["role"] = "generator"
+                is_prior = group["role"] in ("prior", "table")
+                uses_adam = (self.optimizer_family == "dualnorm_D_only"
+                             or (self.optimizer_family == "particle_rownorm_only" and not is_prior))
+                if uses_adam and self.optimizer_adam_lr is not None:
+                    group["lr"] = self.optimizer_adam_lr * (self.prior_lr_mult if is_prior else 1.)
+                groups.append(group)
+            return make_normalized_optimizer(self, groups, **options)
         from .k3p import K3PGeneratorAdam
         return K3PGeneratorAdam(params, latent_table=latent_table, direct_particles=direct_particles,
                                 latent_max_rate=self.latent_damping_max_rate,
@@ -589,7 +647,7 @@ class Recipe:
 
     def make_optimizers(self, generator, discriminator, prior=None, *, encoder=None, ema_critic=None,
                         require_latent_damping=False, **adam_kwargs):
-        """Return ``(opt_g, opt_d)``: Adam optimizers whose ``step()`` does the recipe's work.
+        """Return ``(opt_g, opt_d)`` selected by ``optimizer_family``.
 
         ``opt_g`` covers G + optional E + prior (``make_generator_optimizer``;
         a learnable ``ParticlePrior`` table gets A2 damping) and ``opt_d`` the
@@ -614,24 +672,34 @@ class Recipe:
         standardized reads do not. ``require_latent_damping=True`` rejects an
         unavailable or disabled hook before constructing optimizers. The default
         preserves historical component callers that did not apply A2 to MoG.
+        Fixed-penalty normalized families share the caller's training loop and
+        schedule; G and E have one global normalization norm, with the prior
+        separate. Isolation arms use ``optimizer_adam_lr`` for native Adam
+        groups and ``lr`` for normalized groups (the same role multipliers).
         """
         from .capabilities import prior_mechanisms
         prior_params = [] if prior is None else [p for p in prior.parameters() if p.requires_grad]
         prior_ids = {id(p) for p in prior_params}
         g_params = []
         seen = set(prior_ids)
-        for module in (generator, encoder):
+        normalized = self.optimizer_family not in ("adam", "formulation")
+        groups = []
+        for role, module in (("generator", generator), ("encoder", encoder)):
+            role_params = []
             if module is not None:
                 for p in module.parameters():
                     if p.requires_grad and id(p) not in seen:
                         g_params.append(p)
+                        role_params.append(p)
                         seen.add(id(p))
-        groups = []
-        if g_params:
+            if normalized and role_params:
+                groups.append({"params": role_params, "lr": self.lr, "role": role})
+        if g_params and not normalized:
             groups.append({"params": g_params, "lr": self.lr})
         if prior_params:
             groups.append({"params": prior_params, "lr": self.lr * self.prior_lr_mult,
-                           "betas": self.prior_betas if self.prior_betas is not None else self.betas})
+                           "betas": self.prior_betas if self.prior_betas is not None else self.betas,
+                           **({"role": "prior"} if normalized else {})})
         mechanisms = prior_mechanisms(prior,
             latent_damping_max_rate=self.latent_damping_max_rate,
             prior_beta1=(self.prior_betas or self.betas)[0])

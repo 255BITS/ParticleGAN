@@ -102,6 +102,9 @@ def run_word(request, task, output, device, *, execution_limit=None, capture_med
     reconstructed = context.streams.generator("eval", component="live", purpose="paired_reconstruction")
     # Media adds the genuine initial state; it cannot remove any metric check.
     checks = {math.ceil(index * steps / 24) for index in range(1, 25)}
+    from .optimizer_diagnostics import attach
+    optimizer_diagnostics = attach({"G": fixture.opt_g, "D": fixture.opt_d}, fixture.D,
+        output, checks, prior=fixture.prior)
     started, finite = time.monotonic(), True
     for step in range(steps + 1):
         if step:
@@ -161,6 +164,8 @@ def run_word(request, task, output, device, *, execution_limit=None, capture_med
                  "adapter_loop_seconds": time.monotonic() - started, "phase_timing": timing.snapshot()},
         "scope": "ordinary_full_task" if steps == task["execution"]["steps"] else "integration_demo_only",
         "declared_task_updates": task["execution"]["steps"], "execution_limit": steps}
+    if optimizer_diagnostics is not None:
+        receipt["evidence"]["optimizer_diagnostics"] = optimizer_diagnostics.receipt()
     if retain_scored_outputs:
         receipt["evidence"]["saved_observer_outputs"] = _save_observer_outputs(
             output, "observed-records.pt", [record for record in records if record["step"]],

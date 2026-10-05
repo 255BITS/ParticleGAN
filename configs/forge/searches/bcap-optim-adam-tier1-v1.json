@@ -1,0 +1,31 @@
+{
+  "base_candidate": "bcap-pure-adam-v2",
+  "campaign": {
+    "accept_shared_cost_transfer": false,
+    "budget_seconds": 103320,
+    "candidate_budget_seconds": 2520,
+    "id": "bcap-dualnorm-tier1-v1",
+    "purpose": "Focused optimizer-only BCAP comparison: exactly 41 complete global recipes, fixed protocol seed 0, six required Tier 1 tasks plus the existing clock audit diagnostic, and no higher tiers. Complete independent current-tier jobs despite another peer failing. One worker per GPU, at most two GPU workers plus the existing automatic CPU worker; wall time is cost evidence only. Existing task data, architectures, initialization, priors, sampling, objectives, schedules, update budgets and evaluators remain fixed. Initial stage is a finite coarse rate screen, not the full requested Cartesian grid. No seed repetitions, gate repairs, default adoption, R1/R2/native/scale-transfer runs or automatic continuation. An edge optimum is reported as unresolved and may motivate a separately registered finite follow-up only for a supported-task improvement over the matched Adam control.",
+    "schema_version": 1
+  },
+  "cuda_model": "NVIDIA RTX A6000",
+  "execution_backend": "cuda",
+  "grid": {
+    "lr": [
+      0.00025,
+      0.001,
+      0.00425,
+      0.016,
+      0.064
+    ]
+  },
+  "guide": "EXPERIMENTATION.md",
+  "hypothesis": "Optimizer-only adam may match or improve the matched native-Adam BCAP control on sustained acquisition and quality under one global recipe across the unchanged Tier 1 tasks.",
+  "id": "bcap-optim-adam-tier1-v1",
+  "protocol": "screening",
+  "rationale": "Current public BCAP is Adam beta=(0,0.999), base LR 0.00425, D multiplier 1, prior multiplier 2, coefficient 1, prior_reg 0, constant schedule, live scoring; the pasted historical 0.0006/cosine recipe is not substituted. Protocol seed 0 and public deterministic initializer follow the repository comparison contract. All six required tasks and the existing diagnostic remain; failures being investigated separately receive no gate repair. Native-Adam control gets its own coarse sweep, including the exact incumbent base rate, with incumbent D/prior multipliers held fixed. Complete current-tier peers, then stop. The 41-recipe shared campaign reserves 103320 seconds (2520 per recipe); normalized step rates receive their own finite units and sweep. P1-P6 are screening observations only; five-seed statistical falsification, R1/R2, native100/five-modes/vector177 and scale transfer are deferred. No claim that seed noise, scaling transfer, local convergence or Adam magnitude versus direction is resolved from this tier.",
+  "schema_version": 2,
+  "trainer_family": "bcap-pure",
+  "tuning_through_tier": 1,
+  "view": "discriminator_stability"
+}
