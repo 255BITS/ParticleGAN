@@ -45,6 +45,8 @@ def summarize():
     cost = {name: {k: value[k] for k in ("definition", "spent_seconds", "reserved_seconds")}
             for name, value in state["campaigns"].items()}
     report = {"schema_version": 1, "scope": "bcap_tier1_repair_readout", "qualification_input": False,
+        "status": "COMPLETE" if all(r["submission_status"] not in {"queued", "running", "paused"}
+            and all(t["status"] in {"PASS", "FAIL"} for t in r["tasks"]) for r in rows) else "IN_PROGRESS",
         "candidates": rows, "campaign_accounting": cost, "attempt_count": len(attempts),
         "total_new_paid_seconds": sum(v["spent_seconds"] for v in cost.values()),
         "logs": str(QUEUE / "events.jsonl")}

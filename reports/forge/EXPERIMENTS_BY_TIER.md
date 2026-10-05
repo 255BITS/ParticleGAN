@@ -2,9 +2,9 @@
 
 Current task assignments, grouped by goal view and qualification tier. Required tasks gate progression; ranking and diagnostic tasks retain their declared roles.
 
-Catalog: **60 tasks**; **57 assigned** to at least one view; **3 unassigned**. Showing **8/8 views**.
+Catalog: **63 tasks**; **59 assigned** to at least one view; **4 unassigned**. Showing **9/9 views**.
 
-Declared priors across the catalog: **34 MoGParticlePrior**, **26 ParticlePrior** (including **4 nonsampled parameter controls**). Every experiment defines `execution.prior` explicitly; candidate and API defaults cannot supply it. `kind: mog` selects `MoGParticlePrior`; `kind: particle_cloud` selects `ParticlePrior`. Sigma alone does not identify the code path. Ordinary Forge MoG tasks require positive sigma; archived zero-sigma MoG evidence keeps its recorded kind. Task sigma is absolute; API demonstrations may instead record the recipe's relative `sigma_rel`.
+Declared priors across the catalog: **37 MoGParticlePrior**, **26 ParticlePrior** (including **4 nonsampled parameter controls**). Every experiment defines `execution.prior` explicitly; candidate and API defaults cannot supply it. `kind: mog` selects `MoGParticlePrior`; `kind: particle_cloud` selects `ParticlePrior`. Sigma alone does not identify the code path. Ordinary Forge MoG tasks require positive sigma; archived zero-sigma MoG evidence keeps its recorded kind. Task sigma is absolute; API demonstrations may instead record the recipe's relative `sigma_rel`.
 
 Regenerate from the repository root with `python -m experiments.forge experiments-by-tier --output reports/forge/EXPERIMENTS_BY_TIER.md`. Add `--json` for machine-readable output (use a `.json` output path when saving). Regeneration reads declarations and published artifacts and launches no training.
 
@@ -31,8 +31,9 @@ This report follows changing declarations and published evidence; it selects no 
 | View | Revision | Tier 1 | Tier 2 | Tier 3 | Declared calibration |
 | --- | ---: | --- | --- | --- | --- |
 | [adaptation](../../configs/forge/views/adaptation.json) | 2 | 3 required | 19 required | 1 required | provisional |
-| [clockfree_continuous](../../configs/forge/views/clockfree_continuous.json) | 3 | 4 required | 19 required | 7 required | provisional |
-| [discriminator_stability](../../configs/forge/views/discriminator_stability.json) | 5 | 6 required, 1 diagnostic | 19 required | 2 required | provisional |
+| [bcap_budget_diagnostics_v1](../../configs/forge/views/bcap_budget_diagnostics_v1.json) | 1 | 2 diagnostic | 0 tasks | 0 tasks | provisional |
+| [clockfree_continuous](../../configs/forge/views/clockfree_continuous.json) | 4 | 4 required | 19 required | 7 required | provisional |
+| [discriminator_stability](../../configs/forge/views/discriminator_stability.json) | 6 | 7 required | 19 required | 2 required | provisional |
 | [formulation_comparison](../../configs/forge/views/formulation_comparison.json) | 1 | 3 required | 19 required, 15 diagnostic | 2 required | provisional |
 | [host_profile_transfer](../../configs/forge/views/host_profile_transfer.json) | 4 | 3 required | 19 required, 13 diagnostic | 2 required | provisional |
 | [k3p_two_pole_horizon](../../configs/forge/views/k3p_two_pole_horizon.json) | 1 | 2 diagnostic | 0 tasks | 0 tasks | provisional |
@@ -93,9 +94,42 @@ Candidate outcomes, metrics and measured costs: [leaderboard](leaderboards/adapt
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | [target_shift_recovery](../../configs/forge/tasks/target_shift_recovery.json) | required | MoGParticlePrior (sigma=0.025) | [Question, results, GIFs](#experiment-mode-hold) | paired_adaptation / paired_adaptation | 3600 | 3600 | [mode_hold](../../configs/forge/tasks/mode_hold.json) (gate) |
 
+## bcap_budget_diagnostics_v1
+
+Declaration: [bcap_budget_diagnostics_v1](../../configs/forge/views/bcap_budget_diagnostics_v1.json); revision 1; goal: `discriminator_stability`.
+
+Declared calibration status: **provisional**.
+
+Schedule-preserving acquisition-budget diagnostics grant no ordinary qualification, screen calibration or default adoption.
+
+Declared evidence scope: `research_diagnostic`.
+
+No published solution leaderboard for this view yet; task registration and related API media confer no candidate qualification.
+
+### Tier 1: smoke
+
+2 diagnostic.
+
+| Task | Importance | Prior code path | Experiment guide | Adapter / gate | Declared steps | Timeout (s) | Dependencies / shared execution |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| [gaussian1d_acquisition_3000_schedule1000_diagnostic_v1](../../configs/forge/tasks/gaussian1d_acquisition_3000_schedule1000_diagnostic_v1.json) | diagnostic | MoGParticlePrior (sigma=0.025) | [Question, results, GIFs](#experiment-gaussian1d-acquisition) | transfer_vector / transfer_budget_diagnostic | 3000 | 360 | — |
+| [ring16_acquisition_1600_schedule400_diagnostic_v1](../../configs/forge/tasks/ring16_acquisition_1600_schedule400_diagnostic_v1.json) | diagnostic | MoGParticlePrior (sigma=0.025) | [Question, results, GIFs](#experiment-ring16-acquisition) | transfer_vector / transfer_budget_diagnostic | 1600 | 1200 | — |
+
+### Tier 2: quality
+
+0 tasks.
+
+No tasks assigned.
+
+### Tier 3: endurance
+
+0 tasks.
+
+No tasks assigned.
+
 ## clockfree_continuous
 
-Declaration: [clockfree_continuous](../../configs/forge/views/clockfree_continuous.json); revision 3; goal: `clockfree_continuous`.
+Declaration: [clockfree_continuous](../../configs/forge/views/clockfree_continuous.json); revision 4; goal: `clockfree_continuous`.
 
 Declared calibration status: **provisional**.
 
@@ -112,7 +146,7 @@ Candidate outcomes, metrics and measured costs: [leaderboard](leaderboards/clock
 | [two_pole](../../configs/forge/tasks/two_pole.json) | required | ParticlePrior (sigma=0) | [Question, results, GIFs](#experiment-two-pole) | transfer_behavior / transfer_sustained | 80 | 300 | — |
 | [unused_token_hold](../../configs/forge/tasks/unused_token_hold.json) | required | ParticlePrior (sigma=0; not sampled) | [Question, results, GIFs](#experiment-unused-token-hold) | transfer_behavior / transfer_sustained | 200 | 300 | — |
 | [ae_gan_hold](../../configs/forge/tasks/ae_gan_hold.json) | required | MoGParticlePrior (sigma=0.025) | [Question, results, GIFs](#experiment-ae-gan-hold) | transfer_behavior / transfer_sustained | 250 | 300 | — |
-| [clockfree_audit_measurement_v1](../../configs/forge/tasks/clockfree_audit_measurement_v1.json) | required | MoGParticlePrior (sigma=0.025) | [Question, results, GIFs](#experiment-clockfree-audit-measurement-v1) | clockfree_audit / clockfree_parity | 24 | 300 | — |
+| [schedule_contract_audit](../../configs/forge/tasks/schedule_contract_audit.json) | required | MoGParticlePrior (sigma=0.025) | [Question, results, GIFs](#experiment-schedule-contract-audit) | clockfree_audit / schedule_contract | 231 | 300 | — |
 
 ### Tier 2: quality
 
@@ -156,17 +190,17 @@ Candidate outcomes, metrics and measured costs: [leaderboard](leaderboards/clock
 
 ## discriminator_stability
 
-Declaration: [discriminator_stability](../../configs/forge/views/discriminator_stability.json); revision 5; goal: `discriminator_stability`.
+Declaration: [discriminator_stability](../../configs/forge/views/discriminator_stability.json); revision 6; goal: `discriminator_stability`.
 
 Declared calibration status: **provisional**.
 
-Expanded six-task Tier 1 placement is provisional and requires bounded calibration. Revision 3 and prior profiles retain their original tasks and evidence; a standalone scalar pass gives no whole-view/default credit.
+Seven required Tier 1 tasks include six existing acquisition/behavior checks and a declared-schedule operational audit. Placement remains provisional; no calibrated ranking, clock-free claim or default adoption follows.
 
 Candidate outcomes, metrics and measured costs: [leaderboard](technique-inventory.md).
 
 ### Tier 1: smoke
 
-6 required, 1 diagnostic.
+7 required.
 
 | Task | Importance | Prior code path | Experiment guide | Adapter / gate | Declared steps | Timeout (s) | Dependencies / shared execution |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -176,7 +210,7 @@ Candidate outcomes, metrics and measured costs: [leaderboard](technique-inventor
 | [ae_gan_hold](../../configs/forge/tasks/ae_gan_hold.json) | required | MoGParticlePrior (sigma=0.025) | [Question, results, GIFs](#experiment-ae-gan-hold) | transfer_behavior / transfer_sustained | 250 | 300 | — |
 | [ring16_acquisition](../../configs/forge/tasks/ring16_acquisition.json) | required | MoGParticlePrior (sigma=0.025) | [Question, results, GIFs](#experiment-ring16-acquisition) | transfer_vector / transfer_sustained | 400 | 300 | — |
 | [five_word_joint_acquisition](../../configs/forge/tasks/five_word_joint_acquisition.json) | required | ParticlePrior (sigma=0) | [Question, results, GIFs](#experiment-five-word-joint) | word_joint / transfer_sustained | 20001 | 900 | — |
-| [clockfree_audit_measurement_v1](../../configs/forge/tasks/clockfree_audit_measurement_v1.json) | diagnostic | MoGParticlePrior (sigma=0.025) | [Question, results, GIFs](#experiment-clockfree-audit-measurement-v1) | clockfree_audit / clockfree_parity | 24 | 300 | — |
+| [schedule_contract_audit](../../configs/forge/tasks/schedule_contract_audit.json) | required | MoGParticlePrior (sigma=0.025) | [Question, results, GIFs](#experiment-schedule-contract-audit) | clockfree_audit / schedule_contract | 231 | 300 | — |
 
 ### Tier 2: quality
 
@@ -476,6 +510,7 @@ These catalog tasks have no tier placement. Add an assignment to a view to inclu
 
 | Task | Prior code path | Experiment guide | Adapter / gate | Declared steps | Timeout (s) | Dependencies / shared execution |
 | --- | --- | --- | --- | --- | --- | --- |
+| [clockfree_audit_measurement_v1](../../configs/forge/tasks/clockfree_audit_measurement_v1.json) | MoGParticlePrior (sigma=0.025) | [Question, results, GIFs](#experiment-clockfree-audit-measurement-v1) | clockfree_audit / clockfree_parity | 24 | 300 | — |
 | [grid100_affine_square_named_v1_14k](../../configs/forge/tasks/grid100_affine_square_named_v1_14k.json) | MoGParticlePrior (sigma=0.025) | [Question, results, GIFs](#experiment-grid100) | native100_continuation / native_accuracy | 14000 total; 7000 additional | 7200 | [grid100_affine_square_named_v1](../../configs/forge/tasks/grid100_affine_square_named_v1.json) (checkpoint); [clockfree_audit](../../configs/forge/tasks/clockfree_audit.json) (gate) |
 | [rotated100_affine_square_named_v1_14k](../../configs/forge/tasks/rotated100_affine_square_named_v1_14k.json) | MoGParticlePrior (sigma=0.025) | [Question, results, GIFs](#experiment-rotated100) | native100_continuation / native_accuracy | 14000 total; 7000 additional | 7200 | [rotated100_affine_square_named_v1](../../configs/forge/tasks/rotated100_affine_square_named_v1.json) (checkpoint); [clockfree_audit](../../configs/forge/tasks/clockfree_audit.json) (gate) |
 | [staggered100_affine_square_named_v1_14k](../../configs/forge/tasks/staggered100_affine_square_named_v1_14k.json) | MoGParticlePrior (sigma=0.025) | [Question, results, GIFs](#experiment-staggered100) | native100_continuation / native_accuracy | 14000 total; 7000 additional | 7200 | [staggered100_affine_square_named_v1](../../configs/forge/tasks/staggered100_affine_square_named_v1.json) (checkpoint); [clockfree_audit](../../configs/forge/tasks/clockfree_audit.json) (gate) |
@@ -735,7 +770,7 @@ Can the public ParticleGAN trainer acquire the scalar law N(2, 0.5^2) from rando
 
 Explanation, interpretation and reproduction: [experiment readout](../toy_audit/api_contract/gaussian1d/README.md).
 
-Forge declarations: [gaussian1d_acquisition](../../configs/forge/tasks/gaussian1d_acquisition.json), [gaussian1d_acquisition_tier1_policy_selected_cloud_v1](../../configs/forge/task-variants/tier1_policy_selected_cloud_v1/gaussian1d_acquisition_tier1_policy_selected_cloud_v1.json).
+Forge declarations: [gaussian1d_acquisition](../../configs/forge/tasks/gaussian1d_acquisition.json), [gaussian1d_acquisition_3000_schedule1000_diagnostic_v1](../../configs/forge/tasks/gaussian1d_acquisition_3000_schedule1000_diagnostic_v1.json), [gaussian1d_acquisition_tier1_policy_selected_cloud_v1](../../configs/forge/task-variants/tier1_policy_selected_cloud_v1/gaussian1d_acquisition_tier1_policy_selected_cloud_v1.json).
 
 Declared Forge numerical gates and sampling:
 
@@ -752,6 +787,26 @@ Declared Forge numerical gates and sampling:
 
 At least 5 consecutive passing terminal observations.
 All 24 declared observations and final live metrics are required.
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | MoGParticlePrior (sigma=0.025) |
+| Sampling law | public_prior_without_output_noise |
+| Scoring weights | live |
+| Evaluation output noise | clean |
+
+[gaussian1d_acquisition_3000_schedule1000_diagnostic_v1](../../configs/forge/tasks/gaussian1d_acquisition_3000_schedule1000_diagnostic_v1.json)
+
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 4096 |
+| finite_fraction | == 1 |
+| mean_error_sigma | <= 0.2 |
+| std_ratio | >= 0.8 |
+| std_ratio | <= 1.2 |
+| cdf_ks | <= 0.05 |
+
+At least 5 consecutive passing terminal observations.
 
 | Measurement | Declared condition |
 | --- | --- |
@@ -1176,7 +1231,7 @@ Related public-API demonstrations, with their own recorded contracts:
 
 Acquire all 16 equally weighted two-dimensional Gaussian clusters from scratch: radius 3, sigma 0.1; require meaningful occupancy in every cluster, roughly balanced mass and noncollapsed local spread within 400 updates. No extended hold phase.
 
-Forge declarations: [ring16_acquisition](../../configs/forge/tasks/ring16_acquisition.json), [ring16_acquisition_tier1_policy_selected_cloud_v1](../../configs/forge/task-variants/tier1_policy_selected_cloud_v1/ring16_acquisition_tier1_policy_selected_cloud_v1.json).
+Forge declarations: [ring16_acquisition](../../configs/forge/tasks/ring16_acquisition.json), [ring16_acquisition_1600_schedule400_diagnostic_v1](../../configs/forge/tasks/ring16_acquisition_1600_schedule400_diagnostic_v1.json), [ring16_acquisition_tier1_policy_selected_cloud_v1](../../configs/forge/task-variants/tier1_policy_selected_cloud_v1/ring16_acquisition_tier1_policy_selected_cloud_v1.json).
 
 Declared Forge numerical gates and sampling:
 
@@ -1193,6 +1248,26 @@ Declared Forge numerical gates and sampling:
 
 At least 5 consecutive passing terminal observations.
 All 24 declared observations and final live metrics are required.
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | MoGParticlePrior (sigma=0.025) |
+| Sampling law | public_prior_without_output_noise |
+| Scoring weights | live |
+| Evaluation output noise | clean |
+
+[ring16_acquisition_1600_schedule400_diagnostic_v1](../../configs/forge/tasks/ring16_acquisition_1600_schedule400_diagnostic_v1.json)
+
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 4096 |
+| modes | >= 16 |
+| mass_tv | <= 0.15 |
+| hq | >= 0.85 |
+| component_covariance_error | <= 0.85 |
+| component_min_eigen_ratio | >= 0.15 |
+
+At least 5 consecutive passing terminal observations.
 
 | Measurement | Declared condition |
 | --- | --- |
@@ -1287,6 +1362,29 @@ Related public-API demonstrations, with their own recorded contracts:
 | Variant / actual-training GIF | What this variant tests | Recorded prior code path | Recorded result / failed bounds | Recipe / compute / source | Evidence |
 | --- | --- | --- | --- | --- | --- |
 | [api-rotated100](../toy_audit/api_contract/media/api-rotated100.gif) | Recover all 100 equal-weight Gaussian modes, their mass and local width, including independent density-fidelity bounds. Scope: A per-observation gate is not full-budget or sustained convergence; no historical verdict is replaced. | ParticlePrior (sigma=0) | COMPLETE / PASS; 7000/7000 updates | atlas / cpu / d9d51eff83a2 | [definition](../toy_audit/api_contract/cases.json); [readout](../toy_audit/api_contract/readout.json); [recipe and provenance](../toy_audit/api_contract/runs.json) |
+
+### Experiment: schedule-contract-audit
+
+Public scalar trainer operational audit: declared LR/noise/beta2/critic-coefficient schedules must match independent equations and normalized-clock public replay; guard clipping follows actual Adam history; restart and evaluation cadence retain exact learning state. Passing grants no clock-free claim. Revised question retains original clockfree_audit evidence without relabeling it.
+
+Forge declarations: [schedule_contract_audit](../../configs/forge/tasks/schedule_contract_audit.json).
+
+Declared Forge numerical gates and sampling:
+
+[schedule_contract_audit](../../configs/forge/tasks/schedule_contract_audit.json)
+
+Exact state/output parity for: step_label, horizon, evaluation_cadence, restart; bound source audit required.
+
+| Measurement | Declared condition |
+| --- | --- |
+| Prior | MoGParticlePrior (sigma=0.025) |
+| Sampling law | public_prior_without_output_noise |
+| Scoring weights | live |
+| Evaluation output noise | clean |
+
+No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
+
+No related published API training GIF. This task retains its own declared numerical audit.
 
 ### Experiment: staggered100
 
@@ -1753,6 +1851,6 @@ The wider question review also links standalone experiments outside the Forge ti
 - [Later questions](../toy_audit/api_contract/recent_prs/README.md)
 - [Caption questions](../toy_audit/api_contract/caption_prs/README.md)
 
-Declaration input digest: `3bd6703abbc629bff841655cadcfa07af98c702c88fabcf2da115c5570375525`. The JSON form includes the individual task and view file hashes.
+Declaration input digest: `e37c4dbe59acf95e6303030c17f3d7ac2bdde75b5a9e0264111847e1dce09386`. The JSON form includes the individual task and view file hashes.
 
 Published artifact input digest: `8d3a9773b62db7de817952f28743166a4e277699c0cae0dcb276124a284e354d`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.

@@ -23,7 +23,8 @@ def emit(event, **values):
 
 
 def bind_contract(path, *, view, candidate_cap, campaign_cap,
-                  prediction, falsifier, evidence, control=BASE, task_map=None):
+                  prediction, falsifier, evidence, control=BASE, task_map=None,
+                  competing_explanation=None):
     """Bind the existing admission contract to exact current task/source values."""
     idea = read_json(path)
     from experiments.forge.decision_contracts import scaffold
@@ -42,7 +43,7 @@ def bind_contract(path, *, view, candidate_cap, campaign_cap,
         candidate_binding_sha256=expected["candidate_binding_sha256"],
         substantive_delta=expected["substantive_delta"],
         prediction=prediction, falsifier=falsifier,
-        competing_explanation=("Slower prior transport and stronger cap penalties may "
+        competing_explanation=competing_explanation or ("Slower prior transport and stronger cap penalties may "
             "reduce drift/tails but impede acquisition, movement or word reconstruction. "
             "A final ring covariance improvement alone cannot replace all sustained gates."))
     contract["control"].update(binding_sha256=expected["control_binding_sha256"],
