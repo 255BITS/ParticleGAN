@@ -349,14 +349,16 @@ def validate_screening_submission(request: dict) -> None:
     research_diagnostic = request.get("view", {}).get("evidence_scope") == "research_diagnostic"
     if research_diagnostic:
         views.validate_view(request["view"], request.get("tasks", {}))
-        contract = candidate.get("decision_contract")
+        from .studies import contract_for
+        contract = contract_for(request)
         from .decision_contracts import validate_shape
-        if candidate.get("schema_version") != 2 or not isinstance(contract, dict):
+        if candidate.get("schema_version") not in (2, 3) or not isinstance(contract, dict):
             _block("research diagnostics require a ready v2 bounded decision_contract")
         validate_shape(contract)
-        review = request.get("decision_review", {})
+        review = request.get("study_review" if "study" in request else "decision_review", {})
+        admission = request.get("study_admission" if "study" in request else "decision_admission")
         if (contract.get("status") != "ready" or review.get("status") != "READY"
-                or request.get("decision_admission") != review.get("receipt") or not review.get("receipt")
+                or admission != review.get("receipt") or not review.get("receipt")
                 or request.get("through_tier") != 1 or contract["scope"]["view"] != request["view"]["id"]
                 or contract["scope"]["through_tier"] != 1
                 or set(contract["scope"]["task_ids"]) != {item["task"] for item in request["view"]["assignments"]}):

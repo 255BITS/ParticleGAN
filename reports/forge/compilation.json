@@ -2,7 +2,7 @@
   "automation_digest": "625006792c1515ea89a3107942e770d45304311ecbce131c904321b70152bb85",
   "conflicts": [],
   "import_gap_count": 7,
-  "input_digest": "b25d162738e275a8da2ba1d1d5162f112e671972f708f455b2afd86e69ee015f",
+  "input_digest": "184ea30a5f88ae190cde0bfb8af9c5494ba1e71a8aec983d511da2d03b5c1a22",
   "input_hashes": {
     "configs/forge/calibration-lane-template.json": "65f10d3061aa487bb32da43bb97cb91934a25d763f6bb634f1d3316fdcc6d9e5",
     "configs/forge/calibration/criteria-v1.json": "6eac2531eed68e392c11a57328999ac5dce509f8fe51d23e7b9031b7a4e3f9d1",
@@ -132,6 +132,7 @@
     "configs/forge/defaults.json": "e5699dacce7222eb7a819944eabb796330fd59530a23e0506f941a389a8330a5",
     "configs/forge/execution-policy.schema.json": "ba06ed1dbce661fd1e827229c4a357aaf3d4bb3263f70ba8cbea162b0dc44a11",
     "configs/forge/ideas/atlas.json": "b8a7d65760d0c21d2b3ccd65564085a6e23cde20775791ecb0f8f932609cec65",
+    "configs/forge/ideas/bcap-pure-adam-v1.json": "70e81587307996329e0b53167904ce9d9129ba9e1b1a9f2a52dc41ac055642a5",
     "configs/forge/ideas/e22.json": "434aac4241443ad51ccac2e3e6d620eba9e8131336ca66d1e157b9b1937aaad0",
     "configs/forge/ideas/five-word-joint-ka2-v1.json": "f2cd3809340d8aece6cb24ecde8eb863061ad290de5aa09f4fc66c73bb984118",
     "configs/forge/ideas/forge-no-critic-penalty.json": "886040c69e790fea2dbe9b2457ff174b9518e1821af581b148f4df3a7886eb1f",
@@ -186,6 +187,7 @@
     "configs/forge/selections/family-current-v1.json": "d93c820022809d5aa19f7a4c16040b15312950955f11f2cd08ce8c184a547338",
     "configs/forge/selections/tier1-existing-configs-v1.json": "18e990f873f8315d30740124afad4acad212f6708723b58816dda72d57e224b8",
     "configs/forge/selections/word-joint-task-v1.json": "9e1c77de1914e386eeb1032bd8cf586b4c45b99775ab71b983ee77a4d618edbb",
+    "configs/forge/studies/pure-bcap-baseline-v1.json": "78955e18370e83f97e21dbd26b9ccfe92033959b9cea917df0ab39bb8e08743a",
     "configs/forge/task-variants/tier1_policy_selected_cloud_v1/ae_gan_hold_tier1_policy_selected_cloud_v1.json": "f2195f2cd9eebe5585f989832bbe86805c2064546964aef609d111c003792ecf",
     "configs/forge/task-variants/tier1_policy_selected_cloud_v1/clockfree_audit_tier1_policy_selected_cloud_v1.json": "fbf3c5b91ef75f3ebdde1f1abfaef884192d8ab86cf252359c8695c6b883e66c",
     "configs/forge/task-variants/tier1_policy_selected_cloud_v1/five_word_joint_acquisition_tier1_policy_selected_cloud_v1.json": "d01a22d4e69178841dd23565db024611e09000c449a2f546abdff7e986c404b7",
@@ -1124,16 +1126,16 @@
     "reports/forge/technique-receipts/feab61b6e5d945f3a7344ebbd1eac1be.json": "6714549984e5784b1f6a41c2f5d19de03c87ace239c9240a045cbc5b68fa730b"
   },
   "inventory_coverage": {
-    "declared_count": 11749,
+    "declared_count": 11758,
     "missing": [],
     "stale": [],
-    "tracked_count": 11749,
+    "tracked_count": 11758,
     "unclassified": [],
     "valid": true
   },
   "operational_lifecycle_digest": "b7b68ed15100a08f46090394c6597c2707df5002faed03502f29115ba3f14fca",
   "output_hashes": {
-    "reports/forge/EXPERIMENT_MEMORY.md": "4fd10d4a2314cda6f5dfc3e59e1b52c0cd67915ccfb9cd5a610e794ce24d902a",
+    "reports/forge/EXPERIMENT_MEMORY.md": "2b2fcccebb6c648f677cddf8f5d83b8d52c7b1828a83ff793fad6a66f31c84fb",
     "reports/forge/publication-records.json": "c8597d3b2bd707c72c74ee2043f54e2076ece6aab2a241790e25be27b7e4c04d"
   },
   "pending_readout": [
@@ -1149,10 +1151,10 @@
   },
   "record_count": 459,
   "reducer_hashes": {
-    "experiments.forge.knowledge": "ec511b18d17456c21ad561251a5e93e12ad42290239268c2ff982452a84b53e4",
+    "experiments.forge.knowledge": "96a82b85ead1ced62b487f62270ae7b5e45734f75a40355ffc5918e5c95977f9",
     "experiments.forge.publication_memory": "18dd7d048837dbbe635e4962df849ea101400a835220514bba2305434e83f785"
   },
-  "reducer_sha256": "ec511b18d17456c21ad561251a5e93e12ad42290239268c2ff982452a84b53e4",
+  "reducer_sha256": "96a82b85ead1ced62b487f62270ae7b5e45734f75a40355ffc5918e5c95977f9",
   "reducer_version": "forge-knowledge-v2",
   "schema_version": 1,
   "scientific_normalization_complete": false,

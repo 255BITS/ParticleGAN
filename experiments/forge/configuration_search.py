@@ -44,8 +44,15 @@ def _load_spec(root, spec, *, validate_current_protocol=True):
         value = read_json(Path(root) / path)
     if not isinstance(value, dict) or set(value) - SPEC_FIELDS:
         raise ValueError("search spec contains unsupported fields")
+    modern = value.get("schema_version") == 2
     required = SPEC_FIELDS - {"cuda_model", "hypothesis", "rationale", "guide"}
-    if required - value.keys() or value.get("schema_version") != 1:
+    if modern:
+        required = (required - {"protocol_hash"}) | {"hypothesis"}
+        if "protocol_hash" in value:
+            raise ValueError("v2 search protocol_hash is generated, not authored in a study")
+        if not isinstance(value.get("hypothesis"), str) or not value["hypothesis"].strip() or "TODO" in value["hypothesis"]:
+            raise ValueError("v2 search requires a finished study hypothesis")
+    if required - value.keys() or type(value.get("schema_version")) is not int or value["schema_version"] not in (1, 2):
         raise ValueError("search spec missing required fields or unsupported schema")
     for key in ("id", "trainer_family", "base_candidate", "view", "protocol"):
         identifier(value[key], f"search {key}")
@@ -56,7 +63,7 @@ def _load_spec(root, spec, *, validate_current_protocol=True):
     if validate_current_protocol:
         defaults = read_json(Path(root) / "configs/forge/defaults.json")
         protocol = read_json(Path(root) / "configs/forge/protocols" / f"{value['protocol']}.json")
-        if defaults["protocol"] != value["protocol"] or stable_hash(protocol) != value["protocol_hash"]:
+        if defaults["protocol"] != value["protocol"] or (not modern and stable_hash(protocol) != value["protocol_hash"]):
             raise ValueError("search fixed protocol differs from the declared Forge protocol")
     campaign = value["campaign"]
     identifier(campaign["id"], "search campaign")
@@ -142,6 +149,8 @@ def _validate_grid_value(name, value):
 def configuration_id(candidate, *, resolved_recipe=None):
     """Hash actual configuration and fixed laws; exclude labels and source code."""
     formulation = {key: candidate.get(key) for key in FORMULATION_FIELDS}
+    if candidate.get("schema_version") == 3:
+        formulation["prior"] = None  # Runtime task binding never enters an authored recipe identity.
     formulation["recipe_overrides"] = deepcopy(formulation.get("recipe_overrides") or {})
     formulation["recipe_overrides"].pop("name", None)
     if resolved_recipe is None:
@@ -168,7 +177,8 @@ def _resolved_recipe(candidate):
 def _base_declaration(root, spec):
     base = load_idea(root, spec["base_candidate"])
     defaults = read_json(Path(root) / "configs/forge/defaults.json")
-    base["prior"] = {**defaults["prior"], **base.get("prior", {})}
+    if base["schema_version"] != 3:
+        base["prior"] = {**defaults["prior"], **base.get("prior", {})}
     return base
 
 
@@ -223,6 +233,8 @@ def validate_configuration_declaration(candidate, *, root=None, _lineage=()):
         raise ValueError("configuration parent belongs to a different trainer_family")
     validate_same_technique(parent_recipe, frozen)
     laws = (set(FORMULATION_FIELDS) - {"recipe_overrides"}) | {"host_adaptation", "execution_path"}
+    if candidate.get("schema_version") == 3:
+        laws -= {"prior"}  # Modern priors come only from the task, including search trials.
     if any(stable_hash(candidate.get(name)) != stable_hash(reference.get(name)) for name in laws):
         raise ValueError("configuration changes fixed parent technique/protocol declarations")
     changed = {name for name in frozen if name != "name"
@@ -247,6 +259,11 @@ def _declarations(root, spec):
     declarations = []
     for settings in _grid(spec["grid"]):
         idea = deepcopy(base)
+        modern = spec["schema_version"] == 2
+        if modern:
+            for key in ("decision_contract", "prior", "goal", "hypothesis", "lifecycle", "search_study_id", "search_report"):
+                idea.pop(key, None)
+            idea["schema_version"] = 3
         idea["recipe_overrides"] = {**base.get("recipe_overrides", {}), **settings}
         frozen_recipe = _resolved_recipe(idea)  # Actual public context, never ignored kwargs.
         validate_same_technique(base_recipe, frozen_recipe)
@@ -254,12 +271,13 @@ def _declarations(root, spec):
         name = f"{spec['trainer_family']}--{digest}"
         identifier(name, "configuration candidate")
         idea.update(id=name, parent=spec["base_candidate"], trainer_family=spec["trainer_family"],
-                    configuration_id=digest, search_study_id=spec["id"],
+                    configuration_id=digest,
                     resolved_configuration_recipe=frozen_recipe,
-                    search_report=f"reports/forge/configuration-search/{spec['id']}.json",
-                    hypothesis=spec.get("hypothesis") or base["hypothesis"],
                     changed_factors=[f"Recipe.{key}={settings[key]!r}" for key in sorted(settings)],
-                    mechanism_class="floor_constant", lifecycle="proposed")
+                    mechanism_class="floor_constant")
+        if not modern:
+            idea.update(search_study_id=spec["id"], search_report=f"reports/forge/configuration-search/{spec['id']}.json",
+                        hypothesis=spec.get("hypothesis") or base.get("hypothesis", "See the search study"), lifecycle="proposed")
         validate_idea(idea)
         path = Path(root) / "configs/forge/configurations" / f"{name}.json"
         if path.exists():
@@ -443,6 +461,7 @@ def _evaluator_timing(task, grade):
 
 def _prepare(root, queue_root, spec, queue):
     spec = _load_spec(root, spec)
+    protocol_hash = stable_hash(read_json(Path(root) / f"configs/forge/protocols/{spec['protocol']}.json"))
     previous = _check_spec_registration(root, spec)
     state = queue.inspect()
     existing = state.get("campaigns", {}).get(spec["campaign"]["id"])
@@ -453,6 +472,8 @@ def _prepare(root, queue_root, spec, queue):
         request = resolve_idea(root, idea["id"], declaration=idea, view_id=spec["view"],
                                through_tier=spec["tuning_through_tier"],
                                execution_backend=spec["execution_backend"], cuda_model=spec.get("cuda_model"))
+        if spec["schema_version"] == 2:
+            request["search_plan"] = {"study_id": spec["id"], "spec_sha256": stable_hash(spec), "declaration": deepcopy(spec)}
         requests.append(request)
         planned = plan_summary(request, state)
         allowed = {row["task"] for row in planned["tasks"] if row["permitted_by_tier_cap"]}
@@ -485,7 +506,7 @@ def _prepare(root, queue_root, spec, queue):
         raise ValueError("search grid resolves duplicate configurations")
     sources = sorted({trial["source_digest"] for trial in trials})
     if (len(sources) != 1 or len({stable_hash(t["runtime_cohort"]) for t in trials}) != 1
-            or {t["protocol_hash"] for t in trials} != {spec["protocol_hash"]}):
+            or {t["protocol_hash"] for t in trials} != {protocol_hash}):
         raise ValueError("search requires one frozen source/runtime/protocol cohort; plan again after inputs stabilize")
     if previous:
         old = {trial["configuration_id"]: trial for trial in previous["trials"]}
@@ -500,7 +521,7 @@ def _prepare(root, queue_root, spec, queue):
                "tuning_through_tier": spec["tuning_through_tier"],
                "execution_backend": spec["execution_backend"], "source_digests": sources,
                "source_digest": sources[0] if len(sources) == 1 else None,
-               "policy_fingerprint": requests[0]["policy_fingerprint"], "protocol_hash": spec["protocol_hash"],
+               "policy_fingerprint": requests[0]["policy_fingerprint"], "protocol_hash": protocol_hash,
                "runtime_cohort": trials[0]["runtime_cohort"], "campaign": spec["campaign"],
                "declared_worst_case_seconds": ceiling, "trials": trials,
                "queue_root": str(queue_root), "logs": str(Path(queue_root) / "events.jsonl"),
@@ -574,6 +595,9 @@ def enqueue_search(root: Path, queue_root: Path, spec, *, queue=None) -> dict:
         resolved = resolve_idea(root, trial["candidate_id"], view_id=summary["view"],
                                 through_tier=summary["tuning_through_tier"], execution_backend=summary["execution_backend"],
                                 cuda_model=summary["spec"].get("cuda_model"), queue_root=queue_root, freeze_source=True)
+        if summary["spec"]["schema_version"] == 2:
+            resolved["search_plan"] = {"study_id": summary["study_id"], "spec_sha256": summary["spec_hash"],
+                                       "declaration": deepcopy(summary["spec"])}
         if _signature(resolved) != trial["scientific_signature"]:
             raise ValueError("search source or declarations changed before submission; plan and enqueue again")
         # A Git commit with identical scientific bytes cannot create another

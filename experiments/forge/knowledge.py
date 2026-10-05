@@ -745,7 +745,7 @@ def compile_memory(root: Path, *, summaries_only: bool = False) -> dict:
                 "memory": "reports/forge/EXPERIMENT_MEMORY.md", "conflicts": manifest["conflicts"]}
 
 
-def readout(root: Path, candidate_id: str, conclusion: str, comparison: str, next_action: str) -> dict:
+def readout(root: Path, candidate_id: str, conclusion: str, comparison: str, next_action: str, *, study_id=None) -> dict:
     """Publish a readout for one exact attempted revision, then update memory."""
     root = Path(root)
     identifier(candidate_id, "candidate id")
@@ -755,25 +755,39 @@ def readout(root: Path, candidate_id: str, conclusion: str, comparison: str, nex
     if "@" in candidate_id and not (root / "configs/forge/ideas" / (candidate_id + ".json")).exists():
         candidate_id, requested_revision = candidate_id.rsplit("@", 1)
     attempts, _ = _attempts(root)
+    states = _queue_states(root, attempts)
+    study_request = None
+    from .studies import frozen_declaration, selected_study_id
     selected = [a for a in attempts if a["request"].get("candidate", {}).get("id") == candidate_id
-                and (requested_revision is None or a["request"]["candidate_revision"].startswith(requested_revision))]
+                and (requested_revision is None or a["request"]["candidate_revision"].startswith(requested_revision))
+                and (study_id is None or a["request"].get("study", {}).get("id") == study_id)]
+    if study_id is not None:
+        from .studies import select_observations
+        study_request, selected = select_observations(states, attempts, candidate_id, study_id, requested_revision)
+    if study_id is None and any(selected_study_id(a["request"]) for a in selected):
+        raise ValueError("Study-bound attempts require readout --study STUDY to keep research questions separate")
     revisions = {a["request"]["candidate_revision"] for a in selected}
     if not revisions:
         raise ValueError("No durable execution attempt exists for this candidate/revision.")
     if len(revisions) != 1:
         raise ValueError("Multiple revisions have attempts; use candidate-id@revision to bind the readout.")
     revision = revisions.pop()
-    candidate = selected[0]["request"]["candidate"]
+    candidate = (study_request or selected[0]["request"])["candidate"]
+    study = frozen_declaration(study_request) if study_request else None
     scopes = {diagnostic_evidence_scope(a["request"]) for a in selected}
     if "research_diagnostic" in scopes and len(scopes) != 1:
         raise ValueError("research diagnostic readouts cannot combine ordinary or calibration evidence")
     diagnostic_scope = next(iter(scopes)) if len(scopes) == 1 else None
     diagnostic_only = diagnostic_scope is not None
-    record = {"schema_version": 1, "record_id": "readout-" + stable_hash({"candidate": candidate_id, "revision": revision})[:24],
+    identity = {"candidate": candidate_id, "revision": revision}
+    if study:
+        identity.update(study_id=study["id"], study_sha256=stable_hash(study))
+    record = {"schema_version": 1, "record_id": "readout-" + stable_hash(identity)[:24],
               "record_type": "scientific", "candidate_id": candidate_id, "candidate_revision": revision,
               "evidence_scope": diagnostic_scope or "current",
-              "qualification_reuse": not diagnostic_only, "lifecycle": "concluded", "goal": candidate.get("goal"),
-              "hypothesis": candidate.get("hypothesis", "See immutable candidate declaration."),
+              "qualification_reuse": not diagnostic_only, "lifecycle": "concluded",
+              "goal": study.get("scope", {}).get("view", study.get("view")) if study else candidate.get("goal"),
+              "hypothesis": study["hypothesis"] if study else candidate.get("hypothesis", "See immutable candidate declaration."),
               "mechanism_class": candidate.get("mechanism_class", "unknown"), "prior": candidate.get("prior"),
               "claim_contract": candidate.get("claim_contract"),
               "source": {"path": selected[0]["source"]},
@@ -782,6 +796,8 @@ def readout(root: Path, candidate_id: str, conclusion: str, comparison: str, nex
               "provenance": {"attempts": [{"attempt_id": a["attempt_id"], "result_hash": a["result_hash"],
                                              "valid_receipt": a["valid_receipt"]} for a in selected]},
               "conclusion": conclusion.strip(), "comparison": comparison.strip(), "next_action": next_action.strip()}
+    if study:
+        record.update(study_id=study["id"], study_sha256=stable_hash(study), study=study)
     if diagnostic_scope == "research_diagnostic":
         from reports.forge.regenerate_technique_inventory import _evaluator_summary
         record.update(qualification_input=False, qualified_tier=0, eligible=False)
@@ -789,10 +805,14 @@ def readout(root: Path, candidate_id: str, conclusion: str, comparison: str, nex
             "task_id", "compatibility_key", "gate_status", "raw_status", "reason", "metrics", "cost") if key in row},
             "evaluator_summary": _evaluator_summary(row.get("evaluator_result", {}))}
             for attempt in selected for row in attempt["task_results"]]
-    if candidate.get("decision_contract") is not None:
+    if study_request and "study" in study_request:
+        from .studies import conclude_observations
+        record["decision_outcomes"] = [conclude_observations(study_request, selected)]
+    elif study_request and "search_plan" in study_request:
+        record["search_plan"] = study_request["search_plan"]
+    elif candidate.get("decision_contract") is not None:
         from .decision_contracts import concluded_outcomes
         record["decision_outcomes"] = concluded_outcomes(selected)
-    states = _queue_states(root, attempts)
     with file_lock(root / "runs/forge/readout.lock"), ExitStack() as locks:
         for location in sorted(states):
             locks.enter_context(file_lock(Path(location) / "queue.lock"))
@@ -801,7 +821,8 @@ def readout(root: Path, candidate_id: str, conclusion: str, comparison: str, nex
             state = read_json(Path(location) / "queue/state.json")
             matching = [e for e in state.get("submissions", {}).values()
                         if e["request"].get("candidate", {}).get("id") == candidate_id
-                        and e["request"].get("candidate_revision") == revision]
+                        and e["request"].get("candidate_revision") == revision
+                        and (study_id is None or selected_study_id(e["request"]) == study_id)]
             if any(e["status"] in {"queued", "running", "paused"} for e in matching):
                 raise ValueError("Candidate has active queued/running/paused work; stop or complete it before readout.")
             stopped.append((location, state, matching))
@@ -813,7 +834,7 @@ def readout(root: Path, candidate_id: str, conclusion: str, comparison: str, nex
                 entry.update(status="concluded", lifecycle="concluded", readout_record_id=record["record_id"],
                              readout_attempt_ids=record["attempt_ids"])
             atomic_json(Path(location) / "queue/state.json", state)
-    if diagnostic_scope == "research_diagnostic":
+    if study is not None or diagnostic_scope == "research_diagnostic":
         compile_memory(root, summaries_only=True)
     else:
         compile_memory(root)

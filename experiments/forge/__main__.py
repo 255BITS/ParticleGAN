@@ -56,18 +56,29 @@ def parser():
     new.add_argument("--parent", default="k3p")
     new.add_argument("--goal", default="discriminator_stability")
     new.add_argument("--hypothesis")
+    new.add_argument("--study-id", help="companion study id (default CANDIDATE-study)")
+    study = commands.add_parser("study", help="declare a new question using an existing candidate; no training")
+    study_stages = study.add_subparsers(dest="stage", required=True)
+    study_new = study_stages.add_parser("new")
+    study_new.add_argument("--id", required=True)
+    study_new.add_argument("--candidate", required=True)
+    study_new.add_argument("--control", required=True)
+    study_new.add_argument("--view", default="discriminator_stability")
+    study_new.add_argument("--hypothesis")
+    study_new.add_argument("--device", choices=("cpu", "cuda"), default="cuda")
     for name in ("plan", "enqueue", "run"):
         c = commands.add_parser(name, help={"plan": "show exact tasks/reuse/cost without writing or training", "enqueue": "freeze and submit; do not launch", "run": "enqueue and drain through the declared tier cap"}[name])
         c.add_argument("candidate")
         c.add_argument("--view")
-        c.add_argument("--through-tier", type=int, choices=(1, 2, 3), default=1)
+        c.add_argument("--study", help="explicit research study id or JSON path")
+        c.add_argument("--through-tier", type=int, choices=(1, 2, 3), default=None)
         c.add_argument("--device", choices=("cpu", "cuda"), default=None, help="compute cohort (default CUDA; run infers it from --gpus)")
         c.add_argument("--cuda-model", help="required CUDA model on heterogeneous machines")
         if name == "plan":
             c.add_argument("--all-tiers", action="store_true", help="include full details for tasks outside the requested tier cap")
             c.add_argument("--show-boundaries", action="store_true", help="include each effective field's task, technique, hyperparameter or protocol owner")
         if name != "plan":
-            c.add_argument("--campaign", type=Path, default=Path("configs/forge/campaigns/smoke.json"))
+            c.add_argument("--campaign", type=Path, help="legacy campaign file; a study owns its campaign")
         if name == "run":
             c.add_argument("--gpus", default="cpu", help="physical GPU indices, or cpu")
     d = commands.add_parser("drain", help="execute eligible work with a single queue coordinator")
@@ -160,6 +171,7 @@ def parser():
     retier.add_argument("--reason", required=True)
     out = commands.add_parser("readout", help="conclude an idea with comparison and recommendation, then compile memory")
     out.add_argument("candidate")
+    out.add_argument("--study", help="conclude only this frozen study, preserving other uses of the recipe")
     out.add_argument("--conclusion", required=True)
     out.add_argument("--comparison", required=True)
     out.add_argument("--next-action", required=True)
@@ -263,14 +275,27 @@ def main(argv=None):
     command = args.command
     if command == "new":
         from .planning import new_idea
-        path = new_idea(root, args.id, args.parent, goal=args.goal, hypothesis=args.hypothesis)
-        emit({"declaration": str(path), "next": "edit changed_factors and recipe/API delta, then plan", "guide": str(root / "EXPERIMENTATION.md")})
+        path = new_idea(root, args.id, args.parent, goal=args.goal, hypothesis=args.hypothesis, study_id=args.study_id)
+        from .studies import study_path
+        emit({"candidate": str(path), "study": str(study_path(root, args.study_id or f"{args.id}-study")),
+              "next": "edit the recipe and study, then plan CANDIDATE --study STUDY", "guide": str(root / "EXPERIMENTATION.md")})
+    elif command == "study":
+        from .planning import load_idea
+        from .studies import scaffold, study_path
+        load_idea(root, args.candidate)
+        load_idea(root, args.control)
+        path = study_path(root, args.id)
+        if path.exists():
+            raise ValueError("study already exists")
+        atomic_json(path, scaffold(args.id, args.candidate, args.control, args.view,
+                                  hypothesis=args.hypothesis, execution_backend=args.device))
+        emit({"study": str(path), "training_launched": False})
     elif command in {"plan", "enqueue", "run"}:
         from .planning import plan_summary, resolve_idea
         request = resolve_idea(root, args.candidate, view_id=args.view, through_tier=args.through_tier,
                                queue_root=queue_root, freeze_source=command != "plan",
-                               execution_backend=args.device or ("cpu" if command == "run" and args.gpus == "cpu" else "cuda"),
-                               cuda_model=args.cuda_model)
+                               execution_backend=args.device or (("cpu" if args.gpus == "cpu" else "cuda") if command == "run" else None),
+                               cuda_model=args.cuda_model, study=args.study)
         if command == "plan":
             summary = plan_summary(request, queue.inspect(), include_ownership=args.show_boundaries)
             from .knowledge import freshness
@@ -280,7 +305,9 @@ def main(argv=None):
                 summary["tasks"] = [t for t in summary["tasks"] if t["permitted_by_tier_cap"]]
             emit(summary)
         else:
-            campaign = read_json(root / args.campaign)
+            if args.study and args.campaign:
+                raise ValueError("study owns its campaign; omit --campaign")
+            campaign = request["study"]["campaign"] if args.study else read_json(root / (args.campaign or Path("configs/forge/campaigns/smoke.json")))
             entry = queue.submit(request, campaign)
             emit({"request_id": entry["request"]["request_id"], "status": entry["status"],
                   "queue_root": str(queue_root), "logs": str(queue_root / "events.jsonl"),
@@ -382,7 +409,7 @@ def main(argv=None):
                           f"{counts.get('PASS', 0)}/{sum(counts.values())} | {counts.get('FAIL', 0)} | {counts.get('BLOCKED', 0)} | {seconds} | {row['status']} |")
                 print(f"\nFull evidence: reports/forge/leaderboards/{args.goal}.json; use --json for raw metrics/cohorts.")
         else:
-            emit(knowledge.readout(root, args.candidate, args.conclusion, args.comparison, args.next_action))
+            emit(knowledge.readout(root, args.candidate, args.conclusion, args.comparison, args.next_action, study_id=args.study))
     elif command == "history":
         from .history import import_history, inventory
         result = inventory(root) if args.check else import_history(root)
@@ -393,7 +420,11 @@ def main(argv=None):
         from .views import load_tasks, load_view
         tasks = load_tasks(root)
         views = [load_view(root, p.stem)["id"] for p in sorted((root / "configs/forge/views").glob("*.json"))]
-        emit({"tasks": len(tasks), "views": views, "training_launched": False})
+        from .planning import declaration_paths, load_idea
+        from .studies import load_study
+        candidates = [load_idea(root, path.stem)["id"] for path in declaration_paths(root)]
+        studies = [load_study(root, path.stem)["id"] for path in sorted((root / "configs/forge/studies").glob("*.json"))]
+        emit({"tasks": len(tasks), "views": views, "candidates": len(candidates), "studies": studies, "training_launched": False})
     elif command == "calibrate":
         from .calibration import calibrate
         emit(calibrate(root, profile=args.profile))

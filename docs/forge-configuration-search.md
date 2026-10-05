@@ -41,6 +41,23 @@ Calibration and independent confirmation still govern default adoption.
 
 ## Declare a search
 
+New search declarations use `schema_version: 2` and supply a finished study
+`hypothesis`. They select the `protocol` by name; `protocol_hash` is generated
+in the plan/report and must not be authored. The finite grid, tuning scope,
+selection objective and campaign budgets belong to the search study. Derived
+schema-v3 configuration cards contain only reusable training definitions and
+capability/claim requirements: they inherit no embedded decision contract,
+study hypothesis, budgets or first-study/report binding. Each frozen request
+records its `search_plan` selection. The same content-addressed configuration
+can participate in multiple registered searches. Bare configuration admission
+still requires the exact finite search registration. Original schema-v1 specs,
+cards, saved reports and hashes retain their compatibility path unchanged.
+
+For example, use the existing fields shown below with `schema_version: 2`,
+add `hypothesis`, and omit `protocol_hash`. All existing whitelist, mechanism,
+active-axis, full-reservation, gate and deterministic whole-configuration
+selection checks apply. This declaration change does not tune or launch a model.
+
 A search declares a base recipe, a finite grid of public `Recipe` settings, a
 fixed protocol/view/runtime, a tuning tier cap and immutable campaign budgets.
 Coupled settings such as two endpoints of a penalty schedule belong in one

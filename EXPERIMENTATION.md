@@ -139,16 +139,31 @@ python -m experiments.forge new --id critic-anchor-v2 --parent k3p \
   --hypothesis "A stronger critic anchor preserves terminal quality during hold"
 ```
 
-New scaffolds use idea schema v2 and a draft [hypothesis-to-decision contract](docs/forge-decision-contract.md).
-Bind original evidence identities, review the actual task-owned delta, freeze one
-bounded round and numerical prediction/falsifier, then mark the contract ready.
-Planning shows the bindings; unfinished drafts block admission before spend.
-Saved v1 evidence retains its original identity.
-Keep the same view, tier, backend and runtime selection when preparing and
-submitting the ready contract. Its candidate-round cap accumulates paid retries
-and reservations across campaigns within the shared queue; a new campaign does
-not replenish it. Readout records the frozen numerical prediction and falsifier
-separately from ordinary qualification.
+New scaffolds write a reusable schema-v3 candidate and a separate draft study
+in `configs/forge/studies/critic-anchor-v2-study.json`. Follow the
+[candidate/task/study guide](docs/forge-studies.md) and its complete small example.
+Edit the candidate's training mechanism and `changed_factors`; put the hypothesis,
+control selection, original evidence identities, predictions/falsifiers, finite
+campaign budget and stopping rules in the study. Tasks own the problem, prior,
+architecture, initialization, training allowance, sampling and sustained gates.
+Planning generates technical hashes and execution bindings from these declarations;
+users do not copy hashes or task/source bindings into a recipe. Mark the reviewed
+study ready. Drafts and missing studies block admission before spend. Saved v1/v2
+cards, embedded contracts, requests and receipts retain their original semantics.
+A legacy embedded contract cannot be removed in place to obtain admission.
+
+```sh
+python -m experiments.forge plan critic-anchor-v2 --study critic-anchor-v2-study
+# Reuse the same recipe in another explicitly declared question.
+python -m experiments.forge study new --id critic-anchor-hold \
+  --candidate critic-anchor-v2 --control k3p --view discriminator_stability
+```
+
+Enqueue freezes the study's generated source/runtime/task bindings. A changed
+binding or declaration requires a new study ID; identical task jobs can reuse
+compatible evidence. Paid retries and full reservations count against the same
+scientific round across studies and campaigns in the shared queue. Readout names
+the study and reports its predictions separately from scientific qualification.
 
 Edit `configs/forge/ideas/critic-anchor-v2.json`. Describe the substantive
 change in `changed_factors`, cite relevant prior work, and choose
@@ -208,9 +223,8 @@ screen is not a public-default promotion.
 ## Inspect cost, then submit
 
 ```sh
-python -m experiments.forge plan critic-anchor-v2 --through-tier 1
-python -m experiments.forge enqueue critic-anchor-v2 --through-tier 1 \
-  --campaign configs/forge/campaigns/tier1-acquisition-v2.json
+python -m experiments.forge plan critic-anchor-v2 --study critic-anchor-v2-study
+python -m experiments.forge enqueue critic-anchor-v2 --study critic-anchor-v2-study
 python -m experiments.forge queue
 ```
 
@@ -250,9 +264,8 @@ that reservation blocks another launch.
 # One bounded worker per GPU; execution is a separate, explicit action.
 python -m experiments.forge drain --gpus 0,1 --workers-per-gpu 1
 
-# Or submit and wait for this campaign on CPU for an applicable smoke task.
-python -m experiments.forge run critic-anchor-v2 --through-tier 1 --gpus cpu \
-  --campaign configs/forge/campaigns/tier1-acquisition-v2.json
+# For a study declaring execution_backend cpu, submit and wait for its campaign.
+python -m experiments.forge run critic-anchor-v2 --study critic-anchor-v2-study --gpus cpu
 ```
 
 Use `--device cpu` or `--device cuda` when planning/enqueuing; `run` infers the
@@ -614,7 +627,7 @@ Every attempted idea needs a readout, including cheap failures:
 
 ```sh
 python -m experiments.forge board --goal discriminator_stability
-python -m experiments.forge readout critic-anchor-v2 \
+python -m experiments.forge readout critic-anchor-v2 --study critic-anchor-v2-study \
   --conclusion "State the measured result and its limits" \
   --comparison "Compare the same task/protocol and scoring weights with the parent" \
   --next-action "Advance, revise a specific mechanism, investigate a blocker, or stop"
