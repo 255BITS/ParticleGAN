@@ -71,7 +71,9 @@ def media():
 
 def archive(destination):
     state, attempts, _ = attempts_and_rows()
-    if any(e["status"] in {"pending", "running"} for e in state["submissions"].values()):
+    if (any(e["status"] in {"queued", "running", "paused"} for e in state["submissions"].values())
+            or any(job["status"] == "running" for job in state["jobs"].values())
+            or any(campaign["reserved_seconds"] for campaign in state["campaigns"].values())):
         raise ValueError("finish or cancel admitted work before archiving")
     destination = Path(destination).resolve()
     if destination.exists():

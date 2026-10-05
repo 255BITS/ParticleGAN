@@ -34,7 +34,11 @@ def verify_source(source):
 
 def search_enqueue():
     plans = read_json(REPORT / "plans.json")
+    if file_hash(ROOT / plans["spec"]) != plans["spec_sha256"]:
+        raise ValueError("search specification changed since reviewed preparation")
     for trial in plans["trials"]:
+        if file_hash(ROOT / trial["declaration"]) != trial["declaration_sha256"]:
+            raise ValueError("candidate declaration changed since reviewed preparation")
         request = resolve_idea(ROOT, trial["candidate"], through_tier=1,
             execution_backend="cuda", cuda_model="NVIDIA RTX A6000", queue_root=QUEUE)
         verify_source(request["source"])
@@ -76,6 +80,7 @@ def prepare_diagnostics():
     atomic_json(ROOT / f"configs/forge/campaigns/{campaign_id}.json", campaign)
     atomic_json(REPORT / "diagnostic-plans.json", {"schema_version": 1, "scope": "schedule_preserving_duration_diagnostic",
         "candidate": candidate_id, "source_digest": request["source"]["digest"],
+        "declaration": str(path.relative_to(ROOT)), "declaration_sha256": file_hash(path),
         "decision_status": request["decision_review"]["status"], "campaign": campaign,
         "task_map": request["decision_review"]["expected"]["task_map"], "qualification_input": False})
     emit("diagnostics_prepared", source_digest=request["source"]["digest"], candidate=candidate_id)
@@ -83,6 +88,10 @@ def prepare_diagnostics():
 
 def enqueue_diagnostics():
     plan = read_json(REPORT / "diagnostic-plans.json")
+    if file_hash(ROOT / plan["declaration"]) != plan["declaration_sha256"]:
+        raise ValueError("diagnostic declaration changed since reviewed preparation")
+    if read_json(ROOT / f"configs/forge/campaigns/{plan['campaign']['id']}.json") != plan["campaign"]:
+        raise ValueError("diagnostic campaign changed since reviewed preparation")
     request = resolve_idea(ROOT, plan["candidate"], view_id="bcap_budget_diagnostics_v1",
         through_tier=1, execution_backend="cuda", cuda_model="NVIDIA RTX A6000",
         queue_root=QUEUE, freeze_source=True)
