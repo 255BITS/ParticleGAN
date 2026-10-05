@@ -1,0 +1,128 @@
+{
+  "campaign_paid_seconds": {
+    "bcap-original-horizon-diagnostics-v1": 54.100530778989196,
+    "bcap-tier1-repair-moments-v1": 884.2424906151136,
+    "bcap-tier1-repair-rates-v1": 1749.030614922056
+  },
+  "candidate_rows": 13,
+  "canonical_receipts_manifest_sha256": "809cbb28e3a9a2252eb9defd207f34550ded992a7efbe42d1f1613728e30052d",
+  "counts": {
+    "FAIL": 46,
+    "PASS": 40
+  },
+  "counts_by_task": {
+    "ae_gan_hold": {
+      "FAIL": 2,
+      "PASS": 10
+    },
+    "five_word_joint_acquisition": {
+      "FAIL": 5,
+      "PASS": 7
+    },
+    "gaussian1d_acquisition": {
+      "FAIL": 9,
+      "PASS": 3
+    },
+    "gaussian1d_acquisition_3000_schedule1000_diagnostic_v1": {
+      "FAIL": 1
+    },
+    "ring16_acquisition": {
+      "FAIL": 12
+    },
+    "ring16_acquisition_1600_schedule400_diagnostic_v1": {
+      "FAIL": 1
+    },
+    "schedule_contract_audit": {
+      "PASS": 12
+    },
+    "two_pole": {
+      "FAIL": 8,
+      "PASS": 4
+    },
+    "unused_token_hold": {
+      "FAIL": 8,
+      "PASS": 4
+    }
+  },
+  "cpu_global_rng_unchanged": true,
+  "diagnostic_cells": 2,
+  "endpoint_pass_but_sustained_fail_counts": {
+    "ae_gan_hold": 1,
+    "five_word_joint_acquisition": 4,
+    "gaussian1d_acquisition": 3
+  },
+  "endpoint_pass_but_sustained_fail_counts_by_campaign": {
+    "bcap-tier1-repair-moments-v1": {
+      "five_word_joint_acquisition": 3,
+      "gaussian1d_acquisition": 2
+    },
+    "bcap-tier1-repair-rates-v1": {
+      "ae_gan_hold": 1,
+      "five_word_joint_acquisition": 1,
+      "gaussian1d_acquisition": 1
+    }
+  },
+  "failed_bounds_across_terminal_checks": {
+    "ae_gan_hold": {
+      "recon_mse": 6
+    },
+    "five_word_joint_acquisition": {
+      "mass_tv": 5,
+      "minimum_reconstruction_token_probability": 10,
+      "modes": 5,
+      "quality_fraction": 5,
+      "reconstruction_exact": 6
+    },
+    "gaussian1d_acquisition": {
+      "cdf_ks": 29,
+      "mean_error_sigma": 11,
+      "std_ratio": 5
+    },
+    "gaussian1d_acquisition_3000_schedule1000_diagnostic_v1": {
+      "cdf_ks": 5
+    },
+    "ring16_acquisition": {
+      "component_covariance_error": 60,
+      "component_min_eigen_ratio": 2,
+      "hq": 41,
+      "modes": 21
+    },
+    "ring16_acquisition_1600_schedule400_diagnostic_v1": {
+      "component_covariance_error": 5,
+      "component_min_eigen_ratio": 5
+    },
+    "two_pole": {
+      "mean_abs": 40
+    },
+    "unused_token_hold": {
+      "concept_move": 40
+    }
+  },
+  "independently_gated_observations": 1786,
+  "model_sampling_draws_added": 0,
+  "ordinary_candidates": 12,
+  "ordinary_tasks_per_candidate": 7,
+  "qualification_input": false,
+  "results_sha256": "54d0b97345bcd807c857bfb0602a6e69906d04843f872af9962397c53009426c",
+  "schema_version": 1,
+  "scope": "independent_final_bcap_repair_readout_verification",
+  "search_report_sha256": {
+    "bcap-tier1-repair-moments-v1": "5b0c1681b66b9845f8c3904e721c5c2069f7217b220264e34ac7babd99605c37",
+    "bcap-tier1-repair-rates-v1": "332e9d6902f2e0bdc95f636f4d68bb33dba8433488f1476167fe9bba54cf0276"
+  },
+  "status": "PASS",
+  "total_new_paid_seconds": 2687.373636316159,
+  "training_updates_added": 0,
+  "unique_attempts": 86,
+  "vector_observations_rescored_from_tensors": 634,
+  "verified_source_snapshots": {
+    "888d8710147baa8ddaeaef78e0b6e506831d9a7b7486c79a8ca5e7d74d0f150e": {
+      "executed_commit": "2cdce7be2878cdbcda3446135b247fb07196d076",
+      "files": 1168
+    },
+    "a16f577e680b151fde0158322aef774b401d50d39c17317c61c6f31b86e1db3b": {
+      "executed_commit": "1f0cf74cdbad91d0bc6442e8bfda800b275dbfee",
+      "files": 1168
+    }
+  }
+}
