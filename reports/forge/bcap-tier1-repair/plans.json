@@ -1,0 +1,201 @@
+{
+  "campaign_cap_seconds": 20160,
+  "candidate_cap_seconds": 2520,
+  "gpu_ids": [
+    0,
+    1
+  ],
+  "policy_fingerprint": "4cf0f184fd668fa7e1e62714f4590f85e95038d1602f2d9f89bdf21b515119fd",
+  "prior_evidence": [
+    {
+      "identity": {
+        "attempt_id": "d0638ad5ce5a47e5b2fcb00b369768b2"
+      },
+      "path": "reports/forge/technique-receipts/d0638ad5ce5a47e5b2fcb00b369768b2.json",
+      "selector": [],
+      "sha256": "249c2587015e0cb27e7caea24aed55af3b947cf9673e0d01a70d537aeccbd59c",
+      "use": "motivation_only"
+    },
+    {
+      "identity": {
+        "attempt_id": "d8185ca486b54af79ef422395eac8065"
+      },
+      "path": "reports/forge/technique-receipts/d8185ca486b54af79ef422395eac8065.json",
+      "selector": [],
+      "sha256": "aef02c6b2f94c4ac04e841113d939c1fa36c5fd48d7bdf1c8fa56501aa9e8615",
+      "use": "motivation_only"
+    }
+  ],
+  "qualification_input": false,
+  "round_cap_seconds": 36000,
+  "runtime_cohort": {
+    "compute_profiles": {
+      "cpu": {
+        "backend": "cpu",
+        "deterministic": true,
+        "machine": "x86_64",
+        "model": "AMD Ryzen 9 5900X 12-Core Processor",
+        "tf32": false,
+        "threads": 1
+      },
+      "cuda": {
+        "backend": "cuda",
+        "compute_capability": "8.6",
+        "deterministic": true,
+        "driver": "610.57.04",
+        "model": "NVIDIA RTX A6000",
+        "tf32": false,
+        "threads": 1
+      }
+    },
+    "execution_backend": "cuda",
+    "runtime": {
+      "implementation": "CPython",
+      "machine": "x86_64",
+      "packages": {
+        "numpy": "2.5.2",
+        "scipy": "1.17.1",
+        "torch": "2.14.0"
+      },
+      "python": "3.12.13",
+      "system": "Linux"
+    }
+  },
+  "schema_version": 1,
+  "scope": "bounded_bcap_tier1_repair",
+  "source_digest": "a16f577e680b151fde0158322aef774b401d50d39c17317c61c6f31b86e1db3b",
+  "spec": "configs/forge/searches/bcap-tier1-repair-rates-v1.json",
+  "spec_sha256": "5c54a7a253a535d26b09102babc0e0b3243c6aab3598064327b7c7492f52cc87",
+  "study": "bcap-tier1-repair-rates-v1",
+  "trials": [
+    {
+      "candidate": "bcap--17c9d255a2f8e1adfc1e4ec686e3cee3c7e3fd40fc7979328d4e1955cc2d29a1",
+      "decision_status": "READY",
+      "declaration": "configs/forge/configurations/bcap--17c9d255a2f8e1adfc1e4ec686e3cee3c7e3fd40fc7979328d4e1955cc2d29a1.json",
+      "declaration_sha256": "dd838ff1cbdfe4a1db02674bf8b0caac5c22a64ebb258ddd89af70f6f7adfb65",
+      "source_digest": "a16f577e680b151fde0158322aef774b401d50d39c17317c61c6f31b86e1db3b",
+      "tasks": [
+        "ae_gan_hold",
+        "five_word_joint_acquisition",
+        "gaussian1d_acquisition",
+        "ring16_acquisition",
+        "schedule_contract_audit",
+        "two_pole",
+        "unused_token_hold"
+      ]
+    },
+    {
+      "candidate": "bcap--263d190ebb4c40ddb21337a16a598f5ffcca4639031b3b70aaa3036aec67b31e",
+      "decision_status": "READY",
+      "declaration": "configs/forge/configurations/bcap--263d190ebb4c40ddb21337a16a598f5ffcca4639031b3b70aaa3036aec67b31e.json",
+      "declaration_sha256": "bf1da6607a386141f45c07792fc7d1c7ad812a44129eee84ec65d4d0a09616a7",
+      "source_digest": "a16f577e680b151fde0158322aef774b401d50d39c17317c61c6f31b86e1db3b",
+      "tasks": [
+        "ae_gan_hold",
+        "five_word_joint_acquisition",
+        "gaussian1d_acquisition",
+        "ring16_acquisition",
+        "schedule_contract_audit",
+        "two_pole",
+        "unused_token_hold"
+      ]
+    },
+    {
+      "candidate": "bcap--6c72e4aaf8ffe22be663a6e041971cc22bbee9402bb0095c4935aa167b6ccb03",
+      "decision_status": "READY",
+      "declaration": "configs/forge/configurations/bcap--6c72e4aaf8ffe22be663a6e041971cc22bbee9402bb0095c4935aa167b6ccb03.json",
+      "declaration_sha256": "f7990b004afe2ede65a026848ca16c40855b5e0f8c0ffa4341f3cf8a2f6add15",
+      "source_digest": "a16f577e680b151fde0158322aef774b401d50d39c17317c61c6f31b86e1db3b",
+      "tasks": [
+        "ae_gan_hold",
+        "five_word_joint_acquisition",
+        "gaussian1d_acquisition",
+        "ring16_acquisition",
+        "schedule_contract_audit",
+        "two_pole",
+        "unused_token_hold"
+      ]
+    },
+    {
+      "candidate": "bcap--8a9884cad1e87d5d950d8dff3d4901a787e8f94fc99b00e83877fdf6e1a932c2",
+      "decision_status": "READY",
+      "declaration": "configs/forge/configurations/bcap--8a9884cad1e87d5d950d8dff3d4901a787e8f94fc99b00e83877fdf6e1a932c2.json",
+      "declaration_sha256": "311129daad7f650c88f0fc1a6d2eadd078b51d33e35067b4b5de3de57d97089b",
+      "source_digest": "a16f577e680b151fde0158322aef774b401d50d39c17317c61c6f31b86e1db3b",
+      "tasks": [
+        "ae_gan_hold",
+        "five_word_joint_acquisition",
+        "gaussian1d_acquisition",
+        "ring16_acquisition",
+        "schedule_contract_audit",
+        "two_pole",
+        "unused_token_hold"
+      ]
+    },
+    {
+      "candidate": "bcap--90dcc2c3039f9f4c7ed2b1de03dec0c75cec2e9d386de0bb302f90a5f923de23",
+      "decision_status": "READY",
+      "declaration": "configs/forge/configurations/bcap--90dcc2c3039f9f4c7ed2b1de03dec0c75cec2e9d386de0bb302f90a5f923de23.json",
+      "declaration_sha256": "f38f876204a38342e868a87b49039495253e0aff7bfe24df1b2f2876883434b8",
+      "source_digest": "a16f577e680b151fde0158322aef774b401d50d39c17317c61c6f31b86e1db3b",
+      "tasks": [
+        "ae_gan_hold",
+        "five_word_joint_acquisition",
+        "gaussian1d_acquisition",
+        "ring16_acquisition",
+        "schedule_contract_audit",
+        "two_pole",
+        "unused_token_hold"
+      ]
+    },
+    {
+      "candidate": "bcap--a3675bf5a89a136bd4c64b5577021215c1e118aca2971e274b6d23ded6ac55a9",
+      "decision_status": "READY",
+      "declaration": "configs/forge/configurations/bcap--a3675bf5a89a136bd4c64b5577021215c1e118aca2971e274b6d23ded6ac55a9.json",
+      "declaration_sha256": "0d016e54a4990d61d436bc3bf64a3e057f8c9b08198f082d425b4428029da8ff",
+      "source_digest": "a16f577e680b151fde0158322aef774b401d50d39c17317c61c6f31b86e1db3b",
+      "tasks": [
+        "ae_gan_hold",
+        "five_word_joint_acquisition",
+        "gaussian1d_acquisition",
+        "ring16_acquisition",
+        "schedule_contract_audit",
+        "two_pole",
+        "unused_token_hold"
+      ]
+    },
+    {
+      "candidate": "bcap--c89e202b7830cfc38743c25fc1b34ca8ceef3f113c4f091017cac7c843972da3",
+      "decision_status": "READY",
+      "declaration": "configs/forge/configurations/bcap--c89e202b7830cfc38743c25fc1b34ca8ceef3f113c4f091017cac7c843972da3.json",
+      "declaration_sha256": "457cfbc8d9cbbd0fd11bc7fac343bc688b3a6a31177b8645cab7dcb16cb4a283",
+      "source_digest": "a16f577e680b151fde0158322aef774b401d50d39c17317c61c6f31b86e1db3b",
+      "tasks": [
+        "ae_gan_hold",
+        "five_word_joint_acquisition",
+        "gaussian1d_acquisition",
+        "ring16_acquisition",
+        "schedule_contract_audit",
+        "two_pole",
+        "unused_token_hold"
+      ]
+    },
+    {
+      "candidate": "bcap--e8c9fcd62a13b748b0a1c97543b828ee618833ea45789681323a37c9c300d773",
+      "decision_status": "READY",
+      "declaration": "configs/forge/configurations/bcap--e8c9fcd62a13b748b0a1c97543b828ee618833ea45789681323a37c9c300d773.json",
+      "declaration_sha256": "6847b4070188817ecdc0a02e4edb33fcb35c32627a4f1524400c4bb8feeac83f",
+      "source_digest": "a16f577e680b151fde0158322aef774b401d50d39c17317c61c6f31b86e1db3b",
+      "tasks": [
+        "ae_gan_hold",
+        "five_word_joint_acquisition",
+        "gaussian1d_acquisition",
+        "ring16_acquisition",
+        "schedule_contract_audit",
+        "two_pole",
+        "unused_token_hold"
+      ]
+    }
+  ],
+  "workers_per_gpu": 1
+}

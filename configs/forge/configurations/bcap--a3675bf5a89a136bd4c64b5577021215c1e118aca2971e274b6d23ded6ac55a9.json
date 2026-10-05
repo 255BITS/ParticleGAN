@@ -1,0 +1,459 @@
+{
+  "api_changes": [],
+  "api_version": "forge-api-v1",
+  "changed_factors": [
+    "Recipe.d_lr_mult=2.0",
+    "Recipe.lr=0.0010625",
+    "Recipe.prior_lr_mult=0.5",
+    "Recipe.reg_coeff=2.0"
+  ],
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "configuration_id": "a3675bf5a89a136bd4c64b5577021215c1e118aca2971e274b6d23ded6ac55a9",
+  "decision_contract": {
+    "candidate_binding_sha256": "31b5651f40981539cdf15bec76365dd8418ded6f43d8f29e3ff9ed760a951849",
+    "competing_explanation": "Slower prior transport and stronger cap penalties may reduce drift/tails but impede acquisition, movement or word reconstruction. A final ring covariance improvement alone cannot replace all sustained gates.",
+    "control": {
+      "binding_sha256": "5bf61398e7a80b072e6d0ec11cae293e832fcf15bafc1c89a21d66b14bddfe58",
+      "candidate_id": "k3p-bcap-matched-v1",
+      "task_map": {
+        "ae_gan_hold": "ae_gan_hold",
+        "five_word_joint_acquisition": "five_word_joint_acquisition",
+        "gaussian1d_acquisition": "gaussian1d_acquisition",
+        "ring16_acquisition": "ring16_acquisition",
+        "schedule_contract_audit": "schedule_contract_audit",
+        "two_pole": "two_pole",
+        "unused_token_hold": "unused_token_hold"
+      }
+    },
+    "falsifier": {
+      "metric": "component_covariance_error",
+      "op": ">",
+      "phase": "final",
+      "task_id": "ring16_acquisition",
+      "threshold": 0.85
+    },
+    "prediction": {
+      "metric": "component_covariance_error",
+      "op": "<=",
+      "phase": "final",
+      "task_id": "ring16_acquisition",
+      "threshold": 0.85
+    },
+    "prior_evidence": [
+      {
+        "identity": {
+          "attempt_id": "d0638ad5ce5a47e5b2fcb00b369768b2"
+        },
+        "path": "reports/forge/technique-receipts/d0638ad5ce5a47e5b2fcb00b369768b2.json",
+        "selector": [],
+        "sha256": "249c2587015e0cb27e7caea24aed55af3b947cf9673e0d01a70d537aeccbd59c",
+        "use": "motivation_only"
+      },
+      {
+        "identity": {
+          "attempt_id": "d8185ca486b54af79ef422395eac8065"
+        },
+        "path": "reports/forge/technique-receipts/d8185ca486b54af79ef422395eac8065.json",
+        "selector": [],
+        "sha256": "aef02c6b2f94c4ac04e841113d939c1fa36c5fd48d7bdf1c8fa56501aa9e8615",
+        "use": "motivation_only"
+      }
+    ],
+    "schema_version": 1,
+    "scope": {
+      "campaign_budget_seconds": 20160,
+      "candidate_budget_seconds": 2520,
+      "execution_backend": "cuda",
+      "jobs_sha256": "17c902c1c965ddc295de26398b7e21a39aef604a46140e1de7a0fbdb3250a5d0",
+      "max_rounds": 1,
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "runtime_cohort_sha256": "f03804f032a7d5815d018b45c9fa112c1765013224d393e7a702a172b585735d",
+      "source_digest": "a16f577e680b151fde0158322aef774b401d50d39c17317c61c6f31b86e1db3b",
+      "task_ids": [
+        "ae_gan_hold",
+        "five_word_joint_acquisition",
+        "gaussian1d_acquisition",
+        "ring16_acquisition",
+        "schedule_contract_audit",
+        "two_pole",
+        "unused_token_hold"
+      ],
+      "through_tier": 1,
+      "view": "discriminator_stability"
+    },
+    "status": "ready",
+    "substantive_delta": [
+      {
+        "after": 2.0,
+        "before": 1.0,
+        "path": [
+          "recipe",
+          "ae_gan_hold",
+          "d_lr_mult"
+        ]
+      },
+      {
+        "after": 0.0010625,
+        "before": 0.00425,
+        "path": [
+          "recipe",
+          "ae_gan_hold",
+          "lr"
+        ]
+      },
+      {
+        "after": 0.5,
+        "before": 2.0,
+        "path": [
+          "recipe",
+          "ae_gan_hold",
+          "prior_lr_mult"
+        ]
+      },
+      {
+        "after": 2.0,
+        "before": 1.0,
+        "path": [
+          "recipe",
+          "ae_gan_hold",
+          "reg_coeff"
+        ]
+      },
+      {
+        "after": 2.0,
+        "before": 1.0,
+        "path": [
+          "recipe",
+          "five_word_joint_acquisition",
+          "d_lr_mult"
+        ]
+      },
+      {
+        "after": 0.0010625,
+        "before": 0.00425,
+        "path": [
+          "recipe",
+          "five_word_joint_acquisition",
+          "lr"
+        ]
+      },
+      {
+        "after": 0.5,
+        "before": 2.0,
+        "path": [
+          "recipe",
+          "five_word_joint_acquisition",
+          "prior_lr_mult"
+        ]
+      },
+      {
+        "after": 2.0,
+        "before": 1.0,
+        "path": [
+          "recipe",
+          "five_word_joint_acquisition",
+          "reg_coeff"
+        ]
+      },
+      {
+        "after": 2.0,
+        "before": 1.0,
+        "path": [
+          "recipe",
+          "gaussian1d_acquisition",
+          "d_lr_mult"
+        ]
+      },
+      {
+        "after": 0.0010625,
+        "before": 0.00425,
+        "path": [
+          "recipe",
+          "gaussian1d_acquisition",
+          "lr"
+        ]
+      },
+      {
+        "after": 0.5,
+        "before": 2.0,
+        "path": [
+          "recipe",
+          "gaussian1d_acquisition",
+          "prior_lr_mult"
+        ]
+      },
+      {
+        "after": 2.0,
+        "before": 1.0,
+        "path": [
+          "recipe",
+          "gaussian1d_acquisition",
+          "reg_coeff"
+        ]
+      },
+      {
+        "after": 2.0,
+        "before": 1.0,
+        "path": [
+          "recipe",
+          "ring16_acquisition",
+          "d_lr_mult"
+        ]
+      },
+      {
+        "after": 0.0010625,
+        "before": 0.00425,
+        "path": [
+          "recipe",
+          "ring16_acquisition",
+          "lr"
+        ]
+      },
+      {
+        "after": 0.5,
+        "before": 2.0,
+        "path": [
+          "recipe",
+          "ring16_acquisition",
+          "prior_lr_mult"
+        ]
+      },
+      {
+        "after": 2.0,
+        "before": 1.0,
+        "path": [
+          "recipe",
+          "ring16_acquisition",
+          "reg_coeff"
+        ]
+      },
+      {
+        "after": 2.0,
+        "before": 1.0,
+        "path": [
+          "recipe",
+          "schedule_contract_audit",
+          "d_lr_mult"
+        ]
+      },
+      {
+        "after": 0.0010625,
+        "before": 0.00425,
+        "path": [
+          "recipe",
+          "schedule_contract_audit",
+          "lr"
+        ]
+      },
+      {
+        "after": 0.5,
+        "before": 2.0,
+        "path": [
+          "recipe",
+          "schedule_contract_audit",
+          "prior_lr_mult"
+        ]
+      },
+      {
+        "after": 2.0,
+        "before": 1.0,
+        "path": [
+          "recipe",
+          "schedule_contract_audit",
+          "reg_coeff"
+        ]
+      },
+      {
+        "after": 2.0,
+        "before": 1.0,
+        "path": [
+          "recipe",
+          "two_pole",
+          "d_lr_mult"
+        ]
+      },
+      {
+        "after": 0.0010625,
+        "before": 0.00425,
+        "path": [
+          "recipe",
+          "two_pole",
+          "lr"
+        ]
+      },
+      {
+        "after": 2.0,
+        "before": 1.0,
+        "path": [
+          "recipe",
+          "two_pole",
+          "reg_coeff"
+        ]
+      },
+      {
+        "after": 2.0,
+        "before": 1.0,
+        "path": [
+          "recipe",
+          "unused_token_hold",
+          "d_lr_mult"
+        ]
+      },
+      {
+        "after": 0.0010625,
+        "before": 0.00425,
+        "path": [
+          "recipe",
+          "unused_token_hold",
+          "lr"
+        ]
+      },
+      {
+        "after": 2.0,
+        "before": 1.0,
+        "path": [
+          "recipe",
+          "unused_token_hold",
+          "reg_coeff"
+        ]
+      }
+    ],
+    "terminal_rules": {
+      "falsified": "stop_revision",
+      "incomplete": "request_missing_evidence",
+      "inconclusive": "stop_and_readout",
+      "prediction_observed": "review_saved_diagnostics"
+    }
+  },
+  "execution_path": "public_trainer",
+  "goal": "discriminator_stability",
+  "guide": "EXPERIMENTATION.md",
+  "hypothesis": "Lower global/prior rates and stronger fixed BCap penalties reduce Gaussian location drift and ring tails while one global recipe retains every Tier 1 behavior.",
+  "id": "bcap--a3675bf5a89a136bd4c64b5577021215c1e118aca2971e274b6d23ded6ac55a9",
+  "lifecycle": "proposed",
+  "mechanism_class": "floor_constant",
+  "mechanism_rationale": "Fixed real/fake squared L2 gradients replace the K3P LR-dependent penalty and anchor. Coefficient1, cap1; no tuning.",
+  "parent": "k3p-bcap-matched-v1",
+  "prior": {
+    "kind": "mog",
+    "learnable": true,
+    "sigma": 0.025,
+    "standardize": false
+  },
+  "prior_art": [
+    "reports/forge/studies/FORMULATION_COMPARISON_CONTINUATION.md",
+    "tests/fixtures/release07-public-api.json"
+  ],
+  "recipe_overrides": {
+    "d_lr_mult": 2.0,
+    "lr": 0.0010625,
+    "prior_lr_mult": 0.5,
+    "reg_arm": "b_cap",
+    "reg_coeff": 2.0
+  },
+  "requires_capabilities": [
+    "learned_locations",
+    "a2",
+    "named_rng"
+  ],
+  "resolved_configuration_recipe": {
+    "alpha_bar": [
+      1.0,
+      0.9,
+      0.5,
+      0.05,
+      0.0001
+    ],
+    "amsgrad": false,
+    "batch_size": 2048,
+    "beta2_anneal_end": 0.2,
+    "beta2_end": null,
+    "betas": [
+      0.0,
+      0.999
+    ],
+    "birth_death_backend": "knn",
+    "birth_death_cells": 64,
+    "birth_death_chunk": 256,
+    "birth_death_feature_scale": "none",
+    "birth_death_isolation": false,
+    "birth_death_metric_rank": 8,
+    "birth_death_parent_policy": "real_anchor",
+    "birth_death_space": "data",
+    "conditioning": "scalar",
+    "continuous_policy": null,
+    "critic_formulation": "k3p",
+    "critic_payoff_damping": true,
+    "critic_r1_real": true,
+    "d_guard_min_steps": 200,
+    "d_guard_ratio": 5.0,
+    "d_lr_mult": 2.0,
+    "direct_particle_betas": [
+      0.0,
+      0.9
+    ],
+    "direct_particle_gain": true,
+    "distance_reduction": "sum",
+    "ema_decay": 0.995,
+    "encoder_mode": "none",
+    "eps": 1e-08,
+    "input_noise_anneal_end": 0.1,
+    "input_noise_std": 0.5,
+    "latent_damping_max_rate": 0.5,
+    "lr": 0.0010625,
+    "lr_anneal_start": 0.6,
+    "lr_control": "mobility",
+    "lr_floor": 0.05,
+    "model": "gan",
+    "name": "ka2",
+    "network_lr_floor": 0.01,
+    "network_lr_horizon_cap": 1600,
+    "num_classes": null,
+    "num_particles": 20000,
+    "observation_sigma": 0.03,
+    "optimizer_family": "formulation",
+    "output_noise_mode": "fixed",
+    "output_noise_std": 0.029,
+    "output_noise_warmup": 0.2,
+    "particle_birth_death": false,
+    "prior_betas": null,
+    "prior_kind": "mog",
+    "prior_lr_mult": 0.5,
+    "prior_reg": 0.0,
+    "reconstruction_weight": 1.0,
+    "reg_anchor_min_decay": 0.9,
+    "reg_anchor_weight": 1.0,
+    "reg_arm": "b_cap",
+    "reg_coeff": 2.0,
+    "reg_coeff_anneal_end": 0.2,
+    "reg_coeff_end": null,
+    "reg_every": 1,
+    "reg_kappa": 1.0,
+    "reopen_anchor": "hold",
+    "reopen_guard": null,
+    "reopen_signal": "data",
+    "routing_temperature": 0.25,
+    "row_evidence_exclude": true,
+    "row_evidence_gate": false,
+    "row_evidence_hold": true,
+    "row_evidence_hot": true,
+    "row_evidence_null": "theory",
+    "row_policy": "independent",
+    "serve_average": 0.0,
+    "sigma_rel": 0.0,
+    "standardize": false,
+    "table_release_rule": "any",
+    "total_steps": 7000,
+    "ucd_target": "class",
+    "ucd_weight": 0.02,
+    "z_dim": 2
+  },
+  "schema_version": 2,
+  "search_report": "reports/forge/configuration-search/bcap-tier1-repair-rates-v1.json",
+  "search_study_id": "bcap-tier1-repair-rates-v1",
+  "trainer_family": "bcap"
+}

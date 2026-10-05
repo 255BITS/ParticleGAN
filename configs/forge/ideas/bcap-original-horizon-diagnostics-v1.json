@@ -1,0 +1,528 @@
+{
+  "api_changes": [],
+  "api_version": "forge-api-v1",
+  "changed_factors": [
+    "execution duration3000/1600 with original schedule horizon1000/400"
+  ],
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "decision_contract": {
+    "candidate_binding_sha256": "8ad78fef384d426a5a5305798409ac17355f1baffefa01ac343f1fc2519f78e2",
+    "competing_explanation": "Slower prior transport and stronger cap penalties may reduce drift/tails but impede acquisition, movement or word reconstruction. A final ring covariance improvement alone cannot replace all sustained gates.",
+    "control": {
+      "binding_sha256": "591ec2a20b4b0b9c35ef7b07d0d7ff2417f55846fa867a132daecefe8c6bf7ec",
+      "candidate_id": "bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212",
+      "task_map": {
+        "gaussian1d_acquisition_3000_schedule1000_diagnostic_v1": "gaussian1d_acquisition",
+        "ring16_acquisition_1600_schedule400_diagnostic_v1": "ring16_acquisition"
+      }
+    },
+    "falsifier": {
+      "metric": "component_covariance_error",
+      "op": ">",
+      "phase": "final",
+      "task_id": "ring16_acquisition_1600_schedule400_diagnostic_v1",
+      "threshold": 0.85
+    },
+    "prediction": {
+      "metric": "component_covariance_error",
+      "op": "<=",
+      "phase": "final",
+      "task_id": "ring16_acquisition_1600_schedule400_diagnostic_v1",
+      "threshold": 0.85
+    },
+    "prior_evidence": [
+      {
+        "identity": {
+          "attempt_id": "d0638ad5ce5a47e5b2fcb00b369768b2"
+        },
+        "path": "reports/forge/technique-receipts/d0638ad5ce5a47e5b2fcb00b369768b2.json",
+        "selector": [],
+        "sha256": "249c2587015e0cb27e7caea24aed55af3b947cf9673e0d01a70d537aeccbd59c",
+        "use": "motivation_only"
+      },
+      {
+        "identity": {
+          "attempt_id": "d8185ca486b54af79ef422395eac8065"
+        },
+        "path": "reports/forge/technique-receipts/d8185ca486b54af79ef422395eac8065.json",
+        "selector": [],
+        "sha256": "aef02c6b2f94c4ac04e841113d939c1fa36c5fd48d7bdf1c8fa56501aa9e8615",
+        "use": "motivation_only"
+      }
+    ],
+    "schema_version": 1,
+    "scope": {
+      "campaign_budget_seconds": 1560,
+      "candidate_budget_seconds": 1560,
+      "execution_backend": "cuda",
+      "jobs_sha256": "8204f4d22b94bfae77f2ddad4daa6d28ab469d042e4917a20518cd54384121d0",
+      "max_rounds": 1,
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "runtime_cohort_sha256": "2930309d99196a2aaaeb91262487a63c9448c216152248fe8377b710b5d2882c",
+      "source_digest": "a16f577e680b151fde0158322aef774b401d50d39c17317c61c6f31b86e1db3b",
+      "task_ids": [
+        "gaussian1d_acquisition_3000_schedule1000_diagnostic_v1",
+        "ring16_acquisition_1600_schedule400_diagnostic_v1"
+      ],
+      "through_tier": 1,
+      "view": "bcap_budget_diagnostics_v1"
+    },
+    "status": "ready",
+    "substantive_delta": [
+      {
+        "after": 360,
+        "before": 120,
+        "path": [
+          "budget",
+          "gaussian1d_acquisition_3000_schedule1000_diagnostic_v1",
+          "execution",
+          "execution_resources",
+          "timeout_seconds"
+        ]
+      },
+      {
+        "after": 1000,
+        "before": {
+          "absent": true
+        },
+        "path": [
+          "budget",
+          "gaussian1d_acquisition_3000_schedule1000_diagnostic_v1",
+          "execution",
+          "original_schedule_horizon"
+        ]
+      },
+      {
+        "after": 3000,
+        "before": 1000,
+        "path": [
+          "budget",
+          "gaussian1d_acquisition_3000_schedule1000_diagnostic_v1",
+          "execution",
+          "steps"
+        ]
+      },
+      {
+        "after": 360,
+        "before": 120,
+        "path": [
+          "budget",
+          "gaussian1d_acquisition_3000_schedule1000_diagnostic_v1",
+          "resources",
+          "timeout_seconds"
+        ]
+      },
+      {
+        "after": 1200,
+        "before": 300,
+        "path": [
+          "budget",
+          "ring16_acquisition_1600_schedule400_diagnostic_v1",
+          "execution",
+          "execution_resources",
+          "timeout_seconds"
+        ]
+      },
+      {
+        "after": 400,
+        "before": {
+          "absent": true
+        },
+        "path": [
+          "budget",
+          "ring16_acquisition_1600_schedule400_diagnostic_v1",
+          "execution",
+          "original_schedule_horizon"
+        ]
+      },
+      {
+        "after": 1600,
+        "before": 400,
+        "path": [
+          "budget",
+          "ring16_acquisition_1600_schedule400_diagnostic_v1",
+          "execution",
+          "steps"
+        ]
+      },
+      {
+        "after": 1200,
+        "before": 300,
+        "path": [
+          "budget",
+          "ring16_acquisition_1600_schedule400_diagnostic_v1",
+          "resources",
+          "timeout_seconds"
+        ]
+      },
+      {
+        "after": "experiments.forge.vector_budget_diagnostics:grade",
+        "before": "benchmarks.transfer_suite.protocol:test_verdict",
+        "path": [
+          "evaluation",
+          "gaussian1d_acquisition_3000_schedule1000_diagnostic_v1",
+          "evaluator"
+        ]
+      },
+      {
+        "after": "transfer_budget_diagnostic",
+        "before": "transfer_sustained",
+        "path": [
+          "evaluation",
+          "gaussian1d_acquisition_3000_schedule1000_diagnostic_v1",
+          "kind"
+        ]
+      },
+      {
+        "after": [
+          42,
+          84,
+          125,
+          167,
+          209,
+          250,
+          292,
+          334,
+          375,
+          417,
+          459,
+          500,
+          542,
+          584,
+          625,
+          667,
+          709,
+          750,
+          792,
+          834,
+          875,
+          917,
+          959,
+          1000,
+          2600,
+          2700,
+          2800,
+          2900,
+          3000
+        ],
+        "before": {
+          "absent": true
+        },
+        "path": [
+          "evaluation",
+          "gaussian1d_acquisition_3000_schedule1000_diagnostic_v1",
+          "observation_steps"
+        ]
+      },
+      {
+        "after": 29,
+        "before": 24,
+        "path": [
+          "evaluation",
+          "gaussian1d_acquisition_3000_schedule1000_diagnostic_v1",
+          "observations"
+        ]
+      },
+      {
+        "after": "b31df784dbe09357810a191247bbb0b17d3bb67918595334d16ff728fd5c2d13",
+        "before": {
+          "absent": true
+        },
+        "path": [
+          "evaluation",
+          "gaussian1d_acquisition_3000_schedule1000_diagnostic_v1",
+          "sources",
+          "configs/forge/tasks/gaussian1d_acquisition.json"
+        ]
+      },
+      {
+        "after": "experiments.forge.vector_budget_diagnostics:grade",
+        "before": "benchmarks.transfer_suite.protocol:test_verdict",
+        "path": [
+          "evaluation",
+          "ring16_acquisition_1600_schedule400_diagnostic_v1",
+          "evaluator"
+        ]
+      },
+      {
+        "after": "transfer_budget_diagnostic",
+        "before": "transfer_sustained",
+        "path": [
+          "evaluation",
+          "ring16_acquisition_1600_schedule400_diagnostic_v1",
+          "kind"
+        ]
+      },
+      {
+        "after": [
+          17,
+          34,
+          50,
+          67,
+          84,
+          100,
+          117,
+          134,
+          150,
+          167,
+          184,
+          200,
+          217,
+          234,
+          250,
+          267,
+          284,
+          300,
+          317,
+          334,
+          350,
+          367,
+          384,
+          400,
+          1200,
+          1300,
+          1400,
+          1500,
+          1600
+        ],
+        "before": {
+          "absent": true
+        },
+        "path": [
+          "evaluation",
+          "ring16_acquisition_1600_schedule400_diagnostic_v1",
+          "observation_steps"
+        ]
+      },
+      {
+        "after": 29,
+        "before": 24,
+        "path": [
+          "evaluation",
+          "ring16_acquisition_1600_schedule400_diagnostic_v1",
+          "observations"
+        ]
+      },
+      {
+        "after": "e6b53ba29fbe9ead47e842cfa01e40ba57821bd1b4e6aa5b297631fa0f6525c1",
+        "before": {
+          "absent": true
+        },
+        "path": [
+          "evaluation",
+          "ring16_acquisition_1600_schedule400_diagnostic_v1",
+          "sources",
+          "configs/forge/tasks/ring16_acquisition.json"
+        ]
+      },
+      {
+        "after": {
+          "absent": true
+        },
+        "before": true,
+        "path": [
+          "host",
+          "gaussian1d_acquisition_3000_schedule1000_diagnostic_v1",
+          "adapter_parameters",
+          "budget_diagnostic",
+          "absent"
+        ]
+      },
+      {
+        "after": "preserve_vector_prefix_v1",
+        "before": {
+          "absent": true
+        },
+        "path": [
+          "host",
+          "gaussian1d_acquisition_3000_schedule1000_diagnostic_v1",
+          "adapter_parameters",
+          "budget_diagnostic",
+          "kind"
+        ]
+      },
+      {
+        "after": "gaussian1d_acquisition",
+        "before": {
+          "absent": true
+        },
+        "path": [
+          "host",
+          "gaussian1d_acquisition_3000_schedule1000_diagnostic_v1",
+          "adapter_parameters",
+          "budget_diagnostic",
+          "original_task"
+        ]
+      },
+      {
+        "after": 1000,
+        "before": {
+          "absent": true
+        },
+        "path": [
+          "host",
+          "gaussian1d_acquisition_3000_schedule1000_diagnostic_v1",
+          "adapter_parameters",
+          "budget_diagnostic",
+          "prefix_steps"
+        ]
+      },
+      {
+        "after": 1,
+        "before": {
+          "absent": true
+        },
+        "path": [
+          "host",
+          "gaussian1d_acquisition_3000_schedule1000_diagnostic_v1",
+          "adapter_parameters",
+          "budget_diagnostic",
+          "schema_version"
+        ]
+      },
+      {
+        "after": {
+          "absent": true
+        },
+        "before": true,
+        "path": [
+          "host",
+          "ring16_acquisition_1600_schedule400_diagnostic_v1",
+          "adapter_parameters",
+          "budget_diagnostic",
+          "absent"
+        ]
+      },
+      {
+        "after": "preserve_vector_prefix_v1",
+        "before": {
+          "absent": true
+        },
+        "path": [
+          "host",
+          "ring16_acquisition_1600_schedule400_diagnostic_v1",
+          "adapter_parameters",
+          "budget_diagnostic",
+          "kind"
+        ]
+      },
+      {
+        "after": "ring16_acquisition",
+        "before": {
+          "absent": true
+        },
+        "path": [
+          "host",
+          "ring16_acquisition_1600_schedule400_diagnostic_v1",
+          "adapter_parameters",
+          "budget_diagnostic",
+          "original_task"
+        ]
+      },
+      {
+        "after": 400,
+        "before": {
+          "absent": true
+        },
+        "path": [
+          "host",
+          "ring16_acquisition_1600_schedule400_diagnostic_v1",
+          "adapter_parameters",
+          "budget_diagnostic",
+          "prefix_steps"
+        ]
+      },
+      {
+        "after": 1,
+        "before": {
+          "absent": true
+        },
+        "path": [
+          "host",
+          "ring16_acquisition_1600_schedule400_diagnostic_v1",
+          "adapter_parameters",
+          "budget_diagnostic",
+          "schema_version"
+        ]
+      },
+      {
+        "after": "f3493bede4265936d2af6056d08bc2ce2872857af6e6fe20900fde9810a8635b",
+        "before": "7dbb5e5a5b510ef9a86ce58022b31673b3a848b6f9167c84db4bb9be09bda8f3",
+        "path": [
+          "task_identity",
+          "gaussian1d_acquisition_3000_schedule1000_diagnostic_v1",
+          "evaluation"
+        ]
+      },
+      {
+        "after": "1f2517c5eae202c9c7c97cc52e99a6809aaae3e2aff102cf732e40852d9b160f",
+        "before": "b4edf38c5ab6a8ecfa3957eb9ad23b8f767250d42bc0fb8a7f00df9bfc36b13b",
+        "path": [
+          "task_identity",
+          "gaussian1d_acquisition_3000_schedule1000_diagnostic_v1",
+          "execution"
+        ]
+      },
+      {
+        "after": "e815a921ee2a510467cc13cb08c5294a0966d0080a82f84ff2dcec114a4f4a33",
+        "before": "b361c512f05ebb898fcf5ab3386ad47cfa87f8fc6c56a3f14b90bc979083d433",
+        "path": [
+          "task_identity",
+          "ring16_acquisition_1600_schedule400_diagnostic_v1",
+          "evaluation"
+        ]
+      },
+      {
+        "after": "629193beb67dcfaf9342f853b98ea3f69a816142b838211a6342b2b96f2ee61f",
+        "before": "91325802a2cd0d09a3066e24a716f01d8d851802c23bb73784aec8994eadf996",
+        "path": [
+          "task_identity",
+          "ring16_acquisition_1600_schedule400_diagnostic_v1",
+          "execution"
+        ]
+      }
+    ],
+    "terminal_rules": {
+      "falsified": "stop_revision",
+      "incomplete": "request_missing_evidence",
+      "inconclusive": "stop_and_readout",
+      "prediction_observed": "review_saved_diagnostics"
+    }
+  },
+  "execution_path": "public_trainer",
+  "goal": "bcap_budget_diagnostics_v1",
+  "guide": "EXPERIMENTATION.md",
+  "hypothesis": "Extra low-rate training at the original schedule horizon may correct incumbent Gaussian drift and ring tails without rescaling the original trajectory.",
+  "id": "bcap-original-horizon-diagnostics-v1",
+  "lifecycle": "proposed",
+  "mechanism_class": "floor_constant",
+  "mechanism_rationale": "Fixed real/fake squared L2 gradients replace the K3P LR-dependent penalty and anchor. Coefficient1, cap1; no tuning.",
+  "parent": "bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212",
+  "prior": {
+    "kind": "mog",
+    "learnable": true,
+    "sigma": 0.025,
+    "standardize": false
+  },
+  "prior_art": [
+    "reports/forge/studies/FORMULATION_COMPARISON_CONTINUATION.md",
+    "tests/fixtures/release07-public-api.json"
+  ],
+  "recipe_overrides": {
+    "d_lr_mult": 2.0,
+    "prior_lr_mult": 4.0,
+    "reg_arm": "b_cap",
+    "reg_coeff": 0.5
+  },
+  "requires_capabilities": [
+    "learned_locations",
+    "a2",
+    "named_rng"
+  ],
+  "schema_version": 2,
+  "trainer_family": "bcap"
+}
