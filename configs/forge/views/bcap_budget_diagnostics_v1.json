@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "id": "bcap_budget_diagnostics_v1",
+  "revision": 1,
+  "goal": "discriminator_stability",
+  "evidence_scope": "research_diagnostic",
+  "assignments": [
+    {
+      "task": "gaussian1d_acquisition_3000_schedule1000_diagnostic_v1",
+      "qualification_tier": 1,
+      "importance": "diagnostic",
+      "order": 0
+    },
+    {
+      "task": "ring16_acquisition_1600_schedule400_diagnostic_v1",
+      "qualification_tier": 1,
+      "importance": "diagnostic",
+      "order": 1
+    }
+  ],
+  "eligibility": {},
+  "calibration": {
+    "status": "provisional",
+    "adoption_blocker": "Schedule-preserving acquisition-budget diagnostics grant no ordinary qualification, screen calibration or default adoption."
+  },
+  "ranking": {
+    "policy": "raw_metrics_only",
+    "compare_compatible_cohorts": true,
+    "cost_separate": true
+  },
+  "policy_change_reason": "Explicit bounded training-duration question: retain original schedules and 24 prefix observations, then add five late observations with identical numerical bounds; original tasks, views and historical results remain unchanged."
+}

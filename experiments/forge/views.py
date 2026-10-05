@@ -111,6 +111,9 @@ def _validate_measurement_contract(task):
         from benchmarks.locked_shared.observation import OBSERVATIONS, MIN_STABLE_CHECKS
         fixed.update(evaluator="benchmarks.transfer_suite.protocol:test_verdict",
                      observations=OBSERVATIONS, minimum_stable_checks=MIN_STABLE_CHECKS)
+    elif kind == "transfer_budget_diagnostic":
+        from .vector_budget_diagnostics import validate
+        validate(task)
     elif kind == "native_accuracy":
         from benchmarks.toy100.accuracy import LIMITS
         from benchmarks.toy100.accuracy_gate import HOLDOUT_N
@@ -563,7 +566,9 @@ def grade_result(task: dict, result: dict | None) -> dict:
     guard = _guards(task, evidence)
     if guard is not None:
         return guard
-    graders = {"transfer_sustained": _transfer, "native_accuracy": _native,
+    from .vector_budget_diagnostics import grade as budget_grade
+    graders = {"transfer_sustained": _transfer, "transfer_budget_diagnostic": budget_grade,
+               "native_accuracy": _native,
                "ring_hold": _ring, "ring_extension": _ring,
                "paired_adaptation": _adaptation, "clockfree_parity": _clockfree}
     grader = graders.get(task["evaluation"]["kind"])

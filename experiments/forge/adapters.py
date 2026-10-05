@@ -90,6 +90,11 @@ def adapter_preflight(task, candidate, *, root=None):
         if blockers:
             return blockers
     if adapter == "transfer_vector":
+        from .vector_budget_diagnostics import validate_original
+        try:
+            validate_original(task, root=root)
+        except (ValueError, KeyError, OSError) as error:
+            blockers.append(str(error))
         scorer = task["evaluation"].get("sample_evaluator")
         if scorer not in (None, "benchmarks.toy_audit.ring16_quality:score_samples",
                           "benchmarks.toy_audit.gaussian1d_quality:score_samples"):
@@ -297,6 +302,8 @@ def _save_observer_outputs(output, filename, records, *, kind):
 
 
 def _vector(request, task, output, device, *, retain_scored_outputs=True):
+    from .vector_budget_diagnostics import prefix_receipt, validate
+    budget = validate(task)
     from benchmarks.transfer_suite.vector_tasks import sample_target, score_samples
     scorer = task["evaluation"].get("sample_evaluator")
     if scorer is not None:
@@ -311,13 +318,14 @@ def _vector(request, task, output, device, *, retain_scored_outputs=True):
     context = _context(request, task, device, {"num_particles": spec["particles"],
                        "z_dim": spec["z_dim"], "batch_size": spec["batch"]})
     g, d = build_vector_models(context, spec)
-    trainer = context.build_trainer(g, d)
+    trainer = context.build_trainer(g, d, **({"max_steps": task["execution"]["steps"]} if budget else {}))
     host_receipt = _host_receipt(spec, task["execution"].get("vector_profile"), g, d)
     spec["thresholds"] = task["evaluation"]["thresholds"]
     run = _Run(context, trainer, output, task)
     data = context.streams.generator("data", component="target", purpose="training", device="cpu")
     observations, records = [], []
-    checkpoints = set(_checkpoints(task))
+    checkpoints = set(budget["observation_steps"] if budget else _checkpoints(task))
+    prefix = None
     def evaluate():
         samples = run.sample(4096).cpu()
         if retain_scored_outputs:
@@ -329,7 +337,13 @@ def _vector(request, task, output, device, *, retain_scored_outputs=True):
             row = run.evaluate(evaluate)
             observations.append({"step": step, **row})
             _event("observation", task=task["id"], step=step, metrics=row)
+        if budget and step == budget["prefix_steps"]:
+            prefix = prefix_receipt(context, observations, records)
     evidence = {"observations": observations, "live": observations[-1], "host": host_receipt}
+    if budget:
+        evidence["budget_diagnostic"] = {**budget, "prefix": prefix,
+            "recipe_schedule_horizon": context.recipe.total_steps,
+            "trainer_execution_limit": trainer.max_steps, "completed_steps": trainer.completed_steps}
     if retain_scored_outputs:
         evidence["saved_observer_outputs"] = _save_observer_outputs(
             output, "observed-samples.pt", records, kind="scored_vector_samples_v1")
