@@ -1,0 +1,38 @@
+{
+  "campaign_cap_seconds": 10080,
+  "prior_declared_allowance_seconds": 21720,
+  "qualification_input": false,
+  "remaining_whole_recipe_allowance_seconds": 2520,
+  "round_cap_seconds": 36000,
+  "schema_version": 1,
+  "source_digest": "888d8710147baa8ddaeaef78e0b6e506831d9a7b7486c79a8ca5e7d74d0f150e",
+  "spec": "configs/forge/searches/bcap-tier1-repair-moments-v1.json",
+  "spec_sha256": "05863e1b7d9e25e1d2602b24f8d407a387345e86f2a6ecf041c925bbed8d3b30",
+  "study": "bcap-tier1-repair-moments-v1",
+  "trials": [
+    {
+      "candidate": "bcap--148a58dc4036cfc2d71a10b427582aeea304b4ac70874ff2fe7ec02f31cee561",
+      "decision_status": "READY",
+      "declaration": "configs/forge/configurations/bcap--148a58dc4036cfc2d71a10b427582aeea304b4ac70874ff2fe7ec02f31cee561.json",
+      "declaration_sha256": "f22d626853cb26883752658e81f0b128725e61e41ca6eb0965b9377815f88962"
+    },
+    {
+      "candidate": "bcap--655141ae1d99b0b08dcbac36abbb6f135473d47d389f2ec9d41d9aa6d1201fbe",
+      "decision_status": "READY",
+      "declaration": "configs/forge/configurations/bcap--655141ae1d99b0b08dcbac36abbb6f135473d47d389f2ec9d41d9aa6d1201fbe.json",
+      "declaration_sha256": "f49c4d85906102679afd41a559959c98ae563f3276acb9a059ca5af690667385"
+    },
+    {
+      "candidate": "bcap--ccfa83125643932bdfc88a2178a94ec019a2687d7915dae1ed0d6852925f603d",
+      "decision_status": "READY",
+      "declaration": "configs/forge/configurations/bcap--ccfa83125643932bdfc88a2178a94ec019a2687d7915dae1ed0d6852925f603d.json",
+      "declaration_sha256": "afdaeb19055373796f0a27495b17f1ce32137b84e15f2ffa8250c97a16b05af2"
+    },
+    {
+      "candidate": "bcap--f0163dead110803a0e982cacfa2589918cd7345eea1655c76a3e3f21b0037887",
+      "decision_status": "READY",
+      "declaration": "configs/forge/configurations/bcap--f0163dead110803a0e982cacfa2589918cd7345eea1655c76a3e3f21b0037887.json",
+      "declaration_sha256": "8b2aaf04cb8ec9325746c72fa52f6b528710e292b8a9b7c76e1d959d7de8f56e"
+    }
+  ]
+}

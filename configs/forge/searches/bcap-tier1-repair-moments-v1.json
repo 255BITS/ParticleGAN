@@ -1,0 +1,46 @@
+{
+  "base_candidate": "k3p-bcap-matched-v1",
+  "campaign": {
+    "accept_shared_cost_transfer": false,
+    "budget_seconds": 10080,
+    "candidate_budget_seconds": 2520,
+    "id": "bcap-tier1-repair-moments-v1"
+  },
+  "cuda_model": "NVIDIA RTX A6000",
+  "execution_backend": "cuda",
+  "grid": {
+    "betas": [
+      [
+        0.0,
+        0.9
+      ],
+      [
+        0.0,
+        0.99
+      ]
+    ],
+    "d_lr_mult": [
+      2.0
+    ],
+    "lr": [
+      0.00425
+    ],
+    "prior_lr_mult": [
+      1.0,
+      2.0
+    ],
+    "reg_coeff": [
+      1.0
+    ]
+  },
+  "guide": "EXPERIMENTATION.md",
+  "hypothesis": "Shorter Adam second-moment memory permits ring acquisition at the movement-compatible global LR while slower prior transport limits Gaussian drift.",
+  "id": "bcap-tier1-repair-moments-v1",
+  "protocol": "screening",
+  "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+  "rationale": "Lower global rates produced sustained Gaussian passes but failed direct movement and ring400 acquisition. Restore LR.00425/D2, retain cap1/coefficient1/noise/all task budgets, compare beta2.9/.99 and prior1/2. This tests a hypothesis, not a demonstrated stale-moment bug: shorter memory can increase late normalized steps and worsen drift/tails. Do not rerun an unchanged beta2.999 control. Complete all seven independent Tier1 jobs and report one whole recipe; no seed study or higher tiers.",
+  "schema_version": 1,
+  "trainer_family": "bcap",
+  "tuning_through_tier": 1,
+  "view": "discriminator_stability"
+}
