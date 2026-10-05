@@ -4,37 +4,19 @@
       "importance": "required",
       "order": 0,
       "qualification_tier": 1,
-      "task": "gaussian1d_acquisition"
+      "task": "two_pole"
     },
     {
       "importance": "required",
       "order": 1,
       "qualification_tier": 1,
-      "task": "two_pole"
+      "task": "unused_token_hold"
     },
     {
       "importance": "required",
       "order": 2,
       "qualification_tier": 1,
-      "task": "unused_token_hold"
-    },
-    {
-      "importance": "required",
-      "order": 3,
-      "qualification_tier": 1,
       "task": "ae_gan_hold"
-    },
-    {
-      "importance": "required",
-      "order": 4,
-      "qualification_tier": 1,
-      "task": "ring16_acquisition"
-    },
-    {
-      "importance": "required",
-      "order": 5,
-      "qualification_tier": 1,
-      "task": "five_word_joint_acquisition"
     },
     {
       "importance": "required",
@@ -152,36 +134,75 @@
     },
     {
       "importance": "required",
-      "order": 0,
+      "order": 1,
       "qualification_tier": 3,
       "task": "ring_hold"
     },
     {
       "importance": "required",
-      "order": 1,
+      "order": 2,
       "qualification_tier": 3,
       "task": "ring_extension"
     },
     {
       "importance": "required",
-      "order": 100,
+      "order": 3,
       "qualification_tier": 1,
-      "task": "schedule_contract_audit"
+      "task": "clockfree_audit_measurement_v1"
+    },
+    {
+      "importance": "required",
+      "order": 3,
+      "qualification_tier": 3,
+      "task": "grid100_14k"
+    },
+    {
+      "importance": "required",
+      "order": 4,
+      "qualification_tier": 3,
+      "task": "rotated100_14k"
+    },
+    {
+      "importance": "required",
+      "order": 5,
+      "qualification_tier": 3,
+      "task": "staggered100_14k"
+    },
+    {
+      "importance": "required",
+      "order": 6,
+      "qualification_tier": 3,
+      "task": "target_shift_recovery"
+    },
+    {
+      "importance": "required",
+      "order": 0,
+      "qualification_tier": 3,
+      "task": "clockfree_audit"
     }
   ],
   "calibration": {
-    "adoption_blocker": "Seven required Tier 1 tasks include six existing acquisition/behavior checks and a declared-schedule operational audit. Placement remains provisional; no calibrated ranking, clock-free claim or default adoption follows.",
+    "adoption_blocker": "Phase D historical calibration remains required",
     "status": "provisional"
   },
-  "eligibility": {},
-  "goal": "discriminator_stability",
-  "id": "discriminator_stability",
-  "policy_change_reason": "Replace the known-scheduled clock-independence measurement with an independent public schedule-contract, guard, restart and evaluation-cadence audit. All acquisition gates remain unchanged. Scheduled operation grants no clock-free claim; original strict clock-free eligibility and historical verdicts remain separate.",
+  "eligibility": {
+    "claim_contract": {
+      "learning": "clockfree",
+      "shared_settings": true
+    },
+    "requires_capabilities": [
+      "named_rng",
+      "checkpoint"
+    ]
+  },
+  "goal": "clockfree_continuous",
+  "id": "clockfree_continuous",
+  "policy_change_reason": "Count the runnable clock-dependence measurement in Tier 1. Retain the original clock-free eligibility audit as a required Tier 3 prerequisite for long continuations; historical qualification and task contracts remain unchanged.",
   "ranking": {
     "compare_compatible_cohorts": true,
     "cost_separate": true,
     "policy": "qualified_tier_only_with_raw_metrics"
   },
-  "revision": 6,
+  "revision": 3,
   "schema_version": 1
 }

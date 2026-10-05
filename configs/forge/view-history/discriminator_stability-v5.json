@@ -163,25 +163,25 @@
       "task": "ring_extension"
     },
     {
-      "importance": "required",
+      "importance": "diagnostic",
       "order": 100,
       "qualification_tier": 1,
-      "task": "schedule_contract_audit"
+      "task": "clockfree_audit_measurement_v1"
     }
   ],
   "calibration": {
-    "adoption_blocker": "Seven required Tier 1 tasks include six existing acquisition/behavior checks and a declared-schedule operational audit. Placement remains provisional; no calibrated ranking, clock-free claim or default adoption follows.",
+    "adoption_blocker": "Expanded six-task Tier 1 placement is provisional and requires bounded calibration. Revision 3 and prior profiles retain their original tasks and evidence; a standalone scalar pass gives no whole-view/default credit.",
     "status": "provisional"
   },
   "eligibility": {},
   "goal": "discriminator_stability",
   "id": "discriminator_stability",
-  "policy_change_reason": "Replace the known-scheduled clock-independence measurement with an independent public schedule-contract, guard, restart and evaluation-cadence audit. All acquisition gates remain unchanged. Scheduled operation grants no clock-free claim; original strict clock-free eligibility and historical verdicts remain separate.",
+  "policy_change_reason": "Revision 5 retains the six required Tier 1 tests and adds a separately scoped clock-audit measurement diagnostic. This full-tier measurement round does not calibrate placement or promote a default; original clock-free eligibility and archived view grades remain unchanged.",
   "ranking": {
     "compare_compatible_cohorts": true,
     "cost_separate": true,
     "policy": "qualified_tier_only_with_raw_metrics"
   },
-  "revision": 6,
+  "revision": 5,
   "schema_version": 1
 }

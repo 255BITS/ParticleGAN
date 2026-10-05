@@ -1,208 +1,208 @@
 {
-  "schema_version": 1,
-  "id": "clockfree_continuous",
-  "revision": 3,
-  "goal": "clockfree_continuous",
   "assignments": [
     {
-      "task": "two_pole",
+      "importance": "required",
+      "order": 0,
       "qualification_tier": 1,
-      "importance": "required",
-      "order": 0
+      "task": "two_pole"
     },
     {
-      "task": "unused_token_hold",
+      "importance": "required",
+      "order": 1,
       "qualification_tier": 1,
-      "importance": "required",
-      "order": 1
+      "task": "unused_token_hold"
     },
     {
-      "task": "ae_gan_hold",
+      "importance": "required",
+      "order": 2,
       "qualification_tier": 1,
-      "importance": "required",
-      "order": 2
+      "task": "ae_gan_hold"
     },
     {
-      "task": "trajectory",
+      "importance": "required",
+      "order": 0,
       "qualification_tier": 2,
-      "importance": "required",
-      "order": 0
+      "task": "trajectory"
     },
     {
-      "task": "residual_student",
+      "importance": "required",
+      "order": 1,
       "qualification_tier": 2,
-      "importance": "required",
-      "order": 1
+      "task": "residual_student"
     },
     {
-      "task": "unipolar",
+      "importance": "required",
+      "order": 2,
       "qualification_tier": 2,
-      "importance": "required",
-      "order": 2
+      "task": "unipolar"
     },
     {
-      "task": "cover_leftover",
+      "importance": "required",
+      "order": 3,
       "qualification_tier": 2,
-      "importance": "required",
-      "order": 3
+      "task": "cover_leftover"
     },
     {
-      "task": "mid_scale_identity",
+      "importance": "required",
+      "order": 4,
       "qualification_tier": 2,
-      "importance": "required",
-      "order": 4
+      "task": "mid_scale_identity"
     },
     {
-      "task": "mode_hold",
+      "importance": "required",
+      "order": 5,
       "qualification_tier": 2,
-      "importance": "required",
-      "order": 5
+      "task": "mode_hold"
     },
     {
-      "task": "vector_two_broad",
+      "importance": "required",
+      "order": 6,
       "qualification_tier": 2,
-      "importance": "required",
-      "order": 6
+      "task": "vector_two_broad"
     },
     {
-      "task": "vector_unequal_mass",
+      "importance": "required",
+      "order": 7,
       "qualification_tier": 2,
-      "importance": "required",
-      "order": 7
+      "task": "vector_unequal_mass"
     },
     {
-      "task": "vector_unequal_width",
+      "importance": "required",
+      "order": 8,
       "qualification_tier": 2,
-      "importance": "required",
-      "order": 8
+      "task": "vector_unequal_width"
     },
     {
-      "task": "vector_anisotropic",
+      "importance": "required",
+      "order": 9,
       "qualification_tier": 2,
-      "importance": "required",
-      "order": 9
+      "task": "vector_anisotropic"
     },
     {
-      "task": "vector_overlap",
+      "importance": "required",
+      "order": 10,
       "qualification_tier": 2,
-      "importance": "required",
-      "order": 10
+      "task": "vector_overlap"
     },
     {
-      "task": "vector_spiral",
+      "importance": "required",
+      "order": 11,
       "qualification_tier": 2,
-      "importance": "required",
-      "order": 11
+      "task": "vector_spiral"
     },
     {
-      "task": "img_stripes2",
+      "importance": "required",
+      "order": 12,
       "qualification_tier": 2,
-      "importance": "required",
-      "order": 12
+      "task": "img_stripes2"
     },
     {
-      "task": "img_bars4",
+      "importance": "required",
+      "order": 13,
       "qualification_tier": 2,
-      "importance": "required",
-      "order": 13
+      "task": "img_bars4"
     },
     {
-      "task": "img_blobs4",
+      "importance": "required",
+      "order": 14,
       "qualification_tier": 2,
-      "importance": "required",
-      "order": 14
+      "task": "img_blobs4"
     },
     {
-      "task": "img_intensity2",
+      "importance": "required",
+      "order": 15,
       "qualification_tier": 2,
-      "importance": "required",
-      "order": 15
+      "task": "img_intensity2"
     },
     {
-      "task": "grid100",
+      "importance": "required",
+      "order": 16,
       "qualification_tier": 2,
-      "importance": "required",
-      "order": 16
+      "task": "grid100"
     },
     {
-      "task": "rotated100",
+      "importance": "required",
+      "order": 17,
       "qualification_tier": 2,
-      "importance": "required",
-      "order": 17
+      "task": "rotated100"
     },
     {
-      "task": "staggered100",
+      "importance": "required",
+      "order": 18,
       "qualification_tier": 2,
-      "importance": "required",
-      "order": 18
+      "task": "staggered100"
     },
     {
-      "task": "ring_hold",
+      "importance": "required",
+      "order": 1,
       "qualification_tier": 3,
-      "importance": "required",
-      "order": 1
+      "task": "ring_hold"
     },
     {
-      "task": "ring_extension",
+      "importance": "required",
+      "order": 2,
       "qualification_tier": 3,
-      "importance": "required",
-      "order": 2
+      "task": "ring_extension"
     },
     {
-      "task": "clockfree_audit_measurement_v1",
+      "importance": "required",
+      "order": 3,
       "qualification_tier": 1,
-      "importance": "required",
-      "order": 3
+      "task": "schedule_contract_audit"
     },
     {
-      "task": "grid100_14k",
-      "qualification_tier": 3,
       "importance": "required",
-      "order": 3
+      "order": 3,
+      "qualification_tier": 3,
+      "task": "grid100_14k"
     },
     {
-      "task": "rotated100_14k",
-      "qualification_tier": 3,
       "importance": "required",
-      "order": 4
+      "order": 4,
+      "qualification_tier": 3,
+      "task": "rotated100_14k"
     },
     {
-      "task": "staggered100_14k",
-      "qualification_tier": 3,
       "importance": "required",
-      "order": 5
+      "order": 5,
+      "qualification_tier": 3,
+      "task": "staggered100_14k"
     },
     {
-      "task": "target_shift_recovery",
-      "qualification_tier": 3,
       "importance": "required",
-      "order": 6
+      "order": 6,
+      "qualification_tier": 3,
+      "task": "target_shift_recovery"
     },
     {
-      "task": "clockfree_audit",
-      "qualification_tier": 3,
       "importance": "required",
-      "order": 0
+      "order": 0,
+      "qualification_tier": 3,
+      "task": "clockfree_audit"
     }
   ],
+  "calibration": {
+    "adoption_blocker": "Phase D historical calibration remains required",
+    "status": "provisional"
+  },
   "eligibility": {
-    "requires_capabilities": [
-      "named_rng",
-      "checkpoint"
-    ],
     "claim_contract": {
       "learning": "clockfree",
       "shared_settings": true
-    }
+    },
+    "requires_capabilities": [
+      "named_rng",
+      "checkpoint"
+    ]
   },
-  "calibration": {
-    "status": "provisional",
-    "adoption_blocker": "Phase D historical calibration remains required"
-  },
+  "goal": "clockfree_continuous",
+  "id": "clockfree_continuous",
+  "policy_change_reason": "Replace the known-scheduled clock-independence measurement with an independent public schedule-contract, guard, restart and evaluation-cadence audit. All acquisition gates remain unchanged. Scheduled operation grants no clock-free claim; original strict clock-free eligibility and historical verdicts remain separate.",
   "ranking": {
-    "policy": "qualified_tier_only_with_raw_metrics",
     "compare_compatible_cohorts": true,
-    "cost_separate": true
+    "cost_separate": true,
+    "policy": "qualified_tier_only_with_raw_metrics"
   },
-  "policy_change_reason": "Count the runnable clock-dependence measurement in Tier 1. Retain the original clock-free eligibility audit as a required Tier 3 prerequisite for long continuations; historical qualification and task contracts remain unchanged."
+  "revision": 4,
+  "schema_version": 1
 }
