@@ -70,7 +70,14 @@ def _validate_task(task, candidate, root, *, explicit_initializer=True):
                 word_context({"candidate": reference_candidate, "protocol": {"seed": 0}}, task, "cpu", root=root)
             else:
                 from .api import task_formulation_context
-                task_formulation_context(reference_candidate, task, device="cpu", root=root)
+                context = task_formulation_context(reference_candidate, task, device="cpu", root=root)
+                if adapter == "clockfree_audit" and task["evaluation"]["kind"] == "schedule_contract":
+                    from .views import _validate_measurement_contract
+                    from .clockfree import schedule_blockers
+                    _validate_measurement_contract(task)
+                    blockers = schedule_blockers(context.recipe.to_dict(), context.extension_values)
+                    if blockers:
+                        raise ValueError("; ".join(blockers))
             return True
         return False
     if adapter.startswith("native100"):

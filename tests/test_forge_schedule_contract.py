@@ -2,6 +2,7 @@
 from copy import deepcopy
 import json
 from pathlib import Path
+import shutil
 
 import pytest
 import torch
@@ -198,3 +199,75 @@ def test_scheduled_activation_cannot_hide_unsupported_penalty_counters():
     # activation is represented by a future or unvalidated declaration.
     recipe.update(reg_arm=None, critic_formulation="ka2", reg_every=1)
     assert any("KA2 switches" in reason for reason in schedule_blockers(recipe, {}))
+
+
+def frozen_schedule_request(tmp_path, recipe_overrides):
+    """Exercise current frozen-source admission, with no training or models."""
+    from test_forge_hostprofiles import prospective, bind_candidate, rebind
+    from experiments.forge.initialization import MODULE
+    from experiments.forge.sources import inspect_source, snapshot_source
+
+    task = json.loads((ROOT / "configs/forge/tasks/schedule_contract_audit.json").read_text())
+    request = prospective(tmp_path, [task])
+    checkout = tmp_path / "worktree"
+    target = checkout / MODULE
+    target.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copyfile(ROOT / MODULE, target)
+    source = inspect_source(checkout, set(request["source"]["files"]) | {MODULE})
+    source["snapshot_path"] = str(snapshot_source(checkout, tmp_path / "queue", source))
+    request["source"] = source
+    request["candidate"]["recipe_overrides"].update(reg_arm="b_cap", **recipe_overrides)
+    bind_candidate(request)
+    rebind(request)
+    return request
+
+
+@pytest.mark.parametrize("beta2", [.999, .99, .9])
+def test_actual_queue_accepts_supported_schedule_recipes_without_constructing_models(tmp_path, monkeypatch, beta2):
+    from experiments.forge.queue import Queue
+    from test_forge_queue import campaign
+
+    request = frozen_schedule_request(tmp_path, {"betas": [0., beta2]})
+    def forbidden(*args, **kwargs):
+        raise AssertionError("schedule admission must not construct models or train")
+    monkeypatch.setattr("experiments.forge.api.FormulationContext.construct", forbidden)
+    queue = Queue(tmp_path / "queue")
+    assert queue.submit(request, campaign("schedule-audit", budget=300))["status"] == "queued"
+    state = queue.inspect()
+    assert all(not job["attempts"] and job["status"] == "pending" for job in state["jobs"].values())
+    assert state["campaigns"]["schedule-audit"]["spent_seconds"] == 0
+    assert state["campaigns"]["schedule-audit"]["reserved_seconds"] == 0
+
+
+@pytest.mark.parametrize("mutation", ["periodic", "scheduled_activation", "ka2_switch", "tolerance", "clock", "budget"])
+def test_schedule_controls_are_rechecked_before_actual_queue_mutation(tmp_path, monkeypatch, mutation):
+    from experiments.forge.queue import Queue
+    from test_forge_hostprofiles import bind_candidate, rebind
+    from test_forge_queue import campaign
+
+    request = frozen_schedule_request(tmp_path, {})
+    candidate, task = request["candidate"], request["tasks"]["schedule_contract_audit"]
+    if mutation == "periodic":
+        candidate["recipe_overrides"]["reg_every"] = 2
+    elif mutation == "scheduled_activation":
+        candidate["recipe_overrides"].update(reg_every=2, reg_coeff=0, reg_coeff_end=2)
+    elif mutation == "ka2_switch":
+        candidate["recipe_overrides"].update(reg_arm=None, critic_formulation="ka2")
+    elif mutation == "tolerance":
+        task["evaluation"]["schedule_tolerance"] = 1
+    elif mutation == "clock":
+        task["execution"]["schedule_clocks"]["beta2"] = "critic_optimizer_observed_steps"
+    else:
+        task["execution"]["steps"] += 1
+    # Keep scientific hashes consistent and cached preflight clean: neither
+    # condition can substitute for checking the actual frozen controls again.
+    bind_candidate(request)
+    rebind(request)
+    def forbidden(*args, **kwargs):
+        raise AssertionError("unsupported schedule admission must not construct models or train")
+    monkeypatch.setattr("experiments.forge.api.FormulationContext.construct", forbidden)
+    queue = Queue(tmp_path / "queue")
+    before = queue.inspect()
+    with pytest.raises(ValueError, match="host profile blocked"):
+        queue.submit(request, campaign("schedule-audit", budget=300))
+    assert queue.inspect() == before
