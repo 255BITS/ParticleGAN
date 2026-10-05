@@ -81,6 +81,18 @@ python reports/forge/dualnorm-tier1/run.py media --queue-root "$PWD/runs/forge/b
 python reports/forge/dualnorm-tier1/run.py archive --queue-root "$PWD/runs/forge/bcap-dualnorm-tier1-v1-queue"
 ```
 
+To export completed attempts while the queue continues, use the resumable reader
+below. It records processed IDs locally, verifies existing GIFs, and adds only
+newly completed saved observations. It verifies every original certificate,
+GIF and input hash before finishing. `run.py media` remains the from-scratch
+reproduction command; archiving follows completion of all workers.
+
+```sh
+OMP_NUM_THREADS=1 .venv/bin/python -u reports/forge/dualnorm-tier1/export_media.py --queue-root runs/forge/bcap-dualnorm-tier1-v1-queue > runs/forge/bcap-dualnorm-tier1-v1-queue/media-export.log 2>&1
+tail -F runs/forge/bcap-dualnorm-tier1-v1-queue/media-export.log
+.venv/bin/python reports/forge/dualnorm-tier1/export_media.py --queue-root runs/forge/bcap-dualnorm-tier1-v1-queue --verify-only --once
+```
+
 For a compact live tail without the per-observation arrays:
 
 ```sh
