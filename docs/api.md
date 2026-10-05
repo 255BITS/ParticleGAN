@@ -1243,8 +1243,12 @@ its SGD direction, applying the scheduled rate once. `dualnorm` uses the
 polar factor of every matrix gradient (including heads), scaled by
 `sqrt(max(1, fan_out/fan_in))`, and L2-normalizes vectors. Its optional
 `optimizer_momentum` is `0`, `.5`, or `.9`; matrices with gradient norm below
-`eps` are skipped. It uses exact SVD through side length 1024, then bounded
-Newton--Schulz iterations. Higher-dimensional weight tensors are unsupported.
+`eps` are skipped. It uses exact SVD through side length 1024. Larger matrices
+try 30 Newton--Schulz iterations, then fall back to SVD if their Frobenius
+orthogonality residual exceeds `1e-3`, including ill-conditioned and
+rank-deficient cases. Accepted iterative factors remain approximate within
+that residual tolerance; no scale-transfer claim follows from this numerical
+check. Higher-dimensional weight tensors are unsupported.
 
 The `dualnorm` prior and `particle_rownorm_only` normalize each sampled prior
 row, without momentum. Unsampled rows stay fixed even if a whole-table

@@ -56,7 +56,7 @@ def test_new_bcap_label_does_not_reinterpret_historical_fixed_arm_recipes():
     assert old.critic_formulation == old.effective_critic_formulation == "k3p"
     assert old.optimizer_family == "formulation"
     assert old.d_guard_ratio == 5. and old.direct_particle_gain is True
-    with pytest.raises(ValueError, match="plain Adam"):
+    with pytest.raises(ValueError, match="plain optimizer"):
         Recipe(critic_formulation="bcap", reg_arm="b_cap")
     with pytest.raises(ValueError, match="reg_arm='b_cap'"):
         get_recipe("bcap", reg_arm="a_r1r2")

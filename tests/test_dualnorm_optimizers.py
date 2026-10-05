@@ -12,7 +12,7 @@ from torch import nn
 
 from particlegan import GANTrainer, get_recipe, scale_learning_rates
 from particlegan.init import deterministic_orthogonal_
-from particlegan.optim.dualnorm import NormalizedOptimizer
+from particlegan.optim.dualnorm import NormalizedOptimizer, polar_factor
 
 
 FAMILIES = (
@@ -364,6 +364,19 @@ def test_later_dualnorm_group_keeps_the_full_arm_free_of_adam():
     optimizer.step()
     assert optimizer._adam is None
     torch.testing.assert_close(weight, -.02 * torch.eye(2, dtype=torch.float64), rtol=0, atol=1e-15)
+
+
+@pytest.mark.parametrize("small_singular_value", [1e-7, 0.])
+@pytest.mark.parametrize("transpose", [False, True])
+def test_large_polar_preserves_unit_singular_values_for_ill_conditioned_or_rank_deficient_input(
+        small_singular_value, transpose):
+    gradient = torch.zeros((2, 1025), dtype=torch.float64)
+    gradient[0, 0], gradient[1, 1] = 1., small_singular_value
+    gradient = gradient.T if transpose else gradient
+    factor = polar_factor(gradient)
+    assert torch.isfinite(factor).all()
+    torch.testing.assert_close(torch.linalg.svdvals(factor), torch.ones(2, dtype=torch.float64),
+                               rtol=0, atol=1e-12)
 
 
 @pytest.mark.parametrize("family", ["ada_nsgda", "dualnorm", "dualnorm_D_only", "particle_rownorm_only"])

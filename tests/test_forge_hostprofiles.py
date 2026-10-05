@@ -271,15 +271,65 @@ def test_historical_configuration_default_loss_is_implicit_without_weakening_ide
 @pytest.mark.parametrize("loss", ["relativistic", "non_saturating", "hinge", "wasserstein", "least_squares"])
 def test_pure_configuration_checks_keep_exact_declared_loss_and_request_identity(loss):
     from experiments.forge.hostprofiles import _validate_candidate_identity
+    from experiments.forge.configuration_search import recipe_identity_fields
     cards = [read_json(path) for path in sorted((ROOT / "configs/forge/configurations").glob("bcap-pure--*.json"))]
     card = next(card for card in cards if card["resolved_configuration_recipe"]["loss"] == loss)
     request = declared_configuration_request(card)
-    assert stable_hash(request["candidate"]["resolved_recipe"]) == stable_hash(card["resolved_configuration_recipe"])
+    assert stable_hash(recipe_identity_fields(request["candidate"]["resolved_recipe"])) == stable_hash(recipe_identity_fields(card["resolved_configuration_recipe"]))
     assert request["candidate"]["resolved_recipe"]["loss"] == loss
     before = deepcopy(request)
     _validate_candidate_identity(request)
     assert request == before
     request["candidate"]["resolved_recipe"]["loss"] = "hinge" if loss != "hinge" else "relativistic"
+    with pytest.raises(ValueError, match="candidate resolved_recipe differs"):
+        _validate_candidate_identity(request)
+
+
+@pytest.mark.parametrize("fields", [("optimizer_momentum",), ("optimizer_adam_lr",),
+                                   ("optimizer_momentum", "optimizer_adam_lr")])
+def test_implicit_optimizer_defaults_preserve_exact_historical_request_identity(fields):
+    from experiments.forge.hostprofiles import _validate_candidate_identity
+    from experiments.forge.planning import candidate_revision_for
+    card = next(read_json(path) for path in sorted((ROOT / "configs/forge/configurations").glob("bcap-pure--*.json")))
+    request = declared_configuration_request(card)
+    for field in fields:
+        request["candidate"]["resolved_recipe"].pop(field)
+    request["candidate_revision"] = candidate_revision_for(request["source"]["digest"], request["candidate"])
+    before = deepcopy(request)
+    _validate_candidate_identity(request)
+    assert request == before
+
+
+@pytest.mark.parametrize("field,value", [("optimizer_momentum", .5), ("optimizer_momentum", False),
+                                        ("optimizer_adam_lr", .003)])
+def test_rehashed_optimizer_recipe_tampering_cannot_use_implicit_default_compatibility(field, value):
+    from experiments.forge.hostprofiles import _validate_candidate_identity
+    from experiments.forge.planning import candidate_revision_for
+    card = next(read_json(path) for path in sorted((ROOT / "configs/forge/configurations").glob("bcap-pure--*.json")))
+    request = declared_configuration_request(card)
+    request["candidate"]["resolved_recipe"][field] = value
+    request["candidate_revision"] = candidate_revision_for(request["source"]["digest"], request["candidate"])
+    with pytest.raises(ValueError, match="candidate resolved_recipe differs"):
+        _validate_candidate_identity(request)
+
+
+@pytest.mark.parametrize("overrides,field", [
+    ({"optimizer_family": "dualnorm", "optimizer_momentum": .5}, "optimizer_momentum"),
+    ({"optimizer_family": "dualnorm_D_only", "optimizer_adam_lr": .00425}, "optimizer_adam_lr"),
+])
+def test_active_optimizer_configuration_fields_remain_explicit_and_required(overrides, field):
+    from dataclasses import asdict
+    from experiments.forge.api import FormulationContext
+    from experiments.forge.hostprofiles import _validate_candidate_identity
+    from experiments.forge.planning import candidate_revision_for
+    candidate = {"recipe_preset": "bcap", "recipe_overrides": overrides, "prior": deepcopy(PRIOR)}
+    candidate["resolved_recipe"] = asdict(FormulationContext(
+        recipe_preset="bcap", recipe_overrides=overrides, prior=candidate["prior"]).recipe)
+    request = {"candidate": candidate, "source": {"digest": "a" * 64}}
+    request["candidate_revision"] = candidate_revision_for(request["source"]["digest"], candidate)
+    _validate_candidate_identity(request)
+    candidate["resolved_recipe"].pop(field)
+    request["candidate_revision"] = candidate_revision_for(request["source"]["digest"], candidate)
     with pytest.raises(ValueError, match="candidate resolved_recipe differs"):
         _validate_candidate_identity(request)
 

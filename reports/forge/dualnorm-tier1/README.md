@@ -81,6 +81,12 @@ python reports/forge/dualnorm-tier1/run.py media --queue-root "$PWD/runs/forge/b
 python reports/forge/dualnorm-tier1/run.py archive --queue-root "$PWD/runs/forge/bcap-dualnorm-tier1-v1-queue"
 ```
 
+For a compact live tail without the per-observation arrays:
+
+```sh
+tail -F runs/forge/bcap-dualnorm-tier1-v1-queue/events.jsonl | jq --unbuffered -r 'select(.event == "claimed" or .event == "completed") | [.timestamp, .event, (.candidate | split("--") | .[0] + ":" + (.[1][0:8])), .task, (.verdicts // {} | tojson)] | @tsv'
+```
+
 The driver verifies that all captured scientific bytes exist at the recorded
 commit before admission. Actual-training GIFs render existing certified
 observations and add no sampling or optimizer updates. The final archive receipt
@@ -97,5 +103,8 @@ python -u reports/forge/dualnorm-tier1/run.py resume --queue-root runs/forge/bca
 
 The 2026-10-05 environment switch stopped the first coordinator. Forge collected
 the workers that had finished, and the restored CUDA environment resumed the
-remaining frozen requests. Completed and numerically failed attempts were not
-rerun. The archive retains the queue state, original receipts and recovery logs.
+remaining frozen requests. One interrupted CPU worker received an explicit
+execution-repair retry after access was restored, within the original budget;
+its earlier incomplete receipt and cost remain in the attempt history.
+Completed and numerically failed attempts were not rerun. The archive retains
+the queue state, original receipts and recovery logs.

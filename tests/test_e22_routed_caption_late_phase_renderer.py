@@ -11,7 +11,6 @@ from examples import render_e22_routed_caption_late_phase as render
 @pytest.fixture(autouse=True)
 def cpu_threads():
     threads=torch.get_num_threads();torch.set_num_threads(1)
-    render.STARTED = render.time.monotonic()
     try:yield
     finally:torch.set_num_threads(threads)
 
