@@ -1,5 +1,6 @@
 """Editorial family descriptions and tags cannot create scientific evidence."""
 from copy import deepcopy
+import base64
 import json
 from pathlib import Path
 
@@ -233,3 +234,115 @@ def test_validation_checks_registered_families_even_before_they_have_results(doc
     refresh(root, publication)  # The inventory only links its recorded family.
     with pytest.raises(ValueError, match="missing registered family documentation for unmeasured"):
         validate_family_documentation(root)
+
+
+def _add_math_and_image(root):
+    path = root / "configs/forge/family-documentation/bcap.json"
+    data = read_json(path)
+    asset = root / "reports/forge/families/assets/bcap-explainer.png"
+    asset.parent.mkdir(parents=True)
+    asset.write_bytes(base64.b64decode(
+        "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+aN1cAAAAASUVORK5CYII="))
+    data.update(equations=[{"label": "Critic objective", "latex": r"L_D = L_{\mathrm{adv}} + \lambda R(D)",
+                           "explanation": "The critic minimizes its adversarial loss plus the penalty."}],
+                illustration={"path": asset.relative_to(root).as_posix(),
+                              "alt": "Critic [input] gradient branches", "caption": "Conceptual mechanism, not measured data."})
+    atomic_json(path, data)
+    return path, data, asset
+
+
+def test_math_renders_outside_text_fences_after_symbols_and_preserves_science(documented):
+    root, publication = documented
+    recorded = deepcopy(publication["rows"])
+    _, data, _ = _add_math_and_image(root)
+    family = refresh(root, publication)
+    page = generated_pages(root, publication)[root / family["page"]]
+    assert page.index(data["symbols"]) < page.index("$$") < page.index("## Simplified pseudocode")
+    assert "$$\n" + data["equations"][0]["latex"] + "\n$$" in page
+    assert page.index(data["equations"][0]["explanation"]) < page.index("```text")
+    in_code = False
+    for line in page.splitlines():
+        if line.startswith("```"):
+            in_code = not in_code
+        if line == "$$":
+            assert not in_code
+    assert not in_code
+    assert page.rsplit("\n## ", 1)[1].startswith("References\n")
+    assert publication["rows"] == recorded
+
+
+def test_accessible_illustration_opens_overview_and_binds_its_bytes(documented):
+    root, publication = documented
+    _, data, asset = _add_math_and_image(root)
+    family = refresh(root, publication)
+    page = generated_pages(root, publication)[root / family["page"]]
+    assert "![Critic \\[input\\] gradient branches](assets/bcap-explainer.png)" in page
+    assert page.index(data["overview"]) < page.index("![") < page.index("## Mathematical formulation")
+    assert data["illustration"]["caption"] in page
+    name = data["illustration"]["path"]
+    original = publication["family_progress"]["input_hashes"][name]
+    assert original == file_hash(asset)
+    asset.write_bytes(asset.read_bytes() + b"editorial fixture revision")
+    refresh(root, publication)
+    assert publication["family_progress"]["input_hashes"][name] == file_hash(asset) != original
+
+
+@pytest.mark.parametrize("equations", [None, {}, [{"label": "Objective", "latex": "x"}],
+                                      [{"label": "", "latex": "x", "explanation": "Meaning."}],
+                                      [{"label": "Objective", "latex": " ", "explanation": "Meaning."}],
+                                      [{"label": "Objective", "latex": "x", "explanation": ""}]])
+def test_equations_require_nonempty_labels_bodies_and_explanations(documented, equations):
+    root, _ = documented
+    data = read_json(root / "configs/forge/family-documentation/bcap.json")
+    data["equations"] = equations
+    with pytest.raises(ValueError, match="equation"):
+        validate_documentation(root, data, "bcap")
+
+
+@pytest.mark.parametrize("latex", ["$x$", "$$x$$", r"\(x\)", r"\[x\]", "```math\nx\n```", "~~~math\nx\n~~~"])
+def test_equation_bodies_do_not_break_the_generators_math_delimiters(documented, latex):
+    root, _ = documented
+    data = read_json(root / "configs/forge/family-documentation/bcap.json")
+    data["equations"] = [{"label": "Objective", "latex": latex, "explanation": "Meaning."}]
+    with pytest.raises(ValueError, match="omit math delimiters and Markdown fences"):
+        validate_documentation(root, data, "bcap")
+
+
+def test_aligned_multiline_latex_accepts_spacing_and_legacy_optional_absence(documented):
+    root, publication = documented
+    path, data, _ = _add_math_and_image(root)
+    data["equations"][0]["latex"] = r"\begin{aligned} L_D &= a+b \\[3pt] L_G &= c \end{aligned}"
+    validate_documentation(root, data, "bcap")
+    data.pop("illustration")
+    data["equations"] = []
+    atomic_json(path, data)
+    family = refresh(root, publication)
+    page = generated_pages(root, publication)[root / family["page"]]
+    assert "## Mathematical formulation" not in page and "![" not in page
+    assert data["symbols"] in page
+
+
+@pytest.mark.parametrize("change, error", [
+    ("missing_asset", "existing repository asset"), ("outside_repo", "existing repository asset"),
+    ("remote_asset", "existing repository asset"), ("unsupported_format", "PNG, JPEG, GIF or WebP"),
+    ("missing_alt", "repository path, alt text and caption"), ("empty_alt", "nonempty text"),
+    ("empty_caption", "nonempty text"),
+])
+def test_illustrations_require_local_raster_assets_with_accessible_descriptions(documented, change, error):
+    root, _ = documented
+    _, data, asset = _add_math_and_image(root)
+    if change == "missing_asset":
+        asset.unlink()
+    elif change == "outside_repo":
+        data["illustration"]["path"] = "../elsewhere.png"
+    elif change == "remote_asset":
+        data["illustration"]["path"] = "https://example.com/image.png"
+    elif change == "unsupported_format":
+        asset.rename(asset.with_suffix(".svg"))
+        data["illustration"]["path"] = data["illustration"]["path"].replace(".png", ".svg")
+    elif change == "missing_alt":
+        data["illustration"].pop("alt")
+    else:
+        data["illustration"]["alt" if change == "empty_alt" else "caption"] = " "
+    with pytest.raises(ValueError, match=error):
+        validate_documentation(root, data, "bcap")

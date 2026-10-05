@@ -436,6 +436,9 @@ def build_progress(root: Path, publication: dict) -> dict:
     documented, tag_definitions = family_documentation.load_family_documentation(root, families, load)
     for family in families.values():
         family.update(documented.get(family["id"], {"tags": [], "documentation": None}))
+        illustration = (family.get("documentation") or {}).get("illustration")
+        if illustration is not None:
+            inputs[illustration["path"]] = file_hash(root / illustration["path"])
     atlas_navigation = _atlas_evidence_navigation(root, load)
     next_steps = Path("reports/forge/atlas-inventory-next-steps-20261005.md")
     if atlas_navigation is not None and (root / next_steps).is_file():
@@ -544,8 +547,24 @@ def _technique_description(root, page, family):
                 "Consult the recorded recipe and source bindings below; no training behavior is inferred from its name.", ""]
     lines = ["**Tags:** " + " · ".join(link(root, page, tag, "reports/forge/technique-inventory.md", "tag-" + tag)
                                        for tag in family["tags"]), "",
-             "## Technique overview", "", documentation["overview"], "",
-             "## Simplified pseudocode", "", documentation["symbols"], "", "```text",
+             "## Technique overview", "", documentation["overview"], ""]
+    illustration = documentation.get("illustration")
+    if illustration is not None:
+        alt = illustration["alt"].replace("\\", "\\\\").replace("[", "\\[").replace("]", "\\]").replace("\n", " ")
+        target = os.path.relpath(root / illustration["path"], page.parent)
+        if any(character.isspace() for character in target):
+            target = "<" + target + ">"
+        lines += [f"![{alt}]({target})", "", illustration["caption"], ""]
+    equations = documentation.get("equations", [])
+    if equations:
+        lines += ["## Mathematical formulation", "", documentation["symbols"], ""]
+        for equation in equations:
+            lines += ["**" + equation["label"] + "**", "", "$$", equation["latex"], "$$", "",
+                      equation["explanation"], ""]
+        lines += ["## Simplified pseudocode", ""]
+    else:
+        lines += ["## Simplified pseudocode", "", documentation["symbols"], ""]
+    lines += ["```text",
              *documentation["pseudocode"], "```", "",
              "## Training details", "", "| Characteristic | Behavior |", "| --- | --- |"]
     lines += ["| " + label + " | " + cell(documentation["training_details"][key]) + " |"

@@ -24,6 +24,7 @@ TRAINING_DETAILS = (
 )
 _TAG = re.compile(r"[a-z][a-z0-9]*(?:-[a-z0-9]+)*")
 _PINNED_GITHUB_SOURCE = re.compile(r"/[^/]+/[^/]+/blob/[0-9a-f]{40}/.+")
+_RASTER_EXTENSIONS = {".png", ".jpg", ".jpeg", ".gif", ".webp"}
 
 
 def _text(value, label):
@@ -49,19 +50,48 @@ def _https_url(value, label):
     return parsed
 
 
+def _illustration(root, value):
+    if not isinstance(value, dict) or set(value) != {"path", "alt", "caption"}:
+        raise ValueError("illustration needs a repository path, alt text and caption")
+    for key in ("path", "alt", "caption"):
+        _text(value[key], "illustration " + key)
+    path = Path(value["path"])
+    resolved = (root / path).resolve()
+    if (path.is_absolute() or ".." in path.parts or not resolved.is_relative_to(root.resolve())
+            or not resolved.is_file()):
+        raise ValueError("illustration must be an existing repository asset")
+    if path.suffix.lower() not in _RASTER_EXTENSIONS:
+        raise ValueError("illustration must use PNG, JPEG, GIF or WebP")
+
+
 def validate_documentation(root: Path, value: dict, family_id: str) -> dict:
     """Validate maintained prose and resolvable source navigation, not its claims."""
     if not isinstance(value, dict):
         raise ValueError(f"family documentation for {family_id} must be an object")
     required = {"overview", "symbols", "pseudocode", "training_details", "configuration_notes",
                 "references", "sources"}
-    if set(value) != required:
-        raise ValueError(f"family documentation for {family_id} needs exactly {sorted(required)}")
+    if required - set(value) or set(value) - required - {"equations", "illustration"}:
+        raise ValueError(f"family documentation for {family_id} needs exactly the required fields {sorted(required)} "
+                         "and optional equations/illustration")
     _text(value["overview"], "technique overview")
     _text(value["symbols"], "pseudocode symbols")
     _texts(value["pseudocode"], "pseudocode")
     if any("```" in line for line in value["pseudocode"]):
         raise ValueError("pseudocode cannot contain Markdown code fences")
+    if "equations" in value:
+        if not isinstance(value["equations"], list):
+            raise ValueError("equations must be a list")
+        for equation in value["equations"]:
+            if not isinstance(equation, dict) or set(equation) != {"label", "latex", "explanation"}:
+                raise ValueError("equations need a label, LaTeX body and explanation")
+            for key in ("label", "latex", "explanation"):
+                _text(equation[key], "equation " + key)
+            latex = equation["latex"]
+            if (any(token in latex for token in ("$", "```", "~~~"))
+                    or re.search(r"(?<!\\)\\[\[\]()]", latex)):
+                raise ValueError("equation LaTeX must omit math delimiters and Markdown fences")
+    if "illustration" in value:
+        _illustration(root, value["illustration"])
     _texts(value["configuration_notes"], "configuration notes")
     details = value["training_details"]
     if not isinstance(details, dict) or set(details) != {key for key, _ in TRAINING_DETAILS}:
