@@ -217,12 +217,20 @@ def test_leaderboard_clicks_resolve_to_family_tiers_including_empty_tiers(report
 
 
 def test_committed_pages_and_every_drilldown_link_match_the_generator():
+    import importlib.util
+
     root = Path(__file__).resolve().parents[1]
     publication = read_json(root / "reports/forge/technique-inventory.json")
     assert publication["family_progress"] == build_progress(root, publication)
     pages = generated_pages(root, publication)
     overview = root / "reports/forge/technique-inventory.md"
-    pages[overview] = render_leaderboard(root, publication, overview)
+    spec = importlib.util.spec_from_file_location(
+        "committed_inventory_publisher", root / "reports/forge/regenerate_technique_inventory.py")
+    publisher = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(publisher)
+    # The native publisher also verifies and appends registered research
+    # navigation; check its full output and every linked artifact.
+    pages[overview] = publisher._current_markdown(publication, root, overview)
     for page, text in pages.items():
         assert page.read_text() == text
         for target in re.findall(r"\]\(([^)]+)\)", text):
