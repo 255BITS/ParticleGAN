@@ -14,12 +14,27 @@ environment repair retains its superseded original receipt and cost.
 The strongest acquisition tradeoff is full dualnorm with mu=0, eta=.01: ring
 16/16 modes with HQ=.93018 versus Adam's .82275, and word acquisition PASS.
 Its two-pole sustained gate fails, so the whole recipe remains 3/6; ring's
-complete gate also fails. No default promotion or additional training follows.
+complete gate also fails. At the owner's request, this tied recipe is the
+experimental starting point for subsequent BCAP-pure work. No scientific
+default qualification or additional training follows.
 See [FINDINGS](../../../FINDINGS.md), [compact analysis](analysis.json),
 [final results](results.json), [verified training GIFs](media.json),
 [artifact provenance](artifact-inventory.json), and
 [software verification](software-verification.json). The exact existing Adam
-selection is retained, with seven new measurement pins in the current leaderboard.
+control selection is retained, and the dualnorm measurement pin selects the
+new starting recipe. Original search winners remain recorded unchanged.
+The [starter receipt](starter-selection.json) binds the complete measured row
+and preserves the earlier selection. To use its optimizer settings:
+
+```python
+from particlegan import get_recipe
+
+recipe = get_recipe("bcap", optimizer_family="dualnorm", lr=.01,
+                       d_lr_mult=1.5, prior_lr_mult=3., optimizer_momentum=0.)
+```
+
+Keep each experiment's existing task-owned recipe fields and schedule; the
+configuration above supplies the optimizer delta for the current BCAP preset.
 
 The finite screen contains **41 global configurations**: five Adam rates, five
 plain SGDA rates spanning four decades, four global-normalized rates, four
@@ -104,7 +119,7 @@ python reports/forge/dualnorm-tier1/run.py media --queue-root "$PWD/runs/forge/b
 Using the final PR's reporting helpers after training:
 
 ```sh
-.venv/bin/python reports/forge/dualnorm-tier1/analyze.py --queue-root "$PWD/runs/forge/bcap-dualnorm-tier1-v1-queue"
+.venv/bin/python reports/forge/dualnorm-tier1/analyze.py --queue-root "$PWD/runs/forge/bcap-dualnorm-tier1-v1-queue" --starter-selection reports/forge/dualnorm-tier1/starter-selection.json
 python reports/forge/dualnorm-tier1/run.py archive --queue-root "$PWD/runs/forge/bcap-dualnorm-tier1-v1-queue"
 ```
 

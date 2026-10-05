@@ -165,6 +165,15 @@ def load_families(root: Path | str) -> dict:
             if backend not in {"cpu", "cuda"}:
                 raise ValueError("family active search backend must be cpu or cuda")
             identifier(study, "family active search study")
+        display_fields = {"unmeasured_display_backend", "unmeasured_display_reason"}
+        if display_fields & family.keys():
+            if (not display_fields <= family.keys()
+                    or family["unmeasured_display_backend"] not in {"cpu", "cuda"}
+                    or not isinstance(family["unmeasured_display_reason"], str)
+                    or not family["unmeasured_display_reason"].strip()):
+                raise ValueError(f"family {name}: unmeasured display requires an explicit backend and reason")
+            if family.get("active_search_by_backend"):
+                raise ValueError(f"family {name}: unmeasured display cannot select an active search")
         result[name] = deepcopy(family)
     historical = registry.get("historical_families", [])
     if not isinstance(historical, list):
@@ -407,6 +416,23 @@ def _search_pin(root, family_id, backend, rows, declarations, catalogs, *, view_
     return pins[0] if pins else None
 
 
+def _declaration_only_row(row):
+    """No executed outcome or cost may enter an unmeasured display choice."""
+    tasks = row.get("tasks", []) + row.get("nonrequired_tasks", [])
+    unmeasured = {"UNKNOWN", "BLOCKED", "NOT_RUN"}
+    # qualify() labels a wholly NOT_RUN aggregate INCOMPLETE. The individual
+    # task grades below must still prove that no execution outcome exists.
+    return (bool(tasks) and not row.get("attempt_ids") and row.get("qualified_tier", 0) == 0
+            and row.get("status") in unmeasured | {"INCOMPLETE"}
+            and all(task.get("status") in unmeasured
+                    and task.get("gate_status", task.get("status")) in unmeasured for task in tasks)
+            and not any(tier.get("passed", 0) or any(count and status not in unmeasured
+                        for status, count in tier.get("counts", {}).items())
+                        for tier in row.get("tiers", {}).values())
+            and row.get("cost", {}).get("measured_tasks", 0) == 0
+            and row.get("cost", {}).get("wall_seconds") in {None, 0})
+
+
 def select_family_rows(root: Path | str, rows: list[dict], catalogs: dict, *, view_id: str,
                        policy_fingerprint: str, declarations: dict | None = None,
                        view_policy: dict | None = None, execution_backend: str | None = None,
@@ -445,14 +471,33 @@ def select_family_rows(root: Path | str, rows: list[dict], catalogs: dict, *, vi
         explicit = current_pins.get(family_id)
         all_alternatives = [row for row in variants if row["trainer_family"] == family_id]
         use_explicit = explicit and (execution_backend is None or explicit["execution_backend"] == execution_backend)
+        display_backend = family.get("unmeasured_display_backend") if view_policy is None else None
+        use_unmeasured = display_backend is not None and execution_backend in {None, display_backend}
         if use_explicit:
             if family_id in selected_families:
                 continue
             selected, metadata = _current_pin(root, family_id, all_alternatives, explicit, view_id=view_id, catalogs=catalogs)
             alternatives = all_alternatives
+        elif use_unmeasured:
+            if family.get("active_search_by_backend") or not all(_declaration_only_row(row) for row in all_alternatives):
+                raise ValueError(f"family {family_id}: unmeasured display requires exclusively declaration-only rows; "
+                                 "measured evidence needs an explicit whole-row family selection")
+            if family_id in selected_families:
+                continue
+            canonical = [row for row in all_alternatives if row["candidate_id"] == family["canonical_candidate"]
+                         and row.get("runtime_cohort", {}).get("execution_backend") == display_backend]
+            if len(canonical) != 1:
+                raise ValueError(f"family {family_id}: unmeasured display requires exactly one canonical row "
+                                 f"on declared backend {display_backend}")
+            selected = canonical[0]
+            alternatives = all_alternatives
+            metadata = {"selection_kind": "unmeasured_declaration", "qualified": False, "default_adoption": False,
+                        "reason": family["unmeasured_display_reason"], "execution_backend": display_backend,
+                        "comparison_claim": "Explicit declaration-only display; no source or outcome ranking."}
         else:
             if view_policy is None and family_id in selected_families:
-                raise ValueError("multiple current runtime cohorts require an explicit whole-row family selection")
+                raise ValueError(f"family {family_id}: multiple current runtime cohorts require "
+                                 "an explicit whole-row family selection")
             pin = _search_pin(root, family_id, backend, alternatives, declarations, catalogs,
                               view_id=view_id, policy_fingerprint=policy_fingerprint, view_policy=view_policy)
             if pin:
@@ -460,9 +505,10 @@ def select_family_rows(root: Path | str, rows: list[dict], catalogs: dict, *, vi
             else:
                 canonical = [row for row in alternatives if row["candidate_id"] == family["canonical_candidate"]]
                 if len(canonical) > 1:
-                    raise ValueError("canonical configuration has multiple scientific rows in one runtime; select its recorded revision first")
+                    raise ValueError(f"family {family_id}: canonical configuration has multiple scientific rows "
+                                     "in one runtime; select its recorded revision first")
                 if not canonical:
-                    raise ValueError("family runtime cohort needs its canonical configuration row before selection")
+                    raise ValueError(f"family {family_id}: runtime cohort needs its canonical configuration row before selection")
                 selected = canonical[0]
                 metadata = {"selection_kind": "canonical_fallback", "qualified": selected.get("status") == "PASS",
                             "reason": "Canonical configuration preferred; no outcome ranking across incomparable sources."}

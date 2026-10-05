@@ -351,11 +351,14 @@ Use the [current family leaderboard](reports/forge/technique-inventory.md) for
 the single ranked goal table. [All final configurations and metrics](reports/forge/dualnorm-tier1/analysis.json),
 [search results](reports/forge/dualnorm-tier1/results.json) and the
 [study/reproduction guide](reports/forge/dualnorm-tier1/README.md) preserve task
-statuses and exact whole-recipe selections. Selection maximizes required Tier 1
-PASS count, then breaks ties by configuration hash; task-specific metrics and
-diagnostic appearance do not select recipes. All twelve full-dualnorm
-configurations compete together when pinning that family. Hash tie-breaking is
-not evidence that one tied recipe is better.
+statuses and exact whole-recipe selections. The original search selection
+maximizes required Tier 1 PASS count, then breaks ties by configuration hash.
+Those nine search outcomes remain unchanged. The owner subsequently requested
+a new optimizer as the BCAP starting point even on a tie. The current dualnorm
+measurement therefore uses the .01 zero-momentum recipe: among the 3/6 ties,
+it retains ring coverage, improves ring HQ and passes words. This retrospective
+preference is explicit in the [starter receipt](reports/forge/dualnorm-tier1/starter-selection.json);
+it is not an independent confirmation or a newly qualified default.
 
 **No new optimizer beats the 3/6 Adam control on required Tier 1 PASS count.**
 Global nSGDA, tensor nSGDA, full dualnorm with zero momentum, and prior-only row
@@ -390,23 +393,24 @@ also remains 2/6. These are endpoint improvements, not new gate passes.
 
 Conversely, hash-selected tensor nSGDA at eta=.1 drops ring coverage to five
 modes/HQ=.21729, and prior-only eta=.01 drops it to four modes/HQ=.16260, despite
-their 3/6 scores. Selected full dualnorm eta=.03 generates word samples with
+their 3/6 scores. The original hash-selected full dualnorm eta=.03 generates word samples with
 quality fraction 1 but only three modes and fails reconstruction; quality fraction
 alone does not establish coverage. No tested ring configuration improves HQ
 over the control while losing ring modes, but several tied recipes lose both.
 R1/R2 was not run, so no cross-regularizer claim is available.
 
 The diagnostic plots show the exact .00425 Adam control and the top three
-non-Adam whole-arm selections under the frozen count/hash rule: tensor nSGDA
-.1, zero-momentum dualnorm .03 and prior-only .01. See
+non-Adam arms under the frozen count/hash rule, with the owner's tied dualnorm
+starting recipe substituted: tensor nSGDA .1, zero-momentum dualnorm .01 and
+prior-only .01. The original plot candidates remain recorded in the analysis. See
 [Gaussian](reports/forge/dualnorm-tier1/diagnostics/gaussian1d_acquisition.png),
 [ring](reports/forge/dualnorm-tier1/diagnostics/ring16_acquisition.png) and
 [joint words](reports/forge/dualnorm-tier1/diagnostics/five_word_joint_acquisition.png).
 Each plots relative update speed, G/E and D parameter norms, and the log spectral
-product. In joint words, selected dualnorm's spectral-log total variation is
-4.258 versus Adam's 9.115 over the same 24 checkpoints, but it is higher than
-Adam's on Gaussian and ring; smoothing is not universal. Two dualnorm G matrices
-grow 35.4x and 11.3x over those word checkpoints. Adam's D output matrix also
+product. In joint words, the dualnorm starter's spectral-log total variation is
+4.580 versus Adam's 9.115 over the same 24 checkpoints, but it is higher than
+Adam's on Gaussian and ring; smoothing is not universal. One dualnorm G matrix
+grows 19.3x over those word checkpoints. Adam's D output matrix also
 grows 13.6x, and some biases grow further. These are finite-budget growth flags,
 not optimizer-specific proof of divergence. Explicit sampled-row traces for
 dualnorm and prior-only normalization certify zero unsampled raw-row drift at
@@ -425,14 +429,16 @@ differs. They are now historical incumbents, with numerical results and every
 recipe/source/runtime/RNG/task identity retained; current-contract validation is
 not weakened. The [migration receipt](reports/forge/dualnorm-tier1/selection-migration.json)
 records the original selection-card commit/blob and changed display metadata.
-The exact BCAP-pure incumbent pin is unchanged. The new pure-Adam declaration
+The historical Adam BCAP-pure pin is retained as a control; the current
+dualnorm pin now selects the requested experimental starting point. The new pure-Adam declaration
 joins BCAP-pure only for current presentation; its frozen family identity and
 the existing canonical declaration remain intact.
 
-Recommendation: **retain the current Adam recipe**. Keep nSGDA and zero-momentum
-dualnorm as measured research options, rather than adopting a tie under a
-provisional profile. First investigate the existing acquisition failures in the
-separate PR. Any ratio/prior-rate or edge extension needs its own finite
+Recommendation: **start the next BCAP-pure work from full dualnorm**, with
+etaG=.01, D/G=1.5, etaPrior=.03 and network momentum 0. Use the same BCAP/loss
+and task settings; these normalized step sizes have their own units. This is
+the owner's requested experimental starting recipe, with Adam retained as the
+control and the existing acquisition failures still investigated in the separate PR. Any ratio/prior-rate or edge extension needs its own finite
 declaration and an explicit whole-recipe objective; this screen does not trigger
 automatic expansion or width/depth training. The strongest acquisition follow-up
 is zero-momentum dualnorm near .01. One possible **unexecuted** refinement is

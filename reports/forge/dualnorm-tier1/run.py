@@ -46,7 +46,7 @@ def archive_support_files(queue_root):
                  "regrade-debug.log", "frozen-regrade-debug.json", "selection-card-before-publication.json",
                  "publication-final.log", "compile-summaries.log", "compile-check.log"):
         files[queue_root / name] = "execution/" + name
-    for pattern in ("pytest*", "junit*", "*collection*", "collected-tests*", "publication-*.log", "validate-*.log"):
+    for pattern in ("pytest*", "junit*", "*collection*", "collected-tests*", "publication-*.log", "validate-*.log", "compile-*.log", "analysis-*.log"):
         for path in queue_root.glob(pattern):
             if path.is_file():
                 files[path] = (("execution/" if path.name.startswith("publication-") else "verification/")
@@ -158,7 +158,7 @@ def archive(queue_root):
         raise ValueError("archive already exists; preserve its original identity")
     support_files = archive_support_files(queue_root)
     members, sources = {}, set()
-    with tarfile.open(destination, "x:gz", dereference=True) as bundle:
+    with tarfile.open(destination, "x:gz", dereference=True, compresslevel=1) as bundle:
         def add_tree(path, prefix):
             if not path.exists():
                 return
@@ -173,11 +173,13 @@ def archive(queue_root):
                     reader = ArchiveReader(stream)
                     bundle.addfile(info, reader)
                 members[name] = {"sha256": reader.digest.hexdigest(), "bytes": reader.bytes}
-        for request, attempt in attempts(queue_root):
+        for index, (request, attempt) in enumerate(attempts(queue_root), 1):
             name = attempt["attempt_id"]; sources.add(request["source"]["digest"])
             add_tree(Path(attempt["path"]), "attempts/" + name)
             add_tree(ROOT / "reports/forge/attempts" / name, "durable/" + name)
             add_tree(queue_root / "queue/requests" / (request["request_id"] + ".json"), "requests/" + request["request_id"] + ".json")
+            if index % 25 == 0:
+                emit("archive_progress", attempts=index, members=len(members))
         for source in sorted(sources):
             add_tree(queue_root / "snapshots" / source, "snapshots/" + source)
         add_tree(queue_root / CAMPAIGN, "campaign/" + CAMPAIGN)

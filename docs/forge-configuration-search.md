@@ -46,6 +46,19 @@ alternative while the recorded incumbent stays selected. Neither that retention
 nor a new standard ranks incompatible sources or changes public defaults.
 Calibration and independent confirmation still govern default adoption.
 
+A `current_measurement` pin can identify an explicitly requested experimental
+starting recipe after all required tasks in its declared measurement views have
+PASS/FAIL outcomes. It retains the complete row, failed gates and previous
+selection; it supplies no configured-standard or default-qualification claim.
+The [BCAP optimizer readout](../reports/forge/dualnorm-tier1/README.md) records
+such a tied starting choice separately from its original search tie-breaks.
+
+For a new family with only unexecuted declarations, the registry may specify
+`unmeasured_display_backend` and `unmeasured_display_reason`. The publisher
+shows its sole canonical row on that backend and keeps every alternative.
+This option rejects measured outcomes, costs, qualification and active searches;
+measured families use ordinary whole-row selection.
+
 ## Declare a search
 
 New search declarations use `schema_version: 2` and supply a finished study

@@ -474,7 +474,18 @@ def test_current_measurement_families_complete_only_their_declared_view_scope():
     pins = {pin["trainer_family"]: pin for pin in selection["selections"]}
     progress = build_progress(root, publication)
     families = {family["id"]: family for family in progress["families"]}
-    assert set(families) == set(pins)
+    unmeasured = {row["trainer_family"] for row in rows
+                  if row["selection"]["selection_kind"] == "unmeasured_declaration"}
+    assert set(families) == set(pins) | unmeasured
+    registry = read_json(root / "configs/forge/trainer-families.json")["families"]
+    assert unmeasured == {family["id"] for family in registry
+                          if family.get("unmeasured_display_backend")}
+    for row in rows:
+        if row["trainer_family"] in unmeasured:
+            assert not row["attempt_ids"] and row["qualified_tier"] == 0
+            assert row["selection"]["qualified"] is False and row["selection"]["default_adoption"] is False
+            assert all(task["status"] in {"UNKNOWN", "BLOCKED", "NOT_RUN"}
+                       for task in row["tasks"] + row.get("nonrequired_tasks", []))
     for name, pin in pins.items():
         if pin["selection_kind"] != "current_measurement":
             continue

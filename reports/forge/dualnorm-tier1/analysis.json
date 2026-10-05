@@ -73164,7 +73164,7 @@
     "superseded_attempt_wall_seconds": 39.83082461357117,
     "superseded_original_attempts": 1
   },
-  "input_digest": "25a8c8378b738d6b0dd9b60f8bb7c2cb910d46850669264afb7c2edd6523689a",
+  "input_digest": "292d820b9bbb0e26ae743a17dd85c6fd7a3c56f8494cc6a7e6507ac81728fa30",
   "input_search_reports": {
     "ada-nsgda": "1f66381ba928146d5548df0a1dcf3290fa5e7970f8a1a5beb894f174c12eb96c",
     "adam": "5d7abd0ac69639352b9715b2d6fb711e480c26bf3cfd2c39f2d7e40b3cbbd8b3",
@@ -75332,23 +75332,29 @@
       }
     }
   ],
-  "plot_candidates": [
+  "original_plot_candidates": [
     "bcap-pure--7806a45c214248cad578989a25ba716a1a5aae053e51a8bd482a3c9e01c234b9",
     "bcap-nsgda-layer--3cca4c69f24887ece2c1e993e1267e46985a8a466798f2a166786668cde3c29b",
     "bcap-dualnorm--41a1d59348a35169d7f75362b00a47a930424037f4dfb4ed879518cf8a08827d",
     "bcap-particle-rownorm-only--4c8ddce0b2146981faddd223759e932343d9a6543b84ff4a7aeae8c1ecb55823"
   ],
-  "plot_selection": "Exact .00425 incumbent Adam control and top three non-Adam arm selections by required PASS count then configuration hash; task metrics are not selection inputs. Swept Adam selection is reported separately.",
+  "plot_candidates": [
+    "bcap-pure--7806a45c214248cad578989a25ba716a1a5aae053e51a8bd482a3c9e01c234b9",
+    "bcap-nsgda-layer--3cca4c69f24887ece2c1e993e1267e46985a8a466798f2a166786668cde3c29b",
+    "bcap-dualnorm--78aa66ae5c32297882274c11f191638f2cd1d79a9be4963349db5ed3d2b9a249",
+    "bcap-particle-rownorm-only--4c8ddce0b2146981faddd223759e932343d9a6543b84ff4a7aeae8c1ecb55823"
+  ],
+  "plot_selection": "Exact .00425 Adam control and the original top three non-Adam arms; dualnorm uses the owner's retrospective tied starting-recipe preference. Original whole-arm PASS/hash selections are retained unchanged.",
   "plots": [
     {
       "candidates": [
         "bcap-pure--7806a45c214248cad578989a25ba716a1a5aae053e51a8bd482a3c9e01c234b9",
         "bcap-nsgda-layer--3cca4c69f24887ece2c1e993e1267e46985a8a466798f2a166786668cde3c29b",
-        "bcap-dualnorm--41a1d59348a35169d7f75362b00a47a930424037f4dfb4ed879518cf8a08827d",
+        "bcap-dualnorm--78aa66ae5c32297882274c11f191638f2cd1d79a9be4963349db5ed3d2b9a249",
         "bcap-particle-rownorm-only--4c8ddce0b2146981faddd223759e932343d9a6543b84ff4a7aeae8c1ecb55823"
       ],
       "path": "gaussian1d_acquisition.png",
-      "sha256": "8ecdced318c0d7265febf744e3bb89f8ed743dace6c8d046c4d5d3beec7fc42e",
+      "sha256": "0ce526bb1814055ab7bd4e8ce2529f83a965cc1315396a4b5d87692e36183f1f",
       "task": "gaussian1d_acquisition",
       "unavailable_candidates": []
     },
@@ -75356,11 +75362,11 @@
       "candidates": [
         "bcap-pure--7806a45c214248cad578989a25ba716a1a5aae053e51a8bd482a3c9e01c234b9",
         "bcap-nsgda-layer--3cca4c69f24887ece2c1e993e1267e46985a8a466798f2a166786668cde3c29b",
-        "bcap-dualnorm--41a1d59348a35169d7f75362b00a47a930424037f4dfb4ed879518cf8a08827d",
+        "bcap-dualnorm--78aa66ae5c32297882274c11f191638f2cd1d79a9be4963349db5ed3d2b9a249",
         "bcap-particle-rownorm-only--4c8ddce0b2146981faddd223759e932343d9a6543b84ff4a7aeae8c1ecb55823"
       ],
       "path": "ring16_acquisition.png",
-      "sha256": "5275fe0324e28913d601c5d1d22a0511ebf9d2b8281a5469fc72e101be0ddcb4",
+      "sha256": "e2b7b112d0a88a08342aca873849c243ebab5972da388b51bf01eb7b83afe81f",
       "task": "ring16_acquisition",
       "unavailable_candidates": []
     },
@@ -75368,11 +75374,11 @@
       "candidates": [
         "bcap-pure--7806a45c214248cad578989a25ba716a1a5aae053e51a8bd482a3c9e01c234b9",
         "bcap-nsgda-layer--3cca4c69f24887ece2c1e993e1267e46985a8a466798f2a166786668cde3c29b",
-        "bcap-dualnorm--41a1d59348a35169d7f75362b00a47a930424037f4dfb4ed879518cf8a08827d",
+        "bcap-dualnorm--78aa66ae5c32297882274c11f191638f2cd1d79a9be4963349db5ed3d2b9a249",
         "bcap-particle-rownorm-only--4c8ddce0b2146981faddd223759e932343d9a6543b84ff4a7aeae8c1ecb55823"
       ],
       "path": "five_word_joint_acquisition.png",
-      "sha256": "8654a3182b2689fce79b30ab24c40a4c1ae76e6beed5d563f851687f94b5caa9",
+      "sha256": "121bc31b8d4e72c065c23fefe0b9aca16ace5ebd78f037f56c6a19910c71a54f",
       "task": "five_word_joint_acquisition",
       "unavailable_candidates": []
     }
@@ -75401,6 +75407,11 @@
   "separate_diagnostic_task": "clockfree_audit_measurement_v1",
   "source_commit": "15eb7cb0911905e401bdfcd7e264945a7ea64d97",
   "source_digest": "c5c60a8018e144c447325f3705dd398d04069a91bb294eaaa76d37084ade67cc",
+  "starter_selection": {
+    "candidate_id": "bcap-dualnorm--78aa66ae5c32297882274c11f191638f2cd1d79a9be4963349db5ed3d2b9a249",
+    "qualification_input": false,
+    "scope": "Retrospective experimental starting point; no default qualification."
+  },
   "status": "complete_execution",
   "step_size_grid_edges": [
     {

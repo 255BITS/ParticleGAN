@@ -19,8 +19,12 @@ spec.loader.exec_module(publication)
 
 def _current_family_roster():
     pins = read_json(ROOT / CURRENT_SELECTION)["selections"]
-    families = {pin["trainer_family"] for pin in pins}
-    assert len(families) == len(pins)
+    pinned = {pin["trainer_family"] for pin in pins}
+    assert len(pinned) == len(pins)
+    registry = read_json(ROOT / "configs/forge/trainer-families.json")["families"]
+    families = {family["id"] for family in registry}
+    unmeasured = {family["id"] for family in registry if family.get("unmeasured_display_backend")}
+    assert families == pinned | unmeasured
     return families
 
 
@@ -1654,10 +1658,17 @@ def test_original_completion_cohorts_rebuild_every_scientific_row_without_raw_lo
     if migration_path.is_file():
         # Replay the immutable original card, including its former measurement
         # metadata; today's contract-drift classification is separate history.
+        migration = read_json(migration_path)
         original_pins = {item["trainer_family"]: item["original_selection"]
-                         for item in read_json(migration_path)["migrations"]}
+                         for item in migration["migrations"]}
         selection["selections"] = [deepcopy(original_pins.get(pin["trainer_family"], pin))
                                    for pin in selection["selections"]]
+        # Remove only the later starter's documented history entry. The two
+        # original release-prior history pins predate this publication and stay.
+        starter_history = migration.get("starter_change", {}).get("retained_history_pin")
+        if starter_history is not None:
+            selection["historical_selections"] = [pin for pin in selection["historical_selections"]
+                                                  if pin != starter_history]
     selection["selections"] = [pin for pin in selection["selections"]
                                if pin["trainer_family"] in original_families]
     atomic_json(tmp_path / CURRENT_SELECTION, selection)

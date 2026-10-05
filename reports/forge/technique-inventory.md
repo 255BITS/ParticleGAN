@@ -27,13 +27,13 @@ Family totals sum the view rows. A shared experiment counts once per view requir
 | ↳ [formulation_comparison](families/bcap-ada-nsgda.md#cohort-cuda-0d83d78027c5-formulation_comparison) | [2/3](families/bcap-ada-nsgda.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-1) | [0(*)/19](families/bcap-ada-nsgda.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) | [0(*)/2](families/bcap-ada-nsgda.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-3) | [2(*)/24](families/bcap-ada-nsgda.md#cohort-cuda-0d83d78027c5-formulation_comparison) |
 | ↳ [host_profile_transfer](families/bcap-ada-nsgda.md#cohort-cuda-0d83d78027c5-host_profile_transfer) | [2/3](families/bcap-ada-nsgda.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-1) | [0(*)/19](families/bcap-ada-nsgda.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) | [0(*)/2](families/bcap-ada-nsgda.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-3) | [2(*)/24](families/bcap-ada-nsgda.md#cohort-cuda-0d83d78027c5-host_profile_transfer) |
 | ↳ [quality_coverage](families/bcap-ada-nsgda.md#cohort-cuda-0d83d78027c5-quality_coverage) | [2/3](families/bcap-ada-nsgda.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-1) | [0(*)/19](families/bcap-ada-nsgda.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | [0/0](families/bcap-ada-nsgda.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-3) | [2(*)/22](families/bcap-ada-nsgda.md#cohort-cuda-0d83d78027c5-quality_coverage) |
-| **[BCAP dualnorm](families/bcap-dualnorm.md)** | **[19/22](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5-tier-1)** | **[0(*)/114](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5-tier-2)** | **[0(*)/14](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5-tier-3)** | **[19(*)/150](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5)** |
-| ↳ [adaptation](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5-adaptation) | [3/3](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5-adaptation-tier-1) | [0(*)/19](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) | [0(*)/1](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5-adaptation-tier-3) | [3(*)/23](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5-adaptation) |
-| ↳ [clockfree_continuous](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5-clockfree_continuous) | [4/4](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1) | [0(*)/19](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) | [0(*)/7](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3) | [4(*)/30](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5-clockfree_continuous) |
+| **[BCAP dualnorm (experimental starting point)](families/bcap-dualnorm.md)** | **[14/22](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5-tier-1)** | **[0(*)/114](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5-tier-2)** | **[0(*)/14](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5-tier-3)** | **[14(*)/150](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5)** |
+| ↳ [adaptation](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5-adaptation) | [2/3](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5-adaptation-tier-1) | [0(*)/19](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) | [0(*)/1](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5-adaptation-tier-3) | [2(*)/23](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5-adaptation) |
+| ↳ [clockfree_continuous](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5-clockfree_continuous) | [3/4](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1) | [0(*)/19](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) | [0(*)/7](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3) | [3(*)/30](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5-clockfree_continuous) |
 | ↳ [discriminator_stability](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5-discriminator_stability) | [3/6](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | [0(*)/19](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) | [0(*)/2](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-3) | [3(*)/27](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5-discriminator_stability) |
-| ↳ [formulation_comparison](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5-formulation_comparison) | [3/3](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-1) | [0(*)/19](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) | [0(*)/2](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-3) | [3(*)/24](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5-formulation_comparison) |
-| ↳ [host_profile_transfer](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5-host_profile_transfer) | [3/3](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-1) | [0(*)/19](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) | [0(*)/2](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-3) | [3(*)/24](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5-host_profile_transfer) |
-| ↳ [quality_coverage](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5-quality_coverage) | [3/3](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-1) | [0(*)/19](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | [0/0](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-3) | [3(*)/22](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5-quality_coverage) |
+| ↳ [formulation_comparison](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5-formulation_comparison) | [2/3](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-1) | [0(*)/19](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) | [0(*)/2](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-3) | [2(*)/24](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5-formulation_comparison) |
+| ↳ [host_profile_transfer](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5-host_profile_transfer) | [2/3](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-1) | [0(*)/19](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) | [0(*)/2](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-3) | [2(*)/24](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5-host_profile_transfer) |
+| ↳ [quality_coverage](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5-quality_coverage) | [2/3](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-1) | [0(*)/19](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | [0/0](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-3) | [2(*)/22](families/bcap-dualnorm.md#cohort-cuda-0d83d78027c5-quality_coverage) |
 | **[BCAP dualnorm_D_only](families/bcap-dualnorm-d-only.md)** | **[13/22](families/bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-tier-1)** | **[0(*)/114](families/bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-tier-2)** | **[0(*)/14](families/bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-tier-3)** | **[13(*)/150](families/bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5)** |
 | ↳ [adaptation](families/bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-adaptation) | [2/3](families/bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-adaptation-tier-1) | [0(*)/19](families/bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) | [0(*)/1](families/bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-adaptation-tier-3) | [2(*)/23](families/bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-adaptation) |
 | ↳ [clockfree_continuous](families/bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-clockfree_continuous) | [3/4](families/bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1) | [0(*)/19](families/bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) | [0(*)/7](families/bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3) | [3(*)/30](families/bcap-dualnorm-d-only.md#cohort-cuda-0d83d78027c5-clockfree_continuous) |
@@ -90,6 +90,13 @@ Family totals sum the view rows. A shared experiment counts once per view requir
 | ↳ [formulation_comparison](families/release07-gan-v3.md#cohort-cuda-0d83d78027c5-formulation_comparison) | [3/3](families/release07-gan-v3.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-1) | [0(*)/19](families/release07-gan-v3.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) | [0(*)/2](families/release07-gan-v3.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-3) | [3(*)/24](families/release07-gan-v3.md#cohort-cuda-0d83d78027c5-formulation_comparison) |
 | ↳ [host_profile_transfer](families/release07-gan-v3.md#cohort-cuda-0d83d78027c5-host_profile_transfer) | [3/3](families/release07-gan-v3.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-1) | [0(*)/19](families/release07-gan-v3.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) | [0(*)/2](families/release07-gan-v3.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-3) | [3(*)/24](families/release07-gan-v3.md#cohort-cuda-0d83d78027c5-host_profile_transfer) |
 | ↳ [quality_coverage](families/release07-gan-v3.md#cohort-cuda-0d83d78027c5-quality_coverage) | [3/3](families/release07-gan-v3.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-1) | [0(*)/19](families/release07-gan-v3.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | [0/0](families/release07-gan-v3.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-3) | [3(*)/22](families/release07-gan-v3.md#cohort-cuda-0d83d78027c5-quality_coverage) |
+| **[Halloween optimizer/loss transfer](families/halloween.md)** | **[0(*)/22](families/halloween.md#cohort-cuda-0d83d78027c5-tier-1)** | **[0(*)/114](families/halloween.md#cohort-cuda-0d83d78027c5-tier-2)** | **[0(*)/14](families/halloween.md#cohort-cuda-0d83d78027c5-tier-3)** | **[0(*)/150](families/halloween.md#cohort-cuda-0d83d78027c5)** |
+| ↳ [adaptation](families/halloween.md#cohort-cuda-0d83d78027c5-adaptation) | [0(*)/3](families/halloween.md#cohort-cuda-0d83d78027c5-adaptation-tier-1) | [0(*)/19](families/halloween.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) | [0(*)/1](families/halloween.md#cohort-cuda-0d83d78027c5-adaptation-tier-3) | [0(*)/23](families/halloween.md#cohort-cuda-0d83d78027c5-adaptation) |
+| ↳ [clockfree_continuous](families/halloween.md#cohort-cuda-0d83d78027c5-clockfree_continuous) | [0(*)/4](families/halloween.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1) | [0(*)/19](families/halloween.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) | [0(*)/7](families/halloween.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3) | [0(*)/30](families/halloween.md#cohort-cuda-0d83d78027c5-clockfree_continuous) |
+| ↳ [discriminator_stability](families/halloween.md#cohort-cuda-0d83d78027c5-discriminator_stability) | [0(*)/6](families/halloween.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | [0(*)/19](families/halloween.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) | [0(*)/2](families/halloween.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-3) | [0(*)/27](families/halloween.md#cohort-cuda-0d83d78027c5-discriminator_stability) |
+| ↳ [formulation_comparison](families/halloween.md#cohort-cuda-0d83d78027c5-formulation_comparison) | [0(*)/3](families/halloween.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-1) | [0(*)/19](families/halloween.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) | [0(*)/2](families/halloween.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-3) | [0(*)/24](families/halloween.md#cohort-cuda-0d83d78027c5-formulation_comparison) |
+| ↳ [host_profile_transfer](families/halloween.md#cohort-cuda-0d83d78027c5-host_profile_transfer) | [0(*)/3](families/halloween.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-1) | [0(*)/19](families/halloween.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) | [0(*)/2](families/halloween.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-3) | [0(*)/24](families/halloween.md#cohort-cuda-0d83d78027c5-host_profile_transfer) |
+| ↳ [quality_coverage](families/halloween.md#cohort-cuda-0d83d78027c5-quality_coverage) | [0(*)/3](families/halloween.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-1) | [0(*)/19](families/halloween.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | [0/0](families/halloween.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-3) | [0(*)/22](families/halloween.md#cohort-cuda-0d83d78027c5-quality_coverage) |
 | **[K3P](families/k3p.md)** | **[19/22](families/k3p.md#cohort-cuda-0d83d78027c5-tier-1)** | **[0(*)/114](families/k3p.md#cohort-cuda-0d83d78027c5-tier-2)** | **[0(*)/14](families/k3p.md#cohort-cuda-0d83d78027c5-tier-3)** | **[19(*)/150](families/k3p.md#cohort-cuda-0d83d78027c5)** |
 | ↳ [adaptation](families/k3p.md#cohort-cuda-0d83d78027c5-adaptation) | [3/3](families/k3p.md#cohort-cuda-0d83d78027c5-adaptation-tier-1) | [0(*)/19](families/k3p.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) | [0(*)/1](families/k3p.md#cohort-cuda-0d83d78027c5-adaptation-tier-3) | [3(*)/23](families/k3p.md#cohort-cuda-0d83d78027c5-adaptation) |
 | ↳ [clockfree_continuous](families/k3p.md#cohort-cuda-0d83d78027c5-clockfree_continuous) | [3/4](families/k3p.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1) | [0(*)/19](families/k3p.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) | [0(*)/7](families/k3p.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3) | [3(*)/30](families/k3p.md#cohort-cuda-0d83d78027c5-clockfree_continuous) |
@@ -172,7 +179,7 @@ Trains a generator against a critic; task-owned auxiliary objectives may also ap
 - [Atlas](families/atlas.md)
 - [BCAP](families/bcap-pure.md)
 - [BCAP ada_nsgda](families/bcap-ada-nsgda.md)
-- [BCAP dualnorm](families/bcap-dualnorm.md)
+- [BCAP dualnorm (experimental starting point)](families/bcap-dualnorm.md)
 - [BCAP dualnorm_D_only](families/bcap-dualnorm-d-only.md)
 - [BCAP nsgda_global](families/bcap-nsgda-global.md)
 - [BCAP nsgda_layer](families/bcap-nsgda-layer.md)
@@ -183,6 +190,7 @@ Trains a generator against a critic; task-owned auxiliary objectives may also ap
 - [GAN v3 release 0.7](families/release07-gan-v3.md)
 - [GAN v3 release 0.7 (MoG)](families/release07-gan-v3-mog.md) (historical cohort)
 - [GAN v3 release 0.7 (cloud)](families/release07-gan-v3-cloud.md) (historical cohort)
+- [Halloween optimizer/loss transfer](families/halloween.md)
 - [K3P](families/k3p.md)
 - [K3P without A2](families/k3p-no-a2.md)
 - [K3P without critic anchor](families/k3p-no-anchor.md)
@@ -199,7 +207,7 @@ Penalizes critic input-gradient norms above a threshold on real and generated in
 
 - [BCAP](families/bcap-pure.md)
 - [BCAP ada_nsgda](families/bcap-ada-nsgda.md)
-- [BCAP dualnorm](families/bcap-dualnorm.md)
+- [BCAP dualnorm (experimental starting point)](families/bcap-dualnorm.md)
 - [BCAP dualnorm_D_only](families/bcap-dualnorm-d-only.md)
 - [BCAP nsgda_global](families/bcap-nsgda-global.md)
 - [BCAP nsgda_layer](families/bcap-nsgda-layer.md)
@@ -217,6 +225,7 @@ Penalizes critic input-gradient norms above a threshold on real and generated in
 Declared baseline uses constant learning rates; resolved per-role rates remain configuration-specific.
 
 - [BCAP](families/bcap-pure.md)
+- [Halloween optimizer/loss transfer](families/halloween.md)
 
 <a name="tag-critic-gradient-penalty"></a>
 
@@ -227,7 +236,7 @@ Uses a penalty on critic input gradients; its formula and strength are configura
 - [Atlas](families/atlas.md)
 - [BCAP](families/bcap-pure.md)
 - [BCAP ada_nsgda](families/bcap-ada-nsgda.md)
-- [BCAP dualnorm](families/bcap-dualnorm.md)
+- [BCAP dualnorm (experimental starting point)](families/bcap-dualnorm.md)
 - [BCAP dualnorm_D_only](families/bcap-dualnorm-d-only.md)
 - [BCAP nsgda_global](families/bcap-nsgda-global.md)
 - [BCAP nsgda_layer](families/bcap-nsgda-layer.md)
@@ -280,7 +289,7 @@ Includes formulation-specific interventions around optimizer steps; availability
 
 - [Atlas](families/atlas.md)
 - [BCAP ada_nsgda](families/bcap-ada-nsgda.md)
-- [BCAP dualnorm](families/bcap-dualnorm.md)
+- [BCAP dualnorm (experimental starting point)](families/bcap-dualnorm.md)
 - [BCAP dualnorm_D_only](families/bcap-dualnorm-d-only.md)
 - [BCAP nsgda_global](families/bcap-nsgda-global.md)
 - [BCAP nsgda_layer](families/bcap-nsgda-layer.md)
@@ -314,6 +323,14 @@ Removes a named mechanism from a parent technique and retains a separate evidenc
 - [K3P without critic penalty](families/k3p-no-penalty.md)
 - [K3P without training output noise](families/k3p-no-training-noise.md)
 
+<a name="tag-tensorflow-v1-adam"></a>
+
+### `tensorflow-v1-adam`
+
+Uses the declared dense TensorFlow-v1 Adam update law with checkpointed application clocks and epsilon before second-moment bias correction.
+
+- [Halloween optimizer/loss transfer](families/halloween.md)
+
 ## Refresh
 
 ```sh
@@ -324,6 +341,6 @@ This regenerates the leaderboard, family pages and experiments-by-tier report fr
 
 [Experiments, criteria and tier assignments](EXPERIMENTS_BY_TIER.md) · [Complete numerical publication and provenance](technique-inventory.json)
 
-Publication input digest `0eb455873bf7da4029a951eeec6ad5eda86c4ae77b8c91e321cc0f265f976169`.
+Publication input digest `fd34897c202746b7e7e24f1fb6a81c6de2583d0f8f3cc6230fa7eacc95d72428`.
 
 [Pure BCAP initial readout](pure-bcap/README.md): five adversarial losses at two constant Adam rates; 3/6 required Tier 1 passes for one selected whole recipe. 109 unique attempts cost 2549.509 paid seconds, counted once across the shared campaign. Executed source cohorts `af75a3fea19aa6e4d1ca2be867b9c50a02931e33`, `44cc66d78495cb913e0ea064840e2de37c8a4ae5`; each candidate keeps its complete cohort. No default adoption.

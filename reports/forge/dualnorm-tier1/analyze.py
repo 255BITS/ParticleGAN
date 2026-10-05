@@ -540,6 +540,31 @@ def analyze(root, artifacts, *, allow_partial=False):
     return report, trace_rows
 
 
+def apply_starter_display(report, starter):
+    """Show the explicit retrospective starter without rewriting grid selection."""
+    candidate = starter["candidate_id"]
+    matches = [row for row in report["configurations"] if row["candidate_id"] == candidate]
+    if len(matches) != 1 or not matches[0]["execution_complete"]:
+        raise ValueError("starter must be one complete measured configuration")
+    selected = matches[0]
+    if (selected["arm"] != "dualnorm-zero" or selected["required_pass_count"] !=
+            max(row["required_pass_count"] for row in report["configurations"])):
+        raise ValueError("starter must be a best-count zero-momentum dualnorm recipe")
+    by_id = {row["candidate_id"]: row for row in report["configurations"]}
+    original = report["plot_candidates"]
+    replacements = [value for value in original if by_id[value]["arm"] == "dualnorm-zero"]
+    if len(replacements) != 1:
+        raise ValueError("expected one original dualnorm plot recipe")
+    report["original_plot_candidates"] = list(original)
+    report["plot_candidates"] = [candidate if value == replacements[0] else value for value in original]
+    report["plot_selection"] = (
+        "Exact .00425 Adam control and the original top three non-Adam arms; "
+        "dualnorm uses the owner's retrospective tied starting-recipe preference. "
+        "Original whole-arm PASS/hash selections are retained unchanged.")
+    report["starter_selection"] = {"candidate_id": candidate, "qualification_input": False,
+                                   "scope": "Retrospective experimental starting point; no default qualification."}
+
+
 def plot_diagnostics(report, traces, output):
     if not report["plot_candidates"]:
         return []
@@ -600,7 +625,9 @@ def plot_diagnostics(report, traces, output):
                 for axis in axes[:, index]:
                     axis.set_ylim(bounds)
         figure.suptitle(task + " — frozen BCAP seed-0 screen", fontsize=12)
-        figure.text(.5, .008, "Top whole recipes by frozen PASS/hash objective; no per-task selection. Spectral proxy excludes Fourier maps/nonlinearities. Input-gradient probes excluded.", ha="center", fontsize=8)
+        caption = ("Original top arms with the owner's tied dualnorm starter; whole recipes, no per-task mixing."
+                   if "starter_selection" in report else "Top whole recipes by frozen PASS/hash objective; no per-task selection.")
+        figure.text(.5, .008, caption + " Spectral proxy excludes Fourier maps/nonlinearities. Input-gradient probes excluded.", ha="center", fontsize=8)
         figure.tight_layout(rect=(0, .025, 1, .96))
         path = output / (task + ".png")
         figure.savefig(path, dpi=140, metadata={"Software": "ParticleGAN BCAP frozen-source diagnostic analysis"})
@@ -620,10 +647,13 @@ def main():
     parser.add_argument("--plot-dir", type=Path, default=ROOT / "reports/forge/dualnorm-tier1/diagnostics")
     parser.add_argument("--allow-partial", action="store_true", help="explicit provisional readout; never imputes pending task outcomes")
     parser.add_argument("--no-plots", action="store_true")
+    parser.add_argument("--starter-selection", type=Path, help="explicit retrospective starting-recipe receipt")
     args = parser.parse_args()
     artifacts = Artifacts(args.root.resolve(), args.queue_root.resolve(), args.archive)
     try:
         report, traces = analyze(args.root.resolve(), artifacts, allow_partial=args.allow_partial)
+        if args.starter_selection:
+            apply_starter_display(report, read_json(args.starter_selection))
         report["plots"] = [] if args.no_plots else plot_diagnostics(report, traces, args.plot_dir)
         report["input_digest"] = stable_hash(report)
         atomic_json(args.output, report)

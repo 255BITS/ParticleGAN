@@ -2,9 +2,9 @@
   "schema_version": 1,
   "kind": "software_verification_receipt",
   "study": "bcap-dualnorm-tier1-v1",
-  "audited_at_utc": "2026-10-05T22:02:57.590922+00:00",
-  "audit_checkout_commit": "c51b1f2b4b6e2fd683d872ebb919d68fdaed93d3",
-  "verdict": "segmented_software_verification_with_publication_checks_pending",
+  "audited_at_utc": "2026-10-05T23:21:18.570963+00:00",
+  "audit_checkout_commit": "08a1cffafbd4adc4c150e09fafd718a186dec534",
+  "verdict": "authorized_targeted_software_and_final_publication_checks_complete_with_stated_limits",
   "scope": "Optimizer/API compatibility, diagnostic invariance and reporting safeguards. This receipt adds no scientific training or qualification.",
   "full_suite_limit": "No single clean full-suite invocation on final HEAD was completed. Runs overlap and used an evolving branch; counts must not be summed into a final-HEAD test total.",
   "artifact_policy": "Only compact counts, scopes, hashes and provenance are committed. Raw stdout/JUnit remain at local ignored paths. Hashes identify the audited bytes and do not imply the files are available in a fresh checkout.",
@@ -113,6 +113,276 @@
       "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-publication-final-source.json",
       "sha256": "7f120a24c65c75eed6e1c99d00034a38bfe0f300a521f0bb4288797ac8a55972",
       "bytes": 1154
+    },
+    "pytest-publication-lineage.log": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-publication-lineage.log",
+      "sha256": "71c393b077cadc4ff99dc80047eed06b119d28cb41e8f202c50c7bf999fe961f",
+      "bytes": 5560
+    },
+    "pytest-publication-lineage.xml": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-publication-lineage.xml",
+      "sha256": "9b758cb48a126a8729491c49ca43d2fa80696e6ec9a432833b2f8f0b58cdfa66",
+      "bytes": 48669
+    },
+    "pytest-publication-lineage-source.json": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-publication-lineage-source.json",
+      "sha256": "3d22b03fa3f0dceeaa18a996c6b336cd5d26192f1ec4d59c17977fe299c0b27c",
+      "bytes": 1827
+    },
+    "pytest-publication-lineage-scoped.log": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-publication-lineage-scoped.log",
+      "sha256": "9b2c92a9e4953e04b9b64ae936ceb9fdca8114bc7921ecb919af525286d5b683",
+      "bytes": 355
+    },
+    "pytest-publication-lineage-scoped.xml": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-publication-lineage-scoped.xml",
+      "sha256": "4cd7ee25c80b049d39cc6ff7b518952e8ac972d58e962df868ae740c70232a89",
+      "bytes": 42779
+    },
+    "pytest-publication-lineage-scoped-source.json": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-publication-lineage-scoped-source.json",
+      "sha256": "8c518fde4559ab500e70afbc0029d9cbf18bc69051dcc601e5ec222acf9e99df",
+      "bytes": 2217
+    },
+    "pytest-publication-lineage-ready.log": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-publication-lineage-ready.log",
+      "sha256": "2a5a483def0df9fd6fa879e2692c46eecb28cf4406eafe00a66d779300e1be51",
+      "bytes": 355
+    },
+    "pytest-publication-lineage-ready.xml": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-publication-lineage-ready.xml",
+      "sha256": "fcd5a6baa6f08203da767e73bda2575511b9e01fd6202d92f6d42af6a924da0f",
+      "bytes": 42947
+    },
+    "pytest-publication-lineage-ready-source.json": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-publication-lineage-ready-source.json",
+      "sha256": "a78464a4e6ef93be116e97136f63796ad6b1ae8818efbc3ece1358690aeab332",
+      "bytes": 2041
+    },
+    "pytest-family-presentation.log": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-family-presentation.log",
+      "sha256": "641b8362751967cdd272cdf3eec3d00c903d16a9413dfdfbfa3f1fb0d9112e8b",
+      "bytes": 99
+    },
+    "pytest-family-presentation.xml": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-family-presentation.xml",
+      "sha256": "a7ad12114a46498293c5bb28fb68db2efddfc3540b7d7906d130921d08353b8f",
+      "bytes": 7534
+    },
+    "pytest-family-presentation-source.json": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-family-presentation-source.json",
+      "sha256": "12ea4103f63be7aa73c8d0c95f93e9ad9add9417456e922fc47031c089fd6685",
+      "bytes": 1211
+    },
+    "pytest-final-publication-freshness.log": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-final-publication-freshness.log",
+      "sha256": "aa62f52aa9973c6a7abbc681b5f8913d082dfdf04413c2c3c3ad857412c8d9c5",
+      "bytes": 98
+    },
+    "pytest-final-publication-freshness.xml": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-final-publication-freshness.xml",
+      "sha256": "d686820873168547b4e2c8f116e5b582b264135f378bca7ee0880e6ac10db66f",
+      "bytes": 857
+    },
+    "pytest-final-publication-freshness-source.json": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-final-publication-freshness-source.json",
+      "sha256": "3995969b03a9c602f5bc561b7ce6672997d0e4d676273444699f0eef4dff1823",
+      "bytes": 1803
+    },
+    "publication-lineage-probe.json": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/publication-lineage-probe.json",
+      "sha256": "43bc579f158bccbbe52f20017c6340e916a2651e4f911282749e3dbbfc3a5703",
+      "bytes": 1997
+    },
+    "family-presentation-doc-coverage.json": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/family-presentation-doc-coverage.json",
+      "sha256": "555e153f7f77b3bdd6a66e11f6d9815889fb8265156399502ad7feebfe693517",
+      "bytes": 60128
+    },
+    "compile-check.log": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/compile-check.log",
+      "sha256": "283b4e7749753a4e7d9e23f2218a05af1d050be6beb995c8eb718060a5948d75",
+      "bytes": 954
+    },
+    "compile-summaries.log": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/compile-summaries.log",
+      "sha256": "8f3189c59f1f58d47e17a1038edc52ff7ced8f9d014c70e6cb6556da013f8a87",
+      "bytes": 813
+    },
+    "validate-publication-final.log": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/validate-publication-final.log",
+      "sha256": "cc5fc079f98b30aeee0c6185c832a4394313aa20c83e6b1ef9b846d860f0bef1",
+      "bytes": 442
+    },
+    "pytest-merge-optimizer.log": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-merge-optimizer.log",
+      "sha256": "c57ff26ac8de43c7cc0b1a118bb4c1eec941acddfe4611a64a0e44f34b6dc85e",
+      "bytes": 2293
+    },
+    "pytest-merge-optimizer.xml": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-merge-optimizer.xml",
+      "sha256": "a684f8a7a4a83e47099135dc1897053153c8c65ab490a3becb2e29c24db4b78b",
+      "bytes": 33265
+    },
+    "pytest-merge-optimizer-source.json": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-merge-optimizer-source.json",
+      "sha256": "0fd6bd027cca9b5adbe789a169306af4be93b41064900697e29519b8c128dad0",
+      "bytes": 1473
+    },
+    "pytest-merge-optimizer-final.log": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-merge-optimizer-final.log",
+      "sha256": "8eda86c8e2b622a6012452af12db86e78f6aeab1d7abbb6ea0b61ed707ef4e68",
+      "bytes": 260
+    },
+    "pytest-merge-optimizer-final.xml": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-merge-optimizer-final.xml",
+      "sha256": "3ced71cd8da928011ad8cc9094657abeefad7af0bb19ace52adea6179ee31c33",
+      "bytes": 31446
+    },
+    "pytest-merge-optimizer-final-source.json": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-merge-optimizer-final-source.json",
+      "sha256": "5c16c669bba720805412dd6990bbf861ccfd2e7881fb00bb12c91cbcb002a1d3",
+      "bytes": 1473
+    },
+    "pytest-postmerge-compatibility.log": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-postmerge-compatibility.log",
+      "sha256": "9b41e996ebc23d8193ba614f7db91fb0df8b0a385ac083d8f700afdf0cf84344",
+      "bytes": 341
+    },
+    "pytest-postmerge-compatibility.xml": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-postmerge-compatibility.xml",
+      "sha256": "837a4ebdb1b3882f320400e8cca306fb5328f2e51624afe37fcf590e2eea26fd",
+      "bytes": 31805
+    },
+    "pytest-postmerge-compatibility-source.json": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-postmerge-compatibility-source.json",
+      "sha256": "f5f6e5bb42ce75de884ad411f113110912ccee32274a3ba5d00ebe7a380d779b",
+      "bytes": 16482
+    },
+    "pytest-starter-selection.log": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-starter-selection.log",
+      "sha256": "9f39cddcde6d5038bc8db373a34293a3515b328cecc2daba891c67c410dc2cb2",
+      "bytes": 99
+    },
+    "pytest-starter-selection.xml": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-starter-selection.xml",
+      "sha256": "7b4ec71293a0570e322475ab41073d40b50a0d1406cdbfa90b5764cde98a40d1",
+      "bytes": 1888
+    },
+    "pytest-starter-selection-source.json": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-starter-selection-source.json",
+      "sha256": "ec9d874611db8a93d115ef4cab8b7c05d35b52565ad399c7cc1a51bdd8f76eb3",
+      "bytes": 1724
+    },
+    "publication-starter-selection.log": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/publication-starter-selection.log",
+      "sha256": "d86bc3da6dac6762867bd4c918e6dae5320ad9b7bc87443cc4f1060f2f55eeed",
+      "bytes": 29526
+    },
+    "pytest-unmeasured-family-guard.log": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-unmeasured-family-guard.log",
+      "sha256": "2c20b191ddb91c0dac9da8774af45d85e5d6ddfff5b5a06b3c470ea8fa93e9c4",
+      "bytes": 179
+    },
+    "pytest-unmeasured-family-guard.xml": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-unmeasured-family-guard.xml",
+      "sha256": "a2fde9e46655a2f0066c8a063f8775f08f64660649d382504a783bcba3b519e4",
+      "bytes": 11376
+    },
+    "pytest-unmeasured-family-guard-source.json": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-unmeasured-family-guard-source.json",
+      "sha256": "2886b85818feac92a3d7e40cf228a266ad3b6ef5bb426afac27e808aa68eeb4e",
+      "bytes": 444
+    },
+    "pytest-starter-single-row.log": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-starter-single-row.log",
+      "sha256": "9f39cddcde6d5038bc8db373a34293a3515b328cecc2daba891c67c410dc2cb2",
+      "bytes": 99
+    },
+    "pytest-starter-single-row.xml": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-starter-single-row.xml",
+      "sha256": "a241e60bb7171d789f4c4b71f1958afc13024014ac8bd823c2fc1e21592a65a4",
+      "bytes": 1888
+    },
+    "pytest-starter-single-row-source.json": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-starter-single-row-source.json",
+      "sha256": "c8d99efd4690e67f8d5da22bddf6b90efda65d76ab98838c190bd2c7d7c2bd27",
+      "bytes": 1839
+    },
+    "publication-starter-selection-single-row.log": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/publication-starter-selection-single-row.log",
+      "sha256": "5d11656aa7126855a8bbd01549dc1c3c5d340f918447ccb431ea3356e507bc54",
+      "bytes": 28074
+    },
+    "publication-postmerge-starter.log": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/publication-postmerge-starter.log",
+      "sha256": "e196cd8b32a2acea4f0596ec1bfef030d4035c8999668869fe83659391828d26",
+      "bytes": 990
+    },
+    "publication-postmerge-starter-final.log": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/publication-postmerge-starter-final.log",
+      "sha256": "3c5f84d2b1b11fd9b93879851053db4f1b00aec480dc9499c8885597aff852ae",
+      "bytes": 922
+    },
+    "inventory-postmerge-starter.json": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/inventory-postmerge-starter.json",
+      "sha256": "57f39793a7c10229cc6c7d30ce5f61f62c35c0d1a38661a324eec3984dd2ba29",
+      "bytes": 215
+    },
+    "validate-postmerge-starter.log": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/validate-postmerge-starter.log",
+      "sha256": "d3afa0c7ae8a3c310b0d4b9f8d37eda302f1f96f2ff476a4022af4f72ca66724",
+      "bytes": 442
+    },
+    "pytest-postmerge-publication.log": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-postmerge-publication.log",
+      "sha256": "e5d1f117280e61f9f04962e39ce3b7e29cbcb12e16c7c749da2e028b1a44fb06",
+      "bytes": 5705
+    },
+    "pytest-postmerge-publication.xml": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-postmerge-publication.xml",
+      "sha256": "7a7d767343434c607cbd58465c5d01e0f9ef900274bfa69ae5bebc290c752fd6",
+      "bytes": 53495
+    },
+    "pytest-postmerge-publication-source.json": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-postmerge-publication-source.json",
+      "sha256": "874f455ceb8b1eb7c8ee78c3d4e21862707fd6a498b278e5eecdfab9ac78c862",
+      "bytes": 1764
+    },
+    "pytest-postmerge-publication-repaired.log": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-postmerge-publication-repaired.log",
+      "sha256": "189d0d7aaa582ae157f03822937d7bd95fe19da8175b1325c4eef1f2333badd1",
+      "bytes": 98
+    },
+    "pytest-postmerge-publication-repaired.xml": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-postmerge-publication-repaired.xml",
+      "sha256": "487cf7507a015b40d08118fdc6667a25d0020dad5759d58af772796d96e4b395",
+      "bytes": 1197
+    },
+    "pytest-postmerge-publication-repaired-source.json": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-postmerge-publication-repaired-source.json",
+      "sha256": "f2e3627dd484e543e756d3e70e7a01856f3fe4111af1db7e8cf1f558aeb7b360",
+      "bytes": 1783
+    },
+    "publication-postmerge-starter-complete.log": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/publication-postmerge-starter-complete.log",
+      "sha256": "730ac1b27bd2d4d2b33cb28fc5d2aa92bda7f29d73964a0979ad15989ac08e58",
+      "bytes": 276
+    },
+    "publication-postmerge-starter-probe.json": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/publication-postmerge-starter-probe.json",
+      "sha256": "bb94e467295955867cb5fe08188f0294cd03264b04e3023911cc13d22ceca0c0",
+      "bytes": 1947
+    },
+    "compile-summaries-postmerge-starter.log": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/compile-summaries-postmerge-starter.log",
+      "sha256": "18cc7197fd106bf799afcaa5abfd8d8f9cf13eb33779c359cdd53643dadd2e53",
+      "bytes": 756
+    },
+    "compile-check-postmerge-starter.log": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/compile-check-postmerge-starter.log",
+      "sha256": "f83a221b3173c46dc34b49e226c6001d12f688e028f91e3c38e69792fc090bd7",
+      "bytes": 897
     }
   },
   "runs": [
@@ -137,7 +407,7 @@
         {
           "node": "tests/test_forge_publication_memory.py::test_committed_research_memory_is_fresh_without_raw_log_hydration",
           "classification": "publication_freshness",
-          "status": "pending_final_publication"
+          "status": "passed_final_publication_freshness"
         },
         {
           "node": "tests/test_gym_lander_live.py::test_http_steps_once_stops_at_end_and_reset_invalidates_stale_commands",
@@ -297,6 +567,493 @@
       },
       "source_limit": "Focused pre-run source record covers the publication generator and selected test files on a dirty branch, not the entire repository or environment. This software run adds no training, checkpoint continuation or scientific qualification.",
       "overlap_limit": "Overlaps the earlier current-technique-inventory134 run and its focused4 controls. Counts are recorded per invocation and never added into unique coverage."
+    },
+    {
+      "id": "publication_lineage_initial",
+      "evidence": [
+        "pytest-publication-lineage.log",
+        "pytest-publication-lineage.xml",
+        "pytest-publication-lineage-source.json"
+      ],
+      "command": "python -m pytest -q tests/test_forge_current_technique_inventory.py tests/test_forge_technique_exports.py tests/test_forge_family_reports.py tests/test_forge_trainer_families.py tests/test_forge_technique_composition.py --junitxml=runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-publication-lineage.xml",
+      "counts": {
+        "passed": 266,
+        "failed": 2
+      },
+      "elapsed_seconds": 18.68,
+      "junit": {
+        "tests": 268,
+        "errors": 0,
+        "failures": 2,
+        "skipped": 0,
+        "elapsed_seconds": 18.603
+      },
+      "scope": "Certified compact retry projection and strict publication/family guards, before publication and original-selection fixture repair.",
+      "source": {
+        "capture_phase": "pre_run",
+        "checkout_base_commit": "c51b1f2b4b6e2fd683d872ebb919d68fdaed93d3",
+        "source_record": "pytest-publication-lineage-source.json"
+      },
+      "source_limit": "Focused source record binds the selected dirty working-tree bytes, not a full repository/environment snapshot; no scientific training was added.",
+      "overlap_limit": "Selected files overlap earlier publication runs. Counts remain per invocation and are never summed into unique or full-suite coverage.",
+      "failures": [
+        {
+          "node": "tests/test_forge_current_technique_inventory.py::test_original_completion_cohorts_rebuild_every_scientific_row_without_raw_logs",
+          "classification": "migrated_original_selection_replay_fixture",
+          "status": "resolved_in_lineage_ready_and_final_freshness",
+          "resolution": "Replay now uses the migration receipt original_selection and retains the exact old selection_sha256 assertion; no guard relaxation."
+        },
+        {
+          "node": "tests/test_forge_family_reports.py::test_committed_pages_and_every_drilldown_link_match_the_generator",
+          "classification": "publication_freshness",
+          "status": "passed_final_publication_freshness"
+        }
+      ],
+      "source_window": "pre_merge_dirty_c51; exact focused file hashes retained"
+    },
+    {
+      "id": "publication_lineage_scoped",
+      "evidence": [
+        "pytest-publication-lineage-scoped.log",
+        "pytest-publication-lineage-scoped.xml",
+        "pytest-publication-lineage-scoped-source.json"
+      ],
+      "command": "python -m pytest -q tests/test_forge_current_technique_inventory.py tests/test_forge_technique_exports.py tests/test_forge_family_reports.py tests/test_forge_trainer_families.py tests/test_forge_technique_composition.py -k 'not test_original_completion_cohorts_rebuild_every_scientific_row_without_raw_logs and not test_committed_pages_and_every_drilldown_link_match_the_generator' --junitxml=runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-publication-lineage-scoped.xml",
+      "counts": {
+        "passed": 267,
+        "failed": 0,
+        "deselected": 2
+      },
+      "elapsed_seconds": 19.1,
+      "junit": {
+        "tests": 267,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "elapsed_seconds": 19.09
+      },
+      "scope": "Retry publication guards with original-completion replay and committed-page freshness explicitly deselected.",
+      "source": {
+        "capture_phase": "pre_run",
+        "checkout_base_commit": "c51b1f2b4b6e2fd683d872ebb919d68fdaed93d3",
+        "source_record": "pytest-publication-lineage-scoped-source.json"
+      },
+      "source_limit": "Focused source record binds the selected dirty working-tree bytes, not a full repository/environment snapshot; no scientific training was added.",
+      "overlap_limit": "Selected files overlap earlier publication runs. Counts remain per invocation and are never summed into unique or full-suite coverage.",
+      "excluded_nodes": [
+        "test_original_completion_cohorts_rebuild_every_scientific_row_without_raw_logs",
+        "test_committed_pages_and_every_drilldown_link_match_the_generator"
+      ],
+      "source_window": "pre_merge_dirty_c51; exact focused file hashes retained"
+    },
+    {
+      "id": "publication_lineage_ready",
+      "evidence": [
+        "pytest-publication-lineage-ready.log",
+        "pytest-publication-lineage-ready.xml",
+        "pytest-publication-lineage-ready-source.json"
+      ],
+      "command": "python -m pytest -q tests/test_forge_current_technique_inventory.py tests/test_forge_technique_exports.py tests/test_forge_family_reports.py tests/test_forge_trainer_families.py tests/test_forge_technique_composition.py -k 'not test_committed_pages_and_every_drilldown_link_match_the_generator' --junitxml=runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-publication-lineage-ready.xml",
+      "counts": {
+        "passed": 268,
+        "failed": 0,
+        "deselected": 1
+      },
+      "elapsed_seconds": 22.74,
+      "junit": {
+        "tests": 268,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "elapsed_seconds": 22.48
+      },
+      "scope": "Retry publication/family guards and corrected original-completion replay; committed-page freshness alone excluded until publication.",
+      "source": {
+        "capture_phase": "pre_run",
+        "checkout_base_commit": "c51b1f2b4b6e2fd683d872ebb919d68fdaed93d3",
+        "source_record": "pytest-publication-lineage-ready-source.json"
+      },
+      "source_limit": "Focused source record binds the selected dirty working-tree bytes, not a full repository/environment snapshot; no scientific training was added.",
+      "overlap_limit": "Selected files overlap earlier publication runs. Counts remain per invocation and are never summed into unique or full-suite coverage.",
+      "excluded_nodes": [
+        "test_committed_pages_and_every_drilldown_link_match_the_generator"
+      ],
+      "controls": [
+        "Certified compact retry projection preserves the exact canonical result-hash link and successor; raw original receipts remain unchanged.",
+        "Strict family projection verifies retry lineage and keeps unknown outside-scope task cells visible.",
+        "Original aggregate completeness and new family pins declared six-task measurement views are checked separately, preserving original selection identity."
+      ],
+      "source_window": "pre_merge_dirty_c51; exact focused file hashes retained"
+    },
+    {
+      "id": "current_family_presentation",
+      "evidence": [
+        "pytest-family-presentation.log",
+        "pytest-family-presentation.xml",
+        "pytest-family-presentation-source.json"
+      ],
+      "command": "python -m pytest -q tests/test_forge_trainer_families.py --junitxml=runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-family-presentation.xml",
+      "counts": {
+        "passed": 49,
+        "failed": 0
+      },
+      "elapsed_seconds": 4.66,
+      "junit": {
+        "tests": 49,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "elapsed_seconds": 4.432
+      },
+      "scope": "Current family presentation metadata; explicit current alias maps to BCAP pure while historical candidate-family identity remains unchanged.",
+      "source": {
+        "capture_phase": "pre_run",
+        "checkout_base_commit": "c51b1f2b4b6e2fd683d872ebb919d68fdaed93d3",
+        "source_record": "pytest-family-presentation-source.json"
+      },
+      "source_limit": "Focused source record binds the selected dirty working-tree bytes, not a full repository/environment snapshot; no scientific training was added.",
+      "overlap_limit": "Selected files overlap earlier publication runs. Counts remain per invocation and are never summed into unique or full-suite coverage.",
+      "controls": [
+        "Current-presentation True maps bcap-pure-adam-example-v3 to bcap-pure; False retains its original independently classified family. Canonical v2/member list and historical semantics remain unchanged."
+      ],
+      "source_window": "pre_merge_dirty_c51; exact focused file hashes retained"
+    },
+    {
+      "id": "final_publication_freshness",
+      "evidence": [
+        "pytest-final-publication-freshness.log",
+        "pytest-final-publication-freshness.xml",
+        "pytest-final-publication-freshness-source.json"
+      ],
+      "command": ".venv/bin/python -m pytest -q tests/test_forge_family_reports.py::test_committed_pages_and_every_drilldown_link_match_the_generator tests/test_forge_family_reports.py::test_all_current_non_policy_families_have_executed_tier1_without_new_qualification tests/test_forge_publication_memory.py::test_committed_research_memory_is_fresh_without_raw_log_hydration tests/test_forge_current_technique_inventory.py::test_original_completion_cohorts_rebuild_every_scientific_row_without_raw_logs --junitxml=runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-final-publication-freshness.xml",
+      "counts": {
+        "passed": 4,
+        "failed": 0
+      },
+      "elapsed_seconds": 7.25,
+      "junit": {
+        "tests": 4,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "elapsed_seconds": 7.231
+      },
+      "scope": "Final page/drilldown freshness, scoped family measurements, research-memory freshness without raw hydration, and exact original completion replay.",
+      "source": {
+        "capture_phase": "focused_file_hash_record",
+        "checkout_base_commit": "c51b1f2b4b6e2fd683d872ebb919d68fdaed93d3",
+        "source_record": "pytest-final-publication-freshness-source.json",
+        "source_tree": "dirty final publication; focused files_sha256 recorded before the final checks",
+        "post_run_hashes": "Historical source/publication file hashes were recorded before the final pre-merge checks. The in-progress develop merge is outside this source window."
+      },
+      "source_limit": "Focused source record binds the selected dirty working-tree bytes, not a full repository/environment snapshot; no scientific training was added.",
+      "overlap_limit": "Selected files overlap earlier publication runs. Counts remain per invocation and are never summed into unique or full-suite coverage.",
+      "nodes": [
+        "tests/test_forge_family_reports.py::test_committed_pages_and_every_drilldown_link_match_the_generator",
+        "tests/test_forge_family_reports.py::test_all_current_non_policy_families_have_executed_tier1_without_new_qualification",
+        "tests/test_forge_publication_memory.py::test_committed_research_memory_is_fresh_without_raw_log_hydration",
+        "tests/test_forge_current_technique_inventory.py::test_original_completion_cohorts_rebuild_every_scientific_row_without_raw_logs"
+      ],
+      "command_limit": "Node list is verified from JUnit; this command is a reproduction form. The retained final source record does not store the original shell command.",
+      "source_window": "pre_merge_dirty_c51; exact focused file hashes retained"
+    },
+    {
+      "id": "merge_optimizer_initial",
+      "evidence": [
+        "pytest-merge-optimizer.log",
+        "pytest-merge-optimizer.xml",
+        "pytest-merge-optimizer-source.json"
+      ],
+      "command": ".venv/bin/python -m pytest -q tests/test_dualnorm_optimizers.py tests/test_halloween_recipe.py tests/test_forge_hostprofiles.py tests/test_forge_trainer_families.py --junitxml=runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-merge-optimizer.xml",
+      "counts": {
+        "passed": 199,
+        "failed": 1
+      },
+      "elapsed_seconds": 7.03,
+      "junit": {
+        "tests": 200,
+        "errors": 0,
+        "failures": 1,
+        "skipped": 0,
+        "elapsed_seconds": 6.791
+      },
+      "scope": "Merged optimizer support, upstream Halloween recipe, frozen hostprofile identities and current family resolver.",
+      "source_record": "pytest-merge-optimizer-source.json",
+      "source_window": "Merged optimizer implementation; focused working-tree hashes retained. No scientific training added.",
+      "source_limit": "Focused source hashes bind the selected implementation/test files; not a complete transitive environment snapshot.",
+      "overlap_limit": "Per-invocation counts overlap other selected files and are never summed into unique/full-suite coverage.",
+      "command_limit": "Selected files reported by optimizer_api; command is a reproduction form because retained source record omits original shell command.",
+      "failure": {
+        "node": "tests/test_dualnorm_optimizers.py::test_standardized_role_hyperparameters_reach_normalized_and_native_hybrid_groups[dualnorm_D_only]",
+        "classification": "test_fixture_exact_float_literal",
+        "status": "passed_merge_optimizer_final",
+        "resolution": "Expected native LR now uses .00425*3, matching existing multiplication rounding. No optimizer implementation change was required by this failure."
+      }
+    },
+    {
+      "id": "merge_optimizer_final",
+      "evidence": [
+        "pytest-merge-optimizer-final.log",
+        "pytest-merge-optimizer-final.xml",
+        "pytest-merge-optimizer-final-source.json"
+      ],
+      "command": ".venv/bin/python -m pytest -q tests/test_dualnorm_optimizers.py tests/test_halloween_recipe.py tests/test_forge_hostprofiles.py tests/test_forge_trainer_families.py --junitxml=runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-merge-optimizer-final.xml",
+      "counts": {
+        "passed": 200,
+        "failed": 0
+      },
+      "elapsed_seconds": 6.54,
+      "junit": {
+        "tests": 200,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "elapsed_seconds": 6.365
+      },
+      "scope": "Four-file merged optimizer/API compatibility after correcting the float fixture.",
+      "source_record": "pytest-merge-optimizer-final-source.json",
+      "source_window": "Merged optimizer implementation; focused working-tree hashes retained. No scientific training added.",
+      "source_limit": "Focused source hashes bind the selected implementation/test files; not a complete transitive environment snapshot.",
+      "overlap_limit": "Per-invocation counts overlap other selected files and are never summed into unique/full-suite coverage.",
+      "command_limit": "Selected files reported by optimizer_api; command is a reproduction form because retained source record omits original shell command.",
+      "source_hash_audit": "All13 focused source/test file hashes still equal the retained pre-run fingerprint."
+    },
+    {
+      "id": "postmerge_compatibility",
+      "evidence": [
+        "pytest-postmerge-compatibility.log",
+        "pytest-postmerge-compatibility.xml",
+        "pytest-postmerge-compatibility-source.json"
+      ],
+      "command": ".venv/bin/python -m pytest -q tests/test_recipe_defaults.py tests/test_recipe_schedules.py tests/test_legacy_recipe_schedule.py tests/test_pure_bcap_recipe.py tests/test_pure_bcap_joint.py tests/test_forge_configuration_search.py tests/test_forge_search_space.py tests/test_forge_optimizer_diagnostics.py tests/test_bcap_optimizer_analysis.py tests/test_bcap_optimizer_starter_selection.py tests/test_training.py --junitxml=runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-postmerge-compatibility.xml",
+      "counts": {
+        "passed": 217,
+        "failed": 0
+      },
+      "elapsed_seconds": 10.62,
+      "junit": {
+        "tests": 217,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "elapsed_seconds": 10.598
+      },
+      "scope": "Eleven requested files: recipe defaults/schedules/legacy serialization, fixed pure BCAP and joint hosts, Forge configuration/search-space, actual API diagnostic invariance, analysis and tied starter selection, plus public trainer/checkpoint tests.",
+      "source_record": "pytest-postmerge-compatibility-source.json",
+      "source_window": "Merged optimizer implementation; focused working-tree hashes retained. No scientific training added.",
+      "source_limit": "Focused source hashes bind the selected implementation/test files; not a complete transitive environment snapshot.",
+      "overlap_limit": "Per-invocation counts overlap other selected files and are never summed into unique/full-suite coverage.",
+      "source_hash_audit": {
+        "capture_phase": "pre_run",
+        "checkout_commit": "08a1cffafbd4adc4c150e09fafd718a186dec534",
+        "source_file_count": 132,
+        "changed_through_run": []
+      },
+      "coverage_note": "No skipped tests in this targeted invocation; it does not rerun the earlier full-suite CUDA/opt-in skipped cohorts or qualify scientific results."
+    },
+    {
+      "id": "explicit_tied_starter_selection",
+      "evidence": [
+        "pytest-starter-selection.log",
+        "pytest-starter-selection.xml",
+        "pytest-starter-selection-source.json"
+      ],
+      "command": ".venv/bin/python -m pytest -q tests/test_bcap_optimizer_starter_selection.py --junitxml=runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-starter-selection.xml",
+      "counts": {
+        "passed": 10,
+        "failed": 0
+      },
+      "elapsed_seconds": 0.13,
+      "junit": {
+        "tests": 10,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "elapsed_seconds": 0.126
+      },
+      "scope": "Reporting-only optional starter selection preserves the original scientific ranking, measured-cell requirements and exact requested dualnorm recipe.",
+      "source_record": "pytest-starter-selection-source.json",
+      "source_window": "Focused post-run source record; helper/test unchanged between execution and capture as reported by forge_study. Overlaps the same ten tests in postmerge_compatibility.",
+      "source_limit": "Source hashes were captured after the retained ten-test run. This is a focused post-run record, not a complete environment or contemporaneous transitive manifest. The helper/test source was not edited between that run and this record. No scientific training executed.",
+      "overlap_limit": "Per-invocation counts overlap other selected files and are never summed into unique/full-suite coverage.",
+      "proposal_evidence": [
+        "publication-starter-selection.log"
+      ],
+      "proposal_audit": "The earlier parsed proposal matched the installed card at that audit; it is an intermediate reporting version superseded by final_single_row_starter_display. Original raw logs remain unchanged.",
+      "superseded_reporting_version": "final_single_row_starter_display"
+    },
+    {
+      "id": "declaration_only_unmeasured_family_guard",
+      "evidence": [
+        "pytest-unmeasured-family-guard.log",
+        "pytest-unmeasured-family-guard.xml",
+        "pytest-unmeasured-family-guard-source.json"
+      ],
+      "command": "python -m pytest -q tests/test_forge_trainer_families.py --junitxml=runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-unmeasured-family-guard.xml",
+      "counts": {
+        "passed": 73,
+        "failed": 0
+      },
+      "elapsed_seconds": 6.44,
+      "junit": {
+        "tests": 73,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "elapsed_seconds": 6.247
+      },
+      "scope": "Explicit backend display choice applies only to wholly unmeasured declaration rows; measured, mixed, attempted, cost-bearing and qualified alternatives retain strict whole-row selection guards.",
+      "source_record": "pytest-unmeasured-family-guard-source.json",
+      "source_window": "Postmerge reporting-helper changes; selected source fingerprint retained.",
+      "source_limit": "Focused three-file pre-run fingerprint, not a complete environment/transitive manifest.",
+      "overlap_limit": "Overlaps earlier selected-file runs; counts are never summed into unique or full-suite coverage.",
+      "source_hash_audit": "All three prehashed guard/test/registry files remain unchanged.",
+      "controls": [
+        "Declaration-only backend selection preserves every alternative science hash and uses no active search.",
+        "Aggregate INCOMPLETE is permitted only when every task is UNKNOWN/BLOCKED/NOT_RUN with no attempts, cost or tier passes; this matches qualification aggregation for a wholly NOT_RUN row.",
+        "No measured evidence, runtime selection, original receipt or training execution is changed."
+      ]
+    },
+    {
+      "id": "final_single_row_starter_display",
+      "evidence": [
+        "pytest-starter-single-row.log",
+        "pytest-starter-single-row.xml",
+        "pytest-starter-single-row-source.json"
+      ],
+      "command": [
+        "/home/martyn/dev/ParticleGAN/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "tests/test_bcap_optimizer_starter_selection.py",
+        "--junitxml=/home/martyn/dev/ParticleGAN/runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-starter-single-row.xml"
+      ],
+      "counts": {
+        "passed": 10,
+        "failed": 0
+      },
+      "elapsed_seconds": 0.13,
+      "junit": {
+        "tests": 10,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "elapsed_seconds": 0.126
+      },
+      "scope": "Final optional starter display keeps one current dualnorm row; former tied selection remains compact historical provenance and is not pooled into current family progress.",
+      "source_record": "pytest-starter-single-row-source.json",
+      "source_window": "Postmerge reporting-helper changes; selected source fingerprint retained.",
+      "source_limit": "Focused helper/test/direct imported selection-module hashes, not a complete environment or transitive manifest.",
+      "overlap_limit": "Overlaps earlier selected-file runs; counts are never summed into unique or full-suite coverage.",
+      "source_hash_audit": "Selected five-file before/after fingerprints are equal and still match the audited files.",
+      "proposal_evidence": [
+        "publication-starter-selection-single-row.log"
+      ],
+      "proposal_audit": "Parsed idempotent proposal equals installed card with nineteen current selections and two compact-only history entries. Original scientific/search results are preserved."
+    },
+    {
+      "id": "final_postmerge_publication_initial",
+      "evidence": [
+        "pytest-postmerge-publication.log",
+        "pytest-postmerge-publication.xml",
+        "pytest-postmerge-publication-source.json"
+      ],
+      "counts": {
+        "passed": 297,
+        "failed": 4
+      },
+      "elapsed_seconds": 77.02,
+      "junit": {
+        "tests": 301,
+        "failures": 4,
+        "errors": 0,
+        "skipped": 0,
+        "elapsed_seconds": 76.829
+      },
+      "selected_files": [
+        "tests/test_forge_current_technique_inventory.py",
+        "tests/test_forge_family_reports.py",
+        "tests/test_forge_publication_memory.py",
+        "tests/test_forge_technique_exports.py",
+        "tests/test_forge_trainer_families.py"
+      ],
+      "source_record": "pytest-postmerge-publication-source.json",
+      "source_window": "Final postmerge reporting/publication working-tree hashes; thirteen-file pre-run record retained.",
+      "source_limit": "Focused hashes cover source, selected tests, registry, selection and generated publication bytes; not a full environment or repository snapshot. The manifest does not record original shell command.",
+      "overlap_limit": "Per-invocation counts overlap earlier suites; never summed into unique coverage or a clean final-HEAD full-suite claim.",
+      "scope": "Final publication suite: measured/current view law, family rendering/export, documentation, guards, original completion replay and memory freshness. Four expected-roster assertions needed to account for the explicit wholly unmeasured Halloween declaration.",
+      "failures": [
+        {
+          "node": "tests/test_forge_family_reports.py::test_current_measurement_families_complete_only_their_declared_view_scope",
+          "classification": "test_fixture_expected_roster_omitted_unmeasured_declaration",
+          "status": "passed_final_postmerge_publication_repaired"
+        },
+        {
+          "node": "tests/test_forge_current_technique_inventory.py::test_committed_atlas_progress_display_matches_its_generator_without_raw_evidence",
+          "classification": "test_fixture_expected_roster_omitted_unmeasured_declaration",
+          "status": "passed_final_postmerge_publication_repaired"
+        },
+        {
+          "node": "tests/test_forge_current_technique_inventory.py::test_one_visible_table_keeps_solution_families_with_view_breakdowns_and_separate_evidence",
+          "classification": "test_fixture_expected_roster_omitted_unmeasured_declaration",
+          "status": "passed_final_postmerge_publication_repaired"
+        },
+        {
+          "node": "tests/test_forge_current_technique_inventory.py::test_original_pr223_score_uses_verified_full_original_law_not_changed_c6_cells",
+          "classification": "test_fixture_expected_roster_omitted_unmeasured_declaration",
+          "status": "passed_final_postmerge_publication_repaired"
+        }
+      ],
+      "original_completion_replay": "Passed in the297-test passing portion; retained evidence reused, no rerun.",
+      "reproduction_command": ".venv/bin/python -m pytest -q tests/test_forge_current_technique_inventory.py tests/test_forge_family_reports.py tests/test_forge_publication_memory.py tests/test_forge_technique_exports.py tests/test_forge_trainer_families.py --junitxml=runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-postmerge-publication.xml"
+    },
+    {
+      "id": "final_postmerge_publication_repaired",
+      "evidence": [
+        "pytest-postmerge-publication-repaired.log",
+        "pytest-postmerge-publication-repaired.xml",
+        "pytest-postmerge-publication-repaired-source.json"
+      ],
+      "counts": {
+        "passed": 6,
+        "failed": 0
+      },
+      "elapsed_seconds": 4.4,
+      "junit": {
+        "tests": 6,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "elapsed_seconds": 4.393
+      },
+      "selected_files": [
+        "tests/test_forge_current_technique_inventory.py",
+        "tests/test_forge_family_reports.py",
+        "tests/test_forge_publication_memory.py"
+      ],
+      "source_record": "pytest-postmerge-publication-repaired-source.json",
+      "source_window": "Final postmerge reporting/publication working-tree hashes; thirteen-file pre-run record retained.",
+      "source_limit": "Focused hashes cover source, selected tests, registry, selection and generated publication bytes; not a full environment or repository snapshot. The manifest does not record original shell command.",
+      "overlap_limit": "Per-invocation counts overlap earlier suites; never summed into unique coverage or a clean final-HEAD full-suite claim.",
+      "scope": "Four formerly failing exact-roster assertions plus final page/drilldown generator equality and research-memory freshness without raw hydration.",
+      "nodes": [
+        "tests/test_forge_family_reports.py::test_current_measurement_families_complete_only_their_declared_view_scope",
+        "tests/test_forge_current_technique_inventory.py::test_committed_atlas_progress_display_matches_its_generator_without_raw_evidence",
+        "tests/test_forge_current_technique_inventory.py::test_one_visible_table_keeps_solution_families_with_view_breakdowns_and_separate_evidence",
+        "tests/test_forge_current_technique_inventory.py::test_original_pr223_score_uses_verified_full_original_law_not_changed_c6_cells",
+        "tests/test_forge_family_reports.py::test_committed_pages_and_every_drilldown_link_match_the_generator",
+        "tests/test_forge_publication_memory.py::test_committed_research_memory_is_fresh_without_raw_log_hydration"
+      ],
+      "reproduction_command": ".venv/bin/python -m pytest -q tests/test_forge_family_reports.py::test_current_measurement_families_complete_only_their_declared_view_scope tests/test_forge_current_technique_inventory.py::test_committed_atlas_progress_display_matches_its_generator_without_raw_evidence tests/test_forge_current_technique_inventory.py::test_one_visible_table_keeps_solution_families_with_view_breakdowns_and_separate_evidence tests/test_forge_current_technique_inventory.py::test_original_pr223_score_uses_verified_full_original_law_not_changed_c6_cells tests/test_forge_family_reports.py::test_committed_pages_and_every_drilldown_link_match_the_generator tests/test_forge_publication_memory.py::test_committed_research_memory_is_fresh_without_raw_log_hydration --junitxml=runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-postmerge-publication-repaired.xml",
+      "test_only_repair": {
+        "changed_files": [
+          "tests/test_forge_family_reports.py",
+          "tests/test_forge_current_technique_inventory.py"
+        ],
+        "resolution": "Expected exact current registry roster includes the explicit unmeasured declaration. No production generator, registry, publication or scientific receipt changed between these two runs.",
+        "final_hash_audit": "All thirteen final pre-run source/publication hashes remain unchanged at receipt close."
+      }
     }
   ],
   "earlier_diagnostic_runs": [
@@ -328,7 +1085,7 @@
       "elapsed_seconds": 316.81,
       "failures": [
         "Archived renderer test source identity was briefly changed; original bytes restored, later prefix passes.",
-        "Family-report freshness pending final publication.",
+        "Family-report freshness resolved by final_publication_freshness (4 passed).",
         "Hostprofiles compared newly explicit default fields against frozen resolved recipes; default-only compatibility projection fixed, final integration passes."
       ]
     },
@@ -407,24 +1164,7 @@
       "limit": "No retained stdout/JUnit or contemporaneous manifest; overlaps analysis14 and media3, never counted as additional coverage."
     }
   },
-  "pending": [
-    {
-      "kind": "publication_freshness",
-      "nodes": [
-        "tests/test_forge_family_reports.py::test_committed_pages_and_every_drilldown_link_match_the_generator",
-        "tests/test_forge_publication_memory.py::test_committed_research_memory_is_fresh_without_raw_log_hydration"
-      ],
-      "reason": "Campaign/readout still being published at receipt time; regenerate final reports/memory, then verify these nodes."
-    },
-    {
-      "kind": "coverage_limit",
-      "reason": "Broad-suite CUDA skips and opt-in real-data/research gates remain outside this segmented CPU verification; direct two-GPU optimizer checks have the limited scope stated above."
-    },
-    {
-      "kind": "source_provenance_limit",
-      "reason": "Most pytest invocations have no contemporaneous source manifest. An audit commit and log hash do not reconstruct exact tested working-tree bytes."
-    }
-  ],
+  "pending": [],
   "scientific_source_boundary": {
     "executed_cohort_commit": "15eb7cb0911905e401bdfcd7e264945a7ea64d97",
     "limit": "Scientific training remains bound to its frozen source. Later observer routing and large-polar safeguards are software corrections for future runs; frozen receipts do not qualify the corrected implementation. Contaminated input-gradient curves are excluded without rewriting original traces."
@@ -468,5 +1208,260 @@
     "scientific_boundary": "Only publication generator and its tests change. Frozen15eb scientific source, original receipts, costs and results remain unchanged.",
     "coverage": "Actually recorded timestamps only; explicit missing-time IDs; reject an all-missing cohort without changing outputs; preserve raw/compact receipts, attempt IDs, tasks, tiers, costs and cached/explicit publication idempotence.",
     "latest_retained_run": "final_publication_alias_timestamp"
-  }
+  },
+  "read_only_probes": [
+    {
+      "id": "actual_certified_retry_projection",
+      "evidence": [
+        "publication-lineage-probe.json"
+      ],
+      "parent": "36e43f5195b141bf8f13ba888124e850",
+      "successor": "18af9e14ab8b411eb7fd6c97d5abd69b",
+      "checks": {
+        "all_six_original_receipts_unchanged": true,
+        "nonretry_projection_byte_unchanged": true,
+        "retry_link_matches_original_hash": true,
+        "successor_exact": true
+      },
+      "audit": "All six original raw receipt file hashes still equal the probe; no paid runs or scientific edits."
+    },
+    {
+      "id": "documented_current_family_coverage",
+      "evidence": [
+        "family-presentation-doc-coverage.json"
+      ],
+      "checks": {
+        "all_live_declarations": {
+          "candidate_count": 167,
+          "family_count": 19,
+          "missing_documents": []
+        },
+        "cached_frozen_rows": {
+          "candidate_count": 123,
+          "family_count": 19,
+          "missing_documents": []
+        },
+        "existing_current_rows": {
+          "candidate_count": 12,
+          "family_count": 12,
+          "missing_documents": []
+        }
+      },
+      "audit": "Retained pre-merge probe binds167 declaration file hashes and family documentation hashes. Current presentation mapping is separate from historical classification; training_launched=false, qualification_input=false. It does not verify new declarations from the in-progress merge."
+    }
+  ],
+  "final_publication_controls": {
+    "freshness_run": "final_publication_freshness",
+    "compile": {
+      "evidence": [
+        "compile-summaries.log",
+        "compile-check.log"
+      ],
+      "status": "CURRENT",
+      "fresh": true,
+      "changed_inputs": [],
+      "added_inputs": [],
+      "removed_inputs": [],
+      "inventory_coverage": {
+        "declared_count": 11761,
+        "missing": [
+          "experiments/forge/optimizer_diagnostics.py"
+        ],
+        "stale": [],
+        "tracked_count": 11762,
+        "unclassified": [],
+        "valid": false
+      },
+      "limit": "Memory/publication freshness is CURRENT. The compiler inventory separately reports an undeclared optimizer_diagnostics.py source; these are distinct checks."
+    },
+    "forge_validation": {
+      "evidence": [
+        "validate-publication-final.log"
+      ],
+      "status": "passed_as_recorded_by_root",
+      "candidates": 167,
+      "tasks": 60,
+      "family_documentation": {
+        "families": 21,
+        "status": "valid",
+        "tags": 11
+      },
+      "training_launched": false
+    },
+    "source_window": "pre_merge_only; retained passing checks do not qualify the in-progress merge"
+  },
+  "resolved_publication_checks": {
+    "run": "final_publication_freshness",
+    "nodes": [
+      "tests/test_forge_family_reports.py::test_committed_pages_and_every_drilldown_link_match_the_generator",
+      "tests/test_forge_family_reports.py::test_all_current_non_policy_families_have_executed_tier1_without_new_qualification",
+      "tests/test_forge_publication_memory.py::test_committed_research_memory_is_fresh_without_raw_log_hydration",
+      "tests/test_forge_current_technique_inventory.py::test_original_completion_cohorts_rebuild_every_scientific_row_without_raw_logs"
+    ],
+    "status": "passed",
+    "original_failures_retained": "Earlier failed stdout/JUnit remain in the artifact map; final passing controls resolve their stated freshness/replay questions without rewriting them."
+  },
+  "source_windows": {
+    "scientific_source": "15eb7cb0911905e401bdfcd7e264945a7ea64d97",
+    "pre_merge_publication_test_base": "c51b1f2b4b6e2fd683d872ebb919d68fdaed93d3",
+    "publication_evidence_commit": "a7eab0b63631bae5aa35fc75bc4e7a0af98ca586",
+    "develop_merge_target": "443598f6",
+    "current_scope": "Merged optimizer compatibility200 and broader217 passed; final reporting guard73 and single-row starter10 passed; final publication297 passes/4 roster fixture failures resolved by6 targeted passes with only two test files changed; compilation CURRENT with valid11763 coverage. No clean final-HEAD full suite or new scientific execution is claimed."
+  },
+  "resolved_postmerge_compatibility": {
+    "runs": [
+      "merge_optimizer_final",
+      "postmerge_compatibility"
+    ],
+    "status": "passed",
+    "limit": "Selected software suites only; no single final-HEAD full-suite invocation or new scientific training."
+  },
+  "read_only_publication_attempts": [
+    {
+      "id": "postmerge_starter_initial",
+      "evidence": [
+        "publication-postmerge-starter.log"
+      ],
+      "status": "rejected",
+      "reason": "Ambiguous wholly unmeasured Halloween runtime declarations lacked an explicit display choice.",
+      "resolution": "Declaration-only backend metadata and strict unmeasured guard verified in73 tests. Final publisher/freshness completed; no paid training or historical evidence mutation.",
+      "resolution_status": "resolved_by_third_read_only_publication_and_final_repaired_checks"
+    },
+    {
+      "id": "postmerge_starter_second",
+      "evidence": [
+        "publication-postmerge-starter-final.log"
+      ],
+      "status": "rejected",
+      "reason": "Duplicate current and historical dualnorm selections in the same runtime were rejected by the family progress guard.",
+      "resolution": "Final helper retains old selection as compact-only history and one current row;10 tests and idempotent proposal retained. Final publisher/freshness completed.",
+      "resolution_status": "resolved_by_third_read_only_publication_and_final_repaired_checks"
+    },
+    {
+      "id": "postmerge_starter_third",
+      "evidence": [
+        "publication-postmerge-starter-complete.log",
+        "publication-postmerge-starter-probe.json"
+      ],
+      "status": "passed",
+      "rows": 20,
+      "training_launched": false,
+      "note": "Only reporting/declaration display changed; previous read-only rejection logs retained unchanged."
+    }
+  ],
+  "postmerge_inventory_validation": {
+    "evidence": [
+      "inventory-postmerge-starter.json",
+      "validate-postmerge-starter.log"
+    ],
+    "inventory_coverage": {
+      "catalog_sha256": "2d67c3ed2b1aafe66998989196cbc2f99a203f62319dba8a3cbd814a8e5ca6ab",
+      "declared_count": 11763,
+      "missing": [],
+      "stale": [],
+      "tracked_count": 11763,
+      "unclassified": [],
+      "valid": true
+    },
+    "forge_validation": {
+      "candidates": 168,
+      "family_documentation": {
+        "families": 22,
+        "status": "valid",
+        "tags": 12
+      },
+      "studies": [
+        "pure-bcap-baseline-v1"
+      ],
+      "tasks": 60,
+      "training_launched": false,
+      "views": [
+        "adaptation",
+        "clockfree_continuous",
+        "discriminator_stability",
+        "formulation_comparison",
+        "host_profile_transfer",
+        "k3p_two_pole_horizon",
+        "quality_coverage",
+        "tier1_policy_coverage"
+      ]
+    },
+    "source_limit": "Retained read-only validation after reporting-helper changes; original pre-merge invalid coverage logs remain unchanged. Final postmerge compilation/page-memory freshness is still pending."
+  },
+  "resolved_inventory_coverage": {
+    "status": "passed",
+    "evidence": [
+      "inventory-postmerge-starter.json"
+    ],
+    "note": "Resolves the earlier missing optimizer_diagnostics.py catalog declaration; pre-merge failure evidence is retained."
+  },
+  "final_postmerge_publication_controls": {
+    "publication": {
+      "evidence": [
+        "publication-postmerge-starter-complete.log",
+        "publication-postmerge-starter-probe.json"
+      ],
+      "rows": 20,
+      "selected_required_passes": 3,
+      "selected_required_failures": 3,
+      "qualified": false,
+      "default_adoption": false,
+      "other18pins_unchanged": true,
+      "original2historypins_unchanged": true,
+      "unmeasured_extra_family_attempts": 0,
+      "qualification_input": false,
+      "training_launched": false
+    },
+    "compile": {
+      "evidence": [
+        "compile-summaries-postmerge-starter.log",
+        "compile-check-postmerge-starter.log"
+      ],
+      "status": "CURRENT",
+      "fresh": true,
+      "record_count": 524,
+      "inventory_coverage": {
+        "declared_count": 11763,
+        "missing": [],
+        "stale": [],
+        "tracked_count": 11763,
+        "unclassified": [],
+        "valid": true
+      },
+      "changed_inputs": [],
+      "added_inputs": [],
+      "removed_inputs": []
+    },
+    "checks": {
+      "runs": [
+        "final_postmerge_publication_initial",
+        "final_postmerge_publication_repaired"
+      ],
+      "status": "passed_after_test_only_roster_repair",
+      "original_failure_logs_retained": true,
+      "no_clean301_or_full_suite_claim": true
+    }
+  },
+  "verification_limits": [
+    {
+      "kind": "coverage_limit",
+      "reason": "Broad-suite CUDA skips and opt-in real-data/research gates remain outside this segmented CPU verification; direct two-GPU optimizer checks have the limited scope stated above."
+    },
+    {
+      "kind": "source_provenance_limit",
+      "reason": "Most pytest invocations have no contemporaneous source manifest. An audit commit and log hash do not reconstruct exact tested working-tree bytes."
+    }
+  ],
+  "resolved_postmerge_compilation_freshness": {
+    "status": "passed",
+    "evidence": [
+      "compile-summaries-postmerge-starter.log",
+      "compile-check-postmerge-starter.log",
+      "pytest-postmerge-publication-repaired.log",
+      "pytest-postmerge-publication-repaired.xml",
+      "pytest-postmerge-publication-repaired-source.json"
+    ],
+    "original_compiler_gap": "Pre-merge invalid inventory logs retained; final coverage is valid11763 and memory/publication fresh."
+  },
+  "receipt_state": "closed_for_archive; all referenced raw artifacts checked and no further writes planned by receipt owner"
 }

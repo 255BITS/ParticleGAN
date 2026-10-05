@@ -35,6 +35,22 @@ def test_selection_uses_whole_config_count_then_hash_and_keeps_errors():
     assert second["tasks"][5]["gate_status"] == "INCOMPLETE"
 
 
+def test_starter_plot_preference_keeps_original_search_outcomes():
+    report = {"configurations": [
+        {"candidate_id": "adam", "arm": "adam", "execution_complete": True, "required_pass_count": 3},
+        {"candidate_id": "old", "arm": "dualnorm-zero", "execution_complete": True, "required_pass_count": 3},
+        {"candidate_id": "starter", "arm": "dualnorm-zero", "execution_complete": True, "required_pass_count": 3}],
+        "plot_candidates": ["adam", "old"], "whole_arm_selections": {"dualnorm-zero": "old"}}
+    original = deepcopy(report["whole_arm_selections"])
+    analysis.apply_starter_display(report, {"candidate_id": "starter"})
+    assert report["plot_candidates"] == ["adam", "starter"]
+    assert report["original_plot_candidates"] == ["adam", "old"]
+    assert report["whole_arm_selections"] == original
+    report["configurations"][-1]["required_pass_count"] = 2
+    with pytest.raises(ValueError, match="best-count"):
+        analysis.apply_starter_display(report, {"candidate_id": "starter"})
+
+
 @pytest.mark.parametrize("pending_name", [analysis.REQUIRED[-1], analysis.DIAGNOSTIC])
 def test_no_selection_before_every_independent_current_tier_peer_finishes(pending_name):
     complete = trial("a", passed=analysis.REQUIRED[:2])

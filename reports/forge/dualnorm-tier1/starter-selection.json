@@ -1,0 +1,881 @@
+{
+  "adam_reference": {
+    "candidate_id": "bcap-pure--7806a45c214248cad578989a25ba716a1a5aae053e51a8bd482a3c9e01c234b9",
+    "required_pass_count": 3,
+    "required_total": 6,
+    "ring_endpoint_metrics": {
+      "component_core_covariance_error": 0.5016616713255644,
+      "component_core_min_eigen_ratio": 0.24163351953029633,
+      "component_covariance_error": 5.366516193374991,
+      "component_min_eigen_ratio": 0.34812042117118835,
+      "covariance_error": 0.03320864588022232,
+      "hq": 0.82275390625,
+      "mass_tv": 0.099853515625,
+      "max_component_spill": 0.34517765045166016,
+      "mean_error": 0.03581660985946655,
+      "min_hq_mass_ratio": 0.4375,
+      "min_mass_ratio": 0.48046875,
+      "modes": 16,
+      "resolved_core_covariance_error": 0.0,
+      "resolved_core_min_eigen_ratio": 1.0,
+      "resolved_max_component_spill": 0.0,
+      "sample_count": 4096,
+      "step": 400,
+      "sw1_normalized": 0.04620475956788857,
+      "target_scale": 3.0029242038726807
+    },
+    "source_commit": "15eb7cb0911905e401bdfcd7e264945a7ea64d97",
+    "source_digest": "c5c60a8018e144c447325f3705dd398d04069a91bb294eaaa76d37084ade67cc"
+  },
+  "analysis": {
+    "original_count_hash_selections_unchanged": true,
+    "path": "reports/forge/dualnorm-tier1/analysis.json",
+    "plot_scope": "Current diagnostic plots include the explicit experimental starter; original grid/arm count-hash selections remain unchanged.",
+    "sha256": "7d8856297197086f02eba5daeccd13d636f44da363a9c1dbc79a7044eaaedafb"
+  },
+  "bcap_pure_adam_pin_unchanged": true,
+  "candidate_id": "bcap-dualnorm--78aa66ae5c32297882274c11f191638f2cd1d79a9be4963349db5ed3d2b9a249",
+  "configuration_card": "configs/forge/configurations/bcap-dualnorm--78aa66ae5c32297882274c11f191638f2cd1d79a9be4963349db5ed3d2b9a249.json",
+  "default_adoption": false,
+  "full_recipe": {
+    "alpha_bar": [
+      1.0,
+      0.9,
+      0.5,
+      0.05,
+      0.0001
+    ],
+    "amsgrad": false,
+    "batch_size": 2048,
+    "beta2_anneal_end": 0.2,
+    "beta2_end": null,
+    "betas": [
+      0.0,
+      0.999
+    ],
+    "birth_death_backend": "knn",
+    "birth_death_cells": 64,
+    "birth_death_chunk": 256,
+    "birth_death_feature_scale": "none",
+    "birth_death_isolation": false,
+    "birth_death_metric_rank": 8,
+    "birth_death_parent_policy": "real_anchor",
+    "birth_death_space": "data",
+    "conditioning": "scalar",
+    "continuous_policy": null,
+    "critic_formulation": "bcap",
+    "critic_payoff_damping": true,
+    "critic_r1_real": true,
+    "d_guard_min_steps": 200,
+    "d_guard_ratio": 0.0,
+    "d_lr_mult": 1.5,
+    "direct_particle_betas": [
+      0.0,
+      0.9
+    ],
+    "direct_particle_gain": false,
+    "distance_reduction": "sum",
+    "ema_decay": 0.0,
+    "encoder_mode": "none",
+    "eps": 1e-08,
+    "input_noise_anneal_end": 0.1,
+    "input_noise_std": 0.0,
+    "latent_damping_max_rate": 0.0,
+    "loss": "relativistic",
+    "lr": 0.01,
+    "lr_anneal_start": 0.6,
+    "lr_control": "mobility",
+    "lr_floor": 1.0,
+    "model": "gan",
+    "name": "bcap",
+    "network_lr_floor": 1.0,
+    "network_lr_horizon_cap": null,
+    "num_classes": null,
+    "num_particles": 20000,
+    "observation_sigma": 0.03,
+    "optimizer_adam_lr": null,
+    "optimizer_family": "dualnorm",
+    "optimizer_momentum": 0.0,
+    "output_noise_mode": "fixed",
+    "output_noise_std": 0.0,
+    "output_noise_warmup": 0.0,
+    "particle_birth_death": false,
+    "prior_betas": null,
+    "prior_kind": "mog",
+    "prior_lr_mult": 3.0,
+    "prior_reg": 0.0,
+    "reconstruction_weight": 1.0,
+    "reg_anchor_min_decay": 0.9,
+    "reg_anchor_weight": 0.0,
+    "reg_arm": "b_cap",
+    "reg_coeff": 1.0,
+    "reg_coeff_anneal_end": 0.2,
+    "reg_coeff_end": null,
+    "reg_every": 1,
+    "reg_kappa": 1.0,
+    "reopen_anchor": "hold",
+    "reopen_guard": null,
+    "reopen_signal": "data",
+    "routing_temperature": 0.25,
+    "row_evidence_exclude": true,
+    "row_evidence_gate": false,
+    "row_evidence_hold": true,
+    "row_evidence_hot": true,
+    "row_evidence_null": "theory",
+    "row_policy": "independent",
+    "serve_average": 0.0,
+    "sigma_rel": 0.0,
+    "standardize": false,
+    "table_release_rule": "any",
+    "total_steps": 7000,
+    "ucd_target": "class",
+    "ucd_weight": 0.02,
+    "z_dim": 2
+  },
+  "history_scope": "compact migration and frozen source; no additional current leaderboard row",
+  "input_digest": "3ef64f3391f85325c9de169933f946e9b23141f8306cf77e14cf440b1a3f9309",
+  "kind": "explicit_user_directed_experimental_starter",
+  "original_analysis": {
+    "git_blob": "925b64e79083d1909911b18126d54acf15e10284",
+    "git_commit": "08a1cffafbd4adc4c150e09fafd718a186dec534",
+    "original_count_hash_selections_unchanged": true,
+    "path": "reports/forge/dualnorm-tier1/analysis.json",
+    "sha256": "b72b073137dcc525df71fb32be0efbf2275f2a51c5ce9693021631997c8a2bb3"
+  },
+  "original_search_selections": [
+    {
+      "path": "reports/forge/configuration-search/bcap-optim-ada-nsgda-tier1-v1.json",
+      "selection": {
+        "all_trials_terminal": true,
+        "calibration_status": "provisional",
+        "default_adoption": false,
+        "independent_confirmation": "not_performed",
+        "objective": "required PASS count by ascending tuning tier (descending); configuration hash (ascending)",
+        "qualified": false,
+        "required_pass_count": 2,
+        "required_passes_by_tier": [
+          2
+        ],
+        "required_task_bindings": [
+          {
+            "compatibility_key": "7087f503b8f03bb17872fc9e2994ac9d0f9409531990dd695b27cbcc3af23091",
+            "qualification_tier": 1,
+            "task": "gaussian1d_acquisition"
+          },
+          {
+            "compatibility_key": "07a615e0d5f8d7b05930c44354969fb9aaf10203d1d8258a61d417c234b29278",
+            "qualification_tier": 1,
+            "task": "two_pole"
+          },
+          {
+            "compatibility_key": "5c7bfbaa5a9c9dcecaa1c7931113a198f6193d8a8b128086a17077cb936aa6b8",
+            "qualification_tier": 1,
+            "task": "unused_token_hold"
+          },
+          {
+            "compatibility_key": "87bd8eda04c28cee6fece1ec6e936a8c7292cf797d2efb93833382bb9be3efa5",
+            "qualification_tier": 1,
+            "task": "ae_gan_hold"
+          },
+          {
+            "compatibility_key": "a0e49f4decd44c418c9ea8f3a8a0899797309f74139e0114161c447057877439",
+            "qualification_tier": 1,
+            "task": "ring16_acquisition"
+          },
+          {
+            "compatibility_key": "2b6631d34809de9735950cff29cbbcebdb0d7b20e6eed13a032a4c678c2e2b84",
+            "qualification_tier": 1,
+            "task": "five_word_joint_acquisition"
+          }
+        ],
+        "required_total": 6,
+        "selected_candidate_id": "bcap-ada-nsgda--2e9b7b3ea44f23cc2de35a6961d36b523b9043553970dac855544434c4595675",
+        "selected_configuration_id": "2e9b7b3ea44f23cc2de35a6961d36b523b9043553970dac855544434c4595675",
+        "selection_complete": true,
+        "selection_kind": "best_observed",
+        "source_digest": "c5c60a8018e144c447325f3705dd398d04069a91bb294eaaa76d37084ade67cc",
+        "tuning_through_tier": 1
+      },
+      "sha256": "ee23c5dfcf30096e0aae7cbfc118e330276f8a7e0361093e330a1546836d299d"
+    },
+    {
+      "path": "reports/forge/configuration-search/bcap-optim-adam-tier1-v1.json",
+      "selection": {
+        "all_trials_terminal": true,
+        "calibration_status": "provisional",
+        "default_adoption": false,
+        "independent_confirmation": "not_performed",
+        "objective": "required PASS count by ascending tuning tier (descending); configuration hash (ascending)",
+        "qualified": false,
+        "required_pass_count": 3,
+        "required_passes_by_tier": [
+          3
+        ],
+        "required_task_bindings": [
+          {
+            "compatibility_key": "01fe929cac856b47daf068a1a900b638c6f813a13a420a7ed6c0077dc3e638e2",
+            "qualification_tier": 1,
+            "task": "gaussian1d_acquisition"
+          },
+          {
+            "compatibility_key": "69aecdfe08684d6a70daeaf53639713f632e3768ba1645a6f8ca4ee2bf21df2a",
+            "qualification_tier": 1,
+            "task": "two_pole"
+          },
+          {
+            "compatibility_key": "e59fb67586d21a5e0f517bffcbb71b2b04618dfc013c72d98045af3631c130c6",
+            "qualification_tier": 1,
+            "task": "unused_token_hold"
+          },
+          {
+            "compatibility_key": "408e1bd26e1537e6546b2f3ef809bb57bb15e6d295ffc4c262fa92cc00a00ed4",
+            "qualification_tier": 1,
+            "task": "ae_gan_hold"
+          },
+          {
+            "compatibility_key": "c4c3b73c4abf6a099a3ff8a4aeebeb2320bbc777bb54d079a3f7b994055cbc9c",
+            "qualification_tier": 1,
+            "task": "ring16_acquisition"
+          },
+          {
+            "compatibility_key": "484d26093a058aa2f2fe6dccc864d5c9837fb9b293cf58b50a7e813fe6889424",
+            "qualification_tier": 1,
+            "task": "five_word_joint_acquisition"
+          }
+        ],
+        "required_total": 6,
+        "selected_candidate_id": "bcap-pure--2889aefa5f93bfa03e80c20614756f076e9def9b54969089929bbe6ee65ec58f",
+        "selected_configuration_id": "2889aefa5f93bfa03e80c20614756f076e9def9b54969089929bbe6ee65ec58f",
+        "selection_complete": true,
+        "selection_kind": "best_observed",
+        "source_digest": "c5c60a8018e144c447325f3705dd398d04069a91bb294eaaa76d37084ade67cc",
+        "tuning_through_tier": 1
+      },
+      "sha256": "da746eab2353b6c51006b3e7902118e951d72e1f46370380636e3fb72ebd8ac8"
+    },
+    {
+      "path": "reports/forge/configuration-search/bcap-optim-dualnorm-d-only-tier1-v1.json",
+      "selection": {
+        "all_trials_terminal": true,
+        "calibration_status": "provisional",
+        "default_adoption": false,
+        "independent_confirmation": "not_performed",
+        "objective": "required PASS count by ascending tuning tier (descending); configuration hash (ascending)",
+        "qualified": false,
+        "required_pass_count": 2,
+        "required_passes_by_tier": [
+          2
+        ],
+        "required_task_bindings": [
+          {
+            "compatibility_key": "355ff4ad98b6241c636c3ac44b8bf2416a8d12deaf388aef4d13670ee8df8ab5",
+            "qualification_tier": 1,
+            "task": "gaussian1d_acquisition"
+          },
+          {
+            "compatibility_key": "68b9db11a96950ab1b9e82eb051da81084baa2a96b1726078d77bcded9bbcfa0",
+            "qualification_tier": 1,
+            "task": "two_pole"
+          },
+          {
+            "compatibility_key": "6a3a26ab16467974f3b49ea9b13c4cb1d2f93f9c41db125fec6b866196a1d23c",
+            "qualification_tier": 1,
+            "task": "unused_token_hold"
+          },
+          {
+            "compatibility_key": "15f56ce734e756549d36bf070cd1b784ff84afba3823f2b69a7ec36a079660ad",
+            "qualification_tier": 1,
+            "task": "ae_gan_hold"
+          },
+          {
+            "compatibility_key": "8d5c4bf83f4a814acf5ff763cd7ff481c84afece68558a07f2217140003261ba",
+            "qualification_tier": 1,
+            "task": "ring16_acquisition"
+          },
+          {
+            "compatibility_key": "5792029762a05f47cd20d4661449f859c7e10bc2bed2343c178677ffea523b07",
+            "qualification_tier": 1,
+            "task": "five_word_joint_acquisition"
+          }
+        ],
+        "required_total": 6,
+        "selected_candidate_id": "bcap-dualnorm-d-only--3305345f128eaaef274d5e0932575a068cd40c59f65d4cfad4051322d282c864",
+        "selected_configuration_id": "3305345f128eaaef274d5e0932575a068cd40c59f65d4cfad4051322d282c864",
+        "selection_complete": true,
+        "selection_kind": "best_observed",
+        "source_digest": "c5c60a8018e144c447325f3705dd398d04069a91bb294eaaa76d37084ade67cc",
+        "tuning_through_tier": 1
+      },
+      "sha256": "63045a16e76d4760a10705ef532912e0497426b75aa428a878bfce27ab2520e9"
+    },
+    {
+      "path": "reports/forge/configuration-search/bcap-optim-dualnorm-momentum-tier1-v1.json",
+      "selection": {
+        "all_trials_terminal": true,
+        "calibration_status": "provisional",
+        "default_adoption": false,
+        "independent_confirmation": "not_performed",
+        "objective": "required PASS count by ascending tuning tier (descending); configuration hash (ascending)",
+        "qualified": false,
+        "required_pass_count": 2,
+        "required_passes_by_tier": [
+          2
+        ],
+        "required_task_bindings": [
+          {
+            "compatibility_key": "6c1c8a182eac9c9c2bd3e50f6bd6e9429dfbcd38077b2ffebadb1fd309854f2c",
+            "qualification_tier": 1,
+            "task": "gaussian1d_acquisition"
+          },
+          {
+            "compatibility_key": "d416791a0a82b27aac42abbaef4b59211699af343ede2f314608004e6382bc6c",
+            "qualification_tier": 1,
+            "task": "two_pole"
+          },
+          {
+            "compatibility_key": "a10ba1d26d931916b1458dd9d56e6a9c4c333147ebe092b5f1f94ba03220e2f9",
+            "qualification_tier": 1,
+            "task": "unused_token_hold"
+          },
+          {
+            "compatibility_key": "5658644619dabf2d16738717ae0fd7a7b749e91f1a7f96ca7b7178ea16322b77",
+            "qualification_tier": 1,
+            "task": "ae_gan_hold"
+          },
+          {
+            "compatibility_key": "447aa0851994469c35a7f648821e5e923fca0375bca8be55f440a835cc98deeb",
+            "qualification_tier": 1,
+            "task": "ring16_acquisition"
+          },
+          {
+            "compatibility_key": "5a2f201fd1b1c607d21c5e956cf400e62559876dba6008e04bfca7de0afdeb8d",
+            "qualification_tier": 1,
+            "task": "five_word_joint_acquisition"
+          }
+        ],
+        "required_total": 6,
+        "selected_candidate_id": "bcap-dualnorm--716c59d5ea2fde1ff06d1170c4e856f4201eab877f94fa2bbb5fc1a50a63f724",
+        "selected_configuration_id": "716c59d5ea2fde1ff06d1170c4e856f4201eab877f94fa2bbb5fc1a50a63f724",
+        "selection_complete": true,
+        "selection_kind": "best_observed",
+        "source_digest": "c5c60a8018e144c447325f3705dd398d04069a91bb294eaaa76d37084ade67cc",
+        "tuning_through_tier": 1
+      },
+      "sha256": "3a85d3d24a070a368391f33e0a40ad6fa1591b15e470b1f72a6f872f09d9ebe4"
+    },
+    {
+      "path": "reports/forge/configuration-search/bcap-optim-dualnorm-zero-tier1-v1.json",
+      "selection": {
+        "all_trials_terminal": true,
+        "calibration_status": "provisional",
+        "default_adoption": false,
+        "independent_confirmation": "not_performed",
+        "objective": "required PASS count by ascending tuning tier (descending); configuration hash (ascending)",
+        "qualified": false,
+        "required_pass_count": 3,
+        "required_passes_by_tier": [
+          3
+        ],
+        "required_task_bindings": [
+          {
+            "compatibility_key": "97b41817040c6a0d3b21f84db128d21f047c49297db6b0bee9700e3ba4f24b65",
+            "qualification_tier": 1,
+            "task": "gaussian1d_acquisition"
+          },
+          {
+            "compatibility_key": "f896044e6bf632c70599a2dc0e16f56a4c390714f4f372ff09581eec3fe80a0b",
+            "qualification_tier": 1,
+            "task": "two_pole"
+          },
+          {
+            "compatibility_key": "68b27e6e7e554cc5978b27a10bba3ec13cd08c862de55ba1658a8bc460ef9bee",
+            "qualification_tier": 1,
+            "task": "unused_token_hold"
+          },
+          {
+            "compatibility_key": "cc57104c0f74254ad680d2db775e52529d16b5e1fd94166b0261edcb8537c235",
+            "qualification_tier": 1,
+            "task": "ae_gan_hold"
+          },
+          {
+            "compatibility_key": "1deb22962f3edadf365b0dfbbffa1ef2c3cfa5cd27d7081c6e783df73e5ab368",
+            "qualification_tier": 1,
+            "task": "ring16_acquisition"
+          },
+          {
+            "compatibility_key": "bfeaeb784ace5b78d7b3835abfe046dbaa41dda1835598126608dd6527e339d8",
+            "qualification_tier": 1,
+            "task": "five_word_joint_acquisition"
+          }
+        ],
+        "required_total": 6,
+        "selected_candidate_id": "bcap-dualnorm--41a1d59348a35169d7f75362b00a47a930424037f4dfb4ed879518cf8a08827d",
+        "selected_configuration_id": "41a1d59348a35169d7f75362b00a47a930424037f4dfb4ed879518cf8a08827d",
+        "selection_complete": true,
+        "selection_kind": "best_observed",
+        "source_digest": "c5c60a8018e144c447325f3705dd398d04069a91bb294eaaa76d37084ade67cc",
+        "tuning_through_tier": 1
+      },
+      "sha256": "7af00be693e902199ebe65702c24afb6cf9151eb7cbf89af59581bc62c2d1594"
+    },
+    {
+      "path": "reports/forge/configuration-search/bcap-optim-nsgda-global-tier1-v1.json",
+      "selection": {
+        "all_trials_terminal": true,
+        "calibration_status": "provisional",
+        "default_adoption": false,
+        "independent_confirmation": "not_performed",
+        "objective": "required PASS count by ascending tuning tier (descending); configuration hash (ascending)",
+        "qualified": false,
+        "required_pass_count": 3,
+        "required_passes_by_tier": [
+          3
+        ],
+        "required_task_bindings": [
+          {
+            "compatibility_key": "a9c09a71b17c2a1e51bdc9b880a4cbfea9aec78f6a1249891ba521b1b9b546c5",
+            "qualification_tier": 1,
+            "task": "gaussian1d_acquisition"
+          },
+          {
+            "compatibility_key": "13a92c33aca980401ebb09fcce76cd3c8ab98603297f6ee102240b30b8bdbc88",
+            "qualification_tier": 1,
+            "task": "two_pole"
+          },
+          {
+            "compatibility_key": "ed7fd88009dd51bb82c8a386dcf907a6d289a9223cba9c3121b781f8e908224d",
+            "qualification_tier": 1,
+            "task": "unused_token_hold"
+          },
+          {
+            "compatibility_key": "001049df2eed500b71aed31df6aa3801bc6b76fa42e0962b16d0dba7d39a3ca4",
+            "qualification_tier": 1,
+            "task": "ae_gan_hold"
+          },
+          {
+            "compatibility_key": "4981b5eaaee3b8e5727b0c1bfaf2549e73fcca4ed1f30a9be52642aff9047b4f",
+            "qualification_tier": 1,
+            "task": "ring16_acquisition"
+          },
+          {
+            "compatibility_key": "8231a95a6e469c856e561c306ca3fb128048a5b99adcb28ebd62ab89956067f4",
+            "qualification_tier": 1,
+            "task": "five_word_joint_acquisition"
+          }
+        ],
+        "required_total": 6,
+        "selected_candidate_id": "bcap-nsgda-global--4d46c3064ad21b57f692a8edda5a7d6978e793ba7713f533fafdee6ee684e8d0",
+        "selected_configuration_id": "4d46c3064ad21b57f692a8edda5a7d6978e793ba7713f533fafdee6ee684e8d0",
+        "selection_complete": true,
+        "selection_kind": "best_observed",
+        "source_digest": "c5c60a8018e144c447325f3705dd398d04069a91bb294eaaa76d37084ade67cc",
+        "tuning_through_tier": 1
+      },
+      "sha256": "f69b3ecf5f104d107391eea3e84ec70a4dd246b56589b72d670eb170f055b302"
+    },
+    {
+      "path": "reports/forge/configuration-search/bcap-optim-nsgda-layer-tier1-v1.json",
+      "selection": {
+        "all_trials_terminal": true,
+        "calibration_status": "provisional",
+        "default_adoption": false,
+        "independent_confirmation": "not_performed",
+        "objective": "required PASS count by ascending tuning tier (descending); configuration hash (ascending)",
+        "qualified": false,
+        "required_pass_count": 3,
+        "required_passes_by_tier": [
+          3
+        ],
+        "required_task_bindings": [
+          {
+            "compatibility_key": "a08a93d1f50c5cebf168b60e3064c93c2f5df4f07070ef89249bdc02170b5185",
+            "qualification_tier": 1,
+            "task": "gaussian1d_acquisition"
+          },
+          {
+            "compatibility_key": "2100dca9f9287c3b4145acd9e1e7129a12b2bafb118e70f12d2dd25b6a739193",
+            "qualification_tier": 1,
+            "task": "two_pole"
+          },
+          {
+            "compatibility_key": "a163eb33eb0ad627d02031b60787b37bc1740e045a78d3379fba6c26da5ffa80",
+            "qualification_tier": 1,
+            "task": "unused_token_hold"
+          },
+          {
+            "compatibility_key": "a78ca78ae40df70bb2e151005fc6a3e93eeac000ad2c5b47c9b7a70db22d6ef3",
+            "qualification_tier": 1,
+            "task": "ae_gan_hold"
+          },
+          {
+            "compatibility_key": "717f34eef2d0108bafff07a03d564233755180574d9990ca8d0fbe84aaa3e43c",
+            "qualification_tier": 1,
+            "task": "ring16_acquisition"
+          },
+          {
+            "compatibility_key": "f94b87c65dac2421e87b8d39e702cf07832e39ff341ffb3c0f895fb80fa1d7e8",
+            "qualification_tier": 1,
+            "task": "five_word_joint_acquisition"
+          }
+        ],
+        "required_total": 6,
+        "selected_candidate_id": "bcap-nsgda-layer--3cca4c69f24887ece2c1e993e1267e46985a8a466798f2a166786668cde3c29b",
+        "selected_configuration_id": "3cca4c69f24887ece2c1e993e1267e46985a8a466798f2a166786668cde3c29b",
+        "selection_complete": true,
+        "selection_kind": "best_observed",
+        "source_digest": "c5c60a8018e144c447325f3705dd398d04069a91bb294eaaa76d37084ade67cc",
+        "tuning_through_tier": 1
+      },
+      "sha256": "9897548a15c6db1af1e5db5e7b1e6862a061c3d40fa30d260424fff22278b156"
+    },
+    {
+      "path": "reports/forge/configuration-search/bcap-optim-particle-rownorm-only-tier1-v1.json",
+      "selection": {
+        "all_trials_terminal": true,
+        "calibration_status": "provisional",
+        "default_adoption": false,
+        "independent_confirmation": "not_performed",
+        "objective": "required PASS count by ascending tuning tier (descending); configuration hash (ascending)",
+        "qualified": false,
+        "required_pass_count": 3,
+        "required_passes_by_tier": [
+          3
+        ],
+        "required_task_bindings": [
+          {
+            "compatibility_key": "4ff0d161f20505d6eec0a9272195c9d9de557af7bf6655b8e69f8f7f66619a61",
+            "qualification_tier": 1,
+            "task": "gaussian1d_acquisition"
+          },
+          {
+            "compatibility_key": "5dc0d8d5169052fd84dbab5169ac54fcca3a59410eae4b1d0ccde3c1bfaecec7",
+            "qualification_tier": 1,
+            "task": "two_pole"
+          },
+          {
+            "compatibility_key": "9f58ce782316d3321889b6ac0fd07c602f199f53efad95f7bf63502e167e5d88",
+            "qualification_tier": 1,
+            "task": "unused_token_hold"
+          },
+          {
+            "compatibility_key": "b38a399092b08aa5edb1e429bf0e84d2388366cba4c02ae5060a375533f88854",
+            "qualification_tier": 1,
+            "task": "ae_gan_hold"
+          },
+          {
+            "compatibility_key": "9ab2dbf0f90b6ac2a9f5eab7c3e4efdf63c0bc5b9c3e4b92d7e10ab767451430",
+            "qualification_tier": 1,
+            "task": "ring16_acquisition"
+          },
+          {
+            "compatibility_key": "1a9bd2ef694cdd2f10d2bb4883b3dc049819bb37f3caf765f601f870fa4737c8",
+            "qualification_tier": 1,
+            "task": "five_word_joint_acquisition"
+          }
+        ],
+        "required_total": 6,
+        "selected_candidate_id": "bcap-particle-rownorm-only--4c8ddce0b2146981faddd223759e932343d9a6543b84ff4a7aeae8c1ecb55823",
+        "selected_configuration_id": "4c8ddce0b2146981faddd223759e932343d9a6543b84ff4a7aeae8c1ecb55823",
+        "selection_complete": true,
+        "selection_kind": "best_observed",
+        "source_digest": "c5c60a8018e144c447325f3705dd398d04069a91bb294eaaa76d37084ade67cc",
+        "tuning_through_tier": 1
+      },
+      "sha256": "589104c38072a80f6fd7f2bf52616aa5f899b2376d0ee48e4b5145b4eb3502b8"
+    },
+    {
+      "path": "reports/forge/configuration-search/bcap-optim-sgda-tier1-v1.json",
+      "selection": {
+        "all_trials_terminal": true,
+        "calibration_status": "provisional",
+        "default_adoption": false,
+        "independent_confirmation": "not_performed",
+        "objective": "required PASS count by ascending tuning tier (descending); configuration hash (ascending)",
+        "qualified": false,
+        "required_pass_count": 2,
+        "required_passes_by_tier": [
+          2
+        ],
+        "required_task_bindings": [
+          {
+            "compatibility_key": "9e7f42790a7695596ed8e0740ce9b0afa9eb0abde317f0319a4f0dfc8d50c97a",
+            "qualification_tier": 1,
+            "task": "gaussian1d_acquisition"
+          },
+          {
+            "compatibility_key": "cbbef1c29fb6ba1ee4c7ef78ce984c38d920d5aa4cbab1c1bcda3167b91612ae",
+            "qualification_tier": 1,
+            "task": "two_pole"
+          },
+          {
+            "compatibility_key": "c00c07fb9b4cca98c1697d6381d06cedf9ff321b48083b5bb071fa2a422de0a5",
+            "qualification_tier": 1,
+            "task": "unused_token_hold"
+          },
+          {
+            "compatibility_key": "f9707541fdbc651ea705f3c69156392df481a6bb97c58c40d80d2ed89d85b8f5",
+            "qualification_tier": 1,
+            "task": "ae_gan_hold"
+          },
+          {
+            "compatibility_key": "96b9e114bda0199136bf6ee1a306a2e60c625a15ce53e4d6df747c4d7cc036be",
+            "qualification_tier": 1,
+            "task": "ring16_acquisition"
+          },
+          {
+            "compatibility_key": "e40553b8f96c4c6a35d64a2091fd3303543c9d94594f9f7d7a4d5775e6ae3dcb",
+            "qualification_tier": 1,
+            "task": "five_word_joint_acquisition"
+          }
+        ],
+        "required_total": 6,
+        "selected_candidate_id": "bcap-sgda--d6bc8507ebb19649754af5075970942d5044a3b6bc10b1019d29edcbd8de2201",
+        "selected_configuration_id": "d6bc8507ebb19649754af5075970942d5044a3b6bc10b1019d29edcbd8de2201",
+        "selection_complete": true,
+        "selection_kind": "best_observed",
+        "source_digest": "c5c60a8018e144c447325f3705dd398d04069a91bb294eaaa76d37084ade67cc",
+        "tuning_through_tier": 1
+      },
+      "sha256": "b187d3513e62d1d3d56b6208d53a04deef266851ed3a60568f2d1f263f617a3e"
+    }
+  ],
+  "pin": {
+    "candidate_id": "bcap-dualnorm--78aa66ae5c32297882274c11f191638f2cd1d79a9be4963349db5ed3d2b9a249",
+    "candidate_revision": "e8cce02584df10c9a7650d65ad1744996538041e3d5d269624d8310cb8d12ea8",
+    "cohort": "2d8cee20b23e8d7ed96d20d442df358846fc46d4681d0799cc8ba5081638c975",
+    "execution_backend": "cuda",
+    "measurement_views": [
+      "discriminator_stability"
+    ],
+    "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+    "reason": "User-directed experimental BCAP starter: full dualnorm mu=0, etaG=.01, D/G=1.5, etaPrior=.03. This complete recipe ties the best required Tier 1 PASS count; its full-coverage ring endpoint quality and word-acquisition pass motivate the starting choice. Original frozen PASS/hash search selections remain unchanged. This selects a measured starting point, with no calibrated default adoption or qualification claim.",
+    "recipe_sha256": "1d15d3ab991724ee353548cb6c3638ff4be4a108b71266ede80b7c62b5375272",
+    "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+    "runtime_cohort_sha256": "0d83d78027c55d8fcf998f70a5b04d52863322a4f81151a200301a40e371695e",
+    "scientific_row_sha256": "c666dc1059462623cdb8c60ce0448ef86845fd200a3346434b8f528912a653dc",
+    "selection_kind": "current_measurement",
+    "source_digest": "c5c60a8018e144c447325f3705dd398d04069a91bb294eaaa76d37084ade67cc",
+    "task_keys_sha256": "55cf9efb1cf6160a9d450dcb5ef5462d6dda4c397bf7abd10eaef33f0159307f",
+    "trainer_family": "bcap-dualnorm"
+  },
+  "previous_pin": {
+    "candidate_id": "bcap-dualnorm--41a1d59348a35169d7f75362b00a47a930424037f4dfb4ed879518cf8a08827d",
+    "candidate_revision": "234b3e6c2982b1492b10b05aa8b08fc20ad26ddc6b1488e297cd92d5b1d75ad2",
+    "cohort": "969b7aa32c1bfb3791499bd757da2191bbee08393d32b90eeb3b32ba62da42a0",
+    "execution_backend": "cuda",
+    "measurement_views": [
+      "discriminator_stability"
+    ],
+    "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+    "reason": "Finite optimizer-only BCAP screen: required Tier 1 PASS count descending, then configuration hash ascending, over complete whole recipes under one executed source. This pins a current measurement; calibration, confirmation and default adoption remain separate.",
+    "recipe_sha256": "70d09553de1f06aa1a343d67f2bf99c45b2f973cf0143057dd37c2dde0145161",
+    "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+    "runtime_cohort_sha256": "0d83d78027c55d8fcf998f70a5b04d52863322a4f81151a200301a40e371695e",
+    "scientific_row_sha256": "a0abf7713bfde7ddd3a7c441445f4a914e848ca51b8c636295f438d8eedcaf4e",
+    "selection_kind": "current_measurement",
+    "source_digest": "c5c60a8018e144c447325f3705dd398d04069a91bb294eaaa76d37084ade67cc",
+    "task_keys_sha256": "f7062de40aeeb059b30c22abaa237bd894c195d4a516bb7a33cc8c6b3213623b",
+    "trainer_family": "bcap-dualnorm"
+  },
+  "previous_selection_card": {
+    "git_blob": "a33c0b697d7d4926ac7169741c48eff64fc5c915",
+    "git_commit": "08a1cffafbd4adc4c150e09fafd718a186dec534",
+    "path": "configs/forge/selections/family-current-v1.json",
+    "sha256": "357647545062db6c1050b4156d90320100f804582c085b907b37e472b12d1df4"
+  },
+  "qualification_input": false,
+  "qualification_limit": "This complete source-bound recipe ties 3/6 under provisional Tier 1 gates. Gaussian, two-pole and ring fail; later tiers remain unknown. No native, five-seed, scale-transfer, calibrated default-adoption or merged-implementation qualification is inferred.",
+  "qualified_tier": 0,
+  "reason": "User-directed experimental BCAP starter: full dualnorm mu=0, etaG=.01, D/G=1.5, etaPrior=.03. This complete recipe ties the best required Tier 1 PASS count; its full-coverage ring endpoint quality and word-acquisition pass motivate the starting choice. Original frozen PASS/hash search selections remain unchanged. This selects a measured starting point, with no calibrated default adoption or qualification claim.",
+  "required_and_diagnostic_outcomes": [
+    {
+      "attempt_id": "c630287b618d4f6cb7a60b38b65be53d",
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": null,
+        "first_pass_step": 125,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 1,
+        "passing_suffix": 0,
+        "stable_from_seconds": null,
+        "stable_from_step": null
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "cdf_ks": 0.08327820105267092,
+        "finite_fraction": 1.0,
+        "mean": 2.0178479464302654,
+        "mean_error_sigma": 0.035695892860530876,
+        "sample_count": 4096,
+        "std": 0.6155662797845701,
+        "std_ratio": 1.2311325595691403,
+        "step": 1000
+      },
+      "task": "gaussian1d_acquisition"
+    },
+    {
+      "attempt_id": "3fc2438ce35947ea9117f4d8a8db70d3",
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": null,
+        "first_pass_step": 34,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 14,
+        "passing_suffix": 4,
+        "stable_from_seconds": null,
+        "stable_from_step": null
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "grad_med": 0.9840502142906189,
+        "mean_abs": 0.7916285395622253
+      },
+      "task": "two_pole"
+    },
+    {
+      "attempt_id": "9b32bf2f33d44078949755ad0fad687c",
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": 109,
+        "first_pass_step": 75,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 16,
+        "passing_suffix": 16,
+        "stable_from_seconds": null,
+        "stable_from_step": 75
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "concept_move": 0.9918065893170436,
+        "unused_hold": 0.9892798122018576
+      },
+      "task": "unused_token_hold"
+    },
+    {
+      "attempt_id": "2a1b0bebd3bb46869cce8d99a2db1049",
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": 73,
+        "first_pass_step": 32,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 22,
+        "passing_suffix": 22,
+        "stable_from_seconds": null,
+        "stable_from_step": 32
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "hold": 0.006327168084681034,
+        "recon_mse": 0.002923730993643403
+      },
+      "task": "ae_gan_hold"
+    },
+    {
+      "attempt_id": "f7212ac4c7b74d8c9030bd9109c172f3",
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": null,
+        "first_pass_step": null,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 0,
+        "passing_suffix": 0,
+        "stable_from_seconds": null,
+        "stable_from_step": null
+      },
+      "gate_status": "FAIL",
+      "metrics": {
+        "component_core_covariance_error": 0.5679853353649378,
+        "component_core_min_eigen_ratio": 0.17292854189872742,
+        "component_covariance_error": 13.164045305922627,
+        "component_min_eigen_ratio": 0.17292854189872742,
+        "covariance_error": 0.056550268083810806,
+        "hq": 0.93017578125,
+        "mass_tv": 0.082763671875,
+        "max_component_spill": 0.2851710915565491,
+        "mean_error": 0.07952416688203812,
+        "min_hq_mass_ratio": 0.44921875,
+        "min_mass_ratio": 0.58203125,
+        "modes": 16,
+        "resolved_core_covariance_error": 0.0,
+        "resolved_core_min_eigen_ratio": 1.0,
+        "resolved_max_component_spill": 0.0,
+        "sample_count": 4096,
+        "step": 400,
+        "sw1_normalized": 0.06352626584763359,
+        "target_scale": 3.0029242038726807
+      },
+      "task": "ring16_acquisition"
+    },
+    {
+      "attempt_id": "dee0a0cc3c8b47ca8974455c048c14ff",
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": 19168,
+        "first_pass_step": 1667,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 18,
+        "passing_suffix": 6,
+        "stable_from_seconds": null,
+        "stable_from_step": 15835
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "completed_steps": 20001.0,
+        "mass_apple": 0.2109375,
+        "mass_berry": 0.1875,
+        "mass_grape": 0.1982421875,
+        "mass_lemon": 0.2080078125,
+        "mass_melon": 0.1953125,
+        "mass_tv": 0.018945312500000006,
+        "minimum_reconstruction_token_probability": 1.0,
+        "modes": 5,
+        "output_noise_added": 0.0,
+        "policy_latent_perturbation": 0.0,
+        "quality_fraction": 1.0,
+        "reconstruction_exact": 1,
+        "reconstruction_nll": -0.0,
+        "sample_count": 1024,
+        "served_averaged": 0.0,
+        "step": 20001
+      },
+      "task": "five_word_joint_acquisition"
+    },
+    {
+      "attempt_id": "5de6296fc6fb4b7bb49e03f3cf81c858",
+      "convergence": null,
+      "gate_status": "PASS",
+      "metrics": {
+        "parity_comparisons": 4
+      },
+      "task": "clockfree_audit_measurement_v1"
+    }
+  ],
+  "required_pass_count": 3,
+  "required_total": 6,
+  "schema_version": 1,
+  "selection_card": {
+    "path": "configs/forge/selections/family-current-v1.json",
+    "sha256": "5d11656aa7126855a8bbd01549dc1c3c5d340f918447ccb431ea3356e507bc54"
+  },
+  "selection_role": "experimental_starting_point",
+  "source_publication": {
+    "input_digest": "0239350844b13b7e346b446dbd668e1469625f55755e4989e4f0660e780cff6e",
+    "json_sha256": "f77dbeadf719731e5faa0728ac9ea3b850daf0a80a4857a0163986a5bed0096c",
+    "snapshot": "reports/forge/technique-evidence/0239350844b13b7e346b446dbd668e1469625f55755e4989e4f0660e780cff6e.json",
+    "source_commit": "15eb7cb0911905e401bdfcd7e264945a7ea64d97",
+    "source_digest": "c5c60a8018e144c447325f3705dd398d04069a91bb294eaaa76d37084ade67cc"
+  },
+  "user_instruction": "regenerate the leaderboard with the strongest winner for bcap i want to start from the new optimizer even if it's tied"
+}

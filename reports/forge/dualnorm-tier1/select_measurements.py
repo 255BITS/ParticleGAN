@@ -3,6 +3,8 @@
 This reads an independently regraded source snapshot and the nine final search
 reports. It never writes the selection card or promotes a default. Register the
 source on CUDA first, then review this output before replacing the current card.
+An explicit starter choice changes the displayed dualnorm measurement only;
+the original search objective and recorded search selections remain immutable.
 """
 from __future__ import annotations
 
@@ -32,7 +34,31 @@ FAMILIES = {
 }
 
 
-def proposed_selection(root, snapshot, source_commit):
+def explicit_starter_trial(trials, candidate_id):
+    """Select the requested tied starter without reranking scientific searches."""
+    selected = select_configuration(trials, 1)
+    if not selected["selection_complete"]:
+        raise ValueError("experimental starter requires the complete finite comparison")
+    matches = [trial for trial in trials if trial["candidate_id"] == candidate_id]
+    if len(matches) != 1:
+        raise ValueError("experimental starter must name one recorded dualnorm configuration")
+    trial = matches[0]
+    recipe = trial.get("resolved_recipe", {})
+    if (trial.get("trainer_family") != "bcap-dualnorm"
+            or recipe.get("optimizer_family") != "dualnorm"
+            or recipe.get("optimizer_momentum", 0) != 0
+            or recipe.get("lr") != .01 or recipe.get("d_lr_mult") != 1.5
+            or recipe.get("prior_lr_mult") != 3):
+        raise ValueError("experimental starter must retain the requested mu=0, etaG=.01, D/G=1.5, etaPrior=.03 recipe")
+    tier = [task for task in trial["tasks"] if task["qualification_tier"] == 1]
+    required = [task for task in tier if task["importance"] == "required"]
+    if (len(required) != 6 or any(task["gate_status"] not in {"PASS", "FAIL"} for task in tier)
+            or sum(task["gate_status"] == "PASS" for task in required) != selected["required_pass_count"]):
+        raise ValueError("experimental starter must be a fully measured whole recipe tying the best required PASS count")
+    return trial
+
+
+def proposed_selection(root, snapshot, source_commit, *, starter_candidate_id=None):
     """Bind each selected configuration to verified ordinary science in full."""
     root = Path(root)
     if (snapshot.get("publication_scope") != "frozen_source"
@@ -73,12 +99,15 @@ def proposed_selection(root, snapshot, source_commit):
             by_family.setdefault(report["trainer_family"], []).append(trial)
     if len(by_candidate) != 41 or FAMILIES - by_family.keys():
         raise ValueError("the initial screen must contain its exact 41 configurations and seven new families")
+    starter = (explicit_starter_trial(by_family["bcap-dualnorm"], starter_candidate_id)
+               if starter_candidate_id is not None else None)
     proposed = deepcopy(card)
     proposed["selections"] = [pin for pin in proposed["selections"] if pin["trainer_family"] not in FAMILIES]
     for family in sorted(FAMILIES):
         # The dualnorm family includes both zero- and positive-momentum studies.
         selection = select_configuration(by_family[family], 1)
-        candidate_id = selection["selected_candidate_id"]
+        candidate_id = (starter["candidate_id"] if family == "bcap-dualnorm" and starter is not None
+                        else selection["selected_candidate_id"])
         matches = [row for row in snapshot["rows"] if row["candidate_id"] == candidate_id
                    and row.get("runtime_cohort", {}).get("execution_backend") == "cuda"
                    and row.get("bindings", {}).get("source_digest") in allowed_sources]
@@ -96,6 +125,12 @@ def proposed_selection(root, snapshot, source_commit):
         reason = ("Finite optimizer-only BCAP screen: required Tier 1 PASS count descending, then "
                   "configuration hash ascending, over complete whole recipes under one executed source. "
                   "This pins a current measurement; calibration, confirmation and default adoption remain separate.")
+        if family == "bcap-dualnorm" and starter is not None:
+            reason = ("User-directed experimental BCAP starter: full dualnorm mu=0, etaG=.01, D/G=1.5, "
+                      "etaPrior=.03. This complete recipe ties the best required Tier 1 PASS count; "
+                      "its full-coverage ring endpoint quality and word-acquisition pass motivate the starting choice. "
+                      "Original frozen PASS/hash search selections remain unchanged. This selects a measured "
+                      "starting point, with no calibrated default adoption or qualification claim.")
         pin = family_row_pin(row, selection_kind="current_measurement", reason=reason,
                              measurement_views=["discriminator_stability"])
         _current_pin(root, family, [row], pin, view_id="discriminator_stability", catalogs=snapshot)
@@ -109,9 +144,11 @@ def main():
     parser.add_argument("--root", type=Path, default=ROOT)
     parser.add_argument("--snapshot", type=Path, required=True)
     parser.add_argument("--source-commit", required=True, help="full executed Git commit")
+    parser.add_argument("--starter-candidate", help="explicit user-requested tied dualnorm starter; leaves search winners unchanged")
     args = parser.parse_args()
     snapshot_path = args.snapshot if args.snapshot.is_absolute() else args.root / args.snapshot
-    print(json.dumps(proposed_selection(args.root, read_json(snapshot_path), args.source_commit),
+    print(json.dumps(proposed_selection(args.root, read_json(snapshot_path), args.source_commit,
+                                        starter_candidate_id=args.starter_candidate),
                      indent=2, sort_keys=True))
 
 

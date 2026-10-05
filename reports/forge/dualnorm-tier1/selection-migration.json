@@ -583,5 +583,80 @@
   },
   "qualification_input": false,
   "reason": "Nine existing measurement pins predate the current joint-word evaluator v4 source contract. Preserve original numerical evidence and all recipe/source/runtime/RNG/task/scientific-row identities; classify those selections as historical instead of weakening current-contract validation. This is publication maintenance, with no training or regrading into a new task contract.",
-  "schema_version": 1
+  "schema_version": 1,
+  "starter_change": {
+    "bcap_pure_adam_pin_unchanged": true,
+    "default_adoption": false,
+    "history_scope": "compact migration and frozen source; no additional current leaderboard row",
+    "new_card": {
+      "path": "configs/forge/selections/family-current-v1.json",
+      "sha256": "5d11656aa7126855a8bbd01549dc1c3c5d340f918447ccb431ea3356e507bc54"
+    },
+    "original_search_selections_unchanged": true,
+    "previous_card": {
+      "git_blob": "a33c0b697d7d4926ac7169741c48eff64fc5c915",
+      "git_commit": "08a1cffafbd4adc4c150e09fafd718a186dec534",
+      "path": "configs/forge/selections/family-current-v1.json",
+      "sha256": "357647545062db6c1050b4156d90320100f804582c085b907b37e472b12d1df4"
+    },
+    "previous_pin": {
+      "candidate_id": "bcap-dualnorm--41a1d59348a35169d7f75362b00a47a930424037f4dfb4ed879518cf8a08827d",
+      "candidate_revision": "234b3e6c2982b1492b10b05aa8b08fc20ad26ddc6b1488e297cd92d5b1d75ad2",
+      "cohort": "969b7aa32c1bfb3791499bd757da2191bbee08393d32b90eeb3b32ba62da42a0",
+      "execution_backend": "cuda",
+      "measurement_views": [
+        "discriminator_stability"
+      ],
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "reason": "Finite optimizer-only BCAP screen: required Tier 1 PASS count descending, then configuration hash ascending, over complete whole recipes under one executed source. This pins a current measurement; calibration, confirmation and default adoption remain separate.",
+      "recipe_sha256": "70d09553de1f06aa1a343d67f2bf99c45b2f973cf0143057dd37c2dde0145161",
+      "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+      "runtime_cohort_sha256": "0d83d78027c55d8fcf998f70a5b04d52863322a4f81151a200301a40e371695e",
+      "scientific_row_sha256": "a0abf7713bfde7ddd3a7c441445f4a914e848ca51b8c636295f438d8eedcaf4e",
+      "selection_kind": "current_measurement",
+      "source_digest": "c5c60a8018e144c447325f3705dd398d04069a91bb294eaaa76d37084ade67cc",
+      "task_keys_sha256": "f7062de40aeeb059b30c22abaa237bd894c195d4a516bb7a33cc8c6b3213623b",
+      "trainer_family": "bcap-dualnorm"
+    },
+    "reason": "Separate user-directed tie preference for the experimental BCAP starter; original nine metadata migrations, seven added count/hash measurements and all frozen search selections are retained.",
+    "retained_history_pin": {
+      "candidate_id": "bcap-dualnorm--41a1d59348a35169d7f75362b00a47a930424037f4dfb4ed879518cf8a08827d",
+      "candidate_revision": "234b3e6c2982b1492b10b05aa8b08fc20ad26ddc6b1488e297cd92d5b1d75ad2",
+      "cohort": "969b7aa32c1bfb3791499bd757da2191bbee08393d32b90eeb3b32ba62da42a0",
+      "execution_backend": "cuda",
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "reason": "Finite optimizer-only BCAP screen: required Tier 1 PASS count descending, then configuration hash ascending, over complete whole recipes under one executed source. This pins a current measurement; calibration, confirmation and default adoption remain separate. Retained as the original display selection after the user-directed experimental starter choice.",
+      "recipe_sha256": "70d09553de1f06aa1a343d67f2bf99c45b2f973cf0143057dd37c2dde0145161",
+      "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+      "runtime_cohort_sha256": "0d83d78027c55d8fcf998f70a5b04d52863322a4f81151a200301a40e371695e",
+      "scientific_row_sha256": "a0abf7713bfde7ddd3a7c441445f4a914e848ca51b8c636295f438d8eedcaf4e",
+      "selection_kind": "historical_incumbent",
+      "source_digest": "c5c60a8018e144c447325f3705dd398d04069a91bb294eaaa76d37084ade67cc",
+      "task_keys_sha256": "f7062de40aeeb059b30c22abaa237bd894c195d4a516bb7a33cc8c6b3213623b",
+      "trainer_family": "bcap-dualnorm"
+    },
+    "selected_pin": {
+      "candidate_id": "bcap-dualnorm--78aa66ae5c32297882274c11f191638f2cd1d79a9be4963349db5ed3d2b9a249",
+      "candidate_revision": "e8cce02584df10c9a7650d65ad1744996538041e3d5d269624d8310cb8d12ea8",
+      "cohort": "2d8cee20b23e8d7ed96d20d442df358846fc46d4681d0799cc8ba5081638c975",
+      "execution_backend": "cuda",
+      "measurement_views": [
+        "discriminator_stability"
+      ],
+      "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+      "reason": "User-directed experimental BCAP starter: full dualnorm mu=0, etaG=.01, D/G=1.5, etaPrior=.03. This complete recipe ties the best required Tier 1 PASS count; its full-coverage ring endpoint quality and word-acquisition pass motivate the starting choice. Original frozen PASS/hash search selections remain unchanged. This selects a measured starting point, with no calibrated default adoption or qualification claim.",
+      "recipe_sha256": "1d15d3ab991724ee353548cb6c3638ff4be4a108b71266ede80b7c62b5375272",
+      "rng_sha256": "cea6f009971f61082ee9e2dd249e5902547c670251df827f1e7984315fe75058",
+      "runtime_cohort_sha256": "0d83d78027c55d8fcf998f70a5b04d52863322a4f81151a200301a40e371695e",
+      "scientific_row_sha256": "c666dc1059462623cdb8c60ce0448ef86845fd200a3346434b8f528912a653dc",
+      "selection_kind": "current_measurement",
+      "source_digest": "c5c60a8018e144c447325f3705dd398d04069a91bb294eaaa76d37084ade67cc",
+      "task_keys_sha256": "55cf9efb1cf6160a9d450dcb5ef5462d6dda4c397bf7abd10eaef33f0159307f",
+      "trainer_family": "bcap-dualnorm"
+    },
+    "starter_receipt": {
+      "path": "reports/forge/dualnorm-tier1/starter-selection.json",
+      "sha256": "4c760be5aef6eb1ae92a488602b95b8f2cf0fba4dbe1e0dfef04b9d18f8bd245"
+    }
+  }
 }

@@ -284,6 +284,133 @@ def test_hardware_and_cpu_cuda_families_stay_separate(study):
     assert sum(row["selection"]["selection_kind"] == "best_observed" for row in result["rows"]) == 1
 
 
+def unmeasured_study(study):
+    root, rows, _, _, _, _ = study
+    cpu = deepcopy(rows[-1])
+    gpu = deepcopy(cpu)
+    gpu["runtime_cohort"] = {"execution_backend": "cuda", "compute_profiles": {"cuda": {"model": "gpu-a"}}}
+    rows[:] = [cpu, gpu]
+    registry = read_json(root / families.REGISTRY)
+    family = next(family for family in registry["families"] if family["id"] == "r1r2")
+    family.pop("active_search_by_backend", None)
+    family.update(unmeasured_display_backend="cuda",
+                  unmeasured_display_reason="Declaration-only CUDA placeholder; no execution or qualification credit.")
+    atomic_json(root / families.REGISTRY, registry)
+    return registry, family
+
+
+@pytest.mark.parametrize("reverse", [False, True])
+def test_explicit_unmeasured_backend_keeps_whole_scaffold_and_every_alternative(study, reverse):
+    _, family = unmeasured_study(study)
+    rows = study[1]
+    before = {families.scientific_row_hash(row) for row in rows}
+    if reverse:
+        rows.reverse()
+    result = select(study)
+    assert len(result["rows"]) == 1 and len(result["configuration_rows"]) == 2
+    selected = result["rows"][0]
+    assert selected["runtime_cohort"]["execution_backend"] == "cuda"
+    assert selected["selection"]["selection_kind"] == "unmeasured_declaration"
+    assert selected["selection"]["reason"] == family["unmeasured_display_reason"]
+    assert selected["selection"]["qualified"] is False and selected["selection"]["default_adoption"] is False
+    assert not selected["attempt_ids"] and all(task["status"] == "UNKNOWN" for task in selected["tasks"])
+    assert families.scientific_row_hash(selected) in before
+    assert {families.scientific_row_hash(row) for row in result["configuration_rows"]} == before
+    assert sum(row["selected_configuration"] for row in result["configuration_rows"]) == 1
+
+
+@pytest.mark.parametrize("tamper", ["attempt", "task", "gate", "incomplete_task", "nonrequired", "qualified", "passed",
+                                    "counts", "cost_tasks", "cost_seconds", "status", "malformed_status"])
+def test_unmeasured_backend_cannot_hide_any_executed_or_forged_outcome(study, tamper):
+    unmeasured_study(study)
+    # The nonselected CPU alternative must also be unmeasured.
+    row = study[1][0]
+    if tamper == "attempt":
+        row["attempt_ids"] = ["ordinary-attempt"]
+    elif tamper == "task":
+        row["tasks"][0]["status"] = "PASS"
+    elif tamper == "gate":
+        row["tasks"][0]["gate_status"] = "FAIL"
+    elif tamper == "incomplete_task":
+        row["status"] = row["tasks"][0]["status"] = "INCOMPLETE"
+    elif tamper == "nonrequired":
+        row["nonrequired_tasks"][0]["status"] = "INVALID"
+    elif tamper == "qualified":
+        row["qualified_tier"] = 1
+    elif tamper == "passed":
+        row["tiers"]["1"]["passed"] = 1
+    elif tamper == "counts":
+        row["tiers"]["1"]["counts"] = {"PASS": 1}
+    elif tamper == "cost_tasks":
+        row["cost"] = {"measured_tasks": 1}
+    elif tamper == "cost_seconds":
+        row["cost"] = {"wall_seconds": .01}
+    elif tamper == "status":
+        row["status"] = "FAIL"
+    elif tamper == "malformed_status":
+        row["status"] = "malformed"
+    with pytest.raises(ValueError, match="family r1r2: unmeasured display requires exclusively declaration-only"):
+        select(study)
+
+
+def test_unmeasured_not_run_aggregate_incomplete_retains_its_original_grade(study):
+    unmeasured_study(study)
+    for row in study[1]:
+        row["status"] = "INCOMPLETE"  # views.qualify() maps a wholly NOT_RUN aggregate to this label.
+    result = select(study)
+    assert result["rows"][0]["status"] == "INCOMPLETE"
+    assert result["rows"][0]["selection"]["selection_kind"] == "unmeasured_declaration"
+
+
+@pytest.mark.parametrize("tamper", ["missing_backend", "missing_reason", "invalid_backend", "empty_reason", "active_search"])
+def test_unmeasured_backend_requires_explicit_valid_registry_and_no_active_search(study, tamper):
+    registry, family = unmeasured_study(study)
+    if tamper == "missing_backend":
+        family.pop("unmeasured_display_backend")
+    elif tamper == "missing_reason":
+        family.pop("unmeasured_display_reason")
+    elif tamper == "invalid_backend":
+        family["unmeasured_display_backend"] = "gpu"
+    elif tamper == "empty_reason":
+        family["unmeasured_display_reason"] = " "
+    else:
+        family["active_search_by_backend"] = {"cuda": "active-study"}
+    atomic_json(study[0] / families.REGISTRY, registry)
+    with pytest.raises(ValueError, match="family r1r2: unmeasured display"):
+        select(study)
+
+
+@pytest.mark.parametrize("tamper", ["missing", "duplicate"])
+def test_unmeasured_backend_requires_one_canonical_scientific_row_without_hash_ranking(study, tamper):
+    unmeasured_study(study)
+    rows = study[1]
+    if tamper == "missing":
+        rows.pop()
+    else:
+        alternative = deepcopy(rows[-1])
+        alternative["runtime_cohort"]["compute_profiles"]["cuda"]["model"] = "gpu-b"
+        rows.append(alternative)
+    with pytest.raises(ValueError, match="family r1r2: unmeasured display requires exactly one canonical row"):
+        select(study)
+
+
+def test_unmeasured_backend_does_not_implicitly_select_when_no_selector_is_declared(study):
+    registry, family = unmeasured_study(study)
+    family.pop("unmeasured_display_backend")
+    family.pop("unmeasured_display_reason")
+    atomic_json(study[0] / families.REGISTRY, registry)
+    with pytest.raises(ValueError, match="family r1r2: multiple current runtime cohorts"):
+        select(study)
+
+
+def test_unmeasured_backend_leaves_recorded_policy_cohorts_separate(study):
+    unmeasured_study(study)
+    policy = read_json(study[0] / "configs/forge/views/discriminator_stability.json")
+    result = select(study, view_policy=policy)
+    assert len(result["rows"]) == 2
+    assert all(row["selection"]["selection_kind"] == "canonical_fallback" for row in result["rows"])
+
+
 def current_pin(study, row, *, kind="historical_incumbent", measurement_views=None, measurement_tasks=None):
     root, _, _, _, _, policy = study
     row = deepcopy(row)

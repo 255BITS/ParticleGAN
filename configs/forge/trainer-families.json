@@ -354,7 +354,9 @@
         "adversarial-training",
         "constant-learning-rate",
         "tensorflow-v1-adam"
-      ]
+      ],
+      "unmeasured_display_backend": "cuda",
+      "unmeasured_display_reason": "Declaration-only placeholder in the CUDA view used by all current measurement pins; no execution or qualification credit."
     }
   ],
   "historical_families": [
