@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 449. Inventory coverage: complete. Unresolved import items: 7.
+Records: 459. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -12,6 +12,7 @@ Records: 449. Inventory coverage: complete. Unresolved import items: 7.
 - [formulation_comparison](leaderboards/formulation_comparison.md)
 - [host_profile_transfer](leaderboards/host_profile_transfer.md)
 - [quality_coverage](leaderboards/quality_coverage.md)
+- [tier1_policy_coverage](technique-inventory.md)
 
 [Measured automation costs, reuse, and avoided work](automation.json). Run `python -m experiments.forge stats` for current accounting; unavailable measurements remain explicit.
 
@@ -4645,21 +4646,26 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 - **r1r2-tier1-refresh-v1**: Concluded 12 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/r1r2-tier1-refresh-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **k3p-global-input-noise-tier1-v1**: Concluded 8 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/k3p-global-input-noise-tier1-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **policy-family-defaults-round1-cli-recovery-v2**: Concluded 8 configurations; recorded outcome incomplete_comparison. Original terminal gates and study persistence gates remain distinct. [Source](../../reports/forge/policy-family-inventory.json) · [Board](../../reports/forge/policy-family-inventory.md)
+- **tier1-completion-v1-k3p**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/tier1-completion-v1-k3p.json) · [Board](../../reports/forge/technique-inventory.md)
 - **k3p-tier1-refresh-v1**: Concluded 4 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/k3p-tier1-refresh-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **k3p-family-defaults-round1-v1**: Concluded 4 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/k3p-family-defaults-round1-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **k3p-global-direct-moments-tier1-v1**: Concluded 4 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/k3p-global-direct-moments-tier1-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **r1r2-global-repair-rates-v1**: Concluded 2 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/r1r2-global-repair-rates-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **k3p-global-repair-rates-v1**: Concluded 2 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/k3p-global-repair-rates-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **k3p-global-tier1-v3**: Concluded 8 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/k3p-global-tier1-v3.json) · [Board](../../reports/forge/technique-inventory.md)
+- **tier1-completion-v1-ka2**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/tier1-completion-v1-ka2.json) · [Board](../../reports/forge/technique-inventory.md)
 - **r1r2-modern-toy-v1**: Concluded 4 whole configurations. Recorded selection: qualified_winner; default adoption False. [Source](../../reports/forge/configuration-search/r1r2-modern-toy-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **family-winner-round1**: 60 configurations; finite_screen_complete_no_fully_qualified_config. Capacity, a smoke pass or a good final endpoint does not qualify a whole configuration. Calibration and separately registered confirmation/robustness remain required. External GPU contention disables speed ranking. [Source](../../reports/forge/family-winner-round1/campaign-completion.json) · [Board](../../reports/forge/family-winner-round1/README.md)
 - **k3p-global-tier1-v2**: Concluded 12 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/k3p-global-tier1-v2.json) · [Board](../../reports/forge/technique-inventory.md)
 - **pr223-native3-continuation**: Native3 continuation: 0/3 PASS, 0 FAIL, 3 unavailable; final accepted INCOMPLETE. Original19 parent remains 16 PASS/1 INVALID/2 NOT_RUN under its own source. Current cost includes prior case debit once and cumulative metadata once. [Source](../../reports/forge/pr223-native3-first-invalid-20261004/results.json) · [Board](../../reports/forge/technique-inventory.md)
 - **release07-gan-v3-mog-tier1-refresh-v1**: Concluded 4 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/release07-gan-v3-mog-tier1-refresh-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **pr223-native3-repaired-continuation**: Repaired native3 continuation: 3/3 PASS, 0 FAIL, 0 unavailable; final accepted PASS. Original19 parent remains 16 PASS/1 INVALID/2 NOT_RUN under its own source. Current cost includes original19 and pretraining-invalid debits separately once and SAME cumulative metadata once. [Source](../../reports/forge/pr223-native3-repaired-20261004/results.json) · [Board](../../reports/forge/technique-inventory.md)
+- **tier1-completion-v1-bcap**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/tier1-completion-v1-bcap.json) · [Board](../../reports/forge/technique-inventory.md)
+- **tier1-completion-v1-r1r2**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/tier1-completion-v1-r1r2.json) · [Board](../../reports/forge/technique-inventory.md)
 - **bcap-family-defaults-round1-v1**: Concluded 8 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/bcap-family-defaults-round1-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **release07-gan-v3-mog-family-defaults-round1-v1**: Concluded 4 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/release07-gan-v3-mog-family-defaults-round1-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 - **ka2-family-defaults-round1-v1**: Concluded 4 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/ka2-family-defaults-round1-v1.json) · [Board](../../reports/forge/technique-inventory.md)
+- **tier1-completion-v1-release07-gan-v3**: Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/tier1-completion-v1-release07-gan-v3.json) · [Board](../../reports/forge/technique-inventory.md)
 - **policy-family-defaults-round4-prior-balance-v1**: Concluded 8 configurations; recorded outcome incomplete_comparison. Original terminal gates and study persistence gates remain distinct. [Source](../../reports/forge/policy-family-inventory.json) · [Board](../../reports/forge/policy-family-inventory.md)
 - **ka2-global-repair-rates-v1**: Concluded 2 whole configurations. Recorded selection: best_observed; default adoption False. [Source](../../reports/forge/configuration-search/ka2-global-repair-rates-v1.json) · [Board](../../reports/forge/technique-inventory.md)
 
@@ -4675,4 +4681,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `570fcd4f2cdc7fd896ce2354e60edc1fa44fcd20c837b02f049ebd79078c8a4c`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `7a1c3a25671ec710372c4e994b14c715856949c0d12d320716fe7f918cd08626`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

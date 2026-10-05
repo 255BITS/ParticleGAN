@@ -2,7 +2,7 @@
 
 Current task assignments, grouped by goal view and qualification tier. Required tasks gate progression; ranking and diagnostic tasks retain their declared roles.
 
-Catalog: **60 tasks**; **56 assigned** to at least one view; **4 unassigned**. Showing **8/8 views**.
+Catalog: **60 tasks**; **57 assigned** to at least one view; **3 unassigned**. Showing **8/8 views**.
 
 Declared priors across the catalog: **34 MoGParticlePrior**, **26 ParticlePrior** (including **4 nonsampled parameter controls**). Every experiment defines `execution.prior` explicitly; candidate and API defaults cannot supply it. `kind: mog` selects `MoGParticlePrior`; `kind: particle_cloud` selects `ParticlePrior`. Sigma alone does not identify the code path. Ordinary Forge MoG tasks require positive sigma; archived zero-sigma MoG evidence keeps its recorded kind. Task sigma is absolute; API demonstrations may instead record the recipe's relative `sigma_rel`.
 
@@ -32,7 +32,7 @@ This report follows changing declarations and published evidence; it selects no 
 | --- | ---: | --- | --- | --- | --- |
 | [adaptation](../../configs/forge/views/adaptation.json) | 2 | 3 required | 19 required | 1 required | provisional |
 | [clockfree_continuous](../../configs/forge/views/clockfree_continuous.json) | 2 | 4 required | 19 required | 6 required | provisional |
-| [discriminator_stability](../../configs/forge/views/discriminator_stability.json) | 4 | 6 required | 19 required | 2 required | provisional |
+| [discriminator_stability](../../configs/forge/views/discriminator_stability.json) | 5 | 6 required, 1 diagnostic | 19 required | 2 required | provisional |
 | [formulation_comparison](../../configs/forge/views/formulation_comparison.json) | 1 | 3 required | 19 required, 15 diagnostic | 2 required | provisional |
 | [host_profile_transfer](../../configs/forge/views/host_profile_transfer.json) | 4 | 3 required | 19 required, 13 diagnostic | 2 required | provisional |
 | [k3p_two_pole_horizon](../../configs/forge/views/k3p_two_pole_horizon.json) | 1 | 2 diagnostic | 0 tasks | 0 tasks | provisional |
@@ -155,7 +155,7 @@ Candidate outcomes, metrics and measured costs: [leaderboard](leaderboards/clock
 
 ## discriminator_stability
 
-Declaration: [discriminator_stability](../../configs/forge/views/discriminator_stability.json); revision 4; goal: `discriminator_stability`.
+Declaration: [discriminator_stability](../../configs/forge/views/discriminator_stability.json); revision 5; goal: `discriminator_stability`.
 
 Declared calibration status: **provisional**.
 
@@ -165,7 +165,7 @@ Candidate outcomes, metrics and measured costs: [leaderboard](technique-inventor
 
 ### Tier 1: smoke
 
-6 required.
+6 required, 1 diagnostic.
 
 | Task | Importance | Prior code path | Experiment guide | Adapter / gate | Declared steps | Timeout (s) | Dependencies / shared execution |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -175,6 +175,7 @@ Candidate outcomes, metrics and measured costs: [leaderboard](technique-inventor
 | [ae_gan_hold](../../configs/forge/tasks/ae_gan_hold.json) | required | MoGParticlePrior (sigma=0.025) | [Question, results, GIFs](#experiment-ae-gan-hold) | transfer_behavior / transfer_sustained | 250 | 300 | — |
 | [ring16_acquisition](../../configs/forge/tasks/ring16_acquisition.json) | required | MoGParticlePrior (sigma=0.025) | [Question, results, GIFs](#experiment-ring16-acquisition) | transfer_vector / transfer_sustained | 400 | 300 | — |
 | [five_word_joint_acquisition](../../configs/forge/tasks/five_word_joint_acquisition.json) | required | ParticlePrior (sigma=0) | [Question, results, GIFs](#experiment-five-word-joint) | word_joint / transfer_sustained | 20001 | 900 | — |
+| [clockfree_audit_measurement_v1](../../configs/forge/tasks/clockfree_audit_measurement_v1.json) | diagnostic | MoGParticlePrior (sigma=0.025) | [Question, results, GIFs](#experiment-clockfree-audit-measurement-v1) | clockfree_audit / clockfree_parity | 24 | 300 | — |
 
 ### Tier 2: quality
 
@@ -440,7 +441,7 @@ Declaration: [tier1_policy_coverage](../../configs/forge/views/tier1_policy_cove
 
 Declared calibration status: **undeclared**.
 
-No published solution leaderboard for this view yet; task registration and related API media confer no candidate qualification.
+Candidate outcomes, metrics and measured costs: [leaderboard](technique-inventory.md).
 
 ### Tier 1: smoke
 
@@ -474,7 +475,6 @@ These catalog tasks have no tier placement. Add an assignment to a view to inclu
 
 | Task | Prior code path | Experiment guide | Adapter / gate | Declared steps | Timeout (s) | Dependencies / shared execution |
 | --- | --- | --- | --- | --- | --- | --- |
-| [clockfree_audit_measurement_v1](../../configs/forge/tasks/clockfree_audit_measurement_v1.json) | MoGParticlePrior (sigma=0.025) | [Question, results, GIFs](#experiment-clockfree-audit-measurement-v1) | clockfree_audit / clockfree_parity | 24 | 300 | — |
 | [grid100_affine_square_named_v1_14k](../../configs/forge/tasks/grid100_affine_square_named_v1_14k.json) | MoGParticlePrior (sigma=0.025) | [Question, results, GIFs](#experiment-grid100) | native100_continuation / native_accuracy | 14000 total; 7000 additional | 7200 | [grid100_affine_square_named_v1](../../configs/forge/tasks/grid100_affine_square_named_v1.json) (checkpoint); [clockfree_audit](../../configs/forge/tasks/clockfree_audit.json) (gate) |
 | [rotated100_affine_square_named_v1_14k](../../configs/forge/tasks/rotated100_affine_square_named_v1_14k.json) | MoGParticlePrior (sigma=0.025) | [Question, results, GIFs](#experiment-rotated100) | native100_continuation / native_accuracy | 14000 total; 7000 additional | 7200 | [rotated100_affine_square_named_v1](../../configs/forge/tasks/rotated100_affine_square_named_v1.json) (checkpoint); [clockfree_audit](../../configs/forge/tasks/clockfree_audit.json) (gate) |
 | [staggered100_affine_square_named_v1_14k](../../configs/forge/tasks/staggered100_affine_square_named_v1_14k.json) | MoGParticlePrior (sigma=0.025) | [Question, results, GIFs](#experiment-staggered100) | native100_continuation / native_accuracy | 14000 total; 7000 additional | 7200 | [staggered100_affine_square_named_v1](../../configs/forge/tasks/staggered100_affine_square_named_v1.json) (checkpoint); [clockfree_audit](../../configs/forge/tasks/clockfree_audit.json) (gate) |
@@ -531,11 +531,15 @@ Recorded Forge task outcomes (exact saved configuration/source/runtime):
 
 | Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| ae_gan_hold | [BCap](../../configs/forge/configurations/bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212.json) | MoGParticlePrior (sigma=0.025) | PASS | CHANGED; earlier contract | cuda / 2899099048c0 / bf859ff60898 | [source-bound receipt index](technique-inventory.json) |
-| ae_gan_hold | [K3P](../../configs/forge/configurations/k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c.json) | MoGParticlePrior (sigma=0.025) | PASS | CHANGED; earlier contract | cuda / 2899099048c0 / 7ebaeb278a75 | [source-bound receipt index](technique-inventory.json) |
-| ae_gan_hold | [KA2](../../configs/forge/configurations/ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f.json) | MoGParticlePrior (sigma=0.025) | PASS | CHANGED; earlier contract | cuda / 2899099048c0 / 7be3028bd4fc | [source-bound receipt index](technique-inventory.json) |
-| ae_gan_hold | [R1/R2](../../configs/forge/configurations/r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f.json) | MoGParticlePrior (sigma=0.025) | PASS | CHANGED; earlier contract | cuda / 2899099048c0 / 4ff453a8a3ed | [source-bound receipt index](technique-inventory.json) |
-| ae_gan_hold | [GAN v3 release 0.7](../../configs/forge/configurations/release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c.json) | MoGParticlePrior (sigma=0.025) | PASS | CHANGED; earlier contract | cuda / 2899099048c0 / f99998f9b0fa | [source-bound receipt index](technique-inventory.json) |
+| ae_gan_hold | [BCap](../../configs/forge/configurations/bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212.json) | MoGParticlePrior (sigma=0.025) | PASS | matches; source remains frozen | cuda / 928b485ffbe6 / de1faf2ca5cd | [source-bound receipt index](technique-inventory.json) |
+| ae_gan_hold | [K3P](../../configs/forge/configurations/k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c.json) | MoGParticlePrior (sigma=0.025) | PASS | matches; source remains frozen | cuda / 928b485ffbe6 / 942ae9802bd8 | [source-bound receipt index](technique-inventory.json) |
+| ae_gan_hold | [K3P without A2](../../configs/forge/ideas/k3p-a2-off-native-diagnostic.json) | MoGParticlePrior (sigma=0.025) | PASS | matches; source remains frozen | cuda / 928b485ffbe6 / e17da7e5ab34 | [source-bound receipt index](technique-inventory.json) |
+| ae_gan_hold | [K3P without critic anchor](../../configs/forge/ideas/forge-onboarding-anchor-ablation.json) | MoGParticlePrior (sigma=0.025) | PASS | matches; source remains frozen | cuda / 928b485ffbe6 / 7b8167f5367d | [source-bound receipt index](technique-inventory.json) |
+| ae_gan_hold | [K3P without critic penalty](../../configs/forge/ideas/forge-no-critic-penalty.json) | MoGParticlePrior (sigma=0.025) | PASS | matches; source remains frozen | cuda / 928b485ffbe6 / 861df90816c5 | [source-bound receipt index](technique-inventory.json) |
+| ae_gan_hold | [K3P without training output noise](../../configs/forge/ideas/k3p-no-output-noise-diagnostic.json) | MoGParticlePrior (sigma=0.025) | PASS | matches; source remains frozen | cuda / 928b485ffbe6 / 03c79722db9a | [source-bound receipt index](technique-inventory.json) |
+| ae_gan_hold | [KA2](../../configs/forge/configurations/ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f.json) | MoGParticlePrior (sigma=0.025) | PASS | matches; source remains frozen | cuda / 928b485ffbe6 / fb17123bbc34 | [source-bound receipt index](technique-inventory.json) |
+| ae_gan_hold | [R1/R2](../../configs/forge/configurations/r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f.json) | MoGParticlePrior (sigma=0.025) | PASS | matches; source remains frozen | cuda / 928b485ffbe6 / a56cbab763fa | [source-bound receipt index](technique-inventory.json) |
+| ae_gan_hold | [GAN v3 release 0.7](../../configs/forge/configurations/release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c.json) | MoGParticlePrior (sigma=0.025) | PASS | matches; source remains frozen | cuda / 928b485ffbe6 / 83376d33973c | [source-bound receipt index](technique-inventory.json) |
 
 Related public-API demonstrations, with their own recorded contracts:
 
@@ -707,8 +711,15 @@ Recorded Forge task outcomes (exact saved configuration/source/runtime):
 
 | Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| five_word_joint_acquisition | [K3P](../../configs/forge/configurations/k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c.json) | ParticlePrior (sigma=0) | FAIL | CHANGED; earlier contract | cuda / 2899099048c0 / 7ebaeb278a75 | [source-bound receipt index](technique-inventory.json) |
-| five_word_joint_acquisition | [KA2](../../configs/forge/configurations/ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f.json) | ParticlePrior (sigma=0) | FAIL | CHANGED; earlier contract | cuda / 2899099048c0 / 7be3028bd4fc | [source-bound receipt index](technique-inventory.json) |
+| five_word_joint_acquisition | [BCap](../../configs/forge/configurations/bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / 928b485ffbe6 / de1faf2ca5cd | [source-bound receipt index](technique-inventory.json) |
+| five_word_joint_acquisition | [K3P](../../configs/forge/configurations/k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c.json) | ParticlePrior (sigma=0) | FAIL | matches; source remains frozen | cuda / 928b485ffbe6 / 942ae9802bd8 | [source-bound receipt index](technique-inventory.json) |
+| five_word_joint_acquisition | [K3P without A2](../../configs/forge/ideas/k3p-a2-off-native-diagnostic.json) | ParticlePrior (sigma=0) | FAIL | matches; source remains frozen | cuda / 928b485ffbe6 / e17da7e5ab34 | [source-bound receipt index](technique-inventory.json) |
+| five_word_joint_acquisition | [K3P without critic anchor](../../configs/forge/ideas/forge-onboarding-anchor-ablation.json) | ParticlePrior (sigma=0) | FAIL | matches; source remains frozen | cuda / 928b485ffbe6 / 7b8167f5367d | [source-bound receipt index](technique-inventory.json) |
+| five_word_joint_acquisition | [K3P without critic penalty](../../configs/forge/ideas/forge-no-critic-penalty.json) | ParticlePrior (sigma=0) | FAIL | matches; source remains frozen | cuda / 928b485ffbe6 / 861df90816c5 | [source-bound receipt index](technique-inventory.json) |
+| five_word_joint_acquisition | [K3P without training output noise](../../configs/forge/ideas/k3p-no-output-noise-diagnostic.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / 928b485ffbe6 / 03c79722db9a | [source-bound receipt index](technique-inventory.json) |
+| five_word_joint_acquisition | [KA2](../../configs/forge/configurations/ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f.json) | ParticlePrior (sigma=0) | FAIL | matches; source remains frozen | cuda / 928b485ffbe6 / fb17123bbc34 | [source-bound receipt index](technique-inventory.json) |
+| five_word_joint_acquisition | [R1/R2](../../configs/forge/configurations/r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f.json) | ParticlePrior (sigma=0) | FAIL | matches; source remains frozen | cuda / 928b485ffbe6 / a56cbab763fa | [source-bound receipt index](technique-inventory.json) |
+| five_word_joint_acquisition | [GAN v3 release 0.7](../../configs/forge/configurations/release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c.json) | ParticlePrior (sigma=0) | FAIL | matches; source remains frozen | cuda / 928b485ffbe6 / 83376d33973c | [source-bound receipt index](technique-inventory.json) |
 
 Related public-API demonstrations, with their own recorded contracts:
 
@@ -769,7 +780,19 @@ All 24 declared observations and final live metrics are required.
 | Scoring weights | state_selected |
 | Evaluation output noise | clean |
 
-No measured Forge outcome for these exact task IDs in the current solution publication. Consult the solution leaderboard for unknown requirements and capability blockers.
+Recorded Forge task outcomes (exact saved configuration/source/runtime):
+
+| Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
+| --- | --- | --- | --- | --- | --- | --- |
+| gaussian1d_acquisition | [BCap](../../configs/forge/configurations/bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212.json) | MoGParticlePrior (sigma=0.025) | FAIL | matches; source remains frozen | cuda / 928b485ffbe6 / de1faf2ca5cd | [source-bound receipt index](technique-inventory.json) |
+| gaussian1d_acquisition | [K3P](../../configs/forge/configurations/k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c.json) | MoGParticlePrior (sigma=0.025) | FAIL | matches; source remains frozen | cuda / 928b485ffbe6 / 942ae9802bd8 | [source-bound receipt index](technique-inventory.json) |
+| gaussian1d_acquisition | [K3P without A2](../../configs/forge/ideas/k3p-a2-off-native-diagnostic.json) | MoGParticlePrior (sigma=0.025) | FAIL | matches; source remains frozen | cuda / 928b485ffbe6 / e17da7e5ab34 | [source-bound receipt index](technique-inventory.json) |
+| gaussian1d_acquisition | [K3P without critic anchor](../../configs/forge/ideas/forge-onboarding-anchor-ablation.json) | MoGParticlePrior (sigma=0.025) | FAIL | matches; source remains frozen | cuda / 928b485ffbe6 / 7b8167f5367d | [source-bound receipt index](technique-inventory.json) |
+| gaussian1d_acquisition | [K3P without critic penalty](../../configs/forge/ideas/forge-no-critic-penalty.json) | MoGParticlePrior (sigma=0.025) | FAIL | matches; source remains frozen | cuda / 928b485ffbe6 / 861df90816c5 | [source-bound receipt index](technique-inventory.json) |
+| gaussian1d_acquisition | [K3P without training output noise](../../configs/forge/ideas/k3p-no-output-noise-diagnostic.json) | MoGParticlePrior (sigma=0.025) | FAIL | matches; source remains frozen | cuda / 928b485ffbe6 / 03c79722db9a | [source-bound receipt index](technique-inventory.json) |
+| gaussian1d_acquisition | [KA2](../../configs/forge/configurations/ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f.json) | MoGParticlePrior (sigma=0.025) | FAIL | matches; source remains frozen | cuda / 928b485ffbe6 / fb17123bbc34 | [source-bound receipt index](technique-inventory.json) |
+| gaussian1d_acquisition | [R1/R2](../../configs/forge/configurations/r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f.json) | MoGParticlePrior (sigma=0.025) | FAIL | matches; source remains frozen | cuda / 928b485ffbe6 / a56cbab763fa | [source-bound receipt index](technique-inventory.json) |
+| gaussian1d_acquisition | [GAN v3 release 0.7](../../configs/forge/configurations/release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c.json) | MoGParticlePrior (sigma=0.025) | FAIL | matches; source remains frozen | cuda / 928b485ffbe6 / 83376d33973c | [source-bound receipt index](technique-inventory.json) |
 
 Related public-API demonstrations, with their own recorded contracts:
 
@@ -1202,11 +1225,15 @@ Recorded Forge task outcomes (exact saved configuration/source/runtime):
 
 | Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| ring16_acquisition | [BCap](../../configs/forge/configurations/bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212.json) | MoGParticlePrior (sigma=0.025) | FAIL | CHANGED; earlier contract | cuda / 2899099048c0 / bf859ff60898 | [source-bound receipt index](technique-inventory.json) |
-| ring16_acquisition | [K3P](../../configs/forge/configurations/k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c.json) | MoGParticlePrior (sigma=0.025) | PASS | CHANGED; earlier contract | cuda / 2899099048c0 / 7ebaeb278a75 | [source-bound receipt index](technique-inventory.json) |
-| ring16_acquisition | [KA2](../../configs/forge/configurations/ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f.json) | MoGParticlePrior (sigma=0.025) | PASS | CHANGED; earlier contract | cuda / 2899099048c0 / 7be3028bd4fc | [source-bound receipt index](technique-inventory.json) |
-| ring16_acquisition | [R1/R2](../../configs/forge/configurations/r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f.json) | MoGParticlePrior (sigma=0.025) | FAIL | CHANGED; earlier contract | cuda / 2899099048c0 / 4ff453a8a3ed | [source-bound receipt index](technique-inventory.json) |
-| ring16_acquisition | [GAN v3 release 0.7](../../configs/forge/configurations/release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c.json) | MoGParticlePrior (sigma=0.025) | FAIL | CHANGED; earlier contract | cuda / 2899099048c0 / f99998f9b0fa | [source-bound receipt index](technique-inventory.json) |
+| ring16_acquisition | [BCap](../../configs/forge/configurations/bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212.json) | MoGParticlePrior (sigma=0.025) | FAIL | matches; source remains frozen | cuda / 928b485ffbe6 / de1faf2ca5cd | [source-bound receipt index](technique-inventory.json) |
+| ring16_acquisition | [K3P](../../configs/forge/configurations/k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c.json) | MoGParticlePrior (sigma=0.025) | PASS | matches; source remains frozen | cuda / 928b485ffbe6 / 942ae9802bd8 | [source-bound receipt index](technique-inventory.json) |
+| ring16_acquisition | [K3P without A2](../../configs/forge/ideas/k3p-a2-off-native-diagnostic.json) | MoGParticlePrior (sigma=0.025) | FAIL | matches; source remains frozen | cuda / 928b485ffbe6 / e17da7e5ab34 | [source-bound receipt index](technique-inventory.json) |
+| ring16_acquisition | [K3P without critic anchor](../../configs/forge/ideas/forge-onboarding-anchor-ablation.json) | MoGParticlePrior (sigma=0.025) | FAIL | matches; source remains frozen | cuda / 928b485ffbe6 / 7b8167f5367d | [source-bound receipt index](technique-inventory.json) |
+| ring16_acquisition | [K3P without critic penalty](../../configs/forge/ideas/forge-no-critic-penalty.json) | MoGParticlePrior (sigma=0.025) | FAIL | matches; source remains frozen | cuda / 928b485ffbe6 / 861df90816c5 | [source-bound receipt index](technique-inventory.json) |
+| ring16_acquisition | [K3P without training output noise](../../configs/forge/ideas/k3p-no-output-noise-diagnostic.json) | MoGParticlePrior (sigma=0.025) | FAIL | matches; source remains frozen | cuda / 928b485ffbe6 / 03c79722db9a | [source-bound receipt index](technique-inventory.json) |
+| ring16_acquisition | [KA2](../../configs/forge/configurations/ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f.json) | MoGParticlePrior (sigma=0.025) | PASS | matches; source remains frozen | cuda / 928b485ffbe6 / fb17123bbc34 | [source-bound receipt index](technique-inventory.json) |
+| ring16_acquisition | [R1/R2](../../configs/forge/configurations/r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f.json) | MoGParticlePrior (sigma=0.025) | FAIL | matches; source remains frozen | cuda / 928b485ffbe6 / a56cbab763fa | [source-bound receipt index](technique-inventory.json) |
+| ring16_acquisition | [GAN v3 release 0.7](../../configs/forge/configurations/release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c.json) | MoGParticlePrior (sigma=0.025) | FAIL | matches; source remains frozen | cuda / 928b485ffbe6 / 83376d33973c | [source-bound receipt index](technique-inventory.json) |
 
 Related public-API demonstrations, with their own recorded contracts:
 
@@ -1388,15 +1415,15 @@ Recorded Forge task outcomes (exact saved configuration/source/runtime):
 
 | Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| two_pole | [BCap](../../configs/forge/configurations/bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / 2899099048c0 / bf859ff60898 | [source-bound receipt index](technique-inventory.json) |
-| two_pole | [K3P](../../configs/forge/configurations/k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / 2899099048c0 / 7ebaeb278a75 | [source-bound receipt index](technique-inventory.json) |
-| two_pole | [K3P without A2](../../configs/forge/ideas/k3p-a2-off-native-diagnostic.json) | ParticlePrior (sigma=0) | FAIL | CHANGED; earlier contract | cuda / 2899099048c0 / 31b4d36cc007 | [source-bound receipt index](technique-inventory.json) |
-| two_pole | [K3P without critic anchor](../../configs/forge/ideas/forge-onboarding-anchor-ablation.json) | ParticlePrior (sigma=0) | FAIL | CHANGED; earlier contract | cuda / 2899099048c0 / 08a552799580 | [source-bound receipt index](technique-inventory.json) |
-| two_pole | [K3P without critic penalty](../../configs/forge/ideas/forge-no-critic-penalty.json) | ParticlePrior (sigma=0) | FAIL | CHANGED; earlier contract | cuda / 2899099048c0 / 866cef3392e0 | [source-bound receipt index](technique-inventory.json) |
-| two_pole | [K3P without training output noise](../../configs/forge/ideas/k3p-no-output-noise-diagnostic.json) | ParticlePrior (sigma=0) | FAIL | CHANGED; earlier contract | cuda / 2899099048c0 / edc93bce30da | [source-bound receipt index](technique-inventory.json) |
-| two_pole | [KA2](../../configs/forge/configurations/ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / 2899099048c0 / 7be3028bd4fc | [source-bound receipt index](technique-inventory.json) |
-| two_pole | [R1/R2](../../configs/forge/configurations/r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / 2899099048c0 / 4ff453a8a3ed | [source-bound receipt index](technique-inventory.json) |
-| two_pole | [GAN v3 release 0.7](../../configs/forge/configurations/release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / 2899099048c0 / f99998f9b0fa | [source-bound receipt index](technique-inventory.json) |
+| two_pole | [BCap](../../configs/forge/configurations/bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / 928b485ffbe6 / de1faf2ca5cd | [source-bound receipt index](technique-inventory.json) |
+| two_pole | [K3P](../../configs/forge/configurations/k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / 928b485ffbe6 / 942ae9802bd8 | [source-bound receipt index](technique-inventory.json) |
+| two_pole | [K3P without A2](../../configs/forge/ideas/k3p-a2-off-native-diagnostic.json) | ParticlePrior (sigma=0) | FAIL | matches; source remains frozen | cuda / 928b485ffbe6 / e17da7e5ab34 | [source-bound receipt index](technique-inventory.json) |
+| two_pole | [K3P without critic anchor](../../configs/forge/ideas/forge-onboarding-anchor-ablation.json) | ParticlePrior (sigma=0) | FAIL | matches; source remains frozen | cuda / 928b485ffbe6 / 7b8167f5367d | [source-bound receipt index](technique-inventory.json) |
+| two_pole | [K3P without critic penalty](../../configs/forge/ideas/forge-no-critic-penalty.json) | ParticlePrior (sigma=0) | FAIL | matches; source remains frozen | cuda / 928b485ffbe6 / 861df90816c5 | [source-bound receipt index](technique-inventory.json) |
+| two_pole | [K3P without training output noise](../../configs/forge/ideas/k3p-no-output-noise-diagnostic.json) | ParticlePrior (sigma=0) | FAIL | matches; source remains frozen | cuda / 928b485ffbe6 / 03c79722db9a | [source-bound receipt index](technique-inventory.json) |
+| two_pole | [KA2](../../configs/forge/configurations/ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / 928b485ffbe6 / fb17123bbc34 | [source-bound receipt index](technique-inventory.json) |
+| two_pole | [R1/R2](../../configs/forge/configurations/r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / 928b485ffbe6 / a56cbab763fa | [source-bound receipt index](technique-inventory.json) |
+| two_pole | [GAN v3 release 0.7](../../configs/forge/configurations/release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / 928b485ffbe6 / 83376d33973c | [source-bound receipt index](technique-inventory.json) |
 
 Related public-API demonstrations, with their own recorded contracts:
 
@@ -1486,11 +1513,15 @@ Recorded Forge task outcomes (exact saved configuration/source/runtime):
 
 | Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| unused_token_hold | [BCap](../../configs/forge/configurations/bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / 2899099048c0 / bf859ff60898 | [source-bound receipt index](technique-inventory.json) |
-| unused_token_hold | [K3P](../../configs/forge/configurations/k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / 2899099048c0 / 7ebaeb278a75 | [source-bound receipt index](technique-inventory.json) |
-| unused_token_hold | [KA2](../../configs/forge/configurations/ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / 2899099048c0 / 7be3028bd4fc | [source-bound receipt index](technique-inventory.json) |
-| unused_token_hold | [R1/R2](../../configs/forge/configurations/r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / 2899099048c0 / 4ff453a8a3ed | [source-bound receipt index](technique-inventory.json) |
-| unused_token_hold | [GAN v3 release 0.7](../../configs/forge/configurations/release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / 2899099048c0 / f99998f9b0fa | [source-bound receipt index](technique-inventory.json) |
+| unused_token_hold | [BCap](../../configs/forge/configurations/bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / 928b485ffbe6 / de1faf2ca5cd | [source-bound receipt index](technique-inventory.json) |
+| unused_token_hold | [K3P](../../configs/forge/configurations/k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / 928b485ffbe6 / 942ae9802bd8 | [source-bound receipt index](technique-inventory.json) |
+| unused_token_hold | [K3P without A2](../../configs/forge/ideas/k3p-a2-off-native-diagnostic.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / 928b485ffbe6 / e17da7e5ab34 | [source-bound receipt index](technique-inventory.json) |
+| unused_token_hold | [K3P without critic anchor](../../configs/forge/ideas/forge-onboarding-anchor-ablation.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / 928b485ffbe6 / 7b8167f5367d | [source-bound receipt index](technique-inventory.json) |
+| unused_token_hold | [K3P without critic penalty](../../configs/forge/ideas/forge-no-critic-penalty.json) | ParticlePrior (sigma=0) | FAIL | matches; source remains frozen | cuda / 928b485ffbe6 / 861df90816c5 | [source-bound receipt index](technique-inventory.json) |
+| unused_token_hold | [K3P without training output noise](../../configs/forge/ideas/k3p-no-output-noise-diagnostic.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / 928b485ffbe6 / 03c79722db9a | [source-bound receipt index](technique-inventory.json) |
+| unused_token_hold | [KA2](../../configs/forge/configurations/ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / 928b485ffbe6 / fb17123bbc34 | [source-bound receipt index](technique-inventory.json) |
+| unused_token_hold | [R1/R2](../../configs/forge/configurations/r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / 928b485ffbe6 / a56cbab763fa | [source-bound receipt index](technique-inventory.json) |
+| unused_token_hold | [GAN v3 release 0.7](../../configs/forge/configurations/release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / 928b485ffbe6 / 83376d33973c | [source-bound receipt index](technique-inventory.json) |
 
 Related public-API demonstrations, with their own recorded contracts:
 
@@ -1721,6 +1752,6 @@ The wider question review also links standalone experiments outside the Forge ti
 - [Later questions](../toy_audit/api_contract/recent_prs/README.md)
 - [Caption questions](../toy_audit/api_contract/caption_prs/README.md)
 
-Declaration input digest: `2c7db50aff2e2da092f28012bdbc0966d8876c51a4c160724539a5c103791070`. The JSON form includes the individual task and view file hashes.
+Declaration input digest: `30e6a6c6a118a47b2b5eb24d4cfe6c4e670ba7169c11d930a09d9023e1091334`. The JSON form includes the individual task and view file hashes.
 
-Published artifact input digest: `23f699d0dcdf8f967b1bfd128777aa4e64184a4ad166e505bc1a7440098e86f4`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.
+Published artifact input digest: `6b05b904f4b336fe88120d36fd43d49b7ea9a6ea0780828ebbd43293f603bf89`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.

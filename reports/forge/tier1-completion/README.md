@@ -1,5 +1,54 @@
 # Current Tier 1 measurement round
 
+The completed round measured **26 PASS and 45 FAIL**, with **six explicit
+no-attempt policy blockers**, across eleven fixed recipes. All 71 numerical
+results have [actual-training GIFs and provenance](media.json). Total charged
+execution was **2,055.6923 seconds (34.3 minutes)**, with no infrastructure
+errors, retries, seed repeats or later-tier work.
+
+[Current family leaderboard](../technique-inventory.md) ·
+[Final metrics and exact attempts](results.json) ·
+[Validation receipt](validation.json) ·
+[Bulk archive identity and member hashes](artifact-inventory.json).
+
+Among the nine ordinary recipes, BCap, K3P and KA2 tie at four of six required
+passes. None passes the whole required tier. The objective-specific choices in
+this measured cohort are K3P/KA2 for ring acquisition and BCap/K3P without
+training output noise for joint word acquisition. These observations do not
+select a universal default or qualify later tiers; costs remain separate from
+scientific ranking.
+
+| Ordinary required test | PASS | FAIL |
+| --- | ---: | ---: |
+| Gaussian acquisition | 0 | 9 |
+| Two-pole learning | 5 | 4 |
+| Unused-token retention | 8 | 1 |
+| AE/GAN retention | 9 | 0 |
+| Ring acquisition | 2 | 7 |
+| Joint five-word acquisition | 2 | 7 |
+
+Passing the final observation alone is insufficient. K3P and KA2 satisfy the
+terminal Gaussian bounds but retain only two or three consecutive passing
+checks, below the required five. KA2 also passes the final word bounds without
+the required sustained suffix. Read the saved curves and failed bounds before
+attributing a failure to a formulation change.
+
+All nine separate ordinary clock diagnostics fail their declared parity/source
+checks. Atlas and E22 each have four measured scoped FAILs and three
+explicit ownership blockers (unused-token, AE and joint words). Their clock
+probes also detect restart differences. These policy measurements neither
+replace clean/MoG parent results nor establish clock-free eligibility. Remaining
+incomplete markers identify real unsupported or unmeasured contracts; they are
+not relabeled as completed clean results.
+
+The [portable validator](validate.py) checks recipes, source/runtime/evaluator
+certificates, numerical terminal rules, costs, tier limits and every selected
+attempt's GIF identity without changing a grade or running training:
+
+```sh
+python reports/forge/tier1-completion/validate.py --queue-root "$PWD/runs/forge"
+```
+
 `tier1-completion-v1` measures the existing selected global recipe for each of
 the eleven current trainer families. MoG/cloud remains task-owned. The roster
 freezes candidate declarations, task definitions, view fingerprints and task

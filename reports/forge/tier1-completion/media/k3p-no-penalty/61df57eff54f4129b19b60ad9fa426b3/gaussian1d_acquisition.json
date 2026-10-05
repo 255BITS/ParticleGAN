@@ -1,0 +1,27 @@
+{
+  "gif_sha256": "8e186fb4c5cbfd93e76fc68fb50af1f6d718d225e7f51dfc7cdec8351db3b5db",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "c0b3d5ed76b26d909ea18640f95e18f709b669d679a07fdd61162cb652dd76c5",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "7c3f6bf4491c1daa2c6c11a12c36ff1afe9450df774a0cd7aac17201002e7a09",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/mnt/ml7tb/experiments/ParticleGAN/tier1-completion-v1/queue/61df57eff54f4129b19b60ad9fa426b3/observed-samples.pt": "b756e38f04d03d7557514d3e8eb6a86e5ee30093eaf8f50b6e0b72f883971585"
+  },
+  "task_id": "gaussian1d_acquisition"
+}
