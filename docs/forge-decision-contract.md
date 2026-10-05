@@ -1,6 +1,13 @@
-# Forge hypothesis-to-decision contracts
+# Historical Forge hypothesis-to-decision contracts
 
-`forge new` creates an idea with schema version 2 and a draft decision contract.
+This guide describes the immutable v2 compatibility format. New work uses
+[separate candidate, task and study declarations](forge-studies.md). `forge new`
+now writes a schema-v3 candidate and a draft study; it no longer embeds a
+`decision_contract` in a reusable recipe. Existing v2 cards and frozen requests
+remain readable under the original identities and safeguards. The steps below
+document how the original format was prepared, not a migration of old results.
+
+The original `forge new` created an idea with schema version 2 and a draft decision contract.
 Planning exposes the exact public-API bindings and proposed delta; admission
 rejects the draft before writing queue state or reserving execution. This is a
 small contract around existing ideas, task budgets and readouts. It launches no
