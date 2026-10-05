@@ -87,7 +87,8 @@ def load_idea(root: Path, idea_id: str) -> dict:
     return idea
 
 
-def new_idea(root: Path, idea_id: str, parent: str, *, goal="discriminator_stability", hypothesis=None) -> Path:
+def new_idea(root: Path, idea_id: str, parent: str, *, goal="discriminator_stability", hypothesis=None,
+             study_id=None) -> Path:
     identifier(idea_id, "idea")
     path = Path(root) / "configs/forge/ideas" / f"{idea_id}.json"
     if path.exists():
@@ -96,22 +97,37 @@ def new_idea(root: Path, idea_id: str, parent: str, *, goal="discriminator_stabi
     idea = {k: deepcopy(inherited[k]) for k in FORMULATION_FIELDS if k in inherited}
     if "host_adaptation" in inherited:
         idea["host_adaptation"] = deepcopy(inherited["host_adaptation"])
-    from .decision_contracts import scaffold
-    idea.update(schema_version=2, id=idea_id, parent=parent, goal=goal,
-                hypothesis=hypothesis or "TODO: state why this mechanism should improve the selected goal",
+    idea.pop("prior", None)  # Priors are task conditions, not reusable recipes.
+    from .boundaries import TASK_RECIPE_FIELDS
+    idea["recipe_overrides"] = {key: value for key, value in idea.get("recipe_overrides", {}).items()
+                                if key not in TASK_RECIPE_FIELDS}
+    if "host_adaptation" in idea:
+        fields = [key for key in idea["host_adaptation"]["recipe_fields"] if key not in TASK_RECIPE_FIELDS]
+        if fields:
+            idea["host_adaptation"]["recipe_fields"] = fields
+        else:
+            idea.pop("host_adaptation")
+    from .studies import scaffold, study_path
+    study = scaffold(study_id or f"{idea_id}-study", idea_id, parent, goal, hypothesis=hypothesis)
+    if study_path(root, study["id"]).exists():
+        raise ValueError("study already exists")
+    idea.update(schema_version=3, id=idea_id, parent=parent,
                 changed_factors=["TODO: describe the substantive change before enqueue"],
                 mechanism_class=inherited.get("mechanism_class", "structural"),
                 mechanism_rationale="TODO: explain structural, constant/floor or sampling-only change",
-                api_version="forge-api-v1", lifecycle="proposed", execution_path="public_trainer",
-                prior_art=[parent], guide="EXPERIMENTATION.md", decision_contract=scaffold(parent, goal))
+                api_version="forge-api-v1", execution_path="public_trainer",
+                prior_art=[parent], guide="EXPERIMENTATION.md")
+    validate_idea(idea)
     atomic_json(path, idea)
+    atomic_json(study_path(root, study["id"]), study)
     return path
 
 
 def resolve_idea(root: Path, idea_id: str, *, view_id: str | None = None,
-                 through_tier: int = 1, queue_root: Path | None = None,
-                 freeze_source: bool = False, execution_backend: str = "cuda",
-                 cuda_model: str | None = None, declaration: dict | None = None) -> dict:
+                 through_tier: int | None = None, queue_root: Path | None = None,
+                 freeze_source: bool = False, execution_backend: str | None = None,
+                 cuda_model: str | None = None, declaration: dict | None = None,
+                 study=None) -> dict:
     """Tier placement never enters candidate/task compatibility keys."""
     root = Path(root).resolve()
     idea = load_idea(root, idea_id) if declaration is None else deepcopy(declaration)
@@ -121,10 +137,28 @@ def resolve_idea(root: Path, idea_id: str, *, view_id: str | None = None,
     if declaration is not None and "configuration_id" in idea:
         from .configuration_search import validate_configuration_declaration
         validate_configuration_declaration(idea, root=root)
+    if study is not None:
+        from .studies import load_study
+        study = load_study(root, study)
+        if study["candidate"] != idea_id:
+            raise ValueError("study selects a different candidate")
+        if "decision_contract" in idea:
+            raise ValueError("legacy embedded decision_contract cannot be replaced by a study; declare a v3 successor")
+        for supplied, expected in ((view_id, study["scope"]["view"]),
+                                   (through_tier, study["scope"]["through_tier"]),
+                                   (execution_backend, study["scope"]["execution_backend"]),
+                                   (cuda_model, study["scope"].get("cuda_model"))):
+            if supplied is not None and supplied != expected:
+                raise ValueError("requested view/tier/backend/model differs from study scope")
+        view_id, through_tier, execution_backend = (study["scope"][key] for key in
+                                                   ("view", "through_tier", "execution_backend"))
+        cuda_model = study["scope"].get("cuda_model")
+    through_tier = 1 if through_tier is None else through_tier
+    execution_backend = execution_backend or "cuda"
     if through_tier not in (1, 2, 3):
         raise ValueError("through-tier must be 1, 2, or 3")
     defaults = read_json(root / "configs/forge/defaults.json")
-    view = load_view(root, view_id or idea["goal"])
+    view = load_view(root, view_id or idea.get("goal", "discriminator_stability"))
     all_tasks = load_tasks(root)
     validate_view(view, all_tasks)
     tasks = {a["task"]: deepcopy(all_tasks[a["task"]]) for a in view["assignments"]}
@@ -132,7 +166,7 @@ def resolve_idea(root: Path, idea_id: str, *, view_id: str | None = None,
     protocol = read_json(root / "configs/forge/protocols" / f"{protocol_id}.json")
     prior = {**defaults["prior"], **idea.get("prior", {})}
     blockers = []
-    if "TODO" in idea["hypothesis"] or any("TODO" in x for x in idea["changed_factors"]):
+    if "TODO" in idea.get("hypothesis", "") or any("TODO" in x for x in idea["changed_factors"]):
         blockers.append("finish the scaffold's hypothesis and changed_factors before enqueue")
     if idea.get("extensions") and not idea.get("api_changes"):
         blockers.append("extensions require api_changes describing variables, provider, affected hosts and migration")
@@ -248,12 +282,21 @@ def resolve_idea(root: Path, idea_id: str, *, view_id: str | None = None,
                "execution_backend": execution_backend, "compute_profiles": compute_profiles,
                "view": view, "policy_fingerprint": view_fingerprint(view), "tasks": tasks,
                "jobs": jobs, "through_tier": through_tier, "preflight_blockers": blockers}
-    if "decision_contract" in candidate:
+    if study is not None:
+        from .studies import inspect_study
+        request["study"] = study
+        review = inspect_study(root, request)
+        request["study_review"] = review
+        request["study_admission"] = review["receipt"]
+        blockers.extend(review["blockers"])
+    elif "decision_contract" in candidate:
         from .decision_contracts import inspect_contract
         review = inspect_contract(root, request)
         request["decision_review"] = review
         request["decision_admission"] = review["receipt"]
         blockers.extend(review["blockers"])
+    elif candidate.get("schema_version") == 3 and "configuration_id" not in candidate:
+        blockers.append("v3 candidate requires an explicit study or registered configuration search before enqueue")
     elif "configuration_id" not in candidate and (root / "configs/forge/legacy-ideas-v1.json").is_file():
         from .decision_contracts import validate_legacy_admission
         try:
@@ -295,5 +338,6 @@ def plan_summary(request: dict, queue_state: dict | None = None, *, include_owne
             "view": request["view"]["id"], "policy_fingerprint": request["policy_fingerprint"],
             "through_tier": request["through_tier"], "tasks": tasks, "worst_case_seconds": total,
             "execution_policy": policy(request),
+            **({"study": request["study"], "study_binding": request["study_review"]} if "study" in request else {}),
             **({"decision_contract": request["decision_review"]} if "decision_review" in request else {}),
             "preflight_blockers": request["preflight_blockers"], "guide": "EXPERIMENTATION.md"}

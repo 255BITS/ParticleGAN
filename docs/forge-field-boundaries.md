@@ -3,8 +3,10 @@
 An experiment task defines the problem and comparison conditions: data, model
 architecture, prior implementation and width, initialization, resource budget,
 evaluation and sampling law. A technique defines the training mechanisms. Its
-configuration supplies numerical settings within those mechanisms. The protocol
-binds seed, named RNG streams and comparison policy. View policy selects the
+configuration supplies numerical settings within those mechanisms. A study selects candidates and controls, states a hypothesis and predictions,
+and owns the finite campaign budget and stopping rules. Planning generates its
+provenance and execution bindings. The protocol binds seed, named RNG streams
+and comparison policy. View policy selects the
 required tasks and tiers; it does not change their scientific contracts.
 
 [`boundaries.py`](../experiments/forge/boundaries.py) assigns every public
@@ -31,6 +33,7 @@ label never authorizes pooling source, runtime, prior or sampling identities.
 | Technique | Optimizer/penalty family, loss and encoder modes where supported, update and serving policy, structural switches |
 | Hyperparameter | Learning rates, moments, coefficients and schedule settings within a fixed technique |
 | Protocol | Seed, named RNG derivation and streams, fixed comparison and robustness policy |
+| Study | Candidate/control selection, hypothesis, predictions/falsifiers, finite campaign caps, stopping rules and generated provenance bindings |
 
 The task owns external model architecture independently of `Recipe`. Recipe
 fields such as `model`, `conditioning` and `encoder_mode` describe technique
@@ -50,8 +53,11 @@ The task's prior always selects the actual public code path: `mog` selects
 `MoGParticlePrior` and `particle_cloud` selects `ParticlePrior`. Forge binds an
 absolute task sigma directly and sets the public recipe's relative calibration
 field `sigma_rel` to zero. The receipt therefore records both the task's actual
-width and its distinct implementation. Candidate and protocol prior declarations
-are labelled references and cannot supply an effective task prior.
+width and its distinct implementation. Historical candidate and protocol prior declarations are labelled references
+and cannot supply an effective task prior. New schema-v3 candidates omit prior
+conditions and task-owned resource overrides. An explicit candidate initializer
+is a capability/compatibility requirement; the task still owns initialization.
+See the [complete candidate/task/study example](forge-studies.md).
 
 Every resolved task can emit an ownership receipt with each recipe field's
 effective value, owner and source, plus its prior, initialization, architecture,

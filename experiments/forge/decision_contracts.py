@@ -175,7 +175,7 @@ def _evidence(root, evidence):
         raise ValueError("decision_contract prior evidence identity contradicts its bound source")
 
 
-def inspect_contract(root: Path, request: dict) -> dict | None:
+def inspect_contract(root: Path, request: dict, *, binding_resolver=None) -> dict | None:
     """Expose actual bindings in plans and block unfinished/mismatched launches."""
     candidate = request["candidate"]
     contract = candidate.get("decision_contract")
@@ -193,8 +193,9 @@ def inspect_contract(root: Path, request: dict) -> dict | None:
     mapping = contract["control"].get("task_map") or {name: name for name in active}
     if set(mapping) != set(active) or any(name not in catalog for name in mapping.values()):
         raise ValueError("decision_contract control.task_map must bind every authorized task to a declared control task")
-    before = _bindings(parent, {name: catalog[control] for name, control in mapping.items()}, request["protocol"], root)
-    after = _bindings(candidate, {name: request["tasks"][name] for name in active}, request["protocol"], root)
+    bind = binding_resolver or _bindings
+    before = bind(parent, {name: catalog[control] for name, control in mapping.items()}, request["protocol"], root)
+    after = bind(candidate, {name: request["tasks"][name] for name in active}, request["protocol"], root)
     changed = delta(before, after)
     expected = {"control_binding_sha256": stable_hash(before), "candidate_binding_sha256": stable_hash(after),
                 "substantive_delta": changed, "task_map": mapping, "task_ids": active,
@@ -240,6 +241,10 @@ def inspect_contract(root: Path, request: dict) -> dict | None:
 
 
 def validate_admission(request: dict, campaign: dict, *, root: Path | None) -> None:
+    if "study" in request:
+        from .studies import validate_admission as validate_study_admission
+        validate_study_admission(root, request, campaign)
+        return
     contract = request["candidate"].get("decision_contract")
     if contract is None:
         if request["candidate"].get("schema_version") == 2:
@@ -257,6 +262,8 @@ def validate_admission(request: dict, campaign: dict, *, root: Path | None) -> N
         if root is not None and "configuration_id" in request["candidate"]:
             validate_registered_search(root, request, campaign)
             return
+        if request["candidate"].get("schema_version") == 3:
+            raise ValueError("v3 research admission requires an explicit study")
         validate_legacy_admission(request, root=root)
         return
     if root is None:
@@ -272,7 +279,8 @@ def validate_admission(request: dict, campaign: dict, *, root: Path | None) -> N
 
 def evaluate(request: dict, rows: list[dict]) -> dict:
     """Evaluate final scalar predictions, preserving scientific gates separately."""
-    contract = request["candidate"]["decision_contract"]
+    from .studies import contract_for
+    contract = contract_for(request)
     validate_shape(contract)
     if contract["status"] != "ready":
         raise ValueError("cannot conclude a draft decision_contract")
@@ -338,7 +346,8 @@ def validate_legacy_admission(request, *, root):
 
 
 def round_definition(request):
-    contract = request["candidate"].get("decision_contract")
+    from .studies import contract_for
+    contract = contract_for(request)
     if contract is None:
         return None
     active = set(_authorized_tasks(request))
@@ -362,6 +371,8 @@ def register_round(state, request):
     previous = rounds.get(definition["round_id"])
     if previous is not None and previous != definition:
         raise ValueError("decision round budget is immutable across campaigns and contracts")
+    from .studies import register
+    register(state, request)
     rounds[definition["round_id"]] = definition
 
 
@@ -395,12 +406,16 @@ def concluded_outcomes(attempts):
     groups = defaultdict(list)
     for attempt in attempts:
         request = attempt["request"]
-        contract = request.get("candidate", {}).get("decision_contract")
+        from .studies import contract_for
+        contract = contract_for(request)
         if contract is None:
             continue
         cohort = {"contract_sha256": stable_hash(contract), "round": round_definition(request),
                   "source_digest": request.get("source", {}).get("digest"), "runtime": request.get("runtime"),
                   "execution_backend": request.get("execution_backend"), "compute_profiles": request.get("compute_profiles")}
+        if "study" in request:
+            cohort["study_id"] = request["study"]["id"]
+            cohort["study_sha256"] = stable_hash(request["study"])
         groups[stable_hash(cohort)].append((attempt, cohort))
     results = []
     for identity, group in sorted(groups.items()):
@@ -435,6 +450,9 @@ def validate_registered_search(root, request, campaign):
         registered = _check_spec_registration(root, spec)
         if registered is None or registered.get("stage") not in {"registered", "enqueued", "completed", "reported"}:
             continue
+        if candidate.get("schema_version") == 3 and request.get("search_plan") != {
+                "study_id": spec["id"], "spec_sha256": stable_hash(spec), "declaration": spec}:
+            continue
         matches = [trial for trial in registered["trials"] if trial["candidate_id"] == candidate["id"]]
         if len(matches) != 1:
             continue
@@ -446,5 +464,13 @@ def validate_registered_search(root, request, campaign):
         declared = {idea["id"]: idea for idea, _ in _declarations(root, spec)}
         if candidate["id"] not in declared or stable_hash(declared[candidate["id"]]) != stable_hash(trial["declaration"]):
             raise ValueError("configuration declaration differs from its frozen finite grid")
+        if spec["schema_version"] == 2:
+            from .planning import resolve_idea
+            current = resolve_idea(root, candidate["id"], declaration=declared[candidate["id"]],
+                                   view_id=spec["view"], through_tier=spec["tuning_through_tier"],
+                                   execution_backend=spec["execution_backend"], cuda_model=spec.get("cuda_model"))
+            if (_signature(current) != _signature(request) or request.get("view") != current["view"]
+                    or any(request.get("source", {}).get(key) != current["source"][key] for key in ("digest", "files"))):
+                raise ValueError("configuration request differs from the generated source/task/view binding")
         return
     raise ValueError("v1 configuration admission requires an exact bounded search registration; new bare ideas require v2 decision_contract")

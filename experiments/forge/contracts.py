@@ -111,18 +111,33 @@ def require_fields(value: dict, fields, label: str) -> None:
 
 
 def validate_idea(idea: dict) -> None:
-    require_fields(idea, ("schema_version", "id", "hypothesis", "changed_factors", "goal", "mechanism_class"), "idea")
-    if type(idea["schema_version"]) is not int or idea["schema_version"] not in (1, 2):
+    require_fields(idea, ("schema_version", "id", "changed_factors", "mechanism_class"), "candidate")
+    if type(idea["schema_version"]) is not int or idea["schema_version"] not in (1, 2, 3):
         raise ValueError("unsupported idea schema_version")
+    if idea["schema_version"] == 3:
+        # New recipes cannot carry an experiment's conditions or authorization.
+        allowed = {"schema_version", "id", "parent", "changed_factors", "mechanism_class",
+                   "mechanism_rationale", "recipe_preset", "recipe_overrides", "extensions",
+                   "requires_capabilities", "api_changes", "api_version", "execution_path",
+                   "initializer", "claim_contract", "host_adaptation", "prior_art", "guide",
+                   "trainer_family", "configuration_id", "resolved_configuration_recipe"}
+        if set(idea) - allowed:
+            raise ValueError("v3 candidate has study/task-owned or unsupported fields: "
+                             + ", ".join(sorted(set(idea) - allowed)))
+        from .boundaries import TASK_RECIPE_FIELDS
+        if set(idea.get("recipe_overrides", {})) & TASK_RECIPE_FIELDS:
+            raise ValueError("v3 candidate recipe_overrides contain task-owned fields")
+    else:
+        require_fields(idea, ("hypothesis", "goal"), "legacy idea")
+        identifier(idea["goal"], "goal")
+        if not isinstance(idea["hypothesis"], str) or not idea["hypothesis"].strip():
+            raise ValueError("state a hypothesis before submitting an idea")
     if idea["schema_version"] == 2 and "decision_contract" not in idea:
         raise ValueError("v2 ideas require a decision_contract; use forge new to create the draft scaffold")
     if "decision_contract" in idea:
         from .decision_contracts import validate_shape
         validate_shape(idea["decision_contract"])
     identifier(idea["id"], "idea id")
-    identifier(idea["goal"], "goal")
-    if not isinstance(idea["hypothesis"], str) or not idea["hypothesis"].strip():
-        raise ValueError("state a hypothesis before submitting an idea")
     factors = idea["changed_factors"]
     if not isinstance(factors, list) or not factors or not all(isinstance(x, str) and x.strip() for x in factors):
         raise ValueError("changed_factors must describe at least one mechanism/configuration change")

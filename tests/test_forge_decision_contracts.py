@@ -6,12 +6,24 @@ import pytest
 
 from experiments.forge import decision_contracts as decisions, knowledge
 from experiments.forge.contracts import atomic_json, file_hash, read_json, stable_hash, validate_idea
-from experiments.forge.planning import new_idea, plan_summary, resolve_idea
+from experiments.forge.planning import new_idea as new_candidate, plan_summary, resolve_idea
 from experiments.forge.queue import Queue
 from test_forge_planning import checkout
 
 
 from forge_legacy_fixtures import pin_legacy
+
+
+def new_idea(root, name, parent, *, goal, hypothesis=None):
+    """Exercise original v2 declarations explicitly, not the new writer."""
+    path = new_candidate(root, name, parent, goal=goal, hypothesis=hypothesis)
+    idea = read_json(path)
+    idea.update(schema_version=2, goal=goal,
+                hypothesis=hypothesis or 'TODO: hypothesis', lifecycle='proposed',
+                decision_contract=decisions.scaffold(parent, goal))
+    atomic_json(path, idea)
+    (root / f'configs/forge/studies/{name}-study.json').unlink()
+    return path
 
 @pytest.fixture
 def ready(checkout):

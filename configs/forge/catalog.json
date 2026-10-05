@@ -39,7 +39,7 @@
       "experiment/toy": 3,
       "experiment/trajectory": 2,
       "experiment/transition": 7,
-      "forge_engine": 70,
+      "forge_engine": 79,
       "lrfree/feature-cells-cb64-ra": 4058,
       "report/atlas-explanation": 7,
       "report/behavioral_baseline": 32,
@@ -102,7 +102,7 @@
       "candidate_patch": 26,
       "configuration": 807,
       "driver": 401,
-      "engine_support": 70,
+      "engine_support": 79,
       "evaluator_or_audit": 324,
       "evidence_artifact": 1574,
       "frozen_candidate_implementation": 15,
@@ -116,13 +116,13 @@
       "visualization": 22,
       "visualization_artifact": 723
     },
-    "files": 11749
+    "files": 11758
   },
   "coverage": {
-    "declared_count": 11749,
+    "declared_count": 11758,
     "missing": [],
     "stale": [],
-    "tracked_count": 11749,
+    "tracked_count": 11758,
     "unclassified": [],
     "valid": true
   },
@@ -7131,7 +7131,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "7dd49c13d00e39a0ab8ab4a37d80c5daca191383",
+      "git_blob": "4e5c517651f20715b2ed31ab071a289f19aaf323",
       "path": "experiments/forge/__main__.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -7215,6 +7215,62 @@
     },
     {
       "family": "forge_engine",
+      "git_blob": "92126613a7543935ff43305c251174247cf07d84",
+      "path": "experiments/forge/canonical_ae_adapter.py",
+      "role": "engine_support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "forge_engine",
+      "git_blob": "9b78e0788e84a59725afdfdc98190e0d42df422c",
+      "path": "experiments/forge/canonical_full_atlas_budget.py",
+      "role": "engine_support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "forge_engine",
+      "git_blob": "60bdfc7ab882bdf6b29eba17e169625993089c95",
+      "path": "experiments/forge/canonical_full_atlas_case.py",
+      "role": "engine_support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "forge_engine",
+      "git_blob": "03b8178528b9faa9d0bc8f0cab1ce9cc3b166940",
+      "path": "experiments/forge/canonical_full_atlas_repeat.py",
+      "role": "engine_support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "forge_engine",
+      "git_blob": "4e8edb53ee2b0a7c7ee24fe1ced9a1fbaa3f6cf0",
+      "path": "experiments/forge/canonical_full_atlas_wave.py",
+      "role": "engine_support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "forge_engine",
+      "git_blob": "ba97d7c01391450e6e45d2fc8e51600369e744f2",
+      "path": "experiments/forge/canonical_image_adapter.py",
+      "role": "engine_support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "forge_engine",
+      "git_blob": "604c824b2ce70cdc5cfc38fc74c3c931323af024",
+      "path": "experiments/forge/canonical_mog_adapter.py",
+      "role": "engine_support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "forge_engine",
+      "git_blob": "e12d95b8f1436b6fd7a97f964808a21d2323756f",
+      "path": "experiments/forge/canonical_serving_measurement.py",
+      "role": "engine_support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "forge_engine",
       "git_blob": "4ef50bcda83003f32b19e49806a37a587e1293d9",
       "path": "experiments/forge/canonical_two_pole_adapter.py",
       "role": "engine_support",
@@ -7257,7 +7313,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "dd7cea78e109efbd5542a7e0208c4ae34c3c4010",
+      "git_blob": "a86798419e0a53c14e94dda00284acd7a9493fc1",
       "path": "experiments/forge/configuration_search.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -7271,14 +7327,14 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "d7c5217d8e7c4e218d66d61d8ee0d428159dcaf5",
+      "git_blob": "c8f393508c0d722481d6b306e0431abcb44e2e8f",
       "path": "experiments/forge/contracts.py",
       "role": "engine_support",
       "suggested_tiers": []
     },
     {
       "family": "forge_engine",
-      "git_blob": "e6b7ff103082f9a4cae668e4f0194cd30be37675",
+      "git_blob": "89f4dc9c4c97c3ab4e5096e71393c66dbbb0f5af",
       "path": "experiments/forge/decision_contracts.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -7334,7 +7390,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "cead5ba28f475fa3c9e9207c2fc21ae0b72b44ad",
+      "git_blob": "a7b64f2ba73014fbd1b46a54e764867f22a273dc",
       "path": "experiments/forge/knowledge.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -7383,7 +7439,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "c10f05805f06fd85e88b702bdd1e6366d5b0bb75",
+      "git_blob": "dfc3f36f5aa4689afab1b4d3a8a6490380064adc",
       "path": "experiments/forge/planning.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -7404,7 +7460,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "ed50fef0d940c5a564b16828cfe2fc90a0fb6dd5",
+      "git_blob": "8ccb4eaff2dbf51877cef604be8ac84262d7d49c",
       "path": "experiments/forge/policy_execution.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -7439,7 +7495,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "22cf63d2c7af552f431b585f86175931bde326ba",
+      "git_blob": "9eaa0e2d9ab8d55edb9ccbd785386a339b4ac129",
       "path": "experiments/forge/promotion.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -7504,6 +7560,13 @@
       "family": "forge_engine",
       "git_blob": "bcdfca0d313dc463dfdc481a71e30685d0395959",
       "path": "experiments/forge/state.py",
+      "role": "engine_support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "forge_engine",
+      "git_blob": "dcd67f67b4fc4e27716bbb877f106a8a7b361228",
+      "path": "experiments/forge/studies.py",
       "role": "engine_support",
       "suggested_tiers": []
     },

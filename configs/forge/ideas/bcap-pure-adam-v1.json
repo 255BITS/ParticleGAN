@@ -1,0 +1,58 @@
+{
+  "api_changes": [],
+  "api_version": "forge-api-v1",
+  "changed_factors": [
+    "Native Adam without critic clipping, A2 prior damping, direct-particle response or EMA anchor",
+    "Fixed BCAP coefficient1/cap1/every-update with constant learning rates and moments",
+    "Zero additive training input/output noise; no prior regularizer or EMA selection"
+  ],
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "execution_path": "public_trainer",
+  "guide": "EXPERIMENTATION.md",
+  "id": "bcap-pure-adam-v1",
+  "mechanism_class": "structural",
+  "mechanism_rationale": "Pure BCAP training baseline: public relativistic-pairing logistic loss plus the fixed one-sided L2 critic-input gradient cap on real and generated samples, updated by native Adam. This is a complete baseline definition, not a single-factor causal ablation.",
+  "parent": "k3p-bcap-matched-v1",
+  "prior_art": [
+    "k3p-bcap-matched-v1"
+  ],
+  "recipe_overrides": {
+    "beta2_end": null,
+    "betas": [
+      0.0,
+      0.999
+    ],
+    "d_guard_ratio": 0.0,
+    "d_lr_mult": 1.0,
+    "direct_particle_gain": false,
+    "ema_decay": 0.0,
+    "input_noise_std": 0.0,
+    "latent_damping_max_rate": 0.0,
+    "lr": 0.00425,
+    "lr_floor": 1.0,
+    "name": "bcap-pure-adam-v1",
+    "network_lr_floor": 1.0,
+    "network_lr_horizon_cap": null,
+    "optimizer_family": "adam",
+    "output_noise_std": 0.0,
+    "output_noise_warmup": 0.0,
+    "prior_lr_mult": 2.0,
+    "prior_reg": 0.0,
+    "reg_anchor_weight": 0.0,
+    "reg_arm": "b_cap",
+    "reg_coeff": 1.0,
+    "reg_coeff_end": null,
+    "reg_every": 1,
+    "reg_kappa": 1.0
+  },
+  "requires_capabilities": [
+    "learned_locations",
+    "mog_prior",
+    "named_rng"
+  ],
+  "schema_version": 3
+}

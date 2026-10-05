@@ -170,13 +170,16 @@ plans all six required Tier 1 tasks for an existing candidate and does not
 authorize executing them. Inspect every task's compatibility and the full
 reservation ceiling before choosing a campaign.
 
-For a new v2 idea, plan its final view, tier and compute cohort after the actual
-formulation change. Inspect `decision_contract.actual_bindings` and `expected`,
-bind exact prior evidence with byte hashes and identifying fields, and follow the
-[draft-to-ready steps](forge-decision-contract.md#prepare-one-reviewable-question).
-Planning must show `READY` before submission with that same scope. A changed
-task, source, runtime or job map requires a newly reviewed binding; copying an
-old ready card supplies no authorization.
+For a new schema-v3 candidate, declare its separate study and use
+`plan CANDIDATE --study STUDY`. Inspect `study_binding.actual_bindings`, the
+exercised delta and generated identities. Bind original prior evidence by path,
+selector and identifying fields, then follow the
+[draft-to-ready steps](forge-studies.md). The study owns control selection,
+hypothesis, numerical predictions, finite campaign budgets and stopping rules;
+the candidate owns the reusable recipe. Planning must show `READY` before
+submission. Enqueue generates and freezes source/runtime/task hashes. A changed
+frozen binding needs a new study ID. Existing v1/v2 declarations retain their
+original contract and identity through the [legacy reader](forge-decision-contract.md).
 
 Use focused tests for scorer counterexamples, shared API/adapter behavior,
 incompatibility preflight, initialization/RNG isolation and grading incomplete
