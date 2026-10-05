@@ -81,8 +81,23 @@ def archive(destination):
     destination.parent.mkdir(parents=True, exist_ok=True)
     sources = {entry["request"]["source"]["digest"]: entry["request"]["source"]
                for entry in state["submissions"].values()}
+    for attempt_id, local in attempts.items():
+        durable = ROOT / "reports/forge/attempts" / attempt_id
+        if not local.is_dir() or not durable.is_dir():
+            raise ValueError("missing original attempt or durable envelope: " + attempt_id)
+        for filename in ("request.json", "result.json", "evidence.json"):
+            if not (durable / filename).is_file():
+                raise ValueError("missing original durable " + filename + ": " + attempt_id)
+    for digest, source in sources.items():
+        snapshot = QUEUE / "snapshots" / digest
+        for relative, expected in source["files"].items():
+            if not (snapshot / relative).is_file() or file_hash(snapshot / relative) != expected:
+                raise ValueError("missing or changed original source: " + relative)
+    import tempfile
+    staging = tempfile.TemporaryDirectory(prefix=".bcap-archive-", dir=destination.parent)
+    temporary = Path(staging.name) / "artifacts.tar.gz"
     manifest = {}
-    with tarfile.open(destination, "w:gz") as bundle:
+    with tarfile.open(temporary, "w:gz") as bundle:
         def add_tree(directory, prefix):
             files = [directory] if directory.is_file() else sorted(p for p in directory.rglob("*") if p.is_file())
             for path in files:
@@ -105,7 +120,7 @@ def archive(destination):
                 add_tree(path, "queue/" + str(path.relative_to(QUEUE)))
     # Independently verify every archived file, not merely the tarball digest.
     import hashlib
-    with tarfile.open(destination, "r:gz") as bundle:
+    with tarfile.open(temporary, "r:gz") as bundle:
         checked = {}
         for member in bundle:
             if member.isfile():
@@ -113,6 +128,8 @@ def archive(destination):
                 checked[member.name] = {"sha256": hashlib.sha256(contents).hexdigest(), "bytes": len(contents)}
         if checked != manifest:
             raise ValueError("byte-exact archive verification failed")
+    temporary.replace(destination)
+    staging.cleanup()
     atomic_json(REPORT / "archive.json", {"schema_version": 1, "scope": "exact_original_execution_artifacts",
         "archive": {"path": str(destination), "sha256": file_hash(destination), "bytes": destination.stat().st_size},
         "attempt_ids": sorted(attempts), "source_digests": sorted(sources),

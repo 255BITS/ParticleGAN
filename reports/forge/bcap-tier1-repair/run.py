@@ -13,7 +13,7 @@ from experiments.forge.queue import Queue, drain
 
 
 def verify_source(source):
-    """Verify every scientific input against its committed Git blob."""
+    """Verify the frozen code manifest against committed Git blobs."""
     import hashlib
     import subprocess
     references = "".join(source["origin_commit"] + ":" + name + "\n"
