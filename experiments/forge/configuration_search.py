@@ -139,7 +139,7 @@ def _validate_grid_value(name, value):
             and all(type(item) in (int, float) and math.isfinite(item) and 0 <= item < 1
                     for item in value))
     elif value is None:
-        valid = name in {"network_lr_floor", "beta2_end", "reg_coeff_end", "d_eps", "prior_eps"}
+        valid = name in {"network_lr_floor", "beta2_end", "reg_coeff_end", "optimizer_adam_lr", "d_eps", "prior_eps"}
     else:
         valid = type(value) in (int, float) and math.isfinite(value)
     if not valid:
@@ -153,6 +153,13 @@ def recipe_identity_fields(recipe):
     recipe = without_default_additions(recipe)
     if recipe.get("loss") == "relativistic":
         recipe.pop("loss")
+    # Default selectors added for optimizer experiments are absent from all
+    # earlier resolved recipes. Their implicit values must not rename saved
+    # configuration cards; authored overrides remain in formulation identity.
+    if recipe.get("optimizer_momentum") == 0:
+        recipe.pop("optimizer_momentum")
+    if recipe.get("optimizer_adam_lr") is None:
+        recipe.pop("optimizer_adam_lr", None)
     return recipe
 
 

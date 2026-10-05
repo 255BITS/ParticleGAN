@@ -160,6 +160,58 @@ def test_frozen_selection_survives_current_protocol_change(study):
     assert select(study)["rows"][0]["candidate_id"] == study[4]["selection"]["selected_candidate_id"]
 
 
+def modern_study(study):
+    """Keep the frozen numerical rows while declaring protocol-by-name v2."""
+    root, _, _, _, report, _ = study
+    spec = report["spec"]
+    assert report["protocol_hash"] == spec.pop("protocol_hash")
+    spec.update(schema_version=2, hypothesis="A bounded public-recipe rate comparison may improve Tier 1 acquisition.")
+    report["spec_hash"] = stable_hash(spec)
+    atomic_json(root / f"configs/forge/searches/{spec['id']}.json", spec)
+    persist(root, report)
+    return study
+
+
+def test_v2_generated_protocol_identity_selects_the_same_verified_whole_row(study):
+    expected = select(study)["rows"][0]
+    modern_study(study)
+    actual = select(study)["rows"][0]
+    assert actual["candidate_id"] == expected["candidate_id"]
+    assert actual["tasks"] == expected["tasks"]
+    assert actual["selection"]["selection_kind"] == "best_observed"
+    assert not actual["selection"]["qualified"]
+    assert not actual["selection"]["default_adoption"]
+
+
+@pytest.mark.parametrize("generated_hash", [None, "not-a-hash", "0" * 64])
+def test_v2_generated_protocol_hash_must_bind_the_original_evidence(study, generated_hash):
+    modern_study(study)
+    root, _, _, _, report, _ = study
+    report["protocol_hash"] = generated_hash
+    persist(root, report)
+    with pytest.raises(ValueError, match="generated protocol hash|verified protocol contracts"):
+        select(study)
+
+
+def test_v2_protocol_name_must_match_its_frozen_contract(study):
+    modern_study(study)
+    root, _, _, _, report, _ = study
+    report["spec"]["protocol"] = "different-protocol"
+    report["spec_hash"] = stable_hash(report["spec"])
+    atomic_json(root / f"configs/forge/searches/{report['study_id']}.json", report["spec"])
+    persist(root, report)
+    with pytest.raises(ValueError, match="verified protocol contracts"):
+        select(study)
+
+
+def test_v1_authored_protocol_hash_remains_authoritative(study):
+    root, _, _, _, report, _ = study
+    report["protocol_hash"] = "0" * 64
+    persist(root, report)
+    with pytest.raises(ValueError, match="frozen study contract"):
+        select(study)
+
+
 def test_explicit_recorded_policy_preserves_selection_after_current_view_changes(study):
     root = study[0]
     path = root / "configs/forge/views/discriminator_stability.json"
@@ -230,6 +282,133 @@ def test_hardware_and_cpu_cuda_families_stay_separate(study):
     result = select(study, view_policy=recorded)
     assert len(result["rows"]) == 3
     assert sum(row["selection"]["selection_kind"] == "best_observed" for row in result["rows"]) == 1
+
+
+def unmeasured_study(study):
+    root, rows, _, _, _, _ = study
+    cpu = deepcopy(rows[-1])
+    gpu = deepcopy(cpu)
+    gpu["runtime_cohort"] = {"execution_backend": "cuda", "compute_profiles": {"cuda": {"model": "gpu-a"}}}
+    rows[:] = [cpu, gpu]
+    registry = read_json(root / families.REGISTRY)
+    family = next(family for family in registry["families"] if family["id"] == "r1r2")
+    family.pop("active_search_by_backend", None)
+    family.update(unmeasured_display_backend="cuda",
+                  unmeasured_display_reason="Declaration-only CUDA placeholder; no execution or qualification credit.")
+    atomic_json(root / families.REGISTRY, registry)
+    return registry, family
+
+
+@pytest.mark.parametrize("reverse", [False, True])
+def test_explicit_unmeasured_backend_keeps_whole_scaffold_and_every_alternative(study, reverse):
+    _, family = unmeasured_study(study)
+    rows = study[1]
+    before = {families.scientific_row_hash(row) for row in rows}
+    if reverse:
+        rows.reverse()
+    result = select(study)
+    assert len(result["rows"]) == 1 and len(result["configuration_rows"]) == 2
+    selected = result["rows"][0]
+    assert selected["runtime_cohort"]["execution_backend"] == "cuda"
+    assert selected["selection"]["selection_kind"] == "unmeasured_declaration"
+    assert selected["selection"]["reason"] == family["unmeasured_display_reason"]
+    assert selected["selection"]["qualified"] is False and selected["selection"]["default_adoption"] is False
+    assert not selected["attempt_ids"] and all(task["status"] == "UNKNOWN" for task in selected["tasks"])
+    assert families.scientific_row_hash(selected) in before
+    assert {families.scientific_row_hash(row) for row in result["configuration_rows"]} == before
+    assert sum(row["selected_configuration"] for row in result["configuration_rows"]) == 1
+
+
+@pytest.mark.parametrize("tamper", ["attempt", "task", "gate", "incomplete_task", "nonrequired", "qualified", "passed",
+                                    "counts", "cost_tasks", "cost_seconds", "status", "malformed_status"])
+def test_unmeasured_backend_cannot_hide_any_executed_or_forged_outcome(study, tamper):
+    unmeasured_study(study)
+    # The nonselected CPU alternative must also be unmeasured.
+    row = study[1][0]
+    if tamper == "attempt":
+        row["attempt_ids"] = ["ordinary-attempt"]
+    elif tamper == "task":
+        row["tasks"][0]["status"] = "PASS"
+    elif tamper == "gate":
+        row["tasks"][0]["gate_status"] = "FAIL"
+    elif tamper == "incomplete_task":
+        row["status"] = row["tasks"][0]["status"] = "INCOMPLETE"
+    elif tamper == "nonrequired":
+        row["nonrequired_tasks"][0]["status"] = "INVALID"
+    elif tamper == "qualified":
+        row["qualified_tier"] = 1
+    elif tamper == "passed":
+        row["tiers"]["1"]["passed"] = 1
+    elif tamper == "counts":
+        row["tiers"]["1"]["counts"] = {"PASS": 1}
+    elif tamper == "cost_tasks":
+        row["cost"] = {"measured_tasks": 1}
+    elif tamper == "cost_seconds":
+        row["cost"] = {"wall_seconds": .01}
+    elif tamper == "status":
+        row["status"] = "FAIL"
+    elif tamper == "malformed_status":
+        row["status"] = "malformed"
+    with pytest.raises(ValueError, match="family r1r2: unmeasured display requires exclusively declaration-only"):
+        select(study)
+
+
+def test_unmeasured_not_run_aggregate_incomplete_retains_its_original_grade(study):
+    unmeasured_study(study)
+    for row in study[1]:
+        row["status"] = "INCOMPLETE"  # views.qualify() maps a wholly NOT_RUN aggregate to this label.
+    result = select(study)
+    assert result["rows"][0]["status"] == "INCOMPLETE"
+    assert result["rows"][0]["selection"]["selection_kind"] == "unmeasured_declaration"
+
+
+@pytest.mark.parametrize("tamper", ["missing_backend", "missing_reason", "invalid_backend", "empty_reason", "active_search"])
+def test_unmeasured_backend_requires_explicit_valid_registry_and_no_active_search(study, tamper):
+    registry, family = unmeasured_study(study)
+    if tamper == "missing_backend":
+        family.pop("unmeasured_display_backend")
+    elif tamper == "missing_reason":
+        family.pop("unmeasured_display_reason")
+    elif tamper == "invalid_backend":
+        family["unmeasured_display_backend"] = "gpu"
+    elif tamper == "empty_reason":
+        family["unmeasured_display_reason"] = " "
+    else:
+        family["active_search_by_backend"] = {"cuda": "active-study"}
+    atomic_json(study[0] / families.REGISTRY, registry)
+    with pytest.raises(ValueError, match="family r1r2: unmeasured display"):
+        select(study)
+
+
+@pytest.mark.parametrize("tamper", ["missing", "duplicate"])
+def test_unmeasured_backend_requires_one_canonical_scientific_row_without_hash_ranking(study, tamper):
+    unmeasured_study(study)
+    rows = study[1]
+    if tamper == "missing":
+        rows.pop()
+    else:
+        alternative = deepcopy(rows[-1])
+        alternative["runtime_cohort"]["compute_profiles"]["cuda"]["model"] = "gpu-b"
+        rows.append(alternative)
+    with pytest.raises(ValueError, match="family r1r2: unmeasured display requires exactly one canonical row"):
+        select(study)
+
+
+def test_unmeasured_backend_does_not_implicitly_select_when_no_selector_is_declared(study):
+    registry, family = unmeasured_study(study)
+    family.pop("unmeasured_display_backend")
+    family.pop("unmeasured_display_reason")
+    atomic_json(study[0] / families.REGISTRY, registry)
+    with pytest.raises(ValueError, match="family r1r2: multiple current runtime cohorts"):
+        select(study)
+
+
+def test_unmeasured_backend_leaves_recorded_policy_cohorts_separate(study):
+    unmeasured_study(study)
+    policy = read_json(study[0] / "configs/forge/views/discriminator_stability.json")
+    result = select(study, view_policy=policy)
+    assert len(result["rows"]) == 2
+    assert all(row["selection"]["selection_kind"] == "canonical_fallback" for row in result["rows"])
 
 
 def current_pin(study, row, *, kind="historical_incumbent", measurement_views=None, measurement_tasks=None):
@@ -331,11 +510,28 @@ def test_current_only_task_history_membership_preserves_recorded_family_identity
     assert families.family_for_candidate(ROOT, "five-word-joint-ka2-v1")["id"] == "five-word-joint-ka2-v1"
 
 
+def test_pure_adam_example_groups_only_for_current_presentation():
+    candidate = "bcap-pure-adam-example-v3"
+    declaration = read_json(ROOT / f"configs/forge/ideas/{candidate}.json")
+    registry = families.load_families(ROOT)
+    assert candidate not in registry["bcap-pure"]["candidates"]
+    assert registry["bcap-pure"]["current_presentation_candidates"] == [candidate]
+    assert registry["bcap-pure"]["canonical_candidate"] == "bcap-pure-adam-v2"
+    current = families.family_for_candidate(ROOT, candidate, declaration, current_presentation=True)
+    recorded = families.family_for_candidate(ROOT, candidate, declaration, current_presentation=False)
+    assert current == registry["bcap-pure"]
+    assert recorded == {"id": candidate, "label": candidate, "canonical_candidate": candidate,
+                        "candidates": [candidate], "registration": "unclassified_independent_technique"}
+    assert families.family_for_candidate(ROOT, "bcap-pure-adam-v2")["id"] == "bcap-pure"
+
+
 def test_registry_groups_gan_v3_task_priors_and_keeps_original_historical_identities():
     registry = families.load_families(ROOT)
     retained = {"r1r2", "bcap", "k3p", "ka2", "e22", "atlas", "release07-gan-v3",
                 "k3p-no-anchor", "k3p-no-penalty", "k3p-no-a2", "k3p-no-training-noise"}
-    assert set(registry) == retained | {"bcap-pure", "halloween"}
+    optimizer_families = {"bcap-sgda", "bcap-nsgda-global", "bcap-nsgda-layer", "bcap-ada-nsgda",
+                          "bcap-dualnorm", "bcap-dualnorm-d-only", "bcap-particle-rownorm-only"}
+    assert set(registry) == retained | {"bcap-pure", "halloween"} | optimizer_families
     assert registry["halloween"]["canonical_candidate"] == "halloween-optimizer-loss-v1"
     assert registry["bcap-pure"]["canonical_candidate"] == "bcap-pure-adam-v2"
     assert set(registry["bcap-pure"]["candidates"]).isdisjoint(registry["bcap"]["candidates"])

@@ -54,11 +54,58 @@ def test_projection_keeps_final_values_and_original_hashes_and_drops_traces(rece
     assert row["evaluator_summary"]["terminal_summary"]["passing_checks"] == 1
     assert row["evaluator_summary"]["metric_checks"]["score"]["threshold"] == .5
     assert compact["qualification_reuse"] is False and compact["qualification_input"] is False
+    assert "retry_of" not in compact
     provenance = compact["provenance"]
     assert provenance["canonical_result_hash"] == stable_hash(read_json(directory / "result.json"))
     assert provenance["source_origin_commit"] == "commit-one"
     assert all(item["sha256"] == file_hash(root / item["path"]) for item in provenance["original_files"].values())
     assert before == {path: path.read_bytes() for path in directory.iterdir()}
+
+
+def test_retry_projection_binds_authorization_and_validates_without_original_receipts(receipt):
+    root, directory = receipt
+    original = read_json(directory / "result.json")
+    original["raw"]["attempt_status"] = "error"
+    original["task_results"][0]["gate_status"] = "INCOMPLETE"
+    atomic_json(directory / "result.json", original)
+    certificate = read_json(directory / "evidence.json")
+    certificate["result_hash"] = stable_hash(original)
+    atomic_json(directory / "evidence.json", certificate)
+    link = {"attempt_id": "attempt-one", "result_hash": stable_hash(original),
+            "authorized_at": "2026-10-05T19:35:12+00:00", "reason": "Explicit repair after restoring the environment"}
+    retry = read_json(directory / "result.json")
+    retry.update(attempt_id="attempt-retry", retry_of=link)
+    retry["raw"]["attempt_status"] = "completed"
+    retry["task_results"][0]["gate_status"] = "PASS"
+    request = read_json(directory / "request.json")
+    request["retry_of"] = link
+    retry_directory = directory.parent / "attempt-retry"
+    atomic_json(retry_directory / "request.json", request)
+    atomic_json(retry_directory / "result.json", retry)
+    certificate["result_hash"] = stable_hash(retry)
+    atomic_json(retry_directory / "evidence.json", certificate)
+    protected = {path: path.read_bytes() for path in directory.parent.glob("*/*.json")}
+    summaries = {attempt: publication.project_receipt(root, attempt) for attempt in ("attempt-one", "attempt-retry")}
+    assert "retry_of" not in summaries["attempt-one"]
+    assert summaries["attempt-retry"]["retry_of"] == link
+    row = {"candidate_id": "new-technique", "candidate_revision": "revision-one",
+           "attempt_ids": ["attempt-retry", "attempt-one"], "bindings": {"source_digest": request["request"]["source"]["digest"]},
+           "tasks": [{"task_id": "toy", "status": "PASS"}], "tiers": {"1": {"passed": 1, "total": 1}}}
+    report = {"rows": [row], "tier_requirements": {"1": ["toy"]}}
+    publication._publication_provenance(report, summaries)
+    proof = report["provenance"]["qualified_receipts"]["attempt-retry"]
+    assert proof["retry_of"] == link
+    assert "retry_of" not in report["provenance"]["qualified_receipts"]["attempt-one"]
+    fresh = root / "fresh-checkout"
+    for attempt, summary in summaries.items():
+        atomic_json(fresh / f"reports/forge/technique-receipts/{attempt}.json", summary)
+    assert not (fresh / "reports/forge/attempts").exists()
+    publication._validate_published_row(fresh, report, row)
+    summaries["attempt-retry"]["retry_of"]["reason"] = "different authorization"
+    atomic_json(fresh / "reports/forge/technique-receipts/attempt-retry.json", summaries["attempt-retry"])
+    with pytest.raises(ValueError, match="compact receipt proof differs"):
+        publication._validate_published_row(fresh, report, row)
+    assert all(path.read_bytes() == content for path, content in protected.items())
 
 
 @pytest.mark.parametrize("field", ["result_hash", "source", "runtime"])
@@ -347,6 +394,98 @@ def write_report(root, goal, *, execution_backend, output_prefix):
     assert sum(task["status"] == "FAIL" for task in row["tasks"]) == 1
     assert sum(task["status"] == "UNKNOWN" for task in row["tasks"]) == 25
     assert originals == {path: path.read_bytes() for path in directory.iterdir()}
+
+
+@pytest.mark.parametrize("mixed_candidate_receipts", [False, True])
+def test_frozen_publication_prefers_recorded_identity_over_earlier_alias(
+        frozen_checkout, monkeypatch, mixed_candidate_receipts):
+    root, directory, _ = frozen_checkout
+    code = root / "experiments/forge"
+    atomic_json(root / "configs/forge/ideas/a-alias.json", {"id": "a-alias"})
+    (code / "planning.py").write_text('''
+from .contracts import read_json
+def declaration_paths(root):
+    return sorted((root / 'configs/forge/ideas').glob('*.json'))
+def load_idea(root, idea_id):
+    return read_json(root / 'configs/forge/ideas' / (idea_id + '.json'))
+def resolve_idea(root, idea_id, **kwargs):
+    request = read_json(root / 'reports/forge/attempts/attempt-one/request.json')['request']
+    request['candidate']['id'] = idea_id
+    return request
+''')
+    (code / "knowledge.py").write_text('''
+def _current_request(*args, **kwargs):
+    raise AssertionError('publication must reconstruct the original question')
+''')
+    # This source fixture represents a reducer choosing the first declaration
+    # for one scientific cohort. Both labels have the exact same science.
+    (code / "technique_board.py").write_text('''
+import json
+from pathlib import Path
+from . import knowledge, planning
+from .sources import inspect_source
+def write_report(root, goal, *, execution_backend, output_prefix):
+    candidate = planning.declaration_paths(root)[0].stem
+    request = knowledge._current_request(root, candidate, goal, execution_backend)
+    source = inspect_source(root, ['reports/helpers/evaluator.py'])
+    attempts = ['attempt-one']
+    if (root / 'reports/forge/attempts/attempt-alias/result.json').is_file():
+        attempts.append('attempt-alias')
+    row = {'candidate_id': candidate, 'candidate_revision': request['candidate_revision'],
+           'cohort': 'one-scientific-cohort', 'attempt_ids': attempts,
+           'bindings': {'source_digest': source['digest'], 'recipe_sha256': 'same-recipe'},
+           'tasks': [{'task_id': 'toy', 'status': 'FAIL'}],
+           'tiers': {'1': {'passed': 0, 'total': 1}}, 'cost': {'wall_seconds': 12.5}}
+    result = {'rows': [row], 'tier_requirements': {'1': ['toy']},
+              'provenance': {'view_sha256': 'stable-view', 'reducer_sha256': 'stable-reducer'}}
+    path = Path(str(output_prefix) + '.json')
+    path.write_text(json.dumps(result))
+    return {'json': str(path), 'rows': 1}
+''')
+    _git(root, "add", "experiments/forge", "configs/forge/ideas")
+    _git(root, "commit", "-qm", "declare equivalent labels")
+    commit = _git(root, "rev-parse", "HEAD")
+    request = read_json(directory / "request.json")
+    request["request"]["source"] = inspect_source(root, ["reports/helpers/evaluator.py"])
+    atomic_json(directory / "request.json", request)
+    certificate = read_json(directory / "evidence.json")
+    certificate["source"] = request["request"]["source"]
+    atomic_json(directory / "evidence.json", certificate)
+    alias_request = read_json(directory / "request.json")
+    alias_request["request"]["candidate"]["id"] = "a-alias"
+    if mixed_candidate_receipts:
+        alias_directory = directory.parent / "attempt-alias"
+        alias_result = read_json(directory / "result.json")
+        alias_result["attempt_id"] = "attempt-alias"
+        alias_certificate = read_json(directory / "evidence.json")
+        alias_certificate["result_hash"] = stable_hash(alias_result)
+        atomic_json(alias_directory / "request.json", alias_request)
+        atomic_json(alias_directory / "result.json", alias_result)
+        atomic_json(alias_directory / "evidence.json", alias_certificate)
+    else:
+        # A request from another origin, even with the same source digest,
+        # cannot promote its label ahead of this exact validated cohort.
+        alias_request["request"]["source"]["origin_commit"] = "other-origin"
+        atomic_json(directory.parent / "other-origin/request.json", alias_request)
+    protected = {path: path.read_bytes() for path in directory.parent.glob("*/*.json")}
+    monkeypatch.setattr(publication, "render_markdown", lambda *args, **kwargs: "Snapshot\nrows\n")
+    result = read_json(publication.regenerate(root, source_commit=commit)["json"])
+    row = result["rows"][0]
+    if mixed_candidate_receipts:
+        with pytest.raises(ValueError, match="candidate/source cohort differs.*attempt-one.*new-technique"):
+            publication._validate_published_row(root, result, row)
+    else:
+        assert row["candidate_id"] == "new-technique"
+        publication._validate_published_row(root, result, row)
+    assert row["candidate_revision"] == "revision-one"
+    assert row["cohort"] == "one-scientific-cohort"
+    assert row["bindings"]["recipe_sha256"] == "same-recipe"
+    assert row["bindings"]["source_digest"] == request["request"]["source"]["digest"]
+    assert row["tasks"] == [{"task_id": "toy", "status": "FAIL"}]
+    assert row["tiers"] == {"1": {"passed": 0, "total": 1}}
+    assert row["cost"] == {"wall_seconds": 12.5}
+    assert row["attempt_ids"] == (["attempt-one", "attempt-alias"] if mixed_candidate_receipts else ["attempt-one"])
+    assert all(path.read_bytes() == content for path, content in protected.items())
 
 
 def test_frozen_subprocess_regrades_exact_source_after_live_source_advance(frozen_checkout, monkeypatch):

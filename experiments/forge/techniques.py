@@ -28,6 +28,13 @@ def technique_signature(value):
     network_floor = recipe.resolved_network_lr_floor
     penalty_end = recipe.reg_coeff if recipe.reg_coeff_end is None else recipe.reg_coeff_end
     beta2_end = recipe.betas[1] if recipe.beta2_end is None else recipe.beta2_end
+    # Magnitude grafting consumes Adam moments; raw and normalized SGD do not.
+    # Hybrid D-only retains Adam for G/E/prior, whereas row-only retains it only
+    # for networks. Record the consumed rule, not inert Recipe defaults.
+    adam_networks = recipe.optimizer_family in {
+        "formulation", "adam", "ada_nsgda", "dualnorm_D_only", "particle_rownorm_only"}
+    adam_prior = recipe.optimizer_family in {
+        "formulation", "adam", "ada_nsgda", "dualnorm_D_only"}
     mechanisms = {
         "critic_penalty": {"initial": recipe.reg_coeff > 0, "terminal": penalty_end > 0},
         "penalty_schedule": {"declared": recipe.reg_coeff_end is not None,
@@ -35,12 +42,12 @@ def technique_signature(value):
         "beta2_schedule": {"declared": recipe.beta2_end is not None,
                            "network_changing": beta2_end != recipe.betas[1],
                            "prior_changing": recipe.beta2_end is not None and beta2_end != prior_betas[1]},
-        "network_moments": [value > 0 for value in recipe.betas],
-        "prior_moments": [value > 0 for value in prior_betas],
+        "network_moments": [value > 0 for value in recipe.betas] if adam_networks else None,
+        "prior_moments": [value > 0 for value in prior_betas] if adam_prior else None,
         "direct_particle_moments": ([value > 0 for value in recipe.direct_particle_betas]
                                     if recipe.optimizer_family == "formulation" else None),
-        "terminal_second_moment": beta2_end > 0,
-        "amsgrad": recipe.amsgrad,
+        "terminal_second_moment": beta2_end > 0 if adam_networks or adam_prior else None,
+        "amsgrad": recipe.amsgrad if adam_networks or adam_prior else None,
         "prior_regularization": recipe.prior_reg > 0,
         "critic_anchor": recipe.reg_anchor_weight > 0,
         "critic_guard": recipe.d_guard_ratio > 0,
@@ -61,8 +68,13 @@ def technique_signature(value):
                                  if recipe.effective_critic_formulation == "k3p" and recipe.reg_arm is None
                                  else None),
     }
+    if recipe.optimizer_family in {"dualnorm", "dualnorm_D_only"}:
+        mechanisms["dualnorm_momentum"] = recipe.optimizer_momentum > 0
+    if recipe.optimizer_family in {"dualnorm_D_only", "particle_rownorm_only"}:
+        mechanisms["hybrid_adam_rate_override"] = recipe.optimizer_adam_lr is not None
     critic_betas = recipe.d_betas or recipe.betas
-    if [b > 0 for b in critic_betas] != mechanisms["network_moments"]:
+    adam_critic = recipe.optimizer_family in {"formulation", "adam", "ada_nsgda", "particle_rownorm_only"}
+    if adam_critic and [b > 0 for b in critic_betas] != mechanisms["network_moments"]:
         mechanisms["critic_moments"] = [b > 0 for b in critic_betas]
     if recipe.beta2_end is not None:
         critic_changing = recipe.beta2_end != critic_betas[1]
@@ -95,6 +107,18 @@ def recipe_field_active(name, value, *, task=None):
     execution = {} if task is None else task.get("execution", {})
     prior_active = ((task is None or prior_control_binding(task)["latent_table_controls"])
                     and execution.get("prior", {}).get("learnable", True))
+    if name == "optimizer_momentum":
+        return recipe.optimizer_family in {"dualnorm", "dualnorm_D_only"}
+    if name == "optimizer_adam_lr":
+        return recipe.optimizer_family in {"dualnorm_D_only", "particle_rownorm_only"}
+    if name in {"betas", "amsgrad", "beta2_end"}:
+        return recipe.optimizer_family in {
+            "formulation", "adam", "ada_nsgda", "dualnorm_D_only", "particle_rownorm_only"}
+    if name == "prior_betas" and recipe.optimizer_family not in {
+            "formulation", "adam", "ada_nsgda", "dualnorm_D_only"}:
+        return False
+    if name == "d_betas":
+        return recipe.optimizer_family in {"formulation", "adam", "ada_nsgda", "particle_rownorm_only"}
     if name in {"lr_decay_rate", "lr_decay_steps"}:
         return recipe.lr_schedule == "exponential" and recipe.lr_decay_rate < 1
     if name in {"lr_anneal_start", "lr_floor", "network_lr_floor"} and recipe.lr_schedule != "cosine":

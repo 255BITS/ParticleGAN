@@ -119,6 +119,20 @@ def _validate_task(task, candidate, root, *, explicit_initializer=True):
 
 
 
+def _optimizer_recipe_identity(recipe):
+    """Keep newly implicit defaults compatible with frozen resolved recipes."""
+    if not isinstance(recipe, dict):
+        return recipe
+    from particlegan.recipe_compat import without_default_additions
+    recipe = without_default_additions(recipe)
+    momentum = recipe.get("optimizer_momentum")
+    if type(momentum) in (int, float) and momentum == 0:
+        recipe.pop("optimizer_momentum")
+    if recipe.get("optimizer_adam_lr") is None:
+        recipe.pop("optimizer_adam_lr", None)
+    return recipe
+
+
 def _validate_candidate_identity(request):
     from dataclasses import asdict
     from .api import FormulationContext
@@ -147,10 +161,11 @@ def _validate_candidate_identity(request):
         # explicit and continue through the strict checks below.
         if canonical(recipe_identity_fields(candidate["resolved_configuration_recipe"])) != canonical(recipe_identity_fields(resolved_recipe)):
             raise ValueError("configuration frozen Recipe differs from its actual public formulation")
-    if canonical(candidate.get("resolved_recipe")) != canonical(resolved_recipe):
+    if canonical(_optimizer_recipe_identity(candidate.get("resolved_recipe"))) != canonical(_optimizer_recipe_identity(resolved_recipe)):
         raise ValueError("candidate resolved_recipe differs from its actual public formulation")
-    expected = candidate_revision_for(request["source"]["digest"],
-                                     {**candidate, "resolved_recipe": resolved_recipe})
+    # The semantic check above permits only the new implicit defaults. Hash
+    # the exact recorded dictionary to retain each frozen request's identity.
+    expected = candidate_revision_for(request["source"]["digest"], candidate)
     if request.get("candidate_revision") != expected:
         raise ValueError("candidate scientific identity differs from its actual formulation/source")
 

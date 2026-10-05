@@ -168,6 +168,9 @@ class _Run:
         self.last_update = {}
         self.policy_audit = None
         self.policy_purity, self.policy_observations = [], []
+        from .optimizer_diagnostics import attach
+        self.optimizer_diagnostics = attach({"G": trainer.opt_g, "D": trainer.opt_d},
+            trainer.D, self.output, _checkpoints(task), prior=trainer.prior)
         if context.policy_task is not None:
             from .policy_adapters import PolicyLifecycleAudit
             self.policy_audit = PolicyLifecycleAudit(trainer.policy)
@@ -260,6 +263,8 @@ class _Run:
                   "unintended_rng_deviations": sum(a["unintended_rng_deviations"] for a in self.rng_audits)}
         evidence = {**evidence, "guards": guards, "rng_audits": self.rng_audits,
                     **self.sampling_policy}
+        if self.optimizer_diagnostics is not None:
+            evidence["optimizer_diagnostics"] = self.optimizer_diagnostics.receipt()
         if self.policy_audit is not None:
             from .policy_adapters import controls_receipt
             controls = controls_receipt(trainer.policy, trainer.completed_steps)

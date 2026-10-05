@@ -6,7 +6,8 @@ import re
 import pytest
 
 from experiments.forge.contracts import atomic_json, read_json, stable_hash
-from experiments.forge.family_reports import build_progress, generated_pages, render_leaderboard, score
+from experiments.forge.family_reports import (build_progress, certified_retry_successors,
+                                              generated_pages, render_leaderboard, score)
 from experiments.forge.views import task_evaluation_fingerprint, task_execution_fingerprint
 
 
@@ -184,6 +185,110 @@ def test_receipt_cannot_supply_metrics_from_another_configuration_or_source(repo
         build_progress(root, publication)
 
 
+def _compact_repair(report):
+    root, publication = report
+    parent = read_json(root / "reports/forge/technique-receipts/attempt-one.json")
+    parent.update(attempt_id="attempt-one", attempt_status="error", certificate_validated=True,
+                  qualification_input=False, qualification_reuse=False, runtime={"python": "3.12"})
+    parent["provenance"].update(canonical_result_hash=stable_hash({"interrupted": True}), source_origin_commit="commit-one")
+    parent["task_results"][0].update(compatibility_key="one-complete-task-law", gate_status="INCOMPLETE",
+                                     raw_status="error", reason="worker stopped", cost={"wall_seconds": 12.5})
+    child = deepcopy(parent)
+    child.update(attempt_id="attempt-retry", attempt_status="completed",
+                 retry_of={"attempt_id": "attempt-one", "result_hash": parent["provenance"]["canonical_result_hash"],
+                           "reason": "Explicit environment repair", "authorized_at": "2026-10-05T19:35:12+00:00"})
+    child["provenance"]["canonical_result_hash"] = stable_hash({"repaired": True})
+    result = child["task_results"][0]
+    result.update(gate_status="PASS", raw_status="completed", reason="complete repaired run",
+                  metrics={"score": .9}, cost={"wall_seconds": 7.25})
+    result["evaluator_summary"]["metric_checks"]["score"].update(value=.9, status="PASS")
+    return {"attempt-one": parent, "attempt-retry": child}
+
+
+@pytest.mark.parametrize("reverse", [False, True])
+def test_certified_repair_uses_successor_metrics_and_preserves_original_history_without_raw_receipts(report, reverse):
+    root, publication = report
+    summaries = _compact_repair(report)
+    for attempt, summary in summaries.items():
+        atomic_json(root / f"reports/forge/technique-receipts/{attempt}.json", summary)
+    selected = publication["rows"][0]
+    selected["attempt_ids"] = list(reversed(summaries)) if reverse else list(summaries)
+    selected["tasks"][1]["status"] = "PASS"
+    selected["cost"] = {"wall_seconds": 19.75}
+    original = deepcopy(publication["rows"])
+    protected = {path: path.read_bytes() for path in (root / "reports/forge/technique-receipts").glob("*.json")}
+    assert not (root / "reports/forge/attempts").exists()
+    cohort = generate(report)
+    assert cohort["tasks"]["failed"]["status"] == "PASS"
+    assert cohort["tasks"]["failed"]["attempt_id"] == "attempt-retry"
+    assert cohort["tasks"]["failed"]["metrics"]["metrics"] == {"score": .9}
+    assert cohort["retry_history"][0]["attempt_id"] == "attempt-one"
+    assert cohort["retry_history"][0]["superseded_by"] == "attempt-retry"
+    assert cohort["retry_history"][0]["original_task_costs"] == {"failed": {"wall_seconds": 12.5}}
+    assert score(cohort["total"]) == "4(*)/5"
+    text = next(iter(generated_pages(root, publication).values()))
+    assert "Certified execution repair" in text and "attempt-one.json" in text and "attempt-retry.json" in text
+    assert "original outcome and cost remain recorded" in text
+    assert publication["rows"] == original
+    assert all(path.read_bytes() == content for path, content in protected.items())
+
+
+@pytest.mark.parametrize("tamper", ["hash", "parent_missing", "authorization", "reason", "certificate", "qualification",
+                                    "parent_completed", "parent_fail", "runtime", "source", "origin", "candidate", "revision",
+                                    "task_key", "duplicate_task", "extra_task", "identity"])
+def test_compact_repair_rejects_unproven_or_changed_lineage(report, tamper):
+    summaries = _compact_repair(report)
+    parent, child = summaries["attempt-one"], summaries["attempt-retry"]
+    if tamper == "hash":
+        child["retry_of"]["result_hash"] = "wrong-hash"
+    elif tamper == "parent_missing":
+        del summaries["attempt-one"]
+    elif tamper in {"authorization", "reason"}:
+        child["retry_of"]["authorized_at" if tamper == "authorization" else "reason"] = ""
+    elif tamper == "certificate":
+        parent["certificate_validated"] = False
+    elif tamper == "qualification":
+        child["qualification_input"] = True
+    elif tamper == "parent_completed":
+        parent["attempt_status"] = "completed"
+    elif tamper == "parent_fail":
+        parent["task_results"][0]["gate_status"] = "FAIL"
+    elif tamper == "runtime":
+        child["runtime"]["python"] = "other"
+    elif tamper in {"source", "origin"}:
+        child["provenance"]["source_digest" if tamper == "source" else "source_origin_commit"] = "other"
+    elif tamper in {"candidate", "revision"}:
+        child["candidate_id" if tamper == "candidate" else "candidate_revision"] = "other"
+    elif tamper == "task_key":
+        child["task_results"][0]["compatibility_key"] = "different-task-law"
+    elif tamper in {"duplicate_task", "extra_task"}:
+        extra = deepcopy(child["task_results"][0])
+        if tamper == "extra_task":
+            extra["task_id"] = "other-task"
+        child["task_results"].append(extra)
+    elif tamper == "identity":
+        child["attempt_id"] = "other-attempt"
+    with pytest.raises(ValueError, match="compact retry"):
+        certified_retry_successors(summaries)
+
+
+def test_compact_repair_rejects_conflicting_branches_and_cycles(report):
+    summaries = _compact_repair(report)
+    sibling = deepcopy(summaries["attempt-retry"])
+    sibling["attempt_id"] = "attempt-sibling"
+    summaries["attempt-sibling"] = sibling
+    with pytest.raises(ValueError, match="conflicting compact retry branches"):
+        certified_retry_successors(summaries)
+    del summaries["attempt-sibling"]
+    parent, child = summaries["attempt-one"], summaries["attempt-retry"]
+    child["attempt_status"] = "error"
+    child["task_results"][0]["gate_status"] = "INCOMPLETE"
+    parent["retry_of"] = {**child["retry_of"], "attempt_id": "attempt-retry",
+                          "result_hash": child["provenance"]["canonical_result_hash"]}
+    with pytest.raises(ValueError, match="cyclic compact retry"):
+        certified_retry_successors(summaries)
+
+
 def test_runtime_groups_never_sum_or_borrow_each_others_passes(report):
     root, publication = report
     cpu = deepcopy(publication["rows"][0])
@@ -344,8 +449,11 @@ def test_all_current_non_policy_families_have_executed_tier1_without_new_qualifi
     publication = read_json(root / "reports/forge/technique-inventory.json")
     rows = deepcopy(publication["rows"])
     progress = build_progress(root, publication)
-    ordinary = [family for family in progress["families"] if family["id"] not in {"atlas", "e22"}]
-    assert len(ordinary) == 10
+    selection = read_json(root / "configs/forge/selections/family-current-v1.json")
+    original_families = {pin["trainer_family"] for pin in selection["selections"]
+                         if pin["selection_kind"] != "current_measurement"} - {"atlas", "e22"}
+    ordinary = [family for family in progress["families"] if family["id"] in original_families]
+    assert {family["id"] for family in ordinary} == original_families
     for family in ordinary:
         for cohort in family["cohorts"]:
             assert cohort["tiers"]["1"]["incomplete"] is False
@@ -355,6 +463,53 @@ def test_all_current_non_policy_families_have_executed_tier1_without_new_qualifi
     publication["family_progress"] = progress
     text = render_leaderboard(root, publication, root / "reports/forge/technique-inventory.md")
     assert "Atlas/E22 retain (*) for blocked, unrun tests" in text
+    assert publication["rows"] == rows
+
+
+def test_current_measurement_families_complete_only_their_declared_view_scope():
+    root = Path(__file__).resolve().parents[1]
+    publication = read_json(root / "reports/forge/technique-inventory.json")
+    rows = deepcopy(publication["rows"])
+    selection = read_json(root / "configs/forge/selections/family-current-v1.json")
+    pins = {pin["trainer_family"]: pin for pin in selection["selections"]}
+    progress = build_progress(root, publication)
+    families = {family["id"]: family for family in progress["families"]}
+    unmeasured = {row["trainer_family"] for row in rows
+                  if row["selection"]["selection_kind"] == "unmeasured_declaration"}
+    assert set(families) == set(pins) | unmeasured
+    registry = read_json(root / "configs/forge/trainer-families.json")["families"]
+    assert unmeasured == {family["id"] for family in registry
+                          if family.get("unmeasured_display_backend")}
+    for row in rows:
+        if row["trainer_family"] in unmeasured:
+            assert not row["attempt_ids"] and row["qualified_tier"] == 0
+            assert row["selection"]["qualified"] is False and row["selection"]["default_adoption"] is False
+            assert all(task["status"] in {"UNKNOWN", "BLOCKED", "NOT_RUN"}
+                       for task in row["tasks"] + row.get("nonrequired_tasks", []))
+    for name, pin in pins.items():
+        if pin["selection_kind"] != "current_measurement":
+            continue
+        required = set(pin.get("measurement_tasks", []))
+        for view_name in pin["measurement_views"]:
+            view = read_json(root / f"configs/forge/views/{view_name}.json")
+            required.update(assignment["task"] for assignment in view["assignments"]
+                            if assignment["importance"] == "required" and assignment["qualification_tier"] == 1)
+        assert required
+        for cohort in families[name]["cohorts"]:
+            assert all(cohort["tasks"][task]["status"] in {"PASS", "FAIL"} for task in required)
+            views = {view["id"]: view for view in cohort["views"] + cohort.get("scoped_views", [])}
+            for view_name in pin["measurement_views"]:
+                tier = views[view_name]["tiers"]["1"]
+                assert tier["incomplete"] is False and set(tier["counts"]) <= {"PASS", "FAIL"}
+            # Other goal views retain any unknown cells; a bounded measurement
+            # grants neither execution nor qualification outside its scope.
+            for view in cohort["views"]:
+                declaration = read_json(root / f"configs/forge/views/{view['id']}.json")
+                statuses = [cohort["tasks"][assignment["task"]]["status"] for assignment in declaration["assignments"]
+                            if assignment["importance"] == "required" and assignment["qualification_tier"] == 1]
+                if any(status in {"UNKNOWN", "NOT_RUN", "BLOCKED"} for status in statuses):
+                    assert view["tiers"]["1"]["incomplete"] is True
+            assert rows[cohort["row_index"]]["qualified_tier"] == 0
     assert publication["rows"] == rows
 
 

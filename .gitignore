@@ -22,6 +22,8 @@ build/
 dist/
 /runs/api/
 /runs/forge/
+/runs/bcap-dualnorm-preflight/
+/runs/bcap-dualnorm-preflight-plan.json
 /runs/routed-convergence*/
 /runs/routed-basis-audit*/
 /runs/mog_autoencoder/

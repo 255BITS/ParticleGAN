@@ -1198,7 +1198,7 @@ torch.save({"G": G.state_dict(), "D": D.state_dict(), "D2": D2.state_dict(),
             "opt_g": opt_g.state_dict(), "opt_d": opt_d.state_dict(), "opt_d2": opt_d2.state_dict()}, path)
 ```
 
-- The optimizers are `torch.optim.Adam` subclasses: `param_groups`, LR
+- The default formulation optimizers are `torch.optim.Adam` subclasses: `param_groups`, LR
   schedulers, closures and `state_dict()`/`load_state_dict()` work as usual.
   Their `state_dict()` adds a `"regularizer"` entry holding the EMA critic,
   KA2 controller, counters, guard count and A2/direct-particle histories, so the
@@ -1240,6 +1240,56 @@ Additional Adam options such as `fused=True` or `eps=1e-8` are passed to both
 optimizers; configure learning rates and betas through the recipe. You can
 still construct optimizers yourself, including separate prior optimizers or
 additional parameter groups for learned noise.
+
+Fixed BCap or R1/R2 recipes also support optimizer experiments through
+`optimizer_family`: `sgda`, `nsgda_global`, `nsgda_layer`, `ada_nsgda`,
+`dualnorm`, `dualnorm_D_only`, and `particle_rownorm_only`. They use the same
+public factories and `GANTrainer`, with the recipe's loss, penalty and
+schedule unchanged. Disable the formulation's guard, anchor, latent damping
+and direct-particle gain; `get_recipe("bcap")` already does this.
+
+```python
+recipe = get_recipe("bcap", optimizer_family="dualnorm",
+                    lr=.01, d_lr_mult=1.5, prior_lr_mult=3.,
+                    optimizer_momentum=0.)
+trainer = GANTrainer(recipe, G, D, prior=prior)
+```
+
+These step sizes have different units from Adam learning rates and require
+their own sweeps. `nsgda_global` normalizes the combined G/E gradient, D and
+the prior separately; `nsgda_layer` normalizes each tensor. `ada_nsgda`
+requires beta1 zero and grafts each tensor's unit-rate Adam update norm onto
+its SGD direction, applying the scheduled rate once. `dualnorm` uses the
+polar factor of every matrix gradient (including heads), scaled by
+`sqrt(max(1, fan_out/fan_in))`, and L2-normalizes vectors. Its optional
+`optimizer_momentum` is `0`, `.5`, or `.9`; matrices with gradient norm below
+`eps` are skipped. It uses exact SVD through side length 1024. Larger matrices
+try 30 Newton--Schulz iterations, then fall back to SVD if their Frobenius
+orthogonality residual exceeds `1e-3`, including ill-conditioned and
+rank-deficient cases. Accepted iterative factors remain approximate within
+that residual tolerance; no scale-transfer claim follows from this numerical
+check. Higher-dimensional weight tensors are unsupported.
+
+The `dualnorm` prior and `particle_rownorm_only` normalize each sampled prior
+row, without momentum. Unsampled rows stay fixed even if a whole-table
+regularizer creates gradients there. `GANTrainer` and
+`UpdatePolicy.generate(..., rows=indices)` record actual generator-side draws.
+A caller-owned loop that bypasses `generate` must call
+`policy.observe_sampled_rows(indices)` in its generator phase, or
+`opt_g.set_sampled_rows(prior.z, indices)` before stepping. Repeated optimizer
+setter calls union IDs; updates consume them. Checkpoints include pending IDs,
+moments, momentum and the critic's observation-only step record.
+
+The isolation arms retain native PyTorch Adam for other players. Pin
+`optimizer_adam_lr` to the baseline's learning rate while sweeping `lr` for
+the changed optimizer. `dualnorm_D_only` uses normalized `lr * d_lr_mult` on D,
+baseline `optimizer_adam_lr` on G/E and baseline
+`optimizer_adam_lr * prior_lr_mult` on the prior. `particle_rownorm_only` uses
+normalized `lr * prior_lr_mult` on the prior and baseline Adam rates on G/E/D.
+Direct generated-coordinate fixtures have no sampled prior table: their
+generator coordinates follow the matrix/vector rule in `dualnorm` and retain
+Adam in `particle_rownorm_only`. Default recipe values and native Adam
+behavior remain unchanged.
 
 `adam_variant="tensorflow_v1"` uses the named `TensorFlowV1Adam` dense update
 law, adding epsilon before second-moment bias correction. Checkpoints include

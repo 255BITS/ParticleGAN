@@ -150,7 +150,8 @@ def test_tier1_refresh_materializes_only_all_32_existing_configuration_cards(tmp
     family_pins = {family["id"]: family.get("active_search_by_backend", {})
                    for family in registry["families"] + registry.get("historical_families", [])}
     assert family_pins["r1r2"]["cpu"] == "r1r2-modern-toy-v1"
-    assert {pins["cuda"] for pins in family_pins.values() if "cuda" in pins} == set(roster["studies"])
+    # Later independently registered families do not alter this frozen roster.
+    assert {family_pins[family]["cuda"] for family in roster["configuration_count_by_family"]} == set(roster["studies"])
 
 
 @pytest.mark.parametrize("knob", ["seed", "prior", "task", "budget", "batch_size", "total_steps", "z_dim",

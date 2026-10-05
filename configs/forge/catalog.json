@@ -39,7 +39,7 @@
       "experiment/toy": 3,
       "experiment/trajectory": 2,
       "experiment/transition": 7,
-      "forge_engine": 81,
+      "forge_engine": 82,
       "lrfree/feature-cells-cb64-ra": 4058,
       "report/atlas-explanation": 7,
       "report/behavioral_baseline": 32,
@@ -102,7 +102,7 @@
       "candidate_patch": 26,
       "configuration": 807,
       "driver": 401,
-      "engine_support": 81,
+      "engine_support": 82,
       "evaluator_or_audit": 324,
       "evidence_artifact": 1574,
       "frozen_candidate_implementation": 15,
@@ -116,13 +116,13 @@
       "visualization": 22,
       "visualization_artifact": 723
     },
-    "files": 11762
+    "files": 11763
   },
   "coverage": {
-    "declared_count": 11762,
+    "declared_count": 11763,
     "missing": [],
     "stale": [],
-    "tracked_count": 11762,
+    "tracked_count": 11763,
     "unclassified": [],
     "valid": true
   },
@@ -7448,6 +7448,13 @@
       "family": "forge_engine",
       "git_blob": "51516e3f0c3e445429889fe3f1dcfe3951d993e6",
       "path": "experiments/forge/nativeprofiles.py",
+      "role": "engine_support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "forge_engine",
+      "git_blob": "c8ce541122c2429c687c0acc5fb9a63423e63dd0",
+      "path": "experiments/forge/optimizer_diagnostics.py",
       "role": "engine_support",
       "suggested_tiers": []
     },

@@ -63,6 +63,7 @@ _ADDED_RECIPE_FIELDS = {"reg_anchor_weight": 1.0, "direct_particle_gain": True,
                         "row_evidence_null": "theory", "birth_death_isolation": False,
                         "birth_death_feature_scale": "none", "row_policy": "independent",
                         "optimizer_family": "formulation", "eps": 1e-8,
+                        "optimizer_momentum": 0.0, "optimizer_adam_lr": None,
                         "beta2_end": None, "beta2_anneal_end": 0.2,
                         "reg_coeff_end": None, "reg_coeff_anneal_end": 0.2}
 

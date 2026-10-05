@@ -50,6 +50,9 @@ def _validate_optimizer_state(optimizer, state):
     """
     from .recipe_schedules import validate_plain_adam_state
     validate_plain_adam_state(optimizer, state)
+    from .optim.dualnorm import NormalizedOptimizer
+    if isinstance(optimizer, NormalizedOptimizer):
+        optimizer.validate_state_dict(state)
     ema_critic = getattr(optimizer, "ema_critic", None)
     if ema_critic is not None:
         saved_ema = state.get("regularizer", {}).get("ema") if isinstance(state, dict) else None
@@ -831,6 +834,10 @@ class UpdatePolicy:
 
     def abort_step(self):
         """Release lifecycle bookkeeping after a caller error; does not undo updates."""
+        for optimizer in self.optimizers:
+            clear = getattr(optimizer, "clear_sampled_rows", None)
+            if clear is not None:
+                clear()
         self._phase = "ready"
         self._noise = None
         self._stray_flags = self._hot = self._z_before = None
@@ -960,6 +967,19 @@ class UpdatePolicy:
     def _clean_generate(self, model, latent):
         return model(latent) if self.generation is None else self.generation(model, latent)
 
+    def observe_sampled_rows(self, rows):
+        """Record generator-side prior draws for row-local optimizer updates.
+
+        Caller-owned loops that bypass ``generate`` can call this during their
+        generator phase. Whole-table regularizer gradients grant no ownership
+        of rows that were not actually sampled.
+        """
+        if self._phase != "generator":
+            raise RuntimeError("sampled prior rows must be observed during generator generation")
+        setter = getattr(self.table_optimizer, "set_sampled_rows", None)
+        if setter is not None and self.table.requires_grad:
+            setter(self.table, rows)
+
     def generate(self, latent, *, sigma=None, stream=None, averaged=False, model=None, rows=None):
         """Generate with DV12 perturbation and optional output noise.
 
@@ -972,6 +992,8 @@ class UpdatePolicy:
             sigma = self._noise.output_sigma if self._noise is not None else self.output_sigma()
         model = (self.ema_G if averaged else self.G) if model is None else model
         averaged = averaged or model is self.ema_G
+        if rows is not None and not averaged and self._phase == "generator":
+            self.observe_sampled_rows(rows)
         if self.controller is not None:
             if self._feature_selection is not None and self._feature_selection.state["actual_backend"] == "feature_cells":
                 latent = self.birth_death.perturb_latent(

@@ -247,7 +247,25 @@ class BehaviorComponents:
             kwargs["generator"] = streams.generator(family, component=component, purpose="indices")
             if self.context.prior_config["kind"] == "mog":
                 kwargs["noise_generator"] = streams.generator(family, component=component, purpose="width")
-            return original(count, *args, **kwargs)
+            result = original(count, *args, **kwargs)
+            if family != "eval":
+                # Row-normalized tables must use the actual sampled rows.
+                # Auxiliary all-table losses can create gradients elsewhere,
+                # so a nonzero-gradient mask is not an equivalent contract.
+                for bundle in self.optimizers.values():
+                    owned = bundle.optimizers if isinstance(bundle, _OptimizerBundle) else [bundle]
+                    for optimizer in owned:
+                        setter = getattr(optimizer, "set_sampled_rows", None)
+                        if setter is not None and any(
+                                parameter is prior.z for group in optimizer.param_groups
+                                for parameter in group["params"]):
+                            # These retained hosts have exactly one prior draw
+                            # per G step after the D draw. Their zero_grad can
+                            # occur after sampling, so replace earlier D rows
+                            # here instead of clearing them at zero_grad.
+                            optimizer.clear_sampled_rows()
+                            setter(prior.z, result[1])
+            return result
         prior.sample = sample
 
     def bind(self, *, generator, critic, opt_g, opt_d, priors=(), encoder=None, direct_particles=()):

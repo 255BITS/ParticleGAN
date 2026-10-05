@@ -200,6 +200,9 @@
         "bcap-pure-least-squares-joint-v2"
       ],
       "canonical_candidate": "bcap-pure-adam-v2",
+      "current_presentation_candidates": [
+        "bcap-pure-adam-example-v3"
+      ],
       "id": "bcap-pure",
       "label": "BCAP",
       "rationale": "Native Adam, fixed real/fake BCAP, constant rates and moments, selectable adversarial loss. No optimizer interventions or additive training noise. Historical K3P-derived BCAP remains a separate family.",
@@ -210,6 +213,133 @@
         "critic-gradient-penalty",
         "native-adam",
         "selectable-loss"
+      ]
+    },
+    {
+      "active_search_by_backend": {
+        "cuda": "bcap-optim-sgda-tier1-v1"
+      },
+      "candidates": [
+        "bcap-sgda-v1"
+      ],
+      "canonical_candidate": "bcap-sgda-v1",
+      "id": "bcap-sgda",
+      "label": "BCAP sgda",
+      "rationale": "Optimizer formulation distinct from native-Adam BCAP; all task laws and auxiliary objectives remain explicit. Positive dualnorm momentum strengths share one formulation; zero momentum retains its separate technique signature.",
+      "tags": [
+        "adversarial-training",
+        "capped-input-gradients",
+        "critic-gradient-penalty",
+        "optimizer-interventions"
+      ]
+    },
+    {
+      "active_search_by_backend": {
+        "cuda": "bcap-optim-nsgda-global-tier1-v1"
+      },
+      "candidates": [
+        "bcap-nsgda-global-v1"
+      ],
+      "canonical_candidate": "bcap-nsgda-global-v1",
+      "id": "bcap-nsgda-global",
+      "label": "BCAP nsgda_global",
+      "rationale": "Optimizer formulation distinct from native-Adam BCAP; all task laws and auxiliary objectives remain explicit. Positive dualnorm momentum strengths share one formulation; zero momentum retains its separate technique signature.",
+      "tags": [
+        "adversarial-training",
+        "capped-input-gradients",
+        "critic-gradient-penalty",
+        "optimizer-interventions"
+      ]
+    },
+    {
+      "active_search_by_backend": {
+        "cuda": "bcap-optim-nsgda-layer-tier1-v1"
+      },
+      "candidates": [
+        "bcap-nsgda-layer-v1"
+      ],
+      "canonical_candidate": "bcap-nsgda-layer-v1",
+      "id": "bcap-nsgda-layer",
+      "label": "BCAP nsgda_layer",
+      "rationale": "Optimizer formulation distinct from native-Adam BCAP; all task laws and auxiliary objectives remain explicit. Positive dualnorm momentum strengths share one formulation; zero momentum retains its separate technique signature.",
+      "tags": [
+        "adversarial-training",
+        "capped-input-gradients",
+        "critic-gradient-penalty",
+        "optimizer-interventions"
+      ]
+    },
+    {
+      "active_search_by_backend": {
+        "cuda": "bcap-optim-ada-nsgda-tier1-v1"
+      },
+      "candidates": [
+        "bcap-ada-nsgda-v1"
+      ],
+      "canonical_candidate": "bcap-ada-nsgda-v1",
+      "id": "bcap-ada-nsgda",
+      "label": "BCAP ada_nsgda",
+      "rationale": "Optimizer formulation distinct from native-Adam BCAP; all task laws and auxiliary objectives remain explicit. Positive dualnorm momentum strengths share one formulation; zero momentum retains its separate technique signature.",
+      "tags": [
+        "adversarial-training",
+        "capped-input-gradients",
+        "critic-gradient-penalty",
+        "optimizer-interventions"
+      ]
+    },
+    {
+      "active_search_by_backend": {
+        "cuda": "bcap-optim-dualnorm-momentum-tier1-v1"
+      },
+      "candidates": [
+        "bcap-dualnorm-zero-v1",
+        "bcap-dualnorm-momentum-v1"
+      ],
+      "canonical_candidate": "bcap-dualnorm-momentum-v1",
+      "id": "bcap-dualnorm",
+      "label": "BCAP dualnorm (experimental starting point)",
+      "rationale": "Optimizer formulation distinct from native-Adam BCAP; all task laws and auxiliary objectives remain explicit. Positive dualnorm momentum strengths share one formulation; zero momentum retains its separate technique signature.",
+      "tags": [
+        "adversarial-training",
+        "capped-input-gradients",
+        "critic-gradient-penalty",
+        "optimizer-interventions"
+      ]
+    },
+    {
+      "active_search_by_backend": {
+        "cuda": "bcap-optim-dualnorm-d-only-tier1-v1"
+      },
+      "candidates": [
+        "bcap-dualnorm-d-only-v1"
+      ],
+      "canonical_candidate": "bcap-dualnorm-d-only-v1",
+      "id": "bcap-dualnorm-d-only",
+      "label": "BCAP dualnorm_D_only",
+      "rationale": "Optimizer formulation distinct from native-Adam BCAP; all task laws and auxiliary objectives remain explicit. Positive dualnorm momentum strengths share one formulation; zero momentum retains its separate technique signature.",
+      "tags": [
+        "adversarial-training",
+        "capped-input-gradients",
+        "critic-gradient-penalty",
+        "optimizer-interventions"
+      ]
+    },
+    {
+      "active_search_by_backend": {
+        "cuda": "bcap-optim-particle-rownorm-only-tier1-v1"
+      },
+      "candidates": [
+        "bcap-particle-rownorm-only-v1"
+      ],
+      "canonical_candidate": "bcap-particle-rownorm-only-v1",
+      "id": "bcap-particle-rownorm-only",
+      "label": "BCAP particle_rownorm_only",
+      "rationale": "Optimizer formulation distinct from native-Adam BCAP; all task laws and auxiliary objectives remain explicit. Positive dualnorm momentum strengths share one formulation; zero momentum retains its separate technique signature.",
+      "tags": [
+        "adversarial-training",
+        "capped-input-gradients",
+        "critic-gradient-penalty",
+        "optimizer-interventions"
       ]
     },
     {
@@ -224,7 +354,9 @@
         "adversarial-training",
         "constant-learning-rate",
         "tensorflow-v1-adam"
-      ]
+      ],
+      "unmeasured_display_backend": "cuda",
+      "unmeasured_display_reason": "Declaration-only placeholder in the CUDA view used by all current measurement pins; no execution or qualification credit."
     }
   ],
   "historical_families": [
