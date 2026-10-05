@@ -141,7 +141,7 @@ Complete current Tier 1 measurement in: discriminator_stability; additional scop
 | --- | ---: | ---: | ---: | ---: |
 | [adaptation](ka2.md#cohort-cuda-0d83d78027c5-adaptation) | [3/3](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-1) | [0(*)/19](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) | [0(*)/1](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-3) | [3(*)/23](ka2.md#cohort-cuda-0d83d78027c5-adaptation) |
 | [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous) | [3/4](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1) | [0(*)/19](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) | [0(*)/7](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3) | [3(*)/30](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous) |
-| [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability) | [4(*)/6](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | [0(*)/19](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) | [0(*)/2](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-3) | [4(*)/27](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability) |
+| [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability) | [4/6](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | [0(*)/19](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) | [0(*)/2](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-3) | [4(*)/27](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability) |
 | [formulation_comparison](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison) | [3/3](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-1) | [0(*)/19](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) | [0(*)/2](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-3) | [3(*)/24](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison) |
 | [host_profile_transfer](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer) | [3/3](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-1) | [0(*)/19](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) | [0(*)/2](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-3) | [3(*)/24](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer) |
 | [quality_coverage](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage) | [3/3](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-1) | [0(*)/19](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | [0/0](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-3) | [3(*)/22](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage) |
@@ -152,7 +152,7 @@ Separate cohort coverage (excluded from family totals):
 | --- | ---: | ---: | ---: | ---: |
 | [tier1_policy_coverage](ka2.md#cohort-cuda-0d83d78027c5-tier1_policy_coverage) | [0(*)/7](ka2.md#cohort-cuda-0d83d78027c5-tier1_policy_coverage-tier-1) | [0/0](ka2.md#cohort-cuda-0d83d78027c5-tier1_policy_coverage-tier-2) | [0/0](ka2.md#cohort-cuda-0d83d78027c5-tier1_policy_coverage-tier-3) | [0(*)/7](ka2.md#cohort-cuda-0d83d78027c5-tier1_policy_coverage) |
 
-\* indicates incomplete results, including changed or unbound current contracts.
+(*) means at least one required experiment has no recorded execution, including preflight blockers. PASS and FAIL both count as executed. Attempted errors retain their status and cause; test-definition compatibility is shown separately and does not add (*).
 
 <a name="cohort-cuda-0d83d78027c5-tier-1"></a>
 
@@ -160,15 +160,15 @@ Separate cohort coverage (excluded from family totals):
 
 Shared experiments appear once in this list; the family numerator/denominator count their view requirements.
 
-| Experiment | Required by | Recorded result | Current contract |
+| Experiment | Required by | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [ae_gan_hold](ka2.md#cohort-cuda-0d83d78027c5-experiment-ae_gan_hold) | [adaptation](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-1), [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1), [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1), [formulation_comparison](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-1), [host_profile_transfer](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-1), [quality_coverage](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-1) | PASS | matches |
-| [clockfree_audit_measurement_v1](ka2.md#cohort-cuda-0d83d78027c5-experiment-clockfree_audit_measurement_v1) | [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1) | FAIL | matches |
-| [five_word_joint_acquisition](ka2.md#cohort-cuda-0d83d78027c5-experiment-five_word_joint_acquisition) | [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | FAIL | CHANGED |
-| [gaussian1d_acquisition](ka2.md#cohort-cuda-0d83d78027c5-experiment-gaussian1d_acquisition) | [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | FAIL | matches |
-| [ring16_acquisition](ka2.md#cohort-cuda-0d83d78027c5-experiment-ring16_acquisition) | [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | PASS | matches |
-| [two_pole](ka2.md#cohort-cuda-0d83d78027c5-experiment-two_pole) | [adaptation](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-1), [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1), [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1), [formulation_comparison](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-1), [host_profile_transfer](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-1), [quality_coverage](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-1) | PASS | matches |
-| [unused_token_hold](ka2.md#cohort-cuda-0d83d78027c5-experiment-unused_token_hold) | [adaptation](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-1), [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1), [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1), [formulation_comparison](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-1), [host_profile_transfer](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-1), [quality_coverage](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-1) | PASS | matches |
+| [ae_gan_hold](ka2.md#cohort-cuda-0d83d78027c5-experiment-ae_gan_hold) | [adaptation](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-1), [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1), [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1), [formulation_comparison](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-1), [host_profile_transfer](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-1), [quality_coverage](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-1) | PASS | matches recorded run |
+| [clockfree_audit_measurement_v1](ka2.md#cohort-cuda-0d83d78027c5-experiment-clockfree_audit_measurement_v1) | [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1) | FAIL | matches recorded run |
+| [five_word_joint_acquisition](ka2.md#cohort-cuda-0d83d78027c5-experiment-five_word_joint_acquisition) | [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | FAIL | changed since run |
+| [gaussian1d_acquisition](ka2.md#cohort-cuda-0d83d78027c5-experiment-gaussian1d_acquisition) | [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | FAIL | matches recorded run |
+| [ring16_acquisition](ka2.md#cohort-cuda-0d83d78027c5-experiment-ring16_acquisition) | [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | PASS | matches recorded run |
+| [two_pole](ka2.md#cohort-cuda-0d83d78027c5-experiment-two_pole) | [adaptation](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-1), [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1), [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1), [formulation_comparison](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-1), [host_profile_transfer](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-1), [quality_coverage](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-1) | PASS | matches recorded run |
+| [unused_token_hold](ka2.md#cohort-cuda-0d83d78027c5-experiment-unused_token_hold) | [adaptation](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-1), [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1), [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1), [formulation_comparison](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-1), [host_profile_transfer](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-1), [quality_coverage](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-1) | PASS | matches recorded run |
 
 <a name="cohort-cuda-0d83d78027c5-tier-2"></a>
 
@@ -176,27 +176,27 @@ Shared experiments appear once in this list; the family numerator/denominator co
 
 Shared experiments appear once in this list; the family numerator/denominator count their view requirements.
 
-| Experiment | Required by | Recorded result | Current contract |
+| Experiment | Required by | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [cover_leftover](ka2.md#cohort-cuda-0d83d78027c5-experiment-cover_leftover) | [adaptation](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | UNKNOWN | matches |
-| [grid100](ka2.md#cohort-cuda-0d83d78027c5-experiment-grid100) | [adaptation](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | UNKNOWN | matches |
-| [img_bars4](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_bars4) | [adaptation](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | UNKNOWN | matches |
-| [img_blobs4](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_blobs4) | [adaptation](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | UNKNOWN | matches |
-| [img_intensity2](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_intensity2) | [adaptation](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | UNKNOWN | matches |
-| [img_stripes2](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_stripes2) | [adaptation](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | UNKNOWN | matches |
-| [mid_scale_identity](ka2.md#cohort-cuda-0d83d78027c5-experiment-mid_scale_identity) | [adaptation](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | UNKNOWN | matches |
-| [mode_hold](ka2.md#cohort-cuda-0d83d78027c5-experiment-mode_hold) | [adaptation](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | UNKNOWN | matches |
-| [residual_student](ka2.md#cohort-cuda-0d83d78027c5-experiment-residual_student) | [adaptation](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | UNKNOWN | matches |
-| [rotated100](ka2.md#cohort-cuda-0d83d78027c5-experiment-rotated100) | [adaptation](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | UNKNOWN | matches |
-| [staggered100](ka2.md#cohort-cuda-0d83d78027c5-experiment-staggered100) | [adaptation](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | UNKNOWN | matches |
-| [trajectory](ka2.md#cohort-cuda-0d83d78027c5-experiment-trajectory) | [adaptation](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | UNKNOWN | matches |
-| [unipolar](ka2.md#cohort-cuda-0d83d78027c5-experiment-unipolar) | [adaptation](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | UNKNOWN | matches |
-| [vector_anisotropic](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_anisotropic) | [adaptation](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | UNKNOWN | matches |
-| [vector_overlap](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_overlap) | [adaptation](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | UNKNOWN | matches |
-| [vector_spiral](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_spiral) | [adaptation](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | UNKNOWN | matches |
-| [vector_two_broad](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_two_broad) | [adaptation](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | UNKNOWN | matches |
-| [vector_unequal_mass](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_mass) | [adaptation](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | UNKNOWN | matches |
-| [vector_unequal_width](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_width) | [adaptation](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | UNKNOWN | matches |
+| [cover_leftover](ka2.md#cohort-cuda-0d83d78027c5-experiment-cover_leftover) | [adaptation](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | UNKNOWN | matches recorded run |
+| [grid100](ka2.md#cohort-cuda-0d83d78027c5-experiment-grid100) | [adaptation](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | UNKNOWN | matches recorded run |
+| [img_bars4](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_bars4) | [adaptation](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | UNKNOWN | matches recorded run |
+| [img_blobs4](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_blobs4) | [adaptation](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | UNKNOWN | matches recorded run |
+| [img_intensity2](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_intensity2) | [adaptation](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | UNKNOWN | matches recorded run |
+| [img_stripes2](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_stripes2) | [adaptation](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | UNKNOWN | matches recorded run |
+| [mid_scale_identity](ka2.md#cohort-cuda-0d83d78027c5-experiment-mid_scale_identity) | [adaptation](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | UNKNOWN | matches recorded run |
+| [mode_hold](ka2.md#cohort-cuda-0d83d78027c5-experiment-mode_hold) | [adaptation](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | UNKNOWN | matches recorded run |
+| [residual_student](ka2.md#cohort-cuda-0d83d78027c5-experiment-residual_student) | [adaptation](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | UNKNOWN | matches recorded run |
+| [rotated100](ka2.md#cohort-cuda-0d83d78027c5-experiment-rotated100) | [adaptation](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | UNKNOWN | matches recorded run |
+| [staggered100](ka2.md#cohort-cuda-0d83d78027c5-experiment-staggered100) | [adaptation](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | UNKNOWN | matches recorded run |
+| [trajectory](ka2.md#cohort-cuda-0d83d78027c5-experiment-trajectory) | [adaptation](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | UNKNOWN | matches recorded run |
+| [unipolar](ka2.md#cohort-cuda-0d83d78027c5-experiment-unipolar) | [adaptation](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | UNKNOWN | matches recorded run |
+| [vector_anisotropic](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_anisotropic) | [adaptation](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | UNKNOWN | matches recorded run |
+| [vector_overlap](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_overlap) | [adaptation](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | UNKNOWN | matches recorded run |
+| [vector_spiral](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_spiral) | [adaptation](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | UNKNOWN | matches recorded run |
+| [vector_two_broad](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_two_broad) | [adaptation](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | UNKNOWN | matches recorded run |
+| [vector_unequal_mass](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_mass) | [adaptation](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | UNKNOWN | matches recorded run |
+| [vector_unequal_width](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_width) | [adaptation](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-2), [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2), [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2), [formulation_comparison](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2), [host_profile_transfer](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2), [quality_coverage](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | UNKNOWN | matches recorded run |
 
 <a name="cohort-cuda-0d83d78027c5-tier-3"></a>
 
@@ -204,15 +204,15 @@ Shared experiments appear once in this list; the family numerator/denominator co
 
 Shared experiments appear once in this list; the family numerator/denominator count their view requirements.
 
-| Experiment | Required by | Recorded result | Current contract |
+| Experiment | Required by | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [clockfree_audit](ka2.md#cohort-cuda-0d83d78027c5-experiment-clockfree_audit) | [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3) | UNKNOWN | unbound |
-| [grid100_14k](ka2.md#cohort-cuda-0d83d78027c5-experiment-grid100_14k) | [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3) | UNKNOWN | unbound |
-| [ring_extension](ka2.md#cohort-cuda-0d83d78027c5-experiment-ring_extension) | [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3), [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-3), [formulation_comparison](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-3), [host_profile_transfer](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-3) | UNKNOWN | matches |
-| [ring_hold](ka2.md#cohort-cuda-0d83d78027c5-experiment-ring_hold) | [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3), [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-3), [formulation_comparison](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-3), [host_profile_transfer](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-3) | UNKNOWN | matches |
-| [rotated100_14k](ka2.md#cohort-cuda-0d83d78027c5-experiment-rotated100_14k) | [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3) | UNKNOWN | unbound |
-| [staggered100_14k](ka2.md#cohort-cuda-0d83d78027c5-experiment-staggered100_14k) | [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3) | UNKNOWN | unbound |
-| [target_shift_recovery](ka2.md#cohort-cuda-0d83d78027c5-experiment-target_shift_recovery) | [adaptation](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-3), [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3) | UNKNOWN | unbound |
+| [clockfree_audit](ka2.md#cohort-cuda-0d83d78027c5-experiment-clockfree_audit) | [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3) | UNKNOWN | recorded definition unavailable |
+| [grid100_14k](ka2.md#cohort-cuda-0d83d78027c5-experiment-grid100_14k) | [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3) | UNKNOWN | recorded definition unavailable |
+| [ring_extension](ka2.md#cohort-cuda-0d83d78027c5-experiment-ring_extension) | [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3), [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-3), [formulation_comparison](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-3), [host_profile_transfer](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-3) | UNKNOWN | matches recorded run |
+| [ring_hold](ka2.md#cohort-cuda-0d83d78027c5-experiment-ring_hold) | [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3), [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-3), [formulation_comparison](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-3), [host_profile_transfer](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-3) | UNKNOWN | matches recorded run |
+| [rotated100_14k](ka2.md#cohort-cuda-0d83d78027c5-experiment-rotated100_14k) | [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3) | UNKNOWN | recorded definition unavailable |
+| [staggered100_14k](ka2.md#cohort-cuda-0d83d78027c5-experiment-staggered100_14k) | [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3) | UNKNOWN | recorded definition unavailable |
+| [target_shift_recovery](ka2.md#cohort-cuda-0d83d78027c5-experiment-target_shift_recovery) | [adaptation](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-3), [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3) | UNKNOWN | recorded definition unavailable |
 
 <a name="cohort-cuda-0d83d78027c5-adaptation"></a>
 
@@ -228,45 +228,45 @@ Calibration: **provisional**. Phase D historical calibration remains required
 
 ### Tier 1
 
-| Experiment | Role | Recorded result | Current contract |
+| Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [two_pole](ka2.md#cohort-cuda-0d83d78027c5-experiment-two_pole) | required | PASS | matches |
-| [unused_token_hold](ka2.md#cohort-cuda-0d83d78027c5-experiment-unused_token_hold) | required | PASS | matches |
-| [ae_gan_hold](ka2.md#cohort-cuda-0d83d78027c5-experiment-ae_gan_hold) | required | PASS | matches |
+| [two_pole](ka2.md#cohort-cuda-0d83d78027c5-experiment-two_pole) | required | PASS | matches recorded run |
+| [unused_token_hold](ka2.md#cohort-cuda-0d83d78027c5-experiment-unused_token_hold) | required | PASS | matches recorded run |
+| [ae_gan_hold](ka2.md#cohort-cuda-0d83d78027c5-experiment-ae_gan_hold) | required | PASS | matches recorded run |
 
 <a name="cohort-cuda-0d83d78027c5-adaptation-tier-2"></a>
 
 ### Tier 2
 
-| Experiment | Role | Recorded result | Current contract |
+| Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [trajectory](ka2.md#cohort-cuda-0d83d78027c5-experiment-trajectory) | required | UNKNOWN | matches |
-| [residual_student](ka2.md#cohort-cuda-0d83d78027c5-experiment-residual_student) | required | UNKNOWN | matches |
-| [unipolar](ka2.md#cohort-cuda-0d83d78027c5-experiment-unipolar) | required | UNKNOWN | matches |
-| [cover_leftover](ka2.md#cohort-cuda-0d83d78027c5-experiment-cover_leftover) | required | UNKNOWN | matches |
-| [mid_scale_identity](ka2.md#cohort-cuda-0d83d78027c5-experiment-mid_scale_identity) | required | UNKNOWN | matches |
-| [mode_hold](ka2.md#cohort-cuda-0d83d78027c5-experiment-mode_hold) | required | UNKNOWN | matches |
-| [vector_two_broad](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_two_broad) | required | UNKNOWN | matches |
-| [vector_unequal_mass](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_mass) | required | UNKNOWN | matches |
-| [vector_unequal_width](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_width) | required | UNKNOWN | matches |
-| [vector_anisotropic](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_anisotropic) | required | UNKNOWN | matches |
-| [vector_overlap](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_overlap) | required | UNKNOWN | matches |
-| [vector_spiral](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_spiral) | required | UNKNOWN | matches |
-| [img_stripes2](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_stripes2) | required | UNKNOWN | matches |
-| [img_bars4](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_bars4) | required | UNKNOWN | matches |
-| [img_blobs4](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_blobs4) | required | UNKNOWN | matches |
-| [img_intensity2](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_intensity2) | required | UNKNOWN | matches |
-| [grid100](ka2.md#cohort-cuda-0d83d78027c5-experiment-grid100) | required | UNKNOWN | matches |
-| [rotated100](ka2.md#cohort-cuda-0d83d78027c5-experiment-rotated100) | required | UNKNOWN | matches |
-| [staggered100](ka2.md#cohort-cuda-0d83d78027c5-experiment-staggered100) | required | UNKNOWN | matches |
+| [trajectory](ka2.md#cohort-cuda-0d83d78027c5-experiment-trajectory) | required | UNKNOWN | matches recorded run |
+| [residual_student](ka2.md#cohort-cuda-0d83d78027c5-experiment-residual_student) | required | UNKNOWN | matches recorded run |
+| [unipolar](ka2.md#cohort-cuda-0d83d78027c5-experiment-unipolar) | required | UNKNOWN | matches recorded run |
+| [cover_leftover](ka2.md#cohort-cuda-0d83d78027c5-experiment-cover_leftover) | required | UNKNOWN | matches recorded run |
+| [mid_scale_identity](ka2.md#cohort-cuda-0d83d78027c5-experiment-mid_scale_identity) | required | UNKNOWN | matches recorded run |
+| [mode_hold](ka2.md#cohort-cuda-0d83d78027c5-experiment-mode_hold) | required | UNKNOWN | matches recorded run |
+| [vector_two_broad](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_two_broad) | required | UNKNOWN | matches recorded run |
+| [vector_unequal_mass](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_mass) | required | UNKNOWN | matches recorded run |
+| [vector_unequal_width](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_width) | required | UNKNOWN | matches recorded run |
+| [vector_anisotropic](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_anisotropic) | required | UNKNOWN | matches recorded run |
+| [vector_overlap](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_overlap) | required | UNKNOWN | matches recorded run |
+| [vector_spiral](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_spiral) | required | UNKNOWN | matches recorded run |
+| [img_stripes2](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_stripes2) | required | UNKNOWN | matches recorded run |
+| [img_bars4](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_bars4) | required | UNKNOWN | matches recorded run |
+| [img_blobs4](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_blobs4) | required | UNKNOWN | matches recorded run |
+| [img_intensity2](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_intensity2) | required | UNKNOWN | matches recorded run |
+| [grid100](ka2.md#cohort-cuda-0d83d78027c5-experiment-grid100) | required | UNKNOWN | matches recorded run |
+| [rotated100](ka2.md#cohort-cuda-0d83d78027c5-experiment-rotated100) | required | UNKNOWN | matches recorded run |
+| [staggered100](ka2.md#cohort-cuda-0d83d78027c5-experiment-staggered100) | required | UNKNOWN | matches recorded run |
 
 <a name="cohort-cuda-0d83d78027c5-adaptation-tier-3"></a>
 
 ### Tier 3
 
-| Experiment | Role | Recorded result | Current contract |
+| Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [target_shift_recovery](ka2.md#cohort-cuda-0d83d78027c5-experiment-target_shift_recovery) | required | UNKNOWN | unbound |
+| [target_shift_recovery](ka2.md#cohort-cuda-0d83d78027c5-experiment-target_shift_recovery) | required | UNKNOWN | recorded definition unavailable |
 
 <a name="cohort-cuda-0d83d78027c5-clockfree_continuous"></a>
 
@@ -289,52 +289,52 @@ Additional eligibility requirements:
 
 ### Tier 1
 
-| Experiment | Role | Recorded result | Current contract |
+| Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [two_pole](ka2.md#cohort-cuda-0d83d78027c5-experiment-two_pole) | required | PASS | matches |
-| [unused_token_hold](ka2.md#cohort-cuda-0d83d78027c5-experiment-unused_token_hold) | required | PASS | matches |
-| [ae_gan_hold](ka2.md#cohort-cuda-0d83d78027c5-experiment-ae_gan_hold) | required | PASS | matches |
-| [clockfree_audit_measurement_v1](ka2.md#cohort-cuda-0d83d78027c5-experiment-clockfree_audit_measurement_v1) | required | FAIL | matches |
+| [two_pole](ka2.md#cohort-cuda-0d83d78027c5-experiment-two_pole) | required | PASS | matches recorded run |
+| [unused_token_hold](ka2.md#cohort-cuda-0d83d78027c5-experiment-unused_token_hold) | required | PASS | matches recorded run |
+| [ae_gan_hold](ka2.md#cohort-cuda-0d83d78027c5-experiment-ae_gan_hold) | required | PASS | matches recorded run |
+| [clockfree_audit_measurement_v1](ka2.md#cohort-cuda-0d83d78027c5-experiment-clockfree_audit_measurement_v1) | required | FAIL | matches recorded run |
 
 <a name="cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2"></a>
 
 ### Tier 2
 
-| Experiment | Role | Recorded result | Current contract |
+| Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [trajectory](ka2.md#cohort-cuda-0d83d78027c5-experiment-trajectory) | required | UNKNOWN | matches |
-| [residual_student](ka2.md#cohort-cuda-0d83d78027c5-experiment-residual_student) | required | UNKNOWN | matches |
-| [unipolar](ka2.md#cohort-cuda-0d83d78027c5-experiment-unipolar) | required | UNKNOWN | matches |
-| [cover_leftover](ka2.md#cohort-cuda-0d83d78027c5-experiment-cover_leftover) | required | UNKNOWN | matches |
-| [mid_scale_identity](ka2.md#cohort-cuda-0d83d78027c5-experiment-mid_scale_identity) | required | UNKNOWN | matches |
-| [mode_hold](ka2.md#cohort-cuda-0d83d78027c5-experiment-mode_hold) | required | UNKNOWN | matches |
-| [vector_two_broad](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_two_broad) | required | UNKNOWN | matches |
-| [vector_unequal_mass](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_mass) | required | UNKNOWN | matches |
-| [vector_unequal_width](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_width) | required | UNKNOWN | matches |
-| [vector_anisotropic](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_anisotropic) | required | UNKNOWN | matches |
-| [vector_overlap](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_overlap) | required | UNKNOWN | matches |
-| [vector_spiral](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_spiral) | required | UNKNOWN | matches |
-| [img_stripes2](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_stripes2) | required | UNKNOWN | matches |
-| [img_bars4](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_bars4) | required | UNKNOWN | matches |
-| [img_blobs4](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_blobs4) | required | UNKNOWN | matches |
-| [img_intensity2](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_intensity2) | required | UNKNOWN | matches |
-| [grid100](ka2.md#cohort-cuda-0d83d78027c5-experiment-grid100) | required | UNKNOWN | matches |
-| [rotated100](ka2.md#cohort-cuda-0d83d78027c5-experiment-rotated100) | required | UNKNOWN | matches |
-| [staggered100](ka2.md#cohort-cuda-0d83d78027c5-experiment-staggered100) | required | UNKNOWN | matches |
+| [trajectory](ka2.md#cohort-cuda-0d83d78027c5-experiment-trajectory) | required | UNKNOWN | matches recorded run |
+| [residual_student](ka2.md#cohort-cuda-0d83d78027c5-experiment-residual_student) | required | UNKNOWN | matches recorded run |
+| [unipolar](ka2.md#cohort-cuda-0d83d78027c5-experiment-unipolar) | required | UNKNOWN | matches recorded run |
+| [cover_leftover](ka2.md#cohort-cuda-0d83d78027c5-experiment-cover_leftover) | required | UNKNOWN | matches recorded run |
+| [mid_scale_identity](ka2.md#cohort-cuda-0d83d78027c5-experiment-mid_scale_identity) | required | UNKNOWN | matches recorded run |
+| [mode_hold](ka2.md#cohort-cuda-0d83d78027c5-experiment-mode_hold) | required | UNKNOWN | matches recorded run |
+| [vector_two_broad](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_two_broad) | required | UNKNOWN | matches recorded run |
+| [vector_unequal_mass](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_mass) | required | UNKNOWN | matches recorded run |
+| [vector_unequal_width](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_width) | required | UNKNOWN | matches recorded run |
+| [vector_anisotropic](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_anisotropic) | required | UNKNOWN | matches recorded run |
+| [vector_overlap](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_overlap) | required | UNKNOWN | matches recorded run |
+| [vector_spiral](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_spiral) | required | UNKNOWN | matches recorded run |
+| [img_stripes2](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_stripes2) | required | UNKNOWN | matches recorded run |
+| [img_bars4](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_bars4) | required | UNKNOWN | matches recorded run |
+| [img_blobs4](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_blobs4) | required | UNKNOWN | matches recorded run |
+| [img_intensity2](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_intensity2) | required | UNKNOWN | matches recorded run |
+| [grid100](ka2.md#cohort-cuda-0d83d78027c5-experiment-grid100) | required | UNKNOWN | matches recorded run |
+| [rotated100](ka2.md#cohort-cuda-0d83d78027c5-experiment-rotated100) | required | UNKNOWN | matches recorded run |
+| [staggered100](ka2.md#cohort-cuda-0d83d78027c5-experiment-staggered100) | required | UNKNOWN | matches recorded run |
 
 <a name="cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3"></a>
 
 ### Tier 3
 
-| Experiment | Role | Recorded result | Current contract |
+| Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [clockfree_audit](ka2.md#cohort-cuda-0d83d78027c5-experiment-clockfree_audit) | required | UNKNOWN | unbound |
-| [ring_hold](ka2.md#cohort-cuda-0d83d78027c5-experiment-ring_hold) | required | UNKNOWN | matches |
-| [ring_extension](ka2.md#cohort-cuda-0d83d78027c5-experiment-ring_extension) | required | UNKNOWN | matches |
-| [grid100_14k](ka2.md#cohort-cuda-0d83d78027c5-experiment-grid100_14k) | required | UNKNOWN | unbound |
-| [rotated100_14k](ka2.md#cohort-cuda-0d83d78027c5-experiment-rotated100_14k) | required | UNKNOWN | unbound |
-| [staggered100_14k](ka2.md#cohort-cuda-0d83d78027c5-experiment-staggered100_14k) | required | UNKNOWN | unbound |
-| [target_shift_recovery](ka2.md#cohort-cuda-0d83d78027c5-experiment-target_shift_recovery) | required | UNKNOWN | unbound |
+| [clockfree_audit](ka2.md#cohort-cuda-0d83d78027c5-experiment-clockfree_audit) | required | UNKNOWN | recorded definition unavailable |
+| [ring_hold](ka2.md#cohort-cuda-0d83d78027c5-experiment-ring_hold) | required | UNKNOWN | matches recorded run |
+| [ring_extension](ka2.md#cohort-cuda-0d83d78027c5-experiment-ring_extension) | required | UNKNOWN | matches recorded run |
+| [grid100_14k](ka2.md#cohort-cuda-0d83d78027c5-experiment-grid100_14k) | required | UNKNOWN | recorded definition unavailable |
+| [rotated100_14k](ka2.md#cohort-cuda-0d83d78027c5-experiment-rotated100_14k) | required | UNKNOWN | recorded definition unavailable |
+| [staggered100_14k](ka2.md#cohort-cuda-0d83d78027c5-experiment-staggered100_14k) | required | UNKNOWN | recorded definition unavailable |
+| [target_shift_recovery](ka2.md#cohort-cuda-0d83d78027c5-experiment-target_shift_recovery) | required | UNKNOWN | recorded definition unavailable |
 
 <a name="cohort-cuda-0d83d78027c5-discriminator_stability"></a>
 
@@ -350,50 +350,50 @@ Calibration: **provisional**. Expanded six-task Tier 1 placement is provisional 
 
 ### Tier 1
 
-| Experiment | Role | Recorded result | Current contract |
+| Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [gaussian1d_acquisition](ka2.md#cohort-cuda-0d83d78027c5-experiment-gaussian1d_acquisition) | required | FAIL | matches |
-| [two_pole](ka2.md#cohort-cuda-0d83d78027c5-experiment-two_pole) | required | PASS | matches |
-| [unused_token_hold](ka2.md#cohort-cuda-0d83d78027c5-experiment-unused_token_hold) | required | PASS | matches |
-| [ae_gan_hold](ka2.md#cohort-cuda-0d83d78027c5-experiment-ae_gan_hold) | required | PASS | matches |
-| [ring16_acquisition](ka2.md#cohort-cuda-0d83d78027c5-experiment-ring16_acquisition) | required | PASS | matches |
-| [five_word_joint_acquisition](ka2.md#cohort-cuda-0d83d78027c5-experiment-five_word_joint_acquisition) | required | FAIL | CHANGED |
-| [clockfree_audit_measurement_v1](ka2.md#cohort-cuda-0d83d78027c5-experiment-clockfree_audit_measurement_v1) | diagnostic | FAIL | matches |
+| [gaussian1d_acquisition](ka2.md#cohort-cuda-0d83d78027c5-experiment-gaussian1d_acquisition) | required | FAIL | matches recorded run |
+| [two_pole](ka2.md#cohort-cuda-0d83d78027c5-experiment-two_pole) | required | PASS | matches recorded run |
+| [unused_token_hold](ka2.md#cohort-cuda-0d83d78027c5-experiment-unused_token_hold) | required | PASS | matches recorded run |
+| [ae_gan_hold](ka2.md#cohort-cuda-0d83d78027c5-experiment-ae_gan_hold) | required | PASS | matches recorded run |
+| [ring16_acquisition](ka2.md#cohort-cuda-0d83d78027c5-experiment-ring16_acquisition) | required | PASS | matches recorded run |
+| [five_word_joint_acquisition](ka2.md#cohort-cuda-0d83d78027c5-experiment-five_word_joint_acquisition) | required | FAIL | changed since run |
+| [clockfree_audit_measurement_v1](ka2.md#cohort-cuda-0d83d78027c5-experiment-clockfree_audit_measurement_v1) | diagnostic | FAIL | matches recorded run |
 
 <a name="cohort-cuda-0d83d78027c5-discriminator_stability-tier-2"></a>
 
 ### Tier 2
 
-| Experiment | Role | Recorded result | Current contract |
+| Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [trajectory](ka2.md#cohort-cuda-0d83d78027c5-experiment-trajectory) | required | UNKNOWN | matches |
-| [residual_student](ka2.md#cohort-cuda-0d83d78027c5-experiment-residual_student) | required | UNKNOWN | matches |
-| [unipolar](ka2.md#cohort-cuda-0d83d78027c5-experiment-unipolar) | required | UNKNOWN | matches |
-| [cover_leftover](ka2.md#cohort-cuda-0d83d78027c5-experiment-cover_leftover) | required | UNKNOWN | matches |
-| [mid_scale_identity](ka2.md#cohort-cuda-0d83d78027c5-experiment-mid_scale_identity) | required | UNKNOWN | matches |
-| [mode_hold](ka2.md#cohort-cuda-0d83d78027c5-experiment-mode_hold) | required | UNKNOWN | matches |
-| [vector_two_broad](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_two_broad) | required | UNKNOWN | matches |
-| [vector_unequal_mass](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_mass) | required | UNKNOWN | matches |
-| [vector_unequal_width](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_width) | required | UNKNOWN | matches |
-| [vector_anisotropic](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_anisotropic) | required | UNKNOWN | matches |
-| [vector_overlap](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_overlap) | required | UNKNOWN | matches |
-| [vector_spiral](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_spiral) | required | UNKNOWN | matches |
-| [img_stripes2](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_stripes2) | required | UNKNOWN | matches |
-| [img_bars4](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_bars4) | required | UNKNOWN | matches |
-| [img_blobs4](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_blobs4) | required | UNKNOWN | matches |
-| [img_intensity2](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_intensity2) | required | UNKNOWN | matches |
-| [grid100](ka2.md#cohort-cuda-0d83d78027c5-experiment-grid100) | required | UNKNOWN | matches |
-| [rotated100](ka2.md#cohort-cuda-0d83d78027c5-experiment-rotated100) | required | UNKNOWN | matches |
-| [staggered100](ka2.md#cohort-cuda-0d83d78027c5-experiment-staggered100) | required | UNKNOWN | matches |
+| [trajectory](ka2.md#cohort-cuda-0d83d78027c5-experiment-trajectory) | required | UNKNOWN | matches recorded run |
+| [residual_student](ka2.md#cohort-cuda-0d83d78027c5-experiment-residual_student) | required | UNKNOWN | matches recorded run |
+| [unipolar](ka2.md#cohort-cuda-0d83d78027c5-experiment-unipolar) | required | UNKNOWN | matches recorded run |
+| [cover_leftover](ka2.md#cohort-cuda-0d83d78027c5-experiment-cover_leftover) | required | UNKNOWN | matches recorded run |
+| [mid_scale_identity](ka2.md#cohort-cuda-0d83d78027c5-experiment-mid_scale_identity) | required | UNKNOWN | matches recorded run |
+| [mode_hold](ka2.md#cohort-cuda-0d83d78027c5-experiment-mode_hold) | required | UNKNOWN | matches recorded run |
+| [vector_two_broad](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_two_broad) | required | UNKNOWN | matches recorded run |
+| [vector_unequal_mass](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_mass) | required | UNKNOWN | matches recorded run |
+| [vector_unequal_width](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_width) | required | UNKNOWN | matches recorded run |
+| [vector_anisotropic](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_anisotropic) | required | UNKNOWN | matches recorded run |
+| [vector_overlap](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_overlap) | required | UNKNOWN | matches recorded run |
+| [vector_spiral](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_spiral) | required | UNKNOWN | matches recorded run |
+| [img_stripes2](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_stripes2) | required | UNKNOWN | matches recorded run |
+| [img_bars4](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_bars4) | required | UNKNOWN | matches recorded run |
+| [img_blobs4](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_blobs4) | required | UNKNOWN | matches recorded run |
+| [img_intensity2](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_intensity2) | required | UNKNOWN | matches recorded run |
+| [grid100](ka2.md#cohort-cuda-0d83d78027c5-experiment-grid100) | required | UNKNOWN | matches recorded run |
+| [rotated100](ka2.md#cohort-cuda-0d83d78027c5-experiment-rotated100) | required | UNKNOWN | matches recorded run |
+| [staggered100](ka2.md#cohort-cuda-0d83d78027c5-experiment-staggered100) | required | UNKNOWN | matches recorded run |
 
 <a name="cohort-cuda-0d83d78027c5-discriminator_stability-tier-3"></a>
 
 ### Tier 3
 
-| Experiment | Role | Recorded result | Current contract |
+| Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [ring_hold](ka2.md#cohort-cuda-0d83d78027c5-experiment-ring_hold) | required | UNKNOWN | matches |
-| [ring_extension](ka2.md#cohort-cuda-0d83d78027c5-experiment-ring_extension) | required | UNKNOWN | matches |
+| [ring_hold](ka2.md#cohort-cuda-0d83d78027c5-experiment-ring_hold) | required | UNKNOWN | matches recorded run |
+| [ring_extension](ka2.md#cohort-cuda-0d83d78027c5-experiment-ring_extension) | required | UNKNOWN | matches recorded run |
 
 <a name="cohort-cuda-0d83d78027c5-formulation_comparison"></a>
 
@@ -409,61 +409,61 @@ Calibration: **provisional**. Host-profile transfer and full current-cohort posi
 
 ### Tier 1
 
-| Experiment | Role | Recorded result | Current contract |
+| Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [two_pole](ka2.md#cohort-cuda-0d83d78027c5-experiment-two_pole) | required | PASS | matches |
-| [unused_token_hold](ka2.md#cohort-cuda-0d83d78027c5-experiment-unused_token_hold) | required | PASS | matches |
-| [ae_gan_hold](ka2.md#cohort-cuda-0d83d78027c5-experiment-ae_gan_hold) | required | PASS | matches |
+| [two_pole](ka2.md#cohort-cuda-0d83d78027c5-experiment-two_pole) | required | PASS | matches recorded run |
+| [unused_token_hold](ka2.md#cohort-cuda-0d83d78027c5-experiment-unused_token_hold) | required | PASS | matches recorded run |
+| [ae_gan_hold](ka2.md#cohort-cuda-0d83d78027c5-experiment-ae_gan_hold) | required | PASS | matches recorded run |
 
 <a name="cohort-cuda-0d83d78027c5-formulation_comparison-tier-2"></a>
 
 ### Tier 2
 
-| Experiment | Role | Recorded result | Current contract |
+| Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [trajectory](ka2.md#cohort-cuda-0d83d78027c5-experiment-trajectory) | required | UNKNOWN | matches |
-| [residual_student](ka2.md#cohort-cuda-0d83d78027c5-experiment-residual_student) | required | UNKNOWN | matches |
-| [unipolar](ka2.md#cohort-cuda-0d83d78027c5-experiment-unipolar) | required | UNKNOWN | matches |
-| [cover_leftover](ka2.md#cohort-cuda-0d83d78027c5-experiment-cover_leftover) | required | UNKNOWN | matches |
-| [mid_scale_identity](ka2.md#cohort-cuda-0d83d78027c5-experiment-mid_scale_identity) | required | UNKNOWN | matches |
-| [mode_hold](ka2.md#cohort-cuda-0d83d78027c5-experiment-mode_hold) | required | UNKNOWN | matches |
-| [vector_two_broad](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_two_broad) | required | UNKNOWN | matches |
-| [vector_unequal_mass](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_mass) | required | UNKNOWN | matches |
-| [vector_unequal_width](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_width) | required | UNKNOWN | matches |
-| [vector_anisotropic](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_anisotropic) | required | UNKNOWN | matches |
-| [vector_overlap](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_overlap) | required | UNKNOWN | matches |
-| [vector_spiral](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_spiral) | required | UNKNOWN | matches |
-| [img_stripes2](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_stripes2) | required | UNKNOWN | matches |
-| [img_bars4](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_bars4) | required | UNKNOWN | matches |
-| [img_blobs4](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_blobs4) | required | UNKNOWN | matches |
-| [img_intensity2](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_intensity2) | required | UNKNOWN | matches |
-| [grid100](ka2.md#cohort-cuda-0d83d78027c5-experiment-grid100) | required | UNKNOWN | matches |
-| [rotated100](ka2.md#cohort-cuda-0d83d78027c5-experiment-rotated100) | required | UNKNOWN | matches |
-| [staggered100](ka2.md#cohort-cuda-0d83d78027c5-experiment-staggered100) | required | UNKNOWN | matches |
-| [img_intensity2_residual16](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_intensity2_residual16) | diagnostic | UNKNOWN | unbound |
-| [vector_two_broad_published](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_two_broad_published) | diagnostic | UNKNOWN | unbound |
-| [vector_unequal_mass_published](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_mass_published) | diagnostic | UNKNOWN | unbound |
-| [vector_unequal_width_published](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_width_published) | diagnostic | UNKNOWN | unbound |
-| [vector_anisotropic_published](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_anisotropic_published) | diagnostic | UNKNOWN | unbound |
-| [vector_overlap_published](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_overlap_published) | diagnostic | UNKNOWN | unbound |
-| [vector_spiral_published](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_spiral_published) | diagnostic | UNKNOWN | unbound |
-| [img_stripes2_residual16](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_stripes2_residual16) | diagnostic | UNKNOWN | unbound |
-| [img_bars4_residual16](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_bars4_residual16) | diagnostic | UNKNOWN | unbound |
-| [img_blobs4_residual16](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_blobs4_residual16) | diagnostic | UNKNOWN | unbound |
-| [grid100_affine_square_named_v1](ka2.md#cohort-cuda-0d83d78027c5-experiment-grid100_affine_square_named_v1) | diagnostic | UNKNOWN | unbound |
-| [rotated100_affine_square_named_v1](ka2.md#cohort-cuda-0d83d78027c5-experiment-rotated100_affine_square_named_v1) | diagnostic | UNKNOWN | unbound |
-| [staggered100_affine_square_named_v1](ka2.md#cohort-cuda-0d83d78027c5-experiment-staggered100_affine_square_named_v1) | diagnostic | UNKNOWN | unbound |
-| [grid100_affine_paired_laws_v1](ka2.md#cohort-cuda-0d83d78027c5-experiment-grid100_affine_paired_laws_v1) | diagnostic | UNKNOWN | unbound |
-| [grid100_release07_cloud_named_v1](ka2.md#cohort-cuda-0d83d78027c5-experiment-grid100_release07_cloud_named_v1) | diagnostic | UNKNOWN | unbound |
+| [trajectory](ka2.md#cohort-cuda-0d83d78027c5-experiment-trajectory) | required | UNKNOWN | matches recorded run |
+| [residual_student](ka2.md#cohort-cuda-0d83d78027c5-experiment-residual_student) | required | UNKNOWN | matches recorded run |
+| [unipolar](ka2.md#cohort-cuda-0d83d78027c5-experiment-unipolar) | required | UNKNOWN | matches recorded run |
+| [cover_leftover](ka2.md#cohort-cuda-0d83d78027c5-experiment-cover_leftover) | required | UNKNOWN | matches recorded run |
+| [mid_scale_identity](ka2.md#cohort-cuda-0d83d78027c5-experiment-mid_scale_identity) | required | UNKNOWN | matches recorded run |
+| [mode_hold](ka2.md#cohort-cuda-0d83d78027c5-experiment-mode_hold) | required | UNKNOWN | matches recorded run |
+| [vector_two_broad](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_two_broad) | required | UNKNOWN | matches recorded run |
+| [vector_unequal_mass](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_mass) | required | UNKNOWN | matches recorded run |
+| [vector_unequal_width](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_width) | required | UNKNOWN | matches recorded run |
+| [vector_anisotropic](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_anisotropic) | required | UNKNOWN | matches recorded run |
+| [vector_overlap](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_overlap) | required | UNKNOWN | matches recorded run |
+| [vector_spiral](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_spiral) | required | UNKNOWN | matches recorded run |
+| [img_stripes2](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_stripes2) | required | UNKNOWN | matches recorded run |
+| [img_bars4](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_bars4) | required | UNKNOWN | matches recorded run |
+| [img_blobs4](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_blobs4) | required | UNKNOWN | matches recorded run |
+| [img_intensity2](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_intensity2) | required | UNKNOWN | matches recorded run |
+| [grid100](ka2.md#cohort-cuda-0d83d78027c5-experiment-grid100) | required | UNKNOWN | matches recorded run |
+| [rotated100](ka2.md#cohort-cuda-0d83d78027c5-experiment-rotated100) | required | UNKNOWN | matches recorded run |
+| [staggered100](ka2.md#cohort-cuda-0d83d78027c5-experiment-staggered100) | required | UNKNOWN | matches recorded run |
+| [img_intensity2_residual16](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_intensity2_residual16) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [vector_two_broad_published](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_two_broad_published) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [vector_unequal_mass_published](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_mass_published) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [vector_unequal_width_published](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_width_published) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [vector_anisotropic_published](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_anisotropic_published) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [vector_overlap_published](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_overlap_published) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [vector_spiral_published](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_spiral_published) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [img_stripes2_residual16](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_stripes2_residual16) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [img_bars4_residual16](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_bars4_residual16) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [img_blobs4_residual16](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_blobs4_residual16) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [grid100_affine_square_named_v1](ka2.md#cohort-cuda-0d83d78027c5-experiment-grid100_affine_square_named_v1) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [rotated100_affine_square_named_v1](ka2.md#cohort-cuda-0d83d78027c5-experiment-rotated100_affine_square_named_v1) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [staggered100_affine_square_named_v1](ka2.md#cohort-cuda-0d83d78027c5-experiment-staggered100_affine_square_named_v1) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [grid100_affine_paired_laws_v1](ka2.md#cohort-cuda-0d83d78027c5-experiment-grid100_affine_paired_laws_v1) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [grid100_release07_cloud_named_v1](ka2.md#cohort-cuda-0d83d78027c5-experiment-grid100_release07_cloud_named_v1) | diagnostic | UNKNOWN | recorded definition unavailable |
 
 <a name="cohort-cuda-0d83d78027c5-formulation_comparison-tier-3"></a>
 
 ### Tier 3
 
-| Experiment | Role | Recorded result | Current contract |
+| Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [ring_hold](ka2.md#cohort-cuda-0d83d78027c5-experiment-ring_hold) | required | UNKNOWN | matches |
-| [ring_extension](ka2.md#cohort-cuda-0d83d78027c5-experiment-ring_extension) | required | UNKNOWN | matches |
+| [ring_hold](ka2.md#cohort-cuda-0d83d78027c5-experiment-ring_hold) | required | UNKNOWN | matches recorded run |
+| [ring_extension](ka2.md#cohort-cuda-0d83d78027c5-experiment-ring_extension) | required | UNKNOWN | matches recorded run |
 
 <a name="cohort-cuda-0d83d78027c5-host_profile_transfer"></a>
 
@@ -479,59 +479,59 @@ Calibration: **provisional**. Host-profile transfer and full current-cohort posi
 
 ### Tier 1
 
-| Experiment | Role | Recorded result | Current contract |
+| Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [two_pole](ka2.md#cohort-cuda-0d83d78027c5-experiment-two_pole) | required | PASS | matches |
-| [unused_token_hold](ka2.md#cohort-cuda-0d83d78027c5-experiment-unused_token_hold) | required | PASS | matches |
-| [ae_gan_hold](ka2.md#cohort-cuda-0d83d78027c5-experiment-ae_gan_hold) | required | PASS | matches |
+| [two_pole](ka2.md#cohort-cuda-0d83d78027c5-experiment-two_pole) | required | PASS | matches recorded run |
+| [unused_token_hold](ka2.md#cohort-cuda-0d83d78027c5-experiment-unused_token_hold) | required | PASS | matches recorded run |
+| [ae_gan_hold](ka2.md#cohort-cuda-0d83d78027c5-experiment-ae_gan_hold) | required | PASS | matches recorded run |
 
 <a name="cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2"></a>
 
 ### Tier 2
 
-| Experiment | Role | Recorded result | Current contract |
+| Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [trajectory](ka2.md#cohort-cuda-0d83d78027c5-experiment-trajectory) | required | UNKNOWN | matches |
-| [residual_student](ka2.md#cohort-cuda-0d83d78027c5-experiment-residual_student) | required | UNKNOWN | matches |
-| [unipolar](ka2.md#cohort-cuda-0d83d78027c5-experiment-unipolar) | required | UNKNOWN | matches |
-| [cover_leftover](ka2.md#cohort-cuda-0d83d78027c5-experiment-cover_leftover) | required | UNKNOWN | matches |
-| [mid_scale_identity](ka2.md#cohort-cuda-0d83d78027c5-experiment-mid_scale_identity) | required | UNKNOWN | matches |
-| [mode_hold](ka2.md#cohort-cuda-0d83d78027c5-experiment-mode_hold) | required | UNKNOWN | matches |
-| [vector_two_broad](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_two_broad) | required | UNKNOWN | matches |
-| [vector_unequal_mass](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_mass) | required | UNKNOWN | matches |
-| [vector_unequal_width](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_width) | required | UNKNOWN | matches |
-| [vector_anisotropic](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_anisotropic) | required | UNKNOWN | matches |
-| [vector_overlap](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_overlap) | required | UNKNOWN | matches |
-| [vector_spiral](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_spiral) | required | UNKNOWN | matches |
-| [img_stripes2](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_stripes2) | required | UNKNOWN | matches |
-| [img_bars4](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_bars4) | required | UNKNOWN | matches |
-| [img_blobs4](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_blobs4) | required | UNKNOWN | matches |
-| [img_intensity2](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_intensity2) | required | UNKNOWN | matches |
-| [grid100](ka2.md#cohort-cuda-0d83d78027c5-experiment-grid100) | required | UNKNOWN | matches |
-| [rotated100](ka2.md#cohort-cuda-0d83d78027c5-experiment-rotated100) | required | UNKNOWN | matches |
-| [staggered100](ka2.md#cohort-cuda-0d83d78027c5-experiment-staggered100) | required | UNKNOWN | matches |
-| [img_intensity2_residual16](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_intensity2_residual16) | diagnostic | UNKNOWN | unbound |
-| [vector_two_broad_published](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_two_broad_published) | diagnostic | UNKNOWN | unbound |
-| [vector_unequal_mass_published](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_mass_published) | diagnostic | UNKNOWN | unbound |
-| [vector_unequal_width_published](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_width_published) | diagnostic | UNKNOWN | unbound |
-| [vector_anisotropic_published](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_anisotropic_published) | diagnostic | UNKNOWN | unbound |
-| [vector_overlap_published](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_overlap_published) | diagnostic | UNKNOWN | unbound |
-| [vector_spiral_published](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_spiral_published) | diagnostic | UNKNOWN | unbound |
-| [img_stripes2_residual16](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_stripes2_residual16) | diagnostic | UNKNOWN | unbound |
-| [img_bars4_residual16](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_bars4_residual16) | diagnostic | UNKNOWN | unbound |
-| [img_blobs4_residual16](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_blobs4_residual16) | diagnostic | UNKNOWN | unbound |
-| [grid100_affine_square_named_v1](ka2.md#cohort-cuda-0d83d78027c5-experiment-grid100_affine_square_named_v1) | diagnostic | UNKNOWN | unbound |
-| [rotated100_affine_square_named_v1](ka2.md#cohort-cuda-0d83d78027c5-experiment-rotated100_affine_square_named_v1) | diagnostic | UNKNOWN | unbound |
-| [staggered100_affine_square_named_v1](ka2.md#cohort-cuda-0d83d78027c5-experiment-staggered100_affine_square_named_v1) | diagnostic | UNKNOWN | unbound |
+| [trajectory](ka2.md#cohort-cuda-0d83d78027c5-experiment-trajectory) | required | UNKNOWN | matches recorded run |
+| [residual_student](ka2.md#cohort-cuda-0d83d78027c5-experiment-residual_student) | required | UNKNOWN | matches recorded run |
+| [unipolar](ka2.md#cohort-cuda-0d83d78027c5-experiment-unipolar) | required | UNKNOWN | matches recorded run |
+| [cover_leftover](ka2.md#cohort-cuda-0d83d78027c5-experiment-cover_leftover) | required | UNKNOWN | matches recorded run |
+| [mid_scale_identity](ka2.md#cohort-cuda-0d83d78027c5-experiment-mid_scale_identity) | required | UNKNOWN | matches recorded run |
+| [mode_hold](ka2.md#cohort-cuda-0d83d78027c5-experiment-mode_hold) | required | UNKNOWN | matches recorded run |
+| [vector_two_broad](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_two_broad) | required | UNKNOWN | matches recorded run |
+| [vector_unequal_mass](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_mass) | required | UNKNOWN | matches recorded run |
+| [vector_unequal_width](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_width) | required | UNKNOWN | matches recorded run |
+| [vector_anisotropic](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_anisotropic) | required | UNKNOWN | matches recorded run |
+| [vector_overlap](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_overlap) | required | UNKNOWN | matches recorded run |
+| [vector_spiral](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_spiral) | required | UNKNOWN | matches recorded run |
+| [img_stripes2](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_stripes2) | required | UNKNOWN | matches recorded run |
+| [img_bars4](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_bars4) | required | UNKNOWN | matches recorded run |
+| [img_blobs4](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_blobs4) | required | UNKNOWN | matches recorded run |
+| [img_intensity2](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_intensity2) | required | UNKNOWN | matches recorded run |
+| [grid100](ka2.md#cohort-cuda-0d83d78027c5-experiment-grid100) | required | UNKNOWN | matches recorded run |
+| [rotated100](ka2.md#cohort-cuda-0d83d78027c5-experiment-rotated100) | required | UNKNOWN | matches recorded run |
+| [staggered100](ka2.md#cohort-cuda-0d83d78027c5-experiment-staggered100) | required | UNKNOWN | matches recorded run |
+| [img_intensity2_residual16](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_intensity2_residual16) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [vector_two_broad_published](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_two_broad_published) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [vector_unequal_mass_published](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_mass_published) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [vector_unequal_width_published](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_width_published) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [vector_anisotropic_published](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_anisotropic_published) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [vector_overlap_published](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_overlap_published) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [vector_spiral_published](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_spiral_published) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [img_stripes2_residual16](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_stripes2_residual16) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [img_bars4_residual16](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_bars4_residual16) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [img_blobs4_residual16](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_blobs4_residual16) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [grid100_affine_square_named_v1](ka2.md#cohort-cuda-0d83d78027c5-experiment-grid100_affine_square_named_v1) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [rotated100_affine_square_named_v1](ka2.md#cohort-cuda-0d83d78027c5-experiment-rotated100_affine_square_named_v1) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [staggered100_affine_square_named_v1](ka2.md#cohort-cuda-0d83d78027c5-experiment-staggered100_affine_square_named_v1) | diagnostic | UNKNOWN | recorded definition unavailable |
 
 <a name="cohort-cuda-0d83d78027c5-host_profile_transfer-tier-3"></a>
 
 ### Tier 3
 
-| Experiment | Role | Recorded result | Current contract |
+| Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [ring_hold](ka2.md#cohort-cuda-0d83d78027c5-experiment-ring_hold) | required | UNKNOWN | matches |
-| [ring_extension](ka2.md#cohort-cuda-0d83d78027c5-experiment-ring_extension) | required | UNKNOWN | matches |
+| [ring_hold](ka2.md#cohort-cuda-0d83d78027c5-experiment-ring_hold) | required | UNKNOWN | matches recorded run |
+| [ring_extension](ka2.md#cohort-cuda-0d83d78027c5-experiment-ring_extension) | required | UNKNOWN | matches recorded run |
 
 <a name="cohort-cuda-0d83d78027c5-k3p_two_pole_horizon"></a>
 
@@ -547,10 +547,10 @@ Calibration: **provisional**. Bounded budget/schedule diagnostic supplies no ord
 
 ### Tier 1
 
-| Experiment | Role | Recorded result | Current contract |
+| Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [two_pole_800_schedule80_diagnostic_v1](ka2.md#cohort-cuda-0d83d78027c5-experiment-two_pole_800_schedule80_diagnostic_v1) | diagnostic | UNKNOWN | unbound |
-| [two_pole_800_schedule800_diagnostic_v1](ka2.md#cohort-cuda-0d83d78027c5-experiment-two_pole_800_schedule800_diagnostic_v1) | diagnostic | UNKNOWN | unbound |
+| [two_pole_800_schedule80_diagnostic_v1](ka2.md#cohort-cuda-0d83d78027c5-experiment-two_pole_800_schedule80_diagnostic_v1) | diagnostic | UNKNOWN | recorded definition unavailable |
+| [two_pole_800_schedule800_diagnostic_v1](ka2.md#cohort-cuda-0d83d78027c5-experiment-two_pole_800_schedule800_diagnostic_v1) | diagnostic | UNKNOWN | recorded definition unavailable |
 
 <a name="cohort-cuda-0d83d78027c5-k3p_two_pole_horizon-tier-2"></a>
 
@@ -578,37 +578,37 @@ Calibration: **provisional**. Phase D historical calibration remains required
 
 ### Tier 1
 
-| Experiment | Role | Recorded result | Current contract |
+| Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [two_pole](ka2.md#cohort-cuda-0d83d78027c5-experiment-two_pole) | required | PASS | matches |
-| [unused_token_hold](ka2.md#cohort-cuda-0d83d78027c5-experiment-unused_token_hold) | required | PASS | matches |
-| [ae_gan_hold](ka2.md#cohort-cuda-0d83d78027c5-experiment-ae_gan_hold) | required | PASS | matches |
+| [two_pole](ka2.md#cohort-cuda-0d83d78027c5-experiment-two_pole) | required | PASS | matches recorded run |
+| [unused_token_hold](ka2.md#cohort-cuda-0d83d78027c5-experiment-unused_token_hold) | required | PASS | matches recorded run |
+| [ae_gan_hold](ka2.md#cohort-cuda-0d83d78027c5-experiment-ae_gan_hold) | required | PASS | matches recorded run |
 
 <a name="cohort-cuda-0d83d78027c5-quality_coverage-tier-2"></a>
 
 ### Tier 2
 
-| Experiment | Role | Recorded result | Current contract |
+| Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [trajectory](ka2.md#cohort-cuda-0d83d78027c5-experiment-trajectory) | required | UNKNOWN | matches |
-| [residual_student](ka2.md#cohort-cuda-0d83d78027c5-experiment-residual_student) | required | UNKNOWN | matches |
-| [unipolar](ka2.md#cohort-cuda-0d83d78027c5-experiment-unipolar) | required | UNKNOWN | matches |
-| [cover_leftover](ka2.md#cohort-cuda-0d83d78027c5-experiment-cover_leftover) | required | UNKNOWN | matches |
-| [mid_scale_identity](ka2.md#cohort-cuda-0d83d78027c5-experiment-mid_scale_identity) | required | UNKNOWN | matches |
-| [mode_hold](ka2.md#cohort-cuda-0d83d78027c5-experiment-mode_hold) | required | UNKNOWN | matches |
-| [vector_two_broad](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_two_broad) | required | UNKNOWN | matches |
-| [vector_unequal_mass](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_mass) | required | UNKNOWN | matches |
-| [vector_unequal_width](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_width) | required | UNKNOWN | matches |
-| [vector_anisotropic](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_anisotropic) | required | UNKNOWN | matches |
-| [vector_overlap](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_overlap) | required | UNKNOWN | matches |
-| [vector_spiral](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_spiral) | required | UNKNOWN | matches |
-| [img_stripes2](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_stripes2) | required | UNKNOWN | matches |
-| [img_bars4](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_bars4) | required | UNKNOWN | matches |
-| [img_blobs4](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_blobs4) | required | UNKNOWN | matches |
-| [img_intensity2](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_intensity2) | required | UNKNOWN | matches |
-| [grid100](ka2.md#cohort-cuda-0d83d78027c5-experiment-grid100) | required | UNKNOWN | matches |
-| [rotated100](ka2.md#cohort-cuda-0d83d78027c5-experiment-rotated100) | required | UNKNOWN | matches |
-| [staggered100](ka2.md#cohort-cuda-0d83d78027c5-experiment-staggered100) | required | UNKNOWN | matches |
+| [trajectory](ka2.md#cohort-cuda-0d83d78027c5-experiment-trajectory) | required | UNKNOWN | matches recorded run |
+| [residual_student](ka2.md#cohort-cuda-0d83d78027c5-experiment-residual_student) | required | UNKNOWN | matches recorded run |
+| [unipolar](ka2.md#cohort-cuda-0d83d78027c5-experiment-unipolar) | required | UNKNOWN | matches recorded run |
+| [cover_leftover](ka2.md#cohort-cuda-0d83d78027c5-experiment-cover_leftover) | required | UNKNOWN | matches recorded run |
+| [mid_scale_identity](ka2.md#cohort-cuda-0d83d78027c5-experiment-mid_scale_identity) | required | UNKNOWN | matches recorded run |
+| [mode_hold](ka2.md#cohort-cuda-0d83d78027c5-experiment-mode_hold) | required | UNKNOWN | matches recorded run |
+| [vector_two_broad](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_two_broad) | required | UNKNOWN | matches recorded run |
+| [vector_unequal_mass](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_mass) | required | UNKNOWN | matches recorded run |
+| [vector_unequal_width](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_unequal_width) | required | UNKNOWN | matches recorded run |
+| [vector_anisotropic](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_anisotropic) | required | UNKNOWN | matches recorded run |
+| [vector_overlap](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_overlap) | required | UNKNOWN | matches recorded run |
+| [vector_spiral](ka2.md#cohort-cuda-0d83d78027c5-experiment-vector_spiral) | required | UNKNOWN | matches recorded run |
+| [img_stripes2](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_stripes2) | required | UNKNOWN | matches recorded run |
+| [img_bars4](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_bars4) | required | UNKNOWN | matches recorded run |
+| [img_blobs4](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_blobs4) | required | UNKNOWN | matches recorded run |
+| [img_intensity2](ka2.md#cohort-cuda-0d83d78027c5-experiment-img_intensity2) | required | UNKNOWN | matches recorded run |
+| [grid100](ka2.md#cohort-cuda-0d83d78027c5-experiment-grid100) | required | UNKNOWN | matches recorded run |
+| [rotated100](ka2.md#cohort-cuda-0d83d78027c5-experiment-rotated100) | required | UNKNOWN | matches recorded run |
+| [staggered100](ka2.md#cohort-cuda-0d83d78027c5-experiment-staggered100) | required | UNKNOWN | matches recorded run |
 
 <a name="cohort-cuda-0d83d78027c5-quality_coverage-tier-3"></a>
 
@@ -632,15 +632,15 @@ Calibration: **undeclared**. Calibration and robustness are separate from record
 
 ### Tier 1
 
-| Experiment | Role | Recorded result | Current contract |
+| Experiment | Role | Recorded result | Test definition |
 | --- | --- | --- | --- |
-| [gaussian1d_acquisition_tier1_policy_selected_cloud_v1](ka2.md#cohort-cuda-0d83d78027c5-experiment-gaussian1d_acquisition_tier1_policy_selected_cloud_v1) | required | UNKNOWN | unbound |
-| [two_pole_tier1_policy_selected_cloud_v1](ka2.md#cohort-cuda-0d83d78027c5-experiment-two_pole_tier1_policy_selected_cloud_v1) | required | UNKNOWN | unbound |
-| [unused_token_hold_tier1_policy_selected_cloud_v1](ka2.md#cohort-cuda-0d83d78027c5-experiment-unused_token_hold_tier1_policy_selected_cloud_v1) | required | UNKNOWN | unbound |
-| [ae_gan_hold_tier1_policy_selected_cloud_v1](ka2.md#cohort-cuda-0d83d78027c5-experiment-ae_gan_hold_tier1_policy_selected_cloud_v1) | required | UNKNOWN | unbound |
-| [ring16_acquisition_tier1_policy_selected_cloud_v1](ka2.md#cohort-cuda-0d83d78027c5-experiment-ring16_acquisition_tier1_policy_selected_cloud_v1) | required | UNKNOWN | unbound |
-| [five_word_joint_acquisition_tier1_policy_selected_cloud_v1](ka2.md#cohort-cuda-0d83d78027c5-experiment-five_word_joint_acquisition_tier1_policy_selected_cloud_v1) | required | UNKNOWN | unbound |
-| [clockfree_audit_tier1_policy_selected_cloud_v1](ka2.md#cohort-cuda-0d83d78027c5-experiment-clockfree_audit_tier1_policy_selected_cloud_v1) | required | UNKNOWN | unbound |
+| [gaussian1d_acquisition_tier1_policy_selected_cloud_v1](ka2.md#cohort-cuda-0d83d78027c5-experiment-gaussian1d_acquisition_tier1_policy_selected_cloud_v1) | required | UNKNOWN | recorded definition unavailable |
+| [two_pole_tier1_policy_selected_cloud_v1](ka2.md#cohort-cuda-0d83d78027c5-experiment-two_pole_tier1_policy_selected_cloud_v1) | required | UNKNOWN | recorded definition unavailable |
+| [unused_token_hold_tier1_policy_selected_cloud_v1](ka2.md#cohort-cuda-0d83d78027c5-experiment-unused_token_hold_tier1_policy_selected_cloud_v1) | required | UNKNOWN | recorded definition unavailable |
+| [ae_gan_hold_tier1_policy_selected_cloud_v1](ka2.md#cohort-cuda-0d83d78027c5-experiment-ae_gan_hold_tier1_policy_selected_cloud_v1) | required | UNKNOWN | recorded definition unavailable |
+| [ring16_acquisition_tier1_policy_selected_cloud_v1](ka2.md#cohort-cuda-0d83d78027c5-experiment-ring16_acquisition_tier1_policy_selected_cloud_v1) | required | UNKNOWN | recorded definition unavailable |
+| [five_word_joint_acquisition_tier1_policy_selected_cloud_v1](ka2.md#cohort-cuda-0d83d78027c5-experiment-five_word_joint_acquisition_tier1_policy_selected_cloud_v1) | required | UNKNOWN | recorded definition unavailable |
+| [clockfree_audit_tier1_policy_selected_cloud_v1](ka2.md#cohort-cuda-0d83d78027c5-experiment-clockfree_audit_tier1_policy_selected_cloud_v1) | required | UNKNOWN | recorded definition unavailable |
 
 <a name="cohort-cuda-0d83d78027c5-tier1_policy_coverage-tier-2"></a>
 
@@ -658,7 +658,7 @@ No experiments assigned.
 
 ## Experiment metrics and pass criteria
 
-One evidence entry per experiment is shared by its view rows. CHANGED means the declared execution or evaluator differs from the recorded task; its earlier verdict is preserved.
+One evidence entry per experiment is shared by its view rows. Test-definition changes describe differences from the recorded run, independently of whether it was executed. Earlier verdicts are preserved.
 
 <a name="cohort-cuda-0d83d78027c5-experiment-ae_gan_hold"></a>
 
@@ -666,7 +666,7 @@ One evidence entry per experiment is shared by its view rows. CHANGED means the 
 
 **ae_gan_hold: PASS**. [Current experiment declaration](../../../configs/forge/tasks/ae_gan_hold.json).
 
-Current contract: **matches**. Current task contract matches the recorded conditions. recomputed complete live curve and terminal suffix
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
 Actual task device: `cpu` (recorded execution receipt).
 
@@ -708,7 +708,9 @@ Current measurement: mog prior (sigma 0.025); generated_and_reconstructed_prior_
 
 **ae_gan_hold_tier1_policy_selected_cloud_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/tier1_policy_selected_cloud_v1/ae_gan_hold_tier1_policy_selected_cloud_v1.json).
 
-Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **no recorded execution (*)**.
 
 Policy-cohort variant of [ae_gan_hold](../../../configs/forge/tasks/ae_gan_hold.json); parent task SHA256 `53a400c3f2b27ef347076f3cc603345e1442d2d8f97f8052f0b9496ba35bae79`. This measurement supplies no cells to the parent clean cohort.
 
@@ -735,7 +737,9 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_generated_an
 
 **clockfree_audit: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/clockfree_audit.json).
 
-Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **no recorded execution (*)**.
 
 Used by: [clockfree_continuous / Tier 3](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3).
 
@@ -753,7 +757,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **clockfree_audit_measurement_v1: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/clockfree_audit_measurement_v1.json).
 
-Current contract: **matches**. Current task contract matches the recorded conditions. step_label changed the update or common-prefix state
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. step_label changed the update or common-prefix state
 
 Actual task device: `1` (recorded execution receipt).
 
@@ -798,7 +802,9 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **clockfree_audit_tier1_policy_selected_cloud_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/tier1_policy_selected_cloud_v1/clockfree_audit_tier1_policy_selected_cloud_v1.json).
 
-Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **no recorded execution (*)**.
 
 Policy-cohort variant of [clockfree_audit](../../../configs/forge/tasks/clockfree_audit.json); parent task SHA256 `d7748d04db85633e5c678622486b94b2a44f0e462ffb9c4b0179216db7840258`. This measurement supplies no cells to the parent clean cohort.
 
@@ -818,7 +824,9 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_public_prior
 
 **cover_leftover: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/cover_leftover.json).
 
-Current contract: **matches**. Current task contract matches the recorded conditions. no compatible result
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+
+Execution: **no recorded execution (*)**.
 
 Used by: [adaptation / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [clockfree_continuous / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
 
@@ -848,7 +856,7 @@ Current measurement: particle_cloud prior (sigma 0); learned_parameter_measureme
 
 **five_word_joint_acquisition: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/five_word_joint_acquisition.json).
 
-Current contract: **CHANGED**. Current coverage is stale: changed evaluation (gates or sampling law). recomputed complete live curve and terminal suffix
+Test definition: **changed since run**. Test definition changed since this run: evaluation (gates or sampling law). Earlier verdict preserved. recomputed complete live curve and terminal suffix
 
 Actual task device: `0` (recorded execution receipt).
 
@@ -900,7 +908,9 @@ Current measurement: particle_cloud prior (sigma 0); generated_and_paired_recons
 
 **five_word_joint_acquisition_tier1_policy_selected_cloud_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/tier1_policy_selected_cloud_v1/five_word_joint_acquisition_tier1_policy_selected_cloud_v1.json).
 
-Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **no recorded execution (*)**.
 
 Policy-cohort variant of [five_word_joint_acquisition](../../../configs/forge/tasks/five_word_joint_acquisition.json); parent task SHA256 `26875d18d2d8572a479fe8170894bb8cde0798de38e639514fb077c88344d1f8`. This measurement supplies no cells to the parent clean cohort.
 
@@ -933,7 +943,7 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_generated_an
 
 **gaussian1d_acquisition: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/gaussian1d_acquisition.json).
 
-Current contract: **matches**. Current task contract matches the recorded conditions. recomputed complete live curve and terminal suffix
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
 Actual task device: `0` (recorded execution receipt).
 
@@ -983,7 +993,9 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **gaussian1d_acquisition_tier1_policy_selected_cloud_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/tier1_policy_selected_cloud_v1/gaussian1d_acquisition_tier1_policy_selected_cloud_v1.json).
 
-Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **no recorded execution (*)**.
 
 Policy-cohort variant of [gaussian1d_acquisition](../../../configs/forge/tasks/gaussian1d_acquisition.json); parent task SHA256 `b31df784dbe09357810a191247bbb0b17d3bb67918595334d16ff728fd5c2d13`. This measurement supplies no cells to the parent clean cohort.
 
@@ -1015,7 +1027,9 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_public_prior
 
 **grid100: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/grid100.json).
 
-Current contract: **matches**. Current task contract matches the recorded conditions. no compatible result
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+
+Execution: **no recorded execution (*)**.
 
 Used by: [adaptation / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [clockfree_continuous / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
 
@@ -1054,7 +1068,9 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **grid100_14k: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/grid100_14k.json).
 
-Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **no recorded execution (*)**.
 
 Used by: [clockfree_continuous / Tier 3](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3).
 
@@ -1093,7 +1109,9 @@ Dependencies: grid100 (checkpoint), clockfree_audit (gate).
 
 **grid100_affine_paired_laws_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/grid100_affine_paired_laws_v1.json).
 
-Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **no recorded execution (*)**.
 
 Used by: [formulation_comparison / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2).
 
@@ -1130,7 +1148,9 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **grid100_affine_square_named_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/grid100_affine_square_named_v1.json).
 
-Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **no recorded execution (*)**.
 
 Used by: [formulation_comparison / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2).
 
@@ -1167,7 +1187,9 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **grid100_release07_cloud_named_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/grid100_release07_cloud_named_v1.json).
 
-Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **no recorded execution (*)**.
 
 Used by: [formulation_comparison / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2).
 
@@ -1204,7 +1226,9 @@ Current measurement: particle_cloud prior (sigma 0); public_prior_without_output
 
 **img_bars4: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/img_bars4.json).
 
-Current contract: **matches**. Current task contract matches the recorded conditions. no compatible result
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+
+Execution: **no recorded execution (*)**.
 
 Used by: [adaptation / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [clockfree_continuous / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
 
@@ -1230,7 +1254,9 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 **img_bars4_residual16: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/img_bars4_residual16.json).
 
-Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **no recorded execution (*)**.
 
 Used by: [formulation_comparison / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2).
 
@@ -1254,7 +1280,9 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 **img_blobs4: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/img_blobs4.json).
 
-Current contract: **matches**. Current task contract matches the recorded conditions. no compatible result
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+
+Execution: **no recorded execution (*)**.
 
 Used by: [adaptation / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [clockfree_continuous / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
 
@@ -1280,7 +1308,9 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 **img_blobs4_residual16: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/img_blobs4_residual16.json).
 
-Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **no recorded execution (*)**.
 
 Used by: [formulation_comparison / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2).
 
@@ -1304,7 +1334,9 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 **img_intensity2: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/img_intensity2.json).
 
-Current contract: **matches**. Current task contract matches the recorded conditions. no compatible result
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+
+Execution: **no recorded execution (*)**.
 
 Used by: [adaptation / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [clockfree_continuous / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
 
@@ -1330,7 +1362,9 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 **img_intensity2_residual16: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/img_intensity2_residual16.json).
 
-Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **no recorded execution (*)**.
 
 Used by: [formulation_comparison / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2).
 
@@ -1354,7 +1388,9 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 **img_stripes2: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/img_stripes2.json).
 
-Current contract: **matches**. Current task contract matches the recorded conditions. no compatible result
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+
+Execution: **no recorded execution (*)**.
 
 Used by: [adaptation / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [clockfree_continuous / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
 
@@ -1380,7 +1416,9 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 **img_stripes2_residual16: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/img_stripes2_residual16.json).
 
-Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **no recorded execution (*)**.
 
 Used by: [formulation_comparison / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2).
 
@@ -1404,7 +1442,9 @@ Current measurement: particle_cloud prior (sigma 0); enumerated_prior_without_ou
 
 **mid_scale_identity: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/mid_scale_identity.json).
 
-Current contract: **matches**. Current task contract matches the recorded conditions. no compatible result
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+
+Execution: **no recorded execution (*)**.
 
 Used by: [adaptation / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [clockfree_continuous / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
 
@@ -1436,7 +1476,9 @@ Current measurement: particle_cloud prior (sigma 0); learned_parameter_measureme
 
 **mode_hold: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/mode_hold.json).
 
-Current contract: **matches**. Current task contract matches the recorded conditions. no compatible result
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+
+Execution: **no recorded execution (*)**.
 
 Used by: [adaptation / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [clockfree_continuous / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
 
@@ -1462,7 +1504,9 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **residual_student: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/residual_student.json).
 
-Current contract: **matches**. Current task contract matches the recorded conditions. no compatible result
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+
+Execution: **no recorded execution (*)**.
 
 Used by: [adaptation / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [clockfree_continuous / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
 
@@ -1489,7 +1533,7 @@ Current measurement: particle_cloud prior (sigma 0); conditional_prior_centers_w
 
 **ring16_acquisition: PASS**. [Current experiment declaration](../../../configs/forge/tasks/ring16_acquisition.json).
 
-Current contract: **matches**. Current task contract matches the recorded conditions. recomputed complete live curve and terminal suffix
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
 Actual task device: `0` (recorded execution receipt).
 
@@ -1538,7 +1582,9 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **ring16_acquisition_tier1_policy_selected_cloud_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/tier1_policy_selected_cloud_v1/ring16_acquisition_tier1_policy_selected_cloud_v1.json).
 
-Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **no recorded execution (*)**.
 
 Policy-cohort variant of [ring16_acquisition](../../../configs/forge/tasks/ring16_acquisition.json); parent task SHA256 `e6b53ba29fbe9ead47e842cfa01e40ba57821bd1b4e6aa5b297631fa0f6525c1`. This measurement supplies no cells to the parent clean cohort.
 
@@ -1568,7 +1614,9 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_public_prior
 
 **ring_extension: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/ring_extension.json).
 
-Current contract: **matches**. Current task contract matches the recorded conditions. no compatible result
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+
+Execution: **no recorded execution (*)**.
 
 Used by: [clockfree_continuous / Tier 3](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3) · [discriminator_stability / Tier 3](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-3) · [formulation_comparison / Tier 3](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-3) · [host_profile_transfer / Tier 3](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-3).
 
@@ -1598,7 +1646,9 @@ Dependencies: ring_hold (checkpoint).
 
 **ring_hold: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/ring_hold.json).
 
-Current contract: **matches**. Current task contract matches the recorded conditions. no compatible result
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+
+Execution: **no recorded execution (*)**.
 
 Used by: [clockfree_continuous / Tier 3](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3) · [discriminator_stability / Tier 3](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-3) · [formulation_comparison / Tier 3](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-3) · [host_profile_transfer / Tier 3](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-3).
 
@@ -1628,7 +1678,9 @@ Dependencies: mode_hold (gate).
 
 **rotated100: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/rotated100.json).
 
-Current contract: **matches**. Current task contract matches the recorded conditions. no compatible result
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+
+Execution: **no recorded execution (*)**.
 
 Used by: [adaptation / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [clockfree_continuous / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
 
@@ -1667,7 +1719,9 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **rotated100_14k: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/rotated100_14k.json).
 
-Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **no recorded execution (*)**.
 
 Used by: [clockfree_continuous / Tier 3](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3).
 
@@ -1706,7 +1760,9 @@ Dependencies: rotated100 (checkpoint), clockfree_audit (gate).
 
 **rotated100_affine_square_named_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/rotated100_affine_square_named_v1.json).
 
-Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **no recorded execution (*)**.
 
 Used by: [formulation_comparison / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2).
 
@@ -1743,7 +1799,9 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **staggered100: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/staggered100.json).
 
-Current contract: **matches**. Current task contract matches the recorded conditions. no compatible result
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+
+Execution: **no recorded execution (*)**.
 
 Used by: [adaptation / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [clockfree_continuous / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
 
@@ -1782,7 +1840,9 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **staggered100_14k: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/staggered100_14k.json).
 
-Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **no recorded execution (*)**.
 
 Used by: [clockfree_continuous / Tier 3](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3).
 
@@ -1821,7 +1881,9 @@ Dependencies: staggered100 (checkpoint), clockfree_audit (gate).
 
 **staggered100_affine_square_named_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/staggered100_affine_square_named_v1.json).
 
-Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **no recorded execution (*)**.
 
 Used by: [formulation_comparison / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2).
 
@@ -1858,7 +1920,9 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **target_shift_recovery: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/target_shift_recovery.json).
 
-Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **no recorded execution (*)**.
 
 Used by: [adaptation / Tier 3](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-3) · [clockfree_continuous / Tier 3](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3).
 
@@ -1879,7 +1943,9 @@ Dependencies: mode_hold (gate).
 
 **trajectory: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/trajectory.json).
 
-Current contract: **matches**. Current task contract matches the recorded conditions. no compatible result
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+
+Execution: **no recorded execution (*)**.
 
 Used by: [adaptation / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [clockfree_continuous / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
 
@@ -1904,7 +1970,7 @@ Current measurement: particle_cloud prior (sigma 0); conditional_prior_centers_w
 
 **two_pole: PASS**. [Current experiment declaration](../../../configs/forge/tasks/two_pole.json).
 
-Current contract: **matches**. Current task contract matches the recorded conditions. recomputed complete live curve and terminal suffix
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
 Actual task device: `cpu` (recorded execution receipt).
 
@@ -1946,7 +2012,9 @@ Current measurement: particle_cloud prior (sigma 0); learned_particles_and_criti
 
 **two_pole_800_schedule800_diagnostic_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/two_pole_800_schedule800_diagnostic_v1.json).
 
-Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **no recorded execution (*)**.
 
 Used by: [k3p_two_pole_horizon / Tier 1](ka2.md#cohort-cuda-0d83d78027c5-k3p_two_pole_horizon-tier-1).
 
@@ -1973,7 +2041,9 @@ Current measurement: particle_cloud prior (sigma 0); learned_particles_and_criti
 
 **two_pole_800_schedule80_diagnostic_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/two_pole_800_schedule80_diagnostic_v1.json).
 
-Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **no recorded execution (*)**.
 
 Used by: [k3p_two_pole_horizon / Tier 1](ka2.md#cohort-cuda-0d83d78027c5-k3p_two_pole_horizon-tier-1).
 
@@ -2000,7 +2070,9 @@ Current measurement: particle_cloud prior (sigma 0); learned_particles_and_criti
 
 **two_pole_tier1_policy_selected_cloud_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/tier1_policy_selected_cloud_v1/two_pole_tier1_policy_selected_cloud_v1.json).
 
-Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **no recorded execution (*)**.
 
 Policy-cohort variant of [two_pole](../../../configs/forge/tasks/two_pole.json); parent task SHA256 `55ac2d3883ba6c173da304fa7f10648a0b559c202fc35b451b1d0c8870f61cf5`. This measurement supplies no cells to the parent clean cohort.
 
@@ -2027,7 +2099,9 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_learned_part
 
 **unipolar: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/unipolar.json).
 
-Current contract: **matches**. Current task contract matches the recorded conditions. no compatible result
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+
+Execution: **no recorded execution (*)**.
 
 Used by: [adaptation / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [clockfree_continuous / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
 
@@ -2054,7 +2128,7 @@ Current measurement: particle_cloud prior (sigma 0); learned_parameter_measureme
 
 **unused_token_hold: PASS**. [Current experiment declaration](../../../configs/forge/tasks/unused_token_hold.json).
 
-Current contract: **matches**. Current task contract matches the recorded conditions. recomputed complete live curve and terminal suffix
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. recomputed complete live curve and terminal suffix
 
 Actual task device: `cpu` (recorded execution receipt).
 
@@ -2096,7 +2170,9 @@ Current measurement: particle_cloud prior (sigma 0); learned_parameter_measureme
 
 **unused_token_hold_tier1_policy_selected_cloud_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/tier1_policy_selected_cloud_v1/unused_token_hold_tier1_policy_selected_cloud_v1.json).
 
-Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **no recorded execution (*)**.
 
 Policy-cohort variant of [unused_token_hold](../../../configs/forge/tasks/unused_token_hold.json); parent task SHA256 `ef8ccde8d1fa54af8bfce01c044e3671de8131c980eb4e8022d12ffc8caf51d8`. This measurement supplies no cells to the parent clean cohort.
 
@@ -2123,7 +2199,9 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_learned_para
 
 **vector_anisotropic: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/vector_anisotropic.json).
 
-Current contract: **matches**. Current task contract matches the recorded conditions. no compatible result
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+
+Execution: **no recorded execution (*)**.
 
 Used by: [adaptation / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [clockfree_continuous / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
 
@@ -2152,7 +2230,9 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_anisotropic_published: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/vector_anisotropic_published.json).
 
-Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **no recorded execution (*)**.
 
 Used by: [formulation_comparison / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2).
 
@@ -2179,7 +2259,9 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_overlap: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/vector_overlap.json).
 
-Current contract: **matches**. Current task contract matches the recorded conditions. no compatible result
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+
+Execution: **no recorded execution (*)**.
 
 Used by: [adaptation / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [clockfree_continuous / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
 
@@ -2206,7 +2288,9 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_overlap_published: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/vector_overlap_published.json).
 
-Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **no recorded execution (*)**.
 
 Used by: [formulation_comparison / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2).
 
@@ -2231,7 +2315,9 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_spiral: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/vector_spiral.json).
 
-Current contract: **matches**. Current task contract matches the recorded conditions. no compatible result
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+
+Execution: **no recorded execution (*)**.
 
 Used by: [adaptation / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [clockfree_continuous / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
 
@@ -2258,7 +2344,9 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_spiral_published: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/vector_spiral_published.json).
 
-Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **no recorded execution (*)**.
 
 Used by: [formulation_comparison / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2).
 
@@ -2283,7 +2371,9 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_two_broad: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/vector_two_broad.json).
 
-Current contract: **matches**. Current task contract matches the recorded conditions. no compatible result
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+
+Execution: **no recorded execution (*)**.
 
 Used by: [adaptation / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [clockfree_continuous / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
 
@@ -2312,7 +2402,9 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_two_broad_published: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/vector_two_broad_published.json).
 
-Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **no recorded execution (*)**.
 
 Used by: [formulation_comparison / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2).
 
@@ -2339,7 +2431,9 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_unequal_mass: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/vector_unequal_mass.json).
 
-Current contract: **matches**. Current task contract matches the recorded conditions. no compatible result
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+
+Execution: **no recorded execution (*)**.
 
 Used by: [adaptation / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [clockfree_continuous / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
 
@@ -2369,7 +2463,9 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_unequal_mass_published: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/vector_unequal_mass_published.json).
 
-Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **no recorded execution (*)**.
 
 Used by: [formulation_comparison / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2).
 
@@ -2397,7 +2493,9 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_unequal_width: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/vector_unequal_width.json).
 
-Current contract: **matches**. Current task contract matches the recorded conditions. no compatible result
+Test definition: **matches recorded run**. Test definition matches the recorded conditions. no compatible result
+
+Execution: **no recorded execution (*)**.
 
 Used by: [adaptation / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) · [clockfree_continuous / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) · [discriminator_stability / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) · [formulation_comparison / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) · [quality_coverage / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2).
 
@@ -2426,7 +2524,9 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 **vector_unequal_width_published: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/vector_unequal_width_published.json).
 
-Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+Test definition: **recorded definition unavailable**. Recorded test definition unavailable; compatibility with today's declaration cannot be checked. No recorded result for this selected configuration and source.
+
+Execution: **no recorded execution (*)**.
 
 Used by: [formulation_comparison / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) · [host_profile_transfer / Tier 2](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2).
 

@@ -241,10 +241,21 @@ def evaluation_notes(evaluation):
     return notes
 
 
+def _execution_recorded(status, receipt):
+    """Distinguish a recorded run from preflight rejection or missing evidence."""
+    if status in COMPLETE:
+        return True  # The immutable selected row already records a measurement.
+    result = receipt.get("result", {})
+    cost = result.get("cost", {})
+    return (result.get("raw_status") == "completed"
+            or any(isinstance(cost.get(key), (int, float)) and cost[key] > 0
+                   for key in ("execution_seconds", "wall_seconds")))
+
+
 def _count(tasks):
     statuses = Counter(task["status"] for task in tasks)
     return {"passed": statuses.get("PASS", 0), "total": len(tasks),
-            "incomplete": any(task["status"] not in COMPLETE or task["current_contract"] != "matches" for task in tasks),
+            "incomplete": any(not task["execution_recorded"] for task in tasks),
             "counts": dict(sorted(statuses.items()))}
 
 
@@ -258,6 +269,11 @@ def _sum(counts):
 
 def score(count, *, marker=True):
     return f"{count['passed']}" + ("(*)" if marker and count["incomplete"] else "") + f"/{count['total']}"
+
+
+def _definition_label(result):
+    return {"matches": "matches recorded run", "CHANGED": "changed since run",
+            "unbound": "recorded definition unavailable"}[result["current_contract"]]
 
 
 def _same_active_runtime(left, right):
@@ -358,7 +374,7 @@ def build_progress(root: Path, publication: dict) -> dict:
                     prior = receipts.get(result["task_id"])
                     if prior and prior["result"] != result:
                         raise ValueError("family report has conflicting compact task results")
-                    receipts[result["task_id"]] = {"path": path.as_posix(), "result": result}
+                    receipts[result["task_id"]] = {"path": path.as_posix(), "attempt_id": attempt, "result": result}
 
         results = {}
         assigned = {assignment["task"] for view in views for assignment in view["assignments"]}
@@ -388,12 +404,15 @@ def build_progress(root: Path, publication: dict) -> dict:
                                 "NOT_RUN": "This task was not executed for the selected configuration and source.",
                                 "BLOCKED": "The frozen selected cohort lacks task support; no scientific measurement was admitted.",
                                 "INVALID": "The recorded execution violated its frozen contract; it supplies no valid measurement.",
+                                "ERROR": "The recorded attempt encountered an execution error; see its receipt for the cause.",
                                 "INCOMPLETE": "The recorded execution or required observations did not complete."}.get(
                                     status, "Recorded scientific gate " + status + ".")
-            coverage = ("Current coverage is stale: changed " + "; ".join(changed) + "." if changed else
-                        "No recorded task contract binds this cell to the current declaration." if match == "unbound" else
-                        "Current task contract matches the recorded conditions.")
+            coverage = ("Test definition changed since this run: " + "; ".join(changed) + ". Earlier verdict preserved." if changed else
+                        "Recorded test definition unavailable; compatibility with today's declaration cannot be checked." if match == "unbound" else
+                        "Test definition matches the recorded conditions.")
             results[name] = {"task_id": name, "status": previous.get("status", "UNKNOWN"),
+                             "execution_recorded": _execution_recorded(status, receipt),
+                             "attempt_id": receipt.get("attempt_id"),
                              "current_contract": match, "receipt": receipt.get("path"),
                              "metrics": deepcopy(receipt.get("result", {})), "recorded_contract": contract_hash,
                              "recorded_conditions": {key: deepcopy(contract.get(key, {})) for key in ("prior", "sampling")},
@@ -501,14 +520,21 @@ def render_leaderboard(root: Path, publication: dict, page: Path) -> str:
                 label = "↳ " + link(root, page, view["id"], family["page"], cohort["anchor"] + "-" + view["id"])
                 lines.append("| " + " | ".join([label, *_score_cells(root, page, family, cohort, view, view_id=view["id"])]) + " |")
     lines += ["", "Runtime cohorts and actual per-task devices are recorded on the family pages and in receipt provenance.", "",
-              r"\* indicates incomplete results. Missing, blocked, invalid or incomplete results and changed/unbound "
-              "current contracts receive (*). Zero recorded passes always displays as 0, including unrun families.", "",
+              "(*) means at least one required experiment has no recorded execution for the selected configuration and source, "
+              "including preflight-blocked tests. Recorded PASS and FAIL are both executed results. Attempted ERROR, INVALID "
+              "or INCOMPLETE results show their cause and execution evidence on the family page and earn no pass credit. "
+              "Zero recorded passes always displays as 0, including unrun families.", "",
               "Counts retain recorded verdicts under their original recipe, prior, initialization, budget, serving law "
-              "and source. Changed current contracts are identified on the family pages; recorded passes grant no "
+              "and source. Changes to today's test definition and unavailable recorded definitions are shown separately "
+              "on the family pages and do not add (*); recorded passes grant no "
               "new qualification. Required lower tiers must pass before later work is eligible. "
               "The declared calibration and eligibility requirements appear on each family page.", "",
               "Separately scoped cohort views, diagnostic-only views and historical/API studies are available on the "
               "family pages and excluded from totals.", ""]
+    if {family["id"] for family in progress["families"]} & {"atlas", "e22"}:
+        lines += ["Atlas/E22 retain (*) for blocked, unrun tests in their selected main-table cohort. "
+                  "The family pages list the host, prior, serving and parameter-ownership blockers. "
+                  "Their separately scoped policy measurements keep their own results and do not fill these cells.", ""]
     lines += _tag_directory(root, page, progress)
     lines += ["## Refresh", "", "```sh", "python reports/forge/regenerate_technique_inventory.py", "```", "",
               "This regenerates the leaderboard, family pages and experiments-by-tier report from committed evidence "
@@ -684,7 +710,9 @@ def render_family(root: Path, publication: dict, family: dict) -> str:
                           "; source commit `" + item["source_commit"] + "`; exact scoped cohort `" +
                           cell(item.get("cohort")) + "` (runtime SHA256 `" + cell(item.get("runtime_cohort_sha256")) +
                           "`). These cells give no parent-cohort credit."]
-        lines += ["", r"\* indicates incomplete results, including changed or unbound current contracts.", ""]
+        lines += ["", "(*) means at least one required experiment has no recorded execution, including preflight blockers. "
+                  "PASS and FAIL both count as executed. Attempted errors retain their status and cause; "
+                  "test-definition compatibility is shown separately and does not add (*).", ""]
         for tier in TIERS:
             members = {}
             for definition in progress["views"]:
@@ -695,13 +723,13 @@ def render_family(root: Path, publication: dict, family: dict) -> str:
                         members.setdefault(assignment["task"], []).append(definition["id"])
             lines += [*_heading(3, "Tier " + tier + " across views", base + "-tier-" + tier),
                       "Shared experiments appear once in this list; the family numerator/denominator count their view requirements.", "",
-                      "| Experiment | Required by | Recorded result | Current contract |", "| --- | --- | --- | --- |"]
+                      "| Experiment | Required by | Recorded result | Test definition |", "| --- | --- | --- | --- |"]
             for name, memberships in sorted(members.items()):
                 result = cohort["tasks"][name]
                 lines.append("| " + " | ".join([
                     link(root, page, name, family["page"], base + "-experiment-" + name),
                     ", ".join(link(root, page, view_id, family["page"], base + "-" + view_id + "-tier-" + tier)
-                              for view_id in memberships), result["status"], result["current_contract"]]) + " |")
+                              for view_id in memberships), result["status"], _definition_label(result)]) + " |")
             lines.append("")
         for definition in progress["views"]:
             view_id = definition["id"]
@@ -736,23 +764,34 @@ def render_family(root: Path, publication: dict, family: dict) -> str:
                 if not assignments:
                     lines += ["No experiments assigned.", ""]
                     continue
-                lines += ["| Experiment | Role | Recorded result | Current contract |", "| --- | --- | --- | --- |"]
+                lines += ["| Experiment | Role | Recorded result | Test definition |", "| --- | --- | --- | --- |"]
                 for assignment in assignments:
                     name = assignment["task"]
                     result = cohort["tasks"][name]
                     lines.append("| " + " | ".join([
                         link(root, page, name, family["page"], base + "-experiment-" + name), assignment["importance"],
-                        result["status"], result["current_contract"]]) + " |")
+                        result["status"], _definition_label(result)]) + " |")
                 lines.append("")
         lines += [*_heading(2, "Experiment metrics and pass criteria", base + "-experiments"), "One evidence entry per experiment is shared by its view rows. "
-                  "CHANGED means the declared execution or evaluator differs from the recorded task; its earlier verdict is preserved.", ""]
+                  "Test-definition changes describe differences from the recorded run, independently of whether it was executed. "
+                  "Earlier verdicts are preserved.", ""]
         for name, result in cohort["tasks"].items():
             task_path = Path(progress.get("task_paths", {}).get(name, "configs/forge/tasks/" + name + ".json"))
             task = read_json(root / task_path) if (root / task_path).is_file() else {}
             lines += [*_heading(3, name, base + "-experiment-" + name), f"**{name}: {result['status']}**. " +
                       _existing_link(root, page, "Current experiment declaration", task_path) + ".", "",
-                      "Current contract: **" + result["current_contract"] + "**. " + cell(result["coverage_reason"]) +
+                      "Test definition: **" + _definition_label(result) + "**. " + cell(result["coverage_reason"]) +
                       " " + cell(result["reason"]), ""]
+            if result["status"] not in COMPLETE:
+                lines += ["Execution: **" + ("recorded" if result["execution_recorded"] else "no recorded execution (*)") + "**."]
+                if result["attempt_id"]:
+                    lines.append("Attempt: `" + result["attempt_id"] + "`; raw outcome: " +
+                                 cell(result["metrics"].get("raw_status", "unavailable")) + ".")
+                    cost = result["metrics"].get("cost", {})
+                    lines.append("Recorded execution seconds: " + number(cost.get("execution_seconds")) +
+                                 "; charged wall seconds: " + number(cost.get("wall_seconds")) +
+                                 " (shared execution is charged once to " + cell(cost.get("charged_task", name)) + ").")
+                lines.append("")
             if result["device"]:
                 lines += ["Actual task device: `" + cell(result["device"]) + "` (recorded execution receipt).", ""]
             if result["policy_parent"]:
