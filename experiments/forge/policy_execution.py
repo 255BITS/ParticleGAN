@@ -213,7 +213,11 @@ class PolicyCoordinator:
         # Only this source-bound one-case envelope has a recognized fresh repeat.
         # Ordinary policy studies retain their released identity byte-for-byte.
         schema = packet.get("schema", "")
-        if ((isinstance(schema, str) and schema.startswith("pg_canonical_two_pole_first_case"))
+        if ((isinstance(schema, str) and schema.startswith("pg_common26_full_atlas_diagnostic_case"))
+                or str(row.get("id", "")).startswith("canonical-common26-full-atlas-")):
+            from .canonical_full_atlas_repeat import coordinator_repeat
+            identity["scientific_repeat"] = coordinator_repeat(packet, trial, row)
+        elif ((isinstance(schema, str) and schema.startswith("pg_canonical_two_pole_first_case"))
                 or str(row.get("id", "")).startswith("canonical-two-pole-full-atlas-")
                 or "scientific_repeat" in packet or "scientific_repeat" in packet.get("protocol", {})):
             from .canonical_two_pole_repeat import coordinator_repeat
