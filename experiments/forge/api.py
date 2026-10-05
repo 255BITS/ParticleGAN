@@ -75,12 +75,20 @@ def host_recipe_overrides(candidate, execution, resources):
     return {**candidate.get("recipe_overrides", {}), **fixed}
 
 
+def _noisy_contract(task):
+    """Select an explicit Source-owned contract; never reinterpret old686 tasks."""
+    from . import atlas_noisy025_tier1, atlas_noisy025_adapters
+    if atlas_noisy025_tier1.is_noisy_task(task):
+        return atlas_noisy025_tier1, atlas_noisy025_adapters
+    from . import noisy_prior_tier1, noisy_prior_adapters
+    return noisy_prior_tier1, noisy_prior_adapters
+
+
 def task_recipe_resources(task):
     """Resolve only the resources consumed by the task's existing adapter."""
-    from .noisy_prior_tier1 import is_noisy_task
-    if is_noisy_task(task):
-        from .noisy_prior_adapters import task_resources
-        return task_resources(task)
+    metadata, helpers = _noisy_contract(task)
+    if metadata.is_noisy_task(task):
+        return helpers.task_resources(task)
     execution, adapter = task["execution"], task["adapter"]
     if adapter in {"transfer_vector", "paired_adaptation", "transfer_image"}:
         spec = execution["host_definition"]
@@ -101,14 +109,13 @@ def task_recipe_overrides(candidate, task):
     from .taskrecipes import bind_task_candidate
     bound = bind_task_candidate(candidate, task)
     execution = task["execution"]
-    from .noisy_prior_tier1 import is_noisy_task, validate
-    if is_noisy_task(task):
-        from .noisy_prior_adapters import blockers, task_resources
-        validate(task)
-        reasons = blockers(task, bound)
+    metadata, helpers = _noisy_contract(task)
+    if metadata.is_noisy_task(task):
+        metadata.validate(task)
+        reasons = helpers.blockers(task, bound)
         if reasons:
             raise CapabilityError(reasons)
-        return host_recipe_overrides(bound, execution, task_resources(task))
+        return host_recipe_overrides(bound, execution, helpers.task_resources(task))
     from .atlas_two_pole import supports, TASK_BINDINGS
     if supports(task, bound):
         # The public Atlas schedule remains intrinsic None; 80 bounds the host.
@@ -135,18 +142,16 @@ def task_formulation_context(candidate, task, protocol=None, *, device="cpu", ro
     from .nativeprofiles import native_host_initialization
     from .priors import task_prior
     from .taskrecipes import adaptation_receipt, bind_task_candidate
-    from .noisy_prior_tier1 import is_noisy_task as recognized_noisy
-    if recognized_noisy(task):
-        from .noisy_prior_adapters import blockers as original_noisy_blockers
-        reasons = original_noisy_blockers(task, candidate, root=root)
+    metadata, helpers = _noisy_contract(task)
+    if metadata.is_noisy_task(task):
+        reasons = helpers.blockers(task, candidate, root=root)
         if reasons:
             raise CapabilityError(reasons)
     bound = bind_task_candidate(candidate, task)
     from .atlas_two_pole import supports, resolve_binding, validate_effective_recipe
-    from .noisy_prior_tier1 import is_noisy_task, validate as validate_noisy_task
-    noisy_task = is_noisy_task(task)
+    noisy_task = metadata.is_noisy_task(task)
     if noisy_task:
-        validate_noisy_task(task, root=root)
+        metadata.validate(task, root=root)
     ordinary_two_pole = supports(task, bound) and not noisy_task
     noisy_two_pole = noisy_task and task["execution"].get("host") == "two_pole"
     noisy_binding = resolve_binding(root, bound, task, protocol) if noisy_two_pole else None
@@ -155,7 +160,10 @@ def task_formulation_context(candidate, task, protocol=None, *, device="cpu", ro
     if noisy_ae:
         import json
         from pathlib import Path
-        from . import atlas_noisy_ae
+        if metadata.COHORT == 'atlas_noisy_particle025_tier1_717_v1':
+            from . import atlas717_noisy_ae as atlas_noisy_ae
+        else:
+            from . import atlas_noisy_ae
         ae_root = Path(__file__).resolve().parents[2] if root is None else root
         ae_protocol = (json.loads(atlas_noisy_ae._source(ae_root, atlas_noisy_ae.PROTOCOL_PATH))
                        if protocol is None else protocol)
@@ -211,10 +219,12 @@ def task_formulation_context(candidate, task, protocol=None, *, device="cpu", ro
 
 def task_policy_blockers(task, candidate):
     """Current Forge tasks certify clean/live component laws, not E22 controls."""
-    from .noisy_prior_tier1 import is_noisy_task
-    if is_noisy_task(task):
-        from .noisy_prior_adapters import blockers
-        return blockers(task, candidate)
+    metadata, helpers = _noisy_contract(task)
+    if metadata.is_noisy_task(task):
+        return helpers.blockers(task, candidate)
+    if candidate.get('id') == 'atlas-noisy025-tier1-717-v1' and task.get('id') == 'unused_token_hold':
+        from .atlas_noisy025_adapters import blockers as direct_control_blockers
+        return direct_control_blockers(task, candidate)
     try:
         recipe = resolve_public_recipe(candidate)
     except CapabilityError as error:
@@ -359,12 +369,11 @@ class FormulationContext:
         self.policy_task = deepcopy(policy_task)
         from .atlas_two_pole import is_task
         self._ordinary_two_pole = is_task(self.policy_task)
-        from .noisy_prior_tier1 import is_noisy_task, validate as validate_noisy_task
-        self._noisy_task = is_noisy_task(self.policy_task)
+        metadata, helpers = _noisy_contract(self.policy_task)
+        self._noisy_task = metadata.is_noisy_task(self.policy_task)
         if self._noisy_task:
-            validate_noisy_task(self.policy_task)
-            from .noisy_prior_adapters import blockers
-            reasons = blockers(self.policy_task, dict(recipe_preset=recipe_preset,
+            metadata.validate(self.policy_task)
+            reasons = helpers.blockers(self.policy_task, dict(recipe_preset=recipe_preset,
                 recipe_overrides={}, extensions=extensions or {}, initializer=initializer))
             if reasons:
                 raise CapabilityError(reasons)

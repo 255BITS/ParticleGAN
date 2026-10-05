@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+from copy import deepcopy
 
 from .contracts import file_hash
 
@@ -57,6 +58,28 @@ def recheck_request(request: dict) -> None:
     from .sources import verify_snapshot
     root = Path(snapshot)
     verify_snapshot(root, source)
-    for task in request["tasks"].values():
+    if (request.get("candidate", {}).get("id") != "atlas-noisy025-tier1-717-v1"
+            or request.get("view", {}).get("id") != "atlas_noisy025_tier1_717_v1"):
+        for task in request["tasks"].values():
+            task["preflight_blockers"] = task_preflight(task, request["candidate"], request["protocol"],
+                                                      root=root, tasks=request["tasks"])
+        return
+    from .atlas_noisy025_tier1 import validate_request_scope
+    validate_request_scope(request)
+    checked = deepcopy(request["tasks"])
+    for task in checked.values():
+        cached = task.pop("preflight_blockers", [])
+        if not isinstance(cached, list) or any(not isinstance(reason, str) for reason in cached):
+            raise ValueError("malformed cached task preflight blockers")
+        if "field_ownership" in task and not isinstance(task.pop("field_ownership"), dict):
+            raise ValueError("malformed cached task field ownership")
+    for task in checked.values():
         task["preflight_blockers"] = task_preflight(task, request["candidate"], request["protocol"],
-                                                  root=root, tasks=request["tasks"])
+                                                  root=root, tasks=checked)
+    # Only regenerated administrative annotations are committed. A source or
+    # namespace failure remains a blocker; no scientific field is replaced.
+    for name, task in checked.items():
+        request["tasks"][name]["preflight_blockers"] = task["preflight_blockers"]
+        request["tasks"][name].pop("field_ownership", None)
+        if "field_ownership" in task:
+            request["tasks"][name]["field_ownership"] = task["field_ownership"]

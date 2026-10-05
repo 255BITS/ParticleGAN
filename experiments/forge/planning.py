@@ -165,6 +165,8 @@ def resolve_idea(root: Path, idea_id: str, *, view_id: str | None = None,
     protocol_id = defaults["protocol"]
     protocol = read_json(root / "configs/forge/protocols" / f"{protocol_id}.json")
     prior = {**defaults["prior"], **idea.get("prior", {})}
+    from .atlas_noisy025_tier1 import reference_prior
+    prior = reference_prior(idea, view, prior, root=root)
     blockers = []
     if "TODO" in idea.get("hypothesis", "") or any("TODO" in x for x in idea["changed_factors"]):
         blockers.append("finish the scaffold's hypothesis and changed_factors before enqueue")
@@ -201,6 +203,8 @@ def resolve_idea(root: Path, idea_id: str, *, view_id: str | None = None,
             blockers.append(f"view requires capability {name}")
     # Referenced evaluator source outside normal code roots must travel with a job.
     extra_sources = set(idea.get("source_files", []))
+    from .atlas_noisy025_tier1 import request_source_paths
+    extra_sources.update(request_source_paths(root, idea))
     # A view selects evidence, not a different candidate implementation. Capture
     # the same catalog evaluator support set for every view so quality/stability
     # requests can share their identical task receipts.
@@ -227,9 +231,12 @@ def resolve_idea(root: Path, idea_id: str, *, view_id: str | None = None,
         task["preflight_blockers"] = task_preflight(task, candidate, protocol, root=root, tasks=tasks)
     from .atlas_two_pole import supporting_source_paths
     from .noisy_prior_adapters import supporting_source_paths as noisy_supporting_source_paths
+    from .atlas_noisy025_tier1 import supporting_source_paths as atlas717_supporting_source_paths, is_noisy_task as is_atlas717_sampled
     for task in all_tasks.values():
         extra_sources.update(supporting_source_paths(task))
-        extra_sources.update(noisy_supporting_source_paths(task))
+        if not is_atlas717_sampled(task):
+            extra_sources.update(noisy_supporting_source_paths(task))
+        extra_sources.update(atlas717_supporting_source_paths(task))
     source = inspect_source(root, sorted(extra_sources))
     candidate_revision = candidate_revision_for(source["digest"], candidate)
     runtime = runtime_manifest()

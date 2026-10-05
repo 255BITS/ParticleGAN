@@ -1,0 +1,29 @@
+{
+  "gif_bytes": 182040,
+  "gif_sha256": "0db46a7bcca80a448cb41457d07efbf4ee3bf31b22ffde5344a12fa4934218c3",
+  "observation_count": 24,
+  "observations_sha256": "b4951d68966b8b561cdea2668cd5a1c6309e01f8582b280b139746d1dfaa1d0c",
+  "optimizer_updates_added": 0,
+  "original_media_receipt_canonical_sha256": "a577936d3b847bd7a85d12ddebfb0c6a91f7455fee513152fad31d959e70334b",
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "5d468023bd9908762167096151dd4c52aefd2e684764e50bb7db52b6e1540ce4",
+  "sampling_draws_added": 0,
+  "schema": "pg_atlas717_public_saved_observation_media_v1",
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_input_byte_pins": [],
+  "source_input_sha256": [
+    "f57f0f73618d0b62b99062d9dbbf6913f74538bb3e9c403e74a9383aa204b6ef"
+  ],
+  "task_id": "gaussian1d_acquisition_noisy025717_v1"
+}

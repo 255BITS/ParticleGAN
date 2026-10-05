@@ -1,0 +1,64 @@
+{
+  "campaign": {
+    "budget_seconds": 2220,
+    "candidate_budget_seconds": 2220,
+    "id": "atlas-noisy025-tier1-717-20261005-v1"
+  },
+  "candidate": "atlas-noisy025-tier1-717-v1",
+  "competing_explanation": "A same-width API type substitution can preserve numeric behavior; failures may reflect the unchanged task/owner law. The distinct ka2 metadata reference changes more than the prior and is not a noise-only causal control or an extra training subject.",
+  "control": {
+    "candidate_id": "ka2",
+    "task_map": {
+      "ae_gan_hold_noisy025717_v1": "ae_gan_hold",
+      "five_word_joint_acquisition_noisy025717_v1": "five_word_joint_acquisition",
+      "gaussian1d_acquisition_noisy025717_v1": "gaussian1d_acquisition",
+      "ring16_acquisition_noisy025717_v1": "ring16_acquisition",
+      "two_pole": "two_pole",
+      "unused_token_hold": "unused_token_hold"
+    }
+  },
+  "falsifier": {
+    "metric": "cdf_ks",
+    "op": ">",
+    "phase": "final",
+    "task_id": "gaussian1d_acquisition_noisy025717_v1",
+    "threshold": 0.05
+  },
+  "hypothesis": "One bounded Atlas717 Noisy(.025) Tier1 round preserves the original six goals and two direct controls. Positive sampled word width is explicit; Gaussian/AE/ring width was already.025. API compatibility is assessed separately from numeric performance.",
+  "id": "atlas-noisy025-tier1-717-study-v1",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "cdf_ks",
+    "op": "<=",
+    "phase": "final",
+    "task_id": "gaussian1d_acquisition_noisy025717_v1",
+    "threshold": 0.05
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "candidate_revision": "b2cd5612ac9359744ecc4b8819d936ee45c22eca3cd8d5e613bedae26728a10a",
+        "schema": "forge_noisyprior686_preserved_type_only_readout_v1",
+        "source_digest": "e9c826aeabb75de0a79ba63a027d888b8889654446ff7ba931a485ea960beb12",
+        "state": "COMPLETE_TIER1_WITH_BLOCKERS"
+      },
+      "path": "reports/forge/prior-evidence/atlas-type-only686.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "cuda_model": "NVIDIA RTX A6000",
+    "execution_backend": "cuda",
+    "through_tier": 1,
+    "view": "atlas_noisy025_tier1_717_v1"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

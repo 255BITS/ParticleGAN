@@ -1,0 +1,27 @@
+{
+  "gif_bytes": 111251,
+  "gif_sha256": "4368c9667d9079aa9e327fa47ae899297874b5eadcf06ab270e57abab5b1d67f",
+  "observation_count": 24,
+  "observations_sha256": "eb40e7f46e65e73445bd9513928d0c4c592d5e023114be238cc3a1a9a744e888",
+  "optimizer_updates_added": 0,
+  "original_media_receipt_canonical_sha256": "ee32f0475c1e09ec607bae936de945244f1bd97cf85b74bb0bf25e8178f64a5f",
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "5d468023bd9908762167096151dd4c52aefd2e684764e50bb7db52b6e1540ce4",
+  "sampling_draws_added": 0,
+  "schema": "pg_atlas717_public_saved_observation_media_v1",
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_input_byte_pins": [],
+  "source_input_sha256": [],
+  "task_id": "two_pole"
+}

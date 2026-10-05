@@ -1,0 +1,29 @@
+{
+  "gif_bytes": 289850,
+  "gif_sha256": "abf4f2f15686440ed47a08b1fee7d927a06563944933bdc3357be894f59279ea",
+  "observation_count": 24,
+  "observations_sha256": "f3e64304a64a1f309b1741c247a58a3a9f7cfd62210a0108a1f94390624d694a",
+  "optimizer_updates_added": 0,
+  "original_media_receipt_canonical_sha256": "4de437427a4fcd3b7631c1d77048df5fba971663b68871a1f2c63181ea3d2e26",
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "5d468023bd9908762167096151dd4c52aefd2e684764e50bb7db52b6e1540ce4",
+  "sampling_draws_added": 0,
+  "schema": "pg_atlas717_public_saved_observation_media_v1",
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_input_byte_pins": [],
+  "source_input_sha256": [
+    "85bddfe2d9133cb6b4fffd5809f838e7c3d9fba6bdce82c282d35b66e547f125"
+  ],
+  "task_id": "ring16_acquisition_noisy025717_v1"
+}

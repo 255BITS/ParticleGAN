@@ -42,10 +42,10 @@ def _context(request, task, device, resources):
 
 def adapter_preflight(task, candidate, *, root=None):
     """Report unsupported task/host bindings before reserving training compute."""
-    from .noisy_prior_tier1 import is_noisy_task as recognized_noisy
-    if recognized_noisy(task):
-        from .noisy_prior_adapters import blockers as original_noisy_blockers
-        reasons = original_noisy_blockers(task, candidate, root=root)
+    from .api import _noisy_contract
+    metadata, helpers = _noisy_contract(task)
+    if metadata.is_noisy_task(task):
+        reasons = helpers.blockers(task, candidate, root=root)
         if reasons:
             return reasons
     try:
@@ -55,11 +55,9 @@ def adapter_preflight(task, candidate, *, root=None):
     except ValueError as error:
         return [str(error)]
     adapter = task["adapter"]
-    from .noisy_prior_tier1 import is_noisy_task, validate as validate_noisy_task
-    noisy_task = is_noisy_task(task)
+    noisy_task = metadata.is_noisy_task(task)
     if noisy_task:
-        from .noisy_prior_adapters import blockers as noisy_blockers
-        reasons = noisy_blockers(task, candidate, root=root)
+        reasons = helpers.blockers(task, candidate, root=root)
         if reasons:
             return reasons
     if task.get("task_cohort") == "tier1_policy_selected_cloud_v1":
@@ -180,8 +178,9 @@ class _Run:
         self.rng_audits = []
         self.last_update = {}
         self.policy_audit = None
-        from .noisy_prior_tier1 import is_noisy_task
-        self.noisy_task = is_noisy_task(task)
+        from .api import _noisy_contract
+        metadata, self.noisy_helpers = _noisy_contract(task)
+        self.noisy_task = metadata.is_noisy_task(task)
         self.policy_purity, self.policy_observations = [], []
         if context.policy_task is not None:
             from .policy_adapters import PolicyLifecycleAudit
@@ -189,7 +188,7 @@ class _Run:
             self.sampling_policy = executed_receipt(task["evaluation"]["sampling_law"],
                 eval_output_noise=task["evaluation"]["eval_output_noise"])
         if self.noisy_task:
-            from .noisy_prior_adapters import initialize_vector_receipts
+            initialize_vector_receipts = self.noisy_helpers.initialize_vector_receipts
             initialize_vector_receipts(context, trainer, self.output, task)
         self.mechanism_audit = MechanismAudit(context.recipe, trainer.opt_d, [trainer.opt_g])
         self.timing = PhaseTimer(synchronize=(lambda: torch.cuda.synchronize(context.device))
@@ -210,7 +209,7 @@ class _Run:
         with self.timing.measure("training_updates"):
             self.last_update = self.trainer.step(real, collect_stats=True)
         if self.noisy_task:
-            from .noisy_prior_adapters import restore_live_owner
+            restore_live_owner = self.noisy_helpers.restore_live_owner
             restore_live_owner(self.trainer)
         self.mechanism_audit.observe_penalty(self.last_update.get("penalty_stats", {}))
         if self.trainer.completed_steps != before + 1:
@@ -224,7 +223,7 @@ class _Run:
         if self.policy_audit is not None:
             from .policy_adapters import evaluation_state, typed_state_digest
             if self.noisy_task:
-                from .noisy_prior_adapters import live_evaluation_state
+                live_evaluation_state = self.noisy_helpers.live_evaluation_state
                 policy_before = typed_state_digest(live_evaluation_state(self.context, self.trainer))
             else:
                 policy_before = typed_state_digest(evaluation_state(self.context.state_dict()))
@@ -246,7 +245,7 @@ class _Run:
         self.rng_audits.append(audit)
         if policy_before is not None:
             if self.noisy_task:
-                from .noisy_prior_adapters import observation_receipt, live_evaluation_state
+                observation_receipt = self.noisy_helpers.observation_receipt; live_evaluation_state = self.noisy_helpers.live_evaluation_state
                 after_digest = typed_state_digest(live_evaluation_state(self.context, self.trainer))
             else:
                 from .policy_adapters import observation_receipt
@@ -580,14 +579,20 @@ def _dispatch_task(request: dict, job: dict, output_dir: Path, device: str) -> d
     """Dispatch frozen task definitions; unsupported capabilities fail before work."""
     task = request["tasks"][job["task_id"]]
     adapter = task["adapter"]
-    from .noisy_prior_tier1 import is_noisy_task
-    if is_noisy_task(task):
-        from .noisy_prior_adapters import blockers as noisy_blockers
-        reasons = noisy_blockers(task, request["candidate"], root=request["source"]["snapshot_path"])
+    from .api import _noisy_contract
+    from .atlas_noisy025_tier1 import VIEW_PATH, validate_request_scope
+    if request.get('view', {}).get('id') == VIEW_PATH.stem:
+        validate_request_scope(request)
+    metadata, helpers = _noisy_contract(task)
+    if metadata.is_noisy_task(task):
+        reasons = helpers.blockers(task, request["candidate"], root=request["source"]["snapshot_path"])
         if reasons:
             raise CapabilityError(reasons)
         if task["execution"].get("host") == "ae_gan_hold":
-            from .atlas_noisy_ae import run_behavior as run_noisy_ae
+            if metadata.COHORT == 'atlas_noisy_particle025_tier1_717_v1':
+                from .atlas717_noisy_ae import run_behavior as run_noisy_ae
+            else:
+                from .atlas_noisy_ae import run_behavior as run_noisy_ae
             return run_noisy_ae(request, task, output_dir, device)
     if adapter == "word_joint":
         from .word_adapter import run_word
