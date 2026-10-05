@@ -1,0 +1,39 @@
+{
+  "corrected_execution": {
+    "paid_attempts": 0,
+    "plans_frozen": false,
+    "status": "BLOCKED_COMPUTE",
+    "submissions": 0
+  },
+  "default_adoption": false,
+  "develop_integrated": "4f3a70e7",
+  "merge_commit": "155c8918",
+  "original_evidence": {
+    "archive_files_verified": 2012,
+    "archive_sha256": "3266966bc50405ba92ba6016da375313ff35d63558804c4e9d493a9b718dffa7",
+    "paid_attempts": 53,
+    "paid_wall_seconds": 1038.7521727493731,
+    "source_commit": "af75a3fea19aa6e4d1ca2be867b9c50a02931e33",
+    "training_gifs": 51
+  },
+  "preservation": {
+    "existing_selection_pins": 11,
+    "original_declaration_files_unchanged": 21,
+    "scientific_rows_and_catalogs_unchanged": true
+  },
+  "qualification_input": false,
+  "remaining": [
+    "Execute the eight reviewed joint-loss recipes on GPU 0 and GPU 1 after freezing their actual source/runtime cohort.",
+    "Compose final source-bound family publication while preserving existing scientific rows and original task contracts.",
+    "Push the local commits to PR #293, review, and merge into develop when GitHub is reachable."
+  ],
+  "schema_version": 1,
+  "scope": "pure_bcap_merge_software_review",
+  "software": {
+    "command": "python -m pytest -q tests/test_forge*.py tests/test_adversarial_losses.py tests/test_pure_bcap*.py",
+    "runtime_seconds": 220.42,
+    "status": "PASS",
+    "subtests_passed": 105,
+    "tests_passed": 1883
+  }
+}

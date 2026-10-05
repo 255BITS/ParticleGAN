@@ -712,15 +712,15 @@ Recorded Forge task outcomes (exact saved configuration/source/runtime):
 
 | Task | Configuration | Recorded prior code path | Recorded outcome | Current declaration | Source / cohort | Evidence |
 | --- | --- | --- | --- | --- | --- | --- |
-| five_word_joint_acquisition | [BCap](../../configs/forge/configurations/bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / 928b485ffbe6 / de1faf2ca5cd | [source-bound receipt index](technique-inventory.json) |
-| five_word_joint_acquisition | [K3P](../../configs/forge/configurations/k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c.json) | ParticlePrior (sigma=0) | FAIL | matches; source remains frozen | cuda / 928b485ffbe6 / 942ae9802bd8 | [source-bound receipt index](technique-inventory.json) |
-| five_word_joint_acquisition | [K3P without A2](../../configs/forge/ideas/k3p-a2-off-native-diagnostic.json) | ParticlePrior (sigma=0) | FAIL | matches; source remains frozen | cuda / 928b485ffbe6 / e17da7e5ab34 | [source-bound receipt index](technique-inventory.json) |
-| five_word_joint_acquisition | [K3P without critic anchor](../../configs/forge/ideas/forge-onboarding-anchor-ablation.json) | ParticlePrior (sigma=0) | FAIL | matches; source remains frozen | cuda / 928b485ffbe6 / 7b8167f5367d | [source-bound receipt index](technique-inventory.json) |
-| five_word_joint_acquisition | [K3P without critic penalty](../../configs/forge/ideas/forge-no-critic-penalty.json) | ParticlePrior (sigma=0) | FAIL | matches; source remains frozen | cuda / 928b485ffbe6 / 861df90816c5 | [source-bound receipt index](technique-inventory.json) |
-| five_word_joint_acquisition | [K3P without training output noise](../../configs/forge/ideas/k3p-no-output-noise-diagnostic.json) | ParticlePrior (sigma=0) | PASS | matches; source remains frozen | cuda / 928b485ffbe6 / 03c79722db9a | [source-bound receipt index](technique-inventory.json) |
-| five_word_joint_acquisition | [KA2](../../configs/forge/configurations/ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f.json) | ParticlePrior (sigma=0) | FAIL | matches; source remains frozen | cuda / 928b485ffbe6 / fb17123bbc34 | [source-bound receipt index](technique-inventory.json) |
-| five_word_joint_acquisition | [R1/R2](../../configs/forge/configurations/r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f.json) | ParticlePrior (sigma=0) | FAIL | matches; source remains frozen | cuda / 928b485ffbe6 / a56cbab763fa | [source-bound receipt index](technique-inventory.json) |
-| five_word_joint_acquisition | [GAN v3 release 0.7](../../configs/forge/configurations/release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c.json) | ParticlePrior (sigma=0) | FAIL | matches; source remains frozen | cuda / 928b485ffbe6 / 83376d33973c | [source-bound receipt index](technique-inventory.json) |
+| five_word_joint_acquisition | [BCap](../../configs/forge/configurations/bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / 928b485ffbe6 / de1faf2ca5cd | [source-bound receipt index](technique-inventory.json) |
+| five_word_joint_acquisition | [K3P](../../configs/forge/configurations/k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c.json) | ParticlePrior (sigma=0) | FAIL | CHANGED; earlier contract | cuda / 928b485ffbe6 / 942ae9802bd8 | [source-bound receipt index](technique-inventory.json) |
+| five_word_joint_acquisition | [K3P without A2](../../configs/forge/ideas/k3p-a2-off-native-diagnostic.json) | ParticlePrior (sigma=0) | FAIL | CHANGED; earlier contract | cuda / 928b485ffbe6 / e17da7e5ab34 | [source-bound receipt index](technique-inventory.json) |
+| five_word_joint_acquisition | [K3P without critic anchor](../../configs/forge/ideas/forge-onboarding-anchor-ablation.json) | ParticlePrior (sigma=0) | FAIL | CHANGED; earlier contract | cuda / 928b485ffbe6 / 7b8167f5367d | [source-bound receipt index](technique-inventory.json) |
+| five_word_joint_acquisition | [K3P without critic penalty](../../configs/forge/ideas/forge-no-critic-penalty.json) | ParticlePrior (sigma=0) | FAIL | CHANGED; earlier contract | cuda / 928b485ffbe6 / 861df90816c5 | [source-bound receipt index](technique-inventory.json) |
+| five_word_joint_acquisition | [K3P without training output noise](../../configs/forge/ideas/k3p-no-output-noise-diagnostic.json) | ParticlePrior (sigma=0) | PASS | CHANGED; earlier contract | cuda / 928b485ffbe6 / 03c79722db9a | [source-bound receipt index](technique-inventory.json) |
+| five_word_joint_acquisition | [KA2](../../configs/forge/configurations/ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f.json) | ParticlePrior (sigma=0) | FAIL | CHANGED; earlier contract | cuda / 928b485ffbe6 / fb17123bbc34 | [source-bound receipt index](technique-inventory.json) |
+| five_word_joint_acquisition | [R1/R2](../../configs/forge/configurations/r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f.json) | ParticlePrior (sigma=0) | FAIL | CHANGED; earlier contract | cuda / 928b485ffbe6 / a56cbab763fa | [source-bound receipt index](technique-inventory.json) |
+| five_word_joint_acquisition | [GAN v3 release 0.7](../../configs/forge/configurations/release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c.json) | ParticlePrior (sigma=0) | FAIL | CHANGED; earlier contract | cuda / 928b485ffbe6 / 83376d33973c | [source-bound receipt index](technique-inventory.json) |
 
 Related public-API demonstrations, with their own recorded contracts:
 
@@ -1753,6 +1753,6 @@ The wider question review also links standalone experiments outside the Forge ti
 - [Later questions](../toy_audit/api_contract/recent_prs/README.md)
 - [Caption questions](../toy_audit/api_contract/caption_prs/README.md)
 
-Declaration input digest: `3bd6703abbc629bff841655cadcfa07af98c702c88fabcf2da115c5570375525`. The JSON form includes the individual task and view file hashes.
+Declaration input digest: `68f2fdf4cef8facdd81684f5acc8b427bed616afb6fab919fe76e300807f9807`. The JSON form includes the individual task and view file hashes.
 
-Published artifact input digest: `8d3a9773b62db7de817952f28743166a4e277699c0cae0dcb276124a284e354d`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.
+Published artifact input digest: `fe080279e007464744ecb3b0a95e08b6dbcf203333f847056321808864481c38`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.

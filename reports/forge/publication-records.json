@@ -14710,6 +14710,444 @@
       ]
     },
     {
+      "candidate_id": "bcap-pure--5ea5bdbb2d71403dd316e201a51fb2b2b9c1868a8e053156b21b7cecb344d4be",
+      "candidate_revision": "9139a994e2a88403955e5bc8a0ce95be8c2cd5be8f0b2fad0652350d24b6971c",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "conclusion": "Recorded FAIL; required outcomes {'FAIL': 3, 'PASS': 4, 'UNKNOWN': 21}. Failed requirements: gaussian1d_acquisition, ring16_acquisition, five_word_joint_acquisition.",
+      "configuration_id": "5ea5bdbb2d71403dd316e201a51fb2b2b9c1868a8e053156b21b7cecb344d4be",
+      "evidence_scope": "published_summary",
+      "goal": "discriminator_stability",
+      "hypothesis": "Pure BCAP with relativistic loss and constant Adam rates may acquire Tier 1 distributions without optimizer interventions.",
+      "lifecycle": "concluded",
+      "materialization": "reports/forge/publication-records.json",
+      "mechanism_class": "floor_constant",
+      "next_action": "Read the source-bound study and original evidence before another bounded hypothesis. Unknown requirements remain unknown; this projection grants no qualification or adoption.",
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "provenance": {
+        "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "receipt_bindings": [
+          {
+            "attempt_id": "288936eb39174fd3bf07f60e97763a64",
+            "result_hash": "71074054db995a498033b0603ae6f3b6b5486e9a9194b3bb0d7fc6ed41b2d681",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "6f806410852b4ff0a3482569b3b3fc99",
+            "result_hash": "0b8bb7325f2c52b336d28c71a2248db381a378cbd5df56bc4bfca18ca94e5cb0",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "80f86665c2924acabb3807936ca9af19",
+            "result_hash": "b7673218e917aa6b16796924d376d68236e31b7dd201552122474005bb076367",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "aa60b1572b3f403ca23204b47806a5e1",
+            "result_hash": "9737503db647c1cc44174c258d9b99aac0d4edaa88ef12cbff5dce8d11bec291",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "aae235aaaaa64ac2b5e36c18f4af3155",
+            "result_hash": "c506eb0dfa3c061d86b66457798075bd11c3a25307e7177e3e9c0a21db431c59",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "d295b50685f34011822aa9836946482d",
+            "result_hash": "2ec51b6fddc9fd4d0813a81ffbf88bdbd4f6c87ff806a68a59b34af7c0cfbc59",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "d342f0ff8c4d421aa26360478dbf7680",
+            "result_hash": "4a1aa3b3da68150553ec7624b3beb713a74f98108e12d9b743e59bd10baae98d",
+            "valid_receipt": true
+          }
+        ],
+        "recipe_sha256": "e5404e93760d0e20cfabf9af6e6eea31694141eb6e6966adf5bdd2005c8a7439",
+        "runtime_cohort": {
+          "compute_profiles": {
+            "cpu": {
+              "backend": "cpu",
+              "deterministic": true,
+              "machine": "x86_64",
+              "model": "AMD Ryzen 9 5900X 12-Core Processor",
+              "tf32": false,
+              "threads": 1
+            },
+            "cuda": {
+              "backend": "cuda",
+              "compute_capability": "8.6",
+              "deterministic": true,
+              "driver": "610.57.04",
+              "model": "NVIDIA RTX A6000",
+              "tf32": false,
+              "threads": 1
+            }
+          },
+          "execution_backend": "cuda",
+          "runtime": {
+            "implementation": "CPython",
+            "machine": "x86_64",
+            "packages": {
+              "numpy": "2.5.2",
+              "scipy": "1.17.1",
+              "torch": "2.14.0"
+            },
+            "python": "3.12.13",
+            "system": "Linux"
+          }
+        },
+        "source_digest": "eede2a3a5780805489664b7354e8748a4020fa8eb5023aa6cad50c8e3f9d05ac"
+      },
+      "qualification_input": false,
+      "qualification_reuse": false,
+      "record_id": "publication-2a80ce660b97ec7de5302c01",
+      "record_type": "published_trial",
+      "recorded_cost": {
+        "evidence_wall_seconds": 193.8098060451448,
+        "new_paid_wall_seconds": 193.8098060451448,
+        "wall_seconds": 193.8098060451448
+      },
+      "recorded_qualification": {
+        "full_view_qualified": false,
+        "qualified_tier": 0,
+        "required_passed": 3,
+        "required_statuses": {
+          "FAIL": 3,
+          "PASS": 3,
+          "UNKNOWN": 21
+        },
+        "required_total": 27,
+        "tiers": [
+          {
+            "required_passed": 3,
+            "required_total": 6,
+            "statuses": {
+              "FAIL": 3,
+              "PASS": 3
+            },
+            "tier": 1
+          },
+          {
+            "required_passed": 0,
+            "required_total": 19,
+            "statuses": {
+              "UNKNOWN": 19
+            },
+            "tier": 2
+          },
+          {
+            "required_passed": 0,
+            "required_total": 2,
+            "statuses": {
+              "UNKNOWN": 2
+            },
+            "tier": 3
+          }
+        ],
+        "tuning_qualified": false,
+        "tuning_required_passed": 3,
+        "tuning_required_total": 6
+      },
+      "schema_version": 1,
+      "settings": {
+        "lr": 0.00425
+      },
+      "source": {
+        "board": "reports/forge/technique-inventory.md",
+        "path": "reports/forge/configuration-search/pure-bcap-relativistic-rates-v1.json",
+        "sha256": "6166558aff277cd2b0d3ae4dfaedf4c2f460b20e8a1c069d37d6e2e53b6f3c31"
+      },
+      "status": "FAIL",
+      "study_id": "pure-bcap-relativistic-rates-v1",
+      "task_results": [
+        {
+          "_attempt_id": "80f86665c2924acabb3807936ca9af19",
+          "compatibility_key": "46a625d9d0c69b69766c7832935df82f30f232ca376126b70bac4c4469de734c",
+          "cost": {
+            "wall_seconds": 14.265254441066645
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "cdf_ks": 0.09674429124274314,
+            "finite_fraction": 1.0,
+            "mean": 2.0039131882513175,
+            "mean_error_sigma": 0.007826376502634957,
+            "sample_count": 4096,
+            "std": 0.630841515175758,
+            "std_ratio": 1.261683030351516,
+            "step": 1000
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "gaussian1d_acquisition"
+        },
+        {
+          "_attempt_id": "d295b50685f34011822aa9836946482d",
+          "compatibility_key": "1e719b84ee800f13b5933a1a9681adf46c485730ce4c511e9ec0767534e57295",
+          "cost": {
+            "wall_seconds": 8.76890392799396
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "grad_med": 0.3448672890663147,
+            "mean_abs": 0.42117419838905334
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "two_pole"
+        },
+        {
+          "_attempt_id": "aa60b1572b3f403ca23204b47806a5e1",
+          "compatibility_key": "f5c538913c8770c3abd0d81666a74d3293aa81e5280dd358813cfbce17072ba5",
+          "cost": {
+            "wall_seconds": 6.304015361936763
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "concept_move": 0.9834464616592982,
+            "unused_hold": 0.9886034224182367
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "unused_token_hold"
+        },
+        {
+          "_attempt_id": "d342f0ff8c4d421aa26360478dbf7680",
+          "compatibility_key": "cd9854eec8732e023137ee6639645d1b2a9a9c8536f12b550439ef29120448cd",
+          "cost": {
+            "wall_seconds": 7.1481354960706085
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "hold": 0.023710791021585464,
+            "recon_mse": 0.006918410770595074
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "ae_gan_hold"
+        },
+        {
+          "_attempt_id": "aae235aaaaa64ac2b5e36c18f4af3155",
+          "compatibility_key": "da255498fd77bfc26e0fdba796fc753f7921caf09a19d491a1287ed5f6bd8758",
+          "cost": {
+            "wall_seconds": 10.580151983071119
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "component_core_covariance_error": 0.5016616713255644,
+            "component_core_min_eigen_ratio": 0.24163351953029633,
+            "component_covariance_error": 5.366516193374991,
+            "component_min_eigen_ratio": 0.34812042117118835,
+            "covariance_error": 0.03320864588022232,
+            "hq": 0.82275390625,
+            "mass_tv": 0.099853515625,
+            "max_component_spill": 0.34517765045166016,
+            "mean_error": 0.03581660985946655,
+            "min_hq_mass_ratio": 0.4375,
+            "min_mass_ratio": 0.48046875,
+            "modes": 16,
+            "resolved_core_covariance_error": 0.0,
+            "resolved_core_min_eigen_ratio": 1.0,
+            "resolved_max_component_spill": 0.0,
+            "sample_count": 4096,
+            "step": 400,
+            "sw1_normalized": 0.04620475956788857,
+            "target_scale": 3.0029242038726807
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "ring16_acquisition"
+        },
+        {
+          "_attempt_id": "6f806410852b4ff0a3482569b3b3fc99",
+          "compatibility_key": "b2981c5c1bf94b43ffde558ec56becfc73375f93ca7f858d92662407cf4ad982",
+          "cost": {
+            "wall_seconds": 139.3736281329766
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "completed_steps": 20001.0,
+            "mass_apple": 0.0,
+            "mass_berry": 0.0,
+            "mass_grape": 0.0,
+            "mass_lemon": 0.0,
+            "mass_melon": 0.0,
+            "mass_tv": 1.0,
+            "minimum_reconstruction_token_probability": 0.0,
+            "modes": 0,
+            "output_noise_added": 0.0,
+            "policy_latent_perturbation": 0.0,
+            "quality_fraction": 0.0,
+            "reconstruction_exact": 0,
+            "reconstruction_nll": 22.10481689274284,
+            "sample_count": 1024,
+            "served_averaged": 0.0,
+            "step": 20001
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "five_word_joint_acquisition"
+        },
+        {
+          "_attempt_id": "288936eb39174fd3bf07f60e97763a64",
+          "compatibility_key": "a468093b474460ae02a767fda80656caa687d9dc92d79a5beeca8b41514d54c3",
+          "cost": {
+            "wall_seconds": 7.369716702029109
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "parity_comparisons": 4
+          },
+          "qualification_tier": 1,
+          "reason": "declared state/horizon/cadence/restart comparisons agree; source audit bound",
+          "task_id": "clockfree_audit_measurement_v1"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "trajectory"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "residual_student"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "unipolar"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "cover_leftover"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "mid_scale_identity"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "mode_hold"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_two_broad"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_unequal_mass"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_unequal_width"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_anisotropic"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_overlap"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_spiral"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_stripes2"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_bars4"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_blobs4"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_intensity2"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "grid100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "rotated100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "staggered100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 3,
+          "task_id": "ring_hold"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 3,
+          "task_id": "ring_extension"
+        }
+      ],
+      "trainer_family": "bcap-pure"
+    },
+    {
       "candidate_id": "release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c",
       "candidate_revision": "47630167ae31039bb209a2245097e4b9d5b2379ae0c526d4d3aa57e6204b0f33",
       "claim_contract": {
@@ -17254,6 +17692,444 @@
         }
       ],
       "trainer_family": "bcap"
+    },
+    {
+      "candidate_id": "bcap-pure--ffc04f2456779326082320073842ba6e9d65416e107861996d12376446b38c3c",
+      "candidate_revision": "010ebbb516c2a47e4adb913d8e396e215e1520b79f5c9b5202e2d26560321013",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "conclusion": "Recorded FAIL; required outcomes {'FAIL': 4, 'PASS': 3, 'UNKNOWN': 21}. Failed requirements: gaussian1d_acquisition, two_pole, unused_token_hold, ring16_acquisition.",
+      "configuration_id": "ffc04f2456779326082320073842ba6e9d65416e107861996d12376446b38c3c",
+      "evidence_scope": "published_summary",
+      "goal": "discriminator_stability",
+      "hypothesis": "Pure BCAP with relativistic loss and constant Adam rates may acquire Tier 1 distributions without optimizer interventions.",
+      "lifecycle": "concluded",
+      "materialization": "reports/forge/publication-records.json",
+      "mechanism_class": "floor_constant",
+      "next_action": "Read the source-bound study and original evidence before another bounded hypothesis. Unknown requirements remain unknown; this projection grants no qualification or adoption.",
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "provenance": {
+        "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "receipt_bindings": [
+          {
+            "attempt_id": "0f1994ca025f464c85124642088b217c",
+            "result_hash": "1db885cb30d917814da603a8d7ee50ababa65fc396d8368822ac3358f26a91d4",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "676619fbfa5e4fe59a312df6662f6c30",
+            "result_hash": "619418aad1116805b9665d60cb213933f933e6d6c011b79e6b9df75a32460b2f",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "80b050360e4d4202b5d05138c25cc5d9",
+            "result_hash": "24a108dc60a9cb7081204fcfcfccc7850d369abd624f0e83436b3efafacd92f7",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "a17d32ae15274bed96bb324a239041bd",
+            "result_hash": "438a660c66f2e4b6d6e069188b4c87c229b3102f6a9eba3739d79144a5840378",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "a36a9ee30bfc4caa92fa9f842613c2e4",
+            "result_hash": "59f0c01c2712dd84f208e6b7cf7d6104b193a5dc275e95400bb720e2f076888d",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "ad6b7c03424542d3b6090541b9923ae9",
+            "result_hash": "f7974a266306fdd78ecd761065bb4aea739978224fe252f33ae577541f5de1ef",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "c9ce614e1f01418c9228772d1090bc87",
+            "result_hash": "06d48560ed3b23e105aea55b39d9852f3dd290a4db7830436cfa68abee342025",
+            "valid_receipt": true
+          }
+        ],
+        "recipe_sha256": "c6fa7db2a310265fcb9b872cf63a7bac95c65381fd8ced1bdc0cc0b31509cbfc",
+        "runtime_cohort": {
+          "compute_profiles": {
+            "cpu": {
+              "backend": "cpu",
+              "deterministic": true,
+              "machine": "x86_64",
+              "model": "AMD Ryzen 9 5900X 12-Core Processor",
+              "tf32": false,
+              "threads": 1
+            },
+            "cuda": {
+              "backend": "cuda",
+              "compute_capability": "8.6",
+              "deterministic": true,
+              "driver": "610.57.04",
+              "model": "NVIDIA RTX A6000",
+              "tf32": false,
+              "threads": 1
+            }
+          },
+          "execution_backend": "cuda",
+          "runtime": {
+            "implementation": "CPython",
+            "machine": "x86_64",
+            "packages": {
+              "numpy": "2.5.2",
+              "scipy": "1.17.1",
+              "torch": "2.14.0"
+            },
+            "python": "3.12.13",
+            "system": "Linux"
+          }
+        },
+        "source_digest": "eede2a3a5780805489664b7354e8748a4020fa8eb5023aa6cad50c8e3f9d05ac"
+      },
+      "qualification_input": false,
+      "qualification_reuse": false,
+      "record_id": "publication-3a0e348c3409699faee5fbc0",
+      "record_type": "published_trial",
+      "recorded_cost": {
+        "evidence_wall_seconds": 192.58539328700863,
+        "new_paid_wall_seconds": 192.58539328700863,
+        "wall_seconds": 192.58539328700863
+      },
+      "recorded_qualification": {
+        "full_view_qualified": false,
+        "qualified_tier": 0,
+        "required_passed": 2,
+        "required_statuses": {
+          "FAIL": 4,
+          "PASS": 2,
+          "UNKNOWN": 21
+        },
+        "required_total": 27,
+        "tiers": [
+          {
+            "required_passed": 2,
+            "required_total": 6,
+            "statuses": {
+              "FAIL": 4,
+              "PASS": 2
+            },
+            "tier": 1
+          },
+          {
+            "required_passed": 0,
+            "required_total": 19,
+            "statuses": {
+              "UNKNOWN": 19
+            },
+            "tier": 2
+          },
+          {
+            "required_passed": 0,
+            "required_total": 2,
+            "statuses": {
+              "UNKNOWN": 2
+            },
+            "tier": 3
+          }
+        ],
+        "tuning_qualified": false,
+        "tuning_required_passed": 2,
+        "tuning_required_total": 6
+      },
+      "schema_version": 1,
+      "settings": {
+        "lr": 0.0010625
+      },
+      "source": {
+        "board": "reports/forge/technique-inventory.md",
+        "path": "reports/forge/configuration-search/pure-bcap-relativistic-rates-v1.json",
+        "sha256": "6166558aff277cd2b0d3ae4dfaedf4c2f460b20e8a1c069d37d6e2e53b6f3c31"
+      },
+      "status": "FAIL",
+      "study_id": "pure-bcap-relativistic-rates-v1",
+      "task_results": [
+        {
+          "_attempt_id": "ad6b7c03424542d3b6090541b9923ae9",
+          "compatibility_key": "195526e8ff05fdaeb2dbfaf497b45ea10eee913361cb6a644bd08322296249e2",
+          "cost": {
+            "wall_seconds": 14.098155300016515
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "cdf_ks": 0.06820749292638772,
+            "finite_fraction": 1.0,
+            "mean": 2.0400818080815952,
+            "mean_error_sigma": 0.08016361616319045,
+            "sample_count": 4096,
+            "std": 0.5587890411362039,
+            "std_ratio": 1.1175780822724077,
+            "step": 1000
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "gaussian1d_acquisition"
+        },
+        {
+          "_attempt_id": "c9ce614e1f01418c9228772d1090bc87",
+          "compatibility_key": "be292e2a4c81825470ec90bf10cf98fa6928795d4a8e5563b8a09e0982a64e88",
+          "cost": {
+            "wall_seconds": 6.1026964919874445
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "grad_med": 0.07922613620758057,
+            "mean_abs": 0.07249023765325546
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "two_pole"
+        },
+        {
+          "_attempt_id": "80b050360e4d4202b5d05138c25cc5d9",
+          "compatibility_key": "1a94f34ca479f9ea26d049bb26e1a76022ee32341d23edd98f012e48a395ffe8",
+          "cost": {
+            "wall_seconds": 6.5279965930385515
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "concept_move": 0.5991764679449716,
+            "unused_hold": 0.9898491138592362
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "unused_token_hold"
+        },
+        {
+          "_attempt_id": "676619fbfa5e4fe59a312df6662f6c30",
+          "compatibility_key": "8769b866e3eee1d41ab7f39e63f7fb08c20d3667ccaf1fc5fc75421d69852bbe",
+          "cost": {
+            "wall_seconds": 7.073487506015226
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "hold": 0.004604631569236517,
+            "recon_mse": 0.024311479181051254
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "ae_gan_hold"
+        },
+        {
+          "_attempt_id": "a17d32ae15274bed96bb324a239041bd",
+          "compatibility_key": "e35f86090f0bc7ad4b11b18e7f8d01c6ecb537ff95baed7a1c57aba9e00cfe86",
+          "cost": {
+            "wall_seconds": 10.47222512809094
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "component_core_covariance_error": 0.7483790926635265,
+            "component_core_min_eigen_ratio": 0.1654159277677536,
+            "component_covariance_error": 100.0446025133133,
+            "component_min_eigen_ratio": 0.9494692087173462,
+            "covariance_error": 0.45307454466819763,
+            "hq": 0.456787109375,
+            "mass_tv": 0.111083984375,
+            "max_component_spill": 0.8078431487083435,
+            "mean_error": 0.042149387300014496,
+            "min_hq_mass_ratio": 0.18359375,
+            "min_mass_ratio": 0.515625,
+            "modes": 14,
+            "resolved_core_covariance_error": 0.0,
+            "resolved_core_min_eigen_ratio": 1.0,
+            "resolved_max_component_spill": 0.0,
+            "sample_count": 4096,
+            "step": 400,
+            "sw1_normalized": 0.12494746004760393,
+            "target_scale": 3.0029242038726807
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "ring16_acquisition"
+        },
+        {
+          "_attempt_id": "a36a9ee30bfc4caa92fa9f842613c2e4",
+          "compatibility_key": "4f9d87466731a7d6d9f5b05bff05fd0f4cba81c59ae2ffcb8001216a4a989d95",
+          "cost": {
+            "wall_seconds": 140.4610472319182
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "completed_steps": 20001.0,
+            "mass_apple": 0.1953125,
+            "mass_berry": 0.1982421875,
+            "mass_grape": 0.2109375,
+            "mass_lemon": 0.2080078125,
+            "mass_melon": 0.1875,
+            "mass_tv": 0.018945312500000006,
+            "minimum_reconstruction_token_probability": 0.9987101554870605,
+            "modes": 5,
+            "output_noise_added": 0.0,
+            "policy_latent_perturbation": 0.0,
+            "quality_fraction": 1.0,
+            "reconstruction_exact": 1,
+            "reconstruction_nll": 9.626422770213189e-05,
+            "sample_count": 1024,
+            "served_averaged": 0.0,
+            "step": 20001
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "five_word_joint_acquisition"
+        },
+        {
+          "_attempt_id": "0f1994ca025f464c85124642088b217c",
+          "compatibility_key": "a93e847e0fbceec3cb34a192b271a7b2156a7a502a03ff4649eb96e9b883b25d",
+          "cost": {
+            "wall_seconds": 7.84978503594175
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "parity_comparisons": 4
+          },
+          "qualification_tier": 1,
+          "reason": "declared state/horizon/cadence/restart comparisons agree; source audit bound",
+          "task_id": "clockfree_audit_measurement_v1"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "trajectory"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "residual_student"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "unipolar"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "cover_leftover"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "mid_scale_identity"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "mode_hold"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_two_broad"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_unequal_mass"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_unequal_width"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_anisotropic"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_overlap"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_spiral"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_stripes2"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_bars4"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_blobs4"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_intensity2"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "grid100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "rotated100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "staggered100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 3,
+          "task_id": "ring_hold"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 3,
+          "task_id": "ring_extension"
+        }
+      ],
+      "trainer_family": "bcap-pure"
     },
     {
       "candidate_id": "k3p--a5ef4da177f58c3bd3aa6f3af5a6ffb6145889635d2a303ecb7534711b698993",
@@ -31603,6 +32479,80 @@
         }
       ],
       "trainer_family": "r1r2"
+    },
+    {
+      "candidate_id": "pure-bcap-relativistic-rates-v1",
+      "conclusion": "Concluded 2 whole configurations. Recorded selection: best_observed; default adoption False.",
+      "evidence_scope": "published_summary",
+      "goal": "discriminator_stability",
+      "hypothesis": "Pure BCAP with relativistic loss and constant Adam rates may acquire Tier 1 distributions without optimizer interventions.",
+      "lifecycle": "concluded",
+      "materialization": "reports/forge/publication-records.json",
+      "mechanism_class": "bounded_configuration_search",
+      "next_action": "Read the source-bound study and original evidence before another bounded hypothesis. Unknown requirements remain unknown; this projection grants no qualification or adoption.",
+      "provenance": {
+        "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "runtime_cohort": {
+          "compute_profiles": {
+            "cpu": {
+              "backend": "cpu",
+              "deterministic": true,
+              "machine": "x86_64",
+              "model": "AMD Ryzen 9 5900X 12-Core Processor",
+              "tf32": false,
+              "threads": 1
+            },
+            "cuda": {
+              "backend": "cuda",
+              "compute_capability": "8.6",
+              "deterministic": true,
+              "driver": "610.57.04",
+              "model": "NVIDIA RTX A6000",
+              "tf32": false,
+              "threads": 1
+            }
+          },
+          "execution_backend": "cuda",
+          "runtime": {
+            "implementation": "CPython",
+            "machine": "x86_64",
+            "packages": {
+              "numpy": "2.5.2",
+              "scipy": "1.17.1",
+              "torch": "2.14.0"
+            },
+            "python": "3.12.13",
+            "system": "Linux"
+          }
+        },
+        "source_digests": [
+          "eede2a3a5780805489664b7354e8748a4020fa8eb5023aa6cad50c8e3f9d05ac"
+        ],
+        "spec_hash": "3b6a21ab5d2f4fb14d230076f2fb02aa4b1f376d770e09a115bdc83647f9c5a1"
+      },
+      "qualification_input": false,
+      "qualification_reuse": false,
+      "record_id": "publication-8be4bdab6282f25f4c1bb25e",
+      "record_type": "published_study",
+      "recorded_cost": {
+        "evidence_wall_seconds": 386.3951993321534,
+        "new_paid_wall_seconds": 1038.7521727493731,
+        "observed_attempts": 14,
+        "wall_seconds": 386.3951993321534
+      },
+      "schema_version": 1,
+      "source": {
+        "board": "reports/forge/technique-inventory.md",
+        "path": "reports/forge/configuration-search/pure-bcap-relativistic-rates-v1.json",
+        "sha256": "6166558aff277cd2b0d3ae4dfaedf4c2f460b20e8a1c069d37d6e2e53b6f3c31"
+      },
+      "study_id": "pure-bcap-relativistic-rates-v1",
+      "task_results": [],
+      "trainer_family": "bcap-pure",
+      "trial_ids": [
+        "bcap-pure--5ea5bdbb2d71403dd316e201a51fb2b2b9c1868a8e053156b21b7cecb344d4be",
+        "bcap-pure--ffc04f2456779326082320073842ba6e9d65416e107861996d12376446b38c3c"
+      ]
     },
     {
       "candidate_id": "bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212",
