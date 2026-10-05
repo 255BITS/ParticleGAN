@@ -30,7 +30,7 @@ Complete current Tier 1 measurement in: discriminator_stability; additional scop
 | Family / view | Tier 1 | Tier 2 | Tier 3 | Total |
 | --- | ---: | ---: | ---: | ---: |
 | [adaptation](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-adaptation) | [2/3](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-adaptation-tier-1) | [0(*)/19](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) | [0(*)/1](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-adaptation-tier-3) | [2(*)/23](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-adaptation) |
-| [clockfree_continuous](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-clockfree_continuous) | [2(*)/4](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1) | [0(*)/19](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) | [0(*)/6](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3) | [2(*)/29](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-clockfree_continuous) |
+| [clockfree_continuous](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-clockfree_continuous) | [2/4](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1) | [0(*)/19](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) | [0(*)/7](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3) | [2(*)/30](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-clockfree_continuous) |
 | [discriminator_stability](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-discriminator_stability) | [3/6](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | [0(*)/19](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) | [0(*)/2](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-3) | [3(*)/27](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-discriminator_stability) |
 | [formulation_comparison](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-formulation_comparison) | [2/3](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-1) | [0(*)/19](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) | [0(*)/2](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-3) | [2(*)/24](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-formulation_comparison) |
 | [host_profile_transfer](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-host_profile_transfer) | [2/3](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-1) | [0(*)/19](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) | [0(*)/2](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-3) | [2(*)/24](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-host_profile_transfer) |
@@ -53,7 +53,7 @@ Shared experiments appear once in this list; the family numerator/denominator co
 | Experiment | Required by | Recorded result | Current contract |
 | --- | --- | --- | --- |
 | [ae_gan_hold](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-experiment-ae_gan_hold) | [adaptation](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-adaptation-tier-1), [clockfree_continuous](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1), [discriminator_stability](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1), [formulation_comparison](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-1), [host_profile_transfer](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-1), [quality_coverage](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-1) | PASS | matches |
-| [clockfree_audit](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-experiment-clockfree_audit) | [clockfree_continuous](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1) | UNKNOWN | unbound |
+| [clockfree_audit_measurement_v1](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-experiment-clockfree_audit_measurement_v1) | [clockfree_continuous](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1) | FAIL | matches |
 | [five_word_joint_acquisition](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-experiment-five_word_joint_acquisition) | [discriminator_stability](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | PASS | matches |
 | [gaussian1d_acquisition](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-experiment-gaussian1d_acquisition) | [discriminator_stability](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | FAIL | matches |
 | [ring16_acquisition](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-experiment-ring16_acquisition) | [discriminator_stability](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | FAIL | matches |
@@ -96,6 +96,7 @@ Shared experiments appear once in this list; the family numerator/denominator co
 
 | Experiment | Required by | Recorded result | Current contract |
 | --- | --- | --- | --- |
+| [clockfree_audit](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-experiment-clockfree_audit) | [clockfree_continuous](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3) | UNKNOWN | unbound |
 | [grid100_14k](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-experiment-grid100_14k) | [clockfree_continuous](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3) | UNKNOWN | unbound |
 | [ring_extension](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-experiment-ring_extension) | [clockfree_continuous](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3), [discriminator_stability](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-3), [formulation_comparison](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-3), [host_profile_transfer](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-3) | UNKNOWN | matches |
 | [ring_hold](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-experiment-ring_hold) | [clockfree_continuous](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3), [discriminator_stability](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-3), [formulation_comparison](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-3), [host_profile_transfer](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-3) | UNKNOWN | matches |
@@ -161,9 +162,9 @@ Calibration: **provisional**. Phase D historical calibration remains required
 
 ## clockfree_continuous
 
-**clockfree_continuous — revision 2**. [View declaration](../../../configs/forge/views/clockfree_continuous.json).
+**clockfree_continuous — revision 3**. [View declaration](../../../configs/forge/views/clockfree_continuous.json).
 
-Qualification requires every required experiment to pass, with all lower tiers and task dependencies passed first. Required counts (Tier 1 / 2 / 3): **4 / 19 / 6**.
+Qualification requires every required experiment to pass, with all lower tiers and task dependencies passed first. Required counts (Tier 1 / 2 / 3): **4 / 19 / 7**.
 
 Calibration: **provisional**. Phase D historical calibration remains required
 
@@ -183,7 +184,7 @@ Additional eligibility requirements:
 | [two_pole](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-experiment-two_pole) | required | FAIL | matches |
 | [unused_token_hold](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-experiment-unused_token_hold) | required | PASS | matches |
 | [ae_gan_hold](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-experiment-ae_gan_hold) | required | PASS | matches |
-| [clockfree_audit](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-experiment-clockfree_audit) | required | UNKNOWN | unbound |
+| [clockfree_audit_measurement_v1](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-experiment-clockfree_audit_measurement_v1) | required | FAIL | matches |
 
 <a name="cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2"></a>
 
@@ -217,6 +218,7 @@ Additional eligibility requirements:
 
 | Experiment | Role | Recorded result | Current contract |
 | --- | --- | --- | --- |
+| [clockfree_audit](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-experiment-clockfree_audit) | required | UNKNOWN | unbound |
 | [ring_hold](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-experiment-ring_hold) | required | UNKNOWN | matches |
 | [ring_extension](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-experiment-ring_extension) | required | UNKNOWN | matches |
 | [grid100_14k](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-experiment-grid100_14k) | required | UNKNOWN | unbound |
@@ -625,7 +627,7 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_generated_an
 
 Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
 
-Used by: [clockfree_continuous / Tier 1](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1).
+Used by: [clockfree_continuous / Tier 3](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3).
 
 Current pass criteria:
 
@@ -645,7 +647,7 @@ Current contract: **matches**. Current task contract matches the recorded condit
 
 Actual task device: `0` (recorded execution receipt).
 
-Used by: [discriminator_stability / Tier 1](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1).
+Used by: [clockfree_continuous / Tier 1](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1) · [discriminator_stability / Tier 1](k3p-no-training-noise.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1).
 
 [Compact metrics and receipt provenance](../technique-receipts/39568145a2a24c5291060e6ab48b23a8.json)
 

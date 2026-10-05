@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "id": "clockfree_continuous",
-  "revision": 3,
+  "revision": 2,
   "goal": "clockfree_continuous",
   "assignments": [
     {
@@ -140,16 +140,16 @@
       "task": "ring_hold",
       "qualification_tier": 3,
       "importance": "required",
-      "order": 1
+      "order": 0
     },
     {
       "task": "ring_extension",
       "qualification_tier": 3,
       "importance": "required",
-      "order": 2
+      "order": 1
     },
     {
-      "task": "clockfree_audit_measurement_v1",
+      "task": "clockfree_audit",
       "qualification_tier": 1,
       "importance": "required",
       "order": 3
@@ -158,31 +158,25 @@
       "task": "grid100_14k",
       "qualification_tier": 3,
       "importance": "required",
-      "order": 3
+      "order": 2
     },
     {
       "task": "rotated100_14k",
       "qualification_tier": 3,
       "importance": "required",
-      "order": 4
+      "order": 3
     },
     {
       "task": "staggered100_14k",
       "qualification_tier": 3,
       "importance": "required",
-      "order": 5
+      "order": 4
     },
     {
       "task": "target_shift_recovery",
       "qualification_tier": 3,
       "importance": "required",
-      "order": 6
-    },
-    {
-      "task": "clockfree_audit",
-      "qualification_tier": 3,
-      "importance": "required",
-      "order": 0
+      "order": 5
     }
   ],
   "eligibility": {
@@ -204,5 +198,5 @@
     "compare_compatible_cohorts": true,
     "cost_separate": true
   },
-  "policy_change_reason": "Count the runnable clock-dependence measurement in Tier 1. Retain the original clock-free eligibility audit as a required Tier 3 prerequisite for long continuations; historical qualification and task contracts remain unchanged."
+  "policy_change_reason": "Make existing tier-only ordering explicit; metric ranking needs separately predeclared metrics and directions."
 }
