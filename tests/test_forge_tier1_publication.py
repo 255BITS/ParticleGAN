@@ -24,12 +24,10 @@ DIGEST = "b" * 64
 def packet(tmp_path):
     shutil.copytree(ROOT / "configs/forge", tmp_path / "configs/forge")
     path = tmp_path / "configs/forge/views/discriminator_stability.json"
-    main = read_json(path)
-    if not any(row["task"] == "clockfree_audit_measurement_v1" for row in main["assignments"]):
-        main["revision"] += 1
-        main["assignments"].append({"task": "clockfree_audit_measurement_v1", "qualification_tier": 1,
-                                    "importance": "diagnostic", "order": 100})
-        atomic_json(path, main)
+    # This packet models the finalized v5 publication. Later required audits
+    # cannot expand that historical publication's frozen task denominator.
+    main = read_json(tmp_path / "configs/forge/view-history/discriminator_stability-v5.json")
+    atomic_json(path, main)
     tasks = load_tasks(tmp_path)
     choices = read_json(tmp_path / CURRENT_SELECTION)
     main_rows, policy_rows, roster, results, catalog = [], [], [], [], {}

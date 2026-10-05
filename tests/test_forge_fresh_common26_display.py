@@ -1,4 +1,4 @@
-"""Standalone synthetic controls: standard library, no scientific module imports.
+"""Standalone synthetic controls: pure declaration/display helpers, no trainer imports.
 
 Run alone with --noconftest and plugin autoload disabled for a bounded reporting
 check. The maintained renderer is parsed, never imported. Only its pure display
@@ -16,6 +16,8 @@ import shlex
 import tempfile
 import unittest
 
+from experiments.forge.trainer_families import family_for_candidate
+
 ROOT = Path(__file__).resolve().parents[1]
 CONTRACT_PATH = ROOT / "experiments/forge/common26_comparison.py"
 RENDERER_PATH = ROOT / "reports/forge/regenerate_technique_inventory.py"
@@ -25,7 +27,7 @@ spec.loader.exec_module(contract)
 
 
 def load_display(source):
-    """Compile only named pure functions; replace the exact lazy pure import."""
+    """Compile only named pure functions; inject their exact pure dependencies."""
     tree = ast.parse(source)
     names = {"_load_common26_display_choices", "_common26_display_projection", "_common26_link",
              "_common26_label", "_common26_reference_card", "_common26_evidence_links",
@@ -36,15 +38,19 @@ def load_display(source):
         if isinstance(node, ast.FunctionDef) and node.name in names:
             node = deepcopy(node)
             if node.name == "_common26_display_projection":
-                lazy = node.body[1]
-                if (not isinstance(lazy, ast.ImportFrom)
-                        or lazy.module != "experiments.forge.common26_comparison"
-                        or [(item.name, item.asname) for item in lazy.names] != [("project_common26", None)]):
-                    raise AssertionError("unexpected pure comparison dependency")
-                node.body.pop(1)
+                dependencies = [("experiments.forge.common26_comparison",
+                                 ["FAMILIES", "TASKS_BY_TIER", "project_common26"]),
+                                ("experiments.forge.trainer_families", ["family_for_candidate"])]
+                for lazy, (module, imports) in zip(node.body[1:3], dependencies):
+                    if (not isinstance(lazy, ast.ImportFrom) or lazy.module != module
+                            or [(item.name, item.asname) for item in lazy.names] != [(name, None) for name in imports]):
+                        raise AssertionError("unexpected pure comparison dependency")
+                del node.body[1:3]
             nodes.append(node)
     scope = {"Path": Path, "Counter": Counter, "deepcopy": deepcopy, "hashlib": hashlib,
              "json": json, "os": os, "shlex": shlex, "project_common26": contract.project_common26,
+             "FAMILIES": contract.FAMILIES, "TASKS_BY_TIER": contract.TASKS_BY_TIER,
+             "family_for_candidate": family_for_candidate,
              "CURRENT_PREFIX": Path("reports/forge/technique-inventory"),
              "EVIDENCE_MANIFEST": Path("reports/forge/technique-evidence/manifest.json"),
              "COMMON26_DISPLAY_AUDIT": Path("configs/forge/selections/common26-display-audit-v1.json")}
