@@ -245,6 +245,6 @@ This regenerates the leaderboard, family pages and experiments-by-tier report fr
 
 [Experiments, criteria and tier assignments](EXPERIMENTS_BY_TIER.md) · [Complete numerical publication and provenance](technique-inventory.json)
 
-Publication input digest `71144e77d240abc47a4042232e424c1264a24320fc60bbab3f5180a945896ae2`.
+Publication input digest `c75551ce40158b0e4f542dc0844b293c03b527b94f4e97d452135a8155532041`.
 
 [Pure BCAP initial readout](pure-bcap/README.md): five adversarial losses at two constant Adam rates; 3/6 required Tier 1 passes for one selected whole recipe. 109 unique attempts cost 2549.509 paid seconds, counted once across the shared campaign. Executed source cohorts `af75a3fea19aa6e4d1ca2be867b9c50a02931e33`, `44cc66d78495cb913e0ea064840e2de37c8a4ae5`; each candidate keeps its complete cohort. No default adoption.

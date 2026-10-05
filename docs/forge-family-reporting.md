@@ -38,6 +38,39 @@ Each current or historical linked family has one file in
   no dedicated paper is cited.
 - `sources`: repository-relative files used to check the explanation, or pinned
   GitHub source URLs for archived implementations.
+- Optional `equations`: a list of objects with `label`, `latex`, and
+  `explanation`. Supply the LaTeX body without dollar delimiters or code fences;
+  the generator places it in a display-math block outside the pseudocode fence.
+  Define every symbol in `symbols` before the equations, and explain each
+  equation's role in plain language.
+- Optional `illustration`: one repository-local PNG, JPEG, GIF, or WebP asset
+  with `path`, descriptive `alt`, and `caption`. The generator places it beside
+  the overview and records its file hash. Explain the conceptual mechanism;
+  identify conceptual images as illustrations rather than measured results.
+
+For example, add these optional fields to an existing description (JSON needs
+doubled backslashes for LaTeX commands):
+
+```json
+{
+  "equations": [
+    {
+      "label": "Critic objective",
+      "latex": "L_D = L_{\\mathrm{adv}} + \\lambda R(D)",
+      "explanation": "The critic minimizes its adversarial loss plus the penalty."
+    }
+  ],
+  "illustration": {
+    "path": "reports/forge/families/assets/bcap-explainer.png",
+    "alt": "Real and generated samples feed two critic input-gradient penalties.",
+    "caption": "Conceptual BCAP mechanism; this illustration is not measured data."
+  }
+}
+```
+
+GitHub renders LaTeX inside `$$` display-math blocks; ordinary text fences retain
+readable pseudocode. See [GitHub's mathematical-expression documentation](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/writing-mathematical-expressions)
+and [image and alt-text syntax](https://docs.github.com/en/get-started/writing-on-github/getting-started-with-writing-and-formatting-on-github/basic-writing-and-formatting-syntax#images).
 
 Read the implementation, resolved recipe overrides, and recorded source bindings
 before writing. Define terms such as A2, anchors, and spike guards where they
@@ -61,3 +94,6 @@ This refresh updates the existing leaderboard and family navigation without
 training or regrading qualifications. Review pseudocode and tags against their
 sources, verify links, and check that numerical results and scientific selection
 identities are unchanged. References appear at the end of each family page.
+Review formulas against the implementation as well as the prose. An image is
+optional; explain the technique fully in text and mathematics so the page remains
+useful without it. Existing descriptions without these fields keep their layout.

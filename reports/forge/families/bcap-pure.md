@@ -10,16 +10,46 @@
 
 BCAP trains an adversarial generator with one extra critic loss: a squared penalty whenever the critic input-gradient norm exceeds a threshold, evaluated separately on real and generated data. The simple family uses native Adam at constant rates, with no clipping, A2 damping or additive training noise.
 
-## Simplified pseudocode
+![Real and generated samples share a critic; a soft penalty discourages excessive input-gradient slopes and adds to the critic loss.](assets/bcap-explainer.png)
 
-G is the generator; D is the raw-score critic; P is the learnable prior; x is real data; z is a prior sample; y=G(z) is generated data. mean averages samples, norm is the per-sample L2 norm, relu(a)=max(a,0), softplus(a)=log(1+exp(a)). lambda is penalty strength and kappa its gradient-norm threshold. stop_gradient freezes a value for the current update.
+Conceptual illustration of the BCAP critic-loss mechanism, not measured training results. Generator/prior updates are described below.
+
+## Mathematical formulation
+
+$G$ is the generator, $D$ the raw-score critic, $P$ the task prior, $x$ a real batch, $z\sim P$ a latent batch and $y$ the generated batch, including any declared output noise. $C$ is the critic actually evaluated: $C=D$ without input noise; otherwise every forward evaluates $D(u+\epsilon_{\mathrm{in}})$ with a fresh draw. $\mathbb E$ means a sample mean, $\lVert\cdot\rVert_2$ is the Euclidean norm, $(a)_+=\max(a,0)$ and $\operatorname{softplus}(a)=\log(1+e^a)$. The scalar sketch detaches $y$ during the critic update and resamples differentiable $y$ after that update; joint and auxiliary hosts retain task-owned objectives. $g_r=\nabla_x C(x)$ and $g_f=\nabla_y C(y)$ are per-sample input gradients; $d$ counts critic-input coordinates. $\lambda$ is penalty strength and $\kappa$ the cap threshold. $\eta_0$ is the global base LR, $m_D$ and $m_P$ the role multipliers. A joint host also has an encoder $E$, whose adversarial objective must train both joint critic streams.
+
+**Default paired adversarial loss**
+
+$$
+\begin{aligned}\ell_D&=\mathbb E\!\left[\operatorname{softplus}(C(y)-C(x))\right],\\\ell_G&=\mathbb E\!\left[\operatorname{softplus}(C(x)-C(y))\right].\end{aligned}
+$$
+
+These scalar losses are minimized. The critic objective is $\ell_D+R$; the generator adds only its declared auxiliary objectives. Critic fakes are detached, and generator fakes and both scores are recomputed after the critic step. $C$ includes any declared fresh input noise. This equation is the canonical paired-loss example; non-saturating, hinge, Wasserstein and least-squares options keep their own loss formulas, and joint hosts use their explicit generator/encoder objective.
+
+**Fixed capped input-gradient penalty**
+
+$$
+R_{\mathrm{BCAP}}=\frac{\lambda}{2}\left\{\mathbb E\!\left[(\lVert g_r\rVert_2-\kappa)_+^2\right]+\mathbb E\!\left[(\lVert g_f\rVert_2-\kappa)_+^2\right]\right\}.
+$$
+
+The cap is a soft loss penalty on real and fake critic input-gradient norms, without division by input dimension. It does not directly clip critic parameter gradients or weights. The canonical BCAP cards use $\lambda=1$ and $\kappa=1$; source-bound selected recipes may differ.
+
+**Constant native-Adam learning rates**
+
+$$
+\eta_G(t)=\eta_0,\qquad \eta_D(t)=m_D\eta_0,\qquad \eta_P(t)=m_P\eta_0.
+$$
+
+The public pure-BCAP defaults are $\eta_0=0.00425$, $m_D=1$, $m_P=2$, $\beta_1=0$ and $\beta_2=0.999$. Rates and moments remain constant. The recorded search also tests $\eta_0=0.0010625$; the exact candidate sets its rates. No guard, A2, anchor, additive training noise or EMA is enabled.
+
+## Simplified pseudocode
 
 ```text
 Choose an adversarial loss and constant Adam learning rates for G, D and P.
 For each training update:
   Sample real x and latent z from P; compute y=G(z).
   Critic objective = adversarial_D(D(x), D(stop_gradient(y))) + BCAP.
-  BCAP = lambda/2 * [mean(relu(norm(grad_x D(x))-kappa)^2) + mean(relu(norm(grad_y D(y))-kappa)^2)].
+  Compute BCAP from the real and fake input-gradient norms using the coefficient and cap shown above.
   For penalty derivatives, detach samples from G and treat them as differentiable critic inputs; the penalty updates D only.
   Backpropagate the critic objective and take a native Adam step on D.
   With D fixed, resample latent z, recompute differentiable fake y and scores; backpropagate adversarial_G + task-owned auxiliary losses.
@@ -31,14 +61,14 @@ For each training update:
 
 | Characteristic | Behavior |
 | --- | --- |
-| Adversarial loss | Selectable paired relativistic logistic (canonical/default), non-saturating logistic, hinge, Wasserstein or least squares. The scalar losses are minimized. Relativistic D: mean softplus(D(fake)-D(real)); G reverses the difference. Joint hosts use the explicit generator/encoder objective. |
-| Optimizer | Native PyTorch Adam. Canonical beta1=0, beta2=0.999 and epsilon=1e-8; moments are constant. |
-| Learning rates and annealing | Constant: canonical global LR 0.00425, D multiplier 1 and prior multiplier 2. The measured round also tested global LR 0.0010625. Network and prior LR floors are 1, so the scheduled API path performs no annealing. |
+| Adversarial loss | Selectable paired relativistic logistic (canonical/default), non-saturating logistic, hinge, Wasserstein or least squares. The scalar losses are minimized. Relativistic $D$: $\mathbb E[\operatorname{softplus}(C(y)-C(x))]$; $G$ reverses the difference. Joint hosts use the explicit generator/encoder objective. |
+| Optimizer | Native PyTorch Adam. Canonical $\beta_1=0$, $\beta_2=0.999$ and $\varepsilon=10^{-8}$; moments are constant. |
+| Learning rates and annealing | Constant: canonical global LR $0.00425$, D multiplier $1$ and prior multiplier $2$. The measured round also tested global LR $0.0010625$. Network and prior LR floors are $1$, so the scheduled API path performs no annealing. |
 | Parameter-gradient clipping | None. Critic spike guard is disabled; BCAP acts through the loss, not parameter-gradient clipping. |
-| Critic penalties and anchors | Fixed real/fake one-sided squared L2 cap. Canonical lambda=1, kappa=1, applied every critic update. No K3P early/late blend or critic-anchor term. |
+| Critic penalties and anchors | Fixed real/fake one-sided squared L2 cap. Canonical $\lambda=1$, $\kappa=1$, applied every critic update. No K3P early/late blend or critic-anchor term. |
 | Damping and update guards | No A2 latent-row damping, direct-particle response gain, or adaptive critic step intervention. |
 | Training and sampling noise | No additive critic-input or generator-output training noise. Sampling noise inherent to a task-declared MoG prior remains part of that prior, not an extra BCAP intervention. |
-| Parameter averaging and serving | Canonical generator EMA decay=0 and no critic-anchor penalty; the reported round scores clean live weights. |
+| Parameter averaging and serving | Canonical generator EMA decay=$0$ and no critic-anchor penalty; the reported round scores clean live weights. |
 
 ## Configuration differences
 

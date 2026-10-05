@@ -26,7 +26,11 @@ def packet(tmp_path):
     # Publication renders validated implementation links. Keep the fixture's
     # local documentation sources available without changing their contracts.
     for card in (tmp_path / "configs/forge/family-documentation").glob("*.json"):
-        for source in read_json(card).get("sources", []):
+        documentation = read_json(card)
+        sources = documentation.get("sources", [])
+        if "illustration" in documentation:
+            sources = [*sources, documentation["illustration"]["path"]]
+        for source in sources:
             if "://" not in source:
                 destination = tmp_path / source
                 destination.parent.mkdir(parents=True, exist_ok=True)

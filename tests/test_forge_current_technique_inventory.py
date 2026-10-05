@@ -4,6 +4,7 @@ from collections import Counter
 import importlib.util
 from pathlib import Path
 import shutil
+import subprocess
 
 import pytest
 
@@ -1560,14 +1561,17 @@ def test_original_completion_cohorts_rebuild_every_scientific_row_without_raw_lo
     if archived.is_file():
         shutil.copyfile(archived, policy_path)
     assert stable_hash(read_json(policy_path)) == manifest["policy_fingerprint"]
-    # Restore the archived parent declarations carried by the committed policy
-    # variants. Cached scientific reconstruction uses their original scorer
-    # contracts, even when the live word fixture has acquired another loss.
+    # Restore parent declarations from this publication's pinned source.
+    # Current policy variants follow current task bindings and cannot supply
+    # the original scorer contracts to a historical replay.
     for variant_path in (tmp_path / "configs/forge/task-variants").rglob("*.json"):
         variant = read_json(variant_path)
         parent = variant.get("execution", {}).get("policy_parent_definition")
         if parent is not None:
-            atomic_json(tmp_path / "configs/forge/tasks" / (parent["id"] + ".json"), parent)
+            relative = "configs/forge/tasks/" + parent["id"] + ".json"
+            archived_parent = __import__("json").loads(subprocess.check_output(
+                ["git", "show", original["source_commit"] + ":" + relative], cwd=ROOT, text=True))
+            atomic_json(tmp_path / relative, archived_parent)
     expected, all_snapshots, registered_rows, unregistered_shadows = {}, [], [], []
     snapshot_bytes = {}
     for entry in manifest["cohorts"]:

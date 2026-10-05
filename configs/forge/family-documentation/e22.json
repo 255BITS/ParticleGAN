@@ -1,24 +1,24 @@
 {
   "overview": "E22 combines the KA2 critic with a continuous training policy over independent learned particle rows. Statistical displacement tests reduce or restore each optimizer group's learning rate; row evidence can hold suspect transport and birth/death operations replace poorly supported rows. Learned output noise and state-selected averaged serving are part of this formulation. These controls are repository-specific.",
-  "symbols": "G: generator; D: critic; x: real batch; z: latent batch sampled from the task's prior; fake: generated batch; d: number of coordinates per critic input; g_r and g_f: critic input gradients on real and fake samples; D_bar: critic parameter exponential moving average; coefficient: penalty strength; cap: allowed input-gradient norm. mean averages samples, norm is Euclidean, relu(a)=max(a,0), softplus(a)=log(1+exp(a)), and detach stops gradients. The sketch is a scalar GAN loop; joint, conditional and reconstruction hosts supply their own inputs and auxiliary objectives. A is the early KA2 penalty and B_caps its real/fake cap term; W is the adaptive anchor weight. A row is one learned latent-table entry. s is a group's adaptive LR multiplier; b is its stationarity block size in intrinsic time; rho is A2's row response multiplier. Intrinsic time accumulates applied LR / base LR, rather than wall-clock time. A served state is the fast or averaged inference state chosen by the policy. Game trust is policy confidence derived from optimizer surprise; drift means statistically detected change in update behavior. KA2 maintains the critic-gradient anchor; A2 separately dampens latent-row updates.",
+  "symbols": "$G$ is the generator, $D$ the raw-score critic, $P$ the task prior, $x$ a real batch, $z\\sim P$ a latent batch and $y$ the generated batch, including any declared output noise. $C$ is the critic actually evaluated: $C=D$ without input noise; otherwise every forward evaluates $D(u+\\epsilon_{\\mathrm{in}})$ with a fresh draw. $\\mathbb E$ means a sample mean, $\\lVert\\cdot\\rVert_2$ is the Euclidean norm, $(a)_+=\\max(a,0)$ and $\\operatorname{softplus}(a)=\\log(1+e^a)$. The scalar sketch detaches $y$ during the critic update and resamples differentiable $y$ after that update; joint and auxiliary hosts retain task-owned objectives. $g_r=\\nabla_x C(x)$ and $g_f=\\nabla_y C(y)$ are per-sample input gradients; $d$ counts critic-input coordinates. $\\lambda$ is penalty strength and $\\kappa$ the cap threshold. $\\bar C$ evaluates the critic parameter EMA with the same fresh-input-noise law as $C$. $A$ is the early RMS-scaled penalty, $B_{\\mathrm{cap}}$ the late L2 cap term and $P_{\\mathrm{anchor}}$ the dimension-normalized gradient proximity. $w$ is the configured anchor weight. $n$ counts applied penalty calls, $W\\in\\{0,1\\}$ releases or restores the anchor, and $\\alpha\\in[0,1]$ is the moment-surprise tracking state. $\\delta$ is critic EMA decay and $\\theta$ the live critic parameters. Moment surprise compares critic gradient RMS with completed Adam second-moment RMS. $j$ indexes optimizer groups, $\\eta_j^{(0)}$ is a group's base LR, $s_j$ its adaptive multiplier and $b$ the stationarity block size in intrinsic time. Intrinsic time accumulates applied LR divided by base LR. Game trust is policy confidence derived from optimizer surprise; drift means statistically detected change in update behavior. KA2 anchors critic input gradients; A2 separately dampens sparse latent-row responses. $h_i$ is latent row $i$'s current gradient, $h_i^{\\mathrm{prev}}$ its last observed gradient, $\\rho_i$ the A2 response multiplier and $\\Delta z_i$ the corresponding row update. $\\operatorname{cos}$ denotes the implementation's bounded cosine similarity, including its handling of zero-length history.",
   "pseudocode": [
     "For each training iteration:",
     "  Restore the fast training state if the previous inference state used averages.",
     "  Set each group LR from its stationarity ladder; observe optimizer surprise and any eligible reopen event.",
     "  Damp only the critic's rate using payoff error; retain the policy's floor relative to table motion.",
     "  Draw real x and prior z; generate detached fake with the learned output-noise law.",
-    "  L_D = mean(softplus(D(fake)-D(x))) + KA2_penalty(D,x,fake).",
+    "  Compute the paired critic loss and add KA2 regularization shown above.",
     "    g_r and g_f are gradients of the critic with respect to its detached real/fake inputs.",
-    "    A = mean(norm(g_r)^2/d) + mean(relu(norm(g_f)/sqrt(d)-cap)^2).",
-    "    B_caps = mean(relu(norm(g_r)-cap)^2) + mean(relu(norm(g_f)-cap)^2).",
-    "    proximity = mean(norm(g_r-gradient(D_bar,x))^2/d), zero when the anchor first starts.",
-    "    KA2 penalty = coefficient/2 * A for applied calls 1..799, then coefficient/2 * (.5*A + .5*(B_caps + W*proximity)).",
+    "    Compute the early RMS-scaled real-gradient/fake-cap term A shown above.",
+    "    Compute the late unnormalized real/fake cap term B_caps shown above.",
+    "    Measure real-input gradient proximity to the critic average; use zero when the anchor first starts.",
+    "    Use the early-only KA2 penalty for calls 1..799, then the equal early/late blend shown above.",
     "    Its gradient anchor release/tracking also reads the policy's game-trust and drift evidence.",
     "  Backpropagate; apply the Adam-state critic spike guard, take its Adam/AMSGrad step, record surprise.",
     "  Freeze D parameters; draw fresh latent rows, regenerate fake and recompute both scores.",
-    "  L_G = mean(softplus(D(x)-D(fake))); backpropagate through G, latent rows and learned log output-noise sigma.",
+    "  Compute the paired generator adversarial loss from the updated critic; backpropagate through G, latent rows and learned log output-noise sigma.",
     "  Observe row gradients. A2 applies when some rows have zero gradient, cumulative observed fraction < .5, and Adam state exists:",
-    "    scale each observed-row Adam response by .75+.25*cos(current,last observed gradient), or 1 without row history.",
+    "    Scale observed-row Adam responses using the A2 cosine-agreement rule; leave rows without history unchanged.",
     "  Apply the policy corrections to statistically flagged hot rows and exclude those rows from settling tests.",
     "  Update G/prior; record applied displacements for the next stationarity decision.",
     "  Update G/prior averages over the table tester's declared serving window.",
@@ -28,13 +28,13 @@
   ],
   "training_details": {
     "loss": "Paired relativistic logistic with KA2 input-gradient regularization. Scalar GANTrainer jointly learns the generated-output noise scale through the generator loss. Caller-owned joint/conditional objectives must explicitly bind their roles and guard contexts.",
-    "optimizer": "KA2 critic Adam and shared K3P generator/prior Adam, with AMSGrad enabled and beta1=0, beta2=.999 in the independent-row preset. AMSGrad keeps a running maximum second moment; the policy also owns per-group stationarity, row evidence and restart state.",
-    "learning_rates": "Base LR .00425, critic multiplier 1, latent-prior multiplier 2. No total training horizon drives the LR: per-group two-scale displacement tests halve settled rates, restore rates on drift and enlarge inconclusive observation windows. Optimizer surprise can reopen the ladders and restart generator moments. The critic also receives payoff-error damping; external update/time limits are budgets, not LR schedules.",
-    "gradient_clipping": "The critic spike guard remains: after 200 Adam steps, clip each tensor relative to 5 times its bias-corrected second-moment RMS. With AMSGrad it uses the running maximum denominator that Adam will apply. Row-evidence corrections and A2 modify other responses separately; there is no added fixed global norm clip.",
-    "critic_penalty": "KA2 coefficient 3 and cap 1, using early real R1/fake RMS caps followed by an equal early/late blend and adaptive critic-gradient anchoring. The applied-call warmup at 800 remains, even though the LR controller has no fixed horizon. The policy modulates anchor release and EMA tracking using its own evidence.",
-    "damping_and_guards": "A2 dampens eligible sparse latent-row Adam responses by gradient agreement, with scale .75+.25*cos(current,last observed gradient) in [.5,1]. It activates only when some rows have zero gradient, cumulative observed-row fraction is below .5, and Adam state exists; missing row history gives scale 1. RowEvidence identifies unusually inconsistent transport, can hold table LR descent, excludes flagged rows from settling tests and corrects hot-row motion. Birth/death uses real-support evidence in standardized critic features and copies/rebases state after a move. These controls require the independent-row policy contract.",
-    "noise": "Critic-input noise is zero. Generated-output noise is learnable, initialized at standard deviation .029, with a policy settlement/mobility-dependent floor. DV12 also perturbs latent rows from support statistics. These sampled laws are part of served evidence; a clean diagnostic is a different cohort.",
-    "averaging": "serve_average=4 maintains generator/prior averages over four table-tester blocks. The update rate is table LR scale / (4 times block size), with the .995 EMA fallback when no tester rate is available. Serving selects fast or averaged state according to settlement evidence; the critic's adaptive gradient anchor is a separate average."
+    "optimizer": "KA2 critic Adam and shared K3P generator/prior Adam, with AMSGrad enabled and $\\beta_1=0$, $\\beta_2=0.999$ in the independent-row preset. AMSGrad keeps a running maximum second moment; the policy also owns per-group stationarity, row evidence and restart state.",
+    "learning_rates": "Base LR $0.00425$, critic multiplier $1$, latent-prior multiplier $2$. No total training horizon drives the LR: per-group two-scale displacement tests halve settled rates, restore rates on drift and enlarge inconclusive observation windows. Optimizer surprise can reopen the ladders and restart generator moments. The critic also receives payoff-error damping; external update/time limits are budgets, not LR schedules.",
+    "gradient_clipping": "The critic spike guard remains: after $200$ Adam steps, clip each tensor relative to $5$ times its bias-corrected second-moment RMS. With AMSGrad it uses the running maximum denominator that Adam will apply. Row-evidence corrections and A2 modify other responses separately; there is no added fixed global norm clip.",
+    "critic_penalty": "KA2 $\\lambda=3$ and $\\kappa=1$, using early real R1/fake RMS caps followed by an equal early/late blend and adaptive critic-gradient anchoring. The applied-call warmup at $800$ remains, even though the LR controller has no fixed horizon. The policy modulates anchor release and EMA tracking using its own evidence.",
+    "damping_and_guards": "A2 dampens eligible sparse latent-row Adam responses by gradient agreement, with scale $0.75+0.25\\operatorname{cos}(h_i,h_i^{\\mathrm{prev}})$ in $[0.5,1]$. It activates only when some rows have zero gradient, cumulative observed-row fraction is below $0.5$, and Adam state exists; missing row history gives scale $1$. RowEvidence identifies unusually inconsistent transport, can hold table LR descent, excludes flagged rows from settling tests and corrects hot-row motion. Birth/death uses real-support evidence in standardized critic features and copies/rebases state after a move. These controls require the independent-row policy contract.",
+    "noise": "Critic-input noise is zero. Generated-output noise is learnable, initialized at standard deviation $0.029$, with a policy settlement/mobility-dependent floor. DV12 also perturbs latent rows from support statistics. These sampled laws are part of served evidence; a clean diagnostic is a different cohort.",
+    "averaging": "serve_average=$4$ maintains generator/prior averages over four table-tester blocks. The update rate is table LR scale / ($4$ times block size), with the $0.995$ EMA fallback when no tester rate is available. Serving selects fast or averaged state according to settlement evidence; the critic's adaptive gradient anchor is a separate average."
   },
   "configuration_notes": [
     "Each result retains its executed source, recipe, task prior, initialization, budget and sampling law. These descriptions do not change or requalify recorded measurements.",
@@ -76,5 +76,27 @@
     "particlegan/birth_death.py",
     "reports/forge/family-winner-round1/E22_POLICY_READOUT.md",
     "https://github.com/255BITS/ParticleGAN/blob/928b485ffbe6e17d79b41d307ae8b6275489b37a/particlegan/policy.py"
+  ],
+  "equations": [
+    {
+      "label": "Default paired adversarial loss",
+      "latex": "\\begin{aligned}\\ell_D&=\\mathbb E\\!\\left[\\operatorname{softplus}(C(y)-C(x))\\right],\\\\\\ell_G&=\\mathbb E\\!\\left[\\operatorname{softplus}(C(x)-C(y))\\right].\\end{aligned}",
+      "explanation": "These scalar losses are minimized. The critic objective is $\\ell_D+R$; the generator adds only its declared auxiliary objectives. Critic fakes are detached, and generator fakes and both scores are recomputed after the critic step. $C$ includes any declared fresh input noise."
+    },
+    {
+      "label": "Early, capped and anchor terms",
+      "latex": "\\begin{aligned} A&=\\mathbb E\\!\\left[\\frac{\\lVert g_r\\rVert_2^2}{d}\\right]+\\mathbb E\\!\\left[\\left(\\frac{\\lVert g_f\\rVert_2}{\\sqrt d}-\\kappa\\right)_+^2\\right],\\\\ B_{\\mathrm{cap}}&=\\mathbb E\\!\\left[(\\lVert g_r\\rVert_2-\\kappa)_+^2\\right]+\\mathbb E\\!\\left[(\\lVert g_f\\rVert_2-\\kappa)_+^2\\right],\\\\ P_{\\mathrm{anchor}}&=\\mathbb E\\!\\left[\\frac{\\lVert g_r-\\nabla_x\\bar C(x)\\rVert_2^2}{d}\\right].\\end{aligned}",
+      "explanation": "$A$ uses RMS input-gradient units; $B_{\\mathrm{cap}}$ uses unnormalized L2 caps. When the anchor first starts, copy the live critic and set $P_{\\mathrm{anchor}}=0$ for that call. Subsequent calls evaluate its EMA; its fresh input-noise draws follow the same law as the live critic."
+    },
+    {
+      "label": "KA2 applied-call handover",
+      "latex": "R_{\\mathrm{KA2}}=\\begin{cases}\\dfrac{\\lambda}{2}A,&n<800,\\\\\\dfrac{\\lambda}{2}\\left[\\dfrac12 A+\\dfrac12\\left(B_{\\mathrm{cap}}+WwP_{\\mathrm{anchor}}\\right)\\right],&n\\ge800.\\end{cases}",
+      "explanation": "The first $799$ applied penalty calls use $A$ alone. Starting at call $800$, the equal blend operates even at constant LR. Moment-surprise ratios release $W$ above $3$ and restore it below $1.75$ once reference history exists. Lazy skips do not increment $n$; an applied lazy penalty includes its cadence multiplier. The independent-row preset uses $\\lambda=3$, $\\kappa=1$, $w=1$; game trust and drift evidence also modulate anchor release/tracking."
+    },
+    {
+      "label": "Stationarity learning-rate ladder",
+      "latex": "\\eta_j=\\eta_j^{(0)}s_j,\\qquad s_j^{\\mathrm{next}}=\\begin{cases}s_j/2,&\\text{stationary},\\\\\\min(1,2s_j),&\\text{drift},\\\\s_j,&\\text{no accepted rate change}.\\end{cases}",
+      "explanation": "This is the stationarity ladder before policy corrections. Displacement tests use scales $b$ and $2b$; mixed or inconclusive evidence enlarges the observation window. Row-evidence holds, critic payoff damping and its relative table-rate floor can modify the applied rate. Optimizer surprise can reopen a ladder."
+    }
   ]
 }
