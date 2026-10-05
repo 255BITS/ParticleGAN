@@ -59,11 +59,11 @@
       "campaign_budget_seconds": 1560,
       "candidate_budget_seconds": 1560,
       "execution_backend": "cuda",
-      "jobs_sha256": "8204f4d22b94bfae77f2ddad4daa6d28ab469d042e4917a20518cd54384121d0",
+      "jobs_sha256": "7784d9621e46d19efc4a4967e684cb3ffb38e9c62b1e4f14cdf09f078c14ba6b",
       "max_rounds": 1,
       "protocol_sha256": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
       "runtime_cohort_sha256": "2930309d99196a2aaaeb91262487a63c9448c216152248fe8377b710b5d2882c",
-      "source_digest": "a16f577e680b151fde0158322aef774b401d50d39c17317c61c6f31b86e1db3b",
+      "source_digest": "888d8710147baa8ddaeaef78e0b6e506831d9a7b7486c79a8ca5e7d74d0f150e",
       "task_ids": [
         "gaussian1d_acquisition_3000_schedule1000_diagnostic_v1",
         "ring16_acquisition_1600_schedule400_diagnostic_v1"

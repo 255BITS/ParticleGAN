@@ -8,11 +8,11 @@
   "candidate": "bcap-original-horizon-diagnostics-v1",
   "decision_status": "READY",
   "declaration": "configs/forge/ideas/bcap-original-horizon-diagnostics-v1.json",
-  "declaration_sha256": "cf7d3d0210ee4677cc68601b43b9c8967312bffd7b8d9c7548c16fe1c8b8cd4e",
+  "declaration_sha256": "f8afa3801b1d5ff31096c3e13d35ae518f7facdbe76198f8963d3766250f1136",
   "qualification_input": false,
   "schema_version": 1,
   "scope": "schedule_preserving_duration_diagnostic",
-  "source_digest": "a16f577e680b151fde0158322aef774b401d50d39c17317c61c6f31b86e1db3b",
+  "source_digest": "888d8710147baa8ddaeaef78e0b6e506831d9a7b7486c79a8ca5e7d74d0f150e",
   "task_map": {
     "gaussian1d_acquisition_3000_schedule1000_diagnostic_v1": "gaussian1d_acquisition",
     "ring16_acquisition_1600_schedule400_diagnostic_v1": "ring16_acquisition"
