@@ -1,0 +1,509 @@
+{
+  "model_sampling_draws_added": 0,
+  "original_archive": {
+    "archive": "/home/martyn/dev/ParticleGAN/runs/forge/worktrees/pure-bcap/runs/archives/pure-bcap/original-initial-readout.tar.gz",
+    "bytes": 44256966,
+    "sha256": "3266966bc50405ba92ba6016da375313ff35d63558804c4e9d493a9b718dffa7"
+  },
+  "original_verdicts_rewritten": false,
+  "qualification_input": false,
+  "readout_source": {
+    "path": "reports/forge/pure-bcap/readout.json",
+    "sha256": "3d14d355327e38be0b0f819226310b3bdef1b5f94bad5fa2f4286a27ec4f25e7"
+  },
+  "review_base_commit": "0115a92f68dbf9bdcdf9e4f7bfea0fff8606e752",
+  "schema_version": 1,
+  "scope": "retrospective_pure_bcap_tier1_failure_review",
+  "selected_configuration": {
+    "candidate_id": "bcap-pure--5ea5bdbb2d71403dd316e201a51fb2b2b9c1868a8e053156b21b7cecb344d4be",
+    "candidate_revision": "9139a994e2a88403955e5bc8a0ce95be8c2cd5be8f0b2fad0652350d24b6971c",
+    "configuration_id": "5ea5bdbb2d71403dd316e201a51fb2b2b9c1868a8e053156b21b7cecb344d4be",
+    "loss": "relativistic",
+    "lr": 0.00425,
+    "required_passes": 3,
+    "required_total": 6,
+    "source_commit": "af75a3fea19aa6e4d1ca2be867b9c50a02931e33",
+    "source_digest": "eede2a3a5780805489664b7354e8748a4020fa8eb5023aa6cad50c8e3f9d05ac"
+  },
+  "tasks": [
+    {
+      "attempt_id": "80f86665c2924acabb3807936ca9af19",
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": null,
+        "first_pass_step": 667,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 2,
+        "passing_suffix": 0,
+        "stable_from_seconds": null,
+        "stable_from_step": null
+      },
+      "endpoint_failed_checks": {
+        "cdf_ks": {
+          "margin": -0.04674429124274314,
+          "metric": "cdf_ks",
+          "op": "<=",
+          "status": "FAIL",
+          "threshold": 0.05,
+          "value": 0.09674429124274314
+        },
+        "std_ratio": {
+          "margin": -0.06168303035151612,
+          "metric": "std_ratio",
+          "op": "<=",
+          "status": "FAIL",
+          "threshold": 1.2,
+          "value": 1.261683030351516
+        }
+      },
+      "initialization_sha256": "ce1546104d7f3913e89cabe4170daa405d976317102975eb9b80b7b8db754b0f",
+      "metrics": {
+        "cdf_ks": 0.09674429124274314,
+        "finite_fraction": 1.0,
+        "mean": 2.0039131882513175,
+        "mean_error_sigma": 0.007826376502634957,
+        "sample_count": 4096,
+        "std": 0.630841515175758,
+        "std_ratio": 1.261683030351516,
+        "step": 1000
+      },
+      "optimizer_updates": {
+        "discriminator": 1000,
+        "generator": 1000,
+        "prior": 1000
+      },
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "provenance": {
+        "canonical_result_hash": "b7673218e917aa6b16796924d376d68236e31b7dd201552122474005bb076367",
+        "original_files": {
+          "evidence": {
+            "path": "reports/forge/attempts/80f86665c2924acabb3807936ca9af19/evidence.json",
+            "sha256": "fb8932169d74ae1b984fdcaefc0b6c8bb37dce0e575514d50a5d7efe222c3364"
+          },
+          "request": {
+            "path": "reports/forge/attempts/80f86665c2924acabb3807936ca9af19/request.json",
+            "sha256": "fd7cb1f35c955bbd92d29293c32a36b6de46d40f4b9e16b2a0b296e2767e7917"
+          },
+          "result": {
+            "path": "reports/forge/attempts/80f86665c2924acabb3807936ca9af19/result.json",
+            "sha256": "cb7a8e92e5696fa8ccea390215e28ce021439cd69eadcf3d871dfbf1eaab1358"
+          }
+        },
+        "source_digest": "eede2a3a5780805489664b7354e8748a4020fa8eb5023aa6cad50c8e3f9d05ac",
+        "source_origin_commit": "af75a3fea19aa6e4d1ca2be867b9c50a02931e33"
+      },
+      "raw_result_member": "runs/forge/pure-bcap-losses-v1/queue/pure-bcap-losses-v1/80f86665c2924acabb3807936ca9af19/raw-result.json",
+      "raw_result_sha256": "897cfa3bae87bd1cca4e0007cd2381de269f067958601e8fe00cf5393c2a03f9",
+      "receipt": "reports/forge/pure-bcap/receipts/80f86665c2924acabb3807936ca9af19.json",
+      "receipt_sha256": "ad02acb7a1bf3723f3825106b8a9637f94332bf65b81cef899bfcf455d1f7d71",
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise"
+      },
+      "status": "FAIL",
+      "task_id": "gaussian1d_acquisition",
+      "terminal_observations": [
+        {
+          "cdf_ks": 0.11765239756287249,
+          "finite_fraction": 1.0,
+          "mean_error_sigma": 0.27559195569483563,
+          "sample_count": 4096,
+          "std_ratio": 1.2101371951810385,
+          "step": 834
+        },
+        {
+          "cdf_ks": 0.06516560793957626,
+          "finite_fraction": 1.0,
+          "mean_error_sigma": 0.12534591439180076,
+          "sample_count": 4096,
+          "std_ratio": 0.9375544943237061,
+          "step": 875
+        },
+        {
+          "cdf_ks": 0.1434397914027541,
+          "finite_fraction": 1.0,
+          "mean_error_sigma": 0.1760314047569409,
+          "sample_count": 4096,
+          "std_ratio": 0.7062280555160808,
+          "step": 917
+        },
+        {
+          "cdf_ks": 0.046392211785884374,
+          "finite_fraction": 1.0,
+          "mean_error_sigma": 0.03503880451899022,
+          "sample_count": 4096,
+          "std_ratio": 1.0175632594426554,
+          "step": 959
+        },
+        {
+          "cdf_ks": 0.09674429124274314,
+          "finite_fraction": 1.0,
+          "mean_error_sigma": 0.007826376502634957,
+          "sample_count": 4096,
+          "std_ratio": 1.261683030351516,
+          "step": 1000
+        }
+      ]
+    },
+    {
+      "attempt_id": "aae235aaaaa64ac2b5e36c18f4af3155",
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": null,
+        "first_pass_step": null,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 0,
+        "passing_suffix": 0,
+        "stable_from_seconds": null,
+        "stable_from_step": null
+      },
+      "endpoint_failed_checks": {
+        "component_covariance_error": {
+          "margin": -4.516516193374992,
+          "metric": "component_covariance_error",
+          "op": "<=",
+          "status": "FAIL",
+          "threshold": 0.85,
+          "value": 5.366516193374991
+        },
+        "hq": {
+          "margin": -0.027246093749999978,
+          "metric": "hq",
+          "op": ">=",
+          "status": "FAIL",
+          "threshold": 0.85,
+          "value": 0.82275390625
+        }
+      },
+      "initialization_sha256": "ce1546104d7f3913e89cabe4170daa405d976317102975eb9b80b7b8db754b0f",
+      "metrics": {
+        "component_core_covariance_error": 0.5016616713255644,
+        "component_core_min_eigen_ratio": 0.24163351953029633,
+        "component_covariance_error": 5.366516193374991,
+        "component_min_eigen_ratio": 0.34812042117118835,
+        "covariance_error": 0.03320864588022232,
+        "hq": 0.82275390625,
+        "mass_tv": 0.099853515625,
+        "max_component_spill": 0.34517765045166016,
+        "mean_error": 0.03581660985946655,
+        "min_hq_mass_ratio": 0.4375,
+        "min_mass_ratio": 0.48046875,
+        "modes": 16,
+        "resolved_core_covariance_error": 0.0,
+        "resolved_core_min_eigen_ratio": 1.0,
+        "resolved_max_component_spill": 0.0,
+        "sample_count": 4096,
+        "step": 400,
+        "sw1_normalized": 0.04620475956788857,
+        "target_scale": 3.0029242038726807
+      },
+      "optimizer_updates": {
+        "discriminator": 400,
+        "generator": 400,
+        "prior": 400
+      },
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "provenance": {
+        "canonical_result_hash": "c506eb0dfa3c061d86b66457798075bd11c3a25307e7177e3e9c0a21db431c59",
+        "original_files": {
+          "evidence": {
+            "path": "reports/forge/attempts/aae235aaaaa64ac2b5e36c18f4af3155/evidence.json",
+            "sha256": "ff78d7e2118de48ac50c88fb80df34fdeb5ed8c3a973665618bc6ef5c350fcb1"
+          },
+          "request": {
+            "path": "reports/forge/attempts/aae235aaaaa64ac2b5e36c18f4af3155/request.json",
+            "sha256": "8dbf4f7de7d524cae398ffd4868634bbf618558dca7706ec7e507591dad3320d"
+          },
+          "result": {
+            "path": "reports/forge/attempts/aae235aaaaa64ac2b5e36c18f4af3155/result.json",
+            "sha256": "5f9c4206db50122e7eb3ca73206649a656dcb5f955bff48b910cd4b0a1b045c5"
+          }
+        },
+        "source_digest": "eede2a3a5780805489664b7354e8748a4020fa8eb5023aa6cad50c8e3f9d05ac",
+        "source_origin_commit": "af75a3fea19aa6e4d1ca2be867b9c50a02931e33"
+      },
+      "raw_result_member": "runs/forge/pure-bcap-losses-v1/queue/pure-bcap-losses-v1/aae235aaaaa64ac2b5e36c18f4af3155/raw-result.json",
+      "raw_result_sha256": "dd26e6fb0d36de1396825c4e23b37999318d99ac665dea278ebd55b4b90888fe",
+      "receipt": "reports/forge/pure-bcap/receipts/aae235aaaaa64ac2b5e36c18f4af3155.json",
+      "receipt_sha256": "bace80418faa9b25779d3304e99eeac1a8062f1b74e7b713106b374007197aee",
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise"
+      },
+      "status": "FAIL",
+      "task_id": "ring16_acquisition",
+      "terminal_observations": [
+        {
+          "component_covariance_error": 11.114539910107851,
+          "component_min_eigen_ratio": 0.810458779335022,
+          "hq": 0.46923828125,
+          "mass_tv": 0.092041015625,
+          "modes": 10,
+          "sample_count": 4096,
+          "step": 334
+        },
+        {
+          "component_covariance_error": 10.879495665431023,
+          "component_min_eigen_ratio": 0.315773069858551,
+          "hq": 0.605224609375,
+          "mass_tv": 0.09033203125,
+          "modes": 15,
+          "sample_count": 4096,
+          "step": 350
+        },
+        {
+          "component_covariance_error": 9.122850148007274,
+          "component_min_eigen_ratio": 0.3843556046485901,
+          "hq": 0.49560546875,
+          "mass_tv": 0.07421875,
+          "modes": 10,
+          "sample_count": 4096,
+          "step": 367
+        },
+        {
+          "component_covariance_error": 6.325116725638509,
+          "component_min_eigen_ratio": 0.13934490084648132,
+          "hq": 0.73193359375,
+          "mass_tv": 0.104248046875,
+          "modes": 16,
+          "sample_count": 4096,
+          "step": 384
+        },
+        {
+          "component_covariance_error": 5.366516193374991,
+          "component_min_eigen_ratio": 0.34812042117118835,
+          "hq": 0.82275390625,
+          "mass_tv": 0.099853515625,
+          "modes": 16,
+          "sample_count": 4096,
+          "step": 400
+        }
+      ]
+    },
+    {
+      "acquisition_and_collapse_observations": [
+        {
+          "mass_tv": 0.018945312500000006,
+          "minimum_reconstruction_token_probability": 0.9956637024879456,
+          "modes": 5,
+          "quality_fraction": 1.0,
+          "reconstruction_exact": 1,
+          "sample_count": 1024,
+          "step": 834
+        },
+        {
+          "mass_tv": 0.035546875000000006,
+          "minimum_reconstruction_token_probability": 0.997494101524353,
+          "modes": 5,
+          "quality_fraction": 1.0,
+          "reconstruction_exact": 1,
+          "sample_count": 1024,
+          "step": 3334
+        },
+        {
+          "mass_tv": 1.0,
+          "minimum_reconstruction_token_probability": 0.0,
+          "modes": 0,
+          "quality_fraction": 0.0,
+          "reconstruction_exact": 0,
+          "sample_count": 1024,
+          "step": 4167
+        }
+      ],
+      "attempt_id": "6f806410852b4ff0a3482569b3b3fc99",
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": null,
+        "first_pass_step": 834,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 4,
+        "passing_suffix": 0,
+        "stable_from_seconds": null,
+        "stable_from_step": null
+      },
+      "endpoint_failed_checks": {
+        "mass_tv": {
+          "margin": -0.9,
+          "metric": "mass_tv",
+          "op": "<=",
+          "status": "FAIL",
+          "threshold": 0.1,
+          "value": 1.0
+        },
+        "minimum_reconstruction_token_probability": {
+          "margin": -0.9,
+          "metric": "minimum_reconstruction_token_probability",
+          "op": ">=",
+          "status": "FAIL",
+          "threshold": 0.9,
+          "value": 0.0
+        },
+        "modes": {
+          "margin": -5,
+          "metric": "modes",
+          "op": "==",
+          "status": "FAIL",
+          "threshold": 5,
+          "value": 0
+        },
+        "quality_fraction": {
+          "margin": -0.95,
+          "metric": "quality_fraction",
+          "op": ">=",
+          "status": "FAIL",
+          "threshold": 0.95,
+          "value": 0.0
+        },
+        "reconstruction_exact": {
+          "margin": -1,
+          "metric": "reconstruction_exact",
+          "op": "==",
+          "status": "FAIL",
+          "threshold": 1,
+          "value": 0
+        }
+      },
+      "initialization_sha256": "164ed94a6881a65ae23b0f473e09d9e2f0bb73f240de1ebd505f2238152f836f",
+      "metrics": {
+        "completed_steps": 20001.0,
+        "mass_apple": 0.0,
+        "mass_berry": 0.0,
+        "mass_grape": 0.0,
+        "mass_lemon": 0.0,
+        "mass_melon": 0.0,
+        "mass_tv": 1.0,
+        "minimum_reconstruction_token_probability": 0.0,
+        "modes": 0,
+        "output_noise_added": 0.0,
+        "policy_latent_perturbation": 0.0,
+        "quality_fraction": 0.0,
+        "reconstruction_exact": 0,
+        "reconstruction_nll": 22.10481689274284,
+        "sample_count": 1024,
+        "served_averaged": 0.0,
+        "step": 20001
+      },
+      "optimizer_updates": {
+        "discriminator": 20001,
+        "encoder": 20001,
+        "generator": 20001,
+        "prior": 20001
+      },
+      "prior": {
+        "exception_reason": "Retained finite-vocabulary joint BiGAN question explicitly uses five learned 2D rows, one possible code per word; a MoG-width question needs its own protocol.",
+        "kind": "particle_cloud",
+        "learnable": true,
+        "sigma": 0.0,
+        "standardize": false
+      },
+      "provenance": {
+        "canonical_result_hash": "0b8bb7325f2c52b336d28c71a2248db381a378cbd5df56bc4bfca18ca94e5cb0",
+        "original_files": {
+          "evidence": {
+            "path": "reports/forge/attempts/6f806410852b4ff0a3482569b3b3fc99/evidence.json",
+            "sha256": "049172ad3f22b6275f8c42635802c356990b00f9424c3e061a7911b453865a1a"
+          },
+          "request": {
+            "path": "reports/forge/attempts/6f806410852b4ff0a3482569b3b3fc99/request.json",
+            "sha256": "83d54dff1a2ae8701c82fb145357b7e4543935445aeba7085eb8da0a9845de5c"
+          },
+          "result": {
+            "path": "reports/forge/attempts/6f806410852b4ff0a3482569b3b3fc99/result.json",
+            "sha256": "00a1bc5effd9b01a4e5fb96047654d7065d543a0a950dd44fbb6b340f3b99737"
+          }
+        },
+        "source_digest": "eede2a3a5780805489664b7354e8748a4020fa8eb5023aa6cad50c8e3f9d05ac",
+        "source_origin_commit": "af75a3fea19aa6e4d1ca2be867b9c50a02931e33"
+      },
+      "raw_result_member": "runs/forge/pure-bcap-losses-v1/queue/pure-bcap-losses-v1/6f806410852b4ff0a3482569b3b3fc99/raw-result.json",
+      "raw_result_sha256": "31c03d3ca61be4335d049315a7f05879934cb71b0092d85ec6a8f7b0fe384575",
+      "receipt": "reports/forge/pure-bcap/receipts/6f806410852b4ff0a3482569b3b3fc99.json",
+      "receipt_sha256": "7ef7af2f46709763b17c3ee7bea2cf5b5d369db7a9d57cd253698642ccd15565",
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "generated_and_paired_reconstructed_prior_without_output_noise",
+        "scoring_weights": "live"
+      },
+      "saved_word_records": {
+        "analysis_scope": "Read-only decoded saved observer records; no training or new sampling.",
+        "archive_member": "runs/forge/pure-bcap-losses-v1/queue/pure-bcap-losses-v1/6f806410852b4ff0a3482569b3b3fc99/observed-records.pt",
+        "endpoint_generated_strings": {
+          "beeoia": 621,
+          "bekfed": 200,
+          "bekoid": 203
+        },
+        "endpoint_minimum_generated_token_max_probability": 1.0,
+        "sha256": "eda71941ca6709564e403236b83b7c718044facdbb20cca0717c5036987cbf06"
+      },
+      "status": "FAIL",
+      "task_id": "five_word_joint_acquisition",
+      "terminal_observations": [
+        {
+          "mass_tv": 1.0,
+          "minimum_reconstruction_token_probability": 0.0,
+          "modes": 0,
+          "quality_fraction": 0.0,
+          "reconstruction_exact": 0,
+          "sample_count": 1024,
+          "step": 16668
+        },
+        {
+          "mass_tv": 1.0,
+          "minimum_reconstruction_token_probability": 0.0,
+          "modes": 0,
+          "quality_fraction": 0.0,
+          "reconstruction_exact": 0,
+          "sample_count": 1024,
+          "step": 17501
+        },
+        {
+          "mass_tv": 1.0,
+          "minimum_reconstruction_token_probability": 0.0,
+          "modes": 0,
+          "quality_fraction": 0.0,
+          "reconstruction_exact": 0,
+          "sample_count": 1024,
+          "step": 18335
+        },
+        {
+          "mass_tv": 1.0,
+          "minimum_reconstruction_token_probability": 0.0,
+          "modes": 0,
+          "quality_fraction": 0.0,
+          "reconstruction_exact": 0,
+          "sample_count": 1024,
+          "step": 19168
+        },
+        {
+          "mass_tv": 1.0,
+          "minimum_reconstruction_token_probability": 0.0,
+          "modes": 0,
+          "quality_fraction": 0.0,
+          "reconstruction_exact": 0,
+          "sample_count": 1024,
+          "step": 20001
+        }
+      ]
+    }
+  ],
+  "training_updates_added": 0
+}
