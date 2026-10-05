@@ -48,7 +48,11 @@ def verify_source(source):
 
 def summaries(queue_root, *, final=False):
     values = [report_search(ROOT, queue_root, spec) if final else plan_search(ROOT, queue_root, spec) for spec in SPECS]
-    trials = [{"arm": arm, "study": value["study_id"], **trial}
+    fields = ("candidate_id", "candidate_revision", "configuration_id", "settings", "recipe_overrides",
+        "request_id", "attempt_ids", "source_digest", "status", "submission_status", "submission_blockers", "cost")
+    trials = [{"arm": arm, "study": value["study_id"],
+        **{key: trial[key] for key in fields if key in trial},
+        "tasks": [task for task in trial["tasks"] if task["qualification_tier"] == 1]}
         for arm, value in zip(ARMS, values) for trial in value["trials"]]
     report = {"schema_version": 1, "campaign": CAMPAIGN, "qualification_input": False,
         "scope": "optimizer-only BCAP, protocol seed 0, complete current Tier 1; no task repairs or later tiers",
