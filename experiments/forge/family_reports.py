@@ -12,6 +12,7 @@ import os
 from pathlib import Path
 
 from .contracts import file_hash, identifier, read_json, stable_hash
+from . import family_documentation
 from .views import task_evaluation_fingerprint, task_execution_fingerprint
 
 
@@ -336,15 +337,20 @@ def build_progress(root: Path, publication: dict) -> dict:
                                                            for item in separate],
                                    "tiers": {tier: _sum([view["tiers"][tier] for view in view_rows]) for tier in TIERS},
                                    "total": _sum([view["total"] for view in view_rows])})
+    documented, tag_definitions = family_documentation.load_family_documentation(root, families, load)
+    for family in families.values():
+        family.update(documented.get(family["id"], {"tags": [], "documentation": None}))
     first_full_atlas = _full_original_atlas_first_case(root, load)
     progress = {"schema_version": 1, "scope": "recorded_view_progress", "qualification_input": False,
                 "qualification_reuse": False, "views": views, "diagnostic_views": [view["id"] for view in diagnostics],
                 "scoped_views": [view["id"] for view in scoped],
                 "families": [family for family in families.values() if not family["historical_only"]],
                 "historical_families": [family for family in families.values() if family["historical_only"]],
+                "tag_definitions": tag_definitions,
                 "task_paths": task_paths,
                 "input_hashes": dict(sorted(inputs.items())),
-                "renderer_sha256": file_hash(Path(__file__))}
+                "renderer_sha256": file_hash(Path(__file__)),
+                "documentation_loader_sha256": file_hash(Path(family_documentation.__file__))}
     if first_full_atlas is not None:
         progress["full_original_atlas_common26"] = first_full_atlas
     return progress
@@ -369,7 +375,8 @@ def _score_cells(root, page, family, cohort, counts, *, view_id=None, bold=False
 def render_leaderboard(root: Path, publication: dict, page: Path) -> str:
     progress = publication["family_progress"]
     lines = ["# Forge family leaderboard", "",
-             "Recorded passes / required experiments, grouped by family and view. Click any count for the experiment results. "
+             "Recorded passes / required experiments, grouped by family and view. Click a family for its technique, "
+             "pseudocode and training details; click any count for the experiment results. "
              "Each family/runtime uses one complete selected configuration and source.", "",
              "Family totals sum the view rows. A shared experiment counts once per view requiring it; "
              "these totals measure requirements across views, not unique training runs or scientific rank.", "",
@@ -379,7 +386,7 @@ def render_leaderboard(root: Path, publication: dict, page: Path) -> str:
             name = family["label"]
             if cohort["backend"] != "cuda" or len(family["cohorts"]) > 1:
                 name += " (" + cohort["backend"] + ")"
-            cells = ["**" + link(root, page, name, family["page"], cohort["anchor"]) + "**"]
+            cells = ["**" + link(root, page, name, family["page"]) + "**"]
             cells += _score_cells(root, page, family, cohort, cohort, bold=True)
             lines.append("| " + " | ".join(cells) + " |")
             for view in cohort["views"]:
@@ -393,8 +400,9 @@ def render_leaderboard(root: Path, publication: dict, page: Path) -> str:
               "new qualification. Required lower tiers must pass before later work is eligible. "
               "The declared calibration and eligibility requirements appear on each family page.", "",
               "Separately scoped cohort views, diagnostic-only views and historical/API studies are available on the "
-              "family pages and excluded from totals.", "",
-              "## Refresh", "", "```sh", "python reports/forge/regenerate_technique_inventory.py", "```", "",
+              "family pages and excluded from totals.", ""]
+    lines += _tag_directory(root, page, progress)
+    lines += ["## Refresh", "", "```sh", "python reports/forge/regenerate_technique_inventory.py", "```", "",
               "This regenerates the leaderboard, family pages and experiments-by-tier report from committed evidence "
               "and declarations. Register newly measured evidence with `--source-commit <executed-commit>`; "
               "advancing the recorded view policy also requires `--advance-policy`.", "",
@@ -402,6 +410,64 @@ def render_leaderboard(root: Path, publication: dict, page: Path) -> str:
               link(root, page, "Complete numerical publication and provenance", "reports/forge/technique-inventory.json"), "",
               f"Publication input digest `{publication['provenance']['input_digest']}`.", ""]
     return "\n".join(lines)
+
+
+def _tag_directory(root, page, progress):
+    families = progress["families"] + progress.get("historical_families", [])
+    used = {tag for family in families for tag in family.get("tags", [])}
+    if not used:
+        return []
+    lines = ["## Browse by technique tag", "",
+             "Tags describe properties shared by a family's supported variants, not performance or qualification. "
+             "Configuration-dependent behavior is explained on each family page. Historical pages retain their own scope.", ""]
+    for tag in sorted(used):
+        lines += [f'<a name="tag-{tag}"></a>', "", f"### `{tag}`", "",
+                  progress["tag_definitions"][tag], ""]
+        for family in sorted(families, key=lambda item: (item["label"], item["id"])):
+            if tag in family.get("tags", []):
+                lines.append("- " + link(root, page, family["label"], family["page"]) +
+                             (" (historical cohort)" if family.get("historical_only") else ""))
+        lines.append("")
+    return lines
+
+
+def _technique_description(root, page, family):
+    documentation = family.get("documentation")
+    if documentation is None:
+        return ["## Technique overview", "",
+                "Maintained technique documentation is unavailable in this historical or synthetic report source. "
+                "Consult the recorded recipe and source bindings below; no training behavior is inferred from its name.", ""]
+    lines = ["**Tags:** " + " · ".join(link(root, page, tag, "reports/forge/technique-inventory.md", "tag-" + tag)
+                                       for tag in family["tags"]), "",
+             "## Technique overview", "", documentation["overview"], "",
+             "## Simplified pseudocode", "", documentation["symbols"], "", "```text",
+             *documentation["pseudocode"], "```", "",
+             "## Training details", "", "| Characteristic | Behavior |", "| --- | --- |"]
+    lines += ["| " + label + " | " + cell(documentation["training_details"][key]) + " |"
+              for key, label in family_documentation.TRAINING_DETAILS]
+    lines += ["", "## Configuration differences", ""]
+    lines += ["- " + note for note in documentation["configuration_notes"]]
+    lines += ["", "<details>", "<summary>Implementation and recipe sources</summary>", "",
+              "These links support the explanation. Recorded results below remain bound to their own executed source.", ""]
+    for source in documentation["sources"]:
+        lines.append("- " + (f"[{source}]({source})" if "://" in source else link(root, page, source, source)))
+    lines += ["", "</details>", ""]
+    return lines
+
+
+def _technique_references(family):
+    documentation = family.get("documentation")
+    if documentation is None:
+        return []
+    lines = ["## References", ""]
+    if not documentation["references"]:
+        lines += ["This technique is repository-specific; no dedicated paper reference is declared. "
+                  "Its implementation and recipe sources are linked above.", ""]
+    for reference in documentation["references"]:
+        lines.append("- [" + reference["title"] + "](" + reference["url"] + "). " + reference["component"])
+    if documentation["references"]:
+        lines.append("")
+    return lines
 
 
 def _existing_link(root, page, label, target):
@@ -435,8 +501,9 @@ def render_family(root: Path, publication: dict, family: dict) -> str:
     page = root / family["page"]
     progress = publication["family_progress"]
     views = {view["id"]: view for view in progress["views"]}
-    lines = ["<!-- Generated Forge family report -->", "", f"# {family['label']} — experiment results", "",
+    lines = ["<!-- Generated Forge family report -->", "", f"# {family['label']}", "",
              link(root, page, "← Family leaderboard", "reports/forge/technique-inventory.md"), "",
+             *_technique_description(root, page, family),
              "Generated from one selected configuration per runtime. Recorded verdicts retain their original scientific "
              "contracts; grouping them under current views grants no new qualification.", ""]
     if family.get("historical_only"):
@@ -666,6 +733,7 @@ def render_family(root: Path, publication: dict, family: dict) -> str:
               "## Refresh", "", "```sh", "python reports/forge/regenerate_technique_inventory.py", "```", "",
               "This page is generated alongside the leaderboard. Register new source evidence before refreshing; "
               "editing a page cannot change a verdict or earn qualification.", ""]
+    lines += _technique_references(family)
     return "\n".join(lines)
 
 

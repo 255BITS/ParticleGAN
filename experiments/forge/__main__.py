@@ -140,7 +140,7 @@ def parser():
     compile_parser.add_argument("--summaries-only", action="store_true", help="refresh recall while preserving published qualification/telemetry snapshots")
     h = commands.add_parser("history", help="classify and import pinned history without training")
     h.add_argument("--check", action="store_true", help="check inventory coverage instead of importing")
-    commands.add_parser("validate", help="validate all task/view definitions without training")
+    commands.add_parser("validate", help="validate task/view definitions and maintained family reports without training")
     calibration = commands.add_parser("calibrate", help="replay saved calibration evidence; no training")
     calibration.add_argument("--profile", default="initial")
     feasibility = commands.add_parser("calibration-preflight", help="check whether a frozen current profile can meet its criteria; no writes or training")
@@ -422,9 +422,11 @@ def main(argv=None):
         views = [load_view(root, p.stem)["id"] for p in sorted((root / "configs/forge/views").glob("*.json"))]
         from .planning import declaration_paths, load_idea
         from .studies import load_study
+        from .family_documentation import validate_family_documentation
         candidates = [load_idea(root, path.stem)["id"] for path in declaration_paths(root)]
         studies = [load_study(root, path.stem)["id"] for path in sorted((root / "configs/forge/studies").glob("*.json"))]
-        emit({"tasks": len(tasks), "views": views, "candidates": len(candidates), "studies": studies, "training_launched": False})
+        emit({"tasks": len(tasks), "views": views, "candidates": len(candidates), "studies": studies,
+              "family_documentation": validate_family_documentation(root), "training_launched": False})
     elif command == "calibrate":
         from .calibration import calibrate
         emit(calibrate(root, profile=args.profile))

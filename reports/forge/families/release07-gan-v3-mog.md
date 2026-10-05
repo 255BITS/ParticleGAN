@@ -1,8 +1,70 @@
 <!-- Generated Forge family report -->
 
-# GAN v3 release 0.7 (MoG) — experiment results
+# GAN v3 release 0.7 (MoG)
 
 [← Family leaderboard](../technique-inventory.md)
+
+**Tags:** [adversarial-training](../technique-inventory.md#tag-adversarial-training) · [capped-input-gradients](../technique-inventory.md#tag-capped-input-gradients) · [critic-gradient-penalty](../technique-inventory.md#tag-critic-gradient-penalty) · [historical-cohort](../technique-inventory.md#tag-historical-cohort) · [learning-rate-annealing](../technique-inventory.md#tag-learning-rate-annealing)
+
+## Technique overview
+
+This historical entry retains the released v0.7 GAN v3 recipe adapted to the matched learned-MoG native host: latent dimension 2, batch 2048 and task-bound MoG sampling. It uses the same fixed critic-gradient cap, latent spread objective and full-horizon cosine as the release family. Its exact source/host results remain historical; the reusable task-adapted card is the current family declaration.
+
+## Simplified pseudocode
+
+G: generator; D: critic; x: real batch; z: latent batch sampled from the task's prior; fake: generated batch; d: number of coordinates per critic input; g_r and g_f: critic input gradients on real and fake samples; D_bar: critic parameter exponential moving average; coefficient: penalty strength; cap: allowed input-gradient norm. mean averages samples, norm is Euclidean, relu(a)=max(a,0), softplus(a)=log(1+exp(a)), and detach stops gradients. The sketch is a scalar GAN loop; joint, conditional and reconstruction hosts supply their own inputs and auxiliary objectives. R_prior is the repository's VICReg-inspired latent spread term: it discourages low per-coordinate standard deviation and nonzero off-diagonal covariance. EMA denotes an exponential parameter average.
+
+```text
+For each training iteration:
+  Use the historical 7000-step recipe horizon: hold LR through 60%, then cosine-decay toward 5% of its base value.
+  Draw real x and task-prior z; fake = detach(G(z)).
+  L_D = mean(softplus(D(fake)-D(x))).
+  g_r = gradient(D(x),x); g_f = gradient(D(fake),fake), using detached input copies.
+  L_D += 6/2 * (mean(relu(norm(g_r)-1.25)^2) + mean(relu(norm(g_f)-1.25)^2)).
+  Backpropagate; take the critic Adam step with guard and gradient anchor disabled.
+  Freeze D parameters; draw fresh z, regenerate fake and recompute both scores.
+  L_G = mean(softplus(D(x)-D(G(z)))).
+  On scalar latent-table hosts, add .05 * R_prior to L_G; behavioral hosts retain their original objectives.
+  Backpropagate; update G/prior with A2 and direct response gain disabled.
+  Maintain the configured .995 generator/prior EMA where the host implements it.
+  Score with the frozen task's declared weights, prior and noise law; ordinary gates use clean live outputs.
+```
+
+## Training details
+
+| Characteristic | Behavior |
+| --- | --- |
+| Adversarial loss | Paired relativistic logistic, with the fixed real/fake cap regularizer below. Scalar hosts add the declared .05 latent variance/covariance term; behavioral hosts keep their task-owned reconstruction, conditional or direct-particle objectives. |
+| Optimizer | K3P-derived Adam wrappers selected by the explicit fixed b_cap arm. Beta1=0, beta2=.99, AMSGrad off; guard, anchor, A2 and direct gain are disabled. Observer bookkeeping remains. This recipe is not selected through optimizer_family='adam', despite having its intervention switches off. Direct sample-particle hosts can retain separately declared response moments even when response gain is disabled; inspect the host binding. |
+| Learning rates and annealing | Original reference base LR .00425, critic multiplier 1, latent-prior multiplier 2. The historical selected whole variant uses .006375 and prior multiplier 1. Both retain the 7000-step recipe horizon, a 60% hold followed by cosine decay to 5%, with no separate short network horizon. This native card fixes its resource fields; the later task-adapted successor delegates them explicitly without rewriting the historical recipe. |
+| Parameter-gradient clipping | No critic spike guard or global gradient-norm clipping. The cap penalizes excess critic input-gradient magnitude in the loss; it does not clamp critic parameter gradients or weights. |
+| Critic penalties and anchors | Fixed coefficient 6 and L2 cap 1.25 on both real and fake samples, applied every step. No RMS normalization, K3P handover or critic-gradient proximity term. |
+| Damping and update guards | A2, critic spike guard, critic anchor and direct sample-particle gain are all disabled. This distinguishes the full release recipe from a fixed BCap penalty swapped into an otherwise intact K3P recipe. |
+| Training and sampling noise | No additive critic-input or generated-output training noise. The task's prior still owns its latent sampling noise: learned-MoG and particle-cloud hosts remain distinct. Paired noisy/EMA diagnostics do not replace the required clean/live result. |
+| Parameter averaging and serving | Generator/prior EMA decay .995 is configured where the host implements it; selected ordinary gates use live weights. Behavioral hosts may own no scored EMA or latent table. No critic-gradient anchor average is active. |
+
+## Configuration differences
+
+- Each result retains its executed source, recipe, task prior, initialization, budget and sampling law. These descriptions do not change or requalify recorded measurements.
+- Task-owned objectives and active components matter: direct sample particles, learned latent rows and a generator network are different parameter roles. A declared recipe switch does not imply that every host can apply it.
+- The retained selected variant is release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c at historical source 2899099048c0a9987eb8720214abfce56d86d92a. It uses LR .006375 and prior multiplier 1; the original native card used .00425 and multiplier 2.
+- The historical reference fixes z_dim=2, batch_size=2048 and 7000-step recipe horizon. Its learned-MoG binding records sigma .025 and standardize=false; task initialization and affine native host remain part of the experiment.
+- The original native card's fixed resource fields were incompatible with behavioral toy hosts. A later explicit task-adapted successor delegates those fields; that successor does not rewrite this historical evidence.
+
+<details>
+<summary>Implementation and recipe sources</summary>
+
+These links support the explanation. Recorded results below remain bound to their own executed source.
+
+- [configs/forge/ideas/release07-gan-v3-mog-v1.json](../../../configs/forge/ideas/release07-gan-v3-mog-v1.json)
+- [configs/forge/configurations/release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c.json](../../../configs/forge/configurations/release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c.json)
+- [reports/forge/studies/FORMULATION_COMPARISON_CONTINUATION.md](../studies/FORMULATION_COMPARISON_CONTINUATION.md)
+- [reports/forge/RELEASE07_TASK_ADAPTATION_READOUT.md](../RELEASE07_TASK_ADAPTATION_READOUT.md)
+- [particlegan/grad_regularizers.py](../../../particlegan/grad_regularizers.py)
+- [particlegan/vicreg_loss.py](../../../particlegan/vicreg_loss.py)
+- [https://github.com/255BITS/ParticleGAN/blob/2899099048c0a9987eb8720214abfce56d86d92a/particlegan/recipes.py](https://github.com/255BITS/ParticleGAN/blob/2899099048c0a9987eb8720214abfce56d86d92a/particlegan/recipes.py)
+
+</details>
 
 Generated from one selected configuration per runtime. Recorded verdicts retain their original scientific contracts; grouping them under current views grants no new qualification.
 
@@ -2277,3 +2339,10 @@ python reports/forge/regenerate_technique_inventory.py
 ```
 
 This page is generated alongside the leaderboard. Register new source evidence before refreshing; editing a page cannot change a verdict or earn qualification.
+
+## References
+
+- [Adam: A Method for Stochastic Optimization](https://arxiv.org/abs/1412.6980). Base Adam optimizer.
+- [The relativistic discriminator: a key element missing from standard GAN](https://arxiv.org/abs/1807.00734). Related paired relativistic adversarial objective.
+- [VICReg: Variance-Invariance-Covariance Regularization for Self-Supervised Learning](https://arxiv.org/abs/2105.04906). Inspiration for latent variance/covariance regularization; no full VICReg objective is claimed.
+- [On the regularization of Wasserstein GANs](https://arxiv.org/abs/1709.08894). Related work on one-sided input-gradient penalties. The repository evaluates caps directly on real/fake inputs; it does not reproduce the paper's full training or sampling algorithm.

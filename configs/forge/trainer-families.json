@@ -13,7 +13,11 @@
       "canonical_candidate": "r3gan-stacked-training-toy-v1",
       "id": "r1r2",
       "label": "R1/R2",
-      "rationale": "The modern R3GAN Stacked-MNIST training adaptation is the canonical baseline. The older fixed R1/R2 penalty on a K3P recipe remains an explicit alternative; different recorded sources are not ranked against one another."
+      "rationale": "The modern R3GAN Stacked-MNIST training adaptation is the canonical baseline. The older fixed R1/R2 penalty on a K3P recipe remains an explicit alternative; different recorded sources are not ranked against one another.",
+      "tags": [
+        "adversarial-training",
+        "critic-gradient-penalty"
+      ]
     },
     {
       "active_search_by_backend": {
@@ -24,8 +28,14 @@
       ],
       "canonical_candidate": "k3p-bcap-matched-v1",
       "id": "bcap",
-      "label": "BCap",
-      "rationale": "Frozen BCap penalty with its declared K3P optimizer and training law."
+      "label": "BCAP with K3P",
+      "rationale": "Frozen BCap penalty with its declared K3P optimizer and training law.",
+      "tags": [
+        "adversarial-training",
+        "capped-input-gradients",
+        "critic-gradient-penalty",
+        "optimizer-interventions"
+      ]
     },
     {
       "active_search_by_backend": {
@@ -38,7 +48,12 @@
       "canonical_candidate": "k3p",
       "id": "k3p",
       "label": "K3P",
-      "rationale": "Public K3P formulation."
+      "rationale": "Public K3P formulation.",
+      "tags": [
+        "adversarial-training",
+        "critic-gradient-penalty",
+        "optimizer-interventions"
+      ]
     },
     {
       "active_search_by_backend": {
@@ -54,7 +69,12 @@
       ],
       "id": "ka2",
       "label": "KA2",
-      "rationale": "Public KA2 formulation retains its own training mechanism."
+      "rationale": "Public KA2 formulation retains its own training mechanism.",
+      "tags": [
+        "adversarial-training",
+        "critic-gradient-penalty",
+        "optimizer-interventions"
+      ]
     },
     {
       "candidates": [
@@ -63,7 +83,13 @@
       "canonical_candidate": "e22",
       "id": "e22",
       "label": "E22",
-      "rationale": "Policy-aware E22 formulation; unsupported frozen hosts remain blocked."
+      "rationale": "Policy-aware E22 formulation; unsupported frozen hosts remain blocked.",
+      "tags": [
+        "adaptive-training-policy",
+        "adversarial-training",
+        "critic-gradient-penalty",
+        "optimizer-interventions"
+      ]
     },
     {
       "candidates": [
@@ -72,7 +98,13 @@
       "canonical_candidate": "atlas",
       "id": "atlas",
       "label": "Atlas",
-      "rationale": "Policy-aware Atlas formulation; unsupported frozen hosts remain blocked."
+      "rationale": "Policy-aware Atlas formulation; unsupported frozen hosts remain blocked.",
+      "tags": [
+        "adaptive-training-policy",
+        "adversarial-training",
+        "critic-gradient-penalty",
+        "optimizer-interventions"
+      ]
     },
     {
       "candidates": [
@@ -87,7 +119,13 @@
       ],
       "id": "release07-gan-v3",
       "label": "GAN v3 release 0.7",
-      "rationale": "One released GAN v3 solution family. The reusable task-adapted card delegates host resources and uses each task-declared prior. Historical MoG and cloud cards retain their exact recipe, prior, source, serving and qualification identities; alternative evidence never fills selected-row cells."
+      "rationale": "One released GAN v3 solution family. The reusable task-adapted card delegates host resources and uses each task-declared prior. Historical MoG and cloud cards retain their exact recipe, prior, source, serving and qualification identities; alternative evidence never fills selected-row cells.",
+      "tags": [
+        "adversarial-training",
+        "capped-input-gradients",
+        "critic-gradient-penalty",
+        "learning-rate-annealing"
+      ]
     },
     {
       "candidates": [
@@ -96,7 +134,13 @@
       "canonical_candidate": "forge-onboarding-anchor-ablation",
       "id": "k3p-no-anchor",
       "label": "K3P without critic anchor",
-      "rationale": "Removing the critic anchor is a structural ablation, not a tuned K3P configuration."
+      "rationale": "Removing the critic anchor is a structural ablation, not a tuned K3P configuration.",
+      "tags": [
+        "adversarial-training",
+        "critic-gradient-penalty",
+        "optimizer-interventions",
+        "structural-ablation"
+      ]
     },
     {
       "candidates": [
@@ -105,7 +149,12 @@
       "canonical_candidate": "forge-no-critic-penalty",
       "id": "k3p-no-penalty",
       "label": "K3P without critic penalty",
-      "rationale": "Removing the critic penalty is a structural ablation."
+      "rationale": "Removing the critic penalty is a structural ablation.",
+      "tags": [
+        "adversarial-training",
+        "optimizer-interventions",
+        "structural-ablation"
+      ]
     },
     {
       "candidates": [
@@ -114,7 +163,13 @@
       "canonical_candidate": "k3p-a2-off-native-diagnostic",
       "id": "k3p-no-a2",
       "label": "K3P without A2",
-      "rationale": "Removing A2 is a structural ablation."
+      "rationale": "Removing A2 is a structural ablation.",
+      "tags": [
+        "adversarial-training",
+        "critic-gradient-penalty",
+        "optimizer-interventions",
+        "structural-ablation"
+      ]
     },
     {
       "candidates": [
@@ -123,7 +178,13 @@
       "canonical_candidate": "k3p-no-output-noise-diagnostic",
       "id": "k3p-no-training-noise",
       "label": "K3P without training output noise",
-      "rationale": "Removing training output noise changes the training law and remains a separate technique."
+      "rationale": "Removing training output noise changes the training law and remains a separate technique.",
+      "tags": [
+        "adversarial-training",
+        "critic-gradient-penalty",
+        "optimizer-interventions",
+        "structural-ablation"
+      ]
     },
     {
       "candidates": [
@@ -140,8 +201,16 @@
       ],
       "canonical_candidate": "bcap-pure-adam-v2",
       "id": "bcap-pure",
-      "label": "Pure BCAP",
-      "rationale": "Native Adam, fixed real/fake BCAP, constant rates and moments, selectable adversarial loss. No optimizer interventions or additive training noise. Historical K3P-derived BCAP remains a separate family."
+      "label": "BCAP",
+      "rationale": "Native Adam, fixed real/fake BCAP, constant rates and moments, selectable adversarial loss. No optimizer interventions or additive training noise. Historical K3P-derived BCAP remains a separate family.",
+      "tags": [
+        "adversarial-training",
+        "capped-input-gradients",
+        "constant-learning-rate",
+        "critic-gradient-penalty",
+        "native-adam",
+        "selectable-loss"
+      ]
     }
   ],
   "historical_families": [
@@ -156,7 +225,14 @@
       "canonical_candidate": "release07-gan-v3-task-adapted-v1",
       "id": "release07-gan-v3-mog",
       "label": "GAN v3 release 0.7 (MoG)",
-      "rationale": "The explicit task adaptation is the runnable MoG configuration. The earlier host-incompatible MoG card stays an archived alternative, with its original source and blockers."
+      "rationale": "The explicit task adaptation is the runnable MoG configuration. The earlier host-incompatible MoG card stays an archived alternative, with its original source and blockers.",
+      "tags": [
+        "adversarial-training",
+        "capped-input-gradients",
+        "critic-gradient-penalty",
+        "historical-cohort",
+        "learning-rate-annealing"
+      ]
     },
     {
       "candidates": [
@@ -165,7 +241,14 @@
       "canonical_candidate": "release07-gan-v3-cloud-v1",
       "id": "release07-gan-v3-cloud",
       "label": "GAN v3 release 0.7 (cloud)",
-      "rationale": "Particle-cloud prior and host law are separate from the learned-MoG family."
+      "rationale": "Particle-cloud prior and host law are separate from the learned-MoG family.",
+      "tags": [
+        "adversarial-training",
+        "capped-input-gradients",
+        "critic-gradient-penalty",
+        "historical-cohort",
+        "learning-rate-annealing"
+      ]
     }
   ],
   "schema_version": 1,

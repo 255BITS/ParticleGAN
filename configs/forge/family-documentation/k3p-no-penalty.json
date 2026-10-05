@@ -1,0 +1,62 @@
+{
+  "overview": "K3P without critic penalty sets the full critic regularization coefficient to zero. That removes both its early gradient regularization and its later caps and anchor contribution from the objective. K3P's optimizer interventions remain, so this is a test of critic regularization rather than plain Adam training.",
+  "symbols": "G: generator; D: critic; D_bar: exponential moving average of the critic; x: real samples; z: sampled latent input; d: number of coordinates per critic input. norm is the Euclidean norm, mean averages samples, relu(a)=max(a,0), and softplus(a)=log(1+exp(a)). The training sketch shows the scalar GAN host; joint/auxiliary hosts add task-owned objectives. Remove the entire critic penalty. stop_gradient detaches generated values from G and the prior during the critic update.",
+  "pseudocode": [
+    "Start from the K3P recipe and apply: coefficient = 0; penalty = 0",
+    "For each training iteration:",
+    "  Set G/D learning rates from their network schedule; set prior rate from its full-budget schedule.",
+    "  Draw real x and latent z from the task; fake = stop_gradient(G(z)) for the critic update.",
+    "  Evaluate D through the scheduled input-noise wrapper (fresh noise per forward); add generated-output training noise to fake.",
+    "  L_D = mean(softplus(D(fake) - D(x))).",
+    "  Do not add any critic gradient penalty to L_D.",
+    "  Backpropagate L_D; after warmup, scale each critic gradient tensor down if its RMS exceeds",
+    "    guard_ratio * RMS expected from Adam's bias-corrected second moment; take the critic Adam step.",
+    "  Resample latent input and recompute differentiable fake and critic scores using the updated D; retain declared training noise.",
+    "  L_G = mean(softplus(D(x) - D(fake))); backpropagate through G and learned prior with D fixed.",
+    "  If some latent rows have zero gradient, the cumulative observed-row fraction is below max_rate, and Adam history exists:",
+    "    scale observed-row Adam responses by 0.75+0.25*cos(current,last observed gradient); use 1 without row history.",
+    "  Otherwise leave the latent-row Adam response unchanged.",
+    "  Retain any host-eligible direct-particle response gain; update G and prior.",
+    "  Maintain any configured moving averages; score with the task's declared weights and sampling law."
+  ],
+  "training_details": {
+    "loss": "Paired relativistic logistic by default: critic mean softplus(D(fake)-D(real)); generator reverses that score difference. Task-owned joint or reconstruction terms remain separate.",
+    "optimizer": "Inherited K3P Adam wrappers for critic and generator/prior, with recipe-specific moments and per-role rates. This ablation does not switch to native Adam without interventions.",
+    "learning_rates": "Inherited scheduled training. G/D use the network cosine schedule, capped at a configured horizon; the learned prior uses its full-budget cosine schedule. In the public baseline, rates hold through 60% of their horizon before decaying to their floors. Resolved recorded configurations own exact rates and horizons.",
+    "gradient_clipping": "Adaptive per-tensor critic gradient scaling remains via the spike guard; it is clipping-like and uses Adam second-moment history rather than a fixed global norm threshold. No generic global gradient-norm clipping is added by this candidate.",
+    "critic_penalty": "Disabled: coefficient zero removes the entire K3P penalty, including the anchor contribution. The optimizer can retain anchor bookkeeping, which contributes no penalty to the objective.",
+    "damping_and_guards": "A2 acts only on eligible sparse latent rows: responses are scaled within [0.5,1] according to consecutive gradient agreement, while Adam's second moment still tracks the raw gradient. The critic spike guard remains. Direct sample-particle gain is a separate inherited, host-dependent mechanism; it does not automatically apply to every learned prior. A2 activates only when some rows have zero gradient, the cumulative observed-row fraction is below the configured max_rate (baseline 0.5), and Adam state exists; missing row history gives scale 1.",
+    "noise": "Inherited scheduled critic-input noise and generated-output training noise. Prior sampling noise belongs to the task. Public clean sampling does not automatically include the generated-output training noise. Critic-input noise is independently drawn on each forward of the wrapped critic, including gradient-penalty evaluation.",
+    "averaging": "No effective critic-anchor force because the whole penalty is zero. Critic-anchor bookkeeping and generator/prior moving averages may remain; they do not change the live scoring law."
+  },
+  "configuration_notes": [
+    "The candidate makes one named mechanism removal; it does not replace task priors, initialization, training budgets, or numerical criteria.",
+    "Settings above describe the declared ablation and public K3P baseline. Each recorded result retains its executed recipe/source; current implementation descriptions do not requalify historical measurements.",
+    "Penalty laziness, exact noise magnitudes, role-specific rates, moment settings, and host-eligible controls must be read from the selected configuration bindings rather than assumed to be identical across tasks."
+  ],
+  "references": [
+    {
+      "title": "Adam: A Method for Stochastic Optimization",
+      "url": "https://arxiv.org/abs/1412.6980",
+      "component": "Base optimizer; the spike guard, A2 rule and K3P handover are repository-specific additions."
+    },
+    {
+      "title": "The relativistic discriminator: a key element missing from standard GAN",
+      "url": "https://arxiv.org/abs/1807.00734",
+      "component": "Paired relativistic adversarial loss."
+    },
+    {
+      "title": "Which Training Methods for GANs do actually Converge?",
+      "url": "https://arxiv.org/abs/1801.04406",
+      "component": "Related work on zero-centered input-gradient regularization; it is not a paper specifying the full K3P mechanism or this ablation."
+    }
+  ],
+  "sources": [
+    "configs/forge/ideas/forge-no-critic-penalty.json",
+    "particlegan/recipes.py",
+    "particlegan/k3p.py",
+    "particlegan/grad_regularizers.py",
+    "particlegan/gan_loss.py",
+    "particlegan/training.py"
+  ]
+}

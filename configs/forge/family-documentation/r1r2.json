@@ -1,0 +1,61 @@
+{
+  "overview": "The R1/R2 family now uses the Modern GAN training adaptation: paired relativistic logistic loss, native Adam, and squared critic input-gradient penalties on both real and fake samples. Its early schedule raises Adam's second-moment decay while reducing penalty strength. The retained older R1/R2 entry only swapped K3P's penalty and kept K3P's optimizer controls; it is a different complete recipe.",
+  "symbols": "G: generator; D: critic; x: real batch; z: latent batch sampled from the task's prior; fake: generated batch; d: number of coordinates per critic input; g_r and g_f: critic input gradients on real and fake samples; D_bar: critic parameter exponential moving average; coefficient: penalty strength; cap: allowed input-gradient norm. mean averages samples, norm is Euclidean, relu(a)=max(a,0), softplus(a)=log(1+exp(a)), and detach stops gradients. The sketch is a scalar GAN loop; joint, conditional and reconstruction hosts supply their own inputs and auxiliary objectives. gamma is the scheduled R1/R2 coefficient; beta2 is Adam's second-moment decay. R1 is the real-sample squared input-gradient penalty and R2 is the fake-sample counterpart.",
+  "pseudocode": [
+    "For each training iteration:",
+    "  Apply the resolved LR schedule; cosine-interpolate beta2 and gamma over the first 20% of the task horizon.",
+    "  Draw real x and prior z; fake = detach(G(z)).",
+    "  L_D = mean(softplus(D(fake)-D(x))).",
+    "  g_r = gradient(D(x),x); g_f = gradient(D(fake),fake), using detached input copies.",
+    "  L_D += gamma/2 * (mean(norm(g_r)^2) + mean(norm(g_f)^2)).",
+    "  Backpropagate L_D; take a native Adam critic step with no spike guard or global clipping.",
+    "  Freeze D parameters; draw fresh z, regenerate fake and recompute both scores.",
+    "  L_G = mean(softplus(D(x)-D(G(z)))); add only the host's declared auxiliary objective.",
+    "  Backpropagate L_G; update G and any learned prior with native Adam.",
+    "  Do not apply A2, critic anchoring, direct-particle gain or additive training noise.",
+    "  Score the live model with the frozen task's sampling law."
+  ],
+  "training_details": {
+    "loss": "Paired relativistic logistic, the RpGAN component of the Modern GAN baseline. Forge uses the host's toy architecture and prior; this is not a reproduction of the paper's image architecture or full Stacked MNIST experiment.",
+    "optimizer": "Modern canonical and selected cards use native torch.optim.Adam, beta1=0, epsilon=1e-8, AMSGrad off. Beta2 cosine-interpolates .9 to .99 over the first 20% of each resolved task horizon, then holds. Observer bookkeeping does not alter Adam's update.",
+    "learning_rates": "Canonical modern card keeps .0002 constant for G/D and learned prior. The selected whole variant uses .0085, critic/prior multipliers 1, no short network horizon cap, and cosine LR decay from 20% of the resolved horizon to a 10% floor. Exact host binding determines the horizon.",
+    "gradient_clipping": "Disabled in modern canonical/selected cards: d_guard_ratio=0 and no global gradient-norm clip. The squared input-gradient penalty changes the critic loss rather than clipping parameter gradients. The historical K3P swap retains its inherited spike guard.",
+    "critic_penalty": "R1/R2 = gamma/2 times the mean squared L2 norm on real samples plus the corresponding fake term. Gamma cosine-interpolates 1 to .1 over the first 20% of the resolved horizon; it is applied each step. There is no cap threshold, RMS rescaling, LR-dependent handover or EMA proximity term.",
+    "damping_and_guards": "Modern cards disable A2, direct-particle gain, critic spike guard and anchor. The older k3p-r1r2-matched-v1 keeps those K3P controls where its host supports them; they must not be attributed to the modern native-Adam baseline.",
+    "noise": "Modern cards have zero additive critic-input and generated-output noise. A learned MoG may still have task-declared latent sampling noise; disabling training-output noise does not remove that prior law.",
+    "averaging": "Modern cards set generator/prior EMA decay to zero and use live scoring. The paper's EMA image evaluation is not imported. Historical K3P penalty-swap receipts retain their own averaging configuration."
+  },
+  "configuration_notes": [
+    "Each result retains its executed source, recipe, task prior, initialization, budget and sampling law. These descriptions do not change or requalify recorded measurements.",
+    "Task-owned objectives and active components matter: direct sample particles, learned latent rows and a generator network are different parameter roles. A declared recipe switch does not imply that every host can apply it.",
+    "The selected r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f was recorded at source 928b485ffbe6e17d79b41d307ae8b6275489b37a. Its .0085 rate and LR cosine differ from the canonical constant-.0002 card.",
+    "Toy component hosts retain their original direct-particle, conditional, joint or reconstruction objectives. A shorter host horizon scales the declared schedules through the explicit binding; an external execution cap does not silently redefine them.",
+    "The modern training adaptation, historical fixed R1/R2 swap and their recorded sources cannot pool successful cells or establish a single-change comparison."
+  ],
+  "references": [
+    {
+      "title": "The GAN is dead; long live the GAN! A Modern GAN Baseline",
+      "url": "https://arxiv.org/abs/2501.05441",
+      "component": "RpGAN with R1/R2 and the modern training baseline; Forge adapts its training to toy hosts."
+    },
+    {
+      "title": "Which Training Methods for GANs do actually Converge?",
+      "url": "https://arxiv.org/abs/1801.04406",
+      "component": "Zero-centered input-gradient regularization; not the full repository formulation."
+    },
+    {
+      "title": "Adam: A Method for Stochastic Optimization",
+      "url": "https://arxiv.org/abs/1412.6980",
+      "component": "Base optimizer. Guard, damping and controller rules are repository additions."
+    }
+  ],
+  "sources": [
+    "configs/forge/ideas/r3gan-stacked-training-toy-v1.json",
+    "configs/forge/ideas/k3p-r1r2-matched-v1.json",
+    "configs/forge/configurations/r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f.json",
+    "particlegan/recipe_schedules.py",
+    "particlegan/grad_regularizers.py",
+    "experiments/forge/taskrecipes.py",
+    "reports/forge/R3GAN_BASELINE_READOUT.md"
+  ]
+}

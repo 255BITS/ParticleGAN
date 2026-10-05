@@ -1,8 +1,82 @@
 <!-- Generated Forge family report -->
 
-# K3P — experiment results
+# K3P
 
 [← Family leaderboard](../technique-inventory.md)
+
+**Tags:** [adversarial-training](../technique-inventory.md#tag-adversarial-training) · [critic-gradient-penalty](../technique-inventory.md#tag-critic-gradient-penalty) · [optimizer-interventions](../technique-inventory.md#tag-optimizer-interventions)
+
+## Technique overview
+
+K3P couples a changing critic penalty to the critic's applied learning rate. At high rates it suppresses real-data input gradients and caps fake gradients; as the rate falls it adds real/fake caps and pulls the critic's input gradients toward an averaged critic. Its Adam wrappers also limit critic gradient spikes and damp inconsistent updates to sparsely sampled latent rows. These extra rules are repository-specific.
+
+## Simplified pseudocode
+
+G: generator; D: critic; x: real batch; z: latent batch sampled from the task's prior; fake: generated batch; d: number of coordinates per critic input; g_r and g_f: critic input gradients on real and fake samples; D_bar: critic parameter exponential moving average; coefficient: penalty strength; cap: allowed input-gradient norm. mean averages samples, norm is Euclidean, relu(a)=max(a,0), softplus(a)=log(1+exp(a)), and detach stops gradients. The sketch is a scalar GAN loop; joint, conditional and reconstruction hosts supply their own inputs and auxiliary objectives. In the K3P blend, r is last applied critic rate / largest recorded critic rate, f is the network learning-rate floor fraction, and s is the early-penalty weight. rho is the latent-row response multiplier and max_rate is its observation-rate cutoff.
+
+```text
+For each training iteration:
+  Set role-specific learning rates and noise from the resolved recipe or policy.
+  Draw real x and latent z; fake = detach(G(z) + generated-output training noise).
+  Dn(u) evaluates D(u + fresh critic-input noise on each forward); D_bar_n uses the same noise law with fresh draws.
+  L_D = mean(softplus(Dn(fake) - Dn(x))).
+  g_r = gradient(Dn(x), x); g_f = gradient(Dn(fake), fake), using detached input copies.
+  A = mean(norm(g_r)^2 / d) + mean(relu(norm(g_f)/sqrt(d) - cap)^2).
+  B_caps = mean(relu(norm(g_r)-cap)^2) + mean(relu(norm(g_f)-cap)^2).
+  r = last applied critic LR / largest recorded critic LR; f = resolved network LR floor.
+  s = max(0, min(1, 2*r) - 2*f) / (1 - 2*f); before any critic step, s = 1.
+  If s < 1:
+    When the anchor first becomes active, copy D into D_bar and set proximity = 0 for that call.
+    Subsequently proximity = mean(norm(g_r - gradient(D_bar_n,x))^2 / d).
+  L_D += coefficient/2 * (s*A + (1-s)*(B_caps + anchor_weight*proximity)).
+    At s=1 evaluate A alone; no anchor is evaluated or started.
+    Lazy cadence k applies the penalty every k-th step at k times its declared strength.
+  Backpropagate L_D; apply the critic spike guard, then take the critic Adam step and update its record/anchor.
+  Freeze D parameters; draw a fresh latent batch and recompute fake and both critic scores.
+  L_G = mean(softplus(Dn(x) - Dn(G(z) + generated-output training noise))).
+  Backpropagate L_G through G and the learned prior.
+  For an eligible sparse latent table with existing Adam state: if some rows received no gradient and
+    cumulative observed-row fraction < max_rate, multiply each row's Adam response by rho.
+    rho = .75 + .25*cos(current gradient, last observed gradient); rho = 1 without row history.
+  Apply direct sample-particle response gain only when the host explicitly binds that separate parameter group.
+  Take the generator/prior Adam step; maintain configured averages; score with the task's declared law.
+```
+
+## Training details
+
+| Characteristic | Behavior |
+| --- | --- |
+| Adversarial loss | Paired relativistic logistic on raw scores: D minimizes mean softplus(D(fake)-D(real)); G reverses the difference. Input noise wraps the critic in both losses and the penalty; fresh noise is drawn per forward. Joint and auxiliary losses are host-owned. |
+| Optimizer | K3PCriticAdam and K3PGeneratorAdam wrap PyTorch Adam. Selected moments are beta1=0, beta2=.999, AMSGrad off. The wrappers include critic observation/anchor updates, spike guarding, eligible A2 and optional direct-particle response. |
+| Learning rates and annealing | The public base rate is .00425, critic multiplier 1 and latent-prior multiplier 2. The selected whole configuration uses .006375 and prior multiplier 1. G/D hold through 60% of min(resolved task horizon,1600), then cosine-decay to 1%; the prior follows its full resolved horizon to 5%. Hosts may explicitly bind another horizon or transition. |
+| Parameter-gradient clipping | The spike guard is adaptive per-tensor clipping: after 200 prior Adam steps, scale a critic tensor's gradient down when its RMS exceeds 5 times the RMS predicted by Adam's bias-corrected second moment. It is separate from the input-gradient loss. The family adds no fixed global norm clip. |
+| Critic penalties and anchors | Strength 1 and cap 1 in the public/selected base. A uses RMS input-gradient units: real squared norm/d and fake excess norm/sqrt(d). B uses L2 caps on both sides plus the dimension-normalized critic-gradient proximity term. The applied critic LR controls their handover; constant LR keeps A active. |
+| Damping and update guards | A2 is sparse latent-row damping, with rho in [.5,1] and max_rate=.5. It changes the row's Adam response while preserving the raw second-moment update. Nonstandardized row-local priors can expose this hook; standardized or unsupported hosts cannot. Direct sample-particle gain is a separate host-bound rule, up to 2 times LR when centered gradients agree. |
+| Training and sampling noise | Base critic-input standard deviation .5 decreases linearly to zero over the first 10% of the resolved horizon. Generated-output training noise rises from zero to .029 over its first 20%. Latent MoG sampling noise is task-owned. Clean gates remove generated-output noise according to their declared sampling law. |
+| Parameter averaging and serving | The critic anchor starts at the first blended penalty call, then its parameter EMA has decay .999. Generator/prior averaging is configured at .995 where the host implements it; selected ordinary gates use live weights, not an automatic EMA score. |
+
+## Configuration differences
+
+- Each result retains its executed source, recipe, task prior, initialization, budget and sampling law. These descriptions do not change or requalify recorded measurements.
+- Task-owned objectives and active components matter: direct sample particles, learned latent rows and a generator network are different parameter roles. A declared recipe switch does not imply that every host can apply it.
+- The current selected candidate is k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c, recorded at source 928b485ffbe6e17d79b41d307ae8b6275489b37a. Its .006375 rate and prior multiplier 1 differ from the canonical public defaults.
+- The critic's EMA anchor is a training regularizer; the generator/prior EMA is a separate optional evaluation state. Neither supplies another configuration's gate credit.
+
+<details>
+<summary>Implementation and recipe sources</summary>
+
+These links support the explanation. Recorded results below remain bound to their own executed source.
+
+- [configs/forge/ideas/k3p.json](../../../configs/forge/ideas/k3p.json)
+- [configs/forge/configurations/k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c.json](../../../configs/forge/configurations/k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c.json)
+- [particlegan/recipes.py](../../../particlegan/recipes.py)
+- [particlegan/grad_regularizers.py](../../../particlegan/grad_regularizers.py)
+- [particlegan/k3p.py](../../../particlegan/k3p.py)
+- [particlegan/gan_loss.py](../../../particlegan/gan_loss.py)
+- [particlegan/policy.py](../../../particlegan/policy.py)
+- [https://github.com/255BITS/ParticleGAN/blob/928b485ffbe6e17d79b41d307ae8b6275489b37a/particlegan/k3p.py](https://github.com/255BITS/ParticleGAN/blob/928b485ffbe6e17d79b41d307ae8b6275489b37a/particlegan/k3p.py)
+
+</details>
 
 Generated from one selected configuration per runtime. Recorded verdicts retain their original scientific contracts; grouping them under current views grants no new qualification.
 
@@ -2351,3 +2425,9 @@ python reports/forge/regenerate_technique_inventory.py
 ```
 
 This page is generated alongside the leaderboard. Register new source evidence before refreshing; editing a page cannot change a verdict or earn qualification.
+
+## References
+
+- [Adam: A Method for Stochastic Optimization](https://arxiv.org/abs/1412.6980). Base optimizer. Guard, damping and controller rules are repository additions.
+- [The relativistic discriminator: a key element missing from standard GAN](https://arxiv.org/abs/1807.00734). Related paired relativistic adversarial objective.
+- [Which Training Methods for GANs do actually Converge?](https://arxiv.org/abs/1801.04406). Zero-centered input-gradient regularization; not the full repository formulation.

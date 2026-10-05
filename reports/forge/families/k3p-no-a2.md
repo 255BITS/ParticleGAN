@@ -1,8 +1,76 @@
 <!-- Generated Forge family report -->
 
-# K3P without A2 — experiment results
+# K3P without A2
 
 [← Family leaderboard](../technique-inventory.md)
+
+**Tags:** [adversarial-training](../technique-inventory.md#tag-adversarial-training) · [critic-gradient-penalty](../technique-inventory.md#tag-critic-gradient-penalty) · [optimizer-interventions](../technique-inventory.md#tag-optimizer-interventions) · [structural-ablation](../technique-inventory.md#tag-structural-ablation)
+
+## Technique overview
+
+K3P without A2 disables the extra damping of sparsely visited learned latent rows. Normally A2 reduces a row's Adam response when its current gradient disagrees with its previous observed gradient. With A2 disabled, the latent rows use the ordinary inherited Adam response. The critic penalty, spike guard, schedules and training noise remain.
+
+## Simplified pseudocode
+
+G: generator; D: critic; D_bar: exponential moving average of the critic; x: real samples; z: sampled latent input; d: number of coordinates per critic input. norm is the Euclidean norm, mean averages samples, relu(a)=max(a,0), and softplus(a)=log(1+exp(a)). The training sketch shows the scalar GAN host; joint/auxiliary hosts add task-owned objectives. Remove A2 latent-row damping. stop_gradient detaches generated values from G and the prior during the critic update. When critic-input noise is enabled, D_bar is evaluated through a matching fresh-noise wrapper for the anchor term.
+
+```text
+Start from the K3P recipe and apply: latent_row_damping = disabled
+For each training iteration:
+  Set G/D learning rates from their network schedule; set prior rate from its full-budget schedule.
+  Draw real x and latent z from the task; fake = stop_gradient(G(z)) for the critic update.
+  Evaluate D through the scheduled input-noise wrapper (fresh noise per forward); add generated-output training noise to fake.
+  L_D = mean(softplus(D(fake) - D(x))).
+  g_r = gradient of D(x) with respect to x; g_f = gradient of D(fake) with respect to fake.
+  A = mean(norm(g_r)^2 / d) + mean(relu(norm(g_f)/sqrt(d) - cap)^2).
+  r = last applied critic LR / largest applied critic LR; f = network LR floor.
+  s = max(0, min(1, 2*r) - 2*f) / (1 - 2*f); before the first critic step, s = 1.
+  If s < 1 first occurs, copy D into D_bar and set proximal_term = 0; subsequently use
+    proximal_term = anchor_weight * mean(norm(g_r - gradient(D_bar,x))^2 / d).
+  B = mean(relu(norm(g_r)-cap)^2) + mean(relu(norm(g_f)-cap)^2) + proximal_term.
+  Every k-th penalty call, add k*coefficient/2 * (s*A + (1-s)*B); add zero on other calls (default k=1).
+  Backpropagate L_D; after warmup, scale each critic gradient tensor down if its RMS exceeds
+    guard_ratio * RMS expected from Adam's bias-corrected second moment; take the critic Adam step.
+  Once the anchor has started, update D_bar as 0.999*D_bar + 0.001*D after each critic step.
+  Resample latent input and recompute differentiable fake and critic scores using the updated D; retain declared training noise.
+  L_G = mean(softplus(D(x) - D(fake))); backpropagate through G and learned prior with D fixed.
+  Update learned latent rows without A2 damping.
+  Retain any host-eligible direct-particle response gain; update G and prior.
+  Maintain any configured moving averages; score with the task's declared weights and sampling law.
+```
+
+## Training details
+
+| Characteristic | Behavior |
+| --- | --- |
+| Adversarial loss | Paired relativistic logistic by default: critic mean softplus(D(fake)-D(real)); generator reverses that score difference. Task-owned joint or reconstruction terms remain separate. |
+| Optimizer | Inherited K3P Adam wrappers for critic and generator/prior, with recipe-specific moments and per-role rates. This ablation does not switch to native Adam without interventions. |
+| Learning rates and annealing | Inherited scheduled training. G/D use the network cosine schedule, capped at a configured horizon; the learned prior uses its full-budget cosine schedule. In the public baseline, rates hold through 60% of their horizon before decaying to their floors. Resolved recorded configurations own exact rates and horizons. |
+| Parameter-gradient clipping | Adaptive per-tensor critic gradient scaling remains via the spike guard; it is clipping-like and uses Adam second-moment history rather than a fixed global norm threshold. No generic global gradient-norm clipping is added by this candidate. Input-gradient penalties regularize the objective separately. |
+| Critic penalties and anchors | Enabled: learning-rate-dependent K3P blend of early real-gradient regularization/fake caps and late real/fake caps plus a critic-gradient anchor. With lazy cadence k, apply k times this penalty every k-th call and zero otherwise; default k=1. |
+| Damping and update guards | A2 is disabled by latent_damping_max_rate=0. The critic spike guard remains. Direct sample-particle gain is a separate inherited, host-dependent mechanism; it does not automatically apply to every learned prior. |
+| Training and sampling noise | Inherited scheduled critic-input noise and generated-output training noise. Prior sampling noise belongs to the task. Public clean sampling does not automatically include the generated-output training noise. Critic-input noise is independently drawn on each forward of the wrapped critic, including gradient-penalty evaluation. |
+| Parameter averaging and serving | The critic anchor and optional generator/prior moving averages remain. Gates use their recorded serving law, generally live weights rather than generator EMA. |
+
+## Configuration differences
+
+- The candidate makes one named mechanism removal; it does not replace task priors, initialization, training budgets, or numerical criteria.
+- Settings above describe the declared ablation and public K3P baseline. Each recorded result retains its executed recipe/source; current implementation descriptions do not requalify historical measurements.
+- Penalty laziness, exact noise magnitudes, role-specific rates, moment settings, and host-eligible controls must be read from the selected configuration bindings rather than assumed to be identical across tasks.
+
+<details>
+<summary>Implementation and recipe sources</summary>
+
+These links support the explanation. Recorded results below remain bound to their own executed source.
+
+- [configs/forge/ideas/k3p-a2-off-native-diagnostic.json](../../../configs/forge/ideas/k3p-a2-off-native-diagnostic.json)
+- [particlegan/recipes.py](../../../particlegan/recipes.py)
+- [particlegan/k3p.py](../../../particlegan/k3p.py)
+- [particlegan/grad_regularizers.py](../../../particlegan/grad_regularizers.py)
+- [particlegan/gan_loss.py](../../../particlegan/gan_loss.py)
+- [particlegan/training.py](../../../particlegan/training.py)
+
+</details>
 
 Generated from one selected configuration per runtime. Recorded verdicts retain their original scientific contracts; grouping them under current views grants no new qualification.
 
@@ -2350,3 +2418,9 @@ python reports/forge/regenerate_technique_inventory.py
 ```
 
 This page is generated alongside the leaderboard. Register new source evidence before refreshing; editing a page cannot change a verdict or earn qualification.
+
+## References
+
+- [Adam: A Method for Stochastic Optimization](https://arxiv.org/abs/1412.6980). Base optimizer; the spike guard, A2 rule and K3P handover are repository-specific additions.
+- [The relativistic discriminator: a key element missing from standard GAN](https://arxiv.org/abs/1807.00734). Paired relativistic adversarial loss.
+- [Which Training Methods for GANs do actually Converge?](https://arxiv.org/abs/1801.04406). Related work on zero-centered input-gradient regularization; it is not a paper specifying the full K3P mechanism or this ablation.
