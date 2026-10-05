@@ -1,0 +1,52 @@
+{
+  "extra_noise_assumed": false,
+  "gif_sha256": "014b833ad65a9831adea83f736262df5667b03c467976f2d6be5fba8cb5cb190",
+  "illustrated_distribution": "original_saved_live_coordinates",
+  "illustrated_goal": "Live coordinate travel >=0.30 and critic gradient median <=1.0 at the final five observations; no pole-balance gate.",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "eb40e7f46e65e73445bd9513928d0c4c592d5e023114be238cc3a1a9a744e888",
+  "optimizer_updates_added": 0,
+  "original_renderer_receipt_sha256": "1951faab38b8bca360f9284bb02c441efdd1583ca1c8019ae590196b9cd0f82f",
+  "prior_substitution": {
+    "cohort": "noisy_particle_prior_tier1_686_v1",
+    "eval_output_noise": "not_applied_to_measurement",
+    "latent_prior_sampled": false,
+    "ordinary_parent_credit": false,
+    "owner_compatibility_proven": false,
+    "parent_raw_sha256": "55ac2d3883ba6c173da304fa7f10648a0b559c202fc35b451b1d0c8870f61cf5",
+    "parent_task_id": "two_pole",
+    "prior_kind": "noisy_particle_cloud",
+    "public_prior_type": "particlegan.noisy_particle_prior.NoisyParticlePrior",
+    "sampling_law": "learned_particles_and_critic_gradient",
+    "sigma": 0.0,
+    "sigma_units": "raw_latent_coordinates",
+    "variant_id": "two_pole_noisy_prior686_v1",
+    "weights": "live"
+  },
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "5286f66017afda82a96440e7347a847d33004a3fd926ba0bcf8e745dd8e34567",
+  "sampling_draws_added": 0,
+  "saved_particle_observations_sha256": "2697507db4044bd0229a48a8ac5487a1214734e493d45cb5edfa0f16d7905003",
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {},
+  "target_geometry_sha256": "4a6623126813b1d2060dd1795366cfc36fcf1e711a10cb1d56d9000c8aa10818",
+  "task_id": "two_pole_noisy_prior686_v1",
+  "visual_qa": {
+    "first_and_last_frames_reviewed": true,
+    "frame_count": 9,
+    "goal_and_gate_labels_legible": true
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "extra_noise_assumed": false,
+  "gif_sha256": "78af7fc08ed3708f6f635b19d538314331e553052153ecf8c7afd524040c754b",
+  "illustrated_distribution": "original_scored4096_samples_and_declared_target_geometry",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "f3e64304a64a1f309b1741c247a58a3a9f7cfd62210a0108a1f94390624d694a",
+  "optimizer_updates_added": 0,
+  "original_renderer_receipt_sha256": "ca5cbc11861f74ae1fca627ff589ccf8c350245c7c032f5f670af12068f84c4e",
+  "prior_substitution": {
+    "cohort": "noisy_particle_prior_tier1_686_v1",
+    "eval_output_noise": "clean",
+    "latent_prior_sampled": true,
+    "ordinary_parent_credit": false,
+    "owner_compatibility_proven": false,
+    "parent_raw_sha256": "e6b53ba29fbe9ead47e842cfa01e40ba57821bd1b4e6aa5b297631fa0f6525c1",
+    "parent_task_id": "ring16_acquisition",
+    "prior_kind": "noisy_particle_cloud",
+    "public_prior_type": "particlegan.noisy_particle_prior.NoisyParticlePrior",
+    "sampling_law": "public_prior_without_output_noise",
+    "sigma": 0.025,
+    "sigma_units": "raw_latent_coordinates",
+    "variant_id": "ring16_acquisition_noisy_prior686_v1",
+    "weights": "live"
+  },
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "5286f66017afda82a96440e7347a847d33004a3fd926ba0bcf8e745dd8e34567",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "observed-samples.pt": "85bddfe2d9133cb6b4fffd5809f838e7c3d9fba6bdce82c282d35b66e547f125"
+  },
+  "target_geometry_sha256": "5e863829436d8ce7e3c18e21b3a3ddf4abc11fc5824d46ab7de45917e81fd9d2",
+  "task_id": "ring16_acquisition_noisy_prior686_v1",
+  "visual_qa": {
+    "first_and_last_frames_reviewed": true,
+    "frame_count": 9,
+    "goal_and_gate_labels_legible": true
+  }
+}

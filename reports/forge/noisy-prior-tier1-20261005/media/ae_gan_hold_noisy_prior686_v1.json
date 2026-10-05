@@ -1,0 +1,52 @@
+{
+  "extra_noise_assumed": false,
+  "gif_sha256": "8c6ead506ad03e2a16773b0cb3e074c70dda51a26c535cdadfa24c47e00470d9",
+  "illustrated_distribution": "original_saved_unconditional_generation_paired_reconstruction_and_target",
+  "illustrated_goal": "Original live unconditional hold <=0.35 and paired reconstruction MSE <=0.05 at the final five observations; both saved decoder outputs shown.",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "f07c19d965f2ae788577aafcd0112a41ed5c073c73cf1720bdd2553c576b05e8",
+  "optimizer_updates_added": 0,
+  "original_renderer_receipt_sha256": "e8c8c5477040f9bac80efbae6aa81a70a8ab451d2c662cd4ab802e788db82b13",
+  "prior_substitution": {
+    "cohort": "noisy_particle_prior_tier1_686_v1",
+    "eval_output_noise": "public_recipe_schedule",
+    "latent_prior_sampled": true,
+    "ordinary_parent_credit": false,
+    "owner_compatibility_proven": false,
+    "parent_raw_sha256": "53a400c3f2b27ef347076f3cc603345e1442d2d8f97f8052f0b9496ba35bae79",
+    "parent_task_id": "ae_gan_hold",
+    "prior_kind": "noisy_particle_cloud",
+    "public_prior_type": "particlegan.noisy_particle_prior.NoisyParticlePrior",
+    "sampling_law": "generated_and_reconstructed_prior_with_scheduled_output_noise",
+    "sigma": 0.025,
+    "sigma_units": "raw_latent_coordinates",
+    "variant_id": "ae_gan_hold_noisy_prior686_v1",
+    "weights": "live"
+  },
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "5286f66017afda82a96440e7347a847d33004a3fd926ba0bcf8e745dd8e34567",
+  "sampling_draws_added": 0,
+  "saved_ae_observations_sha256": "2579b8433f0557d0f06fe590488e7af7f5df64678b82e0f2c31e3b8b49e47589",
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {},
+  "target_geometry_sha256": "6e5f35073acb406b11b21d0b9fe54bb9aac4fb97b198fd22be5c469ed752d18c",
+  "task_id": "ae_gan_hold_noisy_prior686_v1",
+  "visual_qa": {
+    "first_and_last_frames_reviewed": true,
+    "frame_count": 9,
+    "goal_and_gate_labels_legible": true
+  }
+}

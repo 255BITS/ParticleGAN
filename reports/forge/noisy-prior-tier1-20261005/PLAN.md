@@ -1,3 +1,5 @@
+> Archived type-only plan. Completed results are in [README.md](README.md). Authenticated message717 supersedes this scientific plan with separate positive Noisy025 and existing-MoG tracks. The command below requires the documented copied-module AE admission handling; it is not a one-command four-case reproduction.
+
 # Atlas with NoisyParticlePrior: fixed Tier 1 experiment
 
 This isolated experiment asks whether the public NoisyParticlePrior type supports the fixed toy hosts and the full Atlas controls, then whether the runnable hosts pass their original numerical gates. It freezes one Atlas configuration and seed 0. It changes the prior type while preserving the parent sampling widths, networks, data, initialization, losses, observation clocks and budgets.

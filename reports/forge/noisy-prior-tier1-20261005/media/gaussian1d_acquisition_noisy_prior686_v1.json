@@ -1,0 +1,52 @@
+{
+  "extra_noise_assumed": false,
+  "gif_sha256": "4eb93f659c1b047b32c70b6ca114d00ac4ecf08849f8dae3d7bfe98bc98e09ba",
+  "illustrated_distribution": "original_scored4096_samples_and_declared_target_geometry",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "b4951d68966b8b561cdea2668cd5a1c6309e01f8582b280b139746d1dfaa1d0c",
+  "optimizer_updates_added": 0,
+  "original_renderer_receipt_sha256": "0dddc3014692aa2e1f57f45407e21af5e863e6975130d37e7a11a1b0adb93f8d",
+  "prior_substitution": {
+    "cohort": "noisy_particle_prior_tier1_686_v1",
+    "eval_output_noise": "clean",
+    "latent_prior_sampled": true,
+    "ordinary_parent_credit": false,
+    "owner_compatibility_proven": false,
+    "parent_raw_sha256": "b31df784dbe09357810a191247bbb0b17d3bb67918595334d16ff728fd5c2d13",
+    "parent_task_id": "gaussian1d_acquisition",
+    "prior_kind": "noisy_particle_cloud",
+    "public_prior_type": "particlegan.noisy_particle_prior.NoisyParticlePrior",
+    "sampling_law": "public_prior_without_output_noise",
+    "sigma": 0.025,
+    "sigma_units": "raw_latent_coordinates",
+    "variant_id": "gaussian1d_acquisition_noisy_prior686_v1",
+    "weights": "live"
+  },
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "5286f66017afda82a96440e7347a847d33004a3fd926ba0bcf8e745dd8e34567",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "observed-samples.pt": "f57f0f73618d0b62b99062d9dbbf6913f74538bb3e9c403e74a9383aa204b6ef"
+  },
+  "target_geometry_sha256": "1b23570b62828bd336b92df0a3414953bbf52f262cc0b334b587744f1cc81bb8",
+  "task_id": "gaussian1d_acquisition_noisy_prior686_v1",
+  "visual_qa": {
+    "first_and_last_frames_reviewed": true,
+    "frame_count": 9,
+    "goal_and_gate_labels_legible": true
+  }
+}
