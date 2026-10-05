@@ -6,7 +6,7 @@ from pathlib import Path
 import pytest
 import torch
 
-from experiments.forge.clockfree import run_clockfree, source_audit
+from experiments.forge.clockfree import run_clockfree, source_audit, schedule_blockers
 from experiments.forge.views import grade_result, load_tasks
 
 
@@ -55,6 +55,18 @@ def test_delayed_beta2_schedule_fails_even_with_expected_branch_differences(sche
     original = schedules.apply_optimizer_schedule
     monkeypatch.setattr(schedules, "apply_optimizer_schedule",
                         lambda step, recipe, optimizer: original(max(0, step - 100), recipe, optimizer))
+    grade = grade_result(task, run_clockfree(request, task, tmp_path, "cpu"))
+    assert grade["status"] == "FAIL", grade
+    assert grade["metrics"]["maximum_schedule_error"] > 1e-12
+    assert grade["metrics"]["schedule_replay_state_mismatches"] > 0
+
+
+def test_delayed_lr_cosine_fails_in_its_active_interior(scheduled, tmp_path, monkeypatch):
+    import particlegan.training as training
+    task, request = scheduled
+    original = training.learning_rate_scales
+    monkeypatch.setattr(training, "learning_rate_scales",
+                        lambda step, recipe: original(max(0, step - 100), recipe))
     grade = grade_result(task, run_clockfree(request, task, tmp_path, "cpu"))
     assert grade["status"] == "FAIL", grade
     assert grade["metrics"]["maximum_schedule_error"] > 1e-12
@@ -175,3 +187,14 @@ def test_unsupported_periodic_control_blocks_before_training(scheduled):
     task, request = scheduled
     request["candidate"]["recipe_overrides"]["reg_every"] = 2
     assert any("periodic" in reason for reason in adapter_preflight(task, request["candidate"]))
+
+
+def test_scheduled_activation_cannot_hide_unsupported_penalty_counters():
+    from particlegan import Recipe
+    recipe = Recipe(critic_formulation="k3p", reg_arm="b_cap", reg_coeff=0,
+                    reg_coeff_end=2, reg_every=2).to_dict()
+    assert any("periodic" in reason for reason in schedule_blockers(recipe, {}))
+    # The conservative source audit also retains an implicit KA2 switch if an
+    # activation is represented by a future or unvalidated declaration.
+    recipe.update(reg_arm=None, critic_formulation="ka2", reg_every=1)
+    assert any("KA2 switches" in reason for reason in schedule_blockers(recipe, {}))

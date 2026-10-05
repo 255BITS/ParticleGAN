@@ -9,7 +9,7 @@
     "warmup_steps": 199,
     "probe_steps": 4,
     "step_label_offset": 8192,
-    "original_schedule_horizon": 512,
+    "original_schedule_horizon": 256,
     "perturbed_horizon": 4096,
     "evaluation_samples": 16,
     "schedule_audit_parent": {

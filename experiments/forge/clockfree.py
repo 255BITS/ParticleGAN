@@ -42,9 +42,10 @@ def source_audit(recipe, extensions):
         dependencies.append("Adam beta2 cosine depends on completed steps and horizon")
     if recipe.get("reg_coeff_end") is not None and recipe["reg_coeff_end"] != recipe["reg_coeff"]:
         dependencies.append("critic coefficient cosine depends on optimizer updates and horizon")
-    if recipe["reg_coeff"] and recipe["reg_every"] != 1:
+    penalty_active = recipe["reg_coeff"] > 0 or (recipe.get("reg_coeff_end") or 0) > 0
+    if penalty_active and recipe["reg_every"] != 1:
         dependencies.append("lazy critic penalty uses a periodic update counter")
-    if recipe["reg_coeff"] and recipe.get("reg_arm") is None and recipe.get("critic_formulation", "ka2") == "ka2":
+    if penalty_active and recipe.get("reg_arm") is None and recipe.get("critic_formulation", "ka2") == "ka2":
         dependencies.append("KA2 switches from pure A to blended penalty at call 800")
     if recipe["d_guard_ratio"] and recipe["d_guard_min_steps"]:
         dependencies.append("critic guard releases at a fixed minimum update count")
