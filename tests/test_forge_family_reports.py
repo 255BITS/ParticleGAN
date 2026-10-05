@@ -10,6 +10,22 @@ from experiments.forge.family_reports import build_progress, generated_pages, re
 from experiments.forge.views import task_evaluation_fingerprint, task_execution_fingerprint
 
 
+def test_schedule_contract_prose_describes_operational_equations_and_normalized_replay():
+    from experiments.forge.family_reports import evaluation_notes
+    evaluation = {"kind": "schedule_contract", "conditions": ["step_label", "horizon", "evaluation_cadence", "restart"],
+                  "schedule_tolerance": 1e-12, "guard_relative_tolerance": 1e-6, "clockfree_claim": False}
+    original = deepcopy(evaluation)
+    prose = " ".join(evaluation_notes(evaluation))
+    assert "independent equations" in prose and "Schedule-normalized replay" in prose
+    assert all(name in prose for name in ("LR", "input/output noise", "Adam beta2", "critic-coefficient", "per-parameter Adam history"))
+    assert "1e-12" in prose and "1e-06" in prose
+    assert "Passing grants no clock-free claim" in prose
+    assert "Exact state/output parity for:" not in prose
+    assert evaluation == original
+    strict = " ".join(evaluation_notes({"kind": "clockfree_audit", "conditions": ["step_label", "horizon"]}))
+    assert strict == "Exact state/output parity for: step_label, horizon; bound source audit required."
+
+
 @pytest.fixture
 def report(tmp_path):
     contracts = {}

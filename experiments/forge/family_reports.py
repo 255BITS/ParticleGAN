@@ -127,7 +127,15 @@ def evaluation_notes(evaluation):
         notes.append(f"All {evaluation.get('observations', 24)} declared observations and final live metrics are required.")
     if evaluation.get("kind") == "native_accuracy":
         notes.append("Both sustained coverage and independent holdout accuracy must pass.")
-    if evaluation.get("conditions"):
+    if evaluation.get("kind") == "schedule_contract":
+        notes.append("Declared LR, input/output noise, Adam beta2 and critic-coefficient schedules must match "
+                     "independent equations; guard clipping must match actual per-parameter Adam history. "
+                     f"Schedule tolerance: {evaluation.get('schedule_tolerance')}; "
+                     f"guard relative tolerance: {evaluation.get('guard_relative_tolerance')}.")
+        notes.append("Schedule-normalized replay must retain exact learning state for step-label and horizon "
+                     "perturbations; restart and evaluation-cadence checks must retain exact learning state. "
+                     "Passing grants no clock-free claim.")
+    elif evaluation.get("conditions"):
         notes.append("Exact state/output parity for: " + ", ".join(evaluation["conditions"]) + "; bound source audit required.")
     for key, label in (("confirmation_checks", "Confirmation checks"), ("hold_budget", "Hold updates"),
                        ("extension_steps", "Extension updates"), ("recovery_deadline", "Recovery deadline in updates")):
