@@ -254,20 +254,22 @@ class Recipe:
                 raise ValueError(f"{key} must be a positive integer")
         if self.encoder_mode not in ("none", "ae", "categorical", "hard"):
             raise ValueError("encoder_mode must be none, ae, categorical, or hard")
-        if self.encoder_mode != "none" and self.prior_kind != "mog":
+        if self.encoder_mode != "none" and self.prior_kind not in ("mog", "noisy_particles"):
             raise ValueError("particle encoders require prior_kind='mog'")
         if self.distance_reduction not in ("sum", "mean"):
             raise ValueError("distance_reduction must be sum or mean")
         if self.model not in ("gan", "ddgan"):
             raise ValueError("model must be 'gan' or 'ddgan'")
-        if self.prior_kind not in ("particles", "mog"):
-            raise ValueError("prior_kind must be 'particles' or 'mog'")
+        if self.prior_kind not in ("particles", "mog", "noisy_particles"):
+            raise ValueError("prior_kind must be 'particles', 'mog' or 'noisy_particles'")
         if not math.isfinite(self.sigma_rel) or self.sigma_rel < 0:
             raise ValueError("sigma_rel must be finite and nonnegative")
         if type(self.standardize) is not bool:
             raise ValueError("standardize must be a boolean")
         if self.prior_kind == "particles" and self.sigma_rel != 0:
             raise ValueError("nonzero sigma_rel requires prior_kind='mog'")
+        if self.prior_kind == "noisy_particles" and (self.sigma_rel != 0 or self.standardize):
+            raise ValueError("noisy_particles requires explicit absolute sigma and raw unstandardized centers")
         if self.prior_kind == "mog" and self.num_particles < 2:
             raise ValueError("MoG calibration requires at least two particles")
         if self.conditioning not in ("scalar", "conditional", "ucd"):
@@ -302,8 +304,8 @@ class Recipe:
             raise ValueError("lr_control='stationarity' requires continuous_policy='dv12'")
         if type(self.particle_birth_death) is not bool:
             raise ValueError("particle_birth_death must be a boolean")
-        if self.particle_birth_death and self.prior_kind != "particles":
-            raise ValueError("particle_birth_death requires prior_kind='particles' (a trainable table)")
+        if self.particle_birth_death and self.prior_kind not in ("particles", "noisy_particles"):
+            raise ValueError("particle_birth_death requires an explicit trainable particle table prior")
         if (isinstance(self.serve_average, bool) or not isinstance(self.serve_average, (int, float))
                 or not math.isfinite(self.serve_average) or self.serve_average < 0):
             raise ValueError("serve_average must be a finite number >= 0")
@@ -436,6 +438,11 @@ class Recipe:
         options = {"num_particles": self.num_particles, "z_dim": self.z_dim,
                    "sigma_rel": self.sigma_rel, "standardize": self.standardize, **overrides}
         kind = options.pop("prior_kind", self.prior_kind)
+        if kind == "noisy_particles":
+            from .noisy_particle_prior import NoisyParticlePrior
+            if options.pop("sigma_rel") != 0 or "sigma" not in options:
+                raise ValueError("noisy_particles requires explicit absolute sigma, without spacing calibration")
+            return NoisyParticlePrior(**options)
         if kind == "mog":
             sigma_rel = options.pop("sigma_rel")
             if "sigma" in options:

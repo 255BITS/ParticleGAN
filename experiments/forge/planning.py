@@ -225,6 +225,11 @@ def resolve_idea(root: Path, idea_id: str, *, view_id: str | None = None,
         # The task owns its sampling law. Candidate priors describe the reference
         # formulation and cannot replace even a task's MoG width or code path.
         task["preflight_blockers"] = task_preflight(task, candidate, protocol, root=root, tasks=tasks)
+    from .atlas_two_pole import supporting_source_paths
+    from .noisy_prior_adapters import supporting_source_paths as noisy_supporting_source_paths
+    for task in all_tasks.values():
+        extra_sources.update(supporting_source_paths(task))
+        extra_sources.update(noisy_supporting_source_paths(task))
     source = inspect_source(root, sorted(extra_sources))
     candidate_revision = candidate_revision_for(source["digest"], candidate)
     runtime = runtime_manifest()
