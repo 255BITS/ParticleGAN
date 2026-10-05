@@ -123,7 +123,8 @@ def _optimizer_recipe_identity(recipe):
     """Keep newly implicit defaults compatible with frozen resolved recipes."""
     if not isinstance(recipe, dict):
         return recipe
-    recipe = dict(recipe)
+    from particlegan.recipe_compat import without_default_additions
+    recipe = without_default_additions(recipe)
     momentum = recipe.get("optimizer_momentum")
     if type(momentum) in (int, float) and momentum == 0:
         recipe.pop("optimizer_momentum")

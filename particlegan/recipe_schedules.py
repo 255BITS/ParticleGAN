@@ -2,7 +2,7 @@
 
 The schedules use completed optimizer updates against the declared recipe
 horizon. Sampling, penalty calls and externally shortened execution budgets do
-not advance or rescale that horizon. Plain Adam updates remain PyTorch Adam;
+not advance or rescale that horizon. Plain Adam uses the declared update law;
 its critic observer only counts steps for penalties and checkpoint receipts.
 """
 from copy import copy
@@ -69,6 +69,8 @@ def validate_plain_adam_state(optimizer, state):
         return
     if not isinstance(state, dict):
         raise ValueError("invalid plain Adam checkpoint")
+    if type(optimizer) is torch.optim.Adam and "tensorflow_v1" in state:
+        raise ValueError("TensorFlow-v1 checkpoint cannot load into native PyTorch Adam")
     if hasattr(optimizer, "record"):
         extra = state.get("regularizer")
         if (not isinstance(extra, dict) or set(extra) != {"optimizer_family", "record", "ema", "guard"}
@@ -103,14 +105,24 @@ def _load_critic_before(optimizer, state):
     return state
 
 
+def _load_native_before(optimizer, state):
+    validate_plain_adam_state(optimizer, state)
+
+
 def _load_critic_after(optimizer):
     optimizer.record.load_state_dict(optimizer.__dict__.pop("_plain_pending_record"))
 
 
 def make_plain_adam(recipe, params, *, critic=None, **options):
-    """Native Adam with disabled intervention metadata and a critic observer."""
-    optimizer = torch.optim.Adam(params, **options)
+    """Declared Adam law with disabled interventions and a critic observer."""
+    if recipe.adam_variant == "tensorflow_v1":
+        from .tensorflow_adam import TensorFlowV1Adam
+        optimizer = TensorFlowV1Adam(params, **options)
+    else:
+        optimizer = torch.optim.Adam(params, **options)
     optimizer.recipe_optimizer_family = "adam"
+    if type(optimizer) is torch.optim.Adam:
+        optimizer.register_load_state_dict_pre_hook(_load_native_before)
     if recipe.beta2_end is not None:
         for group in optimizer.param_groups:
             group["_recipe_initial_betas"] = tuple(group["betas"])

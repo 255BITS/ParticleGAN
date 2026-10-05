@@ -482,6 +482,33 @@ def test_editorial_refresh_cannot_hide_family_selection_structure_changes(eviden
     assert _outputs(root) == before
 
 
+def test_editorial_refresh_accepts_new_unmeasured_family_without_reselecting(evidence):
+    from experiments.forge.trainer_families import REGISTRY, scientific_row_hash
+    root, _ = evidence
+    registry = {"schema_version": 1, "families": [{"id": "bcap", "label": "BCap",
+                "canonical_candidate": "bcap", "candidates": ["bcap"]}]}
+    atomic_json(root / REGISTRY, registry)
+    baseline = read_json(publication.publish_current(root)["json"])
+    evidence_bytes = (root / publication.EVIDENCE_MANIFEST).read_bytes()
+    registry["families"].append({"id": "transfer", "label": "Transfer",
+                                "canonical_candidate": "new-transfer", "candidates": ["new-transfer"]})
+    atomic_json(root / REGISTRY, registry)
+    current = read_json(publication.refresh_publication(root)["json"])
+    assert current["trainer_family_registry"] == registry
+    assert [scientific_row_hash(row) for row in current["rows"]] == [scientific_row_hash(row) for row in baseline["rows"]]
+    assert current["configuration_rows"] == baseline["configuration_rows"]
+    assert (root / publication.EVIDENCE_MANIFEST).read_bytes() == evidence_bytes
+    registry["families"][-1]["active_search_by_backend"] = {"cpu": "new-search"}
+    assert not publication._presentation_registry_compatible(
+        baseline["trainer_family_registry"], registry, baseline)
+    registry["families"][-1].pop("active_search_by_backend")
+    # Binding an existing displayed candidate to that new family is forbidden.
+    registry["families"][-1]["candidates"] = [baseline["rows"][0]["candidate_id"]]
+    registry["families"][-1]["canonical_candidate"] = baseline["rows"][0]["candidate_id"]
+    assert not publication._presentation_registry_compatible(
+        baseline["trainer_family_registry"], registry, baseline)
+
+
 def _unregistered_unmeasured_configuration(root):
     path = root / publication.CURRENT_PREFIX.with_suffix(".json")
     report = read_json(path)

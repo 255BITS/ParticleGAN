@@ -1,0 +1,28 @@
+{
+  "changed_factors": [
+    "Dense TensorFlow-v1 Adam law with independent G/D moments and epsilon",
+    "Least-squares fake/real/G labels [-1,1,1], including the joint encoder stream",
+    "Constant whole-update rates; no inferred historical decay or additional critic penalty",
+    "Learned prior has explicit beta (0,.999), epsilon 1e-8 and multiplier 2; task owns its law"
+  ],
+  "claim_contract": {
+    "sampling_law": "task_declared",
+    "schedule": "scheduled",
+    "scoring_weights": "live"
+  },
+  "execution_path": "public_trainer",
+  "guide": "docs/forge-search-spaces.md",
+  "id": "halloween-optimizer-loss-v1",
+  "mechanism_class": "structural",
+  "mechanism_rationale": "Optimizer/loss transfer from an unbound historical config; architecture, auxiliary AlphaGAN eloss and original trained outcome are outside scope. Constant LR is explicit. No qualification or default adoption.",
+  "prior_art": [
+    "reports/forge/hypergan-search-audit/halloween-optimizer-loss.json"
+  ],
+  "recipe_overrides": {},
+  "recipe_preset": "halloween",
+  "requires_capabilities": [
+    "learned_locations",
+    "named_rng"
+  ],
+  "schema_version": 3
+}

@@ -20,6 +20,8 @@ def technique_signature(value):
 
     recipe = _recipe(value)
     resolved = asdict(recipe)
+    from particlegan.recipe_compat import without_default_additions
+    resolved = without_default_additions(resolved)
     fixed = {name: item for name, item in resolved.items()
              if name != "name" and recipe_field_owner(name) == "technique"}
     prior_betas = recipe.prior_betas or recipe.betas
@@ -70,6 +72,16 @@ def technique_signature(value):
         mechanisms["dualnorm_momentum"] = recipe.optimizer_momentum > 0
     if recipe.optimizer_family in {"dualnorm_D_only", "particle_rownorm_only"}:
         mechanisms["hybrid_adam_rate_override"] = recipe.optimizer_adam_lr is not None
+    critic_betas = recipe.d_betas or recipe.betas
+    adam_critic = recipe.optimizer_family in {"formulation", "adam", "ada_nsgda", "particle_rownorm_only"}
+    if adam_critic and [b > 0 for b in critic_betas] != mechanisms["network_moments"]:
+        mechanisms["critic_moments"] = [b > 0 for b in critic_betas]
+    if recipe.beta2_end is not None:
+        critic_changing = recipe.beta2_end != critic_betas[1]
+        if critic_changing != mechanisms["beta2_schedule"]["network_changing"]:
+            mechanisms["critic_beta2_changing"] = critic_changing
+    if recipe.lr_schedule == "exponential":
+        mechanisms["exponential_decay"] = recipe.lr_decay_rate < 1
     contract = {"schema_version": 1, "fixed_recipe_fields": fixed, "mechanisms": mechanisms}
     return {**contract, "digest": stable_hash(contract)}
 
@@ -77,10 +89,10 @@ def technique_signature(value):
 def validate_same_technique(base, trial):
     """Reject structural changes hidden in otherwise searchable Recipe knobs."""
     before, after = technique_signature(base), technique_signature(trial)
-    changed = [name for name in before["mechanisms"]
-               if before["mechanisms"][name] != after["mechanisms"][name]]
-    changed += [f"Recipe.{name}" for name in before["fixed_recipe_fields"]
-                if before["fixed_recipe_fields"][name] != after["fixed_recipe_fields"][name]]
+    changed = [name for name in before["mechanisms"].keys() | after["mechanisms"].keys()
+               if before["mechanisms"].get(name) != after["mechanisms"].get(name)]
+    changed += [f"Recipe.{name}" for name in before["fixed_recipe_fields"].keys() | after["fixed_recipe_fields"].keys()
+                if before["fixed_recipe_fields"].get(name) != after["fixed_recipe_fields"].get(name)]
     if changed:
         raise ValueError("search changes technique mechanisms: " + ", ".join(changed)
                          + "; declare a structural idea instead of a hyperparameter trial")
@@ -105,6 +117,12 @@ def recipe_field_active(name, value, *, task=None):
     if name == "prior_betas" and recipe.optimizer_family not in {
             "formulation", "adam", "ada_nsgda", "dualnorm_D_only"}:
         return False
+    if name == "d_betas":
+        return recipe.optimizer_family in {"formulation", "adam", "ada_nsgda", "particle_rownorm_only"}
+    if name in {"lr_decay_rate", "lr_decay_steps"}:
+        return recipe.lr_schedule == "exponential" and recipe.lr_decay_rate < 1
+    if name in {"lr_anneal_start", "lr_floor", "network_lr_floor"} and recipe.lr_schedule != "cosine":
+        return False
     if name == "direct_particle_betas":
         return recipe.optimizer_family == "formulation" and (
             task is None or prior_control_binding(task)["representation"] == "direct_sample_coordinates")
@@ -118,6 +136,7 @@ def recipe_field_active(name, value, *, task=None):
         return recipe.reg_coeff_end is not None and recipe.reg_coeff_end != recipe.reg_coeff
     if name == "beta2_anneal_end":
         return recipe.beta2_end is not None and (recipe.beta2_end != recipe.betas[1]
+                or recipe.beta2_end != (recipe.d_betas or recipe.betas)[1]
                 or (prior_active and recipe.beta2_end != (recipe.prior_betas or recipe.betas)[1]))
     if name in {"lr_anneal_start", "lr_floor", "network_lr_floor"} and recipe.total_steps is None:
         return False
@@ -125,7 +144,7 @@ def recipe_field_active(name, value, *, task=None):
         return False
     if name == "lr_floor" and task is not None and not prior_active and recipe.network_lr_floor is not None:
         return False
-    if task is not None and name in {"prior_lr_mult", "prior_betas", "prior_reg"}:
+    if task is not None and name in {"prior_lr_mult", "prior_betas", "prior_eps", "prior_reg"}:
         if not prior_active:
             return False
     return True

@@ -305,7 +305,8 @@ class BehaviorComponents:
         for prior in priors:
             parts.append(self.recipe.make_generator_optimizer(
                 [{"params": list(prior.parameters()), "lr": self.recipe.lr * self.recipe.prior_lr_mult,
-                  "betas": self.recipe.prior_betas or self.recipe.betas, "forge_role": "prior"}], latent_table=prior.z))
+                  "betas": self.recipe.prior_betas or self.recipe.betas, "forge_role": "prior",
+                  **({"eps": self.recipe.prior_eps} if self.recipe.prior_eps is not None else {})}], latent_table=prior.z))
         if direct_particles:
             self.direct_particle_ids = {id(parameter) for parameter in direct_particles}
             parts.append(self.recipe.make_generator_optimizer(

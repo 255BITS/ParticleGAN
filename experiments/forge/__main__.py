@@ -126,6 +126,9 @@ def parser():
     tiers.add_argument("--output", type=Path, help="write the report here, relative to --root; default print to stdout")
     search = commands.add_parser("search", help="bounded deterministic public Recipe grids; no trainer copies")
     search_stages = search.add_subparsers(dest="stage", required=True)
+    compile_search = search_stages.add_parser("compile", help="freeze tagged finite choices and categorical candidate draws; no training")
+    compile_search.add_argument("spec", type=Path, help="forge_search_space_v1 JSON declaration")
+    compile_search.add_argument("--output", type=Path, required=True, help="immutable compiled manifest")
     for stage in ("plan", "enqueue", "run", "report"):
         trial = search_stages.add_parser(stage)
         trial.add_argument("spec", help="search id or configs/forge/searches JSON path")
@@ -358,6 +361,15 @@ def main(argv=None):
             publish()
     elif command == "search":
         from .configuration_search import plan_search, enqueue_search, run_search, report_search
+        from .search_space import (MANIFEST_SCHEMA, write_compilation, plan_compilation,
+                                   enqueue_compilation, report_compilation, run_compilation)
+        if args.stage == "compile":
+            emit(write_compilation(root, queue_root, args.spec, args.output))
+            return 0
+        path = Path(args.spec)
+        if path.suffix == ".json" and (root / path).exists() and read_json(root / path).get("schema") == MANIFEST_SCHEMA:
+            plan_search, enqueue_search, report_search, run_search = (
+                plan_compilation, enqueue_compilation, report_compilation, run_compilation)
         if args.stage == "plan":
             emit(plan_search(root, queue_root, args.spec))
         elif args.stage == "enqueue":

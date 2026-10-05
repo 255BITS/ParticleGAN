@@ -1823,6 +1823,24 @@ def _previous_family_registry(root, result):
     return json.loads(source)
 
 
+def _presentation_registry_compatible(previous, registry, result):
+    """Allow new unmeasured families without changing an existing selection."""
+    before, after = _family_registry_structure(previous), _family_registry_structure(registry)
+    old_ids = {family["id"] for family in before.get("families", [])}
+    additions = [family for family in after.get("families", []) if family["id"] not in old_ids]
+    # No new current rows or evidence is admitted by an editorial refresh.
+    # A family with an active search or an already displayed member requires
+    # ordinary regeneration and its full selection checks.
+    displayed = {row["candidate_id"] for key in (
+        "rows", "configuration_rows", "evidence_rows", "historical_family_rows", "archived_evidence_rows")
+        for row in result.get(key, [])}
+    if any(family.get("active_search_by_backend") or displayed.intersection(
+            [family["canonical_candidate"], *family.get("candidates", [])]) for family in additions):
+        return False
+    after["families"] = [family for family in after.get("families", []) if family["id"] in old_ids]
+    return before == after
+
+
 def _refresh_family_presentation(root, result, registry):
     from experiments.forge.trainer_families import load_families
     active = load_families(root)  # Retain existing registry structure validation.
@@ -1899,7 +1917,7 @@ def refresh_publication(root=REPOSITORY_ROOT, *, view_id="discriminator_stabilit
         registry = read_json(root / REGISTRY) if registry_hash is not None else None
         previous = _previous_family_registry(root, result)
         if (registry is None or previous is None
-                or _family_registry_structure(previous) != _family_registry_structure(registry)):
+                or not _presentation_registry_compatible(previous, registry, result)):
             raise ValueError("trainer family selection structure changed; use ordinary regeneration")
         _refresh_family_presentation(root, result, registry)
         result["provenance"]["trainer_family_registry_sha256"] = registry_hash

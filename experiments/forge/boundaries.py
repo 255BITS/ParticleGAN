@@ -21,7 +21,8 @@ OWNERS = frozenset({"task", "technique", "hyperparameter", "protocol"})
 # In particular, a numerical ablation switch still changes a technique when its
 # value removes an active mechanism; techniques.py checks that invariant.
 TUNABLE_FIELDS = frozenset({
-    "lr", "d_lr_mult", "prior_lr_mult", "betas", "prior_betas", "direct_particle_betas", "eps", "amsgrad",
+    "lr", "d_lr_mult", "prior_lr_mult", "betas", "prior_betas", "d_betas", "d_eps", "prior_eps",
+    "direct_particle_betas", "eps", "amsgrad", "lr_decay_rate", "lr_decay_steps",
     "optimizer_momentum", "optimizer_adam_lr",
     "reg_coeff", "reg_coeff_end", "reg_coeff_anneal_end", "reg_kappa", "reg_every", "prior_reg",
     "lr_anneal_start", "lr_floor", "network_lr_floor", "beta2_end", "beta2_anneal_end",
@@ -35,7 +36,7 @@ TECHNIQUE_RECIPE_FIELDS = frozenset({
     "row_evidence_exclude", "row_evidence_hold", "birth_death_space", "reopen_signal",
     "reopen_anchor", "reopen_guard", "row_evidence_null", "birth_death_isolation",
     "birth_death_feature_scale", "birth_death_backend", "birth_death_parent_policy",
-    "row_policy", "optimizer_family",
+    "row_policy", "optimizer_family", "loss_labels", "adam_variant", "lr_schedule", "lr_decay_staircase",
 })
 HYPERPARAMETER_RECIPE_FIELDS = TUNABLE_FIELDS | {
     "ucd_weight", "alpha_bar", "ema_decay", "network_lr_horizon_cap",
@@ -232,7 +233,7 @@ def ownership_receipt(candidate, task, resolved_recipe, protocol=None, initializ
             owner, status = "technique", "legacy_reference"
         elif owner == "task":
             source = "frozen task host/adapter resource binding"
-        if name in {"prior_lr_mult", "prior_betas"} and not prior_binding["latent_table_controls"]:
+        if name in {"prior_lr_mult", "prior_betas", "prior_eps"} and not prior_binding["latent_table_controls"]:
             result[name] = _record(None, owner, "task prior-control applicability",
                                    status="not_applicable", reference_recipe_value=_json_value(value),
                                    representation=prior_binding["representation"])

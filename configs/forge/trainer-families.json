@@ -297,7 +297,7 @@
       ],
       "canonical_candidate": "bcap-dualnorm-momentum-v1",
       "id": "bcap-dualnorm",
-      "label": "BCAP dualnorm",
+      "label": "BCAP dualnorm (experimental starting point)",
       "rationale": "Optimizer formulation distinct from native-Adam BCAP; all task laws and auxiliary objectives remain explicit. Positive dualnorm momentum strengths share one formulation; zero momentum retains its separate technique signature.",
       "tags": [
         "adversarial-training",
@@ -340,6 +340,20 @@
         "capped-input-gradients",
         "critic-gradient-penalty",
         "optimizer-interventions"
+      ]
+    },
+    {
+      "candidates": [
+        "halloween-optimizer-loss-v1"
+      ],
+      "canonical_candidate": "halloween-optimizer-loss-v1",
+      "id": "halloween",
+      "label": "Halloween optimizer/loss transfer",
+      "rationale": "Explicit dense legacy-Adam and [-1,1,1] least-squares transfer. Unmeasured; original HyperGAN execution and schedule remain unbound.",
+      "tags": [
+        "adversarial-training",
+        "constant-learning-rate",
+        "tensorflow-v1-adam"
       ]
     }
   ],

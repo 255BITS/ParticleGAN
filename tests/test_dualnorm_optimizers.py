@@ -21,6 +21,64 @@ FAMILIES = (
 )
 
 
+@pytest.mark.parametrize("family", FAMILIES)
+def test_standardized_role_hyperparameters_reach_normalized_and_native_hybrid_groups(family):
+    recipe = get_recipe("bcap", optimizer_family=family, lr=.01, d_lr_mult=1.5,
+                        prior_lr_mult=3., betas=(0., .9), d_betas=(0., .8),
+                        prior_betas=(0., .7), eps=.03, d_eps=.02, prior_eps=.01,
+                        num_particles=8, z_dim=2, standardize=False,
+                        optimizer_adam_lr=.00425 if family in {
+                            "dualnorm_D_only", "particle_rownorm_only"} else None)
+    generator, encoder, critic = (nn.Linear(2, 2) for _ in range(3))
+    prior = recipe.make_prior()
+    opt_g, opt_d = recipe.make_optimizers(generator, critic, prior, encoder=encoder)
+    assert [group["betas"] for group in opt_g.param_groups] == [(0., .9), (0., .9), (0., .7)]
+    assert [group["eps"] for group in opt_g.param_groups] == [.03, .03, .01]
+    assert opt_d.param_groups[0]["betas"] == (0., .8)
+    assert opt_d.param_groups[0]["eps"] == .02
+    if family == "dualnorm":
+        assert opt_g._adam is None and opt_d._adam is None
+    if family == "dualnorm_D_only":
+        assert [group["lr"] for group in opt_g.param_groups] == [.00425, .00425, .00425 * 3.]
+        assert opt_d.param_groups[0]["lr"] == .015
+        assert type(opt_g._adam) is torch.optim.Adam and opt_d._adam is None
+    if family == "particle_rownorm_only":
+        assert [group["lr"] for group in opt_g.param_groups] == [.00425, .00425, .03]
+        assert opt_d.param_groups[0]["lr"] == .00425 * 1.5
+        assert type(opt_g._adam) is torch.optim.Adam and type(opt_d._adam) is torch.optim.Adam
+
+
+def test_graft_rejects_nonzero_critic_first_moment_from_standardized_role_override():
+    with pytest.raises(ValueError, match="beta1=0"):
+        get_recipe("bcap", optimizer_family="ada_nsgda", d_betas=(.5, .9))
+
+
+@pytest.mark.parametrize("family", FAMILIES)
+@pytest.mark.parametrize("schedule,expected", [("constant", 1.), ("exponential", .25)])
+def test_explicit_schedule_multiplies_all_normalized_and_native_hybrid_rates(family, schedule, expected):
+    recipe = get_recipe("bcap", optimizer_family=family, lr=.01, d_lr_mult=1.5,
+                        prior_lr_mult=3., num_particles=8, z_dim=2, standardize=False,
+                        lr_schedule=schedule, lr_decay_rate=.5, lr_decay_steps=10,
+                        optimizer_adam_lr=.00425 if family in {
+                            "dualnorm_D_only", "particle_rownorm_only"} else None)
+    prior = recipe.make_prior()
+    optimizers = recipe.make_optimizers(nn.Linear(2, 2), nn.Linear(2, 1), prior)
+    rates = [[group["lr"] for group in opt.param_groups] for opt in optimizers]
+    scale_learning_rates(20, recipe, optimizers, rates, prior)
+    for optimizer, initial_rates in zip(optimizers, rates):
+        assert [group["lr"] for group in optimizer.param_groups] == pytest.approx(
+            [rate * expected for rate in initial_rates])
+
+
+def test_inactive_critic_betas_do_not_invent_adam_mechanism_in_dualnorm_search():
+    from experiments.forge.techniques import recipe_field_active, technique_signature, validate_same_technique
+    recipe = get_recipe("bcap", optimizer_family="dualnorm")
+    alternative = recipe.replace(d_betas=(.5, .9))
+    assert not recipe_field_active("d_betas", alternative)
+    assert "critic_moments" not in technique_signature(recipe)["mechanisms"]
+    validate_same_technique(recipe, alternative)
+
+
 def parameter(values):
     return nn.Parameter(torch.tensor(values, dtype=torch.float64))
 

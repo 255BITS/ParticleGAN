@@ -1,6 +1,7 @@
 """Adversarial objectives on raw critic scores, independent of regularization."""
 import torch
 import torch.nn.functional as F
+import math
 
 
 class GANLoss:
@@ -15,10 +16,16 @@ class GANLoss:
 
     LOSSES = ("relativistic", "non_saturating", "hinge", "wasserstein", "least_squares")
 
-    def __init__(self, loss="relativistic"):
+    def __init__(self, loss="relativistic", *, labels=(0.0, 1.0, 1.0)):
         if loss not in self.LOSSES:
             raise ValueError(f"unknown adversarial loss {loss!r}; choose {', '.join(self.LOSSES)}")
         self.loss = loss
+        if (not isinstance(labels, (list, tuple)) or len(labels) != 3
+                or any(type(v) not in (int, float) or not math.isfinite(v) for v in labels)):
+            raise ValueError("least-squares labels must be three finite numbers (fake, real, generator)")
+        self.labels = tuple(float(v) for v in labels)
+        if loss != "least_squares" and self.labels != (0.0, 1.0, 1.0):
+            raise ValueError("nondefault loss labels require least_squares")
 
     def d_loss(self, real_logits: torch.Tensor, fake_logits: torch.Tensor) -> torch.Tensor:
         """Critic loss (minimized)."""
@@ -30,7 +37,8 @@ class GANLoss:
             return F.relu(1 - real_logits).mean() + F.relu(1 + fake_logits).mean()
         if self.loss == "wasserstein":
             return fake_logits.mean() - real_logits.mean()
-        return .5 * ((real_logits - 1).square().mean() + fake_logits.square().mean())
+        a, b, _ = self.labels
+        return .5 * ((real_logits - b).square().mean() + (fake_logits - a).square().mean())
 
     def g_loss(self, fake_logits: torch.Tensor, real_logits: torch.Tensor = None) -> torch.Tensor:
         """Generator loss; only ``relativistic`` requires real scores."""
@@ -42,7 +50,7 @@ class GANLoss:
             return F.softplus(-fake_logits).mean()
         if self.loss in ("hinge", "wasserstein"):
             return -fake_logits.mean()
-        return .5 * (fake_logits - 1).square().mean()
+        return .5 * (fake_logits - self.labels[2]).square().mean()
 
     def joint_g_loss(self, fake_logits: torch.Tensor, real_logits: torch.Tensor) -> torch.Tensor:
         """Generator/encoder loss for a joint BiGAN critic.
@@ -60,4 +68,4 @@ class GANLoss:
             return self.g_loss(fake_logits) + F.softplus(real_logits).mean()
         if self.loss in ("hinge", "wasserstein"):
             return self.g_loss(fake_logits) + real_logits.mean()
-        return self.g_loss(fake_logits) + .5 * real_logits.square().mean()
+        return self.g_loss(fake_logits) + .5 * (real_logits - self.labels[0]).square().mean()

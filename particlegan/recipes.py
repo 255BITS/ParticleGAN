@@ -162,7 +162,7 @@ class Recipe:
     # an explicit RoutedRows contract in the caller-owned policy API.
     row_policy: str = "independent"
     # Explicit optimizer family: the default retains KA2/K3P interventions.
-    # adam uses native PyTorch Adam with only observer bookkeeping. Its fixed
+    # adam uses the declared plain Adam law with only observer bookkeeping. Its fixed
     # penalties and optional moment/coefficient cosine schedules are declared
     # independently of any candidate name. Non-None endpoints interpolate from
     # betas[1]/reg_coeff over anneal_end * total_steps completed updates, then
@@ -180,10 +180,24 @@ class Recipe:
     reg_coeff_anneal_end: float = 0.2
     # Objective on raw scores; regularization is selected independently.
     loss: str = "relativistic"
+    # G/E use betas/eps. D inherits unless these are explicit; prior inherits
+    # G/E except for its existing prior_betas and optional prior_eps.
+    d_betas: tuple[float, float] | None = None
+    d_eps: float | None = None
+    prior_eps: float | None = None
+    loss_labels: tuple[float, float, float] = (0.0, 1.0, 1.0)
+    adam_variant: str = "pytorch"
+    # Exponential decay counts completed whole training updates, not role
+    # applications or sampling calls. Its horizon is independent of total_steps.
+    lr_schedule: str = "cosine"
+    lr_decay_rate: float = 0.96
+    lr_decay_steps: int = 50_000
+    lr_decay_staircase: bool = False
 
     def __post_init__(self):
         from .gan_loss import GANLoss
-        GANLoss(self.loss)  # reject invalid objectives before constructing a trainer
+        objective = GANLoss(self.loss, labels=self.loss_labels)
+        object.__setattr__(self, "loss_labels", objective.labels)
         from .optim.dualnorm import NORMALIZED_FAMILIES
         if self.optimizer_family not in ("formulation", "adam", *NORMALIZED_FAMILIES):
             raise ValueError("unknown optimizer_family")
@@ -197,6 +211,30 @@ class Recipe:
                 raise ValueError("optimizer_adam_lr must be None or finite and positive")
             if self.optimizer_family not in ("dualnorm_D_only", "particle_rownorm_only"):
                 raise ValueError("optimizer_adam_lr is supported only by isolation arms")
+        if self.d_betas is not None:
+            if (not isinstance(self.d_betas, (list, tuple)) or len(self.d_betas) != 2
+                    or any(type(v) not in (int, float) or not math.isfinite(v) or not 0 <= v < 1
+                           for v in self.d_betas)):
+                raise ValueError("d_betas must contain two finite numbers in [0, 1) or be None")
+            object.__setattr__(self, "d_betas", tuple(float(v) for v in self.d_betas))
+        for key in ("d_eps", "prior_eps"):
+            value = getattr(self, key)
+            if value is not None and (type(value) not in (int, float) or not math.isfinite(value) or value <= 0):
+                raise ValueError(f"{key} must be finite and positive or None")
+        if self.adam_variant not in ("pytorch", "tensorflow_v1"):
+            raise ValueError("adam_variant must be pytorch or tensorflow_v1")
+        if self.adam_variant == "tensorflow_v1" and (
+                self.optimizer_family != "adam" or self.amsgrad or self.beta2_end is not None):
+            raise ValueError("tensorflow_v1 requires plain Adam, no AMSGrad and constant betas")
+        if self.lr_schedule not in ("cosine", "constant", "exponential"):
+            raise ValueError("lr_schedule must be cosine, constant or exponential")
+        if (type(self.lr_decay_steps) is not int or self.lr_decay_steps <= 0
+                or type(self.lr_decay_rate) not in (int, float)
+                or not math.isfinite(self.lr_decay_rate) or not 0 < self.lr_decay_rate <= 1
+                or type(self.lr_decay_staircase) is not bool):
+            raise ValueError("invalid exponential LR rate, steps or staircase")
+        if self.lr_schedule != "cosine" and (self.continuous_policy is not None or self.network_lr_horizon_cap is not None):
+            raise ValueError("explicit constant/exponential LR requires a scheduled recipe without a horizon cap")
         if isinstance(self.eps, bool) or not math.isfinite(self.eps) or self.eps <= 0:
             raise ValueError("eps must be finite and positive")
         for name in ("beta2_anneal_end", "reg_coeff_anneal_end"):
@@ -218,7 +256,8 @@ class Recipe:
             if self.continuous_policy is not None:
                 raise ValueError("plain optimizers do not implement a continuous update policy")
         if self.optimizer_family == "ada_nsgda" and (
-                self.betas[0] != 0 or (self.prior_betas is not None and self.prior_betas[0] != 0)):
+                self.betas[0] != 0 or (self.d_betas is not None and self.d_betas[0] != 0)
+                or (self.prior_betas is not None and self.prior_betas[0] != 0)):
             raise ValueError("ada_nsgda requires beta1=0 for networks and prior")
         if self.beta2_end is not None and self.optimizer_family != "adam":
             raise ValueError("scheduled beta2 requires optimizer_family='adam'")
@@ -412,7 +451,8 @@ class Recipe:
         return replace(self, **overrides)
 
     def to_dict(self):
-        result = asdict(self)
+        from .recipe_compat import without_default_additions
+        result = without_default_additions(asdict(self))
         if self.loss == "relativistic":
             # Older recipes/checkpoints had this one fixed objective. Preserve
             # their packets while recording every alternative explicitly.
@@ -499,7 +539,7 @@ class Recipe:
     def make_loss(self):
         """The selected objective: ``d_loss(real, fake)``, ``g_loss(fake, real=None)``."""
         from .gan_loss import GANLoss
-        return GANLoss(self.loss)
+        return GANLoss(self.loss, labels=self.loss_labels)
 
     def make_critic_penalty(self, optimizer, *, output=None, collect_stats=False, **penalty_overrides):
         """The critic gradient penalty paired with one critic optimizer.
@@ -555,12 +595,13 @@ class Recipe:
         requires it unless ``reg_anchor_weight == 0``. Checkpoint with ``optimizer.state_dict()``: it holds the
         EMA critic and all counters. ``adam_kwargs`` override the recipe's
         ``lr * d_lr_mult``, ``betas`` and ``amsgrad`` or add options such as ``fused``.
-        ``optimizer_family='adam'`` returns native Adam with disabled intervention
+        ``optimizer_family='adam'`` returns the declared Adam law with disabled intervention
         metadata and an observation-only checkpointed critic step counter.
         Normalized families use the same fixed penalty and step observer;
         ``lr * d_lr_mult`` is their scheduled critic step size.
         """
-        options = {"lr": self.lr * self.d_lr_mult, "betas": self.betas, "amsgrad": self.amsgrad, "eps": self.eps,
+        options = {"lr": self.lr * self.d_lr_mult, "betas": self.d_betas or self.betas,
+                   "amsgrad": self.amsgrad, "eps": self.eps if self.d_eps is None else self.d_eps,
                    **adam_kwargs}
         if self.optimizer_family == "adam":
             from .recipe_schedules import make_plain_adam
@@ -589,7 +630,7 @@ class Recipe:
 
         With neither, ``step()`` is exactly ``Adam.step()``. ``adam_kwargs``
         override the recipe's ``lr``, ``betas`` and ``amsgrad`` or add Adam options.
-        Plain ``optimizer_family='adam'`` returns native Adam without A2 or
+        Plain ``optimizer_family='adam'`` returns the declared Adam law without A2 or
         direct-particle response, including when role annotations are supplied.
         Normalized families accept role-named groups. Their row-normalized
         prior requires ``set_sampled_rows(prior.z, indices)`` before stepping;
@@ -699,7 +740,8 @@ class Recipe:
         if prior_params:
             groups.append({"params": prior_params, "lr": self.lr * self.prior_lr_mult,
                            "betas": self.prior_betas if self.prior_betas is not None else self.betas,
-                           **({"role": "prior"} if normalized else {})})
+                           **({"role": "prior"} if normalized else {}),
+                           **({"eps": self.prior_eps} if self.prior_eps is not None else {})})
         mechanisms = prior_mechanisms(prior,
             latent_damping_max_rate=self.latent_damping_max_rate,
             prior_beta1=(self.prior_betas or self.betas)[0])
@@ -776,6 +818,16 @@ def get_recipe(name="gan", **overrides):
     families["atlas"] = {**families["e22"], "birth_death_backend": "auto",
                          "birth_death_cells": 128, "reopen_guard": "settled"}
     families["e22_routed"] = {**families["e22"], "row_policy": "routed_paired"}
+    families["halloween"] = {
+        **families["bcap"], "reg_coeff": 0.0,
+        "lr": 0.008020980209802098, "d_lr_mult": 0.4922016232592352,
+        "betas": (0.6119661196611966, 0.5612256122561226),
+        "d_betas": (0.1051710517105171, 0.7203172031720317),
+        "eps": 0.3087330873308733, "d_eps": 0.007500075000750007,
+        "prior_betas": (0.0, 0.999), "prior_eps": 1e-8,
+        "adam_variant": "tensorflow_v1", "loss": "least_squares",
+        "loss_labels": (-1.0, 1.0, 1.0), "lr_schedule": "constant",
+    }
     if name not in families:
         raise ValueError(f"Unknown recipe {name!r}; choose {', '.join(families)}")
     options = families[name]
@@ -863,6 +915,16 @@ def learning_rate_scales(step, recipe, *, network_transition=None, controller=No
         return controller.current_scales()
     if controller is not None:
         raise ValueError("controller requires a continuous recipe")
+    if recipe.lr_schedule != "cosine":
+        if type(step) is not int or step < 0:
+            raise ValueError("LR schedule clock must be completed nonnegative training updates")
+        if network_transition is not None:
+            raise ValueError("explicit constant/exponential LR does not accept network transitions")
+        exponent = step / recipe.lr_decay_steps
+        if recipe.lr_decay_staircase:
+            exponent = math.floor(exponent)
+        scale = recipe.lr_decay_rate**exponent if recipe.lr_schedule == "exponential" else 1.0
+        return scale, scale
     total = recipe.total_steps
     if network_transition is None:
         horizon = min(total, recipe.network_lr_horizon_cap or total)

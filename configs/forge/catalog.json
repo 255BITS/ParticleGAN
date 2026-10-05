@@ -39,7 +39,7 @@
       "experiment/toy": 3,
       "experiment/trajectory": 2,
       "experiment/transition": 7,
-      "forge_engine": 81,
+      "forge_engine": 82,
       "lrfree/feature-cells-cb64-ra": 4058,
       "report/atlas-explanation": 7,
       "report/behavioral_baseline": 32,
@@ -102,7 +102,7 @@
       "candidate_patch": 26,
       "configuration": 807,
       "driver": 401,
-      "engine_support": 81,
+      "engine_support": 82,
       "evaluator_or_audit": 324,
       "evidence_artifact": 1574,
       "frozen_candidate_implementation": 15,
@@ -116,13 +116,13 @@
       "visualization": 22,
       "visualization_artifact": 723
     },
-    "files": 11762
+    "files": 11763
   },
   "coverage": {
-    "declared_count": 11762,
+    "declared_count": 11763,
     "missing": [],
     "stale": [],
-    "tracked_count": 11762,
+    "tracked_count": 11763,
     "unclassified": [],
     "valid": true
   },
@@ -7145,7 +7145,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "4a688cd90b27d1ef9a42b91e5e668699f3d3c351",
+      "git_blob": "62a13185f188473a03be19fc524b8ea2a64631bd",
       "path": "experiments/forge/__main__.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -7187,7 +7187,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "97c64be63a6d2c6de248f75528601fb6a727f424",
+      "git_blob": "07e97444c748716be795ad936ab87f2e5754a65f",
       "path": "experiments/forge/behavior_adapters.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -7201,7 +7201,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "e3000b562296600cde137f3cd498508e985b6bb7",
+      "git_blob": "a0072bd1e77397144b963a248f82040eb74995b0",
       "path": "experiments/forge/boundaries.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -7229,7 +7229,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "92126613a7543935ff43305c251174247cf07d84",
+      "git_blob": "f51d898a7eed4927b927c4b7ff97bcaefbdd814a",
       "path": "experiments/forge/canonical_ae_adapter.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -7327,7 +7327,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "4bee15d51b73f647240d7c471ca5532a01a350e6",
+      "git_blob": "c1fcb51b099959700642716042a81c308c3c2e21",
       "path": "experiments/forge/configuration_search.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -7376,7 +7376,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "2feeb00e7eba902b79396a1e2188d2eec7e9644e",
+      "git_blob": "5249c0fd621299f99aee81b8dec85a7648ce271c",
       "path": "experiments/forge/family_reports.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -7425,7 +7425,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "76a1b12a41784d646ae5dcf380e1e455117b6af3",
+      "git_blob": "f796dce2a25e18014c9beed024eb5804d4bd7aa6",
       "path": "experiments/forge/mechanisms.py",
       "role": "engine_support",
       "suggested_tiers": []
@@ -7579,6 +7579,13 @@
     },
     {
       "family": "forge_engine",
+      "git_blob": "6f40bd546e3f0c10058b10cb31e9f2d6b109e52a",
+      "path": "experiments/forge/search_space.py",
+      "role": "engine_support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "forge_engine",
       "git_blob": "30c662b9ab4b3628e8b0bd5a14e50883ce348c86",
       "path": "experiments/forge/sources.py",
       "role": "engine_support",
@@ -7621,7 +7628,7 @@
     },
     {
       "family": "forge_engine",
-      "git_blob": "53b1ee18699c550a13213af8fdf395c99086460b",
+      "git_blob": "92c2ddae307242ef953dc472311f21c005487bae",
       "path": "experiments/forge/techniques.py",
       "role": "engine_support",
       "suggested_tiers": []

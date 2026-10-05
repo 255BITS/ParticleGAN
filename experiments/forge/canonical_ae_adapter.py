@@ -514,7 +514,8 @@ def construct_owner(root, binding, *, device, source_guard):
         dict(params=list(owner.generator.parameters()), lr=recipe.lr, forge_role="generator"),
         dict(params=list(owner.encoder.parameters()), lr=recipe.lr, forge_role="encoder"),
         dict(params=[owner.prior.z], lr=recipe.lr * recipe.prior_lr_mult,
-             betas=recipe.prior_betas or recipe.betas, forge_role="prior")], latent_table=owner.prior.z)
+             betas=recipe.prior_betas or recipe.betas, forge_role="prior",
+             **({"eps": recipe.prior_eps} if recipe.prior_eps is not None else {}))], latent_table=owner.prior.z)
     owner.opt_g.prior_mechanisms = deepcopy(mechanisms)
     owner.opt_d = recipe.make_critic_optimizer(owner.critic, ema_critic=deepcopy(owner.critic))
     penalty = recipe.make_critic_penalty(owner.opt_d, collect_stats=True)
