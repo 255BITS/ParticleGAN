@@ -30,10 +30,14 @@ def test_original_24_task_adaptations_stay_ready_and_original_reference_stays_bl
     original = resolve_idea(ROOT, "release07-gan-v3-mog-v1", through_tier=3)
     adapted = resolve_idea(ROOT, NAME, through_tier=3)
     assert not adapted["preflight_blockers"]
-    # The recorded integration covered these 24 hosts. New required smoke hosts
-    # retain their own compatibility checks; they do not inherit that readiness.
-    original_hosts = set(adapted["tasks"]) - {"gaussian1d_acquisition", "ring16_acquisition", "five_word_joint_acquisition"}
-    assert len(adapted["tasks"]) == 27 and len(original_hosts) == 24
+    # The recorded integration covered these 24 hosts. New acquisition hosts
+    # and the independent schedule audit retain their own compatibility checks.
+    added_hosts = {"gaussian1d_acquisition", "ring16_acquisition", "five_word_joint_acquisition",
+                   "schedule_contract_audit"}
+    original_hosts = set(adapted["tasks"]) - added_hosts
+    assert len(adapted["tasks"]) == 28 and len(original_hosts) == 24
+    assert not adapted["tasks"]["schedule_contract_audit"]["preflight_blockers"]
+    assert original["tasks"]["schedule_contract_audit"]["preflight_blockers"]
     assert all(not adapted["tasks"][name]["preflight_blockers"] for name in original_hosts)
     assert sum(bool(original["tasks"][name]["preflight_blockers"]) for name in original_hosts) == 21
     assert original["tasks"]["two_pole"]["preflight_blockers"]
