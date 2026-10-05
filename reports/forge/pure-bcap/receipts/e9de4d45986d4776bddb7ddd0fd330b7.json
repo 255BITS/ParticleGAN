@@ -1,0 +1,95 @@
+{
+  "attempt_id": "e9de4d45986d4776bddb7ddd0fd330b7",
+  "attempt_status": "completed",
+  "campaign_id": "pure-bcap-joint-loss-repair-v2",
+  "candidate_id": "bcap-pure--af8db09ebc6580e3d94cd29b89b2624cb6c8107947e4b44aa714d23a64ea096c",
+  "candidate_revision": "a8781de309e67a11f37fa266e6a01f5f8e41817a5046fa361dd772a2f2c654e1",
+  "certificate_validated": true,
+  "cost_owner": {
+    "campaign": "pure-bcap-joint-loss-repair-v2",
+    "request": "7a63343ca959d1535f93e7aa",
+    "revision": "a8781de309e67a11f37fa266e6a01f5f8e41817a5046fa361dd772a2f2c654e1"
+  },
+  "evidence_scope": "published_summary",
+  "note": "Display summary only. Regrading requires the byte-exact archived original receipts; this projection cannot qualify a technique.",
+  "provenance": {
+    "canonical_result_hash": "61683d2a5ef67dedffe8a3ed08bf671eecefbab1c94c8f09c0c7015e031a6d80",
+    "original_files": {
+      "evidence": {
+        "path": "reports/forge/attempts/e9de4d45986d4776bddb7ddd0fd330b7/evidence.json",
+        "sha256": "33a6939ef52fc86c25527f9e577287bc24e37a32f0908b242d216437884a078a"
+      },
+      "request": {
+        "path": "reports/forge/attempts/e9de4d45986d4776bddb7ddd0fd330b7/request.json",
+        "sha256": "fcc005ae571ea370236470c36a8cec13a9d67294e8fd1c926270db0db05993d2"
+      },
+      "result": {
+        "path": "reports/forge/attempts/e9de4d45986d4776bddb7ddd0fd330b7/result.json",
+        "sha256": "a498e6ab2051e46798ba17a4665408b402bec0c3cec0f8f18d3ec473f5419d0a"
+      }
+    },
+    "source_digest": "57ae290b87790a46e46cd11597a6e1e282f050207dca0b637768047951915b72",
+    "source_origin_commit": "44cc66d78495cb913e0ea064840e2de37c8a4ae5"
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "request_id": "7a63343ca959d1535f93e7aa",
+  "runtime": {
+    "implementation": "CPython",
+    "machine": "x86_64",
+    "packages": {
+      "numpy": "2.5.2",
+      "scipy": "1.17.1",
+      "torch": "2.14.0"
+    },
+    "python": "3.12.13",
+    "system": "Linux"
+  },
+  "schema_version": 1,
+  "summary_version": "forge-technique-receipt-summary-v1",
+  "task_results": [
+    {
+      "api_version": "forge-api-v1",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "compatibility_key": "f0bcd96dab237a98612450fea9ebfe942b2e9981300104ec028188fce07e2289",
+      "cost": {
+        "adapter_reported_inclusive_seconds": 1.0736292969668284,
+        "adapter_seconds": 1.09038976195734,
+        "charged_task": "clockfree_audit_measurement_v1",
+        "completed_updates": 24,
+        "component_timing": "unavailable; legacy elapsed time includes evaluation and sampling",
+        "device": "1",
+        "execution_seconds": 7.381371422088705,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 3.5235279339831322,
+        "wall_seconds": 7.381371422088705
+      },
+      "evaluator_summary": {},
+      "execution_path": "public_trainer",
+      "gate_status": "PASS",
+      "metrics": {
+        "parity_comparisons": 4
+      },
+      "raw_status": "completed",
+      "reason": "declared state/horizon/cadence/restart comparisons agree; source audit bound",
+      "reasons": [
+        "declared state/horizon/cadence/restart comparisons agree; source audit bound"
+      ],
+      "sampling": {
+        "eval_output_noise": "clean",
+        "sampling_contract_version": 1,
+        "sampling_law": "public_prior_without_output_noise",
+        "scoring_weights": "live"
+      },
+      "status": "PASS",
+      "task_id": "clockfree_audit_measurement_v1"
+    }
+  ]
+}

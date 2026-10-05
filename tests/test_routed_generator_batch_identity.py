@@ -2,6 +2,7 @@
 import hashlib
 import json
 import runpy
+import subprocess
 from pathlib import Path
 
 import pytest
@@ -13,9 +14,20 @@ DRIVER = ROOT / "examples" / "routed_generator_batch.py"
 def test_identity_accepts_new_checkout_and_prose_but_rejects_source_drift(tmp_path, monkeypatch):
     api = runpy.run_path(str(DRIVER))
     protocol = json.loads(DRIVER.with_name("routed_generator_batch_protocol.json").read_text())
-    actual = api["execution_identity"](protocol)
+    # Current objectives have changed; they cannot enter the historical cohort.
+    assert hashlib.sha256((ROOT / "particlegan/gan_loss.py").read_bytes()).hexdigest() != protocol["source_hashes"]["particlegan/gan_loss.py"]
+    with pytest.raises(RuntimeError, match="source identity differs"):
+        api["execution_identity"](protocol)
+    # This real publication commit contains every declared frozen source blob.
+    publication = "e71265fd7b77ae2ab70ccbf8b7f0049c3d539b84"
+    historical = tmp_path / "historical-checkout"
+    subprocess.run(["git", "clone", "--shared", "--no-checkout", "--quiet", str(ROOT), str(historical)], check=True)
+    subprocess.run(["git", "update-ref", "--no-deref", "HEAD", publication], cwd=historical, check=True)
+    subprocess.run(["git", "checkout", publication, "--", *protocol["source_hashes"]], cwd=historical, check=True)
+    actual = api["execution_identity"](protocol, root=historical)
     assert actual["verified_source_files"] == len(protocol["source_hashes"])
     assert actual["reference_package_git_sha"] == api["BASE_SHA"]
+    assert actual["checkout_git_sha"] == publication
 
     # Only metadata changes when publication adds a commit or unbound report.
     scientific = tmp_path / "particlegan" / "policy.py"

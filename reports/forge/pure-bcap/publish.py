@@ -10,6 +10,7 @@ import argparse
 from collections import Counter
 from copy import deepcopy
 import math
+import hashlib
 import os
 from pathlib import Path
 import sys
@@ -44,6 +45,79 @@ def source_cohorts(readout):
     if set(sources) != {candidate["candidate_id"] for candidate in readout["candidates"]}:
         raise ValueError("Pure BCAP executed sources differ from the final candidate roster")
     return cohorts, sources
+
+
+def validate_paid_roster(root, plan, readout, selected_attempts, prior_attempts, sources):
+    """Bind every physical charge, including canceled context, to its receipt."""
+    records = readout.get("paid_attempts", [])
+    ids = [record["attempt_id"] for record in records]
+    expected = selected_attempts | set(prior_attempts)
+    if (len(ids) != len(set(ids)) or set(ids) != expected
+            or len(ids) != readout["unique_paid_attempts"]
+            or len(ids) != plan.get("expected_paid_attempt_count", len(expected))
+            or len(selected_attempts) != plan.get("selected_measurement_attempt_count", len(selected_attempts))
+            or len(prior_attempts) != plan.get("original_unselected_paid_attempt_count", len(prior_attempts))):
+        raise ValueError("Pure BCAP paid roster must retain every unique selected and original context attempt")
+    originals = read_json(root / REPORT / "plans.json")
+    revisions = {trial["candidate_id"]: trial["candidate_revision"]
+                 for trial in [*originals["trials"], *plan["trials"]]}
+    cohort_pairs = {(cohort["source_digest"], cohort["source_commit"])
+                    for cohort in source_cohorts(readout)[0]}
+    candidate_costs, total, prior_cost = Counter(), 0.0, 0.0
+    for record in records:
+        attempt = record["attempt_id"]
+        relative = REPORT / "receipts" / (attempt + ".json")
+        if (record["receipt"] != relative.as_posix()
+                or file_hash(root / relative) != record["receipt_sha256"]):
+            raise ValueError("Pure BCAP paid roster receipt reference or hash differs")
+        receipt = read_json(root / relative)
+        if (plan.get("expected_paid_attempt_count") is not None
+                and receipt != inventory.project_receipt(root, attempt)):
+            raise ValueError("Pure BCAP paid compact receipt differs from its original certified projection")
+        provenance = receipt["provenance"]
+        seconds = record["paid_wall_seconds"]
+        charged = [task.get("cost", {}).get("execution_seconds", task.get("cost", {}).get("wall_seconds"))
+                   for task in receipt.get("task_results", [])]
+        if (not isinstance(seconds, (int, float)) or not math.isfinite(seconds) or seconds < 0
+                or not charged or any(not isinstance(value, (int, float)) or not math.isfinite(value)
+                                      or value < 0 for value in charged)
+                or not math.isclose(seconds, sum(charged), rel_tol=0, abs_tol=1e-8)
+                or receipt.get("certificate_validated") is not True or receipt.get("qualification_input") is not False
+                or any(record[key] != receipt.get(key) for key in
+                       ("attempt_id", "candidate_id", "candidate_revision", "campaign_id", "attempt_status"))
+                or record["candidate_revision"] != revisions.get(record["candidate_id"])
+                or record["source_digest"] != provenance["source_digest"]
+                or record["source_commit"] != provenance["source_origin_commit"]
+                or record["canonical_result_hash"] != provenance["canonical_result_hash"]
+                or record["task_statuses"] != {task["task_id"]: task["gate_status"] for task in receipt["task_results"]}
+                or (record["source_digest"], record["source_commit"]) not in cohort_pairs):
+            raise ValueError("Pure BCAP paid roster differs from its certified receipt identity, source, or charge")
+        if attempt in selected_attempts:
+            source = sources.get(record["candidate_id"])
+            if source != {"source_digest": record["source_digest"], "source_commit": record["source_commit"]}:
+                raise ValueError("Pure BCAP paid selected attempt belongs to another complete source cohort")
+            candidate_costs[record["candidate_id"]] += seconds
+        else:
+            if record["source_digest"] != originals["source_digest"]:
+                raise ValueError("Pure BCAP original paid context belongs to another executed source")
+            prior_cost += seconds
+        total += seconds
+    if (not math.isclose(total, readout["paid_wall_seconds"], rel_tol=0, abs_tol=1e-8)
+            or not math.isclose(prior_cost, readout.get("original_unselected_paid_wall_seconds", 0), rel_tol=0, abs_tol=1e-8)
+            or any(not math.isclose(candidate_costs[candidate["candidate_id"]],
+                                    candidate["cost"]["new_paid_wall_seconds"], rel_tol=0, abs_tol=1e-8)
+                   for candidate in readout["candidates"])):
+        raise ValueError("Pure BCAP paid roster charge totals differ")
+    for cohort in plan.get("execution_rounds", []):
+        cohort_records = [record for record in records if record["round"] == cohort["round"]]
+        campaign = cohort.get("campaign_id", cohort["round"])
+        if (not cohort_records or any(record["campaign_id"] != campaign for record in cohort_records)
+                or sum(record["paid_wall_seconds"] for record in cohort_records) > cohort["campaign_cap_seconds"]
+                or (cohort.get("paid_attempt_ids_frozen") is not None
+                    and ({record["attempt_id"] for record in cohort_records} != set(cohort["paid_attempt_ids_frozen"])
+                         or not math.isclose(sum(record["paid_wall_seconds"] for record in cohort_records),
+                                             cohort["paid_wall_seconds_frozen"], rel_tol=0, abs_tol=1e-8)))):
+            raise ValueError("Pure BCAP paid roster differs from the immutable execution-round accounting")
 
 
 def completed_readout(root):
@@ -113,6 +187,11 @@ def completed_readout(root):
                     or receipt["provenance"]["source_digest"] != source["source_digest"]
                     or receipt["provenance"]["source_origin_commit"] != source["source_commit"]):
                 raise ValueError("Pure BCAP compact receipt provenance differs")
+            measured = [row for row in receipt.get("task_results", []) if row["task_id"] == task["task_id"]]
+            if (len(measured) != 1 or measured[0]["gate_status"] != task["status"]
+                    or any(task.get(key) != measured[0].get(key)
+                           for key in ("compatibility_key", "metrics", "cost", "reason"))):
+                raise ValueError("Pure BCAP displayed task differs from its sealed compact measurement")
             gif = root / REPORT / "media" / candidate["configuration_id"][:12] / (task["task_id"] + ".gif")
             media = task["gif_receipt"]
             if (file_hash(gif) != media["gif_sha256"]
@@ -135,10 +214,11 @@ def completed_readout(root):
             or readout["unique_paid_attempts"] != len(attempts) + len(prior_attempts)
             or dict(required) != readout["required_counts"] or dict(diagnostic) != readout["diagnostic_counts"]):
         raise ValueError("Pure BCAP campaign accounting or numerical counts differ")
+    validate_paid_roster(root, plan, readout, attempts, prior_attempts, sources)
     return plan, readout, selection
 
 
-def selected_pin(frozen, plan, readout, selection):
+def selected_pin(frozen, plan, readout, selection, *, selection_kind="current_measurement"):
     """Select one full candidate by the predeclared objective, never by cell."""
     _, sources = source_cohorts(readout)
     source = sources[selection["selected_candidate_id"]]
@@ -157,10 +237,11 @@ def selected_pin(frozen, plan, readout, selection):
             or any(observed.get(task["task_id"]) != task["status"] for task in candidate["tasks"])
             or set(row["attempt_ids"]) != {task["attempt_id"] for task in candidate["tasks"]}):
         raise ValueError("Pure BCAP selected row differs from its certified whole-recipe readout")
-    return family_row_pin(row, selection_kind="current_measurement",
+    return family_row_pin(row, selection_kind=selection_kind,
         reason="Initial finite Pure BCAP round: required Tier 1 PASS count descending, then configuration hash ascending. One complete recipe; no calibrated default adoption.",
-        measurement_views=[VIEW],
-        measurement_tasks=sorted(set(plan["task_ids"]) - set(plan["required_task_ids"])))
+        measurement_views=[VIEW] if selection_kind == "current_measurement" else None,
+        measurement_tasks=(sorted(set(plan["task_ids"]) - set(plan["required_task_ids"]))
+                           if selection_kind == "current_measurement" else None))
 
 
 def preserved_science(before, after):
@@ -181,86 +262,222 @@ def preserved_science(before, after):
     return expected
 
 
-def preflight_retained_pins(root, publication):
-    """Reject live-contract drift before any source or selection is published."""
-    from experiments.forge.trainer_families import _current_pin
-    for pin in read_json(Path(root) / CURRENT_SELECTION)["selections"]:
-        if pin["trainer_family"] == FAMILY:
-            continue
-        try:
-            _current_pin(root, pin["trainer_family"], publication["rows"], pin,
-                         view_id=VIEW, catalogs=publication)
-        except ValueError as error:
-            raise ValueError("Final Pure BCAP registration is blocked by retained family pin or live task-contract drift. "
-                "Preserve the existing source-bound scientific rows and use --pending for display navigation; "
-                "a separately reviewed scientific-composition publication path is required before registering new sources. "
-                f"{pin['trainer_family']}: {error}") from error
+
+def _publication_paths(root):
+    return {root / CURRENT_SELECTION, root / inventory.EVIDENCE_MANIFEST,
+            root / inventory.CURRENT_PREFIX.with_suffix(".json"), root / inventory.CURRENT_PREFIX.with_suffix(".md"),
+            root / REPORT / "publication.json", root / REPORT / "current-media-index.json",
+            root / "reports/forge/scoped-publications.json", root / "reports/forge/EXPERIMENTS_BY_TIER.md",
+            *(root / "reports/forge/families").glob("*.md"),
+            *(root / "reports/forge/shared-score-index-20261003").glob("*.md"),
+            *(root / "reports/forge/technique-evidence").glob("*.json"),
+            *(root / "reports/forge/technique-receipts").glob("*.json")}
+
+
+def _register_media(root, readout):
+    """Extend navigation through a new index; original media stays immutable."""
+    registry_path = root / "reports/forge/scoped-publications.json"
+    if not registry_path.is_file():
+        return
+    registry = read_json(registry_path)
+    old = registry.get("media")
+    if old:
+        if file_hash(root / old["path"]) != old["sha256"]:
+            raise ValueError("Registered actual-training media index differs")
+        index = read_json(root / old["path"])
+    else:
+        index = {"qualification_input": False, "items": []}
+    identities = {(item["family"], item["task_id"], item["attempt_id"]): item for item in index["items"]}
+    for candidate in readout["candidates"]:
+        for task in candidate["tasks"]:
+            gif = REPORT / "media" / candidate["configuration_id"][:12] / (task["task_id"] + ".gif")
+            item = {**task["gif_receipt"], "family": FAMILY, "attempt_id": task["attempt_id"], "gif": gif.as_posix()}
+            key = FAMILY, task["task_id"], task["attempt_id"]
+            if key in identities and identities[key] != item:
+                raise ValueError("Pure BCAP actual-training media identity changed")
+            if key not in identities:
+                index["items"].append(item); identities[key] = item
+    path = REPORT / "current-media-index.json"
+    atomic_json(root / path, index)
+    registry["media"] = {"path": path.as_posix(), "sha256": file_hash(root / path)}
+    atomic_json(registry_path, registry)
+
+
+def compose_scientific_publication(root, before, frozen, plan, readout, selection):
+    """Append recorded evidence while retaining every existing scientific row.
+
+    Existing pins are validated against registered snapshots, rather than
+    readmitted under a changed live task. Only the new measurement pin goes
+    through the strict public fresh-pin contract check.
+    """
+    from experiments.forge.family_reports import build_progress
+    from experiments.forge.trainer_families import REGISTRY, _current_pin, comparison_cohort, load_families
+    root = Path(root).resolve()
+    manifest = read_json(root / inventory.EVIDENCE_MANIFEST)
+    card = read_json(root / CURRENT_SELECTION)
+    old_pins = [pin for pin in card["selections"] if pin["trainer_family"] != FAMILY]
+    result = deepcopy(before)
+    snapshots, eligible = {}, []
+    paid = readout.get("paid_attempts", [])
+    for cohort, report in frozen:
+        if (report.get("publication_scope") != "frozen_source"
+                or report.get("frozen_source", {}).get("commit") != cohort["source_commit"]):
+            raise ValueError("Pure BCAP composition requires independently reconstructed source snapshots")
+        check = deepcopy(report)
+        if check["provenance"].pop("input_digest", None) != stable_hash(check):
+            raise ValueError("Pure BCAP source snapshot input digest differs")
+        if any(report.get(key) != manifest[key] for key in inventory.POLICY_FIELDS):
+            raise ValueError("Pure BCAP source snapshot changed the recorded task policy")
+        names = {record["candidate_id"] for record in paid if record["source_digest"] == cohort["source_digest"]}
+        names = names or set(cohort["candidate_ids"])
+        rows = [row for row in report["rows"] if row["candidate_id"] in names and row.get("attempt_ids")
+                and row.get("bindings", {}).get("source_digest") == cohort["source_digest"]
+                and row.get("runtime_cohort", {}).get("execution_backend") == "cuda"]
+        if len(rows) != len(names) or {row["candidate_id"] for row in rows} != names:
+            raise ValueError("Pure BCAP snapshot must retain every paid candidate in its complete source cohort")
+        recorded = {}
+        for row in rows:
+            inventory._validate_published_row(root, report, row)
+            records = [record for record in paid if record["candidate_id"] == row["candidate_id"]
+                       and record["source_digest"] == cohort["source_digest"]]
+            if records and ({record["attempt_id"] for record in records} != set(row["attempt_ids"])
+                            or any(record["candidate_revision"] != row["candidate_revision"] for record in records)):
+                raise ValueError("Pure BCAP snapshot differs from its exact paid receipt roster")
+            recorded[row["candidate_id"]] = max(read_json(root / "reports/forge/attempts" / attempt / "result.json")
+                                               ["raw"]["finished_at"] for attempt in row["attempt_ids"])
+        encoded = inventory._json_text(report)
+        relative = inventory.EVIDENCE_MANIFEST.parent / (report["provenance"]["input_digest"] + ".json")
+        entry = {"snapshot": relative.as_posix(), "json_sha256": hashlib.sha256(encoded.encode()).hexdigest(),
+                 "source_commit": cohort["source_commit"], "candidates": recorded}
+        if entry not in manifest["cohorts"]:
+            manifest["cohorts"].append(entry)
+        snapshots[root / relative] = encoded
+        result.setdefault("evidence_sources", {})[entry["json_sha256"]] = deepcopy(entry)
+        for row in rows:
+            copied = deepcopy(row)
+            copied.update(publication_key=entry["json_sha256"], qualification_input=False, qualification_reuse=False,
+                          trainer_family=FAMILY)
+            eligible.append(copied)
+        for catalog in inventory.CONTRACT_CATALOGS:
+            combined = result.setdefault(catalog, {})
+            for digest, contract in report.get(catalog, {}).items():
+                if digest != stable_hash(contract) or (digest in combined and combined[digest] != contract):
+                    raise ValueError("Pure BCAP composition contains conflicting scientific contracts")
+                combined[digest] = deepcopy(contract)
+    cohorts, _ = source_cohorts(readout)
+    original_source = read_json(root / REPORT / "plans.json").get("source_digest")
+    old_winner = len(cohorts) > 1 and selection["source_digest"] == original_source
+    pin = selected_pin({"rows": eligible}, plan, readout, selection,
+                       selection_kind="historical_incumbent" if old_winner else "current_measurement")
+    selected, metadata = _current_pin(root, FAMILY, eligible, pin, view_id=VIEW, catalogs=result)
+    metadata.update(qualification_scope="recorded_source", qualifies_latest_checkout=False)
+    if old_winner:
+        metadata["qualified"] = False
+    existing = [item for item in card["selections"] if item["trainer_family"] == FAMILY]
+    if existing and existing != [pin]:
+        raise ValueError("Pure BCAP publication cannot replace its exact frozen family selection")
+    if not existing:
+        card["selections"].append(pin)
+    label = load_families(root)[FAMILY]["label"]
+    winner = deepcopy(selected)
+    winner.update(technique=label, selection=metadata,
+                  configuration_id=selection["selected_configuration_id"], comparison_cohort=comparison_cohort(selected, result))
+    result["rows"] = [row for row in result["rows"] if row.get("trainer_family") != FAMILY] + [winner]
+    result.setdefault("trainer_families", {})[FAMILY] = load_families(root)[FAMILY]
+    for key in ("configuration_rows", "evidence_rows"):
+        seen = {(scientific_row_hash(row), row.get("publication_key")) for row in result.get(key, [])}
+        target = result.setdefault(key, [])
+        for row in eligible:
+            identity = scientific_row_hash(row), row["publication_key"]
+            if identity not in seen:
+                variant = deepcopy(row)
+                if key == "configuration_rows":
+                    variant.update(selected_configuration=scientific_row_hash(row) == scientific_row_hash(winner),
+                                   alternative_scope="selected" if scientific_row_hash(row) == scientific_row_hash(winner)
+                                   else "archived_alternative")
+                target.append(variant); seen.add(identity)
+    preserved = preserved_science(before, result)
+    if [pin for pin in card["selections"] if pin["trainer_family"] != FAMILY] != old_pins:
+        raise ValueError("Pure BCAP composition changed an existing selected pin")
+    for key in inventory.CONTRACT_CATALOGS:
+        if any(result[key].get(digest) != value for digest, value in before.get(key, {}).items()):
+            raise ValueError("Pure BCAP composition changed a recorded scientific contract")
+    # Store navigation inputs before generating pages. The surrounding
+    # transaction restores every public byte if any later validation fails.
+    atomic_json(root / CURRENT_SELECTION, card)
+    _register_media(root, readout)
+    result["publication_refresh"] = {"scientific_rows_preserved": True, "family_selections_preserved": True,
+        "qualification_regraded": False, "new_sources_registered": True, "training_launched": False,
+        "new_sources_independently_regraded": [cohort["source_commit"] for cohort, _ in frozen],
+        "old_word_contracts": "Retained source-bound outcomes; live progress separately reports changed contracts."}
+    result["family_progress"] = build_progress(root, result)
+    result["common26_display"] = inventory._common26_display_projection(result, root)
+    result["provenance"].update(evidence_manifest_sha256=stable_hash(manifest),
+        family_current_selection_sha256=file_hash(root / CURRENT_SELECTION),
+        trainer_family_registry_sha256=file_hash(root / REGISTRY), selected_rows_sha256=stable_hash(result["rows"]),
+        preserved_scientific_composition_reducer_sha256=file_hash(Path(__file__)))
+    result["provenance"].pop("input_digest", None)
+    result["provenance"]["input_digest"] = stable_hash(result)
+    return result, manifest, snapshots, pin, preserved
 
 
 def publish(root=ROOT):
     root = Path(root).resolve()
     plan, readout, selection = completed_readout(root)
-    cohorts, sources = source_cohorts(readout)
-    before = read_json(root / inventory.CURRENT_PREFIX.with_suffix(".json"))
-    preflight_retained_pins(root, before)
-    selection_path = root / CURRENT_SELECTION
-    old_bytes = selection_path.read_bytes()
-    card = read_json(selection_path)
-    old_pins = [pin for pin in card["selections"] if pin["trainer_family"] != FAMILY]
-    with tempfile.TemporaryDirectory(prefix="forge-pure-bcap-publication-") as temporary:
-        rows = []
-        for index, cohort in enumerate(cohorts):
-            regraded = inventory.regenerate(root, view_id=VIEW, execution_backend="cuda",
-                source_commit=cohort["source_commit"], output_prefix=Path(temporary) / f"evidence-{index}")
-            rows.extend(read_json(regraded["json"])["rows"])
-        pin = selected_pin({"rows": rows}, plan, readout, selection)
-    existing = [item for item in card["selections"] if item["trainer_family"] == FAMILY]
-    if existing and existing != [pin]:
-        raise ValueError("Pure BCAP publication cannot silently replace its frozen measurement")
-    if not existing:
-        card["selections"].append(pin)
-    # The general publisher stages its inputs before writing. Retain exact
-    # public bytes as well, so this wrapper's additional preservation check
-    # cannot leave a partial board if it detects an unexpected regression.
-    def public_paths():
-        return {root / CURRENT_SELECTION, root / inventory.EVIDENCE_MANIFEST,
-                root / inventory.CURRENT_PREFIX.with_suffix(".json"),
-                root / inventory.CURRENT_PREFIX.with_suffix(".md"),
-                *(root / "reports/forge/families").glob("*.md"),
-                *(root / "reports/forge/shared-score-index-20261003").glob("*.md")}
-    originals = {path: path.read_bytes() for path in public_paths() if path.is_file()}
+    print(f"Validated {readout['unique_paid_attempts']} paid receipt identities and charges", flush=True)
+    before = verified_registered_publication(root)
+    print(f"Verified {len(before['rows'])} registered selected scientific rows", flush=True)
+    cohorts, _ = source_cohorts(readout)
+    originals = {path: path.read_bytes() for path in _publication_paths(root) if path.is_file()}
     try:
-        atomic_json(selection_path, card)
-        winner_source = sources[pin["candidate_id"]]["source_commit"]
-        for cohort in sorted(cohorts, key=lambda c: c["source_commit"] != winner_source):
-            metadata = inventory.publish_current(root, view_id=VIEW, execution_backend="cuda",
-                                                 source_commit=cohort["source_commit"])
-        after = read_json(metadata["json"])
-        preserved = preserved_science(before, after)
-        if [item for item in read_json(selection_path)["selections"] if item["trainer_family"] != FAMILY] != old_pins:
-            raise ValueError("Pure BCAP publication changed an existing family pin")
+        frozen = []
+        with tempfile.TemporaryDirectory(prefix="forge-pure-bcap-composition-") as temporary:
+            for index, cohort in enumerate(cohorts):
+                print(f"Independently regrading executed source {cohort['source_commit']}", flush=True)
+                regraded = inventory.regenerate(root, view_id=VIEW, execution_backend="cuda",
+                    source_commit=cohort["source_commit"], output_prefix=Path(temporary) / f"evidence-{index}")
+                frozen.append((cohort, read_json(regraded["json"])))
+                print(f"Verified source {cohort['source_commit']}", flush=True)
+        result, manifest, snapshots, pin, preserved = compose_scientific_publication(
+            root, before, frozen, plan, readout, selection)
+        receipt = {"schema_version": 2, "scope": "pure_bcap_initial_recorded_source_selection",
+            "qualification_input": False, "default_adoption": False, "source_cohorts": cohorts,
+            "readout": (REPORT / "readout.json").as_posix(), "readout_sha256": file_hash(root / REPORT / "readout.json"),
+            "plan_sha256": file_hash(root / REPORT / ("publication-plans.json" if
+                                     (root / REPORT / "publication-plans.json").is_file() else "plans.json")),
+            "selection": selection, "family_pin": pin, "preserved_family_scientific_rows": preserved,
+            "unique_paid_attempts": readout["unique_paid_attempts"], "paid_wall_seconds": readout["paid_wall_seconds"],
+            "cost_note": readout["cost_note"], "board": inventory.CURRENT_PREFIX.with_suffix(".md").as_posix(),
+            "selection_scope": "One complete executed source cohort; no latest-checkout or default qualification.",
+            "selected_live_measurement_contracts_validated": pin["selection_kind"] == "current_measurement",
+            "composition": "Exact existing scientific rows and pins are retained; only the new complete Pure BCAP family row is selected."}
+        atomic_json(root / REPORT / "publication.json", receipt)
+        markdown_path = root / inventory.CURRENT_PREFIX.with_suffix(".md")
+        markdown = inventory._current_markdown(result, root, markdown_path)
+        pages = inventory._family_pages(root, result)
+        shared = inventory._shared_score_intro(root, result)
+        for path, content in snapshots.items():
+            if path.exists() and path.read_text() != content:
+                raise ValueError("Registered source snapshots are immutable")
+            inventory._write_changed(path, content)
+        atomic_json(root / inventory.EVIDENCE_MANIFEST, manifest)
+        inventory._write_changed(root / inventory.CURRENT_PREFIX.with_suffix(".json"), inventory._json_text(result))
+        inventory._write_changed(markdown_path, markdown)
+        inventory._write_family_pages(root, pages)
+        if shared:
+            inventory._write_changed(*shared)
     except BaseException:
-        for path in public_paths() - originals.keys():
+        for path in _publication_paths(root) - originals.keys():
             if path.is_file():
                 path.unlink()
         for path, content in originals.items():
+            path.parent.mkdir(parents=True, exist_ok=True)
             path.write_bytes(content)
-        selection_path.write_bytes(old_bytes)
         raise
-    receipt = {"schema_version": 1, "scope": "pure_bcap_initial_current_measurement",
-        "qualification_input": False, "default_adoption": False,
-        "source_cohorts": cohorts,
-        "readout": (REPORT / "readout.json").as_posix(), "readout_sha256": file_hash(root / REPORT / "readout.json"),
-        "plan_sha256": file_hash(root / REPORT / ("publication-plans.json" if
-                                 (root / REPORT / "publication-plans.json").is_file() else "plans.json")),
-        "selection": selection, "family_pin": pin, "preserved_family_scientific_rows": preserved,
-        "unique_paid_attempts": readout["unique_paid_attempts"], "paid_wall_seconds": readout["paid_wall_seconds"],
-        "cost_note": readout["cost_note"], "board": inventory.CURRENT_PREFIX.with_suffix(".md").as_posix()}
-    atomic_json(root / REPORT / "publication.json", receipt)
-    markdown_path = root / inventory.CURRENT_PREFIX.with_suffix(".md")
-    inventory._write_changed(markdown_path, inventory._current_markdown(after, root, markdown_path))
-    return {**metadata, "selected_candidate_id": pin["candidate_id"],
-            "preserved_families": len(preserved), "paid_wall_seconds": receipt["paid_wall_seconds"]}
+    return {"json": str(root / inventory.CURRENT_PREFIX.with_suffix(".json")),
+            "report": str(root / inventory.CURRENT_PREFIX.with_suffix(".md")), "rows": len(result["rows"]),
+            "input_digest": result["provenance"]["input_digest"], "selected_candidate_id": pin["candidate_id"],
+            "preserved_families": len(preserved), "paid_wall_seconds": readout["paid_wall_seconds"]}
 
 
 def verified_registered_publication(root):
@@ -392,7 +609,7 @@ def display_section(root, page):
     cohorts, _ = source_cohorts(readout)
     receipt_cohorts = receipt.get("source_cohorts") or [{"source_commit": receipt.get("source_commit"),
         "source_digest": receipt.get("source_digest"), "candidate_ids": [c["candidate_id"] for c in readout["candidates"]]}]
-    if (receipt.get("scope") != "pure_bcap_initial_current_measurement"
+    if (receipt.get("scope") not in {"pure_bcap_initial_current_measurement", "pure_bcap_initial_recorded_source_selection"}
             or receipt.get("qualification_input") is not False or receipt.get("default_adoption") is not False
             or file_hash(root / receipt["readout"]) != receipt["readout_sha256"]
             or readout["selection"] != receipt["selection"]

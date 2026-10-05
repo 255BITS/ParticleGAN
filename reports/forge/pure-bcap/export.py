@@ -44,6 +44,11 @@ def paid_attempts(root, plan):
         state = Queue(queue, on_completion=None).inspect()
         campaign = cohort.get("campaign_id", cohort["round"])
         charges = [charge for charge in state["charges"] if charge["owner"]["campaign"] == campaign]
+        frozen_ids = cohort.get("paid_attempt_ids_frozen")
+        if frozen_ids is not None and ({charge["attempt_id"] for charge in charges} != set(frozen_ids)
+                or not math.isclose(sum(charge["seconds"] for charge in charges),
+                                    cohort["paid_wall_seconds_frozen"], abs_tol=1e-8)):
+            raise ValueError("Original paid attempts changed after publication planning")
         if sum(charge["seconds"] for charge in charges) > cohort["campaign_cap_seconds"]:
             raise ValueError("Execution round exceeds its frozen paid allowance")
         for charge in charges:
@@ -101,6 +106,8 @@ def export_readout(root=ROOT, *, plan_path=None, partial=False):
     if set(sources) != set(expected):
         raise ValueError("Executed source cohorts differ from the candidate roster")
     paid = paid_attempts(root, plan)
+    if not partial and plan.get("expected_paid_attempt_count", len(paid)) != len(paid):
+        raise ValueError("Final readout differs from the declared complete unique-attempt roster")
     by_attempt = {record["attempt_id"]: record for record in paid}
     attempts, candidates, counts, diagnostic = set(), [], Counter(), Counter()
     projected = {}
@@ -173,6 +180,9 @@ def export_readout(root=ROOT, *, plan_path=None, partial=False):
     # Candidate costs already include their retries. Prior context belongs to
     # candidates omitted from the final roster, not omitted task-attempt cells.
     unselected = [record for record in paid if record["candidate_id"] not in expected]
+    if not partial and (plan.get("selected_measurement_attempt_count", len(attempts)) != len(attempts)
+            or plan.get("original_unselected_paid_attempt_count", len(unselected)) != len(unselected)):
+        raise ValueError("Final selected measurements or retained original context count differs")
     paid_seconds = sum(record["paid_wall_seconds"] for record in paid)
     selected_cost = sum(candidate["cost"]["new_paid_wall_seconds"] for candidate in candidates)
     prior_cost = sum(record["paid_wall_seconds"] for record in unselected)

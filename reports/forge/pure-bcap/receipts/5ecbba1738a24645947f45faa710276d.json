@@ -1,0 +1,130 @@
+{
+  "attempt_id": "5ecbba1738a24645947f45faa710276d",
+  "attempt_status": "completed",
+  "campaign_id": "pure-bcap-joint-loss-repair-v2",
+  "candidate_id": "bcap-pure--b097e283dc35eb5ff38878e138eacc4845dc3fc6e1a9d5d14bba34899d763657",
+  "candidate_revision": "2380690dc65e1800aaf69605b1cf3cfee6acb4f41cad292491d912b94c16901f",
+  "certificate_validated": true,
+  "cost_owner": {
+    "campaign": "pure-bcap-joint-loss-repair-v2",
+    "request": "06f28f9bf228db8bb5d3dfbf",
+    "revision": "2380690dc65e1800aaf69605b1cf3cfee6acb4f41cad292491d912b94c16901f"
+  },
+  "evidence_scope": "published_summary",
+  "note": "Display summary only. Regrading requires the byte-exact archived original receipts; this projection cannot qualify a technique.",
+  "provenance": {
+    "canonical_result_hash": "51b3044a5426e47d38e284a77837ab215918857e980b23b76e18b6102b1613db",
+    "original_files": {
+      "evidence": {
+        "path": "reports/forge/attempts/5ecbba1738a24645947f45faa710276d/evidence.json",
+        "sha256": "432478e9e4e020ee68896bca64d0470ddf89fefb07ea3342b4d41e29d6db1cf5"
+      },
+      "request": {
+        "path": "reports/forge/attempts/5ecbba1738a24645947f45faa710276d/request.json",
+        "sha256": "c006f6f22f5df06b387eb88778902a651ee31fabb8de2b2e047c6f851a99908c"
+      },
+      "result": {
+        "path": "reports/forge/attempts/5ecbba1738a24645947f45faa710276d/result.json",
+        "sha256": "3b43afc6504a0eec7318d6fdb75f13dd8bd9d749ec5f2e47f86745b2eb8c3b3a"
+      }
+    },
+    "source_digest": "57ae290b87790a46e46cd11597a6e1e282f050207dca0b637768047951915b72",
+    "source_origin_commit": "44cc66d78495cb913e0ea064840e2de37c8a4ae5"
+  },
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "request_id": "06f28f9bf228db8bb5d3dfbf",
+  "runtime": {
+    "implementation": "CPython",
+    "machine": "x86_64",
+    "packages": {
+      "numpy": "2.5.2",
+      "scipy": "1.17.1",
+      "torch": "2.14.0"
+    },
+    "python": "3.12.13",
+    "system": "Linux"
+  },
+  "schema_version": 1,
+  "summary_version": "forge-technique-receipt-summary-v1",
+  "task_results": [
+    {
+      "api_version": "forge-api-v1",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "compatibility_key": "38788b27dd2359e2a79f9ba6e93e954ce758b4d087b90cf93160e15685b55851",
+      "cost": {
+        "adapter_seconds": 0.25756468705367297,
+        "charged_task": "two_pole",
+        "device": "cpu",
+        "execution_seconds": 6.325322074000724,
+        "flops": {
+          "kind": "unavailable",
+          "value": null
+        },
+        "runner_seconds": 2.6268835889641196,
+        "wall_seconds": 6.325322074000724
+      },
+      "device": "cpu",
+      "evaluator_summary": {
+        "attempted": true,
+        "confirmation_fraction": 2.0,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": null,
+          "first_pass_step": null,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 0,
+          "passing_suffix": 0,
+          "stable_from_seconds": null,
+          "stable_from_step": null
+        },
+        "metric_checks": {
+          "grad_med": {
+            "margin": 0.8698088228702545,
+            "metric": "grad_med",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 1.0,
+            "value": 0.13019117712974548
+          },
+          "mean_abs": {
+            "margin": -0.2875787189230323,
+            "metric": "mean_abs",
+            "op": ">=",
+            "status": "FAIL",
+            "threshold": 0.3,
+            "value": 0.012421281076967716
+          }
+        },
+        "passed": false,
+        "shortfall": 0.4792978648717205,
+        "status": "FAIL"
+      },
+      "execution_path": "public_components",
+      "gate_status": "FAIL",
+      "metrics": {
+        "grad_med": 0.13019117712974548,
+        "mean_abs": 0.012421281076967716
+      },
+      "raw_status": "completed",
+      "reason": "recomputed complete live curve and terminal suffix",
+      "reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "sampling": {
+        "eval_output_noise": "not_applied_to_measurement",
+        "sampling_contract_version": 1,
+        "sampling_law": "learned_particles_and_critic_gradient",
+        "scoring_weights": "live"
+      },
+      "status": "FAIL",
+      "task_id": "two_pole"
+    }
+  ]
+}

@@ -83,6 +83,7 @@ def archive_readout(root=ROOT, *, readout_path=REPORT / "readout.json", archive=
     attempts, files, restoration = _retained_files(root, result)
     files[readout_path.as_posix()] = root / readout_path
     for path in (result.get("plan"), "reports/forge/pure-bcap/audit-initial.json",
+                 "reports/forge/pure-bcap/audit-repair.json",
                  "reports/forge/pure-bcap/restoration.json"):
         if path and (root / path).is_file():
             files[path] = root / path

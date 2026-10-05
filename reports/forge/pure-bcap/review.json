@@ -1,13 +1,48 @@
 {
   "corrected_execution": {
-    "paid_attempts": 0,
-    "plans_frozen": false,
-    "status": "BLOCKED_COMPUTE",
-    "submissions": 0
+    "actual_execution_devices": {
+      "0": 15,
+      "1": 17,
+      "cpu": 24
+    },
+    "all_joint_roles_updated_for_20001_steps": true,
+    "audit_errors": 0,
+    "audit_sha256": "b9729ab488b51666b1ba7af2e01ca9fe09e5bc8df79439bdaf589b4ee281212e",
+    "independent_audit": "PASS",
+    "paid_attempts": 56,
+    "paid_wall_seconds": 1510.7568104849197,
+    "plans_frozen": true,
+    "source_commit": "44cc66d78495cb913e0ea064840e2de37c8a4ae5",
+    "source_digest": "57ae290b87790a46e46cd11597a6e1e282f050207dca0b637768047951915b72",
+    "status": "COMPLETE",
+    "submissions": 8
   },
   "default_adoption": false,
-  "develop_integrated": "4f3a70e7",
-  "merge_commit": "155c8918",
+  "develop_integrated": "698aba47ddf549af2148d59964170fb61fc5a7d2",
+  "final_publication": {
+    "archive_files_verified": 4070,
+    "archive_sha256": "9f2aa3f21b74aac9031602782da8442aaf1e22241c94a654c4fd63594d77d9c6",
+    "best_required_pass_count": 3,
+    "complete_recipes": 10,
+    "default_adoption": false,
+    "diagnostic_counts": {
+      "PASS": 10
+    },
+    "existing_scientific_rows_and_selection_pins_preserved": 11,
+    "paid_wall_seconds": 2549.508983234293,
+    "qualification_input": false,
+    "required_counts": {
+      "FAIL": 44,
+      "PASS": 16
+    },
+    "required_total": 6,
+    "selected_live_measurement_contracts_validated": false,
+    "selected_measurements_and_actual_training_gifs": 70,
+    "source_scope": "pure_bcap_initial_recorded_source_selection",
+    "status": "PASS",
+    "unique_paid_attempts": 109
+  },
+  "merge_commit": "7a91f299b",
   "original_evidence": {
     "archive_files_verified": 2012,
     "archive_sha256": "3266966bc50405ba92ba6016da375313ff35d63558804c4e9d493a9b718dffa7",
@@ -23,17 +58,56 @@
   },
   "qualification_input": false,
   "remaining": [
-    "Execute the eight reviewed joint-loss recipes on GPU 0 and GPU 1 after freezing their actual source/runtime cohort.",
-    "Compose final source-bound family publication while preserving existing scientific rows and original task contracts.",
-    "Push the local commits to PR #293, review, and merge into develop when GitHub is reachable."
+    "Push the reviewed final report commit to PR #293 and merge into develop with a regular merge preserving both execution source commits."
   ],
+  "review_status": "READY_TO_MERGE",
   "schema_version": 1,
-  "scope": "pure_bcap_merge_software_review",
+  "scope": "pure_bcap_completed_execution_and_merge_review",
   "software": {
-    "command": "python -m pytest -q tests/test_forge*.py tests/test_adversarial_losses.py tests/test_pure_bcap*.py",
-    "runtime_seconds": 220.42,
+    "coverage": "All 321 test files covered by CPU partitions, followed by focused reruns of corrected historical-fixture controls.",
+    "experiment_memory": "Current; summaries-only refresh preserves published qualifications",
+    "failure_resolution": "Test-only frozen-source/registry fixtures and current-view declarations; no production gate, prior, allowance, scientific record or qualification changed.",
+    "forge_validation": "PASS; 118 candidates, 60 tasks, 8 views",
+    "historical_source_checkout": "CPU CI fetch-depth 0 retains exact published Git objects",
+    "partitions": [
+      {
+        "initial_failed": 4,
+        "initial_passed": 3428,
+        "log": "runs/forge/pure-bcap-core-tests.log",
+        "resolved_failures": 4,
+        "scope": "Top-level non-Forge files except publication and isolated renderer",
+        "skipped": 63,
+        "subtests_passed": 18,
+        "targeted_rerun_command": "CUDA_VISIBLE_DEVICES='' /home/martyn/dev/ParticleGAN/.venv/bin/python -m pytest -q tests/test_critic_balance_runner.py tests/test_generator_step_runner.py tests/test_ring16_acquisition.py tests/test_routed_generator_batch_identity.py",
+        "targeted_rerun_passed": 202,
+        "targeted_rerun_receipt": "exec session 1268, completion chunk e9247d; stdout was returned directly, without a log file",
+        "targeted_rerun_result": "202 passed in 21.06s; exit 0",
+        "xfailed": 1
+      },
+      {
+        "initial_failed": 1,
+        "initial_passed": 1822,
+        "log": "runs/forge/pure-bcap-final-forge-tests.log",
+        "resolved_failures": 1,
+        "scope": "All Forge files and pure BCAP publication",
+        "subtests_passed": 105,
+        "targeted_rerun_log": "runs/forge/pure-bcap-original-reconstruction-tests.log",
+        "targeted_rerun_passed": 113
+      },
+      {
+        "log": "runs/forge/pure-bcap-renderer-tests.log",
+        "passed": 3,
+        "scope": "Isolated late-phase renderer"
+      }
+    ],
+    "publication_controls": {
+      "log": "runs/forge/pure-bcap-publication-tests.log",
+      "passed": 79
+    },
+    "skipped": 63,
     "status": "PASS",
-    "subtests_passed": 105,
-    "tests_passed": 1883
+    "subtests_passed": 123,
+    "tests_passed": 5258,
+    "xfailed": 1
   }
 }

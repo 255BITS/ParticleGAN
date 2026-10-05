@@ -1,8 +1,8 @@
 # Pure BCAP initial loss comparison
 
 This family starts from develop `5f2ac0116de93ab697a7d2faa840245430a3af90`.
-Develop's candidate/study separation at `4f3a70e7` is integrated on the PR
-branch. Executed v1 declarations retain their original identities; the
+Develop through `698aba47` is integrated on the PR branch, including the
+candidate/study separation at `4f3a70e7`. Executed v1 declarations retain their original identities; the
 upstream schema-3 example uses the successor ID `bcap-pure-adam-example-v3`
 to avoid replacing the executed v1 parent.
 It uses native PyTorch Adam, constant learning rates and moments, and one fixed
@@ -86,14 +86,46 @@ with up to 20,160 new paid seconds, retaining the original cost within the
 its own source-bound Tier 1 cells. The two unchanged relativistic recipes will
 not be rerun for this merge.
 
-The current session cannot access CUDA or GitHub. No corrected GPU run has
-started, no corrected execution cohort is frozen, and no new family winner has
-been registered. The current leaderboard retains its registered scientific
-rows and selections. Navigation marks the updated word source contract as
-changed; old word grades remain attached to their original sources. Complete
-the corrected loss comparison before choosing another experiment angle. Then
-consider a separately budgeted Gaussian rate/duration comparison and inspect
-the saved critic/shape diagnostics, retaining the existing numerical gates.
+The corrected round is complete on GPU 0 and GPU 1 from
+`44cc66d78495cb913e0ea064840e2de37c8a4ae5`, with its
+[frozen execution plan](repair-plans.json) and [independent audit](audit-repair.json).
+All 56 receipts pass the provenance and execution audit. Every word run updates
+G, E, prior and D for all 20,001 steps. The correction costs 1,510.757 new paid
+seconds; all 109 original and corrected paid attempts cost 2,549.509 seconds.
+The earlier declaration-only preflight retains the unavailable-compute
+observation from its original review.
+
+The [final comparison](readout.json) contains ten complete recipes, each with
+six required tests and the separate clock diagnostic. Relativistic BCAP at
+`.00425` remains best at **3/6**; its lower rate passes **2/6**. Hinge,
+Wasserstein and least squares each pass **2/6** at `.00425` and **1/6** at
+`.0010625`. Non-saturating passes **1/6** at either rate. No recipe passes all
+six required tests. All ten fail Gaussian and ring acquisition. All ten pass
+the clock diagnostic.
+
+The repaired non-saturating low-rate word run passes with 22 consecutive
+terminal checks, quality 1, five modes and mass TV `.01895`. The other seven
+corrected word runs fail. The Wasserstein low-rate endpoint reaches all five
+words with quality 1, but four of its preceding five observations fail: its
+passing terminal suffix is only 1, below the required 5. This is observed
+instability, rather than missing encoder training or a reason to select the
+final endpoint alone.
+
+The current leaderboard preserves existing family science and selects one
+complete original-source relativistic recipe for Pure BCAP. That result keeps
+its original word contract; live coverage marks the changed source separately.
+The new family selection is a recorded baseline, with no calibrated default
+adoption. Do not combine its successful cells with the lower-rate word pass.
+
+For the next bounded study, prioritize constant generator/critic/prior rate
+ratios and fixed BCAP coefficient/cap values. The low-rate non-saturating word
+pass and high-rate collapses justify testing balance; the saved Gaussian and
+Wasserstein oscillations justify testing fixed penalty strength. Keep both
+questions inside pure BCAP and change one factor group at a time. A separate
+Gaussian budget diagnostic can test whether extra updates create five stable
+terminal passes; the transient low-rate relativistic KS passes do not establish
+that longer training will help. Retain every numerical gate and the original
+budget/source evidence when declaring those successor comparisons.
 
 All six required Tier 1 tests retain their original numerical gates,
 initialization, resources, prior, sampling law, and training allowance. The
@@ -117,19 +149,22 @@ history cannot isolate the causal effect of one removal. Generated Forge
 admission metadata is separate from the simple public training recipe; its
 numerical prediction is not the scientific pass/fail criterion.
 
-Prepare and freeze the correction from a clean reviewed commit on the actual
-two-A6000 host, using the same project Python 3.12.13 environment as the original
-round. Preparation never trains and refuses to overwrite frozen declarations:
+The corrected round is already frozen. For exact reproduction, use an isolated,
+clean checkout of `44cc66d78495cb913e0ea064840e2de37c8a4ae5` on the two-A6000
+host with the recorded Python 3.12.13 environment and its existing frozen plan:
 
 ```sh
-python reports/forge/pure-bcap/prepare_repair.py --freeze
-python reports/forge/pure-bcap/run.py --plan repair-plans.json --expected-commit REVIEWED_COMMIT \
+mkdir -p runs/forge/pure-bcap-joint-loss-repair-v2
+python reports/forge/pure-bcap/run.py --plan repair-plans.json \
+  --expected-commit 44cc66d78495cb913e0ea064840e2de37c8a4ae5 \
   > runs/forge/pure-bcap-joint-loss-repair-v2/coordinator.log 2>&1
 tail -F runs/forge/pure-bcap-joint-loss-repair-v2/coordinator.log
 tail -F runs/forge/pure-bcap-joint-loss-repair-v2/queue/events.jsonl
 ```
 
-Without `--freeze`, preparation only materializes reusable declarations.
+Preparation never trains. `prepare_repair.py --freeze` was used before this
+execution and refuses to overwrite its frozen plan. Without `--freeze`,
+preparation only materializes reusable declarations.
 The runner refuses unavailable GPUs, dirty tracked files, changed source
 bindings or an unexpected commit before admitting work. Original v1
 reproduction sources are retained at `af75a3fe`; `prepare.py` intentionally

@@ -292,6 +292,8 @@ def _frozen_report(root, source_commit, *, view_id, execution_backend, temporary
     # modules cannot grade a reconstructed older checkout faithfully.
     program = """
 import json, sys
+import torch
+torch.set_num_threads(1)
 from pathlib import Path
 from experiments.forge.sources import inspect_source
 from experiments.forge.technique_board import write_report
@@ -318,7 +320,8 @@ if (root / 'experiments/forge/knowledge.py').is_file():
 result = write_report(root, goal, execution_backend=None if backend == 'all' else backend, output_prefix=prefix)
 print(json.dumps(result, sort_keys=True))
 """
-    environment = {**os.environ, "PYTHONPATH": str(frozen_root), "PYTHONDONTWRITEBYTECODE": "1"}
+    environment = {**os.environ, "PYTHONPATH": str(frozen_root), "PYTHONDONTWRITEBYTECODE": "1",
+                   "OMP_NUM_THREADS": "1", "MKL_NUM_THREADS": "1", "OPENBLAS_NUM_THREADS": "1"}
     try:
         output = subprocess.check_output([os.path.abspath(sys.executable), "-c", program, str(frozen_root),
                                           str(contract), str(prefix), view_id, execution_backend or "all"],
