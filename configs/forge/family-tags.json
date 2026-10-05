@@ -10,6 +10,7 @@
     "adaptive-training-policy": "Uses an observation-driven training policy rather than a fixed update schedule.",
     "structural-ablation": "Removes a named mechanism from a parent technique and retains a separate evidence identity.",
     "historical-cohort": "A retained historical family with its original source, prior and scoring contracts.",
-    "learning-rate-annealing": "Declared baseline decreases learning rates during training; horizons and floors are configuration-specific."
+    "learning-rate-annealing": "Declared baseline decreases learning rates during training; horizons and floors are configuration-specific.",
+    "tensorflow-v1-adam": "Uses the declared dense TensorFlow-v1 Adam update law with checkpointed application clocks and epsilon before second-moment bias correction."
   }
 }

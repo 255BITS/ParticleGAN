@@ -131,15 +131,15 @@ def _validate_grid_value(name, value):
     """JSON booleans are not numeric hyperparameters; optional values are typed."""
     if name == "amsgrad":
         valid = type(value) is bool
-    elif name == "reg_every":
+    elif name in {"reg_every", "lr_decay_steps"}:
         valid = type(value) is int and value > 0
-    elif name in {"betas", "prior_betas", "direct_particle_betas"}:
-        valid = (name == "prior_betas" and value is None) or (
+    elif name in {"betas", "prior_betas", "d_betas", "direct_particle_betas"}:
+        valid = (name in {"prior_betas", "d_betas"} and value is None) or (
             isinstance(value, (list, tuple)) and len(value) == 2
             and all(type(item) in (int, float) and math.isfinite(item) and 0 <= item < 1
                     for item in value))
     elif value is None:
-        valid = name in {"network_lr_floor", "beta2_end", "reg_coeff_end"}
+        valid = name in {"network_lr_floor", "beta2_end", "reg_coeff_end", "d_eps", "prior_eps"}
     else:
         valid = type(value) in (int, float) and math.isfinite(value)
     if not valid:
@@ -149,6 +149,8 @@ def _validate_grid_value(name, value):
 def recipe_identity_fields(recipe):
     """Preserve the formerly implicit objective without rewriting saved cards."""
     recipe = deepcopy(recipe)
+    from particlegan.recipe_compat import without_default_additions
+    recipe = without_default_additions(recipe)
     if recipe.get("loss") == "relativistic":
         recipe.pop("loss")
     return recipe
@@ -204,7 +206,13 @@ def validate_configuration_declaration(candidate, *, root=None, _lineage=()):
     if not isinstance(frozen, dict) or not frozen:
         raise ValueError("configuration declaration requires its complete frozen resolved Recipe")
     for key, value in candidate.get("recipe_overrides", {}).items():
-        if key != "name" and (key not in frozen or stable_hash(value) != stable_hash(frozen[key])):
+        # Public factories normalize JSON integer moments/labels to floats.
+        # Compare that binding while retaining the authored override in its
+        # original content identity (including archived integer choices).
+        bound = (tuple(float(v) for v in value) if key in {
+            "betas", "prior_betas", "direct_particle_betas", "d_betas", "loss_labels"}
+            and isinstance(value, (list, tuple)) else value)
+        if key != "name" and (key not in frozen or stable_hash(bound) != stable_hash(frozen[key])):
             raise ValueError("configuration declaration overrides contradict its frozen Recipe")
     digest = configuration_id(candidate, resolved_recipe=frozen)
     if (candidate.get("configuration_id") != digest or candidate.get("id") != f"{family}--{digest}"):
@@ -591,8 +599,8 @@ def plan_search(root: Path, queue_root: Path, spec, *, queue=None) -> dict:
     return summary
 
 
-def enqueue_search(root: Path, queue_root: Path, spec, *, queue=None) -> dict:
-    """Materialize all cards, freeze all source, then admit ordinary requests."""
+def _freeze_search(root: Path, queue_root: Path, spec, *, queue) -> tuple:
+    """Prepare immutable requests without admission, including crash recovery."""
     root, queue_root = Path(root).resolve(), Path(queue_root).resolve()
     queue = queue or Queue(queue_root, report_root=root / "reports/forge")
     if queue.root != queue_root:
@@ -632,6 +640,11 @@ def enqueue_search(root: Path, queue_root: Path, spec, *, queue=None) -> dict:
                             if key not in {"request_id", "campaign_id", "queue_root"}}
         frozen.append((resolved, trial))
     summary.update(stage="registered", submitted_count=0, blocked_count=len(requests) - len(frozen))
+    return frozen, summary
+
+
+def _admit_search(root, queue, frozen, summary):
+    queue_root = queue.root
     _persist(root, summary)  # Freeze study identity before the first admission.
     for request, trial in frozen:
         entry = queue.submit(request, summary["campaign"])
@@ -639,9 +652,17 @@ def enqueue_search(root: Path, queue_root: Path, spec, *, queue=None) -> dict:
                      request_path=str(queue_root / "queue/requests" / f"{entry['request']['request_id']}.json"))
         summary["submitted_count"] += 1
         _persist(root, summary)
-    summary.update(stage="enqueued", submitted_count=len(frozen), blocked_count=len(requests) - len(frozen))
+    summary.update(stage="enqueued", submitted_count=len(frozen))
     _persist(root, summary)
     return report_search(root, queue_root, summary["spec"], queue=queue)
+
+
+def enqueue_search(root: Path, queue_root: Path, spec, *, queue=None) -> dict:
+    """Materialize all cards, freeze all source, then admit ordinary requests."""
+    root, queue_root = Path(root).resolve(), Path(queue_root).resolve()
+    queue = queue or Queue(queue_root, report_root=root / "reports/forge")
+    frozen, summary = _freeze_search(root, queue_root, spec, queue=queue)
+    return _admit_search(root, queue, frozen, summary)
 
 
 def report_search(root: Path, queue_root: Path, spec, *, queue=None) -> dict:

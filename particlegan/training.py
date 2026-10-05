@@ -36,7 +36,11 @@ def _normalized_recipe(recipe):
     """A recipe dict in the form checkpoints are compared in: added fields filled with the values that
     reproduce older behaviour, removed fixed choices dropped when they hold their only value, and the
     construction-time ``initialization`` (superseded by saved weights) dropped."""
-    recipe = {**_ADDED_RECIPE_FIELDS, **recipe}
+    from .recipe_compat import without_default_additions
+    recipe = without_default_additions({**_ADDED_RECIPE_FIELDS, **recipe})
+    for name in ("d_betas", "loss_labels"):
+        if name in recipe and isinstance(recipe[name], (list, tuple)):
+            recipe[name] = tuple(recipe[name])
     if all(recipe.get(key, value) == value for key, value in _REMOVED_RECIPE_FIELDS.items()):
         recipe = {key: value for key, value in recipe.items() if key not in _REMOVED_RECIPE_FIELDS}
     if recipe.get("initialization", None) in (None, "batch_feature_zero"):

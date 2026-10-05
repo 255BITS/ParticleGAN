@@ -22,11 +22,13 @@ from .recipes import (
 )
 from .routing import RoutedBatch, RoutedCandidate, RoutedExecution, RoutedRows
 from .training import GANTrainer, InputNoise
+from .tensorflow_adam import TensorFlowV1Adam
 from .vicreg_loss import ParticleRegularizer
 from . import init
 
 __all__ = [
     "init",
+    "TensorFlowV1Adam",
     "prior_capabilities", "prior_mechanisms",
     "ParticleEncoding", "particle_ae", "particle_vae",
     "ParticleRows", "ScalarHeadFeatures",
