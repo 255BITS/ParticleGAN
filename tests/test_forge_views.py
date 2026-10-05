@@ -73,13 +73,12 @@ def test_current_inventory_has_complete_quality_and_distinct_claim_views():
     smoke = [a["task"] for a in stability["assignments"]
              if a["qualification_tier"] == 1 and a["importance"] == "required"]
     assert smoke == ["gaussian1d_acquisition", "two_pole", "unused_token_hold", "ae_gan_hold", "ring16_acquisition",
-                     "five_word_joint_acquisition"]
+                     "five_word_joint_acquisition", "schedule_contract_audit"]
     assert sum(tasks[n]["execution"]["steps"] for n in smoke[1:4]) == 530
-    assert stability["revision"] == 5
-    assert [a["task"] for a in stability["assignments"] if a["importance"] == "diagnostic"] == [
-        "clockfree_audit_measurement_v1"]
+    assert stability["revision"] == 6
+    assert not [a for a in stability["assignments"] if a["importance"] == "diagnostic"]
     assert [sum(a["qualification_tier"] == tier and a["importance"] == "required"
-                for a in stability["assignments"]) for tier in (1, 2, 3)] == [6, 19, 2]
+                for a in stability["assignments"]) for tier in (1, 2, 3)] == [7, 19, 2]
     assert all("qualification_tier" not in t for t in tasks.values())
     assert tasks["ring_hold"]["execution"]["execution_group"] == tasks["ring_extension"]["execution"]["execution_group"]
     assert tasks["ring_hold"]["execution"]["max_total_steps"] == 7500
@@ -107,7 +106,7 @@ def test_default_plan_and_report_include_acquisition_smoke_without_new_views():
     assert not {"ring16_acquisition", "five_word_joint"} & {row["id"] for row in report["views"]}
     view = next(row for row in report["views"] if row["id"] == "discriminator_stability")
     smoke = next(row for row in view["tiers"] if row["qualification_tier"] == 1)
-    assert smoke["counts"] == {"required": 6, "ranking": 0, "diagnostic": 1}
+    assert smoke["counts"] == {"required": 7, "ranking": 0, "diagnostic": 0}
     reported = {row["id"]: row for row in smoke["tasks"]}
     for name, updates, timeout in (("gaussian1d_acquisition", 1000, 120),
                                    ("ring16_acquisition", 400, 300),
@@ -231,11 +230,12 @@ def test_current_clock_view_preserves_historical_policy_and_first_tier_budget():
     historical = json.loads(path.read_text())
     current = load_view(ROOT, "clockfree_continuous")
     validate_view(historical, tasks)
-    assert current["revision"] == 3 and historical["revision"] == 2
+    assert current["revision"] == 4 and historical["revision"] == 2
     assert current["eligibility"] == historical["eligibility"]
     assert current["calibration"] == historical["calibration"]
     assignments = {a["task"]: a for a in current["assignments"]}
-    assert assignments["clockfree_audit_measurement_v1"]["qualification_tier"] == 1
+    assert assignments["schedule_contract_audit"]["qualification_tier"] == 1
+    assert tasks["schedule_contract_audit"]["evaluation"]["clockfree_claim"] is False
     assert assignments["clockfree_audit"]["qualification_tier"] == 3
     assert assignments["clockfree_audit"]["importance"] == "required"
     assert next(a for a in historical["assignments"] if a["task"] == "clockfree_audit")["qualification_tier"] == 1
@@ -263,7 +263,7 @@ def test_passing_clock_probe_cannot_replace_original_long_run_prerequisite(monke
     monkeypatch.setattr("experiments.forge.views.grade_result", grade)
     results = [{"task_id": a["task"]} for a in view["assignments"] if a["task"] != "clockfree_audit"]
     statuses = qualify(view, tasks, results)["task_statuses"]
-    assert statuses["clockfree_audit_measurement_v1"] == "PASS"
+    assert statuses["schedule_contract_audit"] == "PASS"
     assert statuses["clockfree_audit"] == "NOT_RUN"
     for name in ("grid100_14k", "rotated100_14k", "staggered100_14k"):
         assert {"task": "clockfree_audit", "kind": "gate"} in tasks[name]["dependencies"]

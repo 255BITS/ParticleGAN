@@ -10,6 +10,7 @@ import pytest
 from experiments.forge.configuration_search import materialize_search
 from experiments.forge.contracts import atomic_json, read_json, stable_hash
 from experiments.forge.queue import Queue
+from experiments.forge.sources import inspect_source
 
 ROOT = Path(__file__).resolve().parents[1]
 SPEC = importlib.util.spec_from_file_location("tier1_completion_driver", ROOT / "reports/forge/tier1-completion/run.py")
@@ -63,14 +64,21 @@ def test_registration_drift_rejected_before_queue_admission(tmp_path, change):
 def test_actual_full_roster_submit_registration_and_resume_without_training(tmp_path):
     root = tmp_path / "checkout"
     queue_root = tmp_path / "queue"
-    definition, original = DRIVER.requests(ROOT, queue_root)
     # A compact real checkout includes all frozen evaluator/host source bytes and
     # ordinary admission manifests, without copying existing research logs.
-    for relative in original[0][1]["source"]["files"]:
+    for relative in inspect_source(ROOT)["files"]:
         target = root / relative
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(ROOT / relative, target)
     shutil.copytree(ROOT / "configs/forge", root / "configs/forge", dirs_exist_ok=True)
+    # Freeze a software-only fixture against this checkout. The historical
+    # campaign cannot be resubmitted after task/source-pin changes; its committed
+    # definition and outcomes remain immutable.
+    for path in (root / "configs/forge/searches").glob("tier1-completion-v1-*.json"):
+        path.unlink()  # Test-local fresh registrations; never edit the saved study.
+    (root / DRIVER.ROUND).unlink()
+    (root / DRIVER.CAMPAIGN).unlink()
+    definition = DRIVER.prepare(root)
     subprocess.run(["git", "init", "-q", str(root)], check=True)
     subprocess.run(["git", "add", "."], cwd=root, check=True)
     subprocess.run(["git", "-c", "user.name=Forge controls", "-c", "user.email=forge@example.invalid",
@@ -95,7 +103,10 @@ def test_actual_full_roster_submit_registration_and_resume_without_training(tmp_
     for entry in state["submissions"].values():
         eligible, reason, running = queue._eligible(state, entry)
         assert eligible and reason is None and not running
-        expected = 4 if entry["request"]["candidate"]["id"] in {"atlas", "e22"} else 7
+        candidate = entry["request"]["candidate"]["id"]
+        # The separate scheduled audit refuses KA2's unreviewed delayed switch;
+        # policy candidates retain their explicitly unsupported host cells.
+        expected = 4 if candidate in {"atlas", "e22"} else 7 if candidate.startswith("ka2--") else 8
         assert len(eligible) == expected
     registrations = list((root / "reports/forge/configuration-search").glob("*.json"))
     assert len(registrations) == 5
@@ -115,3 +126,9 @@ def test_actual_full_roster_submit_registration_and_resume_without_training(tmp_
     assert len(receipt["source_digests"]) == 1
     with pytest.raises(ValueError, match="archive already exists"):
         DRIVER.archive(root, queue_root, external)
+
+
+def test_historical_round_rejects_current_task_revisions_before_admission(tmp_path):
+    with pytest.raises(ValueError, match="view changed|task definition changed"):
+        DRIVER.requests(ROOT, tmp_path / "queue")
+    assert not (tmp_path / "queue").exists()

@@ -27,7 +27,7 @@ def bind_contract(path, *, view, candidate_cap, campaign_cap,
     """Bind the existing admission contract to exact current task/source values."""
     idea = read_json(path)
     from experiments.forge.decision_contracts import scaffold
-    contract = scaffold(control)
+    contract = scaffold(control, view)
     contract["control"]["task_map"] = task_map or {}
     idea["schema_version"] = 2
     idea["decision_contract"] = contract
