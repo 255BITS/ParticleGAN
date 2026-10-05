@@ -4,7 +4,9 @@ Recorded passes / required experiments, grouped by family and view. Click a fami
 
 Family totals sum the view rows. A shared experiment counts once per view requiring it; these totals measure requirements across views, not unique training runs or scientific rank.
 
-**Full original Atlas — fresh common-26 diagnostic: two_pole FAIL; completed 1/26; remaining 25 NOT_RUN.** mean_abs 0.00244565 >= 0.3 (FAIL); grad_med 0.010897 <= 1 (PASS). The accepted first case completed 80 updates and 24 ordinary live observations at seed 0. [Verified first-case result and goal GIF](common26-first-two-pole-full-atlas-20261004/README.md) · [Pinned result, full Recipe and source](common26-first-two-pole-full-atlas-20261004/results.json). This full original configuration is separate from the canonical Atlas configuration selected in the recorded table. The requested continuation uses the original revision-3 common-26 gates and continues after numerical FAIL; the remaining cases are pending adapter and budget resolution. No selected-table cells, prerequisite credit, default adoption or speed ranking are awarded.
+**Atlas measured evidence — separate configurations and contracts.** [Retained live-clean common-26 diagnostic: HALTED_INCOMPLETE](common26-full-original-diagnostic-20261005/README.md) · [Restored native Atlas — raw particles, public selected/noisy: grid100 PASS, rotated100 PASS, staggered100 PASS](atlas-native-restoration-checkpoint-20261005/README.md) · [Repaired Atlas AE — auxiliary MoG, live scheduled-noise: ae_gan_hold PASS](atlas-ae-sourceguard-checkpoint-20261005/README.md) · [Atlas inventory gaps and bounded next steps](atlas-inventory-next-steps-20261005.md). These records do not add cells to the selected Atlas row or grant prerequisite credit, default adoption or speed ranking.
+
+**Archived first Full Atlas case: two_pole FAIL.** mean_abs 0.00244565 >= 0.3 (FAIL); grad_med 0.010897 <= 1 (PASS). This accepted first case completed 80 updates and 24 ordinary live observations at seed 0. [Archived first-case result and goal GIF](common26-first-two-pole-full-atlas-20261004/README.md) · [Pinned result, full Recipe and source](common26-first-two-pole-full-atlas-20261004/results.json). Its first-case status does not describe the later diagnostic scopes or the canonical Atlas configuration selected in the recorded table. No selected-table cells, prerequisite credit, default adoption or speed ranking are awarded.
 
 | Family / view | Tier 1 | Tier 2 | Tier 3 | Total |
 | --- | ---: | ---: | ---: | ---: |
@@ -247,6 +249,6 @@ This regenerates the leaderboard, family pages and experiments-by-tier report fr
 
 [Experiments, criteria and tier assignments](EXPERIMENTS_BY_TIER.md) · [Complete numerical publication and provenance](technique-inventory.json)
 
-Publication input digest `8012a2ec7335b9c61ee45010de40e330d5575cfe20cde43de21be18f08385d90`.
+Publication input digest `6ef61f2b452b3ded6b28bf6ab66ba3f40962f741b677ea2ee51226a80d4ea112`.
 
 [Pure BCAP initial readout](pure-bcap/README.md): five adversarial losses at two constant Adam rates; 3/6 required Tier 1 passes for one selected whole recipe. 109 unique attempts cost 2549.509 paid seconds, counted once across the shared campaign. Executed source cohorts `af75a3fea19aa6e4d1ca2be867b9c50a02931e33`, `44cc66d78495cb913e0ea064840e2de37c8a4ae5`; each candidate keeps its complete cohort. No default adoption.

@@ -295,3 +295,20 @@ def test_legacy_gan_pages_preserve_original_whole_rows_and_do_not_enter_current_
         assert "Historical cohort navigation" in text
         assert '<a name="cohort-cuda-7f9c23eb0e27-tier-1"></a>' in text
         assert "not pooled into it" in text
+
+
+def test_first_case_snapshot_is_archival_and_missing_later_reports_add_no_cells(report, monkeypatch):
+    root, publication = report
+    from experiments.forge import family_reports
+    historical = {"first_case": {"task_id": "two_pole", "status": "FAIL"},
+                  "campaign_status": "PENDING_ADAPTER_AND_BUDGET", "remaining_not_run": 25}
+    monkeypatch.setattr(family_reports, "_full_original_atlas_first_case", lambda root, load: deepcopy(historical))
+    before = deepcopy(publication["rows"])
+    progress = build_progress(root, publication)
+    assert publication["rows"] == before
+    assert "atlas_evidence_navigation" not in progress
+    archived = progress["full_original_atlas_common26"]
+    assert archived["archived_snapshot"] is True
+    assert archived["counts_scope"] == "AT_FIRST_ACCEPTED_CASE"
+    assert archived["remaining_not_run"] == historical["remaining_not_run"]
+    assert score(progress["families"][0]["cohorts"][0]["total"]) == "3(*)/5"

@@ -26,6 +26,20 @@ FIRST_FULL_ATLAS_RESULT_SHA256 = "66551a0018a22cc96ffe88bd27754634ddb5768c5fd896
 FULL_ORIGINAL_ATLAS_CONFIG_SHA256 = "a3ee5c67ac6594014feeb1ec333131abb4b1d86832510b69923100ebd8510ad4"
 
 
+# These immutable public reports supply navigation only, never selected-row cells.
+ATLAS_EVIDENCE_REPORTS = (
+    ("live_clean_common26", "reports/forge/common26-full-original-diagnostic-20261005/results.json",
+     "02cee5ca6877a4fd8c8b7bca78bcc245d905b0482fee2626a0c8b1220480b6e5", 922104,
+     "pg_common26_full_original_diagnostic_checkpoint_v1"),
+    ("native_restoration", "reports/forge/atlas-native-restoration-checkpoint-20261005/results.json",
+     "8d1b91ea5326731176edc68df06ed36d38007e62d4ebf704fde1d5bf35e4b698", 34254,
+     "pg_atlas_restoration_public_report_v1"),
+    ("ae_sourceguard", "reports/forge/atlas-ae-sourceguard-checkpoint-20261005/results.json",
+     "e6d93f4a850e5c4afd2ab2c4fa18d5b9dab4b34968b5c89e320fd16626d622a6", 15492,
+     "pg_ae633_sourceguard_public_checkpoint_v1"),
+)
+
+
 def _full_original_atlas_first_case(root, load):
     """Navigation over one immutable accepted result; never a selected-row grade."""
     if not (root / FIRST_FULL_ATLAS_RESULT).is_file():
@@ -76,24 +90,106 @@ def _full_original_atlas_first_case(root, load):
             "default_adoption": False, "speed_ranking": False}
 
 
+def _atlas_evidence_navigation(root, load):
+    """Read separate byte-bound public scopes without importing grades into a row."""
+    cohorts = []
+    for scope, relative, digest, size, schema in ATLAS_EVIDENCE_REPORTS:
+        path = Path(relative)
+        if not (root / path).is_file():
+            continue  # Historical fixtures need not contain later publications.
+        if (root / path).stat().st_size != size or file_hash(root / path) != digest:
+            raise ValueError("Atlas evidence navigation public report changed: " + scope)
+        record = load(path)
+        if record.get("schema") != schema:
+            raise ValueError("Atlas evidence navigation has an unsupported public schema")
+        entry = {"scope_id": scope, "public_schema": schema, "qualification_input": False,
+                 "selected_row_credit": False, "readout": path.with_name("README.md").as_posix(),
+                 "public_result": relative, "public_result_sha256": digest, "public_result_bytes": size}
+        if scope == "live_clean_common26":
+            if (record.get("config_sha256") != FULL_ORIGINAL_ATLAS_CONFIG_SHA256
+                    or any(record.get(key) is not False for key in
+                           ("qualification_credit", "default_adoption", "speed_ranking",
+                            "same_source_whole26_claim", "measured_whole26_ranking"))
+                    or not isinstance(record.get("campaign_status"), str)
+                    or type(record.get("halt_required")) is not bool):
+                raise ValueError("retained common26 navigation changed its scope")
+            entry.update(label="Retained live-clean common-26 diagnostic", status=record["campaign_status"],
+                         halt_required=record["halt_required"], counts=deepcopy(record["counts"]),
+                         source=deepcopy(record["current_source"]),
+                         retained_first_case_source=deepcopy(record["retained_first_case_source"]))
+        elif scope == "native_restoration":
+            cases = record.get("native_cases", [])
+            if (not isinstance(cases, list) or [case.get("task_id") for case in cases]
+                    != ["grid100", "rotated100", "staggered100"]
+                    or any(record.get("claims", {}).get(key) is not False for key in
+                           ("qualification_credit", "original_common26_credit", "default_adoption", "speed_ranking"))):
+                raise ValueError("native restoration navigation changed its roster or scope")
+            for case in cases:
+                source = case.get("source", {})
+                grade = case.get("grade", {})
+                if (case.get("candidate_id") != "atlas-native-original-representation-selected-seed0-v1"
+                        or case.get("recipe_sha256") != "152ee607b4a2b18d99e9f440985b920363a481a14236ae12409747e9c283738a"
+                        or source.get("origin_commit") != "9da0e927a0a4242ee813ceb0340e9fee70ccdc40"
+                        or source.get("execution_digest") != "00c19ef01f68e3222888a9b0edc6fcc5f635a384b982260c4e005832c1ed09ae"
+                        or grade.get("status") not in COMPLETE or grade.get("full_protocol_complete") is not True):
+                    raise ValueError("native restoration navigation changed its binding or completion")
+            entry.update(label="Restored native Atlas — raw particles, public selected/noisy",
+                         candidate_id=cases[0]["candidate_id"], recipe_sha256=cases[0]["recipe_sha256"],
+                         source={"origin_commit": cases[0]["source"]["origin_commit"],
+                                 "digest": cases[0]["source"]["execution_digest"]},
+                         task_statuses=[{"task_id": case["task_id"], "status": case["grade"]["status"]} for case in cases])
+        else:
+            grade = record.get("accepted_evidence", {}).get("grade", {})
+            if (record.get("candidate_id") != "atlas-full-original-ae-sourceguard-repair-v1"
+                    or record.get("task_id") != "ae_gan_hold"
+                    or record.get("recipe_sha256") != "a26eb000fbb7616c90265a4bf31c5126e75f86a4cbd04912d71dc0292167e250"
+                    or record.get("source") != {"origin_commit": "36718f9ecbffe6a217914de7a9c22cff1349079e",
+                                               "digest": "2f71661f3407a3af3b166493fa0cb1f6730e8ac4689c2b37a8c8a9e424c5c233"}
+                    or record.get("complete_protocol") is not True or record.get("completed_updates") != 250
+                    or record.get("observation_count") != 24 or record.get("status") not in COMPLETE
+                    or grade.get("status") != record["status"] or grade.get("gate_status") != record["status"]
+                    or any(record.get(key) is not False for key in
+                           ("qualification_credit", "default_adoption", "speed_ranking"))):
+                raise ValueError("repaired AE navigation changed its binding or completion")
+            entry.update(label="Repaired Atlas AE — auxiliary MoG, live scheduled-noise",
+                         candidate_id=record["candidate_id"], recipe_sha256=record["recipe_sha256"],
+                         source=deepcopy(record["source"]),
+                         task_statuses=[{"task_id": record["task_id"], "status": record["status"]}])
+        cohorts.append(entry)
+    if not cohorts:
+        return None
+    return {"schema": "pg_atlas_evidence_navigation_v1", "qualification_input": False,
+            "selected_row_credit": False, "cohorts": cohorts}
+
+
 def _full_original_atlas_status(root, page, progress):
+    lines = []
+    navigation = progress.get("atlas_evidence_navigation")
+    if navigation is not None:
+        links = []
+        for cohort in navigation["cohorts"]:
+            outcome = (", ".join(row["task_id"] + " " + row["status"] for row in cohort["task_statuses"])
+                       if "task_statuses" in cohort else cohort["status"])
+            links.append(link(root, page, cohort["label"] + ": " + outcome, cohort["readout"]))
+        if navigation.get("next_steps"):
+            links.append(link(root, page, "Atlas inventory gaps and bounded next steps", navigation["next_steps"]["readout"]))
+        lines += ["**Atlas measured evidence — separate configurations and contracts.** " + " · ".join(links) + ". " +
+                  "These records do not add cells to the selected Atlas row or grant prerequisite credit, "
+                  "default adoption or speed ranking.", ""]
     context = progress.get("full_original_atlas_common26")
     if context is None:
-        return []
+        return lines
     first = context["first_case"]
     metrics = "; ".join(cell(check["metric"]) + " " + number(check["value"]) + " " + cell(check["op"]) + " " +
                         number(check["threshold"]) + " (" + cell(check["status"]) + ")"
                         for check in first["metric_receipts"])
-    return ["**Full original Atlas — fresh common-26 diagnostic: two_pole " + first["status"] +
-            "; completed 1/26; remaining 25 NOT_RUN.** " + metrics + ". " +
-            "The accepted first case completed 80 updates and 24 ordinary live observations at seed 0. " +
-            link(root, page, "Verified first-case result and goal GIF", context["readout"]) + " · " +
-            link(root, page, "Pinned result, full Recipe and source", context["public_result"]) + ". " +
-            "This full original configuration is separate from the canonical Atlas configuration selected in the recorded table. " +
-            "The requested continuation uses the original revision-3 common-26 gates and continues after numerical FAIL; " +
-            "the remaining cases are pending adapter and budget resolution. No selected-table cells, prerequisite credit, " +
-            "default adoption or speed ranking are awarded.", ""]
-
+    return lines + ["**Archived first Full Atlas case: two_pole " + first["status"] + ".** " + metrics + ". " +
+                    "This accepted first case completed 80 updates and 24 ordinary live observations at seed 0. " +
+                    link(root, page, "Archived first-case result and goal GIF", context["readout"]) + " · " +
+                    link(root, page, "Pinned result, full Recipe and source", context["public_result"]) + ". " +
+                    "Its first-case status does not describe the later diagnostic scopes or the canonical Atlas "
+                    "configuration selected in the recorded table. No selected-table cells, prerequisite credit, "
+                    "default adoption or speed ranking are awarded.", ""]
 
 def cell(value):
     return str(value if value is not None else "unavailable").replace("|", "\\|").replace("\n", " ")
@@ -340,6 +436,12 @@ def build_progress(root: Path, publication: dict) -> dict:
     documented, tag_definitions = family_documentation.load_family_documentation(root, families, load)
     for family in families.values():
         family.update(documented.get(family["id"], {"tags": [], "documentation": None}))
+    atlas_navigation = _atlas_evidence_navigation(root, load)
+    next_steps = Path("reports/forge/atlas-inventory-next-steps-20261005.md")
+    if atlas_navigation is not None and (root / next_steps).is_file():
+        inputs[next_steps.as_posix()] = file_hash(root / next_steps)
+        atlas_navigation["next_steps"] = {"readout": next_steps.as_posix(),
+                                          "sha256": inputs[next_steps.as_posix()]}
     first_full_atlas = _full_original_atlas_first_case(root, load)
     progress = {"schema_version": 1, "scope": "recorded_view_progress", "qualification_input": False,
                 "qualification_reuse": False, "views": views, "diagnostic_views": [view["id"] for view in diagnostics],
@@ -352,7 +454,10 @@ def build_progress(root: Path, publication: dict) -> dict:
                 "renderer_sha256": file_hash(Path(__file__)),
                 "documentation_loader_sha256": file_hash(Path(family_documentation.__file__))}
     if first_full_atlas is not None:
-        progress["full_original_atlas_common26"] = first_full_atlas
+        progress["full_original_atlas_common26"] = {**first_full_atlas, "archived_snapshot": True,
+                                                   "counts_scope": "AT_FIRST_ACCEPTED_CASE"}
+    if atlas_navigation is not None:
+        progress["atlas_evidence_navigation"] = atlas_navigation
     return progress
 
 
