@@ -30,7 +30,7 @@ Selection: historical_incumbent. Exact executed-source parent cohort remains blo
 | Family / view | Tier 1 | Tier 2 | Tier 3 | Total |
 | --- | ---: | ---: | ---: | ---: |
 | [adaptation](atlas.md#cohort-cuda-0d83d78027c5-adaptation) | [0(*)/3](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-1) | [0(*)/19](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) | [0(*)/1](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-3) | [0(*)/23](atlas.md#cohort-cuda-0d83d78027c5-adaptation) |
-| [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous) | [0(*)/4](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1) | [0(*)/19](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) | [0(*)/6](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3) | [0(*)/29](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous) |
+| [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous) | [0(*)/4](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1) | [0(*)/19](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) | [0(*)/7](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3) | [0(*)/30](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous) |
 | [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability) | [0(*)/6](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | [0(*)/19](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) | [0(*)/2](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-3) | [0(*)/27](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability) |
 | [formulation_comparison](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison) | [0(*)/3](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-1) | [0(*)/19](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) | [0(*)/2](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-3) | [0(*)/24](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison) |
 | [host_profile_transfer](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer) | [0(*)/3](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-1) | [0(*)/19](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) | [0(*)/2](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-3) | [0(*)/24](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer) |
@@ -55,7 +55,7 @@ Shared experiments appear once in this list; the family numerator/denominator co
 | Experiment | Required by | Recorded result | Current contract |
 | --- | --- | --- | --- |
 | [ae_gan_hold](atlas.md#cohort-cuda-0d83d78027c5-experiment-ae_gan_hold) | [adaptation](atlas.md#cohort-cuda-0d83d78027c5-adaptation-tier-1), [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1), [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1), [formulation_comparison](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-1), [host_profile_transfer](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-1), [quality_coverage](atlas.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-1) | BLOCKED | matches |
-| [clockfree_audit](atlas.md#cohort-cuda-0d83d78027c5-experiment-clockfree_audit) | [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1) | UNKNOWN | unbound |
+| [clockfree_audit_measurement_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-clockfree_audit_measurement_v1) | [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1) | BLOCKED | matches |
 | [five_word_joint_acquisition](atlas.md#cohort-cuda-0d83d78027c5-experiment-five_word_joint_acquisition) | [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | BLOCKED | matches |
 | [gaussian1d_acquisition](atlas.md#cohort-cuda-0d83d78027c5-experiment-gaussian1d_acquisition) | [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | BLOCKED | matches |
 | [ring16_acquisition](atlas.md#cohort-cuda-0d83d78027c5-experiment-ring16_acquisition) | [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | BLOCKED | matches |
@@ -98,6 +98,7 @@ Shared experiments appear once in this list; the family numerator/denominator co
 
 | Experiment | Required by | Recorded result | Current contract |
 | --- | --- | --- | --- |
+| [clockfree_audit](atlas.md#cohort-cuda-0d83d78027c5-experiment-clockfree_audit) | [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3) | UNKNOWN | unbound |
 | [grid100_14k](atlas.md#cohort-cuda-0d83d78027c5-experiment-grid100_14k) | [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3) | UNKNOWN | unbound |
 | [ring_extension](atlas.md#cohort-cuda-0d83d78027c5-experiment-ring_extension) | [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3), [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-3), [formulation_comparison](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-3), [host_profile_transfer](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-3) | BLOCKED | matches |
 | [ring_hold](atlas.md#cohort-cuda-0d83d78027c5-experiment-ring_hold) | [clockfree_continuous](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3), [discriminator_stability](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-3), [formulation_comparison](atlas.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-3), [host_profile_transfer](atlas.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-3) | BLOCKED | matches |
@@ -163,9 +164,9 @@ Calibration: **provisional**. Phase D historical calibration remains required
 
 ## clockfree_continuous
 
-**clockfree_continuous — revision 2**. [View declaration](../../../configs/forge/views/clockfree_continuous.json).
+**clockfree_continuous — revision 3**. [View declaration](../../../configs/forge/views/clockfree_continuous.json).
 
-Qualification requires every required experiment to pass, with all lower tiers and task dependencies passed first. Required counts (Tier 1 / 2 / 3): **4 / 19 / 6**.
+Qualification requires every required experiment to pass, with all lower tiers and task dependencies passed first. Required counts (Tier 1 / 2 / 3): **4 / 19 / 7**.
 
 Calibration: **provisional**. Phase D historical calibration remains required
 
@@ -185,7 +186,7 @@ Additional eligibility requirements:
 | [two_pole](atlas.md#cohort-cuda-0d83d78027c5-experiment-two_pole) | required | BLOCKED | matches |
 | [unused_token_hold](atlas.md#cohort-cuda-0d83d78027c5-experiment-unused_token_hold) | required | BLOCKED | matches |
 | [ae_gan_hold](atlas.md#cohort-cuda-0d83d78027c5-experiment-ae_gan_hold) | required | BLOCKED | matches |
-| [clockfree_audit](atlas.md#cohort-cuda-0d83d78027c5-experiment-clockfree_audit) | required | UNKNOWN | unbound |
+| [clockfree_audit_measurement_v1](atlas.md#cohort-cuda-0d83d78027c5-experiment-clockfree_audit_measurement_v1) | required | BLOCKED | matches |
 
 <a name="cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2"></a>
 
@@ -219,6 +220,7 @@ Additional eligibility requirements:
 
 | Experiment | Role | Recorded result | Current contract |
 | --- | --- | --- | --- |
+| [clockfree_audit](atlas.md#cohort-cuda-0d83d78027c5-experiment-clockfree_audit) | required | UNKNOWN | unbound |
 | [ring_hold](atlas.md#cohort-cuda-0d83d78027c5-experiment-ring_hold) | required | BLOCKED | matches |
 | [ring_extension](atlas.md#cohort-cuda-0d83d78027c5-experiment-ring_extension) | required | BLOCKED | matches |
 | [grid100_14k](atlas.md#cohort-cuda-0d83d78027c5-experiment-grid100_14k) | required | UNKNOWN | unbound |
@@ -614,7 +616,7 @@ Current measurement: particle_cloud prior (sigma 0); tier1_selected_generated_an
 
 Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
 
-Used by: [clockfree_continuous / Tier 1](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1).
+Used by: [clockfree_continuous / Tier 3](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3).
 
 Current pass criteria:
 
@@ -632,7 +634,7 @@ Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise;
 
 Current contract: **matches**. Current task contract matches the recorded conditions. clockfree_audit_measurement_v1: clean/live scoring has no declared policy-control evidence and served-sampling contract; freeze a policy-aware task before reservation
 
-Used by: [discriminator_stability / Tier 1](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1).
+Used by: [clockfree_continuous / Tier 1](atlas.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1) · [discriminator_stability / Tier 1](atlas.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1).
 
 Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 

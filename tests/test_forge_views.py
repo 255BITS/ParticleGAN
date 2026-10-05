@@ -59,7 +59,7 @@ def receipt(task, *, bad_steps=(), final=.5):
                 cost=dict(seconds=2.))
 
 
-def test_initial_inventory_has_complete_quality_and_distinct_claim_views():
+def test_current_inventory_has_complete_quality_and_distinct_claim_views():
     tasks = load_tasks(ROOT)
     stability = load_view(ROOT, "discriminator_stability")
     quality = load_view(ROOT, "quality_coverage")
@@ -70,11 +70,14 @@ def test_initial_inventory_has_complete_quality_and_distinct_claim_views():
     variant = next(a for a in transfer["assignments"] if a["task"] == "img_intensity2_residual16")
     assert variant["importance"] == "diagnostic"
     assert all(a["task"] != variant["task"] for a in stability["assignments"] + quality["assignments"])
-    smoke = [a["task"] for a in stability["assignments"] if a["qualification_tier"] == 1]
+    smoke = [a["task"] for a in stability["assignments"]
+             if a["qualification_tier"] == 1 and a["importance"] == "required"]
     assert smoke == ["gaussian1d_acquisition", "two_pole", "unused_token_hold", "ae_gan_hold", "ring16_acquisition",
                      "five_word_joint_acquisition"]
     assert sum(tasks[n]["execution"]["steps"] for n in smoke[1:4]) == 530
-    assert stability["revision"] == 4
+    assert stability["revision"] == 5
+    assert [a["task"] for a in stability["assignments"] if a["importance"] == "diagnostic"] == [
+        "clockfree_audit_measurement_v1"]
     assert [sum(a["qualification_tier"] == tier and a["importance"] == "required"
                 for a in stability["assignments"]) for tier in (1, 2, 3)] == [6, 19, 2]
     assert all("qualification_tier" not in t for t in tasks.values())
@@ -104,7 +107,7 @@ def test_default_plan_and_report_include_acquisition_smoke_without_new_views():
     assert not {"ring16_acquisition", "five_word_joint"} & {row["id"] for row in report["views"]}
     view = next(row for row in report["views"] if row["id"] == "discriminator_stability")
     smoke = next(row for row in view["tiers"] if row["qualification_tier"] == 1)
-    assert smoke["counts"] == {"required": 6, "ranking": 0, "diagnostic": 0}
+    assert smoke["counts"] == {"required": 6, "ranking": 0, "diagnostic": 1}
     reported = {row["id"]: row for row in smoke["tasks"]}
     for name, updates, timeout in (("gaussian1d_acquisition", 1000, 120),
                                    ("ring16_acquisition", 400, 300),
@@ -219,6 +222,52 @@ def test_retiering_reuses_evidence_without_changing_execution_or_evaluator_ident
     changed["evaluation"]["thresholds"][0][2] = .1
     assert task_execution_fingerprint(changed) == task_execution_fingerprint(tasks["a"])
     assert task_evaluation_fingerprint(changed) != task_evaluation_fingerprint(tasks["a"])
+
+
+def test_current_clock_view_preserves_historical_policy_and_first_tier_budget():
+    tasks = load_tasks(ROOT)
+    path = ROOT / "configs/forge/view-history/clockfree_continuous-v2.json"
+    assert hashlib.sha256(path.read_bytes()).hexdigest() == "68935adac00a08890c798e193af48ab8bfdddf719e7c66f52aec2f36806b989d"
+    historical = json.loads(path.read_text())
+    current = load_view(ROOT, "clockfree_continuous")
+    validate_view(historical, tasks)
+    assert current["revision"] == 3 and historical["revision"] == 2
+    assert current["eligibility"] == historical["eligibility"]
+    assert current["calibration"] == historical["calibration"]
+    assignments = {a["task"]: a for a in current["assignments"]}
+    assert assignments["clockfree_audit_measurement_v1"]["qualification_tier"] == 1
+    assert assignments["clockfree_audit"]["qualification_tier"] == 3
+    assert assignments["clockfree_audit"]["importance"] == "required"
+    assert next(a for a in historical["assignments"] if a["task"] == "clockfree_audit")["qualification_tier"] == 1
+    # Shared execution groups reserve their maximum timeout once.
+    def ceiling(view, tier=None):
+        groups = {}
+        for assignment in view["assignments"]:
+            if tier is not None and assignment["qualification_tier"] != tier:
+                continue
+            task = tasks[assignment["task"]]
+            group = task["execution"].get("execution_group", task["id"])
+            groups[group] = max(groups.get(group, 0), task["resources"]["timeout_seconds"])
+        return sum(groups.values())
+    assert ceiling(current, 1) == ceiling(historical, 1)
+    assert ceiling(current) == ceiling(historical) + 300
+
+
+def test_passing_clock_probe_cannot_replace_original_long_run_prerequisite(monkeypatch):
+    tasks = load_tasks(ROOT)
+    view = load_view(ROOT, "clockfree_continuous")
+    # Isolate prerequisite reduction from the separately tested artifact grader.
+    def grade(task, result):
+        status = "NOT_RUN" if result is None else "PASS"
+        return {"status": status, "gate_status": status, "reasons": []}
+    monkeypatch.setattr("experiments.forge.views.grade_result", grade)
+    results = [{"task_id": a["task"]} for a in view["assignments"] if a["task"] != "clockfree_audit"]
+    statuses = qualify(view, tasks, results)["task_statuses"]
+    assert statuses["clockfree_audit_measurement_v1"] == "PASS"
+    assert statuses["clockfree_audit"] == "NOT_RUN"
+    for name in ("grid100_14k", "rotated100_14k", "staggered100_14k"):
+        assert {"task": "clockfree_audit", "kind": "gate"} in tasks[name]["dependencies"]
+        assert statuses[name] == "BLOCKED"
 
 
 @pytest.mark.parametrize("mutation,match", [

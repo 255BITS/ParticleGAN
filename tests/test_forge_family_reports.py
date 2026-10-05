@@ -235,6 +235,36 @@ def test_committed_pages_and_every_drilldown_link_match_the_generator():
                 assert f'<a name="{fragment}"></a>' in pages.get(linked, linked.read_text()), (page, target)
 
 
+def test_current_clock_measurement_completes_tier1_without_relabeling_original_evidence():
+    root = Path(__file__).resolve().parents[1]
+    publication = read_json(root / "reports/forge/technique-inventory.json")
+    recorded = deepcopy(publication["rows"])
+    progress = build_progress(root, publication)
+    assert publication["rows"] == recorded
+    assert progress["qualification_input"] is False
+    cohorts = {family["id"]: family["cohorts"][0] for family in progress["families"]}
+    for name, cohort in cohorts.items():
+        clock = cohort["tasks"]["clockfree_audit_measurement_v1"]
+        if name in {"atlas", "e22"}:
+            assert cohort["tiers"]["1"]["incomplete"] is True
+            assert clock["status"] == "BLOCKED"
+            continue
+        assert cohort["tiers"]["1"]["incomplete"] is False
+        assert sum(cohort["tiers"]["1"]["counts"].values()) == 22
+        assert clock["status"] == "FAIL" and clock["current_contract"] == "matches"
+        assert cohort["tasks"]["clockfree_audit"]["status"] == "UNKNOWN"
+        assert cohort["tasks"]["clockfree_audit"]["current_contract"] == "unbound"
+        assert recorded[cohort["row_index"]]["qualified_tier"] == 0
+    bcap = cohorts["bcap"]
+    assert score(bcap["tiers"]["1"]) == "19/22"
+    clock_view = next(view for view in bcap["views"] if view["id"] == "clockfree_continuous")
+    assert score(clock_view["tiers"]["1"]) == "3/4"
+    clock = bcap["tasks"]["clockfree_audit_measurement_v1"]
+    assert clock["clock_audit"]["comparisons"]["step_label"]["digest_equal"] is False
+    assert clock["clock_audit"]["comparisons"]["horizon"]["digest_equal"] is False
+    assert clock["training_media"][0]["recorded_grade"] == "FAIL"
+
+
 def test_legacy_gan_pages_preserve_original_whole_rows_and_do_not_enter_current_totals():
     from experiments.forge.trainer_families import scientific_row_hash
     root = Path(__file__).resolve().parents[1]

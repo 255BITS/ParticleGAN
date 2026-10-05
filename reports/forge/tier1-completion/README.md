@@ -41,6 +41,17 @@ replace clean/MoG parent results nor establish clock-free eligibility. Remaining
 incomplete markers identify real unsupported or unmeasured contracts; they are
 not relabeled as completed clean results.
 
+The current `clockfree_continuous` view revision 3 counts the already measured
+`clockfree_audit_measurement_v1` as its required Tier 1 clock test. All nine
+ordinary families therefore have complete Tier 1 coverage; BCap displays
+**19/22**, including its clock **FAIL**, without an incomplete marker. The
+original eligibility audit remains required in Tier 3 before the three 14k
+continuations. Its task contract and the [archived revision 2 view](../../../configs/forge/view-history/clockfree_continuous-v2.json)
+remain unchanged. This updates current coverage navigation only: the round's
+frozen discriminator-stability qualification, source, attempts, metrics and
+GIFs are preserved, with no new training. The Tier 1 reservation ceiling is
+unchanged; the full clock view adds the probe's declared 300-second ceiling.
+
 The [portable validator](validate.py) checks recipes, source/runtime/evaluator
 certificates, numerical terminal rules, costs, tier limits and every selected
 attempt's GIF identity without changing a grade or running training:
