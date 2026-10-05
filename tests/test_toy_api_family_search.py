@@ -31,7 +31,7 @@ def cases():
 
 def spec_for(tmp_path):
     return {"schema": search.SCHEMA, "id": "software-policy-study", "families": ["atlas", "e22"],
-            "seed": 24002, "grid": {"lr": [.006375, .0085], "prior_lr_mult": [1., 2.]},
+            "seed": 0, "grid": {"lr": [.006375, .0085], "prior_lr_mult": [1., 2.]},
             "cases": [{"id": name, "tier": tier, "timeout_seconds": 10.} for name, tier in search.DEFAULT_CASES],
             "candidate_budget_seconds": 100., "budget_seconds": 1000., "export_grace_seconds": 1.,
             "stability": {"confirmation_checks": 5, "post_confirmation_hold_checks": 5,
@@ -329,6 +329,9 @@ def test_missing_capacity_is_blocked_not_omitted(tmp_path, cases):
 
 
 def test_source_guarded_union_uses_only_owned_family_results(tmp_path, cases, monkeypatch):
+    helper = "benchmarks/toy_audit/reproducibility.py"
+    for case in cases.values():
+        assert helper in search.proof_bindings(case, "atlas")["source_files_sha256"]
     original = planned(tmp_path, cases, monkeypatch)
     paths = []
     for family in search.FAMILIES:
@@ -529,7 +532,7 @@ def test_capacity_replay_checks_primary_gate_without_requiring_extra_clean_diagn
     # A small software draw through the actual native host; no optimizer
     # updates or scientific capacity/convergence claim is made here.
     case = {**cases["api-grid100"], "eval_samples": 64}
-    fixture = api_contract.build(case, recipe_name="e22", seed=24002,
+    fixture = api_contract.build(case, recipe_name="e22", seed=0,
                                  max_steps=case["default_steps"])
     observed = fixture.observe(n=case["eval_samples"], seed=34002)
     samples = api_contract.array(observed["views"][0]["samples"])

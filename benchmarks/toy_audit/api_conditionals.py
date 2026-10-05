@@ -7,6 +7,8 @@ No oracle prediction enters a generator and no pass is assumed from its recipe.
 """
 from __future__ import annotations
 
+from .reproducibility import DEFAULT_SEED, construction_rng
+
 from copy import deepcopy
 import math
 
@@ -551,8 +553,7 @@ class ConditionalFixture:
             batch_size=case["batch_size"],total_steps=case["default_steps"],num_particles=128,z_dim=8,
             prior_kind="mog",sigma_rel=.25,standardize=False,input_noise_std=0.,output_noise_std=0.,lr=.002,
             particle_birth_death=False,row_evidence_gate=False,serve_average=0.).replace(name="conditional_"+recipe_name)
-        with torch.random.fork_rng(devices=[]):
-            torch.manual_seed(seed)
+        with construction_rng(seed, "cpu"):
             self.G=TokenHoldGenerator() if isinstance(task,PairedTask) and task.name=="unused-token-hold" else ConditionalGenerator(task,8)
             self.D=ConditionalCritic(task.output_dim,task.context_dim)
             self.prior=None if task.paired else self.recipe.make_prior()
@@ -622,7 +623,7 @@ class ConditionalFixture:
             fixed_task=task_state,global_rng=torch.random.get_rng_state(),last_losses=self.last_losses))
 
 
-def build_case(case_id,*,device="cpu",seed=24002,recipe_name="atlas",max_steps=None):
+def build_case(case_id,*,device="cpu",seed=DEFAULT_SEED,recipe_name="atlas",max_steps=None):
     if case_id not in CASES: raise ValueError(f"unknown conditional API case {case_id!r}")
     if torch.device(device).type!="cpu": raise ValueError("This frozen caller-owned conditional protocol is CPU-only")
     return ConditionalFixture(deepcopy(CASES[case_id]),_task(case_id.removeprefix("api-")),seed,recipe_name,max_steps)

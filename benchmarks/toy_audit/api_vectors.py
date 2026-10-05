@@ -7,6 +7,8 @@ optimizer decision is used. ``observe`` reads independent held-out draws.
 """
 from __future__ import annotations
 
+from .reproducibility import DEFAULT_SEED
+
 from copy import deepcopy
 import hashlib
 import json
@@ -24,7 +26,7 @@ from benchmarks.toy100 import accuracy, metrics as native_metrics, problems
 from .definition_quality import gaussian_metrics, ring_metrics, two_pole_metrics
 from .vector_quality import projection_ks
 
-VERSION = "toy-public-api-vectors-v1"
+VERSION = "toy-public-api-vectors-v2"
 DEFAULT_EVAL = 4096
 PROJECTION_KS_MAX = .06
 
@@ -281,6 +283,7 @@ def _case(identifier, legacy, title, goal, *, kind="vector", steps=1200,
                 kind=kind, default_steps=steps, batch_size=batch,
                 eval_samples=evaluation, default_recipe=default_recipe,
                 sampling="public served latent law; independent evaluation RNG; output_noise=False removes additive output noise only; DV12/feature-cell latent perturbation remains when enabled",
+                initialization="Public deterministic_orthogonal_ for networks and R2 prior locations; native100 retains its identity affine generator, and two-pole retains its identity/zero/stored-weight controls.",
                 scope="A per-observation gate is not full-budget or sustained convergence; no historical verdict is replaced.") | extra
 
 
@@ -523,7 +526,7 @@ class VectorFixture:
     """Caller-owned data/phase state around one current public trainer."""
     api_components = ("particlegan.Recipe", "particlegan.GANTrainer", "particlegan.ParticlePrior")
 
-    def __init__(self, case, *, device="cpu", seed=24002, recipe_name="atlas", max_steps=None, recipe_overrides=None):
+    def __init__(self, case, *, device="cpu", seed=DEFAULT_SEED, recipe_name="atlas", max_steps=None, recipe_overrides=None):
         self.metadata = deepcopy(case)
         self.case_id = case["id"]
         self.device = torch.device(device)
@@ -561,16 +564,21 @@ class VectorFixture:
         self.recipe = get_recipe(recipe_name, **options)
         data_device = "cpu" if case["kind"] in ("vector", "two_pole") else self.device
         self.data_rng = torch.Generator(device=data_device).manual_seed(seed)
-        cuda = list(range(torch.cuda.device_count())) if torch.cuda.is_available() else []
+        self.generator_data_rng = torch.Generator(device=data_device).manual_seed(seed + 101)
+        self.batch_sequence_sha256 = hashlib.sha256(b"toy-batches-v2").hexdigest()
+        cuda = ([self.device.index if self.device.index is not None else torch.cuda.current_device()]
+                if self.device.type == "cuda" else [])
         with torch.random.fork_rng(devices=cuda):
-            torch.manual_seed(seed)
+            torch.default_generator.manual_seed(seed)
+            if cuda:
+                with torch.cuda.device(cuda[0]):
+                    torch.cuda.manual_seed(seed)
             with torch.device(self.device):
                 prior = self.recipe.make_prior(generator=torch.Generator(device=self.device).manual_seed(seed),
                                                init_std=case.get("profile", {}).get("init_std", .5),
                                                **case.get("prior_options", {}))
                 if case["kind"] == "native100":
-                    with torch.no_grad():
-                        prior.z.uniform_(-5, 5, generator=torch.Generator(device=self.device).manual_seed(seed))
+                    init.deterministic_orthogonal_(prior, seed=seed + 2)
                     generator = nn.Linear(2, 2)
                     with torch.no_grad():
                         generator.weight.copy_(torch.eye(2, device=self.device)); generator.bias.zero_()
@@ -581,6 +589,11 @@ class VectorFixture:
                     with torch.no_grad():
                         generator.weight.fill_(1); generator.bias.zero_(); prior.z.zero_()
                     critic = HostCritic()
+                    # The parameter-movement control starts at its declared
+                    # zero coordinates and stored critic, independently of RNG.
+                    init.initialize_(prior, method="sample_distributions_v1", distributions={"z": init.KEEP})
+                    init.initialize_(critic, method="sample_distributions_v1",
+                                     distributions={name: init.KEEP for name, _ in critic.named_parameters()})
                 else:
                     width = 96 if case["kind"] == "ring" else spec.get("hidden", 64)
                     depth = 3 if case["kind"] == "ring" else spec.get("layers", 2)
@@ -594,6 +607,7 @@ class VectorFixture:
                                                         profile.get("layers", spec.get("d_layers", depth)),
                                                         profile.get("fourier", 3 if case["kind"] == "ring" else spec.get("fourier", 2)))
                     init.deterministic_orthogonal_(generator, seed=seed)
+                    init.deterministic_orthogonal_(prior, seed=seed + 2)
                 if case["kind"] != "two_pole":
                     init.deterministic_orthogonal_(critic, seed=seed + 1)
         if case.get("caller_owned"):
@@ -629,7 +643,12 @@ class VectorFixture:
             if not result["passed"]:
                 raise RuntimeError(f"scientific prerequisite failed at update{self.completed_steps}: {result['failed_bounds']}")
         real = _target(self.metadata, self.recipe.batch_size, self.data_rng, next_step, device=self.device)
-        real_g = lambda: _target(self.metadata, self.recipe.batch_size, self.data_rng, next_step, device=self.device)
+        # Draw both batches once, independently of whether the loss uses real_g.
+        real_g = _target(self.metadata, self.recipe.batch_size, self.generator_data_rng, next_step, device=self.device)
+        from experiments.forge.state import state_digest
+        batch_digest = state_digest({"critic": real, "generator": real_g})
+        self.batch_sequence_sha256 = hashlib.sha256(
+            bytes.fromhex(self.batch_sequence_sha256) + bytes.fromhex(batch_digest)).hexdigest()
         if self.metadata.get("caller_owned"):
             scale_learning_rates(next_step - 1, self.recipe, (self.opt_g, self.opt_d), self.base_rates, self.prior)
             if (next_step - 1) % 2 == 0:
@@ -641,7 +660,7 @@ class VectorFixture:
             try:
                 self.opt_g.zero_grad(set_to_none=True)
                 fake = self.generator(self.prior.sample(self.recipe.batch_size, generator=self.latent_rng)[0])
-                value = self.loss.g_loss(self.critic(fake), self.critic(real_g())) + self.regularizer(self.prior.z)
+                value = self.loss.g_loss(self.critic(fake), self.critic(real_g)) + self.regularizer(self.prior.z)
                 value.backward(); self.opt_g.step(); self.update_counts["g"] += 1
             finally:
                 self.critic.requires_grad_(True)
@@ -720,7 +739,10 @@ class VectorFixture:
 
     def state_dict(self):
         state = dict(version=VERSION, case_id=self.case_id, recipe=self.recipe.to_dict(),
+                     seed=self.seed, case_sha256=_digest(self.metadata),
                      completed_steps=self.completed_steps, data_rng=self.data_rng.get_state().clone(),
+                     generator_data_rng=self.generator_data_rng.get_state().clone(),
+                     batch_sequence_sha256=self.batch_sequence_sha256,
                      phase_receipts=deepcopy(self.phase_receipts))
         if self.metadata.get("caller_owned"):
             state["caller"] = deepcopy(dict(generator=self.generator.state_dict(), critic=self.critic.state_dict(), prior=self.prior.state_dict(),
@@ -731,8 +753,16 @@ class VectorFixture:
         return state
 
     def load_state_dict(self, state):
-        if state["version"] != VERSION or state["case_id"] != self.case_id or state["recipe"] != self.recipe.to_dict():
+        if (state["version"] != VERSION or state["case_id"] != self.case_id
+                or state["recipe"] != self.recipe.to_dict() or state.get("seed") != self.seed
+                or state.get("case_sha256") != _digest(self.metadata)):
             raise ValueError("checkpoint identity/recipe differs")
+        for name in ("data_rng", "generator_data_rng"):
+            torch.Generator(device=self.data_rng.device).set_state(state[name])
+        if (not isinstance(state.get("batch_sequence_sha256"), str)
+                or len(state["batch_sequence_sha256"]) != 64
+                or any(c not in "0123456789abcdef" for c in state["batch_sequence_sha256"])):
+            raise ValueError("checkpoint batch sequence digest differs")
         steps = state["completed_steps"]
         if type(steps) is not int or steps < 0 or steps > self.execution_steps:
             raise ValueError("checkpoint exceeds this execution prefix")
@@ -749,6 +779,8 @@ class VectorFixture:
         else:
             self.trainer.load_state_dict(state["trainer"])
         self.data_rng.set_state(state["data_rng"])
+        self.generator_data_rng.set_state(state["generator_data_rng"])
+        self.batch_sequence_sha256 = state["batch_sequence_sha256"]
         self.phase_receipts = deepcopy(state["phase_receipts"])
         self.completed_steps = state["completed_steps"]
 
@@ -761,7 +793,7 @@ def _view(title, target, samples, metadata):
                 xlabel="x", ylabel="y", caption=metadata["sampling"])
 
 
-def build_case(id, *, device="cpu", seed=24002, recipe_name="atlas", max_steps=None, recipe_overrides=None):
+def build_case(id, *, device="cpu", seed=DEFAULT_SEED, recipe_name="atlas", max_steps=None, recipe_overrides=None):
     cases = _registry()
     if id not in cases:
         raise ValueError(f"unknown vector case {id!r}")

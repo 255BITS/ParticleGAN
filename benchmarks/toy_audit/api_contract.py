@@ -6,6 +6,8 @@ Historical audit definitions and receipts are inputs, never migration outputs.
 """
 from __future__ import annotations
 
+from .reproducibility import DEFAULT_SEED, construction_rng, VERSION as COMPARISON_VERSION
+
 from importlib import import_module
 from copy import deepcopy
 import math
@@ -66,6 +68,8 @@ def discover():
                 raise ValueError(f"duplicate API case: {case['id']}")
             case["provider"] = name
             case.setdefault("default_recipe", "atlas")
+            case.setdefault("protocol_seed", DEFAULT_SEED)
+            case["comparison_version"] = COMPARISON_VERSION
             case.setdefault("evaluation_observations", metric_observations(case))
             cases[case["id"]] = case
     return cases
@@ -119,13 +123,14 @@ def validate_recipe_overrides(case, recipe_name, recipe_overrides):
     return result
 
 
-def build(case, *, device="cpu", seed=24002, recipe_name=None, max_steps=None, recipe_overrides=None):
+def build(case, *, device="cpu", seed=DEFAULT_SEED, recipe_name=None, max_steps=None, recipe_overrides=None):
     provider = import_module(f"benchmarks.toy_audit.{case['provider']}")
     recipe_name = recipe_name or case["default_recipe"]
     overrides = validate_recipe_overrides(case, recipe_name, recipe_overrides)
     options = {"recipe_overrides": overrides} if overrides else {}
-    fixture = provider.build_case(case["id"], device=device, seed=seed,
-                                  recipe_name=recipe_name, max_steps=max_steps, **options)
+    with construction_rng(seed, device):
+        fixture = provider.build_case(case["id"], device=device, seed=seed,
+                                      recipe_name=recipe_name, max_steps=max_steps, **options)
     if not isinstance(fixture.recipe, Recipe):
         raise TypeError(f"{case['id']}: recipe must be the public particlegan.Recipe")
     if not fixture.api_components or any(not isinstance(name, str) or not name

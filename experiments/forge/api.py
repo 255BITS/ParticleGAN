@@ -384,6 +384,7 @@ class FormulationContext:
             return factory()
 
     def initialize(self, model, *, component):
+        from .state import state_digest
         policies = (self.host_initialization or {}).get("components", {})
         if component in policies:
             if component in self._host_initialized_models:
@@ -392,12 +393,15 @@ class FormulationContext:
                 return model
             return self._initialize_host_component(model, component)
         if self.initializer == "supplied":
+            self.initialization[component] = {
+                "initializer": "supplied", "initial_state_sha256": state_digest(model.state_dict())}
             return model
         seeds = {name: self.streams.seed_for("init", component=component, purpose=name)
                  for name, p in model.named_parameters() if p.requires_grad and p.numel()}
         init.deterministic_orthogonal_(model, parameter_seeds=seeds)
         self.initialization[component] = {"initializer": "deterministic_orthogonal_named_parameters_v1",
-                                         "parameter_seeds": seeds}
+                                         "parameter_seeds": seeds,
+                                         "initial_state_sha256": state_digest(model.state_dict())}
         return model
 
     def _host_init_options(self, model, component, *, probe=False):

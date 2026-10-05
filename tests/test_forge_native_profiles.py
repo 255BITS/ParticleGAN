@@ -295,6 +295,10 @@ def test_absent_policy_retains_schema_and_legacy_initialization_entries():
     tiny_trainer(explicit)
     assert state_digest(omitted.state_dict()) == state_digest(explicit.state_dict())
     assert set(omitted.state_dict()) == {"schema", "api_version", "recipe", "prior", "extensions", "initializer", "initialization", "streams", "trainer"}
-    assert all(set(row) == {"initializer", "parameter_seeds"} for row in omitted.initialization.values())
+    assert all(set(row) == {"initializer", "parameter_seeds", "initial_state_sha256"}
+               for row in omitted.initialization.values())
+    for name, module in (("generator", omitted._trainer.G), ("discriminator", omitted._trainer.D),
+                         ("prior", omitted._trainer.prior)):
+        assert omitted.initialization[name]["initial_state_sha256"] == state_digest(module.state_dict())
     assert not any(binding["purpose"] not in {"construction", "locations"} and binding["family"] == "init"
                    for binding in omitted.streams.manifest()["bindings"].values())

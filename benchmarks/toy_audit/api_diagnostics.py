@@ -5,6 +5,8 @@ diagnostic questions and never reclassify archived cards or train receipts.
 """
 from __future__ import annotations
 
+from .reproducibility import DEFAULT_SEED, construction_rng
+
 from copy import deepcopy
 import importlib
 import math
@@ -23,7 +25,7 @@ from lib.vendor.concept_slider_core.reference import noise_std
 from benchmarks.toy_audit import definition_quality
 from benchmarks.toy_audit.api_conditionals import _rng, _bound, observation, view
 
-VERSION="diagnostic-api-v1"
+VERSION="diagnostic-api-v2"
 ROOT=Path(__file__).resolve().parents[2]
 
 
@@ -32,7 +34,7 @@ def _case(name,legacy,title,goal,steps,recipe,thresholds,scope,sampling,batch=16
         default_steps=steps,batch_size=batch,eval_samples=1024,default_recipe=recipe,
         terminal_observations=1 if name.startswith("stiff-") else 5,
         thresholds=thresholds,scope=scope,sampling=sampling,
-        seed_policy="Frozen original named native streams; seed24002 is the cohort identifier, not a stream replacement.")
+        seed_policy="Protocol seed0; frozen original named native streams remain explicit mathematical controls.")
 
 
 _CASES=[
@@ -383,8 +385,7 @@ class AEFixture:
         self.case,self.limit=case,case["default_steps"] if max_steps is None else max_steps
         if type(self.limit) is not int or not 0<self.limit<=case["default_steps"]: raise ValueError("invalid execution cap")
         self.recipe=get_recipe("ae_gan",total_steps=250,num_particles=12,z_dim=2,batch_size=64,lr=.002,input_noise_std=0.,output_noise_std=0.,sigma_rel=.025)
-        with torch.random.fork_rng(devices=[]):
-            torch.manual_seed(seed)
+        with construction_rng(seed, "cpu"):
             self.E=nn.Sequential(nn.Linear(2,32),nn.LeakyReLU(.2),nn.Linear(32,4))
             self.G=nn.Sequential(nn.Linear(2,32),nn.LeakyReLU(.2),nn.Linear(32,2))
             self.D=ScalarCritic(2);self.prior=self.recipe.make_prior()
@@ -432,12 +433,13 @@ class AEFixture:
             recipe=self.recipe.to_dict(),opt_g=self.opt_g.state_dict(),opt_d=self.opt_d.state_dict(),data_rng=self.data_rng.get_state(),latent_rng=self.latent_rng.get_state(),global_rng=torch.random.get_rng_state(),last=self.last))
 
 
-def build_case(case_id,*,device="cpu",seed=24002,recipe_name="atlas",max_steps=None):
+def build_case(case_id,*,device="cpu",seed=DEFAULT_SEED,recipe_name="atlas",max_steps=None):
     if case_id not in CASES: raise ValueError("unknown diagnostic API case: "+str(case_id))
     if torch.device(device).type!="cpu": raise ValueError("Frozen diagnostic sources are CPU-only")
     case=deepcopy(CASES[case_id])
     if recipe_name!=case["default_recipe"]: raise ValueError("This source protocol requires its declared recipe: "+case["default_recipe"])
-    if int(seed)!=24002: raise ValueError("Fixed native protocol uses named source streams; use cohort seed24002")
+    if type(seed) is not int or seed != DEFAULT_SEED:
+        raise ValueError("Fixed native protocol uses named source streams; use protocol seed0")
     if case_id=="api-ae-anchor-hold": return AEFixture(case,seed,max_steps)
     if case_id in ("api-sign-lander-controls","api-safe-fast-controls"): return LandingFixture(case,max_steps)
     return NativeFixture(case,max_steps)

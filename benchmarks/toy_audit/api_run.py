@@ -7,6 +7,8 @@ completed default-budget quality test.
 """
 from __future__ import annotations
 
+from .reproducibility import DEFAULT_SEED, VERSION as COMPARISON_VERSION, reproducible_execution
+
 import argparse
 import ast
 from concurrent.futures import ProcessPoolExecutor, as_completed
@@ -420,8 +422,9 @@ def render_gif(case, records, path, *, full_budget, requested_steps, final_verdi
             "goal_annotations": annotations, "numeric_observations_changed": False}
 
 
+@reproducible_execution
 def run_case(case, output, *, device="cpu", recipe_name=None, steps=None,
-             eval_samples=None, frames=9, seed=24002, recipe_overrides=None, wall_cap_seconds=None):
+             eval_samples=None, frames=9, seed=DEFAULT_SEED, recipe_overrides=None, wall_cap_seconds=None):
     output = Path(output)
     output.mkdir(parents=True, exist_ok=False)
     steps = case["default_steps"] if steps is None else steps
@@ -455,6 +458,10 @@ def run_case(case, output, *, device="cpu", recipe_name=None, steps=None,
                           "includes": "fixture initialization, updates, source binding, sampling and evaluation",
                           "excludes": "initial inventory/queue wait and post-run artifact/media export"},
                "historical_results_changed": False, "observations": []}
+    receipt["runtime"].update(deterministic_algorithms=torch.are_deterministic_algorithms_enabled(),
+                              cudnn_benchmark=torch.backends.cudnn.benchmark,
+                              matmul_tf32=torch.backends.cuda.matmul.allow_tf32,
+                              cudnn_tf32=torch.backends.cudnn.allow_tf32)
     full = (steps >= case["default_steps"] and samples >= case["eval_samples"]
             and len(metric_steps) - 1 >= metric_count)
     records, arrays = [], {}
@@ -482,6 +489,17 @@ def run_case(case, output, *, device="cpu", recipe_name=None, steps=None,
     try:
         options = {"recipe_overrides": recipe_overrides} if recipe_overrides else {}
         fixture = contract.build(case, device=device, seed=seed, recipe_name=recipe_name, max_steps=steps, **options)
+        from experiments.forge.state import state_digest
+        receipt["reproducibility"] = {
+            "comparison_version": COMPARISON_VERSION,
+            "initial_state_sha256": state_digest(fixture.state_dict()),
+            "conditions": "case-owned architecture, prior, sampling, batch size, update budget and scoring cadence",
+            "historical_evidence": "original source, seed and initialization retained; no regrading",
+        }
+        owner = getattr(fixture, "trainer", None) or fixture
+        receipt["reproducibility"]["initial_models"] = {
+            name: state_digest(module.state_dict()) for name in ("G", "D", "E", "prior")
+            if isinstance(module := getattr(owner, name, None), torch.nn.Module)}
         receipt["recipe"] = json_value(fixture.recipe.to_dict())
         receipt["api_components"] = list(fixture.api_components)
         if torch.device(device).type == "cuda":
@@ -524,6 +542,8 @@ def run_case(case, output, *, device="cpu", recipe_name=None, steps=None,
             except Exception as capture_error:
                 receipt["failed_bounds"].append(f"partial goal observation unavailable: {capture_error}")
     receipt["elapsed_seconds"] = time.monotonic() - started
+    if "reproducibility" in receipt and hasattr(fixture, "batch_sequence_sha256"):
+        receipt["reproducibility"]["batch_sequence_sha256"] = fixture.batch_sequence_sha256
     receipt["artifacts"] = {}
     receipt["gif_frames"] = 0
     if records:
@@ -619,7 +639,7 @@ def main(argv=None):
                       steps=None if args.steps is None else min(args.steps, cases[name]["default_steps"]),
                       eval_samples=args.eval_samples, frames=args.frames,
                       recipe_overrides=args.recipe_overrides, wall_cap_seconds=args.wall_cap_seconds,
-                      seed=cases[name].get("protocol_seed", 24002))) for name in selected]
+                      seed=cases[name].get("protocol_seed", DEFAULT_SEED))) for name in selected]
     results = []
     if args.jobs == 1:
         iterator = map(_execute_request, requests)

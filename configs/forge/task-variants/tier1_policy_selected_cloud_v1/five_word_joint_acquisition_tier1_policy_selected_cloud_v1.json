@@ -7,17 +7,28 @@
     "eval_samples": 1024,
     "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
     "evaluator_revision": {
-      "change": "Correct == grading and reject unsupported operators; >= and <= numerical gates unchanged. Word fixture now honors declared prior_betas. Bind current sources for future execution only; original receipts and verdicts remain unchanged.",
-      "id": "explicit-equality-and-word-prior-betas-v3",
+      "change": "Bind the current shared public fixture and deterministic comparison helper for future execution. Forge named component initialization, numerical bounds, geometry, training budget and sampling laws remain unchanged; original receipts retain their original source binding.",
+      "id": "public-api-reproducibility-source-binding-v4",
       "previous_revision": {
-        "change": "Bind the current public fixture after bounded Recipe configuration API additions; retain the declared numerical bounds, task geometry and budget. Earlier evidence keeps its original source binding.",
-        "id": "joint-word-task-source-binding-v2",
-        "previous_api_images_sha256": "bedcb88841ef5cae8c9bfa60364bfacebbef29dea640036c1e30c4593ae71a3f"
+        "change": "Correct == grading and reject unsupported operators; >= and <= numerical gates unchanged. Word fixture now honors declared prior_betas. Bind current sources for future execution only; original receipts and verdicts remain unchanged.",
+        "id": "explicit-equality-and-word-prior-betas-v3",
+        "previous_revision": {
+          "change": "Bind the current public fixture after bounded Recipe configuration API additions; retain the declared numerical bounds, task geometry and budget. Earlier evidence keeps its original source binding.",
+          "id": "joint-word-task-source-binding-v2",
+          "previous_api_images_sha256": "bedcb88841ef5cae8c9bfa60364bfacebbef29dea640036c1e30c4593ae71a3f"
+        },
+        "previous_source_sha256": {
+          "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+          "benchmarks/toy_audit/api_images.py": "243190aba0c5870668a63289b771dc6f784c9460b890bc6a77e12cc2796d7184",
+          "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97"
+        }
       },
       "previous_source_sha256": {
-        "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
-        "benchmarks/toy_audit/api_images.py": "243190aba0c5870668a63289b771dc6f784c9460b890bc6a77e12cc2796d7184",
-        "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97"
+        "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
+        "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+        "benchmarks/toy_audit/api_images.py": "65d5ab6be9e80d3633922dca958a3dcd0e1b01b770e470e3c69a66654e800016",
+        "benchmarks/toy_audit/definition_quality.py": "42d835ab7a0937a6c3759dd719691c721663b7857cb990405253e90f7fbd4cc9",
+        "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89"
       }
     },
     "guards": {
@@ -51,13 +62,14 @@
     "sources": {
       "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
       "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
-      "benchmarks/toy_audit/api_images.py": "2e6c65efff150f4fd393ad3b4ee3000d3f0f56b7a077a80f2624c4af46f7b491",
+      "benchmarks/toy_audit/api_images.py": "c1573e6e34c05302db8608982ff03819447a38b4a310a91aaf1832508c3e4336",
       "benchmarks/toy_audit/definition_quality.py": "42d835ab7a0937a6c3759dd719691c721663b7857cb990405253e90f7fbd4cc9",
+      "benchmarks/toy_audit/reproducibility.py": "bb8cf4836bf8331c1a955a1cbb532c9fa24f469f53560624972bc5a2053f5786",
       "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89",
-      "configs/forge/tasks/five_word_joint_acquisition.json": "419dbbd4aa5116e093e543cd7cacc904185408806cefbc8758004edabcecd048",
+      "configs/forge/tasks/five_word_joint_acquisition.json": "26875d18d2d8572a479fe8170894bb8cde0798de38e639514fb077c88344d1f8",
       "experiments/forge/adapters.py": "e2902ef9f39f39067a8d275616f78bb07e672af69c562833bc1e7ffa681d08c7",
-      "experiments/forge/api.py": "e745bfc9f7246055e4d3cea0b3943493ccdf3769527a54684182514a6dc767cd",
-      "experiments/forge/boundaries.py": "17ce3e0da65d62158955ed03f5a7ba6f4a3526c74730019a5dc51f2d189b7218",
+      "experiments/forge/api.py": "269bd8c090ad71a5f2b7dbf3d942de5da8a1f9d3cc00add0908b0ea5b7e154c5",
+      "experiments/forge/boundaries.py": "9a290d98182cd62e4e72338d04ef03ec2f9f66eeca581c3667d6b750758a2412",
       "experiments/forge/clockfree.py": "e6510f0824f436d07d488667bd78799d7224a6f78efed345510ee4c434543c46",
       "experiments/forge/mechanisms.py": "9e4e1fe1f8cb9a24148cab88b7bf2f980e805a2e488c16a982768519bbe1b23f",
       "experiments/forge/policy_adapters.py": "714046ea1655f1946e09dc2aeed27c43cf93f2841237c2be47f0f0049a5df9fa",
@@ -66,7 +78,7 @@
       "experiments/forge/tier1_policy.py": "2b92022a3bc6213826fadfaaa98b0c4aae0f4afab19f2206e6812c69ac23e5ce",
       "experiments/forge/views.py": "673331e6fd93e56d69db83f034fa2e431ee5f2015f368c7de8029009da739e77",
       "particlegan/policy.py": "8370e36b5b93afe95ae24d2b385aac8735a587f86ef2b87ed369ecfdfcb6fec5",
-      "particlegan/recipes.py": "1a7f9df746e242a2774068c819d70d50cd72dc4f7f6b22b0bd13e1345dcf8ab2",
+      "particlegan/recipes.py": "f22cbd46e8d2b30a8e984e688595b8dd914b60a99a807399080180fbf55d5dc1",
       "particlegan/training.py": "7dadc219135bc3e6bf657bfe9bc3fa81dd14d4b2a31c70d5ff61e2941db35c94"
     },
     "thresholds": [
@@ -157,8 +169,8 @@
       "schema_version": 1,
       "sources": {
         "experiments/forge/adapters.py": "e2902ef9f39f39067a8d275616f78bb07e672af69c562833bc1e7ffa681d08c7",
-        "experiments/forge/api.py": "e745bfc9f7246055e4d3cea0b3943493ccdf3769527a54684182514a6dc767cd",
-        "experiments/forge/boundaries.py": "17ce3e0da65d62158955ed03f5a7ba6f4a3526c74730019a5dc51f2d189b7218",
+        "experiments/forge/api.py": "269bd8c090ad71a5f2b7dbf3d942de5da8a1f9d3cc00add0908b0ea5b7e154c5",
+        "experiments/forge/boundaries.py": "9a290d98182cd62e4e72338d04ef03ec2f9f66eeca581c3667d6b750758a2412",
         "experiments/forge/clockfree.py": "e6510f0824f436d07d488667bd78799d7224a6f78efed345510ee4c434543c46",
         "experiments/forge/mechanisms.py": "9e4e1fe1f8cb9a24148cab88b7bf2f980e805a2e488c16a982768519bbe1b23f",
         "experiments/forge/policy_adapters.py": "714046ea1655f1946e09dc2aeed27c43cf93f2841237c2be47f0f0049a5df9fa",
@@ -167,7 +179,7 @@
         "experiments/forge/tier1_policy.py": "2b92022a3bc6213826fadfaaa98b0c4aae0f4afab19f2206e6812c69ac23e5ce",
         "experiments/forge/views.py": "673331e6fd93e56d69db83f034fa2e431ee5f2015f368c7de8029009da739e77",
         "particlegan/policy.py": "8370e36b5b93afe95ae24d2b385aac8735a587f86ef2b87ed369ecfdfcb6fec5",
-        "particlegan/recipes.py": "1a7f9df746e242a2774068c819d70d50cd72dc4f7f6b22b0bd13e1345dcf8ab2",
+        "particlegan/recipes.py": "f22cbd46e8d2b30a8e984e688595b8dd914b60a99a807399080180fbf55d5dc1",
         "particlegan/training.py": "7dadc219135bc3e6bf657bfe9bc3fa81dd14d4b2a31c70d5ff61e2941db35c94"
       }
     },
@@ -180,17 +192,28 @@
         "eval_samples": 1024,
         "evaluator": "benchmarks.transfer_suite.protocol:test_verdict",
         "evaluator_revision": {
-          "change": "Correct == grading and reject unsupported operators; >= and <= numerical gates unchanged. Word fixture now honors declared prior_betas. Bind current sources for future execution only; original receipts and verdicts remain unchanged.",
-          "id": "explicit-equality-and-word-prior-betas-v3",
+          "change": "Bind the current shared public fixture and deterministic comparison helper for future execution. Forge named component initialization, numerical bounds, geometry, training budget and sampling laws remain unchanged; original receipts retain their original source binding.",
+          "id": "public-api-reproducibility-source-binding-v4",
           "previous_revision": {
-            "change": "Bind the current public fixture after bounded Recipe configuration API additions; retain the declared numerical bounds, task geometry and budget. Earlier evidence keeps its original source binding.",
-            "id": "joint-word-task-source-binding-v2",
-            "previous_api_images_sha256": "bedcb88841ef5cae8c9bfa60364bfacebbef29dea640036c1e30c4593ae71a3f"
+            "change": "Correct == grading and reject unsupported operators; >= and <= numerical gates unchanged. Word fixture now honors declared prior_betas. Bind current sources for future execution only; original receipts and verdicts remain unchanged.",
+            "id": "explicit-equality-and-word-prior-betas-v3",
+            "previous_revision": {
+              "change": "Bind the current public fixture after bounded Recipe configuration API additions; retain the declared numerical bounds, task geometry and budget. Earlier evidence keeps its original source binding.",
+              "id": "joint-word-task-source-binding-v2",
+              "previous_api_images_sha256": "bedcb88841ef5cae8c9bfa60364bfacebbef29dea640036c1e30c4593ae71a3f"
+            },
+            "previous_source_sha256": {
+              "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
+              "benchmarks/toy_audit/api_images.py": "243190aba0c5870668a63289b771dc6f784c9460b890bc6a77e12cc2796d7184",
+              "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97"
+            }
           },
           "previous_source_sha256": {
-            "benchmarks/locked_shared/observation.py": "04067872ce228e4702e48c440222cd2f553ffb30b10ce113a4d52101e9abd9d8",
-            "benchmarks/toy_audit/api_images.py": "243190aba0c5870668a63289b771dc6f784c9460b890bc6a77e12cc2796d7184",
-            "benchmarks/transfer_suite/protocol.py": "7626dd8236c0765645c304891d8fa79be0c05fd10876a0694d58db831ff2dc97"
+            "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
+            "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
+            "benchmarks/toy_audit/api_images.py": "65d5ab6be9e80d3633922dca958a3dcd0e1b01b770e470e3c69a66654e800016",
+            "benchmarks/toy_audit/definition_quality.py": "42d835ab7a0937a6c3759dd719691c721663b7857cb990405253e90f7fbd4cc9",
+            "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89"
           }
         },
         "guards": {
@@ -214,8 +237,9 @@
         "sources": {
           "benchmarks/locked_shared/baseline.py": "8f1f58fc9cb90159c555788e593769d50070deaa078d0637bf881cf074f6680b",
           "benchmarks/locked_shared/observation.py": "bd6f9845b44f1ec2a58d445727990ba5068c7aca3b6f981cf38d738a37c4513b",
-          "benchmarks/toy_audit/api_images.py": "2e6c65efff150f4fd393ad3b4ee3000d3f0f56b7a077a80f2624c4af46f7b491",
+          "benchmarks/toy_audit/api_images.py": "c1573e6e34c05302db8608982ff03819447a38b4a310a91aaf1832508c3e4336",
           "benchmarks/toy_audit/definition_quality.py": "42d835ab7a0937a6c3759dd719691c721663b7857cb990405253e90f7fbd4cc9",
+          "benchmarks/toy_audit/reproducibility.py": "bb8cf4836bf8331c1a955a1cbb532c9fa24f469f53560624972bc5a2053f5786",
           "benchmarks/transfer_suite/protocol.py": "99469b022b790a18a74021a6fe49424d95f535afaa220643688a1ddd7a70ab89"
         },
         "thresholds": [
@@ -339,10 +363,10 @@
   },
   "id": "five_word_joint_acquisition_tier1_policy_selected_cloud_v1",
   "policy_parent": {
-    "evaluation_fingerprint": "acbaa1d733b4f2e47ed97102418481c608763aebcf7277e5248d542be1486540",
+    "evaluation_fingerprint": "9023e1024da135caa1bec9ad36685cc76964a066cccde5f6e5227292fd5a31de",
     "execution_fingerprint": "b6e774afa975f91e3441c30844163058e2c84a993fd4d897be8e6dca617c8654",
     "id": "five_word_joint_acquisition",
-    "task_sha256": "419dbbd4aa5116e093e543cd7cacc904185408806cefbc8758004edabcecd048"
+    "task_sha256": "26875d18d2d8572a479fe8170894bb8cde0798de38e639514fb077c88344d1f8"
   },
   "requires_capabilities": [
     "public_components",

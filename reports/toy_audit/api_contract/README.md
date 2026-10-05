@@ -77,6 +77,18 @@ spaced post-update observations (or every update for shorter declared units).
 Image and word fixtures retain their declared 24 checks. GIF frame selection
 adds real observations but cannot remove a scoring check or change the terminal
 PASS requirement. Receipts record both exact scoring and media update schedules.
+
+New runs share protocol seed `0` and isolate fixture construction from caller
+RNGs. Learned vector priors now use the repository's deterministic R2 initializer.
+Vector critic/generator target draws have independent checkpointed streams;
+receipts record their batch-sequence digest and initial model hashes. Current
+architecture, prior, budget and sampling still belong to each declared task.
+Fixed two-pole controls retain their explicit identity/zero/stored-weight law.
+The [reproducibility audit](../../forge/reproducibility/README.md) supplies the
+bounded numerical proof and actual-training GIFs. Earlier published results and
+frozen seed-24002 studies retain their original source and evidence identities;
+the current policy-search schema is v2 with seed `0`.
+
 Exceptions, NaNs and
 incomplete protocols fail explicitly. The command exits nonzero on FAIL.
 
