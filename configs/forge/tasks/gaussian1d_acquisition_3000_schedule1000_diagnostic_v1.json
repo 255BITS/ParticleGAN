@@ -169,7 +169,7 @@
   "research_artifacts": {
     "api_publication": "reports/toy_audit/api_contract/gaussian1d/results.json",
     "readout": "reports/toy_audit/api_contract/gaussian1d/README.md",
-    "budget_diagnostic_guide": "reports/forge/bcap-tier1-repair-v1/BUDGET_DIAGNOSTICS.md"
+    "budget_diagnostic_guide": "reports/forge/bcap-tier1-repair/budget-diagnostics.md"
   },
   "retained_question_ids": [
     "develop-gaussian1d_acquisition",

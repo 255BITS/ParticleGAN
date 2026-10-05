@@ -408,7 +408,7 @@
   "description": "Budget diagnostic for ring16_acquisition: execute 1600 updates while retaining the original 400-update schedule, all 24 original numerical observations, host, prior, initialization, sampling law and bounds; require all five additional late observations to pass. No ordinary Tier 1 qualification.",
   "research_artifacts": {
     "api_publication": "reports/toy_audit/api_contract/ring16/publication.json",
-    "budget_diagnostic_guide": "reports/forge/bcap-tier1-repair-v1/BUDGET_DIAGNOSTICS.md"
+    "budget_diagnostic_guide": "reports/forge/bcap-tier1-repair/budget-diagnostics.md"
   },
   "retained_question_ids": [
     "ring16_acquisition"
