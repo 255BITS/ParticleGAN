@@ -135,11 +135,20 @@ def _validate_measurement_contract(task):
                      stationary_checks=5, minimum_frozen_passing=0)
         # The complete late window is recomputed from these consumed fields.
         fixed["deadline_checks"] = (evaluation["steps"] - evaluation["shift_step"] - RECOVERY_DEADLINE) // 10 + 1
-    elif kind == "clockfree_parity":
-        fixed.update(evaluator="experiments.forge.views:_clockfree", training_feedback=False)
+    elif kind in {"clockfree_parity", "schedule_contract"}:
+        fixed.update(evaluator=("experiments.forge.views:_clockfree" if kind == "clockfree_parity"
+                                else "experiments.forge.views:_schedule_contract"), training_feedback=False)
         conditions = evaluation.get("conditions")
         if not isinstance(conditions, list) or sorted(conditions) != sorted(("step_label", "horizon", "evaluation_cadence", "restart")):
             raise ValueError(f"{task['id']}: all four fixed clock-free comparisons are required")
+        if kind == "schedule_contract":
+            from .clockfree import SCHEDULE_CLOCKS
+            fixed.update(schedule_tolerance=1e-12, guard_relative_tolerance=1e-6, clockfree_claim=False)
+            execution = task["execution"]
+            if execution.get("schedule_clocks") != SCHEDULE_CLOCKS:
+                raise ValueError(f"{task['id']}: schedule clocks differ from the independently audited laws")
+            if execution.get("steps") != execution.get("warmup_steps", 0) + 8 * execution.get("probe_steps", 0):
+                raise ValueError(f"{task['id']}: budget must include all five probes and three schedule oracle replays")
     else:
         return
     for key, expected in fixed.items():
@@ -529,6 +538,20 @@ def _clockfree(task, evidence):
                     metrics={"parity_comparisons": len(comparisons)})
 
 
+def _schedule_contract(task, evidence):
+    if not evidence.get("artifact_root") or not evidence.get("artifact_manifest"):
+        return _verdict("INCOMPLETE", "schedule contract requires saved actual controls and public states")
+    from .clockfree import verify_schedule_probe
+    comparisons, audit, metrics, blockers = verify_schedule_probe(task, evidence)
+    if blockers:
+        return _verdict("BLOCKED", "; ".join(blockers), metrics=metrics)
+    if (metrics["maximum_schedule_error"] > 1e-12 or metrics["maximum_guard_relative_error"] > 1e-6
+            or metrics["schedule_replay_state_mismatches"] or metrics["restart_cadence_failures"]):
+        return _verdict("FAIL", "actual controls, normalized schedule replay or exact cadence/restart differ", metrics=metrics)
+    return _verdict("PASS", "independent scheduled controls and normalized public replay agree; exact cadence/restart parity; no clock-free claim",
+                    metrics=metrics)
+
+
 def grade_result(task: dict, result: dict | None) -> dict:
     """Independently grade compatible raw evidence, without changing it."""
     try:
@@ -570,7 +593,8 @@ def grade_result(task: dict, result: dict | None) -> dict:
     graders = {"transfer_sustained": _transfer, "transfer_budget_diagnostic": budget_grade,
                "native_accuracy": _native,
                "ring_hold": _ring, "ring_extension": _ring,
-               "paired_adaptation": _adaptation, "clockfree_parity": _clockfree}
+               "paired_adaptation": _adaptation, "clockfree_parity": _clockfree,
+               "schedule_contract": _schedule_contract}
     grader = graders.get(task["evaluation"]["kind"])
     if grader is None:
         return _verdict("BLOCKED", f"unsupported evaluator {task['evaluation']['kind']}")

@@ -29,6 +29,8 @@ def render(task, row, local, output):
     observations = evidence.get('observations', [])
     frames, inputs = [], {}
     samples = None
+    scheduled = task['evaluation']['kind'] == 'schedule_contract'
+    schedule_errors = []
     descriptor = evidence.get('saved_observer_outputs')
     if descriptor:
         path = (local / descriptor['path']).resolve()
@@ -52,6 +54,22 @@ def render(task, row, local, output):
         initial = proof['initial']['trainer']['models']['G']
         parameter = next(key for key, value in initial.items() if value.is_floating_point() and value.numel())
         observations = [{'step': i + 1, **{name: float((proof['trajectories'][name][i]['trainer']['models']['G'][parameter] - initial[parameter]).abs().mean()) for name in names}} for i in range(task['execution']['probe_steps'])]
+        if scheduled:
+            from .clockfree import expected_controls, verify_schedule_probe
+            _, _, schedule_grade, _ = verify_schedule_probe(task, evidence)
+            names = ['reference', 'step_label', 'horizon']
+            for index, point in enumerate(observations):
+                errors = []
+                for name in proof['trajectories']:
+                    actual = proof['schedule_observations'][name][index]
+                    expected = expected_controls(proof['recipe'], proof['initial'], task['execution'], name, index)
+                    for key in ('rates', 'betas'):
+                        for observed, predicted in zip(actual[key], expected[key]):
+                            errors.extend(np.abs(np.asarray(observed) - np.asarray(predicted)).reshape(-1).tolist())
+                    errors.extend(abs(actual[key] - expected[key]) for key in ('input_sigma', 'output_sigma', 'coefficient'))
+                schedule_errors.append(max(errors))
+                for name in names:
+                    point[name + '_oracle'] = float((proof['schedule_oracles'][name][index]['trainer']['models']['G'][parameter] - initial[parameter]).abs().mean())
         thresholds = []
     else:
         thresholds = task['evaluation']['thresholds']
@@ -102,6 +120,9 @@ def render(task, row, local, output):
         else:
             for name in names:
                 top.plot(x[:index+1], [point[name] for point in observations[:index+1]], label=name)
+                if scheduled:
+                    top.plot(x[:index+1], [point[name + '_oracle'] for point in observations[:index+1]],
+                             linestyle='--', label=name + ' independent schedule replay')
             all_values = [point[name] for point in observations for name in names]
             low, high = min(all_values), max(all_values)
             padding = max(.01, (high-low)*.05)
@@ -120,6 +141,16 @@ def render(task, row, local, output):
             bottom.axhline(0, color='black', lw=1)
             bottom.set_title('Measured distance from numerical bounds; direction follows each listed inequality')
             bottom.legend(fontsize=7, ncol=2)
+        elif scheduled:
+            bottom.plot(x[:index+1], [max(1e-16, error) for error in schedule_errors[:index+1]],
+                        label='Maximum observed control error against independent equations')
+            bottom.axhline(task['evaluation']['schedule_tolerance'], color='black', linestyle='--',
+                           label='Declared schedule tolerance')
+            bottom.set_yscale('log'); bottom.set_ylim(1e-17, max(1e-11, max(schedule_errors) * 10))
+            bottom.set_xlim(0, max(x)); bottom.legend(fontsize=7)
+            bottom.set_title(f"Replay state mismatches: {schedule_grade['schedule_replay_state_mismatches']}; "
+                             f"restart/cadence failures: {schedule_grade['restart_cadence_failures']}; "
+                             f"guard relative error: {schedule_grade['maximum_guard_relative_error']:.3g}")
         else:
             comparisons = evidence['comparisons']
             labels = [point['condition'] for point in comparisons]

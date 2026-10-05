@@ -118,14 +118,22 @@ def adapter_preflight(task, candidate, *, root=None):
         blockers.extend(image_profile_blockers(task, root=root))
         if blockers:
             return blockers
-    if adapter == "clockfree_audit" and task["execution"].get("clock_audit_scope") != "measure_known_dependencies":
+    if adapter == "clockfree_audit" and task["evaluation"]["kind"] == "schedule_contract":
+        from .clockfree import schedule_blockers
+        recipe = candidate.get("resolved_recipe")
+        if recipe and "lr_floor" in recipe:
+            blockers.extend(schedule_blockers(recipe, candidate.get("extensions", {})))
+    elif adapter == "clockfree_audit" and task["execution"].get("clock_audit_scope") != "measure_known_dependencies":
         from .clockfree import source_audit
         recipe = candidate.get("resolved_recipe")
         if recipe and "lr_floor" in recipe:
             blockers.extend(source_audit(recipe, candidate.get("extensions", {}))["unexplained_clock_dependencies"])
     # Planning, preflight and execution share the exact public binding path.
     try:
-        task_formulation_context(candidate, task, device="cpu", root=root)
+        context = task_formulation_context(candidate, task, device="cpu", root=root)
+        if adapter == "clockfree_audit" and task["evaluation"]["kind"] == "schedule_contract":
+            from .clockfree import schedule_blockers
+            blockers.extend(schedule_blockers(context.recipe.to_dict(), context.extension_values))
     except CapabilityError as error:
         blockers.extend(error.blockers)
     except ValueError as error:

@@ -1,0 +1,49 @@
+{
+  "schema_version": 1,
+  "id": "schedule_contract_audit",
+  "adapter": "clockfree_audit",
+  "description": "Public scalar trainer operational audit: declared LR/noise/beta2/critic-coefficient schedules must match independent equations and normalized-clock public replay; guard clipping follows actual Adam history; restart and evaluation cadence retain exact learning state. Passing grants no clock-free claim. Revised question retains original clockfree_audit evidence without relabeling it.",
+  "execution": {
+    "initializer": "deterministic_orthogonal",
+    "steps": 231,
+    "warmup_steps": 199,
+    "probe_steps": 4,
+    "step_label_offset": 8192,
+    "original_schedule_horizon": 512,
+    "perturbed_horizon": 4096,
+    "evaluation_samples": 16,
+    "schedule_audit_parent": {
+      "id": "clockfree_audit",
+      "task_sha256": "d7748d04db85633e5c678622486b94b2a44f0e462ffb9c4b0179216db7840258",
+      "execution_fingerprint": "046bcb9371d7fe72f12bb6daa46cf7e90e99737385e1c1be08717625ceaf7477",
+      "evaluation_fingerprint": "06c264e7d0c6ec1433c2055786b92600da4f83af5c796ec85bc231c5027ed96f"
+    },
+    "resources": {"num_particles": 16, "z_dim": 2, "batch_size": 8},
+    "model": {"hidden": 16, "layers": 2, "fourier": 2},
+    "protocol": "screening",
+    "prior": {"kind": "mog", "sigma": 0.025, "standardize": false, "learnable": true},
+    "schedule_clocks": {
+      "learning_rate": "trainer_completed_steps",
+      "input_output_noise": "trainer_completed_steps",
+      "beta2": "trainer_completed_steps",
+      "critic_coefficient": "critic_optimizer_observed_steps",
+      "critic_guard": "per_parameter_adam_steps"
+    }
+  },
+  "evaluation": {
+    "sampling_contract_version": 1,
+    "sampling_law": "public_prior_without_output_noise",
+    "eval_output_noise": "clean",
+    "kind": "schedule_contract",
+    "evaluator": "experiments.forge.views:_schedule_contract",
+    "scoring_weights": "live",
+    "conditions": ["step_label", "horizon", "evaluation_cadence", "restart"],
+    "schedule_tolerance": 1e-12,
+    "guard_relative_tolerance": 1e-6,
+    "clockfree_claim": false,
+    "training_feedback": false
+  },
+  "resources": {"gpus": 1, "gpu_memory_mb": 2048, "cpu_threads": 1, "timeout_seconds": 300},
+  "requires_capabilities": ["checkpoint", "named_rng", "live_sampling", "learned_locations", "mog_prior"],
+  "dependencies": []
+}
