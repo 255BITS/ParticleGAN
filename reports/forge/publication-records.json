@@ -13857,6 +13857,442 @@
       ]
     },
     {
+      "candidate_id": "release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c",
+      "candidate_revision": "4731f466f19a01c3b9b0b6fb63b8eaa5b9334ad9092e7f37b8abd4017ca14ecc",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "conclusion": "Recorded FAIL; required outcomes {'FAIL': 4, 'PASS': 3, 'UNKNOWN': 21}. Failed requirements: gaussian1d_acquisition, ring16_acquisition, five_word_joint_acquisition, clockfree_audit_measurement_v1.",
+      "configuration_id": "1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c",
+      "evidence_scope": "published_summary",
+      "goal": "discriminator_stability",
+      "hypothesis": "Higher shared learning rates increase transport within the unchanged short movement and conditional horizons; one or two times prior rate tests whether stronger location transport destabilizes the later coverage hold.",
+      "lifecycle": "concluded",
+      "materialization": "reports/forge/publication-records.json",
+      "mechanism_class": "floor_constant",
+      "next_action": "Read the source-bound study and original evidence before another bounded hypothesis. Unknown requirements remain unknown; this projection grants no qualification or adoption.",
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "provenance": {
+        "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "receipt_bindings": [
+          {
+            "attempt_id": "10087734b6b3445ea5db443693bf02a0",
+            "result_hash": "e6512dd21adbb5aafd6527875dd5149be73ed91aa3c3c04ce93df90e4a068971",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "13e60a31e9f24e429a72e95ee3bce070",
+            "result_hash": "7a4e5fbecf682ef15478301d7f9d9322bf9b2d65cab73c8c718a9c91bd58726b",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "9d71a2050db7405eb8b0fae856432e0e",
+            "result_hash": "910c4f1bbecc7482cf449a12cfdf5fe2aa7385f621123e411dd577d7a61d1c40",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "c02c053fc0924c3494ab8278628a6596",
+            "result_hash": "46355ca4f39a01e100c726ecec53aabf1f32efc27174261b849e74106b01b512",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "c22eb7c8e1534f1c854b1d6b01898377",
+            "result_hash": "aa04200689820dc6fe8bed64dcdb435c88850798814feac33e467a1cae90675a",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "d151441783bc409aaff7320fe9789542",
+            "result_hash": "b3a03c095473038a74eab295f44fffbeaa5f70553dae9e810fc640ec0c1e51a5",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "dcf742de7b174557a429b674f558e62d",
+            "result_hash": "48e5c4d97dbb0c18fe31bf3657a9f5985586f5666a06a36785af80c18ce541c2",
+            "valid_receipt": true
+          }
+        ],
+        "recipe_sha256": "ad189b704ce2fced9b4cbf07955ee39cd9145e3d0e5fa4bbe9d92f7f4a74cff1",
+        "runtime_cohort": {
+          "compute_profiles": {
+            "cpu": {
+              "backend": "cpu",
+              "deterministic": true,
+              "machine": "x86_64",
+              "model": "AMD Ryzen 9 5900X 12-Core Processor",
+              "tf32": false,
+              "threads": 1
+            },
+            "cuda": {
+              "backend": "cuda",
+              "compute_capability": "8.6",
+              "deterministic": true,
+              "driver": "610.57.04",
+              "model": "NVIDIA RTX A6000",
+              "tf32": false,
+              "threads": 1
+            }
+          },
+          "execution_backend": "cuda",
+          "runtime": {
+            "implementation": "CPython",
+            "machine": "x86_64",
+            "packages": {
+              "numpy": "2.5.2",
+              "scipy": "1.17.1",
+              "torch": "2.14.0"
+            },
+            "python": "3.12.13",
+            "system": "Linux"
+          }
+        },
+        "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f"
+      },
+      "qualification_input": false,
+      "qualification_reuse": false,
+      "record_id": "publication-26a36efccd151af29bd6e469",
+      "record_type": "published_trial",
+      "recorded_cost": {
+        "evidence_wall_seconds": 185.9293481828645,
+        "new_paid_wall_seconds": 185.9293481828645,
+        "wall_seconds": 185.9293481828645
+      },
+      "recorded_qualification": {
+        "full_view_qualified": false,
+        "qualified_tier": 0,
+        "required_passed": 3,
+        "required_statuses": {
+          "FAIL": 3,
+          "PASS": 3,
+          "UNKNOWN": 21
+        },
+        "required_total": 27,
+        "tiers": [
+          {
+            "required_passed": 3,
+            "required_total": 6,
+            "statuses": {
+              "FAIL": 3,
+              "PASS": 3
+            },
+            "tier": 1
+          },
+          {
+            "required_passed": 0,
+            "required_total": 19,
+            "statuses": {
+              "UNKNOWN": 19
+            },
+            "tier": 2
+          },
+          {
+            "required_passed": 0,
+            "required_total": 2,
+            "statuses": {
+              "UNKNOWN": 2
+            },
+            "tier": 3
+          }
+        ],
+        "tuning_qualified": false,
+        "tuning_required_passed": 3,
+        "tuning_required_total": 6
+      },
+      "schema_version": 1,
+      "settings": {
+        "lr": 0.006375
+      },
+      "source": {
+        "board": "reports/forge/technique-inventory.md",
+        "path": "reports/forge/configuration-search/tier1-completion-v1-release07-gan-v3.json",
+        "sha256": "c8d99e0e95362917eb63e7321de64647200363d9ebf14acda8201385ea806529"
+      },
+      "status": "FAIL",
+      "study_id": "tier1-completion-v1-release07-gan-v3",
+      "task_results": [
+        {
+          "_attempt_id": "dcf742de7b174557a429b674f558e62d",
+          "compatibility_key": "42619490180d582fdeabbb8d0e276d519315767666e8b4d15f766609587b5374",
+          "cost": {
+            "wall_seconds": 13.862924857996404
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "cdf_ks": 0.6593897098321984,
+            "finite_fraction": 1.0,
+            "mean": 1.3973797083235695,
+            "mean_error_sigma": 1.205240583352861,
+            "sample_count": 4096,
+            "std": 0.295252224254986,
+            "std_ratio": 0.590504448509972,
+            "step": 1000
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "gaussian1d_acquisition"
+        },
+        {
+          "_attempt_id": "9d71a2050db7405eb8b0fae856432e0e",
+          "compatibility_key": "8b50f6619727a84a11185cd56f5e4b9c4093b536df5e95358fbcd3b8479aca5f",
+          "cost": {
+            "wall_seconds": 6.071002785000019
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "grad_med": 0.4881805181503296,
+            "mean_abs": 0.45521870255470276
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "two_pole"
+        },
+        {
+          "_attempt_id": "c02c053fc0924c3494ab8278628a6596",
+          "compatibility_key": "15dcd2c59ab5dba7c9d6fbb570e46ff749ca9abcf272ba4d1f25d28d17f45368",
+          "cost": {
+            "wall_seconds": 6.397293100017123
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "concept_move": 0.9003351861378235,
+            "unused_hold": 0.9901765957474709
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "unused_token_hold"
+        },
+        {
+          "_attempt_id": "13e60a31e9f24e429a72e95ee3bce070",
+          "compatibility_key": "e72de53fa39dc376a2969782e219d004a80df7ec8c3a33bb466e35d0634adedf",
+          "cost": {
+            "wall_seconds": 7.020622530020773
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "hold": 0.001990848919376731,
+            "recon_mse": 0.01316239032894373
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "ae_gan_hold"
+        },
+        {
+          "_attempt_id": "d151441783bc409aaff7320fe9789542",
+          "compatibility_key": "816d5936242492eb635288cba4ffd430e77d515b1f13e99f60e55fb4a9c4cabb",
+          "cost": {
+            "wall_seconds": 10.186824493925087
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "component_core_covariance_error": 0.5169459357857704,
+            "component_core_min_eigen_ratio": 0.2313469797372818,
+            "component_covariance_error": 12.811298463493586,
+            "component_min_eigen_ratio": 0.34543460607528687,
+            "covariance_error": 0.08228033035993576,
+            "hq": 0.800537109375,
+            "mass_tv": 0.1171875,
+            "max_component_spill": 0.4065934121608734,
+            "mean_error": 0.0381232313811779,
+            "min_hq_mass_ratio": 0.46875,
+            "min_mass_ratio": 0.61328125,
+            "modes": 16,
+            "resolved_core_covariance_error": 0.0,
+            "resolved_core_min_eigen_ratio": 1.0,
+            "resolved_max_component_spill": 0.0,
+            "sample_count": 4096,
+            "step": 400,
+            "sw1_normalized": 0.055280728686861645,
+            "target_scale": 3.0029242038726807
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "ring16_acquisition"
+        },
+        {
+          "_attempt_id": "c22eb7c8e1534f1c854b1d6b01898377",
+          "compatibility_key": "8cc83554dc0bf0615eac4253f3d0f6ac68daaae618e5616b5885b359382d1537",
+          "cost": {
+            "wall_seconds": 135.00117486796807
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "completed_steps": 20001.0,
+            "mass_apple": 0.0,
+            "mass_berry": 0.0,
+            "mass_grape": 0.0,
+            "mass_lemon": 0.0,
+            "mass_melon": 0.3935546875,
+            "mass_tv": 0.8,
+            "minimum_reconstruction_token_probability": 0.0,
+            "modes": 1,
+            "output_noise_added": 0.0,
+            "policy_latent_perturbation": 0.0,
+            "quality_fraction": 0.3935546875,
+            "reconstruction_exact": 0,
+            "reconstruction_nll": 11.859182328859974,
+            "sample_count": 1024,
+            "served_averaged": 0.0,
+            "step": 20001
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "five_word_joint_acquisition"
+        },
+        {
+          "_attempt_id": "10087734b6b3445ea5db443693bf02a0",
+          "compatibility_key": "177102b30837dfa5205e20c65ed3cde5cba8055b201753b096237d52bb8d4180",
+          "cost": {
+            "wall_seconds": 7.389505547937006
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {},
+          "qualification_tier": 1,
+          "reason": "step_label changed the update or common-prefix state",
+          "task_id": "clockfree_audit_measurement_v1"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "trajectory"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "residual_student"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "unipolar"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "cover_leftover"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "mid_scale_identity"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "mode_hold"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_two_broad"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_unequal_mass"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_unequal_width"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_anisotropic"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_overlap"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_spiral"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_stripes2"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_bars4"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_blobs4"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_intensity2"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "grid100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "rotated100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "staggered100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 3,
+          "task_id": "ring_hold"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 3,
+          "task_id": "ring_extension"
+        }
+      ],
+      "trainer_family": "release07-gan-v3-mog"
+    },
+    {
       "candidate_id": "bcap--67963edee7209ea85f9c07ec1f1195301e0ac40a975a44ef9891c5241a4ba2bc",
       "candidate_revision": "46873452231a8c9d3c7f5bb748186b82693b4824b05eaeec93d8af808fa7a467",
       "claim_contract": {
@@ -17423,6 +17859,79 @@
       "trainer_family": "r1r2"
     },
     {
+      "candidate_id": "tier1-completion-v1-k3p",
+      "conclusion": "Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False.",
+      "evidence_scope": "published_summary",
+      "goal": "discriminator_stability",
+      "hypothesis": null,
+      "lifecycle": "concluded",
+      "materialization": "reports/forge/publication-records.json",
+      "mechanism_class": "bounded_configuration_search",
+      "next_action": "Read the source-bound study and original evidence before another bounded hypothesis. Unknown requirements remain unknown; this projection grants no qualification or adoption.",
+      "provenance": {
+        "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "runtime_cohort": {
+          "compute_profiles": {
+            "cpu": {
+              "backend": "cpu",
+              "deterministic": true,
+              "machine": "x86_64",
+              "model": "AMD Ryzen 9 5900X 12-Core Processor",
+              "tf32": false,
+              "threads": 1
+            },
+            "cuda": {
+              "backend": "cuda",
+              "compute_capability": "8.6",
+              "deterministic": true,
+              "driver": "610.57.04",
+              "model": "NVIDIA RTX A6000",
+              "tf32": false,
+              "threads": 1
+            }
+          },
+          "execution_backend": "cuda",
+          "runtime": {
+            "implementation": "CPython",
+            "machine": "x86_64",
+            "packages": {
+              "numpy": "2.5.2",
+              "scipy": "1.17.1",
+              "torch": "2.14.0"
+            },
+            "python": "3.12.13",
+            "system": "Linux"
+          }
+        },
+        "source_digests": [
+          "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f"
+        ],
+        "spec_hash": "863b2ecb289bab659acfc440fbf0b975d4aa8a2da3dceed9396828f50decb649"
+      },
+      "qualification_input": false,
+      "qualification_reuse": false,
+      "record_id": "publication-3d5a3122c52152302ef706c8",
+      "record_type": "published_study",
+      "recorded_cost": {
+        "evidence_wall_seconds": 223.29844438110013,
+        "new_paid_wall_seconds": 2055.6923065807205,
+        "observed_attempts": 7,
+        "wall_seconds": 223.29844438110013
+      },
+      "schema_version": 1,
+      "source": {
+        "board": "reports/forge/technique-inventory.md",
+        "path": "reports/forge/configuration-search/tier1-completion-v1-k3p.json",
+        "sha256": "46cc25af6986468a3a51ed64841bdac560c0641b6031bef55ac0e188fb7ddf14"
+      },
+      "study_id": "tier1-completion-v1-k3p",
+      "task_results": [],
+      "trainer_family": "k3p",
+      "trial_ids": [
+        "k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c"
+      ]
+    },
+    {
       "candidate_id": "k3p--e99f7210e7272e65ba80cd6793b63a073862cff90ce2de25ea1ea4726bc7442f",
       "candidate_revision": "d911e120fbf33ee11cf96ab150440311257affcb197ed760d20fd314fa535982",
       "claim_contract": {
@@ -18085,6 +18594,442 @@
         }
       ],
       "trainer_family": "release07-gan-v3-mog"
+    },
+    {
+      "candidate_id": "r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f",
+      "candidate_revision": "844c924b8d8c077598c517bb5c92edd4ba6b04c1b161449568695b4ee2509435",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "conclusion": "Recorded FAIL; required outcomes {'FAIL': 4, 'PASS': 3, 'UNKNOWN': 21}. Failed requirements: gaussian1d_acquisition, ring16_acquisition, five_word_joint_acquisition, clockfree_audit_measurement_v1.",
+      "configuration_id": "302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f",
+      "evidence_scope": "published_summary",
+      "goal": "discriminator_stability",
+      "hypothesis": "The previous constant-LR 0.0085, gamma 1-to-0.1 Modern GAN configuration passed all smoke tasks but failed trajectory identity at every observation. Preserve its early transport rate and penalty schedule, then reduce later network and prior steps together; comparing equal and half-rate critics tests whether the conditional game benefits from slower critic adaptation under the same short horizons.",
+      "lifecycle": "concluded",
+      "materialization": "reports/forge/publication-records.json",
+      "mechanism_class": "floor_constant",
+      "next_action": "Read the source-bound study and original evidence before another bounded hypothesis. Unknown requirements remain unknown; this projection grants no qualification or adoption.",
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "provenance": {
+        "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "receipt_bindings": [
+          {
+            "attempt_id": "492cef222d534e1da8e526a60af81603",
+            "result_hash": "943a088106e6c0bcf7364d44eeb94726dd7a4513e8da6957a261aeb95dbdf81d",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "5b7aef86733c4079a953578e2c00a67b",
+            "result_hash": "4bf4bd3c994d3ed11b521ab2a84bae8a4b0e58bd6a4d6bdf778650847b9f616f",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "809b9e18b76c49dd9257365f46dba372",
+            "result_hash": "bafd18daa9953495cffbc2f5599850b45f48114d69e99e93a9e1e2924e5c999a",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "9b6c316afe1041d780c3503e80f4119f",
+            "result_hash": "d75ea6eedcf7b9645f5b8205c88571caa846baa545a2b8141d466baa281a696e",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "b191bd3f88c4487086908f0a1bd51469",
+            "result_hash": "4e172c4b93d7e33fb0b5ea16f810442e579b98316f3ccbfda74ebc1ab8a96ced",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "d7e57ea425df4a55836a6994d83f686e",
+            "result_hash": "3cacbbc82fe179e49788305e5242aaf863bcfcae0ca572e3bbadcfb23e5da05b",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "dc3918cd7ee949de9f31b1342cf1e62a",
+            "result_hash": "a388f9447659b59662cbb5ccde3bcf66dd40ccff4163336ebd5acf5159483ad8",
+            "valid_receipt": true
+          }
+        ],
+        "recipe_sha256": "deb7f75a0e7190ea040d0978206f0d3874e90fb8362c7045d0ff337179231910",
+        "runtime_cohort": {
+          "compute_profiles": {
+            "cpu": {
+              "backend": "cpu",
+              "deterministic": true,
+              "machine": "x86_64",
+              "model": "AMD Ryzen 9 5900X 12-Core Processor",
+              "tf32": false,
+              "threads": 1
+            },
+            "cuda": {
+              "backend": "cuda",
+              "compute_capability": "8.6",
+              "deterministic": true,
+              "driver": "610.57.04",
+              "model": "NVIDIA RTX A6000",
+              "tf32": false,
+              "threads": 1
+            }
+          },
+          "execution_backend": "cuda",
+          "runtime": {
+            "implementation": "CPython",
+            "machine": "x86_64",
+            "packages": {
+              "numpy": "2.5.2",
+              "scipy": "1.17.1",
+              "torch": "2.14.0"
+            },
+            "python": "3.12.13",
+            "system": "Linux"
+          }
+        },
+        "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f"
+      },
+      "qualification_input": false,
+      "qualification_reuse": false,
+      "record_id": "publication-41279a2631b1d5c77d8d15bc",
+      "record_type": "published_trial",
+      "recorded_cost": {
+        "evidence_wall_seconds": 181.95588313194457,
+        "new_paid_wall_seconds": 181.95588313194457,
+        "wall_seconds": 181.95588313194457
+      },
+      "recorded_qualification": {
+        "full_view_qualified": false,
+        "qualified_tier": 0,
+        "required_passed": 3,
+        "required_statuses": {
+          "FAIL": 3,
+          "PASS": 3,
+          "UNKNOWN": 21
+        },
+        "required_total": 27,
+        "tiers": [
+          {
+            "required_passed": 3,
+            "required_total": 6,
+            "statuses": {
+              "FAIL": 3,
+              "PASS": 3
+            },
+            "tier": 1
+          },
+          {
+            "required_passed": 0,
+            "required_total": 19,
+            "statuses": {
+              "UNKNOWN": 19
+            },
+            "tier": 2
+          },
+          {
+            "required_passed": 0,
+            "required_total": 2,
+            "statuses": {
+              "UNKNOWN": 2
+            },
+            "tier": 3
+          }
+        ],
+        "tuning_qualified": false,
+        "tuning_required_passed": 3,
+        "tuning_required_total": 6
+      },
+      "schema_version": 1,
+      "settings": {
+        "lr": 0.0085
+      },
+      "source": {
+        "board": "reports/forge/technique-inventory.md",
+        "path": "reports/forge/configuration-search/tier1-completion-v1-r1r2.json",
+        "sha256": "e6478518412445854bd256d49e0cc12beb9d7eee8fa0209b65504677735a714c"
+      },
+      "status": "FAIL",
+      "study_id": "tier1-completion-v1-r1r2",
+      "task_results": [
+        {
+          "_attempt_id": "809b9e18b76c49dd9257365f46dba372",
+          "compatibility_key": "0c570fc41638ff1f25a337ba9ff7478d16a38fb37458d9d322b65c4562257efe",
+          "cost": {
+            "wall_seconds": 13.875331663992256
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "cdf_ks": 0.061630059406933446,
+            "finite_fraction": 1.0,
+            "mean": 1.9172485065791989,
+            "mean_error_sigma": 0.16550298684160225,
+            "sample_count": 4096,
+            "std": 0.5110921857591484,
+            "std_ratio": 1.0221843715182968,
+            "step": 1000
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "gaussian1d_acquisition"
+        },
+        {
+          "_attempt_id": "dc3918cd7ee949de9f31b1342cf1e62a",
+          "compatibility_key": "eff99e6c1efeae29d179d2a22c469e1b51c7a5f84cc5c622e7e1f93ffff5209e",
+          "cost": {
+            "wall_seconds": 6.147894090041518
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "grad_med": 0.6925410032272339,
+            "mean_abs": 0.3810328245162964
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "two_pole"
+        },
+        {
+          "_attempt_id": "492cef222d534e1da8e526a60af81603",
+          "compatibility_key": "e171bedbdcd36c0520d811df869001f79e9f96bc41794f2d8289ef0cd823bf80",
+          "cost": {
+            "wall_seconds": 6.342056447989307
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "concept_move": 0.9999997615814209,
+            "unused_hold": 0.9999999701976776
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "unused_token_hold"
+        },
+        {
+          "_attempt_id": "d7e57ea425df4a55836a6994d83f686e",
+          "compatibility_key": "60c253722f4f20cc0a145484461355f4a289a907252860d40a59c00f8a25d64b",
+          "cost": {
+            "wall_seconds": 6.91040447994601
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "hold": 0.00289349677041173,
+            "recon_mse": 0.002680479548871517
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "ae_gan_hold"
+        },
+        {
+          "_attempt_id": "b191bd3f88c4487086908f0a1bd51469",
+          "compatibility_key": "a3aa0f9b6c073f3886345145f94b642b2046463c7a312eb90a44beb6e482d590",
+          "cost": {
+            "wall_seconds": 10.089769596001133
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "component_core_covariance_error": 0.4898897986859083,
+            "component_core_min_eigen_ratio": 0.12067855894565582,
+            "component_covariance_error": 1.8149110414087772,
+            "component_min_eigen_ratio": 0.2560291886329651,
+            "covariance_error": 0.05377205088734627,
+            "hq": 0.917724609375,
+            "mass_tv": 0.07666015625,
+            "max_component_spill": 0.20171673595905304,
+            "mean_error": 0.05312217399477959,
+            "min_hq_mass_ratio": 0.5703125,
+            "min_mass_ratio": 0.5703125,
+            "modes": 16,
+            "resolved_core_covariance_error": 0.0,
+            "resolved_core_min_eigen_ratio": 1.0,
+            "resolved_max_component_spill": 0.0,
+            "sample_count": 4096,
+            "step": 400,
+            "sw1_normalized": 0.04567681938888195,
+            "target_scale": 3.0029242038726807
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "ring16_acquisition"
+        },
+        {
+          "_attempt_id": "9b6c316afe1041d780c3503e80f4119f",
+          "compatibility_key": "8ae03b6b7e4dde84d96155ed03f7f9112eb66827440ebbd39670a94c695a32a6",
+          "cost": {
+            "wall_seconds": 131.31069715402555
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "completed_steps": 20001.0,
+            "mass_apple": 0.1982421875,
+            "mass_berry": 0.1953125,
+            "mass_grape": 0.2109375,
+            "mass_lemon": 0.2080078125,
+            "mass_melon": 0.1875,
+            "mass_tv": 0.018945312500000006,
+            "minimum_reconstruction_token_probability": 0.12109410017728806,
+            "modes": 5,
+            "output_noise_added": 0.0,
+            "policy_latent_perturbation": 0.0,
+            "quality_fraction": 1.0,
+            "reconstruction_exact": 0,
+            "reconstruction_nll": 0.07780313654933192,
+            "sample_count": 1024,
+            "served_averaged": 0.0,
+            "step": 20001
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "five_word_joint_acquisition"
+        },
+        {
+          "_attempt_id": "5b7aef86733c4079a953578e2c00a67b",
+          "compatibility_key": "e47eca7651fef3596a3b8299eeae9971d471f6eb4b2029b9f3abf578cac77d18",
+          "cost": {
+            "wall_seconds": 7.279729699948803
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {},
+          "qualification_tier": 1,
+          "reason": "step_label changed the update or common-prefix state",
+          "task_id": "clockfree_audit_measurement_v1"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "trajectory"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "residual_student"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "unipolar"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "cover_leftover"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "mid_scale_identity"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "mode_hold"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_two_broad"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_unequal_mass"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_unequal_width"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_anisotropic"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_overlap"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_spiral"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_stripes2"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_bars4"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_blobs4"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_intensity2"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "grid100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "rotated100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "staggered100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 3,
+          "task_id": "ring_hold"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 3,
+          "task_id": "ring_extension"
+        }
+      ],
+      "trainer_family": "r1r2"
     },
     {
       "candidate_id": "k3p--8c14d4a6a059d0954eb79a8d100d1c4de0eb13c039f49a8ac6f8f66ca544b8df",
@@ -28142,6 +29087,442 @@
       "trainer_family": "k3p"
     },
     {
+      "candidate_id": "bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212",
+      "candidate_revision": "1f1d81a0aa3f60e2a3f3187dacfa29e7688bb6509b16daf439036ed5f9951c4e",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "conclusion": "Recorded FAIL; required outcomes {'FAIL': 3, 'PASS': 4, 'UNKNOWN': 21}. Failed requirements: gaussian1d_acquisition, ring16_acquisition, clockfree_audit_measurement_v1.",
+      "configuration_id": "08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212",
+      "evidence_scope": "published_summary",
+      "goal": "discriminator_stability",
+      "hypothesis": "A bounded shared-defaults grid of critic rate, prior rate and fixed BCap strength may retain the canonical smoke behavior while improving the observed clean mode-hold coverage failure.",
+      "lifecycle": "concluded",
+      "materialization": "reports/forge/publication-records.json",
+      "mechanism_class": "floor_constant",
+      "next_action": "Read the source-bound study and original evidence before another bounded hypothesis. Unknown requirements remain unknown; this projection grants no qualification or adoption.",
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "provenance": {
+        "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "receipt_bindings": [
+          {
+            "attempt_id": "329006823c804cdfbd01ab414d10d1cd",
+            "result_hash": "85fdd4af7736bc979cf118b5dbc4d9b1c8ef9df7d716818d5ef768bc8ce6b986",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "5732e526ff764977af157e194f8a5749",
+            "result_hash": "a3fec24dab8f8761b4273f6fbb5ac641026a9371b40b87761e2617513862fbba",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "8b88bf0491144e35b637e68eda852310",
+            "result_hash": "cb0cccce457535f94a1c693d5b843543adeb409abf97bd941e3d07676c9654c6",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "99b2e68810ba4379a860e467e8a818ca",
+            "result_hash": "01bce7bc33b8de7829cd6fc5da3849e9d67ac70acdcc5526b8454e044ee56078",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "bde4745f31864cc08c42880d0fa36272",
+            "result_hash": "fbc4f715f76e5d03885734bd82261a37ff2e395c6b72f4be72d6c969e2fe6e55",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "d0638ad5ce5a47e5b2fcb00b369768b2",
+            "result_hash": "a704de865b85b40b32357f8931a4ad55f1ddaaed57fcaa389a4c3b53aaec7ea9",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "d8185ca486b54af79ef422395eac8065",
+            "result_hash": "8562463777845a734731ef3a617838c90dc5c85077c7f82c0aed7b6de3f250bb",
+            "valid_receipt": true
+          }
+        ],
+        "recipe_sha256": "dc0ab7855facf1f8b0431b08f4656587a59ee2de249ff0deeb62b11c50e12540",
+        "runtime_cohort": {
+          "compute_profiles": {
+            "cpu": {
+              "backend": "cpu",
+              "deterministic": true,
+              "machine": "x86_64",
+              "model": "AMD Ryzen 9 5900X 12-Core Processor",
+              "tf32": false,
+              "threads": 1
+            },
+            "cuda": {
+              "backend": "cuda",
+              "compute_capability": "8.6",
+              "deterministic": true,
+              "driver": "610.57.04",
+              "model": "NVIDIA RTX A6000",
+              "tf32": false,
+              "threads": 1
+            }
+          },
+          "execution_backend": "cuda",
+          "runtime": {
+            "implementation": "CPython",
+            "machine": "x86_64",
+            "packages": {
+              "numpy": "2.5.2",
+              "scipy": "1.17.1",
+              "torch": "2.14.0"
+            },
+            "python": "3.12.13",
+            "system": "Linux"
+          }
+        },
+        "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f"
+      },
+      "qualification_input": false,
+      "qualification_reuse": false,
+      "record_id": "publication-7fc5868c28c45bf35e7ee68a",
+      "record_type": "published_trial",
+      "recorded_cost": {
+        "evidence_wall_seconds": 210.21404680598062,
+        "new_paid_wall_seconds": 210.21404680598062,
+        "wall_seconds": 210.21404680598062
+      },
+      "recorded_qualification": {
+        "full_view_qualified": false,
+        "qualified_tier": 0,
+        "required_passed": 4,
+        "required_statuses": {
+          "FAIL": 2,
+          "PASS": 4,
+          "UNKNOWN": 21
+        },
+        "required_total": 27,
+        "tiers": [
+          {
+            "required_passed": 4,
+            "required_total": 6,
+            "statuses": {
+              "FAIL": 2,
+              "PASS": 4
+            },
+            "tier": 1
+          },
+          {
+            "required_passed": 0,
+            "required_total": 19,
+            "statuses": {
+              "UNKNOWN": 19
+            },
+            "tier": 2
+          },
+          {
+            "required_passed": 0,
+            "required_total": 2,
+            "statuses": {
+              "UNKNOWN": 2
+            },
+            "tier": 3
+          }
+        ],
+        "tuning_qualified": false,
+        "tuning_required_passed": 4,
+        "tuning_required_total": 6
+      },
+      "schema_version": 1,
+      "settings": {
+        "d_lr_mult": 2.0
+      },
+      "source": {
+        "board": "reports/forge/technique-inventory.md",
+        "path": "reports/forge/configuration-search/tier1-completion-v1-bcap.json",
+        "sha256": "d4da8832d2e1b68ce90e893879a2de2a050e182ccf753095485027f477d4bbe2"
+      },
+      "status": "FAIL",
+      "study_id": "tier1-completion-v1-bcap",
+      "task_results": [
+        {
+          "_attempt_id": "d0638ad5ce5a47e5b2fcb00b369768b2",
+          "compatibility_key": "dfb82593ed02efc8cf48a1f77f253c569380ff2a8ee5558a5400c267bfa34722",
+          "cost": {
+            "wall_seconds": 16.32644272292964
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "cdf_ks": 0.17496301213174947,
+            "finite_fraction": 1.0,
+            "mean": 2.2085077540250495,
+            "mean_error_sigma": 0.417015508050099,
+            "sample_count": 4096,
+            "std": 0.5413126228738229,
+            "std_ratio": 1.0826252457476457,
+            "step": 1000
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "gaussian1d_acquisition"
+        },
+        {
+          "_attempt_id": "bde4745f31864cc08c42880d0fa36272",
+          "compatibility_key": "dce9d052b262d2a4ff8525fb4cc0aa2144542f3f51443a41222286872d45995d",
+          "cost": {
+            "wall_seconds": 5.823779058060609
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "grad_med": 0.7534642219543457,
+            "mean_abs": 0.43462809920310974
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "two_pole"
+        },
+        {
+          "_attempt_id": "329006823c804cdfbd01ab414d10d1cd",
+          "compatibility_key": "84524e912215b1c4372140c5821ea077d501c0d661a01ca7c99bc84142db41bf",
+          "cost": {
+            "wall_seconds": 6.027798658935353
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "concept_move": 0.9475227570853306,
+            "unused_hold": 0.9932501632720232
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "unused_token_hold"
+        },
+        {
+          "_attempt_id": "99b2e68810ba4379a860e467e8a818ca",
+          "compatibility_key": "8bc26da42bd68654ec3395f0c1ca3b33a0b13efbfbfbc6966bb5de868202d03b",
+          "cost": {
+            "wall_seconds": 7.014979965984821
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "hold": 0.008576938882470131,
+            "recon_mse": 0.0037055215798318386
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "ae_gan_hold"
+        },
+        {
+          "_attempt_id": "d8185ca486b54af79ef422395eac8065",
+          "compatibility_key": "40889b3b15924e871484cd09184d7c1b8d3d6227d9a10710f116988e4f12f7c4",
+          "cost": {
+            "wall_seconds": 10.407368907006457
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "component_core_covariance_error": 0.7124336995184422,
+            "component_core_min_eigen_ratio": 0.12958036363124847,
+            "component_covariance_error": 4.457004625350237,
+            "component_min_eigen_ratio": 0.13450120389461517,
+            "covariance_error": 0.03750394657254219,
+            "hq": 0.9384765625,
+            "mass_tv": 0.1220703125,
+            "max_component_spill": 0.1754966825246811,
+            "mean_error": 0.0745110958814621,
+            "min_hq_mass_ratio": 0.34765625,
+            "min_mass_ratio": 0.37890625,
+            "modes": 16,
+            "resolved_core_covariance_error": 0.0,
+            "resolved_core_min_eigen_ratio": 1.0,
+            "resolved_max_component_spill": 0.0,
+            "sample_count": 4096,
+            "step": 400,
+            "sw1_normalized": 0.058161806697913015,
+            "target_scale": 3.0029242038726807
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "ring16_acquisition"
+        },
+        {
+          "_attempt_id": "8b88bf0491144e35b637e68eda852310",
+          "compatibility_key": "8227a355e01d7eef10974e26f477bd31095fe5f101b38b74b233fc500d426b4c",
+          "cost": {
+            "wall_seconds": 157.468272792059
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "completed_steps": 20001.0,
+            "mass_apple": 0.1982421875,
+            "mass_berry": 0.2080078125,
+            "mass_grape": 0.1953125,
+            "mass_lemon": 0.2109375,
+            "mass_melon": 0.1875,
+            "mass_tv": 0.018945312500000006,
+            "minimum_reconstruction_token_probability": 0.9963216781616211,
+            "modes": 5,
+            "output_noise_added": 0.0,
+            "policy_latent_perturbation": 0.0,
+            "quality_fraction": 1.0,
+            "reconstruction_exact": 1,
+            "reconstruction_nll": 0.00040383101466545717,
+            "sample_count": 1024,
+            "served_averaged": 0.0,
+            "step": 20001
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "five_word_joint_acquisition"
+        },
+        {
+          "_attempt_id": "5732e526ff764977af157e194f8a5749",
+          "compatibility_key": "ed868cb3726966ebe70d479a38d1d4b9bab26e7c50bb1bbdda8457b287028645",
+          "cost": {
+            "wall_seconds": 7.145404701004736
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {},
+          "qualification_tier": 1,
+          "reason": "step_label changed the update or common-prefix state",
+          "task_id": "clockfree_audit_measurement_v1"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "trajectory"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "residual_student"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "unipolar"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "cover_leftover"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "mid_scale_identity"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "mode_hold"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_two_broad"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_unequal_mass"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_unequal_width"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_anisotropic"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_overlap"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_spiral"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_stripes2"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_bars4"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_blobs4"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_intensity2"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "grid100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "rotated100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "staggered100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 3,
+          "task_id": "ring_hold"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 3,
+          "task_id": "ring_extension"
+        }
+      ],
+      "trainer_family": "bcap"
+    },
+    {
       "candidate_id": "k3p--862c7c23a730daa7bae2c2076b47e192483f4731012e3faa97e9881c708edb0f",
       "candidate_revision": "220de27f8bd988f7bc660140ad6d7262957cc366d417129e8106ff25018c957c",
       "claim_contract": {
@@ -28594,6 +29975,79 @@
         "k3p--b1bac237024d49da20182f1a15ce2298c18475fe6c7a286a569a0f145d6936f7",
         "k3p--bf75899e6d6805fc9779dbbb56e2ed937ffcb838f70e7b64ca422e48cea37d82",
         "k3p--d9270948218dc559ecd52946f251ab755bc201f72aae5bcca8a11b7439965510"
+      ]
+    },
+    {
+      "candidate_id": "tier1-completion-v1-ka2",
+      "conclusion": "Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False.",
+      "evidence_scope": "published_summary",
+      "goal": "discriminator_stability",
+      "hypothesis": null,
+      "lifecycle": "concluded",
+      "materialization": "reports/forge/publication-records.json",
+      "mechanism_class": "bounded_configuration_search",
+      "next_action": "Read the source-bound study and original evidence before another bounded hypothesis. Unknown requirements remain unknown; this projection grants no qualification or adoption.",
+      "provenance": {
+        "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "runtime_cohort": {
+          "compute_profiles": {
+            "cpu": {
+              "backend": "cpu",
+              "deterministic": true,
+              "machine": "x86_64",
+              "model": "AMD Ryzen 9 5900X 12-Core Processor",
+              "tf32": false,
+              "threads": 1
+            },
+            "cuda": {
+              "backend": "cuda",
+              "compute_capability": "8.6",
+              "deterministic": true,
+              "driver": "610.57.04",
+              "model": "NVIDIA RTX A6000",
+              "tf32": false,
+              "threads": 1
+            }
+          },
+          "execution_backend": "cuda",
+          "runtime": {
+            "implementation": "CPython",
+            "machine": "x86_64",
+            "packages": {
+              "numpy": "2.5.2",
+              "scipy": "1.17.1",
+              "torch": "2.14.0"
+            },
+            "python": "3.12.13",
+            "system": "Linux"
+          }
+        },
+        "source_digests": [
+          "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f"
+        ],
+        "spec_hash": "26347f179a9cdcd4603e273845536f171068a4e4e000bc1515b276b6ef12efa4"
+      },
+      "qualification_input": false,
+      "qualification_reuse": false,
+      "record_id": "publication-85894d7e970f702ef008a0e9",
+      "record_type": "published_study",
+      "recorded_cost": {
+        "evidence_wall_seconds": 245.13493827078491,
+        "new_paid_wall_seconds": 2055.6923065807205,
+        "observed_attempts": 7,
+        "wall_seconds": 245.13493827078491
+      },
+      "schema_version": 1,
+      "source": {
+        "board": "reports/forge/technique-inventory.md",
+        "path": "reports/forge/configuration-search/tier1-completion-v1-ka2.json",
+        "sha256": "b541c33d5b3961c05d9849d962243f12f99403e1c3260172bf907d347221154b"
+      },
+      "study_id": "tier1-completion-v1-ka2",
+      "task_results": [],
+      "trainer_family": "ka2",
+      "trial_ids": [
+        "ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f"
       ]
     },
     {
@@ -39688,6 +41142,442 @@
       "trainer_family": "r1r2"
     },
     {
+      "candidate_id": "k3p--0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c",
+      "candidate_revision": "de743d96953782a0f6079843dbe6a10a1145226c1b83660bee550c9c45bce71d",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "conclusion": "Recorded FAIL; required outcomes {'FAIL': 3, 'PASS': 4, 'UNKNOWN': 21}. Failed requirements: gaussian1d_acquisition, five_word_joint_acquisition, clockfree_audit_measurement_v1.",
+      "configuration_id": "0b37e98a01e3cc7c0f4b3325b43f9e6d569de81e4f890f20942f0fc33221305c",
+      "evidence_scope": "published_summary",
+      "goal": "discriminator_stability",
+      "hypothesis": "Higher shared learning rates increase transport within the unchanged short movement and conditional horizons; one or two times prior rate tests whether stronger location transport destabilizes the later coverage hold.",
+      "lifecycle": "concluded",
+      "materialization": "reports/forge/publication-records.json",
+      "mechanism_class": "floor_constant",
+      "next_action": "Read the source-bound study and original evidence before another bounded hypothesis. Unknown requirements remain unknown; this projection grants no qualification or adoption.",
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "provenance": {
+        "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "receipt_bindings": [
+          {
+            "attempt_id": "2031cd7bb3a04d4090bdfbca8eaac088",
+            "result_hash": "2e90bc7601269fea9618ebf13ce531aec65ba16f2f03c56138a4ad87ba58e227",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "20d3eadff3724e6db327613becd577e7",
+            "result_hash": "1b0df1bba8d60d299a3aec6d43f0cfaf241afba4463a118b7dec23aa6ea38854",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "7ccd8797a0ab4592b312a86354518228",
+            "result_hash": "38ee60c7c705fb12bcceef96997fe02170b563b9d64078d8adb5cffc1005f2f0",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "b2e5ce07510342a3ae9b24f0e21449bb",
+            "result_hash": "4ecfa468bf7e53944dedf8e8635e1f62b4dff5cf90b178825e55606ce619f4d7",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "cecbce1a5db74a7bb9bc709231515998",
+            "result_hash": "268a49e06051e6dda867e2c6365fc8fabaa364c8a4c5a5c14da76d509b449ead",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "d6d907c833524c1ea23374d90c548cf6",
+            "result_hash": "0ed7021cad3bd6d18d59e0b94aa909942f83f66c3c59609fce6f98377ed23e16",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "eb7b95dbf5b34f69a0c41e97626df6cb",
+            "result_hash": "ac5bc2f0f1d829779a437208448c1df836fc6731fc436c773e24f48c3e54a094",
+            "valid_receipt": true
+          }
+        ],
+        "recipe_sha256": "fe683eea09623330b1e95774977e0ba58ce10f040a536849e0d0fe7361fda857",
+        "runtime_cohort": {
+          "compute_profiles": {
+            "cpu": {
+              "backend": "cpu",
+              "deterministic": true,
+              "machine": "x86_64",
+              "model": "AMD Ryzen 9 5900X 12-Core Processor",
+              "tf32": false,
+              "threads": 1
+            },
+            "cuda": {
+              "backend": "cuda",
+              "compute_capability": "8.6",
+              "deterministic": true,
+              "driver": "610.57.04",
+              "model": "NVIDIA RTX A6000",
+              "tf32": false,
+              "threads": 1
+            }
+          },
+          "execution_backend": "cuda",
+          "runtime": {
+            "implementation": "CPython",
+            "machine": "x86_64",
+            "packages": {
+              "numpy": "2.5.2",
+              "scipy": "1.17.1",
+              "torch": "2.14.0"
+            },
+            "python": "3.12.13",
+            "system": "Linux"
+          }
+        },
+        "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f"
+      },
+      "qualification_input": false,
+      "qualification_reuse": false,
+      "record_id": "publication-bdba5993a16aba7fd91ff3da",
+      "record_type": "published_trial",
+      "recorded_cost": {
+        "evidence_wall_seconds": 223.29844438110013,
+        "new_paid_wall_seconds": 223.29844438110013,
+        "wall_seconds": 223.29844438110013
+      },
+      "recorded_qualification": {
+        "full_view_qualified": false,
+        "qualified_tier": 0,
+        "required_passed": 4,
+        "required_statuses": {
+          "FAIL": 2,
+          "PASS": 4,
+          "UNKNOWN": 21
+        },
+        "required_total": 27,
+        "tiers": [
+          {
+            "required_passed": 4,
+            "required_total": 6,
+            "statuses": {
+              "FAIL": 2,
+              "PASS": 4
+            },
+            "tier": 1
+          },
+          {
+            "required_passed": 0,
+            "required_total": 19,
+            "statuses": {
+              "UNKNOWN": 19
+            },
+            "tier": 2
+          },
+          {
+            "required_passed": 0,
+            "required_total": 2,
+            "statuses": {
+              "UNKNOWN": 2
+            },
+            "tier": 3
+          }
+        ],
+        "tuning_qualified": false,
+        "tuning_required_passed": 4,
+        "tuning_required_total": 6
+      },
+      "schema_version": 1,
+      "settings": {
+        "lr": 0.006375
+      },
+      "source": {
+        "board": "reports/forge/technique-inventory.md",
+        "path": "reports/forge/configuration-search/tier1-completion-v1-k3p.json",
+        "sha256": "46cc25af6986468a3a51ed64841bdac560c0641b6031bef55ac0e188fb7ddf14"
+      },
+      "status": "FAIL",
+      "study_id": "tier1-completion-v1-k3p",
+      "task_results": [
+        {
+          "_attempt_id": "7ccd8797a0ab4592b312a86354518228",
+          "compatibility_key": "61890b04c5fd2163d88da3b63f878ce71cbc2b96e1f6cf31d3118c5037552392",
+          "cost": {
+            "wall_seconds": 15.398448921972886
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "cdf_ks": 0.026003628152363123,
+            "finite_fraction": 1.0,
+            "mean": 1.9872913138824515,
+            "mean_error_sigma": 0.02541737223509699,
+            "sample_count": 4096,
+            "std": 0.5008465559226679,
+            "std_ratio": 1.0016931118453358,
+            "step": 1000
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "gaussian1d_acquisition"
+        },
+        {
+          "_attempt_id": "cecbce1a5db74a7bb9bc709231515998",
+          "compatibility_key": "e26089e00c2c1fa1d1887a81e83286717ee8e85730dc4716daef501c16287d35",
+          "cost": {
+            "wall_seconds": 6.043272192007862
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "grad_med": 0.185477614402771,
+            "mean_abs": 0.4347359836101532
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "two_pole"
+        },
+        {
+          "_attempt_id": "20d3eadff3724e6db327613becd577e7",
+          "compatibility_key": "0e6a94c52e51f642a6e429d47510a8c7d7b03751bded2d20ed529572108d0e4b",
+          "cost": {
+            "wall_seconds": 6.322174406028353
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "concept_move": 0.9942724652333972,
+            "unused_hold": 0.9990293373120949
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "unused_token_hold"
+        },
+        {
+          "_attempt_id": "b2e5ce07510342a3ae9b24f0e21449bb",
+          "compatibility_key": "916ecc825f604b5d78d970f9fba3acb7f2b236c5eded1ce9195a502334835b2c",
+          "cost": {
+            "wall_seconds": 6.93572703609243
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "hold": 0.0035071824677288532,
+            "recon_mse": 0.00443183071911335
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "ae_gan_hold"
+        },
+        {
+          "_attempt_id": "d6d907c833524c1ea23374d90c548cf6",
+          "compatibility_key": "88bd147ce6aeb7be206395d257923de4f0c6c2b989fe9407aac974a8807a48bb",
+          "cost": {
+            "wall_seconds": 10.831141285016201
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "component_core_covariance_error": 0.4549317844212055,
+            "component_core_min_eigen_ratio": 0.3237893283367157,
+            "component_covariance_error": 0.6216468531638384,
+            "component_min_eigen_ratio": 0.3237893283367157,
+            "covariance_error": 0.05181174352765083,
+            "hq": 0.937255859375,
+            "mass_tv": 0.0810546875,
+            "max_component_spill": 0.15654951333999634,
+            "mean_error": 0.006049726624041796,
+            "min_hq_mass_ratio": 0.609375,
+            "min_mass_ratio": 0.609375,
+            "modes": 16,
+            "resolved_core_covariance_error": 0.0,
+            "resolved_core_min_eigen_ratio": 1.0,
+            "resolved_max_component_spill": 0.0,
+            "sample_count": 4096,
+            "step": 400,
+            "sw1_normalized": 0.022528201667987673,
+            "target_scale": 3.0029242038726807
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "ring16_acquisition"
+        },
+        {
+          "_attempt_id": "2031cd7bb3a04d4090bdfbca8eaac088",
+          "compatibility_key": "fe650cba19a7783e2469567d49cfd2e5355f2b3bf17e4491b2795807fbb23fac",
+          "cost": {
+            "wall_seconds": 170.60787078097928
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "completed_steps": 20001.0,
+            "mass_apple": 0.0,
+            "mass_berry": 0.0,
+            "mass_grape": 0.40625,
+            "mass_lemon": 0.2109375,
+            "mass_melon": 0.3828125,
+            "mass_tv": 0.4,
+            "minimum_reconstruction_token_probability": 0.0,
+            "modes": 3,
+            "output_noise_added": 0.0,
+            "policy_latent_perturbation": 0.0,
+            "quality_fraction": 1.0,
+            "reconstruction_exact": 0,
+            "reconstruction_nll": 7.368280446502225,
+            "sample_count": 1024,
+            "served_averaged": 0.0,
+            "step": 20001
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "five_word_joint_acquisition"
+        },
+        {
+          "_attempt_id": "eb7b95dbf5b34f69a0c41e97626df6cb",
+          "compatibility_key": "15d96531204cf738364359d51a4252e0cf3a8be51fcb4eec3cbae7cdec6d2ff8",
+          "cost": {
+            "wall_seconds": 7.15980975900311
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {},
+          "qualification_tier": 1,
+          "reason": "step_label changed the update or common-prefix state",
+          "task_id": "clockfree_audit_measurement_v1"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "trajectory"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "residual_student"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "unipolar"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "cover_leftover"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "mid_scale_identity"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "mode_hold"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_two_broad"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_unequal_mass"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_unequal_width"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_anisotropic"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_overlap"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_spiral"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_stripes2"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_bars4"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_blobs4"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_intensity2"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "grid100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "rotated100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "staggered100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 3,
+          "task_id": "ring_hold"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 3,
+          "task_id": "ring_extension"
+        }
+      ],
+      "trainer_family": "k3p"
+    },
+    {
       "candidate_id": "atlas--9723217ce64dfdcc88fb37aec35b3476562104f2bce63b25273d33e2098bf7bf",
       "candidate_revision": null,
       "cohort": "policy-family-defaults-round2-v1--0335ecf024ea",
@@ -41886,6 +43776,442 @@
     },
     {
       "candidate_id": "ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f",
+      "candidate_revision": "a851463cd36ee1a5b8cd796f34a47bf215e33e00fe09c1232c2c3588353bc892",
+      "claim_contract": {
+        "sampling_law": "task_declared",
+        "schedule": "scheduled",
+        "scoring_weights": "live"
+      },
+      "conclusion": "Recorded FAIL; required outcomes {'FAIL': 3, 'PASS': 4, 'UNKNOWN': 21}. Failed requirements: gaussian1d_acquisition, five_word_joint_acquisition, clockfree_audit_measurement_v1.",
+      "configuration_id": "093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f",
+      "evidence_scope": "published_summary",
+      "goal": "discriminator_stability",
+      "hypothesis": "Higher shared learning rates increase transport within the unchanged short movement and conditional horizons; one or two times prior rate tests whether stronger location transport destabilizes the later coverage hold.",
+      "lifecycle": "concluded",
+      "materialization": "reports/forge/publication-records.json",
+      "mechanism_class": "floor_constant",
+      "next_action": "Read the source-bound study and original evidence before another bounded hypothesis. Unknown requirements remain unknown; this projection grants no qualification or adoption.",
+      "prior": {
+        "kind": "mog",
+        "learnable": true,
+        "sigma": 0.025,
+        "standardize": false
+      },
+      "provenance": {
+        "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "receipt_bindings": [
+          {
+            "attempt_id": "02b97792b1e24d6f98f8931ca77cf5f6",
+            "result_hash": "d83f79e74b3d3984c223f91bb4fe2b1d171ead8166031a360223d2f906bd5108",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "0a80066804bc4760bafd5110710304a7",
+            "result_hash": "db0e5c15b3fb34bcd53bdf38b9bf9e68d42e9694bff80f8bf87f5c320bb942f3",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "49dcdd59005a4413afc2145348bdfa31",
+            "result_hash": "188b709c1b1fe9c66b9c7ed461f2612ef7122c4258ea6efc66c8aedd8e94dd68",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "764fcd21c0de4d95a8bb898609dfaa72",
+            "result_hash": "2d4d1c999c461fc59dc5495fd95311fc4cd4031b00b8423671144282dc5163c8",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "859d609d7dee4dfab70bb52bd6dcc1dc",
+            "result_hash": "d8d86aa9affa9fd49dee559c2eba39feff5796f8dccabab4b53658f683ee7351",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "bf6d669e859d4c00bda87284addca604",
+            "result_hash": "ff1548bcb6a7665d96bdfaf44537be000406db5ab98855870c407bf1aad4f69d",
+            "valid_receipt": true
+          },
+          {
+            "attempt_id": "ce6eec65990e41269dd54b438e68625c",
+            "result_hash": "8879c62d0323bfce62ec06c6bc33e02a3228ee44b007d057bf71f752a1164e84",
+            "valid_receipt": true
+          }
+        ],
+        "recipe_sha256": "50787d2adfbc21ec74b5f79f2d85181c0d3bc96c21bcc08722be0395d2e913fe",
+        "runtime_cohort": {
+          "compute_profiles": {
+            "cpu": {
+              "backend": "cpu",
+              "deterministic": true,
+              "machine": "x86_64",
+              "model": "AMD Ryzen 9 5900X 12-Core Processor",
+              "tf32": false,
+              "threads": 1
+            },
+            "cuda": {
+              "backend": "cuda",
+              "compute_capability": "8.6",
+              "deterministic": true,
+              "driver": "610.57.04",
+              "model": "NVIDIA RTX A6000",
+              "tf32": false,
+              "threads": 1
+            }
+          },
+          "execution_backend": "cuda",
+          "runtime": {
+            "implementation": "CPython",
+            "machine": "x86_64",
+            "packages": {
+              "numpy": "2.5.2",
+              "scipy": "1.17.1",
+              "torch": "2.14.0"
+            },
+            "python": "3.12.13",
+            "system": "Linux"
+          }
+        },
+        "source_digest": "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f"
+      },
+      "qualification_input": false,
+      "qualification_reuse": false,
+      "record_id": "publication-c402fc715b81d87f14b655ab",
+      "record_type": "published_trial",
+      "recorded_cost": {
+        "evidence_wall_seconds": 245.13493827078491,
+        "new_paid_wall_seconds": 245.13493827078491,
+        "wall_seconds": 245.13493827078491
+      },
+      "recorded_qualification": {
+        "full_view_qualified": false,
+        "qualified_tier": 0,
+        "required_passed": 4,
+        "required_statuses": {
+          "FAIL": 2,
+          "PASS": 4,
+          "UNKNOWN": 21
+        },
+        "required_total": 27,
+        "tiers": [
+          {
+            "required_passed": 4,
+            "required_total": 6,
+            "statuses": {
+              "FAIL": 2,
+              "PASS": 4
+            },
+            "tier": 1
+          },
+          {
+            "required_passed": 0,
+            "required_total": 19,
+            "statuses": {
+              "UNKNOWN": 19
+            },
+            "tier": 2
+          },
+          {
+            "required_passed": 0,
+            "required_total": 2,
+            "statuses": {
+              "UNKNOWN": 2
+            },
+            "tier": 3
+          }
+        ],
+        "tuning_qualified": false,
+        "tuning_required_passed": 4,
+        "tuning_required_total": 6
+      },
+      "schema_version": 1,
+      "settings": {
+        "lr": 0.006375
+      },
+      "source": {
+        "board": "reports/forge/technique-inventory.md",
+        "path": "reports/forge/configuration-search/tier1-completion-v1-ka2.json",
+        "sha256": "b541c33d5b3961c05d9849d962243f12f99403e1c3260172bf907d347221154b"
+      },
+      "status": "FAIL",
+      "study_id": "tier1-completion-v1-ka2",
+      "task_results": [
+        {
+          "_attempt_id": "0a80066804bc4760bafd5110710304a7",
+          "compatibility_key": "1898f5990dd23922b7770859547926e387d639574ef2b4147e18328d5e8f994d",
+          "cost": {
+            "wall_seconds": 16.543695364962332
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "cdf_ks": 0.02700504188240671,
+            "finite_fraction": 1.0,
+            "mean": 2.008591056088335,
+            "mean_error_sigma": 0.01718211217666976,
+            "sample_count": 4096,
+            "std": 0.4855608730718729,
+            "std_ratio": 0.9711217461437458,
+            "step": 1000
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "gaussian1d_acquisition"
+        },
+        {
+          "_attempt_id": "02b97792b1e24d6f98f8931ca77cf5f6",
+          "compatibility_key": "328ab77b50d3174e4a81283f01b1a7d63bc3745512744deaeeb08d84d26ff4bd",
+          "cost": {
+            "wall_seconds": 6.268173022894189
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "grad_med": 0.12166813015937805,
+            "mean_abs": 0.42887094616889954
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "two_pole"
+        },
+        {
+          "_attempt_id": "49dcdd59005a4413afc2145348bdfa31",
+          "compatibility_key": "8ec95371e0fd5b0beb59aca7bbfe9577cac027afd6f7ca514d03e8137e7754ed",
+          "cost": {
+            "wall_seconds": 6.329360360978171
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "concept_move": 0.9926958279948188,
+            "unused_hold": 0.9993161382735707
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "unused_token_hold"
+        },
+        {
+          "_attempt_id": "bf6d669e859d4c00bda87284addca604",
+          "compatibility_key": "be6059d037aca1dacb03b4bddd8150a417fbe3fd74e80af04ddc6214c3274765",
+          "cost": {
+            "wall_seconds": 6.959330771001987
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "hold": 0.0055769868195056915,
+            "recon_mse": 0.004395293537527323
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "ae_gan_hold"
+        },
+        {
+          "_attempt_id": "764fcd21c0de4d95a8bb898609dfaa72",
+          "compatibility_key": "bce0b44b5a1131772e4aa5a7f2832e92072fa46c6f2a80d1b11916905e1b8a69",
+          "cost": {
+            "wall_seconds": 11.06110248400364
+          },
+          "failed_bounds": [],
+          "gate_status": "PASS",
+          "metrics": {
+            "component_core_covariance_error": 0.46746428683400154,
+            "component_core_min_eigen_ratio": 0.3192889988422394,
+            "component_covariance_error": 0.6361371409147978,
+            "component_min_eigen_ratio": 0.3192889988422394,
+            "covariance_error": 0.05057714506983757,
+            "hq": 0.935302734375,
+            "mass_tv": 0.0810546875,
+            "max_component_spill": 0.16932907700538635,
+            "mean_error": 0.005246846936643124,
+            "min_hq_mass_ratio": 0.609375,
+            "min_mass_ratio": 0.609375,
+            "modes": 16,
+            "resolved_core_covariance_error": 0.0,
+            "resolved_core_min_eigen_ratio": 1.0,
+            "resolved_max_component_spill": 0.0,
+            "sample_count": 4096,
+            "step": 400,
+            "sw1_normalized": 0.022302142915498528,
+            "target_scale": 3.0029242038726807
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "ring16_acquisition"
+        },
+        {
+          "_attempt_id": "859d609d7dee4dfab70bb52bd6dcc1dc",
+          "compatibility_key": "a041ecdf27ed2327ac76ab9c56e64a525a98ee35a666c75c248baf7b082e3a7a",
+          "cost": {
+            "wall_seconds": 190.57898552902043
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {
+            "completed_steps": 20001.0,
+            "mass_apple": 0.1982421875,
+            "mass_berry": 0.2080078125,
+            "mass_grape": 0.1875,
+            "mass_lemon": 0.1953125,
+            "mass_melon": 0.2109375,
+            "mass_tv": 0.018945312500000006,
+            "minimum_reconstruction_token_probability": 0.9478409886360168,
+            "modes": 5,
+            "output_noise_added": 0.0,
+            "policy_latent_perturbation": 0.0,
+            "quality_fraction": 1.0,
+            "reconstruction_exact": 1,
+            "reconstruction_nll": 0.0022995131988590416,
+            "sample_count": 1024,
+            "served_averaged": 0.0,
+            "step": 20001
+          },
+          "qualification_tier": 1,
+          "reason": "recomputed complete live curve and terminal suffix",
+          "task_id": "five_word_joint_acquisition"
+        },
+        {
+          "_attempt_id": "ce6eec65990e41269dd54b438e68625c",
+          "compatibility_key": "627fd5410e2bcf4e71ae298c0e53750785f21c7431844689b3ddeac0505b6721",
+          "cost": {
+            "wall_seconds": 7.394290737924166
+          },
+          "failed_bounds": [],
+          "gate_status": "FAIL",
+          "metrics": {},
+          "qualification_tier": 1,
+          "reason": "step_label changed the update or common-prefix state",
+          "task_id": "clockfree_audit_measurement_v1"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "trajectory"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "residual_student"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "unipolar"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "cover_leftover"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "mid_scale_identity"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "mode_hold"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_two_broad"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_unequal_mass"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_unequal_width"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_anisotropic"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_overlap"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "vector_spiral"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_stripes2"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_bars4"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_blobs4"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "img_intensity2"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "grid100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "rotated100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 2,
+          "task_id": "staggered100"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 3,
+          "task_id": "ring_hold"
+        },
+        {
+          "gate_status": "UNKNOWN",
+          "metrics": {},
+          "qualification_tier": 3,
+          "task_id": "ring_extension"
+        }
+      ],
+      "trainer_family": "ka2"
+    },
+    {
+      "candidate_id": "ka2--093c6f2bd41768a3f99e3470d24845f6a99ebc0bfbe9c794aff871a5a466770f",
       "candidate_revision": "ea9e173c4ef275b10ba679ce23423b41e97776f27b2bcc0a45375f4b35e87503",
       "claim_contract": {
         "sampling_law": "task_declared",
@@ -42365,6 +44691,79 @@
         }
       ],
       "trainer_family": "ka2"
+    },
+    {
+      "candidate_id": "tier1-completion-v1-bcap",
+      "conclusion": "Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False.",
+      "evidence_scope": "published_summary",
+      "goal": "discriminator_stability",
+      "hypothesis": null,
+      "lifecycle": "concluded",
+      "materialization": "reports/forge/publication-records.json",
+      "mechanism_class": "bounded_configuration_search",
+      "next_action": "Read the source-bound study and original evidence before another bounded hypothesis. Unknown requirements remain unknown; this projection grants no qualification or adoption.",
+      "provenance": {
+        "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "runtime_cohort": {
+          "compute_profiles": {
+            "cpu": {
+              "backend": "cpu",
+              "deterministic": true,
+              "machine": "x86_64",
+              "model": "AMD Ryzen 9 5900X 12-Core Processor",
+              "tf32": false,
+              "threads": 1
+            },
+            "cuda": {
+              "backend": "cuda",
+              "compute_capability": "8.6",
+              "deterministic": true,
+              "driver": "610.57.04",
+              "model": "NVIDIA RTX A6000",
+              "tf32": false,
+              "threads": 1
+            }
+          },
+          "execution_backend": "cuda",
+          "runtime": {
+            "implementation": "CPython",
+            "machine": "x86_64",
+            "packages": {
+              "numpy": "2.5.2",
+              "scipy": "1.17.1",
+              "torch": "2.14.0"
+            },
+            "python": "3.12.13",
+            "system": "Linux"
+          }
+        },
+        "source_digests": [
+          "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f"
+        ],
+        "spec_hash": "5c21e0a261eadaf4495c6494ff43fe9baaa3b034f1ba327d0151a9323701f5d6"
+      },
+      "qualification_input": false,
+      "qualification_reuse": false,
+      "record_id": "publication-c65660933cf2ef1ab5d17fe3",
+      "record_type": "published_study",
+      "recorded_cost": {
+        "evidence_wall_seconds": 210.21404680598062,
+        "new_paid_wall_seconds": 2055.6923065807205,
+        "observed_attempts": 7,
+        "wall_seconds": 210.21404680598062
+      },
+      "schema_version": 1,
+      "source": {
+        "board": "reports/forge/technique-inventory.md",
+        "path": "reports/forge/configuration-search/tier1-completion-v1-bcap.json",
+        "sha256": "d4da8832d2e1b68ce90e893879a2de2a050e182ccf753095485027f477d4bbe2"
+      },
+      "study_id": "tier1-completion-v1-bcap",
+      "task_results": [],
+      "trainer_family": "bcap",
+      "trial_ids": [
+        "bcap--08689a73c551728cc82434ac9601a06d1a9f3efa1a3999d5a3ec9e69746cc212"
+      ]
     },
     {
       "candidate_id": "e22--da75137238384f27a182b60f6232cd1900263fbf4a6875568c6f8cda4edc77bf",
@@ -43804,6 +46203,79 @@
         }
       ],
       "trainer_family": "k3p"
+    },
+    {
+      "candidate_id": "tier1-completion-v1-r1r2",
+      "conclusion": "Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False.",
+      "evidence_scope": "published_summary",
+      "goal": "discriminator_stability",
+      "hypothesis": null,
+      "lifecycle": "concluded",
+      "materialization": "reports/forge/publication-records.json",
+      "mechanism_class": "bounded_configuration_search",
+      "next_action": "Read the source-bound study and original evidence before another bounded hypothesis. Unknown requirements remain unknown; this projection grants no qualification or adoption.",
+      "provenance": {
+        "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "runtime_cohort": {
+          "compute_profiles": {
+            "cpu": {
+              "backend": "cpu",
+              "deterministic": true,
+              "machine": "x86_64",
+              "model": "AMD Ryzen 9 5900X 12-Core Processor",
+              "tf32": false,
+              "threads": 1
+            },
+            "cuda": {
+              "backend": "cuda",
+              "compute_capability": "8.6",
+              "deterministic": true,
+              "driver": "610.57.04",
+              "model": "NVIDIA RTX A6000",
+              "tf32": false,
+              "threads": 1
+            }
+          },
+          "execution_backend": "cuda",
+          "runtime": {
+            "implementation": "CPython",
+            "machine": "x86_64",
+            "packages": {
+              "numpy": "2.5.2",
+              "scipy": "1.17.1",
+              "torch": "2.14.0"
+            },
+            "python": "3.12.13",
+            "system": "Linux"
+          }
+        },
+        "source_digests": [
+          "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f"
+        ],
+        "spec_hash": "c29d3ca6a53e5463cbb4f266845ef621273f32b1d4fb33b8cc5997b9a884c397"
+      },
+      "qualification_input": false,
+      "qualification_reuse": false,
+      "record_id": "publication-cfe6ffad91539914ad3ebcc4",
+      "record_type": "published_study",
+      "recorded_cost": {
+        "evidence_wall_seconds": 181.95588313194457,
+        "new_paid_wall_seconds": 2055.6923065807205,
+        "observed_attempts": 7,
+        "wall_seconds": 181.95588313194457
+      },
+      "schema_version": 1,
+      "source": {
+        "board": "reports/forge/technique-inventory.md",
+        "path": "reports/forge/configuration-search/tier1-completion-v1-r1r2.json",
+        "sha256": "e6478518412445854bd256d49e0cc12beb9d7eee8fa0209b65504677735a714c"
+      },
+      "study_id": "tier1-completion-v1-r1r2",
+      "task_results": [],
+      "trainer_family": "r1r2",
+      "trial_ids": [
+        "r1r2--302b6baa44f629bfc97270c00a91f3cd6747585897bf43e105ab8aba2a276d6f"
+      ]
     },
     {
       "candidate_id": "atlas--cf74ea1def0d0ea4afa16f47ac10ea1268664fe480c9f6ab578a48ea6a1eabe2",
@@ -47265,6 +49737,79 @@
         }
       ],
       "trainer_family": "k3p"
+    },
+    {
+      "candidate_id": "tier1-completion-v1-release07-gan-v3",
+      "conclusion": "Concluded 1 whole configurations. Recorded selection: best_observed; default adoption False.",
+      "evidence_scope": "published_summary",
+      "goal": "discriminator_stability",
+      "hypothesis": null,
+      "lifecycle": "concluded",
+      "materialization": "reports/forge/publication-records.json",
+      "mechanism_class": "bounded_configuration_search",
+      "next_action": "Read the source-bound study and original evidence before another bounded hypothesis. Unknown requirements remain unknown; this projection grants no qualification or adoption.",
+      "provenance": {
+        "protocol_hash": "7b975bab8008c880a88e04d9e9bbdf4d1ab549d46d1d894b9e42369fdc0931b2",
+        "runtime_cohort": {
+          "compute_profiles": {
+            "cpu": {
+              "backend": "cpu",
+              "deterministic": true,
+              "machine": "x86_64",
+              "model": "AMD Ryzen 9 5900X 12-Core Processor",
+              "tf32": false,
+              "threads": 1
+            },
+            "cuda": {
+              "backend": "cuda",
+              "compute_capability": "8.6",
+              "deterministic": true,
+              "driver": "610.57.04",
+              "model": "NVIDIA RTX A6000",
+              "tf32": false,
+              "threads": 1
+            }
+          },
+          "execution_backend": "cuda",
+          "runtime": {
+            "implementation": "CPython",
+            "machine": "x86_64",
+            "packages": {
+              "numpy": "2.5.2",
+              "scipy": "1.17.1",
+              "torch": "2.14.0"
+            },
+            "python": "3.12.13",
+            "system": "Linux"
+          }
+        },
+        "source_digests": [
+          "21ec7e3f89402b5d0c77669d5fba0e36bcf4e690069cfdceab383520006c525f"
+        ],
+        "spec_hash": "a5d1c354656f703d595bdda0385df6cc73fb33e4ffe1053c7cd16b1016b4fbc2"
+      },
+      "qualification_input": false,
+      "qualification_reuse": false,
+      "record_id": "publication-e5c2701870a232bcbe2b4cb6",
+      "record_type": "published_study",
+      "recorded_cost": {
+        "evidence_wall_seconds": 185.9293481828645,
+        "new_paid_wall_seconds": 2055.6923065807205,
+        "observed_attempts": 7,
+        "wall_seconds": 185.9293481828645
+      },
+      "schema_version": 1,
+      "source": {
+        "board": "reports/forge/technique-inventory.md",
+        "path": "reports/forge/configuration-search/tier1-completion-v1-release07-gan-v3.json",
+        "sha256": "c8d99e0e95362917eb63e7321de64647200363d9ebf14acda8201385ea806529"
+      },
+      "study_id": "tier1-completion-v1-release07-gan-v3",
+      "task_results": [],
+      "trainer_family": "release07-gan-v3-mog",
+      "trial_ids": [
+        "release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c"
+      ]
     },
     {
       "candidate_id": "r1r2--f398f6ea70a2d101c520a1a01db90ea968bbb16736e6cec7ffc887e1dd7e241a",

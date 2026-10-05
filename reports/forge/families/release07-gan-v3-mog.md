@@ -14,7 +14,7 @@ Generated from one selected configuration per runtime. Recorded verdicts retain 
 
 Runtime: **cuda**. Selected configuration: [release07-gan-v3-mog · 1e266b5a2986](../../../configs/forge/configurations/release07-gan-v3-mog--1e266b5a2986ee4cb2f2fdc46437cc82982bf1cf02707eeba95743f4890e8a0c.json).
 
-Recorded qualification: **tier 0**, discriminator_stability revision 3. Other view rows below are navigation over recorded task evidence, not recomputed qualification.
+Recorded qualification: **tier 0**, discriminator_stability revision 5. Other view rows below are navigation over recorded task evidence, not recomputed qualification.
 
 <details>
 <summary>Configuration, source and runtime provenance</summary>
@@ -35,6 +35,12 @@ Selection: historical_incumbent. Retain the exact recorded incumbent; its outcom
 | [formulation_comparison](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-formulation_comparison) | [3(*)/3](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-1) | [0(*)/19](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-2) | [0(*)/2](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-formulation_comparison-tier-3) | [3(*)/24](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-formulation_comparison) |
 | [host_profile_transfer](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer) | [3(*)/3](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-1) | [0(*)/19](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-2) | [0(*)/2](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer-tier-3) | [3(*)/24](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-host_profile_transfer) |
 | [quality_coverage](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-quality_coverage) | [3(*)/3](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-1) | [0(*)/19](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-2) | [0/0](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-quality_coverage-tier-3) | [3(*)/22](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-quality_coverage) |
+
+Separate cohort coverage (excluded from family totals):
+
+| Family / view | Tier 1 | Tier 2 | Tier 3 | Total |
+| --- | ---: | ---: | ---: | ---: |
+| [tier1_policy_coverage](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-tier1_policy_coverage) | [0(*)/7](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-tier1_policy_coverage-tier-1) | [0/0](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-tier1_policy_coverage-tier-2) | [0/0](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-tier1_policy_coverage-tier-3) | [0(*)/7](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-tier1_policy_coverage) |
 
 \* indicates incomplete results, including changed or unbound current contracts.
 
@@ -222,7 +228,7 @@ Additional eligibility requirements:
 
 ## discriminator_stability
 
-**discriminator_stability — revision 4**. [View declaration](../../../configs/forge/views/discriminator_stability.json).
+**discriminator_stability — revision 5**. [View declaration](../../../configs/forge/views/discriminator_stability.json).
 
 Qualification requires every required experiment to pass, with all lower tiers and task dependencies passed first. Required counts (Tier 1 / 2 / 3): **6 / 19 / 2**.
 
@@ -240,6 +246,7 @@ Calibration: **provisional**. Expanded six-task Tier 1 placement is provisional 
 | [ae_gan_hold](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-experiment-ae_gan_hold) | required | PASS | CHANGED |
 | [ring16_acquisition](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-experiment-ring16_acquisition) | required | FAIL | CHANGED |
 | [five_word_joint_acquisition](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-experiment-five_word_joint_acquisition) | required | UNKNOWN | CHANGED |
+| [clockfree_audit_measurement_v1](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-experiment-clockfree_audit_measurement_v1) | diagnostic | UNKNOWN | unbound |
 
 <a name="cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-2"></a>
 
@@ -497,6 +504,44 @@ Calibration: **provisional**. Phase D historical calibration remains required
 
 No experiments assigned.
 
+<a name="cohort-cuda-7f9c23eb0e27-tier1_policy_coverage"></a>
+
+## tier1_policy_coverage
+
+**tier1_policy_coverage — revision 1**. [View declaration](../../../configs/forge/views/tier1_policy_coverage.json).
+
+Separately scoped cohort. This ordinary lane retains its own required gates and execution policy; its measurements are excluded from family totals and give no parent-cohort credit.
+
+Qualification requires every required experiment to pass, with all lower tiers and task dependencies passed first. Required counts (Tier 1 / 2 / 3): **7 / 0 / 0**.
+
+Calibration: **undeclared**. Calibration and robustness are separate from recorded task passes.
+
+<a name="cohort-cuda-7f9c23eb0e27-tier1_policy_coverage-tier-1"></a>
+
+### Tier 1
+
+| Experiment | Role | Recorded result | Current contract |
+| --- | --- | --- | --- |
+| [gaussian1d_acquisition_tier1_policy_selected_cloud_v1](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-experiment-gaussian1d_acquisition_tier1_policy_selected_cloud_v1) | required | UNKNOWN | unbound |
+| [two_pole_tier1_policy_selected_cloud_v1](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-experiment-two_pole_tier1_policy_selected_cloud_v1) | required | UNKNOWN | unbound |
+| [unused_token_hold_tier1_policy_selected_cloud_v1](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-experiment-unused_token_hold_tier1_policy_selected_cloud_v1) | required | UNKNOWN | unbound |
+| [ae_gan_hold_tier1_policy_selected_cloud_v1](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-experiment-ae_gan_hold_tier1_policy_selected_cloud_v1) | required | UNKNOWN | unbound |
+| [ring16_acquisition_tier1_policy_selected_cloud_v1](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-experiment-ring16_acquisition_tier1_policy_selected_cloud_v1) | required | UNKNOWN | unbound |
+| [five_word_joint_acquisition_tier1_policy_selected_cloud_v1](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-experiment-five_word_joint_acquisition_tier1_policy_selected_cloud_v1) | required | UNKNOWN | unbound |
+| [clockfree_audit_tier1_policy_selected_cloud_v1](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-experiment-clockfree_audit_tier1_policy_selected_cloud_v1) | required | UNKNOWN | unbound |
+
+<a name="cohort-cuda-7f9c23eb0e27-tier1_policy_coverage-tier-2"></a>
+
+### Tier 2
+
+No experiments assigned.
+
+<a name="cohort-cuda-7f9c23eb0e27-tier1_policy_coverage-tier-3"></a>
+
+### Tier 3
+
+No experiments assigned.
+
 <a name="cohort-cuda-7f9c23eb0e27-experiments"></a>
 
 ## Experiment metrics and pass criteria
@@ -543,6 +588,33 @@ Declared budget: 250 updates; timeout 300 seconds.
 
 Current measurement: mog prior (sigma 0.025); generated_and_reconstructed_prior_with_scheduled_output_noise; weights live; output noise public_recipe_schedule.
 
+<a name="cohort-cuda-7f9c23eb0e27-experiment-ae_gan_hold_tier1_policy_selected_cloud_v1"></a>
+
+### ae_gan_hold_tier1_policy_selected_cloud_v1
+
+**ae_gan_hold_tier1_policy_selected_cloud_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/tier1_policy_selected_cloud_v1/ae_gan_hold_tier1_policy_selected_cloud_v1.json).
+
+Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+
+Policy-cohort variant of [ae_gan_hold](../../../configs/forge/tasks/ae_gan_hold.json); parent task SHA256 `53a400c3f2b27ef347076f3cc603345e1442d2d8f97f8052f0b9496ba35bae79`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [tier1_policy_coverage / Tier 1](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-tier1_policy_coverage-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| recon_mse | <= 0.05 |
+| hold | <= 0.35 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; mechanism exercised = True; optimizer roles = encoder, generator, prior, discriminator; rng isolation = True.
+
+Declared budget: 250 updates; timeout 300 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); tier1_selected_generated_and_reconstructed_prior_with_scheduled_output_noise; weights state_selected; output noise public_recipe_schedule.
+
 <a name="cohort-cuda-7f9c23eb0e27-experiment-clockfree_audit"></a>
 
 ### clockfree_audit
@@ -560,6 +632,44 @@ Exact state/output parity for: step_label, horizon, evaluation_cadence, restart;
 Declared budget: 24 updates; timeout 300 seconds.
 
 Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
+
+<a name="cohort-cuda-7f9c23eb0e27-experiment-clockfree_audit_measurement_v1"></a>
+
+### clockfree_audit_measurement_v1
+
+**clockfree_audit_measurement_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/clockfree_audit_measurement_v1.json).
+
+Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+
+Used by: [discriminator_stability / Tier 1](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-discriminator_stability-tier-1).
+
+Current pass criteria:
+
+Exact state/output parity for: step_label, horizon, evaluation_cadence, restart; bound source audit required.
+
+Declared budget: 24 updates; timeout 300 seconds.
+
+Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
+
+<a name="cohort-cuda-7f9c23eb0e27-experiment-clockfree_audit_tier1_policy_selected_cloud_v1"></a>
+
+### clockfree_audit_tier1_policy_selected_cloud_v1
+
+**clockfree_audit_tier1_policy_selected_cloud_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/tier1_policy_selected_cloud_v1/clockfree_audit_tier1_policy_selected_cloud_v1.json).
+
+Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+
+Policy-cohort variant of [clockfree_audit](../../../configs/forge/tasks/clockfree_audit.json); parent task SHA256 `d7748d04db85633e5c678622486b94b2a44f0e462ffb9c4b0179216db7840258`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [tier1_policy_coverage / Tier 1](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-tier1_policy_coverage-tier-1).
+
+Current pass criteria:
+
+Exact state/output parity for: step_label, horizon, evaluation_cadence, restart; bound source audit required.
+
+Declared budget: 24 updates; timeout 300 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); tier1_selected_public_prior_without_output_noise; weights state_selected; output noise clean.
 
 <a name="cohort-cuda-7f9c23eb0e27-experiment-cover_leftover"></a>
 
@@ -624,6 +734,39 @@ Current measurement: particle_cloud prior (sigma 0); generated_and_paired_recons
 
 [Explanation and existing training artifacts](../five-word-joint/README.md)
 
+<a name="cohort-cuda-7f9c23eb0e27-experiment-five_word_joint_acquisition_tier1_policy_selected_cloud_v1"></a>
+
+### five_word_joint_acquisition_tier1_policy_selected_cloud_v1
+
+**five_word_joint_acquisition_tier1_policy_selected_cloud_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/tier1_policy_selected_cloud_v1/five_word_joint_acquisition_tier1_policy_selected_cloud_v1.json).
+
+Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+
+Policy-cohort variant of [five_word_joint_acquisition](../../../configs/forge/tasks/five_word_joint_acquisition.json); parent task SHA256 `419dbbd4aa5116e093e543cd7cacc904185408806cefbc8758004edabcecd048`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [tier1_policy_coverage / Tier 1](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-tier1_policy_coverage-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 1024 |
+| quality_fraction | >= 0.95 |
+| modes | == 5 |
+| mass_tv | <= 0.1 |
+| reconstruction_exact | == 1 |
+| minimum_reconstruction_token_probability | >= 0.9 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: exact optimizer updates = True; finite state = True; mechanism exercised = True; optimizer roles = generator, encoder, prior, discriminator; rng isolation = True.
+
+Declared budget: 20001 updates; timeout 900 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); tier1_selected_generated_and_paired_reconstructed_prior_without_output_noise; weights state_selected; output noise clean.
+
+[Explanation and existing training artifacts](../five-word-joint/README.md)
+
 <a name="cohort-cuda-7f9c23eb0e27-experiment-gaussian1d_acquisition"></a>
 
 ### gaussian1d_acquisition
@@ -651,6 +794,38 @@ All 24 declared observations and final live metrics are required.
 Declared budget: 1000 updates; timeout 120 seconds.
 
 Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
+
+[Explanation and existing training artifacts](../../toy_audit/api_contract/gaussian1d/README.md)
+
+<a name="cohort-cuda-7f9c23eb0e27-experiment-gaussian1d_acquisition_tier1_policy_selected_cloud_v1"></a>
+
+### gaussian1d_acquisition_tier1_policy_selected_cloud_v1
+
+**gaussian1d_acquisition_tier1_policy_selected_cloud_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/tier1_policy_selected_cloud_v1/gaussian1d_acquisition_tier1_policy_selected_cloud_v1.json).
+
+Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+
+Policy-cohort variant of [gaussian1d_acquisition](../../../configs/forge/tasks/gaussian1d_acquisition.json); parent task SHA256 `b31df784dbe09357810a191247bbb0b17d3bb67918595334d16ff728fd5c2d13`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [tier1_policy_coverage / Tier 1](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-tier1_policy_coverage-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 4096 |
+| finite_fraction | == 1 |
+| mean_error_sigma | <= 0.2 |
+| std_ratio | >= 0.8 |
+| std_ratio | <= 1.2 |
+| cdf_ks | <= 0.05 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 1000 updates; timeout 120 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); tier1_selected_public_prior_without_output_noise; weights state_selected; output noise clean.
 
 [Explanation and existing training artifacts](../../toy_audit/api_contract/gaussian1d/README.md)
 
@@ -1175,6 +1350,36 @@ Declared budget: 400 updates; timeout 300 seconds.
 
 Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
+<a name="cohort-cuda-7f9c23eb0e27-experiment-ring16_acquisition_tier1_policy_selected_cloud_v1"></a>
+
+### ring16_acquisition_tier1_policy_selected_cloud_v1
+
+**ring16_acquisition_tier1_policy_selected_cloud_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/tier1_policy_selected_cloud_v1/ring16_acquisition_tier1_policy_selected_cloud_v1.json).
+
+Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+
+Policy-cohort variant of [ring16_acquisition](../../../configs/forge/tasks/ring16_acquisition.json); parent task SHA256 `e6b53ba29fbe9ead47e842cfa01e40ba57821bd1b4e6aa5b297631fa0f6525c1`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [tier1_policy_coverage / Tier 1](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-tier1_policy_coverage-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 4096 |
+| modes | >= 16 |
+| mass_tv | <= 0.15 |
+| hq | >= 0.85 |
+| component_covariance_error | <= 0.85 |
+| component_min_eigen_ratio | >= 0.15 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+
+Declared budget: 400 updates; timeout 300 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); tier1_selected_public_prior_without_output_noise; weights state_selected; output noise clean.
+
 <a name="cohort-cuda-7f9c23eb0e27-experiment-ring_extension"></a>
 
 ### ring_extension
@@ -1605,6 +1810,33 @@ Current measurement: particle_cloud prior (sigma 0); learned_particles_and_criti
 
 [Explanation and existing training artifacts](../k3p-two-pole-horizon-v1/README.md)
 
+<a name="cohort-cuda-7f9c23eb0e27-experiment-two_pole_tier1_policy_selected_cloud_v1"></a>
+
+### two_pole_tier1_policy_selected_cloud_v1
+
+**two_pole_tier1_policy_selected_cloud_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/tier1_policy_selected_cloud_v1/two_pole_tier1_policy_selected_cloud_v1.json).
+
+Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+
+Policy-cohort variant of [two_pole](../../../configs/forge/tasks/two_pole.json); parent task SHA256 `55ac2d3883ba6c173da304fa7f10648a0b559c202fc35b451b1d0c8870f61cf5`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [tier1_policy_coverage / Tier 1](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-tier1_policy_coverage-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| mean_abs | >= 0.3 |
+| grad_med | <= 1 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; mechanism exercised = True; optimizer roles = prior, discriminator; rng isolation = True.
+
+Declared budget: 80 updates; timeout 300 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); tier1_selected_learned_particles_and_critic_gradient; weights state_selected; output noise not_applied_to_measurement.
+
 <a name="cohort-cuda-7f9c23eb0e27-experiment-unipolar"></a>
 
 ### unipolar
@@ -1671,6 +1903,33 @@ Execution guards: finite state = True; optimizer roles = generator, discriminato
 Declared budget: 200 updates; timeout 300 seconds.
 
 Current measurement: particle_cloud prior (sigma 0); learned_parameter_measurement; weights live; output noise not_applied_to_measurement.
+
+<a name="cohort-cuda-7f9c23eb0e27-experiment-unused_token_hold_tier1_policy_selected_cloud_v1"></a>
+
+### unused_token_hold_tier1_policy_selected_cloud_v1
+
+**unused_token_hold_tier1_policy_selected_cloud_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/task-variants/tier1_policy_selected_cloud_v1/unused_token_hold_tier1_policy_selected_cloud_v1.json).
+
+Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+
+Policy-cohort variant of [unused_token_hold](../../../configs/forge/tasks/unused_token_hold.json); parent task SHA256 `ef8ccde8d1fa54af8bfce01c044e3671de8131c980eb4e8022d12ffc8caf51d8`. This measurement supplies no cells to the parent clean cohort.
+
+Used by: [tier1_policy_coverage / Tier 1](release07-gan-v3-mog.md#cohort-cuda-7f9c23eb0e27-tier1_policy_coverage-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| unused_hold | >= 0.85 |
+| concept_move | >= 0.85 |
+
+At least 5 consecutive passing terminal observations.
+All 24 declared observations and final live metrics are required.
+Execution guards: finite state = True; mechanism exercised = True; optimizer roles = generator, discriminator; rng isolation = True.
+
+Declared budget: 200 updates; timeout 300 seconds.
+
+Current measurement: particle_cloud prior (sigma 0); tier1_selected_learned_parameter_measurement; weights state_selected; output noise not_applied_to_measurement.
 
 <a name="cohort-cuda-7f9c23eb0e27-experiment-vector_anisotropic"></a>
 
