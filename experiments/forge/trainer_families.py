@@ -285,9 +285,17 @@ def _search_pin(root, family_id, backend, rows, declarations, catalogs, *, view_
         frozen_path = Path(root) / "configs/forge/searches" / (spec["id"] + ".json")
         if not frozen_path.is_file() or stable_hash(read_json(frozen_path)) != report["spec_hash"]:
             raise ValueError("search report differs from its registered specification")
+        modern = spec["schema_version"] == 2
+        # V2 studies select a protocol by name; its hash is generated in the
+        # frozen report rather than authored in the specification. Verify that
+        # generated identity against every independently graded row below.
+        protocol_hash = report.get("protocol_hash") if modern else spec["protocol_hash"]
+        if modern and (not isinstance(protocol_hash, str) or len(protocol_hash) != 64
+                       or any(character not in "0123456789abcdef" for character in protocol_hash)):
+            raise ValueError("v2 search report requires its generated protocol hash")
         for key, value in (("study_id", spec["id"]), ("trainer_family", spec["trainer_family"]),
                            ("view", spec["view"]), ("execution_backend", spec["execution_backend"]),
-                           ("tuning_through_tier", spec["tuning_through_tier"]), ("protocol_hash", spec["protocol_hash"]),
+                           ("tuning_through_tier", spec["tuning_through_tier"]), ("protocol_hash", protocol_hash),
                            ("policy_fingerprint", policy_fingerprint)):
             if report.get(key) != value:
                 raise ValueError("search report contradicts its frozen study contract")
@@ -348,7 +356,8 @@ def _search_pin(root, family_id, backend, rows, declarations, catalogs, *, view_
                 raise ValueError("search configuration or revision differs from verified evidence")
             bindings = row.get("bindings", {})
             protocol = catalogs.get("protocol_contracts", {}).get(bindings.get("protocol_sha256"))
-            if protocol is None or stable_hash(protocol) != spec["protocol_hash"]:
+            if (protocol is None or stable_hash(protocol) != protocol_hash
+                    or (modern and protocol.get("id") != spec["protocol"])):
                 raise ValueError("search frozen protocol differs from verified protocol contracts")
             if (trial.get("source_digest") != bindings.get("source_digest")
                     or trial.get("runtime_cohort") != row.get("runtime_cohort")

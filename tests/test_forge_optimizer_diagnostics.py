@@ -166,3 +166,49 @@ def test_spectral_and_input_gradient_probe_preserves_mixed_modes_buffers_grads_a
     assert metrics["critic_input_gradient_mean_fake"] == pytest.approx(expected_gradient)
     for handle in diagnostics.handles:
         handle.remove()
+
+
+def test_input_gradient_labels_capture_the_current_critic_phase_and_ignore_previous_generator_phase(tmp_path):
+    class QuadraticCritic(nn.Module):
+        def __init__(self):
+            super().__init__()
+            self.weight = nn.Parameter(torch.tensor([[1., 2.]]))
+
+        def forward(self, inputs):
+            return (inputs * self.weight).square().sum(dim=1, keepdim=True)
+
+    critic = QuadraticCritic()
+    optimizer = get_recipe("bcap").make_critic_optimizer(critic)
+    diagnostics = OptimizerDiagnostics({"D": optimizer}, critic, tmp_path, [2])
+    # Finish update 1. Its post-hook clears the observation buffer, and the
+    # optimizer record now points to update 2 as the next observation.
+    critic.train()
+    with torch.no_grad():
+        critic(torch.tensor([[10., 20.]]))
+        critic(torch.tensor([[30., 40.]]))
+    optimizer.step()
+    assert diagnostics.inputs == []
+    # The generator part of update 1 evaluates D(fake) and then D(real).
+    # Neither is a real/fake observation from update 2's critic phase.
+    critic.eval()
+    with torch.no_grad():
+        critic(torch.tensor([[50., 60.]]))
+        critic(torch.tensor([[70., 80.]]))
+    assert diagnostics.inputs == []
+    real = torch.tensor([[1., 2.], [3., 4.]])
+    fake = torch.tensor([[-1., .5], [2., -.5]])
+    critic.train()
+    with torch.no_grad():
+        critic(real)
+        critic(fake)
+    assert len(diagnostics.inputs) == 2
+    assert torch.equal(diagnostics.inputs[0], real)
+    assert torch.equal(diagnostics.inputs[1], fake)
+    optimizer.step()
+    diagnostics.receipt()
+    row, = read_rows(tmp_path / "optimizer-diagnostics.jsonl")
+    assert row["step"] == 2 and row["optimizer"] == "D"
+    # grad_x sum((x * w)^2) = 2*x*w^2, so labels have distinct expected values.
+    for label, inputs in (("real", real), ("fake", fake)):
+        expected = (2 * inputs * critic.weight.detach().square()).norm(dim=1).mean()
+        assert row["critic_input_gradient_mean_" + label] == pytest.approx(float(expected))

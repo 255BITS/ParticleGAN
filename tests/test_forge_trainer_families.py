@@ -160,6 +160,58 @@ def test_frozen_selection_survives_current_protocol_change(study):
     assert select(study)["rows"][0]["candidate_id"] == study[4]["selection"]["selected_candidate_id"]
 
 
+def modern_study(study):
+    """Keep the frozen numerical rows while declaring protocol-by-name v2."""
+    root, _, _, _, report, _ = study
+    spec = report["spec"]
+    assert report["protocol_hash"] == spec.pop("protocol_hash")
+    spec.update(schema_version=2, hypothesis="A bounded public-recipe rate comparison may improve Tier 1 acquisition.")
+    report["spec_hash"] = stable_hash(spec)
+    atomic_json(root / f"configs/forge/searches/{spec['id']}.json", spec)
+    persist(root, report)
+    return study
+
+
+def test_v2_generated_protocol_identity_selects_the_same_verified_whole_row(study):
+    expected = select(study)["rows"][0]
+    modern_study(study)
+    actual = select(study)["rows"][0]
+    assert actual["candidate_id"] == expected["candidate_id"]
+    assert actual["tasks"] == expected["tasks"]
+    assert actual["selection"]["selection_kind"] == "best_observed"
+    assert not actual["selection"]["qualified"]
+    assert not actual["selection"]["default_adoption"]
+
+
+@pytest.mark.parametrize("generated_hash", [None, "not-a-hash", "0" * 64])
+def test_v2_generated_protocol_hash_must_bind_the_original_evidence(study, generated_hash):
+    modern_study(study)
+    root, _, _, _, report, _ = study
+    report["protocol_hash"] = generated_hash
+    persist(root, report)
+    with pytest.raises(ValueError, match="generated protocol hash|verified protocol contracts"):
+        select(study)
+
+
+def test_v2_protocol_name_must_match_its_frozen_contract(study):
+    modern_study(study)
+    root, _, _, _, report, _ = study
+    report["spec"]["protocol"] = "different-protocol"
+    report["spec_hash"] = stable_hash(report["spec"])
+    atomic_json(root / f"configs/forge/searches/{report['study_id']}.json", report["spec"])
+    persist(root, report)
+    with pytest.raises(ValueError, match="verified protocol contracts"):
+        select(study)
+
+
+def test_v1_authored_protocol_hash_remains_authoritative(study):
+    root, _, _, _, report, _ = study
+    report["protocol_hash"] = "0" * 64
+    persist(root, report)
+    with pytest.raises(ValueError, match="frozen study contract"):
+        select(study)
+
+
 def test_explicit_recorded_policy_preserves_selection_after_current_view_changes(study):
     root = study[0]
     path = root / "configs/forge/views/discriminator_stability.json"

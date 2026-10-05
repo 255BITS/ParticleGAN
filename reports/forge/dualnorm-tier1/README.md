@@ -1,6 +1,6 @@
 # BCAP optimizer screen
 
-This branch tests optimizer changes on the current BCAP recipe through Forge's
+This branch tests optimizer changes on the current **BCAP pure** recipe through Forge's
 unchanged public API and full current Tier 1. The user selected this focused
 stage before the larger native, regularizer, seed and scale-transfer study.
 
@@ -51,10 +51,22 @@ gradient-support measurements are explicitly labeled differently. Raw traces
 stay in the ignored queue and archive. Software tests verify exact model,
 optimizer and RNG invariance with the observers enabled.
 
+The executed source is `15eb7cb0911905e401bdfcd7e264945a7ea64d97`.
+Its optional input-gradient observer can capture generator-phase forwards as
+the following critic step's inputs. Those measurements are excluded from this
+readout. The correction and its routing regression test are included for future
+runs; original receipts and training outcomes retain their executed source.
+Update-size, weight-norm and spectral-product observations remain usable.
+
 Original predictions P1–P6 retain their native-benchmark and five-seed scope.
 Tier 1 observations can motivate them, but cannot confirm or falsify the stated
 five-seed claims. R1/R2, 7k native100, sparse177, confirmation and width/depth
 transfer remain explicitly deferred until a promising supported arm exists.
+
+The commands below describe the executed workflow. To reproduce its numerical
+cohort, use the recorded commit above and a fresh local queue. A future study
+using the observer/API corrections must record its own source identity; these
+results do not qualify the final PR's corrected implementation.
 
 Run after committing the scientific source, from the project environment:
 
@@ -75,3 +87,15 @@ observations and add no sampling or optimizer updates. The final archive receipt
 records exact member hashes and preserves original failures. Compact reports,
 provenance, reproduction sources and GIFs may be committed; raw logs, JSONL,
 states and checkpoints remain local or in the artifact archive.
+
+To resume already admitted work after an interruption, drain its existing
+immutable requests rather than enqueue against changed source:
+
+```sh
+python -u reports/forge/dualnorm-tier1/run.py resume --queue-root runs/forge/bcap-dualnorm-tier1-v1-queue --gpus 0,1 > runs/forge/bcap-dualnorm-tier1-v1-queue/resume.log 2>&1
+```
+
+The 2026-10-05 environment switch stopped the first coordinator. Forge collected
+the workers that had finished, and the restored CUDA environment resumed the
+remaining frozen requests. Completed and numerically failed attempts were not
+rerun. The archive retains the queue state, original receipts and recovery logs.

@@ -34,7 +34,7 @@ class OptimizerDiagnostics:
         return optimizer.record.observed_steps + 1
 
     def _capture_inputs(self, module, args):
-        if self.measuring or len(self.inputs) >= 2:
+        if self.measuring or not module.training or len(self.inputs) >= 2:
             return
         if self._step(self.optimizers["D"]) in self.checkpoints and args and isinstance(args[0], torch.Tensor):
             self.inputs.append(args[0][:64].detach().clone())

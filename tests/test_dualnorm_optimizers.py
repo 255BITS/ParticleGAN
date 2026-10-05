@@ -316,6 +316,56 @@ def test_public_optimizer_checkpoint_rejects_wrong_state_without_mutating_live_s
     assert_state_equal(before, trainer.state_dict())
 
 
+def test_later_native_adam_group_updates_and_resumes_exactly():
+    table, generator = parameter([[0., 0.], [0., 0.]]), parameter([0., 0.])
+    optimizer = NormalizedOptimizer([dict(params=[table], role="prior")],
+                                    family="particle_rownorm_only", lr=.3, betas=(0., .9))
+    assert optimizer._adam is None
+    optimizer.add_param_group(dict(params=[generator], role="generator", lr=.02))
+    reference = parameter([0., 0.])
+    native = torch.optim.Adam([reference], lr=.02, betas=(0., .9))
+    generator.grad = reference.grad = torch.tensor([3., -4.], dtype=torch.float64)
+    table.grad = torch.ones_like(table)
+    optimizer.set_sampled_rows(table, torch.tensor([0]))
+    optimizer.step()
+    native.step()
+    assert torch.equal(generator, reference)
+    assert optimizer._adam is not None
+
+    restored_table = parameter(table.detach().tolist())
+    restored_generator = parameter(generator.detach().tolist())
+    restored = NormalizedOptimizer([dict(params=[restored_table], role="prior")],
+                                   family="particle_rownorm_only", lr=.3, betas=(0., .9))
+    restored.add_param_group(dict(params=[restored_generator], role="generator", lr=.02))
+    restored.load_state_dict(deepcopy(optimizer.state_dict()))
+    for current, current_table, current_generator in (
+            (optimizer, table, generator), (restored, restored_table, restored_generator)):
+        current_table.grad = torch.full_like(current_table, 2.)
+        current_generator.grad = torch.tensor([-1., 2.], dtype=torch.float64)
+        current.set_sampled_rows(current_table, torch.tensor([1]))
+        current.step()
+    reference.grad = generator.grad.clone()
+    native.step()
+    assert torch.equal(generator, reference)
+    assert torch.equal(generator, restored_generator)
+    assert torch.equal(table, restored_table)
+    assert_state_equal(optimizer.state_dict(), restored.state_dict())
+
+
+def test_later_dualnorm_group_keeps_the_full_arm_free_of_adam():
+    table, weight = parameter([[0., 0.], [0., 0.]]), parameter([[0., 0.], [0., 0.]])
+    optimizer = NormalizedOptimizer([dict(params=[table], role="prior")],
+                                    family="dualnorm", lr=.3, momentum=.5)
+    optimizer.add_param_group(dict(params=[weight], role="generator", lr=.02))
+    assert optimizer._adam is None
+    table.grad = torch.ones_like(table)
+    weight.grad = torch.diag(torch.tensor([3., 4.], dtype=torch.float64))
+    optimizer.set_sampled_rows(table, torch.tensor([0]))
+    optimizer.step()
+    assert optimizer._adam is None
+    torch.testing.assert_close(weight, -.02 * torch.eye(2, dtype=torch.float64), rtol=0, atol=1e-15)
+
+
 @pytest.mark.parametrize("family", ["ada_nsgda", "dualnorm", "dualnorm_D_only", "particle_rownorm_only"])
 @pytest.mark.parametrize("corruption", ["shape", "nonfinite", "missing"])
 def test_public_optimizer_checkpoint_rejects_invalid_update_history_atomically(family, corruption):

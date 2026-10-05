@@ -127,8 +127,17 @@ class NormalizedOptimizer(Optimizer):
             raise ValueError("dualnorm supports matrix weights and vector/scalar biases only")
 
     def _refresh_adam(self):
+        adam_groups = [g for g in self.param_groups if g["algorithm"] == "adam"]
+        if adam_groups and self._adam is None:
+            # An isolation arm may start with only a row-normalized table and
+            # acquire trainable network/noise parameters later. Construct its
+            # native component on first use, without introducing Adam into a
+            # family whose groups all follow normalized rules.
+            keys = ("lr", "betas", "eps", "amsgrad", "weight_decay", "maximize",
+                    "differentiable", "capturable", "foreach", "fused")
+            self._adam = torch.optim.Adam(adam_groups, **{key: self.defaults[key] for key in keys})
         if self._adam is not None:
-            self._adam.param_groups = [g for g in self.param_groups if g["algorithm"] == "adam"]
+            self._adam.param_groups = adam_groups
             self._adam.state = self.state
 
     def add_param_group(self, param_group):

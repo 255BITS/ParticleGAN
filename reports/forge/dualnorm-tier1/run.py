@@ -56,7 +56,7 @@ def summaries(queue_root, *, final=False):
         for arm, value in zip(ARMS, values) for trial in value["trials"]]
     report = {"schema_version": 1, "campaign": CAMPAIGN, "qualification_input": False,
         "scope": "optimizer-only BCAP, protocol seed 0, complete current Tier 1; no task repairs or later tiers",
-        "diagnostics": "RNG-free actual-step observers enabled for scalar/ring/joint-word hosts; excluded from grading",
+        "diagnostics": "RNG-free actual-step observers enabled for scalar/ring/joint-word hosts; excluded from grading. Frozen input-gradient probes excluded due to phase-label routing; update/weight/spectral traces retained.",
         "deferred": ["R1/R2", "five-seed confirmation", "7k native100", "sparse177", "width/depth transfer"],
         "predictions": {"P1": "unscored: original native benchmarks and five-seed equivalence absent",
             "P2": "screening evidence only; no five-seed falsification",
@@ -134,7 +134,10 @@ def archive(queue_root):
         for source in sorted(sources):
             add_tree(queue_root / "snapshots" / source, "snapshots/" + source)
         add_tree(queue_root / CAMPAIGN, "campaign/" + CAMPAIGN)
+        add_tree(queue_root / "queue/state.json", "queue/state.json")
         add_tree(queue_root / "events.jsonl", "events.jsonl")
+        for name in ("driver.log", "cpu-recovery.log", "resume-cli.log", "resume.log", "recover_cpu.py"):
+            add_tree(queue_root / name, "execution/" + name)
     atomic_json(REPORT / "artifact-inventory.json", {"schema_version": 1,
         "archive": {"path": str(destination), "sha256": file_hash(destination), "bytes": destination.stat().st_size},
         "members": members, "source_digests": sorted(sources)})
@@ -143,7 +146,7 @@ def archive(queue_root):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("stage", choices=("prepare", "plan", "enqueue", "run", "report", "media", "archive"))
+    parser.add_argument("stage", choices=("prepare", "plan", "enqueue", "run", "resume", "report", "media", "archive"))
     parser.add_argument("--queue-root", type=Path, default=ROOT / "runs/forge")
     parser.add_argument("--gpus", default="0,1")
     args = parser.parse_args(); queue_root = args.queue_root.resolve()
@@ -165,11 +168,11 @@ def main():
         for spec in SPECS:
             value = enqueue_search(ROOT, queue_root, spec)
             emit("enqueued", study=spec, configurations=len(value["trials"]))
-    if args.stage == "run":
+    if args.stage in ("run", "resume"):
         os.environ["PARTICLEGAN_FORGE_OPTIMIZER_DIAGNOSTICS"] = "1"
         drain(Queue(queue_root, report_root=ROOT / "reports/forge"), args.gpus.split(","),
             workers_per_gpu=1, campaign=CAMPAIGN)
-    if args.stage in ("run", "report"):
+    if args.stage in ("run", "resume", "report"):
         summaries(queue_root, final=True)
     elif args.stage == "media":
         media(queue_root)
