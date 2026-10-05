@@ -1,0 +1,25 @@
+{
+  "gif_sha256": "7a5b13edd0d1f0a2b73bc53ba4a920fc687b8598b2d0af16fdccf81f5b509110",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "ac7aed4884bcb756c7b93858f4ff5925a7268dc5b2fb86ce0e8200d6e7703aba",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "a584f82642d0d4e296a7280c0a6a8539e522dc29db8934ae7ee4aa783e9623c1",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {},
+  "task_id": "two_pole"
+}

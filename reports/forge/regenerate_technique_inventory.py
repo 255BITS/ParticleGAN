@@ -1400,7 +1400,15 @@ def _common26_current_markdown(result, root, path):
 def _current_markdown(result, root, path):
     if result.get("family_progress"):
         from experiments.forge.family_reports import render_leaderboard
-        return render_leaderboard(root, result, path)
+        markdown = render_leaderboard(root, result, path)
+        repair = root / "reports/forge/bcap-tier1-repair"
+        if (repair / "publication-links.json").is_file():
+            import importlib.util
+            spec = importlib.util.spec_from_file_location("bcap_repair_navigation", repair / "publish_evidence.py")
+            helper = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(helper)
+            markdown += helper.display_section(root, path)
+        return markdown
     if not result.get('recorded_policy') and result['view'] == 'discriminator_stability':
         return _common26_current_markdown(result, root, path)
     def cell(value):

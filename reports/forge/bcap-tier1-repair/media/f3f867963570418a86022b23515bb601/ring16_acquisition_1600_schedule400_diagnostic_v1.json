@@ -1,0 +1,27 @@
+{
+  "gif_sha256": "7057842cab241f92ef63b6990d8765fe3e1040710858199150b04996978df2a6",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 29,
+  "observations_sha256": "be259001b993b66c97a241ab83dd5233f6eb5034dbcccb97511b395f272038d9",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "a584f82642d0d4e296a7280c0a6a8539e522dc29db8934ae7ee4aa783e9623c1",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    4,
+    7,
+    10,
+    14,
+    18,
+    21,
+    24,
+    28
+  ],
+  "source_inputs": {
+    "/home/martyn/dev/ParticleGAN/runs/forge/bcap-tier1-repair/queue/bcap-original-horizon-diagnostics-v1/f3f867963570418a86022b23515bb601/observed-samples.pt": "2278fce41b1d6726b55eadf5c826a044302e9fca1a7c6b008fdfad6a1c893e8b"
+  },
+  "task_id": "ring16_acquisition_1600_schedule400_diagnostic_v1"
+}

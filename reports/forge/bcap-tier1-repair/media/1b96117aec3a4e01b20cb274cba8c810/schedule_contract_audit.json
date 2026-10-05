@@ -1,0 +1,22 @@
+{
+  "gif_sha256": "1794b1b755163b403bd01d79c0bb5c713b30ce8a0c2678a7a0052ddf516171a4",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 4,
+  "observations_sha256": "6cc729cddfa54889b893413c72cab2339646ba9dbc5e81a5a594036a1e0c35e0",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "a584f82642d0d4e296a7280c0a6a8539e522dc29db8934ae7ee4aa783e9623c1",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "source_inputs": {
+    "/home/martyn/dev/ParticleGAN/runs/forge/bcap-tier1-repair/queue/bcap-tier1-repair-rates-v1/1b96117aec3a4e01b20cb274cba8c810/clockfree-proof/comparisons.pt": "57eeacd89e098acb830af9b4ad20e37b5cd3d071f616e6eabaef33c59aaa9140"
+  },
+  "task_id": "schedule_contract_audit"
+}

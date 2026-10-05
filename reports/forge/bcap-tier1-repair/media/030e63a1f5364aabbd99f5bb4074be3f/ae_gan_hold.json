@@ -1,0 +1,25 @@
+{
+  "gif_sha256": "a8de3b24c1c1c11ed4e4f4958a8c08c3fa1f1b27edacb050bdc15d1314490567",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "29d3a330f01cfcd5152f57957568793fd4c8772723b0c37b4e515bb60b49bd04",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "a584f82642d0d4e296a7280c0a6a8539e522dc29db8934ae7ee4aa783e9623c1",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {},
+  "task_id": "ae_gan_hold"
+}

@@ -1,0 +1,27 @@
+{
+  "gif_sha256": "41c5072e33557901c3e6a59ac07359195a0a2530a16d3d321fed972398cb0871",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "677bd68439b28d76a873ed59cc15c55d4703b34d119ea9af5503449fbb9a25d8",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "PASS",
+  "renderer_sha256": "a584f82642d0d4e296a7280c0a6a8539e522dc29db8934ae7ee4aa783e9623c1",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/home/martyn/dev/ParticleGAN/runs/forge/bcap-tier1-repair/queue/bcap-tier1-repair-rates-v1/5dec0fdcf021489fb9d9ad3fc36a28f7/observed-samples.pt": "610506a16b21304cc39cfc549382a8446d4d6bc6efbe56dd899b59fc6cf667ff"
+  },
+  "task_id": "gaussian1d_acquisition"
+}

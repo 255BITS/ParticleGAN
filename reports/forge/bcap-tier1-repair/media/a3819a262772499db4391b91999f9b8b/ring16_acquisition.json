@@ -1,0 +1,27 @@
+{
+  "gif_sha256": "fe0a0e27df59fc59395c1766563f612a274a5d126d05d1f908cfca5d3c092717",
+  "kind": "actual_training_saved_observations_gif",
+  "observation_count": 24,
+  "observations_sha256": "b9669b43f73d8420c9e14e3f14146c4d567953ca535177365859dfdc2c2f7203",
+  "optimizer_updates_added": 0,
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "a584f82642d0d4e296a7280c0a6a8539e522dc29db8934ae7ee4aa783e9623c1",
+  "sampling_draws_added": 0,
+  "schema_version": 1,
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_inputs": {
+    "/home/martyn/dev/ParticleGAN/runs/forge/bcap-tier1-repair/queue/bcap-tier1-repair-moments-v1/a3819a262772499db4391b91999f9b8b/observed-samples.pt": "f70dba01ca21c6f7053efd250f2bdaf651ddc123d427f6380058a2f0be20e624"
+  },
+  "task_id": "ring16_acquisition"
+}
