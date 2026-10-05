@@ -25,6 +25,49 @@ ARMS = ("adam", "sgda", "nsgda-global", "nsgda-layer", "ada-nsgda", "dualnorm-ze
 SPECS = tuple("bcap-optim-" + arm + "-tier1-v1" for arm in ARMS)
 
 
+class ArchiveReader:
+    """Hash the exact bytes tarfile consumes, rather than rereading a path."""
+    def __init__(self, stream):
+        self.stream, self.digest, self.bytes = stream, hashlib.sha256(), 0
+
+    def read(self, size=-1):
+        payload = self.stream.read(size)
+        self.digest.update(payload)
+        self.bytes += len(payload)
+        return payload
+
+
+def archive_support_files(queue_root):
+    files = {}
+    for name in ("driver.log", "cpu-recovery.log", "resume-cli.log", "resume.log", "recover_cpu.py",
+                 "validate-final.log", "media-export.log", "media-verify.log", "media-progress.json",
+                 "analysis.log", "publication-source.log", "publication-source-final.log",
+                 "publication-source-verified.log", "publication-source-complete.log",
+                 "regrade-debug.log", "frozen-regrade-debug.json", "selection-card-before-publication.json",
+                 "publication-final.log", "compile-summaries.log", "compile-check.log"):
+        files[queue_root / name] = "execution/" + name
+    for pattern in ("pytest*", "junit*", "*collection*", "collected-tests*", "publication-*.log", "validate-*.log"):
+        for path in queue_root.glob(pattern):
+            if path.is_file():
+                files[path] = (("execution/" if path.name.startswith("publication-") else "verification/")
+                               + path.name)
+    software = REPORT / "software-verification.json"
+    migration = REPORT / "selection-migration.json"
+    if migration.is_file():
+        files[migration] = "publication/selection-migration.json"
+    if software.is_file():
+        files[software] = "publication/software-verification.json"
+        for artifact in read_json(software).get("artifacts", {}).values():
+            path = (ROOT / artifact["local_path"]).resolve()
+            if not path.is_relative_to(ROOT) or not path.is_file():
+                raise ValueError("software verification artifact unavailable: " + artifact["local_path"])
+            if file_hash(path) != artifact["sha256"] or path.stat().st_size != artifact["bytes"]:
+                raise ValueError("software verification artifact differs from its receipt: " + artifact["local_path"])
+            files[path] = ("verification/" + path.name if path.parent == queue_root.resolve()
+                           else "verification/external/" + path.relative_to(ROOT).as_posix())
+    return sorted(files.items(), key=lambda item: item[1])
+
+
 def emit(event, **data):
     print(json.dumps({"event": event, **data}, sort_keys=True), flush=True)
 
@@ -113,8 +156,9 @@ def archive(queue_root):
     destination.parent.mkdir(parents=True, exist_ok=True)
     if destination.exists():
         raise ValueError("archive already exists; preserve its original identity")
+    support_files = archive_support_files(queue_root)
     members, sources = {}, set()
-    with tarfile.open(destination, "w:gz") as bundle:
+    with tarfile.open(destination, "x:gz", dereference=True) as bundle:
         def add_tree(path, prefix):
             if not path.exists():
                 return
@@ -124,8 +168,11 @@ def archive(queue_root):
                 name = str(Path(prefix) / member.relative_to(path)) if path.is_dir() else prefix
                 if name in members:
                     continue
-                bundle.add(member, arcname=name, recursive=False)
-                members[name] = {"sha256": file_hash(member), "bytes": member.stat().st_size}
+                info = bundle.gettarinfo(member, arcname=name)
+                with member.open("rb") as stream:
+                    reader = ArchiveReader(stream)
+                    bundle.addfile(info, reader)
+                members[name] = {"sha256": reader.digest.hexdigest(), "bytes": reader.bytes}
         for request, attempt in attempts(queue_root):
             name = attempt["attempt_id"]; sources.add(request["source"]["digest"])
             add_tree(Path(attempt["path"]), "attempts/" + name)
@@ -136,8 +183,8 @@ def archive(queue_root):
         add_tree(queue_root / CAMPAIGN, "campaign/" + CAMPAIGN)
         add_tree(queue_root / "queue/state.json", "queue/state.json")
         add_tree(queue_root / "events.jsonl", "events.jsonl")
-        for name in ("driver.log", "cpu-recovery.log", "resume-cli.log", "resume.log", "recover_cpu.py"):
-            add_tree(queue_root / name, "execution/" + name)
+        for path, name in support_files:
+            add_tree(path, name)
     atomic_json(REPORT / "artifact-inventory.json", {"schema_version": 1,
         "archive": {"path": str(destination), "sha256": file_hash(destination), "bytes": destination.stat().st_size},
         "members": members, "source_digests": sorted(sources)})

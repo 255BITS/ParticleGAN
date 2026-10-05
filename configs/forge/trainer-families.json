@@ -200,6 +200,9 @@
         "bcap-pure-least-squares-joint-v2"
       ],
       "canonical_candidate": "bcap-pure-adam-v2",
+      "current_presentation_candidates": [
+        "bcap-pure-adam-example-v3"
+      ],
       "id": "bcap-pure",
       "label": "BCAP",
       "rationale": "Native Adam, fixed real/fake BCAP, constant rates and moments, selectable adversarial loss. No optimizer interventions or additive training noise. Historical K3P-derived BCAP remains a separate family.",

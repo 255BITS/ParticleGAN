@@ -102,7 +102,7 @@ def project_receipt(root: Path | str, attempt_id: str) -> dict:
                                if key in row.get("evidence", {})}
         compact["evaluator_summary"] = _evaluator_summary(row.get("evaluator_result", {}))
         projected.append(compact)
-    return {
+    summary = {
         "schema_version": 1, "summary_version": "forge-technique-receipt-summary-v1",
         "evidence_scope": "published_summary", "qualification_reuse": False,
         "qualification_input": False, "certificate_validated": True,
@@ -117,6 +117,9 @@ def project_receipt(root: Path | str, attempt_id: str) -> dict:
             "source_origin_commit": source.get("origin_commit"),
             "original_files": {name: {"path": path.relative_to(root).as_posix(), "sha256": file_hash(path)}
                                for name, path in paths.items()}}}
+    if result.get("retry_of"):
+        summary["retry_of"] = deepcopy(result["retry_of"])
+    return summary
 
 
 def _json_text(value):
@@ -152,7 +155,8 @@ def _publication_provenance(result, summaries):
             "canonical_result_hash": summary["provenance"]["canonical_result_hash"],
             "source_digest": summary["provenance"]["source_digest"],
             "original_file_sha256": {name: item["sha256"] for name, item in
-                                      summary["provenance"]["original_files"].items()}}
+                                      summary["provenance"]["original_files"].items()},
+            **({"retry_of": deepcopy(summary["retry_of"])} if summary.get("retry_of") else {})}
             for attempt, summary in sorted(summaries.items())})
     result["provenance"]["input_digest"] = stable_hash(result)
 
@@ -310,6 +314,24 @@ for expected in manifests.values():
 # no scope, scientific source, original receipt or numerical gate is edited.
 if (root / 'experiments/forge/knowledge.py').is_file():
     from experiments.forge import knowledge, planning
+    if hasattr(planning, 'declaration_paths'):
+        # Scientific revisions exclude labels. The board emits the first
+        # declaration for an equivalent cohort, so prefer the exact candidate
+        # IDs in originals already validated against these source manifests.
+        # Strict publication checks still reject mixed candidate identities.
+        recorded_candidates = set()
+        sources = {(digest, source.get('origin_commit')) for digest, source in manifests.items()}
+        for path in (root / 'reports/forge/attempts').glob('*/request.json'):
+            resolved = json.loads(path.read_text())
+            request = resolved.get('request', resolved)
+            source = request.get('source', {})
+            if (source.get('digest'), source.get('origin_commit')) in sources:
+                recorded_candidates.add(request['candidate']['id'])
+        original_declaration_paths = planning.declaration_paths
+        def receipt_first_declarations(root):
+            return sorted(original_declaration_paths(root),
+                          key=lambda path: (path.stem not in recorded_candidates, path.stem))
+        planning.declaration_paths = receipt_first_declarations
     def question_request(root, idea_id, view_id, execution_backend='cuda', cuda_model=None):
         idea = planning.load_idea(root, idea_id)
         through_tier = idea.get('decision_contract', {}).get('scope', {}).get('through_tier', 3)
@@ -459,6 +481,7 @@ def _validate_published_row(root, report, row, visited=None):
         _validate_published_row(root, source, matches[0], visited)
         return
     proofs = report.get("provenance", {}).get("qualified_receipts", {})
+    summaries = {}
     for attempt in row.get("attempt_ids", []):
         identifier(attempt, "attempt")
         proof = proofs.get(attempt)
@@ -466,18 +489,33 @@ def _validate_published_row(root, report, row, visited=None):
         if not isinstance(proof, dict) or not path.is_file():
             raise ValueError("measured publication row lacks its compact receipt proof")
         summary = read_json(path)
+        summaries[attempt] = summary
         provenance = summary.get("provenance", {})
         actual = {"canonical_result_hash": provenance.get("canonical_result_hash"),
                   "source_digest": provenance.get("source_digest"),
                   "original_file_sha256": {name: item.get("sha256") for name, item in
                                             provenance.get("original_files", {}).items()}}
+        if summary.get("retry_of"):
+            actual["retry_of"] = deepcopy(summary["retry_of"])
         if actual != proof or summary.get("certificate_validated") is not True:
             raise ValueError("compact receipt proof differs from its publication")
         if (summary.get("qualification_input") is not False or summary.get("qualification_reuse") is not False
                 or summary.get("candidate_id") != row.get("candidate_id")
                 or summary.get("candidate_revision") != row.get("candidate_revision")
                 or provenance.get("source_digest") != row.get("bindings", {}).get("source_digest")):
-            raise ValueError("compact receipt candidate/source cohort differs from its publication row")
+            raise ValueError("compact receipt candidate/source cohort differs from its publication row: "
+                             + _json_text({"attempt_id": attempt,
+                                           "receipt": {"candidate_id": summary.get("candidate_id"),
+                                                       "candidate_revision": summary.get("candidate_revision"),
+                                                       "source_digest": provenance.get("source_digest"),
+                                                       "qualification_input": summary.get("qualification_input"),
+                                                       "qualification_reuse": summary.get("qualification_reuse")},
+                                           "row": {"candidate_id": row.get("candidate_id"),
+                                                   "candidate_revision": row.get("candidate_revision"),
+                                                   "source_digest": row.get("bindings", {}).get("source_digest")}}).strip())
+    if any(summary.get("retry_of") for summary in summaries.values()):
+        from experiments.forge.family_reports import certified_retry_successors
+        certified_retry_successors(summaries)
     for tier, required in report.get("tier_requirements", {}).items():
         cell = row.get("tiers", {}).get(tier, {})
         if (cell.get("total") != len(required) or type(cell.get("passed")) is not int
@@ -1969,13 +2007,25 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
                                   source_commit=source_commit, output_prefix=Path(temporary) / "evidence")
             report = read_json(metadata["json"])
         candidates = {}
+        missing_worker_finished_at = {}
         for row in report["rows"]:
             if not row.get("attempt_ids"):
                 continue
-            times = [read_json(root / "reports/forge/attempts" / attempt / "result.json")["raw"]["finished_at"]
-                     for attempt in row["attempt_ids"]]
             if row["candidate_id"] in candidates:
                 raise ValueError("select one runtime cohort; current rows cannot pool runtimes")
+            times = []
+            for attempt in row["attempt_ids"]:
+                recorded_at = read_json(root / "reports/forge/attempts" / attempt / "result.json")["raw"].get("finished_at")
+                if recorded_at is None:
+                    missing_worker_finished_at.setdefault(row["candidate_id"], []).append(attempt)
+                elif not isinstance(recorded_at, str) or not recorded_at:
+                    raise ValueError(f"invalid recorded worker completion time: {attempt}")
+                else:
+                    times.append(recorded_at)
+            if not times:
+                raise ValueError(f"no recorded worker completion time for measured technique: {row['candidate_id']}")
+            # Interrupted attempts can have no worker terminal timestamp. Keep
+            # them in the evidence, but rank only by an actually recorded time.
             candidates[row["candidate_id"]] = max(times)
         if not candidates:
             raise ValueError("source regrade selected no measured technique rows; restore its recorded runtime/hardware")
@@ -2014,6 +2064,9 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
         relative = EVIDENCE_MANIFEST.parent / (report["provenance"]["input_digest"] + ".json")
         entry = {"snapshot": relative.as_posix(), "json_sha256": hashlib.sha256(data.encode()).hexdigest(),
                  "source_commit": metadata["source_commit"], "candidates": candidates}
+        if missing_worker_finished_at:
+            entry["missing_worker_finished_at"] = {
+                name: sorted(attempts) for name, attempts in sorted(missing_worker_finished_at.items())}
         # Keep exact evidence across CPU/GPU models and other runtime cohorts,
         # including cohorts from the same source commit. Regrading an identical
         # snapshot is idempotent; a new snapshot never retires another runtime.

@@ -383,6 +383,21 @@ def test_current_only_task_history_membership_preserves_recorded_family_identity
     assert families.family_for_candidate(ROOT, "five-word-joint-ka2-v1")["id"] == "five-word-joint-ka2-v1"
 
 
+def test_pure_adam_example_groups_only_for_current_presentation():
+    candidate = "bcap-pure-adam-example-v3"
+    declaration = read_json(ROOT / f"configs/forge/ideas/{candidate}.json")
+    registry = families.load_families(ROOT)
+    assert candidate not in registry["bcap-pure"]["candidates"]
+    assert registry["bcap-pure"]["current_presentation_candidates"] == [candidate]
+    assert registry["bcap-pure"]["canonical_candidate"] == "bcap-pure-adam-v2"
+    current = families.family_for_candidate(ROOT, candidate, declaration, current_presentation=True)
+    recorded = families.family_for_candidate(ROOT, candidate, declaration, current_presentation=False)
+    assert current == registry["bcap-pure"]
+    assert recorded == {"id": candidate, "label": candidate, "canonical_candidate": candidate,
+                        "candidates": [candidate], "registration": "unclassified_independent_technique"}
+    assert families.family_for_candidate(ROOT, "bcap-pure-adam-v2")["id"] == "bcap-pure"
+
+
 def test_registry_groups_gan_v3_task_priors_and_keeps_original_historical_identities():
     registry = families.load_families(ROOT)
     retained = {"r1r2", "bcap", "k3p", "ka2", "e22", "atlas", "release07-gan-v3",

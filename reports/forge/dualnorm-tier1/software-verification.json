@@ -1,0 +1,472 @@
+{
+  "schema_version": 1,
+  "kind": "software_verification_receipt",
+  "study": "bcap-dualnorm-tier1-v1",
+  "audited_at_utc": "2026-10-05T22:02:57.590922+00:00",
+  "audit_checkout_commit": "c51b1f2b4b6e2fd683d872ebb919d68fdaed93d3",
+  "verdict": "segmented_software_verification_with_publication_checks_pending",
+  "scope": "Optimizer/API compatibility, diagnostic invariance and reporting safeguards. This receipt adds no scientific training or qualification.",
+  "full_suite_limit": "No single clean full-suite invocation on final HEAD was completed. Runs overlap and used an evolving branch; counts must not be summed into a final-HEAD test total.",
+  "artifact_policy": "Only compact counts, scopes, hashes and provenance are committed. Raw stdout/JUnit remain at local ignored paths. Hashes identify the audited bytes and do not imply the files are available in a fresh checkout.",
+  "artifacts": {
+    "pytest.log": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/pytest.log",
+      "sha256": "60f1b2727a737fc1220169212755f42da52d7865132992e3341f112bc9ad00bd",
+      "bytes": 3307
+    },
+    "pytest-first-failure.log": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-first-failure.log",
+      "sha256": "d5eddbe64a6b2188bd1765127c433425dae44047a7430a01396b473a7760c6af",
+      "bytes": 609
+    },
+    "pytest-first-failure-restarted.log": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-first-failure-restarted.log",
+      "sha256": "ec5806a7d593bf29f610b52707e93f86d52ebefc367c4497f2f9eb5319dc8afb",
+      "bytes": 2862
+    },
+    "pytest-followup-three-failures.log": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-followup-three-failures.log",
+      "sha256": "96899e8013f92257a19bbc07794f971ad3193ae83668fdeeb11f8421a3adbac5",
+      "bytes": 8931
+    },
+    "pytest-compatibility-followup.log": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-compatibility-followup.log",
+      "sha256": "f4138cf71f8b91d14d43a102422f905c1297ef56c6c1b445c9195c3d5461ea85",
+      "bytes": 11964
+    },
+    "pytest-after-pure-bcap.log": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-after-pure-bcap.log",
+      "sha256": "7eb4f9950d6a428f47fef9bdd92ac682a77f4de0260d82c396053c23de7353fe",
+      "bytes": 5417
+    },
+    "pytest-after-pure-bcap.xml": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-after-pure-bcap.xml",
+      "sha256": "b4ce595d73baf12084cfafb11b84fb04d138bd1dd23161be0a9329e5f925c4b5",
+      "bytes": 236722
+    },
+    "pytest-spawn-control.log": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-spawn-control.log",
+      "sha256": "4733810797472735a6c3a1518316ab2df7ccf79906c3a3b8539156ff1c6220ef",
+      "bytes": 98
+    },
+    "pytest-spawn-control.xml": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-spawn-control.xml",
+      "sha256": "64750ec619507bf52073ae934e41a76ad674584da7226968b5b4d869f8b790c3",
+      "bytes": 388
+    },
+    "pytest-http-root.log": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-http-root.log",
+      "sha256": "f9c684a79977ff1a5e73ad07b06ebe5942fb5893e2e738d093a0772e789a3e91",
+      "bytes": 98
+    },
+    "pytest-final-integration.log": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-final-integration.log",
+      "sha256": "7d48850b8e85f4577dc679b2608fc2e61b647811dc42d25217ea25dbd74a8b79",
+      "bytes": 260
+    },
+    "pytest-probes-final.log": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-probes-final.log",
+      "sha256": "855ae78b55d0c724a3c7bd61b91522972d662924c453bde44c58c4b2b4ee9be4",
+      "bytes": 98
+    },
+    "pytest-analysis-final.log": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-analysis-final.log",
+      "sha256": "043fab74ff735b1dee07f17d30bddb402e20ea4cfc2be20eabbf50eaf2e86912",
+      "bytes": 99
+    },
+    "pytest-optimizer-final.log": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-optimizer-final.log",
+      "sha256": "2c508f607cb05aabbd8a1d9b5e1a00580190041be1817789acac398213230d0d",
+      "bytes": 180
+    },
+    "collected-tests.txt": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/collected-tests.txt",
+      "sha256": "067419bd4e069a3747e5465b707710b6a3f8db27e9b034130e0a289b73d2a743",
+      "bytes": 597535
+    },
+    "pytest-media-regressions.log": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-media-regressions.log",
+      "sha256": "0c15948e3e16483bedf87bc0f9680c9fc3067d50fcb935f6c932a701a875dec8",
+      "bytes": 98
+    },
+    "pytest-media-regressions.xml": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-media-regressions.xml",
+      "sha256": "a7e28204dcf9e096ea34662343a76906e584d564f41ba06eff19a84a596b983b",
+      "bytes": 650
+    },
+    "pytest-media-regressions-source.json": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-media-regressions-source.json",
+      "sha256": "4530d122d5304353962bec3dc4daf50a0a147d50ba5e967c9f3a52fc6b0821fd",
+      "bytes": 1131
+    },
+    "pytest-publication-final.log": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-publication-final.log",
+      "sha256": "e763767441395007c4772a1cb96a1d113b92f333daf8f90470c7151a83c274a0",
+      "bytes": 261
+    },
+    "pytest-publication-final.xml": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-publication-final.xml",
+      "sha256": "c785e850f584cccf82393f7585e694ee5e05ca7481503b44c37b9c6a7460a11f",
+      "bytes": 25799
+    },
+    "pytest-publication-final-source.json": {
+      "local_path": "runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-publication-final-source.json",
+      "sha256": "7f120a24c65c75eed6e1c99d00034a38bfe0f300a521f0bb4288797ac8a55972",
+      "bytes": 1154
+    }
+  },
+  "runs": [
+    {
+      "id": "prefix_after_compatibility_corrections",
+      "evidence": [
+        "pytest-compatibility-followup.log"
+      ],
+      "command": ".venv/bin/python -m pytest -q --maxfail=3 --tb=short --deselect tests/test_forge_family_reports.py::test_committed_pages_and_every_drilldown_link_match_the_generator",
+      "scope": "Normal collection, stopped at the third actual failure in test_pure_bcap_recipe; family-report freshness node was explicitly deselected.",
+      "counts": {
+        "passed": 3884,
+        "failed": 3,
+        "skipped": 59,
+        "deselected": 1,
+        "xfailed": 1,
+        "subtests_passed": 113
+      },
+      "elapsed_seconds": 564.39,
+      "environment": "Managed child; CUDA unavailable and localhost socket creation forbidden.",
+      "failures": [
+        {
+          "node": "tests/test_forge_publication_memory.py::test_committed_research_memory_is_fresh_without_raw_log_hydration",
+          "classification": "publication_freshness",
+          "status": "pending_final_publication"
+        },
+        {
+          "node": "tests/test_gym_lander_live.py::test_http_steps_once_stops_at_end_and_reset_invalidates_stale_commands",
+          "classification": "managed_child_socket_permission_error",
+          "status": "passed_root_http_control"
+        },
+        {
+          "node": "tests/test_pure_bcap_recipe.py::test_new_bcap_label_does_not_reinterpret_historical_fixed_arm_recipes",
+          "classification": "obsolete_plain_Adam_error_regex",
+          "status": "test_assertion_corrected_and_final_integration_passed"
+        }
+      ],
+      "source_limit": "No contemporaneous source manifest; the run included uncommitted compatibility corrections subsequently preserved in da5352c866414d603523bda878b0827d6a225809."
+    },
+    {
+      "id": "suffix_after_pure_bcap_boundary",
+      "evidence": [
+        "pytest-after-pure-bcap.log",
+        "pytest-after-pure-bcap.xml"
+      ],
+      "command": "Python stdin harness invoking pytest.main([\"-q\", \"--maxfail=3\", \"--tb=short\", \"--junitxml=...\"]) with a collection-selection plugin.",
+      "scope": "Excluded every collected item through tests/test_pure_bcap_recipe.py::test_new_bcap_label_does_not_reinterpret_historical_fixed_arm_recipes; ran the remaining collection in order.",
+      "counts": {
+        "passed": 1559,
+        "failed": 1,
+        "skipped": 4,
+        "deselected": 3954,
+        "subtests_passed": 18
+      },
+      "junit": {
+        "tests": 1582,
+        "failures": 1,
+        "errors": 0,
+        "skipped": 4,
+        "note": "JUnit includes the 18 passing subtests as testcase entries."
+      },
+      "elapsed_seconds": 240.53,
+      "failure": {
+        "node": "tests/test_toy_api_reframe.py::test_process_workers_keep_distinct_case_reviews_and_original_capture_bytes",
+        "classification": "selection_harness_error",
+        "detail": "Spawned workers tried to import the stdin harness as a nonexistent <stdin> file.",
+        "status": "passed_normal_invocation_control"
+      },
+      "environment": "Managed child; the four skips require CUDA.",
+      "source_limit": "No contemporaneous source manifest; this is a collection suffix, not a full-suite final-source run."
+    },
+    {
+      "id": "spawn_control",
+      "evidence": [
+        "pytest-spawn-control.log",
+        "pytest-spawn-control.xml"
+      ],
+      "command": ".venv/bin/python -m pytest -q tests/test_toy_api_reframe.py::test_process_workers_keep_distinct_case_reviews_and_original_capture_bytes --junitxml=runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-spawn-control.xml",
+      "counts": {
+        "passed": 1,
+        "failed": 0
+      },
+      "elapsed_seconds": 2.79,
+      "scope": "Corrected the suffix selection-harness failure by using the normal module entry point."
+    },
+    {
+      "id": "root_http_control",
+      "evidence": [
+        "pytest-http-root.log"
+      ],
+      "command": ".venv/bin/python -m pytest -q tests/test_gym_lander_live.py::test_http_steps_once_stops_at_end_and_reset_invalidates_stale_commands",
+      "counts": {
+        "passed": 1,
+        "failed": 0
+      },
+      "elapsed_seconds": 0.94,
+      "scope": "Root environment allowed localhost sockets; verifies the managed-child EPERM was environmental."
+    },
+    {
+      "id": "final_optimizer_forge_integration",
+      "evidence": [
+        "pytest-final-integration.log"
+      ],
+      "command": ".venv/bin/python -m pytest -q tests/test_dualnorm_optimizers.py tests/test_forge_dualnorm_contracts.py tests/test_bcap_optimizer_analysis.py tests/test_recipe_schedules.py tests/test_forge_hostprofiles.py tests/test_pure_bcap_recipe.py",
+      "counts": {
+        "passed": 155,
+        "failed": 0
+      },
+      "elapsed_seconds": 2.79,
+      "scope": "Analytic optimizer formulas, sampled rows, state validation/continuation, API/config admission, unchanged scheduling, legacy recipe identities, pure-BCAP semantics and reporting safeguards.",
+      "source_limit": "Root reports this 19:35 UTC run tested uncommitted corrections subsequently committed in da5352c866414d603523bda878b0827d6a225809. No contemporaneous source manifest was retained."
+    },
+    {
+      "id": "diagnostic_probes",
+      "evidence": [
+        "pytest-probes-final.log"
+      ],
+      "command": ".venv/bin/python -m pytest -q tests/test_forge_optimizer_diagnostics.py",
+      "counts": {
+        "passed": 6,
+        "failed": 0
+      },
+      "elapsed_seconds": 1.66,
+      "scope": "Actual six-step API model/optimizer/RNG equality for Adam and dualnorm with probes on/off; sampled-row metadata; mixed-mode/buffer preservation; critic-training-phase input routing.",
+      "source_limit": "Root reports probe code was fixed in 7a4851f4f7e5b54b413532a214963d459e326e2d and unchanged at this run. No contemporaneous run manifest was retained."
+    },
+    {
+      "id": "final_analysis_safeguards",
+      "evidence": [
+        "pytest-analysis-final.log"
+      ],
+      "command": ".venv/bin/python -m pytest -q tests/test_bcap_optimizer_analysis.py",
+      "counts": {
+        "passed": 14,
+        "failed": 0
+      },
+      "elapsed_seconds": 0.15,
+      "scope": "Final readout safeguards including retry-history/receipt handling.",
+      "source_limit": "Root reports this run tested retry-history edits subsequently committed in f60cd45c1d993f8549f78c66eab0939a058c0764. No contemporaneous source manifest was retained."
+    },
+    {
+      "id": "final_publication_alias_timestamp",
+      "evidence": [
+        "pytest-publication-final.log",
+        "pytest-publication-final.xml",
+        "pytest-publication-final-source.json"
+      ],
+      "command": "python -m pytest -q tests/test_forge_current_technique_inventory.py tests/test_forge_technique_exports.py --junitxml=runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-publication-final.xml",
+      "counts": {
+        "passed": 154,
+        "failed": 0
+      },
+      "junit": {
+        "tests": 154,
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "elapsed_seconds": 17.353
+      },
+      "elapsed_seconds": 17.57,
+      "scope": "Full current-technique-inventory and technique-export software tests, including interrupted worker timestamps and exact recorded candidate aliases.",
+      "controls": [
+        "Frozen-source wrapper prefers exact executed candidate IDs only from validated source-digest and origin receipts; candidate aliases cannot silently combine cohorts.",
+        "Strict alias negative controls reject mixed candidate names while preserving scientific fields and receipt bytes.",
+        "Mixed recorded/missing worker times retain missing IDs and actual recorded times; all-missing timestamps fail closed; publication remains idempotent."
+      ],
+      "source": {
+        "capture_phase": "pre_run",
+        "checkout_base_commit": "c51b1f2b4b6e2fd683d872ebb919d68fdaed93d3",
+        "captured_at_utc": "2026-10-05T21:49:25.001882+00:00",
+        "tested_files_sha256": {
+          "reports/forge/regenerate_technique_inventory.py": "278690fe7f21143c494690bde53367bbf235374f27e72283e91fdffb930eaf05",
+          "tests/test_forge_current_technique_inventory.py": "b22d5f3a417529f781640184b1ca3be735ea63e6ba6ce3fb13e763caf5dc5f18",
+          "tests/test_forge_technique_exports.py": "10f890aee241d0c44f49dd1a93a0cd356143ffa6e1cc901bcb46fac958337f6b"
+        },
+        "tested_files_git_status": [
+          " M reports/forge/regenerate_technique_inventory.py",
+          " M tests/test_forge_current_technique_inventory.py",
+          " M tests/test_forge_technique_exports.py"
+        ],
+        "post_run_hashes": "Agent confirmed unchanged; audit rechecked the same file hashes."
+      },
+      "source_limit": "Focused pre-run source record covers the publication generator and selected test files on a dirty branch, not the entire repository or environment. This software run adds no training, checkpoint continuation or scientific qualification.",
+      "overlap_limit": "Overlaps the earlier current-technique-inventory134 run and its focused4 controls. Counts are recorded per invocation and never added into unique coverage."
+    }
+  ],
+  "earlier_diagnostic_runs": [
+    {
+      "id": "first_completed_prefix",
+      "evidence": [
+        "pytest-first-failure-restarted.log"
+      ],
+      "counts": {
+        "passed": 837,
+        "failed": 1,
+        "skipped": 24
+      },
+      "elapsed_seconds": 194.28,
+      "failure": "Renderer budget clock started at collection and expired before its test; isolated node passed. Fixed by per-test clock isolation in unbound conftest, preserving archived renderer/test source bytes."
+    },
+    {
+      "id": "three_failure_diagnosis",
+      "evidence": [
+        "pytest-followup-three-failures.log"
+      ],
+      "counts": {
+        "passed": 2099,
+        "failed": 3,
+        "skipped": 58,
+        "xfailed": 1,
+        "subtests_passed": 56
+      },
+      "elapsed_seconds": 316.81,
+      "failures": [
+        "Archived renderer test source identity was briefly changed; original bytes restored, later prefix passes.",
+        "Family-report freshness pending final publication.",
+        "Hostprofiles compared newly explicit default fields against frozen resolved recipes; default-only compatibility projection fixed, final integration passes."
+      ]
+    },
+    {
+      "id": "environment_interrupted_runs",
+      "evidence": [
+        "pytest.log",
+        "pytest-first-failure.log"
+      ],
+      "status": "interrupted_without_final_summary",
+      "counts": null,
+      "note": "Do not infer actual failure nodes or test totals from partial progress dots; no usable full-suite verdict."
+    },
+    {
+      "id": "earlier_optimizer_control",
+      "evidence": [
+        "pytest-optimizer-final.log"
+      ],
+      "counts": {
+        "passed": 111,
+        "failed": 0
+      },
+      "elapsed_seconds": 6.78,
+      "scope_limit": "Retained stdout does not declare its selected files or exact source; retained as a historical count, not additional independent coverage."
+    }
+  ],
+  "backend_controls": [
+    {
+      "id": "root_two_gpu_direct_invariants",
+      "evidence_kind": "parent_observed_tool_output",
+      "retained_raw_artifact": null,
+      "tool_session": "85038",
+      "devices": [
+        "CUDA:0",
+        "CUDA:1"
+      ],
+      "status": "passed_as_reported_by_root",
+      "scope": [
+        "Large polar factor of a double-precision 2x1025 matrix and its transpose with singular values 1 and 1e-7; unit-singular tolerance 1e-12 on both GPUs.",
+        "Prior table 6x3 with all-one gradients and sampled row indices [1,1,4]; rows [0,2,3,5] remain bitwise unchanged on both GPUs."
+      ],
+      "limit": "No retained raw log/script or contemporaneous source manifest. No SHA256 is fabricated. These direct software invariants do not replace the CUDA-specific broad-suite skips or qualify scientific results."
+    }
+  ],
+  "media_control": {
+    "scope": "tests/test_bcap_optimizer_media.py: ordinary observations, retained clock proof and cached result certificate identity.",
+    "command": ".venv/bin/python -m pytest -q tests/test_bcap_optimizer_media.py --junitxml=runs/forge/bcap-dualnorm-tier1-v1-queue/pytest-media-regressions.xml",
+    "counts": {
+      "passed": 3,
+      "failed": 0
+    },
+    "elapsed_seconds": 0.09,
+    "evidence_kind": "audited_stdout_and_junit",
+    "evidence": [
+      "pytest-media-regressions.log",
+      "pytest-media-regressions.xml",
+      "pytest-media-regressions-source.json"
+    ],
+    "checkout_commit": "c51b1f2b4b6e2fd683d872ebb919d68fdaed93d3",
+    "source_files": {
+      "tests/test_bcap_optimizer_media.py": "8a832d58eb18867441ba0b829ecccfcbd10edf203d42ef3becd30d8c500c1b6f",
+      "tests/conftest.py": "f11c39a5a9e021601701b95e7a5bc812bb6b29eea964b62f7bdc7a0aed0ca71a",
+      "reports/forge/dualnorm-tier1/export_media.py": "c803d5aeddb6ca9a7b1af03bcb5a0e5f1ea6eafc8173e67216f7795d7c1b8131",
+      "experiments/forge/contracts.py": "f33aac0f2c627f313f3c7cc5a57bdb8078d9a2487bc212e5f7892ce549d81262",
+      "experiments/forge/tier1_media.py": "7c3f6bf4491c1daa2c6c11a12c36ff1afe9450df774a0cd7aac17201002e7a09"
+    },
+    "source_limit": "Selected test, conftest, exporter and direct imported helpers verified unchanged against HEAD immediately after this three-test run. This is a post-run focused source record, not a complete environment or transitive module manifest.",
+    "earlier_run": {
+      "command": ".venv/bin/python -m pytest -q tests/test_bcap_optimizer_analysis.py tests/test_bcap_optimizer_media.py",
+      "counts": {
+        "passed": 17
+      },
+      "elapsed_seconds": 0.2,
+      "evidence_kind": "agent_reported_tool_output",
+      "tool_session": "52774",
+      "limit": "No retained stdout/JUnit or contemporaneous manifest; overlaps analysis14 and media3, never counted as additional coverage."
+    }
+  },
+  "pending": [
+    {
+      "kind": "publication_freshness",
+      "nodes": [
+        "tests/test_forge_family_reports.py::test_committed_pages_and_every_drilldown_link_match_the_generator",
+        "tests/test_forge_publication_memory.py::test_committed_research_memory_is_fresh_without_raw_log_hydration"
+      ],
+      "reason": "Campaign/readout still being published at receipt time; regenerate final reports/memory, then verify these nodes."
+    },
+    {
+      "kind": "coverage_limit",
+      "reason": "Broad-suite CUDA skips and opt-in real-data/research gates remain outside this segmented CPU verification; direct two-GPU optimizer checks have the limited scope stated above."
+    },
+    {
+      "kind": "source_provenance_limit",
+      "reason": "Most pytest invocations have no contemporaneous source manifest. An audit commit and log hash do not reconstruct exact tested working-tree bytes."
+    }
+  ],
+  "scientific_source_boundary": {
+    "executed_cohort_commit": "15eb7cb0911905e401bdfcd7e264945a7ea64d97",
+    "limit": "Scientific training remains bound to its frozen source. Later observer routing and large-polar safeguards are software corrections for future runs; frozen receipts do not qualify the corrected implementation. Contaminated input-gradient curves are excluded without rewriting original traces."
+  },
+  "publication_timestamp_control": {
+    "scope": "Registration of a cohort containing an interrupted original attempt without raw.finished_at.",
+    "fix": "Use the maximum actual recorded worker completion timestamp; retain original attempt identities and receipts, and explicitly record IDs lacking worker finished_at. Reject a measured technique with no recorded worker completion time. Do not invent a date or mutate scientific evidence.",
+    "full_file": {
+      "command": "python -m pytest -q tests/test_forge_current_technique_inventory.py",
+      "counts": {
+        "passed": 134,
+        "failed": 0
+      },
+      "elapsed_seconds": 7.45,
+      "evidence_kind": "agent_observed_tool_output",
+      "retained_raw_artifact": null,
+      "interpreter_note": "Root identifies the project .venv interpreter; agent reported the command as python."
+    },
+    "earlier_focused": {
+      "command": "python -m pytest -q tests/test_forge_current_technique_inventory.py -k 'worker_time or explicit_frozen_regrade'",
+      "counts": {
+        "passed": 4,
+        "failed": 0,
+        "deselected": 130
+      },
+      "elapsed_seconds": 0.51,
+      "evidence_kind": "agent_observed_tool_output",
+      "retained_raw_artifact": null,
+      "limit": "Focused checks overlap the full-file134 run; never counted as additional coverage."
+    },
+    "post_run_source_files": {
+      "reports/forge/regenerate_technique_inventory.py": "b880ca61c37eb863f173624bdc20a66347e8302d089ab208e7714e9dc7608807",
+      "tests/test_forge_current_technique_inventory.py": "b22d5f3a417529f781640184b1ca3be735ea63e6ba6ce3fb13e763caf5dc5f18"
+    },
+    "checkout_base_commit": "c51b1f2b4b6e2fd683d872ebb919d68fdaed93d3",
+    "dirty_source_files": [
+      "reports/forge/regenerate_technique_inventory.py",
+      "tests/test_forge_current_technique_inventory.py"
+    ],
+    "source_limit": "Agent confirmed no edits between the historical timestamp runs and their post-run hash capture. Both files were dirty atop c51b1f2b4b6e2fd683d872ebb919d68fdaed93d3. Those runs had no raw stdout/JUnit or pre-run manifest. Subsequent alias edits are covered separately by the retained final154 run; historical source hashes are not asserted to match current source.",
+    "scientific_boundary": "Only publication generator and its tests change. Frozen15eb scientific source, original receipts, costs and results remain unchanged.",
+    "coverage": "Actually recorded timestamps only; explicit missing-time IDs; reject an all-missing cohort without changing outputs; preserve raw/compact receipts, attempt IDs, tasks, tiers, costs and cached/explicit publication idempotence.",
+    "latest_retained_run": "final_publication_alias_timestamp"
+  }
+}

@@ -712,6 +712,88 @@ def test_explicit_frozen_regrade_registers_evidence_and_updates_canonical(eviden
     assert publication.publish_current(root) == result
 
 
+def test_source_registration_preserves_interrupted_receipt_with_missing_worker_time(evidence, monkeypatch):
+    root, manifest = evidence
+    publication.publish_current(root)
+    finished = "2026-10-03T01:00:00+00:00"
+    _, report = _register(root, deepcopy(manifest), "bcap", "c", finished=finished)
+    atomic_json(root / publication.EVIDENCE_MANIFEST, manifest)
+    originals = {
+        "attempt-c-earlier": {"raw": {"finished_at": "2026-10-03T00:00:00+00:00"}},
+        "attempt-c-interrupted": {"raw": {"attempt_status": "error", "reason": "worker stopped without terminal receipt"}},
+        "attempt-c": {"raw": {"finished_at": finished}},
+    }
+    row = report["rows"][0]
+    row["attempt_ids"] = list(originals)
+    receipt_template = read_json(root / "reports/forge/technique-receipts/attempt-c.json")
+    protected = {}
+    for attempt, value in originals.items():
+        result_path = root / f"reports/forge/attempts/{attempt}/result.json"
+        atomic_json(result_path, value)
+        summary = deepcopy(receipt_template)
+        provenance = summary["provenance"]
+        provenance["canonical_result_hash"] = stable_hash(value)
+        provenance["original_files"]["result"]["sha256"] = file_hash(result_path)
+        receipt_path = root / f"reports/forge/technique-receipts/{attempt}.json"
+        atomic_json(receipt_path, summary)
+        report["provenance"]["qualified_receipts"][attempt] = {
+            "canonical_result_hash": provenance["canonical_result_hash"],
+            "source_digest": provenance["source_digest"],
+            "original_file_sha256": {name: item["sha256"] for name, item in provenance["original_files"].items()},
+        }
+        protected.update({path: path.read_bytes() for path in (result_path, receipt_path)})
+    report["provenance"].pop("input_digest")
+    report["provenance"]["input_digest"] = stable_hash(report)
+
+    def regrade(*args, output_prefix, **kwargs):
+        atomic_json(output_prefix.with_suffix(".json"), report)
+        return {"json": str(output_prefix.with_suffix(".json")), "source_commit": "commit-c"}
+
+    monkeypatch.setattr(publication, "regenerate", regrade)
+    result = publication.publish_current(root, source_commit="commit-c")
+    registered = read_json(root / publication.EVIDENCE_MANIFEST)["cohorts"]
+    assert len(registered) == 3
+    entry = registered[-1]
+    assert entry["candidates"] == {"bcap": finished}
+    assert entry["missing_worker_finished_at"] == {"bcap": ["attempt-c-interrupted"]}
+    assert read_json(root / entry["snapshot"]) == report
+    current = read_json(result["json"])
+    assert current["evidence_sources"][entry["json_sha256"]] == entry
+    selected = next(item for item in current["rows"] if item["candidate_id"] == "bcap")
+    for field in ("attempt_ids", "tasks", "tiers", "cost"):
+        assert selected[field] == row[field]
+    before = _outputs(root)
+    assert publication.publish_current(root, source_commit="commit-c") == result
+    assert publication.publish_current(root) == result
+    assert len(read_json(root / publication.EVIDENCE_MANIFEST)["cohorts"]) == 3
+    assert _outputs(root) == before
+    assert all(path.read_bytes() == content for path, content in protected.items())
+
+
+@pytest.mark.parametrize("raw", [{"attempt_status": "error"}, {"finished_at": None}])
+def test_source_registration_rejects_cohort_without_any_recorded_worker_time(evidence, monkeypatch, raw):
+    root, manifest = evidence
+    publication.publish_current(root)
+    _, report = _register(root, deepcopy(manifest), "bcap", "c", finished="2026-10-03T01:00:00+00:00")
+    atomic_json(root / publication.EVIDENCE_MANIFEST, manifest)
+    result_path = root / "reports/forge/attempts/attempt-c/result.json"
+    atomic_json(result_path, {"raw": raw})
+    original = result_path.read_bytes()
+    before = _outputs(root)
+    manifest_before = (root / publication.EVIDENCE_MANIFEST).read_bytes()
+
+    def regrade(*args, output_prefix, **kwargs):
+        atomic_json(output_prefix.with_suffix(".json"), report)
+        return {"json": str(output_prefix.with_suffix(".json")), "source_commit": "commit-c"}
+
+    monkeypatch.setattr(publication, "regenerate", regrade)
+    with pytest.raises(ValueError, match="no recorded worker completion time.*bcap"):
+        publication.publish_current(root, source_commit="commit-c")
+    assert result_path.read_bytes() == original
+    assert (root / publication.EVIDENCE_MANIFEST).read_bytes() == manifest_before
+    assert _outputs(root) == before
+
+
 def _later_policy_evidence(root, manifest, monkeypatch, *, revision=3):
     policy = {"id": "discriminator_stability", "revision": revision,
               "assignments": [{"task": name, "qualification_tier": 1, "importance": "required"}
@@ -1541,6 +1623,14 @@ def test_original_completion_cohorts_rebuild_every_scientific_row_without_raw_lo
     original_families = {row["family"] for row in frozen["candidate_roster"]}
     assert len(original_families) == len(frozen["candidate_roster"]) == 11
     selection = read_json(tmp_path / CURRENT_SELECTION)
+    migration_path = ROOT / "reports/forge/dualnorm-tier1/selection-migration.json"
+    if migration_path.is_file():
+        # Replay the immutable original card, including its former measurement
+        # metadata; today's contract-drift classification is separate history.
+        original_pins = {item["trainer_family"]: item["original_selection"]
+                         for item in read_json(migration_path)["migrations"]}
+        selection["selections"] = [deepcopy(original_pins.get(pin["trainer_family"], pin))
+                                   for pin in selection["selections"]]
     selection["selections"] = [pin for pin in selection["selections"]
                                if pin["trainer_family"] in original_families]
     atomic_json(tmp_path / CURRENT_SELECTION, selection)

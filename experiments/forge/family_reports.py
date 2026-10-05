@@ -287,6 +287,72 @@ def _same_active_runtime(left, right):
             and profile == right.get("compute_profiles", {}).get(backend))
 
 
+def certified_retry_successors(summaries: dict) -> dict:
+    """Resolve certified execution repairs using compact receipts alone.
+
+    Compatibility keys bind the complete task execution, evaluator, protocol,
+    initializer, RNG and compute law. Scientific outcomes cannot be retried.
+    Eligibility comes from the saved explicit authorization; this projection
+    does not infer the cause of an error or authorize a new execution.
+    """
+    successors, parents = {}, {}
+
+    def task_keys(summary):
+        results = summary.get("task_results", [])
+        keys = {row.get("task_id"): row.get("compatibility_key") for row in results}
+        if (not keys or len(keys) != len(results)
+                or any(not isinstance(name, str) or not name or not isinstance(key, str) or not key
+                       for name, key in keys.items())):
+            raise ValueError("compact retry lacks complete unique task compatibility keys")
+        return keys
+
+    for child, summary in summaries.items():
+        link = summary.get("retry_of")
+        if not link:
+            continue
+        if (not isinstance(link, dict)
+                or set(link) != {"attempt_id", "result_hash", "reason", "authorized_at"}
+                or not isinstance(link.get("reason"), str) or not link["reason"].strip()
+                or not isinstance(link.get("authorized_at"), str) or not link["authorized_at"].strip()):
+            raise ValueError("compact retry lacks explicit repair authorization")
+        parent = link["attempt_id"]
+        if not isinstance(parent, str) or parent not in summaries:
+            raise ValueError("compact retry lacks its original receipt")
+        previous = summaries[parent]
+        for attempt, receipt in ((parent, previous), (child, summary)):
+            if (receipt.get("attempt_id") != attempt or receipt.get("certificate_validated") is not True
+                    or receipt.get("qualification_input") is not False or receipt.get("qualification_reuse") is not False
+                    or any(not isinstance(receipt.get(key), str) or not receipt[key]
+                           for key in ("candidate_id", "candidate_revision"))
+                    or not receipt.get("provenance", {}).get("canonical_result_hash")):
+                raise ValueError("compact retry requires certified nonqualifying receipt identities")
+        original_hash = previous.get("provenance", {}).get("canonical_result_hash")
+        if not isinstance(original_hash, str) or not original_hash or link["result_hash"] != original_hash:
+            raise ValueError("compact retry original result hash mismatch")
+        if (previous.get("attempt_status") not in {"error", "timeout", "cancelled"}
+                or not previous.get("task_results")
+                or any(row.get("gate_status") != "INCOMPLETE" for row in previous["task_results"])):
+            raise ValueError("compact retry cannot supersede scientific or invalid evidence")
+        if (any(previous.get(key) != summary.get(key) for key in ("candidate_id", "candidate_revision", "runtime", "campaign_id"))
+                or not previous.get("runtime")
+                or not previous.get("provenance", {}).get("source_digest")
+                or previous["provenance"]["source_digest"] != summary.get("provenance", {}).get("source_digest")
+                or previous["provenance"].get("source_origin_commit") != summary.get("provenance", {}).get("source_origin_commit")
+                or task_keys(previous) != task_keys(summary)):
+            raise ValueError("compact retry changes the original scientific identity")
+        if parent in successors and successors[parent] != child:
+            raise ValueError("conflicting compact retry branches require investigation")
+        successors[parent], parents[child] = child, parent
+    for child in parents:
+        seen, cursor = set(), child
+        while cursor in parents:
+            if cursor in seen:
+                raise ValueError("cyclic compact retry lineage is invalid")
+            seen.add(cursor)
+            cursor = parents[cursor]
+    return successors
+
+
 def build_progress(root: Path, publication: dict) -> dict:
     """Project current view placement over immutable selected task outcomes."""
     root = Path(root)
@@ -355,7 +421,7 @@ def build_progress(root: Path, publication: dict) -> dict:
             catalogs.update(item["task_contracts"])
             reason_catalog.update(item["status_reasons"])
             scoped_attempts.extend(item["row"].get("attempt_ids", []))
-        receipts = {}
+        receipts, summaries = {}, {}
         for attempt in selected.get("attempt_ids", []) + scoped_attempts:
             identifier(attempt, "attempt")
             path = Path("reports/forge/technique-receipts") / (attempt + ".json")
@@ -364,6 +430,19 @@ def build_progress(root: Path, publication: dict) -> dict:
                     or summary.get("candidate_revision") != selected.get("candidate_revision")
                     or summary.get("provenance", {}).get("source_digest") != selected.get("bindings", {}).get("source_digest")):
                 raise ValueError("family report receipt differs from the selected configuration/source")
+            summaries[attempt] = summary
+        successors = certified_retry_successors(summaries)
+        retry_history = [{"attempt_id": parent, "superseded_by": child,
+                          "retry_of": deepcopy(summaries[child]["retry_of"]),
+                          "receipt": f"reports/forge/technique-receipts/{parent}.json",
+                          "retry_receipt": f"reports/forge/technique-receipts/{child}.json",
+                          "original_task_costs": {row["task_id"]: deepcopy(row.get("cost", {}))
+                                                  for row in summaries[parent]["task_results"]}}
+                         for parent, child in sorted(successors.items())]
+        for attempt, summary in summaries.items():
+            if attempt in successors:
+                continue
+            path = Path("reports/forge/technique-receipts") / (attempt + ".json")
             for result in summary.get("task_results", []):
                 # Grades belong to the selected scientific row. Compact metrics
                 # enrich its navigation only; a receipt never creates a pass.
@@ -452,6 +531,8 @@ def build_progress(root: Path, publication: dict) -> dict:
                                                            for item in separate],
                                    "tiers": {tier: _sum([view["tiers"][tier] for view in view_rows]) for tier in TIERS},
                                    "total": _sum([view["total"] for view in view_rows])})
+        if retry_history:
+            family["cohorts"][-1]["retry_history"] = retry_history
     documented, tag_definitions = family_documentation.load_family_documentation(root, families, load)
     for family in families.values():
         family.update(documented.get(family["id"], {"tags": [], "documentation": None}))
@@ -713,6 +794,11 @@ def render_family(root: Path, publication: dict, family: dict) -> str:
         lines += ["", "(*) means at least one required experiment has no recorded execution, including preflight blockers. "
                   "PASS and FAIL both count as executed. Attempted errors retain their status and cause; "
                   "test-definition compatibility is shown separately and does not add (*).", ""]
+        for repair in cohort.get("retry_history", []):
+            lines += ["Certified execution repair: " +
+                      link(root, page, repair["attempt_id"], repair["receipt"]) + " → " +
+                      link(root, page, repair["superseded_by"], repair["retry_receipt"]) +
+                      ". The original outcome and cost remain recorded; displayed task metrics use the certified successor.", ""]
         for tier in TIERS:
             members = {}
             for definition in progress["views"]:

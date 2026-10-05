@@ -4,6 +4,23 @@ This branch tests optimizer changes on the current **BCAP pure** recipe through 
 unchanged public API and full current Tier 1. The user selected this focused
 stage before the larger native, regularizer, seed and scale-transfer study.
 
+**Completed:** none of the seven new optimizer options improves the current
+Adam control's 3/6 required Tier 1 PASS count. Global/tensor nSGDA, zero-momentum
+dualnorm and prior-only normalization tie it; SGDA, the magnitude graft and
+D-only dualnorm reach 2/6. All 41 configurations and independent current-tier
+peers are terminal. Five SGDA numerical failures remain INCOMPLETE, and one
+environment repair retains its superseded original receipt and cost.
+
+The strongest acquisition tradeoff is full dualnorm with mu=0, eta=.01: ring
+16/16 modes with HQ=.93018 versus Adam's .82275, and word acquisition PASS.
+Its two-pole sustained gate fails, so the whole recipe remains 3/6; ring's
+complete gate also fails. No default promotion or additional training follows.
+See [FINDINGS](../../../FINDINGS.md), [compact analysis](analysis.json),
+[final results](results.json), [verified training GIFs](media.json),
+[artifact provenance](artifact-inventory.json), and
+[software verification](software-verification.json). The exact existing Adam
+selection is retained, with seven new measurement pins in the current leaderboard.
+
 The finite screen contains **41 global configurations**: five Adam rates, five
 plain SGDA rates spanning four decades, four global-normalized rates, four
 tensor-normalized rates, four Adam-magnitude graft rates, four dualnorm rates
@@ -63,10 +80,14 @@ Tier 1 observations can motivate them, but cannot confirm or falsify the stated
 five-seed claims. R1/R2, 7k native100, sparse177, confirmation and width/depth
 transfer remain explicitly deferred until a promising supported arm exists.
 
-The commands below describe the executed workflow. To reproduce its numerical
-cohort, use the recorded commit above and a fresh local queue. A future study
-using the observer/API corrections must record its own source identity; these
-results do not qualify the final PR's corrected implementation.
+The commands below describe the executed workflow. Training uses the recorded
+commit above and a fresh local queue. The final PR supplies `analyze.py`,
+`export_media.py` and `select_measurements.py` separately; those read-only
+reporting helpers did not exist at the training commit and are excluded from
+the captured scientific manifest. Run them from the final PR checkout against
+the saved queue and hydrated original receipts. A future study using the
+observer/API corrections must record its own source identity; these results
+do not qualify the final PR's corrected implementation.
 
 Run after committing the scientific source, from the project environment:
 
@@ -78,6 +99,12 @@ python -u reports/forge/dualnorm-tier1/run.py run --queue-root "$PWD/runs/forge/
 tail -F runs/forge/bcap-dualnorm-tier1-v1-queue/driver.log runs/forge/bcap-dualnorm-tier1-v1-queue/events.jsonl
 python reports/forge/dualnorm-tier1/run.py report --queue-root "$PWD/runs/forge/bcap-dualnorm-tier1-v1-queue"
 python reports/forge/dualnorm-tier1/run.py media --queue-root "$PWD/runs/forge/bcap-dualnorm-tier1-v1-queue"
+```
+
+Using the final PR's reporting helpers after training:
+
+```sh
+.venv/bin/python reports/forge/dualnorm-tier1/analyze.py --queue-root "$PWD/runs/forge/bcap-dualnorm-tier1-v1-queue"
 python reports/forge/dualnorm-tier1/run.py archive --queue-root "$PWD/runs/forge/bcap-dualnorm-tier1-v1-queue"
 ```
 
@@ -105,6 +132,15 @@ observations and add no sampling or optimizer updates. The final archive receipt
 records exact member hashes and preserves original failures. Compact reports,
 provenance, reproduction sources and GIFs may be committed; raw logs, JSONL,
 states and checkpoints remain local or in the artifact archive.
+
+`analyze.py` reads the completed frozen results, preserves the six required task
+outcomes and separate attempt history, and produces compact comparisons and
+diagnostic plots. It performs no training or qualification. The archive also
+retains raw software validation stdout, JUnit, collection and source records,
+media export/verification logs and progress, and the compact software receipt.
+Its member hashes cover the exact bytes consumed by the archive writer, and
+creation refuses to overwrite an existing archive. Archive after workers, media
+verification and final software records have finished writing.
 
 To resume already admitted work after an interruption, drain its existing
 immutable requests rather than enqueue against changed source:
