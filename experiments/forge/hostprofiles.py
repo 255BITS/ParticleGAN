@@ -94,7 +94,17 @@ def _validate_task(task, candidate, root, *, explicit_initializer=True):
         else:
             from .vectorprofiles import resolve_vector_spec
             spec = resolve_vector_spec(task, root=root)
-        if execution["steps"] != spec["steps"]:
+        budget_diagnostic = None
+        if adapter == "transfer_vector":
+            from .vector_budget_diagnostics import validate, validate_original
+            budget_diagnostic = validate(task)
+            if budget_diagnostic:
+                # A named diagnostic may execute longer only after preserving
+                # the frozen parent host, original schedule and all 24 checks.
+                # Recheck the original source in this snapshot at admission and
+                # dispatch; cached planning blockers grant no exception.
+                validate_original(task, root=root)
+        if execution["steps"] != spec["steps"] and not budget_diagnostic:
             raise ValueError("execution budget differs from the explicit host card")
         resources = {"num_particles": spec["particles"], "z_dim": spec["z_dim"],
                      "batch_size": spec["batch_size"] if adapter == "transfer_image" else spec["batch"]}

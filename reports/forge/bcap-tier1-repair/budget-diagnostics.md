@@ -25,6 +25,13 @@ and samples against actual unextended public-API runs. Preflight checks the
 source-bound original task card and rejects changes to its host, prior,
 initialization, scorer, sampling law or bounds.
 
+Queue admission and dispatch repeat those checks against the frozen source
+snapshot before accepting the longer execution budget. An unmarked mismatch or
+changed schedule, original cadence, architecture, prior or numerical bound is
+rejected even when a caller recomputes job hashes. Admission tests call the actual
+`Queue.submit` path and verify that it constructs no model, launches no attempt
+and reserves or charges no training time.
+
 Use the separately scoped `bcap_budget_diagnostics_v1` view with the campaign's
 registered candidate and shared queue. Inspect the cost before enqueueing:
 

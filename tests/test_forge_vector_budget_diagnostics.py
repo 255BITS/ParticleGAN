@@ -3,6 +3,7 @@ from copy import deepcopy
 import json
 import math
 from pathlib import Path
+import shutil
 
 import pytest
 import torch
@@ -182,3 +183,74 @@ def test_stretched_schedule_or_incomplete_actual_training_cannot_pass(field, val
     evidence = passing_evidence(task)
     evidence["budget_diagnostic"][field] = value
     assert grade_result(task, {"evidence": evidence})["gate_status"] == "INVALID"
+
+
+def frozen_budget_request(tmp_path, identifier):
+    """Use the production queue and host boundary, with no training worker."""
+    from test_forge_hostprofiles import prospective, bind_candidate, rebind
+    from experiments.forge.sources import inspect_source, snapshot_source
+
+    task = load_tasks(ROOT)[identifier]
+    req = prospective(tmp_path, [task])
+    relative = f"configs/forge/tasks/{task['execution']['budget_diagnostic']['original_task']}.json"
+    checkout = tmp_path / "worktree"
+    target = checkout / relative
+    target.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copyfile(ROOT / relative, target)
+    files = set(req["source"]["files"]) | {relative}
+    source = inspect_source(checkout, files)
+    source["snapshot_path"] = str(snapshot_source(checkout, tmp_path / "queue", source))
+    req["source"] = source
+    bind_candidate(req)
+    rebind(req)
+    return req
+
+
+@pytest.mark.parametrize("identifier", IDS)
+def test_actual_queue_admission_accepts_valid_frozen_budget_extension_without_training(tmp_path, monkeypatch, identifier):
+    from experiments.forge.queue import Queue
+    from test_forge_queue import campaign
+
+    req = frozen_budget_request(tmp_path, identifier)
+    def forbidden(*args, **kwargs):
+        raise AssertionError("admission must not construct models or train")
+    monkeypatch.setattr("experiments.forge.api.FormulationContext.construct", forbidden)
+    queue = Queue(tmp_path / "queue")
+    assert queue.submit(req, campaign("budget-extension", budget=1560))["status"] == "queued"
+    state = queue.inspect()
+    assert all(not job["attempts"] and job["status"] == "pending" for job in state["jobs"].values())
+    assert state["campaigns"]["budget-extension"]["spent_seconds"] == 0
+    assert state["campaigns"]["budget-extension"]["reserved_seconds"] == 0
+
+
+@pytest.mark.parametrize("mutation", ["unmarked", "horizon", "cadence", "host_steps", "host_width", "thresholds", "prior", "source_pin"])
+def test_budget_exception_cannot_bypass_actual_queue_host_locks_even_with_rehashed_jobs(tmp_path, mutation):
+    from experiments.forge.queue import Queue
+    from test_forge_hostprofiles import rebind
+    from test_forge_queue import campaign
+
+    req = frozen_budget_request(tmp_path, IDS[0])
+    task = req["tasks"][IDS[0]]
+    if mutation == "unmarked":
+        task["execution"].pop("budget_diagnostic")
+        task["evaluation"]["kind"] = "transfer_sustained"
+    elif mutation == "horizon":
+        task["execution"]["original_schedule_horizon"] = 3000
+    elif mutation == "cadence":
+        task["evaluation"]["observation_steps"][0] += 1
+    elif mutation == "host_steps":
+        task["execution"]["host_definition"]["steps"] = 3000
+    elif mutation == "host_width":
+        task["execution"]["host_definition"]["hidden"] = 64
+    elif mutation == "thresholds":
+        task["evaluation"]["thresholds"][-1][-1] = .5
+    elif mutation == "prior":
+        task["execution"]["prior"]["sigma"] = .05
+    else:
+        relative = f"configs/forge/tasks/{task['execution']['budget_diagnostic']['original_task']}.json"
+        task["evaluation"]["sources"][relative] = "0" * 64
+    rebind(req)
+    queue = Queue(tmp_path / "queue")
+    with pytest.raises(ValueError, match="host profile blocked"):
+        queue.submit(req, campaign("budget-extension", budget=1560))
+    assert not (queue.root / "queue/state.json").exists()
