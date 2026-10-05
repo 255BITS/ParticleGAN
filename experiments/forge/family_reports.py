@@ -485,7 +485,7 @@ def render_leaderboard(root: Path, publication: dict, page: Path) -> str:
              "Each family/runtime uses one complete selected configuration and source.", "",
              "Family totals sum the view rows. A shared experiment counts once per view requiring it; "
              "these totals measure requirements across views, not unique training runs or scientific rank.", "",
-             *_full_original_atlas_status(root, page, progress), *_table_header()]
+             *_table_header()]
     for family in progress["families"]:
         for cohort in family["cohorts"]:
             name = family["label"]
