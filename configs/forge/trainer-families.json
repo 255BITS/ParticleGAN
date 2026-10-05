@@ -211,6 +211,20 @@
         "native-adam",
         "selectable-loss"
       ]
+    },
+    {
+      "candidates": [
+        "halloween-optimizer-loss-v1"
+      ],
+      "canonical_candidate": "halloween-optimizer-loss-v1",
+      "id": "halloween",
+      "label": "Halloween optimizer/loss transfer",
+      "rationale": "Explicit dense legacy-Adam and [-1,1,1] least-squares transfer. Unmeasured; original HyperGAN execution and schedule remain unbound.",
+      "tags": [
+        "adversarial-training",
+        "constant-learning-rate",
+        "tensorflow-v1-adam"
+      ]
     }
   ],
   "historical_families": [

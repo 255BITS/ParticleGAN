@@ -335,7 +335,8 @@ def test_registry_groups_gan_v3_task_priors_and_keeps_original_historical_identi
     registry = families.load_families(ROOT)
     retained = {"r1r2", "bcap", "k3p", "ka2", "e22", "atlas", "release07-gan-v3",
                 "k3p-no-anchor", "k3p-no-penalty", "k3p-no-a2", "k3p-no-training-noise"}
-    assert set(registry) == retained | {"bcap-pure"}
+    assert set(registry) == retained | {"bcap-pure", "halloween"}
+    assert registry["halloween"]["canonical_candidate"] == "halloween-optimizer-loss-v1"
     assert registry["bcap-pure"]["canonical_candidate"] == "bcap-pure-adam-v2"
     assert set(registry["bcap-pure"]["candidates"]).isdisjoint(registry["bcap"]["candidates"])
     assert families.family_for_candidate(ROOT, "bcap-pure-adam-v1")["id"] == "bcap-pure"

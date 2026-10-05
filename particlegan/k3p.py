@@ -630,8 +630,10 @@ class CriticPenalty:
     """
 
     def __init__(self, recipe, optimizer, *, output=None, collect_stats=False, **penalty_overrides):
+        from .tensorflow_adam import TensorFlowV1Adam
         if not (isinstance(optimizer, K3PCriticAdam) or (
-                type(optimizer) is torch.optim.Adam and getattr(optimizer, "recipe_optimizer_family", None) == "adam")):
+                type(optimizer) in (torch.optim.Adam, TensorFlowV1Adam)
+                and getattr(optimizer, "recipe_optimizer_family", None) == "adam")):
             raise TypeError("optimizer must come from recipe.make_critic_optimizer or recipe.make_optimizers")
         self.recipe, self.optimizer, self.critic = recipe, optimizer, optimizer.critic
         options = recipe._penalty_options(**penalty_overrides)

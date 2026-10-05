@@ -812,7 +812,7 @@ tracks device and dtype.
 ### `GANLoss`
 
 ```python
-gan = recipe.make_loss()  # GANLoss(recipe.loss); default: paired logistic RpGAN
+gan = recipe.make_loss()  # GANLoss(recipe.loss, labels=recipe.loss_labels)
 recipe = get_recipe("bcap", loss="hinge", lr=.0010625)
 gan = recipe.make_loss()
 ```
@@ -833,6 +833,12 @@ scores, and `mean` averages each score tensor independently except for paired
 | `hinge` | `mean(relu(1-r)) + mean(relu(1+f))` | `-mean(f)` |
 | `wasserstein` | `mean(f) - mean(r)` | `-mean(f)` |
 | `least_squares` | `(mean((r-1)**2) + mean(f**2))/2` | `mean((f-1)**2)/2` |
+
+Least squares accepts `loss_labels=(fake, real, generator)`, default `(0,1,1)`.
+For `(a,b,c)`, D minimizes `(mean((r-b)**2)+mean((f-a)**2))/2` and G minimizes
+`mean((f-c)**2)/2`. `joint_g_loss` also reverses the real-stream target to `a`.
+Use `GANLoss("least_squares", labels=(-1,1,1))` or the corresponding Recipe
+field; nondefault labels on other objectives are rejected.
 
 Only `relativistic` requires real scores in `g_loss`, paired row by row. The
 other losses ignore that optional argument. Recompute D's scores after updating
@@ -1029,10 +1035,11 @@ examples, gradient caveats, DDGAN integration and measured evidence.
 ```python
 get_recipe("gan", **overrides) # Named components, current shared hyperparameters.
 get_recipe("bcap", loss="hinge", lr=.0010625) # Fixed BCAP, native Adam, constant rates.
+get_recipe("halloween", **overrides) # Explicit historical optimizer/loss transfer.
 get_recipe("e22", **overrides) # Schedule-free E22 policy, explicit task settings.
 get_recipe("e22_routed", **overrides) # Conditional dense-bank paired adaptation.
 recipe.replace(**overrides)   # A new immutable Recipe.
-recipe.to_dict()              # Complete resolved fields.
+recipe.to_dict()              # Restorable fields; compatible defaults stay implicit.
 Recipe(**resolved_dict)       # Restore explicit fields from a saved run.
 ```
 
@@ -1052,6 +1059,7 @@ and fields are rejected. Restore a complete saved configuration with
 | --- | --- |
 | `gan` (default) | Scalar GAN, 20,000 particles, latent dimension 2, no sampling noise |
 | `bcap` | Scalar GAN, 20,000 particles, latent dimension 2; pure fixed BCAP and native Adam at constant rates |
+| `halloween` | Scalar GAN; distinct G/D rates, moments and epsilon, dense TensorFlow-v1 Adam, least-squares labels `(-1,1,1)`, constant rates and zero critic penalty |
 | `e22` | Scalar GAN, 20,000 particles, latent dimension 2, batch 2,048; E22 controls with learned output noise initially .029 |
 | `e22_routed` | Same E22 controls with `row_policy="routed_paired"`; requires explicit context/routing/feature callbacks and guard observations |
 | `mog` | GAN, 400 MoG components, latent dimension 2, relative sigma .025 |
@@ -1066,6 +1074,12 @@ distance and temperature .125; the others use sum distance and temperature .25.
 These component choices retain the original API's model-family structure with
 the new shared hyperparameters. The GAN development-suite evidence does not
 establish convergence of those hyperparameters for every AE/VAE/DDGAN setup.
+
+`halloween` transfers the optimizer/loss sections of an archived HyperGAN
+configuration. Its architecture, auxiliary loss, original runtime and decay
+clock are unbound. The preset makes its constant rates and learned-prior
+settings explicit; it has no trained qualification. See the
+[search-space and transfer guide](forge-search-spaces.md) for the exact scope.
 
 E22's task inputs are `num_particles`, `z_dim`, `batch_size` and
 `output_noise_std`; set them explicitly for a new task. Its default
@@ -1125,7 +1139,11 @@ opt_g, opt_d = recipe.make_optimizers(G, D, prior)
 | `z_dim`, `num_particles` | `2`, `20_000` |
 | `prior_kind`, `sigma_rel`, `standardize` | `particles`, `0`, `True` (standardize applies only to MoG) |
 | `lr`, `d_lr_mult`, `prior_lr_mult` | `.00425`, `1`, `2` |
-| `betas`, `prior_betas` | `(0, .999)`, `None` (inherit betas) |
+| `betas`, `d_betas`, `prior_betas` | `(0, .999)`, `None`, `None` (role overrides inherit shared betas) |
+| `eps`, `d_eps`, `prior_eps` | `1e-8`, `None`, `None` (role overrides inherit shared epsilon) |
+| `adam_variant`, `loss_labels` | `pytorch`, `(0,1,1)` |
+| `lr_schedule` | `cosine` (also `constant`, `exponential`) |
+| `lr_decay_rate`, `lr_decay_steps`, `lr_decay_staircase` | `.96`, `50000`, `False` (exponential schedule only) |
 | `loss` | `relativistic` (also `non_saturating`, `hinge`, `wasserstein`, `least_squares`) |
 | `critic_formulation`, `reg_arm` | `ka2`, `None` (`k3p`, `a_r1r2`, `b_cap` explicitly select legacy K3P/fixed penalties) |
 | `reg_coeff`, `reg_kappa` | `1`, `1` (critic penalty strength and cap) |
@@ -1149,7 +1167,7 @@ caller.
 | Optional factory | Result |
 | --- | --- |
 | `recipe.make_prior(**kwargs)` | Prior selected by `prior_kind`, tables drawn at random ([initialize](#initializing-priors) for R2) |
-| `recipe.make_loss()` | `GANLoss(recipe.loss)` (default RpGAN logistic) |
+| `recipe.make_loss()` | `GANLoss(recipe.loss, labels=recipe.loss_labels)` (default RpGAN logistic) |
 | `recipe.make_optimizers(G, D, prior=None, *, encoder=None, ema_critic=None, **adam_kwargs)` | Build `(opt_g, opt_d)` over the weights as given (see below) |
 | `recipe.make_critic_optimizer(D, *, ema_critic=None, **adam_kwargs)` | Adam for one (additional) critic (see below) |
 | `recipe.make_generator_optimizer(params, *, latent_table=None, direct_particles=None, **adam_kwargs)` | Adam for generator-side params (see below) |
@@ -1212,7 +1230,9 @@ torch.save({"G": G.state_dict(), "D": D.state_dict(), "D2": D2.state_dict(),
 Factory keyword arguments override constructor values for that call, without
 changing the recipe. Optimizers exclude frozen parameters; G and prior have
 separate groups at `lr` and `lr * prior_lr_mult`, while D uses `lr * d_lr_mult`.
-`prior_betas` optionally overrides Adam betas for the prior group only.
+`d_betas` / `d_eps` override D's shared settings; `prior_betas` / `prior_eps`
+override the learned-prior group. G/E use shared `betas` / `eps`. Explicit
+factory kwargs and parameter-group settings override those recipe values.
 Set `prior_kind="mog"`, `sigma_rel` and `standardize` through the recipe, or
 override them locally in `make_prior`. Nonzero sigma with the atoms kind is rejected.
 If G contains the supplied prior, its parameters are included only once.
@@ -1220,6 +1240,16 @@ Additional Adam options such as `fused=True` or `eps=1e-8` are passed to both
 optimizers; configure learning rates and betas through the recipe. You can
 still construct optimizers yourself, including separate prior optimizers or
 additional parameter groups for learned noise.
+
+`adam_variant="tensorflow_v1"` uses the named `TensorFlowV1Adam` dense update
+law, adding epsilon before second-moment bias correction. Checkpoints include
+optimizer application clocks, beta powers and moments. It rejects changing
+betas, sparse/complex gradients, weight decay, AMSGrad and accelerated modes.
+Recipe optimizers reject loading this variant's checkpoint into native Adam.
+`lr_schedule="exponential"` counts completed whole training updates and uses
+`lr_decay_rate ** (step / lr_decay_steps)`, or an integer exponent with
+`lr_decay_staircase=True`; network and prior share that multiplier. `constant`
+holds it at one. These schedules do not rescale with an execution budget.
 
 `learning_rate_scale(step, total_steps, start=.6, floor=.05)` returns a Python
 float: hold 1, then cosine decay to `floor`. `step` counts completed updates

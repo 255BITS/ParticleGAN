@@ -70,7 +70,8 @@ def _probe(recipe, name):
                                     initial_observed_optimizer_steps=max(1, recipe.reg_every - 1))
     else:
         parameter = nn.Parameter(torch.zeros(4, 1, dtype=torch.float64))
-        options = ({"latent_table": parameter, "betas": recipe.prior_betas or recipe.betas}
+        options = ({"latent_table": parameter, "betas": recipe.prior_betas or recipe.betas,
+                    "eps": recipe.eps if recipe.prior_eps is None else recipe.prior_eps}
                    if name == "a2" else {"direct_particles": [parameter]})
         optimizer = recipe.make_generator_optimizer([parameter], **options)
         parameter.grad = torch.zeros_like(parameter)

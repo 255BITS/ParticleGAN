@@ -1,5 +1,13 @@
 # HyperGAN / Hyperchamber audit of Forge configuration search
 
+The recommendations are now implemented in this PR. See the
+[implementation readout](IMPLEMENTATION.md) and
+[implementation guide](../../../docs/forge-search-spaces.md) for public role
+settings, historical loss/Adam variants and bounded categorical search
+compilation. The findings and receipts below retain the original audit scope
+at `0115a92f`; reproduce its software script from audit commit `f3100080`.
+They do not describe the newly added interfaces or confer trained qualification.
+
 Audited 2026-10-05 against `develop` commit
 `0115a92f68dbf9bdcdf9e4f7bfea0fff8606e752`, in a separate feature worktree.
 
@@ -306,7 +314,8 @@ runtime and source hashes. [external-sources.json](external-sources.json)
 pins inspected external source files and their byte hashes; these are reference
 snapshots, not inferred historical execution receipts.
 
-From this branch's root:
+From a checkout of the original audit commit `f3100080` (the script retains its
+original rejection checks):
 
 ```sh
 mkdir -p runs/forge/hypergan-search-audit
