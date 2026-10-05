@@ -1,0 +1,152 @@
+{
+  "execution_group": null,
+  "grade": {
+    "evaluator_result": {
+      "attempted": true,
+      "confirmation_fraction": 0.376,
+      "convergence": {
+        "complete": true,
+        "confirmed_seconds": null,
+        "confirmed_step": 94,
+        "first_pass_step": 53,
+        "minimum_stable_checks": 5,
+        "observations": 24,
+        "passing_observations": 20,
+        "passing_suffix": 20,
+        "stable_from_seconds": null,
+        "stable_from_step": 53
+      },
+      "metrics": [
+        {
+          "margin": 0.045602027978748086,
+          "metric": "recon_mse",
+          "op": "<=",
+          "status": "PASS",
+          "threshold": 0.05,
+          "value": 0.004397972021251917
+        },
+        {
+          "margin": 0.34624042236246166,
+          "metric": "hold",
+          "op": "<=",
+          "status": "PASS",
+          "threshold": 0.35,
+          "value": 0.003759577637538314
+        }
+      ],
+      "passed": true,
+      "shortfall": 0.0,
+      "status": "PASS"
+    },
+    "gate_status": "PASS",
+    "metrics": {
+      "hold": 0.003759577637538314,
+      "recon_mse": 0.004397972021251917
+    },
+    "reasons": [
+      "recomputed complete live curve and terminal suffix"
+    ],
+    "status": "PASS"
+  },
+  "raw_task_grades": {
+    "ae_gan_hold": {
+      "evaluator_result": {
+        "attempted": true,
+        "confirmation_fraction": 0.376,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 94,
+          "first_pass_step": 53,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 20,
+          "passing_suffix": 20,
+          "stable_from_seconds": null,
+          "stable_from_step": 53
+        },
+        "metrics": [
+          {
+            "margin": 0.045602027978748086,
+            "metric": "recon_mse",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.05,
+            "value": 0.004397972021251917
+          },
+          {
+            "margin": 0.34624042236246166,
+            "metric": "hold",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.35,
+            "value": 0.003759577637538314
+          }
+        ],
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "hold": 0.003759577637538314,
+        "recon_mse": 0.004397972021251917
+      },
+      "reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "status": "PASS"
+    }
+  },
+  "schema": "pg_common26_full_atlas_grade_projection_v1",
+  "task_grades": {
+    "ae_gan_hold": {
+      "evaluator_result": {
+        "attempted": true,
+        "confirmation_fraction": 0.376,
+        "convergence": {
+          "complete": true,
+          "confirmed_seconds": null,
+          "confirmed_step": 94,
+          "first_pass_step": 53,
+          "minimum_stable_checks": 5,
+          "observations": 24,
+          "passing_observations": 20,
+          "passing_suffix": 20,
+          "stable_from_seconds": null,
+          "stable_from_step": 53
+        },
+        "metrics": [
+          {
+            "margin": 0.045602027978748086,
+            "metric": "recon_mse",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.05,
+            "value": 0.004397972021251917
+          },
+          {
+            "margin": 0.34624042236246166,
+            "metric": "hold",
+            "op": "<=",
+            "status": "PASS",
+            "threshold": 0.35,
+            "value": 0.003759577637538314
+          }
+        ],
+        "passed": true,
+        "shortfall": 0.0,
+        "status": "PASS"
+      },
+      "gate_status": "PASS",
+      "metrics": {
+        "hold": 0.003759577637538314,
+        "recon_mse": 0.004397972021251917
+      },
+      "reasons": [
+        "recomputed complete live curve and terminal suffix"
+      ],
+      "status": "PASS"
+    }
+  }
+}
