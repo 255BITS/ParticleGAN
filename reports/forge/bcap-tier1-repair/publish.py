@@ -135,7 +135,8 @@ def archive(destination):
     atomic_json(REPORT / "archive.json", {"schema_version": 1, "scope": "exact_original_execution_artifacts",
         "archive": {"path": str(destination), "sha256": file_hash(destination), "bytes": destination.stat().st_size},
         "attempt_ids": sorted(attempts), "source_digests": sorted(sources),
-        "executed_commits": sorted({s["origin_commit"] for s in sources.values()}),
+        "executed_commits": sorted({entry["request"]["source"]["origin_commit"]
+            for entry in state["submissions"].values()}),
         "members": manifest, "verification": "all original member hashes independently verified",
         "qualification_input": False})
     emit("repair_archived", path=str(destination), attempts=len(attempts), bytes=destination.stat().st_size)

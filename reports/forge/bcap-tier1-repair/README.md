@@ -65,8 +65,9 @@ from **4.457 to 3.027**, still above .85, and minimum spread remains below .15.
 Original checkpoints were not retained, so the exact sample/metric prefix proof
 does not establish complete original optimizer/RNG-state parity.
 
-The shorter-memory search improves some final ring covariances (best **1.385**)
-and restores movement. It does not deliver sustained acquisition or joint-word
+The shorter-memory search improves some final ring covariances (best **1.385**).
+Movement recovery is consistent with restoring the global LR; direct-coordinate
+Adam betas remain unchanged. The search does not deliver sustained acquisition or joint-word
 stability. Several endpoints pass individual checks while the terminal window
 fails; final metrics alone cannot substitute for the certified gate.
 
