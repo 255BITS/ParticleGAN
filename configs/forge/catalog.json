@@ -39,7 +39,7 @@
       "experiment/toy": 3,
       "experiment/trajectory": 2,
       "experiment/transition": 7,
-      "forge_engine": 79,
+      "forge_engine": 80,
       "lrfree/feature-cells-cb64-ra": 4058,
       "report/atlas-explanation": 7,
       "report/behavioral_baseline": 32,
@@ -102,7 +102,7 @@
       "candidate_patch": 26,
       "configuration": 807,
       "driver": 401,
-      "engine_support": 79,
+      "engine_support": 80,
       "evaluator_or_audit": 324,
       "evidence_artifact": 1574,
       "frozen_candidate_implementation": 15,
@@ -116,13 +116,13 @@
       "visualization": 22,
       "visualization_artifact": 723
     },
-    "files": 11758
+    "files": 11759
   },
   "coverage": {
-    "declared_count": 11758,
+    "declared_count": 11759,
     "missing": [],
     "stale": [],
-    "tracked_count": 11758,
+    "tracked_count": 11759,
     "unclassified": [],
     "valid": true
   },
@@ -7350,6 +7350,13 @@
       "family": "forge_engine",
       "git_blob": "0080b8bb1b99267d0eff477219270d9ce250037c",
       "path": "experiments/forge/execution_policy.py",
+      "role": "engine_support",
+      "suggested_tiers": []
+    },
+    {
+      "family": "forge_engine",
+      "git_blob": "7f7adfc26f612798046c138e008b28cecd7d71df",
+      "path": "experiments/forge/family_documentation.py",
       "role": "engine_support",
       "suggested_tiers": []
     },

@@ -1,0 +1,15 @@
+{
+  "tags": {
+    "adversarial-training": "Trains a generator against a critic; task-owned auxiliary objectives may also apply.",
+    "critic-gradient-penalty": "Uses a penalty on critic input gradients; its formula and strength are configuration-specific.",
+    "capped-input-gradients": "Penalizes critic input-gradient norms above a threshold on real and generated inputs; this is a soft loss penalty.",
+    "native-adam": "Uses native Adam without formulation-specific optimizer interventions.",
+    "constant-learning-rate": "Declared baseline uses constant learning rates; resolved per-role rates remain configuration-specific.",
+    "selectable-loss": "The family explicitly supports multiple adversarial loss formulations.",
+    "optimizer-interventions": "Includes formulation-specific interventions around optimizer steps; availability depends on the host and resolved recipe.",
+    "adaptive-training-policy": "Uses an observation-driven training policy rather than a fixed update schedule.",
+    "structural-ablation": "Removes a named mechanism from a parent technique and retains a separate evidence identity.",
+    "historical-cohort": "A retained historical family with its original source, prior and scoring contracts.",
+    "learning-rate-annealing": "Declared baseline decreases learning rates during training; horizons and floors are configuration-specific."
+  }
+}

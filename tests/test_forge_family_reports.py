@@ -208,9 +208,12 @@ def test_leaderboard_clicks_resolve_to_family_tiers_including_empty_tiers(report
     assert "**[3(*)/5]" in text and "↳ [alpha]" in text
     table = text.split("| --- | ---: | ---: | ---: | ---: |", 1)[1].split("\n\n", 1)[0]
     for target in re.findall(r"\]\(([^)]+)\)", table):
-        filename, fragment = target.split("#")
+        filename, _, fragment = target.partition("#")
         assert filename.startswith("families/")
-        assert f'<a name="{fragment}"></a>' in (overview.parent / filename).read_text()
+        if fragment:
+            assert f'<a name="{fragment}"></a>' in (overview.parent / filename).read_text()
+        else:
+            assert "## Technique overview" in (overview.parent / filename).read_text()
     assert "**[2/2]" in text  # A complete Tier 1 has no incomplete marker.
     assert publication["family_progress"] == build_progress(root, publication)
     assert pages == generated_pages(root, publication)

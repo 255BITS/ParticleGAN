@@ -1,8 +1,71 @@
 <!-- Generated Forge family report -->
 
-# BCap — experiment results
+# BCAP with K3P
 
 [← Family leaderboard](../technique-inventory.md)
+
+**Tags:** [adversarial-training](../technique-inventory.md#tag-adversarial-training) · [capped-input-gradients](../technique-inventory.md#tag-capped-input-gradients) · [critic-gradient-penalty](../technique-inventory.md#tag-critic-gradient-penalty) · [optimizer-interventions](../technique-inventory.md#tag-optimizer-interventions)
+
+## Technique overview
+
+BCAP with K3P replaces the K3P critic penalty with the fixed BCAP real/fake gradient cap, while retaining the K3P training machinery. It therefore combines a simple cap loss with scheduled learning rates, a critic gradient-spike guard, sparse latent-row damping and the declared training noise.
+
+## Simplified pseudocode
+
+G is the generator; D is the raw-score critic; P is the learnable prior; x is real data; z is a prior sample; y=G(z) is generated data. mean averages samples, norm is the per-sample L2 norm, relu(a)=max(a,0), softplus(a)=log(1+exp(a)). lambda is penalty strength and kappa its gradient-norm threshold. stop_gradient freezes a value for the current update. A2 is sparse latent-row damping: it reduces a row’s Adam response when its gradient disagrees with the last observed gradient and row coverage is sparse.
+
+```text
+For each training update:
+  Apply the declared split cosine learning-rate schedules to network and prior parameter groups.
+  Wrap D so each forward adds fresh scheduled critic-input noise.
+  Sample real x and latent z; form fake y=G(z) with declared generated-output training noise.
+  Critic objective = mean softplus(D(stop_gradient(y))-D(x)) + BCAP.
+  BCAP = lambda/2 * [mean(relu(norm(grad_x D(x))-kappa)^2) + mean(relu(norm(grad_y D(y))-kappa)^2)].
+  For penalty derivatives, detach samples from G and treat them as differentiable critic inputs; the penalty updates D only.
+  Backpropagate; after the guard warmup, shrink each critic tensor’s gradient if its RMS exceeds the configured multiple of Adam’s historical RMS.
+  Take the K3P critic Adam step. The BCAP penalty does not use K3P’s early/late penalty blend or EMA anchor.
+  With D fixed, resample latent z and recompute differentiable fake y and both critic scores.
+  Generator objective = mean softplus(D(x)-D(y)) + task-owned auxiliary losses; backpropagate.
+  A2 is active only for an eligible latent table when some rows have zero gradient and the cumulative observed-row fraction is below its configured threshold.
+  With Adam history, scale each active row response by 0.75+0.25*cos(current,last observed gradient); rows without gradient history use 1.
+  Take the K3P generator/prior Adam step; direct sample-particle hosts may use their declared coherent-gradient response gain.
+```
+
+## Training details
+
+| Characteristic | Behavior |
+| --- | --- |
+| Adversarial loss | Canonical paired relativistic logistic on raw critic scores: D minimizes mean softplus(D(fake)-D(real)); G minimizes the reverse. Host-owned auxiliary losses remain explicit. |
+| Optimizer | K3PCriticAdam and K3PGeneratorAdam, built through public recipe factories. Base Adam moments default to (0, 0.999); the wrappers apply critic guards and eligible latent/direct-particle interventions. |
+| Learning rates and annealing | Annealing is retained. Canonical network LR holds for 60% of min(task budget, 1600 steps), then cosine-decays to 1% and holds. Prior LR holds for 60% of the full task budget, then cosine-decays to 5%. Canonical global LR 0.00425, D multiplier 1, prior multiplier 2; recorded searches change role multipliers. Resolve the selected recipe for exact horizons/floors. |
+| Parameter-gradient clipping | Adaptive tensorwise critic gradient clipping via the spike guard: after at least 200 prior Adam steps per tensor, gradient RMS is limited to 5 times the bias-corrected second-moment RMS. This is separate from BCAP and is not a single global norm clip. |
+| Critic penalties and anchors | Fixed BCAP real/fake squared one-sided L2 cap; canonical lambda=1 and kappa=1, every update. The historical search includes lambda=0.5 alternatives. K3P’s LR-dependent penalty handover and EMA-anchor penalty are bypassed by reg_arm=b_cap. |
+| Damping and update guards | A2 requires an eligible sparse learnable latent table, some zero-gradient rows on the current update, and cumulative observed-row fraction below latent_damping_max_rate (canonical 0.5). When Adam state and row history exist, it scales the row response by 0.75+0.25*cos(current gradient, last observed gradient), within [0.5,1]; rows without history use 1. Adam’s second moment still tracks the raw gradient. Direct sample-particle hosts may additionally use coherent-gradient gain and dedicated moments; ordinary learned-prior networks do not automatically receive that gain. |
+| Training and sampling noise | Canonical recipe retains critic input noise, starting at std 0.5 and linearly decaying to zero over the first 10% of training, and generated-output noise warming toward std 0.029 over the first 20%. Task/source-specific adaptations determine actual served and training noise; clean and noisy cohorts remain separate. Critic-input noise is sampled afresh by the noise-wrapped critic on each forward, including penalty evaluation; generated-output noise is separately added to fake samples. |
+| Parameter averaging and serving | Canonical generator EMA decay=0.995 may be maintained by the host, but the card declares live-weight scoring. Fixed BCAP bypasses critic-anchor evaluation, even if an EMA critic copy exists in optimizer state. |
+
+## Configuration differences
+
+- The pseudocode describes the family mechanism; the selected configuration and each task determine architectures, initialization, prior, sampling, update count and task-owned auxiliary losses.
+- The cap is a soft penalty on gradients with respect to critic inputs, not a hard bound on model-parameter gradients. Its L2 norm is not divided by input dimension.
+- Configuration alternatives are complete recipes; passing cells from different recipes or sources are not combined.
+- BCAP with K3P is an editorial rename of family ID bcap; the candidate remains k3p-bcap-matched-v1. It is distinct from the native-Adam BCAP family (ID bcap-pure).
+- Canonical values describe the reusable baseline. Selected historical configurations can change penalty coefficient and role rates; source-bound measurement receipts remain authoritative.
+- The declared A2 capability may be blocked on an incompatible host; do not infer that damping ran merely from the family name.
+
+<details>
+<summary>Implementation and recipe sources</summary>
+
+These links support the explanation. Recorded results below remain bound to their own executed source.
+
+- [configs/forge/ideas/k3p-bcap-matched-v1.json](../../../configs/forge/ideas/k3p-bcap-matched-v1.json)
+- [configs/forge/searches/bcap-tier1-refresh-v1.json](../../../configs/forge/searches/bcap-tier1-refresh-v1.json)
+- [particlegan/recipes.py](../../../particlegan/recipes.py)
+- [particlegan/k3p.py](../../../particlegan/k3p.py)
+- [particlegan/grad_regularizers.py](../../../particlegan/grad_regularizers.py)
+- [particlegan/training.py](../../../particlegan/training.py)
+
+</details>
 
 Generated from one selected configuration per runtime. Recorded verdicts retain their original scientific contracts; grouping them under current views grants no new qualification.
 
@@ -2350,3 +2413,9 @@ python reports/forge/regenerate_technique_inventory.py
 ```
 
 This page is generated alongside the leaderboard. Register new source evidence before refreshing; editing a page cannot change a verdict or earn qualification.
+
+## References
+
+- [Adam: A Method for Stochastic Optimization](https://arxiv.org/abs/1412.6980). Base optimizer. Repository-specific guards and damping are separate mechanisms.
+- [The relativistic discriminator: a key element missing from standard GAN](https://arxiv.org/abs/1807.00734). Paired relativistic logistic objective; this implementation pairs scores, rather than subtracting batch-average scores.
+- [On the regularization of Wasserstein GANs](https://arxiv.org/abs/1709.08894). Related work on one-sided gradient penalties. The repository BCAP kernel uses real/fake inputs directly and is not a reproduction of this paper or its sampling scheme.

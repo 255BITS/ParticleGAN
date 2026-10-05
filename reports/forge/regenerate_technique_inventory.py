@@ -1745,9 +1745,63 @@ def _standalone_api_scores(root):
     return scores
 
 
+def _declaration_only_configuration(row):
+    """Allow saved unmeasured projections without allowing a measured grade."""
+    tasks = row.get("tasks", []) + row.get("nonrequired_tasks", [])
+    statuses = {task.get("status") for task in tasks}
+    unmeasured = {"UNKNOWN", "BLOCKED", "NOT_RUN"}
+    return (not row.get("attempt_ids") and row.get("qualified_tier", 0) == 0
+            and bool(statuses) and statuses <= unmeasured
+            and all(task.get("gate_status", task.get("status")) in unmeasured for task in tasks)
+            and row.get("status") not in {"PASS", "FAIL"}
+            and not any(tier.get("passed", 0) for tier in row.get("tiers", {}).values())
+            and not row.get("cost", {}).get("measured_tasks", 0)
+            and row.get("cost", {}).get("wall_seconds") in {None, 0})
+
+
+def _family_registry_structure(registry):
+    """Only labels and categorization tags are editable without reselection."""
+    value = deepcopy(registry)
+    for key in ("families", "historical_families"):
+        for family in value.get(key, []):
+            family.pop("label", None)
+            family.pop("tags", None)
+    return value
+
+
+def _previous_family_registry(root, result):
+    """Recover pre-metadata publications from their exact, bound Git source."""
+    previous = result.get("trainer_family_registry")
+    if previous is not None:
+        return previous
+    from experiments.forge.trainer_families import REGISTRY
+    try:
+        source = subprocess.check_output(["git", "show", "HEAD:" + REGISTRY.as_posix()], cwd=root,
+                                         stderr=subprocess.DEVNULL)
+    except (subprocess.CalledProcessError, FileNotFoundError):
+        return None
+    if hashlib.sha256(source).hexdigest() != result["provenance"].get("trainer_family_registry_sha256"):
+        return None
+    return json.loads(source)
+
+
+def _refresh_family_presentation(root, result, registry):
+    from experiments.forge.trainer_families import load_families
+    active = load_families(root)  # Retain existing registry structure validation.
+    historical = {family["id"]: family for family in registry.get("historical_families", [])}
+    for key, families in (("rows", active), ("historical_family_rows", historical)):
+        for row in result.get(key, []):
+            family = families.get(row.get("trainer_family"))
+            if family is not None:
+                row["technique"] = family["label"]
+    for name in result.get("trainer_families", {}):
+        if name in active:
+            result["trainer_families"][name] = deepcopy(active[name])
+
+
 def refresh_publication(root=REPOSITORY_ROOT, *, view_id="discriminator_stability"):
     """Refresh the same board while preserving every registered scientific row."""
-    from experiments.forge.trainer_families import CURRENT_SELECTION, REGISTRY, scientific_row_hash, select_family_rows
+    from experiments.forge.trainer_families import CURRENT_SELECTION, REGISTRY, scientific_row_hash
     from experiments.forge.views import load_view
     root = Path(root).resolve()
     manifest = read_json(root / EVIDENCE_MANIFEST)
@@ -1765,17 +1819,21 @@ def refresh_publication(root=REPOSITORY_ROOT, *, view_id="discriminator_stabilit
     if result["provenance"]["evidence_manifest_sha256"] != stable_hash(manifest):
         raise ValueError("registered evidence changed; use ordinary regeneration")
     selection_hash = result["provenance"].get("family_current_selection_sha256")
+    current_selection_hash = file_hash(root / CURRENT_SELECTION) if (root / CURRENT_SELECTION).is_file() else None
     registry_hash = file_hash(root / REGISTRY) if (root / REGISTRY).is_file() else None
     regroup = registry_hash != result["provenance"].get("trainer_family_registry_sha256")
-    if not regroup and selection_hash is not None and file_hash(root / CURRENT_SELECTION) != selection_hash:
+    if current_selection_hash != selection_hash:
         raise ValueError("family selection changed; use ordinary regeneration")
     registered = set()
     for entry in manifest["cohorts"]:
         _, rows = _snapshot(root, entry, manifest)
         registered.update(scientific_row_hash(row) for row in rows.values())
-    for key in ("rows", "configuration_rows", "evidence_rows"):
+    for key in ("rows", "evidence_rows"):
         if any(scientific_row_hash(row) not in registered for row in result.get(key, [])):
             raise ValueError("current publication contains an unregistered scientific row")
+    for row in result.get("configuration_rows", []):
+        if scientific_row_hash(row) not in registered and not _declaration_only_configuration(row):
+            raise ValueError("current publication contains an unregistered measured configuration")
     archived = set()
     for _, _, _, rows in _archived_reports(root, manifest):
         archived.update(scientific_row_hash(row) for row in rows.values())
@@ -1800,15 +1858,16 @@ def refresh_publication(root=REPOSITORY_ROOT, *, view_id="discriminator_stabilit
                                "added_required_tasks": {tier: [name for name in names if name not in manifest["tier_requirements"][tier]]
                                                         for tier, names in requirements.items()}}
     if regroup:
-        result.update(select_family_rows(root, result["configuration_rows"], result, view_id=view_id,
-                                         policy_fingerprint=manifest["policy_fingerprint"],
-                                         historical_rows=[{**row, "publication_key": entry["json_sha256"]}
-                                             for _, entry, _, rows in _archived_reports(root, manifest)
-                                             for row in rows.values()]))
+        registry = read_json(root / REGISTRY) if registry_hash is not None else None
+        previous = _previous_family_registry(root, result)
+        if (registry is None or previous is None
+                or _family_registry_structure(previous) != _family_registry_structure(registry)):
+            raise ValueError("trainer family selection structure changed; use ordinary regeneration")
+        _refresh_family_presentation(root, result, registry)
         result["provenance"]["trainer_family_registry_sha256"] = registry_hash
         result["provenance"]["selected_rows_sha256"] = stable_hash(result["rows"])
-        result["provenance"]["family_current_selection_sha256"] = (
-            file_hash(root / CURRENT_SELECTION) if (root / CURRENT_SELECTION).is_file() else None)
+    if registry_hash is not None:
+        result["trainer_family_registry"] = read_json(root / REGISTRY)
     result["standalone_api_scores"] = _standalone_api_scores(root)
     result["publication_refresh"] = {"scientific_rows_preserved": True, "qualification_regraded": False,
                                      "training_launched": False}
@@ -2145,6 +2204,9 @@ def publish_current(root=REPOSITORY_ROOT, *, source_commit=None, view_id="discri
                             "selected_rows_sha256": stable_hash(result["rows"]),
                             "family_current_selection_sha256": file_hash(root / CURRENT_SELECTION)
                                 if current_pins else None}
+    registry_path = root / "configs/forge/trainer-families.json"
+    if registry_path.is_file():
+        result["trainer_family_registry"] = read_json(registry_path)
     if not recorded_policy and view_id == "discriminator_stability":
         result["common26_display"] = _common26_display_projection(result, root)
         result["provenance"]["common26_comparison_projector_sha256"] = file_hash(

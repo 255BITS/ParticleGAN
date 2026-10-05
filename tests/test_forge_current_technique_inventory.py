@@ -387,6 +387,161 @@ def test_publication_refresh_rejects_changed_science_before_writing(evidence, ta
     assert _outputs(root) == before
 
 
+def test_editorial_family_refresh_preserves_exact_pin_and_drifted_science(evidence, monkeypatch):
+    from experiments.forge.trainer_families import REGISTRY, scientific_row_hash
+    root, manifest = evidence
+    registry = {"schema_version": 1, "families": [{"id": "bcap", "label": "BCap",
+                "canonical_candidate": "bcap", "candidates": ["bcap"]}]}
+    atomic_json(root / REGISTRY, registry)
+    incumbent = read_json(root / manifest["cohorts"][0]["snapshot"])["rows"][0]
+    incumbent["trainer_family"] = "bcap"
+    _family_pin(root, manifest, incumbent)
+    baseline = read_json(publication.publish_current(root)["json"])
+    pin_bytes = (root / CURRENT_SELECTION).read_bytes()
+    evidence_bytes = (root / publication.EVIDENCE_MANIFEST).read_bytes()
+    # An evolved live contract must remain a coverage note, not fresh admission
+    # of the old pin or a regrade of the original numerical row.
+    policy = read_json(root / "configs/forge/views/discriminator_stability.json")
+    atomic_json(root / "configs/forge/view-history/discriminator_stability-v2.json", policy)
+    policy["revision"] = 3
+    policy["assignments"].append({"task": "new-word-contract", "qualification_tier": 1, "importance": "required"})
+    atomic_json(root / "configs/forge/views/discriminator_stability.json", policy)
+    registry["families"][0].update(label="BCAP with K3P", tags=["critic-gradient-penalty"])
+    atomic_json(root / REGISTRY, registry)
+    monkeypatch.setattr("experiments.forge.trainer_families._current_pin",
+                        lambda *args, **kwargs: pytest.fail("editorial refresh cannot re-admit a historical pin"))
+    metadata = publication.refresh_publication(root)
+    current = read_json(metadata["json"])
+    assert current["rows"][0]["technique"] == "BCAP with K3P"
+    assert [scientific_row_hash(row) for row in current["rows"]] == [scientific_row_hash(row) for row in baseline["rows"]]
+    for key in ("configuration_rows", "evidence_rows", "historical_family_rows", "archived_evidence_rows"):
+        assert current.get(key) == baseline.get(key)
+    assert [row.get("selection") for row in current["rows"]] == [row.get("selection") for row in baseline["rows"]]
+    assert current["trainer_families"]["bcap"] == registry["families"][0]
+    assert current["trainer_family_registry"] == registry
+    assert current["provenance"]["trainer_family_registry_sha256"] == file_hash(root / REGISTRY)
+    assert (root / CURRENT_SELECTION).read_bytes() == pin_bytes
+    assert (root / publication.EVIDENCE_MANIFEST).read_bytes() == evidence_bytes
+    before = _outputs(root)
+    assert publication.refresh_publication(root) == metadata
+    assert _outputs(root) == before
+
+
+@pytest.mark.parametrize("bound_source", [True, False])
+def test_legacy_editorial_refresh_requires_the_exact_bound_git_registry(evidence, monkeypatch, bound_source):
+    import hashlib
+    import json
+    from experiments.forge.trainer_families import REGISTRY
+    root, _ = evidence
+    registry = {"schema_version": 1, "families": [{"id": "bcap", "label": "BCap",
+                "canonical_candidate": "bcap", "candidates": ["bcap"]}]}
+    atomic_json(root / REGISTRY, registry)
+    original_registry = (root / REGISTRY).read_bytes()
+    path = Path(publication.publish_current(root)["json"])
+    previous = read_json(path)
+    previous.pop("trainer_family_registry")  # Existing publications predate this metadata.
+    _save_current_projection(path, previous)
+    registry["families"][0]["label"] = "BCAP with K3P"
+    atomic_json(root / REGISTRY, registry)
+    returned = original_registry if bound_source else json.dumps(registry).encode()
+    monkeypatch.setattr(publication.subprocess, "check_output", lambda *args, **kwargs: returned)
+    assert hashlib.sha256(original_registry).hexdigest() == previous["provenance"]["trainer_family_registry_sha256"]
+    before = _outputs(root)
+    if bound_source:
+        current = read_json(publication.refresh_publication(root)["json"])
+        assert current["rows"][0]["technique"] == "BCAP with K3P"
+        assert current["trainer_family_registry"] == registry
+    else:
+        with pytest.raises(ValueError, match="selection structure changed"):
+            publication.refresh_publication(root)
+        assert _outputs(root) == before
+
+
+@pytest.mark.parametrize("change", ["members", "canonical", "search", "historical"])
+def test_editorial_refresh_cannot_hide_family_selection_structure_changes(evidence, change):
+    from experiments.forge.trainer_families import REGISTRY
+    root, _ = evidence
+    registry = {"schema_version": 1, "families": [{"id": "bcap", "label": "BCap",
+                "canonical_candidate": "bcap", "candidates": ["bcap"]}]}
+    atomic_json(root / REGISTRY, registry)
+    publication.publish_current(root)
+    if change == "members":
+        registry["families"][0]["candidates"].append("new-member")
+    elif change == "canonical":
+        registry["families"][0]["canonical_candidate"] = "new-member"
+    elif change == "search":
+        registry["families"][0]["active_search_by_backend"] = {"cuda": "new-search"}
+    else:
+        registry["historical_families"] = [{"id": "old-bcap", "canonical_candidate": "bcap", "candidates": ["bcap"]}]
+    registry["families"][0]["label"] = "Renamed family"
+    atomic_json(root / REGISTRY, registry)
+    before = _outputs(root)
+    with pytest.raises(ValueError, match="selection structure changed"):
+        publication.refresh_publication(root)
+    assert _outputs(root) == before
+
+
+def _unregistered_unmeasured_configuration(root):
+    path = root / publication.CURRENT_PREFIX.with_suffix(".json")
+    report = read_json(path)
+    row = deepcopy(report["configuration_rows"][0])
+    row.update(candidate_id="new-unmeasured-card", candidate_revision="unmeasured-revision", attempt_ids=[],
+               qualified_tier=0, status="INCOMPLETE", cost={"wall_seconds": None, "measured_tasks": 0})
+    row["tasks"] = [{"task_id": "two_pole", "status": "UNKNOWN"}]
+    row["nonrequired_tasks"] = [{"task_id": "probe", "status": "BLOCKED"}]
+    for tier in row["tiers"].values():
+        tier["passed"] = 0
+    report["configuration_rows"].append(row)
+    return path, report, row
+
+
+def _save_current_projection(path, report):
+    report["provenance"].pop("input_digest", None)
+    report["provenance"]["input_digest"] = stable_hash(report)
+    atomic_json(path, report)
+
+
+def test_refresh_keeps_zero_cost_unmeasured_configuration_projections(evidence):
+    root, _ = evidence
+    publication.publish_current(root)
+    path, report, row = _unregistered_unmeasured_configuration(root)
+    _save_current_projection(path, report)
+    current = read_json(publication.refresh_publication(root)["json"])
+    assert current["configuration_rows"][-1] == row
+    assert current["rows"] == report["rows"] and current["evidence_rows"] == report["evidence_rows"]
+
+
+@pytest.mark.parametrize("tamper", ["attempt", "pass", "failure", "diagnostic", "qualification", "tier_pass",
+                                   "cost", "measured_tasks", "gate_status", "status"])
+def test_refresh_unmeasured_exception_cannot_import_measured_or_qualified_science(evidence, tamper):
+    root, _ = evidence
+    publication.publish_current(root)
+    path, report, row = _unregistered_unmeasured_configuration(root)
+    if tamper == "attempt":
+        row["attempt_ids"] = ["unregistered-attempt"]
+    elif tamper in {"pass", "failure"}:
+        row["tasks"][0]["status"] = "PASS" if tamper == "pass" else "FAIL"
+    elif tamper == "diagnostic":
+        row["nonrequired_tasks"][0]["status"] = "PASS"
+    elif tamper == "qualification":
+        row["qualified_tier"] = 1
+    elif tamper == "tier_pass":
+        row["tiers"]["1"]["passed"] = 1
+    elif tamper == "cost":
+        row["cost"]["wall_seconds"] = 1
+    elif tamper == "measured_tasks":
+        row["cost"]["measured_tasks"] = 1
+    elif tamper == "gate_status":
+        row["tasks"][0]["gate_status"] = "PASS"
+    else:
+        row["status"] = "PASS"
+    _save_current_projection(path, report)
+    before = _outputs(root)
+    with pytest.raises(ValueError, match="unregistered measured configuration"):
+        publication.refresh_publication(root)
+    assert _outputs(root) == before
+
+
 def test_default_cli_refreshes_later_view_without_advancing_recorded_qualification(evidence, capsys):
     root, _ = evidence
     before = read_json(publication.publish_current(root)["json"])
