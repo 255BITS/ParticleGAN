@@ -75,14 +75,19 @@ fails; final metrics alone cannot substitute for the certified gate.
 
 Keep the incumbent, the Gaussian/ring bounds and the ordinary budgets for this
 PR. Do not extend these exact failed recipes or promote any searched recipe.
-The evidence supports two next bounded investigations:
+The evidence supports three next bounded investigations:
 
 1. Separate optimizer roles through the public recipe API. Test a fixed generator
    beta2 with shorter critic memory, or a distinct direct-coordinate rate, against
    the observed Gaussian stability versus movement/word tradeoff. Use one whole
    recipe across tasks; first inspect saved critic/gradient and update-scale
    diagnostics. Shorter shared moment memory is not a demonstrated root cause.
-2. Calibrate the new acquisition tasks. Add declared near-boundary population
+2. Match the passing K3P ring recipe before isolating BCAP's penalty. Freeze its
+   LR .006375, D multiplier 1, prior multiplier 1, coefficient 1 and original
+   initialization/sampling law; compare only the penalty arm. Inspect measured
+   critic gradients and cap activity before proposing a cap revision. This
+   ring diagnostic cannot qualify a whole recipe.
+3. Calibrate the new acquisition tasks. Add declared near-boundary population
    controls and a larger Gaussian evaluation sample count to measure false
    rejection without relaxing the KS bound. Bind every revised observation law
    to a new task identity and preserve old failures. Scorer controls establish

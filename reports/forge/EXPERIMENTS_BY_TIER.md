@@ -1373,7 +1373,8 @@ Declared Forge numerical gates and sampling:
 
 [schedule_contract_audit](../../configs/forge/tasks/schedule_contract_audit.json)
 
-Exact state/output parity for: step_label, horizon, evaluation_cadence, restart; bound source audit required.
+Declared LR, input/output noise, Adam beta2 and critic-coefficient schedules must match independent equations; guard clipping must match actual per-parameter Adam history. Schedule tolerance: None; guard relative tolerance: None.
+Schedule-normalized replay must retain exact learning state for step-label and horizon perturbations; restart and evaluation-cadence checks must retain exact learning state. Passing grants no clock-free claim.
 
 | Measurement | Declared condition |
 | --- | --- |
@@ -1853,4 +1854,4 @@ The wider question review also links standalone experiments outside the Forge ti
 
 Declaration input digest: `e37c4dbe59acf95e6303030c17f3d7ac2bdde75b5a9e0264111847e1dce09386`. The JSON form includes the individual task and view file hashes.
 
-Published artifact input digest: `8d3a9773b62db7de817952f28743166a4e277699c0cae0dcb276124a284e354d`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.
+Published artifact input digest: `552f52fcfecbb30f4528c7093d392b42b91140f973e8e62e4a7289596477b78e`. Artifact hashes and exact recipe/source/runtime bindings are included in the JSON form.

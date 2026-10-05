@@ -30,8 +30,8 @@ Complete current Tier 1 measurement in: discriminator_stability; additional scop
 | Family / view | Tier 1 | Tier 2 | Tier 3 | Total |
 | --- | ---: | ---: | ---: | ---: |
 | [adaptation](ka2.md#cohort-cuda-0d83d78027c5-adaptation) | [3/3](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-1) | [0(*)/19](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-2) | [0(*)/1](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-3) | [3(*)/23](ka2.md#cohort-cuda-0d83d78027c5-adaptation) |
-| [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous) | [3/4](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1) | [0(*)/19](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) | [0(*)/7](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3) | [3(*)/30](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous) |
-| [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability) | [4/6](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | [0(*)/19](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) | [0(*)/2](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-3) | [4(*)/27](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability) |
+| [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous) | [3(*)/4](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1) | [0(*)/19](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2) | [0(*)/7](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-3) | [3(*)/30](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous) |
+| [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability) | [4(*)/7](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | [0(*)/19](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-2) | [0(*)/2](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-3) | [4(*)/28](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability) |
 | [formulation_comparison](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison) | [3/3](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-1) | [0(*)/19](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-2) | [0(*)/2](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-3) | [3(*)/24](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison) |
 | [host_profile_transfer](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer) | [3/3](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-1) | [0(*)/19](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-2) | [0(*)/2](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-3) | [3(*)/24](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer) |
 | [quality_coverage](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage) | [3/3](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-1) | [0(*)/19](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-2) | [0/0](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-3) | [3(*)/22](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage) |
@@ -53,10 +53,10 @@ Shared experiments appear once in this list; the family numerator/denominator co
 | Experiment | Required by | Recorded result | Current contract |
 | --- | --- | --- | --- |
 | [ae_gan_hold](ka2.md#cohort-cuda-0d83d78027c5-experiment-ae_gan_hold) | [adaptation](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-1), [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1), [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1), [formulation_comparison](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-1), [host_profile_transfer](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-1), [quality_coverage](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-1) | PASS | matches |
-| [clockfree_audit_measurement_v1](ka2.md#cohort-cuda-0d83d78027c5-experiment-clockfree_audit_measurement_v1) | [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1) | FAIL | matches |
 | [five_word_joint_acquisition](ka2.md#cohort-cuda-0d83d78027c5-experiment-five_word_joint_acquisition) | [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | FAIL | matches |
 | [gaussian1d_acquisition](ka2.md#cohort-cuda-0d83d78027c5-experiment-gaussian1d_acquisition) | [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | FAIL | matches |
 | [ring16_acquisition](ka2.md#cohort-cuda-0d83d78027c5-experiment-ring16_acquisition) | [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | PASS | matches |
+| [schedule_contract_audit](ka2.md#cohort-cuda-0d83d78027c5-experiment-schedule_contract_audit) | [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1), [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1) | UNKNOWN | unbound |
 | [two_pole](ka2.md#cohort-cuda-0d83d78027c5-experiment-two_pole) | [adaptation](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-1), [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1), [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1), [formulation_comparison](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-1), [host_profile_transfer](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-1), [quality_coverage](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-1) | PASS | matches |
 | [unused_token_hold](ka2.md#cohort-cuda-0d83d78027c5-experiment-unused_token_hold) | [adaptation](ka2.md#cohort-cuda-0d83d78027c5-adaptation-tier-1), [clockfree_continuous](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1), [discriminator_stability](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1), [formulation_comparison](ka2.md#cohort-cuda-0d83d78027c5-formulation_comparison-tier-1), [host_profile_transfer](ka2.md#cohort-cuda-0d83d78027c5-host_profile_transfer-tier-1), [quality_coverage](ka2.md#cohort-cuda-0d83d78027c5-quality_coverage-tier-1) | PASS | matches |
 
@@ -158,11 +158,42 @@ Calibration: **provisional**. Phase D historical calibration remains required
 | --- | --- | --- | --- |
 | [target_shift_recovery](ka2.md#cohort-cuda-0d83d78027c5-experiment-target_shift_recovery) | required | UNKNOWN | unbound |
 
+<a name="cohort-cuda-0d83d78027c5-bcap_budget_diagnostics_v1"></a>
+
+## bcap_budget_diagnostics_v1
+
+**bcap_budget_diagnostics_v1 — revision 1**. [View declaration](../../../configs/forge/views/bcap_budget_diagnostics_v1.json).
+
+Diagnostic-only view; its outcomes are excluded from the family totals and grant no qualification.
+
+Calibration: **provisional**. Schedule-preserving acquisition-budget diagnostics grant no ordinary qualification, screen calibration or default adoption.
+
+<a name="cohort-cuda-0d83d78027c5-bcap_budget_diagnostics_v1-tier-1"></a>
+
+### Tier 1
+
+| Experiment | Role | Recorded result | Current contract |
+| --- | --- | --- | --- |
+| [gaussian1d_acquisition_3000_schedule1000_diagnostic_v1](ka2.md#cohort-cuda-0d83d78027c5-experiment-gaussian1d_acquisition_3000_schedule1000_diagnostic_v1) | diagnostic | UNKNOWN | unbound |
+| [ring16_acquisition_1600_schedule400_diagnostic_v1](ka2.md#cohort-cuda-0d83d78027c5-experiment-ring16_acquisition_1600_schedule400_diagnostic_v1) | diagnostic | UNKNOWN | unbound |
+
+<a name="cohort-cuda-0d83d78027c5-bcap_budget_diagnostics_v1-tier-2"></a>
+
+### Tier 2
+
+No experiments assigned.
+
+<a name="cohort-cuda-0d83d78027c5-bcap_budget_diagnostics_v1-tier-3"></a>
+
+### Tier 3
+
+No experiments assigned.
+
 <a name="cohort-cuda-0d83d78027c5-clockfree_continuous"></a>
 
 ## clockfree_continuous
 
-**clockfree_continuous — revision 3**. [View declaration](../../../configs/forge/views/clockfree_continuous.json).
+**clockfree_continuous — revision 4**. [View declaration](../../../configs/forge/views/clockfree_continuous.json).
 
 Qualification requires every required experiment to pass, with all lower tiers and task dependencies passed first. Required counts (Tier 1 / 2 / 3): **4 / 19 / 7**.
 
@@ -184,7 +215,7 @@ Additional eligibility requirements:
 | [two_pole](ka2.md#cohort-cuda-0d83d78027c5-experiment-two_pole) | required | PASS | matches |
 | [unused_token_hold](ka2.md#cohort-cuda-0d83d78027c5-experiment-unused_token_hold) | required | PASS | matches |
 | [ae_gan_hold](ka2.md#cohort-cuda-0d83d78027c5-experiment-ae_gan_hold) | required | PASS | matches |
-| [clockfree_audit_measurement_v1](ka2.md#cohort-cuda-0d83d78027c5-experiment-clockfree_audit_measurement_v1) | required | FAIL | matches |
+| [schedule_contract_audit](ka2.md#cohort-cuda-0d83d78027c5-experiment-schedule_contract_audit) | required | UNKNOWN | unbound |
 
 <a name="cohort-cuda-0d83d78027c5-clockfree_continuous-tier-2"></a>
 
@@ -230,11 +261,11 @@ Additional eligibility requirements:
 
 ## discriminator_stability
 
-**discriminator_stability — revision 5**. [View declaration](../../../configs/forge/views/discriminator_stability.json).
+**discriminator_stability — revision 6**. [View declaration](../../../configs/forge/views/discriminator_stability.json).
 
-Qualification requires every required experiment to pass, with all lower tiers and task dependencies passed first. Required counts (Tier 1 / 2 / 3): **6 / 19 / 2**.
+Qualification requires every required experiment to pass, with all lower tiers and task dependencies passed first. Required counts (Tier 1 / 2 / 3): **7 / 19 / 2**.
 
-Calibration: **provisional**. Expanded six-task Tier 1 placement is provisional and requires bounded calibration. Revision 3 and prior profiles retain their original tasks and evidence; a standalone scalar pass gives no whole-view/default credit.
+Calibration: **provisional**. Seven required Tier 1 tasks include six existing acquisition/behavior checks and a declared-schedule operational audit. Placement remains provisional; no calibrated ranking, clock-free claim or default adoption follows.
 
 <a name="cohort-cuda-0d83d78027c5-discriminator_stability-tier-1"></a>
 
@@ -248,7 +279,7 @@ Calibration: **provisional**. Expanded six-task Tier 1 placement is provisional 
 | [ae_gan_hold](ka2.md#cohort-cuda-0d83d78027c5-experiment-ae_gan_hold) | required | PASS | matches |
 | [ring16_acquisition](ka2.md#cohort-cuda-0d83d78027c5-experiment-ring16_acquisition) | required | PASS | matches |
 | [five_word_joint_acquisition](ka2.md#cohort-cuda-0d83d78027c5-experiment-five_word_joint_acquisition) | required | FAIL | matches |
-| [clockfree_audit_measurement_v1](ka2.md#cohort-cuda-0d83d78027c5-experiment-clockfree_audit_measurement_v1) | diagnostic | FAIL | matches |
+| [schedule_contract_audit](ka2.md#cohort-cuda-0d83d78027c5-experiment-schedule_contract_audit) | required | UNKNOWN | unbound |
 
 <a name="cohort-cuda-0d83d78027c5-discriminator_stability-tier-2"></a>
 
@@ -637,51 +668,6 @@ Declared budget: 24 updates; timeout 300 seconds.
 
 Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
-<a name="cohort-cuda-0d83d78027c5-experiment-clockfree_audit_measurement_v1"></a>
-
-### clockfree_audit_measurement_v1
-
-**clockfree_audit_measurement_v1: FAIL**. [Current experiment declaration](../../../configs/forge/tasks/clockfree_audit_measurement_v1.json).
-
-Current contract: **matches**. Current task contract matches the recorded conditions. step_label changed the update or common-prefix state
-
-Actual task device: `1` (recorded execution receipt).
-
-Used by: [clockfree_continuous / Tier 1](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1) · [discriminator_stability / Tier 1](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1).
-
-[Compact metrics and receipt provenance](../technique-receipts/ce6eec65990e41269dd54b438e68625c.json)
-
-[Actual-training GIF](../tier1-completion/media/ka2/ce6eec65990e41269dd54b438e68625c/clockfree_audit_measurement_v1.gif); 4 saved observations; no new optimizer updates or sampling draws.
-
-Recorded clock parity diagnostics:
-
-| Condition | Exact state digest equality |
-| --- | --- |
-| evaluation_cadence | equal |
-| horizon | different |
-| restart | equal |
-| step_label | different |
-
-Recorded unexplained clock dependencies: **5**.
-
-- learning-rate annealing depends on completed steps and horizon
-- input-noise annealing depends on completed steps and horizon
-- output-noise warmup depends on completed steps and horizon
-- KA2 switches from pure A to blended penalty at call 800
-- critic guard releases at a fixed minimum update count
-
-[Certified parity digests and source audit](../tier1-completion/scoped-evidence.json). These display diagnostics preserve the recorded gate FAIL.
-
-Recorded conditions: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
-
-Current pass criteria:
-
-Exact state/output parity for: step_label, horizon, evaluation_cadence, restart; bound source audit required.
-
-Declared budget: 24 updates; timeout 300 seconds.
-
-Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
-
 <a name="cohort-cuda-0d83d78027c5-experiment-clockfree_audit_tier1_policy_selected_cloud_v1"></a>
 
 ### clockfree_audit_tier1_policy_selected_cloud_v1
@@ -862,6 +848,35 @@ At least 5 consecutive passing terminal observations.
 All 24 declared observations and final live metrics are required.
 
 Declared budget: 1000 updates; timeout 120 seconds.
+
+Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
+
+[Explanation and existing training artifacts](../../toy_audit/api_contract/gaussian1d/README.md)
+
+<a name="cohort-cuda-0d83d78027c5-experiment-gaussian1d_acquisition_3000_schedule1000_diagnostic_v1"></a>
+
+### gaussian1d_acquisition_3000_schedule1000_diagnostic_v1
+
+**gaussian1d_acquisition_3000_schedule1000_diagnostic_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/gaussian1d_acquisition_3000_schedule1000_diagnostic_v1.json).
+
+Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+
+Used by: [bcap_budget_diagnostics_v1 / Tier 1](ka2.md#cohort-cuda-0d83d78027c5-bcap_budget_diagnostics_v1-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 4096 |
+| finite_fraction | == 1 |
+| mean_error_sigma | <= 0.2 |
+| std_ratio | >= 0.8 |
+| std_ratio | <= 1.2 |
+| cdf_ks | <= 0.05 |
+
+At least 5 consecutive passing terminal observations.
+
+Declared budget: 3000 updates; timeout 360 seconds.
 
 Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
@@ -1422,6 +1437,33 @@ Declared budget: 400 updates; timeout 300 seconds.
 
 Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
+<a name="cohort-cuda-0d83d78027c5-experiment-ring16_acquisition_1600_schedule400_diagnostic_v1"></a>
+
+### ring16_acquisition_1600_schedule400_diagnostic_v1
+
+**ring16_acquisition_1600_schedule400_diagnostic_v1: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/ring16_acquisition_1600_schedule400_diagnostic_v1.json).
+
+Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+
+Used by: [bcap_budget_diagnostics_v1 / Tier 1](ka2.md#cohort-cuda-0d83d78027c5-bcap_budget_diagnostics_v1-tier-1).
+
+Current pass criteria:
+
+| Metric | Required bound |
+| --- | --- |
+| sample_count | >= 4096 |
+| modes | >= 16 |
+| mass_tv | <= 0.15 |
+| hq | >= 0.85 |
+| component_covariance_error | <= 0.85 |
+| component_min_eigen_ratio | >= 0.15 |
+
+At least 5 consecutive passing terminal observations.
+
+Declared budget: 1600 updates; timeout 1200 seconds.
+
+Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
+
 <a name="cohort-cuda-0d83d78027c5-experiment-ring16_acquisition_tier1_policy_selected_cloud_v1"></a>
 
 ### ring16_acquisition_tier1_policy_selected_cloud_v1
@@ -1624,6 +1666,25 @@ At least 5 consecutive passing terminal observations.
 Both sustained coverage and independent holdout accuracy must pass.
 
 Declared budget: 7000 updates; timeout 3600 seconds.
+
+Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
+
+<a name="cohort-cuda-0d83d78027c5-experiment-schedule_contract_audit"></a>
+
+### schedule_contract_audit
+
+**schedule_contract_audit: UNKNOWN**. [Current experiment declaration](../../../configs/forge/tasks/schedule_contract_audit.json).
+
+Current contract: **unbound**. No recorded task contract binds this cell to the current declaration. No recorded result for this selected configuration and source.
+
+Used by: [clockfree_continuous / Tier 1](ka2.md#cohort-cuda-0d83d78027c5-clockfree_continuous-tier-1) · [discriminator_stability / Tier 1](ka2.md#cohort-cuda-0d83d78027c5-discriminator_stability-tier-1).
+
+Current pass criteria:
+
+Declared LR, input/output noise, Adam beta2 and critic-coefficient schedules must match independent equations; guard clipping must match actual per-parameter Adam history. Schedule tolerance: 1e-12; guard relative tolerance: 1e-06.
+Schedule-normalized replay must retain exact learning state for step-label and horizon perturbations; restart and evaluation-cadence checks must retain exact learning state. Passing grants no clock-free claim.
+
+Declared budget: 231 updates; timeout 300 seconds.
 
 Current measurement: mog prior (sigma 0.025); public_prior_without_output_noise; weights live; output noise clean.
 
