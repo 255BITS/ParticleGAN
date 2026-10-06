@@ -3,110 +3,223 @@
   "canonical_original_task_credit": false,
   "communication_timeout": {
     "historical_halt_preserved": true,
-    "recipient_read_confirmed": false,
+    "recipient_read_of_retry_confirmed": true,
     "result_retry_seq": 947,
-    "retry_status": "queued",
+    "status": "historical timeout resolved by authenticated coordinator949",
     "timeout_seconds": 5,
     "tool": "stage_message"
   },
+  "completed_new_scientific_parent_spans_seconds": 112.3692320920527,
+  "convergence_ranking": [
+    {
+      "cell_id": "amsgrad_off_l2_off_320",
+      "confirmed_step": 120,
+      "first_pass_step": 107,
+      "particle_l2": 0,
+      "rank": 1,
+      "table_amsgrad": false
+    },
+    {
+      "cell_id": "amsgrad_off_l2_on_320",
+      "confirmed_step": 237,
+      "first_pass_step": 224,
+      "particle_l2": 0.02,
+      "rank": 2,
+      "table_amsgrad": false
+    },
+    {
+      "cell_id": "amsgrad_on_l2_off_320",
+      "confirmed_step": 264,
+      "first_pass_step": 250,
+      "particle_l2": 0,
+      "rank": 3,
+      "table_amsgrad": true
+    },
+    {
+      "cell_id": "amsgrad_on_l2_on_320",
+      "confirmed_step": 294,
+      "first_pass_step": 280,
+      "particle_l2": 0.02,
+      "rank": 4,
+      "table_amsgrad": true
+    }
+  ],
   "exact_all_inclusive_measured_cost": false,
   "historical_case932_debit_in_predecessor_once": true,
-  "inclusive_conservative_cut": 18538.803828128366,
-  "interpretation": "Longer external horizon alone allows the original AMSGrad-on/L2.02 law to meet escape/flatness; fastest-factorial winner remains unresolved",
+  "inclusive_conservative_cut": 18555.21890639815,
+  "interpretation": "All four320 variants pass and all four80 variants fail at fixed seed0. AMSGrad-off/L2zero has earliest confirmed escape/flatness at120 updates; no canonical80 or reusable-default credit",
   "minimum_stable_checks": 5,
-  "new_completed_cells": 2,
-  "new_unrun_cells": 3,
+  "new_completed_cells": 5,
+  "new_unrun_cells": 0,
   "observation_rule": "ceil(i*80/24), i=1..24 for80 or1..96 for320",
   "original_task_preserved": true,
   "partial_optimizer_trace": "UNKNOWN beyond captured prefix; full scored curves complete",
   "post_timeout_child_elapsed": "UNKNOWN_NOT_ZERO",
   "publication_tail": "UNKNOWN_NOT_ZERO",
+  "ranking_criterion": "ascending confirmed convergence update, among passing320 variants",
   "reused_baselines": 3,
   "rows": [
     {
-      "elapsed_seconds": 19.655263988301158,
-      "grad_med": 0.010896995663642883,
-      "horizon": 80,
-      "mean_abs": 0.002445647493004799,
-      "particle_l2": 0.02,
-      "population_std": 0.0027198366052662805,
-      "provenance": "reused_921",
-      "table_amsgrad": true,
-      "verdict": "FAIL"
-    },
-    {
-      "elapsed_seconds": 20.86249917326495,
-      "grad_med": 0.009985171258449554,
-      "horizon": 80,
-      "mean_abs": 0.01502314954996109,
-      "particle_l2": 0.02,
-      "population_std": 0.016676383304872307,
-      "provenance": "reused_927",
-      "table_amsgrad": false,
-      "verdict": "FAIL"
-    },
-    {
-      "elapsed_seconds": 29.4651756612584,
-      "grad_med": 0.022186584770679474,
-      "horizon": 80,
-      "mean_abs": 0.08783505111932755,
-      "particle_l2": 0.0,
-      "population_std": 0.1028884953123352,
-      "provenance": "reused_932",
-      "table_amsgrad": false,
-      "verdict": "FAIL"
-    },
-    {
-      "cell_id": "amsgrad_on_l2_off_80",
-      "confirmed_step": null,
+      "cell_id": "amsgrad_off_l2_off_320",
+      "confirmed_step": 120,
       "declaration_pin": {
-        "bytes": 34998,
-        "sha256": "e715f935da47339ac86c58f8d0a74e36c2bf1d380a923e45ac35b2a7b80c7128"
+        "bytes": 35293,
+        "sha256": "aa6de86312d1bb1f4d76fe2493ccce63dcb5d305ec3caf77b9729b459e534086"
       },
-      "elapsed_seconds": 16.446428993251175,
+      "elapsed_seconds": 18.904111966956407,
       "execution_error": null,
-      "first_pass_step": null,
+      "first_pass_step": 107,
       "full_case_debit_seconds": 300,
-      "grad_med": 0.012824013829231262,
+      "grad_med": 0.016377117484807968,
       "grade_pin": {
-        "bytes": 682,
-        "sha256": "8eb4641a007feb58560a853c662f1efc9a306a5ab6a2efd8ef3d174c5a662d3a"
+        "bytes": 662,
+        "sha256": "25bed3441b816b0052008ac4ac226b2a52f96e759d28976f3c2a8c2163b9b308"
       },
-      "horizon": 80,
-      "mean_abs": 0.0032809569966048002,
-      "observations": 24,
+      "horizon": 320,
+      "mean_abs": 0.9141885638237,
+      "observations": 96,
       "partial_trace_limitation_preserved": true,
       "particle_l2": 0,
-      "passing_observations": 0,
-      "passing_suffix": 0,
-      "population_std": 0.0034162681639620203,
+      "passing_observations": 65,
+      "passing_suffix": 65,
+      "population_std": 0.9838590090643586,
       "prefix": {
-        "not_a_prefix_equality_claim": true,
-        "status": "NEW80_VARIANT_NO_RETAINED_MATCH"
+        "differing_steps": [],
+        "equal": true,
+        "observations": 24,
+        "scope": "ordered particles/targets/critic_gradient and two original metric values; whole-state UNKNOWN"
       },
-      "range": 0.011737663298845291,
+      "range": 2.398046851158142,
       "raw_pin": {
-        "bytes": 4300640,
-        "sha256": "7533c5cbd8b1ac4bb58953e1b3748337627ac60e0f74a9cec7d4253efb278f0e"
+        "bytes": 4470499,
+        "sha256": "21adca62a77874c40d1f2ec024470448092aede722f23b05b0e998cb3e4f7a68"
       },
-      "request_attempt": "4e8e52da5b0c58b2fe0e7f299720f38e",
+      "request_attempt": "fe57ee9ca38f484bfdcea4fcb6315a16",
       "rows": 12,
       "schema": "atlas944_verified_cell_result_v1",
       "scientific_credit": false,
       "software_proof_pin": {
-        "bytes": 22739,
-        "sha256": "660d595895e4059b0cc5fc951c000061ed04994d2b81cb62cc9f664b0b17a0f7"
+        "bytes": 22741,
+        "sha256": "5f577ec727a93455583e961a2c552dd5d6934f5607cbfc0d16e0461575aca4c5"
       },
       "source_digest": "1c422c2e55fcbf308caf134d07304a7e3d0e62cce11ae9268eafc93bec4fdbd2",
-      "supervisor_elapsed_seconds": 14.66504273423925,
-      "table_amsgrad": true,
+      "supervisor_elapsed_seconds": 16.939664085395634,
+      "table_amsgrad": false,
       "terminal_pin": {
-        "bytes": 693,
-        "sha256": "788383f5d076604de0cabaab4c0c95671aeed9a0360da35772f36e081413a6ba"
+        "bytes": 696,
+        "sha256": "a0edc74c5b5aacdf88ab2fed4d770a46cddfc1a675fc5a1d9c4d238bef9606f1"
       },
       "trace_complete": false,
       "trace_status": "UNKNOWN",
-      "verdict": "FAIL"
+      "verdict": "PASS"
+    },
+    {
+      "cell_id": "amsgrad_off_l2_on_320",
+      "confirmed_step": 237,
+      "declaration_pin": {
+        "bytes": 35289,
+        "sha256": "0ab090c65bec5da04c6ceb9c86b9c512d723cd0d4a9b81686c76ccc3ccd8d0ce"
+      },
+      "elapsed_seconds": 29.09489400917664,
+      "execution_error": null,
+      "first_pass_step": 224,
+      "full_case_debit_seconds": 300,
+      "grad_med": 0.047490186989307404,
+      "grade_pin": {
+        "bytes": 666,
+        "sha256": "e76941362e4d7402c2f3226b9bca4bd419c4972964e67d7df89617ed2561b660"
+      },
+      "horizon": 320,
+      "mean_abs": 0.825303316116333,
+      "observations": 96,
+      "partial_trace_limitation_preserved": true,
+      "particle_l2": 0.02,
+      "passing_observations": 30,
+      "passing_suffix": 30,
+      "population_std": 0.8215651490732285,
+      "prefix": {
+        "differing_steps": [],
+        "equal": true,
+        "observations": 24,
+        "scope": "ordered particles/targets/critic_gradient and two original metric values; whole-state UNKNOWN"
+      },
+      "range": 1.7391862869262695,
+      "raw_pin": {
+        "bytes": 4468848,
+        "sha256": "273bc1b4bef2321583022d4b7994ee96ff6644f3fe0cb7e98781f39ebccca4fb"
+      },
+      "request_attempt": "0a70a911fd795988d1c3bbb4003ca4d2",
+      "rows": 12,
+      "schema": "atlas944_verified_cell_result_v1",
+      "scientific_credit": false,
+      "software_proof_pin": {
+        "bytes": 22740,
+        "sha256": "6eaedcfba8862f56f85b32dbd30738cf058017d0f9a8a4f349dac0d95511dd8d"
+      },
+      "source_digest": "1c422c2e55fcbf308caf134d07304a7e3d0e62cce11ae9268eafc93bec4fdbd2",
+      "supervisor_elapsed_seconds": 22.40777340438217,
+      "table_amsgrad": false,
+      "terminal_pin": {
+        "bytes": 694,
+        "sha256": "b1c16ea1f43f795768a6eb2eae08ef056dfa632fa59434a592293252aed0c8b6"
+      },
+      "trace_complete": false,
+      "trace_status": "UNKNOWN",
+      "verdict": "PASS"
+    },
+    {
+      "cell_id": "amsgrad_on_l2_off_320",
+      "confirmed_step": 264,
+      "declaration_pin": {
+        "bytes": 35287,
+        "sha256": "a87be206fd36c95cbb1fb1ad768bf94f6072589541b329710eaaf5fe4e401910"
+      },
+      "elapsed_seconds": 16.59734594495967,
+      "execution_error": null,
+      "first_pass_step": 250,
+      "full_case_debit_seconds": 300,
+      "grad_med": 0.049550920724868774,
+      "grade_pin": {
+        "bytes": 665,
+        "sha256": "d369271bae0299f96bf81566b094de46553a87e75730ec03d33ddfbec33f4ac9"
+      },
+      "horizon": 320,
+      "mean_abs": 0.8724997043609619,
+      "observations": 96,
+      "partial_trace_limitation_preserved": true,
+      "particle_l2": 0,
+      "passing_observations": 22,
+      "passing_suffix": 22,
+      "population_std": 0.8752272884367635,
+      "prefix": {
+        "differing_steps": [],
+        "equal": true,
+        "observations": 24,
+        "scope": "ordered particles/targets/critic_gradient and two original metric values; whole-state UNKNOWN"
+      },
+      "range": 1.8639274835586548,
+      "raw_pin": {
+        "bytes": 4469026,
+        "sha256": "16a1d67b8467d1ee40ec89154090b3f65bf8e059d5c4ed448bd93f5e50daf693"
+      },
+      "request_attempt": "8ff5cba6895d03fd913799e866480ed7",
+      "rows": 12,
+      "schema": "atlas944_verified_cell_result_v1",
+      "scientific_credit": false,
+      "software_proof_pin": {
+        "bytes": 22740,
+        "sha256": "d309db552b1fe1caf8ec2a27c493161a7e1d33e9e0d5e9070263175ade3472a2"
+      },
+      "source_digest": "1c422c2e55fcbf308caf134d07304a7e3d0e62cce11ae9268eafc93bec4fdbd2",
+      "supervisor_elapsed_seconds": 14.907155537046492,
+      "table_amsgrad": true,
+      "terminal_pin": {
+        "bytes": 695,
+        "sha256": "1bac2c3e7b1c50420f90bc7e34280ea7b1f712ce49c99cedc93d50a37ec94f46"
+      },
+      "trace_complete": false,
+      "trace_status": "UNKNOWN",
+      "verdict": "PASS"
     },
     {
       "cell_id": "amsgrad_on_l2_on_320",
@@ -163,51 +276,113 @@
       "verdict": "PASS"
     },
     {
-      "cell_id": "amsgrad_off_l2_on_320",
-      "horizon": 320,
+      "elapsed_seconds": 29.4651756612584,
+      "grad_med": 0.022186584770679474,
+      "horizon": 80,
+      "mean_abs": 0.08783505111932755,
+      "particle_l2": 0.0,
+      "population_std": 0.1028884953123352,
+      "provenance": "reused_932",
+      "table_amsgrad": false,
+      "verdict": "FAIL"
+    },
+    {
+      "elapsed_seconds": 20.86249917326495,
+      "grad_med": 0.009985171258449554,
+      "horizon": 80,
+      "mean_abs": 0.01502314954996109,
       "particle_l2": 0.02,
-      "reason": "already admitted; stopped at safe boundary after outgoing Babel result timeout; no GAN verdict",
+      "population_std": 0.016676383304872307,
+      "provenance": "reused_927",
       "table_amsgrad": false,
-      "verdict": "UNRUN"
+      "verdict": "FAIL"
     },
     {
-      "cell_id": "amsgrad_on_l2_off_320",
-      "horizon": 320,
-      "particle_l2": 0.0,
-      "reason": "already admitted; stopped at safe boundary after outgoing Babel result timeout; no GAN verdict",
+      "cell_id": "amsgrad_on_l2_off_80",
+      "confirmed_step": null,
+      "declaration_pin": {
+        "bytes": 34998,
+        "sha256": "e715f935da47339ac86c58f8d0a74e36c2bf1d380a923e45ac35b2a7b80c7128"
+      },
+      "elapsed_seconds": 16.446428993251175,
+      "execution_error": null,
+      "first_pass_step": null,
+      "full_case_debit_seconds": 300,
+      "grad_med": 0.012824013829231262,
+      "grade_pin": {
+        "bytes": 682,
+        "sha256": "8eb4641a007feb58560a853c662f1efc9a306a5ab6a2efd8ef3d174c5a662d3a"
+      },
+      "horizon": 80,
+      "mean_abs": 0.0032809569966048002,
+      "observations": 24,
+      "partial_trace_limitation_preserved": true,
+      "particle_l2": 0,
+      "passing_observations": 0,
+      "passing_suffix": 0,
+      "population_std": 0.0034162681639620203,
+      "prefix": {
+        "not_a_prefix_equality_claim": true,
+        "status": "NEW80_VARIANT_NO_RETAINED_MATCH"
+      },
+      "range": 0.011737663298845291,
+      "raw_pin": {
+        "bytes": 4300640,
+        "sha256": "7533c5cbd8b1ac4bb58953e1b3748337627ac60e0f74a9cec7d4253efb278f0e"
+      },
+      "request_attempt": "4e8e52da5b0c58b2fe0e7f299720f38e",
+      "rows": 12,
+      "schema": "atlas944_verified_cell_result_v1",
+      "scientific_credit": false,
+      "software_proof_pin": {
+        "bytes": 22739,
+        "sha256": "660d595895e4059b0cc5fc951c000061ed04994d2b81cb62cc9f664b0b17a0f7"
+      },
+      "source_digest": "1c422c2e55fcbf308caf134d07304a7e3d0e62cce11ae9268eafc93bec4fdbd2",
+      "supervisor_elapsed_seconds": 14.66504273423925,
       "table_amsgrad": true,
-      "verdict": "UNRUN"
+      "terminal_pin": {
+        "bytes": 693,
+        "sha256": "788383f5d076604de0cabaab4c0c95671aeed9a0360da35772f36e081413a6ba"
+      },
+      "trace_complete": false,
+      "trace_status": "UNKNOWN",
+      "verdict": "FAIL"
     },
     {
-      "cell_id": "amsgrad_off_l2_off_320",
-      "horizon": 320,
-      "particle_l2": 0.0,
-      "reason": "already admitted; stopped at safe boundary after outgoing Babel result timeout; no GAN verdict",
-      "table_amsgrad": false,
-      "verdict": "UNRUN"
+      "elapsed_seconds": 19.655263988301158,
+      "grad_med": 0.010896995663642883,
+      "horizon": 80,
+      "mean_abs": 0.002445647493004799,
+      "particle_l2": 0.02,
+      "population_std": 0.0027198366052662805,
+      "provenance": "reused_921",
+      "table_amsgrad": true,
+      "verdict": "FAIL"
     }
   ],
   "schema": "atlas944_measured_factorial_comparison_v1",
   "scientific_allocation_seconds": 1500,
   "scope": "five new preregistered diagnostic variants; three reused80 baselines",
+  "scoped_continuation_summary": "CONTINUATION949-SUMMARY.json",
   "software_cost_cut": {
     "cap_seconds": 41288,
-    "charged_seconds": 17038.803828128366,
+    "charged_seconds": 17055.21890639815,
     "declared_reserve_is_certified_upper_bound": false,
     "declared_reserve_is_measured_elapsed": false,
     "exact_all_inclusive_measured_cost": false,
     "halt_additional_work": true,
     "measurement_cut": "CLOSED_MEMORY",
     "metadata_cap_seconds": 180,
-    "metadata_charged_seconds": 48.32114726724103,
-    "metadata_paid_seconds": 48.32114726724103,
-    "metadata_remaining_seconds": 131.67885273275897,
+    "metadata_charged_seconds": 64.73622553702444,
+    "metadata_paid_seconds": 64.73622553702444,
+    "metadata_remaining_seconds": 115.26377446297556,
     "metadata_reserved_seconds": 0,
     "persistence_tail": "UNKNOWN_NOT_ZERO",
     "post_timeout_child_elapsed": "UNKNOWN_NOT_ZERO",
     "predecessor_added_once": true,
     "predecessor_inclusive_seconds": 16990.482680861125,
-    "remaining_seconds": 24249.196171871634,
+    "remaining_seconds": 24232.78109360185,
     "retained_reporting_must_fit": true,
     "schema": "pg_atlas944_software_inclusive_v1",
     "scientific_allocation_seconds": 0
@@ -217,5 +392,6 @@
   "thresholds": {
     "grad_med_lte": 1.0,
     "mean_abs_gte": 0.3
-  }
+  },
+  "wall_clock_time_to_convergence": "NOT_MEASURED; parent elapsed is full-case time only"
 }

@@ -1,0 +1,34 @@
+{
+  "allocations_added_once": true,
+  "approved_authority_seq": 949,
+  "approved_three_cells": [
+    "amsgrad_off_l2_on_320",
+    "amsgrad_on_l2_off_320",
+    "amsgrad_off_l2_off_320"
+  ],
+  "completed_new_cells": 5,
+  "completed_result_report_seq": 952,
+  "completed_results_reported_before_final_publication": true,
+  "driver_authority_seq": 944,
+  "existing_scientific_allocation_seconds": 1500,
+  "historical_halt_preserved": true,
+  "launcher_attempt_error": {
+    "elapsed_seconds": "UNKNOWN_NOT_ZERO",
+    "science_started": false,
+    "status": "SYNTAX_ERROR_BEFORE_EXECUTION"
+  },
+  "new_scientific_allocation_seconds": 0,
+  "numerical_prefix_scope": "24 ordered saved particle/target/critic-gradient banks plus two metric values; whole-state UNKNOWN",
+  "original_science_authority_seq": 939,
+  "recovered_report_timeout": {
+    "child_deadline_seconds": 5,
+    "not_a_scientific_failure": true,
+    "receipt_confirmed_by_authenticated_coordinator_seq": 949,
+    "resolved_stable_retry_seq": 947
+  },
+  "same_frozen_source_and_proofs": true,
+  "same_software_cap_seconds": 180,
+  "schema": "atlas944_scoped949_completion_provenance_v1",
+  "unknown_cost_tails_preserved": true,
+  "unrun_new_cells": 0
+}
