@@ -2,7 +2,7 @@
 
 Read the relevant prior evidence before declaring an idea. Historical outcomes retain their original scope. Published qualification and automation snapshots are retained without replaying unavailable originals. Compact publications enter recall as display-only summaries and grant no qualification.
 
-Records: 552. Inventory coverage: complete. Unresolved import items: 7.
+Records: 553. Inventory coverage: complete. Unresolved import items: 7.
 
 ## Goal views
 
@@ -4326,6 +4326,22 @@ This technique failed the full 80-update two_pole smoke gate: {'grad_med': 0.063
 
 [Evidence](../../reports/forge/technique-receipts/3e1d8ca0f47a4954b41119cbe605548e.json) · [Record](records/readout-faf4999394106140c8a2052e.json)
 
+### bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9 · tier1-prior-smoke-v1-readout
+
+**Scope:** task_only_diagnostic; scientific; revision `d079f5df4e8792c33459b08452b31b0a1136cadff2e6f3e59eddf7df890a6200`.
+
+Prior cardinality, public cloud/MoG code path and fixed MoG width may determine acquisition and local shape under the selected BCAP trainer. A balanced nine-configuration prior grid keeps all other task and trainer factors fixed.
+
+**Observed:** {'FAIL': 18}; wall seconds 134.613; mechanism `task_owned_prior_hyperparameters`.
+
+ring16_acquisition__cloud-n256: modes=16, hq=0.93042, mass_tv=0.059814
+
+All 18 CUDA cells complete: 0/18 full-quality PASS, 3/18 explicitly narrower smoke-projection PASS. Larger tables regress fixed-budget acquisition. With 256 rows, MoG sigma .1 passes Gaussian location/width at five terminal checks but not sustained KS; ring passes coverage/precision/balance with cloud or MoG .025 but fails full local covariance. No single tested prior passes both original tasks or both proposed smoke questions. Baseline endpoints exactly reproduce the archived BCAP winner. No trainer delta, seed variation, retries or changed historical gates.
+
+**Next:** Stop this finite grid. Keep 256 particles for these budgets; propose task-owned MoG sigma .1 for a separately scoped scalar smoke and .025 for ring acquisition. Preserve original full CDF/covariance questions as quality evidence and calibrate an explicit future profile revision before ordinary qualification. No automatic continuation or defaults.
+
+[Evidence](../../reports/forge/tier1-prior-smoke/results.json) · [Record](records/tier1-prior-smoke-v1-readout.json)
+
 ### ka2-slow-prior-0p1 · word-diagnostic-1daeb48c4e66b7ab2e4e1551
 
 **Scope:** task_only_diagnostic; scientific; revision `a3ea26c51800ede1c4dd8983a58b0c2a891bf18e8ef814c7aa5f9283186acf81`.
@@ -4698,4 +4714,4 @@ These study and trial projections preserve recorded outcomes, unknowns and sourc
 
 ## Compilation provenance
 
-Reducer `forge-knowledge-v2`; input digest `bb5b2bf988b293f25081e786a14f8e3c05d1a4089e937f14e3deb12cbbcf6946`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.
+Reducer `forge-knowledge-v2`; input digest `5672d9e033db25587a8b714d740de34d2c70222b0de9da10a8b12c4468c0771d`. [Full input hashes and coverage](compilation.json). No training or image inspection occurs during compilation.

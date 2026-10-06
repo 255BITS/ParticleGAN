@@ -10,7 +10,7 @@
       "benchmark/shared": 5,
       "benchmark/smart_descent": 9,
       "benchmark/toy100": 19,
-      "benchmark/toy_audit": 71,
+      "benchmark/toy_audit": 72,
       "benchmark/transfer_suite": 87,
       "config/100gaussians": 4,
       "config/cifar_ddgan": 77,
@@ -111,18 +111,18 @@
       "frozen_support": 28,
       "narrative": 996,
       "structured_evidence": 5052,
-      "support": 1531,
+      "support": 1532,
       "support_artifact": 60,
       "visualization": 22,
       "visualization_artifact": 723
     },
-    "files": 11763
+    "files": 11764
   },
   "coverage": {
-    "declared_count": 11763,
+    "declared_count": 11764,
     "missing": [],
     "stale": [],
-    "tracked_count": 11763,
+    "tracked_count": 11764,
     "unclassified": [],
     "valid": true
   },
@@ -1363,6 +1363,13 @@
       "suggested_tiers": [
         2
       ]
+    },
+    {
+      "family": "benchmark/toy_audit",
+      "git_blob": "9b94b6bc89606275266ca6bc83ebb9f2c0b045be",
+      "path": "benchmarks/toy_audit/tier1_prior_smoke.py",
+      "role": "support",
+      "suggested_tiers": []
     },
     {
       "family": "benchmark/toy_audit",

@@ -1,0 +1,64 @@
+{
+  "qualification_input": false,
+  "scope": "Endpoint reproducibility check against immutable archived compact receipts; no requalification or independent replication claim.",
+  "tasks": [
+    {
+      "task": "gaussian1d_acquisition",
+      "archived_receipt": "reports/forge/technique-receipts/2f3251483c684806a8f54c30aa360eca.json",
+      "archived_receipt_sha256": "55a12887aa29eb3ed1031ea0ba9443daf6f13bbf86b1e350764f39438e351735",
+      "archived_source": {
+        "canonical_result_hash": "45b8d0b7c4e5dfecfae26b27800a0d66a39d7cd6b6b7b768de16bc44f68c2a52",
+        "original_files": {
+          "evidence": {
+            "path": "reports/forge/attempts/2f3251483c684806a8f54c30aa360eca/evidence.json",
+            "sha256": "0b5cdf56a49f687f961554285cce88e59ce9748edd2714ca14c9a273788d56ba"
+          },
+          "request": {
+            "path": "reports/forge/attempts/2f3251483c684806a8f54c30aa360eca/request.json",
+            "sha256": "84d88472f0c952a34046cb103c94833f460eb602dcfe3c618584694130a16762"
+          },
+          "result": {
+            "path": "reports/forge/attempts/2f3251483c684806a8f54c30aa360eca/result.json",
+            "sha256": "bf2ecdfc2a6213e7db1f270babe1b02844544b342b04198c6475ecc99ce14835"
+          }
+        },
+        "source_digest": "f1755b1b5538901ffd4882f196bfd475030b06df16fd940c9b839eff86dc8226",
+        "source_origin_commit": "a0f7e70e50427e0d3221d1d7f4cb4aac6e18b1be"
+      },
+      "compared_endpoint_metrics": 7,
+      "differences": {},
+      "endpoints_exactly_match": true,
+      "original_verdict": "FAIL",
+      "current_full_verdict": "FAIL"
+    },
+    {
+      "task": "ring16_acquisition",
+      "archived_receipt": "reports/forge/technique-receipts/e7a839160d7a4095990c034557ec1d24.json",
+      "archived_receipt_sha256": "5fd778eb1011b1751016c812dc277336d133c86fc1c888c57a74d6616024fdf6",
+      "archived_source": {
+        "canonical_result_hash": "6ddb71b40bd4fbeed2b1413d55f51a4d8eb1213a687e03ee7e56ecb22cb89d53",
+        "original_files": {
+          "evidence": {
+            "path": "reports/forge/attempts/e7a839160d7a4095990c034557ec1d24/evidence.json",
+            "sha256": "27088cbf075159e4b750b4a072b829e80f1da8f99afd1ebd21553583b52a4ac6"
+          },
+          "request": {
+            "path": "reports/forge/attempts/e7a839160d7a4095990c034557ec1d24/request.json",
+            "sha256": "7e3e845b5cbe96a7d22f7594e02c486c88c319638130805d0c801a62c1a8da8f"
+          },
+          "result": {
+            "path": "reports/forge/attempts/e7a839160d7a4095990c034557ec1d24/result.json",
+            "sha256": "204638d75b2c97e5806d6229fad40c3993b33c9e9cd06e36c864ad927979a2f2"
+          }
+        },
+        "source_digest": "f1755b1b5538901ffd4882f196bfd475030b06df16fd940c9b839eff86dc8226",
+        "source_origin_commit": "a0f7e70e50427e0d3221d1d7f4cb4aac6e18b1be"
+      },
+      "compared_endpoint_metrics": 18,
+      "differences": {},
+      "endpoints_exactly_match": true,
+      "original_verdict": "FAIL",
+      "current_full_verdict": "FAIL"
+    }
+  ]
+}

@@ -1,0 +1,674 @@
+{
+  "schema_version": 1,
+  "scope": "task_only_prior_diagnostic",
+  "qualification_input": false,
+  "qualification_reuse": false,
+  "archive": {
+    "local_path": "/home/martyn/dev/ParticleGAN-tier1-prior-smoke/artifacts/tier1-prior-smoke-v1.tar.gz",
+    "path": "artifacts/tier1-prior-smoke-v1.tar.gz",
+    "bytes": 13716517,
+    "sha256": "0ab6a34f0dbb27b7bd6647ef44918a1f022abc2732826c0d50190064d96ccd7d",
+    "availability": "LOCAL_ONLY"
+  },
+  "raw_root": "/home/martyn/dev/ParticleGAN-tier1-prior-smoke/runs/api/tier1-prior-smoke-v1",
+  "source_commit": "ec9be602b2b8d587b8c8c3f8bc10e98c96580dc1",
+  "source_digest": "5cf787dc883d392f622ca74237a6d0582d6714b5fa5111bb462c30d91dc0c33d",
+  "protocol_sha256": "8bb8ed3bbf760290c8b8711592eda0b197100d0ddc0630b166063391f5c81ea1",
+  "results_sha256": "72b4c725f721ff0595857ab3fc096be21a3b2241ab6f17f300ff0f7c1f157bb6",
+  "analysis_sha256": "0e03801f34828ff3062a8fff73906734f06d45e7b7975a444fcf3a5aecee2ffd",
+  "cuda_model": "NVIDIA RTX A6000",
+  "actual_devices": {
+    "cuda:0": 18
+  },
+  "training_runs": 18,
+  "host_updates": 12600,
+  "optimizer_updates_by_role": {
+    "generator": 12600,
+    "discriminator": 12600,
+    "prior": 12600
+  },
+  "automatic_retries": 0,
+  "remote_replication": "NOT_PERFORMED",
+  "raw_files": [
+    {
+      "path": "cloud-n1024/gaussian1d_acquisition/curve.json",
+      "bytes": 11555,
+      "sha256": "3554c8496dc76ba058a872608ddf2aab976e52bf795dbde8c23f24b580b64f34"
+    },
+    {
+      "path": "cloud-n1024/gaussian1d_acquisition/initial-state.pt",
+      "bytes": 74120,
+      "sha256": "2a043207d7e3f833502537e9ff15b4f469b0248dd40ef3c494d7e00e2d4f5907"
+    },
+    {
+      "path": "cloud-n1024/gaussian1d_acquisition/observations.pt",
+      "bytes": 419571,
+      "sha256": "3fe4a65f0068b78efdc6e532ffa4a7f3bd3c94027eb4f1a4041d223ea17c7c35"
+    },
+    {
+      "path": "cloud-n1024/gaussian1d_acquisition/receipt.json",
+      "bytes": 13199,
+      "sha256": "e3e055391b2e1fb8f26631afaff637bf106e1f106e1873fa82f902c4ea98e1dd"
+    },
+    {
+      "path": "cloud-n1024/gaussian1d_acquisition/source.json",
+      "bytes": 140459,
+      "sha256": "919b433e379f90126d403cfc22c602f56f0aa177272aa18f52337ae0cd995de2"
+    },
+    {
+      "path": "cloud-n1024/gaussian1d_acquisition/state.pt",
+      "bytes": 73280,
+      "sha256": "4ecc4f92fd8c1bddb343b5d25930fa57db28c8a8cc7f7941aba7c0e42dd390a2"
+    },
+    {
+      "path": "cloud-n1024/gaussian1d_acquisition.log",
+      "bytes": 11640,
+      "sha256": "b3f4d5f96ce5216c8114a828459e1e97b11a625edd13cbc33bee3030c06de69d"
+    },
+    {
+      "path": "cloud-n1024/ring16_acquisition/curve.json",
+      "bytes": 105920,
+      "sha256": "c3b8f552f78f4e0d6aaeefe89c40f8df573583f73c39c092486c49911a9fe389"
+    },
+    {
+      "path": "cloud-n1024/ring16_acquisition/initial-state.pt",
+      "bytes": 132488,
+      "sha256": "f76c83a38ba132a75bdabdadf6cff6e1f3e53376fb73fa5eb277f20e943a159b"
+    },
+    {
+      "path": "cloud-n1024/ring16_acquisition/observations.pt",
+      "bytes": 858675,
+      "sha256": "665443840bc50069345db81e109f9a18e5435ad00486a6cc0a06634343b09b0b"
+    },
+    {
+      "path": "cloud-n1024/ring16_acquisition/receipt.json",
+      "bytes": 41302,
+      "sha256": "318c656d35284c40c84310f2ab0f7465f0af01d42c3e11e70135cb5342191c0f"
+    },
+    {
+      "path": "cloud-n1024/ring16_acquisition/source.json",
+      "bytes": 140459,
+      "sha256": "919b433e379f90126d403cfc22c602f56f0aa177272aa18f52337ae0cd995de2"
+    },
+    {
+      "path": "cloud-n1024/ring16_acquisition/state.pt",
+      "bytes": 131648,
+      "sha256": "573d53fcbec1c60dc12fb8f210dd4d7aa223696a5937e0db27ed02edb9c647fd"
+    },
+    {
+      "path": "cloud-n1024/ring16_acquisition.log",
+      "bytes": 75205,
+      "sha256": "193420f25e6faed4a8ae18ce709f6a36b8f45bce3a96d96a99bf8cb42e9a0b5a"
+    },
+    {
+      "path": "cloud-n256/gaussian1d_acquisition/curve.json",
+      "bytes": 11724,
+      "sha256": "d167ee67ebe6079e5db3f202dd695c393afe7673924932c86f1d1db1192ed4f1"
+    },
+    {
+      "path": "cloud-n256/gaussian1d_acquisition/initial-state.pt",
+      "bytes": 61832,
+      "sha256": "04a7451ff7cfa01888bd9deb36eb41fd027df78129fbaa93682a1c0ea03b74dc"
+    },
+    {
+      "path": "cloud-n256/gaussian1d_acquisition/observations.pt",
+      "bytes": 419571,
+      "sha256": "ba69f7a1d2c801356c3dd1d03a8f73a789f51858ed5ce1868df177ac910661c8"
+    },
+    {
+      "path": "cloud-n256/gaussian1d_acquisition/receipt.json",
+      "bytes": 13213,
+      "sha256": "aee44761f85a202b271d7b9a0d0df46f43450282ad50aae61ad43cf087b733b4"
+    },
+    {
+      "path": "cloud-n256/gaussian1d_acquisition/source.json",
+      "bytes": 140459,
+      "sha256": "919b433e379f90126d403cfc22c602f56f0aa177272aa18f52337ae0cd995de2"
+    },
+    {
+      "path": "cloud-n256/gaussian1d_acquisition/state.pt",
+      "bytes": 60992,
+      "sha256": "86e9cc6053e53a40aba21d744481d4a6ea07770c6c7a39262a343923273bcfb2"
+    },
+    {
+      "path": "cloud-n256/gaussian1d_acquisition.log",
+      "bytes": 11735,
+      "sha256": "9de3186929d11a429566d01a510ece7fec846f4fa08cf13c3a66711493d8fdb8"
+    },
+    {
+      "path": "cloud-n256/ring16_acquisition/curve.json",
+      "bytes": 104844,
+      "sha256": "d78f2766f8b36b46adc1c356e4c862f4cd0efb9e5c209746ae81bb6dad5bdfc4"
+    },
+    {
+      "path": "cloud-n256/ring16_acquisition/initial-state.pt",
+      "bytes": 107912,
+      "sha256": "089e0f00d89deae6fd8421cf2b61a03228ad1ed7b265df17bf3bb1dccf9120ce"
+    },
+    {
+      "path": "cloud-n256/ring16_acquisition/observations.pt",
+      "bytes": 858675,
+      "sha256": "0f07d64f11e5ada44ee135da750c18634668656d031c5d786c6bc07ffc3cd6d6"
+    },
+    {
+      "path": "cloud-n256/ring16_acquisition/receipt.json",
+      "bytes": 40567,
+      "sha256": "cc3cb149c83dc1828bca7a0f80c140d670703df412b3f3bc3d025c612f8adbd1"
+    },
+    {
+      "path": "cloud-n256/ring16_acquisition/source.json",
+      "bytes": 140459,
+      "sha256": "919b433e379f90126d403cfc22c602f56f0aa177272aa18f52337ae0cd995de2"
+    },
+    {
+      "path": "cloud-n256/ring16_acquisition/state.pt",
+      "bytes": 107072,
+      "sha256": "cc98eb6885843aad53192c7a28eb0e73dbcb351c4ed3399abc60f4382be2ae9f"
+    },
+    {
+      "path": "cloud-n256/ring16_acquisition.log",
+      "bytes": 74128,
+      "sha256": "f0c72b770e93c0ac110a06539b0e6415486e3ba93962c513aff681cae1d42052"
+    },
+    {
+      "path": "cloud-n4096/gaussian1d_acquisition/curve.json",
+      "bytes": 11604,
+      "sha256": "dd520725e46503977f303d9a75fd71a41bf9de27304832372183eb92a0af6151"
+    },
+    {
+      "path": "cloud-n4096/gaussian1d_acquisition/initial-state.pt",
+      "bytes": 123272,
+      "sha256": "88ddb32e7ea8176d8567fa5e985d2bf01d5755f0bcfb882c759f1dfc12d8f1b4"
+    },
+    {
+      "path": "cloud-n4096/gaussian1d_acquisition/observations.pt",
+      "bytes": 419571,
+      "sha256": "879dab49bea9ae530b040e82e1cc3b747eeb4a89be401650a4b794fadcc903ec"
+    },
+    {
+      "path": "cloud-n4096/gaussian1d_acquisition/receipt.json",
+      "bytes": 13287,
+      "sha256": "61415fc4db05cc7f1a9fa0712f7bdf6999e8ee13b547a4200880fcc476bf1a82"
+    },
+    {
+      "path": "cloud-n4096/gaussian1d_acquisition/source.json",
+      "bytes": 140459,
+      "sha256": "919b433e379f90126d403cfc22c602f56f0aa177272aa18f52337ae0cd995de2"
+    },
+    {
+      "path": "cloud-n4096/gaussian1d_acquisition/state.pt",
+      "bytes": 122432,
+      "sha256": "995f2b62fea2131199f81af16559ae339e30119adefb29e7cd68ebb297f48ed8"
+    },
+    {
+      "path": "cloud-n4096/gaussian1d_acquisition.log",
+      "bytes": 11681,
+      "sha256": "bde08d0f0d045a76842f05daaa8469b672a2f3a4b742f8cfc668a5acd3d65e5a"
+    },
+    {
+      "path": "cloud-n4096/ring16_acquisition/curve.json",
+      "bytes": 105821,
+      "sha256": "5a679848dba914818b3f8d5bb800ede88fc05ad47e4379b992ac1b8643ae0f54"
+    },
+    {
+      "path": "cloud-n4096/ring16_acquisition/initial-state.pt",
+      "bytes": 230792,
+      "sha256": "143f75d560ccecb688c28223c420840d2eb4a0117bcddddfd08ae30e3dc52626"
+    },
+    {
+      "path": "cloud-n4096/ring16_acquisition/observations.pt",
+      "bytes": 858611,
+      "sha256": "933a781df7d80558e8c42808346ad939b53a2d84f5fd15ab55e7c8bce11b36ed"
+    },
+    {
+      "path": "cloud-n4096/ring16_acquisition/receipt.json",
+      "bytes": 41152,
+      "sha256": "4c91a1d92fd22764a1283572afca004a51a3efd31d36fa17d4f95c1d2109f8e6"
+    },
+    {
+      "path": "cloud-n4096/ring16_acquisition/source.json",
+      "bytes": 140459,
+      "sha256": "919b433e379f90126d403cfc22c602f56f0aa177272aa18f52337ae0cd995de2"
+    },
+    {
+      "path": "cloud-n4096/ring16_acquisition/state.pt",
+      "bytes": 229952,
+      "sha256": "93ed6fd59edc658a74561e9a34c9101d82fe9514d2683c82fcaaaba6031ddb8c"
+    },
+    {
+      "path": "cloud-n4096/ring16_acquisition.log",
+      "bytes": 74996,
+      "sha256": "fe964e5e851d4f7345802e083ac33841834737e64a4e20905fa5198358825764"
+    },
+    {
+      "path": "completion.json",
+      "bytes": 58,
+      "sha256": "ecd24a362dbfd7444b47e43a597c068f898af95f8ec63f0f7c1c9660d68a2c83"
+    },
+    {
+      "path": "controls.json",
+      "bytes": 19250,
+      "sha256": "e6671fb570ae258ec9673640345150d75c073162ef40322752939e1af98d60ad"
+    },
+    {
+      "path": "mog025-n1024/gaussian1d_acquisition/curve.json",
+      "bytes": 11139,
+      "sha256": "d9584f9a8b61f51438bfd62a0565ab6a6fc9114b7d8da56bd8ac7391e47ec1f7"
+    },
+    {
+      "path": "mog025-n1024/gaussian1d_acquisition/initial-state.pt",
+      "bytes": 75479,
+      "sha256": "b43f4f89d8dc9ad53a20a5c4f87e41ebdfbef9c7d540dff7f5579e976527b3fb"
+    },
+    {
+      "path": "mog025-n1024/gaussian1d_acquisition/observations.pt",
+      "bytes": 419571,
+      "sha256": "b9e092d0e56a1ce4c8c15ad57e0f18b626476f4dd7d27ad12dcc04c84d0f3577"
+    },
+    {
+      "path": "mog025-n1024/gaussian1d_acquisition/receipt.json",
+      "bytes": 13109,
+      "sha256": "064d271057a0661a37b97b8d03813624c0a573b962b7a23a484597680fa0aa7d"
+    },
+    {
+      "path": "mog025-n1024/gaussian1d_acquisition/source.json",
+      "bytes": 140459,
+      "sha256": "919b433e379f90126d403cfc22c602f56f0aa177272aa18f52337ae0cd995de2"
+    },
+    {
+      "path": "mog025-n1024/gaussian1d_acquisition/state.pt",
+      "bytes": 74599,
+      "sha256": "f67e4ba50e4f0d0c2a79b8c1976c9288b2087ba14bec32ecfaab99b367854224"
+    },
+    {
+      "path": "mog025-n1024/gaussian1d_acquisition.log",
+      "bytes": 11387,
+      "sha256": "318df6db3ce13b11f41ee8fedbc1aa097739eea29c81f3ab1065aaf38eb0e10f"
+    },
+    {
+      "path": "mog025-n1024/ring16_acquisition/curve.json",
+      "bytes": 106057,
+      "sha256": "1e53697a0d498b84f665c192dc2e5d50b1519b4595a69679b57fa8990f9d84b9"
+    },
+    {
+      "path": "mog025-n1024/ring16_acquisition/initial-state.pt",
+      "bytes": 133847,
+      "sha256": "c4adc01eeeec495957134f293e8b1152543186a02dd9a6a9be17e51bbc247b6c"
+    },
+    {
+      "path": "mog025-n1024/ring16_acquisition/observations.pt",
+      "bytes": 858611,
+      "sha256": "e280e9be2d29e1baa9e1f2dbd7f46c9815ec3ce41596e39a699e97854e8b9a0f"
+    },
+    {
+      "path": "mog025-n1024/ring16_acquisition/receipt.json",
+      "bytes": 41162,
+      "sha256": "fbf54225db56679e47aae86d947f7ea4556955f05032de8ffede90632c856b97"
+    },
+    {
+      "path": "mog025-n1024/ring16_acquisition/source.json",
+      "bytes": 140459,
+      "sha256": "919b433e379f90126d403cfc22c602f56f0aa177272aa18f52337ae0cd995de2"
+    },
+    {
+      "path": "mog025-n1024/ring16_acquisition/state.pt",
+      "bytes": 132967,
+      "sha256": "1c5c96a52d5b35ed24c2e87c13153165f01db2c30756fc7abd6c3f1f2c5f15c6"
+    },
+    {
+      "path": "mog025-n1024/ring16_acquisition.log",
+      "bytes": 75356,
+      "sha256": "27715cc259ef73a8bb40b324f974e91342f0078c972b4543670fe20457f9adba"
+    },
+    {
+      "path": "mog025-n256/gaussian1d_acquisition/curve.json",
+      "bytes": 11610,
+      "sha256": "f39a27da46eaa02f21c437ad8c9892a5584c0eaeeb4342d070d3e5c277633f6c"
+    },
+    {
+      "path": "mog025-n256/gaussian1d_acquisition/initial-state.pt",
+      "bytes": 63191,
+      "sha256": "68cd558fe0203b73bbd60ab6fba9d1ff2632c95cac575e0394c44da0de8369e4"
+    },
+    {
+      "path": "mog025-n256/gaussian1d_acquisition/observations.pt",
+      "bytes": 419571,
+      "sha256": "ae7c620d3410b5f6583cd40691c3cdedb0228e163f4c039e188eeb80fc93aa60"
+    },
+    {
+      "path": "mog025-n256/gaussian1d_acquisition/receipt.json",
+      "bytes": 12939,
+      "sha256": "1dc6e0febf9cf188d0d727e1ccc0aad0cc12b7f883d23bb66a3e0cdc0d79b288"
+    },
+    {
+      "path": "mog025-n256/gaussian1d_acquisition/source.json",
+      "bytes": 140459,
+      "sha256": "919b433e379f90126d403cfc22c602f56f0aa177272aa18f52337ae0cd995de2"
+    },
+    {
+      "path": "mog025-n256/gaussian1d_acquisition/state.pt",
+      "bytes": 62311,
+      "sha256": "d6df51dca220cc79c2bdd75c63466e4335ecd3995c9db05d540ba176da720bc0"
+    },
+    {
+      "path": "mog025-n256/gaussian1d_acquisition.log",
+      "bytes": 11683,
+      "sha256": "55f57ff674408544b6ff5d2e87e22971f5603e900a88985a6397c5bce3974f3e"
+    },
+    {
+      "path": "mog025-n256/ring16_acquisition/curve.json",
+      "bytes": 105052,
+      "sha256": "27fe96fa55c04f59a9944268c1f1b6588194e23d5d3a849c134718f48b2301ff"
+    },
+    {
+      "path": "mog025-n256/ring16_acquisition/initial-state.pt",
+      "bytes": 109271,
+      "sha256": "5f00992d0e9bb2d16e8f48b63f7d452582ef8cead37e2a27cc862781ed419ca0"
+    },
+    {
+      "path": "mog025-n256/ring16_acquisition/observations.pt",
+      "bytes": 858675,
+      "sha256": "c21dc3539ef4a338ce6a1b5c53f3a72c28e73801919cc17848b2d0cc5cccf49c"
+    },
+    {
+      "path": "mog025-n256/ring16_acquisition/receipt.json",
+      "bytes": 40520,
+      "sha256": "120c855f60ca25465f418c5e49d8bd3b32c9fec56112f6cb7425c4cbb8d62f2f"
+    },
+    {
+      "path": "mog025-n256/ring16_acquisition/source.json",
+      "bytes": 140459,
+      "sha256": "919b433e379f90126d403cfc22c602f56f0aa177272aa18f52337ae0cd995de2"
+    },
+    {
+      "path": "mog025-n256/ring16_acquisition/state.pt",
+      "bytes": 108391,
+      "sha256": "080ef923a31fddbe11186f7e85ac14e1720a5ad2498e063f802a3ee2907d6299"
+    },
+    {
+      "path": "mog025-n256/ring16_acquisition.log",
+      "bytes": 74444,
+      "sha256": "5808703c3f7625d03d3a2223faabfffb0c8bc004572e8270c6b11932fe23b023"
+    },
+    {
+      "path": "mog025-n4096/gaussian1d_acquisition/curve.json",
+      "bytes": 11695,
+      "sha256": "bac10ff7329e76acfa692280a9f14ce07b2758940c586399785afa62f5904b79"
+    },
+    {
+      "path": "mog025-n4096/gaussian1d_acquisition/initial-state.pt",
+      "bytes": 124631,
+      "sha256": "ecb7898ecd15b32a9cf389628e2177bd8dafdbe0a294791064aff10a53f0fabf"
+    },
+    {
+      "path": "mog025-n4096/gaussian1d_acquisition/observations.pt",
+      "bytes": 419571,
+      "sha256": "1495b509a2e6add648e4d6f8e78451b1304c342823b1f48755ca11e33b8e96f4"
+    },
+    {
+      "path": "mog025-n4096/gaussian1d_acquisition/receipt.json",
+      "bytes": 13174,
+      "sha256": "2708e7f792483056568d2fbf8c2aae232859a0e0d2b9ac93b7e22e422a06b105"
+    },
+    {
+      "path": "mog025-n4096/gaussian1d_acquisition/source.json",
+      "bytes": 140459,
+      "sha256": "919b433e379f90126d403cfc22c602f56f0aa177272aa18f52337ae0cd995de2"
+    },
+    {
+      "path": "mog025-n4096/gaussian1d_acquisition/state.pt",
+      "bytes": 123751,
+      "sha256": "a834c26d4917c689e05f5817e9adfac2b0208c7268898b0e11ebd3626fbf9e65"
+    },
+    {
+      "path": "mog025-n4096/gaussian1d_acquisition.log",
+      "bytes": 11776,
+      "sha256": "d09e8c1011ab98f9f75cdafa96f38b49a3ac9b4bdf35970af0d5253774968929"
+    },
+    {
+      "path": "mog025-n4096/ring16_acquisition/curve.json",
+      "bytes": 105824,
+      "sha256": "0b66765b9629a643fdb2eff6ede4c912373468c36e5555a92394bce99c674576"
+    },
+    {
+      "path": "mog025-n4096/ring16_acquisition/initial-state.pt",
+      "bytes": 232151,
+      "sha256": "35cffe5ee3a76c0c22abb6f1d1f1db57a2c2bdd1b33bcf0f251cfbbd4dfbff66"
+    },
+    {
+      "path": "mog025-n4096/ring16_acquisition/observations.pt",
+      "bytes": 858611,
+      "sha256": "6bb18ad930fc4fb38b7bc9c26a8b1f7fb35344c5b8dad1146d95405f9e495178"
+    },
+    {
+      "path": "mog025-n4096/ring16_acquisition/receipt.json",
+      "bytes": 41009,
+      "sha256": "ba77c37cf3b0192b628343a45be2af1a3eb9b4d12e5a57719f0787abc7150c37"
+    },
+    {
+      "path": "mog025-n4096/ring16_acquisition/source.json",
+      "bytes": 140459,
+      "sha256": "919b433e379f90126d403cfc22c602f56f0aa177272aa18f52337ae0cd995de2"
+    },
+    {
+      "path": "mog025-n4096/ring16_acquisition/state.pt",
+      "bytes": 231271,
+      "sha256": "72a5561061bf1ea3728a312e57fd2f526122f52d63c53e436b986e76b222d945"
+    },
+    {
+      "path": "mog025-n4096/ring16_acquisition.log",
+      "bytes": 75020,
+      "sha256": "86d6b041fb8f34865cd43438d41d5e2c7b069b6410c7b2f02b15ad7c048f9d4f"
+    },
+    {
+      "path": "mog100-n1024/gaussian1d_acquisition/curve.json",
+      "bytes": 11699,
+      "sha256": "2aaa47e64bf3f9ba3078016c8396ea670618b90c7560724ad11379c5803ef3bb"
+    },
+    {
+      "path": "mog100-n1024/gaussian1d_acquisition/initial-state.pt",
+      "bytes": 75479,
+      "sha256": "40e26d800182a0b0a4b44dc5119ab9d052cc69c8acb5828d3af72e8dcfa4f403"
+    },
+    {
+      "path": "mog100-n1024/gaussian1d_acquisition/observations.pt",
+      "bytes": 419571,
+      "sha256": "88ed14918862f5c49d9b96126b2f6b01b57518b80fb9752f91a2a4c134ea64ab"
+    },
+    {
+      "path": "mog100-n1024/gaussian1d_acquisition/receipt.json",
+      "bytes": 13132,
+      "sha256": "a66fcada4cb0db98d85625097f7e03dafb11e93614e794087f471b8a82752e0e"
+    },
+    {
+      "path": "mog100-n1024/gaussian1d_acquisition/source.json",
+      "bytes": 140459,
+      "sha256": "919b433e379f90126d403cfc22c602f56f0aa177272aa18f52337ae0cd995de2"
+    },
+    {
+      "path": "mog100-n1024/gaussian1d_acquisition/state.pt",
+      "bytes": 74599,
+      "sha256": "acb47e0a87caefce4c73c8c11aa07413f90fe985605faf1f00aa1c1edc346789"
+    },
+    {
+      "path": "mog100-n1024/gaussian1d_acquisition.log",
+      "bytes": 11802,
+      "sha256": "8b5b7797888dd2bcc43dc720e7e888f651565f5ea705b1adb38d328508c6929f"
+    },
+    {
+      "path": "mog100-n1024/ring16_acquisition/curve.json",
+      "bytes": 105650,
+      "sha256": "f1731abf83d8420f21c3b699abaa121c54fd25471ca93602940a259be657db0c"
+    },
+    {
+      "path": "mog100-n1024/ring16_acquisition/initial-state.pt",
+      "bytes": 133847,
+      "sha256": "089e024477a71c7b233ad602cfd47de4584a569215b59a4bc633420be1d7cc87"
+    },
+    {
+      "path": "mog100-n1024/ring16_acquisition/observations.pt",
+      "bytes": 858611,
+      "sha256": "a0aabc09dde49be0dc07f15e60b289b94d6f6a92d785fb5e0787c91606565788"
+    },
+    {
+      "path": "mog100-n1024/ring16_acquisition/receipt.json",
+      "bytes": 41001,
+      "sha256": "63ca11e12510a3c953d1bf3045661a3f1543d65f9f4a469281e89e9a59acb380"
+    },
+    {
+      "path": "mog100-n1024/ring16_acquisition/source.json",
+      "bytes": 140459,
+      "sha256": "919b433e379f90126d403cfc22c602f56f0aa177272aa18f52337ae0cd995de2"
+    },
+    {
+      "path": "mog100-n1024/ring16_acquisition/state.pt",
+      "bytes": 132967,
+      "sha256": "16c75b1767856bf7146d579e4143d0c100d86467c4c81e706c0b0c89859605c3"
+    },
+    {
+      "path": "mog100-n1024/ring16_acquisition.log",
+      "bytes": 74894,
+      "sha256": "db154d6e35314fefb4c02947592f85615e1400cbbe11bfb3c2e05f63814744e4"
+    },
+    {
+      "path": "mog100-n256/gaussian1d_acquisition/curve.json",
+      "bytes": 11098,
+      "sha256": "3e951dad906e34630b4ae3a5f0c716cdfa606bda11b6f66e0e636bfa24df30bf"
+    },
+    {
+      "path": "mog100-n256/gaussian1d_acquisition/initial-state.pt",
+      "bytes": 63191,
+      "sha256": "714a87af2b4cddd36f2865b02907f681b654a4b528b04762d1945c96cc95c5e0"
+    },
+    {
+      "path": "mog100-n256/gaussian1d_acquisition/observations.pt",
+      "bytes": 419571,
+      "sha256": "39bc5041bb1e67734e543c6f38aa5b94c10117044c2be4bb890ceaebb87b2911"
+    },
+    {
+      "path": "mog100-n256/gaussian1d_acquisition/receipt.json",
+      "bytes": 12633,
+      "sha256": "038cbb67be787ec7237c81f648881b5611bce7dd02e24b5cd7776c6d3f78fd4b"
+    },
+    {
+      "path": "mog100-n256/gaussian1d_acquisition/source.json",
+      "bytes": 140459,
+      "sha256": "919b433e379f90126d403cfc22c602f56f0aa177272aa18f52337ae0cd995de2"
+    },
+    {
+      "path": "mog100-n256/gaussian1d_acquisition/state.pt",
+      "bytes": 62311,
+      "sha256": "e70cf3edc0feb34c737c605f5cbe17e67c3a5d5be138fabe15c4ecf63a2bdb29"
+    },
+    {
+      "path": "mog100-n256/gaussian1d_acquisition.log",
+      "bytes": 11314,
+      "sha256": "4ce0d1bfbeadde8e720db25527dfe1d8c70c42d793bc3a5e6749bf6c3ac8fb3f"
+    },
+    {
+      "path": "mog100-n256/ring16_acquisition/curve.json",
+      "bytes": 104980,
+      "sha256": "ec528e70df9c22de0eb567e3f5a84b856fb83d024fd034b0686bec7b9c8b3289"
+    },
+    {
+      "path": "mog100-n256/ring16_acquisition/initial-state.pt",
+      "bytes": 109271,
+      "sha256": "064137ddb9b5bef48a818f677a24292e39588ac6a876e6166f2a02074b3af4ea"
+    },
+    {
+      "path": "mog100-n256/ring16_acquisition/observations.pt",
+      "bytes": 858611,
+      "sha256": "fbcf233c1c2c1f7a9430303ac1659b1361a0a4d6cd5d57a365c0f069e7c677bc"
+    },
+    {
+      "path": "mog100-n256/ring16_acquisition/receipt.json",
+      "bytes": 40886,
+      "sha256": "5153c644b9c709ec41e3cad0f4ab1e9da8190520e776ae1e1921d8ea82e85ed3"
+    },
+    {
+      "path": "mog100-n256/ring16_acquisition/source.json",
+      "bytes": 140459,
+      "sha256": "919b433e379f90126d403cfc22c602f56f0aa177272aa18f52337ae0cd995de2"
+    },
+    {
+      "path": "mog100-n256/ring16_acquisition/state.pt",
+      "bytes": 108391,
+      "sha256": "23f5c0c286b3057bdf2146fa8a49d92eb706a7f5e89043099a803e4b19a76524"
+    },
+    {
+      "path": "mog100-n256/ring16_acquisition.log",
+      "bytes": 74243,
+      "sha256": "a453b6c4653b21836b33811771ae623b3efe7b6ee758c1ae2b4619b37f024e33"
+    },
+    {
+      "path": "mog100-n4096/gaussian1d_acquisition/curve.json",
+      "bytes": 11507,
+      "sha256": "079086a83b84599e519485031faf46ae09be81d1175d45a056a2b12a777681b8"
+    },
+    {
+      "path": "mog100-n4096/gaussian1d_acquisition/initial-state.pt",
+      "bytes": 124631,
+      "sha256": "af08abcc8b73aaded0def590e9c4071cdf2eef6b07cd5c12862f38911b390d82"
+    },
+    {
+      "path": "mog100-n4096/gaussian1d_acquisition/observations.pt",
+      "bytes": 419571,
+      "sha256": "5c934a1db11fefc06f3ab412c4ac5b5746291878dcb5a49ea7ad73916bbf2a12"
+    },
+    {
+      "path": "mog100-n4096/gaussian1d_acquisition/receipt.json",
+      "bytes": 12996,
+      "sha256": "2ae4908aa885e8aba2e1e094b182bfbaffa557797811c717cafdc01b6c65d769"
+    },
+    {
+      "path": "mog100-n4096/gaussian1d_acquisition/source.json",
+      "bytes": 140459,
+      "sha256": "919b433e379f90126d403cfc22c602f56f0aa177272aa18f52337ae0cd995de2"
+    },
+    {
+      "path": "mog100-n4096/gaussian1d_acquisition/state.pt",
+      "bytes": 123751,
+      "sha256": "093daac1f4f0bc8e500aaba4087827d384cc94c2a8b535d4e25ddc3d50c80c86"
+    },
+    {
+      "path": "mog100-n4096/gaussian1d_acquisition.log",
+      "bytes": 11647,
+      "sha256": "1e1d89cd8c3259222bab75ac88f278e6870fcbfa975d43911827c5225c0d0b54"
+    },
+    {
+      "path": "mog100-n4096/ring16_acquisition/curve.json",
+      "bytes": 105769,
+      "sha256": "ee07ec4ab37984c35fc3cc7d6ff5705929a344e17c000faeafa3562d9852d229"
+    },
+    {
+      "path": "mog100-n4096/ring16_acquisition/initial-state.pt",
+      "bytes": 232151,
+      "sha256": "43b006fd55be4c9630f1e4a12d31650a47edcfa4022534e74c92a4597bc4a5a2"
+    },
+    {
+      "path": "mog100-n4096/ring16_acquisition/observations.pt",
+      "bytes": 858611,
+      "sha256": "322961324a4706d641548c08df63e0575f35b24bdb31774b459d5c558a5079a8"
+    },
+    {
+      "path": "mog100-n4096/ring16_acquisition/receipt.json",
+      "bytes": 41088,
+      "sha256": "c38d8dbac1e5e3e30d66289a6fe508c23640306b927c1063ace95ce052077965"
+    },
+    {
+      "path": "mog100-n4096/ring16_acquisition/source.json",
+      "bytes": 140459,
+      "sha256": "919b433e379f90126d403cfc22c602f56f0aa177272aa18f52337ae0cd995de2"
+    },
+    {
+      "path": "mog100-n4096/ring16_acquisition/state.pt",
+      "bytes": 231271,
+      "sha256": "3a9f60a31293e0cf1c482f5068458d75f15a0bdf876ddd7abdef0dae300f25a1"
+    },
+    {
+      "path": "mog100-n4096/ring16_acquisition.log",
+      "bytes": 74919,
+      "sha256": "3c3ccb61064f105497c91bc0457e3ae47573eae5f72282db20f46ec1e14144b1"
+    }
+  ]
+}
