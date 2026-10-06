@@ -101,6 +101,10 @@ def task_recipe_overrides(candidate, task):
     from .taskrecipes import bind_task_candidate
     bound = bind_task_candidate(candidate, task)
     execution = task["execution"]
+    if bound.get('id') == 'atlas-two-pole-l2-off932-v1':
+        from .atlas932_two_pole_owner import validate_task, TASK_BINDINGS
+        validate_task(task)
+        return {**bound.get('recipe_overrides', {}), **TASK_BINDINGS}
     from .noisy_prior_tier1 import is_noisy_task, validate
     if is_noisy_task(task):
         from .noisy_prior_adapters import blockers, task_resources
@@ -148,6 +152,11 @@ def task_formulation_context(candidate, task, protocol=None, *, device="cpu", ro
         reasons = original_noisy_blockers(task, candidate, root=root)
         if reasons:
             raise CapabilityError(reasons)
+    if (candidate.get('id') == 'atlas-two-pole-l2-off932-v1' or task.get('id') == 'two_pole_l2_off932_v1'):
+        if candidate.get('id') != 'atlas-two-pole-l2-off932-v1' or task.get('id') != 'two_pole_l2_off932_v1':
+            raise CapabilityError(['932 requires its exact objective candidate/task pair'])
+        from .atlas932_two_pole_owner import validate_task
+        validate_task(task, root=root)
     bound = bind_task_candidate(candidate, task)
     from .atlas_existing_mog import is_candidate as existing_mog_candidate, blockers as existing_mog_blockers
     existing_mog = existing_mog_candidate(bound)
@@ -156,7 +165,9 @@ def task_formulation_context(candidate, task, protocol=None, *, device="cpu", ro
         if reasons:
             raise CapabilityError(reasons)
     from .atlas_two_pole import is_task as original_two_pole_task
-    if bound.get('id') == 'atlas-two-pole-particle-amsgrad-off927-v1':
+    if bound.get('id') == 'atlas-two-pole-l2-off932-v1':
+        from .atlas932_two_pole_owner import supports, resolve_binding, validate_effective_recipe
+    elif bound.get('id') == 'atlas-two-pole-particle-amsgrad-off927-v1':
         from .atlas927_two_pole_owner import supports, resolve_binding, validate_effective_recipe
     elif (bound.get('id') == 'atlas-original-two-pole-passive889-v1'
             or (bound.get('id') == 'atlas-existing-mog-nearest-positive791-v1'
@@ -214,6 +225,17 @@ def task_formulation_context(candidate, task, protocol=None, *, device="cpu", ro
     if ordinary_two_pole:
         validate_effective_recipe(asdict(context.recipe))
         context.ordinary_two_pole_binding = ordinary_binding
+        if bound.get('id') == 'atlas-two-pole-l2-off932-v1':
+            context.particle_l2_932_host_entry = {
+                'owner': 'experiments.forge.atlas932_two_pole_owner.run_behavior',
+                'base_recipe_sha256': ordinary_binding['base_recipe_sha256'],
+                'effective_optimizer_variant': deepcopy(ordinary_binding['effective_optimizer_variant']),
+                'effective_optimizer_variant_sha256': ordinary_binding['effective_optimizer_variant_sha256'],
+                'effective_objective_variant': deepcopy(ordinary_binding['effective_objective_variant']),
+                'effective_objective_variant_sha256': ordinary_binding['effective_objective_variant_sha256'],
+                'source_contract_sha256': ordinary_binding['source_contract_sha256'],
+                'parent_task_id': 'two_pole', 'task_id': 'two_pole_l2_off932_v1',
+                'canonical_original_task_qualification': False}
         if bound.get('id') == 'atlas-two-pole-particle-amsgrad-off927-v1':
             context.particle_amsgrad927_host_entry = {
                 'owner': 'experiments.forge.atlas927_two_pole_owner.run_behavior',
@@ -420,6 +442,16 @@ class FormulationContext:
             raise CapabilityError(["unsupported public execution path"])
         self.execution_path = execution_path
         self.policy_task = deepcopy(policy_task)
+        if ((candidate_id == 'atlas-two-pole-l2-off932-v1' and self.policy_task is not None
+                and self.policy_task.get('id') != 'two_pole_l2_off932_v1')
+                or (self.policy_task is not None and self.policy_task.get('id') == 'two_pole_l2_off932_v1'
+                    and candidate_id != 'atlas-two-pole-l2-off932-v1')):
+            raise CapabilityError(['932 requires its exact objective candidate/task pair'])
+        if candidate_id == 'atlas-two-pole-l2-off932-v1' and self.policy_task is not None:
+            from .atlas932_two_pole_owner import public_parent_task
+            # Only public ownership metadata sees the validated fixed parent.
+            # The caller/request/ownership_contract retain the diagnostic Task.
+            self.policy_task = public_parent_task(self.policy_task)
         if self.policy_task is not None and (
                 (candidate_id == 'atlas-existing-mog-longer871-v1'
                  and self.policy_task.get('id') != 'gaussian1d_acquisition_longer871_v1')
@@ -427,7 +459,7 @@ class FormulationContext:
                     and candidate_id != 'atlas-existing-mog-longer871-v1')):
             raise CapabilityError(['longer871 context requires its exact candidate/task pair'])
         from .atlas_existing_mog import CANDIDATE_ID, validate as validate_existing_mog, task_resources as existing_mog_resources
-        self._existing_mog = candidate_id in {CANDIDATE_ID, 'atlas-existing-mog-radius-observer844-v1', 'atlas-existing-mog-longer871-v1', 'atlas-original-two-pole-passive889-v1', 'atlas-two-pole-particle-amsgrad-off927-v1'}
+        self._existing_mog = candidate_id in {CANDIDATE_ID, 'atlas-existing-mog-radius-observer844-v1', 'atlas-existing-mog-longer871-v1', 'atlas-original-two-pole-passive889-v1', 'atlas-two-pole-particle-amsgrad-off927-v1', 'atlas-two-pole-l2-off932-v1'}
         if candidate_id in {'atlas-existing-mog-radius-observer844-v1', 'atlas-existing-mog-longer871-v1'}:
             self.candidate_id = candidate_id
         if candidate_id == 'atlas-existing-mog-radius-observer844-v1' and self.policy_task is not None:
@@ -783,6 +815,10 @@ class FormulationContext:
             host = ownership['field_ownership']['task_contract']['host']
             host['value'] = {**deepcopy(host['value']),
                 'optimizer_ablation': deepcopy(self.particle_amsgrad927_host_entry)}
+        if getattr(self, 'particle_l2_932_host_entry', None) is not None:
+            host = ownership['field_ownership']['task_contract']['host']
+            host['value'] = {**deepcopy(host['value']),
+                'objective_ablation': deepcopy(self.particle_l2_932_host_entry)}
         policy = None
         if (self._trainer is not None or self._policy is not None) and policy_controls(self.recipe):
             owner = self._trainer if self._trainer is not None else self._policy

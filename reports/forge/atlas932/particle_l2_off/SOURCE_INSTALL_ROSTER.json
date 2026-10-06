@@ -1,0 +1,58 @@
+{
+  "configs/forge/ideas/atlas-two-pole-l2-off932-v1.json": {
+    "bytes": 2639,
+    "sha256": "3b0e54a53c12164246aefe178457b64ae70b8773d1949e2b7d4ae4c987ac9146"
+  },
+  "configs/forge/studies/atlas-two-pole-l2-off932-study-v1.json": {
+    "bytes": 2325,
+    "sha256": "6d37650e12436dd5123c7806d16f7a133665877f777a5c8ea21a987168917c1c"
+  },
+  "configs/forge/tasks/two_pole_l2_off932_v1.json": {
+    "bytes": 3714,
+    "sha256": "868a3e2a8da8a92539051fedd1b08e8ce33635f343dfa34d81ea2d50c99a3f08"
+  },
+  "configs/forge/views/atlas_two_pole_l2_off932_v1.json": {
+    "bytes": 2167,
+    "sha256": "4f746c820992da25a6ad6def8d8eaceab5f6cc262a227aa0da844c0e4f07c8db"
+  },
+  "experiments/forge/adapters.py": {
+    "bytes": 40216,
+    "sha256": "5c2b0d6d8a850c7ab7f7262453a6d476df71ae337ea9c5370299e8a0db2db8ae"
+  },
+  "experiments/forge/api.py": {
+    "bytes": 55071,
+    "sha256": "b0e542c859546271268c3a6f383f87a6a96688af2e58deaeffd9837bf7160ef4"
+  },
+  "experiments/forge/atlas932_contract.py": {
+    "bytes": 14313,
+    "sha256": "2d324291e85d40564e3fd11ed3d5e6130dace9cb14f1080bc6529a427caf36fb"
+  },
+  "experiments/forge/atlas932_reference.py": {
+    "bytes": 8862,
+    "sha256": "1dbb6a192151613d126e17a3fabe9819250fc7154e87d3b2d45e192e093502fe"
+  },
+  "experiments/forge/atlas932_two_pole_owner.py": {
+    "bytes": 76162,
+    "sha256": "ced28b3fe73d1fa74a000b1f10552ada7bc0f703cd8c94c6fff6ce8d04841a07"
+  },
+  "experiments/forge/atlas_existing_mog.py": {
+    "bytes": 50297,
+    "sha256": "55c529de339400d6965336e283bd8596f436f7fc6388d6e8dd639529586ceeca"
+  },
+  "experiments/forge/hostprofiles.py": {
+    "bytes": 16071,
+    "sha256": "606ac26637b964dc94831cccea5c23ffad8866b8f20d03f19ee3a997b76a884d"
+  },
+  "experiments/forge/promotion.py": {
+    "bytes": 34315,
+    "sha256": "b56b6d257fd8c3de38d3a7cc26f439985ef6d6477177817793f8f614bfe5f399"
+  },
+  "experiments/forge/studies.py": {
+    "bytes": 18557,
+    "sha256": "c9ec888101d1f12d9e5ba51cd9ac64ab37c72c55f4262409bdddb38a5d22e41f"
+  },
+  "tests/test_atlas932_particle_l2.py": {
+    "bytes": 18584,
+    "sha256": "9d23717382fa581e0875e815c99df11e41828667bb3a9ca0ed23abb24ad75207"
+  }
+}

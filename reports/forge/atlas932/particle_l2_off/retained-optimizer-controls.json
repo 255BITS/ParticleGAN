@@ -1,0 +1,84 @@
+{
+  "added_operations": {
+    "extra_backward_calls": 0,
+    "extra_decision_evaluations": 0,
+    "extra_model_forwards": 0,
+    "extra_optimizer_steps": 0,
+    "extra_prior_samples": 0,
+    "extra_rng_draws": 0,
+    "foreign_device_initializations": 0,
+    "state_getter_calls": 0,
+    "state_mutations": 0
+  },
+  "base_recipe_sha256": "d5f20a8c4a9a7a3e2f0ac6d4562ae0a364677ffe73611ff9f9b7432434024b95",
+  "checks": {
+    "checkpoint_recorder_and_roundtrip_flags": "PASS",
+    "closure_and_failure_forwarding": "PASS",
+    "completed_lr_clock_and_q_preserved": "PASS",
+    "fresh_owned_table_only_group_override": "PASS",
+    "original_task_gate_and_core_scope": "PASS",
+    "populated_adam_denominator_branch": "PASS",
+    "registry_base_recipe_and_task_bound": "PASS",
+    "wrong_variant_or_role_rejected": "PASS"
+  },
+  "effective_optimizer_variant": {
+    "base_recipe_sha256": "d5f20a8c4a9a7a3e2f0ac6d4562ae0a364677ffe73611ff9f9b7432434024b95",
+    "groups": [
+      {
+        "amsgrad": false,
+        "group_index": 0,
+        "optimizer": "generator",
+        "role": "table"
+      },
+      {
+        "amsgrad": true,
+        "group_index": 1,
+        "optimizer": "generator",
+        "role": "noise"
+      },
+      {
+        "amsgrad": true,
+        "group_index": 0,
+        "optimizer": "critic",
+        "role": "critic"
+      }
+    ],
+    "schema": "forge_atlas927_two_pole_particle_amsgrad_variant_v1",
+    "table_lr_clock": "completed_direct_adam_lr/base_lr"
+  },
+  "effective_optimizer_variant_sha256": "950edc64094c417d98d43b2eaf59fbaaba0524f7823e2acb001ba7576db1d051",
+  "resources": {
+    "backend": "cpu",
+    "budget_seconds": 300,
+    "cpu_threads": 1,
+    "gpus": 0
+  },
+  "schema": "forge_atlas927_particle_amsgrad_control_result_v1",
+  "source_pins": {
+    "experiments/forge/atlas889_two_pole_observer.py": {
+      "bytes": 23311,
+      "sha256": "0c2070cbaa5da9f056ded548b629165ace50746472aa45e0dc8abd20a4e2a646"
+    },
+    "experiments/forge/atlas927_contract.py": {
+      "bytes": 10860,
+      "sha256": "7a2be1b94d723776a4a938868cefc8cc6962fd37946d5b41e1fe0c49ea15e01d"
+    },
+    "experiments/forge/atlas927_two_pole_owner.py": {
+      "bytes": 68998,
+      "sha256": "0fdd73021ab38f660b8c1ee4b292e32ef9fa39077751ba85d7679a64d283a587"
+    },
+    "tests/test_atlas889_two_pole_observer.py": {
+      "bytes": 29610,
+      "sha256": "52f82b6b0bd5bc313ee341466463cee415d61e9804658dfc554280931d144145"
+    },
+    "tests/test_atlas921_completed_lr_clock.py": {
+      "bytes": 13934,
+      "sha256": "3da79006816bcb88488333c200f55077af5d6e3c97f2dafbbedd863fc7279a40"
+    },
+    "tests/test_atlas927_particle_amsgrad.py": {
+      "bytes": 19154,
+      "sha256": "64e562da2a8fe3a5412f78c8fcf23eaeaa86ddf4b5b7b693ca508bc6d1ded2e5"
+    }
+  },
+  "status": "PASS"
+}

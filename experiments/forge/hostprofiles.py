@@ -151,6 +151,10 @@ def _validate_candidate_identity(request):
         from .atlas927_two_pole_owner import supports_candidate as supports927
         if supports927(candidate):
             existing_mog_id = candidate['id']
+    if candidate.get('id') == 'atlas-two-pole-l2-off932-v1' and request.get('view', {}).get('id') == 'atlas_two_pole_l2_off932_v1':
+        from .atlas932_two_pole_owner import supports_candidate as supports932
+        if supports932(candidate):
+            existing_mog_id = candidate['id']
     context = FormulationContext(recipe_preset=candidate.get("recipe_preset"),
         recipe_overrides=candidate.get("recipe_overrides", {}),
         prior=candidate.get("prior"), device="cpu",

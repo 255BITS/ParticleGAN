@@ -1,0 +1,55 @@
+{
+  "campaign": {
+    "budget_seconds": 300,
+    "candidate_budget_seconds": 300,
+    "id": "atlas-two-pole-l2-off932-study-v1"
+  },
+  "candidate": "atlas-two-pole-l2-off932-v1",
+  "competing_explanation": "Weak GAN gradients, q/restored beta effects, or later settle/hot/birth-death writes may dominate even with zero training L2. Completed927 is a retained historical reference; no baseline replay or grade transfer. BaseD5 and optimizer950ed remain provenance, while effective_objective_variant is explicitly different. Original889INVALID300 and every prior failure/cost are preserved.",
+  "control": {
+    "candidate_id": "atlas-two-pole-particle-amsgrad-off927-v1",
+    "task_map": {
+      "two_pole_l2_off932_v1": "two_pole"
+    }
+  },
+  "falsifier": {
+    "metric": "mean_abs",
+    "op": "<",
+    "phase": "final",
+    "task_id": "two_pole_l2_off932_v1",
+    "threshold": 0.3
+  },
+  "hypothesis": "Remove only particle_l2 * particles.square().mean() coefficient0.02 from training, setting0.0 on a distinct diagnostic Task. Compare to completed927 tableAMSGradOFF with the completed-Adam LR clock, all other numeric controls and original80/24/five-check scalar gates fixed. Predict final mean_abs>=0.30 on this objective diagnostic. Identical complete retained actions/trajectory/scores means no observed effect; changed behavior but FAIL means relevant but insufficient; PASS supports only this objective variant, never canonical originalTask qualification.",
+  "id": "atlas-two-pole-l2-off932-study-v1",
+  "max_rounds": 1,
+  "prediction": {
+    "metric": "mean_abs",
+    "op": ">=",
+    "phase": "final",
+    "task_id": "two_pole_l2_off932_v1",
+    "threshold": 0.3
+  },
+  "prior_evidence": [
+    {
+      "identity": {
+        "record_id": "original791-two-pole-f3140adaffd14f4a8974d25874d345d4"
+      },
+      "path": "experiments/forge/prior_evidence/atlas889-original791-motivation.json",
+      "selector": [],
+      "use": "motivation_only"
+    }
+  ],
+  "schema_version": 1,
+  "scope": {
+    "execution_backend": "cpu",
+    "through_tier": 1,
+    "view": "atlas_two_pole_l2_off932_v1"
+  },
+  "status": "ready",
+  "terminal_rules": {
+    "falsified": "stop_revision",
+    "incomplete": "request_missing_evidence",
+    "inconclusive": "stop_and_readout",
+    "prediction_observed": "review_saved_diagnostics"
+  }
+}

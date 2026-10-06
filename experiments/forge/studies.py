@@ -148,6 +148,12 @@ def inspect_study(root, request):
         # Unsupported candidate cells stay in the denominator and cannot run.
         # A task-local binding refusal must not erase independently runnable
         # peers. Legacy contracts continue using their original strict resolver.
+        if (study['candidate'] == 'atlas-two-pole-l2-off932-v1' and study['id'] == 'atlas-two-pole-l2-off932-study-v1'
+                and study['scope']['view'] == 'atlas_two_pole_l2_off932_v1'
+                and candidate['id'] == 'atlas-two-pole-particle-amsgrad-off927-v1'):
+            from .atlas932_reference import historical_reference_bindings
+            return historical_reference_bindings(candidate, tasks, protocol, checkout,
+                study=study, current_candidate=request['candidate'])
         if (study['candidate'] == 'atlas-two-pole-particle-amsgrad-off927-v1'
                 and study['id'] == 'atlas-two-pole-particle-amsgrad-off927-study-v1'
                 and study['scope']['view'] == 'atlas_two_pole_particle_amsgrad_off927_v1'
