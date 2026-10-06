@@ -1,0 +1,40 @@
+{
+  "gif_bytes": 104822,
+  "gif_sha256": "ce259bd0915036a13bced104a9f541d13b775aa9d031c43e3ac003ddd9054488",
+  "observation_count": 24,
+  "observations_sha256": "eb40e7f46e65e73445bd9513928d0c4c592d5e023114be238cc3a1a9a744e888",
+  "optimizer_updates_added": 0,
+  "original_media_receipt_canonical_sha256": "8b362d6dea72ea4fb63e6630360d89d9fd113ada70a7f77bf7576453483b392e",
+  "qualification_input": false,
+  "recorded_grade": "FAIL",
+  "renderer_sha256": "1886779d0d4e9d4c52f0585bae6f0f378553901f45b43b2c93fa50dd8803f0f1",
+  "reporting_renderer_derivation": {
+    "derived_reporting_renderer": {
+      "path": "experiments/forge/atlas717_existing_mog_media_reporting760.py",
+      "sha256": "1886779d0d4e9d4c52f0585bae6f0f378553901f45b43b2c93fa50dd8803f0f1"
+    },
+    "original_training_renderer": {
+      "path": "experiments/forge/atlas717_existing_mog_media.py",
+      "sha256": "84592ae0760dce162d597b5e570a96ecdd0d770912732f1b48fd028958ecd825"
+    },
+    "original_training_source_digest": "e4fa54d397f280dc70012474cddaf585f12088ae68c5b2f6e981c83819e6c145",
+    "scientific_source_unchanged": true,
+    "scope": "REPORTING_ONLY_RECORDED_DIRECT_GRADIENT_SHAPE"
+  },
+  "sampling_draws_added": 0,
+  "schema": "pg_atlas717_public_saved_observation_media_v1",
+  "selected_observation_indices": [
+    0,
+    3,
+    6,
+    9,
+    12,
+    14,
+    17,
+    20,
+    23
+  ],
+  "source_input_byte_pins": [],
+  "source_input_sha256": [],
+  "task_id": "two_pole"
+}
