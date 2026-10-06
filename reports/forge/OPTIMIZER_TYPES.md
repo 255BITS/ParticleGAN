@@ -195,24 +195,45 @@ It preserves the recorded selections rather than combining task-specific
 winners. The single current goal leaderboard remains
 [`technique-inventory.md`](technique-inventory.md).
 
-| Optimizer arm | Whole configurations | Selected required passes | Selected G / D / prior rates |
-| --- | ---: | ---: | --- |
-| [Adam](configuration-search/bcap-optim-adam-tier1-v1.json) | 5 | 3/6 | `.016 / .016 / .032` |
-| [SGDA](configuration-search/bcap-optim-sgda-tier1-v1.json) | 5 | 2/6 | `.1 / .1 / .2` |
-| [Global nSGDA](configuration-search/bcap-optim-nsgda-global-tier1-v1.json) | 4 | 3/6 | `.1 / .15 / .03` |
-| [Layer nSGDA](configuration-search/bcap-optim-nsgda-layer-tier1-v1.json) | 4 | 3/6 | `.1 / .15 / .03` |
-| [Adam-magnitude graft](configuration-search/bcap-optim-ada-nsgda-tier1-v1.json) | 4 | 2/6 | `.016 / .016 / .032` |
-| [DualNorm, momentum 0](configuration-search/bcap-optim-dualnorm-zero-tier1-v1.json) | 4 | 3/6 | `.03 / .045 / .03` |
-| [DualNorm, momentum .5/.9](configuration-search/bcap-optim-dualnorm-momentum-tier1-v1.json) | 8 | 2/6 | `.01 / .015 / .03`, selected `mu=.9` |
-| [Critic-only DualNorm](configuration-search/bcap-optim-dualnorm-d-only-tier1-v1.json) | 4 | 2/6 | `.00425 / .15 / .0085`, D `mu=.5`; G/prior use Adam |
-| [Prior-row-only normalization](configuration-search/bcap-optim-particle-rownorm-only-tier1-v1.json) | 3 | 3/6 | `.00425 / .00425 / .01`; G/D use Adam |
+| Optimizer arm | Whole configurations | Selected required passes | Selected G / D / prior rates | Gaussian ms/step (GPU) | Ring16 ms/step (GPU) |
+| --- | ---: | ---: | --- | ---: | ---: |
+| [Adam](configuration-search/bcap-optim-adam-tier1-v1.json) | 5 | 3/6 | `.016 / .016 / .032` | 7.497 (0) | 8.575 (1) |
+| [SGDA](configuration-search/bcap-optim-sgda-tier1-v1.json) | 5 | 2/6 | `.1 / .1 / .2` | 6.991 (1) | 8.018 (1) |
+| [Global nSGDA](configuration-search/bcap-optim-nsgda-global-tier1-v1.json) | 4 | 3/6 | `.1 / .15 / .03` | 7.743 (1) | 8.822 (1) |
+| [Layer nSGDA](configuration-search/bcap-optim-nsgda-layer-tier1-v1.json) | 4 | 3/6 | `.1 / .15 / .03` | 7.725 (0) | 8.190 (0) |
+| [Adam-magnitude graft](configuration-search/bcap-optim-ada-nsgda-tier1-v1.json) | 4 | 2/6 | `.016 / .016 / .032` | 8.228 (0) | 9.329 (0) |
+| [DualNorm, momentum 0](configuration-search/bcap-optim-dualnorm-zero-tier1-v1.json) | 4 | 3/6 | `.03 / .045 / .03` | 9.751 (0) | 14.096 (0) |
+| [DualNorm, momentum .5/.9](configuration-search/bcap-optim-dualnorm-momentum-tier1-v1.json) | 8 | 2/6 | `.01 / .015 / .03`, selected `mu=.9` | 9.583 (0) | 13.584 (0) |
+| [Critic-only DualNorm](configuration-search/bcap-optim-dualnorm-d-only-tier1-v1.json) | 4 | 2/6 | `.00425 / .15 / .0085`, D `mu=.5`; G/prior use Adam | 8.428 (1) | 11.229 (1) |
+| [Prior-row-only normalization](configuration-search/bcap-optim-particle-rownorm-only-tier1-v1.json) | 3 | 3/6 | `.00425 / .00425 / .01`; G/D use Adam | 7.674 (1) | 8.645 (1) |
+
+Saved receipts mark FLOPs as `unavailable`, so the cost columns use recorded
+**mean milliseconds per full training step**. For each task in the selected
+trial, read `cost.phase_timing.phases.training_updates` and compute
+`ms_per_step = 1000 * seconds / calls`. Gaussian has 1,000 measured calls;
+Ring16 has 400. Each call completes one D update and one G/prior update,
+including forward/backward passes and the BCAP penalty. The
+[synchronized phase timer](../../experiments/forge/telemetry.py) surrounds
+the [public training call](../../experiments/forge/adapters.py), including
+its statistics and attached diagnostic hooks; it excludes real-input
+preparation, evaluation, evaluation sampling and process startup.
+
+The linked search records bind the exact selected candidates, task attempts
+and timing totals. Their runtime cohort records NVIDIA RTX A6000 CUDA
+devices, PyTorch 2.14.0, one Torch thread, deterministic execution and TF32
+disabled; parentheses give each task's GPU index. These are averages from
+the original instrumented executions, without repeated timing trials or
+uncertainty estimates. The campaigns used two GPU workers, and their
+protocol treats wall time as cost evidence without a speed ranking. Keep
+the source cohorts separate when interpreting the measurements.
 
 None of the new optimizer arms exceeded Adam's 3/6 required-pass count in
 that source cohort. Five SGDA numerical failures remained `INCOMPLETE`,
 with no pass credit. The source-bound analysis is in
 [`dualnorm-tier1/analysis.json`](dualnorm-tier1/analysis.json).
 The unchanged incumbent Adam control used `.00425 / .00425 / .0085` and
-also passed 3/6; the table shows the search-selected Adam configuration.
+also passed 3/6; its Gaussian/Ring16 costs were **7.752 / 9.257 ms/step**,
+both on GPU 0. The table shows the search-selected Adam configuration.
 
 The owner chose a different tied zero-momentum DualNorm recipe,
 `.01 / .015 / .03`, as the next experimental starter because it retained
@@ -232,6 +253,15 @@ assigned-component covariance error **`9.61552 > .85`**. Ring still has
 gate. Required passes need at least five consecutive terminal passing
 evaluations, rather than a passing endpoint alone. These measured results
 remain attached to their original recipe, task and source bindings.
+
+The later pacing cohort's recorded step costs are below. These rows use the
+same timing definition and task budgets, and the exact control/winner trials
+in [`dualnorm-pacing-v2/results.json`](dualnorm-pacing-v2/results.json).
+
+| Pacing recipe | G/E / D / prior steps | Gaussian ms/step (GPU) | Ring16 ms/step (GPU) |
+| --- | --- | ---: | ---: |
+| Matched DualNorm starter, momentum 0 | `.01 / .015 / .03` | 9.431 (0) | 13.299 (0) |
+| Selected DualNorm winner, momentum 0 | `.012 / .018 / .03` | 9.497 (1) | 13.122 (1) |
 
 ## Choosing and configuring an optimizer
 
