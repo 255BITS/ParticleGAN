@@ -1,0 +1,196 @@
+{
+  "schema_version": 1,
+  "id": "tier1-prior-smoke-v1",
+  "scope": "task_only_prior_diagnostic",
+  "goal": "discriminator_stability",
+  "protocol_seed": 0,
+  "execution_backend": "cuda",
+  "candidate_id": "bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9",
+  "candidate_path": "configs/forge/configurations/bcap-dualnorm--7beb7378d81dc3be2c648438661e0376fe2805298232f5c2398be835ddaad6f9.json",
+  "trainer_delta": "none: exact selected whole BCAP-pure dualnorm configuration on both tasks",
+  "hypothesis": "Prior cardinality, public cloud/MoG code path and fixed MoG width may determine acquisition and local shape under the selected BCAP trainer. A balanced nine-configuration prior grid keeps all other task and trainer factors fixed.",
+  "prior_evidence": [
+    "reports/forge/dualnorm-pacing-v2/README.md",
+    "reports/forge/dualnorm-pacing-v2/measurement-selection.json",
+    "reports/toy_audit/api_contract/gaussian1d/results.json"
+  ],
+  "arms": {
+    "cloud-n256": {
+      "particles": 256,
+      "prior": {
+        "kind": "particle_cloud",
+        "sigma": 0,
+        "standardize": false,
+        "learnable": true,
+        "exception_reason": "User-requested explicit ParticlePrior diagnostic; finite atoms do not replace the baseline MoG cohort."
+      }
+    },
+    "mog025-n256": {
+      "particles": 256,
+      "prior": {
+        "kind": "mog",
+        "sigma": 0.025,
+        "standardize": false,
+        "learnable": true
+      }
+    },
+    "mog100-n256": {
+      "particles": 256,
+      "prior": {
+        "kind": "mog",
+        "sigma": 0.1,
+        "standardize": false,
+        "learnable": true
+      }
+    },
+    "cloud-n1024": {
+      "particles": 1024,
+      "prior": {
+        "kind": "particle_cloud",
+        "sigma": 0,
+        "standardize": false,
+        "learnable": true,
+        "exception_reason": "User-requested explicit ParticlePrior diagnostic; finite atoms do not replace the baseline MoG cohort."
+      }
+    },
+    "mog025-n1024": {
+      "particles": 1024,
+      "prior": {
+        "kind": "mog",
+        "sigma": 0.025,
+        "standardize": false,
+        "learnable": true
+      }
+    },
+    "mog100-n1024": {
+      "particles": 1024,
+      "prior": {
+        "kind": "mog",
+        "sigma": 0.1,
+        "standardize": false,
+        "learnable": true
+      }
+    },
+    "cloud-n4096": {
+      "particles": 4096,
+      "prior": {
+        "kind": "particle_cloud",
+        "sigma": 0,
+        "standardize": false,
+        "learnable": true,
+        "exception_reason": "User-requested explicit ParticlePrior diagnostic; finite atoms do not replace the baseline MoG cohort."
+      }
+    },
+    "mog025-n4096": {
+      "particles": 4096,
+      "prior": {
+        "kind": "mog",
+        "sigma": 0.025,
+        "standardize": false,
+        "learnable": true
+      }
+    },
+    "mog100-n4096": {
+      "particles": 4096,
+      "prior": {
+        "kind": "mog",
+        "sigma": 0.1,
+        "standardize": false,
+        "learnable": true
+      }
+    }
+  },
+  "tasks": {
+    "gaussian1d_acquisition": {
+      "path": "configs/forge/tasks/gaussian1d_acquisition.json",
+      "sha256": "b31df784dbe09357810a191247bbb0b17d3bb67918595334d16ff728fd5c2d13",
+      "steps": 1000,
+      "timeout_seconds": 120
+    },
+    "ring16_acquisition": {
+      "path": "configs/forge/tasks/ring16_acquisition.json",
+      "sha256": "e6b53ba29fbe9ead47e842cfa01e40ba57821bd1b4e6aa5b297631fa0f6525c1",
+      "steps": 400,
+      "timeout_seconds": 300
+    }
+  },
+  "smoke_projection": {
+    "gaussian1d_acquisition": [
+      [
+        "sample_count",
+        ">=",
+        4096
+      ],
+      [
+        "finite_fraction",
+        "==",
+        1.0
+      ],
+      [
+        "mean_error_sigma",
+        "<=",
+        0.2
+      ],
+      [
+        "std_ratio",
+        ">=",
+        0.8
+      ],
+      [
+        "std_ratio",
+        "<=",
+        1.2
+      ]
+    ],
+    "ring16_acquisition": [
+      [
+        "sample_count",
+        ">=",
+        4096
+      ],
+      [
+        "modes",
+        ">=",
+        16
+      ],
+      [
+        "mass_tv",
+        "<=",
+        0.15
+      ],
+      [
+        "hq",
+        ">=",
+        0.85
+      ]
+    ]
+  },
+  "smoke_scope": "Candidate smoke projections test scalar location/width and ring mode acquisition/precision/balance. They intentionally do not certify Gaussian CDF or local covariance; point masses at every ring center and same-moment scalar uniform laws may pass this narrower question.",
+  "evaluation": {
+    "samples": 4096,
+    "observations": 24,
+    "minimum_terminal_suffix": 5,
+    "scoring_weights": "live",
+    "output_noise": false
+  },
+  "budget": {
+    "maximum_training_runs": 18,
+    "maximum_host_updates": 12600,
+    "reserved_seconds": 3780,
+    "rounds": 1,
+    "retries": 0
+  },
+  "stopping_rule": "Complete all eighteen independent cells in one finite round; timeout/error/nonfinite update is final. No seed variation, trainer tuning, continuation or automatic new round.",
+  "predictions": [
+    "A prior-only repair must pass the original full gates at five terminal checks on both tasks.",
+    "If smoke projections pass while full gates fail, separate basic acquisition from distribution fidelity in an explicitly revised protocol."
+  ],
+  "falsifier": "No prior arm passes both original tasks: a prior substitution alone is not a demonstrated repair.",
+  "qualification_input": false,
+  "calibration": "Provisional; numerical controls are scorer validation, not scientific screen calibration.",
+  "changed_factors": [
+    "Task-owned particle count: 256, 1024, 4096; batch size remains 128",
+    "Task-owned prior: ParticlePrior cloud or MoGParticlePrior with fixed sigma .025 or .1"
+  ],
+  "candidate_sha256": "d079f5df4e8792c33459b08452b31b0a1136cadff2e6f3e59eddf7df890a6200"
+}
