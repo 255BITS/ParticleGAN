@@ -1,0 +1,32 @@
+{
+  "assignments": [
+    {
+      "importance": "required",
+      "order": 0,
+      "qualification_tier": 1,
+      "task": "gaussian1d_acquisition_longer871_v1"
+    }
+  ],
+  "calibration": {
+    "adoption_blocker": "Duration diagnostic only. Original 1000-step FAIL retained; no default/family/qualification credit or assumed prefix identity.",
+    "status": "provisional"
+  },
+  "eligibility": {
+    "claim_contract": {
+      "experimental_track": "atlas871_existing_mog_longer"
+    }
+  },
+  "evidence_scope": "research_diagnostic",
+  "goal": "discriminator_stability",
+  "id": "atlas_existing_mog_longer871_v1",
+  "ranking": {
+    "compare_compatible_cohorts": true,
+    "cost_separate": true,
+    "policy": "qualified_tier_only_with_raw_metrics"
+  },
+  "reporting": {
+    "family_totals": false
+  },
+  "revision": 1,
+  "schema_version": 1
+}

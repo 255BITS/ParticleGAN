@@ -139,6 +139,10 @@ def _validate_candidate_identity(request):
         from .atlas844_radius_owner import supports_candidate as supports844
         if supports844(candidate):
             existing_mog_id = candidate['id']
+    if candidate.get('id') == 'atlas-existing-mog-longer871-v1' and request.get('view', {}).get('id') == 'atlas_existing_mog_longer871_v1':
+        from .atlas871_longer_owner import supports_candidate as supports871
+        if supports871(candidate):
+            existing_mog_id = candidate['id']
     context = FormulationContext(recipe_preset=candidate.get("recipe_preset"),
         recipe_overrides=candidate.get("recipe_overrides", {}),
         prior=candidate.get("prior"), device="cpu",

@@ -320,6 +320,8 @@ class _Run:
                 from .atlas_existing_mog import COHORT, vector_receipt
                 if getattr(self.context, '_radius_observer844', None) is not None:
                     from .atlas844_radius_owner import COHORT
+                if getattr(self.context, 'candidate_id', None) == 'atlas-existing-mog-longer871-v1':
+                    from .atlas871_longer_owner import COHORT
                 controls["cohort"] = COHORT
                 evidence["existing_mog717"] = vector_receipt(self.context, trainer, self.task)
             else:
@@ -344,6 +346,10 @@ class _Run:
 
 
 def _checkpoints(task):
+    from .atlas871_longer import is_task, validate, checkpoints
+    if is_task(task):
+        validate(task)
+        return checkpoints()
     return sorted({math.ceil(i * task["execution"]["steps"] / 24) for i in range(1, 25)})
 
 

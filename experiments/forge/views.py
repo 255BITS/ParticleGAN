@@ -102,6 +102,10 @@ def _validate_measurement_contract(task):
     validate_declaration(task)
     evaluation = task["evaluation"]
     kind = evaluation["kind"]
+    if task.get("task_cohort") == 'atlas_existing_mog_longer871_v1':
+        from .atlas871_longer import validate
+        validate(task)
+        return
     fixed = {"scoring_weights": "live"}
     if task.get("task_cohort") == "tier1_policy_selected_cloud_v1":
         from .tier1_policy import validate
@@ -189,6 +193,10 @@ def load_tasks(root: Path | str) -> dict:
         tasks[name] = task
     from .noisy_prior_tier1 import load_variants as load_noisy_variants
     for name, task in load_noisy_variants(root, tasks).items():
+        _validate_task(task)
+        tasks[name] = task
+    from .atlas871_longer import load_variants as load_duration_variants
+    for name, task in load_duration_variants(root, tasks).items():
         _validate_task(task)
         tasks[name] = task
     return tasks
@@ -340,6 +348,9 @@ def _guards(task, evidence):
 
 
 def _transfer(task, evidence):
+    if task.get("task_cohort") == 'atlas_existing_mog_longer871_v1':
+        from .atlas871_longer import grade_transfer
+        return grade_transfer(task, evidence)
     from benchmarks.transfer_suite.protocol import test_verdict
 
     evaluation = task["evaluation"]

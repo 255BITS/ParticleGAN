@@ -1,0 +1,36 @@
+{
+  "api_changes": "One Gaussian duration diagnostic: original 1000/24 lattice appended to 2000/48, strict fixed prior/Recipe and original gates.",
+  "api_version": "forge-api-v1",
+  "changed_factors": [
+    "external Gaussian duration 1000 to 2000 updates and appended original evaluation lattice"
+  ],
+  "claim_contract": {
+    "experimental_track": "atlas871_existing_mog_longer",
+    "sampling_law": "task_declared",
+    "schedule": "schedule_free",
+    "scoring_weights": "live"
+  },
+  "description": "One same-seed/input from-init Gaussian duration diagnostic; no original-task qualification, first-pass stop, tuning or parameter changes.",
+  "execution_path": "public_trainer",
+  "guide": "EXPERIMENTATION.md",
+  "id": "atlas-existing-mog-longer871-v1",
+  "mechanism_class": "structural",
+  "mechanism_rationale": "One bounded external duration extension, with unchanged intrinsic schedule-free Atlas79 controls and original-grid evaluation prefix; it may falsify a longer-training explanation without identifying a mechanism or gaining qualification credit.",
+  "parent": "atlas",
+  "prior_art": [
+    "docs/atlas.md",
+    "docs/e22.md",
+    "reports/forge/UPSTREAM_E22_COMPATIBILITY.md"
+  ],
+  "recipe_overrides": {},
+  "recipe_preset": "atlas",
+  "requires_capabilities": [
+    "learned_locations",
+    "uniform_masses",
+    "a2",
+    "named_rng",
+    "policy_controls",
+    "policy_serving"
+  ],
+  "schema_version": 3
+}

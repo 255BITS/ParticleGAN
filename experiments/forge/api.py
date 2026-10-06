@@ -389,9 +389,15 @@ class FormulationContext:
             raise CapabilityError(["unsupported public execution path"])
         self.execution_path = execution_path
         self.policy_task = deepcopy(policy_task)
+        if self.policy_task is not None and (
+                (candidate_id == 'atlas-existing-mog-longer871-v1'
+                 and self.policy_task.get('id') != 'gaussian1d_acquisition_longer871_v1')
+                or (self.policy_task.get('id') == 'gaussian1d_acquisition_longer871_v1'
+                    and candidate_id != 'atlas-existing-mog-longer871-v1')):
+            raise CapabilityError(['longer871 context requires its exact candidate/task pair'])
         from .atlas_existing_mog import CANDIDATE_ID, validate as validate_existing_mog, task_resources as existing_mog_resources
-        self._existing_mog = candidate_id in {CANDIDATE_ID, 'atlas-existing-mog-radius-observer844-v1'}
-        if candidate_id == 'atlas-existing-mog-radius-observer844-v1':
+        self._existing_mog = candidate_id in {CANDIDATE_ID, 'atlas-existing-mog-radius-observer844-v1', 'atlas-existing-mog-longer871-v1'}
+        if candidate_id in {'atlas-existing-mog-radius-observer844-v1', 'atlas-existing-mog-longer871-v1'}:
             self.candidate_id = candidate_id
         if candidate_id == 'atlas-existing-mog-radius-observer844-v1' and self.policy_task is not None:
             from .atlas844_radius_owner import validate as validate844
@@ -401,7 +407,7 @@ class FormulationContext:
                 raise CapabilityError(["Track B permits only the unchanged Atlas preset"])
             if self.policy_task is not None:
                 validate_existing_mog(self.policy_task)
-                if self.policy_task["id"] not in {"gaussian1d_acquisition", "two_pole", "ae_gan_hold", "ring16_acquisition"}:
+                if self.policy_task["id"] not in {"gaussian1d_acquisition", "two_pole", "ae_gan_hold", "ring16_acquisition", 'gaussian1d_acquisition_longer871_v1'}:
                     raise CapabilityError(["Track B owner unsupported before construction"])
                 expected = existing_mog_resources(self.policy_task)
                 if self.policy_task["id"] == "two_pole":
