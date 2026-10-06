@@ -1,0 +1,408 @@
+{
+  "task": "routed_terminal_cancellation_v1",
+  "status": "COMPLETE_SCIENTIFIC_FAIL_INDEPENDENT_QUALIFICATION_PASS",
+  "scientific_status": "FAIL",
+  "independent_qualification": {
+    "status": "PASS",
+    "checks": 565,
+    "external_seconds": 1.4960577960591763,
+    "limit_seconds": 60,
+    "all75pins_unchanged": true,
+    "report": "e22_routed_terminal_cancellation_independent_review_v2.json",
+    "report_sha256": "4263eddb9906a9c7b4d752186d5d4deed9c07cd58d3377f844bac16c98d052ff",
+    "scope": "Saved-tensor numerical and byte qualification, including final head norms and paired frozen state values. Initial EMA/owner/RNG/noisy-forward/VJP origins remain source-bound producer proofs; no model/public-API replay. Opaque inputs.pt not unpickled.",
+    "failed_v1_preserved": true,
+    "compatibility": "Only native recipe tuples versus JSON arrays normalized for metadata equality; all numerical gates and reductions unchanged."
+  },
+  "fixed_steps_per_arm": 512,
+  "arms": [
+    "ordinary_BF16",
+    "ordinary_FP32",
+    "particle_BF16",
+    "particle_FP32"
+  ],
+  "training_native_updates": 2048,
+  "TEST_contexts": 48,
+  "contexts_per_source": 8,
+  "metric": "Physical unscaled endpoint RMSE, producer F64 reduction, offline only.",
+  "accuracy": {
+    "ordinary_BF16": {
+      "rmse": 0.0038544907783017845,
+      "by_source": {
+        "0": 0.0036899671687189986,
+        "1": 0.004523749249929324,
+        "2": 0.0037431890771271524,
+        "3": 0.004164138298325676,
+        "4": 0.0030118748101999665,
+        "5": 0.00382616359694629
+      },
+      "source_counts": {
+        "0": 8,
+        "1": 8,
+        "2": 8,
+        "3": 8,
+        "4": 8,
+        "5": 8
+      },
+      "contexts": 48,
+      "coordinates_per_context": 256
+    },
+    "ordinary_FP32": {
+      "rmse": 0.003457183103780683,
+      "by_source": {
+        "0": 0.0034113225278081583,
+        "1": 0.004103905253647096,
+        "2": 0.0032569445633407806,
+        "3": 0.0038279197080114563,
+        "4": 0.002620573816610128,
+        "5": 0.003332486466708602
+      },
+      "source_counts": {
+        "0": 8,
+        "1": 8,
+        "2": 8,
+        "3": 8,
+        "4": 8,
+        "5": 8
+      },
+      "contexts": 48,
+      "coordinates_per_context": 256
+    },
+    "particle_BF16": {
+      "rmse": 0.004136584638735471,
+      "by_source": {
+        "0": 0.003975365691117421,
+        "1": 0.004557905380595313,
+        "2": 0.0038818120496967984,
+        "3": 0.00477757801865026,
+        "4": 0.0036690250211076298,
+        "5": 0.0038385544004201837
+      },
+      "source_counts": {
+        "0": 8,
+        "1": 8,
+        "2": 8,
+        "3": 8,
+        "4": 8,
+        "5": 8
+      },
+      "contexts": 48,
+      "coordinates_per_context": 256
+    },
+    "particle_FP32": {
+      "rmse": 0.003563903105829141,
+      "by_source": {
+        "0": 0.003584903945478439,
+        "1": 0.003853421372253188,
+        "2": 0.003290255827916977,
+        "3": 0.004283503778174581,
+        "4": 0.003000780264759664,
+        "5": 0.003213902501296274
+      },
+      "source_counts": {
+        "0": 8,
+        "1": 8,
+        "2": 8,
+        "3": 8,
+        "4": 8,
+        "5": 8
+      },
+      "contexts": 48,
+      "coordinates_per_context": 256
+    },
+    "zero_code": {
+      "rmse": 0.003422291633746467,
+      "by_source": {
+        "0": 0.0033777563399287475,
+        "1": 0.004009416981904853,
+        "2": 0.003229210427830899,
+        "3": 0.0037772068348481238,
+        "4": 0.0026718059397466804,
+        "5": 0.00330970985006989
+      },
+      "source_counts": {
+        "0": 8,
+        "1": 8,
+        "2": 8,
+        "3": 8,
+        "4": 8,
+        "5": 8
+      },
+      "contexts": 48,
+      "coordinates_per_context": 256
+    }
+  },
+  "particle_FP32_percent_worse_ordinary_FP32": 3.086906271517753,
+  "zero_code_percent_improvement_over_live_particle_FP32": 3.973493887952606,
+  "gate": {
+    "pass": false,
+    "checks": {
+      "aggregate": false,
+      "no_source_harm": false,
+      "code_aggregate": false,
+      "code_each_source": false,
+      "bank_live": true,
+      "query_live": true,
+      "heads_live": true
+    },
+    "failed_bounds": [
+      "aggregate",
+      "no_source_harm",
+      "code_aggregate",
+      "code_each_source"
+    ],
+    "candidate": "particle_FP32",
+    "control": "ordinary_FP32",
+    "offline_terminal_steps": 512
+  },
+  "live": {
+    "ordinary_BF16": {
+      "bank": 0,
+      "query": 0
+    },
+    "ordinary_FP32": {
+      "bank": 0,
+      "query": 0
+    },
+    "particle_BF16": {
+      "bank": 511,
+      "query": 511
+    },
+    "particle_FP32": {
+      "bank": 511,
+      "query": 511
+    }
+  },
+  "norms": {
+    "particle_BF16": {
+      "input": {
+        "C": 0.9604299068450928,
+        "particle_up": 0.25793832540512085
+      },
+      "edit": {
+        "C": 0.8470825552940369,
+        "particle_up": 0.21694433689117432
+      }
+    },
+    "particle_FP32": {
+      "input": {
+        "C": 0.9612139463424683,
+        "particle_up": 0.2589808404445648
+      },
+      "edit": {
+        "C": 0.8486528396606445,
+        "particle_up": 0.21656456589698792
+      }
+    }
+  },
+  "precision_witness": {
+    "scope": "local final native update, same Parameters/delta; not a convergence criterion",
+    "BF16": {
+      "MSE0": 1.7081887898077264e-05,
+      "MSE1": 1.7111332473422267e-05,
+      "delta_MSE": 2.9444575345003263e-08,
+      "output_linear": -2.8683130052677374e-08,
+      "Q": 5.8127705397680637e-08
+    },
+    "FP32": {
+      "MSE0": 1.2761772885888461e-05,
+      "MSE1": 1.2775688653285085e-05,
+      "delta_MSE": 1.3915767396620835e-08,
+      "output_linear": 1.277950613161052e-08,
+      "Q": 1.1362612650103163e-09
+    },
+    "parameter_slopes": {
+      "BF16": 5.124758790418722e-09,
+      "FP32": 5.171057372959217e-09
+    },
+    "absolute_discrepancies": {
+      "BF16": 2.431981655458454e-08,
+      "FP32": 8.744710023661617e-09
+    },
+    "ratios": {
+      "Q": 0.019547671067292025,
+      "discrepancy": 0.3595713809779189
+    },
+    "both_precision_ratios_lte": 0.75,
+    "by_source": {
+      "0": {
+        "BF16": {
+          "MSE0": 1.574738318375294e-05,
+          "MSE1": 1.5803532378113488e-05,
+          "delta_MSE": 5.614919436054775e-08,
+          "output_linear": 1.2896620971668271e-08,
+          "Q": 4.325257338887948e-08
+        },
+        "FP32": {
+          "MSE0": 1.257050014110492e-05,
+          "MSE1": 1.2584910354331503e-05,
+          "delta_MSE": 1.4410213226583338e-08,
+          "output_linear": 1.3314703750054215e-08,
+          "Q": 1.095509476529124e-09
+        }
+      },
+      "1": {
+        "BF16": {
+          "MSE0": 2.0787858462700207e-05,
+          "MSE1": 2.0774501458459705e-05,
+          "delta_MSE": -1.3357004240502346e-08,
+          "output_linear": -7.269160803499708e-08,
+          "Q": 5.9334603794494734e-08
+        },
+        "FP32": {
+          "MSE0": 1.5003152985597794e-05,
+          "MSE1": 1.5001029340668063e-05,
+          "delta_MSE": -2.123644929733643e-09,
+          "output_linear": -3.313488946893238e-09,
+          "Q": 1.1898440171595937e-09
+        }
+      },
+      "2": {
+        "BF16": {
+          "MSE0": 1.4998258334808522e-05,
+          "MSE1": 1.506846478917126e-05,
+          "delta_MSE": 7.020645436273815e-08,
+          "output_linear": 8.69090154183294e-09,
+          "Q": 6.15155528209052e-08
+        },
+        "FP32": {
+          "MSE0": 1.0751763712015113e-05,
+          "MSE1": 1.07638383107703e-05,
+          "delta_MSE": 1.2074598755187335e-08,
+          "output_linear": 1.1034305537206658e-08,
+          "Q": 1.040293217980677e-09
+        }
+      },
+      "3": {
+        "BF16": {
+          "MSE0": 2.2841035273426223e-05,
+          "MSE1": 2.2825251724290147e-05,
+          "delta_MSE": -1.578354913607527e-08,
+          "output_linear": -5.670564818052726e-08,
+          "Q": 4.092209904445199e-08
+        },
+        "FP32": {
+          "MSE0": 1.872369885913887e-05,
+          "MSE1": 1.876293664096954e-05,
+          "delta_MSE": 3.9237781830670094e-08,
+          "output_linear": 3.816505992900627e-08,
+          "Q": 1.0727219016638256e-09
+        }
+      },
+      "4": {
+        "BF16": {
+          "MSE0": 1.3406834939449813e-05,
+          "MSE1": 1.3461744605513843e-05,
+          "delta_MSE": 5.490966606402914e-08,
+          "output_linear": -8.34517310810412e-09,
+          "Q": 6.325483917213326e-08
+        },
+        "FP32": {
+          "MSE0": 9.241689416260096e-06,
+          "MSE1": 9.256236797525765e-06,
+          "delta_MSE": 1.4547381265667884e-08,
+          "output_linear": 1.3213813574583647e-08,
+          "Q": 1.333567691084238e-09
+        }
+      },
+      "5": {
+        "BF16": {
+          "MSE0": 1.4709957194325874e-05,
+          "MSE1": 1.4734499884985156e-05,
+          "delta_MSE": 2.4542690659282163e-08,
+          "output_linear": -5.594387350593699e-08,
+          "Q": 8.048656416521915e-08
+        },
+        "FP32": {
+          "MSE0": 1.027983220121398e-05,
+          "MSE1": 1.0285180475445327e-05,
+          "delta_MSE": 5.348274231350004e-09,
+          "output_linear": 4.262642945705564e-09,
+          "Q": 1.0856312856444398e-09
+        }
+      }
+    },
+    "helpful_parameter_slope_and_finite_harm": false,
+    "precision_status": "PASS"
+  },
+  "cost": {
+    "external_seconds": 65.87559020798653,
+    "limit_seconds": 300,
+    "all51pins_unchanged": true
+  },
+  "bindings": {
+    "runs/terminal-cancellation-v1/report.json": "579a1b6b7fde9e0b7b2ffb3f6d116792cad5aa0d22163617f02a4e32c88d310d",
+    "runs/terminal-cancellation-v1/completion.json": "ccd2313265a37d893068997f48090af54752b8538d9ebf9b43904b672f41f38b",
+    "runs/terminal-cancellation-v1.external.json": "d0e4ae5ae6a2838253fc16dfbb689c928df2f475bc6fdcb13644cc3a8dbeefd4",
+    "docs/e22_routed_terminal_cancellation_v1.json": "b94c0129d9cf490f1c32317ea44f9076b730395e47fdc455efb0179ee24d0e01",
+    "docs/e22_routed_terminal_cancellation_preparation.json": "1f990a1982ea0bde4065bdf3c01d65e258a315e60d6323f90aa42ed9d528824c",
+    "docs/e22_routed_terminal_cancellation_independent_review_v2.json": "4263eddb9906a9c7b4d752186d5d4deed9c07cd58d3377f844bac16c98d052ff",
+    "docs/e22_routed_terminal_cancellation_independent_review_v2.json.completion.json": "51086a0abbb10d313404c380ecbaf1289a0582addc9830dd6a2037f0525ef50e",
+    "docs/e22_routed_terminal_cancellation_qualification.json": "48867d9542fb28f4b383643fb39a936ac93d32ee491d27cf39ebb0ac27b984d7",
+    "docs/media/e22_routed_terminal_cancellation/media-completion.json": "00628bdb2cf058222c23564c3fd6db405a7eba09bb04d0f1bfebadd9ce59c0c7",
+    "runs/terminal-cancellation-v1.reviewer-v2/completion.json": "017d92b97d628f5da16cdaeee37474b595e6f364af91f940d0aff6bfa67a40c8",
+    "runs/terminal-cancellation-v1.media-review/completion.json": "7a4986b5e87e652f427917c17ecb987140205d002bfbca401a750042b2c21836"
+  },
+  "scope": "Constructed analytic [W,-W] carrier/edit terminal cancellation, not measured actual final directions or isolation of the full Supra convergence failure. Precision witness is diagnostic and does not relax the convergence gate.",
+  "contradictory_actual_code_ablation": {
+    "checkpoint": "Qualified full neutral12800 BF16 clean TEST240",
+    "live_RMSE": 0.070021495,
+    "zero_code_RMSE": 0.11730632944349093,
+    "mass_only_RMSE": 0.11045011049767414,
+    "live_D1856": 0.893615349,
+    "zero_code_D1856": 1.1558452328046163,
+    "artifact": "outputs/e22-supra-neutral-continuation-12800/sampled_hb_neutral/particle-ablations-12800.json",
+    "artifact_sha256": "3500739534e8cd8f7e69bed8b40e3ad94bf25e7f68c474f939759f96d01d4b68",
+    "interpretation": "Codes help in this qualified full-model ablation; this toy\u2019s aggregate harmful code does not reproduce a demonstrated full-model mechanism."
+  },
+  "actual_full_terminal_precision_v2": {
+    "status": "Qualified completed scientific FAIL, zero updates",
+    "neutral12800_BF16_RMSE": 0.070021495,
+    "neutral12800_FP32_RMSE": 0.069659898,
+    "original28000_BF16_RMSE": 0.0637773,
+    "original28000_FP32_RMSE": 0.063360985,
+    "interpretation": "A roughly .516% neutral serving improvement also benefits original LoRA (~.653%); original remains better. This is not a sustained or particle-specific convergence remedy."
+  },
+  "preservation": "New readout only. Executed source/tests/card/preparation/readers/raw artifacts remain immutable.",
+  "endpoint_keys": [
+    "ordinary_BF16",
+    "ordinary_FP32",
+    "particle_BF16",
+    "particle_FP32",
+    "zero_code"
+  ],
+  "population_events": {
+    "ordinary_BF16": {
+      "proposal_events": 0,
+      "accepted_proposals": 0,
+      "accepted_row_moves": 0
+    },
+    "ordinary_FP32": {
+      "proposal_events": 0,
+      "accepted_proposals": 0,
+      "accepted_row_moves": 0
+    },
+    "particle_BF16": {
+      "proposal_events": 5,
+      "accepted_proposals": 0,
+      "accepted_row_moves": 0
+    },
+    "particle_FP32": {
+      "proposal_events": 5,
+      "accepted_proposals": 0,
+      "accepted_row_moves": 0
+    }
+  },
+  "media": {
+    "GIF": "media/e22_routed_terminal_cancellation/goal.gif",
+    "PNG": "media/e22_routed_terminal_cancellation/goal-final.png",
+    "receipt": "media/e22_routed_terminal_cancellation/media-completion.json",
+    "gif_sha256": "f6209413dda1c26bc961753eb90b05f7a72355593a551abcb084185088ec615e",
+    "png_sha256": "903e1bee35e9fb8ab9a150877cd3df9c22578bd3410483fe8a4fcd8761210db7",
+    "receipt_sha256": "00628bdb2cf058222c23564c3fd6db405a7eba09bb04d0f1bfebadd9ce59c0c7",
+    "external_seconds": 1.9404586360324174,
+    "limit_seconds": 60,
+    "all57pins_unchanged": true
+  },
+  "qualification_summary": "e22_routed_terminal_cancellation_qualification.json"
+}
