@@ -1,0 +1,106 @@
+test_two_arm_declaration_identity (__main__.RingControls.test_two_arm_declaration_identity) ... ok
+test_unsupported_declaration_rejected (__main__.RingControls.test_unsupported_declaration_rejected) ... ok
+test_original_ring_task_and_recipe_bound (__main__.RingControls.test_original_ring_task_and_recipe_bound) ... ERROR
+test_global_amsgrad_all_groups (__main__.RingControls.test_global_amsgrad_all_groups) ... ERROR
+test_original_numerical_and_evaluator_source (__main__.RingControls.test_original_numerical_and_evaluator_source) ... ERROR
+test_original_400_extended_1600_cadence (__main__.RingControls.test_original_400_extended_1600_cadence) ... ERROR
+test_graded_prefix_and_terminal_gates (__main__.RingControls.test_graded_prefix_and_terminal_gates) ... ERROR
+test_initial17_update_retained_prefix (__main__.RingControls.test_initial17_update_retained_prefix) ... ERROR
+
+======================================================================
+ERROR: test_original_ring_task_and_recipe_bound (__main__.RingControls.test_original_ring_task_and_recipe_bound)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/ml2/hypergan/pg-atlas954-ring-runtime-20261006/v1/owner-source/tests/test_atlas954_ring_controls.py", line 208, in test_original_ring_task_and_recipe_bound
+    module = self.module(arm)
+             ^^^^^^^^^^^^^^^^
+  File "/ml2/hypergan/pg-atlas954-ring-runtime-20261006/v1/owner-source/tests/test_atlas954_ring_controls.py", line 85, in module
+    self._modules[arm] = self.driver.load_owner(
+                         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/ml2/hypergan/pg-atlas954-ring-runtime-20261006/v1/owner-source/experiments/forge/atlas954_ring_driver.py", line 224, in load_owner
+    raise ValueError('Source-resolved original ring Recipe differs from held retained full79')
+ValueError: Source-resolved original ring Recipe differs from held retained full79
+
+======================================================================
+ERROR: test_global_amsgrad_all_groups (__main__.RingControls.test_global_amsgrad_all_groups)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/ml2/hypergan/pg-atlas954-ring-runtime-20261006/v1/owner-source/tests/test_atlas954_ring_controls.py", line 256, in test_global_amsgrad_all_groups
+    module = self.module(arm)
+             ^^^^^^^^^^^^^^^^
+  File "/ml2/hypergan/pg-atlas954-ring-runtime-20261006/v1/owner-source/tests/test_atlas954_ring_controls.py", line 85, in module
+    self._modules[arm] = self.driver.load_owner(
+                         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/ml2/hypergan/pg-atlas954-ring-runtime-20261006/v1/owner-source/experiments/forge/atlas954_ring_driver.py", line 224, in load_owner
+    raise ValueError('Source-resolved original ring Recipe differs from held retained full79')
+ValueError: Source-resolved original ring Recipe differs from held retained full79
+
+======================================================================
+ERROR: test_original_numerical_and_evaluator_source (__main__.RingControls.test_original_numerical_and_evaluator_source)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/ml2/hypergan/pg-atlas954-ring-runtime-20261006/v1/owner-source/tests/test_atlas954_ring_controls.py", line 299, in test_original_numerical_and_evaluator_source
+    module = self.module('atlas791')
+             ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/ml2/hypergan/pg-atlas954-ring-runtime-20261006/v1/owner-source/tests/test_atlas954_ring_controls.py", line 85, in module
+    self._modules[arm] = self.driver.load_owner(
+                         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/ml2/hypergan/pg-atlas954-ring-runtime-20261006/v1/owner-source/experiments/forge/atlas954_ring_driver.py", line 224, in load_owner
+    raise ValueError('Source-resolved original ring Recipe differs from held retained full79')
+ValueError: Source-resolved original ring Recipe differs from held retained full79
+
+======================================================================
+ERROR: test_original_400_extended_1600_cadence (__main__.RingControls.test_original_400_extended_1600_cadence)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/ml2/hypergan/pg-atlas954-ring-runtime-20261006/v1/owner-source/tests/test_atlas954_ring_controls.py", line 348, in test_original_400_extended_1600_cadence
+    module = self.module(arm)
+             ^^^^^^^^^^^^^^^^
+  File "/ml2/hypergan/pg-atlas954-ring-runtime-20261006/v1/owner-source/tests/test_atlas954_ring_controls.py", line 85, in module
+    self._modules[arm] = self.driver.load_owner(
+                         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/ml2/hypergan/pg-atlas954-ring-runtime-20261006/v1/owner-source/experiments/forge/atlas954_ring_driver.py", line 224, in load_owner
+    raise ValueError('Source-resolved original ring Recipe differs from held retained full79')
+ValueError: Source-resolved original ring Recipe differs from held retained full79
+
+======================================================================
+ERROR: test_graded_prefix_and_terminal_gates (__main__.RingControls.test_graded_prefix_and_terminal_gates)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/ml2/hypergan/pg-atlas954-ring-runtime-20261006/v1/owner-source/tests/test_atlas954_ring_controls.py", line 367, in test_graded_prefix_and_terminal_gates
+    grade = self.driver.grade_at(self.root, 'atlas791', good, horizon=horizon, source_pins=self.source_pins)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/ml2/hypergan/pg-atlas954-ring-runtime-20261006/v1/owner-source/experiments/forge/atlas954_ring_driver.py", line 334, in grade_at
+    from benchmarks.transfer_suite import protocol
+  File "/ml2/hypergan/pg-atlas954-ring-runtime-20261006/v1/owner-source/benchmarks/transfer_suite/protocol.py", line 9, in <module>
+    from benchmarks.locked_shared import baseline
+  File "/ml2/hypergan/pg-atlas954-ring-runtime-20261006/v1/owner-source/benchmarks/locked_shared/baseline.py", line 25, in <module>
+    from . import mode_hold, trajectory, two_pole
+  File "/ml2/hypergan/pg-atlas954-ring-runtime-20261006/v1/owner-source/benchmarks/locked_shared/mode_hold.py", line 11, in <module>
+    from .observation import checkpoint, schedule_optimizer
+  File "/ml2/hypergan/pg-atlas954-ring-runtime-20261006/v1/owner-source/benchmarks/locked_shared/observation.py", line 9, in <module>
+    from particlegan import learning_rate_scale
+  File "/ml2/hypergan/pg-atlas954-ring-runtime-20261006/v1/owner-source/particlegan/__init__.py", line 6, in <module>
+    from .capabilities import prior_capabilities, prior_mechanisms
+  File "/ml2/hypergan/pg-atlas954-ring-runtime-20261006/v1/owner-source/particlegan/capabilities.py", line 7, in <module>
+    from .noisy_particle_prior import NoisyParticlePrior
+ModuleNotFoundError: No module named 'particlegan.noisy_particle_prior'
+
+======================================================================
+ERROR: test_initial17_update_retained_prefix (__main__.RingControls.test_initial17_update_retained_prefix)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/ml2/hypergan/pg-atlas954-ring-runtime-20261006/v1/owner-source/tests/test_atlas954_ring_controls.py", line 406, in test_initial17_update_retained_prefix
+    report = self.driver.verify_initial_prefix(self.root, self.source_pins, self.base_recipe,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/ml2/hypergan/pg-atlas954-ring-runtime-20261006/v1/owner-source/experiments/forge/atlas954_ring_driver.py", line 406, in verify_initial_prefix
+    module = load_owner(root, 'atlas791', source_pins, base_recipe, fixture=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/ml2/hypergan/pg-atlas954-ring-runtime-20261006/v1/owner-source/experiments/forge/atlas954_ring_driver.py", line 224, in load_owner
+    raise ValueError('Source-resolved original ring Recipe differs from held retained full79')
+ValueError: Source-resolved original ring Recipe differs from held retained full79
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.469s
+
+FAILED (errors=6)

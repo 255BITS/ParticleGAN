@@ -1,0 +1,8 @@
+{
+  "carried_once": true,
+  "error_cost": "UNKNOWN_NOT_ZERO",
+  "kind": "JS_SYNTAX_ERROR_BEFORE_TOOL_EXECUTION",
+  "message": "Unescaped Markdown backtick in JS source template",
+  "schema": "954_publication_wrapper_error_v1",
+  "source_or_filesystem_or_project_or_science_executed": false
+}

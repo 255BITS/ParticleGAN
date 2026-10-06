@@ -1,0 +1,572 @@
+{
+  "certified_upper_bound": false,
+  "exact_all_inclusive_measured_cost": false,
+  "full_science_caps_charged_once_seconds": 2400,
+  "global_cap_seconds": 41288,
+  "known_charged_seconds": 21025.260670517855,
+  "no_refund_or_replay": true,
+  "schema": "954_qualified_publication_accounting_v1",
+  "science_caps_are_measured_elapsed": false,
+  "snapshot": "ACTIVE_REPORT_PHASE_BEFORE_PUBLICATION_TAIL",
+  "software_envelope": {
+    "cap_seconds": 41288.0,
+    "charged_seconds": 18625.260670517855,
+    "declared_reserve_is_certified_upper_bound": false,
+    "declared_reserve_is_measured_elapsed": false,
+    "exact_all_inclusive_measured_cost": false,
+    "halt_additional_work": false,
+    "measurement_cut": "ACTIVE",
+    "metadata_cap_seconds": 180.0,
+    "metadata_charged_seconds": 60.85870954075083,
+    "metadata_paid_seconds": 60.85870954075083,
+    "metadata_remaining_seconds": 119.14129045924918,
+    "metadata_reserved_seconds": 0.0,
+    "persistence_tail": "UNKNOWN_NOT_ZERO",
+    "phases": [
+      {
+        "index": 0,
+        "kind": "work",
+        "name": "ROOT_MEASURED_BOOTSTRAP934",
+        "paid_seconds": 0.0,
+        "reserved_seconds": 0.0,
+        "status": "ROOT_HELD_MEASURED"
+      },
+      {
+        "index": 1,
+        "kind": "work",
+        "name": "954-bind-new-ring-authority-and-discover-owned-producer-paths",
+        "paid_seconds": 0.08820063481107354,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 2,
+        "kind": "work",
+        "name": "954-read-retained-ring-evidence-and-producer-seams",
+        "paid_seconds": 0.05077628791332245,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 3,
+        "kind": "work",
+        "name": "954-locate-retained-ring-row-and-original-bridge-contract",
+        "paid_seconds": 0.037493657786399126,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 4,
+        "kind": "work",
+        "name": "954-read-ring-construction-run-loop-and-owned-artifact-roots",
+        "paid_seconds": 0.3663212242536247,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 5,
+        "kind": "work",
+        "name": "954-discover-exact-original-ring-artifact-paths",
+        "paid_seconds": 0.037688456941396,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 6,
+        "kind": "work",
+        "name": "954-inspect-owned-original-runtime-root-layout",
+        "paid_seconds": 0.02938008913770318,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 7,
+        "kind": "work",
+        "name": "954-copy-verified-original-producer-and-find-ring-request",
+        "paid_seconds": 0.024994079023599625,
+        "reserved_seconds": 0.0,
+        "status": "ERROR"
+      },
+      {
+        "index": 8,
+        "kind": "work",
+        "name": "954-resolve-original791-snapshot-after-owned-source-mismatch",
+        "paid_seconds": 0.039174022153019905,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 9,
+        "kind": "work",
+        "name": "954-read-exact-retained791-request-and-ring-certification-pointers",
+        "paid_seconds": 0.03672518581151962,
+        "reserved_seconds": 0.0,
+        "status": "ERROR"
+      },
+      {
+        "index": 10,
+        "kind": "work",
+        "name": "954-inspect-held-original-request-versions-and-result-pointer-shape",
+        "paid_seconds": 0.05088645964860916,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 11,
+        "kind": "work",
+        "name": "954_original_device_and_snapshot_pin_selection",
+        "paid_seconds": 0.11384076811373234,
+        "reserved_seconds": 0.0,
+        "status": "ERROR"
+      },
+      {
+        "index": 12,
+        "kind": "work",
+        "name": "954_exact_snapshot_copy_and_retained_ring_locator",
+        "paid_seconds": 0.9216762441210449,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 13,
+        "kind": "work",
+        "name": "954_retained_ring_actual_device_and_banks_manifest",
+        "paid_seconds": 0.0522425239905715,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 14,
+        "kind": "report",
+        "name": "954_babel_exact_device_prefix_blocker",
+        "paid_seconds": 0.37393020233139396,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 15,
+        "kind": "work",
+        "name": "954_retained_bank_schema_and_exact_recipe_export",
+        "paid_seconds": 2.597070634830743,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 16,
+        "kind": "work",
+        "name": "954_read_original_metric_lattice_and_dependency_selection",
+        "paid_seconds": 0.028972518164664507,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 17,
+        "kind": "work",
+        "name": "954_single_owner_snapshot_and_historical_metrics_export",
+        "paid_seconds": 0.2913799621164799,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 18,
+        "kind": "work",
+        "name": "954_review_private_driver_source_once",
+        "paid_seconds": 0.04168605897575617,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 19,
+        "kind": "work",
+        "name": "954_review_driver_metadata_successor_diff",
+        "paid_seconds": 0.09430593391880393,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 20,
+        "kind": "work",
+        "name": "954_driver_handoff_and_worker_meter_schema",
+        "paid_seconds": 0.056503614876419306,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 21,
+        "kind": "work",
+        "name": "954_worker_failure_diagnosis_explicit_source_io_once",
+        "paid_seconds": 0.013101359829306602,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 22,
+        "kind": "work",
+        "name": "954_carry_completed_driver_author_source_io_once",
+        "paid_seconds": 0.5506476280279458,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 23,
+        "kind": "work",
+        "name": "954_resolve_local_vector_horizon_source_review",
+        "paid_seconds": 0.05045130895450711,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 24,
+        "kind": "work",
+        "name": "954_review_private_control_source_once",
+        "paid_seconds": 0.12146289832890034,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 25,
+        "kind": "work",
+        "name": "954_worker_merge_readiness_explicit_source_intervals_once",
+        "paid_seconds": 0.03638224629685283,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 26,
+        "kind": "work",
+        "name": "954_carry_late944_merge_readiness_ci_source_io_once",
+        "paid_seconds": 0.030046701431274414,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 27,
+        "kind": "work",
+        "name": "954_freeze_unadmitted_sources_and_carry_controls_io_once",
+        "paid_seconds": 0.045647738967090845,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 28,
+        "kind": "report",
+        "name": "954_babel_source_preparation_checkpoint",
+        "paid_seconds": 0.3809288418851793,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 29,
+        "kind": "report",
+        "name": "954_claim_exact_ring_gpu1_scope_revision",
+        "paid_seconds": 0.42812330508604646,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 30,
+        "kind": "report",
+        "name": "954_ack_ring_gpu1_revision_same_claim",
+        "paid_seconds": 0.43148459307849407,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 31,
+        "kind": "work",
+        "name": "954_gpu1_mapping_and_live_readonly_inventory",
+        "paid_seconds": 0.6935224458575249,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 32,
+        "kind": "work",
+        "name": "954_worker_failure_diagnosis_gpu959_source_io_once",
+        "paid_seconds": 0.002055794931948185,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 33,
+        "kind": "work",
+        "name": "954_review_freeze_gpu1_driver_and_authority959",
+        "paid_seconds": 0.06907944986596704,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 34,
+        "kind": "work",
+        "name": "954_verify_gpu_metadata_ast_scope_from_pinned_files",
+        "paid_seconds": 0.06711741397157311,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 35,
+        "kind": "report",
+        "name": "954_babel_gpu959_received_preflight_report",
+        "paid_seconds": 1.0828286400064826,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 36,
+        "kind": "work",
+        "name": "954_freeze_gpu1_controls_source_scope",
+        "paid_seconds": 0.046909401658922434,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 37,
+        "kind": "work",
+        "name": "954_worker_merge_readiness_gpu959_source_io_once",
+        "paid_seconds": 0.002926468849182129,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 38,
+        "kind": "work",
+        "name": "954_run_eight_gpu1_focused_controls_once",
+        "paid_seconds": 6.8255681353621185,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 39,
+        "kind": "work",
+        "name": "954_diagnose_source_recipe_binding_and_static_import_closure",
+        "paid_seconds": 1.8039208380505443,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 40,
+        "kind": "work",
+        "name": "F954_recipe_binding_source_diagnosis_io",
+        "paid_seconds": 0.003690820187330246,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 41,
+        "kind": "work",
+        "name": "F954_v4_recipe_binding_source_patch_io",
+        "paid_seconds": 0.0007472722791135311,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 42,
+        "kind": "work",
+        "name": "954_closure_import_binding_and_v4_source_review",
+        "paid_seconds": 0.1478036753833294,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 43,
+        "kind": "work",
+        "name": "954_install_reviewed_v4_driver_and_read_execution_seams",
+        "paid_seconds": 0.028296473901718855,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 44,
+        "kind": "work",
+        "name": "954_read_control_cli_and_budget_admission_seams",
+        "paid_seconds": 0.056521084159612656,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 45,
+        "kind": "work",
+        "name": "M954_v3_controls_pin_amendment_source_io",
+        "paid_seconds": 0.0008344715461134911,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 46,
+        "kind": "work",
+        "name": "954_install_control_v3_and_rerun_fixed_focused_interface_prefix_checks",
+        "paid_seconds": 10.159054847899824,
+        "reserved_seconds": 0.0,
+        "status": "ERROR"
+      },
+      {
+        "index": 47,
+        "kind": "work",
+        "name": "954_report_precise_focused_setup_checkpoint_to_Ember",
+        "paid_seconds": 3.8375294622965157,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 48,
+        "kind": "work",
+        "name": "F954_v5_typed_ownership_source_diagnosis_io",
+        "paid_seconds": 0.0011057332158088684,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 49,
+        "kind": "work",
+        "name": "F954_v5_typed_ownership_source_patch_io",
+        "paid_seconds": 0.0002738097682595253,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 50,
+        "kind": "work",
+        "name": "954_review_install_v5_typed_ownership_and_read_prefix_record_shape",
+        "paid_seconds": 0.08443210879340768,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 51,
+        "kind": "work",
+        "name": "M954_v4_code_content_equality_control_patch_source_io",
+        "paid_seconds": 0.0006024930626153946,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 52,
+        "kind": "work",
+        "name": "954_review_install_v4_controls_and_check_corrected_owner_schema",
+        "paid_seconds": 9.95554324099794,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 53,
+        "kind": "work",
+        "name": "954_freeze_two_declarations_full_science_caps_and_launch_original",
+        "paid_seconds": 0.06837576441466808,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 54,
+        "kind": "work",
+        "name": "954_collect_original_case_terminal_and_full24_prefix",
+        "paid_seconds": 0.003543633036315441,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 55,
+        "kind": "work",
+        "name": "954_report_original_launch_error_no_replay_and_remaining_arm_plan",
+        "paid_seconds": 0.3122231401503086,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 56,
+        "kind": "work",
+        "name": "954_launch_remaining_global_amsgrad_off_by_module",
+        "paid_seconds": 0.031220406759530306,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 57,
+        "kind": "work",
+        "name": "954_collect_remaining_global_amsgrad_off_terminal",
+        "paid_seconds": 0.02072443114593625,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 58,
+        "kind": "work",
+        "name": "954_send_measured_standalone_ring_results_before_publication",
+        "paid_seconds": 0.36715783877298236,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 59,
+        "kind": "work",
+        "name": "954_read_owned_branch_existing_publication_and_pr_before_retained_ring_report",
+        "paid_seconds": 1.0083332164213061,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 60,
+        "kind": "work",
+        "name": "954_prepare_retained_ring_evidence_without_execution_or_regrading",
+        "paid_seconds": 1.5493069128133357,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 61,
+        "kind": "work",
+        "name": "I954_retained_bank_media_source_author_io",
+        "paid_seconds": 0.0024459012784063816,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 62,
+        "kind": "work",
+        "name": "954_review_and_render_retained_bank_gif_only",
+        "paid_seconds": 7.794417626224458,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 63,
+        "kind": "work",
+        "name": "Root954_saved_1600_png_visual_tool_wall",
+        "paid_seconds": 0.028,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 64,
+        "kind": "work",
+        "name": "954_write_numerical_report_api_call_and_known_visual_tool_cost",
+        "paid_seconds": 0.020540501922369003,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 65,
+        "kind": "work",
+        "name": "I954_typography_only_renderer_v2_source_io",
+        "paid_seconds": 0.0004614111967384815,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      },
+      {
+        "index": 66,
+        "kind": "work",
+        "name": "954_render_typography_only_saved_bank_successor",
+        "paid_seconds": 7.286333572585136,
+        "reserved_seconds": 0.0,
+        "status": "COMPLETE"
+      }
+    ],
+    "post_timeout_child_elapsed": "UNKNOWN_NOT_ZERO",
+    "predecessor_added_once": true,
+    "predecessor_inclusive_seconds": 18564.401960977106,
+    "remaining_seconds": 22662.739329482145,
+    "retained_reporting_must_fit": true,
+    "schema": "pg_atlas954_software_inclusive_v1",
+    "scientific_allocation_seconds": 0
+  },
+  "source_author_and_tool_and_persistence_unknown_tails": "UNKNOWN_NOT_ZERO"
+}

@@ -1,0 +1,41 @@
+test_two_arm_declaration_identity (__main__.RingControls.test_two_arm_declaration_identity) ... ok
+test_unsupported_declaration_rejected (__main__.RingControls.test_unsupported_declaration_rejected) ... ok
+test_original_ring_task_and_recipe_bound (__main__.RingControls.test_original_ring_task_and_recipe_bound) ... ok
+test_global_amsgrad_all_groups (__main__.RingControls.test_global_amsgrad_all_groups) ... ok
+test_original_numerical_and_evaluator_source (__main__.RingControls.test_original_numerical_and_evaluator_source) ... FAIL
+test_original_400_extended_1600_cadence (__main__.RingControls.test_original_400_extended_1600_cadence) ... ok
+test_graded_prefix_and_terminal_gates (__main__.RingControls.test_graded_prefix_and_terminal_gates) ... ok
+test_initial17_update_retained_prefix (__main__.RingControls.test_initial17_update_retained_prefix) ... ERROR
+
+======================================================================
+ERROR: test_initial17_update_retained_prefix (__main__.RingControls.test_initial17_update_retained_prefix)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/ml2/hypergan/pg-atlas954-ring-runtime-20261006/v1/owner-source/tests/test_atlas954_ring_controls.py", line 406, in test_initial17_update_retained_prefix
+    report = self.driver.verify_initial_prefix(self.root, self.source_pins, self.base_recipe,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/ml2/hypergan/pg-atlas954-ring-runtime-20261006/v1/owner-source/experiments/forge/atlas954_ring_driver.py", line 425, in verify_initial_prefix
+    result = _run(root, module, output, device)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/ml2/hypergan/pg-atlas954-ring-runtime-20261006/v1/owner-source/experiments/forge/atlas954_ring_driver.py", line 410, in _run
+    result = module.run_case(root, request, output_dir=output, device=device,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/ml2/hypergan/pg-atlas954-ring-runtime-20261006/v1/owner-source/experiments/forge/canonical_mog_adapter.py", line 675, in run_case
+    task = _declaration(request["task"])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/ml2/hypergan/pg-atlas954-ring-runtime-20261006/v1/owner-source/experiments/forge/canonical_mog_adapter.py", line 116, in _declaration
+    raise ValueError("malformed task-specific typed ownership annotation")
+ValueError: malformed task-specific typed ownership annotation
+
+======================================================================
+FAIL: test_original_numerical_and_evaluator_source (__main__.RingControls.test_original_numerical_and_evaluator_source)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/ml2/hypergan/pg-atlas954-ring-runtime-20261006/v1/owner-source/tests/test_atlas954_ring_controls.py", line 303, in test_original_numerical_and_evaluator_source
+    self.assertEqual(marshal.dumps(getattr(module, name).__code__), marshal.dumps(original_code), name)
+AssertionError: b'\xe[10994 chars]x00):\xfaHOnly the admitted child may invoke t[10969 chars]\x00' != b'\xe[10994 chars]x00):zHOnly the admitted child may invoke this[10971 chars]\x00' : construct_owner
+
+----------------------------------------------------------------------
+Ran 8 tests in 4.332s
+
+FAILED (failures=1, errors=1)

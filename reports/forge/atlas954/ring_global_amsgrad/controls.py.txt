@@ -1,0 +1,518 @@
+"""Manual ROOT-paid Atlas954 controls; author status AUTHORED_NOT_RUN.
+
+This file is external Source, not an automatic CI or science entrypoint. The
+one numerical software fixture is explicitly 17 updates and one scored read.
+A retained/current device mismatch refuses the caller before model imports.
+"""
+from __future__ import annotations
+
+import argparse
+import ast
+from copy import deepcopy
+import hashlib
+import importlib.util
+import json
+import os
+from pathlib import Path
+import sys
+import time
+from types import CodeType, SimpleNamespace
+import unittest
+from unittest.mock import patch
+
+DRIVER_PATH = 'experiments/forge/atlas954_ring_driver.py'
+TEST_PATH = 'tests/test_atlas954_ring_controls.py'
+DRIVER_PIN = {'sha256': 'cfbff29104d8ebaebe56e6791435f678d5c366e3c5fada110f4da8d426cd691c', 'bytes': 29653}
+INPUT_PINS = {
+    'source_map': {'sha256': 'af92f54b58787cb33160b991597697ac33d7cf9a247eb2e2c7417db094ad7bdb', 'bytes': 31327},
+    'inputs': {'sha256': '937159e78e372377f09d2456fc8e0bc9bf97dbb01a5e7bbda903ee6896f7a634', 'bytes': 2921},
+    'metrics': {'sha256': '301a320fe9e0cbba7c02114c0031f4e293f26d22f169dfc4699a2b61a59df134', 'bytes': 104220},
+    'retained_bank': {'sha256': '71adc7cb613d474ce6a424798c200ef3e831ad385444c6a1b156df477d2ce2dd', 'bytes': 794217},
+}
+CHECKS = (
+    'two_arm_declaration_identity', 'unsupported_declaration_rejected',
+    'original_ring_task_and_recipe_bound', 'global_amsgrad_all_groups',
+    'original_numerical_and_evaluator_source', 'original_400_extended_1600_cadence',
+    'graded_prefix_and_terminal_gates', 'initial17_update_retained_prefix',
+)
+EXPECTED_RESOURCES = {'backend': 'cuda', 'cpu_threads': 1, 'gpus': 1, 'budget_seconds': 1200}
+
+
+def pin(raw):
+    return {'sha256': hashlib.sha256(raw).hexdigest(), 'bytes': len(raw)}
+
+
+def read_pinned(path, expected):
+    path = Path(path)
+    if not path.is_file() or path.is_symlink():
+        raise ValueError('regular retained/Source input required: ' + str(path))
+    raw = path.read_bytes()
+    if pin(raw) != expected:
+        raise ValueError('input byte pin mismatch: ' + str(path))
+    return raw
+
+
+def node_named(source, name):
+    return next(node for node in ast.parse(source).body
+                if isinstance(node, (ast.FunctionDef, ast.ClassDef)) and node.name == name)
+
+
+def same_ast(left, right):
+    return ast.dump(left, include_attributes=False) == ast.dump(right, include_attributes=False)
+
+
+def assert_code_equal(test, actual, expected):
+    """Compare public code content, never marshal interning/reference markers."""
+    test.assertIs(type(actual), CodeType)
+    test.assertIs(type(expected), CodeType)
+    test.assertEqual(actual, expected)
+    actual_fields = {name for name in dir(actual)
+                     if name.startswith('co_') and not callable(getattr(actual, name))}
+    expected_fields = {name for name in dir(expected)
+                       if name.startswith('co_') and not callable(getattr(expected, name))}
+    test.assertEqual(actual_fields, expected_fields)
+    for name in sorted(actual_fields):
+        test.assertEqual(getattr(actual, name), getattr(expected, name), name)
+    for name in ('co_lines', 'co_positions'):
+        test.assertEqual(hasattr(actual, name), hasattr(expected, name), name)
+        if hasattr(actual, name):
+            test.assertEqual(list(getattr(actual, name)()), list(getattr(expected, name)()), name)
+    # Direct CodeType equality need not cover every nested location field.
+    for left, right in zip(actual.co_consts, expected.co_consts):
+        if isinstance(left, CodeType) or isinstance(right, CodeType):
+            assert_code_equal(test, left, right)
+
+
+class RingControls(unittest.TestCase):
+    driver = None
+    root = None
+    source_pins = None
+    base_recipe = None
+    retained_saved = None
+    retained_metrics = None
+    retained_device = None
+    fixture_output = None
+    fixture_report = None
+    _modules = None
+
+    @classmethod
+    def setUpClass(cls):
+        if cls.driver is None:
+            raise unittest.SkipTest('manual pinned Atlas954 caller required; no automatic numerical fixture')
+        cls._modules = {}
+
+    def module(self, arm):
+        if arm not in self._modules:
+            self._modules[arm] = self.driver.load_owner(
+                self.root, arm, self.source_pins, self.base_recipe)
+        return self._modules[arm]
+
+    def serializer_fixture(self):
+        # Pure declaration-unit input only. This is never emitted as an actual
+        # control receipt and cannot substitute for the measured prefix test.
+        return dict(schema=self.driver.CONTROL_SCHEMA, status='PASS',
+            checks={name: 'PASS' for name in CHECKS}, source_pins=deepcopy(self.source_pins),
+            base_recipe=deepcopy(self.base_recipe), base_recipe_sha256=self.driver.digest(self.base_recipe),
+            software_fixture_updates=17, software_fixture_observations=1, fixture_device='cuda:0', fixture_physical_device='1')
+
+    def declaration(self, arm):
+        controls = self.serializer_fixture()
+        return dict(schema=self.driver.DECLARATION_SCHEMA, arm_id=arm,
+            plan=self.driver.plan_arm(arm), source_pins=deepcopy(self.source_pins),
+            base_recipe=deepcopy(self.base_recipe),
+            software_proof=self.driver.build_software_proof(arm, controls, self.source_pins, self.base_recipe),
+            attempt_id='0123456789abcdef0123456789abcdef')
+
+    def test_two_arm_declaration_identity(self):
+        self.assertEqual(self.driver.CHECKS, CHECKS)
+        self.assertEqual(self.driver.ARMS, {'atlas791': True, 'atlas791_amsgrad_off': False})
+        ids = set()
+        for arm, flag in self.driver.ARMS.items():
+            plan = self.driver.plan_arm(arm)
+            self.assertEqual(plan['resources'], EXPECTED_RESOURCES)
+            self.assertEqual(plan['seed'], 0)
+            self.assertEqual(plan['device'], 'cuda:0')
+            self.assertEqual(plan['physical_device'], '1')
+            self.assertEqual(plan['steps'], 1600)
+            self.assertIs(plan['recipe_total_steps'], None)
+            self.assertIs(plan['amsgrad'], flag)
+            self.assertIs(plan['scientific_credit'], False)
+            self.assertNotEqual(plan['task_id'], 'ring16_acquisition')
+            ids.add((plan['candidate_id'], plan['task_id']))
+            declared = self.declaration(arm)
+            self.assertEqual(set(declared), {'schema', 'arm_id', 'plan', 'source_pins',
+                                            'base_recipe', 'software_proof', 'attempt_id'})
+            self.assertEqual(self.driver.validate_declaration(declared), plan)
+            self.assertEqual(declared['software_proof']['base_recipe'], self.base_recipe)
+        self.assertEqual(len(ids), 2)
+        left = self.driver.plan_arm('atlas791')
+        right = self.driver.plan_arm('atlas791_amsgrad_off')
+        for key in set(left) - {'arm_id', 'task_id', 'candidate_id', 'amsgrad'}:
+            self.assertEqual(left[key], right[key], key)
+
+    def test_unsupported_declaration_rejected(self):
+        for arm in ('original', 'atlas791_amsgrad_false', '', None, True):
+            with self.assertRaises(ValueError):
+                self.driver.plan_arm(arm)
+        for horizon in (80, 320, 401, 1599, 1601, True, 400.0):
+            with self.assertRaises(ValueError):
+                self.driver.observation_clocks(horizon)
+        declaration = self.declaration('atlas791')
+        for key, value in (
+                ('seed', 1), ('steps', 400), ('recipe_total_steps', 1600),
+                ('amsgrad', False), ('scientific_credit', True),
+                ('device', 'cpu'), ('physical_device', '0'),
+                ('resources', dict(EXPECTED_RESOURCES, gpus=0)),
+                ('resources', dict(EXPECTED_RESOURCES, cpu_threads=2)),
+                ('resources', dict(EXPECTED_RESOURCES, budget_seconds=300))):
+            bad = deepcopy(declaration)
+            bad['plan'][key] = value
+            with self.assertRaises(ValueError):
+                self.driver.validate_declaration(bad)
+        for mutate in (
+                lambda d: d.update(unknown_key=True),
+                lambda d: d.update(attempt_id='0' * 31),
+                lambda d: d.update(attempt_id='A' * 32),
+                lambda d: d['software_proof'].update(arm_id='atlas791_amsgrad_off'),
+                lambda d: d['software_proof']['controls'].update(schema='forge_atlas932_particle_l2_control_result_v1'),
+                lambda d: d['software_proof']['controls'].update(software_fixture_updates=0),
+                lambda d: d['software_proof']['controls'].update(software_fixture_observations=0),
+                lambda d: d['software_proof']['controls'].update(fixture_device='cpu'),
+                lambda d: d['software_proof']['controls'].update(fixture_physical_device='0'),
+                lambda d: d['software_proof']['controls'].update(base_recipe={}),
+                lambda d: d['software_proof']['controls']['checks'].pop(CHECKS[0])):
+            bad = deepcopy(declaration)
+            mutate(bad)
+            with self.assertRaises(ValueError):
+                self.driver.validate_declaration(bad)
+        for key, value in (('total_steps', 1600), ('amsgrad', False), ('z_dim', 1), ('batch_size', 12)):
+            bad = deepcopy(self.base_recipe)
+            bad[key] = value
+            with self.assertRaises(ValueError):
+                self.driver.validate_base_recipe(bad)
+        with self.assertRaisesRegex(ValueError, 'device mismatch'):
+            with patch.object(self.driver, 'load_owner', side_effect=AssertionError('factory reached')):
+                self.driver.verify_initial_prefix(None, {}, {}, None, 'cuda:0', None,
+                    retained_device='cpu', retained_metrics=None)
+        for device in ('cpu', '1', 'cuda', 'cuda:1'):
+            with patch.object(self.driver, 'load_owner', side_effect=AssertionError('factory reached')):
+                with self.assertRaises(ValueError):
+                    self.driver.verify_initial_prefix(None, {}, {}, None, device, None,
+                        retained_device='cuda:0', retained_metrics=None)
+        for visibility in (None, '', '0', '1,2', 'GPU-unknown'):
+            with patch.dict(os.environ):
+                if visibility is None:
+                    os.environ.pop('CUDA_VISIBLE_DEVICES', None)
+                else:
+                    os.environ['CUDA_VISIBLE_DEVICES'] = visibility
+                with patch.object(self.driver, 'load_owner', side_effect=AssertionError('factory reached')):
+                    with self.assertRaises(ValueError):
+                        self.driver.verify_initial_prefix(None, {}, {}, None, 'cuda:0', None,
+                            retained_device='cuda:0', retained_metrics=None)
+
+    def test_original_ring_task_and_recipe_bound(self):
+        parent = json.loads(self.driver._read(self.root, self.driver.TASK_PATH, self.driver.TASK_PIN))
+        self.assertEqual(parent['id'], 'ring16_acquisition')
+        self.assertEqual(parent['execution']['steps'], 400)
+        self.assertEqual(parent['evaluation']['observations'], 24)
+        self.assertEqual(parent['evaluation']['minimum_stable_checks'], 5)
+        self.assertEqual(parent['evaluation']['thresholds'], [
+            ['sample_count', '>=', 4096], ['modes', '>=', 16], ['mass_tv', '<=', .15],
+            ['hq', '>=', .85], ['component_covariance_error', '<=', .85],
+            ['component_min_eigen_ratio', '>=', .15]])
+        self.assertEqual(len(self.base_recipe), 79)
+        self.assertIs(self.base_recipe['amsgrad'], True)
+        self.assertIs(self.base_recipe['total_steps'], None)
+        self.assertEqual((self.base_recipe['num_particles'], self.base_recipe['z_dim'],
+                          self.base_recipe['batch_size']), (256, 4, 128))
+        for arm in self.driver.ARMS:
+            module = self.module(arm)
+            task = module.task
+            self.assertEqual(task, self.driver.task_spec(self.root, arm, self.source_pins))
+            self.assertEqual(task['execution']['host_definition'], parent['execution']['host_definition'])
+            self.assertEqual(task['execution']['host_definition']['steps'], 400)
+            for key in set(parent['execution']) - {'steps', 'device'}:
+                self.assertEqual(task['execution'][key], parent['execution'][key], key)
+            for key in set(parent['evaluation']) - {'observations', 'evaluator'}:
+                self.assertEqual(task['evaluation'][key], parent['evaluation'][key], key)
+            self.assertEqual(task['execution']['steps'], 1600)
+            self.assertEqual(task['resources'], dict(parent['resources'], gpus=1, cpu_threads=1,
+                                                   timeout_seconds=1200, allow_cpu=False))
+            self.assertEqual(task['execution'], dict(parent['execution'], steps=1600, device='cuda:0',
+                physical_device='1', cpu_threads=1, gpus=1, budget_seconds=1200, amsgrad=self.driver.ARMS[arm]))
+            self.assertEqual(task['field_ownership']['task_contract']['execution'],
+                             dict(steps=1600, backend='cuda', device='cuda:0', physical_device='1',
+                                  cpu_threads=1, gpus=1, budget_seconds=1200))
+            self.assertEqual(task['field_ownership']['task_id'], task['id'])
+            effective = deepcopy(self.base_recipe)
+            effective['amsgrad'] = self.driver.ARMS[arm]
+            self.assertEqual(module.binding['recipe'], effective)
+            self.assertEqual(module.base_recipe, self.base_recipe)
+            self.assertEqual(module.binding['base_recipe_sha256'], self.driver.digest(self.base_recipe))
+            self.assertEqual(module.binding['effective_recipe_sha256'], self.driver.digest(effective))
+            contract = module.binding['source_contract']
+            self.assertEqual(contract['full_recipe'], effective)
+            self.assertEqual(contract['external_horizon'], 1600)
+            self.assertIs(contract['intrinsic_horizon'], None)
+            self.assertEqual(contract['sampling']['training_recipe_sha256'], self.driver.digest(effective))
+            self.assertIs(contract['sampling']['sampling_law_changed'], False)
+            self.assertEqual(module.resolve_binding(self.root, module.candidate, task, module.protocol), module.binding)
+            bad_candidate = deepcopy(module.candidate)
+            bad_candidate['id'] = self.driver.plan_arm(next(a for a in self.driver.ARMS if a != arm))['candidate_id']
+            with self.assertRaises(ValueError):
+                module.resolve_binding(self.root, bad_candidate, task, module.protocol)
+            with self.assertRaises(ValueError):
+                module.resolve_binding(self.root, module.candidate, parent, module.protocol)
+            forged = deepcopy(module.binding)
+            forged['recipe']['total_steps'] = 1600
+            with self.assertRaises(ValueError):
+                module._check_binding(self.root, forged)
+
+    def test_global_amsgrad_all_groups(self):
+        import torch
+        torch.set_num_threads(1)
+        self.assertEqual(os.environ.get('CUDA_VISIBLE_DEVICES'), '1')
+        self.assertEqual(torch.get_default_dtype(), torch.float32)
+        for arm, flag in self.driver.ARMS.items():
+            module = self.module(arm)
+            # Two fresh no-update constructor checks; not additional ring trajectories.
+            owner = module.construct_owner(self.root, module.binding, device='cuda:0', source_guard=module.guard)
+            receipt = self.driver.optimizer_receipt(owner)
+            self.assertEqual(receipt['all_group_flags'],
+                [flag] * (len(owner.opt_g.param_groups) + len(owner.opt_d.param_groups)))
+            self.assertIs(owner.recipe.amsgrad, flag)
+            self.assertIs(owner.recipe.total_steps, None)
+            self.assertEqual(owner.binding['recipe'], module.binding['recipe'])
+            generator_ids = {id(p) for group in owner.opt_g.param_groups for p in group['params']}
+            critic_ids = {id(p) for group in owner.opt_d.param_groups for p in group['params']}
+            self.assertTrue({id(p) for p in owner.generator.parameters()} <= generator_ids)
+            self.assertTrue({id(p) for p in owner.prior.parameters()} <= generator_ids)
+            self.assertTrue({id(p) for p in owner.critic.parameters()} <= critic_ids)
+            self.assertIn(id(owner.table), generator_ids)
+            self.assertEqual(owner.trainer.completed_steps, 0)
+            self.assertEqual(owner.policy.completed_steps, 0)
+            group = owner.opt_d.param_groups[0]
+            original = group['amsgrad']
+            try:
+                group['amsgrad'] = not flag
+                with self.assertRaises(ValueError):
+                    self.driver.optimizer_receipt(owner)
+            finally:
+                group['amsgrad'] = original
+            self.assertEqual(self.driver.optimizer_receipt(owner), receipt)
+            module.guard()
+
+    def test_original_numerical_and_evaluator_source(self):
+        parent_raw = self.driver._read(self.root, self.driver.PARENT_PATH, self.driver.PARENT_PIN)
+        adapter_raw = self.driver._read(self.root, 'experiments/forge/adapters.py', self.driver.ADAPTER_PIN)
+        original_tree = ast.parse(adapter_raw)
+        prepared_tree = ast.parse(self.driver.prepare_adapter_source(adapter_raw))
+        expected_tree = deepcopy(original_tree)
+        vector = next(n for n in expected_tree.body if isinstance(n, ast.FunctionDef) and n.name == '_vector')
+        metadata = [ast.parse('from .atlas_existing_mog import admitted_vector_context').body[0],
+                    ast.parse('admitted_vector_context(request, task, context, output, device)').body[0]]
+        removed = [n for n in vector.body if any(same_ast(n, item) for item in metadata)]
+        self.assertEqual(len(removed), 2)
+        vector.body = [n for n in vector.body if not any(same_ast(n, item) for item in metadata)]
+        self.assertTrue(same_ast(expected_tree, prepared_tree))
+        with self.assertRaises(ValueError):
+            self.driver.prepare_adapter_source(adapter_raw + b'\n')
+        module = self.module('atlas791')
+        compiled_parent = compile(parent_raw, module.__file__, 'exec')
+        for name in ('construct_owner', '_trainer_class', 'run_case', 'owner_initial_receipt'):
+            original_code = next(c for c in compiled_parent.co_consts if isinstance(c, CodeType) and c.co_name == name)
+            assert_code_equal(self, getattr(module, name).__code__, original_code)
+            self.assertIs(getattr(module, name).__globals__, module.__dict__)
+        reference_code = module.construct_owner.__code__
+        for changed_code in (
+                reference_code.replace(co_code=reference_code.co_code + b'\x09\x00'),
+                reference_code.replace(co_flags=reference_code.co_flags ^ 0x20),
+                reference_code.replace(co_consts=reference_code.co_consts + ('different constant',))):
+            with self.assertRaises(AssertionError):
+                assert_code_equal(self, changed_code, reference_code)
+        original_compiler = next(cell.cell_contents for cell in module.compile_producer.__closure__
+                                 if callable(cell.cell_contents) and getattr(cell.cell_contents, '__name__', None) == 'compile_producer')
+        expected_node, _ = original_compiler(self.driver.prepare_adapter_source(adapter_raw), '_vector')
+        expected_checkpoint = next(n for n in expected_node.body if isinstance(n, ast.Assign)
+                                  and any(isinstance(t, ast.Name) and t.id == 'checkpoints' for t in n.targets))
+        expected_checkpoint.value = ast.parse('set(' + repr(self.driver.observation_clocks(1600)) + ')', mode='eval').body
+        actual_node, overlay = module.compile_producer(adapter_raw, '_vector')
+        self.assertTrue(same_ast(actual_node, expected_node))
+        self.assertEqual(overlay['metadata_admission_nodes_removed'], 2)
+        self.assertIsNone(overlay['fixture_updates'])
+        fixture_compiler = self.driver._producer_compiler(SimpleNamespace(compile_producer=original_compiler), fixture=True)
+        fixture_node, fixture_overlay = fixture_compiler(adapter_raw, '_vector')
+        fixture_expected = deepcopy(expected_node)
+        loop = next(n for n in fixture_expected.body if isinstance(n, ast.For))
+        loop.iter = ast.parse('range(1, 18)', mode='eval').body
+        self.assertTrue(same_ast(fixture_node, fixture_expected))
+        self.assertEqual(fixture_overlay['fixture_updates'], 17)
+        with self.assertRaises(ValueError):
+            module.compile_producer(adapter_raw, '_native')
+        protocol_raw = self.driver._read(self.root, 'benchmarks/transfer_suite/protocol.py',
+                                        self.source_pins['benchmarks/transfer_suite/protocol.py'])
+        original_grade = node_named(protocol_raw, 'test_verdict')
+        restored_grade = node_named(self.driver._grade_source(self.root, self.source_pins), '_grade')
+        restored_grade.name = original_grade.name
+        self.assertEqual(restored_grade.args.args.pop().arg, 'declared_clocks')
+        original_steps = next(n for n in original_grade.body if isinstance(n, ast.Assign)
+                              and any(isinstance(t, ast.Name) and t.id == 'steps' for t in n.targets))
+        restored_steps = next(n for n in restored_grade.body if isinstance(n, ast.Assign)
+                              and any(isinstance(t, ast.Name) and t.id == 'steps' for t in n.targets))
+        restored_steps.value = deepcopy(original_steps.value)
+        self.assertTrue(same_ast(original_grade, restored_grade))
+
+    def test_original_400_extended_1600_cadence(self):
+        original = [(i * 400 + 23) // 24 for i in range(1, 25)]
+        extended = [(i * 400 + 23) // 24 for i in range(1, 97)]
+        self.assertEqual(self.driver.observation_clocks(400), original)
+        self.assertEqual(self.driver.observation_clocks(1600), extended)
+        self.assertEqual(extended[:24], original)
+        self.assertEqual(extended[-5:], [1534, 1550, 1567, 1584, 1600])
+        self.assertEqual(len(set(extended)), 96)
+        self.assertEqual(original[0], 17)
+        self.assertEqual(original[-1], 400)
+        for arm in self.driver.ARMS:
+            module = self.module(arm)
+            self.assertIs(module.binding['recipe']['total_steps'], None)
+            observation = module.binding['source_contract']['observation']
+            self.assertEqual(observation['observation_steps'], extended)
+            self.assertEqual(observation['goal_steps'], extended)
+            self.assertEqual(observation['observation_count'], 96)
+            self.assertEqual(observation['max_retained_goal_states'], 96)
+            self.assertEqual(observation['final_checks'], 5)
+            self.assertIs(observation['all_original_numeric_observations_retained'], True)
+        self.assertNotEqual(extended[:24], [(i * 1600 + 23) // 24 for i in range(1, 25)])
+
+    def test_graded_prefix_and_terminal_gates(self):
+        clocks = self.driver.observation_clocks(1600)
+        def row(step):
+            return dict(step=step, seconds=0.0, sample_count=4096, modes=16, mass_tv=.1,
+                        hq=.9, component_covariance_error=.5, component_min_eigen_ratio=.5)
+        good = dict(evidence=dict(observations=[row(step) for step in clocks],
+                                 guards=dict(all_finite=True, hooks_exercised=True, unintended_rng_deviations=0)))
+        for horizon, count in ((400, 24), (1600, 96)):
+            grade = self.driver.grade_at(self.root, 'atlas791', good, horizon=horizon, source_pins=self.source_pins)
+            self.assertEqual(grade['status'], 'PASS')
+            self.assertEqual(grade['convergence']['observations'], count)
+            self.assertEqual(grade['convergence']['minimum_stable_checks'], 5)
+            self.assertIs(grade['diagnostic'], True)
+            self.assertIs(grade['scientific_credit'], False)
+        late_fail = deepcopy(good)
+        late_fail['evidence']['observations'][-1]['component_covariance_error'] = .86
+        self.assertEqual(self.driver.grade_at(self.root, 'atlas791', late_fail, horizon=400,
+                         source_pins=self.source_pins)['status'], 'PASS')
+        self.assertEqual(self.driver.grade_at(self.root, 'atlas791', late_fail, horizon=1600,
+                         source_pins=self.source_pins)['status'], 'FAIL')
+        only_four = deepcopy(good)
+        for item in only_four['evidence']['observations'][:-4]:
+            item['hq'] = .84
+        grade = self.driver.grade_at(self.root, 'atlas791', only_four, horizon=1600, source_pins=self.source_pins)
+        self.assertEqual(grade['status'], 'FAIL')
+        self.assertEqual(grade['convergence']['passing_suffix'], 4)
+        only_five = deepcopy(only_four)
+        only_five['evidence']['observations'][-5]['hq'] = .9
+        self.assertEqual(self.driver.grade_at(self.root, 'atlas791', only_five, horizon=1600,
+                         source_pins=self.source_pins)['status'], 'PASS')
+        for key, value in (('all_finite', False), ('hooks_exercised', False), ('unintended_rng_deviations', 1)):
+            bad = deepcopy(good)
+            bad['evidence']['guards'][key] = value
+            self.assertEqual(self.driver.grade_at(self.root, 'atlas791', bad, horizon=1600,
+                             source_pins=self.source_pins)['status'], 'INVALID')
+        missing = deepcopy(good)
+        missing['evidence']['observations'].pop(0)
+        self.assertIn(self.driver.grade_at(self.root, 'atlas791', missing, horizon=1600,
+                      source_pins=self.source_pins)['status'], ('INVALID', 'INCOMPLETE'))
+
+    def test_initial17_update_retained_prefix(self):
+        self.assertEqual(len(self.retained_saved), 24)
+        self.assertEqual(len(self.retained_metrics), 24)
+        self.assertEqual(self.retained_saved[0]['step'], 17)
+        self.assertEqual([r['step'] for r in self.retained_saved], self.driver.observation_clocks(400))
+        self.assertEqual([r['step'] for r in self.retained_metrics], self.driver.observation_clocks(400))
+        self.assertEqual(str(self.retained_device), 'cuda:0')
+        report = self.driver.verify_initial_prefix(self.root, self.source_pins, self.base_recipe,
+            self.retained_saved, 'cuda:0', self.fixture_output,
+            retained_device=self.retained_device, retained_metrics=self.retained_metrics)
+        self.assertEqual(report['status'], 'PASS')
+        self.assertEqual(report['software_fixture_updates'], 17)
+        self.assertEqual(report['software_fixture_observations'], 1)
+        self.assertEqual(report['fixture_device'], 'cuda:0')
+        self.assertEqual(report['fixture_physical_device'], '1')
+        self.assertEqual(report['compared_device'], 'cuda:0')
+        self.assertIs(report['equal'], True)
+        self.__class__.fixture_report = report
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--root', required=True)
+    parser.add_argument('--source-map', required=True)
+    parser.add_argument('--inputs', required=True)
+    parser.add_argument('--metrics', required=True)
+    parser.add_argument('--retained-bank', required=True)
+    parser.add_argument('--fixture-output', required=True)
+    parser.add_argument('--output', required=True)
+    parser.add_argument('--device', choices=('cuda:0',), required=True)
+    args = parser.parse_args()
+    if os.environ.get('CUDA_VISIBLE_DEVICES') != '1':
+        raise ValueError('959 requires CUDA_VISIBLE_DEVICES=1 before input or model imports; no fallback')
+    # All actual reads below belong to ROOT's active paid software phase.
+    # This retained bytepin cannot be relabeled by a command-line device flag.
+    inputs = json.loads(read_pinned(args.inputs, INPUT_PINS['inputs']))
+    if str(inputs['actual_device']) != args.device or str(inputs['physical_device']) != '1':
+        raise ValueError('historical/current device mismatch; no model imports or numerical fixture authorized')
+    source_map = json.loads(read_pinned(args.source_map, INPUT_PINS['source_map']))
+    metrics = json.loads(read_pinned(args.metrics, INPUT_PINS['metrics']))
+    root = Path(args.root).resolve()
+    if (Path(source_map['root']).resolve() != root
+            or source_map['original_source_digest'] != 'd45b5459a6def926e41c7d3c544593b1635a670b50ef118fb6660ab679e78f34'
+            or source_map['literal_canonical_old_map_reused_as_current'] is not False
+            or metrics['actual_device'] != inputs['actual_device']):
+        raise ValueError('retained original791 identity/device/Source map differs')
+    driver_raw = read_pinned(root / DRIVER_PATH, DRIVER_PIN)
+    test_raw = read_pinned(root / TEST_PATH, pin(Path(__file__).read_bytes()))
+    source_pins = deepcopy(source_map['files'])
+    source_pins.update({DRIVER_PATH: pin(driver_raw), TEST_PATH: pin(test_raw)})
+    output = Path(args.output)
+    if output.exists() or output.is_symlink() or Path(args.fixture_output).exists():
+        raise ValueError('new owned control/fixture outputs required')
+    sys.path.insert(0, str(root))
+    spec = importlib.util.spec_from_file_location('_atlas954_pinned_control_driver', root / DRIVER_PATH)
+    driver = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(driver)
+    driver.validate_source_pins(root, source_pins)
+    driver.validate_base_recipe(inputs['recipe'])
+    # Only after the retained-device identity refusal and Source validation may
+    # the ROOT-paid caller import Torch or load the already-scored bank.
+    bank_raw = read_pinned(args.retained_bank, INPUT_PINS['retained_bank'])
+    import io
+    import torch
+    saved = torch.load(io.BytesIO(bank_raw), weights_only=True, map_location='cpu')
+    torch.set_num_threads(1)
+    RingControls.driver, RingControls.root = driver, root
+    RingControls.source_pins, RingControls.base_recipe = source_pins, inputs['recipe']
+    RingControls.retained_saved, RingControls.retained_metrics = saved, metrics['observations']
+    RingControls.retained_device, RingControls.fixture_output = inputs['actual_device'], Path(args.fixture_output)
+    suite = unittest.TestSuite(RingControls('test_' + name) for name in CHECKS)
+    started = time.monotonic()
+    result = unittest.TextTestRunner(verbosity=2).run(suite)
+    if result.testsRun != 8 or result.skipped or not result.wasSuccessful() or RingControls.fixture_report is None:
+        raise SystemExit(1)
+    receipt = dict(schema=driver.CONTROL_SCHEMA, status='PASS', checks={name: 'PASS' for name in CHECKS},
+        source_pins=source_pins, base_recipe=deepcopy(inputs['recipe']),
+        base_recipe_sha256=driver.digest(inputs['recipe']),
+        software_fixture_updates=17, software_fixture_observations=1, fixture_device='cuda:0', fixture_physical_device='1',
+        fixture=deepcopy(RingControls.fixture_report),
+        software_constructor_checks=2, wall_seconds=time.monotonic() - started,
+        retained_input_pins=deepcopy(INPUT_PINS), author_measurement_status='AUTHORED_NOT_RUN')
+    # Emit only measured all-eight PASS. Declaration-unit serializer fixtures
+    # are never publication/authority evidence and never reach this output.
+    with output.open('x') as stream:
+        stream.write(driver.canonical(receipt) + '\n')
+    print(driver.canonical(dict(status='PASS', checks=8, output=str(output),
+        software_fixture_updates=17, software_fixture_observations=1)))
+
+
+if __name__ == '__main__':
+    main()
